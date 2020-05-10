@@ -18,10 +18,6 @@ import { LangCreatedEvent } from '../application/events/lang-created.event';
 // TODO desacoplar schema de typeorm del modelo
 // https://typeorm.io/#/separating-entity-definition
 @Entity('admin_lang')
-@Unique(['name'])
-@Unique(['iso6392'])
-@Unique(['iso6393'])
-@Unique(['ietf'])
 export class Lang extends AggregateRoot
 {
     @PrimaryColumn({
@@ -41,6 +37,7 @@ export class Lang extends AggregateRoot
     @Column({
         type: 'varchar',
         length: 255,
+        unique: true,
         transformer: {
             from(value: string): LangName {
                 return new LangName(value);
@@ -71,7 +68,7 @@ export class Lang extends AggregateRoot
         name: 'iso_639_2',
         type: 'char',
         length: 2,
-       // unique: true,
+        unique: true,
         transformer: {
             from(value: string): LangIso6392 {
                 return new LangIso6392(value);
@@ -87,7 +84,7 @@ export class Lang extends AggregateRoot
         name: 'iso_639_3',
         type: 'char',
         length: 3,
-        //unique: true,
+        unique: true,
         transformer: {
             from(value: string): LangIso6393 {
                 return new LangIso6393(value);
@@ -102,7 +99,7 @@ export class Lang extends AggregateRoot
     @Column({
         type: 'char',
         length: 5,
-        //unique: true,
+        unique: true,
         transformer: {
             from(value: string): LangIetf {
                 return new LangIetf(value);
@@ -218,7 +215,7 @@ export class Lang extends AggregateRoot
             new LangCreatedEvent(
                 lang.id.value, 
                 lang.name.value, 
-                lang.image.value, 
+                lang.image?.value, 
                 lang.iso6392.value, 
                 lang.iso6393.value, 
                 lang.ietf.value, 
@@ -226,7 +223,7 @@ export class Lang extends AggregateRoot
                 lang.isActive.value, 
                 lang.createdAt.value, 
                 lang.updatedAt.value, 
-                lang.deletedAt.value
+                lang.deletedAt?.value
             )
         );
     }

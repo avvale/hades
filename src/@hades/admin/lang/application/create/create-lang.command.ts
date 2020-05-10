@@ -8,9 +8,6 @@ export class CreateLangCommand
         public readonly iso6393: string,
         public readonly ietf: string,
         public readonly sort: number,
-        public readonly isActive: boolean,
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly isActive: boolean
     ) {}
 }

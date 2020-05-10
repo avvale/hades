@@ -1,4 +1,3 @@
-// infrastructure
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { 
@@ -11,8 +10,7 @@ import {
     LangSort,
     LangIsActive,
     LangCreatedAt,
-    LangUpdatedAt,
-    LangDeletedAt 
+    LangUpdatedAt
 } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
 import { Lang } from './../../domain/lang';
@@ -33,10 +31,7 @@ export class LangCreatorService
         iso6393: LangIso6393,
         ietf: LangIetf,
         sort: LangSort,
-        isActive: LangIsActive,
-        createdAt: LangCreatedAt,
-        updatedAt: LangUpdatedAt,
-        deletedAt: LangDeletedAt
+        isActive: LangIsActive
     ): Promise<void>
     {        
         // create object with factory pattern
@@ -49,9 +44,9 @@ export class LangCreatorService
             ietf,
             sort,
             isActive,
-            createdAt,
-            updatedAt,
-            deletedAt
+            new LangCreatedAt(),
+            new LangUpdatedAt(),
+            null
         );
 
         // insert EventBus in object returned by the repository, to be able to apply and commit events
