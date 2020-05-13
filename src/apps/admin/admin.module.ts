@@ -4,7 +4,11 @@ import { LangGetController } from './controllers/lang/lang-get.controller';
 import { AdminHandlers, AdminServices, AdminEntities, AdminRepositories, AdminSagas } from '../../@hades/admin';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from './../shared/shared.module';
+
+// resolvers
+import { AdminFindLangsResolver } from './resolvers/lang/admin-find-langs.resolver';
+import { AdminCreateLangResolver } from './resolvers/lang/admin-create-lang.resolver';
 
 @Module({
     imports: [
@@ -21,7 +25,10 @@ import { SharedModule } from '../shared/shared.module';
         ...AdminHandlers,
         ...AdminServices,
         ...AdminRepositories,
-        ...AdminSagas
+        ...AdminSagas,
+
+        AdminFindLangsResolver,
+        AdminCreateLangResolver
     ]
 })
 export class AdminModule {}

@@ -19,7 +19,7 @@ export class LangPostController
     @Post()
     main(@Body() payload: CreateLangDto)
     {
-        return this.commandBus.dispatch(new CreateLangCommand(
+        this.commandBus.dispatch(new CreateLangCommand(
             payload.id, 
             payload.name,
             payload.image,

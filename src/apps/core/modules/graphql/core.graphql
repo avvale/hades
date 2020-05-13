@@ -1,0 +1,53 @@
+
+scalar JSON
+scalar Any
+scalar Upload
+scalar GraphQLInt
+
+enum Command
+{
+    COUNT
+    LIMIT
+    OFFSET
+    ORDER_BY
+    WHERE
+}
+
+enum Operator 
+{
+    ASC
+    CONTAINS
+    DESC
+    EQUALS
+    GREATER
+    GREATER_OR_EQ
+    IN
+    IS_NOT_NULL
+    IS_NULL
+    LOWER
+    LOWER_OR_EQ
+    NOT_CONTAINS
+    NOT_EQUALS
+}
+
+input QueryStatementInput 
+{
+    "Command for query statement"
+    command: Command!
+    "Column over execute query statement"
+    column: String
+    "Operator for query statement"
+    operator: Operator
+    "Value for statement"
+    value: Any
+}
+
+type Pagination 
+{
+    "Total possible objects displayed"
+    total: Int!
+    "Number of items filtered according to query"
+    filtered: Int!
+    "Query object data"
+    objects(query:[QueryStatementInput]): [JSON]!
+}

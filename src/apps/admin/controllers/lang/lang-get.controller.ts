@@ -4,7 +4,7 @@ import { LangDto } from './../../dto/lang.dto';
 
 // @hades
 import { IQueryBus } from './../../../../@hades/shared/domain/bus/query-bus.service';
-import { FindLangsQuery } from 'src/@hades/admin/lang/application/find/find-langs.query';
+import { FindLangsQuery } from './../../../../@hades/admin/lang/application/find/find-langs.query';
 
 @ApiTags('lang')
 @ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto})
@@ -12,7 +12,7 @@ import { FindLangsQuery } from 'src/@hades/admin/lang/application/find/find-lang
 export class LangGetController 
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly queryBus: IQueryBus
     ) {}
 
     @Get()

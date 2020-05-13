@@ -1,0 +1,41 @@
+type AdminLang
+{
+    id: ID!
+    name: String!
+    image: String
+    iso6392: String!
+    iso6393: String!
+    ietf: String!
+    sort: GraphQLInt
+    isActive: Boolean!
+    createdAt: String!
+    updatedAt: String!
+}
+
+input AdminLangInput
+{
+    id: ID
+    name: String
+    image: String
+    iso6392: String
+    iso6393: String
+    ietf: String
+    sort: GraphQLInt
+    isActive: Boolean
+    createdAt: String
+    updatedAt: String
+}
+
+type Query 
+{
+    adminFindLang(query:[QueryStatementInput]): AdminLang
+    adminFindLangs(query:[QueryStatementInput]): [AdminLang]!
+    adminPaginationLangs(query:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    adminCreateLang(payload: AdminLangInput!): AdminLang
+    adminUpdateLang(payload: AdminLangInput!): AdminLang
+    adminDeleteLang(uuid: ID!): AdminLang
+}

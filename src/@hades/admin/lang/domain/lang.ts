@@ -173,8 +173,8 @@ export class Lang extends AggregateRoot
     updatedAt: LangUpdatedAt;
 
     @Column({ 
-        name: 'deleted_at', 
-        type: 'timestamp', 
+        name: 'deleted_at',
+        type: 'timestamp',
         nullable: true,
         transformer: {
             from(value: string): LangDeletedAt {
