@@ -37,7 +37,7 @@ export interface AdminLangInput {
     iso6392?: string;
     iso6393?: string;
     ietf?: string;
-    sort?: number;
+    sort?: GraphQLInt;
     isActive?: boolean;
     createdAt?: string;
     updatedAt?: string;
@@ -84,4 +84,9 @@ export interface Pagination {
 export type JSON = any;
 export type Any = any;
 export type Upload = any;
+export type GraphQLString = any;
 export type GraphQLInt = any;
+export type GraphQLFloat = any;
+export type GraphQLBoolean = any;
+export type GraphQLISODateTime = any;
+export type GraphQLTimestamp = any;

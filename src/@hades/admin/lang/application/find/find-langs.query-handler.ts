@@ -10,9 +10,10 @@ export class FindLangsQueryHandler implements IQueryHandler<FindLangsQuery>
         private readonly langFinderService: LangFinderService
     ) { }
 
-    async execute(query: FindLangsQuery): Promise<LangResponse[]>
+    async execute(query: FindLangsQuery): Promise<LangResponse>
     {
-        return (await this.langFinderService.main()).map(lang => new LangResponse(
+        const lang = await this.langFinderService.main();
+        return new LangResponse(
                 lang.id.value, 
                 lang.name.value, 
                 lang.image.value, 
@@ -22,8 +23,8 @@ export class FindLangsQueryHandler implements IQueryHandler<FindLangsQuery>
                 lang.sort.value, 
                 lang.isActive.value, 
                 lang.createdAt.value, 
-                lang.updatedAt.value, 
+                lang.updatedAt.value,
                 lang.deletedAt.value
-            ));
+            );
     }
 }

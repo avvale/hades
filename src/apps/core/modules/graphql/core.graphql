@@ -2,7 +2,12 @@
 scalar JSON
 scalar Any
 scalar Upload
+scalar GraphQLString
 scalar GraphQLInt
+scalar GraphQLFloat
+scalar GraphQLBoolean
+scalar GraphQLISODateTime
+scalar GraphQLTimestamp
 
 enum Command
 {

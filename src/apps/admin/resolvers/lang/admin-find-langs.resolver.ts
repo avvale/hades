@@ -1,4 +1,4 @@
-import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
+import { Resolver, Query, Args } from '@nestjs/graphql';
 
 // @hades
 import { IQueryBus } from '../../../../@hades/shared/domain/bus/query-bus.service';
