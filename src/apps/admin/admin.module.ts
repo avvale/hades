@@ -7,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SharedModule } from './../shared/shared.module';
 
 // resolvers
-import { AdminFindLangsResolver } from './resolvers/lang/admin-find-langs.resolver';
+import { AdminFindLangResolver } from './resolvers/lang/admin-find-lang.resolver';
 import { AdminCreateLangResolver } from './resolvers/lang/admin-create-lang.resolver';
 
 @Module({
@@ -27,7 +27,7 @@ import { AdminCreateLangResolver } from './resolvers/lang/admin-create-lang.reso
         ...AdminRepositories,
         ...AdminSagas,
 
-        AdminFindLangsResolver,
+        AdminFindLangResolver,
         AdminCreateLangResolver
     ]
 })

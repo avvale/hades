@@ -3,7 +3,7 @@ export type Any = any;
 export interface QueryStatementInput 
 {
     command: Command;
-    column?: String;
+    column?: string;
     operator?: Operator;
     value?: Any;
 }

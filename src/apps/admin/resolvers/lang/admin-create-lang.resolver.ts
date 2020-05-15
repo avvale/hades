@@ -2,10 +2,10 @@ import { Resolver, Args, Mutation, ResolveField, Parent, Int } from '@nestjs/gra
 import { AdminLangInput } from '../../../../graphql';
 
 // @hades
-import { ICommandBus } from './../../../../@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from './../../../../@hades/shared/domain/bus/query-bus.service';
-import { CreateLangCommand } from './../../../../@hades/admin/lang/application/create/create-lang.command';
-import { FindLangsQuery } from './../../../../@hades/admin/lang/application/find/find-langs.query';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { CreateLangCommand } from '@hades/admin/lang/application/create/create-lang.command';
+import { FindLangQuery } from '@hades/admin/lang/application/find/find-lang.query';
 
 @Resolver()
 export class AdminCreateLangResolver
@@ -29,7 +29,6 @@ export class AdminCreateLangResolver
             payload.isActive
         ));
 
-        console.log('create')
-        return await this.queryBus.ask(new FindLangsQuery());
+        return await this.queryBus.ask(new FindLangQuery());
     }
 }

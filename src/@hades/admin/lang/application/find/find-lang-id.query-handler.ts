@@ -1,18 +1,30 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { NotFoundException } from '@nestjs/common';
+import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import { LangResponse } from './../../domain/lang.response';
-import { FindLangsQuery } from './find-langs.query';
+import { FindLangIdQuery } from './find-lang-id.query';
 import { LangFinderService } from './lang-finder.service';
 
-@QueryHandler(FindLangsQuery)
-export class FindLangsQueryHandler implements IQueryHandler<FindLangsQuery>
+@QueryHandler(FindLangIdQuery)
+export class FindLangIdQueryHandler implements IQueryHandler<FindLangIdQuery>
 {
     constructor(
         private readonly langFinderService: LangFinderService
     ) { }
 
-    async execute(query: FindLangsQuery): Promise<LangResponse>
+    async execute(query: FindLangIdQuery): Promise<LangResponse>
     {
-        const lang = await this.langFinderService.main();
+        const lang = await this.langFinderService.main([
+            {
+                command:    Command.WHERE,
+                column:     'id',
+                operator:   Operator.EQUALS,
+                value:      query.id
+            }
+        ]);
+
+        if (!lang) throw new NotFoundException('Lang not found');
+
         return new LangResponse(
                 lang.id.value, 
                 lang.name.value, 

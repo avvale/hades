@@ -4,6 +4,7 @@ import { Repository, SelectQueryBuilder, InsertResult } from 'typeorm';
 
 import { Command, QueryStatementInput, Operator } from './../../../../shared/domain/persistence/sql-statement-input';
 import { ILangRepository } from './../../domain/lang.repository';
+import { ICriteria } from './../../../../shared/domain/persistence/criteria';
 import { LangId } from './../../domain/value-objects/lang-id';
 import { Lang } from './../../domain/lang';
 
@@ -12,7 +13,8 @@ export class TypeOrmLangRepository implements ILangRepository
 {
     constructor(
         @InjectRepository(Lang)
-        public readonly repository: Repository<Lang>
+        public readonly repository: Repository<Lang>,
+        private _criteriaService: ICriteria
     ) {}
 
     builder(): SelectQueryBuilder<Lang>
@@ -36,9 +38,12 @@ export class TypeOrmLangRepository implements ILangRepository
         return await this.repository.insert(lang);
     }
 
-    async find(query: QueryStatementInput[] = []): Promise<Lang> 
+    async find(queryStatements: QueryStatementInput[] = []): Promise<Lang> 
     {
-        return await this.builder().getOne();
+        return await this
+            ._criteriaService
+            .implements(this.builder(), queryStatements)
+            .getOne();
     }
 
     async get(): Promise<Lang[]> 

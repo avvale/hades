@@ -1,5 +1,6 @@
 import { CreateLangCommandHandler } from './lang/application/create/create-lang.command-handler';
-import { FindLangsQueryHandler } from './lang/application/find/find-langs.query-handler';
+import { FindLangQueryHandler } from './lang/application/find/find-lang.query-handler';
+import { FindLangIdQueryHandler } from './lang/application/find/find-lang-id.query-handler';
 import { LangCreatedEventHandler } from './lang/application/events/lang-created.event-handler';
 
 import { LangCreatorService } from './lang/application/create/lang-creator.service';
@@ -14,7 +15,8 @@ import { TypeOrmLangRepository } from './lang/infrastructure/type-orm/type-orm-l
 
 export const AdminHandlers = [
     CreateLangCommandHandler,
-    FindLangsQueryHandler,
+    FindLangQueryHandler,
+    FindLangIdQueryHandler,
     LangCreatedEventHandler
 ];
 export const AdminServices = [
