@@ -65,6 +65,7 @@ export interface AdminLang {
 
 export interface IQuery {
     adminFindLang(query?: QueryStatementInput[]): AdminLang | Promise<AdminLang>;
+    adminFindLangId(id?: string): AdminLang | Promise<AdminLang>;
     adminGetLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
     adminPaginationLangs(query?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }

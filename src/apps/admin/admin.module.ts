@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CreateLangController } from './controllers/lang/create-lang.controller';
+import { FindLangIdController } from './controllers/lang/find-lang-id.controller';
 import { FindLangController } from './controllers/lang/find-lang.controller';
 import { AdminHandlers, AdminServices, AdminEntities, AdminRepositories, AdminSagas } from '../../@hades/admin';
 
@@ -8,6 +9,7 @@ import { SharedModule } from './../shared/shared.module';
 
 // resolvers
 import { FindLangResolver } from './resolvers/lang/find-lang.resolver';
+import { FindLangIdResolver } from './resolvers/lang/find-lang-id.resolver';
 import { CreateLangResolver } from './resolvers/lang/create-lang.resolver';
 
 @Module({
@@ -19,7 +21,8 @@ import { CreateLangResolver } from './resolvers/lang/create-lang.resolver';
     ],
     controllers: [
         CreateLangController,
-        FindLangController
+        FindLangIdController,
+        FindLangController,
     ],
     providers: [
         ...AdminHandlers,
@@ -28,6 +31,7 @@ import { CreateLangResolver } from './resolvers/lang/create-lang.resolver';
         ...AdminSagas,
 
         FindLangResolver,
+        FindLangIdResolver,
         CreateLangResolver
     ]
 })

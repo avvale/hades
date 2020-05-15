@@ -1,24 +1,23 @@
-import { Controller, Get, Body } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { LangDto } from '../../dto/lang.dto';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
-import { FindLangQuery } from '@hades/admin/lang/application/find/find-lang.query';
-import { QueryStatementInput } from '../../../../graphql';
+import { FindLangIdQuery } from '@hades/admin/lang/application/find/find-lang-id.query';
 
 @ApiTags('lang')
 @ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto})
 @Controller('admin/lang')
-export class FindLangController 
+export class FindLangIdController 
 {
     constructor(
         private readonly queryBus: IQueryBus
     ) {}
 
-    @Get()
-    async main(@Body('query') queryStatements: QueryStatementInput[])
+    @Get(':id')
+    async main(@Param('id') id: string)
     {
-        return await this.queryBus.ask(new FindLangQuery(queryStatements));   
+        return await this.queryBus.ask(new FindLangIdQuery(id));   
     }
 }

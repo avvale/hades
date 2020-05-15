@@ -29,6 +29,7 @@ input AdminLangInput
 type Query 
 {
     adminFindLang(query:[QueryStatementInput]): AdminLang
+    adminFindLangId(id:ID): AdminLang
     adminGetLangs(query:[QueryStatementInput]): [AdminLang]!
     adminPaginationLangs(query:[QueryStatementInput]): Pagination!
 }
