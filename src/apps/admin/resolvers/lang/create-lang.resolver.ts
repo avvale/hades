@@ -8,7 +8,7 @@ import { CreateLangCommand } from '@hades/admin/lang/application/create/create-l
 import { FindLangQuery } from '@hades/admin/lang/application/find/find-lang.query';
 
 @Resolver()
-export class AdminCreateLangResolver
+export class CreateLangResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,

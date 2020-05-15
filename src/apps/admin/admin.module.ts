@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { LangPostController } from './controllers/lang/lang-post.controller';
-import { LangGetController } from './controllers/lang/lang-get.controller';
+import { CreateLangController } from './controllers/lang/create-lang.controller';
+import { FindLangController } from './controllers/lang/find-lang.controller';
 import { AdminHandlers, AdminServices, AdminEntities, AdminRepositories, AdminSagas } from '../../@hades/admin';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SharedModule } from './../shared/shared.module';
 
 // resolvers
-import { AdminFindLangResolver } from './resolvers/lang/admin-find-lang.resolver';
-import { AdminCreateLangResolver } from './resolvers/lang/admin-create-lang.resolver';
+import { FindLangResolver } from './resolvers/lang/find-lang.resolver';
+import { CreateLangResolver } from './resolvers/lang/create-lang.resolver';
 
 @Module({
     imports: [
@@ -18,8 +18,8 @@ import { AdminCreateLangResolver } from './resolvers/lang/admin-create-lang.reso
         ])
     ],
     controllers: [
-        LangPostController,
-        LangGetController
+        CreateLangController,
+        FindLangController
     ],
     providers: [
         ...AdminHandlers,
@@ -27,8 +27,8 @@ import { AdminCreateLangResolver } from './resolvers/lang/admin-create-lang.reso
         ...AdminRepositories,
         ...AdminSagas,
 
-        AdminFindLangResolver,
-        AdminCreateLangResolver
+        FindLangResolver,
+        CreateLangResolver
     ]
 })
 export class AdminModule {}
