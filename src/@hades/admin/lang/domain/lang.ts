@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { Entity, Column, CreateDateColumn, UpdateDateColumn, Unique, PrimaryColumn, Index } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 import { 
     LangId, 
     LangName, 
@@ -13,7 +13,8 @@ import {
     LangUpdatedAt,
     LangDeletedAt 
 } from './value-objects';
-import { CreatedLangEvent } from '../application/events/created-lang.event';
+import { CreatedLangEvent } from './../application/events/created-lang.event';
+import { UpdatedLangEvent } from './../application/events/updated-lang.event';
 
 // TODO desacoplar schema de typeorm del modelo
 // https://typeorm.io/#/separating-entity-definition
@@ -213,6 +214,25 @@ export class Lang extends AggregateRoot
     {
         this.apply(
             new CreatedLangEvent(
+                lang.id.value, 
+                lang.name.value, 
+                lang.image?.value, 
+                lang.iso6392.value, 
+                lang.iso6393.value, 
+                lang.ietf.value, 
+                lang.sort.value, 
+                lang.isActive.value, 
+                lang.createdAt.value, 
+                lang.updatedAt.value, 
+                lang.deletedAt?.value
+            )
+        );
+    }
+
+    updated(lang: Lang)
+    {
+        this.apply(
+            new UpdatedLangEvent(
                 lang.id.value, 
                 lang.name.value, 
                 lang.image?.value, 
