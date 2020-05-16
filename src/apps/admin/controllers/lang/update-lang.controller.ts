@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Body, Put } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
 import { CreateLangDto } from '../../dto/create-lang.dto';
 import { LangDto } from '../../dto/lang.dto';
@@ -12,14 +12,14 @@ import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-
 @ApiTags('lang')
 @ApiCreatedResponse({ description: 'The record has been successfully created.', type: LangDto})
 @Controller('admin/lang')
-export class CreateLangController 
+export class UpdateLangController 
 {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus
     ) {}
 
-    @Post()
+    @Put()
     async main(@Body() payload: CreateLangDto)
     {
         this.commandBus.dispatch(new CreateLangCommand(

@@ -4,7 +4,7 @@ import { LangDto } from '../../dto/lang.dto';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
-import { FindLangIdQuery } from '@hades/admin/lang/application/find/find-lang-id.query';
+import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-by-id.query';
 
 @ApiTags('lang')
 @ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto})
@@ -18,6 +18,6 @@ export class FindLangIdController
     @Get(':id')
     async main(@Param('id') id: string)
     {
-        return await this.queryBus.ask(new FindLangIdQuery(id));   
+        return await this.queryBus.ask(new FindLangByIdQuery(id));   
     }
 }

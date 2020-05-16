@@ -11,12 +11,12 @@ import {
     LangIsActive,
     LangCreatedAt,
     LangUpdatedAt
-} from './../../domain/value-objects';
-import { ILangRepository } from './../../domain/lang.repository';
-import { Lang } from './../../domain/lang';
+} from '../../domain/value-objects';
+import { ILangRepository } from '../../domain/lang.repository';
+import { Lang } from '../../domain/lang';
 
 @Injectable()
-export class LangCreatorService
+export class CreatorLangService
 {
     constructor(
         private readonly publisher: EventPublisher,
@@ -54,7 +54,7 @@ export class LangCreatorService
             await this.repository.save(lang)
         );
         
-        langRegister.langCreated(lang); // apply event to model events
+        langRegister.created(lang); // apply event to model events
         langRegister.commit(); // commit all events of model
     }
 }

@@ -1,4 +1,4 @@
-export class FindLangIdQuery
+export class FindLangByIdQuery
 {
     constructor(
         public id: string

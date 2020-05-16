@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { LangCreatedEvent } from './../events/lang-created.event';
+import { CreatedLangEvent } from '../events/created-lang.event';
 
 @Injectable()
 export class LangSagas 
@@ -12,7 +12,7 @@ export class LangSagas
     {
         return events$
             .pipe(
-                ofType(LangCreatedEvent),
+                ofType(CreatedLangEvent),
                 delay(1000),
                 map(event => {
                     console.log('Inside [HeroesGameSagas] Saga');

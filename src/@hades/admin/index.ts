@@ -1,10 +1,10 @@
 import { CreateLangCommandHandler } from './lang/application/create/create-lang.command-handler';
 import { FindLangQueryHandler } from './lang/application/find/find-lang.query-handler';
-import { FindLangIdQueryHandler } from './lang/application/find/find-lang-id.query-handler';
-import { LangCreatedEventHandler } from './lang/application/events/lang-created.event-handler';
+import { FindLangByIdQueryHandler } from './lang/application/find/find-lang-id.query-handler';
+import { CreatedLangEventHandler } from './lang/application/events/created-lang.event-handler';
 
-import { LangCreatorService } from './lang/application/create/lang-creator.service';
-import { LangFinderService } from './lang/application/find/lang-finder.service';
+import { CreatorLangService } from './lang/application/create/creator-lang.service';
+import { FinderLangService } from './lang/application/find/finder-lang.service';
 
 import { LangSagas } from './lang/application/sagas/lang.sagas';
 
@@ -16,12 +16,12 @@ import { TypeOrmLangRepository } from './lang/infrastructure/type-orm/type-orm-l
 export const AdminHandlers = [
     CreateLangCommandHandler,
     FindLangQueryHandler,
-    FindLangIdQueryHandler,
-    LangCreatedEventHandler
+    FindLangByIdQueryHandler,
+    CreatedLangEventHandler
 ];
 export const AdminServices = [
-    LangCreatorService,
-    LangFinderService
+    CreatorLangService,
+    FinderLangService
 ];
 export const AdminEntities = [Lang];
 export const AdminRepositories = [

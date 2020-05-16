@@ -13,7 +13,7 @@ import {
     LangUpdatedAt,
     LangDeletedAt 
 } from './value-objects';
-import { LangCreatedEvent } from '../application/events/lang-created.event';
+import { CreatedLangEvent } from '../application/events/created-lang.event';
 
 // TODO desacoplar schema de typeorm del modelo
 // https://typeorm.io/#/separating-entity-definition
@@ -209,10 +209,10 @@ export class Lang extends AggregateRoot
         return new Lang(id, name, image, iso6392, iso6393, ietf, sort, isActive, createdAt, updatedAt, deletedAt);
     }
 
-    langCreated(lang: Lang)
+    created(lang: Lang)
     {
         this.apply(
-            new LangCreatedEvent(
+            new CreatedLangEvent(
                 lang.id.value, 
                 lang.name.value, 
                 lang.image?.value, 

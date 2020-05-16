@@ -1,18 +1,18 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { LangResponse } from '../../domain/lang.response';
 import { GetLangsQuery } from './get-langs.query';
-import { LangGetterService } from './lang-getter.service';
+import { GetterLangService } from './getter-lang.service';
 
 @QueryHandler(GetLangsQuery)
 export class GetLangsQueryHandler implements IQueryHandler<GetLangsQuery>
 {
     constructor(
-        private readonly langFinderService: LangGetterService
+        private readonly getterLangService: GetterLangService
     ) { }
 
     async execute(query: GetLangsQuery): Promise<LangResponse[]>
     {
-        return (await this.langFinderService.main()).map(lang => new LangResponse(
+        return (await this.getterLangService.main()).map(lang => new LangResponse(
                 lang.id.value, 
                 lang.name.value, 
                 lang.image.value, 
