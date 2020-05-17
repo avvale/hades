@@ -9,14 +9,20 @@ export abstract class Uuid extends StringValueObject
     ) 
     {
         super(_value);
-        this.ensureIsValidUuid(_value);
+        this.checkIfIsNull();
+        this.ensureIsValidUuid();
     }
 
-    private ensureIsValidUuid(id: string): void
+    private ensureIsValidUuid(): void
     { 
-        if (!validate(id, 4))
+        if (!validate(this.value, 4))
         {
             // TODO, lanzar error de uuid no válido
         }
+    }
+
+    private checkIfIsNull(): void
+    {
+        if (!this.value) this.value = uuidv4();
     }
 }

@@ -24,8 +24,20 @@ export class TypeOrmLangRepository implements ILangRepository
 
     async save(lang: Lang): Promise<void>
     {
-        // check if exist same id
-        if (await this.repository.findOne(<Object>lang.id)) throw new ConflictException(`The id ${lang.id.value} already exist in database`);
+        // check if exist object in database, if allow save entity with the same uuid, update this entity in database instead of create it
+        const langInDB = await this
+            ._criteriaService
+            .implements(this.builder(), [
+                {
+                    command: Command.WHERE,
+                    operator: Operator.EQUALS,
+                    column: this.repository.metadata.tableName + '.id',
+                    value: lang.id.value
+                }
+            ])
+            .getOne();
+
+        if (langInDB) throw new ConflictException(`The id ${lang.id.value} already exist in database`);
         
         try
         {

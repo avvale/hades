@@ -1,7 +1,6 @@
-import { Uuid } from './../../../../shared/domain/value-objects/uuid';
-import { StringValueObject } from 'src/@hades/shared/domain/value-objects/string.value-object';
+import { Uuid } from '@hades/shared/domain/value-objects/uuid';
 
-export class LangId extends StringValueObject 
+export class LangId extends Uuid 
 {
     public readonly type: 'LangId';
 }
