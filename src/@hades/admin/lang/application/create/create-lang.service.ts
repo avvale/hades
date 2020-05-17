@@ -16,7 +16,7 @@ import { ILangRepository } from '../../domain/lang.repository';
 import { Lang } from '../../domain/lang';
 
 @Injectable()
-export class CreatorLangService
+export class CreateLangService
 {
     constructor(
         private readonly publisher: EventPublisher,
@@ -48,10 +48,16 @@ export class CreatorLangService
             new LangUpdatedAt(),
             null
         );
+        // TODO, TypeOrm Error: https://github.com/typeorm/typeorm/issues/5719
+        // Cuando das de alta un modelo llama 3 veces al transfor y te crea una anidación incorrecta
+        // cuando se corrija podremos sustituir el await this.repository.findById(id) por lang
+        
+        // save
+        await this.repository.save(lang);
 
         // insert EventBus in object returned by the repository, to be able to apply and commit events
         const langRegister = this.publisher.mergeObjectContext(
-            await this.repository.save(lang)
+            await this.repository.findById(id)
         );
         
         langRegister.created(lang); // apply event to model events

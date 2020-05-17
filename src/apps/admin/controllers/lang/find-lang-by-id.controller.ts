@@ -9,7 +9,7 @@ import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-
 @ApiTags('lang')
 @ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto})
 @Controller('admin/lang')
-export class FindLangIdController 
+export class FindLangByIdController 
 {
     constructor(
         private readonly queryBus: IQueryBus
@@ -18,6 +18,6 @@ export class FindLangIdController
     @Get(':id')
     async main(@Param('id') id: string)
     {
-        return await this.queryBus.ask(new FindLangByIdQuery(id));   
+        return await this.queryBus.ask(new FindLangByIdQuery(id));
     }
 }

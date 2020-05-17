@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateLangCommand } from './create-lang.command';
-import { CreatorLangService } from './creator-lang.service';
+import { CreateLangService } from './create-lang.service';
 import { 
     LangId, 
     LangName, 
@@ -19,13 +19,13 @@ import {
 export class CreateLangCommandHandler implements ICommandHandler<CreateLangCommand>
 {
     constructor(
-        private readonly creatorLangService: CreatorLangService
+        private readonly createLangService: CreateLangService
     ) { }
 
     async execute(command: CreateLangCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        this.creatorLangService.main(
+        await this.createLangService.main(
             new LangId(command.id),
             new LangName(command.name),
             new LangImage(command.image),

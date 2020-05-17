@@ -6,9 +6,10 @@ import { AdminHandlers, AdminServices, AdminEntities, AdminRepositories, AdminSa
 
 // controllers
 import { CreateLangController } from './controllers/lang/create-lang.controller';
-import { FindLangIdController } from './controllers/lang/find-lang-id.controller';
+import { FindLangByIdController } from './controllers/lang/find-lang-by-id.controller';
 import { FindLangController } from './controllers/lang/find-lang.controller';
 import { UpdateLangController } from './controllers/lang/update-lang.controller';
+import { DeleteLangController } from './controllers/lang/delete-lang.controller';
 
 // resolvers
 import { CreateLangResolver } from './resolvers/lang/create-lang.resolver';
@@ -24,9 +25,10 @@ import { FindLangIdResolver } from './resolvers/lang/find-lang-id.resolver';
     ],
     controllers: [
         CreateLangController,
-        FindLangIdController,
+        FindLangByIdController,
         FindLangController,
-        UpdateLangController
+        UpdateLangController,
+        DeleteLangController
     ],
     providers: [
         ...AdminHandlers,

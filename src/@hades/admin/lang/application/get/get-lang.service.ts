@@ -1,17 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ILangRepository } from './../../domain/lang.repository';
 import { Lang } from './../../domain/lang';
 
 @Injectable()
-export class FinderLangService
+export class GetLangService
 {
     constructor(
         private readonly repository: ILangRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[]): Promise<Lang>
+    public async main(): Promise<Lang[]>
     {        
-        return await this.repository.find(queryStatements);
+        return await this.repository.get([]);
     }
 }

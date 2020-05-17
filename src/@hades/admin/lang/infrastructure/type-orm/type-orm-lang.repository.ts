@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder, InsertResult } from 'typeorm';
 
@@ -22,28 +22,48 @@ export class TypeOrmLangRepository implements ILangRepository
         return this.repository.createQueryBuilder(this.repository.metadata.tableName)
     }
 
-    async save(lang: Lang): Promise<Lang>
+    async save(lang: Lang): Promise<void>
     {
-        const langEntity =  await this.repository.save(lang);
-
-        // TODO, TypeOrm Error: https://github.com/typeorm/typeorm/issues/5719
-        // Cuando das de alta un modelo llama 3 veces al transfor y te crea una anidación incorrecta
-        if (typeof langEntity.id.value === 'object') langEntity.id.value = langEntity.id.value['value'];
-
-       return langEntity;
+        // check if exist same id
+        if (await this.repository.findOne(<Object>lang.id)) throw new ConflictException(`The id ${lang.id.value} already exist in database`);
+        
+        try
+        {
+            await this.repository.save(lang);
+        }
+        catch (error) 
+        {
+            throw new ConflictException(error.message);
+        }       
     }
 
-    async insert(lang: Lang[]): Promise<InsertResult>
+    async insert(lang: Lang[]): Promise<void>
     {
-        return await this.repository.insert(lang);
+        await this.repository.insert(lang);
     }
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Lang> 
     {
-        return await this
+        const lang = await this
             ._criteriaService
             .implements(this.builder(), queryStatements)
             .getOne();
+
+        if (!lang) throw new NotFoundException('Lang not found');
+
+        return lang;
+    }
+
+    async findById(id: LangId): Promise<Lang>
+    {
+        return await this.find([
+            {
+                command: Command.WHERE,
+                operator: Operator.EQUALS,
+                column: this.repository.metadata.tableName + '.id',
+                value: id.value
+            }
+        ]);       
     }
 
     async get(): Promise<Lang[]> 
@@ -51,36 +71,25 @@ export class TypeOrmLangRepository implements ILangRepository
         return await this.builder().getMany();
     }
 
-    async update(lang: Lang): Promise<Lang> 
-    {
-        await this.repository.update(lang.id.value, lang);
+    async update(lang: Lang): Promise<void> 
+    { 
+        // check that lang exist
+        await this.findById(lang.id);
 
-        return await this.find([
-            {
-                command: Command.WHERE,
-                operator: Operator.EQUALS,
-                column: this.repository.metadata.tableName + '.id',
-                value: lang.id.value
-            }
-        ]);
+        // clean properties object from undefined values
+        for (const property in lang )
+        {
+            if (lang[property] === null || lang[property].value === undefined) delete lang[property];
+        }
+
+        await this.repository.update(<Object>lang.id, lang);
     }
 
-    async delete(id: LangId): Promise<Lang> 
+    async delete(id: LangId): Promise<void> 
     {
-        const lang = await this.find([
-            {
-                command: Command.WHERE,
-                operator: Operator.EQUALS,
-                column: this.repository.metadata.tableName + '.id',
-                value: id.value
-            }
-        ]);
-
         await this.builder()
             .delete()
-            .where(this.repository.metadata.tableName + '.id = :id', { id: id })
+            .where(this.repository.metadata.tableName + '.id = :id', { id: id.value })
             .execute();
-
-        return lang;
     }
 }

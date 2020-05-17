@@ -1,5 +1,7 @@
 // commands
 import { CreateLangCommandHandler } from './lang/application/create/create-lang.command-handler';
+import { UpdateLangCommandHandler } from './lang/application/update/update-lang.command-handler';
+import { DeleteLangCommandHandler } from './lang/application/delete/delete-lang.command-handler';
 
 // queries
 import { FindLangQueryHandler } from './lang/application/find/find-lang.query-handler';
@@ -11,8 +13,11 @@ import { UpdatedLangEventHandler } from './lang/application/events/updated-lang.
 import { DeletedLangEventHandler } from './lang/application/events/deleted-lang.event-handler';
 
 // services
-import { CreatorLangService } from './lang/application/create/creator-lang.service';
-import { FinderLangService } from './lang/application/find/finder-lang.service';
+import { CreateLangService } from './lang/application/create/create-lang.service';
+import { FindLangService } from './lang/application/find/find-lang.service';
+import { FindLangByIdService } from './lang/application/find/find-lang-by-id.service';
+import { UpdateLangService } from './lang/application/update/update-lang.service';
+import { DeleteLangService } from './lang/application/delete/delete-lang.service';
 
 // models
 import { Lang } from './lang/domain/lang';
@@ -27,6 +32,8 @@ import { LangSagas } from './lang/application/sagas/lang.sagas';
 export const AdminHandlers = [
     // commands
     CreateLangCommandHandler,
+    UpdateLangCommandHandler,
+    DeleteLangCommandHandler,
 
     // queries
     FindLangQueryHandler,
@@ -38,8 +45,11 @@ export const AdminHandlers = [
     DeletedLangEventHandler
 ];
 export const AdminServices = [
-    CreatorLangService,
-    FinderLangService
+    CreateLangService,
+    FindLangService,
+    FindLangByIdService,
+    UpdateLangService,
+    DeleteLangService
 ];
 export const AdminEntities = [
     Lang

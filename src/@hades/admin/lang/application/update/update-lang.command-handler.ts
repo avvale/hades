@@ -25,7 +25,7 @@ export class UpdateLangCommandHandler implements ICommandHandler<UpdateLangComma
     async execute(command: UpdateLangCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        this.updateLangService.main(
+        await this.updateLangService.main(
             new LangId(command.id),
             new LangName(command.name),
             new LangImage(command.image),

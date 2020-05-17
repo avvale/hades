@@ -22,7 +22,7 @@ export class CreateLangController
     @Post()
     async main(@Body() payload: CreateLangDto)
     {
-        this.commandBus.dispatch(new CreateLangCommand(
+        await this.commandBus.dispatch(new CreateLangCommand(
             payload.id, 
             payload.name,
             payload.image,

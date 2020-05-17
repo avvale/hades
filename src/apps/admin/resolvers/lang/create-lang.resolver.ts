@@ -5,7 +5,7 @@ import { AdminLangInput } from '../../../../graphql';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { CreateLangCommand } from '@hades/admin/lang/application/create/create-lang.command';
-import { FindLangQuery } from '@hades/admin/lang/application/find/find-lang.query';
+import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-by-id.query';
 
 @Resolver()
 export class CreateLangResolver
@@ -18,7 +18,7 @@ export class CreateLangResolver
     @Mutation('adminCreateLang')
     async main(@Args('payload') payload: AdminLangInput)
     {
-        this.commandBus.dispatch(new CreateLangCommand(
+        await this.commandBus.dispatch(new CreateLangCommand(
             payload.id, 
             payload.name,
             payload.image,
@@ -28,7 +28,7 @@ export class CreateLangResolver
             payload.sort,
             payload.isActive
         ));
-
-        return await this.queryBus.ask(new FindLangQuery());
+        
+        return await this.queryBus.ask(new FindLangByIdQuery(payload.id));
     }
 }
