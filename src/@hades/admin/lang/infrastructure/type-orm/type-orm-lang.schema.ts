@@ -1,4 +1,4 @@
-import {EntitySchema} from "typeorm";
+import { EntitySchema } from "typeorm";
 
 export const LangEntity = new EntitySchema({
     name: "admin_lang",

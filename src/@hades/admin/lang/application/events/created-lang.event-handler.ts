@@ -6,6 +6,6 @@ export class CreatedLangEventHandler implements IEventHandler<CreatedLangEvent>
 {
     handle(event: CreatedLangEvent) 
     {
-        // console.log('event: ', event);
+        // console.log('CreatedLangEvent: ', event);
     }
 }

@@ -6,6 +6,6 @@ export class UpdatedLangEventHandler implements IEventHandler<UpdatedLangEvent>
 {
     handle(event: UpdatedLangEvent) 
     {
-        // console.log('event: ', event);
+        // console.log('UpdatedLangEvent: ', event);
     }
 }

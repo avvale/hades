@@ -6,6 +6,6 @@ export class DeletedLangEventHandler implements IEventHandler<DeletedLangEvent>
 {
     handle(event: DeletedLangEvent) 
     {
-        // console.log('event: ', event);
+        // console.log('DeletedLangEvent: ', event);
     }
 }

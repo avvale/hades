@@ -1,8 +1,8 @@
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, SelectQueryBuilder, InsertResult } from 'typeorm';
+import { Repository, SelectQueryBuilder } from 'typeorm';
 
-import { Command, QueryStatementInput, Operator } from './../../../../shared/domain/persistence/sql-statement-input';
+import { Command, QueryStatementInput, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ILangRepository } from './../../domain/lang.repository';
 import { ICriteria } from './../../../../shared/domain/persistence/criteria';
 import { LangId } from './../../domain/value-objects/lang-id';
