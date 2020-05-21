@@ -22,7 +22,8 @@ import { DeletedLangEvent } from '../application/events/deleted-lang.event';
 @Entity('admin_lang')
 export class Lang extends AggregateRoot
 {
-    @PrimaryColumn({
+    @Column({
+        primary: true,
         type: 'char',
         length: 36,
         transformer: {

@@ -1,42 +1,168 @@
+import { Lang } from './../../domain/lang';
 import { EntitySchema } from "typeorm";
+import { 
+    LangId, 
+    LangName, 
+    LangImage, 
+    LangIso6392,
+    LangIso6393,
+    LangIetf,
+    LangSort,
+    LangIsActive,
+    LangCreatedAt,
+    LangUpdatedAt,
+    LangDeletedAt 
+} from './../../domain/value-objects';
 
-export const LangEntity = new EntitySchema({
-    name: "admin_lang",
+export const LangEntity = new EntitySchema<Lang>({
+    name: 'admin_lang',
+    target: Lang,
     columns: {
         id: {
-            type: Number,
             primary: true,
-            generated: true
+            type: 'char',
+            length: 36,
+            transformer: {
+                from(value: string): LangId {
+                    return new LangId(value);
+                },
+                to(value: LangId): string {
+                    return value.value
+                }
+            }
         },
         name: {
-            type: String
+            type: 'varchar',
+            length: 255,
+            unique: true,
+            transformer: {
+                from(value: string): LangName {
+                    return new LangName(value);
+                },
+                to(value: LangName): string {
+                    return value.value
+                }
+            }
         },
         image: {
-            type: String
+            type: 'varchar',
+            length: 255,
+            nullable: true,
+            transformer: {
+                from(value: string): LangImage {
+                    return new LangImage(value);
+                },
+                to(value: LangImage): string {
+                    return value.value
+                }
+            }
         },
         iso6392: {
-            type: String
+            name: 'iso_639_2',
+            type: 'char',
+            length: 2,
+            unique: true,
+            transformer: {
+                from(value: string): LangIso6392 {
+                    return new LangIso6392(value);
+                },
+                to(value: LangIso6392): string {
+                    return value.value
+                }
+            }
         },
         iso6393: {
-            type: String
+            name: 'iso_639_3',
+            type: 'char',
+            length: 3,
+            unique: true,
+            transformer: {
+                from(value: string): LangIso6393 {
+                    return new LangIso6393(value);
+                },
+                to(value: LangIso6393): string {
+                    return value.value
+                }
+            }
         },
         ietf: {
-            type: String
+            type: 'char',
+            length: 5,
+            unique: true,
+            transformer: {
+                from(value: string): LangIetf {
+                    return new LangIetf(value);
+                },
+                to(value: LangIetf): string {
+                    return value.value
+                }
+            }
         },
         sort: {
-            type: Number
+            type: 'smallint',
+            unsigned: true,
+            width: 5,
+            nullable: true,
+            transformer: {
+                from(value: number): LangSort {
+                    return new LangSort(value);
+                },
+                to(value: LangSort): number {
+                    return value.value
+                }
+            }
         },
         isActive: {
-            type: Boolean
+            name: 'is_active', 
+            type: 'boolean',
+            default: false,
+            transformer: {
+                from(value: boolean): LangIsActive {
+                    return new LangIsActive(value);
+                },
+                to(value: LangIsActive): boolean {
+                    return value.value
+                }
+            }
         },
         createdAt: {
-            type: String
+            name: 'created_at', 
+            type: 'timestamp', 
+            nullable: true,
+            transformer: {
+                from(value: string): LangCreatedAt {
+                    return new LangCreatedAt(value);
+                },
+                to(value: LangCreatedAt): string {
+                    return value?.value
+                }
+            }
         },
         updatedAt: {
-            type: String
+            name: 'updated_at', 
+            type: 'timestamp', 
+            nullable: true,
+            transformer: {
+                from(value: string): LangUpdatedAt {
+                    return new LangUpdatedAt(value);
+                },
+                to(value: LangUpdatedAt): string {
+                    return value?.value
+                }
+            }
         },
         deletedAt: {
-            type: String
+            name: 'deleted_at', 
+            type: 'timestamp', 
+            nullable: true,
+            transformer: {
+                from(value: string): LangDeletedAt {
+                    return new LangDeletedAt(value);
+                },
+                to(value: LangDeletedAt): string {
+                    return value?.value
+                }
+            }
         }
     }
 });
