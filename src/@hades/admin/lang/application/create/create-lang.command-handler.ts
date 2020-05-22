@@ -9,10 +9,7 @@ import {
     LangIso6393,
     LangIetf,
     LangSort,
-    LangIsActive,
-    LangCreatedAt,
-    LangUpdatedAt,
-    LangDeletedAt 
+    LangIsActive 
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateLangCommand)
@@ -34,6 +31,6 @@ export class CreateLangCommandHandler implements ICommandHandler<CreateLangComma
             new LangIetf(command.ietf),
             new LangSort(command.sort),
             new LangIsActive(command.isActive)
-        )
+        );
     }
 }

@@ -17,6 +17,6 @@ export class DeleteLangCommandHandler implements ICommandHandler<DeleteLangComma
         // call to use case and implements ValueObjects
         await this.deleteLangService.main(
             new LangId(command.id)
-        )
+        );
     }
 }
