@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { LangId } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
-import { Lang } from './../../domain/lang';
 
 @Injectable()
 export class DeleteLangService
