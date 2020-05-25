@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column } from 'typeorm';
 import { 
     LangId, 
     LangName, 
@@ -212,7 +212,7 @@ export class Lang extends AggregateRoot
         return new Lang(id, name, image, iso6392, iso6393, ietf, sort, isActive, createdAt, updatedAt, deletedAt);
     }
 
-    created(lang: Lang)
+    created(lang: Lang): void
     {
         this.apply(
             new CreatedLangEvent(
@@ -231,7 +231,7 @@ export class Lang extends AggregateRoot
         );
     }
 
-    updated(lang: Lang)
+    updated(lang: Lang): void
     {
         this.apply(
             new UpdatedLangEvent(
@@ -250,7 +250,7 @@ export class Lang extends AggregateRoot
         );
     }
 
-    deleted(lang: Lang)
+    deleted(lang: Lang): void
     {
         this.apply(
             new DeletedLangEvent(

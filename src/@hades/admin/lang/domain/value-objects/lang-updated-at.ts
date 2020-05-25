@@ -1,4 +1,4 @@
-import { TimeStamp } from './../../../../shared/domain/value-objects/time-stamp';
+import { TimeStamp } from '@hades/shared/domain/value-objects/time-stamp';
 
 export class LangUpdatedAt extends TimeStamp 
 {

@@ -1,4 +1,4 @@
-import { IntValueObject } from './../../../../shared/domain/value-objects/int.value-object';
+import { IntValueObject } from '@hades/shared/domain/value-objects/int.value-object';
 
 export class LangSort extends IntValueObject 
 {

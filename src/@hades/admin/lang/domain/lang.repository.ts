@@ -1,10 +1,8 @@
 
-import { QueryStatementInput } from './../../../shared/domain/persistence/sql-statement-input';
-import { Lang } from './lang';
-
-// TODO, desacoplar typeorm del dominio
 import { Repository } from 'typeorm';
-import { IRepository } from './../../../shared/domain/persistence/repository';
+import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { IRepository } from '@hades/shared/domain/persistence/repository';
+import { Lang } from './lang';
 import { LangId } from './value-objects';
 
 export abstract class ILangRepository implements IRepository<Lang>

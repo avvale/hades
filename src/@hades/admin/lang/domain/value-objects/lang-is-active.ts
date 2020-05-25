@@ -1,4 +1,4 @@
-import { BooleanValueObject } from './../../../../shared/domain/value-objects/boolean.value-object';
+import { BooleanValueObject } from '@hades/shared/domain/value-objects/boolean.value-object';
 
 export class LangIsActive extends BooleanValueObject 
 {
