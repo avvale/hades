@@ -11,9 +11,9 @@ import {
     LangIsActive,
     LangCreatedAt,
     LangUpdatedAt
-} from '../../domain/value-objects';
-import { ILangRepository } from '../../domain/lang.repository';
-import { Lang } from '../../domain/lang';
+} from './../../domain/value-objects';
+import { ILangRepository } from './../../domain/lang.repository';
+import { Lang } from './../../domain/lang.entity';
 
 @Injectable()
 export class CreateLangService

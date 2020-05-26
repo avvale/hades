@@ -18,9 +18,8 @@ import { EnvironmentModule } from './../../shared/modules/environment.module';
                 'username': environmentService.get<string>('DATABASE_USER'),
                 'password': environmentService.get<string>('DATABASE_PASSWORD'),
                 'database': environmentService.get<string>('DATABASE_SCHEMA'),
-                'autoLoadEntities': true,
-                //'entities': [__dirname + '/../../../../**/**/*.entity{.ts,.js}'],
-                'namingStrategy': new CustomNamingStrategy(),
+                'entities': [__dirname + '../../../../**/*.schema{.ts,.js}'],
+                //'namingStrategy': new CustomNamingStrategy(),
                 'migrationsTableName': 'admin_migration',
 
                 // Synchronize database 

@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation, ResolveField, Parent, Int } from '@nestjs/graphql';
-import { AdminLangInput } from '../../../../graphql';
+import { AdminLangInput } from './../../../../graphql';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';

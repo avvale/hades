@@ -2,7 +2,7 @@
 import { Repository } from 'typeorm';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { IRepository } from '@hades/shared/domain/persistence/repository';
-import { Lang } from './lang';
+import { Lang } from './lang.entity';
 import { LangId } from './value-objects';
 
 export abstract class ILangRepository implements IRepository<Lang>

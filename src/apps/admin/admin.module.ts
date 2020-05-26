@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SharedModule } from './../shared/shared.module';
 
-import { AdminHandlers, AdminServices, AdminEntities, AdminRepositories, AdminSagas } from '@hades/admin';
+import { AdminHandlers, AdminServices, AdminSchemas, AdminRepositories, AdminSagas } from '@hades/admin';
 
 // controllers
 import { CreateLangController } from './controllers/lang/create-lang.controller';
@@ -20,7 +20,7 @@ import { FindLangIdResolver } from './resolvers/lang/find-lang-id.resolver';
     imports: [
         SharedModule,
         TypeOrmModule.forFeature([
-            ...AdminEntities
+            ...AdminSchemas
         ])
     ],
     controllers: [

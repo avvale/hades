@@ -1,7 +1,7 @@
 import { Controller, Body, Put } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
-import { CreateLangDto } from '../../dto/create-lang.dto';
-import { LangDto } from '../../dto/lang.dto';
+import { UpdateLangDto } from './../../dto/update-lang.dto';
+import { LangDto } from './../../dto/lang.dto';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
@@ -20,7 +20,7 @@ export class UpdateLangController
     ) {}
 
     @Put()
-    async main(@Body() payload: CreateLangDto)
+    async main(@Body() payload: UpdateLangDto)
     {
         await this.commandBus.dispatch(new UpdateLangCommand(
             payload.id, 

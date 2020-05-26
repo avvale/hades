@@ -1,7 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
-import { CreateLangDto } from '../../dto/create-lang.dto';
-import { LangDto } from '../../dto/lang.dto';
+import { CreateLangDto } from './../../dto/create-lang.dto';
+import { LangDto } from './../../dto/lang.dto';
 
 // @hades
 import { CreateLangCommand } from '@hades/admin/lang/application/create/create-lang.command';

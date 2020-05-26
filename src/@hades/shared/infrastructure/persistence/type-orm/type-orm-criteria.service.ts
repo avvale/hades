@@ -1,5 +1,5 @@
-import { ICriteria } from '../../../domain/persistence/criteria';
-import { QueryStatementInput, Command, Operator } from '../../../domain/persistence/sql-statement-input';
+import { ICriteria } from './../../../domain/persistence/criteria';
+import { QueryStatementInput, Command, Operator } from './../../../domain/persistence/sql-statement-input';
 import { SelectQueryBuilder } from 'typeorm';
 
 import { BadRequestException } from '@nestjs/common';

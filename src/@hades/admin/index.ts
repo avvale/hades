@@ -19,8 +19,8 @@ import { FindLangByIdService } from './lang/application/find/find-lang-by-id.ser
 import { UpdateLangService } from './lang/application/update/update-lang.service';
 import { DeleteLangService } from './lang/application/delete/delete-lang.service';
 
-// models
-import { Lang } from './lang/domain/lang';
+// schemas
+import { LangSchema } from './lang/infrastructure/type-orm/type-orm-lang.schema';
 
 // repository
 import { ILangRepository } from './lang/domain/lang.repository';
@@ -51,8 +51,8 @@ export const AdminServices = [
     UpdateLangService,
     DeleteLangService
 ];
-export const AdminEntities = [
-    Lang
+export const AdminSchemas = [
+    LangSchema
 ];
 export const AdminRepositories = [
     {

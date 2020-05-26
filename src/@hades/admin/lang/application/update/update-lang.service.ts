@@ -13,7 +13,7 @@ import {
     LangUpdatedAt
 } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
-import { Lang } from './../../domain/lang';
+import { Lang } from './../../domain/lang.entity';
 
 @Injectable()
 export class UpdateLangService
