@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { LangResponse } from './../../domain/lang.response';
-import { LangId } from '../../domain/value-objects';
+import { LangId } from './../../domain/value-objects';
 import { FindLangByIdQuery } from './find-lang-by-id.query';
 import { FindLangByIdService } from './find-lang-by-id.service';
 

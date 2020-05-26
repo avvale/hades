@@ -1,5 +1,5 @@
-import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
-import { DeletedLangEvent } from "./deleted-lang.event";
+import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
+import { DeletedLangEvent } from './deleted-lang.event';
 
 @EventsHandler(DeletedLangEvent)
 export class DeletedLangEventHandler implements IEventHandler<DeletedLangEvent>
