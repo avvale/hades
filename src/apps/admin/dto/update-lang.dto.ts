@@ -1,10 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class CreateLangDto 
+export class UpdateLangDto 
 {
     @ApiProperty({
         type: String,
-        required: false,
         description: 'Lang uuid',
         example: 'd0e0ef42-27f3-4f6d-801c-f7c5fbf2082e'
     })
@@ -12,6 +11,7 @@ export class CreateLangDto
     
     @ApiProperty({
         type: String,
+        required: false,
         description: 'Name to identify lang',
         example: 'English'
     })
@@ -27,6 +27,7 @@ export class CreateLangDto
 
     @ApiProperty({
         type: String,
+        required: false,
         description: 'iso code 639-2',
         example: 'en'
     })
@@ -34,12 +35,14 @@ export class CreateLangDto
 
     @ApiProperty({
         type: String,
+        required: false,
         description: 'iso code 639-3',
         example: 'eng'
     })
     iso6393: string;
 
     @ApiProperty({
+        required: false,
         description: 'IETF language tag',
         example: 'en-US'
     })
@@ -47,6 +50,7 @@ export class CreateLangDto
 
     @ApiProperty({
         type: Boolean,
+        required: false,
         description: 'Check if language is active',
         example: true
     })
@@ -54,6 +58,7 @@ export class CreateLangDto
 
     @ApiProperty({
         type: Number,
+        required: false,
         description: 'Sort of language',
         example: 10
     })

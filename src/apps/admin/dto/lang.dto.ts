@@ -11,6 +11,7 @@ export class LangDto
     
     @ApiProperty({
         type: String,
+        maxLength: 255,
         description: 'Name to identify lang',
         example: 'English'
     })
