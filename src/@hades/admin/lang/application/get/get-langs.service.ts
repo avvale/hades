@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { ILangRepository } from './../../domain/lang.repository';
-import { Lang } from './../../domain/lang';
+import { ILangRepository } from '../../domain/lang.repository';
+import { Lang } from '../../domain/lang';
 
 @Injectable()
-export class GetLangService
+export class GetLangsService
 {
     constructor(
         private readonly repository: ILangRepository
