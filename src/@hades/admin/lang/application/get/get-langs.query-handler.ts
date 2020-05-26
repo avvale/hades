@@ -12,7 +12,7 @@ export class GetLangsQueryHandler implements IQueryHandler<GetLangsQuery>
 
     async execute(query: GetLangsQuery): Promise<LangResponse[]>
     {
-        return (await this.getLangsService.main()).map(lang => new LangResponse(
+        return (await this.getLangsService.main(query.queryStatements)).map(lang => new LangResponse(
                 lang.id.value, 
                 lang.name.value, 
                 lang.image.value, 

@@ -71,9 +71,12 @@ export abstract class TypeOrmRepository<Entity>
         ]);       
     }
 
-    async get(): Promise<Entity[]> 
+    async get(queryStatements: QueryStatementInput[] = []): Promise<Entity[]> 
     {
-        return await this.builder().getMany();
+        return await this
+            .criteriaService
+            .implements(this.builder(), queryStatements)
+            .getMany();
     }
 
     async update(entity: Entity): Promise<void> 
