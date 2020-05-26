@@ -19,7 +19,7 @@ import { EnvironmentModule } from './../../shared/modules/environment.module';
                 'password': environmentService.get<string>('DATABASE_PASSWORD'),
                 'database': environmentService.get<string>('DATABASE_SCHEMA'),
                 'entities': [__dirname + '../../../../**/*.schema{.ts,.js}'],
-                //'namingStrategy': new CustomNamingStrategy(),
+                'namingStrategy': new CustomNamingStrategy(),
                 'migrationsTableName': 'admin_migration',
 
                 // Synchronize database 
