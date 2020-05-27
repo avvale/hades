@@ -1,8 +1,8 @@
-import { Repository, SelectQueryBuilder } from "typeorm";
-import { Command, Operator, QueryStatementInput } from "@hades/shared/domain/persistence/sql-statement-input";
-import { ICriteria } from "@hades/shared/domain/persistence/criteria";
-import { ConflictException, NotFoundException } from "@nestjs/common";
-import { Uuid } from "@hades/shared/domain/value-objects/uuid";
+import { Repository, SelectQueryBuilder } from 'typeorm';
+import { Command, Operator, QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { ICriteria } from '@hades/shared/domain/persistence/criteria';
+import { ConflictException, NotFoundException } from '@nestjs/common';
+import { Uuid } from '@hades/shared/domain/value-objects/uuid';
 
 export abstract class TypeOrmRepository<Entity>
 {
