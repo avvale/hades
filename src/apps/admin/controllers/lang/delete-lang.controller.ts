@@ -5,8 +5,8 @@ import { LangDto } from './../../dto/lang.dto';
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
-import { DeleteLangCommand } from '@hades/admin/lang/application/delete/delete-lang.command';
 import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-by-id.query';
+import { DeleteLangCommand } from '@hades/admin/lang/application/delete/delete-lang.command';
 
 @ApiTags('lang')
 @ApiOkResponse({ description: 'The record has been successfully deleted.', type: LangDto})

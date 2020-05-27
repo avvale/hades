@@ -1,5 +1,5 @@
-import { Lang } from './../../domain/lang.entity';
 import { EntitySchema } from 'typeorm';
+import { Lang } from './../../domain/lang.entity';
 import { 
     LangId, 
     LangName, 

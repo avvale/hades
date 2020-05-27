@@ -4,10 +4,10 @@ import { CreateLangDto } from './../../dto/create-lang.dto';
 import { LangDto } from './../../dto/lang.dto';
 
 // @hades
-import { CreateLangCommand } from '@hades/admin/lang/application/create/create-lang.command';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-by-id.query';
+import { CreateLangCommand } from '@hades/admin/lang/application/create/create-lang.command';
 
 @ApiTags('lang')
 @ApiCreatedResponse({ description: 'The record has been successfully created.', type: LangDto})

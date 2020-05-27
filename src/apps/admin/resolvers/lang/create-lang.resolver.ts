@@ -1,4 +1,4 @@
-import { Resolver, Args, Mutation, ResolveField, Parent, Int } from '@nestjs/graphql';
+import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { AdminLangInput } from './../../../../graphql';
 
 // @hades
