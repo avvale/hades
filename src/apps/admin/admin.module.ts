@@ -14,7 +14,9 @@ import { DeleteLangController } from './controllers/lang/delete-lang.controller'
 // resolvers
 import { CreateLangResolver } from './resolvers/lang/create-lang.resolver';
 import { FindLangResolver } from './resolvers/lang/find-lang.resolver';
-import { FindLangIdResolver } from './resolvers/lang/find-lang-id.resolver';
+import { FindLangByIdResolver } from './resolvers/lang/find-lang-by-id.resolver';
+import { UpdateLangResolver } from './resolvers/lang/update-lang.resolver';
+import { DeleteLangResolver } from './resolvers/lang/delete-lang.resolver';
 
 @Module({
     imports: [
@@ -36,9 +38,11 @@ import { FindLangIdResolver } from './resolvers/lang/find-lang-id.resolver';
         ...AdminRepositories,
         ...AdminSagas,
 
+        CreateLangResolver,
         FindLangResolver,
-        FindLangIdResolver,
-        CreateLangResolver
+        FindLangByIdResolver,
+        UpdateLangResolver,
+        DeleteLangResolver
     ]
 })
 export class AdminModule {}

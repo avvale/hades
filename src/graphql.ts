@@ -65,7 +65,7 @@ export interface AdminLang {
 
 export interface IQuery {
     adminFindLang(query?: QueryStatementInput[]): AdminLang | Promise<AdminLang>;
-    adminFindLangId(id?: string): AdminLang | Promise<AdminLang>;
+    adminFindLangById(id?: string): AdminLang | Promise<AdminLang>;
     adminGetLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
     adminPaginationLangs(query?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }
@@ -73,7 +73,7 @@ export interface IQuery {
 export interface IMutation {
     adminCreateLang(payload: AdminLangInput): AdminLang | Promise<AdminLang>;
     adminUpdateLang(payload: AdminLangInput): AdminLang | Promise<AdminLang>;
-    adminDeleteLang(uuid: string): AdminLang | Promise<AdminLang>;
+    adminDeleteLang(id: string): AdminLang | Promise<AdminLang>;
 }
 
 export interface Pagination {

@@ -90,7 +90,7 @@ export abstract class TypeOrmRepository<Entity>
             if (entity[property] === null || entity[property]['value'] === undefined) delete entity[property];
         }
 
-        await this.repository.update(entity['id'], entity);
+        await this.repository.save(entity);
     }
 
     async delete(id: Uuid): Promise<void> 
