@@ -5,7 +5,7 @@ import { DeleteLangCommandHandler } from './lang/application/delete/delete-lang.
 
 // queries
 import { FindLangQueryHandler } from './lang/application/find/find-lang.query-handler';
-import { FindLangByIdQueryHandler } from './lang/application/find/find-lang-id.query-handler';
+import { FindLangByIdQueryHandler } from './lang/application/find/find-lang-by-id.query-handler';
 
 // events
 import { CreatedLangEventHandler } from './lang/application/events/created-lang.event-handler';
