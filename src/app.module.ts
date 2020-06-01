@@ -9,4 +9,4 @@ import { AdminModule } from './apps/admin/admin.module';
         AdminModule
     ]
 })
-export class AppModule { }
+export class AppModule {}
