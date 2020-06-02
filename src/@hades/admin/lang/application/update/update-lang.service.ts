@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { Util } from '@hades/shared/domain/lib/util';
 import { 
     LangId, 
     LangName, 
@@ -44,8 +45,8 @@ export class UpdateLangService
             ietf,
             sort,
             isActive,
-            new LangCreatedAt(),
-            new LangUpdatedAt(),
+            null,
+            new LangUpdatedAt(Util.nowTimeStamp()),
             null
         );
         // TODO, TypeOrm Error: https://github.com/typeorm/typeorm/issues/5719

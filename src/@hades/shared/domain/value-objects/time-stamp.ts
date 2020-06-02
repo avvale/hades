@@ -6,14 +6,8 @@ export abstract class TimeStamp extends StringValueObject
         _value?: string
     ) 
     {
-        if (!_value)
-        {
-            super(moment().format('YYYY-MM-DD h:mm:ss'));
-        }
-        else
-        {
-            super(_value);
-        }
+        super(_value);
+       
         this.ensureIsValidTimeStamp(_value);
     }
 

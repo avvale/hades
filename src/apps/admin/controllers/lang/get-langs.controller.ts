@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { LangDto } from './../../dto/lang.dto';
 
 // @hades
@@ -7,8 +7,8 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { GetLangsQuery } from '@hades/admin/lang/application/get/get-langs.query';
 import { QueryStatementInput } from './../../../../graphql';
 
-@ApiTags('langs')
-@ApiResponse({ status: 200, description: 'The record has been successfully created.', type: LangDto})
+@ApiTags('lang')
+@ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto})
 @Controller('admin/langs')
 export class GetLangsController 
 {
