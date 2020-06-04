@@ -6,7 +6,7 @@ import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-l
 import { AppModule } from './../../../src/app.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 
-describe('Permission', () => 
+describe('lang', () => 
 {
     let app: INestApplication;
     let repository: MockLangRepository;
@@ -114,6 +114,59 @@ describe('Permission', () =>
             .set('Accept', 'application/json')
             .expect(200)
             .expect(repository.collectionResponse);
+    });
+
+    it(`/REST:PUT admin/lang - Got 404 Not Found`, () => 
+    {
+        return request(app.getHttpServer())
+            .put('/admin/lang')
+            .set('Accept', 'application/json')
+            .send({
+                id: '83595fbd-723b-4219-82fe-d0d2d3d61a74',
+                name: 'XXXXX',
+                image: 'XX',
+                iso6392: 'xx',
+                iso6393: 'xxx',
+                ietf: 'xx-XX',
+                sort: 1,
+                isActive: false,
+            })
+            .expect(404);
+    });
+
+    it(`/REST:PUT admin/lang`, () => 
+    {
+        return request(app.getHttpServer())
+            .put('/admin/lang')
+            .set('Accept', 'application/json')
+            .send({
+                id: '94c893c1-3eb7-4f22-a878-b405c6d42e09',
+                name: 'XXXXX',
+                image: 'XX',
+                iso6392: 'xx',
+                iso6393: 'xxx',
+                ietf: 'xx-XX',
+                sort: 1,
+                isActive: false,
+            })
+            .expect(200)
+            .expect(repository.collectionResponse.find(e => e.id === '94c893c1-3eb7-4f22-a878-b405c6d42e09'));
+    });
+
+    it(`/REST:DELETE admin/lang/{id} - Got 404 Not Found`, () => 
+    {
+        return request(app.getHttpServer())
+            .delete('/admin/lang/77738260-5734-4b31-8ccb-367c2d98aa28')
+            .set('Accept', 'application/json')
+            .expect(404);
+    });
+
+    it(`/REST:DELETE admin/lang/{id}`, () => 
+    {
+        return request(app.getHttpServer())
+            .delete('/admin/lang/94c893c1-3eb7-4f22-a878-b405c6d42e09')
+            .set('Accept', 'application/json')
+            .expect(200);
     });
 
     afterAll(async () => 

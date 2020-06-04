@@ -15,7 +15,8 @@ export class MockLangRepository implements ILangRepository
     public readonly entityName: string = 'Lang';
     public collectionSource: Lang[];
     
-    constructor() {
+    constructor() 
+    {
         this.createSourceMockData();
     }
 
@@ -90,7 +91,7 @@ export class MockLangRepository implements ILangRepository
 
     async findById(id: Uuid): Promise<Lang>
     {
-        const entity = this.collectionSource.find(item => item.id.value === id.value);
+        const entity = this.collectionSource.find(lang => lang.id.value === id.value);
 
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
@@ -105,12 +106,19 @@ export class MockLangRepository implements ILangRepository
     async update(entity: Lang): Promise<void> 
     { 
         // check that entity exist
-        await this.findById(entity['id']);
+        await this.findById(entity.id);
+
+        this.collectionSource.map(lang => {
+            if (lang.id.value === entity.id.value) return entity;
+            return lang;
+        });
     }
 
     async delete(id: Uuid): Promise<void> 
     {
         // check that entity exist
         await this.findById(id);
+
+        this.collectionSource.filter(lang => lang.id.value !== id.value);
     }
 }
