@@ -1,14 +1,12 @@
-import { Repository } from 'typeorm';
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
-import { ICriteria } from '@hades/shared/domain/persistence/criteria';
-import { mockData } from '@hades/shared/domain/persistence/mock-data';
+import { Repository } from 'typeorm';
 import { Uuid } from '@hades/shared/domain/value-objects/uuid';
-import { LangCreatedAt, LangUpdatedAt, LangDeletedAt, LangId, LangName, LangImage, LangIso6392, LangIso6393, LangIetf, LangIsActive, LangSort } from '@hades/admin/lang/domain/value-objects';
+import { Utils } from '@hades/shared/domain/lib/utils';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ILangRepository } from './../../domain/lang.repository';
+import { LangCreatedAt, LangUpdatedAt, LangDeletedAt, LangId, LangName, LangImage, LangIso6392, LangIso6393, LangIetf, LangIsActive, LangSort } from '@hades/admin/lang/domain/value-objects';
 import { Lang } from './../../domain/lang.entity';
 import { langs } from './../seeds/lang.seed';
-import { Utils } from '@hades/shared/domain/lib/utils';
 
 @Injectable()
 export class MockLangRepository implements ILangRepository
@@ -74,6 +72,15 @@ export class MockLangRepository implements ILangRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Lang> 
     {
+        this.collectionSource.filter(entity => {
+            let result = true;
+            for (const queryStatement of queryStatements)
+            {
+                result = entity[queryStatement.column].value === queryStatement.value
+            }
+            return result;
+        });
+
         const entity = this.collectionSource[0];
 
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
@@ -83,7 +90,11 @@ export class MockLangRepository implements ILangRepository
 
     async findById(id: Uuid): Promise<Lang>
     {
-        return this.collectionSource.find(item => item.id.value === id.value);   
+        const entity = this.collectionSource.find(item => item.id.value === id.value);
+
+        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+
+        return entity;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Lang[]> 

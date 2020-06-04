@@ -4,7 +4,8 @@ import * as request from 'supertest';
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
 import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-lang.repository';
 import { AppModule } from './../../../src/app.module';
-  
+import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
+
 describe('Permission', () => 
 {
     let app: INestApplication;
@@ -52,6 +53,24 @@ describe('Permission', () =>
             .expect(201);
     });
 
+    it(`/REST:GET admin/lang - Got 404 Not Found`, () => 
+    {
+        return request(app.getHttpServer())
+            .get('/admin/lang')
+            .set('Accept', 'application/json')
+            .send({
+                query: [
+                    {
+                        command: Command.WHERE,
+                        column: 'id',
+                        operator: Operator.EQUALS,
+                        value: '1c8f7dcc-e150-49c9-9fcb-1db310ca6d90'
+                    }
+                ]
+            })
+            .expect(200);
+    });
+
     it(`/REST:GET admin/lang`, () => 
     {
         return request(app.getHttpServer())
@@ -59,6 +78,14 @@ describe('Permission', () =>
             .set('Accept', 'application/json')
             .expect(200)
             .expect(repository.collectionResponse[0]);
+    });
+
+    it(`/REST:GET admin/lang/{id} - Got 404 Not Found`, () => 
+    {
+        return request(app.getHttpServer())
+            .get('/admin/lang/ffdd5ef0-d622-402d-9e54-11628d81c1c7')
+            .set('Accept', 'application/json')
+            .expect(404);
     });
 
     it(`/REST:GET admin/lang/{id}`, () => 
