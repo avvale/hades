@@ -108,4 +108,21 @@ export class Lang extends AggregateRoot
             )
         );
     }
+
+    toObject(): Object
+    {
+        return {
+            id: this.id.value,
+            name: this.name.value,
+            image: this.image.value,
+            iso6392: this.iso6392.value,
+            iso6393: this.iso6393.value,
+            ietf: this.ietf.value,
+            sort: this.sort.value,
+            isActive: this.isActive.value,
+            createdAt: this.createdAt.value,
+            updatedAt: this.updatedAt.value,
+            deletedAt: this.deletedAt.value,
+        }
+    }
 }

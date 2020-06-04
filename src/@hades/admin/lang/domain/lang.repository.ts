@@ -7,7 +7,7 @@ import { LangId } from './value-objects';
 
 export abstract class ILangRepository implements IRepository<Lang>
 {
-    abstract repository: Repository<Lang>;
+    abstract readonly repository: Repository<Lang>;
     
     // save a single record
     abstract async save(lang: Lang): Promise<void>;

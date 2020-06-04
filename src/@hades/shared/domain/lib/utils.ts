@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-export class Util
+export class Utils
 {
     public static nowTimeStamp(): string
     {
