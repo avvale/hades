@@ -68,7 +68,7 @@ describe('Permission', () =>
                     }
                 ]
             })
-            .expect(200);
+            .expect(404);
     });
 
     it(`/REST:GET admin/lang`, () => 
@@ -76,8 +76,18 @@ describe('Permission', () =>
         return request(app.getHttpServer())
             .get('/admin/lang')
             .set('Accept', 'application/json')
+            .send({
+                query: [
+                    {
+                        command: Command.WHERE,
+                        column: 'id',
+                        operator: Operator.EQUALS,
+                        value: '94c893c1-3eb7-4f22-a878-b405c6d42e09'
+                    }
+                ]
+            })
             .expect(200)
-            .expect(repository.collectionResponse[0]);
+            .expect(repository.collectionResponse.find(item => item.id === '94c893c1-3eb7-4f22-a878-b405c6d42e09'));
     });
 
     it(`/REST:GET admin/lang/{id} - Got 404 Not Found`, () => 

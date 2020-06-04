@@ -72,7 +72,7 @@ export class MockLangRepository implements ILangRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Lang> 
     {
-        this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(entity => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
@@ -81,7 +81,7 @@ export class MockLangRepository implements ILangRepository
             return result;
         });
 
-        const entity = this.collectionSource[0];
+        const entity = response[0];
 
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
