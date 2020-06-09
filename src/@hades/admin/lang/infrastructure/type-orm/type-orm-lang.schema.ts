@@ -20,6 +20,7 @@ export const LangSchema = new EntitySchema<AdminLang>({
     columns: {
         id: {
             primary: true,
+            name: 'id',
             type: 'char',
             length: 36,
             transformer: {
@@ -32,6 +33,7 @@ export const LangSchema = new EntitySchema<AdminLang>({
             }
         },
         name: {
+            name: 'name',
             type: 'varchar',
             length: 255,
             unique: true,
@@ -45,6 +47,7 @@ export const LangSchema = new EntitySchema<AdminLang>({
             }
         },
         image: {
+            name: 'image',
             type: 'varchar',
             length: 255,
             nullable: true,
@@ -86,6 +89,7 @@ export const LangSchema = new EntitySchema<AdminLang>({
             }
         },
         ietf: {
+            name: 'ietf',
             type: 'char',
             length: 5,
             unique: true,
@@ -99,6 +103,7 @@ export const LangSchema = new EntitySchema<AdminLang>({
             }
         },
         sort: {
+            name: 'sort',
             type: 'smallint',
             unsigned: true,
             width: 5,
