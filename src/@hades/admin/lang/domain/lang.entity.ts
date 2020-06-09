@@ -16,7 +16,7 @@ import { CreatedLangEvent } from './../application/events/created-lang.event';
 import { UpdatedLangEvent } from './../application/events/updated-lang.event';
 import { DeletedLangEvent } from './../application/events/deleted-lang.event';
 
-export class Lang extends AggregateRoot
+export class AdminLang extends AggregateRoot
 {
     id: LangId;
     name: LangName;   
@@ -47,12 +47,12 @@ export class Lang extends AggregateRoot
         this.deletedAt  = deletedAt;
     }
 
-    static register (id: LangId, name?: LangName, image?: LangImage, iso6392?: LangIso6392, iso6393?: LangIso6393, ietf?: LangIetf, sort?: LangSort, isActive?: LangIsActive, createdAt?: LangCreatedAt, updatedAt?: LangUpdatedAt, deletedAt?: LangDeletedAt): Lang
+    static register (id: LangId, name?: LangName, image?: LangImage, iso6392?: LangIso6392, iso6393?: LangIso6393, ietf?: LangIetf, sort?: LangSort, isActive?: LangIsActive, createdAt?: LangCreatedAt, updatedAt?: LangUpdatedAt, deletedAt?: LangDeletedAt): AdminLang
     {
-        return new Lang(id, name, image, iso6392, iso6393, ietf, sort, isActive, createdAt, updatedAt, deletedAt);
+        return new AdminLang(id, name, image, iso6392, iso6393, ietf, sort, isActive, createdAt, updatedAt, deletedAt);
     }
 
-    created(lang: Lang)
+    created(lang: AdminLang)
     {
         this.apply(
             new CreatedLangEvent(
@@ -71,7 +71,7 @@ export class Lang extends AggregateRoot
         );
     }
 
-    updated(lang: Lang)
+    updated(lang: AdminLang)
     {
         this.apply(
             new UpdatedLangEvent(
@@ -90,7 +90,7 @@ export class Lang extends AggregateRoot
         );
     }
 
-    deleted(lang: Lang)
+    deleted(lang: AdminLang)
     {
         this.apply(
             new DeletedLangEvent(

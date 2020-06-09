@@ -5,15 +5,15 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ILangRepository } from './../../domain/lang.repository';
 import { LangCreatedAt, LangUpdatedAt, LangDeletedAt, LangId, LangName, LangImage, LangIso6392, LangIso6393, LangIetf, LangIsActive, LangSort } from '@hades/admin/lang/domain/value-objects';
-import { Lang } from './../../domain/lang.entity';
+import { AdminLang } from './../../domain/lang.entity';
 import { langs } from './../seeds/lang.seed';
 
 @Injectable()
 export class MockLangRepository implements ILangRepository
 {
-    public readonly repository: Repository<Lang>;
-    public readonly entityName: string = 'Lang';
-    public collectionSource: Lang[];
+    public readonly repository: Repository<AdminLang>;
+    public readonly entityName: string = 'AdminLang';
+    public collectionSource: AdminLang[];
     
     constructor() 
     {
@@ -41,7 +41,7 @@ export class MockLangRepository implements ILangRepository
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
             
-            this.collectionSource.push(Lang.register(
+            this.collectionSource.push(AdminLang.register(
                     new LangId(itemCollection.id),
                     new LangName(itemCollection.name),
                     new LangImage(itemCollection.image),
@@ -57,7 +57,7 @@ export class MockLangRepository implements ILangRepository
         }
     }
     
-    async save(lang: Lang): Promise<void>
+    async save(lang: AdminLang): Promise<void>
     {
         if (this.collectionSource.find(item => item.id.value === lang.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${lang.id.value} already exist in database`);
 
@@ -67,11 +67,11 @@ export class MockLangRepository implements ILangRepository
         this.collectionSource.push(lang);
     }
 
-    async insert(lang: Lang[]): Promise<void>
+    async insert(lang: AdminLang[]): Promise<void>
     {
     }
 
-    async find(queryStatements: QueryStatementInput[] = []): Promise<Lang> 
+    async find(queryStatements: QueryStatementInput[] = []): Promise<AdminLang> 
     {
         const response = this.collectionSource.filter(entity => {
             let result = true;
@@ -89,7 +89,7 @@ export class MockLangRepository implements ILangRepository
         return entity;
     }
 
-    async findById(id: Uuid): Promise<Lang>
+    async findById(id: Uuid): Promise<AdminLang>
     {
         const entity = this.collectionSource.find(lang => lang.id.value === id.value);
 
@@ -98,12 +98,12 @@ export class MockLangRepository implements ILangRepository
         return entity;
     }
 
-    async get(queryStatements: QueryStatementInput[] = []): Promise<Lang[]> 
+    async get(queryStatements: QueryStatementInput[] = []): Promise<AdminLang[]> 
     {
         return this.collectionSource;
     }
 
-    async update(entity: Lang): Promise<void> 
+    async update(entity: AdminLang): Promise<void> 
     { 
         // check that entity exist
         await this.findById(entity.id);

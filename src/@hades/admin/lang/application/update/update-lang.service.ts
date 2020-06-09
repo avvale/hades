@@ -14,7 +14,7 @@ import {
     LangUpdatedAt
 } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
-import { Lang } from './../../domain/lang.entity';
+import { AdminLang } from './../../domain/lang.entity';
 
 @Injectable()
 export class UpdateLangService
@@ -36,7 +36,7 @@ export class UpdateLangService
     ): Promise<void>
     {        
         // create object with factory pattern
-        const lang = Lang.register(
+        const lang = AdminLang.register(
             id,
             name,
             image,

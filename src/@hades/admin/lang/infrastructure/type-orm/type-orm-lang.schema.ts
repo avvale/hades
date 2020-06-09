@@ -1,5 +1,5 @@
 import { EntitySchema } from 'typeorm';
-import { Lang } from './../../domain/lang.entity';
+import { AdminLang } from './../../domain/lang.entity';
 import { 
     LangId, 
     LangName, 
@@ -14,9 +14,8 @@ import {
     LangDeletedAt 
 } from './../../domain/value-objects';
 
-export const LangSchema = new EntitySchema<Lang>({
-    name: 'Lang',
-    target: Lang,
+export const LangSchema = new EntitySchema<AdminLang>({
+    name: 'AdminLang',
     tableName: 'admin_lang',
     columns: {
         id: {
