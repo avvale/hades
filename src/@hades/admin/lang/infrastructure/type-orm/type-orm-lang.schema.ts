@@ -16,6 +16,7 @@ import {
 
 export const LangSchema = new EntitySchema<AdminLang>({
     name: 'AdminLang',
+    target: AdminLang,
     tableName: 'admin_lang',
     columns: {
         id: {
