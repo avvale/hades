@@ -39,7 +39,7 @@ export class MockLangRepository implements ILangRepository
         {
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
-            itemCollection['deletedAt'] = now;
+            itemCollection['deletedAt'] = null;
             
             this.collectionSource.push(Lang.register(
                     new LangId(itemCollection.id),
@@ -52,7 +52,7 @@ export class MockLangRepository implements ILangRepository
                     new LangIsActive(itemCollection.isActive),
                     new LangCreatedAt(itemCollection.createdAt),
                     new LangUpdatedAt(itemCollection.updatedAt),
-                    new LangDeletedAt(null),
+                    new LangDeletedAt(itemCollection.deletedAt),
                 ));
         }
     }
