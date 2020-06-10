@@ -67,7 +67,8 @@ export abstract class TypeOrmRepository<Entity extends BaseEntity>
 
     async findById(id: Uuid): Promise<Entity>
     {
-        const entity = await this.find([
+        // value is already mapped
+        return await this.find([
                 {
                     command: Command.WHERE,
                     operator: Operator.EQUALS,
@@ -75,9 +76,6 @@ export abstract class TypeOrmRepository<Entity extends BaseEntity>
                     value: id.value
                 }
             ]);
-
-        // map value to create value objects
-        return <Entity>this.mapper.mapToValueObject(entity);       
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Entity[]> 
@@ -98,7 +96,7 @@ export abstract class TypeOrmRepository<Entity extends BaseEntity>
         // clean undefined fields
         const objectLiteral = this.cleanUndefined(entity.toObject());
 
-        await this.repository.save(<DeepPartial<Entity>>objectLiteral.toObject());
+        await this.repository.save(<DeepPartial<Entity>>objectLiteral);
     }
 
     async delete(id: Uuid): Promise<void> 
@@ -117,7 +115,7 @@ export abstract class TypeOrmRepository<Entity extends BaseEntity>
         // clean properties object from undefined values
         for (const property in entity )
         {
-            if (entity[property] === null || entity[property]['value'] === undefined) delete entity[property];
+            if (entity[property] === null || entity[property] === undefined) delete entity[property];
         }
         return entity;
     }
