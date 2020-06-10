@@ -1,14 +1,19 @@
-import { Repository, SelectQueryBuilder } from 'typeorm';
+import { ConflictException, NotFoundException } from '@nestjs/common';
+import { Repository, SelectQueryBuilder, DeepPartial } from 'typeorm';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { Command, Operator, QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
-import { ConflictException, NotFoundException } from '@nestjs/common';
+import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { Uuid } from '@hades/shared/domain/value-objects/uuid';
+import { BaseEntity } from '@hades/shared/domain/lib/base-entity';
+import { TypeOrmMapper } from './type-orm.mapper';
 
-export abstract class TypeOrmRepository<Entity>
+export abstract class TypeOrmRepository<Entity extends BaseEntity>
 {
     public readonly repository: Repository<Entity>;
     public readonly criteriaService: ICriteria;
     public readonly entityName: string;
+    public readonly mapper: TypeOrmMapper;
 
     builder(): SelectQueryBuilder<Entity>
     {
@@ -34,7 +39,7 @@ export abstract class TypeOrmRepository<Entity>
         
         try
         {
-            await this.repository.save(entity);
+            await this.repository.save(<DeepPartial<Entity>>entity.toObject());
         }
         catch (error) 
         {
@@ -42,9 +47,9 @@ export abstract class TypeOrmRepository<Entity>
         }       
     }
 
-    async insert(entity: Entity[]): Promise<void>
+    async insert(entities: Entity[]): Promise<void>
     {
-        await this.repository.insert(entity);
+        await this.repository.insert(<(QueryDeepPartialEntity<Entity>[])>(entities.map(item => item.toObject())));
     }
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Entity> 
@@ -56,27 +61,33 @@ export abstract class TypeOrmRepository<Entity>
 
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
-        return entity;
+        // map value to create value objects
+        return <Entity>this.mapper.mapToValueObject(entity);
     }
 
     async findById(id: Uuid): Promise<Entity>
     {
-        return await this.find([
-            {
-                command: Command.WHERE,
-                operator: Operator.EQUALS,
-                column: this.repository.metadata.tableName + '.id',
-                value: id.value
-            }
-        ]);       
+        const entity = await this.find([
+                {
+                    command: Command.WHERE,
+                    operator: Operator.EQUALS,
+                    column: this.repository.metadata.tableName + '.id',
+                    value: id.value
+                }
+            ]);
+
+        // map value to create value objects
+        return <Entity>this.mapper.mapToValueObject(entity);       
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Entity[]> 
     {
-        return await this
-            .criteriaService
+        const entities = await this.criteriaService
             .implements(this.builder(), queryStatements)
             .getMany();
+
+        // map values to create value objects
+        return <Entity[]>this.mapper.mapToValueObject(entities);
     }
 
     async update(entity: Entity): Promise<void> 
@@ -84,13 +95,10 @@ export abstract class TypeOrmRepository<Entity>
         // check that entity exist
         await this.findById(entity['id']);
 
-        // clean properties object from undefined values
-        for (const property in entity )
-        {
-            if (entity[property] === null || entity[property]['value'] === undefined) delete entity[property];
-        }
+        // clean undefined fields
+        const objectLiteral = this.cleanUndefined(entity.toObject());
 
-        await this.repository.save(entity);
+        await this.repository.save(<DeepPartial<Entity>>objectLiteral.toObject());
     }
 
     async delete(id: Uuid): Promise<void> 
@@ -102,5 +110,15 @@ export abstract class TypeOrmRepository<Entity>
             .delete()
             .where(this.repository.metadata.tableName + '.id = :id', { id: id.value })
             .execute();
+    }
+
+    private cleanUndefined(entity: ObjectLiteral): ObjectLiteral
+    {
+        // clean properties object from undefined values
+        for (const property in entity )
+        {
+            if (entity[property] === null || entity[property]['value'] === undefined) delete entity[property];
+        }
+        return entity;
     }
 }
