@@ -7,13 +7,15 @@ import { EnvironmentModule } from './../../shared/modules/environment.module';
     imports: [        
         SequelizeModule.forRootAsync({
             imports: [EnvironmentModule],
-            useFactory: async (environmentService: EnvironmentService) => ({
+            useFactory: (environmentService: EnvironmentService) => ({
                 dialect: 'mysql',
                 host: environmentService.get<string>('DATABASE_HOST'),
                 port: +environmentService.get<number>('DATABASE_PORT'),
                 username: environmentService.get<string>('DATABASE_USER'),
                 password: environmentService.get<string>('DATABASE_PASSWORD'),
                 database: environmentService.get<string>('DATABASE_SCHEMA'),
+                autoLoadModels: true,
+                synchronize: true,
                 models: [],
             }),
             inject: [EnvironmentService]

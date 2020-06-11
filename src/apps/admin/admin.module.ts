@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from './../shared/shared.module';
 
-import { AdminHandlers, AdminServices, AdminSchemas, AdminRepositories, AdminSagas } from '@hades/admin';
+import { AdminHandlers, AdminServices, AdminModels, AdminRepositories, AdminSagas } from '@hades/admin';
 
 // controllers
 import { CreateLangController } from './controllers/lang/create-lang.controller';
@@ -23,8 +23,8 @@ import { DeleteLangResolver } from './resolvers/lang/delete-lang.resolver';
 @Module({
     imports: [
         SharedModule,
-        TypeOrmModule.forFeature([
-            ...AdminSchemas
+        SequelizeModule.forFeature([
+            ...AdminModels
         ])
     ],
     controllers: [

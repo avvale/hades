@@ -1,38 +1,63 @@
 import { Column, Model, Table } from 'sequelize-typescript';
+import { DataTypes } from 'sequelize';
 
-@Table
+@Table({ modelName: 'admin_langs' })
 export class LangModel extends Model<LangModel> 
 {
-    @Column
+    @Column({
+        primaryKey: true,
+        field: 'id',
+        type: DataTypes.UUID,
+    })
     id: string;
     
-    @Column
+    @Column({
+        field: 'name' 
+    })
     name: string;   
     
-    @Column
+    @Column({
+        field: 'image' 
+    })
     image: string;
     
-    @Column
+    @Column({ 
+        field: 'iso_6392' 
+    })
     iso6392: string;
     
-    @Column
+    @Column({ 
+        field: 'iso_6393' 
+    })
     iso6393: string;
     
-    @Column
+    @Column({
+        field: 'ietf' 
+    })
     ietf: string;
     
-    @Column
+    @Column({
+        field: 'sort' 
+    })
     sort: number;
     
-    @Column
+    @Column({ 
+        field: 'is_active' 
+    })
     isActive: boolean;
     
-    @Column
+    @Column({ 
+        field: 'created_at' 
+    })
     createdAt: string;
     
-    @Column
+    @Column({ 
+        field: 'updated_at' 
+    })
     updatedAt: string;
     
-    @Column
+    @Column({ 
+        field: 'deleted_at' 
+    })
     deletedAt: string;
 }

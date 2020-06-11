@@ -53,6 +53,10 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Entity> 
     {
+        const tt = await this.repository.findOne();
+
+        console.log(tt);
+
         /* const entity = await this
             .criteriaService
             .implements(this.builder(), queryStatements)
