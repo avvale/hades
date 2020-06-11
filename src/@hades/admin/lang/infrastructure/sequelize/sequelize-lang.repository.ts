@@ -5,11 +5,13 @@ import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ILangRepository } from './../../domain/lang.repository';
 import { AdminLang } from './../../domain/lang.entity';
 import { LangModel } from './sequelize-lang.model';
+import { SequelizeLangMapper } from './sequelize-lang.mapper';
 
 @Injectable()
 export class SequelizeLangRepository extends SequelizeRepository<AdminLang> implements ILangRepository
 {
     public readonly entityName: string = 'AdminLang';
+    public readonly mapper: SequelizeLangMapper = new SequelizeLangMapper();
 
     constructor(
         @InjectModel(LangModel)

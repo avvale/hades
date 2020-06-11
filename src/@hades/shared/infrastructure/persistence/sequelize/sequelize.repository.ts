@@ -72,15 +72,17 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
     async findById(id: Uuid): Promise<Entity>
     {
         // value is already mapped
-        /* return await this.find([
-                {
-                    command: Command.WHERE,
-                    operator: Operator.EQUALS,
-                    column: this.repository.metadata.tableName + '.id',
-                    value: id.value
+        const entity = await this.repository.findOne([
+            {
+                where: {
+                    id
                 }
-            ]); */
-            return;
+            }
+        ]);
+
+        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+
+        return entity;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Entity[]> 
