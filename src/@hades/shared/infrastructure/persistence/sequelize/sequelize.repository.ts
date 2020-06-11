@@ -53,9 +53,9 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Entity> 
     {
-        const tt = await this.repository.findOne();
+        const entity = await this.repository.findOne();
 
-        console.log(tt);
+        // console.log(entity.name);
 
         /* const entity = await this
             .criteriaService
@@ -66,7 +66,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
         // map value to create value objects
         return <Entity>this.mapper.mapToValueObject(entity); */
-        return;
+        return entity;
     }
 
     async findById(id: Uuid): Promise<Entity>
