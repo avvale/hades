@@ -1,4 +1,4 @@
-import { TypeOrmMapper } from '@hades/shared/infrastructure/persistence/type-orm/type-orm.mapper';
+import { SequelizeOrmMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { AdminLang } from './../../domain/lang.entity';
 import { 
@@ -15,9 +15,9 @@ import {
     LangDeletedAt,
  } from '../../domain/value-objects';
 
-export class SequelizeLangMapper implements TypeOrmMapper
+export class SequelizeLangMapper implements SequelizeOrmMapper
 {
-    mapToValueObject(lang: ObjectLiteral | ObjectLiteral[]): AdminLang | AdminLang[]
+    mapToEntity(lang: ObjectLiteral | ObjectLiteral[]): AdminLang | AdminLang[]
     {
         if (Array.isArray(lang))
         {

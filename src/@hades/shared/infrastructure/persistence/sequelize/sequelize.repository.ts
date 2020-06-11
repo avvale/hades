@@ -4,15 +4,14 @@ import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { Uuid } from '@hades/shared/domain/value-objects/uuid';
 import { BaseEntity } from '@hades/shared/domain/lib/base-entity';
+import { SequelizeOrmMapper } from './sequelize.mapper';
 
 export abstract class SequelizeRepository<Entity extends BaseEntity>
 {
     public readonly repository: any;
     public readonly criteriaService: ICriteria;
     public readonly entityName: string;
-    
-    // TODO hacer el maper
-    public readonly mapper: any;
+    public readonly mapper: SequelizeOrmMapper;
 
     /* builder(): SelectQueryBuilder<Entity>
     {
@@ -82,7 +81,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
-        return entity;
+        return this.mapper.mapToEntity(entity);
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Entity[]> 
