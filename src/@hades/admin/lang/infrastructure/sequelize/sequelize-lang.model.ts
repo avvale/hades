@@ -1,21 +1,8 @@
 import { Column, Model, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { 
-    LangId, 
-    LangName, 
-    LangImage, 
-    LangIso6392,
-    LangIso6393,
-    LangIetf,
-    LangSort,
-    LangIsActive,
-    LangCreatedAt,
-    LangUpdatedAt,
-    LangDeletedAt,
- } from '../../domain/value-objects';
 
 @Table({ modelName: 'admin_langs' })
-export class LangModel extends Model<LangModel> 
+export class AdminLangModel extends Model<AdminLangModel> 
 {
     @Column({
         primaryKey: true,
@@ -27,15 +14,6 @@ export class LangModel extends Model<LangModel>
     @Column({
         field: 'name',
         allowNull: false,
-        get() 
-        {
-            // console.log(new LangName(this.getDataValue('name')))
-            return new LangName(this.getDataValue('name'));
-        },
-        set(value: LangName) 
-        {
-            this.setDataValue('name', value.value);
-        }
     })
     name: string;   
     
@@ -79,19 +57,19 @@ export class LangModel extends Model<LangModel>
     
     @Column({ 
         field: 'created_at',
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
     })
     createdAt: string;
     
     @Column({ 
         field: 'updated_at',
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
     })
     updatedAt: string;
     
     @Column({ 
         field: 'deleted_at',
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
     })
     deletedAt: string;
 }

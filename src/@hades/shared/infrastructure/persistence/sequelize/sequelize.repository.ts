@@ -21,33 +21,29 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
     async save(entity: Entity): Promise<void>
     {
         // check if exist object in database, if allow save entity with the same uuid, update this entity in database instead of create it
-        /* const entityInDB = await this
-            .criteriaService
-            .implements(this.builder(), [
-                {
-                    command: Command.WHERE,
-                    operator: Operator.EQUALS,
-                    column: this.repository.metadata.tableName + '.id',
-                    value: entity['id']['value']
+        const entityInDB = await this.repository.findOne(
+            {
+                where: {
+                    id: entity['id']['value']
                 }
-            ])
-            .getOne();
-
+            }
+        );
+        
         if (entityInDB) throw new ConflictException(`Error to create ${this.entityName}, the id ${entity['id']['value']} already exist in database`);
         
         try
         {
-            await this.repository.save(<DeepPartial<Entity>>entity.toObject());
+            await this.repository.create(entity.toDTO());
         }
         catch (error) 
         {
             throw new ConflictException(error.message);
-        }        */
+        }
     }
 
     async insert(entities: Entity[]): Promise<void>
     {
-        // await this.repository.insert(<(QueryDeepPartialEntity<Entity>[])>(entities.map(item => item.toObject())));
+        // await this.repository.insert(<(QueryDeepPartialEntity<Entity>[])>(entities.map(item => item.toDTO())));
     }
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Entity> 
@@ -70,18 +66,19 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
     async findById(id: Uuid): Promise<Entity>
     {
+        console.log(id.value);
         // value is already mapped
-        const entity = await this.repository.findOne([
+        const entity = await this.repository.findOne(
             {
                 where: {
-                    id
+                    id: id.value
                 }
             }
-        ]);
+        );
 
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
-        return this.mapper.mapToEntity(entity);
+        return <Entity>this.mapper.mapToEntity(entity);
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Entity[]> 
@@ -99,33 +96,45 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
     async update(entity: Entity): Promise<void> 
     { 
         // check that entity exist
-        /* await this.findById(entity['id']);
+        const entityInDB = await this.repository.findOne(
+            {
+                where: {
+                    id: entity['id']['value']
+                }
+            }
+        );
+
+        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
         // clean undefined fields
-        const objectLiteral = this.cleanUndefined(entity.toObject());
+        const objectLiteral = this.cleanUndefined(entity.toDTO());
 
-        await this.repository.save(<DeepPartial<Entity>>objectLiteral); */
+        await entityInDB.update(objectLiteral);
     }
 
     async delete(id: Uuid): Promise<void> 
     {
         // check that entity exist
-       /*  await this.findById(id);
+        const entity = await this.repository.findOne(
+            {
+                where: {
+                    id: id.value
+                }
+            }
+        );
 
-        await this.builder()
-            .delete()
-            .where(this.repository.metadata.tableName + '.id = :id', { id: id.value })
-            .execute(); */
+        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+
+        await entity.destroy();
     }
 
     private cleanUndefined(entity: ObjectLiteral): ObjectLiteral
     {
         // clean properties object from undefined values
-       /*  for (const property in entity )
+        for (const property in entity )
         {
             if (entity[property] === null || entity[property] === undefined) delete entity[property];
         }
-        return entity; */
-        return;
+        return entity;
     }
 }

@@ -21,7 +21,7 @@ export class MockLangRepository implements ILangRepository
 
     get collectionResponse(): any[]
     { 
-        return this.collectionSource.map(lang => lang.toObject());
+        return this.collectionSource.map(lang => lang.toDTO());
     }
 
     public reset() 

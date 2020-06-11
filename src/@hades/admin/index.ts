@@ -22,7 +22,7 @@ import { UpdateLangService } from './lang/application/update/update-lang.service
 import { DeleteLangService } from './lang/application/delete/delete-lang.service';
 
 // models
-import { LangModel } from './lang/infrastructure/sequelize/sequelize-lang.model';
+import { AdminLangModel } from './lang/infrastructure/sequelize/sequelize-lang.model';
 
 // repository
 import { ILangRepository } from './lang/domain/lang.repository';
@@ -56,7 +56,7 @@ export const AdminServices = [
     DeleteLangService
 ];
 export const AdminModels = [
-   LangModel
+    AdminLangModel
 ];
 export const AdminRepositories = [
     {

@@ -8,8 +8,8 @@ type AdminLang
     ietf: String!
     sort: GraphQLInt
     isActive: Boolean!
-    createdAt: String!
-    updatedAt: String!
+    createdAt: GraphQLTimestamp!
+    updatedAt: GraphQLTimestamp!
 }
 
 input AdminLangInput
@@ -22,8 +22,8 @@ input AdminLangInput
     ietf: String
     sort: GraphQLInt
     isActive: Boolean
-    createdAt: String
-    updatedAt: String
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
 }
 
 type Query 

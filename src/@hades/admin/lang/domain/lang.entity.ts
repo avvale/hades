@@ -109,20 +109,20 @@ export class AdminLang extends AggregateRoot
         );
     }
 
-    toObject(): Object
+    toDTO(): Object
     {
         return {
             id: this.id.value,
             name: this.name.value,
-            image: this.image.value,
+            image: this.image?.value,
             iso6392: this.iso6392.value,
             iso6393: this.iso6393.value,
             ietf: this.ietf.value,
-            sort: this.sort.value,
+            sort: this.sort?.value,
             isActive: this.isActive.value,
-            createdAt: this.createdAt.value,
-            updatedAt: this.updatedAt.value,
-            deletedAt: this.deletedAt.value,
+            createdAt: this.createdAt?.value,
+            updatedAt: this.updatedAt?.value,
+            deletedAt: this.deletedAt?.value,
         }
     }
 }

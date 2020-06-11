@@ -39,8 +39,8 @@ export interface AdminLangInput {
     ietf?: string;
     sort?: GraphQLInt;
     isActive?: boolean;
-    createdAt?: string;
-    updatedAt?: string;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
 }
 
 export interface QueryStatementInput {
@@ -59,8 +59,8 @@ export interface AdminLang {
     ietf: string;
     sort?: GraphQLInt;
     isActive: boolean;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: GraphQLTimestamp;
+    updatedAt: GraphQLTimestamp;
 }
 
 export interface IQuery {
