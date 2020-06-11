@@ -1,6 +1,4 @@
 import { ConflictException, NotFoundException } from '@nestjs/common';
-import { Repository, SelectQueryBuilder, DeepPartial } from 'typeorm';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { Command, Operator, QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';

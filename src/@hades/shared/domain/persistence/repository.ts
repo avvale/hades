@@ -1,12 +1,9 @@
 import { QueryStatementInput } from './sql-statement-input';
 import { ValueObject } from './../value-objects/value-object';
 
-// TODO, desacoplar typeorm del dominio
-import { Repository } from 'typeorm';
-
 export interface IRepository<Entity>
 {
-    repository: Repository<Entity>;
+    repository: any;
     
     // save a single record
     save(item: Entity): Promise<void>;
