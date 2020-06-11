@@ -1,5 +1,4 @@
 
-import { Repository } from 'typeorm';
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { AdminLang } from './lang.entity';
@@ -7,7 +6,7 @@ import { LangId } from './value-objects';
 
 export abstract class ILangRepository implements IRepository<AdminLang>
 {
-    abstract readonly repository: Repository<AdminLang>;
+    abstract readonly repository: any;
     
     // save a single record
     abstract async save(lang: AdminLang): Promise<void>;

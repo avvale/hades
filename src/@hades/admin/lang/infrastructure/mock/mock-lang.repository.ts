@@ -1,5 +1,4 @@
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { Uuid } from '@hades/shared/domain/value-objects/uuid';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
@@ -11,7 +10,7 @@ import { langs } from './../seeds/lang.seed';
 @Injectable()
 export class MockLangRepository implements ILangRepository
 {
-    public readonly repository: Repository<AdminLang>;
+    public readonly repository: any;
     public readonly entityName: string = 'AdminLang';
     public collectionSource: AdminLang[];
     

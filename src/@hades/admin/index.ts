@@ -22,11 +22,11 @@ import { UpdateLangService } from './lang/application/update/update-lang.service
 import { DeleteLangService } from './lang/application/delete/delete-lang.service';
 
 // schemas
-import { LangSchema } from './lang/infrastructure/type-orm/type-orm-lang.schema';
+// import { LangSchema } from './lang/infrastructure/type-orm/type-orm-lang.schema';
 
 // repository
 import { ILangRepository } from './lang/domain/lang.repository';
-import { TypeOrmLangRepository } from './lang/infrastructure/type-orm/type-orm-lang.repository';
+import { SequelizeLangRepository } from './lang/infrastructure/sequelize/sequelize-lang.repository';
 
 // sagas
 import { LangSagas } from './lang/application/sagas/lang.sagas';
@@ -56,12 +56,12 @@ export const AdminServices = [
     DeleteLangService
 ];
 export const AdminSchemas = [
-    LangSchema
+   // LangSchema
 ];
 export const AdminRepositories = [
     {
         provide: ILangRepository,
-        useClass: TypeOrmLangRepository
+        useClass: SequelizeLangRepository
     }
 ];
 export const AdminSagas = [
