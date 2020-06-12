@@ -66,7 +66,6 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
     async findById(id: Uuid): Promise<Entity>
     {
-        console.log(id.value);
         // value is already mapped
         const entity = await this.repository.findOne(
             {
@@ -83,6 +82,14 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Entity[]> 
     {
+        const entity = await this.repository.findAll(
+            {
+                where: {
+                    id: id.value
+                }
+            }
+        );
+
         /* const entities = await this.criteriaService
             .implements(this.builder(), queryStatements)
             .getMany();
