@@ -1,19 +1,19 @@
 import { ICriteria } from './../../../domain/persistence/criteria';
 import { QueryStatementInput, Command, Operator } from './../../../domain/persistence/sql-statement-input';
-
 import { BadRequestException } from '@nestjs/common';
+import { Op } from 'sequelize';
 
 export class SequelizeCriteria implements ICriteria
 {
-    implements<Entity>(queryStatements: QueryStatementInput[])
+    implements(queryStatements: QueryStatementInput[], queryBuilder: Object = {})
     {
         // add where, contains, in, etc.
-        builder = this.implementCriteriaFilterStatement(builder, queryStatements);
+        queryBuilder = this.implementCriteriaFilterStatement(queryStatements, queryBuilder);
         
         // add limit, offset, order by, etc.
-        builder = this.implementCriteriaSliceStatement(builder, queryStatements);
+        queryBuilder = this.implementCriteriaSliceStatement(queryStatements, queryBuilder);
        
-        return builder;
+        return queryBuilder;
     }
 
     /**
@@ -22,7 +22,7 @@ export class SequelizeCriteria implements ICriteria
      * @param queryBuilder 
      * @param query 
      */
-    implementCriteriaFilterStatement<Entity>(queryBuilder: SelectQueryBuilder<Entity>, queryStatements: QueryStatementInput[] = []):  SelectQueryBuilder<Entity>
+    implementCriteriaFilterStatement(queryStatements: QueryStatementInput[] = [], queryBuilder: Object):  Object
     {
         for (const queryStatement of queryStatements)
         {
@@ -35,18 +35,7 @@ export class SequelizeCriteria implements ICriteria
                     break;
 
                 case Command.WHERE:
-                    if (Operator.CONTAINS === queryStatement.operator)
-                    {
-                        queryBuilder.where(`${queryStatement.column} LIKE :value`, {
-                            value: `%${queryStatement.value}%`
-                        });
-                    }
-                    else
-                    {
-                        queryBuilder.where(`${queryStatement.column} ${this._operatorMapping(queryStatement.operator)} :value`, {
-                            value: queryStatement.value
-                        });
-                    }
+                    queryBuilder['where'][queryStatement.column][this._operatorMapping(queryStatement.operator)] = queryStatement.value;
                     break;
 
                 default:
@@ -63,7 +52,7 @@ export class SequelizeCriteria implements ICriteria
      * @param queryBuilder 
      * @param query 
      */
-    implementCriteriaSliceStatement<Entity>(queryBuilder: SelectQueryBuilder<Entity>, queryStatements: QueryStatementInput[] = []):  SelectQueryBuilder<Entity>
+    implementCriteriaSliceStatement<Entity>(queryStatements: QueryStatementInput[] = [], queryBuilder: Object):  Object
     {
         for (const queryStatement of queryStatements)
         {
@@ -73,13 +62,13 @@ export class SequelizeCriteria implements ICriteria
                     // avoid execute this commands
                     break;
                 case Command.LIMIT:
-                    queryBuilder.limit(<number><unknown>queryStatement.value);
+                    queryBuilder['limit'] = queryStatement.value;
                     break;
                 case Command.OFFSET:
-                    queryBuilder.offset(<number><unknown>queryStatement.value);
+                    queryBuilder['offset'] = queryStatement.value;
                     break;
                 case Command.ORDER_BY:
-                    queryBuilder.orderBy(queryStatement.column, <'ASC' | 'DESC'>this._operatorMapping(queryStatement.operator, true));
+                    queryBuilder['order']= [queryStatement.column, <'ASC' | 'DESC'>this._operatorMapping(queryStatement.operator, true)];
                     break;
             }
         }
@@ -93,7 +82,7 @@ export class SequelizeCriteria implements ICriteria
      * @param operator 
      * @param isOrderByOperator 
      */
-    private _operatorMapping(operator: Operator, isOrderByOperator: boolean = false): string
+    private _operatorMapping(operator: Operator, isOrderByOperator: boolean = false): symbol | string
     {
         // check if is order by operator the operator type
         if (isOrderByOperator && (operator && operator !== Operator.ASC && operator !== Operator.DESC))
@@ -105,28 +94,29 @@ export class SequelizeCriteria implements ICriteria
         {
             case Operator.ASC:
                 return 'ASC';
-            case Operator.CONTAINS:
-                return 'CONTAINS';
             case Operator.DESC:
                 return 'DESC';
-            case Operator.EQUALS:
-                return '=';
-            case Operator.GREATER:
-                return '>';
-            case Operator.GREATER_OR_EQ:
-                return '>=';
-            case Operator.IN:
-                return 'IN';
-            case Operator.IS_NOT_NULL:
-                return 'IS NOT NULL';
-            case Operator.IS_NULL:
-                return 'IS NULL';
-            case Operator.LOWER:
-                return '<';
-            case Operator.LOWER_OR_EQ:
-                return '<=';
-            case Operator.NOT_CONTAINS:
-                return 'NOT CONTAINS';
+            case Operator.CONTAINS:         // LIKE
+                return Op.like;
+            case Operator.NOT_CONTAINS:     // NOT LIKE
+                return Op.notLike;
+            case Operator.EQUALS:           // =
+                return Op.eq;
+            case Operator.GREATER:          // >
+                return Op.gt;
+            case Operator.GREATER_OR_EQ:    // >=
+                return Op.gte;
+            case Operator.IN:               // IN
+                return Op.in;
+            case Operator.IS_NOT:           // IS NOT 
+                return Op.not;              
+            case Operator.IS:               // IS
+                return Op.is;               
+            case Operator.LOWER:            // <
+                return Op.lt;               
+            case Operator.LOWER_OR_EQ:      // =< 
+                return Op.lte;              
+            
             default:
                 throw new BadRequestException(`Operator ${operator} not allowed, use any of the following operators: ASC, CONTAINS, DESC, EQUALS, GREATER, GREATER_OR_EQ, IN, IS_NOT_NULL, IS_NULL, LIKE, LOWER, LOWER_OR_EQ, NOT_CONTAINS, NOT_EQUALS`);
         }

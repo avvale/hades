@@ -5,7 +5,7 @@ import { LangDto } from './../../dto/lang.dto';
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { GetLangsQuery } from '@hades/admin/lang/application/get/get-langs.query';
-import { QueryStatementInput } from './../../../../graphql';
+import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 
 @ApiTags('lang')
 @ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto})

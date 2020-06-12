@@ -16,7 +16,7 @@ export class SequelizeLangRepository extends SequelizeRepository<AdminLang> impl
     constructor(
         @InjectModel(AdminLangModel)
         public readonly repository: typeof AdminLangModel,
-       // public readonly criteriaService: ICriteria
+        public readonly criteria: ICriteria
     ) {
         super();
     }

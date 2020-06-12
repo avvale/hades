@@ -13,10 +13,10 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
     public readonly entityName: string;
     public readonly mapper: SequelizeOrmMapper;
 
-    /* builder(): SelectQueryBuilder<Entity>
+    builder(): Object
     {
-        return this.repository.createQueryBuilder(this.repository.metadata.tableName)
-    } */
+        return {}
+    }
     
     async save(entity: Entity): Promise<void>
     {
@@ -83,11 +83,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
     async get(queryStatements: QueryStatementInput[] = []): Promise<Entity[]> 
     {
         const entity = await this.repository.findAll(
-            {
-                where: {
-                    id: id.value
-                }
-            }
+            this.criteria.implements(queryStatements, this.builder())
         );
 
         /* const entities = await this.criteriaService
