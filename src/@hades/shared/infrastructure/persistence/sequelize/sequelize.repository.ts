@@ -9,7 +9,7 @@ import { SequelizeOrmMapper } from './sequelize.mapper';
 export abstract class SequelizeRepository<Entity extends BaseEntity>
 {
     public readonly repository: any;
-    public readonly criteriaService: ICriteria;
+    public readonly criteria: ICriteria;
     public readonly entityName: string;
     public readonly mapper: SequelizeOrmMapper;
 
