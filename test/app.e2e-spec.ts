@@ -17,7 +17,7 @@ describe('AppController (e2e)', () => {
 
     it('/ (GET)', () => {
         return request(app.getHttpServer())
-            .get('/admin/lang')
+            .get('/admin/langs')
             .expect(200);
     });
 

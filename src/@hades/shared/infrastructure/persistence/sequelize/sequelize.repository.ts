@@ -1,5 +1,5 @@
 import { ConflictException, NotFoundException } from '@nestjs/common';
-import { Command, Operator, QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { Uuid } from '@hades/shared/domain/value-objects/uuid';
