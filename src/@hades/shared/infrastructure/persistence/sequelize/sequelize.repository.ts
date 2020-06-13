@@ -48,20 +48,14 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Entity> 
     {
-        const entity = await this.repository.findOne();
-
-        // console.log(entity.name);
-
-        /* const entity = await this
-            .criteriaService
-            .implements(this.builder(), queryStatements)
-            .getOne();
+        const entity = await this.repository.findOne(
+            this.criteria.implements(queryStatements, this.builder())
+        );
 
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
         // map value to create value objects
-        return <Entity>this.mapper.mapToValueObject(entity); */
-        return entity;
+        return <Entity>this.mapper.mapToEntity(entity);
     }
 
     async findById(id: Uuid): Promise<Entity>
@@ -82,18 +76,12 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Entity[]> 
     {
-        const entity = await this.repository.findAll(
+        const entities = await this.repository.findAll(
             this.criteria.implements(queryStatements, this.builder())
         );
 
-        /* const entities = await this.criteriaService
-            .implements(this.builder(), queryStatements)
-            .getMany();
-
         // map values to create value objects
-        return <Entity[]>this.mapper.mapToValueObject(entities); */
-
-        return;
+        return <Entity[]>this.mapper.mapToEntity(entities);
     }
 
     async update(entity: Entity): Promise<void> 

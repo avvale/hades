@@ -2,6 +2,7 @@ import { ICriteria } from './../../../domain/persistence/criteria';
 import { QueryStatementInput, Command, Operator } from './../../../domain/persistence/sql-statement-input';
 import { BadRequestException } from '@nestjs/common';
 import { Op } from 'sequelize';
+import * as _ from 'lodash';
 
 export class SequelizeCriteria implements ICriteria
 {
@@ -12,7 +13,7 @@ export class SequelizeCriteria implements ICriteria
         
         // add limit, offset, order by, etc.
         queryBuilder = this.implementCriteriaSliceStatement(queryStatements, queryBuilder);
-       
+        
         return queryBuilder;
     }
 
@@ -22,7 +23,7 @@ export class SequelizeCriteria implements ICriteria
      * @param queryBuilder 
      * @param query 
      */
-    implementCriteriaFilterStatement(queryStatements: QueryStatementInput[] = [], queryBuilder: Object):  Object
+    implementCriteriaFilterStatement(queryStatements: QueryStatementInput[] = [], queryBuilder: Object = {}):  Object
     {
         for (const queryStatement of queryStatements)
         {
@@ -35,7 +36,7 @@ export class SequelizeCriteria implements ICriteria
                     break;
 
                 case Command.WHERE:
-                    queryBuilder['where'][queryStatement.column][this._operatorMapping(queryStatement.operator)] = queryStatement.value;
+                    _.set(queryBuilder, ['where', queryStatement.column, this._operatorMapping(queryStatement.operator)], queryStatement.value);
                     break;
 
                 default:
@@ -52,7 +53,7 @@ export class SequelizeCriteria implements ICriteria
      * @param queryBuilder 
      * @param query 
      */
-    implementCriteriaSliceStatement<Entity>(queryStatements: QueryStatementInput[] = [], queryBuilder: Object):  Object
+    implementCriteriaSliceStatement<Entity>(queryStatements: QueryStatementInput[] = [], queryBuilder: Object = {}):  Object
     {
         for (const queryStatement of queryStatements)
         {
@@ -62,13 +63,13 @@ export class SequelizeCriteria implements ICriteria
                     // avoid execute this commands
                     break;
                 case Command.LIMIT:
-                    queryBuilder['limit'] = queryStatement.value;
+                    _.set(queryBuilder, ['limit'], queryStatement.value);
                     break;
                 case Command.OFFSET:
-                    queryBuilder['offset'] = queryStatement.value;
+                    _.set(queryBuilder, ['offset'], queryStatement.value);
                     break;
                 case Command.ORDER_BY:
-                    queryBuilder['order']= [queryStatement.column, <'ASC' | 'DESC'>this._operatorMapping(queryStatement.operator, true)];
+                    _.set(queryBuilder, ['order'], [queryStatement.column, <'ASC' | 'DESC'>this._operatorMapping(queryStatement.operator, true)]);
                     break;
             }
         }
