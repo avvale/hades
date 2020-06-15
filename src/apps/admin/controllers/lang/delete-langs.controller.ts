@@ -10,7 +10,7 @@ import { DeleteLangCommand } from '@hades/admin/lang/application/delete/delete-l
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 
 @ApiTags('lang')
-@ApiOkResponse({ description: 'The record has been successfully deleted.', type: LangDto})
+@ApiOkResponse({ description: 'The records has been deleted successfully.', type: LangDto})
 @Controller('admin/langs')
 export class DeleteLangController 
 {

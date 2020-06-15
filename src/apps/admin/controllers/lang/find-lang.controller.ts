@@ -8,7 +8,7 @@ import { FindLangQuery } from '@hades/admin/lang/application/find/find-lang.quer
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 
 @ApiTags('lang')
-@ApiResponse({ status: 200, description: 'The record has been successfully created.', type: LangDto})
+@ApiResponse({ status: 200, description: 'The records has been found successfully.', type: LangDto})
 @Controller('admin/lang')
 export class FindLangController 
 {

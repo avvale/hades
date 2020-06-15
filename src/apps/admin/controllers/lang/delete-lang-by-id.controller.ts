@@ -9,7 +9,7 @@ import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-
 import { DeleteLangByIdCommand } from '@hades/admin/lang/application/delete/delete-lang-by-id.command';
 
 @ApiTags('lang')
-@ApiOkResponse({ description: 'The record has been successfully deleted.', type: LangDto})
+@ApiOkResponse({ description: 'The record has been deleted successfully.', type: LangDto})
 @Controller('admin/lang')
 export class DeleteLangByIdController 
 {

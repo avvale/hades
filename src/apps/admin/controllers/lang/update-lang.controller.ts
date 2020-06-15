@@ -10,7 +10,7 @@ import { UpdateLangCommand } from '@hades/admin/lang/application/update/update-l
 import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-by-id.query';
 
 @ApiTags('lang')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: LangDto})
+@ApiCreatedResponse({ description: 'The record has been updated successfully.', type: LangDto})
 @Controller('admin/lang')
 export class UpdateLangController 
 {

@@ -8,7 +8,7 @@ import { GetLangsQuery } from '@hades/admin/lang/application/get/get-langs.query
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 
 @ApiTags('lang')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto})
+@ApiOkResponse({ description: 'The records has been found successfully.', type: LangDto})
 @Controller('admin/langs')
 export class GetLangsController 
 {

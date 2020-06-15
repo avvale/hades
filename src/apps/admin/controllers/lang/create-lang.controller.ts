@@ -10,7 +10,7 @@ import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-
 import { CreateLangCommand } from '@hades/admin/lang/application/create/create-lang.command';
 
 @ApiTags('lang')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: LangDto})
+@ApiCreatedResponse({ description: 'The record has been created successfully.', type: LangDto})
 @Controller('admin/lang')
 export class CreateLangController 
 {
