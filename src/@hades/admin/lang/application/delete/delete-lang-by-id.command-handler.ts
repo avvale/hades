@@ -9,13 +9,13 @@ import {
 export class DeleteLangByIdCommandHandler implements ICommandHandler<DeleteLangByIdCommand>
 {
     constructor(
-        private readonly deleteLangService: DeleteLangByIdService
+        private readonly deleteLangByIdService: DeleteLangByIdService
     ) { }
 
     async execute(command: DeleteLangByIdCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteLangService.main(
+        await this.deleteLangByIdService.main(
             new LangId(command.id)
         );
     }

@@ -16,13 +16,13 @@ import {
 export class InsertLangsCommandHandler implements ICommandHandler<InsertLangsCommand>
 {
     constructor(
-        private readonly insertLangService: InsertLangsService
+        private readonly insertLangsService: InsertLangsService
     ) { }
 
     async execute(command: InsertLangsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.insertLangService.main(
+        await this.insertLangsService.main(
             command.langs
                 .map(lang => { 
                     return {

@@ -9,7 +9,7 @@ export class InsertLangsCommand
             iso6393: string,
             ietf: string,
             sort?: number,
-            isActive: boolean
-        }  []
+            isActive: boolean,
+        } []
     ) {}
 }

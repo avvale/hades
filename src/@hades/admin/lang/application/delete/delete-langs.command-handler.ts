@@ -6,12 +6,12 @@ import { DeleteLangsService } from './delete-langs.service';
 export class DeleteLangsCommandHandler implements ICommandHandler<DeleteLangsCommand>
 {
     constructor(
-        private readonly deleteLangService: DeleteLangsService
+        private readonly deleteLangsService: DeleteLangsService
     ) { }
 
     async execute(command: DeleteLangsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteLangService.main(command.queryStatements);
+        await this.deleteLangsService.main(command.queryStatements);
     }
 }
