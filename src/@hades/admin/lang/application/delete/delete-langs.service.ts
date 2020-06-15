@@ -4,7 +4,7 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { ILangRepository } from './../../domain/lang.repository';
 
 @Injectable()
-export class DeleteLangService
+export class DeleteLangsService
 {
     constructor(
         private readonly publisher: EventPublisher,
@@ -14,7 +14,7 @@ export class DeleteLangService
     public async main(queryStatements: QueryStatementInput[]): Promise<void>
     {   
         // get object to delete
-        const langs = await this.repository.find(queryStatements);
+        const langs = await this.repository.get(queryStatements);
 
         await this.repository.delete(queryStatements);        
 

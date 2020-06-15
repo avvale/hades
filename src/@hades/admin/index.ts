@@ -1,7 +1,9 @@
 // commands
 import { CreateLangCommandHandler } from './lang/application/create/create-lang.command-handler';
+import { InsertLangsCommandHandler } from './lang/application/insert/insert-langs.command-handler';
 import { UpdateLangCommandHandler } from './lang/application/update/update-lang.command-handler';
-import { DeleteLangCommandHandler } from './lang/application/delete/delete-lang-by-id.command-handler';
+import { DeleteLangByIdCommandHandler } from './lang/application/delete/delete-lang-by-id.command-handler';
+import { DeleteLangsCommandHandler } from './lang/application/delete/delete-langs.command-handler';
 
 // queries
 import { GetLangsQueryHandler } from './lang/application/get/get-langs.query-handler';
@@ -15,11 +17,13 @@ import { DeletedLangEventHandler } from './lang/application/events/deleted-lang.
 
 // services
 import { CreateLangService } from './lang/application/create/create-lang.service';
+import { InsertLangsService } from './lang/application/insert/insert-langs.service';
 import { GetLangsService } from './lang/application/get/get-langs.service';
 import { FindLangService } from './lang/application/find/find-lang.service';
 import { FindLangByIdService } from './lang/application/find/find-lang-by-id.service';
 import { UpdateLangService } from './lang/application/update/update-lang.service';
-import { DeleteLangService } from './lang/application/delete/delete-lang.service';
+import { DeleteLangByIdService } from './lang/application/delete/delete-lang-by-id.service';
+import { DeleteLangsService } from './lang/application/delete/delete-langs.service';
 
 // models
 import { AdminLangModel } from './lang/infrastructure/sequelize/sequelize-lang.model';
@@ -34,8 +38,10 @@ import { LangSagas } from './lang/application/sagas/lang.sagas';
 export const AdminHandlers = [
     // commands
     CreateLangCommandHandler,
+    InsertLangsCommandHandler,
     UpdateLangCommandHandler,
-    DeleteLangCommandHandler,
+    DeleteLangByIdCommandHandler,
+    DeleteLangsCommandHandler,
 
     // queries
     GetLangsQueryHandler,
@@ -45,25 +51,27 @@ export const AdminHandlers = [
     // events
     CreatedLangEventHandler,
     UpdatedLangEventHandler,
-    DeletedLangEventHandler
+    DeletedLangEventHandler,
 ];
 export const AdminServices = [
     CreateLangService,
+    InsertLangsService,
     GetLangsService,
     FindLangService,
     FindLangByIdService,
     UpdateLangService,
-    DeleteLangService
+    DeleteLangByIdService,
+    DeleteLangsService,
 ];
 export const AdminModels = [
-    AdminLangModel
+    AdminLangModel,
 ];
 export const AdminRepositories = [
     {
         provide: ILangRepository,
-        useClass: SequelizeLangRepository
+        useClass: SequelizeLangRepository,
     }
 ];
 export const AdminSagas = [
-    LangSagas
+    LangSagas,
 ];

@@ -56,7 +56,7 @@ export class MockLangRepository implements ILangRepository
         }
     }
     
-    async save(lang: AdminLang): Promise<void>
+    async create(lang: AdminLang): Promise<void>
     {
         if (this.collectionSource.find(item => item.id.value === lang.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${lang.id.value} already exist in database`);
 
@@ -113,11 +113,15 @@ export class MockLangRepository implements ILangRepository
         });
     }
 
-    async delete(id: Uuid): Promise<void> 
+    async deleteById(id: Uuid): Promise<void> 
     {
         // check that entity exist
         await this.findById(id);
 
         this.collectionSource.filter(lang => lang.id.value !== id.value);
+    }
+
+    async delete(queryStatements: QueryStatementInput[] = []): Promise<void> 
+    {
     }
 }

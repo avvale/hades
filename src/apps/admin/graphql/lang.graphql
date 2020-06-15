@@ -12,9 +12,21 @@ type AdminLang
     updatedAt: GraphQLTimestamp!
 }
 
-input AdminLangInput
+input AdminCreateLangInput
 {
-    id: ID
+    id: ID!
+    name: String!
+    image: String!
+    iso6392: String!
+    iso6393: String!
+    ietf: String!
+    sort: GraphQLInt
+    isActive: Boolean!
+}
+
+input AdminUpdateLangInput
+{
+    id: ID!
     name: String
     image: String
     iso6392: String
@@ -22,8 +34,6 @@ input AdminLangInput
     ietf: String
     sort: GraphQLInt
     isActive: Boolean
-    createdAt: GraphQLTimestamp
-    updatedAt: GraphQLTimestamp
 }
 
 type Query 
@@ -36,7 +46,9 @@ type Query
 
 type Mutation
 {
-    adminCreateLang(payload: AdminLangInput!): AdminLang
-    adminUpdateLang(payload: AdminLangInput!): AdminLang
-    adminDeleteLang(id: ID!): AdminLang
+    adminCreateLang(payload: AdminCreateLangInput!): AdminLang
+    adminInsertLangs(payload: [AdminCreateLangInput]!): [AdminLang]!
+    adminUpdateLang(payload: AdminUpdateLangInput!): AdminLang
+    adminDeleteLangs(query:[QueryStatementInput]): [AdminLang]!
+    adminDeleteLangById(id: ID!): AdminLang
 }

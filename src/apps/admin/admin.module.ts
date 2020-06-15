@@ -6,19 +6,23 @@ import { AdminHandlers, AdminServices, AdminModels, AdminRepositories, AdminSaga
 
 // controllers
 import { CreateLangController } from './controllers/lang/create-lang.controller';
+import { InsertLangsController } from './controllers/lang/insert-langs.controller';
 import { GetLangsController } from './controllers/lang/get-langs.controller';
 import { FindLangByIdController } from './controllers/lang/find-lang-by-id.controller';
 import { FindLangController } from './controllers/lang/find-lang.controller';
 import { UpdateLangController } from './controllers/lang/update-lang.controller';
-import { DeleteLangController } from './controllers/lang/delete-lang.controller';
+import { DeleteLangByIdController } from './controllers/lang/delete-lang-by-id.controller';
+import { DeleteLangsController } from './controllers/lang/delete-langs.controller';
 
 // resolvers
 import { CreateLangResolver } from './resolvers/lang/create-lang.resolver';
+import { InsertLangsResolver } from './resolvers/lang/insert-langs.resolver';
 import { GetLangsResolver } from './resolvers/lang/get-langs.resolver';
 import { FindLangResolver } from './resolvers/lang/find-lang.resolver';
 import { FindLangByIdResolver } from './resolvers/lang/find-lang-by-id.resolver';
 import { UpdateLangResolver } from './resolvers/lang/update-lang.resolver';
-import { DeleteLangResolver } from './resolvers/lang/delete-lang.resolver';
+import { DeleteLangByIdResolver } from './resolvers/lang/delete-lang-by-id.resolver';
+import { DeleteLangsResolver } from './resolvers/lang/delete-langs.resolver';
 
 @Module({
     imports: [
@@ -29,11 +33,13 @@ import { DeleteLangResolver } from './resolvers/lang/delete-lang.resolver';
     ],
     controllers: [
         CreateLangController,
+        InsertLangsController,
         GetLangsController,
         FindLangByIdController,
         FindLangController,
         UpdateLangController,
-        DeleteLangController
+        DeleteLangByIdController,
+        DeleteLangsController,
     ],
     providers: [
         ...AdminHandlers,
@@ -42,11 +48,13 @@ import { DeleteLangResolver } from './resolvers/lang/delete-lang.resolver';
         ...AdminSagas,
 
         CreateLangResolver,
+        InsertLangsResolver,
         GetLangsResolver,
         FindLangResolver,
         FindLangByIdResolver,
         UpdateLangResolver,
-        DeleteLangResolver
+        DeleteLangByIdResolver,
+        DeleteLangsResolver,
     ]
 })
 export class AdminModule {}

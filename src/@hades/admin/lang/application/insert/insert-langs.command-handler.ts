@@ -13,7 +13,7 @@ import {
 } from './../../domain/value-objects';
 
 @CommandHandler(InsertLangsCommand)
-export class InsertLangCommandHandler implements ICommandHandler<InsertLangsCommand>
+export class InsertLangsCommandHandler implements ICommandHandler<InsertLangsCommand>
 {
     constructor(
         private readonly insertLangService: InsertLangsService

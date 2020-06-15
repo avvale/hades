@@ -30,8 +30,19 @@ export enum Operator {
     NOT_EQUALS = "NOT_EQUALS"
 }
 
-export interface AdminLangInput {
-    id?: string;
+export interface AdminCreateLangInput {
+    id: string;
+    name: string;
+    image: string;
+    iso6392: string;
+    iso6393: string;
+    ietf: string;
+    sort?: GraphQLInt;
+    isActive: boolean;
+}
+
+export interface AdminUpdateLangInput {
+    id: string;
     name?: string;
     image?: string;
     iso6392?: string;
@@ -39,8 +50,6 @@ export interface AdminLangInput {
     ietf?: string;
     sort?: GraphQLInt;
     isActive?: boolean;
-    createdAt?: GraphQLTimestamp;
-    updatedAt?: GraphQLTimestamp;
 }
 
 export interface QueryStatementInput {
@@ -71,15 +80,17 @@ export interface IQuery {
 }
 
 export interface IMutation {
-    adminCreateLang(payload: AdminLangInput): AdminLang | Promise<AdminLang>;
-    adminUpdateLang(payload: AdminLangInput): AdminLang | Promise<AdminLang>;
-    adminDeleteLang(id: string): AdminLang | Promise<AdminLang>;
+    adminCreateLang(payload: AdminCreateLangInput): AdminLang | Promise<AdminLang>;
+    adminInsertLangs(payload: AdminCreateLangInput[]): AdminLang[] | Promise<AdminLang[]>;
+    adminUpdateLang(payload: AdminUpdateLangInput): AdminLang | Promise<AdminLang>;
+    adminDeleteLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
+    adminDeleteLangById(id: string): AdminLang | Promise<AdminLang>;
 }
 
 export interface Pagination {
     total: number;
-    filtered: number;
-    objects: JSON[];
+    count: number;
+    rows: JSON[];
 }
 
 export type JSON = any;

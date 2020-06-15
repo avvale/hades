@@ -15,7 +15,7 @@ export class UpdateLangDto
         description: 'Name to identify lang',
         example: 'English'
     })
-    name: string;
+    name?: string;
 
     @ApiProperty({
         type: String,
@@ -23,7 +23,7 @@ export class UpdateLangDto
         description: 'Representative image of the language',
         example: 'usa.svg'
     })
-    image: string;
+    image?: string;
 
     @ApiProperty({
         type: String,
@@ -31,7 +31,7 @@ export class UpdateLangDto
         description: 'iso code 639-2',
         example: 'en'
     })
-    iso6392: string;
+    iso6392?: string;
 
     @ApiProperty({
         type: String,
@@ -39,14 +39,14 @@ export class UpdateLangDto
         description: 'iso code 639-3',
         example: 'eng'
     })
-    iso6393: string;
+    iso6393?: string;
 
     @ApiProperty({
         required: false,
         description: 'IETF language tag',
         example: 'en-US'
     })
-    ietf: string;
+    ietf?: string;
 
     @ApiProperty({
         type: Boolean,
@@ -54,7 +54,7 @@ export class UpdateLangDto
         description: 'Check if language is active',
         example: true
     })
-    isActive: boolean;
+    isActive?: boolean;
 
     @ApiProperty({
         type: Number,
@@ -62,5 +62,5 @@ export class UpdateLangDto
         description: 'Sort of language',
         example: 10
     })
-    sort: number
+    sort?: number
 }

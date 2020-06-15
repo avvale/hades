@@ -8,6 +8,7 @@ export class AdminLangModel extends Model<AdminLangModel>
         primaryKey: true,
         field: 'id',
         type: DataTypes.UUID,
+        allowNull: false,
     })
     id: string;
     
@@ -20,6 +21,7 @@ export class AdminLangModel extends Model<AdminLangModel>
     @Column({
         field: 'image',
         type: DataTypes.STRING,
+        allowNull: true,
     })
     image: string;
     
@@ -47,6 +49,7 @@ export class AdminLangModel extends Model<AdminLangModel>
     @Column({
         field: 'sort',
         type: DataTypes.SMALLINT,
+        allowNull: true,
     })
     sort: number;
     
@@ -59,18 +62,21 @@ export class AdminLangModel extends Model<AdminLangModel>
     @Column({ 
         field: 'created_at',
         type: DataTypes.DATE,
+        allowNull: true,
     })
     createdAt: string;
     
     @Column({ 
         field: 'updated_at',
         type: DataTypes.DATE,
+        allowNull: true,
     })
     updatedAt: string;
     
     @Column({ 
         field: 'deleted_at',
         type: DataTypes.DATE,
+        allowNull: true,
     })
     deletedAt: string;
 }

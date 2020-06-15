@@ -1,6 +1,4 @@
-import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
-import { LangDto } from './../../dto/lang.dto';
+import { Resolver, Args, Mutation } from '@nestjs/graphql';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
@@ -9,18 +7,16 @@ import { GetLangsQuery } from '@hades/admin/lang/application/get/get-langs.query
 import { DeleteLangsCommand } from '@hades/admin/lang/application/delete/delete-langs.command';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 
-@ApiTags('lang')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: LangDto})
-@Controller('admin/langs')
-export class DeleteLangsController 
+@Resolver()
+export class DeleteLangsResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus
     ) {}
 
-    @Delete()
-    async main(@Body('query') queryStatements: QueryStatementInput[])
+    @Mutation('adminDeleteLangs')
+    async main(@Args('query') queryStatements: QueryStatementInput[])
     {
         const langs = await this.queryBus.ask(new GetLangsQuery(queryStatements));
 

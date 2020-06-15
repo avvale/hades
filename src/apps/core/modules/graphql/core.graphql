@@ -52,7 +52,7 @@ type Pagination
     "Total possible objects displayed"
     total: Int!
     "Number of items filtered according to query"
-    filtered: Int!
+    count: Int!
     "Query object data"
-    objects(query:[QueryStatementInput]): [JSON]!
+    rows(query:[QueryStatementInput]): [JSON]!
 }

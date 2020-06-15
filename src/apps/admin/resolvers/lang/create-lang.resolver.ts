@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AdminLangInput } from './../../../../graphql';
+import { AdminCreateLangInput } from './../../../../graphql';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
@@ -16,7 +16,7 @@ export class CreateLangResolver
     ) {}
 
     @Mutation('adminCreateLang')
-    async main(@Args('payload') payload: AdminLangInput)
+    async main(@Args('payload') payload: AdminCreateLangInput)
     {
         await this.commandBus.dispatch(new CreateLangCommand(
             payload.id, 

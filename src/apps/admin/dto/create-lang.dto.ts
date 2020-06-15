@@ -23,7 +23,7 @@ export class CreateLangDto
         description: 'Representative image of the language',
         example: 'usa.svg'
     })
-    image: string;
+    image?: string;
 
     @ApiProperty({
         type: String,
@@ -57,5 +57,5 @@ export class CreateLangDto
         description: 'Sort of language',
         example: 10
     })
-    sort: number
+    sort?: number
 }

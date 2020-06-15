@@ -4,6 +4,7 @@ import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { Uuid } from '@hades/shared/domain/value-objects/uuid';
 import { BaseEntity } from '@hades/shared/domain/lib/base-entity';
+import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { SequelizeOrmMapper } from './sequelize.mapper';
 
 export abstract class SequelizeRepository<Entity extends BaseEntity>
@@ -18,9 +19,18 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         return {}
     }
 
-    async pagination(queryStatements: QueryStatementInput[] = []): Promise<void>
+    async pagination(queryStatements: QueryStatementInput[] = [], constraints: QueryStatementInput[] = []): Promise<Pagination>
     {
-        
+        // get count total records from sql service library
+        const total = await this.repository.count(
+            this.criteria.implements(constraints, this.builder())
+        );
+
+        const { count, rows } = await this.repository.findAndCountAll(
+            this.criteria.implements(constraints.concat(queryStatements), this.builder())
+        );
+
+        return { total, count, rows };
     }
     
     async create(entity: Entity): Promise<void>
@@ -48,7 +58,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
     async insert(entities: Entity[]): Promise<void>
     {
-        await this.repository.insert(entities.map(item => item.toDTO()));
+        await this.repository.bulkCreate(entities.map(item => item.toDTO()));
     }
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Entity> 
