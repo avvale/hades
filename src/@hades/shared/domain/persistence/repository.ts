@@ -5,10 +5,10 @@ export interface IRepository<Entity>
 {
     repository: any;
     
-    // save a single record
-    save(item: Entity): Promise<void>;
+    // create a single record
+    create(item: Entity): Promise<void>;
 
-    // save a single or multiple records
+    // create a single or multiple records
     insert(items: Entity[]): Promise<void>;
 
     // find a single record
@@ -22,7 +22,10 @@ export interface IRepository<Entity>
 
     // update record
     update(item: Entity): Promise<void>;
-  
+
     // delete record
-    delete(id: ValueObject<String>): Promise<void>;
+    delete(query: QueryStatementInput[]): Promise<void>;
+  
+    // delete record by id
+    deleteById(id: ValueObject<String>): Promise<void>;
 }

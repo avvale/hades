@@ -9,7 +9,7 @@ export abstract class ILangRepository implements IRepository<AdminLang>
     abstract readonly repository: any;
     
     // save a single record
-    abstract async save(lang: AdminLang): Promise<void>;
+    abstract async create(lang: AdminLang): Promise<void>;
 
     // save a single or multiple records
     abstract async insert(langs: AdminLang[]): Promise<void>;
@@ -27,5 +27,8 @@ export abstract class ILangRepository implements IRepository<AdminLang>
     abstract async update(lang: AdminLang): Promise<void>;
   
     // delete record
-    abstract async delete(id: LangId): Promise<void>;
+    abstract async delete(query: QueryStatementInput[]): Promise<void>;
+
+    // delete record
+    abstract async deleteById(id: LangId): Promise<void>;
 }

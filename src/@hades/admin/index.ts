@@ -1,7 +1,7 @@
 // commands
 import { CreateLangCommandHandler } from './lang/application/create/create-lang.command-handler';
 import { UpdateLangCommandHandler } from './lang/application/update/update-lang.command-handler';
-import { DeleteLangCommandHandler } from './lang/application/delete/delete-lang.command-handler';
+import { DeleteLangCommandHandler } from './lang/application/delete/delete-lang-by-id.command-handler';
 
 // queries
 import { GetLangsQueryHandler } from './lang/application/get/get-langs.query-handler';

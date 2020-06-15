@@ -1,7 +1,7 @@
 import { Column, Model, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
-@Table({ modelName: 'admin_langs' })
+@Table({ modelName: 'admin_lang' })
 export class AdminLangModel extends Model<AdminLangModel> 
 {
     @Column({
@@ -19,6 +19,7 @@ export class AdminLangModel extends Model<AdminLangModel>
     
     @Column({
         field: 'image',
+        type: DataTypes.STRING,
     })
     image: string;
     

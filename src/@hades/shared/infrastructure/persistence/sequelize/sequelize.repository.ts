@@ -17,8 +17,13 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
     {
         return {}
     }
+
+    async pagination(queryStatements: QueryStatementInput[] = []): Promise<void>
+    {
+        
+    }
     
-    async save(entity: Entity): Promise<void>
+    async create(entity: Entity): Promise<void>
     {
         // check if exist object in database, if allow save entity with the same uuid, update this entity in database instead of create it
         const entityInDB = await this.repository.findOne(
@@ -43,7 +48,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
     async insert(entities: Entity[]): Promise<void>
     {
-        // await this.repository.insert(<(QueryDeepPartialEntity<Entity>[])>(entities.map(item => item.toDTO())));
+        await this.repository.insert(entities.map(item => item.toDTO()));
     }
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Entity> 
@@ -103,7 +108,15 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         await entityInDB.update(objectLiteral);
     }
 
-    async delete(id: Uuid): Promise<void> 
+    async delete(queryStatements: QueryStatementInput[] = []): Promise<void> 
+    {
+        // check that entity exist
+        await this.repository.destroy(
+            this.criteria.implements(queryStatements, this.builder())
+        );
+    }
+
+    async deleteById(id: Uuid): Promise<void> 
     {
         // check that entity exist
         const entity = await this.repository.findOne(

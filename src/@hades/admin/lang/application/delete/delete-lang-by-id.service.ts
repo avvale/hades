@@ -4,7 +4,7 @@ import { LangId } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
 
 @Injectable()
-export class DeleteLangService
+export class DeleteLangByIdService
 {
     constructor(
         private readonly publisher: EventPublisher,
@@ -16,7 +16,7 @@ export class DeleteLangService
         // get object to delete
         const lang = await this.repository.findById(id);
 
-        await this.repository.delete(id);        
+        await this.repository.deleteById(id);        
             
         // insert EventBus in object, to be able to apply and commit events
         const langRegister = this.publisher.mergeObjectContext(lang);
