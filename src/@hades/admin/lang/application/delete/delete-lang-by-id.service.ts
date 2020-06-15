@@ -19,9 +19,9 @@ export class DeleteLangByIdService
         await this.repository.deleteById(id);        
             
         // insert EventBus in object, to be able to apply and commit events
-        const langRegister = this.publisher.mergeObjectContext(lang);
+        const langRegistered = this.publisher.mergeObjectContext(lang);
         
-        langRegister.deleted(lang); // apply event to model events
-        langRegister.commit(); // commit all events of model
+        langRegistered.deleted(lang); // apply event to model events
+        langRegistered.commit(); // commit all events of model
     }
 }

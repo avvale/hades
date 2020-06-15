@@ -78,7 +78,7 @@ export class SequelizeCriteria implements ICriteria
     }
 
     /**
-     * Function for map operator type to string value allowed for TypeORM
+     * Function for map operator type to string value
      * 
      * @param operator 
      * @param isOrderByOperator 

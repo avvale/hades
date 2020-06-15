@@ -49,18 +49,15 @@ export class UpdateLangService
             new LangUpdatedAt(Utils.nowTimeStamp()),
             null
         );
-        // TODO, TypeOrm Error: https://github.com/typeorm/typeorm/issues/5719
-        // Cuando das de alta un modelo llama 3 veces al transfor y te crea una anidación incorrecta
-        // cuando se corrija podremos sustituir el await this.repository.findById(id) por lang
 
         await this.repository.update(lang);        
             
         // insert EventBus in object returned by the repository, to be able to apply and commit events
-        const langRegister = this.publisher.mergeObjectContext(
+        const langRegistered = this.publisher.mergeObjectContext(
            await this.repository.findById(id)
         );
         
-        langRegister.updated(lang); // apply event to model events
-        langRegister.commit(); // commit all events of model
+        langRegistered.updated(lang); // apply event to model events
+        langRegistered.commit(); // commit all events of model
     }
 }
