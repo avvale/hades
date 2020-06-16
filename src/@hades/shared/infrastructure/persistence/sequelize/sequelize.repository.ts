@@ -19,7 +19,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         return {}
     }
 
-    async pagination(queryStatements: QueryStatementInput[] = [], constraints: QueryStatementInput[] = []): Promise<Pagination>
+    async paginate(queryStatements: QueryStatementInput[] = [], constraints: QueryStatementInput[] = []): Promise<Pagination>
     {
         // get count total records from sql service library
         const total = await this.repository.count(

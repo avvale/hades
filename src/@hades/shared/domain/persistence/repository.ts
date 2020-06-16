@@ -1,10 +1,14 @@
 import { QueryStatementInput } from './sql-statement-input';
 import { ValueObject } from './../value-objects/value-object';
+import { Pagination } from './../lib/pagination';
 
 export interface IRepository<Entity>
 {
     repository: any;
     
+    // paginate records
+    paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination>;
+
     // create a single record
     create(item: Entity): Promise<void>;
 
