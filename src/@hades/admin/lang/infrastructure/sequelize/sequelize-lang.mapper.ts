@@ -1,4 +1,4 @@
-import { SequelizeOrmMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
+import { SequelizeMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { AdminLang } from './../../domain/lang.entity';
 import { 
@@ -15,7 +15,7 @@ import {
     LangDeletedAt,
  } from '../../domain/value-objects';
 
-export class SequelizeLangMapper implements SequelizeOrmMapper
+export class SequelizeLangMapper implements SequelizeMapper
 {
     mapToEntity(lang: ObjectLiteral | ObjectLiteral[]): AdminLang | AdminLang[]
     {
