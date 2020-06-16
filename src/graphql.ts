@@ -52,12 +52,6 @@ export interface AdminUpdateLangInput {
     isActive?: boolean;
 }
 
-export interface AdminRoleInput {
-    id?: string;
-    name?: string;
-    isMaster?: boolean;
-}
-
 export interface QueryStatementInput {
     command: Command;
     column?: string;
@@ -82,31 +76,15 @@ export interface IQuery {
     adminFindLang(query?: QueryStatementInput[]): AdminLang | Promise<AdminLang>;
     adminFindLangById(id?: string): AdminLang | Promise<AdminLang>;
     adminGetLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
-    adminPaginationLangs(query?: QueryStatementInput[]): Pagination | Promise<Pagination>;
-    adminFindRole(query?: QueryStatementInput[]): AdminRole | Promise<AdminRole>;
-    adminFindRoleById(id?: string): AdminRole | Promise<AdminRole>;
-    adminGetRoles(query?: QueryStatementInput[]): AdminRole[] | Promise<AdminRole[]>;
-    adminPaginationRoles(query?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    adminPaginateLangs(query?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
     adminCreateLang(payload: AdminCreateLangInput): AdminLang | Promise<AdminLang>;
-    adminInsertLangs(payload: AdminCreateLangInput[]): AdminLang[] | Promise<AdminLang[]>;
+    adminInsertLangs(payload: AdminCreateLangInput[]): boolean | Promise<boolean>;
     adminUpdateLang(payload: AdminUpdateLangInput): AdminLang | Promise<AdminLang>;
     adminDeleteLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
     adminDeleteLangById(id: string): AdminLang | Promise<AdminLang>;
-    adminCreateRole(payload: AdminRoleInput): AdminRole | Promise<AdminRole>;
-    adminUpdateRole(payload: AdminRoleInput): AdminRole | Promise<AdminRole>;
-    adminDeleteRole(id: string): AdminRole | Promise<AdminRole>;
-}
-
-export interface AdminRole {
-    id: string;
-    name: string;
-    isMaster: boolean;
-    createdAt?: string;
-    updatedAt?: string;
-    deletedAt?: string;
 }
 
 export interface Pagination {

@@ -7,7 +7,7 @@ export interface IRepository<Entity>
     repository: any;
     
     // paginate records
-    paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<Entity>>;
+    paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<Entity>>;
 
     // create a single record
     create(item: Entity): Promise<void>;

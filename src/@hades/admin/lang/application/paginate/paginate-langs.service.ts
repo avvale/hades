@@ -11,8 +11,8 @@ export class PaginateLangsService
         private readonly repository: ILangRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<AdminLang>>
+    public async main(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<AdminLang>>
     {        
-        return await this.repository.paginate(queryStatements, constraints);
+        return await this.repository.paginate(queryStatements, constraint);
     }
 }

@@ -7,6 +7,7 @@ import { AdminHandlers, AdminServices, AdminModels, AdminRepositories, AdminSaga
 // controllers
 import { CreateLangController } from './controllers/lang/create-lang.controller';
 import { InsertLangsController } from './controllers/lang/insert-langs.controller';
+import { PaginateLangsController } from './controllers/lang/paginate-langs.controller';
 import { GetLangsController } from './controllers/lang/get-langs.controller';
 import { FindLangByIdController } from './controllers/lang/find-lang-by-id.controller';
 import { FindLangController } from './controllers/lang/find-lang.controller';
@@ -34,6 +35,7 @@ import { DeleteLangsResolver } from './resolvers/lang/delete-langs.resolver';
     controllers: [
         CreateLangController,
         InsertLangsController,
+        PaginateLangsController,
         GetLangsController,
         FindLangByIdController,
         FindLangController,

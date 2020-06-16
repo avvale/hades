@@ -2,6 +2,7 @@ import { Injectable, ConflictException, NotFoundException } from '@nestjs/common
 import { Uuid } from '@hades/shared/domain/value-objects/uuid';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { ILangRepository } from './../../domain/lang.repository';
 import { LangCreatedAt, LangUpdatedAt, LangDeletedAt, LangId, LangName, LangImage, LangIso6392, LangIso6393, LangIetf, LangIsActive, LangSort } from '@hades/admin/lang/domain/value-objects';
 import { AdminLang } from './../../domain/lang.entity';
@@ -54,6 +55,11 @@ export class MockLangRepository implements ILangRepository
                     new LangDeletedAt(itemCollection.deletedAt),
                 ));
         }
+    }
+
+    async paginate(queryStatements: QueryStatementInput[] = [], constraint: QueryStatementInput[] = []): Promise<Pagination<AdminLang>>
+    {
+        return;
     }
     
     async create(lang: AdminLang): Promise<void>

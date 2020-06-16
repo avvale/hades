@@ -6,6 +6,7 @@ import { DeleteLangByIdCommandHandler } from './lang/application/delete/delete-l
 import { DeleteLangsCommandHandler } from './lang/application/delete/delete-langs.command-handler';
 
 // queries
+import { PaginateLangsQueryHandler } from './lang/application/paginate/paginate-langs.query-handler';
 import { GetLangsQueryHandler } from './lang/application/get/get-langs.query-handler';
 import { FindLangQueryHandler } from './lang/application/find/find-lang.query-handler';
 import { FindLangByIdQueryHandler } from './lang/application/find/find-lang-by-id.query-handler';
@@ -18,6 +19,7 @@ import { DeletedLangEventHandler } from './lang/application/events/deleted-lang.
 // services
 import { CreateLangService } from './lang/application/create/create-lang.service';
 import { InsertLangsService } from './lang/application/insert/insert-langs.service';
+import { PaginateLangsService } from './lang/application/paginate/paginate-langs.service';
 import { GetLangsService } from './lang/application/get/get-langs.service';
 import { FindLangService } from './lang/application/find/find-lang.service';
 import { FindLangByIdService } from './lang/application/find/find-lang-by-id.service';
@@ -44,6 +46,7 @@ export const AdminHandlers = [
     DeleteLangsCommandHandler,
 
     // queries
+    PaginateLangsQueryHandler,
     GetLangsQueryHandler,
     FindLangQueryHandler,
     FindLangByIdQueryHandler,
@@ -56,6 +59,7 @@ export const AdminHandlers = [
 export const AdminServices = [
     CreateLangService,
     InsertLangsService,
+    PaginateLangsService,
     GetLangsService,
     FindLangService,
     FindLangByIdService,

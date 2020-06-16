@@ -4,12 +4,12 @@ import { LangDto } from './../../dto/lang.dto';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
-import { GetLangsQuery } from '@hades/admin/lang/application/get/get-langs.query';
+import { PaginateLangsQuery } from '@hades/admin/lang/application/paginate/paginate-langs.query';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 
 @ApiTags('lang')
-@ApiOkResponse({ description: 'The records has been found successfully.', type: LangDto})
-@Controller('admin/langs')
+@ApiOkResponse({ description: 'The records has been paginated successfully.', type: LangDto})
+@Controller('admin/langs/paginate')
 export class PaginateLangsController 
 {
     constructor(
@@ -17,8 +17,8 @@ export class PaginateLangsController
     ) {}
 
     @Get()
-    async main(@Body('query') queryStatements: QueryStatementInput[])
+    async main(@Body('query') queryStatements: QueryStatementInput[], @Body('constraint') constraint: QueryStatementInput[])
     {
-        return await this.queryBus.ask(new GetLangsQuery(queryStatements));   
+        return await this.queryBus.ask(new PaginateLangsQuery(queryStatements, constraint));   
     }
 }

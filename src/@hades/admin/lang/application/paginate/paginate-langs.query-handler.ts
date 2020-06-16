@@ -12,26 +12,12 @@ export class PaginateLangsQueryHandler implements IQueryHandler<PaginateLangsQue
 
     async execute(query: PaginateLangsQuery): Promise<PaginationLangsResponse>
     {
-        const { total, count, rows } = await this.paginateLangsService.main(query.queryStatements, query.constraints)
+        const { total, count, rows } = await this.paginateLangsService.main(query.queryStatements, query.constraint)
 
         return new PaginationLangsResponse(
             total, 
             count, 
-            rows
+            rows.map(item => item.toDTO())
         );
-
-        return (await this.paginateLangsService.main(query.queryStatements, query.constraints)).map(lang => new LangResponse(
-                lang.id.value, 
-                lang.name.value, 
-                lang.image.value, 
-                lang.iso6392.value, 
-                lang.iso6393.value, 
-                lang.ietf.value, 
-                lang.sort.value, 
-                lang.isActive.value, 
-                lang.createdAt.value, 
-                lang.updatedAt.value, 
-                lang.deletedAt.value
-            ));
     }
 }

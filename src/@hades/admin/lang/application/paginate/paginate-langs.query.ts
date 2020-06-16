@@ -4,6 +4,6 @@ export class PaginateLangsQuery
 {
     constructor(
         public queryStatements: QueryStatementInput[] = [],
-        public constraints: QueryStatementInput[] = [],
+        public constraint: QueryStatementInput[] = [],
     ) {}
 }
