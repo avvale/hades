@@ -118,16 +118,6 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         await entityInDB.update(objectLiteral);
     }
 
-    async delete(queryStatements: QueryStatementInput[] = []): Promise<void> 
-    {
-        if (!Array.isArray(queryStatements) || queryStatements.length === 0) throw new BadRequestException(`To delete multiple records, you must define a query statement`);
-
-        // check that entity exist
-        await this.repository.destroy(
-            this.criteria.implements(queryStatements, this.builder())
-        );
-    }
-
     async deleteById(id: Uuid): Promise<void> 
     {
         // check that entity exist
@@ -142,6 +132,16 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
         await entity.destroy();
+    }
+
+    async delete(queryStatements: QueryStatementInput[] = []): Promise<void> 
+    {
+        if (!Array.isArray(queryStatements) || queryStatements.length === 0) throw new BadRequestException(`To delete multiple records, you must define a query statement`);
+
+        // check that entity exist
+        await this.repository.destroy(
+            this.criteria.implements(queryStatements, this.builder())
+        );
     }
 
     private cleanUndefined(entity: ObjectLiteral): ObjectLiteral
