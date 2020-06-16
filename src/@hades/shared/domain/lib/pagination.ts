@@ -1,6 +1,6 @@
-export interface Pagination 
+export interface Pagination<Entity>
 {
     total: number,
     count: number,
-    rows: any[],
+    rows: Entity[],
 }

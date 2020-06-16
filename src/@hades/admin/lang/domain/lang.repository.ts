@@ -10,7 +10,7 @@ export abstract class ILangRepository implements IRepository<AdminLang>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<AdminLang>>;
     
     // save a single record
     abstract async create(lang: AdminLang): Promise<void>;
