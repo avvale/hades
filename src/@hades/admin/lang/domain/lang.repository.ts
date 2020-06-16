@@ -1,12 +1,16 @@
 
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { AdminLang } from './lang.entity';
 import { LangId } from './value-objects';
 
 export abstract class ILangRepository implements IRepository<AdminLang>
 {
     abstract readonly repository: any;
+
+    // paginate records
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination>;
     
     // save a single record
     abstract async create(lang: AdminLang): Promise<void>;

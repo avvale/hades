@@ -41,7 +41,7 @@ type Query
     adminFindLang(query:[QueryStatementInput]): AdminLang
     adminFindLangById(id:ID): AdminLang
     adminGetLangs(query:[QueryStatementInput]): [AdminLang]!
-    adminPaginationLangs(query:[QueryStatementInput]): Pagination!
+    adminPaginateLangs(query:[QueryStatementInput]): Pagination!
 }
 
 type Mutation
