@@ -19,7 +19,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         return {}
     }
 
-    async paginate(queryStatements: QueryStatementInput[] = [], constraints: QueryStatementInput[] = []): Promise<Pagination>
+    async paginate(queryStatements: QueryStatementInput[] = [], constraints: QueryStatementInput[] = []): Promise<Pagination<Entity>>
     {
         // get count total records from sql service library
         const total = await this.repository.count(
@@ -30,7 +30,11 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
             this.criteria.implements(constraints.concat(queryStatements), this.builder())
         );
 
-        return { total, count, rows };
+        return { 
+            total, 
+            count, 
+            rows: <Entity[]>this.mapper.mapToEntity(rows) // map values to create value objects
+        };
     }
     
     async create(entity: Entity): Promise<void>
