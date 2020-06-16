@@ -76,7 +76,7 @@ export interface IQuery {
     adminFindLang(query?: QueryStatementInput[]): AdminLang | Promise<AdminLang>;
     adminFindLangById(id?: string): AdminLang | Promise<AdminLang>;
     adminGetLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
-    adminPaginateLangs(query?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    adminPaginateLangs(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {

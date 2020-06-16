@@ -18,6 +18,7 @@ import { DeleteLangsController } from './controllers/lang/delete-langs.controlle
 // resolvers
 import { CreateLangResolver } from './resolvers/lang/create-lang.resolver';
 import { InsertLangsResolver } from './resolvers/lang/insert-langs.resolver';
+import { PaginateLangsResolver } from './resolvers/lang/paginate-langs.resolver';
 import { GetLangsResolver } from './resolvers/lang/get-langs.resolver';
 import { FindLangResolver } from './resolvers/lang/find-lang.resolver';
 import { FindLangByIdResolver } from './resolvers/lang/find-lang-by-id.resolver';
@@ -51,6 +52,7 @@ import { DeleteLangsResolver } from './resolvers/lang/delete-langs.resolver';
 
         CreateLangResolver,
         InsertLangsResolver,
+        PaginateLangsResolver,
         GetLangsResolver,
         FindLangResolver,
         FindLangByIdResolver,

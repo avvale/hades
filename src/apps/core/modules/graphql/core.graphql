@@ -54,5 +54,5 @@ type Pagination
     "Number of items filtered according to query"
     count: Int!
     "Query object data"
-    rows(query:[QueryStatementInput]): [JSON]!
+    rows: [JSON]!
 }
