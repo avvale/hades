@@ -1,4 +1,4 @@
-import { ConflictException, NotFoundException } from '@nestjs/common';
+import { ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
@@ -120,6 +120,8 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
     async delete(queryStatements: QueryStatementInput[] = []): Promise<void> 
     {
+        if (!Array.isArray(queryStatements) || queryStatements.length === 0) throw new BadRequestException(`To delete multiple records, you must define a query statement`);
+
         // check that entity exist
         await this.repository.destroy(
             this.criteria.implements(queryStatements, this.builder())
