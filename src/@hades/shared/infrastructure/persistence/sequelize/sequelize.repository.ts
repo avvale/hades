@@ -5,14 +5,14 @@ import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { Uuid } from '@hades/shared/domain/value-objects/uuid';
 import { BaseEntity } from '@hades/shared/domain/lib/base-entity';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { SequelizeOrmMapper } from './sequelize.mapper';
+import { SequelizeMapper } from './sequelize.mapper';
 
 export abstract class SequelizeRepository<Entity extends BaseEntity>
 {
     public readonly repository: any;
     public readonly criteria: ICriteria;
     public readonly entityName: string;
-    public readonly mapper: SequelizeOrmMapper;
+    public readonly mapper: SequelizeMapper;
 
     builder(): Object
     {

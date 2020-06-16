@@ -13,7 +13,7 @@ import {
     LangCreatedAt,
     LangUpdatedAt,
     LangDeletedAt,
- } from '../../domain/value-objects';
+ } from './../../domain/value-objects';
 
 export class SequelizeLangMapper implements SequelizeMapper
 {
