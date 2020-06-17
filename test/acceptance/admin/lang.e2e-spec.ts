@@ -53,6 +53,31 @@ describe('lang', () =>
             .expect(201);
     });
 
+    it(`/REST:GET admin/langs/paginate`, () => 
+    {
+        return request(app.getHttpServer())
+            .get('/admin/langs/paginate')
+            .set('Accept', 'application/json')
+            .send({
+                query: [
+                    {
+                        command: Command.OFFSET,
+                        value: 0
+                    },
+                    {
+                        command: Command.LIMIT,
+                        value: 10
+                    }
+                ]
+            })
+            .expect(200)
+            .expect({ 
+                total   : repository.collectionResponse.length, 
+                count   : repository.collectionResponse.length, 
+                rows    : repository.collectionResponse.slice(0, 10)
+            });
+    });
+
     it(`/REST:GET admin/lang - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
@@ -167,6 +192,93 @@ describe('lang', () =>
             .delete('/admin/lang/94c893c1-3eb7-4f22-a878-b405c6d42e09')
             .set('Accept', 'application/json')
             .expect(200);
+    });
+
+    it(`/GraphQL adminCreateLang`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({ 
+                query: `
+                    mutation ($payload:AdminCreateLangInput!)
+                    {
+                        adminCreateLang (payload:$payload)
+                        {
+                            id
+                            name
+                            image
+                            iso6392
+                            iso6393
+                            ietf
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '3cdb80ca-9138-4e17-b876-41f04a97fa68',
+                        name: 'test01',
+                        image: '',
+                        iso6392: 'xx',
+                        iso6393: 'xxx',
+                        ietf: 'xx-XX',
+                        sort: '',
+                        isActive: true
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body.data.adminCreateLang).toHaveProperty('id', '3cdb80ca-9138-4e17-b876-41f04a97fa68');
+            });
+    });
+
+    it(`/GraphQL adminCreateLang - Got 409 Conflict, item already exist in database`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({ 
+                query: `
+                    mutation ($payload:AdminCreateLangInput!)
+                    {
+                        adminCreateLang (payload:$payload)
+                        {
+                            id
+                            name
+                            image
+                            iso6392
+                            iso6393
+                            ietf
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        id: '3cdb80ca-9138-4e17-b876-41f04a97fa68',
+                        name: 'test01',
+                        image: '',
+                        iso6392: 'xx',
+                        iso6393: 'xxx',
+                        ietf: 'xx-XX',
+                        sort: '',
+                        isActive: true
+                    }
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
+            });
     });
 
     afterAll(async () => 

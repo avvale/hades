@@ -1,7 +1,7 @@
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { Uuid } from '@hades/shared/domain/value-objects/uuid';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatementInput, Command } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { ILangRepository } from './../../domain/lang.repository';
 import { LangCreatedAt, LangUpdatedAt, LangDeletedAt, LangId, LangName, LangImage, LangIso6392, LangIso6393, LangIetf, LangIsActive, LangSort } from '@hades/admin/lang/domain/value-objects';
@@ -59,7 +59,18 @@ export class MockLangRepository implements ILangRepository
 
     async paginate(queryStatements: QueryStatementInput[] = [], constraint: QueryStatementInput[] = []): Promise<Pagination<AdminLang>>
     {
-        return;
+        let offset  = 0;
+        let limit   = this.collectionSource.length;
+        for (const queryStatement of queryStatements)
+        {
+            if (queryStatement.command === Command.OFFSET)  offset = queryStatement.value;
+            if (queryStatement.command === Command.LIMIT)   limit = queryStatement.value;
+        }
+        return { 
+            total   : this.collectionSource.length, 
+            count   : this.collectionSource.length, 
+            rows    : this.collectionSource.slice(offset,limit)
+        };
     }
     
     async create(lang: AdminLang): Promise<void>
@@ -78,7 +89,8 @@ export class MockLangRepository implements ILangRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<AdminLang> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(entity => 
+        {
             let result = true;
             for (const queryStatement of queryStatements)
             {
