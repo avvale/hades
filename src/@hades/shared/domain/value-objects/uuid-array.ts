@@ -23,7 +23,7 @@ export abstract class UuidArray implements ValueObject<string[]>
         return this._value.length;
     }
 
-    get isArray(): boolean
+    isArray(): boolean
     {
         return Array.isArray(this._value);
     }

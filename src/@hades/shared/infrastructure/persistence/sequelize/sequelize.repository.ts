@@ -148,7 +148,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         );
     }
 
-    private cleanUndefined(entity: ObjectLiteral): ObjectLiteral
+    cleanUndefined(entity: ObjectLiteral): ObjectLiteral
     {
         // clean properties object from undefined values
         for (const property in entity )
