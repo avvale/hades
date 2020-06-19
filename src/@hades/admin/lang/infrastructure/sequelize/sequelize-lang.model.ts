@@ -1,7 +1,7 @@
 import { Column, Model, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
-@Table({ modelName: 'admin_lang' })
+@Table({ modelName: 'admin_lang', freezeTableName: true })
 export class AdminLangModel extends Model<AdminLangModel> 
 {
     @Column({

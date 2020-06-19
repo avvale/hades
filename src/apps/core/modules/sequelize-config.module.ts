@@ -14,8 +14,9 @@ import { EnvironmentModule } from './../../shared/modules/environment.module';
                 username: environmentService.get<string>('DATABASE_USER'),
                 password: environmentService.get<string>('DATABASE_PASSWORD'),
                 database: environmentService.get<string>('DATABASE_SCHEMA'),
+                synchronize: environmentService.get<boolean>('DATABASE_SYNCHRONIZE'),
+                logging: environmentService.get<string>('DATABASE_LOGGIN') === 'true' ? console.log : false,
                 autoLoadModels: true,
-                synchronize: true,
                 models: [],
             }),
             inject: [EnvironmentService]
