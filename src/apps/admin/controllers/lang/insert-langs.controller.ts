@@ -1,5 +1,5 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiBody } from '@nestjs/swagger';
 import { CreateLangDto } from './../../dto/create-lang.dto';
 
 // @hades
@@ -16,6 +16,9 @@ export class InsertLangsController
     ) {}
 
     @Post()
+    @ApiBody({ 
+        type: [CreateLangDto]
+    })
     async main(@Body() payload: CreateLangDto[])
     {
         await this.commandBus.dispatch(new InsertLangsCommand(payload));

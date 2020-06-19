@@ -17,6 +17,16 @@ export abstract class UuidArray implements ValueObject<string[]>
     {
         this._value = value;
     }
+
+    get length(): number
+    {
+        return this._value.length;
+    }
+
+    get isArray(): boolean
+    {
+        return Array.isArray(this._value);
+    }
         
     toString(): string 
     {
