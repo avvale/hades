@@ -32,24 +32,42 @@ export enum Operator {
 
 export interface AdminCreateLangInput {
     id: string;
-    name: string;
-    image: string;
-    iso6392: string;
-    iso6393: string;
-    ietf: string;
+    name: GraphQLString;
+    image: GraphQLString;
+    iso6392: GraphQLString;
+    iso6393: GraphQLString;
+    ietf: GraphQLString;
     sort?: GraphQLInt;
-    isActive: boolean;
+    isActive: GraphQLBoolean;
 }
 
 export interface AdminUpdateLangInput {
     id: string;
-    name?: string;
-    image?: string;
-    iso6392?: string;
-    iso6393?: string;
-    ietf?: string;
+    name?: GraphQLString;
+    image?: GraphQLString;
+    iso6392?: GraphQLString;
+    iso6393?: GraphQLString;
+    ietf?: GraphQLString;
     sort?: GraphQLInt;
-    isActive?: boolean;
+    isActive?: GraphQLBoolean;
+}
+
+export interface AdminCreateTenantInput {
+    id: string;
+    name: GraphQLString;
+    code: GraphQLString;
+    logo?: GraphQLString;
+    isActive: GraphQLBoolean;
+    data?: JSON;
+}
+
+export interface AdminUpdateTenantInput {
+    id: string;
+    name?: GraphQLString;
+    code?: GraphQLString;
+    logo?: GraphQLString;
+    isActive?: GraphQLBoolean;
+    data?: JSON;
 }
 
 export interface QueryStatementInput {
@@ -61,13 +79,13 @@ export interface QueryStatementInput {
 
 export interface AdminLang {
     id: string;
-    name: string;
-    image?: string;
-    iso6392: string;
-    iso6393: string;
-    ietf: string;
+    name: GraphQLString;
+    image?: GraphQLString;
+    iso6392: GraphQLString;
+    iso6393: GraphQLString;
+    ietf: GraphQLString;
     sort?: GraphQLInt;
-    isActive: boolean;
+    isActive: GraphQLBoolean;
     createdAt: GraphQLTimestamp;
     updatedAt: GraphQLTimestamp;
 }
@@ -77,14 +95,35 @@ export interface IQuery {
     adminFindLangById(id?: string): AdminLang | Promise<AdminLang>;
     adminGetLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
     adminPaginateLangs(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    adminFindTenant(query?: QueryStatementInput[]): AdminTenant | Promise<AdminTenant>;
+    adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
+    adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
     adminCreateLang(payload: AdminCreateLangInput): AdminLang | Promise<AdminLang>;
-    adminInsertLangs(payload: AdminCreateLangInput[]): boolean | Promise<boolean>;
+    adminInsertLangs(payload: AdminCreateLangInput[]): GraphQLBoolean | Promise<GraphQLBoolean>;
     adminUpdateLang(payload: AdminUpdateLangInput): AdminLang | Promise<AdminLang>;
     adminDeleteLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
     adminDeleteLangById(id: string): AdminLang | Promise<AdminLang>;
+    adminCreateTenant(payload: AdminCreateTenantInput): AdminTenant | Promise<AdminTenant>;
+    adminInsertTenants(payload: AdminCreateTenantInput[]): GraphQLBoolean | Promise<GraphQLBoolean>;
+    adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
+    adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
+    adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+}
+
+export interface AdminTenant {
+    id: string;
+    name: GraphQLString;
+    code: GraphQLString;
+    logo?: GraphQLString;
+    isActive: GraphQLBoolean;
+    data?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
 }
 
 export interface Pagination {

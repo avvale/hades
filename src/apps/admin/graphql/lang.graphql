@@ -1,13 +1,13 @@
 type AdminLang
 {
     id: ID!
-    name: String!
-    image: String
-    iso6392: String!
-    iso6393: String!
-    ietf: String!
+    name: GraphQLString!
+    image: GraphQLString
+    iso6392: GraphQLString!
+    iso6393: GraphQLString!
+    ietf: GraphQLString!
     sort: GraphQLInt
-    isActive: Boolean!
+    isActive: GraphQLBoolean!
     createdAt: GraphQLTimestamp!
     updatedAt: GraphQLTimestamp!
 }
@@ -15,25 +15,25 @@ type AdminLang
 input AdminCreateLangInput
 {
     id: ID!
-    name: String!
-    image: String!
-    iso6392: String!
-    iso6393: String!
-    ietf: String!
+    name: GraphQLString!
+    image: GraphQLString!
+    iso6392: GraphQLString!
+    iso6393: GraphQLString!
+    ietf: GraphQLString!
     sort: GraphQLInt
-    isActive: Boolean!
+    isActive: GraphQLBoolean!
 }
 
 input AdminUpdateLangInput
 {
     id: ID!
-    name: String
-    image: String
-    iso6392: String
-    iso6393: String
-    ietf: String
+    name: GraphQLString
+    image: GraphQLString
+    iso6392: GraphQLString
+    iso6393: GraphQLString
+    ietf: GraphQLString
     sort: GraphQLInt
-    isActive: Boolean
+    isActive: GraphQLBoolean
 }
 
 type Query 
@@ -47,7 +47,7 @@ type Query
 type Mutation
 {
     adminCreateLang(payload: AdminCreateLangInput!): AdminLang
-    adminInsertLangs(payload: [AdminCreateLangInput]!): Boolean!
+    adminInsertLangs(payload: [AdminCreateLangInput]!): GraphQLBoolean!
     adminUpdateLang(payload: AdminUpdateLangInput!): AdminLang
     adminDeleteLangs(query:[QueryStatementInput]): [AdminLang]!
     adminDeleteLangById(id: ID!): AdminLang

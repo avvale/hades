@@ -36,6 +36,31 @@ import { SequelizeLangRepository } from './lang/infrastructure/sequelize/sequeli
 
 // sagas
 import { LangSagas } from './lang/application/sagas/lang.sagas';
+import { CreateTenantCommandHandler } from './tenant/application/create/create-tenant.command-handler';
+import { InsertTenantsCommandHandler } from './tenant/application/insert/insert-tenants.command-handler';
+import { UpdateTenantCommandHandler } from './tenant/application/update/update-tenant.command-handler';
+import { DeleteTenantByIdCommandHandler } from './tenant/application/delete/delete-tenant-by-id.command-handler';
+import { DeleteTenantsCommandHandler } from './tenant/application/delete/delete-tenants.command-handler';
+import { PaginateTenantsQueryHandler } from './tenant/application/paginate/paginate-tenants.query-handler';
+import { GetTenantsQueryHandler } from './tenant/application/get/get-tenants.query-handler';
+import { FindTenantQueryHandler } from './tenant/application/find/find-tenant.query-handler';
+import { FindTenantByIdQueryHandler } from './tenant/application/find/find-tenant-by-id.query-handler';
+import { CreatedTenantEventHandler } from './tenant/application/events/created-tenant.event-handler';
+import { UpdatedTenantEventHandler } from './tenant/application/events/updated-tenant.event-handler';
+import { DeletedTenantEventHandler } from './tenant/application/events/deleted-tenant.event-handler';
+import { CreateTenantService } from './tenant/application/create/create-tenant.service';
+import { InsertTenantsService } from './tenant/application/insert/insert-tenants.service';
+import { PaginateTenantsService } from './tenant/application/paginate/paginate-tenants.service';
+import { GetTenantsService } from './tenant/application/get/get-tenants.service';
+import { FindTenantService } from './tenant/application/find/find-tenant.service';
+import { FindTenantByIdService } from './tenant/application/find/find-tenant-by-id.service';
+import { UpdateTenantService } from './tenant/application/update/update-tenant.service';
+import { DeleteTenantByIdService } from './tenant/application/delete/delete-tenant-by-id.service';
+import { DeleteTenantsService } from './tenant/application/delete/delete-tenants.service';
+import { ITenantRepository } from './tenant/domain/tenant.repository';
+import { SequelizeTenantRepository } from './tenant/infrastructure/sequelize/sequelize-tenant.repository';
+import { AdminTenantModel } from './tenant/infrastructure/sequelize/sequelize-tenant.model';
+import { TenantSagas } from './tenant/application/sagas/tenant.sagas';
 
 export const AdminHandlers = [
     // commands
@@ -55,6 +80,18 @@ export const AdminHandlers = [
     CreatedLangEventHandler,
     UpdatedLangEventHandler,
     DeletedLangEventHandler,
+    CreateTenantCommandHandler,
+    InsertTenantsCommandHandler,
+    UpdateTenantCommandHandler,
+    DeleteTenantByIdCommandHandler,
+    DeleteTenantsCommandHandler,
+    PaginateTenantsQueryHandler,
+    GetTenantsQueryHandler,
+    FindTenantQueryHandler,
+    FindTenantByIdQueryHandler,
+    CreatedTenantEventHandler,
+    UpdatedTenantEventHandler,
+    DeletedTenantEventHandler
 ];
 export const AdminServices = [
     CreateLangService,
@@ -66,16 +103,31 @@ export const AdminServices = [
     UpdateLangService,
     DeleteLangByIdService,
     DeleteLangsService,
+    CreateTenantService,
+    InsertTenantsService,
+    PaginateTenantsService,
+    GetTenantsService,
+    FindTenantService,
+    FindTenantByIdService,
+    UpdateTenantService,
+    DeleteTenantByIdService,
+    DeleteTenantsService
 ];
 export const AdminModels = [
     AdminLangModel,
+    AdminTenantModel
 ];
 export const AdminRepositories = [
     {
         provide: ILangRepository,
         useClass: SequelizeLangRepository,
+    },
+    {
+        provide: ITenantRepository,
+        useClass: SequelizeTenantRepository
     }
 ];
 export const AdminSagas = [
     LangSagas,
+    TenantSagas
 ];
