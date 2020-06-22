@@ -1,7 +1,8 @@
 export interface ValidationRules
 {
-    nullable: boolean;
-    length :number;
-    minLength: number;
-    maxLength: number;
+    name: string,
+    nullable?: boolean;
+    length?:number;
+    minLength?: number;
+    maxLength?: number;
 }
