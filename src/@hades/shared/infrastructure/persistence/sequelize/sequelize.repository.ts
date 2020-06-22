@@ -153,7 +153,8 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         // clean properties object from undefined values
         for (const property in entity )
         {
-            if (entity[property] === null || entity[property] === undefined) delete entity[property];
+            // can to be null for nullable values
+            if (entity[property] === undefined) delete entity[property];
         }
         return entity;
     }
