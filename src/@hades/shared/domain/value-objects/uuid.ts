@@ -1,16 +1,16 @@
 import { v4 as uuidv4 } from 'uuid';
 import * as validate from 'uuid-validate';
 import { StringValueObject } from './string.value-object';
+import { ValidationRules } from './../lib/validation-rules';
 
 export abstract class Uuid extends StringValueObject
 {
-    public readonly length: number = 36;
-
     constructor(
-        _value: string
+        _value: string,
+        validationRules: ValidationRules
     ) 
     {
-        super(_value);
+        super(_value, Object.assign(validationRules, { length: 36 }));
         this.checkIfIsNull();
         this.ensureIsValidUuid();
     }
