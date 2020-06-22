@@ -4,6 +4,8 @@ import { StringValueObject } from './string.value-object';
 
 export abstract class Uuid extends StringValueObject
 {
+    public readonly length: number = 36;
+
     constructor(
         _value: string
     ) 
