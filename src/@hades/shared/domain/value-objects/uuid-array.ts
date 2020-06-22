@@ -3,6 +3,7 @@ import { ValueObject } from './value-object';
 export abstract class UuidArray implements ValueObject<string[]>
 {
     public readonly type: string;
+    public readonly nullable: boolean;
 
     constructor(
        private _value: string[]

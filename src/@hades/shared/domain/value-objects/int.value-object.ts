@@ -3,6 +3,7 @@ import { ValueObject } from './value-object';
 export abstract class IntValueObject implements ValueObject<number>
 {
     public readonly type: string;
+    public readonly nullable: boolean;
 
     constructor(
         private _value: number

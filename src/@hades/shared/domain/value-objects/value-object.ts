@@ -1,1 +1,1 @@
-export interface ValueObject<T> extends Readonly<{ type: string; value: T; }> {}
+export interface ValueObject<T> extends Readonly<{ type: string; value: T; nullable: boolean; }> {}
