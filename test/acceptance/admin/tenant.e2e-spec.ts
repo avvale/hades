@@ -36,6 +36,25 @@ describe('tenant', () =>
             .expect(409);
     });
 
+    it(`/REST:POST admin/tenant - Got 400 Conflict, name can not be nullable`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/admin/tenant')
+            .set('Accept', 'application/json')
+            .send({
+                id: '63412dca-9f03-444a-8ad4-4a56074bbc56',
+                name: null,
+                code: 'Handcrafted Metal Chair',
+                logo: 'Handmade Plastic Chair',
+                isActive: true,
+                data: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('must be defined, can not be null or undefined');
+            });
+    });
+
     it(`/REST:POST admin/tenant`, () => 
     {
         return request(app.getHttpServer())

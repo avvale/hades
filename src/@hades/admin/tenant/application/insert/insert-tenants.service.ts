@@ -44,8 +44,8 @@ export class InsertTenantsService
             tenant.logo,
             tenant.isActive,
             tenant.data,
-            new TenantCreatedAt(Utils.nowTimeStamp()),
-            new TenantUpdatedAt(Utils.nowTimeStamp()),
+            new TenantCreatedAt(Utils.nowTimestamp()),
+            new TenantUpdatedAt(Utils.nowTimestamp()),
             null
         ));
         

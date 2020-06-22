@@ -42,8 +42,8 @@ export class CreateTenantService
             logo,
             isActive,
             data,
-            new TenantCreatedAt(Utils.nowTimeStamp()),
-            new TenantUpdatedAt(Utils.nowTimeStamp()),
+            new TenantCreatedAt(Utils.nowTimestamp()),
+            new TenantUpdatedAt(Utils.nowTimestamp()),
             null
         );
         

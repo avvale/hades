@@ -46,7 +46,7 @@ export class UpdateLangService
             sort,
             isActive,
             null,
-            new LangUpdatedAt(Utils.nowTimeStamp()),
+            new LangUpdatedAt(Utils.nowTimestamp()),
             null
         );
 

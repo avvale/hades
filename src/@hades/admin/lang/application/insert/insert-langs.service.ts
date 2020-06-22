@@ -47,8 +47,8 @@ export class InsertLangsService
             lang.ietf,
             lang.sort,
             lang.isActive,
-            new LangCreatedAt(Utils.nowTimeStamp()),
-            new LangUpdatedAt(Utils.nowTimeStamp()),
+            new LangCreatedAt(Utils.nowTimestamp()),
+            new LangUpdatedAt(Utils.nowTimestamp()),
             null
         ));
         

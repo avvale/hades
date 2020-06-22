@@ -44,7 +44,7 @@ export class MockTenantRepository implements ITenantRepository
     private createSourceMockData(): void
     {
         this.collectionSource = [];
-        const now = Utils.nowTimeStamp();
+        const now = Utils.nowTimestamp();
 
         for (const itemCollection of <any[]>tenants)
         {

@@ -45,8 +45,8 @@ export class CreateLangService
             ietf,
             sort,
             isActive,
-            new LangCreatedAt(Utils.nowTimeStamp()),
-            new LangUpdatedAt(Utils.nowTimeStamp()),
+            new LangCreatedAt(Utils.nowTimestamp()),
+            new LangUpdatedAt(Utils.nowTimestamp()),
             null
         );
         

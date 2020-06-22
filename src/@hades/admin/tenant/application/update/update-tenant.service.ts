@@ -43,7 +43,7 @@ export class UpdateTenantService
             isActive,
             data,
             null,
-            new TenantUpdatedAt(Utils.nowTimeStamp()),
+            new TenantUpdatedAt(Utils.nowTimestamp()),
             null
         );
         

@@ -33,7 +33,7 @@ export class MockLangRepository implements ILangRepository
     private createSourceMockData(): void
     {
         this.collectionSource = [];
-        const now = Utils.nowTimeStamp();
+        const now = Utils.nowTimestamp();
 
         for (const itemCollection of <any[]>langs)
         {
