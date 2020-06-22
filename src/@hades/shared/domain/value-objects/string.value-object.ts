@@ -1,5 +1,5 @@
-import { ValueObject } from './value-object';
 import { BadRequestException } from '@nestjs/common';
+import { ValueObject } from './value-object';
 import { ValidationRules } from './../lib/validation-rules';
 
 export abstract class StringValueObject implements ValueObject<string>
