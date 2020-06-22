@@ -263,14 +263,14 @@ describe('lang', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '3cdb80ca-9138-4e17-b876-41f04a97fa68',
-                        name: 'test01',
-                        image: '',
+                        id: '7be2504d-1a4a-47ff-924a-2c81404f77f5',
+                        name: 'XXXXX',
+                        image: 'XX',
                         iso6392: 'xx',
                         iso6393: 'xxx',
                         ietf: 'xx-XX',
-                        sort: '',
-                        isActive: true
+                        sort: 1,
+                        isActive: false,
                     }
                 }
             })
@@ -278,6 +278,86 @@ describe('lang', () =>
             .then(res => {
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
+            });
+    });
+
+    it(`/GraphQL adminFindLang`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({ 
+                query: `
+                    query ($query:[QueryStatementInput])
+                    {
+                        adminFindLang (query:$query)
+                        {   
+                            id
+                            name
+                            image
+                            iso6392
+                            iso6393
+                            ietf
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    query: 
+                    [
+                        {
+                            command : Command.WHERE,
+                            column  : 'id',
+                            operator: Operator.EQUALS,
+                            value   : '00000000-0000-0000-0000-000000000000'
+                        }
+                    ]
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+            });
+    });
+
+    it(`/GraphQL adminDeleteLangById`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({ 
+                query: `
+                    mutation ($id:ID!)
+                    {
+                        adminDeleteLangById (id:$id)
+                        {   
+                            id
+                            name
+                            image
+                            iso6392
+                            iso6393
+                            ietf
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    id: '00000000-0000-0000-0000-000000000000'
+                }
+            })
+            .expect(200)
+            .then(res => {
+                expect(res.body).toHaveProperty('errors');
+                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
             });
     });
 
