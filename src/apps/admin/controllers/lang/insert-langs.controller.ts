@@ -1,6 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody } from '@nestjs/swagger';
-import { CreateLangDto } from './../../dto/create-lang.dto';
+import { CreateLangDto } from './../../dto/lang/create-lang.dto';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';

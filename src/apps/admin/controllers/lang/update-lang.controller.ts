@@ -1,7 +1,7 @@
 import { Controller, Body, Put } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
-import { UpdateLangDto } from './../../dto/update-lang.dto';
-import { LangDto } from './../../dto/lang.dto';
+import { UpdateLangDto } from '../../dto/lang/update-lang.dto';
+import { LangDto } from '../../dto/lang/lang.dto';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';

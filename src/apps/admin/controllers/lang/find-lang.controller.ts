@@ -1,6 +1,6 @@
 import { Controller, Get, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
-import { LangDto } from './../../dto/lang.dto';
+import { LangDto } from './../../dto/lang/lang.dto';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
