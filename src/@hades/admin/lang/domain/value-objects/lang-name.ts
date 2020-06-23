@@ -3,4 +3,11 @@ import { StringValueObject } from '@hades/shared/domain/value-objects/string.val
 export class LangName extends StringValueObject 
 {
     public readonly type: 'LangName';
+
+    constructor(value: string) 
+    {
+        super(value, { 
+            name: 'LangName'
+        });
+    }
 }
