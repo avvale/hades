@@ -24,7 +24,7 @@ export class UpdateLangCommandHandler implements ICommandHandler<UpdateLangComma
         // call to use case and implements ValueObjects
         await this.updateLangService.main(
             new LangId(command.id),
-            new LangName(command.name),
+            new LangName(command.name, { undefinable: true }),
             new LangImage(command.image),
             new LangIso6392(command.iso6392),
             new LangIso6393(command.iso6393),
