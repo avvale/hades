@@ -42,6 +42,89 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '7be2504d-1a4a-47ff-924a-2c81404f77f5',
+                name: '7be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f57be2504d-1a4a-47ff-924a-2c81404f77f5',
+                image: 'XX',
+                iso6392: 'xx',
+                iso6393: 'xxx',
+                ietf: 'xx-XX',
+                sort: 1,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for LangName is too large, has a maximum length of 255');
+            });
+    });
+
+    it(`/REST:POST admin/lang`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .send({
+                id: '7be2504d-1a4a-47ff-924a-2c81404f77f5',
+                image: 'XX',
+                iso6392: 'xx',
+                iso6393: 'xxx',
+                ietf: 'xx-XX',
+                sort: 1,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for LangName must be defined, can not be undefined');
+            });
+    });
+
+    it(`/REST:POST admin/lang`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .send({
+                id: '7be2504d-1a4a-47ff-924a-2c81404f77f5',
+                name: null,
+                image: 'XX',
+                iso6392: 'xx',
+                iso6393: 'xxx',
+                ietf: 'xx-XX',
+                sort: 1,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for LangName must be defined, can not be null');
+            });
+    });
+
+    it(`/REST:POST admin/lang`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .send({
+                id: '7be2504d-1a4a-47ff-924a-2c81404f77f5',
+                name: 'XXXXX',
+                image: 'XX',
+                iso6392: 'xxx',
+                iso6393: 'xxx',
+                ietf: 'xx-XX',
+                sort: 1,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for LangIso6392 is not allowed, must be a length of 2');
+            });
+    });
+
+    it(`/REST:POST admin/lang`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/admin/lang')
+            .set('Accept', 'application/json')
+            .send({
+                id: '7be2504d-1a4a-47ff-924a-2c81404f77f5',
                 name: 'XXXXX',
                 image: 'XX',
                 iso6392: 'xx',

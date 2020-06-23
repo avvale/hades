@@ -7,7 +7,10 @@ export class LangIso6392 extends StringValueObject
     constructor(value: string) 
     {
         super(value, { 
-            name: 'LangIso6392'
+            name: 'LangIso6392',
+            nullable: false,
+            undefinable: false,
+            length: 2  
         });
     }
 }
