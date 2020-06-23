@@ -25,24 +25,6 @@ import { FindLangByIdResolver } from './resolvers/lang/find-lang-by-id.resolver'
 import { UpdateLangResolver } from './resolvers/lang/update-lang.resolver';
 import { DeleteLangByIdResolver } from './resolvers/lang/delete-lang-by-id.resolver';
 import { DeleteLangsResolver } from './resolvers/lang/delete-langs.resolver';
-import { CreateTenantController } from './controllers/tenant/create-tenant.controller';
-import { InsertTenantsController } from './controllers/tenant/insert-tenants.controller';
-import { PaginateTenantsController } from './controllers/tenant/paginate-tenants.controller';
-import { GetTenantsController } from './controllers/tenant/get-tenants.controller';
-import { FindTenantByIdController } from './controllers/tenant/find-tenant-by-id.controller';
-import { FindTenantController } from './controllers/tenant/find-tenant.controller';
-import { UpdateTenantController } from './controllers/tenant/update-tenant.controller';
-import { DeleteTenantByIdController } from './controllers/tenant/delete-tenant-by-id.controller';
-import { DeleteTenantsController } from './controllers/tenant/delete-tenants.controller';
-import { CreateTenantResolver } from './resolvers/tenant/create-tenant.resolver';
-import { InsertTenantsResolver } from './resolvers/tenant/insert-tenants.resolver';
-import { PaginateTenantsResolver } from './resolvers/tenant/paginate-tenants.resolver';
-import { GetTenantsResolver } from './resolvers/tenant/get-tenants.resolver';
-import { FindTenantByIdResolver } from './resolvers/tenant/find-tenant-by-id.resolver';
-import { FindTenantResolver } from './resolvers/tenant/find-tenant.resolver';
-import { UpdateTenantResolver } from './resolvers/tenant/update-tenant.resolver';
-import { DeleteTenantByIdResolver } from './resolvers/tenant/delete-tenant-by-id.resolver';
-import { DeleteTenantsResolver } from './resolvers/tenant/delete-tenants.resolver';
 
 @Module({
     imports: [
@@ -61,15 +43,6 @@ import { DeleteTenantsResolver } from './resolvers/tenant/delete-tenants.resolve
         UpdateLangController,
         DeleteLangByIdController,
         DeleteLangsController,
-        CreateTenantController,
-        InsertTenantsController,
-        PaginateTenantsController,
-        GetTenantsController,
-        FindTenantByIdController,
-        FindTenantController,
-        UpdateTenantController,
-        DeleteTenantByIdController,
-        DeleteTenantsController
     ],
     providers: [
         ...AdminHandlers,
@@ -86,15 +59,6 @@ import { DeleteTenantsResolver } from './resolvers/tenant/delete-tenants.resolve
         UpdateLangResolver,
         DeleteLangByIdResolver,
         DeleteLangsResolver,
-        CreateTenantResolver,
-        InsertTenantsResolver,
-        PaginateTenantsResolver,
-        GetTenantsResolver,
-        FindTenantByIdResolver,
-        FindTenantResolver,
-        UpdateTenantResolver,
-        DeleteTenantByIdResolver,
-        DeleteTenantsResolver
     ]
 })
 export class AdminModule {}
