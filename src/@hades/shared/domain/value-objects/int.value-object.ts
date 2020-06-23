@@ -1,26 +1,20 @@
 import { ValueObject } from './value-object';
 
-export abstract class IntValueObject implements ValueObject<number>
+export abstract class IntValueObject extends ValueObject<number>
 {
-    public readonly type: string;
-    public readonly nullable: boolean;
-
-    constructor(
-        private _value: number
-    ) {}
-
     get value(): number
     {
         if (<unknown>this._value === "") return null;
-        return this._value;
+        return super.value;
     }
+
     set value(value: number)
-    {
-        this._value = value;
+    {  
+        super.value = value;
     }
 
     toString(): string 
     {
-        return <string><unknown>this.value;
+        return this.value.toString();
     }
 }

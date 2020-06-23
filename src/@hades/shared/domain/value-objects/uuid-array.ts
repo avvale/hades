@@ -1,36 +1,19 @@
 import { ValueObject } from './value-object';
 
-export abstract class UuidArray implements ValueObject<string[]>
+export abstract class UuidArray extends ValueObject<string[]>
 {
-    public readonly type: string;
-    public readonly nullable: boolean;
-
-    constructor(
-       private _value: string[]
-    ) 
-    {}
-
-    get value(): string[]
-    {
-        return this._value;
-    }
-    set value(value: string[])
-    {
-        this._value = value;
-    }
-
     get length(): number
     {
-        return this._value.length;
+        return super.value.length;
     }
 
     isArray(): boolean
     {
-        return Array.isArray(this._value);
+        return Array.isArray(super.value);
     }
         
     toString(): string 
     {
-        return this.value.toString();
+        return super.value.toString();
     }
 }

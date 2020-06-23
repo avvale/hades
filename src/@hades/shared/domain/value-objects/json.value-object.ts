@@ -1,23 +1,17 @@
 import { ValueObject } from './value-object';
 
-export abstract class JsonValueObject implements ValueObject<string>
+export abstract class JsonValueObject extends ValueObject<string>
 {
-    public readonly type: string;
-    public readonly nullable: boolean;
-
-    constructor(
-        private _value: any
-    ) {}
-
     get value(): any
-    {
-        return this._value;
+    {  
+        return super.value;
     }
-    set value(value: string | any)
+
+    set value(value: any)
     {
-        this._value = typeof value === 'string' ? JSON.parse(value) : value;
+        super.value = typeof value === 'string' ? JSON.parse(value) : value;
     }
-        
+    
     toString(): string 
     {
         return JSON.stringify(this.value);
