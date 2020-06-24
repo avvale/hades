@@ -9,7 +9,8 @@ export abstract class BooleanValueObject extends ValueObject<boolean>
     }
     set value(value: boolean)
     {
-        if (typeof value === 'boolean') throw new BadRequestException(`Value for ${this.validationRules.name}, has to be a boolean value`);;
+        if (value === <boolean><unknown>'') value = null;
+        if (value !== undefined && value !== null && typeof value !== 'boolean') throw new BadRequestException(`Value for ${this.validationRules.name} has to be a boolean value`);;
         
         super.value = value;
     }
