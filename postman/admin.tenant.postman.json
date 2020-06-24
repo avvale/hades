@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "ae102e16-049e-4781-9686-eac3b54301aa",
+		"name"          : "@hades - admin/tenant",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - adminCreateTenant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminCreateTenantInput!)\n{\n\tadminCreateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"d94d4722-7446-4a49-8d23-0346bfcd2881\", \n\t\t\"name\": \"Handmade Frozen Shirt\", \n\t\t\"code\": \"Small Soft Chips\", \n\t\t\"logo\": \"Refined Fresh Pizza\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminInsertTenants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[AdminCreateTenantInput]!)\n{\n\tadminInsertTenants (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"4078812b-a41b-4557-b55f-f3cbb678baa7\", \n\t\t\t\"name\": \"Gorgeous Steel Bacon\", \n\t\t\t\"code\": \"Fantastic Steel Table\", \n\t\t\t\"logo\": \"Practical Frozen Bike\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"51e93026-ffb3-4468-8f1f-e28ca5580d9c\", \n\t\t\t\"name\": \"Intelligent Cotton Bike\", \n\t\t\t\"code\": \"Incredible Metal Soap\", \n\t\t\t\"logo\": \"Handmade Steel Table\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dfa2f9f5-0ed2-47aa-83ab-2b4f532f4a31\", \n\t\t\t\"name\": \"Unbranded Wooden Towels\", \n\t\t\t\"code\": \"Tasty Granite Shirt\", \n\t\t\t\"logo\": \"Awesome Soft Pizza\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7f8664b5-97df-415d-bef8-062741dd2d2e\", \n\t\t\t\"name\": \"Practical Frozen Shoes\", \n\t\t\t\"code\": \"Gorgeous Frozen Salad\", \n\t\t\t\"logo\": \"Rustic Cotton Bike\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a5279dec-dc12-402b-b239-47a7dc2660ab\", \n\t\t\t\"name\": \"Practical Steel Tuna\", \n\t\t\t\"code\": \"Awesome Frozen Table\", \n\t\t\t\"logo\": \"Sleek Steel Fish\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3239a43c-ae1a-4984-a153-d6b243f25fb1\", \n\t\t\t\"name\": \"Handcrafted Granite Fish\", \n\t\t\t\"code\": \"Generic Cotton Cheese\", \n\t\t\t\"logo\": \"Practical Cotton Table\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"643e50bf-e555-4c15-864f-a55e2f5d6c5e\", \n\t\t\t\"name\": \"Tasty Wooden Towels\", \n\t\t\t\"code\": \"Refined Concrete Computer\", \n\t\t\t\"logo\": \"Sleek Frozen Computer\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"656efd39-1465-41d0-8e77-13ad358568c1\", \n\t\t\t\"name\": \"Refined Fresh Gloves\", \n\t\t\t\"code\": \"Ergonomic Metal Chair\", \n\t\t\t\"logo\": \"Sleek Wooden Car\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"29dccf0c-fb56-4680-9046-c3c1ffcf1a05\", \n\t\t\t\"name\": \"Refined Rubber Pants\", \n\t\t\t\"code\": \"Practical Granite Mouse\", \n\t\t\t\"logo\": \"Ergonomic Wooden Keyboard\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6e3f37e5-c5ab-4cea-bb38-d7af63f85dc3\", \n\t\t\t\"name\": \"Awesome Fresh Bike\", \n\t\t\t\"code\": \"Handmade Wooden Sausages\", \n\t\t\t\"logo\": \"Incredible Plastic Gloves\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"570c531e-a6e0-4bee-81a4-70855a0f8d3f\", \n\t\t\t\"name\": \"Handmade Wooden Gloves\", \n\t\t\t\"code\": \"Unbranded Cotton Towels\", \n\t\t\t\"logo\": \"Refined Metal Mouse\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1ef05de6-64fb-476c-bf9a-0e6ec9c52d68\", \n\t\t\t\"name\": \"Fantastic Fresh Pizza\", \n\t\t\t\"code\": \"Licensed Rubber Bacon\", \n\t\t\t\"logo\": \"Awesome Plastic Table\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"394c9225-deac-43ab-a8ba-38e0d5e6f819\", \n\t\t\t\"name\": \"Practical Granite Car\", \n\t\t\t\"code\": \"Small Concrete Mouse\", \n\t\t\t\"logo\": \"Tasty Cotton Shoes\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e0e2edb6-3ab8-4d67-bf5b-4f3712019494\", \n\t\t\t\"name\": \"Generic Rubber Chips\", \n\t\t\t\"code\": \"Generic Metal Ball\", \n\t\t\t\"logo\": \"Gorgeous Cotton Bacon\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"36bd7ae2-d353-47dd-9537-c9970e669244\", \n\t\t\t\"name\": \"Ergonomic Frozen Shirt\", \n\t\t\t\"code\": \"Fantastic Wooden Chair\", \n\t\t\t\"logo\": \"Gorgeous Rubber Shirt\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"704e1fa8-40e2-4789-a54f-5f38bc4e766e\", \n\t\t\t\"name\": \"Refined Soft Computer\", \n\t\t\t\"code\": \"Fantastic Concrete Table\", \n\t\t\t\"logo\": \"Unbranded Rubber Mouse\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a79a0a25-94d8-40d6-8995-ea1bf7f67247\", \n\t\t\t\"name\": \"Handcrafted Wooden Table\", \n\t\t\t\"code\": \"Awesome Granite Pizza\", \n\t\t\t\"logo\": \"Incredible Granite Car\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"85171e3b-8f61-4633-80f5-b98fc26e7c2d\", \n\t\t\t\"name\": \"Awesome Concrete Towels\", \n\t\t\t\"code\": \"Licensed Granite Bike\", \n\t\t\t\"logo\": \"Gorgeous Soft Cheese\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"17ccb2be-99f6-4ce2-a41b-c5d32bb7f6f9\", \n\t\t\t\"name\": \"Unbranded Steel Fish\", \n\t\t\t\"code\": \"Rustic Steel Chair\", \n\t\t\t\"logo\": \"Incredible Metal Bike\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"07b1144f-bd09-485d-af1b-44cf5ba6b67b\", \n\t\t\t\"name\": \"Small Frozen Cheese\", \n\t\t\t\"code\": \"Practical Steel Pizza\", \n\t\t\t\"logo\": \"Practical Metal Bacon\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminPaginateTenants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tadminPaginateTenants (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminGetTenants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tadminGetTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"d94d4722-7446-4a49-8d23-0346bfcd2881\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindTenant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tadminFindTenant (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"d94d4722-7446-4a49-8d23-0346bfcd2881\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindTenantById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tadminFindTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"d94d4722-7446-4a49-8d23-0346bfcd2881\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminUpdateTenant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminUpdateTenantInput!)\n{\n\tadminUpdateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"d94d4722-7446-4a49-8d23-0346bfcd2881\", \n\t\t\"name\": \"Incredible Soft Soap\", \n\t\t\"code\": \"Awesome Fresh Pants\", \n\t\t\"logo\": \"Practical Rubber Gloves\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteTenantById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tadminDeleteTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"d94d4722-7446-4a49-8d23-0346bfcd2881\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteTenants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tadminDeleteTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/tenant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"d94d4722-7446-4a49-8d23-0346bfcd2881\", \n\t\"name\": \"Small Wooden Computer\", \n\t\"code\": \"Intelligent Steel Bacon\", \n\t\"logo\": \"Fantastic Soft Keyboard\", \n\t\"isActive\": false, \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/tenant",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/tenants",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"27863d9f-e988-4d4a-80a6-32d5b18dc6e6\", \n\t\t\"name\": \"Practical Concrete Salad\", \n\t\t\"code\": \"Incredible Frozen Cheese\", \n\t\t\"logo\": \"Incredible Steel Tuna\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"2cb7d383-7dbf-4958-8ccc-b30d49c81c0e\", \n\t\t\"name\": \"Ergonomic Cotton Keyboard\", \n\t\t\"code\": \"Gorgeous Fresh Gloves\", \n\t\t\"logo\": \"Tasty Frozen Sausages\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"e8c9ba6f-e5d3-499c-8292-68463b1b21ed\", \n\t\t\"name\": \"Ergonomic Granite Ball\", \n\t\t\"code\": \"Fantastic Metal Pizza\", \n\t\t\"logo\": \"Handcrafted Concrete Cheese\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"8a5ca003-e20c-4eec-94b1-e42c380c844a\", \n\t\t\"name\": \"Fantastic Plastic Shoes\", \n\t\t\"code\": \"Sleek Plastic Bike\", \n\t\t\"logo\": \"Unbranded Cotton Shirt\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"0753e000-0651-47f2-b398-0ff04fd603db\", \n\t\t\"name\": \"Intelligent Metal Fish\", \n\t\t\"code\": \"Handcrafted Frozen Fish\", \n\t\t\"logo\": \"Awesome Plastic Pizza\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"ecbcb821-c97d-4eb9-9baf-7edcbbf23fdc\", \n\t\t\"name\": \"Generic Steel Keyboard\", \n\t\t\"code\": \"Gorgeous Metal Car\", \n\t\t\"logo\": \"Refined Rubber Bike\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5fe4f7db-014f-4c9b-a8e0-ead40876e1da\", \n\t\t\"name\": \"Tasty Rubber Fish\", \n\t\t\"code\": \"Unbranded Steel Shirt\", \n\t\t\"logo\": \"Incredible Soft Bike\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"bbaaf1cf-56ea-497f-a06d-c96a5b04c294\", \n\t\t\"name\": \"Sleek Rubber Shoes\", \n\t\t\"code\": \"Fantastic Fresh Computer\", \n\t\t\"logo\": \"Rustic Fresh Towels\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"9277bbb0-5f4f-431b-927e-8a84b2dc4c6f\", \n\t\t\"name\": \"Refined Metal Chips\", \n\t\t\"code\": \"Handmade Fresh Cheese\", \n\t\t\"logo\": \"Rustic Cotton Fish\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"8dc47b24-5704-4a56-9cda-ce48b9342632\", \n\t\t\"name\": \"Practical Metal Hat\", \n\t\t\"code\": \"Generic Granite Keyboard\", \n\t\t\"logo\": \"Handmade Metal Car\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"7548dbfb-ae58-459a-9b43-abc588da3f5b\", \n\t\t\"name\": \"Gorgeous Frozen Keyboard\", \n\t\t\"code\": \"Tasty Metal Cheese\", \n\t\t\"logo\": \"Ergonomic Steel Shoes\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"b24e1a29-4d36-447e-a443-9285ef06ce40\", \n\t\t\"name\": \"Rustic Wooden Table\", \n\t\t\"code\": \"Generic Wooden Shirt\", \n\t\t\"logo\": \"Licensed Concrete Sausages\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"bbcccf5c-6b2b-4edf-8cda-490868cc02f4\", \n\t\t\"name\": \"Tasty Rubber Soap\", \n\t\t\"code\": \"Practical Granite Tuna\", \n\t\t\"logo\": \"Rustic Soft Chicken\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"96ca5a7f-1742-4e88-93fc-c6ef475762d6\", \n\t\t\"name\": \"Handcrafted Metal Car\", \n\t\t\"code\": \"Rustic Steel Salad\", \n\t\t\"logo\": \"Gorgeous Metal Salad\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"044ad9b0-efcb-4ca4-ba27-d8bc4cabf9ba\", \n\t\t\"name\": \"Practical Rubber Sausages\", \n\t\t\"code\": \"Incredible Metal Hat\", \n\t\t\"logo\": \"Generic Wooden Ball\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"81db06e9-b5fe-494b-903c-29295966e8a3\", \n\t\t\"name\": \"Refined Steel Shirt\", \n\t\t\"code\": \"Gorgeous Granite Chips\", \n\t\t\"logo\": \"Handcrafted Frozen Pizza\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"1fe466f1-54fd-4583-9cd1-4dae42e67458\", \n\t\t\"name\": \"Awesome Rubber Computer\", \n\t\t\"code\": \"Sleek Wooden Shoes\", \n\t\t\"logo\": \"Handmade Metal Car\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"fa0ccbc0-f87b-4e46-a7ad-04a4f332c53e\", \n\t\t\"name\": \"Awesome Metal Computer\", \n\t\t\"code\": \"Sleek Wooden Mouse\", \n\t\t\"logo\": \"Handcrafted Concrete Sausages\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"02386047-4b6e-4cfe-9736-c2dfedfe83d5\", \n\t\t\"name\": \"Handmade Frozen Car\", \n\t\t\"code\": \"Practical Soft Fish\", \n\t\t\"logo\": \"Unbranded Soft Pizza\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"2275f5eb-bbb6-48bb-a95d-43cb3c7936c7\", \n\t\t\"name\": \"Sleek Frozen Chips\", \n\t\t\"code\": \"Incredible Fresh Chicken\", \n\t\t\"logo\": \"Sleek Plastic Table\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/tenants",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"tenants"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/tenants/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/tenants/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+                        "tenants",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/tenants",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"d94d4722-7446-4a49-8d23-0346bfcd2881\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/tenants",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"tenants"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/tenant",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"d94d4722-7446-4a49-8d23-0346bfcd2881\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/tenant",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/tenant/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/tenant/d94d4722-7446-4a49-8d23-0346bfcd2881",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"tenant",
+						"d94d4722-7446-4a49-8d23-0346bfcd2881"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/tenant",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"d94d4722-7446-4a49-8d23-0346bfcd2881\", \n\t\"name\": \"Awesome Concrete Pizza\", \n\t\"code\": \"Generic Fresh Shirt\", \n\t\"logo\": \"Generic Concrete Soap\", \n\t\"isActive\": false, \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/tenant",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/tenant/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/tenant/d94d4722-7446-4a49-8d23-0346bfcd2881",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"tenant",
+						"d94d4722-7446-4a49-8d23-0346bfcd2881"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - admin/tenants",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/tenants",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"tenants"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "0fbb9435-f0d2-4252-badc-4392c582be89",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

@@ -52,6 +52,24 @@ export interface AdminUpdateLangInput {
     isActive?: GraphQLBoolean;
 }
 
+export interface AdminCreateTenantInput {
+    id: string;
+    name: GraphQLString;
+    code: GraphQLString;
+    logo: GraphQLString;
+    isActive: GraphQLBoolean;
+    data?: JSON;
+}
+
+export interface AdminUpdateTenantInput {
+    id: string;
+    name?: GraphQLString;
+    code?: GraphQLString;
+    logo?: GraphQLString;
+    isActive?: GraphQLBoolean;
+    data?: JSON;
+}
+
 export interface QueryStatementInput {
     command: Command;
     column?: string;
@@ -77,6 +95,10 @@ export interface IQuery {
     adminFindLangById(id?: string): AdminLang | Promise<AdminLang>;
     adminGetLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
     adminPaginateLangs(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    adminFindTenant(query?: QueryStatementInput[]): AdminTenant | Promise<AdminTenant>;
+    adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
+    adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
@@ -85,6 +107,23 @@ export interface IMutation {
     adminUpdateLang(payload: AdminUpdateLangInput): AdminLang | Promise<AdminLang>;
     adminDeleteLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
     adminDeleteLangById(id: string): AdminLang | Promise<AdminLang>;
+    adminCreateTenant(payload: AdminCreateTenantInput): AdminTenant | Promise<AdminTenant>;
+    adminInsertTenants(payload: AdminCreateTenantInput[]): boolean | Promise<boolean>;
+    adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
+    adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
+    adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+}
+
+export interface AdminTenant {
+    id: string;
+    name: GraphQLString;
+    code: GraphQLString;
+    logo: GraphQLString;
+    isActive: GraphQLBoolean;
+    data?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
 }
 
 export interface Pagination {

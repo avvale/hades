@@ -1,0 +1,52 @@
+type AdminTenant
+{
+    id: ID!
+    name: GraphQLString!
+    code: GraphQLString!
+    logo: GraphQLString!
+    isActive: GraphQLBoolean!
+    data: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input AdminCreateTenantInput
+{
+    id: ID!
+    name: GraphQLString!
+    code: GraphQLString!
+    logo: GraphQLString!
+    isActive: GraphQLBoolean!
+    data: JSON
+    
+}
+
+input AdminUpdateTenantInput
+{
+    id: ID!
+    name: GraphQLString
+    code: GraphQLString
+    logo: GraphQLString
+    isActive: GraphQLBoolean
+    data: JSON
+    
+}
+
+type Query 
+{
+    adminFindTenant(query:[QueryStatementInput]): AdminTenant
+    adminFindTenantById(id:ID): AdminTenant
+    adminGetTenants(query:[QueryStatementInput]): [AdminTenant]!
+    adminPaginateTenants(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    adminCreateTenant(payload: AdminCreateTenantInput!): AdminTenant
+    adminInsertTenants(payload: [AdminCreateTenantInput]!): Boolean!
+    adminUpdateTenant(payload: AdminUpdateTenantInput!): AdminTenant
+    adminDeleteTenantById(id: ID!): AdminTenant
+    adminDeleteTenants(query:[QueryStatementInput]): [AdminTenant]!
+}
