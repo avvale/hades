@@ -1,6 +1,6 @@
-import { TimeStamp } from '@hades/shared/domain/value-objects/time-stamp';
+import { Timestamp } from '@hades/shared/domain/value-objects/timestamp';
 
-export class LangCreatedAt extends TimeStamp 
+export class LangCreatedAt extends Timestamp 
 {
     public readonly type: 'LangCreatedAt';
 
