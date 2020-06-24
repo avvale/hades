@@ -1,4 +1,5 @@
 import { ValueObject } from './value-object';
+import { BadRequestException } from '@nestjs/common';
 
 export abstract class IntValueObject extends ValueObject<number>
 {
@@ -9,7 +10,9 @@ export abstract class IntValueObject extends ValueObject<number>
     }
 
     set value(value: number)
-    {  
+    {
+        if (value !== undefined && value !== null && !Number.isInteger(value)) throw new BadRequestException(`Value for ${this.validationRules.name}, has to be a integer value`);
+
         super.value = value;
     }
 
