@@ -1,6 +1,6 @@
 import { Controller, Param, Delete } from '@nestjs/common';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
-import { LangDto } from './../../dto/lang/lang.dto';
+import { LangDto } from './../dto/lang.dto';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
