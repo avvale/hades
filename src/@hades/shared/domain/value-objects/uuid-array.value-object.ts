@@ -1,6 +1,6 @@
 import { ValueObject } from './value-object';
 
-export abstract class UuidArray extends ValueObject<string[]>
+export abstract class UuidArrayValueObject extends ValueObject<string[]>
 {
     get length(): number
     {

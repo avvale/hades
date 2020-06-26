@@ -3,7 +3,7 @@ import * as validate from 'uuid-validate';
 import { StringValueObject } from './string.value-object';
 import { ValidationRules } from './../lib/validation-rules';
 
-export abstract class Uuid extends StringValueObject
+export abstract class UuidValueObject extends StringValueObject
 {
     constructor(value: string, validationRules: ValidationRules) 
     {
