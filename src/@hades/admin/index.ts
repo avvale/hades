@@ -1,20 +1,29 @@
 import { AdminLangHandlers, AdminLangServices, AdminLangModel, ILangRepository, SequelizeLangRepository, LangSagas } from './lang';
+import { AdminModuleHandlers, AdminModuleServices, AdminModuleModel, IModuleRepository, SequelizeModuleRepository, ModuleSagas } from './module';
 
 export const AdminHandlers = [
-    ...AdminLangHandlers
+    ...AdminLangHandlers,
+    ...AdminModuleHandlers
 ];
 export const AdminServices = [
-    ...AdminLangServices
+    ...AdminLangServices,
+    ...AdminModuleServices
 ];
 export const AdminModels = [
-    AdminLangModel
+    AdminLangModel,
+    AdminModuleModel
 ];
 export const AdminRepositories = [
     {
         provide: ILangRepository,
         useClass: SequelizeLangRepository
+    },
+    {
+        provide: IModuleRepository,
+        useClass: SequelizeModuleRepository
     }
 ];
 export const AdminSagas = [
-    LangSagas
+    LangSagas,
+    ModuleSagas
 ];

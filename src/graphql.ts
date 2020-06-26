@@ -52,6 +52,22 @@ export interface AdminUpdateLangInput {
     isActive?: GraphQLBoolean;
 }
 
+export interface AdminCreateModuleInput {
+    id: string;
+    name: GraphQLString;
+    root: GraphQLString;
+    sort: GraphQLInt;
+    isActive: GraphQLBoolean;
+}
+
+export interface AdminUpdateModuleInput {
+    id: string;
+    name?: GraphQLString;
+    root?: GraphQLString;
+    sort?: GraphQLInt;
+    isActive?: GraphQLBoolean;
+}
+
 export interface QueryStatementInput {
     command: Command;
     column?: string;
@@ -78,6 +94,10 @@ export interface IQuery {
     adminFindLangById(id?: string): AdminLang | Promise<AdminLang>;
     adminGetLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
     adminPaginateLangs(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    adminFindModule(query?: QueryStatementInput[]): AdminModule | Promise<AdminModule>;
+    adminFindModuleById(id?: string): AdminModule | Promise<AdminModule>;
+    adminGetModules(query?: QueryStatementInput[]): AdminModule[] | Promise<AdminModule[]>;
+    adminPaginateModules(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
@@ -86,6 +106,22 @@ export interface IMutation {
     adminUpdateLang(payload: AdminUpdateLangInput): AdminLang | Promise<AdminLang>;
     adminDeleteLangById(id: string): AdminLang | Promise<AdminLang>;
     adminDeleteLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
+    adminCreateModule(payload: AdminCreateModuleInput): AdminModule | Promise<AdminModule>;
+    adminInsertModules(payload: AdminCreateModuleInput[]): boolean | Promise<boolean>;
+    adminUpdateModule(payload: AdminUpdateModuleInput): AdminModule | Promise<AdminModule>;
+    adminDeleteModuleById(id: string): AdminModule | Promise<AdminModule>;
+    adminDeleteModules(query?: QueryStatementInput[]): AdminModule[] | Promise<AdminModule[]>;
+}
+
+export interface AdminModule {
+    id: string;
+    name: GraphQLString;
+    root: GraphQLString;
+    sort: GraphQLInt;
+    isActive: GraphQLBoolean;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
 }
 
 export interface Pagination {
