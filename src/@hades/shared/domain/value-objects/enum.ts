@@ -3,7 +3,7 @@ import { BadRequestException } from '@nestjs/common';
 
 export abstract class Enum extends StringValueObject
 {
-    private _values: string[];
+    public options: string[];
 
     get value(): string
     {
@@ -12,7 +12,7 @@ export abstract class Enum extends StringValueObject
     
     set value(value: string)
     {
-        if (this.value && this._values.indexOf(this.value) > -1) throw new BadRequestException(`Value for ${this.validationRules.name} has to be any of this values: ${this._values.join(', ')}`);
+        if (this.value && this.options.indexOf(this.value) > -1) throw new BadRequestException(`Value for ${this.validationRules.name} has to be any of this options: ${this.options.join(', ')}`);
     
         super.value = value
     }
