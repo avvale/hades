@@ -4,9 +4,7 @@ import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/s
 
 @Table({ modelName: 'bplus_it_sappi_system', freezeTableName: true })
 export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel> 
-{   
- 
-        
+{      
     @Column({
         field: 'id',
         primaryKey: true,
@@ -16,8 +14,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     id: string;
         
              
-            @ForeignKey(() => AdminTenantModel)
-    
+    @ForeignKey(() => AdminTenantModel)
     @Column({
         field: 'tenant_id',
         primaryKey: false,
@@ -26,7 +23,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     })
     tenantId: string;
         
-        @BelongsTo(() => AdminTenantModel)
+    @BelongsTo(() => AdminTenantModel)
     tenant: AdminTenantModel;
              
         
