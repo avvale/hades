@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "218ed382-7a7b-4277-9d13-1852302a52dd",
+		"name"          : "@hades - bplus-it-sappi/system",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - bplusItSappiCreateSystem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiCreateSystemInput!)\n{\n\tbplusItSappiCreateSystem (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\ttenantCode\n\t\tenvironment\n\t\tversion\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"f10700e8-add5-4be5-ad9f-3ab1fce72996\", \n\t\t\"tenantId\": \"f1394b0d-77fb-4613-a343-1b6dd20aea71\", \n\t\t\"name\": \"sb8vm7147fd03cd8u536\", \n\t\t\"tenantCode\": \"773tumpzgxo13nxh3j6r\", \n\t\t\"environment\": \"z7egtqtrpnea1psbfyz7\", \n\t\t\"version\": \"irqp6hdw0u3w782w6m5z\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-06-26 04:31:51\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiInsertSystems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[BplusItSappiCreateSystemInput]!)\n{\n\tbplusItSappiInsertSystems (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"40b0a3d4-2a3c-4972-b4ae-c4dfb32c85e9\", \n\t\t\t\"tenantId\": \"7b121e94-3e92-41f7-8c37-70f741983354\", \n\t\t\t\"name\": \"k4os7b2qebklmpqgbfun\", \n\t\t\t\"tenantCode\": \"kqz5fweii8on7hj1ycqz\", \n\t\t\t\"environment\": \"nyqdzk4g9kjg4q0nsfxz\", \n\t\t\t\"version\": \"tgi3bya2eozcmuorpeta\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-06-26 14:32:27\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e646d4c0-5ffc-4454-a424-5e86c77b2d94\", \n\t\t\t\"tenantId\": \"31439d33-0668-403e-9a38-96842573c801\", \n\t\t\t\"name\": \"5u5nneod1g4q8d07flfb\", \n\t\t\t\"tenantCode\": \"r4cdl1g8q4qosgzx2c8f\", \n\t\t\t\"environment\": \"sbj5muqne7fa1gkinh0w\", \n\t\t\t\"version\": \"wcngpagqffqup13h0r7g\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-06-26 14:04:31\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c542b6f6-56e8-46c2-aae5-ae2be8693579\", \n\t\t\t\"tenantId\": \"07ad1ddd-e93b-49d8-a8d1-e91df176b60a\", \n\t\t\t\"name\": \"93kmhnu0hdlvwj7oajdp\", \n\t\t\t\"tenantCode\": \"kjzyh0rh1rp0v9mwrszw\", \n\t\t\t\"environment\": \"uelslb12yrcnp8mfphjk\", \n\t\t\t\"version\": \"g6kvo85cfabad5vev5zi\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-06-26 03:02:29\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ccea547f-40eb-4fe1-bf40-0767b2df8779\", \n\t\t\t\"tenantId\": \"1c498215-0bd3-40af-8caa-149087a7e169\", \n\t\t\t\"name\": \"3qlyrushoida6uin3wdt\", \n\t\t\t\"tenantCode\": \"p41bfsb7em4ql2c3av3r\", \n\t\t\t\"environment\": \"vck1fekked9kdubxouc7\", \n\t\t\t\"version\": \"9l3wc6moalcx6f0n9o2x\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-06-26 12:57:01\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"51f64672-ffa3-47be-9ebe-a79cf1350646\", \n\t\t\t\"tenantId\": \"6926aa5c-7795-4e48-b97e-a8da75f2499b\", \n\t\t\t\"name\": \"udgc7cnlfos1n15r1xj0\", \n\t\t\t\"tenantCode\": \"m4cde67cmrhvpjdjopat\", \n\t\t\t\"environment\": \"jjfgvr5w05md22kaepoq\", \n\t\t\t\"version\": \"m198npc9qy4s9rbnhy8t\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-06-26 01:56:39\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"eafbdf6b-65c8-483e-9441-6a2457a0d011\", \n\t\t\t\"tenantId\": \"d0176d33-3202-48c7-b8be-c398a9c0b1c9\", \n\t\t\t\"name\": \"ht6ryvhrr5gefppi6qdw\", \n\t\t\t\"tenantCode\": \"yuucdc9hjrqj8b44h6mv\", \n\t\t\t\"environment\": \"t3a3up5e4l0efl3km0rf\", \n\t\t\t\"version\": \"y9xvdfg0g8m8po832s3c\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-06-26 16:37:28\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ff93d7c6-16b6-42a1-afbf-ddea8bde65d8\", \n\t\t\t\"tenantId\": \"2fe72932-0856-456b-88de-9ee25309cbeb\", \n\t\t\t\"name\": \"j5914qyvcrhtnk9rjko6\", \n\t\t\t\"tenantCode\": \"xw5wwqtzc562df2dofqk\", \n\t\t\t\"environment\": \"b1vr2tuubiawcnjzw24u\", \n\t\t\t\"version\": \"qy605mkyrmz76n1h1r57\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-06-26 09:51:56\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4eed3937-9f51-4153-8578-159e5483f976\", \n\t\t\t\"tenantId\": \"c2f83de5-6403-412e-abde-751fdab97fa3\", \n\t\t\t\"name\": \"869x2e74kqh6l5jn05lp\", \n\t\t\t\"tenantCode\": \"h1mxet2icnwxbqrqeozj\", \n\t\t\t\"environment\": \"qnkkfto5wsyyu5hy9ebi\", \n\t\t\t\"version\": \"wcsfmtetz0xmlvpyroi5\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-06-26 01:34:13\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8c80f916-335f-4f80-8988-5dbec50fb330\", \n\t\t\t\"tenantId\": \"fdcaa5dc-d885-4fe9-bbd8-1b340063c08d\", \n\t\t\t\"name\": \"7bdykexy804hz2a6agpo\", \n\t\t\t\"tenantCode\": \"ddwl0v1nu7bgf98wbtcx\", \n\t\t\t\"environment\": \"0mm9w3jmeh4wpuh8rhv8\", \n\t\t\t\"version\": \"ajlnmgs4y9jcbs9buw07\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-06-26 12:58:25\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7d647006-f76e-4d91-8e2f-ed4596ee5078\", \n\t\t\t\"tenantId\": \"d1c2c307-4ae8-47a0-b8ce-8d864de543d0\", \n\t\t\t\"name\": \"syzp1kyhrf6qtv2c0dio\", \n\t\t\t\"tenantCode\": \"ptynv2chozu8f4r44tr5\", \n\t\t\t\"environment\": \"ad8z6bddpmk93ua7ipwg\", \n\t\t\t\"version\": \"a193gi8n5xzpieccoe9k\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-06-26 10:02:05\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7839641d-affa-476e-ab85-e12d4b3c1577\", \n\t\t\t\"tenantId\": \"a7bde412-01c0-48df-962f-8231db1f45a6\", \n\t\t\t\"name\": \"uahu2yn7umjlkl8lpw3x\", \n\t\t\t\"tenantCode\": \"5m4t6znawns4rvy1umto\", \n\t\t\t\"environment\": \"i73zvc95zlzlhzw4ozws\", \n\t\t\t\"version\": \"tfja3v6sd1qqapx11dy1\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-06-26 13:26:29\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8d9666ab-7a86-4a69-8bc2-76fbbdbe26dd\", \n\t\t\t\"tenantId\": \"179d3fca-225f-4ed8-a913-d9745476438d\", \n\t\t\t\"name\": \"uv37q4u5msb81vtr042j\", \n\t\t\t\"tenantCode\": \"2akjsscmh5e8sx5bmzgz\", \n\t\t\t\"environment\": \"vvbfhjwb5tzv42tcq2xt\", \n\t\t\t\"version\": \"n11t2fynb32pjhgbzlec\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-06-26 03:09:39\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4419cc09-82b3-4c38-930c-5e47c2382c1a\", \n\t\t\t\"tenantId\": \"ab0f6375-0356-4f09-80f8-069c83faef1e\", \n\t\t\t\"name\": \"v218vbz64mkbcr8p670i\", \n\t\t\t\"tenantCode\": \"wp2im33pcvo6wjy6agg8\", \n\t\t\t\"environment\": \"hv4g0zdebzdzclnegfww\", \n\t\t\t\"version\": \"2t2bjwt6rre6f6wdulu4\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-06-26 17:40:39\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1d21d17a-e827-4851-908e-754e0388716a\", \n\t\t\t\"tenantId\": \"9a3202b7-5c11-456a-88b4-d8cc4688ab46\", \n\t\t\t\"name\": \"1tx86at8x21i5spoj93q\", \n\t\t\t\"tenantCode\": \"7qa88ren0op0n2lm9e7m\", \n\t\t\t\"environment\": \"8ypxmaxkw77x35f043ex\", \n\t\t\t\"version\": \"pcqopwbt6tea34dvtik2\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-06-26 04:32:42\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"99372128-0607-4a87-ad44-baa3e8f6b62e\", \n\t\t\t\"tenantId\": \"7174c73e-aed6-4c6d-a9eb-3a9038238dfd\", \n\t\t\t\"name\": \"qjlo61cfobd1gu9q7kgu\", \n\t\t\t\"tenantCode\": \"zm7imzbfcpbifesr458u\", \n\t\t\t\"environment\": \"lg1ztat917urjcgjftp8\", \n\t\t\t\"version\": \"jzlxiplrsth3jblj1ght\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-06-26 12:02:05\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a8e7e7b6-6f3f-4061-bb09-5c9e121c069e\", \n\t\t\t\"tenantId\": \"36507832-658c-469c-964a-f52ec17919e7\", \n\t\t\t\"name\": \"ty09oe4rkzf8ii2aa0n9\", \n\t\t\t\"tenantCode\": \"kmlhntdylsahpz7abef3\", \n\t\t\t\"environment\": \"gjiapvrjatgfm44u6kk6\", \n\t\t\t\"version\": \"30oixy9ebi3gvh5znqtz\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-06-26 12:46:41\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3a74afc6-d5b7-46f0-bc2d-9a8644e823a5\", \n\t\t\t\"tenantId\": \"c93ab22b-8545-4e7c-879d-653846f03848\", \n\t\t\t\"name\": \"lmppookn42v81f463g5c\", \n\t\t\t\"tenantCode\": \"z8s5vd83kyxijt4ptpe4\", \n\t\t\t\"environment\": \"7ani8quefbz8dl4hcmzu\", \n\t\t\t\"version\": \"8pvxrw4zvhndu40x7u07\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-06-25 20:18:59\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c90f47d0-5e7f-4f0d-a11a-f0532e20809e\", \n\t\t\t\"tenantId\": \"d86047fa-eca2-4c3b-aeaf-9e0cc62b040f\", \n\t\t\t\"name\": \"gyki33nga2q4gp7zeqd0\", \n\t\t\t\"tenantCode\": \"q1qu4bhjwq1ldsl6f001\", \n\t\t\t\"environment\": \"00zzgzm7j6ptvefza7xp\", \n\t\t\t\"version\": \"tzdqxh24esn9xsqpwgtd\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-06-26 10:07:23\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"935593fc-1d58-4bb4-bc21-a89dba135508\", \n\t\t\t\"tenantId\": \"6a90bcb5-e16b-4054-b0ed-54bcf4791b88\", \n\t\t\t\"name\": \"nrsm5rtmag6z7y1fu8ci\", \n\t\t\t\"tenantCode\": \"atw6d5gktapprd6lqnyd\", \n\t\t\t\"environment\": \"0iymiw4b5do6zczbxykj\", \n\t\t\t\"version\": \"n7j59qcap6g3fkng7q4i\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-06-26 02:36:18\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e25a1b51-1986-4954-bddb-d7364efc0e54\", \n\t\t\t\"tenantId\": \"487e0745-382c-4be9-85b1-398e9fdbb286\", \n\t\t\t\"name\": \"zotqk0equ4krzr2qld1i\", \n\t\t\t\"tenantCode\": \"q8poybx3pntkyg454j30\", \n\t\t\t\"environment\": \"q4nar34v4q3r43hx3zqb\", \n\t\t\t\"version\": \"prarw7no9rzxd56fcfcj\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-06-26 12:23:06\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiPaginateSystems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tbplusItSappiPaginateSystems (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiGetSystems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetSystems (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\ttenantCode\n\t\tenvironment\n\t\tversion\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f10700e8-add5-4be5-ad9f-3ab1fce72996\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindSystem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindSystem (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\ttenantCode\n\t\tenvironment\n\t\tversion\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f10700e8-add5-4be5-ad9f-3ab1fce72996\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindSystemById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tbplusItSappiFindSystemById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\ttenantCode\n\t\tenvironment\n\t\tversion\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"f10700e8-add5-4be5-ad9f-3ab1fce72996\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiUpdateSystem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiUpdateSystemInput!)\n{\n\tbplusItSappiUpdateSystem (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\ttenantCode\n\t\tenvironment\n\t\tversion\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"f10700e8-add5-4be5-ad9f-3ab1fce72996\", \n\t\t\"tenantId\": \"f1394b0d-77fb-4613-a343-1b6dd20aea71\", \n\t\t\"name\": \"6uo2tihjonbgrzzdq1ir\", \n\t\t\"tenantCode\": \"nykkeql24tez53dchq7p\", \n\t\t\"environment\": \"09t8dh91rhrwvv7y8gm3\", \n\t\t\"version\": \"lh8f2fqodpn5ytz8nq9f\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-06-26 16:32:20\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteSystemById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteSystemById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\ttenantCode\n\t\tenvironment\n\t\tversion\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"f10700e8-add5-4be5-ad9f-3ab1fce72996\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteSystems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteSystems (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\ttenantCode\n\t\tenvironment\n\t\tversion\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/system",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"f10700e8-add5-4be5-ad9f-3ab1fce72996\", \n\t\"tenantId\": \"f1394b0d-77fb-4613-a343-1b6dd20aea71\", \n\t\"name\": \"j4p7c2vyz0efowzj7z82\", \n\t\"tenantCode\": \"j7c9fcsds53orpotovqt\", \n\t\"environment\": \"iyiethk0elr6monisktu\", \n\t\"version\": \"71krf0cn16g3y9x7pdik\", \n\t\"isActive\": true, \n\t\"cancelledAt\": \"2020-06-26 02:30:17\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/system",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"system"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/systems",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"23cba88a-b7b5-4b52-951d-869bd80e0f6b\", \n\t\t\"tenantId\": \"f27999b9-b732-43dd-bcc9-174017a96168\", \n\t\t\"name\": \"gqam34zywl76l4rekh07\", \n\t\t\"tenantCode\": \"92b0dfe2ap2lvxf1d7jr\", \n\t\t\"environment\": \"b1qwm3a46hgk6nridcgq\", \n\t\t\"version\": \"x799d6rplu7f94aef16t\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-26 16:04:19\"\n\t}, \n\t{\n\t\t\"id\": \"1e63b4f4-e71b-4035-bbdc-8c00e1637e28\", \n\t\t\"tenantId\": \"a651a072-ff22-4301-a243-d5c27d3d48d6\", \n\t\t\"name\": \"1lym7qp3ybjefmvlay5x\", \n\t\t\"tenantCode\": \"hykfnpomz4qfefagatag\", \n\t\t\"environment\": \"qnf1h0p6gb9t1cm5cv0s\", \n\t\t\"version\": \"o0zy2mciqduw1fqaqmxh\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-06-26 18:14:15\"\n\t}, \n\t{\n\t\t\"id\": \"aa585d36-02f2-4382-94e7-ded4dfbf36ea\", \n\t\t\"tenantId\": \"51c91588-6348-4e92-a3f3-c648d5de3f5d\", \n\t\t\"name\": \"3ugix6ki1ufz4s1kl6fp\", \n\t\t\"tenantCode\": \"whivozqzs7ndacjgq6zm\", \n\t\t\"environment\": \"67p6aj4fkll2xsamrle7\", \n\t\t\"version\": \"m1tvnw0fq56wpdb148q8\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-06-26 10:18:37\"\n\t}, \n\t{\n\t\t\"id\": \"05973e8d-73d2-4cc3-9be8-f20bae339cf1\", \n\t\t\"tenantId\": \"a1aead3c-b1ce-4f37-904f-89b7efe9ab7d\", \n\t\t\"name\": \"m838lf6huqmmehrlsvu1\", \n\t\t\"tenantCode\": \"vljwayw09mpcl69vp92q\", \n\t\t\"environment\": \"9znbvo6gsf59tswryd5t\", \n\t\t\"version\": \"s1he77m75jhxqra3xj9l\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-26 08:59:29\"\n\t}, \n\t{\n\t\t\"id\": \"d60acbd4-de34-4d62-ae57-a1064a6dfddd\", \n\t\t\"tenantId\": \"88b610ef-96b9-464e-a85b-3dc41026107d\", \n\t\t\"name\": \"egenbfsrde1nufyscwbv\", \n\t\t\"tenantCode\": \"fewsr04amx1w6lub0u7u\", \n\t\t\"environment\": \"r158inv614pab0xe63s1\", \n\t\t\"version\": \"0i1h7rw5mdmb5p86vnzf\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-25 20:03:29\"\n\t}, \n\t{\n\t\t\"id\": \"f8194ade-d8c3-41da-80eb-b090e21dd848\", \n\t\t\"tenantId\": \"6738c0bf-71f9-4a0a-9bd5-5d348891fd48\", \n\t\t\"name\": \"3lg8n0deantnjbfcch2l\", \n\t\t\"tenantCode\": \"7ijdexa6n0zqoh7af79g\", \n\t\t\"environment\": \"evaxcspw7xqmdio427gc\", \n\t\t\"version\": \"nj707omlnvb05ldli0tx\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-25 19:36:10\"\n\t}, \n\t{\n\t\t\"id\": \"f99733a9-33fe-447c-a664-5ad595d91bee\", \n\t\t\"tenantId\": \"863e376e-1cda-41b8-8958-68a07ed9eefd\", \n\t\t\"name\": \"vjtiigh112joogypobjy\", \n\t\t\"tenantCode\": \"oisrxov1t0cus86j5u6f\", \n\t\t\"environment\": \"6s03zmka5ihzwgf844u3\", \n\t\t\"version\": \"yv9hib3gru70n3ueugvi\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-25 22:20:33\"\n\t}, \n\t{\n\t\t\"id\": \"14bd69df-9b62-4c67-ab2f-0253d60fa203\", \n\t\t\"tenantId\": \"69303e7a-ff52-4b4d-b040-203a227e3fa4\", \n\t\t\"name\": \"szx1itvtl2x5ckyxkq2b\", \n\t\t\"tenantCode\": \"n34mvm3t3klur90mhirx\", \n\t\t\"environment\": \"eur4rl8t9pwdvag44upi\", \n\t\t\"version\": \"6m68wh5i61g999109qwl\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-26 00:55:53\"\n\t}, \n\t{\n\t\t\"id\": \"3c080678-07e6-4472-af1d-5227bab687e6\", \n\t\t\"tenantId\": \"fefa4fc8-e1b9-496b-beb5-1c1faad75bc0\", \n\t\t\"name\": \"n33e7w4rsbkccdo1h2fd\", \n\t\t\"tenantCode\": \"bbdacqubcguqgob7kptg\", \n\t\t\"environment\": \"ltqc0vofou5ijvg246g8\", \n\t\t\"version\": \"wnrfcj8ib8rfj6ize794\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-26 06:59:48\"\n\t}, \n\t{\n\t\t\"id\": \"8cb44468-156a-4152-a487-8f1f13d5ef4d\", \n\t\t\"tenantId\": \"f94e4451-6a79-45d8-b7ab-548f87d57a79\", \n\t\t\"name\": \"fwcounm2c5uh1bmt580o\", \n\t\t\"tenantCode\": \"j09z8tkbkx6qd88s8s75\", \n\t\t\"environment\": \"gblae4l4dlm41fbj0dch\", \n\t\t\"version\": \"yeuw8d44eei7ui60s2g9\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-06-26 12:31:11\"\n\t}, \n\t{\n\t\t\"id\": \"bccbbe98-bb33-4eb5-b3b4-f13e5abdce96\", \n\t\t\"tenantId\": \"5cad75ab-f58e-4c22-ae3b-e5c3443e83ae\", \n\t\t\"name\": \"pj5cnquk333u4vsvmnam\", \n\t\t\"tenantCode\": \"nyow8kz4jcg814qrq450\", \n\t\t\"environment\": \"gvd2zdq7t90wj8v5gylj\", \n\t\t\"version\": \"hw725l17kj5de3hcek99\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-26 03:08:12\"\n\t}, \n\t{\n\t\t\"id\": \"328f15f9-b92c-4b19-9c5c-1b0d9540b6fd\", \n\t\t\"tenantId\": \"fc6b4399-5837-4b67-8f82-4bd88a6a74b8\", \n\t\t\"name\": \"d4hzqse76bxn2he5mnf0\", \n\t\t\"tenantCode\": \"uo24el9raeh6ntz2p8hc\", \n\t\t\"environment\": \"vpfahlwbr0iou9sxrn3a\", \n\t\t\"version\": \"pnlzm3x6s1krky36jad6\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-06-26 04:17:48\"\n\t}, \n\t{\n\t\t\"id\": \"45769952-4214-406e-9456-e0b0997ddf52\", \n\t\t\"tenantId\": \"c91940cb-8796-4f0c-8805-9df6547858ad\", \n\t\t\"name\": \"vlng1jeees3ipj1qiw02\", \n\t\t\"tenantCode\": \"crpamh5gujgcuzci1kek\", \n\t\t\"environment\": \"8sm2fy2niwlz5kwnrxca\", \n\t\t\"version\": \"4qu98038qyr9jsopx07w\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-26 15:02:20\"\n\t}, \n\t{\n\t\t\"id\": \"67ac26af-8750-427c-b222-7db0d47f2a15\", \n\t\t\"tenantId\": \"5dc29b87-2661-4c87-8c51-247578918460\", \n\t\t\"name\": \"djnk43m2oe4fqp3vylwe\", \n\t\t\"tenantCode\": \"yp9fd4p59g6owcvhd30j\", \n\t\t\"environment\": \"3953o45wp26gh4ocuy0d\", \n\t\t\"version\": \"v2r84v1v0vbc05hizua6\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-26 13:01:10\"\n\t}, \n\t{\n\t\t\"id\": \"8c186c12-28d3-44ed-a621-7a54615d1958\", \n\t\t\"tenantId\": \"5e68bb03-b461-43b8-aa6e-542c2b5a9541\", \n\t\t\"name\": \"2xzx76f3y4m6yire8ceh\", \n\t\t\"tenantCode\": \"d6zra5e2u9nvqk3ylzyx\", \n\t\t\"environment\": \"oyoo73a0k0bajuz54zi8\", \n\t\t\"version\": \"0nnq1s1rs99kmgva9gkd\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-06-26 09:50:01\"\n\t}, \n\t{\n\t\t\"id\": \"819934be-94d3-4e8a-9e60-9333bcf44794\", \n\t\t\"tenantId\": \"c69aded9-d26f-4eaa-b0bd-8c877da85468\", \n\t\t\"name\": \"anr22cu2ct3xp35x9k3j\", \n\t\t\"tenantCode\": \"nsoxampj3vktuk5wzaxx\", \n\t\t\"environment\": \"rxf3de59lbhgbjkm2h7f\", \n\t\t\"version\": \"fuqpso19hgumfj4nbbvp\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-25 19:49:51\"\n\t}, \n\t{\n\t\t\"id\": \"6df00f34-53e1-4bd6-b99f-d57409b2c583\", \n\t\t\"tenantId\": \"74b2656f-fb0a-463f-aabe-6e53153a15dd\", \n\t\t\"name\": \"wafo14rk10e3cgk75vtz\", \n\t\t\"tenantCode\": \"79zepa4pkinu07p88bce\", \n\t\t\"environment\": \"epfgm4l4njy7hhyuztpp\", \n\t\t\"version\": \"wecz6w13u8x5cy5r4gav\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-06-26 12:59:25\"\n\t}, \n\t{\n\t\t\"id\": \"5b03da93-f694-4718-a7c8-c0dc3e493a3e\", \n\t\t\"tenantId\": \"f28c67d4-d199-476d-9f97-1b6312dd67c9\", \n\t\t\"name\": \"eiquga99jhcz5idge6to\", \n\t\t\"tenantCode\": \"up8orx8a2fo42sdz4bqz\", \n\t\t\"environment\": \"5e6mi6of83xl1ydac0wx\", \n\t\t\"version\": \"l2mjjmw9g55ea7p1e8kg\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-26 14:00:52\"\n\t}, \n\t{\n\t\t\"id\": \"a4574f4c-43ba-4b62-84d9-d9567c102245\", \n\t\t\"tenantId\": \"ba56c636-3d87-4905-a902-6ed65466324c\", \n\t\t\"name\": \"gc21ktx0o79ibrbvk82r\", \n\t\t\"tenantCode\": \"gkd0zdqgfza0goh65p5r\", \n\t\t\"environment\": \"bfy8cxrg2hj5kipl3d9x\", \n\t\t\"version\": \"pplgasfwopt9l3cnimk7\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-06-26 01:50:32\"\n\t}, \n\t{\n\t\t\"id\": \"a73d1d8c-95ab-4b3b-8ffa-24c5f4b8c456\", \n\t\t\"tenantId\": \"b59e9f27-2c24-4632-b631-c8043f141982\", \n\t\t\"name\": \"7dadu5xwr5utjmq8wufi\", \n\t\t\"tenantCode\": \"mlli9pkurzt11j15lx9h\", \n\t\t\"environment\": \"t01qg2lmdz0slcjnxmhx\", \n\t\t\"version\": \"m6rdzwfnsrb3qyvfzhhk\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-06-26 07:54:08\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/systems",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"systems"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/systems/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/systems/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+                        "systems",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/systems",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f10700e8-add5-4be5-ad9f-3ab1fce72996\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/systems",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"systems"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/system",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f10700e8-add5-4be5-ad9f-3ab1fce72996\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/system",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"system"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/system/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/system/f10700e8-add5-4be5-ad9f-3ab1fce72996",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"system",
+						"f10700e8-add5-4be5-ad9f-3ab1fce72996"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/system",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"f10700e8-add5-4be5-ad9f-3ab1fce72996\", \n\t\"tenantId\": \"f1394b0d-77fb-4613-a343-1b6dd20aea71\", \n\t\"name\": \"wi5ay03dalyf0po6g59r\", \n\t\"tenantCode\": \"69xt8gvuroudrmd7scqz\", \n\t\"environment\": \"4wuvsyin6fk47gtrde0v\", \n\t\"version\": \"bdpoa793wu4zkw9seizp\", \n\t\"isActive\": true, \n\t\"cancelledAt\": \"2020-06-26 06:17:48\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/system",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"system"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/system/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/system/f10700e8-add5-4be5-ad9f-3ab1fce72996",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"system",
+						"f10700e8-add5-4be5-ad9f-3ab1fce72996"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - bplus-it-sappi/systems",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/systems",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"systems"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "9024642b-a77d-42bc-abf1-d3249e8be96f",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

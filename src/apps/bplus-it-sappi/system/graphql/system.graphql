@@ -1,0 +1,58 @@
+type BplusItSappiSystem
+{
+    id: ID!
+    tenantId: ID!
+    name: GraphQLString!
+    tenantCode: GraphQLString!
+    environment: GraphQLString!
+    version: GraphQLString!
+    isActive: GraphQLBoolean!
+    cancelledAt: GraphQLTimestamp
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateSystemInput
+{
+    id: ID!
+    tenantId: ID!
+    name: GraphQLString!
+    tenantCode: GraphQLString!
+    environment: GraphQLString!
+    version: GraphQLString!
+    isActive: GraphQLBoolean!
+    cancelledAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiUpdateSystemInput
+{
+    id: ID!
+    tenantId: ID
+    name: GraphQLString
+    tenantCode: GraphQLString
+    environment: GraphQLString
+    version: GraphQLString
+    isActive: GraphQLBoolean
+    cancelledAt: GraphQLTimestamp
+    
+}
+
+type Query 
+{
+    bplusItSappiFindSystem(query:[QueryStatementInput]): BplusItSappiSystem
+    bplusItSappiFindSystemById(id:ID): BplusItSappiSystem
+    bplusItSappiGetSystems(query:[QueryStatementInput]): [BplusItSappiSystem]!
+    bplusItSappiPaginateSystems(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateSystem(payload: BplusItSappiCreateSystemInput!): BplusItSappiSystem
+    bplusItSappiInsertSystems(payload: [BplusItSappiCreateSystemInput]!): Boolean!
+    bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput!): BplusItSappiSystem
+    bplusItSappiDeleteSystemById(id: ID!): BplusItSappiSystem
+    bplusItSappiDeleteSystems(query:[QueryStatementInput]): [BplusItSappiSystem]!
+}

@@ -86,6 +86,28 @@ export interface AdminUpdateTenantInput {
     data?: JSON;
 }
 
+export interface BplusItSappiCreateSystemInput {
+    id: string;
+    tenantId: string;
+    name: GraphQLString;
+    tenantCode: GraphQLString;
+    environment: GraphQLString;
+    version: GraphQLString;
+    isActive: GraphQLBoolean;
+    cancelledAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiUpdateSystemInput {
+    id: string;
+    tenantId?: string;
+    name?: GraphQLString;
+    tenantCode?: GraphQLString;
+    environment?: GraphQLString;
+    version?: GraphQLString;
+    isActive?: GraphQLBoolean;
+    cancelledAt?: GraphQLTimestamp;
+}
+
 export interface QueryStatementInput {
     command: Command;
     column?: string;
@@ -120,6 +142,10 @@ export interface IQuery {
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindSystem(query?: QueryStatementInput[]): BplusItSappiSystem | Promise<BplusItSappiSystem>;
+    bplusItSappiFindSystemById(id?: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
+    bplusItSappiGetSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
+    bplusItSappiPaginateSystems(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
@@ -138,6 +164,11 @@ export interface IMutation {
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    bplusItSappiCreateSystem(payload: BplusItSappiCreateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
+    bplusItSappiInsertSystems(payload: BplusItSappiCreateSystemInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
+    bplusItSappiDeleteSystemById(id: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
+    bplusItSappiDeleteSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
 }
 
 export interface AdminModule {
@@ -158,6 +189,20 @@ export interface AdminTenant {
     logo?: GraphQLString;
     isActive: GraphQLBoolean;
     data?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiSystem {
+    id: string;
+    tenantId: string;
+    name: GraphQLString;
+    tenantCode: GraphQLString;
+    environment: GraphQLString;
+    version: GraphQLString;
+    isActive: GraphQLBoolean;
+    cancelledAt?: GraphQLTimestamp;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
