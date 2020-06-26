@@ -68,6 +68,24 @@ export interface AdminUpdateModuleInput {
     isActive?: GraphQLBoolean;
 }
 
+export interface AdminCreateTenantInput {
+    id: string;
+    name: GraphQLString;
+    code: GraphQLString;
+    logo?: GraphQLString;
+    isActive: GraphQLBoolean;
+    data?: JSON;
+}
+
+export interface AdminUpdateTenantInput {
+    id: string;
+    name?: GraphQLString;
+    code?: GraphQLString;
+    logo?: GraphQLString;
+    isActive?: GraphQLBoolean;
+    data?: JSON;
+}
+
 export interface QueryStatementInput {
     command: Command;
     column?: string;
@@ -98,6 +116,10 @@ export interface IQuery {
     adminFindModuleById(id?: string): AdminModule | Promise<AdminModule>;
     adminGetModules(query?: QueryStatementInput[]): AdminModule[] | Promise<AdminModule[]>;
     adminPaginateModules(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    adminFindTenant(query?: QueryStatementInput[]): AdminTenant | Promise<AdminTenant>;
+    adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
+    adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
@@ -111,6 +133,11 @@ export interface IMutation {
     adminUpdateModule(payload: AdminUpdateModuleInput): AdminModule | Promise<AdminModule>;
     adminDeleteModuleById(id: string): AdminModule | Promise<AdminModule>;
     adminDeleteModules(query?: QueryStatementInput[]): AdminModule[] | Promise<AdminModule[]>;
+    adminCreateTenant(payload: AdminCreateTenantInput): AdminTenant | Promise<AdminTenant>;
+    adminInsertTenants(payload: AdminCreateTenantInput[]): boolean | Promise<boolean>;
+    adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
+    adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
+    adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
 }
 
 export interface AdminModule {
@@ -119,6 +146,18 @@ export interface AdminModule {
     root: GraphQLString;
     sort: GraphQLInt;
     isActive: GraphQLBoolean;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface AdminTenant {
+    id: string;
+    name: GraphQLString;
+    code: GraphQLString;
+    logo?: GraphQLString;
+    isActive: GraphQLBoolean;
+    data?: JSON;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

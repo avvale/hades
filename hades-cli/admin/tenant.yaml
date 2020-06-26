@@ -1,0 +1,41 @@
+packageName: admin
+sectionName: tenant
+sectionNames: tenants
+entityProperties:
+  - id: 6e243e17-899f-42a2-8d0d-86cef1c96469
+    name: id
+    type: id
+    length: 36
+    nullable: false
+  - id: 0ce83537-ac1c-4830-8706-c4c530fbb413
+    name: name
+    type: varchar
+    nullable: false
+  - id: a271e6b0-e7ec-470a-b613-d21889c5bc05
+    name: code
+    type: varchar
+    nullable: false
+  - id: 6e4f4982-94ef-44e6-a859-6a0d62706ae6
+    name: logo
+    type: varchar
+    nullable: true
+  - id: 6c964f10-944d-40cf-8e24-7be3ae0aa90e
+    name: is_active
+    type: boolean
+    nullable: false
+  - id: 6173dd71-b6fa-4c61-af4c-850c46bdbe24
+    name: data
+    type: json
+    nullable: true
+  - id: 184e581e-692e-46b8-92ec-ca18b9bee70a
+    name: created_at
+    type: timestamp
+    nullable: true
+  - id: e9e627c7-5dbd-41fe-b044-54873c74ec2b
+    name: updated_at
+    type: timestamp
+    nullable: true
+  - id: d8efa721-182d-447b-8d64-877e853df270
+    name: deleted_at
+    type: timestamp
+    nullable: true
