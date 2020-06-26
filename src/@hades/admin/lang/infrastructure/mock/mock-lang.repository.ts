@@ -1,6 +1,6 @@
 import { Injectable, ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
-import { Uuid } from '@hades/shared/domain/value-objects/uuid';
 import { Utils } from '@hades/shared/domain/lib/utils';
+import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { QueryStatementInput, Command } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ILangRepository } from './../../domain/lang.repository';
@@ -119,7 +119,7 @@ export class MockLangRepository implements ILangRepository
         return entity;
     }
 
-    async findById(id: Uuid): Promise<AdminLang>
+    async findById(id: UuidValueObject): Promise<AdminLang>
     {
         const entity = this.collectionSource.find(lang => lang.id.value === id.value);
 
@@ -144,7 +144,7 @@ export class MockLangRepository implements ILangRepository
         });
     }
 
-    async deleteById(id: Uuid): Promise<void> 
+    async deleteById(id: UuidValueObject): Promise<void> 
     {
         // check that entity exist
         await this.findById(id);
