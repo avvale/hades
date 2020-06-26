@@ -2,7 +2,7 @@ import { StringValueObject } from './string.value-object';
 import { ValidationRules } from './../lib/validation-rules';
 import { BadRequestException } from '@nestjs/common';
 
-export abstract class Timestamp extends StringValueObject
+export abstract class TimestampValueObject extends StringValueObject
 {
     constructor(value: string, validationRules: ValidationRules = {}) 
     {
