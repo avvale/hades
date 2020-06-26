@@ -1,6 +1,6 @@
 import { StringValueObject } from './string.value-object';
 import { ValidationRules } from './../lib/validation-rules';
-import * as moment from 'moment';
+import { BadRequestException } from '@nestjs/common';
 
 export abstract class Timestamp extends StringValueObject
 {
@@ -13,9 +13,6 @@ export abstract class Timestamp extends StringValueObject
 
     private ensureIsValidTimestamp(timeStamp: string): void
     {
-        if (!timeStamp)
-        {
-
-        }
+        if (timeStamp !== null && !((new Date(timeStamp)).getTime() > 0)) throw new BadRequestException(`Value for ${this.validationRules.name} has to be a timestamp value`);
     }
 }
