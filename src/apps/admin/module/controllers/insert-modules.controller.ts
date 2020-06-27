@@ -1,12 +1,12 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { CreateModuleDto } from './../dto/create-module.dto';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
 import { InsertModulesCommand } from '@hades/admin/module/application/insert/insert-modules.command';
 
-@ApiTags('module')
+@ApiTags('[admin] module')
 @ApiCreatedResponse({ description: 'The records has been created successfully.'})
 @Controller('admin/modules')
 export class InsertModulesController 
@@ -16,6 +16,7 @@ export class InsertModulesController
     ) {}
 
     @Post()
+    @ApiOperation({ summary: 'Insert modules in batch' })
     @ApiBody({ 
         type: [CreateModuleDto]
     })

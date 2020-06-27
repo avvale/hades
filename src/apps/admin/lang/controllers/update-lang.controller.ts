@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateLangDto } from './../dto/update-lang.dto';
 import { LangDto } from './../dto/lang.dto';
 
@@ -9,7 +9,7 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { UpdateLangCommand } from '@hades/admin/lang/application/update/update-lang.command';
 import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-by-id.query';
 
-@ApiTags('lang')
+@ApiTags('[admin] lang')
 @ApiCreatedResponse({ description: 'The record has been successfully updated.', type: LangDto})
 @Controller('admin/lang')
 export class UpdateLangController 
@@ -20,6 +20,7 @@ export class UpdateLangController
     ) {}
 
     @Put()
+    @ApiOperation({ summary: 'Update lang' })
     async main(@Body() payload: UpdateLangDto)
     {
         await this.commandBus.dispatch(new UpdateLangCommand(

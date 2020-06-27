@@ -1,7 +1,7 @@
-import { Timestamp } from '@hades/shared/domain/value-objects/timestamp';
+import { TimestampValueObject } from '@hades/shared/domain/value-objects/timestamp.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/validation-rules';
 
-export class ModuleDeletedAt extends Timestamp 
+export class ModuleDeletedAt extends TimestampValueObject 
 {
     public readonly type: 'ModuleDeletedAt';
 

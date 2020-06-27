@@ -2,7 +2,7 @@ import { ConflictException, NotFoundException, BadRequestException } from '@nest
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
-import { Uuid } from '@hades/shared/domain/value-objects/uuid';
+import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { BaseEntity } from '@hades/shared/domain/lib/base-entity';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { SequelizeMapper } from './sequelize.mapper';
@@ -77,7 +77,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         return <Entity>this.mapper.mapToEntity(entity);
     }
 
-    async findById(id: Uuid): Promise<Entity>
+    async findById(id: UuidValueObject): Promise<Entity>
     {
         // value is already mapped
         const entity = await this.repository.findOne(
@@ -122,7 +122,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         await entityInDB.update(objectLiteral);
     }
 
-    async deleteById(id: Uuid): Promise<void> 
+    async deleteById(id: UuidValueObject): Promise<void> 
     {
         // check that entity exist
         const entity = await this.repository.findOne(
