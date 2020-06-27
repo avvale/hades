@@ -1,5 +1,5 @@
 import { Injectable, ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
-import { Uuid } from '@hades/shared/domain/value-objects/uuid';
+import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { QueryStatementInput, Command } from '@hades/shared/domain/persistence/sql-statement-input';
@@ -119,7 +119,7 @@ export class MockSystemRepository implements ISystemRepository
         return entity;
     }
 
-    async findById(id: Uuid): Promise<BplusItSappiSystem>
+    async findById(id: UuidValueObject): Promise<BplusItSappiSystem>
     {
         const entity = this.collectionSource.find(system => system.id.value === id.value);
 
@@ -144,7 +144,7 @@ export class MockSystemRepository implements ISystemRepository
         });
     }
 
-    async deleteById(id: Uuid): Promise<void> 
+    async deleteById(id: UuidValueObject): Promise<void> 
     {
         // check that entity exist
         await this.findById(id);

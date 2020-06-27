@@ -1,7 +1,7 @@
-import { Timestamp } from '@hades/shared/domain/value-objects/timestamp';
+import { TimestampValueObject } from '@hades/shared/domain/value-objects/timestamp.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/validation-rules';
 
-export class SystemCancelledAt extends Timestamp 
+export class SystemCancelledAt extends TimestampValueObject 
 {
     public readonly type: 'SystemCancelledAt';
 
