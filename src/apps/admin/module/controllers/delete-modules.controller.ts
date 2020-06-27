@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ModuleDto } from './../dto/module.dto';
 
 // @hades
@@ -9,7 +9,7 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { GetModulesQuery } from '@hades/admin/module/application/get/get-modules.query';
 import { DeleteModulesCommand } from '@hades/admin/module/application/delete/delete-modules.command';
 
-@ApiTags('module')
+@ApiTags('[admin] module')
 @ApiOkResponse({ description: 'The records has been deleted successfully.', type: ModuleDto})
 @Controller('admin/modules')
 export class DeleteModulesController 
@@ -20,6 +20,7 @@ export class DeleteModulesController
     ) {}
 
     @Delete()
+    @ApiOperation({ summary: 'Delete modules in batch according to query' })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const modules = await this.queryBus.ask(new GetModulesQuery(queryStatements));

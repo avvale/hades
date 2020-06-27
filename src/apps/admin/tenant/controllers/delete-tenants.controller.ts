@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { TenantDto } from './../dto/tenant.dto';
 
 // @hades
@@ -9,7 +9,7 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { GetTenantsQuery } from '@hades/admin/tenant/application/get/get-tenants.query';
 import { DeleteTenantsCommand } from '@hades/admin/tenant/application/delete/delete-tenants.command';
 
-@ApiTags('tenant')
+@ApiTags('[admin] tenant')
 @ApiOkResponse({ description: 'The records has been deleted successfully.', type: TenantDto})
 @Controller('admin/tenants')
 export class DeleteTenantsController 
@@ -20,6 +20,7 @@ export class DeleteTenantsController
     ) {}
 
     @Delete()
+    @ApiOperation({ summary: 'Delete tenants in batch according to query' })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const tenants = await this.queryBus.ask(new GetTenantsQuery(queryStatements));

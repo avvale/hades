@@ -1,5 +1,5 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateTenantDto } from './../dto/create-tenant.dto';
 import { TenantDto } from './../dto/tenant.dto';
 
@@ -9,7 +9,7 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { FindTenantByIdQuery } from '@hades/admin/tenant/application/find/find-tenant-by-id.query';
 import { CreateTenantCommand } from '@hades/admin/tenant/application/create/create-tenant.command';
 
-@ApiTags('tenant')
+@ApiTags('[admin] tenant')
 @ApiCreatedResponse({ description: 'The record has been successfully created.', type: TenantDto})
 @Controller('admin/tenant')
 export class CreateTenantController 
@@ -20,6 +20,7 @@ export class CreateTenantController
     ) {}
 
     @Post()
+    @ApiOperation({ summary: 'Create tenant' })
     async main(@Body() payload: CreateTenantDto)
     {
         await this.commandBus.dispatch(new CreateTenantCommand(

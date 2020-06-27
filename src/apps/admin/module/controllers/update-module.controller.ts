@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateModuleDto } from './../dto/update-module.dto';
 import { ModuleDto } from './../dto/module.dto';
 
@@ -9,7 +9,7 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { UpdateModuleCommand } from '@hades/admin/module/application/update/update-module.command';
 import { FindModuleByIdQuery } from '@hades/admin/module/application/find/find-module-by-id.query';
 
-@ApiTags('module')
+@ApiTags('[admin] module')
 @ApiCreatedResponse({ description: 'The record has been successfully updated.', type: ModuleDto})
 @Controller('admin/module')
 export class UpdateModuleController 
@@ -20,6 +20,7 @@ export class UpdateModuleController
     ) {}
 
     @Put()
+    @ApiOperation({ summary: 'Update module' })
     async main(@Body() payload: UpdateModuleDto)
     {
         await this.commandBus.dispatch(new UpdateModuleCommand(
