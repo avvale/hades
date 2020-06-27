@@ -1,20 +1,29 @@
 import { BplusItSappiSystemHandlers, BplusItSappiSystemServices, BplusItSappiSystemModel, ISystemRepository, SequelizeSystemRepository, SystemSagas } from './system';
+import { BplusItSappiExecutionHandlers, BplusItSappiExecutionServices, BplusItSappiExecutionModel, IExecutionRepository, SequelizeExecutionRepository, ExecutionSagas } from './execution';
 
 export const BplusItSappiHandlers = [
-    ...BplusItSappiSystemHandlers
+    ...BplusItSappiSystemHandlers,
+    ...BplusItSappiExecutionHandlers
 ];
 export const BplusItSappiServices = [
-    ...BplusItSappiSystemServices
+    ...BplusItSappiSystemServices,
+    ...BplusItSappiExecutionServices
 ];
 export const BplusItSappiModels = [
-    BplusItSappiSystemModel
+    BplusItSappiSystemModel,
+    BplusItSappiExecutionModel
 ];
 export const BplusItSappiRepositories = [
     {
         provide: ISystemRepository,
         useClass: SequelizeSystemRepository
+    },
+    {
+        provide: IExecutionRepository,
+        useClass: SequelizeExecutionRepository
     }
 ];
 export const BplusItSappiSagas = [
-    SystemSagas
+    SystemSagas,
+    ExecutionSagas
 ];

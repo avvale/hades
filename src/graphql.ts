@@ -6,6 +6,11 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum BplusItSappiExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
 export enum Command {
     COUNT = "COUNT",
     LIMIT = "LIMIT",
@@ -86,6 +91,26 @@ export interface AdminUpdateTenantInput {
     data?: JSON;
 }
 
+export interface BplusItSappiCreateExecutionInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    type: BplusItSappiExecutionType;
+    monitoringStartAt: GraphQLTimestamp;
+    monitoringEndAt: GraphQLTimestamp;
+    executedAt: GraphQLTimestamp;
+}
+
+export interface BplusItSappiUpdateExecutionInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    type?: BplusItSappiExecutionType;
+    monitoringStartAt?: GraphQLTimestamp;
+    monitoringEndAt?: GraphQLTimestamp;
+    executedAt?: GraphQLTimestamp;
+}
+
 export interface BplusItSappiCreateSystemInput {
     id: string;
     tenantId: string;
@@ -142,6 +167,10 @@ export interface IQuery {
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindExecution(query?: QueryStatementInput[]): BplusItSappiExecution | Promise<BplusItSappiExecution>;
+    bplusItSappiFindExecutionById(id?: string): BplusItSappiExecution | Promise<BplusItSappiExecution>;
+    bplusItSappiGetExecutions(query?: QueryStatementInput[]): BplusItSappiExecution[] | Promise<BplusItSappiExecution[]>;
+    bplusItSappiPaginateExecutions(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindSystem(query?: QueryStatementInput[]): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiFindSystemById(id?: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiGetSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
@@ -164,6 +193,11 @@ export interface IMutation {
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    bplusItSappiCreateExecution(payload: BplusItSappiCreateExecutionInput): BplusItSappiExecution | Promise<BplusItSappiExecution>;
+    bplusItSappiInsertExecutions(payload: BplusItSappiCreateExecutionInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateExecution(payload: BplusItSappiUpdateExecutionInput): BplusItSappiExecution | Promise<BplusItSappiExecution>;
+    bplusItSappiDeleteExecutionById(id: string): BplusItSappiExecution | Promise<BplusItSappiExecution>;
+    bplusItSappiDeleteExecutions(query?: QueryStatementInput[]): BplusItSappiExecution[] | Promise<BplusItSappiExecution[]>;
     bplusItSappiCreateSystem(payload: BplusItSappiCreateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiInsertSystems(payload: BplusItSappiCreateSystemInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
@@ -189,6 +223,19 @@ export interface AdminTenant {
     logo?: GraphQLString;
     isActive: GraphQLBoolean;
     data?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiExecution {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    type: BplusItSappiExecutionType;
+    monitoringStartAt: GraphQLTimestamp;
+    monitoringEndAt: GraphQLTimestamp;
+    executedAt: GraphQLTimestamp;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

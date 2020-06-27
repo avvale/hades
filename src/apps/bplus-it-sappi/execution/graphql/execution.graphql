@@ -1,0 +1,62 @@
+
+enum BplusItSappiExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+
+type BplusItSappiExecution
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    type: BplusItSappiExecutionType!
+    monitoringStartAt: GraphQLTimestamp!
+    monitoringEndAt: GraphQLTimestamp!
+    executedAt: GraphQLTimestamp!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateExecutionInput
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    type: BplusItSappiExecutionType!
+    monitoringStartAt: GraphQLTimestamp!
+    monitoringEndAt: GraphQLTimestamp!
+    executedAt: GraphQLTimestamp!
+    
+}
+
+input BplusItSappiUpdateExecutionInput
+{
+    id: ID!
+    tenantId: ID
+    systemId: ID
+    type: BplusItSappiExecutionType
+    monitoringStartAt: GraphQLTimestamp
+    monitoringEndAt: GraphQLTimestamp
+    executedAt: GraphQLTimestamp
+    
+}
+
+type Query 
+{
+    bplusItSappiFindExecution(query:[QueryStatementInput]): BplusItSappiExecution
+    bplusItSappiFindExecutionById(id:ID): BplusItSappiExecution
+    bplusItSappiGetExecutions(query:[QueryStatementInput]): [BplusItSappiExecution]!
+    bplusItSappiPaginateExecutions(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateExecution(payload: BplusItSappiCreateExecutionInput!): BplusItSappiExecution
+    bplusItSappiInsertExecutions(payload: [BplusItSappiCreateExecutionInput]!): Boolean!
+    bplusItSappiUpdateExecution(payload: BplusItSappiUpdateExecutionInput!): BplusItSappiExecution
+    bplusItSappiDeleteExecutionById(id: ID!): BplusItSappiExecution
+    bplusItSappiDeleteExecutions(query:[QueryStatementInput]): [BplusItSappiExecution]!
+}
