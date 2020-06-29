@@ -1,0 +1,20 @@
+moduleName: bplus-it-sappi
+sectionName: data-lake
+sectionNames: data-lakes
+entityProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+  - name: data
+    type: json
+    nullable: false
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

@@ -11,6 +11,11 @@ export enum BplusItSappiExecutionType {
     DETAIL = "DETAIL"
 }
 
+export enum BplusItSappiJobExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
 export enum Command {
     COUNT = "COUNT",
     LIMIT = "LIMIT",
@@ -91,6 +96,16 @@ export interface AdminUpdateTenantInput {
     data?: JSON;
 }
 
+export interface BplusItSappiCreateDataLakeInput {
+    id: string;
+    data: JSON;
+}
+
+export interface BplusItSappiUpdateDataLakeInput {
+    id: string;
+    data?: JSON;
+}
+
 export interface BplusItSappiCreateExecutionInput {
     id: string;
     tenantId: string;
@@ -109,6 +124,36 @@ export interface BplusItSappiUpdateExecutionInput {
     monitoringStartAt?: GraphQLTimestamp;
     monitoringEndAt?: GraphQLTimestamp;
     executedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiCreateJobInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiJobExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    cancelled?: GraphQLInt;
+    completed?: GraphQLInt;
+    error?: GraphQLInt;
+}
+
+export interface BplusItSappiUpdateJobInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    executionId?: string;
+    executionType?: BplusItSappiJobExecutionType;
+    executionExecutedAt?: GraphQLTimestamp;
+    executionMonitoringStartAt?: GraphQLTimestamp;
+    executionMonitoringEndAt?: GraphQLTimestamp;
+    cancelled?: GraphQLInt;
+    completed?: GraphQLInt;
+    error?: GraphQLInt;
 }
 
 export interface BplusItSappiCreateSystemInput {
@@ -167,10 +212,18 @@ export interface IQuery {
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindDataLake(query?: QueryStatementInput[]): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
+    bplusItSappiFindDataLakeById(id?: string): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
+    bplusItSappiGetDataLakes(query?: QueryStatementInput[]): BplusItSappiDataLake[] | Promise<BplusItSappiDataLake[]>;
+    bplusItSappiPaginateDataLakes(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindExecution(query?: QueryStatementInput[]): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiFindExecutionById(id?: string): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiGetExecutions(query?: QueryStatementInput[]): BplusItSappiExecution[] | Promise<BplusItSappiExecution[]>;
     bplusItSappiPaginateExecutions(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindJob(query?: QueryStatementInput[]): BplusItSappiJob | Promise<BplusItSappiJob>;
+    bplusItSappiFindJobById(id?: string): BplusItSappiJob | Promise<BplusItSappiJob>;
+    bplusItSappiGetJobs(query?: QueryStatementInput[]): BplusItSappiJob[] | Promise<BplusItSappiJob[]>;
+    bplusItSappiPaginateJobs(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindSystem(query?: QueryStatementInput[]): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiFindSystemById(id?: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiGetSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
@@ -193,11 +246,21 @@ export interface IMutation {
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    bplusItSappiCreateDataLake(payload: BplusItSappiCreateDataLakeInput): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
+    bplusItSappiInsertDataLakes(payload: BplusItSappiCreateDataLakeInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateDataLake(payload: BplusItSappiUpdateDataLakeInput): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
+    bplusItSappiDeleteDataLakeById(id: string): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
+    bplusItSappiDeleteDataLakes(query?: QueryStatementInput[]): BplusItSappiDataLake[] | Promise<BplusItSappiDataLake[]>;
     bplusItSappiCreateExecution(payload: BplusItSappiCreateExecutionInput): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiInsertExecutions(payload: BplusItSappiCreateExecutionInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateExecution(payload: BplusItSappiUpdateExecutionInput): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiDeleteExecutionById(id: string): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiDeleteExecutions(query?: QueryStatementInput[]): BplusItSappiExecution[] | Promise<BplusItSappiExecution[]>;
+    bplusItSappiCreateJob(payload: BplusItSappiCreateJobInput): BplusItSappiJob | Promise<BplusItSappiJob>;
+    bplusItSappiInsertJobs(payload: BplusItSappiCreateJobInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateJob(payload: BplusItSappiUpdateJobInput): BplusItSappiJob | Promise<BplusItSappiJob>;
+    bplusItSappiDeleteJobById(id: string): BplusItSappiJob | Promise<BplusItSappiJob>;
+    bplusItSappiDeleteJobs(query?: QueryStatementInput[]): BplusItSappiJob[] | Promise<BplusItSappiJob[]>;
     bplusItSappiCreateSystem(payload: BplusItSappiCreateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiInsertSystems(payload: BplusItSappiCreateSystemInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
@@ -228,6 +291,14 @@ export interface AdminTenant {
     deletedAt?: GraphQLTimestamp;
 }
 
+export interface BplusItSappiDataLake {
+    id: string;
+    data: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
 export interface BplusItSappiExecution {
     id: string;
     tenantId: string;
@@ -236,6 +307,24 @@ export interface BplusItSappiExecution {
     monitoringStartAt: GraphQLTimestamp;
     monitoringEndAt: GraphQLTimestamp;
     executedAt: GraphQLTimestamp;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiJob {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiJobExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    cancelled?: GraphQLInt;
+    completed?: GraphQLInt;
+    error?: GraphQLInt;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

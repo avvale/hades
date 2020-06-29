@@ -1,0 +1,77 @@
+
+enum BplusItSappiJobExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+
+type BplusItSappiJob
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiJobExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    cancelled: GraphQLInt
+    completed: GraphQLInt
+    error: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateJobInput
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiJobExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    cancelled: GraphQLInt
+    completed: GraphQLInt
+    error: GraphQLInt
+    
+}
+
+input BplusItSappiUpdateJobInput
+{
+    id: ID!
+    tenantId: ID
+    systemId: ID
+    systemName: GraphQLString
+    executionId: ID
+    executionType: BplusItSappiJobExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    cancelled: GraphQLInt
+    completed: GraphQLInt
+    error: GraphQLInt
+    
+}
+
+type Query 
+{
+    bplusItSappiFindJob(query:[QueryStatementInput]): BplusItSappiJob
+    bplusItSappiFindJobById(id:ID): BplusItSappiJob
+    bplusItSappiGetJobs(query:[QueryStatementInput]): [BplusItSappiJob]!
+    bplusItSappiPaginateJobs(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateJob(payload: BplusItSappiCreateJobInput!): BplusItSappiJob
+    bplusItSappiInsertJobs(payload: [BplusItSappiCreateJobInput]!): Boolean!
+    bplusItSappiUpdateJob(payload: BplusItSappiUpdateJobInput!): BplusItSappiJob
+    bplusItSappiDeleteJobById(id: ID!): BplusItSappiJob
+    bplusItSappiDeleteJobs(query:[QueryStatementInput]): [BplusItSappiJob]!
+}

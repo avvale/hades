@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "0f2d2d09-ff8d-4626-825f-09af9e8bfac5",
+		"name"          : "@hades - bplus-it-sappi/data-lake",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - bplusItSappiCreateDataLake",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiCreateDataLakeInput!)\n{\n\tbplusItSappiCreateDataLake (payload:$payload)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"234ed110-b063-41f2-88b3-b91da0fae3e5\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiInsertDataLakes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[BplusItSappiCreateDataLakeInput]!)\n{\n\tbplusItSappiInsertDataLakes (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"eed4ee7e-c75d-4882-98e6-976dbe42fbe7\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a2583273-a6b3-4743-9a41-92feccfec7d7\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8e841ebb-0f57-47b8-a3b2-f15f5ab498f7\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5688bcb2-8168-41cf-983c-40303e22b96c\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0a16a21f-dde9-4831-b8ae-cde330a9efbc\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"470321d5-4049-43ab-b9c7-bb5a528d8e26\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"75b7d67f-11da-4c7d-9d92-a95f1dfd1e86\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1d264f05-ce41-4650-bce2-b9407e35cc58\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"702a735f-a0b7-44fb-b230-f72e790f7773\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"df6a1b29-c53d-4800-aa92-5249899140ba\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b41857b9-cdcc-4809-bdf3-2cab74abd324\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9194f07c-6d4f-48e9-98e6-176f5975134c\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"054f5d40-3df2-4142-9dbf-55285e4136b0\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6f94ea24-7fd5-40f7-ba39-3c1bca89b6f5\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8129efae-bacf-4b50-a922-506ed30eb877\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"aeefd51c-b8a4-4e0d-a3f5-895d1ab861a3\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c52076d6-f7bc-46a3-8f76-629e9003ed45\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"441aa61c-f269-4d6a-8321-019370ccfec1\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b10a05ab-0ad9-423e-878e-6c37caefcda2\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3d9600b5-4e47-4370-b954-6db33756841a\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiPaginateDataLakes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tbplusItSappiPaginateDataLakes (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiGetDataLakes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetDataLakes (query: $query)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"234ed110-b063-41f2-88b3-b91da0fae3e5\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindDataLake",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindDataLake (query: $query)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"234ed110-b063-41f2-88b3-b91da0fae3e5\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindDataLakeById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tbplusItSappiFindDataLakeById (id:$id)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"234ed110-b063-41f2-88b3-b91da0fae3e5\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiUpdateDataLake",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiUpdateDataLakeInput!)\n{\n\tbplusItSappiUpdateDataLake (payload:$payload)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"234ed110-b063-41f2-88b3-b91da0fae3e5\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteDataLakeById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteDataLakeById (id:$id)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"234ed110-b063-41f2-88b3-b91da0fae3e5\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteDataLakes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteDataLakes (query: $query)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/data-lake",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"234ed110-b063-41f2-88b3-b91da0fae3e5\", \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/data-lake",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"data-lake"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/data-lakes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"d172dd91-2bbd-4943-9688-a28d2f79d1ed\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"43849f6c-b7a1-48f3-b405-ba2424653e8c\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"1203cfb8-c792-4aa2-ad60-c4d2c7670846\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"d57dd288-a2b3-4510-9195-cf9835b798a7\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"8db1003b-9a29-480a-b364-805980212c13\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"8caaaa9b-ca6e-4826-a25f-cba42ab0ba80\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"a3de89cf-e9af-47cf-8904-470e0f2143d1\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"84ebb6bc-894a-462e-8cb9-3154bf7559b5\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"11988010-dbea-4d9c-9c88-54cf37ad024b\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"a3144ea2-10b5-40c6-acb2-28824e857bf9\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"30d8ab7b-9d93-470e-a154-726cb5a47ac2\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"13edce05-5f87-499f-bbb4-04ee57e70118\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"3cb685fb-3ed5-4ef7-9085-1e4cb04ffef9\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"46532bee-89ff-4d77-9625-c27edbe3d77d\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"966405d6-3f98-43ab-8df0-e21c2aa02bde\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"73de231a-2dcd-4b26-8f60-391c1d1595fe\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"969e711e-67d7-44e2-80ab-976add57282c\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"9541eb57-2948-48d7-aa1d-2681b50d859d\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"c6243e4c-c772-4a3a-a18a-327ad9672e23\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"0ccb08de-9a1e-47bc-b4d8-99f43f148d37\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/data-lakes",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"data-lakes"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/data-lakes/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/data-lakes/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+                        "data-lakes",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/data-lakes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"234ed110-b063-41f2-88b3-b91da0fae3e5\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/data-lakes",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"data-lakes"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/data-lake",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"234ed110-b063-41f2-88b3-b91da0fae3e5\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/data-lake",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"data-lake"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/data-lake/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/data-lake/234ed110-b063-41f2-88b3-b91da0fae3e5",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"data-lake",
+						"234ed110-b063-41f2-88b3-b91da0fae3e5"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/data-lake",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"234ed110-b063-41f2-88b3-b91da0fae3e5\", \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/data-lake",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"data-lake"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/data-lake/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/data-lake/234ed110-b063-41f2-88b3-b91da0fae3e5",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"data-lake",
+						"234ed110-b063-41f2-88b3-b91da0fae3e5"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - bplus-it-sappi/data-lakes",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/data-lakes",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"data-lakes"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "e754505c-fb4a-4846-9fd7-59d18b22f047",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

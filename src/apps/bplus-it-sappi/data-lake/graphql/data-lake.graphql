@@ -1,0 +1,42 @@
+
+
+type BplusItSappiDataLake
+{
+    id: ID!
+    data: JSON!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateDataLakeInput
+{
+    id: ID!
+    data: JSON!
+    
+}
+
+input BplusItSappiUpdateDataLakeInput
+{
+    id: ID!
+    data: JSON
+    
+}
+
+type Query 
+{
+    bplusItSappiFindDataLake(query:[QueryStatementInput]): BplusItSappiDataLake
+    bplusItSappiFindDataLakeById(id:ID): BplusItSappiDataLake
+    bplusItSappiGetDataLakes(query:[QueryStatementInput]): [BplusItSappiDataLake]!
+    bplusItSappiPaginateDataLakes(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateDataLake(payload: BplusItSappiCreateDataLakeInput!): BplusItSappiDataLake
+    bplusItSappiInsertDataLakes(payload: [BplusItSappiCreateDataLakeInput]!): Boolean!
+    bplusItSappiUpdateDataLake(payload: BplusItSappiUpdateDataLakeInput!): BplusItSappiDataLake
+    bplusItSappiDeleteDataLakeById(id: ID!): BplusItSappiDataLake
+    bplusItSappiDeleteDataLakes(query:[QueryStatementInput]): [BplusItSappiDataLake]!
+}

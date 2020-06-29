@@ -4,6 +4,8 @@ import { SharedModule } from './../shared/shared.module';
 import { BplusItSappiModels, BplusItSappiHandlers, BplusItSappiServices, BplusItSappiRepositories, BplusItSappiSagas } from '@hades/bplus-it-sappi';
 import { BplusItSappiSystemControllers, BplusItSappiSystemResolvers } from './system';
 import { BplusItSappiExecutionControllers, BplusItSappiExecutionResolvers } from './execution';
+import { BplusItSappiDataLakeControllers, BplusItSappiDataLakeResolvers } from './data-lake';
+import { BplusItSappiJobControllers, BplusItSappiJobResolvers } from './job';
 
 @Module({
     imports: [
@@ -12,7 +14,9 @@ import { BplusItSappiExecutionControllers, BplusItSappiExecutionResolvers } from
     ],
     controllers: [
         ...BplusItSappiSystemControllers,
-        ...BplusItSappiExecutionControllers
+        ...BplusItSappiExecutionControllers,
+        ...BplusItSappiDataLakeControllers,
+        ...BplusItSappiJobControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
@@ -20,7 +24,9 @@ import { BplusItSappiExecutionControllers, BplusItSappiExecutionResolvers } from
         ...BplusItSappiRepositories,
         ...BplusItSappiSagas,
         ...BplusItSappiSystemResolvers,
-        ...BplusItSappiExecutionResolvers
+        ...BplusItSappiExecutionResolvers,
+        ...BplusItSappiDataLakeResolvers,
+        ...BplusItSappiJobResolvers
     ]
 })
 export class BplusItSappiModule {}
