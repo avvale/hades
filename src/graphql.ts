@@ -11,7 +11,7 @@ export enum BplusItSappiExecutionType {
     DETAIL = "DETAIL"
 }
 
-export enum BplusItSappiJobExecutionType {
+export enum BplusItSappiJobOverviewExecutionType {
     SUMMARY = "SUMMARY",
     DETAIL = "DETAIL"
 }
@@ -126,13 +126,11 @@ export interface BplusItSappiUpdateExecutionInput {
     executedAt?: GraphQLTimestamp;
 }
 
-export interface BplusItSappiCreateJobInput {
+export interface BplusItSappiCreateJobOverviewInput {
     id: string;
     tenantId: string;
     systemId: string;
-    systemName: GraphQLString;
-    executionId: string;
-    executionType: BplusItSappiJobExecutionType;
+    executionType: BplusItSappiJobOverviewExecutionType;
     executionExecutedAt: GraphQLTimestamp;
     executionMonitoringStartAt: GraphQLTimestamp;
     executionMonitoringEndAt: GraphQLTimestamp;
@@ -141,13 +139,11 @@ export interface BplusItSappiCreateJobInput {
     error?: GraphQLInt;
 }
 
-export interface BplusItSappiUpdateJobInput {
+export interface BplusItSappiUpdateJobOverviewInput {
     id: string;
     tenantId?: string;
     systemId?: string;
-    systemName?: GraphQLString;
-    executionId?: string;
-    executionType?: BplusItSappiJobExecutionType;
+    executionType?: BplusItSappiJobOverviewExecutionType;
     executionExecutedAt?: GraphQLTimestamp;
     executionMonitoringStartAt?: GraphQLTimestamp;
     executionMonitoringEndAt?: GraphQLTimestamp;
@@ -220,10 +216,10 @@ export interface IQuery {
     bplusItSappiFindExecutionById(id?: string): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiGetExecutions(query?: QueryStatementInput[]): BplusItSappiExecution[] | Promise<BplusItSappiExecution[]>;
     bplusItSappiPaginateExecutions(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
-    bplusItSappiFindJob(query?: QueryStatementInput[]): BplusItSappiJob | Promise<BplusItSappiJob>;
-    bplusItSappiFindJobById(id?: string): BplusItSappiJob | Promise<BplusItSappiJob>;
-    bplusItSappiGetJobs(query?: QueryStatementInput[]): BplusItSappiJob[] | Promise<BplusItSappiJob[]>;
-    bplusItSappiPaginateJobs(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindJobOverview(query?: QueryStatementInput[]): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
+    bplusItSappiFindJobOverviewById(id?: string): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
+    bplusItSappiGetJobsOverview(query?: QueryStatementInput[]): BplusItSappiJobOverview[] | Promise<BplusItSappiJobOverview[]>;
+    bplusItSappiPaginateJobsOverview(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindSystem(query?: QueryStatementInput[]): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiFindSystemById(id?: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiGetSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
@@ -256,11 +252,11 @@ export interface IMutation {
     bplusItSappiUpdateExecution(payload: BplusItSappiUpdateExecutionInput): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiDeleteExecutionById(id: string): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiDeleteExecutions(query?: QueryStatementInput[]): BplusItSappiExecution[] | Promise<BplusItSappiExecution[]>;
-    bplusItSappiCreateJob(payload: BplusItSappiCreateJobInput): BplusItSappiJob | Promise<BplusItSappiJob>;
-    bplusItSappiInsertJobs(payload: BplusItSappiCreateJobInput[]): boolean | Promise<boolean>;
-    bplusItSappiUpdateJob(payload: BplusItSappiUpdateJobInput): BplusItSappiJob | Promise<BplusItSappiJob>;
-    bplusItSappiDeleteJobById(id: string): BplusItSappiJob | Promise<BplusItSappiJob>;
-    bplusItSappiDeleteJobs(query?: QueryStatementInput[]): BplusItSappiJob[] | Promise<BplusItSappiJob[]>;
+    bplusItSappiCreateJobOverview(payload: BplusItSappiCreateJobOverviewInput): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
+    bplusItSappiInsertJobsOverview(payload: BplusItSappiCreateJobOverviewInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateJobOverview(payload: BplusItSappiUpdateJobOverviewInput): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
+    bplusItSappiDeleteJobOverviewById(id: string): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
+    bplusItSappiDeleteJobsOverview(query?: QueryStatementInput[]): BplusItSappiJobOverview[] | Promise<BplusItSappiJobOverview[]>;
     bplusItSappiCreateSystem(payload: BplusItSappiCreateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiInsertSystems(payload: BplusItSappiCreateSystemInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
@@ -312,13 +308,11 @@ export interface BplusItSappiExecution {
     deletedAt?: GraphQLTimestamp;
 }
 
-export interface BplusItSappiJob {
+export interface BplusItSappiJobOverview {
     id: string;
     tenantId: string;
     systemId: string;
-    systemName: GraphQLString;
-    executionId: string;
-    executionType: BplusItSappiJobExecutionType;
+    executionType: BplusItSappiJobOverviewExecutionType;
     executionExecutedAt: GraphQLTimestamp;
     executionMonitoringStartAt: GraphQLTimestamp;
     executionMonitoringEndAt: GraphQLTimestamp;

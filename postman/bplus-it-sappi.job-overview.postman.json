@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "3f696d2f-7ac9-4451-8cd7-36ec11a07a06",
+		"name"          : "@hades - bplus-it-sappi/job-overview",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - bplusItSappiCreateJobOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiCreateJobOverviewInput!)\n{\n\tbplusItSappiCreateJobOverview (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"a89cd7f7-6d71-4275-81bf-b7372ac67357\", \n\t\t\"tenantId\": \"b6372430-2806-4225-9c30-275012460f21\", \n\t\t\"systemId\": \"476318f0-9577-4fa9-bfd7-9f5133c6dc8d\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 18:20:20\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 22:34:39\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 03:54:50\", \n\t\t\"cancelled\": 4945097334, \n\t\t\"completed\": 1222584982, \n\t\t\"error\": 6891378691\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiInsertJobsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[BplusItSappiCreateJobOverviewInput]!)\n{\n\tbplusItSappiInsertJobsOverview (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"9672d6e1-9e86-4fd5-a23a-837a159c0f57\", \n\t\t\t\"tenantId\": \"23688494-3d96-4aeb-a153-cca1cee63a74\", \n\t\t\t\"systemId\": \"f72aeaa9-1461-476a-8bff-36053638251f\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 22:33:49\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 20:05:45\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 06:12:06\", \n\t\t\t\"cancelled\": 8051531411, \n\t\t\t\"completed\": 8226080713, \n\t\t\t\"error\": 5285798965\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4a44e172-9ac7-4239-9b10-05068214802c\", \n\t\t\t\"tenantId\": \"fad33f26-8bfe-420d-8433-be5a1430a6aa\", \n\t\t\t\"systemId\": \"16501582-57e4-4153-b530-5761e6cb2d4a\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 15:13:44\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 13:21:21\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 02:14:10\", \n\t\t\t\"cancelled\": 7366941034, \n\t\t\t\"completed\": 2310937742, \n\t\t\t\"error\": 6678807325\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4ba8f41c-3e70-4db2-9185-068c85aa648c\", \n\t\t\t\"tenantId\": \"ff281a92-5d82-409d-97eb-5d342df47ec3\", \n\t\t\t\"systemId\": \"19362e66-1be4-4fe3-acaa-7c8020e08530\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 03:03:49\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 00:40:45\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 16:52:31\", \n\t\t\t\"cancelled\": 7476633202, \n\t\t\t\"completed\": 1191697428, \n\t\t\t\"error\": 7661229006\n\t\t},\n\t\t{\n\t\t\t\"id\": \"94da5d8d-095c-4676-823f-8b7cc716c013\", \n\t\t\t\"tenantId\": \"2faa7054-e4fa-4c6b-a06d-27007a236de9\", \n\t\t\t\"systemId\": \"833657c1-64b8-45f2-b248-ef7899bf7662\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 14:18:50\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 01:58:00\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 02:10:50\", \n\t\t\t\"cancelled\": 6151935381, \n\t\t\t\"completed\": 1087424677, \n\t\t\t\"error\": 2028575989\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d3e355be-6284-414b-b940-c5d00754615d\", \n\t\t\t\"tenantId\": \"2ab5e18e-3c32-48bc-941a-eed407a3a490\", \n\t\t\t\"systemId\": \"55078cbc-0898-4c33-abcd-993a8fcb584b\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 06:05:07\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 13:31:24\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 18:51:20\", \n\t\t\t\"cancelled\": 4430994993, \n\t\t\t\"completed\": 1045932134, \n\t\t\t\"error\": 4683407051\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3c2537e4-1282-432b-acf9-711f2144015b\", \n\t\t\t\"tenantId\": \"f746ecfd-b2b8-4b09-90fc-6ac7f8268997\", \n\t\t\t\"systemId\": \"bbf46585-b959-4310-8542-4ebb940bef19\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 05:47:56\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 10:51:37\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 00:41:36\", \n\t\t\t\"cancelled\": 2058438466, \n\t\t\t\"completed\": 1628093653, \n\t\t\t\"error\": 7632953523\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4ed26877-53a6-4b73-80c6-66fbcdf0abae\", \n\t\t\t\"tenantId\": \"ee65a7e0-4c9e-4567-98ee-cf0f48d24d16\", \n\t\t\t\"systemId\": \"1b49a2ae-4b11-4147-8e63-66c3b640d20d\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 04:08:05\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 12:21:52\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 13:33:38\", \n\t\t\t\"cancelled\": 7783846750, \n\t\t\t\"completed\": 8552517041, \n\t\t\t\"error\": 9223759654\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6f8ee1cb-96d6-442b-848f-da8b2ca0bd87\", \n\t\t\t\"tenantId\": \"870a1e13-478d-46e7-b0b8-7339b3c17090\", \n\t\t\t\"systemId\": \"0a491e52-9f32-4be1-9d90-ac76c08ff81d\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 22:11:02\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 16:55:40\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 16:36:22\", \n\t\t\t\"cancelled\": 6411100956, \n\t\t\t\"completed\": 7050458391, \n\t\t\t\"error\": 7774972637\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ee9dea08-79dc-4263-b4c3-648cee6b3145\", \n\t\t\t\"tenantId\": \"de74be67-00e7-498b-8fe8-b94453b877b2\", \n\t\t\t\"systemId\": \"6b6a8168-d91b-4832-bcf6-c6382bc4a223\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 00:36:40\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 14:49:33\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 09:40:32\", \n\t\t\t\"cancelled\": 8104257834, \n\t\t\t\"completed\": 2450467897, \n\t\t\t\"error\": 4664160154\n\t\t},\n\t\t{\n\t\t\t\"id\": \"420214bd-98f5-40b3-a27c-bc593e22e530\", \n\t\t\t\"tenantId\": \"ab209dbe-3c7c-4eab-8638-a0c49f9bb2a4\", \n\t\t\t\"systemId\": \"54bcc738-e357-4605-951e-6eae198ed40b\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 15:15:29\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 07:05:57\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 07:41:02\", \n\t\t\t\"cancelled\": 3934466206, \n\t\t\t\"completed\": 7937170598, \n\t\t\t\"error\": 8447906620\n\t\t},\n\t\t{\n\t\t\t\"id\": \"21654df4-ab9f-4763-9337-99c5663ab046\", \n\t\t\t\"tenantId\": \"b7cacefb-d5a7-47a2-9708-4f3b84e12537\", \n\t\t\t\"systemId\": \"7804cf88-64f1-43d1-bbb6-8e4b36c15944\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 05:22:34\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 09:12:38\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 13:12:41\", \n\t\t\t\"cancelled\": 8366237760, \n\t\t\t\"completed\": 8318239435, \n\t\t\t\"error\": 2972427078\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a3d89bb4-d10b-4d80-8c2b-d5cce711ffea\", \n\t\t\t\"tenantId\": \"ef17585c-7094-45b3-8749-90a956fd6b14\", \n\t\t\t\"systemId\": \"4cf473b5-8bd6-413d-9f50-794cd3670e09\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 04:44:25\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 22:29:09\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 08:08:18\", \n\t\t\t\"cancelled\": 2224333053, \n\t\t\t\"completed\": 1339561178, \n\t\t\t\"error\": 8508708910\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c0bc272c-0eae-4e39-aae5-1cdfcbe51130\", \n\t\t\t\"tenantId\": \"befcfad2-2fd7-49f8-b87b-4596582bf0fc\", \n\t\t\t\"systemId\": \"2c23d4e8-866a-4cd5-9b5d-7104692084bc\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 01:28:59\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 18:21:22\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 09:18:43\", \n\t\t\t\"cancelled\": 5728898223, \n\t\t\t\"completed\": 5540649867, \n\t\t\t\"error\": 1270266859\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1e2d2453-731f-4a17-b30b-bda74184ac84\", \n\t\t\t\"tenantId\": \"fe0f4518-77fa-4ec5-bdbd-65ee6170921b\", \n\t\t\t\"systemId\": \"ad464b3c-2d55-44f8-b335-e23a6e624af7\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 01:01:01\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 14:50:01\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 07:50:04\", \n\t\t\t\"cancelled\": 5606603194, \n\t\t\t\"completed\": 4782987004, \n\t\t\t\"error\": 6614939280\n\t\t},\n\t\t{\n\t\t\t\"id\": \"639df3b1-ab1e-49de-8907-2703b6eba1a1\", \n\t\t\t\"tenantId\": \"9bd805e6-800c-403d-80e3-7672c8f68fde\", \n\t\t\t\"systemId\": \"2c11dc3d-5569-42bb-9d02-69a481eb35c1\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 06:42:30\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 06:50:13\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 08:05:43\", \n\t\t\t\"cancelled\": 9079047539, \n\t\t\t\"completed\": 1805120563, \n\t\t\t\"error\": 2906184412\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3f4fab20-742a-4cd6-bf4e-269f11f0a7fa\", \n\t\t\t\"tenantId\": \"169cdf6b-020f-4a2b-a7f5-4f542ed7da3d\", \n\t\t\t\"systemId\": \"76891b96-1cfa-4b9a-a986-15ffa9ff1435\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 09:59:36\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 07:18:45\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 22:37:10\", \n\t\t\t\"cancelled\": 1222121955, \n\t\t\t\"completed\": 3906663825, \n\t\t\t\"error\": 7872617690\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e427b29f-03b1-4b21-9bee-431116e80b98\", \n\t\t\t\"tenantId\": \"5612f3b6-38e1-4039-bb86-708adbad7445\", \n\t\t\t\"systemId\": \"886d72e1-967c-439a-830b-9fce6ab666e8\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 14:43:14\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 13:55:47\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 07:50:16\", \n\t\t\t\"cancelled\": 5137220739, \n\t\t\t\"completed\": 7597091503, \n\t\t\t\"error\": 8291240256\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3fb47987-fe3f-4aab-909d-ba729068f515\", \n\t\t\t\"tenantId\": \"c0cef4eb-7c96-4fcf-a835-62557dd9639a\", \n\t\t\t\"systemId\": \"dd7a6339-dbb2-4a7d-b6ca-4fb83c43191d\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 19:47:14\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 20:00:35\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 09:38:32\", \n\t\t\t\"cancelled\": 2393541831, \n\t\t\t\"completed\": 3491333907, \n\t\t\t\"error\": 2136007770\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4a68cddb-82b2-47bf-bc89-64f02fa7d2bf\", \n\t\t\t\"tenantId\": \"f57de279-d4c1-4f7e-9c8b-8b9422858f13\", \n\t\t\t\"systemId\": \"5d386b5d-d8c7-40e3-a0fa-a0b589e84774\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 10:39:19\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 18:47:14\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 12:55:21\", \n\t\t\t\"cancelled\": 6568464648, \n\t\t\t\"completed\": 3987767982, \n\t\t\t\"error\": 3226536610\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8d19eb29-c139-4272-8e91-aeae48755486\", \n\t\t\t\"tenantId\": \"c04099e8-8a5d-4275-898e-4955b2af0a2e\", \n\t\t\t\"systemId\": \"dc1e3583-15fc-4f3e-8625-b4fc89ebdb92\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 22:29:39\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 23:57:09\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 11:45:00\", \n\t\t\t\"cancelled\": 2778982002, \n\t\t\t\"completed\": 1192363515, \n\t\t\t\"error\": 4533171381\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiPaginateJobsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tbplusItSappiPaginateJobsOverview (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiGetJobsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetJobsOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"a89cd7f7-6d71-4275-81bf-b7372ac67357\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindJobOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindJobOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"a89cd7f7-6d71-4275-81bf-b7372ac67357\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindJobOverviewById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tbplusItSappiFindJobOverviewById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"a89cd7f7-6d71-4275-81bf-b7372ac67357\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiUpdateJobOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiUpdateJobOverviewInput!)\n{\n\tbplusItSappiUpdateJobOverview (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"a89cd7f7-6d71-4275-81bf-b7372ac67357\", \n\t\t\"tenantId\": \"b6372430-2806-4225-9c30-275012460f21\", \n\t\t\"systemId\": \"476318f0-9577-4fa9-bfd7-9f5133c6dc8d\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 05:32:38\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 00:23:44\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 14:13:06\", \n\t\t\"cancelled\": 9070603408, \n\t\t\"completed\": 5252326956, \n\t\t\"error\": 3640261647\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteJobOverviewById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteJobOverviewById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"a89cd7f7-6d71-4275-81bf-b7372ac67357\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteJobsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteJobsOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/job-overview",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"a89cd7f7-6d71-4275-81bf-b7372ac67357\", \n\t\"tenantId\": \"b6372430-2806-4225-9c30-275012460f21\", \n\t\"systemId\": \"476318f0-9577-4fa9-bfd7-9f5133c6dc8d\", \n\t\"executionType\": \"DETAIL\", \n\t\"executionExecutedAt\": \"2020-06-30 22:51:25\", \n\t\"executionMonitoringStartAt\": \"2020-06-30 09:06:58\", \n\t\"executionMonitoringEndAt\": \"2020-06-30 21:35:46\", \n\t\"cancelled\": 4851609180, \n\t\"completed\": 5563718440, \n\t\"error\": 2065509614\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/job-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"job-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/jobs-overview",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"1f318dc5-6522-46f5-ad0e-ae5004605b21\", \n\t\t\"tenantId\": \"b6497452-ab5c-405c-8367-3d3e9114ecc9\", \n\t\t\"systemId\": \"1851372a-51c5-441c-a6a6-a3d2c1662fda\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 14:49:10\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 22:28:38\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 07:25:53\", \n\t\t\"cancelled\": 6049475187, \n\t\t\"completed\": 5104320295, \n\t\t\"error\": 6428532834\n\t}, \n\t{\n\t\t\"id\": \"6c771025-0918-45b8-9d0c-49ad5a676131\", \n\t\t\"tenantId\": \"42e7814a-0b53-4ba2-9434-9977f7046b85\", \n\t\t\"systemId\": \"ffdba871-e27d-46d7-ab37-04cb43d70511\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 03:10:18\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 03:35:32\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 03:50:24\", \n\t\t\"cancelled\": 7795067835, \n\t\t\"completed\": 5471921895, \n\t\t\"error\": 7467217941\n\t}, \n\t{\n\t\t\"id\": \"57db2ad7-9bed-48a8-9285-f60bf1daf585\", \n\t\t\"tenantId\": \"8bc9cf98-329f-4764-b5c0-c94add10770b\", \n\t\t\"systemId\": \"1c324ecc-0990-4a5f-bd55-11d5d8504b86\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 07:52:49\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 22:09:50\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 09:01:07\", \n\t\t\"cancelled\": 6506459803, \n\t\t\"completed\": 7795192784, \n\t\t\"error\": 7565977338\n\t}, \n\t{\n\t\t\"id\": \"4c10d1e8-3733-47ac-ad69-7b2ba7272c15\", \n\t\t\"tenantId\": \"3c0d952f-e394-403e-809f-120a2ca93d9f\", \n\t\t\"systemId\": \"4c4b8b43-02a3-4577-8a89-c919112735af\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 23:11:02\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 16:44:29\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 07:23:15\", \n\t\t\"cancelled\": 9670198880, \n\t\t\"completed\": 8769076271, \n\t\t\"error\": 6320795808\n\t}, \n\t{\n\t\t\"id\": \"c15698e9-6844-41fa-ad13-a3aae8a03436\", \n\t\t\"tenantId\": \"1befbd9b-1e74-465a-9d67-3a525c5904a1\", \n\t\t\"systemId\": \"651e2345-5fb2-4f04-a838-437cf90b290a\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 08:59:47\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 20:11:53\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 07:58:40\", \n\t\t\"cancelled\": 3617525253, \n\t\t\"completed\": 2996800749, \n\t\t\"error\": 7831911003\n\t}, \n\t{\n\t\t\"id\": \"135f68cc-7316-44a5-8fcc-1d0ae1215565\", \n\t\t\"tenantId\": \"3346b167-1afc-48ef-b6a7-bab6a8d0cecc\", \n\t\t\"systemId\": \"14da99d7-3a26-4f9a-91bb-21af9fe24ce0\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 18:26:26\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 23:08:52\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 15:46:19\", \n\t\t\"cancelled\": 1076130931, \n\t\t\"completed\": 6793813009, \n\t\t\"error\": 7920580079\n\t}, \n\t{\n\t\t\"id\": \"f18e11a3-5400-4059-9095-67a831061d8c\", \n\t\t\"tenantId\": \"5210a06b-52a5-4162-a2ec-2720acffd6d3\", \n\t\t\"systemId\": \"dbbca571-6e11-413f-8f94-3a92adc922b6\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 18:21:58\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 06:15:06\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 19:07:18\", \n\t\t\"cancelled\": 2828873954, \n\t\t\"completed\": 8529589324, \n\t\t\"error\": 2001097479\n\t}, \n\t{\n\t\t\"id\": \"ccd7a6bd-9d63-40b6-8d2f-3708e62e63e3\", \n\t\t\"tenantId\": \"61e96ebc-b62c-4a23-b5a0-14e8eec60087\", \n\t\t\"systemId\": \"eafc7b39-d1a9-4bea-a8f4-a33d7a2fb8b0\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 21:07:20\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 01:55:51\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 00:58:30\", \n\t\t\"cancelled\": 1552645964, \n\t\t\"completed\": 3499874164, \n\t\t\"error\": 3244291640\n\t}, \n\t{\n\t\t\"id\": \"f5838fcc-1300-45ca-86c5-a4d29690404f\", \n\t\t\"tenantId\": \"84d9bad6-7624-4a03-a172-66ab05f59245\", \n\t\t\"systemId\": \"8cd33657-280c-496e-b9d2-9a1c73714cd1\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 13:15:19\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 05:17:34\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 02:41:14\", \n\t\t\"cancelled\": 3017584316, \n\t\t\"completed\": 1671238261, \n\t\t\"error\": 3357903739\n\t}, \n\t{\n\t\t\"id\": \"4d8537b6-fc28-4ad2-8b58-4d91b7b7104d\", \n\t\t\"tenantId\": \"fd1df8a3-ac45-4cac-a9d8-95d567575627\", \n\t\t\"systemId\": \"57ad856c-40c9-48e4-ad06-f20ec386573c\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 01:20:07\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 15:32:12\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 13:15:54\", \n\t\t\"cancelled\": 6695218226, \n\t\t\"completed\": 6802904874, \n\t\t\"error\": 1002045957\n\t}, \n\t{\n\t\t\"id\": \"b8dafab8-0bb2-4ea0-8b88-ccc0b14442f6\", \n\t\t\"tenantId\": \"5ef48b28-5e43-404b-bbbb-72607d26bc45\", \n\t\t\"systemId\": \"d900dbd7-c683-437c-8526-a36a5997c234\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 15:51:09\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 14:59:16\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 13:54:41\", \n\t\t\"cancelled\": 6623415792, \n\t\t\"completed\": 1925819055, \n\t\t\"error\": 8856926091\n\t}, \n\t{\n\t\t\"id\": \"01feeefe-894f-4d4a-b66c-dd3bfaf7f4e3\", \n\t\t\"tenantId\": \"0db60faa-5ebe-4285-813e-37d186d84f53\", \n\t\t\"systemId\": \"6323cb7e-d0bc-4be8-8c0a-9f4bfd70b126\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 19:05:55\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 03:55:48\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 05:43:18\", \n\t\t\"cancelled\": 8707097431, \n\t\t\"completed\": 1948764184, \n\t\t\"error\": 2425818370\n\t}, \n\t{\n\t\t\"id\": \"20ee1997-01e8-47b5-a332-4101c2aa38fa\", \n\t\t\"tenantId\": \"76be5f2d-5db0-4bd3-aad1-36bb27ab9edf\", \n\t\t\"systemId\": \"40635d1b-5e5a-4f3e-813b-c91913daec6a\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 16:01:28\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 13:29:00\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 18:54:47\", \n\t\t\"cancelled\": 9266492492, \n\t\t\"completed\": 5366005579, \n\t\t\"error\": 7189275474\n\t}, \n\t{\n\t\t\"id\": \"64743b85-3e70-4246-b4ea-d309edab3fd7\", \n\t\t\"tenantId\": \"9195805a-0cac-47c9-ba8d-920f5415a960\", \n\t\t\"systemId\": \"b94723bf-a222-41bf-8a67-8e4355c4ef6d\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 18:24:44\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 12:41:41\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 02:50:40\", \n\t\t\"cancelled\": 4888646852, \n\t\t\"completed\": 3033465677, \n\t\t\"error\": 3759226493\n\t}, \n\t{\n\t\t\"id\": \"e6fab0f2-d855-42da-9e47-c76f6268528b\", \n\t\t\"tenantId\": \"28e7c1d7-68cc-42e8-9236-6b4ed6dee760\", \n\t\t\"systemId\": \"cd70c579-9afe-4635-bc64-de1b725a82e9\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 10:34:48\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 04:29:03\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 01:22:10\", \n\t\t\"cancelled\": 8489740855, \n\t\t\"completed\": 2958261214, \n\t\t\"error\": 5384607032\n\t}, \n\t{\n\t\t\"id\": \"3d466895-c31c-4f8e-b4a6-5cc9574eaaaf\", \n\t\t\"tenantId\": \"efca1816-37b3-4228-b916-9578d56d17f1\", \n\t\t\"systemId\": \"967bc532-d373-4234-98b3-cdda3580cd25\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 18:04:50\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 06:46:36\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 17:08:09\", \n\t\t\"cancelled\": 1498127019, \n\t\t\"completed\": 6609463244, \n\t\t\"error\": 8183246247\n\t}, \n\t{\n\t\t\"id\": \"5b4fb4a3-9f4c-4a3f-8846-45a7dbf628a5\", \n\t\t\"tenantId\": \"48c2fdd8-dc37-445e-ac22-db39f678934a\", \n\t\t\"systemId\": \"b74a6426-96c9-4b67-8394-5322feb97a42\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 03:16:14\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 19:12:48\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 11:21:42\", \n\t\t\"cancelled\": 1162185198, \n\t\t\"completed\": 2386194459, \n\t\t\"error\": 6563837826\n\t}, \n\t{\n\t\t\"id\": \"8aa29378-253a-4d01-a7f3-0a56012e061c\", \n\t\t\"tenantId\": \"14b50122-7cc4-43d4-9b9c-b7d1966ca8c7\", \n\t\t\"systemId\": \"319b0718-2448-4016-b77b-df0838ac6373\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 16:19:53\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 13:42:32\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 06:54:20\", \n\t\t\"cancelled\": 4129392202, \n\t\t\"completed\": 5122887372, \n\t\t\"error\": 6684932928\n\t}, \n\t{\n\t\t\"id\": \"98b4d715-b71d-479e-b184-8b6de4f8f440\", \n\t\t\"tenantId\": \"77288883-fe41-4ff8-b044-7a00b9e1d135\", \n\t\t\"systemId\": \"92a3756c-fc03-41e1-a9db-41bacb7f64ca\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 21:40:20\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 17:54:52\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 23:42:24\", \n\t\t\"cancelled\": 9081829082, \n\t\t\"completed\": 5233402251, \n\t\t\"error\": 1960134704\n\t}, \n\t{\n\t\t\"id\": \"c3b8de23-8366-426d-8eb5-8b71637a9e96\", \n\t\t\"tenantId\": \"122d87be-bdd9-4a94-8f2b-fa447e0c0592\", \n\t\t\"systemId\": \"d8a5c3fc-91dc-47d5-918c-1a126e76294e\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 12:17:43\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 17:09:19\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 06:32:56\", \n\t\t\"cancelled\": 6912226197, \n\t\t\"completed\": 2999666066, \n\t\t\"error\": 2665933813\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/jobs-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"jobs-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/jobs-overview/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/jobs-overview/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+                        "jobs-overview",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/jobs-overview",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"a89cd7f7-6d71-4275-81bf-b7372ac67357\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/jobs-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"jobs-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/job-overview",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"a89cd7f7-6d71-4275-81bf-b7372ac67357\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/job-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"job-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/job-overview/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/job-overview/a89cd7f7-6d71-4275-81bf-b7372ac67357",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"job-overview",
+						"a89cd7f7-6d71-4275-81bf-b7372ac67357"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/job-overview",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"a89cd7f7-6d71-4275-81bf-b7372ac67357\", \n\t\"tenantId\": \"b6372430-2806-4225-9c30-275012460f21\", \n\t\"systemId\": \"476318f0-9577-4fa9-bfd7-9f5133c6dc8d\", \n\t\"executionType\": \"SUMMARY\", \n\t\"executionExecutedAt\": \"2020-06-30 03:00:01\", \n\t\"executionMonitoringStartAt\": \"2020-06-30 06:21:22\", \n\t\"executionMonitoringEndAt\": \"2020-06-30 13:06:34\", \n\t\"cancelled\": 8107405130, \n\t\"completed\": 5689044461, \n\t\"error\": 1535493014\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/job-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"job-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/job-overview/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/job-overview/a89cd7f7-6d71-4275-81bf-b7372ac67357",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"job-overview",
+						"a89cd7f7-6d71-4275-81bf-b7372ac67357"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - bplus-it-sappi/jobs-overview",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/jobs-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"jobs-overview"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "8e4ddf40-3568-40f7-b8e8-d719deb71d56",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

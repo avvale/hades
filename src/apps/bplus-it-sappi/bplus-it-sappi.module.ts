@@ -5,7 +5,7 @@ import { BplusItSappiModels, BplusItSappiHandlers, BplusItSappiServices, BplusIt
 import { BplusItSappiSystemControllers, BplusItSappiSystemResolvers } from './system';
 import { BplusItSappiExecutionControllers, BplusItSappiExecutionResolvers } from './execution';
 import { BplusItSappiDataLakeControllers, BplusItSappiDataLakeResolvers } from './data-lake';
-import { BplusItSappiJobControllers, BplusItSappiJobResolvers } from './job';
+import { BplusItSappiJobOverviewControllers, BplusItSappiJobOverviewResolvers } from './job-overview';
 
 @Module({
     imports: [
@@ -16,7 +16,7 @@ import { BplusItSappiJobControllers, BplusItSappiJobResolvers } from './job';
         ...BplusItSappiSystemControllers,
         ...BplusItSappiExecutionControllers,
         ...BplusItSappiDataLakeControllers,
-        ...BplusItSappiJobControllers
+        ...BplusItSappiJobOverviewControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
@@ -26,7 +26,7 @@ import { BplusItSappiJobControllers, BplusItSappiJobResolvers } from './job';
         ...BplusItSappiSystemResolvers,
         ...BplusItSappiExecutionResolvers,
         ...BplusItSappiDataLakeResolvers,
-        ...BplusItSappiJobResolvers
+        ...BplusItSappiJobOverviewResolvers
     ]
 })
 export class BplusItSappiModule {}

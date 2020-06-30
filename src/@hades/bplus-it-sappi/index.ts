@@ -1,25 +1,25 @@
 import { BplusItSappiSystemHandlers, BplusItSappiSystemServices, BplusItSappiSystemModel, ISystemRepository, SequelizeSystemRepository, SystemSagas } from './system';
 import { BplusItSappiExecutionHandlers, BplusItSappiExecutionServices, BplusItSappiExecutionModel, IExecutionRepository, SequelizeExecutionRepository, ExecutionSagas } from './execution';
 import { BplusItSappiDataLakeHandlers, BplusItSappiDataLakeServices, BplusItSappiDataLakeModel, IDataLakeRepository, SequelizeDataLakeRepository, DataLakeSagas } from './data-lake';
-import { BplusItSappiJobHandlers, BplusItSappiJobServices, BplusItSappiJobModel, IJobRepository, SequelizeJobRepository, JobSagas } from './job';
+import { BplusItSappiJobOverviewHandlers, BplusItSappiJobOverviewServices, BplusItSappiJobOverviewModel, IJobOverviewRepository, SequelizeJobOverviewRepository, JobOverviewSagas } from './job-overview';
 
 export const BplusItSappiHandlers = [
     ...BplusItSappiSystemHandlers,
     ...BplusItSappiExecutionHandlers,
     ...BplusItSappiDataLakeHandlers,
-    ...BplusItSappiJobHandlers
+    ...BplusItSappiJobOverviewHandlers
 ];
 export const BplusItSappiServices = [
     ...BplusItSappiSystemServices,
     ...BplusItSappiExecutionServices,
     ...BplusItSappiDataLakeServices,
-    ...BplusItSappiJobServices
+    ...BplusItSappiJobOverviewServices
 ];
 export const BplusItSappiModels = [
     BplusItSappiSystemModel,
     BplusItSappiExecutionModel,
     BplusItSappiDataLakeModel,
-    BplusItSappiJobModel
+    BplusItSappiJobOverviewModel
 ];
 export const BplusItSappiRepositories = [
     {
@@ -35,13 +35,13 @@ export const BplusItSappiRepositories = [
         useClass: SequelizeDataLakeRepository
     },
     {
-        provide: IJobRepository,
-        useClass: SequelizeJobRepository
+        provide: IJobOverviewRepository,
+        useClass: SequelizeJobOverviewRepository
     }
 ];
 export const BplusItSappiSagas = [
     SystemSagas,
     ExecutionSagas,
     DataLakeSagas,
-    JobSagas
+    JobOverviewSagas
 ];
