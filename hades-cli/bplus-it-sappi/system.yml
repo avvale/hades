@@ -1,3 +1,4 @@
+version: '1.0.0',
 moduleName: bplus_it_sappi
 sectionName: system
 sectionNames: systems
