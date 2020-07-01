@@ -21,6 +21,11 @@ export enum BplusItSappiJobOverviewExecutionType {
     DETAIL = "DETAIL"
 }
 
+export enum BplusItSappiMessageOverviewExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
 export enum Command {
     COUNT = "COUNT",
     LIMIT = "LIMIT",
@@ -209,6 +214,48 @@ export interface BplusItSappiUpdateJobOverviewInput {
     error?: GraphQLInt;
 }
 
+export interface BplusItSappiCreateMessageOverviewInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiMessageOverviewExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    numberMax?: GraphQLInt;
+    numberDays?: GraphQLInt;
+    success?: GraphQLInt;
+    cancelled?: GraphQLInt;
+    delivering?: GraphQLInt;
+    error?: GraphQLInt;
+    holding?: GraphQLInt;
+    toBeDelivered?: GraphQLInt;
+    waiting?: GraphQLInt;
+}
+
+export interface BplusItSappiUpdateMessageOverviewInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    executionId?: string;
+    executionType?: BplusItSappiMessageOverviewExecutionType;
+    executionExecutedAt?: GraphQLTimestamp;
+    executionMonitoringStartAt?: GraphQLTimestamp;
+    executionMonitoringEndAt?: GraphQLTimestamp;
+    numberMax?: GraphQLInt;
+    numberDays?: GraphQLInt;
+    success?: GraphQLInt;
+    cancelled?: GraphQLInt;
+    delivering?: GraphQLInt;
+    error?: GraphQLInt;
+    holding?: GraphQLInt;
+    toBeDelivered?: GraphQLInt;
+    waiting?: GraphQLInt;
+}
+
 export interface BplusItSappiCreateSystemInput {
     id: string;
     tenantId: string;
@@ -285,6 +332,10 @@ export interface IQuery {
     bplusItSappiFindJobOverviewById(id?: string): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
     bplusItSappiGetJobsOverview(query?: QueryStatementInput[]): BplusItSappiJobOverview[] | Promise<BplusItSappiJobOverview[]>;
     bplusItSappiPaginateJobsOverview(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindMessageOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
+    bplusItSappiFindMessageOverviewById(id?: string): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
+    bplusItSappiGetMessagesOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview[] | Promise<BplusItSappiMessageOverview[]>;
+    bplusItSappiPaginateMessagesOverview(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindSystem(query?: QueryStatementInput[]): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiFindSystemById(id?: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiGetSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
@@ -332,6 +383,11 @@ export interface IMutation {
     bplusItSappiUpdateJobOverview(payload: BplusItSappiUpdateJobOverviewInput): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
     bplusItSappiDeleteJobOverviewById(id: string): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
     bplusItSappiDeleteJobsOverview(query?: QueryStatementInput[]): BplusItSappiJobOverview[] | Promise<BplusItSappiJobOverview[]>;
+    bplusItSappiCreateMessageOverview(payload: BplusItSappiCreateMessageOverviewInput): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
+    bplusItSappiInsertMessagesOverview(payload: BplusItSappiCreateMessageOverviewInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateMessageOverview(payload: BplusItSappiUpdateMessageOverviewInput): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
+    bplusItSappiDeleteMessageOverviewById(id: string): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
+    bplusItSappiDeleteMessagesOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview[] | Promise<BplusItSappiMessageOverview[]>;
     bplusItSappiCreateSystem(payload: BplusItSappiCreateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiInsertSystems(payload: BplusItSappiCreateSystemInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
@@ -426,6 +482,30 @@ export interface BplusItSappiJobOverview {
     cancelled?: GraphQLInt;
     completed?: GraphQLInt;
     error?: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiMessageOverview {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiMessageOverviewExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    numberMax?: GraphQLInt;
+    numberDays?: GraphQLInt;
+    success?: GraphQLInt;
+    cancelled?: GraphQLInt;
+    delivering?: GraphQLInt;
+    error?: GraphQLInt;
+    holding?: GraphQLInt;
+    toBeDelivered?: GraphQLInt;
+    waiting?: GraphQLInt;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

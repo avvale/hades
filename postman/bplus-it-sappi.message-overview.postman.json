@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "ec76e7eb-b4b9-49c1-96c9-3b82b809a100",
+		"name"          : "@hades - bplus-it-sappi/message-overview",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - bplusItSappiCreateMessageOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiCreateMessageOverviewInput!)\n{\n\tbplusItSappiCreateMessageOverview (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tnumberMax\n\t\tnumberDays\n\t\tsuccess\n\t\tcancelled\n\t\tdelivering\n\t\terror\n\t\tholding\n\t\ttoBeDelivered\n\t\twaiting\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8\", \n\t\t\"tenantId\": \"297b040c-aad4-48f4-972b-d3914796cea7\", \n\t\t\"systemId\": \"1326b2ab-de69-4d49-9bb5-728824aaf232\", \n\t\t\"systemName\": \"ds2r3oqinfthsy6d92x1\", \n\t\t\"executionId\": \"34488ceb-3d52-483b-b70f-e68595ea2f6a\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 12:59:57\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 09:24:10\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 01:45:08\", \n\t\t\"numberMax\": 4693988874, \n\t\t\"numberDays\": 8152392562, \n\t\t\"success\": 6096869634, \n\t\t\"cancelled\": 6451264804, \n\t\t\"delivering\": 3676551434, \n\t\t\"error\": 7904356923, \n\t\t\"holding\": 5796748806, \n\t\t\"toBeDelivered\": 5993115192, \n\t\t\"waiting\": 6475315331\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiInsertMessagesOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[BplusItSappiCreateMessageOverviewInput]!)\n{\n\tbplusItSappiInsertMessagesOverview (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"7151eab7-3582-4645-8d2d-25f7cece8222\", \n\t\t\t\"tenantId\": \"c19cc2cf-c5d0-4212-868f-526489cbf148\", \n\t\t\t\"systemId\": \"860530ce-d600-4e4c-9146-e9d769007a0f\", \n\t\t\t\"systemName\": \"8g0cbkhzdfkrn5oi3y8n\", \n\t\t\t\"executionId\": \"90971245-9bcd-448a-82c8-bf6b98a42a1c\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 16:08:25\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 06:12:24\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 03:40:05\", \n\t\t\t\"numberMax\": 6233250642, \n\t\t\t\"numberDays\": 3065446340, \n\t\t\t\"success\": 5779244925, \n\t\t\t\"cancelled\": 4275780725, \n\t\t\t\"delivering\": 6787682879, \n\t\t\t\"error\": 2614609525, \n\t\t\t\"holding\": 6476949992, \n\t\t\t\"toBeDelivered\": 9805377494, \n\t\t\t\"waiting\": 7665700966\n\t\t},\n\t\t{\n\t\t\t\"id\": \"db9ef1ca-6da0-40fd-8b19-a1a987bd3262\", \n\t\t\t\"tenantId\": \"d47b610c-8d8e-45a6-97a2-d412625feea6\", \n\t\t\t\"systemId\": \"f513344a-b3c0-4843-8bc2-9f5ba2aa9dd9\", \n\t\t\t\"systemName\": \"e7iyred6l0rvip07fcpl\", \n\t\t\t\"executionId\": \"c6a28793-9845-4212-8a80-ed3c6332937b\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 03:09:04\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 09:56:33\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 10:59:53\", \n\t\t\t\"numberMax\": 6890643149, \n\t\t\t\"numberDays\": 6458172212, \n\t\t\t\"success\": 9772186061, \n\t\t\t\"cancelled\": 8649881627, \n\t\t\t\"delivering\": 6358687461, \n\t\t\t\"error\": 3848953984, \n\t\t\t\"holding\": 5384305331, \n\t\t\t\"toBeDelivered\": 5044930822, \n\t\t\t\"waiting\": 1597342063\n\t\t},\n\t\t{\n\t\t\t\"id\": \"39145fad-12c7-453e-925a-64c36a11e5d7\", \n\t\t\t\"tenantId\": \"961590c5-e46b-4b79-b9a4-ab7bf28f6e63\", \n\t\t\t\"systemId\": \"92af3b7d-d44b-42ba-976e-a264e2636281\", \n\t\t\t\"systemName\": \"ivfml2lzo8ldqv9n5blu\", \n\t\t\t\"executionId\": \"c8ac15a8-f1f3-4c39-a3b5-4ea0f2180a9c\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 22:36:24\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 20:47:32\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 07:16:25\", \n\t\t\t\"numberMax\": 8146118221, \n\t\t\t\"numberDays\": 4146260664, \n\t\t\t\"success\": 6378024382, \n\t\t\t\"cancelled\": 6908082127, \n\t\t\t\"delivering\": 9730180426, \n\t\t\t\"error\": 4716199616, \n\t\t\t\"holding\": 5880415778, \n\t\t\t\"toBeDelivered\": 1676175296, \n\t\t\t\"waiting\": 1571091086\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8f6a25db-774b-42dc-b31d-331028c5f64b\", \n\t\t\t\"tenantId\": \"6bd75b6d-0724-4351-bb6c-ed8ae7213ea7\", \n\t\t\t\"systemId\": \"dad186b8-8fa6-4aa4-b5a1-d485893598ad\", \n\t\t\t\"systemName\": \"jtqkibtiwu3lhpx4q3e7\", \n\t\t\t\"executionId\": \"f9caf97d-c021-4d4f-9f2b-bd64efeb2148\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 23:27:10\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 16:02:05\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 13:39:25\", \n\t\t\t\"numberMax\": 3928541905, \n\t\t\t\"numberDays\": 7141682581, \n\t\t\t\"success\": 3292315693, \n\t\t\t\"cancelled\": 5126839398, \n\t\t\t\"delivering\": 6049239011, \n\t\t\t\"error\": 8237519810, \n\t\t\t\"holding\": 4724364616, \n\t\t\t\"toBeDelivered\": 9202045839, \n\t\t\t\"waiting\": 4671774548\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2e46d066-7852-4633-81e1-bd347bb8bbbc\", \n\t\t\t\"tenantId\": \"5f0bca74-dfbe-4e17-aa8c-97b30299a982\", \n\t\t\t\"systemId\": \"f6ee056b-b74b-4b7e-b2d4-0c274c412b6e\", \n\t\t\t\"systemName\": \"qon5wqai4kfrbp3p29o5\", \n\t\t\t\"executionId\": \"a50ab8cd-c222-4c8e-9a94-eee8f915f12f\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 15:13:25\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 11:52:13\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 15:46:27\", \n\t\t\t\"numberMax\": 6348909823, \n\t\t\t\"numberDays\": 6746604480, \n\t\t\t\"success\": 7447128872, \n\t\t\t\"cancelled\": 2196067870, \n\t\t\t\"delivering\": 2030163833, \n\t\t\t\"error\": 5464125464, \n\t\t\t\"holding\": 4544104698, \n\t\t\t\"toBeDelivered\": 7047540412, \n\t\t\t\"waiting\": 1197431768\n\t\t},\n\t\t{\n\t\t\t\"id\": \"66bb9264-da26-49f1-8e41-df7d805fbf63\", \n\t\t\t\"tenantId\": \"e54bfc07-825d-4870-bdf4-cd9c56336ecc\", \n\t\t\t\"systemId\": \"71b4aa43-b152-41ba-ad7f-33a01ef8a978\", \n\t\t\t\"systemName\": \"8e38jp061cl42ejtvjux\", \n\t\t\t\"executionId\": \"b018839f-98a9-44ad-a230-d67407e6e14f\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 06:25:57\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 11:44:38\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 03:22:16\", \n\t\t\t\"numberMax\": 5420776192, \n\t\t\t\"numberDays\": 1596857400, \n\t\t\t\"success\": 9524173296, \n\t\t\t\"cancelled\": 5445486279, \n\t\t\t\"delivering\": 6593783784, \n\t\t\t\"error\": 9239420174, \n\t\t\t\"holding\": 1267282919, \n\t\t\t\"toBeDelivered\": 8307529639, \n\t\t\t\"waiting\": 3886968284\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2b4190e5-15d4-4b67-8d1c-b9e9c8cc89d3\", \n\t\t\t\"tenantId\": \"28a1db6d-9610-4cfa-9d8c-b46fb58bb97c\", \n\t\t\t\"systemId\": \"3624937a-6a88-4ce2-a3a4-4ee5239e2792\", \n\t\t\t\"systemName\": \"idv99eu5u8tjr8784uci\", \n\t\t\t\"executionId\": \"4de19e31-30b0-447b-a7a0-3371fd653b17\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 07:31:08\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 06:08:39\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 04:26:02\", \n\t\t\t\"numberMax\": 6707869355, \n\t\t\t\"numberDays\": 3007149093, \n\t\t\t\"success\": 5406556826, \n\t\t\t\"cancelled\": 9344612249, \n\t\t\t\"delivering\": 5308117938, \n\t\t\t\"error\": 4970310805, \n\t\t\t\"holding\": 8733312670, \n\t\t\t\"toBeDelivered\": 3437135199, \n\t\t\t\"waiting\": 3307492171\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e5eb07b4-d0a4-407d-a396-2f5d2cf58c32\", \n\t\t\t\"tenantId\": \"5c8d72f7-47ef-4876-9c63-2c0198828cfe\", \n\t\t\t\"systemId\": \"2881e2d4-4cda-4512-b6f8-86891364abd1\", \n\t\t\t\"systemName\": \"ywwfpxhgmqs1gghliq3z\", \n\t\t\t\"executionId\": \"1ce6de14-f012-4b9f-97ec-12b085e66774\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 04:24:23\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 08:09:25\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 11:33:37\", \n\t\t\t\"numberMax\": 8983018710, \n\t\t\t\"numberDays\": 4243620675, \n\t\t\t\"success\": 2005116132, \n\t\t\t\"cancelled\": 6892249776, \n\t\t\t\"delivering\": 6749306545, \n\t\t\t\"error\": 4568778164, \n\t\t\t\"holding\": 6861886094, \n\t\t\t\"toBeDelivered\": 4438515916, \n\t\t\t\"waiting\": 2219672755\n\t\t},\n\t\t{\n\t\t\t\"id\": \"131d5885-e431-41d8-8246-d68c2caaba8e\", \n\t\t\t\"tenantId\": \"533775f6-b298-4480-a445-cbd4c71540f7\", \n\t\t\t\"systemId\": \"d34008fb-73e9-4ef1-95bf-5e7feccd941e\", \n\t\t\t\"systemName\": \"irgmajf1mby56nje7pnk\", \n\t\t\t\"executionId\": \"2551d54d-639f-48f0-935b-cae518b5fca4\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 05:52:15\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 05:57:55\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 17:56:45\", \n\t\t\t\"numberMax\": 4511434948, \n\t\t\t\"numberDays\": 9689305025, \n\t\t\t\"success\": 4622887695, \n\t\t\t\"cancelled\": 9048469662, \n\t\t\t\"delivering\": 4576570039, \n\t\t\t\"error\": 4629500771, \n\t\t\t\"holding\": 1049088725, \n\t\t\t\"toBeDelivered\": 6328861601, \n\t\t\t\"waiting\": 9538285194\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d0062548-90a0-4046-9dc3-6f6df64b1f60\", \n\t\t\t\"tenantId\": \"f83dc07c-dcb8-4198-8e08-24090cbbca70\", \n\t\t\t\"systemId\": \"9a905b24-103a-46e3-82bb-33fa137dff15\", \n\t\t\t\"systemName\": \"zn2xugi1r7s3l2kmr2dj\", \n\t\t\t\"executionId\": \"3c7c9157-c956-495e-a73d-0dc1bd708636\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 16:28:37\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 18:49:19\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 15:08:49\", \n\t\t\t\"numberMax\": 6136960943, \n\t\t\t\"numberDays\": 5476089348, \n\t\t\t\"success\": 9892608565, \n\t\t\t\"cancelled\": 4010259504, \n\t\t\t\"delivering\": 3290631157, \n\t\t\t\"error\": 2871133911, \n\t\t\t\"holding\": 9389022928, \n\t\t\t\"toBeDelivered\": 5668495648, \n\t\t\t\"waiting\": 1844356715\n\t\t},\n\t\t{\n\t\t\t\"id\": \"26d05516-fae5-4bf7-97a5-50fa9ea75955\", \n\t\t\t\"tenantId\": \"7fc34ac1-6d8c-4217-97e2-1463eb6565ee\", \n\t\t\t\"systemId\": \"980951f9-9c1f-4f74-a028-2fb69ec5b218\", \n\t\t\t\"systemName\": \"rz5o6j2u4a3ym0holmvm\", \n\t\t\t\"executionId\": \"5905f2c6-3145-4e74-a5a2-70b82b54baa1\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 01:27:58\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 22:28:59\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 04:42:08\", \n\t\t\t\"numberMax\": 2250912639, \n\t\t\t\"numberDays\": 8576189949, \n\t\t\t\"success\": 8633484407, \n\t\t\t\"cancelled\": 1927916828, \n\t\t\t\"delivering\": 3688204490, \n\t\t\t\"error\": 9080097418, \n\t\t\t\"holding\": 4571670227, \n\t\t\t\"toBeDelivered\": 8198757630, \n\t\t\t\"waiting\": 2881462136\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a4514d42-30cd-4b33-9fa1-94bf8c03f0cd\", \n\t\t\t\"tenantId\": \"a4c431f3-840d-4f1a-8761-d6c2fa4863e2\", \n\t\t\t\"systemId\": \"9b857dfe-29ae-497d-b70c-a900bbcaf718\", \n\t\t\t\"systemName\": \"qg3q302aihtkfxp2xi00\", \n\t\t\t\"executionId\": \"275412e0-cb4f-4274-86f8-797f4fb308c3\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 11:26:08\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 20:20:53\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 11:42:18\", \n\t\t\t\"numberMax\": 7144870319, \n\t\t\t\"numberDays\": 5356590981, \n\t\t\t\"success\": 9383128033, \n\t\t\t\"cancelled\": 3696539540, \n\t\t\t\"delivering\": 6855795744, \n\t\t\t\"error\": 7407857287, \n\t\t\t\"holding\": 1918157736, \n\t\t\t\"toBeDelivered\": 3881631461, \n\t\t\t\"waiting\": 8951465837\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ab8ec207-a84e-445e-873d-da0c74311527\", \n\t\t\t\"tenantId\": \"a070b5cf-7a87-4962-bc5f-f1c121734620\", \n\t\t\t\"systemId\": \"d0bc9111-ecaf-4761-84b0-0e246b86087c\", \n\t\t\t\"systemName\": \"rrycjefbc7vncib3tah4\", \n\t\t\t\"executionId\": \"62a93bd3-cd4e-42c7-8972-afdbfb21682e\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 14:54:39\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 03:33:15\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 14:24:44\", \n\t\t\t\"numberMax\": 2051929091, \n\t\t\t\"numberDays\": 1646812578, \n\t\t\t\"success\": 3821491576, \n\t\t\t\"cancelled\": 7612107247, \n\t\t\t\"delivering\": 5576189849, \n\t\t\t\"error\": 8519506384, \n\t\t\t\"holding\": 3483415282, \n\t\t\t\"toBeDelivered\": 7326487806, \n\t\t\t\"waiting\": 5183646229\n\t\t},\n\t\t{\n\t\t\t\"id\": \"259dd436-5084-4538-9089-78def8ae3278\", \n\t\t\t\"tenantId\": \"6946f387-6b71-4212-bf23-2e1daa1048d2\", \n\t\t\t\"systemId\": \"ac09728e-8b88-4970-bdfd-3d10f97c197f\", \n\t\t\t\"systemName\": \"egnixmo2lh47bxfw0biw\", \n\t\t\t\"executionId\": \"56f8687b-b550-4032-a831-d9fc38044600\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 15:52:04\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 09:50:30\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 07:23:29\", \n\t\t\t\"numberMax\": 1578308169, \n\t\t\t\"numberDays\": 5956806563, \n\t\t\t\"success\": 1800970412, \n\t\t\t\"cancelled\": 8811943253, \n\t\t\t\"delivering\": 4557011085, \n\t\t\t\"error\": 8662616570, \n\t\t\t\"holding\": 8612111620, \n\t\t\t\"toBeDelivered\": 5368882351, \n\t\t\t\"waiting\": 6263296680\n\t\t},\n\t\t{\n\t\t\t\"id\": \"46137b09-0f2f-4a3d-884d-5dc4b8a1f95d\", \n\t\t\t\"tenantId\": \"2211400e-665e-48c2-996b-2a3b390e8db9\", \n\t\t\t\"systemId\": \"cc2083a8-0972-408e-833f-bea4e6a8b874\", \n\t\t\t\"systemName\": \"rvkm0klgqdydvudsisqr\", \n\t\t\t\"executionId\": \"9e4ba3d1-bb14-4067-98e9-4cbb799377c2\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 02:33:28\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 18:06:53\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 20:16:31\", \n\t\t\t\"numberMax\": 5490200671, \n\t\t\t\"numberDays\": 6734045562, \n\t\t\t\"success\": 7002546043, \n\t\t\t\"cancelled\": 3103921707, \n\t\t\t\"delivering\": 5816351577, \n\t\t\t\"error\": 5061219356, \n\t\t\t\"holding\": 1596043827, \n\t\t\t\"toBeDelivered\": 6844046324, \n\t\t\t\"waiting\": 7297725516\n\t\t},\n\t\t{\n\t\t\t\"id\": \"89d5f53f-c278-4985-b353-358a6b60b504\", \n\t\t\t\"tenantId\": \"7266e172-8ae9-45ad-8c48-5c4170d4e3f3\", \n\t\t\t\"systemId\": \"945917ee-99b2-49f2-bd80-d71aeedc0610\", \n\t\t\t\"systemName\": \"bpj70mf7u0g5ztc0lzlt\", \n\t\t\t\"executionId\": \"bb051ced-207a-48c9-87b8-9c45ad3b5310\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 03:46:41\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 17:48:54\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 01:34:14\", \n\t\t\t\"numberMax\": 1803708046, \n\t\t\t\"numberDays\": 1494190755, \n\t\t\t\"success\": 2038087988, \n\t\t\t\"cancelled\": 9037105133, \n\t\t\t\"delivering\": 1031967399, \n\t\t\t\"error\": 1978813165, \n\t\t\t\"holding\": 3176453419, \n\t\t\t\"toBeDelivered\": 7913208524, \n\t\t\t\"waiting\": 8768596924\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c02819b9-0e25-49cf-bfc8-cc972202c740\", \n\t\t\t\"tenantId\": \"46fd2b7a-b667-4f43-a884-edfa5bf29465\", \n\t\t\t\"systemId\": \"b86321d7-6975-4a7a-9845-3a198a2ec299\", \n\t\t\t\"systemName\": \"01nrju5oocfyx285wfkf\", \n\t\t\t\"executionId\": \"4d480c2a-c899-4c55-92c9-95823b43f5e1\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 21:30:57\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 11:36:56\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 09:46:53\", \n\t\t\t\"numberMax\": 6815343596, \n\t\t\t\"numberDays\": 1637518551, \n\t\t\t\"success\": 6327465965, \n\t\t\t\"cancelled\": 4991017641, \n\t\t\t\"delivering\": 5244824660, \n\t\t\t\"error\": 5564151473, \n\t\t\t\"holding\": 3863398976, \n\t\t\t\"toBeDelivered\": 4762701640, \n\t\t\t\"waiting\": 9584834163\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d63b5450-268b-49d4-aad7-6d2f4fadd7d3\", \n\t\t\t\"tenantId\": \"fcaa49f1-ee2e-4b60-a29b-6b636684adec\", \n\t\t\t\"systemId\": \"efe2386b-9e0d-4a94-b854-814c5b91087f\", \n\t\t\t\"systemName\": \"4laz0vl294t8lueip7k6\", \n\t\t\t\"executionId\": \"eb28e7ea-0bf8-4b21-926b-e98217e1af7c\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 13:47:19\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 11:50:18\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 01:15:19\", \n\t\t\t\"numberMax\": 4300146088, \n\t\t\t\"numberDays\": 8695960803, \n\t\t\t\"success\": 4763946139, \n\t\t\t\"cancelled\": 3491507426, \n\t\t\t\"delivering\": 9053118044, \n\t\t\t\"error\": 3539625097, \n\t\t\t\"holding\": 6723689440, \n\t\t\t\"toBeDelivered\": 9774993367, \n\t\t\t\"waiting\": 3350950750\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4050f1ce-5685-439c-ae7b-6ee3873cf6d2\", \n\t\t\t\"tenantId\": \"c0c29d11-5df9-4e19-9802-2a1a484a7324\", \n\t\t\t\"systemId\": \"b54eb63e-8aac-47fa-a76f-b4301ca6b0d4\", \n\t\t\t\"systemName\": \"3r1dlujyop328q1fxxwq\", \n\t\t\t\"executionId\": \"e7b44c93-c40a-4304-b11e-69ca93e7bbf8\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 21:07:06\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 08:39:23\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 13:26:01\", \n\t\t\t\"numberMax\": 9134904160, \n\t\t\t\"numberDays\": 6065107754, \n\t\t\t\"success\": 2489954768, \n\t\t\t\"cancelled\": 5325080130, \n\t\t\t\"delivering\": 5934358774, \n\t\t\t\"error\": 6156275917, \n\t\t\t\"holding\": 4747379530, \n\t\t\t\"toBeDelivered\": 3252018677, \n\t\t\t\"waiting\": 8090258652\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4655bf59-fce8-47ed-8530-ae07770b6159\", \n\t\t\t\"tenantId\": \"5a27cb49-7c77-466e-83e5-74682cd678e3\", \n\t\t\t\"systemId\": \"15a95c03-d446-417d-99d4-8d37e46af500\", \n\t\t\t\"systemName\": \"iav4aapqyr0re8o0e16n\", \n\t\t\t\"executionId\": \"dec308b7-898d-44ad-afc2-ebfbc324556b\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 00:57:43\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 10:49:39\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 14:32:42\", \n\t\t\t\"numberMax\": 9306459792, \n\t\t\t\"numberDays\": 6069195269, \n\t\t\t\"success\": 5304724255, \n\t\t\t\"cancelled\": 2191645076, \n\t\t\t\"delivering\": 4286466494, \n\t\t\t\"error\": 9997348123, \n\t\t\t\"holding\": 2302622857, \n\t\t\t\"toBeDelivered\": 6331591573, \n\t\t\t\"waiting\": 3960637723\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiPaginateMessagesOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tbplusItSappiPaginateMessagesOverview (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiGetMessagesOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetMessagesOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tnumberMax\n\t\tnumberDays\n\t\tsuccess\n\t\tcancelled\n\t\tdelivering\n\t\terror\n\t\tholding\n\t\ttoBeDelivered\n\t\twaiting\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindMessageOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindMessageOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tnumberMax\n\t\tnumberDays\n\t\tsuccess\n\t\tcancelled\n\t\tdelivering\n\t\terror\n\t\tholding\n\t\ttoBeDelivered\n\t\twaiting\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindMessageOverviewById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tbplusItSappiFindMessageOverviewById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tnumberMax\n\t\tnumberDays\n\t\tsuccess\n\t\tcancelled\n\t\tdelivering\n\t\terror\n\t\tholding\n\t\ttoBeDelivered\n\t\twaiting\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiUpdateMessageOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiUpdateMessageOverviewInput!)\n{\n\tbplusItSappiUpdateMessageOverview (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tnumberMax\n\t\tnumberDays\n\t\tsuccess\n\t\tcancelled\n\t\tdelivering\n\t\terror\n\t\tholding\n\t\ttoBeDelivered\n\t\twaiting\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8\", \n\t\t\"tenantId\": \"297b040c-aad4-48f4-972b-d3914796cea7\", \n\t\t\"systemId\": \"1326b2ab-de69-4d49-9bb5-728824aaf232\", \n\t\t\"systemName\": \"1aeh4l6b4efrs5q1fe9o\", \n\t\t\"executionId\": \"34488ceb-3d52-483b-b70f-e68595ea2f6a\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 07:40:06\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 18:37:08\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 23:38:10\", \n\t\t\"numberMax\": 6156087589, \n\t\t\"numberDays\": 7812624426, \n\t\t\"success\": 8051631023, \n\t\t\"cancelled\": 4491338801, \n\t\t\"delivering\": 3010593109, \n\t\t\"error\": 8729710103, \n\t\t\"holding\": 8701569691, \n\t\t\"toBeDelivered\": 9859033784, \n\t\t\"waiting\": 4946132062\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteMessageOverviewById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteMessageOverviewById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tnumberMax\n\t\tnumberDays\n\t\tsuccess\n\t\tcancelled\n\t\tdelivering\n\t\terror\n\t\tholding\n\t\ttoBeDelivered\n\t\twaiting\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteMessagesOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteMessagesOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tnumberMax\n\t\tnumberDays\n\t\tsuccess\n\t\tcancelled\n\t\tdelivering\n\t\terror\n\t\tholding\n\t\ttoBeDelivered\n\t\twaiting\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/message-overview",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8\", \n\t\"tenantId\": \"297b040c-aad4-48f4-972b-d3914796cea7\", \n\t\"systemId\": \"1326b2ab-de69-4d49-9bb5-728824aaf232\", \n\t\"systemName\": \"bawolb2awul5qq4l8lgw\", \n\t\"executionId\": \"34488ceb-3d52-483b-b70f-e68595ea2f6a\", \n\t\"executionType\": \"SUMMARY\", \n\t\"executionExecutedAt\": \"2020-07-01 03:13:16\", \n\t\"executionMonitoringStartAt\": \"2020-07-01 07:10:27\", \n\t\"executionMonitoringEndAt\": \"2020-06-30 17:59:23\", \n\t\"numberMax\": 7684914853, \n\t\"numberDays\": 3108879503, \n\t\"success\": 7760576753, \n\t\"cancelled\": 6714489652, \n\t\"delivering\": 7810009455, \n\t\"error\": 8796198596, \n\t\"holding\": 9818654655, \n\t\"toBeDelivered\": 5377498815, \n\t\"waiting\": 3974790962\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/message-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"message-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/messages-overview",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"5becc4f8-cf94-4dbd-9588-d7be119ca235\", \n\t\t\"tenantId\": \"692952bc-1a0f-4944-a74d-7580a11024df\", \n\t\t\"systemId\": \"2fc847c9-d25e-48bc-941d-7ca33a9b9602\", \n\t\t\"systemName\": \"xr30j1rwv4lj8k2wn7cr\", \n\t\t\"executionId\": \"bbcc0a99-3090-4eb4-85e7-05d084570c9d\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 04:27:16\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 18:11:19\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 07:11:41\", \n\t\t\"numberMax\": 6893353497, \n\t\t\"numberDays\": 7087195938, \n\t\t\"success\": 5393519594, \n\t\t\"cancelled\": 2557748976, \n\t\t\"delivering\": 5903628297, \n\t\t\"error\": 2820106585, \n\t\t\"holding\": 5314895709, \n\t\t\"toBeDelivered\": 7530052876, \n\t\t\"waiting\": 7068965547\n\t}, \n\t{\n\t\t\"id\": \"ac84d099-90c5-42c9-bbb1-89ab682b525c\", \n\t\t\"tenantId\": \"e40f9d23-bbad-4cbd-b4fd-c40572c18e1a\", \n\t\t\"systemId\": \"2e6bfa9f-d91e-41b3-8013-4a3b84b02798\", \n\t\t\"systemName\": \"ib6aaplu2eifw4ixu4pv\", \n\t\t\"executionId\": \"09d4c14d-7d62-4030-a694-ed3d85294a4b\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 10:01:11\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 02:29:36\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 09:12:50\", \n\t\t\"numberMax\": 2381102957, \n\t\t\"numberDays\": 3674562392, \n\t\t\"success\": 6609802112, \n\t\t\"cancelled\": 9856122116, \n\t\t\"delivering\": 1017406892, \n\t\t\"error\": 2195545175, \n\t\t\"holding\": 4325240440, \n\t\t\"toBeDelivered\": 9675804357, \n\t\t\"waiting\": 8507973748\n\t}, \n\t{\n\t\t\"id\": \"e36865db-53fe-471b-87a5-02c45fef02c3\", \n\t\t\"tenantId\": \"95af179f-7a15-4ef1-a96d-96a5804c2cd8\", \n\t\t\"systemId\": \"76416a88-9f16-43f5-a58b-e6e64b2c83be\", \n\t\t\"systemName\": \"7go04iixllzvifq8b0ug\", \n\t\t\"executionId\": \"b5b856fa-1757-4277-a5a8-1cb10723bb8d\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 02:17:30\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 19:16:37\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 21:01:44\", \n\t\t\"numberMax\": 3263272580, \n\t\t\"numberDays\": 7212522275, \n\t\t\"success\": 3893926357, \n\t\t\"cancelled\": 6064097171, \n\t\t\"delivering\": 8481825206, \n\t\t\"error\": 7745898893, \n\t\t\"holding\": 9948122759, \n\t\t\"toBeDelivered\": 7275528502, \n\t\t\"waiting\": 1921296310\n\t}, \n\t{\n\t\t\"id\": \"b3f46517-39a2-4fd7-9564-daaa09425785\", \n\t\t\"tenantId\": \"688bfb80-be61-4952-b161-d7127ee342ac\", \n\t\t\"systemId\": \"eb716b9b-46db-4943-85e9-b31589391172\", \n\t\t\"systemName\": \"43g6cfq3dfo23y5bqjdk\", \n\t\t\"executionId\": \"3d71ebc1-b1b4-4e9f-b960-e747c6b3d816\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 10:15:11\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 03:29:06\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 09:43:10\", \n\t\t\"numberMax\": 5027407065, \n\t\t\"numberDays\": 2603965446, \n\t\t\"success\": 6194124151, \n\t\t\"cancelled\": 6133154447, \n\t\t\"delivering\": 9042806894, \n\t\t\"error\": 6877081929, \n\t\t\"holding\": 9285770429, \n\t\t\"toBeDelivered\": 9256843995, \n\t\t\"waiting\": 7042581542\n\t}, \n\t{\n\t\t\"id\": \"c310710d-f7d8-4cf4-9225-c04d5e1734e9\", \n\t\t\"tenantId\": \"18cc3a3b-9048-4dee-bba5-1ce8ce465b7a\", \n\t\t\"systemId\": \"4eda1725-2b5a-4fbe-9d0f-da9b5a61c44d\", \n\t\t\"systemName\": \"cia25io89lvonhvni6vo\", \n\t\t\"executionId\": \"dee0f194-c9c3-413a-944a-4262b7b0aad9\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 03:52:23\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 10:24:50\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 15:17:51\", \n\t\t\"numberMax\": 4099637077, \n\t\t\"numberDays\": 3966275367, \n\t\t\"success\": 8256176986, \n\t\t\"cancelled\": 8844087658, \n\t\t\"delivering\": 4734856591, \n\t\t\"error\": 9710686552, \n\t\t\"holding\": 2903360053, \n\t\t\"toBeDelivered\": 6044838517, \n\t\t\"waiting\": 3908176724\n\t}, \n\t{\n\t\t\"id\": \"369cd747-9c66-4eac-ada1-47be40c1b7a4\", \n\t\t\"tenantId\": \"4bc1541b-bc50-4b63-a2c1-c984c0d78c60\", \n\t\t\"systemId\": \"7245df39-2195-490f-b2bb-539b3adb71ad\", \n\t\t\"systemName\": \"p1lkpswhdui4ofnd9erc\", \n\t\t\"executionId\": \"cda30e1f-fe09-4dc5-a732-ddb990b3dd26\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 12:55:29\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 12:57:20\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 15:35:07\", \n\t\t\"numberMax\": 4171072216, \n\t\t\"numberDays\": 6831007768, \n\t\t\"success\": 7722602389, \n\t\t\"cancelled\": 8564260453, \n\t\t\"delivering\": 8589031715, \n\t\t\"error\": 6800539971, \n\t\t\"holding\": 7132944776, \n\t\t\"toBeDelivered\": 6452575331, \n\t\t\"waiting\": 7859793152\n\t}, \n\t{\n\t\t\"id\": \"d4a21b03-863c-46c4-abd3-2d0fc26f6a59\", \n\t\t\"tenantId\": \"8a772796-aa2f-49d1-9373-f63555c0bdcd\", \n\t\t\"systemId\": \"bedbc298-b7ab-4a98-a26c-c7fbb7551313\", \n\t\t\"systemName\": \"fzyi233k0ovnliqzrkl1\", \n\t\t\"executionId\": \"8b3a0a2a-6633-4a5d-86e3-154ceb85ef0d\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 08:46:34\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 15:20:35\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 16:13:59\", \n\t\t\"numberMax\": 1323559629, \n\t\t\"numberDays\": 4096215214, \n\t\t\"success\": 9756678503, \n\t\t\"cancelled\": 8513469574, \n\t\t\"delivering\": 3925901319, \n\t\t\"error\": 5976574965, \n\t\t\"holding\": 1830388465, \n\t\t\"toBeDelivered\": 1884079090, \n\t\t\"waiting\": 9241306351\n\t}, \n\t{\n\t\t\"id\": \"b3318c0b-200a-4392-a45b-95e29a2454d4\", \n\t\t\"tenantId\": \"0c47f521-d2b0-4f6a-a251-50c57f7093fc\", \n\t\t\"systemId\": \"4bb1100b-b757-48b4-bea2-ac372c24684a\", \n\t\t\"systemName\": \"pkt83gqzg3jn1a96xdnx\", \n\t\t\"executionId\": \"aeff7295-b686-4ea0-a3a4-cf37b4c09caf\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 01:12:57\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 06:14:57\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 04:53:26\", \n\t\t\"numberMax\": 5847189377, \n\t\t\"numberDays\": 1010188002, \n\t\t\"success\": 4887009051, \n\t\t\"cancelled\": 3580599734, \n\t\t\"delivering\": 7331679608, \n\t\t\"error\": 5508119687, \n\t\t\"holding\": 9690518038, \n\t\t\"toBeDelivered\": 1988710951, \n\t\t\"waiting\": 6356588623\n\t}, \n\t{\n\t\t\"id\": \"d5b6089b-e736-4676-b74f-2b104a849047\", \n\t\t\"tenantId\": \"b069cbbf-2188-40c7-8112-12a7164c1094\", \n\t\t\"systemId\": \"0fc40996-742d-46ca-989b-5f8fbdcea760\", \n\t\t\"systemName\": \"lv1bt3h1bqaujc5bbm8s\", \n\t\t\"executionId\": \"d6610519-98b6-4f47-9bd9-de4a0be39261\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 19:55:31\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 10:21:11\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 08:23:21\", \n\t\t\"numberMax\": 9987284175, \n\t\t\"numberDays\": 4694400680, \n\t\t\"success\": 4056915722, \n\t\t\"cancelled\": 9609741846, \n\t\t\"delivering\": 6897855820, \n\t\t\"error\": 1151955118, \n\t\t\"holding\": 5673781305, \n\t\t\"toBeDelivered\": 3352874812, \n\t\t\"waiting\": 6675956239\n\t}, \n\t{\n\t\t\"id\": \"69417bbe-1331-4981-b367-1784607b55c7\", \n\t\t\"tenantId\": \"42ecad32-d4dd-4ee6-80ff-7bc40bffeb6b\", \n\t\t\"systemId\": \"42d5fcf6-1854-494d-9735-b059727e5af2\", \n\t\t\"systemName\": \"npx1kl9uv7pom3ypmxk0\", \n\t\t\"executionId\": \"c20f6ec7-de1c-42b4-b1a7-ed6cf8bbf5c8\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 00:16:10\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 10:44:51\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 16:52:53\", \n\t\t\"numberMax\": 4631106854, \n\t\t\"numberDays\": 7649921879, \n\t\t\"success\": 4103935962, \n\t\t\"cancelled\": 8726607039, \n\t\t\"delivering\": 8670927159, \n\t\t\"error\": 6126494483, \n\t\t\"holding\": 2575761775, \n\t\t\"toBeDelivered\": 5353922477, \n\t\t\"waiting\": 6201339481\n\t}, \n\t{\n\t\t\"id\": \"0f14f72a-6a1a-4d4a-8051-a123192274fe\", \n\t\t\"tenantId\": \"b4e19da2-5c1d-418e-ac5f-caff3e16d888\", \n\t\t\"systemId\": \"da2d498f-161e-43e3-954b-a927939efda6\", \n\t\t\"systemName\": \"z0fwptcs6k496sa4b4wc\", \n\t\t\"executionId\": \"417ba3b9-c754-4808-8f21-7b0f59386109\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 23:00:48\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 02:45:09\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 11:49:37\", \n\t\t\"numberMax\": 4220090295, \n\t\t\"numberDays\": 8362426355, \n\t\t\"success\": 1723992482, \n\t\t\"cancelled\": 5066167654, \n\t\t\"delivering\": 5843859412, \n\t\t\"error\": 4192376689, \n\t\t\"holding\": 3274824701, \n\t\t\"toBeDelivered\": 3775789244, \n\t\t\"waiting\": 4199893709\n\t}, \n\t{\n\t\t\"id\": \"40267291-80f9-4325-aa3e-da3ea6b91e7f\", \n\t\t\"tenantId\": \"ab4fe803-576d-4d09-b817-eedc1a1cf623\", \n\t\t\"systemId\": \"254808c9-c54b-4b30-9165-fc09b14f7c6c\", \n\t\t\"systemName\": \"4v6qihb6k6hck4v9golq\", \n\t\t\"executionId\": \"cf3d4fb0-bb5f-464d-aa6f-5ac2ef3cc152\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 15:28:22\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 22:34:25\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 19:30:33\", \n\t\t\"numberMax\": 1373094226, \n\t\t\"numberDays\": 6908536120, \n\t\t\"success\": 6719804325, \n\t\t\"cancelled\": 4812993477, \n\t\t\"delivering\": 9701885035, \n\t\t\"error\": 7550612976, \n\t\t\"holding\": 6727045178, \n\t\t\"toBeDelivered\": 9412228452, \n\t\t\"waiting\": 4714344342\n\t}, \n\t{\n\t\t\"id\": \"34412e2e-37dc-4dad-9a69-5ef662583ee7\", \n\t\t\"tenantId\": \"280dc162-e379-4d57-bfa9-4c83e9fde7c6\", \n\t\t\"systemId\": \"5bae7c6f-b743-4e47-a934-a494f55d2799\", \n\t\t\"systemName\": \"45bs152iybukrom3cb0c\", \n\t\t\"executionId\": \"caa2d1f0-bc0f-4760-b864-39c8ee669d58\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 16:40:12\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 19:16:02\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 05:24:06\", \n\t\t\"numberMax\": 4868762692, \n\t\t\"numberDays\": 2060037132, \n\t\t\"success\": 7184480894, \n\t\t\"cancelled\": 5506163628, \n\t\t\"delivering\": 5946267275, \n\t\t\"error\": 3978196529, \n\t\t\"holding\": 5058778015, \n\t\t\"toBeDelivered\": 9753166033, \n\t\t\"waiting\": 8960235910\n\t}, \n\t{\n\t\t\"id\": \"38420cc4-fac8-4075-b64c-fe8e5ebb6623\", \n\t\t\"tenantId\": \"510af8fc-d803-4aff-b43f-ba85113f1dff\", \n\t\t\"systemId\": \"f3e9e563-adf5-43c6-bc58-53d792806f9f\", \n\t\t\"systemName\": \"13naub0rjuj2ebjcqgnz\", \n\t\t\"executionId\": \"7bfd6a39-22b4-48dc-a27e-74e119f86f7a\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 02:43:44\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 00:45:00\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 16:04:46\", \n\t\t\"numberMax\": 4573878411, \n\t\t\"numberDays\": 2821136552, \n\t\t\"success\": 6680678255, \n\t\t\"cancelled\": 1483365858, \n\t\t\"delivering\": 7193799167, \n\t\t\"error\": 2996849779, \n\t\t\"holding\": 7735122688, \n\t\t\"toBeDelivered\": 3039746808, \n\t\t\"waiting\": 7770446238\n\t}, \n\t{\n\t\t\"id\": \"d67fa9f2-f020-46bd-925b-ff9b7c2fb59b\", \n\t\t\"tenantId\": \"44654596-d977-42a9-be8d-48c35457bedd\", \n\t\t\"systemId\": \"0ad0c774-3884-484c-8b05-24f304ea28ca\", \n\t\t\"systemName\": \"mpn2xjpsx8w9i3ktr0dk\", \n\t\t\"executionId\": \"d7b516e8-f6f1-408d-8493-e6c207d622bd\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 00:47:44\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 03:23:40\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 12:52:07\", \n\t\t\"numberMax\": 3330744975, \n\t\t\"numberDays\": 3814173602, \n\t\t\"success\": 9250597096, \n\t\t\"cancelled\": 2890247226, \n\t\t\"delivering\": 1563491082, \n\t\t\"error\": 4034999424, \n\t\t\"holding\": 9888250146, \n\t\t\"toBeDelivered\": 7269915662, \n\t\t\"waiting\": 8123836806\n\t}, \n\t{\n\t\t\"id\": \"5ff52592-8e70-46ca-aace-42622489f4c9\", \n\t\t\"tenantId\": \"2c2032c4-c720-4da9-b2ab-21a3b9eeadd2\", \n\t\t\"systemId\": \"70ad8319-394a-4c54-8b5d-cbabe743b6ea\", \n\t\t\"systemName\": \"fx2iejzcqpzttnj873rx\", \n\t\t\"executionId\": \"f18f0170-1d5f-42d6-8319-33e51f8f29b7\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 05:54:02\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 00:06:10\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 09:05:56\", \n\t\t\"numberMax\": 5638056512, \n\t\t\"numberDays\": 6654822107, \n\t\t\"success\": 5596606096, \n\t\t\"cancelled\": 3492749207, \n\t\t\"delivering\": 5534951064, \n\t\t\"error\": 1049109326, \n\t\t\"holding\": 6710131045, \n\t\t\"toBeDelivered\": 7956137812, \n\t\t\"waiting\": 8575351320\n\t}, \n\t{\n\t\t\"id\": \"d60ae4a0-2fef-42ca-bb5f-ca0af7733ad0\", \n\t\t\"tenantId\": \"78539e4f-8399-4144-bd81-d185a0807751\", \n\t\t\"systemId\": \"92987418-3c28-4d01-bdd9-8e497432b8ce\", \n\t\t\"systemName\": \"wyu8uc7m0t38tvoxuckx\", \n\t\t\"executionId\": \"80f8707b-d857-4b06-ae5c-01c2db402779\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 06:56:48\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 07:06:18\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 20:04:55\", \n\t\t\"numberMax\": 4926747859, \n\t\t\"numberDays\": 2406983921, \n\t\t\"success\": 8581744543, \n\t\t\"cancelled\": 7380621082, \n\t\t\"delivering\": 6439887608, \n\t\t\"error\": 7622927548, \n\t\t\"holding\": 4494622446, \n\t\t\"toBeDelivered\": 7123862998, \n\t\t\"waiting\": 9391318472\n\t}, \n\t{\n\t\t\"id\": \"6cefd785-7958-4de5-9d51-a4c1c186ff9d\", \n\t\t\"tenantId\": \"4d144d63-8c07-49e7-8602-e36938088033\", \n\t\t\"systemId\": \"c8fb12b6-2866-436b-91a6-ea61b83a2e3d\", \n\t\t\"systemName\": \"1mmynbo73mwbhwkl7kk2\", \n\t\t\"executionId\": \"a0b77cb1-cc03-41b2-ad89-9554b5ca84e6\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 14:32:28\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 20:55:54\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 12:53:28\", \n\t\t\"numberMax\": 6149589132, \n\t\t\"numberDays\": 7084779293, \n\t\t\"success\": 6509798668, \n\t\t\"cancelled\": 7760891028, \n\t\t\"delivering\": 7015994687, \n\t\t\"error\": 5961326658, \n\t\t\"holding\": 6620068213, \n\t\t\"toBeDelivered\": 7097188042, \n\t\t\"waiting\": 2584974055\n\t}, \n\t{\n\t\t\"id\": \"45353dea-f90b-49c7-b6ce-41444b553c20\", \n\t\t\"tenantId\": \"3b05f3c8-34ec-4d50-9228-b900670e58a4\", \n\t\t\"systemId\": \"46a9b591-d1c1-4383-a2c9-e533c680958a\", \n\t\t\"systemName\": \"rf0mjfvlnze9bn3p0fdv\", \n\t\t\"executionId\": \"0358f967-62bc-4b7b-b399-dd66861da8f6\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 23:09:03\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 17:00:26\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 09:27:36\", \n\t\t\"numberMax\": 8793691172, \n\t\t\"numberDays\": 9669413074, \n\t\t\"success\": 8463942068, \n\t\t\"cancelled\": 5824271765, \n\t\t\"delivering\": 5454989089, \n\t\t\"error\": 4192153426, \n\t\t\"holding\": 1761585588, \n\t\t\"toBeDelivered\": 1048208661, \n\t\t\"waiting\": 3105620657\n\t}, \n\t{\n\t\t\"id\": \"690ed4dd-6900-4657-9626-6ff7ae0c894e\", \n\t\t\"tenantId\": \"4d104c65-592d-4ad0-a3ac-4f363e3542cc\", \n\t\t\"systemId\": \"7068e128-82af-4484-ab07-be315b66a340\", \n\t\t\"systemName\": \"2coelvhlbcpvkvtp8onc\", \n\t\t\"executionId\": \"e815791a-881f-4001-aef0-9d1fd1a822de\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 14:44:32\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 20:32:44\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 10:57:34\", \n\t\t\"numberMax\": 2922127176, \n\t\t\"numberDays\": 1265994564, \n\t\t\"success\": 6226500204, \n\t\t\"cancelled\": 1782592048, \n\t\t\"delivering\": 6702538494, \n\t\t\"error\": 5538691419, \n\t\t\"holding\": 9237177543, \n\t\t\"toBeDelivered\": 2778002279, \n\t\t\"waiting\": 7661460782\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/messages-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"messages-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/messages-overview/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/messages-overview/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+                        "messages-overview",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/messages-overview",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/messages-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"messages-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/message-overview",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/message-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"message-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/message-overview/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/message-overview/8caa60e1-fbb8-49a0-9302-c41ea4bae9a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"message-overview",
+						"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/message-overview",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8\", \n\t\"tenantId\": \"297b040c-aad4-48f4-972b-d3914796cea7\", \n\t\"systemId\": \"1326b2ab-de69-4d49-9bb5-728824aaf232\", \n\t\"systemName\": \"2fouyt01lwvbxvcyxcqe\", \n\t\"executionId\": \"34488ceb-3d52-483b-b70f-e68595ea2f6a\", \n\t\"executionType\": \"DETAIL\", \n\t\"executionExecutedAt\": \"2020-07-01 01:43:53\", \n\t\"executionMonitoringStartAt\": \"2020-07-01 00:33:09\", \n\t\"executionMonitoringEndAt\": \"2020-07-01 11:59:45\", \n\t\"numberMax\": 9747385110, \n\t\"numberDays\": 4311449141, \n\t\"success\": 3742328155, \n\t\"cancelled\": 6860589958, \n\t\"delivering\": 9198303070, \n\t\"error\": 6240865392, \n\t\"holding\": 6482786116, \n\t\"toBeDelivered\": 8276578224, \n\t\"waiting\": 3539068272\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/message-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"message-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/message-overview/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/message-overview/8caa60e1-fbb8-49a0-9302-c41ea4bae9a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"message-overview",
+						"8caa60e1-fbb8-49a0-9302-c41ea4bae9a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - bplus-it-sappi/messages-overview",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/messages-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"messages-overview"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "fc88473d-2fad-41fa-acf0-209fe5b9773c",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

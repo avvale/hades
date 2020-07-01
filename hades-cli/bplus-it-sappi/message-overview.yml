@@ -1,0 +1,94 @@
+version: 1.0.0
+moduleName: bplus-it-sappi
+sectionName: message-overview
+sectionNames: messages-overview
+entityProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipEntity: AdminTenant
+    relationshipModuleSection: admin/tenant
+  - name: system_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipEntity: BplusItSappiSystem
+    relationshipModuleSection: bplus-it-sappi/system
+  - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: execution_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipEntity: BplusItSappiExecution
+    relationshipModuleSection: bplus-it-sappi/execution
+  - name: execution_type
+    type: enum
+    enumOptions:
+      - SUMMARY
+      - DETAIL
+    nullable: false
+  - name: execution_executed_at
+    type: timestamp
+    nullable: false
+  - name: execution_monitoring_start_at
+    type: timestamp
+    nullable: false
+  - name: execution_monitoring_end_at
+    type: timestamp
+    nullable: false
+  - name: number_max
+    type: int
+    maxLength: 10
+    nullable: true
+  - name: number_days
+    type: int
+    maxLength: 10
+    nullable: true
+  - name: success
+    type: int
+    maxLength: 10
+    nullable: true
+  - name: cancelled
+    type: int
+    maxLength: 10
+    nullable: true
+  - name: delivering
+    type: int
+    maxLength: 10
+    nullable: true
+  - name: error
+    type: int
+    maxLength: 10
+    nullable: true
+  - name: holding
+    type: int
+    maxLength: 10
+    nullable: true
+  - name: to_be_delivered
+    type: int
+    maxLength: 10
+    nullable: true
+  - name: waiting
+    type: int
+    maxLength: 10
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

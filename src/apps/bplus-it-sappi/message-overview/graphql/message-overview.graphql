@@ -1,0 +1,95 @@
+
+enum BplusItSappiMessageOverviewExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+
+type BplusItSappiMessageOverview
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiMessageOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    numberMax: GraphQLInt
+    numberDays: GraphQLInt
+    success: GraphQLInt
+    cancelled: GraphQLInt
+    delivering: GraphQLInt
+    error: GraphQLInt
+    holding: GraphQLInt
+    toBeDelivered: GraphQLInt
+    waiting: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateMessageOverviewInput
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiMessageOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    numberMax: GraphQLInt
+    numberDays: GraphQLInt
+    success: GraphQLInt
+    cancelled: GraphQLInt
+    delivering: GraphQLInt
+    error: GraphQLInt
+    holding: GraphQLInt
+    toBeDelivered: GraphQLInt
+    waiting: GraphQLInt
+    
+}
+
+input BplusItSappiUpdateMessageOverviewInput
+{
+    id: ID!
+    tenantId: ID
+    systemId: ID
+    systemName: GraphQLString
+    executionId: ID
+    executionType: BplusItSappiMessageOverviewExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    numberMax: GraphQLInt
+    numberDays: GraphQLInt
+    success: GraphQLInt
+    cancelled: GraphQLInt
+    delivering: GraphQLInt
+    error: GraphQLInt
+    holding: GraphQLInt
+    toBeDelivered: GraphQLInt
+    waiting: GraphQLInt
+    
+}
+
+type Query 
+{
+    bplusItSappiFindMessageOverview(query:[QueryStatementInput]): BplusItSappiMessageOverview
+    bplusItSappiFindMessageOverviewById(id:ID): BplusItSappiMessageOverview
+    bplusItSappiGetMessagesOverview(query:[QueryStatementInput]): [BplusItSappiMessageOverview]!
+    bplusItSappiPaginateMessagesOverview(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateMessageOverview(payload: BplusItSappiCreateMessageOverviewInput!): BplusItSappiMessageOverview
+    bplusItSappiInsertMessagesOverview(payload: [BplusItSappiCreateMessageOverviewInput]!): Boolean!
+    bplusItSappiUpdateMessageOverview(payload: BplusItSappiUpdateMessageOverviewInput!): BplusItSappiMessageOverview
+    bplusItSappiDeleteMessageOverviewById(id: ID!): BplusItSappiMessageOverview
+    bplusItSappiDeleteMessagesOverview(query:[QueryStatementInput]): [BplusItSappiMessageOverview]!
+}

@@ -1,0 +1,26 @@
+export class InsertMessagesOverviewCommand 
+{
+    constructor(
+        public readonly messagesOverview: {
+            id: string,
+            tenantId: string,
+            systemId: string,
+            systemName: string,
+            executionId: string,
+            executionType: string,
+            executionExecutedAt: string,
+            executionMonitoringStartAt: string,
+            executionMonitoringEndAt: string,
+            numberMax?: number,
+            numberDays?: number,
+            success?: number,
+            cancelled?: number,
+            delivering?: number,
+            error?: number,
+            holding?: number,
+            toBeDelivered?: number,
+            waiting?: number,
+            
+        } []
+    ) {}
+}
