@@ -1,21 +1,25 @@
 import { AdminLangHandlers, AdminLangServices, AdminLangModel, ILangRepository, SequelizeLangRepository, LangSagas } from './lang';
 import { AdminModuleHandlers, AdminModuleServices, AdminModuleModel, IModuleRepository, SequelizeModuleRepository, ModuleSagas } from './module';
 import { AdminTenantHandlers, AdminTenantServices, AdminTenantModel, ITenantRepository, SequelizeTenantRepository, TenantSagas } from './tenant';
+import { AdminPermissionHandlers, AdminPermissionServices, AdminPermissionModel, IPermissionRepository, SequelizePermissionRepository, PermissionSagas } from './permission';
 
 export const AdminHandlers = [
     ...AdminLangHandlers,
     ...AdminModuleHandlers,
-    ...AdminTenantHandlers
+    ...AdminTenantHandlers,
+    ...AdminPermissionHandlers
 ];
 export const AdminServices = [
     ...AdminLangServices,
     ...AdminModuleServices,
-    ...AdminTenantServices
+    ...AdminTenantServices,
+    ...AdminPermissionServices
 ];
 export const AdminModels = [
     AdminLangModel,
     AdminModuleModel,
-    AdminTenantModel
+    AdminTenantModel,
+    AdminPermissionModel
 ];
 export const AdminRepositories = [
     {
@@ -29,10 +33,15 @@ export const AdminRepositories = [
     {
         provide: ITenantRepository,
         useClass: SequelizeTenantRepository
+    },
+    {
+        provide: IPermissionRepository,
+        useClass: SequelizePermissionRepository
     }
 ];
 export const AdminSagas = [
     LangSagas,
     ModuleSagas,
-    TenantSagas
+    TenantSagas,
+    PermissionSagas
 ];

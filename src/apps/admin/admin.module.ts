@@ -5,6 +5,7 @@ import { AdminModels, AdminHandlers, AdminServices, AdminRepositories, AdminSaga
 import { AdminLangControllers, AdminLangResolvers } from './lang';
 import { AdminModuleControllers, AdminModuleResolvers } from './module';
 import { AdminTenantControllers, AdminTenantResolvers } from './tenant';
+import { AdminPermissionControllers, AdminPermissionResolvers } from './permission';
 
 @Module({
     imports: [
@@ -14,7 +15,8 @@ import { AdminTenantControllers, AdminTenantResolvers } from './tenant';
     controllers: [
         ...AdminLangControllers,
         ...AdminModuleControllers,
-        ...AdminTenantControllers
+        ...AdminTenantControllers,
+        ...AdminPermissionControllers
     ],
     providers: [
         ...AdminHandlers,
@@ -23,7 +25,8 @@ import { AdminTenantControllers, AdminTenantResolvers } from './tenant';
         ...AdminSagas,
         ...AdminLangResolvers,
         ...AdminModuleResolvers,
-        ...AdminTenantResolvers
+        ...AdminTenantResolvers,
+        ...AdminPermissionResolvers
     ]
 })
 export class AdminModule {}
