@@ -1,4 +1,5 @@
-packageName: admin
+version: '1.0.0',
+moduleName: admin
 sectionName: lang
 sectionNames: langs
 entityProperties:
