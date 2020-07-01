@@ -1,0 +1,77 @@
+
+enum BplusItSappiJobOverviewExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+
+type BplusItSappiJobOverview
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiJobOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    cancelled: GraphQLInt
+    completed: GraphQLInt
+    error: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateJobOverviewInput
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiJobOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    cancelled: GraphQLInt
+    completed: GraphQLInt
+    error: GraphQLInt
+    
+}
+
+input BplusItSappiUpdateJobOverviewInput
+{
+    id: ID!
+    tenantId: ID
+    systemId: ID
+    systemName: GraphQLString
+    executionId: ID
+    executionType: BplusItSappiJobOverviewExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    cancelled: GraphQLInt
+    completed: GraphQLInt
+    error: GraphQLInt
+    
+}
+
+type Query 
+{
+    bplusItSappiFindJobOverview(query:[QueryStatementInput]): BplusItSappiJobOverview
+    bplusItSappiFindJobOverviewById(id:ID): BplusItSappiJobOverview
+    bplusItSappiGetJobsOverview(query:[QueryStatementInput]): [BplusItSappiJobOverview]!
+    bplusItSappiPaginateJobsOverview(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateJobOverview(payload: BplusItSappiCreateJobOverviewInput!): BplusItSappiJobOverview
+    bplusItSappiInsertJobsOverview(payload: [BplusItSappiCreateJobOverviewInput]!): Boolean!
+    bplusItSappiUpdateJobOverview(payload: BplusItSappiUpdateJobOverviewInput!): BplusItSappiJobOverview
+    bplusItSappiDeleteJobOverviewById(id: ID!): BplusItSappiJobOverview
+    bplusItSappiDeleteJobsOverview(query:[QueryStatementInput]): [BplusItSappiJobOverview]!
+}

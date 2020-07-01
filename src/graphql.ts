@@ -6,6 +6,11 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum BplusItSappiChannelOverviewExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
 export enum BplusItSappiExecutionType {
     SUMMARY = "SUMMARY",
     DETAIL = "DETAIL"
@@ -108,6 +113,42 @@ export interface AdminUpdateTenantInput {
     data?: JSON;
 }
 
+export interface BplusItSappiCreateChannelOverviewInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiChannelOverviewExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    error?: GraphQLInt;
+    inactive?: GraphQLInt;
+    successful?: GraphQLInt;
+    stopped?: GraphQLInt;
+    unknown?: GraphQLInt;
+    unregistered?: GraphQLInt;
+}
+
+export interface BplusItSappiUpdateChannelOverviewInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    executionId?: string;
+    executionType?: BplusItSappiChannelOverviewExecutionType;
+    executionExecutedAt?: GraphQLTimestamp;
+    executionMonitoringStartAt?: GraphQLTimestamp;
+    executionMonitoringEndAt?: GraphQLTimestamp;
+    error?: GraphQLInt;
+    inactive?: GraphQLInt;
+    successful?: GraphQLInt;
+    stopped?: GraphQLInt;
+    unknown?: GraphQLInt;
+    unregistered?: GraphQLInt;
+}
+
 export interface BplusItSappiCreateDataLakeInput {
     id: string;
     data: JSON;
@@ -142,6 +183,8 @@ export interface BplusItSappiCreateJobOverviewInput {
     id: string;
     tenantId: string;
     systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
     executionType: BplusItSappiJobOverviewExecutionType;
     executionExecutedAt: GraphQLTimestamp;
     executionMonitoringStartAt: GraphQLTimestamp;
@@ -155,6 +198,8 @@ export interface BplusItSappiUpdateJobOverviewInput {
     id: string;
     tenantId?: string;
     systemId?: string;
+    systemName?: GraphQLString;
+    executionId?: string;
     executionType?: BplusItSappiJobOverviewExecutionType;
     executionExecutedAt?: GraphQLTimestamp;
     executionMonitoringStartAt?: GraphQLTimestamp;
@@ -224,6 +269,10 @@ export interface IQuery {
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindChannelOverview(query?: QueryStatementInput[]): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
+    bplusItSappiFindChannelOverviewById(id?: string): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
+    bplusItSappiGetChannelsOverview(query?: QueryStatementInput[]): BplusItSappiChannelOverview[] | Promise<BplusItSappiChannelOverview[]>;
+    bplusItSappiPaginateChannelsOverview(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindDataLake(query?: QueryStatementInput[]): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiFindDataLakeById(id?: string): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiGetDataLakes(query?: QueryStatementInput[]): BplusItSappiDataLake[] | Promise<BplusItSappiDataLake[]>;
@@ -263,6 +312,11 @@ export interface IMutation {
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    bplusItSappiCreateChannelOverview(payload: BplusItSappiCreateChannelOverviewInput): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
+    bplusItSappiInsertChannelsOverview(payload: BplusItSappiCreateChannelOverviewInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateChannelOverview(payload: BplusItSappiUpdateChannelOverviewInput): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
+    bplusItSappiDeleteChannelOverviewById(id: string): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
+    bplusItSappiDeleteChannelsOverview(query?: QueryStatementInput[]): BplusItSappiChannelOverview[] | Promise<BplusItSappiChannelOverview[]>;
     bplusItSappiCreateDataLake(payload: BplusItSappiCreateDataLakeInput): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiInsertDataLakes(payload: BplusItSappiCreateDataLakeInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateDataLake(payload: BplusItSappiUpdateDataLakeInput): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
@@ -317,6 +371,27 @@ export interface AdminTenant {
     deletedAt?: GraphQLTimestamp;
 }
 
+export interface BplusItSappiChannelOverview {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiChannelOverviewExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    error?: GraphQLInt;
+    inactive?: GraphQLInt;
+    successful?: GraphQLInt;
+    stopped?: GraphQLInt;
+    unknown?: GraphQLInt;
+    unregistered?: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
 export interface BplusItSappiDataLake {
     id: string;
     data: JSON;
@@ -342,6 +417,8 @@ export interface BplusItSappiJobOverview {
     id: string;
     tenantId: string;
     systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
     executionType: BplusItSappiJobOverviewExecutionType;
     executionExecutedAt: GraphQLTimestamp;
     executionMonitoringStartAt: GraphQLTimestamp;

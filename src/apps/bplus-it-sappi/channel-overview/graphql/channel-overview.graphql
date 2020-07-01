@@ -1,0 +1,86 @@
+
+enum BplusItSappiChannelOverviewExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+
+type BplusItSappiChannelOverview
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiChannelOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    error: GraphQLInt
+    inactive: GraphQLInt
+    successful: GraphQLInt
+    stopped: GraphQLInt
+    unknown: GraphQLInt
+    unregistered: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateChannelOverviewInput
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiChannelOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    error: GraphQLInt
+    inactive: GraphQLInt
+    successful: GraphQLInt
+    stopped: GraphQLInt
+    unknown: GraphQLInt
+    unregistered: GraphQLInt
+    
+}
+
+input BplusItSappiUpdateChannelOverviewInput
+{
+    id: ID!
+    tenantId: ID
+    systemId: ID
+    systemName: GraphQLString
+    executionId: ID
+    executionType: BplusItSappiChannelOverviewExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    error: GraphQLInt
+    inactive: GraphQLInt
+    successful: GraphQLInt
+    stopped: GraphQLInt
+    unknown: GraphQLInt
+    unregistered: GraphQLInt
+    
+}
+
+type Query 
+{
+    bplusItSappiFindChannelOverview(query:[QueryStatementInput]): BplusItSappiChannelOverview
+    bplusItSappiFindChannelOverviewById(id:ID): BplusItSappiChannelOverview
+    bplusItSappiGetChannelsOverview(query:[QueryStatementInput]): [BplusItSappiChannelOverview]!
+    bplusItSappiPaginateChannelsOverview(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateChannelOverview(payload: BplusItSappiCreateChannelOverviewInput!): BplusItSappiChannelOverview
+    bplusItSappiInsertChannelsOverview(payload: [BplusItSappiCreateChannelOverviewInput]!): Boolean!
+    bplusItSappiUpdateChannelOverview(payload: BplusItSappiUpdateChannelOverviewInput!): BplusItSappiChannelOverview
+    bplusItSappiDeleteChannelOverviewById(id: ID!): BplusItSappiChannelOverview
+    bplusItSappiDeleteChannelsOverview(query:[QueryStatementInput]): [BplusItSappiChannelOverview]!
+}

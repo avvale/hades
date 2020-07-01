@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "597b81a7-31c6-4cf1-be0e-9e36255b28bd",
+		"name"          : "@hades - bplus-it-sappi/channel-overview",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - bplusItSappiCreateChannelOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiCreateChannelOverviewInput!)\n{\n\tbplusItSappiCreateChannelOverview (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\terror\n\t\tinactive\n\t\tsuccessful\n\t\tstopped\n\t\tunknown\n\t\tunregistered\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"254294c7-7d07-4b15-8dee-77fe2f65b69d\", \n\t\t\"tenantId\": \"06716136-30ff-4c05-a0d9-250522a2c1ab\", \n\t\t\"systemId\": \"9ed05082-8a98-44b8-9c53-bacc05b887d3\", \n\t\t\"systemName\": \"x1467qhuqfi4x60zz40g\", \n\t\t\"executionId\": \"cf446f33-eabf-4198-a69b-51846738c0c2\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 14:26:44\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 22:22:30\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 21:39:53\", \n\t\t\"error\": 6915109159, \n\t\t\"inactive\": 1524077244, \n\t\t\"successful\": 9628794573, \n\t\t\"stopped\": 9847123773, \n\t\t\"unknown\": 7306339712, \n\t\t\"unregistered\": 1689311376\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiInsertChannelsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[BplusItSappiCreateChannelOverviewInput]!)\n{\n\tbplusItSappiInsertChannelsOverview (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"5afe8fdc-42fe-4a89-896d-82dc6da16d10\", \n\t\t\t\"tenantId\": \"9d1eefa1-66f4-4a49-913f-cc236ca73487\", \n\t\t\t\"systemId\": \"19eb851f-f181-4c16-bcdc-1f6e10d5fdc8\", \n\t\t\t\"systemName\": \"cyoc3d57631txyzlpvyf\", \n\t\t\t\"executionId\": \"42f60c8c-a777-41e7-87c2-2c8c51ce17d5\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 16:50:21\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 18:33:41\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 14:35:31\", \n\t\t\t\"error\": 1697574394, \n\t\t\t\"inactive\": 1511619745, \n\t\t\t\"successful\": 5187280728, \n\t\t\t\"stopped\": 7593521774, \n\t\t\t\"unknown\": 5074009763, \n\t\t\t\"unregistered\": 2171485588\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9c6b28be-2b50-4e02-9842-ad5370c8e4cb\", \n\t\t\t\"tenantId\": \"9ff3f5ef-9a04-451a-8c12-62b57496f6d3\", \n\t\t\t\"systemId\": \"0e9dc1ae-5082-4114-b982-598066944541\", \n\t\t\t\"systemName\": \"euzq0ytrijkzene4gv4u\", \n\t\t\t\"executionId\": \"4e2b538e-63de-4459-a92f-bf756fc21212\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 10:24:55\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 20:20:00\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 03:15:53\", \n\t\t\t\"error\": 4115153576, \n\t\t\t\"inactive\": 7304886234, \n\t\t\t\"successful\": 2166891092, \n\t\t\t\"stopped\": 3447982854, \n\t\t\t\"unknown\": 6664513766, \n\t\t\t\"unregistered\": 4651900302\n\t\t},\n\t\t{\n\t\t\t\"id\": \"041b3c1c-fcd5-44fa-8aa3-7eeb146488f9\", \n\t\t\t\"tenantId\": \"160f4bbe-c67a-4d65-bd9c-9d4ff85e2603\", \n\t\t\t\"systemId\": \"b21545d3-214b-42d9-8102-a894e9dfd405\", \n\t\t\t\"systemName\": \"5r1n75g4c1zgd3q8cz3m\", \n\t\t\t\"executionId\": \"cb72c44c-a820-4798-8e76-8b4ae0665631\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 05:11:49\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 08:07:37\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 03:57:16\", \n\t\t\t\"error\": 2908076003, \n\t\t\t\"inactive\": 5406840632, \n\t\t\t\"successful\": 8751688569, \n\t\t\t\"stopped\": 7774454650, \n\t\t\t\"unknown\": 2561068417, \n\t\t\t\"unregistered\": 1668244898\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5b16e3d2-8265-473c-9a17-b2dfb8a35936\", \n\t\t\t\"tenantId\": \"f4c714ab-e66b-400d-9efc-19f4df13c10a\", \n\t\t\t\"systemId\": \"3e682832-09fe-4433-bbd9-66b9d497b13f\", \n\t\t\t\"systemName\": \"wkoosvr3v8d2vnbk3vcn\", \n\t\t\t\"executionId\": \"0aaf2efa-5674-406b-b410-55eb5162be31\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 07:55:11\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 05:30:29\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 07:01:12\", \n\t\t\t\"error\": 5628481703, \n\t\t\t\"inactive\": 1854531035, \n\t\t\t\"successful\": 5279708981, \n\t\t\t\"stopped\": 5475265579, \n\t\t\t\"unknown\": 3653222534, \n\t\t\t\"unregistered\": 3935951887\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dcbc8cd1-3510-462e-a343-229563e41676\", \n\t\t\t\"tenantId\": \"2b05ac67-2739-442b-96b5-a1fe0bbffe66\", \n\t\t\t\"systemId\": \"a93a6090-6cab-4445-97bc-95912db451b4\", \n\t\t\t\"systemName\": \"ms0zwgy7g62xthh5klvr\", \n\t\t\t\"executionId\": \"fea87396-a4e4-4a0c-bee8-a1ead350ce51\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 02:08:42\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 14:07:47\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 06:16:04\", \n\t\t\t\"error\": 4219962347, \n\t\t\t\"inactive\": 7401460580, \n\t\t\t\"successful\": 2261254196, \n\t\t\t\"stopped\": 4289938486, \n\t\t\t\"unknown\": 9583497719, \n\t\t\t\"unregistered\": 3503089424\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a51b59a3-eadd-4816-a948-05a01fe93576\", \n\t\t\t\"tenantId\": \"fc41e995-15e7-4a36-b957-986b76e10397\", \n\t\t\t\"systemId\": \"5ccc3919-b92c-46f3-b082-572588ad2b6b\", \n\t\t\t\"systemName\": \"cth2g63ipbfetpp675qu\", \n\t\t\t\"executionId\": \"df614975-a541-4b1a-9a26-932b782acd15\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 03:17:29\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 03:06:13\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 17:07:13\", \n\t\t\t\"error\": 9728979979, \n\t\t\t\"inactive\": 7618481151, \n\t\t\t\"successful\": 4518270040, \n\t\t\t\"stopped\": 2026488337, \n\t\t\t\"unknown\": 8906636216, \n\t\t\t\"unregistered\": 2628254598\n\t\t},\n\t\t{\n\t\t\t\"id\": \"366839ce-54ee-436c-ab1a-58dd12cfbe4e\", \n\t\t\t\"tenantId\": \"64efdc8d-c93a-4d74-8fc3-5f31c6f79cbb\", \n\t\t\t\"systemId\": \"e1477fa8-0057-400b-a378-9a4deb5b1832\", \n\t\t\t\"systemName\": \"a5eg257fnzfydj9te9ql\", \n\t\t\t\"executionId\": \"57d207d4-4123-4490-9246-f58d395b31f4\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 02:19:49\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 14:05:14\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 01:37:01\", \n\t\t\t\"error\": 1328164565, \n\t\t\t\"inactive\": 6286257459, \n\t\t\t\"successful\": 8466710081, \n\t\t\t\"stopped\": 4237393600, \n\t\t\t\"unknown\": 8784350256, \n\t\t\t\"unregistered\": 8081677442\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6c9b06ac-1fb1-4600-a62f-f029cf1f58c0\", \n\t\t\t\"tenantId\": \"06eea1bb-eb33-4550-b7df-192d5b4f956b\", \n\t\t\t\"systemId\": \"2e628964-4d12-4a06-8e58-aa1834cdf1d8\", \n\t\t\t\"systemName\": \"ikn032c8iwxll0a6hw6r\", \n\t\t\t\"executionId\": \"6ce4aa54-5572-4e70-9485-271f783c2221\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 11:27:01\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 03:28:44\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 20:04:34\", \n\t\t\t\"error\": 2322326137, \n\t\t\t\"inactive\": 5789666066, \n\t\t\t\"successful\": 1273939811, \n\t\t\t\"stopped\": 7778292752, \n\t\t\t\"unknown\": 2254404883, \n\t\t\t\"unregistered\": 3353782055\n\t\t},\n\t\t{\n\t\t\t\"id\": \"11ec527f-21e9-4a47-b7d7-f7508c2390bc\", \n\t\t\t\"tenantId\": \"d560b9f6-28bf-4f4f-a4a2-02bf4b47034b\", \n\t\t\t\"systemId\": \"f7c40c82-3b88-4f0a-a467-e4634d7cedde\", \n\t\t\t\"systemName\": \"f8k6y6us3zmhtttbp8pa\", \n\t\t\t\"executionId\": \"c8daba38-4c7b-44ea-bec7-543c2aa8f78e\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 03:15:28\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 12:38:59\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 07:33:01\", \n\t\t\t\"error\": 9670142355, \n\t\t\t\"inactive\": 2914598311, \n\t\t\t\"successful\": 9395254859, \n\t\t\t\"stopped\": 9930367424, \n\t\t\t\"unknown\": 1146582776, \n\t\t\t\"unregistered\": 4531404570\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c4d2b60b-4983-4ac3-9fa9-090d5e0be6b2\", \n\t\t\t\"tenantId\": \"a99da5f8-b460-4429-a2d1-42f6c0344e19\", \n\t\t\t\"systemId\": \"8271027e-f001-4339-accb-f894f3a73c9a\", \n\t\t\t\"systemName\": \"vpu2nuvnu7pf1lxz56xk\", \n\t\t\t\"executionId\": \"016252b7-e012-46f6-8b61-3a4e0eb2d523\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 02:08:42\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 05:57:46\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 08:13:23\", \n\t\t\t\"error\": 3585726244, \n\t\t\t\"inactive\": 9957427862, \n\t\t\t\"successful\": 6474698768, \n\t\t\t\"stopped\": 5660427055, \n\t\t\t\"unknown\": 8371656729, \n\t\t\t\"unregistered\": 8390029292\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f3ef412e-7407-4d18-88bc-95905d33288d\", \n\t\t\t\"tenantId\": \"b39d2f63-6a64-4ce4-a3be-a5ed92a924bb\", \n\t\t\t\"systemId\": \"4822b8b7-071e-4e48-a5f0-a27a1c1fd0d0\", \n\t\t\t\"systemName\": \"ny8kvki6mjwtgw5wvfs1\", \n\t\t\t\"executionId\": \"ee6c3916-0722-41b7-89d8-ef33802f9bc2\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 01:51:00\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 10:04:19\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 18:06:31\", \n\t\t\t\"error\": 8858473775, \n\t\t\t\"inactive\": 1072801324, \n\t\t\t\"successful\": 5682784583, \n\t\t\t\"stopped\": 2710226115, \n\t\t\t\"unknown\": 1157714187, \n\t\t\t\"unregistered\": 2425146316\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6a831563-0973-479d-8015-4470eda376e2\", \n\t\t\t\"tenantId\": \"ff625219-03e2-4ba6-bcf6-f2e4e76f9b2d\", \n\t\t\t\"systemId\": \"4f2e44a9-128b-448b-95af-4bb37b9f4d5e\", \n\t\t\t\"systemName\": \"3lp3nmzyzxwbcdxsnoja\", \n\t\t\t\"executionId\": \"ff62863c-f210-478f-a359-bbc5643693c4\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 06:37:56\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 05:42:56\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 13:10:20\", \n\t\t\t\"error\": 1200158068, \n\t\t\t\"inactive\": 2276693456, \n\t\t\t\"successful\": 9326625176, \n\t\t\t\"stopped\": 2067236245, \n\t\t\t\"unknown\": 9961814128, \n\t\t\t\"unregistered\": 4792168720\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a1268340-ab9d-4096-8abc-f0aea33bb1bc\", \n\t\t\t\"tenantId\": \"76dcd7ab-7a12-434a-9db4-547d3d6815b3\", \n\t\t\t\"systemId\": \"8bf45db5-e878-4e2b-895d-daa3ace10e48\", \n\t\t\t\"systemName\": \"92ogb0mpaj5l7xeajrcg\", \n\t\t\t\"executionId\": \"e006f7fd-ceb8-4769-9db8-6dc89cf33413\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 09:35:30\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 05:19:26\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 22:54:30\", \n\t\t\t\"error\": 8739042223, \n\t\t\t\"inactive\": 7687642211, \n\t\t\t\"successful\": 6438341601, \n\t\t\t\"stopped\": 5436034261, \n\t\t\t\"unknown\": 9446762130, \n\t\t\t\"unregistered\": 8067468045\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2a28085e-5bcd-4bf0-b40b-79795c278053\", \n\t\t\t\"tenantId\": \"4e32eb1d-f750-43de-92f3-17479569d55e\", \n\t\t\t\"systemId\": \"bb705bb8-5f84-455f-a140-b3a57ac88944\", \n\t\t\t\"systemName\": \"hb8vdi2e2vv4a2d34gnd\", \n\t\t\t\"executionId\": \"fe64d4db-622b-4879-a4e0-9448300fdcf1\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-06-30 22:23:53\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 23:24:45\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 14:07:48\", \n\t\t\t\"error\": 3057538933, \n\t\t\t\"inactive\": 8291703061, \n\t\t\t\"successful\": 5970461580, \n\t\t\t\"stopped\": 7508791074, \n\t\t\t\"unknown\": 3212396963, \n\t\t\t\"unregistered\": 7246106611\n\t\t},\n\t\t{\n\t\t\t\"id\": \"99a49f6e-dd45-41c9-aaae-09d273151366\", \n\t\t\t\"tenantId\": \"80eb64db-44b5-4823-8cfd-75805c960556\", \n\t\t\t\"systemId\": \"75720d19-8548-4f2e-92f5-67f263d29682\", \n\t\t\t\"systemName\": \"6hvpmc4ajnw35hflnoy5\", \n\t\t\t\"executionId\": \"e04353c5-44fd-4283-8129-1950904434d8\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 02:54:52\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 01:50:59\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 06:24:31\", \n\t\t\t\"error\": 5859629036, \n\t\t\t\"inactive\": 5124075599, \n\t\t\t\"successful\": 8313885236, \n\t\t\t\"stopped\": 9128505829, \n\t\t\t\"unknown\": 6484979591, \n\t\t\t\"unregistered\": 3587429046\n\t\t},\n\t\t{\n\t\t\t\"id\": \"fdafdc90-dbcb-45b1-9a35-bcf5407622f6\", \n\t\t\t\"tenantId\": \"35aaf2a7-7706-40dd-a20e-28a2449ec067\", \n\t\t\t\"systemId\": \"e7c0b7b3-2ae5-46a1-992b-5cb79ced5fc0\", \n\t\t\t\"systemName\": \"er5p4by614ulb9laa6og\", \n\t\t\t\"executionId\": \"c9bb8dbe-5b2d-46a3-8e7e-1ed6d0d8b4db\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 08:16:08\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 06:38:19\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 04:58:59\", \n\t\t\t\"error\": 2880137321, \n\t\t\t\"inactive\": 4488046519, \n\t\t\t\"successful\": 2141057666, \n\t\t\t\"stopped\": 5847663339, \n\t\t\t\"unknown\": 4831987263, \n\t\t\t\"unregistered\": 9519464073\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7ff6095e-ab45-4926-84b1-7f96b145eb1b\", \n\t\t\t\"tenantId\": \"4d7a0ee7-0934-4656-bb87-0b25981c9601\", \n\t\t\t\"systemId\": \"01c39d2a-e584-4a46-ac92-889449860c20\", \n\t\t\t\"systemName\": \"vk4wxf45wjp0wq3e2r96\", \n\t\t\t\"executionId\": \"56f5299d-80d7-472b-8091-42a99ad7136f\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 06:06:51\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 10:49:36\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 12:41:33\", \n\t\t\t\"error\": 4452012951, \n\t\t\t\"inactive\": 7943162480, \n\t\t\t\"successful\": 2996769781, \n\t\t\t\"stopped\": 4655189968, \n\t\t\t\"unknown\": 8952898543, \n\t\t\t\"unregistered\": 8160754877\n\t\t},\n\t\t{\n\t\t\t\"id\": \"45de5756-58c7-418e-93b6-46b7762fccdc\", \n\t\t\t\"tenantId\": \"ac7f3b39-b9bf-43fa-bae5-2d9bbe188f0a\", \n\t\t\t\"systemId\": \"26b94a65-2465-43e4-909e-cd600afcfd60\", \n\t\t\t\"systemName\": \"umvw4eg3z9whny50z38e\", \n\t\t\t\"executionId\": \"d35bbc02-4728-4f42-ba82-da6f4f7f6eb3\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 12:53:11\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 18:48:56\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 03:47:37\", \n\t\t\t\"error\": 5317213920, \n\t\t\t\"inactive\": 2805936246, \n\t\t\t\"successful\": 6866754924, \n\t\t\t\"stopped\": 3428551219, \n\t\t\t\"unknown\": 5505192883, \n\t\t\t\"unregistered\": 1295885404\n\t\t},\n\t\t{\n\t\t\t\"id\": \"29a1cfef-0272-44dd-9cdd-13216747b938\", \n\t\t\t\"tenantId\": \"16dbc1cb-34f7-4f04-a47e-a7818f8d7654\", \n\t\t\t\"systemId\": \"2fbd87ba-82c3-4b9c-923c-6d0abacb48ab\", \n\t\t\t\"systemName\": \"dbvfk7khnaomiuuzldxh\", \n\t\t\t\"executionId\": \"97efb350-a520-4650-ab25-3112baa185df\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 10:33:00\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 13:00:53\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-06-30 22:02:50\", \n\t\t\t\"error\": 2739042914, \n\t\t\t\"inactive\": 3380265791, \n\t\t\t\"successful\": 4638146358, \n\t\t\t\"stopped\": 1738470025, \n\t\t\t\"unknown\": 1283441727, \n\t\t\t\"unregistered\": 6107003868\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a035245e-6cb2-403c-9436-39531fab1929\", \n\t\t\t\"tenantId\": \"2944a891-aee3-4777-8d6d-564e696c5472\", \n\t\t\t\"systemId\": \"03bb8491-957e-420b-be86-6238555e3f13\", \n\t\t\t\"systemName\": \"p2dmb6vrschshfnminyx\", \n\t\t\t\"executionId\": \"8910d593-f08c-4d4d-85aa-3875eb8436e6\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 11:00:54\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-06-30 17:54:04\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 16:49:02\", \n\t\t\t\"error\": 4430677622, \n\t\t\t\"inactive\": 2247619027, \n\t\t\t\"successful\": 6457178036, \n\t\t\t\"stopped\": 6793755807, \n\t\t\t\"unknown\": 9542006484, \n\t\t\t\"unregistered\": 8803462836\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiPaginateChannelsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tbplusItSappiPaginateChannelsOverview (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiGetChannelsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetChannelsOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\terror\n\t\tinactive\n\t\tsuccessful\n\t\tstopped\n\t\tunknown\n\t\tunregistered\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"254294c7-7d07-4b15-8dee-77fe2f65b69d\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindChannelOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindChannelOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\terror\n\t\tinactive\n\t\tsuccessful\n\t\tstopped\n\t\tunknown\n\t\tunregistered\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"254294c7-7d07-4b15-8dee-77fe2f65b69d\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindChannelOverviewById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tbplusItSappiFindChannelOverviewById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\terror\n\t\tinactive\n\t\tsuccessful\n\t\tstopped\n\t\tunknown\n\t\tunregistered\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"254294c7-7d07-4b15-8dee-77fe2f65b69d\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiUpdateChannelOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiUpdateChannelOverviewInput!)\n{\n\tbplusItSappiUpdateChannelOverview (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\terror\n\t\tinactive\n\t\tsuccessful\n\t\tstopped\n\t\tunknown\n\t\tunregistered\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"254294c7-7d07-4b15-8dee-77fe2f65b69d\", \n\t\t\"tenantId\": \"06716136-30ff-4c05-a0d9-250522a2c1ab\", \n\t\t\"systemId\": \"9ed05082-8a98-44b8-9c53-bacc05b887d3\", \n\t\t\"systemName\": \"f09ntu1dtfg1s5sbgazy\", \n\t\t\"executionId\": \"cf446f33-eabf-4198-a69b-51846738c0c2\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 03:44:10\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 06:58:38\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 03:45:46\", \n\t\t\"error\": 5808326310, \n\t\t\"inactive\": 6517073251, \n\t\t\"successful\": 5389153246, \n\t\t\"stopped\": 8804295905, \n\t\t\"unknown\": 8481862750, \n\t\t\"unregistered\": 6970076996\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteChannelOverviewById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteChannelOverviewById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\terror\n\t\tinactive\n\t\tsuccessful\n\t\tstopped\n\t\tunknown\n\t\tunregistered\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"254294c7-7d07-4b15-8dee-77fe2f65b69d\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteChannelsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteChannelsOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\terror\n\t\tinactive\n\t\tsuccessful\n\t\tstopped\n\t\tunknown\n\t\tunregistered\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/channel-overview",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"254294c7-7d07-4b15-8dee-77fe2f65b69d\", \n\t\"tenantId\": \"06716136-30ff-4c05-a0d9-250522a2c1ab\", \n\t\"systemId\": \"9ed05082-8a98-44b8-9c53-bacc05b887d3\", \n\t\"systemName\": \"ijayvgd2p8c6i43jtm47\", \n\t\"executionId\": \"cf446f33-eabf-4198-a69b-51846738c0c2\", \n\t\"executionType\": \"DETAIL\", \n\t\"executionExecutedAt\": \"2020-06-30 20:23:21\", \n\t\"executionMonitoringStartAt\": \"2020-07-01 05:18:08\", \n\t\"executionMonitoringEndAt\": \"2020-07-01 16:47:46\", \n\t\"error\": 2948357071, \n\t\"inactive\": 3963385129, \n\t\"successful\": 8868847815, \n\t\"stopped\": 8005308755, \n\t\"unknown\": 5812199287, \n\t\"unregistered\": 1528046125\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/channel-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"channel-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/channels-overview",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"2420e822-eacc-4514-90c3-45a7dc04e52b\", \n\t\t\"tenantId\": \"60c3b120-1db2-48e1-8f7b-337d4638475c\", \n\t\t\"systemId\": \"dfc94330-5fa2-4989-a925-047ad8614677\", \n\t\t\"systemName\": \"y1ut2qfr1r6xzhk5bfca\", \n\t\t\"executionId\": \"1d7a9df6-bb05-40ae-b21a-071f56ef9fb7\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 15:46:35\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 10:12:30\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 03:38:37\", \n\t\t\"error\": 5842003677, \n\t\t\"inactive\": 7108082804, \n\t\t\"successful\": 4741773407, \n\t\t\"stopped\": 3779995203, \n\t\t\"unknown\": 2016818644, \n\t\t\"unregistered\": 6478623074\n\t}, \n\t{\n\t\t\"id\": \"77f1d270-13b8-4191-bf47-81eb1856f338\", \n\t\t\"tenantId\": \"f834a2d0-645d-4ba5-9693-6f6b13048ab8\", \n\t\t\"systemId\": \"ea7423d9-7113-4a23-b526-6141fd97fa70\", \n\t\t\"systemName\": \"xof4jkckvp3boj5l4dph\", \n\t\t\"executionId\": \"fdba6fdf-d32e-46e2-bc53-14b08fdfc98b\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 22:50:27\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 07:29:48\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 13:58:07\", \n\t\t\"error\": 2714896628, \n\t\t\"inactive\": 1856553395, \n\t\t\"successful\": 1210722520, \n\t\t\"stopped\": 7210589739, \n\t\t\"unknown\": 8141536115, \n\t\t\"unregistered\": 8028522694\n\t}, \n\t{\n\t\t\"id\": \"d2ab147f-aab0-40c5-a7bb-a54ecc5d961c\", \n\t\t\"tenantId\": \"03014f90-c9de-4585-ab64-e637e3cf2959\", \n\t\t\"systemId\": \"6a37c27b-9af4-4e66-9c9f-6f59dc440957\", \n\t\t\"systemName\": \"piu8uif11idbqm6ptq2c\", \n\t\t\"executionId\": \"f6a78fb9-a4a9-4bd7-aa37-68ff4ca71942\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 02:10:48\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 16:52:54\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 14:19:40\", \n\t\t\"error\": 7044203164, \n\t\t\"inactive\": 3841446083, \n\t\t\"successful\": 2494126138, \n\t\t\"stopped\": 9188901004, \n\t\t\"unknown\": 1593766175, \n\t\t\"unregistered\": 7154635957\n\t}, \n\t{\n\t\t\"id\": \"13639a73-9336-4783-b624-ca7a49c80b7d\", \n\t\t\"tenantId\": \"38bec4d0-eece-452a-97dc-2b505d3c78e6\", \n\t\t\"systemId\": \"d140cd4d-c440-4969-9fa7-e87bd629da94\", \n\t\t\"systemName\": \"d2yd89q47xx3rkll90lo\", \n\t\t\"executionId\": \"646475d7-a5ed-47e2-a36b-22d248fa7aab\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 09:19:56\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 02:00:06\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 11:34:07\", \n\t\t\"error\": 1682326341, \n\t\t\"inactive\": 2184069869, \n\t\t\"successful\": 8763322916, \n\t\t\"stopped\": 1779164932, \n\t\t\"unknown\": 8184457207, \n\t\t\"unregistered\": 7469263938\n\t}, \n\t{\n\t\t\"id\": \"079ce326-0337-41f0-9ff3-6b5c94c3cda7\", \n\t\t\"tenantId\": \"1a86a027-72b6-46ab-848a-11682db09333\", \n\t\t\"systemId\": \"aa98b1c5-11a2-4c53-834b-1fb3a51bfb13\", \n\t\t\"systemName\": \"a6wdp0kvqloy2dx3kazj\", \n\t\t\"executionId\": \"9b10de9f-79f3-4142-ae70-5bc3bc789e45\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 23:52:42\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 02:36:14\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 23:07:55\", \n\t\t\"error\": 4344133545, \n\t\t\"inactive\": 5884892957, \n\t\t\"successful\": 2541542751, \n\t\t\"stopped\": 4593665208, \n\t\t\"unknown\": 5171588497, \n\t\t\"unregistered\": 3500114144\n\t}, \n\t{\n\t\t\"id\": \"fe53d0df-7bb2-4040-b8b2-d2630c6b8328\", \n\t\t\"tenantId\": \"f7c853cc-83e6-489e-97df-2b581965d2fc\", \n\t\t\"systemId\": \"cd580f18-e363-4e92-83ad-968491376999\", \n\t\t\"systemName\": \"ihrw53xluvqw58tarqvu\", \n\t\t\"executionId\": \"81f8e499-f0be-4d38-8c21-ac694aed7594\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 20:00:02\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 05:32:10\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 18:58:12\", \n\t\t\"error\": 8390871559, \n\t\t\"inactive\": 4214403172, \n\t\t\"successful\": 6006275570, \n\t\t\"stopped\": 1877994515, \n\t\t\"unknown\": 8442342197, \n\t\t\"unregistered\": 5135743949\n\t}, \n\t{\n\t\t\"id\": \"c3553a95-abb7-4a50-bcba-c435f8c63f13\", \n\t\t\"tenantId\": \"adf9f388-c2e3-4563-8dfd-92db6411142f\", \n\t\t\"systemId\": \"238212a9-5f71-41b2-af25-bc89ff99a578\", \n\t\t\"systemName\": \"oo0zw3mmovugnucemccg\", \n\t\t\"executionId\": \"215af6e0-bad2-4ba1-b8ca-24d79cc12c77\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 18:15:52\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 18:11:45\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 10:48:49\", \n\t\t\"error\": 5869918899, \n\t\t\"inactive\": 8018024474, \n\t\t\"successful\": 5555292446, \n\t\t\"stopped\": 2736507736, \n\t\t\"unknown\": 2875743319, \n\t\t\"unregistered\": 5103042127\n\t}, \n\t{\n\t\t\"id\": \"0c53056b-5bd6-488c-a7cd-18eed8aa7c9b\", \n\t\t\"tenantId\": \"3169bba9-eb50-428b-a9d2-79a2b9f7c309\", \n\t\t\"systemId\": \"a85a8ecd-9a6a-4cd4-812f-3fc451400c4c\", \n\t\t\"systemName\": \"nanjzy2skihoe4i18pky\", \n\t\t\"executionId\": \"c068949a-40ed-42c8-aafe-0350be19fa87\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 16:18:36\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 22:51:26\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 06:04:57\", \n\t\t\"error\": 7586036376, \n\t\t\"inactive\": 3411592025, \n\t\t\"successful\": 4769445793, \n\t\t\"stopped\": 3196156367, \n\t\t\"unknown\": 9842248930, \n\t\t\"unregistered\": 9247675605\n\t}, \n\t{\n\t\t\"id\": \"882322cd-1db5-4a5c-b093-3f162ce45c73\", \n\t\t\"tenantId\": \"87300bff-46e7-4817-be23-14a0dff3dc64\", \n\t\t\"systemId\": \"c956bca0-1d1b-4064-b61a-be37466063fd\", \n\t\t\"systemName\": \"app5q4dzd01pxb7j1lju\", \n\t\t\"executionId\": \"79a031ba-128a-49bc-a87f-52bf60ecd19c\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 13:16:40\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 10:44:49\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 14:35:57\", \n\t\t\"error\": 3887279039, \n\t\t\"inactive\": 6761836189, \n\t\t\"successful\": 8010106192, \n\t\t\"stopped\": 3324584327, \n\t\t\"unknown\": 5256964990, \n\t\t\"unregistered\": 8264029608\n\t}, \n\t{\n\t\t\"id\": \"d6d8fb15-3d9f-4721-9838-da906ac6561f\", \n\t\t\"tenantId\": \"78d36391-557a-4949-8fbe-803f8f3d65a7\", \n\t\t\"systemId\": \"8691c64c-b01c-4f93-bc18-003e17b65ca2\", \n\t\t\"systemName\": \"swxm54qvdfux0rk1hk4z\", \n\t\t\"executionId\": \"091e5cde-b4ac-4fbb-a5f4-ad5b3c8ad3df\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 21:33:08\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 18:52:18\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 12:39:58\", \n\t\t\"error\": 3562590078, \n\t\t\"inactive\": 2597520708, \n\t\t\"successful\": 9877647847, \n\t\t\"stopped\": 7635028781, \n\t\t\"unknown\": 8364533731, \n\t\t\"unregistered\": 8849217235\n\t}, \n\t{\n\t\t\"id\": \"54934626-bb0c-444b-acc6-5f1857f4a362\", \n\t\t\"tenantId\": \"1d294b25-16ce-4514-ace4-2eddef1b799e\", \n\t\t\"systemId\": \"4aae6328-71d8-4694-a7f5-78155c18cf1e\", \n\t\t\"systemName\": \"e7fsqnjdarwf16k6nx1y\", \n\t\t\"executionId\": \"6a5ce4c0-f8e0-4a0a-b7e3-03ae43e9df24\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 10:36:10\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 06:53:24\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 07:36:15\", \n\t\t\"error\": 8646661676, \n\t\t\"inactive\": 1822741123, \n\t\t\"successful\": 2413019654, \n\t\t\"stopped\": 9333841073, \n\t\t\"unknown\": 8578217940, \n\t\t\"unregistered\": 2926788767\n\t}, \n\t{\n\t\t\"id\": \"1e23f15a-d6b5-4b96-a89e-6c351cee73a8\", \n\t\t\"tenantId\": \"d70e9aee-f79f-46c5-9fea-6a50094032d6\", \n\t\t\"systemId\": \"b6b924ed-0a9b-42b9-a9f1-af6d9730de5a\", \n\t\t\"systemName\": \"fdjowaxj05n01jih7ysy\", \n\t\t\"executionId\": \"963c49d2-170e-4847-a430-c4d051e688a1\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 00:29:06\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 19:33:35\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 02:10:12\", \n\t\t\"error\": 1808925103, \n\t\t\"inactive\": 8662788542, \n\t\t\"successful\": 9636731499, \n\t\t\"stopped\": 3123099212, \n\t\t\"unknown\": 3076373724, \n\t\t\"unregistered\": 1478164457\n\t}, \n\t{\n\t\t\"id\": \"f3850fd2-3ab9-47c3-8faa-79124e7280f3\", \n\t\t\"tenantId\": \"e9aa2bbd-14b4-48e5-a73f-e49f574f3b45\", \n\t\t\"systemId\": \"84149fe0-f3ed-4d3b-8124-bf40f872a43d\", \n\t\t\"systemName\": \"eb67j1ptl9egniw535i5\", \n\t\t\"executionId\": \"0bfed783-385e-4a7f-bb2a-6ee6504c7734\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 06:21:54\", \n\t\t\"executionMonitoringStartAt\": \"2020-06-30 20:07:38\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 07:24:49\", \n\t\t\"error\": 2364172810, \n\t\t\"inactive\": 2348680912, \n\t\t\"successful\": 9399344293, \n\t\t\"stopped\": 4503673644, \n\t\t\"unknown\": 1695698090, \n\t\t\"unregistered\": 9591776100\n\t}, \n\t{\n\t\t\"id\": \"a157bddc-ffd0-4747-9af9-795386d563ba\", \n\t\t\"tenantId\": \"77ec3592-2e78-448b-b2e9-34c977839a03\", \n\t\t\"systemId\": \"2cb213c1-60c6-4e8a-8262-2426baca2610\", \n\t\t\"systemName\": \"iddly6jq7aj4vrz6mpt0\", \n\t\t\"executionId\": \"4f28f24f-745f-4107-aa18-5efbc994f821\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 14:26:38\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 12:52:20\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 06:44:48\", \n\t\t\"error\": 9005755627, \n\t\t\"inactive\": 3442268361, \n\t\t\"successful\": 9308776720, \n\t\t\"stopped\": 6637374555, \n\t\t\"unknown\": 9287996918, \n\t\t\"unregistered\": 3656936157\n\t}, \n\t{\n\t\t\"id\": \"362adad9-d382-4076-87cb-91868f1fa21a\", \n\t\t\"tenantId\": \"1a8b27f2-2623-48db-be03-dd48333b1c5b\", \n\t\t\"systemId\": \"84771ebc-72f9-4ae7-8da7-4644ae49ac5c\", \n\t\t\"systemName\": \"gkbg35tq61z7q176fntk\", \n\t\t\"executionId\": \"fd540e08-a5a3-4359-956e-0f95b113391e\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 06:04:49\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 01:43:59\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 12:59:19\", \n\t\t\"error\": 1220789209, \n\t\t\"inactive\": 1906114940, \n\t\t\"successful\": 6544750744, \n\t\t\"stopped\": 4339378283, \n\t\t\"unknown\": 6039224542, \n\t\t\"unregistered\": 9245293210\n\t}, \n\t{\n\t\t\"id\": \"0dc9cb87-0d7b-476d-b8a5-92bc55599801\", \n\t\t\"tenantId\": \"066c72b2-8d7e-448e-ba3d-51bfd9a06e6e\", \n\t\t\"systemId\": \"689d2754-0a6a-458f-aa79-312ea5900087\", \n\t\t\"systemName\": \"5z8jm45u6nm6cl0jwv0e\", \n\t\t\"executionId\": \"a08e83b7-4c6f-49d5-bc63-7da26c5c7f6d\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 11:41:26\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 13:50:14\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 22:34:41\", \n\t\t\"error\": 9832709457, \n\t\t\"inactive\": 5076396974, \n\t\t\"successful\": 9128952112, \n\t\t\"stopped\": 1165805085, \n\t\t\"unknown\": 8463213632, \n\t\t\"unregistered\": 9074944557\n\t}, \n\t{\n\t\t\"id\": \"7ad77cb5-37bb-4049-b864-964e49ebfde9\", \n\t\t\"tenantId\": \"36a19237-f28c-4548-8a6d-c225aeee6cd5\", \n\t\t\"systemId\": \"5c6646a1-5281-4c86-b0c5-f7393bdb97f2\", \n\t\t\"systemName\": \"56wev6842sfatstrs75r\", \n\t\t\"executionId\": \"ef5d3fb8-41d7-428f-967b-680244bfd174\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 23:21:51\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 01:59:30\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 17:42:19\", \n\t\t\"error\": 9888497905, \n\t\t\"inactive\": 5603215989, \n\t\t\"successful\": 4390460421, \n\t\t\"stopped\": 7076547690, \n\t\t\"unknown\": 8610723661, \n\t\t\"unregistered\": 3547485005\n\t}, \n\t{\n\t\t\"id\": \"31fe8a99-426f-4604-9a79-3d722dc6902f\", \n\t\t\"tenantId\": \"9230e731-28f3-4798-9c38-122cbc19a37b\", \n\t\t\"systemId\": \"cd14cf6f-27ef-432f-a149-393a68773db9\", \n\t\t\"systemName\": \"gu6hn53nm7q4wicw14gc\", \n\t\t\"executionId\": \"73093761-3b11-4045-944d-3dfcbb0856a5\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-06-30 23:41:16\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 07:42:50\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 20:44:43\", \n\t\t\"error\": 7203021324, \n\t\t\"inactive\": 2523305933, \n\t\t\"successful\": 1293836654, \n\t\t\"stopped\": 6095771691, \n\t\t\"unknown\": 3739688052, \n\t\t\"unregistered\": 1393851657\n\t}, \n\t{\n\t\t\"id\": \"5d210d29-809e-485b-b2b3-7c6e31f09773\", \n\t\t\"tenantId\": \"1b559a48-97fd-40a6-aeeb-a02b1b88278d\", \n\t\t\"systemId\": \"58a56531-2a97-444c-b649-7e09a1ccfe59\", \n\t\t\"systemName\": \"hk5jaftj63ewvp5gwj81\", \n\t\t\"executionId\": \"fa23b2f2-d1c4-473a-b599-0d258c238028\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-06-30 18:16:32\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 01:24:59\", \n\t\t\"executionMonitoringEndAt\": \"2020-06-30 19:44:48\", \n\t\t\"error\": 9642812301, \n\t\t\"inactive\": 2714319764, \n\t\t\"successful\": 1397739229, \n\t\t\"stopped\": 5654315395, \n\t\t\"unknown\": 7189997394, \n\t\t\"unregistered\": 2841130485\n\t}, \n\t{\n\t\t\"id\": \"384d5414-fffb-49de-801c-25a4e6dbff3b\", \n\t\t\"tenantId\": \"63cbe2db-5bf9-48af-9346-5ffe19811d2a\", \n\t\t\"systemId\": \"7c82574e-1e48-48c1-970f-ea36d8933661\", \n\t\t\"systemName\": \"3a2xvk0kcpd26dwdwxik\", \n\t\t\"executionId\": \"d05a15d0-a69b-4513-9970-9f6e104bb95a\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 13:38:04\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 16:14:48\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 05:57:07\", \n\t\t\"error\": 7972454892, \n\t\t\"inactive\": 1578945655, \n\t\t\"successful\": 7705883361, \n\t\t\"stopped\": 6676869679, \n\t\t\"unknown\": 7918249707, \n\t\t\"unregistered\": 8182340084\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/channels-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"channels-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/channels-overview/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/channels-overview/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+                        "channels-overview",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/channels-overview",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"254294c7-7d07-4b15-8dee-77fe2f65b69d\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/channels-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"channels-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/channel-overview",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"254294c7-7d07-4b15-8dee-77fe2f65b69d\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/channel-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"channel-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/channel-overview/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/channel-overview/254294c7-7d07-4b15-8dee-77fe2f65b69d",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"channel-overview",
+						"254294c7-7d07-4b15-8dee-77fe2f65b69d"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/channel-overview",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"254294c7-7d07-4b15-8dee-77fe2f65b69d\", \n\t\"tenantId\": \"06716136-30ff-4c05-a0d9-250522a2c1ab\", \n\t\"systemId\": \"9ed05082-8a98-44b8-9c53-bacc05b887d3\", \n\t\"systemName\": \"vmjllpt5tjzkz5b67j0a\", \n\t\"executionId\": \"cf446f33-eabf-4198-a69b-51846738c0c2\", \n\t\"executionType\": \"DETAIL\", \n\t\"executionExecutedAt\": \"2020-06-30 20:52:02\", \n\t\"executionMonitoringStartAt\": \"2020-06-30 17:31:34\", \n\t\"executionMonitoringEndAt\": \"2020-07-01 03:40:35\", \n\t\"error\": 5614495590, \n\t\"inactive\": 2616883290, \n\t\"successful\": 4873849846, \n\t\"stopped\": 6692394684, \n\t\"unknown\": 2174432948, \n\t\"unregistered\": 4000303631\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/channel-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"channel-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/channel-overview/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/channel-overview/254294c7-7d07-4b15-8dee-77fe2f65b69d",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"channel-overview",
+						"254294c7-7d07-4b15-8dee-77fe2f65b69d"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - bplus-it-sappi/channels-overview",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/channels-overview",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"channels-overview"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "7c625f67-cb0d-442c-8c51-9d1c09c9d815",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
