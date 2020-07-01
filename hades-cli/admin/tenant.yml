@@ -1,3 +1,4 @@
+version: '1.0.0',
 moduleName: admin
 sectionName: tenant
 sectionNames: tenants
