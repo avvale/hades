@@ -1,0 +1,45 @@
+
+
+type BplusItSappiRole
+{
+    id: ID!
+    tenantId: ID!
+    name: GraphQLString!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateRoleInput
+{
+    id: ID!
+    tenantId: ID!
+    name: GraphQLString!
+    
+}
+
+input BplusItSappiUpdateRoleInput
+{
+    id: ID!
+    tenantId: ID
+    name: GraphQLString
+    
+}
+
+type Query 
+{
+    bplusItSappiFindRole(query:[QueryStatementInput]): BplusItSappiRole
+    bplusItSappiFindRoleById(id:ID): BplusItSappiRole
+    bplusItSappiGetRoles(query:[QueryStatementInput]): [BplusItSappiRole]!
+    bplusItSappiPaginateRoles(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateRole(payload: BplusItSappiCreateRoleInput!): BplusItSappiRole
+    bplusItSappiInsertRoles(payload: [BplusItSappiCreateRoleInput]!): Boolean!
+    bplusItSappiUpdateRole(payload: BplusItSappiUpdateRoleInput!): BplusItSappiRole
+    bplusItSappiDeleteRoleById(id: ID!): BplusItSappiRole
+    bplusItSappiDeleteRoles(query:[QueryStatementInput]): [BplusItSappiRole]!
+}

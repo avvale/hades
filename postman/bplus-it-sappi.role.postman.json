@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "5c377c58-7e92-4b16-a33e-d170a584a674",
+		"name"          : "@hades - bplus-it-sappi/role",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - bplusItSappiCreateRole",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiCreateRoleInput!)\n{\n\tbplusItSappiCreateRole (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"ff8cb54d-0a91-475c-b0e5-1991a725d1da\", \n\t\t\"tenantId\": \"a35fedca-15dc-422a-9a50-029d18c9764b\", \n\t\t\"name\": \"1p2ypclsf4us79qins31dlh16c47qfxwjgdmb09snu62mls8kmh63t8gwhxq5itoemm3agpzgsruzbsx6t4w07eell7s8emz8df9po0i6y9u9ytrlay6gjj7208powpokombmoemc5vtrimgmftm3h9oszr4cdyyxqlijcrlv3206v17m20u4um5yp8lsno3xif2re8pij5h7zizuzete4akyx9gyce40mkh792pydfl428w2oen3djw22ex9fa\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiInsertRoles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[BplusItSappiCreateRoleInput]!)\n{\n\tbplusItSappiInsertRoles (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"0b9b498c-73cd-42f5-86ce-db46b4b673f4\", \n\t\t\t\"tenantId\": \"095e8662-36d9-4d7a-93fe-3b861751924a\", \n\t\t\t\"name\": \"dpz0y6keydt9yg66u55cgul33108k6aerj55zyu3tsor60f5hyoyy5n4l7fgrrcva1zi0bogdec6tnmrsxnkck2qdm9j19yvlyngb9xml8btdjm35hze2cvorheofq85xlpsqg0oqmjxlz2aw6sz1m8eqv3z2vwlqsmk6m4a9ykjk3y5n90p361jnr3vf4iwqhqwgjgsgjy5oli2axc0caazqypm22dls5hxwlswmekrbrn3vwxgeh8tgjxg72r\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"90603196-971f-4b1d-9914-d88980005932\", \n\t\t\t\"tenantId\": \"a0c03fb6-bba5-4b91-80cb-d2378112fe36\", \n\t\t\t\"name\": \"ktuhh0od9g016n7w1agfkd1dmyij81ovbu0ejd64bdlki336zywgastdes0dh1xmp9z82k9zfio9app771of0xec2t90wzwu40xjtwo7qb1emrwadtwhhp87kez56bn6ytejw455g67mxqlgwhfzgn29augkw537prgs3cnvbnkk2drtkxnqsm1yjvhir6e2mcgbjzj4a388fku1pu8f99yn6mqp7x5ejj84n9ft83rjws0vi0riypxaxo3hclf\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"86a034db-4bd7-414d-b57f-a8d43b91a054\", \n\t\t\t\"tenantId\": \"5b5b402c-18ff-4368-8d94-c1bcd6ea2ba6\", \n\t\t\t\"name\": \"la0wp7zay6me5f52ze4gloa0ecis45wzuwfi0v38p8bi4kbhvzog9q0c1oc7o3pacv3wk4bfgec8i9clt1m7pb1dmx41jyvalt2bvvw27x6ufzakfzuy9tn91wlw7r1fpueuoj7kreqzz8tfn7nsskhc0twmf607jjgr0hr0ae464dys43pliap7rv6vq10tz3zvzn83ivritx4j0fsjskkw3591ub3tii35gy6ejodst598ydf1ep89ixi3syh\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"41a17174-8048-44ef-80f4-6a986ae5449c\", \n\t\t\t\"tenantId\": \"2134f94f-1d22-48ff-add7-aa4dbbcc0d35\", \n\t\t\t\"name\": \"gxycw1hxzht8d2t1qy9rajj0y5tiow5498wdqepynlsfso0foev43wngyheu08f188dhl1bpipyyvz0p2p4b6i4gdmw1vn8wag7l8k98tcndmasy7r8784dj9fxnr3wjbqj54b2mzbfdlmblfbijxu5w1fjkqw42picmgvmn8760jzsgxpdjkeecbvqmu75cfi9zgpriv3bbm4mwxoi6nwyqx2cxcmjtdiz7g7s3v0ck5usl65virqmg2df21x4\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a1f72769-a48e-4cd9-970a-c8b7fffa6fcc\", \n\t\t\t\"tenantId\": \"dce5d1ba-30c0-464b-ac92-86cc13026dd1\", \n\t\t\t\"name\": \"c5jhzv89hbx7m70q0n7b2r93vvg3web3ubqnuktg62k7ni9u1o2ism17d7iksj12prc0e1ippjsm4slz120ef3c84p5oed6eqgarhtuvlsaazq0rcmo7tffljz1a0lpx9e6g08b1cxjkf1d5x615wxmi66j6jexybsitsqmdilllepw158mdx5ts1wdeyqt2hnz11nb8wng3e2ba7baeco9mohva7r48brc5cwkjxtfzkz0ulaatzov2wzazwxm\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9c087997-f475-4d97-b92a-5937dea2abcf\", \n\t\t\t\"tenantId\": \"8fa15863-5f64-4ab6-b52b-7cbef1514b5e\", \n\t\t\t\"name\": \"0d9wi0g8v92t6taai7jgck7zbiwpvcn4iakygfrghqzkc70foukdnoirtacl2mvs9ftlj6f090ebnf1i41xd9vkp1xckhkuunpkvwvjpodpibfnygwaqhqn9bkcnnkc7l5hn2bkcave7ugsse4l5t058dyhk0717w4dz2qabhucxcv30uygkydvjg5djyfdd9kkkwnw4ekjj1si2bn1l0kmkek0bzf5ragyl4sswqqiyigvxqhg1x9fwtrems01\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"07ac44c2-c03d-486b-9b78-b4cb630e8261\", \n\t\t\t\"tenantId\": \"26fa2808-1ddf-4bb4-a51b-adf4017c5baa\", \n\t\t\t\"name\": \"fiuzdv9kqy8iapvejv03z0kbe57z8cfgjf286awxrszoqq2f7dxja21f1q391nz0kzo2b27kz1844vp7rmsmhgrex6r8guransrfdo5w62ag6xiikqx29vsxtxsicuklca6czyl9dtm53jyuqzflhs0sp4yflagbsqqwvimfxmlaj7gcfn71ydlavedqfqj5ro1fcddly1s6nz9ndpgug3sihean9w232gyldwryoa3k1n84ikfu3nl8fsc2hi2\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"883a8ea0-f9f0-41ab-9e27-bd5258c3bada\", \n\t\t\t\"tenantId\": \"8445980c-9135-492f-80e3-7c59e0780dad\", \n\t\t\t\"name\": \"8q647m1xkrf4veen2z99kfy1cggurback0wj9dxksz78d287ij5jcg3wduvtwp4ya8t0b910cnp7yaftbf1rq9jbvxnkcbbcfwdutvgdvzu5n7jl7ujnju70fub1gvbhwqd4bgfcyga55z0v0tdocx9441t825olg4ypl7w5grxhoe7vavra8ddw0p36vmxkhllw54q5wkdbt8o1pt7egqw98c32gk7lu51gucj3cfx5snfxj5ohlilh4a3244f\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e5453278-1af0-4dda-b9a6-18aac8eb82ea\", \n\t\t\t\"tenantId\": \"8fb29c4a-0856-4742-9094-ed1aa2c9f3a8\", \n\t\t\t\"name\": \"rorxia6km3lvhgkqfb1kuapp08brupioccgu1rbjyyxkkuh1qgikmx98ddijq3daket63zw0hx500q3ivccdy1ol65q72g1k94k0auou2m7qh0521fzxsiph2gzhx4p48n433tnl303954dkiktjeuxfg4adkb421wrwoya5l2nbgl3e3gc12pn0j6ookmh64o2gjif9wmvbuakcm3ndsh96og2e6ni20g9e7auhnzx3lz3vq3lt4r39n4gpv39\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6a28a0ae-59ab-4250-a21e-dbf1f506d7a4\", \n\t\t\t\"tenantId\": \"48aca361-98ac-41d9-9fd9-69cb6d93e9e8\", \n\t\t\t\"name\": \"zf584b98570imw6mka24241uts75gtf5hu6vp64036wa4ij25xgmdam2ghzx5acy6cqf3coip3hxf4hwmqurdyyic0bixqdbq5ysnaxxpqhdc5woqs6lqnv75ce1p8g9jh7onlapposk8n8zlqxcyq9lr02iavchkvp663ya70wgqkxtledp8dkcb24mzo6njk9vz8rghfnsaa5zm4xrnu2w23mgww1vreh2jiqxgfd1ty344zoirxzdz7sssf2\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"995ae292-ea35-443b-b60e-b0f92cf2ff58\", \n\t\t\t\"tenantId\": \"65ff7e39-ba9c-4e4b-a3dd-e2c6fd19126b\", \n\t\t\t\"name\": \"25ls3h42hzhlkr3ncjadakkasun8eyexihk551x66qvyhksi44ieyec090yh3mymr0c874gndr0o8dx8nusydo0oy3g4mlb30smry9dov41exfowac789m0i36t13x8rue4fiq32w63k20dzs0tjdy9bxula9h63strh6e2xpmjh0mic02ny1jnw2kewnfaosnpua55s1yy8nkkka3v6d9ka5t4kcik41brzcsf6vh07pybkjjjez9nijw27591\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2a8b65a5-2078-4e42-90fa-34b4fa1aa71c\", \n\t\t\t\"tenantId\": \"139186ea-e253-42cb-a0bb-b77bc0875373\", \n\t\t\t\"name\": \"6terjrneews0bymum81dopqcmz3qx1olttud0l3vy6cosmp2l809lzvepdp8q48wij49fcjho45ow1eq96f84jnxk70tknni8yx91nizab21poicfizc3f5h86ozmiuz8u7jozazy1q81l0aow98glw9lwue67nfmpg0ij3h6u04j9upczk8bcudowii2xrw7d8k3geq34fh3rmqbq5jxfycgiwushoqzfzx3zmz5hmv8nbmq8fxmqjphpodl55\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1229edbc-251c-4238-8e63-fd5cf9d2309e\", \n\t\t\t\"tenantId\": \"f74945bb-da2d-4cb5-b35c-18410a960f37\", \n\t\t\t\"name\": \"68rqr7d35gito6x9zw0his9wk5wii68ul3nspquvbb86ixo6tnevbh92zybrl1ocp839uzgobbsagvvjcwqfavonu308v05to6akoe52ou8sbcobittya69joh8753c28c95hyedx7sv175lkurpv6nx8zt9c1ozoszhgsvzf4qv7np9zgf5uv194rudgum4hzu4l79cpf7vha2xtr23p5wya5xejd9bbi5af9f95nhcz2n0i7y24cysksgf2r7\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9566c5d0-87c3-4826-b944-74e91b54722e\", \n\t\t\t\"tenantId\": \"9009a0a5-75df-4ab2-9edc-dc2c4cbed6e9\", \n\t\t\t\"name\": \"ywx348fm512pxyhptlf6hibuz76yh308bavbj3h8ril5bkcy2k682ldk80favym19ngehb7y5s5fvucbm3tvobp6j990c2nvh086w249je2bvim6cswqor177cdmijqeiklykzfp5miy96y6l7vy6705bwj7zic7ugbu6cpdynsifl5pj2n8z4r30twdz061h5uylih0iowwof2mhrgnh3eggrrorgs24fimtyvy6i3wosmzzsszyelf2regj3v\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0bde4012-5b21-4305-b295-a0b8bac4c287\", \n\t\t\t\"tenantId\": \"618f6778-4702-4cd4-bcd8-9c8a564fa4a5\", \n\t\t\t\"name\": \"2ib6sdiieo44uxla2k9y1wjr0qls9ip6046suf722axgu8if1s9pwamxtjzhtvcujrml6ajmdjsl8jmpg1dozjpk854kmoywtq7v2aik3w1ae0aoftgcfmm4rddtv4j3p0if2k4lbzfdc9od0x299aympacb890ep3701r4bkvcrzbddydij9o5md911oqrunrz5bglva3djk2776jav3224deytvhsvcpw4sing1k36jiny6lz6lpekbfumy0b\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d1697ad8-7c44-49b5-a978-4eddd0ab248a\", \n\t\t\t\"tenantId\": \"76a132af-6cf5-4332-a2fc-3900ff2ae8d0\", \n\t\t\t\"name\": \"ig7jdmqm0p9730qe0ftaajsybtnebt498svwssht3bdqds2hldin7hf3aifhksmzaugltlni5d2h7t08g9kssungr3ztt706wqmc123u2uj8yiq3f2a6pnasc1qcgup2yfvu9j2b3fnnsied4yl1vdsn47fxlv72651gwlwzzxljp1hpf41to777h0u40k9jayd31x0ks2czh7d1bowengwq5rno8qntgwhlj6pgsfo0j9n50v27mx6ev9cc3ez\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"beb64a6e-fdb4-4190-ab93-61e0bd436314\", \n\t\t\t\"tenantId\": \"87a69bef-e159-4ec6-9244-a77443861def\", \n\t\t\t\"name\": \"99xhlq2s6bmwlx0czf55cvbalbihn737kv546snv296rr3j6tr744p6fsjbvb72gxpfiauzydiuej86ca8ix73hves2qdxbu70a74gxhgtfb7ie30ihxkue2qxib7szo5s8downf0466wentp0mjmjklg1c2e6bvx6e6k5obfdce96j2hnc6g3yaiwgj60zf1cbz3zzw7xs1lu96sagnhrmdweob6e85p0thal25thp5pa8x2ed442cahibsfpi\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d67295c5-b91e-4a8c-a03a-5d02852e0f03\", \n\t\t\t\"tenantId\": \"293c2490-516d-4d55-b640-55de1a7cc704\", \n\t\t\t\"name\": \"wgdfz2499vz2nlrgp54v26c33cvrn57vcf4peeoyln08vj2bai02ypl5cqg3fkf6fh6az6dr7e0fvzo56f10cwdiyyy8mq3fvn98y5p28dqyv07hnhr1gbtyj902lc09c0l0xcut116426uz0b0abbslg1enupvs5tgknqgi4p59d12u3q4udcjmmq40w5j095m4x4oa28uvj08elpmtvzryas5e0e59cv22212sld3mnsgzk88hc5kpfsgqt92\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ed31cfa1-1133-493d-83b4-324015d0b314\", \n\t\t\t\"tenantId\": \"1a99b5dd-01f7-4516-91e0-f97ea171763a\", \n\t\t\t\"name\": \"p19m3xxtqx9mz6024od5uh7io4qvilhjc733vgtvx437vylmvu1w4sc6c025bjb5yqyhzjw5zl94mj2aj2mcp7n3ibkqy0y7k2icswvwtyh68awiurerce0ufe54zn0xk9ntpu762lld344dnvidonb67g088hqhp97aizj43b39z6777760uvrgbeof0olb65bvky0bx90muxlneps917v14t1f8fvknea47ouubf87s6bdvq3d1qugnwr3ee5\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0c81bfad-7a16-4e3a-ac6e-a2b008e50a04\", \n\t\t\t\"tenantId\": \"ca8bedd3-16f8-4c5c-af9b-db9e910d6068\", \n\t\t\t\"name\": \"0rap4heci864zl1gif8bhpmni0drj31sh6bcputug169l6qt2bc5su126isy34dk2sliao3gqvkju1bsq9clkx8jp089j4j72zx2ptsorefyyqodzjd1shz11vo2cctweszf3puug5qaag32ayxnhigb8t3l5momrtucdvwg9ym1fwi8kg9dlodtj5507kttcn4v1hazu878e2plrg7v9o9psf58j9j0x78p2yz1vh0yy6jkq29xydjuqrg9xh4\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiPaginateRoles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tbplusItSappiPaginateRoles (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiGetRoles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetRoles (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"ff8cb54d-0a91-475c-b0e5-1991a725d1da\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindRole",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindRole (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"ff8cb54d-0a91-475c-b0e5-1991a725d1da\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindRoleById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tbplusItSappiFindRoleById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"ff8cb54d-0a91-475c-b0e5-1991a725d1da\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiUpdateRole",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiUpdateRoleInput!)\n{\n\tbplusItSappiUpdateRole (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"ff8cb54d-0a91-475c-b0e5-1991a725d1da\", \n\t\t\"tenantId\": \"a35fedca-15dc-422a-9a50-029d18c9764b\", \n\t\t\"name\": \"3has0odeows3i8gvnm9rdl2143qbh33o571nvcgj3uqydz2hhiu9by4zr3l3hxfo3qtkzuc3ls8hiegjs6g2siic4h77cbvtgxv5xfi1ld0vsjciukvr180p7upataozybcx0piv4k9k6mqczc39fzin1fqz48ckdfixuzd077p7dprhpxpv26g8mb926lxpb71ntsq2tvp960dxriddikpo3pg8w6w4vut7o8u7ktoicx0pqpo7uogbkuv48t2\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteRoleById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteRoleById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"ff8cb54d-0a91-475c-b0e5-1991a725d1da\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteRoles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteRoles (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/role",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"ff8cb54d-0a91-475c-b0e5-1991a725d1da\", \n\t\"tenantId\": \"a35fedca-15dc-422a-9a50-029d18c9764b\", \n\t\"name\": \"70jmgkeo2xjowpkgb6n4sgyxaybydawv06ar6rux81uv8l77dhdpwinp0zzrrarboaka5ezaxxzsap6svtb958vzb2bnygz7i9bclp0d808d8o1nm0m140bhylhdzimxwnm45rsb3dfcjiwnzn4mkmnb5arse4o2jjrw7lc7fsxc85ulca2mxve80ctq2o33kcb1ya00xr49xg8hgu9xx5q1y8cf2xgoik458ozzkogevl4gi0mgk80v2nvd1q4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/role",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"role"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/roles",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"3a1faaf6-aa01-474d-b081-c3b378c92e8c\", \n\t\t\"tenantId\": \"e79ef749-2355-45d3-99a3-ebbf3205b43c\", \n\t\t\"name\": \"chxa54rmvyoo1nh7wno15f43hmqv8jfz6dcqqaq0x15thnxz7b1i6zw2yz3nqym70jfqmjg7wlt1jpverkt007yxaz7mfzoc88jr58k93irb5w1lyfioy555ijo81yikyhztzzkkdom8u0nqasva0qm2q86fyj44p2pwjse6388eguy0rr268jvl6lt0ayna117t4rch4uelbi0g0dlklblnebxuny95d558eitdigw02606znmy1wmo5lcqtcz\"\n\t}, \n\t{\n\t\t\"id\": \"5d850dc4-d1db-4917-982d-8eeb62632a8d\", \n\t\t\"tenantId\": \"50699a49-175c-42af-a4b4-57e450184ef4\", \n\t\t\"name\": \"gi6ks7iv5va5i1zkb4vhzqp5cmm5c5th7r26clohvceqzuo6ekihfupngl4m23hn8wx60f67e4597zibaorq38vp9v7207848mh9fxwd8j9vyjj01eu474345zguw0xqckoo0nxdzoc5ug765ud784j6p73o8ho76gm04nk370ebekfxtw7c8y36y4f5iv5azn28mkoslxjezkxs12vumh4h3bh9sjf7n0v9n3ga1hfmwzwbnrj9yzx7p10e943\"\n\t}, \n\t{\n\t\t\"id\": \"e3d461a5-cbd5-40fd-8d5c-29a5de4f5df9\", \n\t\t\"tenantId\": \"e19b560a-7862-4d9e-af52-a78ac66b2829\", \n\t\t\"name\": \"w466vindlofh07smslh06v9qtiy5np6z5x5wkttn9v09c2sdjqalvlr3kabthp8ntm0y2qez71e8cz4dlq7qumexma7akqclte34s1q0ax576jcxmjiqu9awv3obedeacnbb2wpa1zh9vb3k2jk48pbxmy9yersxs3w9cf0b5xvh423wjo49n9v7c22syumg5psyuyna63txzhxy8lyystnx9fpj538o2bz6sdwdf65rofyybrn1n2s1qvbmse9\"\n\t}, \n\t{\n\t\t\"id\": \"48d5fd57-4e91-445a-be1b-b8a411e7334f\", \n\t\t\"tenantId\": \"f22b322b-1b47-4316-b506-3924f2b90448\", \n\t\t\"name\": \"lbx32d2wvj4b33gzljif042tu7t1e80ra3okyz7wjb80bap2jgigmw0sxvfsexshycibzj8fyvip95tlgrhnlwxi7j4fpn9hmxopimtu40hi1ou2yjfjh4931gfg9vauep92l92wo7fro46ti6lg30zc9nxw9jdbzm42tcomqtg83xga2lkq4kq5r5rygl4dwf89ioxw2eexlo4df1mcysanfhbnkk83hn8ro64am1ep4ghgb00c15mqszpfpho\"\n\t}, \n\t{\n\t\t\"id\": \"77ff6cab-e532-4312-a8f4-172947a77887\", \n\t\t\"tenantId\": \"6aa1b991-e289-4ec4-b038-61e3e119b4e0\", \n\t\t\"name\": \"m2t57lnsgds2n3r7gmpgfpnr3rk8yreylf6hooof5nlzbtz06itqmv1tfpdrvqhkf6zlxiltf108nkdgiotd52g2sgff1h532578igxcoq60juhlc3tu3bkheocnvhyj14km264y2uzhi1k4k6633vopkj6iqtut8evzpeit72mejp5v5bkwvuv010f1h2ewuipzewv25owgvow09uzmynttng9nnrkt0tryrkvwok7y4pcbccx9f4tbu3tyluc\"\n\t}, \n\t{\n\t\t\"id\": \"b69c4b44-28de-4f2f-9d3b-1e68e9aa4d08\", \n\t\t\"tenantId\": \"0275bd5d-5dc0-44b0-9915-04c90ffd817b\", \n\t\t\"name\": \"cbcs74rdn9v3z8lch32fc3bxc6gwpzcp7ghibljpy2fzrkfhthxos8bx27hulnm3vkep8owgycu1mbi83l0vvebv7ip4w7vp6y7lfkfugo6lr5hw05jvy5rccqhoh70boeyv4b7qz196mqzxt8tlhlf1k1bgabsa69a3i38udt18gag2yfxk9yguczw1ddgrv5tlknmadg6qsygkt68ural133bmhtiy2sh1gsmc2h0vsn8krwt42mhubbffq39\"\n\t}, \n\t{\n\t\t\"id\": \"87242d30-83b9-4d78-a889-3968e04265e0\", \n\t\t\"tenantId\": \"74f154b7-55d3-4d4f-9644-fc423a87e7b7\", \n\t\t\"name\": \"suiqqfzf9bfb7afkz2jjkldc4rvj4cbh7b338nnk7u7ubszprrbqrb7nxvtnw1nhc0qktx6chh0dv5zpg6qn8l5sgw9k36yzmd6i7nzzdveq7rfxz9mnyqd84hyn9uijk9htk0e1vtsn44g1s8gfvc9mfojak0mifkksvy078dftbxyka9mp2w93o61fz1czf9u5us0bbqojkr3bxl6j220kixy7nrh5wgts86ixxqxxr0xjsqjow81mo7zrk77\"\n\t}, \n\t{\n\t\t\"id\": \"8c1fdcd6-7521-49fc-9b3a-89de23af099d\", \n\t\t\"tenantId\": \"c8df1114-0259-4dfc-bd7c-109d9bc34cb5\", \n\t\t\"name\": \"t6alm3gommwxf3be1vks2gp5n8d17jflj6dx9honcqim6raw6ez2158dvrmn849fhs27x8h2mbomhaax1d8yfnotre1nszq0hjhhkoqihca8l2lp1w3oo8aol0z2wsyuoctnnnjse3iq67brviw2vhxif71pcn1vsxxksl9np5o9i211wued9l08vc5nnxhkm8c1iyu5wxwk9tb3gn6ooespt1nmr59v64x90rkxvlqwa7v4hqsm7agjgop4gfd\"\n\t}, \n\t{\n\t\t\"id\": \"3e5eeb0f-5aa6-437b-9125-5d2f1098ceb5\", \n\t\t\"tenantId\": \"fe46ee64-a76a-4511-ac55-4bd0f7c8f874\", \n\t\t\"name\": \"hfnhxg8jmzygpnwsq004hdolmdx28curxy7bijn3ak46n695mc3vzdwp92s2nah5us0463l5ygiwktkbhonvjmnn7bcueje5febsls7opv0wq59udfeki84wqcrcj10y6kcr1bn7aydc1bfrrlzjvjtrxxasxsavnhvxkjzx9mami9j7x6nmyfi7rh68uoonk5zppjvmg1m1a793afg4sffqlhhhalktbvxosl41cg2ocsadeypfno6cil799mk\"\n\t}, \n\t{\n\t\t\"id\": \"ecab9b0b-9d86-4fc2-979d-7778ab14296e\", \n\t\t\"tenantId\": \"e1f23722-16ea-48a6-8b12-273314361926\", \n\t\t\"name\": \"i6ubz7f71ag0k5sqadocmx9wckgn2f8abibpkv2vg01dyju72zzp38gw7a84js5q8nbhbnqc1kjgqc8ewidbpxaegfl5kkvjcfk6mcgpk6wbwu1mv1bbtimn7zrlwl5ba9nphmfu36yb39gtj6zepfu41g9b4aotarx4693olb494js14m9u78nmh0zec9r9c6wje3bkw2dezq32loy1oo0qrn76xdsu8epvmbc2se7zu7ihuubkeqpf7g17fo9\"\n\t}, \n\t{\n\t\t\"id\": \"8d924a12-9ef7-4770-855a-87d8800b2f98\", \n\t\t\"tenantId\": \"cc148b9a-71e3-4804-8a41-a96001838f41\", \n\t\t\"name\": \"6vqs6v7pk480nee7m6imtaa0g6x7r5f4243glxhazyblflfhbs23zoruorv877fid8yb1gabm88ukuyb6v1hj49blpbt881lf6j425tc017mt5aroif80ufsecl405nqultnhj5m37f1qjuou01rkduetfsqx9l6ecjvr2xbhgb2le6o5t0jpqwrevur8pnv0y6ysjkwuxtda03e1sxbokw5s701m206qsxgn3dzlavnqp3f6d32injmtxdwcy4\"\n\t}, \n\t{\n\t\t\"id\": \"8a20e324-1909-4acb-b1da-37fbf2a17720\", \n\t\t\"tenantId\": \"82a8e522-7594-4414-94ab-17adc9b99744\", \n\t\t\"name\": \"7z6cmaiqnmbks8tyb43visxh4synrlar123c96p6lhii2u6dt6yzpf6z69cfk7tp7vqxoyzl8kt6oznma7wxnmfqajtibap6uakqxorz1sch1mqp6eaqug1zv637m4t2k7bvvjrd0vk4w9x187nodg6uiuiigwvt5m7ma6al5mq18baqu6bfqb7m3dgv39qm7a39udz4dkuqire63lskcq5l8o7e7vecyf2iggrljh5n8na3bmnwznupffw0m9q\"\n\t}, \n\t{\n\t\t\"id\": \"ed702859-f744-45a7-9ab5-11d3bc547e24\", \n\t\t\"tenantId\": \"7ad8016f-34ef-4007-ace4-f8eba417a63d\", \n\t\t\"name\": \"tcdm0gwaktex1crq25ow4h0dhbj5pqan00cxiqmtpseklcjj48e6ff48wbyo8lniflxcvcgfbhf3495v9yq0g2ssvossy1ln4whkybrijazn93jv4n2in64mbf7rtno7yr9yqhnn7zylka0nlozdi6ri0yr8fjfrlzste92uyz1h6njqwhnlei9dz4hgoce1k5v9alp4u9mpec3cqp2jnqs10hqvhq5sj9ba14ttoxbixtf2haomwt26wgyy6yn\"\n\t}, \n\t{\n\t\t\"id\": \"e5d8c8f3-5d43-4c69-bddb-12c709bbdfde\", \n\t\t\"tenantId\": \"60edfef2-344f-4807-a516-a4d8a7711cd3\", \n\t\t\"name\": \"ccj99qn9d0ctknxf3vzzh5x51ck69dwa1it8wb9lomota75oqucw5h1md7v28ydcj81v97yiel34g8db18mx4dr16jztokzx4ygxalhdhvh6x7nja3p78j52bp12gbl22ed1v7mo9qq9k8xoqn1rh5nflmxnhagsp5ckqyw8bx9omxt0lddkstm1v405tm4rfcclfihgjmmedhuznub5vmbe71unl4fc75f0xyjpml85ua8dyw9a8x1yjmx74md\"\n\t}, \n\t{\n\t\t\"id\": \"bc548691-b8ac-438c-bd36-6d8837c02e00\", \n\t\t\"tenantId\": \"fa5a66bb-c0a5-4770-a163-b58ba0ea0732\", \n\t\t\"name\": \"vmq2i2ba1wajvmvzaz27o1kwe09nxu4dqquzbx63xpgirsx27li2kmu7a1vs9fkqiord1j89jlaajjl3cv34neroap71aw2p2thrvi52faujy07va3xioi3ouz6jnassljoo4uqh09uze3bv9mee0t3yyoz35nwn82mmjwtsd6w7rrx1sueokoidiaghcpkb1i1tpzq3drn8yfe0pt804igv2fyeqcm6f5i3swmtc5uzq9ww7xy1ykf5vvpb7cf\"\n\t}, \n\t{\n\t\t\"id\": \"f23f1f57-6ed2-4998-bbe2-44aa4c30717c\", \n\t\t\"tenantId\": \"94314336-0003-4441-b937-610967197f6c\", \n\t\t\"name\": \"xturcxxefzspuvhpcco7qaqgrgxlxmne5k6nbpitau9mq7euypybgzs6w12yzokuob2oe1pusnh5hul0b2o1vy3nzhepd8hsopix4fesho4ova3210jgvt1saip370sssv03thh16ve67rn3982rxsvrersw9zglqge74n17jwz0fdfi4d8e0jslie4sn8ndm3iydc5n528xb0sar5gtasteqxhspjcbwgp4nwvrvaxy4osercozs2sd6yukcd7\"\n\t}, \n\t{\n\t\t\"id\": \"d41f3d83-bc90-420a-a72b-9ae81cdaf077\", \n\t\t\"tenantId\": \"f113e77e-0276-4d41-9da7-4ea4301d6596\", \n\t\t\"name\": \"m1vd6gye1n39c06yfik6fjwgw6mgtxtwy28z98k3ybcrkoqgrm07jmipf69cyt8opvptlhd534zajdb2ju48btrslx1o6507dom05cmkmqx8urqeg6vok42po44tzdn0di0geev5k79qyqap0y62bzv3estmod95y1g3pi1w5tilryd5giyuy4cepdazj3r736ga1zo3wxlidny6u7d50m6z1s4zulr0cgfr0g0qotnb6f4kblpum4mk8em2sl9\"\n\t}, \n\t{\n\t\t\"id\": \"34eed9fa-7361-453b-8c66-2bba18c4ea79\", \n\t\t\"tenantId\": \"4ebd933f-8c9a-47ad-b572-4e5c8546821a\", \n\t\t\"name\": \"v8zaf7ut9ant8w8oml4bp1dssre1xr2tl66aip24bvdjankj008upo0dqfdher1o5og4mlt2aosnzejbot0ht1a1muouy450e2nsa96puasp1nxgslslz2r9miclyhcwu6l30lyrz408pi1o0s32n25519xh08fflso8j4mj8oeze4fhlnok7zs3fw6wc14mrhlmd8i5szr520fnlz1f2xqj0idj5y2ugay7hoozj44rq0fdbfgt6aqzzonq1vg\"\n\t}, \n\t{\n\t\t\"id\": \"2bcac974-4efe-4450-a5f2-b28ffd7ec85a\", \n\t\t\"tenantId\": \"e481be9b-8c9b-43a6-b145-919cdbdec416\", \n\t\t\"name\": \"48vqa19e1z3zhaujf6nwb6yj3ahlbdufetyyf5vjuh9r3rfhq543hf6nk0gk8sscdwebqftuiwljdrnlpynbwqr3yqpzrckdgrelqg3cjwufdvw91b7tghtpc88su6errp9kzyufv36k9o4c1cxpkk23pouxug5xxfpc6zibuk1lwlc13kwlqmot8uxmqzoxebcp3kpfyshh5nt6b8nb52dy7s6ao4q9irmkqzdwfy66z1cxcbj7kqn7whjk307\"\n\t}, \n\t{\n\t\t\"id\": \"27e6f26e-4fc1-4851-9b35-83b5a147e6ad\", \n\t\t\"tenantId\": \"cfb6742d-805b-4cf3-858d-4146df512fa2\", \n\t\t\"name\": \"u0qg3hze3ga7mic07lyt4n6x08fsk6nt0cixj4b0xfu8wimqvq4y5cdlcullw9by7tejupflst8q9w4cdo0m8i8dum9td4knm3x69zwra6mkji8tw0jfvuqf8cyq83oypiw6ssn2d5owpxzny9fxf8naev4bsv69ceewg3weckd6v1t5jbatl7pp3lm4v8viiloivp2afe12wvjv4xgmldtph2t7ez3ic3mjp9e84bcc1mukp4npcvg9qi3vmcp\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/roles",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"roles"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/roles/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/roles/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+                        "roles",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/roles",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"ff8cb54d-0a91-475c-b0e5-1991a725d1da\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/roles",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"roles"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/role",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"ff8cb54d-0a91-475c-b0e5-1991a725d1da\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/role",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"role"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/role/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/role/ff8cb54d-0a91-475c-b0e5-1991a725d1da",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"role",
+						"ff8cb54d-0a91-475c-b0e5-1991a725d1da"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/role",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"ff8cb54d-0a91-475c-b0e5-1991a725d1da\", \n\t\"tenantId\": \"a35fedca-15dc-422a-9a50-029d18c9764b\", \n\t\"name\": \"y6s6vaekxkgkb0smrn37dl7ly4adgmau0kx51j6bqltkp8sovn1t5apz4pai5ej7nu51a3p31w4qu0gyzoxcfj0kmholzyb26hw0yqyo5nrlie4bkao6ibqql87k1wzznc6alrt16vxc69kwidvgjhtxv59ier0zdpaowbdk74a65482ozaqcesgo4hwtbu4ewusro9jf5nrwkiwu8rbu0118y4kln46cwj7on8nnso45b7llrse5kgn85eddgg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/role",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"role"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/role/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/role/ff8cb54d-0a91-475c-b0e5-1991a725d1da",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"role",
+						"ff8cb54d-0a91-475c-b0e5-1991a725d1da"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - bplus-it-sappi/roles",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/roles",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "3654a6a5-691e-4b67-abcd-37daf45f49df",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,29 @@
+version: 1.0.0
+moduleName: bplus-it-sappi
+sectionName: role
+sectionNames: roles
+entityProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipEntity: AdminTenant
+    relationshipModuleSection: admin/tenant
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

@@ -256,6 +256,18 @@ export interface BplusItSappiUpdateMessageOverviewInput {
     waiting?: GraphQLInt;
 }
 
+export interface BplusItSappiCreateRoleInput {
+    id: string;
+    tenantId: string;
+    name: GraphQLString;
+}
+
+export interface BplusItSappiUpdateRoleInput {
+    id: string;
+    tenantId?: string;
+    name?: GraphQLString;
+}
+
 export interface BplusItSappiCreateSystemInput {
     id: string;
     tenantId: string;
@@ -336,6 +348,10 @@ export interface IQuery {
     bplusItSappiFindMessageOverviewById(id?: string): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
     bplusItSappiGetMessagesOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview[] | Promise<BplusItSappiMessageOverview[]>;
     bplusItSappiPaginateMessagesOverview(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindRole(query?: QueryStatementInput[]): BplusItSappiRole | Promise<BplusItSappiRole>;
+    bplusItSappiFindRoleById(id?: string): BplusItSappiRole | Promise<BplusItSappiRole>;
+    bplusItSappiGetRoles(query?: QueryStatementInput[]): BplusItSappiRole[] | Promise<BplusItSappiRole[]>;
+    bplusItSappiPaginateRoles(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindSystem(query?: QueryStatementInput[]): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiFindSystemById(id?: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiGetSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
@@ -388,6 +404,11 @@ export interface IMutation {
     bplusItSappiUpdateMessageOverview(payload: BplusItSappiUpdateMessageOverviewInput): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
     bplusItSappiDeleteMessageOverviewById(id: string): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
     bplusItSappiDeleteMessagesOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview[] | Promise<BplusItSappiMessageOverview[]>;
+    bplusItSappiCreateRole(payload: BplusItSappiCreateRoleInput): BplusItSappiRole | Promise<BplusItSappiRole>;
+    bplusItSappiInsertRoles(payload: BplusItSappiCreateRoleInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateRole(payload: BplusItSappiUpdateRoleInput): BplusItSappiRole | Promise<BplusItSappiRole>;
+    bplusItSappiDeleteRoleById(id: string): BplusItSappiRole | Promise<BplusItSappiRole>;
+    bplusItSappiDeleteRoles(query?: QueryStatementInput[]): BplusItSappiRole[] | Promise<BplusItSappiRole[]>;
     bplusItSappiCreateSystem(payload: BplusItSappiCreateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiInsertSystems(payload: BplusItSappiCreateSystemInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
@@ -506,6 +527,15 @@ export interface BplusItSappiMessageOverview {
     holding?: GraphQLInt;
     toBeDelivered?: GraphQLInt;
     waiting?: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiRole {
+    id: string;
+    tenantId: string;
+    name: GraphQLString;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
