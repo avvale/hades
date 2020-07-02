@@ -1,0 +1,15 @@
+export { JobDetailId } from './job-detail-id';
+export { JobDetailTenantId } from './job-detail-tenant-id';
+export { JobDetailSystemId } from './job-detail-system-id';
+export { JobDetailSystemName } from './job-detail-system-name';
+export { JobDetailExecutionId } from './job-detail-execution-id';
+export { JobDetailExecutionType } from './job-detail-execution-type';
+export { JobDetailExecutionExecutedAt } from './job-detail-execution-executed-at';
+export { JobDetailExecutionMonitoringStartAt } from './job-detail-execution-monitoring-start-at';
+export { JobDetailExecutionMonitoringEndAt } from './job-detail-execution-monitoring-end-at';
+export { JobDetailStatus } from './job-detail-status';
+export { JobDetailDetail } from './job-detail-detail';
+export { JobDetailExample } from './job-detail-example';
+export { JobDetailCreatedAt } from './job-detail-created-at';
+export { JobDetailUpdatedAt } from './job-detail-updated-at';
+export { JobDetailDeletedAt } from './job-detail-deleted-at';

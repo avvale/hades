@@ -1,0 +1,84 @@
+
+enum BplusItSappiJobDetailExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+enum BplusItSappiJobDetailStatus {
+    CANCELLED
+    COMPLETED
+    RUNNING
+    ERROR
+        
+}
+
+type BplusItSappiJobDetail
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiJobDetailExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    status: BplusItSappiJobDetailStatus!
+    detail: GraphQLString!
+    example: GraphQLString!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateJobDetailInput
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiJobDetailExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    status: BplusItSappiJobDetailStatus!
+    detail: GraphQLString!
+    example: GraphQLString!
+    
+}
+
+input BplusItSappiUpdateJobDetailInput
+{
+    id: ID!
+    tenantId: ID
+    systemId: ID
+    systemName: GraphQLString
+    executionId: ID
+    executionType: BplusItSappiJobDetailExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    status: BplusItSappiJobDetailStatus
+    detail: GraphQLString
+    example: GraphQLString
+    
+}
+
+type Query 
+{
+    bplusItSappiFindJobDetail(query:[QueryStatementInput]): BplusItSappiJobDetail
+    bplusItSappiFindJobDetailById(id:ID): BplusItSappiJobDetail
+    bplusItSappiGetJobsDetail(query:[QueryStatementInput]): [BplusItSappiJobDetail]!
+    bplusItSappiPaginateJobsDetail(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateJobDetail(payload: BplusItSappiCreateJobDetailInput!): BplusItSappiJobDetail
+    bplusItSappiInsertJobsDetail(payload: [BplusItSappiCreateJobDetailInput]!): Boolean!
+    bplusItSappiUpdateJobDetail(payload: BplusItSappiUpdateJobDetailInput!): BplusItSappiJobDetail
+    bplusItSappiDeleteJobDetailById(id: ID!): BplusItSappiJobDetail
+    bplusItSappiDeleteJobsDetail(query:[QueryStatementInput]): [BplusItSappiJobDetail]!
+}

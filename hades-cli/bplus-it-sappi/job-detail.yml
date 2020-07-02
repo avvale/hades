@@ -48,8 +48,12 @@ entityProperties:
     type: timestamp
     nullable: false
   - name: status
-    type: varchar
-    maxLength: 20
+    type: enum
+    enumOptions:
+      - CANCELLED
+      - COMPLETED
+      - RUNNING
+      - ERROR
     nullable: false
   - name: detail
     type: varchar

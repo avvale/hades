@@ -9,6 +9,7 @@ import { BplusItSappiJobOverviewControllers, BplusItSappiJobOverviewResolvers } 
 import { BplusItSappiChannelOverviewControllers, BplusItSappiChannelOverviewResolvers } from './channel-overview';
 import { BplusItSappiMessageOverviewControllers, BplusItSappiMessageOverviewResolvers } from './message-overview';
 import { BplusItSappiRoleControllers, BplusItSappiRoleResolvers } from './role';
+import { BplusItSappiJobDetailControllers, BplusItSappiJobDetailResolvers } from './job-detail';
 
 @Module({
     imports: [
@@ -22,7 +23,8 @@ import { BplusItSappiRoleControllers, BplusItSappiRoleResolvers } from './role';
         ...BplusItSappiJobOverviewControllers,
         ...BplusItSappiChannelOverviewControllers,
         ...BplusItSappiMessageOverviewControllers,
-        ...BplusItSappiRoleControllers
+        ...BplusItSappiRoleControllers,
+        ...BplusItSappiJobDetailControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
@@ -35,7 +37,8 @@ import { BplusItSappiRoleControllers, BplusItSappiRoleResolvers } from './role';
         ...BplusItSappiJobOverviewResolvers,
         ...BplusItSappiChannelOverviewResolvers,
         ...BplusItSappiMessageOverviewResolvers,
-        ...BplusItSappiRoleResolvers
+        ...BplusItSappiRoleResolvers,
+        ...BplusItSappiJobDetailResolvers
     ]
 })
 export class BplusItSappiModule {}

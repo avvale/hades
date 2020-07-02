@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "ce25a03a-d999-4b28-b3e5-c2798f40590f",
+		"name"          : "@hades - bplus-it-sappi/job-detail",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - bplusItSappiCreateJobDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiCreateJobDetailInput!)\n{\n\tbplusItSappiCreateJobDetail (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tdetail\n\t\texample\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db\", \n\t\t\"tenantId\": \"21810c78-39c1-4dc8-8e1b-89ddeecf3fa4\", \n\t\t\"systemId\": \"11122a48-29f9-42b1-a88f-9076e4531d45\", \n\t\t\"systemName\": \"hiexm2uqokb34q6h0rnm\", \n\t\t\"executionId\": \"454b10e4-23bd-46f3-b88c-c858d6a9166c\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-02 15:14:39\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 21:29:18\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 18:23:06\", \n\t\t\"status\": \"ERROR\", \n\t\t\"detail\": \"ki17969ruwzpkr7zoqoy9tau86xt95l31dk6bep8wxvzum3arcmecixkmpi0uo8barf9afpbwed8yo6ozd2we58azex5qqddaaw63e71s0odmsbwbkkala8e1yeq8ap30ghmy0v5fx8jpoxqhpkvk8r29w26gsok9ax048u1f59rlgya2tmzoa3ja9kei50qi8g8d1zy409cvkhriw9vzbbehahf3zufqxq2dakyte9pv7d4gczoh91umpit515\", \n\t\t\"example\": \"8fsvzw2hv9t3ggdmpn2p0xwxau5i2c324b1n7yam5qhessd556hr1aityild4huub2sm3itkf20gw7toj9ik5hj074r43ty1neu142hjr24bhhckwc78bk9e5dgzbt2mj0v8v7l51t76wafdoe7pnhw783d82i4t\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiInsertJobsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[BplusItSappiCreateJobDetailInput]!)\n{\n\tbplusItSappiInsertJobsDetail (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"551d6050-13e0-4493-bd39-a1be74e339ea\", \n\t\t\t\"tenantId\": \"b69e516f-17db-49ff-b30f-d110ff622afa\", \n\t\t\t\"systemId\": \"2d12ae89-4fd5-41df-929e-aee0d088d18b\", \n\t\t\t\"systemName\": \"3k38lb34jrniuvc0uxtg\", \n\t\t\t\"executionId\": \"02f9c2ad-bd57-4244-99a1-6fd67a9c9986\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 06:22:48\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 22:24:41\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 02:58:11\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"detail\": \"mfajtqravzn3k7gwwik2ee6qb0bs9nq9r7mcig5y60nqftovohly5vxonk54ix89xmudwfponm6p7yxj40i381h2a06h0c7bzczsfdwp0jg7zr6k9m81so8n5elauk2uq9e3vcpioglpbpencmn246i17u0jll0pdrsadzl60okh4qwz6k9fv11jy98dt9zbjgh7a4zvuzaw9uihk9oqrfm67pcm0qhmm34bm7p72kaxt0rjh4rsv5pja7zrcqy\", \n\t\t\t\"example\": \"e9p658oe1hjhi62s40qcluulrgw0a40i7wtgkcv58uj0gb7sn0dxswmhca64vkn557uxqsi2hf8yznyuohj6gvdoywkwj2r94qwh9pd4s8h0hkul16gkivsuzpf2t5skh63n51cdeb6ja5r34xt0m4xmubcer84d\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"26add229-89cf-451e-8127-0f60163eb44c\", \n\t\t\t\"tenantId\": \"18619971-26af-41b2-95d6-17d5a5dfb6ab\", \n\t\t\t\"systemId\": \"9e960ec2-9b76-4aff-90dd-586372d4df93\", \n\t\t\t\"systemName\": \"i2bn3ud85zaki4sj502b\", \n\t\t\t\"executionId\": \"1a12632e-7c80-400b-b99c-6f4e5d7d1b6f\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 17:22:55\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 18:01:41\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 12:40:33\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"detail\": \"qcj7sm5hab6tmii7kkoo5i7y87b66fz06o9qftsq3kyyqflywpw7vqcu17ps8kztytbzb98ea7ul1iv19ocbjlowvxb9q5jxoebpw334ai12t3crkgzq0vzt2zz1aeper687d98d8x5isq5d84t8cwmgbqyp6et33x3vqf5avmfb4qu5hob52q3u896e24m9bn6tdc1u6xe7tk14mnf2ehvoir8ci1uqzgf8ykjwt781ywelvze711bkim6x8fh\", \n\t\t\t\"example\": \"542izqrsmfnt8abf3efu6zpxazrd8apyr8jnyzazm6mh5pdnfask95ki2k05ci0amlmtnzuhh5r5qe5ozt7icezsta8l41nrx60aip6khlf1k9pl0ntdh4fmvjcuswjn18lrmf4qwj2oc6heklipe1mo29mm5k6b\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"73363494-ec85-4379-a55a-2b6824b55452\", \n\t\t\t\"tenantId\": \"4f0eb74b-e7e7-4dfa-8392-9e87754fc12f\", \n\t\t\t\"systemId\": \"3861f5aa-607a-4013-a27b-c8225ad662a0\", \n\t\t\t\"systemName\": \"g68kp9qy6c3i3zquy18p\", \n\t\t\t\"executionId\": \"493bb49d-7994-47e7-beca-f92f1f13c6dc\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 10:36:15\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 03:45:06\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 12:16:08\", \n\t\t\t\"status\": \"RUNNING\", \n\t\t\t\"detail\": \"nnpx5s3cwphshgyy1qqle1mfbx80ljb7qy6gdulxv7o6rehu15a5dww4xhoqqk09kd4z36u664t91n6j8dwgqlf58kscf4xxb3d08tp5juw8te08gu7rbdrcz262sffzy3m8e56fcwl2ed08qysczyiqp9wh79eo5xfmhujztii6s7qv41jpbuhq1tkh5ueml1s4tz2071w5vo6mimns11fqyubwl03frxlknsq6zgsk21ep8h1mey1dsprvgeo\", \n\t\t\t\"example\": \"33913cayqssttvh7fjxsad5z5ktet9d06fycl3dln5vnl87b8nwq60apvasfnpgnv29wths6hg38yqglmn3p9iaym8byk1pijgkwnb3t1y50q8n8puu5y28sjb0ys506d94od9aqhmziba713l31f5at6654rbxn\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"57a64951-2447-4b7f-9401-da036c1760fc\", \n\t\t\t\"tenantId\": \"872231bf-9192-4334-ab7c-f03ff61ccd82\", \n\t\t\t\"systemId\": \"780eb0d5-0868-4df8-a959-63dc7faa8370\", \n\t\t\t\"systemName\": \"hqwbao9oqt5lvagra5ei\", \n\t\t\t\"executionId\": \"02ffb87b-c9dc-404a-be79-cf0234bf7a0b\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 23:19:24\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 13:05:37\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 22:07:28\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"detail\": \"xds9t9lhao6r1nn8mo2sqjdtgu0bdkr7yp6hqyswtmrv939n5wm4viwoqi8o4ptabcuepqv9up2e5q8h4wq3ohkhne2ouxtwgt5elthvipnv6bg0vo0wr0zrjzpl2civ0v9wsche5jvtevrlbftyd566boe84lg5e1zevp2tnww8mkgrv9tzap18935w6k5falyubf39c8pz93hdm63gzcrg3ui2eanlg6ektwph3eowoa7anhxuk2upvmnctw1\", \n\t\t\t\"example\": \"px63shp79inejxkajad1k3durcv2lb1uzfnigxkl2xgui89igdn49xohpkynzuskexdbk56kvxac54d6gryo1ya6c8atq7iixndxq37xkpghiw5ea06gmpx2l34ioi6o7lvqy6zcpz87tqpk9nfrq3uxyc81d7u2\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"66abc817-03af-493a-a7ba-5737d302e1a5\", \n\t\t\t\"tenantId\": \"57d4fa35-250b-4635-ab34-b87e5d05a92f\", \n\t\t\t\"systemId\": \"77fef9b8-28c5-459d-9636-c834e10d3efe\", \n\t\t\t\"systemName\": \"94kzsmbdiizjck0ohnnf\", \n\t\t\t\"executionId\": \"14be8c00-6f4b-4947-b502-324723728bb4\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 21:31:29\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 06:22:10\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 08:59:07\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"detail\": \"yojbrja30e0t6a8hetyhkz8x5cc44kt4cf18bixxfxg2qujsfd0t8c1pxoqmves3yv4xgbcbuqh26oyg0sjn2altbh50pxi1836k41klza2vy8bvsyehbrvdpehfete0j0wcoti589r3k1uek2ecg2rdpyf5bsus2od9p6xey92om0i21dwemddf6cfzxgnltno2ar9vozifpb7t82c5f9c18bpo2yclpzbgac46xo9h7vwio8o75mszigh36vc\", \n\t\t\t\"example\": \"oz4wlvqovx2gd7iciknew8yytind0upul1tg8forgqxwtd5nhknm2pd9vdphre2mfylh8cg7gp76xjxylx6abv0cpetgu1oikcfz6ov6tsd5pslvem2i7x01giwh9u4037glnsfos4j1p2s0w4sw6fcsrs3u2bfh\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"db55c719-0717-46c2-ad12-cc5a555a35fa\", \n\t\t\t\"tenantId\": \"2901687e-0134-46ab-998f-80b4bfaa5cc0\", \n\t\t\t\"systemId\": \"3f512394-768b-4254-88c5-3b2ee8c160f0\", \n\t\t\t\"systemName\": \"qlcwo6pd8r87f2py73wc\", \n\t\t\t\"executionId\": \"a528a726-ba3b-4d7a-8b4e-0db62c7ebdb6\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 07:20:40\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 06:39:41\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 23:11:43\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"detail\": \"a4km0qp3d9batun7ldvu89bmyymmyodufpxyq4nsbya7aq0csk2e9xg1i4hzpzb7uutm5ygkoxkdh2007ktwatrns6m0g3zva83tyol6871kpbt08yg1sxditid2uxh2vrshknxxe1ga8hd5wbtn1k2nwibcz0cr2xpij7chl730esiyoxptd8ljsq4ssb4cc85dt8wy8az3t75wshcoxb8pekajywq72bqvx16bfi4k6o7bxkfrx0w3bvask7w\", \n\t\t\t\"example\": \"cv7uhat7nvngm7emw5v4a4s9xv1x4gii6hxjlemw5jzrmr9irjg070pvubhpasbj3ymzag5qawqtbxvlq4uo9dldcv72m6v0dfgvf7dx1e44wtvn6ar4nmp6or9lx1jwfrgwf3b68z7s2muut7j009wtihbhn709\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"425a5a7c-80c5-4b1c-8169-5aa11fd3cf09\", \n\t\t\t\"tenantId\": \"62fab5a4-eeaa-4418-b4df-67950e320e11\", \n\t\t\t\"systemId\": \"1b449852-deba-4fd1-b65e-cbead6319a46\", \n\t\t\t\"systemName\": \"7oj7ki6h06rzekhrxdel\", \n\t\t\t\"executionId\": \"81c2b4fc-2f3f-4fd7-967d-77c895bd30f8\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 14:28:30\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 01:41:26\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 08:21:50\", \n\t\t\t\"status\": \"COMPLETED\", \n\t\t\t\"detail\": \"hnl5plybfd3czb29whqgqk0icj1f0mavyegimqeiz7bnvomcxgvj7vkmrbjthboetfi9d9fylcl035x4yranwggu59b00ipsw9cixjsn47ar7y07u74wvcmgdjbbtffpt8fbkrxq07uzg82q2l7xgv4gbqtfzsbyvufwrazoe1db8a98dma4xlbys93i4flit47zxul6gs0vmp65tz4ugi3g9loc4fhuis9aoo1mmieq1e5ypx5et44p0srqen8\", \n\t\t\t\"example\": \"rb27c87avrwhaxmak5oe52lwwf0md2ecqsc13tj8a97riaprpqiplztf0mklcivitfntekncshw91df09g3ob08cq3d10mnf9nqnicebeqi0gxjq8hgswcn4gganeg9p81t45gqiswh9dd0952hpzvzz1m7ytbvu\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c77d2478-c42b-4df2-885d-5183ae22c12c\", \n\t\t\t\"tenantId\": \"00268b53-8e18-4100-b2cb-6e559f9d14db\", \n\t\t\t\"systemId\": \"75f4e696-bf6c-4f7e-8a17-bd4859a21c2d\", \n\t\t\t\"systemName\": \"0xxpeabg66g3j67li1bz\", \n\t\t\t\"executionId\": \"87e653bc-1f08-42d7-99b5-9937756b1eb6\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 04:29:50\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 08:55:42\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 01:19:42\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"detail\": \"m2hkbzz6p9t0kd1fyjn2jyzkke3wc33kqkncrrn7iicvm87l4lmjasj3weauxcgpj6b7rhbeyl18pyug9zlghra2sizbyottcuzuzdffq3v6ohe2i8ui9k9f3b5i6gmu3c7vdgc0fxdvj74bqmrgzy56cg3cy6olylmr9nv8b6trg3gzuhl61zvz2iyj2mppfwxetr416b51inzapgu1svzk1ztmexvvfq339hy03a19kp851xk8rogmtax4csx\", \n\t\t\t\"example\": \"8jb6q2kpa2g85xfd8qskzjmcyix5gcd70f57674xsbu0r8b8b53vescxoe1u01e1j12xb0woufwqxixenunmzkyde4uhexu8jrsw7ah2m8e58ndwqrbnsq1ev9enjyb4zm7vrbwlht6vatqgr0ei078asgfos8d0\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f3fe17b0-c471-45ae-ac20-955927387ee7\", \n\t\t\t\"tenantId\": \"0b3e1aeb-2a7d-475f-9c94-09edadc6106b\", \n\t\t\t\"systemId\": \"7d97a594-3429-46b4-b05a-401676a4be1a\", \n\t\t\t\"systemName\": \"2tsvu1k83kkeckh93ymo\", \n\t\t\t\"executionId\": \"b84972c5-95d4-4c00-9c6d-29bd4465069c\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 23:18:31\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 20:18:35\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 01:13:44\", \n\t\t\t\"status\": \"COMPLETED\", \n\t\t\t\"detail\": \"wy0eljcr0zk8f3w6d33cwpybphu1t4x1dl05asdvhezzymcrha857jqka5aj3brlz58101bx4vft3dt9o9leuenpcdsvq4xofkj278cx8l1vpjhpwcm4cg53544ujjt0lg2kasz7delqty32pzhhykrjcadyzf0cmzo5feprw97tdsshazoo9paabj2etmh29xhlbhs1sxik81ck408vlq3vikux44nvbfst4ntw0a0uljwga7y3ego6b07uuvd\", \n\t\t\t\"example\": \"9y29htyx1uwr3bvpw7igdvfu216it3bu1xbfge9wvmxa4mgbr9vv8asqwyaq0k8djic2o6xd5lpu6hu7ddkasd1r4b4of2pemdc9p8vaax6ntgndt58xvpgfibe0lhgx5vx4cquqlce0xe8x2oiw73xqvo6aagzf\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a6c01a07-4e9c-4330-ac8c-b497eded260b\", \n\t\t\t\"tenantId\": \"8b1fd098-7c2d-44f2-9342-933d4e4e2ff3\", \n\t\t\t\"systemId\": \"8260d91e-cf6e-48e0-9e0e-72223617a566\", \n\t\t\t\"systemName\": \"2zmha4xyf1d56eweyw6m\", \n\t\t\t\"executionId\": \"c9f1a0df-2af9-4058-ae14-d031bdc0c0cc\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 14:34:18\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 09:48:56\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 01:56:39\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"detail\": \"j74proma7hs68pfuqwy0scnhsxnitms5aj0t0e2m15ypy5a5oewqlgtc3qd2efvdznupw5ixtlgu2p4eq5hnhisnd6c2m8d62lbzw1soap4tbo3og8e5eow0qwske0uwpwi2dx1yzirvdkz8u9r67j13fd2tcgfxvauz4shc9pa3t825bsfguznuxydyr50ih2bktrfhngyf1lk65ztxz0iolquwm24cs7bcn2z5td5r4w1xtfq3nvcrbzaqmbg\", \n\t\t\t\"example\": \"swlf3vd7neewllneiwph4fake89qo21exobh55qc1puyjs7iyh6iebxri3ev5v9p4ur1bcjiu5l1f02wxcknwnaz8nvyue4ah6pjia634lqx0yb7e0ioyjvfwfjfg4nuvgip2uj1xmoozfaithizkim8oinjk69b\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5d8e961f-5c82-4925-8a05-b5588aab1363\", \n\t\t\t\"tenantId\": \"bee20e3b-2e8a-41fc-a90d-166bdbfaf217\", \n\t\t\t\"systemId\": \"f8153c54-2ea9-498d-b8d2-d39411278462\", \n\t\t\t\"systemName\": \"yfv9r8cjjgqjsh5yjyvi\", \n\t\t\t\"executionId\": \"89a0d2d2-0651-4231-8834-5dc6e176f629\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 05:24:10\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 11:00:06\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 20:51:56\", \n\t\t\t\"status\": \"COMPLETED\", \n\t\t\t\"detail\": \"t82sb0140r6a5dkyl6y8cvdgaks7xp8dvadbru6d34uy39h6qwdj4q82mf8nu1t9guzzlmtiqlfcrbz0bmkfk5uwl8wcixxg4zhwd10m54s2l1ughk34eae6jz25ul90ruds2t4rkjiav3awd73814wtdldjtccpwob53jy4cbvsgf1ugyar5t9706ppltctg4ookz99ex70l6s08jx9tejobcjzernfs3lvmgiagc3386dk1eiagfj4fc9xfs4\", \n\t\t\t\"example\": \"5c7gtq6376y560xf4gdp763fqxf6zdqx42gzale7wrtdp3p6odslowne0v4mp5f3zb3d3nwy4q5cmze9j9t3vbpbhcw1y64a8fxfh82ebsp4shqwlv88znhn1qa8ir42a2fkcj4gbkeyw7ro7o88omkbd80ouuwi\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a5544f9a-5100-49f0-9179-9f5aa09e45ea\", \n\t\t\t\"tenantId\": \"71b216d9-ddd2-4abe-b7e8-54249faa62ad\", \n\t\t\t\"systemId\": \"a20a64e0-e0c1-4347-b87e-f1a076c337e8\", \n\t\t\t\"systemName\": \"ddl5ptih2af9l15nkd0x\", \n\t\t\t\"executionId\": \"3c880941-597d-45e5-aea7-9afc9f9a2986\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 19:25:36\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-01 17:48:30\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 09:12:46\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"detail\": \"qw3x4uqdas07maqya6sfsoesyfqnnb34nndpeeco6dxfd1poug4zeyrazfgpo29lrlunenh53be7uev1psykphob0z1cp9a4s375zbi7k9g8inu32zpzddz26flkhcgakefboaur3oso4il6x3jkyg1rlhv6cretofskki0qw3hwt238li4itdq0xhds2lvhu101plz9o3khjkkv5vjdw0iagvzvlsf1z6oh5u4mjvyq4jy2fh3xioivflrvdt5\", \n\t\t\t\"example\": \"c16gom4zs4d438of3ooset5ammezkwec6s4bd7k1h08ukhgwnw62vqs4kxxd19001rchsp9v62hffng7ybe207zljjtdigrsxsqtaisingollobf6a7fvd92lgpdi0gyd0q0tnaxy5u8n4yxvzmdhu2pyr63btrn\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7281a78d-4c63-4b25-b88a-35dd53a86756\", \n\t\t\t\"tenantId\": \"72f228ce-6596-4dc0-93a4-e4e6ecd86d0d\", \n\t\t\t\"systemId\": \"03022372-9ad5-4fdc-aed0-b5c3594f7e72\", \n\t\t\t\"systemName\": \"7e8smxzqq6ekxdlturxe\", \n\t\t\t\"executionId\": \"cb251b41-4b2d-475e-b7e5-7c4d38527fad\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 22:44:08\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 04:53:54\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 01:58:20\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"detail\": \"88ige5l10d2thqgm29icbi8c1n473zfv92r2l8ziefxi6i1xkz504khh2amp13ybz9ztjmvbjw5oe0dlppaf7trtd80y4q9hn09d1pbd6iajaadk8lpwzs7shsl0w4oyikaptcp61d2f7qgb5k2rdewvcyw0vyhr4gbhtvzdkso7gxn16c8c52i634oac6m6ge5cyytqf6i199pewwhwelii4s9r4eylahspopuqcqpsa5jotfvmugdopxyouuy\", \n\t\t\t\"example\": \"badyd0ru48g095pl2c3jqam5rft80havtm9a237xrtltlgoqk8a7rf58ugl3xf2kgrcuk9a34ixzqyjfnb2hese3f59gme2x75hj8dsn1tugicohmop0w0ah0cidc474epn42wrwjnqeyc7568jjvrc8gj3fap6a\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e4c8c398-c9f0-4d63-a9ec-f3b71cfb88de\", \n\t\t\t\"tenantId\": \"53af19a7-6e23-469a-957f-784bcc38c630\", \n\t\t\t\"systemId\": \"f544441a-8318-48ac-bf61-13748ebfdd96\", \n\t\t\t\"systemName\": \"sutilze4xaq6h9ut3b6f\", \n\t\t\t\"executionId\": \"828c82c6-9922-4cf6-8a1e-6a23d241e396\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 03:33:59\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 13:40:32\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 16:46:29\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"detail\": \"v782rzab8cccz0y5ut133mr0eajwnvr34cslisxzbwbolgg0bkxwd3oz4mnmge17t3y18xylnihjg6c4az86f8i240v0um5ek0xjlgwt9ftwlw9s5vefy82z2lcwdsr7ssob5pb6gait7hadb52sb81bml9qztmq6uttu2zki946ixz6nzatsnxx2yqlo4h2xjgcar8v7yhlbjgq0shzsq6eo1ndv60prgpqx28936mv56163far1c5iqg2171v\", \n\t\t\t\"example\": \"2dj096p8kaue62k4ietkz0hia07k9ucfgq7wzv6a2ya9fel147ucwdt75iu6145e9t4easpzgladg748ks2k44r2xlb4209mnq2wgjnh5kszuuqua2e1g1tyet3874ja1dqyv3euauhmnile9t5b2ll3cic637aj\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"597a44b7-5fc1-4f92-9311-c39e45749b17\", \n\t\t\t\"tenantId\": \"a73ae4ee-8187-4df5-9242-a310081be87d\", \n\t\t\t\"systemId\": \"2e78e7de-cab6-4e04-9c42-76c50debb7ff\", \n\t\t\t\"systemName\": \"nenjgd0toyzsxgqfu1gl\", \n\t\t\t\"executionId\": \"38847946-1173-417b-a4cd-7931b41e7bd6\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 15:28:48\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 14:39:33\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 22:19:56\", \n\t\t\t\"status\": \"RUNNING\", \n\t\t\t\"detail\": \"ee5n7ixziok4j2lp1l126egcc1z4fboloxjpbcchllky30uya6id80gq2fa7cap6xo0buqb69u3hqcpp0a8a8h3ebum801pvtgci4o7rblsuyi6x4iux25sx8i4awdznrqzsxvvjpc52rr98q8ulv7v9msw5icak5diim3e6grdwl1ds1upbmf6bbumpde7hzsngm5j16i465qm238k2f8e2oson1u305wwcmiu01lvf2ge6deuvagwlv1gl7dj\", \n\t\t\t\"example\": \"3t97llc4lg5u6filu1v631wd0ueht0xsxs900jzdamiq5ewm6o5ou3gjb8ark0bbgizk1u1nmg89c6qf8gev1141ocw5z3r3w0ocvx6pm8pckj7w07ps01xnkwgrkbbkrlv41jftlinokok6nbdeb84t1c9g6f3v\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"60e277c1-cf77-423c-9f6a-26185a619e47\", \n\t\t\t\"tenantId\": \"0a2350d5-8f09-48c6-bb10-68883d67d4e7\", \n\t\t\t\"systemId\": \"d6856cde-2b17-4b2a-8129-a943438995fb\", \n\t\t\t\"systemName\": \"oy6s2olxm3niw7yzbxfw\", \n\t\t\t\"executionId\": \"d7046f79-17e4-40b4-b5f8-28a376f37200\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 17:43:24\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 08:27:15\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 14:10:32\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"detail\": \"i8er1wx0k51wku2edzxdijwf8pz94ftsulhof8xt024d8egwk6jsap1w45ondu345z8o7sk4adv1wmy48wj9no5ko4jjb2f7xhdjslyrw1x7ufspxqj2prmi5yc9j7wcdj18eojsumuiuy0v6cnwg187utf8jvrgh5gdf7pe0cz3lc429jrexs25m6ewrtfv9scb0ppf3681245ht815dynelfhc0llo4f85klyxg9i4xai3tyhviixuhndy5xu\", \n\t\t\t\"example\": \"g1jzclnj20be3me3rgns4aijbebiyxyu7ekupxpce5fqmk0icwe4assxyntjyacj3not85q7d069ubt25nux3719skvst1y98puwzwd73yf4n6cffq3w71grp621t8w00htf2mz5m23q9v39zl5girh8ek5gz1cg\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"27d4dc01-fbe2-49c3-9971-c3aa19f8e5f0\", \n\t\t\t\"tenantId\": \"3e0737f2-2c19-48f1-aff4-84a889b0e6ab\", \n\t\t\t\"systemId\": \"69d077b6-6ee0-42f9-81ee-2ce6d61a6fab\", \n\t\t\t\"systemName\": \"xjf4r9tuxu70ely8km18\", \n\t\t\t\"executionId\": \"be7b07f4-603c-4740-a0ad-50676a47aca7\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 04:05:11\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 03:06:44\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 08:13:33\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"detail\": \"6fnzy5o2kljle2jbwq16e7l256lrxzodyyb6pk61o51i1y0jeudsd5hpw87ca9fxba3hy926a6f0qgdox2abv2cre04spvub6eq3aconl0hmjveab8d9anjowdd5hr6gq6l0lmrkacmjpkwgqswz4h7wb6wtrt1s2uxoz30lpyqnnu4ypnu02fy6praa7s8iiqaprhnq78nbaudveew0mxgysemlttcjzilflccz7km05uslc4p35g63mkwqrcd\", \n\t\t\t\"example\": \"pzu9lcxlehz40ad1jx3pkudyk5nusycj94eny122msbkjf8uhfyjmvwc50l5ue6jta2uapv04ufrtnq8er6c8q1mbxi5x6hrpq4n1oexg6ua91c1shopit0ggajzuxt54dj6a26d3149clbi2o5sc0ossyu6v73g\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"61363cd1-2d2f-4c08-a9e1-171a3f47784c\", \n\t\t\t\"tenantId\": \"126ad4fa-5a06-498b-b2e3-174846fb363e\", \n\t\t\t\"systemId\": \"613b5a90-00a6-42b1-a42f-cab446adbce5\", \n\t\t\t\"systemName\": \"lm5lg82wmbiynaxjl2je\", \n\t\t\t\"executionId\": \"1acd4475-522e-4e64-8e20-a8fef0ef0665\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-01 21:52:09\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 17:05:24\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-01 21:47:35\", \n\t\t\t\"status\": \"RUNNING\", \n\t\t\t\"detail\": \"cob1908n73kucpu2acjbbzrr1om0cki94kvsnr6xjfpauf2batfjvcqmb9jrm9779h5k6ex62oobmvzl07hwbr852tdhj2b069vyozjzfmy2uw3vd64wxa7aglm26coricdao3zzgo4w3xfgr1lbioh9x0or3h95dnz7fjh0ecsp3semwhoehm3i2dmehi4qh6vdlyrp59cgr4bzapkts1nu9nswqlsfda55z53rd4cknj604wgo6dcrlkhqdgx\", \n\t\t\t\"example\": \"18995j9zad00xg0yqkog8tt7ixkw3brvj87yh78bg31ik2foor4xxtwr0mjk3twitc7yd65j9jyozt32oe4uwda6a1e0cg6wp1xloa8agpbam2ffg9j2ksjka6hvewfvyjijtugje85scy9av3on1cmriwzgjv0x\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bb2e8f13-4f6b-4624-9bfc-f7e4dbf08e24\", \n\t\t\t\"tenantId\": \"9d802177-ac2c-4769-b985-0510e5ddfcaf\", \n\t\t\t\"systemId\": \"94103064-afbc-45ec-b7fc-718a61091c26\", \n\t\t\t\"systemName\": \"yl3ocq2t5031qn817uj7\", \n\t\t\t\"executionId\": \"ff051c0a-e6c2-429e-9bd1-d7ee35f914fb\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 01:22:07\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 02:01:18\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 11:15:02\", \n\t\t\t\"status\": \"RUNNING\", \n\t\t\t\"detail\": \"03hegcjqnadvcycsd7x9p92gmn8k3gkzxs5gy1otqd9t28kjfz93z8i25a2whjgb1jsm1wuj3jfc8d00an6eycb4xq14inauc3zzsv9r6eu0pm4nxcqrhzxeb83njt6jfe7dtvr4t7dj9eut8nl3fmr8fus882zi18alymsgvofjccnmv6r8nf09wnq6b68s71vbxvtezbnmenaaw9z2f9u1039ax9akawh3hbndwx05hbsxhxlvt7xmooe6yt8\", \n\t\t\t\"example\": \"3jc47kt9rmobhyaatl4kxi5qacq0v0ihg22jvj1r1yvtug4cc6uznoom5r8daiowt7atm3xuvmyeohssctem6ebx4tdmwc6se8hk9saqgkmds8ryh0bwytaofuguzz4o8f70f0247oqd5vbus7pt4498sk0b1nqj\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"eb9f34aa-b3ad-4cbe-a798-d7775881bc88\", \n\t\t\t\"tenantId\": \"d06bf36e-75f2-4a19-bff5-4478cb77142a\", \n\t\t\t\"systemId\": \"f7ba034e-ce65-4c51-bb18-3e8632888789\", \n\t\t\t\"systemName\": \"rr3v7rlbc6a317eadjsk\", \n\t\t\t\"executionId\": \"d432dced-6563-40dc-a3c7-0dfa07527877\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-07-02 02:13:58\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-07-02 06:43:27\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-07-02 01:19:25\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"detail\": \"1e4end7if93mmr8h7ls3x3tnnskkyi5gz8ns8mne34z5uw7i5ms13p2w62k6m02cxwxcuyiyqxb5r7pyg8dj0ctbpsyhdlpm47fm2wk0970hkmtrsuf30rt1co43z3yfs03rzeb2v9wlht54i7ob9qt9l0aewbwqgwl03cks1u9vyyy2fzri5e8h6w0atpkg9odwns0vh5dxixp1ey6drt52061dt2infz1wykit280f13guxjubm9eyn9yksfi\", \n\t\t\t\"example\": \"usgr2szty3sjkq3j363cvu349z99vzbsuew1ls3y5zdxv3koha40m92s4k93oti7x2qmqpk7ohjscvdm2gh6opiaalbr8krwqd732fpoha27orlh9llifwizhyu9smxc1at65bmu05rkuuomzm9ki4w45a06jb09\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiPaginateJobsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tbplusItSappiPaginateJobsDetail (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiGetJobsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetJobsDetail (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tdetail\n\t\texample\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindJobDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindJobDetail (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tdetail\n\t\texample\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindJobDetailById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tbplusItSappiFindJobDetailById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tdetail\n\t\texample\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiUpdateJobDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiUpdateJobDetailInput!)\n{\n\tbplusItSappiUpdateJobDetail (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tdetail\n\t\texample\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db\", \n\t\t\"tenantId\": \"21810c78-39c1-4dc8-8e1b-89ddeecf3fa4\", \n\t\t\"systemId\": \"11122a48-29f9-42b1-a88f-9076e4531d45\", \n\t\t\"systemName\": \"49baawb59df0mdll3563\", \n\t\t\"executionId\": \"454b10e4-23bd-46f3-b88c-c858d6a9166c\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-02 00:23:36\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 23:42:21\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 21:39:33\", \n\t\t\"status\": \"ERROR\", \n\t\t\"detail\": \"kgyh53e2gh0xg02jitd0scp9k6pcuvd9nwrlo3tpeg35v0n24vf3irqcmm5v7tccmc54ge91dedr4m2sdw8rac3mbk7n6mhb1d12qxuuxvjsnkf1tshstzwmpq5iw11n2ylgu129wyixc6tfq9npjg0qykk4b69qnnaifw7goov9org52f8134048bmiv8ndw2p1ly8zbns74svfwhqfvk0xqgp4gfgxmiwg4b4fuzlyk0hfl46nksrqf1bnajo\", \n\t\t\"example\": \"me9kqc8hw0swhzy93q10ub3x7wi73g7h3obdbna8mybf86tlx8fr963pd21x4rrhxy8v5mbzaph2zlyvqc44mohdrryrsnpwd9iiv26s7umpbn17ang8wdjbatd3dn9ehi6f3mkfcz8za6z2qguxy3elbpvd656z\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteJobDetailById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteJobDetailById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tdetail\n\t\texample\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteJobsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteJobsDetail (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\texecutionId\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tdetail\n\t\texample\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/job-detail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db\", \n\t\"tenantId\": \"21810c78-39c1-4dc8-8e1b-89ddeecf3fa4\", \n\t\"systemId\": \"11122a48-29f9-42b1-a88f-9076e4531d45\", \n\t\"systemName\": \"tq9umpf4kbc3fq3i551m\", \n\t\"executionId\": \"454b10e4-23bd-46f3-b88c-c858d6a9166c\", \n\t\"executionType\": \"DETAIL\", \n\t\"executionExecutedAt\": \"2020-07-02 10:00:19\", \n\t\"executionMonitoringStartAt\": \"2020-07-02 03:04:20\", \n\t\"executionMonitoringEndAt\": \"2020-07-02 10:00:21\", \n\t\"status\": \"RUNNING\", \n\t\"detail\": \"86wc818qgwj4zpwt25nwlo3gnm7ak276u73d9lw0odx9wk0xpojkdiocg73y0l89eq1n1tu28wfzud6g1r9xtjoi04sfndi3abexm6s1wuvsev8eijzauarmxv2q93r9len6x3xmmiyjnq3mnz7f8gbphcvjntxshgib1u5v0ki7mvctgmmrvn2weqzp6vvnhrgeqhlq1a07p9ytoo3lfe2f7xnanz5xoh5dlc82wsk231g583mba1luxezcwew\", \n\t\"example\": \"1hrpb9a7jr6yhn485fn386ye1ugo2h64cc01j6cihlzev22mlrv38dvg8tjv6cq179nv78k2p7g16f95niqdmoa2ffi8dyykns11hfe5bmd6wstqqyyhfcq0ew5vzyv7totxk17how5wyjlxaaiot8ukdou9dbr1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/job-detail",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"job-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/jobs-detail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"cc7385b5-6503-4a5b-8025-35e164309892\", \n\t\t\"tenantId\": \"efe6dd0b-b8d7-4618-8293-9ee6c1f700ab\", \n\t\t\"systemId\": \"17f89795-d643-4f1d-82c9-1f5737eacc5d\", \n\t\t\"systemName\": \"0ywaxmdz11hfgzo8cop8\", \n\t\t\"executionId\": \"b364b270-0145-433e-bae8-826fdd8799c5\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-02 13:16:11\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 17:32:06\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 04:45:32\", \n\t\t\"status\": \"ERROR\", \n\t\t\"detail\": \"o3ebcds0jglw3t42k50lmk4vt1c8jwou33974w6ccr6iy3npvq5mgjl19lj5rscwz5aq4axebgo1si0c96dg9snyv3j0970ynxpo3717wjw5xaks78c5q8ifvu9gt91m9jpant5l0mxiip4enio5dcohu4kc2hx24gfj92diga2mk26eobqe8kx1jx2drss5wuvp1yge645ia67gv37pheoh07a8j5fhha5pkxefo9oqhxfh5r72u71quxzzhro\", \n\t\t\"example\": \"fr83okmxhtz36z8rj70051ki0p4poyx4xcdey4vi3xpymjxcu62jt7gg95ge16nun0lgr05n1t4pf8yf7fq84qmpjjib7gzuxf17se8vmhkuwgfvif810d8f60q0s0kr5qvs021q2io25qfnwklt42gowg4w7w8h\"\n\t}, \n\t{\n\t\t\"id\": \"906b1796-cc4d-4d2c-a209-241279a19d9b\", \n\t\t\"tenantId\": \"6f4215b3-8e24-47d0-a85a-f10971586156\", \n\t\t\"systemId\": \"d2609bcd-5c54-4198-8733-3ca7b32f32ec\", \n\t\t\"systemName\": \"3bex4gbib2e2znnuysv2\", \n\t\t\"executionId\": \"bdc7690b-4c6b-4b91-8170-75b83df9d083\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-02 01:45:19\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 03:16:03\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 06:28:13\", \n\t\t\"status\": \"RUNNING\", \n\t\t\"detail\": \"vid4zyox9djrgol5b5blm3kc4hdje2azw0fdouedfav8j53mkhv3x34fbjmplr716ojpzhp9nunqkypyxd9572st2kwpwk6kgliqgtrwffg1wmydzogc7n6rnhlzz3t6cm8tv1qorl8biqqquqtdnldcqdnkx8ku1ae52tptvksnm4e855mqc4mzm28v40odj06tw1a1riw45q1qaukxzug7vi9f6ekpq4hiplq94liak054b831fy3561oihiq\", \n\t\t\"example\": \"5lsgfybjpxl0szluy21x9pk0oaej1iokv7ueq7ji8x298hmv468ipnxg887gwnj34pf83s5unz1iz68phcq6f9vsmbt84p0t7sx7rvojh2hzt7q2sufaaphd7p2vlnarl7dy40mn8zmqtlx9kukyap22qjd8bbvz\"\n\t}, \n\t{\n\t\t\"id\": \"eb775c06-c3f3-45c4-9e9d-5da0f5df4c47\", \n\t\t\"tenantId\": \"d76aa201-0edd-40e4-bd97-c6773b9e372b\", \n\t\t\"systemId\": \"bada3125-45ee-4931-ab4f-1312fd7e3870\", \n\t\t\"systemName\": \"hq3b5dn405h317gfgd73\", \n\t\t\"executionId\": \"0cf428c4-396c-4029-b60b-627582cfe669\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-02 11:27:03\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 17:35:59\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 10:54:59\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"detail\": \"ns43g2v00pcowyt02ytyxlkb1vnyh0dluqwvn7oxtngh8yo3zxtlhtgrds8ljo5d6fqi2fk5nu8ixxo92mcpst9djb3q9ws2kd6lfq4e2poq9b1favund8ptxs9od1vta90ovln2xikfpjs2vpfro7b6039hicknhhxt138zqapa985zxo6jyf51n897jnaj9p84vqugf8g6wpmyl6620zna93y61xn235uno5i91jphp2yz1xj07brzluy2pq9\", \n\t\t\"example\": \"xzrq2t9rqnys6uale3nr5dp3aarrh2de5fbi3x4ymokpfg95vixwt74tgitwfirpvkaxg1th4xr4m91cs0lbfcxt6xgy6xv79v9l83ju5546cdjg3arg4u87x9gljfm9b1juffptpbma0091ryviezutu7cydep7\"\n\t}, \n\t{\n\t\t\"id\": \"f63d55a9-17d2-4e22-89b6-15b6793fca54\", \n\t\t\"tenantId\": \"11a25a9b-2b3a-4a16-9067-467978fec161\", \n\t\t\"systemId\": \"bc2d2583-cc94-453d-a3ef-7ddadfaa18fa\", \n\t\t\"systemName\": \"su0tlg636czxg9pgndl8\", \n\t\t\"executionId\": \"729ffe09-7c89-484c-b4a5-6992550fb129\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 22:30:41\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 16:05:42\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 15:45:05\", \n\t\t\"status\": \"ERROR\", \n\t\t\"detail\": \"ptgirv8i55nadnh4wgkb3bls7u6lucry67wilex2h8bjdyz7s6pqdwmhrvl6bh1ysvr6p5lrxttkvdv3uzp301oxm8xi0ukda46b0c4fwyv04fi3aq9nqou28zc3ckg0qximzwfh829gt30yxoy2xherlvmofqqjaq1gzn17b8w4njgy28lcf0asic4v97myqrbede6kkiern8vah9kty4pnkggqw1mon50gp9nklg3e0n6g6b6gtv5shye1daz\", \n\t\t\"example\": \"d033mbguulr10qf16nrvarq142jc0wkmlhewijyz6s4f5qialu5yd7jc360p2t3ld74yz0ur3cmc7rbh4slav81sihfbeyyukmsxq6f737j4pru2m2vd6dsc6rd1ovmo38tenpu7qeiomvhsdrn7mer8hnk0yxr1\"\n\t}, \n\t{\n\t\t\"id\": \"ae26cfe2-9743-4f38-9e78-1947732b486c\", \n\t\t\"tenantId\": \"6ccb96de-45b1-4f49-9078-5ad6f85f375e\", \n\t\t\"systemId\": \"45f0de48-2f2f-4a78-a889-83180f39d153\", \n\t\t\"systemName\": \"0omofzt4jdtcte84qtsl\", \n\t\t\"executionId\": \"58369d36-b049-4e35-a867-9e2dee53222d\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 17:30:52\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 17:01:02\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 06:54:08\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"detail\": \"hs4tjxam8htto9szsfhuv232gf98gbdsy2f9w2pmllg13tu4lufkfmbxssrcc4w5fybxd4qjo1uge1bnqvpr1gbk4vkahjlb4myxp4jqj91wwxvp23ntilljpl549y12bxe5pj9a0u84jazg3enm82phhblsf3kxnn5wnx3pu5isfle4rv6fos3w3q2636e5mq1lvnqh97wpqve6z0zi8ro78r96sm22qa52li861bbvzro407dd6kjko4tj61h\", \n\t\t\"example\": \"a18aqwjl2ckdt9z7xfbdp3c8263aeuqd3xvazht1wjlqc6nm727ez6fhmn7p5o8r491fzi5ieecnbab2qi2vl65nv3mxvcxy99nbt4zm3b11ajjwdloue9h7o3715dcxvcfzdvsrdjlzsnd1g3qlusrk5haoir2e\"\n\t}, \n\t{\n\t\t\"id\": \"65945c76-adad-43e0-a6ce-2299ffca514a\", \n\t\t\"tenantId\": \"df5e58bc-7250-4d99-92a9-856fe356ac52\", \n\t\t\"systemId\": \"32daf3f6-e756-4d9a-bbc5-a75e0e7eae4a\", \n\t\t\"systemName\": \"ta0aq9tder1fpwovdif5\", \n\t\t\"executionId\": \"3c45a42d-27a8-4c78-b39d-2cb7f10b160d\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-02 02:30:05\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 22:28:17\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 23:59:51\", \n\t\t\"status\": \"RUNNING\", \n\t\t\"detail\": \"qy0se2zq71vab4m8ls27j53t3jaedphswtz8ovmefogfsac0iy0qsfafqkkfaalr7l8fxlxukvtqozeauwaqtq2g961u0vcq76wup1c9p15ehljshp61ko51u5hn5grrpq7rt1yhruwc01uius7lkw5j3qrpn9yiexa4lhj3v57yghh2qa7nro8rthm769buvw6mrp4f0tw8jcb81ytwlzp4uz0d652vnn3x9jd34xlsgwx5n39pmwnrlidghou\", \n\t\t\"example\": \"zid9xksovrhjwild5h2jou4aiigqxu39ojzv4tgm3xj0xxgdcdr3ul5zvoz9i8q5hu6vprtbvkevygbuvidjjqfqd64ry74rr1xsruolaa5g95tw5rve2w7nno8ria5g3p5wd6tkymwmzrnrgzd9gz94ekhehkc0\"\n\t}, \n\t{\n\t\t\"id\": \"438155bc-2f89-4d28-bfa2-74248e519994\", \n\t\t\"tenantId\": \"bc656cdb-a4ff-43b2-88eb-913e758945b4\", \n\t\t\"systemId\": \"40392eca-9b6c-4bd1-87ef-932eb564bc9b\", \n\t\t\"systemName\": \"ils6hp6i4r66k1m1rseq\", \n\t\t\"executionId\": \"0888fa83-a396-489b-a144-0242a6e92563\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-02 07:33:49\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 05:31:36\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 13:34:10\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"detail\": \"4g6f4h3nz9cbpx4o379h80jfpmhfimbx0rz5q3m6pafyjzoalrhbut74asle51xlpr9hid7qtgu4ntxsw2vml4qm6hjshqnn4a6g8vv0d6khkvy38hifwy5qsl2m8mkdhykb3815l0xyf0td8hlrksptbk9y33paer4bc6xzduu4dcuh2i6dzrirs4bdcr6ds139hu3elh201lk7d7mm0u12li397m1as1cekuf8jv5jeakd3oxcp9pkziyzz15\", \n\t\t\"example\": \"ljhx2rbylxvigih6jmsn32kup7t4didi1c597akh7oau6pz8zqg4itcx3uou5gvanof8bunaicqgl6864hg1h02rnyby4sd8un76u3lywdye7ewh7hsr85ygb2g5twshwwcy92iuyzhp1axpupurvn2ctgmwt8ts\"\n\t}, \n\t{\n\t\t\"id\": \"30e6de1d-1928-426a-aa43-bec2132013e1\", \n\t\t\"tenantId\": \"46dd32ff-3f44-48e5-821c-e4525dca0aea\", \n\t\t\"systemId\": \"5636950c-37b7-440e-b3ea-fd1aa19a459f\", \n\t\t\"systemName\": \"azxswd452si09d2v92tf\", \n\t\t\"executionId\": \"03afbd23-4216-4136-90cc-27d0c358530a\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-02 05:33:40\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 16:31:46\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 09:52:47\", \n\t\t\"status\": \"RUNNING\", \n\t\t\"detail\": \"r9rirajj8tvimvhvk2m0pbfi50can3szczigx33ojjrng9jk5d997wd5pm3yan7o6i0gvcjx7orez1wk964cuha6mqaq5zz9r5ljs2cok9q8krd0039hih9opv8f5g7zh8trxcbp7blg51w6qvl3uddaow2qibd5i48o92ddgq2zrzkc9uvboe0bjf3aipbxmgncilpns56x07qchbqodo0rk03d2sbzcazl2yw2t3dc7jvbreibkpla4ptpusd\", \n\t\t\"example\": \"xl0qjxrbli9kxn95lhcrp59utkix9uwr768fz4dbta3c7b1a128jpz3g95w0lnktg4p63qjw0avgjis74yaj620btsaoxgci4g7j0hgg0qavf4anjjkrsjzluzq4zw42dyddvsvkcysywj5qa9873rywmtt2sl8m\"\n\t}, \n\t{\n\t\t\"id\": \"f67447c7-3520-49f8-9264-5001f04964bf\", \n\t\t\"tenantId\": \"fd23dd88-fa3d-40d1-ba20-1464179172a3\", \n\t\t\"systemId\": \"3b99cfce-12f2-4800-aa19-47c32478afd7\", \n\t\t\"systemName\": \"0pzjjb30zcnt1yjwhegf\", \n\t\t\"executionId\": \"728a87b5-c887-4d10-bcf1-be2fb66aebb4\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-02 10:43:52\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 14:36:49\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 18:18:09\", \n\t\t\"status\": \"RUNNING\", \n\t\t\"detail\": \"2lv0dxbb2e7lfgbwt06o9oi7cquv9z4qk41is3ixrvip7c36lkeyix1pddfq0ajkms9ynh5ddlbr6bgbdaoc80eriwppjig5jaavpv9jgy1rtwrju46dusbjo0y5d0u7275lbqp11yaxkmaz300jsdv5hckn8i90gz66dswude1yg5zzq0w19c7nvfk32sp9pp6guep4ixr15v450yu3vaxbjxke274f4px7irlyndfi1p2re7kre5d1qt7riw6\", \n\t\t\"example\": \"1skx8yr9q8g02f4gn6wsa6pw3c13stgjz227kub2bpi46cq4324nkrqz58u0yvczrl78uc8dg7ex6qukusdfowy3gwzw7jg5sd951w68tr52awajfynpz6vkd8roqmr7rxm8g9fe3xpmij45fh46rwfwsr3xf8fu\"\n\t}, \n\t{\n\t\t\"id\": \"4238bc20-bf15-4464-b8f0-f96359455646\", \n\t\t\"tenantId\": \"96176a21-af93-492f-8338-7c9feba63062\", \n\t\t\"systemId\": \"3771a86a-6d4a-48e9-85a1-a0852faa89dc\", \n\t\t\"systemName\": \"4c957p0s32wdta4zpuqw\", \n\t\t\"executionId\": \"a5a8d119-b757-4373-989e-c0bef8e510ef\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-02 04:35:06\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 06:28:57\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 05:47:44\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"detail\": \"d8tko8bvllvuj39ov1is7n9gij35imwhfz8ii3b84mvzgpz0bd4w9mzebcddoriwf83bbfj9vfkufho2bbnrf7gvtcqipx0mspcl8dnse0n9wzrue2b34iq4g9g9kcfh25fjkrx2pu4gtv1al9unr2vkwl832rg2vbojy31hii8br7c30b1e2v9neniy7rtv1o8ru6pqhcn02mlfqxs9l7e93rn3gt7b9f6z5sn5u8nzb7po5q9ragzqyvheki4\", \n\t\t\"example\": \"bozbkpuetew6ttxnj6s5sunlk0webm8h0uhib0cykx3nqxq99t47mkan2naql9q0uhtyemjac8j5fzqhyaq8as86l11zxlyeb5tqt2pdonfcvz75s7z4fxgw98kgdawlhnysy4bqmv0hl2g149zlbcw8txsjjr3g\"\n\t}, \n\t{\n\t\t\"id\": \"2826dd93-f1ef-4510-b1b5-74e3e341dab1\", \n\t\t\"tenantId\": \"8d31a338-737a-4f72-ad84-dcf71596e143\", \n\t\t\"systemId\": \"b7150599-00e7-43d6-a26e-b1b1da086d72\", \n\t\t\"systemName\": \"n5lsr1jiawena55q5eld\", \n\t\t\"executionId\": \"1559f1f4-69f4-458d-8d96-26bc1d6fbf70\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 23:14:26\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 03:04:04\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 03:17:00\", \n\t\t\"status\": \"RUNNING\", \n\t\t\"detail\": \"nbhfwcgmv59ppy3vr2y4ahyt1gcarojy13owsiviywn6687rdrq01n5f6tcd26oqm84k7h5pcoyb9xycne47ainpd8kyyzrwv5100sialu6c2nosy296hzjzuzm689b258t0tbphnca9p6p71z6gazmiqdnebdxey0aznkms226l25389ew5swt2fgdu1016phi0dv1irbwcaecjd38h8s71m9nrmmhmylz5zduxv59jg9z2q8tvavj0c465e9l\", \n\t\t\"example\": \"vf7fjzsgg89mmijexcwkdvwggk13haxocvsq1oo8gmtvd3t8qcpoqure386y4ux0w8pdwr6pui47srku9dmktojatibrb1uxkjoxj68em5nj8xj8iwav4b5oaytksd0ynqc99nhcjsf83503mtgbf9ln8i0808uq\"\n\t}, \n\t{\n\t\t\"id\": \"353554f6-6a61-47be-8a93-6cf24456414e\", \n\t\t\"tenantId\": \"c825cd44-2102-4716-b273-56ece0712ac1\", \n\t\t\"systemId\": \"42251718-5b3c-4718-a35d-4941bf078afa\", \n\t\t\"systemName\": \"l7tigp97f8dzceecq7ac\", \n\t\t\"executionId\": \"280b1485-0623-4975-ac5b-888dec23081e\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-02 04:39:10\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 12:44:18\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 03:00:31\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"detail\": \"6k33u94jgx70cttqmg5tardgz0bk0vynpi1v5b9rhg6t5jbr1usxynfudkw8weq0tls81vb6c1j4cgggc5i7hpo8u14blysyj0nept5456xech1qkelho7po4r8tu48qexjok1vnq8216tqqugsb9gqkt98326s3cnbkr6wpv6ewnhelpjylfwauufssp99d0sav1qgn4dyg2bxr2fft6p81qgbrsg5fuyhxuck2wuy9ujulikehw2a3add37qg\", \n\t\t\"example\": \"taqcdmedcjpaxp5lrtj1lay8h6jzj7a0i27a57cf9yv9zyu0sly5zygzwpzl1efzq1uxvaras03j1rg5yp1yfymur165j8f4soy2amnjywbln7jrgox1u3zyq3kjj8xnrgeire6tnabhyujb5m4h3n4po241hc2m\"\n\t}, \n\t{\n\t\t\"id\": \"503b82a1-da6a-446b-abd0-0fafa10a0661\", \n\t\t\"tenantId\": \"da0dd105-0a88-4f29-b41d-f21794d5c045\", \n\t\t\"systemId\": \"d4966364-8297-4538-a68e-a97cf660578b\", \n\t\t\"systemName\": \"obkr0fpxn9qudpxczkc8\", \n\t\t\"executionId\": \"38146dbb-292a-4177-b492-a0f0c6e22431\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-02 07:05:00\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 09:24:07\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 14:14:19\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"detail\": \"ig2mhz3gdw8q87duufc0r3pu8780ml89ekusasrqma075t14z5fulhdtjom0dd7guhhl4c9fq7qzm33dpy6331o9itow87rz9zleu78sf1ctiwlg1qiqc7ls6gs9ppcerccsjt6v77l542b01le57jdyfbl0tp81lar9jm3bxzld0fj6gmu48tbou3y6buuh19glfu690no4px30xzx94ervm6l9yc8ezu3nukqcvvaeeo68gnrwq0uv43bc6xb\", \n\t\t\"example\": \"y6c7b06dxrzt9fnxascfrqulv21w2azfjibnjqqstshitrq2xivca9b56b6zzimxyb08wehct2un80u4sn4nchiawhorf0a8jzem1j8dl8mfgrv5oumm19tpqwtop89to3f6xytjfkozrwbjkoe8j4shsk8pqvzk\"\n\t}, \n\t{\n\t\t\"id\": \"02863157-a300-46a2-95f3-a1af9db34316\", \n\t\t\"tenantId\": \"90df5755-18de-4d0d-9717-5065b78a6a04\", \n\t\t\"systemId\": \"3f59b2fe-9dd1-4b5c-b32b-b5792833d6ee\", \n\t\t\"systemName\": \"6rge0a1ecogzleg3mjdj\", \n\t\t\"executionId\": \"5c149b95-4ec3-487d-919c-7575d325e379\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-02 14:30:16\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 03:00:13\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 16:00:22\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"detail\": \"cohtw5d73bxzg5z58ncx38yr01h57id1qtx8v4falf23ko9nfiugtc0pv798gmzxufdq9z7aa5owfsrumnvjljpu39dhjdyoduimwx04stx66t0um3e2d0j1h1w4q9iilfjvn40rra2pjz8yblq2vuuspblmj4gvraot8qzfm9w6at21url04j2hxp55v8xv50hzprwy44yhror3xzgq68ekau5f5jki8ue4pzrgo7ik9o68xyapx8l0yg5l8v0\", \n\t\t\"example\": \"8uv8xpm0iouyg2vhkup11eedxznyj7a5a9r13f88o4jwsh2p2bckz6q7aiknz5w1q164kf9dcv9ghyatwl14o2t2c8bbz6wta809w2q40cg6liaq3wzni84dk1fxo9wrwzyol960frwffyyynr9nf9041l6kmy84\"\n\t}, \n\t{\n\t\t\"id\": \"23e89e9b-6f8c-45ce-80f6-bbb16a1cf4eb\", \n\t\t\"tenantId\": \"ec424f9d-6b6f-42ee-ac48-bdbc8a042f13\", \n\t\t\"systemId\": \"4d55ecf1-52cd-40f4-abda-784ead5efcdf\", \n\t\t\"systemName\": \"jvqk9cdr7mpk2p9r3uz9\", \n\t\t\"executionId\": \"fef1f8fc-4e73-4ef9-ac55-7ff53385b5a5\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 18:37:06\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 13:53:40\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 01:26:27\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"detail\": \"vtq7n9hqxbwttj6kazff0j8x1kb3dx7k6m5y4nthmc00i4quenn5sqlla892qv1sjqwghvqjr1knf3inou1qgk6kbx4dgwnetoc18qxg848aepfu518ev550cf7p6t2j67d6kqo5sycho8ueo55098b6690ozw780eo3id7f87shdohzoqzv9czax3eh6qmnanc1c7kv4v8v4r2oh9vos0jo1ot6220lcalm47bhs5yj5gj9gwbblaqtghyqeye\", \n\t\t\"example\": \"y3uivqcquujpec2mu2hq620154ni3oe10rhomj7grlzxylax8ubba1fch0t9f2ppo91nj7ahd4ig177y8j05tpshkis0qhslfaamq4oettizagz4p0qddhvtvygzzu48aq5a2cgjbcsks2z1055qs6bmzroe7kyo\"\n\t}, \n\t{\n\t\t\"id\": \"b3749128-0c85-4e69-bd6b-2ac5dabfd112\", \n\t\t\"tenantId\": \"7eac3cab-b827-4bc4-893c-e0cb20fb09cf\", \n\t\t\"systemId\": \"7a6c4817-9883-461e-b7ff-d4eafdd37924\", \n\t\t\"systemName\": \"x64rnvg72x33j5ugm2fn\", \n\t\t\"executionId\": \"741a454b-1f35-498a-8f5b-9f1d87491e58\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 19:49:26\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 17:51:53\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-01 19:08:14\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"detail\": \"kdvnmpytetabhe6b55nlzhxrcebw5u0j756h2dn8tru49ai5jcywfquw71eekwcf80vxaeavknoa6iy15y8zpqn1v87n50rahadt2ymxrgp6xij8keuxjkg55673d99rs4nfg7ibcqa49l8py7ez6wm75dj8jfwarajljlx3eht99b68vcwfnrlveoj09iutyh15bk8ptszoru7cvjk6zcaetriypi8ty0g5uzwz753vgvrwpnv8p7wfn1fauuo\", \n\t\t\"example\": \"epdv5ftlptnpphhmc7wlv2mg4s9gmzazcoz4b7hobvizfrxlhptqa9p3kqm17uus2fto7e1mklfha5yv3f7stuey9ivhskoh9wiarso51siy97lk0smcw5qkzy6jtugj88pv4kilzh0cm3i7j4igfi1vqhz0eusr\"\n\t}, \n\t{\n\t\t\"id\": \"ee751edb-9209-41c8-9a6e-c5c3a2cb126c\", \n\t\t\"tenantId\": \"e6244f45-df90-4754-91f7-514ce0a5adaf\", \n\t\t\"systemId\": \"611fe788-37bf-4ff5-b6c5-cd598e0ae14e\", \n\t\t\"systemName\": \"al2oo62phw2ds15vdghg\", \n\t\t\"executionId\": \"7106c6ed-cce6-4c4f-8182-1ea22548b0f1\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 21:59:02\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 05:43:33\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 10:20:10\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"detail\": \"hgivz2jpwgfaefmsvs48ub3li3ls4ywv0hypm8rvyth1ihlb4wib3ls4ri9iae38dpb3db6xqbqrfjoveowfbu6n6s1hy1rq0huaezdb223is0wd6a7hc48sidsvwl36dohvon2bnf9d08m1xhy8uonyf6qb8wec0ezp9324hr290h4o7pda0piltxv3d277qrtayw8ddx4g7zsvnxtxnr9y6w73akc8b5zlkou6flk2pmkgxcj7z1dn3rr7nh1\", \n\t\t\"example\": \"j598j1egh8paj018n2bdorez9h4kipqqupxd5zxxctzpphfl6y5dqal5l0a9dvid6kcs7ki9sxo680kem9iv90icuj6igbre5hhd3rwa8dxnsh05ndv9t203h8olqdtbkab2zn7d94qvk9z5odqjwtvhzal5h5if\"\n\t}, \n\t{\n\t\t\"id\": \"bb6d51da-a920-44eb-a1c7-c157f5643b9f\", \n\t\t\"tenantId\": \"4bfbc0a8-35cb-492f-8e1b-366061aabf32\", \n\t\t\"systemId\": \"4b59089f-3361-4236-b529-8181f2c70a9e\", \n\t\t\"systemName\": \"gio17d7niez4b09ktwh8\", \n\t\t\"executionId\": \"77101f85-2b09-48c6-aab5-a11cde3fb48a\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-02 13:48:23\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-02 01:07:48\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 02:38:15\", \n\t\t\"status\": \"ERROR\", \n\t\t\"detail\": \"dgzudtw9rtcagdh7albed3tl40atzhxhm3ezwemyofx40qpco3e8tvcajupsotdmra6lhnpare82jq6galcglakwkwy76c3rton23dl0xdm4inljyk2vpl7l7vsysigsxpu3ojvuwfv7xdjkxk9z5oalec1liegt4p7jc7gtyczgyeoo9d8eiafiy3qox7q8ckc0bn211vd20vjztggcxzybnbqxi7n879hkxlb7bdn3gtu4c75rognygmwo3ts\", \n\t\t\"example\": \"edgt1d3knvolvebzlq3s4cecdajirs2yhlvhgu7bap7rjuc44e0pl03i3xaoef5vcuypwowjd1muvwt7i4ufu2wpchrxbprtzn0mo1mf615xfynusg2u1xcn84ona4qgwuis5hbljzdcket316uyc1a6wvgmf10i\"\n\t}, \n\t{\n\t\t\"id\": \"b9c75063-94b7-4294-a8a7-193b43c226bb\", \n\t\t\"tenantId\": \"09078535-a9be-4e8c-8548-9ed9de094e70\", \n\t\t\"systemId\": \"bf882b62-acfd-4a4f-918b-dec2d0b3acb8\", \n\t\t\"systemName\": \"vhlxvjytplli6nz1xy6x\", \n\t\t\"executionId\": \"10b498aa-1455-49c1-b9f1-e301220a7c64\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-07-01 20:56:03\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 18:01:13\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 06:45:35\", \n\t\t\"status\": \"ERROR\", \n\t\t\"detail\": \"4i0dcc12v39nhd8jz687r7wrntr7k1smlrlwaqjqnsl75dd1kp7ef85if1kzrllm0znsp8935l158v098twixk47vtsrhuy8u5lb4toj3b06abu8h8ginjuiwp4yhydvh1nvbt32sty7ttgfltu9dd9anm9y3qn9xy7rmyj2vxjr3egqgdu5zfsg036run2u2nqcmssrn55xgfr7phqvzcwd2pdgugbtj709bi071auatfbfcdvlw8bc0dk33vl\", \n\t\t\"example\": \"vu9s1hgqffkrbbi4lx8rbvcqdpclwyg1x3iht7ozuhyorldw2so0hcvbw8u9evht6nupf1i6h6rkchi5ca6qeu1306kk0zv5mo7u27dh8q5ad5sjuxwgzafn9aupkifj6qmhdptk8qgjtxvc71f0bgh3fcdwysmn\"\n\t}, \n\t{\n\t\t\"id\": \"07e0750f-bee3-496d-bd34-5cc2827e0dc0\", \n\t\t\"tenantId\": \"bb42c3d7-dac0-4c53-9324-df3c5f991299\", \n\t\t\"systemId\": \"b3b86b34-96de-4c07-b40d-3af14d3fde51\", \n\t\t\"systemName\": \"c94j4zhgmtrrgrp76rwy\", \n\t\t\"executionId\": \"c37c2945-5e5e-40f2-8d09-2f9341b07532\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-07-01 23:26:16\", \n\t\t\"executionMonitoringStartAt\": \"2020-07-01 19:47:08\", \n\t\t\"executionMonitoringEndAt\": \"2020-07-02 15:54:37\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"detail\": \"y1uww56ay3ha6of9c30omnw6of4vb3ya3qutae2hpb2l8r817rqx02cishcmhc9y34n1mtb7lqlppzavvqfk319sjkkuatzrdk5y8lb02641sqt9z76zqz93mfizvcwd8vuhthwr49fol1bopy7p5hygemxjigmto73r5ly1cn1agr58sf7l7in8k4021djr5gx7xsso0n4taauyadm822wrjuonokb2ay206o274v75w3dar6z2kcpnb7b6xsj\", \n\t\t\"example\": \"ft46zh42bczgm0vyfjwmmjkmu05ocjwug24xlg59em0ztsqc59til4zp6zmlv63a83b7165yqsao2amoywxjrlue1jigglqaawrpztjmkjuemfgx05dzvs5c4o7p68wsk2mrogox6a6biprd1qyelxjrp01wby9l\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/jobs-detail",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"jobs-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/jobs-detail/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/jobs-detail/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+                        "jobs-detail",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/jobs-detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/jobs-detail",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"jobs-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/job-detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/job-detail",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"job-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/job-detail/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/job-detail/ce5d3987-ce2e-436e-851f-ab6d1ef3d1db",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"job-detail",
+						"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/job-detail",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db\", \n\t\"tenantId\": \"21810c78-39c1-4dc8-8e1b-89ddeecf3fa4\", \n\t\"systemId\": \"11122a48-29f9-42b1-a88f-9076e4531d45\", \n\t\"systemName\": \"v4deprvu1eugymrc8x5f\", \n\t\"executionId\": \"454b10e4-23bd-46f3-b88c-c858d6a9166c\", \n\t\"executionType\": \"DETAIL\", \n\t\"executionExecutedAt\": \"2020-07-02 08:40:18\", \n\t\"executionMonitoringStartAt\": \"2020-07-02 13:29:21\", \n\t\"executionMonitoringEndAt\": \"2020-07-02 15:01:50\", \n\t\"status\": \"RUNNING\", \n\t\"detail\": \"2jpzt5rebazvs897gueg5firq6j4pboppmbssgqgyksovfkfzax4gs3a1vovbqk0vqnpsjvkmixgk450dgd432qdkux00vosj7blzo8avldcimnmwf1dj5o3ic8unoqlygh7ff5gwvg71f2nglaoypnr5k588p33uwnarzmk2hv06939f57s70kodroegb4pznbl44ys0mtqo1bbyaextmchjxvf8grz7q0mlxd2n8c3gb081y88bwcptdaf3xo\", \n\t\"example\": \"76d6wbyovk3yj7vwa2smwfcmtfctplynflm76pkjrqltmdonce0xhsw71ase9r0kk2orpp8b30zgdiiy2yif88sxj40gdhxn5dk019n42bchgwsp8oa74w98h6in70vzjs2tjq2l8roi0yo01ref1jad30u6o5oz\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/job-detail",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"job-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/job-detail/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/job-detail/ce5d3987-ce2e-436e-851f-ab6d1ef3d1db",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"job-detail",
+						"ce5d3987-ce2e-436e-851f-ab6d1ef3d1db"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - bplus-it-sappi/jobs-detail",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/jobs-detail",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"jobs-detail"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "0d67d929-43b3-4535-9f02-d9de31b9ea08",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
