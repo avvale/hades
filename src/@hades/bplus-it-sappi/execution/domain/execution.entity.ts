@@ -15,7 +15,7 @@ import {
 import { CreatedExecutionEvent } from './../application/events/created-execution.event';
 import { UpdatedExecutionEvent } from './../application/events/updated-execution.event';
 import { DeletedExecutionEvent } from './../application/events/deleted-execution.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.entity';
+import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.entity';
 
 export class BplusItSappiExecution extends AggregateRoot

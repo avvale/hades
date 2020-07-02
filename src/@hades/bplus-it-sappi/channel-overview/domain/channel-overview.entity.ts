@@ -23,7 +23,7 @@ import {
 import { CreatedChannelOverviewEvent } from './../application/events/created-channel-overview.event';
 import { UpdatedChannelOverviewEvent } from './../application/events/updated-channel-overview.event';
 import { DeletedChannelOverviewEvent } from './../application/events/deleted-channel-overview.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.entity';
+import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.entity';
 import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.entity';
 

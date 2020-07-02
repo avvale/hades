@@ -11,7 +11,7 @@ import {
 import { CreatedRoleEvent } from './../application/events/created-role.event';
 import { UpdatedRoleEvent } from './../application/events/updated-role.event';
 import { DeletedRoleEvent } from './../application/events/deleted-role.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.entity';
+import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 
 export class BplusItSappiRole extends AggregateRoot
 {

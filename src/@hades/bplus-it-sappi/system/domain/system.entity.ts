@@ -16,7 +16,7 @@ import {
 import { CreatedSystemEvent } from './../application/events/created-system.event';
 import { UpdatedSystemEvent } from './../application/events/updated-system.event';
 import { DeletedSystemEvent } from './../application/events/deleted-system.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.entity';
+import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 
 export class BplusItSappiSystem extends AggregateRoot
 {

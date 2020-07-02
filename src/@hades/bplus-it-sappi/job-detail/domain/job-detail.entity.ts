@@ -20,7 +20,7 @@ import {
 import { CreatedJobDetailEvent } from './../application/events/created-job-detail.event';
 import { UpdatedJobDetailEvent } from './../application/events/updated-job-detail.event';
 import { DeletedJobDetailEvent } from './../application/events/deleted-job-detail.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.entity';
+import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.entity';
 import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.entity';
 
