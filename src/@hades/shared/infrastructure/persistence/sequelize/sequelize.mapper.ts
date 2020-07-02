@@ -3,5 +3,5 @@ import { ObjectLiteral } from "@hades/shared/domain/lib/object-literal";
 
 export interface SequelizeMapper
 {
-    mapToAggregate(object: ObjectLiteral | ObjectLiteral[]): BaseAggregate | BaseAggregate[];
+    mapToAggregate(object: ObjectLiteral | ObjectLiteral[]): AggregateBase | AggregateBase[];
 }
