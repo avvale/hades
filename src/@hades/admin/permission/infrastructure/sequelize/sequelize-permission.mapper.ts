@@ -13,7 +13,7 @@ import {
 
 export class SequelizePermissionMapper implements SequelizeMapper
 {
-    mapToEntity(permission: ObjectLiteral | ObjectLiteral[]): AdminPermission | AdminPermission[]
+    mapToAggregate(permission: ObjectLiteral | ObjectLiteral[]): AdminPermission | AdminPermission[]
     {
         if (Array.isArray(permission))
         {

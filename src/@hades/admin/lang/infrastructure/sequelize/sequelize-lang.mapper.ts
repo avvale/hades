@@ -18,7 +18,7 @@ import {
 
 export class SequelizeLangMapper implements SequelizeMapper
 {
-    mapToEntity(lang: ObjectLiteral | ObjectLiteral[]): AdminLang | AdminLang[]
+    mapToAggregate(lang: ObjectLiteral | ObjectLiteral[]): AdminLang | AdminLang[]
     {
         if (Array.isArray(lang))
         {

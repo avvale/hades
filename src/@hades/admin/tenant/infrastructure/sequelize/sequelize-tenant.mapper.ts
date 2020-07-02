@@ -16,7 +16,7 @@ import {
 
 export class SequelizeTenantMapper implements SequelizeMapper
 {
-    mapToEntity(tenant: ObjectLiteral | ObjectLiteral[]): AdminTenant | AdminTenant[]
+    mapToAggregate(tenant: ObjectLiteral | ObjectLiteral[]): AdminTenant | AdminTenant[]
     {
         if (Array.isArray(tenant))
         {
