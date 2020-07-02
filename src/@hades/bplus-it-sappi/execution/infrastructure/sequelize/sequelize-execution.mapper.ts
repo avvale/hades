@@ -17,7 +17,7 @@ import {
 
 export class SequelizeExecutionMapper implements SequelizeMapper
 {
-    mapToEntity(execution: ObjectLiteral | ObjectLiteral[]): BplusItSappiExecution | BplusItSappiExecution[]
+    mapToAggregate(execution: ObjectLiteral | ObjectLiteral[]): BplusItSappiExecution | BplusItSappiExecution[]
     {
         if (Array.isArray(execution))
         {

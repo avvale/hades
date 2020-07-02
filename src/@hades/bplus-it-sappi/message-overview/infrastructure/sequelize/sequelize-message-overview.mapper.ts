@@ -28,7 +28,7 @@ import {
 
 export class SequelizeMessageOverviewMapper implements SequelizeMapper
 {
-    mapToEntity(messageOverview: ObjectLiteral | ObjectLiteral[]): BplusItSappiMessageOverview | BplusItSappiMessageOverview[]
+    mapToAggregate(messageOverview: ObjectLiteral | ObjectLiteral[]): BplusItSappiMessageOverview | BplusItSappiMessageOverview[]
     {
         if (Array.isArray(messageOverview))
         {

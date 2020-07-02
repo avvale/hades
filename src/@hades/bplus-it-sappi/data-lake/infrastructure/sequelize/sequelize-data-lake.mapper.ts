@@ -12,7 +12,7 @@ import {
 
 export class SequelizeDataLakeMapper implements SequelizeMapper
 {
-    mapToEntity(dataLake: ObjectLiteral | ObjectLiteral[]): BplusItSappiDataLake | BplusItSappiDataLake[]
+    mapToAggregate(dataLake: ObjectLiteral | ObjectLiteral[]): BplusItSappiDataLake | BplusItSappiDataLake[]
     {
         if (Array.isArray(dataLake))
         {

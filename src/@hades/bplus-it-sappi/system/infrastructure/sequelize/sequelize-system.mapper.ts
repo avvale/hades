@@ -18,7 +18,7 @@ import {
 
 export class SequelizeSystemMapper implements SequelizeMapper
 {
-    mapToEntity(system: ObjectLiteral | ObjectLiteral[]): BplusItSappiSystem | BplusItSappiSystem[]
+    mapToAggregate(system: ObjectLiteral | ObjectLiteral[]): BplusItSappiSystem | BplusItSappiSystem[]
     {
         if (Array.isArray(system))
         {

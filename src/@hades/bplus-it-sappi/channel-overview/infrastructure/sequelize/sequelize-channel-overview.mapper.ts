@@ -25,7 +25,7 @@ import {
 
 export class SequelizeChannelOverviewMapper implements SequelizeMapper
 {
-    mapToEntity(channelOverview: ObjectLiteral | ObjectLiteral[]): BplusItSappiChannelOverview | BplusItSappiChannelOverview[]
+    mapToAggregate(channelOverview: ObjectLiteral | ObjectLiteral[]): BplusItSappiChannelOverview | BplusItSappiChannelOverview[]
     {
         if (Array.isArray(channelOverview))
         {

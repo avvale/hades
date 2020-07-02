@@ -22,7 +22,7 @@ import {
 
 export class SequelizeJobOverviewMapper implements SequelizeMapper
 {
-    mapToEntity(jobOverview: ObjectLiteral | ObjectLiteral[]): BplusItSappiJobOverview | BplusItSappiJobOverview[]
+    mapToAggregate(jobOverview: ObjectLiteral | ObjectLiteral[]): BplusItSappiJobOverview | BplusItSappiJobOverview[]
     {
         if (Array.isArray(jobOverview))
         {

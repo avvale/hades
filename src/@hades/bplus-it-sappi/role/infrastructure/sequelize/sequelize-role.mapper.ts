@@ -13,7 +13,7 @@ import {
 
 export class SequelizeRoleMapper implements SequelizeMapper
 {
-    mapToEntity(role: ObjectLiteral | ObjectLiteral[]): BplusItSappiRole | BplusItSappiRole[]
+    mapToAggregate(role: ObjectLiteral | ObjectLiteral[]): BplusItSappiRole | BplusItSappiRole[]
     {
         if (Array.isArray(role))
         {
