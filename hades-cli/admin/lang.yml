@@ -27,6 +27,7 @@ entityProperties:
     nullable: false
   - name: sort
     type: smallint
+    maxLength: 6
     nullable: true
   - name: is_active
     type: boolean
