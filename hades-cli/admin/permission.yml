@@ -1,4 +1,4 @@
-version: '1.0.0',
+version: 1.0.0,
 moduleName: admin
 sectionName: permission
 sectionNames: permissions
@@ -7,7 +7,7 @@ entityProperties:
     type: id
     length: 36
     nullable: false
-  - name: module_id
+  - name: bounded_context_id
     type: id
     length: 36
     nullable: false

@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "b7916b1b-21fb-427d-b3dc-ac35ef2545ac",
+		"name"          : "@hades - admin/bounded-context",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - adminCreateBoundedContext",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminCreateBoundedContextInput!)\n{\n\tadminCreateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"a51f73b7-dece-4537-87dc-808d0b57b600\", \n\t\t\"name\": \"n\", \n\t\t\"root\": \"2\", \n\t\t\"sort\": 6, \n\t\t\"isActive\": true\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminInsertBoundedContexts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[AdminCreateBoundedContextInput]!)\n{\n\tadminInsertBoundedContexts (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"88b3da7b-5ca7-4dda-a760-c3ee9a224e50\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"root\": \"l\", \n\t\t\t\"sort\": 5, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3bb4ebf1-3d88-4957-b84e-52d79bcb599a\", \n\t\t\t\"name\": \"y\", \n\t\t\t\"root\": \"f\", \n\t\t\t\"sort\": 4, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6b88b344-131d-419b-9b4e-b83797902678\", \n\t\t\t\"name\": \"0\", \n\t\t\t\"root\": \"s\", \n\t\t\t\"sort\": 5, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8ff83359-32fa-43e3-8ee4-89eafede1b3b\", \n\t\t\t\"name\": \"7\", \n\t\t\t\"root\": \"7\", \n\t\t\t\"sort\": 9, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"91f5fafd-bfd7-4db3-8b33-d55df98ddc55\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"root\": \"d\", \n\t\t\t\"sort\": 3, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"900d8993-cd15-4469-8656-f241e97a6419\", \n\t\t\t\"name\": \"0\", \n\t\t\t\"root\": \"m\", \n\t\t\t\"sort\": 6, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"68c40852-3f7e-4264-817e-fdd28714dc0f\", \n\t\t\t\"name\": \"l\", \n\t\t\t\"root\": \"k\", \n\t\t\t\"sort\": 2, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0456f238-ad52-4103-a504-e4a38d4952da\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"root\": \"x\", \n\t\t\t\"sort\": 2, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"719dd939-f05c-4786-9026-e57c56cc40f7\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"root\": \"c\", \n\t\t\t\"sort\": 7, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ebcc807e-f7fc-4973-b4b7-cf6bbd866b66\", \n\t\t\t\"name\": \"h\", \n\t\t\t\"root\": \"i\", \n\t\t\t\"sort\": 8, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"58d98c8e-8056-42d5-89c3-4b9fa9f41b97\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"root\": \"t\", \n\t\t\t\"sort\": 3, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"71560363-883b-41ad-aa3e-e4c8af0f2568\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"root\": \"9\", \n\t\t\t\"sort\": 8, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"655cf3d1-3363-4d79-815c-fd60fbef630f\", \n\t\t\t\"name\": \"s\", \n\t\t\t\"root\": \"v\", \n\t\t\t\"sort\": 3, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a193debf-63d2-4f5d-b419-d66d431071f3\", \n\t\t\t\"name\": \"o\", \n\t\t\t\"root\": \"a\", \n\t\t\t\"sort\": 9, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ba2fe0de-ca8f-4c5a-a2db-9ca858e89b6d\", \n\t\t\t\"name\": \"x\", \n\t\t\t\"root\": \"k\", \n\t\t\t\"sort\": 9, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"13b1a33c-52de-4694-b774-41b09b91ecb1\", \n\t\t\t\"name\": \"6\", \n\t\t\t\"root\": \"y\", \n\t\t\t\"sort\": 1, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dd4a6eea-15dc-43ab-8073-f9f1bd96789e\", \n\t\t\t\"name\": \"7\", \n\t\t\t\"root\": \"f\", \n\t\t\t\"sort\": 6, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c82f6c07-0f1d-4918-92aa-e79a31eff5d5\", \n\t\t\t\"name\": \"r\", \n\t\t\t\"root\": \"m\", \n\t\t\t\"sort\": 9, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"62b1609c-85ea-40a4-97ae-87a80c658b13\", \n\t\t\t\"name\": \"c\", \n\t\t\t\"root\": \"h\", \n\t\t\t\"sort\": 8, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8d1d35ce-b6e7-4734-9064-5aeb80cef15a\", \n\t\t\t\"name\": \"c\", \n\t\t\t\"root\": \"d\", \n\t\t\t\"sort\": 5, \n\t\t\t\"isActive\": false\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminPaginateBoundedContexts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tadminPaginateBoundedContexts (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminGetBoundedContexts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tadminGetBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"a51f73b7-dece-4537-87dc-808d0b57b600\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindBoundedContext",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tadminFindBoundedContext (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"a51f73b7-dece-4537-87dc-808d0b57b600\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindBoundedContextById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tadminFindBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"a51f73b7-dece-4537-87dc-808d0b57b600\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminUpdateBoundedContext",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminUpdateBoundedContextInput!)\n{\n\tadminUpdateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"a51f73b7-dece-4537-87dc-808d0b57b600\", \n\t\t\"name\": \"j\", \n\t\t\"root\": \"h\", \n\t\t\"sort\": 6, \n\t\t\"isActive\": false\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteBoundedContextById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tadminDeleteBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"a51f73b7-dece-4537-87dc-808d0b57b600\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteBoundedContexts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tadminDeleteBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-context",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"a51f73b7-dece-4537-87dc-808d0b57b600\", \n\t\"name\": \"3\", \n\t\"root\": \"k\", \n\t\"sort\": 8, \n\t\"isActive\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-context",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-context"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-contexts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"0eb26809-1a3f-4010-aa52-609cca566e80\", \n\t\t\"name\": \"g\", \n\t\t\"root\": \"d\", \n\t\t\"sort\": 3, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"d8b2bd8e-ba61-40da-9e17-bc8b5721da17\", \n\t\t\"name\": \"l\", \n\t\t\"root\": \"p\", \n\t\t\"sort\": 6, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"f11a6df4-7255-47d3-b0e0-169f8abc4bb0\", \n\t\t\"name\": \"6\", \n\t\t\"root\": \"r\", \n\t\t\"sort\": 7, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"c969c163-0ad6-4fde-9a0e-41200d6d866f\", \n\t\t\"name\": \"o\", \n\t\t\"root\": \"d\", \n\t\t\"sort\": 4, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"41365762-b7f6-4e34-ba59-cdbe8dff5f2c\", \n\t\t\"name\": \"r\", \n\t\t\"root\": \"u\", \n\t\t\"sort\": 6, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"ebd15b59-6bbd-4deb-870d-4c92a444ddf3\", \n\t\t\"name\": \"7\", \n\t\t\"root\": \"0\", \n\t\t\"sort\": 1, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"04be095f-d960-493e-832d-9d819abdc032\", \n\t\t\"name\": \"q\", \n\t\t\"root\": \"5\", \n\t\t\"sort\": 5, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"572c94a9-9a75-4ec2-8cda-44c5e4e234cf\", \n\t\t\"name\": \"e\", \n\t\t\"root\": \"j\", \n\t\t\"sort\": 2, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"8e3f4710-4ca9-476c-933a-1f8d2b6429b9\", \n\t\t\"name\": \"8\", \n\t\t\"root\": \"f\", \n\t\t\"sort\": 9, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"69dd4296-0486-4fc4-a4b7-a1293480d97b\", \n\t\t\"name\": \"3\", \n\t\t\"root\": \"y\", \n\t\t\"sort\": 5, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"67417c75-00b1-4115-9a95-ee9263cac928\", \n\t\t\"name\": \"a\", \n\t\t\"root\": \"o\", \n\t\t\"sort\": 2, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"5e865e9c-adf0-49cd-88b5-b06839515895\", \n\t\t\"name\": \"c\", \n\t\t\"root\": \"r\", \n\t\t\"sort\": 8, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"9e025a32-2af9-440a-80dd-6a6eec60695b\", \n\t\t\"name\": \"3\", \n\t\t\"root\": \"i\", \n\t\t\"sort\": 7, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"3f50f536-1b3c-4a7c-974b-dc8fe22959b0\", \n\t\t\"name\": \"p\", \n\t\t\"root\": \"l\", \n\t\t\"sort\": 9, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"ae0145cd-dd26-4aad-b060-4c2dfece56b9\", \n\t\t\"name\": \"h\", \n\t\t\"root\": \"l\", \n\t\t\"sort\": 4, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"7b069839-9023-46cb-874c-fa6166416f74\", \n\t\t\"name\": \"0\", \n\t\t\"root\": \"1\", \n\t\t\"sort\": 5, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"2115208c-5d68-40c4-a2af-b8b58d303c06\", \n\t\t\"name\": \"c\", \n\t\t\"root\": \"v\", \n\t\t\"sort\": 2, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"67255587-1b5e-4a1f-bdc3-62b33bfa74a3\", \n\t\t\"name\": \"f\", \n\t\t\"root\": \"2\", \n\t\t\"sort\": 7, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"dcbbe45b-9c9c-43a7-86e9-2a55202c934b\", \n\t\t\"name\": \"9\", \n\t\t\"root\": \"o\", \n\t\t\"sort\": 5, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"160a9589-c1d3-4d3e-946f-156b32b10f7f\", \n\t\t\"name\": \"e\", \n\t\t\"root\": \"p\", \n\t\t\"sort\": 5, \n\t\t\"isActive\": true\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-contexts",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-contexts"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-contexts/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-contexts/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+                        "bounded-contexts",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-contexts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"a51f73b7-dece-4537-87dc-808d0b57b600\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-contexts",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-contexts"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-context",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"a51f73b7-dece-4537-87dc-808d0b57b600\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-context",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-context"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-context/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-context/a51f73b7-dece-4537-87dc-808d0b57b600",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-context",
+						"a51f73b7-dece-4537-87dc-808d0b57b600"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-context",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"a51f73b7-dece-4537-87dc-808d0b57b600\", \n\t\"name\": \"u\", \n\t\"root\": \"7\", \n\t\"sort\": 8, \n\t\"isActive\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-context",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-context"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-context/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-context/a51f73b7-dece-4537-87dc-808d0b57b600",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-context",
+						"a51f73b7-dece-4537-87dc-808d0b57b600"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - admin/bounded-contexts",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-contexts",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-contexts"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "30a431a6-517b-4077-9d20-51bb63dae48d",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

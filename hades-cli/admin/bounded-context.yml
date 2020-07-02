@@ -1,0 +1,30 @@
+version: 1.0.0
+boundedContextName: admin
+moduleName: bounded-context
+moduleNames: bounded-contexts
+aggregateProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    nullable: false
+  - name: root
+    type: varchar
+    nullable: false
+  - name: sort
+    type: smallint
+    nullable: false
+  - name: is_active
+    type: boolean
+    nullable: false
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

@@ -1,25 +1,21 @@
 import { AdminLangHandlers, AdminLangServices, AdminLangModel, ILangRepository, SequelizeLangRepository, LangSagas } from './lang';
-import { AdminModuleHandlers, AdminModuleServices, AdminModuleModel, IModuleRepository, SequelizeModuleRepository, ModuleSagas } from './module';
 import { AdminTenantHandlers, AdminTenantServices, AdminTenantModel, ITenantRepository, SequelizeTenantRepository, TenantSagas } from './tenant';
-import { AdminPermissionHandlers, AdminPermissionServices, AdminPermissionModel, IPermissionRepository, SequelizePermissionRepository, PermissionSagas } from './permission';
+import { AdminBoundedContextHandlers, AdminBoundedContextServices, AdminBoundedContextModel, IBoundedContextRepository, SequelizeBoundedContextRepository, BoundedContextSagas } from './bounded-context';
 
 export const AdminHandlers = [
     ...AdminLangHandlers,
-    ...AdminModuleHandlers,
     ...AdminTenantHandlers,
-    ...AdminPermissionHandlers
+    ...AdminBoundedContextHandlers
 ];
 export const AdminServices = [
     ...AdminLangServices,
-    ...AdminModuleServices,
     ...AdminTenantServices,
-    ...AdminPermissionServices
+    ...AdminBoundedContextServices
 ];
 export const AdminModels = [
     AdminLangModel,
-    AdminModuleModel,
     AdminTenantModel,
-    AdminPermissionModel
+    AdminBoundedContextModel
 ];
 export const AdminRepositories = [
     {
@@ -27,21 +23,16 @@ export const AdminRepositories = [
         useClass: SequelizeLangRepository
     },
     {
-        provide: IModuleRepository,
-        useClass: SequelizeModuleRepository
-    },
-    {
         provide: ITenantRepository,
         useClass: SequelizeTenantRepository
     },
     {
-        provide: IPermissionRepository,
-        useClass: SequelizePermissionRepository
+        provide: IBoundedContextRepository,
+        useClass: SequelizeBoundedContextRepository
     }
 ];
 export const AdminSagas = [
     LangSagas,
-    ModuleSagas,
     TenantSagas,
-    PermissionSagas
+    BoundedContextSagas
 ];
