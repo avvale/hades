@@ -1,6 +1,6 @@
-export interface Pagination<Entity>
+export interface Pagination<Aggregate>
 {
     total: number,
     count: number,
-    rows: Entity[],
+    rows: Aggregate[],
 }
