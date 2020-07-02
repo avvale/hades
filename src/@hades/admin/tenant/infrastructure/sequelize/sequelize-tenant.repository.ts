@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ITenantRepository } from './../../domain/tenant.repository';
-import { AdminTenant } from './../../domain/tenant.entity';
+import { AdminTenant } from './../../domain/tenant.aggregate';
 import { AdminTenantModel } from './sequelize-tenant.model';
 import { SequelizeTenantMapper } from './sequelize-tenant.mapper';
 

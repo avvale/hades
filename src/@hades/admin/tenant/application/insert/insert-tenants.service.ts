@@ -13,8 +13,8 @@ import {
     TenantDeletedAt
     
 } from './../../domain/value-objects';
-import { ITenantRepository } from '../../domain/tenant.repository';
-import { AdminTenant } from './../../domain/tenant.entity';
+import { ITenantRepository } from './../../domain/tenant.repository';
+import { AdminTenant } from './../../domain/tenant.aggregate';
 
 @Injectable()
 export class InsertTenantsService

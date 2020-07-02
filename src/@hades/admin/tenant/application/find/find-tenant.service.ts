@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ITenantRepository } from './../../domain/tenant.repository';
-import { AdminTenant } from './../../domain/tenant.entity';
+import { AdminTenant } from './../../domain/tenant.aggregate';
 
 @Injectable()
 export class FindTenantService

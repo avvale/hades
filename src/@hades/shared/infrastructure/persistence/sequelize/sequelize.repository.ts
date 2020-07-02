@@ -3,11 +3,11 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
-import { BaseEntity } from '@hades/shared/domain/lib/base-entity';
+import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { SequelizeMapper } from './sequelize.mapper';
 
-export abstract class SequelizeRepository<Entity extends BaseEntity>
+export abstract class SequelizeRepository<Aggregate extends AggregateBase>
 {
     public readonly repository: any;
     public readonly criteria: ICriteria;
@@ -19,7 +19,7 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         return {}
     }
 
-    async paginate(queryStatements: QueryStatementInput[] = [], constraint: QueryStatementInput[] = []): Promise<Pagination<Entity>>
+    async paginate(queryStatements: QueryStatementInput[] = [], constraint: QueryStatementInput[] = []): Promise<Pagination<Aggregate>>
     {
         // get count total records from sql service library
         const total = await this.repository.count(
@@ -33,11 +33,11 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         return { 
             total, 
             count, 
-            rows: <Entity[]>this.mapper.mapToEntity(rows) // map values to create value objects
+            rows: <Aggregate[]>this.mapper.mapToAggregate(rows) // map values to create value objects
         };
     }
     
-    async create(entity: Entity): Promise<void>
+    async create(entity: Aggregate): Promise<void>
     {
         // check if exist object in database, if allow save entity with the same uuid, update this entity in database instead of create it
         const entityInDB = await this.repository.findOne(
@@ -60,12 +60,12 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         }
     }
 
-    async insert(entities: Entity[]): Promise<void>
+    async insert(entities: Aggregate[]): Promise<void>
     {
         await this.repository.bulkCreate(entities.map(item => item.toDTO()));
     }
 
-    async find(queryStatements: QueryStatementInput[] = []): Promise<Entity> 
+    async find(queryStatements: QueryStatementInput[] = []): Promise<Aggregate> 
     {
         const entity = await this.repository.findOne(
             this.criteria.implements(queryStatements, this.builder())
@@ -74,10 +74,10 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
         // map value to create value objects
-        return <Entity>this.mapper.mapToEntity(entity);
+        return <Aggregate>this.mapper.mapToAggregate(entity);
     }
 
-    async findById(id: UuidValueObject): Promise<Entity>
+    async findById(id: UuidValueObject): Promise<Aggregate>
     {
         // value is already mapped
         const entity = await this.repository.findOne(
@@ -90,20 +90,20 @@ export abstract class SequelizeRepository<Entity extends BaseEntity>
 
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
-        return <Entity>this.mapper.mapToEntity(entity);
+        return <Aggregate>this.mapper.mapToAggregate(entity);
     }
 
-    async get(queryStatements: QueryStatementInput[] = []): Promise<Entity[]> 
+    async get(queryStatements: QueryStatementInput[] = []): Promise<Aggregate[]> 
     {
         const entities = await this.repository.findAll(
             this.criteria.implements(queryStatements, this.builder())
         );
 
         // map values to create value objects
-        return <Entity[]>this.mapper.mapToEntity(entities);
+        return <Aggregate[]>this.mapper.mapToAggregate(entities);
     }
 
-    async update(entity: Entity): Promise<void> 
+    async update(entity: Aggregate): Promise<void> 
     { 
         // check that entity exist
         const entityInDB = await this.repository.findOne(

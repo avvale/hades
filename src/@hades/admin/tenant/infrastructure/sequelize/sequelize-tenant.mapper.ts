@@ -1,6 +1,6 @@
 import { SequelizeMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
-import { AdminTenant } from './../../domain/tenant.entity';
+import { AdminTenant } from './../../domain/tenant.aggregate';
 import { 
     TenantId, 
     TenantName, 
@@ -16,7 +16,7 @@ import {
 
 export class SequelizeTenantMapper implements SequelizeMapper
 {
-    mapToEntity(tenant: ObjectLiteral | ObjectLiteral[]): AdminTenant | AdminTenant[]
+    mapToAggregate(tenant: ObjectLiteral | ObjectLiteral[]): AdminTenant | AdminTenant[]
     {
         if (Array.isArray(tenant))
         {

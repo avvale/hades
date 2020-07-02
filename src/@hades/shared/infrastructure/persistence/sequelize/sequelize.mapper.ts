@@ -1,7 +1,7 @@
-import { BaseEntity } from "@hades/shared/domain/lib/base-entity";
+import { AggregateBase } from "@hades/shared/domain/lib/aggregate-base";
 import { ObjectLiteral } from "@hades/shared/domain/lib/object-literal";
 
 export interface SequelizeMapper
 {
-    mapToEntity(object: ObjectLiteral | ObjectLiteral[]): BaseEntity | BaseEntity[];
+    mapToAggregate(object: ObjectLiteral | ObjectLiteral[]): AggregateBase | AggregateBase[];
 }

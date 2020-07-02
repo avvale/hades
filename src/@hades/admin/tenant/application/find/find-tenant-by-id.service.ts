@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ITenantRepository } from './../../domain/tenant.repository';
-import { AdminTenant } from './../../domain/tenant.entity';
+import { AdminTenant } from './../../domain/tenant.aggregate';
 import { TenantId } from './../../domain/value-objects';
 
 @Injectable()

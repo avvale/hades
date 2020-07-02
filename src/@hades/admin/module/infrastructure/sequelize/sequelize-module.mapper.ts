@@ -15,7 +15,7 @@ import {
 
 export class SequelizeModuleMapper implements SequelizeMapper
 {
-    mapToEntity(module: ObjectLiteral | ObjectLiteral[]): AdminModule | AdminModule[]
+    mapToAggregate(module: ObjectLiteral | ObjectLiteral[]): AdminModule | AdminModule[]
     {
         if (Array.isArray(module))
         {

@@ -1,6 +1,6 @@
 import { SequelizeMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
-import { AdminLang } from './../../domain/lang.entity';
+import { AdminLang } from './../../domain/lang.aggregate';
 import { 
     LangId, 
     LangName, 
@@ -18,7 +18,7 @@ import {
 
 export class SequelizeLangMapper implements SequelizeMapper
 {
-    mapToEntity(lang: ObjectLiteral | ObjectLiteral[]): AdminLang | AdminLang[]
+    mapToAggregate(lang: ObjectLiteral | ObjectLiteral[]): AdminLang | AdminLang[]
     {
         if (Array.isArray(lang))
         {

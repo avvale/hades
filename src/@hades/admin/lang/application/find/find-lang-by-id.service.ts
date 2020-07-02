@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ILangRepository } from './../../domain/lang.repository';
-import { AdminLang } from './../../domain/lang.entity';
+import { AdminLang } from './../../domain/lang.aggregate';
 import { LangId } from './../../domain/value-objects';
 
 @Injectable()
