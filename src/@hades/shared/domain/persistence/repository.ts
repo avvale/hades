@@ -2,30 +2,30 @@ import { QueryStatementInput } from './sql-statement-input';
 import { ValueObject } from './../value-objects/value-object';
 import { Pagination } from './../lib/pagination';
 
-export interface IRepository<Entity>
+export interface IRepository<Aggregate>
 {
     repository: any;
     
     // paginate records
-    paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<Entity>>;
+    paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<Aggregate>>;
 
     // create a single record
-    create(item: Entity): Promise<void>;
+    create(item: Aggregate): Promise<void>;
 
     // create a single or multiple records
-    insert(items: Entity[]): Promise<void>;
+    insert(items: Aggregate[]): Promise<void>;
 
     // find a single record
-    find(query: QueryStatementInput[]): Promise<Entity | null>;
+    find(query: QueryStatementInput[]): Promise<Aggregate | null>;
 
     // find a single record by id
-    findById(id: ValueObject<String>): Promise<Entity | null>;
+    findById(id: ValueObject<String>): Promise<Aggregate | null>;
 
     // get multiple records
-    get(query: QueryStatementInput[]): Promise<Entity[]>;
+    get(query: QueryStatementInput[]): Promise<Aggregate[]>;
 
     // update record
-    update(item: Entity): Promise<void>;
+    update(item: Aggregate): Promise<void>;
 
     // delete record
     delete(query: QueryStatementInput[]): Promise<void>;

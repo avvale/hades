@@ -53,7 +53,7 @@ export class SequelizeCriteria implements ICriteria
      * @param queryBuilder 
      * @param query 
      */
-    implementCriteriaSliceStatement<Entity>(queryStatements: QueryStatementInput[] = [], queryBuilder: Object = {}):  Object
+    implementCriteriaSliceStatement<Aggregate>(queryStatements: QueryStatementInput[] = [], queryBuilder: Object = {}):  Object
     {
         for (const queryStatement of queryStatements)
         {
