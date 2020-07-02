@@ -2,7 +2,7 @@
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { AdminTenant } from './tenant.entity';
+import { AdminTenant } from './tenant.aggregate';
 import { TenantId } from './value-objects';
 
 export abstract class ITenantRepository implements IRepository<AdminTenant>

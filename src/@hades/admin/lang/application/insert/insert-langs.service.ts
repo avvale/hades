@@ -15,8 +15,8 @@ import {
     LangDeletedAt
     
 } from './../../domain/value-objects';
-import { ILangRepository } from '../../domain/lang.repository';
-import { AdminLang } from './../../domain/lang.entity';
+import { ILangRepository } from './../../domain/lang.repository';
+import { AdminLang } from './../../domain/lang.aggregate';
 
 @Injectable()
 export class InsertLangsService

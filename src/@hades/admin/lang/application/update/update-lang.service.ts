@@ -16,7 +16,7 @@ import {
     
 } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
-import { AdminLang } from './../../domain/lang.entity';
+import { AdminLang } from './../../domain/lang.aggregate';
 
 @Injectable()
 export class UpdateLangService

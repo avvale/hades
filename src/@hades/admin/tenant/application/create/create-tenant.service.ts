@@ -14,7 +14,7 @@ import {
     
 } from './../../domain/value-objects';
 import { ITenantRepository } from './../../domain/tenant.repository';
-import { AdminTenant } from './../../domain/tenant.entity';
+import { AdminTenant } from './../../domain/tenant.aggregate';
 
 @Injectable()
 export class CreateTenantService

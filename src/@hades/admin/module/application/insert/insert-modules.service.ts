@@ -12,7 +12,7 @@ import {
     ModuleDeletedAt
     
 } from './../../domain/value-objects';
-import { IModuleRepository } from '../../domain/module.repository';
+import { IModuleRepository } from './../../domain/module.repository';
 import { AdminModule } from './../../domain/module.entity';
 
 @Injectable()

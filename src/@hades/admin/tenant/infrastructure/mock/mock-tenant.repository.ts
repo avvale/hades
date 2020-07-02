@@ -16,7 +16,7 @@ import {
     TenantDeletedAt
     
 } from '@hades/admin/tenant/domain/value-objects';
-import { AdminTenant } from './../../domain/tenant.entity';
+import { AdminTenant } from './../../domain/tenant.aggregate';
 import { tenants } from './../seeds/tenant.seed';
 
 @Injectable()

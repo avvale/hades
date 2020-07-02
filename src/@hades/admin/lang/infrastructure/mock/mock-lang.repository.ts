@@ -18,7 +18,7 @@ import {
     LangDeletedAt
     
 } from '@hades/admin/lang/domain/value-objects';
-import { AdminLang } from './../../domain/lang.entity';
+import { AdminLang } from './../../domain/lang.aggregate';
 import { langs } from './../seeds/lang.seed';
 
 @Injectable()
