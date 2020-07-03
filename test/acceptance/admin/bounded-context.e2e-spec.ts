@@ -1,5 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { SequelizeModule } from '@nestjs/sequelize';
 import { IBoundedContextRepository } from '@hades/admin/bounded-context/domain/bounded-context.repository';
 import { MockBoundedContextRepository } from '@hades/admin/bounded-context/infrastructure/mock/mock-bounded-context.repository';
 import { AppModule } from './../../../src/app.module';
@@ -15,7 +16,22 @@ describe('bounded-context', () =>
     beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
-                imports: [AppModule]
+                imports: [
+                    AppModule,
+                    SequelizeModule.forRootAsync({
+                        useFactory: () => ({
+                            dialect: 'mysql',
+                            host: 'localhost',
+                            port: 3306,
+                            username: 'root',
+                            password: 'root',
+                            database: 'test',
+                            synchronize: false,
+                            autoLoadModels: true,
+                            models: [],
+                        })
+                    })
+                ]
             })
             .overrideProvider(IBoundedContextRepository)
             .useClass(MockBoundedContextRepository)

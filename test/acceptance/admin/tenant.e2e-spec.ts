@@ -1,5 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { SequelizeModule } from '@nestjs/sequelize';
 import { ITenantRepository } from '@hades/admin/tenant/domain/tenant.repository';
 import { MockTenantRepository } from '@hades/admin/tenant/infrastructure/mock/mock-tenant.repository';
 import { AppModule } from './../../../src/app.module';
@@ -15,7 +16,22 @@ describe('tenant', () =>
     beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
-                imports: [AppModule]
+                imports: [
+                    AppModule,
+                    SequelizeModule.forRootAsync({
+                        useFactory: () => ({
+                            dialect: 'mysql',
+                            host: 'localhost',
+                            port: 3306,
+                            username: 'root',
+                            password: 'root',
+                            database: 'test',
+                            synchronize: false,
+                            autoLoadModels: true,
+                            models: [],
+                        })
+                    })
+                ]
             })
             .overrideProvider(ITenantRepository)
             .useClass(MockTenantRepository)
