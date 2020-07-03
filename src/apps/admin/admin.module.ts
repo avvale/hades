@@ -5,6 +5,7 @@ import { AdminModels, AdminHandlers, AdminServices, AdminRepositories, AdminSaga
 import { AdminLangControllers, AdminLangResolvers } from './lang';
 import { AdminTenantControllers, AdminTenantResolvers } from './tenant';
 import { AdminBoundedContextControllers, AdminBoundedContextResolvers } from './bounded-context';
+import { AdminPermissionControllers, AdminPermissionResolvers } from './permission';
 
 @Module({
     imports: [
@@ -14,7 +15,8 @@ import { AdminBoundedContextControllers, AdminBoundedContextResolvers } from './
     controllers: [
         ...AdminLangControllers,
         ...AdminTenantControllers,
-        ...AdminBoundedContextControllers
+        ...AdminBoundedContextControllers,
+        ...AdminPermissionControllers
     ],
     providers: [
         ...AdminHandlers,
@@ -23,7 +25,8 @@ import { AdminBoundedContextControllers, AdminBoundedContextResolvers } from './
         ...AdminSagas,
         ...AdminLangResolvers,
         ...AdminTenantResolvers,
-        ...AdminBoundedContextResolvers
+        ...AdminBoundedContextResolvers,
+        ...AdminPermissionResolvers
     ]
 })
 export class AdminModule {}

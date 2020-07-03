@@ -68,6 +68,18 @@ export interface AdminUpdateLangInput {
     isActive?: GraphQLBoolean;
 }
 
+export interface AdminCreatePermissionInput {
+    id: string;
+    boundedContextId: string;
+    name: GraphQLString;
+}
+
+export interface AdminUpdatePermissionInput {
+    id: string;
+    boundedContextId?: string;
+    name?: GraphQLString;
+}
+
 export interface AdminCreateTenantInput {
     id: string;
     name: GraphQLString;
@@ -113,6 +125,10 @@ export interface IQuery {
     adminFindLangById(id?: string): AdminLang | Promise<AdminLang>;
     adminGetLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
     adminPaginateLangs(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    adminFindPermission(query?: QueryStatementInput[]): AdminPermission | Promise<AdminPermission>;
+    adminFindPermissionById(id?: string): AdminPermission | Promise<AdminPermission>;
+    adminGetPermissions(query?: QueryStatementInput[]): AdminPermission[] | Promise<AdminPermission[]>;
+    adminPaginatePermissions(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     adminFindTenant(query?: QueryStatementInput[]): AdminTenant | Promise<AdminTenant>;
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
@@ -130,6 +146,11 @@ export interface IMutation {
     adminUpdateLang(payload: AdminUpdateLangInput): AdminLang | Promise<AdminLang>;
     adminDeleteLangById(id: string): AdminLang | Promise<AdminLang>;
     adminDeleteLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
+    adminCreatePermission(payload: AdminCreatePermissionInput): AdminPermission | Promise<AdminPermission>;
+    adminInsertPermissions(payload: AdminCreatePermissionInput[]): boolean | Promise<boolean>;
+    adminUpdatePermission(payload: AdminUpdatePermissionInput): AdminPermission | Promise<AdminPermission>;
+    adminDeletePermissionById(id: string): AdminPermission | Promise<AdminPermission>;
+    adminDeletePermissions(query?: QueryStatementInput[]): AdminPermission[] | Promise<AdminPermission[]>;
     adminCreateTenant(payload: AdminCreateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminInsertTenants(payload: AdminCreateTenantInput[]): boolean | Promise<boolean>;
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
@@ -146,6 +167,15 @@ export interface AdminLang {
     ietf: GraphQLString;
     sort?: GraphQLInt;
     isActive: GraphQLBoolean;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface AdminPermission {
+    id: string;
+    boundedContextId: string;
+    name: GraphQLString;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
