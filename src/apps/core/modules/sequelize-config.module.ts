@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { EnvironmentService } from './../../../@hades/shared/domain/environment/environment.service'
+import { EnvironmentService } from '@hades/shared/domain/environment/environment.service'
 import { EnvironmentModule } from './../../shared/modules/environment.module';
 
 @Module({
-    imports: [        
+    imports: [
         SequelizeModule.forRootAsync({
             imports: [EnvironmentModule],
             useFactory: (environmentService: EnvironmentService) => ({
