@@ -19,7 +19,7 @@ export class AdminBoundedContextModel extends Model<AdminBoundedContextModel>
         field: 'name',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.STRING(undefined),
+        type: DataTypes.STRING(255),
     })
     name: string;
         
@@ -29,7 +29,7 @@ export class AdminBoundedContextModel extends Model<AdminBoundedContextModel>
         field: 'root',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.STRING(undefined),
+        type: DataTypes.STRING(20),
     })
     root: string;
         

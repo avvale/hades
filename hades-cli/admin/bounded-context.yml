@@ -9,9 +9,11 @@ aggregateProperties:
     nullable: false
   - name: name
     type: varchar
+    maxLength: 255
     nullable: false
   - name: root
     type: varchar
+    maxLength: 20
     nullable: false
   - name: sort
     type: smallint

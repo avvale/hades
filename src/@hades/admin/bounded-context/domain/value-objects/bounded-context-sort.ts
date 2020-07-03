@@ -11,7 +11,7 @@ export class BoundedContextSort extends SmallintValueObject
             name: 'BoundedContextSort',
             nullable: false,
             undefinable: false,
-            maxLength: ,
+            maxLength: 6,
         }, validationRules));
     }
 }
