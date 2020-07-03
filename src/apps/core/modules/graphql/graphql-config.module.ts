@@ -5,7 +5,6 @@ import { Any } from './scalars/any.scalar';
 import { Json } from './scalars/json.scalar';
 import { Upload } from './scalars/upload.scalar';
 import { join } from 'path';
-import { GraphQLInt } from 'graphql';
 
 @Module({
     imports: [        
