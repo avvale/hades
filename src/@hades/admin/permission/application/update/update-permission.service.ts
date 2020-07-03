@@ -3,7 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     PermissionId, 
-    PermissionModuleId, 
+    PermissionBoundedContextId, 
     PermissionName, 
     PermissionCreatedAt, 
     PermissionUpdatedAt, 
@@ -11,7 +11,7 @@ import {
     
 } from './../../domain/value-objects';
 import { IPermissionRepository } from './../../domain/permission.repository';
-import { AdminPermission } from './../../domain/permission.entity';
+import { AdminPermission } from './../../domain/permission.aggregate';
 
 @Injectable()
 export class UpdatePermissionService
@@ -23,7 +23,7 @@ export class UpdatePermissionService
 
     public async main(
         id: PermissionId,
-        moduleId?: PermissionModuleId,
+        boundedContextId?: PermissionBoundedContextId,
         name?: PermissionName,
         
     ): Promise<void>
@@ -31,7 +31,7 @@ export class UpdatePermissionService
         // create object with factory pattern
         const permission = AdminPermission.register(
             id,
-            moduleId,
+            boundedContextId,
             name,
             null,
             new PermissionUpdatedAt(Utils.nowTimestamp()),

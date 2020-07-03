@@ -2,7 +2,7 @@
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { AdminPermission } from './permission.entity';
+import { AdminPermission } from './permission.aggregate';
 import { PermissionId } from './value-objects';
 
 export abstract class IPermissionRepository implements IRepository<AdminPermission>

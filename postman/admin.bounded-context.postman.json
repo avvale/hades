@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "90fc25f8-d382-47af-8cd8-c96999d3c226",
+		"name"          : "@hades - admin/bounded-context",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - adminCreateBoundedContext",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminCreateBoundedContextInput!)\n{\n\tadminCreateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"927455c7-af1c-4132-98d5-bc91f9286763\", \n\t\t\"name\": \"3w861pawce0nvvhzmhvz30snx5630nzypqg97w4ep4e6mtbcgurrqheazo3o5qpiumhmy7crbwtkv8hhruan8a8zj3y16bbsb3u977ie9i1ihfxsxh6vwhjjdo3vezuuc8lrg89n769wcnpnncy0mt2lyhpc78lykn618gtjva2rf92e5ogf4qqcflrydw41twrmwa5v1vheqljsckagkxtwskdhql0106yl3t2ondyxovrape1nuah68a4dy09\", \n\t\t\"root\": \"7mjs490i6syfc425zvuy\", \n\t\t\"sort\": 264631, \n\t\t\"isActive\": false\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminInsertBoundedContexts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[AdminCreateBoundedContextInput]!)\n{\n\tadminInsertBoundedContexts (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"4a10af0b-96db-43d1-ac83-1c184461ed82\", \n\t\t\t\"name\": \"ieeb6kgh89cqkvve7e340w635nphqy5enbiyieujqhqs4lulyvhjsidn7zfshxa9h9gvaoxbfbwosrkio2i6quxvjuqkkpv6zte5zfdqr2kalpadx9hh733uttyx1500uxedctd87i03wzm81h40esl0zcknap06nuuxl9brzng5x18b2myuwbuozpkv15xajiyk94f8l4kvxr082kh98st3rgm7vd85qsgskkib4d9c9zxj6gdi6zlwgb9ybzf\", \n\t\t\t\"root\": \"jl97f46k0us72ze7khli\", \n\t\t\t\"sort\": 644092, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"266ff7be-a294-4a26-ae0b-8922a481bd83\", \n\t\t\t\"name\": \"b9zb8i77u5u27jvx1skpsx1wv55cxwhae3jzfuyb4yclu0jfas7w0fjhtxbzeqk03n7bjj122xax24fhtzjvh5al9km4x3ynu6mt5lc1loksy5qmrwmcniva11ht03r3dzlcoo4epsjrckumm24jixjixac5yj1fgoapazcist9vmknr17tb35w6jl0gbq571pppwmglrep6gfss6d4rq7pxy4lt1d60djb8fdb2rgsndsj70fvmt5qi5w0xkww\", \n\t\t\t\"root\": \"60qqkaq7exs838jtmc43\", \n\t\t\t\"sort\": 860359, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"04040b71-93b4-47ae-9d59-bed06794565c\", \n\t\t\t\"name\": \"4g9dui34knjjdcpid2nqhgp6i9gxybih1f1prn8vz6htfz119r8r2oa214q1taxx0lechqgv4ggdmp39lfdy1r4jubzm7plgsbl85yvt62i9kr3uiy3zu1tscf9it37ynxfyhfb2mlsdl188rb2oha9umit28ahrqimc9vt03js8bt09yvhn92gy17gzrl94pbmc119o8ly45repoh42ua60lhc9uj678xk1g47rg3bg21lpp8wn5mvruucoox3\", \n\t\t\t\"root\": \"oardgifjvyt8loyjha02\", \n\t\t\t\"sort\": 227213, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b3809aa7-a5f9-4022-a2a2-985533139662\", \n\t\t\t\"name\": \"187dcw3vp1mwzx4z0bp9m1j0zleytu76a7s7k26kgrlqn276di1pgo03xt76sb8owt6740q1xadxi74e2p62grxsz9jija9b2rdgjsb0157myru39v1vnui19r5tm6fn40b5oyj5a82qhmxb41xinbfva1ixk2evs09wym5rsxjkudosvt0xq46n8ar6ms14c8ar1uqzkfwbcvtplb7j51roww8pnakjrqr4jhojzn5eyu5mkvkf49t2xmpfncr\", \n\t\t\t\"root\": \"9l6pjst0oao63idw7dup\", \n\t\t\t\"sort\": 589871, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f7865b8f-c5bd-43a5-85e8-49765684b989\", \n\t\t\t\"name\": \"nhip1t2mdooqrbwya45v5qkvzmb2gdax0izxddljchrowxmwr9ejom339yk1uvod7u3vh8d3kt4jc8enuufpvdu99bcpqxwtfoa42zgg3shya3tix9h2kmdwtfibq47r8vl1t5d6lbe0a6jho9hd0npiw20turynwb8nhglothj9y1n84z1amqhlcpi6ugwz1g7zitlktwjomgwidzy8oq3lx11tkkid67ehz4wwem9izfbfsp91evqgs2jvx2g\", \n\t\t\t\"root\": \"68ip3uhx9i329ke7w1fe\", \n\t\t\t\"sort\": 185809, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5a48ab44-cda3-4c06-a083-31f2a2581a79\", \n\t\t\t\"name\": \"z3txjoy1ksowec6xt86rqner95zbbbhrm6t5s4igulqzk6swaimyfoiht1rwq9bjmqdqp9dy4yy03d486d3j36txmx4ae308c5283ejr1fanxepfhfthxv7bfi5aeie6x3sfp75vlgyvbw1l2qpm5sl4gku2q15py0ns3zvg9xgs3jpcqz1nrcaxio0qnezskwk6m13g7d8tfqpze9d1lx0dwawzyqtcyy7zm10my5lfp9tee6iefiw0o8irrbc\", \n\t\t\t\"root\": \"ebthixfahjvvfg3thfkm\", \n\t\t\t\"sort\": 115466, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"50ca789f-bc5d-44be-ba78-91e4627744ef\", \n\t\t\t\"name\": \"tgls388phfinmtgubv62j8rpna056f1obeh231bhgc5vcfbp2nbdct9bu2rgjk7smtaardgojlbjpk23obxh8e40366cd2cviqmlot3mf07l1zyx7ka45j36e1zutljo54ubl49xw1fi8yeqc1ldg4p8n0lnz1xwuz9az8ctg9cu24ihxutastystrbh8sgf1z0zhduom6bing9t60o5lw7qp40bcj6ckxxxkm4m0upbmz1qpfk8x1u5mrbuaut\", \n\t\t\t\"root\": \"xpcf0c93c22auwrsifd3\", \n\t\t\t\"sort\": 851560, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"81398b3b-bb6a-4672-acba-f7c8be58ecf2\", \n\t\t\t\"name\": \"xr4qrsybagwzgxhpqpixof3itsslx8o6wkzczx5kgcr9ccp6gkazhuneo7nzv0dbovd6fe4nnme722tnosobnvw4f4ht2jt5zj3z1c4jlhrv94c5mf2iappnvsy7lr8u9rthfbzry8c9st1s9ev0ppl7dcnbni8ik8s3zd75zoie34ls7l4q4sfmon2s5t65pfxuffxpppasqf2evxeo08id5laf6rnl6k3cckx8yzxuzl620pd4hzcn9o83bjb\", \n\t\t\t\"root\": \"xa3xbq1b8kxqshe737rq\", \n\t\t\t\"sort\": 458821, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1b1427ce-d5a4-423b-b18e-4745a83bde27\", \n\t\t\t\"name\": \"abc1ts65n0x01ewa7kg9z89lq1i92e90yo5bc47t6u3jny398f9oxposmqbh9k9j1odajak8awnjsob2d7s8ko0phzwdnj4qi3o2jb7oat32upxdez11lyuxz7wjt4ddnwaxjxs6mrhw7d2p6i264lir5swoahqezde7a3g80t2kjlyjxzxnepqqxs0vqjro6j8wzrp7pgyva2dbpkb74oml1vhpfoofdgdbt40s7od9u5xreqgmkw9vh9b5wxj\", \n\t\t\t\"root\": \"x6meot7zymc4e3bc0wif\", \n\t\t\t\"sort\": 793442, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2251f83b-3803-4f58-af34-2e8d0d46c2df\", \n\t\t\t\"name\": \"638ve4pislyc9rjoon3vgf2tgxkz6fdo3sjw2ef5rdm0cskh7u8dae0tftuodjrs8521w821jvnit8gtqzck42f4xbx933ow53yxaumu7fht6fuvb7fp7nmaax6lhn9y1zvls89cgww1qk16i5u4bjma2ufzxqwtlccemseacgnv19pde4ej6nm87b19sy03llhigycrd757eb06kb4qcdrr31a6ai5a8nj12ppinetp7nx38tob5rit0v88xph\", \n\t\t\t\"root\": \"wgnffmelg6lmnb1yxucl\", \n\t\t\t\"sort\": 150723, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0fc15a54-c80f-4f59-870e-277d175080df\", \n\t\t\t\"name\": \"f2c97sq6rqijbdyrsi0qgqs77rifpz3t95xguzbtb3pux7wssq1xc3vt8ge1zpvj5uglhcr99c2p69wa7435vpm54hmeluhud4pphhoqyfd5m8fgy189afagtydgu8rzhjzqwrg7mjv5vmuc0vkty1k78z7fh2ts4r76qdjn5nfjimhxuzvovoenv7xp5myqvixdle4xux63owalv90mk0tqn00o5r2vjxu023jpitbfwp8cms58ckg8hd2u0xd\", \n\t\t\t\"root\": \"x9usg4cagt8tb466hy5f\", \n\t\t\t\"sort\": 950296, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f9248fa1-4c34-4a2d-a1cb-8fbb871ace78\", \n\t\t\t\"name\": \"b0ks7movo2ilimh1gbfz3b3ngkbgf2i3bwvvfyx6gem7oa779niyr9ztkvenfbfrxz7jyt5yd5snso16iy5i856o67cevj6f8yotnxh70nhv3ms32hutkz6vtzkynp4qi091ly8t4p3gp4hdielw5jelh59mm2ar1gsezqdaxdcr2d4nbfd4r2rriyso36j7im5zmhlsv4lezf2o2r37q2tkhywy5gzrtsgqeg3ir1qyq1odh11qhkxog6o98ii\", \n\t\t\t\"root\": \"4uxctqo7p93ei98ae4rz\", \n\t\t\t\"sort\": 320687, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c813a56e-780d-45e0-92f7-edafb9ec85e8\", \n\t\t\t\"name\": \"ednbsqspfr5n18ew6jgyevmg0zwrwat97ve3udcr569b268dh4jy870naf6clipqnxlv7kpzlc44rhfuyen6h3waiiudev5bewa6mv1jfwbj0s29wzta3v7nr94of0t2fnaj0te4kbssckkn2hho0wp648kyjdi8bkmkiuny9av45h5u1rug1os5tckdsim0q8n8lunap1knodxkraxtuch7r8optzddmeeo56fb7fpbxi7swpn3jdcyf1w5v7o\", \n\t\t\t\"root\": \"rqymy4li7kkzvihy6pnt\", \n\t\t\t\"sort\": 994788, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9e891bb5-97c6-436c-81a5-7e42ce4ffa45\", \n\t\t\t\"name\": \"i8m9ams742kh9m1akzun32qksnhpxd8cr5hb62rc45nvkb3ia8qe5yh7ym1ccws1y8zr1yg4cqt1zq63dkjb13fkosvuhbfmzl64x4m9ovmthwwnouz6al5f8779e4eljt7c5kbs7fpa91r8npfp7or36eoizs7h9e54g16flqs8ddbtiuwv4nvwmrmd56vug2vbdi9pkg01upv4p8rewe1thdwfzql2cemm3upm4o3jwhs52hq5a1enp2gjgjx\", \n\t\t\t\"root\": \"uvh10g7o15thufubf9vc\", \n\t\t\t\"sort\": 325653, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5204e839-132c-4017-bc92-d0e54d00e814\", \n\t\t\t\"name\": \"qk8sgfdhuunj3oq14rrornx3b6n11al3aunhq8ldb0b5chtuvorggxu26fvl106017d6gts4x585iwne4r0ze4bljtcfcsfuk88evq2l45n42pwgnz58fiq5ql36kfq1nt7dx25p44nn41ew65l3xwdkvcokz4jytk4q1hyz8tbeisde0tg8de1nfnd4867283a4aa9vkasocyc25liq4o0o0zteyu1lhto0kjf58az31uu24ofeqdy1m5lc3ja\", \n\t\t\t\"root\": \"p63urs1sbzui5duddalq\", \n\t\t\t\"sort\": 316848, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1ae5b20b-14a6-417c-96cd-376007c6f27a\", \n\t\t\t\"name\": \"c1qmtj4fahhd1sqwxcqmekmiertukwf1btbzd845sdmcm4bu88031l7ij2ambz0dy1ywsypb4dfg17mdrxw7yiffbh1r7kal8j4e1hjk51uvdcjh4kz69qaibtjkgh9h580aqxq92ze9a540g7bp6rpcv7tkms7jnt4k1knll57aitbtghaz5qyzfshqtibclt015kou5c523pykzr8oyqigtck1ybcq29lp1hmc1jv4742wwyunt0olhcnfmte\", \n\t\t\t\"root\": \"9l3f1waw0xu5cqwyi4kz\", \n\t\t\t\"sort\": 932354, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1002b5e4-174e-4825-8eae-138ffaabfeae\", \n\t\t\t\"name\": \"pivlup69hlnu4kkiqplnxtovu34z3qu9vvc48t0qp1wgwr0e3rg2beaywkefckwffzgcjdkvtxzfdqr5b2tqff799ui8gz1nzjo8nlg3f0q3iah5s2fq40yytj9q0gjc7xaclta7r9i1y8x8x6qhulc8cj10jav9vam7dguoefqyrj5joi80q5wkuj4btcfs017qkbhtw2f5f1qw572jmsw1kgtqqptvf5phkma8lvntwupplpvpqbb1d39573k\", \n\t\t\t\"root\": \"dgb5me50b5ku4gtbh8d4\", \n\t\t\t\"sort\": 404801, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4fbd9c6a-d391-4823-aeea-ea7ee922b182\", \n\t\t\t\"name\": \"3e605mwzrusphqqx91zwejpalhqijsd6w5e1z1i84gbtv86zwd3hnlm2az6io6oz1h8dmij609e9rhf46qb7fg017p9krmwk7x7ejy1kbymg9jm3tvi458gwyacpm70l12oll09022xh1uo3d1usiw8ry0hgsbtu5flwldza6wbsrscv9whx9on8i4j9dp5s2dbozlax9avtevbkayuhcbczb6tcmpnxdig2g0bvkudllyi7rtr54i2mifvq0tn\", \n\t\t\t\"root\": \"yx26ji63i99x3iqsmpm2\", \n\t\t\t\"sort\": 182473, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ee7a62e8-f4b4-45d1-b0ec-143ecdfc4038\", \n\t\t\t\"name\": \"jdcpz983kxesgkpxlh7jqjuwqqw3o3zwuns2p3jano92756y11i71gcye0leplet81ng06crwv8o9sg96f1zp88ho8zwdnhib9pk2kosoidi6r8j7drg1h74akh7bivf2e4wri4uzj7mwqjjzfi1gkyjnrvq6bn7vwzjvkzs7foku2wyv8ft6albrgiovqi9mcbwbajhqau8f5ei50jc2qncvhk8znrfsghuwodjg6el502idovx6u4jjq2vinw\", \n\t\t\t\"root\": \"2s7y7l4jftfn7mpschfs\", \n\t\t\t\"sort\": 333747, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"de15f4cb-9715-4e18-adbc-ff71e52564c1\", \n\t\t\t\"name\": \"i18ujr2sy97mzj2d8j2qqig1cj6m6cxt11kren9r7kkcelt8u6n6f0suvbwu3kd0vjd1eajmotm95gsd0b7vdo3etsfqicqz5kwfp324r6wyyanvk53vzcx810h0snrodph07z8vdhi2kfgi3xqrzyqocaxx80tdzyh0xyc0eipzhrbknmt0xy1f4b41jf1a58od9bbiz2q6cuvvyip8qplcz8l4flipf4f660kpqa9wa68lnq1pn5han8lylvq\", \n\t\t\t\"root\": \"k0ck9x3aiad3au1cknva\", \n\t\t\t\"sort\": 589090, \n\t\t\t\"isActive\": false\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminPaginateBoundedContexts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tadminPaginateBoundedContexts (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminGetBoundedContexts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tadminGetBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"927455c7-af1c-4132-98d5-bc91f9286763\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindBoundedContext",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tadminFindBoundedContext (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"927455c7-af1c-4132-98d5-bc91f9286763\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindBoundedContextById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tadminFindBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"927455c7-af1c-4132-98d5-bc91f9286763\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminUpdateBoundedContext",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminUpdateBoundedContextInput!)\n{\n\tadminUpdateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"927455c7-af1c-4132-98d5-bc91f9286763\", \n\t\t\"name\": \"nnqky64q9t5sjhlyg7di9ybc9cfffcqi2zhby1wuy53obfseowg06bhp7ukzks0xlykkjfwxn8gurr18k8k0t0sgjfs6k0wczghall571vouqskv1wevfxan13ji3iop3koe32pc32w9n5e2zx3b51j9if5908i2v9bjppepc8d499nbfv9v0df7lf8yzt8hh3ye9u8k8fpo4qteg19z37vanlr5nz1wn3s1h8bekm00y036ltl56y908mugxxe\", \n\t\t\"root\": \"b8uggjd2tl0rzl0v6lrp\", \n\t\t\"sort\": 848614, \n\t\t\"isActive\": true\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteBoundedContextById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tadminDeleteBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"927455c7-af1c-4132-98d5-bc91f9286763\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteBoundedContexts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tadminDeleteBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-context",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"927455c7-af1c-4132-98d5-bc91f9286763\", \n\t\"name\": \"9mq8y27fzeb3poql046d70sbvq08s7rgrs15mwzvflr946ywjqjy5rk72gln01gq0elej643spuc5onede0s5msfijnv5t3yxkabmvtpg38jdcrz9hj72c5h0nc4kfghji36iroznpz4zkzhtf10miabogyb3y8lsvbepspy1ppw693o4x9zkcmxr23bmrhgw35hpykl7t23brtleqh1mmyidqedotdt78xxc4eqyrzm4pizbgt8fnci3877shg\", \n\t\"root\": \"jxvree4w0hk3eufemquz\", \n\t\"sort\": 616274, \n\t\"isActive\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-context",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-context"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-contexts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"144bdc71-4ac6-4ed4-bcd3-a1744254b58a\", \n\t\t\"name\": \"yb4prgig15nu28emvcv0amax5o6ca7mbvueersujvhemd52gyi4hb9r2yflr69xdhalfzevz0vuimk7osfyeuwfuv3tv89yrtp1u6hpm6kh9pxtye6hhfr9t71upyczii6940rwon6yliglaq3xc56s07favfp2cuez7qecqiuo9is9bqwpp7vv2ipb25u0r0fe3j8o7yteq0lo921bkjtngltnekrumg63qt0zovl94c3y6rg091ap08bs5v9m\", \n\t\t\"root\": \"j2avw3sxju2bi6pl3i62\", \n\t\t\"sort\": 544662, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"48d5293f-74c7-4a75-8172-ca3c458a19a6\", \n\t\t\"name\": \"gn09x6yw6nvgclf5eu778i7ozrdxbzpe1wpqqfbss2h3s1d7bkfx888br83kzw7ltqaxh3tjidyfub7dpb1qixpsin7rgdshiqdr2y3r8vbtlckpk1zc73dfgt1m8oz7okplms52g4z89duw7k23ws0g5qp8izu1u761znmq8p74nqpn05o4vwtbaxgb2fwwv6tt2zbzei4hem8upfjqftldi78kgha0owaqgkf9yglgvlfcwb956kl0wlvmr6r\", \n\t\t\"root\": \"lji709rya2ys6l744gkv\", \n\t\t\"sort\": 958666, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"1b7e1f7a-f043-4682-88b4-f7fb728ed644\", \n\t\t\"name\": \"yescm6ltu0k8nrlqbiibwlacxvymfabt0985e34wkb8vlkwc26pj7j2qv93t7j0d3fes9n1lowycrmv5ozsyb9zkink8y9nqy7sfp7gd0dwwrsm7gvfnwb706c5eqxazc3300uo7q6ibbd5d2d9f7d1aovumykb8iaoqgz5i709juck91m48xw2088n54ekgpq1rykbs6rpgo77shshz9yhlwu6pylsggvsuvbfgvpia5q07nqk31940d998xic\", \n\t\t\"root\": \"2jslvu7mtyc9jryrxdpr\", \n\t\t\"sort\": 510939, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"3df163a4-0471-4c64-9f8e-f5705de2357b\", \n\t\t\"name\": \"a95k01ye9p785jama4x97xq0wy5m3v9p3at33i1n6ukh134yxpkaetv107f8zxxyctyjhs99348mmmexmnov99axli77dum7tz7inoumu2zmap297c9ifxdj4co7me4fuq4nocwyj07lgvlw58hp185p9ph11y5zvfxbdvjicl6lhf3r19apsqfm6of2o2orq2o5jt8rz8w0ekt4whxeau24k89jzhptmqcwfi8fya59kuwzj84vpg3aor7wxp0\", \n\t\t\"root\": \"7qicr55womf3rahg0ekr\", \n\t\t\"sort\": 919303, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"8e4f8e78-16e7-4a4d-b826-259225cbf3c5\", \n\t\t\"name\": \"8ic3tkwwvrnjgpa97vnlcsow9ww15seadm477txiyn1cwbw6vzlz9q110yyr57wzq37tr8gb70y5xaiokv105zn6y1hdr5wfyu625anh9iafa4dimo7k00h6e5ej9lm3a5r8dc22q39w3cx2oje8msr01xh8w3xw2x7np30dyxl24vi74k1uv910zodrewl0qyuci48t9t0flan1y20e3gujfxbj0p47msj73w1hfirb3isrzgjtjpna4uezijj\", \n\t\t\"root\": \"1mowghnjx2x93e363js1\", \n\t\t\"sort\": 453674, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"999a1a53-55f1-48a6-ac2e-e38db7275c9f\", \n\t\t\"name\": \"5zuhb8j9yvwhycsfyjgt9nvkui54kfsvyd038gjni30o4yd6pye90i1wyxnmn7435q4yhfywd1a8tet2o6njb8ywm6rwqduqe83g0c5phdnxy0w0e3i40qbarsypx1htzgut1uforrcegysr30vgl8g54coc51y40jerslbih8yuztok5pywh5slh5bmrcr9lgy265b7eeeug5n0a3ikxrb1o7jqki2ancutzfjb7bhyqmbcizi5vdepo3git0k\", \n\t\t\"root\": \"qlvo9rsk60cirshjhrvw\", \n\t\t\"sort\": 525606, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"8af1792a-abd0-469d-99a4-579536207c26\", \n\t\t\"name\": \"bohkbbvnuuihczbo8vtz0t33y6okf7k48rk1h1v1xbal88updx8wnfsn4kiooy8x8g5s0waudzk1b1u8xngo72xkl4hb69pl9kbpuct9qz9fszjcmfu758d92qyov5li2zmpitgtosz74elibcigzn3jva67buaev1ty6dryumq6bdf6xzzr1had186vzeh8y3i8njv5u1ka9ob7743kcfhniindle9zdptnkkj9relsd680e75meth34l16g7i\", \n\t\t\"root\": \"eolqqpavclult2o5rxpe\", \n\t\t\"sort\": 409640, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"b9887c7d-bfd3-45e8-9fb6-75c412d0266d\", \n\t\t\"name\": \"gvbchhe4qxsst3sw8cp41nlq575ylrvt2l2312uakhyas2jvosa9qt1t88vqd2d6fpopj5yvi5begsggp3eizo0o3jkk2dnyah3k5he4qfqolwpc090v76n99ev3tyhj9zfwmukqtq07no86xnsck94uwnyldcdw44u1gfydnw471lafqxcdqyj5nzimdeksyopbw52yvkh6j9fzop064qr3jt5as5ch7ckx6abidkq2n0gyoi6n4qzzf4ijk9l\", \n\t\t\"root\": \"nrau47wbzv1b89strqec\", \n\t\t\"sort\": 886732, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"cdab43da-ad05-42fc-94d0-7b614a94a5c5\", \n\t\t\"name\": \"irbu6bqvxuk014fy79wkspifd3earud3n00tgo3m8xqwzo5bxev008dyx9478zmo8ac76yqdntx91xph7gqkkclgluce26t0md5jrwq1qbedd6h3p340hwqn9df0769cpdrhi9va1roj0y762fsbx6pnv4wapg474tq2cir27zex35busjevjuemmtrkdjpap3lep3p9k43je9dzr6wcd5esxu5fx3arnd2yudtj3r1y87j928dqh0lfzgm9v2x\", \n\t\t\"root\": \"ena0tvoto55hxwm9803b\", \n\t\t\"sort\": 941923, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"5bb6f7c2-a3be-485c-803d-fcb8c630a233\", \n\t\t\"name\": \"fr8x3gny4dby6sy89vw9nh6yux49rsgu7kw6l1eqs3tlxr0b67660mhhypm148a3pqxr5x973ci7m08q35yqvqjc8vnqn3sn24h67hzg9bjscdcxqa2kqbzabefpn1ih38oe2dnjvf7l33r7jp6avodncl0fy73dil1637z9synptc7zt17zncki5g9gqp99ij4dgjqswmaytue8bgdcmwpegvgqx5tf73i57xaa2r0jwfqdv0dm2xnlsndrc68\", \n\t\t\"root\": \"1pdno36hvqil5e8s2vi3\", \n\t\t\"sort\": 927678, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"f6214286-3a28-4c08-9229-174726bb0479\", \n\t\t\"name\": \"7l2he4jln4oe9hoinc3q7wey72ceqgqss7h3qt9gdpysrgnot7x71idwhp0zswbip5eeble27x6eqp7noiiue9ek1gef1rnwmjd6u3cjgytj6dm4o0omwwoynvdxpzgiqobakflalqend22i5j9d20l24r43sd5zm8m67w9ex2wn4067c1h4mhi7icdqjq4cgxso7btyav4s3n98s3s0fj3mk4x4gvwzqfao0xivpqu8b4ivjyblxmypptzx94t\", \n\t\t\"root\": \"pnv5s2pe3au20ra77zo6\", \n\t\t\"sort\": 147353, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"9f39af54-914d-42a7-85e1-2dd3118ae73e\", \n\t\t\"name\": \"1tj3v6hhg8gphkllcuk2tmuletcr91m58g7r8n1yawvovdk8l0vl1e93chr0hjcw6bl5xlsvlmgv00rs7tip0oxgwgddn8mmmde6ui9otbqhzeughpg0jnnhyvj00sk8safi6masutqw07k8dz2ltxp150tc292amo07c3yqn9lh7o5yrp5xyyoqx5h6762p0qee2gfnvtirtl1jbf7qj4ok4qatj5gt431siq3pdbhm6flxmun9f0dn6qpd300\", \n\t\t\"root\": \"q67s5oaewe3ucfhr7w0l\", \n\t\t\"sort\": 629017, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"13556580-1249-4b23-9c28-f0f7a3fa8f24\", \n\t\t\"name\": \"g0dmak58fxi5whdgx9lnog38r1wahmqt36mjsov3qs29fe5w1joer5bxcv4e0txtmp2ifjqlbm86g8qymjnr8aq4v4j7mg2v2z60pm5iy6bhjx6fazca5400018rrjse3tmfy0xmlxflrk1x2octuy6w8v33vgqpd7yyjjwlqpowfgjyxzltlbdoacf2imqpfc90dnt27tqntmu2ussv6us1tsfgpn7v6mkn36mp8h458tp9fu4wd0jjpm4rhnc\", \n\t\t\"root\": \"zn76vekbd0jhyq4bobtz\", \n\t\t\"sort\": 845052, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"b28f7126-7a5f-4c98-b39d-6a30922c2611\", \n\t\t\"name\": \"163y7h3j55zcpbqhcllxu30rfcd6z25j7eeyzql6y5glppaamz26olhdw5y8y1mlh3okrkrin2r0ay6yl1xw9yrpp3mmoqs321560x061f80lizmr5cnk5tfx4fmncbliyqibnscv4c1sgf96biet1bd24cfj8rdo6ti8nfleqt4zxt7rnhi3ztjx5e10iw5rhjjijq275k768z91mojbvbaoewbk5vq275nye7e2awpns1xogg6ibq1p8qvx0i\", \n\t\t\"root\": \"4jtr7m7sjsmjdw8a34xf\", \n\t\t\"sort\": 891353, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"e4f9af86-0714-4f0e-8271-f47debafa300\", \n\t\t\"name\": \"25uqnmpdkzlqq53o7x0a63e7jcmehyfgcebdfr92v4b699id2fdg60vl32klncvdd2pqeh2xtlsx1uw71e8u58dsx0zx9n0kytl3ag00inkcnjnlxnxo3ow66jh87731golgp8ahgb2ux7touhn8h9dpli5f79isvce5397ern7i74zgo67lc2du8okxf0vb0ky9lwmqhvi43crgwcoy07gcxrm1bv54jjv64vfo66iu3hcqu2j3wb35esbsa2a\", \n\t\t\"root\": \"u0a9sbn3oqht6oira53g\", \n\t\t\"sort\": 952096, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"ab14d453-e138-43cb-a826-88fbde13b921\", \n\t\t\"name\": \"1m23ngciyhgn9o9t0ftqogwvidgkpa5ndx6jzm96u1jv5eg111fsgvvnbwifcdwxnof3unlhus5fhip369aapn9gjp0gcty1e89gxtspu30xkd0918yap6hu66fufhfu3zryjp5pqttahg88wnwakitekw1ok8b7uyc7l1lbgge8cdl4yw1ga6khq2z2ab6p17nbuva0nkujvzpru0hpfhuq78j41okx524zw60ids5b2ile8d2qike78xst9az\", \n\t\t\"root\": \"jp6eu5mmrtl8hqp06k2g\", \n\t\t\"sort\": 921148, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"66ac1376-f9ce-442f-ba34-0bde2059ea3c\", \n\t\t\"name\": \"4456vrrvwgjx40qqnwpczkd4bi7f4bhfu1q6djx98zkemsn7ae0lq9mtc71k22rx9e4wqetv8lzt6pe77wxoina3fr5w0ezp65d02lvovzfzu21qofp037ng8kbf96lef6b8zgi2x65iqw3jg9eaeixp1qhzxo1ysx94bggpy8eu6v4qgyixvzwalzl4pwlg9xqwd253t61qgcktr0tm370p4koyz57tjqkehjxbegkymw4m309k0zl5mbp3sg1\", \n\t\t\"root\": \"6r7yg0aort6yf3fjnvft\", \n\t\t\"sort\": 901181, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"f0715377-ce4b-46d4-995a-7015ca3f911b\", \n\t\t\"name\": \"jp1pt24jfo44v8st99c64vdi0lsge5c33ubbe3q10ti39l3dzr2wbvgq7s08m0bqpt2x0m3k00pt1h9b3s2081at8ux5271h26jmrgw3iai3e8unzozpi7sg4mx20ibw9e2g8cpnyef4m8fkkdgerqqqbelrjaa7d350qy3u4idyymdspcnt9do94vv66335z5h63bot3i7qh521cqwfrcb1yb29m4zun23yt0t3prvr8410775ky9r2gugady7\", \n\t\t\"root\": \"ukx27firfem1st9x3x00\", \n\t\t\"sort\": 867943, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"cf1e8019-d5ed-4b58-ae41-005dc3c3e949\", \n\t\t\"name\": \"slp14wo7zx6q7wsf4mi2ydnaowxpleajai8r1ak33wda19vyvuuzhpnwv6vu509i4kgufri1lycm4nyw51gjdwpakc7hww0pl7294ubay8iaamaba04u5aoq3qkbgppqz7jnytelulizdlsliiccj3dmnosmj3ktdy56x3s5eloz547tbiw857hzpy756dovwxyz3k0pmeociweqe1p52k3enonymitzi8vt5i9oz8j2bi7hlfcn0rralcrvzer\", \n\t\t\"root\": \"80ivkdkpem2oivdtyivj\", \n\t\t\"sort\": 537490, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"e3165f67-4bd7-4eac-b133-46bbce7d8b4f\", \n\t\t\"name\": \"80pdmufo0oqqj2v0oupn5wfdlook98jclkrx5fsj8h9ecsppegqeiy0zf8syb8hnachpz3bo3aw23chtri6zu0oecybjt9kyt7thsitpc1ztr7eqpke9sqeqdc8050kqgj4uyc0pqodce6z4h63leueczqcynk948k04ucypi07fcybky8xja2ztem0tu5x8fkonpbv6k21bukge0gzswgwsq3lonr05fchg5q1qdni3h9em5sd4rzpbuar4j1x\", \n\t\t\"root\": \"e8q3tcd82huwujc00sg1\", \n\t\t\"sort\": 703054, \n\t\t\"isActive\": false\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-contexts",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-contexts"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-contexts/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-contexts/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+                        "bounded-contexts",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-contexts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"927455c7-af1c-4132-98d5-bc91f9286763\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-contexts",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-contexts"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-context",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"927455c7-af1c-4132-98d5-bc91f9286763\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-context",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-context"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-context/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-context/927455c7-af1c-4132-98d5-bc91f9286763",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-context",
+						"927455c7-af1c-4132-98d5-bc91f9286763"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-context",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"927455c7-af1c-4132-98d5-bc91f9286763\", \n\t\"name\": \"iyiqwc63vajwjelrrdu789wa0ivu983un0tpj0ws1rhhw3khrvicgf3r8kb1k7n4uptn4rjv8tvqmik3s8mbq84osu8dkjnbh3gu9f6xpbw5ws9elivfw7ut793kder8bprsy877jm32kc2cgazhtc0jcih52oy4j7ss3id9oqbup22b8o2vnolpx431oeaupi4k8ystidb6i8y1kjpqhgqejl8qddh6dbi3l1e2pzja76jjv62yuuyvu2dohei\", \n\t\"root\": \"wa5etxjlnz1ikzkcpt3l\", \n\t\"sort\": 661119, \n\t\"isActive\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-context",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-context"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/bounded-context/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-context/927455c7-af1c-4132-98d5-bc91f9286763",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-context",
+						"927455c7-af1c-4132-98d5-bc91f9286763"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - admin/bounded-contexts",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/bounded-contexts",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"bounded-contexts"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "aed0fe05-dfb2-4062-9aac-35d1f4d9d508",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

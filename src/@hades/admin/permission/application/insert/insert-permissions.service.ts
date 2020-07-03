@@ -3,15 +3,15 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     PermissionId, 
-    PermissionModuleId, 
+    PermissionBoundedContextId, 
     PermissionName, 
     PermissionCreatedAt, 
     PermissionUpdatedAt, 
     PermissionDeletedAt
     
 } from './../../domain/value-objects';
-import { IPermissionRepository } from './../../domain/permission.repository';
-import { AdminPermission } from './../../domain/permission.entity';
+import { IPermissionRepository } from '../../domain/permission.repository';
+import { AdminPermission } from './../../domain/permission.aggregate';
 
 @Injectable()
 export class InsertPermissionsService
@@ -24,16 +24,16 @@ export class InsertPermissionsService
     public async main(
         permissions: {
             id: PermissionId,
-            moduleId: PermissionModuleId,
+            boundedContextId: PermissionBoundedContextId,
             name: PermissionName,
             
         } []
     ): Promise<void>
     {
         // create object with factory pattern
-        const entityPermissions = permissions.map(permission => AdminPermission.register(
+        const aggregatePermissions = permissions.map(permission => AdminPermission.register(
             permission.id,
-            permission.moduleId,
+            permission.boundedContextId,
             permission.name,
             new PermissionCreatedAt(Utils.nowTimestamp()),
             new PermissionUpdatedAt(Utils.nowTimestamp()),
@@ -41,7 +41,7 @@ export class InsertPermissionsService
         ));
         
         // insert
-        await this.repository.insert(entityPermissions);
+        await this.repository.insert(aggregatePermissions);
 
         // TODO a falta de definir eventos
         // insert EventBus in object returned by the repository, to be able to apply and commit events

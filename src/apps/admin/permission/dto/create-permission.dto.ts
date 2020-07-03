@@ -5,21 +5,21 @@ export class CreatePermissionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'a3448654-e7db-42c8-840c-9c47ee589727'
+        example     : '747bfcad-c6a3-4118-893e-bfc04c8b5929'
     })
     id: string;
     
     @ApiProperty({
         type        : String,
-        description : 'moduleId [input here api field description]',
-        example     : '6d5b02fb-7368-487b-9115-4b02ecb0f694'
+        description : 'boundedContextId [input here api field description]',
+        example     : '4c99962e-9e84-4d89-bee0-08f27d46035b'
     })
-    moduleId: string;
+    boundedContextId: string;
     
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '47aolk6pl6rl3a35alxxclqz2xnpil20k8h3ldcu4zuj938njz9krlnttrqxww2rv04quyj54hluvtig9m2p1deo8ymcik1yixuwq1q6zv5ujp00ux3m53xekcgnkj1ayz4ckwl6aclzj9xxys2leic43p2phkdolbtf5w54rv7ttkgrytfvokzdxm2f09i32sr41ip3n9n3q5yww3yimgflv9uqa3rjtiixkjk3ayr5vmcse2rtmb8ooxakns9'
+        example     : 'u2imttr34mjr6c3h2bgy94fsb8mm7luslzpqcmcyn1ruv57r57l8c4zch6z9hnbmj0tferqm2qlag755l9h0yebc0co9esxty0ma66zave69aetkcul9fr63n6yoxy3lb15nx00orq083v72kgagyeznaeavneiqmpkfoe1rqd4sj3c4v8up3m5mu5j3l1yu7npyg915mmfx54aikd7p9lvvld99u7lozmthaq63p4lwh2lhjy8z4z8zc1i9184'
     })
     name: string;
     

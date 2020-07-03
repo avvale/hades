@@ -3,8 +3,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from './../shared/shared.module';
 import { AdminModels, AdminHandlers, AdminServices, AdminRepositories, AdminSagas } from '@hades/admin';
 import { AdminLangControllers, AdminLangResolvers } from './lang';
-import { AdminModuleControllers, AdminModuleResolvers } from './module';
 import { AdminTenantControllers, AdminTenantResolvers } from './tenant';
+import { AdminBoundedContextControllers, AdminBoundedContextResolvers } from './bounded-context';
 import { AdminPermissionControllers, AdminPermissionResolvers } from './permission';
 
 @Module({
@@ -14,8 +14,8 @@ import { AdminPermissionControllers, AdminPermissionResolvers } from './permissi
     ],
     controllers: [
         ...AdminLangControllers,
-        ...AdminModuleControllers,
         ...AdminTenantControllers,
+        ...AdminBoundedContextControllers,
         ...AdminPermissionControllers
     ],
     providers: [
@@ -24,8 +24,8 @@ import { AdminPermissionControllers, AdminPermissionResolvers } from './permissi
         ...AdminRepositories,
         ...AdminSagas,
         ...AdminLangResolvers,
-        ...AdminModuleResolvers,
         ...AdminTenantResolvers,
+        ...AdminBoundedContextResolvers,
         ...AdminPermissionResolvers
     ]
 })

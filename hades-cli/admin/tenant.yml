@@ -1,8 +1,8 @@
-version: '1.0.0',
-moduleName: admin
-sectionName: tenant
-sectionNames: tenants
-entityProperties:
+version: 1.0.0,
+boundedContextName: admin
+moduleName: tenant
+moduleNames: tenants
+aggregateProperties:
   - name: id
     type: id
     length: 36

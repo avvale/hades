@@ -17,7 +17,7 @@ export class FindPermissionByIdQueryHandler implements IQueryHandler<FindPermiss
 
         return new PermissionResponse(
                 permission.id.value,
-                permission.moduleId.value,
+                permission.boundedContextId.value,
                 permission.name.value,
                 permission.createdAt.value,
                 permission.updatedAt.value,

@@ -3,7 +3,7 @@ import { UpdatePermissionCommand } from './update-permission.command';
 import { UpdatePermissionService } from './update-permission.service';
 import { 
     PermissionId, 
-    PermissionModuleId, 
+    PermissionBoundedContextId, 
     PermissionName
     
 } from './../../domain/value-objects';
@@ -20,7 +20,7 @@ export class UpdatePermissionCommandHandler implements ICommandHandler<UpdatePer
         // call to use case and implements ValueObjects
         await this.updatePermissionService.main(
             new PermissionId(command.id),
-            new PermissionModuleId(command.moduleId, { undefinable: true }),
+            new PermissionBoundedContextId(command.boundedContextId, { undefinable: true }),
             new PermissionName(command.name, { undefinable: true }),
             
         )

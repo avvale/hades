@@ -1,19 +1,19 @@
-version: '1.0.0',
-moduleName: admin
-sectionName: permission
-sectionNames: permissions
-entityProperties:
+version: 1.0.0
+boundedContextName: admin
+moduleName: permission
+moduleNames: permissions
+aggregateProperties:
   - name: id
     type: id
     length: 36
     nullable: false
-  - name: module_id
+  - name: bounded_context_id
     type: id
     length: 36
     nullable: false
     relationship: many-to-one
-    relationshipEntity: AdminModule
-    relationshipModuleSection: admin/module
+    relationshipAggregate: AdminBoundedContext
+    relationshipModuleSection: admin/bounded-context
   - name: name
     type: varchar
     maxLength: 255

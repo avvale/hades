@@ -25,7 +25,7 @@ export class UpdatePermissionController
     {
         await this.commandBus.dispatch(new UpdatePermissionCommand(
             payload.id,
-            payload.moduleId,
+            payload.boundedContextId,
             payload.name,
             
         ));

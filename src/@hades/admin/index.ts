@@ -1,24 +1,24 @@
 import { AdminLangHandlers, AdminLangServices, AdminLangModel, ILangRepository, SequelizeLangRepository, LangSagas } from './lang';
-import { AdminModuleHandlers, AdminModuleServices, AdminModuleModel, IModuleRepository, SequelizeModuleRepository, ModuleSagas } from './module';
 import { AdminTenantHandlers, AdminTenantServices, AdminTenantModel, ITenantRepository, SequelizeTenantRepository, TenantSagas } from './tenant';
+import { AdminBoundedContextHandlers, AdminBoundedContextServices, AdminBoundedContextModel, IBoundedContextRepository, SequelizeBoundedContextRepository, BoundedContextSagas } from './bounded-context';
 import { AdminPermissionHandlers, AdminPermissionServices, AdminPermissionModel, IPermissionRepository, SequelizePermissionRepository, PermissionSagas } from './permission';
 
 export const AdminHandlers = [
     ...AdminLangHandlers,
-    ...AdminModuleHandlers,
     ...AdminTenantHandlers,
+    ...AdminBoundedContextHandlers,
     ...AdminPermissionHandlers
 ];
 export const AdminServices = [
     ...AdminLangServices,
-    ...AdminModuleServices,
     ...AdminTenantServices,
+    ...AdminBoundedContextServices,
     ...AdminPermissionServices
 ];
 export const AdminModels = [
     AdminLangModel,
-    AdminModuleModel,
     AdminTenantModel,
+    AdminBoundedContextModel,
     AdminPermissionModel
 ];
 export const AdminRepositories = [
@@ -27,12 +27,12 @@ export const AdminRepositories = [
         useClass: SequelizeLangRepository
     },
     {
-        provide: IModuleRepository,
-        useClass: SequelizeModuleRepository
-    },
-    {
         provide: ITenantRepository,
         useClass: SequelizeTenantRepository
+    },
+    {
+        provide: IBoundedContextRepository,
+        useClass: SequelizeBoundedContextRepository
     },
     {
         provide: IPermissionRepository,
@@ -41,7 +41,7 @@ export const AdminRepositories = [
 ];
 export const AdminSagas = [
     LangSagas,
-    ModuleSagas,
     TenantSagas,
+    BoundedContextSagas,
     PermissionSagas
 ];

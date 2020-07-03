@@ -20,7 +20,7 @@ export class CreatePermissionResolver
     {
         await this.commandBus.dispatch(new CreatePermissionCommand(
             payload.id,
-            payload.moduleId,
+            payload.boundedContextId,
             payload.name,
             
         ));

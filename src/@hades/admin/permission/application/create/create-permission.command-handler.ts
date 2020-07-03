@@ -3,7 +3,7 @@ import { CreatePermissionCommand } from './create-permission.command';
 import { CreatePermissionService } from './create-permission.service';
 import { 
     PermissionId, 
-    PermissionModuleId, 
+    PermissionBoundedContextId, 
     PermissionName
     
 } from './../../domain/value-objects';
@@ -20,7 +20,7 @@ export class CreatePermissionCommandHandler implements ICommandHandler<CreatePer
         // call to use case and implements ValueObjects
         await this.createPermissionService.main(
             new PermissionId(command.id),
-            new PermissionModuleId(command.moduleId),
+            new PermissionBoundedContextId(command.boundedContextId),
             new PermissionName(command.name),
             
         );

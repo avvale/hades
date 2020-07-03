@@ -6,21 +6,21 @@ import { QueryStatementInput, Command } from '@hades/shared/domain/persistence/s
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { 
     PermissionId, 
-    PermissionModuleId, 
+    PermissionBoundedContextId, 
     PermissionName, 
     PermissionCreatedAt, 
     PermissionUpdatedAt, 
     PermissionDeletedAt
     
 } from '@hades/admin/permission/domain/value-objects';
-import { AdminPermission } from './../../domain/permission.entity';
+import { AdminPermission } from './../../domain/permission.aggregate';
 import { permissions } from './../seeds/permission.seed';
 
 @Injectable()
 export class MockPermissionRepository implements IPermissionRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'AdminPermission';
+    public readonly aggregateName: string = 'AdminPermission';
     public collectionSource: AdminPermission[];
     
     constructor() 
@@ -51,7 +51,7 @@ export class MockPermissionRepository implements IPermissionRepository
             
             this.collectionSource.push(AdminPermission.register(
                     new PermissionId(itemCollection.id),
-                    new PermissionModuleId(itemCollection.moduleId),
+                    new PermissionBoundedContextId(itemCollection.boundedContextId),
                     new PermissionName(itemCollection.name),
                     new PermissionCreatedAt(itemCollection.createdAt),
                     new PermissionUpdatedAt(itemCollection.updatedAt),
@@ -79,7 +79,7 @@ export class MockPermissionRepository implements IPermissionRepository
     
     async create(permission: AdminPermission): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === permission.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${permission.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === permission.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${permission.id.value} already exist in database`);
 
         // create deletedAt null 
         permission.deletedAt = new PermissionDeletedAt(null);
@@ -93,29 +93,29 @@ export class MockPermissionRepository implements IPermissionRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<AdminPermission> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<AdminPermission>
     {
-        const entity = this.collectionSource.find(permission => permission.id.value === id.value);
+        const aggregate = this.collectionSource.find(permission => permission.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<AdminPermission[]> 
@@ -123,20 +123,20 @@ export class MockPermissionRepository implements IPermissionRepository
         return this.collectionSource;
     }
 
-    async update(entity: AdminPermission): Promise<void> 
+    async update(aggregate: AdminPermission): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(permission => {
-            if (permission.id.value === entity.id.value) return entity;
+            if (permission.id.value === aggregate.id.value) return aggregate;
             return permission;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(permission => permission.id.value !== id.value);

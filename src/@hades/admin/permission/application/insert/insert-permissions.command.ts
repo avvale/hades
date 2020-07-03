@@ -3,7 +3,7 @@ export class InsertPermissionsCommand
     constructor(
         public readonly permissions: {
             id: string,
-            moduleId: string,
+            boundedContextId: string,
             name: string,
             
         } []

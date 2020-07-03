@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IPermissionRepository } from './../../domain/permission.repository';
-import { AdminPermission } from './../../domain/permission.entity';
+import { AdminPermission } from './../../domain/permission.aggregate';
 import { PermissionId } from './../../domain/value-objects';
 
 @Injectable()

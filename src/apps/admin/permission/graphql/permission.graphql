@@ -3,7 +3,7 @@
 type AdminPermission
 {
     id: ID!
-    moduleId: ID!
+    boundedContextId: ID!
     name: GraphQLString!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
@@ -14,7 +14,7 @@ type AdminPermission
 input AdminCreatePermissionInput
 {
     id: ID!
-    moduleId: ID!
+    boundedContextId: ID!
     name: GraphQLString!
     
 }
@@ -22,7 +22,7 @@ input AdminCreatePermissionInput
 input AdminUpdatePermissionInput
 {
     id: ID!
-    moduleId: ID
+    boundedContextId: ID
     name: GraphQLString
     
 }

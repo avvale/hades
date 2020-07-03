@@ -1,9 +1,9 @@
 import { SequelizeMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
-import { AdminPermission } from './../../domain/permission.entity';
+import { AdminPermission } from './../../domain/permission.aggregate';
 import { 
     PermissionId, 
-    PermissionModuleId, 
+    PermissionBoundedContextId, 
     PermissionName, 
     PermissionCreatedAt, 
     PermissionUpdatedAt, 
@@ -19,7 +19,7 @@ export class SequelizePermissionMapper implements SequelizeMapper
         {
             return permission.map(item => AdminPermission.register(
                     new PermissionId(item.id),
-                    new PermissionModuleId(item.moduleId),
+                    new PermissionBoundedContextId(item.boundedContextId),
                     new PermissionName(item.name),
                     new PermissionCreatedAt(item.createdAt),
                     new PermissionUpdatedAt(item.updatedAt),
@@ -31,7 +31,7 @@ export class SequelizePermissionMapper implements SequelizeMapper
         
         return AdminPermission.register(
             new PermissionId(permission.id),
-            new PermissionModuleId(permission.moduleId),
+            new PermissionBoundedContextId(permission.boundedContextId),
             new PermissionName(permission.name),
             new PermissionCreatedAt(permission.createdAt),
             new PermissionUpdatedAt(permission.updatedAt),

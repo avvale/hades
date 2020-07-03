@@ -3,7 +3,7 @@ import { InsertPermissionsCommand } from './insert-permissions.command';
 import { InsertPermissionsService } from './insert-permissions.service';
 import { 
     PermissionId, 
-    PermissionModuleId, 
+    PermissionBoundedContextId, 
     PermissionName
     
 } from './../../domain/value-objects';
@@ -23,7 +23,7 @@ export class InsertPermissionsCommandHandler implements ICommandHandler<InsertPe
                 .map(permission => { 
                     return {
                         id: new PermissionId(permission.id),
-                        moduleId: new PermissionModuleId(permission.moduleId),
+                        boundedContextId: new PermissionBoundedContextId(permission.boundedContextId),
                         name: new PermissionName(permission.name),
                         
                     }

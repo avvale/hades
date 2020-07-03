@@ -6,7 +6,7 @@ export class PermissionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'a3448654-e7db-42c8-840c-9c47ee589727',
+        example     : '747bfcad-c6a3-4118-893e-bfc04c8b5929',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     id: string;
@@ -15,18 +15,18 @@ export class PermissionDto
     
     @ApiProperty({
         type        : String,
-        description : 'moduleId [input here api field description]',
-        example     : '6d5b02fb-7368-487b-9115-4b02ecb0f694',
+        description : 'boundedContextId [input here api field description]',
+        example     : '4c99962e-9e84-4d89-bee0-08f27d46035b',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
-    moduleId: string;
+    boundedContextId: string;
     
     
     
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '8i36savgvcghlvyvhyzov7mjwgd7baamd58hbx7op80sy681s1838u51fbitwtbqez1trujgoh7cfouvww3fa07ru7k0m8hr05n0fj1mbay3bti8kyouoopg4i1tedhgmofls8eks2gbmt8fmt9i2x9i0fwf313vkv3f0yo0elcmeyewhcg86q5mg1aij4rko0l66aoopi1ua53un545g2gvaey9vuv7764l14czcikwabgasr45u0n671o0peq',
+        example     : '8jgtvqdl0w878nft98imxeituupp1u50sgkdp7n8i6vgydiwvw4645ztxj2szl235emnlw4ks9detc5zi4676rnu350kb5mgi85xfmbq7jhr3ipx65cg0jjrrqv0dngcfnkv8lxjwmdzfml147fuf9fp0ljcirhefg83wulk22y4fs3k79ib8np0qpd2tz3w5wd2ub3c2gynuv1nvlhecb69nfnxac8fjqnks3squoufytg71lp1y93d18e7tuy',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     name: string;
@@ -36,7 +36,7 @@ export class PermissionDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-06-27 08:54:35',
+        example     : '2020-07-02 02:37:48',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     createdAt: string;
@@ -46,7 +46,7 @@ export class PermissionDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-06-27 22:36:37',
+        example     : '2020-07-03 00:01:41',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     updatedAt: string;
@@ -56,7 +56,7 @@ export class PermissionDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-06-27 15:18:46',
+        example     : '2020-07-02 08:26:29',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     deletedAt: string;

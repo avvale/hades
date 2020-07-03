@@ -1,8 +1,8 @@
-version: '1.0.0',
-moduleName: admin
-sectionName: lang
-sectionNames: langs
-entityProperties:
+version: 1.0.0,
+boundedContextName: admin
+moduleName: lang
+moduleNames: langs
+aggregateProperties:
   - name: id
     type: id
     length: 36
@@ -27,6 +27,7 @@ entityProperties:
     nullable: false
   - name: sort
     type: smallint
+    maxLength: 6
     nullable: true
   - name: is_active
     type: boolean

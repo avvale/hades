@@ -5,21 +5,21 @@ export class UpdatePermissionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'a3448654-e7db-42c8-840c-9c47ee589727'
+        example     : '747bfcad-c6a3-4118-893e-bfc04c8b5929'
     })
     id: string;
     
     @ApiProperty({
         type        : String,
-        description : 'moduleId [input here api field description]',
-        example     : '6d5b02fb-7368-487b-9115-4b02ecb0f694'
+        description : 'boundedContextId [input here api field description]',
+        example     : '4c99962e-9e84-4d89-bee0-08f27d46035b'
     })
-    moduleId: string;
+    boundedContextId: string;
     
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'w9nucurgvelz23urnd3cuxg2iirer369a5o17lqmftrppp91na564bhddxxkvgcbiqbxe9soehl6zypwdn1yr6aq3c94tr1sinpnutwbzkkiyc2r3cno1xcmst8jinnm0ewsrxi42six40m447hfaat3ckrmimlfc6212jz3dfy7nmhaqdi6vtxbi3ewcnqg9bfjds2ffbgxuwo7hpum15dtekexbcwx9k99hygtrlnshpujw7qps9p20l490aq'
+        example     : 'xun0ysuz1trgub06a2p0txt5w04ddh56n5qwi8pmmpxnbo36rk3oyy4mslyeldh7m94ec393rxfm67qg566n0yaxj6hlila5p5850m5r7yi0jr7ti938781nyaz6nv9c00us12u0anpm9ck27epw6ud55t9h1acem0lvn2g9x1f4l7819f85cr71d1flsuuhln5r0m6or47tclb8zj58fzy2uby5vrltf0guh2m97w9rxih4nrb3xg4iev5lkf4'
     })
     name: string;
     

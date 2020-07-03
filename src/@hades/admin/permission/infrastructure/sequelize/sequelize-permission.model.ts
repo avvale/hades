@@ -1,6 +1,6 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { AdminModuleModel } from '@hades/admin/module/infrastructure/sequelize/sequelize-module.model';
+import { AdminBoundedContextModel } from '@hades/admin/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model';
 
 @Table({ modelName: 'admin_permission', freezeTableName: true })
 export class AdminPermissionModel extends Model<AdminPermissionModel> 
@@ -16,19 +16,19 @@ export class AdminPermissionModel extends Model<AdminPermissionModel>
         
              
         
-    @ForeignKey(() => AdminModuleModel)
+    @ForeignKey(() => AdminBoundedContextModel)
     
     @Column({
-        field: 'module_id',
+        field: 'bounded_context_id',
         primaryKey: false,
         allowNull: false,
         type: DataTypes.UUID,
     })
-    moduleId: string;
+    boundedContextId: string;
         
     
-    @BelongsTo(() => AdminModuleModel)
-    module: AdminModuleModel;
+    @BelongsTo(() => AdminBoundedContextModel)
+    boundedContext: AdminBoundedContextModel;
              
         
     @Column({
