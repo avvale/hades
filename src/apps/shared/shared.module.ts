@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { EnvironmentModule } from './modules/environment.module';
-import { SharedProviders } from './../../@hades/shared/index';
+import { SharedProviders } from '@hades/shared/index';
 import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
