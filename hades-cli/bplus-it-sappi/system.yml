@@ -1,8 +1,8 @@
-version: '1.0.0',
-moduleName: bplus_it_sappi
-sectionName: system
-sectionNames: systems
-entityProperties:
+version: 1.0.0,
+boundedContextName: bplus_it_sappi
+moduleName: system
+moduleNames: systems
+aggregateProperties:
   - id: f10700e8-add5-4be5-ad9f-3ab1fce72996
     name: id
     type: id

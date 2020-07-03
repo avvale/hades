@@ -1,8 +1,8 @@
 version: 1.0.0
-moduleName: bplus-it-sappi
-sectionName: channel-overview
-sectionNames: channels-overview
-entityProperties:
+boundedContextName: bplus-it-sappi
+moduleName: channel-overview
+moduleNames: channels-overview
+aggregateProperties:
   - name: id
     type: id
     length: 36

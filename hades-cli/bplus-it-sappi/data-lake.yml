@@ -1,8 +1,8 @@
-version: '1.0.0',
-moduleName: bplus-it-sappi
-sectionName: data-lake
-sectionNames: data-lakes
-entityProperties:
+version: 1.0.0,
+boundedContextName: bplus-it-sappi
+moduleName: data-lake
+moduleNames: data-lakes
+aggregateProperties:
   - name: id
     type: id
     length: 36

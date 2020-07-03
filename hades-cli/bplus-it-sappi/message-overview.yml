@@ -1,8 +1,8 @@
 version: 1.0.0
-moduleName: bplus-it-sappi
-sectionName: message-overview
-sectionNames: messages-overview
-entityProperties:
+boundedContextName: bplus-it-sappi
+moduleName: message-overview
+moduleNames: messages-overview
+aggregateProperties:
   - name: id
     type: id
     length: 36

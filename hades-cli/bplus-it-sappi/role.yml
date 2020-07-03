@@ -1,8 +1,8 @@
 version: 1.0.0
-moduleName: bplus-it-sappi
-sectionName: role
-sectionNames: roles
-entityProperties:
+boundedContextName: bplus-it-sappi
+moduleName: role
+moduleNames: roles
+aggregateProperties:
   - name: id
     type: id
     length: 36

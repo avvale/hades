@@ -1,8 +1,8 @@
 version: 1.0.0
-moduleName: bplus-it-sappi
-sectionName: job-overview
-sectionNames: jobs-overview
-entityProperties:
+boundedContextName: bplus-it-sappi
+moduleName: job-overview
+moduleNames: jobs-overview
+aggregateProperties:
   - name: id
     type: id
     length: 36
