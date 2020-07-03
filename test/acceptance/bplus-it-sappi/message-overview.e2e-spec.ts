@@ -1,5 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { SequelizeModule } from '@nestjs/sequelize';
 import { IMessageOverviewRepository } from '@hades/bplus-it-sappi/message-overview/domain/message-overview.repository';
 import { MockMessageOverviewRepository } from '@hades/bplus-it-sappi/message-overview/infrastructure/mock/mock-message-overview.repository';
 import { AppModule } from './../../../src/app.module';
@@ -16,7 +17,22 @@ describe('message-overview', () =>
     beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
-                imports: [AppModule]
+                imports: [
+                    AppModule,
+                    SequelizeModule.forRootAsync({
+                        useFactory: () => ({
+                            dialect: 'mysql',
+                            host: 'localhost',
+                            port: 3306,
+                            username: 'root',
+                            password: 'root',
+                            database: 'test',
+                            synchronize: false,
+                            autoLoadModels: true,
+                            models: [],
+                        })
+                    })
+                ]
             })
             .overrideProvider(IMessageOverviewRepository)
             .useClass(MockMessageOverviewRepository)
