@@ -6,7 +6,6 @@ import { AppModule } from './../../../src/app.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
 import * as _ from 'lodash';
-import { config } from 'process';
 
 describe('lang', () => 
 {
