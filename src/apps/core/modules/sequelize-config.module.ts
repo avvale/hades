@@ -22,8 +22,6 @@ import { EnvironmentModule } from './../../shared/modules/environment.module';
             inject: [EnvironmentService]
         })
     ],
-    exports: [
-        SequelizeModule
-    ]
+    exports: [SequelizeModule]
 })
 export class SequelizeConfigModule {}
