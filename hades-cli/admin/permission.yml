@@ -12,8 +12,8 @@ aggregateProperties:
     length: 36
     nullable: false
     relationship: many-to-one
-    relationshipEntity: AdminModule
-    relationshipModuleSection: admin/module
+    relationshipEntity: AdminBoundedContext
+    relationshipModuleSection: admin/bounded-context
   - name: name
     type: varchar
     maxLength: 255
