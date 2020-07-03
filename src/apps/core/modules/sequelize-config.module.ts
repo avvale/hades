@@ -4,7 +4,7 @@ import { EnvironmentService } from '@hades/shared/domain/environment/environment
 import { EnvironmentModule } from './../../shared/modules/environment.module';
 
 @Module({
-    imports: [        
+    imports: [
         SequelizeModule.forRootAsync({
             imports: [EnvironmentModule],
             useFactory: (environmentService: EnvironmentService) => ({
