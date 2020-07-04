@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IMessageOverviewRepository } from '@hades/bplus-it-sappi/message-overview/domain/message-overview.repository';
 import { MockMessageOverviewRepository } from '@hades/bplus-it-sappi/message-overview/infrastructure/mock/mock-message-overview.repository';
+import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { AppModule } from './../../../src/app.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
@@ -18,6 +19,7 @@ describe('message-overview', () =>
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
                     AppModule,
+                    GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
                         useFactory: () => ({
                             dialect: 'mysql',

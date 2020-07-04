@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IChannelOverviewRepository } from '@hades/bplus-it-sappi/channel-overview/domain/channel-overview.repository';
 import { MockChannelOverviewRepository } from '@hades/bplus-it-sappi/channel-overview/infrastructure/mock/mock-channel-overview.repository';
+import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { BplusItSappiModule } from './../../../src/apps/bplus-it-sappi/bplus-it-sappi.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
@@ -18,6 +19,7 @@ describe('channel-overview', () =>
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
                     BplusItSappiModule,
+                    GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
                         useFactory: () => ({
                             dialect: 'mysql',
