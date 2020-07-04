@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IPermissionRepository } from '@hades/admin/permission/domain/permission.repository';
 import { MockPermissionRepository } from '@hades/admin/permission/infrastructure/mock/mock-permission.repository';
+import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { AdminModule } from './../../../src/apps/admin/admin.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
@@ -18,6 +19,7 @@ describe('permission', () =>
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
                     AdminModule,
+                    GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
                         useFactory: () => ({
                             dialect: 'mysql',
