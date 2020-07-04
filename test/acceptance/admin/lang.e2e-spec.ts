@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
 import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-lang.repository';
-import { AppModule } from './../../../src/app.module';
+import { AdminModule } from './../../../src/apps/admin/admin.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
 import * as _ from 'lodash';
@@ -17,7 +17,7 @@ describe('lang', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
-                    AppModule,
+                    AdminModule,
                     SequelizeModule.forRootAsync({
                         useFactory: () => ({
                             dialect: 'mysql',
