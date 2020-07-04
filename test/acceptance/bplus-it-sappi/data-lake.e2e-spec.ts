@@ -3,11 +3,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IDataLakeRepository } from '@hades/bplus-it-sappi/data-lake/domain/data-lake.repository';
 import { MockDataLakeRepository } from '@hades/bplus-it-sappi/data-lake/infrastructure/mock/mock-data-lake.repository';
-import { AppModule } from './../../../src/app.module';
+import { BplusItSappiModule } from './../../../src/apps/bplus-it-sappi/bplus-it-sappi.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
 import * as _ from 'lodash';
-import { config } from 'process';
 
 describe('data-lake', () => 
 {
@@ -18,7 +17,7 @@ describe('data-lake', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
-                    AppModule,
+                    BplusItSappiModule,
                     SequelizeModule.forRootAsync({
                         useFactory: () => ({
                             dialect: 'mysql',
