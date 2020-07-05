@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { DeleteLangsController } from './delete-langs.controller';
+import { FindLangByIdController } from './find-lang-by-id.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed'
 
-describe('DeleteLangsController', () => 
+describe('FindLangByIdController', () => 
 {
-    let controller: DeleteLangsController;
+    let controller: FindLangByIdController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -16,7 +16,7 @@ describe('DeleteLangsController', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                DeleteLangsController
+                FindLangByIdController
             ],
             providers: [
                 {
@@ -34,27 +34,27 @@ describe('DeleteLangsController', () =>
             ]
         }).compile();
 
-        controller  = module.get<DeleteLangsController>(DeleteLangsController);
+        controller  = module.get<FindLangByIdController>(FindLangByIdController);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteLangsController should be defined', () => 
+    it('FindLangByIdController should be defined', () => 
     {
         expect(controller).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteLangsController should be defined', () => 
+        it('FindLangByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an langs deleted', async () => 
+        it('should return an lang by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
-            expect(await controller.main([])).toBe(langs);
+            expect(await controller.main(langs[0].id)).toBe(langs[0]);
         });
     });
 });
