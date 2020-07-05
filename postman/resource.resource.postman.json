@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "3e409583-2177-496d-9d6b-d40f435a2461",
+		"name"          : "@hades - admin/resource",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - adminCreateResource",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminCreateResourceInput!)\n{\n\tadminCreateResource (payload:$payload)\n\t{\n\t\tid\n\t\tboundedContextId\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90\", \n\t\t\"boundedContextId\": \"7c1f725a-2fd6-48e4-b73a-9814c76458ac\", \n\t\t\"name\": \"irq029ds29bhdt6fd1q2z9sbiv2bjboqipycfrf54a9e4ipsn43je14z62x493vga2wh6f7km5vj0n3ih0ptyy9pglbgxvedlf5o2zaoiu6av3jt8nuzqvf8ioo8qyj64hmgwa29nbpihuwrcpbs4aow8aizurq6ezuaykwxo6oiyqskjwqurfzp2h78cipnzxftzlv9am726tzkh6o1boh9xwwmczlbs202r9wxjl3ggr9b31lfy0qd3ly4s3j\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminInsertResources",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[AdminCreateResourceInput]!)\n{\n\tadminInsertResources (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"5fbff161-e477-4e28-bdbd-1d9ff3a443f4\", \n\t\t\t\"boundedContextId\": \"b0f749e4-1032-4347-8eb9-e4e36b44c8e7\", \n\t\t\t\"name\": \"5ssaee1tt4clhktb902fxw56u40n8o33zmgefme0h6zyonusjogz53duib7y7ovc2pi9dkd8nwniyn4cw1dalgrkl42y6wkrmjeetdxw86udkwe9z1y2it1kh44wc3a12kn2h0akuipccwm2sm9ox9cbi68zm5equdppd23geyfw7r7symhflbz65f6jazf9ybjcqdyaly038hqnrnca6w0evlarvkrqrcby3bi1ykhu862qvh1gwihg9ma25p8\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5c7f2ec4-78c1-4d7f-8b52-2973f1d6b865\", \n\t\t\t\"boundedContextId\": \"cf73087f-59e1-4d8d-b4b9-a97d62536a26\", \n\t\t\t\"name\": \"g4b69zwwb9b0srqt15zq307fdkfmysgq5bx0k6svtjti62f3324gxscr1zlbjcvnf3vhnbprns03qkl2r8y2d3iv784tfdikfhwxenipfe89bnpozm4u3uklq8i74r17sq3im6449rknxn9fw093tjqqbsf52h05vvzkkexikruru1ub2s6bc3k1d4nr4rm2qfpf1geqdy9nzb42x8tf3ywimwkq3ejyzk3gbmzvmvgzpccyi8iq4coxafyrg7m\", \n\t\t\t\"hasCustomFields\": false, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"220e5cb1-3c06-4f2a-8b6a-6e5055d8e884\", \n\t\t\t\"boundedContextId\": \"1d74317c-5a19-4dd6-9aea-e135b3cf5377\", \n\t\t\t\"name\": \"tynpbg8qlsr63urxxfyou2dneb9tczw5zjv3im5n2lstju1tbpz4h2y3aq2sydkdeb98y04iv45xg6a5k6pb7uvs91x8f63eqbh8z14mvr0sigfmdzo7odowidg6sbg5qw53u5g8egm7vw8abz3guoapbvzc7q7srbc2htz2urfnvynfqhlbbw8cpe46ddq5jko6rcj6hismryispkoc2hj7llur8tiy9q84t3fsy5eekb8tq8igcj71atrd6lb\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"213fdfcf-47b3-49b0-9a10-aac25e9ac2ce\", \n\t\t\t\"boundedContextId\": \"46f6ea84-e4e2-4a59-ac12-af7a95da3d04\", \n\t\t\t\"name\": \"617ywqv7uec2o2l9k4faczbtlm241p07n9nufvjfsfteb8k2n7mmydp173174ukjjo8x625psm9ki37qd26085a8ev49mzljzxlftpg22pafryxuvpt0y28q2844ly1grhay393cef1m3iudjhc4cm1r2291szbvafe1x3ng60uwbb5ulphf37r8isqig2u1isu1iwmmco96ps2pb86c8weqh1nv1a9lwsrlsjn2xm8iytk7x1cxi1m7dhq9nkm\", \n\t\t\t\"hasCustomFields\": false, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"47d2fcc7-10b7-48f9-bd63-a21d7bcf1715\", \n\t\t\t\"boundedContextId\": \"c24bc115-8c70-4d79-b770-887937dd5d88\", \n\t\t\t\"name\": \"4s1y7dsemiydzk07mkaboiuvvrplp1w0rtauhixkr9kqqm9ekz8cjpa43iu8thd600gpqcojb9rn7i4dv5zdxyro0hi9tl6p77jt6gah2r39m1pvtr7ylh2s5v0jbkyckk6cx0bee6b0y4mb9ryps6i73oidbanqkdzfrj9qkd1oxvgui49sy1df47x915eewys4q233reuwg4p8sq80noowbstvlee6gg6sqxypxu4qhmjdk1uu5qg1sxmldtu\", \n\t\t\t\"hasCustomFields\": false, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cf727176-d0fa-4d19-b08d-3e9a25feb249\", \n\t\t\t\"boundedContextId\": \"07fe8012-c6f6-4db2-bc2f-65da2d5594c0\", \n\t\t\t\"name\": \"sxx24yl9m4um6hozktc51a1nbapij99hoqn3vk81h26on3z066gdmfl5z2a4gsd21c2k97fq3jwpq9ds0eojsgr8sgjg432ngp48pblmjbb5l270mtpo8r2ru3eoxh51i6vw564y7z0wo8ylvvwh4eldbjh1sct109qpxxhfua77uvozbbw8yniq25obgnebl6i3pfeksqvwzg265lgbtkixmalcq7m03lbzgs42n1mdei2pgzx7ge8obe750ye\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"91c97199-6bfe-4f35-95ba-db361b559b93\", \n\t\t\t\"boundedContextId\": \"6da0eff6-9312-4f5a-a913-81fbe4a22fd5\", \n\t\t\t\"name\": \"ygfhnlrnkq7ov2lw24uul58pzd3zks81r75t5h2ftrnjw1ht4kynda5lktvl56fibbw1tldlpe84266ovp18wa68eibuv7t9dwbp5iio236yhcgqwoq02shsmifjtwry64r4af5k28g62314o7qk7ed5ho5eorljbjwd3uuekzucvrr4z0674anybdwlksr1iefffx55gphf389efzbebr7vxrhq3zewrg7ytlnomyxkc9fkcmgnrwnbyotcitf\", \n\t\t\t\"hasCustomFields\": false, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a619d04c-2d40-41a6-86de-3d521a89839e\", \n\t\t\t\"boundedContextId\": \"03a563c9-1847-417a-a588-50af06474231\", \n\t\t\t\"name\": \"o8qd7nw5f4zedc92v22uyzu7xcxg3dsb4s8svybizcgsbmzw3r9wlubq57ynqhmte9v4xks7gxt0di4n9zqptfkas989328duimomx3cmj6jnntu7j35d1assz25qem38sr8tyu8wrzlsr4zd36l219ezdn4g38z2v1mbmz22nwd8wr6imf7qf4kcupz7c0ur7qp6oxufel0wpool2io1h2likhkl3mcupomvib4yrzzv6kubn52glgxz9go90i\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a70f23e8-f4b8-49ea-8930-350e08286df8\", \n\t\t\t\"boundedContextId\": \"f14c54cd-7171-4c7f-ba02-1556700162c3\", \n\t\t\t\"name\": \"qnbz5i83waunbwy09kzf6oh8iy1asb67ncpw8p3q2po6zqk20r7grh4afa2t296up0g8bh946qcr3r4imt91zwvoi0qazng27t3lpkye1fjvfefeyfvn1n8jq1ln5lke7q94va200ujh50jzzmv4w40wf1wglao9g00dyz11tjwe4x77nz3l9sclvld84f9dwaws5rccb6fkp7wz4y6fqp6zodlu92qougm9nylpzlfj2i2hb8bobbyipf6aoiu\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c6d5b063-15f8-4dbd-838e-8d3a01184109\", \n\t\t\t\"boundedContextId\": \"f3d44829-47e1-42f4-a063-3e1d13bde42a\", \n\t\t\t\"name\": \"t0dxwqbbrts0axlhxean8wl335stpc6j1anb6ha9hu9q6gh24dast3ft375dinsgr4afy6gmrzgjw5asesb23y3ns2iiskeut1q55xeo9f9amflmtz89hlg5oukct8nge29b7q0ko0o1poci4pvz5xi4jeit7ya2fhpafjdnqd3gkiotrfo2c26zryljg3xj4ursxikvhauvr09txitatd6gdknlyss7d4rzq18hz6cnyxfsgbubzl1rbsnk6as\", \n\t\t\t\"hasCustomFields\": false, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0f0d8d3a-5c0f-4c38-9c8d-6baae7eda72c\", \n\t\t\t\"boundedContextId\": \"45b65f0c-3189-4ae5-9a94-aa4f552ca696\", \n\t\t\t\"name\": \"ugl2y75puzvem5wrey1acamjf9nwhhaump1txac263eqq194x7wa4yd8j3g3t1uraevgey8i4ws62cpsivstlj1bz9rrkfs1um9kqbabjq7usm5cdlrx5eyy1o81qnykl3m81l27w59zu9z3qynckwit1kczkhy5a1aham6kcri374fyq0iw29i5iiegu6gqch92xnb8xla99lu58jyy0iy2580upewo6do15ry8v6555nxohwlkevvmv7c6att\", \n\t\t\t\"hasCustomFields\": false, \n\t\t\t\"hasAttachments\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e3356c73-511c-47a8-9ca3-e48c366ba53c\", \n\t\t\t\"boundedContextId\": \"a8fafb75-46b0-4a09-beac-92b6811c37aa\", \n\t\t\t\"name\": \"tudi6n7z1zmbasozk2176e48wikputdthj4qgyziffgfge9cvuuelsz6ymh60a58jp5m7xyiqnqrvni5l8qlnx5u2ozpr1tzrjuady6wq0tezxcgyhs6k9fpt4qx2iep1ft2sqi4x7f5g8aaqyx83e82tn7i4fcqkhrawlka5h594oz6m9q9xkk61c9m83wpbcjcu84vmkzzml3mublsuo9jbmaurtfvoswizcrqics51g8svaabi1fahqhg47r\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bf572541-8328-4b99-a1b3-425495bb6d88\", \n\t\t\t\"boundedContextId\": \"f3a0e242-7c1a-4e99-b253-27a274d9e422\", \n\t\t\t\"name\": \"agc9n6z06bwjgk6gw6l7yw72dx0dazrlwjfj9c7hei9ziol3fhbbegknrtqfg2idkqet2lju66avvbxoyjoelo9zgn623ngkxy1m9f6hg1enjek2gyxdd5z7c6lbk00mwjntq9zjtqy2xecc635mkcgzoidggj6hjleqxt1fjhkuxdugjgofw82zobp9vyjzeu81mw8q33972vqo26ptnvztn31qf2z5rdxcagfoad55hv04cr63q260rbbjrl1\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7c12f49f-fb68-442c-9894-a08ab1f78f31\", \n\t\t\t\"boundedContextId\": \"277bdf24-86e4-4178-98cd-48b54259abba\", \n\t\t\t\"name\": \"t5504l2jpqdxkqvjbootr52nowrra1pnuq0m66aqtbv0n3zbi8vl42lp98jjtp7u9v93cdg6hs915kk2r21dejc0hurb0zssmxzbfgro89mtfzycpvajj3on8h40hngljci8ef5ocpsy3vhklgy5w91sgo9eyfkgamu9yvibff9glx5ik88jx7x7bd7g83uejbvnq1tk7ch0udntc8jclnf2bbnxbseppjbycyxo2nr5k5k95lrqqoay0bza35m\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5dd8fd66-bcb9-4f72-9e45-86b5885f906c\", \n\t\t\t\"boundedContextId\": \"a48f61d0-65aa-4952-8562-176153a0be21\", \n\t\t\t\"name\": \"9ax7wyblw1htecwl105b4w4x64619vcfrlc60a6n145n4suoquijan80qw29midcnxhfy3gj139gr64kxi1vbmc45zq2igevnoako7fsjpxio75cmfvjlami1z4qfkhq8av9okzfcis5xju82qvu5565tp9wdtx57xxx01or9b89z5yxouqspei7s6o7clt4tlxumevnw2yc74dbsrno38hwpymjh9e964v6w1bohzkylrdr4hj1h48njhs54bi\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2edd3b83-22db-4f83-829a-3df28be558f6\", \n\t\t\t\"boundedContextId\": \"9ec9f030-e2aa-47a0-9e37-09c7307823b6\", \n\t\t\t\"name\": \"drcvh3bwjwgihi4hxnd2gr3kk1qefsmq5t8odwrdmgfnerbcjet1l07kv8itnawjaw4s7zoyg0o91cku7b01v8gc3q0mx0i3u466nyhpkq36olxazl6ilm56fbi7gexkumws0kka47k0tkqddu2w9u46lt0b4v35itqcromt2tu8qicvdbdxndl44wvt7eavrvxkfak84cu0b4mmuah0400460ojm53l4mmlo9u8h6vb8am710xf2hjvo7dz283\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"52507755-e869-428c-a428-9acff83714b6\", \n\t\t\t\"boundedContextId\": \"24b53462-9062-425a-85af-a1a4cacfd463\", \n\t\t\t\"name\": \"vwjgsdbu5lncczyf5ywdl6ls1rumoduir6epizyzaovnsbdeei5bv37xxrl2gn9v426u0h2uo03i3rqq7s8m55g3lqxxm410xq4bigpgmqqdtd2vvg2qjx9qjt20zo2256zd5ztq3b4wcewp0e33qsgc8g9if2d69tiqd5b7sdl6j8cpkzfyywykyh58l1gdhcuk0qugakd5mpmuuad99ctekseuadwwb5dy4o0lfabfkuyr8bhjmwynx1lwcpl\", \n\t\t\t\"hasCustomFields\": false, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b5d85053-0f24-4205-b7d2-8e5bbe541374\", \n\t\t\t\"boundedContextId\": \"c909fc0f-4036-4ec6-8443-de11700c9fdb\", \n\t\t\t\"name\": \"i0ptqmy8zhatjo41lck1dv2xvwfarn09djzddc7z02f7kseknbwyszz6xuon1nvcj5m29x6g28n4txm5qwfcn8v5om3ri1q85vhee8u80gezo3hzmr2zwfy6nz2mtsz0zqmhmihkj44jmon9gdfi25t6bd6g23gbhewljnvcygkv04ir3ddu1ng8g04ndirxi2s3hw8jxvtoi8qbi9qv1u5chrwifdm0lfh5ry3gwn75cykueu876mlcw8dok5i\", \n\t\t\t\"hasCustomFields\": false, \n\t\t\t\"hasAttachments\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4af5239f-5c14-43ab-95ed-36d9857168d1\", \n\t\t\t\"boundedContextId\": \"ddbecac4-617b-4729-9e22-46b0f46b0ab5\", \n\t\t\t\"name\": \"3ohnjpopza9h4bktyginndsgqv1mkmskybu994faqwkvhyrtrddqnooyutowxkeu1bb9jqm7crj8axap3pnpt9o3akqlhm47rg4y4niowpp9hpjbjeoxg3xjemdc9cvzhi0lrvwjrt9hxxd0c3zkins8xh6nxnd15mvwsdfvcm6fta0xb2buynyzxfnt4a9ny2fvkptydrm7lel5y7ebvls4c0kilfwm7hmp97itanpkaj0iqyzuti5kmpba8n0\", \n\t\t\t\"hasCustomFields\": true, \n\t\t\t\"hasAttachments\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4cd8f43d-51a2-4153-8969-6334bdfce3e9\", \n\t\t\t\"boundedContextId\": \"f2a6e705-b976-42d8-bb6e-8fa58a513d9e\", \n\t\t\t\"name\": \"h2fyincy0yd3ajz3meblp5h6t4pfs0qghpaaa3jkrefu989ij9b8jwjmz8pnanmlgrv3ucqxeaes656u19z46djod0c0s5bmprzzqq65w3k2nupwuk4lo4mq6y3hxvezifa84ji04lgv3xyki6sxnotzwtxnyuc3uugr3bem9280yj2mfvwfddhlq9wxmv6cpofa0zhr7urx04qrqvqjzzc4fci9bwdrpfaz02u55gf9g8o2bzffgd8o9uzg5p6\", \n\t\t\t\"hasCustomFields\": false, \n\t\t\t\"hasAttachments\": true\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminPaginateResources",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tadminPaginateResources (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminGetResources",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tadminGetResources (query: $query)\n\t{\n\t\tid\n\t\tboundedContextId\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindResource",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tadminFindResource (query: $query)\n\t{\n\t\tid\n\t\tboundedContextId\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindResourceById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tadminFindResourceById (id:$id)\n\t{\n\t\tid\n\t\tboundedContextId\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminUpdateResource",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminUpdateResourceInput!)\n{\n\tadminUpdateResource (payload:$payload)\n\t{\n\t\tid\n\t\tboundedContextId\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90\", \n\t\t\"boundedContextId\": \"7c1f725a-2fd6-48e4-b73a-9814c76458ac\", \n\t\t\"name\": \"v3grk18a272w3ltytcfyb74fu1fthembbrkei2yfs245dflvjfe14ulv5mc04ecac5js7jk2327n5aq7c46x8nllozlpg13ovte5s063dynkpbjkap8apizcmrjve2ou0vf8v3ydh57qwgdep7buh69hzk10dyg8ormaw0w4fo7zexbhfundkskhqwcc7fanqehbrbnvf37tzkgzvgkfhtqbrjsvjis0loxfkonzsz3gl0aziitjjkdovfgj39y\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": true\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteResourceById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tadminDeleteResourceById (id:$id)\n\t{\n\t\tid\n\t\tboundedContextId\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteResources",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tadminDeleteResources (query: $query)\n\t{\n\t\tid\n\t\tboundedContextId\n\t\tname\n\t\thasCustomFields\n\t\thasAttachments\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/resource",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90\", \n\t\"boundedContextId\": \"7c1f725a-2fd6-48e4-b73a-9814c76458ac\", \n\t\"name\": \"zd4ol1hryx6tp4equfzakizm3c85ujelrx64hidpa54kfvenp28ma27tknvscmxgmyxq154hcreybl4goz7obwij1zg6pezv4dzgc018u2os22nkn3ar3efxoibl031rem1sgw10483szzc1rznpz0scp5xv1jbq0zw9euu83ctvlae1f0ingoc1knvht5xhc44hufuejts9gfzj78fisw84ilk2theg5jys3lwr6s8ir4m7pquj2p3na5ueg3l\", \n\t\"hasCustomFields\": true, \n\t\"hasAttachments\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/resource",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"resource"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/resources",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"f7ce4c80-f189-4ced-82cd-88bed68ab116\", \n\t\t\"boundedContextId\": \"65638769-2d52-4e44-ad48-96636e391dc0\", \n\t\t\"name\": \"7xuxo5zy0fa8k1aqmpe1nkdng2fi42lirtjz4kow5wumbtkcjfqeqje0ma0iyi1uewxapdl2hdu427q3zj8t0r8mj5o69wq6szbup3ujv2bcjyrza44v1wwlurkfvcztybv6wpdb9f5oisjv0ahs6yscypffkwyf39qdyzu0po697t5hufzn7iz1qch3pgqyc1hmtmxewcz5ehs3sgnrrt7oasznq7l77tc1nwkpg4mff6efo68cuaqndtznwns\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": true\n\t}, \n\t{\n\t\t\"id\": \"60a1896f-1c14-4106-8d6a-537ae858c7d1\", \n\t\t\"boundedContextId\": \"c332e220-e034-49d0-bb16-a953792c1633\", \n\t\t\"name\": \"enhd4qeih3eghc42bhw8uv6a8271fc75508nqoiom06oht1tljh99l6wtfw0nqhcxat49qcwswestutj7b4lhk4pm49p9ufgwwldzdy9ffdceelebybqa94cwsdca7a4jnvyu1l3vsevxeta3kx7s284rrd00h7blal2f7mhuw431smuocpuqqsnbv2ii74hfndo2gmzmpvq4kqjye651urrnhq9sctn7v5z5ilavj04vlzszapgskwg8jyjdpi\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"8d632f1a-ade6-4f37-a766-2675e5546fb1\", \n\t\t\"boundedContextId\": \"a7b9ba27-8fe2-4e8d-ade3-5c2c6d3450d8\", \n\t\t\"name\": \"1ftk4b0qwgu6ecgu3j2aspoadzdaxh9flry0w7hrct0oqpe7ye3gjwunxiu7oa2dxukks7wowp785xdcc4y18fesl2y7vpy0byhtbwmsp5vc4fbjyi6ahde56t56ho1d3az8qzx0zvu4enu44h1fbpjoxcufa9gkrmxef0ycwqd674oqjvmktyqd7oj7t04kay5inqeukh707bsjtg6eh83u57aauhu9t1ztoolq6dkpyjn9bm11u6ve0gasaui\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"febe0872-055f-44b5-aa31-b60694cc4ec9\", \n\t\t\"boundedContextId\": \"73657cce-7093-4ad0-91f2-7047393376a9\", \n\t\t\"name\": \"a96iyiknokaxbkezw4qnqkw61boewdbdhe3ju69rcx0vw4zlzv8tnzh8owpxv5mii2oa318i35549zdgd20b3xdixnp8mqd2i89pjdicidtymymo9ewni67ucq6gh6rbd5eh9sprdtycct3jwf4jngw3uhkl9xnneco3jncmkqn8o2hliebuu2ues4t3a922anmohq2yeyr20qkdoxhb3dz6ime47tgugudvz2pf3kuv5ih584b7dagrgj06g2l\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"9e84863d-d887-489e-9b7e-31ecba70de44\", \n\t\t\"boundedContextId\": \"9b995786-0104-4856-b32e-bed1c7d1f8fc\", \n\t\t\"name\": \"s2wv1zydyv4uo4wldfgb8jdkz953zmo5zbtj9musvuja4nihq6hiudm2kh2e5f3hyiviu1w8okczxrjbfoowj3eskgkx7zjmpcbba1x0r3aktqwrx8qjahi8sbz9ttzuxc3rlp46ne4bmsadl8iimrxudhfzwk1oi87j2dx7cuglhn53zq9dpkg706ew9s4d3xxpwqqbu6sb16bji29u39295bkhovb68bcyvjyk9rttiooxuwtrl8jzmlnws3m\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"304de244-9a50-40e9-b4f1-bc976bc8c410\", \n\t\t\"boundedContextId\": \"05c55c60-7246-453c-9fb0-59f375b52815\", \n\t\t\"name\": \"gpg8rly3dlxpwu63eqkyzwz8g58zeg59x3w71az8g14lmsln8130up3hp5hvwk0gq8giv189o8a2wb6pn4uu40mryrogmzlifu7d6fv5mvoa9wqrs4qzzs1skmm7kesa5v230blt2rqawoo45aswmh1jn58n9n2do5w68ry4ohivk45419s6l5f842l220dp9ms1ynao6jsy4qxh7svzzg5z4snkgbqox2eez358cun1a67mgyw77pdti8h9b0a\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": true\n\t}, \n\t{\n\t\t\"id\": \"bc659137-c501-4b2c-be02-6544eb09c96f\", \n\t\t\"boundedContextId\": \"7b664d76-1771-4240-9861-02dc2f9fd803\", \n\t\t\"name\": \"s9px92renbxf60ilef5tkddagrxmawdi3sb2u01bchyuc759fj3t5qhp3ibixza5h5d6e4f5xyolxcq5xyk4bvlykl6t1igmns7ofi2mct32kyc12kblty4y0hzgklddk4kwefhq5fjwgu5l7nxlupgfn49cmyeppiphjd4eek2oyle6b3mx76282zgof1m3qw10mjs5z1bexb8ek0slp9owe4gyh3jblo01udrhesybw2vk39mxosmgsusjkz4\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"654b550c-a0f6-4627-82e7-bec1e4db923d\", \n\t\t\"boundedContextId\": \"7cce78e3-3ec7-4736-9650-83582bb47acb\", \n\t\t\"name\": \"1u6y0f2mn258zbt23ycuob50otyrtsgwhkass7hhsgqw46u84ohyeb5o65dms0k5k3ei23e1w4z582lowmdfswchj5g2q66tlnix62bzxlm3hgogrlmv9r243h3dvf37srujb1h6bhgnt8vmrese3vld4umuatxaj5voquji1jztgf7yetdxfjhpyu9s7gyurzsfz2fvgpfh3q2smx03rrdklu1snqlqq3qg5jbiqnn4omd9jslw06jegw20wa8\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": true\n\t}, \n\t{\n\t\t\"id\": \"90c3f9b0-db40-4bb8-a857-6ff8240b9d28\", \n\t\t\"boundedContextId\": \"305e661b-a23c-4832-b2c0-7c1ca58310fb\", \n\t\t\"name\": \"j9cs63pnre348gnqfkplqjcn5ieryoqvdsly9bru41rplp2vtzoyb65oiffhv4hkrzc375d5t7m7r1cwdi80x1inatm8t67jys9l7enatawi5p14wfyjpvd91lze1e56avtg91fm9cg33x26u0hh34al051rnw4bpcya4q8p7nroaywgj14quvgew07roxemdwj2szxnmxutiei5g212fnskjz7q2qiddp9c7uh12sa1bm87po59llu8qnn6yew\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"e7a2aefa-bed3-4294-9d22-c1b5720a1846\", \n\t\t\"boundedContextId\": \"38fa728c-740c-4022-9b56-8df1e9df774a\", \n\t\t\"name\": \"32ehsenszun01f8hlh0bvnxnsjdzbt4mleoda7sep1dqoyvsvp1aahqzlwlcbrrf8jvw7jq5bgvohhkufb327mb55o337zwii3w6ralrq8wzb2vhe5uqhrm1zd6xnitiznq9rq1pr2zhk4wnggxeecg42tzw52u3q2vi6dc3wg4urd6fojdwj7bhy1w2tr79j6lg47oe7xqk6jn34jf7fu2ojyg1x3avuoqmnix79gllkb1sv057uf0kc1deq1o\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"413aa78e-cb4b-4d8a-900d-7c7363bab4e8\", \n\t\t\"boundedContextId\": \"21829b59-a597-4be4-b47e-88181a0a33bd\", \n\t\t\"name\": \"ws7vx7kq2yj57k5ekk99uej6ufu1d9g2j79aswn1rdm45kheq29gbhei4tayay72mpvbhczr7ne1kavhndv8jz9twpmun6q4n2fi1z293m5sk203mfrxl0n6iuw0ovxngrmt3iysikh0wnf0c1fwkr20opsbeusxke5iznzbgsh901llpzumy7v2lkb2g4pdm300mq2lcozok5rjiwtqc0owkuu2yzsupza295kulgvg9bb3h624k4uaor6g3sx\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"20464291-01ad-4c3d-a566-40ab97909488\", \n\t\t\"boundedContextId\": \"0c890e40-a765-4080-84e1-9842231e02f4\", \n\t\t\"name\": \"8bez0dy8j8le1tgxbswx1rxm9ioh0ku1v3zbfkb2zfv0jgq6tz6mj727rjt8irjzz0bsh129fp20d3fzyxqqviq5gl02fq7soosgy6jicaljehhba557w1yor141k9a6kab0jh0yzrbrj6nltg9b0qlljy2r236ohgvq29zxhq86fw79yywfvdc5nzqfc96rc0dnxc94vzud2wtdfs1ppe3fof2p3k2src14ufgvywm3jc34jojv0onnxnpczp2\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"7f32cce2-f740-4dad-a0e2-07a5c5c07564\", \n\t\t\"boundedContextId\": \"0b8b3318-e2cd-45a0-805e-110d409927b0\", \n\t\t\"name\": \"krhkextd4furfv8wd0roo1zvqdssx7ol2jjlxq3efrs9vdxomp9kwip4c7okxihbytija6d4zye0aozi2nfbq90r5lq9y7tkzw1cyo798gcempnpx7si5k5ir9ilgvfd3suv2ljr20zqhpsorlna27i4dqhkr361uv1vci9vjmyshtjiak6e028a8n5zltd4xglq61vyyal1w0zzfcwcvaxg51vhhdo3w6plihzpalonl57ekk54bq0bvc0bou0\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": true\n\t}, \n\t{\n\t\t\"id\": \"474e8873-9488-4068-80a1-9d2d81052d7c\", \n\t\t\"boundedContextId\": \"beb863b8-05d7-46b1-b21a-91f5d0513828\", \n\t\t\"name\": \"4h5weroyfgfpdi6mj4cievyjccrcg77492x9mhy7eozewdgbkqqgmj8fpkud7w4zutnef6mq692lht4nhe1jgviki2lyhkgywm0t69upuwezgkiqux9n19v7kdmxid8kbvctbiyztu3y2t4g49shee14ep8ia967vgig808oy0f44c1bh7ggfqs7gaha7qu97p23l69aog9t22z1xnlt6sz80q9demlf8njg6bh61tqyclef6ax52wp6ektsip2\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": true\n\t}, \n\t{\n\t\t\"id\": \"60b049f7-d682-468e-9ee7-a876cca9abc4\", \n\t\t\"boundedContextId\": \"30b5c967-0b50-49b0-9530-c32d100310e5\", \n\t\t\"name\": \"tuqlbqmwykifu91k0pg0ad6k879dt78trfd82mrvv9z5nijvtf25n47lemwt78in5j7va52j1km9syjqde52z8j7fuxs5exm6wdh09u3bfrnzx4x139qjm3iqfd38fo8pfw2kgqgumbimls18wawb7qgvzjpicybkfj06wtcky4gxf3qbjeypkeitttg8t6pjwi0z0rtlqogmdvp3arm0jnoqu3swxz5dnfylpseahowqb1xvyefuu6ikpuqm2s\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": true\n\t}, \n\t{\n\t\t\"id\": \"25c9ca28-f2cb-455e-b8e4-577887f28956\", \n\t\t\"boundedContextId\": \"da0b152a-f2f9-48bd-9ff9-38cfc0d0c69f\", \n\t\t\"name\": \"5qg5qs9uawaforbpih4bkst3nt8x80wtcs13xf4j53rnlgzqomcchrpi7ip4p5eihlcm8nw3ggz6btw7hhe4hdx1h5xgz4du3pgistrvibdext1dnygdnlu160go5cri88k6c4smf17tpppjyy8bkitxvk9ppss3d25qt83lc28botr83tdv28hn3uh0uiguirbrbipy5ajki1avaymcw4tzuu9f0zaq8xi1xva7i0zeen2144q3ckhmr8l8izu\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": true\n\t}, \n\t{\n\t\t\"id\": \"ea4e2d22-67f3-42e2-b48d-6a93462bd9b8\", \n\t\t\"boundedContextId\": \"2081101c-9951-4cd3-a230-714134223f6c\", \n\t\t\"name\": \"2mcblpqcrwdamkqoouxbou5chkz8u6dhrzkv1s3727h8n6y9k4td6ywr6bzunk0qm9j2bzmtnmg8oe2r28x2ww2mzh71qc1wn8m3s2hzg86oalg8ihdsqir26f0qx1ln0po8c6evnedbhdki6kdzid23xgd1qs59i4crdgckz96w6l63nnzvl1avr7loirsi0iv3xcdgklwkdul9g5k4cteinprc4comavjsd49dt0sjgbcd0yxhvf7tyhw2xwp\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"632ab8de-5018-450d-9591-9480f8b9f788\", \n\t\t\"boundedContextId\": \"aaec2ccc-202b-4b2c-850f-2d7c4a5838e8\", \n\t\t\"name\": \"hgiacspivdawkccce89sulmnaewgqj33nl7qvgugt5dbk5hl3ec97wz1y5edync9bwyzndbipz51f3it1pawuu2us8nz0o401tudolc367wf4uoz8gr62l441h3z64wf4wmlt3mmo2hmhctobgu4ms2aefw8y1wf7fcafbajyr9suvnkwazua5t7llja6yhoanh9s2gjqpmqqbb9foty86e0icqy0jsz79hqwt85h6nkkbrj2hihlepanuwqssg\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"0ffc9e31-2fff-4f99-bb73-086ca2d1f9c7\", \n\t\t\"boundedContextId\": \"df701660-9b7b-4e13-bc3b-0932e1e263b3\", \n\t\t\"name\": \"njkwi5dobdeutssvftetanrz7bjue95l6jd8ed1vpdmuv4hw9v8ddzqub8nr9vid8176qaif05evho8hrdmy9iyvvqhy0yxvs9vgjz6kzfvdnix8xixi6jbwp0en13wfcvp4ymnr6pwrso8h31htpm8bnfoshikccoqvmvoks11u2ztaxz8rtfpxcd42c7k93ovf00pa6y3nyiykz7n223znnjttjfygl4z7sapqqzzrkqmxpaj15uxp968h4rd\", \n\t\t\"hasCustomFields\": false, \n\t\t\"hasAttachments\": false\n\t}, \n\t{\n\t\t\"id\": \"b150a68a-d104-4eba-92e4-f4afdfd3c9a3\", \n\t\t\"boundedContextId\": \"9e462dea-0c30-4ac2-8a77-95d7a74c21ff\", \n\t\t\"name\": \"lq6zmmjd58czco15sgvg0yz5ji3ixbtgnqtfl231w98likoipbm2wla9554g7s4lzrs1f8d78a0n7pjscowej3gjzow77m4cprebqe5ov3qmlup3zcftvczufht57xoonxxt5hypaopphlyvrrx7unlc8jewrr4somd4lup9eqwwak6wczqj8s1x064mndl2p543vonbr7m1mlieu8enofkxls3z28hd0yozbiv9somnxdfp6xnfa2rf5j40018\", \n\t\t\"hasCustomFields\": true, \n\t\t\"hasAttachments\": false\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/resources",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"resources"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/resources/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/resources/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+                        "resources",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/resources",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/resources",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"resources"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/resource",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/resource",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"resource"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/resource/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/resource/bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"resource",
+						"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/resource",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90\", \n\t\"boundedContextId\": \"7c1f725a-2fd6-48e4-b73a-9814c76458ac\", \n\t\"name\": \"h648928m38b7viu2lh6ea3kbesj9h6dylzkk3ztevkblw0rnvg9m9bv8ojet8flcf92cksbxedivblddvctw1xfm36t21immsd48fv3muckdljqwdaim5xv656zo2nbyvd328ku8tcv31hpys2oepn8ti6tz9rxye65ygbu7vag4bqaugy2mqxusouz1xvhb0oyktzey7o1g2a2cw0lh5kyrdgvd9r0x27am9xji3cf0pgn2a5n66cdoqqbjgyf\", \n\t\"hasCustomFields\": true, \n\t\"hasAttachments\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/resource",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"resource"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/resource/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/resource/bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"resource",
+						"bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - admin/resources",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/resources",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"resources"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "9ef3dc9e-c91e-42dd-a67a-2ef42094f9d8",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

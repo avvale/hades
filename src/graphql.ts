@@ -80,6 +80,22 @@ export interface AdminUpdatePermissionInput {
     name?: GraphQLString;
 }
 
+export interface AdminCreateResourceInput {
+    id: string;
+    boundedContextId: string;
+    name: GraphQLString;
+    hasCustomFields: GraphQLBoolean;
+    hasAttachments: GraphQLBoolean;
+}
+
+export interface AdminUpdateResourceInput {
+    id: string;
+    boundedContextId?: string;
+    name?: GraphQLString;
+    hasCustomFields?: GraphQLBoolean;
+    hasAttachments?: GraphQLBoolean;
+}
+
 export interface AdminCreateTenantInput {
     id: string;
     name: GraphQLString;
@@ -129,6 +145,10 @@ export interface IQuery {
     adminFindPermissionById(id?: string): AdminPermission | Promise<AdminPermission>;
     adminGetPermissions(query?: QueryStatementInput[]): AdminPermission[] | Promise<AdminPermission[]>;
     adminPaginatePermissions(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    adminFindResource(query?: QueryStatementInput[]): AdminResource | Promise<AdminResource>;
+    adminFindResourceById(id?: string): AdminResource | Promise<AdminResource>;
+    adminGetResources(query?: QueryStatementInput[]): AdminResource[] | Promise<AdminResource[]>;
+    adminPaginateResources(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     adminFindTenant(query?: QueryStatementInput[]): AdminTenant | Promise<AdminTenant>;
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
@@ -151,6 +171,11 @@ export interface IMutation {
     adminUpdatePermission(payload: AdminUpdatePermissionInput): AdminPermission | Promise<AdminPermission>;
     adminDeletePermissionById(id: string): AdminPermission | Promise<AdminPermission>;
     adminDeletePermissions(query?: QueryStatementInput[]): AdminPermission[] | Promise<AdminPermission[]>;
+    adminCreateResource(payload: AdminCreateResourceInput): AdminResource | Promise<AdminResource>;
+    adminInsertResources(payload: AdminCreateResourceInput[]): boolean | Promise<boolean>;
+    adminUpdateResource(payload: AdminUpdateResourceInput): AdminResource | Promise<AdminResource>;
+    adminDeleteResourceById(id: string): AdminResource | Promise<AdminResource>;
+    adminDeleteResources(query?: QueryStatementInput[]): AdminResource[] | Promise<AdminResource[]>;
     adminCreateTenant(payload: AdminCreateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminInsertTenants(payload: AdminCreateTenantInput[]): boolean | Promise<boolean>;
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
@@ -176,6 +201,17 @@ export interface AdminPermission {
     id: string;
     boundedContextId: string;
     name: GraphQLString;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface AdminResource {
+    id: string;
+    boundedContextId: string;
+    name: GraphQLString;
+    hasCustomFields: GraphQLBoolean;
+    hasAttachments: GraphQLBoolean;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

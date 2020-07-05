@@ -1,0 +1,51 @@
+
+
+type AdminResource
+{
+    id: ID!
+    boundedContextId: ID!
+    name: GraphQLString!
+    hasCustomFields: GraphQLBoolean!
+    hasAttachments: GraphQLBoolean!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input AdminCreateResourceInput
+{
+    id: ID!
+    boundedContextId: ID!
+    name: GraphQLString!
+    hasCustomFields: GraphQLBoolean!
+    hasAttachments: GraphQLBoolean!
+    
+}
+
+input AdminUpdateResourceInput
+{
+    id: ID!
+    boundedContextId: ID
+    name: GraphQLString
+    hasCustomFields: GraphQLBoolean
+    hasAttachments: GraphQLBoolean
+    
+}
+
+type Query 
+{
+    adminFindResource(query:[QueryStatementInput]): AdminResource
+    adminFindResourceById(id:ID): AdminResource
+    adminGetResources(query:[QueryStatementInput]): [AdminResource]!
+    adminPaginateResources(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    adminCreateResource(payload: AdminCreateResourceInput!): AdminResource
+    adminInsertResources(payload: [AdminCreateResourceInput]!): Boolean!
+    adminUpdateResource(payload: AdminUpdateResourceInput!): AdminResource
+    adminDeleteResourceById(id: ID!): AdminResource
+    adminDeleteResources(query:[QueryStatementInput]): [AdminResource]!
+}
