@@ -10,7 +10,7 @@ import {
     PermissionDeletedAt
     
 } from './../../domain/value-objects';
-import { IPermissionRepository } from '../../domain/permission.repository';
+import { IPermissionRepository } from './../../domain/permission.repository';
 import { AdminPermission } from './../../domain/permission.aggregate';
 
 @Injectable()

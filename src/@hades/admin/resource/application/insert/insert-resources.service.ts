@@ -12,7 +12,7 @@ import {
     ResourceDeletedAt
     
 } from './../../domain/value-objects';
-import { IResourceRepository } from '../../domain/resource.repository';
+import { IResourceRepository } from './../../domain/resource.repository';
 import { AdminResource } from './../../domain/resource.aggregate';
 
 @Injectable()
