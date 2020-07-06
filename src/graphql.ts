@@ -182,6 +182,70 @@ export interface BplusItSappiUpdateChannelOverviewInput {
     unregistered?: GraphQLInt;
 }
 
+export interface BplusItSappiCreateChannelInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    party?: GraphQLString;
+    component: GraphQLString;
+    name: GraphQLString;
+    flowParty: GraphQLString;
+    flowComponent: GraphQLString;
+    flowInterfaceName: GraphQLString;
+    flowInterfaceNamespace: GraphQLString;
+    adapterType?: GraphQLString;
+    direction?: GraphQLString;
+    transportProtocol?: GraphQLString;
+    messageProtocol?: GraphQLString;
+    adapterEngineName?: GraphQLString;
+    url?: GraphQLString;
+    username?: GraphQLString;
+    remoteHost?: GraphQLString;
+    remotePort?: GraphQLString;
+    directory?: GraphQLString;
+    fileSchema?: GraphQLString;
+    proxyHost?: GraphQLString;
+    proxyPort?: GraphQLString;
+    destination?: GraphQLString;
+    adapterStatus?: GraphQLString;
+    softwareComponentName?: GraphQLString;
+    responsibleUserAccountName?: GraphQLString;
+    lastChangeUserAccount?: GraphQLString;
+    lastChangedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiUpdateChannelInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    party?: GraphQLString;
+    component?: GraphQLString;
+    name?: GraphQLString;
+    flowParty?: GraphQLString;
+    flowComponent?: GraphQLString;
+    flowInterfaceName?: GraphQLString;
+    flowInterfaceNamespace?: GraphQLString;
+    adapterType?: GraphQLString;
+    direction?: GraphQLString;
+    transportProtocol?: GraphQLString;
+    messageProtocol?: GraphQLString;
+    adapterEngineName?: GraphQLString;
+    url?: GraphQLString;
+    username?: GraphQLString;
+    remoteHost?: GraphQLString;
+    remotePort?: GraphQLString;
+    directory?: GraphQLString;
+    fileSchema?: GraphQLString;
+    proxyHost?: GraphQLString;
+    proxyPort?: GraphQLString;
+    destination?: GraphQLString;
+    adapterStatus?: GraphQLString;
+    softwareComponentName?: GraphQLString;
+    responsibleUserAccountName?: GraphQLString;
+    lastChangeUserAccount?: GraphQLString;
+    lastChangedAt?: GraphQLTimestamp;
+}
+
 export interface BplusItSappiCreateDataLakeInput {
     id: string;
     data: JSON;
@@ -360,6 +424,16 @@ export interface BplusItSappiUpdateMessageOverviewInput {
     waiting?: GraphQLInt;
 }
 
+export interface BplusItSappiCreateModuleInput {
+    id: string;
+    tenantId: string;
+}
+
+export interface BplusItSappiUpdateModuleInput {
+    id: string;
+    tenantId?: string;
+}
+
 export interface BplusItSappiCreateRoleInput {
     id: string;
     tenantId: string;
@@ -437,6 +511,10 @@ export interface IQuery {
     bplusItSappiFindChannelOverviewById(id?: string): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
     bplusItSappiGetChannelsOverview(query?: QueryStatementInput[]): BplusItSappiChannelOverview[] | Promise<BplusItSappiChannelOverview[]>;
     bplusItSappiPaginateChannelsOverview(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindChannel(query?: QueryStatementInput[]): BplusItSappiChannel | Promise<BplusItSappiChannel>;
+    bplusItSappiFindChannelById(id?: string): BplusItSappiChannel | Promise<BplusItSappiChannel>;
+    bplusItSappiGetChannels(query?: QueryStatementInput[]): BplusItSappiChannel[] | Promise<BplusItSappiChannel[]>;
+    bplusItSappiPaginateChannels(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindDataLake(query?: QueryStatementInput[]): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiFindDataLakeById(id?: string): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiGetDataLakes(query?: QueryStatementInput[]): BplusItSappiDataLake[] | Promise<BplusItSappiDataLake[]>;
@@ -461,6 +539,10 @@ export interface IQuery {
     bplusItSappiFindMessageOverviewById(id?: string): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
     bplusItSappiGetMessagesOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview[] | Promise<BplusItSappiMessageOverview[]>;
     bplusItSappiPaginateMessagesOverview(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindModule(query?: QueryStatementInput[]): BplusItSappiModule | Promise<BplusItSappiModule>;
+    bplusItSappiFindModuleById(id?: string): BplusItSappiModule | Promise<BplusItSappiModule>;
+    bplusItSappiGetModules(query?: QueryStatementInput[]): BplusItSappiModule[] | Promise<BplusItSappiModule[]>;
+    bplusItSappiPaginateModules(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindRole(query?: QueryStatementInput[]): BplusItSappiRole | Promise<BplusItSappiRole>;
     bplusItSappiFindRoleById(id?: string): BplusItSappiRole | Promise<BplusItSappiRole>;
     bplusItSappiGetRoles(query?: QueryStatementInput[]): BplusItSappiRole[] | Promise<BplusItSappiRole[]>;
@@ -502,6 +584,11 @@ export interface IMutation {
     bplusItSappiUpdateChannelOverview(payload: BplusItSappiUpdateChannelOverviewInput): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
     bplusItSappiDeleteChannelOverviewById(id: string): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
     bplusItSappiDeleteChannelsOverview(query?: QueryStatementInput[]): BplusItSappiChannelOverview[] | Promise<BplusItSappiChannelOverview[]>;
+    bplusItSappiCreateChannel(payload: BplusItSappiCreateChannelInput): BplusItSappiChannel | Promise<BplusItSappiChannel>;
+    bplusItSappiInsertChannels(payload: BplusItSappiCreateChannelInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateChannel(payload: BplusItSappiUpdateChannelInput): BplusItSappiChannel | Promise<BplusItSappiChannel>;
+    bplusItSappiDeleteChannelById(id: string): BplusItSappiChannel | Promise<BplusItSappiChannel>;
+    bplusItSappiDeleteChannels(query?: QueryStatementInput[]): BplusItSappiChannel[] | Promise<BplusItSappiChannel[]>;
     bplusItSappiCreateDataLake(payload: BplusItSappiCreateDataLakeInput): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiInsertDataLakes(payload: BplusItSappiCreateDataLakeInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateDataLake(payload: BplusItSappiUpdateDataLakeInput): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
@@ -532,6 +619,11 @@ export interface IMutation {
     bplusItSappiUpdateMessageOverview(payload: BplusItSappiUpdateMessageOverviewInput): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
     bplusItSappiDeleteMessageOverviewById(id: string): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
     bplusItSappiDeleteMessagesOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview[] | Promise<BplusItSappiMessageOverview[]>;
+    bplusItSappiCreateModule(payload: BplusItSappiCreateModuleInput): BplusItSappiModule | Promise<BplusItSappiModule>;
+    bplusItSappiInsertModules(payload: BplusItSappiCreateModuleInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateModule(payload: BplusItSappiUpdateModuleInput): BplusItSappiModule | Promise<BplusItSappiModule>;
+    bplusItSappiDeleteModuleById(id: string): BplusItSappiModule | Promise<BplusItSappiModule>;
+    bplusItSappiDeleteModules(query?: QueryStatementInput[]): BplusItSappiModule[] | Promise<BplusItSappiModule[]>;
     bplusItSappiCreateRole(payload: BplusItSappiCreateRoleInput): BplusItSappiRole | Promise<BplusItSappiRole>;
     bplusItSappiInsertRoles(payload: BplusItSappiCreateRoleInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateRole(payload: BplusItSappiUpdateRoleInput): BplusItSappiRole | Promise<BplusItSappiRole>;
@@ -606,6 +698,41 @@ export interface BplusItSappiChannelOverview {
     stopped?: GraphQLInt;
     unknown?: GraphQLInt;
     unregistered?: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiChannel {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    party?: GraphQLString;
+    component: GraphQLString;
+    name: GraphQLString;
+    flowParty: GraphQLString;
+    flowComponent: GraphQLString;
+    flowInterfaceName: GraphQLString;
+    flowInterfaceNamespace: GraphQLString;
+    adapterType?: GraphQLString;
+    direction?: GraphQLString;
+    transportProtocol?: GraphQLString;
+    messageProtocol?: GraphQLString;
+    adapterEngineName?: GraphQLString;
+    url?: GraphQLString;
+    username?: GraphQLString;
+    remoteHost?: GraphQLString;
+    remotePort?: GraphQLString;
+    directory?: GraphQLString;
+    fileSchema?: GraphQLString;
+    proxyHost?: GraphQLString;
+    proxyPort?: GraphQLString;
+    destination?: GraphQLString;
+    adapterStatus?: GraphQLString;
+    softwareComponentName?: GraphQLString;
+    responsibleUserAccountName?: GraphQLString;
+    lastChangeUserAccount?: GraphQLString;
+    lastChangedAt?: GraphQLTimestamp;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -713,6 +840,14 @@ export interface BplusItSappiMessageOverview {
     holding?: GraphQLInt;
     toBeDelivered?: GraphQLInt;
     waiting?: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiModule {
+    id: string;
+    tenantId: string;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

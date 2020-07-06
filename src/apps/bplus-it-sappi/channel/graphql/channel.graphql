@@ -1,0 +1,123 @@
+
+
+type BplusItSappiChannel
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    party: GraphQLString
+    component: GraphQLString!
+    name: GraphQLString!
+    flowParty: GraphQLString!
+    flowComponent: GraphQLString!
+    flowInterfaceName: GraphQLString!
+    flowInterfaceNamespace: GraphQLString!
+    adapterType: GraphQLString
+    direction: GraphQLString
+    transportProtocol: GraphQLString
+    messageProtocol: GraphQLString
+    adapterEngineName: GraphQLString
+    url: GraphQLString
+    username: GraphQLString
+    remoteHost: GraphQLString
+    remotePort: GraphQLString
+    directory: GraphQLString
+    fileSchema: GraphQLString
+    proxyHost: GraphQLString
+    proxyPort: GraphQLString
+    destination: GraphQLString
+    adapterStatus: GraphQLString
+    softwareComponentName: GraphQLString
+    responsibleUserAccountName: GraphQLString
+    lastChangeUserAccount: GraphQLString
+    lastChangedAt: GraphQLTimestamp
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateChannelInput
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    party: GraphQLString
+    component: GraphQLString!
+    name: GraphQLString!
+    flowParty: GraphQLString!
+    flowComponent: GraphQLString!
+    flowInterfaceName: GraphQLString!
+    flowInterfaceNamespace: GraphQLString!
+    adapterType: GraphQLString
+    direction: GraphQLString
+    transportProtocol: GraphQLString
+    messageProtocol: GraphQLString
+    adapterEngineName: GraphQLString
+    url: GraphQLString
+    username: GraphQLString
+    remoteHost: GraphQLString
+    remotePort: GraphQLString
+    directory: GraphQLString
+    fileSchema: GraphQLString
+    proxyHost: GraphQLString
+    proxyPort: GraphQLString
+    destination: GraphQLString
+    adapterStatus: GraphQLString
+    softwareComponentName: GraphQLString
+    responsibleUserAccountName: GraphQLString
+    lastChangeUserAccount: GraphQLString
+    lastChangedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiUpdateChannelInput
+{
+    id: ID!
+    tenantId: ID
+    systemId: ID
+    party: GraphQLString
+    component: GraphQLString
+    name: GraphQLString
+    flowParty: GraphQLString
+    flowComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
+    adapterType: GraphQLString
+    direction: GraphQLString
+    transportProtocol: GraphQLString
+    messageProtocol: GraphQLString
+    adapterEngineName: GraphQLString
+    url: GraphQLString
+    username: GraphQLString
+    remoteHost: GraphQLString
+    remotePort: GraphQLString
+    directory: GraphQLString
+    fileSchema: GraphQLString
+    proxyHost: GraphQLString
+    proxyPort: GraphQLString
+    destination: GraphQLString
+    adapterStatus: GraphQLString
+    softwareComponentName: GraphQLString
+    responsibleUserAccountName: GraphQLString
+    lastChangeUserAccount: GraphQLString
+    lastChangedAt: GraphQLTimestamp
+    
+}
+
+type Query 
+{
+    bplusItSappiFindChannel(query:[QueryStatementInput]): BplusItSappiChannel
+    bplusItSappiFindChannelById(id:ID): BplusItSappiChannel
+    bplusItSappiGetChannels(query:[QueryStatementInput]): [BplusItSappiChannel]!
+    bplusItSappiPaginateChannels(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateChannel(payload: BplusItSappiCreateChannelInput!): BplusItSappiChannel
+    bplusItSappiInsertChannels(payload: [BplusItSappiCreateChannelInput]!): Boolean!
+    bplusItSappiUpdateChannel(payload: BplusItSappiUpdateChannelInput!): BplusItSappiChannel
+    bplusItSappiDeleteChannelById(id: ID!): BplusItSappiChannel
+    bplusItSappiDeleteChannels(query:[QueryStatementInput]): [BplusItSappiChannel]!
+}

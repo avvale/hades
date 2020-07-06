@@ -7,6 +7,7 @@ import { BplusItSappiMessageOverviewHandlers, BplusItSappiMessageOverviewService
 import { BplusItSappiRoleHandlers, BplusItSappiRoleServices, BplusItSappiRoleModel, IRoleRepository, SequelizeRoleRepository, RoleSagas } from './role';
 import { BplusItSappiJobDetailHandlers, BplusItSappiJobDetailServices, BplusItSappiJobDetailModel, IJobDetailRepository, SequelizeJobDetailRepository, JobDetailSagas } from './job-detail';
 import { BplusItSappiFlowHandlers, BplusItSappiFlowServices, BplusItSappiFlowModel, IFlowRepository, SequelizeFlowRepository, FlowSagas } from './flow';
+import { BplusItSappiChannelHandlers, BplusItSappiChannelServices, BplusItSappiChannelModel, IChannelRepository, SequelizeChannelRepository, ChannelSagas } from './channel';
 
 export const BplusItSappiHandlers = [
     ...BplusItSappiSystemHandlers,
@@ -17,7 +18,8 @@ export const BplusItSappiHandlers = [
     ...BplusItSappiMessageOverviewHandlers,
     ...BplusItSappiRoleHandlers,
     ...BplusItSappiJobDetailHandlers,
-    ...BplusItSappiFlowHandlers
+    ...BplusItSappiFlowHandlers,
+    ...BplusItSappiChannelHandlers
 ];
 export const BplusItSappiServices = [
     ...BplusItSappiSystemServices,
@@ -28,7 +30,8 @@ export const BplusItSappiServices = [
     ...BplusItSappiMessageOverviewServices,
     ...BplusItSappiRoleServices,
     ...BplusItSappiJobDetailServices,
-    ...BplusItSappiFlowServices
+    ...BplusItSappiFlowServices,
+    ...BplusItSappiChannelServices
 ];
 export const BplusItSappiModels = [
     BplusItSappiSystemModel,
@@ -39,7 +42,8 @@ export const BplusItSappiModels = [
     BplusItSappiMessageOverviewModel,
     BplusItSappiRoleModel,
     BplusItSappiJobDetailModel,
-    BplusItSappiFlowModel
+    BplusItSappiFlowModel,
+    BplusItSappiChannelModel
 ];
 export const BplusItSappiRepositories = [
     {
@@ -77,6 +81,10 @@ export const BplusItSappiRepositories = [
     {
         provide: IFlowRepository,
         useClass: SequelizeFlowRepository
+    },
+    {
+        provide: IChannelRepository,
+        useClass: SequelizeChannelRepository
     }
 ];
 export const BplusItSappiSagas = [
@@ -88,5 +96,6 @@ export const BplusItSappiSagas = [
     MessageOverviewSagas,
     RoleSagas,
     JobDetailSagas,
-    FlowSagas
+    FlowSagas,
+    ChannelSagas
 ];

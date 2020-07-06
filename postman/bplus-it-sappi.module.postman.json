@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "a7d8f036-3afd-4b07-919f-08150b982323",
+		"name"          : "@hades - bplus-it-sappi/module",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - bplusItSappiCreateModule",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiCreateModuleInput!)\n{\n\tbplusItSappiCreateModule (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"eb80e07a-fe55-4688-82e0-58a493cf2852\", \n\t\t\"tenantId\": \"dc8cdb1c-9a41-4096-bea5-3a34ebc4d069\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiInsertModules",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[BplusItSappiCreateModuleInput]!)\n{\n\tbplusItSappiInsertModules (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"6b9c9b4a-de8a-4823-9145-6a17a83be543\", \n\t\t\t\"tenantId\": \"260a936b-60d5-4f67-ae7d-16c3f5184c2e\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c423fe82-cf87-46e8-8ed4-5967fa671a4e\", \n\t\t\t\"tenantId\": \"d8270c8a-5a72-409c-b386-706ecd4080bf\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"fb506f37-4c60-4d8c-b943-efd489e89e29\", \n\t\t\t\"tenantId\": \"c1e105da-b648-4cdb-ab38-561d110c32df\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"aba23fed-7608-4f54-9179-7f8942cb94ba\", \n\t\t\t\"tenantId\": \"4e8314d1-6d96-4553-8caa-f78697cbce5b\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2ea91926-a6e6-4d64-b386-62632865e290\", \n\t\t\t\"tenantId\": \"6c123313-bcff-4bbd-9fb0-0ef8ac6fd60b\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bc7c1087-9683-4852-bfe7-66a2f79b0bc9\", \n\t\t\t\"tenantId\": \"eabc9483-0b90-4530-9a7b-791c4a5512f2\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"77fd365b-cb60-4f47-a2d2-6701a99a9f68\", \n\t\t\t\"tenantId\": \"ec22ab36-47d5-40b4-84cb-09122cda346a\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3d9e2c43-7158-4485-8393-95649b700252\", \n\t\t\t\"tenantId\": \"b057847e-4933-4815-ae0d-f29f08a238f8\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e1e16d3e-9067-4fbb-a615-eb33de92a356\", \n\t\t\t\"tenantId\": \"0f97949a-0f62-4fa3-9a15-00e5d5857440\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1cfdf0f5-b20f-4582-9212-e292cb62c94d\", \n\t\t\t\"tenantId\": \"ad926bfd-b1ee-46eb-9c90-cc8390427aae\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"77af9b61-6e1d-4adf-a2ae-23a2ccc555cb\", \n\t\t\t\"tenantId\": \"d7e2b940-0684-478c-91b1-bec4a2e3e9df\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cb499d6b-e0ab-4526-af97-490ac02dfd49\", \n\t\t\t\"tenantId\": \"fca10e1f-a79c-4dea-a889-e521abb39b88\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3a34c9b8-dca5-4860-b01e-5e87c7a32ac3\", \n\t\t\t\"tenantId\": \"29c1a0aa-4c2e-40ff-b411-887d48257479\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"026760d0-cfcf-4763-8b48-8d707207e578\", \n\t\t\t\"tenantId\": \"de23518e-5ec9-41ea-ae4a-77dccc95dc57\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"169e3100-b126-460a-8c1e-91454393c18e\", \n\t\t\t\"tenantId\": \"c2b9faff-f536-496e-bae0-a3a7601bd9f7\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"97913059-e871-4687-854b-251a977823c8\", \n\t\t\t\"tenantId\": \"a93b49ba-c5b6-4fa9-910f-302c07f51f6c\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e71ae1b3-4e01-47c2-a7f7-2b2d1911a410\", \n\t\t\t\"tenantId\": \"55b1d718-a189-4956-be52-8a3ba05e4869\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b588279b-f3e5-4540-a1cc-40fe2e905176\", \n\t\t\t\"tenantId\": \"e27ae1a7-9c8b-4155-9ea5-a9f225a3d70a\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"59ab524c-6830-465d-a9f6-4d22587a3b8b\", \n\t\t\t\"tenantId\": \"ce9db914-e065-4496-83c0-8546469f609f\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9b391935-1176-4995-83e5-3ee375ba460b\", \n\t\t\t\"tenantId\": \"a70164e0-9df3-488e-b4e5-7ae57e5a6683\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiPaginateModules",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tbplusItSappiPaginateModules (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiGetModules",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetModules (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"eb80e07a-fe55-4688-82e0-58a493cf2852\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindModule",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindModule (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"eb80e07a-fe55-4688-82e0-58a493cf2852\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindModuleById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tbplusItSappiFindModuleById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"eb80e07a-fe55-4688-82e0-58a493cf2852\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiUpdateModule",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiUpdateModuleInput!)\n{\n\tbplusItSappiUpdateModule (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"eb80e07a-fe55-4688-82e0-58a493cf2852\", \n\t\t\"tenantId\": \"dc8cdb1c-9a41-4096-bea5-3a34ebc4d069\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteModuleById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteModuleById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"eb80e07a-fe55-4688-82e0-58a493cf2852\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteModules",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteModules (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/module",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"eb80e07a-fe55-4688-82e0-58a493cf2852\", \n\t\"tenantId\": \"dc8cdb1c-9a41-4096-bea5-3a34ebc4d069\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/module",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"module"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/modules",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"ebaecc0f-8445-4c73-8f21-844013e7b1df\", \n\t\t\"tenantId\": \"a98022cb-2964-467e-9e66-1a788748a73b\"\n\t}, \n\t{\n\t\t\"id\": \"4f672b3a-06fb-41cb-8aea-bca0365a8989\", \n\t\t\"tenantId\": \"c0e02965-feea-43df-a7df-87cc3eb76721\"\n\t}, \n\t{\n\t\t\"id\": \"2c1002bf-1ccd-4879-998d-dbf36b09cbdd\", \n\t\t\"tenantId\": \"700fed89-72e5-4a87-aea3-418517224697\"\n\t}, \n\t{\n\t\t\"id\": \"0d56813e-b3f1-4593-91e8-2ab40b0f7aa3\", \n\t\t\"tenantId\": \"ea70084e-551a-4ffc-95a7-e37acb9f4bd6\"\n\t}, \n\t{\n\t\t\"id\": \"6183a7f2-66d9-495c-ae95-d2dbfbf7577e\", \n\t\t\"tenantId\": \"035e0f8c-8cc7-4b91-908b-96543d92af70\"\n\t}, \n\t{\n\t\t\"id\": \"56e6c991-9767-4a2b-bb29-73c09b4edf90\", \n\t\t\"tenantId\": \"c7ffd455-2afb-4a36-9a94-ff9fdafc9e55\"\n\t}, \n\t{\n\t\t\"id\": \"f19a6235-0ece-4c4b-9d74-1fb8be976742\", \n\t\t\"tenantId\": \"6462eb38-79c2-4ab8-867a-2aa831c671f8\"\n\t}, \n\t{\n\t\t\"id\": \"833709b8-4eae-4e29-8f98-c3616a478b83\", \n\t\t\"tenantId\": \"9031be1c-f643-4dfb-b70c-9c02a926d375\"\n\t}, \n\t{\n\t\t\"id\": \"0fe4430d-eba6-4f9a-ab19-bb30242d2490\", \n\t\t\"tenantId\": \"d33c0934-f33f-4ad9-a075-b92f93110d31\"\n\t}, \n\t{\n\t\t\"id\": \"8fc43b9d-56c2-499a-ae35-bacc18de350f\", \n\t\t\"tenantId\": \"c8b9763a-d115-4793-b438-6f73d2bf5a04\"\n\t}, \n\t{\n\t\t\"id\": \"c9a64678-c6a8-44d9-b155-220d64a290b0\", \n\t\t\"tenantId\": \"941c28eb-a171-47f6-897e-a3c1d568169a\"\n\t}, \n\t{\n\t\t\"id\": \"784c422b-96dc-4224-8a04-f09a31fce103\", \n\t\t\"tenantId\": \"92e704c6-2cba-4ebe-9b09-82922c326890\"\n\t}, \n\t{\n\t\t\"id\": \"04bbd25b-9c62-44c6-bb3c-53efb30a6b8a\", \n\t\t\"tenantId\": \"647905e3-7bbb-4194-a0e8-ed2b99299a9e\"\n\t}, \n\t{\n\t\t\"id\": \"fe9f1a41-63b0-4800-8a43-2b4ae30f7692\", \n\t\t\"tenantId\": \"6e4934ea-81fc-46eb-aa98-bb5738397878\"\n\t}, \n\t{\n\t\t\"id\": \"d9cd9717-4fb0-40a5-8f19-f6efb854f743\", \n\t\t\"tenantId\": \"819a2484-6f64-490a-9301-35a7d86d5298\"\n\t}, \n\t{\n\t\t\"id\": \"dd413991-6bbe-4e86-bfc3-b175044a2125\", \n\t\t\"tenantId\": \"ecb1e405-6aac-4c36-a25d-a9792fe341ee\"\n\t}, \n\t{\n\t\t\"id\": \"8e6bd171-1f6f-4894-82d2-395ea1ec710b\", \n\t\t\"tenantId\": \"d2cf8ddf-e746-4d26-bbea-626ba48cb5ab\"\n\t}, \n\t{\n\t\t\"id\": \"ee333a8c-fde8-4b56-91b2-3e63505b56de\", \n\t\t\"tenantId\": \"fd8acc27-e738-4b06-b1ad-02108a491e01\"\n\t}, \n\t{\n\t\t\"id\": \"888ec307-5750-496a-962d-391dc9b37166\", \n\t\t\"tenantId\": \"752d088e-cd80-462d-a140-d7b6494cbe3e\"\n\t}, \n\t{\n\t\t\"id\": \"ac91371a-9dbb-4c8c-992a-104d2a9ec135\", \n\t\t\"tenantId\": \"2b3ecc6c-4111-4d41-ad4b-4ce28ed2dae6\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/modules",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"modules"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/modules/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/modules/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+                        "modules",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/modules",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"eb80e07a-fe55-4688-82e0-58a493cf2852\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/modules",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"modules"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/module",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"eb80e07a-fe55-4688-82e0-58a493cf2852\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/module",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"module"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/module/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/module/eb80e07a-fe55-4688-82e0-58a493cf2852",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"module",
+						"eb80e07a-fe55-4688-82e0-58a493cf2852"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/module",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"eb80e07a-fe55-4688-82e0-58a493cf2852\", \n\t\"tenantId\": \"dc8cdb1c-9a41-4096-bea5-3a34ebc4d069\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/module",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"module"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/module/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/module/eb80e07a-fe55-4688-82e0-58a493cf2852",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"module",
+						"eb80e07a-fe55-4688-82e0-58a493cf2852"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - bplus-it-sappi/modules",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/modules",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"modules"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "554e71e3-d1e4-40fd-82d7-14cafeab0757",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
