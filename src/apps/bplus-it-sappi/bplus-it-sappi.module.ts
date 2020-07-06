@@ -12,6 +12,7 @@ import { BplusItSappiRoleControllers, BplusItSappiRoleResolvers } from './role';
 import { BplusItSappiJobDetailControllers, BplusItSappiJobDetailResolvers } from './job-detail';
 import { BplusItSappiFlowControllers, BplusItSappiFlowResolvers } from './flow';
 import { BplusItSappiChannelControllers, BplusItSappiChannelResolvers } from './channel';
+import { BplusItSappiModuleControllers, BplusItSappiModuleResolvers } from './module';
 
 @Module({
     imports: [
@@ -28,7 +29,8 @@ import { BplusItSappiChannelControllers, BplusItSappiChannelResolvers } from './
         ...BplusItSappiRoleControllers,
         ...BplusItSappiJobDetailControllers,
         ...BplusItSappiFlowControllers,
-        ...BplusItSappiChannelControllers
+        ...BplusItSappiChannelControllers,
+        ...BplusItSappiModuleControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
@@ -44,7 +46,8 @@ import { BplusItSappiChannelControllers, BplusItSappiChannelResolvers } from './
         ...BplusItSappiRoleResolvers,
         ...BplusItSappiJobDetailResolvers,
         ...BplusItSappiFlowResolvers,
-        ...BplusItSappiChannelResolvers
+        ...BplusItSappiChannelResolvers,
+        ...BplusItSappiModuleResolvers
     ]
 })
 export class BplusItSappiModule {}

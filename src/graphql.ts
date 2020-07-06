@@ -427,11 +427,39 @@ export interface BplusItSappiUpdateMessageOverviewInput {
 export interface BplusItSappiCreateModuleInput {
     id: string;
     tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    channelId: string;
+    channelParty?: GraphQLString;
+    channelComponent: GraphQLString;
+    channelName: GraphQLString;
+    flowParty?: GraphQLString;
+    flowComponent: GraphQLString;
+    flowInterfaceName: GraphQLString;
+    flowInterfaceNamespace: GraphQLString;
+    parameterGroup?: GraphQLString;
+    name?: GraphQLString;
+    parameterName?: GraphQLString;
+    parameterValue?: GraphQLString;
 }
 
 export interface BplusItSappiUpdateModuleInput {
     id: string;
     tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    channelId?: string;
+    channelParty?: GraphQLString;
+    channelComponent?: GraphQLString;
+    channelName?: GraphQLString;
+    flowParty?: GraphQLString;
+    flowComponent?: GraphQLString;
+    flowInterfaceName?: GraphQLString;
+    flowInterfaceNamespace?: GraphQLString;
+    parameterGroup?: GraphQLString;
+    name?: GraphQLString;
+    parameterName?: GraphQLString;
+    parameterValue?: GraphQLString;
 }
 
 export interface BplusItSappiCreateRoleInput {
@@ -848,6 +876,20 @@ export interface BplusItSappiMessageOverview {
 export interface BplusItSappiModule {
     id: string;
     tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    channelId: string;
+    channelParty?: GraphQLString;
+    channelComponent: GraphQLString;
+    channelName: GraphQLString;
+    flowParty?: GraphQLString;
+    flowComponent: GraphQLString;
+    flowInterfaceName: GraphQLString;
+    flowInterfaceNamespace: GraphQLString;
+    parameterGroup?: GraphQLString;
+    name?: GraphQLString;
+    parameterName?: GraphQLString;
+    parameterValue?: GraphQLString;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

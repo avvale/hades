@@ -1,0 +1,87 @@
+version: 1.0.0
+boundedContextName: bplus-it-sappi
+moduleName: module
+moduleNames: modules
+aggregateProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminTenant
+    relationshipModuleSection: admin/tenant
+  - name: system_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: BplusItSappiSystem
+    relationshipModuleSection: bplus-it-sappi/system
+  - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: channel_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: BplusItSappiChannel
+    relationshipModuleSection: bplus-it-sappi/channel
+  - name: channel_party
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: channel_component
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: channel_name
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: flow_party
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: flow_component
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: flow_interface_name
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: flow_interface_namespace
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: parameter_group
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: name
+    type: varchar
+    maxLength: 320
+    nullable: true
+  - name: parameter_name
+    type: varchar
+    maxLength: 320
+    nullable: true
+  - name: parameter_value
+    type: varchar
+    maxLength: 1023
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

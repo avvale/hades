@@ -1,0 +1,84 @@
+
+
+type BplusItSappiModule
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    channelId: ID!
+    channelParty: GraphQLString
+    channelComponent: GraphQLString!
+    channelName: GraphQLString!
+    flowParty: GraphQLString
+    flowComponent: GraphQLString!
+    flowInterfaceName: GraphQLString!
+    flowInterfaceNamespace: GraphQLString!
+    parameterGroup: GraphQLString
+    name: GraphQLString
+    parameterName: GraphQLString
+    parameterValue: GraphQLString
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateModuleInput
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    channelId: ID!
+    channelParty: GraphQLString
+    channelComponent: GraphQLString!
+    channelName: GraphQLString!
+    flowParty: GraphQLString
+    flowComponent: GraphQLString!
+    flowInterfaceName: GraphQLString!
+    flowInterfaceNamespace: GraphQLString!
+    parameterGroup: GraphQLString
+    name: GraphQLString
+    parameterName: GraphQLString
+    parameterValue: GraphQLString
+    
+}
+
+input BplusItSappiUpdateModuleInput
+{
+    id: ID!
+    tenantId: ID
+    systemId: ID
+    systemName: GraphQLString
+    channelId: ID
+    channelParty: GraphQLString
+    channelComponent: GraphQLString
+    channelName: GraphQLString
+    flowParty: GraphQLString
+    flowComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
+    parameterGroup: GraphQLString
+    name: GraphQLString
+    parameterName: GraphQLString
+    parameterValue: GraphQLString
+    
+}
+
+type Query 
+{
+    bplusItSappiFindModule(query:[QueryStatementInput]): BplusItSappiModule
+    bplusItSappiFindModuleById(id:ID): BplusItSappiModule
+    bplusItSappiGetModules(query:[QueryStatementInput]): [BplusItSappiModule]!
+    bplusItSappiPaginateModules(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateModule(payload: BplusItSappiCreateModuleInput!): BplusItSappiModule
+    bplusItSappiInsertModules(payload: [BplusItSappiCreateModuleInput]!): Boolean!
+    bplusItSappiUpdateModule(payload: BplusItSappiUpdateModuleInput!): BplusItSappiModule
+    bplusItSappiDeleteModuleById(id: ID!): BplusItSappiModule
+    bplusItSappiDeleteModules(query:[QueryStatementInput]): [BplusItSappiModule]!
+}
