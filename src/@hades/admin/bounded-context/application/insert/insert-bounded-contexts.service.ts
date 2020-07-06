@@ -12,7 +12,7 @@ import {
     BoundedContextDeletedAt
     
 } from './../../domain/value-objects';
-import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
+import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { AdminBoundedContext } from './../../domain/bounded-context.aggregate';
 
 @Injectable()

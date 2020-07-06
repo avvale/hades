@@ -18,7 +18,7 @@ import {
     SystemDeletedAt
     
 } from '@hades/bplus-it-sappi/system/domain/value-objects';
-import { BplusItSappiSystem } from './../../domain/system.entity';
+import { BplusItSappiSystem } from './../../domain/system.aggregate';
 import { systems } from './../seeds/system.seed';
 
 @Injectable()

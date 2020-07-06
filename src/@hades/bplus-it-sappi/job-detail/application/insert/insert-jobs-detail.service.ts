@@ -19,7 +19,7 @@ import {
     JobDetailDeletedAt
     
 } from './../../domain/value-objects';
-import { IJobDetailRepository } from '../../domain/job-detail.repository';
+import { IJobDetailRepository } from './../../domain/job-detail.repository';
 import { BplusItSappiJobDetail } from './../../domain/job-detail.entity';
 
 @Injectable()

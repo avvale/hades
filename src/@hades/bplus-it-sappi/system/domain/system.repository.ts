@@ -2,7 +2,7 @@
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { BplusItSappiSystem } from './system.entity';
+import { BplusItSappiSystem } from './system.aggregate';
 import { SystemId } from './value-objects';
 
 export abstract class ISystemRepository implements IRepository<BplusItSappiSystem>

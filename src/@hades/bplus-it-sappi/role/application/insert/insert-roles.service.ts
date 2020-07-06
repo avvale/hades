@@ -10,7 +10,7 @@ import {
     RoleDeletedAt
     
 } from './../../domain/value-objects';
-import { IRoleRepository } from '../../domain/role.repository';
+import { IRoleRepository } from './../../domain/role.repository';
 import { BplusItSappiRole } from './../../domain/role.entity';
 
 @Injectable()

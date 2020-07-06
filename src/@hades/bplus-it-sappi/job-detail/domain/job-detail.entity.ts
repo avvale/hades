@@ -21,7 +21,7 @@ import { CreatedJobDetailEvent } from './../application/events/created-job-detai
 import { UpdatedJobDetailEvent } from './../application/events/updated-job-detail.event';
 import { DeletedJobDetailEvent } from './../application/events/deleted-job-detail.event';
 import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
-import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.entity';
+import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.aggregate';
 import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.entity';
 
 export class BplusItSappiJobDetail extends AggregateRoot

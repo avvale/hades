@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ISystemRepository } from './../../domain/system.repository';
-import { BplusItSappiSystem } from './../../domain/system.entity';
+import { BplusItSappiSystem } from './../../domain/system.aggregate';
 import { SystemId } from './../../domain/value-objects';
 
 @Injectable()

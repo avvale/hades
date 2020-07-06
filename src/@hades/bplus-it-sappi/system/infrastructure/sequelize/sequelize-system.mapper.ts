@@ -1,6 +1,6 @@
 import { SequelizeMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
-import { BplusItSappiSystem } from './../../domain/system.entity';
+import { BplusItSappiSystem } from './../../domain/system.aggregate';
 import { 
     SystemId, 
     SystemTenantId, 

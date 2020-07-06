@@ -22,7 +22,7 @@ import {
     ChannelOverviewDeletedAt
     
 } from './../../domain/value-objects';
-import { IChannelOverviewRepository } from '../../domain/channel-overview.repository';
+import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
 import { BplusItSappiChannelOverview } from './../../domain/channel-overview.entity';
 
 @Injectable()

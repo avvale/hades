@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ISystemRepository } from './../../domain/system.repository';
-import { BplusItSappiSystem } from './../../domain/system.entity';
+import { BplusItSappiSystem } from './../../domain/system.aggregate';
 import { BplusItSappiSystemModel } from './sequelize-system.model';
 import { SequelizeSystemMapper } from './sequelize-system.mapper';
 

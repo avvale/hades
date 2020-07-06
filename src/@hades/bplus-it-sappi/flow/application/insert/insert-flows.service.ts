@@ -27,7 +27,7 @@ import {
     FlowDeletedAt
     
 } from './../../domain/value-objects';
-import { IFlowRepository } from '../../domain/flow.repository';
+import { IFlowRepository } from './../../domain/flow.repository';
 import { BplusItSappiFlow } from './../../domain/flow.aggregate';
 
 @Injectable()

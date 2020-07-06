@@ -25,7 +25,7 @@ import {
     MessageOverviewDeletedAt
     
 } from './../../domain/value-objects';
-import { IMessageOverviewRepository } from '../../domain/message-overview.repository';
+import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { BplusItSappiMessageOverview } from './../../domain/message-overview.entity';
 
 @Injectable()

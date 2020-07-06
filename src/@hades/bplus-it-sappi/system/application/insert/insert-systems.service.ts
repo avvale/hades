@@ -15,8 +15,8 @@ import {
     SystemDeletedAt
     
 } from './../../domain/value-objects';
-import { ISystemRepository } from '../../domain/system.repository';
-import { BplusItSappiSystem } from './../../domain/system.entity';
+import { ISystemRepository } from './../../domain/system.repository';
+import { BplusItSappiSystem } from './../../domain/system.aggregate';
 
 @Injectable()
 export class InsertSystemsService

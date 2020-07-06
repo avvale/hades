@@ -14,7 +14,7 @@ import {
     ExecutionDeletedAt
     
 } from './../../domain/value-objects';
-import { IExecutionRepository } from '../../domain/execution.repository';
+import { IExecutionRepository } from './../../domain/execution.repository';
 import { BplusItSappiExecution } from './../../domain/execution.entity';
 
 @Injectable()

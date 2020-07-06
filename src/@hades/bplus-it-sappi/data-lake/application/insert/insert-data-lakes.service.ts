@@ -9,7 +9,7 @@ import {
     DataLakeDeletedAt
     
 } from './../../domain/value-objects';
-import { IDataLakeRepository } from '../../domain/data-lake.repository';
+import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { BplusItSappiDataLake } from './../../domain/data-lake.entity';
 
 @Injectable()

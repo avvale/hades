@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ISystemRepository } from './../../domain/system.repository';
-import { BplusItSappiSystem } from './../../domain/system.entity';
+import { BplusItSappiSystem } from './../../domain/system.aggregate';
 
 @Injectable()
 export class GetSystemsService

@@ -16,7 +16,7 @@ import {
     
 } from './../../domain/value-objects';
 import { ISystemRepository } from './../../domain/system.repository';
-import { BplusItSappiSystem } from './../../domain/system.entity';
+import { BplusItSappiSystem } from './../../domain/system.aggregate';
 
 @Injectable()
 export class UpdateSystemService
