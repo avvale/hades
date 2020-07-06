@@ -4,7 +4,7 @@ import { BplusItSappiFlowModel } from '@hades/bplus-it-sappi/flow/infrastructure
 import { BplusItSappiContactModel } from '@hades/bplus-it-sappi/contact/infrastructure/sequelize/sequelize-contact.model';
 
 @Table({ modelName: 'bplus_it_sappi_flows_contacts', freezeTableName: true })
-export class BplusItSappiFlowsContactsIdModel extends Model<BplusItSappiFlowsContactsIdModel> 
+export class BplusItSappiFlowsContactsModel extends Model<BplusItSappiFlowsContactsModel> 
 {   
     @ForeignKey(() => BplusItSappiFlowModel)
     @Column({

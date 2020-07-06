@@ -86,7 +86,7 @@ aggregateProperties:
   - name: data
     type: json
     nullable: true
-  - name: contactsIdId
+  - name: contactsId
     type: relationship
     relationship: many-to-many
     relationshipAggregate: BplusItSappiContact
