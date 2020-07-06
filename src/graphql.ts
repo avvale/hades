@@ -246,6 +246,42 @@ export interface BplusItSappiUpdateChannelInput {
     lastChangedAt?: GraphQLTimestamp;
 }
 
+export interface BplusItSappiCreateContactInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    roleId?: string;
+    roleName?: GraphQLString;
+    name: GraphQLString;
+    surname?: GraphQLString;
+    email: GraphQLString;
+    mobile?: GraphQLString;
+    area?: GraphQLString;
+    hasConsentEmail: GraphQLBoolean;
+    hasConsentMobile: GraphQLBoolean;
+    isActive: GraphQLBoolean;
+    flowsId: BplusItSappiFlow[];
+}
+
+export interface BplusItSappiUpdateContactInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    roleId?: string;
+    roleName?: GraphQLString;
+    name?: GraphQLString;
+    surname?: GraphQLString;
+    email?: GraphQLString;
+    mobile?: GraphQLString;
+    area?: GraphQLString;
+    hasConsentEmail?: GraphQLBoolean;
+    hasConsentMobile?: GraphQLBoolean;
+    isActive?: GraphQLBoolean;
+    flowsId?: BplusItSappiFlow[];
+}
+
 export interface BplusItSappiCreateDataLakeInput {
     id: string;
     data: JSON;
@@ -543,6 +579,10 @@ export interface IQuery {
     bplusItSappiFindChannelById(id?: string): BplusItSappiChannel | Promise<BplusItSappiChannel>;
     bplusItSappiGetChannels(query?: QueryStatementInput[]): BplusItSappiChannel[] | Promise<BplusItSappiChannel[]>;
     bplusItSappiPaginateChannels(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindContact(query?: QueryStatementInput[]): BplusItSappiContact | Promise<BplusItSappiContact>;
+    bplusItSappiFindContactById(id?: string): BplusItSappiContact | Promise<BplusItSappiContact>;
+    bplusItSappiGetContacts(query?: QueryStatementInput[]): BplusItSappiContact[] | Promise<BplusItSappiContact[]>;
+    bplusItSappiPaginateContacts(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindDataLake(query?: QueryStatementInput[]): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiFindDataLakeById(id?: string): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiGetDataLakes(query?: QueryStatementInput[]): BplusItSappiDataLake[] | Promise<BplusItSappiDataLake[]>;
@@ -617,6 +657,11 @@ export interface IMutation {
     bplusItSappiUpdateChannel(payload: BplusItSappiUpdateChannelInput): BplusItSappiChannel | Promise<BplusItSappiChannel>;
     bplusItSappiDeleteChannelById(id: string): BplusItSappiChannel | Promise<BplusItSappiChannel>;
     bplusItSappiDeleteChannels(query?: QueryStatementInput[]): BplusItSappiChannel[] | Promise<BplusItSappiChannel[]>;
+    bplusItSappiCreateContact(payload: BplusItSappiCreateContactInput): BplusItSappiContact | Promise<BplusItSappiContact>;
+    bplusItSappiInsertContacts(payload: BplusItSappiCreateContactInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateContact(payload: BplusItSappiUpdateContactInput): BplusItSappiContact | Promise<BplusItSappiContact>;
+    bplusItSappiDeleteContactById(id: string): BplusItSappiContact | Promise<BplusItSappiContact>;
+    bplusItSappiDeleteContacts(query?: QueryStatementInput[]): BplusItSappiContact[] | Promise<BplusItSappiContact[]>;
     bplusItSappiCreateDataLake(payload: BplusItSappiCreateDataLakeInput): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiInsertDataLakes(payload: BplusItSappiCreateDataLakeInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateDataLake(payload: BplusItSappiUpdateDataLakeInput): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
@@ -761,6 +806,27 @@ export interface BplusItSappiChannel {
     responsibleUserAccountName?: GraphQLString;
     lastChangeUserAccount?: GraphQLString;
     lastChangedAt?: GraphQLTimestamp;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiContact {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    roleId?: string;
+    roleName?: GraphQLString;
+    name: GraphQLString;
+    surname?: GraphQLString;
+    email: GraphQLString;
+    mobile?: GraphQLString;
+    area?: GraphQLString;
+    hasConsentEmail: GraphQLBoolean;
+    hasConsentMobile: GraphQLBoolean;
+    isActive: GraphQLBoolean;
+    flows: BplusItSappiFlow[];
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

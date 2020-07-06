@@ -1,0 +1,84 @@
+version: 1.0.0
+boundedContextName: bplus-it-sappi
+moduleName: contact
+moduleNames: contacts
+aggregateProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminTenant
+    relationshipModuleSection: admin/tenant
+  - name: system_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: BplusItSappiSystem
+    relationshipModuleSection: bplus-it-sappi/system
+  - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: role_id
+    type: id
+    length: 36
+    nullable: true
+    relationship: many-to-one
+    relationshipAggregate: BplusItSappiRole
+    relationshipModuleSection: bplus-it-sappi/role
+  - name: role_name
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: surname
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: email
+    type: varchar
+    maxLength: 120
+    nullable: false
+  - name: mobile
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: area
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: has_consent_email
+    type: boolean
+    nullable: false
+  - name: has_consent_mobile
+    type: boolean
+    nullable: false
+  - name: is_active
+    type: boolean
+    nullable: false
+  - name: flowsId
+    type: relationship
+    relationship: many-to-many
+    relationshipAggregate: BplusItSappiFlow
+    relationshipModuleSection: bplus-it-sappi/flow
+    intermediateModel: BplusItSappiFlowsContactsModel
+    intermediateModelModuleSection: bplus-it-sappi/flow
+    intermediateModelFile: flows-contacts
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true
