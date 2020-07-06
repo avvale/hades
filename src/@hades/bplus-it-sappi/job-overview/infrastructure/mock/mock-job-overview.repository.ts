@@ -22,7 +22,7 @@ import {
     JobOverviewDeletedAt
     
 } from '@hades/bplus-it-sappi/job-overview/domain/value-objects';
-import { BplusItSappiJobOverview } from './../../domain/job-overview.entity';
+import { BplusItSappiJobOverview } from './../../domain/job-overview.aggregate';
 import { jobsOverview } from './../seeds/job-overview.seed';
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
-import { BplusItSappiMessageOverview } from './../../domain/message-overview.entity';
+import { BplusItSappiMessageOverview } from './../../domain/message-overview.aggregate';
 import { MessageOverviewId } from './../../domain/value-objects';
 
 @Injectable()

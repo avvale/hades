@@ -13,7 +13,7 @@ import {
     RoleDeletedAt
     
 } from '@hades/bplus-it-sappi/role/domain/value-objects';
-import { BplusItSappiRole } from './../../domain/role.entity';
+import { BplusItSappiRole } from './../../domain/role.aggregate';
 import { roles } from './../seeds/role.seed';
 
 @Injectable()

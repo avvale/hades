@@ -2,7 +2,7 @@
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { BplusItSappiRole } from './role.entity';
+import { BplusItSappiRole } from './role.aggregate';
 import { RoleId } from './value-objects';
 
 export abstract class IRoleRepository implements IRepository<BplusItSappiRole>

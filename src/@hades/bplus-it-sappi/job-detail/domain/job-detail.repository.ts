@@ -2,7 +2,7 @@
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { BplusItSappiJobDetail } from './job-detail.entity';
+import { BplusItSappiJobDetail } from './job-detail.aggregate';
 import { JobDetailId } from './value-objects';
 
 export abstract class IJobDetailRepository implements IRepository<BplusItSappiJobDetail>

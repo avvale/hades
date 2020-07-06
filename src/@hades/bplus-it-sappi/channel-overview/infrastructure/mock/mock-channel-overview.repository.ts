@@ -25,7 +25,7 @@ import {
     ChannelOverviewDeletedAt
     
 } from '@hades/bplus-it-sappi/channel-overview/domain/value-objects';
-import { BplusItSappiChannelOverview } from './../../domain/channel-overview.entity';
+import { BplusItSappiChannelOverview } from './../../domain/channel-overview.aggregate';
 import { channelsOverview } from './../seeds/channel-overview.seed';
 
 @Injectable()

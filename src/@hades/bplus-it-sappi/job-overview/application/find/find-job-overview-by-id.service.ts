@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
-import { BplusItSappiJobOverview } from './../../domain/job-overview.entity';
+import { BplusItSappiJobOverview } from './../../domain/job-overview.aggregate';
 import { JobOverviewId } from './../../domain/value-objects';
 
 @Injectable()

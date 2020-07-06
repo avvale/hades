@@ -12,7 +12,7 @@ import {
     DataLakeDeletedAt
     
 } from '@hades/bplus-it-sappi/data-lake/domain/value-objects';
-import { BplusItSappiDataLake } from './../../domain/data-lake.entity';
+import { BplusItSappiDataLake } from './../../domain/data-lake.aggregate';
 import { dataLakes } from './../seeds/data-lake.seed';
 
 @Injectable()

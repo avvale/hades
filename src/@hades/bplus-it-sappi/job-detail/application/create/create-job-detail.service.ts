@@ -20,7 +20,7 @@ import {
     
 } from './../../domain/value-objects';
 import { IJobDetailRepository } from './../../domain/job-detail.repository';
-import { BplusItSappiJobDetail } from './../../domain/job-detail.entity';
+import { BplusItSappiJobDetail } from './../../domain/job-detail.aggregate';
 
 @Injectable()
 export class CreateJobDetailService

@@ -2,7 +2,7 @@
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { BplusItSappiExecution } from './execution.entity';
+import { BplusItSappiExecution } from './execution.aggregate';
 import { ExecutionId } from './value-objects';
 
 export abstract class IExecutionRepository implements IRepository<BplusItSappiExecution>

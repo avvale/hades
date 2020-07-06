@@ -15,7 +15,7 @@ import {
     
 } from './../../domain/value-objects';
 import { IExecutionRepository } from './../../domain/execution.repository';
-import { BplusItSappiExecution } from './../../domain/execution.entity';
+import { BplusItSappiExecution } from './../../domain/execution.aggregate';
 
 @Injectable()
 export class InsertExecutionsService

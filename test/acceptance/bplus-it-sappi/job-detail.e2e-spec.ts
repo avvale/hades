@@ -4,6 +4,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { IJobDetailRepository } from '@hades/bplus-it-sappi/job-detail/domain/job-detail.repository';
 import { MockJobDetailRepository } from '@hades/bplus-it-sappi/job-detail/infrastructure/mock/mock-job-detail.repository';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
+import { AdminModule } from './../../../src/apps/admin/admin.module';
 import { BplusItSappiModule } from './../../../src/apps/bplus-it-sappi/bplus-it-sappi.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
@@ -18,6 +19,7 @@ describe('job-detail', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
+                    AdminModule,
                     BplusItSappiModule,
                     GraphQLConfigModule,
                     SequelizeModule.forRootAsync({

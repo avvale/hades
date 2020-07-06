@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IJobDetailRepository } from './../../domain/job-detail.repository';
-import { BplusItSappiJobDetail } from './../../domain/job-detail.entity';
+import { BplusItSappiJobDetail } from './../../domain/job-detail.aggregate';
 import { BplusItSappiJobDetailModel } from './sequelize-job-detail.model';
 import { SequelizeJobDetailMapper } from './sequelize-job-detail.mapper';
 

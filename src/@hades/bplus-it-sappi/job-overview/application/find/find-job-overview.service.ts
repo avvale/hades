@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
-import { BplusItSappiJobOverview } from './../../domain/job-overview.entity';
+import { BplusItSappiJobOverview } from './../../domain/job-overview.aggregate';
 
 @Injectable()
 export class FindJobOverviewService

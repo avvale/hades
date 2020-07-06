@@ -2,7 +2,7 @@
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { BplusItSappiChannelOverview } from './channel-overview.entity';
+import { BplusItSappiChannelOverview } from './channel-overview.aggregate';
 import { ChannelOverviewId } from './value-objects';
 
 export abstract class IChannelOverviewRepository implements IRepository<BplusItSappiChannelOverview>

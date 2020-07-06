@@ -22,7 +22,7 @@ import {
     JobDetailDeletedAt
     
 } from '@hades/bplus-it-sappi/job-detail/domain/value-objects';
-import { BplusItSappiJobDetail } from './../../domain/job-detail.entity';
+import { BplusItSappiJobDetail } from './../../domain/job-detail.aggregate';
 import { jobsDetail } from './../seeds/job-detail.seed';
 
 @Injectable()

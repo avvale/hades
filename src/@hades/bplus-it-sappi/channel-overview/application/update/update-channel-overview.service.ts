@@ -23,7 +23,7 @@ import {
     
 } from './../../domain/value-objects';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
-import { BplusItSappiChannelOverview } from './../../domain/channel-overview.entity';
+import { BplusItSappiChannelOverview } from './../../domain/channel-overview.aggregate';
 
 @Injectable()
 export class UpdateChannelOverviewService

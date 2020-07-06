@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
-import { BplusItSappiDataLake } from './../../domain/data-lake.entity';
+import { BplusItSappiDataLake } from './../../domain/data-lake.aggregate';
 import { BplusItSappiDataLakeModel } from './sequelize-data-lake.model';
 import { SequelizeDataLakeMapper } from './sequelize-data-lake.mapper';
 

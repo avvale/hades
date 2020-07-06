@@ -2,7 +2,7 @@
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { BplusItSappiDataLake } from './data-lake.entity';
+import { BplusItSappiDataLake } from './data-lake.aggregate';
 import { DataLakeId } from './value-objects';
 
 export abstract class IDataLakeRepository implements IRepository<BplusItSappiDataLake>

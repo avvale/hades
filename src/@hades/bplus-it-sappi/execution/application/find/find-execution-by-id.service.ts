@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IExecutionRepository } from './../../domain/execution.repository';
-import { BplusItSappiExecution } from './../../domain/execution.entity';
+import { BplusItSappiExecution } from './../../domain/execution.aggregate';
 import { ExecutionId } from './../../domain/value-objects';
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { SequelizeMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
-import { BplusItSappiMessageOverview } from './../../domain/message-overview.entity';
+import { BplusItSappiMessageOverview } from './../../domain/message-overview.aggregate';
 import { 
     MessageOverviewId, 
     MessageOverviewTenantId, 

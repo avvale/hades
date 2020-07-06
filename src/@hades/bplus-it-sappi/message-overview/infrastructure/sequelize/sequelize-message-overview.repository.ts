@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
-import { BplusItSappiMessageOverview } from './../../domain/message-overview.entity';
+import { BplusItSappiMessageOverview } from './../../domain/message-overview.aggregate';
 import { BplusItSappiMessageOverviewModel } from './sequelize-message-overview.model';
 import { SequelizeMessageOverviewMapper } from './sequelize-message-overview.mapper';
 

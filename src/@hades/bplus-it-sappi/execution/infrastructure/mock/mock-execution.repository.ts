@@ -17,7 +17,7 @@ import {
     ExecutionDeletedAt
     
 } from '@hades/bplus-it-sappi/execution/domain/value-objects';
-import { BplusItSappiExecution } from './../../domain/execution.entity';
+import { BplusItSappiExecution } from './../../domain/execution.aggregate';
 import { executions } from './../seeds/execution.seed';
 
 @Injectable()

@@ -11,7 +11,7 @@ import {
     
 } from './../../domain/value-objects';
 import { IRoleRepository } from './../../domain/role.repository';
-import { BplusItSappiRole } from './../../domain/role.entity';
+import { BplusItSappiRole } from './../../domain/role.aggregate';
 
 @Injectable()
 export class CreateRoleService

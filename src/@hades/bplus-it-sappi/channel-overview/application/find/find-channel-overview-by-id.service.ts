@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
-import { BplusItSappiChannelOverview } from './../../domain/channel-overview.entity';
+import { BplusItSappiChannelOverview } from './../../domain/channel-overview.aggregate';
 import { ChannelOverviewId } from './../../domain/value-objects';
 
 @Injectable()

@@ -22,7 +22,7 @@ import { UpdatedJobOverviewEvent } from './../application/events/updated-job-ove
 import { DeletedJobOverviewEvent } from './../application/events/deleted-job-overview.event';
 import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.aggregate';
-import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.entity';
+import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.aggregate';
 
 export class BplusItSappiJobOverview extends AggregateRoot
 {

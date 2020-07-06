@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
-import { BplusItSappiDataLake } from './../../domain/data-lake.entity';
+import { BplusItSappiDataLake } from './../../domain/data-lake.aggregate';
 
 @Injectable()
 export class GetDataLakesService

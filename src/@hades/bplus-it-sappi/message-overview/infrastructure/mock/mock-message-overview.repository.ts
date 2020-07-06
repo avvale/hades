@@ -28,7 +28,7 @@ import {
     MessageOverviewDeletedAt
     
 } from '@hades/bplus-it-sappi/message-overview/domain/value-objects';
-import { BplusItSappiMessageOverview } from './../../domain/message-overview.entity';
+import { BplusItSappiMessageOverview } from './../../domain/message-overview.aggregate';
 import { messagesOverview } from './../seeds/message-overview.seed';
 
 @Injectable()

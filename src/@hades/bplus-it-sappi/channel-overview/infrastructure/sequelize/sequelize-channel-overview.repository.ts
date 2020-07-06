@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
-import { BplusItSappiChannelOverview } from './../../domain/channel-overview.entity';
+import { BplusItSappiChannelOverview } from './../../domain/channel-overview.aggregate';
 import { BplusItSappiChannelOverviewModel } from './sequelize-channel-overview.model';
 import { SequelizeChannelOverviewMapper } from './sequelize-channel-overview.mapper';
 

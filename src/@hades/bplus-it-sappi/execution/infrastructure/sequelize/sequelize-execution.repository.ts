@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IExecutionRepository } from './../../domain/execution.repository';
-import { BplusItSappiExecution } from './../../domain/execution.entity';
+import { BplusItSappiExecution } from './../../domain/execution.aggregate';
 import { BplusItSappiExecutionModel } from './sequelize-execution.model';
 import { SequelizeExecutionMapper } from './sequelize-execution.mapper';
 

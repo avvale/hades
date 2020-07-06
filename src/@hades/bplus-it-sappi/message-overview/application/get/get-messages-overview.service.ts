@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
-import { BplusItSappiMessageOverview } from './../../domain/message-overview.entity';
+import { BplusItSappiMessageOverview } from './../../domain/message-overview.aggregate';
 
 @Injectable()
 export class GetMessagesOverviewService

@@ -25,7 +25,7 @@ import { UpdatedChannelOverviewEvent } from './../application/events/updated-cha
 import { DeletedChannelOverviewEvent } from './../application/events/deleted-channel-overview.event';
 import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.aggregate';
-import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.entity';
+import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.aggregate';
 
 export class BplusItSappiChannelOverview extends AggregateRoot
 {

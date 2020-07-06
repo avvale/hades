@@ -2,7 +2,7 @@
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { BplusItSappiMessageOverview } from './message-overview.entity';
+import { BplusItSappiMessageOverview } from './message-overview.aggregate';
 import { MessageOverviewId } from './value-objects';
 
 export abstract class IMessageOverviewRepository implements IRepository<BplusItSappiMessageOverview>

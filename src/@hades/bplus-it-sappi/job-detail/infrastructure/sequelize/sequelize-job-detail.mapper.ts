@@ -1,6 +1,6 @@
 import { SequelizeMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
-import { BplusItSappiJobDetail } from './../../domain/job-detail.entity';
+import { BplusItSappiJobDetail } from './../../domain/job-detail.aggregate';
 import { 
     JobDetailId, 
     JobDetailTenantId, 

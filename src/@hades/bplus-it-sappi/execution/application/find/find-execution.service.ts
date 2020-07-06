@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { IExecutionRepository } from './../../domain/execution.repository';
-import { BplusItSappiExecution } from './../../domain/execution.entity';
+import { BplusItSappiExecution } from './../../domain/execution.aggregate';
 
 @Injectable()
 export class FindExecutionService

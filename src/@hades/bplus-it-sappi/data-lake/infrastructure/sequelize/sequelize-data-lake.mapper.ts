@@ -1,6 +1,6 @@
 import { SequelizeMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
-import { BplusItSappiDataLake } from './../../domain/data-lake.entity';
+import { BplusItSappiDataLake } from './../../domain/data-lake.aggregate';
 import { 
     DataLakeId, 
     DataLakeData, 

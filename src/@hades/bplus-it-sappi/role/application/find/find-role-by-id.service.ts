@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IRoleRepository } from './../../domain/role.repository';
-import { BplusItSappiRole } from './../../domain/role.entity';
+import { BplusItSappiRole } from './../../domain/role.aggregate';
 import { RoleId } from './../../domain/value-objects';
 
 @Injectable()

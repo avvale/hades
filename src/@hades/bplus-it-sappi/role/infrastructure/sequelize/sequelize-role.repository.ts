@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IRoleRepository } from './../../domain/role.repository';
-import { BplusItSappiRole } from './../../domain/role.entity';
+import { BplusItSappiRole } from './../../domain/role.aggregate';
 import { BplusItSappiRoleModel } from './sequelize-role.model';
 import { SequelizeRoleMapper } from './sequelize-role.mapper';
 
