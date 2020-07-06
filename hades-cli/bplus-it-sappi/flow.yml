@@ -1,0 +1,97 @@
+version: 1.0.0
+boundedContextName: bplus-it-sappi
+moduleName: flow
+moduleNames: flows
+aggregateProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminTenant
+    relationshipModuleSection: admin/tenant
+  - name: system_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: BplusItSappiSystem
+    relationshipModuleSection: bplus-it-sappi/system
+  - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: scenario
+    type: varchar
+    maxLength: 60
+    nullable: false
+  - name: party
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: component
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: interface_name
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: interface_namespace
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: iflow_name
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: responsible_user_account
+    type: varchar
+    maxLength: 20
+    nullable: true
+  - name: last_change_user_account
+    type: varchar
+    maxLength: 20
+    nullable: true
+  - name: last_changed_at
+    type: timestamp
+    nullable: true
+  - name: folder_path
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: description
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: application
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: is_critical
+    type: boolean
+    nullable: false
+  - name: is_complex
+    type: boolean
+    nullable: false
+  - name: field_group_id
+    type: id
+    length: 36
+    nullable: true
+    relationship: none
+  - name: data
+    type: json
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

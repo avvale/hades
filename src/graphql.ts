@@ -212,6 +212,52 @@ export interface BplusItSappiUpdateExecutionInput {
     executedAt?: GraphQLTimestamp;
 }
 
+export interface BplusItSappiCreateFlowInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    scenario: GraphQLString;
+    party?: GraphQLString;
+    component: GraphQLString;
+    interfaceName: GraphQLString;
+    interfaceNamespace: GraphQLString;
+    iflowName?: GraphQLString;
+    responsibleUserAccount?: GraphQLString;
+    lastChangeUserAccount?: GraphQLString;
+    lastChangedAt?: GraphQLTimestamp;
+    folderPath?: GraphQLString;
+    description?: GraphQLString;
+    application?: GraphQLString;
+    isCritical: GraphQLBoolean;
+    isComplex: GraphQLBoolean;
+    fieldGroupId?: string;
+    data?: JSON;
+}
+
+export interface BplusItSappiUpdateFlowInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    scenario?: GraphQLString;
+    party?: GraphQLString;
+    component?: GraphQLString;
+    interfaceName?: GraphQLString;
+    interfaceNamespace?: GraphQLString;
+    iflowName?: GraphQLString;
+    responsibleUserAccount?: GraphQLString;
+    lastChangeUserAccount?: GraphQLString;
+    lastChangedAt?: GraphQLTimestamp;
+    folderPath?: GraphQLString;
+    description?: GraphQLString;
+    application?: GraphQLString;
+    isCritical?: GraphQLBoolean;
+    isComplex?: GraphQLBoolean;
+    fieldGroupId?: string;
+    data?: JSON;
+}
+
 export interface BplusItSappiCreateJobDetailInput {
     id: string;
     tenantId: string;
@@ -399,6 +445,10 @@ export interface IQuery {
     bplusItSappiFindExecutionById(id?: string): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiGetExecutions(query?: QueryStatementInput[]): BplusItSappiExecution[] | Promise<BplusItSappiExecution[]>;
     bplusItSappiPaginateExecutions(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindFlow(query?: QueryStatementInput[]): BplusItSappiFlow | Promise<BplusItSappiFlow>;
+    bplusItSappiFindFlowById(id?: string): BplusItSappiFlow | Promise<BplusItSappiFlow>;
+    bplusItSappiGetFlows(query?: QueryStatementInput[]): BplusItSappiFlow[] | Promise<BplusItSappiFlow[]>;
+    bplusItSappiPaginateFlows(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindJobDetail(query?: QueryStatementInput[]): BplusItSappiJobDetail | Promise<BplusItSappiJobDetail>;
     bplusItSappiFindJobDetailById(id?: string): BplusItSappiJobDetail | Promise<BplusItSappiJobDetail>;
     bplusItSappiGetJobsDetail(query?: QueryStatementInput[]): BplusItSappiJobDetail[] | Promise<BplusItSappiJobDetail[]>;
@@ -462,6 +512,11 @@ export interface IMutation {
     bplusItSappiUpdateExecution(payload: BplusItSappiUpdateExecutionInput): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiDeleteExecutionById(id: string): BplusItSappiExecution | Promise<BplusItSappiExecution>;
     bplusItSappiDeleteExecutions(query?: QueryStatementInput[]): BplusItSappiExecution[] | Promise<BplusItSappiExecution[]>;
+    bplusItSappiCreateFlow(payload: BplusItSappiCreateFlowInput): BplusItSappiFlow | Promise<BplusItSappiFlow>;
+    bplusItSappiInsertFlows(payload: BplusItSappiCreateFlowInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateFlow(payload: BplusItSappiUpdateFlowInput): BplusItSappiFlow | Promise<BplusItSappiFlow>;
+    bplusItSappiDeleteFlowById(id: string): BplusItSappiFlow | Promise<BplusItSappiFlow>;
+    bplusItSappiDeleteFlows(query?: QueryStatementInput[]): BplusItSappiFlow[] | Promise<BplusItSappiFlow[]>;
     bplusItSappiCreateJobDetail(payload: BplusItSappiCreateJobDetailInput): BplusItSappiJobDetail | Promise<BplusItSappiJobDetail>;
     bplusItSappiInsertJobsDetail(payload: BplusItSappiCreateJobDetailInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateJobDetail(payload: BplusItSappiUpdateJobDetailInput): BplusItSappiJobDetail | Promise<BplusItSappiJobDetail>;
@@ -572,6 +627,32 @@ export interface BplusItSappiExecution {
     monitoringStartAt: GraphQLTimestamp;
     monitoringEndAt: GraphQLTimestamp;
     executedAt: GraphQLTimestamp;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiFlow {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    scenario: GraphQLString;
+    party?: GraphQLString;
+    component: GraphQLString;
+    interfaceName: GraphQLString;
+    interfaceNamespace: GraphQLString;
+    iflowName?: GraphQLString;
+    responsibleUserAccount?: GraphQLString;
+    lastChangeUserAccount?: GraphQLString;
+    lastChangedAt?: GraphQLTimestamp;
+    folderPath?: GraphQLString;
+    description?: GraphQLString;
+    application?: GraphQLString;
+    isCritical: GraphQLBoolean;
+    isComplex: GraphQLBoolean;
+    fieldGroupId?: string;
+    data?: JSON;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
