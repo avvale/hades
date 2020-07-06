@@ -6,10 +6,11 @@ import { BplusItSappiChannelOverviewHandlers, BplusItSappiChannelOverviewService
 import { BplusItSappiMessageOverviewHandlers, BplusItSappiMessageOverviewServices, BplusItSappiMessageOverviewModel, IMessageOverviewRepository, SequelizeMessageOverviewRepository, MessageOverviewSagas } from './message-overview';
 import { BplusItSappiRoleHandlers, BplusItSappiRoleServices, BplusItSappiRoleModel, IRoleRepository, SequelizeRoleRepository, RoleSagas } from './role';
 import { BplusItSappiJobDetailHandlers, BplusItSappiJobDetailServices, BplusItSappiJobDetailModel, IJobDetailRepository, SequelizeJobDetailRepository, JobDetailSagas } from './job-detail';
-import { BplusItSappiFlowHandlers, BplusItSappiFlowServices, BplusItSappiFlowModel, IFlowRepository, SequelizeFlowRepository, FlowSagas } from './flow';
 import { BplusItSappiChannelHandlers, BplusItSappiChannelServices, BplusItSappiChannelModel, IChannelRepository, SequelizeChannelRepository, ChannelSagas } from './channel';
 import { BplusItSappiModuleHandlers, BplusItSappiModuleServices, BplusItSappiModuleModel, IModuleRepository, SequelizeModuleRepository, ModuleSagas } from './module';
 import { BplusItSappiContactHandlers, BplusItSappiContactServices, BplusItSappiContactModel, IContactRepository, SequelizeContactRepository, ContactSagas } from './contact';
+import { BplusItSappiFlowHandlers, BplusItSappiFlowServices, BplusItSappiFlowModel, IFlowRepository, SequelizeFlowRepository, FlowSagas } from './flow';
+import { BplusItSappiFlowsContactsModel } from './flow';
 
 export const BplusItSappiHandlers = [
     ...BplusItSappiSystemHandlers,
@@ -20,10 +21,10 @@ export const BplusItSappiHandlers = [
     ...BplusItSappiMessageOverviewHandlers,
     ...BplusItSappiRoleHandlers,
     ...BplusItSappiJobDetailHandlers,
-    ...BplusItSappiFlowHandlers,
     ...BplusItSappiChannelHandlers,
     ...BplusItSappiModuleHandlers,
-    ...BplusItSappiContactHandlers
+    ...BplusItSappiContactHandlers,
+    ...BplusItSappiFlowHandlers
 ];
 export const BplusItSappiServices = [
     ...BplusItSappiSystemServices,
@@ -34,10 +35,10 @@ export const BplusItSappiServices = [
     ...BplusItSappiMessageOverviewServices,
     ...BplusItSappiRoleServices,
     ...BplusItSappiJobDetailServices,
-    ...BplusItSappiFlowServices,
     ...BplusItSappiChannelServices,
     ...BplusItSappiModuleServices,
-    ...BplusItSappiContactServices
+    ...BplusItSappiContactServices,
+    ...BplusItSappiFlowServices
 ];
 export const BplusItSappiModels = [
     BplusItSappiSystemModel,
@@ -48,10 +49,11 @@ export const BplusItSappiModels = [
     BplusItSappiMessageOverviewModel,
     BplusItSappiRoleModel,
     BplusItSappiJobDetailModel,
-    BplusItSappiFlowModel,
     BplusItSappiChannelModel,
     BplusItSappiModuleModel,
-    BplusItSappiContactModel
+    BplusItSappiContactModel,
+    BplusItSappiFlowModel,
+    BplusItSappiFlowsContactsModel
 ];
 export const BplusItSappiRepositories = [
     {
@@ -87,10 +89,6 @@ export const BplusItSappiRepositories = [
         useClass: SequelizeJobDetailRepository
     },
     {
-        provide: IFlowRepository,
-        useClass: SequelizeFlowRepository
-    },
-    {
         provide: IChannelRepository,
         useClass: SequelizeChannelRepository
     },
@@ -101,6 +99,10 @@ export const BplusItSappiRepositories = [
     {
         provide: IContactRepository,
         useClass: SequelizeContactRepository
+    },
+    {
+        provide: IFlowRepository,
+        useClass: SequelizeFlowRepository
     }
 ];
 export const BplusItSappiSagas = [
@@ -112,8 +114,8 @@ export const BplusItSappiSagas = [
     MessageOverviewSagas,
     RoleSagas,
     JobDetailSagas,
-    FlowSagas,
     ChannelSagas,
     ModuleSagas,
-    ContactSagas
+    ContactSagas,
+    FlowSagas
 ];

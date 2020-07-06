@@ -25,6 +25,7 @@ import {
     FlowIsComplex, 
     FlowFieldGroupId, 
     FlowData, 
+    FlowContactsIdId, 
     FlowCreatedAt, 
     FlowUpdatedAt, 
     FlowDeletedAt
@@ -87,6 +88,7 @@ export class MockFlowRepository implements IFlowRepository
                     new FlowIsComplex(itemCollection.isComplex),
                     new FlowFieldGroupId(itemCollection.fieldGroupId),
                     new FlowData(itemCollection.data),
+                    new FlowContactsIdId(itemCollection.contactsIdId),
                     new FlowCreatedAt(itemCollection.createdAt),
                     new FlowUpdatedAt(itemCollection.updatedAt),
                     new FlowDeletedAt(itemCollection.deletedAt),

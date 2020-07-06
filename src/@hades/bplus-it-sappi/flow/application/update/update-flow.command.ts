@@ -21,6 +21,7 @@ export class UpdateFlowCommand
         public readonly isComplex?: boolean,
         public readonly fieldGroupId?: string,
         public readonly data?: any,
+        public readonly contactsIdId?: string[],
         
     ) {}
 }

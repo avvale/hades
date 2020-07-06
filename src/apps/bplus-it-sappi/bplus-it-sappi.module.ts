@@ -10,10 +10,10 @@ import { BplusItSappiChannelOverviewControllers, BplusItSappiChannelOverviewReso
 import { BplusItSappiMessageOverviewControllers, BplusItSappiMessageOverviewResolvers } from './message-overview';
 import { BplusItSappiRoleControllers, BplusItSappiRoleResolvers } from './role';
 import { BplusItSappiJobDetailControllers, BplusItSappiJobDetailResolvers } from './job-detail';
-import { BplusItSappiFlowControllers, BplusItSappiFlowResolvers } from './flow';
 import { BplusItSappiChannelControllers, BplusItSappiChannelResolvers } from './channel';
 import { BplusItSappiModuleControllers, BplusItSappiModuleResolvers } from './module';
 import { BplusItSappiContactControllers, BplusItSappiContactResolvers } from './contact';
+import { BplusItSappiFlowControllers, BplusItSappiFlowResolvers } from './flow';
 
 @Module({
     imports: [
@@ -29,10 +29,10 @@ import { BplusItSappiContactControllers, BplusItSappiContactResolvers } from './
         ...BplusItSappiMessageOverviewControllers,
         ...BplusItSappiRoleControllers,
         ...BplusItSappiJobDetailControllers,
-        ...BplusItSappiFlowControllers,
         ...BplusItSappiChannelControllers,
         ...BplusItSappiModuleControllers,
-        ...BplusItSappiContactControllers
+        ...BplusItSappiContactControllers,
+        ...BplusItSappiFlowControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
@@ -47,10 +47,10 @@ import { BplusItSappiContactControllers, BplusItSappiContactResolvers } from './
         ...BplusItSappiMessageOverviewResolvers,
         ...BplusItSappiRoleResolvers,
         ...BplusItSappiJobDetailResolvers,
-        ...BplusItSappiFlowResolvers,
         ...BplusItSappiChannelResolvers,
         ...BplusItSappiModuleResolvers,
-        ...BplusItSappiContactResolvers
+        ...BplusItSappiContactResolvers,
+        ...BplusItSappiFlowResolvers
     ]
 })
 export class BplusItSappiModule {}

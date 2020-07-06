@@ -35,6 +35,7 @@ export class FindFlowQueryHandler implements IQueryHandler<FindFlowQuery>
                 flow.isComplex.value,
                 flow.fieldGroupId.value,
                 flow.data.value,
+                flow.contactsIdId.value,
                 flow.createdAt.value,
                 flow.updatedAt.value,
                 flow.deletedAt.value,

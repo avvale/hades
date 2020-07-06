@@ -29,7 +29,7 @@ import { DeleteFlowsService } from './application/delete/delete-flows.service';
 
 // models
 export { BplusItSappiFlowModel } from './infrastructure/sequelize/sequelize-flow.model';
-
+export { BplusItSappiFlowsContactsModel } from './infrastructure/sequelize/sequelize-flows-contacts.model';
 
 // repository
 export { IFlowRepository } from './domain/flow.repository';

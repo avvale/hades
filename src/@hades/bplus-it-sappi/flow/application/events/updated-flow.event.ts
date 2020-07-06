@@ -21,6 +21,7 @@ export class UpdatedFlowEvent
         public readonly isComplex: boolean,
         public readonly fieldGroupId: string,
         public readonly data: any,
+        public readonly contactsIdId: string[],
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,

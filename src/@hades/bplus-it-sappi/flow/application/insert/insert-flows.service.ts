@@ -22,6 +22,7 @@ import {
     FlowIsComplex, 
     FlowFieldGroupId, 
     FlowData, 
+    FlowContactsIdId, 
     FlowCreatedAt, 
     FlowUpdatedAt, 
     FlowDeletedAt
@@ -60,6 +61,7 @@ export class InsertFlowsService
             isComplex: FlowIsComplex,
             fieldGroupId: FlowFieldGroupId,
             data: FlowData,
+            contactsIdId: FlowContactsIdId,
             
         } []
     ): Promise<void>
@@ -86,6 +88,7 @@ export class InsertFlowsService
             flow.isComplex,
             flow.fieldGroupId,
             flow.data,
+            flow.contactsIdId,
             new FlowCreatedAt(Utils.nowTimestamp()),
             new FlowUpdatedAt(Utils.nowTimestamp()),
             null

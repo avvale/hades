@@ -39,6 +39,7 @@ export class UpdateFlowResolver
             payload.isComplex,
             payload.fieldGroupId,
             payload.data,
+            payload.contactsIdId,
             
         ));
         

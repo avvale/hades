@@ -22,6 +22,7 @@ import {
     FlowIsComplex, 
     FlowFieldGroupId, 
     FlowData, 
+    FlowContactsIdId, 
     FlowCreatedAt, 
     FlowUpdatedAt, 
     FlowDeletedAt
@@ -55,6 +56,7 @@ export class SequelizeFlowMapper implements SequelizeMapper
                     new FlowIsComplex(item.isComplex),
                     new FlowFieldGroupId(item.fieldGroupId),
                     new FlowData(item.data),
+                    new FlowContactsIdId(item.contactsIdId),
                     new FlowCreatedAt(item.createdAt),
                     new FlowUpdatedAt(item.updatedAt),
                     new FlowDeletedAt(item.deletedAt),
@@ -84,6 +86,7 @@ export class SequelizeFlowMapper implements SequelizeMapper
             new FlowIsComplex(flow.isComplex),
             new FlowFieldGroupId(flow.fieldGroupId),
             new FlowData(flow.data),
+            new FlowContactsIdId(flow.contactsIdId),
             new FlowCreatedAt(flow.createdAt),
             new FlowUpdatedAt(flow.updatedAt),
             new FlowDeletedAt(flow.deletedAt),

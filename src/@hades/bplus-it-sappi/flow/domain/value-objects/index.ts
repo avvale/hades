@@ -18,6 +18,7 @@ export { FlowIsCritical } from './flow-is-critical';
 export { FlowIsComplex } from './flow-is-complex';
 export { FlowFieldGroupId } from './flow-field-group-id';
 export { FlowData } from './flow-data';
+export { FlowContactsIdId } from './flow-contacts-id-id';
 export { FlowCreatedAt } from './flow-created-at';
 export { FlowUpdatedAt } from './flow-updated-at';
 export { FlowDeletedAt } from './flow-deleted-at';

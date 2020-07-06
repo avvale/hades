@@ -21,7 +21,8 @@ import {
     FlowIsCritical, 
     FlowIsComplex, 
     FlowFieldGroupId, 
-    FlowData
+    FlowData, 
+    FlowContactsIdId
     
 } from './../../domain/value-objects';
 
@@ -56,6 +57,7 @@ export class UpdateFlowCommandHandler implements ICommandHandler<UpdateFlowComma
             new FlowIsComplex(command.isComplex, { undefinable: true }),
             new FlowFieldGroupId(command.fieldGroupId),
             new FlowData(command.data),
+            new FlowContactsIdId(command.contactsIdId, { undefinable: true }),
             
         )
     }

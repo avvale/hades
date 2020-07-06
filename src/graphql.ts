@@ -333,6 +333,7 @@ export interface BplusItSappiCreateFlowInput {
     isComplex: GraphQLBoolean;
     fieldGroupId?: string;
     data?: JSON;
+    contactsIdId: BplusItSappiContact[];
 }
 
 export interface BplusItSappiUpdateFlowInput {
@@ -356,6 +357,7 @@ export interface BplusItSappiUpdateFlowInput {
     isComplex?: GraphQLBoolean;
     fieldGroupId?: string;
     data?: JSON;
+    contactsIdId?: BplusItSappiContact[];
 }
 
 export interface BplusItSappiCreateJobDetailInput {
@@ -874,6 +876,7 @@ export interface BplusItSappiFlow {
     isComplex: GraphQLBoolean;
     fieldGroupId?: string;
     data?: JSON;
+    contactsId: BplusItSappiContact[];
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

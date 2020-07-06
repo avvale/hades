@@ -2,6 +2,9 @@ import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany } f
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
+import { BplusItSappiContactModel } from '@hades/bplus-it-sappi/contact/infrastructure/sequelize/sequelize-contact.model';
+    
+import { BplusItSappiFlowsContactsModel } from '@hades/bplus-it-sappi/flow/infrastructure/sequelize/sequelize-flows-contacts.model';
 
 @Table({ modelName: 'bplus_it_sappi_flow', freezeTableName: true })
 export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel> 
@@ -216,6 +219,11 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     data: any;
         
              
+        
+            
+    @BelongsToMany(() => BplusItSappiContactModel, () => BplusItSappiFlowsContactsModel)
+    contactsId: BplusItSappiContactModel[];
+     
         
     @Column({
         field: 'created_at',

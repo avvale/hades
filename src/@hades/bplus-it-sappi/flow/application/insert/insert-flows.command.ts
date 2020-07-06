@@ -22,6 +22,7 @@ export class InsertFlowsCommand
             isComplex: boolean,
             fieldGroupId?: string,
             data?: any,
+            contactsIdId: string[],
             
         } []
     ) {}
