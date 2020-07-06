@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { DeleteLangsController } from './delete-langs.controller';
+import { UpdateLangController } from './update-lang.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed'
 
-describe('DeleteLangsController', () => 
+describe('UpdateLangController', () => 
 {
-    let controller: DeleteLangsController;
+    let controller: UpdateLangController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -16,7 +16,7 @@ describe('DeleteLangsController', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                DeleteLangsController
+                UpdateLangController
             ],
             providers: [
                 {
@@ -34,27 +34,28 @@ describe('DeleteLangsController', () =>
             ]
         }).compile();
 
-        controller  = module.get<DeleteLangsController>(DeleteLangsController);
+        controller  = module.get<UpdateLangController>(UpdateLangController);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteLangsController should be defined', () => 
+    it('UpdateLangController should be defined', () => 
     {
         expect(controller).toBeDefined();
     });
 
+    // Test get method
     describe('main', () => 
     {
-        it('DeleteLangsController should be defined', () => 
+        it('UpdateLangController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an langs deleted', async () => 
+        it('should return an lang created', async () => 
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
-            expect(await controller.main([])).toBe(langs);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
+            expect(await controller.main(langs[0])).toBe(langs[0]);
         });
     });
 });
