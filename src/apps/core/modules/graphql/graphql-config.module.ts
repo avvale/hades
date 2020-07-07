@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import * as GraphQLJSON from 'graphql-type-json';
+import GraphQLJSON from 'graphql-type-json';
 import { Any } from './scalars/any.scalar';
 import { Json } from './scalars/json.scalar';
 import { Upload } from './scalars/upload.scalar';
