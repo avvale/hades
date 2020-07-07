@@ -1,0 +1,17 @@
+export { ContactId } from './contact-id';
+export { ContactTenantId } from './contact-tenant-id';
+export { ContactSystemId } from './contact-system-id';
+export { ContactSystemName } from './contact-system-name';
+export { ContactRoleId } from './contact-role-id';
+export { ContactRoleName } from './contact-role-name';
+export { ContactName } from './contact-name';
+export { ContactSurname } from './contact-surname';
+export { ContactEmail } from './contact-email';
+export { ContactMobile } from './contact-mobile';
+export { ContactArea } from './contact-area';
+export { ContactHasConsentEmail } from './contact-has-consent-email';
+export { ContactHasConsentMobile } from './contact-has-consent-mobile';
+export { ContactIsActive } from './contact-is-active';
+export { ContactCreatedAt } from './contact-created-at';
+export { ContactUpdatedAt } from './contact-updated-at';
+export { ContactDeletedAt } from './contact-deleted-at';

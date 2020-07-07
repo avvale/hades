@@ -261,7 +261,6 @@ export interface BplusItSappiCreateContactInput {
     hasConsentEmail: GraphQLBoolean;
     hasConsentMobile: GraphQLBoolean;
     isActive: GraphQLBoolean;
-    flowsId: BplusItSappiFlow[];
 }
 
 export interface BplusItSappiUpdateContactInput {
@@ -279,7 +278,6 @@ export interface BplusItSappiUpdateContactInput {
     hasConsentEmail?: GraphQLBoolean;
     hasConsentMobile?: GraphQLBoolean;
     isActive?: GraphQLBoolean;
-    flowsId?: BplusItSappiFlow[];
 }
 
 export interface BplusItSappiCreateDataLakeInput {
@@ -333,7 +331,6 @@ export interface BplusItSappiCreateFlowInput {
     isComplex: GraphQLBoolean;
     fieldGroupId?: string;
     data?: JSON;
-    contactsId: GraphQLString[];
 }
 
 export interface BplusItSappiUpdateFlowInput {
@@ -357,7 +354,6 @@ export interface BplusItSappiUpdateFlowInput {
     isComplex?: GraphQLBoolean;
     fieldGroupId?: string;
     data?: JSON;
-    contactsIdId?: BplusItSappiContact[];
 }
 
 export interface BplusItSappiCreateJobDetailInput {
@@ -828,7 +824,6 @@ export interface BplusItSappiContact {
     hasConsentEmail: GraphQLBoolean;
     hasConsentMobile: GraphQLBoolean;
     isActive: GraphQLBoolean;
-    flows: BplusItSappiFlow[];
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -876,7 +871,6 @@ export interface BplusItSappiFlow {
     isComplex: GraphQLBoolean;
     fieldGroupId?: string;
     data?: JSON;
-    contacts: BplusItSappiContact[];
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

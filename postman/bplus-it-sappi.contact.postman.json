@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "9807a006-4b98-46a1-94ef-336a47813348",
+		"name"          : "@hades - bplus-it-sappi/contact",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - bplusItSappiCreateContact",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiCreateContactInput!)\n{\n\tbplusItSappiCreateContact (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\troleId\n\t\troleName\n\t\tname\n\t\tsurname\n\t\temail\n\t\tmobile\n\t\tarea\n\t\thasConsentEmail\n\t\thasConsentMobile\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"f0150f22-5d78-44ef-9051-af1f0e215b0a\", \n\t\t\"tenantId\": \"d2966e7d-0ae0-4ade-87b0-55b8c2d396f5\", \n\t\t\"systemId\": \"121df1c1-08f1-42c0-bae4-4221ac7625aa\", \n\t\t\"systemName\": \"pmggqitrjxng7wx27p7j\", \n\t\t\"roleId\": \"0db2de56-02b0-4e93-9015-bebd4285b8ea\", \n\t\t\"roleName\": \"3kk7phs5bmeznwa1rybezdh1hveqrf1ug1k97ej1yei9dwqom18zak7926fi9myfhzli0mfwsllvxq9wfdw98eud91eu6dn5rr388jq4zjcxz1a7crlykpgkqyigyx9ybf25qs27t9kdpczy5ggba6uss5hew0ae5g4h5l0fpc3v6djzc31ta1ihsilgzwdm3a57wa1kuwxgkyq8v5ojrpn4v72mnxxrozoa4wsqodgqb3uuwn8loq82fj7q16l\", \n\t\t\"name\": \"8u045qmdea0e37z14ds0pxr018uxfv5fk7qqgawbuibjp6wxcvt8e4y0ef4f0q55e3ncdh9mm1xj2137cee9v22qwe4sw80lxsqvgylm4h29uobjav2nlq85azd6c7apclt3bztn0fzkm8b163lsrplrylybg4xpwtm1sh7rydempzt828doxg52sdeceecj69bgs32e0bz6zftul77vslkun7p99a14wvetne302r1xilvtyey7pj7o8nrawut\", \n\t\t\"surname\": \"7gj508xf2g6mxdzpmhndi144x316ae38osg8awekz0p4frzttn92af1da2x7vd14qhuygltmkyczpadg4ikmg3ja4ffkvfl9914j7jhslwh6mql4e1npapjox8yakxz4ti5t50r4ofznyxwzuyaemnl9qp3b65vx9d8hlgelv4ufm0kb25ymfmq0w2gzl4utyrzpj9el1p159md5gm8zbi6hantyhblq3bhzgqmnyb9aqddwyltusptmcf1as38\", \n\t\t\"email\": \"5u13alyyq7k4yxn9ou6zl362hzrr3i7dyuixzvkyjfduscagwjso6obkw0233uqmegfkd7v6k4n04tzzp1c8pemyc51qx71r7omfqx2430yz0e2omz2vvd3e\", \n\t\t\"mobile\": \"3pliu9b2yi709klvawya6hlt0ll005idvdka71082jswcym1q0gmzw6roeiu\", \n\t\t\"area\": \"78hu6dg9x4figpv3xl9p9llqy656dl8wbrspmwgvnpx9bdyvod9f20q1utnaxxgkonkmb08arrghgt6xnh8ekxqhiz92j0wgrnwniujvw14rwcmf7fgq5uzakk6inntbg73ux6lgz789xgfk1hmmnqjzotbpxv9dbbmagk6ci8v50f1oemj0yu2ewlduyogg3ag4qzxvfa8pbcqgm30qth8hsetczrzpbytunlqy04a1is6ixdtnr590i3kh8f7\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": false\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiInsertContacts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[BplusItSappiCreateContactInput]!)\n{\n\tbplusItSappiInsertContacts (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"f2638330-03fc-4ff5-8020-f334882be05c\", \n\t\t\t\"tenantId\": \"31871d20-1f06-462c-9bd0-e7cd76ae84da\", \n\t\t\t\"systemId\": \"de2a9811-93d6-405b-a22e-60493c84c40e\", \n\t\t\t\"systemName\": \"c907tdbww4b4g24rncyw\", \n\t\t\t\"roleId\": \"85f9be72-3afd-4d87-8a44-a5f4b2c43841\", \n\t\t\t\"roleName\": \"r46werpcpxt2mtcskvuwyu5hvoxlnpipws62xsyhar21y6wj9oruvmw70j8i24vrvggezkuxzrpf9y2qj5osfp4ofic6qlpgces6tg7hoh799jckhxhbhegt1adcyef91nogjgn93stnhamxlcbc8niib3msav7i81vfneoynwozqxqg52p4t6k1atnac46b3w6ixvnvd53owlcsnhj00j0swbfplhgjemleb43fjagyx5z3jgux0sr9bqyawj2\", \n\t\t\t\"name\": \"ttovcp5beayutt92idsd7ps7jb1i5kfrjelsbmusbqclr86ntnk59bo61v6ogt7g8qdapp40pczleel40pojbctdq8xs0mc1gmthofn9b7nvrbnvfp1m727a0dseis7u0szi52os2bskfrknqeqpxyi0wlglnq6fuzcbg7w1cuox8sfh22vkidm89uvrzutmgfcqdh4aef7f3v6f6cyb4r1aiwpvtyri1c9vlcyxufpsw18ntwrnl9306y82um5\", \n\t\t\t\"surname\": \"ldlnq4dfq98026ryu4n5v1ci9ivvqtjysjz6ypd0ae1qu0dx57bn2vytl5mnu5vx1hh9767jwtxxnbu94kcr954wmcbhbq4zuvdxxf5kst7fwqaokt1cn9gtpirw8a6qtq1a3ql2608r9vykq36e5oty8f34ys88qow1jblsgywz7ismu3xy6somaulbmvfdynt40wcwmy9i3y2svfj5fmug7bn5nd81jwb95tvsb1xbs9sdsi8nyrlrklxgbsi\", \n\t\t\t\"email\": \"p9m7yc85ye6e5nuzumi4b4qjpaibtpmcinzoge4oppbn4488ilo11do0l62ays7oxr7k5u13v2emw6t3o2z4ashcu14eaek3t3ldqgju6ri7r2hflbvtxrki\", \n\t\t\t\"mobile\": \"vx82du4hadpa0gt2pztwzswoy0yq4xvlig1i8bzoly8vzs1mrfasfwa1bu91\", \n\t\t\t\"area\": \"lo97gsswegkuehu03i48mc2a2b7ty75xxlh3jcrojyqrq01g751i8x4ueeez8yhtg6h2vay243g3if293ae4jkissssw9uzew7edy5j66smzevdpuw4fuo09pm7nq8rofxvx0z7ddg7goh5yt9vxifd6wy0yyeeciceabq8cdas68std33nh8hab363y9rlbe0s11sxwkxgw0giomqfcmcomhlij00fjkxeox06ig2d8yvdu3yot5p1u5gjqla3\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": false, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"447f3ece-8e4d-4355-99ed-cf872813f350\", \n\t\t\t\"tenantId\": \"4f540e35-616c-4acc-b69e-63dd9caac47d\", \n\t\t\t\"systemId\": \"944b82c1-1ddc-4ff9-825d-0a435859ae22\", \n\t\t\t\"systemName\": \"rmkasy9s80d0j2dtyolc\", \n\t\t\t\"roleId\": \"1b0d991f-cbb4-47e7-ae65-7f297db06837\", \n\t\t\t\"roleName\": \"j19i2ftfnc9yxlriud3gifj0vuu1avoya5eh41xqaum51fialu8putjvuruwm3yas3n4xnskz9gfesli85e6hjjly66x61jukkwmw152vvx5ac966gvzv84o9cm5ezcd2rx5rp6jovzuerbjf9i9pdpwkvpmr47omzgmk6gaprh6m4121stgb790ydo1usruwvcgr5ovzye3xbdeknemzayhisuu8fp4dof40gy5n8jop8gufbqh7aulbah7jhj\", \n\t\t\t\"name\": \"py49f73tcipt7kbo9692d241v45cw2crwtqbxnlkaw3hfkcinhywsni495rt8a1pnvgew5aw3vndvf4l4yntvcpdl1t89i5608uakbfk0lf2jmjjpp50ac8fl9o4ulk2z06gwwvs497h5oda419yj3i91yuovqsed8pehlwrg8rzt55cygzrl2njrrxw217zk161z86csrozb7pmzdbxvmciyizop9i5edlixe1w2xr2zmvr1nhmldahsa7qjkl\", \n\t\t\t\"surname\": \"ny4gjidp8ae5i1cbr9vijeyxzcv9v2aita5gipzdfvxyadav3n307ict0m92l3n3xppk8v5bjn1q5f1oiex6zabcd34k98mzzo2rd99cc5wn6afv2x1vmrn98okf6d7undlgafpdsktz5qufp8a09yz6k0jtn8i4iczfkzztadlb4p37rm9fqlhnuqzemq2csrwhzj5k6k6ztjwjlnwv6b0667z32upx9giqdprgvc2ed8d50wgzp0ikulebh9e\", \n\t\t\t\"email\": \"1uct96fc43kxzsusiwh8nbbqsoznsmz7nsd1rtn6c6xronhiopzf0nigifzdqpr2b5iljtg4kfrzdit6ac4bnnm4ai4xkqwx20xljgwsty0l2qbd27942bp5\", \n\t\t\t\"mobile\": \"ps69toot5v8azse2ck3xtsth3zgxoeqlnmc40ehutvqpb7o0vlb7plhnbuvj\", \n\t\t\t\"area\": \"p1fvtbarp5v2qgpnsy13k0lmic6098y6dq7zskacx3g4pl79ikfvjr8cff2fo48lvzkoldgo4tj1sxml4oapd9ty4wzxheuyw3suh8hhcde9fmgrqpoa8v88mv2qyc1eblydl3mcojv0z9d6trccbcga57fran535876wqyugh64i09fuocrxtm1tbpiz9ps7fcb8cvn9fctc5etjfse2jgpiz5o4z7pv8s0znux71mo6wyl5gx0oqweswcuu6o\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"410201dd-ea5f-4c3a-be4f-b42b5957e634\", \n\t\t\t\"tenantId\": \"8e68e3a4-faec-4cd6-a7de-815ff3f77d7f\", \n\t\t\t\"systemId\": \"9a0d5c30-adba-40a7-aa9b-79f72205c84c\", \n\t\t\t\"systemName\": \"j2yk3q7zp0zkn9kfod3b\", \n\t\t\t\"roleId\": \"8a7e7d91-c33b-4d81-a62c-45a820ff8293\", \n\t\t\t\"roleName\": \"9l34pf9bgzeg8t4uk373h1b6marl1tjha0wcrfa36y747pvm7plqni1pdswqtvvqjyip07sxcusbs6alc8nzr0lqudbihzgcvgjme020ph2ia2t836iop4p4gy0urva7j80sieodpcpqfe2ic12bxkb4cjbwxsmdmbn4jymhmc5phky37tudmm4dp4rrtfjltyqo955qm04rz3bda4qtvxyhjpftkbeqntzh6rq9pbv75oh5ihbupof0choj443\", \n\t\t\t\"name\": \"tz8mrfiszfw8dd6qqdx9wo588qeuwiygh1ftmckq49jmjtd81g2j5yplq1unuinc3aztjq95jfmlxltzpp4e8tj9ox1gacuxbjyxuwp9yu28k4wno4gyzwn2dxon73cxb45w2o0gbphd1h1y0xa3zblzlq84zvba3hkxefo8japk96wg52yib4k8vwnn1unf8ph644slz18pna2fjrf2tdpu2x8x7m3ezvw7mt80zweqq91520mwa53uhqkmaej\", \n\t\t\t\"surname\": \"5awuaw5j0oc70yyt9h444lstmlbjvvr9yc89d2fge7gmd9npmnq9mvtybqo9q8k5z47ra4m224i0nv39fnrr1vmdjzv6q7smcfaqqfupfn6pb8qgzqdkiksdx04mdma69165uyai98y8c8iyf45sml171iunz94iwerr99o2j9nyo4r177i2zhm69d5fn7emdq30g6mhn97d80hnpogc4erm88w93aqeadsylreenksriegppqkcnqhfekq5dqv\", \n\t\t\t\"email\": \"anjco5vp2nwv2412m7fu3lqifzz8vxg7o07ky87kpzb9bouz59gmh65q7czrc7o98ln75l0ihc12phowgl3c3vjzxx8yfrg3boll7e8tkdyoxwfoe9tcngck\", \n\t\t\t\"mobile\": \"ci6igup5z2ohkk1nmps42nshgx4seklrid3i988s6fy57j7wtimfn52y8s4m\", \n\t\t\t\"area\": \"4dg8augssbmzfvgk0fcrug5org2x56r9ze75m1aaxndior9kcanbf8epg9tvieh01nnm4zk2csgsheny6xd7m0xvy4l78k8ovv2cxfyad2kkv2vzmc8x62ji1gz8fintor146u4djk9oft0ohjrmtc3m97bn6r3dnx1h2yfi8lam9wa1snj4onlgcpyq98nzo7a20186oun4mpfy67x0jbfk7cuqvgkjdowhrb3lspab7zc911cuswhsm3oeueh\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a61d0ebd-2c84-407f-be74-87a96be0433d\", \n\t\t\t\"tenantId\": \"9d680086-4718-4582-bc10-1570967113d5\", \n\t\t\t\"systemId\": \"f2d9b1e4-b0b2-42a1-970f-ac82e5222433\", \n\t\t\t\"systemName\": \"h137onvii1a7xwztfz3r\", \n\t\t\t\"roleId\": \"956ec342-10f5-48a2-8548-7be124ffe1c9\", \n\t\t\t\"roleName\": \"kgt0zv4lmea7psp7b4ozfxgh063f6mfwjayvyqflsyt4fzwgw1hk02bixzn2fd66zxp397c8hlsn6z2orxyxvf3iyirqajyicc0bqs3f3ut06vk59baojb4uu5va9m0mk1nzh6rjqtpgqupbh7cucja36tako84cy8mx9e1dbil065mppctu23osiq0j9cf5s93jf2nair7pnmd10ekeyioe9y1pdt46kumbza1edruhemq9i28dviyv0zsjh6o\", \n\t\t\t\"name\": \"92mdhwpbn2dwom8rb6qgk27eb90biaoi9srtrwauyoa54ckwbdn8d9a4gfgkq1jqj44zg5o9wsl3l9kiul2acw9udpr4vmh5e3oqozentx0syn2wceoi3bqocl663ij9ailg2bg6wtje75e3dbtzh0dctwmcne8nnw03klocgsju5yi9hbf615heiqh28q3t2t7wd7zk1ymxdfphcmagpxpbejewmiw0ec4igrslogxsd206fdsnupcz53nkwdy\", \n\t\t\t\"surname\": \"l11dp5jlcgng0g2mtz20jhbg4jhqi3xb6koshble5tve822voqo4t5gkegr79y8hlcq0a0l10b1g2ak18xhy7jbf7mmh6la6muavgf6vt8za74lkffosgf44nn6yplroaz5fdc18dfhe751wi5t25oodmz4b8b61z7tauyui5azqnabp84s0kesjp8cfhmv64oflqfpnjqf9o9mkyx9wevbhrxh4v8byqzpuopn0y0le18h0tlryf7u8fqmo6yq\", \n\t\t\t\"email\": \"b5s3tma0wg7px6tfllpzkcrsegcyt05oete2h9azkjbhz0dvpmg0own39ymwz1f4tuazvktgnu76hol897pukgnv5xmy6ci2b4urccra6e02wro44mdb98xf\", \n\t\t\t\"mobile\": \"0w9e43m23gg89kr63m3yx756w0txyahx6wwbclo699ke5jlfzk72yk3b02tt\", \n\t\t\t\"area\": \"rrquiad0u2h4alcow9vsxzl9io6g7eyn38iysu2yb2i941ha2y1ebjlbw4muyimiow9b9g3jchgu86twsyok5ofyxmer0p5fb3unuaysx9it5js1fb5axydtj1iypnfg7u2uad6h89nyagus5v3ixrvjy12whhw230ilu8yc2zxlxjakzffv7q516zt5w8etyf0d6o4u5s2owqtwlt6bk5xir00604qkwh3vebwe7uwc1p4cet0p71nxlajslml\", \n\t\t\t\"hasConsentEmail\": false, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2cfe112b-f37a-45d6-83c6-e9705524d71d\", \n\t\t\t\"tenantId\": \"1317ec78-47b6-45b1-b14a-89ca3cbdaf28\", \n\t\t\t\"systemId\": \"69cb41fa-2f1a-4550-a069-a5822f31eefd\", \n\t\t\t\"systemName\": \"ll1aaaveabmhwjg25i7r\", \n\t\t\t\"roleId\": \"06a12614-9858-4760-9cd9-e74b93d0bf8c\", \n\t\t\t\"roleName\": \"350xi14hmjokrou2lbgswjg5hsyr35mj5wezm874pdv73tgqhgch44gfk36az8lkgp03mg6v38vnlqwl66vnw5kuqra3o0fo13jux2b7mcd11ar8rkiylqftzmb426iszb5rqdqyjfap4kcz192gugn95kiqumliitos8edy6lehmtzvb8a1izk6d1y2avwfly6zurvshq1b8t67vdo76zabc6bbqfih14pj45oi1852drnz86759cfs92b4y3j\", \n\t\t\t\"name\": \"2eif71cynqe8y20gpo3pglyortq2xolb2ycfq69pr0pulufteakxto74y202c8pz9kdga39qojq1y9tbt16ad4vdlt1igpz8g7o7e9a79l9540h903zke47u3vx94cr8fw0u7w9ti5j58m5ixrayyqgqsbgqlobdql8ixpvygbftzovhunuydimk9z1zdauy1u4b9tb8cyepujuxmr05fulnc4vmzrbmpuailu01q0tb5l8bhg3kt62vc83exaz\", \n\t\t\t\"surname\": \"o2xsqrvkecq38sxe9rw27ps3lmwh5be9n9o07mexmkjd6om4yb31cn9vs1oy95b5e5pafwgzjunuhl6slb2hwdtz2q3yokuxwg25g23fl1jq7ddvzxkhqo67xkmkv9kw4d60oueuwksp3pjayjntakdxmsev2n3bw3hwzgdyru96p6e9pxtp2lo917hf81wphe04409fj4dixq425q5dg8hhu7yglomj0go6ez2bwjesdwnuyki1p1ttleffayx\", \n\t\t\t\"email\": \"itabcg5cqbyhmhoyjj443it9qqpu88xybkqurfqzwb0ng3ygmsxv4odiw1dn611g5v0dbn8p8mkpfsvme6kpw1ia7aaga9ut0ihx21lm7ifwbyy8lerqwvq4\", \n\t\t\t\"mobile\": \"az4vn7tdz7ylx1bx7d3xsln696ekkh4yt4275ud60pekb6nwwmybfd2zv7aw\", \n\t\t\t\"area\": \"p0ssoi2nzatq58l7lfqpclnk34op5ohlhjhp9j8b73x567fcpdfevk942x0ejlhodsh7higt6pq034lvd4tbbcbzj7871frxab887pqlrr7h30djivahfqk7bl2q32j2wu0fax9dy4jt5cz9l270u2bdfogxbstg7x545sscjbj4nmxna917sshkpmykwi6pab00b34dn171rhrxcd5xe4mlpo8brq344oo4gzv2fywje0h6naqaxqkwpacazh1\", \n\t\t\t\"hasConsentEmail\": false, \n\t\t\t\"hasConsentMobile\": false, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5cac4dd4-b0e4-424c-9ce9-8fab1dcbd4e2\", \n\t\t\t\"tenantId\": \"fcbd16e0-549f-40fa-ab1a-03bae7876c87\", \n\t\t\t\"systemId\": \"3e7a7b6e-4caf-4b45-b19e-2e5d9883476d\", \n\t\t\t\"systemName\": \"tsizbp3cshkhbvj98ley\", \n\t\t\t\"roleId\": \"207bfd24-4015-454e-80ed-904a90eb1092\", \n\t\t\t\"roleName\": \"2xz2jh4jd10bg9zen5zips4d8nt0jwgh5jn4o00ubhmgfn8fq0oebxjambt4s6rrmmf59szzk1ov0gg0bhyphm9405usmdarf5t355pzfu579kgybrgu0w7wizidlt3snx7pjfx1085hjutmac45sb6pwin7oagjmgbvatfura3x9jlx8innqqdcxrmpywp2xtkqsj9yc1jtuqj0fkxwwozscklvsbug3bmbhxzqojckf7fdz6ia538kludla78\", \n\t\t\t\"name\": \"46b9d1l8xuvkf869sgvazkuxcz1izcvfputzflw23wfp00oz46p050zxtko2m33q738ochsnkr82s082fz6vdw838as8hodkfz5lqbmfqal0myhz64mhr04gjyb2y6xgbm9fo6ezqysgp2sbb0c0094rszmnintoes8qpra9ulssiaa2x43hbtbmqe77lgtualc9prk8firgixa9xpnfe23h0a1ekn53ofad4fsgt6rhyufjsfixji42gv8ejxg\", \n\t\t\t\"surname\": \"brjvxhe3de2ik7h9t1l7njgw9k7e653pytyhiakyg3799k51ff0zxoi0n284of4kqo2he3xwelvrbqkfo5ohue44b9x53g4p9301cbw7k505a2fpgnevay7o0mbq4jakdxmvtg4ufupnjlxcwf6tim2545vcvrasrdc2t3vv41cuo6akasz5yi7ufwt54isquxqdtxqyoxckt309l1vb12odn55x291050b8p7fy7g3fdhasy0uhdu7g26rv1o9\", \n\t\t\t\"email\": \"7r0dr1hw73gqsg8e132umejqa3xb5lcmlwlxcmry4o4yqhzrm9cbqspmgmlfbk0rlemf5rw198x6h8oc54ew32zeif5a6h7439618n560y3feyjr80dgzo67\", \n\t\t\t\"mobile\": \"2lvkwhvbadhur1vamkqbeghd5jx20dip6b1tnep4gg5uteqxlsw7ysnxo8rw\", \n\t\t\t\"area\": \"uuau9fa4c3bb4m7i1ybqlsp5y9d8z4mjz415kpfjwothdt2k9mzotfek7py7zerv4kgicaoxv9xftv4igye08vv6txxaayaxgc1ndtby4pc1ctz4fvr727ndsi97ltvrumoq1mme3u9bnjulq0polhv4oy3smv3mp30kczwewjsdn056vw856ilmtkb7zctrjxpsvxulxdtpudezsjjhxhmt7ozgsuf8inrb53cygsbmo0mdwnh9d3h5zn9w6za\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bfd9ae20-3a5d-42b7-921e-2530b007088a\", \n\t\t\t\"tenantId\": \"1db6140e-219f-466f-976c-9e7b416bd48d\", \n\t\t\t\"systemId\": \"12432683-df0e-4388-9b3c-c85c386b6bf6\", \n\t\t\t\"systemName\": \"oyx33l5vmuanbrgo2tgd\", \n\t\t\t\"roleId\": \"0a067b3a-1ae8-4222-947b-378f7ab8f6d8\", \n\t\t\t\"roleName\": \"eco1697zh2o6jgnlxf9ix4h8vbtc8qmbwqmzue9ntrk2yawfu226gm0ipy46ednsc7eacctoei5qahyshk9rcql44mnjchsng74eyjzaeicmejro8enorh3j9na9jrqtjv9j65ljsb0d2vgaibg4h4yz59w9qlohlmyht6c8qt9fskqzta12r90soxagzxrlhj3qyjuanfecmk91q831pd9sb67nkzze9scveqku5oh9okdus1eeulm9p2p2y17\", \n\t\t\t\"name\": \"dr680m7nk1x8ocxm5z0x2uzcsr94xs5l1ydkn0mh2qv8b11eg2vmh9sh51fzf6d5k077tp2ldbsuwkewj4092eyd3q7gcl1knlgrh6z3bbbkhulgdkdv5vg8fadqtvebc4umoqvl2jxm4m2puj7pr612avwd2yx16fxke2s6n9068oefw9j6dmj5sgiodil71hnzzjhwqnj19jw27kuk8izid2frkn77atn0mz6wtriuyi1hyhzwz9rqj3cuo02\", \n\t\t\t\"surname\": \"v5xoqidhsvw4uyqpw696z0s9zi4s48ntg39gffxpiwwpxt47j83ysvmr3pvcsl059vd9gkf2q4wqtqb0u8zt8nx7a90f4t995pqjqe9onf8619aqmndxrrm9jgtg3tx57q7httfjuok3g1y1hrzf5thjorebm8mt0nywdarqsyujk2s0rsboi4u6cldgl0nimnafi1x8ly0v31qjz8hwqpx6fpf5jpbgfmcyomcpk6aq5lrv34eh320cbdnzbeo\", \n\t\t\t\"email\": \"15o5twimz7bpycmqv1z4e0nkoa1roxjuknf117uq7h8z3gad6ehnv8kgze8swkcwf73luybe2yfstmp6gdk9t0r7lq9oy1xcm2gldctuk3cznr76w1lu3vk8\", \n\t\t\t\"mobile\": \"jsy06kuln7e29ayn51p75i1tpgqw7jnsslxal0js0ry0qkqegybbkr4bz4oq\", \n\t\t\t\"area\": \"futwvlgp79t2byiuzomkpfxlqnrqxfujmf08mfba1w77rnmh92tthb93l9y29ufcqbmx7sbrr047lhvcgr4tbm3ub4ez3xa1uef30xgpamm8f91ps7rpzwv5zgcw158ri72xt20x9xunpuf75ym7i9hh5ht47tit0tbzsptfub1xo32q3ag8i1o1oumu4xbjhpfnhvahvjjhckfyu2jy5mkzxz5klk67uelri3njmt46l7h1l5oqa6qykpmvp96\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": false, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"62bc1e00-140c-4fa4-a512-a0a16cfd92c6\", \n\t\t\t\"tenantId\": \"c7b2f4e8-c7bf-4f1f-85b1-545e7498fda1\", \n\t\t\t\"systemId\": \"dbfe9dbe-cdd6-4196-b146-71746510fbed\", \n\t\t\t\"systemName\": \"d2wa7ez4gj653x04t04l\", \n\t\t\t\"roleId\": \"36e8efe7-1c3e-4faf-baff-212356c30c50\", \n\t\t\t\"roleName\": \"0ey51c3xgxhqlaz99crhge8rr6vt9omkb7lxrrhg32mkusp8f3bnonkgy1wj81u7pb9i3lcu5o3exkpch2esw92i4pctad3etuyxvshibcm3iwu0vkpactwyiobmrobo6ggsaj84b2rvqcbqhttv40ns4ndbekq8a7szyi9kzm0kjxzntzkx4pimyf7636vhh76g1wqyv11qq7ga0n2jw4jx4n9gr541xa4hpyh1phhk9g8to3pzyh23j74ff7j\", \n\t\t\t\"name\": \"j8la13fmy51lgym875g4bkj0n1f20nmllyy5hz97iy67lum5bi9mv0dnio628knoer1t2sr59kmh35s1cq9sfjq8il5fr5rkt8sqlxo098yxq3zymnh9g117m55a2h3l3tghpakxyc48obft1ws6oe9en9bixiuwc312v1ho2t4i60m91e9lmv0wytscjk9lvxwgbhtjgfzxmcee6qmjxb9egkmxn19m5hi67ih235acss43mnkpokw09vtlk3t\", \n\t\t\t\"surname\": \"w1s1fqqeb4vjb5js65648ovthcxa0w7oy62fszq9ndzl73vuwc01fbtu3fe39327d45jajbzjx873p1edro95zzaspx8z6yo09k96m6twp7b1rblvcxdpseloj9yvrc5do44jy30tmqubdu6yhrf5sllxg2jkdq49atalfxz5zrnum520hym4o71bvskex7rwg1dfa3anhhze8ozgzt1u9tshzrulci1lp61zseir6rggkvymcjro9ptq5o0fls\", \n\t\t\t\"email\": \"a6eaouk3bv885wyfmf0j3tlveuequrxf76b82xp6s12rdnfrhebegryccx4zrbsjrc0dohy33q41gvcnv2jzcgy9p4w4z728s6j1qzlyrq1s12bqr3wh6kt2\", \n\t\t\t\"mobile\": \"1q9jk5sowtm30cem4xgthhh5h9giyxwizwpwewoclgrpvgc7aob28drrpsf8\", \n\t\t\t\"area\": \"spfbekq3fd64y21mn8a4z9cgkvs7ff2yxj1c2y3s7ft4fs3raru1tlewgzveustfnff15mys2vltr8dnj2mx9cvvzwjdwzwv2fq4jgkfd9c1mq0u8n0li9rkruf3g5nty5l92tll55qxpmim4dh2jtoewqic34i2paq73wzhd2me046h6x4d28wa4zwl312qhn4504zu0pnf9vsmqfc32cn9tqt5a2l6m224am6xukpibwzkxupoar3t013r1it\", \n\t\t\t\"hasConsentEmail\": false, \n\t\t\t\"hasConsentMobile\": false, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"244e31db-c29c-43f2-bb06-ba18fa5d6e1b\", \n\t\t\t\"tenantId\": \"9a4a2b58-0a92-4dc2-8885-cbf39d64e318\", \n\t\t\t\"systemId\": \"bfb98371-ae38-41e0-86f8-c1b81b0ffc38\", \n\t\t\t\"systemName\": \"nq1api7jbleccz71z95r\", \n\t\t\t\"roleId\": \"2f0eaed4-4d7e-4f40-9a40-5f49f16debd6\", \n\t\t\t\"roleName\": \"q4it7iuhxjezc3er0xo5m8njrbfovzixv7u7xm2s8ntgrzxtyyiv3xdpnak5by5enz5x4xkma8u3gm1n1jc5cq1s6uc9ji15tzxxkcqh8euow9rkgvewjihirk0cp046rl6n3ujh0n9uym6mdqz3ma4ckezkzzhnvuk7l3yi4iel5ky5c7zucs07f5nbge34zb0o9d2lz44grsand5zyj4fetgptsxwynbfi4y5sa9qnd9a9am2wopngtyhe1qi\", \n\t\t\t\"name\": \"smgs02x5mjvfn3zt9gsnvtpjxlm1xsanci210mlbopgtr86fxf2dvzfs0ljbm345apw88bjdvk1d9h0ddqrk3az9v54ouv6b1tjwbe9bitnop4r99gx6703c1s7pytw6zjfyqm7ztkao0si4iwrvwzv69ngtpelj9y517rnj0ikfa86jfjbll1cbxaeu6cgrgfsnbmx73a6iunhomg9gwyzwooirnloma5y259y9lactg13574beb8d7ycxqy49\", \n\t\t\t\"surname\": \"exmi9z7py3booffqqr7mf4q7iqptmykav9mxxd3dkrzjoo5sdr9v9v8e5lukphjafi51w55meurpg58ts3eaxha3tfzfcv2zdy4pckx8kgyv650nyvudtjv4uaif2b603obufj7ev50u3kqookgj98yfn9vmnyfhfvhwwz7yfxoyds23d1aq6t3lp2aiggebtxe8k5as0n0b3vg0i855bg6k9w8tc9mhlw3i3xr7r1op5kpkz488p153sgyw3r7\", \n\t\t\t\"email\": \"h3wrl6oity6bgtzw8yzaosyxja6gbruuj2b8z3wgasq6ikgrxmr2ubgohiki1sqdiwv5elihp6tcn93ctoyj459jxnjewm2q75f2hoq7ps8975hov66wneuh\", \n\t\t\t\"mobile\": \"2dqq68hjthnnjo9n5c1hndo1yibds006fq217yaasjz7h8mtfrte4ccehe97\", \n\t\t\t\"area\": \"f84zzu7o4b823mxz6mthx7ez3znok0sdidgdex5972ghggtzvwvmm71kzxchtvi5ah7do7ws4rmtorvmixdelj5gqsrkxrouqrb0t7idqxoslzlkdaqp7scu0l3e54jo33zacy6n0pjh0gxguca8eyf4rnpyerdbcp9ltu2e3tgfupte4ni53w8kwl62dnu5qvbabvszceeb7sk594uboeg27tt3qqngoee053etiqkf85d7ur5silu781uwtzn\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": false, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dc8a957d-9bb2-444c-b994-2180a19d6022\", \n\t\t\t\"tenantId\": \"db63932f-83d3-434c-85a7-d150527e23ce\", \n\t\t\t\"systemId\": \"c9b95ca6-60f9-45a0-b10b-e9c5874e61f0\", \n\t\t\t\"systemName\": \"l0oya6064m9wzo40nrxn\", \n\t\t\t\"roleId\": \"bfb2ed8d-09fc-41ca-a7ca-6c288ffe4317\", \n\t\t\t\"roleName\": \"16mn2t9qx4hmce85gdt37pvkyilsgz198irstm0ztwhju3gc1cldox8n8allgauicpkab31tnpjzhyt12bdbqdnue16f7gw3q58fpymkptwx5i8s13s6erhymv11dkyd2y1giolvtdmt8lxuah0dxoqi76ng532js850fy4fan20msdfr7u8khjuz3s6gwgtxxso5oi1hxsbs8assmef47ekkn00ngrap5oyw6q2iv42ebztp1jkxa960o6291m\", \n\t\t\t\"name\": \"enpv9i6u6imv4rwi5ck6bclxirljyziwlaod58c66skvdg989vxze162dn27qqobe3kfyts9bhg3fubn9rpr9pze4t6g1hqd7ook9260n4xwp8n85j4545te3z33pbbjo3xklhla7vnq32q7rcy8avzxbc6dqtlxcqlxidbvxvotxtfekfpjglufatfafgodfer6vbczv2d73b16oi6smhpz2pburejxdpxzq3qk4e8e0wzmbtw0e1j3f9p144r\", \n\t\t\t\"surname\": \"4cai0hebneekqlxms6f4o69i4zlp0729zzeap518puy8xlzw3co81ymdawmpr5nrcqsd40t00h3v24657zr4sroph5itcktonw7jxppl6yb4lhugz23sz0yna6a9ew3bsb6zdv1fyfdh1xztb5dka813xg6fyqx0m5vxqhr838c6xg6vpnar8qshza1nfcbetwzw8qv1nekmf0iortj1x7pwfj9tf3s46glvylf5do45jqpcwbfk4yem9y4pymo\", \n\t\t\t\"email\": \"07618h7ouayqqs1v0vtlfx09dlehx8hhtufqt42f1bbjlrkazv4y4ffxzzl0gp0e3nn1mvkei1u8rrw31owqe7vkl4dwndpsv5ez8i5fdnbzo3208ogsijuy\", \n\t\t\t\"mobile\": \"vnetkeztm68tpgaiqsf6cex7urgoi0jblia7lbzx3e0o1r0hddpi2jl1u4yg\", \n\t\t\t\"area\": \"i41esmxlxn08v2xbsjzawt9xdxix5ljhb4jf01gmi6umb9me6a91gtgwe0tgdkeqwmr1671tv7p6yse2phqjq9ak133p2vr3belmq6lt5bacfowx0epbi1gnl846tc6ncj5dj2lsyz4fk6sa9eb8bqlltnqkufyd0bzzwonlg7l3jb3zepc9s9qoogttavwlfbt8hs5fzce4peu9lkqazccsjpmtkjq7yeksm7430puh6ns1bpl648pjbc7i948\", \n\t\t\t\"hasConsentEmail\": false, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"de5924b5-5b55-4a52-81ce-b362758e0032\", \n\t\t\t\"tenantId\": \"021483b6-59d2-4af6-8d3c-52c769b12cb7\", \n\t\t\t\"systemId\": \"49b45599-546d-49c5-a332-c0a8c9528e61\", \n\t\t\t\"systemName\": \"uxqgau8jwbri9cdoqvvu\", \n\t\t\t\"roleId\": \"417f5eb9-f166-46d7-8611-f8b5b0b09d2e\", \n\t\t\t\"roleName\": \"z5do31bwbpr4gm8i865u2coko3bx4lwvabudfqlkfnmkhsa1tsjl3s8u068ud7ocla42dmg4b3yf00lpbm3vc98lr3y5pglkn0s8r8jayhf5gxu01m3dz2iec9p2qwa3jbvdryywyc7z738ua2glawnyss5hwd1mtk2f2348ub4dpu1m0df73i95xrmheys2lehx1p8wovow3tzkza2lpxkwxo4s89k0n8x3retw3dt6ko0obns5t95q233kfij\", \n\t\t\t\"name\": \"f0b3fkly66v6o50vjcxkb2r6lxg44v492hl8472vsgscqxluutb8z6ron0yoqw7h47iceeell37319m7ol3ctqirn05x35oqnmfimcx6ffhof1q8v33fe5ykc9qkbwv052tkxr7ib3lt8evbdevrxlfqnn5n7dtb67yu8rx5yuxr106eir1pj1wd508moflz62h899p6o6s9ot78jdzmvgrjsbz2w0jt67go6vkuv1lq50wjc95poe0f99aulxq\", \n\t\t\t\"surname\": \"w1kyyjchxt02d1kerq0e1lx683vcldedqnaiwy0unrcbyt15r24sco1pgokk1aeuteb2s5f76lo76u9rr5wqy5z9n22ts89bulxzy12wnyfv53olg1ty7p5tx3z4big22a4xix4tsyagqsfispnxc9chaar3xvlaf5d312iucbkk9w4hxazttne5jh1jr90joe9zcvioradvpr476lmj4tvsurhl9ioieg4hkgutug0pt6qu5wu9kc0d61l9x5f\", \n\t\t\t\"email\": \"rabp54ogykepy2dn1pim7rukvoa7t0occ69vdqqaix3h0hj4nkzbt3m8ubgjfshio6ofmxlrefic9imaji0950co8vwihhd0kb1ww3rtzkf467kt85f0t4va\", \n\t\t\t\"mobile\": \"ailkyzfjvy6798u2r8qsj3rnuytr89cffqhommsnmebpeobxg9tue3jzvtae\", \n\t\t\t\"area\": \"a2jo2ydptubcpkd3u92s852g1ctij0dc81h2k6wrjzawl43s31r3iakiscosjo8mobzyj6xmg7ycn0hvjie2zwyqmm4k0z1yb4ul55pptues6pps7u9gtk1uhmqk3pigp6g6ns254gqj2ybf8be9zw8r2dd9oy88jzzzwnnijejhzwr2nwszp404cb6e4fhkuxx94uxf9oivq2sb2023f33oznp2y2ktr8uy8rajtyxm9n2k3rqrw5uqk0mikss\", \n\t\t\t\"hasConsentEmail\": false, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"06e006b4-45d8-4477-a3c6-fbfeacfb1981\", \n\t\t\t\"tenantId\": \"60fcf298-3132-4508-b5b3-7edc4e777ad6\", \n\t\t\t\"systemId\": \"8f2e4310-6cfd-42ff-9d01-00a0fe8cbeca\", \n\t\t\t\"systemName\": \"9f8yfl187xkrwcpquweu\", \n\t\t\t\"roleId\": \"83f4501d-1395-4d43-8128-04fcde0dd0f0\", \n\t\t\t\"roleName\": \"owj23xrs7nxm9vwji0dfxonmwzhsofnt6fy6rbcuveny0vl23xkay45u7g4vburu0ggalbxrb5zolnusbiq6o3sw0vb8it9ach1jcfga0yoix4gd8z3exa7sjlwbna7keny02xgkrruek6j6vgfist5elhgb4aehbakcwonwv0qfwqa2cqn1bu04fw5w5akhiuygqb2e47ed18fwxaptrp9ri9y40h58lqh2h6t0he7lld2hal0z6xnz94dc94n\", \n\t\t\t\"name\": \"kugazzrv2xennltktz5yw1m160nzf8qvyetmw6qdx7ubrqo10ru4zq5w4s9jwgu7eym96n4rxkqzqqwjgp5r8v1dtga4sh3d3uo7jahrlwhobnwnwmldbaypa0bk70w25oyr7tk219f1h082g8hoh05jg9ir5xk106gxmtw4nz66aqhp2zli7ae57w2wwlq2ppkhsiqqyy5mjbs88r2loa7wr74b1pso729r3llscdronb29kofoer0c0ms5jti\", \n\t\t\t\"surname\": \"aizp52ructrrqz2ragrs47vz03fc96c6lsdb2t2vki10mbipapb70qzfmz38y5pbneycr2zies8bm4ax2fp1qmjf9ppl4npjykhij6fm4huh4bmuidnai6r0p4glkgmqtxl0mz4js08xjrgd1658gcqqeuv9ipz8bnaf41mid0wzh3rfvc4d6mu75plsf4cjk9qrr6qy5bzz7x4ln8wgrzj48xfrttxov7hvhbr5hkdpa3ykpituvj769macgxk\", \n\t\t\t\"email\": \"1a1csj8awfqteg91gr2yahzq6z0xsm94n5dtur0h2zbfbynhvoe32a4xj0smxth3j4tj1mxrc2rxxrx3fi91y6bofyr2ebxypjve2tmi919kz9x6vey58gpc\", \n\t\t\t\"mobile\": \"wqloj3axl3dwkg85ft970y3qhh6k3gycaw8ykp7guyw6boc1dyu89bshz51g\", \n\t\t\t\"area\": \"t05bmfyq79hw5a6q5ikglbj6h619r4xbkmc354rwuqvzvdhjkf3fgmma6vjca63mdmb0jamonq22sdtl25fp2sad2mer921giir6x1woas07vxw4ip8u80k6uye7mexigl02apzjg4uevu6bdo6l3nk13pcesyznm80iyss8d4zs73z135ndfdgs7jm5hu6fstj2pis17eh8pum3h24j826i9qsbcbzmbyqrauhtfthda64g70mlp4cksic3o71\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e77017fb-be08-45ca-9d82-d40d32c4a50b\", \n\t\t\t\"tenantId\": \"ded29551-f496-446e-a397-023d3cc503dc\", \n\t\t\t\"systemId\": \"6ab4f63d-c036-416c-aec4-342cfedaf903\", \n\t\t\t\"systemName\": \"b56jmw8eh29okwukjj5a\", \n\t\t\t\"roleId\": \"70cb8f1b-56d2-4298-bcca-3d234430fa05\", \n\t\t\t\"roleName\": \"w8nirw4zk5qkrc5le7js45ukvunzhczk3lab0jhno9xhnixu10n17fd0n4638r01xscwza11b4lulvt6sx5rjsbh7ygobp1atpyh2ftvl5k6bjdyr01mkxu7jkme883fbkzkd7b4z3103dcavaqc6umbybh67fakat2kpbtlb6n1o2g9r77u27ap2s138htkjbsvdv8kbjeypl75m91jnp009w7c04uv2f5qx2x6uipmfuei0rksjx0vitxc8m5\", \n\t\t\t\"name\": \"r5wbimy3bsjxdgn6ppn6phe84jcuhsr1tcl1z7mz4mnf31s0z03gqye6l3yma7bmfxaeoze9s6s05zeuaww636f05aibmivv8h5wb5yh004k7bzzzup6d34glg50tomzd6ztdqnvl1nw2zexdb4q2sd70uhi6kcva6iguxo444n2h4trlbye7x8a8xdipaslyz8kxgi2xwwwv8ideeeawuaqbfi8mwfimo9itjuadoude84ahjy81bl1m529ogp\", \n\t\t\t\"surname\": \"p7blc4bcio7sr7fwpdqn20rcb5dmdajjo8g1t1fnhl8gyzes9gnyaudyu0nbebq6yjkyvyfs3t74z6kdwtedl7slfo3qer509e1sk855qhiqjse2ydh1pgn02o09ghuv4fmpzex0h9bi1q6f1xlc7wcw3rgpbaki66syb4yfw3hfpmxzgcd4o4hhxhhqtr1v5rerca15ps6qjihw51wt37o7818y7sjn7onjcpfnp8jmu8cntfdaj5g2u21hwvn\", \n\t\t\t\"email\": \"z7z7kdh3y84n1wgwua6382lfxqpc2cren2x8n308gznlvanpq9598dkbogqnss2gajj8m70juirizdxoqe0k2yiow6tij7t40b7kfjg1ahtg0mac1klayg0z\", \n\t\t\t\"mobile\": \"c8hy3qgditt3islz92um1mdm7ibqe5sd9bgic6f7anj976cahdevrvxsyoyi\", \n\t\t\t\"area\": \"xxh0ee49sdo10xizg60vil3cstp2lmguy1l8a8lkfxdsogcq5eilkt7lb478ehklkn59c3eiekzxlcq1zwtt18xp52xohpicjqjgbwb9tj59cyjpb7t398jp79q8bu1ku7l29kao3a93u8lal1j0f74kgm9ezmsp3yonpc6uorgzlxll875uloc7lmku7ojard27zl7xg9njlcgq6sr1sbpmbg2omsctgyw3o94wm997m13vir9164sarkbjulj\", \n\t\t\t\"hasConsentEmail\": false, \n\t\t\t\"hasConsentMobile\": false, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"11bd298c-4596-4af6-9926-17b4e74c44c0\", \n\t\t\t\"tenantId\": \"912cfb05-95be-418d-a94c-a5e849691b76\", \n\t\t\t\"systemId\": \"9920d9a2-3aa5-459f-b883-37a06bd321fe\", \n\t\t\t\"systemName\": \"ljhvmlui4nsxstvozx3i\", \n\t\t\t\"roleId\": \"1a0dc66c-3a38-4b05-94a2-64dbb8f3d6ce\", \n\t\t\t\"roleName\": \"ts0t0t8u3yttof48v1vtoix8e5h7qq8g2gjwguhyu6068sccjru2w4831etmrgszq2t8xanxdul1e95ijxy8zrvglqv52g04jfqedvn6d2za3vdhpc6u258piajarq2xr9mz5rud9qyr6a4y80s07m0wbxhq6zzzb3mljyndfhzx1xm4hn1ifk9ugx66yuhc3412mvd2255niobk3ho6oqze68c8srqnlij2gizh7p3s8jd8necg17faon4rqdl\", \n\t\t\t\"name\": \"n8nts2noi0q59p9qrrwwd18xapwhm5phbm9vu70q2q44ezn7qe913dkhlhrwjtgnn734swtb8txki15l1hm7ir0rylgjsz68wpal59uohfhdy629t3bbaapq52zgiecexv5rhv5kk5dpnvnmlwro95krf2y9xqo2xr58t2387x1oc3eqk235riv12s87424b8fa2wav1wbj6085nakrpc9shtn33oyrbie3mpgsnmngbbzwblr9j5u0vwwemail\", \n\t\t\t\"surname\": \"ytjln8s0d1fn09m4yet8exrkzl4kpcwtztbb609ybzlkjuy0m0mrbu9keguwcpy54y8at5a8dso42adprehbndgi7tdrm9rhbasbuorppjvv3yolkd7t33luxtr4054r3iop98urikm6800e0q7w40xg12ho8gx7ewv20knzu3i9j189dipyu7u1eljh5qbe8fyjnkvxtn4unaqqqvvphw5d3p4lq95ygpdpi5nipvkwxk5m3ptbk0iwhkr8lxc\", \n\t\t\t\"email\": \"sqdosvydf1g7t9bh8lt9gwr83446uj0fw3wgdj75o3pm60mnhrzp064ulpdm4s7v0r11r3r25ojynvjdphohkbs5jj2f1cyyzdmy5y2515z8p02dw85niu2q\", \n\t\t\t\"mobile\": \"d9i2e2djrt6y3pb5cecllp30ldv23ny9ii9tqdt1ju3sys5699sk2mf3wipe\", \n\t\t\t\"area\": \"nyj0iegr4nybi79pcdnp6z7qtmzv0g6aac5rcqdqfeguyou7xhih6jrxcjihgq8aqdr3ffq5cpib83heakn3lvq2n2oh3wg5oaph21ow5v4frox5vbxa0sjlzb3yelaj1w920ysbv3t3w2bvn9n8g83ixatbgjufe7ihi3yty3tugeqphmm3a8mfinfkkpy6ce8dyqqnr3odfamk41xvimkghqghz6pdn2eczovlz1ks842zfvsj67bzn7scm2n\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4e31b02e-0fc7-4f43-b9d4-bdcc6597b111\", \n\t\t\t\"tenantId\": \"69ce9b21-88e5-42d9-8793-a5f1306774b0\", \n\t\t\t\"systemId\": \"7c091595-d69e-44f1-a2c2-98878036f477\", \n\t\t\t\"systemName\": \"rwtmze1d2u7q8zp1a7lo\", \n\t\t\t\"roleId\": \"8375053e-829a-420b-b091-b6f54828251d\", \n\t\t\t\"roleName\": \"dvorrnp5robjmkbn3rggsp5fmqlexkmq4z5eo43xqvdgnjocpllsexnnx1x5fb37es6ld9qyh3jur1pid8wtkul3h5t2m3bfvccekv75kio2yslj5o4bdyzuv9edh9mwdb1ajs25b4fxdy2iwjtaihydv1az15ane3lx6ekb8w0suhcnabwomips348sj5qo5oajtfk7n3j3ub85hg7z9x028r2msb8vuqrfeaokq7ady8jqys9e291s7gyuxc3\", \n\t\t\t\"name\": \"nkrn34qpu53rorcxffsqd160f8bx0bo3hamnjq6kv25j2qvq7dgrra5qvj7x3phbpjpfcs9exesnca8mangkme39ukoxeghrieogd220ns7uadnuro7zdbriuey5ypkfddvdsleon1e4hxmuefrsekcypshlv3v8zvgiva7ogxx3xvn8b8z65oqb4puz06diaxn7cgwess1xgikr4mjre2lwn7f9ywhx8z257avrojvyo0ho919z5mxmk61jdj3\", \n\t\t\t\"surname\": \"0dckoeilt8v65nhjgj9q3qjoddsotz8fgo0exqfg08rcw0ck5wntc0o51twi7b2o5y3hs2ij7ks9qj287izl9fw9wf7bf8np4g8ncddrhcdgpggp2tavd59osk4sj1xzq4kwb0nkwcv278u5bp2obhbf7hpmhp7kos8dk9zgz9349qz7eq7wavnqhv7oq1asoq5wo51odgbura9hvglb5viqvjad7i74v8qyggi6t2zrpx6xwyx9qd2exghfck9\", \n\t\t\t\"email\": \"x9p1mtylwwc751vd2vfx5qh1hwzcp62l3z4f1btopco310l23btq7gzecfw4en4vmhwm6hzzxgtgl2tn4qxdnl56bwaqk4mh0npy31eosnbieza1v1h63qkr\", \n\t\t\t\"mobile\": \"r6sb3bjqjc38iw4o7kgb8voqfsuasjju9whtgtzasso67qqa40wdweduuw8a\", \n\t\t\t\"area\": \"ysdlnpavdepmklcl7xrwzn4x71nz4nbpziymlwqi5dph3n7dq5rirjg4528hr1h1l010pbfslbav01zprawdae5xmssx4ss26m77ddj0z6z6yd78wegy3ar6ze6ypwatg8zkpl0l9dwkprosunblzzoo5366jv2xs2b0lqe4sxwqhjq4it43g3uzokuz912iowfhheoq9723xcbrszj6recdbcfj0fcefmohh2wviu0xpc77hp8ssow391ez6vn\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": false, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"50587194-1161-4296-9e3b-7385720dac1d\", \n\t\t\t\"tenantId\": \"b0115270-bec9-4c5a-a53a-a1e2fc43ea46\", \n\t\t\t\"systemId\": \"848968bb-1c36-4112-bea5-f6f57fea6bf4\", \n\t\t\t\"systemName\": \"4r37h334c5rgk6w8v28a\", \n\t\t\t\"roleId\": \"862e2a51-1999-4c1f-b6b9-fd88c0ccfd13\", \n\t\t\t\"roleName\": \"ur995plezqix29juyd0kfq2uvq7vi8t4gbubbtsg7h9jbd4ujx5qvk5tye12hlgi53qdcivkid2sw4kuhok7sz9z6sqtu27duxzti83o6i9ws6gyitkm4hlakmqolsyqhufncae2lrll7z6izkcmryzgj67zgblqn3vabq25ppjwt34entcdz8atkrj78lic3zestqo5cwgjiflcyjl6749aucx876815km72i05hkvj3ym8azy1s218bvy1mh8\", \n\t\t\t\"name\": \"whbsucpf10h43m50dgkfhbit37zx1glwei86kbwwhvgfaxyfxko3zvpmsip0pc311yh0xr2nvposkso02bpl0nuge1n1v9028lzstvk9w02njor5lwtzv3xn51bcqb9zofgsxxkt7sh64bo2mo0pedj2va7k997ip685cnwvpmuz7g7yfca3vyq1dzziiwfvq1hexiy460uiuxe4ev6fsprbdktaquq7cplpndt08rkki0daqhgv2xfam1banqa\", \n\t\t\t\"surname\": \"hlgjxn1thd2j8x289bkn7yngliv33cix8sw8ztyyz8zax7tzyvu11lyjhpzvgz5ma31cfcxhj10r92n1wrb4auhk13dt2ypl3em1ubld7ni084htsrru28yez995o10whvz7rmgn0ppemryexc1svox5x5nganb6eddxs6ko56qqzbrn2a1adjdynmjproyw03wz04a8a171vuc40gn2yrcdnshdw4rifkk03wbopgd7oxalca4hgcoj6ig99bu\", \n\t\t\t\"email\": \"zcd3wu9hejfb8hehqsdnpv1zkaoa6mhpio3ipe8rc93dtbpvvdzqi7ax16eqvlg55p9pv1uklpe2pyk4oav4xkim0kjv3qryuta5u1zs9v1t9148px387qe5\", \n\t\t\t\"mobile\": \"5d2lpic0udbyq67nf90r4d0q6302zdno8a1imig7qbxx2ittj7h2z2mkk6cd\", \n\t\t\t\"area\": \"phv6rrp8hme2r7n82unah1waetzkcpiq2y7vmdfeiyjy8eaxpp9wzvbrjwp0107a9sjqi80xbltth8p0r7gc0n1di1mzsyqxteipsarxeei881ye8ibr6pgnx3jji12bud0046zwej2debrvwdavl7072ojei5p9fqjsx63wx9mvvrsh339zwj79c355f5tszyhc3v6h6jgdh1p5e0w1unww2d2ozn7y57ll33xtoyikrq2pho974p5915gnbog\", \n\t\t\t\"hasConsentEmail\": false, \n\t\t\t\"hasConsentMobile\": false, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"28c0b15b-4b0c-447a-92eb-c2f353f80322\", \n\t\t\t\"tenantId\": \"fd632948-f562-401f-ba1e-855d1c61b244\", \n\t\t\t\"systemId\": \"a62ec00c-b8d8-4b81-903a-a387f49cc6b1\", \n\t\t\t\"systemName\": \"gu4qdzfuxk8v56pnk6cq\", \n\t\t\t\"roleId\": \"13496905-87d4-45f8-846b-4da4b5c03f06\", \n\t\t\t\"roleName\": \"28g9a13xt4x7bbofcuybhbqeat1zw2x6f6ngtsljdsfuv52p4fio73h5d9uu4qqcw4fvbmjctqaf6vwj41h02s8wk1557c7mlyu75k6iukhk0l3d4vx5u2oyuifejzk4nwz82ojru7aggrijcp36sggfzpkqi5frvmjemlgdfd9vbn9yev2hdffmwne33876mo75gjzp3nanwl4ebmvkzz7elzk95iwd467gtnxuoqg145revrseg44l1z92q4y\", \n\t\t\t\"name\": \"nhgv1rdi1izkielq9btwpej5u22rj8flpxq29ma6lloajn7ivzx518gyr49mygj5dnlk7kj2nw76wk4sks201kkc8s87xbfawz3vkn7934w405ehuflo83kxjtakunbbtg3e8cydy600xgl0x4fzabq5d1ze3d3g1hhffbap3h79w4v6psxs9rsriy07wj5yfwc4y4fr6uqlp0ojpkckkhzjbwcyxvcnwo7d9ltbo5tx0buhe6mryujykgcc87g\", \n\t\t\t\"surname\": \"wcl8riktp3ub93fxeh08etz7ywrpo2q9szba02bj4h1f2kr791hndc18gvk2rlx0065k044ok3e1uod2ylz6v0e8x4cukga9b0r2hzkzfhp7x1wjdm4sk7vct6w54u9dp6mjksbn71cre1q5qkb8h4wvjapkyyakv2kfw380avj7ghu86umrxa4h1w7j24kx5bu3hnafl1vsxwkxgnhl75xf4lorkgj4x5ivvm131wjyndt64egfi66360n09yn\", \n\t\t\t\"email\": \"lkxo5i8ntdrdhcu714zogealkkmw0audn22u54dlmzeuhw4qnbqqjqv2z9k7asx7ine73pc9nz4nbm4a8n07ubgxd7srxofqym83d7oqdddwe2pauwi02jhe\", \n\t\t\t\"mobile\": \"z7fj4ak4q5nywv047mmke5p7c056wj296yw2hkqe0826nhpdhxlsv5xgvo3f\", \n\t\t\t\"area\": \"kqu079yjsjc8nrywjiijq3pbtopb1h4iyqq33ld66lq8v3rdz7h0u4jzvhialxyp922m10ewtmmw6y024prcuhm4n3h9hp01trx2r2fd3m28ndi1uoxdosnokvi23vdixf2t7hr7l2mlnfkweqkocvzvf0gl73x35inile5grzwd9a0laqwval3ofwmsbav37soof8bslfa0t44ompm9xp2r6btg2fdnovayi4qt6w3wck2ek82hgp4u5wf0yor\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c9c51049-6aa0-43d7-b451-ea38bf5a0ac1\", \n\t\t\t\"tenantId\": \"d07a1a60-c3ca-4678-9cec-be1f61f0d5a8\", \n\t\t\t\"systemId\": \"feeaf40e-d31f-4455-a7cd-29bdf1a9dc0f\", \n\t\t\t\"systemName\": \"kiwb70w27qzssryv6any\", \n\t\t\t\"roleId\": \"425ae597-c3bf-4d0d-9bb4-431a4875718d\", \n\t\t\t\"roleName\": \"wt1kb0i8skishiz38yuzm2lclxbaxv0jbsklzhr02g18ywgh0lmtawgavs6x3wnnwr9y8pvpkzqeyvq4ff8125sa7e2m5ojpd4mjrh2z2e1xk9wrr8f1e4ft66jz4iob4sp3b838rz31qwi6fi2t3rwn69tbcf3hyh0py3rnbx6r1xjbol5h2eph98vxrk3m3zsx2rymc00sr8ytxk6u46qtarcg6y81etqjv9eth7rxpsfpxzx8akjjajnuqgr\", \n\t\t\t\"name\": \"ewronk5pocuybi3tq6ccb9nhrx9kynh6z8orntywkcux7fb6g6644rdtb673vusoi0hkc77c9imxiclwh51t7qspjw1k3jpsyl0zqgz24rhszseg0sgbefq2l6l9r5mlzsyc3nc5tlufh3c7otpr2384s0v6ozf6cxdsp0kows1o3jhcqa9d703tk05a0xfhtk7yslbeudjirko27s8kgbk0amw5d7xottnr3rkhxy7a0te85ep64ybldz1bttq\", \n\t\t\t\"surname\": \"bqjc674ft19k1yx8i7i4qusrqzebrz9czghia0csdm1hqz5oampp4g091j1yr66hz61tpt545eraxmu74fb0n55c3p5n99astf5x0iwwzac3ivlcijx9f2yhzibcbhkigfki12dkuud7ni079lffodb2udlmd6lw546gv3ji4p35bi81mny4kvz1hypgjhim29j97xqsfoe8axt8cend9jjuvde03oou6j4axm8o8mc1ot5zh37kg88i4tdk0ni\", \n\t\t\t\"email\": \"ny1r70oonnjcgwwatdr0jj9hejgj03c9d5492b3yqwlvb0gz7l92b8ephr9ahpn38xbe6t0bfjfisr03vv4qk21q9fd189lo7k3u1xdzdm6xlnj1it458p7y\", \n\t\t\t\"mobile\": \"j1wgseo743y6z3mfqbw1y495wx8wtvzliis2jqjh1j6mjwi0hw7fmdpyl1ss\", \n\t\t\t\"area\": \"gm79bnjw7l0ffeijnsri2eff53pw8r4ozmfw7w3ph80ur55i3uywf2xkzkcmu33elvyfpwb49qe2ojcoyqoqiznwkmc9ppzku086c0t1vq7i3o1t4ap8ssxsiwjazx96wrewgksammp5tcxao7f7khemj6apcc49hl9a0ib6vcb4myy4l413ur17c772dqts43ri9h6q024vztvvi3tthwz4tvctdmijvq9u7scod7qfl9cquszfl7jsj6j6g2y\", \n\t\t\t\"hasConsentEmail\": false, \n\t\t\t\"hasConsentMobile\": false, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"78817d6d-0632-4214-8a2a-872c4393e234\", \n\t\t\t\"tenantId\": \"d04ebbbd-bae3-4e9a-803b-bd83f2450301\", \n\t\t\t\"systemId\": \"b5f1b3eb-1049-4ce7-a057-23445750bdd6\", \n\t\t\t\"systemName\": \"7utb9lcnzu07wrvrsguy\", \n\t\t\t\"roleId\": \"030cd689-cfa5-462c-9c9d-da637c768cdb\", \n\t\t\t\"roleName\": \"m3s2hgvzee36lq2bdf2pegpo8y1m4rrhxtdk2q8fzwtgqxphgpo9pgl20pohxt9rw67a7k8rurbx98juhjqb1q4iazw1g0615s2lsxvpr3o38glovxu5cr6dwlje647vznzff0za27x8ti108xpr3rhdw8lci6pw3pfqiwxu3szh3xpn8po4vkitkregr3jfhmtlvsvdsn2cqg9r9do8040rpusex8gywo2d0a7renilgftf6ka5432twsd4lgr\", \n\t\t\t\"name\": \"62sj18o2nvqwlx2pm7supi0nmcu4dk2qmc3fep1qx2lsuyynhhvkz7flsadorjq5rtrfn6afgvthayjm6di429tb4lgls35w5kr8pow0k0hrp240iylayanq3tzpa35vhx5r2zfqv223v49bfcuee1sv7ya2l3m8z94nra485pzo7zktu6cumbisu020c3oe6de0egzc3mmastv6y0waysqg1clhegbm7bah6j9rkqdq9brb2t53mcphxrrbwvj\", \n\t\t\t\"surname\": \"z9l3077yq9ls5bbd2dm0669rwgg8h59nb1wyqaep6xuj65q0seal3kjou51yfyatqet9v226av6l9gngmwq4cicauwer7ujewdz1ajkou1hvni51fpesm2ncpxfj3326ff7rjoqx9z0n47sbbqqmvkoq6zio4qn5ynr8mcy4g1zhl2yfawz4i0ibqkgemi5rfbat73k9umnlx5taklvu17audodz8u6d63i3nufgm0pwabioorrzt7c3x0paqkd\", \n\t\t\t\"email\": \"wdwf8za7xh1dlk32yqqi8qeh8eqebd5wntauyvnsp56du15yj8n3jqdoehxohe1ovntinukzxiychdc605zt93syy5p4bxpqpeznbqdfcv9r5yri3gue6y5w\", \n\t\t\t\"mobile\": \"qkkicj1nns8dt0k7p8rwqobzytq811an02nuautvkggilwf0eipg1bz0uqts\", \n\t\t\t\"area\": \"5dr7bdwm6empgy6fpj305h4euq7awsbp1qnqwwrpnog4mvu52qibiz61mitg0g36j0cq2p11ylaek9c9oxj6h93ecvi3me4yy02qz1lpm2curh4y0pcmwp2ut4k2ala1ee4m9scfxqrvj74biw9po24f50cv805per7k6grtt79o4tkzc25j3zxs5hee2kugnqn6aspd96moko6vf21j4iwf26zfenkotzjxx8fvwyyumn9c35mx09znjpk8zih\", \n\t\t\t\"hasConsentEmail\": true, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"635d99da-c5ee-4137-85d9-f67017ed6257\", \n\t\t\t\"tenantId\": \"fbb4230e-c45b-4ad0-bf80-6a1e92520a70\", \n\t\t\t\"systemId\": \"a3b14398-7b42-4316-a42a-f82efd3e6f0c\", \n\t\t\t\"systemName\": \"tww17zpidetag745dcqt\", \n\t\t\t\"roleId\": \"d4cbf313-fb22-4dac-b4be-44069404fd36\", \n\t\t\t\"roleName\": \"7yjzclyjpgkzmxc0quc14f5719332ghenl4zcxfdgzecgywavspmyc1alvs9h5evupz6cgrtx8naxiaj2aigs91grp7c721iohttvvfqertqq0k19a10k6s73ejswe92vcv0yftkghvvr6sg6twgxr8lwqrx31qui7x6snb6mync2b2ijlj09ndcy1ml1rolevpcrbvjkuvciqcbb5dqd5pydrgldhe64jv14xnebeujbk9sjh0t8gbb8rj1t1k\", \n\t\t\t\"name\": \"75xgdm6xr9ydhsbkzi65nhy8v9869uuhsio6i93ivctjl9nn3qipdsj1qw9waqrznj47rfj8h438dzrjx07u7qhas3b761u8xspkefc6l4polg6l1aj8ssssm57c7utm2iblr0ef1loe0bauobhta8i8yxbr29q2p3tvi4h3vatw8irtxxb0bmmlab3bjy7x1kmgo3jqqip5qbqaubbb4yqb5voa6wkzm8jdbua6pzuz1irjpw3mhfbn5ya2mkh\", \n\t\t\t\"surname\": \"m2p7opchzlrr05pjnqb6oww12r0jbkftc830j1iciqrbibx6h2dynfu8e70f3uhy4iwv9kohzegpchmeyvlza1h05vmzyoksb0vt3whcgw1c6ch9tdxumi7qmolonr1nk0a9zumfq3zl9hugjft4o9102uiuucp0a1e5bp7h7238rc25edjae8oce2m43f7d7qv7ca2cwbx8ytq26oytr60td17bnghbn3xf8vyd8onu4fii67am4zjm9z7liwx\", \n\t\t\t\"email\": \"1j0w8sgvu5kcy7uihw0azy1jmr5qbjoupyfl5a2q616t42rlccqhxusca8ll3yrkovppd3msoutwqaisd2ha8g3dmsy6x31sb6vm00x3h64n8hq216xazk6s\", \n\t\t\t\"mobile\": \"cojhcjpobhyvamvwwulacyab2pkln2mdwv5urkxdg3s9xqfvjc5qaz73i72p\", \n\t\t\t\"area\": \"saatrkga7qtv7sbpujpk9kzg3s4jpr2gb4bnm2bexyogs5gmb76kz1o7vunpf0rck5vh43ezakg7hsk3x3b44si8aagglget613nkw8txvkoi2dldq3ybsv4uce8e3dg7550qyz7u85z502filg3dhi7yhwt3d6y4tnmzq6aa6hcdsxpvpfosfdiftanwxbnuc100u2eejjm9hpjp8py7uug9nq4o1pssstxpyfj7lm08decqldmgkv90kz9c0d\", \n\t\t\t\"hasConsentEmail\": false, \n\t\t\t\"hasConsentMobile\": true, \n\t\t\t\"isActive\": true\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiPaginateContacts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tbplusItSappiPaginateContacts (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiGetContacts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetContacts (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\troleId\n\t\troleName\n\t\tname\n\t\tsurname\n\t\temail\n\t\tmobile\n\t\tarea\n\t\thasConsentEmail\n\t\thasConsentMobile\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f0150f22-5d78-44ef-9051-af1f0e215b0a\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindContact",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindContact (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\troleId\n\t\troleName\n\t\tname\n\t\tsurname\n\t\temail\n\t\tmobile\n\t\tarea\n\t\thasConsentEmail\n\t\thasConsentMobile\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f0150f22-5d78-44ef-9051-af1f0e215b0a\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiFindContactById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tbplusItSappiFindContactById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\troleId\n\t\troleName\n\t\tname\n\t\tsurname\n\t\temail\n\t\tmobile\n\t\tarea\n\t\thasConsentEmail\n\t\thasConsentMobile\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"f0150f22-5d78-44ef-9051-af1f0e215b0a\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiUpdateContact",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:BplusItSappiUpdateContactInput!)\n{\n\tbplusItSappiUpdateContact (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\troleId\n\t\troleName\n\t\tname\n\t\tsurname\n\t\temail\n\t\tmobile\n\t\tarea\n\t\thasConsentEmail\n\t\thasConsentMobile\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"f0150f22-5d78-44ef-9051-af1f0e215b0a\", \n\t\t\"tenantId\": \"d2966e7d-0ae0-4ade-87b0-55b8c2d396f5\", \n\t\t\"systemId\": \"121df1c1-08f1-42c0-bae4-4221ac7625aa\", \n\t\t\"systemName\": \"cs22j4klm610697bpv0c\", \n\t\t\"roleId\": \"0db2de56-02b0-4e93-9015-bebd4285b8ea\", \n\t\t\"roleName\": \"trhpp7t30eodmit5i9vjvu116n9wleacxvp2mw5toir2cqdd8otxg2jblk3nsq5x4nn5uee6fqim47xdsvvz9717sflbp7il7ttegk4fv9opop234qn80khyvjcwutx3qk8kirqadt5wm1x6fs1jugahvofdxomyvmzfyoj3aj9la63sy98rc5o95h6808nr0eonf6p2qgercg8t10f2dj3u6cikgu69rfzm745tr38fcgv922v5nz0xrfv12nf\", \n\t\t\"name\": \"o5chj19ceiaj2jen6bdla05llqn3f4l03swnvdd1fun1lm5fiw183bj6gbwhuxma2txedmsccf7gsw0cs1e76nf4b5wgmc3vhculpbfmvahdusa6nh3qvct5f3aa9enpisojean4vtu5thk3ajdw342qfe9i8pix762z4qz483vqnvc88amcytlatm5jtetorjilhuqb076wmkq47se1mz5gsr13nou797249n57wvqj2krnoafyior12lr77di\", \n\t\t\"surname\": \"f9v352e5v5uxmzz4t8rq6e2m5ql5p8un6s16v48o4ybux7xdqm8qs4thlzddm7gqzc6eilw74hm46zof7u5anqzaw8lbfirsjmwqn9gpv7dv96rt45adlu8qyh7l3d646b8tsyvub06ufj2vaadtrxqtj0aoscq0mzi0uzlp9t0fl5gjfeg3akarpukkhkwoxzu5tuleicscy30c1itukt8dov28vhkl3lo7z47ob26m41dehbdvoh7wxugvor1\", \n\t\t\"email\": \"2zqyou6i3odxwu6827q3j7hjqxj104p3pczo2ucon9f93175vyabfk454zq2ug3pspy5dhqslbxfenkoaa0f3xyo2ti8q725161sapnnq4r2xt262k87qmhd\", \n\t\t\"mobile\": \"xhdb22pjalog5v4hioif3ohzwjtzwgauvm1r0dgznbz3m268gegicshivvk7\", \n\t\t\"area\": \"qagq5fadxxz48obfwdn6y620mbden33qav29nxuvgnv9zvn4fho2wc2dczydelhmn44zd9bgou8fp8u6t4csy6oot24qpr8asgafabra5n19890mchakrhvksw26sulfridfbvc7e7tfkv4tjqlklny3t2jgbx3jjmrqp9q52wymyhqupydktlrb7xb2ujhkcb6ha8807reupj1a95s524ny4sl1b46v0xz7o5gmq58xb1gbzpa4b78n5n41fay\", \n\t\t\"hasConsentEmail\": false, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": false\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteContactById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteContactById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\troleId\n\t\troleName\n\t\tname\n\t\tsurname\n\t\temail\n\t\tmobile\n\t\tarea\n\t\thasConsentEmail\n\t\thasConsentMobile\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"f0150f22-5d78-44ef-9051-af1f0e215b0a\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - bplusItSappiDeleteContacts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteContacts (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\tsystemId\n\t\tsystemName\n\t\troleId\n\t\troleName\n\t\tname\n\t\tsurname\n\t\temail\n\t\tmobile\n\t\tarea\n\t\thasConsentEmail\n\t\thasConsentMobile\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"f0150f22-5d78-44ef-9051-af1f0e215b0a\", \n\t\"tenantId\": \"d2966e7d-0ae0-4ade-87b0-55b8c2d396f5\", \n\t\"systemId\": \"121df1c1-08f1-42c0-bae4-4221ac7625aa\", \n\t\"systemName\": \"5sdtsbf3d6bhk6mythny\", \n\t\"roleId\": \"0db2de56-02b0-4e93-9015-bebd4285b8ea\", \n\t\"roleName\": \"s94f6terny9kqla7ro3lfsrjknl6d8oa83pzrd7kraqz37q26c0js2cxc946tyt419sjd71wzs3p5ew06bgdun10wgvd9sii2e946nsqcva8g8epxxljsgpvh63yed022mxc8u6nrphlta26kppnmaq9nd77ufgejpbbcbngicwe2pik27wjinefczedu5cdgwaialxe5yqsen595nmqxss8chizwruk1od1l26a8qhuxj1fxljdj9zqc58n3b8\", \n\t\"name\": \"snniongjdzr1whc29sl8arbw6riceqqlj23umush9lpbunm9r8p7ha3s6r2oxau2khs9l3zdh2u2twujhokqh3z7bzkylr58lzaymp9noov6zhf4ox6vy17w9liszgmk2rxinvt4k656rqajd9g8hdzk7mwvwqn3zlz4nb699zl08va7wtv1wsr2e2sv28240yt15pzo6jsu2zlqgzgtc58ojkcexxpjosz29glrlnee8qgzxosy5j70xdcz7o7\", \n\t\"surname\": \"i86uchb8v1gezjudn9n1vd3bcsk9k58pp0spcbo3tkw517qwsg2a4053jr0sit2lc9zzx1oyjnlv01m5klgzvcsefq63yexsfin2kbfc307ln5i761se4m0ib0mgm6sancyozti7i8ijimkz855p017fw4q1cojtexv9pycd0nfyll69qqh1hqlnbfurdo13yzt8sajkubnipjwaoh2nstx2caoigfb6nmkquzl1sa5yze6btkg2158hlyfcsf7\", \n\t\"email\": \"c0kk9qmy9as67hi2qisfnboeq1jjf0x2y1rgkepw5tn78wi9rhobk4tgq7mwy45tudiqzzcdocvqn4lh4fmsm7znl0fkkmp86h937pytggjham0wiw9hs8un\", \n\t\"mobile\": \"vezawugvi22zjo9c8xg46hwerhv82c0qz7abrw5arv2q49yoepptsojuvn89\", \n\t\"area\": \"m5ljny36l6bh4h2e5a3o9h8lv6r2eqfdxxn4gdw8eq1ycwd4dwczen4iuoean4zorzrx9n0cvuzn63704yjfhicz8899hjr1zfrdr8alonu7o1so9z7ue9ewvfaysq7p1q3p6v8wzd69hmmetyjw67n3nnf1k68y0hqbogt901tyz7wmob5v4gc0dqdlvmyk7lijtyd076yhjph8k5eu6qjypkbubgumrpdra1e15hxp6vx7dogltqcuzvx10mx\", \n\t\"hasConsentEmail\": true, \n\t\"hasConsentMobile\": false, \n\t\"isActive\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/contact",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"contact"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/contacts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"8644a33d-bb3c-454d-938f-5e54245ef549\", \n\t\t\"tenantId\": \"f363ccb5-89fd-4d02-89b2-c679671ad9aa\", \n\t\t\"systemId\": \"94947202-2a43-4e0a-9220-53128fe28421\", \n\t\t\"systemName\": \"4badszaoszf5fo7srp8e\", \n\t\t\"roleId\": \"d7b67a03-a109-461d-b4f4-e18cbd4cce02\", \n\t\t\"roleName\": \"sp4658r7xcjfj2bd8zrmc0129k4y96skwmic57dqz8tw0sybjdconbd0xpxar0sjumx0n8vs97ksjdpoglz5bt3l4cgit84em37m5tqlz2rg46wclbppfku8f1duufdc9kddwosljayk4v441e0j6dmlj2sem6ay8gr1qvzv8xmpjljcw6aag7exhhv98f4alkisgn1x0r28rd1p505awmguq32zwy5w6aci203okfx40q5xyiu4jv4wxh75mk5\", \n\t\t\"name\": \"y5znpo9s3mnrra3p19jnskzu0slkwknfg5ogji13rb353dv6quxxzuxzdbovxn9ty0643badmgo0o4jf4ulo0vthxxh94k0690rg2l0f5lqi76v98j2h9j78949znhw6v9xw00zd7o32ts06ktlq8j5q3sz7ozasjrh0rc7srsaqyclan5kf5hx2sedhjxqmk6lyfltx8z478886t5aofe8nbm1sbq1ijphaerwb480euwq6jxnrvnipavvzura\", \n\t\t\"surname\": \"shgg6w5befm13w2hjsdhra1sy5icpxe8tz8j4inu9q3b3hy9j265rt9403v3k3npas0xdnwdvuqsr7fh6nsi6goozxyq75fv5aqmkd0i0nqqcf3rqvj903vg4i689mcuv1969a1a2mxqrwrffnxwz4anuwxzyw2k7fuwarth34e4dvrs9z659ad3m9col0dy5x4lp14t5cg5fwk1m6uwrj4i2h1g0htt7y2x7jx7j2100yxuv1zroh2cjb0mc8s\", \n\t\t\"email\": \"c8fgzkny1rko04s50ckeouprlraturp5zhov9g23trst3c1q4aqhd1sky1rvj2eipiphcv1yc8l3g45qno48nx1lnfaua2ou5o4cqq8f84vsz7npugegegfx\", \n\t\t\"mobile\": \"7ljfp6zkusqnu199cwdr6vv8d8cswawradyufeav6c5w861420kusvvvzu3c\", \n\t\t\"area\": \"f2uwnqs28o8zjc2ghc6lr9vxdfnh96x5w6d3jp8mx5rs7ku2sse5uqvow6331o66ynusvuosu30trgotx831qd0q1bocnosoq6083izdk7kdivadhih3lsrrh3ws8187fwy9s7jcgak7jfyg5icm85emy51hk162us4ocuk5y30ruwlina1wpumrh1acsmj3tyjy1flzfjhp3r8qkwqvblb7g44ktwlz3r89up3s6b7b37rparrv9voq69sfp66\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"b615f181-4d1f-4a6b-8d50-617526f71be9\", \n\t\t\"tenantId\": \"995d7aaf-be01-4315-890b-8a9b99aeeb02\", \n\t\t\"systemId\": \"436f3ce2-2efb-44f3-bd60-d8094b106410\", \n\t\t\"systemName\": \"8f8w06y7pyoymba4bonz\", \n\t\t\"roleId\": \"0cf14924-1eaa-4a29-a6cb-8bd4783d8ce4\", \n\t\t\"roleName\": \"a85wi29qxoevgv4yevl4uxt4gb93xc1jxm13rtq6vbo2chkd5xzixlcz2rvuu8i47vyfk8t15l9fvbz6tnne8210lz4dhtsjwta49fuf24wu7zf2ehrz623b9bq6jc1taw2a0034doab47a37ysi4kv9kkt113oe0nfcrps070y8n32mmqvmkux8e79c4zax3v6gy68vt1xle4sy82op5nftbkw10f5jek5jwz3158rbxktxkky02kjsh2hrtak\", \n\t\t\"name\": \"oxin5vrw9du2ud8u2x4mpiizvz0wu5m174c840egu2kz3n37miyxk6kxm42br2x6nw4ts331gqbl2p1eu38785gb6qqok4nk7u6z4p6dqe8mjlf7lwyw6my7i8zo3qrdx6mnpx00smh21eokea4qpanpkk7ram7qafc8q070qn3npr5fa5h9nq2nn323olt7or5j854jdmaczxd3r259twoyglxmr9jvqa75o04yv5p1ct5onswm6dyx0m8ap3h\", \n\t\t\"surname\": \"3y6blmoklwnucjannkosn90n6tfv10n2zygl15p6mvo78tjw4nulo0xftpktsbewrk32cizgm3scbdmjl88y0btk7py0z8g97ix2cj2d7waonmo6viqxjab5wt2ftbhhpeuuzhm5y0oqnhyvb2difpz4kr50ycqcakcryjv1eiyv9y97z65ac51rmjoio71orqy2iw8l3w60rmr3md4zvxuvxq2qou3jm32tey5mu4t1j69yo5pv40343j18fid\", \n\t\t\"email\": \"wir8xdffyjmrn0n8prmshjqcx86m0fao01hud9b7djh7aj1iwcyw5wi8gtg1j7ffl36xunh4fw6ta1c3hpdwlcba0gspmryp5aiq00zx2gz0jhgwgyoorlpx\", \n\t\t\"mobile\": \"qxqpnqv5r3joxfr4tsghj3zkqy2vz2o9l19wuc2ajn555ez2srughqnr1dtz\", \n\t\t\"area\": \"hyhwrb5eedvjmus3rp7lp17x3jhvi5063d2jusu1s3h8726lwjlf21m4t5p43d11qop2byk797l032js9i7uvz1zbbx4xgmo2oztdkpoz18dv15bb56mg10d1c5v0n6bqmf5ero7zh52qxl7tnbehao8qf6q796xmcfmbfpg289xpbeyzbxk2wcffdeyik8uwqz0sjr0bedxpy5u55pyr9pm1qucxpv16xucd9x30z3hezz0nnostwtcooikvrr\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": false, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"a3951e09-5607-4463-920e-465b2d6237d4\", \n\t\t\"tenantId\": \"c52281a7-9804-41bf-bf20-8a49a91528c7\", \n\t\t\"systemId\": \"6655a5fa-696c-4f8f-bee5-33b7a1191411\", \n\t\t\"systemName\": \"giv20xzlelo7amzeydjy\", \n\t\t\"roleId\": \"27145cec-1106-4aab-8b8c-f70645e84bc0\", \n\t\t\"roleName\": \"kab8tyzst6amvv8t2bsyx3kxxfowxjnzjsktno4cbu789sjpymslj8zzkefwi0iqccpjwojeaqns44l2n5hvhc85cmz3rbdo02ky8d8eru0rwhi4oc9alyoolukdr3nihun4hb7g4xastw238d3pphwu32pya2ccuhm7ykfpj4wfeetlsmkq0qtxh8y55qyxyl0zfrxj3ckydb1t00y6vum5l19xg6dw2ozoktz6tr9253791u6bmxsb8g43pie\", \n\t\t\"name\": \"amc3vo0jiqk5pnzasob3bhrphzo0yk8i5hyvhq3ri3ooar3gwt3bz5bwuyw3jbuwkcqk1v9yc5yxhqy40g5cop3ld024uste22ikx7txboefcitf874v5thzc0d5g8snsxhnipg9z8w4nm9fxkgmkwo8119x35fq7h7z1tapdaq3b5luheynyu599rbowdeu0hd4ul3vzaip4wvr9tcyn4kc9eumq45ip4434u7sjzvrs77qe42nf2jnjbo42h9\", \n\t\t\"surname\": \"mip92dmztxtwx5f3z0wtv16spsebyi12xbhkt7hqy6wrt6sksac5df7z1udnpzenrhb84gv3wg173mrj9ffw4xb4cu9tu34eac1eahgqd311duyblzicr54xx1jbb1lwgujyfutv3p3yt1roz3j39xs60bdoc6n4gnyvcunpqv5p1f04aagekqe4i9bc55ntppdsfh4gmantugb1p7e2bh08yp5xumod2mbo5ccxl8318epvleffw8kzqntprob\", \n\t\t\"email\": \"ucf0ywci4su0y8lo5961kzbakb2ntes96o2zczv7iz7jgzvbxjoga3y7b13y2r4m6cw62xs4pm0o91xpksnxvfhf44n1qgiwe5s40prprdw9vs1q5uvx1gmv\", \n\t\t\"mobile\": \"3hr6zwxm0ewhqf07py5urxz80q61k9j69535kzxn0qs0fzd1419pqhp62jau\", \n\t\t\"area\": \"vwzjbs6k8jvlpq5su5cs6qcccug4ef72cmlq8lv7z726wxduy6k7qewwrhmhdxy8pppgaoi93lwegcyoj921u0mk4disd4hnh80fhj1tv7e7p47elghm2lyqjpi388o8zxmoxnb8dspqvv8ulsplx1fenhvp6t4jcnkrn5plr1n86achw1352394wil4yamkezdy68vmduzfbggelxhmh1adexvgjg1nmbbl1ahephzbpbfgyi980g8r4wkvq1m\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"531a13ac-cadd-425d-9ca5-38a9b9665ef3\", \n\t\t\"tenantId\": \"0593f6c5-3c03-4452-87e1-b627645e5950\", \n\t\t\"systemId\": \"b1da5c21-6f52-4636-8770-ca2eca6270ff\", \n\t\t\"systemName\": \"7ohkia4jds2zx2xkbzyu\", \n\t\t\"roleId\": \"4fe9250a-2a49-4f8d-af12-614b46c9e389\", \n\t\t\"roleName\": \"4h7mcy9w9pzxl6vgm2acg0tyla0fiegziufczk469fy7d8asx7c55au2im6j2wndz95uygahkr0tyf5pdakrfspqrovfsjh4382dckizyqjkhrnxdp1ti6lnxn64mf2p9ujebe630goky9p8q8dbtz2kukj76oanwzmxxi1fiakj49o7xys4sy5wu3pm7628b3jstje0azpn6mj0gy53r93ylz3qo164ofldvemfdnnswlaltt9ztbfz2ub8p68\", \n\t\t\"name\": \"44g52bhrnebc6ol5srpqhrxxtedxorluep2hrvwwas4w9ucf0cmgzu1cb09g9jawmy2lmtjoek9ej3la284vsxc0j4ow5rizl4lj7rpevkflkzkw0medb0ef7g8qbg8nuo4dj90jz6340e229n35b7oea138rza59gk58v7cgdqq2zmdllv9aibjqxz6x2yfhw251mqc9zcr6bad1mc0erzattpbufp83xstsuasm4y5xqf5ycaigp3tz8fssov\", \n\t\t\"surname\": \"av0e1h2o2cqq8jix06a43h211i9zdopiwtco6rq4njh5iqmo0v2im0qom7m1jugsi43xldulgt7mh21htgpj1lm7tuxu3ch7p4038qecqu0hewfyfiln8eafip3t2j5cv1rzlg3h2vtrkmca4g1r5g6w46j6a73k7ncde3tcvoj5i3e52qqxaiq14ea26oei21w9aa5wdwl85wj2dl87z2voy6k7inkdyu8lssx25f6we69wwic3c7m2816e3ug\", \n\t\t\"email\": \"2lfp1efh6aszg8q5q5n12nk8elar126fsv37maqbpdf761adixl42ky33w51q1lxyyxrpkh0dzu5wbdohatjhgh0hmui4b75tp4zlnkfulyupa0ujmgwkf4x\", \n\t\t\"mobile\": \"oky344pzfxwg637rfix8d1gcvkmh526iba5irmfom77pq8subv52ou3odh71\", \n\t\t\"area\": \"xsx805annzbqab4go7x9qu2hbfsg5yb79dhjzfst2ije7pbj4mus84zcqmmh6usio46s9cwp77wzgg03yr5kxh9y7zm0eev96gnfsua8wmb2p8sz8aju3d0rxiic9v1tdv7yg95wytkwv58c9018cehdfawd62wqdrmnr5yemjf7snom6sm9y5nyi84y5gv43tpobrs3mbyxrj57jsyg59ifftlmeg5fb57z1d1votuws1rdktj7laofjmlap7f\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"11e980c4-214a-4491-8700-7e69033c224b\", \n\t\t\"tenantId\": \"3932db82-a88b-4f6a-b4ee-a25cf53fe358\", \n\t\t\"systemId\": \"291af507-d6b8-452f-93a7-26974f079371\", \n\t\t\"systemName\": \"samx6nlqalh73zgks3x1\", \n\t\t\"roleId\": \"c738f564-ffca-4710-be17-8d3d134f8467\", \n\t\t\"roleName\": \"punixpqh138vt5qb2gh2vjet2taw7egh0uwteddd9on6ey0i6tz1q7u49p44okphob3szguycfh2i10ccp8utsjktx0vdxor900r711wq3mxxx3ldcmhvea4ou7vvlx25difpvogbw85n2398b56itth0hoc47328dopnfxnzou90l8opt42mp6z4w8xr60bbcbn1kiy8p1lhgzg1cn7w4xuxobwghe9tebeipc94rs4wg7h50xtodxemcu7osz\", \n\t\t\"name\": \"u70v2lojx76mjw0x4r5uxcgfsl6s9nd475pzv3qyrt0y60lfjcyi5jfvdd0djkwzrpiybkbiw3gsojzfelmveyc8zz4nie1fcth3906jxtshtazlo7c9bic0xwm8hvor0dtjrw4zw6vj4r1a7qmspiqithj3plb9qd1h33kvqafd4xx1v51jhxqdr4nj8kqz65hmfan2cpxlsgd8kstwlfu3a2wkjbbrwy31oo2cvgfarxof9culhagipqpi8tn\", \n\t\t\"surname\": \"cuqrh3wfy6s6mnpeajajquio3vnb5630o9u0gmnw0l7r7gspv0wjq9hrwb945zirjag8etm611t9xiexyoa3oqql2hip5ywbhdl0smzsol5b2a8e0q94zg7jq469d714bjt0wm28eab0jpyk6uvvmkhq5b5gcyjgeoepdp4pz5bzwbtn5stvm0kl17ey7flx26lluwtc4q88tliye2uoacxep9roce9k068wdg2ga2bdzzy64v4i9dxr33lk3ym\", \n\t\t\"email\": \"1qabffca4ggn5rqbx0kvc9f732563vry5unukstzu0zcbhlc5ava6biauhmga48amndueudp1j9h7iyt4jtz6dqzqjsyka58fa4s5fb8vz0fl1au1bjfxz2f\", \n\t\t\"mobile\": \"avguku6tyk9kcinqx5xkgs2r08a55izv603fpsbbrct9lidvijdks876yfml\", \n\t\t\"area\": \"rektgbtog70ixeiyt0p8fmrn4gcvid9rbo7pdrh5n52wts5w5594c5q8m0jgle3wkpm35ajpvq8gsxbv0qmnjjnliege9dn19ybjfenpuc80lltvv3tzikdaa25qgn3j5cwu96uo8e2idbt8t5f7ybtyxdxbrc3bzpevfcmo6mba6vcyi5pak2joy2fx5gsiahnsm2ulkn77trvm03eqkur7upb07zh3qmjfn46go98m49kvzu7fw51xs2pg2q4\", \n\t\t\"hasConsentEmail\": false, \n\t\t\"hasConsentMobile\": false, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"c78897a8-8aaa-47a6-876e-3bd8559d22ee\", \n\t\t\"tenantId\": \"50cd4353-b737-4edb-bd18-34e90373a56b\", \n\t\t\"systemId\": \"6d8eb084-5224-496e-9a24-574e5d7f5050\", \n\t\t\"systemName\": \"i54sng0pvor7mca77g6q\", \n\t\t\"roleId\": \"3d606637-9607-424e-a909-d073f7ca4690\", \n\t\t\"roleName\": \"gchbm0pgpd078pol2nyfxtve237iuipnqmw9v3iqi61nmwk2b6hu7mv31xa8vnsoexqf3ngkjbuh7btp5zvil36kjlu5xfl9r4orfqrtkd57n0o1pqdrpnuwu8pbkerwts34ks5c1d158mhq5q51ykl3at1luzlr1oya0ddqh52fi6h0ycgu96c0ggtvxynpp37z87263igq5q9tvav1uvo82ahloue90drvl6macwkonqv5n0qk74gtmzu5483\", \n\t\t\"name\": \"94nxld1meqe1y9d7ugwyedpa56miylqgdn6n6q2worx9bhxzwtzrk7333ldy3l2hbb6spwpizt53761h198kbvftjnj7wo32fybm1n60zvyix7pkz8s4bk2m3u3lfiglm1aa1n9cxomy9dhkl7saco6en8xvk41x1o2sr6zieurggpq54cy3cr0mlbz1xzbqrbett6wemmdv3raxbpl6mxyosojg1h6e19at2mz7cbbees2fpegit2ej5anj0ef\", \n\t\t\"surname\": \"ruqfvxm57newunpx0a9rmcpyoazosdxsu2dikhyd1qsedd3bqwvhhbfkreabmbnpcqeucvjwuzucggc0rinu7y5gt0i80814wdqpt5d3c4trp6b86n09wxyc7diqolzl8wxu07p1x08sp6x9ika8lmdbogrfxufakvo3ompsiukpnjl0hz6e4tip78iaxq500hitp00osg9n5i22c5jua5cqpad2e1we9q2i0eui4x6fgmtu7wtrr5hxc87kw64\", \n\t\t\"email\": \"6dea45aeoovgl8x4nvlv5rjjzkbw6nsrtj5dwrkew7ay72oi952qbco25i7bhwxo4moxkm3dz79b58pcced9wc62txx0o3osfmxquh7lr97qdebs5ofsc69e\", \n\t\t\"mobile\": \"gqdzj6zojeuasq09484shrc4dfrw8f94kh7rol7abmgc2fvmgopedxid0fw7\", \n\t\t\"area\": \"pqjgxe6o2rxmod3wtgz8oclnovg6o4m7wlx0l53qd36scadjl9ismxshx35dycj8fwety93f4nuud4ggdcjvk9197ikq1d8r84m8hli4aq1ok8n5g33rzeuvdfbryluksmsn6dg6yv1ba9jnbbgqm847g8wymhcxwo4w7kw5fja1gmlsc47ub7vhvc85le9kwctjifbhgqtkndqiyeilg9dy3wye20hdjzfe0pmralwyzd5cq8i1fhnootad7d0\", \n\t\t\"hasConsentEmail\": false, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"f36640cf-791d-4fbd-8fe3-811da0b1b9b2\", \n\t\t\"tenantId\": \"3e6a5aff-0381-4a01-8288-9f3e2d900699\", \n\t\t\"systemId\": \"5fcf94c6-5ae8-4a3e-9d93-3185cca231b4\", \n\t\t\"systemName\": \"0y3832ocel30rdndnovz\", \n\t\t\"roleId\": \"023aa946-6257-419a-86c2-f200cdfc9e0e\", \n\t\t\"roleName\": \"o1gfbpes93p6ofz8jrnb6oyf059hhmbyswxq5h5g49pr03k7nt1gn801dv0m0bvu2r63ce9kup90g63d3runn9287ulan4dirufp32s3bjj3zassr5u2n0d4tnlshwng14ffh06fxrod391mkohk4n7walwo6tytf2ep5dj2rz9239kbadqi8zatkxn2c6oa2lmqu5adkq9fnxyjad3q508ccdaqvrzahj44zb1gbh9a25kyoqgeb6dhbwegog5\", \n\t\t\"name\": \"gvp3snrb4p8fdum7578dildrmswpxp88728jvcnsp35y5p0eo5f8n1g9nd8e89wrblkeaxolhglli2ycqcul8phduskwyjhan5k0otj1xheb41my582dsvvmkf9r3c6gy25n8zjkr3465fur57uvdeb833f9yflu8oxnbi0agi1kcu3xrhgukjqfjs7p0wxob4gcfvjo9hh5svv56k2ccss2mlf0pjpsv5injxb6mxiyh5cfx0yn8riuboz9rh4\", \n\t\t\"surname\": \"jjcs4udy39xmxft9gu4g9esfp6nra023nvr52z0zm0bka2vgncbxxfq0ie7k1unoy10ivbr71xshjfvjzdsqyastbnyofc422k0vo89v03el31jc19uv7k5r9v7fuiwbsafcqmefep6spegm123slzn1jail7kl1gw5emgtsxq92i9dms6chxie721rclnsa3cdyrmco8imbhinut7wmrlhx5q6hwe2m3q2xwl7sybq5erfuggv08gfnsoqvxum\", \n\t\t\"email\": \"u0apfd43jcx3cimy4k4yi1bxvaawtr668xfja0tvz6dromf54jka6pmqs7z8w3waep9bvbdu07jcow30xh4j9rkcntha2pbg7pv0zfi7dogzouhf5b41b5rz\", \n\t\t\"mobile\": \"wz0trjzd8ifiwk59u49t7fbl32teexwbsob8m0zqym65q0f8xavysoo5ihol\", \n\t\t\"area\": \"v7hw8o6tzb9xci44jufiz0l03bmzpl0w2mps6o1ya5w5z1w3f71blbmrm024nv18v064ggvqd0fxaqjmgu1s62kv4r34hh4wzclqqjo0kl0xmuni7h0dsi7alsl8su2k0r9s6e9r4kuu1fl3f02hhoygvh6cmifas2etxko7y9zfnjpht5vlqg9o2m87ovxkze45bd5nzytz6zzpkgyd8h13c5alb5pjikawdsxwq06g4pno8cna0hvhbzxw6yf\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": false, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"c6456947-0df6-4f5a-8e57-fd735b035d13\", \n\t\t\"tenantId\": \"c23367fd-a492-4099-a7d4-7c31611241f9\", \n\t\t\"systemId\": \"17c13bc9-4233-4df6-ba2f-d838bf663d39\", \n\t\t\"systemName\": \"uumgo9tkxhow6kzsgkhi\", \n\t\t\"roleId\": \"55f0b3b6-7db2-4ff1-a740-b9d186cb5592\", \n\t\t\"roleName\": \"f0jyftgh3g0quc8d9r2ys6ossk8n8xldrzq5q5553t26iyfxrcde5ofwu23zi14lbukzse9ego6p89nhwpv73o4xkmky5txxf5adu7eiw9cu9dgkdp7zu54j7wqlnczifby5z3ahmlw55uuz0p6665u9bf59mti4kw66inb4zzw6fzozisqvlh9bk41r3ihkz088ewogwna2eqc0d2dfaly9v81oz9c7e3stp6d1xepuj154ehbzmc521i39tui\", \n\t\t\"name\": \"h4k4i0os6w3ectl1lmtc1qrsk5xef55z3txz4cgtx6scv6qvfp2j8v9p29otz59zu0hmvhjwqur600qref16mibbdpb2cjostn3jsdwd2ryegf177lqgdfgarbj7xqf9l3p5t4ktuhfr57n786dubstecuen373ax4e8bsloymkmtwargw8wr6pwk3jgfrl0v1xc0lfjsc5yxyc2kuxb3ealr69som4exrqbxw8jbf7h6f9930fswglpm5ffq8h\", \n\t\t\"surname\": \"vgz8ztiiugdyrpzwgqm2bx9f2r5w61idiat1n1gzvcif6maee1gk0g4xnxjdtnf4shwxhvwg7h1xikaz0sgy7tdmwm1agxodh15687u7a76fq11jur4tsx3ou8lh0t7vf0hf407g9gffocc60sl1s5bea47nuo5ldsozi6xp48hy1649fvy0q0wknfhldcpfmw8a9yrtuba6aghsory9emm0p3u4lgm9c94cfil3g4duxm6hdrc3wk0hdqxcrpm\", \n\t\t\"email\": \"ywybhxy9xw9crsr83auirx2ysskob9az023eg858lvt0z789nqtvdz47vponsuixxcc3j952abauw6sn6it5h81r74x44nslxpa6dcscs8g639lkiv60s8zd\", \n\t\t\"mobile\": \"xp2nbml4uw3kgo7hu4eye0gqdfygxjed29wif8zm3keq9oydn3ku1tswa8rr\", \n\t\t\"area\": \"pi0rr2l4mdu0oqo5guyqup4t4k14pnroy4zb9cd6sch5252vbqnxrz6bc41ebid6haybkdq6e026rxa3rsitlknsryw4ecmpty0wyf5m70tqngotf4ue3n8seqwd3w1roqdg9typ8ywrpptno2v1rhhqhj5fgbejurop2ys1kpuaa3qgsite368u5hx3sfcpsdrs213ryufxzcz2l9yp0iwtfe1ng79kz0v2vvlod9m1bquff6exv4uza46oj4s\", \n\t\t\"hasConsentEmail\": false, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"1086de55-2a6b-479e-be52-6a017b14b50a\", \n\t\t\"tenantId\": \"c059de39-71e4-470d-aa32-e3294e8d9976\", \n\t\t\"systemId\": \"f0585b53-721c-4d5c-86a0-1f297fffd9eb\", \n\t\t\"systemName\": \"mkwu7bebc0r53rs52qxh\", \n\t\t\"roleId\": \"67406fd8-5c54-4b15-b2dc-9a906a96e6cd\", \n\t\t\"roleName\": \"zev22s725feqfn8bzh205nv3dium77stmlel1t4e6l0w6ioxhzoh55ahgkh3lhe3xmzjvf02o9oitokzmhui5plshzl2v0x2akaahdeh5d1nbc6mr597k6vy1enm5vz87yog7uvckr6j2ph0bskvjy655k3z0ugj8dws3lwnn5akfb6mr7s67f4ovq1weq1tzdy70i2gzphc7r83jajj93d8oyo77hefo3hdlv8dc1mggw8uav3ab3w85iugtxr\", \n\t\t\"name\": \"5lb1elxqmvrk1i0s2oo5wfho367ruzma927nat8c42tizks5ht2ekzl436ncdn82x1v8b2enu8qhi3sq5y356d5uxfeyqy6mbbiuwdi15juqef09j83t09tjyr3rpsljhdy2jxykn3o31l3c7lve0wbgdx0xe5my1ygt08ugo57we9cr3tvvso87tox5259buyrxa7qy5by69f7mk41f8f3kkddi7lar609qkmesfoezxvjgsw75fizx7e8fc8m\", \n\t\t\"surname\": \"6t1zyggmuiy9f638jrjxar4evc9cnfex0hh46ea0961nbicnw9ltezsucygz5vocydjp1nd3fscc0bczpmu06ive86lu5wzrw23o4q9ljqh35rc2vosxgtvjil22xts6rnf3rvts4krm8sx8u2mak3ywfid9m2a0uma63m0smvrjd148f5brm1vf41sfhy2mqi4tosv88xfvsccndzjde2m45jcibq4k5a6b7bjeyhha19w1n8xtxxil7cfu0l5\", \n\t\t\"email\": \"raof318ghm9acvzblqvz4hv59dbbye9zzmed1fsem9hs4gmasj5043ap4puhtrp24gse7af08gi8nqr82myod3zu7dxtmegerpxjvfwjay15dioohu4u77ja\", \n\t\t\"mobile\": \"tf1zv00y8yy4ct5fy1cbnymn3tsczccbczu5x54f4typvvl5fm0i8iiq1ah5\", \n\t\t\"area\": \"wrlg9xflmww8a7fexn7rsha9nsox3hf2mwwvs6lpreubrgzwk32o5ubbyoqpg59j3uxdysew0exwqk72mp9g9jhz02y4n719c796al09tk6962l4xf0mho7fxqrwbz3nymiwo2857xi5w0rapvncex2en24xgkdqdqe05uma61o9cfc6fhy0bx1plvoeat6l52nkp38xfof8mq7regl2ivif10c6fklk78vyg1ncik67kqfa3qx2cw9xeh7u0ks\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"ad1d641e-c28f-45ed-b21c-48cd77ee9ff6\", \n\t\t\"tenantId\": \"5170ba38-23d2-4ff9-8642-79a48be9190d\", \n\t\t\"systemId\": \"745cf712-fff3-411c-bdc9-44b4c3609c99\", \n\t\t\"systemName\": \"2n7jens9k9p1al1v3340\", \n\t\t\"roleId\": \"6c962fc6-76d3-44ab-8e2e-d3fa05b220cf\", \n\t\t\"roleName\": \"owy41djyu06wpjtw1icz0txdj0ms8mpavuvvd1gkc1j14q1xfe6tx8pik00dl0bydtst475sl4vc9zfcma1akdr55x0b2qcepesktsk0dp9osf818yoffyhzpzlo5isb4hbme0yjfzls9nbs4v7nqlcwvlah9iqjrm9pgyjbm00buljfiyna3gok4mhp8doinhh7k3y4iyllsrhrxk09qo0arjp3uh2gu6muu491wz3x625ott0jxwrb0kuoa19\", \n\t\t\"name\": \"802d6s9rzwadailcc4dr9ocr7pk0eep1imd340kx54my083s48xz0nvoxpydnhl86lqfpplvrmi17j4kalfye7cle5zj3ropyqprjo4gvr4j6n2tl39o0v2ztvmujebtbmtui89z528lw6a2kbj6ttib256n3vjbqn8wtftmze1dyjse3q0ucped61x0kgd23a5ka7yzmenx4syh5il9rgambhz9ddb8kxj87j2oeo25vmbkhv6r56sp7ysrvsk\", \n\t\t\"surname\": \"hpzf50ost5ujy6463kcj7xn6huwl5c9aykmns9ifanzic3emyhsqsa0vnnjahebkn7ros0aq5kas9lowyizucuj319yltahcu2zo0phy9j3yjl8jzhsn2lol6s0kgo8t80sd9e1uvkdajgzz659ssdq9agb2cnaqmnb034bgdbqn00ef9ma5lvots12uul1obith1a043ovin33i2kinee1pswcsmqade8dabnl71l8y02kaglfj04cwy6x0b40\", \n\t\t\"email\": \"l4lyw9e1cjtou8vbijpqactzks8nqsvmb578ri4n7mznxt1rsv9pmb6eiu8uu0mbkh9f2gowayliu445aux2dhp1x4ugorotomnm9ggtbc5crs72qmrt1nqn\", \n\t\t\"mobile\": \"lfl1wdupsfbdgo8nbhuv2vdsbgzq2wimzvcmp2gulvm7nj9f5pu6jcltw7ng\", \n\t\t\"area\": \"ol0lujjfncsivtk80gk7ot14bt0psdmt56ohr4uy4hu1ua13nep4wmppxinx8x5vhdtlfvbrpm47wsacqdkcw0xd3ig43r62x5t5a7b9nv9tr7bekfkau27vzv2r30iqs64g915o2pjxrsv0enka1qt74eq2q0ipz9s6qlqrjgso8roihj2fgy1qza7s1laudl5f7mlx4mrq296nut5okb4etn7v7bufa8phynxis1bfpqmath7p7xr9fsk9cxf\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"27418af0-7b25-43ad-969f-b93b97f75283\", \n\t\t\"tenantId\": \"d32bef89-3fc2-43e6-9925-69082a402478\", \n\t\t\"systemId\": \"819a45f3-4f59-4538-93ff-e64e8377e6e9\", \n\t\t\"systemName\": \"vspy5sr6psr1rb9bkg4x\", \n\t\t\"roleId\": \"2d285ede-9138-4520-9d84-c02248ceeac8\", \n\t\t\"roleName\": \"u07ag42nl53k4s15ztgke6ndfoqq2jdn8scbjaib6ltlkohrusjhda291izk4xkhkmjs0ag3ydddyrs7i5d8svhvunnw1fd7gxmw0x6k21l2bany0ndpo4xliz65c7a9zmpl440in7rdv7xn5xikcd3jd8x767hmdzqpu0ccpw3thm12wncsc10mbys7skzpmr49sk0co9yxhh04jx46s1s2m2o32i47u7ni59fcrbik5kmthv49henkmzgmrcu\", \n\t\t\"name\": \"iir3v5s89rxf208yz4e7lejakp4npdehhym3ru8bb818sb9t9i61t7r9r63a5embuolhhzb0toh4g4m2opg4kpsnihnygozfz4q6d0wpb0vvn4uroudea9vitellifyqujb5ewdh3jzpx30lyvjil83nxguwui8xfw3z2n03up2dayyitzxxdl3lwk18xuce9le1wohf6olr8py9u7i27snp30ql7xqxaajc9d60lnsdgivewsl16b3dh01x3ux\", \n\t\t\"surname\": \"5rhfi84ufmzofb15wp1hqyh1ndx2eh76jh1okpuhba2oob0on5mogl4l08pqoqkfwd5n929ciz5v67btobs9cof7c0fo5u1jn8o5yzfa1beatcbbmuo63rrozy6pqztt815a3fsf089q2xovpa7e9t7fu988f8iff6shih3nrb7o4sbh077696w6d7w6uo5jbx3godyvxzsvls9kjikeuez1bgy5adszkzoptb80oltweb02u200aou5dz95ay4\", \n\t\t\"email\": \"cvvhfptru8gwwi0bhb4av4tqbls1da0jq3iu21qf8ydscgwrrna6l45enu9d1iixr89hqax1mahqgrs556c1iqhn8bvx9c1ib7tcoz0me9fxs1cio901f7ij\", \n\t\t\"mobile\": \"dwh70vds97e0j7h1m3n5slne2wo9rs78wr7ypjrzfnoue2ba0kyijuwg6esa\", \n\t\t\"area\": \"tyq6yg57jnhkvu1dqn7nhvr0lx036vbacfiuc845r8ule9opx8d0b8f64mv3f25vmh2c7hezeq7g8yhioyv8nzmqeh026r7k3hajniidjpbyobor4426axrpfc8deyb45ht3ysup6twbc2mlfzfrrrcck3iq93zwgeqfpwrik2uiwf8of9cwjf2s4de9ss8zuesw2n5nkjjamdpdg77y8o6hseydxgtjgcayc301uyntu87awbpq0if0oqrke8g\", \n\t\t\"hasConsentEmail\": false, \n\t\t\"hasConsentMobile\": false, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"4289b6ab-54af-43a5-9098-b4233185a0ff\", \n\t\t\"tenantId\": \"e0729f0d-9a75-467f-84ed-5af5c64ba0b5\", \n\t\t\"systemId\": \"69afdd9b-6ddf-486e-b212-3f8c0c25d121\", \n\t\t\"systemName\": \"w9w1njs1m8dktyt5h3we\", \n\t\t\"roleId\": \"52196954-c85d-4ce5-89d4-381cd68d40a2\", \n\t\t\"roleName\": \"x4wg6poumodepq10jwihv3peuk9hghjavqxpnf3ks6xz7p4cq1kbm9crr6kvsqcmc7smeuzbfq6dfvqiksh215wtomyk5wje512gbeqvfeu332zbb9gphl93p90vwdctwuyez20baytaim7a9wi4vtg22b029robgfkyo2xes5sydvl8scf028k068bzkfdillpskb2g27gvt87vt6a702zitbykmydnbcs4l3e63wc30ig3xhvai06lrcmf8mb\", \n\t\t\"name\": \"zpp21g3lcpxmaa0m5s4h1og9fnp51yxpa4fwwegs3voo2n9yv7nh49wwgh5e2owiqitwe15cehmrsjzse7u601epi8eq9tdpt02uxf9i1v9a8b15l0siuou9t7504chaq13uykmsxg1pr2mf50t0e5ses2vombpuejg5an7rved7lhdr9dtlkz3xahp5t3jnm487rwuytolf47rfc8d6wifurq91j5tcyz9nwt4twi2tvpqc0zyqrefy5k3qvrh\", \n\t\t\"surname\": \"ghyd2gyhgb6mmro6zzciznz6ssaxn7jhi0rnesbvtg8uszhkghz6giwx1omz10978b04fg4ar8pjl5u7ult16wedp99ryr7df6160hn0esri76swtpr5tws2n11e3j52nkgiurcbjl29aux3hhq9cimzc6rmr4bqii4ys2g44sk22nbrkxo4lyfjuikt38andxggezep4rmgrpd62mtm4oa8tcechrb4ihdbssq1kzznlfa7tojtvgdz0kkq171\", \n\t\t\"email\": \"5l6y8nodnruyugj8i3bxyqdqc4hr8u281e7np8gqvvsb5q0z3gkyyw5vgii4izprg8t09nx1ath0elfqtb5j1bj62d14arxua6tfnjosfaaw0cze9hq6xoye\", \n\t\t\"mobile\": \"wfto1ykphxrs924dlnli9aqzy2qcka2up0pwtk7wfz4kgtkf7k0484b5q1l6\", \n\t\t\"area\": \"ggc7mcu973p7eddta052tr7nbxtxmjsqcsp4mzz5n5xc3tjafq1mkbzlfvg50iqkj9b13sgt2p31rgk13mvx35168ka6rwmfj0mped48zd6ou9c7robzhymcrx829c84sso5ctv88ih2ys8o6dqwvtehhzbekdqr6jzdddxjt1nj98os4uzel77kkbpnoljexbe19rrvxn8sex8a16zgiimqvnamu3xnfzh7h6cbmfoblwq5z1cir82u8cud3uw\", \n\t\t\"hasConsentEmail\": false, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"5a16738f-4ac2-49b2-b4b4-0358be86d8ce\", \n\t\t\"tenantId\": \"47ca5e2c-8ee6-4eb3-816f-757fb845bec3\", \n\t\t\"systemId\": \"efbe333d-2c19-430d-8fda-cbd5afad9454\", \n\t\t\"systemName\": \"e1429h3g151dc1iq8yix\", \n\t\t\"roleId\": \"09b511d2-fbea-479b-8a1f-cdb9c6989676\", \n\t\t\"roleName\": \"ax10q3bvt9agjupkpxjjdax2zurmvkujqbkrixohj4y9lu71xfvvvsk7a984bcumrt2vnt94h5g9tcigolhcdoy19olg2irvy87w117bipkv5bytizjzgbqraljfapigo4ywmxze2xuknhjmpv38ug28c28ligvln840ycchwwydd642f4lqdulpz7la1mectpg9l123ksw8mhg82biunhe4ehy26zki7eczylwe6mi0cddglodtenbgksqn6ci\", \n\t\t\"name\": \"w1xxzxmnwscfsncrg5v1070116i2realovno265vt0388y2rt5pqe8difiqsl26i2oo8jau0goj73t25a7ofmcvfba45ls7shj2723hmbs9oopr28x7asvum1fkcr8lj7bntrkjgm0vbz3qolw59j0uue6oswsgsvplhh8icnurs254hkhta62fkiccj0bn9inapn1btvs51jprcwsjcjqh0o90v40rzou9z9zlwdw7staftscv94i5bjel5lvy\", \n\t\t\"surname\": \"apd7nfo84wmxzi7ayoa4lt4aejyiooguq1g886j251smxdgryc7tb8hki6b06ooqh17o0lpsosuoa9omwuvdwyglgh225hjnksek63vrl0m44k2deii6rqcvfpd69t99mjvoyol2h8rlwq1pe2nb3lmtb38hzpxaqljv654ymwb31zwt2o8uy4kw6ns0i95ufmfrdsp6lxjdjduzvstg627781fx9b83a50e7ulg6zqmqx85rdp4vx1bbvscly5\", \n\t\t\"email\": \"ih5byv33fper8opn699wt16881py7w6vo66z8og1b5nwa7n8f3i8lfx3n42wj11aimqmytz5djdz0kaggdpstbhezmbp6isp3ystop6z2mea5mn9jx4n8tp4\", \n\t\t\"mobile\": \"3zio9orr5xjod3kmmu32cffr6gq1uqa60iq4uieqdj0voqgavq1s80go58p1\", \n\t\t\"area\": \"v8qt5q3pofwdl1yund94ir00zxwba6icgwwsf0ly0hphd0ztxyjlfgo7h92sqnypheq4ow8liox0zfps37cdeahdpa822gogtkm5jzeqd9bv9jcgnmi4890ovwsr4qc238mepd0e9eukhkvwis02qvsowbbbp1uh8i0wo1ia240q4frpxyozzq2tb0qffelm380osunxw4qof869rkvpofvkzsneuway55vnygy3q722zz18p0sxnewbmoawhqz\", \n\t\t\"hasConsentEmail\": false, \n\t\t\"hasConsentMobile\": false, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"6ebbd8b2-d3f5-4d7f-82a4-93d17fa2465d\", \n\t\t\"tenantId\": \"3f89d097-b1c0-453f-b87a-6792f09ced3c\", \n\t\t\"systemId\": \"c4a54a9f-bc52-4e48-92eb-b9f7aa20c63d\", \n\t\t\"systemName\": \"2l2twl46h1ha8mqdu8uc\", \n\t\t\"roleId\": \"403f80ca-e9f4-4798-b4af-bad720742c9e\", \n\t\t\"roleName\": \"rv9izun6hsziyvrm71yzn06mcgt3wrqtwexkn37wg7eggfyomgu18ljx2khipw1z30g43kxt8qgd6whtuw9jnavfntr77ho7erpbrq075225x1vggn43uw3zid2hhbwsl4tx85xtmpli3l75uct6g3caxeamk5ob4bita405vbflc3fu4b4qggfmlqa50nb5qjqpwj704p7wmzi5gy7yqzdyjjvphojok6r2z5qjxkfbkevhqoumwk13c9350k3\", \n\t\t\"name\": \"jkmn5mrlibnmpajpsoieddddznjsuofanpcgpk28is661p2j2vpg57ht4y7oh1imq54v69zvzc9yp8z29ddfrub7zwyleu51irjc5h989t45i15ruke31mzkp4slcbpf02bnmaso4zig19cavq3by91lalwxhx9fwtbvvsibks8lmc8hetz3kjjoacmfbefgtixd2o3cc1e8eq8ne93rqifohkp998wmi4tq801bky3eot00ujxyiw0zeggiher\", \n\t\t\"surname\": \"ibvgav2s7jrsc73wpue4bclwda1dleadcu1fn9ptfp9sruk0qx24k5ah5a5lg0xmpkujikh3ryxljxwycsokbs6kg2nuvb7tudfu3mj65omaxg5m1smacczyx7fm02so3toah9g589grbfotj2e17v27hou5puauuaa8xk8fwo7rp773i1r5id98qtg6dsqwp76e2r5z0q5lqfp40ffuzfbcngkvw4jz0rrcuwt412gf1n0k1dqmdbggtf1m9uc\", \n\t\t\"email\": \"4v3w2fxqbxo74kicoj64ezae26gtdjkw09nk8koaq7worggc29ue6mmvi19sjl5i0p8sniq0za7ganwwmokjnd7rzc809rblpn210u7xcfz4sre797elppf9\", \n\t\t\"mobile\": \"l4t4k6fpy7lvlh03l6sfe1uul3zg379qtd39ch7es51z50ptk8rj0576rotm\", \n\t\t\"area\": \"5vu9coipy47ifz2qde0jze54f4iel2bz1gqgwg3j9vqzl2kclxf75cyjeupksurhdy61kxhgm2opdwelds8i66cm4fvbh36eajzsk1vz7t2m9jiccnl3xkwodxn6qieym6xspxiqle0wjlisbtp82e1r9ab6up8g4xrignw3y27b6dy4p5hjklytkd94fn1iu01s3a0r4owo2g7n0rfwxxrqu2qp2eflvpfkw9g1l50bsqvh0m374wxd9zqfe21\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"0c9b1d6c-4571-48c4-81d1-b8a1d8db1cc1\", \n\t\t\"tenantId\": \"f6c1be55-ddc9-4349-b720-163dad434211\", \n\t\t\"systemId\": \"83a0d5bd-4f35-421d-b774-acc362096cac\", \n\t\t\"systemName\": \"c0f8dqp94cmtlgy1bfl7\", \n\t\t\"roleId\": \"09324f68-ff92-4ff4-bf0d-59ccbbfa6a77\", \n\t\t\"roleName\": \"mrjkdoc147zhf7y9v2um5v62ud1p1iunb2twxzz8ewiz0abmgo3lyfr0jk0n711ikvxs7iqm8eymlp1idwypy2ma8pdontn8afn3gsrztpezk8sxymk97jvjbqjarvfw86xnl1u3kbm0e1gra9g4oyhn6p6eyau2rhy8jcalv222w05lsaxfwi4ypp2lht55t8ryvx46561h0xcw3hygb2qvyq965rvq4nawtvuyzfbpimysk5w50w2tcemfbkq\", \n\t\t\"name\": \"clxnvgar0dqczcmsvlggj41h0gxna2tow22g5o69qm822ogybx2stlyfn8glcaie9s7rzt95mfvrsib7pkmeeje4u0g2h37dszduxgz4wgtasellqbbysp6bn3mzjfd6htm83ai21lqvf6ck0t8zaxfwzwnwhmwpysg6hl7hfe1vejx2s26vot20r58xxmukvrxzza4xazwxnn2otimqu8l13jzrzupktuzbvmf37ivzbd8d3aythol1ft539hq\", \n\t\t\"surname\": \"v8r8a0jvbloavhxbafekjqfksu3967b34bdbbxsvdl4cvecfweh4le0pvfawj0cgst43l8pa7prcyd75bj0gaf4n0isr4v9kjspc9pmfhww226j7le0gk0k5oqh1k26pppzpj8ci5yowtqmdvx2us2xva2jmg1dzn2fs61nh26nzml5prgvnj4n5yyjt38j8kjn9ba7g7vbqfnhq2v7vir0gz7ryeo3o8nsj35yovddn1ly38z9d7kqyiokz1kw\", \n\t\t\"email\": \"9zagqarq7qu9433es4ligywh49ltosrcagfpgapoo08ospu1e7lcmk1lks3jorkbr5u8ysdzplhpsojh4uncuovamcflj3r6mi58a70loe7ueys5nowh73kb\", \n\t\t\"mobile\": \"3u35ib5yf22r7r74h8tkk0cx1zcwd91b2933gsyi2ubhaq9icrjzxg387jn2\", \n\t\t\"area\": \"j6armlq3mtrwkajxrk4ha7psca5j81d1bk4mdb5u7dznfjy0nyimmw0gb6ksysdber359sn23sargxynxp2f9f1gyrfsqwmjxd2kh1ooqpjrvwfpfosgwlxuepta1csuqv4qlp6111l864yc8dv8rlqz5dd2fdtr8hwdfbc2bze04kqaffv22wcc3jl4i1kw0ms4bqmha7jl5de27lckn9svjr6sl0jxhm6g47cih9z8ix3hq7y6pggtnliwzex\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": false, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"011bdead-5cdf-46f3-b931-b31bdfff5ce0\", \n\t\t\"tenantId\": \"306604b3-62f2-4682-9b90-846df1f78cb0\", \n\t\t\"systemId\": \"7f1b6bbe-9d35-42b8-874f-45e7dafe9045\", \n\t\t\"systemName\": \"6ndav876eh091zmg2qjy\", \n\t\t\"roleId\": \"b0077cb5-364c-47a4-af4c-b0acb575285e\", \n\t\t\"roleName\": \"5zo1xdi3oxphr94383okr2e4u9hpjulxt9js363bs9xyvbj34y64it63mvfpur87utn6uiuspaiab8095u58czh8c45ombewql2rd2dt0qlvwrl88mw7yowzatrdt2pnnpv46je6942rarzh8e7fpwhqzj0mo3cd8l03aer6t76n8f9dber103c2t0lg766sm4ol2n9wwbih9eh3xmfudgd4vw1qcry40snsftcf6d9eq1001w7ivt4tj8dozsl\", \n\t\t\"name\": \"mmzqvd3bt8aaqnd47feo1tcesshoanpzqwyfh19vqq6kuo2wmwdtilbtvjkp86dmj39qzzpgrow0p4f7zwqgwtj3lw06ulvcm4x1ej8sclxmtgpht7mdscj1nxcp8zrw3sz6as2sxavtgrprbk6pms5ebmoj5cntjcq64n4z4p85mpttg57f8tyvud2dle2s1rea0crbo8comd5q3jj9h1tl6k9r4qi7pr3e9ymelimk0njc1u66xjclht42ent\", \n\t\t\"surname\": \"n2xe0shn6bl4o2ebz105v3d96gwinuftd7ulyxkq15t2b1t7aqaqowke75lrk8g7mqqfy3xrmhvcfqmeb89sm63rjxsko6li9c34urfxp79hiwkt8du5k27j175ab6as890m5pzui6p0c9jv5jnzl5n0z0tbwapvthya6pigi17rkibffxug93k7qxz5zvusl5wzh7pt965red223uclhhtrs747zygy5symscal77yu2vc9nn4jeibdlftqjls\", \n\t\t\"email\": \"l0ibxqw588hd3j5s7nx60taq03hupix5aalsx0p5o0c4ikck55hijkpt4ikmmrnh7ygcigybjdbtckltzrvrl21ydnguebygd1685ppmr6dko0ji4umeiwlt\", \n\t\t\"mobile\": \"90508dy3wk5ovt0aa7fe7xvfvk157cln2igvhyjepavuftszlhf88vykgji0\", \n\t\t\"area\": \"93x99mguoj7w3119i4qyfquo731uuwk1olnoveuli1bqmedplovq8mbr5oqprgtk0za5lpdxp8gff74csa4exk5h291k1230aww9zthdc8pf4gm8swp895cllzbgqhr2e8heimpvjrchlej6qq6h17mdnkwo5a89zgc5okgwnu1z60gsqprypexniwt7d6b95vs7iji19gdep1jg5wvgbzw9j4wnwlxq7p615hrwkvwi58vt8rm6104emo1lhhn\", \n\t\t\"hasConsentEmail\": false, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"76d71dd1-dd55-4b96-8fa7-d5f37ab501a8\", \n\t\t\"tenantId\": \"bfde7e17-ba80-47a8-844a-eac8a26e18b1\", \n\t\t\"systemId\": \"07bf9785-942a-414a-844a-33a0f25b1958\", \n\t\t\"systemName\": \"1sbofh8wj7plhq8vk4pr\", \n\t\t\"roleId\": \"fdb8e151-b6fb-432f-93e0-906c03710f6b\", \n\t\t\"roleName\": \"5hcjcou1p42s39nwlsvman0jvb7zrgbmtrxe79x7lo9jc5a1w84n12qkj3lskmnc804ngsje0dn5x8lpukj1mgdbnv7qeipnbnsjxg1podeuhhcaypm5eio9846jbcui7ce9rwsg739elyn4pn2ab4girhwftwo776c0opmpi37fcw2l79g73pgwuxe4g4bk3n9y4rbz0uv9u36ftz8rmo350qwjngtn530fv7gg4no4a3a445w9hs3i04ujw14\", \n\t\t\"name\": \"h4qefcpqlwudczu5txhfiie685ta7c7clcqcgt32tfxu63c6bi2hwz9zchrjzjwflmdqvz0340qjdqh40fhfd8tegt2f6yi875blgqsee6xaoojakxx1khysyt11s7uwtua90f0yzz0s8i7g3zl3sg9looaj3zggudz247f60v4huwb7ohjkhbjgqm9k0ron694b2lfqrk7egnjvn5yzt4is8zurxk0j61ofrqbdd9jrx4i5rnbc9i3k6kklfuf\", \n\t\t\"surname\": \"9gx6hsnajuun14tbdynsohu0dzknt9xgpu721aulpq3gedr2o983vmq146nuvk1h5wz4mf9znatgg6d194ygtmre8mfr4et02b9b0uk9wezt7vsstgdmv0yds69lv1pb7qmp0krh8m4j6ug60me3ky2pfbew7r5xd104bh1zj3nbtn0ueox9xfq2u96h11le3ymms5rhk67oxomk6suvfj1bufxt2pxi9osl2q1w2uh8ahvtnbififl5q6iy7a4\", \n\t\t\"email\": \"9i39cywzgomyl8wbb8i0ywribpeck6tjfken5zm1mm0dn9btt3gvwbyqnhcaunsq1ho7nosezrhnphauyo1145p1va4l2l5jscbrlqzum7shu0zoip2u9fly\", \n\t\t\"mobile\": \"6c3qkcg2csbj7b5ljy5og59p6pm58umrk8hr5tbyd5dqozcm7eqgdjongej5\", \n\t\t\"area\": \"we7pmzpx8guripb90oen80jydnrn86orq9g1tdtw9dcceonsd7auxyjcx8ap1916aobr1ofv1ynream7xeh9xzazsmvh3azwrfemwuz97bwdtrpgnhak6vpjdpq2jlaq3czylvadhig7uugi0f9wnlr1ik4vi1zp40uyj3sx4h8ow91akys7oihoyeng4xzd39qzwwtxqyres5em1eg7u2pyd2i1jxm9zatdejb9gccowoa8sema3rvrme6084c\", \n\t\t\"hasConsentEmail\": false, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"8289feac-21a7-4202-b3da-83df781e70e7\", \n\t\t\"tenantId\": \"75696fab-0477-43e8-a7d7-ccc4c73ae2c8\", \n\t\t\"systemId\": \"41658bb3-e4ff-4457-b507-be33e4b21c5f\", \n\t\t\"systemName\": \"wro68nhr4710ury5dvok\", \n\t\t\"roleId\": \"94c4db0b-59f2-4831-a490-ca16e77d89c3\", \n\t\t\"roleName\": \"lkhxn42cyy7u26bywa4j6r9ssl0ejdvgu6antbcpso0eyyv1frdm1hd7f2jtebivvyrvoo1e6r0ikrqdx8e3c4e1lrgyzka064xkcmvrl6fle0v4ukyn57kvsxkfwup2wamdu30hv537c0rldjhqnolj5kxu19kgwrfw5ve7pt1ddaz80i5hkvmx02zedlfmbt4i1r62vz1zop6yxe3he2rrle8nnrvjppzs0c17bm3n796n1j0qy5tljyosymy\", \n\t\t\"name\": \"tyxooggi9o31nzpkdx5xr2fkqo8548pxodw83tkp904d2gv1ui8mwvtcl9gwp92a6jjyj3d0e8gozhw8ymd2tzcqtvzfixr3bhs5jjtkrjnavby040rrc99lhnroufbx3gu188ir5gmpek5sf72r0p5v0nklxzvzlsw0tm3q8lobo50us7wlcbmghlllm20s2u6hrnfs06wm8w6r32c6qr3qd8d49on515lnbxjs0tq3nqjgsofz3vkcf9qt0wp\", \n\t\t\"surname\": \"cn2h8ge274utn5uj2klbbt2qyt9hsy9urxhkh8bzyeuy2gjtblqbwkm3ha9m37vi5x84d2fhz3cmxbsn7h9lx70ahfhu6uztmo2puqqpsi49u7agiserk46oylee2puqvzo9l5x3iy9s6el68zekaatz40kx0ppuwo1efgtni5f0muxabn2cq2rxv7qx2s6wtsu2sr0fgxncfdweu849tl1hh4chfyu36jmb7yw07g9ja3z98p2vkqwa3o8f0wv\", \n\t\t\"email\": \"2jp9l9o9gry2up46c6dhevyksjkpe0eem1cf72kdia69fiyz2fz079nkahung0stn4myvxlcvz3ehcl13e004a8to1vacilewy0dk7zl1u0f4syg9kr140s3\", \n\t\t\"mobile\": \"1a9fv5w5yfy7weisyn1p69v9f6acors8nucmh85bmkoao5jcs8u74cwztzdr\", \n\t\t\"area\": \"30curj91xls5n05knq4aonegms60sft24l628h16wuncyn2gn5578eonpdoysf7p9park11aqs1h1fsffqfwt2zmdwuw5k551b80a6vbyg37me5g21v2ld8z20u91dffm72oxdv8266a9ev65q94na5uqgmxkas0urs63tu66jgoplspxylo7k1i734gu5058mfd2ekuldkp6gxgyxzv4oflzeupuhtm2tabnhp3dnfc2fqj0jmyi3uw4m1yxnp\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": true, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"9f61fa20-a12d-4808-82a6-5f54b4e2144c\", \n\t\t\"tenantId\": \"e3a99b4d-9130-4c16-a1ac-18364c9b3756\", \n\t\t\"systemId\": \"76c4e2fb-12ea-4fac-bf1a-42a3d8b7edcb\", \n\t\t\"systemName\": \"prekfpswn922a9nlzgd1\", \n\t\t\"roleId\": \"8ec7a841-9e21-457d-b77d-0dd643076e4e\", \n\t\t\"roleName\": \"9dp4iv54lestqnm4tvk73lxflu9tm52saqlwnws23jv3euysto34qd3jacyhtj81yjshwsgbrrs1rjj4s0xscah4vfpklioffgj12ycvaxexmt8isvskmbyqe93ug31404n6kcxpn9ng7dnpt1vh3wk98vanlm26kdxk9z8rdc2zrk534hhi8m4o3vbv932ozkl1nfgl7w590uj49a45k3zez5iwzub2q9cvpp27wnsqgyfg2j85qqaxikv2ueh\", \n\t\t\"name\": \"sqfavylst6jv0b6fb61k2m9tb4khvfju7fyqc4zc8gwfwtkplemjge51k5cyzzyl4ql2aq3l8r3nh1rtduygm77vperq0g5tl8dn3e96dz2hbvf6eb04e87cdaxjzrajc5mo1qnk68dxsl0vnwsxa7bc2b3xa0r60x766htxh0he8zh3bf5k0kdvygow6rd0sql1dnt5svwe30k353rp71u5wvvrku3sodcm76f93xidhxo7v49qrw0gxn8djrs\", \n\t\t\"surname\": \"tvoiv3coapv4m0i1oj1qcroerwu6m238qfkx1vwnep2qzl99vndtfg9cjhf65aixp2zv125mvor0ldppatep7lzra7h6x2wjqcg3ej2cz6fk19zfgwwvuo94g09h3k9edjnf0ocks2005vgrfi8ddl72kryw50t2l8l266lf7ko5bl9y0b99msexvzyums17f3rdfyite8etf7u5bsggdrk8kla2ouv1ghrfbej2f95ie4ofybqn82oogi176o8\", \n\t\t\"email\": \"y5wgq893trr3kczme4z5ccj20dq4s5n001v81uyylb2zi7a7ji4j5umqvpzyhthw6c6uviuf62wesypg5zbtn2tqebjjlws7sc0lc2fpl7leryn6osoddam1\", \n\t\t\"mobile\": \"i5bgvs3magc745swodtcpqhewhb2x4no4495eldxqhamvrnfq410dh4mny3y\", \n\t\t\"area\": \"od34cdwiiagez6v2l14y6a8f7er6bljpb4f8mib3a75dbza8blrxur2l87sa3re4d8ucnsx6cdqae7wxzbgvvd3m40u6sipjsgltmcxwgo30asxp4si9g1dzkio0604u0txyjnbbtq0ib1hasqayz2leh33d6pcwkbrdi4wsmnx7a56k4whjzxqdfy7yepm5kxqnlq6gni8yzi4pu3jggjm2y7knb3v1ht3893yia2hc0k8i6yt188hck9mdb4j\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": false, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"eaf08399-6d61-418d-95ab-a7cc53de2e3a\", \n\t\t\"tenantId\": \"5b8a2674-f36c-498e-bedb-90bbb4105cb7\", \n\t\t\"systemId\": \"2193a529-9e8d-4c0e-bfb0-ef09014fdeee\", \n\t\t\"systemName\": \"1kh8h4d6vib3n7zk2m09\", \n\t\t\"roleId\": \"c3742c40-aaff-40b3-b7df-b015065bebed\", \n\t\t\"roleName\": \"cvjmgvtjdjxcfkclipd55lhzxhu50ej4iaz5q5wtm75x9cyqvhlbjzbp996y9wht9a297rlxkmpte46tezjmowazelqtx2ald3k11qjler1vsta3epcz06rlqqz7rf1nng53b296k558oip3m2qacnzfqxt3mxgg34hz8i61vtq90n6z353ghpwx71iwizrs5tkpzb3fgi2jmtcatcqbxags97gn3vrpz888vmf8cysg6apwgxds08lqojfh0l2\", \n\t\t\"name\": \"2s0bjrtprcv299m31vap6ay1u6wp3flrqa0fekrixdupcuwtgfvzqy6s5ty7urctphypr1v1kecdjlyvv04m7t9p4caid6hmfvfozg24do7dm83ml7tyzcb2xn9k6sihd64f19xbqslirfpeylq21ccyrbaar3ya0zou0b7f9e9n3j304w9hw4e2qmr6l6ik0r574t6e92pwsjonmykj2vd2asixhzbusa159mad3gfaivjjcvxciqv0u7h7xv6\", \n\t\t\"surname\": \"440p6xtkj9qzt21xxvh9qqnb6wq20lmcb10v9yx8xzgtkdabmdq3ikhlpq2zyaafh8hew3t3zsckr3z8w7x5b7jj09x88sr7s3bk69xferdiqesai5af888a65zhe6ycjqqbztdwx0gsuwh0a0wkhos06vijj2l5dvday49e5yl8og3kvzyis01pcvooa7s9felsyq3zhpywt3t289mz6k8ik7ksiq5cx2upmlu8bs6hz50n8eizpha2cvebdvz\", \n\t\t\"email\": \"yuu164sdm2m86nqq0kugkyxo1ua7m7557ifde33jotypid6z9moi8uj66xu6ltkkw2d7reyx6ofdbc9icxx2coptzuo2250ydi35b0y95e6z6zl9v9cfc66q\", \n\t\t\"mobile\": \"wuzicjchh9fbkt04gbq4fhliabbwbj6x92ppm6tf1gazzqfyc5lzmy0ue6ka\", \n\t\t\"area\": \"ornyuipm5tby0gzehn2vsv78sqqni2qh9i5p6bnb487wlk8et3jba6xee2iulmrkckgqm0fexpgaekwuc0386hc8zxc2w9a0ut8uszxvp3418hsn13r1n0k5yxnncknyedfg410gjomrvp7o3vd860yijx239eh6lpdvxrv4qm8l90oqe5atfzbvokoo604p8jpzwnxekxudsdujdywwwicpawytegey360w4cs6sjgxffhcu6b0axjr2b1hi0c\", \n\t\t\"hasConsentEmail\": true, \n\t\t\"hasConsentMobile\": false, \n\t\t\"isActive\": true\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/contacts",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/contacts/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/contacts/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+                        "contacts",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/contacts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f0150f22-5d78-44ef-9051-af1f0e215b0a\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/contacts",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/contact",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f0150f22-5d78-44ef-9051-af1f0e215b0a\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/contact",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"contact"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/contact/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/contact/f0150f22-5d78-44ef-9051-af1f0e215b0a",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"contact",
+						"f0150f22-5d78-44ef-9051-af1f0e215b0a"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/contact",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"f0150f22-5d78-44ef-9051-af1f0e215b0a\", \n\t\"tenantId\": \"d2966e7d-0ae0-4ade-87b0-55b8c2d396f5\", \n\t\"systemId\": \"121df1c1-08f1-42c0-bae4-4221ac7625aa\", \n\t\"systemName\": \"lwisy6owhata1xq9klum\", \n\t\"roleId\": \"0db2de56-02b0-4e93-9015-bebd4285b8ea\", \n\t\"roleName\": \"ks7y885fxd0ima0t3qsk0yl2fk646gulmoe6qzkg3mrc1odai9xfsngdx760f0abtl2z1ceerbc811g9cp4ngpwq88wp9k5g0vicec71v7ishh3li7jaihm0a0y92rwfwmrlz1t3jx3lis075bfy959avbdu32o6a4jjskcp45b1jjixfwjzgfuknh05gkshdjra6vdmnp74t3kv5idjil9gyrc2c6lfzgblw3anci15uv1fbcj5q8x7z8ecx0y\", \n\t\"name\": \"sgpappyshnl81uajun5pzclyrf26lkk11ihjpla2h7zafcvedjq07imq1sletjfw51bdpwh2ohv05054jkzaeaqj8sz9dgswpf186w6pncpvb044btyn3l745bt0qds26lme118dpcm7hz8ite6ivq4pbjlmzyokh2yjmoixxy89dzucgx4qpdhcitr2d8czo60skpta2pke8aznfhkvtw9giljjmxr315azwoxlg8ks6m69g1667z90z8qyyf0\", \n\t\"surname\": \"46k84m45xaovpcgbzf5hkjlfgurbyj4hk0mew4jbbdt2pp7iwcmu5137fdb6c58u8z5iqyvhyj1hsl2hwv61n88qqeolt0uirckehpsso5t4gm59briian1xqa0e8ne2hezwxga6zqbfiy00se5akj99i3osb6c5ddex4jv8dicj0nl65mjvq6ek9n9k3pgqziz0n0y6uxfqic7drpfmllpwprgojqm6l5aajc8vxj5hn6xtpt5qwo98abely7e\", \n\t\"email\": \"7qj4skyzecsx8416o6zlucjruifzrz36rhqutvu8j465vw0h40adyal43ekwcqnp5ld1e3v9ndxq5xb93qjp73hgx2iozol34t22z5hyixgk75j6yqnu7ltf\", \n\t\"mobile\": \"8sukj6w60djfk87sjobs1kqrma4529a2uxwtb6coy1ig0xe1wazojfkzbn87\", \n\t\"area\": \"bzlubw6w4q0lb7zs4rf4zz42whus662eg41hexjjz4d0romawcdwh2opci5costhrodoohwzkexlgwgz5dvgp6sgv13f06q5yncwg0z07a5ajxl9m5ilzc57y8jfbezeeib1ji25fat6ab13c6ip0fy42hq4iiwkxk7w9ljz8xq6cn05vhy2feaskttfi5zwu254sd023x40cd2d8bme9vgvy604vzzq4fwbox0y4wndg21392f9l0fz538ph7k\", \n\t\"hasConsentEmail\": true, \n\t\"hasConsentMobile\": true, \n\t\"isActive\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/contact",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"contact"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - bplus-it-sappi/contact/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/contact/f0150f22-5d78-44ef-9051-af1f0e215b0a",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"contact",
+						"f0150f22-5d78-44ef-9051-af1f0e215b0a"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - bplus-it-sappi/contacts",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/bplus-it-sappi/contacts",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"bplus-it-sappi",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "4a138698-e5f6-4ab8-b734-88382d84b3be",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
