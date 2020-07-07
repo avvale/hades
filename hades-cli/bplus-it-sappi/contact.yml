@@ -65,14 +65,6 @@ aggregateProperties:
   - name: is_active
     type: boolean
     nullable: false
-  - name: flowsId
-    type: relationship
-    relationship: many-to-many
-    relationshipAggregate: BplusItSappiFlow
-    relationshipModuleSection: bplus-it-sappi/flow
-    intermediateModel: BplusItSappiFlowsContactsModel
-    intermediateModelModuleSection: bplus-it-sappi/flow
-    intermediateModelFile: flows-contacts
   - name: created_at
     type: timestamp
     nullable: true

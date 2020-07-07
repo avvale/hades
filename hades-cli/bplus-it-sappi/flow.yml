@@ -86,15 +86,6 @@ aggregateProperties:
   - name: data
     type: json
     nullable: true
-  - name: contactsId
-    type: relationship
-    relationship: many-to-many
-    relationshipAggregate: BplusItSappiContact
-    relationshipModuleSection: bplus-it-sappi/contact
-    intermediateTable: bplus_it_sappi_flows_contacts
-    intermediateModel: BplusItSappiFlowsContactsModel
-    intermediateModelModuleSection: bplus-it-sappi/flow
-    intermediateModelFile: flows-contacts
   - name: created_at
     type: timestamp
     nullable: true
