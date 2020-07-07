@@ -1,10 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { EnvironmentService } from '@hades/shared/domain/environment/environment.service';
 import { AppModule } from './app.module';
 
 async function bootstrap() 
 {
-    const app = await NestFactory.create(AppModule);
+    const app                   = await NestFactory.create(AppModule);
+    const environmentService    = app.get(EnvironmentService);
 
     // set swagger config
     const options = new DocumentBuilder()
@@ -15,6 +17,6 @@ async function bootstrap()
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('api', app, document);
     
-    await app.listen(8080);
+    await app.listen(environmentService.get<number>('APP_PORT'));
 }
 bootstrap();
