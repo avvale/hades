@@ -1,4 +1,14 @@
 
+enum BplusItSappiChannelDirection {
+    SENDER
+    RECEIVER
+        
+}
+enum BplusItSappiChannelAdapterStatus {
+    ACTIVE
+    INACTIVE
+        
+}
 
 type BplusItSappiChannel
 {
@@ -13,20 +23,20 @@ type BplusItSappiChannel
     flowInterfaceName: GraphQLString!
     flowInterfaceNamespace: GraphQLString!
     adapterType: GraphQLString
-    direction: GraphQLString
+    direction: BplusItSappiChannelDirection!
     transportProtocol: GraphQLString
     messageProtocol: GraphQLString
     adapterEngineName: GraphQLString
     url: GraphQLString
     username: GraphQLString
     remoteHost: GraphQLString
-    remotePort: GraphQLString
+    remotePort: GraphQLInt
     directory: GraphQLString
     fileSchema: GraphQLString
     proxyHost: GraphQLString
-    proxyPort: GraphQLString
+    proxyPort: GraphQLInt
     destination: GraphQLString
-    adapterStatus: GraphQLString
+    adapterStatus: BplusItSappiChannelAdapterStatus!
     softwareComponentName: GraphQLString
     responsibleUserAccountName: GraphQLString
     lastChangeUserAccount: GraphQLString
@@ -50,20 +60,20 @@ input BplusItSappiCreateChannelInput
     flowInterfaceName: GraphQLString!
     flowInterfaceNamespace: GraphQLString!
     adapterType: GraphQLString
-    direction: GraphQLString
+    direction: BplusItSappiChannelDirection!
     transportProtocol: GraphQLString
     messageProtocol: GraphQLString
     adapterEngineName: GraphQLString
     url: GraphQLString
     username: GraphQLString
     remoteHost: GraphQLString
-    remotePort: GraphQLString
+    remotePort: GraphQLInt
     directory: GraphQLString
     fileSchema: GraphQLString
     proxyHost: GraphQLString
-    proxyPort: GraphQLString
+    proxyPort: GraphQLInt
     destination: GraphQLString
-    adapterStatus: GraphQLString
+    adapterStatus: BplusItSappiChannelAdapterStatus!
     softwareComponentName: GraphQLString
     responsibleUserAccountName: GraphQLString
     lastChangeUserAccount: GraphQLString
@@ -84,20 +94,20 @@ input BplusItSappiUpdateChannelInput
     flowInterfaceName: GraphQLString
     flowInterfaceNamespace: GraphQLString
     adapterType: GraphQLString
-    direction: GraphQLString
+    direction: BplusItSappiChannelDirection
     transportProtocol: GraphQLString
     messageProtocol: GraphQLString
     adapterEngineName: GraphQLString
     url: GraphQLString
     username: GraphQLString
     remoteHost: GraphQLString
-    remotePort: GraphQLString
+    remotePort: GraphQLInt
     directory: GraphQLString
     fileSchema: GraphQLString
     proxyHost: GraphQLString
-    proxyPort: GraphQLString
+    proxyPort: GraphQLInt
     destination: GraphQLString
-    adapterStatus: GraphQLString
+    adapterStatus: BplusItSappiChannelAdapterStatus
     softwareComponentName: GraphQLString
     responsibleUserAccountName: GraphQLString
     lastChangeUserAccount: GraphQLString

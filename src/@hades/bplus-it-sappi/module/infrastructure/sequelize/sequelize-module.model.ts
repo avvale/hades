@@ -177,7 +177,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         field: 'parameter_value',
         primaryKey: false,
         allowNull: true,
-        type: DataTypes.STRING(1023),
+        type: DataTypes.STRING(1024),
     })
     parameterValue: string;
         

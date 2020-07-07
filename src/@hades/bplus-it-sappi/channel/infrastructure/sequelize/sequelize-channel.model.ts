@@ -131,8 +131,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @Column({
         field: 'direction',
         primaryKey: false,
-        allowNull: true,
-        type: DataTypes.STRING(60),
+        allowNull: false,
+        type: DataTypes.ENUM('SENDER','RECEIVER'),
     })
     direction: string;
         
@@ -202,9 +202,9 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         field: 'remote_port',
         primaryKey: false,
         allowNull: true,
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER.UNSIGNED,
     })
-    remotePort: string;
+    remotePort: number;
         
              
         
@@ -212,7 +212,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         field: 'directory',
         primaryKey: false,
         allowNull: true,
-        type: DataTypes.STRING(1023),
+        type: DataTypes.STRING(1024),
     })
     directory: string;
         
@@ -222,7 +222,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         field: 'file_schema',
         primaryKey: false,
         allowNull: true,
-        type: DataTypes.STRING(1023),
+        type: DataTypes.STRING(1024),
     })
     fileSchema: string;
         
@@ -242,9 +242,9 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         field: 'proxy_port',
         primaryKey: false,
         allowNull: true,
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER.UNSIGNED,
     })
-    proxyPort: string;
+    proxyPort: number;
         
              
         
@@ -261,8 +261,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @Column({
         field: 'adapter_status',
         primaryKey: false,
-        allowNull: true,
-        type: DataTypes.STRING(20),
+        allowNull: false,
+        type: DataTypes.ENUM('ACTIVE','INACTIVE'),
     })
     adapterStatus: string;
         

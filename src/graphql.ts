@@ -11,6 +11,16 @@ export enum BplusItSappiChannelOverviewExecutionType {
     DETAIL = "DETAIL"
 }
 
+export enum BplusItSappiChannelDirection {
+    SENDER = "SENDER",
+    RECEIVER = "RECEIVER"
+}
+
+export enum BplusItSappiChannelAdapterStatus {
+    ACTIVE = "ACTIVE",
+    INACTIVE = "INACTIVE"
+}
+
 export enum BplusItSappiExecutionType {
     SUMMARY = "SUMMARY",
     DETAIL = "DETAIL"
@@ -194,20 +204,20 @@ export interface BplusItSappiCreateChannelInput {
     flowInterfaceName: GraphQLString;
     flowInterfaceNamespace: GraphQLString;
     adapterType?: GraphQLString;
-    direction?: GraphQLString;
+    direction: BplusItSappiChannelDirection;
     transportProtocol?: GraphQLString;
     messageProtocol?: GraphQLString;
     adapterEngineName?: GraphQLString;
     url?: GraphQLString;
     username?: GraphQLString;
     remoteHost?: GraphQLString;
-    remotePort?: GraphQLString;
+    remotePort?: GraphQLInt;
     directory?: GraphQLString;
     fileSchema?: GraphQLString;
     proxyHost?: GraphQLString;
-    proxyPort?: GraphQLString;
+    proxyPort?: GraphQLInt;
     destination?: GraphQLString;
-    adapterStatus?: GraphQLString;
+    adapterStatus: BplusItSappiChannelAdapterStatus;
     softwareComponentName?: GraphQLString;
     responsibleUserAccountName?: GraphQLString;
     lastChangeUserAccount?: GraphQLString;
@@ -226,20 +236,20 @@ export interface BplusItSappiUpdateChannelInput {
     flowInterfaceName?: GraphQLString;
     flowInterfaceNamespace?: GraphQLString;
     adapterType?: GraphQLString;
-    direction?: GraphQLString;
+    direction?: BplusItSappiChannelDirection;
     transportProtocol?: GraphQLString;
     messageProtocol?: GraphQLString;
     adapterEngineName?: GraphQLString;
     url?: GraphQLString;
     username?: GraphQLString;
     remoteHost?: GraphQLString;
-    remotePort?: GraphQLString;
+    remotePort?: GraphQLInt;
     directory?: GraphQLString;
     fileSchema?: GraphQLString;
     proxyHost?: GraphQLString;
-    proxyPort?: GraphQLString;
+    proxyPort?: GraphQLInt;
     destination?: GraphQLString;
-    adapterStatus?: GraphQLString;
+    adapterStatus?: BplusItSappiChannelAdapterStatus;
     softwareComponentName?: GraphQLString;
     responsibleUserAccountName?: GraphQLString;
     lastChangeUserAccount?: GraphQLString;
@@ -786,20 +796,20 @@ export interface BplusItSappiChannel {
     flowInterfaceName: GraphQLString;
     flowInterfaceNamespace: GraphQLString;
     adapterType?: GraphQLString;
-    direction?: GraphQLString;
+    direction: BplusItSappiChannelDirection;
     transportProtocol?: GraphQLString;
     messageProtocol?: GraphQLString;
     adapterEngineName?: GraphQLString;
     url?: GraphQLString;
     username?: GraphQLString;
     remoteHost?: GraphQLString;
-    remotePort?: GraphQLString;
+    remotePort?: GraphQLInt;
     directory?: GraphQLString;
     fileSchema?: GraphQLString;
     proxyHost?: GraphQLString;
-    proxyPort?: GraphQLString;
+    proxyPort?: GraphQLInt;
     destination?: GraphQLString;
-    adapterStatus?: GraphQLString;
+    adapterStatus: BplusItSappiChannelAdapterStatus;
     softwareComponentName?: GraphQLString;
     responsibleUserAccountName?: GraphQLString;
     lastChangeUserAccount?: GraphQLString;

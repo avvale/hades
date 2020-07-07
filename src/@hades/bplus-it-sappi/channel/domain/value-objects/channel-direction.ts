@@ -1,17 +1,17 @@
-import { StringValueObject } from '@hades/shared/domain/value-objects/string.value-object';
+import { EnumValueObject } from '@hades/shared/domain/value-objects/enum.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/validation-rules';
 
-export class ChannelDirection extends StringValueObject 
+export class ChannelDirection extends EnumValueObject 
 {
-    public readonly type: 'ChannelDirection';   
-
+    public readonly type: 'ChannelDirection';
+    
     constructor(value: string, validationRules: ValidationRules = {}) 
     {
         super(value, Object.assign({ 
             name: 'ChannelDirection',
-            nullable: true,
-            undefinable: true,
-            maxLength: 60,            
+            nullable: false,
+            undefinable: false,
+            enumOptions:  ['SENDER','RECEIVER'],
         }, validationRules));
     }
 }

@@ -11,7 +11,7 @@ export class ChannelDirectory extends StringValueObject
             name: 'ChannelDirectory',
             nullable: true,
             undefinable: true,
-            maxLength: 1023,            
+            maxLength: 1024,            
         }, validationRules));
     }
 }

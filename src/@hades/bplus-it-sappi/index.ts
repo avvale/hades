@@ -6,10 +6,10 @@ import { BplusItSappiChannelOverviewHandlers, BplusItSappiChannelOverviewService
 import { BplusItSappiMessageOverviewHandlers, BplusItSappiMessageOverviewServices, BplusItSappiMessageOverviewModel, IMessageOverviewRepository, SequelizeMessageOverviewRepository, MessageOverviewSagas } from './message-overview';
 import { BplusItSappiRoleHandlers, BplusItSappiRoleServices, BplusItSappiRoleModel, IRoleRepository, SequelizeRoleRepository, RoleSagas } from './role';
 import { BplusItSappiJobDetailHandlers, BplusItSappiJobDetailServices, BplusItSappiJobDetailModel, IJobDetailRepository, SequelizeJobDetailRepository, JobDetailSagas } from './job-detail';
-import { BplusItSappiChannelHandlers, BplusItSappiChannelServices, BplusItSappiChannelModel, IChannelRepository, SequelizeChannelRepository, ChannelSagas } from './channel';
-import { BplusItSappiModuleHandlers, BplusItSappiModuleServices, BplusItSappiModuleModel, IModuleRepository, SequelizeModuleRepository, ModuleSagas } from './module';
 import { BplusItSappiFlowHandlers, BplusItSappiFlowServices, BplusItSappiFlowModel, IFlowRepository, SequelizeFlowRepository, FlowSagas } from './flow';
 import { BplusItSappiContactHandlers, BplusItSappiContactServices, BplusItSappiContactModel, IContactRepository, SequelizeContactRepository, ContactSagas } from './contact';
+import { BplusItSappiChannelHandlers, BplusItSappiChannelServices, BplusItSappiChannelModel, IChannelRepository, SequelizeChannelRepository, ChannelSagas } from './channel';
+import { BplusItSappiModuleHandlers, BplusItSappiModuleServices, BplusItSappiModuleModel, IModuleRepository, SequelizeModuleRepository, ModuleSagas } from './module';
 
 export const BplusItSappiHandlers = [
     ...BplusItSappiSystemHandlers,
@@ -20,10 +20,10 @@ export const BplusItSappiHandlers = [
     ...BplusItSappiMessageOverviewHandlers,
     ...BplusItSappiRoleHandlers,
     ...BplusItSappiJobDetailHandlers,
-    ...BplusItSappiChannelHandlers,
-    ...BplusItSappiModuleHandlers,
     ...BplusItSappiFlowHandlers,
-    ...BplusItSappiContactHandlers
+    ...BplusItSappiContactHandlers,
+    ...BplusItSappiChannelHandlers,
+    ...BplusItSappiModuleHandlers
 ];
 export const BplusItSappiServices = [
     ...BplusItSappiSystemServices,
@@ -34,10 +34,10 @@ export const BplusItSappiServices = [
     ...BplusItSappiMessageOverviewServices,
     ...BplusItSappiRoleServices,
     ...BplusItSappiJobDetailServices,
-    ...BplusItSappiChannelServices,
-    ...BplusItSappiModuleServices,
     ...BplusItSappiFlowServices,
-    ...BplusItSappiContactServices
+    ...BplusItSappiContactServices,
+    ...BplusItSappiChannelServices,
+    ...BplusItSappiModuleServices
 ];
 export const BplusItSappiModels = [
     BplusItSappiSystemModel,
@@ -48,10 +48,10 @@ export const BplusItSappiModels = [
     BplusItSappiMessageOverviewModel,
     BplusItSappiRoleModel,
     BplusItSappiJobDetailModel,
-    BplusItSappiChannelModel,
-    BplusItSappiModuleModel,
     BplusItSappiFlowModel,
-    BplusItSappiContactModel
+    BplusItSappiContactModel,
+    BplusItSappiChannelModel,
+    BplusItSappiModuleModel
 ];
 export const BplusItSappiRepositories = [
     {
@@ -87,20 +87,20 @@ export const BplusItSappiRepositories = [
         useClass: SequelizeJobDetailRepository
     },
     {
-        provide: IChannelRepository,
-        useClass: SequelizeChannelRepository
-    },
-    {
-        provide: IModuleRepository,
-        useClass: SequelizeModuleRepository
-    },
-    {
         provide: IFlowRepository,
         useClass: SequelizeFlowRepository
     },
     {
         provide: IContactRepository,
         useClass: SequelizeContactRepository
+    },
+    {
+        provide: IChannelRepository,
+        useClass: SequelizeChannelRepository
+    },
+    {
+        provide: IModuleRepository,
+        useClass: SequelizeModuleRepository
     }
 ];
 export const BplusItSappiSagas = [
@@ -112,8 +112,8 @@ export const BplusItSappiSagas = [
     MessageOverviewSagas,
     RoleSagas,
     JobDetailSagas,
-    ChannelSagas,
-    ModuleSagas,
     FlowSagas,
-    ContactSagas
+    ContactSagas,
+    ChannelSagas,
+    ModuleSagas
 ];
