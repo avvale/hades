@@ -8,7 +8,6 @@ import { PaginateLangsQuery } from '@hades/admin/lang/application/paginate/pagin
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 
 @ApiTags('[admin] lang')
-@ApiOkResponse({ description: 'The records has been paginated successfully.', type: LangDto})
 @Controller('admin/langs/paginate')
 export class PaginateLangsController 
 {
@@ -18,6 +17,7 @@ export class PaginateLangsController
 
     @Get()
     @ApiOperation({ summary: 'Paginate langs' })
+    @ApiOkResponse({ description: 'The records has been paginated successfully.', type: LangDto})
     async main(@Body('query') queryStatements: QueryStatementInput[], @Body('constraint') constraint: QueryStatementInput[])
     {
         return await this.queryBus.ask(new PaginateLangsQuery(queryStatements, constraint));   

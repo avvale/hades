@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { GetLangsQuery } from '@hades/admin/lang/application/get/get-langs.query';
 
 @ApiTags('[admin] lang')
-@ApiOkResponse({ description: 'The records has been found successfully.', type: LangDto})
 @Controller('admin/langs')
 export class GetLangsController 
 {
@@ -18,6 +17,7 @@ export class GetLangsController
 
     @Get()
     @ApiOperation({ summary: 'Find langs according to query' })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [LangDto] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new GetLangsQuery(queryStatements));   

@@ -7,7 +7,6 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-by-id.query';
 
 @ApiTags('[admin] lang')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto})
 @Controller('admin/lang')
 export class FindLangByIdController 
 {
@@ -17,6 +16,7 @@ export class FindLangByIdController
 
     @Get(':id')
     @ApiOperation({ summary: 'Find land by id' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto })
     async main(@Param('id') id: string)
     {
         return await this.queryBus.ask(new FindLangByIdQuery(id));
