@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { LangDto } from './../dto/lang.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetLangsQuery } from '@hades/admin/lang/application/get/get-langs.query
 import { DeleteLangsCommand } from '@hades/admin/lang/application/delete/delete-langs.command';
 
 @ApiTags('[admin] lang')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: LangDto})
 @Controller('admin/langs')
 export class DeleteLangsController 
 {
@@ -21,6 +20,9 @@ export class DeleteLangsController
 
     @Delete()
     @ApiOperation({ summary: 'Delete lang in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [LangDto] })
+    @ApiBody({type: [QueryStatementInput]})
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const langs = await this.queryBus.ask(new GetLangsQuery(queryStatements));

@@ -1,12 +1,6 @@
-export type Any = any;
+import { ApiProperty } from '@nestjs/swagger';
 
-export interface QueryStatementInput 
-{
-    command: Command;
-    column?: string;
-    operator?: Operator;
-    value?: Any;
-}
+export type Any = any;
 
 export enum Command
 {
@@ -32,4 +26,35 @@ export enum Operator
     LOWER_OR_EQ = "LOWER_OR_EQ",
     NOT_CONTAINS = "NOT_CONTAINS",
     NOT_EQUALS = "NOT_EQUALS"
+}
+
+export class QueryStatementInput 
+{
+    @ApiProperty({
+        enum        : Command,
+        description : 'Query command',
+        example     : 'WHERE'
+    })
+    command: Command;
+
+    @ApiProperty({
+        type        : String,
+        description : 'Column name on which the query will be made',
+        example     : 'admin_user.name'
+    })
+    column?: string;
+
+    @ApiProperty({
+        enum        : Operator,
+        description : 'Operator to be used in the query',
+        example     : 'LIKE'
+    })
+    operator?: Operator;
+
+    @ApiProperty({
+        type        : String,
+        description : 'Value to be used to operate with the operator',
+        example     : '%John Doe%'
+    })
+    value?: Any;
 }

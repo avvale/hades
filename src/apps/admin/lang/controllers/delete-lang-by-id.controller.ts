@@ -9,7 +9,6 @@ import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-
 import { DeleteLangByIdCommand } from '@hades/admin/lang/application/delete/delete-lang-by-id.command';
 
 @ApiTags('[admin] lang')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: LangDto})
 @Controller('admin/lang')
 export class DeleteLangByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteLangByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete lang entity by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: LangDto })
     async main(@Param('id') id: string)
     {
         const lang = await this.queryBus.ask(new FindLangByIdQuery(id));

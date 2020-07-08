@@ -10,7 +10,6 @@ import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-
 import { CreateLangCommand } from '@hades/admin/lang/application/create/create-lang.command';
 
 @ApiTags('[admin] lang')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: LangDto})
 @Controller('admin/lang')
 export class CreateLangController 
 {
@@ -21,6 +20,7 @@ export class CreateLangController
 
     @Post()
     @ApiOperation({ summary: 'Create lang' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: LangDto })
     async main(@Body() payload: CreateLangDto)
     {
         await this.commandBus.dispatch(new CreateLangCommand(
