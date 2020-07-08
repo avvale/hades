@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { LangDto } from './../dto/lang.dto';
 
 // @hades
@@ -18,7 +18,8 @@ export class FindLangController
     @Get()
     @ApiOperation({ summary: 'Find lang according to query' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto })
-   //  @ApiBody({ type: [CreateLangDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new FindLangQuery(queryStatements));   
