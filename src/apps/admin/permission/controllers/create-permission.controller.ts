@@ -10,7 +10,6 @@ import { FindPermissionByIdQuery } from '@hades/admin/permission/application/fin
 import { CreatePermissionCommand } from '@hades/admin/permission/application/create/create-permission.command';
 
 @ApiTags('[admin] permission')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: PermissionDto})
 @Controller('admin/permission')
 export class CreatePermissionController 
 {
@@ -21,6 +20,7 @@ export class CreatePermissionController
 
     @Post()
     @ApiOperation({ summary: 'Create permission' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: PermissionDto})
     async main(@Body() payload: CreatePermissionDto)
     {
         await this.commandBus.dispatch(new CreatePermissionCommand(
