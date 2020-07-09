@@ -1,0 +1,51 @@
+
+
+type NfcSummary
+{
+    id: ID!
+    tagId: ID!
+    tenantId: ID!
+    accessAt: GraphQLTimestamp!
+    counter: GraphQLInt!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input NfcCreateSummaryInput
+{
+    id: ID!
+    tagId: ID!
+    tenantId: ID!
+    accessAt: GraphQLTimestamp!
+    counter: GraphQLInt!
+    
+}
+
+input NfcUpdateSummaryInput
+{
+    id: ID!
+    tagId: ID
+    tenantId: ID
+    accessAt: GraphQLTimestamp
+    counter: GraphQLInt
+    
+}
+
+type Query 
+{
+    nfcFindSummary(query:[QueryStatementInput]): NfcSummary
+    nfcFindSummaryById(id:ID): NfcSummary
+    nfcGetSummaries(query:[QueryStatementInput]): [NfcSummary]!
+    nfcPaginateSummaries(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    nfcCreateSummary(payload: NfcCreateSummaryInput!): NfcSummary
+    nfcInsertSummaries(payload: [NfcCreateSummaryInput]!): Boolean!
+    nfcUpdateSummary(payload: NfcUpdateSummaryInput!): NfcSummary
+    nfcDeleteSummaryById(id: ID!): NfcSummary
+    nfcDeleteSummaries(query:[QueryStatementInput]): [NfcSummary]!
+}

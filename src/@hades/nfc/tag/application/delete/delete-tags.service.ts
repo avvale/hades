@@ -1,0 +1,28 @@
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
+import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { ITagRepository } from './../../domain/tag.repository';
+
+@Injectable()
+export class DeleteTagsService
+{
+    constructor(
+        private readonly publisher: EventPublisher,
+        private readonly repository: ITagRepository
+    ) {}
+
+    public async main(queryStatements: QueryStatementInput[]): Promise<void>
+    {   
+        // get object to delete
+        const tags = await this.repository.get(queryStatements);
+
+        await this.repository.delete(queryStatements);        
+
+        // TODO a falta de definir eventos
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
+        // const tagsRegistered = this.publisher.mergeObjectContext(tags);
+        
+        // tagsRegistered.deleted(tags); // apply event to model events
+        // tagsRegistered.commit(); // commit all events of model
+    }
+}

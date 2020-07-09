@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "345fdd32-604e-41d6-b538-bee9ae491914",
+		"name"          : "@hades - nfc/summary",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - nfcCreateSummary",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:NfcCreateSummaryInput!)\n{\n\tnfcCreateSummary (payload:$payload)\n\t{\n\t\tid\n\t\ttagId\n\t\ttenantId\n\t\taccessAt\n\t\tcounter\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"9a8c9eba-8693-4291-a6ca-290ed515da45\", \n\t\t\"tagId\": \"2a71fa2b-9564-4990-b3fd-502329dcafd1\", \n\t\t\"tenantId\": \"c44947ed-9e4b-4896-99f4-b2d2466a0878\", \n\t\t\"accessAt\": \"2020-07-08 15:12:15\", \n\t\t\"counter\": 7438523258\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcInsertSummaries",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[NfcCreateSummaryInput]!)\n{\n\tnfcInsertSummaries (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"19f2b449-f60c-4771-8a9b-5ff9697c524f\", \n\t\t\t\"tagId\": \"579bcf28-a7ee-41fa-8ec0-e1d92e81f8b0\", \n\t\t\t\"tenantId\": \"22713a5c-9186-43e0-bc87-796b6fff8550\", \n\t\t\t\"accessAt\": \"2020-07-09 03:53:11\", \n\t\t\t\"counter\": 2367210405\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5d1fcb8a-559c-49ba-a4b0-27c82bf6a074\", \n\t\t\t\"tagId\": \"996ef632-8c10-4c6c-84d8-94e670078791\", \n\t\t\t\"tenantId\": \"ef71f29c-e7ce-4dea-acd5-f5f6b977d7c8\", \n\t\t\t\"accessAt\": \"2020-07-09 00:45:04\", \n\t\t\t\"counter\": 6450872108\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cd37305f-3f36-4171-aa96-ec2bfef8d788\", \n\t\t\t\"tagId\": \"6e882623-f3c2-47d8-97ab-8ae154e05183\", \n\t\t\t\"tenantId\": \"4127282c-cc3a-48c5-b282-26df5e2bb5c5\", \n\t\t\t\"accessAt\": \"2020-07-09 01:43:50\", \n\t\t\t\"counter\": 7325629531\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1a0cb471-0aea-464c-94bb-0f5c15a6e707\", \n\t\t\t\"tagId\": \"a8e7f2d7-6546-4043-9dc4-2c5ba36bfa9d\", \n\t\t\t\"tenantId\": \"f1244365-97ab-4273-86e9-48949b944d2a\", \n\t\t\t\"accessAt\": \"2020-07-09 07:43:39\", \n\t\t\t\"counter\": 3364980314\n\t\t},\n\t\t{\n\t\t\t\"id\": \"91ddd72b-361a-4ff4-9e7d-8d23c76baf69\", \n\t\t\t\"tagId\": \"f29e8370-65af-453e-bb83-c70c34060ca6\", \n\t\t\t\"tenantId\": \"ec25c096-d78e-4b52-a8c4-7e0634dc1fed\", \n\t\t\t\"accessAt\": \"2020-07-08 19:00:18\", \n\t\t\t\"counter\": 3125213766\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c451f603-2268-43bd-8e76-ae781b89a3c1\", \n\t\t\t\"tagId\": \"4b0ed8b5-375c-486c-94e6-ff1528d30c81\", \n\t\t\t\"tenantId\": \"3feb7941-99ed-4293-8a18-14e19ebf022b\", \n\t\t\t\"accessAt\": \"2020-07-09 00:59:06\", \n\t\t\t\"counter\": 8849495010\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c7574ff8-bb8f-4f21-b110-0d85394328b4\", \n\t\t\t\"tagId\": \"0926dea4-ccd0-405a-91fa-fd82a6d0c622\", \n\t\t\t\"tenantId\": \"ccae1a1b-bdb2-4e32-9b3c-7ff45f1f6759\", \n\t\t\t\"accessAt\": \"2020-07-08 22:19:01\", \n\t\t\t\"counter\": 9365798177\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e5d3555d-266f-42c9-ab2a-2b1f4bcebf52\", \n\t\t\t\"tagId\": \"5c6bead7-81c5-44e7-9380-786158a82829\", \n\t\t\t\"tenantId\": \"f95fef70-67bc-42f4-be88-14b07c28a3c0\", \n\t\t\t\"accessAt\": \"2020-07-08 16:18:52\", \n\t\t\t\"counter\": 5958937494\n\t\t},\n\t\t{\n\t\t\t\"id\": \"eeac222b-4eda-476a-bfdf-5770893ee95e\", \n\t\t\t\"tagId\": \"c8c1d033-280c-4aa4-8300-de42781ff4ba\", \n\t\t\t\"tenantId\": \"ebaebaec-4b94-4057-bd04-2a686dcebf24\", \n\t\t\t\"accessAt\": \"2020-07-08 16:30:57\", \n\t\t\t\"counter\": 3591106349\n\t\t},\n\t\t{\n\t\t\t\"id\": \"34f85ef4-b081-4819-a264-5bd6deb238ef\", \n\t\t\t\"tagId\": \"25485169-5470-4fa2-97e1-84c90ca22090\", \n\t\t\t\"tenantId\": \"8f0574ee-5baf-4009-8c12-f2d549663476\", \n\t\t\t\"accessAt\": \"2020-07-09 00:15:41\", \n\t\t\t\"counter\": 7292976762\n\t\t},\n\t\t{\n\t\t\t\"id\": \"53080e78-a43f-4b9a-a3de-89d5baf493af\", \n\t\t\t\"tagId\": \"2be9c214-981c-4c4e-8e09-587017515bed\", \n\t\t\t\"tenantId\": \"3fe50c91-197a-4580-957f-a2825711665e\", \n\t\t\t\"accessAt\": \"2020-07-09 06:53:25\", \n\t\t\t\"counter\": 6619971819\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ed887525-2dfc-4c11-84b8-663aae015d7e\", \n\t\t\t\"tagId\": \"158a80fb-33a9-4f14-94c9-7a9e769fcb3d\", \n\t\t\t\"tenantId\": \"a70aae34-86cb-47ac-83e6-2db782e244d9\", \n\t\t\t\"accessAt\": \"2020-07-08 18:12:12\", \n\t\t\t\"counter\": 8121262009\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4c9325e7-7997-46e1-97b0-53ca177de8b6\", \n\t\t\t\"tagId\": \"15fe8dbf-a307-4503-9886-5fcf76cef909\", \n\t\t\t\"tenantId\": \"1b987c66-f1ff-4709-b178-ecd84d1ee26d\", \n\t\t\t\"accessAt\": \"2020-07-09 08:45:50\", \n\t\t\t\"counter\": 8568896995\n\t\t},\n\t\t{\n\t\t\t\"id\": \"24cbcd4d-aa98-4929-82e8-5860d27f8ff4\", \n\t\t\t\"tagId\": \"9242c25b-a78d-408b-97c8-d39a16c52943\", \n\t\t\t\"tenantId\": \"7f391020-ec31-4242-85c4-68e4db693938\", \n\t\t\t\"accessAt\": \"2020-07-08 19:46:46\", \n\t\t\t\"counter\": 7679063753\n\t\t},\n\t\t{\n\t\t\t\"id\": \"57886612-09c1-4792-8733-0751ae73a8a0\", \n\t\t\t\"tagId\": \"3201e9fc-da1a-46fb-afdf-4ef195818254\", \n\t\t\t\"tenantId\": \"c5dfbeeb-707f-45c9-88e0-937c31e281b3\", \n\t\t\t\"accessAt\": \"2020-07-08 23:46:56\", \n\t\t\t\"counter\": 7887679571\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d002b9e7-0fd1-4398-81f1-18201db6d72c\", \n\t\t\t\"tagId\": \"a9d0f898-ef43-454d-83b7-e26b979c84fb\", \n\t\t\t\"tenantId\": \"bebb8ce1-be9f-4810-b898-cd7e2080ce4b\", \n\t\t\t\"accessAt\": \"2020-07-09 05:32:06\", \n\t\t\t\"counter\": 4202562010\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7137320a-c05c-44c2-9453-3c8abc37f07a\", \n\t\t\t\"tagId\": \"8eea7ff1-964d-4979-8815-49fe58fbd42c\", \n\t\t\t\"tenantId\": \"719757f7-0564-4691-9cdb-25daed52a13e\", \n\t\t\t\"accessAt\": \"2020-07-09 06:17:45\", \n\t\t\t\"counter\": 1663520080\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bc34d515-befa-4e4e-8757-f4152cc6d2e0\", \n\t\t\t\"tagId\": \"3e113246-ee81-4507-8cb2-763f94280860\", \n\t\t\t\"tenantId\": \"ffbb0643-f3d2-49d9-a1d2-560b08baf2d0\", \n\t\t\t\"accessAt\": \"2020-07-08 16:22:42\", \n\t\t\t\"counter\": 5658087042\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1995f07f-8bb2-4177-8312-3004212189f7\", \n\t\t\t\"tagId\": \"33fda948-777b-45c9-b1b2-82087f50cb77\", \n\t\t\t\"tenantId\": \"717f8a4b-0b3b-44cf-9ab9-e92c78e0fde7\", \n\t\t\t\"accessAt\": \"2020-07-08 18:14:59\", \n\t\t\t\"counter\": 9763132445\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cd5ed192-e96e-4b15-85c0-363fba89388a\", \n\t\t\t\"tagId\": \"8dbe47f0-defa-4eab-a8b2-7bced2967f3e\", \n\t\t\t\"tenantId\": \"21d29149-8179-4689-a6ff-522c5b67d7b2\", \n\t\t\t\"accessAt\": \"2020-07-09 13:20:24\", \n\t\t\t\"counter\": 5390953190\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcPaginateSummaries",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tnfcPaginateSummaries (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcGetSummaries",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tnfcGetSummaries (query: $query)\n\t{\n\t\tid\n\t\ttagId\n\t\ttenantId\n\t\taccessAt\n\t\tcounter\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"9a8c9eba-8693-4291-a6ca-290ed515da45\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcFindSummary",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tnfcFindSummary (query: $query)\n\t{\n\t\tid\n\t\ttagId\n\t\ttenantId\n\t\taccessAt\n\t\tcounter\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"9a8c9eba-8693-4291-a6ca-290ed515da45\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcFindSummaryById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tnfcFindSummaryById (id:$id)\n\t{\n\t\tid\n\t\ttagId\n\t\ttenantId\n\t\taccessAt\n\t\tcounter\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"9a8c9eba-8693-4291-a6ca-290ed515da45\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcUpdateSummary",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:NfcUpdateSummaryInput!)\n{\n\tnfcUpdateSummary (payload:$payload)\n\t{\n\t\tid\n\t\ttagId\n\t\ttenantId\n\t\taccessAt\n\t\tcounter\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"9a8c9eba-8693-4291-a6ca-290ed515da45\", \n\t\t\"tagId\": \"2a71fa2b-9564-4990-b3fd-502329dcafd1\", \n\t\t\"tenantId\": \"c44947ed-9e4b-4896-99f4-b2d2466a0878\", \n\t\t\"accessAt\": \"2020-07-08 17:02:07\", \n\t\t\"counter\": 8267246084\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcDeleteSummaryById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tnfcDeleteSummaryById (id:$id)\n\t{\n\t\tid\n\t\ttagId\n\t\ttenantId\n\t\taccessAt\n\t\tcounter\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"9a8c9eba-8693-4291-a6ca-290ed515da45\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcDeleteSummaries",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tnfcDeleteSummaries (query: $query)\n\t{\n\t\tid\n\t\ttagId\n\t\ttenantId\n\t\taccessAt\n\t\tcounter\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/summary",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"9a8c9eba-8693-4291-a6ca-290ed515da45\", \n\t\"tagId\": \"2a71fa2b-9564-4990-b3fd-502329dcafd1\", \n\t\"tenantId\": \"c44947ed-9e4b-4896-99f4-b2d2466a0878\", \n\t\"accessAt\": \"2020-07-08 15:53:26\", \n\t\"counter\": 7422553798\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/summary",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"summary"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/summaries",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"b433ba04-318b-4229-8259-9fac2cd6f611\", \n\t\t\"tagId\": \"4f34defe-1b8a-4a35-8ae3-1dfd31b20f8e\", \n\t\t\"tenantId\": \"d0ee96a4-5700-440c-aeac-59c12c4aa5b6\", \n\t\t\"accessAt\": \"2020-07-08 18:35:21\", \n\t\t\"counter\": 7330724379\n\t}, \n\t{\n\t\t\"id\": \"a2a51fda-0142-4ab6-be48-8d840d7f7a7d\", \n\t\t\"tagId\": \"8f7633e7-e458-4c3d-bd62-f7e010cc546a\", \n\t\t\"tenantId\": \"eb78c1df-9ca3-4819-ba2a-e4aa1e76b8ed\", \n\t\t\"accessAt\": \"2020-07-08 23:47:42\", \n\t\t\"counter\": 7187765751\n\t}, \n\t{\n\t\t\"id\": \"3d4670de-7302-4a5d-a5aa-a9a772365946\", \n\t\t\"tagId\": \"b9a83b60-cfda-4a5b-8850-68a3323a5d18\", \n\t\t\"tenantId\": \"917c6408-079c-444a-812f-81cc58d7812a\", \n\t\t\"accessAt\": \"2020-07-09 13:48:30\", \n\t\t\"counter\": 8419428773\n\t}, \n\t{\n\t\t\"id\": \"f83cbff2-ff7b-470e-95c7-c91b8fbd5674\", \n\t\t\"tagId\": \"2dff7dc6-23ff-4b36-80f0-d2acd4f12ed5\", \n\t\t\"tenantId\": \"e8b7815b-35da-4517-abd0-93df94f5eee2\", \n\t\t\"accessAt\": \"2020-07-08 16:31:43\", \n\t\t\"counter\": 9820551206\n\t}, \n\t{\n\t\t\"id\": \"8758e02e-0223-4aa3-a3d4-a5cbfd6abc9d\", \n\t\t\"tagId\": \"1ac96c8c-ca9f-4839-92b1-f5f33f2ff97b\", \n\t\t\"tenantId\": \"6176e661-69c2-44da-8e9d-1763f851225e\", \n\t\t\"accessAt\": \"2020-07-09 12:00:54\", \n\t\t\"counter\": 7546662354\n\t}, \n\t{\n\t\t\"id\": \"243ab5f6-f1b0-4e92-996a-e8d228a5d5bc\", \n\t\t\"tagId\": \"134db96f-c301-49f8-9c26-98ce1f306954\", \n\t\t\"tenantId\": \"cdad7644-80bb-4558-b18c-ed5b2d86d4ba\", \n\t\t\"accessAt\": \"2020-07-09 03:45:32\", \n\t\t\"counter\": 9787843407\n\t}, \n\t{\n\t\t\"id\": \"064f79fd-57f1-4a5e-ba48-2e6d8e500834\", \n\t\t\"tagId\": \"023d4277-88ec-46ff-ac36-bc84fcb76c52\", \n\t\t\"tenantId\": \"da07e1e1-0815-473b-a95e-d8b34e32a6d0\", \n\t\t\"accessAt\": \"2020-07-09 11:09:39\", \n\t\t\"counter\": 2622871025\n\t}, \n\t{\n\t\t\"id\": \"716875ae-10bd-4712-81dd-945d9371f7db\", \n\t\t\"tagId\": \"c9db8a56-dbf7-4237-a362-0d89b4eec3a3\", \n\t\t\"tenantId\": \"6d5327ce-6a8a-4baf-ae23-fa1aad2b9111\", \n\t\t\"accessAt\": \"2020-07-09 09:40:30\", \n\t\t\"counter\": 3500488888\n\t}, \n\t{\n\t\t\"id\": \"98243a5b-5497-4fe0-bb18-0028295d981d\", \n\t\t\"tagId\": \"208a002e-5961-440f-b63c-eb7d1e4f540e\", \n\t\t\"tenantId\": \"3e8b31f8-12d6-41b8-851d-e49859d63f58\", \n\t\t\"accessAt\": \"2020-07-08 22:20:52\", \n\t\t\"counter\": 3083428727\n\t}, \n\t{\n\t\t\"id\": \"5db8a081-b85f-494d-91bf-262f6d9e2dc4\", \n\t\t\"tagId\": \"17f74bc4-697f-4bdc-be2f-debf76ea5646\", \n\t\t\"tenantId\": \"1bad0056-330e-4484-8eb8-e58267fa5cde\", \n\t\t\"accessAt\": \"2020-07-08 14:31:35\", \n\t\t\"counter\": 7656163190\n\t}, \n\t{\n\t\t\"id\": \"f23c7990-7427-4043-8fa4-e3e80184ec6d\", \n\t\t\"tagId\": \"577cb274-ec58-4f83-99e9-dadad9281eb3\", \n\t\t\"tenantId\": \"4fb986d1-58a1-4d64-9ef4-53586536c7f8\", \n\t\t\"accessAt\": \"2020-07-09 06:56:28\", \n\t\t\"counter\": 1457295762\n\t}, \n\t{\n\t\t\"id\": \"4b8f62c8-d2f4-45cf-9c24-d72b456e1d2a\", \n\t\t\"tagId\": \"f0399645-dc04-492f-b102-37964d5b1f52\", \n\t\t\"tenantId\": \"35f33eaf-0f43-4ec5-b023-c7e8943a9820\", \n\t\t\"accessAt\": \"2020-07-08 20:55:28\", \n\t\t\"counter\": 1911593433\n\t}, \n\t{\n\t\t\"id\": \"b917d56a-99e4-4680-be4f-b8858eca5406\", \n\t\t\"tagId\": \"e24670c8-66e4-40ee-a0a2-de12ab0d8e9f\", \n\t\t\"tenantId\": \"7bf27f69-7777-41f0-9149-98bcf76a7167\", \n\t\t\"accessAt\": \"2020-07-08 17:00:36\", \n\t\t\"counter\": 7640463579\n\t}, \n\t{\n\t\t\"id\": \"dd6db75b-0855-43ef-be9c-2b397a9467e3\", \n\t\t\"tagId\": \"2801469c-d8ed-48ac-bc6c-f8255689ceda\", \n\t\t\"tenantId\": \"d39ce5f4-c12d-4e19-825b-4e474e005754\", \n\t\t\"accessAt\": \"2020-07-09 07:17:46\", \n\t\t\"counter\": 9224030816\n\t}, \n\t{\n\t\t\"id\": \"0a489071-8262-464f-b903-4913260d8136\", \n\t\t\"tagId\": \"bad9f09a-398d-4d57-b2d7-c7e5a811e44c\", \n\t\t\"tenantId\": \"7c63e040-cfc3-406e-8562-d82d62759281\", \n\t\t\"accessAt\": \"2020-07-08 17:15:17\", \n\t\t\"counter\": 7917688027\n\t}, \n\t{\n\t\t\"id\": \"b6af7391-56b0-4438-827b-5904d6080b25\", \n\t\t\"tagId\": \"b1ff7171-8f12-42b6-acd1-c4b04e10f357\", \n\t\t\"tenantId\": \"f1119521-c9f3-4c45-82c0-bf21fd701026\", \n\t\t\"accessAt\": \"2020-07-09 02:38:47\", \n\t\t\"counter\": 4627530288\n\t}, \n\t{\n\t\t\"id\": \"ad8e55f1-8b20-4b93-9a05-0047fa748c8e\", \n\t\t\"tagId\": \"49c1a388-222e-4d95-bd0a-5a7abf0c56b8\", \n\t\t\"tenantId\": \"8993a7f6-75fd-4394-965c-0f9c6f4ba263\", \n\t\t\"accessAt\": \"2020-07-08 18:18:49\", \n\t\t\"counter\": 9812657730\n\t}, \n\t{\n\t\t\"id\": \"2ef9a1c4-b673-4191-a5de-e4b62577d267\", \n\t\t\"tagId\": \"c0e68024-4650-4c12-a0e7-67cdbd7dc443\", \n\t\t\"tenantId\": \"dbbe4afd-6ed3-4799-a25d-80be5a33cc27\", \n\t\t\"accessAt\": \"2020-07-09 01:47:35\", \n\t\t\"counter\": 1918737622\n\t}, \n\t{\n\t\t\"id\": \"bb6c6f3d-e9f4-4b50-b2dd-f1c3f5d9fc81\", \n\t\t\"tagId\": \"4c6fa06e-8a05-42c0-94ae-734a827271ae\", \n\t\t\"tenantId\": \"9bf5b564-10a2-4e0e-b8f4-97df3fb2fb70\", \n\t\t\"accessAt\": \"2020-07-08 20:51:00\", \n\t\t\"counter\": 7879716067\n\t}, \n\t{\n\t\t\"id\": \"5ec2f943-6215-42c3-8a25-546d1c2b4c17\", \n\t\t\"tagId\": \"d3f10760-105f-4eb6-861b-ccbaa67bcec2\", \n\t\t\"tenantId\": \"84ee6649-d6b2-4e1d-b99d-18aad3613348\", \n\t\t\"accessAt\": \"2020-07-09 10:27:23\", \n\t\t\"counter\": 2365528699\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/summaries",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"summaries"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/summaries/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/summaries/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+                        "summaries",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/summaries",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"9a8c9eba-8693-4291-a6ca-290ed515da45\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/summaries",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"summaries"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/summary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"9a8c9eba-8693-4291-a6ca-290ed515da45\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/summary",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"summary"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/summary/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/summary/9a8c9eba-8693-4291-a6ca-290ed515da45",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"summary",
+						"9a8c9eba-8693-4291-a6ca-290ed515da45"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/summary",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"9a8c9eba-8693-4291-a6ca-290ed515da45\", \n\t\"tagId\": \"2a71fa2b-9564-4990-b3fd-502329dcafd1\", \n\t\"tenantId\": \"c44947ed-9e4b-4896-99f4-b2d2466a0878\", \n\t\"accessAt\": \"2020-07-09 00:24:11\", \n\t\"counter\": 3813805386\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/summary",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"summary"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/summary/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/summary/9a8c9eba-8693-4291-a6ca-290ed515da45",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"summary",
+						"9a8c9eba-8693-4291-a6ca-290ed515da45"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - nfc/summaries",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/summaries",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"summaries"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "1fa10fc6-535f-4eec-a5be-d57a0f77f189",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

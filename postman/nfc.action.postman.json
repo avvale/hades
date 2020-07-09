@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "e3ae6409-7f58-4cfd-8bda-48c3c8145895",
+		"name"          : "@hades - nfc/action",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - nfcCreateAction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:NfcCreateActionInput!)\n{\n\tnfcCreateAction (payload:$payload)\n\t{\n\t\tid\n\t\ttagId\n\t\ttype\n\t\tsectionId\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"f61efb8a-207b-4376-bb49-81097dab62ef\", \n\t\t\"tagId\": \"a4ab133d-6481-43dc-a678-2f2fb61ec42c\", \n\t\t\"type\": \"ZAP\", \n\t\t\"sectionId\": \"20975c4a-e020-456e-bed7-d00bb4ba058d\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcInsertActions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[NfcCreateActionInput]!)\n{\n\tnfcInsertActions (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"4f31db79-c0c3-4a6d-a3a2-4094aa8a8a80\", \n\t\t\t\"tagId\": \"39834119-5670-436e-88cf-19bdeae70d55\", \n\t\t\t\"type\": \"TCI\", \n\t\t\t\"sectionId\": \"34e8bd1f-f62b-4e90-bef4-3c0a881ebbd5\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"af511c14-6b7b-4cd5-a7a5-beaa409b2462\", \n\t\t\t\"tagId\": \"86ed2f6f-2c45-4439-916d-6c9d400d616a\", \n\t\t\t\"type\": \"CMS\", \n\t\t\t\"sectionId\": \"b346eb36-7eb3-4bdb-b11e-e404df0ee1de\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5f9b9cec-dea2-4e12-8986-b29a1cc0ad94\", \n\t\t\t\"tagId\": \"f73ae0df-a292-47c6-ab72-92f7cd2c7c9b\", \n\t\t\t\"type\": \"CMS\", \n\t\t\t\"sectionId\": \"a253ff80-1a11-4e8c-b60a-8356f7bc3627\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d3bd6dd6-6a81-463e-8629-628e19ac00c3\", \n\t\t\t\"tagId\": \"a1867f7e-1550-4a82-a0a6-d2027cb186c2\", \n\t\t\t\"type\": \"MULESOFT\", \n\t\t\t\"sectionId\": \"b9bcebd8-6500-4256-bb7a-24d158d08bac\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0b2ac012-0242-4a2a-9d3d-6b4394beb558\", \n\t\t\t\"tagId\": \"4d4214ae-e7cd-4e4a-acdd-3039d6c43e9f\", \n\t\t\t\"type\": \"MULESOFT\", \n\t\t\t\"sectionId\": \"8775b9a8-f08a-4433-80ae-f44049ff9b48\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7ea7aa80-3e6c-4b2d-8734-e6f4e09b2a55\", \n\t\t\t\"tagId\": \"69aaf6e0-eaf3-4384-8e10-69955aa80073\", \n\t\t\t\"type\": \"TCI\", \n\t\t\t\"sectionId\": \"85bf2ea7-028e-44c0-a037-3b685933bdd0\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a57ea1a5-07ee-473d-a1f3-d0ee7d5c248c\", \n\t\t\t\"tagId\": \"e7c8d65c-6466-4c1e-9df2-f3f5c39cfb40\", \n\t\t\t\"type\": \"CMS\", \n\t\t\t\"sectionId\": \"44d4c57e-2179-4e1d-ba21-7b11cb23358e\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3262e88b-6acb-4339-8397-b1affa2c3f0f\", \n\t\t\t\"tagId\": \"182bfe7b-1eac-493b-a107-e45f381a5c4b\", \n\t\t\t\"type\": \"MULESOFT\", \n\t\t\t\"sectionId\": \"e3865478-e8a2-4097-b447-de93edd187ab\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8e91e4ad-0cbf-48f1-80e0-666544703714\", \n\t\t\t\"tagId\": \"f867f602-b0c8-41f1-9ff9-09cfaec69e94\", \n\t\t\t\"type\": \"ZAP\", \n\t\t\t\"sectionId\": \"5eaceca2-6d3f-45d6-a9ca-9b312c5d18ba\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"67b0fbf8-83d6-4098-adc1-f74dcf1b6382\", \n\t\t\t\"tagId\": \"eaf19a54-bf00-4cbe-b21f-6a22df6421b7\", \n\t\t\t\"type\": \"MULESOFT\", \n\t\t\t\"sectionId\": \"5f9cb0fd-4593-4ca2-a0f2-a11a589c720b\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9d817971-2129-42f4-a369-e6a365091283\", \n\t\t\t\"tagId\": \"4c149148-80d9-43a9-8783-3bd2b8a8f38a\", \n\t\t\t\"type\": \"CMS\", \n\t\t\t\"sectionId\": \"5cbe7731-06bb-4802-90c1-6f382ec72bf4\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b27a6e2e-0600-46e5-a299-768b50e9049b\", \n\t\t\t\"tagId\": \"f4b1058b-aa75-4b60-bee0-07e40a2268c2\", \n\t\t\t\"type\": \"ZAP\", \n\t\t\t\"sectionId\": \"3e949161-b1c1-49df-b027-1054cd3d1710\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f57b62ff-7028-4c4b-9596-4807537d0152\", \n\t\t\t\"tagId\": \"b3afb793-ec1f-407c-b946-b00cb1bc2b02\", \n\t\t\t\"type\": \"ZAP\", \n\t\t\t\"sectionId\": \"e57f7466-d2b4-4959-ac1f-94c4ac6824f3\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"afc5a7e3-6241-433c-a4cc-5d485876e82c\", \n\t\t\t\"tagId\": \"2dcebdea-90ed-4649-ad85-974ec817ea9b\", \n\t\t\t\"type\": \"ZAP\", \n\t\t\t\"sectionId\": \"f18d97bc-2c50-48d6-8854-15bb528fa136\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d3d4d079-e1f8-49c1-aa61-a502e6cb933d\", \n\t\t\t\"tagId\": \"cc265229-2315-4cbe-ab9d-312487c83663\", \n\t\t\t\"type\": \"TCI\", \n\t\t\t\"sectionId\": \"d93686be-5d2c-45d6-b55e-f4a3f63a4fea\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d3425f65-970c-4777-b822-7926487c8eca\", \n\t\t\t\"tagId\": \"bb0bbec5-6307-4878-8772-c03fbf7db6d8\", \n\t\t\t\"type\": \"CMS\", \n\t\t\t\"sectionId\": \"0eafe7f8-91a5-40c6-9ddf-09cb28204fbf\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b356b025-b6e9-4861-acf9-3d78e4b64893\", \n\t\t\t\"tagId\": \"3ba9014d-c887-46eb-a313-e710bc4d0245\", \n\t\t\t\"type\": \"ZAP\", \n\t\t\t\"sectionId\": \"3c002b2e-858d-4c04-8f0c-b436ec83d393\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5af596cc-189e-4525-bfab-cfafb971ac9b\", \n\t\t\t\"tagId\": \"b5ee09e4-5c8e-4675-ad07-0dde21935506\", \n\t\t\t\"type\": \"CMS\", \n\t\t\t\"sectionId\": \"a2b86fe0-c82f-450b-b68e-ff0930225c9a\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1c95e0b4-d857-4565-ab2f-a86d4e9d3a1f\", \n\t\t\t\"tagId\": \"0deb516b-3231-4e22-8a4b-76fe7cb7e6fc\", \n\t\t\t\"type\": \"TCI\", \n\t\t\t\"sectionId\": \"a2b94d24-8eb4-41c2-ba2a-5601608b5ece\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9d61c3a3-6915-4fc0-9df4-e0cd6649b975\", \n\t\t\t\"tagId\": \"6433096f-9e9e-4049-91c9-19c0bea0a093\", \n\t\t\t\"type\": \"MULESOFT\", \n\t\t\t\"sectionId\": \"1d1c1141-f468-476b-8fc5-e5f4b4d605b6\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcPaginateActions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])\n{\n\tnfcPaginateActions (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcGetActions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tnfcGetActions (query: $query)\n\t{\n\t\tid\n\t\ttagId\n\t\ttype\n\t\tsectionId\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f61efb8a-207b-4376-bb49-81097dab62ef\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcFindAction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:[QueryStatementInput])\n{\n\tnfcFindAction (query: $query)\n\t{\n\t\tid\n\t\ttagId\n\t\ttype\n\t\tsectionId\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f61efb8a-207b-4376-bb49-81097dab62ef\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcFindActionById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tnfcFindActionById (id:$id)\n\t{\n\t\tid\n\t\ttagId\n\t\ttype\n\t\tsectionId\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"f61efb8a-207b-4376-bb49-81097dab62ef\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcUpdateAction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:NfcUpdateActionInput!)\n{\n\tnfcUpdateAction (payload:$payload)\n\t{\n\t\tid\n\t\ttagId\n\t\ttype\n\t\tsectionId\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"f61efb8a-207b-4376-bb49-81097dab62ef\", \n\t\t\"tagId\": \"a4ab133d-6481-43dc-a678-2f2fb61ec42c\", \n\t\t\"type\": \"CMS\", \n\t\t\"sectionId\": \"20975c4a-e020-456e-bed7-d00bb4ba058d\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcDeleteActionById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tnfcDeleteActionById (id:$id)\n\t{\n\t\tid\n\t\ttagId\n\t\ttype\n\t\tsectionId\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"f61efb8a-207b-4376-bb49-81097dab62ef\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - nfcDeleteActions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tnfcDeleteActions (query: $query)\n\t{\n\t\tid\n\t\ttagId\n\t\ttype\n\t\tsectionId\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/action",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"f61efb8a-207b-4376-bb49-81097dab62ef\", \n\t\"tagId\": \"a4ab133d-6481-43dc-a678-2f2fb61ec42c\", \n\t\"type\": \"ZAP\", \n\t\"sectionId\": \"20975c4a-e020-456e-bed7-d00bb4ba058d\", \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/action",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"action"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/actions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"706506f0-8960-458f-a8e0-9e8366ab7d10\", \n\t\t\"tagId\": \"6923cffd-e96e-4364-b0e5-002bf383e648\", \n\t\t\"type\": \"ZAP\", \n\t\t\"sectionId\": \"d9e3cdfb-fa46-4e37-ae9d-a5ced3f2b09b\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"f3cd43ad-5468-492d-8594-5935da5e7d40\", \n\t\t\"tagId\": \"10d9b97c-42ec-4e10-a31e-19975ce5f739\", \n\t\t\"type\": \"MULESOFT\", \n\t\t\"sectionId\": \"e3153c69-66d9-4397-aadd-a1018f360c7f\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6aaefbc3-0cba-4374-bb64-c48b63470899\", \n\t\t\"tagId\": \"e9b5972c-b7cb-45c7-be95-438351d3161d\", \n\t\t\"type\": \"TCI\", \n\t\t\"sectionId\": \"40f0ea69-410f-4440-a3ff-94466362ae9d\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6954fcc8-34b5-4443-b8a7-a60023661809\", \n\t\t\"tagId\": \"4a8871c3-ce12-4ea2-80ad-6d1029ac3cf9\", \n\t\t\"type\": \"CMS\", \n\t\t\"sectionId\": \"63ace9ce-73da-4abb-a28a-b464f7892453\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"28cc25dc-bae4-4e47-a3b0-8104ff2917f3\", \n\t\t\"tagId\": \"d4c1b36d-3dc3-45fe-b1dd-1871ddf72a9b\", \n\t\t\"type\": \"CMS\", \n\t\t\"sectionId\": \"67991e73-42b4-4261-878f-505c8e5b1c58\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"1bdc28f3-e290-41eb-a681-19ebd3987d74\", \n\t\t\"tagId\": \"1ac0be3c-bab0-42c9-b061-bda2ac631dc9\", \n\t\t\"type\": \"TCI\", \n\t\t\"sectionId\": \"ffb135f1-595e-4438-95b3-ab42dd11cfcf\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"992e577c-c697-4e87-a4f0-d46b0340558c\", \n\t\t\"tagId\": \"b9227865-31f2-4beb-9cc8-1f169c4bbbe9\", \n\t\t\"type\": \"ZAP\", \n\t\t\"sectionId\": \"7f256cdb-4323-46d6-a405-11c311a3acf6\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"7b0c4f71-96f3-495b-8da3-a08ee5a1da04\", \n\t\t\"tagId\": \"d7452535-1439-4df9-9778-789334901384\", \n\t\t\"type\": \"MULESOFT\", \n\t\t\"sectionId\": \"0e6121e2-a907-4f0f-a758-333acd51e175\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"24c799ad-8ea0-4a4f-8dd2-8db7e214636d\", \n\t\t\"tagId\": \"f5aa457c-aab1-4340-8fbf-6ed41100bbd9\", \n\t\t\"type\": \"TCI\", \n\t\t\"sectionId\": \"aad0f202-a9e6-4baf-a8c7-d0bb32b283a9\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"1d033cb5-953d-406f-9264-c0746b48052c\", \n\t\t\"tagId\": \"440d0c6c-82ae-43f8-8773-7d202baada87\", \n\t\t\"type\": \"ZAP\", \n\t\t\"sectionId\": \"a7dce30a-61ff-49a7-ac14-e97d6427c67c\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"59d83eaa-3b27-484c-b301-47361715a09b\", \n\t\t\"tagId\": \"a8ba893f-0942-4bfc-8157-d337f5ee3296\", \n\t\t\"type\": \"MULESOFT\", \n\t\t\"sectionId\": \"067d3dd5-68fb-4a98-bb41-e13b3b7198d1\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"22251c8a-e37d-4cdc-af62-1a4849066bdb\", \n\t\t\"tagId\": \"75373f7a-4353-4b3f-a4a3-9ca756a8240e\", \n\t\t\"type\": \"TCI\", \n\t\t\"sectionId\": \"c2d0cc6f-ac38-4c81-8a32-0ac4170d0d40\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"60ff2fa8-1792-4d9a-ba5f-a0d1c0726cc3\", \n\t\t\"tagId\": \"cd675af2-b835-4929-ba74-0e1c96162ced\", \n\t\t\"type\": \"CMS\", \n\t\t\"sectionId\": \"7840d5d9-684f-4002-8ca8-ac8846c930d5\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"08e3da2e-fce5-4df9-87b6-1d10dbf43bb3\", \n\t\t\"tagId\": \"26614e7e-a2f0-4b8a-89e9-a6e69a9cbf97\", \n\t\t\"type\": \"ZAP\", \n\t\t\"sectionId\": \"5471879f-550f-4789-bd46-11a494732963\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"a749e198-dfc2-4ba5-9d4c-de2787a2a917\", \n\t\t\"tagId\": \"27d47e60-de36-4f55-a292-50ce99c8eb79\", \n\t\t\"type\": \"TCI\", \n\t\t\"sectionId\": \"a1e20252-b6cb-4b40-a6c0-5e6cc4a8ebed\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"990e94df-d863-4928-a097-f05823f78b37\", \n\t\t\"tagId\": \"bb567846-a034-43b2-994a-8a0dbb8eeb78\", \n\t\t\"type\": \"CMS\", \n\t\t\"sectionId\": \"accde1e3-0bfb-48d2-a3a1-c4b356284869\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"284770f1-992b-4909-9ef8-470e8e95116d\", \n\t\t\"tagId\": \"b24fbca9-93d4-486c-8501-880beb797da9\", \n\t\t\"type\": \"CMS\", \n\t\t\"sectionId\": \"eba6f3dc-4da5-4582-a3f8-f98f958e4594\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"8eba95b9-f15c-4494-b233-d38b46243294\", \n\t\t\"tagId\": \"141496af-c4d8-429d-8684-425f98347c0d\", \n\t\t\"type\": \"CMS\", \n\t\t\"sectionId\": \"38a324d6-15f7-41dc-b7d2-43566e7ab670\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"0d01d596-7afe-4bd7-8b60-729afd4ec492\", \n\t\t\"tagId\": \"7ff23c60-8804-44f9-9f3f-1e95ba6dd6fe\", \n\t\t\"type\": \"CMS\", \n\t\t\"sectionId\": \"2ad9ca60-9687-4668-9f2a-d0ef6bdf7679\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"7b056267-36e0-4f6c-89c2-2a24bdc238a7\", \n\t\t\"tagId\": \"fe1e2669-90a4-4527-8368-387f3f09ea75\", \n\t\t\"type\": \"TCI\", \n\t\t\"sectionId\": \"e4f8b1ae-d51f-43eb-a25b-d602863d5b7c\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/actions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"actions"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/actions/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"OFFSET\",\n\t\t\t\"value\": 0\n\t\t},\n\t\t{\n\t\t\t\"command\": \"LIMIT\",\n\t\t\t\"value\": 10\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/actions/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+                        "actions",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/actions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f61efb8a-207b-4376-bb49-81097dab62ef\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/actions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"actions"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/action",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"f61efb8a-207b-4376-bb49-81097dab62ef\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/action",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"action"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/action/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/action/f61efb8a-207b-4376-bb49-81097dab62ef",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"action",
+						"f61efb8a-207b-4376-bb49-81097dab62ef"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/action",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"f61efb8a-207b-4376-bb49-81097dab62ef\", \n\t\"tagId\": \"a4ab133d-6481-43dc-a678-2f2fb61ec42c\", \n\t\"type\": \"CMS\", \n\t\"sectionId\": \"20975c4a-e020-456e-bed7-d00bb4ba058d\", \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/action",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"action"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - nfc/action/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/action/f61efb8a-207b-4376-bb49-81097dab62ef",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"action",
+						"f61efb8a-207b-4376-bb49-81097dab62ef"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - nfc/actions",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/nfc/actions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"nfc",
+						"actions"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "7453ac72-382e-4164-8d68-0c33fd09eb7d",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

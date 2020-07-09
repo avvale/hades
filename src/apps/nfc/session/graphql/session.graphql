@@ -1,0 +1,54 @@
+
+
+type NfcSession
+{
+    id: ID!
+    ip: GraphQLString!
+    tagId: ID!
+    uid: GraphQLString!
+    counter: GraphQLInt!
+    expiredAt: GraphQLTimestamp
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input NfcCreateSessionInput
+{
+    id: ID!
+    ip: GraphQLString!
+    tagId: ID!
+    uid: GraphQLString!
+    counter: GraphQLInt!
+    expiredAt: GraphQLTimestamp
+    
+}
+
+input NfcUpdateSessionInput
+{
+    id: ID!
+    ip: GraphQLString
+    tagId: ID
+    uid: GraphQLString
+    counter: GraphQLInt
+    expiredAt: GraphQLTimestamp
+    
+}
+
+type Query 
+{
+    nfcFindSession(query:[QueryStatementInput]): NfcSession
+    nfcFindSessionById(id:ID): NfcSession
+    nfcGetSessions(query:[QueryStatementInput]): [NfcSession]!
+    nfcPaginateSessions(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    nfcCreateSession(payload: NfcCreateSessionInput!): NfcSession
+    nfcInsertSessions(payload: [NfcCreateSessionInput]!): Boolean!
+    nfcUpdateSession(payload: NfcUpdateSessionInput!): NfcSession
+    nfcDeleteSessionById(id: ID!): NfcSession
+    nfcDeleteSessions(query:[QueryStatementInput]): [NfcSession]!
+}

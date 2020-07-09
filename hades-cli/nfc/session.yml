@@ -1,0 +1,40 @@
+version: 1.0.0
+boundedContextName: nfc
+moduleName: session
+moduleNames: sessions
+aggregateProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+  - name: ip
+    type: char
+    length: 15
+    nullable: false
+  - name: tag_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: NfcTag
+    relationshipModuleSection: nfc/tag
+  - name: uid
+    type: varchar
+    maxLength: 64
+    nullable: false
+  - name: counter
+    type: smallint
+    maxLength: 6
+    nullable: false
+  - name: expired_at
+    type: timestamp
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

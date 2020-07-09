@@ -30,6 +30,13 @@ export enum Operator {
     NOT_EQUALS = "NOT_EQUALS"
 }
 
+export enum NfcActionType {
+    CMS = "CMS",
+    ZAP = "ZAP",
+    TCI = "TCI",
+    MULESOFT = "MULESOFT"
+}
+
 export interface AdminCreateBoundedContextInput {
     id: string;
     name: GraphQLString;
@@ -121,6 +128,78 @@ export interface QueryStatementInput {
     value?: Any;
 }
 
+export interface NfcCreateActionInput {
+    id: string;
+    tagId: string;
+    type: NfcActionType;
+    sectionId?: string;
+    data?: JSON;
+}
+
+export interface NfcUpdateActionInput {
+    id: string;
+    tagId?: string;
+    type?: NfcActionType;
+    sectionId?: string;
+    data?: JSON;
+}
+
+export interface NfcCreateSessionInput {
+    id: string;
+    ip: GraphQLString;
+    tagId: string;
+    uid: GraphQLString;
+    counter: GraphQLInt;
+    expiredAt?: GraphQLTimestamp;
+}
+
+export interface NfcUpdateSessionInput {
+    id: string;
+    ip?: GraphQLString;
+    tagId?: string;
+    uid?: GraphQLString;
+    counter?: GraphQLInt;
+    expiredAt?: GraphQLTimestamp;
+}
+
+export interface NfcCreateSummaryInput {
+    id: string;
+    tagId: string;
+    tenantId: string;
+    accessAt: GraphQLTimestamp;
+    counter: GraphQLInt;
+}
+
+export interface NfcUpdateSummaryInput {
+    id: string;
+    tagId?: string;
+    tenantId?: string;
+    accessAt?: GraphQLTimestamp;
+    counter?: GraphQLInt;
+}
+
+export interface NfcCreateTagInput {
+    id: string;
+    code: GraphQLInt;
+    tenantId: string;
+    tenantCode: GraphQLString;
+    urlBase: GraphQLString;
+    params?: JSON;
+    offset?: GraphQLInt;
+    isSessionRequired?: GraphQLBoolean;
+}
+
+export interface NfcUpdateTagInput {
+    id: string;
+    code?: GraphQLInt;
+    tenantId?: string;
+    tenantCode?: GraphQLString;
+    urlBase?: GraphQLString;
+    params?: JSON;
+    offset?: GraphQLInt;
+    isSessionRequired?: GraphQLBoolean;
+}
+
 export interface AdminBoundedContext {
     id: string;
     name: GraphQLString;
@@ -153,6 +232,22 @@ export interface IQuery {
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    nfcFindAction(query?: QueryStatementInput[]): NfcAction | Promise<NfcAction>;
+    nfcFindActionById(id?: string): NfcAction | Promise<NfcAction>;
+    nfcGetActions(query?: QueryStatementInput[]): NfcAction[] | Promise<NfcAction[]>;
+    nfcPaginateActions(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    nfcFindSession(query?: QueryStatementInput[]): NfcSession | Promise<NfcSession>;
+    nfcFindSessionById(id?: string): NfcSession | Promise<NfcSession>;
+    nfcGetSessions(query?: QueryStatementInput[]): NfcSession[] | Promise<NfcSession[]>;
+    nfcPaginateSessions(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    nfcFindSummary(query?: QueryStatementInput[]): NfcSummary | Promise<NfcSummary>;
+    nfcFindSummaryById(id?: string): NfcSummary | Promise<NfcSummary>;
+    nfcGetSummaries(query?: QueryStatementInput[]): NfcSummary[] | Promise<NfcSummary[]>;
+    nfcPaginateSummaries(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    nfcFindTag(query?: QueryStatementInput[]): NfcTag | Promise<NfcTag>;
+    nfcFindTagById(id?: string): NfcTag | Promise<NfcTag>;
+    nfcGetTags(query?: QueryStatementInput[]): NfcTag[] | Promise<NfcTag[]>;
+    nfcPaginateTags(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
@@ -181,6 +276,26 @@ export interface IMutation {
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    nfcCreateAction(payload: NfcCreateActionInput): NfcAction | Promise<NfcAction>;
+    nfcInsertActions(payload: NfcCreateActionInput[]): boolean | Promise<boolean>;
+    nfcUpdateAction(payload: NfcUpdateActionInput): NfcAction | Promise<NfcAction>;
+    nfcDeleteActionById(id: string): NfcAction | Promise<NfcAction>;
+    nfcDeleteActions(query?: QueryStatementInput[]): NfcAction[] | Promise<NfcAction[]>;
+    nfcCreateSession(payload: NfcCreateSessionInput): NfcSession | Promise<NfcSession>;
+    nfcInsertSessions(payload: NfcCreateSessionInput[]): boolean | Promise<boolean>;
+    nfcUpdateSession(payload: NfcUpdateSessionInput): NfcSession | Promise<NfcSession>;
+    nfcDeleteSessionById(id: string): NfcSession | Promise<NfcSession>;
+    nfcDeleteSessions(query?: QueryStatementInput[]): NfcSession[] | Promise<NfcSession[]>;
+    nfcCreateSummary(payload: NfcCreateSummaryInput): NfcSummary | Promise<NfcSummary>;
+    nfcInsertSummaries(payload: NfcCreateSummaryInput[]): boolean | Promise<boolean>;
+    nfcUpdateSummary(payload: NfcUpdateSummaryInput): NfcSummary | Promise<NfcSummary>;
+    nfcDeleteSummaryById(id: string): NfcSummary | Promise<NfcSummary>;
+    nfcDeleteSummaries(query?: QueryStatementInput[]): NfcSummary[] | Promise<NfcSummary[]>;
+    nfcCreateTag(payload: NfcCreateTagInput): NfcTag | Promise<NfcTag>;
+    nfcInsertTags(payload: NfcCreateTagInput[]): boolean | Promise<boolean>;
+    nfcUpdateTag(payload: NfcUpdateTagInput): NfcTag | Promise<NfcTag>;
+    nfcDeleteTagById(id: string): NfcTag | Promise<NfcTag>;
+    nfcDeleteTags(query?: QueryStatementInput[]): NfcTag[] | Promise<NfcTag[]>;
 }
 
 export interface AdminLang {
@@ -233,6 +348,54 @@ export interface Pagination {
     total: number;
     count: number;
     rows: JSON[];
+}
+
+export interface NfcAction {
+    id: string;
+    tagId: string;
+    type: NfcActionType;
+    sectionId?: string;
+    data?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface NfcSession {
+    id: string;
+    ip: GraphQLString;
+    tagId: string;
+    uid: GraphQLString;
+    counter: GraphQLInt;
+    expiredAt?: GraphQLTimestamp;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface NfcSummary {
+    id: string;
+    tagId: string;
+    tenantId: string;
+    accessAt: GraphQLTimestamp;
+    counter: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface NfcTag {
+    id: string;
+    code: GraphQLInt;
+    tenantId: string;
+    tenantCode: GraphQLString;
+    urlBase: GraphQLString;
+    params?: JSON;
+    offset?: GraphQLInt;
+    isSessionRequired?: GraphQLBoolean;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
 }
 
 export type JSON = any;

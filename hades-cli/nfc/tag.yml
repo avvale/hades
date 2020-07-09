@@ -1,0 +1,47 @@
+version: 1.0.0
+boundedContextName: nfc
+moduleName: tag
+moduleNames: tags
+aggregateProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+  - name: code
+    type: int
+    maxLength: 10
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminTenant
+    relationshipModuleSection: admin/tenant
+  - name: tenant_code
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: url_base
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: params
+    type: json
+    nullable: true
+  - name: offset
+    type: smallint
+    maxLength: 6
+    nullable: true
+  - name: is_session_required
+    type: boolean
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

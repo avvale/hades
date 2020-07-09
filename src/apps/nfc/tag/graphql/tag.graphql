@@ -1,0 +1,60 @@
+
+
+type NfcTag
+{
+    id: ID!
+    code: GraphQLInt!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    urlBase: GraphQLString!
+    params: JSON
+    offset: GraphQLInt
+    isSessionRequired: GraphQLBoolean
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input NfcCreateTagInput
+{
+    id: ID!
+    code: GraphQLInt!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    urlBase: GraphQLString!
+    params: JSON
+    offset: GraphQLInt
+    isSessionRequired: GraphQLBoolean
+    
+}
+
+input NfcUpdateTagInput
+{
+    id: ID!
+    code: GraphQLInt
+    tenantId: ID
+    tenantCode: GraphQLString
+    urlBase: GraphQLString
+    params: JSON
+    offset: GraphQLInt
+    isSessionRequired: GraphQLBoolean
+    
+}
+
+type Query 
+{
+    nfcFindTag(query:[QueryStatementInput]): NfcTag
+    nfcFindTagById(id:ID): NfcTag
+    nfcGetTags(query:[QueryStatementInput]): [NfcTag]!
+    nfcPaginateTags(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    nfcCreateTag(payload: NfcCreateTagInput!): NfcTag
+    nfcInsertTags(payload: [NfcCreateTagInput]!): Boolean!
+    nfcUpdateTag(payload: NfcUpdateTagInput!): NfcTag
+    nfcDeleteTagById(id: ID!): NfcTag
+    nfcDeleteTags(query:[QueryStatementInput]): [NfcTag]!
+}
