@@ -5,6 +5,7 @@ import { InsertActionsResolver } from './insert-actions.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { actions } from '@hades/nfc/action/infrastructure/seeds/action.seed'
+import { NfcCreateActionInput } from './../../../../../src/graphql';
 
 describe('InsertActionsResolver', () => 
 {
@@ -52,7 +53,7 @@ describe('InsertActionsResolver', () =>
 
         it('should return an actions created', async () => 
         {
-            expect(await resolver.main(actions)).toBe(true);
+            expect(await resolver.main(<NfcCreateActionInput[]>actions)).toBe(true);
         });
     });
 });
