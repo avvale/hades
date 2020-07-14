@@ -3,8 +3,8 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { JobOverviewDto } from './../dto/job-overview.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindJobOverviewByIdQuery } from '@hades/bplus-it-sappi/job-overview/application/find/find-job-overview-by-id.query';
 import { DeleteJobOverviewByIdCommand } from '@hades/bplus-it-sappi/job-overview/application/delete/delete-job-overview-by-id.command';
 

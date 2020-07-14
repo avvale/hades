@@ -4,8 +4,8 @@ import { CreateContactDto } from './../dto/create-contact.dto';
 import { ContactDto } from './../dto/contact.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindContactByIdQuery } from '@hades/bplus-it-sappi/contact/application/find/find-contact-by-id.query';
 import { CreateContactCommand } from '@hades/bplus-it-sappi/contact/application/create/create-contact.command';
 

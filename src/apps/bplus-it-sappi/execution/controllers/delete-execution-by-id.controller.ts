@@ -3,8 +3,8 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ExecutionDto } from './../dto/execution.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindExecutionByIdQuery } from '@hades/bplus-it-sappi/execution/application/find/find-execution-by-id.query';
 import { DeleteExecutionByIdCommand } from '@hades/bplus-it-sappi/execution/application/delete/delete-execution-by-id.command';
 

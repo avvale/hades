@@ -2,8 +2,8 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { BplusItSappiCreateExecutionInput } from './../../../../graphql';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { InsertExecutionsCommand } from '@hades/bplus-it-sappi/execution/application/insert/insert-executions.command';
 
 @Resolver()

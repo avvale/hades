@@ -2,8 +2,8 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { BplusItSappiCreateMessageOverviewInput } from './../../../../graphql';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { CreateMessageOverviewCommand } from '@hades/bplus-it-sappi/message-overview/application/create/create-message-overview.command';
 import { FindMessageOverviewByIdQuery } from '@hades/bplus-it-sappi/message-overview/application/find/find-message-overview-by-id.query';
 

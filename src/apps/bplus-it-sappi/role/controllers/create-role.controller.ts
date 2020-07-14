@@ -4,8 +4,8 @@ import { CreateRoleDto } from './../dto/create-role.dto';
 import { RoleDto } from './../dto/role.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindRoleByIdQuery } from '@hades/bplus-it-sappi/role/application/find/find-role-by-id.query';
 import { CreateRoleCommand } from '@hades/bplus-it-sappi/role/application/create/create-role.command';
 

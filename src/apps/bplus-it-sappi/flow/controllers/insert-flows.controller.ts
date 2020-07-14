@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreateFlowDto } from './../dto/create-flow.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertFlowsCommand } from '@hades/bplus-it-sappi/flow/application/insert/insert-flows.command';
 
 @ApiTags('[bplus-it-sappi] flow')

@@ -1,8 +1,8 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindContactByIdQuery } from '@hades/bplus-it-sappi/contact/application/find/find-contact-by-id.query';
 import { DeleteContactByIdCommand } from '@hades/bplus-it-sappi/contact/application/delete/delete-contact-by-id.command';
 

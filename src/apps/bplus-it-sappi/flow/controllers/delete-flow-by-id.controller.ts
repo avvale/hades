@@ -3,8 +3,8 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { FlowDto } from './../dto/flow.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindFlowByIdQuery } from '@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.query';
 import { DeleteFlowByIdCommand } from '@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.command';
 

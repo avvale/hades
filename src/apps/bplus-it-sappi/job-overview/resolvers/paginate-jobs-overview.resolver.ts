@@ -1,7 +1,7 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginateJobsOverviewQuery } from '@hades/bplus-it-sappi/job-overview/application/paginate/paginate-jobs-overview.query';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from './../../../../graphql';

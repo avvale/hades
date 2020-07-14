@@ -1,7 +1,7 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindJobDetailByIdQuery } from '@hades/bplus-it-sappi/job-detail/application/find/find-job-detail-by-id.query';
 import { BplusItSappiJobDetail } from './../../../../graphql';
 

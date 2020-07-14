@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreateSystemDto } from './../dto/create-system.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertSystemsCommand } from '@hades/bplus-it-sappi/system/application/insert/insert-systems.command';
 
 @ApiTags('[bplus-it-sappi] system')

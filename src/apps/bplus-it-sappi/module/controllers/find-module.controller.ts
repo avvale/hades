@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ModuleDto } from './../dto/module.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { FindModuleQuery } from '@hades/bplus-it-sappi/module/application/find/find-module.query';
 

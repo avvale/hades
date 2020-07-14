@@ -2,8 +2,8 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { BplusItSappiUpdateJobDetailInput } from './../../../../graphql';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { UpdateJobDetailCommand } from '@hades/bplus-it-sappi/job-detail/application/update/update-job-detail.command';
 import { FindJobDetailByIdQuery } from '@hades/bplus-it-sappi/job-detail/application/find/find-job-detail-by-id.query';
 

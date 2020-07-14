@@ -1,8 +1,8 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { GetFlowsQuery } from '@hades/bplus-it-sappi/flow/application/get/get-flows.query';
 import { DeleteFlowsCommand } from '@hades/bplus-it-sappi/flow/application/delete/delete-flows.command';

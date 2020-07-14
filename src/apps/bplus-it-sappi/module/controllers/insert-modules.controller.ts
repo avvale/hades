@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreateModuleDto } from './../dto/create-module.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertModulesCommand } from '@hades/bplus-it-sappi/module/application/insert/insert-modules.command';
 
 @ApiTags('[bplus-it-sappi] module')

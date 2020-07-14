@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreateRoleDto } from './../dto/create-role.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertRolesCommand } from '@hades/bplus-it-sappi/role/application/insert/insert-roles.command';
 
 @ApiTags('[bplus-it-sappi] role')

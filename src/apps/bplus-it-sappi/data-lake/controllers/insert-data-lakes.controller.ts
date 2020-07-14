@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreateDataLakeDto } from './../dto/create-data-lake.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertDataLakesCommand } from '@hades/bplus-it-sappi/data-lake/application/insert/insert-data-lakes.command';
 
 @ApiTags('[bplus-it-sappi] data-lake')

@@ -2,8 +2,8 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { BplusItSappiCreateChannelInput } from './../../../../graphql';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { CreateChannelCommand } from '@hades/bplus-it-sappi/channel/application/create/create-channel.command';
 import { FindChannelByIdQuery } from '@hades/bplus-it-sappi/channel/application/find/find-channel-by-id.query';
 

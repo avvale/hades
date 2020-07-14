@@ -4,8 +4,8 @@ import { CreateExecutionDto } from './../dto/create-execution.dto';
 import { ExecutionDto } from './../dto/execution.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindExecutionByIdQuery } from '@hades/bplus-it-sappi/execution/application/find/find-execution-by-id.query';
 import { CreateExecutionCommand } from '@hades/bplus-it-sappi/execution/application/create/create-execution.command';
 

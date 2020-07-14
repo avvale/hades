@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ContactDto } from './../dto/contact.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { GetContactsQuery } from '@hades/bplus-it-sappi/contact/application/get/get-contacts.query';
 

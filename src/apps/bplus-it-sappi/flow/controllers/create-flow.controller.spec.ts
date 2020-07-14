@@ -2,8 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { CreateFlowController } from './create-flow.controller';
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { flows } from '@hades/bplus-it-sappi/flow/infrastructure/seeds/flow.seed'
 
 describe('CreateFlowController', () => 

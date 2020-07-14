@@ -4,8 +4,8 @@ import { UpdateChannelDto } from './../dto/update-channel.dto';
 import { ChannelDto } from './../dto/channel.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { UpdateChannelCommand } from '@hades/bplus-it-sappi/channel/application/update/update-channel.command';
 import { FindChannelByIdQuery } from '@hades/bplus-it-sappi/channel/application/find/find-channel-by-id.query';
 

@@ -3,8 +3,8 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ModuleDto } from './../dto/module.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { GetModulesQuery } from '@hades/bplus-it-sappi/module/application/get/get-modules.query';
 import { DeleteModulesCommand } from '@hades/bplus-it-sappi/module/application/delete/delete-modules.command';

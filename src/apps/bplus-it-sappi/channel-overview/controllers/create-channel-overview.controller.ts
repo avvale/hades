@@ -4,8 +4,8 @@ import { CreateChannelOverviewDto } from './../dto/create-channel-overview.dto';
 import { ChannelOverviewDto } from './../dto/channel-overview.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindChannelOverviewByIdQuery } from '@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview-by-id.query';
 import { CreateChannelOverviewCommand } from '@hades/bplus-it-sappi/channel-overview/application/create/create-channel-overview.command';
 

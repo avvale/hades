@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreateChannelDto } from './../dto/create-channel.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertChannelsCommand } from '@hades/bplus-it-sappi/channel/application/insert/insert-channels.command';
 
 @ApiTags('[bplus-it-sappi] channel')

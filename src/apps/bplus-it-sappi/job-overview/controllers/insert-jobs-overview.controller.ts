@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreateJobOverviewDto } from './../dto/create-job-overview.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertJobsOverviewCommand } from '@hades/bplus-it-sappi/job-overview/application/insert/insert-jobs-overview.command';
 
 @ApiTags('[bplus-it-sappi] job-overview')

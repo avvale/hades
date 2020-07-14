@@ -2,8 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteModuleByIdController } from './delete-module-by-id.controller';
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { modules } from '@hades/bplus-it-sappi/module/infrastructure/seeds/module.seed'
 
 describe('DeleteModuleByIdController', () => 

@@ -4,8 +4,8 @@ import { UpdateModuleDto } from './../dto/update-module.dto';
 import { ModuleDto } from './../dto/module.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { UpdateModuleCommand } from '@hades/bplus-it-sappi/module/application/update/update-module.command';
 import { FindModuleByIdQuery } from '@hades/bplus-it-sappi/module/application/find/find-module-by-id.query';
 

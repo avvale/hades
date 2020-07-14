@@ -4,8 +4,8 @@ import { CreateFlowDto } from './../dto/create-flow.dto';
 import { FlowDto } from './../dto/flow.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindFlowByIdQuery } from '@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.query';
 import { CreateFlowCommand } from '@hades/bplus-it-sappi/flow/application/create/create-flow.command';
 

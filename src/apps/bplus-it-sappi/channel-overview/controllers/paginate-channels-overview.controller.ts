@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ChannelOverviewDto } from './../dto/channel-overview.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginateChannelsOverviewQuery } from '@hades/bplus-it-sappi/channel-overview/application/paginate/paginate-channels-overview.query';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 

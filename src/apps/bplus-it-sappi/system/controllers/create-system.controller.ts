@@ -4,8 +4,8 @@ import { CreateSystemDto } from './../dto/create-system.dto';
 import { SystemDto } from './../dto/system.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindSystemByIdQuery } from '@hades/bplus-it-sappi/system/application/find/find-system-by-id.query';
 import { CreateSystemCommand } from '@hades/bplus-it-sappi/system/application/create/create-system.command';
 

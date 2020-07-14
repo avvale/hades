@@ -4,8 +4,8 @@ import { CreateMessageOverviewDto } from './../dto/create-message-overview.dto';
 import { MessageOverviewDto } from './../dto/message-overview.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindMessageOverviewByIdQuery } from '@hades/bplus-it-sappi/message-overview/application/find/find-message-overview-by-id.query';
 import { CreateMessageOverviewCommand } from '@hades/bplus-it-sappi/message-overview/application/create/create-message-overview.command';
 

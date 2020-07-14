@@ -4,8 +4,8 @@ import { CreateJobDetailDto } from './../dto/create-job-detail.dto';
 import { JobDetailDto } from './../dto/job-detail.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindJobDetailByIdQuery } from '@hades/bplus-it-sappi/job-detail/application/find/find-job-detail-by-id.query';
 import { CreateJobDetailCommand } from '@hades/bplus-it-sappi/job-detail/application/create/create-job-detail.command';
 
