@@ -13,7 +13,7 @@ aggregateProperties:
     nullable: false
     relationship: many-to-one
     relationshipAggregate: AdminBoundedContext
-    relationshipModuleSection: admin/bounded-context
+    relationshipModulePath: admin/bounded-context
   - name: name
     type: varchar
     maxLength: 255
