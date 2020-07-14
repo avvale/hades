@@ -1,6 +1,7 @@
 import { SequelizeMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { AdminLang } from './../../domain/lang.aggregate';
+import { LangResponse } from './../../domain/lang.response';
 import { 
     LangId, 
     LangName, 
@@ -18,6 +19,11 @@ import {
 
 export class SequelizeLangMapper implements SequelizeMapper
 {
+    /**
+     * Map object or array of objects to aggregate or array aggregates
+     * 
+     * @param lang
+     */
     mapToAggregate(lang: ObjectLiteral | ObjectLiteral[]): AdminLang | AdminLang[]
     {
         if (Array.isArray(lang))
@@ -51,6 +57,48 @@ export class SequelizeLangMapper implements SequelizeMapper
             new LangCreatedAt(lang.createdAt),
             new LangUpdatedAt(lang.updatedAt),
             new LangDeletedAt(lang.deletedAt),
+            
+        );
+    }
+
+    /**
+     * Map aggregate or array of aggregates to response or array responses
+     * 
+     * @param lang 
+     */
+    mapToResponse(lang: AdminLang | AdminLang[]): LangResponse | LangResponse[]
+    {
+        if (Array.isArray(lang))
+        {
+            return lang.map(item => new LangResponse(
+                    item.id.value,
+                    item.name.value,
+                    item.image.value,
+                    item.iso6392.value,
+                    item.iso6393.value,
+                    item.ietf.value,
+                    item.sort.value,
+                    item.isActive.value,
+                    item.createdAt.value,
+                    item.updatedAt.value,
+                    item.deletedAt.value,
+                    
+                )
+            );
+        }
+
+        return new LangResponse(
+            lang.id.value,
+            lang.name.value,
+            lang.image.value,
+            lang.iso6392.value,
+            lang.iso6393.value,
+            lang.ietf.value,
+            lang.sort.value,
+            lang.isActive.value,
+            lang.createdAt.value,
+            lang.updatedAt.value,
+            lang.deletedAt.value,
             
         );
     }
