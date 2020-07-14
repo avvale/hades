@@ -3,7 +3,11 @@ import { ObjectLiteral } from "@hades/shared/domain/lib/object-literal";
 
 export interface IMapper
 {
-    mapToAggregate(object: ObjectLiteral | ObjectLiteral[]): AggregateBase | AggregateBase[];
+    mapObjectToAggregate(object: ObjectLiteral): AggregateBase;
 
-    mapToResponse(aggregate: AggregateBase | AggregateBase[]): ObjectLiteral | ObjectLiteral[]
+    mapObjectsToAggregates(objects: ObjectLiteral[]): AggregateBase[];
+
+    mapAggregateToResponse(aggregate: AggregateBase): ObjectLiteral;
+
+    mapAggregatesToResponses(aggregates: AggregateBase[]): ObjectLiteral[];
 }
