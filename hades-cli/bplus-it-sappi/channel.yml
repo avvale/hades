@@ -13,14 +13,14 @@ aggregateProperties:
     nullable: false
     relationship: many-to-one
     relationshipAggregate: AdminTenant
-    relationshipModuleSection: admin/tenant
+    relationshipModulePath: admin/tenant
   - name: system_id
     type: id
     length: 36
     nullable: false
     relationship: many-to-one
     relationshipAggregate: BplusItSappiSystem
-    relationshipModuleSection: bplus-it-sappi/system
+    relationshipModulePath: bplus-it-sappi/system
   - name: party
     type: varchar
     maxLength: 160
@@ -132,7 +132,7 @@ aggregateProperties:
     type: BplusItSappiModule
     relationship: one-to-many
     relationshipAggregate: BplusItSappiModule
-    relationshipModuleSection: bplus-it-sappi/module
+    relationshipModulePath: bplus-it-sappi/module
   - name: created_at
     type: timestamp
     nullable: true
