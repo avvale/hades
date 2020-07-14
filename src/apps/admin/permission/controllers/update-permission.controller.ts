@@ -4,8 +4,8 @@ import { UpdatePermissionDto } from './../dto/update-permission.dto';
 import { PermissionDto } from './../dto/permission.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { UpdatePermissionCommand } from '@hades/admin/permission/application/update/update-permission.command';
 import { FindPermissionByIdQuery } from '@hades/admin/permission/application/find/find-permission-by-id.query';
 

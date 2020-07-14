@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { TenantDto } from './../dto/tenant.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindTenantByIdQuery } from '@hades/admin/tenant/application/find/find-tenant-by-id.query';
 
 @ApiTags('[admin] tenant')

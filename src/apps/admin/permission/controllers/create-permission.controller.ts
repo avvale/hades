@@ -4,8 +4,8 @@ import { CreatePermissionDto } from './../dto/create-permission.dto';
 import { PermissionDto } from './../dto/permission.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindPermissionByIdQuery } from '@hades/admin/permission/application/find/find-permission-by-id.query';
 import { CreatePermissionCommand } from '@hades/admin/permission/application/create/create-permission.command';
 

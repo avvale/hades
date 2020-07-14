@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ResourceDto } from './../dto/resource.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindResourceByIdQuery } from '@hades/admin/resource/application/find/find-resource-by-id.query';
 
 @ApiTags('[admin] resource')

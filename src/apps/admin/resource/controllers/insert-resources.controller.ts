@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreateResourceDto } from './../dto/create-resource.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertResourcesCommand } from '@hades/admin/resource/application/insert/insert-resources.command';
 
 @ApiTags('[admin] resource')

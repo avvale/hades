@@ -39,7 +39,7 @@ describe('FindLangByIdQueryHandler', () =>
         queryHandler    = module.get<FindLangByIdQueryHandler>(FindLangByIdQueryHandler);
         service         = module.get<FindLangByIdService>(FindLangByIdService);
         repository      = <MockLangRepository>module.get<ILangRepository>(ILangRepository);
-        mapper          = new SequelizeLangMapper();
+        mapper          = new LangMapper();
     });
 
     it('FindLangByIdQueryHandler should be defined', () => 
@@ -63,7 +63,7 @@ describe('FindLangByIdQueryHandler', () =>
                     langs[0].id,
                 
                 )
-            )).toStrictEqual(mapper.mapToResponse(repository.collectionSource[0]));
+            )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });
 });

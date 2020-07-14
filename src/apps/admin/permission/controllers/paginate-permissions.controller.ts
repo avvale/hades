@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { PermissionDto } from './../dto/permission.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginatePermissionsQuery } from '@hades/admin/permission/application/paginate/paginate-permissions.query';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 
