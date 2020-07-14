@@ -12,7 +12,7 @@ aggregateProperties:
     length: 36
     nullable: false
     relationship: many-to-one
-    relationshipEntity: AdminTenant
+    relationshipAggregate: AdminTenant
     relationshipModuleSection: admin/tenant
   - name: name
     type: varchar
