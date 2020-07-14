@@ -1,18 +1,18 @@
 import { ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
+import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { SequelizeMapper } from './sequelize.mapper';
 
 export abstract class SequelizeRepository<Aggregate extends AggregateBase>
 {
     public readonly repository: any;
     public readonly criteria: ICriteria;
     public readonly entityName: string;
-    public readonly mapper: SequelizeMapper;
+    public readonly mapper: IMapper;
 
     builder(): Object
     {

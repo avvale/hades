@@ -1,4 +1,4 @@
-import { ICommandBus } from './../../domain/bus/command-bus.service';
+import { ICommandBus } from './../../domain/bus/command-bus';
 import { CommandBus as NestCommandBusImplementation, ICommand } from '@nestjs/cqrs';
 import { Injectable } from '@nestjs/common';
 
