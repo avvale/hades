@@ -42,7 +42,7 @@ describe('DeleteLangByIdCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return an lang created', async () => 
+        it('should return void', async () => 
         {
             expect(await commandHandler.execute(
                 new DeleteLangByIdCommand(
