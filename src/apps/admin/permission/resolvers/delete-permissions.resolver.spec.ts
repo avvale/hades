@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DeletePermissionsResolver } from './delete-permissions.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { permissions } from '@hades/admin/permission/infrastructure/seeds/permission.seed'
+import { permissions } from '@hades/admin/permission/infrastructure/seeds/permission.seed';
 
 describe('DeletePermissionsResolver', () => 
 {

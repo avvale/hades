@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DeleteBoundedContextsResolver } from './delete-bounded-contexts.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { boundedContexts } from '@hades/admin/bounded-context/infrastructure/seeds/bounded-context.seed'
+import { boundedContexts } from '@hades/admin/bounded-context/infrastructure/seeds/bounded-context.seed';
 
 describe('DeleteBoundedContextsResolver', () => 
 {

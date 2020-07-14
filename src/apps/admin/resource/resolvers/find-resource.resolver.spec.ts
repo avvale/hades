@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { FindResourceResolver } from './find-resource.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed'
+import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
 
 describe('FindResourceResolver', () => 
 {

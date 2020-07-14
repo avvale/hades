@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DeleteResourceByIdController } from './delete-resource-by-id.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed'
+import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
 
 describe('DeleteResourceByIdController', () => 
 {
