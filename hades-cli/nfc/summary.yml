@@ -13,14 +13,14 @@ aggregateProperties:
     nullable: false
     relationship: many-to-one
     relationshipAggregate: NfcTag
-    relationshipModuleSection: nfc/tag
+    relationshipModulePath: nfc/tag
   - name: tenant_id
     type: id
     length: 36
     nullable: false
     relationship: many-to-one
     relationshipAggregate: AdminTenant
-    relationshipModuleSection: admin/tenant
+    relationshipModulePath: admin/tenant
   - name: access_at
     type: timestamp
     nullable: false

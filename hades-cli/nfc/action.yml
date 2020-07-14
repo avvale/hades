@@ -13,7 +13,7 @@ aggregateProperties:
     nullable: false
     relationship: many-to-one
     relationshipAggregate: NfcTag
-    relationshipModuleSection: nfc/tag
+    relationshipModulePath: nfc/tag
   - name: type
     type: enum
     enumOptions:
