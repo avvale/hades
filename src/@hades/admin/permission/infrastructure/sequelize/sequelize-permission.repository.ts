@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { AdminPermission } from './../../domain/permission.aggregate';
+import { PermissionMapper } from './../../domain/permission.mapper';
 import { AdminPermissionModel } from './sequelize-permission.model';
-import { SequelizePermissionMapper } from './sequelize-permission.mapper';
 
 @Injectable()
 export class SequelizePermissionRepository extends SequelizeRepository<AdminPermission> implements IPermissionRepository
 {
     public readonly aggregateName: string = 'AdminPermission';
-    public readonly mapper: SequelizePermissionMapper = new SequelizePermissionMapper();
+    public readonly mapper: PermissionMapper = new PermissionMapper();
 
     constructor(
         @InjectModel(AdminPermissionModel)

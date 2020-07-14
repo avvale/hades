@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { AdminBoundedContext } from './../../domain/bounded-context.aggregate';
+import { BoundedContextMapper } from './../../domain/bounded-context.mapper';
 import { AdminBoundedContextModel } from './sequelize-bounded-context.model';
-import { SequelizeBoundedContextMapper } from './sequelize-bounded-context.mapper';
 
 @Injectable()
 export class SequelizeBoundedContextRepository extends SequelizeRepository<AdminBoundedContext> implements IBoundedContextRepository
 {
     public readonly aggregateName: string = 'AdminBoundedContext';
-    public readonly mapper: SequelizeBoundedContextMapper = new SequelizeBoundedContextMapper();
+    public readonly mapper: BoundedContextMapper = new BoundedContextMapper();
 
     constructor(
         @InjectModel(AdminBoundedContextModel)

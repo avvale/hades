@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreateBoundedContextDto } from './../dto/create-bounded-context.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertBoundedContextsCommand } from '@hades/admin/bounded-context/application/insert/insert-bounded-contexts.command';
 
 @ApiTags('[admin] bounded-context')

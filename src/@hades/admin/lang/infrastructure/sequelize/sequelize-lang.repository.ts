@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ILangRepository } from './../../domain/lang.repository';
 import { AdminLang } from './../../domain/lang.aggregate';
+import { LangMapper } from './../../domain/lang.mapper';
 import { AdminLangModel } from './sequelize-lang.model';
-import { SequelizeLangMapper } from './sequelize-lang.mapper';
 
 @Injectable()
 export class SequelizeLangRepository extends SequelizeRepository<AdminLang> implements ILangRepository
 {
     public readonly entityName: string = 'AdminLang';
-    public readonly mapper: SequelizeLangMapper = new SequelizeLangMapper();
+    public readonly mapper: LangMapper = new LangMapper();
 
     constructor(
         @InjectModel(AdminLangModel)

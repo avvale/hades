@@ -4,13 +4,12 @@ import { CreateBoundedContextDto } from './../dto/create-bounded-context.dto';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindBoundedContextByIdQuery } from '@hades/admin/bounded-context/application/find/find-bounded-context-by-id.query';
 import { CreateBoundedContextCommand } from '@hades/admin/bounded-context/application/create/create-bounded-context.command';
 
 @ApiTags('[admin] bounded-context')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: BoundedContextDto})
 @Controller('admin/bounded-context')
 export class CreateBoundedContextController 
 {
@@ -21,6 +20,7 @@ export class CreateBoundedContextController
 
     @Post()
     @ApiOperation({ summary: 'Create bounded-context' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: BoundedContextDto})
     async main(@Body() payload: CreateBoundedContextDto)
     {
         await this.commandBus.dispatch(new CreateBoundedContextCommand(
