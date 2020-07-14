@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { GetTagsResolver } from './get-tags.resolver'; 
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { tags } from '@hades/nfc/tag/infrastructure/seeds/tag.seed'
+import { tags } from '@hades/nfc/tag/infrastructure/seeds/tag.seed';
 
 describe('GetTagsResolver', () => 
 {

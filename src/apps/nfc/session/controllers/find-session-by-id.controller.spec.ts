@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { FindSessionByIdController } from './find-session-by-id.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { sessions } from '@hades/nfc/session/infrastructure/seeds/session.seed'
+import { sessions } from '@hades/nfc/session/infrastructure/seeds/session.seed';
 
 describe('FindSessionByIdController', () => 
 {

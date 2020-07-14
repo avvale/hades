@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { FindSummaryController } from './find-summary.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { summaries } from '@hades/nfc/summary/infrastructure/seeds/summary.seed'
+import { summaries } from '@hades/nfc/summary/infrastructure/seeds/summary.seed';
 
 describe('FindSummaryController', () => 
 {
