@@ -1,54 +1,43 @@
-version: 1.0.0,
+version: 1.0.0
 boundedContextName: bplus_it_sappi
 moduleName: system
 moduleNames: systems
 aggregateProperties:
-  - id: f10700e8-add5-4be5-ad9f-3ab1fce72996
-    name: id
+  - name: id
     type: id
     length: 36
     nullable: false
-  - id: f1394b0d-77fb-4613-a343-1b6dd20aea71
-    name: tenant_id
+  - name: tenant_id
     type: id
     length: 36
     nullable: false
     relationship: many-to-one
-    relationshipEntity: AdminTenant
-    relationshipPackageSection: admin/tenant
-  - id: 7e77c1fd-e2d5-4c08-a397-92aef392c4b8
-    name: name
+    relationshipAggregate: AdminTenant
+    relationshipModuleSection: admin/tenant
+  - name: name
     type: varchar
     nullable: false
-  - id: e33e01c2-bfb6-4a4f-9da4-4958c5dca663
-    name: tenant_code
+  - name: tenant_code
     type: varchar
     nullable: false
-  - id: b2017409-7fd6-4b3c-a3de-baac3d91b1dc
-    name: environment
+  - name: environment
     type: varchar
     nullable: false
-  - id: be332fc2-3fc2-4b4e-acc7-bfe49c7f5e9d
-    name: version
+  - name: version
     type: varchar
     nullable: false
-  - id: 6c5d3657-7d32-440d-94cb-d82341f00718
-    name: is_active
+  - name: is_active
     type: boolean
     nullable: false
-  - id: 389f02f2-e657-4a57-82f2-ab194bf1b607
-    name: cancelled_at
+  - name: cancelled_at
     type: timestamp
     nullable: true
-  - id: a72e78fd-edd5-4270-be7c-306ebc3fb1ec
-    name: created_at
+  - name: created_at
     type: timestamp
     nullable: true
-  - id: cacff6c4-19df-4993-b56d-67ebef89adb5
-    name: updated_at
+  - name: updated_at
     type: timestamp
     nullable: true
-  - id: b910dc90-3124-4506-840f-e65cb8f894a8
-    name: deleted_at
+  - name: deleted_at
     type: timestamp
     nullable: true
