@@ -1,5 +1,5 @@
-import { ICommandBus } from './domain/bus/command-bus.service';
-import { IQueryBus } from './domain/bus/query-bus.service';
+import { ICommandBus } from './domain/bus/command-bus';
+import { IQueryBus } from './domain/bus/query-bus';
 import { ICriteria } from './domain/persistence/criteria';
 
 // implementations
