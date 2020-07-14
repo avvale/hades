@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { InsertChannelsOverviewController } from './insert-channels-overview.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { channelsOverview } from '@hades/bplus-it-sappi/channel-overview/infrastructure/seeds/channel-overview.seed'
+import { channelsOverview } from '@hades/bplus-it-sappi/channel-overview/infrastructure/seeds/channel-overview.seed';
 
 describe('InsertChannelsOverviewController', () => 
 {

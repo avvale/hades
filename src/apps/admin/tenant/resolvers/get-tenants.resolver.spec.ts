@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { GetTenantsResolver } from './get-tenants.resolver'; 
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { tenants } from '@hades/admin/tenant/infrastructure/seeds/tenant.seed'
+import { tenants } from '@hades/admin/tenant/infrastructure/seeds/tenant.seed';
 
 describe('GetTenantsResolver', () => 
 {

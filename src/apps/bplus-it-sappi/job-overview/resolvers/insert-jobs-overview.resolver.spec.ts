@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { InsertJobsOverviewResolver } from './insert-jobs-overview.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { jobsOverview } from '@hades/bplus-it-sappi/job-overview/infrastructure/seeds/job-overview.seed'
+import { jobsOverview } from '@hades/bplus-it-sappi/job-overview/infrastructure/seeds/job-overview.seed';
 import { BplusItSappiCreateJobOverviewInput } from './../../../../../src/graphql';
 
 describe('InsertJobsOverviewResolver', () => 

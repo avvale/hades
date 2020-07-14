@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DeleteRoleByIdResolver } from './delete-role-by-id.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { roles } from '@hades/bplus-it-sappi/role/infrastructure/seeds/role.seed'
+import { roles } from '@hades/bplus-it-sappi/role/infrastructure/seeds/role.seed';
 
 describe('DeleteRoleByIdResolver', () => 
 {

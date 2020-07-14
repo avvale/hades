@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { PaginateExecutionsResolver } from './paginate-executions.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { executions } from '@hades/bplus-it-sappi/execution/infrastructure/seeds/execution.seed'
+import { executions } from '@hades/bplus-it-sappi/execution/infrastructure/seeds/execution.seed';
 
 describe('PaginateExecutionsResolver', () => 
 {

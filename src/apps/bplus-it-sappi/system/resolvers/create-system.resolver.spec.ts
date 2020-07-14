@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CreateSystemResolver } from './create-system.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { systems } from '@hades/bplus-it-sappi/system/infrastructure/seeds/system.seed'
+import { systems } from '@hades/bplus-it-sappi/system/infrastructure/seeds/system.seed';
 import { BplusItSappiCreateSystemInput } from './../../../../../src/graphql';
 
 describe('CreateSystemResolver', () => 

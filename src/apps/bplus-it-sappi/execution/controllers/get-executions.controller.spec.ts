@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { GetExecutionsController } from './get-executions.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { executions } from '@hades/bplus-it-sappi/execution/infrastructure/seeds/execution.seed'
+import { executions } from '@hades/bplus-it-sappi/execution/infrastructure/seeds/execution.seed';
 
 describe('GetExecutionsController', () => 
 {

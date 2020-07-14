@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { FindModuleResolver } from './find-module.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { modules } from '@hades/bplus-it-sappi/module/infrastructure/seeds/module.seed'
+import { modules } from '@hades/bplus-it-sappi/module/infrastructure/seeds/module.seed';
 
 describe('FindModuleResolver', () => 
 {

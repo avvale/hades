@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { InsertChannelsResolver } from './insert-channels.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { channels } from '@hades/bplus-it-sappi/channel/infrastructure/seeds/channel.seed'
+import { channels } from '@hades/bplus-it-sappi/channel/infrastructure/seeds/channel.seed';
 import { BplusItSappiCreateChannelInput } from './../../../../../src/graphql';
 
 describe('InsertChannelsResolver', () => 

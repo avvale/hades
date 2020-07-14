@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { InsertLangsResolver } from './insert-langs.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed'
+import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 
 describe('InsertLangsResolver', () => 
 {

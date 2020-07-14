@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CreateContactResolver } from './create-contact.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { contacts } from '@hades/bplus-it-sappi/contact/infrastructure/seeds/contact.seed'
+import { contacts } from '@hades/bplus-it-sappi/contact/infrastructure/seeds/contact.seed';
 import { BplusItSappiCreateContactInput } from './../../../../../src/graphql';
 
 describe('CreateContactResolver', () => 

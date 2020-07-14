@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { FindJobOverviewController } from './find-job-overview.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { jobsOverview } from '@hades/bplus-it-sappi/job-overview/infrastructure/seeds/job-overview.seed'
+import { jobsOverview } from '@hades/bplus-it-sappi/job-overview/infrastructure/seeds/job-overview.seed';
 
 describe('FindJobOverviewController', () => 
 {

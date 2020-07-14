@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UpdateJobDetailResolver } from './update-job-detail.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { jobsDetail } from '@hades/bplus-it-sappi/job-detail/infrastructure/seeds/job-detail.seed'
+import { jobsDetail } from '@hades/bplus-it-sappi/job-detail/infrastructure/seeds/job-detail.seed';
 import { BplusItSappiUpdateJobDetailInput } from './../../../../../src/graphql';
 
 describe('UpdateJobDetailResolver', () => 

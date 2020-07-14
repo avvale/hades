@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DeleteFlowByIdController } from './delete-flow-by-id.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { flows } from '@hades/bplus-it-sappi/flow/infrastructure/seeds/flow.seed'
+import { flows } from '@hades/bplus-it-sappi/flow/infrastructure/seeds/flow.seed';
 
 describe('DeleteFlowByIdController', () => 
 {

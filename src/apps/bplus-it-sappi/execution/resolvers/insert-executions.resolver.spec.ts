@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { InsertExecutionsResolver } from './insert-executions.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { executions } from '@hades/bplus-it-sappi/execution/infrastructure/seeds/execution.seed'
+import { executions } from '@hades/bplus-it-sappi/execution/infrastructure/seeds/execution.seed';
 import { BplusItSappiCreateExecutionInput } from './../../../../../src/graphql';
 
 describe('InsertExecutionsResolver', () => 

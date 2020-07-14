@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { FindLangByIdQueryHandler } from './find-lang-by-id.query-handler';
 import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-lang.repository';
-import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed'
+import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
 import { LangMapper } from '@hades/admin/lang/domain/lang.mapper';
 
