@@ -20,31 +20,43 @@ import {
 export class LangMapper implements IMapper
 {
     /**
-     * Map object or array of objects to aggregate or array aggregates
-     * 
+     * Map object to aggregate
      * @param lang
      */
-    mapToAggregate(lang: ObjectLiteral | ObjectLiteral[]): AdminLang | AdminLang[]
+    mapObjectToAggregate(lang: ObjectLiteral): AdminLang
     {
-        if (Array.isArray(lang))
-        {
-            return lang.map(item => AdminLang.register(
-                    new LangId(item.id),
-                    new LangName(item.name),
-                    new LangImage(item.image),
-                    new LangIso6392(item.iso6392),
-                    new LangIso6393(item.iso6393),
-                    new LangIetf(item.ietf),
-                    new LangSort(item.sort),
-                    new LangIsActive(item.isActive),
-                    new LangCreatedAt(item.createdAt),
-                    new LangUpdatedAt(item.updatedAt),
-                    new LangDeletedAt(item.deletedAt),
-                    
-                )
-            );
-        }
-        
+        return this.makeAggregate(lang);
+    }
+
+    /**
+     * Map array of objects to array aggregates
+     * @param langs 
+     */
+    mapObjectsToAggregates(langs: ObjectLiteral[]): AdminLang[]
+    {
+        return langs.map(lang => this.makeAggregate(lang));
+    }
+
+    /**
+     * Map aggregate to response
+     * @param lang 
+     */
+    mapAggregateToResponse(lang: AdminLang): LangResponse
+    {
+        return this.makeResponse(lang);
+    }
+
+    /**
+     * Map array of aggregates to array responses
+     * @param langs
+     */
+    mapAggregatesToResponses(langs: AdminLang[]): LangResponse[]
+    {
+        return langs.map(lang => this.makeResponse(lang));
+    }
+
+    private makeAggregate(lang: ObjectLiteral): AdminLang
+    {
         return AdminLang.register(
             new LangId(lang.id),
             new LangName(lang.name),
@@ -61,32 +73,8 @@ export class LangMapper implements IMapper
         );
     }
 
-    /**
-     * Map aggregate or array of aggregates to response or array responses
-     * 
-     * @param lang 
-     */
-    mapToResponse(lang: AdminLang | AdminLang[]): LangResponse | LangResponse[]
+    private makeResponse(lang: AdminLang): LangResponse
     {
-        if (Array.isArray(lang))
-        {
-            return lang.map(item => new LangResponse(
-                    item.id.value,
-                    item.name.value,
-                    item.image.value,
-                    item.iso6392.value,
-                    item.iso6393.value,
-                    item.ietf.value,
-                    item.sort.value,
-                    item.isActive.value,
-                    item.createdAt.value,
-                    item.updatedAt.value,
-                    item.deletedAt.value,
-                    
-                )
-            );
-        }
-
         return new LangResponse(
             lang.id.value,
             lang.name.value,
