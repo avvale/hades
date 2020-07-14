@@ -1,7 +1,7 @@
-import { SequelizeMapper } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.mapper';
+import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
-import { AdminLang } from './../../domain/lang.aggregate';
-import { LangResponse } from './../../domain/lang.response';
+import { AdminLang } from './lang.aggregate';
+import { LangResponse } from './lang.response';
 import { 
     LangId, 
     LangName, 
@@ -15,9 +15,9 @@ import {
     LangUpdatedAt, 
     LangDeletedAt
     
-} from './../../domain/value-objects';
+} from './value-objects';
 
-export class SequelizeLangMapper implements SequelizeMapper
+export class LangMapper implements IMapper
 {
     /**
      * Map object or array of objects to aggregate or array aggregates

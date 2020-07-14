@@ -5,7 +5,7 @@ import { FindLangByIdQueryHandler } from './find-lang-by-id.query-handler';
 import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-lang.repository';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed'
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
-import { SequelizeLangMapper } from '@hades/admin/lang/infrastructure/sequelize/sequelize-lang.mapper';
+import { LangMapper } from '@hades/admin/lang/domain/lang.mapper';
 
 import { FindLangByIdQuery } from './find-lang-by-id.query';
 import { FindLangByIdService } from './find-lang-by-id.service';
@@ -15,7 +15,7 @@ describe('FindLangByIdQueryHandler', () =>
     let queryHandler: FindLangByIdQueryHandler;
     let service: FindLangByIdService;
     let repository: MockLangRepository;
-    let mapper: SequelizeLangMapper;
+    let mapper: LangMapper;
 
     beforeEach(async () => 
     {
