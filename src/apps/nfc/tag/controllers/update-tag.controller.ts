@@ -4,8 +4,8 @@ import { UpdateTagDto } from './../dto/update-tag.dto';
 import { TagDto } from './../dto/tag.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { UpdateTagCommand } from '@hades/nfc/tag/application/update/update-tag.command';
 import { FindTagByIdQuery } from '@hades/nfc/tag/application/find/find-tag-by-id.query';
 

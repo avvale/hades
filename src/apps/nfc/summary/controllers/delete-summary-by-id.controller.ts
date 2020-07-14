@@ -3,8 +3,8 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { SummaryDto } from './../dto/summary.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindSummaryByIdQuery } from '@hades/nfc/summary/application/find/find-summary-by-id.query';
 import { DeleteSummaryByIdCommand } from '@hades/nfc/summary/application/delete/delete-summary-by-id.command';
 

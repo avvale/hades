@@ -1,5 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { ActionResponse } from './../../domain/action.response';
+import { ActionMapper } from './../../domain/action.mapper';
 import { ActionId } from './../../domain/value-objects';
 import { FindActionByIdQuery } from './find-action-by-id.query';
 import { FindActionByIdService } from './find-action-by-id.service';
@@ -7,6 +8,8 @@ import { FindActionByIdService } from './find-action-by-id.service';
 @QueryHandler(FindActionByIdQuery)
 export class FindActionByIdQueryHandler implements IQueryHandler<FindActionByIdQuery>
 {
+    private readonly mapper: ActionMapper = new ActionMapper();
+
     constructor(
         private readonly findActionByIdService: FindActionByIdService
     ) { }
@@ -15,16 +18,6 @@ export class FindActionByIdQueryHandler implements IQueryHandler<FindActionByIdQ
     {
         const action = await this.findActionByIdService.main(new ActionId(query.id));
 
-        return new ActionResponse(
-                action.id.value,
-                action.tagId.value,
-                action.type.value,
-                action.sectionId.value,
-                action.data.value,
-                action.createdAt.value,
-                action.updatedAt.value,
-                action.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(action);
     }
 }

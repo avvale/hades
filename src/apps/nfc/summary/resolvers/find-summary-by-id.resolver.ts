@@ -1,7 +1,7 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindSummaryByIdQuery } from '@hades/nfc/summary/application/find/find-summary-by-id.query';
 import { NfcSummary } from './../../../../graphql';
 

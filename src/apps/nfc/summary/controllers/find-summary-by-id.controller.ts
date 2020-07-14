@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { SummaryDto } from './../dto/summary.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindSummaryByIdQuery } from '@hades/nfc/summary/application/find/find-summary-by-id.query';
 
 @ApiTags('[nfc] summary')

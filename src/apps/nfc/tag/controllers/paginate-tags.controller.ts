@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger'
 import { TagDto } from './../dto/tag.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginateTagsQuery } from '@hades/nfc/tag/application/paginate/paginate-tags.query';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { Pagination } from '@hades/shared/domain/lib/pagination';

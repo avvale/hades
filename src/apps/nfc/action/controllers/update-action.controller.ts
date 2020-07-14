@@ -4,8 +4,8 @@ import { UpdateActionDto } from './../dto/update-action.dto';
 import { ActionDto } from './../dto/action.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { UpdateActionCommand } from '@hades/nfc/action/application/update/update-action.command';
 import { FindActionByIdQuery } from '@hades/nfc/action/application/find/find-action-by-id.query';
 

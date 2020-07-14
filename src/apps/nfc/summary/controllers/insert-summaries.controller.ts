@@ -4,7 +4,7 @@ import { SummaryDto } from './../dto/summary.dto';
 import { CreateSummaryDto } from './../dto/create-summary.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertSummariesCommand } from '@hades/nfc/summary/application/insert/insert-summaries.command';
 
 @ApiTags('[nfc] summary')

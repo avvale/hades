@@ -2,8 +2,8 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { NfcCreateTagInput } from './../../../../graphql';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { CreateTagCommand } from '@hades/nfc/tag/application/create/create-tag.command';
 import { FindTagByIdQuery } from '@hades/nfc/tag/application/find/find-tag-by-id.query';
 

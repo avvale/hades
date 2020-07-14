@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ITagRepository } from './../../domain/tag.repository';
 import { NfcTag } from './../../domain/tag.aggregate';
+import { TagMapper } from './../../domain/tag.mapper';
 import { NfcTagModel } from './sequelize-tag.model';
-import { SequelizeTagMapper } from './sequelize-tag.mapper';
 
 @Injectable()
 export class SequelizeTagRepository extends SequelizeRepository<NfcTag> implements ITagRepository
 {
     public readonly aggregateName: string = 'NfcTag';
-    public readonly mapper: SequelizeTagMapper = new SequelizeTagMapper();
+    public readonly mapper: TagMapper = new TagMapper();
 
     constructor(
         @InjectModel(NfcTagModel)

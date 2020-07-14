@@ -3,8 +3,8 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { SessionDto } from './../dto/session.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindSessionByIdQuery } from '@hades/nfc/session/application/find/find-session-by-id.query';
 import { DeleteSessionByIdCommand } from '@hades/nfc/session/application/delete/delete-session-by-id.command';
 

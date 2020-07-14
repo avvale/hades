@@ -4,7 +4,7 @@ import { SessionDto } from './../dto/session.dto';
 import { CreateSessionDto } from './../dto/create-session.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertSessionsCommand } from '@hades/nfc/session/application/insert/insert-sessions.command';
 
 @ApiTags('[nfc] session')

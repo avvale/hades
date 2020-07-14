@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { TagDto } from './../dto/tag.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindTagByIdQuery } from '@hades/nfc/tag/application/find/find-tag-by-id.query';
 
 @ApiTags('[nfc] tag')

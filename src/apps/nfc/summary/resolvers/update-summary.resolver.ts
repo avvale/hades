@@ -2,8 +2,8 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { NfcUpdateSummaryInput } from './../../../../graphql';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { UpdateSummaryCommand } from '@hades/nfc/summary/application/update/update-summary.command';
 import { FindSummaryByIdQuery } from '@hades/nfc/summary/application/find/find-summary-by-id.query';
 

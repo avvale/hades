@@ -4,8 +4,8 @@ import { CreateTagDto } from './../dto/create-tag.dto';
 import { TagDto } from './../dto/tag.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindTagByIdQuery } from '@hades/nfc/tag/application/find/find-tag-by-id.query';
 import { CreateTagCommand } from '@hades/nfc/tag/application/create/create-tag.command';
 

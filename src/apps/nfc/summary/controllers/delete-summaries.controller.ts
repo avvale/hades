@@ -3,8 +3,8 @@ import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs
 import { SummaryDto } from './../dto/summary.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { GetSummariesQuery } from '@hades/nfc/summary/application/get/get-summaries.query';
 import { DeleteSummariesCommand } from '@hades/nfc/summary/application/delete/delete-summaries.command';

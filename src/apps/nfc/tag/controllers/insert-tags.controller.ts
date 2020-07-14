@@ -4,7 +4,7 @@ import { TagDto } from './../dto/tag.dto';
 import { CreateTagDto } from './../dto/create-tag.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertTagsCommand } from '@hades/nfc/tag/application/insert/insert-tags.command';
 
 @ApiTags('[nfc] tag')

@@ -2,8 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindSessionController } from './find-session.controller';
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { sessions } from '@hades/nfc/session/infrastructure/seeds/session.seed'
 
 describe('FindSessionController', () => 

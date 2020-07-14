@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IActionRepository } from './../../domain/action.repository';
 import { NfcAction } from './../../domain/action.aggregate';
+import { ActionMapper } from './../../domain/action.mapper';
 import { NfcActionModel } from './sequelize-action.model';
-import { SequelizeActionMapper } from './sequelize-action.mapper';
 
 @Injectable()
 export class SequelizeActionRepository extends SequelizeRepository<NfcAction> implements IActionRepository
 {
     public readonly aggregateName: string = 'NfcAction';
-    public readonly mapper: SequelizeActionMapper = new SequelizeActionMapper();
+    public readonly mapper: ActionMapper = new ActionMapper();
 
     constructor(
         @InjectModel(NfcActionModel)

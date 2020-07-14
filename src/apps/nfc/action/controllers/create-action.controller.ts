@@ -4,8 +4,8 @@ import { CreateActionDto } from './../dto/create-action.dto';
 import { ActionDto } from './../dto/action.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindActionByIdQuery } from '@hades/nfc/action/application/find/find-action-by-id.query';
 import { CreateActionCommand } from '@hades/nfc/action/application/create/create-action.command';
 

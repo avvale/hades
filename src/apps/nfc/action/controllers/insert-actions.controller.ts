@@ -4,7 +4,7 @@ import { ActionDto } from './../dto/action.dto';
 import { CreateActionDto } from './../dto/create-action.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertActionsCommand } from '@hades/nfc/action/application/insert/insert-actions.command';
 
 @ApiTags('[nfc] action')

@@ -1,11 +1,14 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { SessionResponse } from './../../domain/session.response';
+import { SessionMapper } from './../../domain/session.mapper';
 import { FindSessionQuery } from './find-session.query';
 import { FindSessionService } from './find-session.service';
 
 @QueryHandler(FindSessionQuery)
 export class FindSessionQueryHandler implements IQueryHandler<FindSessionQuery>
 {
+    private readonly mapper: SessionMapper = new SessionMapper();
+
     constructor(
         private readonly findSessionService: FindSessionService
     ) { }
@@ -14,17 +17,6 @@ export class FindSessionQueryHandler implements IQueryHandler<FindSessionQuery>
     {
         const session = await this.findSessionService.main(query.queryStatements);
 
-        return new SessionResponse(
-                session.id.value,
-                session.ip.value,
-                session.tagId.value,
-                session.uid.value,
-                session.counter.value,
-                session.expiredAt.value,
-                session.createdAt.value,
-                session.updatedAt.value,
-                session.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(session);
     }
 }

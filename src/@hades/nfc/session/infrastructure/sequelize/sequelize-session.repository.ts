@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ISessionRepository } from './../../domain/session.repository';
 import { NfcSession } from './../../domain/session.aggregate';
+import { SessionMapper } from './../../domain/session.mapper';
 import { NfcSessionModel } from './sequelize-session.model';
-import { SequelizeSessionMapper } from './sequelize-session.mapper';
 
 @Injectable()
 export class SequelizeSessionRepository extends SequelizeRepository<NfcSession> implements ISessionRepository
 {
     public readonly aggregateName: string = 'NfcSession';
-    public readonly mapper: SequelizeSessionMapper = new SequelizeSessionMapper();
+    public readonly mapper: SessionMapper = new SessionMapper();
 
     constructor(
         @InjectModel(NfcSessionModel)

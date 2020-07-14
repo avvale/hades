@@ -4,8 +4,8 @@ import { CreateSessionDto } from './../dto/create-session.dto';
 import { SessionDto } from './../dto/session.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindSessionByIdQuery } from '@hades/nfc/session/application/find/find-session-by-id.query';
 import { CreateSessionCommand } from '@hades/nfc/session/application/create/create-session.command';
 

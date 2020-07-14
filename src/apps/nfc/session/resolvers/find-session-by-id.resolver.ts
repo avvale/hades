@@ -1,7 +1,7 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindSessionByIdQuery } from '@hades/nfc/session/application/find/find-session-by-id.query';
 import { NfcSession } from './../../../../graphql';
 
