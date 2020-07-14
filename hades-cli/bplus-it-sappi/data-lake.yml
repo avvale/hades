@@ -1,4 +1,4 @@
-version: 1.0.0,
+version: 1.0.0
 boundedContextName: bplus-it-sappi
 moduleName: data-lake
 moduleNames: data-lakes
