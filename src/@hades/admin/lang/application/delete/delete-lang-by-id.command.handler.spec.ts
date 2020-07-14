@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteLangByIdCommandHandler } from './delete-lang-by-id.command-handler';
-import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed'
+import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { DeleteLangByIdCommand } from './delete-lang-by-id.command';
 import { DeleteLangByIdService } from './delete-lang-by-id.service';
 
@@ -42,7 +42,7 @@ describe('DeleteLangByIdCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return an lang created', async () => 
+        it('should return void', async () => 
         {
             expect(await commandHandler.execute(
                 new DeleteLangByIdCommand(

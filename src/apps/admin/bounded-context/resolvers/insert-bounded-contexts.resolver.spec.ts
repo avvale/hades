@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { InsertBoundedContextsResolver } from './insert-bounded-contexts.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { boundedContexts } from '@hades/admin/bounded-context/infrastructure/seeds/bounded-context.seed'
+import { boundedContexts } from '@hades/admin/bounded-context/infrastructure/seeds/bounded-context.seed';
 import { AdminCreateBoundedContextInput } from './../../../../../src/graphql';
 
 describe('InsertBoundedContextsResolver', () => 

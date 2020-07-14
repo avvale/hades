@@ -1,19 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { FindLangByIdQueryHandler } from './find-lang-by-id.query-handler';
+import { FindLangQueryHandler } from './find-lang.query-handler';
 import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-lang.repository';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
 import { LangMapper } from '@hades/admin/lang/domain/lang.mapper';
 
-import { FindLangByIdQuery } from './find-lang-by-id.query';
-import { FindLangByIdService } from './find-lang-by-id.service';
+import { FindLangQuery } from './find-lang.query';
+import { FindLangService } from './find-lang.service';
 
-describe('FindLangByIdQueryHandler', () => 
+describe('FindLangQueryHandler', () => 
 {
-    let queryHandler: FindLangByIdQueryHandler;
-    let service: FindLangByIdService;
+    let queryHandler: FindLangQueryHandler;
+    let service: FindLangService;
     let repository: MockLangRepository;
     let mapper: LangMapper;
 
@@ -21,13 +21,13 @@ describe('FindLangByIdQueryHandler', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                FindLangByIdQueryHandler,
+                FindLangQueryHandler,
                 {
                     provide: ILangRepository,
                     useClass: MockLangRepository
                 },
                 {
-                    provide: FindLangByIdService,
+                    provide: FindLangService,
                     useValue: {
                         main: () => {},
                     }
@@ -36,13 +36,13 @@ describe('FindLangByIdQueryHandler', () =>
         })
         .compile();
 
-        queryHandler    = module.get<FindLangByIdQueryHandler>(FindLangByIdQueryHandler);
-        service         = module.get<FindLangByIdService>(FindLangByIdService);
+        queryHandler    = module.get<FindLangQueryHandler>(FindLangQueryHandler);
+        service         = module.get<FindLangService>(FindLangService);
         repository      = <MockLangRepository>module.get<ILangRepository>(ILangRepository);
         mapper          = new LangMapper();
     });
 
-    it('FindLangByIdQueryHandler should be defined', () => 
+    it('FindLangQueryHandler should be defined', () => 
     {
         expect(queryHandler).toBeDefined();
     });
@@ -50,7 +50,7 @@ describe('FindLangByIdQueryHandler', () =>
     // Test get method
     describe('main', () => 
     {
-        it('FindLangByIdQueryHandler should be defined', () => 
+        it('FindLangQueryHandler should be defined', () => 
         {
             expect(queryHandler).toBeDefined();
         });
@@ -59,10 +59,7 @@ describe('FindLangByIdQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
-                new FindLangByIdQuery(
-                    langs[0].id,
-                
-                )
+                new FindLangQuery()
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });
