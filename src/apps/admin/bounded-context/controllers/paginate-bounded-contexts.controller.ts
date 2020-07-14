@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginateBoundedContextsQuery } from '@hades/admin/bounded-context/application/paginate/paginate-bounded-contexts.query';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 

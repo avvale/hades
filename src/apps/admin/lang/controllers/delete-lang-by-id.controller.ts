@@ -3,8 +3,8 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { LangDto } from './../dto/lang.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-by-id.query';
 import { DeleteLangByIdCommand } from '@hades/admin/lang/application/delete/delete-lang-by-id.command';
 

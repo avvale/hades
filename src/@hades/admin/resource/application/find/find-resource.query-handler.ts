@@ -1,11 +1,14 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { ResourceResponse } from './../../domain/resource.response';
+import { ResourceMapper } from './../../domain/resource.mapper';
 import { FindResourceQuery } from './find-resource.query';
 import { FindResourceService } from './find-resource.service';
 
 @QueryHandler(FindResourceQuery)
 export class FindResourceQueryHandler implements IQueryHandler<FindResourceQuery>
 {
+    private readonly mapper: ResourceMapper = new ResourceMapper();
+
     constructor(
         private readonly findResourceService: FindResourceService
     ) { }
@@ -14,16 +17,6 @@ export class FindResourceQueryHandler implements IQueryHandler<FindResourceQuery
     {
         const resource = await this.findResourceService.main(query.queryStatements);
 
-        return new ResourceResponse(
-                resource.id.value,
-                resource.boundedContextId.value,
-                resource.name.value,
-                resource.hasCustomFields.value,
-                resource.hasAttachments.value,
-                resource.createdAt.value,
-                resource.updatedAt.value,
-                resource.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(resource);
     }
 }

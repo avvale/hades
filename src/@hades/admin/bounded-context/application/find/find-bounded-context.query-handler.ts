@@ -1,11 +1,14 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { BoundedContextResponse } from './../../domain/bounded-context.response';
+import { BoundedContextMapper } from './../../domain/bounded-context.mapper';
 import { FindBoundedContextQuery } from './find-bounded-context.query';
 import { FindBoundedContextService } from './find-bounded-context.service';
 
 @QueryHandler(FindBoundedContextQuery)
 export class FindBoundedContextQueryHandler implements IQueryHandler<FindBoundedContextQuery>
 {
+    private readonly mapper: BoundedContextMapper = new BoundedContextMapper();
+
     constructor(
         private readonly findBoundedContextService: FindBoundedContextService
     ) { }
@@ -14,16 +17,6 @@ export class FindBoundedContextQueryHandler implements IQueryHandler<FindBounded
     {
         const boundedContext = await this.findBoundedContextService.main(query.queryStatements);
 
-        return new BoundedContextResponse(
-                boundedContext.id.value,
-                boundedContext.name.value,
-                boundedContext.root.value,
-                boundedContext.sort.value,
-                boundedContext.isActive.value,
-                boundedContext.createdAt.value,
-                boundedContext.updatedAt.value,
-                boundedContext.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(boundedContext);
     }
 }

@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreatePermissionDto } from './../dto/create-permission.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertPermissionsCommand } from '@hades/admin/permission/application/insert/insert-permissions.command';
 
 @ApiTags('[admin] permission')

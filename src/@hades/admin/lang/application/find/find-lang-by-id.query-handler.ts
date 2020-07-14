@@ -1,5 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { LangResponse } from './../../domain/lang.response';
+import { LangMapper } from './../../domain/lang.mapper';
 import { LangId } from './../../domain/value-objects';
 import { FindLangByIdQuery } from './find-lang-by-id.query';
 import { FindLangByIdService } from './find-lang-by-id.service';
@@ -7,6 +8,8 @@ import { FindLangByIdService } from './find-lang-by-id.service';
 @QueryHandler(FindLangByIdQuery)
 export class FindLangByIdQueryHandler implements IQueryHandler<FindLangByIdQuery>
 {
+    private readonly mapper: LangMapper = new LangMapper();
+    
     constructor(
         private readonly findLangByIdService: FindLangByIdService
     ) { }
@@ -15,19 +18,6 @@ export class FindLangByIdQueryHandler implements IQueryHandler<FindLangByIdQuery
     {
         const lang = await this.findLangByIdService.main(new LangId(query.id));
 
-        return new LangResponse(
-                lang.id.value,
-                lang.name.value,
-                lang.image.value,
-                lang.iso6392.value,
-                lang.iso6393.value,
-                lang.ietf.value,
-                lang.sort.value,
-                lang.isActive.value,
-                lang.createdAt.value,
-                lang.updatedAt.value,
-                lang.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(lang);
     }
 }

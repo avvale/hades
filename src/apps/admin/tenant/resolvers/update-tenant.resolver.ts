@@ -2,8 +2,8 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { AdminUpdateTenantInput } from './../../../../graphql';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { UpdateTenantCommand } from '@hades/admin/tenant/application/update/update-tenant.command';
 import { FindTenantByIdQuery } from '@hades/admin/tenant/application/find/find-tenant-by-id.query';
 

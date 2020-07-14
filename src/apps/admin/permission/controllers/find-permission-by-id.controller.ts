@@ -3,7 +3,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { PermissionDto } from './../dto/permission.dto';
 
 // @hades
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindPermissionByIdQuery } from '@hades/admin/permission/application/find/find-permission-by-id.query';
 
 @ApiTags('[admin] permission')

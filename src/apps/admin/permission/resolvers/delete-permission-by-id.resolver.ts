@@ -1,8 +1,8 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindPermissionByIdQuery } from '@hades/admin/permission/application/find/find-permission-by-id.query';
 import { DeletePermissionByIdCommand } from '@hades/admin/permission/application/delete/delete-permission-by-id.command';
 

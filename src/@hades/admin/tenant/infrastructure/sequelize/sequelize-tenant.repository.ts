@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ITenantRepository } from './../../domain/tenant.repository';
 import { AdminTenant } from './../../domain/tenant.aggregate';
+import { TenantMapper } from './../../domain/tenant.mapper';
 import { AdminTenantModel } from './sequelize-tenant.model';
-import { SequelizeTenantMapper } from './sequelize-tenant.mapper';
 
 @Injectable()
 export class SequelizeTenantRepository extends SequelizeRepository<AdminTenant> implements ITenantRepository
 {
-    public readonly entityName: string = 'AdminTenant';
-    public readonly mapper: SequelizeTenantMapper = new SequelizeTenantMapper();
+    public readonly aggregateName: string = 'AdminTenant';
+    public readonly mapper: TenantMapper = new TenantMapper();
 
     constructor(
         @InjectModel(AdminTenantModel)

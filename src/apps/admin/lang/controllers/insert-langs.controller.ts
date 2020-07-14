@@ -4,7 +4,7 @@ import { LangDto } from './../dto/lang.dto';
 import { CreateLangDto } from './../dto/create-lang.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertLangsCommand } from '@hades/admin/lang/application/insert/insert-langs.command';
 
 @ApiTags('[admin] lang')

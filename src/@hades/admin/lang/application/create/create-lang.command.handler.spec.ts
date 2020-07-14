@@ -2,8 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { CreateLangCommandHandler } from './create-lang.command-handler';
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus.service';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed'
 import { CreateLangCommand } from './create-lang.command';
 import { CreateLangService } from './create-lang.service';

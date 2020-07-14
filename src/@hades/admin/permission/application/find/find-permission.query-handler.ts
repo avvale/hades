@@ -1,11 +1,14 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { PermissionResponse } from './../../domain/permission.response';
+import { PermissionMapper } from './../../domain/permission.mapper';
 import { FindPermissionQuery } from './find-permission.query';
 import { FindPermissionService } from './find-permission.service';
 
 @QueryHandler(FindPermissionQuery)
 export class FindPermissionQueryHandler implements IQueryHandler<FindPermissionQuery>
 {
+    private readonly mapper: PermissionMapper = new PermissionMapper();
+
     constructor(
         private readonly findPermissionService: FindPermissionService
     ) { }
@@ -14,14 +17,6 @@ export class FindPermissionQueryHandler implements IQueryHandler<FindPermissionQ
     {
         const permission = await this.findPermissionService.main(query.queryStatements);
 
-        return new PermissionResponse(
-                permission.id.value,
-                permission.boundedContextId.value,
-                permission.name.value,
-                permission.createdAt.value,
-                permission.updatedAt.value,
-                permission.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(permission);
     }
 }

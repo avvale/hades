@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { CreateTenantDto } from './../dto/create-tenant.dto';
 
 // @hades
-import { ICommandBus } from '@hades/shared/domain/bus/command-bus.service';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { InsertTenantsCommand } from '@hades/admin/tenant/application/insert/insert-tenants.command';
 
 @ApiTags('[admin] tenant')

@@ -1,4 +1,4 @@
-import { IQueryBus } from './../../domain/bus/query-bus.service';
+import { IQueryBus } from './../../domain/bus/query-bus';
 import { QueryBus as NestQueryBusImplementation, ICommand } from '@nestjs/cqrs';
 import { Injectable } from '@nestjs/common';
 

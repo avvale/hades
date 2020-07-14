@@ -1,18 +1,18 @@
 import { ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
+import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
-import { SequelizeMapper } from './sequelize.mapper';
 
 export abstract class SequelizeRepository<Aggregate extends AggregateBase>
 {
     public readonly repository: any;
     public readonly criteria: ICriteria;
     public readonly entityName: string;
-    public readonly mapper: SequelizeMapper;
+    public readonly mapper: IMapper;
 
     builder(): Object
     {
@@ -33,7 +33,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         return { 
             total, 
             count, 
-            rows: <Aggregate[]>this.mapper.mapToAggregate(rows) // map values to create value objects
+            rows: <Aggregate[]>this.mapper.mapObjectsToAggregates(rows) // map values to create value objects
         };
     }
     
@@ -74,7 +74,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
         // map value to create value objects
-        return <Aggregate>this.mapper.mapToAggregate(entity);
+        return <Aggregate>this.mapper.mapObjectToAggregate(entity);
     }
 
     async findById(id: UuidValueObject): Promise<Aggregate>
@@ -90,7 +90,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
 
         if (!entity) throw new NotFoundException(`${this.entityName} not found`);
 
-        return <Aggregate>this.mapper.mapToAggregate(entity);
+        return <Aggregate>this.mapper.mapObjectToAggregate(entity);
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Aggregate[]> 
@@ -100,7 +100,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         );
 
         // map values to create value objects
-        return <Aggregate[]>this.mapper.mapToAggregate(entities);
+        return <Aggregate[]>this.mapper.mapObjectsToAggregates(entities);
     }
 
     async update(entity: Aggregate): Promise<void> 
