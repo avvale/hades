@@ -1,5 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { ChannelOverviewResponse } from './../../domain/channel-overview.response';
+import { ChannelOverviewMapper } from './../../domain/channel-overview.mapper';
 import { ChannelOverviewId } from './../../domain/value-objects';
 import { FindChannelOverviewByIdQuery } from './find-channel-overview-by-id.query';
 import { FindChannelOverviewByIdService } from './find-channel-overview-by-id.service';
@@ -7,6 +8,8 @@ import { FindChannelOverviewByIdService } from './find-channel-overview-by-id.se
 @QueryHandler(FindChannelOverviewByIdQuery)
 export class FindChannelOverviewByIdQueryHandler implements IQueryHandler<FindChannelOverviewByIdQuery>
 {
+    private readonly mapper: ChannelOverviewMapper = new ChannelOverviewMapper();
+
     constructor(
         private readonly findChannelOverviewByIdService: FindChannelOverviewByIdService
     ) { }
@@ -15,26 +18,6 @@ export class FindChannelOverviewByIdQueryHandler implements IQueryHandler<FindCh
     {
         const channelOverview = await this.findChannelOverviewByIdService.main(new ChannelOverviewId(query.id));
 
-        return new ChannelOverviewResponse(
-                channelOverview.id.value,
-                channelOverview.tenantId.value,
-                channelOverview.systemId.value,
-                channelOverview.systemName.value,
-                channelOverview.executionId.value,
-                channelOverview.executionType.value,
-                channelOverview.executionExecutedAt.value,
-                channelOverview.executionMonitoringStartAt.value,
-                channelOverview.executionMonitoringEndAt.value,
-                channelOverview.error.value,
-                channelOverview.inactive.value,
-                channelOverview.successful.value,
-                channelOverview.stopped.value,
-                channelOverview.unknown.value,
-                channelOverview.unregistered.value,
-                channelOverview.createdAt.value,
-                channelOverview.updatedAt.value,
-                channelOverview.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(channelOverview);
     }
 }

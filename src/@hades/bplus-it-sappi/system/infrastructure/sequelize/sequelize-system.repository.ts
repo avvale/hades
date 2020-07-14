@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ISystemRepository } from './../../domain/system.repository';
 import { BplusItSappiSystem } from './../../domain/system.aggregate';
+import { SystemMapper } from './../../domain/system.mapper';
 import { BplusItSappiSystemModel } from './sequelize-system.model';
-import { SequelizeSystemMapper } from './sequelize-system.mapper';
 
 @Injectable()
 export class SequelizeSystemRepository extends SequelizeRepository<BplusItSappiSystem> implements ISystemRepository
 {
-    public readonly entityName: string = 'BplusItSappiSystem';
-    public readonly mapper: SequelizeSystemMapper = new SequelizeSystemMapper();
+    public readonly aggregateName: string = 'BplusItSappiSystem';
+    public readonly mapper: SystemMapper = new SystemMapper();
 
     constructor(
         @InjectModel(BplusItSappiSystemModel)

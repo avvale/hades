@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IChannelRepository } from './../../domain/channel.repository';
 import { BplusItSappiChannel } from './../../domain/channel.aggregate';
+import { ChannelMapper } from './../../domain/channel.mapper';
 import { BplusItSappiChannelModel } from './sequelize-channel.model';
-import { SequelizeChannelMapper } from './sequelize-channel.mapper';
 
 @Injectable()
 export class SequelizeChannelRepository extends SequelizeRepository<BplusItSappiChannel> implements IChannelRepository
 {
     public readonly aggregateName: string = 'BplusItSappiChannel';
-    public readonly mapper: SequelizeChannelMapper = new SequelizeChannelMapper();
+    public readonly mapper: ChannelMapper = new ChannelMapper();
 
     constructor(
         @InjectModel(BplusItSappiChannelModel)

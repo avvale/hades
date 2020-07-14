@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { BplusItSappiMessageOverview } from './../../domain/message-overview.aggregate';
+import { MessageOverviewMapper } from './../../domain/message-overview.mapper';
 import { BplusItSappiMessageOverviewModel } from './sequelize-message-overview.model';
-import { SequelizeMessageOverviewMapper } from './sequelize-message-overview.mapper';
 
 @Injectable()
 export class SequelizeMessageOverviewRepository extends SequelizeRepository<BplusItSappiMessageOverview> implements IMessageOverviewRepository
 {
-    public readonly entityName: string = 'BplusItSappiMessageOverview';
-    public readonly mapper: SequelizeMessageOverviewMapper = new SequelizeMessageOverviewMapper();
+    public readonly aggregateName: string = 'BplusItSappiMessageOverview';
+    public readonly mapper: MessageOverviewMapper = new MessageOverviewMapper();
 
     constructor(
         @InjectModel(BplusItSappiMessageOverviewModel)

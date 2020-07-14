@@ -1,11 +1,14 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { SystemResponse } from './../../domain/system.response';
+import { SystemMapper } from './../../domain/system.mapper';
 import { FindSystemQuery } from './find-system.query';
 import { FindSystemService } from './find-system.service';
 
 @QueryHandler(FindSystemQuery)
 export class FindSystemQueryHandler implements IQueryHandler<FindSystemQuery>
 {
+    private readonly mapper: SystemMapper = new SystemMapper();
+
     constructor(
         private readonly findSystemService: FindSystemService
     ) { }
@@ -14,19 +17,6 @@ export class FindSystemQueryHandler implements IQueryHandler<FindSystemQuery>
     {
         const system = await this.findSystemService.main(query.queryStatements);
 
-        return new SystemResponse(
-                system.id.value,
-                system.tenantId.value,
-                system.name.value,
-                system.tenantCode.value,
-                system.environment.value,
-                system.version.value,
-                system.isActive.value,
-                system.cancelledAt.value,
-                system.createdAt.value,
-                system.updatedAt.value,
-                system.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(system);
     }
 }

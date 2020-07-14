@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IRoleRepository } from './../../domain/role.repository';
 import { BplusItSappiRole } from './../../domain/role.aggregate';
+import { RoleMapper } from './../../domain/role.mapper';
 import { BplusItSappiRoleModel } from './sequelize-role.model';
-import { SequelizeRoleMapper } from './sequelize-role.mapper';
 
 @Injectable()
 export class SequelizeRoleRepository extends SequelizeRepository<BplusItSappiRole> implements IRoleRepository
 {
-    public readonly entityName: string = 'BplusItSappiRole';
-    public readonly mapper: SequelizeRoleMapper = new SequelizeRoleMapper();
+    public readonly aggregateName: string = 'BplusItSappiRole';
+    public readonly mapper: RoleMapper = new RoleMapper();
 
     constructor(
         @InjectModel(BplusItSappiRoleModel)

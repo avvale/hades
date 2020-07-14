@@ -1,11 +1,14 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { DataLakeResponse } from './../../domain/data-lake.response';
+import { DataLakeMapper } from './../../domain/data-lake.mapper';
 import { FindDataLakeQuery } from './find-data-lake.query';
 import { FindDataLakeService } from './find-data-lake.service';
 
 @QueryHandler(FindDataLakeQuery)
 export class FindDataLakeQueryHandler implements IQueryHandler<FindDataLakeQuery>
 {
+    private readonly mapper: DataLakeMapper = new DataLakeMapper();
+
     constructor(
         private readonly findDataLakeService: FindDataLakeService
     ) { }
@@ -14,13 +17,6 @@ export class FindDataLakeQueryHandler implements IQueryHandler<FindDataLakeQuery
     {
         const dataLake = await this.findDataLakeService.main(query.queryStatements);
 
-        return new DataLakeResponse(
-                dataLake.id.value,
-                dataLake.data.value,
-                dataLake.createdAt.value,
-                dataLake.updatedAt.value,
-                dataLake.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(dataLake);
     }
 }

@@ -1,11 +1,14 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { ContactResponse } from './../../domain/contact.response';
+import { ContactMapper } from './../../domain/contact.mapper';
 import { FindContactQuery } from './find-contact.query';
 import { FindContactService } from './find-contact.service';
 
 @QueryHandler(FindContactQuery)
 export class FindContactQueryHandler implements IQueryHandler<FindContactQuery>
 {
+    private readonly mapper: ContactMapper = new ContactMapper();
+
     constructor(
         private readonly findContactService: FindContactService
     ) { }
@@ -14,25 +17,6 @@ export class FindContactQueryHandler implements IQueryHandler<FindContactQuery>
     {
         const contact = await this.findContactService.main(query.queryStatements);
 
-        return new ContactResponse(
-                contact.id.value,
-                contact.tenantId.value,
-                contact.systemId.value,
-                contact.systemName.value,
-                contact.roleId.value,
-                contact.roleName.value,
-                contact.name.value,
-                contact.surname.value,
-                contact.email.value,
-                contact.mobile.value,
-                contact.area.value,
-                contact.hasConsentEmail.value,
-                contact.hasConsentMobile.value,
-                contact.isActive.value,
-                contact.createdAt.value,
-                contact.updatedAt.value,
-                contact.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(contact);
     }
 }

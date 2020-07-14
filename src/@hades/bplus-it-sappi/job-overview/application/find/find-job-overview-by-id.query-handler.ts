@@ -1,5 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { JobOverviewResponse } from './../../domain/job-overview.response';
+import { JobOverviewMapper } from './../../domain/job-overview.mapper';
 import { JobOverviewId } from './../../domain/value-objects';
 import { FindJobOverviewByIdQuery } from './find-job-overview-by-id.query';
 import { FindJobOverviewByIdService } from './find-job-overview-by-id.service';
@@ -7,6 +8,8 @@ import { FindJobOverviewByIdService } from './find-job-overview-by-id.service';
 @QueryHandler(FindJobOverviewByIdQuery)
 export class FindJobOverviewByIdQueryHandler implements IQueryHandler<FindJobOverviewByIdQuery>
 {
+    private readonly mapper: JobOverviewMapper = new JobOverviewMapper();
+
     constructor(
         private readonly findJobOverviewByIdService: FindJobOverviewByIdService
     ) { }
@@ -15,23 +18,6 @@ export class FindJobOverviewByIdQueryHandler implements IQueryHandler<FindJobOve
     {
         const jobOverview = await this.findJobOverviewByIdService.main(new JobOverviewId(query.id));
 
-        return new JobOverviewResponse(
-                jobOverview.id.value,
-                jobOverview.tenantId.value,
-                jobOverview.systemId.value,
-                jobOverview.systemName.value,
-                jobOverview.executionId.value,
-                jobOverview.executionType.value,
-                jobOverview.executionExecutedAt.value,
-                jobOverview.executionMonitoringStartAt.value,
-                jobOverview.executionMonitoringEndAt.value,
-                jobOverview.cancelled.value,
-                jobOverview.completed.value,
-                jobOverview.error.value,
-                jobOverview.createdAt.value,
-                jobOverview.updatedAt.value,
-                jobOverview.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(jobOverview);
     }
 }

@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IContactRepository } from './../../domain/contact.repository';
 import { BplusItSappiContact } from './../../domain/contact.aggregate';
+import { ContactMapper } from './../../domain/contact.mapper';
 import { BplusItSappiContactModel } from './sequelize-contact.model';
-import { SequelizeContactMapper } from './sequelize-contact.mapper';
 
 @Injectable()
 export class SequelizeContactRepository extends SequelizeRepository<BplusItSappiContact> implements IContactRepository
 {
     public readonly aggregateName: string = 'BplusItSappiContact';
-    public readonly mapper: SequelizeContactMapper = new SequelizeContactMapper();
+    public readonly mapper: ContactMapper = new ContactMapper();
 
     constructor(
         @InjectModel(BplusItSappiContactModel)

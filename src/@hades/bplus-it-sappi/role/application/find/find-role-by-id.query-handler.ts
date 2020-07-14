@@ -1,5 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { RoleResponse } from './../../domain/role.response';
+import { RoleMapper } from './../../domain/role.mapper';
 import { RoleId } from './../../domain/value-objects';
 import { FindRoleByIdQuery } from './find-role-by-id.query';
 import { FindRoleByIdService } from './find-role-by-id.service';
@@ -7,6 +8,8 @@ import { FindRoleByIdService } from './find-role-by-id.service';
 @QueryHandler(FindRoleByIdQuery)
 export class FindRoleByIdQueryHandler implements IQueryHandler<FindRoleByIdQuery>
 {
+    private readonly mapper: RoleMapper = new RoleMapper();
+
     constructor(
         private readonly findRoleByIdService: FindRoleByIdService
     ) { }
@@ -15,14 +18,6 @@ export class FindRoleByIdQueryHandler implements IQueryHandler<FindRoleByIdQuery
     {
         const role = await this.findRoleByIdService.main(new RoleId(query.id));
 
-        return new RoleResponse(
-                role.id.value,
-                role.tenantId.value,
-                role.name.value,
-                role.createdAt.value,
-                role.updatedAt.value,
-                role.deletedAt.value,
-                
-            );
+        return this.mapper.mapAggregateToResponse(role);
     }
 }

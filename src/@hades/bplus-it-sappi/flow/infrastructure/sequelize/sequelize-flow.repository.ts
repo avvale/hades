@@ -4,14 +4,14 @@ import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/se
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IFlowRepository } from './../../domain/flow.repository';
 import { BplusItSappiFlow } from './../../domain/flow.aggregate';
+import { FlowMapper } from './../../domain/flow.mapper';
 import { BplusItSappiFlowModel } from './sequelize-flow.model';
-import { SequelizeFlowMapper } from './sequelize-flow.mapper';
 
 @Injectable()
 export class SequelizeFlowRepository extends SequelizeRepository<BplusItSappiFlow> implements IFlowRepository
 {
     public readonly aggregateName: string = 'BplusItSappiFlow';
-    public readonly mapper: SequelizeFlowMapper = new SequelizeFlowMapper();
+    public readonly mapper: FlowMapper = new FlowMapper();
 
     constructor(
         @InjectModel(BplusItSappiFlowModel)
