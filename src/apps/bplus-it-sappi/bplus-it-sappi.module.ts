@@ -14,6 +14,8 @@ import { BplusItSappiFlowControllers, BplusItSappiFlowResolvers } from './flow';
 import { BplusItSappiContactControllers, BplusItSappiContactResolvers } from './contact';
 import { BplusItSappiChannelControllers, BplusItSappiChannelResolvers } from './channel';
 import { BplusItSappiModuleControllers, BplusItSappiModuleResolvers } from './module';
+import { BplusItSappiChannelDetailControllers, BplusItSappiChannelDetailResolvers } from './channel-detail';
+import { BplusItSappiMessageDetailControllers, BplusItSappiMessageDetailResolvers } from './message-detail';
 
 @Module({
     imports: [
@@ -32,7 +34,9 @@ import { BplusItSappiModuleControllers, BplusItSappiModuleResolvers } from './mo
         ...BplusItSappiFlowControllers,
         ...BplusItSappiContactControllers,
         ...BplusItSappiChannelControllers,
-        ...BplusItSappiModuleControllers
+        ...BplusItSappiModuleControllers,
+        ...BplusItSappiChannelDetailControllers,
+        ...BplusItSappiMessageDetailControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
@@ -50,7 +54,9 @@ import { BplusItSappiModuleControllers, BplusItSappiModuleResolvers } from './mo
         ...BplusItSappiFlowResolvers,
         ...BplusItSappiContactResolvers,
         ...BplusItSappiChannelResolvers,
-        ...BplusItSappiModuleResolvers
+        ...BplusItSappiModuleResolvers,
+        ...BplusItSappiChannelDetailResolvers,
+        ...BplusItSappiMessageDetailResolvers
     ]
 })
 export class BplusItSappiModule {}

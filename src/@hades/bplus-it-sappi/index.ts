@@ -10,6 +10,8 @@ import { BplusItSappiFlowHandlers, BplusItSappiFlowServices, BplusItSappiFlowMod
 import { BplusItSappiContactHandlers, BplusItSappiContactServices, BplusItSappiContactModel, IContactRepository, SequelizeContactRepository, ContactSagas } from './contact';
 import { BplusItSappiChannelHandlers, BplusItSappiChannelServices, BplusItSappiChannelModel, IChannelRepository, SequelizeChannelRepository, ChannelSagas } from './channel';
 import { BplusItSappiModuleHandlers, BplusItSappiModuleServices, BplusItSappiModuleModel, IModuleRepository, SequelizeModuleRepository, ModuleSagas } from './module';
+import { BplusItSappiChannelDetailHandlers, BplusItSappiChannelDetailServices, BplusItSappiChannelDetailModel, IChannelDetailRepository, SequelizeChannelDetailRepository, ChannelDetailSagas } from './channel-detail';
+import { BplusItSappiMessageDetailHandlers, BplusItSappiMessageDetailServices, BplusItSappiMessageDetailModel, IMessageDetailRepository, SequelizeMessageDetailRepository, MessageDetailSagas } from './message-detail';
 
 export const BplusItSappiHandlers = [
     ...BplusItSappiSystemHandlers,
@@ -23,7 +25,9 @@ export const BplusItSappiHandlers = [
     ...BplusItSappiFlowHandlers,
     ...BplusItSappiContactHandlers,
     ...BplusItSappiChannelHandlers,
-    ...BplusItSappiModuleHandlers
+    ...BplusItSappiModuleHandlers,
+    ...BplusItSappiChannelDetailHandlers,
+    ...BplusItSappiMessageDetailHandlers
 ];
 export const BplusItSappiServices = [
     ...BplusItSappiSystemServices,
@@ -37,7 +41,9 @@ export const BplusItSappiServices = [
     ...BplusItSappiFlowServices,
     ...BplusItSappiContactServices,
     ...BplusItSappiChannelServices,
-    ...BplusItSappiModuleServices
+    ...BplusItSappiModuleServices,
+    ...BplusItSappiChannelDetailServices,
+    ...BplusItSappiMessageDetailServices
 ];
 export const BplusItSappiModels = [
     BplusItSappiSystemModel,
@@ -51,7 +57,9 @@ export const BplusItSappiModels = [
     BplusItSappiFlowModel,
     BplusItSappiContactModel,
     BplusItSappiChannelModel,
-    BplusItSappiModuleModel
+    BplusItSappiModuleModel,
+    BplusItSappiChannelDetailModel,
+    BplusItSappiMessageDetailModel
 ];
 export const BplusItSappiRepositories = [
     {
@@ -101,6 +109,14 @@ export const BplusItSappiRepositories = [
     {
         provide: IModuleRepository,
         useClass: SequelizeModuleRepository
+    },
+    {
+        provide: IChannelDetailRepository,
+        useClass: SequelizeChannelDetailRepository
+    },
+    {
+        provide: IMessageDetailRepository,
+        useClass: SequelizeMessageDetailRepository
     }
 ];
 export const BplusItSappiSagas = [
@@ -115,5 +131,7 @@ export const BplusItSappiSagas = [
     FlowSagas,
     ContactSagas,
     ChannelSagas,
-    ModuleSagas
+    ModuleSagas,
+    ChannelDetailSagas,
+    MessageDetailSagas
 ];

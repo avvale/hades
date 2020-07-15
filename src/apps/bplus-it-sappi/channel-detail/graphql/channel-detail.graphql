@@ -1,0 +1,98 @@
+
+enum BplusItSappiChannelDetailExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+enum BplusItSappiChannelDetailStatus {
+    ERROR
+    INACTIVE
+    SUCCESSFUL
+    STOPPED
+    UNKNOWN
+    UNREGISTERED
+        
+}
+
+type BplusItSappiChannelDetail
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiChannelDetailExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    status: BplusItSappiChannelDetailStatus!
+    channelId: ID!
+    channelParty: GraphQLString
+    channelComponent: GraphQLString!
+    channelName: GraphQLString!
+    detail: GraphQLString
+    example: GraphQLString
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateChannelDetailInput
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: BplusItSappiChannelDetailExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    status: BplusItSappiChannelDetailStatus!
+    channelId: ID!
+    channelParty: GraphQLString
+    channelComponent: GraphQLString!
+    channelName: GraphQLString!
+    detail: GraphQLString
+    example: GraphQLString
+    
+}
+
+input BplusItSappiUpdateChannelDetailInput
+{
+    id: ID!
+    tenantId: ID
+    systemId: ID
+    systemName: GraphQLString
+    executionId: ID
+    executionType: BplusItSappiChannelDetailExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    status: BplusItSappiChannelDetailStatus
+    channelId: ID
+    channelParty: GraphQLString
+    channelComponent: GraphQLString
+    channelName: GraphQLString
+    detail: GraphQLString
+    example: GraphQLString
+    
+}
+
+type Query 
+{
+    bplusItSappiFindChannelDetail(query:[QueryStatementInput]): BplusItSappiChannelDetail
+    bplusItSappiFindChannelDetailById(id:ID): BplusItSappiChannelDetail
+    bplusItSappiGetChannelsDetail(query:[QueryStatementInput]): [BplusItSappiChannelDetail]!
+    bplusItSappiPaginateChannelsDetail(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateChannelDetail(payload: BplusItSappiCreateChannelDetailInput!): BplusItSappiChannelDetail
+    bplusItSappiInsertChannelsDetail(payload: [BplusItSappiCreateChannelDetailInput]!): Boolean!
+    bplusItSappiUpdateChannelDetail(payload: BplusItSappiUpdateChannelDetailInput!): BplusItSappiChannelDetail
+    bplusItSappiDeleteChannelDetailById(id: ID!): BplusItSappiChannelDetail
+    bplusItSappiDeleteChannelsDetail(query:[QueryStatementInput]): [BplusItSappiChannelDetail]!
+}

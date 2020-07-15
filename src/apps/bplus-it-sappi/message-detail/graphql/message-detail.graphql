@@ -1,0 +1,150 @@
+
+enum BplusItSappiMessageDetailExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+enum BplusItSappiMessageDetailStatus {
+    SUCCESS
+    CANCELLED
+    DELIVERING
+    ERROR
+    HOLDING
+    TO_BE_DELIVERED
+    WAITING
+        
+}
+
+type BplusItSappiMessageDetail
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    scenario: GraphQLString
+    executionId: ID!
+    executionType: BplusItSappiMessageDetailExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    flowId: ID!
+    flowParty: GraphQLString
+    flowComponent: GraphQLString!
+    flowInterfaceName: GraphQLString!
+    flowInterfaceNamespace: GraphQLString!
+    status: BplusItSappiMessageDetailStatus!
+    detail: GraphQLString
+    example: GraphQLString
+    startTimeAt: GraphQLTimestamp
+    direction: GraphQLString
+    errorCategory: GraphQLString
+    errorCode: GraphQLString
+    errorLabel: GraphQLString
+    node: GraphQLInt
+    protocol: GraphQLString
+    qualityOfService: GraphQLString
+    receiverParty: GraphQLString
+    receiverComponent: GraphQLString
+    receiverInterface: GraphQLString
+    receiverInterfaceNamespace: GraphQLString
+    retries: GraphQLInt
+    size: GraphQLInt
+    timesFailed: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input BplusItSappiCreateMessageDetailInput
+{
+    id: ID!
+    tenantId: ID!
+    systemId: ID!
+    systemName: GraphQLString!
+    scenario: GraphQLString
+    executionId: ID!
+    executionType: BplusItSappiMessageDetailExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    flowId: ID!
+    flowParty: GraphQLString
+    flowComponent: GraphQLString!
+    flowInterfaceName: GraphQLString!
+    flowInterfaceNamespace: GraphQLString!
+    status: BplusItSappiMessageDetailStatus!
+    detail: GraphQLString
+    example: GraphQLString
+    startTimeAt: GraphQLTimestamp
+    direction: GraphQLString
+    errorCategory: GraphQLString
+    errorCode: GraphQLString
+    errorLabel: GraphQLString
+    node: GraphQLInt
+    protocol: GraphQLString
+    qualityOfService: GraphQLString
+    receiverParty: GraphQLString
+    receiverComponent: GraphQLString
+    receiverInterface: GraphQLString
+    receiverInterfaceNamespace: GraphQLString
+    retries: GraphQLInt
+    size: GraphQLInt
+    timesFailed: GraphQLInt
+    
+}
+
+input BplusItSappiUpdateMessageDetailInput
+{
+    id: ID!
+    tenantId: ID
+    systemId: ID
+    systemName: GraphQLString
+    scenario: GraphQLString
+    executionId: ID
+    executionType: BplusItSappiMessageDetailExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    flowId: ID
+    flowParty: GraphQLString
+    flowComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
+    status: BplusItSappiMessageDetailStatus
+    detail: GraphQLString
+    example: GraphQLString
+    startTimeAt: GraphQLTimestamp
+    direction: GraphQLString
+    errorCategory: GraphQLString
+    errorCode: GraphQLString
+    errorLabel: GraphQLString
+    node: GraphQLInt
+    protocol: GraphQLString
+    qualityOfService: GraphQLString
+    receiverParty: GraphQLString
+    receiverComponent: GraphQLString
+    receiverInterface: GraphQLString
+    receiverInterfaceNamespace: GraphQLString
+    retries: GraphQLInt
+    size: GraphQLInt
+    timesFailed: GraphQLInt
+    
+}
+
+type Query 
+{
+    bplusItSappiFindMessageDetail(query:[QueryStatementInput]): BplusItSappiMessageDetail
+    bplusItSappiFindMessageDetailById(id:ID): BplusItSappiMessageDetail
+    bplusItSappiGetMessagesDetail(query:[QueryStatementInput]): [BplusItSappiMessageDetail]!
+    bplusItSappiPaginateMessagesDetail(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    bplusItSappiCreateMessageDetail(payload: BplusItSappiCreateMessageDetailInput!): BplusItSappiMessageDetail
+    bplusItSappiInsertMessagesDetail(payload: [BplusItSappiCreateMessageDetailInput]!): Boolean!
+    bplusItSappiUpdateMessageDetail(payload: BplusItSappiUpdateMessageDetailInput!): BplusItSappiMessageDetail
+    bplusItSappiDeleteMessageDetailById(id: ID!): BplusItSappiMessageDetail
+    bplusItSappiDeleteMessagesDetail(query:[QueryStatementInput]): [BplusItSappiMessageDetail]!
+}

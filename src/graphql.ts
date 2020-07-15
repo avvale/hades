@@ -6,6 +6,20 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum BplusItSappiChannelDetailExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
+export enum BplusItSappiChannelDetailStatus {
+    ERROR = "ERROR",
+    INACTIVE = "INACTIVE",
+    SUCCESSFUL = "SUCCESSFUL",
+    STOPPED = "STOPPED",
+    UNKNOWN = "UNKNOWN",
+    UNREGISTERED = "UNREGISTERED"
+}
+
 export enum BplusItSappiChannelOverviewExecutionType {
     SUMMARY = "SUMMARY",
     DETAIL = "DETAIL"
@@ -40,6 +54,21 @@ export enum BplusItSappiJobDetailStatus {
 export enum BplusItSappiJobOverviewExecutionType {
     SUMMARY = "SUMMARY",
     DETAIL = "DETAIL"
+}
+
+export enum BplusItSappiMessageDetailExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
+export enum BplusItSappiMessageDetailStatus {
+    SUCCESS = "SUCCESS",
+    CANCELLED = "CANCELLED",
+    DELIVERING = "DELIVERING",
+    ERROR = "ERROR",
+    HOLDING = "HOLDING",
+    TO_BE_DELIVERED = "TO_BE_DELIVERED",
+    WAITING = "WAITING"
 }
 
 export enum BplusItSappiMessageOverviewExecutionType {
@@ -153,6 +182,44 @@ export interface AdminUpdateTenantInput {
     logo?: GraphQLString;
     isActive?: GraphQLBoolean;
     data?: JSON;
+}
+
+export interface BplusItSappiCreateChannelDetailInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiChannelDetailExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    status: BplusItSappiChannelDetailStatus;
+    channelId: string;
+    channelParty?: GraphQLString;
+    channelComponent: GraphQLString;
+    channelName: GraphQLString;
+    detail?: GraphQLString;
+    example?: GraphQLString;
+}
+
+export interface BplusItSappiUpdateChannelDetailInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    executionId?: string;
+    executionType?: BplusItSappiChannelDetailExecutionType;
+    executionExecutedAt?: GraphQLTimestamp;
+    executionMonitoringStartAt?: GraphQLTimestamp;
+    executionMonitoringEndAt?: GraphQLTimestamp;
+    status?: BplusItSappiChannelDetailStatus;
+    channelId?: string;
+    channelParty?: GraphQLString;
+    channelComponent?: GraphQLString;
+    channelName?: GraphQLString;
+    detail?: GraphQLString;
+    example?: GraphQLString;
 }
 
 export interface BplusItSappiCreateChannelOverviewInput {
@@ -429,6 +496,78 @@ export interface BplusItSappiUpdateJobOverviewInput {
     error?: GraphQLInt;
 }
 
+export interface BplusItSappiCreateMessageDetailInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    scenario?: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiMessageDetailExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    flowId: string;
+    flowParty?: GraphQLString;
+    flowComponent: GraphQLString;
+    flowInterfaceName: GraphQLString;
+    flowInterfaceNamespace: GraphQLString;
+    status: BplusItSappiMessageDetailStatus;
+    detail?: GraphQLString;
+    example?: GraphQLString;
+    startTimeAt?: GraphQLTimestamp;
+    direction?: GraphQLString;
+    errorCategory?: GraphQLString;
+    errorCode?: GraphQLString;
+    errorLabel?: GraphQLString;
+    node?: GraphQLInt;
+    protocol?: GraphQLString;
+    qualityOfService?: GraphQLString;
+    receiverParty?: GraphQLString;
+    receiverComponent?: GraphQLString;
+    receiverInterface?: GraphQLString;
+    receiverInterfaceNamespace?: GraphQLString;
+    retries?: GraphQLInt;
+    size?: GraphQLInt;
+    timesFailed?: GraphQLInt;
+}
+
+export interface BplusItSappiUpdateMessageDetailInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    scenario?: GraphQLString;
+    executionId?: string;
+    executionType?: BplusItSappiMessageDetailExecutionType;
+    executionExecutedAt?: GraphQLTimestamp;
+    executionMonitoringStartAt?: GraphQLTimestamp;
+    executionMonitoringEndAt?: GraphQLTimestamp;
+    flowId?: string;
+    flowParty?: GraphQLString;
+    flowComponent?: GraphQLString;
+    flowInterfaceName?: GraphQLString;
+    flowInterfaceNamespace?: GraphQLString;
+    status?: BplusItSappiMessageDetailStatus;
+    detail?: GraphQLString;
+    example?: GraphQLString;
+    startTimeAt?: GraphQLTimestamp;
+    direction?: GraphQLString;
+    errorCategory?: GraphQLString;
+    errorCode?: GraphQLString;
+    errorLabel?: GraphQLString;
+    node?: GraphQLInt;
+    protocol?: GraphQLString;
+    qualityOfService?: GraphQLString;
+    receiverParty?: GraphQLString;
+    receiverComponent?: GraphQLString;
+    receiverInterface?: GraphQLString;
+    receiverInterfaceNamespace?: GraphQLString;
+    retries?: GraphQLInt;
+    size?: GraphQLInt;
+    timesFailed?: GraphQLInt;
+}
+
 export interface BplusItSappiCreateMessageOverviewInput {
     id: string;
     tenantId: string;
@@ -582,6 +721,10 @@ export interface IQuery {
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindChannelDetail(query?: QueryStatementInput[]): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
+    bplusItSappiFindChannelDetailById(id?: string): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
+    bplusItSappiGetChannelsDetail(query?: QueryStatementInput[]): BplusItSappiChannelDetail[] | Promise<BplusItSappiChannelDetail[]>;
+    bplusItSappiPaginateChannelsDetail(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindChannelOverview(query?: QueryStatementInput[]): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
     bplusItSappiFindChannelOverviewById(id?: string): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
     bplusItSappiGetChannelsOverview(query?: QueryStatementInput[]): BplusItSappiChannelOverview[] | Promise<BplusItSappiChannelOverview[]>;
@@ -614,6 +757,10 @@ export interface IQuery {
     bplusItSappiFindJobOverviewById(id?: string): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
     bplusItSappiGetJobsOverview(query?: QueryStatementInput[]): BplusItSappiJobOverview[] | Promise<BplusItSappiJobOverview[]>;
     bplusItSappiPaginateJobsOverview(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindMessageDetail(query?: QueryStatementInput[]): BplusItSappiMessageDetail | Promise<BplusItSappiMessageDetail>;
+    bplusItSappiFindMessageDetailById(id?: string): BplusItSappiMessageDetail | Promise<BplusItSappiMessageDetail>;
+    bplusItSappiGetMessagesDetail(query?: QueryStatementInput[]): BplusItSappiMessageDetail[] | Promise<BplusItSappiMessageDetail[]>;
+    bplusItSappiPaginateMessagesDetail(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     bplusItSappiFindMessageOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
     bplusItSappiFindMessageOverviewById(id?: string): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
     bplusItSappiGetMessagesOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview[] | Promise<BplusItSappiMessageOverview[]>;
@@ -658,6 +805,11 @@ export interface IMutation {
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    bplusItSappiCreateChannelDetail(payload: BplusItSappiCreateChannelDetailInput): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
+    bplusItSappiInsertChannelsDetail(payload: BplusItSappiCreateChannelDetailInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateChannelDetail(payload: BplusItSappiUpdateChannelDetailInput): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
+    bplusItSappiDeleteChannelDetailById(id: string): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
+    bplusItSappiDeleteChannelsDetail(query?: QueryStatementInput[]): BplusItSappiChannelDetail[] | Promise<BplusItSappiChannelDetail[]>;
     bplusItSappiCreateChannelOverview(payload: BplusItSappiCreateChannelOverviewInput): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
     bplusItSappiInsertChannelsOverview(payload: BplusItSappiCreateChannelOverviewInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateChannelOverview(payload: BplusItSappiUpdateChannelOverviewInput): BplusItSappiChannelOverview | Promise<BplusItSappiChannelOverview>;
@@ -698,6 +850,11 @@ export interface IMutation {
     bplusItSappiUpdateJobOverview(payload: BplusItSappiUpdateJobOverviewInput): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
     bplusItSappiDeleteJobOverviewById(id: string): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
     bplusItSappiDeleteJobsOverview(query?: QueryStatementInput[]): BplusItSappiJobOverview[] | Promise<BplusItSappiJobOverview[]>;
+    bplusItSappiCreateMessageDetail(payload: BplusItSappiCreateMessageDetailInput): BplusItSappiMessageDetail | Promise<BplusItSappiMessageDetail>;
+    bplusItSappiInsertMessagesDetail(payload: BplusItSappiCreateMessageDetailInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateMessageDetail(payload: BplusItSappiUpdateMessageDetailInput): BplusItSappiMessageDetail | Promise<BplusItSappiMessageDetail>;
+    bplusItSappiDeleteMessageDetailById(id: string): BplusItSappiMessageDetail | Promise<BplusItSappiMessageDetail>;
+    bplusItSappiDeleteMessagesDetail(query?: QueryStatementInput[]): BplusItSappiMessageDetail[] | Promise<BplusItSappiMessageDetail[]>;
     bplusItSappiCreateMessageOverview(payload: BplusItSappiCreateMessageOverviewInput): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
     bplusItSappiInsertMessagesOverview(payload: BplusItSappiCreateMessageOverviewInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateMessageOverview(payload: BplusItSappiUpdateMessageOverviewInput): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
@@ -761,6 +918,28 @@ export interface AdminTenant {
     logo?: GraphQLString;
     isActive: GraphQLBoolean;
     data?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiChannelDetail {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiChannelDetailExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    status: BplusItSappiChannelDetailStatus;
+    channelId: string;
+    channelParty?: GraphQLString;
+    channelComponent: GraphQLString;
+    channelName: GraphQLString;
+    detail?: GraphQLString;
+    example?: GraphQLString;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -922,6 +1101,45 @@ export interface BplusItSappiJobOverview {
     cancelled?: GraphQLInt;
     completed?: GraphQLInt;
     error?: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiMessageDetail {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    scenario?: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiMessageDetailExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    flowId: string;
+    flowParty?: GraphQLString;
+    flowComponent: GraphQLString;
+    flowInterfaceName: GraphQLString;
+    flowInterfaceNamespace: GraphQLString;
+    status: BplusItSappiMessageDetailStatus;
+    detail?: GraphQLString;
+    example?: GraphQLString;
+    startTimeAt?: GraphQLTimestamp;
+    direction?: GraphQLString;
+    errorCategory?: GraphQLString;
+    errorCode?: GraphQLString;
+    errorLabel?: GraphQLString;
+    node?: GraphQLInt;
+    protocol?: GraphQLString;
+    qualityOfService?: GraphQLString;
+    receiverParty?: GraphQLString;
+    receiverComponent?: GraphQLString;
+    receiverInterface?: GraphQLString;
+    receiverInterfaceNamespace?: GraphQLString;
+    retries?: GraphQLInt;
+    size?: GraphQLInt;
+    timesFailed?: GraphQLInt;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

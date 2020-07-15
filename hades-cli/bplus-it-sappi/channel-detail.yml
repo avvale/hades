@@ -1,0 +1,94 @@
+version: 1.0.0
+boundedContextName: bplus-it-sappi
+moduleName: channel-detail
+moduleNames: channels-detail
+aggregateProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminTenant
+    relationshipModulePath: admin/tenant
+  - name: system_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: BplusItSappiSystem
+    relationshipModulePath: bplus-it-sappi/system
+  - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: execution_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: BplusItSappiExecution
+    relationshipModulePath: bplus-it-sappi/execution
+  - name: execution_type
+    type: enum
+    enumOptions:
+      - SUMMARY
+      - DETAIL
+    nullable: false
+  - name: execution_executed_at
+    type: timestamp
+    nullable: false
+  - name: execution_monitoring_start_at
+    type: timestamp
+    nullable: false
+  - name: execution_monitoring_end_at
+    type: timestamp
+    nullable: false
+  - name: status
+    type: enum
+    enumOptions:
+      - ERROR
+      - INACTIVE
+      - SUCCESSFUL
+      - STOPPED
+      - UNKNOWN
+      - UNREGISTERED
+    nullable: false
+  - name: channel_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: BplusItSappiChannel
+    relationshipModulePath: bplus-it-sappi/channel
+  - name: channel_party
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: channel_component
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: channel_name
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: detail
+    type: text
+    nullable: true
+  - name: example
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true
