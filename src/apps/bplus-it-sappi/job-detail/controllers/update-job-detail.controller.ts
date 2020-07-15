@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateJobDetailDto } from './../dto/update-job-detail.dto';
 import { JobDetailDto } from './../dto/job-detail.dto';
 
@@ -10,7 +10,6 @@ import { UpdateJobDetailCommand } from '@hades/bplus-it-sappi/job-detail/applica
 import { FindJobDetailByIdQuery } from '@hades/bplus-it-sappi/job-detail/application/find/find-job-detail-by-id.query';
 
 @ApiTags('[bplus-it-sappi] job-detail')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: JobDetailDto})
 @Controller('bplus-it-sappi/job-detail')
 export class UpdateJobDetailController 
 {
@@ -21,6 +20,7 @@ export class UpdateJobDetailController
 
     @Put()
     @ApiOperation({ summary: 'Update job-detail' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: JobDetailDto})
     async main(@Body() payload: UpdateJobDetailDto)
     {
         await this.commandBus.dispatch(new UpdateJobDetailCommand(
@@ -34,8 +34,10 @@ export class UpdateJobDetailController
             payload.executionMonitoringStartAt,
             payload.executionMonitoringEndAt,
             payload.status,
-            payload.detail,
-            payload.example,
+            payload.name,
+            payload.returnCode,
+            payload.node,
+            payload.user,
             
         ));
 

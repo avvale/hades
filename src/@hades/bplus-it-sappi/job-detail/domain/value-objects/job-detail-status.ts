@@ -11,7 +11,7 @@ export class JobDetailStatus extends EnumValueObject
             name: 'JobDetailStatus',
             nullable: false,
             undefinable: false,
-            enumOptions:  ['CANCELLED','COMPLETED','RUNNING','ERROR'],
+            enumOptions:  ['CANCELLED','COMPLETED','ERROR'],
         }, validationRules));
     }
 }

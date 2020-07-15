@@ -48,15 +48,15 @@ aggregateProperties:
     type: timestamp
     nullable: false
   - name: cancelled
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: completed
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: error
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: created_at

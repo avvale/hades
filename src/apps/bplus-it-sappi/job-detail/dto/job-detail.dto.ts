@@ -6,7 +6,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'ce5d3987-ce2e-436e-851f-ab6d1ef3d1db',
+        example     : '6cb9ea29-9d2a-41b9-b3d4-0e6e6daae1ea',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     id: string;
@@ -16,7 +16,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '21810c78-39c1-4dc8-8e1b-89ddeecf3fa4',
+        example     : '93280fac-34d0-4f7e-8447-8e6314664cf0',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     tenantId: string;
@@ -26,7 +26,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '11122a48-29f9-42b1-a88f-9076e4531d45',
+        example     : '7df7f500-6d68-4fe8-861a-22d7314d2562',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     systemId: string;
@@ -36,7 +36,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : '4gu988jg2843k3om9w37',
+        example     : 'k9i0ebu4e9gzgahx6r9u',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     systemName: string;
@@ -46,7 +46,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '454b10e4-23bd-46f3-b88c-c858d6a9166c',
+        example     : 'eccd75df-265a-4cf6-8f6a-57eec5ab1cef',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     executionId: string;
@@ -66,7 +66,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-02 16:22:33',
+        example     : '2020-07-15 05:20:31',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     executionExecutedAt: string;
@@ -76,7 +76,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-02 05:17:07',
+        example     : '2020-07-14 21:09:04',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     executionMonitoringStartAt: string;
@@ -86,7 +86,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-02 07:54:59',
+        example     : '2020-07-14 20:08:59',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     executionMonitoringEndAt: string;
@@ -96,7 +96,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'status [input here api field description]',
-        example     : 'CANCELLED',
+        example     : 'COMPLETED',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     status: string;
@@ -105,28 +105,48 @@ export class JobDetailDto
     
     @ApiProperty({
         type        : String,
-        description : 'detail [input here api field description]',
-        example     : 'qvbxz6s23frrtuwod956vpmu4oxe358kxbi32wo8o1a3eoppglsv2ldalxsbskigt81r8704yrpxqe0slze8u764lgqkqqmhfno4xx11kg1q2ugczud8gvje6cs5fu0b6gaty5kmsmf3s0x7kacmjpoc9kik7smpx1ptxp9kj4jlwvndy0i2tnct4081i52jb4ybjrw0trl1rgljuwgb7xlgz24o4bpvb7bioh7r259zpl5e73j3wnty33pu20o',
+        description : 'name [input here api field description]',
+        example     : 'vtowx17fjy37h1slysppxpxgprm892pmv5b9e9pyxi6oho4x0thtjc7dfkiwrgddrjab8rpes76wsouwekmeswe2vctbjgrlep0nubpyirnj1ldhbu0rx6uc04zbe124y7jg7ft7j3x15i90t5owgf3y909r63sncmvrnc6j2na3ij4yubptpw8pi2iveas6bzrnet86tb9d6geju768m5tgeu9wofhj174xxs0ys5yu9esaj9fqspidj2pe99f',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
-    detail: string;
+    name: string;
+    
+    
+    
+    @ApiProperty({
+        type        : Number,
+        description : 'returnCode [input here api field description]',
+        example     : 1216993734,
+        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+    })
+    returnCode: number;
     
     
     
     @ApiProperty({
         type        : String,
-        description : 'example [input here api field description]',
-        example     : 'uwh5noaj70h3v0w3ov22m847muaq04kbfi3fd7zz1vsrb7n6aduwsogidtn5b290ko4489ggnpxqf89yk2763hr6h15wklz0dk3t9pvi6442oantkkqpi1oki6c2kle02g4zt7hh5v6qu9peprhjin7ixho9oq9e',
+        description : 'node [input here api field description]',
+        example     : '6cn432pcp4t8uqavfenn5ar7ffs4uj1k107o3m667rxwnf4ifrinksjfk5dzjgwurguqv108fnl51zvg5ctbjfexdpxqgq4y86zg69ccpwq1fygkt4k8r9fkbr4njj366ticlypt8l0cvqg6vfe54q7288zjbodh',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
-    example: string;
+    node: string;
+    
+    
+    
+    @ApiProperty({
+        type        : String,
+        description : 'user [input here api field description]',
+        example     : 'g1v1welkmygxoxmjfcerkg44nc2lxnkyu9wefwoz5oe3flr555ysq9b9csqa21liszjtxrpyj9yhj9nvcx4khc18fyxehr2pse8zj50hb0e3081a5ojyfsn4w9cmdmcsv4campgaya60z54re4f8s4lh3edab85frpboiyzdg2heamroqqou17ogj927hds5gdu8artbkctcadi3c4rpefujc3wqijvl3aduv0lwmgggarjsm8v9iry6yx6hu0f',
+        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+    })
+    user: string;
     
     
     
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-01 22:33:50',
+        example     : '2020-07-15 00:24:59',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     createdAt: string;
@@ -136,7 +156,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-02 16:22:08',
+        example     : '2020-07-15 04:05:37',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     updatedAt: string;
@@ -146,7 +166,7 @@ export class JobDetailDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-02 17:23:20',
+        example     : '2020-07-15 08:10:37',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     deletedAt: string;

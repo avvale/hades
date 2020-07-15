@@ -9,7 +9,6 @@ import { FindJobDetailByIdQuery } from '@hades/bplus-it-sappi/job-detail/applica
 import { DeleteJobDetailByIdCommand } from '@hades/bplus-it-sappi/job-detail/application/delete/delete-job-detail-by-id.command';
 
 @ApiTags('[bplus-it-sappi] job-detail')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: JobDetailDto})
 @Controller('bplus-it-sappi/job-detail')
 export class DeleteJobDetailByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteJobDetailByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete job-detail by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: JobDetailDto })
     async main(@Param('id') id: string)
     {
         const jobDetail = await this.queryBus.ask(new FindJobDetailByIdQuery(id));

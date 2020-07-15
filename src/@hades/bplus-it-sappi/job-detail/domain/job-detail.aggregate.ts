@@ -10,8 +10,10 @@ import {
     JobDetailExecutionMonitoringStartAt, 
     JobDetailExecutionMonitoringEndAt, 
     JobDetailStatus, 
-    JobDetailDetail, 
-    JobDetailExample, 
+    JobDetailName, 
+    JobDetailReturnCode, 
+    JobDetailNode, 
+    JobDetailUser, 
     JobDetailCreatedAt, 
     JobDetailUpdatedAt, 
     JobDetailDeletedAt
@@ -39,13 +41,15 @@ export class BplusItSappiJobDetail extends AggregateRoot
     executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt;
     executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt;
     status: JobDetailStatus;
-    detail: JobDetailDetail;
-    example: JobDetailExample;
+    name: JobDetailName;
+    returnCode: JobDetailReturnCode;
+    node: JobDetailNode;
+    user: JobDetailUser;
     createdAt: JobDetailCreatedAt;
     updatedAt: JobDetailUpdatedAt;
     deletedAt: JobDetailDeletedAt;
     
-    constructor(id?: JobDetailId, tenantId?: JobDetailTenantId, systemId?: JobDetailSystemId, systemName?: JobDetailSystemName, executionId?: JobDetailExecutionId, executionType?: JobDetailExecutionType, executionExecutedAt?: JobDetailExecutionExecutedAt, executionMonitoringStartAt?: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: JobDetailExecutionMonitoringEndAt, status?: JobDetailStatus, detail?: JobDetailDetail, example?: JobDetailExample, createdAt?: JobDetailCreatedAt, updatedAt?: JobDetailUpdatedAt, deletedAt?: JobDetailDeletedAt, )
+    constructor(id?: JobDetailId, tenantId?: JobDetailTenantId, systemId?: JobDetailSystemId, systemName?: JobDetailSystemName, executionId?: JobDetailExecutionId, executionType?: JobDetailExecutionType, executionExecutedAt?: JobDetailExecutionExecutedAt, executionMonitoringStartAt?: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: JobDetailExecutionMonitoringEndAt, status?: JobDetailStatus, name?: JobDetailName, returnCode?: JobDetailReturnCode, node?: JobDetailNode, user?: JobDetailUser, createdAt?: JobDetailCreatedAt, updatedAt?: JobDetailUpdatedAt, deletedAt?: JobDetailDeletedAt, )
     {
         super();
         
@@ -59,17 +63,19 @@ export class BplusItSappiJobDetail extends AggregateRoot
         this.executionMonitoringStartAt = executionMonitoringStartAt;
         this.executionMonitoringEndAt = executionMonitoringEndAt;
         this.status = status;
-        this.detail = detail;
-        this.example = example;
+        this.name = name;
+        this.returnCode = returnCode;
+        this.node = node;
+        this.user = user;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
         
     }
 
-    static register (id: JobDetailId,tenantId: JobDetailTenantId,systemId: JobDetailSystemId,systemName: JobDetailSystemName,executionId: JobDetailExecutionId,executionType: JobDetailExecutionType,executionExecutedAt: JobDetailExecutionExecutedAt,executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt,executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt,status: JobDetailStatus,detail: JobDetailDetail,example: JobDetailExample,createdAt: JobDetailCreatedAt,updatedAt: JobDetailUpdatedAt,deletedAt: JobDetailDeletedAt,): BplusItSappiJobDetail
+    static register (id: JobDetailId, tenantId: JobDetailTenantId, systemId: JobDetailSystemId, systemName: JobDetailSystemName, executionId: JobDetailExecutionId, executionType: JobDetailExecutionType, executionExecutedAt: JobDetailExecutionExecutedAt, executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt, status: JobDetailStatus, name: JobDetailName, returnCode: JobDetailReturnCode, node: JobDetailNode, user: JobDetailUser, createdAt: JobDetailCreatedAt, updatedAt: JobDetailUpdatedAt, deletedAt: JobDetailDeletedAt, ): BplusItSappiJobDetail
     {
-        return new BplusItSappiJobDetail(id, tenantId, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, status, detail, example, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiJobDetail(id, tenantId, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, status, name, returnCode, node, user, createdAt, updatedAt, deletedAt, );
     }
 
     created(jobDetail: BplusItSappiJobDetail): void
@@ -86,8 +92,10 @@ export class BplusItSappiJobDetail extends AggregateRoot
                 jobDetail.executionMonitoringStartAt.value,
                 jobDetail.executionMonitoringEndAt.value,
                 jobDetail.status.value,
-                jobDetail.detail.value,
-                jobDetail.example.value,
+                jobDetail.name?.value,
+                jobDetail.returnCode?.value,
+                jobDetail.node?.value,
+                jobDetail.user?.value,
                 jobDetail.createdAt?.value,
                 jobDetail.updatedAt?.value,
                 jobDetail.deletedAt?.value,
@@ -110,8 +118,10 @@ export class BplusItSappiJobDetail extends AggregateRoot
                 jobDetail.executionMonitoringStartAt?.value,
                 jobDetail.executionMonitoringEndAt?.value,
                 jobDetail.status?.value,
-                jobDetail.detail?.value,
-                jobDetail.example?.value,
+                jobDetail.name?.value,
+                jobDetail.returnCode?.value,
+                jobDetail.node?.value,
+                jobDetail.user?.value,
                 jobDetail.createdAt?.value,
                 jobDetail.updatedAt?.value,
                 jobDetail.deletedAt?.value,
@@ -134,8 +144,10 @@ export class BplusItSappiJobDetail extends AggregateRoot
                 jobDetail.executionMonitoringStartAt.value,
                 jobDetail.executionMonitoringEndAt.value,
                 jobDetail.status.value,
-                jobDetail.detail.value,
-                jobDetail.example.value,
+                jobDetail.name?.value,
+                jobDetail.returnCode?.value,
+                jobDetail.node?.value,
+                jobDetail.user?.value,
                 jobDetail.createdAt?.value,
                 jobDetail.updatedAt?.value,
                 jobDetail.deletedAt?.value,
@@ -157,8 +169,10 @@ export class BplusItSappiJobDetail extends AggregateRoot
             executionMonitoringStartAt: this.executionMonitoringStartAt.value,
             executionMonitoringEndAt: this.executionMonitoringEndAt.value,
             status: this.status.value,
-            detail: this.detail.value,
-            example: this.example.value,
+            name: this.name?.value,
+            returnCode: this.returnCode?.value,
+            node: this.node?.value,
+            user: this.user?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

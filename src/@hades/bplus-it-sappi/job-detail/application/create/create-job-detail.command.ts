@@ -11,8 +11,10 @@ export class CreateJobDetailCommand
         public readonly executionMonitoringStartAt: string,
         public readonly executionMonitoringEndAt: string,
         public readonly status: string,
-        public readonly detail: string,
-        public readonly example: string,
+        public readonly name: string,
+        public readonly returnCode: number,
+        public readonly node: string,
+        public readonly user: string,
         
     ) {}
 }

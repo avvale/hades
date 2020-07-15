@@ -34,7 +34,6 @@ export enum BplusItSappiJobDetailExecutionType {
 export enum BplusItSappiJobDetailStatus {
     CANCELLED = "CANCELLED",
     COMPLETED = "COMPLETED",
-    RUNNING = "RUNNING",
     ERROR = "ERROR"
 }
 
@@ -377,8 +376,10 @@ export interface BplusItSappiCreateJobDetailInput {
     executionMonitoringStartAt: GraphQLTimestamp;
     executionMonitoringEndAt: GraphQLTimestamp;
     status: BplusItSappiJobDetailStatus;
-    detail: GraphQLString;
-    example: GraphQLString;
+    name?: GraphQLString;
+    returnCode?: GraphQLInt;
+    node?: GraphQLString;
+    user?: GraphQLString;
 }
 
 export interface BplusItSappiUpdateJobDetailInput {
@@ -392,8 +393,10 @@ export interface BplusItSappiUpdateJobDetailInput {
     executionMonitoringStartAt?: GraphQLTimestamp;
     executionMonitoringEndAt?: GraphQLTimestamp;
     status?: BplusItSappiJobDetailStatus;
-    detail?: GraphQLString;
-    example?: GraphQLString;
+    name?: GraphQLString;
+    returnCode?: GraphQLInt;
+    node?: GraphQLString;
+    user?: GraphQLString;
 }
 
 export interface BplusItSappiCreateJobOverviewInput {
@@ -897,8 +900,10 @@ export interface BplusItSappiJobDetail {
     executionMonitoringStartAt: GraphQLTimestamp;
     executionMonitoringEndAt: GraphQLTimestamp;
     status: BplusItSappiJobDetailStatus;
-    detail: GraphQLString;
-    example: GraphQLString;
+    name?: GraphQLString;
+    returnCode?: GraphQLInt;
+    node?: GraphQLString;
+    user?: GraphQLString;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

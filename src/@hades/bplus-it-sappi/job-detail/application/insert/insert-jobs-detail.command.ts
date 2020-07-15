@@ -12,8 +12,10 @@ export class InsertJobsDetailCommand
             executionMonitoringStartAt: string,
             executionMonitoringEndAt: string,
             status: string,
-            detail: string,
-            example: string,
+            name?: string,
+            returnCode?: number,
+            node?: string,
+            user?: string,
             
         } []
     ) {}

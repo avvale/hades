@@ -12,8 +12,10 @@ import {
     JobDetailExecutionMonitoringStartAt, 
     JobDetailExecutionMonitoringEndAt, 
     JobDetailStatus, 
-    JobDetailDetail, 
-    JobDetailExample, 
+    JobDetailName, 
+    JobDetailReturnCode, 
+    JobDetailNode, 
+    JobDetailUser, 
     JobDetailCreatedAt, 
     JobDetailUpdatedAt, 
     JobDetailDeletedAt
@@ -41,8 +43,10 @@ export class CreateJobDetailService
         executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt,
         executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt,
         status: JobDetailStatus,
-        detail: JobDetailDetail,
-        example: JobDetailExample,
+        name: JobDetailName,
+        returnCode: JobDetailReturnCode,
+        node: JobDetailNode,
+        user: JobDetailUser,
         
     ): Promise<void>
     {
@@ -58,8 +62,10 @@ export class CreateJobDetailService
             executionMonitoringStartAt,
             executionMonitoringEndAt,
             status,
-            detail,
-            example,
+            name,
+            returnCode,
+            node,
+            user,
             new JobDetailCreatedAt(Utils.nowTimestamp()),
             new JobDetailUpdatedAt(Utils.nowTimestamp()),
             null
@@ -68,9 +74,9 @@ export class CreateJobDetailService
         // create
         await this.repository.create(jobDetail);
 
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const jobDetailRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            jobDetail
         );
         
         jobDetailRegister.created(jobDetail); // apply event to model events

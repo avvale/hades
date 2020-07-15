@@ -5,85 +5,99 @@ export class CreateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'ce5d3987-ce2e-436e-851f-ab6d1ef3d1db'
+        example     : '6cb9ea29-9d2a-41b9-b3d4-0e6e6daae1ea'
     })
     id: string;
     
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '21810c78-39c1-4dc8-8e1b-89ddeecf3fa4'
+        example     : '93280fac-34d0-4f7e-8447-8e6314664cf0'
     })
     tenantId: string;
     
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '11122a48-29f9-42b1-a88f-9076e4531d45'
+        example     : '7df7f500-6d68-4fe8-861a-22d7314d2562'
     })
     systemId: string;
     
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'jiykcp9q6vye22ha3zx4'
+        example     : '69kp62ngoaliliv2tgjy'
     })
     systemName: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '454b10e4-23bd-46f3-b88c-c858d6a9166c'
+        example     : 'eccd75df-265a-4cf6-8f6a-57eec5ab1cef'
     })
     executionId: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionType [input here api field description]',
-        example     : 'SUMMARY'
+        example     : 'DETAIL'
     })
     executionType: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-02 03:19:33'
+        example     : '2020-07-14 23:26:08'
     })
     executionExecutedAt: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-02 02:15:10'
+        example     : '2020-07-15 12:10:31'
     })
     executionMonitoringStartAt: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-02 17:12:28'
+        example     : '2020-07-14 23:59:44'
     })
     executionMonitoringEndAt: string;
     
     @ApiProperty({
         type        : String,
         description : 'status [input here api field description]',
-        example     : 'CANCELLED'
+        example     : 'COMPLETED'
     })
     status: string;
     
     @ApiProperty({
         type        : String,
-        description : 'detail [input here api field description]',
-        example     : 'pyjl6azmtdocgpcp3dnbynu47l9ye4kgg873jfa4spt2sp672n9lpg1osvjja4aedwhw9hi1g64xfv4tcyw26nc99k4wfohx54n95uk0fvolsnh88jw6st2yhdm03t11fsanqufjaljdf4ug2reg3bwetg90p6g9iuvdegptix1750g9rg13vdawq8mambc2p39fw9tripmy2rm3zmvh2m8zwr8pyjt41mh5sxlbxxduf8ipxt2wyq3qtu781o7'
+        description : 'name [input here api field description]',
+        example     : 'duw4uazudopv402rogec5rp6e28fdpts62gb5uk02adqrgnv1c1otmq9qgjwio5jlbmd4r0frz512w4f7e0pb0olbvgdny6fr7ak088ivmnqp8cxfehocgg4jyjwlua6lyfz7h5zex159rf0yapdae1lkmiizxbpy0hwkyy5sy9o7acxv1nmkpo17sjm13ytw7vhwdk69slku5vm8pmpvez63xw7lttklguxubp3npy4lutxv4coqu95jiwp5bw'
     })
-    detail: string;
+    name: string;
+    
+    @ApiProperty({
+        type        : Number,
+        description : 'returnCode [input here api field description]',
+        example     : 5346324837
+    })
+    returnCode: number;
     
     @ApiProperty({
         type        : String,
-        description : 'example [input here api field description]',
-        example     : '1oxq0m0vc9odn6fylistj0fafrv8pyewjuzdqml5dqq9ii6n3uzmdcu1gepsoicnjaoatsq4oae4seb5njulcr8q3o9hk6s6zqqoufe8ap6dyz05xsh63a4t9uo6640nkm7shtvudbb8dyybblm74qjaqok3use0'
+        description : 'node [input here api field description]',
+        example     : 'sfk1e7xfild0h8su55exksvc2rp9eb7m1kjl0pu2lb2pabl8huaqf2zc6g2earqpsp6jmo37r0esesifi57gpnqr1kajekk7s931c5uxj6p7uk7gbmgd1z2ac9i4d5gpi8qgh4315te5bi2x37mpg0oxcd5hefe2'
     })
-    example: string;
+    node: string;
+    
+    @ApiProperty({
+        type        : String,
+        description : 'user [input here api field description]',
+        example     : 'qb3ry95y9dyr6kvvkud9pmazmvhiihgdbhl5j83pn8rp69vcbpom6yl81102q4hxj4zxpj50v5mazpfi1tj8ymod8uzw8atwl0sqseqkx4nwyv73i5070obvy9gu03vuij6ci5vuji1zo0i4wtzqldd1xm3m13k25trgmj1yxg54pieylej33eepa01xc7owm2bnudui9qqrpi003egjpbbs5nqkbqkat3iwc49k6ri848tm1f9nq1xs6lhkr6r'
+    })
+    user: string;
     
 }

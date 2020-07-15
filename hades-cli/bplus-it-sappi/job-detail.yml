@@ -52,17 +52,24 @@ aggregateProperties:
     enumOptions:
       - CANCELLED
       - COMPLETED
-      - RUNNING
       - ERROR
     nullable: false
-  - name: detail
+  - name: name
     type: varchar
     maxLength: 255
-    nullable: false
-  - name: example
+    nullable: true
+  - name: return_code
+    type: int
+    maxLength: 10
+    nullable: true
+  - name: node
     type: varchar
     maxLength: 160
-    nullable: false
+    nullable: true
+  - name: user
+    type: varchar
+    maxLength: 255
+    nullable: true
   - name: created_at
     type: timestamp
     nullable: true

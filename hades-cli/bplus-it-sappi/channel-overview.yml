@@ -48,27 +48,27 @@ aggregateProperties:
     type: timestamp
     nullable: false
   - name: error
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: inactive
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: successful
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: stopped
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: unknown
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: unregistered
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: created_at

@@ -29,8 +29,10 @@ export class UpdateJobDetailResolver
             payload.executionMonitoringStartAt,
             payload.executionMonitoringEndAt,
             payload.status,
-            payload.detail,
-            payload.example,
+            payload.name,
+            payload.returnCode,
+            payload.node,
+            payload.user,
             
         ));
         

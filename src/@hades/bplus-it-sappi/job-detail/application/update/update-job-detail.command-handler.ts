@@ -12,8 +12,10 @@ import {
     JobDetailExecutionMonitoringStartAt, 
     JobDetailExecutionMonitoringEndAt, 
     JobDetailStatus, 
-    JobDetailDetail, 
-    JobDetailExample
+    JobDetailName, 
+    JobDetailReturnCode, 
+    JobDetailNode, 
+    JobDetailUser
     
 } from './../../domain/value-objects';
 
@@ -38,8 +40,10 @@ export class UpdateJobDetailCommandHandler implements ICommandHandler<UpdateJobD
             new JobDetailExecutionMonitoringStartAt(command.executionMonitoringStartAt, { undefinable: true }),
             new JobDetailExecutionMonitoringEndAt(command.executionMonitoringEndAt, { undefinable: true }),
             new JobDetailStatus(command.status, { undefinable: true }),
-            new JobDetailDetail(command.detail, { undefinable: true }),
-            new JobDetailExample(command.example, { undefinable: true }),
+            new JobDetailName(command.name),
+            new JobDetailReturnCode(command.returnCode),
+            new JobDetailNode(command.node),
+            new JobDetailUser(command.user),
             
         )
     }

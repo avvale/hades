@@ -48,39 +48,39 @@ aggregateProperties:
     type: timestamp
     nullable: false
   - name: number_max
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: number_days
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: success
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: cancelled
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: delivering
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: error
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: holding
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: to_be_delivered
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: waiting
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: created_at

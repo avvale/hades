@@ -117,29 +117,49 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
         field: 'status',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.ENUM('CANCELLED','COMPLETED','RUNNING','ERROR'),
+        type: DataTypes.ENUM('CANCELLED','COMPLETED','ERROR'),
     })
     status: string;
         
              
         
     @Column({
-        field: 'detail',
+        field: 'name',
         primaryKey: false,
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(255),
     })
-    detail: string;
+    name: string;
         
              
         
     @Column({
-        field: 'example',
+        field: 'return_code',
         primaryKey: false,
-        allowNull: false,
+        allowNull: true,
+        type: DataTypes.INTEGER,
+    })
+    returnCode: number;
+        
+             
+        
+    @Column({
+        field: 'node',
+        primaryKey: false,
+        allowNull: true,
         type: DataTypes.STRING(160),
     })
-    example: string;
+    node: string;
+        
+             
+        
+    @Column({
+        field: 'user',
+        primaryKey: false,
+        allowNull: true,
+        type: DataTypes.STRING(255),
+    })
+    user: string;
         
              
         

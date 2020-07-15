@@ -84,7 +84,7 @@ aggregateProperties:
     maxLength: 160
     nullable: true
   - name: remote_port
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: directory
@@ -100,7 +100,7 @@ aggregateProperties:
     maxLength: 60
     nullable: true
   - name: proxy_port
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: true
   - name: destination

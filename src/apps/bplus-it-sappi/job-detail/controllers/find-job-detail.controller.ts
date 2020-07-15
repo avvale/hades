@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { JobDetailDto } from './../dto/job-detail.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { FindJobDetailQuery } from '@hades/bplus-it-sappi/job-detail/application/find/find-job-detail.query';
 
 @ApiTags('[bplus-it-sappi] job-detail')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: JobDetailDto})
 @Controller('bplus-it-sappi/job-detail')
 export class FindJobDetailController 
 {
@@ -18,6 +17,9 @@ export class FindJobDetailController
 
     @Get()
     @ApiOperation({ summary: 'Find job-detail according to query' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: JobDetailDto })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new FindJobDetailQuery(queryStatements));   

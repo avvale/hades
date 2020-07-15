@@ -12,8 +12,10 @@ import {
     JobDetailExecutionMonitoringStartAt, 
     JobDetailExecutionMonitoringEndAt, 
     JobDetailStatus, 
-    JobDetailDetail, 
-    JobDetailExample, 
+    JobDetailName, 
+    JobDetailReturnCode, 
+    JobDetailNode, 
+    JobDetailUser, 
     JobDetailCreatedAt, 
     JobDetailUpdatedAt, 
     JobDetailDeletedAt
@@ -42,14 +44,16 @@ export class InsertJobsDetailService
             executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt,
             executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt,
             status: JobDetailStatus,
-            detail: JobDetailDetail,
-            example: JobDetailExample,
+            name: JobDetailName,
+            returnCode: JobDetailReturnCode,
+            node: JobDetailNode,
+            user: JobDetailUser,
             
         } []
     ): Promise<void>
     {
         // create object with factory pattern
-        const entityJobsDetail = jobsDetail.map(jobDetail => BplusItSappiJobDetail.register(
+        const aggregateJobsDetail = jobsDetail.map(jobDetail => BplusItSappiJobDetail.register(
             jobDetail.id,
             jobDetail.tenantId,
             jobDetail.systemId,
@@ -60,20 +64,22 @@ export class InsertJobsDetailService
             jobDetail.executionMonitoringStartAt,
             jobDetail.executionMonitoringEndAt,
             jobDetail.status,
-            jobDetail.detail,
-            jobDetail.example,
+            jobDetail.name,
+            jobDetail.returnCode,
+            jobDetail.node,
+            jobDetail.user,
             new JobDetailCreatedAt(Utils.nowTimestamp()),
             new JobDetailUpdatedAt(Utils.nowTimestamp()),
             null
         ));
         
         // insert
-        await this.repository.insert(entityJobsDetail);
+        await this.repository.insert(aggregateJobsDetail);
 
         // TODO a falta de definir eventos
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         // const jobsDetailRegistered = this.publisher.mergeObjectContext(
-        //     await this.repository.findById(id)
+        //     await this.repository.findById(id) // there may be cases where the database object is direct to the command, for example in the update, only one field can be updated
         // );
         // 
         // jobsDetailRegistered.created(jobsDetail); // apply event to model events

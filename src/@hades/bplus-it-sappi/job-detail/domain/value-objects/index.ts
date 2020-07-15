@@ -8,8 +8,10 @@ export { JobDetailExecutionExecutedAt } from './job-detail-execution-executed-at
 export { JobDetailExecutionMonitoringStartAt } from './job-detail-execution-monitoring-start-at';
 export { JobDetailExecutionMonitoringEndAt } from './job-detail-execution-monitoring-end-at';
 export { JobDetailStatus } from './job-detail-status';
-export { JobDetailDetail } from './job-detail-detail';
-export { JobDetailExample } from './job-detail-example';
+export { JobDetailName } from './job-detail-name';
+export { JobDetailReturnCode } from './job-detail-return-code';
+export { JobDetailNode } from './job-detail-node';
+export { JobDetailUser } from './job-detail-user';
 export { JobDetailCreatedAt } from './job-detail-created-at';
 export { JobDetailUpdatedAt } from './job-detail-updated-at';
 export { JobDetailDeletedAt } from './job-detail-deleted-at';

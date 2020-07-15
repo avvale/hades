@@ -15,8 +15,10 @@ import {
     JobDetailExecutionMonitoringStartAt, 
     JobDetailExecutionMonitoringEndAt, 
     JobDetailStatus, 
-    JobDetailDetail, 
-    JobDetailExample, 
+    JobDetailName, 
+    JobDetailReturnCode, 
+    JobDetailNode, 
+    JobDetailUser, 
     JobDetailCreatedAt, 
     JobDetailUpdatedAt, 
     JobDetailDeletedAt
@@ -29,7 +31,7 @@ import { jobsDetail } from './../seeds/job-detail.seed';
 export class MockJobDetailRepository implements IJobDetailRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'BplusItSappiJobDetail';
+    public readonly aggregateName: string = 'BplusItSappiJobDetail';
     public collectionSource: BplusItSappiJobDetail[];
     
     constructor() 
@@ -69,8 +71,10 @@ export class MockJobDetailRepository implements IJobDetailRepository
                     new JobDetailExecutionMonitoringStartAt(itemCollection.executionMonitoringStartAt),
                     new JobDetailExecutionMonitoringEndAt(itemCollection.executionMonitoringEndAt),
                     new JobDetailStatus(itemCollection.status),
-                    new JobDetailDetail(itemCollection.detail),
-                    new JobDetailExample(itemCollection.example),
+                    new JobDetailName(itemCollection.name),
+                    new JobDetailReturnCode(itemCollection.returnCode),
+                    new JobDetailNode(itemCollection.node),
+                    new JobDetailUser(itemCollection.user),
                     new JobDetailCreatedAt(itemCollection.createdAt),
                     new JobDetailUpdatedAt(itemCollection.updatedAt),
                     new JobDetailDeletedAt(itemCollection.deletedAt),
@@ -97,7 +101,7 @@ export class MockJobDetailRepository implements IJobDetailRepository
     
     async create(jobDetail: BplusItSappiJobDetail): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === jobDetail.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${jobDetail.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === jobDetail.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${jobDetail.id.value} already exist in database`);
 
         // create deletedAt null 
         jobDetail.deletedAt = new JobDetailDeletedAt(null);
@@ -111,29 +115,29 @@ export class MockJobDetailRepository implements IJobDetailRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiJobDetail> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<BplusItSappiJobDetail>
     {
-        const entity = this.collectionSource.find(jobDetail => jobDetail.id.value === id.value);
+        const aggregate = this.collectionSource.find(jobDetail => jobDetail.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiJobDetail[]> 
@@ -141,20 +145,20 @@ export class MockJobDetailRepository implements IJobDetailRepository
         return this.collectionSource;
     }
 
-    async update(entity: BplusItSappiJobDetail): Promise<void> 
+    async update(aggregate: BplusItSappiJobDetail): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(jobDetail => {
-            if (jobDetail.id.value === entity.id.value) return entity;
+            if (jobDetail.id.value === aggregate.id.value) return aggregate;
             return jobDetail;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(jobDetail => jobDetail.id.value !== id.value);
