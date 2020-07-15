@@ -8,7 +8,7 @@ aggregateProperties:
     length: 36
     nullable: false
   - name: code
-    type: int
+    type: int.unsigned
     maxLength: 10
     nullable: false
   - name: tenant_id
@@ -30,7 +30,7 @@ aggregateProperties:
     type: json
     nullable: true
   - name: offset
-    type: smallint
+    type: smallint.unsigned
     maxLength: 6
     nullable: true
   - name: is_session_required
