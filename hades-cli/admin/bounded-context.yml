@@ -16,7 +16,7 @@ aggregateProperties:
     maxLength: 20
     nullable: false
   - name: sort
-    type: smallint
+    type: smallint.unsigned
     maxLength: 6
     nullable: false
   - name: is_active
