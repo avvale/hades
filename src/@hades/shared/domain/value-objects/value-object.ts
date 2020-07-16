@@ -22,7 +22,7 @@ export abstract class ValueObject<T> implements IValueObject<T>
 
         if (this.validationRules.undefinable === false && value === undefined)
         {
-            throw new BadRequestException(`Value for ${this.validationRules.name} must be defined, can not be undefined`);
+            throw new BadRequestException(`Value for ${this.validationRules.name} must be pos, can not be undefined`);
         }
         
         this._value = value;
@@ -30,7 +30,7 @@ export abstract class ValueObject<T> implements IValueObject<T>
     
     constructor(value: T, validationRules: ValidationRules = {}) 
     {
-        this.validationRules = validationRules;
         this.value = value;
+        this.validationRules = validationRules;
     }
 }
