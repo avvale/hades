@@ -7,6 +7,15 @@ import { BplusItSappiSystemControllers, BplusItSappiSystemResolvers } from './sy
 import { BplusItSappiExecutionControllers, BplusItSappiExecutionResolvers } from './execution';
 import { BplusItSappiFlowControllers, BplusItSappiFlowResolvers } from './flow';
 import { BplusItSappiChannelControllers, BplusItSappiChannelResolvers } from './channel';
+import { BplusItSappiRoleControllers, BplusItSappiRoleResolvers } from './role';
+import { BplusItSappiJobOverviewControllers, BplusItSappiJobOverviewResolvers } from './job-overview';
+import { BplusItSappiContactControllers, BplusItSappiContactResolvers } from './contact';
+import { BplusItSappiJobDetailControllers, BplusItSappiJobDetailResolvers } from './job-detail';
+import { BplusItSappiChannelOverviewControllers, BplusItSappiChannelOverviewResolvers } from './channel-overview';
+import { BplusItSappiChannelDetailControllers, BplusItSappiChannelDetailResolvers } from './channel-detail';
+import { BplusItSappiModuleControllers, BplusItSappiModuleResolvers } from './module';
+import { BplusItSappiMessageOverviewControllers, BplusItSappiMessageOverviewResolvers } from './message-overview';
+import { BplusItSappiMessageDetailControllers, BplusItSappiMessageDetailResolvers } from './message-detail';
 
 @Module({
     imports: [
@@ -20,7 +29,16 @@ import { BplusItSappiChannelControllers, BplusItSappiChannelResolvers } from './
         ...BplusItSappiSystemControllers,
         ...BplusItSappiExecutionControllers,
         ...BplusItSappiFlowControllers,
-        ...BplusItSappiChannelControllers
+        ...BplusItSappiChannelControllers,
+        ...BplusItSappiRoleControllers,
+        ...BplusItSappiJobOverviewControllers,
+        ...BplusItSappiContactControllers,
+        ...BplusItSappiJobDetailControllers,
+        ...BplusItSappiChannelOverviewControllers,
+        ...BplusItSappiChannelDetailControllers,
+        ...BplusItSappiModuleControllers,
+        ...BplusItSappiMessageOverviewControllers,
+        ...BplusItSappiMessageDetailControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
@@ -31,7 +49,16 @@ import { BplusItSappiChannelControllers, BplusItSappiChannelResolvers } from './
         ...BplusItSappiSystemResolvers,
         ...BplusItSappiExecutionResolvers,
         ...BplusItSappiFlowResolvers,
-        ...BplusItSappiChannelResolvers
+        ...BplusItSappiChannelResolvers,
+        ...BplusItSappiRoleResolvers,
+        ...BplusItSappiJobOverviewResolvers,
+        ...BplusItSappiContactResolvers,
+        ...BplusItSappiJobDetailResolvers,
+        ...BplusItSappiChannelOverviewResolvers,
+        ...BplusItSappiChannelDetailResolvers,
+        ...BplusItSappiModuleResolvers,
+        ...BplusItSappiMessageOverviewResolvers,
+        ...BplusItSappiMessageDetailResolvers
     ]
 })
 export class BplusItSappiModule {}
