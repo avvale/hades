@@ -3,6 +3,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from './../shared/shared.module';
 import { BplusItSappiModels, BplusItSappiHandlers, BplusItSappiServices, BplusItSappiRepositories, BplusItSappiSagas } from '@hades/bplus-it-sappi';
 import { BplusItSappiDataLakeControllers, BplusItSappiDataLakeResolvers } from './data-lake';
+import { BplusItSappiSystemControllers, BplusItSappiSystemResolvers } from './system';
 
 @Module({
     imports: [
@@ -12,14 +13,16 @@ import { BplusItSappiDataLakeControllers, BplusItSappiDataLakeResolvers } from '
             ])
     ],
     controllers: [
-        ...BplusItSappiDataLakeControllers
+        ...BplusItSappiDataLakeControllers,
+        ...BplusItSappiSystemControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
         ...BplusItSappiServices,
         ...BplusItSappiRepositories,
         ...BplusItSappiSagas,
-        ...BplusItSappiDataLakeResolvers
+        ...BplusItSappiDataLakeResolvers,
+        ...BplusItSappiSystemResolvers
     ]
 })
 export class BplusItSappiModule {}
