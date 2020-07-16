@@ -1,21 +1,25 @@
 import { BplusItSappiDataLakeHandlers, BplusItSappiDataLakeServices, BplusItSappiDataLakeModel, IDataLakeRepository, SequelizeDataLakeRepository, DataLakeSagas } from './data-lake';
 import { BplusItSappiSystemHandlers, BplusItSappiSystemServices, BplusItSappiSystemModel, ISystemRepository, SequelizeSystemRepository, SystemSagas } from './system';
 import { BplusItSappiExecutionHandlers, BplusItSappiExecutionServices, BplusItSappiExecutionModel, IExecutionRepository, SequelizeExecutionRepository, ExecutionSagas } from './execution';
+import { BplusItSappiFlowHandlers, BplusItSappiFlowServices, BplusItSappiFlowModel, IFlowRepository, SequelizeFlowRepository, FlowSagas } from './flow';
 
 export const BplusItSappiHandlers = [
     ...BplusItSappiDataLakeHandlers,
     ...BplusItSappiSystemHandlers,
-    ...BplusItSappiExecutionHandlers
+    ...BplusItSappiExecutionHandlers,
+    ...BplusItSappiFlowHandlers
 ];
 export const BplusItSappiServices = [
     ...BplusItSappiDataLakeServices,
     ...BplusItSappiSystemServices,
-    ...BplusItSappiExecutionServices
+    ...BplusItSappiExecutionServices,
+    ...BplusItSappiFlowServices
 ];
 export const BplusItSappiModels = [
     BplusItSappiDataLakeModel,
     BplusItSappiSystemModel,
-    BplusItSappiExecutionModel
+    BplusItSappiExecutionModel,
+    BplusItSappiFlowModel
 ];
 export const BplusItSappiRepositories = [
     {
@@ -29,10 +33,15 @@ export const BplusItSappiRepositories = [
     {
         provide: IExecutionRepository,
         useClass: SequelizeExecutionRepository
+    },
+    {
+        provide: IFlowRepository,
+        useClass: SequelizeFlowRepository
     }
 ];
 export const BplusItSappiSagas = [
     DataLakeSagas,
     SystemSagas,
-    ExecutionSagas
+    ExecutionSagas,
+    FlowSagas
 ];
