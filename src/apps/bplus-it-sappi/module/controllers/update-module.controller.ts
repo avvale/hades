@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateModuleDto } from './../dto/update-module.dto';
 import { ModuleDto } from './../dto/module.dto';
 
@@ -10,7 +10,6 @@ import { UpdateModuleCommand } from '@hades/bplus-it-sappi/module/application/up
 import { FindModuleByIdQuery } from '@hades/bplus-it-sappi/module/application/find/find-module-by-id.query';
 
 @ApiTags('[bplus-it-sappi] module')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: ModuleDto})
 @Controller('bplus-it-sappi/module')
 export class UpdateModuleController 
 {
@@ -21,6 +20,7 @@ export class UpdateModuleController
 
     @Put()
     @ApiOperation({ summary: 'Update module' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: ModuleDto})
     async main(@Body() payload: UpdateModuleDto)
     {
         await this.commandBus.dispatch(new UpdateModuleCommand(

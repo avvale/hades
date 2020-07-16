@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateContactDto } from './../dto/update-contact.dto';
 import { ContactDto } from './../dto/contact.dto';
 
@@ -10,7 +10,6 @@ import { UpdateContactCommand } from '@hades/bplus-it-sappi/contact/application/
 import { FindContactByIdQuery } from '@hades/bplus-it-sappi/contact/application/find/find-contact-by-id.query';
 
 @ApiTags('[bplus-it-sappi] contact')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: ContactDto})
 @Controller('bplus-it-sappi/contact')
 export class UpdateContactController 
 {
@@ -21,6 +20,7 @@ export class UpdateContactController
 
     @Put()
     @ApiOperation({ summary: 'Update contact' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: ContactDto})
     async main(@Body() payload: UpdateContactDto)
     {
         await this.commandBus.dispatch(new UpdateContactCommand(

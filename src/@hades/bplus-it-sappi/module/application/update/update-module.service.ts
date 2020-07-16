@@ -80,9 +80,9 @@ export class UpdateModuleService
         // update
         await this.repository.update(module);        
             
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const moduleRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            module
         );
         
         moduleRegister.updated(module); // apply event to model events

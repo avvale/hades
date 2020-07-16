@@ -79,7 +79,7 @@ export class BplusItSappiModule extends AggregateRoot
         
     }
 
-    static register (id: ModuleId,tenantId: ModuleTenantId,systemId: ModuleSystemId,systemName: ModuleSystemName,channelId: ModuleChannelId,channelParty: ModuleChannelParty,channelComponent: ModuleChannelComponent,channelName: ModuleChannelName,flowParty: ModuleFlowParty,flowComponent: ModuleFlowComponent,flowInterfaceName: ModuleFlowInterfaceName,flowInterfaceNamespace: ModuleFlowInterfaceNamespace,parameterGroup: ModuleParameterGroup,name: ModuleName,parameterName: ModuleParameterName,parameterValue: ModuleParameterValue,createdAt: ModuleCreatedAt,updatedAt: ModuleUpdatedAt,deletedAt: ModuleDeletedAt,): BplusItSappiModule
+    static register (id: ModuleId, tenantId: ModuleTenantId, systemId: ModuleSystemId, systemName: ModuleSystemName, channelId: ModuleChannelId, channelParty: ModuleChannelParty, channelComponent: ModuleChannelComponent, channelName: ModuleChannelName, flowParty: ModuleFlowParty, flowComponent: ModuleFlowComponent, flowInterfaceName: ModuleFlowInterfaceName, flowInterfaceNamespace: ModuleFlowInterfaceNamespace, parameterGroup: ModuleParameterGroup, name: ModuleName, parameterName: ModuleParameterName, parameterValue: ModuleParameterValue, createdAt: ModuleCreatedAt, updatedAt: ModuleUpdatedAt, deletedAt: ModuleDeletedAt, ): BplusItSappiModule
     {
         return new BplusItSappiModule(id, tenantId, systemId, systemName, channelId, channelParty, channelComponent, channelName, flowParty, flowComponent, flowInterfaceName, flowInterfaceNamespace, parameterGroup, name, parameterName, parameterValue, createdAt, updatedAt, deletedAt, );
     }

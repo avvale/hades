@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { FlowDto } from './../dto/flow.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { GetFlowsQuery } from '@hades/bplus-it-sappi/flow/application/get/get-flows.query';
 
 @ApiTags('[bplus-it-sappi] flow')
-@ApiOkResponse({ description: 'The records has been found successfully.', type: FlowDto})
 @Controller('bplus-it-sappi/flows')
 export class GetFlowsController 
 {
@@ -18,6 +17,9 @@ export class GetFlowsController
 
     @Get()
     @ApiOperation({ summary: 'Find flows according to query' })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [FlowDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new GetFlowsQuery(queryStatements));   

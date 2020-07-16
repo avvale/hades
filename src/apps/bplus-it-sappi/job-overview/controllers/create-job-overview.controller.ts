@@ -10,7 +10,6 @@ import { FindJobOverviewByIdQuery } from '@hades/bplus-it-sappi/job-overview/app
 import { CreateJobOverviewCommand } from '@hades/bplus-it-sappi/job-overview/application/create/create-job-overview.command';
 
 @ApiTags('[bplus-it-sappi] job-overview')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: JobOverviewDto})
 @Controller('bplus-it-sappi/job-overview')
 export class CreateJobOverviewController 
 {
@@ -21,6 +20,7 @@ export class CreateJobOverviewController
 
     @Post()
     @ApiOperation({ summary: 'Create job-overview' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: JobOverviewDto })
     async main(@Body() payload: CreateJobOverviewDto)
     {
         await this.commandBus.dispatch(new CreateJobOverviewCommand(

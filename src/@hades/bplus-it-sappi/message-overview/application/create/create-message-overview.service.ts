@@ -86,9 +86,9 @@ export class CreateMessageOverviewService
         // create
         await this.repository.create(messageOverview);
 
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const messageOverviewRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            messageOverview
         );
         
         messageOverviewRegister.created(messageOverview); // apply event to model events

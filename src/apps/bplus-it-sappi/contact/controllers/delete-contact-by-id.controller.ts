@@ -9,7 +9,6 @@ import { FindContactByIdQuery } from '@hades/bplus-it-sappi/contact/application/
 import { DeleteContactByIdCommand } from '@hades/bplus-it-sappi/contact/application/delete/delete-contact-by-id.command';
 
 @ApiTags('[bplus-it-sappi] contact')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: ContactDto})
 @Controller('bplus-it-sappi/contact')
 export class DeleteContactByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteContactByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete contact by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: ContactDto })
     async main(@Param('id') id: string)
     {
         const contact = await this.queryBus.ask(new FindContactByIdQuery(id));

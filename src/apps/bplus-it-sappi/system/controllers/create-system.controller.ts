@@ -10,7 +10,6 @@ import { FindSystemByIdQuery } from '@hades/bplus-it-sappi/system/application/fi
 import { CreateSystemCommand } from '@hades/bplus-it-sappi/system/application/create/create-system.command';
 
 @ApiTags('[bplus-it-sappi] system')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: SystemDto})
 @Controller('bplus-it-sappi/system')
 export class CreateSystemController 
 {
@@ -21,6 +20,7 @@ export class CreateSystemController
 
     @Post()
     @ApiOperation({ summary: 'Create system' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: SystemDto })
     async main(@Body() payload: CreateSystemDto)
     {
         await this.commandBus.dispatch(new CreateSystemCommand(

@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateChannelDto } from './../dto/update-channel.dto';
 import { ChannelDto } from './../dto/channel.dto';
 
@@ -10,7 +10,6 @@ import { UpdateChannelCommand } from '@hades/bplus-it-sappi/channel/application/
 import { FindChannelByIdQuery } from '@hades/bplus-it-sappi/channel/application/find/find-channel-by-id.query';
 
 @ApiTags('[bplus-it-sappi] channel')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: ChannelDto})
 @Controller('bplus-it-sappi/channel')
 export class UpdateChannelController 
 {
@@ -21,6 +20,7 @@ export class UpdateChannelController
 
     @Put()
     @ApiOperation({ summary: 'Update channel' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: ChannelDto})
     async main(@Body() payload: UpdateChannelDto)
     {
         await this.commandBus.dispatch(new UpdateChannelCommand(

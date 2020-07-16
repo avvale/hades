@@ -9,7 +9,6 @@ import { FindChannelOverviewByIdQuery } from '@hades/bplus-it-sappi/channel-over
 import { DeleteChannelOverviewByIdCommand } from '@hades/bplus-it-sappi/channel-overview/application/delete/delete-channel-overview-by-id.command';
 
 @ApiTags('[bplus-it-sappi] channel-overview')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: ChannelOverviewDto})
 @Controller('bplus-it-sappi/channel-overview')
 export class DeleteChannelOverviewByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteChannelOverviewByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete channel-overview by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: ChannelOverviewDto })
     async main(@Param('id') id: string)
     {
         const channelOverview = await this.queryBus.ask(new FindChannelOverviewByIdQuery(id));

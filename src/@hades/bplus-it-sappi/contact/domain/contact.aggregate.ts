@@ -73,7 +73,7 @@ export class BplusItSappiContact extends AggregateRoot
         
     }
 
-    static register (id: ContactId,tenantId: ContactTenantId,systemId: ContactSystemId,systemName: ContactSystemName,roleId: ContactRoleId,roleName: ContactRoleName,name: ContactName,surname: ContactSurname,email: ContactEmail,mobile: ContactMobile,area: ContactArea,hasConsentEmail: ContactHasConsentEmail,hasConsentMobile: ContactHasConsentMobile,isActive: ContactIsActive,createdAt: ContactCreatedAt,updatedAt: ContactUpdatedAt,deletedAt: ContactDeletedAt,): BplusItSappiContact
+    static register (id: ContactId, tenantId: ContactTenantId, systemId: ContactSystemId, systemName: ContactSystemName, roleId: ContactRoleId, roleName: ContactRoleName, name: ContactName, surname: ContactSurname, email: ContactEmail, mobile: ContactMobile, area: ContactArea, hasConsentEmail: ContactHasConsentEmail, hasConsentMobile: ContactHasConsentMobile, isActive: ContactIsActive, createdAt: ContactCreatedAt, updatedAt: ContactUpdatedAt, deletedAt: ContactDeletedAt, ): BplusItSappiContact
     {
         return new BplusItSappiContact(id, tenantId, systemId, systemName, roleId, roleName, name, surname, email, mobile, area, hasConsentEmail, hasConsentMobile, isActive, createdAt, updatedAt, deletedAt, );
     }

@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ExecutionDto } from './../dto/execution.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetExecutionsQuery } from '@hades/bplus-it-sappi/execution/application/
 import { DeleteExecutionsCommand } from '@hades/bplus-it-sappi/execution/application/delete/delete-executions.command';
 
 @ApiTags('[bplus-it-sappi] execution')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: ExecutionDto})
 @Controller('bplus-it-sappi/executions')
 export class DeleteExecutionsController 
 {
@@ -21,6 +20,9 @@ export class DeleteExecutionsController
 
     @Delete()
     @ApiOperation({ summary: 'Delete executions in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [ExecutionDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const executions = await this.queryBus.ask(new GetExecutionsQuery(queryStatements));

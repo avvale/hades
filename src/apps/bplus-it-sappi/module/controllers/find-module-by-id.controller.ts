@@ -7,7 +7,6 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindModuleByIdQuery } from '@hades/bplus-it-sappi/module/application/find/find-module-by-id.query';
 
 @ApiTags('[bplus-it-sappi] module')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: ModuleDto})
 @Controller('bplus-it-sappi/module')
 export class FindModuleByIdController 
 {
@@ -17,6 +16,7 @@ export class FindModuleByIdController
 
     @Get(':id')
     @ApiOperation({ summary: 'Find module by id' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: ModuleDto })
     async main(@Param('id') id: string)
     {
         return await this.queryBus.ask(new FindModuleByIdQuery(id));

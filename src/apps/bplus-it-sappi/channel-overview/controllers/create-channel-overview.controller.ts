@@ -10,7 +10,6 @@ import { FindChannelOverviewByIdQuery } from '@hades/bplus-it-sappi/channel-over
 import { CreateChannelOverviewCommand } from '@hades/bplus-it-sappi/channel-overview/application/create/create-channel-overview.command';
 
 @ApiTags('[bplus-it-sappi] channel-overview')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: ChannelOverviewDto})
 @Controller('bplus-it-sappi/channel-overview')
 export class CreateChannelOverviewController 
 {
@@ -21,6 +20,7 @@ export class CreateChannelOverviewController
 
     @Post()
     @ApiOperation({ summary: 'Create channel-overview' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: ChannelOverviewDto })
     async main(@Body() payload: CreateChannelOverviewDto)
     {
         await this.commandBus.dispatch(new CreateChannelOverviewCommand(

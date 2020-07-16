@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateSystemDto } from './../dto/update-system.dto';
 import { SystemDto } from './../dto/system.dto';
 
@@ -10,7 +10,6 @@ import { UpdateSystemCommand } from '@hades/bplus-it-sappi/system/application/up
 import { FindSystemByIdQuery } from '@hades/bplus-it-sappi/system/application/find/find-system-by-id.query';
 
 @ApiTags('[bplus-it-sappi] system')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: SystemDto})
 @Controller('bplus-it-sappi/system')
 export class UpdateSystemController 
 {
@@ -21,6 +20,7 @@ export class UpdateSystemController
 
     @Put()
     @ApiOperation({ summary: 'Update system' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: SystemDto})
     async main(@Body() payload: UpdateSystemDto)
     {
         await this.commandBus.dispatch(new UpdateSystemCommand(

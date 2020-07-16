@@ -19,7 +19,7 @@ export class DeleteChannelsService
         await this.repository.delete(queryStatements);        
 
         // TODO a falta de definir eventos
-        // insert EventBus in object, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         // const channelsRegistered = this.publisher.mergeObjectContext(channels);
         
         // channelsRegistered.deleted(channels); // apply event to model events

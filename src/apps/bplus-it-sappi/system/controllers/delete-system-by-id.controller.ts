@@ -9,7 +9,6 @@ import { FindSystemByIdQuery } from '@hades/bplus-it-sappi/system/application/fi
 import { DeleteSystemByIdCommand } from '@hades/bplus-it-sappi/system/application/delete/delete-system-by-id.command';
 
 @ApiTags('[bplus-it-sappi] system')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: SystemDto})
 @Controller('bplus-it-sappi/system')
 export class DeleteSystemByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteSystemByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete system by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: SystemDto })
     async main(@Param('id') id: string)
     {
         const system = await this.queryBus.ask(new FindSystemByIdQuery(id));

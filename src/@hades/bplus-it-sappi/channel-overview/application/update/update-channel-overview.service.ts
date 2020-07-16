@@ -77,9 +77,9 @@ export class UpdateChannelOverviewService
         // update
         await this.repository.update(channelOverview);        
             
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const channelOverviewRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            channelOverview
         );
         
         channelOverviewRegister.updated(channelOverview); // apply event to model events

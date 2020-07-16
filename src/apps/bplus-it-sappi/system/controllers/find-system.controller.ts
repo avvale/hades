@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { SystemDto } from './../dto/system.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { FindSystemQuery } from '@hades/bplus-it-sappi/system/application/find/find-system.query';
 
 @ApiTags('[bplus-it-sappi] system')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: SystemDto})
 @Controller('bplus-it-sappi/system')
 export class FindSystemController 
 {
@@ -18,6 +17,9 @@ export class FindSystemController
 
     @Get()
     @ApiOperation({ summary: 'Find system according to query' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: SystemDto })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new FindSystemQuery(queryStatements));   

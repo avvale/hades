@@ -9,7 +9,6 @@ import { FindMessageOverviewByIdQuery } from '@hades/bplus-it-sappi/message-over
 import { DeleteMessageOverviewByIdCommand } from '@hades/bplus-it-sappi/message-overview/application/delete/delete-message-overview-by-id.command';
 
 @ApiTags('[bplus-it-sappi] message-overview')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: MessageOverviewDto})
 @Controller('bplus-it-sappi/message-overview')
 export class DeleteMessageOverviewByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteMessageOverviewByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete message-overview by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: MessageOverviewDto })
     async main(@Param('id') id: string)
     {
         const messageOverview = await this.queryBus.ask(new FindMessageOverviewByIdQuery(id));

@@ -11,7 +11,7 @@ export class SystemEnvironment extends StringValueObject
             name: 'SystemEnvironment',
             nullable: false,
             undefinable: false,
-            maxLength: 20,            
+                        
         }, validationRules));
     }
 }

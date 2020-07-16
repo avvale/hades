@@ -68,9 +68,9 @@ export class UpdateJobOverviewService
         // update
         await this.repository.update(jobOverview);        
             
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const jobOverviewRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            jobOverview
         );
         
         jobOverviewRegister.updated(jobOverview); // apply event to model events

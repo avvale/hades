@@ -11,7 +11,7 @@ export class SystemVersion extends StringValueObject
             name: 'SystemVersion',
             nullable: false,
             undefinable: false,
-            maxLength: 20,            
+                        
         }, validationRules));
     }
 }

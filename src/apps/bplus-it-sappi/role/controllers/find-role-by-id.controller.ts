@@ -7,7 +7,6 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindRoleByIdQuery } from '@hades/bplus-it-sappi/role/application/find/find-role-by-id.query';
 
 @ApiTags('[bplus-it-sappi] role')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: RoleDto})
 @Controller('bplus-it-sappi/role')
 export class FindRoleByIdController 
 {
@@ -17,6 +16,7 @@ export class FindRoleByIdController
 
     @Get(':id')
     @ApiOperation({ summary: 'Find role by id' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: RoleDto })
     async main(@Param('id') id: string)
     {
         return await this.queryBus.ask(new FindRoleByIdQuery(id));

@@ -7,7 +7,6 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindExecutionByIdQuery } from '@hades/bplus-it-sappi/execution/application/find/find-execution-by-id.query';
 
 @ApiTags('[bplus-it-sappi] execution')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: ExecutionDto})
 @Controller('bplus-it-sappi/execution')
 export class FindExecutionByIdController 
 {
@@ -17,6 +16,7 @@ export class FindExecutionByIdController
 
     @Get(':id')
     @ApiOperation({ summary: 'Find execution by id' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: ExecutionDto })
     async main(@Param('id') id: string)
     {
         return await this.queryBus.ask(new FindExecutionByIdQuery(id));

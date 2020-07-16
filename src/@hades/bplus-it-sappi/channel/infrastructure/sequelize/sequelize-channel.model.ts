@@ -308,7 +308,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         
              
         
-            @HasMany(() => BplusItSappiModuleModel)
+        
+    @HasMany(() => BplusItSappiModuleModel)
     modules: BplusItSappiModuleModel[];
          
         

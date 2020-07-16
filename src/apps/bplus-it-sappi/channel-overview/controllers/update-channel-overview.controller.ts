@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateChannelOverviewDto } from './../dto/update-channel-overview.dto';
 import { ChannelOverviewDto } from './../dto/channel-overview.dto';
 
@@ -10,7 +10,6 @@ import { UpdateChannelOverviewCommand } from '@hades/bplus-it-sappi/channel-over
 import { FindChannelOverviewByIdQuery } from '@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview-by-id.query';
 
 @ApiTags('[bplus-it-sappi] channel-overview')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: ChannelOverviewDto})
 @Controller('bplus-it-sappi/channel-overview')
 export class UpdateChannelOverviewController 
 {
@@ -21,6 +20,7 @@ export class UpdateChannelOverviewController
 
     @Put()
     @ApiOperation({ summary: 'Update channel-overview' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: ChannelOverviewDto})
     async main(@Body() payload: UpdateChannelOverviewDto)
     {
         await this.commandBus.dispatch(new UpdateChannelOverviewCommand(

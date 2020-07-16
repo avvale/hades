@@ -31,7 +31,7 @@ export class InsertRolesService
     ): Promise<void>
     {
         // create object with factory pattern
-        const entityRoles = roles.map(role => BplusItSappiRole.register(
+        const aggregateRoles = roles.map(role => BplusItSappiRole.register(
             role.id,
             role.tenantId,
             role.name,
@@ -41,12 +41,12 @@ export class InsertRolesService
         ));
         
         // insert
-        await this.repository.insert(entityRoles);
+        await this.repository.insert(aggregateRoles);
 
         // TODO a falta de definir eventos
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         // const rolesRegistered = this.publisher.mergeObjectContext(
-        //     await this.repository.findById(id)
+        //     await this.repository.findById(id) // there may be cases where the database object is direct to the command, for example in the update, only one field can be updated
         // );
         // 
         // rolesRegistered.created(roles); // apply event to model events

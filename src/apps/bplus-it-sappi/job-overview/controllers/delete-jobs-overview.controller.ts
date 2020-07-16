@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { JobOverviewDto } from './../dto/job-overview.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetJobsOverviewQuery } from '@hades/bplus-it-sappi/job-overview/applica
 import { DeleteJobsOverviewCommand } from '@hades/bplus-it-sappi/job-overview/application/delete/delete-jobs-overview.command';
 
 @ApiTags('[bplus-it-sappi] job-overview')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: JobOverviewDto})
 @Controller('bplus-it-sappi/jobs-overview')
 export class DeleteJobsOverviewController 
 {
@@ -21,6 +20,9 @@ export class DeleteJobsOverviewController
 
     @Delete()
     @ApiOperation({ summary: 'Delete jobs-overview in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [JobOverviewDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const jobsOverview = await this.queryBus.ask(new GetJobsOverviewQuery(queryStatements));

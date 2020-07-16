@@ -10,7 +10,6 @@ import { FindFlowByIdQuery } from '@hades/bplus-it-sappi/flow/application/find/f
 import { CreateFlowCommand } from '@hades/bplus-it-sappi/flow/application/create/create-flow.command';
 
 @ApiTags('[bplus-it-sappi] flow')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: FlowDto})
 @Controller('bplus-it-sappi/flow')
 export class CreateFlowController 
 {
@@ -21,6 +20,7 @@ export class CreateFlowController
 
     @Post()
     @ApiOperation({ summary: 'Create flow' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: FlowDto })
     async main(@Body() payload: CreateFlowDto)
     {
         await this.commandBus.dispatch(new CreateFlowCommand(

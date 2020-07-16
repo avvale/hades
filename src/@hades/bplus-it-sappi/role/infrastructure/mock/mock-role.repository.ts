@@ -20,7 +20,7 @@ import { roles } from './../seeds/role.seed';
 export class MockRoleRepository implements IRoleRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'BplusItSappiRole';
+    public readonly aggregateName: string = 'BplusItSappiRole';
     public collectionSource: BplusItSappiRole[];
     
     constructor() 
@@ -79,7 +79,7 @@ export class MockRoleRepository implements IRoleRepository
     
     async create(role: BplusItSappiRole): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === role.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${role.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === role.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${role.id.value} already exist in database`);
 
         // create deletedAt null 
         role.deletedAt = new RoleDeletedAt(null);
@@ -93,29 +93,29 @@ export class MockRoleRepository implements IRoleRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiRole> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<BplusItSappiRole>
     {
-        const entity = this.collectionSource.find(role => role.id.value === id.value);
+        const aggregate = this.collectionSource.find(role => role.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiRole[]> 
@@ -123,20 +123,20 @@ export class MockRoleRepository implements IRoleRepository
         return this.collectionSource;
     }
 
-    async update(entity: BplusItSappiRole): Promise<void> 
+    async update(aggregate: BplusItSappiRole): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(role => {
-            if (role.id.value === entity.id.value) return entity;
+            if (role.id.value === aggregate.id.value) return aggregate;
             return role;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(role => role.id.value !== id.value);

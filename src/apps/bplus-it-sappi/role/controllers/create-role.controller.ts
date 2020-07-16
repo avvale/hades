@@ -10,7 +10,6 @@ import { FindRoleByIdQuery } from '@hades/bplus-it-sappi/role/application/find/f
 import { CreateRoleCommand } from '@hades/bplus-it-sappi/role/application/create/create-role.command';
 
 @ApiTags('[bplus-it-sappi] role')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: RoleDto})
 @Controller('bplus-it-sappi/role')
 export class CreateRoleController 
 {
@@ -21,6 +20,7 @@ export class CreateRoleController
 
     @Post()
     @ApiOperation({ summary: 'Create role' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: RoleDto })
     async main(@Body() payload: CreateRoleDto)
     {
         await this.commandBus.dispatch(new CreateRoleCommand(

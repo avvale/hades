@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { SystemDto } from './../dto/system.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetSystemsQuery } from '@hades/bplus-it-sappi/system/application/get/ge
 import { DeleteSystemsCommand } from '@hades/bplus-it-sappi/system/application/delete/delete-systems.command';
 
 @ApiTags('[bplus-it-sappi] system')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: SystemDto})
 @Controller('bplus-it-sappi/systems')
 export class DeleteSystemsController 
 {
@@ -20,7 +19,10 @@ export class DeleteSystemsController
     ) {}
 
     @Delete()
-    @ApiOperation({ summary: 'Delete system in batch according to query' })
+    @ApiOperation({ summary: 'Delete systems in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [SystemDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const systems = await this.queryBus.ask(new GetSystemsQuery(queryStatements));

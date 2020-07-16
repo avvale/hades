@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ChannelDto } from './../dto/channel.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { GetChannelsQuery } from '@hades/bplus-it-sappi/channel/application/get/get-channels.query';
 
 @ApiTags('[bplus-it-sappi] channel')
-@ApiOkResponse({ description: 'The records has been found successfully.', type: ChannelDto})
 @Controller('bplus-it-sappi/channels')
 export class GetChannelsController 
 {
@@ -18,6 +17,9 @@ export class GetChannelsController
 
     @Get()
     @ApiOperation({ summary: 'Find channels according to query' })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [ChannelDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new GetChannelsQuery(queryStatements));   

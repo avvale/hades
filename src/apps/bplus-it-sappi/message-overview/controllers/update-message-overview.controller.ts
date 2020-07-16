@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateMessageOverviewDto } from './../dto/update-message-overview.dto';
 import { MessageOverviewDto } from './../dto/message-overview.dto';
 
@@ -10,7 +10,6 @@ import { UpdateMessageOverviewCommand } from '@hades/bplus-it-sappi/message-over
 import { FindMessageOverviewByIdQuery } from '@hades/bplus-it-sappi/message-overview/application/find/find-message-overview-by-id.query';
 
 @ApiTags('[bplus-it-sappi] message-overview')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: MessageOverviewDto})
 @Controller('bplus-it-sappi/message-overview')
 export class UpdateMessageOverviewController 
 {
@@ -21,6 +20,7 @@ export class UpdateMessageOverviewController
 
     @Put()
     @ApiOperation({ summary: 'Update message-overview' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: MessageOverviewDto})
     async main(@Body() payload: UpdateMessageOverviewDto)
     {
         await this.commandBus.dispatch(new UpdateMessageOverviewCommand(

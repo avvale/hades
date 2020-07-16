@@ -9,7 +9,6 @@ import { FindExecutionByIdQuery } from '@hades/bplus-it-sappi/execution/applicat
 import { DeleteExecutionByIdCommand } from '@hades/bplus-it-sappi/execution/application/delete/delete-execution-by-id.command';
 
 @ApiTags('[bplus-it-sappi] execution')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: ExecutionDto})
 @Controller('bplus-it-sappi/execution')
 export class DeleteExecutionByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteExecutionByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete execution by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: ExecutionDto })
     async main(@Param('id') id: string)
     {
         const execution = await this.queryBus.ask(new FindExecutionByIdQuery(id));

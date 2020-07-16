@@ -119,9 +119,9 @@ export class UpdateChannelService
         // update
         await this.repository.update(channel);        
             
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const channelRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            channel
         );
         
         channelRegister.updated(channel); // apply event to model events

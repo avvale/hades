@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ModuleDto } from './../dto/module.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetModulesQuery } from '@hades/bplus-it-sappi/module/application/get/ge
 import { DeleteModulesCommand } from '@hades/bplus-it-sappi/module/application/delete/delete-modules.command';
 
 @ApiTags('[bplus-it-sappi] module')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: ModuleDto})
 @Controller('bplus-it-sappi/modules')
 export class DeleteModulesController 
 {
@@ -21,6 +20,9 @@ export class DeleteModulesController
 
     @Delete()
     @ApiOperation({ summary: 'Delete modules in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [ModuleDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const modules = await this.queryBus.ask(new GetModulesQuery(queryStatements));

@@ -55,7 +55,7 @@ export class InsertChannelsOverviewService
     ): Promise<void>
     {
         // create object with factory pattern
-        const entityChannelsOverview = channelsOverview.map(channelOverview => BplusItSappiChannelOverview.register(
+        const aggregateChannelsOverview = channelsOverview.map(channelOverview => BplusItSappiChannelOverview.register(
             channelOverview.id,
             channelOverview.tenantId,
             channelOverview.systemId,
@@ -77,12 +77,12 @@ export class InsertChannelsOverviewService
         ));
         
         // insert
-        await this.repository.insert(entityChannelsOverview);
+        await this.repository.insert(aggregateChannelsOverview);
 
         // TODO a falta de definir eventos
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         // const channelsOverviewRegistered = this.publisher.mergeObjectContext(
-        //     await this.repository.findById(id)
+        //     await this.repository.findById(id) // there may be cases where the database object is direct to the command, for example in the update, only one field can be updated
         // );
         // 
         // channelsOverviewRegistered.created(channelsOverview); // apply event to model events

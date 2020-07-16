@@ -122,9 +122,9 @@ export class InsertChannelsService
         await this.repository.insert(aggregateChannels);
 
         // TODO a falta de definir eventos
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         // const channelsRegistered = this.publisher.mergeObjectContext(
-        //     await this.repository.findById(id)
+        //     await this.repository.findById(id) // there may be cases where the database object is direct to the command, for example in the update, only one field can be updated
         // );
         // 
         // channelsRegistered.created(channels); // apply event to model events

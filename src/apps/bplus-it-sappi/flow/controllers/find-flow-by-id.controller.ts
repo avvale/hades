@@ -7,7 +7,6 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindFlowByIdQuery } from '@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.query';
 
 @ApiTags('[bplus-it-sappi] flow')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: FlowDto})
 @Controller('bplus-it-sappi/flow')
 export class FindFlowByIdController 
 {
@@ -17,6 +16,7 @@ export class FindFlowByIdController
 
     @Get(':id')
     @ApiOperation({ summary: 'Find flow by id' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: FlowDto })
     async main(@Param('id') id: string)
     {
         return await this.queryBus.ask(new FindFlowByIdQuery(id));

@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { MessageOverviewDto } from './../dto/message-overview.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { FindMessageOverviewQuery } from '@hades/bplus-it-sappi/message-overview/application/find/find-message-overview.query';
 
 @ApiTags('[bplus-it-sappi] message-overview')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: MessageOverviewDto})
 @Controller('bplus-it-sappi/message-overview')
 export class FindMessageOverviewController 
 {
@@ -18,6 +17,9 @@ export class FindMessageOverviewController
 
     @Get()
     @ApiOperation({ summary: 'Find message-overview according to query' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: MessageOverviewDto })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new FindMessageOverviewQuery(queryStatements));   

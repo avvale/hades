@@ -1,7 +1,7 @@
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/validation-rules';
 
-export class SystemTenantId extends UuidValueObject 
+export class SystemTenantId extends UuidValueObject
 {
     public readonly type: 'SystemTenantId';
 

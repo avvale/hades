@@ -36,7 +36,7 @@ export class BplusItSappiRole extends AggregateRoot
         
     }
 
-    static register (id: RoleId,tenantId: RoleTenantId,name: RoleName,createdAt: RoleCreatedAt,updatedAt: RoleUpdatedAt,deletedAt: RoleDeletedAt,): BplusItSappiRole
+    static register (id: RoleId, tenantId: RoleTenantId, name: RoleName, createdAt: RoleCreatedAt, updatedAt: RoleUpdatedAt, deletedAt: RoleDeletedAt, ): BplusItSappiRole
     {
         return new BplusItSappiRole(id, tenantId, name, createdAt, updatedAt, deletedAt, );
     }

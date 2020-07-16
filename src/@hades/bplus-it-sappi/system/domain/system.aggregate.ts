@@ -51,7 +51,7 @@ export class BplusItSappiSystem extends AggregateRoot
         
     }
 
-    static register (id: SystemId,tenantId: SystemTenantId,name: SystemName,tenantCode: SystemTenantCode,environment: SystemEnvironment,version: SystemVersion,isActive: SystemIsActive,cancelledAt: SystemCancelledAt,createdAt: SystemCreatedAt,updatedAt: SystemUpdatedAt,deletedAt: SystemDeletedAt,): BplusItSappiSystem
+    static register (id: SystemId, tenantId: SystemTenantId, name: SystemName, tenantCode: SystemTenantCode, environment: SystemEnvironment, version: SystemVersion, isActive: SystemIsActive, cancelledAt: SystemCancelledAt, createdAt: SystemCreatedAt, updatedAt: SystemUpdatedAt, deletedAt: SystemDeletedAt, ): BplusItSappiSystem
     {
         return new BplusItSappiSystem(id, tenantId, name, tenantCode, environment, version, isActive, cancelledAt, createdAt, updatedAt, deletedAt, );
     }

@@ -10,7 +10,6 @@ import { FindContactByIdQuery } from '@hades/bplus-it-sappi/contact/application/
 import { CreateContactCommand } from '@hades/bplus-it-sappi/contact/application/create/create-contact.command';
 
 @ApiTags('[bplus-it-sappi] contact')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: ContactDto})
 @Controller('bplus-it-sappi/contact')
 export class CreateContactController 
 {
@@ -21,6 +20,7 @@ export class CreateContactController
 
     @Post()
     @ApiOperation({ summary: 'Create contact' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: ContactDto })
     async main(@Body() payload: CreateContactDto)
     {
         await this.commandBus.dispatch(new CreateContactCommand(

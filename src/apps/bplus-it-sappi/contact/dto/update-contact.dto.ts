@@ -5,91 +5,91 @@ export class UpdateContactDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'f0150f22-5d78-44ef-9051-af1f0e215b0a'
+        example     : '6e521ac7-7f34-453c-b979-6cca399cf44b'
     })
     id: string;
     
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'd2966e7d-0ae0-4ade-87b0-55b8c2d396f5'
+        example     : 'eaf0c187-6227-49dc-a3d2-eb19832a0bfb'
     })
     tenantId: string;
     
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '121df1c1-08f1-42c0-bae4-4221ac7625aa'
+        example     : '656171ec-fd59-46ef-b5fd-d64472f2ca81'
     })
     systemId: string;
     
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'olltkrlvuijph9l2f6ru'
+        example     : 'ijrxqex7rtw5kylyq6ny'
     })
     systemName: string;
     
     @ApiProperty({
         type        : String,
         description : 'roleId [input here api field description]',
-        example     : '0db2de56-02b0-4e93-9015-bebd4285b8ea'
+        example     : '607751ae-2828-48ca-818a-d079459234a9'
     })
     roleId: string;
     
     @ApiProperty({
         type        : String,
         description : 'roleName [input here api field description]',
-        example     : 'pms0btd9jq5rb8vytjt3qnq2tfuyac6f2zrdzcyinh52nkzmbhewhbm4dw2u7kmrviywfarxmwx58cdq4ce8tum0escsm4k5gbh0z1ph1kgdooen8x7iu9s8n5zcvmflvmns0k4z8je5wq0q3wjnrl5mwy5dc4oa8s4a2mgrdue65l2s4lldetzpg5lnksz7p3n0tltoovvhxsw5u4h1oh8k38wx84k65p36f476mvj5zsraofe1kpiqkgzxhvc'
+        example     : 'xi2mo4q2drf1ceusiv5ccqw4wk17s7czaqftaaai3tadainhtc809kf3shujnbwxa1ynd4pe4g124fq5u034t8ezsam0e5ie374zmt7gfuy72ybzb4ougkc2l8jsmw09zoz3t1402euxuedaqqcv1sjygql1cf0af7ea5hotuf6tfyarlm1s9frfps0cdavwgi1ks7nhl4r56uaf246k99fxk8ynn1p60dsq2if79f33wyux5mirlo91ew9b51i'
     })
     roleName: string;
     
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'tlhlqqt5tdn1hjgqbgb24fwe3fct6c8n1l6dl019l8h4lyq7mwsrk39flof6eawbek2f5omj4g0m1clzwoqkufse8a8mb3ao899rm2adqxbkxhzda04x2v01iarq5a4chg2ydjzpz09418pavaz9jtdk2x8z846f97ubozd64vc82jzj9s0r7urx4gghkine601bxgsuitl50hnkmdjlbprz4slsh50a9bp447d3ir0izzo8x7cq14oqfc11j5t'
+        example     : '8vphwk0rofz2c4vyvgvrp6omkoo0wcxh3tbbbzr3knqnihjze0ksh1m4nat2m1d5zxlpqvt42dr0gpiug8uy8m4da9msyqk28yw3tv129st2k6ddsvnm6yc2j193kjb6sk790uvhwxnij3geqn6tebg08hycitkkbon5o2rcus2tqypcipjwtrp5qkhzz524t9lxy8xup8qzclj7u7qoljbd2l2belg1yzluqwmg8hn8298qbm5xrjwqa0kay3c'
     })
     name: string;
     
     @ApiProperty({
         type        : String,
         description : 'surname [input here api field description]',
-        example     : '8dyiddfabm5igrm0vnexul27o1g5ankgl9kw8gm0lqsl6pd8xknc1ksq5wrv5iiik9xqr7dfii34h4t06pthj62odl6kmeao8qmioc883f3juboc1pzq7wdvlq0fcqlmwq9z3hcdf5sduwdt4stv0nwy313tjji9s2l3nm3mtkh2bl7awxv4j8l3kgtzfjo9dch89qj8nlmt36ahrgoydt3nopx3jlqm7ejb1bgj6ewh9fzikktis0cls2x70gj'
+        example     : '0ozqb75worwiexlrrq3ei2cr0jdgmc1mnrhn9f4dj0aknd9bqlk2bhlzs09jsu7fkb8bb8mfyg8wgxp73zs9cfb4butukpammfb5o1ciyjpnddvvs9lzvnqheymvuc8kxbkdzbd5khae82q9iqhi7b6yjvq9ptlomt8nq9tvjp1og0f31qdqh8xajsr39vlgeda76eywe4zucttysviykx8y5wqvk79y024ced1h2lmtz0krn7hpdbwv72pl42m'
     })
     surname: string;
     
     @ApiProperty({
         type        : String,
         description : 'email [input here api field description]',
-        example     : '21563yvoklvx2234jn2pw0a5lmn70ev5e0vz6q8ny1ovr4d5p80y41i9m6f628utyol7soqq2cky9we6e681ac9az9cjm4bhmn028tgzy2x4ctu9bwzq9bem'
+        example     : 'omr07z4nlsja8dn4ktvygjnr84snqoixek2b7nzdgwory9i7el1b86yz39qgpehi6aa14kywtlradlw4raenzn5m7mdd5e61732himjlkq3mfeg3vj5zz4yg'
     })
     email: string;
     
     @ApiProperty({
         type        : String,
         description : 'mobile [input here api field description]',
-        example     : 'i3kq6nayy4xhoy73kfxinxsgx46u0zphbyez7gjdfe9ka8z0foyy2p5yc6rs'
+        example     : 'ueje7vf5dw510cyqe1cs4mplzcyr79ginvhy76p85k8v4707fulgt5kzebhc'
     })
     mobile: string;
     
     @ApiProperty({
         type        : String,
         description : 'area [input here api field description]',
-        example     : '9fo43ms7ypk4n46juf9nyzni52gdjkko8dftktcpsnrkltt298f7xmnzvr3ow5jc4l2wzmr8oxn7kjof26t1pxci1e52055nseod19zfx0bvx7510acpjr8t7vt67vv1qy7i2sv4jn0ge0xsce3c5njjq20uwnx8zebodno3heji49ht87rnizc2jsaafcizdxau7ceia43nqc1cupfwbiuv0jht4otlr6x0ehdgtz6zv4x7w794syqbmgsgfn0'
+        example     : 'a0n0nys4qegld3yecpp0jgzzu5haqri3l72ap8zslikqbusv0v8qftkeja9oi0u9g7mrrrqpqd4zd12kl1frnrw8g564m6gdol1st4lqf17up671fp0qq2lnikljsmo039lh8zk3f7b76gr5njup0x70hjnf0f2vretlrzgvb7l5pz8svc8buvra80ta0jqqwmdfwz5s6ahhd6w8sac57yefa7l95ha0oc9l9k5ybof7gwt7bwbq6rhkzk3djgp'
     })
     area: string;
     
     @ApiProperty({
         type        : Boolean,
         description : 'hasConsentEmail [input here api field description]',
-        example     : false
+        example     : true
     })
     hasConsentEmail: boolean;
     
     @ApiProperty({
         type        : Boolean,
         description : 'hasConsentMobile [input here api field description]',
-        example     : true
+        example     : false
     })
     hasConsentMobile: boolean;
     

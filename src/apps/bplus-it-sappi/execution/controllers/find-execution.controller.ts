@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ExecutionDto } from './../dto/execution.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { FindExecutionQuery } from '@hades/bplus-it-sappi/execution/application/find/find-execution.query';
 
 @ApiTags('[bplus-it-sappi] execution')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: ExecutionDto})
 @Controller('bplus-it-sappi/execution')
 export class FindExecutionController 
 {
@@ -18,6 +17,9 @@ export class FindExecutionController
 
     @Get()
     @ApiOperation({ summary: 'Find execution according to query' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: ExecutionDto })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new FindExecutionQuery(queryStatements));   

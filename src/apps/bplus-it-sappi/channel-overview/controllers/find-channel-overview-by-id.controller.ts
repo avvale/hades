@@ -7,7 +7,6 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindChannelOverviewByIdQuery } from '@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview-by-id.query';
 
 @ApiTags('[bplus-it-sappi] channel-overview')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: ChannelOverviewDto})
 @Controller('bplus-it-sappi/channel-overview')
 export class FindChannelOverviewByIdController 
 {
@@ -17,6 +16,7 @@ export class FindChannelOverviewByIdController
 
     @Get(':id')
     @ApiOperation({ summary: 'Find channel-overview by id' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: ChannelOverviewDto })
     async main(@Param('id') id: string)
     {
         return await this.queryBus.ask(new FindChannelOverviewByIdQuery(id));

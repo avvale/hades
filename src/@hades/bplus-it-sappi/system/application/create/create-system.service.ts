@@ -56,9 +56,9 @@ export class CreateSystemService
         // create
         await this.repository.create(system);
 
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const systemRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            system
         );
         
         systemRegister.created(system); // apply event to model events

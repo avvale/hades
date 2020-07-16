@@ -5,42 +5,42 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'f10700e8-add5-4be5-ad9f-3ab1fce72996'
+        example     : '585253e3-dd6a-496d-a067-168ee65c3167'
     })
     id: string;
     
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'f1394b0d-77fb-4613-a343-1b6dd20aea71'
+        example     : 'd24ee6a8-6252-4bf7-aae0-c54258e58abf'
     })
     tenantId: string;
     
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '22zvb79yrmu34wb9jt6a'
+        example     : 'j'
     })
     name: string;
     
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'nugke39wid4o5elwqkir'
+        example     : 'x'
     })
     tenantCode: string;
     
     @ApiProperty({
         type        : String,
         description : 'environment [input here api field description]',
-        example     : 'guv0cfpgm40fg3ayf0a4'
+        example     : 'g'
     })
     environment: string;
     
     @ApiProperty({
         type        : String,
         description : 'version [input here api field description]',
-        example     : '891289byzjykv70t4yfw'
+        example     : 'v'
     })
     version: string;
     
@@ -54,7 +54,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'cancelledAt [input here api field description]',
-        example     : '2020-06-26 12:23:02'
+        example     : '2020-07-15 22:14:01'
     })
     cancelledAt: string;
     

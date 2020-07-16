@@ -9,7 +9,6 @@ import { FindRoleByIdQuery } from '@hades/bplus-it-sappi/role/application/find/f
 import { DeleteRoleByIdCommand } from '@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.command';
 
 @ApiTags('[bplus-it-sappi] role')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: RoleDto})
 @Controller('bplus-it-sappi/role')
 export class DeleteRoleByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteRoleByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete role by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: RoleDto })
     async main(@Param('id') id: string)
     {
         const role = await this.queryBus.ask(new FindRoleByIdQuery(id));

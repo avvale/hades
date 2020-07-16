@@ -24,7 +24,7 @@ import { executions } from './../seeds/execution.seed';
 export class MockExecutionRepository implements IExecutionRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'BplusItSappiExecution';
+    public readonly aggregateName: string = 'BplusItSappiExecution';
     public collectionSource: BplusItSappiExecution[];
     
     constructor() 
@@ -87,7 +87,7 @@ export class MockExecutionRepository implements IExecutionRepository
     
     async create(execution: BplusItSappiExecution): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === execution.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${execution.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === execution.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${execution.id.value} already exist in database`);
 
         // create deletedAt null 
         execution.deletedAt = new ExecutionDeletedAt(null);
@@ -101,29 +101,29 @@ export class MockExecutionRepository implements IExecutionRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiExecution> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<BplusItSappiExecution>
     {
-        const entity = this.collectionSource.find(execution => execution.id.value === id.value);
+        const aggregate = this.collectionSource.find(execution => execution.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiExecution[]> 
@@ -131,20 +131,20 @@ export class MockExecutionRepository implements IExecutionRepository
         return this.collectionSource;
     }
 
-    async update(entity: BplusItSappiExecution): Promise<void> 
+    async update(aggregate: BplusItSappiExecution): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(execution => {
-            if (execution.id.value === entity.id.value) return entity;
+            if (execution.id.value === aggregate.id.value) return aggregate;
             return execution;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(execution => execution.id.value !== id.value);

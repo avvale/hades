@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateFlowDto } from './../dto/update-flow.dto';
 import { FlowDto } from './../dto/flow.dto';
 
@@ -10,7 +10,6 @@ import { UpdateFlowCommand } from '@hades/bplus-it-sappi/flow/application/update
 import { FindFlowByIdQuery } from '@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.query';
 
 @ApiTags('[bplus-it-sappi] flow')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: FlowDto})
 @Controller('bplus-it-sappi/flow')
 export class UpdateFlowController 
 {
@@ -21,6 +20,7 @@ export class UpdateFlowController
 
     @Put()
     @ApiOperation({ summary: 'Update flow' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: FlowDto})
     async main(@Body() payload: UpdateFlowDto)
     {
         await this.commandBus.dispatch(new UpdateFlowCommand(

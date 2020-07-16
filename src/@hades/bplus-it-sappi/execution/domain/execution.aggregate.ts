@@ -50,7 +50,7 @@ export class BplusItSappiExecution extends AggregateRoot
         
     }
 
-    static register (id: ExecutionId,tenantId: ExecutionTenantId,systemId: ExecutionSystemId,type: ExecutionType,monitoringStartAt: ExecutionMonitoringStartAt,monitoringEndAt: ExecutionMonitoringEndAt,executedAt: ExecutionExecutedAt,createdAt: ExecutionCreatedAt,updatedAt: ExecutionUpdatedAt,deletedAt: ExecutionDeletedAt,): BplusItSappiExecution
+    static register (id: ExecutionId, tenantId: ExecutionTenantId, systemId: ExecutionSystemId, type: ExecutionType, monitoringStartAt: ExecutionMonitoringStartAt, monitoringEndAt: ExecutionMonitoringEndAt, executedAt: ExecutionExecutedAt, createdAt: ExecutionCreatedAt, updatedAt: ExecutionUpdatedAt, deletedAt: ExecutionDeletedAt, ): BplusItSappiExecution
     {
         return new BplusItSappiExecution(id, tenantId, systemId, type, monitoringStartAt, monitoringEndAt, executedAt, createdAt, updatedAt, deletedAt, );
     }

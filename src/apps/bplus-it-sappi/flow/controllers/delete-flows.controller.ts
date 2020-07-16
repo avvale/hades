@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { FlowDto } from './../dto/flow.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetFlowsQuery } from '@hades/bplus-it-sappi/flow/application/get/get-fl
 import { DeleteFlowsCommand } from '@hades/bplus-it-sappi/flow/application/delete/delete-flows.command';
 
 @ApiTags('[bplus-it-sappi] flow')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: FlowDto})
 @Controller('bplus-it-sappi/flows')
 export class DeleteFlowsController 
 {
@@ -21,6 +20,9 @@ export class DeleteFlowsController
 
     @Delete()
     @ApiOperation({ summary: 'Delete flows in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [FlowDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const flows = await this.queryBus.ask(new GetFlowsQuery(queryStatements));

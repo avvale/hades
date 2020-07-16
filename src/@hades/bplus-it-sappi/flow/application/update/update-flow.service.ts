@@ -92,9 +92,9 @@ export class UpdateFlowService
         // update
         await this.repository.update(flow);        
             
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const flowRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            flow
         );
         
         flowRegister.updated(flow); // apply event to model events

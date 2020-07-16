@@ -7,7 +7,6 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindChannelByIdQuery } from '@hades/bplus-it-sappi/channel/application/find/find-channel-by-id.query';
 
 @ApiTags('[bplus-it-sappi] channel')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: ChannelDto})
 @Controller('bplus-it-sappi/channel')
 export class FindChannelByIdController 
 {
@@ -17,6 +16,7 @@ export class FindChannelByIdController
 
     @Get(':id')
     @ApiOperation({ summary: 'Find channel by id' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: ChannelDto })
     async main(@Param('id') id: string)
     {
         return await this.queryBus.ask(new FindChannelByIdQuery(id));

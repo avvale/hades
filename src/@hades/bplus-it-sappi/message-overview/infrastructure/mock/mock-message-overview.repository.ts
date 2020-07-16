@@ -35,7 +35,7 @@ import { messagesOverview } from './../seeds/message-overview.seed';
 export class MockMessageOverviewRepository implements IMessageOverviewRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'BplusItSappiMessageOverview';
+    public readonly aggregateName: string = 'BplusItSappiMessageOverview';
     public collectionSource: BplusItSappiMessageOverview[];
     
     constructor() 
@@ -109,7 +109,7 @@ export class MockMessageOverviewRepository implements IMessageOverviewRepository
     
     async create(messageOverview: BplusItSappiMessageOverview): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === messageOverview.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${messageOverview.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === messageOverview.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${messageOverview.id.value} already exist in database`);
 
         // create deletedAt null 
         messageOverview.deletedAt = new MessageOverviewDeletedAt(null);
@@ -123,29 +123,29 @@ export class MockMessageOverviewRepository implements IMessageOverviewRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiMessageOverview> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<BplusItSappiMessageOverview>
     {
-        const entity = this.collectionSource.find(messageOverview => messageOverview.id.value === id.value);
+        const aggregate = this.collectionSource.find(messageOverview => messageOverview.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiMessageOverview[]> 
@@ -153,20 +153,20 @@ export class MockMessageOverviewRepository implements IMessageOverviewRepository
         return this.collectionSource;
     }
 
-    async update(entity: BplusItSappiMessageOverview): Promise<void> 
+    async update(aggregate: BplusItSappiMessageOverview): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(messageOverview => {
-            if (messageOverview.id.value === entity.id.value) return entity;
+            if (messageOverview.id.value === aggregate.id.value) return aggregate;
             return messageOverview;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(messageOverview => messageOverview.id.value !== id.value);

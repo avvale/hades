@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ModuleDto } from './../dto/module.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { GetModulesQuery } from '@hades/bplus-it-sappi/module/application/get/get-modules.query';
 
 @ApiTags('[bplus-it-sappi] module')
-@ApiOkResponse({ description: 'The records has been found successfully.', type: ModuleDto})
 @Controller('bplus-it-sappi/modules')
 export class GetModulesController 
 {
@@ -18,6 +17,9 @@ export class GetModulesController
 
     @Get()
     @ApiOperation({ summary: 'Find modules according to query' })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [ModuleDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new GetModulesQuery(queryStatements));   

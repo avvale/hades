@@ -10,7 +10,6 @@ import { FindModuleByIdQuery } from '@hades/bplus-it-sappi/module/application/fi
 import { CreateModuleCommand } from '@hades/bplus-it-sappi/module/application/create/create-module.command';
 
 @ApiTags('[bplus-it-sappi] module')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: ModuleDto})
 @Controller('bplus-it-sappi/module')
 export class CreateModuleController 
 {
@@ -21,6 +20,7 @@ export class CreateModuleController
 
     @Post()
     @ApiOperation({ summary: 'Create module' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: ModuleDto })
     async main(@Body() payload: CreateModuleDto)
     {
         await this.commandBus.dispatch(new CreateModuleCommand(

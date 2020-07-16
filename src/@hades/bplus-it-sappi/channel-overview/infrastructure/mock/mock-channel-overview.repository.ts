@@ -32,7 +32,7 @@ import { channelsOverview } from './../seeds/channel-overview.seed';
 export class MockChannelOverviewRepository implements IChannelOverviewRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'BplusItSappiChannelOverview';
+    public readonly aggregateName: string = 'BplusItSappiChannelOverview';
     public collectionSource: BplusItSappiChannelOverview[];
     
     constructor() 
@@ -103,7 +103,7 @@ export class MockChannelOverviewRepository implements IChannelOverviewRepository
     
     async create(channelOverview: BplusItSappiChannelOverview): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === channelOverview.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${channelOverview.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === channelOverview.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${channelOverview.id.value} already exist in database`);
 
         // create deletedAt null 
         channelOverview.deletedAt = new ChannelOverviewDeletedAt(null);
@@ -117,29 +117,29 @@ export class MockChannelOverviewRepository implements IChannelOverviewRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiChannelOverview> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<BplusItSappiChannelOverview>
     {
-        const entity = this.collectionSource.find(channelOverview => channelOverview.id.value === id.value);
+        const aggregate = this.collectionSource.find(channelOverview => channelOverview.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiChannelOverview[]> 
@@ -147,20 +147,20 @@ export class MockChannelOverviewRepository implements IChannelOverviewRepository
         return this.collectionSource;
     }
 
-    async update(entity: BplusItSappiChannelOverview): Promise<void> 
+    async update(aggregate: BplusItSappiChannelOverview): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(channelOverview => {
-            if (channelOverview.id.value === entity.id.value) return entity;
+            if (channelOverview.id.value === aggregate.id.value) return aggregate;
             return channelOverview;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(channelOverview => channelOverview.id.value !== id.value);

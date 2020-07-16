@@ -10,7 +10,6 @@ import { FindExecutionByIdQuery } from '@hades/bplus-it-sappi/execution/applicat
 import { CreateExecutionCommand } from '@hades/bplus-it-sappi/execution/application/create/create-execution.command';
 
 @ApiTags('[bplus-it-sappi] execution')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: ExecutionDto})
 @Controller('bplus-it-sappi/execution')
 export class CreateExecutionController 
 {
@@ -21,6 +20,7 @@ export class CreateExecutionController
 
     @Post()
     @ApiOperation({ summary: 'Create execution' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: ExecutionDto })
     async main(@Body() payload: CreateExecutionDto)
     {
         await this.commandBus.dispatch(new CreateExecutionCommand(

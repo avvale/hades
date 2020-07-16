@@ -53,9 +53,9 @@ export class CreateExecutionService
         // create
         await this.repository.create(execution);
 
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const executionRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            execution
         );
         
         executionRegister.created(execution); // apply event to model events

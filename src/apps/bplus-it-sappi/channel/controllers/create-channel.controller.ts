@@ -10,7 +10,6 @@ import { FindChannelByIdQuery } from '@hades/bplus-it-sappi/channel/application/
 import { CreateChannelCommand } from '@hades/bplus-it-sappi/channel/application/create/create-channel.command';
 
 @ApiTags('[bplus-it-sappi] channel')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: ChannelDto})
 @Controller('bplus-it-sappi/channel')
 export class CreateChannelController 
 {
@@ -21,6 +20,7 @@ export class CreateChannelController
 
     @Post()
     @ApiOperation({ summary: 'Create channel' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: ChannelDto })
     async main(@Body() payload: CreateChannelDto)
     {
         await this.commandBus.dispatch(new CreateChannelCommand(

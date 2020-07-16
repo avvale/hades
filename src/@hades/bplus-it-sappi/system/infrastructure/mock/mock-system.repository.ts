@@ -25,7 +25,7 @@ import { systems } from './../seeds/system.seed';
 export class MockSystemRepository implements ISystemRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'BplusItSappiSystem';
+    public readonly aggregateName: string = 'BplusItSappiSystem';
     public collectionSource: BplusItSappiSystem[];
     
     constructor() 
@@ -89,7 +89,7 @@ export class MockSystemRepository implements ISystemRepository
     
     async create(system: BplusItSappiSystem): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === system.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${system.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === system.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${system.id.value} already exist in database`);
 
         // create deletedAt null 
         system.deletedAt = new SystemDeletedAt(null);
@@ -103,29 +103,29 @@ export class MockSystemRepository implements ISystemRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiSystem> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<BplusItSappiSystem>
     {
-        const entity = this.collectionSource.find(system => system.id.value === id.value);
+        const aggregate = this.collectionSource.find(system => system.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiSystem[]> 
@@ -133,20 +133,20 @@ export class MockSystemRepository implements ISystemRepository
         return this.collectionSource;
     }
 
-    async update(entity: BplusItSappiSystem): Promise<void> 
+    async update(aggregate: BplusItSappiSystem): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(system => {
-            if (system.id.value === entity.id.value) return entity;
+            if (system.id.value === aggregate.id.value) return aggregate;
             return system;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(system => system.id.value !== id.value);

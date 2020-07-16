@@ -11,7 +11,7 @@ export class SystemName extends StringValueObject
             name: 'SystemName',
             nullable: false,
             undefinable: false,
-            maxLength: 20,            
+                        
         }, validationRules));
     }
 }

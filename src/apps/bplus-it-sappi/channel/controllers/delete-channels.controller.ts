@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ChannelDto } from './../dto/channel.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetChannelsQuery } from '@hades/bplus-it-sappi/channel/application/get/
 import { DeleteChannelsCommand } from '@hades/bplus-it-sappi/channel/application/delete/delete-channels.command';
 
 @ApiTags('[bplus-it-sappi] channel')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: ChannelDto})
 @Controller('bplus-it-sappi/channels')
 export class DeleteChannelsController 
 {
@@ -21,6 +20,9 @@ export class DeleteChannelsController
 
     @Delete()
     @ApiOperation({ summary: 'Delete channels in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [ChannelDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const channels = await this.queryBus.ask(new GetChannelsQuery(queryStatements));

@@ -4,7 +4,8 @@ import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/s
 
 @Table({ modelName: 'bplus_it_sappi_system', freezeTableName: true })
 export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel> 
-{      
+{ 
+        
     @Column({
         field: 'id',
         primaryKey: true,
@@ -14,7 +15,9 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     id: string;
         
              
+        
     @ForeignKey(() => AdminTenantModel)
+    
     @Column({
         field: 'tenant_id',
         primaryKey: false,
@@ -23,6 +26,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     })
     tenantId: string;
         
+    
     @BelongsTo(() => AdminTenantModel)
     tenant: AdminTenantModel;
              
@@ -31,7 +35,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
         field: 'name',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(undefined),
     })
     name: string;
         
@@ -41,7 +45,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
         field: 'tenant_code',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(undefined),
     })
     tenantCode: string;
         
@@ -51,7 +55,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
         field: 'environment',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(undefined),
     })
     environment: string;
         
@@ -61,7 +65,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
         field: 'version',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(undefined),
     })
     version: string;
         

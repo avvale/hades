@@ -10,7 +10,6 @@ import { FindMessageOverviewByIdQuery } from '@hades/bplus-it-sappi/message-over
 import { CreateMessageOverviewCommand } from '@hades/bplus-it-sappi/message-overview/application/create/create-message-overview.command';
 
 @ApiTags('[bplus-it-sappi] message-overview')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: MessageOverviewDto})
 @Controller('bplus-it-sappi/message-overview')
 export class CreateMessageOverviewController 
 {
@@ -21,6 +20,7 @@ export class CreateMessageOverviewController
 
     @Post()
     @ApiOperation({ summary: 'Create message-overview' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: MessageOverviewDto })
     async main(@Body() payload: CreateMessageOverviewDto)
     {
         await this.commandBus.dispatch(new CreateMessageOverviewCommand(

@@ -9,7 +9,6 @@ import { FindFlowByIdQuery } from '@hades/bplus-it-sappi/flow/application/find/f
 import { DeleteFlowByIdCommand } from '@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.command';
 
 @ApiTags('[bplus-it-sappi] flow')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: FlowDto})
 @Controller('bplus-it-sappi/flow')
 export class DeleteFlowByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteFlowByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete flow by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: FlowDto })
     async main(@Param('id') id: string)
     {
         const flow = await this.queryBus.ask(new FindFlowByIdQuery(id));

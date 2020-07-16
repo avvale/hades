@@ -29,7 +29,7 @@ import { jobsOverview } from './../seeds/job-overview.seed';
 export class MockJobOverviewRepository implements IJobOverviewRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'BplusItSappiJobOverview';
+    public readonly aggregateName: string = 'BplusItSappiJobOverview';
     public collectionSource: BplusItSappiJobOverview[];
     
     constructor() 
@@ -97,7 +97,7 @@ export class MockJobOverviewRepository implements IJobOverviewRepository
     
     async create(jobOverview: BplusItSappiJobOverview): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === jobOverview.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${jobOverview.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === jobOverview.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${jobOverview.id.value} already exist in database`);
 
         // create deletedAt null 
         jobOverview.deletedAt = new JobOverviewDeletedAt(null);
@@ -111,29 +111,29 @@ export class MockJobOverviewRepository implements IJobOverviewRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiJobOverview> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<BplusItSappiJobOverview>
     {
-        const entity = this.collectionSource.find(jobOverview => jobOverview.id.value === id.value);
+        const aggregate = this.collectionSource.find(jobOverview => jobOverview.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiJobOverview[]> 
@@ -141,20 +141,20 @@ export class MockJobOverviewRepository implements IJobOverviewRepository
         return this.collectionSource;
     }
 
-    async update(entity: BplusItSappiJobOverview): Promise<void> 
+    async update(aggregate: BplusItSappiJobOverview): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(jobOverview => {
-            if (jobOverview.id.value === entity.id.value) return entity;
+            if (jobOverview.id.value === aggregate.id.value) return aggregate;
             return jobOverview;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(jobOverview => jobOverview.id.value !== id.value);
