@@ -1,17 +1,21 @@
 import { BplusItSappiDataLakeHandlers, BplusItSappiDataLakeServices, BplusItSappiDataLakeModel, IDataLakeRepository, SequelizeDataLakeRepository, DataLakeSagas } from './data-lake';
 import { BplusItSappiSystemHandlers, BplusItSappiSystemServices, BplusItSappiSystemModel, ISystemRepository, SequelizeSystemRepository, SystemSagas } from './system';
+import { BplusItSappiExecutionHandlers, BplusItSappiExecutionServices, BplusItSappiExecutionModel, IExecutionRepository, SequelizeExecutionRepository, ExecutionSagas } from './execution';
 
 export const BplusItSappiHandlers = [
     ...BplusItSappiDataLakeHandlers,
-    ...BplusItSappiSystemHandlers
+    ...BplusItSappiSystemHandlers,
+    ...BplusItSappiExecutionHandlers
 ];
 export const BplusItSappiServices = [
     ...BplusItSappiDataLakeServices,
-    ...BplusItSappiSystemServices
+    ...BplusItSappiSystemServices,
+    ...BplusItSappiExecutionServices
 ];
 export const BplusItSappiModels = [
     BplusItSappiDataLakeModel,
-    BplusItSappiSystemModel
+    BplusItSappiSystemModel,
+    BplusItSappiExecutionModel
 ];
 export const BplusItSappiRepositories = [
     {
@@ -21,9 +25,14 @@ export const BplusItSappiRepositories = [
     {
         provide: ISystemRepository,
         useClass: SequelizeSystemRepository
+    },
+    {
+        provide: IExecutionRepository,
+        useClass: SequelizeExecutionRepository
     }
 ];
 export const BplusItSappiSagas = [
     DataLakeSagas,
-    SystemSagas
+    SystemSagas,
+    ExecutionSagas
 ];
