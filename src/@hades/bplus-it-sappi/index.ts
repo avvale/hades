@@ -2,24 +2,28 @@ import { BplusItSappiDataLakeHandlers, BplusItSappiDataLakeServices, BplusItSapp
 import { BplusItSappiSystemHandlers, BplusItSappiSystemServices, BplusItSappiSystemModel, ISystemRepository, SequelizeSystemRepository, SystemSagas } from './system';
 import { BplusItSappiExecutionHandlers, BplusItSappiExecutionServices, BplusItSappiExecutionModel, IExecutionRepository, SequelizeExecutionRepository, ExecutionSagas } from './execution';
 import { BplusItSappiFlowHandlers, BplusItSappiFlowServices, BplusItSappiFlowModel, IFlowRepository, SequelizeFlowRepository, FlowSagas } from './flow';
+import { BplusItSappiChannelHandlers, BplusItSappiChannelServices, BplusItSappiChannelModel, IChannelRepository, SequelizeChannelRepository, ChannelSagas } from './channel';
 
 export const BplusItSappiHandlers = [
     ...BplusItSappiDataLakeHandlers,
     ...BplusItSappiSystemHandlers,
     ...BplusItSappiExecutionHandlers,
-    ...BplusItSappiFlowHandlers
+    ...BplusItSappiFlowHandlers,
+    ...BplusItSappiChannelHandlers
 ];
 export const BplusItSappiServices = [
     ...BplusItSappiDataLakeServices,
     ...BplusItSappiSystemServices,
     ...BplusItSappiExecutionServices,
-    ...BplusItSappiFlowServices
+    ...BplusItSappiFlowServices,
+    ...BplusItSappiChannelServices
 ];
 export const BplusItSappiModels = [
     BplusItSappiDataLakeModel,
     BplusItSappiSystemModel,
     BplusItSappiExecutionModel,
-    BplusItSappiFlowModel
+    BplusItSappiFlowModel,
+    BplusItSappiChannelModel
 ];
 export const BplusItSappiRepositories = [
     {
@@ -37,11 +41,16 @@ export const BplusItSappiRepositories = [
     {
         provide: IFlowRepository,
         useClass: SequelizeFlowRepository
+    },
+    {
+        provide: IChannelRepository,
+        useClass: SequelizeChannelRepository
     }
 ];
 export const BplusItSappiSagas = [
     DataLakeSagas,
     SystemSagas,
     ExecutionSagas,
-    FlowSagas
+    FlowSagas,
+    ChannelSagas
 ];

@@ -6,6 +6,7 @@ import { BplusItSappiDataLakeControllers, BplusItSappiDataLakeResolvers } from '
 import { BplusItSappiSystemControllers, BplusItSappiSystemResolvers } from './system';
 import { BplusItSappiExecutionControllers, BplusItSappiExecutionResolvers } from './execution';
 import { BplusItSappiFlowControllers, BplusItSappiFlowResolvers } from './flow';
+import { BplusItSappiChannelControllers, BplusItSappiChannelResolvers } from './channel';
 
 @Module({
     imports: [
@@ -18,7 +19,8 @@ import { BplusItSappiFlowControllers, BplusItSappiFlowResolvers } from './flow';
         ...BplusItSappiDataLakeControllers,
         ...BplusItSappiSystemControllers,
         ...BplusItSappiExecutionControllers,
-        ...BplusItSappiFlowControllers
+        ...BplusItSappiFlowControllers,
+        ...BplusItSappiChannelControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
@@ -28,7 +30,8 @@ import { BplusItSappiFlowControllers, BplusItSappiFlowResolvers } from './flow';
         ...BplusItSappiDataLakeResolvers,
         ...BplusItSappiSystemResolvers,
         ...BplusItSappiExecutionResolvers,
-        ...BplusItSappiFlowResolvers
+        ...BplusItSappiFlowResolvers,
+        ...BplusItSappiChannelResolvers
     ]
 })
 export class BplusItSappiModule {}
