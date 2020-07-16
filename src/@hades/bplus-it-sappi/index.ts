@@ -1,20 +1,20 @@
-import { BplusItSappiChannelDetailHandlers, BplusItSappiChannelDetailServices, BplusItSappiChannelDetailModel, IChannelDetailRepository, SequelizeChannelDetailRepository, ChannelDetailSagas } from './channel-detail';
+import { BplusItSappiDataLakeHandlers, BplusItSappiDataLakeServices, BplusItSappiDataLakeModel, IDataLakeRepository, SequelizeDataLakeRepository, DataLakeSagas } from './data-lake';
 
 export const BplusItSappiHandlers = [
-    ...BplusItSappiChannelDetailHandlers
+    ...BplusItSappiDataLakeHandlers
 ];
 export const BplusItSappiServices = [
-    ...BplusItSappiChannelDetailServices
+    ...BplusItSappiDataLakeServices
 ];
 export const BplusItSappiModels = [
-    BplusItSappiChannelDetailModel
+    BplusItSappiDataLakeModel
 ];
 export const BplusItSappiRepositories = [
     {
-        provide: IChannelDetailRepository,
-        useClass: SequelizeChannelDetailRepository
+        provide: IDataLakeRepository,
+        useClass: SequelizeDataLakeRepository
     }
 ];
 export const BplusItSappiSagas = [
-    ChannelDetailSagas
+    DataLakeSagas
 ];

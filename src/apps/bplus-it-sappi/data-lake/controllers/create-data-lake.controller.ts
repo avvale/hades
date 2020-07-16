@@ -10,7 +10,6 @@ import { FindDataLakeByIdQuery } from '@hades/bplus-it-sappi/data-lake/applicati
 import { CreateDataLakeCommand } from '@hades/bplus-it-sappi/data-lake/application/create/create-data-lake.command';
 
 @ApiTags('[bplus-it-sappi] data-lake')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: DataLakeDto})
 @Controller('bplus-it-sappi/data-lake')
 export class CreateDataLakeController 
 {
@@ -21,6 +20,7 @@ export class CreateDataLakeController
 
     @Post()
     @ApiOperation({ summary: 'Create data-lake' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: DataLakeDto })
     async main(@Body() payload: CreateDataLakeDto)
     {
         await this.commandBus.dispatch(new CreateDataLakeCommand(

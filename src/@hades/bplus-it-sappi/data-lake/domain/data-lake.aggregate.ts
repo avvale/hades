@@ -31,7 +31,7 @@ export class BplusItSappiDataLake extends AggregateRoot
         
     }
 
-    static register (id: DataLakeId,data: DataLakeData,createdAt: DataLakeCreatedAt,updatedAt: DataLakeUpdatedAt,deletedAt: DataLakeDeletedAt,): BplusItSappiDataLake
+    static register (id: DataLakeId, data: DataLakeData, createdAt: DataLakeCreatedAt, updatedAt: DataLakeUpdatedAt, deletedAt: DataLakeDeletedAt, ): BplusItSappiDataLake
     {
         return new BplusItSappiDataLake(id, data, createdAt, updatedAt, deletedAt, );
     }

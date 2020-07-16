@@ -9,7 +9,6 @@ import { FindDataLakeByIdQuery } from '@hades/bplus-it-sappi/data-lake/applicati
 import { DeleteDataLakeByIdCommand } from '@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lake-by-id.command';
 
 @ApiTags('[bplus-it-sappi] data-lake')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: DataLakeDto})
 @Controller('bplus-it-sappi/data-lake')
 export class DeleteDataLakeByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteDataLakeByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete data-lake by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: DataLakeDto })
     async main(@Param('id') id: string)
     {
         const dataLake = await this.queryBus.ask(new FindDataLakeByIdQuery(id));

@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { DataLakeDto } from './../dto/data-lake.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetDataLakesQuery } from '@hades/bplus-it-sappi/data-lake/application/g
 import { DeleteDataLakesCommand } from '@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lakes.command';
 
 @ApiTags('[bplus-it-sappi] data-lake')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: DataLakeDto})
 @Controller('bplus-it-sappi/data-lakes')
 export class DeleteDataLakesController 
 {
@@ -21,6 +20,9 @@ export class DeleteDataLakesController
 
     @Delete()
     @ApiOperation({ summary: 'Delete data-lakes in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [DataLakeDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const dataLakes = await this.queryBus.ask(new GetDataLakesQuery(queryStatements));

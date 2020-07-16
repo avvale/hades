@@ -19,7 +19,7 @@ import { dataLakes } from './../seeds/data-lake.seed';
 export class MockDataLakeRepository implements IDataLakeRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'BplusItSappiDataLake';
+    public readonly aggregateName: string = 'BplusItSappiDataLake';
     public collectionSource: BplusItSappiDataLake[];
     
     constructor() 
@@ -77,7 +77,7 @@ export class MockDataLakeRepository implements IDataLakeRepository
     
     async create(dataLake: BplusItSappiDataLake): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === dataLake.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${dataLake.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === dataLake.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${dataLake.id.value} already exist in database`);
 
         // create deletedAt null 
         dataLake.deletedAt = new DataLakeDeletedAt(null);
@@ -91,29 +91,29 @@ export class MockDataLakeRepository implements IDataLakeRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiDataLake> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<BplusItSappiDataLake>
     {
-        const entity = this.collectionSource.find(dataLake => dataLake.id.value === id.value);
+        const aggregate = this.collectionSource.find(dataLake => dataLake.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<BplusItSappiDataLake[]> 
@@ -121,20 +121,20 @@ export class MockDataLakeRepository implements IDataLakeRepository
         return this.collectionSource;
     }
 
-    async update(entity: BplusItSappiDataLake): Promise<void> 
+    async update(aggregate: BplusItSappiDataLake): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(dataLake => {
-            if (dataLake.id.value === entity.id.value) return entity;
+            if (dataLake.id.value === aggregate.id.value) return aggregate;
             return dataLake;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(dataLake => dataLake.id.value !== id.value);

@@ -38,9 +38,9 @@ export class CreateDataLakeService
         // create
         await this.repository.create(dataLake);
 
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const dataLakeRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            dataLake
         );
         
         dataLakeRegister.created(dataLake); // apply event to model events

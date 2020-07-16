@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from './../shared/shared.module';
 import { BplusItSappiModels, BplusItSappiHandlers, BplusItSappiServices, BplusItSappiRepositories, BplusItSappiSagas } from '@hades/bplus-it-sappi';
-import { BplusItSappiChannelDetailControllers, BplusItSappiChannelDetailResolvers } from './channel-detail';
+import { BplusItSappiDataLakeControllers, BplusItSappiDataLakeResolvers } from './data-lake';
 
 @Module({
     imports: [
@@ -12,14 +12,14 @@ import { BplusItSappiChannelDetailControllers, BplusItSappiChannelDetailResolver
             ])
     ],
     controllers: [
-        ...BplusItSappiChannelDetailControllers
+        ...BplusItSappiDataLakeControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
         ...BplusItSappiServices,
         ...BplusItSappiRepositories,
         ...BplusItSappiSagas,
-        ...BplusItSappiChannelDetailResolvers
+        ...BplusItSappiDataLakeResolvers
     ]
 })
 export class BplusItSappiModule {}
