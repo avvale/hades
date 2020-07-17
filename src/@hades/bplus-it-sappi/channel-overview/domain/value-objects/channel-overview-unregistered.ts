@@ -12,6 +12,7 @@ export class ChannelOverviewUnregistered extends IntValueObject
             nullable: true,
             undefinable: true,
             maxLength: 10,
+            unsigned: true,
         }, validationRules));
     }
 }

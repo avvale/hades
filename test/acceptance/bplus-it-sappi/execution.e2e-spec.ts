@@ -8,6 +8,11 @@ import { BplusItSappiModule } from './../../../src/apps/bplus-it-sappi/bplus-it-
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+import { AdminModule } from './../../../src/apps/admin/admin.module';
+
+const importForeignModules = [
+    AdminModule
+];
 
 describe('execution', () => 
 {
@@ -18,6 +23,7 @@ describe('execution', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
+                    ...importForeignModules,
                     BplusItSappiModule,
                     GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
@@ -62,12 +68,12 @@ describe('execution', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'DETAIL',
-                monitoringStartAt: '2020-07-16 07:16:02',
-                monitoringEndAt: '2020-07-16 19:04:32',
-                executedAt: '2020-07-16 04:08:13',
+                monitoringStartAt: '2020-07-17 08:33:03',
+                monitoringEndAt: '2020-07-17 15:11:43',
+                executedAt: '2020-07-17 03:00:05',
             })
             .expect(400)
             .then(res => {
@@ -82,12 +88,12 @@ describe('execution', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'DETAIL',
-                monitoringStartAt: '2020-07-16 12:47:28',
-                monitoringEndAt: '2020-07-16 00:56:16',
-                executedAt: '2020-07-16 18:51:11',
+                monitoringStartAt: '2020-07-17 09:09:40',
+                monitoringEndAt: '2020-07-16 17:42:22',
+                executedAt: '2020-07-17 02:31:09',
             })
             .expect(400)
             .then(res => {
@@ -101,13 +107,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
                 tenantId: null,
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'DETAIL',
-                monitoringStartAt: '2020-07-16 01:07:11',
-                monitoringEndAt: '2020-07-16 09:55:04',
-                executedAt: '2020-07-16 18:32:41',
+                monitoringStartAt: '2020-07-16 22:13:15',
+                monitoringEndAt: '2020-07-17 12:47:24',
+                executedAt: '2020-07-16 17:12:43',
             })
             .expect(400)
             .then(res => {
@@ -121,13 +127,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
                 
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
-                type: 'DETAIL',
-                monitoringStartAt: '2020-07-15 20:48:23',
-                monitoringEndAt: '2020-07-16 04:20:08',
-                executedAt: '2020-07-16 14:46:46',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
+                type: 'SUMMARY',
+                monitoringStartAt: '2020-07-17 03:50:19',
+                monitoringEndAt: '2020-07-16 22:02:17',
+                executedAt: '2020-07-17 08:00:09',
             })
             .expect(400)
             .then(res => {
@@ -141,13 +147,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
                 systemId: null,
-                type: 'SUMMARY',
-                monitoringStartAt: '2020-07-16 18:42:31',
-                monitoringEndAt: '2020-07-16 08:56:14',
-                executedAt: '2020-07-16 14:30:28',
+                type: 'DETAIL',
+                monitoringStartAt: '2020-07-16 18:20:35',
+                monitoringEndAt: '2020-07-17 15:16:12',
+                executedAt: '2020-07-17 14:58:55',
             })
             .expect(400)
             .then(res => {
@@ -161,13 +167,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
                 
                 type: 'SUMMARY',
-                monitoringStartAt: '2020-07-16 02:51:47',
-                monitoringEndAt: '2020-07-16 17:34:18',
-                executedAt: '2020-07-16 15:31:39',
+                monitoringStartAt: '2020-07-17 05:20:38',
+                monitoringEndAt: '2020-07-17 00:08:59',
+                executedAt: '2020-07-16 22:52:26',
             })
             .expect(400)
             .then(res => {
@@ -181,13 +187,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: null,
-                monitoringStartAt: '2020-07-16 14:58:58',
-                monitoringEndAt: '2020-07-16 01:53:30',
-                executedAt: '2020-07-16 04:55:59',
+                monitoringStartAt: '2020-07-16 22:18:02',
+                monitoringEndAt: '2020-07-17 07:27:49',
+                executedAt: '2020-07-17 12:17:52',
             })
             .expect(400)
             .then(res => {
@@ -201,13 +207,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 
-                monitoringStartAt: '2020-07-16 09:56:49',
-                monitoringEndAt: '2020-07-16 07:51:49',
-                executedAt: '2020-07-15 22:58:53',
+                monitoringStartAt: '2020-07-17 06:48:34',
+                monitoringEndAt: '2020-07-17 15:30:23',
+                executedAt: '2020-07-17 12:44:49',
             })
             .expect(400)
             .then(res => {
@@ -221,13 +227,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'SUMMARY',
                 monitoringStartAt: null,
-                monitoringEndAt: '2020-07-15 19:29:40',
-                executedAt: '2020-07-16 02:15:50',
+                monitoringEndAt: '2020-07-16 18:27:30',
+                executedAt: '2020-07-17 07:34:34',
             })
             .expect(400)
             .then(res => {
@@ -241,13 +247,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'DETAIL',
                 
-                monitoringEndAt: '2020-07-15 20:51:12',
-                executedAt: '2020-07-16 15:05:38',
+                monitoringEndAt: '2020-07-16 21:28:08',
+                executedAt: '2020-07-16 18:15:14',
             })
             .expect(400)
             .then(res => {
@@ -261,13 +267,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
-                type: 'DETAIL',
-                monitoringStartAt: '2020-07-16 16:29:51',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
+                type: 'SUMMARY',
+                monitoringStartAt: '2020-07-17 16:03:25',
                 monitoringEndAt: null,
-                executedAt: '2020-07-15 21:23:33',
+                executedAt: '2020-07-16 19:41:16',
             })
             .expect(400)
             .then(res => {
@@ -281,13 +287,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'DETAIL',
-                monitoringStartAt: '2020-07-16 00:55:06',
+                monitoringStartAt: '2020-07-16 22:15:02',
                 
-                executedAt: '2020-07-15 19:26:23',
+                executedAt: '2020-07-17 15:42:35',
             })
             .expect(400)
             .then(res => {
@@ -301,12 +307,12 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'SUMMARY',
-                monitoringStartAt: '2020-07-16 08:11:02',
-                monitoringEndAt: '2020-07-16 03:57:10',
+                monitoringStartAt: '2020-07-17 13:15:51',
+                monitoringEndAt: '2020-07-17 02:20:56',
                 executedAt: null,
             })
             .expect(400)
@@ -321,12 +327,12 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
-                type: 'DETAIL',
-                monitoringStartAt: '2020-07-16 12:33:15',
-                monitoringEndAt: '2020-07-15 19:57:58',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
+                type: 'SUMMARY',
+                monitoringStartAt: '2020-07-17 03:48:03',
+                monitoringEndAt: '2020-07-17 14:59:10',
                 
             })
             .expect(400)
@@ -343,13 +349,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'vg6faqwv6je06dpe6j9aetk18jz2pvbhxk9gt',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: 'djpzznokuef7xyiruh71c4ac5ti1nzmq0wt87',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'SUMMARY',
-                monitoringStartAt: '2020-07-16 00:29:52',
-                monitoringEndAt: '2020-07-16 09:07:19',
-                executedAt: '2020-07-16 16:08:02',
+                monitoringStartAt: '2020-07-16 17:50:22',
+                monitoringEndAt: '2020-07-17 07:17:02',
+                executedAt: '2020-07-16 23:45:22',
             })
             .expect(400)
             .then(res => {
@@ -363,13 +369,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '6xolwsckkqpcnsejcsq0f154dx56j9uq1t8fq',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: 'zo503wi2c64tsom98a7r5nuvrmcd21ve5z1ue',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'DETAIL',
-                monitoringStartAt: '2020-07-15 20:30:25',
-                monitoringEndAt: '2020-07-16 09:50:19',
-                executedAt: '2020-07-16 13:31:20',
+                monitoringStartAt: '2020-07-16 23:55:19',
+                monitoringEndAt: '2020-07-17 13:44:09',
+                executedAt: '2020-07-17 11:52:50',
             })
             .expect(400)
             .then(res => {
@@ -383,13 +389,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '7fzjfr5b3ftmsevi7ghr77r35zb0upkm18nit',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: '4gyh6fymfkum38y7be3gbctp6ms2vwcypis7g',
                 type: 'SUMMARY',
-                monitoringStartAt: '2020-07-16 08:09:20',
-                monitoringEndAt: '2020-07-15 21:11:01',
-                executedAt: '2020-07-16 14:36:45',
+                monitoringStartAt: '2020-07-16 17:23:18',
+                monitoringEndAt: '2020-07-16 21:50:31',
+                executedAt: '2020-07-17 10:11:48',
             })
             .expect(400)
             .then(res => {
@@ -403,7 +409,7 @@ describe('execution', () =>
     
 
     
-
+    
     
 
     
@@ -415,13 +421,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'XXXX',
-                monitoringStartAt: '2020-07-15 22:25:05',
-                monitoringEndAt: '2020-07-16 06:42:07',
-                executedAt: '2020-07-16 14:26:10',
+                monitoringStartAt: '2020-07-16 23:41:35',
+                monitoringEndAt: '2020-07-17 12:56:46',
+                executedAt: '2020-07-16 21:26:17',
             })
             .expect(400)
             .then(res => {
@@ -437,13 +443,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
-                type: 'DETAIL',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
+                type: 'SUMMARY',
                 monitoringStartAt: 'XXXXXXXX',
-                monitoringEndAt: '2020-07-15 21:54:45',
-                executedAt: '2020-07-16 05:00:51',
+                monitoringEndAt: '2020-07-17 11:46:17',
+                executedAt: '2020-07-16 19:12:44',
             })
             .expect(400)
             .then(res => {
@@ -457,13 +463,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'DETAIL',
-                monitoringStartAt: '2020-07-16 02:06:12',
+                monitoringStartAt: '2020-07-16 19:15:59',
                 monitoringEndAt: 'XXXXXXXX',
-                executedAt: '2020-07-16 17:02:20',
+                executedAt: '2020-07-16 17:32:43',
             })
             .expect(400)
             .then(res => {
@@ -477,12 +483,12 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
-                type: 'SUMMARY',
-                monitoringStartAt: '2020-07-15 23:04:40',
-                monitoringEndAt: '2020-07-16 05:51:10',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
+                type: 'DETAIL',
+                monitoringStartAt: '2020-07-16 19:26:47',
+                monitoringEndAt: '2020-07-16 20:06:57',
                 executedAt: 'XXXXXXXX',
             })
             .expect(400)
@@ -498,13 +504,13 @@ describe('execution', () =>
             .post('/bplus-it-sappi/execution')
             .set('Accept', 'application/json')
             .send({
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                 type: 'SUMMARY',
-                monitoringStartAt: '2020-07-16 02:58:28',
-                monitoringEndAt: '2020-07-15 21:44:46',
-                executedAt: '2020-07-15 21:47:56',
+                monitoringStartAt: '2020-07-17 14:27:11',
+                monitoringEndAt: '2020-07-17 01:35:30',
+                executedAt: '2020-07-16 18:04:36',
             })
             .expect(201);
     });
@@ -563,12 +569,12 @@ describe('execution', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92'
+                        value   : '7fbe1406-aad1-497b-9a01-8772d5cae7f0'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92'));
+            .expect(repository.collectionResponse.find(item => item.id === '7fbe1406-aad1-497b-9a01-8772d5cae7f0'));
     });
 
     it(`/REST:GET bplus-it-sappi/execution/{id} - Got 404 Not Found`, () => 
@@ -582,10 +588,10 @@ describe('execution', () =>
     it(`/REST:GET bplus-it-sappi/execution/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/execution/6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92')
+            .get('/bplus-it-sappi/execution/7fbe1406-aad1-497b-9a01-8772d5cae7f0')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92'));
+            .expect(repository.collectionResponse.find(e => e.id === '7fbe1406-aad1-497b-9a01-8772d5cae7f0'));
     });
 
     it(`/REST:GET bplus-it-sappi/executions`, () => 
@@ -604,13 +610,13 @@ describe('execution', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'e4ddb4b9-4d1e-46ec-906f-e622bd9b3a2a',
-                tenantId: 'caa28bc6-fb85-448a-b9ac-3f8b99109665',
-                systemId: '7486e5fa-f069-4ad2-bbbf-40aff26cd6ef',
-                type: 'DETAIL',
-                monitoringStartAt: '2020-07-15 19:47:43',
-                monitoringEndAt: '2020-07-16 06:17:23',
-                executedAt: '2020-07-16 15:14:22',
+                id: '4dac1f98-2125-41d1-a092-3604786815fe',
+                tenantId: '09df43a9-3321-4957-b7c2-b2cfa4ed8f77',
+                systemId: '87e4560d-e3e9-431f-bfa6-4fac63953418',
+                type: 'SUMMARY',
+                monitoringStartAt: '2020-07-16 16:30:38',
+                monitoringEndAt: '2020-07-17 14:31:53',
+                executedAt: '2020-07-17 08:10:32',
             })
             .expect(404);
     });
@@ -622,16 +628,16 @@ describe('execution', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
-                type: 'SUMMARY',
-                monitoringStartAt: '2020-07-15 20:46:22',
-                monitoringEndAt: '2020-07-16 12:13:24',
-                executedAt: '2020-07-16 10:07:45',
+                id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
+                type: 'DETAIL',
+                monitoringStartAt: '2020-07-16 19:27:08',
+                monitoringEndAt: '2020-07-17 16:11:09',
+                executedAt: '2020-07-17 11:14:06',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92'));
+            .expect(repository.collectionResponse.find(e => e.id === '7fbe1406-aad1-497b-9a01-8772d5cae7f0'));
     });
 
     it(`/REST:DELETE bplus-it-sappi/execution/{id} - Got 404 Not Found`, () => 
@@ -645,7 +651,7 @@ describe('execution', () =>
     it(`/REST:DELETE bplus-it-sappi/execution/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/execution/6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92')
+            .delete('/bplus-it-sappi/execution/7fbe1406-aad1-497b-9a01-8772d5cae7f0')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -710,19 +716,19 @@ describe('execution', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'a1764173-a69a-439d-9080-955f0eaf0e28',
-                        tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                        systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
-                        type: 'SUMMARY',
-                        monitoringStartAt: '2020-07-15 20:34:35',
-                        monitoringEndAt: '2020-07-16 03:11:37',
-                        executedAt: '2020-07-16 02:25:46',
+                        id: '4077aa80-52c3-4e20-bf99-c6e1cac20aa4',
+                        tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                        systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
+                        type: 'DETAIL',
+                        monitoringStartAt: '2020-07-17 10:49:05',
+                        monitoringEndAt: '2020-07-16 18:29:55',
+                        executedAt: '2020-07-17 06:03:02',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateExecution).toHaveProperty('id', 'a1764173-a69a-439d-9080-955f0eaf0e28');
+                expect(res.body.data.bplusItSappiCreateExecution).toHaveProperty('id', '4077aa80-52c3-4e20-bf99-c6e1cac20aa4');
             });
     });
 
@@ -835,14 +841,14 @@ describe('execution', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92'
+                            value   : '7fbe1406-aad1-497b-9a01-8772d5cae7f0'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindExecution.id).toStrictEqual('6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92');
+                expect(res.body.data.bplusItSappiFindExecution.id).toStrictEqual('7fbe1406-aad1-497b-9a01-8772d5cae7f0');
             });
     });
 
@@ -905,12 +911,12 @@ describe('execution', () =>
                     }
                 `,
                 variables: {
-                    id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92'
+                    id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindExecutionById.id).toStrictEqual('6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92');
+                expect(res.body.data.bplusItSappiFindExecutionById.id).toStrictEqual('7fbe1406-aad1-497b-9a01-8772d5cae7f0');
             });
     });
 
@@ -974,13 +980,13 @@ describe('execution', () =>
                 variables: {
                     payload: {
                         
-                        id: '27cf1420-a074-477b-9cb6-6efc3147173c',
-                        tenantId: 'e9db84b1-efd1-4798-9eb0-12c5c92ff247',
-                        systemId: 'c09a9168-b781-4e5f-9b86-7db63d8e7e2d',
-                        type: 'DETAIL',
-                        monitoringStartAt: '2020-07-16 04:53:36',
-                        monitoringEndAt: '2020-07-16 10:34:25',
-                        executedAt: '2020-07-16 02:06:47',
+                        id: '97355d86-9eb7-44f0-8416-dc28ed4c73ce',
+                        tenantId: '68cfcddf-fba2-4e0e-8ff2-bfcf97775c6b',
+                        systemId: 'a6cac782-a4bd-462b-a8c0-199406d343e7',
+                        type: 'SUMMARY',
+                        monitoringStartAt: '2020-07-17 00:21:04',
+                        monitoringEndAt: '2020-07-16 19:00:44',
+                        executedAt: '2020-07-16 22:38:47',
                     }
                 }
             })
@@ -1018,19 +1024,19 @@ describe('execution', () =>
                 variables: {
                     payload: {
                         
-                        id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92',
-                        tenantId: '4ff1b6ae-238b-4b34-a9a8-556c96f538c2',
-                        systemId: '8b8e19bb-7c44-42b2-bf69-2394ef167e2f',
+                        id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0',
+                        tenantId: '319c94c0-674a-40a6-a4f7-c29429b3a81a',
+                        systemId: 'b6abd9f6-242b-4091-88cd-5afa01120cb0',
                         type: 'DETAIL',
-                        monitoringStartAt: '2020-07-16 04:44:40',
-                        monitoringEndAt: '2020-07-16 00:06:55',
-                        executedAt: '2020-07-16 13:45:13',
+                        monitoringStartAt: '2020-07-17 11:05:53',
+                        monitoringEndAt: '2020-07-16 22:04:54',
+                        executedAt: '2020-07-17 10:03:03',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateExecution.id).toStrictEqual('6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92');
+                expect(res.body.data.bplusItSappiUpdateExecution.id).toStrictEqual('7fbe1406-aad1-497b-9a01-8772d5cae7f0');
             });
     });
 
@@ -1093,12 +1099,12 @@ describe('execution', () =>
                     }
                 `,
                 variables: {
-                    id: '6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92'
+                    id: '7fbe1406-aad1-497b-9a01-8772d5cae7f0'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteExecutionById.id).toStrictEqual('6e7a2cea-fa3d-4a5f-bf30-7bf63a64be92');
+                expect(res.body.data.bplusItSappiDeleteExecutionById.id).toStrictEqual('7fbe1406-aad1-497b-9a01-8772d5cae7f0');
             });
     });
 

@@ -6,7 +6,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '99d5404c-1667-48d4-b10a-809991f67d6b',
+        example     : '8955fb29-e3b9-48f1-aed1-e0609284bee0',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     id: string;
@@ -16,7 +16,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '99dd7bdf-e50d-4e46-9710-3df4cefc6cf2',
+        example     : '08ea6898-c808-46e0-b5aa-6587eb458e0d',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     tenantId: string;
@@ -26,7 +26,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '9bda5c93-a5db-4631-aa26-9c9d77a8454d',
+        example     : '1872191d-3649-49d6-9bfe-4f871cb90c87',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     systemId: string;
@@ -36,7 +36,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'zb4yh5vu4i9bs8ipcu80',
+        example     : '2ecp9mu008ou6dk6319q',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     systemName: string;
@@ -46,7 +46,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '5b2c2d78-3728-4ef2-845c-960c83585d67',
+        example     : 'bab4872b-d33f-4ebf-8e26-e24112fdb459',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     executionId: string;
@@ -56,7 +56,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionType [input here api field description]',
-        example     : 'DETAIL',
+        example     : 'SUMMARY',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     executionType: string;
@@ -66,7 +66,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-16 17:25:10',
+        example     : '2020-07-16 19:49:17',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     executionExecutedAt: string;
@@ -76,7 +76,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-15 21:01:11',
+        example     : '2020-07-17 05:10:51',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     executionMonitoringStartAt: string;
@@ -86,7 +86,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-16 10:42:05',
+        example     : '2020-07-16 22:35:07',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     executionMonitoringEndAt: string;
@@ -96,7 +96,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'status [input here api field description]',
-        example     : 'ERROR',
+        example     : 'STOPPED',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     status: string;
@@ -106,7 +106,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelId [input here api field description]',
-        example     : '3afea616-40f1-4ec5-87cf-84636acb0a49',
+        example     : '65a58e8f-a01c-4206-bd23-33c36604ea63',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     channelId: string;
@@ -116,7 +116,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelParty [input here api field description]',
-        example     : '6xh0vvybkmch1kobil9cv75wy2f7m29dqd064ys4epvn28ctkw5ol0kxhr7jna9ai83dv9lx2wstna22gooomi6ljpznynvme2oq30tgznwrebyreftf09spmteiabhgzjdfwcdkrmsuj50e02hetdrjc7mls5vz',
+        example     : 'keba4kwstez8o0feb3dn8xfmbdmy5yjkt57kvbsm3f1tppnhrt1n50rvadmpkz0vvoizxvf6izw8n62xtnsgdpa823wjcdbiamnr1qi23g3kxll41a4fbkcl7wmfehn0jzszq0t4vhiu6pjxnho18vsmxq6lwvnu',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     channelParty: string;
@@ -126,7 +126,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelComponent [input here api field description]',
-        example     : 'l4cwyypu0pctxchppawz1pyrwsdc16lckvo9sa2cak6af45ygqxqis6qrq6mwga8hqjfv07r7ngwji9zaqjttzbbfgp1uanr4aulvrtopsxnl4lj8inr1cg9um7y249kiy2tk0tcas8fqqd3x20cnpdq94ms6sk4',
+        example     : '5iy8unrdyp1o881jvh73u28nld4fxaqj7pwpari38vmqh8f4k0ow1m16en7fkq9jsp69oemqk63l3y0jxx963s3i0qodrlhpggih2iltnxzh4xd1ci5plpmnkvqz1lktv2r7v415c5xt37vp0otlo3scyyktvogn',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     channelComponent: string;
@@ -136,7 +136,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelName [input here api field description]',
-        example     : 'ijyk5nocw6jnccvn4hxsw050ge0hopwkunq9xkwfa4ihcw3epnx2xt9dtcn3zzxdbv8unlx8a6bjel6d1ff8vsyglchisw4uflkfezwe0ko7mheg7ylggq6bfsnm2rhnpf2ou5sjpv7ni7tb6zm7qxv04w1qrc7c',
+        example     : 'mxkzph5wmf4drjj6gx2pu86ia2m0hzxh4s2d5s0sn8kk2ftomr48fmion74hukauroh4t8uv9iu0wkdofj7ndoygecoye9f0z96jnbt8ykdxg7p4htfbx9rzb2rpr30awdkuibesoz6dhyae9ndnhgx8lo783lbr',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     channelName: string;
@@ -146,7 +146,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'detail [input here api field description]',
-        example     : 'Velit et reiciendis quo consectetur. Itaque est voluptatem ex et nam et quia accusamus a. Enim sint aperiam nihil minima quia ipsam. Est quas deserunt. Ut perspiciatis commodi id molestias.',
+        example     : 'Qui quae vel. Nemo aut ipsum quam sed consequatur officiis. Consequatur sit quaerat nostrum. Quis rerum odio dolores quisquam omnis.',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     detail: string;
@@ -156,7 +156,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'example [input here api field description]',
-        example     : 'st7ymtokwclbvxfdp5729oklw11r4r3iud64bvom6l2btw66envdexk434l1s0ayycm0po3546wle0yvj730euobw39ztf6vrsucv3ljnki92lmjj29mtnztniw48j2iwyj3h4y06jeop2vdv8xxht6o7c0xfskv',
+        example     : 'xruuq1otk47f4fzbq65um1aqrdbk7j2fxh8cm433a7n4xgllcuotcgeq1bltiqcwxipipgmk9mtt2eaaquy5aubwt8b9hmx6wug5syp77b9yemh22sf51w8887mnagmrjv3a13u23q05mlkuldjjg50ixbkj1w6y',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     example: string;
@@ -166,7 +166,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-16 06:39:17',
+        example     : '2020-07-17 10:20:09',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     createdAt: string;
@@ -176,7 +176,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-16 08:14:58',
+        example     : '2020-07-17 15:45:31',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     updatedAt: string;
@@ -186,7 +186,7 @@ export class ChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-16 10:51:21',
+        example     : '2020-07-16 22:17:10',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     deletedAt: string;

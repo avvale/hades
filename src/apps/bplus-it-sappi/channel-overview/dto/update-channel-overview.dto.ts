@@ -5,105 +5,105 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '22fe1091-7078-4c95-b84b-94402647016b'
+        example     : 'bfaac914-73ac-45fc-9c74-2b64d6df0ffc'
     })
     id: string;
     
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'efdf0ebb-9511-4ee0-b885-90cfc495e3ff'
+        example     : 'a7051b5c-5600-4eb2-88a5-db0d04762c01'
     })
     tenantId: string;
     
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : 'f2885c4d-07d4-4da9-b984-dbe901ad0713'
+        example     : '1340cec3-fbca-4131-8fba-c1a2a7fb826c'
     })
     systemId: string;
     
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'an9atktb17stprckuz20'
+        example     : 'hic6jcwp595l604ng92k'
     })
     systemName: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : 'bf7a7360-bde2-4a08-bf05-cc98ecf321cb'
+        example     : '816dc44c-9607-4cdf-a859-465710286163'
     })
     executionId: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionType [input here api field description]',
-        example     : 'SUMMARY'
+        example     : 'DETAIL'
     })
     executionType: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-15 21:34:21'
+        example     : '2020-07-17 03:05:01'
     })
     executionExecutedAt: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-16 14:39:14'
+        example     : '2020-07-17 01:55:24'
     })
     executionMonitoringStartAt: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-16 00:55:10'
+        example     : '2020-07-17 06:10:07'
     })
     executionMonitoringEndAt: string;
     
     @ApiProperty({
         type        : Number,
         description : 'error [input here api field description]',
-        example     : 6782067537
+        example     : 1482685280
     })
     error: number;
     
     @ApiProperty({
         type        : Number,
         description : 'inactive [input here api field description]',
-        example     : 9494350041
+        example     : 8121012001
     })
     inactive: number;
     
     @ApiProperty({
         type        : Number,
         description : 'successful [input here api field description]',
-        example     : 2244571228
+        example     : 7324197662
     })
     successful: number;
     
     @ApiProperty({
         type        : Number,
         description : 'stopped [input here api field description]',
-        example     : 1303119501
+        example     : 6600259195
     })
     stopped: number;
     
     @ApiProperty({
         type        : Number,
         description : 'unknown [input here api field description]',
-        example     : 9381686204
+        example     : 1079864579
     })
     unknown: number;
     
     @ApiProperty({
         type        : Number,
         description : 'unregistered [input here api field description]',
-        example     : 1790314967
+        example     : 4089308038
     })
     unregistered: number;
     

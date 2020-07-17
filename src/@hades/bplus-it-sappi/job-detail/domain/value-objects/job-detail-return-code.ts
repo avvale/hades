@@ -12,6 +12,7 @@ export class JobDetailReturnCode extends IntValueObject
             nullable: true,
             undefinable: true,
             maxLength: 10,
+            unsigned: false,
         }, validationRules));
     }
 }

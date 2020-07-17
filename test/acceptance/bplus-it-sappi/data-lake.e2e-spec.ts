@@ -8,6 +8,11 @@ import { BplusItSappiModule } from './../../../src/apps/bplus-it-sappi/bplus-it-
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+import { AdminModule } from './../../../src/apps/admin/admin.module';
+
+const importForeignModules = [
+    AdminModule
+];
 
 describe('data-lake', () => 
 {
@@ -18,6 +23,7 @@ describe('data-lake', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
+                    ...importForeignModules,
                     BplusItSappiModule,
                     GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
@@ -91,7 +97,7 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1',
+                id: '38079f4c-5b05-4836-94fe-0db6e01d388b',
                 data: null,
             })
             .expect(400)
@@ -106,7 +112,7 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1',
+                id: '38079f4c-5b05-4836-94fe-0db6e01d388b',
                 
             })
             .expect(400)
@@ -123,7 +129,7 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: 'c6gjgr1de5dv65fhgrx39tmxtzbmzkpc6fgt2',
+                id: '00iik55qu4hi9ev4clkqv3njiu7cyulbc2yfy',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -138,7 +144,7 @@ describe('data-lake', () =>
     
 
     
-
+    
     
 
     
@@ -153,7 +159,7 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1',
+                id: '38079f4c-5b05-4836-94fe-0db6e01d388b',
                 data: { "foo" : "bar" },
             })
             .expect(201);
@@ -213,12 +219,12 @@ describe('data-lake', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1'
+                        value   : '38079f4c-5b05-4836-94fe-0db6e01d388b'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1'));
+            .expect(repository.collectionResponse.find(item => item.id === '38079f4c-5b05-4836-94fe-0db6e01d388b'));
     });
 
     it(`/REST:GET bplus-it-sappi/data-lake/{id} - Got 404 Not Found`, () => 
@@ -232,10 +238,10 @@ describe('data-lake', () =>
     it(`/REST:GET bplus-it-sappi/data-lake/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/data-lake/2dbc6726-4e3a-40f7-84a1-4b5334d35fb1')
+            .get('/bplus-it-sappi/data-lake/38079f4c-5b05-4836-94fe-0db6e01d388b')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1'));
+            .expect(repository.collectionResponse.find(e => e.id === '38079f4c-5b05-4836-94fe-0db6e01d388b'));
     });
 
     it(`/REST:GET bplus-it-sappi/data-lakes`, () => 
@@ -254,7 +260,7 @@ describe('data-lake', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '2dbbaa2d-a6b7-494d-b929-1f69011587ef',
+                id: 'e211fb69-fc1f-4ed8-9459-9cab31fa98ab',
                 data: { "foo" : "bar" },
             })
             .expect(404);
@@ -267,11 +273,11 @@ describe('data-lake', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1',
+                id: '38079f4c-5b05-4836-94fe-0db6e01d388b',
                 data: { "foo" : "bar" },
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1'));
+            .expect(repository.collectionResponse.find(e => e.id === '38079f4c-5b05-4836-94fe-0db6e01d388b'));
     });
 
     it(`/REST:DELETE bplus-it-sappi/data-lake/{id} - Got 404 Not Found`, () => 
@@ -285,7 +291,7 @@ describe('data-lake', () =>
     it(`/REST:DELETE bplus-it-sappi/data-lake/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/data-lake/2dbc6726-4e3a-40f7-84a1-4b5334d35fb1')
+            .delete('/bplus-it-sappi/data-lake/38079f4c-5b05-4836-94fe-0db6e01d388b')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -340,14 +346,14 @@ describe('data-lake', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'f100239a-2933-4506-81d7-ec8fffbb063a',
+                        id: '8ad7e3b2-6ee6-4d0f-9f61-ec5eecef68b6',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateDataLake).toHaveProperty('id', 'f100239a-2933-4506-81d7-ec8fffbb063a');
+                expect(res.body.data.bplusItSappiCreateDataLake).toHaveProperty('id', '8ad7e3b2-6ee6-4d0f-9f61-ec5eecef68b6');
             });
     });
 
@@ -450,14 +456,14 @@ describe('data-lake', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1'
+                            value   : '38079f4c-5b05-4836-94fe-0db6e01d388b'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindDataLake.id).toStrictEqual('2dbc6726-4e3a-40f7-84a1-4b5334d35fb1');
+                expect(res.body.data.bplusItSappiFindDataLake.id).toStrictEqual('38079f4c-5b05-4836-94fe-0db6e01d388b');
             });
     });
 
@@ -510,12 +516,12 @@ describe('data-lake', () =>
                     }
                 `,
                 variables: {
-                    id: '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1'
+                    id: '38079f4c-5b05-4836-94fe-0db6e01d388b'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindDataLakeById.id).toStrictEqual('2dbc6726-4e3a-40f7-84a1-4b5334d35fb1');
+                expect(res.body.data.bplusItSappiFindDataLakeById.id).toStrictEqual('38079f4c-5b05-4836-94fe-0db6e01d388b');
             });
     });
 
@@ -569,7 +575,7 @@ describe('data-lake', () =>
                 variables: {
                     payload: {
                         
-                        id: 'fd7dfe1c-b402-429e-8027-8886b43b5a64',
+                        id: '1bf4e697-d78d-4b79-9f45-0849e1de03b1',
                         data: { "foo" : "bar" },
                     }
                 }
@@ -603,14 +609,14 @@ describe('data-lake', () =>
                 variables: {
                     payload: {
                         
-                        id: '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1',
+                        id: '38079f4c-5b05-4836-94fe-0db6e01d388b',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateDataLake.id).toStrictEqual('2dbc6726-4e3a-40f7-84a1-4b5334d35fb1');
+                expect(res.body.data.bplusItSappiUpdateDataLake.id).toStrictEqual('38079f4c-5b05-4836-94fe-0db6e01d388b');
             });
     });
 
@@ -663,12 +669,12 @@ describe('data-lake', () =>
                     }
                 `,
                 variables: {
-                    id: '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1'
+                    id: '38079f4c-5b05-4836-94fe-0db6e01d388b'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteDataLakeById.id).toStrictEqual('2dbc6726-4e3a-40f7-84a1-4b5334d35fb1');
+                expect(res.body.data.bplusItSappiDeleteDataLakeById.id).toStrictEqual('38079f4c-5b05-4836-94fe-0db6e01d388b');
             });
     });
 

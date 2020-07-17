@@ -5,35 +5,35 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '6b4e8e54-58c2-4c14-96b8-15fd76ba02e0'
+        example     : 'ea9a6163-9bf7-4646-b216-88706ab96519'
     })
     id: string;
     
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'a68a588d-9ca9-4dcd-9471-e2b8c7f3ff7f'
+        example     : '3d9852bd-bac6-4ae4-bace-919f70515bc7'
     })
     tenantId: string;
     
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : 'e3fbb6f6-fd47-490c-9ebc-d67fc3baa8d3'
+        example     : '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f'
     })
     systemId: string;
     
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'mxndphscg9dsj9xlwust'
+        example     : 'rqozpgwwdgp3bmgl10wz'
     })
     systemName: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '7ff72752-fd8e-4519-ab23-05fbe04160da'
+        example     : '2260ba58-71bd-4e05-b3b5-1c2ebca6e661'
     })
     executionId: string;
     
@@ -47,42 +47,42 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-16 01:43:58'
+        example     : '2020-07-17 13:20:31'
     })
     executionExecutedAt: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-16 17:02:43'
+        example     : '2020-07-17 02:22:25'
     })
     executionMonitoringStartAt: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-16 05:30:10'
+        example     : '2020-07-17 04:02:15'
     })
     executionMonitoringEndAt: string;
     
     @ApiProperty({
         type        : Number,
         description : 'cancelled [input here api field description]',
-        example     : 7255165998
+        example     : 8791866470
     })
     cancelled: number;
     
     @ApiProperty({
         type        : Number,
         description : 'completed [input here api field description]',
-        example     : 4810403627
+        example     : 5061593367
     })
     completed: number;
     
     @ApiProperty({
         type        : Number,
         description : 'error [input here api field description]',
-        example     : 7320528373
+        example     : 9822925207
     })
     error: number;
     

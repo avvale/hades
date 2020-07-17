@@ -6,7 +6,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'd247bdf1-4cb9-4e35-be80-5a4bb5acbe62',
+        example     : '3b1bb011-1b5b-4ff1-8453-d226ed4351dc',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     id: string;
@@ -16,7 +16,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '28186aed-f2d9-4ca6-870c-36d994e0fd6e',
+        example     : 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     tenantId: string;
@@ -26,7 +26,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'bkjzct4csjhc7pltfde4iruigz5lji707kxfvm5mkxps131hoz29rdxao9yt0m36ici96723l6jmrxu9a9ro1p04xhzg2yz2g8u68xuktef96gnhhept5vnqkzbqtakr0w0g0use3hf65o3pb8y2ebazbbhl2f4l0wal2aais4bh67j0ksj6thzdc6eptrfy6n5p3qsakmm75axxonur9c2pxdy7g3gkdu8q6njs1sztngfr1yrqagggv9cy212',
+        example     : 'mta0fcrh19qt2mn8alcs7gb9zlc0g7fbkb1pjofix9ftrbtfif03jhwflrbmh5azxfyndbtcca899pfxfgx8mdhdulh5695j2i0f7640ced8swqne642f4mjj8fhlrqp6ujjlgbxgmefflmvza0n7zoj3mjwdhxnbdmx7hz1gfy6gcu31przf3pjcptlqudzvg86qg6e7cqe5whizm047uusc64zf5tapuy217et6sskmvjq3q7bkvxmhxtcnso',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     name: string;
@@ -36,7 +36,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-16 04:49:53',
+        example     : '2020-07-16 17:42:52',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     createdAt: string;
@@ -46,7 +46,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-16 03:11:06',
+        example     : '2020-07-17 07:35:08',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     updatedAt: string;
@@ -56,7 +56,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-16 11:47:57',
+        example     : '2020-07-17 03:21:15',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     deletedAt: string;

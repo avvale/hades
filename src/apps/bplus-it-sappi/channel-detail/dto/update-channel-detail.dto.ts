@@ -5,35 +5,35 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '99d5404c-1667-48d4-b10a-809991f67d6b'
+        example     : '8955fb29-e3b9-48f1-aed1-e0609284bee0'
     })
     id: string;
     
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '99dd7bdf-e50d-4e46-9710-3df4cefc6cf2'
+        example     : '08ea6898-c808-46e0-b5aa-6587eb458e0d'
     })
     tenantId: string;
     
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '9bda5c93-a5db-4631-aa26-9c9d77a8454d'
+        example     : '1872191d-3649-49d6-9bfe-4f871cb90c87'
     })
     systemId: string;
     
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'nd6vs9qylroiwgcxewtm'
+        example     : '1f8zc86vx1w6xsa498u2'
     })
     systemName: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '5b2c2d78-3728-4ef2-845c-960c83585d67'
+        example     : 'bab4872b-d33f-4ebf-8e26-e24112fdb459'
     })
     executionId: string;
     
@@ -47,70 +47,70 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-16 11:22:30'
+        example     : '2020-07-17 14:28:50'
     })
     executionExecutedAt: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-15 23:40:43'
+        example     : '2020-07-16 17:44:35'
     })
     executionMonitoringStartAt: string;
     
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-16 17:14:08'
+        example     : '2020-07-17 10:17:14'
     })
     executionMonitoringEndAt: string;
     
     @ApiProperty({
         type        : String,
         description : 'status [input here api field description]',
-        example     : 'UNKNOWN'
+        example     : 'SUCCESSFUL'
     })
     status: string;
     
     @ApiProperty({
         type        : String,
         description : 'channelId [input here api field description]',
-        example     : '3afea616-40f1-4ec5-87cf-84636acb0a49'
+        example     : '65a58e8f-a01c-4206-bd23-33c36604ea63'
     })
     channelId: string;
     
     @ApiProperty({
         type        : String,
         description : 'channelParty [input here api field description]',
-        example     : '82fadxhinq4nysw276sntouws4kih3zp3nadstp37p9twuqoxuyyqbiexebhtr5ts8xz8xt7pkhlor7vad6c30bcce15phmtvhs2prorzptvyn0ydxjg7s4vsujkmpu7ge30bk8cubcuh3bdjj8jptjqloyn264b'
+        example     : '2v267651fy6c40rc9qy41d13qr6ruct0lto286zkzsc567si9sv91a4t0su8t5j3jelxb8hmr3bha44twjqmkixpqllqjpi17l8zmmevn6tn40188svibh6e43ky9frojvylvh83y1nfjay6poqfnuu4lw7imv9e'
     })
     channelParty: string;
     
     @ApiProperty({
         type        : String,
         description : 'channelComponent [input here api field description]',
-        example     : 'nnld5h51fym2w6rjvu91ojy5l1boztjh37uf75agpceb04u6j45mitssrj1z20ch3aq4gpexi2o4hxwkxd37v9hu2vdmwllfd1oa1uq11w9cggkuz0ckluhq5a07m2d2zrpzkv42pr5zs97mo3y5ms0b6rlnnnxu'
+        example     : '8i0re7fmantumqjuokokmk9slnr0zm3d5k3tjixntxhjxnnevimozrmb4wmnemtjg0rim8dj6gbill2h525pjnjs8a3t3d3wjgvs5ywyo7qh83h81xqsmay6w7i6uod1xl7odbozv9x2v0s5c4puwfru434ahiu6'
     })
     channelComponent: string;
     
     @ApiProperty({
         type        : String,
         description : 'channelName [input here api field description]',
-        example     : 'k5jvaw5y93xjvmnzvh1o5dssv5f2hb5iz2h1ggnvsfpkhge8f9nevfzx1pxgnvj6vls443hnk131prbi6gw7vyvecuwwv8pensqipg782086kfsqsee1eb4t8izcqw40to6nddumjx7geawaw9z695eanshs22ux'
+        example     : 'tm2taf28dk5ysr0zji93i7x02wtewucxd4tjir6mvewasibeo7gpvl37zz46e4irs0ouqmv4yzj4nobz19d2menxm9w3f3wv4xfc0j9x96glluhzmlgyxpzckrs08h77g8cfia9jjji4ilq0jv14tk5ogtvd2nbh'
     })
     channelName: string;
     
     @ApiProperty({
         type        : String,
         description : 'detail [input here api field description]',
-        example     : 'Voluptatem ut consectetur soluta est corrupti et. Est eum ut sit porro. In recusandae tempore nam iste aut temporibus ab fugiat aut. Nulla voluptates nihil dolorum molestiae ad. Ipsum et expedita ut est totam illo provident qui totam. Iusto voluptatem aut.'
+        example     : 'Ad velit vitae perspiciatis. Placeat unde aut. Quam saepe id rerum ad aut pariatur dolore vel. Qui omnis sunt perferendis quia saepe natus vero quisquam. Doloribus mollitia dolorem consectetur molestias.'
     })
     detail: string;
     
     @ApiProperty({
         type        : String,
         description : 'example [input here api field description]',
-        example     : 'sqhdbr45ymt257h6emobq9j0yuu2akyiav3e4pzg0vf5yn3ck46lpr4r4ykc4uxnvyhe4hp1892a1q61yptp01cij6izid1lf28hqahxorm716n7rim20284v506j41iqiyfq9qiigiz56t19mbm5qg4kmkmipus'
+        example     : '5mqrpbq9fbw4i52alrerf5bt5aozccc206fqpihy2xtydsfe08o8k2gg9zxz432vyx6heme907awhi9mkyzhhpgg3lfq0pczpwqm8ho8fxsc3qjhj9y9ahzwtd4sxp63u3zgx65yn5a3s8n3ymr3qfpgaof2ne0u'
     })
     example: string;
     

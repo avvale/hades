@@ -6,7 +6,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '2dbc6726-4e3a-40f7-84a1-4b5334d35fb1',
+        example     : '38079f4c-5b05-4836-94fe-0db6e01d388b',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     id: string;
@@ -26,7 +26,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-16 13:03:33',
+        example     : '2020-07-17 14:04:33',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     createdAt: string;
@@ -36,7 +36,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-16 16:48:34',
+        example     : '2020-07-17 05:10:17',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     updatedAt: string;
@@ -46,7 +46,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-15 23:11:56',
+        example     : '2020-07-17 04:32:53',
         enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
     })
     deletedAt: string;
