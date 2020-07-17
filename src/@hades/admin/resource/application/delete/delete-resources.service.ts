@@ -19,7 +19,7 @@ export class DeleteResourcesService
         await this.repository.delete(queryStatements);        
 
         // TODO a falta de definir eventos
-        // insert EventBus in object, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         // const resourcesRegistered = this.publisher.mergeObjectContext(resources);
         
         // resourcesRegistered.deleted(resources); // apply event to model events

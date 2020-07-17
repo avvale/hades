@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateBoundedContextDto } from './../dto/update-bounded-context.dto';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
 
@@ -10,7 +10,6 @@ import { UpdateBoundedContextCommand } from '@hades/admin/bounded-context/applic
 import { FindBoundedContextByIdQuery } from '@hades/admin/bounded-context/application/find/find-bounded-context-by-id.query';
 
 @ApiTags('[admin] bounded-context')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: BoundedContextDto})
 @Controller('admin/bounded-context')
 export class UpdateBoundedContextController 
 {
@@ -21,6 +20,7 @@ export class UpdateBoundedContextController
 
     @Put()
     @ApiOperation({ summary: 'Update bounded-context' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: BoundedContextDto})
     async main(@Body() payload: UpdateBoundedContextDto)
     {
         await this.commandBus.dispatch(new UpdateBoundedContextCommand(

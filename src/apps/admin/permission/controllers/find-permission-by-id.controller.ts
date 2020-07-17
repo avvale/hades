@@ -7,7 +7,6 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindPermissionByIdQuery } from '@hades/admin/permission/application/find/find-permission-by-id.query';
 
 @ApiTags('[admin] permission')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: PermissionDto})
 @Controller('admin/permission')
 export class FindPermissionByIdController 
 {
@@ -17,6 +16,7 @@ export class FindPermissionByIdController
 
     @Get(':id')
     @ApiOperation({ summary: 'Find permission by id' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: PermissionDto })
     async main(@Param('id') id: string)
     {
         return await this.queryBus.ask(new FindPermissionByIdQuery(id));

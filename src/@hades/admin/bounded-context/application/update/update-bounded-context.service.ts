@@ -47,9 +47,9 @@ export class UpdateBoundedContextService
         // update
         await this.repository.update(boundedContext);        
             
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const boundedContextRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            boundedContext
         );
         
         boundedContextRegister.updated(boundedContext); // apply event to model events

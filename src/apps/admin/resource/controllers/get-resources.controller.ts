@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ResourceDto } from './../dto/resource.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { GetResourcesQuery } from '@hades/admin/resource/application/get/get-resources.query';
 
 @ApiTags('[admin] resource')
-@ApiOkResponse({ description: 'The records has been found successfully.', type: ResourceDto})
 @Controller('admin/resources')
 export class GetResourcesController 
 {
@@ -18,6 +17,9 @@ export class GetResourcesController
 
     @Get()
     @ApiOperation({ summary: 'Find resources according to query' })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [ResourceDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new GetResourcesQuery(queryStatements));   

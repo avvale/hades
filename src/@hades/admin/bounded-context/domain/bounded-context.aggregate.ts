@@ -40,7 +40,7 @@ export class AdminBoundedContext extends AggregateRoot
         
     }
 
-    static register (id: BoundedContextId,name: BoundedContextName,root: BoundedContextRoot,sort: BoundedContextSort,isActive: BoundedContextIsActive,createdAt: BoundedContextCreatedAt,updatedAt: BoundedContextUpdatedAt,deletedAt: BoundedContextDeletedAt,): AdminBoundedContext
+    static register (id: BoundedContextId, name: BoundedContextName, root: BoundedContextRoot, sort: BoundedContextSort, isActive: BoundedContextIsActive, createdAt: BoundedContextCreatedAt, updatedAt: BoundedContextUpdatedAt, deletedAt: BoundedContextDeletedAt, ): AdminBoundedContext
     {
         return new AdminBoundedContext(id, name, root, sort, isActive, createdAt, updatedAt, deletedAt, );
     }

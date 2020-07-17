@@ -9,7 +9,6 @@ import { FindResourceByIdQuery } from '@hades/admin/resource/application/find/fi
 import { DeleteResourceByIdCommand } from '@hades/admin/resource/application/delete/delete-resource-by-id.command';
 
 @ApiTags('[admin] resource')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: ResourceDto})
 @Controller('admin/resource')
 export class DeleteResourceByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteResourceByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete resource by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: ResourceDto })
     async main(@Param('id') id: string)
     {
         const resource = await this.queryBus.ask(new FindResourceByIdQuery(id));
