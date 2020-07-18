@@ -6,8 +6,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'bc9efbb1-2b66-4f8a-8b60-7125694e1a40',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '227dd6b3-43f5-46ad-ae48-6b31543f4d7f'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '5e09071e-30e7-469e-b7eb-2b7feb8e33a3',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '26cd62b1-51c4-46aa-97a0-d3af7cd1a0ce'
     })
     tenantId: string;
     
@@ -26,8 +24,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : 'a29ef734-eaf8-430e-b44a-b57db72ed4d8',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'dad995ab-8a20-44c2-b73a-a37c488191c2'
     })
     systemId: string;
     
@@ -36,8 +33,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'party [input here api field description]',
-        example     : 'ckzziuvfo8yjsyos191b9q00yugjszzmlzw4xl1x5t5ja28x4hibpw3jq7ts84l1gldqk0vg0lzclvxk447edebiuhglgibq69foxt7iy4c1flgy2afou9yp35wwkyjsq9m4jrv2h6egpkif254z0caf0b07haxv',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '9jvsweoj7do1vwnwr4ds0ny6x2m4ae7mphi9fe8grwugrarsc2fqo0cipy8pst0fc4pksr59jdlphx1ggjztcvvngolmvcifddvfywmzuewrbaqyc5zydmdm1igqxj1b2u88h0u6atgp0pihl381vk15pix1zpwn'
     })
     party: string;
     
@@ -46,8 +42,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'component [input here api field description]',
-        example     : '8g8aphm2g4kuj0zese1fkphc5z13jf0v4xd96xk8ur1ttvrul4d5zfz5ypwmfin7r0sya5mzm3qp02wlzwyl8tsk0wrg1mbnzmsl8h6kgh4vq42mevln6oobfo61h6z85hkj68mn7ram82sg3mvjsuf991ha3pec',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'cs40n2xzt1u1bneeelc6y5tmv0atlwsjamfnjil2r233p7m6hhhqv2jvahid7uw6xha3fejjgqlq9gdfag94dttb10fpqq8a7t1ro7g3eddcr7sa0ozdj6xgb85q5570qloh86nznmlcta7xyrhxz4w89ca7s42k'
     })
     component: string;
     
@@ -56,8 +51,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'f6el4mz3yea8oe6crqimsqq6uqdslthpiaam9sf9f5clxit5doq56vybdvu88s573gr5yp78rzemqtb711oomw13tgjed4upr1mp7ito16hz3079hwcse5e7477a9cwbelecb39dssouv51sgtaag7ek1sjk37kw',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'b4lb8l9dv0vdepj8hesq8za6805rle7mmz254zyfwsbn41j6zbvpwteg7cjsd6dtrwy8lf3jca2l8bhdxyt345at4kldlgz3kud32m5jdjqjm24qj2okz7de42l3tkodd5e523sw9b6o14h8gsfci8tzqy9q8k9c'
     })
     name: string;
     
@@ -66,8 +60,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'flowParty [input here api field description]',
-        example     : 'h0cr3tunzs5q2x7t7o5g440u93ft02thjf60fybeftqr9fgkrbhgg0wzjjbleiwk42xkxdl6bmstnjvl36rm0dpealrvptwg7kanqctxfexc17i30gibrdhm7w2bz8pr8q9utjy12w23aohj0qqr79mjgwt9csdv',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'xx7w9v4og5p1p8sjrho3r4gob976mxxm8yv4zrevrp0ohpv6ooarbky2v38mh5aqos5eyu9uvm5sj7zz4xco407t4o2isz6qv7yevfmn7w2rlaga87sfk12d7a3xe2gaa7aqcdt1kwfnkgt2phgnkvcfbahicbxt'
     })
     flowParty: string;
     
@@ -76,8 +69,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'flowComponent [input here api field description]',
-        example     : '7vabmmqdgan4kgv7j1gr9wf1maeq33t064jss1am3qrmnwq0829brfc4rdst226thmgl8b1ciisn1uumslqgohbpzomup6bk7szxv295azz6pcltnudie1ukuzzdemo8tmxtasv48ug8156oqu9w82w9cybknc2g',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'v6t687q5uf1ssa56e89026m3s957jkza585jnzmaad4m7ujwd88w5urw2hv1uzfkaf5nkllxrixy73yke5zu325m818c01lp87yuzb0u14e1t89d72hs2r10je6qqhmwbm4yb4vpzsfflt7r5jnmwsjderjr4rpj'
     })
     flowComponent: string;
     
@@ -86,8 +78,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'flowInterfaceName [input here api field description]',
-        example     : 'cm9kt7qzdc47yutjla5xz8iwz6xtkwahmaj8h0m4bsvbhkdk7okalvxjj6y03hyof5outg7m65kwnfjwj8zct3br16xxs8nuyqvlugufo0x4citv1bj07b07qqplwg2h5dgem6bms0xtgfwuiutpxhk87zwh0440',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'epx3juigtl1uisrucc7eru2o0y5swedruy4lx9jp36yx38j3ebz23w4b9b0zwwenpjglf3z09iqgv1bgzi8v0f9zaf1yhfdoxcjixxo4qgraft0ltrn4jxp0bsqrhtx15ktuf7rht2wq9q67l84nkauh6c2yzwno'
     })
     flowInterfaceName: string;
     
@@ -96,8 +87,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'flowInterfaceNamespace [input here api field description]',
-        example     : '6l1qugb8lsa7tjmz45zb7yqltz9p6zqjaok3pwa1ayzz0hashlyvd4a01mo2jagyjmq8istcx1ms7f7bw4g1usuv9j45hc6id6izl528b68uivmbokvm2x2of36l5n5x9n2zfgpo4krajzxe57h0cvq4nfk55ilh',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 't3ewnxr3gtm3a6sqk10k50zxv2q6drfxweqpwp21kc3lcwbnh4v97h3av28xxkx5szwc2wtv2juufhlxvubxt1sv1tamd5kmri5xy3y9o1nx7t9qg9bhrnavae7bi10rfkhivumk24fslljbfceso87zt7v60a9b'
     })
     flowInterfaceNamespace: string;
     
@@ -106,8 +96,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'adapterType [input here api field description]',
-        example     : 'ktaue1irejx17evax9g98gxwc4zkrrq5l3uom384hyeyi9k4jxzttigluj8s',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'fjg2dx3c4u2o0tpvu5cda24egw4n023ws2leex8h6572a0ge14n6xwbs5f5s'
     })
     adapterType: string;
     
@@ -116,8 +105,8 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'direction [input here api field description]',
-        example     : 'SENDER',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'RECEIVER',
+        enum        : ['SENDER','RECEIVER']
     })
     direction: string;
     
@@ -126,8 +115,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'transportProtocol [input here api field description]',
-        example     : '6hyu3hurbpf0pv6pxbml76sybfkm371e2jmzzwk0enast5h2ljr2zpf6bdx8',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'e72hnle2mnlkz7fmm17dh2utflatyvxtzyvj3edyjueejzpac5thiyd9jax9'
     })
     transportProtocol: string;
     
@@ -136,8 +124,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'messageProtocol [input here api field description]',
-        example     : 'ydcfzzjcf1zyhp4t7s7n3k9tmskmrocshnpgedkkbp2bpo9fa5cqym96gyc6',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'godzps3ncrr8uwgdqh5hxifuqhrp50p1ldmlgnkdm2nrcwc5d53zk0vcu5kr'
     })
     messageProtocol: string;
     
@@ -146,8 +133,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'adapterEngineName [input here api field description]',
-        example     : 'av9zuxe0gqpdn8pmpjrpihmgxowhmfw5wg1ulibd6jxzqpd38et1tfmookxtlrx15dlx608j3oufsv1q8twsu998htiaepoh0ss583zejzhfyb41fazfvxqpr6ybyib408utav60ziwseyq9484q57r9li2wcl9j',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'qjqzjb1ms30bcg0wd8i5fy5yd7a3cion4qnr03jl80i4ncrxtz6jflhghfjw4mu3a1jr3gwi7enecsds5lmfnx9pr7ujk9lehs9x7le478di60ino5hmpdryv61o9up08pkzxgm1mw72sihlvna3s7hukzhfw5se'
     })
     adapterEngineName: string;
     
@@ -156,8 +142,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'url [input here api field description]',
-        example     : 'ym4yjzz4tm5n3cfhkgskm032rush1e6v197pbwmwcag9rezgb4uj61c6qx63lk1eznnqfjqze31uzeidv8grcydurk4ei3c3o4o266r12x25cg0awjdukdvfqo0a6tlxals8nz640wzzwzn8tu6p7w8h4ybwr6z3km0b7t1p46b4sdxsvl0hyk3d2rlgv4uyem0slpasbdnsp0nnxr1a9p32x33qqx458j64wy6dawkda1tq0dec2ren9562c996i21m5sdeu4wr2wbxtxtxm7g7os3ivcv4sb60l74mph8hpolpbde53gg79s7995lc',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'kqcpzh9w1ev7qx6f36srjojiel0s9ol87igmltzlfbqnl7czax3jg7jd7wz3f5ni9pyn7dal96o8iv1yowgr6o5lfbzli54xtn2woc0gri4hci8jhazl62195lsfsgehgnt30qk4xjr8rerwz75g3ox5pu7if102hdapkikbi189p4ijc3mivsi32o4lglaeryz9wqhg92pad145vll7z29gypv7r6dulvaakuwh71h5izp0dllujix79ztdsu76ugu9xcmrsyo7f00u9hi4lvqr1jo0iv2xszmavboc8h55ve5djda4izaak613qinx'
     })
     url: string;
     
@@ -166,8 +151,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'username [input here api field description]',
-        example     : 'ryzku8m5kskwj154hpj0sqdw355ws5xm9z10qi7k70df3a5og35cjboqltm0',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'v7bt1k7r89zu5m5pmp4zo0agkt3u59nrs0pzyfakw35k0iylnsl9txw3krhc'
     })
     username: string;
     
@@ -176,8 +160,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'remoteHost [input here api field description]',
-        example     : 'wimdjujn92u7gboxbwzy06i1fi8ydu41ziregnej80cgm6oyoygjglqxrv9bec3a0hc5dyxsnj0cl30z1ebuhhhtkl15y3215nbon8xs1r6r4r8hd8owdv88v60dhwgoq4lqzbxc9dki54w2khy9glnq8quoi04e',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'qsoglil4vxvpnxjmv51ryvsyiigfrgt1e6b7g31wqbz31xr4esbiwq25nnnczqxhyhegpjfjig1orcmspspwgec2l1nw50puji3z39z9khuw1k3k0xx1ajw1nr9tv0vh5vr959brumh0wkr9fcinp9eb85swu3nm'
     })
     remoteHost: string;
     
@@ -186,8 +169,7 @@ export class ChannelDto
     @ApiProperty({
         type        : Number,
         description : 'remotePort [input here api field description]',
-        example     : 3577160266,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 4472622044
     })
     remotePort: number;
     
@@ -196,8 +178,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'directory [input here api field description]',
-        example     : 'impq2wu8m206ebzsot6rdiljos8mc552nbkctrm5w1rxjg3ei5kqmu100oh5u32kunku9a6db28b6jl0vjpmv449avcdb99ndpzf802hgaqyysc31vfie48xjboiwrwky0svqr9e78mf9m52kgya2gvralsc6gj9k04f1zhm2c71v7kf57oevkn3pqt9esby6ctmqsgeojdjneeihqo3u3tccgc56zlgl703f0nhcyl7vxmk0l4r8b781a0p5v3wtl2p1w2ee8d4fsj0ybp9mlnhwx9vi8gbaqgkq417yptqcmcb9boze09tlg20qgq543tus50khz09z3keq1aemlaj9v1tier5ntaflboisvatwhk693fdmczaecal5nfl86rr7mj4mhbop8rglsttb8xklmxkufarne52wwq0mdhinzlldq7wfqn32p4kkmjv33108a9rpb1kft002s3wbr9701loykql7p6k5vyux5yxh87vxf728g470pv53u91xje1q7y0ndcpo0mvyp5hrptoodc1m1tpyroyeu2gjxhbfkn3bgyrogtfvl6vd46ofo4kvros2gidmlfdh721i198894tc61onj5v8k5slfzeobrt5fb3z42t0m1inc7mfw1umfuzkqewgy66io098s2lhsxuua5obukq1dca0j2042daurfvrxz2poli7dmmxzeezrcso9sovp0jg63sonekqervc9ysa1qivr1lffyxniki93z93pkzcsgcsqoxy4v9ut8q1waohce5wzxpue9mhotvqhkezh4j53bqk91ya9hx4qpzlk9mj5yqo4xbm9xk6g2vmggdrsb8roh2is0tindi8i4v0egkfjzxbyhsa997i0oh6v3ziv7on2bm8ugtyd845ryy7rnna9sd3xfww8gwljwr6799gkv52mtxp16tssb61gskbo9ut9qc5cbk4bflqe1bblu6ah4d1sfd9q2uovy6sb5wkylfuy57froi5qg98owygkjgu5os',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2974nebli4j2pnwpy3yantpldifid7l4w5zylj0rto96glm0gaf7cdo5lwswbu04ieesypdzvtu5xn3hs4ksjs8uvtyh4e4jscxsz1b7ro5rmcv1zzz1165mlmq6o8aql4e4233t0adgvd67nm2ijnd34l4164xl66hx8k8cx0l3pwg97a3dinfnu6ib06ui8o60769517bu03biuan9zk49t98v9g2n1pbkzidjv9n10ftxpgdoegzovfidmfs5vfednxg6cujbhwnmxtq6ownmff2a94e0gysw11imco7376xz1jp3c96h8ohf39syos9u9s29dp6vgtksk30s1k0nvahis8zn7tzx8zqswhirudpvxmr30nspmbombnrbdngfc0kqmaficylbxjfs9fmbwtpepsil3djrzv0vtpfuiycclswk2bk7j6msozi9nvqzei531vzpfy4ck865p5jj42jxiwzmbt978jnwmha5j7c6i12pohjik11z20ayqf6g3vgwxxifyukwjrv56pbv4ixae4q49kmik5llkwd15qt1p40b0trr9ekumkrrp59e0scr9f4lpopbtp1b26ryqms7nq4ows7mdwfzvffznczzf2tsm53jy9c1g42e4c5l19ridqs1kmed7m6khays9mst0emv9kdxccxmpyn8ri6krbt8ec53r1j80ufe61x5kxi4k14qkqsu5mv9ak22ft0gy6q9zwwu4g6cvaycgkisi8wv69nhf7cjbm1luuiy50bfrfebbjn0mqtqf6bwe1xc1qxv0leedb4dditlav9go5t9lnn5xogvy4zxwo24i3qk4990ljrk2fwn8ibuv0a1t7yt0g5bioll9p7nrg49by0cdp5dc3umcis48v4evyevvdk753bycgyaw6obkctlylm3x0gd9b3ll5dorrbmf1r7ro4c7pj7m4seq6cgrpjo6j7m5b8i75upmyr3u25g7dnhain8bfltgeg62nhm8nzpohqgva4ievnw'
     })
     directory: string;
     
@@ -206,8 +187,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'fileSchema [input here api field description]',
-        example     : 'eotvkd3l21g2s5ib8t17vndm6lz1hewu5c0286n5xakgjxv9oo08mq863b5yvsp6pzz94cyrdp460c04bq7tmzolz3auvr1uvqz75cz3eux4h2fc5rgkgjxmcdqh6wrb2z3abjsvc7ovs0gy6a3veigft6bgg9bo9rld1xptbwyglunxfrvtm9v3vpaw2b1jp68w2qs52zumspehl9vqda245pvrd67sl910ulef1xcehy2oqz0udyq91hirdenigywc6p0reo9awi4642c5egvihjb0r0tmwmvarypohd8dtepphrpclbo8kzdqqrdg71wbda38nran5b0ao9mcn7uwtenczh2nj94lbd0v1tz1m4kpo0wa7lv1vjtmnoxa6m21uiq1io7i6ur1gz71su426p0098itxw8q9dzoncvqm20857dfyt1hcfq96175dg7e34qw8wz8zoymz2pq4yy50phqqnzg2bejlencc0uaablf71oyl1ywmui5rpwqbw7mh84k3mgyyu73nl37lrfoppzr2vp9x0e6h5sfp24gl9qg9i588zr1bilv8lkmgwqhfq319qx57vf0ryh5aw798p3gzd4m7okjqhsr25az7rvsxstmvceptfc1hcnhgm7fexqa7b6cdayr3t2hd33ksrwc8twzmnc61t97ed70xllu2n1maok1erky5c3pazd8fzuoj8yqt13bg7y4gq0z9p64l89h46n2ybgmtfsezug7uk6gqyrqufl1yqbpfj2dihmdhaacn2zvek9bkpushhs2x3kbq61j0o4l3f8k75ijx5rgllbgtoifkv33qcs44pkxqqat3zrzty1s6r19n7hg5mkuzjvlih7wsognxfkbg0ez2zyosb4mv5pa55sbbjfos2br6nbjxj13yylmrulfton0asmjm4cjdu84z3959oeiwoywuxic2xswcsh8cv3hpeiyqrkabet9bdm71gnreup4265wxxjgs55lxbl0baakj8we6af6fwi1',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'xroqtydafs0i6ehkwlqzpv87euo13gu2o0cvzq5z3vmo34yyjm7gec07g30f8omqhrcj55s1sqrdac58lcyvvhmkhjiuc2r997piix3un65ky9t5w7d33s6xn0fwxwii4jyvpl3b46xxd388hajaa3kpjfeew0rmdb2q25r1ekog6dpnuo38788apdhzyq346rpvk0pz86huxikv8xzwue636nrubm4r1b8jcfo1gop8xjay7fwb50t45kik4ghbjxz7ejzfe63y3i89t9tnq8jbz2c30e5cutadjlji8pprium10tfpnbzsv5oqc4gvf2bo4ixhp43daogzo70vnj1gpnai0onj8d98e299h8olkz8h549rwdcmaqbmnv2yrqjg1wf5zu3zs2umt2sr9oxijiigcde506gxlimtaommfpwxot9oak0gg33w72h1vyudu5yo11k9bge7f4v2l78ucx9wqo1d67gxb7at1tt626m9bz1gr6kmip23wpety8tucmo2jbv9zyg9l8oexz00aurta81j5ue7y9gvrssl1n4hrxfqyh9q72d2aakw93h6rnl4szmmceoqpbgvyzoe8ourqpbct3tt18jut1ynqm6913gx3qcawrgeaaoh2f13z0gqi31ih8i2y4ntx25s9k18783dvvch4p02c350efxb6ouv2ywkazlzsqpzr42v6shyx55msbk0db9m9ri2opnvdd4lemj443w9odkx9rybwyjgr2cmq3rnvlncs23gdl1f826sejhx9q1maxh1xngliq8498akv9r0yf8zghxd7s3vxnq94kfjs4vtlu08044jrajr9cmxlgzt5kzyhnppmath5y403fsjyjr574blocaeeo2372fhfj06yvbgnwjpuzg26lzbwkvfoj8qw8kud7ft6e7t5vwym8jzv81mkfg9hrolameaid0g3frsenxwccsos1hzsbs8cx827psz9jiovysmhv7ipfrghrj0w44yy8gbb6nugg64'
     })
     fileSchema: string;
     
@@ -216,8 +196,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'proxyHost [input here api field description]',
-        example     : 'yhr1d7saacdib5pjpmg3onk1xp0fgrnxzcb5rf1j3uncn6pbzlho87cw7w5q',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2ko6f7wauju8pqdb0ux92o8udrik6xh2a86wlflpezdoif66dyoyo6gazr4t'
     })
     proxyHost: string;
     
@@ -226,8 +205,7 @@ export class ChannelDto
     @ApiProperty({
         type        : Number,
         description : 'proxyPort [input here api field description]',
-        example     : 8901907688,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 7255111005
     })
     proxyPort: number;
     
@@ -236,8 +214,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'destination [input here api field description]',
-        example     : 'tsm8fiaol4b3inzrcppk38z5u1fgvdm8ioewrcks0bov2i9qmbi5ua0v2qluneq831si41ev9zihw3g0jl31qcn6t5mmgrh2anz6di06bbk26vz0nnzgkvqwu2jbx7ohxu5q3yfyvii21pw2d0n00f2l8y6u1hnd',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'mmq318voi8uhldfgs48lxdh4ygs6dsv5xmrc2ods7ht6rcd83zd83u4buhgdmarmrirmwvpaxphq179vrdzxrzungcge24ui5dztjc64xkc8skbzd2mw0pk6xqeapu4mhi47qf6qz8mzqv5lop5atq21ah35us8i'
     })
     destination: string;
     
@@ -246,8 +223,8 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'adapterStatus [input here api field description]',
-        example     : 'ACTIVE',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'INACTIVE',
+        enum        : ['ACTIVE','INACTIVE']
     })
     adapterStatus: string;
     
@@ -256,8 +233,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'softwareComponentName [input here api field description]',
-        example     : 'rje129p4tmgnmqhj2fup928t59vfu016meg4mjjkcfygl3367s6bjuximkz7m719x5cpr36joz3ouaxc6o8qh5qlnikm657w80kkbq2r5wpfmkqzntj0e7ls85jbmchum7ouofoyptnmlajj2utnb6gc5zvizshv',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'utzlj4r18pqcv7eb6bs59y4hweixvb0b6ob0jf0ag61wgcdwmfckruy275cx6tmx5ntxt59hftbtrt74tq76ote6fjvsymu9znqhhw7adl1onl1hh142gbtqgmmhi1bdy2tr81j68weiodvr8emcgfdhaz01iway'
     })
     softwareComponentName: string;
     
@@ -266,8 +242,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'responsibleUserAccountName [input here api field description]',
-        example     : 'rh6sa1qh2rzulr3ojse6',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '8jqer1kudbi3yhuiru66'
     })
     responsibleUserAccountName: string;
     
@@ -276,8 +251,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'lastChangeUserAccount [input here api field description]',
-        example     : 'fmzzbkwc4kdx124ppf8i',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '11s1l66sq7b1gt8bcf4j'
     })
     lastChangeUserAccount: string;
     
@@ -286,8 +260,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'lastChangedAt [input here api field description]',
-        example     : '2020-07-17 00:27:16',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-18 16:18:53'
     })
     lastChangedAt: string;
     
@@ -296,8 +269,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-17 14:26:14',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-18 15:09:29'
     })
     createdAt: string;
     
@@ -306,8 +278,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-17 08:00:31',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-17 19:13:15'
     })
     updatedAt: string;
     
@@ -316,8 +287,7 @@ export class ChannelDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-16 20:42:24',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-18 03:34:51'
     })
     deletedAt: string;
     
