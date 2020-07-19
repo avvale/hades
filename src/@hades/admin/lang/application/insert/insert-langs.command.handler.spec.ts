@@ -47,7 +47,6 @@ describe('InsertLangsCommandHandler', () =>
             expect(await commandHandler.execute(
                 new InsertLangsCommand(
                     langs
-                
                 )
             )).toBe(undefined);
         });

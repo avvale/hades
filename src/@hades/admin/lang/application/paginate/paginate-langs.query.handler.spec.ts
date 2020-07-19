@@ -3,7 +3,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { PaginateLangsQueryHandler } from './paginate-langs.query-handler';
 import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-lang.repository';
-import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
 import { LangMapper } from '@hades/admin/lang/domain/lang.mapper';
 import { Command } from '@hades/shared/domain/persistence/sql-statement-input';
@@ -57,7 +56,7 @@ describe('PaginateLangsQueryHandler', () =>
             expect(queryHandler).toBeDefined();
         });
 
-        it('should return an langs founded', async () => 
+        it('should return an langs paginated', async () => 
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {
