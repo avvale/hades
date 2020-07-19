@@ -6,7 +6,7 @@ export class CreateBoundedContextDto
         @ApiProperty({
             type        : String,
             description : 'id [input here api field description]',
-            example     : '55dab76c-fcc8-4dbb-877f-503e2c7c0e8a'
+            example     : 'db1564dd-99ac-4a9e-b51d-87a45133fc0b'
         })
         id: string;
     
@@ -15,7 +15,7 @@ export class CreateBoundedContextDto
         @ApiProperty({
             type        : String,
             description : 'name [input here api field description]',
-            example     : 'w7qo5ikrtv2nkpqguornbaw3c5gzqb15btk8fqppvnzh5ts34egkyfpd2066zag4h33nomx5r969urb0kjzzszbv5ykk9czazmvnc784w4ddrgpet5pit6560pgdkdspvtx53ykzl1iqavjibcp17fxy4d41nq8sjmd35me1cmbiydsmjep13sy3uz3i5hkgy2cjqjare46v61kggyufhu9tqcksbb9jcjo7m6lrsgkmqk5tnzzyood468yt2ie'
+            example     : 'odpid37ovnmpib6gtrygq9fvn5maiicsir2ei2m6y6yb5u23n0isnlhyofdn10fs4ulggbp71mp8fqm4h6ylnyhaczu7l5n1wlb42j6b49yhrpm3go8wls3y232qur8792pzgr9ccpc4lg70rzgssuyxi2vumu25y2t96ck5v7l6gdvt5b9mvq68llsa79et3im3z65fxlelez0aht263qk7wto1x1v8nlhq0h3ab43dqek0p33hs5xq3bqgjht'
         })
         name: string;
     
@@ -24,7 +24,7 @@ export class CreateBoundedContextDto
         @ApiProperty({
             type        : String,
             description : 'root [input here api field description]',
-            example     : 'q4goudzjnw5phg246ag6'
+            example     : '3gra9gbpty51hsyw8dix'
         })
         root: string;
     
@@ -33,7 +33,7 @@ export class CreateBoundedContextDto
         @ApiProperty({
             type        : Number,
             description : 'sort [input here api field description]',
-            example     : 470258
+            example     : 946197
         })
         sort: number;
     
@@ -42,7 +42,7 @@ export class CreateBoundedContextDto
         @ApiProperty({
             type        : Boolean,
             description : 'isActive [input here api field description]',
-            example     : true
+            example     : false
         })
         isActive: boolean;
     

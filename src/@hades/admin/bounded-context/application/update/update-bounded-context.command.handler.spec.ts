@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { UpdateBoundedContextCommandHandler } from './update-bounded-contexts.command-handler';
-import { boundedContexts } from '@hades/admin/bounded-contexts/infrastructure/seeds/bounded-contexts.seed';
-import { UpdateBoundedContextCommand } from './update-bounded-contexts.command';
-import { UpdateBoundedContextService } from './update-bounded-contexts.service';
+import { UpdateBoundedContextCommandHandler } from './update-bounded-context.command-handler';
+import { boundedContexts } from '@hades/admin/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { UpdateBoundedContextCommand } from './update-bounded-context.command';
+import { UpdateBoundedContextService } from './update-bounded-context.service';
 
 describe('UpdateBoundedContextCommandHandler', () => 
 {
