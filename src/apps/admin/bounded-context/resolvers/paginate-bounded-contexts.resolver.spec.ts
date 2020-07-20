@@ -37,19 +37,19 @@ describe('PaginateBoundedContextsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateBoundedContextsResolver should be defined', () => 
+    test('PaginateBoundedContextsResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('PaginateBoundedContextsResolver should be defined', () => 
+        test('PaginateBoundedContextsResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a boundedContexts', async () => 
+        test('should return a boundedContexts', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts)));
             expect(await resolver.main([], [])).toBe(boundedContexts);

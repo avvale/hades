@@ -41,20 +41,14 @@ describe('FindBoundedContextByIdQueryHandler', () =>
         mapper          = new BoundedContextMapper();
     });
 
-    it('FindBoundedContextByIdQueryHandler should be defined', () => 
-    {
-        expect(queryHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('FindBoundedContextByIdQueryHandler should be defined', () => 
+        test('FindBoundedContextByIdQueryHandler should be defined', () => 
         {
             expect(queryHandler).toBeDefined();
         });
 
-        it('should return an boundedContext founded', async () => 
+        test('should return an boundedContext founded', async () => 
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

@@ -29,20 +29,14 @@ describe('CreateBoundedContextCommandHandler', () =>
         service         = module.get<CreateBoundedContextService>(CreateBoundedContextService);
     });
 
-    it('CreateBoundedContextCommandHandler should be defined', () => 
-    {
-        expect(commandHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('CreateBoundedContextCommandHandler should be defined', () => 
+        test('CreateBoundedContextCommandHandler should be defined', () => 
         {
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return an boundedContext created', async () => 
+        test('should create the values objects and pass them as parameters to the CreateBoundedContextService', async () => 
         {
             expect(await commandHandler.execute(
                 new CreateBoundedContextCommand(

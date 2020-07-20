@@ -39,19 +39,14 @@ describe('DeleteBoundedContextsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteBoundedContextsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteBoundedContextsController should be defined', () => 
+        test('DeleteBoundedContextsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an boundedContexts deleted', async () => 
+        test('should return an boundedContexts deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts)));
             expect(await controller.main([])).toBe(boundedContexts);

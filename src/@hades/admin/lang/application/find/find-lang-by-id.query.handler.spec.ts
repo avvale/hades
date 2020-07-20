@@ -42,7 +42,7 @@ describe('FindLangByIdQueryHandler', () =>
         mapper          = new LangMapper();
     });
 
-    it('FindLangByIdQueryHandler should be defined', () => 
+    test('FindLangByIdQueryHandler should be defined', () => 
     {
         expect(queryHandler).toBeDefined();
     });
@@ -50,12 +50,7 @@ describe('FindLangByIdQueryHandler', () =>
     // Test get method
     describe('main', () => 
     {
-        it('FindLangByIdQueryHandler should be defined', () => 
-        {
-            expect(queryHandler).toBeDefined();
-        });
-
-        it('should return an lang founded', async () => 
+        test('should return an lang founded', async () => 
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

@@ -39,20 +39,14 @@ describe('InsertBoundedContextsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('InsertBoundedContextsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('InsertBoundedContextsController should be defined', () => 
+        test('InsertBoundedContextsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an boundedContexts created', async () => 
+        test('should return an boundedContexts created', async () => 
         {
             expect(await controller.main(boundedContexts)).toBe(undefined);
         });

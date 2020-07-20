@@ -38,20 +38,19 @@ describe('InsertBoundedContextsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('InsertBoundedContextsResolver should be defined', () => 
+    test('InsertBoundedContextsResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('InsertBoundedContextsResolver should be defined', () => 
+        test('InsertBoundedContextsResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an boundedContexts created', async () => 
+        test('should return an boundedContexts created', async () => 
         {
             expect(await resolver.main(<AdminCreateBoundedContextInput[]>boundedContexts)).toBe(true);
         });

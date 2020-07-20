@@ -42,20 +42,14 @@ describe('PaginateBoundedContextsQueryHandler', () =>
         mapper          = new BoundedContextMapper();
     });
 
-    it('PaginateBoundedContextsQueryHandler should be defined', () => 
-    {
-        expect(queryHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('PaginateBoundedContextsQueryHandler should be defined', () => 
+        test('PaginateBoundedContextsQueryHandler should be defined', () => 
         {
             expect(queryHandler).toBeDefined();
         });
 
-        it('should return an boundedContexts paginated', async () => 
+        test('should return an boundedContexts paginated', async () => 
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {

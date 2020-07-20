@@ -39,20 +39,14 @@ describe('CreateBoundedContextController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('CreateBoundedContextController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('CreateBoundedContextController should be defined', () => 
+        test('CreateBoundedContextController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an boundedContext created', async () => 
+        test('should return an boundedContext created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await controller.main(boundedContexts[0])).toBe(boundedContexts[0]);

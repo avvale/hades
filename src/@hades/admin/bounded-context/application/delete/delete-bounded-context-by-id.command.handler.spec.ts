@@ -29,24 +29,18 @@ describe('DeleteBoundedContextByIdCommandHandler', () =>
         service         = module.get<DeleteBoundedContextByIdService>(DeleteBoundedContextByIdService);
     });
 
-    it('DeleteBoundedContextByIdCommandHandler should be defined', () => 
-    {
-        expect(commandHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('DeleteBoundedContextByIdCommandHandler should be defined', () => 
+        test('DeleteBoundedContextByIdCommandHandler should be defined', () => 
         {
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return void', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteBoundedContextByIdService', async () => 
         {
             expect(await commandHandler.execute(
                 new DeleteBoundedContextByIdCommand(
-                    BoundedContext[0].id,
+                    boundedContexts[0].id,
                 
                 )
             )).toBe(undefined);
