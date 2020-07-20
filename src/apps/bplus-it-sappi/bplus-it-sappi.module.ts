@@ -16,6 +16,7 @@ import { BplusItSappiChannelDetailControllers, BplusItSappiChannelDetailResolver
 import { BplusItSappiModuleControllers, BplusItSappiModuleResolvers } from './module';
 import { BplusItSappiMessageOverviewControllers, BplusItSappiMessageOverviewResolvers } from './message-overview';
 import { BplusItSappiMessageDetailControllers, BplusItSappiMessageDetailResolvers } from './message-detail';
+import { BplusItSappiSnapshotControllers, BplusItSappiSnapshotResolvers } from './snapshot';
 
 @Module({
     imports: [
@@ -38,7 +39,8 @@ import { BplusItSappiMessageDetailControllers, BplusItSappiMessageDetailResolver
         ...BplusItSappiChannelDetailControllers,
         ...BplusItSappiModuleControllers,
         ...BplusItSappiMessageOverviewControllers,
-        ...BplusItSappiMessageDetailControllers
+        ...BplusItSappiMessageDetailControllers,
+        ...BplusItSappiSnapshotControllers
     ],
     providers: [
         ...BplusItSappiHandlers,
@@ -58,7 +60,8 @@ import { BplusItSappiMessageDetailControllers, BplusItSappiMessageDetailResolver
         ...BplusItSappiChannelDetailResolvers,
         ...BplusItSappiModuleResolvers,
         ...BplusItSappiMessageOverviewResolvers,
-        ...BplusItSappiMessageDetailResolvers
+        ...BplusItSappiMessageDetailResolvers,
+        ...BplusItSappiSnapshotResolvers
     ]
 })
 export class BplusItSappiModule {}
