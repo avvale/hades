@@ -17,6 +17,7 @@ import {
 } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
 import { AdminLang } from './../../domain/lang.aggregate';
+import { LangsEventCreator } from './../../domain/langs.event-creator';
 
 @Injectable()
 export class InsertLangsService
@@ -58,13 +59,11 @@ export class InsertLangsService
         // insert
         await this.repository.insert(entityLangs);
 
-        // TODO a falta de definir eventos
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
-        // const langsRegistered = this.publisher.mergeObjectContext(
-        //     await this.repository.findById(id)
-        // );
-        // 
-        // langsRegistered.created(langs); // apply event to model events
-        // langsRegistered.commit(); // commit all events of model
+        // create LangsEventCreator to have object wrapper to add event publisher functionality
+        // insert EventBus in object, to be able to apply and commit events
+        const langsRegistered = this.publisher.mergeObjectContext(new LangsEventCreator(entityLangs));
+ 
+        langsRegistered.created(); // apply event to model events
+        langsRegistered.commit(); // commit all events of model
     }
 }

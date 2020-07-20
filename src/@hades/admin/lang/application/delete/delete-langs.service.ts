@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ILangRepository } from './../../domain/lang.repository';
+import { LangsEventCreator } from './../../domain/langs.event-creator';
 
 @Injectable()
 export class DeleteLangsService
@@ -18,11 +19,11 @@ export class DeleteLangsService
 
         await this.repository.delete(queryStatements);        
 
-        // TODO a falta de definir eventos
+        // create LangsEventCreator to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        // const langsRegistered = this.publisher.mergeObjectContext(langs);
-        
-        // langsRegistered.deleted(langs); // apply event to model events
-        // langsRegistered.commit(); // commit all events of model
+        const langsRegistered = this.publisher.mergeObjectContext(new LangsEventCreator(langs));
+
+        langsRegistered.deleted(); // apply event to model events
+        langsRegistered.commit(); // commit all events of model
     }
 }
