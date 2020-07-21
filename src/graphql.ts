@@ -35,6 +35,47 @@ export enum BplusItSappiChannelAdapterStatus {
     INACTIVE = "INACTIVE"
 }
 
+export enum BplusItSappiExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
+export enum BplusItSappiJobDetailExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
+export enum BplusItSappiJobDetailStatus {
+    CANCELLED = "CANCELLED",
+    COMPLETED = "COMPLETED",
+    ERROR = "ERROR"
+}
+
+export enum BplusItSappiJobOverviewExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
+export enum BplusItSappiMessageDetailExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
+export enum BplusItSappiMessageDetailStatus {
+    SUCCESS = "SUCCESS",
+    CANCELLED = "CANCELLED",
+    DELIVERING = "DELIVERING",
+    ERROR = "ERROR",
+    HOLDING = "HOLDING",
+    TO_BE_DELIVERED = "TO_BE_DELIVERED",
+    WAITING = "WAITING"
+}
+
+export enum BplusItSappiMessageOverviewExecutionType {
+    SUMMARY = "SUMMARY",
+    DETAIL = "DETAIL"
+}
+
 export enum Command {
     COUNT = "COUNT",
     LIMIT = "LIMIT",
@@ -325,6 +366,322 @@ export interface BplusItSappiUpdateDataLakeInput {
     data?: JSON;
 }
 
+export interface BplusItSappiCreateExecutionInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    type: BplusItSappiExecutionType;
+    monitoringStartAt: GraphQLTimestamp;
+    monitoringEndAt: GraphQLTimestamp;
+    executedAt: GraphQLTimestamp;
+}
+
+export interface BplusItSappiUpdateExecutionInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    type?: BplusItSappiExecutionType;
+    monitoringStartAt?: GraphQLTimestamp;
+    monitoringEndAt?: GraphQLTimestamp;
+    executedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiCreateFlowInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    scenario: GraphQLString;
+    party?: GraphQLString;
+    component: GraphQLString;
+    interfaceName: GraphQLString;
+    interfaceNamespace: GraphQLString;
+    iflowName?: GraphQLString;
+    responsibleUserAccount?: GraphQLString;
+    lastChangeUserAccount?: GraphQLString;
+    lastChangedAt?: GraphQLTimestamp;
+    folderPath?: GraphQLString;
+    description?: GraphQLString;
+    application?: GraphQLString;
+    isCritical: GraphQLBoolean;
+    isComplex: GraphQLBoolean;
+    fieldGroupId?: string;
+    data?: JSON;
+}
+
+export interface BplusItSappiUpdateFlowInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    scenario?: GraphQLString;
+    party?: GraphQLString;
+    component?: GraphQLString;
+    interfaceName?: GraphQLString;
+    interfaceNamespace?: GraphQLString;
+    iflowName?: GraphQLString;
+    responsibleUserAccount?: GraphQLString;
+    lastChangeUserAccount?: GraphQLString;
+    lastChangedAt?: GraphQLTimestamp;
+    folderPath?: GraphQLString;
+    description?: GraphQLString;
+    application?: GraphQLString;
+    isCritical?: GraphQLBoolean;
+    isComplex?: GraphQLBoolean;
+    fieldGroupId?: string;
+    data?: JSON;
+}
+
+export interface BplusItSappiCreateJobDetailInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiJobDetailExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    status: BplusItSappiJobDetailStatus;
+    name?: GraphQLString;
+    returnCode?: GraphQLInt;
+    node?: GraphQLString;
+    user?: GraphQLString;
+}
+
+export interface BplusItSappiUpdateJobDetailInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    executionId?: string;
+    executionType?: BplusItSappiJobDetailExecutionType;
+    executionExecutedAt?: GraphQLTimestamp;
+    executionMonitoringStartAt?: GraphQLTimestamp;
+    executionMonitoringEndAt?: GraphQLTimestamp;
+    status?: BplusItSappiJobDetailStatus;
+    name?: GraphQLString;
+    returnCode?: GraphQLInt;
+    node?: GraphQLString;
+    user?: GraphQLString;
+}
+
+export interface BplusItSappiCreateJobOverviewInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiJobOverviewExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    cancelled?: GraphQLInt;
+    completed?: GraphQLInt;
+    error?: GraphQLInt;
+}
+
+export interface BplusItSappiUpdateJobOverviewInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    executionId?: string;
+    executionType?: BplusItSappiJobOverviewExecutionType;
+    executionExecutedAt?: GraphQLTimestamp;
+    executionMonitoringStartAt?: GraphQLTimestamp;
+    executionMonitoringEndAt?: GraphQLTimestamp;
+    cancelled?: GraphQLInt;
+    completed?: GraphQLInt;
+    error?: GraphQLInt;
+}
+
+export interface BplusItSappiCreateMessageDetailInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    scenario?: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiMessageDetailExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    flowId: string;
+    flowParty?: GraphQLString;
+    flowComponent: GraphQLString;
+    flowInterfaceName: GraphQLString;
+    flowInterfaceNamespace: GraphQLString;
+    status: BplusItSappiMessageDetailStatus;
+    detail?: GraphQLString;
+    example?: GraphQLString;
+    startTimeAt?: GraphQLTimestamp;
+    direction?: GraphQLString;
+    errorCategory?: GraphQLString;
+    errorCode?: GraphQLString;
+    errorLabel?: GraphQLString;
+    node?: GraphQLInt;
+    protocol?: GraphQLString;
+    qualityOfService?: GraphQLString;
+    receiverParty?: GraphQLString;
+    receiverComponent?: GraphQLString;
+    receiverInterface?: GraphQLString;
+    receiverInterfaceNamespace?: GraphQLString;
+    retries?: GraphQLInt;
+    size?: GraphQLInt;
+    timesFailed?: GraphQLInt;
+}
+
+export interface BplusItSappiUpdateMessageDetailInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    scenario?: GraphQLString;
+    executionId?: string;
+    executionType?: BplusItSappiMessageDetailExecutionType;
+    executionExecutedAt?: GraphQLTimestamp;
+    executionMonitoringStartAt?: GraphQLTimestamp;
+    executionMonitoringEndAt?: GraphQLTimestamp;
+    flowId?: string;
+    flowParty?: GraphQLString;
+    flowComponent?: GraphQLString;
+    flowInterfaceName?: GraphQLString;
+    flowInterfaceNamespace?: GraphQLString;
+    status?: BplusItSappiMessageDetailStatus;
+    detail?: GraphQLString;
+    example?: GraphQLString;
+    startTimeAt?: GraphQLTimestamp;
+    direction?: GraphQLString;
+    errorCategory?: GraphQLString;
+    errorCode?: GraphQLString;
+    errorLabel?: GraphQLString;
+    node?: GraphQLInt;
+    protocol?: GraphQLString;
+    qualityOfService?: GraphQLString;
+    receiverParty?: GraphQLString;
+    receiverComponent?: GraphQLString;
+    receiverInterface?: GraphQLString;
+    receiverInterfaceNamespace?: GraphQLString;
+    retries?: GraphQLInt;
+    size?: GraphQLInt;
+    timesFailed?: GraphQLInt;
+}
+
+export interface BplusItSappiCreateMessageOverviewInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiMessageOverviewExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    numberMax?: GraphQLInt;
+    numberDays?: GraphQLInt;
+    success?: GraphQLInt;
+    cancelled?: GraphQLInt;
+    delivering?: GraphQLInt;
+    error?: GraphQLInt;
+    holding?: GraphQLInt;
+    toBeDelivered?: GraphQLInt;
+    waiting?: GraphQLInt;
+}
+
+export interface BplusItSappiUpdateMessageOverviewInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    executionId?: string;
+    executionType?: BplusItSappiMessageOverviewExecutionType;
+    executionExecutedAt?: GraphQLTimestamp;
+    executionMonitoringStartAt?: GraphQLTimestamp;
+    executionMonitoringEndAt?: GraphQLTimestamp;
+    numberMax?: GraphQLInt;
+    numberDays?: GraphQLInt;
+    success?: GraphQLInt;
+    cancelled?: GraphQLInt;
+    delivering?: GraphQLInt;
+    error?: GraphQLInt;
+    holding?: GraphQLInt;
+    toBeDelivered?: GraphQLInt;
+    waiting?: GraphQLInt;
+}
+
+export interface BplusItSappiCreateModuleInput {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    channelId: string;
+    channelParty?: GraphQLString;
+    channelComponent: GraphQLString;
+    channelName: GraphQLString;
+    flowParty?: GraphQLString;
+    flowComponent: GraphQLString;
+    flowInterfaceName: GraphQLString;
+    flowInterfaceNamespace: GraphQLString;
+    parameterGroup?: GraphQLString;
+    name?: GraphQLString;
+    parameterName?: GraphQLString;
+    parameterValue?: GraphQLString;
+}
+
+export interface BplusItSappiUpdateModuleInput {
+    id: string;
+    tenantId?: string;
+    systemId?: string;
+    systemName?: GraphQLString;
+    channelId?: string;
+    channelParty?: GraphQLString;
+    channelComponent?: GraphQLString;
+    channelName?: GraphQLString;
+    flowParty?: GraphQLString;
+    flowComponent?: GraphQLString;
+    flowInterfaceName?: GraphQLString;
+    flowInterfaceNamespace?: GraphQLString;
+    parameterGroup?: GraphQLString;
+    name?: GraphQLString;
+    parameterName?: GraphQLString;
+    parameterValue?: GraphQLString;
+}
+
+export interface BplusItSappiCreateRoleInput {
+    id: string;
+    tenantId: string;
+    name: GraphQLString;
+}
+
+export interface BplusItSappiUpdateRoleInput {
+    id: string;
+    tenantId?: string;
+    name?: GraphQLString;
+}
+
+export interface BplusItSappiCreateSystemInput {
+    id: string;
+    tenantId: string;
+    name: GraphQLString;
+    tenantCode: GraphQLString;
+    environment: GraphQLString;
+    version: GraphQLString;
+    isActive: GraphQLBoolean;
+    cancelledAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiUpdateSystemInput {
+    id: string;
+    tenantId?: string;
+    name?: GraphQLString;
+    tenantCode?: GraphQLString;
+    environment?: GraphQLString;
+    version?: GraphQLString;
+    isActive?: GraphQLBoolean;
+    cancelledAt?: GraphQLTimestamp;
+}
+
 export interface QueryStatementInput {
     command: Command;
     column?: string;
@@ -384,6 +741,42 @@ export interface IQuery {
     bplusItSappiFindDataLakeById(id?: string): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiGetDataLakes(query?: QueryStatementInput[]): BplusItSappiDataLake[] | Promise<BplusItSappiDataLake[]>;
     bplusItSappiPaginateDataLakes(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindExecution(query?: QueryStatementInput[]): BplusItSappiExecution | Promise<BplusItSappiExecution>;
+    bplusItSappiFindExecutionById(id?: string): BplusItSappiExecution | Promise<BplusItSappiExecution>;
+    bplusItSappiGetExecutions(query?: QueryStatementInput[]): BplusItSappiExecution[] | Promise<BplusItSappiExecution[]>;
+    bplusItSappiPaginateExecutions(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindFlow(query?: QueryStatementInput[]): BplusItSappiFlow | Promise<BplusItSappiFlow>;
+    bplusItSappiFindFlowById(id?: string): BplusItSappiFlow | Promise<BplusItSappiFlow>;
+    bplusItSappiGetFlows(query?: QueryStatementInput[]): BplusItSappiFlow[] | Promise<BplusItSappiFlow[]>;
+    bplusItSappiPaginateFlows(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindJobDetail(query?: QueryStatementInput[]): BplusItSappiJobDetail | Promise<BplusItSappiJobDetail>;
+    bplusItSappiFindJobDetailById(id?: string): BplusItSappiJobDetail | Promise<BplusItSappiJobDetail>;
+    bplusItSappiGetJobsDetail(query?: QueryStatementInput[]): BplusItSappiJobDetail[] | Promise<BplusItSappiJobDetail[]>;
+    bplusItSappiPaginateJobsDetail(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindJobOverview(query?: QueryStatementInput[]): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
+    bplusItSappiFindJobOverviewById(id?: string): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
+    bplusItSappiGetJobsOverview(query?: QueryStatementInput[]): BplusItSappiJobOverview[] | Promise<BplusItSappiJobOverview[]>;
+    bplusItSappiPaginateJobsOverview(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindMessageDetail(query?: QueryStatementInput[]): BplusItSappiMessageDetail | Promise<BplusItSappiMessageDetail>;
+    bplusItSappiFindMessageDetailById(id?: string): BplusItSappiMessageDetail | Promise<BplusItSappiMessageDetail>;
+    bplusItSappiGetMessagesDetail(query?: QueryStatementInput[]): BplusItSappiMessageDetail[] | Promise<BplusItSappiMessageDetail[]>;
+    bplusItSappiPaginateMessagesDetail(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindMessageOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
+    bplusItSappiFindMessageOverviewById(id?: string): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
+    bplusItSappiGetMessagesOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview[] | Promise<BplusItSappiMessageOverview[]>;
+    bplusItSappiPaginateMessagesOverview(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindModule(query?: QueryStatementInput[]): BplusItSappiModule | Promise<BplusItSappiModule>;
+    bplusItSappiFindModuleById(id?: string): BplusItSappiModule | Promise<BplusItSappiModule>;
+    bplusItSappiGetModules(query?: QueryStatementInput[]): BplusItSappiModule[] | Promise<BplusItSappiModule[]>;
+    bplusItSappiPaginateModules(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindRole(query?: QueryStatementInput[]): BplusItSappiRole | Promise<BplusItSappiRole>;
+    bplusItSappiFindRoleById(id?: string): BplusItSappiRole | Promise<BplusItSappiRole>;
+    bplusItSappiGetRoles(query?: QueryStatementInput[]): BplusItSappiRole[] | Promise<BplusItSappiRole[]>;
+    bplusItSappiPaginateRoles(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    bplusItSappiFindSystem(query?: QueryStatementInput[]): BplusItSappiSystem | Promise<BplusItSappiSystem>;
+    bplusItSappiFindSystemById(id?: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
+    bplusItSappiGetSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
+    bplusItSappiPaginateSystems(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
@@ -437,6 +830,51 @@ export interface IMutation {
     bplusItSappiUpdateDataLake(payload: BplusItSappiUpdateDataLakeInput): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiDeleteDataLakeById(id: string): BplusItSappiDataLake | Promise<BplusItSappiDataLake>;
     bplusItSappiDeleteDataLakes(query?: QueryStatementInput[]): BplusItSappiDataLake[] | Promise<BplusItSappiDataLake[]>;
+    bplusItSappiCreateExecution(payload: BplusItSappiCreateExecutionInput): BplusItSappiExecution | Promise<BplusItSappiExecution>;
+    bplusItSappiCreateExecutions(payload: BplusItSappiCreateExecutionInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateExecution(payload: BplusItSappiUpdateExecutionInput): BplusItSappiExecution | Promise<BplusItSappiExecution>;
+    bplusItSappiDeleteExecutionById(id: string): BplusItSappiExecution | Promise<BplusItSappiExecution>;
+    bplusItSappiDeleteExecutions(query?: QueryStatementInput[]): BplusItSappiExecution[] | Promise<BplusItSappiExecution[]>;
+    bplusItSappiCreateFlow(payload: BplusItSappiCreateFlowInput): BplusItSappiFlow | Promise<BplusItSappiFlow>;
+    bplusItSappiCreateFlows(payload: BplusItSappiCreateFlowInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateFlow(payload: BplusItSappiUpdateFlowInput): BplusItSappiFlow | Promise<BplusItSappiFlow>;
+    bplusItSappiDeleteFlowById(id: string): BplusItSappiFlow | Promise<BplusItSappiFlow>;
+    bplusItSappiDeleteFlows(query?: QueryStatementInput[]): BplusItSappiFlow[] | Promise<BplusItSappiFlow[]>;
+    bplusItSappiCreateJobDetail(payload: BplusItSappiCreateJobDetailInput): BplusItSappiJobDetail | Promise<BplusItSappiJobDetail>;
+    bplusItSappiCreateJobsDetail(payload: BplusItSappiCreateJobDetailInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateJobDetail(payload: BplusItSappiUpdateJobDetailInput): BplusItSappiJobDetail | Promise<BplusItSappiJobDetail>;
+    bplusItSappiDeleteJobDetailById(id: string): BplusItSappiJobDetail | Promise<BplusItSappiJobDetail>;
+    bplusItSappiDeleteJobsDetail(query?: QueryStatementInput[]): BplusItSappiJobDetail[] | Promise<BplusItSappiJobDetail[]>;
+    bplusItSappiCreateJobOverview(payload: BplusItSappiCreateJobOverviewInput): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
+    bplusItSappiCreateJobsOverview(payload: BplusItSappiCreateJobOverviewInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateJobOverview(payload: BplusItSappiUpdateJobOverviewInput): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
+    bplusItSappiDeleteJobOverviewById(id: string): BplusItSappiJobOverview | Promise<BplusItSappiJobOverview>;
+    bplusItSappiDeleteJobsOverview(query?: QueryStatementInput[]): BplusItSappiJobOverview[] | Promise<BplusItSappiJobOverview[]>;
+    bplusItSappiCreateMessageDetail(payload: BplusItSappiCreateMessageDetailInput): BplusItSappiMessageDetail | Promise<BplusItSappiMessageDetail>;
+    bplusItSappiCreateMessagesDetail(payload: BplusItSappiCreateMessageDetailInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateMessageDetail(payload: BplusItSappiUpdateMessageDetailInput): BplusItSappiMessageDetail | Promise<BplusItSappiMessageDetail>;
+    bplusItSappiDeleteMessageDetailById(id: string): BplusItSappiMessageDetail | Promise<BplusItSappiMessageDetail>;
+    bplusItSappiDeleteMessagesDetail(query?: QueryStatementInput[]): BplusItSappiMessageDetail[] | Promise<BplusItSappiMessageDetail[]>;
+    bplusItSappiCreateMessageOverview(payload: BplusItSappiCreateMessageOverviewInput): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
+    bplusItSappiCreateMessagesOverview(payload: BplusItSappiCreateMessageOverviewInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateMessageOverview(payload: BplusItSappiUpdateMessageOverviewInput): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
+    bplusItSappiDeleteMessageOverviewById(id: string): BplusItSappiMessageOverview | Promise<BplusItSappiMessageOverview>;
+    bplusItSappiDeleteMessagesOverview(query?: QueryStatementInput[]): BplusItSappiMessageOverview[] | Promise<BplusItSappiMessageOverview[]>;
+    bplusItSappiCreateModule(payload: BplusItSappiCreateModuleInput): BplusItSappiModule | Promise<BplusItSappiModule>;
+    bplusItSappiCreateModules(payload: BplusItSappiCreateModuleInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateModule(payload: BplusItSappiUpdateModuleInput): BplusItSappiModule | Promise<BplusItSappiModule>;
+    bplusItSappiDeleteModuleById(id: string): BplusItSappiModule | Promise<BplusItSappiModule>;
+    bplusItSappiDeleteModules(query?: QueryStatementInput[]): BplusItSappiModule[] | Promise<BplusItSappiModule[]>;
+    bplusItSappiCreateRole(payload: BplusItSappiCreateRoleInput): BplusItSappiRole | Promise<BplusItSappiRole>;
+    bplusItSappiCreateRoles(payload: BplusItSappiCreateRoleInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateRole(payload: BplusItSappiUpdateRoleInput): BplusItSappiRole | Promise<BplusItSappiRole>;
+    bplusItSappiDeleteRoleById(id: string): BplusItSappiRole | Promise<BplusItSappiRole>;
+    bplusItSappiDeleteRoles(query?: QueryStatementInput[]): BplusItSappiRole[] | Promise<BplusItSappiRole[]>;
+    bplusItSappiCreateSystem(payload: BplusItSappiCreateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
+    bplusItSappiCreateSystems(payload: BplusItSappiCreateSystemInput[]): boolean | Promise<boolean>;
+    bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
+    bplusItSappiDeleteSystemById(id: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
+    bplusItSappiDeleteSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
 }
 
 export interface AdminLang {
@@ -586,6 +1024,191 @@ export interface BplusItSappiContact {
 export interface BplusItSappiDataLake {
     id: string;
     data: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiExecution {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    type: BplusItSappiExecutionType;
+    monitoringStartAt: GraphQLTimestamp;
+    monitoringEndAt: GraphQLTimestamp;
+    executedAt: GraphQLTimestamp;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiFlow {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    scenario: GraphQLString;
+    party?: GraphQLString;
+    component: GraphQLString;
+    interfaceName: GraphQLString;
+    interfaceNamespace: GraphQLString;
+    iflowName?: GraphQLString;
+    responsibleUserAccount?: GraphQLString;
+    lastChangeUserAccount?: GraphQLString;
+    lastChangedAt?: GraphQLTimestamp;
+    folderPath?: GraphQLString;
+    description?: GraphQLString;
+    application?: GraphQLString;
+    isCritical: GraphQLBoolean;
+    isComplex: GraphQLBoolean;
+    fieldGroupId?: string;
+    data?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiJobDetail {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiJobDetailExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    status: BplusItSappiJobDetailStatus;
+    name?: GraphQLString;
+    returnCode?: GraphQLInt;
+    node?: GraphQLString;
+    user?: GraphQLString;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiJobOverview {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiJobOverviewExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    cancelled?: GraphQLInt;
+    completed?: GraphQLInt;
+    error?: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiMessageDetail {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    scenario?: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiMessageDetailExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    flowId: string;
+    flowParty?: GraphQLString;
+    flowComponent: GraphQLString;
+    flowInterfaceName: GraphQLString;
+    flowInterfaceNamespace: GraphQLString;
+    status: BplusItSappiMessageDetailStatus;
+    detail?: GraphQLString;
+    example?: GraphQLString;
+    startTimeAt?: GraphQLTimestamp;
+    direction?: GraphQLString;
+    errorCategory?: GraphQLString;
+    errorCode?: GraphQLString;
+    errorLabel?: GraphQLString;
+    node?: GraphQLInt;
+    protocol?: GraphQLString;
+    qualityOfService?: GraphQLString;
+    receiverParty?: GraphQLString;
+    receiverComponent?: GraphQLString;
+    receiverInterface?: GraphQLString;
+    receiverInterfaceNamespace?: GraphQLString;
+    retries?: GraphQLInt;
+    size?: GraphQLInt;
+    timesFailed?: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiMessageOverview {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    executionId: string;
+    executionType: BplusItSappiMessageOverviewExecutionType;
+    executionExecutedAt: GraphQLTimestamp;
+    executionMonitoringStartAt: GraphQLTimestamp;
+    executionMonitoringEndAt: GraphQLTimestamp;
+    numberMax?: GraphQLInt;
+    numberDays?: GraphQLInt;
+    success?: GraphQLInt;
+    cancelled?: GraphQLInt;
+    delivering?: GraphQLInt;
+    error?: GraphQLInt;
+    holding?: GraphQLInt;
+    toBeDelivered?: GraphQLInt;
+    waiting?: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiModule {
+    id: string;
+    tenantId: string;
+    systemId: string;
+    systemName: GraphQLString;
+    channelId: string;
+    channelParty?: GraphQLString;
+    channelComponent: GraphQLString;
+    channelName: GraphQLString;
+    flowParty?: GraphQLString;
+    flowComponent: GraphQLString;
+    flowInterfaceName: GraphQLString;
+    flowInterfaceNamespace: GraphQLString;
+    parameterGroup?: GraphQLString;
+    name?: GraphQLString;
+    parameterName?: GraphQLString;
+    parameterValue?: GraphQLString;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiRole {
+    id: string;
+    tenantId: string;
+    name: GraphQLString;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface BplusItSappiSystem {
+    id: string;
+    tenantId: string;
+    name: GraphQLString;
+    tenantCode: GraphQLString;
+    environment: GraphQLString;
+    version: GraphQLString;
+    isActive: GraphQLBoolean;
+    cancelledAt?: GraphQLTimestamp;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
