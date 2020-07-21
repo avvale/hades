@@ -5,7 +5,7 @@ import { CreateMessagesOverviewResolver } from './create-messages-overview.resol
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { messagesOverview } from '@hades/bplus-it-sappi/message-overview/infrastructure/seeds/message-overview.seed';
-import { BplusItSappiCreateMessageOverviewInput } from './../../../../../src/graphql';
+import { BplusItSappiCreateMessageOverviewInput } from './../../../../graphql';
 
 describe('CreateMessagesOverviewResolver', () => 
 {

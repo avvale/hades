@@ -6,7 +6,7 @@ export class UpdateExecutionDto
         @ApiProperty({
             type        : String,
             description : 'id [input here api field description]',
-            example     : 'ee59f251-931b-4ed9-bc5d-bfdc6041a958'
+            example     : '7247849f-add6-4b3c-8661-bf74e3180938'
         })
         id: string;
     
@@ -15,7 +15,7 @@ export class UpdateExecutionDto
         @ApiProperty({
             type        : String,
             description : 'tenantId [input here api field description]',
-            example     : '99499fd1-c68b-4675-9ae7-4371fef2399a'
+            example     : 'e20adb1a-14d9-4970-b94d-893932753a5e'
         })
         tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateExecutionDto
         @ApiProperty({
             type        : String,
             description : 'systemId [input here api field description]',
-            example     : '31bf8ec9-6b8d-49f4-bfe2-f2820eefdbd4'
+            example     : 'e81c5663-752b-42af-a7d0-2e70c479f0ca'
         })
         systemId: string;
     
@@ -33,7 +33,7 @@ export class UpdateExecutionDto
         @ApiProperty({
             type        : String,
             description : 'type [input here api field description]',
-            example     : 'SUMMARY',
+            example     : 'DETAIL',
             enum        : ['SUMMARY','DETAIL']
         })
         type: string;
@@ -43,7 +43,7 @@ export class UpdateExecutionDto
         @ApiProperty({
             type        : String,
             description : 'monitoringStartAt [input here api field description]',
-            example     : '2020-07-21 05:17:14'
+            example     : '2020-07-21 08:54:24'
         })
         monitoringStartAt: string;
     
@@ -52,7 +52,7 @@ export class UpdateExecutionDto
         @ApiProperty({
             type        : String,
             description : 'monitoringEndAt [input here api field description]',
-            example     : '2020-07-21 01:23:36'
+            example     : '2020-07-21 01:58:50'
         })
         monitoringEndAt: string;
     
@@ -61,7 +61,7 @@ export class UpdateExecutionDto
         @ApiProperty({
             type        : String,
             description : 'executedAt [input here api field description]',
-            example     : '2020-07-21 10:47:54'
+            example     : '2020-07-21 02:37:30'
         })
         executedAt: string;
     

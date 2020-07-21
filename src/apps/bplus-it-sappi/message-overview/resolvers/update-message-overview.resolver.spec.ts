@@ -5,7 +5,7 @@ import { UpdateMessageOverviewResolver } from './update-message-overview.resolve
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { messagesOverview } from '@hades/bplus-it-sappi/message-overview/infrastructure/seeds/message-overview.seed';
-import { BplusItSappiUpdateMessageOverviewInput } from './../../../../../src/graphql';
+import { BplusItSappiUpdateMessageOverviewInput } from './../../../../graphql';
 
 describe('UpdateMessageOverviewResolver', () => 
 {

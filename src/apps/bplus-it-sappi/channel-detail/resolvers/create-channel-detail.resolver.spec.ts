@@ -5,7 +5,7 @@ import { CreateChannelDetailResolver } from './create-channel-detail.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { channelsDetail } from '@hades/bplus-it-sappi/channel-detail/infrastructure/seeds/channel-detail.seed';
-import { BplusItSappiCreateChannelDetailInput } from './../../../../../src/graphql';
+import { BplusItSappiCreateChannelDetailInput } from './../../../../graphql';
 
 describe('CreateChannelDetailResolver', () => 
 {

@@ -5,7 +5,7 @@ import { UpdateChannelOverviewResolver } from './update-channel-overview.resolve
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { channelsOverview } from '@hades/bplus-it-sappi/channel-overview/infrastructure/seeds/channel-overview.seed';
-import { BplusItSappiUpdateChannelOverviewInput } from './../../../../../src/graphql';
+import { BplusItSappiUpdateChannelOverviewInput } from './../../../../graphql';
 
 describe('UpdateChannelOverviewResolver', () => 
 {

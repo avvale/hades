@@ -6,7 +6,7 @@ export class CreateDataLakeDto
         @ApiProperty({
             type        : String,
             description : 'id [input here api field description]',
-            example     : '55291cea-ae07-4101-9e8e-905effd32ae9'
+            example     : 'e9392915-c9f6-4303-bfcb-9a56077e4778'
         })
         id: string;
     

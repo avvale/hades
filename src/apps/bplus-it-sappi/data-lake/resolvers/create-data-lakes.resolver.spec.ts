@@ -5,7 +5,7 @@ import { CreateDataLakesResolver } from './create-data-lakes.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { dataLakes } from '@hades/bplus-it-sappi/data-lake/infrastructure/seeds/data-lake.seed';
-import { BplusItSappiCreateDataLakeInput } from './../../../../../src/graphql';
+import { BplusItSappiCreateDataLakeInput } from './../../../../graphql';
 
 describe('CreateDataLakesResolver', () => 
 {

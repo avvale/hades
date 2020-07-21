@@ -5,7 +5,7 @@ import { UpdateRoleResolver } from './update-role.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { roles } from '@hades/bplus-it-sappi/role/infrastructure/seeds/role.seed';
-import { BplusItSappiUpdateRoleInput } from './../../../../../src/graphql';
+import { BplusItSappiUpdateRoleInput } from './../../../../graphql';
 
 describe('UpdateRoleResolver', () => 
 {

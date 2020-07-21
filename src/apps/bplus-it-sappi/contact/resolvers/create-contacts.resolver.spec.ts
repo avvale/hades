@@ -5,7 +5,7 @@ import { CreateContactsResolver } from './create-contacts.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { contacts } from '@hades/bplus-it-sappi/contact/infrastructure/seeds/contact.seed';
-import { BplusItSappiCreateContactInput } from './../../../../../src/graphql';
+import { BplusItSappiCreateContactInput } from './../../../../graphql';
 
 describe('CreateContactsResolver', () => 
 {

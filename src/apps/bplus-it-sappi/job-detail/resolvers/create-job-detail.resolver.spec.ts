@@ -5,7 +5,7 @@ import { CreateJobDetailResolver } from './create-job-detail.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { jobsDetail } from '@hades/bplus-it-sappi/job-detail/infrastructure/seeds/job-detail.seed';
-import { BplusItSappiCreateJobDetailInput } from './../../../../../src/graphql';
+import { BplusItSappiCreateJobDetailInput } from './../../../../graphql';
 
 describe('CreateJobDetailResolver', () => 
 {

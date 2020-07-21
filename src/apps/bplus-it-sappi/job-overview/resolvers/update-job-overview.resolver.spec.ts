@@ -5,7 +5,7 @@ import { UpdateJobOverviewResolver } from './update-job-overview.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { jobsOverview } from '@hades/bplus-it-sappi/job-overview/infrastructure/seeds/job-overview.seed';
-import { BplusItSappiUpdateJobOverviewInput } from './../../../../../src/graphql';
+import { BplusItSappiUpdateJobOverviewInput } from './../../../../graphql';
 
 describe('UpdateJobOverviewResolver', () => 
 {

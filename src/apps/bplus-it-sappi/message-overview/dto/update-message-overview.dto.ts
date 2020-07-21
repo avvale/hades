@@ -6,7 +6,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : String,
             description : 'id [input here api field description]',
-            example     : '857b4225-b827-4044-8f58-f1881a248932'
+            example     : '4748233b-58ad-403c-af15-a50883004ad7'
         })
         id: string;
     
@@ -15,7 +15,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : String,
             description : 'tenantId [input here api field description]',
-            example     : 'b6edecd4-33d0-43a4-8e61-afb0efaa456f'
+            example     : 'b134d494-8c2f-4a8a-b09b-5eb46bb7bf35'
         })
         tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : String,
             description : 'systemId [input here api field description]',
-            example     : '3fef01a2-5194-4339-ba78-4ab6deeb348c'
+            example     : '6c312827-8454-4b70-a629-29d8ee54e684'
         })
         systemId: string;
     
@@ -33,7 +33,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : String,
             description : 'systemName [input here api field description]',
-            example     : '4idv7o5deoi09f8f1msm'
+            example     : '0021ouw1040q3t0mlanu'
         })
         systemName: string;
     
@@ -42,7 +42,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : String,
             description : 'executionId [input here api field description]',
-            example     : '30130d03-fc77-4e8e-ad7f-a3da85d0f950'
+            example     : '0b59269a-5fbf-4f9c-ae41-985a5712b85b'
         })
         executionId: string;
     
@@ -51,7 +51,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : String,
             description : 'executionType [input here api field description]',
-            example     : 'DETAIL',
+            example     : 'SUMMARY',
             enum        : ['SUMMARY','DETAIL']
         })
         executionType: string;
@@ -61,7 +61,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : String,
             description : 'executionExecutedAt [input here api field description]',
-            example     : '2020-07-21 06:04:04'
+            example     : '2020-07-21 10:54:56'
         })
         executionExecutedAt: string;
     
@@ -70,7 +70,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : String,
             description : 'executionMonitoringStartAt [input here api field description]',
-            example     : '2020-07-21 14:27:55'
+            example     : '2020-07-21 08:47:38'
         })
         executionMonitoringStartAt: string;
     
@@ -79,7 +79,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : String,
             description : 'executionMonitoringEndAt [input here api field description]',
-            example     : '2020-07-21 03:02:42'
+            example     : '2020-07-21 16:22:30'
         })
         executionMonitoringEndAt: string;
     
@@ -88,7 +88,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'numberMax [input here api field description]',
-            example     : 4736877520
+            example     : 9648829950
         })
         numberMax: number;
     
@@ -97,7 +97,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'numberDays [input here api field description]',
-            example     : 9031029658
+            example     : 8628027952
         })
         numberDays: number;
     
@@ -106,7 +106,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'success [input here api field description]',
-            example     : 5550074760
+            example     : 1909107081
         })
         success: number;
     
@@ -115,7 +115,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'cancelled [input here api field description]',
-            example     : 6117634367
+            example     : 6552235276
         })
         cancelled: number;
     
@@ -124,7 +124,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'delivering [input here api field description]',
-            example     : 5703147917
+            example     : 6020062135
         })
         delivering: number;
     
@@ -133,7 +133,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'error [input here api field description]',
-            example     : 8987438165
+            example     : 5879516054
         })
         error: number;
     
@@ -142,7 +142,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'holding [input here api field description]',
-            example     : 4154433634
+            example     : 7497611360
         })
         holding: number;
     
@@ -151,7 +151,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'toBeDelivered [input here api field description]',
-            example     : 9040643967
+            example     : 2493507725
         })
         toBeDelivered: number;
     
@@ -160,7 +160,7 @@ export class UpdateMessageOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'waiting [input here api field description]',
-            example     : 2545784510
+            example     : 6872900710
         })
         waiting: number;
     

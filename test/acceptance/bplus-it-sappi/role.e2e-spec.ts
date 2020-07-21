@@ -68,8 +68,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
-                name: 'q1xn0yal786rfmn1bz6dp6cxtiv04k18ioltpoc6kyrwba1vw3scwkxlzncy8jvxlvzjumouimy9wnqsy2znpzveuoa0jwvvuigqmqse67k1xlhet2ex8l2qmzphv446bll2pbqqymllmfj0r5sfm2xoolcmwpzyxc27zhp8lesqqrcd6s3cffp2y3a82lansr9c86u7bsypc511h1n0cpeei1ekco2s03zxd6f6opm15nhn1p4qcyl301ddf2a',
+                tenantId: '4ea53cf0-4253-42b5-b7ff-460ba94e25f4',
+                name: 'y2180j8azegtw532ktya6y571tn8tq3wi3gy3l1ex14zjbd0kbewy8qh39z94iixjkf60tfotjf3680u40tu5xhosr64fqfttcjnhvv2wh1k8erh9apmeggylda2cg3auukqie1goyne360av9g17yfm59v2e0js44gu9ggy9ugdzczaaioknmghw5ph2inm54rlhw5jly1eadwqykadzfqrbij2nia9gu10v3h8bcum1liid11lqpgvzejuhi9',
             })
             .expect(400)
             .then(res => {
@@ -84,8 +84,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
-                name: 'jtb0s2oaowpvvmxy5clqmno6rgkhpzsnszdc5o6h56gma1i2kj36ngqsjm63bwx3i6wisnw7aknpxzqydlrjeut95qquzg9qs4m0qejwu61sqo9yhk9nrbqiwxvk65xqsc54d51vby3d33x84bqnvxxfb19rsipccm9vrmiozenkctbotb5i2h66bvmdlqdsa7vw2dk87lemyo96ohqt5ipq29y8dnojd2xzn9asb30uwb97pmilpfxyfjw9xii',
+                tenantId: '4ea53cf0-4253-42b5-b7ff-460ba94e25f4',
+                name: 'n8to5w7sswhmy43oupadqkaygqcbm2hqrg4pwj70mlzwq7onqqlqs7frjzcpv9mhuc5ksvxrtrq0opdh3alkyjypcklfon645i7w9a5ohiel9o96lz2pf5zojb3huhpmd7jwre1oc0ybxt0drpu34paj9xe28kj7znuzirajj7syf264krczx7opcbw506zxr5gucmbtfnjuijo17oy9iif75j1tjd35s3f8ng2feevyo08vz02hoqjb4xqp6xr',
             })
             .expect(400)
             .then(res => {
@@ -99,9 +99,9 @@ describe('role', () =>
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '8fd69091-78d9-4942-be62-d502744fda3b',
+                id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa',
                 tenantId: null,
-                name: 'hu5vq0ccgivtq1b5ft5h70dlpbkna5d9potplfqy4xsl4w6yll1cl6vcqgkg86dlcw21pbvt7jznj7x34jx26vpx7fzng64ogqhyodrrq8ehyz6dd6a9vlb8x8qb6a6z4cga1lzx2n99yxo19yeg6xjfntff3kr836hf4fi7adqkpf0jt9zghizm1p64a7kh1tw1k4f7wqoqj0i0go200myfrexv21ylory7vr6sq7ce9gaign7u1cnjr2e02pb',
+                name: 'j7uobl1jsbzjaploje0bj5uide4urdwcvo3cr76uj92tie32g6xv688ouekgly58ydi6abhmcz09wsd6v5gghrb8vzvw4on1358o4qhamri394gdtsz5u1ki521csby8u6zijz0czcbl9fso9hmn43foho5t3ftjecw9truy27j1l4ykjaa5mmbcb2sv1eizfljh6oaoxlokry6ivcf9ks6uy2pybgndz22h5e34y4dola85bgr9tsmhf979my4',
             })
             .expect(400)
             .then(res => {
@@ -115,9 +115,9 @@ describe('role', () =>
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '8fd69091-78d9-4942-be62-d502744fda3b',
+                id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa',
                 
-                name: 'qebi5cv5i2q37vycrn2imorv2z3qsv1scum5ikmwz433m0k5gcr08qatgz1e1omyv5csfhmwu45inqxsareobvb5wepf5lxmhm780xpgwmkfofggp89jx8bivvg5rztiamx6z3ps78r4dn5uhpq5u5l4yf7m7lesmhm2fdy7grl37gzqsmkm1zy5gthx1sp6ut7kmnt99ihulmpr9nwev5rwqvln2h3v9d8fpza6gdj02c4w6rs254mendlwscj',
+                name: 'gcocxgeoui4zbrecwmbi7vjbms5pxjbv5x0ja6vbbcybyysa3629nud11scnkyqphskjymz4f9uecnnlumgappj60nq01ookrnmabx8yxfyg2virb4glsvyswwhpe8w8swgy4hj1mfhjilwojcyk7ekib5vop6phv12zylh7isra0m8poo82nm30mpyo2h10og7jye6ib4kyznjjqhi8djpycqn98dbqpu5a698ms23dbtgoef6tmpmpq3l0qc3',
             })
             .expect(400)
             .then(res => {
@@ -131,8 +131,8 @@ describe('role', () =>
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '8fd69091-78d9-4942-be62-d502744fda3b',
-                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
+                id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa',
+                tenantId: '4ea53cf0-4253-42b5-b7ff-460ba94e25f4',
                 name: null,
             })
             .expect(400)
@@ -147,8 +147,8 @@ describe('role', () =>
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '8fd69091-78d9-4942-be62-d502744fda3b',
-                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
+                id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa',
+                tenantId: '4ea53cf0-4253-42b5-b7ff-460ba94e25f4',
                 
             })
             .expect(400)
@@ -165,9 +165,9 @@ describe('role', () =>
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '6g9uhtt74375te3exji0mehogbqao474mqnxy',
-                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
-                name: 'pmdszq37t9an3yap794wp3jajyfv8cqzt1tutmtdfbc917a91dbu41kajv86cmfejd59hgj69v30q2bdjl2io61fq0urzmdnoo6u1one1neg4gzeudyuc9450hmudo56ur51rg67iccks7o6rc0q9b4n4c3ucds971nsmwusd56mx2sx59wtvlsg3clyh5s87r6b64d3auhgd8kkh1p3ivvuv4oumbtshaertvbvq80pnq3osh7hd97u6h3csu6',
+                id: 'z4zqbcigq51l1fo7hpnv5alwvimi94xymfwi3',
+                tenantId: '4ea53cf0-4253-42b5-b7ff-460ba94e25f4',
+                name: '6dnbkhkp7w4br1jj55rqhzpae35rhp8p19aaue4wuyl4w7lybplett5fjr81c7t7nj7vuqplzyry1028phpxorhsffxqz0goo8kczo6dkiw3pv3nrnppofml147qv1kzv7lsfj1qtwlwch9i3tjytjh0pbqydzj6g71uk5vyrpltt0oz7mbjfgpw6vqb6o2sih147bjqswz5adoowc4v9tgkyavjsaqguadd3t6vrrot4y1b9lv1jdpdnr0ozs0',
             })
             .expect(400)
             .then(res => {
@@ -181,9 +181,9 @@ describe('role', () =>
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '8fd69091-78d9-4942-be62-d502744fda3b',
-                tenantId: 'nveyyox17iowr7l02yb41sbm06j5876j2rtvw',
-                name: 'pobkxi4kfp473p28n1ur0jmmru91t6u50ggygu54vydf91h1teg5a5xejk1w37d67yj9dyobwrcjeid3lj56habpoklrckxwinf5v69wxnir3d53wwj773z0dbzmz05d9tugotnwnbko86tmmng11fvix5s9nza0gd50jbcd13o81vd4qmvvasm1tjt91jvczfp5ouopbdmnbyx5nzoo31ctfwlh4izh76me592657454u1i9ipyz2nayw3uqig',
+                id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa',
+                tenantId: 'bteu56vo3dm8rootz7jg4x8u6duzsaqepx3id',
+                name: 'r5i3x9nq67m0s98nl9zzusyamevzzjqw1mcqrryl8h4vkekbijid0jpde66ty4shrcpfm2iqi7owurv9hvqcg1vrtihrl7by897315kjvsknripy6sqvwjn709dki7oqgpxb7zqxedzod1jb0captoe4xlybt62soraldphp6s6jrkoh0h3bjpc2xrlyb4w0m9mm1sf5wshg85u7wflx5y7lpk20h8emu0n6xv0jzwe277gzndd1rt48uusvr82',
             })
             .expect(400)
             .then(res => {
@@ -199,9 +199,9 @@ describe('role', () =>
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '8fd69091-78d9-4942-be62-d502744fda3b',
-                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
-                name: 'pwwu5vo8mtwzk8vihstw3ysh4coh9tp3bd5hexbp5vqlrymqvj2lf1k00b31o1iia30rvv5d407qwx26wb0ia5re93rc6m08xp10t1ei0874gptwalx02jkfp8v14wyu6ojs2lg2uf490ptsn0d9y1o5d8sxognnyc66vhxly75x4i8qiwzvdk9ik455f55t1cnetcnk46u166io9j9e3w7o2g6v957waf2yid28bqqdppkb4e185i4tprw96uvp',
+                id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa',
+                tenantId: '4ea53cf0-4253-42b5-b7ff-460ba94e25f4',
+                name: 'hs8tjkjb55aujh09xikw0aemc159muu51rzz4ukrefntbzbd0fjq37bztvf6ayi8m96000m1fjxxsv3jpbjmnievmpjj503nz05cu79wp6g3h606vqn8616og7gkbobpx34eiptap5zl07ap1b9tki3gi8f4i0nif2vrt5ctsyjwk0e3f78bsher2if7dsbr9y7d5pskdr34bgaq1s5zzkg22ld3yh539umfi6gdg5q4d2eez6vxt54qq5szp5zk',
             })
             .expect(400)
             .then(res => {
@@ -228,9 +228,9 @@ describe('role', () =>
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '8fd69091-78d9-4942-be62-d502744fda3b',
-                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
-                name: 'h0jovremip5nlmnn4e2tz9lmidca0fnb7my76th7q00a5vpmb9ngy5mespx33k3monlzw0g7ol4jyy5tdovv48qec25zrq2toriin6y164x6xe1i62m0f8m178wrvsd5e4w9q6i6x5n1odxhw5w87w8jasz4pv57gjc146hggip3wbqhpcytgmy5ab69yn83l7dw7tx4a3azlm5vdtptxkygzku4slbzfy0cmg5l393k3x2remo52azohia8f6f',
+                id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa',
+                tenantId: '4ea53cf0-4253-42b5-b7ff-460ba94e25f4',
+                name: 'r3mhmm6w4g4ll5mpe5baqu0f5p2h4y20z2a0m1dtrtmg1nk79hyp6wmbf8kr3eb9cdmwhgr1edeu7kpwlwj2bshubh56pdlgg403ciyv0n9dvqpdw79mt27obj4fama168ky982dz6ezxq3t3gtbk1wm91ugpshup6vhe7kh2ht7eduppkcvflg5ej4g6dsdmqkadw80hzm5iqwzd4ah5kryvf1tn4n4tr2dkwxyvwf89h30e5oqgwa1l0s9frw',
             })
             .expect(201);
     });
@@ -289,12 +289,12 @@ describe('role', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '8fd69091-78d9-4942-be62-d502744fda3b'
+                        value   : '6c68c5e4-ee23-44b4-855d-20ac92d58daa'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '8fd69091-78d9-4942-be62-d502744fda3b'));
+            .expect(repository.collectionResponse.find(item => item.id === '6c68c5e4-ee23-44b4-855d-20ac92d58daa'));
     });
 
     test(`/REST:GET bplus-it-sappi/role/{id} - Got 404 Not Found`, () => 
@@ -308,10 +308,10 @@ describe('role', () =>
     test(`/REST:GET bplus-it-sappi/role/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/role/8fd69091-78d9-4942-be62-d502744fda3b')
+            .get('/bplus-it-sappi/role/6c68c5e4-ee23-44b4-855d-20ac92d58daa')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '8fd69091-78d9-4942-be62-d502744fda3b'));
+            .expect(repository.collectionResponse.find(e => e.id === '6c68c5e4-ee23-44b4-855d-20ac92d58daa'));
     });
 
     test(`/REST:GET bplus-it-sappi/roles`, () => 
@@ -330,9 +330,9 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '123817b3-d2b3-49b9-929f-97791d5b4a81',
-                tenantId: '6122202e-75b0-4ddd-a6c7-d7c93f9ec00e',
-                name: 'ppaf772zbujycsdjshjy7qtjog4ewue6q8grjhenxm8pcc7pbmufoy114we1qwbovfveoomseqgjwflm18snmdqfnzmdm6jixusg927kqiapp10zj2e7pn1gib5vf1xsv3sryvu9a1web90vtiw03a2x21xljg1ug8df4z2ncc8ffiyrhn96oagu4zlh7jiyj9pftakil2bsxp18mpzxtjlprrmyj74wymxsg30wrs7v5os0sdjulebprr5pxgs',
+                id: '3d30e132-1cdf-42a0-9b3a-b9dfcf986e5c',
+                tenantId: '2aad69a7-5d06-44fb-8f33-53a77c1d8c9f',
+                name: 'bwkraojgxd9n93u2ya3ay9jtbkhcgj2xg74zapesacnvaixwcv585yu3ygkumdme2j5zao95tew9xmbcb3w42xqfp8uepy8qks0gnw0747d3zmbjtl0tbq31cnytqrnchlbobab160rqgmejvyip385e7e8avs5dae0zw5gcs5migil5jjzbp4n7xfujw90c0o0ijqkjcl1j0ukv8rzw1hdxmehlxl27usoig6ivozp5voxdrd3mt9rs49e2l7t',
             })
             .expect(404);
     });
@@ -344,12 +344,12 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '8fd69091-78d9-4942-be62-d502744fda3b',
-                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
-                name: '3tqrv9ef5597162vese340gcsggvyvsglwuua1gr8eqni869cuncxkrwuyqxr3cvqoy3o53qzwb2s7v4vmlrwf9zb0r7tcf6tlkt3zdotebzyo3fyiboc9htug7gpimwaou9g2gw8ry0fwjfukxg49sl6s47qwkwo6f78g2jxjpaobinuoo8s1e1jfj82mi1hbc65mhjvh5kfu5atm40r9rl9kc7d05ce24wc9na389bmavei6rabfulwroqgb4',
+                id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa',
+                tenantId: '4ea53cf0-4253-42b5-b7ff-460ba94e25f4',
+                name: 'kxz2dty910ksuhn2axg1xmxsmscwmd9uzehl7u8j4unj1hxuw77exqt3axjwst1mgtfgfy547qeo51rl4nulpauia5i97ibzw14b8nzfavlt186elrduxnvh0vcbjr2vuxztnni721s5y3w9nqs0z9hgxeq7jxkvdzejptfls06njj7obibomowikzjssrzu68qh5l081ojpifxh4g0z4i6bovt6x3rewksiq0rg4jlmig3whzjn6nczmatfv41',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '8fd69091-78d9-4942-be62-d502744fda3b'));
+            .expect(repository.collectionResponse.find(e => e.id === '6c68c5e4-ee23-44b4-855d-20ac92d58daa'));
     });
 
     test(`/REST:DELETE bplus-it-sappi/role/{id} - Got 404 Not Found`, () => 
@@ -363,7 +363,7 @@ describe('role', () =>
     test(`/REST:DELETE bplus-it-sappi/role/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/role/8fd69091-78d9-4942-be62-d502744fda3b')
+            .delete('/bplus-it-sappi/role/6c68c5e4-ee23-44b4-855d-20ac92d58daa')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -420,15 +420,15 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '42b6b7fc-5fd3-4c0d-a2a0-1b5343feebbc',
-                        tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
-                        name: '9rv7wzskrvlcivho058jt5s0eiqqxopy2w3o71bmiq8o4q9y8jru0sg7i7mzgs5r1h0renuohgxbhvdwfqar3t17ejvv8rop2xcu204lv4p1gypufjjj9mz6ctbwlbanpqjetqbvavyytpl180mi2976okz1x377ojnss6c7ptwiam49me648ue251wsw0fmz9vwck8pcysfsofcinpnpms23au3pb32vep94h05mqy9tota32jk3redfln2u5k',
+                        id: '57a07484-a7cc-4d98-8447-1b7a30771d47',
+                        tenantId: '4ea53cf0-4253-42b5-b7ff-460ba94e25f4',
+                        name: '2t8jqbi7139buibpp2j10xrh2uzingy97gmn0ytz0vi0vv8lra4zzmo6fef9h7jgrxcpma3uddjq6pb3j65dlauk172lqhw7u95akop26g4oq7pfcs6ky93w5yhhugty5ikc4axqj2ec7dxywsde55td5ffr4mskd3m3bqtakhzhzbu2fbvcme63jntr524ndk5fm4bpq3tlwn3vsz6iuypmh4e1asv61ork867ck2p9sku6wm5x4k9zdm3uki6',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateRole).toHaveProperty('id', '42b6b7fc-5fd3-4c0d-a2a0-1b5343feebbc');
+                expect(res.body.data.bplusItSappiCreateRole).toHaveProperty('id', '57a07484-a7cc-4d98-8447-1b7a30771d47');
             });
     });
 
@@ -533,14 +533,14 @@ describe('role', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '8fd69091-78d9-4942-be62-d502744fda3b'
+                            value   : '6c68c5e4-ee23-44b4-855d-20ac92d58daa'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindRole.id).toStrictEqual('8fd69091-78d9-4942-be62-d502744fda3b');
+                expect(res.body.data.bplusItSappiFindRole.id).toStrictEqual('6c68c5e4-ee23-44b4-855d-20ac92d58daa');
             });
     });
 
@@ -595,12 +595,12 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '8fd69091-78d9-4942-be62-d502744fda3b'
+                    id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindRoleById.id).toStrictEqual('8fd69091-78d9-4942-be62-d502744fda3b');
+                expect(res.body.data.bplusItSappiFindRoleById.id).toStrictEqual('6c68c5e4-ee23-44b4-855d-20ac92d58daa');
             });
     });
 
@@ -656,9 +656,9 @@ describe('role', () =>
                 variables: {
                     payload: {
                         
-                        id: 'd187a0de-0a76-4857-b4c4-9d8494ea6a1a',
-                        tenantId: 'da652b78-4867-44c1-b2d8-b39a2d8ffa9f',
-                        name: 'trpvg6uuukf163nlzk6pr06w4ab4xw4823lsd6t8yfn4o98jut1ppwa3u9fq2fr73rh55womzpj4327qsldwig2jex4q812z6zz9ji2mp8ubvr1bkkshs97upigtgjturars80ydao3wmlqpkdw7ivilri4cv71a2qpz5333u0359d2tt2lji0v0aem50qnr34wr6cx56zb5dtwba66qf8p4iajbt7ejguybkpf7ey85r39ahh3p8x793a3xi6n',
+                        id: '1c200039-769e-472e-ac61-843dcd4b9155',
+                        tenantId: '21fc280a-c767-4a32-a120-8be4cd87c9be',
+                        name: 'vwrlrtyitvc8r0o4voorh92g3kg9mtju17bus7jl8jst9qq2kj74t1kib7ne8zzycpjsphulddremyor7l2l7cuxawyytlwfqwuw4tfzdg7umczywud73eumamijfklk569pjt27xf3hipv6mko99x7b8fmji96uav4ju56sxdj1tve4zakq7ai9u7mdjhp4n3bcuxdfzz5ysqeywmaobatz8lwxm2i1u0jduwhl4o7zs0gjrvbszf19452kea8',
                     }
                 }
             })
@@ -692,15 +692,15 @@ describe('role', () =>
                 variables: {
                     payload: {
                         
-                        id: '8fd69091-78d9-4942-be62-d502744fda3b',
-                        tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
-                        name: 'c94acwxzoticqi6jx6wt4j8zjk47h8lyl8ger8tgu5zsd3taa8t85ex4uhljso3iphpz7xifpns5srxrm8jvhrfjztbb2mywd6ypp12ut4bx2tum2dy81uuu559xltliwfrr8333f0ewu1j7kdinr5ek72cnd11zdz13cdq4h5h2aoc2mnf5u3l7iaz1fwxke1rh2dwj1085vqxa8ca3kqarsj9qvxcu73ijg1xz4yi53gwap4r7zgj7nreeuzv',
+                        id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa',
+                        tenantId: '4ea53cf0-4253-42b5-b7ff-460ba94e25f4',
+                        name: '8sir9ummba7w7pw1q13jh4e5wjcjfgtwwcyrhhbu69ft1d2njvwb52lb2uq8tpjoi8r5alwb2fzx6zqoj5pdibbbadg1qicjm2gszf5gaekqaxaldjeybnhcb6bf71vl0evix5qcjm4r46tgttmzyglx06va8bxkhv5dh97ms3if9aiofn6yy1451afpmn414fwy66q82gpd0w59aiib6fu3ezhqi81ag3bt037iyp7ssukltfm0rx35zfrrh6a',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateRole.id).toStrictEqual('8fd69091-78d9-4942-be62-d502744fda3b');
+                expect(res.body.data.bplusItSappiUpdateRole.id).toStrictEqual('6c68c5e4-ee23-44b4-855d-20ac92d58daa');
             });
     });
 
@@ -755,12 +755,12 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '8fd69091-78d9-4942-be62-d502744fda3b'
+                    id: '6c68c5e4-ee23-44b4-855d-20ac92d58daa'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteRoleById.id).toStrictEqual('8fd69091-78d9-4942-be62-d502744fda3b');
+                expect(res.body.data.bplusItSappiDeleteRoleById.id).toStrictEqual('6c68c5e4-ee23-44b4-855d-20ac92d58daa');
             });
     });
 

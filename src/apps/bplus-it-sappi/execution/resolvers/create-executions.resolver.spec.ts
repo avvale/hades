@@ -5,7 +5,7 @@ import { CreateExecutionsResolver } from './create-executions.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { executions } from '@hades/bplus-it-sappi/execution/infrastructure/seeds/execution.seed';
-import { BplusItSappiCreateExecutionInput } from './../../../../../src/graphql';
+import { BplusItSappiCreateExecutionInput } from './../../../../graphql';
 
 describe('CreateExecutionsResolver', () => 
 {

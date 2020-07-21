@@ -6,7 +6,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : String,
             description : 'id [input here api field description]',
-            example     : 'd9846142-891a-47b0-a5e1-557f09ba8a1c'
+            example     : '72b6e611-4d0f-4f33-bcf4-b24f4c0dde72'
         })
         id: string;
     
@@ -15,7 +15,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : String,
             description : 'tenantId [input here api field description]',
-            example     : '219b5467-01f7-48de-a55a-6f48e54c6005'
+            example     : 'c640fc09-a678-427c-94b7-34536b9fcc5c'
         })
         tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : String,
             description : 'systemId [input here api field description]',
-            example     : 'fd1891e9-6550-4641-915f-9a62ab6c0324'
+            example     : 'eeb53bd7-bb7a-49e5-a1c8-1135415ee41d'
         })
         systemId: string;
     
@@ -33,7 +33,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : String,
             description : 'systemName [input here api field description]',
-            example     : 'dqgo7ez0a88uzicxdl99'
+            example     : 'r5orlduq5exi6pkzrupr'
         })
         systemName: string;
     
@@ -42,7 +42,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : String,
             description : 'executionId [input here api field description]',
-            example     : '0b64e3a3-44e2-4608-b06d-1ab7cea186e6'
+            example     : 'be7394d7-f01d-4eff-926b-ea7c6c6ebf04'
         })
         executionId: string;
     
@@ -51,7 +51,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : String,
             description : 'executionType [input here api field description]',
-            example     : 'SUMMARY',
+            example     : 'DETAIL',
             enum        : ['SUMMARY','DETAIL']
         })
         executionType: string;
@@ -61,7 +61,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : String,
             description : 'executionExecutedAt [input here api field description]',
-            example     : '2020-07-21 06:20:19'
+            example     : '2020-07-21 05:13:24'
         })
         executionExecutedAt: string;
     
@@ -70,7 +70,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : String,
             description : 'executionMonitoringStartAt [input here api field description]',
-            example     : '2020-07-21 09:56:07'
+            example     : '2020-07-21 07:21:45'
         })
         executionMonitoringStartAt: string;
     
@@ -79,7 +79,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : String,
             description : 'executionMonitoringEndAt [input here api field description]',
-            example     : '2020-07-21 16:40:37'
+            example     : '2020-07-21 15:02:14'
         })
         executionMonitoringEndAt: string;
     
@@ -88,7 +88,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'cancelled [input here api field description]',
-            example     : 9165970471
+            example     : 5353001650
         })
         cancelled: number;
     
@@ -97,7 +97,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'completed [input here api field description]',
-            example     : 1763594180
+            example     : 7567755365
         })
         completed: number;
     
@@ -106,7 +106,7 @@ export class UpdateJobOverviewDto
         @ApiProperty({
             type        : Number,
             description : 'error [input here api field description]',
-            example     : 4187384472
+            example     : 6803756775
         })
         error: number;
     

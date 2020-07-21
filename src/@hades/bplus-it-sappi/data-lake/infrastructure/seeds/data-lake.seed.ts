@@ -1,126 +1,126 @@
 export const dataLakes = [
     {
-        id: '9d36cc8b-8eb0-445f-8ab6-ad88e82c4e38',
+        id: 'b585ee5e-68c3-4779-9ddd-9cd841a1c1ad',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '8f6d5c65-a55e-4ebb-a192-78400b08a853',
+        id: 'f24fd7a4-0fc3-4122-81c7-4caa81154a91',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '227afd50-01cb-470f-86e1-18e10e4e7379',
+        id: '7927539e-1551-43ab-b21b-923b9ee7e8d4',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '962f6b2b-4efd-4b49-88a6-a259c2fcc3f8',
+        id: '95fce349-95b1-4ae4-8897-585a4fc0b0df',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '13f839b5-a899-477e-82d1-57c86c541346',
+        id: 'd6ca4d93-6684-4fb7-87c6-49e23beed23c',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '71245a80-72ea-4724-86de-0abf4e6ae026',
+        id: '882c3023-f4eb-45ff-9379-a9f2311a9ca2',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '46b67a77-c4ec-4899-a6d8-3cb561b18d9e',
+        id: '85220484-cb60-4346-9dbe-a56853fd045d',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '9ae807ef-c5d9-47a8-aecb-e710ddad3d90',
+        id: '0e183694-bd7a-4583-bbb5-8245d07db771',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '3ba0586b-8b97-4c42-9d29-d607c0da0df4',
+        id: '0f27fea5-fcf5-40ba-b06b-2114eef38c50',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '9727927d-9b6d-4fcd-9be2-07d0afdb0359',
+        id: '997d6800-d6da-4846-8e23-259fee306e00',
         data: { "foo" : "bar" },
     },
     
     {
-        id: 'a8259838-b44e-48cd-8105-308052d55ac9',
+        id: '068c0bec-7c5e-4122-82d8-a3b3149107f5',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '0aa1f7b8-9348-4d89-9a2e-5816c3880d6f',
+        id: 'd1c1adaa-7eee-437b-ab0c-8273993a45b8',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '9bb7bcd3-648e-4ffe-a195-d4efbc57b84c',
+        id: 'acf91b64-0601-4999-a4de-82d5a13d4ca6',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '92e4ffcb-f09f-476b-a866-367adb39428b',
+        id: '4005c1cc-2eda-46cf-9f7c-ebed75fdeecd',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '5ebc6947-6e77-4c5e-a0ba-a8789d470a3f',
+        id: '6a0cc764-6ba0-455e-8ab7-0930cd59fda1',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '9f1ee49d-37f9-4557-a57d-0f6a6510014b',
+        id: 'fda752ac-0967-4816-874c-e5b2c9f5cd16',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '7ff3cdb7-aee8-4be9-ba61-02b5671e4221',
+        id: 'a334468d-e620-4570-abbb-50e86a6d787c',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '2d02b75e-975d-4451-9f26-1feed42ea0ae',
+        id: '950f69cd-73d1-4c3c-90d1-47ca4400fc33',
         data: { "foo" : "bar" },
     },
     
     {
-        id: 'aa853035-de3c-4e43-b97c-7425ce761e7b',
+        id: '6a5e8dce-d478-4d72-86db-7d0f013d51b8',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '5da64b71-20ae-488a-beb4-00d81c201830',
+        id: 'cff4baad-4251-48e2-972f-488b80b54c9b',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '44fcb20a-9c72-49bb-aed2-481896221ffe',
+        id: '03521fca-3ae5-4885-9baa-c36dd82d4647',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '479d7ce3-88c4-4de3-89ff-e1d83acf21c6',
+        id: '41d28b61-8ed7-4ff9-8201-0e0c9087d5c5',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '62c73992-4aa3-4c75-8a8d-563c4981f681',
+        id: 'd94d2186-412b-417e-8725-da7a165b7b5a',
         data: { "foo" : "bar" },
     },
     
     {
-        id: '00a5222c-9189-4f79-b8ff-1f23e080ff45',
+        id: '852e1a27-b515-4c53-8b43-79b4b7f5e39b',
         data: { "foo" : "bar" },
     },
     
     {
-        id: 'c1dbc58e-16be-4768-b6d9-3eee33fc77a2',
+        id: '1e43ac26-7a00-4194-b6b6-2b7e5284db89',
         data: { "foo" : "bar" },
     },
     
