@@ -37,19 +37,19 @@ describe('GetTenantsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('GetTenantsResolver should be defined', () => 
+    test('GetTenantsResolver should be defined', () => 
     {
         expect(resolver).   toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('GetTenantsResolver should be defined', () => 
+        test('GetTenantsResolver should be defined', () => 
         {
             expect(resolver).   toBeDefined();
         });
 
-        it('should return a tenants', async () => 
+        test('should return a tenants', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
             expect(await resolver.main([])).toBe(tenants);

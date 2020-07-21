@@ -39,20 +39,14 @@ describe('CreateLangController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('CreateLangController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('CreateLangController should be defined', () => 
+        test('CreateLangController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an lang created', async () => 
+        test('should return an lang created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
             expect(await controller.main(langs[0])).toBe(langs[0]);

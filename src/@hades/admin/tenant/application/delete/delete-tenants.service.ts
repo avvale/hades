@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ITenantRepository } from './../../domain/tenant.repository';
+import { AddTenantsContextEvent } from './../events/add-tenants-context.event';
 
 @Injectable()
 export class DeleteTenantsService
@@ -16,13 +17,13 @@ export class DeleteTenantsService
         // get object to delete
         const tenants = await this.repository.get(queryStatements);
 
-        await this.repository.delete(queryStatements);        
+        await this.repository.delete(queryStatements);
 
-        // TODO a falta de definir eventos
+        // create AddTenantsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        // const tenantsRegistered = this.publisher.mergeObjectContext(tenants);
-        
-        // tenantsRegistered.deleted(tenants); // apply event to model events
-        // tenantsRegistered.commit(); // commit all events of model
+        const tenantsRegistered = this.publisher.mergeObjectContext(new AddTenantsContextEvent(tenants));
+
+        tenantsRegistered.deleted(); // apply event to model events
+        tenantsRegistered.commit(); // commit all events of modelx
     }
 }

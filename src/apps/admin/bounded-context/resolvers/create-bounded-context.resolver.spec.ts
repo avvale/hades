@@ -5,7 +5,7 @@ import { CreateBoundedContextResolver } from './create-bounded-context.resolver'
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { boundedContexts } from '@hades/admin/bounded-context/infrastructure/seeds/bounded-context.seed';
-import { AdminCreateBoundedContextInput } from './../../../../../src/graphql';
+import { AdminCreateBoundedContextInput } from './../../../../graphql';
 
 describe('CreateBoundedContextResolver', () => 
 {
@@ -38,20 +38,19 @@ describe('CreateBoundedContextResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('CreateBoundedContextResolver should be defined', () => 
+    test('CreateBoundedContextResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('CreateBoundedContextResolver should be defined', () => 
+        test('CreateBoundedContextResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an boundedContext created', async () => 
+        test('should return an boundedContext created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await resolver.main(<AdminCreateBoundedContextInput>boundedContexts[0])).toBe(boundedContexts[0]);

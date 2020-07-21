@@ -41,9 +41,9 @@ export class CreatePermissionService
         // create
         await this.repository.create(permission);
 
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const permissionRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            permission
         );
         
         permissionRegister.created(permission); // apply event to model events

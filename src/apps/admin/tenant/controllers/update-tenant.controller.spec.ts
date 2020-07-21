@@ -39,20 +39,14 @@ describe('UpdateTenantController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateTenantController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateTenantController should be defined', () => 
+        test('UpdateTenantController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a tenant created', async () => 
+        test('should return a tenant created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
             expect(await controller.main(tenants[0])).toBe(tenants[0]);

@@ -1,6 +1,6 @@
 import { Injectable, ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
+import { Utils } from '@hades/shared/domain/lib/utils';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { QueryStatementInput, Command } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ILangRepository } from './../../domain/lang.repository';
@@ -25,7 +25,7 @@ import { langs } from './../seeds/lang.seed';
 export class MockLangRepository implements ILangRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'AdminLang';
+    public readonly aggregateName: string = 'AdminLang';
     public collectionSource: AdminLang[];
     
     constructor() 
@@ -89,7 +89,7 @@ export class MockLangRepository implements ILangRepository
     
     async create(lang: AdminLang): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === lang.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${lang.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === lang.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${lang.id.value} already exist in database`);
 
         // create deletedAt null 
         lang.deletedAt = new LangDeletedAt(null);
@@ -103,29 +103,29 @@ export class MockLangRepository implements ILangRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<AdminLang> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<AdminLang>
     {
-        const entity = this.collectionSource.find(lang => lang.id.value === id.value);
+        const aggregate = this.collectionSource.find(lang => lang.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<AdminLang[]> 
@@ -133,20 +133,20 @@ export class MockLangRepository implements ILangRepository
         return this.collectionSource;
     }
 
-    async update(entity: AdminLang): Promise<void> 
+    async update(aggregate: AdminLang): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(lang => {
-            if (lang.id.value === entity.id.value) return entity;
+            if (lang.id.value === aggregate.id.value) return aggregate;
             return lang;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(lang => lang.id.value !== id.value);

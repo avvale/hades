@@ -5,7 +5,7 @@ import { CreatePermissionResolver } from './create-permission.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { permissions } from '@hades/admin/permission/infrastructure/seeds/permission.seed';
-import { AdminCreatePermissionInput } from './../../../../../src/graphql';
+import { AdminCreatePermissionInput } from './../../../../graphql';
 
 describe('CreatePermissionResolver', () => 
 {
@@ -38,20 +38,19 @@ describe('CreatePermissionResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('CreatePermissionResolver should be defined', () => 
+    test('CreatePermissionResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('CreatePermissionResolver should be defined', () => 
+        test('CreatePermissionResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an permission created', async () => 
+        test('should return an permission created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await resolver.main(<AdminCreatePermissionInput>permissions[0])).toBe(permissions[0]);

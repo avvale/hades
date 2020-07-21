@@ -39,19 +39,14 @@ describe('FindPermissionController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindPermissionController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('FindPermissionController should be defined', () => 
+        test('FindPermissionController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a permission', async () => 
+        test('should return a permission', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await controller.main([])).toBe(permissions[0]);

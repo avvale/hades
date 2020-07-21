@@ -7,7 +7,6 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindBoundedContextByIdQuery } from '@hades/admin/bounded-context/application/find/find-bounded-context-by-id.query';
 
 @ApiTags('[admin] bounded-context')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: BoundedContextDto})
 @Controller('admin/bounded-context')
 export class FindBoundedContextByIdController 
 {
@@ -17,6 +16,7 @@ export class FindBoundedContextByIdController
 
     @Get(':id')
     @ApiOperation({ summary: 'Find bounded-context by id' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: BoundedContextDto })
     async main(@Param('id') id: string)
     {
         return await this.queryBus.ask(new FindBoundedContextByIdQuery(id));

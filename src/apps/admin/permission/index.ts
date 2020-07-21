@@ -1,6 +1,6 @@
 // controllers
 import { CreatePermissionController } from './controllers/create-permission.controller';
-import { InsertPermissionsController } from './controllers/insert-permissions.controller';
+import { CreatePermissionsController } from './controllers/create-permissions.controller';
 import { PaginatePermissionsController } from './controllers/paginate-permissions.controller';
 import { GetPermissionsController } from './controllers/get-permissions.controller';
 import { FindPermissionByIdController } from './controllers/find-permission-by-id.controller';
@@ -11,7 +11,7 @@ import { DeletePermissionsController } from './controllers/delete-permissions.co
 
 // resolvers
 import { CreatePermissionResolver } from './resolvers/create-permission.resolver';
-import { InsertPermissionsResolver } from './resolvers/insert-permissions.resolver';
+import { CreatePermissionsResolver } from './resolvers/create-permissions.resolver';
 import { PaginatePermissionsResolver } from './resolvers/paginate-permissions.resolver';
 import { GetPermissionsResolver } from './resolvers/get-permissions.resolver';
 import { FindPermissionResolver } from './resolvers/find-permission.resolver';
@@ -22,7 +22,7 @@ import { DeletePermissionsResolver } from './resolvers/delete-permissions.resolv
 
 export const AdminPermissionControllers = [
     CreatePermissionController,
-    InsertPermissionsController,
+    CreatePermissionsController,
     PaginatePermissionsController,
     GetPermissionsController,
     FindPermissionByIdController,
@@ -34,7 +34,7 @@ export const AdminPermissionControllers = [
 
 export const AdminPermissionResolvers = [
     CreatePermissionResolver,
-    InsertPermissionsResolver,
+    CreatePermissionsResolver,
     PaginatePermissionsResolver,
     GetPermissionsResolver,
     FindPermissionResolver,

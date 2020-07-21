@@ -1,6 +1,6 @@
 // controllers
 import { CreateResourceController } from './controllers/create-resource.controller';
-import { InsertResourcesController } from './controllers/insert-resources.controller';
+import { CreateResourcesController } from './controllers/create-resources.controller';
 import { PaginateResourcesController } from './controllers/paginate-resources.controller';
 import { GetResourcesController } from './controllers/get-resources.controller';
 import { FindResourceByIdController } from './controllers/find-resource-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteResourcesController } from './controllers/delete-resources.contro
 
 // resolvers
 import { CreateResourceResolver } from './resolvers/create-resource.resolver';
-import { InsertResourcesResolver } from './resolvers/insert-resources.resolver';
+import { CreateResourcesResolver } from './resolvers/create-resources.resolver';
 import { PaginateResourcesResolver } from './resolvers/paginate-resources.resolver';
 import { GetResourcesResolver } from './resolvers/get-resources.resolver';
 import { FindResourceResolver } from './resolvers/find-resource.resolver';
@@ -22,7 +22,7 @@ import { DeleteResourcesResolver } from './resolvers/delete-resources.resolver';
 
 export const AdminResourceControllers = [
     CreateResourceController,
-    InsertResourcesController,
+    CreateResourcesController,
     PaginateResourcesController,
     GetResourcesController,
     FindResourceByIdController,
@@ -34,7 +34,7 @@ export const AdminResourceControllers = [
 
 export const AdminResourceResolvers = [
     CreateResourceResolver,
-    InsertResourcesResolver,
+    CreateResourcesResolver,
     PaginateResourcesResolver,
     GetResourcesResolver,
     FindResourceResolver,

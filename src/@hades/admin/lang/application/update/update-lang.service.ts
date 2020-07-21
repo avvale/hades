@@ -56,9 +56,9 @@ export class UpdateLangService
         // update
         await this.repository.update(lang);        
             
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const langRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            lang
         );
         
         langRegister.updated(lang); // apply event to model events

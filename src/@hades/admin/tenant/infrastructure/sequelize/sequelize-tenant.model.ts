@@ -1,10 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
 @Table({ modelName: 'admin_tenant', freezeTableName: true })
 export class AdminTenantModel extends Model<AdminTenantModel> 
-{   
- 
+{ 
         
     @Column({
         field: 'id',
@@ -20,17 +19,17 @@ export class AdminTenantModel extends Model<AdminTenantModel>
         field: 'name',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(undefined),
     })
     name: string;
         
              
-    @Index('admin_tenant_code_idx')
+        
     @Column({
         field: 'code',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.STRING(50)
+        type: DataTypes.STRING(undefined),
     })
     code: string;
         
@@ -40,7 +39,7 @@ export class AdminTenantModel extends Model<AdminTenantModel>
         field: 'logo',
         primaryKey: false,
         allowNull: true,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(undefined),
     })
     logo: string;
         

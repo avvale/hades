@@ -37,19 +37,19 @@ describe('FindPermissionByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindPermissionByIdResolver should be defined', () => 
+    test('FindPermissionByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindPermissionByIdResolver should be defined', () => 
+        test('FindPermissionByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an permission by id', async () => 
+        test('should return an permission by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await resolver.main(permissions[0].id)).toBe(permissions[0]);

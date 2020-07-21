@@ -11,7 +11,7 @@ export class TenantName extends StringValueObject
             name: 'TenantName',
             nullable: false,
             undefinable: false,
-            maxLength: 255,            
+                        
         }, validationRules));
     }
 }

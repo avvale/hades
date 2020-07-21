@@ -1,6 +1,6 @@
 // commands
 import { CreatePermissionCommandHandler } from './application/create/create-permission.command-handler';
-import { InsertPermissionsCommandHandler } from './application/insert/insert-permissions.command-handler';
+import { CreatePermissionsCommandHandler } from './application/create/create-permissions.command-handler';
 import { UpdatePermissionCommandHandler } from './application/update/update-permission.command-handler';
 import { DeletePermissionByIdCommandHandler } from './application/delete/delete-permission-by-id.command-handler';
 import { DeletePermissionsCommandHandler } from './application/delete/delete-permissions.command-handler';
@@ -13,12 +13,14 @@ import { FindPermissionByIdQueryHandler } from './application/find/find-permissi
 
 // events
 import { CreatedPermissionEventHandler } from './application/events/created-permission.event-handler';
+import { CreatedPermissionsEventHandler } from './application/events/created-permissions.event-handler';
 import { UpdatedPermissionEventHandler } from './application/events/updated-permission.event-handler';
 import { DeletedPermissionEventHandler } from './application/events/deleted-permission.event-handler';
+import { DeletedPermissionsEventHandler } from './application/events/deleted-permissions.event-handler';
 
 // services
 import { CreatePermissionService } from './application/create/create-permission.service';
-import { InsertPermissionsService } from './application/insert/insert-permissions.service';
+import { CreatePermissionsService } from './application/create/create-permissions.service';
 import { PaginatePermissionsService } from './application/paginate/paginate-permissions.service';
 import { GetPermissionsService } from './application/get/get-permissions.service';
 import { FindPermissionService } from './application/find/find-permission.service';
@@ -41,7 +43,7 @@ export { PermissionSagas } from './application/sagas/permission.sagas';
 export const AdminPermissionHandlers = [
     // commands
     CreatePermissionCommandHandler,
-    InsertPermissionsCommandHandler,
+    CreatePermissionsCommandHandler,
     UpdatePermissionCommandHandler,
     DeletePermissionByIdCommandHandler,
     DeletePermissionsCommandHandler,
@@ -54,13 +56,15 @@ export const AdminPermissionHandlers = [
 
     // events
     CreatedPermissionEventHandler,
+    CreatedPermissionsEventHandler,
     UpdatedPermissionEventHandler,
     DeletedPermissionEventHandler,
+    DeletedPermissionsEventHandler,
 ];
 
 export const AdminPermissionServices = [
     CreatePermissionService,
-    InsertPermissionsService,
+    CreatePermissionsService,
     PaginatePermissionsService,
     GetPermissionsService,
     FindPermissionService,

@@ -36,7 +36,7 @@ export class AdminPermission extends AggregateRoot
         
     }
 
-    static register (id: PermissionId,boundedContextId: PermissionBoundedContextId,name: PermissionName,createdAt: PermissionCreatedAt,updatedAt: PermissionUpdatedAt,deletedAt: PermissionDeletedAt,): AdminPermission
+    static register (id: PermissionId, boundedContextId: PermissionBoundedContextId, name: PermissionName, createdAt: PermissionCreatedAt, updatedAt: PermissionUpdatedAt, deletedAt: PermissionDeletedAt, ): AdminPermission
     {
         return new AdminPermission(id, boundedContextId, name, createdAt, updatedAt, deletedAt, );
     }

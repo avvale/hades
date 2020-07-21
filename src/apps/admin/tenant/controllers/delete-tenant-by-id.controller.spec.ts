@@ -39,19 +39,14 @@ describe('DeleteTenantByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteTenantByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteTenantByIdController should be defined', () => 
+        test('DeleteTenantByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an tenant deleted', async () => 
+        test('should return an tenant deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
             expect(await controller.main(tenants[0].id)).toBe(tenants[0]);

@@ -37,19 +37,19 @@ describe('DeleteResourceByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteResourceByIdResolver should be defined', () => 
+    test('DeleteResourceByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteResourceByIdResolver should be defined', () => 
+        test('DeleteResourceByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an resource deleted', async () => 
+        test('should return an resource deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(resources[0])));
             expect(await resolver.main(resources[0].id)).toBe(resources[0]);

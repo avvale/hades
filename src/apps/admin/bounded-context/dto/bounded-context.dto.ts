@@ -6,8 +6,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '927455c7-af1c-4132-98d5-bc91f9286763',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'fe84c0ad-e326-4c1d-8775-1ce2a82260bc'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'bnc05jg0mhn3ixsgv82zguep3rllbsprheetlyq8i5htr5g4p4b18mjebqauupgtvun5yab6ygt5mv3eca1a0twz27wdoxonzxxk5nbh7f7f16pl7tvxec7l47ipz5mhdsqgoanlplmj15gpb2agmscvf3lvvpc1dopim4nwlc4q46m1rmgz8x04mhgsyosjnzdury78psfq0t6t3k071cdjxrl2wq53qhuzx2z9xsjbxrmcblj9x23mtiwfncf',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '52q0pf8x13ty9uuo0zzvgt60x15hbubxrsbvao668djvw4z70xmdzdf5l1sskowcnwnjx0y5jpazvuys12hywry9bntu4i4lfeaznxp0u43xwenv9tfk5w84g9syrhm7wnz9jzqc2age5yxxnzlov51et1hwcyg3ijx64r8otrdisb52blyq14lstfue4fnly4nflsov82te85acrbji4ztx64f8g011fc66tlettuckiomvvpcz9d8i6u7nvfn'
     })
     name: string;
     
@@ -26,8 +24,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'root [input here api field description]',
-        example     : 't56olw59my8psc30oue5',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'ks0unn81syebi4bj5f64'
     })
     root: string;
     
@@ -36,8 +33,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
-        example     : 679937,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 483561
     })
     sort: number;
     
@@ -46,8 +42,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : true,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : true
     })
     isActive: boolean;
     
@@ -56,8 +51,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-02 15:03:27',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 22:47:45'
     })
     createdAt: string;
     
@@ -66,8 +60,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-02 10:57:52',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 22:17:49'
     })
     updatedAt: string;
     
@@ -76,8 +69,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-02 14:05:45',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 05:21:23'
     })
     deletedAt: string;
     

@@ -39,20 +39,14 @@ describe('UpdateResourceController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateResourceController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateResourceController should be defined', () => 
+        test('UpdateResourceController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a resource created', async () => 
+        test('should return a resource created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(resources[0])));
             expect(await controller.main(resources[0])).toBe(resources[0]);

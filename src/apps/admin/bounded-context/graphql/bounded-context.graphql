@@ -44,7 +44,7 @@ type Query
 type Mutation
 {
     adminCreateBoundedContext(payload: AdminCreateBoundedContextInput!): AdminBoundedContext
-    adminInsertBoundedContexts(payload: [AdminCreateBoundedContextInput]!): Boolean!
+    adminCreateBoundedContexts(payload: [AdminCreateBoundedContextInput]!): Boolean!
     adminUpdateBoundedContext(payload: AdminUpdateBoundedContextInput!): AdminBoundedContext
     adminDeleteBoundedContextById(id: ID!): AdminBoundedContext
     adminDeleteBoundedContexts(query:[QueryStatementInput]): [AdminBoundedContext]!

@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { PermissionDto } from './../dto/permission.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { GetPermissionsQuery } from '@hades/admin/permission/application/get/get-permissions.query';
 
 @ApiTags('[admin] permission')
-@ApiOkResponse({ description: 'The records has been found successfully.', type: PermissionDto})
 @Controller('admin/permissions')
 export class GetPermissionsController 
 {
@@ -18,6 +17,9 @@ export class GetPermissionsController
 
     @Get()
     @ApiOperation({ summary: 'Find permissions according to query' })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [PermissionDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new GetPermissionsQuery(queryStatements));   

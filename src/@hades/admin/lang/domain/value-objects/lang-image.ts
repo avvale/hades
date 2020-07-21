@@ -11,7 +11,7 @@ export class LangImage extends StringValueObject
             name: 'LangImage',
             nullable: true,
             undefinable: true,
-            maxLength: 255,            
+                        
         }, validationRules));
     }
 }

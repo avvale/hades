@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetBoundedContextsQuery } from '@hades/admin/bounded-context/applicatio
 import { DeleteBoundedContextsCommand } from '@hades/admin/bounded-context/application/delete/delete-bounded-contexts.command';
 
 @ApiTags('[admin] bounded-context')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: BoundedContextDto})
 @Controller('admin/bounded-contexts')
 export class DeleteBoundedContextsController 
 {
@@ -21,6 +20,9 @@ export class DeleteBoundedContextsController
 
     @Delete()
     @ApiOperation({ summary: 'Delete bounded-contexts in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [BoundedContextDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const boundedContexts = await this.queryBus.ask(new GetBoundedContextsQuery(queryStatements));

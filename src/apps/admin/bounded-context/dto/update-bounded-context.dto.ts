@@ -2,39 +2,49 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateBoundedContextDto 
 {   
-    @ApiProperty({
-        type        : String,
-        description : 'id [input here api field description]',
-        example     : '927455c7-af1c-4132-98d5-bc91f9286763'
-    })
-    id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'name [input here api field description]',
-        example     : 'necpkayuwq1urq5omlkiuuksjij009wsnlehte9myccqyd1bjkt95e4zehwk1woafwi3unrf83hgf2qqdpv9n9rrvfevy83yeqabdbobybgl702zv3ngjimx7iyxlptgz30ax6k74nmpugsqfv3ao5bufddag3mpdxcrah4v9sr6d7xpmvbaal1rew9hgfjrvgu2btqj1oqn9u0edj4hcecc14ne8w3hfksczbpl7ygc1e6rlzzcc103vath3zz'
-    })
-    name: string;
+        @ApiProperty({
+            type        : String,
+            description : 'id [input here api field description]',
+            example     : 'fe84c0ad-e326-4c1d-8775-1ce2a82260bc'
+        })
+        id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'root [input here api field description]',
-        example     : '0eyjqtt4w8x3l4qll85h'
-    })
-    root: string;
     
-    @ApiProperty({
-        type        : Number,
-        description : 'sort [input here api field description]',
-        example     : 326993
-    })
-    sort: number;
     
-    @ApiProperty({
-        type        : Boolean,
-        description : 'isActive [input here api field description]',
-        example     : true
-    })
-    isActive: boolean;
+        @ApiProperty({
+            type        : String,
+            description : 'name [input here api field description]',
+            example     : 'jgxium9kn0wytz60quchoxl6lgfahuzypytpxtnos7ngdoh0t09xmog8y5gf7o3jbs83yg1qp49t30pbjsyokf8cfr7elb7qy2mymr4w62dr31g05ehyjxxt3n96rshlzpfttkroqtlb1l0h0qjuuj0qet2xdgpr0q1bckvid0cjxk5hk4k6vh0yt018hrvu7bdva53jhczk4abj1ngrbdymx9xepppdcawxz7iuy7ewvb2qrhep7djfu4e9jmc'
+        })
+        name: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'root [input here api field description]',
+            example     : '2t6vwvs3w3vusq27ynfe'
+        })
+        root: string;
+    
+    
+    
+        @ApiProperty({
+            type        : Number,
+            description : 'sort [input here api field description]',
+            example     : 303467
+        })
+        sort: number;
+    
+    
+    
+        @ApiProperty({
+            type        : Boolean,
+            description : 'isActive [input here api field description]',
+            example     : false
+        })
+        isActive: boolean;
+    
     
 }

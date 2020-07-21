@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { PermissionDto } from './../dto/permission.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetPermissionsQuery } from '@hades/admin/permission/application/get/get
 import { DeletePermissionsCommand } from '@hades/admin/permission/application/delete/delete-permissions.command';
 
 @ApiTags('[admin] permission')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: PermissionDto})
 @Controller('admin/permissions')
 export class DeletePermissionsController 
 {
@@ -21,6 +20,9 @@ export class DeletePermissionsController
 
     @Delete()
     @ApiOperation({ summary: 'Delete permissions in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [PermissionDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const permissions = await this.queryBus.ask(new GetPermissionsQuery(queryStatements));

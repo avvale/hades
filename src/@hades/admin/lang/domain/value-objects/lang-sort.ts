@@ -12,6 +12,7 @@ export class LangSort extends SmallintValueObject
             nullable: true,
             undefinable: true,
             maxLength: 6,
+            unsigned: true,
         }, validationRules));
     }
 }

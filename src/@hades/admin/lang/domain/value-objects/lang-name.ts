@@ -11,7 +11,7 @@ export class LangName extends StringValueObject
             name: 'LangName',
             nullable: false,
             undefinable: false,
-            maxLength: 255,            
+                        
         }, validationRules));
     }
 }

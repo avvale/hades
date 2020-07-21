@@ -5,7 +5,7 @@ import { UpdateTenantResolver } from './update-tenant.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { tenants } from '@hades/admin/tenant/infrastructure/seeds/tenant.seed';
-import { AdminUpdateTenantInput } from './../../../../../src/graphql';
+import { AdminUpdateTenantInput } from './../../../../graphql';
 
 describe('UpdateTenantResolver', () => 
 {
@@ -38,20 +38,19 @@ describe('UpdateTenantResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateTenantResolver should be defined', () => 
+    test('UpdateTenantResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateTenantResolver should be defined', () => 
+        test('UpdateTenantResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a tenant created', async () => 
+        test('should return a tenant created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
             expect(await resolver.main(<AdminUpdateTenantInput>tenants[0])).toBe(tenants[0]);

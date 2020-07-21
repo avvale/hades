@@ -37,19 +37,19 @@ describe('DeleteBoundedContextByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteBoundedContextByIdResolver should be defined', () => 
+    test('DeleteBoundedContextByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteBoundedContextByIdResolver should be defined', () => 
+        test('DeleteBoundedContextByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an boundedContext deleted', async () => 
+        test('should return an boundedContext deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await resolver.main(boundedContexts[0].id)).toBe(boundedContexts[0]);

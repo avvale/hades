@@ -1,6 +1,6 @@
 // controllers
 import { CreateLangController } from './controllers/create-lang.controller';
-import { InsertLangsController } from './controllers/insert-langs.controller';
+import { CreateLangsController } from './controllers/create-langs.controller';
 import { PaginateLangsController } from './controllers/paginate-langs.controller';
 import { GetLangsController } from './controllers/get-langs.controller';
 import { FindLangByIdController } from './controllers/find-lang-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteLangsController } from './controllers/delete-langs.controller';
 
 // resolvers
 import { CreateLangResolver } from './resolvers/create-lang.resolver';
-import { InsertLangsResolver } from './resolvers/insert-langs.resolver';
+import { CreateLangsResolver } from './resolvers/create-langs.resolver';
 import { PaginateLangsResolver } from './resolvers/paginate-langs.resolver';
 import { GetLangsResolver } from './resolvers/get-langs.resolver';
 import { FindLangResolver } from './resolvers/find-lang.resolver';
@@ -22,7 +22,7 @@ import { DeleteLangsResolver } from './resolvers/delete-langs.resolver';
 
 export const AdminLangControllers = [
     CreateLangController,
-    InsertLangsController,
+    CreateLangsController,
     PaginateLangsController,
     GetLangsController,
     FindLangByIdController,
@@ -34,7 +34,7 @@ export const AdminLangControllers = [
 
 export const AdminLangResolvers = [
     CreateLangResolver,
-    InsertLangsResolver,
+    CreateLangsResolver,
     PaginateLangsResolver,
     GetLangsResolver,
     FindLangResolver,

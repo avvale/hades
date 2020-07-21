@@ -50,9 +50,9 @@ export class CreateTenantService
         // create
         await this.repository.create(tenant);
 
-        // insert EventBus in object returned by the repository, to be able to apply and commit events
+        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const tenantRegister = this.publisher.mergeObjectContext(
-            await this.repository.findById(id)
+            tenant
         );
         
         tenantRegister.created(tenant); // apply event to model events

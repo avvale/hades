@@ -1,5 +1,5 @@
 import { Controller, Body, Put } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateTenantDto } from './../dto/update-tenant.dto';
 import { TenantDto } from './../dto/tenant.dto';
 
@@ -10,7 +10,6 @@ import { UpdateTenantCommand } from '@hades/admin/tenant/application/update/upda
 import { FindTenantByIdQuery } from '@hades/admin/tenant/application/find/find-tenant-by-id.query';
 
 @ApiTags('[admin] tenant')
-@ApiCreatedResponse({ description: 'The record has been successfully updated.', type: TenantDto})
 @Controller('admin/tenant')
 export class UpdateTenantController 
 {
@@ -21,6 +20,7 @@ export class UpdateTenantController
 
     @Put()
     @ApiOperation({ summary: 'Update tenant' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: TenantDto})
     async main(@Body() payload: UpdateTenantDto)
     {
         await this.commandBus.dispatch(new UpdateTenantCommand(

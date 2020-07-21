@@ -1,6 +1,6 @@
 // commands
 import { CreateLangCommandHandler } from './application/create/create-lang.command-handler';
-import { InsertLangsCommandHandler } from './application/insert/insert-langs.command-handler';
+import { CreateLangsCommandHandler } from './application/create/create-langs.command-handler';
 import { UpdateLangCommandHandler } from './application/update/update-lang.command-handler';
 import { DeleteLangByIdCommandHandler } from './application/delete/delete-lang-by-id.command-handler';
 import { DeleteLangsCommandHandler } from './application/delete/delete-langs.command-handler';
@@ -13,12 +13,14 @@ import { FindLangByIdQueryHandler } from './application/find/find-lang-by-id.que
 
 // events
 import { CreatedLangEventHandler } from './application/events/created-lang.event-handler';
+import { CreatedLangsEventHandler } from './application/events/created-langs.event-handler';
 import { UpdatedLangEventHandler } from './application/events/updated-lang.event-handler';
 import { DeletedLangEventHandler } from './application/events/deleted-lang.event-handler';
+import { DeletedLangsEventHandler } from './application/events/deleted-langs.event-handler';
 
 // services
 import { CreateLangService } from './application/create/create-lang.service';
-import { InsertLangsService } from './application/insert/insert-langs.service';
+import { CreateLangsService } from './application/create/create-langs.service';
 import { PaginateLangsService } from './application/paginate/paginate-langs.service';
 import { GetLangsService } from './application/get/get-langs.service';
 import { FindLangService } from './application/find/find-lang.service';
@@ -41,7 +43,7 @@ export { LangSagas } from './application/sagas/lang.sagas';
 export const AdminLangHandlers = [
     // commands
     CreateLangCommandHandler,
-    InsertLangsCommandHandler,
+    CreateLangsCommandHandler,
     UpdateLangCommandHandler,
     DeleteLangByIdCommandHandler,
     DeleteLangsCommandHandler,
@@ -54,13 +56,15 @@ export const AdminLangHandlers = [
 
     // events
     CreatedLangEventHandler,
+    CreatedLangsEventHandler,
     UpdatedLangEventHandler,
     DeletedLangEventHandler,
+    DeletedLangsEventHandler,
 ];
 
 export const AdminLangServices = [
     CreateLangService,
-    InsertLangsService,
+    CreateLangsService,
     PaginateLangsService,
     GetLangsService,
     FindLangService,

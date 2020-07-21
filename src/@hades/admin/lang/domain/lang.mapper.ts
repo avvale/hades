@@ -34,7 +34,7 @@ export class LangMapper implements IMapper
      */
     mapObjectsToAggregates(langs: ObjectLiteral[]): AdminLang[]
     {
-        return langs.map(lang => this.makeAggregate(lang));
+        return langs.map(lang  => this.makeAggregate(lang ));
     }
 
     /**
@@ -69,7 +69,7 @@ export class LangMapper implements IMapper
             new LangCreatedAt(lang.createdAt),
             new LangUpdatedAt(lang.updatedAt),
             new LangDeletedAt(lang.deletedAt),
-            
+              
         );
     }
 

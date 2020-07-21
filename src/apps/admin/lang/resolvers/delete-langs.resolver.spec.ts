@@ -37,19 +37,19 @@ describe('DeleteLangsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteLangsResolver should be defined', () => 
+    test('DeleteLangsResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteLangsResolver should be defined', () => 
+        test('DeleteLangsResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an langs deleted', async () => 
+        test('should return an langs deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
             expect(await resolver.main([])).toBe(langs);

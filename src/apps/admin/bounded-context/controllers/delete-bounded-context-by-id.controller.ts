@@ -9,7 +9,6 @@ import { FindBoundedContextByIdQuery } from '@hades/admin/bounded-context/applic
 import { DeleteBoundedContextByIdCommand } from '@hades/admin/bounded-context/application/delete/delete-bounded-context-by-id.command';
 
 @ApiTags('[admin] bounded-context')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: BoundedContextDto})
 @Controller('admin/bounded-context')
 export class DeleteBoundedContextByIdController 
 {
@@ -20,6 +19,7 @@ export class DeleteBoundedContextByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete bounded-context by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: BoundedContextDto })
     async main(@Param('id') id: string)
     {
         const boundedContext = await this.queryBus.ask(new FindBoundedContextByIdQuery(id));
