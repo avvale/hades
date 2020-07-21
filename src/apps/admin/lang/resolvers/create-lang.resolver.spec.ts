@@ -5,7 +5,7 @@ import { CreateLangResolver } from './create-lang.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
-import { AdminCreateLangInput } from './../../../../../src/graphql';
+import { AdminCreateLangInput } from './../../../../graphql';
 
 describe('CreateLangResolver', () => 
 {

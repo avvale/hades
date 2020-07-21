@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "d28b8ab7-f43e-4d1d-ad08-51b9c4e02f90",
+		"_postman_id"   : "7f536a50-1774-44f7-a16a-7fa36e469357",
 		"name"          : "@hades - admin/tenant",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -14,7 +14,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:AdminCreateTenantInput!)\n{\n\tadminCreateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"9ab186b4-b09c-497b-9983-8cfca310cc78\", \n\t\t\"name\": \"z\", \n\t\t\"code\": \"t\", \n\t\t\"logo\": \"x\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e\", \n\t\t\"name\": \"7\", \n\t\t\"code\": \"q\", \n\t\t\"logo\": \"l\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
 					}
 				},
 				"url": {
@@ -38,7 +38,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[AdminCreateTenantInput]!)\n{\n\tadminCreateTenants (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"afee669b-0711-40c0-a73a-abb4ad367173\", \n\t\t\t\"name\": \"t\", \n\t\t\t\"code\": \"i\", \n\t\t\t\"logo\": \"p\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"959c72dd-1641-445d-94d1-004db60d6858\", \n\t\t\t\"name\": \"s\", \n\t\t\t\"code\": \"t\", \n\t\t\t\"logo\": \"r\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dcd04813-2bb9-4af2-9098-7bcfd1f518d8\", \n\t\t\t\"name\": \"q\", \n\t\t\t\"code\": \"3\", \n\t\t\t\"logo\": \"c\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9bbd47c8-9fae-4ea6-ad5f-e534f6e122b9\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"code\": \"j\", \n\t\t\t\"logo\": \"b\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bdd6fbca-3f7c-4eaa-b739-8174e66545df\", \n\t\t\t\"name\": \"8\", \n\t\t\t\"code\": \"f\", \n\t\t\t\"logo\": \"e\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"26bfc98a-5f81-4f6e-9002-dff8d44fcc5d\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"code\": \"g\", \n\t\t\t\"logo\": \"x\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1236d002-82bd-4faa-8a70-b236f662ed47\", \n\t\t\t\"name\": \"l\", \n\t\t\t\"code\": \"l\", \n\t\t\t\"logo\": \"u\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"182e9fbf-1bbc-4633-b3be-9d0b07c8dd61\", \n\t\t\t\"name\": \"m\", \n\t\t\t\"code\": \"q\", \n\t\t\t\"logo\": \"w\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7bfb676b-b6cb-4422-89e7-5de927eb0720\", \n\t\t\t\"name\": \"x\", \n\t\t\t\"code\": \"t\", \n\t\t\t\"logo\": \"n\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7973ae51-379a-4720-9bf9-c76c4ed178fc\", \n\t\t\t\"name\": \"7\", \n\t\t\t\"code\": \"3\", \n\t\t\t\"logo\": \"e\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"77ee318d-5b0a-43ee-9b38-7a0446f66780\", \n\t\t\t\"name\": \"0\", \n\t\t\t\"code\": \"s\", \n\t\t\t\"logo\": \"8\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"035cdfa8-1a9b-411f-9870-79dafdfa2bc1\", \n\t\t\t\"name\": \"y\", \n\t\t\t\"code\": \"3\", \n\t\t\t\"logo\": \"4\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bd5de0ae-9839-49e7-ae55-5186c2f1e5a2\", \n\t\t\t\"name\": \"2\", \n\t\t\t\"code\": \"k\", \n\t\t\t\"logo\": \"8\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0e325050-6e9e-4394-b6bc-698ccbb7fd2f\", \n\t\t\t\"name\": \"6\", \n\t\t\t\"code\": \"4\", \n\t\t\t\"logo\": \"q\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"839cf82d-dc7d-4daa-bf23-6285ab2e0308\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"code\": \"w\", \n\t\t\t\"logo\": \"o\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"72a6a6be-1e8c-424c-a779-584b40fa2476\", \n\t\t\t\"name\": \"a\", \n\t\t\t\"code\": \"z\", \n\t\t\t\"logo\": \"q\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"85798ce6-120c-4551-bd86-9c757912836c\", \n\t\t\t\"name\": \"a\", \n\t\t\t\"code\": \"b\", \n\t\t\t\"logo\": \"s\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5d1b973c-4791-45e0-8019-319a6beae6f4\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"code\": \"9\", \n\t\t\t\"logo\": \"y\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"84625ead-24dc-4d23-b7a7-232ab241b695\", \n\t\t\t\"name\": \"b\", \n\t\t\t\"code\": \"n\", \n\t\t\t\"logo\": \"8\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"04dbf8a9-bdd5-4bc7-b098-a803565d9ec3\", \n\t\t\t\"name\": \"h\", \n\t\t\t\"code\": \"f\", \n\t\t\t\"logo\": \"g\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"72163e29-665c-44e1-a719-0af2f82f05e7\", \n\t\t\t\"name\": \"e\", \n\t\t\t\"code\": \"r\", \n\t\t\t\"logo\": \"m\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3c8e078d-63da-4624-ae8c-36bb82b41d79\", \n\t\t\t\"name\": \"p\", \n\t\t\t\"code\": \"p\", \n\t\t\t\"logo\": \"5\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"aaaac7a5-50e2-4489-bd06-e3cbdfdd66cf\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"code\": \"v\", \n\t\t\t\"logo\": \"5\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"198909f5-ca51-4b58-ac7e-119b72d2f73e\", \n\t\t\t\"name\": \"a\", \n\t\t\t\"code\": \"c\", \n\t\t\t\"logo\": \"7\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bdef2915-aedc-4f80-b17c-72d72fc66b75\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"code\": \"6\", \n\t\t\t\"logo\": \"u\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"eaaa05c1-e4f9-45fb-9d5c-831fc78ba12e\", \n\t\t\t\"name\": \"m\", \n\t\t\t\"code\": \"t\", \n\t\t\t\"logo\": \"x\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b69e2a7d-9f5c-4761-9902-24862dbca5c9\", \n\t\t\t\"name\": \"y\", \n\t\t\t\"code\": \"x\", \n\t\t\t\"logo\": \"g\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4ea420bf-c966-4017-a01f-23b3781299c2\", \n\t\t\t\"name\": \"r\", \n\t\t\t\"code\": \"y\", \n\t\t\t\"logo\": \"i\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"351ca0f1-132d-4f66-9e59-1379f19e093a\", \n\t\t\t\"name\": \"c\", \n\t\t\t\"code\": \"4\", \n\t\t\t\"logo\": \"u\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f00db997-07be-4a20-8304-28f0bbee67b1\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"code\": \"x\", \n\t\t\t\"logo\": \"2\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6fc77f78-9a3d-4f0a-85c4-9d5e7b6ff0bd\", \n\t\t\t\"name\": \"e\", \n\t\t\t\"code\": \"s\", \n\t\t\t\"logo\": \"y\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0e47bf71-cd9a-47e0-8913-6afecfc2cd23\", \n\t\t\t\"name\": \"t\", \n\t\t\t\"code\": \"u\", \n\t\t\t\"logo\": \"z\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f6471a57-3fc9-496f-86ba-6efa04dc12cb\", \n\t\t\t\"name\": \"0\", \n\t\t\t\"code\": \"5\", \n\t\t\t\"logo\": \"9\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f153e72c-b29c-46d2-bced-edd48aac3158\", \n\t\t\t\"name\": \"t\", \n\t\t\t\"code\": \"a\", \n\t\t\t\"logo\": \"f\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3fc1e6dc-9219-4d80-a5e9-62b61f5fef3d\", \n\t\t\t\"name\": \"f\", \n\t\t\t\"code\": \"a\", \n\t\t\t\"logo\": \"3\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1f07e93a-2ba7-4270-bb16-2489de66b798\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"code\": \"e\", \n\t\t\t\"logo\": \"i\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d2a5a9bb-cb92-4c5b-9054-26a43aa9347d\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"code\": \"9\", \n\t\t\t\"logo\": \"p\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"428830dc-2684-4b77-ab2d-8a1529def021\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"code\": \"3\", \n\t\t\t\"logo\": \"y\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b471d135-6616-4714-a51a-cea52c08f70b\", \n\t\t\t\"name\": \"f\", \n\t\t\t\"code\": \"3\", \n\t\t\t\"logo\": \"w\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"119a5110-ccdc-4ec2-bbb2-646c555ed8eb\", \n\t\t\t\"name\": \"e\", \n\t\t\t\"code\": \"k\", \n\t\t\t\"logo\": \"a\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -86,7 +86,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:[QueryStatementInput])\n{\n\tadminGetTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"9ab186b4-b09c-497b-9983-8cfca310cc78\"\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -110,7 +110,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:[QueryStatementInput])\n{\n\tadminFindTenant (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"9ab186b4-b09c-497b-9983-8cfca310cc78\"\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -134,7 +134,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($id:ID)\n{\n\tadminFindTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"9ab186b4-b09c-497b-9983-8cfca310cc78\"\n}"
+						"variables": "{\n\t\"id\": \"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e\"\n}"
 					}
 				},
 				"url": {
@@ -158,7 +158,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:AdminUpdateTenantInput!)\n{\n\tadminUpdateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"9ab186b4-b09c-497b-9983-8cfca310cc78\", \n\t\t\"name\": \"2\", \n\t\t\"code\": \"1\", \n\t\t\"logo\": \"v\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e\", \n\t\t\"name\": \"s\", \n\t\t\"code\": \"v\", \n\t\t\"logo\": \"e\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
 					}
 				},
 				"url": {
@@ -182,7 +182,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($id:ID!)\n{\n\tadminDeleteTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"9ab186b4-b09c-497b-9983-8cfca310cc78\"\n}"
+						"variables": "{\n\t\"id\": \"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e\"\n}"
 					}
 				},
 				"url": {
@@ -235,7 +235,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"9ab186b4-b09c-497b-9983-8cfca310cc78\", \n\t\"name\": \"p\", \n\t\"code\": \"u\", \n\t\"logo\": \"u\", \n\t\"isActive\": true, \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"raw"   : "{\n\t\"id\": \"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e\", \n\t\"name\": \"n\", \n\t\"code\": \"7\", \n\t\"logo\": \"q\", \n\t\"isActive\": true, \n\t\"data\": { \"foo\" : \"bar\" }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -269,7 +269,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"aca2501a-7268-4425-b272-b2465806f20f\", \n\t\t\"name\": \"s\", \n\t\t\"code\": \"z\", \n\t\t\"logo\": \"g\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"fef8f0cc-5fb8-4fac-9125-fde042bb9e4b\", \n\t\t\"name\": \"i\", \n\t\t\"code\": \"g\", \n\t\t\"logo\": \"8\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"dbd6c682-b28e-4982-8227-030519181818\", \n\t\t\"name\": \"k\", \n\t\t\"code\": \"u\", \n\t\t\"logo\": \"p\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6c62e26f-d2f0-4f9c-95bc-c8df2f4a9a27\", \n\t\t\"name\": \"7\", \n\t\t\"code\": \"q\", \n\t\t\"logo\": \"v\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"d9a35287-104a-44e6-9a7a-1aff67e5a34a\", \n\t\t\"name\": \"v\", \n\t\t\"code\": \"4\", \n\t\t\"logo\": \"u\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"3924145c-51b4-4dfa-903d-a3a1d8b49efc\", \n\t\t\"name\": \"r\", \n\t\t\"code\": \"p\", \n\t\t\"logo\": \"f\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"a5c2ba07-ebae-41e0-84b3-56bb9285dfe1\", \n\t\t\"name\": \"3\", \n\t\t\"code\": \"k\", \n\t\t\"logo\": \"a\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5cd6d6e7-3158-4556-96c5-7f7e83e4dddc\", \n\t\t\"name\": \"g\", \n\t\t\"code\": \"k\", \n\t\t\"logo\": \"a\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5b7716db-5392-4e35-b70e-8c8ea00c10b3\", \n\t\t\"name\": \"m\", \n\t\t\"code\": \"q\", \n\t\t\"logo\": \"t\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"0623500c-0b99-4afa-b8a8-89841331fbba\", \n\t\t\"name\": \"r\", \n\t\t\"code\": \"x\", \n\t\t\"logo\": \"i\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"837af98f-25cd-4359-9c57-baf124735685\", \n\t\t\"name\": \"a\", \n\t\t\"code\": \"n\", \n\t\t\"logo\": \"b\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"c0b7e1e9-f373-4d89-9e4e-90dbe1998bd1\", \n\t\t\"name\": \"k\", \n\t\t\"code\": \"l\", \n\t\t\"logo\": \"l\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"d3413d1e-6842-4eab-ba2b-bfdf35f935dc\", \n\t\t\"name\": \"j\", \n\t\t\"code\": \"q\", \n\t\t\"logo\": \"i\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"ac4bb3c4-f8f9-4b9a-9a43-c2f9ae55e5d8\", \n\t\t\"name\": \"j\", \n\t\t\"code\": \"c\", \n\t\t\"logo\": \"h\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"e8ead3ab-a893-4c06-894e-575ced78cbec\", \n\t\t\"name\": \"q\", \n\t\t\"code\": \"0\", \n\t\t\"logo\": \"m\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"8042f901-9746-4cb7-a99d-14a5dac2dda3\", \n\t\t\"name\": \"9\", \n\t\t\"code\": \"3\", \n\t\t\"logo\": \"l\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"b54374ef-6340-425f-aa0a-5b8226b75bca\", \n\t\t\"name\": \"a\", \n\t\t\"code\": \"w\", \n\t\t\"logo\": \"y\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"4cb89eb5-effb-48a9-964f-5164d49706f3\", \n\t\t\"name\": \"1\", \n\t\t\"code\": \"t\", \n\t\t\"logo\": \"h\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"27d99a3b-7e21-41bd-806f-eae8158cd259\", \n\t\t\"name\": \"w\", \n\t\t\"code\": \"o\", \n\t\t\"logo\": \"r\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"d12ef8c7-ff14-4fd6-b4f4-2e22579dbe41\", \n\t\t\"name\": \"d\", \n\t\t\"code\": \"8\", \n\t\t\"logo\": \"o\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"173d0d55-5a71-4db5-b7ab-68eab90d1b6e\", \n\t\t\"name\": \"3\", \n\t\t\"code\": \"r\", \n\t\t\"logo\": \"j\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"589c1c06-3414-45fe-8029-3d656ecdef3d\", \n\t\t\"name\": \"j\", \n\t\t\"code\": \"6\", \n\t\t\"logo\": \"f\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"2b658fd0-d296-4698-be9b-556604ab3e97\", \n\t\t\"name\": \"6\", \n\t\t\"code\": \"t\", \n\t\t\"logo\": \"r\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"01681ba4-ff11-43ce-831c-0561af78ba09\", \n\t\t\"name\": \"r\", \n\t\t\"code\": \"8\", \n\t\t\"logo\": \"l\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"90bd003b-a94e-4eb7-9998-c049ed6c0b30\", \n\t\t\"name\": \"4\", \n\t\t\"code\": \"0\", \n\t\t\"logo\": \"2\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"150eca36-2885-4ffa-8a58-0b732e1ba5ae\", \n\t\t\"name\": \"z\", \n\t\t\"code\": \"k\", \n\t\t\"logo\": \"6\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"0217c954-b7cc-4506-b939-7edf4c41a915\", \n\t\t\"name\": \"9\", \n\t\t\"code\": \"e\", \n\t\t\"logo\": \"6\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"780300a0-5d1a-4949-8656-ea56538e5eea\", \n\t\t\"name\": \"5\", \n\t\t\"code\": \"2\", \n\t\t\"logo\": \"l\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"944a8e28-fea5-4389-aad0-a6b91aca1e3a\", \n\t\t\"name\": \"5\", \n\t\t\"code\": \"z\", \n\t\t\"logo\": \"v\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"48dc721f-aabd-4adb-8328-3b61829835a6\", \n\t\t\"name\": \"p\", \n\t\t\"code\": \"h\", \n\t\t\"logo\": \"0\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"fc6ee742-00fc-4d67-ad98-0013906d89a7\", \n\t\t\"name\": \"c\", \n\t\t\"code\": \"x\", \n\t\t\"logo\": \"a\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"d71a54b6-007b-4adf-9cb3-6d82d6f2565e\", \n\t\t\"name\": \"w\", \n\t\t\"code\": \"v\", \n\t\t\"logo\": \"y\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"ddcc6c89-9ea3-40c3-a492-a458f523311b\", \n\t\t\"name\": \"h\", \n\t\t\"code\": \"5\", \n\t\t\"logo\": \"6\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"bbf24c60-4a45-43d9-b027-35cdd6975d22\", \n\t\t\"name\": \"z\", \n\t\t\"code\": \"6\", \n\t\t\"logo\": \"t\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"72ed8f0a-c6c1-4e1a-bffa-b802b537277c\", \n\t\t\"name\": \"t\", \n\t\t\"code\": \"5\", \n\t\t\"logo\": \"t\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"30ebabb5-e760-4b46-a785-8372d87c1a78\", \n\t\t\"name\": \"1\", \n\t\t\"code\": \"y\", \n\t\t\"logo\": \"i\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"ca7ccc10-113f-4069-8b5c-8c070223964a\", \n\t\t\"name\": \"x\", \n\t\t\"code\": \"h\", \n\t\t\"logo\": \"a\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"518f02db-9372-4413-ae6b-ce2f5ceb2542\", \n\t\t\"name\": \"t\", \n\t\t\"code\": \"5\", \n\t\t\"logo\": \"z\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"00e4b5b6-0a44-4eb9-80ef-202a018791c5\", \n\t\t\"name\": \"l\", \n\t\t\"code\": \"x\", \n\t\t\"logo\": \"m\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6e59e41d-cd85-4261-a03a-9cfb463a5363\", \n\t\t\"name\": \"z\", \n\t\t\"code\": \"g\", \n\t\t\"logo\": \"7\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -344,7 +344,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"9ab186b4-b09c-497b-9983-8cfca310cc78\"\n\t\t}\n\t]\n}",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e\"\n\t\t}\n\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -381,7 +381,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"9ab186b4-b09c-497b-9983-8cfca310cc78\"\n\t\t}\n\t]\n}",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e\"\n\t\t}\n\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -426,14 +426,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/admin/tenant/9ab186b4-b09c-497b-9983-8cfca310cc78",
+					"raw": "{{URL}}/admin/tenant/3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin",
 						"tenant",
-						"9ab186b4-b09c-497b-9983-8cfca310cc78"
+						"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e"
 					]
 				}
 			},
@@ -453,7 +453,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"9ab186b4-b09c-497b-9983-8cfca310cc78\", \n\t\"name\": \"q\", \n\t\"code\": \"7\", \n\t\"logo\": \"c\", \n\t\"isActive\": true, \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"raw"   : "{\n\t\"id\": \"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e\", \n\t\"name\": \"b\", \n\t\"code\": \"r\", \n\t\"logo\": \"3\", \n\t\"isActive\": true, \n\t\"data\": { \"foo\" : \"bar\" }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -495,14 +495,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/admin/tenant/9ab186b4-b09c-497b-9983-8cfca310cc78",
+					"raw": "{{URL}}/admin/tenant/3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin",
 						"tenant",
-						"9ab186b4-b09c-497b-9983-8cfca310cc78"
+						"3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e"
 					]
 				}
 			},
@@ -545,7 +545,7 @@
     ],
     "variable": [
 		{
-			"id": "6ef88178-4138-4a56-ac49-597e18344f04",
+			"id": "0baea0c3-ae48-4c85-ab89-715285c2a45d",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

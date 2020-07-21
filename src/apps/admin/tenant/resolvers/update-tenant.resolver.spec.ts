@@ -5,7 +5,7 @@ import { UpdateTenantResolver } from './update-tenant.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { tenants } from '@hades/admin/tenant/infrastructure/seeds/tenant.seed';
-import { AdminUpdateTenantInput } from './../../../../../src/graphql';
+import { AdminUpdateTenantInput } from './../../../../graphql';
 
 describe('UpdateTenantResolver', () => 
 {

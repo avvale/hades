@@ -6,7 +6,7 @@ export class UpdateResourceDto
         @ApiProperty({
             type        : String,
             description : 'id [input here api field description]',
-            example     : 'a016b6d2-437a-46ba-92dc-d42c891ba04c'
+            example     : 'e6fca3d1-f082-45d8-acef-1dc470294220'
         })
         id: string;
     
@@ -15,7 +15,7 @@ export class UpdateResourceDto
         @ApiProperty({
             type        : String,
             description : 'boundedContextId [input here api field description]',
-            example     : 'c466f698-71db-4cb2-ae46-08604fc10fe0'
+            example     : '8b3cb4a5-c55e-487c-a024-fc9c389fbcce'
         })
         boundedContextId: string;
     
@@ -24,7 +24,7 @@ export class UpdateResourceDto
         @ApiProperty({
             type        : String,
             description : 'name [input here api field description]',
-            example     : 'tf3pjyeyh6aej4r3ungcf5er5uuspnrzmz0c2uqgdgdla1zkik3qoo9wgqk9bicg8ar9iv2l1mef7my73vk5qehmm7hgbl2hem7pw8pu2fxhswxdikxkir2qhkfizwdkw1ib8z81qz456y23tqobt0l0zif9hmwbg3pd6nu6xjcgia2h1d0dsvreo9rzm075c9ltmte8lec4tsidah1vl5q1bvx4cgtt8rp1ei5itn66wo755zbaygg56qx6zzg'
+            example     : '42gm700tzvlhnkwigx7sa3ac8uo3528qr267m7prlxv5fhqa23boqdx13bmqkxtulkknvd9tf4d1kh21x9k4g8sxnzsc5s38dhlxmi434sdtb4p1lpy49a5hdcsdz84s3rlptlgw85s1f9di45v8k00uhcrmp8133tsxg4vo7xxr8xblvgdmafbkzem27q4ae61s41967a8un69hofokm20cgyfrokxoga9iwa0ea1ajq8efom66p0zh05j6kba'
         })
         name: string;
     
@@ -33,7 +33,7 @@ export class UpdateResourceDto
         @ApiProperty({
             type        : Boolean,
             description : 'hasCustomFields [input here api field description]',
-            example     : true
+            example     : false
         })
         hasCustomFields: boolean;
     
@@ -42,7 +42,7 @@ export class UpdateResourceDto
         @ApiProperty({
             type        : Boolean,
             description : 'hasAttachments [input here api field description]',
-            example     : true
+            example     : false
         })
         hasAttachments: boolean;
     

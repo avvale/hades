@@ -6,7 +6,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'a016b6d2-437a-46ba-92dc-d42c891ba04c'
+        example     : 'e6fca3d1-f082-45d8-acef-1dc470294220'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : 'c466f698-71db-4cb2-ae46-08604fc10fe0'
+        example     : '8b3cb4a5-c55e-487c-a024-fc9c389fbcce'
     })
     boundedContextId: string;
     
@@ -24,7 +24,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'j72bsxrownl2hzc8qwwa0qbk31iwgo0oak0dwzv82epci9bhauewckh7m1voblytutwl1y9lc85lamhazfa7t8isfplbznfs8ybgs6hj2i7arxynuaolm2raxl7ws5qdzps5sy71whel9p2ntqr81s7o510ivg85882m79ktnk6y29llqtcs36ja4nciwnwrzl25u51jn6ugon85xau2w2xyb6spku1q6pyhlu8ifv48novfhfukoo51lo5y5bk'
+        example     : 'clopzuu76ranmjp659oumbjfi0dc9ijx6umdjcxdt265vq6wj3ca3m1t6khgc3386q1ays9ij2pgllb2xa8xuk0q2bfj268rnp9z7yj7g3vqpskyx8bgku6tos25zoqdskgqbvxinmeottpvmvqvg1bvajo8wn7cj9rl4i6tcid80gqzo6nqk32qvaccco51ll4ds6hx6f507o4t8o9rakymi5pzzwr78epcy2tczmpjejgqrdi19wtynsssxm2'
     })
     name: string;
     
@@ -33,7 +33,7 @@ export class ResourceDto
     @ApiProperty({
         type        : Boolean,
         description : 'hasCustomFields [input here api field description]',
-        example     : true
+        example     : false
     })
     hasCustomFields: boolean;
     
@@ -51,7 +51,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-21 18:56:45'
+        example     : '2020-07-21 02:52:52'
     })
     createdAt: string;
     
@@ -60,7 +60,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-21 09:44:39'
+        example     : '2020-07-21 01:41:39'
     })
     updatedAt: string;
     
@@ -69,7 +69,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-21 20:42:44'
+        example     : '2020-07-21 18:05:47'
     })
     deletedAt: string;
     
