@@ -1,6 +1,6 @@
 // commands
 import { CreateActionCommandHandler } from './application/create/create-action.command-handler';
-import { InsertActionsCommandHandler } from './application/insert/insert-actions.command-handler';
+import { CreateActionsCommandHandler } from './application/create/create-actions.command-handler';
 import { UpdateActionCommandHandler } from './application/update/update-action.command-handler';
 import { DeleteActionByIdCommandHandler } from './application/delete/delete-action-by-id.command-handler';
 import { DeleteActionsCommandHandler } from './application/delete/delete-actions.command-handler';
@@ -13,12 +13,14 @@ import { FindActionByIdQueryHandler } from './application/find/find-action-by-id
 
 // events
 import { CreatedActionEventHandler } from './application/events/created-action.event-handler';
+import { CreatedActionsEventHandler } from './application/events/created-actions.event-handler';
 import { UpdatedActionEventHandler } from './application/events/updated-action.event-handler';
 import { DeletedActionEventHandler } from './application/events/deleted-action.event-handler';
+import { DeletedActionsEventHandler } from './application/events/deleted-actions.event-handler';
 
 // services
 import { CreateActionService } from './application/create/create-action.service';
-import { InsertActionsService } from './application/insert/insert-actions.service';
+import { CreateActionsService } from './application/create/create-actions.service';
 import { PaginateActionsService } from './application/paginate/paginate-actions.service';
 import { GetActionsService } from './application/get/get-actions.service';
 import { FindActionService } from './application/find/find-action.service';
@@ -41,7 +43,7 @@ export { ActionSagas } from './application/sagas/action.sagas';
 export const NfcActionHandlers = [
     // commands
     CreateActionCommandHandler,
-    InsertActionsCommandHandler,
+    CreateActionsCommandHandler,
     UpdateActionCommandHandler,
     DeleteActionByIdCommandHandler,
     DeleteActionsCommandHandler,
@@ -54,13 +56,15 @@ export const NfcActionHandlers = [
 
     // events
     CreatedActionEventHandler,
+    CreatedActionsEventHandler,
     UpdatedActionEventHandler,
     DeletedActionEventHandler,
+    DeletedActionsEventHandler,
 ];
 
 export const NfcActionServices = [
     CreateActionService,
-    InsertActionsService,
+    CreateActionsService,
     PaginateActionsService,
     GetActionsService,
     FindActionService,

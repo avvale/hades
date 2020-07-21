@@ -47,7 +47,7 @@ type Query
 type Mutation
 {
     nfcCreateSession(payload: NfcCreateSessionInput!): NfcSession
-    nfcInsertSessions(payload: [NfcCreateSessionInput]!): Boolean!
+    nfcCreateSessions(payload: [NfcCreateSessionInput]!): Boolean!
     nfcUpdateSession(payload: NfcUpdateSessionInput!): NfcSession
     nfcDeleteSessionById(id: ID!): NfcSession
     nfcDeleteSessions(query:[QueryStatementInput]): [NfcSession]!

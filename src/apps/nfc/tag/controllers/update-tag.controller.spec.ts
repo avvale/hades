@@ -39,20 +39,14 @@ describe('UpdateTagController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateTagController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateTagController should be defined', () => 
+        test('UpdateTagController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a tag created', async () => 
+        test('should return a tag created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tags[0])));
             expect(await controller.main(tags[0])).toBe(tags[0]);

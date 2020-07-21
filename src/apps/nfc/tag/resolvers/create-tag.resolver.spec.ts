@@ -5,6 +5,7 @@ import { CreateTagResolver } from './create-tag.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { tags } from '@hades/nfc/tag/infrastructure/seeds/tag.seed';
+import { NfcCreateTagInput } from './../../../../graphql';
 
 describe('CreateTagResolver', () => 
 {
@@ -37,23 +38,22 @@ describe('CreateTagResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('CreateTagResolver should be defined', () => 
+    test('CreateTagResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('CreateTagResolver should be defined', () => 
+        test('CreateTagResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an tag created', async () => 
+        test('should return an tag created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tags[0])));
-            expect(await resolver.main(tags[0])).toBe(tags[0]);
+            expect(await resolver.main(<NfcCreateTagInput>tags[0])).toBe(tags[0]);
         });
     });
 });

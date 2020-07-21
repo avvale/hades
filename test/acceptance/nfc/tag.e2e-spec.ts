@@ -6,9 +6,13 @@ import { MockTagRepository } from '@hades/nfc/tag/infrastructure/mock/mock-tag.r
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { NfcModule } from './../../../src/apps/nfc/nfc.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
-import { AdminModule } from './../../../src/apps/admin/admin.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+import { AdminModule } from './../../../src/apps/admin/admin.module';
+
+const importForeignModules = [
+    AdminModule
+];
 
 describe('tag', () => 
 {
@@ -19,7 +23,7 @@ describe('tag', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
-                    AdminModule,
+                    ...importForeignModules,
                     NfcModule,
                     GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
@@ -47,7 +51,7 @@ describe('tag', () =>
         await app.init();
     });
 
-    it(`/REST:POST nfc/tag - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST nfc/tag - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
@@ -57,20 +61,20 @@ describe('tag', () =>
     });
 
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagId property can not to be null`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                code: 9093009496,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: '8d8mj3fgzm5cqlsdr103hcpwkdpsivmyvnvt69yqi0fv3oc9jh',
-                urlBase: 'zoa8f7zziqugfgg8hk2ckm7w2n56rw8dgk3vdyebn1jk8ux00incma1cg70oopt4b9tksvrbnfjn6axmdq7glmdci9ujntxyefrs5u9busy7zjotmwuhx7gkzok6ezc62qu8pjli51cnj1i2nc7cjgmsvx5knixdfkiisiha9963t0angjmutaka7u29vtub6tpf0svo18bo3jyrcz9zc317m74hbpeycrz5tlcesejcu55zjdk5n8dkuxi7ems',
+                code: 8435416767,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'tj7q8lftni9akezx7f2nrq8htggt446ttc4p4jj0293ea47v3e',
+                urlBase: 'agzhkwpnib8tpdhmr3lvd8k6oybspq97qx8uoj7hxg9d4wsicqn1eawu011lac764zskfs01nusllpx14zkq3pjfcgfn3jdemc0jwb43e2za65k7pzzl6pxhd41cpjwwnxup6r0foccp2qeanqtjc62t3iikap4awlyekncg0es5nry9z8rdyo6vxevqsp555bgrag5w56ii9ug05lltugrbtgpopwff7kfx4sabl1ancoug4jnqjp6dzqsxe1o',
                 params: { "foo" : "bar" },
-                offset: 249914,
-                isSessionRequired: true,
+                offset: 805794,
+                isSessionRequired: false,
             })
             .expect(400)
             .then(res => {
@@ -78,19 +82,19 @@ describe('tag', () =>
             });
     });
 
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagId property can not to be undefined`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
                 
-                code: 3310171122,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'alhhk4cbv77lp4dbfbf94b9mx0xogr1xar4dxuklw4dbksla6r',
-                urlBase: 'qnebzs2es3do6g2ctdo39j9eyrauhi5ib58mez04vyww08cyvvskg83zjb501mhk5gwce5easgsb9pgvih0c65rtl6uwnnq45sd2bnjbm2ek617z8zyvo4ewpb1zf8r0988z9sfnjxjzc64r5p0dwdgn7i8v3ayivqkfohxuyudp8ia7sxzknchgu0sgjsseuef4z0xvx4stny9gfqo8l1tgtpdvrc8qj7qtj2eb6mcpxdpksvdnx27kiu9abw0',
+                code: 9132639037,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'g51bxm2di60c8lqncmzdi8704vhjf93v9pfnj6hbieob4de1ju',
+                urlBase: 'f3fkx8jwn27o19zx5zk2deqztdktm1qux7grhr3akq9f085llxfmx4ec23vfzqeyhz0g79l7bf9cbw19x90anj5qvvm9dxc6pnz4i6i8a4ns5ne627hxgit7suor7bw0ekurt2q2y0c4qf1lv0ynrne0nr305u1y97rz1v5sm9v1d3k4461vxjwlg0hehogaei2vr4kscoxeb6klvpltbv3asugb91owd716qvagp4c932wk7jvzxvith1rv3f7',
                 params: { "foo" : "bar" },
-                offset: 493737,
+                offset: 933397,
                 isSessionRequired: false,
             })
             .expect(400)
@@ -99,20 +103,20 @@ describe('tag', () =>
             });
     });
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagCode property can not to be null`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagCode property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
                 code: null,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'o6fwbilcjs6mdbwgnt8wfe614k5455lu53cn0sr0m2zsdv9ulq',
-                urlBase: 'nkjwddifdj41gqwtm1mr31xun8havrji3qv81xc4c6wbb40dpk3f98cy9xt5mqd4hpp7d881kzdisgneszqthevmp2gms5rgko7cfwez4jlbqdma13stv8jc1qwfqejj02353uusrakwz3pn27m8j2je584lmn8ijqk15w4wr6w528vrqgc17ytlv4jb027qb99kwhazi50v9xsfe08elm7j68r94g9puteajfrkjpup78elac6alfh8ayg83jd',
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'ocd990z8uq45ak2cqcnjkxv29z36vskmjyk9tj0vs4ttr0g80e',
+                urlBase: 'zxwmrswcjomnwatjj6780bzgzuyluq2e2v5c65vyw67efmikmo9coi6d2t9qofj2nilzegyre47ufo59nt1oqlt7x68u84y8vve2mlaj4vh1hzdkirqudnqxjkr5gug6vqh8tf8tmlfeee4c6adin9d552wvsczaie2nyzopf7jvon3zk1l04z6gz1upjoilrqq5c655aafqhmy8b0ichvk2yu3xr1qkbcggeh1ffexq971wkrxqtcsndxiavq4',
                 params: { "foo" : "bar" },
-                offset: 391359,
-                isSessionRequired: true,
+                offset: 347310,
+                isSessionRequired: false,
             })
             .expect(400)
             .then(res => {
@@ -120,20 +124,20 @@ describe('tag', () =>
             });
     });
 
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagCode property can not to be undefined`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagCode property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
                 
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'uuwxje1js949dtns7vpbpiyk3lnmrh3ml4r6zuvhibohk0zx3f',
-                urlBase: '51m5vdqta4team53cl7mmy7en2yzdoyzubzpeo32rrmgoenuwaxfuu6v3rxzwcgg6qs162r8tr64i4etxcq6ad0wqj3acu69110n813scvm2qnuyelfd9vtp76ifl5cq964doqg94kwxkdjyu9qspo7slyo9c7798licuc3nye053zyofsbdklgohauyq8iw16w1b3foravbibglyoonhnk2b0sxl3f4mzt85kj33414qhsffitano6q3837e8p',
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: '7u2s81xxclsynnxyin1iag037e7gfhyiuwcv8o10ndsdqtageg',
+                urlBase: '6pjag5w3o78uto3suvdhlnwmhxcv2t3nv0dj7vyj79hl5cox55axcnqg39bwjl9futf1oobth9uhocoeq7eur759qppcjcou87c9b4yg4mwrqdryfa6nzjotnu9qkf1ek99w1z31vkhhovxua2f129yfen5rgxq631lk5oyi6rtm4zkddu6wf3r6wyrxw4vnffofq2nwpthvqbt962i560sqa5ka2gcnnwxr6tc9g8fm71rbibdq463tc4aa5l6',
                 params: { "foo" : "bar" },
-                offset: 266488,
-                isSessionRequired: true,
+                offset: 657926,
+                isSessionRequired: false,
             })
             .expect(400)
             .then(res => {
@@ -141,19 +145,19 @@ describe('tag', () =>
             });
     });
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantId property can not to be null`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 1430379151,
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 6524890596,
                 tenantId: null,
-                tenantCode: 'fwux858mae27vjfk0gszzqtfb5qip4m1sz4tb3gjms23u2wyko',
-                urlBase: 'zxvon62ganxkd6mppkgxiyv3ru6utfku2w3wc5n24qxl0ic8gqhu7yqlgza1kx1nxu9yuhl5lbtzk4xk4ekpoi0ielbkgut3rrue2aewetrqf6w3y9kfokrp76o9j0a8og5cvicun260eo0ruq87h0fb495yqil0iqvmxs5awnvxt0cu11qwh6q8gj733ru4dk59law4up3j22ubmigvhtl75ugt4z87ngfbmakwwwm0gmqnidl1a4vs8ftnqsp',
+                tenantCode: 'x44js8wwmxu8bovgn4p561ja4q3aqagalr6qhy1s232yglvuzw',
+                urlBase: 'o1sn2p0h41uwzqhqsnnkr6whqd192wdevcq8ik4mhb3m2vj7dr96ffejho9cwhi126dzch76rvm6vopsjb0s9kjy6xum5tc012dippbev1v52x55k2ck5tkmgf1mxrrnj8l3d5dlfhccm3dz729h8c0hrwgo811ofwuw8yqxiwq84dzh3t73az2dggts8zv0jaibt0s7dvbq994coyd7l1c3hde2268cemxj8wdq20qvjnad83vl817qn9djvui',
                 params: { "foo" : "bar" },
-                offset: 321319,
+                offset: 219545,
                 isSessionRequired: false,
             })
             .expect(400)
@@ -162,19 +166,19 @@ describe('tag', () =>
             });
     });
 
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantId property can not to be undefined`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 5880346592,
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 1127903536,
                 
-                tenantCode: 'fdf6nsdxoywsuxopz4s4lxyywhdlpm5jtsc48o403s8vu0mwe7',
-                urlBase: 'stkfvqq7amchgm7w1l8wimnjyx3s9g7x2htzt00jbnd5xixq03m3nkajisargzrv5r665mol8856rrtpps0tc7bdf2uo3idikdqt39u2psdsbuk1nsnbynl30eshx01ctbwg7n99mgxvcha7ejhx1ukuexfqtuvsvppyzgkq6akxbnv87yy0xqb3jiusu2q2jll02s6ku6xbpmnfz7ymw3txrwcz7mtz3sw48lsd3qayjbnednjop5b4epqu9hr',
+                tenantCode: 'p9ywroaqtonwtrdrmpzq0d91cb49hdol2hxqcwgv20e969hupo',
+                urlBase: 'ua53fctk5ghxvzase3wms6kjpghjroznf5db079qf1qbhzd46omujpakpy6gig8dgxgpke43xgwd8yo7britm7q7hvfcodhk52tysuqfqvinfwan2izs1ssow5f0kelwknkv05iol2oqhbdpaow2wub2cne4k0uy9y97jrq9g5tndy6nfi8y95mxtpuuwdno542hfdehyz972phmd9nhi6vpcdc7jqh7d7a991sk3k9e3b3n51pr20tbc7zxj72',
                 params: { "foo" : "bar" },
-                offset: 273129,
+                offset: 820083,
                 isSessionRequired: true,
             })
             .expect(400)
@@ -183,19 +187,19 @@ describe('tag', () =>
             });
     });
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantCode property can not to be null`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantCode property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 1344090612,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 8225418341,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
                 tenantCode: null,
-                urlBase: '8w1wwhuja5jvwd379skt5tk1rw0dadgolma26t9c6pj5wayjysnruwkm6nvfooaqjpmrcpx35xtqsb1tr6kewgxowbwsrnjccfr8ptlpef7brjgj86xiofdlig9xmjew481coivp580tbz9epbz95phgs5s69tgaqkmwn3hvg649e3nwl6r0ldiyxvbqbrc2b7db8c19ku84wlsixtp9xsr36v74pf6vzdwsksngtlhrios0bfbsht2hzm1oo2j',
+                urlBase: '3nzmezu8zctgww8qe2bz4aclalam5mtpzxoknkzr7c7zhqyba4y41wk4gwpv1iaxfoptyhzlz0ayw0ar8vey7z64s4ufgjnr5d6a1uvstad1segv0wn103gi7t12bosqrdff2jzp0v8u1xjwd7e02425wpqqf65isobmh2ph2xyqb5siy2xeobvpnaw0l0kuh5y5qpuoj43mmuksrt5lrkbnuzyydqo0etluzc9mnayft8rthgxaop5gcpymbmc',
                 params: { "foo" : "bar" },
-                offset: 973908,
+                offset: 610757,
                 isSessionRequired: true,
             })
             .expect(400)
@@ -204,19 +208,19 @@ describe('tag', () =>
             });
     });
 
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantCode property can not to be undefined`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantCode property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 3306328203,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 4080694127,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
                 
-                urlBase: 'wr0ztm46sdfj8k7fbyo2lo292zq7yl7aert5hzqbdfhmfuksqvfclxz7812sm7h59uh3onl7qixvp74scxc1h5us8sl66f2d3w4qiegvj060f8hpphhkypc1ohq16lktubgaqcwh8r6zxkxx7j7iope7sbezq1fisxnxrhkdd3udcqx8xjgvjgzudabpcm7xqd5w45r1j06ioyenskwwcgwr5f5qqcce9cgl3rzjjmxanj0alahle1bxygat9vo',
+                urlBase: 'ihy4eafo0y2gzqy7bkc3ehlsaols956azt5c348fvjo4dk3h54cwb1o2bq43tvwhuxtjibyghzuwhjr8cnbqsvfaejkpq9bwosn7ukkbpqlz5xkr5wnmqitw04tct0rbnit0fwkwtbaoc3be5o4j6k0v3dy44mhkz92mb1mz32l6eyonfuoq9ryiptjxw7zik94399b9eqhed0g0a6al7u92b0186dhkhv43ip9ulhf9z2zfyf0k2qsx5ffme7i',
                 params: { "foo" : "bar" },
-                offset: 744994,
+                offset: 485809,
                 isSessionRequired: false,
             })
             .expect(400)
@@ -225,19 +229,19 @@ describe('tag', () =>
             });
     });
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagUrlBase property can not to be null`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagUrlBase property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 3040270352,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: '2cv1srnyuc9p2js56cng95fdxthcmm32of5afs30v9a6buzz2o',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 7061254416,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: '9lrtsvsvpedpeopkr0njgkfr8f7srq1snvmx1m1xyisblkqgbh',
                 urlBase: null,
                 params: { "foo" : "bar" },
-                offset: 814567,
+                offset: 583965,
                 isSessionRequired: true,
             })
             .expect(400)
@@ -246,20 +250,20 @@ describe('tag', () =>
             });
     });
 
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagUrlBase property can not to be undefined`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagUrlBase property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 1527946703,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: '3ajuzrtybzeu43b6xa0u8inn8x6w6shzsazrsuj58ezx9yuoex',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 3645543680,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: '6hfze4lhnc1vr4rfubynyv38jj1ndh2f79jzntdxfoxvw14rm2',
                 
                 params: { "foo" : "bar" },
-                offset: 576099,
-                isSessionRequired: false,
+                offset: 821699,
+                isSessionRequired: true,
             })
             .expect(400)
             .then(res => {
@@ -269,19 +273,19 @@ describe('tag', () =>
     
 
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab0drujth6ahdthmhe7ecli6lvdkd32egb2zk',
-                code: 6779376333,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'kqopd4k836y975setfnu6rn78jkd74skkgtaja9ustj9ttatjd',
-                urlBase: 'hgl8awypj5oep0w7kwpi601ym4etf3bevwbru9do21yvi9twt5kgqyigvwjdyq7ou8r6rk3yxshbmpdhney6jj594knhdkda5qvipebcrnr944ibm7zpohg3jhq2w4nz8802a1r3p8gatxrz98vuhsyj8jpvedfbv3pyd90n8d4bxftuz9nvp1p3dbam94k86dn5fyphngd1mvq4byomyfmj4825p2vv4diogenm184hbg0xxisq1x1aiaiu41a',
+                id: 'ty3zzp0g07o3r5b5zwd4iqa6julpy6g5mwfgd',
+                code: 1991985609,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'yv5mm2vru4vz8oihniw1vrgov46e25crilapr6uzlyvogkixdn',
+                urlBase: '8s551qyai5rh3hp5ey3kw7470yfuhu0kwn7qb1755qycmjxolaw1oprw1ilvs934wp0ljcdl3u1bhhwdxr4j9tn9cejn0wv0is9tqjvd5u40ljr5i0poyi5lkt7mj9dkq5jcceagwh1wr0jamf17bl4qld5mn4m065glubt92rexpixba7f58ujqxhvgsyezj38ev5j42d2wnml9mfgz2p517oan0gb1753etcefxg8t2pc3esvhq3sizhva3h7',
                 params: { "foo" : "bar" },
-                offset: 668403,
+                offset: 267792,
                 isSessionRequired: true,
             })
             .expect(400)
@@ -290,19 +294,19 @@ describe('tag', () =>
             });
     });
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 3495929880,
-                tenantId: 'y1ecm8d70rvyvrn02rj6d7dz87s4yd1b4tknn',
-                tenantCode: 'b8nepvu59qk7mb84wctwchjlsvxe6zsfc9gvcxa42i44o14q8a',
-                urlBase: 'jihfqjdtk0pf7lg964psy4pwnc7td37dma6n9qmt0t73je7ocgtzfxx0ibw01ihwyv959y40f474kmce3uu10uhdh32pg5t06jgwnlh4jhz1xuyc2gzn3vkkiacvrl912knytnd28r3vxb5vx2jgima41oyy5z8l5the3y76x52k7gakm6sowsrpibunu1fedwo9fuabx7jpz92zx5hf1bwn2ldldak13flz26ygtwzzmm3gnxx61kb6125cs5u',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 4720976373,
+                tenantId: '3wusj0sop87jicbpq85dwt2y8hgz9nxneyqzd',
+                tenantCode: 'fddk2cte6849ieubhtxjoam5tpmpcbci0vxnxkbr3dd2lxsula',
+                urlBase: 'vuthp1kmymrwrij3qo8vj4u3rdp8p7tszgho49xxs91u7fz95re6fwexvszckb1qv8m944oojp3k3d2ecdw519ap8m8v31nil6brwd1667enc4m046numbiog7exddy4n45re9u5rvy0as6brd5z047rfcmsb2bcsdirs2gx6agai6ekyv5hkebjvsxgwoyhoo26n89yuorhfsv23m8tcdldx4q96chrtea42fywr9tku0d61iskq8wv2uzv1kp',
                 params: { "foo" : "bar" },
-                offset: 792450,
+                offset: 137753,
                 isSessionRequired: false,
             })
             .expect(400)
@@ -313,19 +317,19 @@ describe('tag', () =>
     
 
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagCode is too large, has a maximum length of 10`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagCode is too large, has a maximum length of 10`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 58044865576,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: '2hxwrqenvv0spcjtdha3oc8h957rne115amsmuf14welyynvfr',
-                urlBase: 'xzg7msy0dxbekyh8snhbzz2tozp8cjv5ag1klzrel88q7k1zad2wg7vnfpgxv4f3531qdxc08rc40pixfqgeu0b7br87hbqlin3ej9tsi2khwekx62gnr5rw5fusxpo705e9y75b9kiwoz5kdx9fcis8pj0ft31opvp2hu1w9muhai9mdg9kiax7k4ll1zqj6mcexofiz3wgdr43fa6b5arauzucjp2bcm3syj7ed10rtyijjrop3cby8ht9z3n',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 83942716396,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'kqtlhqy09p510nfhfxl7i27vf3skhte1uwojh87eq4bw6bqvwq',
+                urlBase: 'owmai97ife47fj3wfrtt3cb1ovsyzzwu7d7fsr7dfs1fu8jebckajc35p52mfmmjfnbb4lwu41lwkii0peh7wmwpwl8g5clwxpte4uf6dxapzk1sbgd88ya4erdwrnhhrmqukafeq9k8low2qotks8flbxwlecu4j7qpycva5nunhuwgbu4y1esgvk3y578gco95aulf7u3m3zycu28ef8rrq566gya685emtxbny7yzh8arkg0z6fkxrcg3iwz',
                 params: { "foo" : "bar" },
-                offset: 170232,
+                offset: 195372,
                 isSessionRequired: true,
             })
             .expect(400)
@@ -334,20 +338,20 @@ describe('tag', () =>
             });
     });
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantCode is too large, has a maximum length of 50`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagTenantCode is too large, has a maximum length of 50`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 9721919714,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'rmjs4c51g2t75qcl2860fetnjmpf6k571ctkl6t42tmulrd3exz',
-                urlBase: 'z9suinqisceo0q0p6s7it2z0swa4cyds92zclhlfabdvp3h6uucuwb6c9z1r8gub1wikcol45s26c6mhbnpovja42264i1i74nfo1r9pp2ehq97tw3dbezzjqeqmiknx3mou9txdueex24v42atobjfl0hc1apsuxk853s9109rg4my6wtdfjwdmpz32n59qxaler6xtdjc7sny32i3tv4s4j7ifm5s7qp9c0pq0mpzdhpg727b9l7q65y45aab',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 6876942501,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'mnnjlnum0dcwbnjeil1ujzmb1e3pe69t5qn7gp7t1sc53ozyafe',
+                urlBase: 'zt0no46lrw4pzl6zwb1qsh9dx0b8ucqqdbgeyjow3gwpn3zk6q4ut002r8nfutu54zs6d3i9wak875xek8hisvjwkaooancd6awl5xu9k9k7fuh32r7gijajfwkf21js9obgn4thjn2mfdp2etorwmkzys00k9s77dwuswlr1ipzei35gxthoxhjtt34p8vcx10d96o6vsuwwknhl15q5g52w7foogg736nqcmsc2pfjolotr0g34u83s93dp0i',
                 params: { "foo" : "bar" },
-                offset: 788455,
-                isSessionRequired: false,
+                offset: 815878,
+                isSessionRequired: true,
             })
             .expect(400)
             .then(res => {
@@ -355,20 +359,20 @@ describe('tag', () =>
             });
     });
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagUrlBase is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagUrlBase is too large, has a maximum length of 255`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 3300012983,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'q02sdlmh51i640hu40udp8xetamgo1jcg36m9gpy5uvqa25sld',
-                urlBase: 'gxnlsa0zjhgf9xy6xlylgdytil3zwhnxflms379ttsb7u21pir7d4i1mxxl4u8kyzojpk1rn2mucslayhe0okapnh9ki2l9b7fyrxtew2w59xgxcp6rehrpip5myjv9pezqpjvculxhjy2kfd9sy5sigtob1adsoqz2ghoojsfrenrns3im13you9wgvgcpewwmhycfovxq4a97l5gch7nyp61pilis83hhyf302ll5bqjnldhiy46ulnsatdo8t',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 2635683217,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: '7cp44464yg6dk5wf63b29pemnzeaknhdj10pe5jvx2xe5zqhp3',
+                urlBase: 'ki1vatx80x8llg28bt9dfhitvqz2oc85wls7w8xxs442r7mg0pajp1hoi87kvmk8hj8iw82bapfne8851bjl7nf4qhec2jvt28maklanr5b2ixw0qn6p5wxd4stp0rn6yye1e6sa8f2mmrobskbvmu7913lh5m68enbyzc0r1tacdkkd4yuszboemfg5siufh4kdfb4wv2mx3a7xpikny6rlo5lend3efztvjbr5s28tgr2rbdbi8feh34010sjb',
                 params: { "foo" : "bar" },
-                offset: 908307,
-                isSessionRequired: false,
+                offset: 672233,
+                isSessionRequired: true,
             })
             .expect(400)
             .then(res => {
@@ -376,20 +380,20 @@ describe('tag', () =>
             });
     });
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagOffset is too large, has a maximum length of 6`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagOffset is too large, has a maximum length of 6`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 3505158425,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'ud8gbdam1d7169mi67scdga6h7jzuikhqothu6nfzfvhv64f4d',
-                urlBase: 'muly9k5mq857ckux1siq4i1lk1z7lipmehfjw3n7zjbul7uf0fokzfidmq3k6dv6yo98hwzg0sy6uxn1m6099mku1o6s3j5tl5t6n15nty0ht1lkfrwuldhpuichx32j61owdefebavtq9v1z2zwmveyp2layc47hgo1kdci6w8jlhi8gy9hffar9erasr6avyx5flf1ahdm65ced5nkohswavig2k6nel0kb6t4mfce3a1tkuz2v742s3o8np5',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 7345755934,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'vc7r9e4o36z5p1q8gtk57vbedignw51u789g68trcnyr6gapzk',
+                urlBase: '9ctlgn3enfniv4p80k90h22a6a0pa93t24ffuugo2k5l0im727srkmzanrld4arp86eac7qbqfdc6utczplur9m1g1vwzjqfgxrv7lilnv1ke5sya9x6ioxxqq4zmkpcn2g716oughfszuhl6vpg30oqtlstur7ogajfgbow0j0xxw6uhhjgzme3i1ozvomz1z9hh1b2ag1e05oory29piqw847pt4mez5q221fqvy4xcm577uvy7n7252ityev',
                 params: { "foo" : "bar" },
-                offset: 3263724,
-                isSessionRequired: false,
+                offset: 9180752,
+                isSessionRequired: true,
             })
             .expect(400)
             .then(res => {
@@ -401,42 +405,44 @@ describe('tag', () =>
     
 
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagCode has to be a integer value`, () => 
+    
+    
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagCode must have a positive sign`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 100.10,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'sgh11yn9s4dgg76tdjlwfpjp27o1pvpf72zx7toc5qexnhvuau',
-                urlBase: 'pzo6vgup1ih7mrcrmvwg253xw9w8zwseo5dx0k2ngsk8u5vfxbw1eyy04xp1vyfhzp7g3orfq6or15yp72v5zfvgltog9vez3wi3j2wpdo48vysoux4nssvmy8mei4313x96bjm0rj6b5p0e6pik9okxi1mlp6ycnih4pfw0oa98cprr81q3n95b12n9jceg626bwuxjsnnsixfrr41809qu6xvoo3y7v8zfhjdk9afg2aubkvxb1vo38dyiwgg',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: -9,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'm0xbpq2pjpnl0v8ycm806uj6uaizrgdtp2jfccc3dep882nd4f',
+                urlBase: 'dgv6f1xjw6mich43vvwn59xpjzazww6pzaalnqxxbdtl5qsafi2yu9p90b1148nlyzsqt5spvto9inzbakcioni5g6rwzjzli1h44cinsu37rc0x5q8gwzuqxzklsur3j1diayrq12fs05a5jvce61ricgfbn35uc7zi9fixlkerh67i1974zg82hin7dqkin94qzuwamavfzdh8h2hh5gpkcnrpuncicxwekczrnbh49j7hscwza574jusolvl',
                 params: { "foo" : "bar" },
-                offset: 449968,
+                offset: 891438,
                 isSessionRequired: true,
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for TagCode has to be a integer value');
+                expect(res.body.message).toContain('The numerical value for TagCode must have a positive sign, this field does not accept negative values');
             });
     });
     
 
     
-    it(`/REST:POST nfc/tag - Got 400 Conflict, TagIsSessionRequired has to be a boolean value`, () => 
+    test(`/REST:POST nfc/tag - Got 400 Conflict, TagIsSessionRequired has to be a boolean value`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 1945339441,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'iye0bv0kl71z164gvimq2dgjazrqb05unc4dmozp3hiczgt6mb',
-                urlBase: 'fzoy0go52vwmo26ote6qyqwri0z4rfay94mxi1y0s0l153cllc0hhknnsay9fhlearu6oer9wlxz9ybzxlzy6l6ho9jorow6achbx8kj4yevhkk6epeqbbfhlrfve57icpmpwzqoj03c64x3w8fqd1upe9szzojsn4p134l2i06xpjmqxomcyc53r4zlc3d94i9j805te0rkavaepd61u2waebijqtoxhmiunvp3l1ukum5b7b7w4tosex7luyo',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 9513449411,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'x8julkcvz9lys7laxinm45uj91soyrezv0kcx9zrrzxurke291',
+                urlBase: '0n567a7cl1q8108slh0sjf8u9u6oxqoqxk5lypqy3a1iag8xmxcfqejd4c0e1gimdyqqi5fqkuiccobwojvmapdfg35727wi8p2mtstk0np41epqsiu6aa8mf2utj4p19jm0dud9b52627dpmgyka6j62u03jvk2mgviyodbayrte7gf7966hbxxl0k6kuxbxwxxs7hk3jfa1xvb9ahqpoej6u4el0j8z21t3ucxvi2vuval2aaaoaz8ifmdc69',
                 params: { "foo" : "bar" },
-                offset: 697531,
+                offset: 870387,
                 isSessionRequired: 'true',
             })
             .expect(400)
@@ -450,25 +456,25 @@ describe('tag', () =>
 
     
 
-    it(`/REST:POST nfc/tag`, () => 
+    test(`/REST:POST nfc/tag`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 1582599013,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'pm08ixw9wafyoy6a7twpbi95xukcj6qovadgoysp98sccg1o4t',
-                urlBase: 'fy9kscktz3nkaee1hwcz2ae9iijnm5gnkex10k1nczvcrwz9psllq30ou6yudyh8sqwpmali8udnzdjdhd5gbe79m2alksxul81immom1fxxc6etc65fqxoahjspuyyleqmxr5etda0dwhlt9nvrhz3thpew90tnjy6t6l86l0950j9s1hd6tmpkncw2airkzjujzcv1act4yb525cbxk5cjb37l9glbzvazc21ly0zy286criginjqichnq6xs',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 4190009602,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'upshzyzwue2f119awy1rnlqyspm2u3j08w1jn6ve2kf65s276a',
+                urlBase: 'kwkjnpgrqcegq8yqdzyjdqrxhewexa6nh30ytmwcfv10cl2gwz3uqvagvffba7rsnvjvq1ngchctuf4016ox5q3n1396qu6xwctyfu4vb7lu50l4i27xiwk0i22geh1ns6s8tuin4yx09hq0mpfdgj7hfe4m16v7d2eppr2md18px32bg7c1tiveoryjiozibw156kbc443bwz8aesotmuwnfdrrfb4tev9at8x20xobhx5zpyf2clvfn6b3rwa',
                 params: { "foo" : "bar" },
-                offset: 464978,
-                isSessionRequired: false,
+                offset: 959278,
+                isSessionRequired: true,
             })
             .expect(201);
     });
 
-    it(`/REST:GET nfc/tags/paginate`, () => 
+    test(`/REST:GET nfc/tags/paginate`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/tags/paginate')
@@ -493,7 +499,7 @@ describe('tag', () =>
             });
     });
 
-    it(`/REST:GET nfc/tag - Got 404 Not Found`, () => 
+    test(`/REST:GET nfc/tag - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/tag')
@@ -511,7 +517,7 @@ describe('tag', () =>
             .expect(404);
     });
 
-    it(`/REST:GET nfc/tag`, () => 
+    test(`/REST:GET nfc/tag`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/tag')
@@ -522,15 +528,15 @@ describe('tag', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : 'b91fa74f-012c-4830-9dd1-a930fa42296d'
+                        value   : 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'b91fa74f-012c-4830-9dd1-a930fa42296d'));
+            .expect(repository.collectionResponse.find(item => item.id === 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'));
     });
 
-    it(`/REST:GET nfc/tag/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET nfc/tag/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/tag/00000000-0000-0000-0000-000000000000')
@@ -538,16 +544,16 @@ describe('tag', () =>
             .expect(404);
     });
 
-    it(`/REST:GET nfc/tag/{id}`, () => 
+    test(`/REST:GET nfc/tag/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/nfc/tag/b91fa74f-012c-4830-9dd1-a930fa42296d')
+            .get('/nfc/tag/b14beb99-e0e8-4e6f-9505-a59263cd6eed')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'b91fa74f-012c-4830-9dd1-a930fa42296d'));
+            .expect(repository.collectionResponse.find(e => e.id === 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'));
     });
 
-    it(`/REST:GET nfc/tags`, () => 
+    test(`/REST:GET nfc/tags`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/tags')
@@ -556,46 +562,46 @@ describe('tag', () =>
             .expect(repository.collectionResponse);
     });
 
-    it(`/REST:PUT nfc/tag - Got 404 Not Found`, () => 
+    test(`/REST:PUT nfc/tag - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .put('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '94f005bd-90bd-47fd-a69a-ea281fdb56b5',
-                code: 8679878603,
-                tenantId: 'd4f07e24-6796-464f-9335-3fc42807ec9f',
-                tenantCode: '3dzf2deabfzsc8k3fk61v571wwwlms48kcqz3abpdlg7mb484t',
-                urlBase: 't5ungkzn28avhfxa3qml3w3ahsdpld8lw2ns71s13s3l5uekce9ftadb80t6j6wfj7uep9ng413xnnfb5q40871jrp22st2ur0t28fb9tiunuvso3qbn6tahtfo0jrafp20o76060rmrnxe4pok1euayhsvi5cfzmb7zr6d5ep8t1ggh9w6387uwkqgevpn42hqcp977cv2hwl3q7how54dr1ok1bnmsv4h4n31meq36fcb46eyl6qwxdm5bn58',
+                id: '94e92f30-08f5-4618-8097-5574fadf8216',
+                code: 7888663153,
+                tenantId: 'e1640f4a-c35e-4d6e-b966-164c9aedfe87',
+                tenantCode: 'bkck3yfd9gtzgxgs39b0w64lilntytxc1ktkrihuahdckgzk01',
+                urlBase: 'hykwxuyppxlribqdypxcc9bb4q372dlmi6g6jujc1bbcb1sd1a1a0ivct882mob72d4hi60iexyl1c2xq1qjvecq21zbyteuby043zrsjqw7fssm3t2dho4t4axd0ibpo5evbjpr1nn5wswqmqguvrjfym8zohtor546t8foulm7blhnnk8bp6hsszcd5bizw08mw8twbh8aqnjhphuybar1ln2vl2rrr54u8otq2clldgadlcmyorz063965t3',
                 params: { "foo" : "bar" },
-                offset: 973296,
+                offset: 335731,
                 isSessionRequired: true,
             })
             .expect(404);
     });
 
-    it(`/REST:PUT nfc/tag`, () => 
+    test(`/REST:PUT nfc/tag`, () => 
     {
         return request(app.getHttpServer())
             .put('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                code: 2290385035,
-                tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                tenantCode: 'zxumvi8hjz74u71vd63m4iqfanmpfidqthb8gz8el9d4zh5c8z',
-                urlBase: '7c6z7fj7zbfyvs41iqms1vhdjt3anyvs7monszegdxbhsqpsp8shopntk826gos6jr6r54x5ndbkz0ytm3xe3ggc8ckscx6lj3ani7q1d44cteqjrbcnw34ishabulfkc2jjcwdd82hi3g3z2gohl8y8bkbndmrdq32v2ehr94lmi93mlnaw3pzvtaalaq7xhhyc52l2uzqpgsq8ucnga4c18o37bahixtxdeio3xep75w39vr7psl0nhgyfngf',
+                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                code: 8310569140,
+                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                tenantCode: 'oirgqnsb1154pd52f5slqedydaesp9dd6c81r3k5lw6iprhxa7',
+                urlBase: '5ztqrf17ykin35kko2tznn7ffusj834gh22tipc6dk3utl178v49qg9mfrkeeksyt306epxpkcorpuq9zy9wgkwrh4i54r9hye25711etcvohdme0sm1z3mdn98sblq4d9cfmzl6qh0jm49czclu9lcbs7e02nja9ifquijfmg9qu0ivgi8kkgkv0j7uugj6pjspxz81gmymuiogya5luzwh3b0ajxqylnujo9i39q9rr0kuud7g79vp8x8gcik',
                 params: { "foo" : "bar" },
-                offset: 636849,
-                isSessionRequired: false,
+                offset: 324571,
+                isSessionRequired: true,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'b91fa74f-012c-4830-9dd1-a930fa42296d'));
+            .expect(repository.collectionResponse.find(e => e.id === 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'));
     });
 
-    it(`/REST:DELETE nfc/tag/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE nfc/tag/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .delete('/nfc/tag/00000000-0000-0000-0000-000000000000')
@@ -603,15 +609,15 @@ describe('tag', () =>
             .expect(404);
     });
 
-    it(`/REST:DELETE nfc/tag/{id}`, () => 
+    test(`/REST:DELETE nfc/tag/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/nfc/tag/b91fa74f-012c-4830-9dd1-a930fa42296d')
+            .delete('/nfc/tag/b14beb99-e0e8-4e6f-9505-a59263cd6eed')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    it(`/GraphQL nfcCreateTag - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL nfcCreateTag - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -647,7 +653,7 @@ describe('tag', () =>
             });
     });
 
-    it(`/GraphQL nfcCreateTag`, () => 
+    test(`/GraphQL nfcCreateTag`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -673,24 +679,24 @@ describe('tag', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '807f2cae-07d7-425f-a1eb-9e7f163b2675',
-                        code: 4996506241,
-                        tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                        tenantCode: 'euygjsu6xstpvcg3l2wqdgegockkvgov747e7uenecax1jckbo',
-                        urlBase: '57by32qm7cimm5cgdyr4wrhynbrqccwam2zie4z9d3j5f3xj9ak7fzsj99amdrlr80d7q8y3a1zwhohtt14vfs4kt1qzdbfo0xak6dzrehsic3ythz3xpxdjxux6ipmx9amo36p0st736hz95eoj51n5ivey7z0cl2bgyc6m46ydbbcl1ds1p7s4sieatvf9wim9e54ibj7wjentidijo19dk4cmtwhd2eff1afsuk2qu57z398rcj5dty52yxq',
+                        id: '664f8a4b-d548-4994-9dce-d293e0d646c4',
+                        code: 4159135457,
+                        tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                        tenantCode: 'evetxg037eb0v0ovu2tkoqxpokews84s6cdop8wfsvv5jnke8q',
+                        urlBase: 'dyggmdgjxr7azt0bkglg1etfdwz2g0o5kqjv65v1yiqzgsrp2eignxqqkn9rw4485zth43kdsdsnnrwonzhyizekjv5j9ss2xm90gdlyozg4y067bewda9xxkwucon7ylljyyk5f473rc2oscn4uu8pfuwcv9ghvrahu3utzi1t39pbs5fmoprj0mjfsjayyq63kvpkzri335b3xqo8fugu0w4o7xjx88qcsyvmihcb08jodv1nqsk2251hp28y',
                         params: { "foo" : "bar" },
-                        offset: 418414,
-                        isSessionRequired: true,
+                        offset: 331717,
+                        isSessionRequired: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcCreateTag).toHaveProperty('id', '807f2cae-07d7-425f-a1eb-9e7f163b2675');
+                expect(res.body.data.nfcCreateTag).toHaveProperty('id', '664f8a4b-d548-4994-9dce-d293e0d646c4');
             });
     });
 
-    it(`/GraphQL nfcPaginateTags`, () => 
+    test(`/GraphQL nfcPaginateTags`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -728,7 +734,7 @@ describe('tag', () =>
             });
     });
 
-    it(`/GraphQL nfcFindTag - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcFindTag - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -771,7 +777,7 @@ describe('tag', () =>
             });
     });
 
-    it(`/GraphQL nfcFindTag`, () => 
+    test(`/GraphQL nfcFindTag`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -801,18 +807,18 @@ describe('tag', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'b91fa74f-012c-4830-9dd1-a930fa42296d'
+                            value   : 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindTag.id).toStrictEqual('b91fa74f-012c-4830-9dd1-a930fa42296d');
+                expect(res.body.data.nfcFindTag.id).toStrictEqual('b14beb99-e0e8-4e6f-9505-a59263cd6eed');
             });
     });
 
-    it(`/GraphQL nfcFindTagById - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcFindTagById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -848,7 +854,7 @@ describe('tag', () =>
             });
     });
 
-    it(`/GraphQL nfcFindTagById`, () => 
+    test(`/GraphQL nfcFindTagById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -873,16 +879,16 @@ describe('tag', () =>
                     }
                 `,
                 variables: {
-                    id: 'b91fa74f-012c-4830-9dd1-a930fa42296d'
+                    id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindTagById.id).toStrictEqual('b91fa74f-012c-4830-9dd1-a930fa42296d');
+                expect(res.body.data.nfcFindTagById.id).toStrictEqual('b14beb99-e0e8-4e6f-9505-a59263cd6eed');
             });
     });
 
-    it(`/GraphQL nfcGetTags`, () => 
+    test(`/GraphQL nfcGetTags`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -917,7 +923,7 @@ describe('tag', () =>
             });
     });
 
-    it(`/GraphQL nfcUpdateTag - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcUpdateTag - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -944,13 +950,13 @@ describe('tag', () =>
                 variables: {
                     payload: {
                         
-                        id: 'f705ec1c-f5d3-4480-bbf3-55afa34c4ff4',
-                        code: 9312429428,
-                        tenantId: 'bfd86930-3d83-488b-8a0c-9cf0c0e53649',
-                        tenantCode: 'syyqzfe55df3v0szkqtu3x9td8bgkzy28fd6ggnrorkh8vlqhl',
-                        urlBase: '5uqkoh79tbs0ajodi0wf49w4ddnthi9lqfn4hq0gkvrvczrfqxit6q5uxp9yuyin16qiau5a4iw0mgoez1wf0t2a9h8aq26lxz5uk0lyxm4vcw9b33bdz86itcnhwfeeu9iyi0ps5smnzprlzyiqx9hd3rh5kz6kmbwrgxmsg4n6evq6vxdqwlm6slvsnwd24ptmr0po0jppof83mefijyhecdyp2n96t2a7anhqjrl4l4m8v7431d2gdsxuai6',
+                        id: '73c4343a-093c-44ec-92d5-c592e4e5d1d4',
+                        code: 3335423371,
+                        tenantId: '62455bda-3795-4426-959d-02f1bb0f9f62',
+                        tenantCode: 'zuj1yqhhpm9dg13r8wl90dn6j3vl4wcktit5ph8dp1ci9i4gls',
+                        urlBase: 'ne7gzkl5q1pe9mqu8g0fjd4scexn3afqxj71i8xuc2s2ov8fcj24hq7reb0or07hv7ai7a9cmzv7wfo0klno8uk3ith8n19tg2pwdb3g96cx3aadqi7yr271d303y59wx93ac2iw7w4lrtwzyn5571au1e7atrvq5ih31gwhap4psfznw822qejwlh9o9slgts7jpgd3neb8ytka0opieyyd1ftkhmj9wpmomiqw34lbumurf3g4h53gh9kkosa',
                         params: { "foo" : "bar" },
-                        offset: 269321,
+                        offset: 515892,
                         isSessionRequired: false,
                     }
                 }
@@ -963,7 +969,7 @@ describe('tag', () =>
             });
     });
 
-    it(`/GraphQL nfcUpdateTag`, () => 
+    test(`/GraphQL nfcUpdateTag`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -990,24 +996,24 @@ describe('tag', () =>
                 variables: {
                     payload: {
                         
-                        id: 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-                        code: 9965850263,
-                        tenantId: '9659665e-b461-4578-9df2-5bd2f5cc5014',
-                        tenantCode: '32ilqx25ababxqakqip6vpszinax8s3l4uf37oendg027b2m56',
-                        urlBase: 'gh3ixr3ri6nfodrxn9enarmpufy9czdtjt783qtchnm5jcvpg1frtbglyvrvv9y0tfrshtqve90905yrkjvy10hwpkdkkyfn7lbeui2ab06llcxl7ze4mfrusqjzff78k2uuc1gdt7edz1rcml666kz0r8pvk9j5hgheg9z0usvfq0jm17nw9umho8cc3idajm1cj6q73ywyn33mdirfx6wgs9fpo8e1iuos5pd6rm1ewdjua4gcz0l8fmb97xg',
+                        id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                        code: 6104985809,
+                        tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                        tenantCode: '82uex9r6n1ezzclgomyhqi4k4q2715h11u4e2pbrxworqg8gn6',
+                        urlBase: 'dkaqktth9ux9d58xrxen2a0yexxwbdvava3zgb6amm1gcqc96yswxmo3srsjc6n5q19o72innm5v0y50bkkkny4zp4wv1gpy4zehih1x5vfn0nuoiej7vcds44nqzcg4cuwg2wz1nsq435zfx0yurxkvqm7rd2nbl9tsrhiodqdwguixmc0o33w65hvyrydghsv1fh2u2b7srvadlu85q4p7j45j9a0tyfvl4e55ebdlmox1adp45pd8nor4fkt',
                         params: { "foo" : "bar" },
-                        offset: 702086,
-                        isSessionRequired: false,
+                        offset: 366562,
+                        isSessionRequired: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcUpdateTag.id).toStrictEqual('b91fa74f-012c-4830-9dd1-a930fa42296d');
+                expect(res.body.data.nfcUpdateTag.id).toStrictEqual('b14beb99-e0e8-4e6f-9505-a59263cd6eed');
             });
     });
 
-    it(`/GraphQL nfcDeleteTagById - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcDeleteTagById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1043,7 +1049,7 @@ describe('tag', () =>
             });
     });
 
-    it(`/GraphQL nfcDeleteTagById`, () => 
+    test(`/GraphQL nfcDeleteTagById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1068,12 +1074,12 @@ describe('tag', () =>
                     }
                 `,
                 variables: {
-                    id: 'b91fa74f-012c-4830-9dd1-a930fa42296d'
+                    id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcDeleteTagById.id).toStrictEqual('b91fa74f-012c-4830-9dd1-a930fa42296d');
+                expect(res.body.data.nfcDeleteTagById.id).toStrictEqual('b14beb99-e0e8-4e6f-9505-a59263cd6eed');
             });
     });
 

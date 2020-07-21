@@ -39,19 +39,14 @@ describe('PaginateSessionsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateSessionsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('PaginateSessionsController should be defined', () => 
+        test('PaginateSessionsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a sessions', async () => 
+        test('should return a sessions', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(sessions)));
             expect(await controller.main([], [])).toBe(sessions);

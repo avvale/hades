@@ -1,6 +1,6 @@
 // commands
 import { CreateSessionCommandHandler } from './application/create/create-session.command-handler';
-import { InsertSessionsCommandHandler } from './application/insert/insert-sessions.command-handler';
+import { CreateSessionsCommandHandler } from './application/create/create-sessions.command-handler';
 import { UpdateSessionCommandHandler } from './application/update/update-session.command-handler';
 import { DeleteSessionByIdCommandHandler } from './application/delete/delete-session-by-id.command-handler';
 import { DeleteSessionsCommandHandler } from './application/delete/delete-sessions.command-handler';
@@ -13,12 +13,14 @@ import { FindSessionByIdQueryHandler } from './application/find/find-session-by-
 
 // events
 import { CreatedSessionEventHandler } from './application/events/created-session.event-handler';
+import { CreatedSessionsEventHandler } from './application/events/created-sessions.event-handler';
 import { UpdatedSessionEventHandler } from './application/events/updated-session.event-handler';
 import { DeletedSessionEventHandler } from './application/events/deleted-session.event-handler';
+import { DeletedSessionsEventHandler } from './application/events/deleted-sessions.event-handler';
 
 // services
 import { CreateSessionService } from './application/create/create-session.service';
-import { InsertSessionsService } from './application/insert/insert-sessions.service';
+import { CreateSessionsService } from './application/create/create-sessions.service';
 import { PaginateSessionsService } from './application/paginate/paginate-sessions.service';
 import { GetSessionsService } from './application/get/get-sessions.service';
 import { FindSessionService } from './application/find/find-session.service';
@@ -41,7 +43,7 @@ export { SessionSagas } from './application/sagas/session.sagas';
 export const NfcSessionHandlers = [
     // commands
     CreateSessionCommandHandler,
-    InsertSessionsCommandHandler,
+    CreateSessionsCommandHandler,
     UpdateSessionCommandHandler,
     DeleteSessionByIdCommandHandler,
     DeleteSessionsCommandHandler,
@@ -54,13 +56,15 @@ export const NfcSessionHandlers = [
 
     // events
     CreatedSessionEventHandler,
+    CreatedSessionsEventHandler,
     UpdatedSessionEventHandler,
     DeletedSessionEventHandler,
+    DeletedSessionsEventHandler,
 ];
 
 export const NfcSessionServices = [
     CreateSessionService,
-    InsertSessionsService,
+    CreateSessionsService,
     PaginateSessionsService,
     GetSessionsService,
     FindSessionService,

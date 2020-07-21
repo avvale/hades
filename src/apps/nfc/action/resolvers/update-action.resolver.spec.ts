@@ -5,7 +5,7 @@ import { UpdateActionResolver } from './update-action.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { actions } from '@hades/nfc/action/infrastructure/seeds/action.seed';
-import { NfcUpdateActionInput } from './../../../../../src/graphql';
+import { NfcUpdateActionInput } from './../../../../graphql';
 
 describe('UpdateActionResolver', () => 
 {
@@ -38,20 +38,19 @@ describe('UpdateActionResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateActionResolver should be defined', () => 
+    test('UpdateActionResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateActionResolver should be defined', () => 
+        test('UpdateActionResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a action created', async () => 
+        test('should return a action created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(actions[0])));
             expect(await resolver.main(<NfcUpdateActionInput>actions[0])).toBe(actions[0]);

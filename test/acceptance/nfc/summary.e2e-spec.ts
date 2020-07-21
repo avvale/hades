@@ -5,10 +5,14 @@ import { ISummaryRepository } from '@hades/nfc/summary/domain/summary.repository
 import { MockSummaryRepository } from '@hades/nfc/summary/infrastructure/mock/mock-summary.repository';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { NfcModule } from './../../../src/apps/nfc/nfc.module';
-import { AdminModule } from './../../../src/apps/admin/admin.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+import { AdminModule } from './../../../src/apps/admin/admin.module';
+
+const importForeignModules = [
+    AdminModule
+];
 
 describe('summary', () => 
 {
@@ -19,7 +23,7 @@ describe('summary', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
-                    AdminModule,
+                    ...importForeignModules,
                     NfcModule,
                     GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
@@ -47,7 +51,7 @@ describe('summary', () =>
         await app.init();
     });
 
-    it(`/REST:POST nfc/summary - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST nfc/summary - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
@@ -57,17 +61,17 @@ describe('summary', () =>
     });
 
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryId property can not to be null`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-08 19:12:14',
-                counter: 2944569910,
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 02:16:05',
+                counter: 9974676576,
             })
             .expect(400)
             .then(res => {
@@ -75,17 +79,17 @@ describe('summary', () =>
             });
     });
 
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryId property can not to be undefined`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
                 
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-08 19:07:10',
-                counter: 3070134837,
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 14:58:47',
+                counter: 2075055293,
             })
             .expect(400)
             .then(res => {
@@ -93,17 +97,17 @@ describe('summary', () =>
             });
     });
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTagId property can not to be null`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTagId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
                 tagId: null,
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-08 21:44:05',
-                counter: 3229186270,
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 11:10:05',
+                counter: 3490313753,
             })
             .expect(400)
             .then(res => {
@@ -111,17 +115,17 @@ describe('summary', () =>
             });
     });
 
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTagId property can not to be undefined`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTagId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
                 
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-09 09:51:25',
-                counter: 7888680693,
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-22 00:00:28',
+                counter: 1802646012,
             })
             .expect(400)
             .then(res => {
@@ -129,17 +133,17 @@ describe('summary', () =>
             });
     });
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTenantId property can not to be null`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTenantId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
                 tenantId: null,
-                accessAt: '2020-07-09 05:33:27',
-                counter: 6963134645,
+                accessAt: '2020-07-22 00:17:28',
+                counter: 5958494516,
             })
             .expect(400)
             .then(res => {
@@ -147,17 +151,17 @@ describe('summary', () =>
             });
     });
 
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTenantId property can not to be undefined`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTenantId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
                 
-                accessAt: '2020-07-08 19:05:22',
-                counter: 1883346325,
+                accessAt: '2020-07-21 16:04:48',
+                counter: 1575927724,
             })
             .expect(400)
             .then(res => {
@@ -165,17 +169,17 @@ describe('summary', () =>
             });
     });
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryAccessAt property can not to be null`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryAccessAt property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
                 accessAt: null,
-                counter: 7650275525,
+                counter: 7419703310,
             })
             .expect(400)
             .then(res => {
@@ -183,17 +187,17 @@ describe('summary', () =>
             });
     });
 
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryAccessAt property can not to be undefined`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryAccessAt property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
                 
-                counter: 2311073964,
+                counter: 7888835853,
             })
             .expect(400)
             .then(res => {
@@ -201,16 +205,16 @@ describe('summary', () =>
             });
     });
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryCounter property can not to be null`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryCounter property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-09 09:33:04',
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 03:14:26',
                 counter: null,
             })
             .expect(400)
@@ -219,16 +223,16 @@ describe('summary', () =>
             });
     });
 
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryCounter property can not to be undefined`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryCounter property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-09 05:42:31',
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 05:46:31',
                 
             })
             .expect(400)
@@ -239,17 +243,17 @@ describe('summary', () =>
     
 
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: 'qaev91un12lsunai849w51475ek2r6rl6ssyq',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-09 10:11:14',
-                counter: 9860197249,
+                id: 'e245j1ckayfok0m2dc0sw5g7dhwjslpsz2qps',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 16:18:14',
+                counter: 6538587711,
             })
             .expect(400)
             .then(res => {
@@ -257,17 +261,17 @@ describe('summary', () =>
             });
     });
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTagId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTagId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: 'caqmb23kra4nfkh92knsta6bqx3a1gn02na4m',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-09 03:18:02',
-                counter: 9903628381,
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'v0xiyv4jaqnrtrf8frnc1mzr29mnlo8ovv457',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 19:13:20',
+                counter: 9923628539,
             })
             .expect(400)
             .then(res => {
@@ -275,17 +279,17 @@ describe('summary', () =>
             });
     });
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTenantId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryTenantId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'f1k4lbg6d63ci9uparjubffjdok2czx2ocjm7',
-                accessAt: '2020-07-09 00:56:12',
-                counter: 2073162688,
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: 'gpg50cpnvdzi8u397xcu98tbp82dwyl8sctp5',
+                accessAt: '2020-07-21 03:29:14',
+                counter: 8767523602,
             })
             .expect(400)
             .then(res => {
@@ -295,17 +299,17 @@ describe('summary', () =>
     
 
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryCounter is too large, has a maximum length of 10`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryCounter is too large, has a maximum length of 10`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-09 07:24:50',
-                counter: 54598512081,
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 13:02:12',
+                counter: 24422796113,
             })
             .expect(400)
             .then(res => {
@@ -317,21 +321,23 @@ describe('summary', () =>
     
 
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryCounter has to be a integer value`, () => 
+    
+    
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryCounter must have a positive sign`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-09 10:08:22',
-                counter: 100.10,
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 15:00:32',
+                counter: -9,
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for SummaryCounter has to be a integer value');
+                expect(res.body.message).toContain('The numerical value for SummaryCounter must have a positive sign, this field does not accept negative values');
             });
     });
     
@@ -341,17 +347,17 @@ describe('summary', () =>
     
 
     
-    it(`/REST:POST nfc/summary - Got 400 Conflict, SummaryAccessAt has to be a timestamp value`, () => 
+    test(`/REST:POST nfc/summary - Got 400 Conflict, SummaryAccessAt has to be a timestamp value`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
                 accessAt: 'XXXXXXXX',
-                counter: 5393507839,
+                counter: 4301403034,
             })
             .expect(400)
             .then(res => {
@@ -360,22 +366,22 @@ describe('summary', () =>
     });
     
 
-    it(`/REST:POST nfc/summary`, () => 
+    test(`/REST:POST nfc/summary`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-08 23:25:12',
-                counter: 7133363015,
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 16:04:12',
+                counter: 6312631966,
             })
             .expect(201);
     });
 
-    it(`/REST:GET nfc/summaries/paginate`, () => 
+    test(`/REST:GET nfc/summaries/paginate`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/summaries/paginate')
@@ -400,7 +406,7 @@ describe('summary', () =>
             });
     });
 
-    it(`/REST:GET nfc/summary - Got 404 Not Found`, () => 
+    test(`/REST:GET nfc/summary - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/summary')
@@ -418,7 +424,7 @@ describe('summary', () =>
             .expect(404);
     });
 
-    it(`/REST:GET nfc/summary`, () => 
+    test(`/REST:GET nfc/summary`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/summary')
@@ -429,15 +435,15 @@ describe('summary', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '9a8c9eba-8693-4291-a6ca-290ed515da45'
+                        value   : 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '9a8c9eba-8693-4291-a6ca-290ed515da45'));
+            .expect(repository.collectionResponse.find(item => item.id === 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9'));
     });
 
-    it(`/REST:GET nfc/summary/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET nfc/summary/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/summary/00000000-0000-0000-0000-000000000000')
@@ -445,16 +451,16 @@ describe('summary', () =>
             .expect(404);
     });
 
-    it(`/REST:GET nfc/summary/{id}`, () => 
+    test(`/REST:GET nfc/summary/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/nfc/summary/9a8c9eba-8693-4291-a6ca-290ed515da45')
+            .get('/nfc/summary/aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '9a8c9eba-8693-4291-a6ca-290ed515da45'));
+            .expect(repository.collectionResponse.find(e => e.id === 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9'));
     });
 
-    it(`/REST:GET nfc/summaries`, () => 
+    test(`/REST:GET nfc/summaries`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/summaries')
@@ -463,40 +469,40 @@ describe('summary', () =>
             .expect(repository.collectionResponse);
     });
 
-    it(`/REST:PUT nfc/summary - Got 404 Not Found`, () => 
+    test(`/REST:PUT nfc/summary - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .put('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '88dba81e-81a2-4e9c-8de3-277043941509',
-                tagId: '9cd4161d-6228-4a59-855b-eee34a721b59',
-                tenantId: '5ae57979-7e7a-431b-97f2-83f3d66f0c15',
-                accessAt: '2020-07-09 08:45:04',
-                counter: 9459081196,
+                id: '26f5adbb-23eb-4c43-b66d-223d41245a66',
+                tagId: 'cff66916-be88-4234-b455-0c80af63526c',
+                tenantId: 'ae69d699-3d2b-4956-b7f0-16d5ead29c27',
+                accessAt: '2020-07-22 00:59:28',
+                counter: 4086720052,
             })
             .expect(404);
     });
 
-    it(`/REST:PUT nfc/summary`, () => 
+    test(`/REST:PUT nfc/summary`, () => 
     {
         return request(app.getHttpServer())
             .put('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                accessAt: '2020-07-08 19:40:10',
-                counter: 1255824107,
+                id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                accessAt: '2020-07-21 19:31:38',
+                counter: 4724432461,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '9a8c9eba-8693-4291-a6ca-290ed515da45'));
+            .expect(repository.collectionResponse.find(e => e.id === 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9'));
     });
 
-    it(`/REST:DELETE nfc/summary/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE nfc/summary/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .delete('/nfc/summary/00000000-0000-0000-0000-000000000000')
@@ -504,15 +510,15 @@ describe('summary', () =>
             .expect(404);
     });
 
-    it(`/REST:DELETE nfc/summary/{id}`, () => 
+    test(`/REST:DELETE nfc/summary/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/nfc/summary/9a8c9eba-8693-4291-a6ca-290ed515da45')
+            .delete('/nfc/summary/aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    it(`/GraphQL nfcCreateSummary - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL nfcCreateSummary - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -545,7 +551,7 @@ describe('summary', () =>
             });
     });
 
-    it(`/GraphQL nfcCreateSummary`, () => 
+    test(`/GraphQL nfcCreateSummary`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -568,21 +574,21 @@ describe('summary', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'e0bf1383-59cc-4ed1-929a-7b64cd8d6e55',
-                        tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                        tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                        accessAt: '2020-07-08 20:24:23',
-                        counter: 9269346000,
+                        id: '46c6220e-a5c3-4256-b4e3-2f68dcfd0305',
+                        tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                        tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                        accessAt: '2020-07-21 09:07:31',
+                        counter: 3752189392,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcCreateSummary).toHaveProperty('id', 'e0bf1383-59cc-4ed1-929a-7b64cd8d6e55');
+                expect(res.body.data.nfcCreateSummary).toHaveProperty('id', '46c6220e-a5c3-4256-b4e3-2f68dcfd0305');
             });
     });
 
-    it(`/GraphQL nfcPaginateSummaries`, () => 
+    test(`/GraphQL nfcPaginateSummaries`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -620,7 +626,7 @@ describe('summary', () =>
             });
     });
 
-    it(`/GraphQL nfcFindSummary - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcFindSummary - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -660,7 +666,7 @@ describe('summary', () =>
             });
     });
 
-    it(`/GraphQL nfcFindSummary`, () => 
+    test(`/GraphQL nfcFindSummary`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -687,18 +693,18 @@ describe('summary', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '9a8c9eba-8693-4291-a6ca-290ed515da45'
+                            value   : 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindSummary.id).toStrictEqual('9a8c9eba-8693-4291-a6ca-290ed515da45');
+                expect(res.body.data.nfcFindSummary.id).toStrictEqual('aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9');
             });
     });
 
-    it(`/GraphQL nfcFindSummaryById - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcFindSummaryById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -731,7 +737,7 @@ describe('summary', () =>
             });
     });
 
-    it(`/GraphQL nfcFindSummaryById`, () => 
+    test(`/GraphQL nfcFindSummaryById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -753,16 +759,16 @@ describe('summary', () =>
                     }
                 `,
                 variables: {
-                    id: '9a8c9eba-8693-4291-a6ca-290ed515da45'
+                    id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindSummaryById.id).toStrictEqual('9a8c9eba-8693-4291-a6ca-290ed515da45');
+                expect(res.body.data.nfcFindSummaryById.id).toStrictEqual('aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9');
             });
     });
 
-    it(`/GraphQL nfcGetSummaries`, () => 
+    test(`/GraphQL nfcGetSummaries`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -794,7 +800,7 @@ describe('summary', () =>
             });
     });
 
-    it(`/GraphQL nfcUpdateSummary - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcUpdateSummary - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -818,11 +824,11 @@ describe('summary', () =>
                 variables: {
                     payload: {
                         
-                        id: '29d572db-477d-48aa-95ab-2d36fe844509',
-                        tagId: '271c89cc-55f4-4bc1-80f4-258c41d3b85c',
-                        tenantId: 'a0bdd368-b94c-46c0-bd78-c429a4b6a0a9',
-                        accessAt: '2020-07-08 21:46:43',
-                        counter: 9516688592,
+                        id: 'dad822f3-ca78-4764-b579-2fa1d81b9ed4',
+                        tagId: '093d234d-d41a-4b43-bab0-865855e5022d',
+                        tenantId: 'd006c3b9-46a3-4c0d-b32c-4f4323500986',
+                        accessAt: '2020-07-21 18:12:13',
+                        counter: 8472859567,
                     }
                 }
             })
@@ -834,7 +840,7 @@ describe('summary', () =>
             });
     });
 
-    it(`/GraphQL nfcUpdateSummary`, () => 
+    test(`/GraphQL nfcUpdateSummary`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -858,21 +864,21 @@ describe('summary', () =>
                 variables: {
                     payload: {
                         
-                        id: '9a8c9eba-8693-4291-a6ca-290ed515da45',
-                        tagId: '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-                        tenantId: 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-                        accessAt: '2020-07-09 00:47:19',
-                        counter: 9148161525,
+                        id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9',
+                        tagId: 'ec1d4999-3670-4cb7-9ac2-990874b484ae',
+                        tenantId: '8f5e233c-18e5-454b-8ea1-93a855544e21',
+                        accessAt: '2020-07-21 02:00:13',
+                        counter: 5544147129,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcUpdateSummary.id).toStrictEqual('9a8c9eba-8693-4291-a6ca-290ed515da45');
+                expect(res.body.data.nfcUpdateSummary.id).toStrictEqual('aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9');
             });
     });
 
-    it(`/GraphQL nfcDeleteSummaryById - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcDeleteSummaryById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -905,7 +911,7 @@ describe('summary', () =>
             });
     });
 
-    it(`/GraphQL nfcDeleteSummaryById`, () => 
+    test(`/GraphQL nfcDeleteSummaryById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -927,12 +933,12 @@ describe('summary', () =>
                     }
                 `,
                 variables: {
-                    id: '9a8c9eba-8693-4291-a6ca-290ed515da45'
+                    id: 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcDeleteSummaryById.id).toStrictEqual('9a8c9eba-8693-4291-a6ca-290ed515da45');
+                expect(res.body.data.nfcDeleteSummaryById.id).toStrictEqual('aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9');
             });
     });
 

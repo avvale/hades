@@ -39,20 +39,14 @@ describe('UpdateSessionController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateSessionController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateSessionController should be defined', () => 
+        test('UpdateSessionController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a session created', async () => 
+        test('should return a session created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(sessions[0])));
             expect(await controller.main(sessions[0])).toBe(sessions[0]);

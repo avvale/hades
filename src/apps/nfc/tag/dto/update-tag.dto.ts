@@ -2,60 +2,76 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateTagDto 
 {   
-    @ApiProperty({
-        type        : String,
-        description : 'id [input here api field description]',
-        example     : 'b91fa74f-012c-4830-9dd1-a930fa42296d'
-    })
-    id: string;
     
-    @ApiProperty({
-        type        : Number,
-        description : 'code [input here api field description]',
-        example     : 7075614978
-    })
-    code: number;
+        @ApiProperty({
+            type        : String,
+            description : 'id [input here api field description]',
+            example     : 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
+        })
+        id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'tenantId [input here api field description]',
-        example     : '9659665e-b461-4578-9df2-5bd2f5cc5014'
-    })
-    tenantId: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'tenantCode [input here api field description]',
-        example     : 'ff5vxqnpwdid3k87lwgfg7by9mcloei89xy3wxbmlugbz8jniu'
-    })
-    tenantCode: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'urlBase [input here api field description]',
-        example     : '3a6hx2kiqeprhwtqhghdnqmu7y0qxi1setyf7utcl6qubnvxihjizlqdwf0rjxynlyeqaj3go33s1y8mttto44uqm9vb63asxj5h7vm13rzjyjr8lyh795b1d0gdah6f2ooseu5bgkxw92fctasslkff4xl84wi5dlsfkb1xk66k4tii5w9m6te80qnwrzeec1pasxsk3kxe87dvtjl5o42l2qjlqs7yd5mvfif4s79q24530wrjzwmfiwygg8h'
-    })
-    urlBase: string;
+        @ApiProperty({
+            type        : Number,
+            description : 'code [input here api field description]',
+            example     : 8041865664
+        })
+        code: number;
     
-    @ApiProperty({
-        type        : Object,
-        description : 'params [input here api field description]',
-        example     : { "foo" : "bar" }
-    })
-    params: any;
     
-    @ApiProperty({
-        type        : Number,
-        description : 'offset [input here api field description]',
-        example     : 883299
-    })
-    offset: number;
     
-    @ApiProperty({
-        type        : Boolean,
-        description : 'isSessionRequired [input here api field description]',
-        example     : true
-    })
-    isSessionRequired: boolean;
+        @ApiProperty({
+            type        : String,
+            description : 'tenantId [input here api field description]',
+            example     : '0d7ba885-0f6d-4149-8d2b-8e15081fa80c'
+        })
+        tenantId: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'tenantCode [input here api field description]',
+            example     : 'k6t044mkdu090tvpflqeix4klx821t5lydd5ob9lvdxu8s7qq7'
+        })
+        tenantCode: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'urlBase [input here api field description]',
+            example     : 'wp7wy03haht5pdd10suzgvwrexdouw3stev7k31872xavarw6ak1h6y2dq1csgolex2qjw1cvlarlittmo7ntttaaokho2lmps0cj5gnahgum940pi40nvvrzdsclcbjetyihf0pgl5gjgygaxeb942svb82cf0oj3bwlujvq9qttv8ke4j2zx1rdy00kdn9c8i1vaz1dm0hvld7xx28ls9ornsi3i7a54mtzeb9gw4zhy1hmabk5yw4e3g306m'
+        })
+        urlBase: string;
+    
+    
+    
+        @ApiProperty({
+            type        : Object,
+            description : 'params [input here api field description]',
+            example     : { "foo" : "bar" }
+        })
+        params: any;
+    
+    
+    
+        @ApiProperty({
+            type        : Number,
+            description : 'offset [input here api field description]',
+            example     : 453024
+        })
+        offset: number;
+    
+    
+    
+        @ApiProperty({
+            type        : Boolean,
+            description : 'isSessionRequired [input here api field description]',
+            example     : false
+        })
+        isSessionRequired: boolean;
+    
     
 }

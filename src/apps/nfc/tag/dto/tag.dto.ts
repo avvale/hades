@@ -6,8 +6,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'b91fa74f-012c-4830-9dd1-a930fa42296d',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class TagDto
     @ApiProperty({
         type        : Number,
         description : 'code [input here api field description]',
-        example     : 4668952662,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 7894005846
     })
     code: number;
     
@@ -26,8 +24,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '9659665e-b461-4578-9df2-5bd2f5cc5014',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '0d7ba885-0f6d-4149-8d2b-8e15081fa80c'
     })
     tenantId: string;
     
@@ -36,8 +33,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : '5ym5z4bgmyv43yo19q85ksedy007cuvz29c3l3wn4vz7b0sy4s',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'xh7qwmqkhydd6ew7sgeu59xhz5t60yac2ljuqzn8dfjaow1qkj'
     })
     tenantCode: string;
     
@@ -46,8 +42,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'urlBase [input here api field description]',
-        example     : '71l1fiaf2lr8090hc5di89b18tira6fdy726k4h4mwe6ymz6jn58vlt9omu2n8e1hxwe26marz2cgwkqzk0rheu5ebb7gafxxbjyf2zdtxrftd3qjf8miw4ch9rd7tefv3xngbgkyrxr2mt26jr4wlnkhi8od681z8n4b6gc2qg8qkjyezfekj0hnwhycmfwtdx9574acy1nro48xth96ak6dtpiblhxohph0ifr4clvim2cd4af7pv1gtj1tm5',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'p1ybmzjt1thrl9i9rsjrcp27pvyo7klnb35rp65mudg6ci055od4oflcug26mk2w5e387ecmgezjf5bawjigcjeqn0poogjfr4bbxwumix70qn0m50nn12mo1vfrx41kyxgmkdccce1d2gcssguwnkt7oynduckjzjzqcgptqov8tjifdntm2clbhyk3zhy683p7wxecqsxpx3kdl87wdjgkwxstgnyz0gbgen5dwkwfg2pk9k0fm1hgqjub1sj'
     })
     urlBase: string;
     
@@ -56,8 +51,7 @@ export class TagDto
     @ApiProperty({
         type        : Object,
         description : 'params [input here api field description]',
-        example     : { "foo" : "bar" },
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : { "foo" : "bar" }
     })
     params: any;
     
@@ -66,8 +60,7 @@ export class TagDto
     @ApiProperty({
         type        : Number,
         description : 'offset [input here api field description]',
-        example     : 646370,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 354912
     })
     offset: number;
     
@@ -76,8 +69,7 @@ export class TagDto
     @ApiProperty({
         type        : Boolean,
         description : 'isSessionRequired [input here api field description]',
-        example     : false,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : false
     })
     isSessionRequired: boolean;
     
@@ -86,8 +78,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-09 05:16:13',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 19:02:30'
     })
     createdAt: string;
     
@@ -96,8 +87,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-08 20:06:15',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 02:26:04'
     })
     updatedAt: string;
     
@@ -106,8 +96,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-08 19:50:58',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 01:40:53'
     })
     deletedAt: string;
     

@@ -20,7 +20,6 @@ export class NfcTagModel extends Model<NfcTagModel>
         field: 'code',
         primaryKey: false,
         allowNull: false,
-        autoIncrement: true,
         type: DataTypes.INTEGER.UNSIGNED,
     })
     code: number;

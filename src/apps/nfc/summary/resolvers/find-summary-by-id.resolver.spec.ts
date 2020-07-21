@@ -37,19 +37,19 @@ describe('FindSummaryByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindSummaryByIdResolver should be defined', () => 
+    test('FindSummaryByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindSummaryByIdResolver should be defined', () => 
+        test('FindSummaryByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an summary by id', async () => 
+        test('should return an summary by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(summaries[0])));
             expect(await resolver.main(summaries[0].id)).toBe(summaries[0]);

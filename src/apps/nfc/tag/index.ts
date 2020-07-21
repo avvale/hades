@@ -1,6 +1,6 @@
 // controllers
 import { CreateTagController } from './controllers/create-tag.controller';
-import { InsertTagsController } from './controllers/insert-tags.controller';
+import { CreateTagsController } from './controllers/create-tags.controller';
 import { PaginateTagsController } from './controllers/paginate-tags.controller';
 import { GetTagsController } from './controllers/get-tags.controller';
 import { FindTagByIdController } from './controllers/find-tag-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteTagsController } from './controllers/delete-tags.controller';
 
 // resolvers
 import { CreateTagResolver } from './resolvers/create-tag.resolver';
-import { InsertTagsResolver } from './resolvers/insert-tags.resolver';
+import { CreateTagsResolver } from './resolvers/create-tags.resolver';
 import { PaginateTagsResolver } from './resolvers/paginate-tags.resolver';
 import { GetTagsResolver } from './resolvers/get-tags.resolver';
 import { FindTagResolver } from './resolvers/find-tag.resolver';
@@ -22,7 +22,7 @@ import { DeleteTagsResolver } from './resolvers/delete-tags.resolver';
 
 export const NfcTagControllers = [
     CreateTagController,
-    InsertTagsController,
+    CreateTagsController,
     PaginateTagsController,
     GetTagsController,
     FindTagByIdController,
@@ -34,7 +34,7 @@ export const NfcTagControllers = [
 
 export const NfcTagResolvers = [
     CreateTagResolver,
-    InsertTagsResolver,
+    CreateTagsResolver,
     PaginateTagsResolver,
     GetTagsResolver,
     FindTagResolver,

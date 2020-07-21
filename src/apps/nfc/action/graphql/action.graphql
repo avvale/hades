@@ -51,7 +51,7 @@ type Query
 type Mutation
 {
     nfcCreateAction(payload: NfcCreateActionInput!): NfcAction
-    nfcInsertActions(payload: [NfcCreateActionInput]!): Boolean!
+    nfcCreateActions(payload: [NfcCreateActionInput]!): Boolean!
     nfcUpdateAction(payload: NfcUpdateActionInput!): NfcAction
     nfcDeleteActionById(id: ID!): NfcAction
     nfcDeleteActions(query:[QueryStatementInput]): [NfcAction]!

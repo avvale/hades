@@ -39,19 +39,14 @@ describe('FindSummaryByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindSummaryByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('FindSummaryByIdController should be defined', () => 
+        test('FindSummaryByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an summary by id', async () => 
+        test('should return an summary by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(summaries[0])));
             expect(await controller.main(summaries[0].id)).toBe(summaries[0]);

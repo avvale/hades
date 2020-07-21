@@ -37,19 +37,19 @@ describe('FindTagByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindTagByIdResolver should be defined', () => 
+    test('FindTagByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindTagByIdResolver should be defined', () => 
+        test('FindTagByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an tag by id', async () => 
+        test('should return an tag by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tags[0])));
             expect(await resolver.main(tags[0].id)).toBe(tags[0]);

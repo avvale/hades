@@ -37,19 +37,19 @@ describe('FindSessionResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindSessionResolver should be defined', () => 
+    test('FindSessionResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindSessionResolver should be defined', () => 
+        test('FindSessionResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a session', async () => 
+        test('should return a session', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(sessions[0])));
             expect(await resolver.main([])).toBe(sessions[0]);

@@ -5,6 +5,7 @@ import { UpdateSummaryResolver } from './update-summary.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { summaries } from '@hades/nfc/summary/infrastructure/seeds/summary.seed';
+import { NfcUpdateSummaryInput } from './../../../../graphql';
 
 describe('UpdateSummaryResolver', () => 
 {
@@ -37,23 +38,22 @@ describe('UpdateSummaryResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateSummaryResolver should be defined', () => 
+    test('UpdateSummaryResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateSummaryResolver should be defined', () => 
+        test('UpdateSummaryResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a summary created', async () => 
+        test('should return a summary created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(summaries[0])));
-            expect(await resolver.main(summaries[0])).toBe(summaries[0]);
+            expect(await resolver.main(<NfcUpdateSummaryInput>summaries[0])).toBe(summaries[0]);
         });
     });
 });

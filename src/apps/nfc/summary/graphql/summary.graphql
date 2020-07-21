@@ -44,7 +44,7 @@ type Query
 type Mutation
 {
     nfcCreateSummary(payload: NfcCreateSummaryInput!): NfcSummary
-    nfcInsertSummaries(payload: [NfcCreateSummaryInput]!): Boolean!
+    nfcCreateSummaries(payload: [NfcCreateSummaryInput]!): Boolean!
     nfcUpdateSummary(payload: NfcUpdateSummaryInput!): NfcSummary
     nfcDeleteSummaryById(id: ID!): NfcSummary
     nfcDeleteSummaries(query:[QueryStatementInput]): [NfcSummary]!

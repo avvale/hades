@@ -39,19 +39,14 @@ describe('DeleteTagsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteTagsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteTagsController should be defined', () => 
+        test('DeleteTagsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an tags deleted', async () => 
+        test('should return an tags deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tags)));
             expect(await controller.main([])).toBe(tags);

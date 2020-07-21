@@ -5,6 +5,7 @@ import { CreateSessionResolver } from './create-session.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { sessions } from '@hades/nfc/session/infrastructure/seeds/session.seed';
+import { NfcCreateSessionInput } from './../../../../graphql';
 
 describe('CreateSessionResolver', () => 
 {
@@ -37,23 +38,22 @@ describe('CreateSessionResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('CreateSessionResolver should be defined', () => 
+    test('CreateSessionResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('CreateSessionResolver should be defined', () => 
+        test('CreateSessionResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an session created', async () => 
+        test('should return an session created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(sessions[0])));
-            expect(await resolver.main(sessions[0])).toBe(sessions[0]);
+            expect(await resolver.main(<NfcCreateSessionInput>sessions[0])).toBe(sessions[0]);
         });
     });
 });

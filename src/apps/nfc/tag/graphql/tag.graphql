@@ -53,7 +53,7 @@ type Query
 type Mutation
 {
     nfcCreateTag(payload: NfcCreateTagInput!): NfcTag
-    nfcInsertTags(payload: [NfcCreateTagInput]!): Boolean!
+    nfcCreateTags(payload: [NfcCreateTagInput]!): Boolean!
     nfcUpdateTag(payload: NfcUpdateTagInput!): NfcTag
     nfcDeleteTagById(id: ID!): NfcTag
     nfcDeleteTags(query:[QueryStatementInput]): [NfcTag]!

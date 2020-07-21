@@ -1,6 +1,6 @@
 // controllers
 import { CreateSummaryController } from './controllers/create-summary.controller';
-import { InsertSummariesController } from './controllers/insert-summaries.controller';
+import { CreateSummariesController } from './controllers/create-summaries.controller';
 import { PaginateSummariesController } from './controllers/paginate-summaries.controller';
 import { GetSummariesController } from './controllers/get-summaries.controller';
 import { FindSummaryByIdController } from './controllers/find-summary-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteSummariesController } from './controllers/delete-summaries.contro
 
 // resolvers
 import { CreateSummaryResolver } from './resolvers/create-summary.resolver';
-import { InsertSummariesResolver } from './resolvers/insert-summaries.resolver';
+import { CreateSummariesResolver } from './resolvers/create-summaries.resolver';
 import { PaginateSummariesResolver } from './resolvers/paginate-summaries.resolver';
 import { GetSummariesResolver } from './resolvers/get-summaries.resolver';
 import { FindSummaryResolver } from './resolvers/find-summary.resolver';
@@ -22,7 +22,7 @@ import { DeleteSummariesResolver } from './resolvers/delete-summaries.resolver';
 
 export const NfcSummaryControllers = [
     CreateSummaryController,
-    InsertSummariesController,
+    CreateSummariesController,
     PaginateSummariesController,
     GetSummariesController,
     FindSummaryByIdController,
@@ -34,7 +34,7 @@ export const NfcSummaryControllers = [
 
 export const NfcSummaryResolvers = [
     CreateSummaryResolver,
-    InsertSummariesResolver,
+    CreateSummariesResolver,
     PaginateSummariesResolver,
     GetSummariesResolver,
     FindSummaryResolver,

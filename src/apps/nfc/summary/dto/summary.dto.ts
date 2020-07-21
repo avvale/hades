@@ -6,8 +6,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '9a8c9eba-8693-4291-a6ca-290ed515da45',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'tagId [input here api field description]',
-        example     : '2a71fa2b-9564-4990-b3fd-502329dcafd1',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'ec1d4999-3670-4cb7-9ac2-990874b484ae'
     })
     tagId: string;
     
@@ -26,8 +24,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'c44947ed-9e4b-4896-99f4-b2d2466a0878',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '8f5e233c-18e5-454b-8ea1-93a855544e21'
     })
     tenantId: string;
     
@@ -36,8 +33,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'accessAt [input here api field description]',
-        example     : '2020-07-09 06:47:05',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 07:30:23'
     })
     accessAt: string;
     
@@ -46,8 +42,7 @@ export class SummaryDto
     @ApiProperty({
         type        : Number,
         description : 'counter [input here api field description]',
-        example     : 6934302108,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 7357411594
     })
     counter: number;
     
@@ -56,8 +51,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-08 20:20:54',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 02:18:05'
     })
     createdAt: string;
     
@@ -66,8 +60,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-09 12:03:48',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 19:27:28'
     })
     updatedAt: string;
     
@@ -76,8 +69,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-09 05:52:23',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 03:35:03'
     })
     deletedAt: string;
     

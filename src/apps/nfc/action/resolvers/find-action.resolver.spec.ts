@@ -37,19 +37,19 @@ describe('FindActionResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindActionResolver should be defined', () => 
+    test('FindActionResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindActionResolver should be defined', () => 
+        test('FindActionResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a action', async () => 
+        test('should return a action', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(actions[0])));
             expect(await resolver.main([])).toBe(actions[0]);

@@ -5,10 +5,14 @@ import { ISessionRepository } from '@hades/nfc/session/domain/session.repository
 import { MockSessionRepository } from '@hades/nfc/session/infrastructure/mock/mock-session.repository';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { NfcModule } from './../../../src/apps/nfc/nfc.module';
-import { AdminModule } from './../../../src/apps/admin/admin.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+import { AdminModule } from './../../../src/apps/admin/admin.module';
+
+const importForeignModules = [
+    AdminModule
+];
 
 describe('session', () => 
 {
@@ -19,7 +23,7 @@ describe('session', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
-                    AdminModule,
+                    ...importForeignModules,
                     NfcModule,
                     GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
@@ -47,7 +51,7 @@ describe('session', () =>
         await app.init();
     });
 
-    it(`/REST:POST nfc/session - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST nfc/session - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
@@ -57,18 +61,18 @@ describe('session', () =>
     });
 
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionId property can not to be null`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                ip: '7cuoikrbo5wqo4t',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: '5i74h2qkgo1gj6f92v6vwjttny90e6boaqs9fmx0xg504yq269w9g5ci7cn7e8iu',
-                counter: 790774,
-                expiredAt: '2020-07-09 00:14:55',
+                ip: 'fkcqq351ccw58cy',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'gpyjq89k9fkt5wymnwnnjozwdk064vx1x7861nomnmy4esyrhot2rh6sdmd799ys',
+                counter: 478922,
+                expiredAt: '2020-07-21 11:50:39',
             })
             .expect(400)
             .then(res => {
@@ -76,18 +80,18 @@ describe('session', () =>
             });
     });
 
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionId property can not to be undefined`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
                 
-                ip: '1w0av7kzndklwyl',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: 'w0ph5pw0f18r7rkezmgidfqw9muwk3qyhoje6we5brp6lixd58wco1di9sm604ch',
-                counter: 469127,
-                expiredAt: '2020-07-08 21:18:31',
+                ip: '0nbmn5bdwuefbdv',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'eb48bm00pr3x9tv0jb0qvjsnzehg0f60iq23sg4ngsnxex30xhptnge7kl6wkn6z',
+                counter: 363533,
+                expiredAt: '2020-07-21 09:27:29',
             })
             .expect(400)
             .then(res => {
@@ -95,18 +99,18 @@ describe('session', () =>
             });
     });
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionIp property can not to be null`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionIp property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
                 ip: null,
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: '1dy24h6ox19zm2cy0kbcvozgw4nf3npl03ub1k1scr342yadxihojjrs9uvqfgps',
-                counter: 775471,
-                expiredAt: '2020-07-08 22:36:37',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'cfd4wsrw9bmfzamyll6feycu4pmt76obginwt9i7pvjjfuifvm24c4iqjgmvn0pd',
+                counter: 440092,
+                expiredAt: '2020-07-21 10:12:51',
             })
             .expect(400)
             .then(res => {
@@ -114,18 +118,18 @@ describe('session', () =>
             });
     });
 
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionIp property can not to be undefined`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionIp property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
                 
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: '3n8f7xb9jbv0cnafzi95fmo4uoydthh58unae3pf7cp9delcflnmvxjzwaqkz5gw',
-                counter: 461742,
-                expiredAt: '2020-07-08 23:08:26',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'sp3y9br1ej3gl666hz54sn0v0h2c8kocqb5c6h946v4oxzb4q4lhuepthouzcab8',
+                counter: 894487,
+                expiredAt: '2020-07-21 12:26:41',
             })
             .expect(400)
             .then(res => {
@@ -133,18 +137,18 @@ describe('session', () =>
             });
     });
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionTagId property can not to be null`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionTagId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'fjom9rc52x1mz6b',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'dv4d4ufkm12nm33',
                 tagId: null,
-                uid: '92wa8a8tn5bpwg7w6h1dhyuw5de3ip3tzl64v8eayyauoysvze7mx1xcdxw1r6hr',
-                counter: 952457,
-                expiredAt: '2020-07-09 12:44:14',
+                uid: 'u1fu4r6mxw6lg7gqnb3tc4hjvvmxv1wsiw0dyjjkmv35m8zo67z6hqx6th39x5ec',
+                counter: 957068,
+                expiredAt: '2020-07-21 11:01:04',
             })
             .expect(400)
             .then(res => {
@@ -152,18 +156,18 @@ describe('session', () =>
             });
     });
 
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionTagId property can not to be undefined`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionTagId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: '3s9e9z7ebj1sshu',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'rtv6chago2fcrd2',
                 
-                uid: 'vfuyw1jole9hwop4umyjtaqw7qbfxyhqyelwtimo70o8onlkvoacfeulbdstdlpm',
-                counter: 627760,
-                expiredAt: '2020-07-09 11:54:10',
+                uid: '3t6rfpzq2tfuv4vgtendi480iq34uav8d2yyply5tpdgx0b0535wa5hdtl7gztuw',
+                counter: 631155,
+                expiredAt: '2020-07-21 23:23:54',
             })
             .expect(400)
             .then(res => {
@@ -171,18 +175,18 @@ describe('session', () =>
             });
     });
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionUid property can not to be null`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionUid property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'kg40k2mbfwnfxy0',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'd6uglepcasoslp3',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
                 uid: null,
-                counter: 929427,
-                expiredAt: '2020-07-09 10:10:27',
+                counter: 129207,
+                expiredAt: '2020-07-21 10:36:33',
             })
             .expect(400)
             .then(res => {
@@ -190,18 +194,18 @@ describe('session', () =>
             });
     });
 
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionUid property can not to be undefined`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionUid property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'blx752roglbsmmj',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'z786ibo1ubflb3y',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
                 
-                counter: 409595,
-                expiredAt: '2020-07-08 22:27:16',
+                counter: 896899,
+                expiredAt: '2020-07-21 03:02:31',
             })
             .expect(400)
             .then(res => {
@@ -209,18 +213,18 @@ describe('session', () =>
             });
     });
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionCounter property can not to be null`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionCounter property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: '17lyqmn1attdn47',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: '12a8ot9jx9xne17brkdjz05obi29nbvcly74nu4uw1v1zi4p7q2rcn16cizazmow',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'xt4w4uig7xxwlfl',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'tnjxt5edtp5ip3ix523aj94rcrj1oc2mct1u44867blps7awsfwh7fy3xbl5597h',
                 counter: null,
-                expiredAt: '2020-07-08 19:03:08',
+                expiredAt: '2020-07-21 16:47:38',
             })
             .expect(400)
             .then(res => {
@@ -228,18 +232,18 @@ describe('session', () =>
             });
     });
 
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionCounter property can not to be undefined`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionCounter property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'exsc1d6nnqtvmxk',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: 'jasxgrph9oypbfupph5lm8vdlpcmn6c55jt68nwhg588o2y6vndiukkgud0jmgmn',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'zd5796ldwiftokd',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'oqckeros84ugs278he1xm0trxmt8grdvuhymedh4jmbm9ps5g3qztx2bkeyc6hxe',
                 
-                expiredAt: '2020-07-08 16:40:45',
+                expiredAt: '2020-07-21 23:52:19',
             })
             .expect(400)
             .then(res => {
@@ -249,18 +253,18 @@ describe('session', () =>
     
 
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'axvh0uj6il3vhkxcwr87pc6z8hc4jnvexn4su',
-                ip: 'jef9wdraymmy8po',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: '53bkpbw3rnryk8fqztfcgtjigw0fv94hilaumtvos4g4fix80iavemk96z6392cg',
-                counter: 766494,
-                expiredAt: '2020-07-09 11:50:05',
+                id: 'p8y65uys9lk1ttg5nzf11gbyfcb11db384ycj',
+                ip: 'mbbcb1ff02k9wvy',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'ycsnkuovw9vyh6l2c1rkmm7y8ujyndyvzta5eakmp9bgk3oukvkjiqd4ngmiuxon',
+                counter: 820947,
+                expiredAt: '2020-07-21 20:19:56',
             })
             .expect(400)
             .then(res => {
@@ -268,18 +272,18 @@ describe('session', () =>
             });
     });
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionIp is not allowed, must be a length of 15`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionIp is not allowed, must be a length of 15`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'opr8r35mr3w03esu',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: 'cvzndjmowubl1as59234ph2b8l8dxs7ya5wtffk1awm396k3lrhp45k053cr4b0n',
-                counter: 337592,
-                expiredAt: '2020-07-09 14:06:06',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'm4ez3ocqu3l7h7u7',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'ik7vbkym1zcdtb5icyjax364h0617mv05avnenbxvg6fe1muvjvp4f45wmpg1xz7',
+                counter: 345051,
+                expiredAt: '2020-07-21 15:50:57',
             })
             .expect(400)
             .then(res => {
@@ -287,18 +291,18 @@ describe('session', () =>
             });
     });
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionTagId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionTagId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'ym3ida9gx6atc05',
-                tagId: '851x0mgddnarl1ihqoyzfwnkxrq2db8okjy4s',
-                uid: 'd5r7772jzjy669mi6t99ckmxu410de5op1pj967cl3kqy1j85hl7pbzzzv66hxu6',
-                counter: 106989,
-                expiredAt: '2020-07-08 19:46:48',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: '8wu9n5c5pnx3h6k',
+                tagId: '5iinjjys3h3l1d76iocyyevsx12zzzej4wsmi',
+                uid: 'r2wecvm88gc6ons6iahmorhctqgu7i56wsgjg4zi2oboihfeykqtvrzr0nsr8m1u',
+                counter: 733164,
+                expiredAt: '2020-07-21 02:59:34',
             })
             .expect(400)
             .then(res => {
@@ -308,18 +312,18 @@ describe('session', () =>
     
 
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionUid is too large, has a maximum length of 64`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionUid is too large, has a maximum length of 64`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'wl963ow44za7zsr',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: 'q5lxuini3wxm5snqubb65fik48kjknfw8tqukqjogtf8o06b0rtre08sdtvo291rt',
-                counter: 367364,
-                expiredAt: '2020-07-09 06:05:05',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'p5kkoglpn4l7bhc',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'desox03thx341w1vf2th4ddq7m12vym6s6ems2s9xp4d9xvvr3q9v3hajeu5fo3w5',
+                counter: 306166,
+                expiredAt: '2020-07-21 06:24:39',
             })
             .expect(400)
             .then(res => {
@@ -327,18 +331,18 @@ describe('session', () =>
             });
     });
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionCounter is too large, has a maximum length of 6`, () => 
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionCounter is too large, has a maximum length of 6`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'kvi6tez167hlfw3',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: 'g7ds778zacxgn1q44qpdgy8365gq6oc54telkbklxcxdy9sqxei1dxglt2v98fvk',
-                counter: 4374375,
-                expiredAt: '2020-07-08 21:07:39',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'f7822dgm25crevi',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'ujjd6w43eul7s1gjw3ym2t0d5fnw3o6q3qiwvcivmsxogbf5fvlydkzc4ogbx260',
+                counter: 3981225,
+                expiredAt: '2020-07-21 21:04:13',
             })
             .expect(400)
             .then(res => {
@@ -350,23 +354,25 @@ describe('session', () =>
     
 
     
-
+    
     
 
     
 
     
-    it(`/REST:POST nfc/session - Got 400 Conflict, SessionExpiredAt has to be a timestamp value`, () => 
+
+    
+    test(`/REST:POST nfc/session - Got 400 Conflict, SessionExpiredAt has to be a timestamp value`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'r5pfe0ixcyrkoms',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: 'd3wvw2hr3fwef8k0fnreokz6nkiy31n2645tr7jk1aujt93ij1xqddgqupnspshy',
-                counter: 539560,
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'ay8dyite3usjb95',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'ws5zpghr89gwfw844tz5eoq3mi71xgcgnlgpe8xbook765mt41iv6lwcm4vnjrjx',
+                counter: 136280,
                 expiredAt: 'XXXXXXXX',
             })
             .expect(400)
@@ -376,23 +382,23 @@ describe('session', () =>
     });
     
 
-    it(`/REST:POST nfc/session`, () => 
+    test(`/REST:POST nfc/session`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/session')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'o946j68rbk2klpw',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: '1i02d6xremrhgud1hgyj60oadmbnh8uqkg5h9nvf12sdgxw9bn3m3jciatfju5io',
-                counter: 373458,
-                expiredAt: '2020-07-08 20:03:39',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'ysn5ejetga4htr1',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: '5p1wb7hkrdxodn3huob76tbu49pha54kdf1k1fi9jg2l8eru7ed526erf5st66dq',
+                counter: 436503,
+                expiredAt: '2020-07-21 20:26:56',
             })
             .expect(201);
     });
 
-    it(`/REST:GET nfc/sessions/paginate`, () => 
+    test(`/REST:GET nfc/sessions/paginate`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/sessions/paginate')
@@ -417,7 +423,7 @@ describe('session', () =>
             });
     });
 
-    it(`/REST:GET nfc/session - Got 404 Not Found`, () => 
+    test(`/REST:GET nfc/session - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/session')
@@ -435,7 +441,7 @@ describe('session', () =>
             .expect(404);
     });
 
-    it(`/REST:GET nfc/session`, () => 
+    test(`/REST:GET nfc/session`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/session')
@@ -446,15 +452,15 @@ describe('session', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c'
+                        value   : 'ab63d4ac-a941-4caa-ad47-78a315327f13'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c'));
+            .expect(repository.collectionResponse.find(item => item.id === 'ab63d4ac-a941-4caa-ad47-78a315327f13'));
     });
 
-    it(`/REST:GET nfc/session/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET nfc/session/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/session/00000000-0000-0000-0000-000000000000')
@@ -462,16 +468,16 @@ describe('session', () =>
             .expect(404);
     });
 
-    it(`/REST:GET nfc/session/{id}`, () => 
+    test(`/REST:GET nfc/session/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/nfc/session/ab627b95-5e94-4f7e-b2fd-b29af1ef833c')
+            .get('/nfc/session/ab63d4ac-a941-4caa-ad47-78a315327f13')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c'));
+            .expect(repository.collectionResponse.find(e => e.id === 'ab63d4ac-a941-4caa-ad47-78a315327f13'));
     });
 
-    it(`/REST:GET nfc/sessions`, () => 
+    test(`/REST:GET nfc/sessions`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/sessions')
@@ -480,42 +486,42 @@ describe('session', () =>
             .expect(repository.collectionResponse);
     });
 
-    it(`/REST:PUT nfc/session - Got 404 Not Found`, () => 
+    test(`/REST:PUT nfc/session - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .put('/nfc/session')
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'a10a2363-c715-42f2-a5ed-28fe46d5b1d4',
-                ip: 't3346x1u4ubb0dp',
-                tagId: 'a07ca095-8243-4359-812f-7f67a14cc216',
-                uid: 'okv1t420s9pofblo7eygety410k5241bd77jw52fkiovvhuw7sv18qovdlz07pve',
-                counter: 583393,
-                expiredAt: '2020-07-08 21:55:48',
+                id: '76a0e15d-0f3a-4964-ab3c-083d3f3b7853',
+                ip: 'bq2i0be7zbqwywb',
+                tagId: 'fb4886ca-afd8-4acc-978d-bff9c58283f8',
+                uid: 'bx5f7o4t7oajt2ax32b9ocbmxzl45jjsw1cdx5vnw64mouo2smgyq4x0o1q9wrcg',
+                counter: 820774,
+                expiredAt: '2020-07-21 22:13:12',
             })
             .expect(404);
     });
 
-    it(`/REST:PUT nfc/session`, () => 
+    test(`/REST:PUT nfc/session`, () => 
     {
         return request(app.getHttpServer())
             .put('/nfc/session')
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                ip: 'd6db9wqvaxaowbb',
-                tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                uid: 'r8nyl82k1pkq4htrgvpt2zjhdrrf9po7dhsqz59ifgfq1yj18mr9i04yxsoiiwjn',
-                counter: 228989,
-                expiredAt: '2020-07-08 23:16:18',
+                id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                ip: 'x3zwqgf49yo8k6z',
+                tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                uid: 'rn79fw8oiwbmszlow3eq66uki0tq00alrcosga2a09xqv1ixxfbghj9sksmwy6ea',
+                counter: 891335,
+                expiredAt: '2020-07-21 09:52:50',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c'));
+            .expect(repository.collectionResponse.find(e => e.id === 'ab63d4ac-a941-4caa-ad47-78a315327f13'));
     });
 
-    it(`/REST:DELETE nfc/session/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE nfc/session/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .delete('/nfc/session/00000000-0000-0000-0000-000000000000')
@@ -523,15 +529,15 @@ describe('session', () =>
             .expect(404);
     });
 
-    it(`/REST:DELETE nfc/session/{id}`, () => 
+    test(`/REST:DELETE nfc/session/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/nfc/session/ab627b95-5e94-4f7e-b2fd-b29af1ef833c')
+            .delete('/nfc/session/ab63d4ac-a941-4caa-ad47-78a315327f13')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    it(`/GraphQL nfcCreateSession - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL nfcCreateSession - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -565,7 +571,7 @@ describe('session', () =>
             });
     });
 
-    it(`/GraphQL nfcCreateSession`, () => 
+    test(`/GraphQL nfcCreateSession`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -589,22 +595,22 @@ describe('session', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'a580189f-602d-4b4d-8df8-ffe469a84cc6',
-                        ip: 'yvezozhh8hjci5h',
-                        tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                        uid: 'cxfetnmql7usfhd3bztx0s89gcroy1r1gv2yzk42kuoqm8nelzqs9zfgm64ircor',
-                        counter: 140351,
-                        expiredAt: '2020-07-08 22:16:42',
+                        id: 'b6cf643f-102b-4219-8dcd-540abcc54963',
+                        ip: 'i8blljucapfo179',
+                        tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                        uid: 'zokzt6s3p08cf0c2x30avxetxqvg2k363m2ohfjlyvq7pp8yh35ym2d05mai764i',
+                        counter: 434996,
+                        expiredAt: '2020-07-21 17:45:51',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcCreateSession).toHaveProperty('id', 'a580189f-602d-4b4d-8df8-ffe469a84cc6');
+                expect(res.body.data.nfcCreateSession).toHaveProperty('id', 'b6cf643f-102b-4219-8dcd-540abcc54963');
             });
     });
 
-    it(`/GraphQL nfcPaginateSessions`, () => 
+    test(`/GraphQL nfcPaginateSessions`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -642,7 +648,7 @@ describe('session', () =>
             });
     });
 
-    it(`/GraphQL nfcFindSession - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcFindSession - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -683,7 +689,7 @@ describe('session', () =>
             });
     });
 
-    it(`/GraphQL nfcFindSession`, () => 
+    test(`/GraphQL nfcFindSession`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -711,18 +717,18 @@ describe('session', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c'
+                            value   : 'ab63d4ac-a941-4caa-ad47-78a315327f13'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindSession.id).toStrictEqual('ab627b95-5e94-4f7e-b2fd-b29af1ef833c');
+                expect(res.body.data.nfcFindSession.id).toStrictEqual('ab63d4ac-a941-4caa-ad47-78a315327f13');
             });
     });
 
-    it(`/GraphQL nfcFindSessionById - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcFindSessionById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -756,7 +762,7 @@ describe('session', () =>
             });
     });
 
-    it(`/GraphQL nfcFindSessionById`, () => 
+    test(`/GraphQL nfcFindSessionById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -779,16 +785,16 @@ describe('session', () =>
                     }
                 `,
                 variables: {
-                    id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c'
+                    id: 'ab63d4ac-a941-4caa-ad47-78a315327f13'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindSessionById.id).toStrictEqual('ab627b95-5e94-4f7e-b2fd-b29af1ef833c');
+                expect(res.body.data.nfcFindSessionById.id).toStrictEqual('ab63d4ac-a941-4caa-ad47-78a315327f13');
             });
     });
 
-    it(`/GraphQL nfcGetSessions`, () => 
+    test(`/GraphQL nfcGetSessions`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -821,7 +827,7 @@ describe('session', () =>
             });
     });
 
-    it(`/GraphQL nfcUpdateSession - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcUpdateSession - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -846,12 +852,12 @@ describe('session', () =>
                 variables: {
                     payload: {
                         
-                        id: '4e177f15-9d0a-4727-9939-40b95fde5063',
-                        ip: 'jnyv7veki56nh46',
-                        tagId: '30071cc2-5500-426e-8cbd-849c6adcfc89',
-                        uid: '3abdzm0y7x353chgkki4yu13dnl7v51m3smhyoa2aod7kihr0rs5cr0ktun514mh',
-                        counter: 624599,
-                        expiredAt: '2020-07-09 01:32:16',
+                        id: 'adbbf5a4-192a-44be-90ba-9d371df84be0',
+                        ip: 'r700ysftxh2u0bb',
+                        tagId: 'f332bea1-dbb4-43dd-a326-66e4a36448bf',
+                        uid: 'cnjgmu7czdksy5znhe9yrkqf1hz1z8x3og1cvb91hsmjl1z8219zk7fuq9z8t6y9',
+                        counter: 202294,
+                        expiredAt: '2020-07-21 05:13:33',
                     }
                 }
             })
@@ -863,7 +869,7 @@ describe('session', () =>
             });
     });
 
-    it(`/GraphQL nfcUpdateSession`, () => 
+    test(`/GraphQL nfcUpdateSession`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -888,22 +894,22 @@ describe('session', () =>
                 variables: {
                     payload: {
                         
-                        id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-                        ip: 'l4o0uzr3z3uobs4',
-                        tagId: 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-                        uid: 'p8blwv1xzhq34cemjstd5bvyb3qjv6w8rpbw2nhdx6t8q97giw4rm7y0xuo3m5e4',
-                        counter: 923626,
-                        expiredAt: '2020-07-09 02:33:18',
+                        id: 'ab63d4ac-a941-4caa-ad47-78a315327f13',
+                        ip: 'zr8c8z1ap60jjtz',
+                        tagId: '8ae89090-39be-4439-8f58-e523b2ff12f4',
+                        uid: '8p43jajz9mwfhk0v6rr2y09qeguivldu2331y1zccj4gzxpyyrigjqjitkgg8cbw',
+                        counter: 958901,
+                        expiredAt: '2020-07-21 17:25:11',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcUpdateSession.id).toStrictEqual('ab627b95-5e94-4f7e-b2fd-b29af1ef833c');
+                expect(res.body.data.nfcUpdateSession.id).toStrictEqual('ab63d4ac-a941-4caa-ad47-78a315327f13');
             });
     });
 
-    it(`/GraphQL nfcDeleteSessionById - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcDeleteSessionById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -937,7 +943,7 @@ describe('session', () =>
             });
     });
 
-    it(`/GraphQL nfcDeleteSessionById`, () => 
+    test(`/GraphQL nfcDeleteSessionById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -960,12 +966,12 @@ describe('session', () =>
                     }
                 `,
                 variables: {
-                    id: 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c'
+                    id: 'ab63d4ac-a941-4caa-ad47-78a315327f13'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcDeleteSessionById.id).toStrictEqual('ab627b95-5e94-4f7e-b2fd-b29af1ef833c');
+                expect(res.body.data.nfcDeleteSessionById.id).toStrictEqual('ab63d4ac-a941-4caa-ad47-78a315327f13');
             });
     });
 

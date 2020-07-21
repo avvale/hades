@@ -37,19 +37,19 @@ describe('FindTagResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindTagResolver should be defined', () => 
+    test('FindTagResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindTagResolver should be defined', () => 
+        test('FindTagResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a tag', async () => 
+        test('should return a tag', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tags[0])));
             expect(await resolver.main([])).toBe(tags[0]);

@@ -37,19 +37,19 @@ describe('DeleteTagsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteTagsResolver should be defined', () => 
+    test('DeleteTagsResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteTagsResolver should be defined', () => 
+        test('DeleteTagsResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an tags deleted', async () => 
+        test('should return an tags deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tags)));
             expect(await resolver.main([])).toBe(tags);

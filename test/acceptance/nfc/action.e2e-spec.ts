@@ -5,10 +5,14 @@ import { IActionRepository } from '@hades/nfc/action/domain/action.repository';
 import { MockActionRepository } from '@hades/nfc/action/infrastructure/mock/mock-action.repository';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { NfcModule } from './../../../src/apps/nfc/nfc.module';
-import { AdminModule } from './../../../src/apps/admin/admin.module';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+import { AdminModule } from './../../../src/apps/admin/admin.module';
+
+const importForeignModules = [
+    AdminModule
+];
 
 describe('action', () => 
 {
@@ -19,7 +23,7 @@ describe('action', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
-                    AdminModule,
+                    ...importForeignModules,
                     NfcModule,
                     GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
@@ -47,7 +51,7 @@ describe('action', () =>
         await app.init();
     });
 
-    it(`/REST:POST nfc/action - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST nfc/action - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
@@ -57,16 +61,16 @@ describe('action', () =>
     });
 
     
-    it(`/REST:POST nfc/action - Got 400 Conflict, ActionId property can not to be null`, () => 
+    test(`/REST:POST nfc/action - Got 400 Conflict, ActionId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
-                type: 'TCI',
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                type: 'ZAP',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -75,16 +79,16 @@ describe('action', () =>
             });
     });
 
-    it(`/REST:POST nfc/action - Got 400 Conflict, ActionId property can not to be undefined`, () => 
+    test(`/REST:POST nfc/action - Got 400 Conflict, ActionId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
                 
-                tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
-                type: 'ZAP',
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                type: 'TCI',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -93,16 +97,16 @@ describe('action', () =>
             });
     });
     
-    it(`/REST:POST nfc/action - Got 400 Conflict, ActionTagId property can not to be null`, () => 
+    test(`/REST:POST nfc/action - Got 400 Conflict, ActionTagId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'f61efb8a-207b-4376-bb49-81097dab62ef',
+                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
                 tagId: null,
-                type: 'CMS',
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                type: 'TCI',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -111,16 +115,16 @@ describe('action', () =>
             });
     });
 
-    it(`/REST:POST nfc/action - Got 400 Conflict, ActionTagId property can not to be undefined`, () => 
+    test(`/REST:POST nfc/action - Got 400 Conflict, ActionTagId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'f61efb8a-207b-4376-bb49-81097dab62ef',
+                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
                 
-                type: 'CMS',
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                type: 'MULESOFT',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -129,16 +133,16 @@ describe('action', () =>
             });
     });
     
-    it(`/REST:POST nfc/action - Got 400 Conflict, ActionType property can not to be null`, () => 
+    test(`/REST:POST nfc/action - Got 400 Conflict, ActionType property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'f61efb8a-207b-4376-bb49-81097dab62ef',
-                tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
+                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
+                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
                 type: null,
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -147,16 +151,16 @@ describe('action', () =>
             });
     });
 
-    it(`/REST:POST nfc/action - Got 400 Conflict, ActionType property can not to be undefined`, () => 
+    test(`/REST:POST nfc/action - Got 400 Conflict, ActionType property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'f61efb8a-207b-4376-bb49-81097dab62ef',
-                tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
+                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
+                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
                 
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -167,16 +171,16 @@ describe('action', () =>
     
 
     
-    it(`/REST:POST nfc/action - Got 400 Conflict, ActionId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST nfc/action - Got 400 Conflict, ActionId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'i0ohyt2pg23c15ncxbtoglaskztdfxky6py1b',
-                tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
-                type: 'ZAP',
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                id: 'kwcsuhnf4jvaj5jep73g2fsrug2db7eaw07vy',
+                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                type: 'TCI',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -185,16 +189,16 @@ describe('action', () =>
             });
     });
     
-    it(`/REST:POST nfc/action - Got 400 Conflict, ActionTagId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST nfc/action - Got 400 Conflict, ActionTagId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'f61efb8a-207b-4376-bb49-81097dab62ef',
-                tagId: '6hfdjo8slnddiuovolwx1ly2z4g4wq2vgi1ji',
-                type: 'MULESOFT',
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
+                tagId: 'm6bve1nb89t6rtzdzfsamcc17o4pkh50cs5ps',
+                type: 'TCI',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -203,16 +207,16 @@ describe('action', () =>
             });
     });
     
-    it(`/REST:POST nfc/action - Got 400 Conflict, ActionSectionId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST nfc/action - Got 400 Conflict, ActionSectionId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'f61efb8a-207b-4376-bb49-81097dab62ef',
-                tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
-                type: 'ZAP',
-                sectionId: '0k8g7lnj0ou1kukwnw77jn9q5v8iorj2enu2h',
+                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
+                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                type: 'MULESOFT',
+                sectionId: 'to97v0icqu7j9zgldsu4xr1e9464kmq7v5osu',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -227,20 +231,22 @@ describe('action', () =>
     
 
     
-
+    
     
 
     
-    it(`/REST:POST nfc/action - Got 400 Conflict, ActionType has to be a enum option of CMS, ZAP, TCI, MULESOFT`, () => 
+
+    
+    test(`/REST:POST nfc/action - Got 400 Conflict, ActionType has to be a enum option of CMS, ZAP, TCI, MULESOFT`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'f61efb8a-207b-4376-bb49-81097dab62ef',
-                tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
+                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
+                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
                 type: 'XXXX',
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -252,22 +258,22 @@ describe('action', () =>
 
     
 
-    it(`/REST:POST nfc/action`, () => 
+    test(`/REST:POST nfc/action`, () => 
     {
         return request(app.getHttpServer())
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'f61efb8a-207b-4376-bb49-81097dab62ef',
-                tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
-                type: 'CMS',
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
+                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                type: 'TCI',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(201);
     });
 
-    it(`/REST:GET nfc/actions/paginate`, () => 
+    test(`/REST:GET nfc/actions/paginate`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/actions/paginate')
@@ -292,7 +298,7 @@ describe('action', () =>
             });
     });
 
-    it(`/REST:GET nfc/action - Got 404 Not Found`, () => 
+    test(`/REST:GET nfc/action - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/action')
@@ -310,7 +316,7 @@ describe('action', () =>
             .expect(404);
     });
 
-    it(`/REST:GET nfc/action`, () => 
+    test(`/REST:GET nfc/action`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/action')
@@ -321,15 +327,15 @@ describe('action', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : 'f61efb8a-207b-4376-bb49-81097dab62ef'
+                        value   : 'e8172046-483a-4019-80ae-4490f4d43deb'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'f61efb8a-207b-4376-bb49-81097dab62ef'));
+            .expect(repository.collectionResponse.find(item => item.id === 'e8172046-483a-4019-80ae-4490f4d43deb'));
     });
 
-    it(`/REST:GET nfc/action/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET nfc/action/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/action/00000000-0000-0000-0000-000000000000')
@@ -337,16 +343,16 @@ describe('action', () =>
             .expect(404);
     });
 
-    it(`/REST:GET nfc/action/{id}`, () => 
+    test(`/REST:GET nfc/action/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/nfc/action/f61efb8a-207b-4376-bb49-81097dab62ef')
+            .get('/nfc/action/e8172046-483a-4019-80ae-4490f4d43deb')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'f61efb8a-207b-4376-bb49-81097dab62ef'));
+            .expect(repository.collectionResponse.find(e => e.id === 'e8172046-483a-4019-80ae-4490f4d43deb'));
     });
 
-    it(`/REST:GET nfc/actions`, () => 
+    test(`/REST:GET nfc/actions`, () => 
     {
         return request(app.getHttpServer())
             .get('/nfc/actions')
@@ -355,40 +361,40 @@ describe('action', () =>
             .expect(repository.collectionResponse);
     });
 
-    it(`/REST:PUT nfc/action - Got 404 Not Found`, () => 
+    test(`/REST:PUT nfc/action - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .put('/nfc/action')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '7deed772-1dae-42b3-bede-caa6bd1c4907',
-                tagId: '26906b11-0891-4d8f-9c43-7cdbf9b5b704',
-                type: 'TCI',
-                sectionId: '3cd10e86-69d8-4e09-8954-a65feef5f1dc',
+                id: '184387d7-d49f-4780-8ba4-7122b12b914b',
+                tagId: '08997a82-9a50-45fc-8bc3-af1ce88ba4d7',
+                type: 'CMS',
+                sectionId: 'ee0e4035-0779-4649-b24b-b88e8f7a85d4',
                 data: { "foo" : "bar" },
             })
             .expect(404);
     });
 
-    it(`/REST:PUT nfc/action`, () => 
+    test(`/REST:PUT nfc/action`, () => 
     {
         return request(app.getHttpServer())
             .put('/nfc/action')
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'f61efb8a-207b-4376-bb49-81097dab62ef',
-                tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
-                type: 'MULESOFT',
-                sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
+                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                type: 'ZAP',
+                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                 data: { "foo" : "bar" },
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'f61efb8a-207b-4376-bb49-81097dab62ef'));
+            .expect(repository.collectionResponse.find(e => e.id === 'e8172046-483a-4019-80ae-4490f4d43deb'));
     });
 
-    it(`/REST:DELETE nfc/action/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE nfc/action/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .delete('/nfc/action/00000000-0000-0000-0000-000000000000')
@@ -396,15 +402,15 @@ describe('action', () =>
             .expect(404);
     });
 
-    it(`/REST:DELETE nfc/action/{id}`, () => 
+    test(`/REST:DELETE nfc/action/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/nfc/action/f61efb8a-207b-4376-bb49-81097dab62ef')
+            .delete('/nfc/action/e8172046-483a-4019-80ae-4490f4d43deb')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    it(`/GraphQL nfcCreateAction - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL nfcCreateAction - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -437,7 +443,7 @@ describe('action', () =>
             });
     });
 
-    it(`/GraphQL nfcCreateAction`, () => 
+    test(`/GraphQL nfcCreateAction`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -460,21 +466,21 @@ describe('action', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '6a3ba61c-315b-451c-bb89-998fd937a78e',
-                        tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
-                        type: 'CMS',
-                        sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                        id: '51999ad5-caa6-4c93-9d59-e0e3c0eeb837',
+                        tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                        type: 'ZAP',
+                        sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcCreateAction).toHaveProperty('id', '6a3ba61c-315b-451c-bb89-998fd937a78e');
+                expect(res.body.data.nfcCreateAction).toHaveProperty('id', '51999ad5-caa6-4c93-9d59-e0e3c0eeb837');
             });
     });
 
-    it(`/GraphQL nfcPaginateActions`, () => 
+    test(`/GraphQL nfcPaginateActions`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -512,7 +518,7 @@ describe('action', () =>
             });
     });
 
-    it(`/GraphQL nfcFindAction - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcFindAction - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -552,7 +558,7 @@ describe('action', () =>
             });
     });
 
-    it(`/GraphQL nfcFindAction`, () => 
+    test(`/GraphQL nfcFindAction`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -579,18 +585,18 @@ describe('action', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'f61efb8a-207b-4376-bb49-81097dab62ef'
+                            value   : 'e8172046-483a-4019-80ae-4490f4d43deb'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindAction.id).toStrictEqual('f61efb8a-207b-4376-bb49-81097dab62ef');
+                expect(res.body.data.nfcFindAction.id).toStrictEqual('e8172046-483a-4019-80ae-4490f4d43deb');
             });
     });
 
-    it(`/GraphQL nfcFindActionById - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcFindActionById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -623,7 +629,7 @@ describe('action', () =>
             });
     });
 
-    it(`/GraphQL nfcFindActionById`, () => 
+    test(`/GraphQL nfcFindActionById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -645,16 +651,16 @@ describe('action', () =>
                     }
                 `,
                 variables: {
-                    id: 'f61efb8a-207b-4376-bb49-81097dab62ef'
+                    id: 'e8172046-483a-4019-80ae-4490f4d43deb'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindActionById.id).toStrictEqual('f61efb8a-207b-4376-bb49-81097dab62ef');
+                expect(res.body.data.nfcFindActionById.id).toStrictEqual('e8172046-483a-4019-80ae-4490f4d43deb');
             });
     });
 
-    it(`/GraphQL nfcGetActions`, () => 
+    test(`/GraphQL nfcGetActions`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -686,7 +692,7 @@ describe('action', () =>
             });
     });
 
-    it(`/GraphQL nfcUpdateAction - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcUpdateAction - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -710,10 +716,10 @@ describe('action', () =>
                 variables: {
                     payload: {
                         
-                        id: '372a7212-4369-419e-af3b-2603b8bf35d0',
-                        tagId: 'e398ebd7-628d-4525-9673-0d65276ed7d0',
+                        id: '6511753e-0fee-43a5-aef3-770299d4769e',
+                        tagId: '13c0ea68-e077-44d7-965e-cca933fb4f35',
                         type: 'CMS',
-                        sectionId: 'eedd49e0-a93f-4571-ae32-7efa2b782a8f',
+                        sectionId: 'f90cd7aa-b4aa-4a1b-b9d3-f69eab7bd92c',
                         data: { "foo" : "bar" },
                     }
                 }
@@ -726,7 +732,7 @@ describe('action', () =>
             });
     });
 
-    it(`/GraphQL nfcUpdateAction`, () => 
+    test(`/GraphQL nfcUpdateAction`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -750,21 +756,21 @@ describe('action', () =>
                 variables: {
                     payload: {
                         
-                        id: 'f61efb8a-207b-4376-bb49-81097dab62ef',
-                        tagId: 'a4ab133d-6481-43dc-a678-2f2fb61ec42c',
-                        type: 'CMS',
-                        sectionId: '20975c4a-e020-456e-bed7-d00bb4ba058d',
+                        id: 'e8172046-483a-4019-80ae-4490f4d43deb',
+                        tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                        type: 'TCI',
+                        sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcUpdateAction.id).toStrictEqual('f61efb8a-207b-4376-bb49-81097dab62ef');
+                expect(res.body.data.nfcUpdateAction.id).toStrictEqual('e8172046-483a-4019-80ae-4490f4d43deb');
             });
     });
 
-    it(`/GraphQL nfcDeleteActionById - Got 404 Not Found`, () => 
+    test(`/GraphQL nfcDeleteActionById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -797,7 +803,7 @@ describe('action', () =>
             });
     });
 
-    it(`/GraphQL nfcDeleteActionById`, () => 
+    test(`/GraphQL nfcDeleteActionById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -819,12 +825,12 @@ describe('action', () =>
                     }
                 `,
                 variables: {
-                    id: 'f61efb8a-207b-4376-bb49-81097dab62ef'
+                    id: 'e8172046-483a-4019-80ae-4490f4d43deb'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcDeleteActionById.id).toStrictEqual('f61efb8a-207b-4376-bb49-81097dab62ef');
+                expect(res.body.data.nfcDeleteActionById.id).toStrictEqual('e8172046-483a-4019-80ae-4490f4d43deb');
             });
     });
 

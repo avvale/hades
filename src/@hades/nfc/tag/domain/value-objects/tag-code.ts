@@ -12,6 +12,7 @@ export class TagCode extends IntValueObject
             nullable: false,
             undefinable: false,
             maxLength: 10,
+            unsigned: true,
         }, validationRules));
     }
 }

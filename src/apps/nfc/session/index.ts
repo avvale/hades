@@ -1,6 +1,6 @@
 // controllers
 import { CreateSessionController } from './controllers/create-session.controller';
-import { InsertSessionsController } from './controllers/insert-sessions.controller';
+import { CreateSessionsController } from './controllers/create-sessions.controller';
 import { PaginateSessionsController } from './controllers/paginate-sessions.controller';
 import { GetSessionsController } from './controllers/get-sessions.controller';
 import { FindSessionByIdController } from './controllers/find-session-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteSessionsController } from './controllers/delete-sessions.controll
 
 // resolvers
 import { CreateSessionResolver } from './resolvers/create-session.resolver';
-import { InsertSessionsResolver } from './resolvers/insert-sessions.resolver';
+import { CreateSessionsResolver } from './resolvers/create-sessions.resolver';
 import { PaginateSessionsResolver } from './resolvers/paginate-sessions.resolver';
 import { GetSessionsResolver } from './resolvers/get-sessions.resolver';
 import { FindSessionResolver } from './resolvers/find-session.resolver';
@@ -22,7 +22,7 @@ import { DeleteSessionsResolver } from './resolvers/delete-sessions.resolver';
 
 export const NfcSessionControllers = [
     CreateSessionController,
-    InsertSessionsController,
+    CreateSessionsController,
     PaginateSessionsController,
     GetSessionsController,
     FindSessionByIdController,
@@ -34,7 +34,7 @@ export const NfcSessionControllers = [
 
 export const NfcSessionResolvers = [
     CreateSessionResolver,
-    InsertSessionsResolver,
+    CreateSessionsResolver,
     PaginateSessionsResolver,
     GetSessionsResolver,
     FindSessionResolver,

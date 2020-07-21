@@ -6,8 +6,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'ab627b95-5e94-4f7e-b2fd-b29af1ef833c',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'ab63d4ac-a941-4caa-ad47-78a315327f13'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'ip [input here api field description]',
-        example     : 'xguiv46pqmb0set',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '0qafn3ut6g01274'
     })
     ip: string;
     
@@ -26,8 +24,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'tagId [input here api field description]',
-        example     : 'b757a5a3-48c5-415f-bdb7-1d52efc782b1',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '8ae89090-39be-4439-8f58-e523b2ff12f4'
     })
     tagId: string;
     
@@ -36,8 +33,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'uid [input here api field description]',
-        example     : '7db7pedr9u8gh4y42t9pmgr87ywi18xg2ce4si46953nn75sue9grfj656xgzvfi',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 's63gxztokbq8nka2lc42k6uugza59vtbbm49sk5zhofcuxtn47v32ze3f12qw7lv'
     })
     uid: string;
     
@@ -46,8 +42,7 @@ export class SessionDto
     @ApiProperty({
         type        : Number,
         description : 'counter [input here api field description]',
-        example     : 940019,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 184032
     })
     counter: number;
     
@@ -56,8 +51,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'expiredAt [input here api field description]',
-        example     : '2020-07-08 22:45:03',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 11:51:36'
     })
     expiredAt: string;
     
@@ -66,8 +60,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-08 17:08:19',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 11:51:26'
     })
     createdAt: string;
     
@@ -76,8 +69,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-09 00:57:33',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 19:26:08'
     })
     updatedAt: string;
     
@@ -86,8 +78,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-09 06:37:10',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 07:46:44'
     })
     deletedAt: string;
     

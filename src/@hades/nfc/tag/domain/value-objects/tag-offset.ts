@@ -12,6 +12,7 @@ export class TagOffset extends SmallintValueObject
             nullable: true,
             undefinable: true,
             maxLength: 6,
+            unsigned: true,
         }, validationRules));
     }
 }

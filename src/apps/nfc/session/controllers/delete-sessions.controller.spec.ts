@@ -39,19 +39,14 @@ describe('DeleteSessionsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteSessionsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteSessionsController should be defined', () => 
+        test('DeleteSessionsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an sessions deleted', async () => 
+        test('should return an sessions deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(sessions)));
             expect(await controller.main([])).toBe(sessions);

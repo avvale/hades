@@ -37,19 +37,19 @@ describe('PaginateTagsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateTagsResolver should be defined', () => 
+    test('PaginateTagsResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('PaginateTagsResolver should be defined', () => 
+        test('PaginateTagsResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a tags', async () => 
+        test('should return a tags', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tags)));
             expect(await resolver.main([], [])).toBe(tags);

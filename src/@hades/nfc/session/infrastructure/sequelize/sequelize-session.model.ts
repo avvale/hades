@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { NfcTagModel } from '@hades/nfc/tag/infrastructure/sequelize/sequelize-tag.model';
 
@@ -15,7 +15,7 @@ export class NfcSessionModel extends Model<NfcSessionModel>
     id: string;
         
              
-    @Index    
+        
     @Column({
         field: 'ip',
         primaryKey: false,
@@ -40,8 +40,7 @@ export class NfcSessionModel extends Model<NfcSessionModel>
     @BelongsTo(() => NfcTagModel)
     tag: NfcTagModel;
              
-    
-    @Index
+        
     @Column({
         field: 'uid',
         primaryKey: false,
