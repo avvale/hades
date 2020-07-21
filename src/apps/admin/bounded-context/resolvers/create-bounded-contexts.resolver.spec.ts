@@ -5,7 +5,7 @@ import { CreateBoundedContextsResolver } from './create-bounded-contexts.resolve
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { boundedContexts } from '@hades/admin/bounded-context/infrastructure/seeds/bounded-context.seed';
-import { AdminCreateBoundedContextInput } from './../../../../../src/graphql';
+import { AdminCreateBoundedContextInput } from './../../../../graphql';
 
 describe('CreateBoundedContextsResolver', () => 
 {

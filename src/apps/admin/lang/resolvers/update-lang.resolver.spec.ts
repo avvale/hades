@@ -5,7 +5,7 @@ import { UpdateLangResolver } from './update-lang.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
-import { AdminUpdateLangInput } from './../../../../../src/graphql';
+import { AdminUpdateLangInput } from './../../../../graphql';
 
 describe('UpdateLangResolver', () => 
 {

@@ -5,7 +5,7 @@ import { CreateResourceResolver } from './create-resource.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
-import { AdminCreateResourceInput } from './../../../../../src/graphql';
+import { AdminCreateResourceInput } from './../../../../graphql';
 
 describe('CreateResourceResolver', () => 
 {

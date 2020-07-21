@@ -6,7 +6,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'a8355191-017b-41b4-aa48-e167d3051c1d'
+        example     : 'fe84c0ad-e326-4c1d-8775-1ce2a82260bc'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '8w1zkym6rpwq5ld5au8x7vnsylo0vmn1qflyga8rni6dlp6wholscb63bpmhy82u0xolazzei88vnkxrkq4lmyjw5f76ckcdlgyzo5gtun1t7p0mcfr2be8mwpp388pm3qh0658uimp9kvppzuxb21ynnc7454l12z2kguk4uukwc54r48ynf405grvxbuy23xm8fulj10z291jgx393xsp6enrnzgcb9usp1y0dljvapd5ufefeof73fiiv3eg'
+        example     : '52q0pf8x13ty9uuo0zzvgt60x15hbubxrsbvao668djvw4z70xmdzdf5l1sskowcnwnjx0y5jpazvuys12hywry9bntu4i4lfeaznxp0u43xwenv9tfk5w84g9syrhm7wnz9jzqc2age5yxxnzlov51et1hwcyg3ijx64r8otrdisb52blyq14lstfue4fnly4nflsov82te85acrbji4ztx64f8g011fc66tlettuckiomvvpcz9d8i6u7nvfn'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'root [input here api field description]',
-        example     : '58zr0fee7s18mcp7fg9o'
+        example     : 'ks0unn81syebi4bj5f64'
     })
     root: string;
     
@@ -33,7 +33,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
-        example     : 933090
+        example     : 483561
     })
     sort: number;
     
@@ -51,7 +51,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-21 07:39:49'
+        example     : '2020-07-21 22:47:45'
     })
     createdAt: string;
     
@@ -60,7 +60,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-21 13:24:48'
+        example     : '2020-07-21 22:17:49'
     })
     updatedAt: string;
     
@@ -69,7 +69,7 @@ export class BoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-21 00:39:27'
+        example     : '2020-07-21 05:21:23'
     })
     deletedAt: string;
     

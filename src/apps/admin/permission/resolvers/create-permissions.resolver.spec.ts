@@ -5,7 +5,7 @@ import { CreatePermissionsResolver } from './create-permissions.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { permissions } from '@hades/admin/permission/infrastructure/seeds/permission.seed';
-import { AdminCreatePermissionInput } from './../../../../../src/graphql';
+import { AdminCreatePermissionInput } from './../../../../graphql';
 
 describe('CreatePermissionsResolver', () => 
 {
