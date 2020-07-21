@@ -29,20 +29,14 @@ describe('UpdateLangCommandHandler', () =>
         service         = module.get<UpdateLangService>(UpdateLangService);
     });
 
-    it('UpdateLangCommandHandler should be defined', () => 
-    {
-        expect(commandHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateLangCommandHandler should be defined', () => 
+        test('UpdateLangCommandHandler should be defined', () => 
         {
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return an lang created', async () => 
+        test('should return an lang created', async () => 
         {
             expect(await commandHandler.execute(
                 new UpdateLangCommand(
@@ -54,7 +48,7 @@ describe('UpdateLangCommandHandler', () =>
                     langs[0].ietf,
                     langs[0].sort,
                     langs[0].isActive,
-                
+                    
                 )
             )).toBe(undefined);
         });

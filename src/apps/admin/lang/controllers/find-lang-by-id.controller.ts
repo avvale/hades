@@ -15,7 +15,7 @@ export class FindLangByIdController
     ) {}
 
     @Get(':id')
-    @ApiOperation({ summary: 'Find land by id' })
+    @ApiOperation({ summary: 'Find lang by id' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto })
     async main(@Param('id') id: string)
     {

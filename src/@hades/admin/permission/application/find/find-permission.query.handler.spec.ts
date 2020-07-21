@@ -40,20 +40,14 @@ describe('FindPermissionQueryHandler', () =>
         mapper          = new PermissionMapper();
     });
 
-    it('FindPermissionQueryHandler should be defined', () => 
-    {
-        expect(queryHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('FindPermissionQueryHandler should be defined', () => 
+        test('FindPermissionQueryHandler should be defined', () => 
         {
             expect(queryHandler).toBeDefined();
         });
 
-        it('should return an permission founded', async () => 
+        test('should return an permission founded', async () => 
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(

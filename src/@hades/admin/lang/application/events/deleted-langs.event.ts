@@ -4,6 +4,5 @@ export class DeletedLangsEvent
 {
     constructor(
         public readonly langs: DeletedLangEvent[],
-        
     ) {}
 }

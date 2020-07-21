@@ -39,19 +39,14 @@ describe('PaginateResourcesController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateResourcesController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('PaginateResourcesController should be defined', () => 
+        test('PaginateResourcesController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a resources', async () => 
+        test('should return a resources', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(resources)));
             expect(await controller.main([], [])).toBe(resources);

@@ -39,19 +39,14 @@ describe('PaginateLangsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateLangsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('PaginateLangsController should be defined', () => 
+        test('PaginateLangsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a langs', async () => 
+        test('should return a langs', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
             expect(await controller.main([], [])).toBe(langs);

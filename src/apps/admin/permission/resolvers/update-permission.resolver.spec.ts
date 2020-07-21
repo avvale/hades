@@ -38,20 +38,19 @@ describe('UpdatePermissionResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdatePermissionResolver should be defined', () => 
+    test('UpdatePermissionResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('UpdatePermissionResolver should be defined', () => 
+        test('UpdatePermissionResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a permission created', async () => 
+        test('should return a permission created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await resolver.main(<AdminUpdatePermissionInput>permissions[0])).toBe(permissions[0]);

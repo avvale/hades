@@ -37,19 +37,19 @@ describe('PaginateResourcesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateResourcesResolver should be defined', () => 
+    test('PaginateResourcesResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('PaginateResourcesResolver should be defined', () => 
+        test('PaginateResourcesResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a resources', async () => 
+        test('should return a resources', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(resources)));
             expect(await resolver.main([], [])).toBe(resources);

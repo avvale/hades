@@ -1,3 +1,5 @@
+
+
 type AdminTenant
 {
     id: ID!
@@ -45,7 +47,7 @@ type Query
 type Mutation
 {
     adminCreateTenant(payload: AdminCreateTenantInput!): AdminTenant
-    adminInsertTenants(payload: [AdminCreateTenantInput]!): Boolean!
+    adminCreateTenants(payload: [AdminCreateTenantInput]!): Boolean!
     adminUpdateTenant(payload: AdminUpdateTenantInput!): AdminTenant
     adminDeleteTenantById(id: ID!): AdminTenant
     adminDeleteTenants(query:[QueryStatementInput]): [AdminTenant]!

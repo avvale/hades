@@ -39,19 +39,14 @@ describe('DeleteLangsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteLangsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteLangsController should be defined', () => 
+        test('DeleteLangsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an langs deleted', async () => 
+        test('should return an langs deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
             expect(await controller.main([])).toBe(langs);

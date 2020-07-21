@@ -29,20 +29,14 @@ describe('CreatePermissionCommandHandler', () =>
         service         = module.get<CreatePermissionService>(CreatePermissionService);
     });
 
-    it('CreatePermissionCommandHandler should be defined', () => 
-    {
-        expect(commandHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('CreatePermissionCommandHandler should be defined', () => 
+        test('CreatePermissionCommandHandler should be defined', () => 
         {
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return an permission created', async () => 
+        test('should create the values objects and pass them as parameters to the CreatePermissionService', async () => 
         {
             expect(await commandHandler.execute(
                 new CreatePermissionCommand(

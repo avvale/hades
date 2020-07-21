@@ -28,20 +28,14 @@ describe('DeletePermissionsCommandHandler', () =>
         service         = module.get<DeletePermissionsService>(DeletePermissionsService);
     });
 
-    it('DeletePermissionsCommandHandler should be defined', () => 
-    {
-        expect(commandHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('DeletePermissionsCommandHandler should be defined', () => 
+        test('DeletePermissionsCommandHandler should be defined', () => 
         {
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return void', async () => 
+        test('should return void', async () => 
         {
             expect(await commandHandler.execute(
                 new DeletePermissionsCommand()

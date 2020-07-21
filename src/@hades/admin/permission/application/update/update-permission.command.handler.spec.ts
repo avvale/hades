@@ -29,20 +29,14 @@ describe('UpdatePermissionCommandHandler', () =>
         service         = module.get<UpdatePermissionService>(UpdatePermissionService);
     });
 
-    it('UpdatePermissionCommandHandler should be defined', () => 
-    {
-        expect(commandHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('UpdatePermissionCommandHandler should be defined', () => 
+        test('UpdatePermissionCommandHandler should be defined', () => 
         {
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return an permission created', async () => 
+        test('should return an permission created', async () => 
         {
             expect(await commandHandler.execute(
                 new UpdatePermissionCommand(

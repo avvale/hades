@@ -37,19 +37,19 @@ describe('FindLangResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindLangResolver should be defined', () => 
+    test('FindLangResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindLangResolver should be defined', () => 
+        test('FindLangResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a lang', async () => 
+        test('should return a lang', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
             expect(await resolver.main([])).toBe(langs[0]);

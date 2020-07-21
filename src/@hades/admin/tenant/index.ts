@@ -1,6 +1,6 @@
 // commands
 import { CreateTenantCommandHandler } from './application/create/create-tenant.command-handler';
-import { InsertTenantsCommandHandler } from './application/insert/insert-tenants.command-handler';
+import { CreateTenantsCommandHandler } from './application/create/create-tenants.command-handler';
 import { UpdateTenantCommandHandler } from './application/update/update-tenant.command-handler';
 import { DeleteTenantByIdCommandHandler } from './application/delete/delete-tenant-by-id.command-handler';
 import { DeleteTenantsCommandHandler } from './application/delete/delete-tenants.command-handler';
@@ -13,12 +13,14 @@ import { FindTenantByIdQueryHandler } from './application/find/find-tenant-by-id
 
 // events
 import { CreatedTenantEventHandler } from './application/events/created-tenant.event-handler';
+import { CreatedTenantsEventHandler } from './application/events/created-tenants.event-handler';
 import { UpdatedTenantEventHandler } from './application/events/updated-tenant.event-handler';
 import { DeletedTenantEventHandler } from './application/events/deleted-tenant.event-handler';
+import { DeletedTenantsEventHandler } from './application/events/deleted-tenants.event-handler';
 
 // services
 import { CreateTenantService } from './application/create/create-tenant.service';
-import { InsertTenantsService } from './application/insert/insert-tenants.service';
+import { CreateTenantsService } from './application/create/create-tenants.service';
 import { PaginateTenantsService } from './application/paginate/paginate-tenants.service';
 import { GetTenantsService } from './application/get/get-tenants.service';
 import { FindTenantService } from './application/find/find-tenant.service';
@@ -41,7 +43,7 @@ export { TenantSagas } from './application/sagas/tenant.sagas';
 export const AdminTenantHandlers = [
     // commands
     CreateTenantCommandHandler,
-    InsertTenantsCommandHandler,
+    CreateTenantsCommandHandler,
     UpdateTenantCommandHandler,
     DeleteTenantByIdCommandHandler,
     DeleteTenantsCommandHandler,
@@ -54,13 +56,15 @@ export const AdminTenantHandlers = [
 
     // events
     CreatedTenantEventHandler,
+    CreatedTenantsEventHandler,
     UpdatedTenantEventHandler,
     DeletedTenantEventHandler,
+    DeletedTenantsEventHandler,
 ];
 
 export const AdminTenantServices = [
     CreateTenantService,
-    InsertTenantsService,
+    CreateTenantsService,
     PaginateTenantsService,
     GetTenantsService,
     FindTenantService,

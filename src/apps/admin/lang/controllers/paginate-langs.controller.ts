@@ -1,5 +1,6 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
+import { LangDto } from './../dto/lang.dto';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
@@ -14,11 +15,10 @@ export class PaginateLangsController
     constructor(
         private readonly queryBus: IQueryBus
     ) {}
-    // , count: number, rows: LangDto
+
     @Get()
     @ApiOperation({ summary: 'Paginate langs' })
     @ApiOkResponse({ description: 'The records has been paginated successfully.', type: Pagination })
-    @ApiBody({ type: [QueryStatementInput] })
     @ApiQuery({ name: 'queryStatements', type: [QueryStatementInput] })
     @ApiQuery({ name: 'constraint', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[], @Body('constraint') constraint: QueryStatementInput[])

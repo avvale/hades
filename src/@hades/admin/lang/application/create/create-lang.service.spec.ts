@@ -50,12 +50,12 @@ describe('CreateLangService', () =>
 
     describe('main', () => 
     {
-        it('CreateLangService should be defined', () => 
+        test('CreateLangService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should return an lang created', async () => 
+        test('should create a lang and emit event', async () => 
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
@@ -67,6 +67,7 @@ describe('CreateLangService', () =>
                 new LangIetf(langs[0].ietf),
                 new LangSort(langs[0].sort),
                 new LangIsActive(langs[0].isActive),
+                
             )).toBe(undefined);
         });
     });

@@ -29,20 +29,14 @@ describe('DeletePermissionByIdCommandHandler', () =>
         service         = module.get<DeletePermissionByIdService>(DeletePermissionByIdService);
     });
 
-    it('DeletePermissionByIdCommandHandler should be defined', () => 
-    {
-        expect(commandHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('DeletePermissionByIdCommandHandler should be defined', () => 
+        test('DeletePermissionByIdCommandHandler should be defined', () => 
         {
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return void', async () => 
+        test('should create the value object id and pass them as parameters to the DeletePermissionByIdService', async () => 
         {
             expect(await commandHandler.execute(
                 new DeletePermissionByIdCommand(

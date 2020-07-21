@@ -2,39 +2,49 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateResourceDto 
 {   
-    @ApiProperty({
-        type        : String,
-        description : 'id [input here api field description]',
-        example     : '2c26fca4-536b-4ede-a8bb-4a6f0ab83d92'
-    })
-    id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'boundedContextId [input here api field description]',
-        example     : 'ef62f526-feac-4e8c-a9c9-9ed906bb3891'
-    })
-    boundedContextId: string;
+        @ApiProperty({
+            type        : String,
+            description : 'id [input here api field description]',
+            example     : 'a016b6d2-437a-46ba-92dc-d42c891ba04c'
+        })
+        id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'name [input here api field description]',
-        example     : 'blvypd418a2l6kxo8coc66juojmhtkdicapkz1mfi59745jjvurt0tlyt7vtli20ywina7tusy9c3w87r6f4ig9eewgapt7r5lz2nfbufpq48wfo0tvrx38vkt52lqyhtomxu1b0zuhm09m9bxx3xhxdn0unk1zbzsjyrllklx0utog63q7frvtanv7xs95g0gj0m32iroloefi4k7kwmdorc2w0ea6zrxtdj2wtsro6easlnz1p63x28t21lij'
-    })
-    name: string;
     
-    @ApiProperty({
-        type        : Boolean,
-        description : 'hasCustomFields [input here api field description]',
-        example     : false
-    })
-    hasCustomFields: boolean;
     
-    @ApiProperty({
-        type        : Boolean,
-        description : 'hasAttachments [input here api field description]',
-        example     : true
-    })
-    hasAttachments: boolean;
+        @ApiProperty({
+            type        : String,
+            description : 'boundedContextId [input here api field description]',
+            example     : 'c466f698-71db-4cb2-ae46-08604fc10fe0'
+        })
+        boundedContextId: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'name [input here api field description]',
+            example     : 'tf3pjyeyh6aej4r3ungcf5er5uuspnrzmz0c2uqgdgdla1zkik3qoo9wgqk9bicg8ar9iv2l1mef7my73vk5qehmm7hgbl2hem7pw8pu2fxhswxdikxkir2qhkfizwdkw1ib8z81qz456y23tqobt0l0zif9hmwbg3pd6nu6xjcgia2h1d0dsvreo9rzm075c9ltmte8lec4tsidah1vl5q1bvx4cgtt8rp1ei5itn66wo755zbaygg56qx6zzg'
+        })
+        name: string;
+    
+    
+    
+        @ApiProperty({
+            type        : Boolean,
+            description : 'hasCustomFields [input here api field description]',
+            example     : true
+        })
+        hasCustomFields: boolean;
+    
+    
+    
+        @ApiProperty({
+            type        : Boolean,
+            description : 'hasAttachments [input here api field description]',
+            example     : true
+        })
+        hasAttachments: boolean;
+    
     
 }

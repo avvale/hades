@@ -29,20 +29,14 @@ describe('DeleteLangByIdCommandHandler', () =>
         service         = module.get<DeleteLangByIdService>(DeleteLangByIdService);
     });
 
-    it('DeleteLangByIdCommandHandler should be defined', () => 
-    {
-        expect(commandHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('DeleteLangByIdCommandHandler should be defined', () => 
+        test('DeleteLangByIdCommandHandler should be defined', () => 
         {
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return void', async () => 
+        test('should create the value object id and pass them as parameters to the DeleteLangByIdService', async () => 
         {
             expect(await commandHandler.execute(
                 new DeleteLangByIdCommand(

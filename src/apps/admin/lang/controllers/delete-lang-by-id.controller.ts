@@ -18,7 +18,7 @@ export class DeleteLangByIdController
     ) {}
 
     @Delete(':id')
-    @ApiOperation({ summary: 'Delete lang entity by id' })
+    @ApiOperation({ summary: 'Delete lang by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: LangDto })
     async main(@Param('id') id: string)
     {

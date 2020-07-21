@@ -7,7 +7,6 @@ import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
 import { LangMapper } from '@hades/admin/lang/domain/lang.mapper';
 import { Command } from '@hades/shared/domain/persistence/sql-statement-input';
 import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response';
-
 import { PaginateLangsQuery } from './paginate-langs.query';
 import { PaginateLangsService } from './paginate-langs.service';
 
@@ -43,20 +42,14 @@ describe('PaginateLangsQueryHandler', () =>
         mapper          = new LangMapper();
     });
 
-    it('PaginateLangsQueryHandler should be defined', () => 
-    {
-        expect(queryHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('PaginateLangsQueryHandler should be defined', () => 
+        test('PaginateLangsQueryHandler should be defined', () => 
         {
             expect(queryHandler).toBeDefined();
         });
 
-        it('should return an langs paginated', async () => 
+        test('should return an langs paginated', async () => 
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {

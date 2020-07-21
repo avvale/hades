@@ -42,20 +42,14 @@ describe('PaginatePermissionsQueryHandler', () =>
         mapper          = new PermissionMapper();
     });
 
-    it('PaginatePermissionsQueryHandler should be defined', () => 
-    {
-        expect(queryHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('PaginatePermissionsQueryHandler should be defined', () => 
+        test('PaginatePermissionsQueryHandler should be defined', () => 
         {
             expect(queryHandler).toBeDefined();
         });
 
-        it('should return an permissions paginated', async () => 
+        test('should return an permissions paginated', async () => 
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
                 {

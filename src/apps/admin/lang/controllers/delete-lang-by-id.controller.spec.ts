@@ -39,19 +39,14 @@ describe('DeleteLangByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteLangByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteLangByIdController should be defined', () => 
+        test('DeleteLangByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an lang deleted', async () => 
+        test('should return an lang deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
             expect(await controller.main(langs[0].id)).toBe(langs[0]);

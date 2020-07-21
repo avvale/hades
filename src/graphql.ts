@@ -157,27 +157,27 @@ export interface IQuery {
 
 export interface IMutation {
     adminCreateBoundedContext(payload: AdminCreateBoundedContextInput): AdminBoundedContext | Promise<AdminBoundedContext>;
-    adminInsertBoundedContexts(payload: AdminCreateBoundedContextInput[]): boolean | Promise<boolean>;
+    adminCreateBoundedContexts(payload: AdminCreateBoundedContextInput[]): boolean | Promise<boolean>;
     adminUpdateBoundedContext(payload: AdminUpdateBoundedContextInput): AdminBoundedContext | Promise<AdminBoundedContext>;
     adminDeleteBoundedContextById(id: string): AdminBoundedContext | Promise<AdminBoundedContext>;
     adminDeleteBoundedContexts(query?: QueryStatementInput[]): AdminBoundedContext[] | Promise<AdminBoundedContext[]>;
     adminCreateLang(payload: AdminCreateLangInput): AdminLang | Promise<AdminLang>;
-    adminInsertLangs(payload: AdminCreateLangInput[]): boolean | Promise<boolean>;
+    adminCreateLangs(payload: AdminCreateLangInput[]): boolean | Promise<boolean>;
     adminUpdateLang(payload: AdminUpdateLangInput): AdminLang | Promise<AdminLang>;
     adminDeleteLangById(id: string): AdminLang | Promise<AdminLang>;
     adminDeleteLangs(query?: QueryStatementInput[]): AdminLang[] | Promise<AdminLang[]>;
     adminCreatePermission(payload: AdminCreatePermissionInput): AdminPermission | Promise<AdminPermission>;
-    adminInsertPermissions(payload: AdminCreatePermissionInput[]): boolean | Promise<boolean>;
+    adminCreatePermissions(payload: AdminCreatePermissionInput[]): boolean | Promise<boolean>;
     adminUpdatePermission(payload: AdminUpdatePermissionInput): AdminPermission | Promise<AdminPermission>;
     adminDeletePermissionById(id: string): AdminPermission | Promise<AdminPermission>;
     adminDeletePermissions(query?: QueryStatementInput[]): AdminPermission[] | Promise<AdminPermission[]>;
     adminCreateResource(payload: AdminCreateResourceInput): AdminResource | Promise<AdminResource>;
-    adminInsertResources(payload: AdminCreateResourceInput[]): boolean | Promise<boolean>;
+    adminCreateResources(payload: AdminCreateResourceInput[]): boolean | Promise<boolean>;
     adminUpdateResource(payload: AdminUpdateResourceInput): AdminResource | Promise<AdminResource>;
     adminDeleteResourceById(id: string): AdminResource | Promise<AdminResource>;
     adminDeleteResources(query?: QueryStatementInput[]): AdminResource[] | Promise<AdminResource[]>;
     adminCreateTenant(payload: AdminCreateTenantInput): AdminTenant | Promise<AdminTenant>;
-    adminInsertTenants(payload: AdminCreateTenantInput[]): boolean | Promise<boolean>;
+    adminCreateTenants(payload: AdminCreateTenantInput[]): boolean | Promise<boolean>;
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;

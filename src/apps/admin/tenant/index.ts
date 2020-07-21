@@ -1,6 +1,6 @@
 // controllers
 import { CreateTenantController } from './controllers/create-tenant.controller';
-import { InsertTenantsController } from './controllers/insert-tenants.controller';
+import { CreateTenantsController } from './controllers/create-tenants.controller';
 import { PaginateTenantsController } from './controllers/paginate-tenants.controller';
 import { GetTenantsController } from './controllers/get-tenants.controller';
 import { FindTenantByIdController } from './controllers/find-tenant-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteTenantsController } from './controllers/delete-tenants.controller
 
 // resolvers
 import { CreateTenantResolver } from './resolvers/create-tenant.resolver';
-import { InsertTenantsResolver } from './resolvers/insert-tenants.resolver';
+import { CreateTenantsResolver } from './resolvers/create-tenants.resolver';
 import { PaginateTenantsResolver } from './resolvers/paginate-tenants.resolver';
 import { GetTenantsResolver } from './resolvers/get-tenants.resolver';
 import { FindTenantResolver } from './resolvers/find-tenant.resolver';
@@ -22,7 +22,7 @@ import { DeleteTenantsResolver } from './resolvers/delete-tenants.resolver';
 
 export const AdminTenantControllers = [
     CreateTenantController,
-    InsertTenantsController,
+    CreateTenantsController,
     PaginateTenantsController,
     GetTenantsController,
     FindTenantByIdController,
@@ -34,7 +34,7 @@ export const AdminTenantControllers = [
 
 export const AdminTenantResolvers = [
     CreateTenantResolver,
-    InsertTenantsResolver,
+    CreateTenantsResolver,
     PaginateTenantsResolver,
     GetTenantsResolver,
     FindTenantResolver,

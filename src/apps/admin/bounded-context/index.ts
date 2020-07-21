@@ -1,6 +1,6 @@
 // controllers
 import { CreateBoundedContextController } from './controllers/create-bounded-context.controller';
-import { InsertBoundedContextsController } from './controllers/insert-bounded-contexts.controller';
+import { CreateBoundedContextsController } from './controllers/create-bounded-contexts.controller';
 import { PaginateBoundedContextsController } from './controllers/paginate-bounded-contexts.controller';
 import { GetBoundedContextsController } from './controllers/get-bounded-contexts.controller';
 import { FindBoundedContextByIdController } from './controllers/find-bounded-context-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteBoundedContextsController } from './controllers/delete-bounded-co
 
 // resolvers
 import { CreateBoundedContextResolver } from './resolvers/create-bounded-context.resolver';
-import { InsertBoundedContextsResolver } from './resolvers/insert-bounded-contexts.resolver';
+import { CreateBoundedContextsResolver } from './resolvers/create-bounded-contexts.resolver';
 import { PaginateBoundedContextsResolver } from './resolvers/paginate-bounded-contexts.resolver';
 import { GetBoundedContextsResolver } from './resolvers/get-bounded-contexts.resolver';
 import { FindBoundedContextResolver } from './resolvers/find-bounded-context.resolver';
@@ -22,7 +22,7 @@ import { DeleteBoundedContextsResolver } from './resolvers/delete-bounded-contex
 
 export const AdminBoundedContextControllers = [
     CreateBoundedContextController,
-    InsertBoundedContextsController,
+    CreateBoundedContextsController,
     PaginateBoundedContextsController,
     GetBoundedContextsController,
     FindBoundedContextByIdController,
@@ -34,7 +34,7 @@ export const AdminBoundedContextControllers = [
 
 export const AdminBoundedContextResolvers = [
     CreateBoundedContextResolver,
-    InsertBoundedContextsResolver,
+    CreateBoundedContextsResolver,
     PaginateBoundedContextsResolver,
     GetBoundedContextsResolver,
     FindBoundedContextResolver,

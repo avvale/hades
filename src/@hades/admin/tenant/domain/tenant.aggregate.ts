@@ -43,7 +43,7 @@ export class AdminTenant extends AggregateRoot
         
     }
 
-    static register (id: TenantId,name: TenantName,code: TenantCode,logo: TenantLogo,isActive: TenantIsActive,data: TenantData,createdAt: TenantCreatedAt,updatedAt: TenantUpdatedAt,deletedAt: TenantDeletedAt,): AdminTenant
+    static register (id: TenantId, name: TenantName, code: TenantCode, logo: TenantLogo, isActive: TenantIsActive, data: TenantData, createdAt: TenantCreatedAt, updatedAt: TenantUpdatedAt, deletedAt: TenantDeletedAt, ): AdminTenant
     {
         return new AdminTenant(id, name, code, logo, isActive, data, createdAt, updatedAt, deletedAt, );
     }

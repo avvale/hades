@@ -19,9 +19,9 @@ export class DeleteLangsController
     ) {}
 
     @Delete()
-    @ApiOperation({ summary: 'Delete lang in batch according to query' })
+    @ApiOperation({ summary: 'Delete langs in batch according to query' })
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [LangDto] })
-    @ApiBody({type: [QueryStatementInput]})
+    @ApiBody({ type: [QueryStatementInput] })
     @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {

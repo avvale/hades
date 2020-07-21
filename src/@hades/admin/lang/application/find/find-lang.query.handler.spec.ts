@@ -5,7 +5,6 @@ import { FindLangQueryHandler } from './find-lang.query-handler';
 import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-lang.repository';
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
 import { LangMapper } from '@hades/admin/lang/domain/lang.mapper';
-
 import { FindLangQuery } from './find-lang.query';
 import { FindLangService } from './find-lang.service';
 
@@ -41,20 +40,14 @@ describe('FindLangQueryHandler', () =>
         mapper          = new LangMapper();
     });
 
-    it('FindLangQueryHandler should be defined', () => 
-    {
-        expect(queryHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('FindLangQueryHandler should be defined', () => 
+        test('FindLangQueryHandler should be defined', () => 
         {
             expect(queryHandler).toBeDefined();
         });
 
-        it('should return an lang founded', async () => 
+        test('should return an lang founded', async () => 
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
