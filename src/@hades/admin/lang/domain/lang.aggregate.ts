@@ -49,7 +49,7 @@ export class AdminLang extends AggregateRoot
         
     }
 
-    static register (id: LangId,name: LangName,image: LangImage,iso6392: LangIso6392,iso6393: LangIso6393,ietf: LangIetf,sort: LangSort,isActive: LangIsActive,createdAt: LangCreatedAt,updatedAt: LangUpdatedAt,deletedAt: LangDeletedAt,): AdminLang
+    static register (id: LangId, name: LangName, image: LangImage, iso6392: LangIso6392, iso6393: LangIso6393, ietf: LangIetf, sort: LangSort, isActive: LangIsActive, createdAt: LangCreatedAt, updatedAt: LangUpdatedAt, deletedAt: LangDeletedAt, ): AdminLang
     {
         return new AdminLang(id, name, image, iso6392, iso6393, ietf, sort, isActive, createdAt, updatedAt, deletedAt, );
     }

@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { GetBoundedContextsQuery } from '@hades/admin/bounded-context/application/get/get-bounded-contexts.query';
 
 @ApiTags('[admin] bounded-context')
-@ApiOkResponse({ description: 'The records has been found successfully.', type: BoundedContextDto})
 @Controller('admin/bounded-contexts')
 export class GetBoundedContextsController 
 {
@@ -18,6 +17,9 @@ export class GetBoundedContextsController
 
     @Get()
     @ApiOperation({ summary: 'Find bounded-contexts according to query' })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [BoundedContextDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new GetBoundedContextsQuery(queryStatements));   

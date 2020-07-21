@@ -10,7 +10,6 @@ import { FindTenantByIdQuery } from '@hades/admin/tenant/application/find/find-t
 import { CreateTenantCommand } from '@hades/admin/tenant/application/create/create-tenant.command';
 
 @ApiTags('[admin] tenant')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: TenantDto})
 @Controller('admin/tenant')
 export class CreateTenantController 
 {
@@ -21,6 +20,7 @@ export class CreateTenantController
 
     @Post()
     @ApiOperation({ summary: 'Create tenant' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: TenantDto })
     async main(@Body() payload: CreateTenantDto)
     {
         await this.commandBus.dispatch(new CreateTenantCommand(

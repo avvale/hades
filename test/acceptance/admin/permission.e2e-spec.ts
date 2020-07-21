@@ -9,6 +9,8 @@ import { Command, Operator } from '@hades/shared/domain/persistence/sql-statemen
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
+const importForeignModules = [];
+
 describe('permission', () => 
 {
     let app: INestApplication;
@@ -18,6 +20,7 @@ describe('permission', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
+                    ...importForeignModules,
                     AdminModule,
                     GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
@@ -45,7 +48,7 @@ describe('permission', () =>
         await app.init();
     });
 
-    it(`/REST:POST admin/permission - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST admin/permission - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
@@ -55,15 +58,15 @@ describe('permission', () =>
     });
 
     
-    it(`/REST:POST admin/permission - Got 400 Conflict, PermissionId property can not to be null`, () => 
+    test(`/REST:POST admin/permission - Got 400 Conflict, PermissionId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                boundedContextId: '4c99962e-9e84-4d89-bee0-08f27d46035b',
-                name: '1tmg4q6sl5fdf0534l9u0vgu1m3acfm00irx5gevve5mn7apnhnfcmxzaignwsww9v5mlj0rtkooaa8cr014ov6wzp9ldw12l9bhiutds2y4fynnk4i37xxc9kwwgciu69fqcux02ifnjh5sm037vokx7rya1bb1let3ro7hlxz7wfnqgdzb4iw1c7djdiv1dp0eis7rxe9jemtf4bv9binr4r9zn3ut4j24jx8v4wqx8cyohr3nbi9lqfvk0ys',
+                boundedContextId: '6efb92e9-069c-4c46-96bf-e96c5beb0709',
+                name: '0semecvxw23bl2qck4plkywsoltv8cb082dn6jjtxkm94lzqr4fg5u7b91084kn7dl8293ejm9xoaxxjq2vcv2t94hgx57seaik9e3r3zvd5g5eav2a92kb908v018v44zmv6zhacmchwkik2yxam6ks6u8pg61vhlizsk9gar3pu5fgr74qdbtfvxv1ralxel2v15e85rj2zriu4rthmhelx5wwn8a207euenqyemjoq4135dsswo3p2t0z704',
             })
             .expect(400)
             .then(res => {
@@ -71,15 +74,15 @@ describe('permission', () =>
             });
     });
 
-    it(`/REST:POST admin/permission - Got 400 Conflict, PermissionId property can not to be undefined`, () => 
+    test(`/REST:POST admin/permission - Got 400 Conflict, PermissionId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
             .set('Accept', 'application/json')
             .send({
                 
-                boundedContextId: '4c99962e-9e84-4d89-bee0-08f27d46035b',
-                name: 'jzxuonp7xy7raav1udlh419vc3neh03j7ygp4dmulxy3m48ov676aflos8780dchnkklo4cbyfe77f7kbnf3w0c5x6kbuvenxopqezem8ttevzcoe0wzm73vu906e4ycqgq6tctvxfdr128phdaed7jmoswbywfkfrqa20a6jml06r7g0a1cujmh8sca8z8qmpkqmr9yquid8v1xkxha2xyfoxw6iuylpqo3fyke00n0opanmeipab8i1v176j7',
+                boundedContextId: '6efb92e9-069c-4c46-96bf-e96c5beb0709',
+                name: 'ii1aqr7vzdwj81dv2bse2w24s7pm19gftg39dxkntf2oe3k8xjqxiu2rpj7bja6ywny2wq6zjsmu8htitof4dwxu8eq9eokuj7782d8gc779qf3bq5j7jpl1eotr65cqbmhplardst1hu7atj5q2o7un932sdk2tfwswt2w60zjeijiyaskmqukhylue8xtepsktz04mnbmv0u4462yqhc8xzux2r7k2to59isv501dkw6rctau3n8ccgesyne4',
             })
             .expect(400)
             .then(res => {
@@ -87,15 +90,15 @@ describe('permission', () =>
             });
     });
     
-    it(`/REST:POST admin/permission - Got 400 Conflict, PermissionBoundedContextId property can not to be null`, () => 
+    test(`/REST:POST admin/permission - Got 400 Conflict, PermissionBoundedContextId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '747bfcad-c6a3-4118-893e-bfc04c8b5929',
+                id: '26cd0504-1f0f-4132-a209-c0939984de3d',
                 boundedContextId: null,
-                name: 'm4mrrlp6zg017hq7v9o0s5ew6sffkgp3vn6zi9chkczbf5lh4er5y7rm99bc9c47xhdtbfqibxrg5767f9uqt5xu9ptxlav8gvwq70epws0rwbsrb7udxnp2ao71gn1vskn88vmkklnn2o7qi99byrfsj6ci3w9lx810ulxzprtho6hqiqa8apmxyup78ugtzr5n4htgdno89951ezu3j0912rdf4svhiqc51j3v2389j5kxh9hr2imyvg6z4aa',
+                name: 'dbrrplg53bdqbhvngnrepx2ua4fnhgkxpdhakwi46ighr7qmsvhzslzsasow09eski9ju44rpdg71if53delxx3j5s9jsd5mykcvhyij2u9sk0dxsbnwbpik5b546z3fge0kw4gond3li1h2xpswbt6q7cpgb4w3xgiwwvz86xktw2z4tfz8vebnk6dsdiviaracm7lwgqex41ncmsb6t7bmggjgwd2lmi0gl1jy6315lnnkcp71da3rhiwebco',
             })
             .expect(400)
             .then(res => {
@@ -103,15 +106,15 @@ describe('permission', () =>
             });
     });
 
-    it(`/REST:POST admin/permission - Got 400 Conflict, PermissionBoundedContextId property can not to be undefined`, () => 
+    test(`/REST:POST admin/permission - Got 400 Conflict, PermissionBoundedContextId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '747bfcad-c6a3-4118-893e-bfc04c8b5929',
+                id: '26cd0504-1f0f-4132-a209-c0939984de3d',
                 
-                name: 'gply8honadk840mamm73067yv0vqb69jso385yqb04kx46ho7515syy2jwlxh85apqrh3o3j4j7am7fjb5krswt5epppj23km0j1zhvkkwjv5u05fn8rd5cmgw0es2gzukq7k2vsp798izpwhseyczkyospskpnoffzf9codxnol5n8v94dhdovexam9grw20s6b3isoeoyk1nbwmcg5t7pogq7gl65ujk6d62sq9ggrchgc0y04o8zznop4ced',
+                name: '87gq68l8t8h5kl0loplcuasthdredvg30tqmumrf2v2v6lyd6oq6wtjvo58r78dr2xcnzqipw0rr5076smxtmtc7o7qgicxkkz9vdrhwc6xa2g10jyey9gt884ifjgyzre1aknx7c5za28jjgal0zzjpnqa10aowhd3fbk6x3pkmwyufs08u0uca8uh175329pz94h6yd4mz12m74sx5lyxjqc4iby0giv4aiurxaicq2g3hn7lamkdtlh3xvp6',
             })
             .expect(400)
             .then(res => {
@@ -119,14 +122,14 @@ describe('permission', () =>
             });
     });
     
-    it(`/REST:POST admin/permission - Got 400 Conflict, PermissionName property can not to be null`, () => 
+    test(`/REST:POST admin/permission - Got 400 Conflict, PermissionName property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '747bfcad-c6a3-4118-893e-bfc04c8b5929',
-                boundedContextId: '4c99962e-9e84-4d89-bee0-08f27d46035b',
+                id: '26cd0504-1f0f-4132-a209-c0939984de3d',
+                boundedContextId: '6efb92e9-069c-4c46-96bf-e96c5beb0709',
                 name: null,
             })
             .expect(400)
@@ -135,14 +138,14 @@ describe('permission', () =>
             });
     });
 
-    it(`/REST:POST admin/permission - Got 400 Conflict, PermissionName property can not to be undefined`, () => 
+    test(`/REST:POST admin/permission - Got 400 Conflict, PermissionName property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '747bfcad-c6a3-4118-893e-bfc04c8b5929',
-                boundedContextId: '4c99962e-9e84-4d89-bee0-08f27d46035b',
+                id: '26cd0504-1f0f-4132-a209-c0939984de3d',
+                boundedContextId: '6efb92e9-069c-4c46-96bf-e96c5beb0709',
                 
             })
             .expect(400)
@@ -153,15 +156,15 @@ describe('permission', () =>
     
 
     
-    it(`/REST:POST admin/permission - Got 400 Conflict, PermissionId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST admin/permission - Got 400 Conflict, PermissionId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
             .set('Accept', 'application/json')
             .send({
-                id: 'lthbfrnm2vj9c65htzpksa1mpv08c54gv8dg2',
-                boundedContextId: '4c99962e-9e84-4d89-bee0-08f27d46035b',
-                name: '3kfhx0o3lvj226id49lm5elvu0z2zxuxhwma5clplcyye1pxag1jl26y9sp9ww5q3vtkzp3rs32qdb8u1ewgjvxoooekiy3psw7shbzvvce8fl14gabn29s4dizz2pewb7a2etewehvwth1763g0l4qbo2pwumc6c8xk7un3yv29c014vfpkutnlm50j83qo0rafxwyc1fv8sz4qdz4wezw08l0i07mjampt1z3epmngjd94sdtmatqdivpp6q1',
+                id: 'lyzpdr6n335ru7vwebcrvbpfk89nwrgto38bg',
+                boundedContextId: '6efb92e9-069c-4c46-96bf-e96c5beb0709',
+                name: 'dnlefpdyffsulxi0s93aktmm5c7x7n07wr6c06utijdq0pl82gzdnverrcxi8e1pp7hld9x8s87oz7cxfkra86k9rlnzq1rjtz0342q85f1qk9gcbjyyfhr5z11niqxidvxt4y3ym3tb3foxvucv32kn0tp244tmqsrgc6i3fwhf39xqvygkbvc1obth539xndwmhlqin7qb24w6gbcci81d95kov05jvqj22wdbiphosi3r1bhyu6jerqythx7',
             })
             .expect(400)
             .then(res => {
@@ -169,15 +172,15 @@ describe('permission', () =>
             });
     });
     
-    it(`/REST:POST admin/permission - Got 400 Conflict, PermissionBoundedContextId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST admin/permission - Got 400 Conflict, PermissionBoundedContextId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '747bfcad-c6a3-4118-893e-bfc04c8b5929',
-                boundedContextId: '3stjrsc17d8juvn2aosm543zehv4cvinog0wo',
-                name: 'judg5g1bwdzhosif6lrojix10b87499viebsofsscfh48m1jlkt7rhxn9mdkt9h94gog3gp3wclm5dojer11pb4jagmozj5v7szsdga3adqcn3oesjmnimo7wzqad31pk6tm5akz296hdzdw46davu47k5pkswo4c6e1ibhwh9h69v8gdult15mzax7au3ui3uwivp7sdbhojpcuw9ya6uwg0p2iyiz2y0errd2txcsocl2t3opfjnt91zbbur8',
+                id: '26cd0504-1f0f-4132-a209-c0939984de3d',
+                boundedContextId: 'r9yhyuearc4h0tvs4fl912zoru9e1mhdy8hak',
+                name: 'gzt2didvmmk5jr251tlrd12r4bvyxhsb0bt9voydk44v9jncy9m22wtedh2pjk34av1sen8gch1fwl9huonoc8th1d6exa1tf009s8wqie2uzbjcfw7b5d7t37txeu0jqy5x6iiv509lcmvj5ijiq2rraitc216hmrze8tznbxmeq97tjzc5loixk09f3a0dpq0yhcumr6sgyyte12qwzk3qxasfpltmn53c3gh8j3u5hlpvg2lzrql1ip2vtlv',
             })
             .expect(400)
             .then(res => {
@@ -187,15 +190,15 @@ describe('permission', () =>
     
 
     
-    it(`/REST:POST admin/permission - Got 400 Conflict, PermissionName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST admin/permission - Got 400 Conflict, PermissionName is too large, has a maximum length of 255`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '747bfcad-c6a3-4118-893e-bfc04c8b5929',
-                boundedContextId: '4c99962e-9e84-4d89-bee0-08f27d46035b',
-                name: '3eoevjja2gze0ghqxk8s9m085mgi0xy1c0ynn5wny2bwruu09ywshyfzk0nrwqds9ylzhz9693bw6kf7p28x5ojyith3fk6oxmgz93h9q23x6mqeq026ami81wpbkbu3rx7s999a7xum1c675g50r9h0h1ssy5n68eemb0epa7p0irvsadktqxobxr331qe18o9x7jd7wmgcwjefon7xz93dwuikg9fdvvqbq9qvbgi1ncjuhpg8zni44qtutvey',
+                id: '26cd0504-1f0f-4132-a209-c0939984de3d',
+                boundedContextId: '6efb92e9-069c-4c46-96bf-e96c5beb0709',
+                name: 'cz59uds3we7l7s987o7xpfmbtp3tih4d5uzjwh99nfjn5m7rjmbajp0m13iiwbx1wgmuntt785embzovdfemb62f2kcr4qz1swggwjwynng5oxd0yacdv1md21hiozrm6zkoup6f3pp6pv8lpob1bej7ep55m9dwmnwnpg0pi77k4u76mzlijrn4ngbewjb30l21dk9qtbudmimzrgej0kczzgidifkt47c282onrpksyu3a2f75omytgzzh3lix',
             })
             .expect(400)
             .then(res => {
@@ -207,27 +210,29 @@ describe('permission', () =>
     
 
     
-
+    
     
 
     
 
     
 
-    it(`/REST:POST admin/permission`, () => 
+    
+
+    test(`/REST:POST admin/permission`, () => 
     {
         return request(app.getHttpServer())
             .post('/admin/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '747bfcad-c6a3-4118-893e-bfc04c8b5929',
-                boundedContextId: '4c99962e-9e84-4d89-bee0-08f27d46035b',
-                name: '7p3zu06be67ojop7928u8vqh4b3zhqd5kf4rlvz1e7s1krk0hwwyqc5moqtupt8buwstb30n9wxwnz57l03xaonfk91xvl198pfkitbflcn8ojp9znq91v5wxl88rsfd8exxcmudm6iagy6mla068f588jewpiee008fbar1bnchfrogshbrstj3ygjtthp3enz5mbiesw6cln7aspw8euwcy4rymgmo6psup2pxiyb9ax1xl0p058gh7sq3kcs',
+                id: '26cd0504-1f0f-4132-a209-c0939984de3d',
+                boundedContextId: '6efb92e9-069c-4c46-96bf-e96c5beb0709',
+                name: '0o9ppcyr3ht4j2xq2ykuz35tho39x9m6ogqbxro33q4nx5h2rewegsvcp4josndlhfebg6y3grz4mzydwxqbsp107t5agn2uzv6la7bcdep2eo1nzarb5wf2xls59g8b6reknsgiadz795zq4o0qwa4gcthnmyyn4ebjgvzjfn6ypt84sb5c1z2c5bhyiin4q2sjtgnfxj239jwk8a31l8d280yol88jw3dwikfv1hzs2ql2oahftbaofteubda',
             })
             .expect(201);
     });
 
-    it(`/REST:GET admin/permissions/paginate`, () => 
+    test(`/REST:GET admin/permissions/paginate`, () => 
     {
         return request(app.getHttpServer())
             .get('/admin/permissions/paginate')
@@ -252,7 +257,7 @@ describe('permission', () =>
             });
     });
 
-    it(`/REST:GET admin/permission - Got 404 Not Found`, () => 
+    test(`/REST:GET admin/permission - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/admin/permission')
@@ -270,7 +275,7 @@ describe('permission', () =>
             .expect(404);
     });
 
-    it(`/REST:GET admin/permission`, () => 
+    test(`/REST:GET admin/permission`, () => 
     {
         return request(app.getHttpServer())
             .get('/admin/permission')
@@ -281,15 +286,15 @@ describe('permission', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '747bfcad-c6a3-4118-893e-bfc04c8b5929'
+                        value   : '26cd0504-1f0f-4132-a209-c0939984de3d'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '747bfcad-c6a3-4118-893e-bfc04c8b5929'));
+            .expect(repository.collectionResponse.find(item => item.id === '26cd0504-1f0f-4132-a209-c0939984de3d'));
     });
 
-    it(`/REST:GET admin/permission/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET admin/permission/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/admin/permission/00000000-0000-0000-0000-000000000000')
@@ -297,16 +302,16 @@ describe('permission', () =>
             .expect(404);
     });
 
-    it(`/REST:GET admin/permission/{id}`, () => 
+    test(`/REST:GET admin/permission/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/permission/747bfcad-c6a3-4118-893e-bfc04c8b5929')
+            .get('/admin/permission/26cd0504-1f0f-4132-a209-c0939984de3d')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '747bfcad-c6a3-4118-893e-bfc04c8b5929'));
+            .expect(repository.collectionResponse.find(e => e.id === '26cd0504-1f0f-4132-a209-c0939984de3d'));
     });
 
-    it(`/REST:GET admin/permissions`, () => 
+    test(`/REST:GET admin/permissions`, () => 
     {
         return request(app.getHttpServer())
             .get('/admin/permissions')
@@ -315,36 +320,36 @@ describe('permission', () =>
             .expect(repository.collectionResponse);
     });
 
-    it(`/REST:PUT admin/permission - Got 404 Not Found`, () => 
+    test(`/REST:PUT admin/permission - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .put('/admin/permission')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '0d75c97d-d928-46e7-ba25-1628658fd18b',
-                boundedContextId: 'cca40d5a-f3b0-4d63-987e-3f27c741dedb',
-                name: 'b6whb1b4a7yas3f9qspvgswnkdff1yk9wyheqvuivky84koj3zf5xo9l4frlnpbqkn7cjmmfrd7xj4b3fzpi5cx7ofr0z3tokkiqp2dkvqajbuz60xadn3pz4g1tly6rrf5qh6vqdida96lso0o1y36budtj0g8cpay7na0d041p8e1xgjw1i2rvmv2f8tqeg77zgw8t5f7771jux8lycv2h9g7uggz60yqj5u7s6v3d9ntj52w9vy4k70a2pj4',
+                id: '7dced2ef-12fe-48c7-b645-5a97a57b70a1',
+                boundedContextId: 'd4d7ff19-c99e-4c0f-a29a-1491890e0924',
+                name: 'lg1a2dmyoe6bm7avlzjzwh43grnmssez3itpkw5k6iukautp0y1rf9kln75m7rb2ghouvwnzqcesprsoairzzhzsqosj6pt43tiiq0sf24cqpnx55lzy5re6k2btc4g6wb55bt2qx1cff68834ms8apqtj3v42bvxhnzlq3enq3ow7qruq7xh8o0l9carxxj4iitfnraonm92j3hvuirskdme0huvjkenfg5ggmu89a3oyx557dx2t91hvpgxnk',
             })
             .expect(404);
     });
 
-    it(`/REST:PUT admin/permission`, () => 
+    test(`/REST:PUT admin/permission`, () => 
     {
         return request(app.getHttpServer())
             .put('/admin/permission')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '747bfcad-c6a3-4118-893e-bfc04c8b5929',
-                boundedContextId: '4c99962e-9e84-4d89-bee0-08f27d46035b',
-                name: 'e6tv27wguq3auajrfqoozeninhyrr9mivc203mt7x7p83gdazmyt1ksuzvjnfqj3o1gp5tqhxk59crs2qq3lnh5qvj5zxkmm709ykhvv8h7l0pm24u1hzge60xk4ioebelpc7mlktv5g2w137y6rcd2vvn8pvbxwnyn0w20f563by1m7va37e83npvlftkgx6zh70a823accru3rtpmrfr50pgld9x0moq47y4n1ihlyg1fk5mperv7uge6outp',
+                id: '26cd0504-1f0f-4132-a209-c0939984de3d',
+                boundedContextId: '6efb92e9-069c-4c46-96bf-e96c5beb0709',
+                name: 'ww4yrqtb82iz37an6nkqqpwr4kstwl6wddzv86ya9pd2vcajeunqz4sknm5twg01pxosjbu0do8ffij2sthp6belexogh16jgirbdbgnvtpddq11u1gyex0v1auo48zd07tpvl0cmdloamrrnvrtrsn9jfn9zma64zy4y0k8pyhnaq39t7ox4s34f7kpib2710h85ri1xzfqd715f9tlmg47u32igcmw1e19h64pamabhltopytyesz50i94l0q',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '747bfcad-c6a3-4118-893e-bfc04c8b5929'));
+            .expect(repository.collectionResponse.find(e => e.id === '26cd0504-1f0f-4132-a209-c0939984de3d'));
     });
 
-    it(`/REST:DELETE admin/permission/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE admin/permission/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .delete('/admin/permission/00000000-0000-0000-0000-000000000000')
@@ -352,15 +357,15 @@ describe('permission', () =>
             .expect(404);
     });
 
-    it(`/REST:DELETE admin/permission/{id}`, () => 
+    test(`/REST:DELETE admin/permission/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/admin/permission/747bfcad-c6a3-4118-893e-bfc04c8b5929')
+            .delete('/admin/permission/26cd0504-1f0f-4132-a209-c0939984de3d')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    it(`/GraphQL adminCreatePermission - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL adminCreatePermission - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -391,7 +396,7 @@ describe('permission', () =>
             });
     });
 
-    it(`/GraphQL adminCreatePermission`, () => 
+    test(`/GraphQL adminCreatePermission`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -412,19 +417,19 @@ describe('permission', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '1ddd1887-65a7-427f-aa34-beacd0510dd7',
-                        boundedContextId: '4c99962e-9e84-4d89-bee0-08f27d46035b',
-                        name: 'hro1ytjfylm14qyx1sqt4t1uc1inqqthsumjog9unezu1ro5scy0k287j288l0255yu6ijn597gndw4hj6az4jjh50zo7wiv1g6dkrvo58b062yw7mo7dab6h6uqhg76kj8j59hxjt19xk6yqeg6fkhop64wy92khkqj7bju4iikmg3w5cxv2fuo7biepfpgrqc2mgnpxlp8elxbtoqjtlzkaskn8ypgu4u5ft98miqg9uu1mx3fhbcfbg2pt8n',
+                        id: '1a4b6a86-a1fe-4910-8b70-ab7aaf1ffdcf',
+                        boundedContextId: '6efb92e9-069c-4c46-96bf-e96c5beb0709',
+                        name: 'rx1yh6zy1y7elz8n555zawfyiaallw14zcv2j6brdofoshd0qs8ok99f454emtb0jid6psi72j3neasftfiilg35p1r6zofk8z142wp3gmad2os72iwd17zpsja44iqwjf88awjhaap6vx5bwqbvkv42mikhcsgl86n0qs0nf2ljwmtrcjiku951kaf70dto2aahqeuvi17z8drqj8q61he2ja1v7pp4zkxd29esjtu4v398u0gn3kidkx7a4mj',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreatePermission).toHaveProperty('id', '1ddd1887-65a7-427f-aa34-beacd0510dd7');
+                expect(res.body.data.adminCreatePermission).toHaveProperty('id', '1a4b6a86-a1fe-4910-8b70-ab7aaf1ffdcf');
             });
     });
 
-    it(`/GraphQL adminPaginatePermissions`, () => 
+    test(`/GraphQL adminPaginatePermissions`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -462,7 +467,7 @@ describe('permission', () =>
             });
     });
 
-    it(`/GraphQL adminFindPermission - Got 404 Not Found`, () => 
+    test(`/GraphQL adminFindPermission - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -500,7 +505,7 @@ describe('permission', () =>
             });
     });
 
-    it(`/GraphQL adminFindPermission`, () => 
+    test(`/GraphQL adminFindPermission`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -525,18 +530,18 @@ describe('permission', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '747bfcad-c6a3-4118-893e-bfc04c8b5929'
+                            value   : '26cd0504-1f0f-4132-a209-c0939984de3d'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindPermission.id).toStrictEqual('747bfcad-c6a3-4118-893e-bfc04c8b5929');
+                expect(res.body.data.adminFindPermission.id).toStrictEqual('26cd0504-1f0f-4132-a209-c0939984de3d');
             });
     });
 
-    it(`/GraphQL adminFindPermissionById - Got 404 Not Found`, () => 
+    test(`/GraphQL adminFindPermissionById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -567,7 +572,7 @@ describe('permission', () =>
             });
     });
 
-    it(`/GraphQL adminFindPermissionById`, () => 
+    test(`/GraphQL adminFindPermissionById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -587,16 +592,16 @@ describe('permission', () =>
                     }
                 `,
                 variables: {
-                    id: '747bfcad-c6a3-4118-893e-bfc04c8b5929'
+                    id: '26cd0504-1f0f-4132-a209-c0939984de3d'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindPermissionById.id).toStrictEqual('747bfcad-c6a3-4118-893e-bfc04c8b5929');
+                expect(res.body.data.adminFindPermissionById.id).toStrictEqual('26cd0504-1f0f-4132-a209-c0939984de3d');
             });
     });
 
-    it(`/GraphQL adminGetPermissions`, () => 
+    test(`/GraphQL adminGetPermissions`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -626,7 +631,7 @@ describe('permission', () =>
             });
     });
 
-    it(`/GraphQL adminUpdatePermission - Got 404 Not Found`, () => 
+    test(`/GraphQL adminUpdatePermission - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -648,9 +653,9 @@ describe('permission', () =>
                 variables: {
                     payload: {
                         
-                        id: '847f91eb-427c-4bef-a0fa-cd3f9462408d',
-                        boundedContextId: 'b8bead3a-ae76-4ede-b6f9-a244dcce2e7e',
-                        name: 'bbauk4797590uh5fv8qdcaos27pd5y9l4u9xmlq3ic8flizjmhbtejbbbyyrtfrip8mvygl7hn4vboa8kw5y66p5m61is4wkqa7afaxdnrmf2ply1ex00ohs1w7vnqvneptecca12eh0ktjcmdlo7r4wcbhsimehb7uu6jj4aa1dfsu3aeobebxut5b89gn9u3z0w0ivorcqw72alx6doln3m30qfchzqwpgkmpdtnvqic5muk4q7xuffksxcjh',
+                        id: '3486fe2f-8b94-4c4a-b286-c51e8f63f504',
+                        boundedContextId: '258abd2c-fd69-4034-a115-3efc7d8b7f0a',
+                        name: 'mymrwngwfnn7lsfs5c6cmvx1chjh019mr0ku36civz0t2fqxqepc1xd0vteudnmvw4teo7y4xtwc4bv9eo79bezffaouclh0jus7fl5wm8ipnnoyz082tt7nqci840m0madt1su1n124xhcm9kru1dvhy5a6jwa9x4i2jeljqt0dos307i2l3ofnoq89awsn2j2n5yjc00o9fm6emsjof45gjo56z6ngwz9fp4jgiq2figmcgfj589z6j6rqx8k',
                     }
                 }
             })
@@ -662,7 +667,7 @@ describe('permission', () =>
             });
     });
 
-    it(`/GraphQL adminUpdatePermission`, () => 
+    test(`/GraphQL adminUpdatePermission`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -684,19 +689,19 @@ describe('permission', () =>
                 variables: {
                     payload: {
                         
-                        id: '747bfcad-c6a3-4118-893e-bfc04c8b5929',
-                        boundedContextId: '4c99962e-9e84-4d89-bee0-08f27d46035b',
-                        name: 'xrmn682v22k94tnos3ainqyqtpg7t8pimdjkakbotmw6m0x3gmo52pnoc9juxdvhsnrnw097ij3gcjn2un3jlc5nulfm9xa8ith2z7zwrd63ionsp3f1czsmbd7ghfbyjd1dtk94v7l6a6jh7vbrsklz58an6z7p3id9pejm5lyx4x23lt77oce01nt7cxyty91diumy4fplagdgsswf6xzvxgx0rf7gq2j9l73ruq6dg6mayzp3nb3eiwbudff',
+                        id: '26cd0504-1f0f-4132-a209-c0939984de3d',
+                        boundedContextId: '6efb92e9-069c-4c46-96bf-e96c5beb0709',
+                        name: '7hw7jnzku5agabetcxvqhas8at6vd4hk23frd30wojzvygv3rnoqwsln0s86yl5nr0pazbcmdnww7a1c5t541k6x3uhfeki397d4b3ikwqfv6w9rtq9lrkqbgnpf8qi9adr62lak8gj5pcmzifbvoho3hr7ygd7qu6skmr7rj3b73cylwckl13p2ozkphglq4znao34ih769vocne4j38sai6oi6kdz5qd52zisox63x53vdelwjx05pwdiiuui',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdatePermission.id).toStrictEqual('747bfcad-c6a3-4118-893e-bfc04c8b5929');
+                expect(res.body.data.adminUpdatePermission.id).toStrictEqual('26cd0504-1f0f-4132-a209-c0939984de3d');
             });
     });
 
-    it(`/GraphQL adminDeletePermissionById - Got 404 Not Found`, () => 
+    test(`/GraphQL adminDeletePermissionById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -727,7 +732,7 @@ describe('permission', () =>
             });
     });
 
-    it(`/GraphQL adminDeletePermissionById`, () => 
+    test(`/GraphQL adminDeletePermissionById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -747,12 +752,12 @@ describe('permission', () =>
                     }
                 `,
                 variables: {
-                    id: '747bfcad-c6a3-4118-893e-bfc04c8b5929'
+                    id: '26cd0504-1f0f-4132-a209-c0939984de3d'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeletePermissionById.id).toStrictEqual('747bfcad-c6a3-4118-893e-bfc04c8b5929');
+                expect(res.body.data.adminDeletePermissionById.id).toStrictEqual('26cd0504-1f0f-4132-a209-c0939984de3d');
             });
     });
 

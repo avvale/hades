@@ -39,19 +39,14 @@ describe('PaginateTenantsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateTenantsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('PaginateTenantsController should be defined', () => 
+        test('PaginateTenantsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a tenants', async () => 
+        test('should return a tenants', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
             expect(await controller.main([], [])).toBe(tenants);

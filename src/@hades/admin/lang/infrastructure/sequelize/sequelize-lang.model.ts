@@ -3,8 +3,7 @@ import { DataTypes } from 'sequelize';
 
 @Table({ modelName: 'admin_lang', freezeTableName: true })
 export class AdminLangModel extends Model<AdminLangModel> 
-{   
- 
+{ 
         
     @Column({
         field: 'id',
@@ -20,7 +19,7 @@ export class AdminLangModel extends Model<AdminLangModel>
         field: 'name',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(undefined),
     })
     name: string;
         
@@ -30,7 +29,7 @@ export class AdminLangModel extends Model<AdminLangModel>
         field: 'image',
         primaryKey: false,
         allowNull: true,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(undefined),
     })
     image: string;
         
@@ -40,7 +39,7 @@ export class AdminLangModel extends Model<AdminLangModel>
         field: 'iso_639_2',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.CHAR(2),
+        type: DataTypes.CHAR(undefined),
     })
     iso6392: string;
         
@@ -50,7 +49,7 @@ export class AdminLangModel extends Model<AdminLangModel>
         field: 'iso_639_3',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.CHAR(3),
+        type: DataTypes.CHAR(undefined),
     })
     iso6393: string;
         
@@ -60,7 +59,7 @@ export class AdminLangModel extends Model<AdminLangModel>
         field: 'ietf',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.CHAR(5),
+        type: DataTypes.CHAR(undefined),
     })
     ietf: string;
         
@@ -70,7 +69,7 @@ export class AdminLangModel extends Model<AdminLangModel>
         field: 'sort',
         primaryKey: false,
         allowNull: true,
-        type: DataTypes.SMALLINT,
+        type: DataTypes.SMALLINT.UNSIGNED,
     })
     sort: number;
         

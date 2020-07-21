@@ -12,6 +12,7 @@ export class BoundedContextSort extends SmallintValueObject
             nullable: false,
             undefinable: false,
             maxLength: 6,
+            unsigned: true,
         }, validationRules));
     }
 }

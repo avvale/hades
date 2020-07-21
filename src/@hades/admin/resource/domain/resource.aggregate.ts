@@ -42,7 +42,7 @@ export class AdminResource extends AggregateRoot
         
     }
 
-    static register (id: ResourceId,boundedContextId: ResourceBoundedContextId,name: ResourceName,hasCustomFields: ResourceHasCustomFields,hasAttachments: ResourceHasAttachments,createdAt: ResourceCreatedAt,updatedAt: ResourceUpdatedAt,deletedAt: ResourceDeletedAt,): AdminResource
+    static register (id: ResourceId, boundedContextId: ResourceBoundedContextId, name: ResourceName, hasCustomFields: ResourceHasCustomFields, hasAttachments: ResourceHasAttachments, createdAt: ResourceCreatedAt, updatedAt: ResourceUpdatedAt, deletedAt: ResourceDeletedAt, ): AdminResource
     {
         return new AdminResource(id, boundedContextId, name, hasCustomFields, hasAttachments, createdAt, updatedAt, deletedAt, );
     }

@@ -39,19 +39,14 @@ describe('PaginatePermissionsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginatePermissionsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('PaginatePermissionsController should be defined', () => 
+        test('PaginatePermissionsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a permissions', async () => 
+        test('should return a permissions', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions)));
             expect(await controller.main([], [])).toBe(permissions);

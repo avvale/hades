@@ -29,20 +29,14 @@ describe('CreateLangCommandHandler', () =>
         service         = module.get<CreateLangService>(CreateLangService);
     });
 
-    it('CreateLangCommandHandler should be defined', () => 
-    {
-        expect(commandHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('CreateLangCommandHandler should be defined', () => 
+        test('CreateLangCommandHandler should be defined', () => 
         {
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return an lang created', async () => 
+        test('should create the values objects and pass them as parameters to the CreateLangService', async () => 
         {
             expect(await commandHandler.execute(
                 new CreateLangCommand(
@@ -54,7 +48,7 @@ describe('CreateLangCommandHandler', () =>
                     langs[0].ietf,
                     langs[0].sort,
                     langs[0].isActive,
-                
+                    
                 )
             )).toBe(undefined);
         });

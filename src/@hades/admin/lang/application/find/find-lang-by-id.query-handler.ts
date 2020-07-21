@@ -9,7 +9,7 @@ import { FindLangByIdService } from './find-lang-by-id.service';
 export class FindLangByIdQueryHandler implements IQueryHandler<FindLangByIdQuery>
 {
     private readonly mapper: LangMapper = new LangMapper();
-    
+
     constructor(
         private readonly findLangByIdService: FindLangByIdService
     ) { }

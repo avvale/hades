@@ -23,7 +23,7 @@ import { tenants } from './../seeds/tenant.seed';
 export class MockTenantRepository implements ITenantRepository
 {
     public readonly repository: any;
-    public readonly entityName: string = 'AdminTenant';
+    public readonly aggregateName: string = 'AdminTenant';
     public collectionSource: AdminTenant[];
     
     constructor() 
@@ -85,7 +85,7 @@ export class MockTenantRepository implements ITenantRepository
     
     async create(tenant: AdminTenant): Promise<void>
     {
-        if (this.collectionSource.find(item => item.id.value === tenant.id.value)) throw new ConflictException(`Error to create ${this.entityName}, the id ${tenant.id.value} already exist in database`);
+        if (this.collectionSource.find(item => item.id.value === tenant.id.value)) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${tenant.id.value} already exist in database`);
 
         // create deletedAt null 
         tenant.deletedAt = new TenantDeletedAt(null);
@@ -99,29 +99,29 @@ export class MockTenantRepository implements ITenantRepository
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<AdminTenant> 
     {
-        const response = this.collectionSource.filter(entity => {
+        const response = this.collectionSource.filter(aggregate => {
             let result = true;
             for (const queryStatement of queryStatements)
             {
-                result = entity[queryStatement.column].value === queryStatement.value
+                result = aggregate[queryStatement.column].value === queryStatement.value
             }
             return result;
         });
 
-        const entity = response[0];
+        const aggregate = response[0];
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async findById(id: UuidValueObject): Promise<AdminTenant>
     {
-        const entity = this.collectionSource.find(tenant => tenant.id.value === id.value);
+        const aggregate = this.collectionSource.find(tenant => tenant.id.value === id.value);
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        return entity;
+        return aggregate;
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<AdminTenant[]> 
@@ -129,20 +129,20 @@ export class MockTenantRepository implements ITenantRepository
         return this.collectionSource;
     }
 
-    async update(entity: AdminTenant): Promise<void> 
+    async update(aggregate: AdminTenant): Promise<void> 
     { 
-        // check that entity exist
-        await this.findById(entity.id);
+        // check that aggregate exist
+        await this.findById(aggregate.id);
 
         this.collectionSource.map(tenant => {
-            if (tenant.id.value === entity.id.value) return entity;
+            if (tenant.id.value === aggregate.id.value) return aggregate;
             return tenant;
         });
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
+        // check that aggregate exist
         await this.findById(id);
 
         this.collectionSource.filter(tenant => tenant.id.value !== id.value);

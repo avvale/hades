@@ -11,7 +11,7 @@ export class TenantLogo extends StringValueObject
             name: 'TenantLogo',
             nullable: true,
             undefinable: true,
-            maxLength: 255,            
+                        
         }, validationRules));
     }
 }

@@ -20,7 +20,7 @@ export class CreatePermissionController
 
     @Post()
     @ApiOperation({ summary: 'Create permission' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: PermissionDto})
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: PermissionDto })
     async main(@Body() payload: CreatePermissionDto)
     {
         await this.commandBus.dispatch(new CreatePermissionCommand(

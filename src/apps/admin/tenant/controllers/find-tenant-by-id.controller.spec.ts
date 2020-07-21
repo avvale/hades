@@ -39,19 +39,14 @@ describe('FindTenantByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindTenantByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('FindTenantByIdController should be defined', () => 
+        test('FindTenantByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an tenant by id', async () => 
+        test('should return an tenant by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
             expect(await controller.main(tenants[0].id)).toBe(tenants[0]);

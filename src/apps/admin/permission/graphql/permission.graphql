@@ -38,7 +38,7 @@ type Query
 type Mutation
 {
     adminCreatePermission(payload: AdminCreatePermissionInput!): AdminPermission
-    adminInsertPermissions(payload: [AdminCreatePermissionInput]!): Boolean!
+    adminCreatePermissions(payload: [AdminCreatePermissionInput]!): Boolean!
     adminUpdatePermission(payload: AdminUpdatePermissionInput!): AdminPermission
     adminDeletePermissionById(id: ID!): AdminPermission
     adminDeletePermissions(query:[QueryStatementInput]): [AdminPermission]!

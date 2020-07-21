@@ -1,6 +1,6 @@
 // commands
 import { CreateResourceCommandHandler } from './application/create/create-resource.command-handler';
-import { InsertResourcesCommandHandler } from './application/insert/insert-resources.command-handler';
+import { CreateResourcesCommandHandler } from './application/create/create-resources.command-handler';
 import { UpdateResourceCommandHandler } from './application/update/update-resource.command-handler';
 import { DeleteResourceByIdCommandHandler } from './application/delete/delete-resource-by-id.command-handler';
 import { DeleteResourcesCommandHandler } from './application/delete/delete-resources.command-handler';
@@ -13,12 +13,14 @@ import { FindResourceByIdQueryHandler } from './application/find/find-resource-b
 
 // events
 import { CreatedResourceEventHandler } from './application/events/created-resource.event-handler';
+import { CreatedResourcesEventHandler } from './application/events/created-resources.event-handler';
 import { UpdatedResourceEventHandler } from './application/events/updated-resource.event-handler';
 import { DeletedResourceEventHandler } from './application/events/deleted-resource.event-handler';
+import { DeletedResourcesEventHandler } from './application/events/deleted-resources.event-handler';
 
 // services
 import { CreateResourceService } from './application/create/create-resource.service';
-import { InsertResourcesService } from './application/insert/insert-resources.service';
+import { CreateResourcesService } from './application/create/create-resources.service';
 import { PaginateResourcesService } from './application/paginate/paginate-resources.service';
 import { GetResourcesService } from './application/get/get-resources.service';
 import { FindResourceService } from './application/find/find-resource.service';
@@ -41,7 +43,7 @@ export { ResourceSagas } from './application/sagas/resource.sagas';
 export const AdminResourceHandlers = [
     // commands
     CreateResourceCommandHandler,
-    InsertResourcesCommandHandler,
+    CreateResourcesCommandHandler,
     UpdateResourceCommandHandler,
     DeleteResourceByIdCommandHandler,
     DeleteResourcesCommandHandler,
@@ -54,13 +56,15 @@ export const AdminResourceHandlers = [
 
     // events
     CreatedResourceEventHandler,
+    CreatedResourcesEventHandler,
     UpdatedResourceEventHandler,
     DeletedResourceEventHandler,
+    DeletedResourcesEventHandler,
 ];
 
 export const AdminResourceServices = [
     CreateResourceService,
-    InsertResourcesService,
+    CreateResourcesService,
     PaginateResourcesService,
     GetResourcesService,
     FindResourceService,

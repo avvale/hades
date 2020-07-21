@@ -10,7 +10,6 @@ import { FindResourceByIdQuery } from '@hades/admin/resource/application/find/fi
 import { CreateResourceCommand } from '@hades/admin/resource/application/create/create-resource.command';
 
 @ApiTags('[admin] resource')
-@ApiCreatedResponse({ description: 'The record has been successfully created.', type: ResourceDto})
 @Controller('admin/resource')
 export class CreateResourceController 
 {
@@ -21,6 +20,7 @@ export class CreateResourceController
 
     @Post()
     @ApiOperation({ summary: 'Create resource' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: ResourceDto })
     async main(@Body() payload: CreateResourceDto)
     {
         await this.commandBus.dispatch(new CreateResourceCommand(

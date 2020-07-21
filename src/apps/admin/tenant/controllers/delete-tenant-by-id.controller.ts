@@ -9,7 +9,6 @@ import { FindTenantByIdQuery } from '@hades/admin/tenant/application/find/find-t
 import { DeleteTenantByIdCommand } from '@hades/admin/tenant/application/delete/delete-tenant-by-id.command';
 
 @ApiTags('[admin] tenant')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: TenantDto})
 @Controller('admin/tenant')
 export class DeleteTenantByIdController 
 {
@@ -19,7 +18,8 @@ export class DeleteTenantByIdController
     ) {}
 
     @Delete(':id')
-    @ApiOperation({ summary: 'Delete tenant entity by id' })
+    @ApiOperation({ summary: 'Delete tenant by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: TenantDto })
     async main(@Param('id') id: string)
     {
         const tenant = await this.queryBus.ask(new FindTenantByIdQuery(id));

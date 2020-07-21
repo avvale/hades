@@ -1,5 +1,5 @@
 import { Controller, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { TenantDto } from './../dto/tenant.dto';
 
 // @hades
@@ -8,7 +8,6 @@ import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statem
 import { FindTenantQuery } from '@hades/admin/tenant/application/find/find-tenant.query';
 
 @ApiTags('[admin] tenant')
-@ApiOkResponse({ description: 'The record has been successfully created.', type: TenantDto})
 @Controller('admin/tenant')
 export class FindTenantController 
 {
@@ -18,6 +17,9 @@ export class FindTenantController
 
     @Get()
     @ApiOperation({ summary: 'Find tenant according to query' })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: TenantDto })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         return await this.queryBus.ask(new FindTenantQuery(queryStatements));   

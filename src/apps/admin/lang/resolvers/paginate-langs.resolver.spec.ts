@@ -37,19 +37,19 @@ describe('PaginateLangsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateLangsResolver should be defined', () => 
+    test('PaginateLangsResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('PaginateLangsResolver should be defined', () => 
+        test('PaginateLangsResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a langs', async () => 
+        test('should return a langs', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
             expect(await resolver.main([], [])).toBe(langs);

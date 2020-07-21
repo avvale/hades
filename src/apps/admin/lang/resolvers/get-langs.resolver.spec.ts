@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { GetLangsResolver } from './get-langs.resolver';
+import { GetLangsResolver } from './get-langs.resolver'; 
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 
 describe('GetLangsResolver', () => 
 {
-    let resolver: GetLangsResolver;
+    let resolver:   GetLangsResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -37,19 +37,19 @@ describe('GetLangsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('GetLangsResolver should be defined', () => 
+    test('GetLangsResolver should be defined', () => 
     {
-        expect(resolver).toBeDefined();
+        expect(resolver).   toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('GetLangsResolver should be defined', () => 
+        test('GetLangsResolver should be defined', () => 
         {
-            expect(resolver).toBeDefined();
+            expect(resolver).   toBeDefined();
         });
 
-        it('should return a langs', async () => 
+        test('should return a langs', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
             expect(await resolver.main([])).toBe(langs);

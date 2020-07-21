@@ -3,10 +3,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { GetLangsQueryHandler } from './get-langs.query-handler';
 import { MockLangRepository } from '@hades/admin/lang/infrastructure/mock/mock-lang.repository';
-import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
 import { LangMapper } from '@hades/admin/lang/domain/lang.mapper';
-
 import { GetLangsQuery } from './get-langs.query';
 import { GetLangsService } from './get-langs.service';
 
@@ -42,20 +40,14 @@ describe('GetLangsQueryHandler', () =>
         mapper          = new LangMapper();
     });
 
-    it('GetLangsQueryHandler should be defined', () => 
-    {
-        expect(queryHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('GetLangsQueryHandler should be defined', () => 
+        test('GetLangsQueryHandler should be defined', () => 
         {
             expect(queryHandler).toBeDefined();
         });
 
-        it('should return an langs founded', async () => 
+        test('should return an langs founded', async () => 
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(

@@ -6,8 +6,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'bb02483a-4fa3-44a2-a1bb-9b4cd7d78c90',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'a016b6d2-437a-46ba-92dc-d42c891ba04c'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : '7c1f725a-2fd6-48e4-b73a-9814c76458ac',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'c466f698-71db-4cb2-ae46-08604fc10fe0'
     })
     boundedContextId: string;
     
@@ -26,8 +24,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'b8h0i6yj3pnfaebpnpdo4re3oa27raepk7hcqlh5fcbgi7u42fua9z42te8kxvwg5dzscsgjwqv13rlmkltrx6ennqv3t2f1suw2mg7dieeqotgm5v3hai0fag3wbnp9gax63klnnjo9y0grifmhxrlvav05n5oc4rkrfxntygn6xk92qz8elxrryl9qwrhj3qy4ol2q4i6exr9f8zt9untargc0ih4r7hipe9cap1a5bf0mmg0ypb7ldku4w44',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'j72bsxrownl2hzc8qwwa0qbk31iwgo0oak0dwzv82epci9bhauewckh7m1voblytutwl1y9lc85lamhazfa7t8isfplbznfs8ybgs6hj2i7arxynuaolm2raxl7ws5qdzps5sy71whel9p2ntqr81s7o510ivg85882m79ktnk6y29llqtcs36ja4nciwnwrzl25u51jn6ugon85xau2w2xyb6spku1q6pyhlu8ifv48novfhfukoo51lo5y5bk'
     })
     name: string;
     
@@ -36,8 +33,7 @@ export class ResourceDto
     @ApiProperty({
         type        : Boolean,
         description : 'hasCustomFields [input here api field description]',
-        example     : true,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : true
     })
     hasCustomFields: boolean;
     
@@ -46,8 +42,7 @@ export class ResourceDto
     @ApiProperty({
         type        : Boolean,
         description : 'hasAttachments [input here api field description]',
-        example     : false,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : true
     })
     hasAttachments: boolean;
     
@@ -56,8 +51,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-05 12:31:37',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 18:56:45'
     })
     createdAt: string;
     
@@ -66,8 +60,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-05 11:20:51',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 09:44:39'
     })
     updatedAt: string;
     
@@ -76,8 +69,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-05 01:33:34',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 20:42:44'
     })
     deletedAt: string;
     

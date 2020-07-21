@@ -37,19 +37,19 @@ describe('FindTenantByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindTenantByIdResolver should be defined', () => 
+    test('FindTenantByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindTenantByIdResolver should be defined', () => 
+        test('FindTenantByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an tenant by id', async () => 
+        test('should return an tenant by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
             expect(await resolver.main(tenants[0].id)).toBe(tenants[0]);

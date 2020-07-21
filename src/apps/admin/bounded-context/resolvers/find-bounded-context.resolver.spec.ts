@@ -37,19 +37,19 @@ describe('FindBoundedContextResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindBoundedContextResolver should be defined', () => 
+    test('FindBoundedContextResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindBoundedContextResolver should be defined', () => 
+        test('FindBoundedContextResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a boundedContext', async () => 
+        test('should return a boundedContext', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await resolver.main([])).toBe(boundedContexts[0]);

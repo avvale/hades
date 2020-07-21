@@ -9,7 +9,6 @@ import { FindPermissionByIdQuery } from '@hades/admin/permission/application/fin
 import { DeletePermissionByIdCommand } from '@hades/admin/permission/application/delete/delete-permission-by-id.command';
 
 @ApiTags('[admin] permission')
-@ApiOkResponse({ description: 'The record has been deleted successfully.', type: PermissionDto})
 @Controller('admin/permission')
 export class DeletePermissionByIdController 
 {
@@ -20,6 +19,7 @@ export class DeletePermissionByIdController
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete permission by id' })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: PermissionDto })
     async main(@Param('id') id: string)
     {
         const permission = await this.queryBus.ask(new FindPermissionByIdQuery(id));

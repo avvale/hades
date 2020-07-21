@@ -1,5 +1,5 @@
 import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ResourceDto } from './../dto/resource.dto';
 
 // @hades
@@ -10,7 +10,6 @@ import { GetResourcesQuery } from '@hades/admin/resource/application/get/get-res
 import { DeleteResourcesCommand } from '@hades/admin/resource/application/delete/delete-resources.command';
 
 @ApiTags('[admin] resource')
-@ApiOkResponse({ description: 'The records has been deleted successfully.', type: ResourceDto})
 @Controller('admin/resources')
 export class DeleteResourcesController 
 {
@@ -21,6 +20,9 @@ export class DeleteResourcesController
 
     @Delete()
     @ApiOperation({ summary: 'Delete resources in batch according to query' })
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [ResourceDto] })
+    @ApiBody({ type: [QueryStatementInput] })
+    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
     async main(@Body('query') queryStatements: QueryStatementInput[])
     {
         const resources = await this.queryBus.ask(new GetResourcesQuery(queryStatements));

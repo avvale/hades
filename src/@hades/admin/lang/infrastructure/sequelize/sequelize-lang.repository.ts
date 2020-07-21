@@ -10,7 +10,7 @@ import { AdminLangModel } from './sequelize-lang.model';
 @Injectable()
 export class SequelizeLangRepository extends SequelizeRepository<AdminLang> implements ILangRepository
 {
-    public readonly entityName: string = 'AdminLang';
+    public readonly aggregateName: string = 'AdminLang';
     public readonly mapper: LangMapper = new LangMapper();
 
     constructor(

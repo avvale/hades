@@ -20,7 +20,7 @@ export class CreateBoundedContextController
 
     @Post()
     @ApiOperation({ summary: 'Create bounded-context' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: BoundedContextDto})
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: BoundedContextDto })
     async main(@Body() payload: CreateBoundedContextDto)
     {
         await this.commandBus.dispatch(new CreateBoundedContextCommand(
