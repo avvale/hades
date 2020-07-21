@@ -1,6 +1,6 @@
 // commands
 import { CreateChannelCommandHandler } from './application/create/create-channel.command-handler';
-import { InsertChannelsCommandHandler } from './application/insert/insert-channels.command-handler';
+import { CreateChannelsCommandHandler } from './application/create/create-channels.command-handler';
 import { UpdateChannelCommandHandler } from './application/update/update-channel.command-handler';
 import { DeleteChannelByIdCommandHandler } from './application/delete/delete-channel-by-id.command-handler';
 import { DeleteChannelsCommandHandler } from './application/delete/delete-channels.command-handler';
@@ -13,12 +13,14 @@ import { FindChannelByIdQueryHandler } from './application/find/find-channel-by-
 
 // events
 import { CreatedChannelEventHandler } from './application/events/created-channel.event-handler';
+import { CreatedChannelsEventHandler } from './application/events/created-channels.event-handler';
 import { UpdatedChannelEventHandler } from './application/events/updated-channel.event-handler';
 import { DeletedChannelEventHandler } from './application/events/deleted-channel.event-handler';
+import { DeletedChannelsEventHandler } from './application/events/deleted-channels.event-handler';
 
 // services
 import { CreateChannelService } from './application/create/create-channel.service';
-import { InsertChannelsService } from './application/insert/insert-channels.service';
+import { CreateChannelsService } from './application/create/create-channels.service';
 import { PaginateChannelsService } from './application/paginate/paginate-channels.service';
 import { GetChannelsService } from './application/get/get-channels.service';
 import { FindChannelService } from './application/find/find-channel.service';
@@ -41,7 +43,7 @@ export { ChannelSagas } from './application/sagas/channel.sagas';
 export const BplusItSappiChannelHandlers = [
     // commands
     CreateChannelCommandHandler,
-    InsertChannelsCommandHandler,
+    CreateChannelsCommandHandler,
     UpdateChannelCommandHandler,
     DeleteChannelByIdCommandHandler,
     DeleteChannelsCommandHandler,
@@ -54,13 +56,15 @@ export const BplusItSappiChannelHandlers = [
 
     // events
     CreatedChannelEventHandler,
+    CreatedChannelsEventHandler,
     UpdatedChannelEventHandler,
     DeletedChannelEventHandler,
+    DeletedChannelsEventHandler,
 ];
 
 export const BplusItSappiChannelServices = [
     CreateChannelService,
-    InsertChannelsService,
+    CreateChannelsService,
     PaginateChannelsService,
     GetChannelsService,
     FindChannelService,

@@ -39,19 +39,14 @@ describe('DeleteMessagesDetailController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteMessagesDetailController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteMessagesDetailController should be defined', () => 
+        test('DeleteMessagesDetailController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an messagesDetail deleted', async () => 
+        test('should return an messagesDetail deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messagesDetail)));
             expect(await controller.main([])).toBe(messagesDetail);

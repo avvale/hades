@@ -51,7 +51,7 @@ describe('role', () =>
         await app.init();
     });
 
-    it(`/REST:POST bplus-it-sappi/role - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST bplus-it-sappi/role - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
@@ -61,15 +61,15 @@ describe('role', () =>
     });
 
     
-    it(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
-                name: 'o9k96z0y55t0hqf789aqjddm01tm8y1bom773np94inj38uoiyilc441m3qflcd285l2n68id53ditygc1gcttacr9gbauvv00e94l27rczf5xlxnh3qqtqch1v1czgpn67419psp5r8ybh5ubaevt5n1h8gnufua5d6hker30w92w79k46y6os763ok9jxmngvx83hhsuptxrjwsht5vxsph53lbgpjeoot5zxshpyvj3mm3e24lddmp8kmria',
+                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
+                name: 'q1xn0yal786rfmn1bz6dp6cxtiv04k18ioltpoc6kyrwba1vw3scwkxlzncy8jvxlvzjumouimy9wnqsy2znpzveuoa0jwvvuigqmqse67k1xlhet2ex8l2qmzphv446bll2pbqqymllmfj0r5sfm2xoolcmwpzyxc27zhp8lesqqrcd6s3cffp2y3a82lansr9c86u7bsypc511h1n0cpeei1ekco2s03zxd6f6opm15nhn1p4qcyl301ddf2a',
             })
             .expect(400)
             .then(res => {
@@ -77,15 +77,15 @@ describe('role', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
-                name: '84o2mv5e9nczg0njzuvtcpamw8091f1nkve5a5bmtksdww529cv20wgvxgehj9689mupitbm87h5fceyzutvyq0urle9ztexyge1ku9o97puylyydzomr4vhbvk10z74js7aw7cdy62sdz26r02kqycvpaogyh3gkbdukvxm60oayfr82wm7hh9rt0q37nlhew60cie8up3ou5xmxjzgrxk9k9uqhnovxd3wqvj0c2hvgazeywn693c3z1ualmw',
+                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
+                name: 'jtb0s2oaowpvvmxy5clqmno6rgkhpzsnszdc5o6h56gma1i2kj36ngqsjm63bwx3i6wisnw7aknpxzqydlrjeut95qquzg9qs4m0qejwu61sqo9yhk9nrbqiwxvk65xqsc54d51vby3d33x84bqnvxxfb19rsipccm9vrmiozenkctbotb5i2h66bvmdlqdsa7vw2dk87lemyo96ohqt5ipq29y8dnojd2xzn9asb30uwb97pmilpfxyfjw9xii',
             })
             .expect(400)
             .then(res => {
@@ -93,15 +93,15 @@ describe('role', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleTenantId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleTenantId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc',
+                id: '8fd69091-78d9-4942-be62-d502744fda3b',
                 tenantId: null,
-                name: 'nw9hkm33wjs5sovph6izalif3dre2lmsnq8v8qoqusprfv0jk8jhp620at1qamzd1iyu93dcsg39ou2mlii6hkcwy07i2anyjex80u3xpnvv7v4f4273zqscvn0xs138t6128b4oi4oybp6td01slgrwwwty9dq12n2v6b8c9j3719b2u742p7ef77wgk55jtdh6jcoccmlr4ln6lzwb91ui1vk35ts7u8pwkwk11utbuc0tiid4e1kwoutleou',
+                name: 'hu5vq0ccgivtq1b5ft5h70dlpbkna5d9potplfqy4xsl4w6yll1cl6vcqgkg86dlcw21pbvt7jznj7x34jx26vpx7fzng64ogqhyodrrq8ehyz6dd6a9vlb8x8qb6a6z4cga1lzx2n99yxo19yeg6xjfntff3kr836hf4fi7adqkpf0jt9zghizm1p64a7kh1tw1k4f7wqoqj0i0go200myfrexv21ylory7vr6sq7ce9gaign7u1cnjr2e02pb',
             })
             .expect(400)
             .then(res => {
@@ -109,15 +109,15 @@ describe('role', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleTenantId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleTenantId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc',
+                id: '8fd69091-78d9-4942-be62-d502744fda3b',
                 
-                name: 'm49mq60e9fk1o3lozknqjx72773ak3px0i3kjs3grzilbc24nkp7wluu602706qrfodxqwvl1awu9rgtqa4ei15nicbi8xxja8kzufzkjbdldislerabwvcwdnnxu74prrkq2dhe3o9o3ucixrmwpgfr83m0ks9694g0cyh43asqa9iyizh6wkids0ri3o7p3cdyymp7rxju0gh71phpwa1fnr9m9h12zm8k0yi69pzxlejeej7vgcjm801vpaw',
+                name: 'qebi5cv5i2q37vycrn2imorv2z3qsv1scum5ikmwz433m0k5gcr08qatgz1e1omyv5csfhmwu45inqxsareobvb5wepf5lxmhm780xpgwmkfofggp89jx8bivvg5rztiamx6z3ps78r4dn5uhpq5u5l4yf7m7lesmhm2fdy7grl37gzqsmkm1zy5gthx1sp6ut7kmnt99ihulmpr9nwev5rwqvln2h3v9d8fpza6gdj02c4w6rs254mendlwscj',
             })
             .expect(400)
             .then(res => {
@@ -125,14 +125,14 @@ describe('role', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleName property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleName property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc',
-                tenantId: 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
+                id: '8fd69091-78d9-4942-be62-d502744fda3b',
+                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
                 name: null,
             })
             .expect(400)
@@ -141,14 +141,14 @@ describe('role', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleName property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleName property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc',
-                tenantId: 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
+                id: '8fd69091-78d9-4942-be62-d502744fda3b',
+                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
                 
             })
             .expect(400)
@@ -159,15 +159,15 @@ describe('role', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: 'r0o2q0fl1e0iz6p8kcn3dwvard9kn6uahtvwg',
-                tenantId: 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
-                name: 'qv1q1wlal71a8h9xmc7pm0eoxtdmn1gqvxcioab18qo48d72c0sgr86k926ycfnod8ob79bvsfmhx0gn024obr87wfsp9gn3v68fvp97ggf9bwf7e6zizzoi84bjmh62k8oo1b1gx7u26u8a0f29n6ezzytm5vqffeomj52vgnyaaeuu779st0ejxec3mfwbuy5r67j8vn04phpnal6gzao4zzxgcrft2ey5eut9p9rj8tm51xu2vyl7wplvsby',
+                id: '6g9uhtt74375te3exji0mehogbqao474mqnxy',
+                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
+                name: 'pmdszq37t9an3yap794wp3jajyfv8cqzt1tutmtdfbc917a91dbu41kajv86cmfejd59hgj69v30q2bdjl2io61fq0urzmdnoo6u1one1neg4gzeudyuc9450hmudo56ur51rg67iccks7o6rc0q9b4n4c3ucds971nsmwusd56mx2sx59wtvlsg3clyh5s87r6b64d3auhgd8kkh1p3ivvuv4oumbtshaertvbvq80pnq3osh7hd97u6h3csu6',
             })
             .expect(400)
             .then(res => {
@@ -175,15 +175,15 @@ describe('role', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleTenantId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleTenantId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc',
-                tenantId: '92993c9ibrjrdbicojbmndjbpzmugnl83oywh',
-                name: 'pv2ja4jnichrx3bvbqbdt6o0lokixynj4ytg1eejxk5zvu0tw51ehogij90pjlhv9giwp2ym150y4wyuhcq8v4ifxxjt5n2hbikt43i0gdaji5i943zekq9vqfr7r90ob2t9v1jo8j8ub21lx6ffb184bqu6169jkla84w6mz502ybfflpy7c0kh3dss0q83qxsisz7q07db8kop66lwk0p4klyugr850k2825ljrd7nkyyejxnvkb7lorbnj7v',
+                id: '8fd69091-78d9-4942-be62-d502744fda3b',
+                tenantId: 'nveyyox17iowr7l02yb41sbm06j5876j2rtvw',
+                name: 'pobkxi4kfp473p28n1ur0jmmru91t6u50ggygu54vydf91h1teg5a5xejk1w37d67yj9dyobwrcjeid3lj56habpoklrckxwinf5v69wxnir3d53wwj773z0dbzmz05d9tugotnwnbko86tmmng11fvix5s9nza0gd50jbcd13o81vd4qmvvasm1tjt91jvczfp5ouopbdmnbyx5nzoo31ctfwlh4izh76me592657454u1i9ipyz2nayw3uqig',
             })
             .expect(400)
             .then(res => {
@@ -193,15 +193,15 @@ describe('role', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleName is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST bplus-it-sappi/role - Got 400 Conflict, RoleName is too large, has a maximum length of 255`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc',
-                tenantId: 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
-                name: 'kcucfb3ibuqfndcut5y3opoc1gjcvnjhgvzm26pxsjwqfd369j22d7rs4l2lfl5pbf9g9ba33zuhppfzc25q0kfifdxd20oflswr9jtchw89i2tnh5hsufpd6e9h4xu5vc0g707c56ljlm61cyzyvdolh6lfv4hrr10wjhab124jx1r9o4xkxxu2llkwp665ucgue5d2amaa2fc823m8xorgvnbx27d7o0xdi0uqbrfu7eq7kp3v3dbhmmfd275z',
+                id: '8fd69091-78d9-4942-be62-d502744fda3b',
+                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
+                name: 'pwwu5vo8mtwzk8vihstw3ysh4coh9tp3bd5hexbp5vqlrymqvj2lf1k00b31o1iia30rvv5d407qwx26wb0ia5re93rc6m08xp10t1ei0874gptwalx02jkfp8v14wyu6ojs2lg2uf490ptsn0d9y1o5d8sxognnyc66vhxly75x4i8qiwzvdk9ik455f55t1cnetcnk46u166io9j9e3w7o2g6v957waf2yid28bqqdppkb4e185i4tprw96uvp',
             })
             .expect(400)
             .then(res => {
@@ -222,20 +222,20 @@ describe('role', () =>
 
     
 
-    it(`/REST:POST bplus-it-sappi/role`, () => 
+    test(`/REST:POST bplus-it-sappi/role`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
-                id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc',
-                tenantId: 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
-                name: '76q0mdk58bvbu44tcei32hyh6v4hommlbev0wxhf14glvvb7k20e2yvhz2xyk8q5gtqpopy6hcmim0r987rgqojaum06tplhqfexn7ydo53c6c0h71th3pbpa7yoss66gyk596xys33icgiy52lkeykv3tf84yiufor26zi7cuxnqq26l64sd63kh4aa8tq7kygzn3w837lhve4m6181qr8g1rq3e6dyzp5p7mm914ucovgx20vh61xkpbi5uxj',
+                id: '8fd69091-78d9-4942-be62-d502744fda3b',
+                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
+                name: 'h0jovremip5nlmnn4e2tz9lmidca0fnb7my76th7q00a5vpmb9ngy5mespx33k3monlzw0g7ol4jyy5tdovv48qec25zrq2toriin6y164x6xe1i62m0f8m178wrvsd5e4w9q6i6x5n1odxhw5w87w8jasz4pv57gjc146hggip3wbqhpcytgmy5ab69yn83l7dw7tx4a3azlm5vdtptxkygzku4slbzfy0cmg5l393k3x2remo52azohia8f6f',
             })
             .expect(201);
     });
 
-    it(`/REST:GET bplus-it-sappi/roles/paginate`, () => 
+    test(`/REST:GET bplus-it-sappi/roles/paginate`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/roles/paginate')
@@ -260,7 +260,7 @@ describe('role', () =>
             });
     });
 
-    it(`/REST:GET bplus-it-sappi/role - Got 404 Not Found`, () => 
+    test(`/REST:GET bplus-it-sappi/role - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/role')
@@ -278,7 +278,7 @@ describe('role', () =>
             .expect(404);
     });
 
-    it(`/REST:GET bplus-it-sappi/role`, () => 
+    test(`/REST:GET bplus-it-sappi/role`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/role')
@@ -289,15 +289,15 @@ describe('role', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '3b1bb011-1b5b-4ff1-8453-d226ed4351dc'
+                        value   : '8fd69091-78d9-4942-be62-d502744fda3b'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '3b1bb011-1b5b-4ff1-8453-d226ed4351dc'));
+            .expect(repository.collectionResponse.find(item => item.id === '8fd69091-78d9-4942-be62-d502744fda3b'));
     });
 
-    it(`/REST:GET bplus-it-sappi/role/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET bplus-it-sappi/role/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/role/00000000-0000-0000-0000-000000000000')
@@ -305,16 +305,16 @@ describe('role', () =>
             .expect(404);
     });
 
-    it(`/REST:GET bplus-it-sappi/role/{id}`, () => 
+    test(`/REST:GET bplus-it-sappi/role/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/role/3b1bb011-1b5b-4ff1-8453-d226ed4351dc')
+            .get('/bplus-it-sappi/role/8fd69091-78d9-4942-be62-d502744fda3b')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '3b1bb011-1b5b-4ff1-8453-d226ed4351dc'));
+            .expect(repository.collectionResponse.find(e => e.id === '8fd69091-78d9-4942-be62-d502744fda3b'));
     });
 
-    it(`/REST:GET bplus-it-sappi/roles`, () => 
+    test(`/REST:GET bplus-it-sappi/roles`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/roles')
@@ -323,36 +323,36 @@ describe('role', () =>
             .expect(repository.collectionResponse);
     });
 
-    it(`/REST:PUT bplus-it-sappi/role - Got 404 Not Found`, () => 
+    test(`/REST:PUT bplus-it-sappi/role - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .put('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'b95f9402-60b9-4355-8998-fc5185102481',
-                tenantId: '9ddd85ba-9c0e-461a-a648-1b26c55369fa',
-                name: '98joaldjpll0lp7ou7q3mkdljjvfabmnc4y1ffkrpiwzazap3x7a0kz29fxytoz3paj414i8coayfb8xpamqs5f1pxwtmlzraz5fkdzzzyhsk6kk1dilll0bn3ywmmflp7lzfgbckrcrv2k8gud0k37rbrizy7qm5qffwd34cjapxyse8gd3ogdgryy3giqzb4412o2oaivedr6c9p4opclae5uwcrdze4cuihzicahyscf993ngiu460jlk441',
+                id: '123817b3-d2b3-49b9-929f-97791d5b4a81',
+                tenantId: '6122202e-75b0-4ddd-a6c7-d7c93f9ec00e',
+                name: 'ppaf772zbujycsdjshjy7qtjog4ewue6q8grjhenxm8pcc7pbmufoy114we1qwbovfveoomseqgjwflm18snmdqfnzmdm6jixusg927kqiapp10zj2e7pn1gib5vf1xsv3sryvu9a1web90vtiw03a2x21xljg1ug8df4z2ncc8ffiyrhn96oagu4zlh7jiyj9pftakil2bsxp18mpzxtjlprrmyj74wymxsg30wrs7v5os0sdjulebprr5pxgs',
             })
             .expect(404);
     });
 
-    it(`/REST:PUT bplus-it-sappi/role`, () => 
+    test(`/REST:PUT bplus-it-sappi/role`, () => 
     {
         return request(app.getHttpServer())
             .put('/bplus-it-sappi/role')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc',
-                tenantId: 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
-                name: '58l2cdfqrf2xedhg9vn0pzum200rvrfabqjrny8v6f0d0be6f8sszgc1dka1gf0a8rqnohxnfcig1cgb91l0u33dmdcjhkvd60yy81yhwvcy74b6xytty87ftbs9jnwphuiu8bwr9raohte1mys8mbcrmpp6i329fzojmahk5itgfolp4p531ottdse4yxu5efk9qe508dgbv0n7q9fdhie22l4lauwxhm3tafx70qwopp7ootqxyset8sxpyu9',
+                id: '8fd69091-78d9-4942-be62-d502744fda3b',
+                tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
+                name: '3tqrv9ef5597162vese340gcsggvyvsglwuua1gr8eqni869cuncxkrwuyqxr3cvqoy3o53qzwb2s7v4vmlrwf9zb0r7tcf6tlkt3zdotebzyo3fyiboc9htug7gpimwaou9g2gw8ry0fwjfukxg49sl6s47qwkwo6f78g2jxjpaobinuoo8s1e1jfj82mi1hbc65mhjvh5kfu5atm40r9rl9kc7d05ce24wc9na389bmavei6rabfulwroqgb4',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '3b1bb011-1b5b-4ff1-8453-d226ed4351dc'));
+            .expect(repository.collectionResponse.find(e => e.id === '8fd69091-78d9-4942-be62-d502744fda3b'));
     });
 
-    it(`/REST:DELETE bplus-it-sappi/role/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE bplus-it-sappi/role/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .delete('/bplus-it-sappi/role/00000000-0000-0000-0000-000000000000')
@@ -360,15 +360,15 @@ describe('role', () =>
             .expect(404);
     });
 
-    it(`/REST:DELETE bplus-it-sappi/role/{id}`, () => 
+    test(`/REST:DELETE bplus-it-sappi/role/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/role/3b1bb011-1b5b-4ff1-8453-d226ed4351dc')
+            .delete('/bplus-it-sappi/role/8fd69091-78d9-4942-be62-d502744fda3b')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    it(`/GraphQL bplusItSappiCreateRole - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL bplusItSappiCreateRole - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -399,7 +399,7 @@ describe('role', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiCreateRole`, () => 
+    test(`/GraphQL bplusItSappiCreateRole`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -420,19 +420,19 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'ab3515bb-f9c2-485d-a34c-d695444e05bb',
-                        tenantId: 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
-                        name: 'a1limfmv5j5kq9tc9pp5u60korlcqezfgs0n40emf4eoq4i8gk3rkctxf3h1ouneuxjnwjje54v3mhv4s334wkgqxt5mdrqe562asytzx35p2fc4ltmsp93wyuvgb9meltjcdrxc5kj9to8iuatshulrbn3lf1lpng1als2ldwgl50rysvd0iv8p1sftls10bprkhghb4n3qn1jwr10cnodj4qaub2bhnrdwma283crudtnezwmp5kl8nverqv3',
+                        id: '42b6b7fc-5fd3-4c0d-a2a0-1b5343feebbc',
+                        tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
+                        name: '9rv7wzskrvlcivho058jt5s0eiqqxopy2w3o71bmiq8o4q9y8jru0sg7i7mzgs5r1h0renuohgxbhvdwfqar3t17ejvv8rop2xcu204lv4p1gypufjjj9mz6ctbwlbanpqjetqbvavyytpl180mi2976okz1x377ojnss6c7ptwiam49me648ue251wsw0fmz9vwck8pcysfsofcinpnpms23au3pb32vep94h05mqy9tota32jk3redfln2u5k',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateRole).toHaveProperty('id', 'ab3515bb-f9c2-485d-a34c-d695444e05bb');
+                expect(res.body.data.bplusItSappiCreateRole).toHaveProperty('id', '42b6b7fc-5fd3-4c0d-a2a0-1b5343feebbc');
             });
     });
 
-    it(`/GraphQL bplusItSappiPaginateRoles`, () => 
+    test(`/GraphQL bplusItSappiPaginateRoles`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -470,7 +470,7 @@ describe('role', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindRole - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiFindRole - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -508,7 +508,7 @@ describe('role', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindRole`, () => 
+    test(`/GraphQL bplusItSappiFindRole`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -533,18 +533,18 @@ describe('role', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '3b1bb011-1b5b-4ff1-8453-d226ed4351dc'
+                            value   : '8fd69091-78d9-4942-be62-d502744fda3b'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindRole.id).toStrictEqual('3b1bb011-1b5b-4ff1-8453-d226ed4351dc');
+                expect(res.body.data.bplusItSappiFindRole.id).toStrictEqual('8fd69091-78d9-4942-be62-d502744fda3b');
             });
     });
 
-    it(`/GraphQL bplusItSappiFindRoleById - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiFindRoleById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -575,7 +575,7 @@ describe('role', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindRoleById`, () => 
+    test(`/GraphQL bplusItSappiFindRoleById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -595,16 +595,16 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc'
+                    id: '8fd69091-78d9-4942-be62-d502744fda3b'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindRoleById.id).toStrictEqual('3b1bb011-1b5b-4ff1-8453-d226ed4351dc');
+                expect(res.body.data.bplusItSappiFindRoleById.id).toStrictEqual('8fd69091-78d9-4942-be62-d502744fda3b');
             });
     });
 
-    it(`/GraphQL bplusItSappiGetRoles`, () => 
+    test(`/GraphQL bplusItSappiGetRoles`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -634,7 +634,7 @@ describe('role', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiUpdateRole - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiUpdateRole - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -656,9 +656,9 @@ describe('role', () =>
                 variables: {
                     payload: {
                         
-                        id: '173782f9-150b-4225-a48f-be7cc72a18df',
-                        tenantId: '9f22c43f-4d89-41bc-a2a9-5740510f7d6f',
-                        name: 'yi19p7a0y1aomsht9b4om9x6qvt4ychm1vbzhkqkpl3f1i344ljl4bm5xpf9x07o8jsvbwmi6zr4z28yol54fob5unl3kcy82m2mtl8gqbk2egl9c2sh57aibsy470vgik5lmze2k5lq0iwqi0uell99hjrxyfzoe9omryubnd6406nlxtbxeps5eyy6ymish6xncxktbulrq3if3a0t1hak5i1su8vj0oklxgqo6dzshslk25z355v4deggwfm',
+                        id: 'd187a0de-0a76-4857-b4c4-9d8494ea6a1a',
+                        tenantId: 'da652b78-4867-44c1-b2d8-b39a2d8ffa9f',
+                        name: 'trpvg6uuukf163nlzk6pr06w4ab4xw4823lsd6t8yfn4o98jut1ppwa3u9fq2fr73rh55womzpj4327qsldwig2jex4q812z6zz9ji2mp8ubvr1bkkshs97upigtgjturars80ydao3wmlqpkdw7ivilri4cv71a2qpz5333u0359d2tt2lji0v0aem50qnr34wr6cx56zb5dtwba66qf8p4iajbt7ejguybkpf7ey85r39ahh3p8x793a3xi6n',
                     }
                 }
             })
@@ -670,7 +670,7 @@ describe('role', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiUpdateRole`, () => 
+    test(`/GraphQL bplusItSappiUpdateRole`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -692,19 +692,19 @@ describe('role', () =>
                 variables: {
                     payload: {
                         
-                        id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc',
-                        tenantId: 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7',
-                        name: 'n6kodik8tqhq63pvzpvs3pz0ysv23ohy429x2w9kt6dyq8mnly8giea1e8mxcbmkp6ywwky132fgp1nlijuovggmpuprwlf5anzw1ezm5khgfh4r86zptj3u0veteks076acccac8twyrl82yvf8o1ol9ajhtyz2dbq5pcfghbvqev1w1q6d413alsu5ns566n6cgsvffhg3mob8ult0yqojv2tg8lz9q2l8qze9sypya9d1o46h7ui1j2iybh6',
+                        id: '8fd69091-78d9-4942-be62-d502744fda3b',
+                        tenantId: 'd0706715-b701-4bb1-9baf-372f4a71accd',
+                        name: 'c94acwxzoticqi6jx6wt4j8zjk47h8lyl8ger8tgu5zsd3taa8t85ex4uhljso3iphpz7xifpns5srxrm8jvhrfjztbb2mywd6ypp12ut4bx2tum2dy81uuu559xltliwfrr8333f0ewu1j7kdinr5ek72cnd11zdz13cdq4h5h2aoc2mnf5u3l7iaz1fwxke1rh2dwj1085vqxa8ca3kqarsj9qvxcu73ijg1xz4yi53gwap4r7zgj7nreeuzv',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateRole.id).toStrictEqual('3b1bb011-1b5b-4ff1-8453-d226ed4351dc');
+                expect(res.body.data.bplusItSappiUpdateRole.id).toStrictEqual('8fd69091-78d9-4942-be62-d502744fda3b');
             });
     });
 
-    it(`/GraphQL bplusItSappiDeleteRoleById - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiDeleteRoleById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -735,7 +735,7 @@ describe('role', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiDeleteRoleById`, () => 
+    test(`/GraphQL bplusItSappiDeleteRoleById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -755,12 +755,12 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '3b1bb011-1b5b-4ff1-8453-d226ed4351dc'
+                    id: '8fd69091-78d9-4942-be62-d502744fda3b'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteRoleById.id).toStrictEqual('3b1bb011-1b5b-4ff1-8453-d226ed4351dc');
+                expect(res.body.data.bplusItSappiDeleteRoleById.id).toStrictEqual('8fd69091-78d9-4942-be62-d502744fda3b');
             });
     });
 

@@ -38,20 +38,19 @@ describe('UpdateSystemResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateSystemResolver should be defined', () => 
+    test('UpdateSystemResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateSystemResolver should be defined', () => 
+        test('UpdateSystemResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a system created', async () => 
+        test('should return a system created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(systems[0])));
             expect(await resolver.main(<BplusItSappiUpdateSystemInput>systems[0])).toBe(systems[0]);

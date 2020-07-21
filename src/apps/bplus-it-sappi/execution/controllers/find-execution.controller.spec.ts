@@ -39,19 +39,14 @@ describe('FindExecutionController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindExecutionController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('FindExecutionController should be defined', () => 
+        test('FindExecutionController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a execution', async () => 
+        test('should return a execution', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(executions[0])));
             expect(await controller.main([])).toBe(executions[0]);

@@ -37,19 +37,19 @@ describe('FindChannelOverviewResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindChannelOverviewResolver should be defined', () => 
+    test('FindChannelOverviewResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindChannelOverviewResolver should be defined', () => 
+        test('FindChannelOverviewResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a channelOverview', async () => 
+        test('should return a channelOverview', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channelsOverview[0])));
             expect(await resolver.main([])).toBe(channelsOverview[0]);

@@ -53,7 +53,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateSystem(payload: BplusItSappiCreateSystemInput!): BplusItSappiSystem
-    bplusItSappiInsertSystems(payload: [BplusItSappiCreateSystemInput]!): Boolean!
+    bplusItSappiCreateSystems(payload: [BplusItSappiCreateSystemInput]!): Boolean!
     bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput!): BplusItSappiSystem
     bplusItSappiDeleteSystemById(id: ID!): BplusItSappiSystem
     bplusItSappiDeleteSystems(query:[QueryStatementInput]): [BplusItSappiSystem]!

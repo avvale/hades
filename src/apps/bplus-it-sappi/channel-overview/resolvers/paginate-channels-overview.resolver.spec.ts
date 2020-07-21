@@ -37,19 +37,19 @@ describe('PaginateChannelsOverviewResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateChannelsOverviewResolver should be defined', () => 
+    test('PaginateChannelsOverviewResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('PaginateChannelsOverviewResolver should be defined', () => 
+        test('PaginateChannelsOverviewResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a channelsOverview', async () => 
+        test('should return a channelsOverview', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channelsOverview)));
             expect(await resolver.main([], [])).toBe(channelsOverview);

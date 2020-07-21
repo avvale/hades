@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
+import { AddDataLakesContextEvent } from './../events/add-data-lakes-context.event';
 
 @Injectable()
 export class DeleteDataLakesService
@@ -16,13 +17,13 @@ export class DeleteDataLakesService
         // get object to delete
         const dataLakes = await this.repository.get(queryStatements);
 
-        await this.repository.delete(queryStatements);        
+        await this.repository.delete(queryStatements);
 
-        // TODO a falta de definir eventos
-        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        // const dataLakesRegistered = this.publisher.mergeObjectContext(dataLakes);
-        
-        // dataLakesRegistered.deleted(dataLakes); // apply event to model events
-        // dataLakesRegistered.commit(); // commit all events of model
+        // create AddDataLakesContextEvent to have object wrapper to add event publisher functionality
+        // insert EventBus in object, to be able to apply and commit events
+        const dataLakesRegistered = this.publisher.mergeObjectContext(new AddDataLakesContextEvent(dataLakes));
+
+        dataLakesRegistered.deleted(); // apply event to model events
+        dataLakesRegistered.commit(); // commit all events of modelx
     }
 }

@@ -2,235 +2,303 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateMessageDetailDto 
 {   
-    @ApiProperty({
-        type        : String,
-        description : 'id [input here api field description]',
-        example     : '8761b63d-3ae5-41d3-95be-958ca51dfc1c'
-    })
-    id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'tenantId [input here api field description]',
-        example     : 'b81db37e-a5c2-4f2d-83af-ffb7f23c1def'
-    })
-    tenantId: string;
+        @ApiProperty({
+            type        : String,
+            description : 'id [input here api field description]',
+            example     : '45700825-9f4d-403d-9d36-a21fbf331a93'
+        })
+        id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'systemId [input here api field description]',
-        example     : 'bcafefb7-cf68-4f3b-a844-1bb60c649712'
-    })
-    systemId: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'systemName [input here api field description]',
-        example     : 'szy2mk40b7bmm60skcsj'
-    })
-    systemName: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'scenario [input here api field description]',
-        example     : 'cxem26x6avqkimm97terttw6vut0owoob1j8n1m93vsiistxqvsrrqsyqp0l'
-    })
-    scenario: string;
+        @ApiProperty({
+            type        : String,
+            description : 'tenantId [input here api field description]',
+            example     : '136c296a-11a8-436a-aab6-0a9f7e4c22ee'
+        })
+        tenantId: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'executionId [input here api field description]',
-        example     : '10ab02f3-b600-44cb-a7c2-63978290326e'
-    })
-    executionId: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'executionType [input here api field description]',
-        example     : 'DETAIL'
-    })
-    executionType: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-17 11:53:51'
-    })
-    executionExecutedAt: string;
+        @ApiProperty({
+            type        : String,
+            description : 'systemId [input here api field description]',
+            example     : 'f0aafb29-c406-4ece-9787-2e632eec3833'
+        })
+        systemId: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-17 05:36:16'
-    })
-    executionMonitoringStartAt: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-17 14:44:42'
-    })
-    executionMonitoringEndAt: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'flowId [input here api field description]',
-        example     : '7111a4f6-d53a-49a9-ae2f-c337b4c299d6'
-    })
-    flowId: string;
+        @ApiProperty({
+            type        : String,
+            description : 'systemName [input here api field description]',
+            example     : 'ibzzrl8pjtzwfry3r8dm'
+        })
+        systemName: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'flowParty [input here api field description]',
-        example     : 'kii7usr97cckq2qrjvmfhwg3ifufvltjnoozayqbzsnhd9c1d7e6ay0wvyco2zk71qd94s473lcd1ppccxcom5webukwlx1nr6dgzyym4ffv3oa6jjcam4ec3a6n0mp4ohezgmdciowds4mlf90ybmbeoaogv5wh'
-    })
-    flowParty: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'flowComponent [input here api field description]',
-        example     : 'vo73ccryud5y6d3m84ap1r7qz5a0jzq5ym0qfvbn7gz4d71c80398szb2kog9tt89jhawqb2vhv3dxgbj1qs7lge9y8dlx6mrncknayj4oeegdfcpr39ks6sikglazmdujxtlt49dd21j1q97t0hkmjggmr08zi7'
-    })
-    flowComponent: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'flowInterfaceName [input here api field description]',
-        example     : 'b2fcj3d0ftaaaejudqf3ikgxq3f9a4q7x8mucrmczip7szm6ovmfokb556mk9t5gp34nqie8u2ye38wfxp85hirfsbkxp6mr0n6ko3fjj2v7ec5kvjbccxki16tg6oljdj583blan2mx7653qdyh58pp0q4xgule'
-    })
-    flowInterfaceName: string;
+        @ApiProperty({
+            type        : String,
+            description : 'scenario [input here api field description]',
+            example     : 'uwmzw27vg1d6cclv2v6f1migfs3ukpr0qfyci0llnprs1wr0ydjwuz2oft8q'
+        })
+        scenario: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'flowInterfaceNamespace [input here api field description]',
-        example     : '9094jai93651l6x7z1pr5rwpby0dilku9f6dylf50quq258to6nsvy27479wn1598js6fb8cfzw602f6yslin0hq3ujis70r1h4myooruk9quv2bq60xcf38a41vrecs3lof4tdge33p9pd68ty3r33546llx3rw'
-    })
-    flowInterfaceNamespace: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'status [input here api field description]',
-        example     : 'ERROR'
-    })
-    status: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'detail [input here api field description]',
-        example     : 'Itaque sit explicabo quidem magni dolor porro vel eaque eaque. Officiis nisi hic perspiciatis nesciunt maxime eaque voluptatem dolores voluptatem. Et tempore quas ipsa ratione aut sed debitis unde error. Labore quos ad velit provident.'
-    })
-    detail: string;
+        @ApiProperty({
+            type        : String,
+            description : 'executionId [input here api field description]',
+            example     : '784d23da-a6b7-4fd1-b66d-b546b3825386'
+        })
+        executionId: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'example [input here api field description]',
-        example     : 'r237mpx7dedzrtahsonl888w9mcof2kajfkk85gm0oihr2i2f6uwywoxz6w0pu97g20ilq3g3k6lbdq20fe28vulb6af9ndz3z0d9hhg6z9hj5d8j09bbbt1gs4bv6lpljdf2deapa8syccfhusznaorw5pm4ukr'
-    })
-    example: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'startTimeAt [input here api field description]',
-        example     : '2020-07-17 11:24:38'
-    })
-    startTimeAt: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'direction [input here api field description]',
-        example     : '06p9m31addwcqo60tniq'
-    })
-    direction: string;
+        @ApiProperty({
+            type        : String,
+            description : 'executionType [input here api field description]',
+            example     : 'SUMMARY',
+            enum        : ['SUMMARY','DETAIL']
+        })
+        executionType: string;
+        
     
-    @ApiProperty({
-        type        : String,
-        description : 'errorCategory [input here api field description]',
-        example     : 'oj0n6o22m932wmtkrdmwac434djgbp0copiafkawx726qfiou9rgb8ye5gguxr2fh6n2dxfg2c1h1l9fj5yv2aa60d1v0rss0odean98z2aje1m2gomkelpvhk1ufbq6di528wknump4z5ptfimz8u6ikvyye281'
-    })
-    errorCategory: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'errorCode [input here api field description]',
-        example     : 'cee3yduczwbzcmaxz5yi'
-    })
-    errorCode: string;
+        @ApiProperty({
+            type        : String,
+            description : 'executionExecutedAt [input here api field description]',
+            example     : '2020-07-21 17:33:28'
+        })
+        executionExecutedAt: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'errorLabel [input here api field description]',
-        example     : 'zqrcuxt38zst6g50au0pcdf47vtcbontie078y1u2esq1sp3m7ugifnsknh0ub18nsvt3jl1atmxss5lcayd5sg4fsqlfc1gzd7p7fgp6ydrils4qqqif3oy45i8nksut8g2wgmv7ggwwz2ijpe3mck6dj5cqz8n'
-    })
-    errorLabel: string;
     
-    @ApiProperty({
-        type        : Number,
-        description : 'node [input here api field description]',
-        example     : 3406256543
-    })
-    node: number;
     
-    @ApiProperty({
-        type        : String,
-        description : 'protocol [input here api field description]',
-        example     : '9f5y8hoagvbh10kmmukr'
-    })
-    protocol: string;
+        @ApiProperty({
+            type        : String,
+            description : 'executionMonitoringStartAt [input here api field description]',
+            example     : '2020-07-21 09:34:45'
+        })
+        executionMonitoringStartAt: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'qualityOfService [input here api field description]',
-        example     : 'x8ad74k249quolbuxsm8'
-    })
-    qualityOfService: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'receiverParty [input here api field description]',
-        example     : 'lw3myuak07y82dpa60mmfnw20xhuqhz7ez1k5cgns5p4zk4uz0qlh105cirxr50622d044sngq6tnsaqdhtrv8ijkvzxeukpiieked575aisev4mj9yitw2i49uqpkqy0fxa47wmdlxri4ycehgly2g4mja4za4p'
-    })
-    receiverParty: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'receiverComponent [input here api field description]',
-        example     : 'l8gkc7u3c1texsrywqg9rrx6hktz6wstbrwribwyyi036eawxwdanw7v9owo0s2gfvclf8tob2u620zyswzrc2hqgrjxko0v2vmktxmgy4kr4uggbuofbtbmx4bxdhwvnnsbl2xxkjrmy5gc1idev1jid808p3yc'
-    })
-    receiverComponent: string;
+        @ApiProperty({
+            type        : String,
+            description : 'executionMonitoringEndAt [input here api field description]',
+            example     : '2020-07-21 14:15:19'
+        })
+        executionMonitoringEndAt: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'receiverInterface [input here api field description]',
-        example     : '7pzs7ldieafh4l96y40g1zo51pthv9hwd2n5la9eti6n0c188vzc7abezfkd3xoni3xdip1vz7jw677pttb7yhmtqfo0gxtaa8puvh2lbfgtad30jxhwzk65zwnqxn3f02z1kkzo67ds8kak7x5w54yp8orxd4w6'
-    })
-    receiverInterface: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'receiverInterfaceNamespace [input here api field description]',
-        example     : '2jmasbhxh129xcpd4tl483biolo5negtl1sa8zo3yalhg53azsy3czf7qppy7yrhvegginl597adptfnzjtioliedliu8iirv90bipb9viityq4mxpoodst78vnl7xqczbhi9nzv5pngyneq84anvp36fd43hfav'
-    })
-    receiverInterfaceNamespace: string;
     
-    @ApiProperty({
-        type        : Number,
-        description : 'retries [input here api field description]',
-        example     : 2912326513
-    })
-    retries: number;
+        @ApiProperty({
+            type        : String,
+            description : 'flowId [input here api field description]',
+            example     : '90a21551-3c36-445a-ac70-43eabce33ab8'
+        })
+        flowId: string;
     
-    @ApiProperty({
-        type        : Number,
-        description : 'size [input here api field description]',
-        example     : 7981688898
-    })
-    size: number;
     
-    @ApiProperty({
-        type        : Number,
-        description : 'timesFailed [input here api field description]',
-        example     : 6512571907
-    })
-    timesFailed: number;
+    
+        @ApiProperty({
+            type        : String,
+            description : 'flowParty [input here api field description]',
+            example     : '53mmd4i9og8vm4fj4s4yieiq6t4xl2erdio2u7wo38rc0zlfpmh4flbalinzuh95vq2n62gi5t5epniqs4mkx69hlc83j6tf7yii3uznjqf343uquvlxp5q4ovc6u5zauizdzybkt3sb4ecu6e2klcryr29xxdnm'
+        })
+        flowParty: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'flowComponent [input here api field description]',
+            example     : '5bnbst71vk0jbfuvnvbxdwjxopw2uzzgzlg14sw975bcnzh5uru5lmo7ms7xc13jp990pr9176cdkxox7gg5xt1mjtjzgvcya0hdgb22fkhhfki8o2zkh5lsz1dogyitf5tqrrfclhul5xsga9h1ov7uu9e9yp8x'
+        })
+        flowComponent: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'flowInterfaceName [input here api field description]',
+            example     : 'y0nrve4pybstayrwnsczgppu0lco67t8jcaywgcakujks5d9jkcokr33r4sri14mp20b37u3rq3wtbdw5isy5bmpbomnczyb8h43c8azek9vy8facdqcrztxrs17qc5ieyqfu47g0nweojvcfivnpgwcpbf7pxvg'
+        })
+        flowInterfaceName: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'flowInterfaceNamespace [input here api field description]',
+            example     : '1f5iy11a8oc0frsv60b5khz2sr8vlaxqv0xw279lmenz6p8x7ae9d2iwrlt864t5wjsvjcixwsy7to1j0qhkxcl26zjfsoveecoaozeb3xxe4d592rgl9t5v7o8jtaff4w2wo8jiausnd23vty8lr10xi4w2bh4w'
+        })
+        flowInterfaceNamespace: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'status [input here api field description]',
+            example     : 'TO_BE_DELIVERED',
+            enum        : ['SUCCESS','CANCELLED','DELIVERING','ERROR','HOLDING','TO_BE_DELIVERED','WAITING']
+        })
+        status: string;
+        
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'detail [input here api field description]',
+            example     : 'Ullam incidunt provident non sunt nulla consectetur sed blanditiis. Dolores dolorem fugiat quidem ut. Ex facilis excepturi quam provident non soluta aut quas officiis. Iste cum rerum excepturi expedita vel suscipit quibusdam suscipit nesciunt. Et voluptatem inventore autem qui corporis.'
+        })
+        detail: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'example [input here api field description]',
+            example     : 'h2dmngcl73qfk21nigm2j72aofg9bwdktlynhywtw374tyu1qzjpuzqxceei60sategi4drujfjpqd1u2gk6n5t4hnka8hgazm85m2moh5bywccf36opcdaye7z399vgt86dtxj85qqr8sdadk479w0ybueeklnw'
+        })
+        example: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'startTimeAt [input here api field description]',
+            example     : '2020-07-21 18:18:39'
+        })
+        startTimeAt: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'direction [input here api field description]',
+            example     : 'vp8w4zqzufg8cwiu3e31'
+        })
+        direction: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'errorCategory [input here api field description]',
+            example     : '4ue9gu9e3cx6ftrhahh7e78c9l18v127xfr5vahkkrefdes2eveb26suf6d5hccah4fnm52rd9fvq867lcwnmwi6kwckogc2a676ol7thp1ugfmx31p2tvl6rtntmyfv6erjevjm81o27clm1cyutaz11ybtng50'
+        })
+        errorCategory: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'errorCode [input here api field description]',
+            example     : '4spv9ixmp06borp2507g'
+        })
+        errorCode: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'errorLabel [input here api field description]',
+            example     : '48fgeerqc8xacsj0rlwu72cw2x28vhk9ns5wiysji5itv5m7xgwg9htnk9s3zacfnwqo5gd9fpx9o8i0o4ik8a0vn2op9cjb93g0iszg2didgf4xuji7pm1uew2xq69ags2jar9x8hsw1ptmuiz3kkohdjlc2z1s'
+        })
+        errorLabel: string;
+    
+    
+    
+        @ApiProperty({
+            type        : Number,
+            description : 'node [input here api field description]',
+            example     : 2482030493
+        })
+        node: number;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'protocol [input here api field description]',
+            example     : 'zcvegbmqbi3tjrkyow89'
+        })
+        protocol: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'qualityOfService [input here api field description]',
+            example     : 'gapp75xr4s2ccl4cuouu'
+        })
+        qualityOfService: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'receiverParty [input here api field description]',
+            example     : 'hv51cwvk763dny8pm2hodv0a7z9xzgzw36z5h4mshvcja452wogbbqpp5u6mbm3jyajdprcdxv8u458jp1omw4pgagez4cbf8jn5uqz4cu3q49nd2eh64dv0qmv6utdjoqvpb67umsepjusx1oi6qg3o8ex9gig6'
+        })
+        receiverParty: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'receiverComponent [input here api field description]',
+            example     : 'tgg5c5kkgvkztngp1c0t689hopmx4amg6up63xp11a7qccjtn1uaj6nd9sqebkl3bgw92d0i8f6hlalidkba48tw3yd6iv4ugl9rv330c0ytasrsbj52pz6g026rk920veox3est98k1mpsu3g5ycwsrpp10ptkk'
+        })
+        receiverComponent: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'receiverInterface [input here api field description]',
+            example     : 'fww8yq3atismbgpkx9tnj7j3cujnpzb2olw2okcs7b1ov5z1gkpmd3bhi9u2fhg90ftlsf64dbd5kmbfu69ot7bfwvcrzrdf55l70w397lirpi7oncmlzyjh7larvp6wpmq3uztv5y30yd71c4u4qmnw34in60w1'
+        })
+        receiverInterface: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'receiverInterfaceNamespace [input here api field description]',
+            example     : 'r86cx0mxv50usdyoavd53may2d2rqb26bgtkpw248i8gbdc4s0rrzoxo80q1v1792tjdmb62mikepue7momzyuj5mkevjqz82leq3ndfqc1m1b9mbfjhkfuuyi6fcmywt3tpo5177p0uyc7kg53s40y6zjxben38'
+        })
+        receiverInterfaceNamespace: string;
+    
+    
+    
+        @ApiProperty({
+            type        : Number,
+            description : 'retries [input here api field description]',
+            example     : 6884635548
+        })
+        retries: number;
+    
+    
+    
+        @ApiProperty({
+            type        : Number,
+            description : 'size [input here api field description]',
+            example     : 5423440034
+        })
+        size: number;
+    
+    
+    
+        @ApiProperty({
+            type        : Number,
+            description : 'timesFailed [input here api field description]',
+            example     : 3002651924
+        })
+        timesFailed: number;
+    
     
 }

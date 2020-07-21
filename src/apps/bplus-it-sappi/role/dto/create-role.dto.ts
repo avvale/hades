@@ -2,25 +2,31 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateRoleDto 
 {   
-    @ApiProperty({
-        type        : String,
-        description : 'id [input here api field description]',
-        example     : '3b1bb011-1b5b-4ff1-8453-d226ed4351dc'
-    })
-    id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'tenantId [input here api field description]',
-        example     : 'd76e18ba-d0b3-48e4-bebf-0bb95a5c04b7'
-    })
-    tenantId: string;
+        @ApiProperty({
+            type        : String,
+            description : 'id [input here api field description]',
+            example     : '8fd69091-78d9-4942-be62-d502744fda3b'
+        })
+        id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'name [input here api field description]',
-        example     : 'fy7fkxwxjepjmr35rs3rcm6ckcfslgzdzh25z7vbzx8uq3d1tljvs7hxrq191rkbarr1r5gw34jqjeoel6nfmreoece3ifij25p9ybmvb6j67qfcv02sg8d5qszldjqojt6n23egn15cz54nu2722jwy5muxs1msuw9d8wq6mwyoxqpqmqg03owo01f7fxzpiejnx4cejjaqo9al3g9yowuiackpika918d8cnp5nu31lm8hs92qlnl9wy3xaon'
-    })
-    name: string;
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'tenantId [input here api field description]',
+            example     : 'd0706715-b701-4bb1-9baf-372f4a71accd'
+        })
+        tenantId: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'name [input here api field description]',
+            example     : 'tbbephu3i71rypd45477xcc54c4gpmnre3t3bdkfl76r175k6h18oq782rj6imophzk7i8e7owrjg8hmm06ra542tq2ftj0crywf0rlpyy92qpsyspsg3l11gth5340m6lj3eyx5l3fi8dz40n55hk0qd2ypv027hgirefetyxiw9zrsqgkf6es2wh9fn7m9cfiu1cnwyormvql8t18qs5x1xu3d8cavnewr6rfv8ixagx2ft07s1hsv8vedv2m'
+        })
+        name: string;
+    
     
 }

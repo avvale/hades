@@ -39,19 +39,14 @@ describe('FindFlowByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindFlowByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('FindFlowByIdController should be defined', () => 
+        test('FindFlowByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an flow by id', async () => 
+        test('should return an flow by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(flows[0])));
             expect(await controller.main(flows[0].id)).toBe(flows[0]);

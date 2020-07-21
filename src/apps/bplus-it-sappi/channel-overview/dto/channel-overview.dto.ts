@@ -6,8 +6,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'bfaac914-73ac-45fc-9c74-2b64d6df0ffc',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '423d8a3e-2701-4236-ad44-c3167fcb5691'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'a7051b5c-5600-4eb2-88a5-db0d04762c01',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '7373cee6-d316-4085-8f27-ab48d3e74d6d'
     })
     tenantId: string;
     
@@ -26,8 +24,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '1340cec3-fbca-4131-8fba-c1a2a7fb826c',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'db96dfe9-46bd-412e-af3b-dde8988d644c'
     })
     systemId: string;
     
@@ -36,8 +33,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'xh2bwrttx43s1wr7aetd',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'g7kpyjwn10z4ksj0m0st'
     })
     systemName: string;
     
@@ -46,8 +42,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '816dc44c-9607-4cdf-a859-465710286163',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'ac24879f-862f-4b27-af72-47ce34cfe605'
     })
     executionId: string;
     
@@ -57,7 +52,7 @@ export class ChannelOverviewDto
         type        : String,
         description : 'executionType [input here api field description]',
         example     : 'DETAIL',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        enum        : ['SUMMARY','DETAIL']
     })
     executionType: string;
     
@@ -66,8 +61,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-16 20:02:35',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 11:32:45'
     })
     executionExecutedAt: string;
     
@@ -76,8 +70,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-17 03:42:01',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 11:53:59'
     })
     executionMonitoringStartAt: string;
     
@@ -86,8 +79,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-17 13:33:36',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 16:21:36'
     })
     executionMonitoringEndAt: string;
     
@@ -96,8 +88,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'error [input here api field description]',
-        example     : 7196493906,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 2291664870
     })
     error: number;
     
@@ -106,8 +97,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'inactive [input here api field description]',
-        example     : 4338079964,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 7748820686
     })
     inactive: number;
     
@@ -116,8 +106,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'successful [input here api field description]',
-        example     : 8964755348,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 7773674634
     })
     successful: number;
     
@@ -126,8 +115,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'stopped [input here api field description]',
-        example     : 2045546136,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 7314929389
     })
     stopped: number;
     
@@ -136,8 +124,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'unknown [input here api field description]',
-        example     : 1954662444,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 9032092251
     })
     unknown: number;
     
@@ -146,8 +133,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'unregistered [input here api field description]',
-        example     : 9822966679,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 5180065174
     })
     unregistered: number;
     
@@ -156,8 +142,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-17 10:42:44',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 15:29:16'
     })
     createdAt: string;
     
@@ -166,8 +151,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-16 18:20:36',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 21:43:28'
     })
     updatedAt: string;
     
@@ -176,8 +160,7 @@ export class ChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-17 05:45:52',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 19:53:31'
     })
     deletedAt: string;
     

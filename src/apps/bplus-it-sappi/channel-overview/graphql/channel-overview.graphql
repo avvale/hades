@@ -79,7 +79,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateChannelOverview(payload: BplusItSappiCreateChannelOverviewInput!): BplusItSappiChannelOverview
-    bplusItSappiInsertChannelsOverview(payload: [BplusItSappiCreateChannelOverviewInput]!): Boolean!
+    bplusItSappiCreateChannelsOverview(payload: [BplusItSappiCreateChannelOverviewInput]!): Boolean!
     bplusItSappiUpdateChannelOverview(payload: BplusItSappiUpdateChannelOverviewInput!): BplusItSappiChannelOverview
     bplusItSappiDeleteChannelOverviewById(id: ID!): BplusItSappiChannelOverview
     bplusItSappiDeleteChannelsOverview(query:[QueryStatementInput]): [BplusItSappiChannelOverview]!

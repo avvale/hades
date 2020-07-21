@@ -38,7 +38,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateRole(payload: BplusItSappiCreateRoleInput!): BplusItSappiRole
-    bplusItSappiInsertRoles(payload: [BplusItSappiCreateRoleInput]!): Boolean!
+    bplusItSappiCreateRoles(payload: [BplusItSappiCreateRoleInput]!): Boolean!
     bplusItSappiUpdateRole(payload: BplusItSappiUpdateRoleInput!): BplusItSappiRole
     bplusItSappiDeleteRoleById(id: ID!): BplusItSappiRole
     bplusItSappiDeleteRoles(query:[QueryStatementInput]): [BplusItSappiRole]!

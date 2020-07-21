@@ -39,19 +39,14 @@ describe('FindSystemByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindSystemByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('FindSystemByIdController should be defined', () => 
+        test('FindSystemByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an system by id', async () => 
+        test('should return an system by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(systems[0])));
             expect(await controller.main(systems[0].id)).toBe(systems[0]);

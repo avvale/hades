@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
+import { AddMessagesOverviewContextEvent } from './../events/add-messages-overview-context.event';
 
 @Injectable()
 export class DeleteMessagesOverviewService
@@ -16,13 +17,13 @@ export class DeleteMessagesOverviewService
         // get object to delete
         const messagesOverview = await this.repository.get(queryStatements);
 
-        await this.repository.delete(queryStatements);        
+        await this.repository.delete(queryStatements);
 
-        // TODO a falta de definir eventos
-        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        // const messagesOverviewRegistered = this.publisher.mergeObjectContext(messagesOverview);
-        
-        // messagesOverviewRegistered.deleted(messagesOverview); // apply event to model events
-        // messagesOverviewRegistered.commit(); // commit all events of model
+        // create AddMessagesOverviewContextEvent to have object wrapper to add event publisher functionality
+        // insert EventBus in object, to be able to apply and commit events
+        const messagesOverviewRegistered = this.publisher.mergeObjectContext(new AddMessagesOverviewContextEvent(messagesOverview));
+
+        messagesOverviewRegistered.deleted(); // apply event to model events
+        messagesOverviewRegistered.commit(); // commit all events of modelx
     }
 }

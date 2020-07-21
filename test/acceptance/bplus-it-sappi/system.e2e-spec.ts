@@ -51,7 +51,7 @@ describe('system', () =>
         await app.init();
     });
 
-    it(`/REST:POST bplus-it-sappi/system - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
@@ -61,20 +61,20 @@ describe('system', () =>
     });
 
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: '7',
-                tenantCode: '7',
-                environment: 'b',
-                version: 'v',
-                isActive: false,
-                cancelledAt: '2020-07-17 06:47:19',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'f',
+                tenantCode: 'i',
+                environment: 'n',
+                version: 'x',
+                isActive: true,
+                cancelledAt: '2020-07-21 08:07:32',
             })
             .expect(400)
             .then(res => {
@@ -82,20 +82,20 @@ describe('system', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: 'b',
-                tenantCode: '2',
-                environment: 'z',
-                version: 'z',
-                isActive: true,
-                cancelledAt: '2020-07-17 05:20:56',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'z',
+                tenantCode: 'e',
+                environment: '9',
+                version: 'k',
+                isActive: false,
+                cancelledAt: '2020-07-21 08:08:08',
             })
             .expect(400)
             .then(res => {
@@ -103,20 +103,20 @@ describe('system', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
                 tenantId: null,
-                name: 'j',
-                tenantCode: 'q',
-                environment: '7',
-                version: 'a',
-                isActive: false,
-                cancelledAt: '2020-07-16 22:45:54',
+                name: '4',
+                tenantCode: 'o',
+                environment: 't',
+                version: 'd',
+                isActive: true,
+                cancelledAt: '2020-07-21 02:34:26',
             })
             .expect(400)
             .then(res => {
@@ -124,20 +124,20 @@ describe('system', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
                 
-                name: 'p',
-                tenantCode: 'g',
-                environment: 'd',
-                version: 'f',
+                name: 'y',
+                tenantCode: 'f',
+                environment: 'j',
+                version: 'e',
                 isActive: false,
-                cancelledAt: '2020-07-17 00:45:40',
+                cancelledAt: '2020-07-21 23:30:44',
             })
             .expect(400)
             .then(res => {
@@ -145,20 +145,20 @@ describe('system', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemName property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemName property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
                 name: null,
-                tenantCode: 'u',
-                environment: 'r',
-                version: 'g',
-                isActive: false,
-                cancelledAt: '2020-07-16 20:43:44',
+                tenantCode: 's',
+                environment: 'y',
+                version: 'y',
+                isActive: true,
+                cancelledAt: '2020-07-21 03:39:10',
             })
             .expect(400)
             .then(res => {
@@ -166,20 +166,20 @@ describe('system', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemName property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemName property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
                 
-                tenantCode: '3',
-                environment: '4',
-                version: 'k',
-                isActive: true,
-                cancelledAt: '2020-07-17 07:11:03',
+                tenantCode: '0',
+                environment: 's',
+                version: 'r',
+                isActive: false,
+                cancelledAt: '2020-07-21 04:45:01',
             })
             .expect(400)
             .then(res => {
@@ -187,20 +187,20 @@ describe('system', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantCode property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantCode property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: 'p',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 't',
                 tenantCode: null,
-                environment: 's',
-                version: '7',
-                isActive: false,
-                cancelledAt: '2020-07-17 12:41:25',
+                environment: 'i',
+                version: 'd',
+                isActive: true,
+                cancelledAt: '2020-07-21 05:56:34',
             })
             .expect(400)
             .then(res => {
@@ -208,20 +208,20 @@ describe('system', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantCode property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantCode property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: '3',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'f',
                 
                 environment: '2',
-                version: 'l',
+                version: 'c',
                 isActive: false,
-                cancelledAt: '2020-07-16 22:09:28',
+                cancelledAt: '2020-07-21 17:27:13',
             })
             .expect(400)
             .then(res => {
@@ -229,20 +229,20 @@ describe('system', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemEnvironment property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemEnvironment property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: 'k',
-                tenantCode: 'h',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'n',
+                tenantCode: 'j',
                 environment: null,
-                version: 'y',
+                version: 'x',
                 isActive: false,
-                cancelledAt: '2020-07-17 06:16:37',
+                cancelledAt: '2020-07-21 13:49:37',
             })
             .expect(400)
             .then(res => {
@@ -250,20 +250,20 @@ describe('system', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemEnvironment property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemEnvironment property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: '5',
-                tenantCode: 'f',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'c',
+                tenantCode: '5',
                 
-                version: 'p',
+                version: '9',
                 isActive: true,
-                cancelledAt: '2020-07-17 11:31:06',
+                cancelledAt: '2020-07-21 03:12:37',
             })
             .expect(400)
             .then(res => {
@@ -271,20 +271,20 @@ describe('system', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemVersion property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemVersion property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: '7',
-                tenantCode: '8',
-                environment: 'n',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'v',
+                tenantCode: 'x',
+                environment: '8',
                 version: null,
                 isActive: true,
-                cancelledAt: '2020-07-16 17:29:50',
+                cancelledAt: '2020-07-21 10:49:49',
             })
             .expect(400)
             .then(res => {
@@ -292,20 +292,20 @@ describe('system', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemVersion property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemVersion property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: '7',
-                tenantCode: '2',
-                environment: 'a',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 's',
+                tenantCode: 'x',
+                environment: 'y',
                 
-                isActive: true,
-                cancelledAt: '2020-07-17 11:53:34',
+                isActive: false,
+                cancelledAt: '2020-07-21 23:03:58',
             })
             .expect(400)
             .then(res => {
@@ -313,20 +313,20 @@ describe('system', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemIsActive property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemIsActive property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: 'j',
-                tenantCode: '1',
-                environment: '1',
-                version: 'j',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'l',
+                tenantCode: '6',
+                environment: 'x',
+                version: '2',
                 isActive: null,
-                cancelledAt: '2020-07-17 10:17:01',
+                cancelledAt: '2020-07-21 15:44:16',
             })
             .expect(400)
             .then(res => {
@@ -334,20 +334,20 @@ describe('system', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemIsActive property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemIsActive property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: 'k',
-                tenantCode: '5',
-                environment: '0',
-                version: 'x',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'a',
+                tenantCode: 't',
+                environment: 'm',
+                version: '8',
                 
-                cancelledAt: '2020-07-17 01:27:46',
+                cancelledAt: '2020-07-21 11:55:17',
             })
             .expect(400)
             .then(res => {
@@ -357,20 +357,20 @@ describe('system', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '44bx1jup4por67wzuhe7fodabe95yvwme819w',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: 'j',
-                tenantCode: 'o',
-                environment: 'b',
-                version: 'p',
+                id: 'r22gq5dvhz40rz4ck54g7vxx0lmgb5q8o7d38',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'q',
+                tenantCode: '7',
+                environment: 'x',
+                version: 'f',
                 isActive: false,
-                cancelledAt: '2020-07-16 18:14:42',
+                cancelledAt: '2020-07-21 21:11:10',
             })
             .expect(400)
             .then(res => {
@@ -378,20 +378,20 @@ describe('system', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'qx9z5h92rxsuy4fxs6xav3k57fwrkh54oc6n7',
-                name: 's',
-                tenantCode: 'e',
-                environment: 'm',
-                version: 'y',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: 'g32gffa8g1aqjbd82qo8fnqadzppkhmfgurfl',
+                name: '5',
+                tenantCode: 's',
+                environment: '4',
+                version: 'p',
                 isActive: false,
-                cancelledAt: '2020-07-17 01:11:04',
+                cancelledAt: '2020-07-21 11:07:16',
             })
             .expect(400)
             .then(res => {
@@ -409,20 +409,20 @@ describe('system', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemIsActive has to be a boolean value`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemIsActive has to be a boolean value`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: 'm',
-                tenantCode: 'x',
-                environment: 'i',
-                version: 'u',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'n',
+                tenantCode: 'v',
+                environment: 'a',
+                version: 'y',
                 isActive: 'true',
-                cancelledAt: '2020-07-16 19:51:26',
+                cancelledAt: '2020-07-21 05:09:14',
             })
             .expect(400)
             .then(res => {
@@ -434,19 +434,19 @@ describe('system', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemCancelledAt has to be a timestamp value`, () => 
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemCancelledAt has to be a timestamp value`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: 'f',
-                tenantCode: '1',
-                environment: 'c',
-                version: 'y',
-                isActive: true,
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'a',
+                tenantCode: 'k',
+                environment: '3',
+                version: '2',
+                isActive: false,
                 cancelledAt: 'XXXXXXXX',
             })
             .expect(400)
@@ -456,25 +456,25 @@ describe('system', () =>
     });
     
 
-    it(`/REST:POST bplus-it-sappi/system`, () => 
+    test(`/REST:POST bplus-it-sappi/system`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: 'm',
-                tenantCode: '4',
-                environment: 'm',
-                version: 'c',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: '0',
+                tenantCode: 'z',
+                environment: '1',
+                version: 'f',
                 isActive: true,
-                cancelledAt: '2020-07-17 06:44:34',
+                cancelledAt: '2020-07-21 13:22:50',
             })
             .expect(201);
     });
 
-    it(`/REST:GET bplus-it-sappi/systems/paginate`, () => 
+    test(`/REST:GET bplus-it-sappi/systems/paginate`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/systems/paginate')
@@ -499,7 +499,7 @@ describe('system', () =>
             });
     });
 
-    it(`/REST:GET bplus-it-sappi/system - Got 404 Not Found`, () => 
+    test(`/REST:GET bplus-it-sappi/system - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/system')
@@ -517,7 +517,7 @@ describe('system', () =>
             .expect(404);
     });
 
-    it(`/REST:GET bplus-it-sappi/system`, () => 
+    test(`/REST:GET bplus-it-sappi/system`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/system')
@@ -528,15 +528,15 @@ describe('system', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '03f356e6-952c-40df-86ab-5b42cfedd85c'
+                        value   : 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '03f356e6-952c-40df-86ab-5b42cfedd85c'));
+            .expect(repository.collectionResponse.find(item => item.id === 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015'));
     });
 
-    it(`/REST:GET bplus-it-sappi/system/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET bplus-it-sappi/system/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/system/00000000-0000-0000-0000-000000000000')
@@ -544,16 +544,16 @@ describe('system', () =>
             .expect(404);
     });
 
-    it(`/REST:GET bplus-it-sappi/system/{id}`, () => 
+    test(`/REST:GET bplus-it-sappi/system/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/system/03f356e6-952c-40df-86ab-5b42cfedd85c')
+            .get('/bplus-it-sappi/system/a36798b4-80ea-40fa-9b0f-1a3fc2ba2015')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '03f356e6-952c-40df-86ab-5b42cfedd85c'));
+            .expect(repository.collectionResponse.find(e => e.id === 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015'));
     });
 
-    it(`/REST:GET bplus-it-sappi/systems`, () => 
+    test(`/REST:GET bplus-it-sappi/systems`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/systems')
@@ -562,46 +562,46 @@ describe('system', () =>
             .expect(repository.collectionResponse);
     });
 
-    it(`/REST:PUT bplus-it-sappi/system - Got 404 Not Found`, () => 
+    test(`/REST:PUT bplus-it-sappi/system - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .put('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '2f1a05d4-ba77-4258-bc48-8ae1447750fd',
-                tenantId: 'b95616ab-8980-4f6a-a4ae-0db80822a5d1',
-                name: '1',
-                tenantCode: 'n',
-                environment: 'k',
-                version: 'g',
+                id: '91724ff0-5425-4cdd-bdaf-e8d5e6e667a9',
+                tenantId: '9bc747b5-d1b6-4286-aa2f-f4a3dbe95351',
+                name: 'a',
+                tenantCode: '0',
+                environment: 'j',
+                version: 'a',
                 isActive: true,
-                cancelledAt: '2020-07-17 15:36:55',
+                cancelledAt: '2020-07-21 06:51:30',
             })
             .expect(404);
     });
 
-    it(`/REST:PUT bplus-it-sappi/system`, () => 
+    test(`/REST:PUT bplus-it-sappi/system`, () => 
     {
         return request(app.getHttpServer())
             .put('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                name: 'k',
-                tenantCode: 'y',
-                environment: '8',
-                version: '7',
+                id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                name: 'c',
+                tenantCode: 'c',
+                environment: 'f',
+                version: '9',
                 isActive: false,
-                cancelledAt: '2020-07-17 10:40:24',
+                cancelledAt: '2020-07-21 11:55:08',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '03f356e6-952c-40df-86ab-5b42cfedd85c'));
+            .expect(repository.collectionResponse.find(e => e.id === 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015'));
     });
 
-    it(`/REST:DELETE bplus-it-sappi/system/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE bplus-it-sappi/system/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .delete('/bplus-it-sappi/system/00000000-0000-0000-0000-000000000000')
@@ -609,15 +609,15 @@ describe('system', () =>
             .expect(404);
     });
 
-    it(`/REST:DELETE bplus-it-sappi/system/{id}`, () => 
+    test(`/REST:DELETE bplus-it-sappi/system/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/system/03f356e6-952c-40df-86ab-5b42cfedd85c')
+            .delete('/bplus-it-sappi/system/a36798b4-80ea-40fa-9b0f-1a3fc2ba2015')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    it(`/GraphQL bplusItSappiCreateSystem - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL bplusItSappiCreateSystem - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -653,7 +653,7 @@ describe('system', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiCreateSystem`, () => 
+    test(`/GraphQL bplusItSappiCreateSystem`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -679,24 +679,24 @@ describe('system', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '37d7d897-5140-465a-a720-1f99a4d3124f',
-                        tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                        name: '3',
-                        tenantCode: '7',
-                        environment: 'f',
-                        version: '1',
-                        isActive: true,
-                        cancelledAt: '2020-07-16 22:52:40',
+                        id: '83459524-bdb8-42cb-a928-6ce20c08a756',
+                        tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                        name: 'e',
+                        tenantCode: 'x',
+                        environment: 'x',
+                        version: 'g',
+                        isActive: false,
+                        cancelledAt: '2020-07-21 13:09:37',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateSystem).toHaveProperty('id', '37d7d897-5140-465a-a720-1f99a4d3124f');
+                expect(res.body.data.bplusItSappiCreateSystem).toHaveProperty('id', '83459524-bdb8-42cb-a928-6ce20c08a756');
             });
     });
 
-    it(`/GraphQL bplusItSappiPaginateSystems`, () => 
+    test(`/GraphQL bplusItSappiPaginateSystems`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -734,7 +734,7 @@ describe('system', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindSystem - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiFindSystem - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -777,7 +777,7 @@ describe('system', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindSystem`, () => 
+    test(`/GraphQL bplusItSappiFindSystem`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -807,18 +807,18 @@ describe('system', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '03f356e6-952c-40df-86ab-5b42cfedd85c'
+                            value   : 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindSystem.id).toStrictEqual('03f356e6-952c-40df-86ab-5b42cfedd85c');
+                expect(res.body.data.bplusItSappiFindSystem.id).toStrictEqual('a36798b4-80ea-40fa-9b0f-1a3fc2ba2015');
             });
     });
 
-    it(`/GraphQL bplusItSappiFindSystemById - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiFindSystemById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -854,7 +854,7 @@ describe('system', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindSystemById`, () => 
+    test(`/GraphQL bplusItSappiFindSystemById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -879,16 +879,16 @@ describe('system', () =>
                     }
                 `,
                 variables: {
-                    id: '03f356e6-952c-40df-86ab-5b42cfedd85c'
+                    id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindSystemById.id).toStrictEqual('03f356e6-952c-40df-86ab-5b42cfedd85c');
+                expect(res.body.data.bplusItSappiFindSystemById.id).toStrictEqual('a36798b4-80ea-40fa-9b0f-1a3fc2ba2015');
             });
     });
 
-    it(`/GraphQL bplusItSappiGetSystems`, () => 
+    test(`/GraphQL bplusItSappiGetSystems`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -923,7 +923,7 @@ describe('system', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiUpdateSystem - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiUpdateSystem - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -950,14 +950,14 @@ describe('system', () =>
                 variables: {
                     payload: {
                         
-                        id: 'c82e2fe9-dd96-47d1-91c3-1d184a24e908',
-                        tenantId: 'e00ffd2c-a75e-4fd2-9100-e1f6a309f363',
-                        name: 'd',
-                        tenantCode: 'k',
-                        environment: '9',
-                        version: 'p',
-                        isActive: true,
-                        cancelledAt: '2020-07-17 11:26:39',
+                        id: '6d32dbac-ea43-4bf2-90e4-358de6491308',
+                        tenantId: '48c89017-b007-4626-8581-612754d8707b',
+                        name: '8',
+                        tenantCode: 'a',
+                        environment: 'z',
+                        version: 'a',
+                        isActive: false,
+                        cancelledAt: '2020-07-21 17:20:53',
                     }
                 }
             })
@@ -969,7 +969,7 @@ describe('system', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiUpdateSystem`, () => 
+    test(`/GraphQL bplusItSappiUpdateSystem`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -996,24 +996,24 @@ describe('system', () =>
                 variables: {
                     payload: {
                         
-                        id: '03f356e6-952c-40df-86ab-5b42cfedd85c',
-                        tenantId: 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-                        name: 'g',
-                        tenantCode: 'd',
-                        environment: 'q',
-                        version: '4',
+                        id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015',
+                        tenantId: '52853c06-4f08-4289-9c17-73d76d1fb36b',
+                        name: '3',
+                        tenantCode: 'r',
+                        environment: 'i',
+                        version: '3',
                         isActive: false,
-                        cancelledAt: '2020-07-17 15:38:51',
+                        cancelledAt: '2020-07-21 15:44:14',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateSystem.id).toStrictEqual('03f356e6-952c-40df-86ab-5b42cfedd85c');
+                expect(res.body.data.bplusItSappiUpdateSystem.id).toStrictEqual('a36798b4-80ea-40fa-9b0f-1a3fc2ba2015');
             });
     });
 
-    it(`/GraphQL bplusItSappiDeleteSystemById - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiDeleteSystemById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1049,7 +1049,7 @@ describe('system', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiDeleteSystemById`, () => 
+    test(`/GraphQL bplusItSappiDeleteSystemById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1074,12 +1074,12 @@ describe('system', () =>
                     }
                 `,
                 variables: {
-                    id: '03f356e6-952c-40df-86ab-5b42cfedd85c'
+                    id: 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteSystemById.id).toStrictEqual('03f356e6-952c-40df-86ab-5b42cfedd85c');
+                expect(res.body.data.bplusItSappiDeleteSystemById.id).toStrictEqual('a36798b4-80ea-40fa-9b0f-1a3fc2ba2015');
             });
     });
 

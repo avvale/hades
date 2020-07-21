@@ -39,20 +39,14 @@ describe('CreateSystemController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('CreateSystemController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('CreateSystemController should be defined', () => 
+        test('CreateSystemController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an system created', async () => 
+        test('should return an system created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(systems[0])));
             expect(await controller.main(systems[0])).toBe(systems[0]);

@@ -39,20 +39,14 @@ describe('CreateJobOverviewController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('CreateJobOverviewController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('CreateJobOverviewController should be defined', () => 
+        test('CreateJobOverviewController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an jobOverview created', async () => 
+        test('should return an jobOverview created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(jobsOverview[0])));
             expect(await controller.main(jobsOverview[0])).toBe(jobsOverview[0]);

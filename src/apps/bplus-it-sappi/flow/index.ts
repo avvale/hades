@@ -1,6 +1,6 @@
 // controllers
 import { CreateFlowController } from './controllers/create-flow.controller';
-import { InsertFlowsController } from './controllers/insert-flows.controller';
+import { CreateFlowsController } from './controllers/create-flows.controller';
 import { PaginateFlowsController } from './controllers/paginate-flows.controller';
 import { GetFlowsController } from './controllers/get-flows.controller';
 import { FindFlowByIdController } from './controllers/find-flow-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteFlowsController } from './controllers/delete-flows.controller';
 
 // resolvers
 import { CreateFlowResolver } from './resolvers/create-flow.resolver';
-import { InsertFlowsResolver } from './resolvers/insert-flows.resolver';
+import { CreateFlowsResolver } from './resolvers/create-flows.resolver';
 import { PaginateFlowsResolver } from './resolvers/paginate-flows.resolver';
 import { GetFlowsResolver } from './resolvers/get-flows.resolver';
 import { FindFlowResolver } from './resolvers/find-flow.resolver';
@@ -22,7 +22,7 @@ import { DeleteFlowsResolver } from './resolvers/delete-flows.resolver';
 
 export const BplusItSappiFlowControllers = [
     CreateFlowController,
-    InsertFlowsController,
+    CreateFlowsController,
     PaginateFlowsController,
     GetFlowsController,
     FindFlowByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiFlowControllers = [
 
 export const BplusItSappiFlowResolvers = [
     CreateFlowResolver,
-    InsertFlowsResolver,
+    CreateFlowsResolver,
     PaginateFlowsResolver,
     GetFlowsResolver,
     FindFlowResolver,

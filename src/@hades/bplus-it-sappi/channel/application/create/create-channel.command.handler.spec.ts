@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { CreateChannelCommandHandler } from './create-channel.command-handler';
-import { channels } from '@hades/admin/channel/infrastructure/seeds/channel.seed';
+import { channels } from '@hades/bplus-it-sappi/channel/infrastructure/seeds/channel.seed';
 import { CreateChannelCommand } from './create-channel.command';
 import { CreateChannelService } from './create-channel.service';
 
@@ -29,20 +29,14 @@ describe('CreateChannelCommandHandler', () =>
         service         = module.get<CreateChannelService>(CreateChannelService);
     });
 
-    it('CreateChannelCommandHandler should be defined', () => 
-    {
-        expect(commandHandler).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('CreateChannelCommandHandler should be defined', () => 
+        test('CreateChannelCommandHandler should be defined', () => 
         {
             expect(commandHandler).toBeDefined();
         });
 
-        it('should return an channel created', async () => 
+        test('should create the values objects and pass them as parameters to the CreateChannelService', async () => 
         {
             expect(await commandHandler.execute(
                 new CreateChannelCommand(

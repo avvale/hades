@@ -39,19 +39,14 @@ describe('DeleteSystemByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteSystemByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteSystemByIdController should be defined', () => 
+        test('DeleteSystemByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an system deleted', async () => 
+        test('should return an system deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(systems[0])));
             expect(await controller.main(systems[0].id)).toBe(systems[0]);

@@ -88,7 +88,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateMessageOverview(payload: BplusItSappiCreateMessageOverviewInput!): BplusItSappiMessageOverview
-    bplusItSappiInsertMessagesOverview(payload: [BplusItSappiCreateMessageOverviewInput]!): Boolean!
+    bplusItSappiCreateMessagesOverview(payload: [BplusItSappiCreateMessageOverviewInput]!): Boolean!
     bplusItSappiUpdateMessageOverview(payload: BplusItSappiUpdateMessageOverviewInput!): BplusItSappiMessageOverview
     bplusItSappiDeleteMessageOverviewById(id: ID!): BplusItSappiMessageOverview
     bplusItSappiDeleteMessagesOverview(query:[QueryStatementInput]): [BplusItSappiMessageOverview]!

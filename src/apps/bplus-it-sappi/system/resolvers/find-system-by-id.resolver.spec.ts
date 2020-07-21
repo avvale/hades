@@ -37,19 +37,19 @@ describe('FindSystemByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindSystemByIdResolver should be defined', () => 
+    test('FindSystemByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindSystemByIdResolver should be defined', () => 
+        test('FindSystemByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an system by id', async () => 
+        test('should return an system by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(systems[0])));
             expect(await resolver.main(systems[0].id)).toBe(systems[0]);

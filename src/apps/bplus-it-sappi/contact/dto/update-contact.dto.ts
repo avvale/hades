@@ -2,102 +2,130 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateContactDto 
 {   
-    @ApiProperty({
-        type        : String,
-        description : 'id [input here api field description]',
-        example     : 'a143a40d-d134-466f-9c31-4b59b9b1c36e'
-    })
-    id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'tenantId [input here api field description]',
-        example     : '7c448cfa-3408-4102-9d45-ce46cbfc8ab1'
-    })
-    tenantId: string;
+        @ApiProperty({
+            type        : String,
+            description : 'id [input here api field description]',
+            example     : 'f57e19cf-e0a7-4976-b49e-40d4fe1f20c2'
+        })
+        id: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'systemId [input here api field description]',
-        example     : '56504540-1964-434b-871f-afa892eb0e69'
-    })
-    systemId: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'systemName [input here api field description]',
-        example     : '8b0j3hrmhhqjwu8lw6dm'
-    })
-    systemName: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'roleId [input here api field description]',
-        example     : 'a14dd912-d135-49fe-b50d-0cfeea373155'
-    })
-    roleId: string;
+        @ApiProperty({
+            type        : String,
+            description : 'tenantId [input here api field description]',
+            example     : '2186eac0-4963-4b7c-a768-4dc9c97286a4'
+        })
+        tenantId: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'roleName [input here api field description]',
-        example     : 'yp9x2pt97htn9oimbz0d0iu8p57ttgztgwqufbzd3h2eu6xn06xe6maeb00ltzajwclf5lp5yo20ynbk0eezfz8igmemp7s1ht4ambg8bi7z32xagbsq3vwtxu7b6o39jyp2p8i0viiq4g6rqxc0uvl5a6kk4s79k26ccye6dyjq38s3qttp3pkq6mm8wlz7x1lyoelhq85y0gpsucyayggzpng2sd5pnu7ig75wp7isq64a1krrf81mq40wprr'
-    })
-    roleName: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'name [input here api field description]',
-        example     : 'pz5y94on3zmmc2h430avl1c5chtg2mwkfke0s2hmyyyg5gvogbcum5twnrhxvqo3r63n907hisewfurgtrhb6c2rlkd0s9yg2g2ycqhk7ok8isi54qyoka8xkauyp8uk189kxh3n17h63zxjunhvl49ccamfcxk9mwovhy6saurghnli4fz2f5p1209dmssxq4g9ghyknx9ffhod55lycw112ubp7kmlh0063s3ofqsfachioslg2fz04hchtik'
-    })
-    name: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'surname [input here api field description]',
-        example     : 'pxn7fwdsgsbd6ne9rc5yej6ox4e4de5aim54x73sjblv7hf4hzmc2fdqx1gok4yrvbqfjwdd19qcv7zfiipk6vhtdxe3ejp5shcfq2n2tymg1utlkpgr7ipnzyuhb37ytepvxbvmg0xte3dkjvi9x0i2oequ4jczqf7jxw191hoi6xt4mjdjxnzhkbtu572f9485ejl41s0km897tpio3ba8gubb0e8a35vln104s56e1mwnvea3s8yanubswtr'
-    })
-    surname: string;
+        @ApiProperty({
+            type        : String,
+            description : 'systemId [input here api field description]',
+            example     : 'bea95f09-4110-4ade-a8c8-97cede034565'
+        })
+        systemId: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'email [input here api field description]',
-        example     : 'mihzefuedqk7kxyno1xd3fofj4maqmfqq5niar5jcx8fpe990gmtceepf3jtan4lrw6g8a9kjppnbrwtnm5cg4ijabqrlo180n1rgrp3wwlzkasgqyi5ivau'
-    })
-    email: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'mobile [input here api field description]',
-        example     : 'sv3cypl0q6tk0e6d9zs1uvgh6v8tkcp8xqfndohvtl3fgvnob8kct7h94kp3'
-    })
-    mobile: string;
     
-    @ApiProperty({
-        type        : String,
-        description : 'area [input here api field description]',
-        example     : 'eoq016ml1dp7wgod10y44hg6g4abw8dbf88c2xmtu1g0jzfcociad2b05h2yib7t3635fhn51d40t5ryffeukrp630del5lan8cehfqcrw5u94jj3bc1hjck6d7t55ceqyjz9ty5e3xzt39y8pxs467cy9mn1pfyj0x5webp53664ofyghxl1g5e1m557ew5rgbboxgvnowo71njjll4c1imthh6u0q54cruqztfp37sowkxddqr34mzcvsx9pp'
-    })
-    area: string;
+        @ApiProperty({
+            type        : String,
+            description : 'systemName [input here api field description]',
+            example     : 'nij3fysl2i15gl4libx6'
+        })
+        systemName: string;
     
-    @ApiProperty({
-        type        : Boolean,
-        description : 'hasConsentEmail [input here api field description]',
-        example     : false
-    })
-    hasConsentEmail: boolean;
     
-    @ApiProperty({
-        type        : Boolean,
-        description : 'hasConsentMobile [input here api field description]',
-        example     : true
-    })
-    hasConsentMobile: boolean;
     
-    @ApiProperty({
-        type        : Boolean,
-        description : 'isActive [input here api field description]',
-        example     : true
-    })
-    isActive: boolean;
+        @ApiProperty({
+            type        : String,
+            description : 'roleId [input here api field description]',
+            example     : 'f7099a6f-8b0b-44b1-bb10-e63d853c9ffd'
+        })
+        roleId: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'roleName [input here api field description]',
+            example     : 'nlfnow5msd5klad91dqsmhmy7yscqru2u68wbp3uekhcu3n5x91czejzlmt94ovkoqxxi2r9xt99bl8cra8mt1xveybt7uaqq2jbloxre28ud9wogg6ptj1j037i6i6ms1ncp6zbc4lh2sdfqql14x2dey76uf3n5xwo7nkfu4k1ot6fbextlbudd309uvdqffl7cjzz2h7sjmmf0wadmyff72gil3pe71b2aquzutxlcqddf381mhi3uu4nzyk'
+        })
+        roleName: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'name [input here api field description]',
+            example     : '9t6nv403okrn9bhdwx5qeiyza6ydqnl90ybofz6m0es33pk0y9faysjj3aqspedmx5eu60vfim21085hvf3afiwj8s5stf7taxaazh6kqg064mng4er1bauvc59rkcdk2yt5uzt7jbw7bzlbnbq62zfyuzulg5eq7v6sezc94z0rg4a99u4lor46q8jxdf5i6eq8vv3oa5mzzg94dhws9e7jvbstumls5pd23a6gy0u8dme4zd2wnyhrlmr1rrz'
+        })
+        name: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'surname [input here api field description]',
+            example     : 'hnop6qwhnvobda8w3pu24mmx8orlxs0aneu7bdmzy5bcohxh60p4tcthkkrii7c0stbgheirr3gdgjdziwxfes4lnmqt0ldlo99zshbnqsnb49aj4lolk0fsjgylcbakweab7nym2l8evvqy344ktrvabojbkeifocri4na46ohu5e0gb42i1er76q51n9km06du0u5srt19bf96mqcd3rnki0kn1wdsz24eovrw5s3tbz1vibfhnyzav0l599r'
+        })
+        surname: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'email [input here api field description]',
+            example     : '3do6niy2f6c9apcmqlpi5e0fw7jvcayzj31t9yvs4jl58be1k66xejpw8tx8try9p7cxxhohnpe3qttvtrm3llomsyzg9ye8okr31f06bz9lpykyk6476c32'
+        })
+        email: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'mobile [input here api field description]',
+            example     : 'cdk6lb4ujtlwr7nbgr4j2kh2g8dx676f309vtondqt1g8zlcha4ycb8wm9l8'
+        })
+        mobile: string;
+    
+    
+    
+        @ApiProperty({
+            type        : String,
+            description : 'area [input here api field description]',
+            example     : 'w17z7m0qc3r80qs7xsfcj0sclstpm7mhulumxdi4h4zcdxwvtemv2mwfracjcmvmy066pz36a3o1h8yuxxmlc1dnxu5w2tbbh73nxwj3qlsxftgxl7ea9hibdu57pktzdns93ko4tsexbywzb3kzvdgbqb6nufvbnxww5e30bpqsra0bay181nrhj0oup4rrptnq8nf5b4mlyzf7apivy8fg9qoo64mw4laat634id0bv9lfcryo4kaq8od620z'
+        })
+        area: string;
+    
+    
+    
+        @ApiProperty({
+            type        : Boolean,
+            description : 'hasConsentEmail [input here api field description]',
+            example     : true
+        })
+        hasConsentEmail: boolean;
+    
+    
+    
+        @ApiProperty({
+            type        : Boolean,
+            description : 'hasConsentMobile [input here api field description]',
+            example     : false
+        })
+        hasConsentMobile: boolean;
+    
+    
+    
+        @ApiProperty({
+            type        : Boolean,
+            description : 'isActive [input here api field description]',
+            example     : false
+        })
+        isActive: boolean;
+    
     
 }

@@ -39,19 +39,14 @@ describe('FindChannelDetailController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindChannelDetailController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('FindChannelDetailController should be defined', () => 
+        test('FindChannelDetailController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a channelDetail', async () => 
+        test('should return a channelDetail', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channelsDetail[0])));
             expect(await controller.main([])).toBe(channelsDetail[0]);

@@ -37,19 +37,19 @@ describe('DeleteJobsDetailResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteJobsDetailResolver should be defined', () => 
+    test('DeleteJobsDetailResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteJobsDetailResolver should be defined', () => 
+        test('DeleteJobsDetailResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an jobsDetail deleted', async () => 
+        test('should return an jobsDetail deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(jobsDetail)));
             expect(await resolver.main([])).toBe(jobsDetail);

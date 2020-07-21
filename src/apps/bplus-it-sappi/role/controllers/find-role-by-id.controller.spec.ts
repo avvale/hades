@@ -39,19 +39,14 @@ describe('FindRoleByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindRoleByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('FindRoleByIdController should be defined', () => 
+        test('FindRoleByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an role by id', async () => 
+        test('should return an role by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
             expect(await controller.main(roles[0].id)).toBe(roles[0]);

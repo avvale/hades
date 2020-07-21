@@ -1,6 +1,6 @@
 // controllers
 import { CreateModuleController } from './controllers/create-module.controller';
-import { InsertModulesController } from './controllers/insert-modules.controller';
+import { CreateModulesController } from './controllers/create-modules.controller';
 import { PaginateModulesController } from './controllers/paginate-modules.controller';
 import { GetModulesController } from './controllers/get-modules.controller';
 import { FindModuleByIdController } from './controllers/find-module-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteModulesController } from './controllers/delete-modules.controller
 
 // resolvers
 import { CreateModuleResolver } from './resolvers/create-module.resolver';
-import { InsertModulesResolver } from './resolvers/insert-modules.resolver';
+import { CreateModulesResolver } from './resolvers/create-modules.resolver';
 import { PaginateModulesResolver } from './resolvers/paginate-modules.resolver';
 import { GetModulesResolver } from './resolvers/get-modules.resolver';
 import { FindModuleResolver } from './resolvers/find-module.resolver';
@@ -22,7 +22,7 @@ import { DeleteModulesResolver } from './resolvers/delete-modules.resolver';
 
 export const BplusItSappiModuleControllers = [
     CreateModuleController,
-    InsertModulesController,
+    CreateModulesController,
     PaginateModulesController,
     GetModulesController,
     FindModuleByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiModuleControllers = [
 
 export const BplusItSappiModuleResolvers = [
     CreateModuleResolver,
-    InsertModulesResolver,
+    CreateModulesResolver,
     PaginateModulesResolver,
     GetModulesResolver,
     FindModuleResolver,

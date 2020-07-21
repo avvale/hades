@@ -1,6 +1,6 @@
 // controllers
 import { CreateExecutionController } from './controllers/create-execution.controller';
-import { InsertExecutionsController } from './controllers/insert-executions.controller';
+import { CreateExecutionsController } from './controllers/create-executions.controller';
 import { PaginateExecutionsController } from './controllers/paginate-executions.controller';
 import { GetExecutionsController } from './controllers/get-executions.controller';
 import { FindExecutionByIdController } from './controllers/find-execution-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteExecutionsController } from './controllers/delete-executions.cont
 
 // resolvers
 import { CreateExecutionResolver } from './resolvers/create-execution.resolver';
-import { InsertExecutionsResolver } from './resolvers/insert-executions.resolver';
+import { CreateExecutionsResolver } from './resolvers/create-executions.resolver';
 import { PaginateExecutionsResolver } from './resolvers/paginate-executions.resolver';
 import { GetExecutionsResolver } from './resolvers/get-executions.resolver';
 import { FindExecutionResolver } from './resolvers/find-execution.resolver';
@@ -22,7 +22,7 @@ import { DeleteExecutionsResolver } from './resolvers/delete-executions.resolver
 
 export const BplusItSappiExecutionControllers = [
     CreateExecutionController,
-    InsertExecutionsController,
+    CreateExecutionsController,
     PaginateExecutionsController,
     GetExecutionsController,
     FindExecutionByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiExecutionControllers = [
 
 export const BplusItSappiExecutionResolvers = [
     CreateExecutionResolver,
-    InsertExecutionsResolver,
+    CreateExecutionsResolver,
     PaginateExecutionsResolver,
     GetExecutionsResolver,
     FindExecutionResolver,

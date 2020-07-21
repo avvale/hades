@@ -39,19 +39,14 @@ describe('GetDataLakesController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('GetDataLakesController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('GetDataLakesController should be defined', () => 
+        test('GetDataLakesController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a dataLakes', async () => 
+        test('should return a dataLakes', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(dataLakes)));
             expect(await controller.main([])).toBe(dataLakes);

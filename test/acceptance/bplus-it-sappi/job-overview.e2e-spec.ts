@@ -51,7 +51,7 @@ describe('job-overview', () =>
         await app.init();
     });
 
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
@@ -61,24 +61,24 @@ describe('job-overview', () =>
     });
 
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: '0qwb7q2amfb2rhj7d4yk',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: '8jcd9djwwacxzk430ado',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-16 22:47:02',
-                executionMonitoringStartAt: '2020-07-16 22:50:30',
-                executionMonitoringEndAt: '2020-07-17 02:48:29',
-                cancelled: 2854413196,
-                completed: 9149409809,
-                error: 2629507410,
+                executionExecutedAt: '2020-07-21 15:53:18',
+                executionMonitoringStartAt: '2020-07-21 09:33:43',
+                executionMonitoringEndAt: '2020-07-21 18:53:59',
+                cancelled: 7628076281,
+                completed: 1523939680,
+                error: 5704447860,
             })
             .expect(400)
             .then(res => {
@@ -86,24 +86,24 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: '2jipwq17t419l35agwc7',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: '4cmrdeaien9j5h75mwbv',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-16 19:33:00',
-                executionMonitoringStartAt: '2020-07-16 21:23:23',
-                executionMonitoringEndAt: '2020-07-17 09:17:41',
-                cancelled: 7622824605,
-                completed: 8115494624,
-                error: 1361589901,
+                executionExecutedAt: '2020-07-21 23:25:28',
+                executionMonitoringStartAt: '2020-07-21 05:46:08',
+                executionMonitoringEndAt: '2020-07-21 13:27:16',
+                cancelled: 9841085498,
+                completed: 4929205991,
+                error: 5732348787,
             })
             .expect(400)
             .then(res => {
@@ -111,24 +111,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewTenantId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewTenantId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
                 tenantId: null,
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'm6ovhr5ba1jfh465xmgm',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-17 04:44:15',
-                executionMonitoringStartAt: '2020-07-17 10:00:33',
-                executionMonitoringEndAt: '2020-07-17 14:52:29',
-                cancelled: 5465442902,
-                completed: 2936724176,
-                error: 3934087868,
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'thjfzp6emqpkc5btoxzq',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-21 09:24:35',
+                executionMonitoringStartAt: '2020-07-21 14:39:57',
+                executionMonitoringEndAt: '2020-07-21 05:56:26',
+                cancelled: 9107522137,
+                completed: 4603683249,
+                error: 4761388213,
             })
             .expect(400)
             .then(res => {
@@ -136,24 +136,24 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewTenantId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewTenantId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
                 
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'vglivfcgza4xyp0ick1u',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 12:07:00',
-                executionMonitoringStartAt: '2020-07-17 01:56:48',
-                executionMonitoringEndAt: '2020-07-17 06:22:09',
-                cancelled: 5171143909,
-                completed: 2812056285,
-                error: 4702664204,
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'ymolxn0mhed5k9gvjtyl',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-22 00:16:21',
+                executionMonitoringStartAt: '2020-07-21 21:17:59',
+                executionMonitoringEndAt: '2020-07-21 15:26:01',
+                cancelled: 3787343363,
+                completed: 9608713309,
+                error: 1847772926,
             })
             .expect(400)
             .then(res => {
@@ -161,24 +161,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
                 systemId: null,
-                systemName: 'swalh1gg03by5af88yod',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 01:56:04',
-                executionMonitoringStartAt: '2020-07-17 05:52:00',
-                executionMonitoringEndAt: '2020-07-17 00:59:43',
-                cancelled: 4375119522,
-                completed: 1196916465,
-                error: 6212313115,
+                systemName: 'bfksscddtn4rjzk1oh7s',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-21 08:00:42',
+                executionMonitoringStartAt: '2020-07-21 20:12:10',
+                executionMonitoringEndAt: '2020-07-21 18:40:01',
+                cancelled: 7294001212,
+                completed: 9575522450,
+                error: 6250855268,
             })
             .expect(400)
             .then(res => {
@@ -186,24 +186,24 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
                 
-                systemName: 'mhk5c1x1m95b1krs0g4q',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                systemName: 'k00gbo3hiswonfcwfb8s',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-16 17:58:57',
-                executionMonitoringStartAt: '2020-07-17 15:13:47',
-                executionMonitoringEndAt: '2020-07-16 21:03:20',
-                cancelled: 7925228195,
-                completed: 1827414710,
-                error: 4674250555,
+                executionExecutedAt: '2020-07-21 16:49:01',
+                executionMonitoringStartAt: '2020-07-21 16:46:43',
+                executionMonitoringEndAt: '2020-07-21 11:57:11',
+                cancelled: 2227538005,
+                completed: 2885453381,
+                error: 6378409034,
             })
             .expect(400)
             .then(res => {
@@ -211,24 +211,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemName property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemName property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
                 systemName: null,
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 07:59:07',
-                executionMonitoringStartAt: '2020-07-16 21:45:11',
-                executionMonitoringEndAt: '2020-07-16 20:05:46',
-                cancelled: 8166149005,
-                completed: 9155048500,
-                error: 5646706808,
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-21 04:22:45',
+                executionMonitoringStartAt: '2020-07-21 21:14:02',
+                executionMonitoringEndAt: '2020-07-21 19:07:52',
+                cancelled: 1876563036,
+                completed: 2432420195,
+                error: 6271877148,
             })
             .expect(400)
             .then(res => {
@@ -236,24 +236,24 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemName property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemName property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
                 
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 00:00:00',
-                executionMonitoringStartAt: '2020-07-17 14:26:06',
-                executionMonitoringEndAt: '2020-07-17 09:04:04',
-                cancelled: 2977423868,
-                completed: 9963032116,
-                error: 9837116141,
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-21 04:20:34',
+                executionMonitoringStartAt: '2020-07-21 02:42:25',
+                executionMonitoringEndAt: '2020-07-21 07:06:12',
+                cancelled: 9216435173,
+                completed: 4734682416,
+                error: 6369218225,
             })
             .expect(400)
             .then(res => {
@@ -261,24 +261,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'vgyapfg88pcd59pcpz1r',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'ka5vflm2to6o2lhl59vs',
                 executionId: null,
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-17 04:48:58',
-                executionMonitoringStartAt: '2020-07-17 04:30:21',
-                executionMonitoringEndAt: '2020-07-16 17:01:17',
-                cancelled: 6269534095,
-                completed: 5105346506,
-                error: 6754079978,
+                executionExecutedAt: '2020-07-21 09:19:09',
+                executionMonitoringStartAt: '2020-07-21 18:21:00',
+                executionMonitoringEndAt: '2020-07-21 15:04:52',
+                cancelled: 2839149235,
+                completed: 1213709364,
+                error: 7816012330,
             })
             .expect(400)
             .then(res => {
@@ -286,24 +286,24 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'c3ouw1lna04ildtvni8u',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'k2ms9s22ywblppj9lcu0',
                 
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 06:04:33',
-                executionMonitoringStartAt: '2020-07-17 16:03:38',
-                executionMonitoringEndAt: '2020-07-17 06:35:27',
-                cancelled: 6486824905,
-                completed: 1437757308,
-                error: 1320622252,
+                executionExecutedAt: '2020-07-21 22:44:37',
+                executionMonitoringStartAt: '2020-07-21 12:24:07',
+                executionMonitoringEndAt: '2020-07-21 13:01:42',
+                cancelled: 4314128913,
+                completed: 6891243178,
+                error: 9075284957,
             })
             .expect(400)
             .then(res => {
@@ -311,24 +311,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionType property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionType property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'wy0g081mzajaqyc9t2yz',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: '1z0abrfkazw6s03u8o0v',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: null,
-                executionExecutedAt: '2020-07-16 19:29:38',
-                executionMonitoringStartAt: '2020-07-17 00:09:41',
-                executionMonitoringEndAt: '2020-07-17 00:07:40',
-                cancelled: 6465168900,
-                completed: 3499821842,
-                error: 7124079110,
+                executionExecutedAt: '2020-07-21 09:58:55',
+                executionMonitoringStartAt: '2020-07-21 20:29:21',
+                executionMonitoringEndAt: '2020-07-21 08:24:41',
+                cancelled: 7445179775,
+                completed: 4286758607,
+                error: 8939481427,
             })
             .expect(400)
             .then(res => {
@@ -336,24 +336,24 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionType property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionType property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'thq71aooypj7wskmzseq',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'bxqyz6cn2qj7eaz6dmmz',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 
-                executionExecutedAt: '2020-07-17 11:42:52',
-                executionMonitoringStartAt: '2020-07-17 06:38:19',
-                executionMonitoringEndAt: '2020-07-17 14:26:41',
-                cancelled: 6742483212,
-                completed: 4896543086,
-                error: 2465863588,
+                executionExecutedAt: '2020-07-21 20:14:16',
+                executionMonitoringStartAt: '2020-07-21 15:11:27',
+                executionMonitoringEndAt: '2020-07-21 20:30:17',
+                cancelled: 5905699364,
+                completed: 3816389447,
+                error: 2240696519,
             })
             .expect(400)
             .then(res => {
@@ -361,24 +361,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionExecutedAt property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionExecutedAt property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'pr4i6hhv7kdpvbnl745y',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'd2z7mgdpteqk650k68tp',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
                 executionExecutedAt: null,
-                executionMonitoringStartAt: '2020-07-17 05:02:54',
-                executionMonitoringEndAt: '2020-07-16 21:48:29',
-                cancelled: 2463151713,
-                completed: 9156055666,
-                error: 7944771339,
+                executionMonitoringStartAt: '2020-07-21 03:26:08',
+                executionMonitoringEndAt: '2020-07-21 04:37:28',
+                cancelled: 5152546085,
+                completed: 6074605695,
+                error: 9404824296,
             })
             .expect(400)
             .then(res => {
@@ -386,24 +386,24 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionExecutedAt property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionExecutedAt property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'p5c6x9eczwaryuttmm3f',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'gmwdfmhljghc67rp1vu5',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
                 
-                executionMonitoringStartAt: '2020-07-16 23:38:10',
-                executionMonitoringEndAt: '2020-07-17 03:54:29',
-                cancelled: 7026950494,
-                completed: 1787394864,
-                error: 6614195134,
+                executionMonitoringStartAt: '2020-07-21 09:25:17',
+                executionMonitoringEndAt: '2020-07-21 19:22:37',
+                cancelled: 7392728817,
+                completed: 8094418224,
+                error: 9550468806,
             })
             .expect(400)
             .then(res => {
@@ -411,24 +411,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringStartAt property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringStartAt property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'cry5auniavvy1qc1jh1h',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 06:00:04',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'goqbp9ly0hoeemctn0vl',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-21 01:16:00',
                 executionMonitoringStartAt: null,
-                executionMonitoringEndAt: '2020-07-17 10:17:49',
-                cancelled: 6240048806,
-                completed: 6525546508,
-                error: 9033100045,
+                executionMonitoringEndAt: '2020-07-21 09:14:04',
+                cancelled: 1438280711,
+                completed: 6939958326,
+                error: 5354708892,
             })
             .expect(400)
             .then(res => {
@@ -436,24 +436,24 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringStartAt property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringStartAt property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'ietemf45won32ec5d85u',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'shda1wghk58hmqcvs2vg',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-16 20:34:41',
+                executionExecutedAt: '2020-07-21 01:04:24',
                 
-                executionMonitoringEndAt: '2020-07-17 07:00:01',
-                cancelled: 4958236964,
-                completed: 8305153249,
-                error: 2814920538,
+                executionMonitoringEndAt: '2020-07-21 01:11:05',
+                cancelled: 2961632839,
+                completed: 1673966394,
+                error: 2769290303,
             })
             .expect(400)
             .then(res => {
@@ -461,24 +461,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringEndAt property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringEndAt property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'hcyhbnivs2z8t24u29m0',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'suzubrmhm2sgsxl7ue1y',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 08:29:42',
-                executionMonitoringStartAt: '2020-07-17 01:01:37',
+                executionExecutedAt: '2020-07-21 20:25:40',
+                executionMonitoringStartAt: '2020-07-21 05:02:33',
                 executionMonitoringEndAt: null,
-                cancelled: 9752224360,
-                completed: 2239074701,
-                error: 3208483583,
+                cancelled: 9648739748,
+                completed: 6688242228,
+                error: 5209657447,
             })
             .expect(400)
             .then(res => {
@@ -486,24 +486,24 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringEndAt property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringEndAt property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: '4u3e57ghxaf0qdegs0nw',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 05:28:50',
-                executionMonitoringStartAt: '2020-07-17 09:15:07',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: '18baxzz2kp7s63f8blgz',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-21 11:22:52',
+                executionMonitoringStartAt: '2020-07-21 20:23:46',
                 
-                cancelled: 4166971887,
-                completed: 8245927900,
-                error: 4254628664,
+                cancelled: 3432124494,
+                completed: 6097814406,
+                error: 9052068916,
             })
             .expect(400)
             .then(res => {
@@ -513,24 +513,24 @@ describe('job-overview', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'oonnequ42p3gkfqjud7fd898qel5p1x0hpq6w',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'v2z0xdslh685yohy2old',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: '2lh73xqpble9276b2eno05qkqox9tc9nrl6vd',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'ty2hgguckwjskyj84ocm',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-16 22:28:43',
-                executionMonitoringStartAt: '2020-07-16 20:32:29',
-                executionMonitoringEndAt: '2020-07-17 08:17:02',
-                cancelled: 7390124182,
-                completed: 7075249565,
-                error: 5372180290,
+                executionExecutedAt: '2020-07-21 14:48:15',
+                executionMonitoringStartAt: '2020-07-21 05:50:15',
+                executionMonitoringEndAt: '2020-07-21 01:01:47',
+                cancelled: 7997905212,
+                completed: 3942686789,
+                error: 9123998530,
             })
             .expect(400)
             .then(res => {
@@ -538,24 +538,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewTenantId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewTenantId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: 'km8wo7jbenrnzgmvd8fc7c4i8x5w6bdpdke0u',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'rq0dpptbe6whfupfo9tb',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: 'actkq7v91jd486zz8xsm8q1cwwedgd2wi6sxy',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'g3b9s7xww6nnkv92iyji',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-16 22:40:22',
-                executionMonitoringStartAt: '2020-07-16 22:44:36',
-                executionMonitoringEndAt: '2020-07-17 05:11:23',
-                cancelled: 6553592967,
-                completed: 6369251518,
-                error: 6081005724,
+                executionExecutedAt: '2020-07-21 22:11:11',
+                executionMonitoringStartAt: '2020-07-21 23:35:01',
+                executionMonitoringEndAt: '2020-07-21 10:15:55',
+                cancelled: 2541193508,
+                completed: 4004600892,
+                error: 3886668631,
             })
             .expect(400)
             .then(res => {
@@ -563,24 +563,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: 'neaflnkmfm9nqyv4pu33tghkw9monxd3bjwfp',
-                systemName: 'xbgupr3wiqwup982sw97',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-16 23:31:03',
-                executionMonitoringStartAt: '2020-07-17 05:39:30',
-                executionMonitoringEndAt: '2020-07-16 21:54:17',
-                cancelled: 9847994255,
-                completed: 1265391758,
-                error: 7690283576,
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'obdz0yvqei7vzh2u0tnry5kkeez50rduq3mlf',
+                systemName: 'ls83xm4c2lt9h6qunrix',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-21 16:59:15',
+                executionMonitoringStartAt: '2020-07-21 07:08:13',
+                executionMonitoringEndAt: '2020-07-21 07:22:21',
+                cancelled: 4920379380,
+                completed: 4909261435,
+                error: 2186653396,
             })
             .expect(400)
             .then(res => {
@@ -588,24 +588,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: '17fp8tavmsz05ucne2b7',
-                executionId: '2bgv4m6jx0yot5zv8kci3qrcxz8img3xd5oyk',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'sduq32mwvt670zqhbz93',
+                executionId: 'tymfvehebmtr7jnig70e75gzfssyl8v0zzpu6',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-17 10:38:35',
-                executionMonitoringStartAt: '2020-07-17 07:21:38',
-                executionMonitoringEndAt: '2020-07-17 03:52:14',
-                cancelled: 8646385583,
-                completed: 3669496901,
-                error: 7420485409,
+                executionExecutedAt: '2020-07-21 10:45:41',
+                executionMonitoringStartAt: '2020-07-21 21:48:51',
+                executionMonitoringEndAt: '2020-07-21 22:20:48',
+                cancelled: 3878266170,
+                completed: 3161720346,
+                error: 1473928503,
             })
             .expect(400)
             .then(res => {
@@ -615,24 +615,24 @@ describe('job-overview', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemName is too large, has a maximum length of 20`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewSystemName is too large, has a maximum length of 20`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'xehs7pn9fxg4jvhxzhlto',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-16 23:11:25',
-                executionMonitoringStartAt: '2020-07-17 01:52:39',
-                executionMonitoringEndAt: '2020-07-16 18:21:07',
-                cancelled: 6636001717,
-                completed: 7310277003,
-                error: 8349973419,
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'owcqf9ykk0ei7yinjy71i',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-21 13:01:22',
+                executionMonitoringStartAt: '2020-07-21 13:31:07',
+                executionMonitoringEndAt: '2020-07-21 20:04:37',
+                cancelled: 5904973550,
+                completed: 3527149434,
+                error: 2722657311,
             })
             .expect(400)
             .then(res => {
@@ -640,24 +640,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewCancelled is too large, has a maximum length of 10`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewCancelled is too large, has a maximum length of 10`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'rb6250bhi9ks0qy5f2yp',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-17 01:18:30',
-                executionMonitoringStartAt: '2020-07-16 17:18:19',
-                executionMonitoringEndAt: '2020-07-17 08:26:09',
-                cancelled: 96624594895,
-                completed: 6857871550,
-                error: 7623012342,
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: '2p40k7p0r5jg34rz7t28',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-21 20:16:01',
+                executionMonitoringStartAt: '2020-07-21 13:16:15',
+                executionMonitoringEndAt: '2020-07-21 16:32:18',
+                cancelled: 89963084301,
+                completed: 5224993970,
+                error: 2105401116,
             })
             .expect(400)
             .then(res => {
@@ -665,24 +665,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewCompleted is too large, has a maximum length of 10`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewCompleted is too large, has a maximum length of 10`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'r4tyejgr9skfchntt2ue',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-16 20:23:44',
-                executionMonitoringStartAt: '2020-07-17 00:40:41',
-                executionMonitoringEndAt: '2020-07-17 02:22:43',
-                cancelled: 7902884904,
-                completed: 85166241474,
-                error: 4263118948,
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'i04l504adhkckbtoh2rk',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-21 15:42:51',
+                executionMonitoringStartAt: '2020-07-21 07:31:37',
+                executionMonitoringEndAt: '2020-07-21 20:05:19',
+                cancelled: 2973156907,
+                completed: 88748671754,
+                error: 9034101142,
             })
             .expect(400)
             .then(res => {
@@ -690,24 +690,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewError is too large, has a maximum length of 10`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewError is too large, has a maximum length of 10`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: '4h2sjdsk7ia68ifr5oli',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 01:44:07',
-                executionMonitoringStartAt: '2020-07-17 10:06:56',
-                executionMonitoringEndAt: '2020-07-16 19:13:48',
-                cancelled: 4458987675,
-                completed: 4775803785,
-                error: 84540389502,
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'ue7kodss9949t6a1bxqr',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-21 23:05:42',
+                executionMonitoringStartAt: '2020-07-21 12:40:55',
+                executionMonitoringEndAt: '2020-07-21 10:17:08',
+                cancelled: 7505272147,
+                completed: 5910676423,
+                error: 82205914249,
             })
             .expect(400)
             .then(res => {
@@ -721,24 +721,24 @@ describe('job-overview', () =>
     
     
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewCancelled must have a positive sign`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewCancelled must have a positive sign`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'vnf8xxgt8h7y8h073zad',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'pkr19evhnk2r6w27d73d',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-16 18:17:13',
-                executionMonitoringStartAt: '2020-07-17 12:51:37',
-                executionMonitoringEndAt: '2020-07-17 07:01:03',
+                executionExecutedAt: '2020-07-21 18:51:29',
+                executionMonitoringStartAt: '2020-07-21 05:20:22',
+                executionMonitoringEndAt: '2020-07-21 12:37:42',
                 cancelled: -9,
-                completed: 6876419758,
-                error: 7521909062,
+                completed: 7715267683,
+                error: 1968065524,
             })
             .expect(400)
             .then(res => {
@@ -746,24 +746,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewCompleted must have a positive sign`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewCompleted must have a positive sign`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'ealhzb4vaz9hdi5bn6qp',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: '32pmj2p3z3nnrk2h25pp',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 07:32:15',
-                executionMonitoringStartAt: '2020-07-17 15:49:16',
-                executionMonitoringEndAt: '2020-07-17 03:38:30',
-                cancelled: 1463601198,
+                executionExecutedAt: '2020-07-21 16:48:31',
+                executionMonitoringStartAt: '2020-07-21 07:12:26',
+                executionMonitoringEndAt: '2020-07-21 15:25:49',
+                cancelled: 1583454101,
                 completed: -9,
-                error: 3862503671,
+                error: 4069274044,
             })
             .expect(400)
             .then(res => {
@@ -771,23 +771,23 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewError must have a positive sign`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewError must have a positive sign`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'axpq5y9r72wck7vw8hm3',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'f6jjkssr9ht24qouq5su',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-16 17:47:40',
-                executionMonitoringStartAt: '2020-07-17 00:53:25',
-                executionMonitoringEndAt: '2020-07-17 12:03:03',
-                cancelled: 8362474478,
-                completed: 4388310476,
+                executionExecutedAt: '2020-07-21 00:51:59',
+                executionMonitoringStartAt: '2020-07-21 15:11:43',
+                executionMonitoringEndAt: '2020-07-21 03:27:25',
+                cancelled: 3510974219,
+                completed: 4884160619,
                 error: -9,
             })
             .expect(400)
@@ -800,24 +800,24 @@ describe('job-overview', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionType has to be a enum option of SUMMARY, DETAIL`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionType has to be a enum option of SUMMARY, DETAIL`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: '4h53kn06o55vghfxp12j',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'ewwk5wswgh4r1k55m1v2',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'XXXX',
-                executionExecutedAt: '2020-07-17 01:08:45',
-                executionMonitoringStartAt: '2020-07-16 22:32:14',
-                executionMonitoringEndAt: '2020-07-17 06:26:37',
-                cancelled: 2705084961,
-                completed: 5827692825,
-                error: 3457093342,
+                executionExecutedAt: '2020-07-21 18:31:21',
+                executionMonitoringStartAt: '2020-07-21 23:41:04',
+                executionMonitoringEndAt: '2020-07-21 12:24:26',
+                cancelled: 6842801366,
+                completed: 2936326381,
+                error: 9556378061,
             })
             .expect(400)
             .then(res => {
@@ -827,24 +827,24 @@ describe('job-overview', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionExecutedAt has to be a timestamp value`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionExecutedAt has to be a timestamp value`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'l9gsrd75qyyapu3y4iqu',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                executionType: 'SUMMARY',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'bqg0bm645hd08zyb4rm7',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                executionType: 'DETAIL',
                 executionExecutedAt: 'XXXXXXXX',
-                executionMonitoringStartAt: '2020-07-17 10:25:39',
-                executionMonitoringEndAt: '2020-07-16 21:39:02',
-                cancelled: 9370056296,
-                completed: 1352707261,
-                error: 1003293635,
+                executionMonitoringStartAt: '2020-07-21 06:15:04',
+                executionMonitoringEndAt: '2020-07-21 12:37:02',
+                cancelled: 7239439294,
+                completed: 2315922986,
+                error: 2240522437,
             })
             .expect(400)
             .then(res => {
@@ -852,24 +852,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringStartAt has to be a timestamp value`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringStartAt has to be a timestamp value`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: '96lmxc6z60kw47tgpeas',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'onhip93h9rasfsg4dd1n',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-17 13:31:12',
+                executionExecutedAt: '2020-07-21 19:38:02',
                 executionMonitoringStartAt: 'XXXXXXXX',
-                executionMonitoringEndAt: '2020-07-17 00:30:31',
-                cancelled: 5785740920,
-                completed: 2954542929,
-                error: 5080243725,
+                executionMonitoringEndAt: '2020-07-21 14:32:53',
+                cancelled: 3098216078,
+                completed: 8996227647,
+                error: 7618512098,
             })
             .expect(400)
             .then(res => {
@@ -877,24 +877,24 @@ describe('job-overview', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringEndAt has to be a timestamp value`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview - Got 400 Conflict, JobOverviewExecutionMonitoringEndAt has to be a timestamp value`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'j8re314ymkslkabxq56b',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'vw43iour3lpmmds5g81h',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 00:12:52',
-                executionMonitoringStartAt: '2020-07-16 16:35:26',
+                executionExecutedAt: '2020-07-21 23:29:48',
+                executionMonitoringStartAt: '2020-07-21 05:13:13',
                 executionMonitoringEndAt: 'XXXXXXXX',
-                cancelled: 9967261110,
-                completed: 3995952894,
-                error: 8084732592,
+                cancelled: 1138121994,
+                completed: 2475779794,
+                error: 8796388711,
             })
             .expect(400)
             .then(res => {
@@ -903,29 +903,29 @@ describe('job-overview', () =>
     });
     
 
-    it(`/REST:POST bplus-it-sappi/job-overview`, () => 
+    test(`/REST:POST bplus-it-sappi/job-overview`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'xk9gkdp2x6tl1p9ftdy7',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'aecuyymikjtcga2ho0bx',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 03:28:26',
-                executionMonitoringStartAt: '2020-07-17 01:22:56',
-                executionMonitoringEndAt: '2020-07-17 02:22:26',
-                cancelled: 6611645051,
-                completed: 8532817267,
-                error: 3542861825,
+                executionExecutedAt: '2020-07-21 06:47:37',
+                executionMonitoringStartAt: '2020-07-21 11:21:18',
+                executionMonitoringEndAt: '2020-07-21 09:19:06',
+                cancelled: 9726706163,
+                completed: 4041960531,
+                error: 9819472666,
             })
             .expect(201);
     });
 
-    it(`/REST:GET bplus-it-sappi/jobs-overview/paginate`, () => 
+    test(`/REST:GET bplus-it-sappi/jobs-overview/paginate`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/jobs-overview/paginate')
@@ -950,7 +950,7 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/REST:GET bplus-it-sappi/job-overview - Got 404 Not Found`, () => 
+    test(`/REST:GET bplus-it-sappi/job-overview - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/job-overview')
@@ -968,7 +968,7 @@ describe('job-overview', () =>
             .expect(404);
     });
 
-    it(`/REST:GET bplus-it-sappi/job-overview`, () => 
+    test(`/REST:GET bplus-it-sappi/job-overview`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/job-overview')
@@ -979,15 +979,15 @@ describe('job-overview', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : 'ea9a6163-9bf7-4646-b216-88706ab96519'
+                        value   : 'd9846142-891a-47b0-a5e1-557f09ba8a1c'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'ea9a6163-9bf7-4646-b216-88706ab96519'));
+            .expect(repository.collectionResponse.find(item => item.id === 'd9846142-891a-47b0-a5e1-557f09ba8a1c'));
     });
 
-    it(`/REST:GET bplus-it-sappi/job-overview/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET bplus-it-sappi/job-overview/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/job-overview/00000000-0000-0000-0000-000000000000')
@@ -995,16 +995,16 @@ describe('job-overview', () =>
             .expect(404);
     });
 
-    it(`/REST:GET bplus-it-sappi/job-overview/{id}`, () => 
+    test(`/REST:GET bplus-it-sappi/job-overview/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/job-overview/ea9a6163-9bf7-4646-b216-88706ab96519')
+            .get('/bplus-it-sappi/job-overview/d9846142-891a-47b0-a5e1-557f09ba8a1c')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'ea9a6163-9bf7-4646-b216-88706ab96519'));
+            .expect(repository.collectionResponse.find(e => e.id === 'd9846142-891a-47b0-a5e1-557f09ba8a1c'));
     });
 
-    it(`/REST:GET bplus-it-sappi/jobs-overview`, () => 
+    test(`/REST:GET bplus-it-sappi/jobs-overview`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/jobs-overview')
@@ -1013,54 +1013,54 @@ describe('job-overview', () =>
             .expect(repository.collectionResponse);
     });
 
-    it(`/REST:PUT bplus-it-sappi/job-overview - Got 404 Not Found`, () => 
+    test(`/REST:PUT bplus-it-sappi/job-overview - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .put('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'a9ccdae1-9b46-4935-9c22-217f1b7154a6',
-                tenantId: 'd0d17282-3bc1-4240-9d09-f7b99fae0c95',
-                systemId: 'c37fccab-9a7d-43a9-958f-6d9fcf1637cf',
-                systemName: 'ka7ljeikye7fpefgirzo',
-                executionId: '5dc7b03d-0dd8-42df-86e9-bc8953369175',
+                id: '110b17b0-66fb-4061-9d09-99dc56151711',
+                tenantId: '007e89ab-f809-4d00-b1e7-c4104c5f0d29',
+                systemId: '701e1481-19e7-47e2-850e-70c49914e5ed',
+                systemName: 'j657l2jcdi199s1tzh87',
+                executionId: '678de6cb-6e93-4b31-9dea-fe05cfb84de6',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-17 07:18:36',
-                executionMonitoringStartAt: '2020-07-16 16:40:03',
-                executionMonitoringEndAt: '2020-07-17 00:38:44',
-                cancelled: 2200324150,
-                completed: 5342990932,
-                error: 4351361184,
+                executionExecutedAt: '2020-07-21 00:55:43',
+                executionMonitoringStartAt: '2020-07-21 10:13:24',
+                executionMonitoringEndAt: '2020-07-21 13:36:56',
+                cancelled: 9972190596,
+                completed: 5295083795,
+                error: 7097251346,
             })
             .expect(404);
     });
 
-    it(`/REST:PUT bplus-it-sappi/job-overview`, () => 
+    test(`/REST:PUT bplus-it-sappi/job-overview`, () => 
     {
         return request(app.getHttpServer())
             .put('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                systemName: 'wss02fttroupc0xs091t',
-                executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
+                id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                systemName: 'nkpah915rw6cohm2xqi5',
+                executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-17 14:48:29',
-                executionMonitoringStartAt: '2020-07-16 18:28:44',
-                executionMonitoringEndAt: '2020-07-17 09:11:52',
-                cancelled: 2541344157,
-                completed: 7153013691,
-                error: 2431519277,
+                executionExecutedAt: '2020-07-21 04:48:13',
+                executionMonitoringStartAt: '2020-07-21 13:12:15',
+                executionMonitoringEndAt: '2020-07-21 02:55:31',
+                cancelled: 9115583796,
+                completed: 2417000691,
+                error: 2752177712,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'ea9a6163-9bf7-4646-b216-88706ab96519'));
+            .expect(repository.collectionResponse.find(e => e.id === 'd9846142-891a-47b0-a5e1-557f09ba8a1c'));
     });
 
-    it(`/REST:DELETE bplus-it-sappi/job-overview/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE bplus-it-sappi/job-overview/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .delete('/bplus-it-sappi/job-overview/00000000-0000-0000-0000-000000000000')
@@ -1068,15 +1068,15 @@ describe('job-overview', () =>
             .expect(404);
     });
 
-    it(`/REST:DELETE bplus-it-sappi/job-overview/{id}`, () => 
+    test(`/REST:DELETE bplus-it-sappi/job-overview/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/job-overview/ea9a6163-9bf7-4646-b216-88706ab96519')
+            .delete('/bplus-it-sappi/job-overview/d9846142-891a-47b0-a5e1-557f09ba8a1c')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    it(`/GraphQL bplusItSappiCreateJobOverview - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL bplusItSappiCreateJobOverview - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1116,7 +1116,7 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiCreateJobOverview`, () => 
+    test(`/GraphQL bplusItSappiCreateJobOverview`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1146,28 +1146,28 @@ describe('job-overview', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '6a89db42-2eb0-4f61-9a03-8ee5749bd00d',
-                        tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                        systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                        systemName: '6oudyzmjjofex1cad2hk',
-                        executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                        executionType: 'DETAIL',
-                        executionExecutedAt: '2020-07-17 15:37:30',
-                        executionMonitoringStartAt: '2020-07-17 09:38:07',
-                        executionMonitoringEndAt: '2020-07-16 22:28:36',
-                        cancelled: 2843397024,
-                        completed: 1454953549,
-                        error: 7552660775,
+                        id: '8615906c-65ef-42ad-8335-f680572c9c25',
+                        tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                        systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                        systemName: 'u2ugnf8d0lcuhhsv291l',
+                        executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                        executionType: 'SUMMARY',
+                        executionExecutedAt: '2020-07-21 11:41:57',
+                        executionMonitoringStartAt: '2020-07-21 17:06:51',
+                        executionMonitoringEndAt: '2020-07-21 13:03:33',
+                        cancelled: 6702058553,
+                        completed: 6179966157,
+                        error: 8933851759,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateJobOverview).toHaveProperty('id', '6a89db42-2eb0-4f61-9a03-8ee5749bd00d');
+                expect(res.body.data.bplusItSappiCreateJobOverview).toHaveProperty('id', '8615906c-65ef-42ad-8335-f680572c9c25');
             });
     });
 
-    it(`/GraphQL bplusItSappiPaginateJobsOverview`, () => 
+    test(`/GraphQL bplusItSappiPaginateJobsOverview`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1205,7 +1205,7 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindJobOverview - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiFindJobOverview - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1252,7 +1252,7 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindJobOverview`, () => 
+    test(`/GraphQL bplusItSappiFindJobOverview`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1286,18 +1286,18 @@ describe('job-overview', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'ea9a6163-9bf7-4646-b216-88706ab96519'
+                            value   : 'd9846142-891a-47b0-a5e1-557f09ba8a1c'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindJobOverview.id).toStrictEqual('ea9a6163-9bf7-4646-b216-88706ab96519');
+                expect(res.body.data.bplusItSappiFindJobOverview.id).toStrictEqual('d9846142-891a-47b0-a5e1-557f09ba8a1c');
             });
     });
 
-    it(`/GraphQL bplusItSappiFindJobOverviewById - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiFindJobOverviewById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1337,7 +1337,7 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindJobOverviewById`, () => 
+    test(`/GraphQL bplusItSappiFindJobOverviewById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1366,16 +1366,16 @@ describe('job-overview', () =>
                     }
                 `,
                 variables: {
-                    id: 'ea9a6163-9bf7-4646-b216-88706ab96519'
+                    id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindJobOverviewById.id).toStrictEqual('ea9a6163-9bf7-4646-b216-88706ab96519');
+                expect(res.body.data.bplusItSappiFindJobOverviewById.id).toStrictEqual('d9846142-891a-47b0-a5e1-557f09ba8a1c');
             });
     });
 
-    it(`/GraphQL bplusItSappiGetJobsOverview`, () => 
+    test(`/GraphQL bplusItSappiGetJobsOverview`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1414,7 +1414,7 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiUpdateJobOverview - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiUpdateJobOverview - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1445,18 +1445,18 @@ describe('job-overview', () =>
                 variables: {
                     payload: {
                         
-                        id: 'c94bed71-fc6d-4f06-bb77-2f01ef37c002',
-                        tenantId: '8fbe8c7f-dc82-4a65-a7af-28d1cbdbce5e',
-                        systemId: '01af5848-1e90-461e-9d94-29ea5540756c',
-                        systemName: 'eojybrjyu1z5t7fwuo81',
-                        executionId: 'b7501b33-2cda-4230-a0e1-a663d1951789',
-                        executionType: 'DETAIL',
-                        executionExecutedAt: '2020-07-16 22:04:39',
-                        executionMonitoringStartAt: '2020-07-16 21:58:26',
-                        executionMonitoringEndAt: '2020-07-17 04:59:58',
-                        cancelled: 7588962345,
-                        completed: 7590400263,
-                        error: 3169355889,
+                        id: 'd1d32d3b-1f04-4346-ac74-440981cdb2a5',
+                        tenantId: '6e82fef7-92a4-4e69-ac04-a31832120d87',
+                        systemId: '64197fb5-bb60-47c2-9091-a1551e3c49b9',
+                        systemName: 'aaqxtjjf0zs48r2yaq4s',
+                        executionId: '033410f9-109a-4757-ace9-3f9fbdbef10c',
+                        executionType: 'SUMMARY',
+                        executionExecutedAt: '2020-07-21 03:49:44',
+                        executionMonitoringStartAt: '2020-07-21 05:21:57',
+                        executionMonitoringEndAt: '2020-07-21 12:43:02',
+                        cancelled: 1216416123,
+                        completed: 8468752587,
+                        error: 9038257709,
                     }
                 }
             })
@@ -1468,7 +1468,7 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiUpdateJobOverview`, () => 
+    test(`/GraphQL bplusItSappiUpdateJobOverview`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1499,28 +1499,28 @@ describe('job-overview', () =>
                 variables: {
                     payload: {
                         
-                        id: 'ea9a6163-9bf7-4646-b216-88706ab96519',
-                        tenantId: '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-                        systemId: '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-                        systemName: 'awiz5d4k7zfjaeytvoz2',
-                        executionId: '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-                        executionType: 'SUMMARY',
-                        executionExecutedAt: '2020-07-17 06:24:02',
-                        executionMonitoringStartAt: '2020-07-17 13:07:09',
-                        executionMonitoringEndAt: '2020-07-16 19:38:37',
-                        cancelled: 5526205202,
-                        completed: 3290829923,
-                        error: 3747600799,
+                        id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c',
+                        tenantId: '219b5467-01f7-48de-a55a-6f48e54c6005',
+                        systemId: 'fd1891e9-6550-4641-915f-9a62ab6c0324',
+                        systemName: 'aay1rw836bopr9kh7vp1',
+                        executionId: '0b64e3a3-44e2-4608-b06d-1ab7cea186e6',
+                        executionType: 'DETAIL',
+                        executionExecutedAt: '2020-07-21 11:42:40',
+                        executionMonitoringStartAt: '2020-07-21 18:21:44',
+                        executionMonitoringEndAt: '2020-07-21 16:47:24',
+                        cancelled: 8856079612,
+                        completed: 7925965687,
+                        error: 3036326796,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateJobOverview.id).toStrictEqual('ea9a6163-9bf7-4646-b216-88706ab96519');
+                expect(res.body.data.bplusItSappiUpdateJobOverview.id).toStrictEqual('d9846142-891a-47b0-a5e1-557f09ba8a1c');
             });
     });
 
-    it(`/GraphQL bplusItSappiDeleteJobOverviewById - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiDeleteJobOverviewById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1560,7 +1560,7 @@ describe('job-overview', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiDeleteJobOverviewById`, () => 
+    test(`/GraphQL bplusItSappiDeleteJobOverviewById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1589,12 +1589,12 @@ describe('job-overview', () =>
                     }
                 `,
                 variables: {
-                    id: 'ea9a6163-9bf7-4646-b216-88706ab96519'
+                    id: 'd9846142-891a-47b0-a5e1-557f09ba8a1c'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteJobOverviewById.id).toStrictEqual('ea9a6163-9bf7-4646-b216-88706ab96519');
+                expect(res.body.data.bplusItSappiDeleteJobOverviewById.id).toStrictEqual('d9846142-891a-47b0-a5e1-557f09ba8a1c');
             });
     });
 

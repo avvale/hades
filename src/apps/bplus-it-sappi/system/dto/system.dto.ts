@@ -6,8 +6,7 @@ export class SystemDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '03f356e6-952c-40df-86ab-5b42cfedd85c',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'a36798b4-80ea-40fa-9b0f-1a3fc2ba2015'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class SystemDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'b33dc6c1-903e-480f-9e30-46e53cb9041e',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '52853c06-4f08-4289-9c17-73d76d1fb36b'
     })
     tenantId: string;
     
@@ -26,8 +24,7 @@ export class SystemDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '0',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'k'
     })
     name: string;
     
@@ -36,8 +33,7 @@ export class SystemDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'r',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'r'
     })
     tenantCode: string;
     
@@ -46,8 +42,7 @@ export class SystemDto
     @ApiProperty({
         type        : String,
         description : 'environment [input here api field description]',
-        example     : 'f',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '6'
     })
     environment: string;
     
@@ -56,8 +51,7 @@ export class SystemDto
     @ApiProperty({
         type        : String,
         description : 'version [input here api field description]',
-        example     : '7',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'j'
     })
     version: string;
     
@@ -66,8 +60,7 @@ export class SystemDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : true,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : false
     })
     isActive: boolean;
     
@@ -76,8 +69,7 @@ export class SystemDto
     @ApiProperty({
         type        : String,
         description : 'cancelledAt [input here api field description]',
-        example     : '2020-07-17 06:45:36',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 16:33:47'
     })
     cancelledAt: string;
     
@@ -86,8 +78,7 @@ export class SystemDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-17 05:07:30',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 23:19:05'
     })
     createdAt: string;
     
@@ -96,8 +87,7 @@ export class SystemDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-16 21:12:02',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 17:31:16'
     })
     updatedAt: string;
     
@@ -106,8 +96,7 @@ export class SystemDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-17 03:09:08',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 16:10:40'
     })
     deletedAt: string;
     

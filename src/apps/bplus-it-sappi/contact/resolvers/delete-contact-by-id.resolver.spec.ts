@@ -37,19 +37,19 @@ describe('DeleteContactByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteContactByIdResolver should be defined', () => 
+    test('DeleteContactByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteContactByIdResolver should be defined', () => 
+        test('DeleteContactByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an contact deleted', async () => 
+        test('should return an contact deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(contacts[0])));
             expect(await resolver.main(contacts[0].id)).toBe(contacts[0]);

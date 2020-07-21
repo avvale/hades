@@ -37,19 +37,19 @@ describe('DeleteRolesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteRolesResolver should be defined', () => 
+    test('DeleteRolesResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteRolesResolver should be defined', () => 
+        test('DeleteRolesResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an roles deleted', async () => 
+        test('should return an roles deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles)));
             expect(await resolver.main([])).toBe(roles);

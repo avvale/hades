@@ -6,8 +6,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'bb588cca-e74a-4f2b-931f-2ef29ba22388',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '857b4225-b827-4044-8f58-f1881a248932'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '89d17be9-5aa4-4294-9c4a-90bdfd97fb79',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'b6edecd4-33d0-43a4-8e61-afb0efaa456f'
     })
     tenantId: string;
     
@@ -26,8 +24,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : 'e66ba1b2-2152-4b5d-a44e-a6d81a519524',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '3fef01a2-5194-4339-ba78-4ab6deeb348c'
     })
     systemId: string;
     
@@ -36,8 +33,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'vq6rlm2t756e5xq6ci16',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'syxilwqth1c1ryhjw09k'
     })
     systemName: string;
     
@@ -46,8 +42,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '9f6a4a47-76c5-45d7-804d-93df9fb23010',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '30130d03-fc77-4e8e-ad7f-a3da85d0f950'
     })
     executionId: string;
     
@@ -56,8 +51,8 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionType [input here api field description]',
-        example     : 'DETAIL',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'SUMMARY',
+        enum        : ['SUMMARY','DETAIL']
     })
     executionType: string;
     
@@ -66,8 +61,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-17 02:05:39',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 23:08:09'
     })
     executionExecutedAt: string;
     
@@ -76,8 +70,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-17 04:21:13',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 05:08:38'
     })
     executionMonitoringStartAt: string;
     
@@ -86,8 +79,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-17 13:35:48',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-22 00:10:27'
     })
     executionMonitoringEndAt: string;
     
@@ -96,8 +88,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'numberMax [input here api field description]',
-        example     : 2711872069,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 6121888569
     })
     numberMax: number;
     
@@ -106,8 +97,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'numberDays [input here api field description]',
-        example     : 2768142909,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 5275992043
     })
     numberDays: number;
     
@@ -116,8 +106,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'success [input here api field description]',
-        example     : 9784408310,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 6431107881
     })
     success: number;
     
@@ -126,8 +115,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'cancelled [input here api field description]',
-        example     : 1909014391,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 3006282531
     })
     cancelled: number;
     
@@ -136,8 +124,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'delivering [input here api field description]',
-        example     : 2503310338,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 2176041909
     })
     delivering: number;
     
@@ -146,8 +133,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'error [input here api field description]',
-        example     : 8123225065,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 3967770179
     })
     error: number;
     
@@ -156,8 +142,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'holding [input here api field description]',
-        example     : 7391115428,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 9613350451
     })
     holding: number;
     
@@ -166,8 +151,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'toBeDelivered [input here api field description]',
-        example     : 4657685616,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 3001551913
     })
     toBeDelivered: number;
     
@@ -176,8 +160,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'waiting [input here api field description]',
-        example     : 3588015820,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 3646988956
     })
     waiting: number;
     
@@ -186,8 +169,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-16 23:17:34',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 04:51:00'
     })
     createdAt: string;
     
@@ -196,8 +178,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-16 21:18:48',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 20:46:54'
     })
     updatedAt: string;
     
@@ -206,8 +187,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-16 19:44:38',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 21:00:17'
     })
     deletedAt: string;
     

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { IChannelRepository } from './../../domain/channel.repository';
+import { AddChannelsContextEvent } from './../events/add-channels-context.event';
 
 @Injectable()
 export class DeleteChannelsService
@@ -16,13 +17,13 @@ export class DeleteChannelsService
         // get object to delete
         const channels = await this.repository.get(queryStatements);
 
-        await this.repository.delete(queryStatements);        
+        await this.repository.delete(queryStatements);
 
-        // TODO a falta de definir eventos
-        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        // const channelsRegistered = this.publisher.mergeObjectContext(channels);
-        
-        // channelsRegistered.deleted(channels); // apply event to model events
-        // channelsRegistered.commit(); // commit all events of model
+        // create AddChannelsContextEvent to have object wrapper to add event publisher functionality
+        // insert EventBus in object, to be able to apply and commit events
+        const channelsRegistered = this.publisher.mergeObjectContext(new AddChannelsContextEvent(channels));
+
+        channelsRegistered.deleted(); // apply event to model events
+        channelsRegistered.commit(); // commit all events of modelx
     }
 }

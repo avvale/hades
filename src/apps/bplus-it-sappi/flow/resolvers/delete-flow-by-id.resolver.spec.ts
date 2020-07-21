@@ -37,19 +37,19 @@ describe('DeleteFlowByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteFlowByIdResolver should be defined', () => 
+    test('DeleteFlowByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteFlowByIdResolver should be defined', () => 
+        test('DeleteFlowByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an flow deleted', async () => 
+        test('should return an flow deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(flows[0])));
             expect(await resolver.main(flows[0].id)).toBe(flows[0]);

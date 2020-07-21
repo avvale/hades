@@ -1,6 +1,6 @@
 // commands
 import { CreateMessageDetailCommandHandler } from './application/create/create-message-detail.command-handler';
-import { InsertMessagesDetailCommandHandler } from './application/insert/insert-messages-detail.command-handler';
+import { CreateMessagesDetailCommandHandler } from './application/create/create-messages-detail.command-handler';
 import { UpdateMessageDetailCommandHandler } from './application/update/update-message-detail.command-handler';
 import { DeleteMessageDetailByIdCommandHandler } from './application/delete/delete-message-detail-by-id.command-handler';
 import { DeleteMessagesDetailCommandHandler } from './application/delete/delete-messages-detail.command-handler';
@@ -13,12 +13,14 @@ import { FindMessageDetailByIdQueryHandler } from './application/find/find-messa
 
 // events
 import { CreatedMessageDetailEventHandler } from './application/events/created-message-detail.event-handler';
+import { CreatedMessagesDetailEventHandler } from './application/events/created-messages-detail.event-handler';
 import { UpdatedMessageDetailEventHandler } from './application/events/updated-message-detail.event-handler';
 import { DeletedMessageDetailEventHandler } from './application/events/deleted-message-detail.event-handler';
+import { DeletedMessagesDetailEventHandler } from './application/events/deleted-messages-detail.event-handler';
 
 // services
 import { CreateMessageDetailService } from './application/create/create-message-detail.service';
-import { InsertMessagesDetailService } from './application/insert/insert-messages-detail.service';
+import { CreateMessagesDetailService } from './application/create/create-messages-detail.service';
 import { PaginateMessagesDetailService } from './application/paginate/paginate-messages-detail.service';
 import { GetMessagesDetailService } from './application/get/get-messages-detail.service';
 import { FindMessageDetailService } from './application/find/find-message-detail.service';
@@ -41,7 +43,7 @@ export { MessageDetailSagas } from './application/sagas/message-detail.sagas';
 export const BplusItSappiMessageDetailHandlers = [
     // commands
     CreateMessageDetailCommandHandler,
-    InsertMessagesDetailCommandHandler,
+    CreateMessagesDetailCommandHandler,
     UpdateMessageDetailCommandHandler,
     DeleteMessageDetailByIdCommandHandler,
     DeleteMessagesDetailCommandHandler,
@@ -54,13 +56,15 @@ export const BplusItSappiMessageDetailHandlers = [
 
     // events
     CreatedMessageDetailEventHandler,
+    CreatedMessagesDetailEventHandler,
     UpdatedMessageDetailEventHandler,
     DeletedMessageDetailEventHandler,
+    DeletedMessagesDetailEventHandler,
 ];
 
 export const BplusItSappiMessageDetailServices = [
     CreateMessageDetailService,
-    InsertMessagesDetailService,
+    CreateMessagesDetailService,
     PaginateMessagesDetailService,
     GetMessagesDetailService,
     FindMessageDetailService,

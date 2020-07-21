@@ -37,19 +37,19 @@ describe('PaginateFlowsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateFlowsResolver should be defined', () => 
+    test('PaginateFlowsResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('PaginateFlowsResolver should be defined', () => 
+        test('PaginateFlowsResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a flows', async () => 
+        test('should return a flows', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(flows)));
             expect(await resolver.main([], [])).toBe(flows);

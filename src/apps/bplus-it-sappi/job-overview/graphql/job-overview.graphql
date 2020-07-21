@@ -70,7 +70,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateJobOverview(payload: BplusItSappiCreateJobOverviewInput!): BplusItSappiJobOverview
-    bplusItSappiInsertJobsOverview(payload: [BplusItSappiCreateJobOverviewInput]!): Boolean!
+    bplusItSappiCreateJobsOverview(payload: [BplusItSappiCreateJobOverviewInput]!): Boolean!
     bplusItSappiUpdateJobOverview(payload: BplusItSappiUpdateJobOverviewInput!): BplusItSappiJobOverview
     bplusItSappiDeleteJobOverviewById(id: ID!): BplusItSappiJobOverview
     bplusItSappiDeleteJobsOverview(query:[QueryStatementInput]): [BplusItSappiJobOverview]!

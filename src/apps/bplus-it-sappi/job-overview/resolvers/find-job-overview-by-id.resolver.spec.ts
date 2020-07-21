@@ -37,19 +37,19 @@ describe('FindJobOverviewByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindJobOverviewByIdResolver should be defined', () => 
+    test('FindJobOverviewByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindJobOverviewByIdResolver should be defined', () => 
+        test('FindJobOverviewByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an jobOverview by id', async () => 
+        test('should return an jobOverview by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(jobsOverview[0])));
             expect(await resolver.main(jobsOverview[0].id)).toBe(jobsOverview[0]);

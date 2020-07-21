@@ -1,6 +1,6 @@
 // commands
 import { CreateMessageOverviewCommandHandler } from './application/create/create-message-overview.command-handler';
-import { InsertMessagesOverviewCommandHandler } from './application/insert/insert-messages-overview.command-handler';
+import { CreateMessagesOverviewCommandHandler } from './application/create/create-messages-overview.command-handler';
 import { UpdateMessageOverviewCommandHandler } from './application/update/update-message-overview.command-handler';
 import { DeleteMessageOverviewByIdCommandHandler } from './application/delete/delete-message-overview-by-id.command-handler';
 import { DeleteMessagesOverviewCommandHandler } from './application/delete/delete-messages-overview.command-handler';
@@ -13,12 +13,14 @@ import { FindMessageOverviewByIdQueryHandler } from './application/find/find-mes
 
 // events
 import { CreatedMessageOverviewEventHandler } from './application/events/created-message-overview.event-handler';
+import { CreatedMessagesOverviewEventHandler } from './application/events/created-messages-overview.event-handler';
 import { UpdatedMessageOverviewEventHandler } from './application/events/updated-message-overview.event-handler';
 import { DeletedMessageOverviewEventHandler } from './application/events/deleted-message-overview.event-handler';
+import { DeletedMessagesOverviewEventHandler } from './application/events/deleted-messages-overview.event-handler';
 
 // services
 import { CreateMessageOverviewService } from './application/create/create-message-overview.service';
-import { InsertMessagesOverviewService } from './application/insert/insert-messages-overview.service';
+import { CreateMessagesOverviewService } from './application/create/create-messages-overview.service';
 import { PaginateMessagesOverviewService } from './application/paginate/paginate-messages-overview.service';
 import { GetMessagesOverviewService } from './application/get/get-messages-overview.service';
 import { FindMessageOverviewService } from './application/find/find-message-overview.service';
@@ -41,7 +43,7 @@ export { MessageOverviewSagas } from './application/sagas/message-overview.sagas
 export const BplusItSappiMessageOverviewHandlers = [
     // commands
     CreateMessageOverviewCommandHandler,
-    InsertMessagesOverviewCommandHandler,
+    CreateMessagesOverviewCommandHandler,
     UpdateMessageOverviewCommandHandler,
     DeleteMessageOverviewByIdCommandHandler,
     DeleteMessagesOverviewCommandHandler,
@@ -54,13 +56,15 @@ export const BplusItSappiMessageOverviewHandlers = [
 
     // events
     CreatedMessageOverviewEventHandler,
+    CreatedMessagesOverviewEventHandler,
     UpdatedMessageOverviewEventHandler,
     DeletedMessageOverviewEventHandler,
+    DeletedMessagesOverviewEventHandler,
 ];
 
 export const BplusItSappiMessageOverviewServices = [
     CreateMessageOverviewService,
-    InsertMessagesOverviewService,
+    CreateMessagesOverviewService,
     PaginateMessagesOverviewService,
     GetMessagesOverviewService,
     FindMessageOverviewService,

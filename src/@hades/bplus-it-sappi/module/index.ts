@@ -1,6 +1,6 @@
 // commands
 import { CreateModuleCommandHandler } from './application/create/create-module.command-handler';
-import { InsertModulesCommandHandler } from './application/insert/insert-modules.command-handler';
+import { CreateModulesCommandHandler } from './application/create/create-modules.command-handler';
 import { UpdateModuleCommandHandler } from './application/update/update-module.command-handler';
 import { DeleteModuleByIdCommandHandler } from './application/delete/delete-module-by-id.command-handler';
 import { DeleteModulesCommandHandler } from './application/delete/delete-modules.command-handler';
@@ -13,12 +13,14 @@ import { FindModuleByIdQueryHandler } from './application/find/find-module-by-id
 
 // events
 import { CreatedModuleEventHandler } from './application/events/created-module.event-handler';
+import { CreatedModulesEventHandler } from './application/events/created-modules.event-handler';
 import { UpdatedModuleEventHandler } from './application/events/updated-module.event-handler';
 import { DeletedModuleEventHandler } from './application/events/deleted-module.event-handler';
+import { DeletedModulesEventHandler } from './application/events/deleted-modules.event-handler';
 
 // services
 import { CreateModuleService } from './application/create/create-module.service';
-import { InsertModulesService } from './application/insert/insert-modules.service';
+import { CreateModulesService } from './application/create/create-modules.service';
 import { PaginateModulesService } from './application/paginate/paginate-modules.service';
 import { GetModulesService } from './application/get/get-modules.service';
 import { FindModuleService } from './application/find/find-module.service';
@@ -41,7 +43,7 @@ export { ModuleSagas } from './application/sagas/module.sagas';
 export const BplusItSappiModuleHandlers = [
     // commands
     CreateModuleCommandHandler,
-    InsertModulesCommandHandler,
+    CreateModulesCommandHandler,
     UpdateModuleCommandHandler,
     DeleteModuleByIdCommandHandler,
     DeleteModulesCommandHandler,
@@ -54,13 +56,15 @@ export const BplusItSappiModuleHandlers = [
 
     // events
     CreatedModuleEventHandler,
+    CreatedModulesEventHandler,
     UpdatedModuleEventHandler,
     DeletedModuleEventHandler,
+    DeletedModulesEventHandler,
 ];
 
 export const BplusItSappiModuleServices = [
     CreateModuleService,
-    InsertModulesService,
+    CreateModulesService,
     PaginateModulesService,
     GetModulesService,
     FindModuleService,

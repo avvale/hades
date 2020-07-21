@@ -39,19 +39,14 @@ describe('DeleteFlowByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteFlowByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteFlowByIdController should be defined', () => 
+        test('DeleteFlowByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an flow deleted', async () => 
+        test('should return an flow deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(flows[0])));
             expect(await controller.main(flows[0].id)).toBe(flows[0]);

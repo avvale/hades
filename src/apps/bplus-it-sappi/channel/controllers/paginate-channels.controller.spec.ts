@@ -39,19 +39,14 @@ describe('PaginateChannelsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateChannelsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('PaginateChannelsController should be defined', () => 
+        test('PaginateChannelsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a channels', async () => 
+        test('should return a channels', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channels)));
             expect(await controller.main([], [])).toBe(channels);

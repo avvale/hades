@@ -1,6 +1,6 @@
 // commands
 import { CreateRoleCommandHandler } from './application/create/create-role.command-handler';
-import { InsertRolesCommandHandler } from './application/insert/insert-roles.command-handler';
+import { CreateRolesCommandHandler } from './application/create/create-roles.command-handler';
 import { UpdateRoleCommandHandler } from './application/update/update-role.command-handler';
 import { DeleteRoleByIdCommandHandler } from './application/delete/delete-role-by-id.command-handler';
 import { DeleteRolesCommandHandler } from './application/delete/delete-roles.command-handler';
@@ -13,12 +13,14 @@ import { FindRoleByIdQueryHandler } from './application/find/find-role-by-id.que
 
 // events
 import { CreatedRoleEventHandler } from './application/events/created-role.event-handler';
+import { CreatedRolesEventHandler } from './application/events/created-roles.event-handler';
 import { UpdatedRoleEventHandler } from './application/events/updated-role.event-handler';
 import { DeletedRoleEventHandler } from './application/events/deleted-role.event-handler';
+import { DeletedRolesEventHandler } from './application/events/deleted-roles.event-handler';
 
 // services
 import { CreateRoleService } from './application/create/create-role.service';
-import { InsertRolesService } from './application/insert/insert-roles.service';
+import { CreateRolesService } from './application/create/create-roles.service';
 import { PaginateRolesService } from './application/paginate/paginate-roles.service';
 import { GetRolesService } from './application/get/get-roles.service';
 import { FindRoleService } from './application/find/find-role.service';
@@ -41,7 +43,7 @@ export { RoleSagas } from './application/sagas/role.sagas';
 export const BplusItSappiRoleHandlers = [
     // commands
     CreateRoleCommandHandler,
-    InsertRolesCommandHandler,
+    CreateRolesCommandHandler,
     UpdateRoleCommandHandler,
     DeleteRoleByIdCommandHandler,
     DeleteRolesCommandHandler,
@@ -54,13 +56,15 @@ export const BplusItSappiRoleHandlers = [
 
     // events
     CreatedRoleEventHandler,
+    CreatedRolesEventHandler,
     UpdatedRoleEventHandler,
     DeletedRoleEventHandler,
+    DeletedRolesEventHandler,
 ];
 
 export const BplusItSappiRoleServices = [
     CreateRoleService,
-    InsertRolesService,
+    CreateRolesService,
     PaginateRolesService,
     GetRolesService,
     FindRoleService,

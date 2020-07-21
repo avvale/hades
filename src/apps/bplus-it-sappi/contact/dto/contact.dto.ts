@@ -6,8 +6,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'a143a40d-d134-466f-9c31-4b59b9b1c36e',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'f57e19cf-e0a7-4976-b49e-40d4fe1f20c2'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '7c448cfa-3408-4102-9d45-ce46cbfc8ab1',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2186eac0-4963-4b7c-a768-4dc9c97286a4'
     })
     tenantId: string;
     
@@ -26,8 +24,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '56504540-1964-434b-871f-afa892eb0e69',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'bea95f09-4110-4ade-a8c8-97cede034565'
     })
     systemId: string;
     
@@ -36,8 +33,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'mcwohs0vm29ki5wqkfy9',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '6ui6cmfsuhgdtswy1mj6'
     })
     systemName: string;
     
@@ -46,8 +42,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'roleId [input here api field description]',
-        example     : 'a14dd912-d135-49fe-b50d-0cfeea373155',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'f7099a6f-8b0b-44b1-bb10-e63d853c9ffd'
     })
     roleId: string;
     
@@ -56,8 +51,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'roleName [input here api field description]',
-        example     : '05baklbu9xerurh6pfns988ohkzbooz7orrn76bob8ngmjdbbnf9ca5ieu42oegtn8rzsc3to10t36p4bh469laju6nw0io6nhqgexwb58m2dgfbsiikks0xog81jc2qmc4f107dorxtbbzgy5hcop4eabls9kgk0wmfiic2wq212y2r4yqm4uegp1d2t98i58747k6fk91s2z9oc3e1bc00c8su181dgxw9dy6mdep9muj7gwnbsgj3yj93cqk',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '5j5s6o1s7njncudurfw6mnag0zwrpswga9e8cgt1wygln115rzovz743c5mnhchs5atvodeg49cbetbypotqvylncwwg6ppap2tf434p6c57nvcbf9dl6a6igimjdjxwdp31gpqua8sbikggaid0ttwtoa9zzaa33cx4s1uzqyjf8hcma0oasenfiptzx5mu5nhoppmvdslsouikzif89v65qap7nwfdne5d6vmackvvwt7cmp26emujm5fzmmx'
     })
     roleName: string;
     
@@ -66,8 +60,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'llkplqyvbaep5vo3mnfx5z1sa4lvccgx1n0j7jcgfo68j9hn4gjczo1ktiyarfor1600hptmwcedii4ad0uim1u3nq1k8tulpp8ea7etrksjkgtqs1jrkbzyguu45g6k5oa4cqxkec3dtxl8kelkt03ozw8jv3757tttdhljbz9lsx9myzml5rhv38bglu4udvyjvnsnb0swhgvj2qerht0bj69jqqqrwpg1e8nz4reyfh1cgq13ejdxjnkv8lk',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'kkrexf6pdu1bdjemaqykthglgsbq83anvzroda6c8jdxchzcor2obpyghaboxjnnaskd2hcqza26j18ckthsk12ozfzjqy85z3cpd03a5lv8pbylb2bxel2e7n3aob4f0dirjr5qjvtg4togfachx987pb47v7v0o5r1d3piy0paguvdn5096xg7dn6fg34bdc049mujpsfr5obcgsc00wyxkdghwvhmrwtu2i1z8kf0inldjmzkz92qck9ch9y'
     })
     name: string;
     
@@ -76,8 +69,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'surname [input here api field description]',
-        example     : 'uao0mhvbkg5k8u8ji2oih7w675d3ljfumtfjx26jmpv1m1jkyqdxd5mm8c1w1ej29i5ch3yztt57ihchncksvp475tz3d09eha66kp0gcbgnwtqlrvh31f8z7rxei33md9b15ff3aewa9i2i9r5v9fmhykxrilhq6rex96baasvrlj4gomkhk8ewzvfdoguqrupc8h618gkauvdlxaq3zlsq52cdv3zjjcuwyf38ugaahbxb9ddfgz7tp1zssfr',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'q03wlmlwjxvbre5y0j1rbg4tql1dbq6enfmffgamfszpz2pmpsn3nm2v2oc8xyd9pqa5n1fsgk8qovvy2datuneowrl4zucl7a2k1o56vf2cu9w1qm5n7tav09xpe3bk8s2yarq4g70nb46br14loyglrc2dqx5x4kht76980avqwg3aum9ifubkvr6u2l42skop5i635txp5vmj4stewa1sddvyts4mz039gs2035rtgn7engwvhpgehjuv2h9'
     })
     surname: string;
     
@@ -86,8 +78,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'email [input here api field description]',
-        example     : 'bftcog0ww96tojm7qoegf7dyef6e373svbjtkdrahasnyhzcm01tsbavrg649vkpaunpatqnh2oaf3pl5io5147vpq2vuw2b334c7755x4ic0581bsy9vsz2',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'ucilo7a45ij6gnuvxc1vept1napthvflgnyhnfidl2cehz2rbn5dmxcbvl0s24septp2ahhtg28gkcb4zxeus8zb1bqscnxhm09ijc3jtfv5iig7d0tecja2'
     })
     email: string;
     
@@ -96,8 +87,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'mobile [input here api field description]',
-        example     : '0dbbxtt0fumxggja5wm2okn27d5crqasi09nk7zj2qefpviw89tie18n8190',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'x3haw9eqb51kgtf85f8hfh8jgawo8hiu31gvqcls3htlwu3h257e45j00jni'
     })
     mobile: string;
     
@@ -106,8 +96,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'area [input here api field description]',
-        example     : 'zvdalljvnao0z1d8708hjj53b5dk38t8oym8idmmi1ycril2njzq60fz36d8neb74gdn29ni53eirssfs0cr9vlarnd12nsle1gtlziap607e538g6yo985wfnivk1fmemxrp8unk30solh4z8c7e61qx5ug6ebi6lpzmmvo3p3qs4sdq8mnicpmlr5omqqnl1k2ovsacaqu12ktmj23evdd7vtcacw24qbajk9bsrcijxrdxzyqpeylzhluovm',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '6n3czmi532q70mm0r3h1pyvoeyx0pj4nb3uejqp49wu7i021jh3rnjnhtsvcha23gcyz6h7i4tshxli17f5373bh0vpr1ppkospshna7pv23dnv2wz8ye2kmuyyvmi3yi9who713kkh7jlnda77l5lix84ogz7g74bgt70qomzbzfux7djizpjgmnnrzti7eqw5ti0ecyrfyrg0s7qv0ab3i3hneplp5gu3735djqp5r2rmaxklnj7d10876erc'
     })
     area: string;
     
@@ -116,8 +105,7 @@ export class ContactDto
     @ApiProperty({
         type        : Boolean,
         description : 'hasConsentEmail [input here api field description]',
-        example     : true,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : false
     })
     hasConsentEmail: boolean;
     
@@ -126,8 +114,7 @@ export class ContactDto
     @ApiProperty({
         type        : Boolean,
         description : 'hasConsentMobile [input here api field description]',
-        example     : true,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : false
     })
     hasConsentMobile: boolean;
     
@@ -136,8 +123,7 @@ export class ContactDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : true,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : false
     })
     isActive: boolean;
     
@@ -146,8 +132,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-16 20:44:31',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 09:19:12'
     })
     createdAt: string;
     
@@ -156,8 +141,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-17 12:55:18',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 08:40:01'
     })
     updatedAt: string;
     
@@ -166,8 +150,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-17 14:49:39',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 12:35:43'
     })
     deletedAt: string;
     

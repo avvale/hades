@@ -37,19 +37,19 @@ describe('PaginateContactsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateContactsResolver should be defined', () => 
+    test('PaginateContactsResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('PaginateContactsResolver should be defined', () => 
+        test('PaginateContactsResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a contacts', async () => 
+        test('should return a contacts', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(contacts)));
             expect(await resolver.main([], [])).toBe(contacts);

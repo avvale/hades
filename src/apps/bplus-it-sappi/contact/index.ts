@@ -1,6 +1,6 @@
 // controllers
 import { CreateContactController } from './controllers/create-contact.controller';
-import { InsertContactsController } from './controllers/insert-contacts.controller';
+import { CreateContactsController } from './controllers/create-contacts.controller';
 import { PaginateContactsController } from './controllers/paginate-contacts.controller';
 import { GetContactsController } from './controllers/get-contacts.controller';
 import { FindContactByIdController } from './controllers/find-contact-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteContactsController } from './controllers/delete-contacts.controll
 
 // resolvers
 import { CreateContactResolver } from './resolvers/create-contact.resolver';
-import { InsertContactsResolver } from './resolvers/insert-contacts.resolver';
+import { CreateContactsResolver } from './resolvers/create-contacts.resolver';
 import { PaginateContactsResolver } from './resolvers/paginate-contacts.resolver';
 import { GetContactsResolver } from './resolvers/get-contacts.resolver';
 import { FindContactResolver } from './resolvers/find-contact.resolver';
@@ -22,7 +22,7 @@ import { DeleteContactsResolver } from './resolvers/delete-contacts.resolver';
 
 export const BplusItSappiContactControllers = [
     CreateContactController,
-    InsertContactsController,
+    CreateContactsController,
     PaginateContactsController,
     GetContactsController,
     FindContactByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiContactControllers = [
 
 export const BplusItSappiContactResolvers = [
     CreateContactResolver,
-    InsertContactsResolver,
+    CreateContactsResolver,
     PaginateContactsResolver,
     GetContactsResolver,
     FindContactResolver,

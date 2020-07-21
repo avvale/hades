@@ -37,19 +37,19 @@ describe('DeleteDataLakeByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteDataLakeByIdResolver should be defined', () => 
+    test('DeleteDataLakeByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteDataLakeByIdResolver should be defined', () => 
+        test('DeleteDataLakeByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an dataLake deleted', async () => 
+        test('should return an dataLake deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(dataLakes[0])));
             expect(await resolver.main(dataLakes[0].id)).toBe(dataLakes[0]);

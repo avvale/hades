@@ -39,19 +39,14 @@ describe('FindChannelByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindChannelByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('FindChannelByIdController should be defined', () => 
+        test('FindChannelByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an channel by id', async () => 
+        test('should return an channel by id', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channels[0])));
             expect(await controller.main(channels[0].id)).toBe(channels[0]);

@@ -1,6 +1,6 @@
 // commands
 import { CreateSystemCommandHandler } from './application/create/create-system.command-handler';
-import { InsertSystemsCommandHandler } from './application/insert/insert-systems.command-handler';
+import { CreateSystemsCommandHandler } from './application/create/create-systems.command-handler';
 import { UpdateSystemCommandHandler } from './application/update/update-system.command-handler';
 import { DeleteSystemByIdCommandHandler } from './application/delete/delete-system-by-id.command-handler';
 import { DeleteSystemsCommandHandler } from './application/delete/delete-systems.command-handler';
@@ -13,12 +13,14 @@ import { FindSystemByIdQueryHandler } from './application/find/find-system-by-id
 
 // events
 import { CreatedSystemEventHandler } from './application/events/created-system.event-handler';
+import { CreatedSystemsEventHandler } from './application/events/created-systems.event-handler';
 import { UpdatedSystemEventHandler } from './application/events/updated-system.event-handler';
 import { DeletedSystemEventHandler } from './application/events/deleted-system.event-handler';
+import { DeletedSystemsEventHandler } from './application/events/deleted-systems.event-handler';
 
 // services
 import { CreateSystemService } from './application/create/create-system.service';
-import { InsertSystemsService } from './application/insert/insert-systems.service';
+import { CreateSystemsService } from './application/create/create-systems.service';
 import { PaginateSystemsService } from './application/paginate/paginate-systems.service';
 import { GetSystemsService } from './application/get/get-systems.service';
 import { FindSystemService } from './application/find/find-system.service';
@@ -41,7 +43,7 @@ export { SystemSagas } from './application/sagas/system.sagas';
 export const BplusItSappiSystemHandlers = [
     // commands
     CreateSystemCommandHandler,
-    InsertSystemsCommandHandler,
+    CreateSystemsCommandHandler,
     UpdateSystemCommandHandler,
     DeleteSystemByIdCommandHandler,
     DeleteSystemsCommandHandler,
@@ -54,13 +56,15 @@ export const BplusItSappiSystemHandlers = [
 
     // events
     CreatedSystemEventHandler,
+    CreatedSystemsEventHandler,
     UpdatedSystemEventHandler,
     DeletedSystemEventHandler,
+    DeletedSystemsEventHandler,
 ];
 
 export const BplusItSappiSystemServices = [
     CreateSystemService,
-    InsertSystemsService,
+    CreateSystemsService,
     PaginateSystemsService,
     GetSystemsService,
     FindSystemService,

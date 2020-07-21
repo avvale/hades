@@ -89,7 +89,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateFlow(payload: BplusItSappiCreateFlowInput!): BplusItSappiFlow
-    bplusItSappiInsertFlows(payload: [BplusItSappiCreateFlowInput]!): Boolean!
+    bplusItSappiCreateFlows(payload: [BplusItSappiCreateFlowInput]!): Boolean!
     bplusItSappiUpdateFlow(payload: BplusItSappiUpdateFlowInput!): BplusItSappiFlow
     bplusItSappiDeleteFlowById(id: ID!): BplusItSappiFlow
     bplusItSappiDeleteFlows(query:[QueryStatementInput]): [BplusItSappiFlow]!

@@ -1,6 +1,6 @@
 // controllers
 import { CreateRoleController } from './controllers/create-role.controller';
-import { InsertRolesController } from './controllers/insert-roles.controller';
+import { CreateRolesController } from './controllers/create-roles.controller';
 import { PaginateRolesController } from './controllers/paginate-roles.controller';
 import { GetRolesController } from './controllers/get-roles.controller';
 import { FindRoleByIdController } from './controllers/find-role-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteRolesController } from './controllers/delete-roles.controller';
 
 // resolvers
 import { CreateRoleResolver } from './resolvers/create-role.resolver';
-import { InsertRolesResolver } from './resolvers/insert-roles.resolver';
+import { CreateRolesResolver } from './resolvers/create-roles.resolver';
 import { PaginateRolesResolver } from './resolvers/paginate-roles.resolver';
 import { GetRolesResolver } from './resolvers/get-roles.resolver';
 import { FindRoleResolver } from './resolvers/find-role.resolver';
@@ -22,7 +22,7 @@ import { DeleteRolesResolver } from './resolvers/delete-roles.resolver';
 
 export const BplusItSappiRoleControllers = [
     CreateRoleController,
-    InsertRolesController,
+    CreateRolesController,
     PaginateRolesController,
     GetRolesController,
     FindRoleByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiRoleControllers = [
 
 export const BplusItSappiRoleResolvers = [
     CreateRoleResolver,
-    InsertRolesResolver,
+    CreateRolesResolver,
     PaginateRolesResolver,
     GetRolesResolver,
     FindRoleResolver,

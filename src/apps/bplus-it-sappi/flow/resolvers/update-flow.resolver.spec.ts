@@ -38,20 +38,19 @@ describe('UpdateFlowResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateFlowResolver should be defined', () => 
+    test('UpdateFlowResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateFlowResolver should be defined', () => 
+        test('UpdateFlowResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a flow created', async () => 
+        test('should return a flow created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(flows[0])));
             expect(await resolver.main(<BplusItSappiUpdateFlowInput>flows[0])).toBe(flows[0]);

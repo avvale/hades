@@ -39,20 +39,14 @@ describe('UpdateRoleController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateRoleController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateRoleController should be defined', () => 
+        test('UpdateRoleController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a role created', async () => 
+        test('should return a role created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
             expect(await controller.main(roles[0])).toBe(roles[0]);

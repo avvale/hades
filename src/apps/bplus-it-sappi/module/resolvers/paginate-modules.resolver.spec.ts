@@ -37,19 +37,19 @@ describe('PaginateModulesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateModulesResolver should be defined', () => 
+    test('PaginateModulesResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('PaginateModulesResolver should be defined', () => 
+        test('PaginateModulesResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a modules', async () => 
+        test('should return a modules', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(modules)));
             expect(await resolver.main([], [])).toBe(modules);

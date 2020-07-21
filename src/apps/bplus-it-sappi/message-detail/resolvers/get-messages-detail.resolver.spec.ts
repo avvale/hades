@@ -37,19 +37,19 @@ describe('GetMessagesDetailResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('GetMessagesDetailResolver should be defined', () => 
+    test('GetMessagesDetailResolver should be defined', () => 
     {
         expect(resolver).   toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('GetMessagesDetailResolver should be defined', () => 
+        test('GetMessagesDetailResolver should be defined', () => 
         {
             expect(resolver).   toBeDefined();
         });
 
-        it('should return a messagesDetail', async () => 
+        test('should return a messagesDetail', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messagesDetail)));
             expect(await resolver.main([])).toBe(messagesDetail);

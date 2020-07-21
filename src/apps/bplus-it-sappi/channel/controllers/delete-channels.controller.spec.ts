@@ -39,19 +39,14 @@ describe('DeleteChannelsController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteChannelsController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteChannelsController should be defined', () => 
+        test('DeleteChannelsController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an channels deleted', async () => 
+        test('should return an channels deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channels)));
             expect(await controller.main([])).toBe(channels);

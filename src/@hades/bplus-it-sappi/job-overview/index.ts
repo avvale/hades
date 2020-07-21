@@ -1,6 +1,6 @@
 // commands
 import { CreateJobOverviewCommandHandler } from './application/create/create-job-overview.command-handler';
-import { InsertJobsOverviewCommandHandler } from './application/insert/insert-jobs-overview.command-handler';
+import { CreateJobsOverviewCommandHandler } from './application/create/create-jobs-overview.command-handler';
 import { UpdateJobOverviewCommandHandler } from './application/update/update-job-overview.command-handler';
 import { DeleteJobOverviewByIdCommandHandler } from './application/delete/delete-job-overview-by-id.command-handler';
 import { DeleteJobsOverviewCommandHandler } from './application/delete/delete-jobs-overview.command-handler';
@@ -13,12 +13,14 @@ import { FindJobOverviewByIdQueryHandler } from './application/find/find-job-ove
 
 // events
 import { CreatedJobOverviewEventHandler } from './application/events/created-job-overview.event-handler';
+import { CreatedJobsOverviewEventHandler } from './application/events/created-jobs-overview.event-handler';
 import { UpdatedJobOverviewEventHandler } from './application/events/updated-job-overview.event-handler';
 import { DeletedJobOverviewEventHandler } from './application/events/deleted-job-overview.event-handler';
+import { DeletedJobsOverviewEventHandler } from './application/events/deleted-jobs-overview.event-handler';
 
 // services
 import { CreateJobOverviewService } from './application/create/create-job-overview.service';
-import { InsertJobsOverviewService } from './application/insert/insert-jobs-overview.service';
+import { CreateJobsOverviewService } from './application/create/create-jobs-overview.service';
 import { PaginateJobsOverviewService } from './application/paginate/paginate-jobs-overview.service';
 import { GetJobsOverviewService } from './application/get/get-jobs-overview.service';
 import { FindJobOverviewService } from './application/find/find-job-overview.service';
@@ -41,7 +43,7 @@ export { JobOverviewSagas } from './application/sagas/job-overview.sagas';
 export const BplusItSappiJobOverviewHandlers = [
     // commands
     CreateJobOverviewCommandHandler,
-    InsertJobsOverviewCommandHandler,
+    CreateJobsOverviewCommandHandler,
     UpdateJobOverviewCommandHandler,
     DeleteJobOverviewByIdCommandHandler,
     DeleteJobsOverviewCommandHandler,
@@ -54,13 +56,15 @@ export const BplusItSappiJobOverviewHandlers = [
 
     // events
     CreatedJobOverviewEventHandler,
+    CreatedJobsOverviewEventHandler,
     UpdatedJobOverviewEventHandler,
     DeletedJobOverviewEventHandler,
+    DeletedJobsOverviewEventHandler,
 ];
 
 export const BplusItSappiJobOverviewServices = [
     CreateJobOverviewService,
-    InsertJobsOverviewService,
+    CreateJobsOverviewService,
     PaginateJobsOverviewService,
     GetJobsOverviewService,
     FindJobOverviewService,

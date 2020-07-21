@@ -37,19 +37,19 @@ describe('DeleteModuleByIdResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteModuleByIdResolver should be defined', () => 
+    test('DeleteModuleByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteModuleByIdResolver should be defined', () => 
+        test('DeleteModuleByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an module deleted', async () => 
+        test('should return an module deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(modules[0])));
             expect(await resolver.main(modules[0].id)).toBe(modules[0]);

@@ -1,6 +1,6 @@
 // controllers
 import { CreateMessageOverviewController } from './controllers/create-message-overview.controller';
-import { InsertMessagesOverviewController } from './controllers/insert-messages-overview.controller';
+import { CreateMessagesOverviewController } from './controllers/create-messages-overview.controller';
 import { PaginateMessagesOverviewController } from './controllers/paginate-messages-overview.controller';
 import { GetMessagesOverviewController } from './controllers/get-messages-overview.controller';
 import { FindMessageOverviewByIdController } from './controllers/find-message-overview-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteMessagesOverviewController } from './controllers/delete-messages-
 
 // resolvers
 import { CreateMessageOverviewResolver } from './resolvers/create-message-overview.resolver';
-import { InsertMessagesOverviewResolver } from './resolvers/insert-messages-overview.resolver';
+import { CreateMessagesOverviewResolver } from './resolvers/create-messages-overview.resolver';
 import { PaginateMessagesOverviewResolver } from './resolvers/paginate-messages-overview.resolver';
 import { GetMessagesOverviewResolver } from './resolvers/get-messages-overview.resolver';
 import { FindMessageOverviewResolver } from './resolvers/find-message-overview.resolver';
@@ -22,7 +22,7 @@ import { DeleteMessagesOverviewResolver } from './resolvers/delete-messages-over
 
 export const BplusItSappiMessageOverviewControllers = [
     CreateMessageOverviewController,
-    InsertMessagesOverviewController,
+    CreateMessagesOverviewController,
     PaginateMessagesOverviewController,
     GetMessagesOverviewController,
     FindMessageOverviewByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiMessageOverviewControllers = [
 
 export const BplusItSappiMessageOverviewResolvers = [
     CreateMessageOverviewResolver,
-    InsertMessagesOverviewResolver,
+    CreateMessagesOverviewResolver,
     PaginateMessagesOverviewResolver,
     GetMessagesOverviewResolver,
     FindMessageOverviewResolver,

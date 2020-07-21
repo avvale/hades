@@ -37,19 +37,19 @@ describe('FindSystemResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindSystemResolver should be defined', () => 
+    test('FindSystemResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindSystemResolver should be defined', () => 
+        test('FindSystemResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a system', async () => 
+        test('should return a system', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(systems[0])));
             expect(await resolver.main([])).toBe(systems[0]);

@@ -51,7 +51,7 @@ describe('data-lake', () =>
         await app.init();
     });
 
-    it(`/REST:POST bplus-it-sappi/data-lake - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/data-lake')
@@ -61,7 +61,7 @@ describe('data-lake', () =>
     });
 
     
-    it(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/data-lake')
@@ -76,7 +76,7 @@ describe('data-lake', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/data-lake')
@@ -91,13 +91,13 @@ describe('data-lake', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeData property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeData property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '38079f4c-5b05-4836-94fe-0db6e01d388b',
+                id: '55291cea-ae07-4101-9e8e-905effd32ae9',
                 data: null,
             })
             .expect(400)
@@ -106,13 +106,13 @@ describe('data-lake', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeData property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeData property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '38079f4c-5b05-4836-94fe-0db6e01d388b',
+                id: '55291cea-ae07-4101-9e8e-905effd32ae9',
                 
             })
             .expect(400)
@@ -123,13 +123,13 @@ describe('data-lake', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '00iik55qu4hi9ev4clkqv3njiu7cyulbc2yfy',
+                id: 'fugipj6m2e5qdm7h3182crkbbk4qca6u3pl4b',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -153,19 +153,19 @@ describe('data-lake', () =>
 
     
 
-    it(`/REST:POST bplus-it-sappi/data-lake`, () => 
+    test(`/REST:POST bplus-it-sappi/data-lake`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '38079f4c-5b05-4836-94fe-0db6e01d388b',
+                id: '55291cea-ae07-4101-9e8e-905effd32ae9',
                 data: { "foo" : "bar" },
             })
             .expect(201);
     });
 
-    it(`/REST:GET bplus-it-sappi/data-lakes/paginate`, () => 
+    test(`/REST:GET bplus-it-sappi/data-lakes/paginate`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/data-lakes/paginate')
@@ -190,7 +190,7 @@ describe('data-lake', () =>
             });
     });
 
-    it(`/REST:GET bplus-it-sappi/data-lake - Got 404 Not Found`, () => 
+    test(`/REST:GET bplus-it-sappi/data-lake - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/data-lake')
@@ -208,7 +208,7 @@ describe('data-lake', () =>
             .expect(404);
     });
 
-    it(`/REST:GET bplus-it-sappi/data-lake`, () => 
+    test(`/REST:GET bplus-it-sappi/data-lake`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/data-lake')
@@ -219,15 +219,15 @@ describe('data-lake', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '38079f4c-5b05-4836-94fe-0db6e01d388b'
+                        value   : '55291cea-ae07-4101-9e8e-905effd32ae9'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '38079f4c-5b05-4836-94fe-0db6e01d388b'));
+            .expect(repository.collectionResponse.find(item => item.id === '55291cea-ae07-4101-9e8e-905effd32ae9'));
     });
 
-    it(`/REST:GET bplus-it-sappi/data-lake/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET bplus-it-sappi/data-lake/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/data-lake/00000000-0000-0000-0000-000000000000')
@@ -235,16 +235,16 @@ describe('data-lake', () =>
             .expect(404);
     });
 
-    it(`/REST:GET bplus-it-sappi/data-lake/{id}`, () => 
+    test(`/REST:GET bplus-it-sappi/data-lake/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/data-lake/38079f4c-5b05-4836-94fe-0db6e01d388b')
+            .get('/bplus-it-sappi/data-lake/55291cea-ae07-4101-9e8e-905effd32ae9')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '38079f4c-5b05-4836-94fe-0db6e01d388b'));
+            .expect(repository.collectionResponse.find(e => e.id === '55291cea-ae07-4101-9e8e-905effd32ae9'));
     });
 
-    it(`/REST:GET bplus-it-sappi/data-lakes`, () => 
+    test(`/REST:GET bplus-it-sappi/data-lakes`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/data-lakes')
@@ -253,34 +253,34 @@ describe('data-lake', () =>
             .expect(repository.collectionResponse);
     });
 
-    it(`/REST:PUT bplus-it-sappi/data-lake - Got 404 Not Found`, () => 
+    test(`/REST:PUT bplus-it-sappi/data-lake - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .put('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'e211fb69-fc1f-4ed8-9459-9cab31fa98ab',
+                id: 'f7d64cbf-b7aa-47c1-99bb-1336e55fd5e5',
                 data: { "foo" : "bar" },
             })
             .expect(404);
     });
 
-    it(`/REST:PUT bplus-it-sappi/data-lake`, () => 
+    test(`/REST:PUT bplus-it-sappi/data-lake`, () => 
     {
         return request(app.getHttpServer())
             .put('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '38079f4c-5b05-4836-94fe-0db6e01d388b',
+                id: '55291cea-ae07-4101-9e8e-905effd32ae9',
                 data: { "foo" : "bar" },
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '38079f4c-5b05-4836-94fe-0db6e01d388b'));
+            .expect(repository.collectionResponse.find(e => e.id === '55291cea-ae07-4101-9e8e-905effd32ae9'));
     });
 
-    it(`/REST:DELETE bplus-it-sappi/data-lake/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE bplus-it-sappi/data-lake/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .delete('/bplus-it-sappi/data-lake/00000000-0000-0000-0000-000000000000')
@@ -288,15 +288,15 @@ describe('data-lake', () =>
             .expect(404);
     });
 
-    it(`/REST:DELETE bplus-it-sappi/data-lake/{id}`, () => 
+    test(`/REST:DELETE bplus-it-sappi/data-lake/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/data-lake/38079f4c-5b05-4836-94fe-0db6e01d388b')
+            .delete('/bplus-it-sappi/data-lake/55291cea-ae07-4101-9e8e-905effd32ae9')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    it(`/GraphQL bplusItSappiCreateDataLake - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL bplusItSappiCreateDataLake - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -326,7 +326,7 @@ describe('data-lake', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiCreateDataLake`, () => 
+    test(`/GraphQL bplusItSappiCreateDataLake`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -346,18 +346,18 @@ describe('data-lake', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '8ad7e3b2-6ee6-4d0f-9f61-ec5eecef68b6',
+                        id: 'af7045d4-c10e-44f3-b988-976c15ec120e',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateDataLake).toHaveProperty('id', '8ad7e3b2-6ee6-4d0f-9f61-ec5eecef68b6');
+                expect(res.body.data.bplusItSappiCreateDataLake).toHaveProperty('id', 'af7045d4-c10e-44f3-b988-976c15ec120e');
             });
     });
 
-    it(`/GraphQL bplusItSappiPaginateDataLakes`, () => 
+    test(`/GraphQL bplusItSappiPaginateDataLakes`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -395,7 +395,7 @@ describe('data-lake', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindDataLake - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiFindDataLake - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -432,7 +432,7 @@ describe('data-lake', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindDataLake`, () => 
+    test(`/GraphQL bplusItSappiFindDataLake`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -456,18 +456,18 @@ describe('data-lake', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '38079f4c-5b05-4836-94fe-0db6e01d388b'
+                            value   : '55291cea-ae07-4101-9e8e-905effd32ae9'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindDataLake.id).toStrictEqual('38079f4c-5b05-4836-94fe-0db6e01d388b');
+                expect(res.body.data.bplusItSappiFindDataLake.id).toStrictEqual('55291cea-ae07-4101-9e8e-905effd32ae9');
             });
     });
 
-    it(`/GraphQL bplusItSappiFindDataLakeById - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiFindDataLakeById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -497,7 +497,7 @@ describe('data-lake', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindDataLakeById`, () => 
+    test(`/GraphQL bplusItSappiFindDataLakeById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -516,16 +516,16 @@ describe('data-lake', () =>
                     }
                 `,
                 variables: {
-                    id: '38079f4c-5b05-4836-94fe-0db6e01d388b'
+                    id: '55291cea-ae07-4101-9e8e-905effd32ae9'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindDataLakeById.id).toStrictEqual('38079f4c-5b05-4836-94fe-0db6e01d388b');
+                expect(res.body.data.bplusItSappiFindDataLakeById.id).toStrictEqual('55291cea-ae07-4101-9e8e-905effd32ae9');
             });
     });
 
-    it(`/GraphQL bplusItSappiGetDataLakes`, () => 
+    test(`/GraphQL bplusItSappiGetDataLakes`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -554,7 +554,7 @@ describe('data-lake', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiUpdateDataLake - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiUpdateDataLake - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -575,7 +575,7 @@ describe('data-lake', () =>
                 variables: {
                     payload: {
                         
-                        id: '1bf4e697-d78d-4b79-9f45-0849e1de03b1',
+                        id: '657ff121-77ec-46ad-9fbe-42f50bab2537',
                         data: { "foo" : "bar" },
                     }
                 }
@@ -588,7 +588,7 @@ describe('data-lake', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiUpdateDataLake`, () => 
+    test(`/GraphQL bplusItSappiUpdateDataLake`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -609,18 +609,18 @@ describe('data-lake', () =>
                 variables: {
                     payload: {
                         
-                        id: '38079f4c-5b05-4836-94fe-0db6e01d388b',
+                        id: '55291cea-ae07-4101-9e8e-905effd32ae9',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateDataLake.id).toStrictEqual('38079f4c-5b05-4836-94fe-0db6e01d388b');
+                expect(res.body.data.bplusItSappiUpdateDataLake.id).toStrictEqual('55291cea-ae07-4101-9e8e-905effd32ae9');
             });
     });
 
-    it(`/GraphQL bplusItSappiDeleteDataLakeById - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiDeleteDataLakeById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -650,7 +650,7 @@ describe('data-lake', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiDeleteDataLakeById`, () => 
+    test(`/GraphQL bplusItSappiDeleteDataLakeById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -669,12 +669,12 @@ describe('data-lake', () =>
                     }
                 `,
                 variables: {
-                    id: '38079f4c-5b05-4836-94fe-0db6e01d388b'
+                    id: '55291cea-ae07-4101-9e8e-905effd32ae9'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteDataLakeById.id).toStrictEqual('38079f4c-5b05-4836-94fe-0db6e01d388b');
+                expect(res.body.data.bplusItSappiDeleteDataLakeById.id).toStrictEqual('55291cea-ae07-4101-9e8e-905effd32ae9');
             });
     });
 

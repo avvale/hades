@@ -1,6 +1,6 @@
 // controllers
 import { CreateChannelOverviewController } from './controllers/create-channel-overview.controller';
-import { InsertChannelsOverviewController } from './controllers/insert-channels-overview.controller';
+import { CreateChannelsOverviewController } from './controllers/create-channels-overview.controller';
 import { PaginateChannelsOverviewController } from './controllers/paginate-channels-overview.controller';
 import { GetChannelsOverviewController } from './controllers/get-channels-overview.controller';
 import { FindChannelOverviewByIdController } from './controllers/find-channel-overview-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteChannelsOverviewController } from './controllers/delete-channels-
 
 // resolvers
 import { CreateChannelOverviewResolver } from './resolvers/create-channel-overview.resolver';
-import { InsertChannelsOverviewResolver } from './resolvers/insert-channels-overview.resolver';
+import { CreateChannelsOverviewResolver } from './resolvers/create-channels-overview.resolver';
 import { PaginateChannelsOverviewResolver } from './resolvers/paginate-channels-overview.resolver';
 import { GetChannelsOverviewResolver } from './resolvers/get-channels-overview.resolver';
 import { FindChannelOverviewResolver } from './resolvers/find-channel-overview.resolver';
@@ -22,7 +22,7 @@ import { DeleteChannelsOverviewResolver } from './resolvers/delete-channels-over
 
 export const BplusItSappiChannelOverviewControllers = [
     CreateChannelOverviewController,
-    InsertChannelsOverviewController,
+    CreateChannelsOverviewController,
     PaginateChannelsOverviewController,
     GetChannelsOverviewController,
     FindChannelOverviewByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiChannelOverviewControllers = [
 
 export const BplusItSappiChannelOverviewResolvers = [
     CreateChannelOverviewResolver,
-    InsertChannelsOverviewResolver,
+    CreateChannelsOverviewResolver,
     PaginateChannelsOverviewResolver,
     GetChannelsOverviewResolver,
     FindChannelOverviewResolver,

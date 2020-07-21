@@ -1,6 +1,6 @@
 // controllers
 import { CreateJobOverviewController } from './controllers/create-job-overview.controller';
-import { InsertJobsOverviewController } from './controllers/insert-jobs-overview.controller';
+import { CreateJobsOverviewController } from './controllers/create-jobs-overview.controller';
 import { PaginateJobsOverviewController } from './controllers/paginate-jobs-overview.controller';
 import { GetJobsOverviewController } from './controllers/get-jobs-overview.controller';
 import { FindJobOverviewByIdController } from './controllers/find-job-overview-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteJobsOverviewController } from './controllers/delete-jobs-overview
 
 // resolvers
 import { CreateJobOverviewResolver } from './resolvers/create-job-overview.resolver';
-import { InsertJobsOverviewResolver } from './resolvers/insert-jobs-overview.resolver';
+import { CreateJobsOverviewResolver } from './resolvers/create-jobs-overview.resolver';
 import { PaginateJobsOverviewResolver } from './resolvers/paginate-jobs-overview.resolver';
 import { GetJobsOverviewResolver } from './resolvers/get-jobs-overview.resolver';
 import { FindJobOverviewResolver } from './resolvers/find-job-overview.resolver';
@@ -22,7 +22,7 @@ import { DeleteJobsOverviewResolver } from './resolvers/delete-jobs-overview.res
 
 export const BplusItSappiJobOverviewControllers = [
     CreateJobOverviewController,
-    InsertJobsOverviewController,
+    CreateJobsOverviewController,
     PaginateJobsOverviewController,
     GetJobsOverviewController,
     FindJobOverviewByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiJobOverviewControllers = [
 
 export const BplusItSappiJobOverviewResolvers = [
     CreateJobOverviewResolver,
-    InsertJobsOverviewResolver,
+    CreateJobsOverviewResolver,
     PaginateJobsOverviewResolver,
     GetJobsOverviewResolver,
     FindJobOverviewResolver,

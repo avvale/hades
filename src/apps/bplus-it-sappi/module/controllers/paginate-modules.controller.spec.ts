@@ -39,19 +39,14 @@ describe('PaginateModulesController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateModulesController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('PaginateModulesController should be defined', () => 
+        test('PaginateModulesController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return a modules', async () => 
+        test('should return a modules', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(modules)));
             expect(await controller.main([], [])).toBe(modules);

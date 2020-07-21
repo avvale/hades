@@ -38,20 +38,19 @@ describe('UpdateDataLakeResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateDataLakeResolver should be defined', () => 
+    test('UpdateDataLakeResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateDataLakeResolver should be defined', () => 
+        test('UpdateDataLakeResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a dataLake created', async () => 
+        test('should return a dataLake created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(dataLakes[0])));
             expect(await resolver.main(<BplusItSappiUpdateDataLakeInput>dataLakes[0])).toBe(dataLakes[0]);

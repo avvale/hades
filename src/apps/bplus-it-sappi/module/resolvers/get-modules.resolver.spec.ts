@@ -37,19 +37,19 @@ describe('GetModulesResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('GetModulesResolver should be defined', () => 
+    test('GetModulesResolver should be defined', () => 
     {
         expect(resolver).   toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('GetModulesResolver should be defined', () => 
+        test('GetModulesResolver should be defined', () => 
         {
             expect(resolver).   toBeDefined();
         });
 
-        it('should return a modules', async () => 
+        test('should return a modules', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(modules)));
             expect(await resolver.main([])).toBe(modules);

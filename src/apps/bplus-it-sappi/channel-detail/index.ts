@@ -1,6 +1,6 @@
 // controllers
 import { CreateChannelDetailController } from './controllers/create-channel-detail.controller';
-import { InsertChannelsDetailController } from './controllers/insert-channels-detail.controller';
+import { CreateChannelsDetailController } from './controllers/create-channels-detail.controller';
 import { PaginateChannelsDetailController } from './controllers/paginate-channels-detail.controller';
 import { GetChannelsDetailController } from './controllers/get-channels-detail.controller';
 import { FindChannelDetailByIdController } from './controllers/find-channel-detail-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteChannelsDetailController } from './controllers/delete-channels-de
 
 // resolvers
 import { CreateChannelDetailResolver } from './resolvers/create-channel-detail.resolver';
-import { InsertChannelsDetailResolver } from './resolvers/insert-channels-detail.resolver';
+import { CreateChannelsDetailResolver } from './resolvers/create-channels-detail.resolver';
 import { PaginateChannelsDetailResolver } from './resolvers/paginate-channels-detail.resolver';
 import { GetChannelsDetailResolver } from './resolvers/get-channels-detail.resolver';
 import { FindChannelDetailResolver } from './resolvers/find-channel-detail.resolver';
@@ -22,7 +22,7 @@ import { DeleteChannelsDetailResolver } from './resolvers/delete-channels-detail
 
 export const BplusItSappiChannelDetailControllers = [
     CreateChannelDetailController,
-    InsertChannelsDetailController,
+    CreateChannelsDetailController,
     PaginateChannelsDetailController,
     GetChannelsDetailController,
     FindChannelDetailByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiChannelDetailControllers = [
 
 export const BplusItSappiChannelDetailResolvers = [
     CreateChannelDetailResolver,
-    InsertChannelsDetailResolver,
+    CreateChannelsDetailResolver,
     PaginateChannelsDetailResolver,
     GetChannelsDetailResolver,
     FindChannelDetailResolver,

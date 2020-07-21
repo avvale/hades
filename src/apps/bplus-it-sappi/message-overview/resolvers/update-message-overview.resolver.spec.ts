@@ -38,20 +38,19 @@ describe('UpdateMessageOverviewResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateMessageOverviewResolver should be defined', () => 
+    test('UpdateMessageOverviewResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateMessageOverviewResolver should be defined', () => 
+        test('UpdateMessageOverviewResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a messageOverview created', async () => 
+        test('should return a messageOverview created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messagesOverview[0])));
             expect(await resolver.main(<BplusItSappiUpdateMessageOverviewInput>messagesOverview[0])).toBe(messagesOverview[0]);

@@ -126,7 +126,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateChannel(payload: BplusItSappiCreateChannelInput!): BplusItSappiChannel
-    bplusItSappiInsertChannels(payload: [BplusItSappiCreateChannelInput]!): Boolean!
+    bplusItSappiCreateChannels(payload: [BplusItSappiCreateChannelInput]!): Boolean!
     bplusItSappiUpdateChannel(payload: BplusItSappiUpdateChannelInput!): BplusItSappiChannel
     bplusItSappiDeleteChannelById(id: ID!): BplusItSappiChannel
     bplusItSappiDeleteChannels(query:[QueryStatementInput]): [BplusItSappiChannel]!

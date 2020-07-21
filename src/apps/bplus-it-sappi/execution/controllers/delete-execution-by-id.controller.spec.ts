@@ -39,19 +39,14 @@ describe('DeleteExecutionByIdController', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteExecutionByIdController should be defined', () => 
-    {
-        expect(controller).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        it('DeleteExecutionByIdController should be defined', () => 
+        test('DeleteExecutionByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        it('should return an execution deleted', async () => 
+        test('should return an execution deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(executions[0])));
             expect(await controller.main(executions[0].id)).toBe(executions[0]);

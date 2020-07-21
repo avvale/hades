@@ -55,7 +55,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateExecution(payload: BplusItSappiCreateExecutionInput!): BplusItSappiExecution
-    bplusItSappiInsertExecutions(payload: [BplusItSappiCreateExecutionInput]!): Boolean!
+    bplusItSappiCreateExecutions(payload: [BplusItSappiCreateExecutionInput]!): Boolean!
     bplusItSappiUpdateExecution(payload: BplusItSappiUpdateExecutionInput!): BplusItSappiExecution
     bplusItSappiDeleteExecutionById(id: ID!): BplusItSappiExecution
     bplusItSappiDeleteExecutions(query:[QueryStatementInput]): [BplusItSappiExecution]!

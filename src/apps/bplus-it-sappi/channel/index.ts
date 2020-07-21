@@ -1,6 +1,6 @@
 // controllers
 import { CreateChannelController } from './controllers/create-channel.controller';
-import { InsertChannelsController } from './controllers/insert-channels.controller';
+import { CreateChannelsController } from './controllers/create-channels.controller';
 import { PaginateChannelsController } from './controllers/paginate-channels.controller';
 import { GetChannelsController } from './controllers/get-channels.controller';
 import { FindChannelByIdController } from './controllers/find-channel-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteChannelsController } from './controllers/delete-channels.controll
 
 // resolvers
 import { CreateChannelResolver } from './resolvers/create-channel.resolver';
-import { InsertChannelsResolver } from './resolvers/insert-channels.resolver';
+import { CreateChannelsResolver } from './resolvers/create-channels.resolver';
 import { PaginateChannelsResolver } from './resolvers/paginate-channels.resolver';
 import { GetChannelsResolver } from './resolvers/get-channels.resolver';
 import { FindChannelResolver } from './resolvers/find-channel.resolver';
@@ -22,7 +22,7 @@ import { DeleteChannelsResolver } from './resolvers/delete-channels.resolver';
 
 export const BplusItSappiChannelControllers = [
     CreateChannelController,
-    InsertChannelsController,
+    CreateChannelsController,
     PaginateChannelsController,
     GetChannelsController,
     FindChannelByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiChannelControllers = [
 
 export const BplusItSappiChannelResolvers = [
     CreateChannelResolver,
-    InsertChannelsResolver,
+    CreateChannelsResolver,
     PaginateChannelsResolver,
     GetChannelsResolver,
     FindChannelResolver,

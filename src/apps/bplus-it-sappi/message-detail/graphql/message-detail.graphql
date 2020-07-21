@@ -143,7 +143,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateMessageDetail(payload: BplusItSappiCreateMessageDetailInput!): BplusItSappiMessageDetail
-    bplusItSappiInsertMessagesDetail(payload: [BplusItSappiCreateMessageDetailInput]!): Boolean!
+    bplusItSappiCreateMessagesDetail(payload: [BplusItSappiCreateMessageDetailInput]!): Boolean!
     bplusItSappiUpdateMessageDetail(payload: BplusItSappiUpdateMessageDetailInput!): BplusItSappiMessageDetail
     bplusItSappiDeleteMessageDetailById(id: ID!): BplusItSappiMessageDetail
     bplusItSappiDeleteMessagesDetail(query:[QueryStatementInput]): [BplusItSappiMessageDetail]!

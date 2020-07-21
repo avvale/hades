@@ -6,8 +6,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'ea9a6163-9bf7-4646-b216-88706ab96519',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'd9846142-891a-47b0-a5e1-557f09ba8a1c'
     })
     id: string;
     
@@ -16,8 +15,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '3d9852bd-bac6-4ae4-bace-919f70515bc7',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '219b5467-01f7-48de-a55a-6f48e54c6005'
     })
     tenantId: string;
     
@@ -26,8 +24,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '9bab2c5e-7d08-4a78-87ef-1139f4c8c45f',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'fd1891e9-6550-4641-915f-9a62ab6c0324'
     })
     systemId: string;
     
@@ -36,8 +33,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'd770nq23v1tgq25hdbvm',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 'hk1kjjjhf1h5lsjceqqv'
     })
     systemName: string;
     
@@ -46,8 +42,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '2260ba58-71bd-4e05-b3b5-1c2ebca6e661',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '0b64e3a3-44e2-4608-b06d-1ab7cea186e6'
     })
     executionId: string;
     
@@ -57,7 +52,7 @@ export class JobOverviewDto
         type        : String,
         description : 'executionType [input here api field description]',
         example     : 'SUMMARY',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        enum        : ['SUMMARY','DETAIL']
     })
     executionType: string;
     
@@ -66,8 +61,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-17 14:55:48',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 13:46:49'
     })
     executionExecutedAt: string;
     
@@ -76,8 +70,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-16 23:32:36',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 02:20:05'
     })
     executionMonitoringStartAt: string;
     
@@ -86,8 +79,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-17 15:21:29',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 23:32:28'
     })
     executionMonitoringEndAt: string;
     
@@ -96,8 +88,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'cancelled [input here api field description]',
-        example     : 8977973846,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 3910267350
     })
     cancelled: number;
     
@@ -106,8 +97,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'completed [input here api field description]',
-        example     : 2985419463,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 7086301930
     })
     completed: number;
     
@@ -116,8 +106,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'error [input here api field description]',
-        example     : 1590725197,
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : 7027293083
     })
     error: number;
     
@@ -126,8 +115,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-16 16:50:32',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 12:04:51'
     })
     createdAt: string;
     
@@ -136,8 +124,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-17 15:04:40',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 20:46:13'
     })
     updatedAt: string;
     
@@ -146,8 +133,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-17 06:48:19',
-        enum        : [this.enumOptions?.map(item => '\'' + item + '\'').join()]
+        example     : '2020-07-21 07:59:54'
     })
     deletedAt: string;
     

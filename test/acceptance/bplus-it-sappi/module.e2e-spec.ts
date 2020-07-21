@@ -51,7 +51,7 @@ describe('module', () =>
         await app.init();
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 409 Conflict, item already exist in database`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
@@ -61,28 +61,28 @@ describe('module', () =>
     });
 
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'k5a06orjfrp72unqizrw',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'lg92n873fg7oov1fdetui010t2lnchsiybuthmo9ci8bkyey2u86fb3209qkhu6zjhz8kh2qi14kin894ur69r3k60wja8w02bpxtcpu6x2c91pmwxndhw5gn3qqsug6ki1tar04ub1ktsozjexsztq9w1ugu9g3',
-                channelComponent: 'xtm8fwbonqataonp8dhd5s1pzwdvmjcxdz37dgsyqzh3i9lv1o6irmq9d0nn9kwzf0rgep6ekr3gw6mjpp81crc12csmv0wmct1c8vno9fw37f85dt52998inwjkryw5nto0gldmgl0073hkhmtfczpmfrpl8dwu',
-                channelName: 'im903no8x5l0xntjloml5g0vbzgho5c4i338ieurn6873fici9l3fzoc4ehhlt9d5sk9exsrq1ztdg19p49on0eox1pnk1mrybkado8fmvk6ubr5ojle9t2hi7z65kkzjng0hvugkmlu3m0po34c0mbpc1vijnrw',
-                flowParty: 'l4z0fedms8vtqyk07u32vba2r9j1ddrbs468oc7pfu8vvn1j7i8nwpnqrsayi9r6s2aiyli19swedisovphu7yyj12doxu8difq1dfqn0jxs5u3i4uw1h839xwhii89ecyuo2b1e5ejdl3aoxhu9bnd191fkmukd',
-                flowComponent: 'sfje96x9kl2s36ugnyfgiiufl1gofi0docmtsfzit71dre0ls1tiftffzap6mx85qwnqvyjxfjhm6vr8z9dq7u2ocjh8u5e4f35o8lahscqjnjs94caugk21211whq5emayjwjihkml3ezszw6hhc61nci9fqnuk',
-                flowInterfaceName: 'h2dxeci67gyepcw1t5ybe7jm3inoaym89tmbgtos293kkssf4womoeek1rgodzwtbvelttl6hpjwz9nixkv5otv5jzb5fc56sjddrd0ct6mzejwxb9eo7pkvn25oxmhpjkst0ayer7xbho4or6sv3gy44s61z50u',
-                flowInterfaceNamespace: 'po4h43wgeef7xx09ycgx1ivh1ofcbydt5r43v4jkibgo2z4uu92o77bxqaje73pd39z4j7e2ttlm7er8fu7qrx1rjxd1dhd3v9o4k8d92z8959tuuw4cx9t7hb2ye29mn2eawww8cc0amryy6bwjo9nlcbhm1tzz',
-                parameterGroup: 'a8t4kmjoou2n84uc5za29mfdc8f33qoipbq4r6s9s0uuaw8864ha9hrz1oyr9ka5y1aobpy24e4prdhm34l12o3o8yrinpqmhuk15p4mpntjddrr2zblhll4mn0n8fk72my4ifcq3jec0vf7slr15c8d7vvfbfzcnx86xz5kazhe1tiq0yu98t2414oqp7hwkk77a1t5jezd3noewnmhfdbxw66i8kms0n7ou1gw31du3t27b6rvlbjneg6eqck',
-                name: 'h122bgo8h89n0c85k5cynmy80ye9pt6jgrxf72q6gxy8f8d0vpzgztywr1rzvgzh91z9we6zzwdq3lgyopu3e2vq3427r6t985b6qmeldf4kjxozwqmygnl1j82s00558uggqui7oln8djqic6kqhk8pqeaz81vua7i5xo7kjb1xrxk1nfbs7ykf0fa3dg4eulimbu852lxhocypzfigt0nae8vaa24esie6er5t7mdpgnwysjv25ma03isz98t005citz28vd2qnv3oxvh60ysqrbctfgiiap2cr1amecfh9oos8005ijuug6sombre',
-                parameterName: 'lpv842f4srxf6rifosws10g5p3p3inq8sxt2j7y5ucj5fazv2bvkaqbv01rbu287fje1z8ooy13gme5dcydlm8q0erksvlys0wosv0l7q3ueiwq3i03isu74frjy6jmd3p6aah3yvqrcc4obst3cw5v6747ly6s13vpcl4ob8lvi9ji0pyqqzakghzub192w4b8v5mhfaviu6ly6dxnghae8p808qr8gcgfpod7mlghfp995ynu1iis7keridsp37w2ysrqotg8gq0iiawcmua4xuzxqicwqaqwwzjn6qs8m4nwfk9gsw7qmol6hoaj3',
-                parameterValue: 'aadvxq9jgfhurfadhcgmnct1lcu777gpplgpl03d4w4qpezb802xuid89yef7r6e5b7l1y1og0eyj3bgnz415mdkcn4h9yny861q0pb2y0sjmzt12ytmvsri6whq6xhe613t7485w4cv1lywjkrgy3018nkvm336mwj1vufcecind4jdex7hq5xnap2nct1idjhsjmnyzg7hxjmu5upf3hvrln0ysy0asywfx9nm5o98pzlv3uybyl5u7nhgi9vq4zlnbl9q3beaynd79xyer06c3l8hi2319tv09uew1uinmygasgfwayfx2hj1w72bdc5wk98zm1fkvnmzuwub9w6j97yleoozxq086nfqm7vjuoglp51af6wlb0fv62gs5c88e2jsxt151nima0bivloia65xfnyyze7jubebxrmzrlngnm0sxy9m1w59udg40j6ujm4lkhi8o43ynvrlnx34yjgwzviastvbhgh3nqi2gjnbycp2nxk3nwffsotos51q8zjhgi8wv74p21go7ondlloo6tsmmzan4k66hbypm7ts3cwk4ur5fl74avcn1e9j7jpmty23lgvckxevz893sqc9kye69jmsn4uc9ybr6rrdzkllqowx5q0dyv7ninjgrcs389ktdk05o2wrgi6ph32c690nm3wnpw5ponsdudrviey4qo9jjddfj03v2u0mb20slyf1ribpb4gedtfu6hqhd478nxfrf13anj667lmbnevymqn0x1tggep27fhcjks04drdr9nctpxu2uymepo9r712djgs5wfhdcmod0hp6u63hgykd27vsyhmix1in6v3bcdj6j3z7gprzr0tw9c60irpw4kuasreoch7k4xqe6ofx26einyda8f14qaclfeqcu9qc2buc7ealwhr82a273y1kfl8o3jkt9imu458nvg5ixohydbjjsbv1qbenoqrobbrhrnxuqd4tfqii14r7obeqocnir6ocm0lb8btj46bty2w7hhtdwwy',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '5kcn97rzgu78pfaft8zi',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'tqsxelvvocobgbp94q18fk27rr600hgi9bbzjxifsmfhtrjvcp7omxvkpaacjz450ij4gmdpzclfzfajsoq9g8mwc35g7q9for524annxnmitejgdsux4r1masvvja3atbbzaxo8nxjgtgmtc1smj2t8ejhw0idh',
+                channelComponent: 'ts1lvd5jjopz2d6iclkanja5utxat04o8cnpel5druggwxw6mj4bk7e1peohpoe1j0iuhk2vg3nh40usus40eglfwsf4yn4h2lee831gdz7h71i8caknrbu1pweza5s3sf41ken1y15qmevg4zbt112iu3su0imh',
+                channelName: 'o610d70o9hkya7cpfbag50uicnon1522iv222rjh28b6xnhsv0zx1xkhdb02ve8ml9jb5bdb5v3piv5p7aagzli53e79takrdfasrtv1k67h5wqu3d3fdg1pt1wmhnvdnq18gfx45s36t3b1paub7ng616hiap2e',
+                flowParty: 'uxcs0qai1kj15romlihaskzoy0jqlxd737v6scf6cyotclej0a181f7mqpdnxyp3lasefrodrhrjg5qjsgb7jlrcv53qjmwqt6sq9386vlh2ahc1octp5n3hwx09iut4nn4gju0xj4vl0pumfkw7f4gtugw7h4tm',
+                flowComponent: '8s2y3iokelj5remyokbswh6avqkv4nl606ddnl7zta91t7je6sk6zv5hngwza75op1t3lereshctayw1dneoynw5qw8zuu9unq524wwkjfc7hw3h1rna5a2p03zuvprh0tr0jyg36pwaaqa4wevyu7jtuj39h4zu',
+                flowInterfaceName: 'fp7vrhiyzxyyp7ugk41d1zhidg7dj3kw0dkuwwjjoqnk0b5w4zeinhfqx3w56lr4c4v9iaw7pqrnhisyv9ybxpfn8gwuzbluroz5k4qw8fa9ffc9csih20hmd3s6hrzzxqt9jvu7f24finvbr4zke98qpqw4qgaq',
+                flowInterfaceNamespace: 'h89weq80fmua4e8wmsdoxnr1yu8i1lgv0ev16qvd7wapd3q67kcuokwpi4ur7fibv541tlnia9zfinslk64c5t3214lo51t3079af8nxsjdumq1mmpoddnsgeurbaw1r45oy7x7hp24hgo6rp5iwh6jf7o7gs0u6',
+                parameterGroup: 'hnu4iohbzmskg5u4irmmutfddwpnnuqgoxi2g0o669p92hkvyrcldoonvr17y68de8n0noyiyryziwj4qm3gmfkh9u57gzv925v22uj47dvd2nqkyakqjc84c5phib3ccj90ibh0o9hrapmaz7d9fcbgbuullqo2l4jr1dnzy5ps9rnt4pikica3sc9io2be2pieis5yk4oe4j5jc6rkls3l5s40k6bej9akwaeuvhavr587jfi2i01sxpps8zl',
+                name: '0q7kcws27meskxb2njiubrvjnime5cv2gl67s12ihe8e1wwrsmkympafzrubzurilwd7skm8t0bwbcg5c35z3q64tqfnsknteqy53r5z8owzalvyi8ofwglb1776ghrqyb5dweh7shqa3izutxtbr46ia3k5ji3agycusabxr5h8ekv54myh3jordiobherbp69l3m8vfgqxauf0gu11ka3kouid3izysggm71oqr6df0xj6zddzqoof297o42cqsckth2va3gpfdzx61ld72duno32uxy3vb1b4tg13w80jdd61uq1j2jzpzdhrjili',
+                parameterName: 'mc9gg2p8g5nb6qug7tnoj4j5iwwqaeev4h0cryd69wxfa6hx3fbtyowwh6thbo0kx130qh9w43a5n2jg6il7814oavkoov27ubfvnxp0rzz1q9m73gk4lsi936sam9ai19wdrcu4c71yhcx2lq8di58xz5k47aknwhhrnuhpquaps1h1n0b0qem1lem2gqvuaokrf527vdg6018kon6psruhuwhfqeksodo5j5na1vjv50za9xmv1v35l658wejotcpfwdus4boamdbibm1iaculz35vue232dww1z5hmdisrtz4j3r45ny9s7m5xfi6',
+                parameterValue: 'pvhwjmy2z35jxzmarbzc0aqh00ot686jg4grl2eo59vawv2t90xp18y5i84a02q06tgbx9pym56iqbn36lyz08o2cz7ep2kux4t6os8a0au101c3uwn56yfwi8o1wpvgffm2v7tp851z2jcn1mmj43mrufn20453jobodgl8w1qcntzmo1tzj3uypypzsltx9jmz4u1pkxzqoyp2zbjyubg28ckebnz0k6fstz8f4t8we7py1ams4454p3blwzvd1zrj2bizcdcyph8fs5parcxlicp4iw8etr8rbtdqqa5bhjinp7fdqsm420a2cjzddy4xgc8s7d0xyqk6ellr177a38fplt57z8a6j1ee0ymopczw2xpc726fmi4x7byc6pgj6t7erdichjfhqj7oqpcgwd95xt6zv6g9i9b9q4dfysfpyx9hla6561l9mfxnnwkes7haffsbfns2q8yg15nur60k51akx4kgi3ifmc47dvmw8y0wqkot87dq058p7qvkz26hrfmbuirpjbjxw9vcobvz20dvqwja9viyk3ve8860vixwckv45o9rxuhlsjpumjmtkqbdvlza41amxmmy2b4pcu9vi3ium0jfcl5t7ld0xjf3btpp0j55zcgustyo2b2jguwbc1ckszln4d72xit2zqchkx4ark3my8zo75pzzhghv0loau3hru6l25vlfoftq7t1m0njou30bfhio9xuxc30hyvndyzeaiy3ml8c5bbfjxai7fs8d4e2tdan7fcycgdn6ngbvado8upav4my4srzk7euolg57agf1x1wkoutbs9kzpnarlhrosaxonpo5tj2qxo2ia9bd9i4tr4y8yfx8rpn9g52lwddko4qq749cw70s72a6zaejvpvh6hcuncgatnn70e9h51vmiu2lyzvrvh234vj94tfpi7pbhwyzqk4gfy43n9ozfmfltxuxuuhdraq0jy3wvtfw043g40g5ck9hg69t3c3vbvopyk4m88765edem2p',
             })
             .expect(400)
             .then(res => {
@@ -90,28 +90,28 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'wceomkl36vxyvmwvbd5v',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: '237984f2ipnkvoir32on7lxiz6hmcwsrraqpbdb0fwisdorao3iw1v6m31dms2f8yy2tyheqv8o6b5cqsg7lrtfhwl1zmipha2r99lbrc2uq3jqf5irdbaf4al8pk9m9uavyxw23dwfv94mzl081hqsj78rtzqns',
-                channelComponent: 'wbkk8ld5w2yrrxwi42tfnyjzzmixpa23v44kw4tugtscnlxdncrdakilda8e7b5velkdqshx4kzfm3hs7140iytqmoheqdqisvhniz5n1v86jgrphar5c5k6yzfvtyd6d8a6bnqr6g545u4ae9yyhnefjg1sj0cy',
-                channelName: '8ujojm8vqngdq6iq6faog10j10bq7k3f493rxaq8mo9br5gab043w4cqdnswojfo7nb6ltcor4tn4c1v266pcxdtw046mfq43v3602hro18kssyhsohhkoa3xqy9uq2xrots3l3cto14uo4wxd4cff79qkr3dmtx',
-                flowParty: 'avdgm6hyg2umnj0c8y7u2gb30ebw4t2p5svcb2tra49sf7l5f9mdeunmg42arzc0ucej7du2scam6trbrzcb0nows1yhx5xlwz5vkb7iqrevdopb82tmot4d8ixkl0z879eue808eom3albgmwyuamvv95g95gy9',
-                flowComponent: 'mnil18h1k3njb6uwv7xn571b09bpfrz6v2lw1o6fsd18bj3kvppzpo8ujmq8l7gmca2ad98kglobk0masbzm8sy2kbm7oao1nyguyr29r665aq0qc8h6gpcm14jp14nb6huhq4k0gamh6ki37cmc92ucpiwq2upk',
-                flowInterfaceName: '6rbpayo4561eu678gbx0o6fky15lk4od162sjp7tg53onrehn7m72vcjk3kmx53vn9qkrcbifevajl5ebodwctpva0dhd82wqwothps276do6q2n4sj94zh6l4y37dbifxfvt4y7gyvhwrnlo8q0xux107wppnuh',
-                flowInterfaceNamespace: 'zslya5odxalh2zkxdyack1k8f7yv7bd7pq8e1aoiefkk0b1157mh8psqaik27a5b0kbm19keloyynsq3e6esyhjtk8iyz19dflk3698vwye12ods6upog1uklxumubb43q1pi6ssq7px26nj2r1vrzazkc9mxrwc',
-                parameterGroup: '2e2ubw3pasqycrhsyfkatylqn1u5obaszduf9c6juip6cjkfgo2uf5rzmrnzhfcbw9yj1ef4dijggs9c9w59fi8pmi7hzhn8l7b21n4kuzc8u359xqndx0nhn7m3u5d13h1ysim7cimu9qy4mykmspavjpgf4u8gmsgnrdtxwj75nd8qhrdgdix84e5egac0stohlxfvsxvh42yuq47rlyntg72xjub87c6hjp362vzblmths6w6ndiasnlkw19',
-                name: 'lp2ujj0gvfv0en4fyp88xcvpmewo3m44gk2borabzz7tijtlyhk1bqo14r4o6mi0gu45w9ierve8nv5ro7hlkto8el3ara7tbci2e43vtm923a47it69uo4bkxpb31qqm9vt8sgh8m5x7p9trvsc2vzxofiivhiu8lyshb26nbhtk4u0slvdxxlq5hm9uz1xyzv4x03jnceh7pyn15ih47xqonchlhmnxpcq9d0bqe5ua1jovwjtayrjdgh96b0sscqb405dzdvjbpv8mzfyhdt3pc9ga6enope0rsf5p5tcsjvg99iex7q7vkvmuh8c',
-                parameterName: '2yvfpwx4aymcozcrx3qpyqm4yatix8y23925lnc43rscks4g3vh4are092ppps6a41na7ihyyp0dr5kn1qopnalfda7g8k2jcb8lzj2knjli73iye1tvc03v92uftge0x2aa1a7a3i0pud8i8g7aw6kf7ou0hmkd4ks5jyh4vhabbdiafa8xzgg5k3s3i4844uuyosepvi7hmaiwzt9ra53wd89clbsvas9zlev3e5p9byaglqvpp8q2crwugx78ludaxtb47y3jllxb7ecmz3ip1aoqhlsw07kzqz7pe1qyu44gymj2lz064t2enqmw',
-                parameterValue: 'clidkdxrgrs897c12rjfgz0fq3c1n86o8g9rnrckaa8wjgrh8er569mf8nnea3vvvd4c9ilk8yh5gbz1vuls4w0ozap1w96t5lsy445p4hb06xgvb4swqjifwdsptskcena508v7z8raginpmad2lez0svlmcahrho2r05kqe676q8npzkdnx5h2168n9l2fbtuo2kjs59uy4c7msu1p7hqw8wnyizxw89v5o6fe97saktla86elo4hfdarvpr4wugsj0vk9groa9w9w9511or4knibo6zr2lttf6vr6zb8j9a28q147u4p7w2ofzje0m11sgqszasvf4yjb33qvikf5raj2q6y78yimvsllxf0zvxt036pzgpid7y2xvsd54pqwlf4u7qoksppxpgjdxw0qpmnsra00yl16x0mn3h08wlrv9onp4wbolui4wpuuskdyicxwwghi4vogrszo36nxzaqpk4vq88m8h5hlo2k9ds2pp5w13chb4q1w6c4onjwtmxhlypm7rr8t8dnmqmx2yy1409d8f5gi3wvt95ont35cz89mz4i8296byegdzwj1xi6mp5n95njomj74kd59yjeub2s67fmkzkda71m5vpr4a8d2i2gkoma80lwolrcxjde6ir4zsv2lrav904fnkc9c8fhcfhwdpm14312vdeyrz71pu40nunjk7o1a8sppaqkr0sfi1b9da2crv9vtxsw2ksra43dwz3n344u7h5lrn6gytmk55w7j3eo6wbiii5bvw2whkp4qdnyup2ulnapc2yit14paig1ifxfprsuplu7jkwxfe6wdpuj1cbv7phtodl760m3ev96x1om5zhlj4iusoo1ep0i8170gdo8vlolsbrnmzai9n5rmnfligyfh7jtyyxckgowmwlxrzfvvsp6dwv2vd2s4hnjnzbibybct0oni0d8v8bh1g853c1s88owdjb229x8zerocfqk0bx2cribm8d8req8cpyvhfy51qqi0tye33qzb',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'nc4vlpr4nhpxjj8c7o97',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'k5g44elhno5ywp61f530rsc798sprxl9ypodqierh2q1xvg99yppgbs6cuzp3r3me9aasd58t62u1qeilfuca4uks5yph5tib3mrlayrjrnw1ahz3k30a271qgwkuncuxv1jnokprs02n5wmlv9sgwjsi4s3a1cm',
+                channelComponent: 'f8nis8r0cgz50a7ath9qwx11a11scjh4muoq25vgievf3hvwmvcth6gazxxznx8x0wg162kdbsnc0om3dx6mdxnx22xjhvirmxcfw64alx27umo83lkzra6xnd4vk8f64on6m2q6x70i923mako9oks1rpwz6wjn',
+                channelName: 'v035xmgl9h0maqvaprl9g0yl6qhc7thgn5lpd2mkgap4vsy5nd2hc7jnhm7z7g7nbprf44yxtjf6hre48h310rww6mhxgj6rmah1bxp2qvmh6mxn6rjnrkmotsllt1pw67snfpu8o0j6mvr1x103r1xglvsora1c',
+                flowParty: 'tzlnfxcbg2vu3bs2cos2exmaa390y9hmp6f8yeof7gu7m3xzexynh4uujrt7124vsq74qv9e6diezt6h6r0koryxmulc9q8n53cdkbfwaymtmjo6awd9puhmy64mg7k7lir4tjjxedxf7mfko9k288gniwcxv48k',
+                flowComponent: 'h45amd78glcvlm9zl988e9jfqg6q5y67lem0ulywu95ve0yctze7p1v8qdgzudib5o7u6q7bqjdphl39sq0dkol8dud875rmowwhezr3e0zv39p5torvpxlqmw2wnjh9u9kvkhkmn47sf1gupqzyuws2w44srrtw',
+                flowInterfaceName: 'w7yi55piwsvb99bjxmk3r761p676sooa6kak48caoaizhowy3abgfxgz8gngyr7bwn9umtedydwh77mxzuk8eq9fxa7yv1u5b8t2fw75xd97lfd1bc1md2bg74kosruw7jaut7j0aydnqjbrx9w1v2y25rtuny3s',
+                flowInterfaceNamespace: '1cnlki1uy85zirc3d08gnecdxnn1i09l2s14ekop6cw6gm1skfu99q4ud9krlk4xapn5tshovhyxn5aro7pp82fso7mq5od9pp7h3q57ioe8kja61g861lle7g2ok7mzjk5hhgj0b6qpkza6xe1ja6aagsniul1h',
+                parameterGroup: 'wkgnu7vs74cy12b3jl0ynny0wlirct0xuys1r1gsaa74ymsopdw1x8gh32t8bn2rof8nla3b07panpj2ic7nj7p2txi01ux591j06snp4p5re7f3u8gu185ogqgzww5v6c09r2gfhoe9q0rbv81zu6ppozer4wix94we7ziqgu9h3300qz9j183ok48etwwp40y4tpd7qppixs7xnauehpn3aipjysa1h9r4x0ylr9jw3bvexo5z13kuvqb6qqh',
+                name: 'xld4ghotplylj711wb1zh63wbfes3ackwj1up6krodvv4fudzor3gp9gwzxvabj5vscxjv8pt4fckgt4hsb2j42bfb6kd0ft9ibth1yhsu8lo6oyqout45zx4pfo4t2r2w3m4wpng0b0bhabyte2w0htvo28nl9kji2yrusvdfoep3w1cyonm9wr5x2ojs8q8qhya9pj5u4e0295h1hm6ktztbmpo34gvyg9dmoyla2ges4ny25cao2k71m0mzshwit2wtl65j3m8tlurhxbjzkm2r3unjh37t8xk2c6e57bk7sg6uk8zrvqfgjahgg5',
+                parameterName: 'ccy2q3vu1txm6sp1c0isk57m35e3zs3wkvm3f545yvyy8ifr3knt3g7rjvtr0zucge1mv79wksso8z95djlxquemdi30p9bdmni3w29dwjiad3qf3li5gzf53mi5vvnp07ldnn0qkd3rfov88l2wmp5lutzijkzy4cema80y2c6rkr52bso9kd0k0fpzpxz3b5r9fz32taszfjs7l5r4i8g74acwxb2l9ska4em841qxne212e5rp0v6auf16ex8mguex0e7v9rrgo02drkn4oe9h8sny781wyofd9hxapxmjq95rb69orok1geswrof',
+                parameterValue: 'yzug6eayexgshen62dwtv1wm4pqnwaq17lvwafmykqxjhizzjbi4xx8tlz7s63rf0s3ieues51x1ivcq7oswppsjquy39xse8zrwutvff0hq87srm7lkdfcdop6ch4a81iqfdei13isdsxvnkgqylcegvjv30fmjyzk9idmv2p21gii2ins0ynfig8wv9f0vi1ludq19ndaz0l1usi2qutl1li878f0i71zq1ar77n3chk90sr569fm6t6nyjf5w9vulna0f861zu090vc8632wlqdwuhuak1ql8fwdgwsu6uy9qrj5ier59skw315i5ere2j2jmop5vawir1a1casxtcvtlyll6fbepmle86xm9awkwievn485hcppz88628vb1nsg9372ru0risf4o5stpuh6fvcl36k8n66ogz6t1q89m25c0grwf75cjz5ysqaiyb5dvrvlo51hvaks4766zsexlidv6hrjzihqu6t58qi6gk903woi43t7feixuu0s2gftapld52y6il0ooa2ubtt0ko7tleyuqvuk6mtmrbd1ika7d0r2ldg7iehaj2ybc7bcbj2o5o9xz1onli6ixfjmijeav6lfdoplvk8pd7f28f6svkg0p99ouas04eqx57p35ml1ap4tb4jy12mtryegpneo0phtas0jtlhkh7lpqgjqf8fbkdnkbhmxl45rzkrwh7r6xy90mcvyy9vasoq0zmrjdwtuwrfhes2v799irxzqh9mu6eptt5ovlw0cdiehl1sv2514aq87blzjuqs8mr0o2typdracknlmsqvunb1bb0fqwgvqik9rqslsr8uik3r7d89kkb6g7uywwq45y953np2h784h03pqejhqetl8wuva4i7oryprqy2t0vizyv8mw8rffciamj1lgipdq7hr9ehng3mdcmsav69qoohwh5ettxw9tdzsrjhzf2o89b4qrrbfotgjnq3v4s4sq9zcnpastidbo014ezvxtmvhlh1jdeqr7c80p',
             })
             .expect(400)
             .then(res => {
@@ -119,28 +119,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleTenantId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleTenantId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
                 tenantId: null,
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'fed613h86r8y8267adjp',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'u9kvwd45rvj5iisdjv20byot62kq4oetzkbxr92g8rsj390nhfl06pan4y8ho51mpowjbghdak11fohvhmem5av85gwk2mpcxwbeuyb57jdcvo5rfq36wecoz2bpbo7du16fxqvg3vti2gw40lh554octesg1iyq',
-                channelComponent: 'jy92mv0dzelifwm0u51l1oa8vsy3vho63ixd78eqx0dcchmf1p9kl9u333jba6g532f0s315k2h8zsfion2iqqgvqv21tdamb2jus7xb8d3nixuchq43eypzrbamkal9wi6ccu2zjbt6xk4kwu9z4qsmv7yuy83l',
-                channelName: 'u52nsm8wvbovw1von3ipk357cw8kms7h3dhtp51bruxiypj5er67uvkq9c0uy1rtl7qs27qcsic72ryu5elgdu6elu1z723s4t68t2ohrdqx1vfpm3ns6mg8j0i936p1f2ko43r9wmv2fleku2qg4md3642rfnf4',
-                flowParty: 'knsqasgcjqa6bok8zt3wq92h86yyskxyynpcsl0fkbqtt5i9w081quwh887qfm48oj92p3kar2t1spt0owl9v60osui9xrnv899pj4oiixwor811ax50td5fz59ejjpz7u2beoo618n4u3yzcavl7kwzvbgzvr7r',
-                flowComponent: '8pnavrnskhi018ovlr63tkgsvqui6kjkzvkudhi4rgszbdz432753ts8b6hogwb8n325tsabcq56et7wk1srrg564tikzkcz524cwo2shgeblnic9c5wvj4t1a7cx0pxgmgivznbt6c4h05y7vsf8g49evlvbw4i',
-                flowInterfaceName: 'e8k6ngfi6ygcxuqi91syi25l5u4t19yz3lwllw7x4tkhnx5bsnznc3fzwtwbsd9mdgmtrohurnqvoz0o4rh76mgsm1eodr05chhzmz9u2tv3t7lmsbi23180fdrpo6jq86p5gd8zboe8x1snocgjhmx4mfu0bl8w',
-                flowInterfaceNamespace: 'sl5xp6fo2yru24q8q9cofu8gtpst88kt7cnyezdirqpjhl48pw8qc7mi91dgayucgtqp2gqthk3l02ixf87zi5axn2tel3m2jfgf0j7detvhzj7hq6ns4tpfwpl9wjkjqpeticudtspeo66td2ohzv8d43401pmf',
-                parameterGroup: 'g74t48c4i4bf6byceazvx0siiowu7ca1qwnrfab1imq9mcuuor9fzazlzqkvmu67dn3vvg7o0sq2hdcng9dq76skdr39q4m9kj91357vuncvbuokj2n8hfyj0rmqayhyuc09pmliasywjk02vu0lildlvvuec5aoc8dt8ai6imoytfo7eqc74q2tdc25yem0kbmjvbf9uzjq3emk8lxjshksk5x621g35xmubbbaw07vy7wq0exc5sejyvfxlo2',
-                name: 'v4aebo4lexptjlkig12q20qw8v1tsn5izislkjnqzdmvmdtwjl25zb6gudtmnot9aldry5mj6ynl8ktajjtx1vzu02sj6xutwvoj66htkijsp3w8q4ig5zl7wc1w5w16wablui7lbtir6lnxuvgppalcpfr4lfe1pudynfoiarmvta57lz1jombrq8p0k7uro8zagpenyf3e48szru9ebzzawx6onpfj852lpy5l5dv6ler6624iqq9ewf83277s95shgmwynxkze2hscqqze8eprpwfvlm5dn7rzrud6mgskzrno239la23ex01x0zc',
-                parameterName: 'rxy9rl28jke910y5xdues82nlp6cwtxjxklce1hamoekby7q4jrqffmih2izl4vvksb5sn2salqaonzzwgkhord43evqhu4m2ybpmp6mffawciejwhjpxciu0098zpe2nj5rit7q7gamwbxjakf428909jzhpzzqndvbbgh0ysynezj2sah4uwv622xnl2o78z1w4k7wjld836o63it10k366wrluhnp0mxrexgc8pzb95oaayyu1m2gt4s4jlyhdj1n74a1g8dsbn1rctdk8krj587mu69gi0k0vb25mdbbhbdurjrwrzc2mmm7ggcf',
-                parameterValue: '7hvgacu6un7dgwcolb3nx70osm3ew2rfxbq5ahteb7qltbjrv9g6o8126jdbthffsec5np93y0gaxc1qdjdvtpqlrre1r9ipd64dkpkapg3sdvi7n5a32ju87drny38trbojtkou7w89mh5wnxaoni9e1a8xzrty6am0jfjvngopoog1ytfunbgqvnalh3izu9y66026v6xirar52eydh7bgg5ix0twc2jx03bfc3xkq993bs8ix38qjj7n3vjfvug16n9u2mrc0afp5thdz4gi4n09k48wa9v2hg8kl1zlrl61jss8828ogku1hi9dxj05r8y1m5syzrzq3pxmxjdzceahn6doo42da7dkrkf0k8g5t0pv8vdxnvlbmx52f2mfr1fj7gmb7hifooi1iiq9ca5fq48sf682ag8lfqa7b8eec66hn9rhhcest5exf2hmmmxl7x3vuabupxn8we6iu7yl3wwocuohk8ktbwo037ghm2q4926fnhfgu492zd5eywhk9d5bst8cl6knrwzea71mnzz0svz637371sl9nc58k8riti0eovabaqh0pc5017zo0cbbkgo8kfv7qfbdgfoo1i6lepy1cj4on8g2c9xe0gl8n93525a3j10mg6vpd3clq25iiptdjj8drbwhnrr3x9sq7ne38jyyi8hynghf32y7t8xbsgm2lf8l0yv3pkoa0pwtnr6x26di8pxbycx8qlniphhmw3yv1pj0fccrjtwbiuisqyp1f02xkgedev0qkff8q4yl79pxoywtrjs68m59rr4z8nrmtyglrtkq00ieu03ey8q85dx5ka21gcmfzo6ce4sblgr3iggckt8awtw2mfhkvv2h4yj9tkdk24bpa1dy6j5b7zh8kyot1ivv53rsj3yc7gzn69ki9b9ss2ozco722grs17gb032dxugr8a2qwxu1q9wajr4hfrcp70asemqld9ha7mnc70iyxmad04yfa9l088ver67o1rwjz51v9ahsypzo7',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'cwqt75kb307nalw9qymi',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'tadtgqachpxhrl9faljbp6oet1l0zq9riyosme3qrancgzcbyvu5tbfbq1z4fm95mhdm3wovwgoov935wlebpp2t5guven0bueq1zqhlrqjjq0i14y74j0b3wrzd9kj9d7k1dva93qe8k6i68iupk3cy3t0zn7cl',
+                channelComponent: 'oxnjfnlkj4j86nrgfgn5dll2inh9uk6hkciv3016y81zsyn05pqzapzwzrp1si8nf78bpxayo5hztpgaydrragx0ec5y0ovhvj6o8fiwmia9bccdny3ir01soxwlrp5aodk2z891iybpqeigtpmg3hr1370ub0iy',
+                channelName: '3mm6kgy6mvqjbmrzqmmjgdunucz61ngnc9rx6b3cmfm35w7e72fmrupc7s9fvif206ngxgi1hupi3lfkh4owqxpeb9u8wqi3fds5pjmodjri4ai06f1q7wlvgh4ow7o90554rqmv51obulkby10z8rz416977dbu',
+                flowParty: 'lt3g60g2rukww8ixlp0lvvo67gdcml7gdfabiik4slg0eli20jtvbdbezq1yylbslhf4cj349gsu828verwgkhaiz3e1mf2w0yfuhtrdltheu57ze7bcy8gtvngl5gcs4v8egb1of9unqcvtxo862wqt3ne3wfxv',
+                flowComponent: 'ev3uzp8dyandvjjm6rnpsqkh6dw6kfbkfqkmg715f5mdrt19zds7tqlstgvbq12df5h7yo61u16s53pm4ffssn7c08dxrky1qef0myhc4vookmonxaexa3pkjzofy0w8ngtwlpkbbq4uohq53fpm14upht08w3xw',
+                flowInterfaceName: 'wa6l80ehkg1xig7dwn7v6ufka936pjcig8ditk9dd4b8yg26u2kll954wg0dju85shchirxtp391xikn35i7cksn4gvq915gy4b8e9141nx64c5d76alja8d9u34a88h2651yd2q8zllsg0ffsxpey687zeeujdt',
+                flowInterfaceNamespace: 'p5noe1xhfv09qbv18sxxsb1gim6x7ei7ixxvu10ywpaktjyhetr3imv7fgar77giw4wh3v7vvope929gbh7yu1e6r8yzlyy0foawthod2yld27r0qbi420fxbbucmi71y6we3nj53yr3wfxwizl2anb5db1g7q7i',
+                parameterGroup: '8k9ogn8mtixvyu1evy4fl98kemdbuupkqqd4yrrszq3b3qf21hlgr17pff1zfc6tu7wbq3f4k1afwurxps60apub5810e95yvvf7riu2bjzy1b0t6et4ii2hex6vnsdj8q6k6gvxqw1i0770sjqamqm2ufxm4vfokvdxnwtnyparxtpqmcrq21zh8yds5qa2lygkcyxw4y7rjajpyt93148hqlz11mz2r2hiuw74yt5e3o4cmotocetr1rotdnn',
+                name: 'oy0zog6yvfrfv3rb3yvzf0jfhrxp4yp4bznwbkcefkxzecg0nszbwuzv87bqcovf6k5rhnjjk9lulx2hd4zszkd16z1s9h8b3fbwzfh0vvojc9wkh4wtypa49tz5bf19kcuat0ojz6t36edpy3agsvwy21ub2glyhepd14382jh0ffgfox35qh8jqfrediiotnf5qswbrc0sdc74f4q4b6lieix8wcjvzzqdxpqsf1rkajd96h9yf06lpt3cwjj4swlnhlz4ib90zmmuzzfm8wwzwkrbcia8rkni8w32v0ic3wpdgsws8am5sry4za40',
+                parameterName: 's5xijymy6oy1bnt26rr5c508gtcg045jrypbj0vcbifi98flhtp9h07z3oh3zognem13ouzg0ljt2nxgmmjbyx3dinlmk86cqn2cwzk14vjklvgb8k5px3a1vhc8j533fhw2juy8o377g0nuqj2g9tgecl560gcuy3z2xctainy8qtj33jek70ni0a8zwz4u1opd2njp84a6b57cshfmp0zos1ik94drqoj7ws7dzir3o7ai3dq5cnzx7d49hyefmlorksiw0buk9ax54u2m16oti9l7vkdr4sp6k5f9fvqr8ymyz3d8y2z36ehicjy1',
+                parameterValue: 'fmgtx2k5dscvnw59sab7skewswv277zut003n6cyytj1q82zc3mzgynb8bkpai45lljxb4wc9h4ptuqjz719ejzodj3qb2jfxi69nb9wn87zwwqkl4xfgdke1cpam3j65ydatefmqg3h2dggpmurh3iy6vb8yk7mkv4vv2fsyoff0rzf0rm69zk1p7pqsr7ejpzubaozj195q4janmjni588xg0sw8p5rkusfdobi84fr7g6zahqcl4gco45ivpqascmj28l7io8dpc76fwlsrs9wjtpv97lqz3ia29n173uomqcqvcpcjwrc7aiomx0do4bukhojoptot4y517hk9ciklcxms892ji170pyr8ebqagfzrpbksbo833wdiohzaqtp9kgov18qdxytdy5vqwh5u02q3w81ygyy3da21et8vcpzbylrlfu605qy6qsbpjcr3x6sehanr80ix3rdol9zbtcjndft50x4q74dlx27391usp0sc7cui91owea8zo5glgge6a7ii63m6icf7ozpvbiah43gy5846x7irks6safquqsxl8rzunlhl0lbep7i0gghan9poet0xnllwvw2swzfmafx05kdoq015lnw7f64cpewaggcnmxcwua39lb1i5t4ps55621n1e8j4eix1e24ztmpgtpzo1uzt6c0nuynokj4ffmuxb0duvggg0xpxy6piwwmux3kcwfwyxg9axa8amg5xx8007x1p1zvv1xqzhybjreq25kgv0bmkrhiudf7o7ufl96dgtq9rr1mdepzk9qxqs75rpkw2s8s1va714gh63fu0z96yknolht9l5yix2uthmd7dy4miba3afq76hzb3grj7otzwbthzpruagytxlq0ieg3so5dq8m2qgm3nmzxj0b61u7e1ncz42wj74odfhcy7ri14i3j2bpz3ewz2kz9b4sn99onktdgoa0hess6rh8ide6fjsw2c4v1pbai0sihwbvove23maaf1qc9jcpd3ar31g8',
             })
             .expect(400)
             .then(res => {
@@ -148,28 +148,28 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleTenantId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleTenantId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
                 
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'xqpzg7b48k2ndaef1zcu',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'ph8we57i06ve2jg330kf41j3ujf6nyuobcgryrmgcfl3wpfhmbortqlu1habsiqjukon3rfsnaa5pc1b29lit4ykjpbwnqtvwop9wkdow8zsezwpuk648k5jpwmo0mih6ua27a7te2sj902ayq7sguhwe51qs5m0',
-                channelComponent: 'b26x9zdb9amliozuzvspe7l7adtnnwsyeahqyx2fxnxc0xj0qdvo1p93vhojq8bau8yt8u7tnzzmhbeg37e8d0sk88m218k0gvfoiy4f9xum3uklsd0h37fz8udjtxq9rtu1182cch6k1yzmbz32bsws17ksr673',
-                channelName: '7hmmuthnabc9ll7tsvt5k9i3necuityg6azwfz1dqspq2mpwittnj90zocny5j7qkjqs1d1gcg7widpfbqxzljqheqn06q9tmpg23lyad2uia0icpaw18jgk9y0iaidcdp5iwrtlbsf0dh7sthic9o20l0rpyj2s',
-                flowParty: '83ql39e8w12x8b98z3b96szto6lv4zycb88ryx4dbgslit4yqlopo0quwz81jb212i9ujibamnokdckqs92rbwntxntvuk0lzg5ivu6iftc1y0k6uk60aiuonikqj45ejppcukygz96szkhf7lzxy79or69rbj1u',
-                flowComponent: 'fybsyy9y5p2avv1ms1eglgabmxd23yplzd8lgy8xl5q7ctp11ij29mor2tz6migswdui3nf2hdotw71v2mjdnp5sf27pg4otxmhc2u6r744v2rgtcov8azwasw8u50ezzxq1p4uh4zum9lsqzudjk31nobj4lf9f',
-                flowInterfaceName: 'qg5be7xqettbxgjx0yvpvz6g7sbsebvqdz1j0b3jcafid6wuzy84lbgyz2exs964njk5h1bc0bylyhngu63whbg3yviits51xloxpf46x4ppp2jhlyl4mcbrvvkor5kl9w82wh9zyjwqhoq5lbgmjc5iuvoc85jx',
-                flowInterfaceNamespace: 'frsfl8uif9dm3sr88h02d9r4o40iun1xmh8mhzcs7z32rbm4vudd7x7ytfay9wmrcyxj6f6uhwzv2fefnb12rs4yuw0qr91ct3h6u15l8xo61c9pufcix8f3agw2ov8nntvpv2u3d5qejpwyomb8pnnp3samjnuo',
-                parameterGroup: '8rf1lfdzdoczki4v2yay9u9oras4p7p43eb1pasw3zh6otdrqhac8bxcejto1kppvtm4p7to0fvoaells2l01ii8wrcoz2cjq5art8ljxdocoz9tfelu1zph0lpj1gw68mmxz01tvcdeg8a9orwws17k83pbbod3t1wwukc8gybnpxv7mi8o01ifydeqvr6e8q01qf4mn86c1vhbfdf2p436ar181djp7t1epbl3td62ttt3cy9z23h1l316n9h',
-                name: 'ky91abpceoklr2ovzv1ztt4sctl1lr0ze1my75uawi7kseiv5ddpcf5oiret2li61gvgszzxkalpzikholpzhqeqqhschua45kkdh7qqvzklcdhec5o54vaazolzdnfjgu5avod4wgas4ifggey2uo4125jxjm9ira6fruv4bxm5hpf6guft7vwmk1rclc0ptwe5wkzyi3jn5stnrxdce9766tpwqxa1nxfqscih6n7p9nt8cc37jrp2gbqetrwspkpdvfp1gjko1sapv0fcxois36i0uojgv8s0vyptixx9jpatq20pzp2c0nodfvca',
-                parameterName: 'jsyuxdd1lyczai3w3hgn2b0fpddgbs9grtbx1z3cpjrz422zmuuvzl7rcspvue6wyhxtcvpkiv81pqjgu2s6xggj9tkw1mdr7hst194uzthrb5g3or8vu49mid6mqixr0twcrba05jodacypm8hrx54pbtre7kkye73aksr6q6ousdu2vpto5v52a65r05bf1kdcjnfqfzgdrbpxdy2zr5qm5hqnoofn5d5p4d59gqxyrdyscr4wr3zrukrecit8igkd3xsih94g8hnpjryrnwdweir21ngoblhtk17bo24qx1y6k2l5l81otrbysxlh',
-                parameterValue: 'k9369wtmjy3m0o5f4lgagq9ug8x1avqce7jtsmthwkvfs4saq57mduui81e0y9egvwjmbd251t7cpjc4ckpqwuigytc7ayzlujnbogdaqdkd0ax4snstxub0krj57whgvuox8d78aevp80w9antsvnmy4zu6sz9dtp0l5anjctkb58xrelfrhmdjeet35sbqgirynizzaauhq1q4nw2c3t6udoth47yheqz3dj8djrq241uwlznirvi2m6k72yvv1nunxkbm4jy7apl2b5tscgmv0wp84u4ia1fh82sa7xc6f0jkepnfb2kpcvvfuo3e76c4au6i03vu9bgb6m6h67m8ebq6ghwx43bppp9rx3ps6fk99i6jyx4lucxz9r53gd57kywshe05qxbjg1s5rx3mo28bqi48qwmisbj71e8atbqkhmagd37uz9asmsvu563b7mslvvx8xh042k2vol6bqnvxk9r3zpfb6u2tluoro987qbv67lx1e784npuinhebgt3j1ow390y8d3dm1d4v5awuxmif6xwohvds572k4c6xz92r5k4j63ypsg2qcv4xg13bqknfngovcuim7vjdxidq8d9vdarihf6nf98r5fdlhx2kezo0yzgvormluej4rs0y2tfs2fetacg742btftju5wng37xgizct3rf076lqnxhq5roujnpqji4fusz7wfsw8oje0q2bdqarsmcqmftkkf8phbval0ol3tsn24sn4k9zyg6h6t8e99twli2pj3ytyf9rwp92a35m6uw3egxb6jyvdakw41uvp4bvgerj6xagbqgzbkwo2dghoj5lgrckbut1w58vtseuv7dzy64ms4ziu42mlb8adhaeyzzycmte466eg51w6rd30txkij468grtpnk306kgieauzw8b135agg2kkkrrfxwty37ihsvzgjgof0w60r5fpuz3oaozelopduevbfavycxsj5sff8yghjmvs5dw07xyc28fugjt11g20r8tk1av',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '2db1gj0d6byyjv71fjtk',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'nrdea9ts698isrdok8plfj47hhlrkmsl8absswh41wsnxl3fnxfm4dui7b1yy9y0fsq2iwcrs3q9rzb2z3d6rwrxgkbedspg73rsekrb3vncgzv2ymn71b0ny4dgv34l0rr92htfq4arhwoud8szw23n8vwi5ei7',
+                channelComponent: 'v0fmxvbjulqm0vcvul24t2w4giazr1g3r7ko0e7dnwq0fmoksf4jkk3n1lhgz3v7c840nt9ioswy723f49h1x4tdhb02g7ujkehwmh6u9c2k34hkhrtngskoic6d5ehnrvkwdi41jygq1htzp4hbp3aq14oashoy',
+                channelName: '9mwt8fq7zij37mvdjqgtxhfqckirmjnvblqt2i2rcatha3mkm8gmxz575qtmohuligs316qtltb0g9iemvlqlmwcz330o8021zr4tdfrmnfuofnmgdlt2eydlgacvfidu40nynipf8j3yv3jxcjj4d49w4rxehdt',
+                flowParty: 'ir5jgltok46u31vc5614er6tknuut4o4bspetgxy3grgkhpod7h010rubkhnq6n5gebfvuff38ns70qor3qy9d5z7evxaydyxyjuyxk8ayiicelk7oxk8wzq1jrz9mvc41udf4wjxscq7ngyqz48gvgaj3r7s985',
+                flowComponent: 'pl5iwkwtt90otsns6n9v6rk7iohof3ov3nb7shhxtfl1y2bwh7byzxqubkv1s16j8unpv9pzinb2jzz83qll00oausottt3hnp4x6giu4c74f2n85i3qrpxjlwn1dhx1zk178z1yt73w2vva6urr4lihbkg32ebh',
+                flowInterfaceName: '3xq9mw5hb00i1cn0nrh4dbw5vxxi9dpg90mprzwvgofzw1q5vghxf818ue5myfabj2smrhyq8uahb2qnbrx18cb8p12p8o4jhywjlgrexpu95f6fw6u6x4pxyf19u65v5stksplx8zapq6duse955qzvbrkuinl4',
+                flowInterfaceNamespace: 'q0zaq4a0ebh29bwn7pjdv2rja31mxa5vffleepyyffvb65d3vu3p5jap9frjytidnd62q5pi3y01r0mry489ainw1e4iqlc4xag9r415koopmh9iuaz0wem0d43pv391uikjtyes3bg3u2wuzwl1j1bserq70sxw',
+                parameterGroup: 'f53ga4nug8d2v9dthpyx5c4schspplnje40s5x8b7xj7ue63bxfj7v0c73uonaob809ej7stoeg8d317f30g9hw62c0hs8dhmy0isgicn7bjwocfy1d1ssojtlkf31zdjk0b1y25m0y09l8yoqi72txaz8r3whb089wyv97kb77wrocvkvobdf0ax867dofecpythkoggambsmgtt62ps65djh9s183gci4wnsxka0bx4rk30yusl9vwy2788xa',
+                name: '9gueia6gckv0ti73nbj9vz35krft7xa4fdvt3ef7b2xdfyjzgoyh0voi8ar3xzve7wlqhfobp53gwh9lfguddo2x30ln0tik3pewaoiu77p2we6xrgm7ypwp23tm7gpxa9ap97m5cnj5gq0wchff9bjp75do0hrrabzhc7msrpie2l7y6hfxm78lo0omxpmyiki1e647n2s0m7x8fxxli510tset2b6fs4ftcn3wub60ie6vrq3w2f6uqtmigx3xuohpiixiy6jhq0c0eo7izelosgobhgy8yi4xwf67atdg1xirjomulg7rpbat2uh2',
+                parameterName: 'py0esjl93utpxlt0u3thh2nvvy881l60vd6gx0m7kpzsdtie3guv9k0oxak0bgpdid32kw4gewopcxl2pupixzig0tp473yt3slgyq1wgdrn4mo9qqvjl1sl73so1nftn81eycc31nsrzmismd6n4c7o343o3gvqrluspgqn29yeqjm071jbbp3jd516urd6164a8g6stgujond9d56ez60wysossglllow1nhhwe5iyblzvze98p9jc29a44jvo5ujh4gt1szpnr5dfzonlc7ztj7bv6207eqbxrfa36r88d0xxxqdv100m1tgaj4ju',
+                parameterValue: '7rw8dewsn36tnroi2prgu39f9pwo37losxbvp9dafwe6jsyao3ftub027e4rh5d37iv3939i8q6z8zifaoo5rpjbhjlpf0xn3l7c3zr5yo65irgiumsgh0pq4gj3tp5q56v0x0v8zmnyjqq3zyahudffkir8uyie4jvvmbp2u4cnx23h1cpiqagyn4x1e09rdqjqykx7m0rnh4rsjnzyg5qom0kuxq9tdsa2t6cn0skaraczlqvfh1sh6sonejnu9w9vktd9twlm6l5wue7ug0do218uszslyvmpbc0ldhwgkw81np6eaizutbk5w560rrb5log98ch06ceg1dewgi85lfnxudamnx90xqikvhac9hqlgqc8ruvamyym9l3biyyyybe6q4nxuqt4p3ackeshtk96qcnyiuhfuk5uf5wdgo9fzgv4qsj2p5nwbmbnuswv5klkv698l8qf4bexcvlgemulkay1o125diznh62pckthuammwdinkrre5k85dqlzlkz41zgraz3siaoj1zoqim1hoqt4zmc1faxiqwclp6p4yhtcmzv7atm9hwipfxkzh657zxyl5kxl5ou0x2cfgpa65aklasg10akcvo00np8im5lgj49u9kkh43kt4tm4a71fp6rd7104ff2shkjvttwv3rm6u77rzmomw4pukvwog4c5toi9d7un1s6jt4wciz33q5n4e4fa7x3mlm0v4cbu2932asfkzkjai0mgu4kapn82szakk74xubzzvjzfum077a4v73r2eai62elc85322p6i1yehyeqey50nmsqny0ol5dybidpsi93ks2ec13fmkybnnqbo6jhh4h4gzn801l060tqz5ojc2txa1nbg3adxtakyuufcrsajf2q2qvrths662hwlh04sscdnn4cccszjcrni110ov5rzh3cnvqtprr38llflwgat5of1vesddpw1mlodu7qgyoqflk22nkc8alxhpg4cb0iry68cwl7gxj2ti7km5ayf',
             })
             .expect(400)
             .then(res => {
@@ -177,28 +177,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
                 systemId: null,
-                systemName: 'bchgq0gvri1kpcz308yo',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'km957mugesg1u9xgkipqucb269fy9972mfnvrf6lbt18uyxivedrzp7zxf10hpznzfgwwps7u75j9r8iir3o726x2pezmjorqfg1k9k4xow3ik497ji8g7n4t4ar8viroqdx4ydpwlrb2ah6hltazo8wmtrprjl5',
-                channelComponent: 'kxwpsmups6lzlmioy4xpx7vrh48mkptx2ssy03egt48l7gsdw261g2nd8fbo8ec7adfv22ivvxoc9kkf50j4dthzj6hwqg5kih8nqnc7w0gtgecg8d2g2bh01eg5tm60arbdl2dgt71rbv4bwrncdzobi2mv49e1',
-                channelName: 's0jl9qby98gc11gezf7nuk1amnxnumhja4weqmj7gsk3jqeqxnd80q4f0zudr1mnoo8qu14u1l4epcwqeisq1oa7hrokkzrrjm5plmyayqau5p3hyrdqpewjntiohianuymukss3hc13kh9157zwocdkap9kvep8',
-                flowParty: 'r7x5k4tt1akqjdhqornyhdly3p5ptu7mni1oulv9x4p28p1hh0hz4a2di0c61j5k08zkp92f8gg3riy416rqjazeloulhzssxszdnrdenbbtr860tievk6n5xffjrpwc82nrcfsz0xfab07dknqqak09tabtdamw',
-                flowComponent: 'av2fpn9uqiblzyk5oko1a13c1n5z1wk7sxo38dr2zruh0silhbvar8em8yu99g8n6vtavljs6zaotjegbkjlb2vqqp5mve5i5jus4whq05yqbtyrkb92bnyjnwqwouod2dbmqrgd1ppahzyonmmweffs6xz6xoos',
-                flowInterfaceName: 'apkdcsm3dhbser51atojbzm2g5fb1oo9z8f29b3z695gkauapbrm7bqufb48mc35onzkrm8i1iz2subqf35jp49hi9mwqjja9cs7352rmalt5z3nj0knqz7cg3za8z6aqbsfy2ta2t9m5edm6u37fmxgfwmflwja',
-                flowInterfaceNamespace: 'et3zcwr8v3wnaj2wbvqmge66idet26265g3604vibid8shpap9bzd503ks6j4ae23vr09rbfd01bqlc2s145i5j6fq7q49ao2grz7dvrybwz5sh9wfws5b8sq1a8i57yka7p8n7iq56dyvay0zowyte24b15sql2',
-                parameterGroup: 'hyi684zozbec4dq1avehf2h4m9golxdk4s5gtl0f1l9xl4asyprtdtit3dhlqrhpjzi7zx3dm6679nbabhddpiwv4zxtysdmnp9d717v4mf1mf9dy6m2nychno8cn5o9eg5z8pbp1fhedzybdgx1mgl0brahtsk3mn7m9t28yevyypakkxg3v7u22r5r9xt9lb5j7vdnmdw2j6jm9lbqej8k528ripqcn6ubruw7vskbr4rw7brozgbi1qqqyym',
-                name: 'cu8lqs536gkujsp5b8jsewe82p90cmye7gz6umxcnyruzd855pa1ok5u5c2licd8u6r6xp19rk9ze1f1a4axr216y4d8fp1q12ib07rp2ikdck2tap9d4ykpg6ujkew0dibmwzgi5r41kj3o2yjinceit72orbanqnytibt6to374o8jlmtujqcxk53hasoiea8r1ch7ttp9h1e2fjwkbla5pfktwmn5laic5a5p39wg5878l7p4t19rwjhawzs3fgod221yr87b7866ts3k30y0jeo17diy2hxp8njstxlzd09mdzxg0ub4g5vewlht',
-                parameterName: 'knp8pxrt87vp53ngmfasej44aulzt9m0ww0y00mp6d13n7t9vsvyf2kizbpbcs4zuceep4r9euv6en0m0d3ires48ghehl19l3yyb40tvok6xyqdvs3un6rff8x6m3ai84ncovtbpcvpmix30dcusqc0yt7hnvak4l7958oosk233ei8p799fjzm88uytu76d2x68iexvfhktori89lr3luurltv21hz1qlps1ji09457vqpclmsuwc1xfe2xqurlx70keywou695k7innlv953ysic8f6aqbmbg868zxemlpkci6r3fc9yka2irzmj6',
-                parameterValue: 'vd6z9d6psc1olzsgnhpw225xvfwy8bvsab9anuxva7t5gew576u9zmi6u8apt51k4f8gsdpe6hxvr5975foobugordw0aad78m36onrg5umofs1t3f4wpkl5bctzfttyuj6fn3dn3ytb0zt1zq22z2elv5dvi5mponb5s6xqiu3etvpc2qxjjkasmqou0oscqgic1gkyql2l8wbjeusvfiiuv6zfuukpphwdxnbh6o3l3ww62qhqup37i2518g2a31gavpugx3dlh63a9rja0d9tgpgm6veln0yyxk8in3c3erwg474egt3d5mt60tpkkcmmxct8sodc8digy8tllxvsa09z4nxnti67qy9q70jcprc8vwgunvrk22nxorlgtprmjcy8ujpcs24y9mfqndl5q74veblox99izpilz201ex2v2wb04zs3tpxn3ap8v2wo68xtp3zam9d1kmvruhbmq1yzte2n1ma9kfij47tng1yav7h2nlgaem82rgz5kmr72dkr8zk5mug94hyanh2kzmtv19yk1ry3hjs8mk587gnhh0winx0d46znfjmvkh7q7s3pq230a9dxvo5fnf7obitol3gtmq4xjqksh8k79u26q35gwzmesamzgxqctut8hyi1o37p2ji1j9huqzcjxcaf6k2gf9ly44hb84i103f4konbtdzd3ow0iqgwyey3295k2dphnlem1m31xbi25z266qhanj92bvvw0dsqyd4mwyda8yhdwwj8sgl89hwpqyo0t34gl895a9p9zsg7jteobi42688jxtwow1nt3dza9r3bhx1q0kcboywj3bnxeqngj69t5u3wbz2gys66v0ha8eh7locdi2sfh24nls8qp5ff6yxo1bp2bhkghbop6x83limxzh7z1ngu9ft8rwk82gxkqbszzwyk9s6isjipvix43meprh4wu7h4oi6wrlhtiiojz4aaef7u18g87pjc9t8i6h0lgijxce3t3lqjob6ov70hvairlhrl',
+                systemName: 'p9ypo7pcg2s9wuq58pc4',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'schquzt9y8snqqzmal202lfqarqq5mhx5b4h54boq97rwv34iyh95sxmnx19q6j3aave7m21uxs1smxrcv10t8af45u6m69vmndvnoy6a0abxtq620u0l42s4t9nwnfs9rvp5wxetiekq57thbg2gc0t5sny2b1j',
+                channelComponent: 'vvbn27ov7etzkhf7xjllxzmdwu0k9c34kt5i1zf9rrbhrh66gwcwrjrrtc31twxymb1uwapcnzscu0psmmax7coaa8a4vyuvmd4opeqs59bfwh0h9mg5rhmeykr0cq2nc1kar520nws15be14cblevzsnyosajlo',
+                channelName: 'fk02ln0zdt33pysudgx4g5ld6ds6uohlgvacm81ma7l50t7602yx3tlgy8flzan7ym4rhkjtclfec59ntpvb1bjbixkopz4u8fmx0u9uz5tupq5lmysj9dhylc48pz5jdu4uz6pbfz1cjksoc9snxy0ignr292zf',
+                flowParty: 'abtrkyjcfkbs5dxotuhekxdrfghe2qbpip0790xcqsbzhrymp47eldglysnurudvzie2pgipdlprg4mwz4sleqsmkzxgumrrrrxgqnu1eccovw5o4i8vvdeu9240hvwihy915dabkjn15k4imrnykwuhka117yjo',
+                flowComponent: '4vy4zhlonwexl4arzgoqx6uwxcq97194mjdbj6ha69kezcm5f6hvmuvwcux66wsscst5tew8bwnhsmp99xpsw9y2v4jg4l10m66di6woardqsm8ki4sdwcwj4g86825wkgsnhe036t1jbi8sfvn53f4m98c10qdi',
+                flowInterfaceName: 'oaxtmlmydvna2w9hncloj72ks4grgkdjs3ih698l6txwekustyqrk1gdy6gkkgfz7wwf7y3tit9puir8dz83po7lopnix0anv1guhpuz31nylgw30higq88i7904qnjv04yf4sunrs5k4dd97ca5wn0w95hnihmi',
+                flowInterfaceNamespace: 'wpcu5pb7nzru0ces02gyni9proqd6l386k59sbppd2tlw26bt5f080mq5piqyz63lf2v1y8029z9iegxqm64e8kr88wpyh6aznhf5tcz345oc32fo9u2wx903pagvvu12ulum8abebw2vjqrla263ez776yaxlml',
+                parameterGroup: 'by7fh1zsfiz0bsihvuxc5p5gr1xlzdejx7isemft54tym9met2nvsucazvdoahcxcdla0irg40dm79sot60tbhsju1jn9ijv11i8eqv4i3352yzthhzu7tl0i53r6m2vpycxtom9ge3hdxex5e5clbnz0520nipdhdwvw3b7oo2exi6bz2ph5k09r30y8txppe014x5mt65igt45moszzkszi2u8bhqjz6k983pb10tuwtftnzobr9t4kzx0yyd',
+                name: '0nejyabe8janbg61ontay1ay75p34c9akt0qz8b4bgc6v51swxzm0rdzqvf4ysxqumwgup9bwhmze88pdaswgl4g2tswgmdc1g3w5ai2on0c397kesq7hrjm1hbqk3fjbi356gdqbl0oyyw5jnennzk4ow36u307zbtqd2wb1qxuncolbytxa5881opsfvm1fnkfwha8sbqsuiekrrnh4nwb265u6wob2651havzplhczbdrtapd3tykk7zkch9w6edhhvholeuu91n3f3o4mej9kknw3ntxyzsrd9au31mbxy88azgvtjdob5b0i1di',
+                parameterName: 'wzle0ab8a9yqhl55hwaxklhj05acwstooswndotwaqz8zrp0ysfxwjts5eyjyq8l4l3yy8sasc665gdihw21awa5r8i1p6j6iuqa9m5eoblbvvcwozeppqpvu61lbi64vw3ii3ytsfqe8gynl32kykzh033s4by0vb0kq4yryk64j3vnuu8w5g1yfiwqo09n1eqtogpnln9oq1y02gg8efam674w81ccnwfkvcdn7mdtxv377prj2ebqv8ihfmhjbqwoy9p83fn0dtkuhaifj352k2zftlx7fhhafpwl1puy8330z9e24ga7cr4ej9c2',
+                parameterValue: 'n5v1zra1jl5w5cne4nzvnxxhche5fnkgv033k6d7hrofsk9np59jt10iekl1blfd84p6kqdwl5oxk0vayjnv0hh7ajd69py0e9kxy7qjwai5e2e4l434f0ez1jbuu80jhhbwrm71n93j7z5ex5054kb3mdnbj4ug9wpqdokjo1nv4rnli9djh9z6l1har0schn64v51ivpu2n6ge85reggvjbcu4m03uxnoogmuqd57daljfcq3le73dhzargjkv1318w5zzu52ze60huu20htrln12vb63mwds4wjkgcxesabm671klw93k8ntzf8qfk9o4s2sb3svfhqyzp9niel703r89s9z8rblr591ym5vhhz7449izei8rzqbyhy7sdj9iz2mgz7kbrdbbbzv9v1z8t4b7wll6wsusjzpfg4tar95tpedeah7xgzzl4iui5vspt2936uqj9boew7o09akaud72oulj1mlzacqw4b66hsbv2a149zp4aryp156urt3uyeb1vvp1gqaooomdmq6bok0hhnliizahp4mzweujncza5wavt9tvgn6sgzipcams3sea5ohx2c5axuvjs66qdda0iyv9d4zfnl6bmf0eotidoaw0jhv4e0ldtbrzpepev1pzjmqeotrufnlernkdev8dt40q8o5ch2b2u6ce4tzbazzqa3u83w9d3lzh1khgo0nlft37i72x8a2dkfrcbvg7dq6s9suoijtkdvcpf1pxuvlxhyussuewlynptrqeapqw0oryreqzocrclkib2wr6nb0lsu7e6oxa8vx1nikpzexk50kkjprmd7819xfib0hz33pe3negw6813xttgxom435l5qxtyxru0irmz4ojwt70pt8l3i13i1nrilj6qkoanb38j88ctca69i5htrg0jd8wqbe1021ij08r91i3z4u52vgfs227dhsikyxh6mdbvsppdfss0kso9i27llxattt8us50mreywu0850cftq90h6sa67j3h3ne',
             })
             .expect(400)
             .then(res => {
@@ -206,28 +206,28 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
                 
-                systemName: 'u8pnx35g1ppn8ise7z9v',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: '2ab72tdro2ygc1i928jrvs4zgqhjyn0rnho43kihghyey2knjyjpdaezv7svzkzcf7ac6b88y94vsxmutinz7iuqmaf34uho2btx4tbrucjmm6rril7zcfqa5kmqr0aucsn5but8ylz9mg8iiuejr8zs0bg2l34h',
-                channelComponent: 'vun4jayx9cs6cngi2y2f7l5zr7f1q87696xj9d833wo3rix0djovkis9l46hc94mpt82vk9uhdnx9b9qmts00n1cvdg84ncp554whhkomudfus2gyhyrgj8me36c1k1lkklt8ne2v7kuui0os593qgzufuood1rp',
-                channelName: 'hafdjxtqyomrho7kz548eq1tcjun6r64c6lbroyx6d52dhobcgmg0qzumynyvf3y6738rhny15spadp0rahc2l70auq3z8d50wrhiugeh7omctx4p0ciew6kg5ewpokvdvji95ak4qpujke2gvvdfw8udsspx3c6',
-                flowParty: '30e747olquxuynjmv3in38l5o1zczw6cjprrjxkzhz3nrtg8vpjamm7o262m6g8f94sn8o5xzw4b4lgw9ptkdw88rha8dcg3taua8j005jm3ondef09xdtuup137runnw1jmm1j8ydo64s72acn1x9fy3gjfqmqz',
-                flowComponent: 'e3gdngn5kk1hmri0hbf1pkdthnisj7m0pr1m3pyg9y4uobe06o99ytpk3dsqbgfhmulinsl1l4cuh2sp4by4nimq0e9wy6cwzut7co9zfba8bfeul711w2olnqdp07b3efeww46kc777vgb54st7qikb27t5gbbt',
-                flowInterfaceName: 'o0whi4g4u1fwtjxqam8vnog9l8lpld5ooqqagw8dn8m8y1fq2bnx9lfmum0im0z2jztv2ctmco9owiedmpfqmtl40oox45k0whaouvtbwxhiszx673zq3s33szcn78q1mjyul4r20etmzxcfwoqietauzzor3m1l',
-                flowInterfaceNamespace: 'hga0vc28ahrgl3x98ab8ucgnn7ruz7cs0hyc5nqprf72076yqkdfoqnpnsp3yub010w0bpaspex5j24xdaxkqsesmys7ou9vk2c2d8fmnm5kw8valpzecfyt83g3fxhaxr87d66i80rn32ismw4xexc4hpwei85z',
-                parameterGroup: 'rmzwq74za02imv2n3mn9ifab77ftmp72n3wv6mx8i2or9srsjl0wfertuqfp9xh4q2k5jg8mor0mpskcj0f4658idhxega31jv68qxm7h4ntedt891bf0yfngf3r59krci7jsmrmlmx7u9ywwnrn0yhdjzd2yp299jl8jjxbmt9xrgrs5m50wpm47p7ppur0sqrjcxkjsdozmokqvifatd93tb7apc13ys44bk6uefb43nle4pk62o9l596i1fg',
-                name: '2j3fr2r6kei7eybah4ft5wv802anq6vwx90kxj2fmawn8skzd4mqtgqqwi3b04ic6yfyca959cwpbzzd8s65w8ffeootf921hpggg5xiujvhen6jhie8dzhluan91prcbnv0lrtaqg7quelh89afsfgm6izl4uc6o82eebd19j1beo2nk1o6ufm3ch6wv0rqkm2ynxcwwaqob049u2rfrpiyktpy4thhztmr4p7p1a2apmyws5c0omuwr6ctsohgnh3inzytr1x7r6t2wjsloe371ctr5boch0wpuvti85c95oe63uk5499cdv2ezw3n',
-                parameterName: 'qqsz9cx8i0q8wd1qa9v25k3vhys395ta10qact8biwrwcerwugzyrqklocujqu6ymkq1ur6qyjyztcd2fm7xq6w5orm2fc8qlc7phsib1pnk5f5ruvdyqfgzv2eq95jcidd0nhwmpxtuzbyu9mqckgyyeuw1u5d92a7lt3we8i3c2u3i1qum3fuwg7r2q0387vwquvpblmpbk91e0068chsj86tk2muk1ltupjk302msxb2edrg410m3t9s3930qxojvfzm2klter678yz5di50icxh7vkys0m83078acsshyhd9mjhygl5mj5znzhwt',
-                parameterValue: 'ct47gcgv79g2zesoazza8p8232g0y4r0nedeqe8q6utqr7o15qm5wott5wisgbg5sbonesuymg8v6ccsqiclqzj3f1fq6gy0rrw1sh15hx6vqj17tyrh3qp8qo20yb7zmh4sy9iuo5a811cds0oj2ly4st5m7sna8bdqy2t7d82y5hy96tztixl54y7gxa7mow2lwjjiwgdp9qymwk1fwsj4k0ss2p9b5lsbvn6h1s1vo3uu7h1du5d588zdt2ufejhzkhn0yg063a5jf77fyjc5izyup2gy94ttoa3rh36s9e53t10pxh61qgkivxg5hdwppaqxxkfpcpnijdg2zin7qb5s4zot645fn8mic6r2ra6ipikjswkgrysyv53rmxvh7lc7fpmfwld58qb3obv5nvdhen4y0snu6nk8sg2d5o86xy6l43wuwqc7gnjtcq9yp4egaabuv7uszn28xth4twl8vqvq0b7tnc2xlhlq9vq3s8xtv4gmoxa3oss5fbm1scpwoh57s3f3b15uw6qrysmd42a0m3pv3zpbiqs0m06qmuo88uf6m5szexaxs4zhcwom3a65soqvfzljo9tdhr33azoiublvmr4d22ouenkq8znmdgvxi1im6leckpnooqby54r7sclqh76jd19l7c95hhc080bd2zen06sfhtfnek3k1eyqgljluwwj3ez6ysdrvkm4cmr7f8chr7lnwfiadlblkh654gsa7jpvh19jpw0ohzt05obfo32rdgdldqq0ek7nsu92qpm5ev3cdvheawet9mjtz14l59p4eepdd7qq2hnimeclx3skn6z9ooo8n0po8vw15v05z2m8np71xytsq24c40a86cq561zrfitcbttlcjcbt3cqof808q802alkrg638fxqrhrnxd4vw79z78e3b0ihbzad1as9i5fega3adp6995wtbhi0u2dyze50i49pxb9220fni99wcht0x5rv5volpr4z3t2vhy3bzi8j6tspvpax',
+                systemName: 'phwsg837t662edwmp6we',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'cksai6mk3eljoz4a3w79lyn64qyjro929i3xlou0x68o9nugs3xw40ncecbtxzjw7kvp1a028gx957gc7ytbq22zhski7szemhmxlkn61tnw9bw6gg8jerln00noslepj032r2t48n5wn2u5ab858hdj8ktw90nh',
+                channelComponent: '5vszo8otdfyrc9qxe43kbpbd7ox6yod4iyyp4rof8twlmlfvrwdzc0zqgwnd9vzyigrzwkwcs6nk24868bbom0eq1jxlj7r3ml9pvykuvlwbj1gtvzaxpkqut89lqza9txqyowlbyzsoge3mxpbvegm9coz9fsiu',
+                channelName: 'zt0i26au56ylw3j4mmypz5dwmqxcfrmvzifm3atskallfkec3t75wfiq824vskbfav32asjmki5vo83a9kglcrcm2wrwwnao9uqx0u5xckqdmx5hzew82rontor5hbcnzzcscxwqrlbknbgan8ssl6jcac9i1vnz',
+                flowParty: 'rlq9t1wl2xogl0akn3fgpvbsfduqlqmd3ckyi846ym52rbo05x4d6aq8e8fkhiuwfthkxf93r4uehtj6qbmuygnf6l5pgvm0del4svh74cqo37nq63gb5g9l1myofqxog91uzeqck9rdj648rscr5outn3aaez27',
+                flowComponent: '0wzuay3qgpec4dyim2rhn78wv43bfhe5apv82ju6vx308qfkkx11n65xi5n71ibmm46xndy33jyxrg4qxavpe6cu1ffuiemy8ibn2w1uyiddoe1e63vxlcwpyyzrhi1y9bp6mlgm5vm8954pdtb1ljpj1yelubgq',
+                flowInterfaceName: 'alj4kj6cp6wq6h861ejekcixu3mru1i4b6ts6pey03e56bkfbkofu7c34ppeapmld7xcdd0wo19wuac11vpusjb5uxqxh4725he231sf84v8ci20zosd6nqrcs1b6ebjat9rlhb0gnmqerk7hs55gb0w1nw5tf8a',
+                flowInterfaceNamespace: '9ax9fv50ailqj3cjvcqd2i0u7tk7pgsd4mjtha7dpkt1lpkifdrsx3aeuvuvezztckp537x2bp9xtqo9ehonj3tlot2g6x6nsr24ymsifftb0j4v3zdsmj45efbfm3vnk0q1k0ap4yq19cyhkxhj4y7fgy6uz6yx',
+                parameterGroup: 'wgo1o1u22g2o00yka6sqshtdd3u07ddocmoduzcg8e4a3qlbluj1wkzrwy10y4auzk4ko0nfriuplx8wr88gfkyhalk2lwlrrz1cy1ypi6sjq0rdpavluedf0ldb233c0ley4w7i0hnauidnxqd4aaxrn6z5l3oiesxmx9ldtj3f43ju8pt0vr2mi3d5iaxstu4rbpou1pal33137nbs8zh9oy0ugyv967i00mpymgay577sc1qm8epjrs4spu3',
+                name: 'dzdngo0v8qo0h42c4xnuauqbafzz7dib88lhjq8vr6z6i69mhzf5gd7cycc3ja13lfj6xfoxdejd23xsscvtr8kk94l5c9p8l1gm2rxw40irqbkweom53i6nzlhxki9sxxsawvmwzuemjfu4g3auezq8coxgwumga37vztg029802b47hv74jhsezjd77jiov1eqmg8useu994qf484fejvio1jrm83snhasfkv13vozjjkhzk8pzp85lenhx1yenmbjh9m73j9vvapmo4mfkc4w8cvyo677ztu1fliue7hvfhgpin5f7p6tbcceqdn6',
+                parameterName: '8bate272ij4cqn9524c7ps5n63vmlixchcelk1ip2kd2unxmdg2itkyrk58p9mmxrz9tfnfu1ufda0mrt1rqy0edtr0kx3g3cnj24ufbwgn2wowz91mrat08l33aag9nhhvnuj8kzo2douw15n3j0cgcubwdjwz91xfpfsfqr1gxez3n0ze0gmjcrgp807mws01bg6w6w9d96a2p6l3wibgbpw44dou9efsl8whl1v1utyvss6j8zlinqr5jco51yhbb5ysiwj61dely9nxfk6uo25u76k54n76xs3tq1nd8uhnmgavfc46yu5j3xex0',
+                parameterValue: '9x4we65335ss16ootqqvhvzgbqyvx1medepvl1q2p27y641kgo8nrtfx74rx51k45ftajbgi6vwybutrddl5wzgthimtbjn45mihwj5npzx97wnnismydpwfrovqsbfnyyvwubsye8bqr6s45b40rjou52mfzfy4in95k9nihafpvlrzsdej8fa6nf09jwzubfg0e83gjooao7kh26tvzqccc7h4wbu5q6n6b7ddx8ngfts5ksx7blz5ncx9k2cjdjqynbqy8b9tz5ljfvmcszd8p6jvq86sbxwl9vnc5c7sqwi9mxpssu8jg6mnjrikcoax5mlyjloqd9272av0c6c8500218nn709n0pw71ryyqq91omrfvn5fzs4ye62ulzjoqfx06ysjnr8vy2lqabcue4ogyw1e9y8ao1v3sro603tz6qfytcefp21i3iku7s7gtvy7apxjbcodpjj280zpnl5gf2sngo83w9ogrzgffpqaqcpk2hs9ch9khyiodbq6408h21jiirshua0p09y0q5a6g09w6f64jughozd1wreefrrm50cvlb5hgbzwra4arafjt788r8wert8x7ss560jxhodn24nuicwci4z26vz8j1rzj25fqefrzg13j4e3i48db25fc0eyn3kg82gqyfmu7zmipcl0o4byd6l2sa6wycclmdpq9yxs2n6jl1wbql0bajkmodca5er1wwk8r49e9mab7t468s8k6mvybgvnwnj03ewh4vz83ujhijvje8pns87m9kh9kiymkvri6ju7oy94guo7ux7avewz7jnkzsk0v81od31nzvkcik03et8lnx8czkg44pvwmp159g0c96d49ztsi595phzrkeh393kgh93kb9kung0fbmj7txe71g3rje255xpn6bfrfrg6i8199ya5rv80a3bppgj1gnfyca8yw782kj6r6m6iev819lsvfwvpa07tn1gx2wmrs96g70j3ldjtfxps668fs0ncj4jrjrjg8rp1',
             })
             .expect(400)
             .then(res => {
@@ -235,28 +235,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemName property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemName property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
                 systemName: null,
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'zt7fw0u6qggmtu5vvj4pylz8g2jyzmzptjojophn4gcr7lspqsv9f5sscj9jj6b5maf7yo2x4dvyuh9eavbua3ti28z3env7ar1pdgxz1jryikpbsty5jgjgb2g8i9fwqb0bhx3h6cga1l3fnjscjl7rzwstsser',
-                channelComponent: '07oyc96euuwlgvh3o9imx3ny5glufvalxw5nz3o73w9ybsx28v8as5szs9l5houodzjkon043vcfr9cra4n4heq8gi70csj88526wiqrnl77e0murte0ov82o7bz6wb1i4afq6si0qkpn35zfs85sqhdtji8thl6',
-                channelName: 'ef4qte1gl9g7wnge3g8b9156p3ydj58qvtg5srm8kx9zxus87cw8u6xgp496j09ltwchilqk9n10992a9x222e0qf7y58y3d4bp2wdxo1d71gpq7zvnssbcqf3jg18x4vg54swcvpsep2uygcm71e75qo09bwpeq',
-                flowParty: 'mdv0xwm8x0nsxa8bu5klm2933o5bjrcwgri4okeorxnf7h9kpe1d0551tty5bh1s0qhi4bfe2oskurxwfpubxjt8t5q5lorwvd5w8p5r6skr8u3acvdtxju39oz783auw8hddglyrpztpzrfn1j30p4ogux8ib8x',
-                flowComponent: 'wfexwgdbxs6819s7io1bpmyba080cb318mypikrub5xi4a3giirkdxnkmx9rr68l3t5zo9e4gx0uzdjmrmn92b2cqwa53sc8rbqbyboe0o5wnxycqrypvyu3p5yovogywyuz9et02w2mz8vpaizaen8b0w0m0ugh',
-                flowInterfaceName: 's5hfq2w05p8qieblaelhooq7rihrv1m2asq58mssuxps7sfb24m3lodr3v2tug1iefu3xezeaocrb878duahcfhrx1dbg71ktvaf06x2f8htzd11x0mf5un061pxc35znrcy81gx7c1ddu9ilnwsku152gp1mt3l',
-                flowInterfaceNamespace: 'tc0amgnyur8aaj2iraks14xmz36zwrte43wg66w4rd1s2nhqpifwffe24l3lipryssqoihemldes2dhxymyd1nco5yt4bhxmy8lh6unwp7zk2scdr3xhuf6inift9119znexhqw8x08s8bseodiejaprg8bj3ocx',
-                parameterGroup: 'r8gd0bv9p334be9yolgue6c5x2atopmceixqypzaewz0nb5joru8i1j58n48m0e00j9szjb3chl85idf1suyccixzjrml4xgi8zmo9spm7rg8aj4klnid93o309c69enz2nau1q97c8x6tltowwcdrbjb1r0r6mcipckhj48t0yplssudgxc0jnzwtab1422z3kxmsrngd5y9w8ubswyhbypy1cp1euyi3r6xh5eaq6urph1g40i2pharsq75aq',
-                name: 'o2bfsf1zvi9p8h2ru8g0ztu264qoxx4xsxvc2zztope3o5imizbq9blwp6mj71xh4mo0tmsk1ujq8qp1si7ldzrrb0g8igbekjnr5e00ih8oxr7mmb5hhfwc1xoig9vgz5pzdi8lfi75zjyf5b1bs3w3xe19li07ol07c0dvvr8fh5kj713pf9u71t7z1m6eng5eypvb0knx9gft79iq0jk84bon6oilr2ft2qds6ni0fjijwsjczog1t30rxy2f7iw8lxbjbn6bywg1cu1rh09vrv2wdvixmqm605g7uf2hnsx03s47pfdyosu8ks6u',
-                parameterName: '3f1771h9hiio43c3rbkxrepuca80v6xtpzynsj9xkrgcufqfs5c643rcdx4jih4bl0xj31806eoezmwzw5qitansmf8y4146i5l9gm30to0owq9bfszqybciowtb4qtnj92egbp0o9zuludog92vlugv5912mm4unyvklqjfamluw8acjf6c4q2u9ff45xuggod2lcwg2cx38le9y7rtzto8xf6pg5wo5lvipbqwdo4fog1jff6xi3hqdn4u2i78fjwj2evicaxay43brsmn2icz0uros72upkl6qd8twlb8tfgsldrg6s3jqu9qjitj',
-                parameterValue: '68dpqvk33rpm0au4mvmvovhpqvtvpqffywo52v8111vgezw6ngb35tesk1uafc7rmh01zci7asrhgh8zkt069p5zr1s3rwjkmwynlx2lvzu5sauwb5p6w5g7nke79cyc6qcnnzvzg69lt2zrtem378xk3nze4gibbqrnlxdoqsw4hdbi53j6ijxbwum9u02bu36c4zx1tpuphc6w9j3ubzhkw67khiopfc7hagwu8mmxy2k6ushg8rf3bli6tqhqjrz7ap82hx74r5mvdx9wgirk9lwfxy47pmjibuo5m808c4it86akju2avt5gomuysbc2gexos9p5nmoz5s17vdujvlrwlxs7dvldgt2auhs76zyvfditsvv5j1c8qoz77qgfow4b8r32h8m05zdh1llf8ylh9yownpdvjcjocye6v4tnnl40wrtfonmsbivecjr2p85cebxs1mvc14s2xi61gy80t68y4spqawdcu2ztck0okq5c2r53ui7dhx9k2q43tbwdok0b1j907yws2f9fy12a132218eznn606m19fxoxplfruqp2vvw6r2w9i9zkbfl4b2wqnuwbbjvuwbkrq9vteaw4r5hlvehvgj8p23544p46uip82r1ymz9hiwx1v6kxl8h3p7dqcqjrbg6mnk01wpled3px8pjl9cjbiadjjxbschmap5h7up3dmpy04a8zdnzor8eam5rnlhxk5dztyi4mrk51vu0nv45cwdduel95yk2dnl6zoqynpfg43junkqcq4pja553lbwwz9p0ug0p3y8ceohumhj4em5ych5r8n30qxuttp2k288uv43idnjdqd48kvfzkc804r9o84kgf2wjhgap9m3prc5hpzyg92rvs30gdw1cabfq2zdwpmc4u7wd3fue4n8mmhk163xjezbdcerjpwghudqzdyuwnswvtxwi8bidbkv909nq18swbqfcfpaaesbzpol5s898mpewlhw52i7ezziu395n5xvuoxos8tt36',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'ei9wrdfsabefod2qzvi5wj7sulu8usjbnbej0nqmz6it8xn1lllu14tlbjqijf4qztw6w5j5mij5aeeewisliw7t4h9qao3bcy6wsu2npp8d1cu1jg9jaykj3u2y3gi77iagl1qoqayj7osqr1t16xzqoig8p6o2',
+                channelComponent: 'q8jjicejde9m2w55t2a7av6448dtozh7l9ab1llmui0jbg9ci28ow4dq8dhhqeq2v62w3hxi39etzvw8j2ljrqj3tm2g0sbbx70qxjye5unp63bdv4fngl3o6rnmooi4loik5umuxdbvps8cygh2nupalz6oqujv',
+                channelName: '3euyu7aqk6jz0vqnwa4vevq7nvzuw7rwslqxxpexo1gsorrtoh3071m2xz7399x78pguwsx5pr8jayb1ryxbo35yhq6crxi6zep51bkpnqa370zm8sgk6ybhv104czxj275rdec4tr5oqb3sx1aor3avlzu4d1wy',
+                flowParty: 'qmou8hiw6fz055vgvqz8qd01vex39glzpzh2n8pamjqwwvyszkto16cv9blg2kcnodgi8fr7ai14f6z1zfd6qby7ul67361un59v1qhddxrm77bomkb1ugxzu7whjr4i4sc10420ja73mryjbe80gz1iose0iy7y',
+                flowComponent: 'wqdqqk068qlgdqe7v17m0qw79jup7jon60wl1r5q04g6tmf0y3dn2gwp8rff8g8ei1vpmkfh51gsbve2sm876ugkggvqtyzzv9hr46ce06sx87dlkgybiix9ye439lxp7d8u6ic921e00aijwhzlwyzbuz93dgrh',
+                flowInterfaceName: 'e9387vda3e6w1rd7gavilbybuhzj0136bvahmevbj5mapg21dafi7lzfblohkwz9fkiq350dbmtkzmgy41xnk14fnnedm82742axal73814ugdi81ows3578jhsvcbwnf571a0fi4e1jsvbeo1zt8rz4yoefsmoj',
+                flowInterfaceNamespace: 'oen9uqu2nidqd8ilqpuxlb7yrc79fhfuihg1boy3n3u8j9kpwux4qynos82wazbdmi53mc9xfedrao2qed2fatcguoqmzbf73u7fo0h000ov5hkxxfl8bofpd66vvogzvx8x7am0nkesqkz8f9jfhejpc5wehqut',
+                parameterGroup: 'aehqwur1zdf6mq07r1hynhuedjcl0fk5gg2rmmcjbxtpb67rv928toq6wyx0t8npnrb6hxpblq26wv5rrxuwcfeh31wjad69ln8nrx7ywcrxhmbqil3ejry1253bj850i1ht4r12bg3ohb00v2aw0v865dbetian68qlod7q82skcxwlo5gyaz3sxy635azh7xhz2qsdeb73d2ajoxiqce7bb9k14n04x1obgbxh0fr2ptd1a671grxeoyvqr2h',
+                name: 'tnuviksea64igzmafmu36q9pw77bqwo2mh6wlru0am2s0hz9pycgq3syw333cw7vk0uvzqee0p7tgk9759t663en9pmx8liaxhz1wpt9y6y3gs2bku16fzc0g4gq5jhjb7h12d4v31o2x9g6g4gaq970eyqfwu6gp6rtpvvgznbwvht98hv0xv4mjgexcoi6y9uk675netad6z6htvv127i3cyjyw82rci0i16gf8o3uij044lqknczuoj75rgflgsiy5ia3i6yv7ib4vba7i7ehrcetzu0rd69knvan90kvwmn5ihoo1xbg68tuhj8w',
+                parameterName: 'njowpksidhb0sv0qxuvtm6elog5uprpww48ogup2xwk2kgkvnb4wxzmbkylz10qv1gniw2kg52islltpw1cziz1s0tsoj2s2rnakxb8cr5y7b8fk3wkgara7vne2mdws00kzpav5j8cf1hov0mfj5aolo4aowyc94spx4bjfe6uzgswp9uwxj0c5ricqaefonjf04ner8t8rmjnbpxwvyj7lu873myddj4wbi6bntsecc62y9ziwf32bwmanepanutaybkl3aphz8xb4oricqldlw7zyp64xvnqpcj4r7x2pyeck8vezps1y27bkkdx9',
+                parameterValue: 'yl6hrx3q37idt51szirbfkla3svlyz29wj1m0jd9wh69wq3ci2bdbu1yqqov6wo8zsgaeitpa2vkz8epzt38xv8xokl8pfpnt9tu44iihllae0p7uhz41hdtixnp8ksk7xanxzirlutyanzqgawumzsq3lgkrnfsz3olg743r880klrjesaj0lgpsia384al7ctjw20o6eyuesuthg0a0ulckjldub5yynejjz9bzjg0qrg9plgx5ay37bl0jage0i1qqfvomqkeyb5l7eribpv1yaflskq6z8mkop0zldllfgw6x66sqtex69tsw54e8av46ra5ocoxe63wpewn7rjck0qi1f5r6logzh53suxmei508yep4fso2q6uuia8qh453543xf7gmjk4gfstnd1ic5ibj9prbaxwb57sgxlv42vwu1yfy8cc4crt6fhs8r95jemvq2i59nlbrl1mamd7ntu5gr7yow7mlgmhg54ag7sabl5ud2axmkskqn1mkwb86g1zrboow60jqbzdzpzo8jhsfhe11kxcpdb0vs0c7qsih6jmoff84oo3h8byigqth5u7bpts6c9tq0w500cerofi6ncy8qpqyx72ggu4seqzd7g1u9i1jceclad6km8126fyan2b6ep52ntc3d5dey2gaakqojsgtnibgco2fan1zfxtg84um0jp944wja3uzik5dykcvtp6topniex5cvrqti4hbttd2y22xrb3eqzr04wc3jyyak5pemn7csnkkhqgwdjzr37lkdlk4gv4n8qst2efrii2r3o6wavo8ry0poej876anekq4dqqta40n6jwz4crj6gs6yzce5huc7reqixuxsz4umqv4ii6wzatxy2wk3zmdjl9lbdh3tc8kl4w33gzgwcrzuoz9otf8n2t8czyl249soy1e6zdvgdi3xum8322cmilm46knj6k3sjlzr6gpkeqdpby6sbapb7rqs97kyjq14mt9yhzqve2ptifwtjk35dfnbyu',
             })
             .expect(400)
             .then(res => {
@@ -264,28 +264,28 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemName property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemName property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
                 
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'mqbasgmrxhk2y35mmzv8wjpsg0vqgjpyp85l4h2f6wjjm55p5wrs96gmv7492eh6rtqb9xjdnp4rsubhwz0ycl6as14wgy79qz9drjwbhl71gsgahecz76kdfwd56pg18gwpvgvjeu7zax0verebtkznem88lexj',
-                channelComponent: 'm9i1zfk7zxcylokbdvkrr1wdhvsv8werq9deik8leed95jt2on62smso9meg2ofwncsyya6hw06n4cnpphgrrhca9i3v82twafvvskneu00b3u8opcm935bqy26v598nuwnwliizi0ocjmzdk8q376kw3uyrizwr',
-                channelName: 't89nix2mn8jlwutdd8rsnx6oonjrxvjvinakb7munpcfslhjvjufianels6rjuqw6gggjbxtwfmwiy60xxbjzik36wzqdwqzzyba3gk7tsjgg0shiqsmhvfxk8nxylu32vmpodpsqofyrrfgr8kkbeqxx3yur52l',
-                flowParty: 'kmowrytowr9plttjwf99cs8z9kf9zd1m4q1izhrun0a3i1h2coylzpcvllu0hif0c9gh316yd7iv0uqv966pfowqukwxb5j9lkj4wqxgn056tw4r2lsqhxg27d86fezdb9aioyw2kq4dpey2za1yxsd2kfvzttsc',
-                flowComponent: '990h1c7zc82rcdb4zg0bd55h0p72glc085ogj94b9imk6obzfjminktlgfytozeetsvdaobr1yw45p8xie4qhipc9o720ggm97l79313yyb70etn7wyhxxfczuzx1aj7e73vu83fph0bae1ffyzl9r8e8nx2j130',
-                flowInterfaceName: 't5khynu0l2t77glisazcnlwl2nf6orh9drn3tt0gde4t2cfkgfmvjrd2dsui5ovuhf89id7xu53v6g4vhsf54aueujq0t5wezl0729ouopzawpbqjalhatyo0nxh29oo6sze4zu921g997uy5qf2pfxpraqddrab',
-                flowInterfaceNamespace: 'meao6i6a6dzb7ai4c99h9v33uhrmpuxmctwmavmyhc9pqdx9jldbha2syhd5q3yhwjebbxwih11o6f774tquyhlzksli64jeatetwdgn3g2shkxqy1onb3qglwspn8qg39povlyj03o8y4f9j71swf0xhfbchv8z',
-                parameterGroup: '28nxclqpurj4g4lnrxiwveojczoif5gylri170dkwxqlxt8nr6ptnjlbd98r2k7ndqf00d5va3b04yfrx2oun9dof1hmitx1mh3hi4q7g69urqx7d0oujif40wvq71nrglcefd6mj115hmiuri6u5lq3b6f80n6vo40dq0uaiw19bi3islydpvsac31nto4834e2ds9iyq50n9lepv4so4x0ve2ndamq3ko6107el1iowy3ziebebtu5wwu4yns',
-                name: 'iovu49jkowf3jjtjhhqnmw7w0dgrke01uj7qwdj8hbm6zdui5c1ovbkkl5p85d0z9hlwq8bi0rgcd2kwbjlmcj1oi3ppl5wbs7cdx3qyqo038l0yc9w4spgtx1rujyikwg5v7sfbjysvvdx6mqutumh6x3fetfpq89wx05nus0u8hze0m8wasvlqge0d21w8k17skw3f6awdsf7z0zdayhde2h5tyg6yhh6fs1uxh33umaq8dpd1e80l2uucb565fibwjg2qxtkkhlxigchdevra3xqtuo1hkte2xkfvetn8s6bkaiu4pl3nelj6k351',
-                parameterName: 'l9znuq6yt2i25xkeke19f2j7lxb69t898q72n6il60ql9y5uz5vb217mwwxdze2n1dl1r3d1e990td0rjs0emw9imnobsvz8omgeh6y0m2rx5ewkdl8hl2ulxd9fruu4s1wkxxntfbjmen7usqmk3t8411cnwb6dw02vsbezbl185kcvshohnx9hb1qjc62gbi4zgf1lnul7xumwv4szogrx3v0u0ud2g30w8rw5yzutoqp427r31n71wevrgmqjv5z606cunrqy5dgl07p3u7lk8y6mpf7iz3on02ub0nmdp25956d48jn2v3r0ssun',
-                parameterValue: 'pdpjwiftzfe6qenvr0c5rs898i0wtffynhf9bjyq2gaectdc1w591qrk451e1nve88uvxlr6da1v78er68kzzwthk909mt6ugefe8gs3oycu7nm6wpunl2vgk7jh2fcb36yzvor2ancmvjq2uqicr7mp6eoehov2ylin3udeb8to05cwhsh5a0fk80dffydz27zuf1fglhie3riv9tp4jvx9srnthdj1gar12l5u2wdg9egh140iml67vowhwkjestkvfbx1gc6f1fj6dok9rh3srxko82h4s0u4e3tqrw4kyeww3jixis3737zsjie9n8ygu1pm5ybj52483h3hkuplbxbmvstausz21w1wbo509bqyqackjcetmvodbc6j4antssxpsv6eysdotyxch7w6sbakz6all8mdqgtbxdyk3vkl7341xbuxqylczndj75wpt5fdunyacgova74q3vgke2iv6ofqz3bawryc25ox38j0iwzlnmmat20fmp8u2tp4r3h4m43qyuo7o338t9m7uomla16vidw2w4zpw7fuiuem04xpy0uclrjjwtkts6wl5b2lwwou4pgiw7leueow4lhc923ffwr4p1ex04pyc5v9p8h4g0q0jf4y9bf1zyqc9y1uzj9txf7h1ofs07h4kztqjuplwd4w65yjy69qwjrjxrtnzk6ukedtu01w9j6q0za2hbrev5ihvcsz0bz1qu2tev10coolqcllab6xihl5idf47fh9ztjpg51rvgspbn8ygtux648jenvbjrjdjsy8cipfsytgk1olaqdy5wuqbic1cr4aalpykfesjm2jdrpe9zmwnvplr4ako02c60dsvqtittzjop6efcvtpfw0giio1w7sfykjw4fku0ku7swfybemdppzu8d8ujq7nb8xe4owvo6xrl1749cl6tmh6wdwot6k59pbugorn0xapv0turwow9mvxprg2zltfq08yu4945i5hv6j0x1d3exwspa36w99wsucy2zj',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'nr786vypr1n7qm6hde63k38t04q1sq9pwx20sygf1avrgjnf0xsmj2od8n219xvtup9n00iubv0r21s5a916bmw6zh4ludljg6fuewckam6akr0e553ktd1wi851oxa30l7l42e0q3r67u5drnej65t3g8tizrno',
+                channelComponent: '6we16rwkxu94nwak114f9zhqyn4513rj6aobaxx9b0kjs5ina6dlnpxmjpcn9y2v6i6d66u41n2w0sh3icm5vmp8p6d8ki3ukdhalmr8e48t8u6w6ao0hee7h1ju5jjnkd433lajnhhmnrs53ojys4nxivy0ydyh',
+                channelName: 'inzfrqzl7hiu21rinu3qa7ftnxy5opqf9lqr0ub5iuwdkr8rkfkpp2mvktshbkpusztz51fqyeo31lwfibcmuiwt30gksvgapclvy3hu49worma1u690mzbf6ttose3jmockxhh4m7ngcz8f3k12ghhlsn12w4b0',
+                flowParty: 'g10z3zjxgy3uxmixloopedzj98nsy07g1fpui2b4wdxduyk204i6eh143sot1mg1egsn7rjdmcj3u6pibpmtncnjzs2yagb7hvge5we3z4en3etlo9ofbvglmxv8z1nm7udmda03o9dx85qae23deh7aq0dw43uh',
+                flowComponent: '1n6hgivwpeu7lo6g5l8lz9con9o466126hg286yvdo8k4c7v6iztlyif0y9z0a1e2egzxqbtlnb4smhaj0515m8l241uluvwjg4v3v6mej94o78uqmeuzcn2runh3x3vnqi8nlyd9dm71rpacmqa16lzip7ywazo',
+                flowInterfaceName: 'o3e81tr226eb5epbpamqlrqr666a6pq2ejfxd05icbd35ge27b8viezgogqc2fj3qn7gsp8mhivzcnefmvd2rsawog3yf29vo9278vq0sxp81so0l8jwjqp5nrawsol4pnzhm86f3gga7eityuwzw4o4f9scty6b',
+                flowInterfaceNamespace: '34epsitr1thk80yin58eabhiw6uvtbjdy8oq4s8l4pqcpnikpwjhfooqc24p9vo3rmtikckq8mh82ggyjydidfs34xjgsnd1scgts8nlk8yvghnypguijltdg733dq867e89fzdkptm4fjrtzcndtuiwpeelcuvs',
+                parameterGroup: 'ag2lbgwe4rz9d3m3mg8bg8nez9sz44c8u4d1ptblduo8spvzi9mem2bht0dd0wi1n9893h1ob5s1d7irlbj8rqkxk7m9os21td8fv5l58m3g563tlbqnnowwd0cyelo4z0mcnkfqsgh8uhg5tx13l3in24jxwikq9f5bu7ctzidoszz81od2p0ox38iye5hq3a1427xf94b5hya95p8ksfitp7m5r8m2qopm31sra9qpn4q1cj4p419cse539ms',
+                name: 'fgz12td2nzdf3ymm0bjdym3brmjxbl4aajeetntqsghuh4bqbvrf9dtkbg5cjklf7l1q6t74h3avyyl192fmiqcb444bq81dapxnw3imzjviuj2r9siebjmoef9uij7xhl5ka2cv9l81od85kjd8lame9q5y63lb4lug7ohti4sh25rts1uiooa7gkwled4pdul63z0uvdoij0xe3pc03zjxxhjagxlu2teekoosi01ll0ov9i3ttyqqsugypqjurig5rhdsj9y4hvfnkc8z428ucm1rkxpg04374yir1pnzu23fik1j78pn7hkxp7g6',
+                parameterName: '0d72hhg3ucj9yrhvaisaps65k7xt6pm6cswripkq87y7l599j94c3efjkicwkwuoqtgmdct7t5m17qbsjdup7ay4jw6ird5sj8x8v55dqj3tkqjmnvzlgaq4wj58p5kqxk4ca2bw5gxekfabm1zfysei8cb6pvmfqfg3n1843i6jqtg5m938ebo8b4dfro2se71wwr66rpzz4ithvj3xdsw9m504eyuvekbhmt0n94ixnkhchsxlk7vric439gd1c7rlaqmcnasq7p03saasprebmc1znypbzz05rv7mwq9rend3fb8dj3d1eg6sw21x',
+                parameterValue: 'p0k2l02u27td5wg5q8qu6dyjc5qmhcllijvnp796moicforybndysuhax4ks8aj79f3sjehg63d4s8qb6jt5riwcdgashcxv45cuw1ki515jytqb0vn92rd9knmsa2uqbclsadyb9b7ph9zgudbec6oulhzcotv9kf88m4i3kghsxh8eiogmb9w1zxed9nrpfgkybotjkqrcxz5uflgdc60datbxzdk8vmy4l53v62ffphlukj7hkp04o7cfqtxwrh4kmhptm0re63wvbvzzq2fx1mogrwd1yjug3ut27stjkujbgwmuqjihlv88ef2rg522g7e9t7qdyzh3mgfvd6udot20370bstd61hc2wttrg8l0k7x6qfpkrbzcj2kyrh01uu8y4o1mrkgojvhzk32lh35jlohll8kd4yvea6bs0xf4okvipazl5a6jvooab7tkgwt2x3llh7t0flqoetpfc6pkpoxeiatjqwaq5svd41u0prwdk8ncyghm2w9726l7oqovuvdeu7wxlehurn7i0cy6gvf1vgrqc9tfbb21skm802iwgiwqaz54m3j4itceki4q4kgs4mt4cz882i7u3w3gqdy6yqa6gobvy0vqb7m5is6rmx4ngut6ho4fob7to5y7zprdy0u7z1raar0qvbo8j5agi9bhi4n68cbk9z6qnzyhqjzru2jek78hhqfavroq5gu3w6u9be9t6qo87jj70atst4z1rdhem6xt2x1i1dmd89b2ek7dtf5cot8jztii3kmoerm4w2k43e84eiawlge4xuluhkqfgnxj1ct73qw4mdg7xjp1guwrc9ixglse7k1pe513ni0ew5w6tzi9aj1g8m14qid6aiiwtaqzs9e1e3rprz56w0kt13p636owm6aqpoao4n6vj11p5ss55irijv683z8yrbp39kfe6kc349f8wr2wpr4oo21py2y6vdsgc8qi3cq882uka0zgbz3rg6tkntfncbkk4vcd7kbii8xz79yxr2jo',
             })
             .expect(400)
             .then(res => {
@@ -293,28 +293,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelId property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelId property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'l56zubpzkamuq4zds4hr',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'x9xxrk4l4y2w7m7g75ak',
                 channelId: null,
-                channelParty: 'fyvz123v647q5io3j8pi4uicjsye9f91lwylvdmnfuerhh6i4bkhip11w75ms2woou5e2twury83u342sueu3ay9nlgvun00d706dfmo3ahin2hnnz4e9bpsjkdaocvng5vhcfw9hidmxgn53uo35nmnla8cnugj',
-                channelComponent: 'i5zwh33xa2r9o43udq9ddll5hfno35knywvwq2h7ribdyed8nmf9itvhu9ap6yhgfk737zu5sz2cnn6irchlkn69p3efpdjkv46vtqd01dcnyx5onujs3y7qqu2x9939kgd6pq9tvzfek4jymscbz5pq2oadc79d',
-                channelName: 'ipgyjeo2z1cur8pg45ssbi874wqa26m98nkazd4zj150zsv6ryd6jjz2blda1oy99hvrrw61y9m28t4zgwdcpbjpi9f3fqhoaamab42gjj8v5goc5pjgp3232eprdaykwom9xhg5pwkdq0ug4ididfo4swx84tyo',
-                flowParty: '4kk5bxci26o2z9mp29qrvw9j2z6t3bz1gbf82mxvyfrtfppt6x7cjc7udqe0g5s0y7v0j9vr22teu2pp7my27exz6c3g90ntclnjfl3uqk37tqoukwbitzsn9ei6sup8zjslltvsmint81nkd9h5mv7hp994zfvu',
-                flowComponent: 'ye1opmjt9y5ln2x5z0t0rtj2nw9ftbsosc117lh8zad0xx6bswgb4y4fahg1hq4f08ghj4xgag71k7d5yajro5w17fl1po8850rgbt1xwfe79wweehzvv31d4xvtuk1wnzz2dwc0dgo9dnocgvv56ywmka1zxlsp',
-                flowInterfaceName: 'ys8mxjnnuzaifxfarw48dhfn4edzj1bmz5l3wgwsd6r8vch46rcm9ryi316sjrqxe0kg63d2zhmet9zbqimbpi8p31q0cdzkj5k4f2dlivi1p0cly2da09q9cxtklefqccbl6gcj5g12eumyauctjrb6qwep6kj0',
-                flowInterfaceNamespace: 'wql52zrujmtx7xjzx4umem36r4g9ybi1x4qily8h2r8knbtbtoyzyl3ocue66314zxpoj1ox4tebw7cen00l294t329xvophhdgxwbf8k8epsy2ic8aggly5waqyyq7ppbmx6ltmdz1xrmvxsvmt2kqsbspqup1z',
-                parameterGroup: '1df0bkuqlny8n4oblm59tmmldup5633hwbvmwj7ght99x0yxn81nwkqfr12bk15fh7jex9u6qtv1e478kcadj2memtthjqdi9yzkeondatc7lurr1j3uvq5ezx25fv7r5fh501cudmqvf1jvcsewttrjoivb7hojbd6wk4waqq534leiyfl94z8650n6n0h9z4hjoqr6a1muttw2446a2qbcwvqaiy4g90exm3g5ff71va68zyc7xvz0bi8h53q',
-                name: 'opvki936w4bkru44z218jvyh8aav676pfbd0lwfr0byue2vkwx9oigr8ahjid0afiivjwc3mjqxeviiecjlxfhsueqbs8j9tk5k7nigy8zb8ahcflnbyqd7wwzf068ayhu2jyjri47kstgr3kskdrrsapcjm7ou4epkw10gzo8a3wc4h5mmi1lvh7wqvtrb8k6unrhs5u0ybe8infnqhoycvw7ff91gir27x2wrr4m5ij72bqvgdbuvze2hba8bnj9167bbwsrvw6akfdy849wp4ey0eskoefb6xevqyfez7sau0rzaovgcp1d731r18',
-                parameterName: 'un80bz7yoqxb1is3h4ze29gfukse73eul24lmbywkh0sscfiffighzjezhb17ba5ao9c0e4yz0j8fheypxm5ca7vg7hif122or39j0gm2rmb6otlwkbapn1ydjmybrhkgy83q143l4cg8c994dkl6oqk6cartaehl0skl39lrk95vjqa1kixekd1lbaw2mndnjj8oseb19kg3ad41neyc6tzhs0ufl3wnj767hn8v111qxo5nw6e3blm6spgygik4nqrszzxmnp3qgrkoatycwjr4g3dg0b2y188cfneoif8ylc8wvgu30ydch2544tu',
-                parameterValue: 'wf5p1pzl6qkqu8alptnxvsemk5hxypndrepc3eq1ugqcm549dhmzkosbxesdqe8ebz887xzdogtodttpfarfla63if2dbvmk361v0k177o44hpdq8pbnrn090mg2n3x9mukn53khaaucchzzc33hbbr133ofzfrqzxd70h9bphhbhooappjfdcwc4wqfjedtr02p1rasmj466qnurobj27qabev1o72qoh8vcinh7oenw16isr6fe8bxef4i15qekexdddt402gy0couraj24u810nvrwnwlao5y8rsas77bfqpt3wk92kgxwz4xga6skwr77s11n3l6bz999umhw3mx7xiyemrd182tqi6r4h1o04ik9381n5f24kenj3bvu8d5jnv8bhxcjokp8iit72vnwbjriae1hpmtkx7domtg1w3bnksblxmodenr51rfxg5e0d79b9kt3dksgpirmjn7r65gombzcykbijnknz9zr0d4erwmngx8g7a6qufatahmfku4jcg7q7k33vw06dpwemeb0j1oie04s3mtstf70j2gdqmo64vyw7i0ibzddnnqv7pdwyib2b3tazxevwo376rdi10k0tbv6tmvvgbf5yexb49vkvolj730rshee3ja5w8c0ovi9x8yg0gfbr6zf08wc3bng1p53it4fkgbq8e3pcpq5uyy69ld5unndrjwfchmcbt4nkaujcvakcw3lygwhddv61et5gq6doxg49k688je6d08rq519ik3t4m919ghgz5gcky5ehh10hywut9ab2h4bpasiw0mpt70vdqmqvzb435bpemnsn92ytrbj2rpn8wlgehibbtge27i754y62evo0hprqgglb00h158a263hieqw9s1sjx90pzhrwt4ars26k6u5y728jx5r9u066isrd37nuilfoiz9vm7xvoblc8dahtad0crkmbz2c6jbhjza3nmy8b5os6foslfval1cbn8bfdttifj5ql2oxkt274ppwt5p1sq',
+                channelParty: 'qtgxlrhsc50r8lhpgeskacsccy898wfshn53e4btpb4rrfz0afpgkqesz49mfor3lqymo4oaqn6j9z92vjjaz5m4mi3y7llq5peg851oj500vzgb39s9nmsc40afz9g3b03bi4xa9hupd8vyxtv03640k64yvaa8',
+                channelComponent: 'luj3a1xyiblfc9xgj1x2w71m8tt2y9u6praxq9fjfzju68r461dy6qnuxo7hi2jwcdgjh96m0kyvmeyx2yq3san4f15upw5bthz66px7e5t143aqbm103fug8hjwok9dwx7e05abexm928hsqy6m2to75nhwv1qe',
+                channelName: 'zjzs7qo3cf1jufkk5za4oodyg4kqr0w2yj6k91slp620j360612hft9pqqwhgtqvhzwtlmplz7i2zwuqmfkfd53p2loby0c2phm6s1pqpd434pnpir14zlks0jmqazrh36iea1dstd868n96klfh87ie8pyoyexi',
+                flowParty: 'beydze3hj26ukt8hzfd4dmsttmmp8a7v8a1vdfl5njbriwr0g0dk36kx4u56brjqk7mxwnfkn4qe872vlkt4nn8u9t5amjpagbjpca3jicme4g0tsxrzy6eiajrzoyfqx9ay27ny6ttpmyv3wkkcjcllyv21ke0k',
+                flowComponent: 's4qeufkce8ne1u57avyt40r4rwupb8mjt94oe6fxumv2im4fq603eb22cmyq6ikmpu876orc01kmfjtqymf7atsdqw2xz5kzz1kerdfbdpqba1qfakhf1k70qysz64n9qun7bsst2hintv2ijnp55xz8kp1ubd4h',
+                flowInterfaceName: 'h0jy9q0c1p5684qcw3ibw96t9sm36tqer28w7v7brh1cubxqxd7l985yp7gkbyfilhnc8onkt2m1nxgxgti28hiy666wm9t50txfrbb2ffeb9ula4yw6pspofkv0y2oaysclkp6oh7c04ybydodwpdkgkc0z3px5',
+                flowInterfaceNamespace: 'dt10y7whoy2z2otd592rx9461mix976zbjxbgvmg9hsj56bdx8h7ulfcn99mf676c0xneha67o18z8h4gd452aaah3udp67vdri6fdvejqxxncenjo3uo1d64wnzdi1olmo1adjaq7c3b9epc1gyo6414pdveku8',
+                parameterGroup: 'ycxhha5i7jgjhnlivqz4qzuxnjnkyrc4vcuwug4cigwqub49jx0bhtcodafxghu4emqsv1e6pw1336ifva91vpdmoc9tiitotmalkvqukzhhgl1as2b00dspw7z3txacrtv3hftj1kztaxeorbg1bdmg1e0pq3myjofz1hgbptay24xd751g0decumqubteim5euwcak5hmfi587i0k5ntgkj3pw3i93r8l78vlbyylqinqk3yuno1lbmmexy8m',
+                name: 'j6tfzllxereuc0oeqpqbhug1dn2ybgaxvzdg8720izrphro4qwqvfoe6tcgpr0c8q3f6e0tmioyj1bmxv3htx22bhwtdtfsnvd1jbow3457xetolopqq0rgt6ajqqd32ynma0cxh29lvb4088r67hc1t6gbmddzlpblb291vut5nfgdj5c4o996rp63x26239nx40f0f62u8q4mkdan0ljt931vv9hs53dks0011fwl44y7x92iv40t0ocrtfj950uem5oiiowqq5qkqnun7sdajushz3u79qg4fy799ok4cv8d192f72toj7h6l2hbd',
+                parameterName: 'd18ng9wyjrcb5pvcnjbims1xfkk66q5sz1umlf9jcvaivu98w7dew1syik9ibfsfp4mry5862wimsx14ppgoj4vmm5l3pth5ztmiotbb4nv3oxcqxdkxpx7bo0ailwrap6rnq3evv5339tggj2oj4sgeez5w6t7s197b0bsty0znxtdox1khb7y8s0e96zm9yo3i9aq63canvf5bjp4yradzhtlez076ec0qplyxwz222jcgruflmcgctzca1xnkfcbmi6kx6oqyefzk1n37ai3gbqmnk0k6qybw7vnpmv19ykbvhhc3jdddxqksi0a5',
+                parameterValue: 'fpu6egefbd2fgffxjno1n0467ex3zi67531xzurfttjlpfaneyrol682o01auzncy6bbhbd9x643egnwlwg5drs28r9ehe96vayx6itg4sst2p12frbhavmaqwfwbl39wluoiwljny8ojrel6byqacok79fd9vjzzf04dm44uoabxbua7g0b1z347je0vs5mr4996cffb61h863sefo6qxlhgtkiierzx3ca2atsgqjuaiwwuqvgl3xq2x71swr4ck2oqd47wbx4b7mjsiniguc8inlwcy7omdkp0n5lfhtrfrwq5waljcgrpe3lmdbytj9w7eeoaj378969ldrnnxbrww2o1erpmrce8mtzl23albml0ilibsf61vnrfuydmmdy3gi46vm4xox6efnkslgkbcpwcqwx4s45o9dbso2m175x4ntniv8uafdgbuvjtm036bs5bmurgzbaqd6hlmh3rzz580i9my2oxb3mpljltbcxkp49yp9yxewpn6gotx2jme0xwoujgml6jzuhxkjqttmpar04u5b48gwggcndotxw2mhvn4w5od88wg6htnvl386bsz6glkp5lroibj8xj07kbfdvdhptelve3254wfla00mgr22n7jpz5nd1wd2v0i355k99yvvigun65xuh2acy3z73x8ugg6ru6z6a9j0yl87scn9w8p5tq1ouci48hcthoapwwvotvawsz677nx8hvvafg5yf4xitc3jn6loftelz2t9w0izmsnti8a0mx5yxmmr33qip69x7ftd2hrg4ifabz91mjnnba5yc1588a5myq8n39im6itsrnp5s3d2v3ambt76dmkesu06dlxhuoed1e3vlo8oo9c714n84e1iq4lsiw0t8ww8uayjkfta673a17q7k2x6w53nvy1jg7qc5s7idhu13spx3d1zvi7hy9p450umr5mnts7suajeqp50w7na4tucyjvqrv4j36ngs6ccrpl6cxqf4zfsqbua5b40ux0mq7wyj',
             })
             .expect(400)
             .then(res => {
@@ -322,28 +322,28 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelId property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelId property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'g3g88ikitgnt0abs1i5d',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 't34shk0w4pz7vym73ajf',
                 
-                channelParty: 'hhtpzbng6n7a7wc597gioqeimyvia2totgnzhnabnbmzyvzwvbgpsk278lopbtjeolw4q7vlqt6zt2735qk9jamjb529nt16cil44vzdqhnwkks51ggpn1ne5x6kk5w7czfxopg50vyfnukqyoycpgb19708im1w',
-                channelComponent: 'qwi0depe1vl6qrckyfz3w6ru9lxhw26ugdxwostgs4l97s8nwjztzxmh4rbq0jtsh4l92rn3ixg26tj125dv666hh3ggyt4lxiqq03lz9vqj3e6qehdyc077tv1ei0vz6rzwm9t2lvtf3wad7ayyhz00r7twu20v',
-                channelName: 'u7aqyk7rk9pj8ia3ygrcnfb5zok6d6laousf2xcdw16336o2g5pdlyxjbfbwouwlqybn1skpyrzr26qdby2xt79t6y45270xwbtxa1kjaklll9vtygln8iid24rn152e4c9b31whygjiedf3n7enqbfjucv83u9x',
-                flowParty: 'uoy7c2hzq149hviiyv3t0wh7em12nkx8bxb573tvncx2j9q51j9yymdoqme6ytwcdn4olz6hkbuiqpfw2yffmoipxl7vfpm05agz47wy6hu2v5yvqle5qwblgyk3w78ekfcvv71os3haax8hb0vk9lqh527119j4',
-                flowComponent: '10dapcbgnhcwg34vsds9qy0rs9s3s82youm0lz5mw5tcp0jkrojhww4p9ltg16ahgkmc1zgdcqyx6ebpalp25i960dkyfxtror0d2f7jx0a3176qzno93sr0bbzsmdamluimytp1c7jpo11rj3cbj3y3zmueetq7',
-                flowInterfaceName: '8w6lpn1s9qcuc88l02t5ewi4k87zx4ddbbqu8fjpt2hjn3nlsuakvt4dhp1fz8joz43qglkjh05qcdpyyraimb73fbvncw5lkmhsoipebiu45cwbwjlkomej62kmdjlv2pmkck8qkhobp2iiwrlvpf3eqcjqa3md',
-                flowInterfaceNamespace: 'a0arz0gr251pthkzkzc8wi5ng3isum8o0zz2cyeaxyassghcsihhxtf7fv376b0pppzu08ubmk4xpfiju0kpjluy84ep3pqcz18cz0rx0mn9v071iznfrb8zc7wolvmh5bbu7xt8a0pwwbc4sn1ztopl6m7batjk',
-                parameterGroup: 'znvdphwafobyplua8jv0vwb8pgth3vhh8m6yfsgv6p3w0lvhype4pu65gib4nv2lm6io7xvfmjri7002szkafd8ylx75k0pb75zrj5mmrajgctqrtal475ule5vjwy1tyca1o9d3qtgo8vz3ybfdzli2sfrn40qp6gj1rllkg8lufvn8zd621miabt8vs5r3wclns561cm1c0yi1y3ybmoc7tufet580rl8l8d29vuc1x8zzzeg94ko616ap656',
-                name: 'vc3stestydbu87oeh4zz0j5m2pxpzfzd92l22t0xrvixy7wsrp5qoojfi1j7d59k9rdlpb4wclyfmkie0ek8nguz56fjrlvdldu64sok32zkokrpvin7gsprgrn1kb2rx9zfnryedepiswwri66gykovpihtwy56kgvacn3n6j0e94o0wku1qhahg4vw8cz8aqcqhrqkosgmxu42vpm2w433nghxn42fijbry10togublkp151o0ysj9iyyqsli6ur6x92grob5bgc2s1scxjlkrnm5coe0nixbhkj5eefis67apsqh01xl1plhc2v4u',
-                parameterName: 'fwq677qivj3324knck75rr7qc83djduwlfbszjtu7youfjkmnfg3ju8qlhyjzno0gnjuqvduq9ljfrizc9kkqsoisvnorjr6qbzay1nbgvzqn8kkc343fu8k9temkggzq1r7ntj2chxdfo7ktgi4nkyyaafuhzy3umgdexq595dj12nnlu6u840grhg3dpa1fmlmt8osw6vl6y2jfn0eurqzkwfjt0rd42hin1qfz29k0m8hml9r3dx8h26r2u7rwxg29jz617iec4jyzsbrm12vxxmdqqo5s4blia7a61g6r3b1935lkaf3em1ct3jl',
-                parameterValue: 'r937v7af7tbq61wkmut1ljhmhl1bczd1hahxa8txhgiw025f8bf6jmhatcgekomllj9b72phrp7mayegk7t7j8cyzraktbleh11n54ssudt3tv7umlwatrwsoo91irxibvcs6lssck9v8rlcemw4zg1h4i55wf5l26bx3aq9tby4fyoroncgmpydd6z0ow6fi5adab9zsnz06zxd6lf77ugbis49r5k2p9w11uz56m8sc0qfr26el6xsj5zwt1mmm8n07q89x743sju0xjmjnws164r4wrkng9bsoolnna2x7vq7map6pzdo6r25zmqjuzxcdxphphxpzgnm2dbbgohhz1x2phlqx6x04wf26to456mzsehz8cqdp0jtmm0n4grzurieo9e1rjx0innjnnfop9vrh9rdonegqs46tk86v58vsmitijh2eagrp15b55grh5837j1txqx5fdgcvejd5ckwvaukozqbsa8a7aqnu606mlbb94h3fis9ixo9xupz6g3mzxxr6bwdev6idh4skyn81x4nre6o3hzqo6k93den1w8f7ocacfd6vh1b6qk4xtsvypicrkwjeev76sgbqepfafv1bko9le55lpyyjmouipj6nzsrl23wneoo0iglv5vcfmrl7j43s2e8affnkutd26on7f7h9cr4b5to4ilv8fxmf5d0ogshg1xqd2cojyvkyvyqnp9ozeznlm5jwn3g1t0171l2xh10f4vofc483iohh1g4b4r3hebsrggwwmodp6eqmrzx0stlb28z1rjw7vjtfg56w68nu7mj440f70o29ymztcp8dg5wbt84c65y1onbuxyp1ko3rs90dzfua217j1vi274kpth3rd498son0rikiotgx4qobocpmcbm3yecsn68i0djgl6ebqaz03859r8iueo56dr6mdsb0mm8sm1q4xsjgaqpyycpwweitanskzp176qhibwmygapj2wqplruxga0lli4fjbyz3vsn7l5qx6mwqes',
+                channelParty: 'hc1vs1oxffejgt31jakj3mzgb6bw54s7hgq0vq25r16kgh41bkx6xkwpdxdzu8mwmmib534mfp5shaqxrujskdzsil4t3liaq54zcxxre4nf45c746giyhosolqru0a1cuvr2dt75hxwabbco3zyg1n83oqef3ji',
+                channelComponent: '4zrtblqzfsnj0xhuzqikvjztg460udeo2ux6ptdonclo926p5cwn1zh2up35ym5hg6kwhni2r24prkl2e0qntqdqwn56haa6brwbya2uwlssr3zbip7ke1wahal5qoykp0nrspuow5solve82bvtaa9h2uh1ba3d',
+                channelName: 'cmda0t8n4u9q48sdui3vzauld80azfco77eccn5zi5fnujkm36x03h6cvq6kxpqucrdtvj332zqfyrmfe7sbybh16ukmydhuhz15grbyena5a296zng2usvg13uixperlv426piqr7h0dfex95dm5wwabu5d25g2',
+                flowParty: '4vzi11k73obgpezlsm3hnywj1fhgla926fk81hscdm834w597j8lgwflp2alhmvw4hbc3j1pku9im37fyuiw8n20aspqz3ngikkn9oc310bf2b23jpf61rpulabsbxuq56qg19q68w4zti05vr7zvcfe9l75inx5',
+                flowComponent: 'czi81geoznme34w0z9xj5k0lhj35nli2b1wvon3jg4zp7qmujlmvebl6kgepax9vgn50xyx060qu9wlyh9jl4bfepsvpu9dtc20d7a9x0t3jmcybwhi3zt9pda863zazsgcrf5lqh4tz5ctv9016rd3wvzwsu0r4',
+                flowInterfaceName: 'fpu5zw9doo0h8rqi8jz1utynsk6vx24ol2diqy93c50ptr6itgfna9k1dluld04e8pq6oa636mrw5g28d77y63ymsh0qf57gm8s930jh5yrkaglmupu6n4uty9y3sj6ga6uenfkjgzv9iq9i67izmc8fjuufhdda',
+                flowInterfaceNamespace: '554s90qm6fwf55dnw6dg1e37baconrbydioawuf44dx8ftw7nh62ft95iiajxhvqr2h64s1tuyi17lrd4e35ofvcbonqplyt33lo4qygoap49ezxluo4uipq3k693m76pjokygbedbkuerayjbsh7wgwmnwf9z13',
+                parameterGroup: 'uxw6wp43trwexws2w8cyn5u49pbnytq3ajvnmfg697gg8rngzc0hajwmlulpgzwsaw87dd7ybsdogbf2mi646ci3kg8mk9an6spo9evmnqrauaw0d29tymwyu5rn6qti4ymb8hnw4yog7hjrbeefqjj0jr5h8i685u4xro97r15letkpf6amcr7c1331z4sfwrk2267x2torpnvpxe9t0q4qu4cpzboei8ah90usxk3ovxcuokjt0w4i36kb4kl',
+                name: '4pnuu5gym96644fbydo4d5xlw145ls0bn7m0plsl2ad1k51n9juc557ggnac9kmtawoqgxeubcgnl1xr6aof6gycxk5ltpsovxpjhuwx3oczpr7kwy0df2xk3kyxczj6vj2hu6cie50r6u0s2onvfbfpclxvot79qo8kc561otnlk411xbemvd1nnw3jwnj0lpa8p48a66f21nt5lq3fbttdn2nvbt1mxc6w8i6ab9fd34dj90homxlogmkbstl9gxakjqrwhj84l3xtr5yam6wuuidwod9g4xyke8b7mokkoaqnrg6n92g8knzr2gdn',
+                parameterName: 'afwzamfl203xxek4onguty6jvclw39jq2ca2dwy66dqjtoekwxjddekc2kdvfh89j6mnx4fdz5t2x5tdfvjpmjs96nzdtakuqlq6ajmw6fgrepmz4nzwt8fyi1ckzfyfip0nm1eq7od0i2la0pv54gvb41ysjchsd1lae07cnwhfgthif8nf21wyyhnxabi98ycrr405ifhapnax33wna2rc4mjy3avrjrzwk2y02jq3y4qf2obsxscxurbsg6qe2dtf8upb1hz72c6b99f1mbk4g14sk4srdbvrl36cm4cro245ih43p5ess619248q',
+                parameterValue: 'a4g5mq0p4k8ggbzlasd0bqu4huwrp2fvi3kxc5sx4v0jt4p6uzvd9npls84qrjy9xbtm2ljdq5ti99pg9c6ofeuu4od0cuecm8oy6wqhcriwef3q4xu1tbi0s19ps0ek44q4jukjcevlj50f7ts12781fmk2jplcn33w7rnf2s2yfi015ttm2fjiggaz1d6urq0v6erqbo1bsyt3jdapso9nx88iquc3qcdu8yyrf3iy7bwqnoznfiiga4dmlwwz1ysijn2tdgok1p4ht0tqqzshs544v7o29rznsa7q7mj88j8o12f1y3pufh8jof563lqdpgauc72sjuziwjo25ivugdxqvhk5xnck086hnrnzxrvbut7xkfn2dz2pxpr9d95mmsk2o2jlz8z8le9gdhp6qn1f28ie7zx6sm6sj10wnjlj03737tagtk8zxhdwkunv67b8yic31yax20taohm1k335gnmk95zsv3s0zll8h9fg1t3vxak17zuw4socviv38zgjc1dyk9lf3kii45rddmp9m14hq7fwpvxz5x5n2k627p6hp83a1fmaf66sr5916naqgdyerphbl87j281bknolgzyc60m4z5e4532u4c4dlhztmur1beh0om51hfztijfnekmo8c29da1ucgvp8grm7gai9hljlb3v19194nh0pt811cn3vhycnbg0vz4q62r078s37xkoztu4jg72fsmmr63yhio13ittt0qhveeqw6iev6eorh0tt2qrxhotcmamuyifnvrz38kyts9mtq7acsj1tyoap45e6xt5cmw9v1jfhicshz5it8vgq4u4ocu6twssmhzsynunc6th436rgf4yyqwqfkpemzmz5u87chjk66ntdion8l8b79boyhe15dn0x4ek7e4v6i0hmz89554yz62tcdogco2o2xeynppcmthpqx2c4hdtop6tty0bkhwpnmq1bjsz840k3r7dgpg5pr46rod0zu9sgbz0sphkshm51yh4ldsm',
             })
             .expect(400)
             .then(res => {
@@ -351,28 +351,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelComponent property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelComponent property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: '1bfm8j4yb07dwqtlu53j',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'jwwa3ghc58n3teihlks1yu9fytfhjm12bknu4psnmy8168svvexw52tdnsjd3pq2nx1o301y9xgg3xbnokb5thcdka23qmq7tmyljuxu9foyu051878n0ci5n5sn20dczz1txzgjn9wo04sll59cfi11wxs5mu67',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '3sqto25ozxxzzoaezrvq',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: '8pt79l1um2dxem3arg80pxdvm33lu2mcozxbohesx0z06mth1cbyo5ucbzn0l7mz04heiwqfnhh2801vth9rz3pc8vlnj6kegyz2gl4nbofnf3dwkd7jju8xbx829mabfq5uhouyt1k06nncag1u8yx3cge3w83f',
                 channelComponent: null,
-                channelName: '8qphb6il3qn0el4q6wkh4f6mzysl3usisqt1lu7xe89f0ov332hssfbaji7cq7px5svxuf79e56kmxyvofqyiv6gkog9wijuvu79i5kwx9gui26h0ns7yqil1e7sv7n9sei9ubd2kegq2l6sm0x1drhytgfamzrs',
-                flowParty: 'xpyf0j1ayy737bgkf1hwg80nfnatfocudnxg1omid4tj02c3fwc044dmvvv3rnbk6bod8sg0h8uonr51yqa7wmd5li0t2y6vg07w0n2mactx17jjkkqnc1b1j0kftoqmc1n2r5owc4r1upmg74jvfmt61jvetirz',
-                flowComponent: 'yc1cchox7tzugkvcw3ltgzhni8pm1ueqx1gjrvx4ysly6kacgchvfcrvbx6wmwyvj4cbqu6bq457vfwwmty6dyqp6sobddkhcjaidzqggi6j2va0fh1ga3o6nfmwg6fi0mpu4tb2geev75434mhe3pkt35t1l7rl',
-                flowInterfaceName: 'fx43141n4seh77rqxvau2gvq1yj4qlcohvvy3y0uznvfbmmj6ntes3mk6tvqzd58tcyy8pra4g33noggj3rkghiu9fabkb7t4eu4nwdew6ucnn1unfv2bgthvqhy0i87r0xbi8tzbwc2m98c7ikqyb5wjm09myto',
-                flowInterfaceNamespace: '1oby0uq7as7g1m2wlw4eakky5kf4z4zirp9aco5d2mpd751dz1agep7g06zo9vk4tavi2cqpg93acxdc4r2vg4293th111k5lq8wvkaxxo2z2qfzyf2kpgg0hkcuc2w1w305kj9t271ryp00lp9w751pn6rpody4',
-                parameterGroup: 'jshc04ssxk962esk0k0dfjmvc5603jv5slf5u4bbg8cq0se3h40j0jyv11a59wuvn2twj0xxmzwy41shoyphxxwkx97a628l3yqajzr6ie3xnqvkefmpx8v3pmr3cgttu5yy3ojupbatuc1nbsjylouynmedr2a356t0jt6ub792wshukw8jpgn1ok4gh53qnajv1skdb5gon6mu4mmlso9uqvn7xppqpd13x4gp83m1zvqtospcyoifuvurado',
-                name: 'gwoa6ytymkf0o3we00h3r64wd43mqeag9iy2lmj4wtkhukn85dphj2gkpw2ac3h5tj6va11bvxs6wjmzd2wm7xohahb6e4toz1di79zeyrsvz25lbugbd77b09vawd4i7nsel6v72gqdle1mao9jllzv9u2ozzve4sgyvza527jnltk1nq9vqysdxf8blc4v84o4gmh6cs8c0iqbm3rycbwgv2a292usal23iitlexsbn0bxk97esjxznuwvyquym8amp2ygpsy7izbohf9op02pfgsaeq7nkludh4rv2o12dqtjin0ybf098vjtxdu3',
-                parameterName: 'dqikiwxfw6wbjwk19048uqmcrfba937jep6mji1lv3yfqkln2rsfklzpz20mgkxv8tn8hw76j7ga82fh4p13p7zjap1l0gspumfzn04skphf3hct9yen89t1ug4uww5htgnqxzwzb1ihl2fpgeos8bhecrcejr6n1pmk05z074na6ye3e175ohjw8t1pm5tto64dnswaklpzz6k0cqpy5su2heaw7h18kez96dokbvg6yo0afpkhm51yfdk71btf1ghb40vi0bnr9si2svklupxxsjj8dhjql3glhfm9solad8930zrikhqtoojqi94f',
-                parameterValue: 'uhf4qqf4jwzp3c4go8ui46mt8koqn7cfi1dx4232urqksfzg0hmo6ln2rbosf8s76juld774sv47hjetdtz3uundy0jauqytxeeyob9hu485gvdnuqjqcr8opqfbdic3f5qhz75aa3gcs7yl0g4fku1fotzjisl0h9vm4vts7jg64s4tzmcbr2juo9a02kyxdwd3tz4ua07wo7umav5ceqn77k2c4i6m3karlmxibs5nb4gch00y4o4uluvxvwfa0kml1w9517ycw9onxpdm463y6jiyjy6ptdj9e4lgk00koxr6rbmga8w0pqilmg0ohukcoru9687fmjsyhyosas9xszgzv0hv57y7ydfpvhbt22vn3kfsrt3f5kqs9mz83bq8lt88g11mjfjyv0xwlqzsm8gpm23iveathw5zoxs8xogb0v6j06gzh53jaz8m9i1f6f22tv47h1b1zc78a6rh7kdqp65wowdmgcmbvpwntr4gxachlgiuy3l8cl8vlarn9k3ofx0r4z8swe96ir8bql89m7tw6er1c3dwwwr53w1uemshcpntdoso3vtj5ui29u2cw2ip6kwutwjtctxlpafo8s3e5q8oj9sfzxrofjtytc3gb941b9qxd6iyvj6y7asr27woag0lofuz80ghqet8y384cpjgvxxtofm3gxsx1tv277pcr20zjp8wg5dmts3vt7j3u1xq7qrb4elko3wfv8k5vdx81zev7c4uccr134pvmpbkxjaj1esip94kpeke5si6u006vn4h4b1yg40mulu1u2tfz3wyla55py44jnjg1p8gf5om929ua23br8noqbt1pha2xs9i84b7077ba14f7chov057fvi4epqwv2sgor298wtj7vny1u5aybd2tcd3reptrj7jqny3b4snono66wfjd8ke3urgaao9m5dftsf379oejjpowmlpir28ou5vwxxel6wt721j8yrkkhf7okn2dkbut3as2lm4bktys6vh4lgutqo3',
+                channelName: '86r22dkr2rlzwc7l2qruhggannjgl3lpmxl7upeu8amasxwgo0mmx44d4xwphmdonp7miieea1r8l0nivi2ly4nslj6xpnxbi41t2j3iokrdsks7diwqclysh7slkq77f9qaxcexfgzdgyoq0wsp1oa33j74o6wm',
+                flowParty: 'q45n9aqi62cm3kms13t8xn2n2opwll8yjtgfjt8hmfdjc48psdxk9jve63mdmnykjwm81mwp5ayakizqmt5lvhchwqlitqzzd38jz6ir01pv445eg9itvd2ilmy244iqrjqlfhk20ck3icybbvukdl841xj0bzg4',
+                flowComponent: 'o5fwy3dp0g1edar7hpzqauu39qzxu98crl20tmh8wy1f9mpt4ixeysh0yed4hglm7m98augelrnrs51t9t5xyfabmu3djq92izprfn41ceusyf8kd162nnfpcqpdq615l81s23a0lbsf0h8m26qwdytifc5wpme3',
+                flowInterfaceName: 'qa67lbrzdfd1di7o3z0zk8fghu5jwrnwei8ukpb0cu9m976dxfnxlv7sxvtpv1b2uoyf6hosx4hb3xrdyp6qjm57ualcl05gejrxm06vxv2ujlsykdaovg8lyodol542a3yxfcc0diakuhl7cz9dfrapphgpeala',
+                flowInterfaceNamespace: 'c907guqeq93fj0gptbms7xupd7ofst1q8a6qjdxbmzz6901ofcsix0swc8d0vwvz49i5aq9lhvdzsorzwx5xmdm0ldheru532ipubmrkm6gcv8gfqbxszxi5goplwpr9pikv39jjr726txycm6j9rgex22xmuoa0',
+                parameterGroup: 'kzletlsikoavny1pv9kyuc19qvzl6fr4y26qb9ne9dp60c72n9f2j73gggpqxl6b5wlfs58wlh3gyrvuq4u69ox75wjkn0iab8spxv5pega959aui3wqwef2d09cizexlf14fer4lz4wita3q77dojbz5akxkcp7m2bllbon5291kzx59kebkwkm6inkuql9s4di5e1ihmsw41igd1wm89i3u72x8lvfrv5qfzfi695vg0ndreqwj4r6p35bvp0',
+                name: '3fi95dycfp8e8dshsn8x7vsmwgx1t5glizdrtux0wz2pwyjvwycjrb4a3cb62fi2uhw5879twcvxfukc94dmyrr0wwn0z1bx5hgtuibb9u2zlmso31pero26lhjko37h6ecbevmc6ggryklm0b2jdu91l5zpb7ebtv81fcadj7yoydpi44p3vupi0kx1ol5dd7xjvtv00qiw3j3f6ngk40vwpsmowxjyw9r3no48aq8soz98slq7vx6huubkwhxr3069egi1r9xvr5yngaft0669sfe8t5lgjr39jt537ttyqfh5fkvplauno7pz5ewo',
+                parameterName: 'n2ut4bz17i762nwdr6vk6r2d1i8i5bxsmh5j6ffpbd9xhzhumq6bd03wlntlt8fxt149yq2603kdqcvvhcctkovk6ibxsv21dxgo1xwy65c0ylze6qbbmeie691y9am1v0vi9umrgjyegp8n8k2ae486zx6hzmyfxtump9w5x6rprbp46xyo1rbig5bhkyrdhgf9apokjkrl89v93m9pwzyz9ocqtyhsa2woyrvzwub19rawnltm3aexrwrsundhms6uiw6g0kqnj4jrz8t5vt7a4n0dugq3wfi6002qvfnhs8a5myx0bjb4lqorz5p7',
+                parameterValue: '1ey04pjsmw1y52m79lxuybzcv3tpt6zdlq9f5zjxv9jsgx5zcv4s73inqfpz5x0isvl1szsmk33n1e51ibzjt7u2wc4lfil2t4j7sdcfnhqkf8fhtbihfuyunluehfbpjnbpf0vz9avomhccjyqw9wiy1qrvu8nta57x77yihnck560qkx5wg5frtkyruqx6k3tnq6uz253z4479mue1wt3sc9kuslvvrmpcj930968trdnvk77ta403me3yz1zfdsmopb3xfzs21x18vuz8wisu279vu36mg3pv17ebuodff5ebuhhnan2erlg6buewgxt48478ioleul7m015xk9qy506dyxi2e76g68zcy83985h6ea5aozrq21lw90jl42z60f4hficxane832nzgon88ttkhrpnwdxvmaos7tdpvb6p11j5s3nh5fh1e2ton3a6bvs7g7r6fm6ox49r60g39buaimgy5ln0sav0l5xbale3485t00ngxns9xiy0yttvomaocbpseunh1x29g1i73cl1o2929ath8lyel2c5k6zzjmqbgwuyv5ljll098jisfni10pf5qlk9ewcr16ie0vmnot5eucld59fe55jlv8m4m8j0iv17ia1ukh3uc95kzd4jlmwh51lf1chou32ejmy99jzlztfy8ykavyeguvr2qo9t8rp1zuhmzg41tpy7ayryo1lotf5eyhsvtokyd0k3nk8l42vs87bkzpbzhbk2dmxwl9rbj6x7dckvk7rzgjrq4scpwwtuip6x1e4goo7kr3vlvmlaqjsbwjypodto3ydsgzcj82deo37x2dwskl89npi2m83ygmwo2pel249jws6iupn6dd4rkxksmzmn1tmrzbltfjzaoc0689ljrlp9rpeafa3kr3ik5zg795qeoq73qsmu29g1z9yldzctigggufct0b06xnothilf7191r7aqmagok5fm4gkb92n591f32z46glhba9ztc6b1qs89d2q9tpok5eon',
             })
             .expect(400)
             .then(res => {
@@ -380,28 +380,28 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelComponent property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelComponent property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'b66hc3txk1h4lta6vy19',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'vrhwk33xhjs41uzo9bysjp4klhfm0m8g80nxaifsna9tbryh59ngck5iipi6kjitxxubw23owojqe9fdnyy4nuckqtf5rzjdt52woq49b1a6sii0t2tx2y2y44qokftx5qkvvdfk3m11kegcp6p8s7abf19cnrcu',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '3zzl9oz8e66jetnjuscr',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: '263z80jz51q7q64cwvwbup6nnug1lhyvjun0e5mjb43naq1v968tu2bou9q0y0yucaex818poeczt78dj16kmfwd6760p2os0ajaqb98sq7oo42xn34amparubzegi6y82ik8ycm4m8nem52z6kr6frbyppfpn6m',
                 
-                channelName: '0syjjt2z5qrpsxdzba5zn9bkzaizzkopnhzepqumfeertbryi7qlkg7b3qjhesvfkf5fgx9aqvdcg6794l0wja4bkbpxm0nrhz3g5962hsutkury82m3pfy8q3wcyx7lurljtni9ok3o8ferwjbn7qumqyd9nz36',
-                flowParty: 'vjr44jz0rzgb22442qhfsc5a6s1q8vaug4zf85zazx78awludh9vqqfwulkrmgbrrsge6f637m1cnydjnd81o8nenu4tpt9uare5efmcm410aomshb4jxvlznpxycrtcsent1pkv63cq3jnyoss1h21shoj4qxg9',
-                flowComponent: '74dqc9r9d7oc5c3hzaekkolejpmgxm599wub89kk4jg3zamxgs6z7v6kzs515mcn4q5fztxfhc45yytqliws808lf3k84krhhunrabu0306yokofs0sfkh9w284tpd3y256x3mlu1pdj148jh6n3epwu6n6zbwq1',
-                flowInterfaceName: 'nuw8ezo5z4xwu8k8mvf9lo2qt4pxp4ihaw5z5lsqpuvw6qxk5tl3yy60hrkukwd4vxuxxoi62mmzy1dc046a87gki5efeuufat0jcpzl0ybsc9n3zuz87hpjtun35wcvplcgfdpqsy1uxw6hkj53iqfa15v75py4',
-                flowInterfaceNamespace: '43aphiw0rpmryiu3fm6fvubw5uxm0pp4t2upza6zcoaknw7rxoxihp1mo2rcbgzum00l3vh3r31s2cvjd9im6u5n215a4yfie66nuof2d520ln0y4ka3mqg9mm2twpl851jr09rx9oj297bw0tqbiqa5kmv4n5ob',
-                parameterGroup: 'duphc8hp56fk0mngbv7pm6n3cv7ztkbpneftaevbg2ak67wmt864lnee3n8a9aezp00lg30stc3lmzcghlpbaue5bobhai7vl4g27urk3zudleuprrum40u4etrukrrwgznecvge8hk3ez69fc7gxbmnq12vihcy5y1m7zw11luxr6u48dbntibxqcj90rw3hfql9tyqf29qb91y1eip2sz4uypgceijfersoy3tgv7k9rdyerwgjugbeg7ttct',
-                name: 'sfvfkda5uoic17nvqvl0xeealqo5fja0svs104gdywrindtx15osd8p3v3fdfiwlhlu1tsdwn71moqwawhpz5ntb4099s0249m4rsfjjizoca1h4p61m7f62t6vqcv6w086am6ocnfr3qzqe1wv7ear2ed7fh659u3zjxssycy7gqmgw2udkl3444qsoohv06mty18p8n73gzeubluj7xqh41vtjazfwtboqlvdtitt86hrxcty7n9f3sjd0ua6oo3bahbycd4rszythz83plkr5dddsc15isshusslhg5pmjs9kmx2vagzrtkk0lj7j',
-                parameterName: 'ni3m1mjh9jxmi33cf3pvdsze7cmq43fsazzwehigutuxtkjuprmwy7311dv6ud4otp6t6wzfdh5jyd5ilnbm0zma53isnkq1l35e7th9ycg3ll993g2p2wx5m5intjcqganybarmgqd4emnyv8a28n8rp3rjdnjefybrndv1qqfnowtj9996vutwongop1k57b1xgx8b1cg89gif1lai0da7ovazw6f2gqdm5brrqkh6dr6vaemx6fjrl42o4e7p6d5klh8acrq5mwurbzs60xau3sfr0fox2ryllvmcudebfkpug3b3gp3y8vg21oem',
-                parameterValue: 'mdfof8d0d44ydwlj5ctntq131j9auyi0g1hvx3k78war69o4hf4igf560ltjma486fel101w11ssjh55u2dw74lqxr3f07wfxt3rk95exeqc51uggkx4wll8d1hj67bph9tpaebu8xy8g9mvsg95wvfmuyt0mumjgzgtm2q5hrrs53vh69yimtl2e6albm6amxwfd1qt4ljuyb73itot91q78xb72wgq9oobhxsnhlcq29fgyzxwj3hoaxfjcikpulhx2uobhmyuljqpfnvq7jrwdtd5tr48w2y69lt7mwz98epi93xzdrep27jmspy8teg7lb5q9s6wbw6rtdddjd3id7xx875tpb4as8s88qj30qa6wc3zv64qt04m0rprcxp4yc4pubt0n9ydoytrcys39oy9qzrlx4gdnpb558hrdvupomtel6yixw57jpc2yvi37jalkdq76q2bnobsu6qiud56q87v2kjvgxy70mjjmkb21ttia1th1lve6s72glsdeff8tzy090pie2ico4dp9mzzx07m7slzwkp0cz9tzid8shveipancxoecmdcqary1xm50fdc3381a3ssk7cmidhvjzxvpdf2lk2quffo5yyaq9mz9bopkhfwiy5322bkn4oe426tzj6gi6rw2ngqgsdqdemovny46xrcklbr9d810nceuiaa4tua774romjmcdkts2q3bnsjap8ggezqfyziwbrsizpwrexu047el44za9harxstvouf9byqb4psjo3p65v4nfsluhijm40wsorojmp9je1xqnrfwfzrbfgu6umyubl2gqcuz44f3nx6xd3wswjdg26kc9u55mc9w1ghyj8srzo6hpfnh913c96dr39v7ilridgjj1ibhe9m9witp568vsq6xdi5yn3vh3moc28e3dss2n6t6mztjt012x29mfmbrgo973ypqmu9kt1kdjl1reasnzp6u8y52k8mxulz920iunda0934njx6ysjxflj9n4o6qtel',
+                channelName: '9ikihg57rqmh27p97fsouvfmgutzyv3rg9bep676qdrbum0uups3n81tfqk0bt805s1h27yhyed1ld6rsci860pkv67qczg148mde660dwtn5qa5y7xwd02oyi99tumrt85kf9ro859912nccp9s5ozmwb5mretk',
+                flowParty: 'xxf9pqpch8ijt0js7gs8409viotc7tzabzme9ls3ykfr2kkfwlpna1kso313imyou492wuvwr9henr3323rfv7obpa2by8j67mfcvrsseewt1b657s4rut24ynlr1tme5abchmg1fxjodsipjzr1xqa8ed1nq2fa',
+                flowComponent: 'faiycx9ct3o05yp8eqt466lkprbmn579u1r8v4fzpmunhoa0w8iziv1jfc4e64d41jks00jhkp1k4h09aexwo00v5y86ovyp9nx6ys6cghjmuyd80yvfxinzgvb04bceago3leqvabzbdjzmkcykdxovubpmt8zm',
+                flowInterfaceName: '4m1kmgkllnele4ehelub5acpul26yovw4gix5fhysjg0r63fn7iglps4lacr6pbsb7j22ucz8qxw5uvrdhmvjooui5n788q3mxmzwfe1o1hgy60ao0kmoalnn8wwtx8tdrk46q8i1y9w05wwut090awqjdb1zx7j',
+                flowInterfaceNamespace: 'yqdiu0h8bzqzhgmjtjcq3ccdded4cxwkm1yznf6ts3wn5a9xtks1z3dv6kxcdgkg3e3rnif85k4olj8bwmpxibjqhh2421cy458anaj7wbz6jd7ajm60mdfl0i8omi2ynzepogvh8t6y0gtnyxvwdys8mseanha1',
+                parameterGroup: '79esajnppk7q0lb0wruukkni5aml7tk5zorg2skxbvkpxh3zyj6q1ufm44ruf2c0dxnkt3hk5qvsb35dox0xy5fpp1o8mfy3x2xj2jh182x89wob3xcqtj0oll9e3dfn3u11nc5smxg84xfuqvdgb6ehe56e5ctu7mzq418iq2evn4c2zy0l86g11lj2o090x8jplqjvkb4tlgon6he0l8s5yczdqvs11m4f0dr0dxy4xrrgtjmqwhtptpaybdr',
+                name: 'rradeodm4om8nlgwtv4950isi3l6zsuki79tzorbsno0kz3x6yc1bp3l01d14ycnkyk24bmq41xn0vdi0xoafi0vmdfpjytnqnurxnj9l26s0lp1kg2chglfeq4gi6v465eyu1aqfdymiomvgh19bppwlnp9vda77zqshfqrsjkco3zi2vku72frka8xdcnec20qu2czld9dvjzvfjfbagbpgz4tvpyjh5ppldivec9941076kmrg53tdfq6hydjqccbthhdui9ff4tdikiwhv3hwvlzs622f9ps9g7ytq9rd9duyhhiiaye94ml7e9w',
+                parameterName: 'zvoeg5x5pj3svnhw9zhfp7gwt2ydp0agfzbcb0ufhlg8dw5dzgkwkxdzlwruhzuc5417wivo8y3utclt9seq9vbhtcb58zub65i0qdcy9ndfx8fktsw80k1obh8vi7qe27q06akiwm33wej08djokwg1ap64z3jqcr0i1pjfflirmn39v5lsknphthgru5yimzg83a1vg0jhu7mj2fx25usl4x41q3mf5vc0mij5sj87xrdert1f42235tud1w94f4i95tlq0nwi9vllp5hfecoa2bgepkv330djkhr8q5xlphqw64b06w0jwi4qqv2v',
+                parameterValue: 'bek2r702c9tntoghlq9tzn5420mfbwb5b40j7c4nih70njwbnk1ki4hjm11vx9s3inv7l9a3sf3pqbnyj43yc7mpclp44svbgt3txg2s4qcjhr9421nbtskflxvl0k7v4hun3v0t0jmev7g9s4w3oja1mzmsjgdezi0i5t59io9d2s2cpvwtkjqacpb9bqrjl51lfj9977y4awxwqte6p3x29n10rwkqhtc5i7133et2774eblcd2137v6coshffyd9lxo1eotfzol5kzbibdyxnrl6u13cqptgwbumtwgljjbc3cyq3ralscc8pfbph7qjcez1w85bse1yolfth8i2cynygoluion86jmzg0ua3a1r45my8yh065mjyc8300mkrblcexdbzrsufoa1ypp9zng206dbjrclwdbfpn7lthg6c6r6z59pwwo49llxwjwq8zx09ngjnwzls3k15ene1yqy37l9qizmqhaa3uj5wd0zdzz0f51cza1hv1dqwgpyt66sj14c3cmg0pq5hnk4pm7cij7pqrudbdahkvia2j58y7kmi6xaqg1tq1yc33wshr6lueswznf9s3mq4dbbpkkyc5aqhz0g4qql2b9ezi8dfh7gnuy9dhwnqjiapl06uetw7565m6whdswab2gb8s7ysd50o3ovsw6n02c3jny9pfwk1j3wekfoyj295ohz0me0k4yala19rwz3jn2g7yw2skz41bttaopcaed46mmi2iv7dhaveucfhkrim3mu54fvhum2wkfv68f7l1p58bltjrjectrlj02aq5mwphhlrjad9cchp7wvsrwmn1m5v6i70dyxo1ak1lonlof1r0mni5yv7ttz496twldiw8trw6q9ih2mspcrgzgq0r2z0qbtt3aq1d744zwjabpl89w577qlkf9kkzry5ctdafeuhmhhcuo44kpu0j24n0v13pst8nl1rmalrznpyrfpvb2300qu8d2erl9saoks2up6jagm43k0a4tzor0wc',
             })
             .expect(400)
             .then(res => {
@@ -409,28 +409,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelName property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelName property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'pu57ayjxgiel3ot0csys',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: '98i084sl0xknbparbm51yrwuufdtfei9h4nafqu35gdocps4t7mt0bhm341dtbhdn9htcubde3hy4gmk2dyk9lxmltohqu98kx9m4j5kbw0ii7dwwem95xykg1hf40fijg4apka8jv0y52zi4vluijhck8dg4uo4',
-                channelComponent: 'd3vjkc9gh0oyaolv9aqb5oqxx5f0kc3db11vacg21s15fzipl8oebkdm38xzpnb8xo8361xe69tm12c51iq2jwa2sv2pkjsbzs7t2zwhx5cogjowrh2gnkr8ntmabpn76i32fwc4m5xhrozmen4t9n0yxo9sohlj',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '3zznsbcncusvvavjvxqs',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'hquri1bqnpngbzgsrj94lkficdyxc6u31hqy87kzxnkctnpgri8jehz61wm429ucpwrfunvism29jhgqrjbwzcd3mtrna1j2yb5lmkrupc0vqk9muop39s7q258cvpo10m3fjluklhlmkjyc0kjnancnu5ggh3tb',
+                channelComponent: 'rg1fl4xtpm6qkh2upfrshjha1mnmtix80d4c63ijdpmrlqq6bgycswz8axi1skkc4lxhe9rbry68exu5ca8e6j7h560h5vopplsssjov7eqi7ma3mni0510vtkirv7g8pzyva8ymy62bqhpn1j7ki91n3ruwf8j0',
                 channelName: null,
-                flowParty: 'ivxphwz7erp4hrbflv8l44l0poz4rjme5sjkqx665a09rumlwwjlv9vuxi9uwwy56qrxkf1i935pw8vtmzx4qju164b9gq7iq6un8jd6a4xv463m8d8imskd74d3uwbopn5apdfjo5u7xxoidrlckzdw5oi9xz3d',
-                flowComponent: 'fmhytpsllbo1hwuh8p6gpjqrvspu1w2x6zmqz7d5hai30kzggnj4tt8zq1oprq5ra2r1o7ybbmhhfg1sxhc9rggbd6rap40z5bhtof7yg68w8culfvlzlyz9pb6pm7s9cxs5cjfmg0nxayyhuqzpzmwwjex7mxdj',
-                flowInterfaceName: 'rqwghhjrglc0spfdxzs0tqbxe0nq0veb5pjcxy6futw2c8j4o9mdroc8ufabxdnu6yuaj5bmy69qxc9k92nz9hnjqhqnza738lgekw33ilahcul5tkqxt48rk1hkla5y04pq9lzmyztcdtu5c9hfd2xludttn8e6',
-                flowInterfaceNamespace: 'b54il8mcv6aztoo0vhtsu0asg11plsgcp781e23sfl6zbvta6gey7jc3lxtrl2vjxa345litiaaq0d8w5rxhvdwx8ggi4bonzz0y2ye2p6n8mkxi1o4m6m6peg9nt5tyvyy60ysfym19fuvmpg9g1rq3xvj801p3',
-                parameterGroup: '4pgwgyzdrdiz3qn0lrz6o40y0zms802i0ppysqu7x6sqbo0jf05b3g7uzay3wwpr0t5g6fg1kafkfvh8llsjvhszq57qshmiem7wim7l3tl0228ekhs9pst3r0dbyozo8o3iil2hq2g1rk4zp896be5nhf1nykr56jimhe5aj3lfdbae7hplhd8rkitwxbhmakch9fto02gu800s2hrdt39y6ywr5kbt926r0ys6c59k193q1gycpyjjtoo59sc',
-                name: 'rmv5cbyar9hybjvi1bq7m1xfz95u6idp7ppzzmwkefizlf3jhycyxfdkxgmxtn29jkb4qb5ca5nhl60zcpc0gct8e85ngwvz2843255ky5ccfv2ey8lnizv2fmp7mwrkz1mg7uf51lu2l36ndenhcywp0zdx2j4038fe7ac7xd8aadmibhwnvqytbjwiwxxejvy0r7g0lsq67sccjcwbd16wtruh2esvjg8dakd7ds8y7ew2o7coqux10hbwrbwa67az2mkjjy6phvt0jz8vid6cnhzohc0dagnn6r3126brdi6al7lcyx0ulegmsweb',
-                parameterName: '5trdhcxblz575xb77q5ewtoe4hule76wq7r800hu9tzv4bu859ddui3jkzg92mh8fjpuecgtz2yn7f4fyrsh0bwscsbz5jq0dz9ksqq2sx713d7mr9cmvw1we90m9n2wa9v28pubaihbug54mw4epme58cmbol3lz90jhqjthgbfxqeukf4yggsptrxjblxbuhz9g7abfcc2sr10wb2lqrvm458vljloyl0udfujvv7za9hvt6fkk3drxc2tn6wzpkp5on1xdndy1rc8nryubao2yw5h4qbhy3p3whkzs3oubcjustqmj1a1a2h15bfy',
-                parameterValue: '0ceatridfma6feynnygqg4j4lz6ma2xbq7me25uychuo84lnhygl1rjbkuuf7kyfe8xuc935mvsqm01228xqbkj04coa8sj3rb1c7mz1gllixbdyeiszcc0qu5r9k7ctp2039atnds0ouyd57ob9dp34mhyqjlebd5zon70p1lixc9pxe4xgzvkvcyevy5b9thjldjcubvzmeuhbfo6x45gfk4lt8v9f3v5kb96g4iwuupnvkxlste89k6mo895gq84gwc4bwrssgfb8jh2vkni2v02msudqjezzxum2vry5w7x9ns4t4iuass5k0qa9e64bf78pdxu9x9r4x0twx5mf2ckqx3oj2w6to4yomk37jxwxmip188ofj9emgpb3jrj1gawkqvvq0aqo9fdyxxsrwzxcjqzpdqnfe96jxv4pf5cpw02vj89f4vpk9jys7rys7hrt2o1gx7ak3vuploxrwr6zfgfu8jkuzp5t29twyihcwm47rluoiv6wtwo42w69drjgtuocbtlpfzsg19gdfzev7eu56rut88c2o23mipzgez8cq5cthz6q0c8ij78bl11ku3pgmnvkkst8ginmdo6k948tiza3pj4oqejimcnpo1h0xf04gepm080nyv1mo9s7yt9q4ok65738dpbvc6tvbrp1m44smxg0gwje3cq89j5hi3m54br6hrtxmfm12t9q03qhkxx2axc9bwcaacufyfhoxuzvgqvzkhbhr8zotpbprvtfk7qiq3s7e1aa2ri89i9s1rblx9y0y8e137svjgx46rfckzb1o5pu47qrfbq7kj91n9bqh9oikvr0wbcr2nba9z667j43t908rkieughraf3stjpnjigsmzbiqbzm9tdnqf4orpyyn2o3n8dg9qv7gcwlmcqd3j3tnzy08pmigp2cycjrhb4o0t5jgci7f95pm91gc75ac9xv6z9s5jkij0twn4jl45gen7ctt2t9837cg0a4exxmqu22jsp6y9edh7g63j6k',
+                flowParty: '77cvjd89nbma59hzu3z1wxtnv6nh26s54ku580yapufu45zihlnn522c7uru2rbm1j1ty2un7q4pw9gm17w5b0wr7s8teaf0piij4e2lqvrsa77i2u1kkd7h2yenf5o87dysp2tt816hy3roblbpnd4ejkmbaw7r',
+                flowComponent: 'n1qx1kki3nvt27n8z5j45yl43b891r46fpg89u3jwv2igklkyv49c7f2akyl42uytkphd243i7ycsprljfnt0wgq366x3fozrm8mvhtc4msl5mn7y1eclajxfm6xt9z5ee9ldwb5kb6iyhm2mo4xjizqbd1j8roj',
+                flowInterfaceName: '1hwoq4uadyqiyqxmmco7jcyvw5yjz9mr6dna4yf7l9jl22p4u7rtldulkdzde5gvfcd2x857yxste5xxkm6cakd8ff6zt5j5jzmwwvy0wufh53pmb2xj5j5y34ck2vcfnpfvvvbp1s9ggxb72w5ir0ad22q02jy5',
+                flowInterfaceNamespace: '8ztzwtvzupvkgtmjfc40xs0tnhxtjueuoy3wbl40eejp75odb9fs0j9gx4zzmyzav5h2fat0bly37nmbf1lfzfhnmtihzxkjiauwa5m182c7xd5wdcyq49hiy9h0act7ipe21jz2jt6pd1lj364qvybb5uzbzefk',
+                parameterGroup: 'q5x2wkm9d8uq2mag2ffayp9cllv5fhojtney09zc2tgqljak9jaysys6f4d13zyl3avqqi4s3kzjaris9h44yphdy4qfj899qzwiwmoksrv943kgdd28lpfwsvdjd6juhvuo3w7xzepmwj3blcjbxoobj4sip5p1s2fkkreo8pkhelgvqwqc52phiihqjqed36t98fy98tuofnkb8zub8hqp4c0p4qcc7xjd51mn4ag5ys5awkec01x40lwu65p',
+                name: 'x4cvcv1i4wqzp3yvnlseiktujgrg3delttor9ws93nxhryiy24mltvlca49xcyd5x58fa8nkszzlhfat5g6xp77a9hk428ktqg3k7vet65uxix5l7gyt2ep966moloqogr3hzajxnbh5abvufn1g8m4vt8hn7hacilgj5ersao7otn5vo11kep6u0zfgjqq2mjta1vj79cq32nowjbe13ccsvtrrsf49esy2bbilk9e1ovntdppr0gz7z0bdhs25pdyzzato6c0gatalmgxvamqbq4jjl99r0tbn4ba96w7o7cezy8wiulnv1zxrg4hi',
+                parameterName: 'luqcf3668ww082p94cwe4kcws6ynvvym3cdh9i1hpva6vuy78n77g0c7fj34rk7845wnftps29n3beqkb6k6izlvp86hiec09qiw1a3ccsqnneuw7zqv1acjt5vqsf26qxy2psixdez3ne01dfunmig188eedqnznwt50j51gt5kcfb03abx1l3rh122x1rtfquds35g22elutwyxo0bp5vag5w6op9owwzrjpa6wvfihf7m0ijf7jw4pjiygt5dogmq2h4qpuq8yc2tquqvpviuz3j111ulfz5w2h7rnzaf83l9r8s3f12hzqpuzbip',
+                parameterValue: '5cs52sjoxga11j9m04rull1lohk6itp81b13qo8g93krg0es821684sklosmcvk98sbv801zrso1wa1v0m2k47xp3x97sfouj8wra4wxtazsu2m6qtktdgc051y8kzb7andwynfm7e6idh4le7iemvnwow5o8xl6p0xcg03nk6etrp8itieaatn6lcwlt9w3rjecssyatynl8c2yewyr0e9g045gd38467tocf9za9yqp9yapln4vbsif3njehqomkc2hkqt8d39ubqxg8qda8qwv0tp1saqur91vd7jtgsnw3lpx2yld00ccr272cxctfe98vxblgbbh87sv9qnof00ywaorev2jfzgk7die7efqzsl5bkyk95r90yl3z4j1bp80ylltzpai0a6gsaopgy990j8cuqokfgr238mfhs5dfrwtzzhkxtftsy7votrp81hapaf20xkmyp1o96cuj5q2kp7lft362k6vtxmbduduf21kkpqo8d1pso5ysh85771rjugy6cpcesvqvtarki1kwkc12s03yllxgdsrfdr6wi9bm8vquwow6u05kamd39xpe6ol3347pxahh2lzyj4h6olcosysiham33z5kkt07f0inqgmx4fahy0c87ldctwn78q416eub4jedmkmlsx10743dw2tu8insghthj5538141opqvc7lizgu0kar8ut7n2nlckjmvm2lp40blsr2pmvifia0niknlmntucd4pqhh5kycwmj7x7eoaf7f9a1vcl2xwxe9ym22iqa3agcsowhixvw33i1mueto385z3v9r0zzy6x8xz30vz8su2jbdbtia9dtu115bgu9oebxnabbdldfk3duzzvuudbgb2b5eg0uz55rdxu2sn0bjz34trihfd73e6o9hp1thnz8onuxmv8prlpdmusoeponvo3h4t6j14dcy52qe0lba84mjzid12en2rwtauid2sjbint9shvfp7f8yux0f0zr19ar8mqp76f9agj4fb4r',
             })
             .expect(400)
             .then(res => {
@@ -438,28 +438,28 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelName property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelName property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: '0pjkerm908jo336zibc2',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'uocuh98l2h685n97n83kldm094b6rn0obdx4fqf6gyr4z1gdbgxyr2r4n1mhgrmgjmya6xspkeffghooq6hbmf55g1dhaghmbmfihk9h5oz6zlhkq5k7u7c7eyglp65gddz94iq3x14zxrrmjn716q5851cs0nlo',
-                channelComponent: '6j94xz0aqqtfofdbh125i7m92n2rnixsm1wfyof8s270zc7la2or2x1cap9dwdunsompi25azmli9n7l9xk5vtcixfjfrkdo203fw00ejoolcidqhe8w3wxy9t0ufniusli1s60d8u7ei2ihmzhwvtf36up3yetb',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'qxq6s19i8rr9xf9dtonv',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'aw4n51f3o68v4lca0mnlcx9u0g6hll3u7ka01gzyas0inm1qz92f74d9np5xk9rybqtawhp1jr0l4sr5w6epx0qjh1on3ani6tg6hac2w0w9q9ol5z5sqrxmh2oljzyzzl7ga82rc6j97z2y6lgcqbrvenpf23mp',
+                channelComponent: 'oigcul571lsjkt12mzzpd8y0ceq3787l6n5kvwpf30kgsto8yewrc75g18qf56dndj8p5mqieji06v1k4b1q1jdydurhq6e8wxc69f0n2ovg1qokp2gxvzln9dqdnhmuk24blvu9qcgnmvc217gqb1qq1a8yc0cq',
                 
-                flowParty: '0piiasw0egsym71q3pwmh7x51t7i887ekfaphrv9fin18ji0todts3qa9ttkoq1uda8i4n419p9hdjg6ryrnkfm3n0u778mzpo906eco9anythiiyav11noyxvdod6832av975q5zsske90cob1mar32j9jq0q9z',
-                flowComponent: 'yi4aajm9g7uloggvq28rtdszr55gz9y5zvdx3rth8ae7vscmu2nauxxgqfuia7dajol7nkmumoc7od6wa790ycatjjq11b9x2vjwh1gio6hhcfyuvpy9a6iwuh9pj9vp0kvk2pxb0t876otn2kpxtbs9ah6d1hah',
-                flowInterfaceName: '137kymb79csbdosextx9v41ukid8h2u2h47318fcn4cvmx45vknti6ki3nkvo883c6rngnq19j46wx4ufkyh3pmkjo799ax1r6q1dqaern76mc9fskad2cgbjfp6vi364x9c03auqe3w69ttz60elgmhf4s32zb1',
-                flowInterfaceNamespace: 'q97t4otmld9swq7m91f2d6zvcapb6g6pq130j4gfu32oxuc7xycww68he87tv4pfh31pdk33xya1g924057d1qzjb6m3wmz7mr11rdcx8o8urpyzjar3s77g0exoipukiuosst3gcdv9ks5s86rw78i6jd9a5817',
-                parameterGroup: 'tmjranje0681lgikmddgogdd2jjo0a3ntin7g3rp93ls1v1fzmgge4cgipo9sd7eiqdzxlqb0gcippenjk593xxqxn0dkfrg9vt2sw2kn3crux3wu0b80rmu060z1d0wz6cu5n6pfumy3wlyed2zqpy2aiv8e3c6bk7pyaojwegkwg5d207mtkjoid0ws19sd2acbigwwei82kifuu0lp1qbfq21sz1799cc16lrtzkutkagktwo4dw0fq22tnx',
-                name: 'gjwdk8a5fov6rq8zu85c4vpjj08foyhv522f2o4dd6p5ks8hyvak8j1pgsawy3wynnkhjcquw152g38yarth2yh4rklcitnztlokhv9ik7fzphpuf33ci4r3ig1vq6pdvylsg8q7q10kb1igaslsavn58qcjv3zw1mp2vqk0yfgsf01mjb7p30w9xv328zh4l872ayfgtrs93wwqrzmbux88w1z187uhsmf34bu75iy43gogyyt6vniugt722rmwkosuu3l01pfxv7i8acye15mr28ba5cr6v4q55d54a865i1ishrub8avxiwhwhpto',
-                parameterName: 'fxau1d6usps3yn314lny40eqtsc6iy5lq9xgeimlfam0goqdwh5xwwrpeqqhncmam484r59dbj9xudnlns9owvbezrag8j380szro69raszaw2z9zwruh95ik5ocbonna8olue1bmejywczpfsppludxjgzdmqbyvhzy9ss9o3d5d0mmfyxd0k7fu1cbowp094d6eynh9zi1cl9nst4j264qqf9hmrm9v9n9meuiv0ek3dzfgelqmxeu7jk22q0cw201emsv5q57tap621t08czvvzt476impj1gq23uks0lz2ycyv06j5yeijqitsw3',
-                parameterValue: 'vdv4jbhuk9susnadhg1s8dxv9xl0rk5dfiwhh5ugndfuxejzg35wqc9o7tqwmacv2o5bh2jy5ycjqsqtnx77wt6alns8nzuox3tnwht6xiuun0433uu13sjvraeb016trgvi2567ijvoh4h701vkr1pcjnv1kewxin44kib2o6rwmqdu9nn1uechp51g6rnotfmw94w73463havkg5blnyjsv2hpcv014trx0qt3lizzg4hxdh1cm15bjq9jdjkr80grb97oiutiaodmw3b9d5blwpjr8j42b2ocmknicwq6c7xodxzlozv8q4dtqniak8hlh2n81jsxbv1mzjydaygrzfo84gcakpjwvgc7juusyqinbwakbtleqs8krp6qm07jcv1qto2z6r02vrnf2zv9yt7zroch4oixte3zrmvgzkj6d30wke3iw9krzkwp3zgplalr91gea386jrrv3rejzxyuux9tygihclqquupi6nw7dnlf1oy5ixqm99j5kxl5cx1a52hlyivlthugyeqfpfjwb0nzcgmuoima4c6krjdmbdj2mvst5bebds3vbv42jr6l1p4eo03k275bvq9ffdqra3kveaxscrjsceu3fn669rd3iyjwdk0b0mg8tg0qjlipitwp6la79oof5xtmsso19sb8hd3rlas8pexeu1eb8w3nqsd8bglizcz4htxjyujed6ldop166vqmtwn0s4tejtuumtdxes6u899vgcjhxnpw6rh4kx4gp361ewsfj6h0zpi7vgn2ueqbb1v50f1woglv66vhl46g07xapn74k19bzn9kssfhmsr4osqs5tyy6gn4et56vxtfxmold1w66p6n2qy3unjcoom020p5xe0yp1zohnzt7r3rn6ngpvfghamb6k497e0f68o84nn3u4tpu5w8j4zielxgjsyk9lbby8to0mmef8utn23y8ndpaa0wdj1p6rmp0h4ig575bposl5zpzo97mc5i42ow5v5po4hevwi7120p',
+                flowParty: 'i44xrj0w05w85gikp4iw9ro5oqjltj7nxu8rvgra1gji9mwzoegfvtckio2bhvks1srip5pq9tj7ptukdq95t07womrzn202gfdkdtimzy23c05as4mz7c2upqsj0ht4movphsrzyiou5hlzjf2lg0ztz4tcqd9s',
+                flowComponent: 'rl5apjr4yv3xlbkd6mzt6p267abjtn8d9h5uswgvypbetcl86dw8qcuahpesiz6otxp95nj613cfvwp2jkx3bn6ab5l3dn7gl468f1c84q63sblszv6vrizivvvazxmn90q14ti465e8fvw4f7pt9ipfdi1if3b2',
+                flowInterfaceName: '27wc479giyqd7mo9eyh8psvs5tadrt1egzze81n0nh8v8kwfd03v9xam0sso4lcmve0xuodejat98exr4is1pdoj6tvpkybmu4b40xoyswnn63kp98slkb4bxbinlagd3zsvqbwovftxim4xg7pcdwnfc5y9gw4d',
+                flowInterfaceNamespace: 'x8xk6h07ym2f52eua5k9uyvxuhofvrvm744ls19ulsuuwvk2wtpjcparfuqw543zkr0n6obqqdq72oexaayx8k37r2uea4pu84zzov4muzqqfv9x6eaaogtlrd7dgsf0qjrygo3mw4zi12igmt0eya8eincbhggx',
+                parameterGroup: 'gx4mmon946kj12uyvdx66ysrb73q70cqv8411qkb413bpnw5kifadx5zkpppkaq3fnw0iej0uko6s7x8bdagbdwcexph0xbcyq5lp79nd8gpz34r12nu2bo7bl1ajeb7haaqgzqwcxsw48zghuxry7rqphtrno3nkxq4zpis8eipoxhpueozi1jovykmh1dza6nygweyd5rcvng02a4ii1kz3f6ss7x0ni7tismz5rgchtyb1a08if4yl0cj6so',
+                name: 'd8ios6ixm6lq77613v99l3vkt85zytw8md2oirk6cy7f04l3wqgbhva5nocoo5rvr9vpsx7g0vtm1mt2dg6oo2bfn0v0j36tdct2wt2p87yus1n826kze72jmlpmvnejno71vnzno9t5u5intqzmxpibl42fqhzfr2e07u3odcvwttoqmmyx9h2wowgh1i63ggy6o20j2e8it5qfij51zti69wje4nztxylolqsistvzjqhdadngvlgqdknns1ncru7mdoki5nhlk1myns3aanzpmgaqawfb6ylm9wszmcd1hkeflaazibxna01jnr33',
+                parameterName: '6xd6wh0z66qaoc5sx5g91rqv7zyblhq9w4sqaz3lxlt7j819xo2nvyezgcfbhx7kgp152q21mtqx4fn3giw8kc7jnw8tx1f1rcc5spig80mbw2bitt4cky75c2ft8w2jikzz41llyak9z5y0gewr9mn191i7faspngxujek1lw9i8atszdam3swto3rr5n3xo9t13fks0i1p0lbzw3bklmt955dsp6p3582nfsxiwlassxvdwlb8aa6tzjnk78bcyg7w7oknsl2xqzenkwea1islmpkbrgogsowe6d8vv8kd66mir3dm6o7urnqsz852',
+                parameterValue: '5dfkpyxhxftn6pm3qyy1xfzjgvot9evliyygote56jsbb38sm2s3gmhx1q6t8fvmx05pu8dfx946goubk3dd6vrt06wy8xgsjku1d1x0edn4jwlwif1eznyqp5letvg8x3ha28c89w6qfxsr7z4jnknxte3tffm62m6im63pyib1kbixii4fpbcl95lkuy16lhybk19ivk9sx7qzqlrhz1lrxienexog89ztl342rdfvz4uw01pvzckn0w7e6nl48oyltc4gvzdflcxhr6gtu1p73adx50o9o5252lazchtkx4kv54jb0cknlgqj2udv8uddu0lrhgs6vku01xtnw3sy2778syoawvfcffv8ssivu05xmugfp4lmrmt15vif3svz6pilr5rwyv7ss2gjeqbeh1wzx6yd1mmcinxkp5p8dnd7wfl49ad3wr70ei0v772y73j1vr4629hc4rbxytmmd5g9itqz13ett9xqsllp8okix5t0tc8smeyrb5bov73bzz0l342jkmdpv8q1thd12ker5yw1jgbqrj7u7s560hskwu1tvct668dxsq01gswe7c1bvto591wnwu4gs32xh04babp001zzwbehdwyu9zipncgg5iqbcq0i5koik9o8h2fctvgp1h2lz1haw2c64j8qssh07f3xpw3nxkdrifyr077htpp1eicqw0onywamnra27i07op5unrcm56svbtrdrfo7gpn07jjpsi3ildfa36ukna4vtcqo0iizgzji2jwmsxoh22dzv70ndv1v2g1msvxshx0faigw843jwj09k5wjjoxyuk7o610j973saqs6qyf3q0kmhfco66f38o7wmpr1v93y6wfhcp5uyano3i0e4tqoaa7y2lk6z2j92o0ichh4pf1rj5it1nir2cdb9a91w28c8yjg5boxdmgpyk8n3v0qr5pjumaem7gey59sr1gjhzephm7ab3ke42tk35id53cxl19x7qw3qi111yuoicqw2wodshr2',
             })
             .expect(400)
             .then(res => {
@@ -467,28 +467,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowComponent property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowComponent property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'dl2bkh7ppib1qme199lm',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'q5x4jijhtpu1exlcrs7ccwwrfy2t0grhbkvxxymq4qpmcofayoqi3w31gx3z5icbslpk1fo8ueh2h6qaosg4jon66rxwi53j85009xt5r3x0smae1klkf514ya2rem8f6hcrwmijkf7625mrqx300pcq8r1kqm1b',
-                channelComponent: 'equ5c030664dz2a3k4bn5v6y8bzpbx4eoymm6v7hptik8djxn99u7exltgm32hmy1to7089yyzs1g6zhykuilyz5yvnsxqsctxjxxoci748r1kb15vntnf82wqdtm2xwugnwfdowc9544yy4i1nst0i25172my0a',
-                channelName: 'ksfqf31uxkdg69cmx39b4pm4g5r0hk8j8h8q7z4x3vp0zxlj592nf2vpolpk6vtnv9ltgqu62kshzpmwbrm4vx0mk4wcctd1dbn1r9ndo6fktnjryqgjtwi2iqrhdm9m6zpp0ig8idurtk21nt70t2ta919yzqld',
-                flowParty: '7cs9vt5mtzsg1auiguhr5jhtv5p3l12y5awnxtuqozud9zq62hp6oq2yqobdnabv8yj2j4kfxiii4yt6nq8yc0vlh16pc94nrcn0p1qtb06frma7f4h567i6rhth66vh6mqa9u56pe6ru7ltf3dzotxq0of0lb20',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'zn5fkzsvq5znh7dr6m94',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'ker1o78h3bqc2hg6f52pb7bxgi996upzdpuy78bvwa4z0r7i40jsmpl1r8zapmps8xysz03tffbdarky1e60udh71akuc8nvluosgz8u9fvmqczaxds3ish12bzr1633azaeu197tu49yfkc52w7h5vdxpbvvfli',
+                channelComponent: 'cz6dyu7kwema2rgu0f02jpzz6wrvp471zmzpkntle6vvv8eq393hoo9rj9t2gqd7090yl75q6uh5d58h1evxw9vz3zz3bejphe4idvfo6yurbkjajzjcrn78vhg8k4ycukk8ynmrpou5ol4oirfocf1ap8u785rj',
+                channelName: 'rgpov368p6n3nk1b21e2wiq4s2x696i0zs1nqzbc5dqkok4ipdz6krm91bq16dv6rpyx81ltsx2a0qvt4wh278x5ch5gyxinalr5g98owoy6ty0mrs91o4nrsjbdnqoi3tad3jupj1a7ldpb7slw0ooja738o6ef',
+                flowParty: 'xtxk24l9xgygv8nxu18tqm3xxcclv9ib21ce4zawalpe5l5w7ak2lmmpmy96hsp94niz5d8aoptuaz2cvso8zsb1k0ic9pus9d5eofjynijg4fc4qddluev4meguh6y5c6kf0yt44wdolu6ig2bxf7xut9pf2wh2',
                 flowComponent: null,
-                flowInterfaceName: 'l38h73niuh452ikbwuyax47pbn64ohbpac6ej1pj0e8pl3u2vwibj07l1k2s6z8v6wvu0gsi43z6ce2enadh5lwlgckbbmvoslqser6zvqpn6m34h8icckjdw1evojm5jdwuz3j541ltm5n544xh4gszb4y8g185',
-                flowInterfaceNamespace: 'n0th2tm18xsbvzrpba3gv1uvwhufd1thnvp8buyh7jaqi39ouha6c9014t34c5lp86yga5nyktylp3w2hyizaldcy3rpdj2erpbkzptbaqgkmlyj2n6rbpc55i5gbxg7gapmu59o5x2ocueleyuuvny14zzkr2ds',
-                parameterGroup: 'qiy0mhw3o25mssfgb9knksp0o6rkjbdx56x1fxr6usjk78pl0qd8lzoovj4p8re66x35ikxpj5fo50f3qs3edu8l3r5dkc5jq2uh90lghsssxqz9nolfjogpzw50dnnmnngmqa078uoxunctisi966evsifydikheku6tyx0aimohnt4ijqzxwa5nxulb22fiads5439cnf7uekouuzjgkdkc5eka45sichppomzo4dmwdlwkv86p9nvhovbsm5',
-                name: 't7dpj7a5kwara2esuqoyq41ymw8tkkn4iqyhg3egx1y2a7bhx8cd2p2d6v4vm1a5qp6gmdnfqj5vkm1wrz7oshkax4rhyzn0ht1i9aetlh6xgii3tc5g7yx3g5em1dc3j2weqr45tybow91mfzkml7m9lkhhjprmjqdu0mie786mkqe30z1w0hfjnpcxvo115db3n3l99c5n029wyj6ulcv04cnxcdauyaa6qzihz23n8tz5s8n42e0mlnuifjjz3aar2plyealbxjb1rpb4nxlr9d8wy5kqti9i3956qf5sxzotcbc7pfq7jw2y7a5y',
-                parameterName: 'p361mn7x7thh1ks8zwdy9h80hd34blovnqxfjrjla7zijqbeqys2tbi5n1yk75c4rnkf1xprrwxu3223vr0yelavtom7d19f0pq8hd2guayzlygp66ne1h83ktp6v5bm2uk7zu9kevmrrszqfcr7ha5rjnf590hcv1r08ah75c0bmmsi4o3unfegft3q634596fhmodxvc8tgodpr03lwxc8agsmcsodfe55q1xaq2e4cfzyx9mk7ls4ysowpvu3xjecmf3hs4tk15cwqfn4drh5u70j5kwapqce61rkf66fmdqpbda8eefxhyxw553q',
-                parameterValue: 's194bqhlt65febz21j0b9jvjl8abfrp5eniklvoan3svdbsgi5dhd6mjpd9o0yd999hozsac98illmno3m3jybzuu88l7qhcid1wk0crjelpgkaqk7urhznfzpw6bfh06tnrhgmj8veb4jxxdmjsgx7brydtwrjex2u4qokhsc69xuajffcxy75fu2s6lilwfpf8v5y6x83w1x5imptrjmcauac7abpxe7nzpira3vz2mvgxpjsz0y7i6xeo8gt2cu3gla65q81qni8yxnor9r4gmnp3yfk1znov4gun6mayi8eqjvhygsoi0nvk8kmuifeddzd5thyyn52udot9zv1jk7qp1kui2ophmvesb1l7wlhldz6586rrsfurxf7sq69iwbgjylxc45l4p9zzefe0yh6vj5iea5vf9o36fk0667eo86lv6iyzv05800bl07j3urfk32o70d88q207zk8fmwmturtvgg4rovq59dppelkwhdr5awkaz79ubdrtkp2js1pgamy8uorcfwzrtwxk6cqeha5ray5086sx4n9jfmwkgh3rpahd0vjym63a1lbn2e4g5hmntu1yhc6h8v7alkte3efa41z1nhlf76pitvs4j4kw18lckgzaec9pkiy7ljr1rw4ca8otgu4ib01dm88c5sr9cj26uknv088cesvctda4me6237bq8g05xzxfxjd84scw3fnwab8648ceeknwbcceif3am1ts23mjixlfjup98i661h162j5t8fc9qwpxne9pd37o2u9nvvmkekk9q5a4cylf82o2wwwsenknyuuup5psli30exerst54av6zldffs86w7wzwmij8q3ndvs5nt6f1x0lr0wxslbqf364vw1l836iy6vwunfpkfhk11o2gp8y28mnga0aj6tf0czxi8ehloyaukhw2kmwrs52gbgm9sf3ebntbhhsz3terxe2pdavl6a2vmx6a4ajohaaqh1ntrc4bwjf5udxa8cp3hjliqei98y19',
+                flowInterfaceName: 'hw9pg53c81sjkc2aabw8adb6qw089kh4becwgz2csmv9isdobha5v0cpmmhy1ptjfvigifrfb1rk39lvvnhuv8ybnayc3awx0idoojk4ren5xvx4iem58m130fiw6scaa5g6cfe15bne9i0bbkiz3v96woktkrr3',
+                flowInterfaceNamespace: 'aoea68ja7k8z946rkrjf91kth2icnnf7aq8xu1rnymkarg48fqolq00vblo7v9w5h1ps024p83ik43nwfrh20alenkjpvvz2yqywgj1o5ru6eelun9408n2i77ub5emre0np1297n92e72titmwk0h67zbot7sr5',
+                parameterGroup: 'foezgm61dvpxy3ysn4sdayfl0xxppbyutdg2zhpme2hb5ekxn29lspwce897w3q2dheczt9am1u095etrboa80ruvbcza1r2w6xzt1m9mobf83comtow6z837k9wacic4b6fvddj9qabmh2g7re1npz8359eio5utjt1xxmhgyrnykhsqat96ntraq83v1hg2h88rjrael4st73zkdvu5j3fg0j947oqg3gcy4sl9ohbihj1r3jejg8vt4qz2ev',
+                name: 'h49m6lcoi0li3bgmpmmkyuqq72v5hzhuagdongkr6t619pux1y6tm63tv7uinbg5c9wmdd002z5ivu930w999uk6lkr8uqt1x8lywjbuufcfxd0pb7uxw5m0u5gehshf2ogw8omnwgvnxgx4b4bdz0qvrgy14x2pxmgefbt4adr5edxhrrrkme8rsbop5arququxh06pr2uu1r5fj43cfno6pmddh78nrtwacnmz1u129man1bikfikhu0b47rckqs585txy6qgce3unnp9kw2ydv8ed8r1u9rmw66a7nx9osadizdgzpq68fx6sz9t9',
+                parameterName: '9uhjvf1qzoszvcbs2htifxucb63yzygvc3r0q41v2x2b87cb9np8b5xxlu3fd2ogynnw4thwrz87xd8h4g1toqsdntewbh4jj4rk5w879n0idw19k270zlq5epwszbcqxq8seqek5a7u9e5i96zwghzeumdc0ssbmun73pwp1eftxzbkpwhlne36ukdau0innoizo45myju1oh7qr9eij3vbjb710bjek11o1r4h389e41tmagqmkhw7wroytdni52ad25cvnrzv4fxgzbpfyp4kp8r60ba01go9kq1cayzcd0ug10n5bempf3ms5vej',
+                parameterValue: '4qtu3uhqcjs1dqeqivkt9q2oy6vloys3wp2i1h3tuh1gzgb53x86xls03n6i05n3a4sx7qckea5g2orcjinnyn9m6mektsoo0kwrs73bql28w7g8jvalj0t1whoqte8voo1u3qzhzj1x2fqx1igpejxaf3202bb5xpthpyurq5ih21zsau5w1h243l9qx5wg3ectt1h0k0hhg24f0ats447b5ksod5za00wefqvotquiyhs5flxvgok9h1c6glv7li65ntiz3f8v6ompp4p78nzyixuvt0fsure4ikysg1frfuhkpjazvl5u2siygbkae8yx07dipaaf75oo31fdzc17habdbhsfiejitvyd8zwy8hwdls5u0gx3kwm1ejyqdubyqmq3p0rqq6439yfimhqd3plv18januwsx3hosabhmo5e8sexmwb7pamjmak9s21m4cnnyeob8af1yszefn7ugaaqs01lzjo60ukt08zzaf9g2jaq4atqe1rnuyk99nor7rjvfa7oob6lfyafuvysq0tj5uyh4t6bbguge0cczi348vmgtau448vqz2ljngdf4areuz075gmji0b3b3pwmd9p4r4zb92abf24q41je5h0zxpq00psh6u5y36x5leult5tphcjgaby1o433zv2f2c56rkw9zrf2ihkvvgmwgcls2kii8wzmzmld25wesdu7bl2z1op15hmd97bs16l31sv44e710j02yc29kty310mipt1pr87ccztn0szm7ll6zu66qh64uyq29gg4s1ulfyol730oy7igk1dek63dcxk65ourbdbvkq10wss2jpsoik9igtzh5ek3yoifg4pirr8b9zslou94btmkmyksbrn6iwq7lpas7136ikxg64j83dxqk03nra3bu4wowwguqmhxm3cddivy5lzlx64m33tv7zkg3ztbims1pewymy8azekze1dm9t4hmj2d7pqamdq7fora3yipduelan2ixsia726t0qnkb6plqo3',
             })
             .expect(400)
             .then(res => {
@@ -496,28 +496,28 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowComponent property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowComponent property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: '6tg65ijw7zu0ch4jiu7d',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'g19h5dg0rf9adi6bgffkogmkybrkmdgr9rn1tz6f4vs3sm6bt5qw051j6tfh6i1fwpvmwmnxbzp06if67yglqquaepf49xzetvhc8roguweli2ig726biykm6vrcmse3wxp2jhrynvi37ivk52ohu4tnztj8zij5',
-                channelComponent: '2qyryupsc1p5c7of1jugev37wd9uhrb5mfx4s0iw6l3j8elu52hq72gtc7d3u22c6bce3jxufw6a2t7g8oonaqquw6tr37uu8hushjt2dkz11s81cx4ps9wkgadgiqyjq34qtjymhbicbdtf9qempyx1zvzmj5gm',
-                channelName: 'd6pgrb51nzuels3sxf05y1ffwirc4rabjdc2fk1inhiohtsvrh8co68r90tp0wzuvqio9bk9q1gg1o9065ye0hubynxgn49uxmb7g10srm8r1bq20pepza215u9cmwofye0cjfaf93x9z3jocs1d3crdtsmp8j8u',
-                flowParty: 'nere4d7k4m3fabaj9pxue5k0m9l6mhzk69bks3al9btvnc5ri7pljfcd0hrmj6y7vcrv07j92c4f0ke62mugkyqwz7t9neqn6pxbj5m0mrobc502se2fgqegs7585413p7ahvgak6c3a0nhsjm1xb2axdayvkxo5',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '3zlopeyxhq2fy14tglxb',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'qr4yhrt34iel6xone0hzpbc7ariiq85eawygo2g23lymgmm7zibh1bbtd13yatxlp794nej19dbul0ar2ah4gvk1wtfjq3kownm8ld0vb20mmislxldfsno2bfv24jebnh9z3nnqxgp4nmcpbz28uhhqaog5ju8q',
+                channelComponent: 'r6wav5m350z3760kcgxohptuf9dg92vtske5n883vxww1kf49jh4bmlhxw9k1zgd40vw20gh908vb9ehwgps8bto8kx8eea932gean3egkac4lxqha8juhl68mkf0gebqc6zbyzve8ay33lous6dqr7tenk56zje',
+                channelName: 'jm58lh7r0ecxgvex4mmw5bj0w8wv813uvnzgc2i0fenr9os7z5ishud3r9k511sbesok123loxcf7vbcdhw9qu4yn06v9fpmpl04yr24f9ne0r0sxnk24muzl3j0y1n690w754kcszr2eojv1bvw4ssrlxsqcwbt',
+                flowParty: 'vgapu7siukjm23krb10fhyyugibdr4pcrsnqokxqjhexrt2kiudypjjecu1uffkmpdbqod9qwa1h0byefx8rcaef16fzqlux6w154e9rgkpf39weyq0l8axowav546u4qh2yprjyjvk00fq7qwdejofpwb3h4vzg',
                 
-                flowInterfaceName: 'nrav39j90senc5w2bw6e3dxij2yob1lxxd129k74j9i1hk4iagfruklcuu47pdt06feydj0twtbtifrju8jsxv89u9ih6v78e8hcxr6ix0ekj5v71w0c2sy4nce7ds7n18synmp9herhwocctu330zvvxfm53ynu',
-                flowInterfaceNamespace: 'pqfhj4xqwgiuv0s54843y0b5c8zpk0gct3fnrhqfzvc209tlsl0bmca94sk398v7znak4i34o44dwzbeir3uzgtit1tiqcymhx2jhbvyq3p0lubcz35q5h25bgqi11hw2q5rizf6d2a00jeqxedgsp501o3y29jh',
-                parameterGroup: 'lxjs1k2dduqfk24f3ksg5ony3hfmwj3dcbvhyqyznipo84srr7b5wpwfqp9hdtg7v3qrg1tsnv6dmch69xdmldudswsm1jrgom88mk4nik1w063pjivqsfvz9fstrzcxr7kjfcjs9figtscmdgf0kj7ys4wgxhnauzogukjv3y1p1kl2iagit6fflfouxbekrib2q775fidphmvfl6wct2w3ozkg3fc5d5sj7d45artic3okmwcdichp8u2favl',
-                name: 't92r6apdbbmy4ujbwoji39wtm57o57744kalyt4nceysjlz9e58jpiv57kgesmqwv7o0wuvaheidsg6o5j81c2hxuz9msm8i9b0icykdsh95ygvoydj19u8z5b8mzeo8csmdwbxt6578qofv9nxrcxp6z3rwv57rykj9iwa2a4jc2hkg5gn8mbc2qfkoraieo5gn6x11h2i8k8zmy4g52ubdqkf16a4zgvdjupguewk6227tgw89sqrtl8fmp618sf2dqmykvuelzitekgye565klkgsp4teteo453o9ohw20ei6xg873jcnxlcna08p',
-                parameterName: 'sb59b654b0mzobwnpnli6tg732dz1iqphj5ydg9lwtofa07twpa1ybejaoyt01pf8sl6hij9uq7enktbv2mimdmu00evim6f9ufj0ra3n2dw74cin35kjwq0me7av1vzphx4dk5opesbqhz1ff596fr4aimux2ige7frfttvgdsqr2qjq4pvbyvf77042bm50urt4g3qjexev40b27trjm1egpbh1oxa4fca2w0qqw22bh4g0j7u58ukw38xqzb8jsrrhdwysf75d6k0ewfq1fmkhhmw0l2l5sxjuntdhxfebhrw2vdllcea2iz1h1xi',
-                parameterValue: 'tg91eet7hg4smf5jpjcia0bvm8hvkzcfekqle7moq72iv4qrda5ltji5aqily4cwjxnrufg2luflov02zb178fnztybdjck6npflq490fooph904b44unzgg8v51y9lp41dt9hjlzgamlfgsoqcbon8bt1s7vablve3ww7v3paoztkf2ua313shyszstjaxuqjh2kwbuz9s0ijac8pacs9mu31iangxn1oqnrrxwpup7a4rgx6u8szfznafbi66xo9ecm8xjlpu80i5ndq1lnc5mfrnfh8is5qwe4fq1pivi2oad1rzv683ra5xohogueaubvn790gev9eupivv4qmib1awy86jdbx41rnciiqnmcqie9v8i7j0uorqlb5ontapvmnlrgko6fmskx2jalb60pu0d1gchwynn30nvjupo475vaphmxf7hhdzw26cw8ctbdh1oif8ee3v7bn2f86be9yzic5yf2ewzzzldvdvvwm8ai509hhx8yn6tfbdijpp5sm2vzbo5qmed4x5zq6kd6u3p9k9sfn6ytec7hbzm3720dw83oqwjikt162vly7c4l8n2o5g8bkn6oe143w6btyfot7lbw9vm4ezv9egnt6tz27kdr4n65or2zsorj532q8zjkjaesikbjxbzkd87ndtpsew3hsg74y5r5d6nne3pp8et1vhfg6pf6yvjpr2ackclvof9m00g8ziwqe4qyde5vlm79kcz1hd46dmerggc5f99eo107vmkkdfs4gc0oi5t2oba1d9a3gn18jckrr4gfs8v6sijbhfi4c7pohadauq975jrv76z8zx9jt8re1osagozd5cbdm3tgzi5atq86zd2errgl0uiwff555u2vdi4eptry846try93g7ob6lkq9mzv9tsguacsxrs5rkf8gyoosp3ogh25huica9mlasebkyhlyzibytrekragbo83kxa7968ds2gywjkvvfqdx02ddd1laj35w3evjnppvq3mg6afkzq99nw',
+                flowInterfaceName: 'cjw2rwl5lzt70z4whilcuj9q38rx2d1aops97ngphwnoli4hykafzqc9a6uihs0tqnnu6om1sgpgenadteekzi9nr09zfuu4xb2ty7xh5mjsq6prh3wxs3tj3priqxkd7cd1bmynzxq5tqg16rprm5ct20u1i5gm',
+                flowInterfaceNamespace: 'qlmv4dbv09abql2rzdzla7m8zt6p77d36onk9pzqow6h685cqozeyua4v4wcgkdssjhelzi131p646zfgr2f5r6cnb1qlfv5u9w32p8pn18jiqy6e6cpyat9zktmldc92qgr6lr8s0x0gu0t6pstnrlci7shk8ym',
+                parameterGroup: 'bkvyhv1kpd84zu1ilbra2l5d7ja4yru7o3n37efj8hiuqfprq7w7uo4fthwphsuedv65avt4pylyldwne0smtt26kxwuqnhwxoqnnaw6v2ff5kxxwp1p4dav04o0w09jiyyg040vd55tboouchw1xsjsfpvwjk1i9a3f9zz8isnnih5pguf8nrys5lv1l47aesz8g2fcrf9gxc4lkxedm34g5gl0r72a9zazkeyf9vgkaydl0a3o9k8foc0lf6n',
+                name: 'h2mgbebhjpvasfnsjhts36rd8kemsjx16j0wpa67ogl6qs4jqbnchvpww6v43gejg0ioff08eznagbp0las05bdls04k8zy0p1alt6n4zo5ptsikdeu03zufmk8nnjs1hpzzrsamv31mk3pt7v3yh45yvj8i1x6nuc52pxkfd8sabnttcsvwnr16azh0b06t96eu4imcp8s024wdtuegsg3pzu8tvn44ntdqwch9mpmesqof4n914dja83ukeofm484dnte5j0e6yio64zi5fbu55goqe3hlswt4950nti2clha3qsd7mtrxyq96o7vg',
+                parameterName: 'ezyvs09ph4w7cd58aovcitpzp12sn5kratyd281ksje7h2x5xbe503gjfoyzr4lxeztasfgbxcdyaq0ixaw76lw0k7ruliq742hygybz9gk21jmc5ke9s8uf4gl1vxnxp6k8i2mfjb6buthqpsegzqirrewxjnhnrzn7l3t1f2n9yc5de2qbdrvj7e08c0p4i1za5xlg2sba178c4rvluqgi61z7atq8df4tjhvibsmie44sn6ktzdamos8996k0kmzuc0r9cjb3h589gbm3j9u86vhyrsnicndi54men9u324uellielrq628zn1kmh',
+                parameterValue: 't08hkc4v4w1ezod5odv0kjd171b8c3nol2n4m6dmyatn1uay8s216vbdfcnlp1jkbmywywz0assrbk68h7sty0gzz9cqivhm3upajehceuuzsa55glotpn56cf3dl75ftl8dcvf72k9skou52u165qccwhgk7y73ev8za2htkkwqwe4bxythytoawb3d7b2rse6cqbyljvmei0t843a9io54hloim618gkjmoe8ibwxd0h034rvq7tpizh48qfq4br7ymkof9a6n0thfulpvi03mnlamz75rh2zeauo7m8b7ujwoiixix22u6parbr6bpxpsf5radpd8uxwuiq33e06zjmgpau0ejne8mady3teo4gzei92qdqbeb20eusi04ay9oapmtb63e6byq4ptdlxknvuc9veygcx3bylkwb3k89d6a18w0fywy0mg40j4rnlvdb5es94q2fb68its29s6jxk9xzxixydfp5cz78yk95m7z7ljey3zfwi8dcu1dacmjgexuklp4dewhudt62xdh5o4nefx0dlgzcpxtohxi1fah519dk3vqu8308io6zcamiolicydd45jn3pfdotcybpwvob0onyds5ya5ty9z8yiinz3qt8hu59mxglmvovgz1et4ck7fow0kbf1e68m3w0xeoulzmcxg07knu1nxidedqm8y4tl93iwv7w6sj6gdtp2st7g7jv3goou27ywp1tqtdvdp0uskqs4tb8tlm8h3ylt8f43az092bayohq4mpqgtjrhgsb98tzc2tjb31kas27yiy7hr379y5yhr25c41y59hozpy2xnk1wejm59f4kx5prwrvcaygx4k8qw6u6vbdf3ao1ew2r8ccul22tmqsln7w2hazmy00ex52y5aqho4u9hew57ocuivcklzjmzgklg3ab4bwwkz9gq45r23x9eqo8fp816hdg0ffixj88k3mqqf8mq5abbop8ankmzhrhz3jbod1q62ct5tttao4wzftgtkh7kwbl',
             })
             .expect(400)
             .then(res => {
@@ -525,28 +525,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceName property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceName property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'ytqa276jp0kztbi4muzv',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'lldyovfhlqkyqcftrgz46vfypxjdwhu2x8mk6tsw231t6fvsl7ofib1wesein9yitckq54j8ygayr2yq8ef9de2qh3dzuy2a1avnqex9b0o2z1971mgntuq20gw63fx9b53bkj1qnsps7k5wmlm7j3nlwb5jgwr9',
-                channelComponent: 'j0r66szdmy19p0b02b2lbpatkem54towcix6jg720mhyzllzlztjkvdoczxr5fyuwbhb0qqlc5iwz3jmzkx7f19yjq1v5xgp5vwy43nxt02ohp0hwktfpfhkvt65o6n9gaffeldopezt5j5dreptcpm1a2a2b8ki',
-                channelName: '2pcl2ymsxxjeszaxzf64ahg6qz3xcy0sfhx0zbjbzigwkw66hprz2adr8dtqxc41suxoz2png0ynrm60aa6dxylmc8mcnpp32hz9aq5arrjv3p0kija7wra6zluql1l3fk33xfqna2hloa1yx1sd3rdkc14l35a1',
-                flowParty: '3opdxpt0uepjxf45fvz08gkiv664hpbdw8xv3de8b0lzyxpmehhbzaci3prllcksjfp94yxe9um95jxg3tqfej2ukzrfh2afbnrvw5kahiggsc4htnmfv2hn2j0b3kqnxpb24u7bv34bocbd94z9hbi66nk7whlv',
-                flowComponent: 'u1khljj4zvtq1xpozm78gey97ms4vs8shfuh18hfhpvdrbrr5q9xu6etm5usrzj1znls64nfixwv2vzpgwxj7sfwrswmhdc7z3y4lz6ahlmoxusauw7jni6vt34tuz09thvu6utvmgqltasoq798881btdnq99uf',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'g576718q30rx5lbymske',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: '294ph1hv4k6s8z8wudgc5z0zmhf1wj337qzic0t9y5nk7pty7usnsi6xb02qtzbiqumt56j33wr8yvd8u35n0s04wdyxjep5gcb6ph64e2e55eel4u28gjecwy0ej99z1eopj3tg1hubotb234x1bgscr0m1aoxk',
+                channelComponent: 'fhojp7cfmlbr8wsa9kkz12nrs23nokr6y0drlr9in19hgyerzpfs73xmce6fzbwwiwoql6lycl3mpjf2gzpskqr8omqrdrq6hxca0v6jqbod5zjbkszop0tf8m33d3rjg9rc7nhfktdmcjyo6oguxfgv55syqthm',
+                channelName: 's4q940mp9ysjn9vrea2ayo8t5uwv1iy0hpi65tm9hs67wjlptupq3xy6ch0h0xsr60975i78d86edxyalcypnm1ojo1hynlluc7vsxs4gn6hitvprrgpo24636dim5c2b80jqthgp7qkde72i0em8zcdx0cgsggd',
+                flowParty: 'j4jh053wtdz7qqb03yvsqiypp7kwokh7wz6i2j22nn23n3cebbz7ajsp0qla1ar36um90rkqvk3oox8ujq8t1exndei7vsxvth997kx0jrya2lkzvh7ch55cmdemu4h4xkaqkv8az72u0n5x8vdwjee23lg1csc3',
+                flowComponent: '7m03ad6w23qk54z22poaymopak44w7dmoy6ge2muls7z7hidze2tcheysqoek850sbtyj9cb0sp0ypzug5tdbbarifn2nr6o2rj1txgnoy9yqkobsfx8x848mkbkqy48oaivqazlaf6oh0m2m8zq4osuuayccglf',
                 flowInterfaceName: null,
-                flowInterfaceNamespace: '3r8g0uxoy183ktqq11n9od9boxql9ztc4s38xnng1g7u1urldni0i03r3vete0comvl1p2roaq2bkrcxd19qnveockecb9q04go7va8htayd2hoo89kovqdivseygxcmyao72dr17ls0x15ryd8jq3xkbrqbhbbf',
-                parameterGroup: 'dwh4znhkzh9cihq71n6sjae0l7tgb3wgpujnja2gkn4xu6u3t555x3x9lp78n5ga994updns7lr9fo0ljd1f7ebnn3p6mly4ameeu6700mbg79v35j1wzm3jlj5r8uqwrynyqfwou3xvfp1sp9vpb2k4isji67w9ynh2l7awlk889fb8rvt42amjdugh5b1u7rzokcu460t13aznt8jysikbt5fa27f7aoerkmiia1qg57by0r8pb99iiyp15p0',
-                name: 'ld8c5kowb4vsjlj0kygxsxz4rjb5mb2ivijbjr0s7ru0bauwuc4hdscprz6km0eldzlr1pnh8z9stj410ph0qxo646yh5y0awwbazlv6loi98h0wl6mbrqphheltqg0xsulg1gm1ct7gwc5za605nm30p8rp9aqcw5ezh1g6ov31athkwv8vatjpairtsogtkp8tgibn35m75rkydohdd2mmcaa9zcwoosmmwp137i6uw8d8o44jtkhqtiyryklygkvb77pxpecx0dlnyzcpier9mf9q7x14awwanpf5wcf331u73gptalov9qnhdkkr',
-                parameterName: 'qkmboy0gg13x6gfm9mcoh2n89bnrn7r89963qzss9jc4a1575cwg19slrmxe34esz7fcad3qw7l71nq7sg346fb5195k5zyg3hedwxxhgovl92t12k33yc7plo01nrwo8gqjou2p9ko088gl5nyisxtli8eejdlf22xffldg5uzor54ayiuz1e9g5fkr00blsu7do5r4p8i9qrtswp6jjp9qb8n6imniou6qlhyiwecnezeqyminq1n7mrmsrr8jz22r1ewog3apf92ryo85vra4igauuw8wd28v073y5ka7le9l6ani938mhng0ar5k',
-                parameterValue: 'qkxcmsjyxbtxem9ys810pzdx6jzs5f9yeg3x2zqquy1yuur6ecjrcqikwbh9hqh6ci4s8864m9va0lf9qpug4eq4piceqd5bk02hrutfbyeh12bec3qu4quou0b0umj8ck1vu0o4zbasa6ddfaetcyiiw89ahtael5j65wt5j1mbbe3zohvmunygabwbfe5551ryuybllk1mjpuhp8kzfbdyyl5h4w8apurkypryy4k6k77kpd8intw6lqy6afj3p37ket5l2pxxcohio91hc807v3d8snldw91z6cc2gfmayw0zr47x56gxs0vtoh4dqyio4khl2zt6olv3ibpx9478ewt8baa5tlhjphgfspraaqbzomssz0m95ai4xnbr1u7gcn0ibj57jfao7nxe0beoks3ip906ue5hln0m184kfbgwc1f8n5lew12rxy3adzdyklohwbsxkry8x6ymwkn4kg6dvjuc9q6lg7ralv01zus3otk279bv3hb1xmuy313447aijm0q7wol2wyj3dfxy2dy69m73g4p5s9x7n82jsi09f40b34rufhhd2i9etgxphajopjg6wl76vy7mhphal9933scgok1v5dpecjc1ubi9uhzdab1dmypiwtq5u7sf74n2n45a3iumrp1oc4t9j8v6xf23fkmba2ma7cwvkubz0zvboro5kvxqravtke8pf9cb4e1i136f62l091k0kwlzvvk7oaabpuw235po19sldcy6pglhc4l0ae6mur7ok9stgu6edldhum7byp29z0abdb4p87x5sznniaj8m0kzum8430zkmou2gmi0ufosy6yvlczgzvoo6n9qsc8gq6w00uf5m02hfponzx3rtwxmd2kz1fl7qzdudsvvt8n9ohco4c3hiqiud7x0z0ds6wqb5snxr6pgetwuoo235gsubsuxrr1qmpptfitusyizhdg2hvhvrp836f98yplti40ikvwrbotlla2oulb5xlwe7cmghntai97yf0j',
+                flowInterfaceNamespace: '7kqxa6w8eryu24fhno2a5bokjrn0lawniptr8bxkg5ro1tdsb5ibjyikwfbha5z287nvlp0g07evdctn34xtv3ov2xe94qdmyyil4nloig2z8k17dgia8rlh7x5u81awwe7xmo0i4yfl482g0d5stp5x3kwh83n9',
+                parameterGroup: 'gv3mo8hzvtwbyzluxdibntf3kxqduf2x40m66i0290iguck2lpizd9nv3cqhgh756gsfju3mjjdj553k60dfd63e3sv5nnfl3vxn5hgr5jjswdrj462z4n6xwjr5euzl2tgjo1fcs327zthl7dn1sivnxafuaoyn950nyi4poq4j1jjg3w5e1ii2g9331tqgw4c23wxmflssnxifgzyfsjt1bkldts7jqvgxz5l597ick8h4h0zc62glz9tg80y',
+                name: '0yrpgplvxosra7rd1qzikges39nqn2ptuck0qbph7m167veohw6imm7rexchi6yn8x83dfn2h0yxyzevi76loz2ziqo2duc2w02yspicfhdjkvbmredxfdpdj1wnb54ox9bdrswc8uyf5kvufo2jqyg6ewe56hn0os1mlmzj5lxoxrj0qya08vwql7qs01blm9g3tgwawilwz1cx74wcc9aq81cqlnbqq8jplkxz16ywpxscr3xznx7swtj6987s10le7wzuy6nw65c2i1nu8sqstzdw1y8hqy7ky5404dqqdrq36c7xmxo7clv48sm3',
+                parameterName: 'lqhio0r77zky7p3z9fiemh8mc56r41bk4l1ex0jedyn6yv6i8kydwll3v6egznkm8e6hsjam7kebvckoytbpvefpsg6oepl35j7zuxgx61yy545ywiblafgjbvrmat8fsijev0nihlzoi25ha1aets61vl6ds2di9xy9zhmap9ll0cnrutj59m6vp7tf0zw5fv5f631yx71uzz3dowyuui4d2j0qfbkfz0owpfemcevcpg63nm8d4l557x89y9p6eq2cc7kshmo4bsn4y09pyai1gxtf298iw97pae6zov0wsx1y9e8v5elm48gur07t',
+                parameterValue: 'robjwhpyz6nmc9n69afvpz9fg3aygm4lv98ftdb50wov9rmvb20i0eyebllcd8v802tiyjlfysrkxtalfmruv9a752pvabu2yzpm5tae2fg578faikpyp5ttynjmmasyv3063up8b7mcd1n6ktpqqxdmbdytow33w41vm8nis32vziu6d4wnp80xiodqfe5axwdcqhvxoys9ozw8vvqg5c7hkwlz1fds491twh822etf31ra7bil42ko2ox2zb5mpncnl55vj5jzuojx58weary5pz523nrxdrln8dxpj3olr20hzq4o8m0cg523qklxmecyxnkq6tt2gyu0d2w18tldmh6uktz3jdufuhqb5xtzvzuu1eyqsu3aftrdt0lmlkfjms02d32brcehxijitgh16thtmy6dr24lb1goz2srjaqsbetn2nvsig2phzz9xqb6cgx0j18gtcf0jxjuui45bjxttgzztrm14e33faudq99yjbiok7zt269570yosv8w7p62cludoam6fh6sxo6t3txlgohs7pxmbrrns4ko8l8kn4yx2n4gaf2proanteb7ztmz3ogzlfemsmvu9xn4mi1o4xmdqfa6bri9mprkjjsysp7qnpv2gye6ky7icc2otsiec4ugl1aksm2p82ndxsijrhvksipyzpu5bu7yq0evboc6uiiyuveo4j42ttxaz4u7f1u5c6i52mhso6syizi7zzyp5amc3j1fiaqn20gbscyrsw0truavr2kg89x02t6wk7gkri01o574br4c0ad4vezqlhvvc21aouwac8glormlnnl3mhu2m58hdksrabqgwkzmb1cbvewmu9qdjde3z7joxaos877yvzdlhwxuuwyvrwthlitdhnb8rsibyopkkp9qlydpbgynth82zf6bdisyu72red9o19s6rrdcv18dfvovp5bp5ybn8zk0ity2tzvoj8zbw8rjpam8fskhx7272fy8z4vdizsthu9b5iy72iz800bxujll',
             })
             .expect(400)
             .then(res => {
@@ -554,28 +554,28 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceName property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceName property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'fuh3fjdf3ttof1uf53fn',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'q8avluxj543fe3m5ei76md3nhzf9poe9fz0q8o23e00j0j47dml2sdkqupnabhj0lapt72owx7i5piu44jqvackqkkytfhq35l6azhm74ngdujr29ebxfgkklz1f1qn9kel7cihn1g8d84v1nn8fyi5sboantn4d',
-                channelComponent: 'qi56s48imk0jai98bs0wqt41iki7hy2dz7rb2z5oov4pdq5zq3fvnyl9p2grroi93e1e2x4lbz79wtqqd914svsafl38c9v3s5migc2oa52bnzbksughp7p7lcxfud9jreal6kl300q7nkg3j3si92jdo0kg3ev9',
-                channelName: 'u15p4xqbh9zcavaxwjh1z3swdazxhofyvnjosmcj3txpw9q51q4b1fq4w9bfvsexd490dyefuygfkyikvmreuu5l6qbtriceoi3vnbvhagxqsibmfffvimhbm833lqtlg0ihfpn4vk9cbwkyem3g0046dlnsx5z6',
-                flowParty: '3koktj6mvesewurcsrcmwogxe49yxnomjkknjkx0kx04qiabna29a0e8qsl6vxqndv9m9a64054vrwobbzywv1awkab3m203128r7qrbobiutybjrw8yk5alkwvnu2y1nmxbngiugifeu0a6kfpycdypfd2lic61',
-                flowComponent: 'ah9dweextzl4o5c854o4gjl1hedh17ce1acvahvcizdqxwiffyoylnxk4605bysdjporaen4t7uk2r0xnbf8pfb9t4e3lhej1srb8qkw6stlyrm7yylq8zeuiocoy6x5o009fr8x0my3vg7ricpw1avsvy61n4he',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '2te4ysjs4hm20b738jbz',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: '3z9puatnkki32dxjf9ksv2rkez4nd6c38i41mx8wuto9lpjf1p28v5bd5l8ou4qrfvatrlolemjjyzkh5gyffy6siiw78xto114ixai5j7qx8u6fgr849s43kgnkd3g3ejo6hfqw2ply76su4mczvnyn3a5qj141',
+                channelComponent: '1n5of57qne18gdlk69sbin1gwlh7tepmu1fblss43lkgjvscro71tbmozg7w3c0ac3xth6gvtjp9xibnyuvpgexvhw1wm36s8af7umr45li2sd3r1wlewefgk3za45qxgo33gmz0ksainzvkyodlmlpqvdwe7fx9',
+                channelName: 's10kagys1vxr7rhu8tbwaret0or6d95qs792dokcjeaaf0f72hmygn799xnmx3em69y4u7cx4hy5w566px6d3xr1ovfsu3t6ifpkxc2wvlp84f1dlahhne15twjdumt3b6aitt799qw0orzj021y92ttmdxj1tel',
+                flowParty: 'z0fiuhli6hcqtjs8p41r7xgqv7gems5fjivdbc7nr5s7zmvazunaepqc5c3y5pj6br00fnqvr6kcmik0yyurw7uond6teudo5ipcakibux0mb8uamn2zpcqxe3e598if95e13x4ho392cpx8cx035jd1hhl76oyh',
+                flowComponent: 'xms3yxv5he56napsnoroh6xtr48d92e8l5ohdjiwa0oe0cdh9odgxiuf871awaav1c921lc4ydk79myydvo6i5jxmw76gx531b62xexg71oi413zyg37fix7o9a6sv8gzlmpjaj60mpym20ew7fmovbxro05j2e9',
                 
-                flowInterfaceNamespace: '4bd88ii4kyy4w8mn2mvx0ueac73upa394mwkq9ygiz45alez5a0bqrwu7velc9ibpc54nmmjbzn01fs1ue8jux5juv8zegrl4apy9wlxemd9vizf9wo32a7knwdgn1twx3y6v1jhb2w1pg3yfhwmq6crqxr16rmn',
-                parameterGroup: 'behfiajrlbwzpn8gr0e6h9b8xz1lcofa7he3bn5ijyanlbdg8l9od6qz56go3k97madm8bml24yqqwr9bcffxyy5emooqu1hk5pn5f4hjzo0uixxew1iytgh8korjlh5y5oteph58v7cdp4bhs01f326btcgl5dcayoohxajlx7jweax0508e4j0vv42m6sdi7f2p9zzoold18sx16umkq4rq2jwnsga49qjafj6r6g3nxx93157i3c6zn3a5mw',
-                name: '8d4mucr4buco5f8ocjrs3a4ebfi1doiltdzq9qj2qgjeltlc9f1i509zof3qyw421685pbh16n76pym1ujpdlmlfkw3x4rso0ty7xyncjb9r5bdu6nknselgersqb6ul34rwtbsva5ko284g0gu9s5xmotpkdydft5evyljung9ewpmohqozdoz2lwsvdiwigc9cl3ns98nlcah9gy7sfk99m4ucjw9kdq5vbq6aamkxhzl4y0i798xdg44fulgblswqi74qt6o8t6d6eiq3z86d8ledkiw9dy1zm77ouwc7un6txlzwpppasfpdysk9',
-                parameterName: 'zivt0w9wxx28w1gq4u65dpexd9jh2afgdrlib38ftufgqlo1lujjl83hu7hhv80iwdcm2y0kv840kycd7x530fcjhi2fw324k3vv3es0xt8tzpzcb0hhskka169faj5khp3csy3aqvhh5tjvy6pn248x6jh7amztj4nyr98n23m5ayx3x46arx85aco1b92rw0k87qnenrdgejaqvco4n8etwws8ckphxlraqa2gkvnwk56z4h590hekneskkeqaqseqdk31w1vbscfmuqj72wr4ykz4sr9kd4hr1yzqga9p1w5z85mi7mwomxq3sbl3',
-                parameterValue: 'pez2nhq2uxre9vzg7mkkjf585y8bkhxgzfmx87a4zl8xq0pvp4pg1scs2t80s3rr95d9ldzbv7kc4ixaq2nwewgo0eqj68gluqe15kvhae986fac0j4hdozovcknvr0748et11hrl2aa78uzm03jsqmewpkgmyyjfz1uciuwzruu7hsqsbqt8uzylmz65f4962jx1did09niz507oa5e8egbgwsd8g8g1p1dy3bo4e6sr5u72lk2hbcwdthpwd7yyk6efcmsefk27i0deflvitlq16mqvxmly6g6maflq09gvu02vxrklx7xphk087o270py3mhxi2anr247zn1z771zy6cup30o3up9vcwgr5s61d4lgdbyyd6fge7logghtz0s6gcikkrlqojztnxwjmtfyb9z2sd6t27prp7lnlvlrdgp6nogsp1gfs7ba9l98ptqz2mbcq5m8p1qoocy4m26fcw9ssj33ia82kcb5gd62asov8du28e2vr5k8lv7eteaz73red6td7okbng2rgw3dd5g8jcvfs3uuhr9dtppk4pgpfg5u660ivi39x2g7rc8b735a2y4ywe3082v0qhp532kowd5lt8i0757lofffijqnlo6edwdqakcxkslkaq6q0lve6j1hr9fykz65hg4d2r2dlfyov21qt6ypronagwc6sf9nduxh1telqgrdhpeovwlkzd757dw9lyvu8pu6g2ovcniscm6bjesnrf0qa5dqxaxw1qxzvzpqfsufk5lj2c2nac5tdfy6j9wrsy7ytp13dsxri6dwn9sq1pnejbs2i66b91dcax9sdrjrl665fymf3p13ncwnhzf4pndopg7zgwuf215y11hb5tbmp0x3huv9o559m8t77vrcxjmvvdpxozf7bph05jxhp24cbg15jpjzcciej5a5z3sf2t906xaa7ejf2nz2zglmm0op9ygfoo8d6gebiznty4j39o3edps5pdvzy7r5x9it4q6jbs827w8lx41g6ec',
+                flowInterfaceNamespace: 'ru8np2eic56qzexyenkhj8totvmr32ztexwlvttiot8h4pomrle9vs86m0jurot00r6svcwh0yg2e63d0s4egmunp8y4gnaug687spqpg94j6f9zxvhtrcmrrg97on91wayedr17y2wjzc30nw6jgln1lia34at3',
+                parameterGroup: '1n6sxx5bsg2ih64400isn504ph5q7ea7tf3jul4js9kz3y9o77vhhclwvbdounme591ejrt7kr5yx8nyz26ed5sp3idu37iwlqhameye1fr1fr6rznp8p2vdqqazvga2qqvaaforxiu1t0r6s88k9mq68hz6qlkt3crdq9d7852z2n77sy2f10axx57zoy4y3ma6qz7w496p4rpzq6m04nxq33geouddrc3jin3hh48547y9fuw2g3e5s2fqbxu',
+                name: 'ixag2eza5pbedz7h00eke317zi8h2gdstjxl8qqebiv2grsg1kcw092g554172hs32ncjsrhrz06wp166hkn8dtdhgqkhgl6lfewd7c0elc6yngzqgijuxvjcbof8j5uzp1jotociglpz46yeejl0cb0061o86nnlawpfle6smlxn0qhhgmt66qgopcjaj47ggoe5msakf4vf17uepeieb4qeuel6o0ozg14nmjlyeu2jm57xqc99xbbjr106vsv92gs91ob17macku9e7yeow9gye7gwm70fot5ksxwnyr3hwwzsoge0ossq8m3ils7',
+                parameterName: '4876xb8ans93ugqlq5gd2ii3izt5xxjkpqa12hb2vca7cr7os3gfkaxllm641xwfd75fypazsl0p0mfs0in8dwxne7l5w82kn89zzfwbf6fivyz2bhrz1g2a2wpi85slu1w3qnkmp2p4befqvpng6orffp82bcw9uvxgfjjsaj0cs9k7je0sl1p040aenf27rep87u76h9mc02j80wf1fxspb6tptooslmu2f1h4915lsfej1so71ujstcfr1vvaka6ot65mv0ks5juieegt1ww6dcuupkg6k8etvd4gz5tj6pusdxq1vkl10mz1nzej',
+                parameterValue: 'az324tcewcsn3uoeu8ivolbz3ct4tl3ms0f6cxwd1a524bis3eu3pdicsf3ljjf5shtjydo1zk766dh4eqmfdgvf4d7g9ybks351q58s372gj9lkpihaa1qdatr3jw7wbaq93ofwdns4lybd5ye9vzpcbjd13wfl1mb3sfkdffkjq5499su12shdlayhec7otkhtxxumfxe1nld8wvucmud8ez6qb0ttvcctfhi28pjvs566ch7ww5i6sqznpfhy4saqp8on5ckn8iyu366tnvkrgn8e0cpc27evq96rmicm4iumqhjc5yl3grftz1eykmqycorfsvst10uvzzu6h9nh4c7nxtfxe9uxsnvv7pamlc0cu0abbko7ym4sfs0nw1nu4ylib4nbkcymd2xn7l7c2uhfqdiqx9jphgik3c7u4303t3uyay5mopjz382tcdpkfqxqmfe0w14fttsgin40s19qglt3ciu40onv08yylzl2fm7aw3r6kq6ecf9n8yy0cinbjwrjfdxc2apxt9rie3ncnesjolt89y1cavwg8gcplowsd4msk09a1d8qe9psxxyr4mwgyj6v3e63x5e2yxws7x3ka526047qgd59rrlmvvr1bnyy95bquijrb0tu31j25acvx3bk25ynd7sgxmwltbbdw6axm2snutkus42i9yt7fh2wbszswe2rdmfky49tgd1mu02jseososrqp0xqake8xy2p4cf18ez2cx7a7ice049p8b8fqxv5yrkdayi8qhtnad61upxtc2ghoozdgaorxp0z9zlkrtlac3gdsy80b1gsj18bwja92ux89di5kvxq3nztqibrp4y9fujfso784y5ffcrl7uv7igoir63vqqauwl41zofvw2opptxwbq14wqulmih06u1umohrtogkhc7fwpwmjbxiszoedip253y65nemmb5iza0lx0jnkz39udhcem5gksk7tki5b8emidh7t7wjz878087cqmc38xpqrwjed0d2',
             })
             .expect(400)
             .then(res => {
@@ -583,28 +583,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceNamespace property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceNamespace property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'bg6dshugxmxgehjd9x5b',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'ye3kaywrttjt8yu2ub0qs28a54ichjxqv69j21iqo2ld3jhekuh50t2f17vr8lphv4pzd5cig8alykt78ei74nd3wgloavvd627r0evpdybcma510pj4qd4zuixaqiubthht3a32c7xh2qrfrpu31dho1g3hh5hb',
-                channelComponent: 'ldf0hs9yhq8foj5ovqdueaal7tpegenf4vaep2pw2uwthzyreamn9j7cbdu2734fj20s86xy2dmqt71izm6usalinboqjmt5izngwrgjre7t6hauuy7dhv5xq79dqo8ga5m4uqpomafdbda90spvh4v4qzwvmh9y',
-                channelName: '0hovnwumtyrjo56slbepxpe4bielzitfp7iq6b84108dlnkdjnd9qr9f4g5yds7g2ogvgz9vra9cbocq2di1ei73ra7cav5n4e9uke5luin5psr7vei64yahwxwfkgj42gso1ja4vf6ekpyawhc42tr67zwmcppv',
-                flowParty: '08yftthhv14ti15pbgguubo7za8uxnux0hx6fkoeeurzr5v334b72hap0nsl9osbwm3hz9lib17q51ycqk0g3hz56hnw9493bu13t57qbkww6m0xg398boujfqu0fnphbthu0gx3lxjfidy64t4sdck4phlx1gbo',
-                flowComponent: '14kil7k7gq8a23izhqf8wih3ez98tq5a9uzweyabhqllghatlpyj192qn704u89brhrwaslk92653wuy2hal2e9rx4pj5ng67oqp6k041otolmw9c6b0vtxsp9gjlq9gvlo01dutp8iov7h8gy9xcvbfigljdi1a',
-                flowInterfaceName: 'd4yvacr6ernuey4g564lmi1kovd37nqtx7o9k15qpy2p78f2uqpeu9o3nrdarr1wxb1pubmhetkzaagirkjfsi2r2z3cauecieyr4g101kxmga98tgxtujsm6h5zi1p1knkk6hktz3t3o0bz7zb74qwvdw5mcdza',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '8pug3layxi0i17epn8y1',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 't92yxj42zpgl6nvpqzkdjk05voymu2vmg2ecffz5sxz62fa2t5xlneahk2r5sy2unlfw29zrfxu8p7quznbeitvnivygn2a1c67zlru5q3hxjtkhus9lemua5hgbcjqbbdpxwl9t7nwi7daatrus364v8qoh8ebz',
+                channelComponent: 'e17mpfjuiae9ukt0stcrzjreix5c64tqrlpxdsarilh33mmovoloayivi04vi3uh5ii2jtxflxr6jqr8lye846som623x584mfrqielcor5rstwss15g0szrx3xs3jlklaljesekovq8okgcnrz75kcjqwqmvr93',
+                channelName: '8x77kltxmp00iqdjl1zh0imwespiglxffy1vp2wk29cbkl6ue98spsv0fkxzfas76emcnqjsiomi8z5vpmd4h9hpsxwlt1nn5pymy2bagms7doqizulwas8y81f8wexcn33rbot5u2xlb05tju59ppv6lbrr8zln',
+                flowParty: 'rcs1sodjj60b8y6q0ufpzlq5jm6skalf95x0m7cdv2g4zghuhqdkeyljib1gjprzl77h4r4sanf83cmvoudu1ndc9n4v7109kdkwoilfwlufye9q9i0pw9fxx71me2h79gey4dc6evopc4im04kminlptw7mf1xe',
+                flowComponent: '5s93re2dut51dwoomqcql6pwfsi5by1x6szvnt5ca8afxsyz0k4myt6ohq9a2izwv3iigdlmme1ewh12jrvlduqbe2bd4afo8ycrsyp4blbqkd9glvfl5ob6kibd7g7rkofo7vhxk9dv83z2h3hxyidygm1j57bf',
+                flowInterfaceName: 'kyv21li4pkpmkjs7najsm2ihffxlepeejwc9wlyij9147h2y9bkh3xzo1ru8kvyaj4jtciz7ofdes300z6ek76yadvjaqj6rmjdlu20li55et6pbmbrb2en34f2yskmkqoioqitedvec6rq36qp7pg9znxpwgop7',
                 flowInterfaceNamespace: null,
-                parameterGroup: 't82643u4j15gs0mkwuacvsgdjbqltder30jjioijsspij59lbrsg7k4jt0dhceclxs6zvplqfaa5m8w42ibw6fx1sryjrwhadn7i0i7vndjhce8pltreejcg0veg68o9vg1x411hpqkpp0axii7ke662by6lqz7um2ouaqbm9e1jxm2boxqa6mxhm9zvb73env5mm658f2kxg3kkejfj94ia1on6a1j7rwcyhirjwkdwjo4g7qouusy9ngujnms',
-                name: 'tv9bmwx1napuwa2jtwydpiy633zf6f3qz7nd1shda2tu8o6olqvbyivbed6jergxd8ggq8ijbvjfw5odgi9wd9cv10wff3j5xjp9f448znfoctruq4dsgchvk3ify56zck7rmcpxwjoeldcky4ka7h09lmjrsmtqrzquzjrakwm4b2yu10erziggpjtgwqf0e3wbyug8zwa5klzh0t8nqrj12esveuatzz054k9pugs9gk2d4k3v743jgycd6rrtmz6ie1i38a3aicai79usq2wx7zy6s5tsnrds7jvkz8bfg25f9bpk6om0awvmks7m',
-                parameterName: 'k5in7feaijbm5d26lli6iqvnfqj15j3ifcbv6nbmqo49lscwt4zlpal72j8x8w7lk75pouwlzwbzgrts3stukk0bduc98umvi4qym4xun69dpx5lwhk0jgp1ai1mrgx463fwt30g82lqf8gyys6dshwtz00qgq4kcuvmb8i33tajle9wp06z3e906vh1p66iioi3qrnp7389dx1ogmlurnrbbk7sbuqk9v1v256wpmie35t7j5s4ol2gsnqjcsbw460elvgjt5si4vem1bka9otdy2k12v2uef8yb44kefrlrtz1gm3o2oc48oah6dxs',
-                parameterValue: 'vqrc8khyuljyvnp644r4stdb9xkuhla54ocd08cxvf9ngobhgi0b4cuxg6l0i742imja9es1vwsi3b52pwtmkr9riq3mvi7o877kqkkxkfa3jkn8wkgof6dr857i2f16gyl8520msskeqcxr7yhotzx86pukkqgy1gymxgs4qumkdzoy7c9bri2l9dpg6pqxmkzd2m6ynryibo5leuzxxew9zw71v6sdkn1y21zpro4d1vdax1875imonwi4hims84rv9dc12q0am0mcjhlruoxg1opdpwxjil65xwr8ygarvze4p84ec4kweupfjffdf363xs2jgwsbubgkrelowpzyutd99vy0x0bmfdbsw86fi6750b4m7ger01mwdw3hdvrx8p3qq4ka5r7hq1ml9u2gmszthmjvruvbkkmy0udcnoj2zvagc9em4f8er7fjn9ixcbtahstjg84cjt626i7zmemf7ho2dvuig27q6g3f3cwyvdu00aft42m1bjp1uqcog30s0q34vvjtpy8x3dow0ph45yomh90scalk8vkikhxs2edhzegxrinumbgxcscvcqlhwfiefp50fmrs744melj9fwv23exgogsmpvkeg100fxpeerd3y5iconaz5mx6k77ktvv4119gmf1ozb7mg9bhsdd7y3mj6p5mwv5oht95iqilja2orde56lnzzmczwdwjy17g2x7cy8nerqvwqz985kvw4vzrt3vmb0i00bqbnejgdmfsnfncb724l65plf47hz5trp19a3p17fdscr8q311i2hizq475713u6v3smkv2efchiv1qwqiz8nfbnbku71u7g157ymj9i4uhb1wljsy77k0y06o14pp3zwxmgkkjoccesbrsbr5jmkhs3yhtnb5ym1zi5n0l3uwog2nguixnwc80wumlq7efd0rp1p2pzz0ynsf6n753hx7bp17xqrjcnylaz6i07coogma37dsuvafq071f4a4oesb0r7vlluifl15f9j21',
+                parameterGroup: 'azzag8ds7puv0qj53t648qvf33ut2yek6nxiyzyboj4brs7pgi7xmqvwmktoudzljajbxd2z5zixqnnch0azk51ntk829782qexifg2b5d1hq4ipcdx52afd1p3yu7xrfanlx1x2h1tgcs8m3vuspcceg5xqn6jq5jrt2g9ej94h8009m40uq0wgxm8ef39ax3owjsemexir4hyderi28m27wzfqrpekcf2mzao9pvl72rr5ktj2dfupcocjvsw',
+                name: 'b0togymhd371ntbhs2c9egwquwlnzgm36a3b2l0h4hpcf0prfuvpqs0tvlvzc8zfh6lsnwflg8028isqxwbd0834uyiinihvygim35978dgs0bgkks7b7jxae81kef32tny8wn3nbcag6l3v59pjjbdo67p1scar5s2pt3jvp6yp6qgldqzs7tw70e7g3orgjllecq8lfxj8vn4qiogbggzzedgd1bmmrszgyj2wnxot38je320ouxllw2a43i1penrzi2s126dj15s1q0f210kvmb77unr3zaun6tk6ln12woa3qohc76q8bps8vgoc',
+                parameterName: 'ixl6cy6m3kc48w1ryt2fz8cqv45l3zhhka8vfrjfpbi6shsrbfkfdh2xa06t2j1f7uhycew8lgjh78duczzee0tzepgg9s2a9tgzueh8rx69ba33a9fj9lx4ql6hzncqiqvb8jgje1rmndvvx0xv0hunq7ayn1ofa7km73jg2cbyn0soy9rmtftyisi90addzdqii4xbtddrj2tcificbn613q0gtcfxaaqff4usx1gowjsxbo8yrjvvjufaa7riaxq795em72hcq8rez7f4exy9q7oe6q3qf2k4g6lis9ui8thwv9d4xwdkuushyybn',
+                parameterValue: '62v022q98ekaiwo5eh4b0hurwat47on7o6y8vhckgerz262zg85fzozs7u0xyw2dyleof2bmq8p7oiumqw94n1pabpsifj9up5ddxspoy6qhzw1reonjipzcohh4j6h79xxqcjy874pzsnqxcjxlpszsfcyxmhapylbfe9j5qcpfpu12b1vhuuvaed1jwkal4h9xjp7ccffy99k4du1ry2lx13dd09q0o0mlhi2rezex71cppd5g1m04nckrus3k2rrgpqowx6iij272qpywkut4pq37sle2cpmdecaz4qc0ck0vl3vw4jtlamnwutnai6g5uaegcja98nhxineobnju01aoeqsehb5h9hwdt2wd9y16da0uuo6sl0g03yyfnvehf04wsr67iftml3qmnju4iyhh1kaniy9hjxoklilbqfsnrlwnz7jbqmfqzw6v7l926turrzmmlfo4r0ehqytm13o4i8ak4wocy45vzh4iyz3bsmkru1898untu2r15zcyxv9myvc0mq5p1k6fj4gywdd762dofh8vm8ki6p5jofdnlsalhgutwsjboif8x0yuszv9khvvg2fvsbxutz43gexup0045hv8v9xfntu0oyiz5otyncl2oyrdxerv2qhp1o6bt3gpoqmrbyrzf746izec7107eg2ek6mycqwkzceeuxye7xxtw4pjlvacm2mclvf5zb1esct5f8u3rm3mln8q8wm05ynsbon0iu7rvo70mn6ymfagfgh3bifgegk5w4ualhobmsf42hpgq8cufi78yzzby518c12j7csr3agw1fuo6hg7223wfiu5m9lwgj8ktizejtq8f2ghnmcc533bvs95oxa21vnsljl7leacqq9fg3oz2w1wi657hutinf1h5pur55aqfve0irhnb3hc5gcwl031h7hkd29pr51a531gp228la6s8kp47nlvkdyb28qje71jgi5lx21gzk1papmin1tmqv315kpcfj11ieejf4u3oyv9qpha',
             })
             .expect(400)
             .then(res => {
@@ -612,28 +612,28 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceNamespace property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceNamespace property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: '0aqog3yvtafrir34wcz0',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'mbejmcr6vdltql8l4w2cp9s5hvry3iypq11u0l3821725yo4m8h3xvxevbf2bysauwefmxx0g3tzwrn5rstr4xbtfv7mq9epxqgih4yfueo1gmxwnnfwl6jkiwnl1aib4ogx7yqx9lpiou9rj2la7beckchof0ko',
-                channelComponent: '1tasth7p90s8zme4jfrqwnd8e28ihrv5pdagi9s14cuzto95i57dnfre5obbwt0hg60aeqwudpflat0230cn44b5pj10f5adtkgtzoh71uwjb3f7irv4pqk0v9c3lxx8jut1mu16mgr7o06esxuny6rp24r7ae3g',
-                channelName: '5zeggk0g9y5p4vaflr44gkbl0forwtijqm9wbwjpla3ok42l66z7feh9ct6sni7hkcjh74jxfkdwjv49r4xfw6btqp63tn020t35u8fzot4zq9s6c8hc1i5p44jisfo3ptb86hn7inzq44xh2ff709jnm46xrmph',
-                flowParty: '5debjgpvh1e4eb6yvx6287k1ihzyjkx0tn710tytw033fh0jk9fb4d050197z3wwtdgfq7wqbne5j49jcap9qpakm1dk3h58u9bl4t7szia6g3n1p3n63p7y6ek3d1a5xjiy6lyaxlprh0f0lf0sxans1ydc8p3k',
-                flowComponent: 'debohq1py01m9chcx2i4fxyhkigbu00a4k1artysyl700pm9854winfe5hw0548vt9r8xkoafmg06ve3zdes9fe79hxtxn7ma970xcx9yf163zrg8ow4fai0s8usc7t87rrr527f9iy47v3ndqltpfikba3j7z9g',
-                flowInterfaceName: 'xdcb2fzm0t4wr693smotwov0sfca1dwtgxq0m073xz45vm68w7hv081oagkn0qs68071tv4e1sksqji6bzh6sd9vzesmg8eb5vehqc7v1fgdqe542etuag6pf2hbvrzm656nzvlvr0inax61nsviidw546444mjt',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'vfyxd1tpwg4cjkkx877p',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: '9frtjjpzjwiktvz9ebjlz4sykis6nyxkimmsh6bmzdqt7v8e36pdcz196r3hrpgyp7ae114j341fq6zzntreuvyf0rwrbd4nrkkz43d8gs803lfvcby386n9oc863ilv5q1d7a1w7s0h8savfhe4nkq1njwbuquu',
+                channelComponent: 'fno55dgn87wjai1bbju2dgtjcwsrepd00r7ouwmayqo3wonx218vkjhq0nej26y70yth6fmi6evm1y2ja0vs40ywbbg9yrorro2qag79846xhzco8uut2buy33mlsmcpl3td3we71yksx26jjkm6594zri187ij5',
+                channelName: 'lif3qe9emk2359dpwm0kh3pxvr1lv6t1jd0c5tvnvb53otj4z5p5d6trsql3y8jwxejovkcu59kvsgccxg831rs7119ccqthbayx5hvz03gv58rg23do5x9w1vtdg61h000bq11rp5u22da9o8rhnxv9hgt5ykqi',
+                flowParty: 'wqbitmixsaejt3y3g3m1x8aqvu4y7qooo0qli2euw9q5pzuporb3hiozm9jnz6zjkuv1kz0uwx6ma0pgmijlp56u7adb62k2l9shbay9bt5e5n9jz8xycv637bq19hthkxb75nf5nvqlqw2zmslzosbb6nit0gon',
+                flowComponent: 'zwu6lsgstpyr05idagzm8cbdwon7rjaddzmbisqfeloj5qdvurzhu2fa5su7kkzf3izp7hm79grglin6lbw07frumo3qh94cpy9dflhey4uhpfwf5x7697iwhel0t914otezkfo778lpr6bg3sz0snyqm14zffzt',
+                flowInterfaceName: 'tcik7arnrlvxq9p98z1wzc3p2fezqqgolbff2nw0ym55pl9czxr3vf1ik6p9dn2720mbg4l6rxlqx952js0m2mm1dru0gytnelk1s16pgyx1u77sjg20xw0oy7dewuscxpuylmcz85keveeezvyno7jldvqpkvjs',
                 
-                parameterGroup: 'euo4w0gu6mghlc4xyp34g57jrk2l9jnr2du7q0cmdgrw4ayb7v7di0jrkgjd5exs4pylpoxz4y3f2boqfq8xqi5ko4x2emmkgvjmo7rn6higdq9lqr1b7xu52narnxdrsb2y5l3kyueerdl61ullvhwqq0f1vi55h8b44hwhebergjjbswsc533mo6cniwvaquge51xtgnt9ah1siu3ij0648khjof82wxj0ptnv2ir1lqc2hjdf985mg4iusx1',
-                name: 'dxgs9q06zzffa6dr0e8umszjrsbtdlo6ct76clxrvrgl831baqu70aj6v10bhwkdsteg90rvwp89n4fizjqmbl0nkz25af82zcoazj83dw7eu96uqvmvkhlk1y0ymg70573k1tktg674kaaf4zybx5q2h1nx4cpc0nidcheid6533a8kd2nkr76xuutjp2dhowowfm9t54m8jb7eqvw564n13dnxhm0jpgvfgg4ktcmk7sdc5jgvjfdn501qzk3ncq9xpiu0p9rf4xxlq1mdob0okrzyizas1pp2w6tuqhtpsba0w0pg0xa410r0ri0d',
-                parameterName: 'q549yvs9nmlan8dew8n6jecynrsikcvb6w5vz9ug8llm4alc7t9wqwrq3n957dvxtgdgm1tjumwskdgvav4qv6gvedx2n8aec2r4lcio04clg63icv352zzcz3bwzqr1lj5ebsh7wjinbehzbrfuwyc1eh0kpl4xtvq1hj3phd5qqx9pb41hssij0bdzhih29qlqa56p6plj7b7rltru5yb87r7e5wf2uoya5e7a8t5y8ruo9435v5ek775q0eeb4c1cz3qc94b6egvpid1ynbm9kbh96q7ccgoa39lo8qgh4kn4ql7kc3g9gchhm2gk',
-                parameterValue: 'ndk4mzq7eqrrd7stgvqvpyj0xn01evffyrrd8l8zy4qlmq5b4cotozo910w6v06h76swtxe81k0kono8l7kk1prgcy5umwmcrye10yb7dx8c8ie4apklj76bqbonqk28ehro1rhdpuouh22hmfa6cz0a6z49m9px4fyl3kkbmw3i9z3gzdvdpc7ni4dd5n0hoagpdhab0uplixanz9buzsxfv93eh3yr5dzvwopzkeh6mcf4siinl2f5wxl4kdzrycttym3l0it2zcmp5vay2th6pcivnwkidx0riyzue0w0ebuksmiwowfw8odu2h1qj01do5g69qcx7pfbe3th15pa3b5weid8eegoqtk7v1uw9usme2cfm7fccgu63508tvslgcaa8su9wp9kqkjr704kjkce4rxt3pzd6a40wijgjtqs86yp16bp57pit827ovwi4tct7du1v9f0jvdoalegcp7wstmnmh0fn1rqqyi1gm4wlyt0fwqn4shl065n4nvhcmy5ermjbtmechp30ip7nfrsimjkaqosscjwkfeuwq2nb8mlb91n7pz0hsz21cq1t1ehcrtta4icedjv4emqzv402hldzzztxve5qbvwbge9cwppgkn0scumjyv1mkxy54tz5ghut3dfvy8vvokdjg5mdu22wlmquj2ghrzdscgwen0cmxdhps4bpwasaaxr7l2lunu44akz7e9u6ot30jf38osz46mnv2bblnvmpb1b6p49345e786plflrl24x3s38wt1u99j59mzjqe8g535aof7vlmjjiums8qvt85akwml4re689kfj58t74initgvh6x48bagra80f6omm0k4u8zdcif8nvoohl4vr70isk697ds2icoo5zv1vm8qxsbvp5xke5k8uuxyf2nutzv41ajease5xa66l9bz30jaenut81rkcysjwdcydll78gf555hlqstc7x2auk61o9rqey4rg4e9maev8qj66gxm2omwlz40np6nqhdzg',
+                parameterGroup: 'zlnfhixl1r3x0kij5xxcl2gfnh6z8iplxqmiom95j8m2l8jq0tibm723oknccotzrekejp21crlvauw7vvzff8zy6wisjhugj1jdj82iaw7ifdannwu7kcjqz8j8rg1whta464gxnr2e0prencnppcsvrc7ysdmihhfv45dogms0po3j6tg45atjfalfwjd1zwbdbz0gmfwhgh59oo1gl2ty6oj5oaynti27hpk1nx8qxi7rgr1byict6h1e26z',
+                name: '0sl794lru2o0yet8u94jckiu5ofuj5lf2irzjzcs31vd4edjqey6pr5af87dwgjrqqpwldl3og1zi4v7r6b35wstahijum73isto778hs7i2umpj4get44t5sfxsilcvc31826x7tkhag05g8bohjd4uhxl0u4btprjwdsi0p85bjckuviy0iohg2po8o69q6p44xtbbngv9t3irffjjv8lu83kcplpcjsmoxbm93nl8nl2rc8iza2bmuy4cbcbelgls0gf3mx0pq6dw3zyu3k0kp0bkt8fx4d5f76btskudd5x3hsbs8yu7yk49l7hc',
+                parameterName: '7gl4adi579vv9b1lva4ioqtpgm30rruvpy4kl792lpantnsi7vu1pgebkut7381sa6qp5hsbpv3164bonhp9eo9gdw2hyxcxnba7lyh22nk130se25yrptfkvo39m83edbd7lx0krk9tgq3lxm3kxvskfv0e9b896uzvnu24tmfvn407vdkahxa6obuk6dz45menhqxa4xczvdwcvm18jejhuwt4qt6j7lu2broz3pfl6q722j0x2tki014miyu92tkhqttp9o0e5tft8lgc9ff84prvr9f8qsebqnj62p7orbs5vef90uxw9qyx6t7j',
+                parameterValue: '47vd5b1goez633h96rveqmee0pucq6s0osyxbul88p7m54mnxi5vpvpui3jn04iopyco2sn42icrou9pww80j6fmk40p4zy2zay54fuy1ruuwj69ulb3r9hlssptktm0uqeplez32oyuoxv8ow6mze8e2h5ruglx9vflqxidt7hg2bvrf4s35gnvc8x9zlm3ayzy97tdlmt6s8in93xqnhj6gdwwwq6412fif1ui4b6fxl4tl2muylfe95c6acdflmomvgteneubk5cfrn4fxmrqr3367anix0698qvemeddh8fxj717loicirmkph6kpgszb22qvbm13vln6t29tn7v0w0lvxn5ufc38cqx9ym2jwykfbcsi44dlid0kdhia6lsrgdcqbnb0sxjov009n02eas6u5mryzsgwujlqbd4s15frwplmhe0ueeu6ex8k2ves4yjz3hwb5uoe76g9c6vibnybk4xhuq7nf5nsxkhskn04394ndb3g591kr1xmaxf2kdeox6tukbpcycqfg7yfb8pads3kvmmhmlwq6y68sg7gyofx5vv25z67ts0zye4nuytf5x0wlj8j5bfbt8p1r8wmffezgkpuy6ndoay1fett5nlgsahjry8q06pk3exur3o56juu35b7mq4p8gzq0q9z8584ipauqeebhxhnmt4pstdop08uhla061ts5894lr7f514gcllzqodxoytdumcfwixg9o6dlxhh5rkr4vt4v8u1imjtun66si6b4qv9rws3hvbji6sme9soyinvvf4wxokmoh4z28agqx17n43wjnnrd3upnua40m8vedfz54gjrc6cketumnto3qpsdlmde24xtp6q96ejbbj128ulwrwuchkamb4jv4rndo1uhv61rxlw9t2etpijg0fsfkbyrfep6jhvobcoha139bd7n3xtefke24jao0s6eg9zttlv13x57pybcye6t6f894sdnlmhetqbf21s4qye1ldwyh1iiv8lmrdf1qm',
             })
             .expect(400)
             .then(res => {
@@ -643,28 +643,28 @@ describe('module', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: 'lxzw1ndbgr2b2von5c4swftcwygm96bwx4d88',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: '4duvyeszm03c3gk2k080',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'qlk3pv5uu7svplwrd4wcdsqkz7d7bfoa1eq10ceds09b0pif0pdbeunhmka736bzy40hk9pf3blstoqmv8d2qpwla8m0k1hycu3cwm45rfifjhzke1wfpso9zypojk0qjbd078om27xehbwbmab6psyji6dvfdfu',
-                channelComponent: 'b49q3qlwc2qswhla1ou07g5jb2em2cwg7ictqyia0dkj34ovikjnbpjbyto9jsvjqvc6nbpiqp0fhqujzvsn6chhghddfq7k7x8x7qav0dqbslqjt1fcl0n5cw6d8l6giimzaqzdh9kk0eehn83g3n6n5tp2xu6q',
-                channelName: 'wh3dkpy34pe7snmv0ss1z1ldhtjl1d69k1exgn2e51omgu70a0uatkx7hespkxf5nmuhbvt03iw4ys6oq2gtmaraui2lpyud58jzjirjrgi3ulibffj3waqoxgmqxcwzm3piid2n7uw18acuip3wjnziqg1ziriu',
-                flowParty: 'gjlpq6yjpt4yt33ee0cb87lmuprafk0o6ta9t1ixb9hth2gs9sv8nm7bjw4jixumqiamiu4enf906dhzli91p00bf1u8mp762w6jktbtk2cckf3kis7e51n24q6hapopjsdd06sj6z47aq06it23yxj6csgcarzv',
-                flowComponent: '9kaygk3scbili8iqfp92skdi77i5gcb29s8983h9a8n9m2yxabqo48h3jd8qpappyyos9g3iifbhmkghhi3h19orz0k2kixihentro2alum4zbluvyrpiqzsus1b9gub21ifzqga9f64eusr3c4hla0lzand7v6c',
-                flowInterfaceName: 'lspwg8e2p78a4v8e9f7gch5i7tbc3lwxa8e1dd2yoszzbxa57olbut9trc17ki8f17tvf70tbwilslt8nwnelbivvak05adydv1g5zl61skyjr2lh2t3olbuq28moveaio9jhkyp6mdn5s4tq30if8kr0i1fzw34',
-                flowInterfaceNamespace: '1fhrr34bkh8pc32kcgxekkjx6rk5bd0xe1tmsek67jjhwgdvech5t0b5lg28lxpi7i0tzki87vua2ro60qt3z6t1vqenk2wrcto9ln9vtqhv5jm376b3z5yhq689ga77zonphi8jp2p4npiloqap65f15hpn8vb8',
-                parameterGroup: '7wz44dxi0z9o112bwj6rzbhr1oqq3p7eccnnzr4hy6j2ys8il6p5bc848le5ayu39qx6l4mjbztpuyjbxifr6ievtxximr1l2yf8qc09yawlii0yma69a5yzdrfoht0apdq9yeksrte6pi1c11rprnhtu8xlkzq9qzb6elm5rcev7rr02lqv8pstikdzcqk9pvnq5gc18ac1hsoxzm782pmmd2pnxao353gejblvswoexssfm9xlx33dpd6dmyi',
-                name: 'zp91sssivr5bozbfscb7xlmvqi4jtihr4695zgx80hc4pt18k0kjja1p2m91ym8s3ymtk9aps4wtbmbvzvj30j03e8fc9rtje9ce6fknip7ewhb0eh761zeo6638izymegruyyrsh2w8o2grsixmsfnqjexeioevxm2xg8xmxuw9bmxnhz8orv6m05i6dvltcsegv9pdzkphlmg942rkdmjor2ai2xbo7n3mhbp2s8npe4vpni1llmrg31j4efc6tjhh10r29m4jcjb0t9kes2spqxx977aeroxjbo2z23vkobpw5sjryrnfyp1dfci4',
-                parameterName: 'fe770r53yv8z5qgs0em99fpi2urgynpsznwf532vn6naio1t1dnea9cgb0cuiqinkb4f92b12883rzr612pph2hl79xn5uumvb02wr62y5v2n7fxvxffejg3hccp21fw3gbnrd2ue65ias0npdvg81cuaouu3uul7rwrlj7e6by85n7dh8l5xdigk9fjby5h2tmkkvj6lijp276o333rynk6vqejt1ie75ulzy576l7o9jccivx49adf3qz1k8utfq5mbscio1dqgqehre2ypih9am660kp77t4m0q8vftchn3qpumd0q5h54bmqbv1j',
-                parameterValue: 'lw5b0b2ygeq30e17b233n4ae9tzgon5f1y4ds7i1o9d8bkuf00vi8ja8k1l7eb6pzxb1nmuyot67n5lel8vy4e9myuhjllh1xbfjaryh9lpffccbwvrbceuvrxz9ca3rl84xqz4x7j79lvjm776f3giin41wui2z1mq9skmiwzi1q3flhcqx3h200stj8x525a9eyp7ifkmosby5tht8n4mvf993bjdxwudoee1jr62gus7f9t2kqvv51ulb39yjf59zlyk7lhaxibdba2jxza0f1ayaldt57hqbwon5ei1sab7s0u52plbb2anf1hd4d2pl0penzndnbh9wtasxxc8mtblhtw330uimznzw1nyxm7zy4roe0agtfh6efaxf6kn09fdokep7kbk3j6huc81gwlr0uvfkbz37551lm3m8urrp15r1om78hqoxi30zh72847nuiuzrwbbgcf0t9bdb25uxeqw26ix36ssnqp31z6r3pixqxym2q08kitw9mr8ei3tmj0xh5gxo6thc3gelcukukjs6libkfzgh7vlo53nbausfylrlox4p9g685pn97qy9q4mwffydthrwpps8804qgxdieh1mvmo2p8bokx3tx3bdzkiks6gjvpqlyf82kw5pq4dfa5x1jly3eabvc52e7rn94tyr03atxvo89ml84iw1p28nli6835rd792it5du46afbc5863m1wn4xvmglkj0fgibq72cr186rt0yj2n5qf3flqqnlxf9nk2nulc30rgbh2tpbw3ilu93r2jtnb26hc7vil4b1bpfofhgo068n15cfccoiy28c072f7t1tzhmiadzr98pq1a24pmwqqlhnp5micano9ep8dbgntenl2f7352sh3dvvxvh93bxe0kvwjgeg5s1gataispwcz8ix05h90wv11zbw0owqnd6tlnam6ozwt4yzn3f4rwpwnxb80qcl1m0t9uunvh950l25jb9qqrwri9b0ligumeogsantxdqyid34',
+                id: '2rxbcm8w9an1yhisxbasgnhx8lrym14vuus2a',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'w7uqsj9ngz30sf36ffwg',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'nta6yd00va7ket0iajj13jvuhqwr5aaijawmqmvbayoyoaa4dmmydnb2bm4vmv6y3dc00jcpl1ldqmbj21v2e7kyvqtpdsyk2aaurjr9k7o7cbssk1zefeqercig2aivkit0xms2ipzax6nb48gvxw1lqxgow042',
+                channelComponent: '7nnrbznskwihe7m4ivawon63hkjtwswulyw03dj8yhkumdlxai5vllk49bew66834cu8cfkwlaf97ynh0jdlmj0qz4i2e8frf5fjl9k00xg1pirdxg9uip2hdgdoiaa3u4jvgoce84vgz351jy6ai7xf6ie2vljs',
+                channelName: 'sw7kq7bzbuc3f69wdtbqkrfu2brp04zcgv44kxrs6ggfsobsryu6sizw0b8fbm0cu5ne6eey5j5c2phif2az7a9qhkztorv109c93mm5dgeyus15vp7ij4ruhnf3fquxtxpc8kqxg7kb5ete5giomj8x2lhx75iq',
+                flowParty: 'varjfxlmssoclo7pmmgwqoubizxjl1xlbklm8o1d7q1y448xb8zuynnomluly1hz1iv1dvssax5pmuh8ia2saqvuh8l4m2vzgpstuqq3mdvmqg2hlfcumkx226hyefxkdt17kt2rftrn4r9ypmggep2ps0ybnoqx',
+                flowComponent: '79yf89i47wgb7ja9bcc62pytrg2mmqqim03a3g7zx4eprid5we0oqk95cj82j45jtsv50zm7knkad3opix80e4exj78duyioicveu0h5ln878ji8cxji29rabhw4xowh8zybgpzqnig1yubix6p7jjr52l4fhlkl',
+                flowInterfaceName: 'ux16gltoxa719ofzq337t15ohu2a68k1oindw9q3ctnm01m9jzyo5a9swi3ishzbku5xn0s3v1uh22t62hk1w5lgdfayxn1pi2p2sy49vo4i3c76h93b2sleajedp2hkx47rih8oi68n95siy3d0a26m7ix9rxf1',
+                flowInterfaceNamespace: 'ja4lj4jcfamraypbjrda8t0y2ib4muyw1umf1c4xo4ngx93y7rswjxd0ib0wn5xs7nwiewttxmh1t6o7b9mk5sfoaf2qnjmcapvwv198ortlamawpxrs0gl8oxzmntj90pchhzkcx2b6vk9uo3nyv3gh27rzwu1t',
+                parameterGroup: 'djj7m786oenz0v9ed92i539vxq63xw1dh4mawu76thnryyv5ixrvi70wpbfgaajh6c380ngcz090rqlzp8wzfiuqcbyugpx1i97m9tfsl7bta9vwc2d1o1o5lnp6l72rj0drl2fj72k1gft72k39cotzjli5zuxedrxx9ejqwfalgjje9wcf74h99it1n3jsd2h5bcmvbwf3sk981yw8r3baolnt4zl5p5lk5njhe7k9t2zeik7umuw72vaf878',
+                name: 't2xjog3tl3zdd7d82ni0e02y6xp0dekh55yqym9hktot1y3tgfnzbgnwyq3lherbclt8usdhgu5dmm8xemuegw97iwf3bsa8xjf0h2qqrnjpszbkqzztyjbljphgahxmfhw8kbxrpp57s9x6cjdal6qtgnfi7av8ssiv4ys9o8fx2cnwawkh9aq6s28d19bx5fh2wetk6g6ujjsp1rb8zw58ngm9wsx18xghvob2kzzt6xgz1c1ur3mh0cxl3dcxzkwvsu238hc6qhplswjq2nbl0ohwoo9bjjuahvd26c12hutlgzfznz1dfwg8ja5k',
+                parameterName: '5m0auyertyvy1opjaaxku6durcm7y2fq2t66cejelmt33ja5fjv03ucf2bjltqah6wkwh2s6z67x5cmuhack3hiaawxv8zm3epxyz8bpx7merpm65q8c853qq35ci5dboew69au0ckkq9z72yz5w7xi6ebkmln1sfr0vaw9bm4in02fekfz6t2kolpqj6yrxmbc0w8pq7hbei4vsd4b8fe3glh0sg415jdbfam1xtztruzpw9qkyllo0wef1tehip53qfqi41m898ydm9tm2spoyh0etrmscy46czho28pb07gpr6j0cgnbql6wncvyp',
+                parameterValue: 'fqwuv9dvagpoptg4jk4uwknnittfhmxaq9egt62s10xakvj6oahx3k643x1btr0ct1eovg7pfhfla1215iy4bbyj5b6tf7wik7mo8citxxari41iui0sebx2yccnsfdbj7erufzsu70b395boibib0dtzi8zcp51kgvcubq3cjjjwagwpj54yeoniebh8rjhpgjikmyb4b84kisw8h6bn1y08p7nd3y9erj20dm5btx4jupvgvpzsc9voanixlbbh0fwzdxeahlgq9ag0sedkscdxgi7bgjfwh3uxapbm097hy7vhrukdctih10w58nkdrol4zo3jqy3j2m1nn32wxll5bcth9p9vlapluwgk6c5651m97plkxjiy0e1xx8x4ck08j4np3qawrretmlww4k4qsagel8wzoju2l9ylajr0di57tx4u1zxr705ag4zrmjz77a7z050ibs76kttbmvl3btlvctjqbkpze5rykrkw4lm3o78olgy8a0vurcagehp2qq6g2tpzyg944kd5tm0mkbh3vtahrq4jwbxkaep4tzazvlnzksxc1q1lftx9j7p5aujr6zh8ux4st3c9a03uu7sfpw9necog7ipici3zviq3e8m8e4zbqlef2b6be8qoaz0c1lu110cqekcv4at28usftkm7tfsl7xcl9zjwybfdmc44byxfxsghpa4ebfxezoh8tr6eviwak4niddmk7tr2utainskfn9i27abzarcawq9j9mykgb5thfrf118t84r1j459yak4mhdqllos6nqf8okxd7ny81v4ndyv19zwbexan6xz0b15qks81jh263b77pzsbh7cpdyw03earyxlrsegq3eqmsabsuw29nin8s65q23fx5e1qmru25got6wdra9c55q56049jzi1x0146hilmsrchrogviwbt423s4yhdfq14a4bumnksikr8a0w12pa7tslfqx3zdzr1037494w22sd67ofyhrnx4n1p9ujk16rxr55u32',
             })
             .expect(400)
             .then(res => {
@@ -672,28 +672,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleTenantId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleTenantId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: 'jqk0t3wlr5mkxpari0xv42uj7cjm02pioomfn',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: '59ajyut7kqsxjgi8lqgz',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: '8vfupny539fv7ow0zeba5y6zsxt7xpjo1s0ar4glh8kz1s03bhhowj8edwnmy85satrowtupk6nyju8l3xrn9wrzkvh94jenmou7bhq9c4v3gic5whx5t16e9f1v87m8j42yfcrcc6qm4yqun7xgbklysagzstp5',
-                channelComponent: 'ybxraz6jc60b4fxamo55pvcqjldhzw3yig36ugr2sbogyfvg3ra1dition111baxa5zstdyy2palsc0q17clhm8abngrlgep9iqkutc6d70eqyu15fe8uoa80vxdibmr03x8qqnrxl33lk88o2u5532ikt7q5yjl',
-                channelName: 'skbzotvrh5yzscro12a67eaxfwzwuycb3p2ex8nt5docdx5hwhlcayd7o182xp44pt6ual21lm7w4oie3guowkjbylx7h69lctgyiejfvcj39nkm7vg7yhpsingwahroi00t1yxfl0vk3h6vwegac0j5uymrgd03',
-                flowParty: 'qraz9otfnw4z4hwp1e06hsevhvfw0sfw1ydxry6swaci2amnbrvddrqk5m911hiwtzs4nhnvo1whk6cljwccyi3qwwfuql7hoibhtmj4dkxu9osdo5b23iphh97oeiyte2ywq9rt0pyr6bpr6ll8qe4syf4nx42l',
-                flowComponent: 'e0fql8kpdg6clldcnu58pwcailzlf2ufvsepm3xzd129remg4adpl5cgfa46r76r33q68tq2fmfai2r3l4lthmi0r0uk15n9dkwk7pjht9zlxccx5qg4h806iy8bkzqdggn91rpaebi9jbwd54gupynf6p96bcqh',
-                flowInterfaceName: 'vrka7104hhjp92smoe5agwzk9sir0e1n1asl1lphgcs2ii6oe8gkv6c3jsb0mmjh5jijbbmkwedqiawun72kt29xp6l7fb29un62eu5x66dfibaqwtcr8ag6iwsy1h83mmmehxl473j985sd35ogz329fj954nj6',
-                flowInterfaceNamespace: '1kbjgs42uptzffuevx7v4mqp5qe1zwachzvvcea9enzf3tiawod6tvcqywxccve0ig61mr8n295lapmyxl7y84gl78liitot04hhzptpve0vk4tbakcmtj59d5bsfrvges0v46agm5kc3buq2nnsequ2lyjv4ow3',
-                parameterGroup: 'ux4i3prpggrzaj079yi61acearblmr0icdffwrsj50fl37ph12gpjw7niz93fjlo83fxx61952rpgusssqngy8hc4u3mwclenlfr94uyawgiubeqwrltvasi4dpbpqcfyqsr8r2ac5z7arkj62jbd2z5efx7t7uy6yyjif1qukcsls2kudr2mxoc03pcaxbt02f52j41w01uc33z2rlt981kjn0v5htsmg76l05g42i75cpzrz8mcvw6j76jzhk',
-                name: 'ca4vom9mjct1y5zu5nmyv6oua3jpgaymex3uhzikq1hy25nuxxzxtgyquyhxue3meystnopzvru074oydmpycureze3b7jrs6yf585cbweqanejzx3nqufljl7b7kgvame56yose9qdqasyvxhvq0eqz1hv7yt0763mo77tr4wco1xhwvllci29uksf7tto25fiawmjpttuqxpuzmcedd8xnluh739znr7asz60l3yde40a0ammy54eewf1nj6qg6hp1zjj59ewgelehuwiyto5kx3vlf61dk09g6bt0uuayur3vrkeh4vmnu9qlcvkd',
-                parameterName: 'jv3k445n91pphfkyqtft34gy0sa1w3m2is70dam7ruf8svl6mzd9qkshe4u6reb9k2wq93nwnqs7trby35nof0tl8mluchrarvim7f70csci9390i5wevhttsbmvfh40p7yzormqxheo6okqbe3nn1hc7532m13skc7bf6kvu2broay95xc6krsiws0yqutxneahgxrl48zvpidya7l0n9jxoyapbv7jvepzlkmnri7lfm78u2tuins1i7y0zwvez6f005nelwp7joyi5gl13s2615vtmvhpaq1pvir4ic9wiulruau3rskhf1dncuqc',
-                parameterValue: '9iar90i9crhfamv95nl972yrh9bdp99ku1nzmg0seb9w5kh9phzh1l93itbwpsiglo2kyrrjyntex6zaza2lg7wrwee274h5y5s8yb99x7j0gi7fcjg82m8vckmrmd16revb5qepgi6e04zig73iozu15rwuktes4xyrhwn14zwzzo028sepizfpcmk9dbm5nai7bjs7hm0ct4oc870w68j278elvpptxab6w9dg1mhddnp1x7in0npu6l908rp5ouzsjzl8bjh7ybbes6tx5z4w8ug9smcgohl4hgmwptwpqy79aymxtq9lji1yi27s4emscq9zqg2lwof0anxmsb90zl64g9f8lpv0o8ie200mev1nwk1unsn0x1uufguo29w7jwwuap0ewr3imol9ef9f4ssrhk8mkui6l98jbzk2lnv92ad21zyschjltx4vfy9icbf0ewaewf4pwe9iovscsphappaq78k0xzd883jegpi0302cleweo1vcnad5750myarqabnhsd46kedr94ohbwjepmr0harcshq64cm4yu9fsaa2sc505v4sv3icxq7mb7gse2v6pvq49w4kxvls4gr1jl7psk96ftak7y3j7zwsqskoas3vbgwrg2bkhe95cxyti1tzwjawauf9cwdgbcavz1itrv979v6mfdrcd2e54klxgjbs42i70fb1le7aoaw8smol5b3z4xze7cb89gmp0g4n2v0tbqtfpe0ko4fauu97lpzxr6gqx0rk3dotxw9ikgp21vpjtk2hq2wtokvhzyz56nmp73xtxuwd5jbe3z2zz16z19nzktvu9o44ovbw5c9rcb8b5jfuhm7hmw2mnntg0io2u2pm07w2zlc2xrnwl11wg6mb4eabz8cr8wedguzojlsn8yaexg5s3dzp31c41ubbgsfdx0pjm7hviok2g5zfz2m70osrua8rbw6msgxjiw5d6b91f5txbql1m4byodsnp3klhoftzda9w950n1zm6ffk464r',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: 'rqfsfpfy8ecds6himnhf44c7tvz4j4gi1d65f',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'p2d6ajnbxintqbwfjzdv',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'zrl4knshtgeis80ossjb92rgdy2qch5uh4biczpwrruqnnxapck3dihqriff8fxoqhknuqa4yocruma9ryl1fbpf0htn9z78jf65z8c1kxfhh5kabwr0jtlv801unabpoctl50m4jv481da0cvk7dw0jexubtwde',
+                channelComponent: 'jo6prlq9x6chz4kg4lhlwiypbzbolucnjwmsf6qrmoryi41ssqpqqrhbkpk3dv3805241v5n3823l32yefn8y4dyzz6lw5n33xb4x27koo8caqc9y1tj910adclro4m6ae4n2d1e3lpxgdlpmlea7o21fpefbhrs',
+                channelName: '1iqqyysflbrwjt42m4lrhe76kpjnske4zw8bz7upxs68uhcjaf9v435mkmp5hl414m9j3n4s8bewjg5pk7ofobbk6bta6juama5qlffn0n64n8dfluahn7atu40tc6b6zwkeucooslnyvipnnz60vp1ivabkiopv',
+                flowParty: 'e9s9x7zt8ewtytilsyeo4yn9gq930dgpquhg88x0aap9r58lcjjquhlk11wtmrs77lkv5hpchf2mu08cvbvhr5td40fc68400fsfkwy2fkyjczgxj2wbiper09hv0zxch0r7n1v816j93wn2do7wfx0kt0dpjuqf',
+                flowComponent: 'yxbmvq67yqg0itzyrjy4grd937t4hwqml7g1kdaj27oieb8o1b2kkel9618zjxtp6og3f526ob4tsrb3rru6s62s1fhoo81k4p9wadbp1l73b7c66vkta7itrilwwdadbove852nn1gf7wfj7338xa2qrocojee3',
+                flowInterfaceName: 'rgwcg18myog09heoqy1jvx42h4gwtbaslqs35jovnchgtio6qkzgnamsg5740twclkssk8qxfynd2elk8n046kxkixfh4d2yonjnce9iumfps50j2k2a83o0b3h2r901gwjjvr5ab5j752oj0geidt6rdqwi8boa',
+                flowInterfaceNamespace: 'e1ms2rpxm3mxvopyh5orliwuex48z883fparyjzwaf4muncdcnxm2kcbj9nctsawjhb3iyvsjb6kyznum2xkkx2xl790i3uq5h0pnk8ux5ddhhll20w0eqsciz2obqrocp44tthh5m8yfqqe738m50iz26fs7mz2',
+                parameterGroup: 'i4vtm4y4pay04hlz8xroy12tclita54i5g8mxynm3ts6cizc8pyomc2hc2bkskczokae8l47kc693jm5imakaxq1r9beke5xriljfl5homnbhz3mryg4ezp2jfnj61f0jp9cc5t29mshb48wka4xo4yz8fm5w3mm00asdb8hcvc9gq07c8zf58xea14tf750usi3hjpg6v9v87ngr49syieg14o2h86yuc9qf2k9t4v35rxfkgeekbgdtkpgyew',
+                name: '3povf4v091bgew9vgxvm2e8y93moaihswm02nmfbk27xxd0zry0pxrc6qq79zv5moocle0sps16ez9yqyslklmg6hlmbvv9e3iwo6so9vyyyfd8qw542iedfepvnpy1apvquo56b42m7rydkmsgf9x6h3g9quk8ojdgjg4mh9oq90gxesfm7nuuovo94goonasnuhednhm789p3e0yoomgoznzx43vdke50enxxb1kwpifq0ykfwm49o4vuqv15s6ni11xhvh2f7qqht2d3jldkc377yo23de4cbzgdk4yyys6fywbq2fzttnlqscmpv',
+                parameterName: 'dvbk918cp14augfxtx0ku0ul8x9a62rjckmpqd2f693ex34zdgompai5flsyqy3yi0d9dy627z7np842l93bcs8g63nm3vrtk9ph9cc1jigjg60tflv2dbfkgfv8ohazwy6kll8oc59ci3xfpso05y28zmnf25dkcelo264jk3s2scbyeb1paadkktug95uyxyqpvky1r76qduuruob3fzordpwgm46q9obgo5qhqvuaqr10mtdhrp7cdba3eq0uyuipojgflk3a75r1vtgbuk3b096mtcfw88hruewcc506jlcnbem3fpvogkxsz5pb',
+                parameterValue: '2xk0n297s7k72xss2l43gxyqhiio0g9t85uzanx65wwbbyqu3itevqh549bll7b78wndezscrye0licreccw3xcta3pyrsbn8qcwconbh8iobvxllsaamt84i9g6wu6vwlqv5s0xgswpjgrdyy59tnh6mo7sag7gpi6mbivfrm8xwu1gafq03g1he5p2v3j5t6eqrjz1km6pvjsjkpt4ywnr4a3zcelb8eewesvijcakfx4um75bhj5lqfmoykrp4hptcm2wx2qi57dynbevz84kbncvx2uxhoj1lpbqpjwypksnz068ogxt3u3ja53w7vzcms6y03omqch5q5asgovo1mpczc3wutwcm0757x5pwz96qfula2yirihezbt1n7pykjvre3j1odea7lh2y42igtinf7fay9mfnonq1n0a6pk11m4421astc7gsryp2u500pvikiibj9ph7m82akznp2af8a9dsuk2rs90t8318fgf8cam5qhotr5umykhrdoogsf0j43wey4wcxvytxnxylsfmgleng2mhbialivjvn998pxj0p1qxg0izw8a9tpqgczcs2z8qyc04nqu4a7rbudu69915trzr4y76u2q0dwq852pk5p74tscf0gzgalammdytirq70v404tqb0274t795hnurlha9qzhngymetrd8tfr2x4oric2s7s8hhu2kxp3ao6t2m61tso8q2mfh74yjm5uj1zpwvrlxf77s6z3pwl3d0memu0cyjahrv4u9syqjp2jfpy7wzz1bw2k5gqgbugrr5y4hpx4nhye2mb1qlqvmy3vlj4b4ut9x2mpbvhswktlsh2aw1lllj9w5hx88mypy0nh10c1wlqb9kz4r7vewjbd36gig6bi1kdxunkcrkummxhwdui5rn5o6frl4ykuaconwutk4oar4334cuflj0moejg3mha5ebqzc0b85ic86u9s97vdstqz67mup46xs51tjun6gnekeo94ktb04p2pyry2qadr',
             })
             .expect(400)
             .then(res => {
@@ -701,28 +701,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'wke2wxobymttz55umx61s7lq0w0a9eqk01sh6',
-                systemName: '4mmg2pmxt4lqqmukk7vx',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'mfeskr5qhpo2s5eyhv7x7ymelsf6eywvym46q6ofn94qwsz00t90b6c1u2kqeo72ynzd76pehqo6wxtugcsx5cr9rfcypk8y9bmg4b4tzzkyit9ywnln20c1mym8n2rs4be8dzz2xqpz7glpa2ipa0xpl58k7gad',
-                channelComponent: 'mj1ook21y79mpcmojjs650gfhywd72sg5qbns87qp1vonyb91kkpjo6ok85o6u6vr99m5ptusf1jznr0a2jya565w09cn4h6mxfeksmd1qc0i9atbvtxccvc2vv49oypovfv6u4inkzwrmtf2a5g3v3rpyd3sekh',
-                channelName: '79l9g9lvai9ilyztk5rt1luex8b2m72r7xonhl7vdnlu7n5js06zb1wbvsiucfgqxo5cbvkmg3q2ed33k90un5z61n8v7gvb85cqhrz79g9t1vz6nz7lgy3hbd8cqe1zck1ymsqd7ocozls6rogxnjo9bzidcbmo',
-                flowParty: '1snzl8qlzc0mqqthnklmaomborg3zjwwil6rj3ctrpl03vkic14awwoks1968b9d3s36sdy2i6magg6t5hvhl7i761ixk0bqan361pl6s8yjmt5whl6u33e4n5zbg7s609vlo5adqlxb1pkbb12439qj98t5h1cg',
-                flowComponent: 'a45j20l17yypxl80jzeqnqh6xyjbsjd47pmvjmzbicxzki81bite8rurjfapskg49jq1dq7sa05bgc4myqvih5ef2mkpxc83fusi360qvjk396gvhvldu44xzhed47ln1b2a0eov6d0w37mdzjho9vi2glad1z1d',
-                flowInterfaceName: 'opo7dlj2x6a7ueumc2c81qexvpwd4t7kgi9acsupxy50u3wu6o585bt32ts6fzoksebov5wrixodn4chkaedibriizxsay4iondkx5ph7gejlfnzjwmr4dcepalloqebxrcj7vjseyaw7zyf2fo5iykhkbwsgl8v',
-                flowInterfaceNamespace: '22qyhhrhnu5hlr41hnnuloinwq9sp0j7u0vyxx361zjhmdoybgu58ceyxfhrgv3ual24xgbplne4wlo8q8co7eojcr7au3aeidomsngkwnl5b87ytx1274q2qx04q724yz67gkgnci3dn09yji5d2etlnvtzz1xl',
-                parameterGroup: 'mhcw0re2mbyeich2ot1i7iesvxkyqnog311l71nhjf3ukqbw1vyaqczrzztcc2bz4dfhpwc2vp9po0aymdi3u1f2ujcqkmowi3slhg0xsny3052um0vv9h127f5lvhmg2zg9lp4dtumr5zx09erkwwicn3pwf1lw8qrib9vb4hiv7mx5o190xewwm1w0qpyue7w5xjk1vb2p1shh1knuh32ay63q6i9yzwvljaxmi7zixes2ptr0w83tgcehvef',
-                name: '99jtpace5mqkidarp950r26pnkj4c8h86n6ukv7emh9z2pexrmddygaul8guutjwgrrwmvmt3nnysk73c5o6obwyzu7y3k9fe1svqod90m2zgw28azk0zpnbovuwib2nu6ybrclass70btkky87cojexj6haq1rg3rtbav21igbaj85uuyxwh94lwd39q2o8qj188uznv6ao7l13iiub4b84df5pl78j03jq40sbhyzq33zq6g1fhs3gnb7jhldyj74gsgap1hbx8zltim960ysxh19d7srgtf2gxqdoye3l9rabycg7qlg6d6duzu81',
-                parameterName: 'jzhva7r7sdrimoj02ba9m0jtjs5hlyd3jozqyaj8m31uhuzrpbnh0ghca2aqbtn8iakm1nycp7i3h2naaupght6ioetiucjxa49rb93gkacludmfvfonb4dm7rqrdw1ar00zlncn2jgwaxjwndbej2miofho7hx8a56a8dzl1q3uiymr4qf80umi0e8erjuaw7zab5lgk9fchliwdxv9nu2nvotk8dq0lbaum8m0h3htlb8chzsa93mfmlboiveq4r7dzht2ocutsf1kvhyps3e6puk5i6n4ekge6k6bhshpywntadjfh8yk2l5rbnob',
-                parameterValue: '78eu7ehj1ae3qrxjgpy2joombd7l94rj8gzix42nzv7a4muey1123s7w1t7b8jmllbd9na1wd09hgqd3ma4t8zxmsqby1ka6u1repe2fyw1ihi2o25s34r1qj4t9ra2zllslokgfdi5v7pbz2xh3ggd1zn976wsnrlh76pgpzhmh613fi1l0keuilt19a549tvt8t7p141a7f0ng31gst6hosrswawk9ny1hbjj9f3r2flx2r0e29ldtesd0i8lv6kj75brdy9ori3chtoa2kny5w0v145s6bnphpilj6f1svzjoixkmy8wzlb5na6o1p4tgfhkeshwrgd1fc2oof4xyfpqwsoght7oqtkyjm3vho0eu58jrl2gsjzs77aj4dzb0qzeco9k28mofd0yjrg5kmr36d59d0d03yra6dt42ol8y0w53ew1dkfo18lu78z3olp5zzebpc10zm0jm5o93ci3os5uff86mdw8eubwz006ez6uw3tz49ul2r592bykz1txtjx3fngwoloro2s1kmmqbyem8xmckd2ncfuxlt9bbdxufgyn88q1o582tktqhp5cq7otvuyguw6pn0qjbwwwnitcktx2v06bc0qzin05ccfapqz4fkyz2hucmstzeajxxg1699wbnf11n3wptm88km4bykps2osavvhv9iseo95uzwqe1muczcumn97kny9oczc705zwbnutpp2rmd55ugdar7iuch0e2laf2t7ewsc3iewr5oucj31vv77ywpdpypkb6uy4nivsj39t7y17kwjzuplofgprg3gez0eqt1ahnb83b54hp838c3knf2pjnc4ezbsphpzbsvm2xasqj0kq99hvftwu58cgaydmw1o8fffqpxribkckw7jurrnfz9minxuk0wque62y9tw7v5utkda0nmmjm789guretlar4stfxa54kislu8zk3n9eafu2azjcerle7xjbyc47x4ajno27uzf6s0tbsa04s539v1ebgvlef4k1s',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: 'wh4ntbff3dkslthn8ripeiypeoqwka4kjm741',
+                systemName: 'hr39w8c3hhlbqjoap76t',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: '7tyoi5xib994vv4sfrmtn8bkttifyxqru97b57uaa3n7zdm6ppm2z34u0se83fwxedt90qhv2nvu422mj80jboipzgck7dwbg0py1rwq2ybygrl1tnyksulpk16en1mpykmguh8jv2m7qpmy6mgltmvy1q2qr4xi',
+                channelComponent: 'ey240no8s5sfxvbp50tftcn5u76fkqxnepdq8gl6lrv14w1hbq4g4d2xembymzqdqi8an6btxqbil1u0xvmvp7qd56476bapvm7ypxvqvr894g2tlh554ueeszjw0sq866q5sotgsotkmba7myfkl17tgdzr1u5y',
+                channelName: 's11adg8es556e8wrddauhnix95mouch1ca25prujpx63t855h8svriw2h90l1sdlgvrcxleg6scy2cut541doygn8fme1yd46hjdu5o5c5hmhh9fn976idphp0cgq7wvz9y3mxn62ox845htk5mz4vw6khoiyckx',
+                flowParty: 'x7bc3fhf0xxvrklx84bnth26bqxcr660qc7363pe72z0ihpnyg3qki3tlvti2l6ktyaskljcvkcxivkf2vge31qfkhpogf0p51c6s9xvifr9ipsueyuu3uxdpf1owh65nf14veoa1405uj0jlhkatkeqr2fqq1gs',
+                flowComponent: 'deh0m8mi7n5ai0o3j0ant1bq9c0zyfe9u60g6ycw8zw0v3yz0uur385a069eampdlrj88qbc2efb1os9ywn11u3fu12tra6p3nwqwd4h8n005wozpojenl06acqgy8eufqqjvcoua28vxf0ytzifc1pn2nqyqqkz',
+                flowInterfaceName: 'w5trwyey0ofau03mlnzo2iyduvw8uawnwjchtjm7dgrj30xsqf8tibvcbjhhca2yeztb1t5vxogn2i3ia6guj0qfg4puhith98viiija4aroit3w08ixofi315ny371r7xcmn39d6roe7h6tqh7gugqxurr9o72p',
+                flowInterfaceNamespace: 'tceu77izwbgyxs3wdm5gnpnlmwg0hojc7h5ndb19tnz7scucdweg8y3psib1axibe0tkegkpcwch545whr9ojbgauxrp83azhra1ruj5yw261nqmhf9qfqq0ml4xqaq085m516u7uq65iggo64wdrwz0vuiyc9ws',
+                parameterGroup: 'mipfxj8ve4e7kmupod41l1v0mrphrgkf0zm0xypxt06i64di29yw5c7mjzgftun4y0db1462jvsriu1l2v4xhsn7mmx8p48zokami8nvopjgpyo03dcgjt8l5w285e2kc6azdreh244usld0h3sfsc2zscyvjurzooijklskp0uuyxmftoy6z8mp4slvwwc5kq0x7bygi7ky3oz6pxbxbucrinplbxogw8aunv796e8tdxxrsd56g55gj1cerot',
+                name: 'ycdgpy7mrrvwrq0sonbz8hgem7ro3tkjkujln0spevk03fx7gzys1mymg8oaueu99aeu87u8immgnja242l85w81zl5ag0otmecmbhwu3x6tq1uyderyyq7tr1r3yaxdfezxdwbs0y8j258u8c5f07gndo9qr8bumgehu8bu3sj9yefjdg0yvsaqv3svy3udn0h16isxjtffpsiypwjzgbcjx95z8f4b6vzyjx6o7dqi94bppp6c6xeg8fdy239tqz7vva5wwlbe4yq204mk9729v2bk5k7sucbabe8ko5tjc5qebniy9zqvr4506u3j',
+                parameterName: '81fz4ajr4qt7bmttqoqn90z7xbkijtnlhff7uudas1tyzza8ff42v25tel65825n3secpaucdq7cj86j63he9ll88mj47j4kg570wm7vedrotjftdm3zspmko0wsuo58cvx5jjwbax4erjel0hczzj1iou62jwqegu37xztbbd05vr1wos9gemdvs5q3wd8lfrmap8hxdj3nm8dlsdviwefw3lu24l861tio7bkcw1okbx736hsptkjedawc4u1ynawkmk1r8b4uz21se2fv9il903lcoxob17p5d147v0rhiratxv9y9623ylo8g88d',
+                parameterValue: '4nlkqfe03l42nkbxfx7yg9n3z70o4lqaxktazv3fm1wpteja92ctrlgc3erkjj04wavj5dbylbwyac0nx92ze0e3fbhl09o7jx2lo2faspuaw66p8bn18jbajy2udwecp2wsrjqi1jvjtvmie8z82e9tuylnu7w7qiljnxyya81r67tngastujpqcir9z0n5837fete0h8hm1ifo3wg6mmblrobkahnfqlyqobkq138nm0c8n1h7y90pgxczz639z9gd9mx72cfyyx8l6ewq1o03qbw2dg3pu3d5ss5j32kcism7xlwa2297ximduenmo3gqegzz2v65bijc09o3iijfk0883ww7q7adnvc6x618l36c6tx2jk2sgdbk8a6lu26lze10jjtsvi6rz73ve0qfl068scuabuyx3vl61jcss66xepxsrj5s4sronseqc9sfajbsm55agtuqj0af6kqkbh9vn4x19s5tb7r0euooylcp1s17a9uql2gy0uex2882iamlfl1eypmbgcqn07v3gi0ufillwxzs4e0dcj4ffgzcuj74j0ly9zu25bjuhljtbvisi4ro67foxxdcurk0ak0h1ond3c4vvhc68hzik8b5chsqqxfz47hfkjkgnr640unrzvbdspdinvz8fpnw2kl43not8z1edieqinoxlumrf8la2wh260gfwc5v2yt9pzmwqxdbdn2gjfjo1qdfp89u00ddy6mf9xkm4bqj6jj0x3ffvb8v33wha9fulq3u8scoglzb3889azcjjpsgmvg7j8acpbrv78nqbizsxh5q2dmntpr8wamuoc7nucmj6fw2oo1le1z40g98keyjqr9w9od21z4slgt1w106qurbl7itr14mu7q64jrv72hpnwfhmggt0k9hjwjjroww5uyp2ripmepytnvpek7qqhfhq8b6nt51b0b9bjbl4vj7tu2yb4cwhru3jlhpek0l6j9qqxw924ziwmqelw79mc5w8awagitgy0w8tun5',
             })
             .expect(400)
             .then(res => {
@@ -730,28 +730,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelId is not allowed, must be a length of 36`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelId is not allowed, must be a length of 36`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: '96ku312c2n91decx3zu2',
-                channelId: '9yockkzo4rndd7xx5iuhn1wdgktcaa3uguh5n',
-                channelParty: 'o5fb6fbxqslcg0d0o9nck6fstus3519o7v3n93rppg3odvaky7qr67dnnyb7hcr0ov08lxgjtdyafb0binrd8qgv8x2j4iyy0fch1688l9cugjywfscija3uc7eo75ch2k2ccdgn5wrlxveickdlxdtsj3w1yvd8',
-                channelComponent: 'k6602q4820wh35tq9oeybqsb7pgsctqxszryvskty1d8y1plhtgw4eym0vxao2mfj3bojr7ggbrcxte7aphrmflveopius547sim4ayk7l4killxj98h71d4ix7zbptlqgz1zhic82fy5pyhfp225yqg7dg4v4sm',
-                channelName: 'umvqjcmyqkv4g7pj73ds3wbp4a4k199x1mnnu63gjxvyuwhk14482lnor0h34pouhycrv765mnmu46qmggnbxhahqcctqpwbrkoo79iuh4mrrhq4ou24n3peeud4kfgoklus9g7sapv1qtwkqiexfyjcbnq6s37v',
-                flowParty: '8e9hbuoxwx29c0fd01a4wr6spanju5el6radtrlx1anclfxf92xtk8nxhp7h9sunoxs9ncfgsvvscmkickam18mdn6tensadudtecatre2rywrxqcxwf6oukzaajsafgl1nafp53o2sgithh9csf5trw0fdudpln',
-                flowComponent: 'n8pvyopx7iqee3dq2bmvs30e8btp3o7g7gnmrv10gq9vpi2f02fdimlt71hzgd4etumc54gfyl3a3pyxxw19mfiw4686k0dcz90fg0lol3vkgjw1oht8vkyyjgi9qh3w29snnjitjyje6n0452ex0rqlxgr65690',
-                flowInterfaceName: 'f5hkuehay4zmbvzxl8q9i376rvhef7y6jn7q9kjuisfh35gaq291xwnbc1k9cgf03wqifik0ws36q9f9mwq75lyb0pht1rn5lqz0njtwzxnqgcmuam6lar5pgsvs6ud0lc1qxesjnkl61atj36umqz5ljv5yg9le',
-                flowInterfaceNamespace: '216ptp5k8pvdvb9qplkic6wrml525u0jryozbl942sx3cqvhdv1f3dtn2c4hmfx2u81ggay0jobtnsdlngyncxct1hntahmnwb9f7ciwy09qxu86ivv27t724m4gl6l5y1nujxxncpnbq55t4buyhgjkvykzit1v',
-                parameterGroup: 'utazr5vil382yhy1jp9nnpeoam6h5gso59q29yo9vw9stx94ili5n6m32g4dcfmy90mol1lzcf1pupnrr4ho0lbbxpxvnohn8o60d5pcfqesp98omibu478uodx76fqmwz7juz4xdvzl4y3m97je72s95a00ypvx0ldx8f0w4dfrk7220aqejeb3aq7uhclnvhzw3gpk7i8xqnprwlyam11kvggk8gilkt679x9exu8h86pk1en4zwhqot8bwwf',
-                name: 'ayztw96at4j6rdz5b2acx4660prhzq11vbgshq88nj1xcwmrnqhcklwk4m13fgntk9ttdulrj8wrtdf83jfnn0161ogwpocrhhgoyrjlksg0b934pym5ewfu22ezzefmki39cdyt4b07ouf9rpropwbd2d27pf69voqz30qbq7z8g64rky1ifftkcdu2ei5kals6jf3t5e3bzx60wxzx7l2q88qu3kkdm9znmp783tgnm69xud5i0zw55hbayilchdamqgxxa0gcpy739djtn6nrxvic8x38eozd3lceuyqlb5e180vbo9gsah015wxu',
-                parameterName: '9ikccf3odu1690mwz2wmqsm68fcrt5s2e0e8a62wap3wzqevmu0aull5wec66guv9d2neafk49i6qoonb3kjgl3n0r17eafm3jyclp9r7r7m2hjr9oienr6urdlp6kg92t64nh9ymyoxbjdlof3emjn6jzjf6hb3qv98d1oind072mavqshjp7zafo5v271xevrmohh2itnercq1ldimj0ccx9cuiepdmnuvybhuue6b9iy1wkru8fqh6abfbsf9l35xce0mdke9hueu3d1l01ti7lzerq5odqqz5ha3j4hqh5ot8o76sg7jhjmciy7i',
-                parameterValue: '2qzhdup381z05jmvrdzlaaerz66k8n1sgv1sji3wx1enh8rmfi4ag84ypdauvhpu4gi42cbngzuwtyuhen7dx2vvz0dkezubu8g7bgcbnkzuaidk3oproox7bfjou71l7841vat1owhq7nnyl9n2tgq9idq60hq5tf9kqv2q3mvufgxdk7qaxsdmaeu9tv2wfzprh77b20b5v21jjec68g2752iqqzhzvgfw23sw97j93vwwca36oqd7qohyo88s3e0xm9ts697brnan9jnrr2qozaxh55xuf80yx4whznujmlt97l13dtbftje6ckz6ko5njocbu1ql3lagrl1kz48qyzjxwxpyjsj9ljdf2fmcph8ckhw2gkpilckxiz03gmtamiipxqshsv2bez9tcghwy35qhtlastih3doporludbr6hq2cfoxzk4v0r6acc5cvcidyg08s33ttuhac6561366tqwksy304adezbrg2qu7tmefdozeu889bze7k50jzm06l0iqkpddrsw493977nq0hu0p81w53mn05rjri8t0gyryl31fxf0ifpgrytiurhbrvz8jfm7szn83cfim9erwkdunt7gl2zegj6acldhg7s3pyjivzjcndn7ft874vyj5chv08tnrjhey0tp45lab2ti8qgmwh8yo4iv5f42fg3ckpx2si4q1kvriagxzslalngg4a3jfktqb1h636k0g6mmnajlu6nfekr3hwolsmg3reklnjd7qpx3urq4a6mlpd08jedp27bm1g00s22ozxse8vfome2upit0fvjk1vnub0btxgp77gjl46vv12inojfz2q31sbgjp1mdrcyf7i7ai6n2ed5dxy60o9j8f6zwose85ku3geyk19pa3p05siy6h22yfbtymsukgn7mb64e4l60bt0ijga9ubt7sy1jrcbbg752r44gx2r3csw96piyprjdd3f1awq9uv76it0th7yqwqvadxptu1pyaox8nmkgcbln0k05m7',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '4k20mv4zom2d7uhmsu9p',
+                channelId: 'xv3bkijo9gfjpko8zxz88ptd92skv9affuwtr',
+                channelParty: 'uqac6hrvja33wt1hajzp8bj6zjrvbzdh3sowmq4qzlmrsrj88a87yve1a0ov8k2u752mblyu026db9fqjeo85r7kmpyn9y9emws8nlxwci5i3e7i7cdlh6lyrwpwtrv5yq8u507h8la1yfvd4wcpfltg8kgda8vd',
+                channelComponent: 'kkl7xmff8oju3j886h0p23ps1j5177sotjdif3u35ey2xmr3hbuhr577n7w8v93j6wx8jogfc749iz8q9435en74q4uvsfqb45y5wy06yq5no92486whn7w8at12p87mb1c6ng7w7zhjbte6s9f55sarltcmh01u',
+                channelName: '64cvnzezu2dese87hw1aapv0xysyr14y1uen8tw6sg1apnd7xy7h6kayuabebzporfa8usia4novllmj1v77qy3r5jvzhm8m3gad2cmdh2j204su4eefsd24c6y1l64f4gm5vdgzr7c36iabb5nyzvh4scq1wnne',
+                flowParty: 'eiqc5vilqhgmnqxo6sq8krlzhf1d5eghszb3lk2siq593h72fg98uye6rql3t13hno4r5yyn0ghry4b3czgeit79ykk5lyz5isq87f4pbyod4liw7jiuo4t41vcvisa721ksybv12h9k11l1w4x8gu3qpdgbyqdl',
+                flowComponent: 'nvkjn15fpqt4rfllmp0sb5vtvczgmsxfqfpou2n9uopd4uu2iyfkps4yug15il71ijhpmkg7s8q6it2h58h0q0o962hp2gkx7hgyjl19zepkkkr2wwoocqpiit6qw5hjk59bayevhpvlxd6hg3fmcf2hzveengk4',
+                flowInterfaceName: 'tsx7d88njdx1gjp8k3smtiy0ngxnfntl7k8grupc79zrq1cksvdg3tfogmq41ab34oiq8fcijp4bh7hjrvlw2l5tix022cilwsk3l38ighyn5ssiq33570drm5ea9wwvom11juzw466dg63zl1pp4q6smrgmevjm',
+                flowInterfaceNamespace: '2pqji1vgppvk19y8audedbal3n1yhx6tc0kqafwxqc5f1sdcx941lx8sl2seid651xomkevykpk1k4nwvfenewupvhl1y3ea5pjxpx4rsfl5rznveftrgtzn3flqu994ej3hj1i3y4a1ime2q4trzpjybd5e13bg',
+                parameterGroup: 'f4f5qexlnwg0d1yuy8ptv16fusctqals3ds5s0idvdb0ily6ecoxni6ojj2hgmz4efzem8a1r6bprjngpvcuj7xbmx1jcvoiy67iwhm03omev9vwd0solibzb455cedgh2qjppwo34njnm8f9amims0571rzay5yyidnprasnw0oieo22s2081rb8qq1twtq3qptbameli4xpvd814hbck5inro4ogq14tgt5y0q74mh972tifxg8rrdpzo0ssv',
+                name: 'l5bio0e38hifb7453z80isbg3ki9hu89hz328d0r1zg28dfls5xfragpvjsjic7y32lqyuqrzitgnp2wbvjx8pyrh0f0euwwjvojt7z6qy45kqm45k2qiwu6ud4rsrhzuf5cpo9j5hx0ap9wz8nybqiit44uzgtx0ify2s0xkw3c9qf572o8erj8z9mym860jrm6ssiw2xh6nfjkt12eqylilyfqg82jvn8ywsrwtaahyxiiuwd0cn5hn2o7zw97qs3tuwww0kg3qf3d9szww4wpgsseo2sp0nvv5ct2mydd9du4jj09yt48ib73rdg0',
+                parameterName: '9ld3dld7koh7oyniehqxsu7jwehoydltx0pkvlause81oei8r2h5z4v5e26gizve27fn5vriqpgrr05p2xhv7ecnbbhhthmruc81pbjtjuf793030lelohlk6sah10p0fkuehxsbnzsojjhlzl1whwdaynvg35gprdsgcaezylux3e5c45w7r17p1e73potskouam1egltt381xgctncg8mwein2fhhy8fz696hehclwrzhy7pcbsrtgscknzv89pbahjclqieuotp32qe18oxgcxut5r47jv9amy3uugtoy74dll9nlg1p54vs01ecf',
+                parameterValue: 'sxeihcoeb9xrdfb3xh3ocdzf5gpu7ni1h2lpjk9fpv1s7h7uxuv7ulkczioyt12lw3vtny19yiph5489evsrb0jjzj2oreekjmypk4kivuvauxqissqlrxvdo9ywnmat16ldu8zgdtcwma2f8y3urgunlg5941tf23pys9y7q3xmzsrrkbfsd4ke3vozi5jif2i1bzr5z7fibtfqb7ne10486rvtv4ldzwy68u7c6plpbnl4t8ujk6amn7yrkuhs5l9qaxebb0l37uawrifd6egpkeq0mng9dyr49p6nyuoq882dvfljrgyw12vjib3rbp75de4ejiiwpn7c5ut10dl6t57yov5svbddff10hg0gt4jzbfctdxt0tdeir0hd489jml5r57xl4f02dcu61uab6umqzysiq6vc1y7kkgqcrz8r315yaeem9utrbhuce6xjhb9lvczucl6yxy1q00yn43sl4n3isfbw9lvvu10bll0jayldvu4ve85itfwmn4ckdx5tx7nw4gwau53w8w4tmj6yhcmeijhekwiesjuc5jll8ksa3qs33je1n5z3tsqunn5an8m28vxcmnyps1donzn54zbbmnlg3wdj4dm4jhuotvnn0u6fo3kte23fph0tzff0x5wzl02gh78hkzs8tfr6i7b8ndexh7mudx6g3a7jvqkbjykc9zb77e3vask8vkn9lmyoohwidwlctpg001dzx6bej5ojzepvhp2b50yipnk8l3suycbhvrnixzh7g4cuojebopfbgd232hmk8eskz6xv92uw98tkwkyabej2pwpv5pkqh4y0s6x8aair7lw8pcr6hdcu0avynolzrnah9ihznqbe786u8srxe2b9wte34m8tqdsmvpamobd943oqe0mtt9op6g31uocuzluiem7uyr2baudahtneolfotxshfwgf02h1auq8noxmxh2y4t5v6wa1r56fr4cq9twi7i3tavm7hw1n8jznbacon12clec4ixi08g4z',
             })
             .expect(400)
             .then(res => {
@@ -761,28 +761,28 @@ describe('module', () =>
     
 
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemName is too large, has a maximum length of 20`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleSystemName is too large, has a maximum length of 20`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'i2xnhb31tdui0rr2nofqo',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'd9tbrltlmj2p8z2aqwp4ylvus44b2mmx37jpmb51audqpfo7wken3euu4hwlj8m4d5z7i4hz7frwmu7ruk4lxkwoqa5jz064nk49ndmcojlb0qkcp37r6f043e5qydmqwq1txgd6cd3c0zbwqmhd6ibpi8b6rp4e',
-                channelComponent: 'o16j0tnxueceup5m29xnbw0z5a0sizn3xrwa2lr7oscdgf5ign372qekbzp87c7621j7xypvxsoams8928k9zs37za0nek767rg3dyzm9izz4h9vtawqy6hs4lqbln0boh56vlo76tjmhav0m6qxmdnq0ijffjed',
-                channelName: '0td180k41ov1dljejrx1k34g3lt9kye1xpz94q08pns5u4ugmvhn8mmhxdvdik69kikzyfbl4hsnf7trmaby77b3zfcrk73qevif4jvfamss2q20v7f7j8claf7hkz0o7ko1m1u8u1yca0a8fnrd16xl1dbd3ip4',
-                flowParty: 'bbukne6a0tj0i6s847c8nebqsa1884vo6elx1x25gmeyzv7om4ffj3mtrkzbeolzc5tggcu1n8x6s0k3klh53fqxypceenne8erg0hlel9pxrd3yy805j5s7oybgxshf228g7gpg9h9tq8arjvkcal2mttbnv1eg',
-                flowComponent: '00y0ibyb31h4ez3bfdo0vrwypgy8xpqde1gp1cp6wz6d4iit50ebzc0huxl3h2n4caj31d9tr6gkvuac9awaaf5c539t7cbfw2hl864klblkwb5f0g740x6j95x779zari90oppkh1sbufg3hk1wcs6n149q9jab',
-                flowInterfaceName: '5kn76bequo1baalggf6njvysd89vmxus6gkarxrzqj2fu0wvwbwsbhq0lvloxa4b87xxt7i7wxkl4jv0qd26q0uemsadpphda0j3ktfuo1pl86tlbheh15s9wlg1xe0xmb3jqmw230xekxfg5fpodul61gq82q6j',
-                flowInterfaceNamespace: 'i1j3pzc0m3fc7xcqut257mu4g1uogwvmcf5116hs4qkzy8xj21dqueiin94i1xb5om3inc74m991e8m3t6w7k7ked5bla2f2h1tpdwng0fdvvk9dd2pfbyfqq8zxzod1qslc1ww9jx2b87yldradi7cujvvbito7',
-                parameterGroup: 'xotkmnmr94upu5ffmxlmctno5anl7uymem0jfdupv76lngvr938e8tvandnnox4sw42ywtkgzbszznfovzo2ijmq212wwg9ylh0sasd59g54iv96k21a67voro5wjqaqjsehh9dimp94u2d9fuewrq02za7749p14uk6l30rnxnu6723nc8l5ky73d028w2ook6v82xy6x3v64u36wtdsx5tt0vic09kosyrgfn9le9cwjs7mt4r16pe644kinc',
-                name: '978edvk6p9osot8jnacgcqsvs5hawivaplc3ihbr20tt5y4jl4onnj23k7wrmge8l3j08w6vlwictbjyrd9m2xlj7p7p8phvdspenytf249ok7wwugw6jkd12igemg4dccxv3yis3bza6c9ykcn6spradv4b4frzi4k0vc766zw28pjx78wz9qvt4qi52jcw89s3xros8fpdem7avtcqfym516qbyxbh17tdtqwfodlnnjdcnvje9viu79mr5ymeoyhitqsf7o0gkxwi19p1dfeebsvx9utw3hft4xq8mjwzctekzs62cto7ftu0f7tu',
-                parameterName: 'i0hygwcnuv1pv61h99s3gasuhx4wmknfwedht06mrm5nc82gsqaw5442ekpfr68d493pjo8q8eagi24bj8ml5socgniupc3rtiodnf5ufgi07u9hjo31u27cf0smq820hyb460u85mu7eykhd8sjaerrn4mvqus835flq7behyvlohdspma7jshpovo9fu03dxjdhya6dbskrts3irbj8xdhbyb8qe7vcauqgtb81vbj89jup50rp0ewifwfpqdtb7j1cnow53zqth6sxyurw36lspz39vqijr8ydoexob9dryqewa9oal9xxe2e08oh',
-                parameterValue: '543vbqx46ulonzc1lgjs2dtwg7fele4udzfg9phwqnw62jiup8qktumryx0iqzpbv5zyi2p7sqbksrvf0x0w7np3csakb48g29de7i42yhyoep7mlb5vfve0ecezqc0fwczsid5mx2moyduim3zoez31c7ah39peycxkawudrfm2udbwa80bci76lrxbfe6od35mqf4mdj341r0oatjqwwgef2itegp0bp10khrmh5e80mb1jvjj457ezt8oqdvemwefgul1rbgxn8adkhpvysod9snh93q7wq37kchuqvk4o3l1j7qcqqe4nvw6xaou4gxhos6hpbt66c3zwu7yua3a3azschc0pa6hu6iyxf166uwvdzypje1vtg9wn9xpizfuauaop7bk36l1iywnx68fimh9te3lbsbhrst067ra9nhpiq26fho5ku7jasa9mmh2c2ul7vfoxtftdhgxa8j6vxrdlwso33dyqw5akh0s8tnjlv7gwo4l00zj0dsib3fojuegpp5muebm6kqn0jdljoj33guppcjjm2l4dlqv6blzvfbg3speucudpub5wbti2mnmrdkbjivoyyhsrnqyj4a9nn1crun78as2r14ezoes1g6nnc4rk9ctyqx81cj7e34ubt81fbkskygmkevelsm6mlju2txw4w3hxbkv4d97jvx6lrk0htg1p7xf4p0qc896zg9p4dqm5ta93jtuaq7jfkm7mi7mqd8una05b8wzks00jd3gzo5qgem0on81q2ybmdjyohxqioa0z1qtt15f5pb7xxzsikk2ytmhakb9oj4lkducfdo7bvhir5aqk3gbnyk7rodcafggwpvw66tcsfabb4lzx1d1qnren6mdkxwgm0vjqstevqx4axmtl65jj7aen4rinewb9iwk6jshrtje9hdy25fz731hd5z544brebv4v1rswgr246twmst1zkbm0or61zp7n101ydg38neoncdjbjly3faho5zr84drwkdngax2ti1r',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '8catka226a6uzwhcfo1g1',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'm4sz5df3080xeisbj728oy8648wy50y21rw8487y521pxlflnpc0yotr1t6h4i6exz68vikecwadsj6nvtb111xwytxoigb9xcbow9ueufg1sgkrjd9tnmmfgj8eyd2l3tij1cyde94ejfvyt8dp45t24yb01ycs',
+                channelComponent: 'mz0rax3qyf9btl7oza3dxngxyjha821ipmyebrmogigg7eosg374clg30qhbwvw1heodhm1s7muwjt51xc0h1urwpivce0yksgbwmfhirnmyscbuzen66110fcg86tzf49q9jtceclcm8js5rgk9p8u24fefp25f',
+                channelName: 'vdi5ek7h0pny4mzx2gne8rj5bx29eajuvwkuvqekn1c39mwb1m9qr4rjzfkcl5o3m7slcihmkelge1z7jvsh73un1a6yqhh9nzxyi04td5rt0pt232wqe22dn55ftdcofl9wzxi4l3sa1xp1n90p37zg1s9cf4xd',
+                flowParty: 'd7n0yomm4eq2f6ttyfcefd3ovh9o51ncm9kg0nrrt1zgblt2p6h6fh1wl3r85595tw09xrbpr156wk5acsl5ta4k8l48h4evh20pip4m2x4imp44m6njs9vfturddf0pfud0btz6w7g8kkgig2qwzxnqvyehgmki',
+                flowComponent: 'xvdsff3d58in83136sfw5rsys3bfk3260pluvyc0m6i1xpaje34jayqeufco7aqevpw8373s2um00kvpfkpgcic2i3laqdei7tsxhswby8ou4sexpsbpkbdozrm9qlx002gpnjvi1m4wi0vkx2jnxmlv3xa3aydl',
+                flowInterfaceName: '62l8099hto6gnasz0fnmo1w16n3cc9qlwy0o212kaxvspk8bvlkwfgmjlm2rvgkompkotljlhghyxwenkph0hp6mc5r5a8y53otkea2rdrqy47krva896prgzy63prckucopmot4vq3xim2tgv7wnekps7d0yh7z',
+                flowInterfaceNamespace: 'i0xjsloo5i5gmmxgc0hetajtef8iq7tc6dxodmai93s7aq3gmqtzu6wep96kk8ocbylr4s1pzr6g8aohks4m4b1ru7gckmcpmdwaxozgi9jdk8xhfndx3giqg5bwaxpe8j1g0q50kb8acvxangyosxx8upktdtmy',
+                parameterGroup: '7pa5fz4ya61b7kp0npg23m1j6ti9f35dpqdcq1uvknyq4365i7kxulqm2plzc2t90hxu1s974gtlqk5d8gq6v2rouwvzflmc3e80sysfmmxrmydhub6w16mxoi08tga3i8eejejdvod8ywabcdo4q6hlap07rwq45yhxckvgsu8td8mjlgwihaczepesahxk5vx7fsbb3j8loc4wf1ixyv8fgmm00haxiaadnhogv84c9l0lzgeocmpfl1x1294',
+                name: 'as78vh0j4yve3d3zl01j37o1xq8c2r09hwxylq5r8k69qumq6yf7x9m1leav87rkt0kor6rvna7lugrbe23bm7fcelrkts50pbx81ckryxrdxkbqsciqsvb8360k36x2r2qf7gq7jjf94e039yn8g0jhebygke2lmqe57vyhnqtfey1fxt4e3tdffucfxqsy51mqnae54b3e36w25ygsqcpacgc04qwz3sik5d71d8la3xd1g0svxd65jqstoct7acpr0twq3z8ybphrndsy8ss99hxighama8gt1mwmpzcoxrqdjkzvyro20edc58h7',
+                parameterName: 'u8vn92p64mu6662r04ulmsh1kv1vgarhl0ex8e08er6o5qj06tv0rz88v03atkqkmenjwk9vfdmoqak0pyvuy784c78gky7yg2l90e8nsj5m1ooffx37pyrpagr22ehkjbe0hfjah0kmcalm9v7bl7073624dryhismnx1xfzglc2hstvlcsssenrcbw71qt37rso3ryl9x2kvu0cpxmnaex0vv69osgzlwjonnii4wzc0ivowpw7wpj0mbckfsa6z0hh6a4cuq24e9ixklggachd0glw3tzis98s2wztonloc72ob38x72ty432a4sm',
+                parameterValue: 'yl3mhxxy9bvcixnkk9xf3tsuso33wof6dvbx3ctrkw1vnmli7y4rbnp4ti7skn105mtdbzvs987gpjxn6nug392gdnxi8frw9d5rmtdx52mmrvz693frh3dvoeob182djz4tpzs0yffeblsbjqypqtk87h7jouv8rsj3phx5hu881ab6o5s2jqvd8hf249g4d9bgt12dsmy4tzn6nc2cz8kprdv7txufz0h92kt5wlb2fydds2yz4lqbh1kd1vnkc5mykrvqpps01usqf8ra92vsvqcgxl7g98as4am63ozhermacp0ccn2z79tb2w57akox18497js2nn6ld2uastmzomitddsbd82t1iqs765dfq6ycwdt15u1lw76vqx48rhh89o3nl9oqqgt27ouxgmw3b9v4bmzz21wosup0nhne4n4erpv1sb4h2j2m39t8ns7hly308c57yskd0zt0wit7mz1tru8o296jfbtnbwimn3cvi15qib8tcim1co33hja9xf62sqgscizuhx0hbj2naffncz7tt90kr7xdxflh77nkfbf03rm15ub2qv5om1jk1s0f8g6882nv093l8ctja2adz2hjkgdawjn7b2wrfp03vsozv5b1cihkkb93m9ee9cprm2sdg4pv1t01xh6o8y0uwpsh4nyisrvav2hiq9egs9kmsdcvuz8pbpg5dh265i33o1lqaxbizm9yk4jfie63e2kcb82bhb7w2umsaxx4z3mlm1gubj0f1isx6c86rt201o5m90g84ed32ea69yq7bv51ff4brxteya3ozqwlrw3biyotkc99zjik0b3gv73813wjafxbsdj3b3sv4be0seclaj6j7bvusabss9rhimhmjhqh8mp1bqmct1kk6nv1cczroh1c0wcn653knw4fcepew7uytj4npu6r3y315dxf7afmzn31sh45mnqrwse3umb22muzjc6h9itnedrm59qymkh8spiex9tlxtaj62fpyoohpbuwbxe',
             })
             .expect(400)
             .then(res => {
@@ -790,28 +790,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelParty is too large, has a maximum length of 160`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelParty is too large, has a maximum length of 160`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'l9xjyzvbadv2f7t6cibh',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'mgycna7azx7phbvtngneyksuefdoz02ew8bbf6va7sslszlkimaq7423q9d34g2l5zshhmjyz37ymwuo99auruk8n64nv5lmsd3gkwzmjjhjdkz41k4nrzfmyuj01v75hmfgnhlpse5df5yhlwo2usk727b7btzgj',
-                channelComponent: 'e5reh5to8bshs1j69dwtzonvsmebhhmtfohgu7t519s4nd0zacyr3cq6mm42s5rk1ckzqfyfhfhw6eevg10szri4k5kzlu17jd9wzfuru5xubcmzpfo1ywwb33ebx44cu59vl0mw2luj4yk6ei5o2tehtto6zmmy',
-                channelName: 'qvzi9l8frxl83b3trjvcjuww8miks0l5ttj3tzhqgf6cxaoa60wkfs24l3eckwaya41bb9t8ozel0k7qob5ydfxfv3bsodngb0pfta29cpom3ck1kpqqfj7o853s8za9kj8bxl40phz43xmq3vv8n0n7qy637rr2',
-                flowParty: '4kwk7u60bqkoz9fm9mjssjds5ia5jpdis6ec5ae8dnef82yfz16ybnsj1q64bjqyt5ma5q72hr4rfbojk3ru5coww7xydkum9yvcrb3urtxssods2qy9txtzwfenshvcl0416p9uqxft1oajvwcv2t9vk1ba9nsh',
-                flowComponent: 'pb2lsev09s377e3prnkjzik8d0c8vytjq5wve45o3nl7rf4m9vx4ob2o02nozcc64e9ncvc88oko711w9m6ftb1jv6rpaify52z4cthdm0l0275275d0ibh9hegn4y6rzmu33grzse04z3gwecshqbjvy0oklt8d',
-                flowInterfaceName: '1z9csiirbccyt8kfee9refbo1rcjudey7cjudnpvrxmhsrfuwn5b2vx71zl2dsx6ingyhpacrl470eq6vho3bu6vm4ocpyy07eg5spispjhyvtne6bcsvsxj3dasdchgr5q7qy7lopyh835hzy0p1wweocfn4am8',
-                flowInterfaceNamespace: '4opcifzhr8aj1g0ii72wwhbl6hz3i8d8qtpkkhm8xewbqjromlcijyu3pdzbtrqgea1uo9p42ed53t9h5d0ftcamxwdp28srslbpstcupu2bi5l201ua8m0ss15agc3h6q2hepaz9u0nq029ihdiylv263gqi3vw',
-                parameterGroup: '8gkdm0lo3kair5xxo1iao3hlro8bn9vu9cjavq11dx2fs8cnxgv29ahsczh7abvev2r21r6ftaf01xd402qc06vvm3ietxeqjehvid0vpsc7cph9s5trp889u3lpkzkuvn7jeix3jz749anvaytgtds5fj4iqehrf7gavebjmgomx3q4fpu32s92egrzxm4grq0fg1b3mvpqra1tqp1lc7gjh3hmbig4511j67uemf7rho27ijus3hydihpuuwd',
-                name: 't1q4uub3udjrwfpn82ffrj5miehq8zxhqwdsp184zpua74jxpk8i4vi1oqrx6ipijekbk69r0fwpc0kqv09uyub60kemhay58ja849qa3jwndmdjwl4ohobkobvixx46meic4v4bjrls0d2rmcijs2toqu3ua4z3bw8l676hcp0hz4ym1an6ecm86kbfmrj4skxi7mejtx0whfglozrbk7znyvuzj4u1p8jzffsbg7497z4g8q1e7dorb9ba5c4fd2wck9r9w1ce7wmgdjlcz3mxw6gh24nmxzvelp4fes9k6xvlulcpz2ahnp6r5ve5',
-                parameterName: '8sq65qg96l92i5jwq8ambq94jab4onnmypbuyl4xv0tojedfuuxm7t9e8fnavqd8rba7gu5l95vwd35haethfotqwww80ipmwqyzyhmuiu5o4689s64tp11xiopdqzir8snp714g8kn5t0yn41a6hn4u9wy2t91sajsh76uvngf4y24sssbrh6m7vwu1jlf9hszyncxg6xqn1udrtcepc82q8zprneqqvv5z9hce9ft8vuoj1yzy6qx5sdlz0nxot57ovqrqiune4m7z1k3ki9uxio5nfj5flbee5uc2h2opq8otnt73wv2cgcazec7a',
-                parameterValue: 'eig106mmsh5neipdhzwstoe92sfi4yz2ygw2xwjv70j76rubwtkw7ud2m2t6mmyoow1ggsfb6js25tc6qozpb9ipp5vexiqq80iv9ylppkh95bm2u447rnxy056p1nj1kicr64ncue24vuh36m1j0idrvpgi7uxae11fpdypvuz6gy2t53yrdpzsji6yka7xwg9qztv6o037bko271kmi2rdymqq53dkjyvopay3lfz3lv5pno80fjad0cdgm3xal1otc4vz1bj5y6n6xdali2eyy5ahcpdkrqffxsshn208wit3knjplpky4jwvz5b1yj55l40iindbgcb37rleqeybvertftgyu9x09peym4xp8gluudcoz7xjgadp8j4q7t8jv724mbvpmzwfp6db9ve96kx6ing1t1aqd0s96jmbxvnrzva501u704u7vh0bao3tcppjkx59oc4zjrg8nkekamuw0ayz6iv3jn886wx5id3ja2hm0htad2nri7uzf7w400zh3ca4x52chaquua5z8tgkv6feosm5ser4psbqwrz8kp9isx6chw5exbde2m0hd9lwqlosn83mmstpsw1x3zc3glci8619jr1mcsqooa9ioy2z8tgh1klti2g8oo7bjx2shkgtrlcb4wva5o7lhyuagdh3al85f82dvip1w7jb34dvg3sxwdcxwxj9jvlj7yg5cs7rki8wkezqtsnydttw9jxod58wdog24a9dt6xnd7dua8kzoyoum6movz1yxeuovpu14gwt8pzt22a0ssqhr7uelsnxr92pf0v8ukwhr5yf9tr79shhki45d7q1iqi65me0vnz7nqdwvgnyb9yh7wa0jwi9xm43gn1wgv77zirxazw6313ex327fj4qi2ubaxwfm2955bd5o4se38hgwqrro0edo9wz17ox2sy9j8w8mzkuy6iqrmm4mvnn29x6p3mf1z2kzhuo1ihosf1hpxgol2kfydtjl154tag0zm2r2aao03n33sha',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '2oewwbsyh3de7i8y5e1z',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'zlwymnpjq0h5w15znacxo2tei2h989ohvrpqkzos1wmf8ax4yoatp8zf1bk0ebbnovrnr12xqsj7ell5e9yqiyhqletgje1206gfrvp9avqig6jiv4xj14agqyukpl75ciggakxqyp0v3ucaeunbl5raortnzs5w9',
+                channelComponent: '2xhkcli9lm1u3kzni09vhbtk34xtvkdqblcyblgf0n0b5z7k9dmy2jnq9h6lim9vysmbi6fzpkpx94ncn6rh8krikszwroftjzky0lzeh5kw8euj50ms4sk4e37g9hndy6g4o9rhbv7mywv6s35b2elxlw2yutmu',
+                channelName: 'ushlpax2mtf86x294pojl6dw3yb5mtl9oc7zdehbk2xsld3kjl38ia1z5uw6eczctf7fvqb0f00oadu3ppmk9edo8chj2s1b2alw0jds7sdbel7i3el0yungreypub29jzlzlewib1hf8fekiu08uhg01hcnjcro',
+                flowParty: 'd24znp4urj6f3yf0e69dkcstpwdarie9lbfqoprbv5bm8lj4jgqa0cyoaq6w4kf7tx8859a68v6c0dfx8vy10gtjbmxe4ddgej3ob88dt7ylizl4ctg2u0mqmvg8elhsn9d164nyk2wo060djfs7ik0auh4i7195',
+                flowComponent: 'ceqyvohz4n0lney37ozstj4dbq6v1hw7vazl7cw99el8bjiwhzetvfs9670yviusbne8w4yj2qzz3gd8cy8fnhp7flesp8jioeoewqgk9vrs6adagcaniymy3a7bql1uscp2cbhma02lq7x7ee34dqw7ha0bghtg',
+                flowInterfaceName: 'og4bv9lla65w32slmepvnuhaqsnld0n7rqgpeiwzinvy1ztv0s4ro8supzcz4hdghfj4hqka9l2ektuj9x4faqqrhjh98ud4g7y2utwwu5s0rnan3ntb1abdw6qg0nycba5me1m0cfuclvmxcf7mmxay29cbpb7d',
+                flowInterfaceNamespace: '7o73t7qowvcfr0k27fjhnygjy4m55xr87jtah323y8ek2q7kjl74xoqcizpmz75exmqw1xe2gud9yt24yso4jr9zheeffgigbi54lfuemfe7wwz7bj89k6e3upv4f6tlm8fn987yxutnvvun6qr92ta9vpfxohrx',
+                parameterGroup: 'eqy32ennppwyn1mbdw2mcla4hnv72lzcu9akak4we1zh14hkbyab9hefpscf5ckf8a0bk9gfdc6habcr2meoivsn8jy0bahi7ffkwh3tvu2e45gz2xv3dhgfydfw3qoe4usbvolntkbz9wfahx4dxw2oqrivi49mgt5e8w42h6xochv1vq02pij5mvc9o5004xe1fnpstz1bwgb6on81veapysz22oh0dtgzjq3x1fv5lphsddhmi1wxsi1pblq',
+                name: 'ff6yd7b0txu209hywa0szpj6lgqtggilgm5qnhwu89ucy4mdw789iy6h36wjgrevb5fdttr0h4tqbnbz7kkzw2spdnxkfn7rh0dj4q4zrec56fdw9jbf7iooijr45vty175q9hx22sc50x3sibgbl75m1kuyhs5feus1n6g2qlp11qcr7w44tijhisacxeckj91lrcqnh3qw4yykbulww07ehkxj1pkggtozgi5b474pr2w5zgqm522h9vhcl4esfy7hk4wgirirouwbatgtwha52kblez7a954h66j0cuaktitf9rgvnlmx03ofeu1a',
+                parameterName: '8vtl3g5gxfpib098nfwxru2naxi4ra6w54wz9j9sx1d8y7pqtti0th0dmmdurfts3q9ig8ptrnel5rx9xlfpqx9gz5w54blhfj22umkgpfqrling2h8ge81ot5k115acch25wzu4rfvofoiucte95h0bdva0lbyur4v7l8dr2xs243jsz26dlqvpuakwqbq0xubr8sfqf0md8c7kyvr8q1j400u7vl9ubs00dvy2d5g4mgv9lf979nwsb30dvot328z5czjmqv1ei2fjgv3oz31uow69z6rtdm2ofkj95fnv5h9w4je9109xavw8mzse',
+                parameterValue: 'n1gemhjon3y1cfzy55k561pbuv5arbnzbb2s26u4vha80bvmrcx3b2b4r6fgjnueo1ywrkq9hgwtmwckpex613zbqkn9esp9efu3luu0v5k0nze6vv8oxqtjfg4xv1j204w0sbapz6ine18ufmbrc76dga5bo5nxuidvmtcli3bhup7mabb2squi2wpu07iyqbbtvluyd44cj8kmkv6yico19o3vrjo1a410fpa8cd26jc2mu8a0xsas231qvpe0i443j7a8hlejykaczadq7dc5vtj5lwjnbcs4qd26nj8jn0nmwxroty5jzrlqfzcf6exrygo16tfgd3y5d2b5exy3was6m44usiwnldxafoi6h1hdaz74ja8j17nynvism5v9scupyea2amacor8juj3u8yg90i31scbzbim48wymgnyauq6r8et2mddzh66n9h0q7s9h8s6n1cu64ofx6dww17zv74n6ygew84n19z4t8q44uyd79ov5eljm1w3dnyb7ursfpbg68pygjzqyq5nup5rlhn9sjyyz26i5ahxcibpmc4wx9tcu2ek45zqpk8z4rx2gswbxvbk7ryd0kv8fxoseim98c904wyrznkxjcsahum6p0y0b7hht5w90a4n5hwnmck7djq07u4w7skqo2pj9xl98ts229m7ctys2ibayuibhncs3p66p0k2m2oaurs324lyg0avbsh4ufwncea4vwz22xenda1wwv0wvz9zos5nsoce8s5250vqhzk557sw0n7a6skjmoy7mm0nnl65giqf3ncrjmxxjdry9ihn36phnzv4go5b9uanyr1a6vu524x1tlojjwzkncdl5wjpo1ko0efa4vkk3uzssngj8274q5moc2mjpgj3gua8t1mphum1xgsq4wk4xd75v727p1337bn9k2iuwuuptqsz7r0nnt5v8tta7qh55kk58yx2ysyhi570373ht9l7n44hf51ppsr0xgug4au1ijl2ubxn4t6ellqm0rrki',
             })
             .expect(400)
             .then(res => {
@@ -819,28 +819,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelComponent is too large, has a maximum length of 160`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelComponent is too large, has a maximum length of 160`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: '3m68zq0t2sp1ekosb4k1',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 's79e0rls5rue5mwho27fdkvvjnlydioakdjam14rgzuv4m8erc6eed7s0mwu3zfuesn7v4q5zxmm61w0r3cnfp407w86l6bq47vkvj4t71kvantzvi6wh556r1devu1ykz5cml39sgewb2xlyffwppfu4xi1xacx',
-                channelComponent: 'iot0jqfzbp3b4bo4wlsjqdeiqjm4zso4nozhcjpbjrn2lntyldsayvf9mbkuxd9oev41m8czuh6k71nq3wsqlj2pdruljjekwd0vbgxh3gd7f5tw013vgxa070ixmy04dxgknsb5a2fkwdvv8v81xcpq1oga4isgg',
-                channelName: 'e4dutqc8sl7rs8tn0ajgu97uqgd2wyfnsvqfwmx756sd5lc0v0auc3v8f8o2jb2nfhebiww91fv5seqm0wly0bqg1vmdlwthrxtcpf7tc56e5sca8uzp47elpqy185oyqxm7ngsifyn1vqm2r2xj1yf8hl31bloe',
-                flowParty: 'p26ktg7hseh88mzv6fwutukubk66dba0elxczbcdkmojpge5vip54usicdxstjegll2vwjumyl46cg3dlxr2lni8ntkv1asuvg80e3vws74yxy7cupqs3tqbiqactw1lunhprdmdjcw6s7in7b7a7ty3oy8jas46',
-                flowComponent: '54t7wxmkqzex866lq7fw7v075ejc4h7xem527c0npnfh9j3hj5vwv0kysaogpyxskjogpgi80an14lx9w4g9v8uzsmvqk5drvgag0pffv1jrle2ig0sio29w3lkx4sexqnbcd1t96osljfyg6jio0421ybssnbaz',
-                flowInterfaceName: '2n98m79rftystsdxdz1gbqcmlgi4d0rl6d9fmihatje3kky87ea2vicw4fb7f9868rrredymfue47zy1o6jlr3yda0cx9ey64332rq3yxta5n52133xfkixyxsv70f7q53loj7jkl249rix9a6dt4xvggbs18dhu',
-                flowInterfaceNamespace: 'efk9g6mnrrv0q4kma8gwdf16ivy2krriavgogvdlm0ndk80r37tpgeeg9h8mqononj6egkf3qqbyyr88hc71do97kugfi4zkyoweddtsh2t6e1n8ona0pfa5sjx46wv41mr3t2u6ldzkq4qbvd37v3icy043tdmk',
-                parameterGroup: 'q7vvn4sb4y6mooj9wshs9wvz0dkks2d86l4ud10lymtzzjz0dg7yidfpe9ksyuv12aro0bk718esfht10rzcj0hxqwjvtzcnukh0bu6miaw3zee2jfz14lruuysps89hglynwgptpbde5nizvra2rv2if3yybdhqa4ajprfo56zqvxdzle5wnofn2e4cox426jt61beyxz7z82bate044prbbx7z6azy5kokotb799a58amzuwput4m8b99md3v',
-                name: '9wc2tc3tj5626yp6uszo4uefy4iflbz6fr2vvp158bd7s7u8s0ijxczum4nwcowjgp6iuj5v5bv5v8xg9zfkioncagfnlhiwiyi7mj6477nklpfgay37ecrfznoo1zh209swxbaq9x7j0yvbhsnopjho2xebgyoij3hqcw1yj6ly1eb22gz0tuv5zf7mgyuuwxfg7jc70y5ch0tdp8jd0rdk77fm2el9pu4azprbaskqwt1146z9t9bb0vi71ob1zkgyvs498zxac545xesk0o5qxgqsrwgnoep6pu4tdbiixhkdd4hbh0qo15yytgrw',
-                parameterName: 'g1uwxbfqhrpsbgyprqju2bvp94duqigblpfx9lo5nqp1sc36fd5q27yayye4oerhce27l6if7d9av4gtqn9k3zzn4c5k1i5d6euo9g1djz6y0ttpuob9dojicnv0hg9n9rr7l0ra6egdhiwgeysma0pslkcgj54cbsagmv5x7n0jhoxpvds4ukffzlx1mku57s5aqrbs529cendj56ydxpaokxyh8zlkndjtypdlnmkoszn8s3biv26qaigoaig9s0rj76ssfkllyvy4yy8in9qmmonvk5ghccdzo09f34pprmno12lehl9a3g4h901e',
-                parameterValue: 's96qnupfbtus6bj78g42nybdzvmfxbvaecchcqryw5az4auig7iibily76qic9pwh2gn8gyolis25sgyyfwspwk5e8iy0u6o6m7bcsqtvcbuoi01eexibn7g43lk3jchb0ocgfkanrzovskg6nezkvzro8td9ontrsicoj9vbltdtlf96o5o9web0kbbm0nify8ostl3l29ydxygmta7620id5r0zl0jdptxosbkodn86y7fbp0bysm98algg7pr09m5vwwa827aqw56h2144wt9k0myn0ta9cddqhbyy6wzpgdu2vdzld3mvc2wqmujq7ifqvmip857skdutw7cegqxcnhqw5n8jc1fis3mh3skcsxt02twxxgajka3ipz317o9bhe39g7o6yrnrrzigda0ronx453u0m5s4j7xckysg7nmob46w63woufrnpgeczypvze5t9w5lyvghnxn2gjnfuet1d79ml1xhuuarrom8z3eo56f9fxw7cli2geexicglirkpftjrxapc8b1z13glwukxnz7tyo14foopd8cijixg3ieo24x4v8iqi91fcqhqfsu0l42j3z3mq0v69i0v8fahmrznv07214xb38n9e2aj534vmvha1rpu30sjywl7ktow5dwn45u5oy6pj44ylnu1ut630knsebikeipj0b1nv5ysk2el57syoozvzag6n6zgde9o1sc0j99n9q2jcv5p6viqcyadgylgzkn865e6kfc0aqp1yhlx4ocu3d5x3a02wb7gmzyl3w8oqe2sgebuf2b9cc95q8qj2kg2cwiovafi9im2xeyap0pta9h7uxg18g6cfaeqp8a3qo8lch42dsqbn5zepliuz2olls79tvxqfa4sie7kztuoxpza4cgpf6l4ilwy9enldf53aclmwqro0crehbgx0371ur4nosw59sao1zklsbambs9rbef99eaccffy4fx9vynfsw40c0p19iwbl9uqqe1mcpw1c7wuov6q6o4fsav',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'phfo4cpf923gr15l2d6e',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'w1ysmuydss7h6dmjlq8vp27fry4u6kge5cnr2yffop65s9nr2o9ohiqzvn0afivsv4jzwdk1h2qg012w2vcxe7i945xo74xsn7lpi0hhebksm6m720uihkd28mrm20e2c0e6e92hok5qmiq1k1ryakqlpzbfm4tn',
+                channelComponent: 'wtcjdure3wc3mh0uozibpgamhu4qbfb1miif2302625pzcji6zaau7gc8znsnutf4p1wc9np46o6yzsfvsmk479h83hqc4a21lwwcw4nbv5d7kusug4fzpipfr25h9z6zdbqr3qd9d7r2aqbo5q3s6bfgnj41wiq0',
+                channelName: 'l3gev8h19xzwe6q1udf64ztp7nfzqnlj6g07ttc7n1blug3rfpwhx8fs9fxqteifr778tuvznbfm8cjnm51rr7br9fcllh3mg1biw0nniqpytaficp6m7k09nfakdz2d6zwqsl8yh58brn5ymh763z3zxdaw4ypp',
+                flowParty: 'fjs29qz7u7j2xfnqtikfk4lso11k7yagsukfqy0w9eqctq62kyi5u38n9lffppzv8frv3rvxl2oakjazwqk6vg42pqjzrjh51yjd3lwcx90mna57akn4jllyxdvj4cn9jzehgfyya0i5qvlo7vgeuv18njf85vra',
+                flowComponent: 'r4rdlktar1f0yey01qpnqxl9hhe96faxfv9ltt869nueenlgfleuqg00i7ggbfkpgdvd6aw3vkya1qmg6j1rjk0ps3bcs246bm981x40nesru8b0rgyyli8bfz8znvx1tpfajafkxnqhv56anykjemihkyvlwz3e',
+                flowInterfaceName: 'j6d4p781qsgq99y5y4acqv5x3xsu9a7xvy7pyjm7cv1g3x6yu9edmecj3mo9j9vqs9mvf2ffp30tru0lwyloem06uxn3rlb3w1d8m946enop4ef02102v38ewyeq3oeocrkkfh9dw0m0ef4pk0vuiw3fki9l7lu8',
+                flowInterfaceNamespace: 'wy08z7q82297qlcoimbv4uu3guibewhsur8xjw8mzhan4j4ajxfwqv9efw8qpj4klkf0gnvp8ahvtp082sjx40l9oinqc8ysun1bs3vaxio1tqcz0bubwicj7w2ij586921gqc4y5p9d0ef2crxgehyig2co5otd',
+                parameterGroup: 'qs85wixspzih7lcb7vci93gxzwj0c09cw8agfbnieavvwqqdlfgjdq9uk4evbt5ksvgfsoko0ip2cpn82abzfbwqfh5p0k00ychac80etq3r16hkkrfqwluv3b5cmkm973p64hng89xqeoe7ivougfdgbd6a5nrtg9lgdyjjvoxsq3vbrpan4p99czg2lxekfx922f5i9irz5k90ilw2uxtjibc186q39xqyt9mptw24rnvbq5yo78we7977tux',
+                name: '7w6pf807mahkx7m5erdy1fkl2gh7kv47qp6nudnma77jbsbliwjnq9k9kk5tau9p6otshxye6b9h4aml2ucl5uvsagcnlt8rk6p15tc20agn4lt004n8q3u4x2fh7ab5pp28c1oacagh4sqr9usq8fbp9dmekq7yuhwhr3hr6cz8ao46azlwkn9nht3e6ez5w9pte8kux8wi53avdfq69kavs2u4y3n6zryqkljxrro0s6v3fw3mbgito5ijxyvfc0ky243xbj71u0c71oewh2tvly214rtpaqshbzv266fosopzdcrubywlgquzpzl3',
+                parameterName: 'ay6c0x347mgpilfl2x6d7fpl13mloe22ae32vux4dkcg6ziqdhxndakfq7dubkrm6ynfmjc8gqs2vwi7zh5tvogblsykt20nc166t7bfzyur3asl6tts06farbc28osl1tuyo2u8p4u2kudis8ebwac63g3je546sevaf80myyip0bxnah6c3ee0hzxyjsncatqkf7y685xj6wwut31jrbyiwpzu1atxrc76yrwauz5fiqpeadw3jc5vsx6i1el67jr0llzzgo6qolf47nki1gv78hdwyhh24kocgxy0hje8nl7myj7geami2nq5q2dz',
+                parameterValue: 'f47wdva7yjvve34642j7adugvrtchw0euoeg1t7nqagvxxcjn11ahq8cbgie8ej8mr9asdxyqysnmui9rvcqryk54migr5jl26hya6br99x3hyowo174yo5ookogs5p8du96j0wzxu3wsy3e293xgotq0q0ryea4uggqpkiiobxbfp53g2c2m6524d9b9ugr6p87hz1g08x700x5im3wtrdid20rd73wsez68ui6ysw9y6r1ub7gertelo1s1qtdwrzndttf6dchpjg0u1atss447vtntslcyu2fw1hm57rn8hd958oclp4uk9uwxlb4m8xgx4fdyw8zb5qlmj224tnk2uhkwjd5yx02l65711splfdyx6o3ysml4qf358ywtx6im0020ta53z60mgg577szn6sxvwo2uwwo009pogdb6eitpjs3gvzmblnmy17519wy298juh6gp223f2q4ueod8u1dyrbaalyywva9ryuimwfi5v6mvxjljien7qrie6vz0vhs7a733b8qpw0r47820nzfvtcgienagbg4f9rc8vny9873eynjnqglpe1wfihxolygl6a01vba4lnxj3g3ajg0678wxcpss65tp6jxqpvxcpfk8697nsh8hpyqxxgt19k0682vl0q4zi8rcm9718ityhtgui07xpmwlmftu1x26j62twgwneagvh90pe23vtu4awhpiw24xfh9q4gjfnl0lwi64l6krzptaivpbwoep8iluwvfkdv4o3wex1bib9kx2rfnn2728d8ji5rz4qhqxxid61ebfd4rbahv6uvqzmedghrlxgelsza6lqpquo35j2aig00jfn03kr3kt7hog2sx5hha21armw1wnprlefnx9592ow3vek06vws5f7ut6x3ucd6ls7yivkcul4iv0yupwxo7g5zzrbmv38ti04ljr5qgkuqk1hsjpuzukggm2bvl5146d7mrwh4tuu7ho8f1g66j5gffmj0nzhzc0gm1ui60w4sihbp9',
             })
             .expect(400)
             .then(res => {
@@ -848,28 +848,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelName is too large, has a maximum length of 160`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleChannelName is too large, has a maximum length of 160`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'q9u3bd8brnkg17mjg6ww',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'dzbd6m1zrkuv4gf7mv4a25hkudl7jivc237huszqh2ix8ixx6sii7obliekvdqnwhbd5twqfbkcw08k4hwpn1tc729dhax2iksjwhbll8w9qy3ydq1k3n1xzjn4pljrqf6r5wkpdxyljhbql33xm7skmk9udjqdd',
-                channelComponent: 'z2t3wwits3dz959eq32wj5co39ew3ae6bgrw3yw1m1dgm3d2n0ewzvk5jcvg9afmmsme3f8pw1oykel0ysozmmg59dtc2zcx0n7ef8cemy757quy822enjxnq1y3imaxj69cm5ip6yvj9iwv6riavmrfvcr1s5f1',
-                channelName: 'ksna3w42fshxi9gjhezzl46scsjdsxkrml2wha4vy24epen496p2p3wn4v3ybcm0zlq994uiav9w407fkykjgt7758koli1r1lzc38zv8b8ro3a53nsx0mo8gnq5n0nuk13i2j2dyt03mk6cq2jt2bm9d4kk4fbgk',
-                flowParty: 'wypsaqbsoomrvy88f10r8zlsebmjay3e9uzsdmy8wpv4dbqqr1tzlvng393oiv30a9bg6gbtnx58uc8k20ij5d1nx4ohsv0kkz0gundvibx2tbj9nobjyg1kjkgxk243ldwieadjpkk9efkuz2gwbue83n0w7gf0',
-                flowComponent: 'fl7zuvv8g03wyoay1xbd8lqrm1gswn6fxqxlp7zkna9s0kqyg77h74q1yp2g2yn2b867865pe0c1z9q4b91cxyr2mt9hvcluzabh7ieymbmgph846r5x91rn2wbt9l9nfzo5n1314dyvbbjvn7koskefqlidhs36',
-                flowInterfaceName: 's0bltxm1cdse31hfmsdpex0gjhsv2m5g96peqn59mr8ea5ffth7ynkp5x7zg2vbnxwg0l20sgoi8j52wosi22h3n1iah8maqo5fb9dwqayvdqq3yyxch5y1u0w3hhhctnfbafkp4bbi4lmntqdo5u04dof3a10ie',
-                flowInterfaceNamespace: '41y1smwi9ncyr3z910u8gfvybzllmfv5mxl13xv9d9c4yhunehte6nhpg8auxleg57cjfcncwzq1gsdpwhvuv9eqhmhqlbbmzfur3tpia2f1zz4acdq2594ygwjkq1nizp7ha42shzxkz1h84rheosfklbye6nqb',
-                parameterGroup: 'kblcjhg063jgi0cqc015vgh7q24dy5mgaz5i92amff99rfpf5bnx6axyfk68xy51zs4ehblvwaplhys2u9kaw8n3lb2bpyzqj1m3owh1nnpjtadfcqgf24i4bdnb4zcrt5vhl63ao7ndbbfd5lxgwt5b2s0pdp34logztllgpdkxo3u2ecxzwx6lhq3k5fuo61pzthjtvlv4qq7p5v6j00gcxqu950mvdzrwaioauyiuy5d1vh2f3l19qpb84yd',
-                name: 'd57otpvs4istcxfv058d5q951p3l3f45ew6hjzc442lynl50ooxvog6m81nuqplx31fda10fc6o4i5udmcml94fwnth2j06o1t9xwlo6v88o88vz3yyyn65dbjdotn9sls18d2n6xckrmt9kq1niric4c9cmbg51z9qo8e29gdarzgq0o59yju412dgm7yfiu3gjmcctryjlats5d2kb6t69v9ipstl7ryskcenq89wz4qat4xldxc0bv04d3mutxtd6za0penhz2o4qyrmr8se5lmmd7e6f3eqpwez8ol3trt7rtqgbbybnbl1box3f',
-                parameterName: 'py0px1mrxra6ya64rvfkzpeqn6yi09fh0i21nhvfx8ucxwwmf5kplwe1rfudo5wzaqkw4vp5tr0plsio023000kbcjv85boak5u5ydb96ri7pus3quci87qta9ohahw7v77h18la9xuqqw42usxxg5g6p5bd9q398e6gert6zujx8b0i82yzkmn4csfslatax5s3l5ksrl3g56zjscq4i4lvlpg809yq04ewid3rtaaqruyfr1g50i9ndenysli5hanxqezpcxmwtsuhjbfaffbigrvcp4klbfiay8smgwgp61lsw0zkorthiptzrzfm',
-                parameterValue: 'zdgzee16j4pgd4kkw0n4l45jgt3dfv7r5lgrqlcl3tcs5q1ghxfebhsmnvtf562pftdhnj10bnqok56uxhep0uf4r5bs3c1tqbm3tqwiqqygtpfvq0wargzz8qsgj3tn5sdscfck08jghvqpplks3o4inig0plwh47shbez0hg0j2mg7njtf5h0fgh2go40twipib45nds5ki6vcmd0cuoquhdexyxhopn377wks6g7nmf74087ensuv33r0u67268aw4ot9f95rqaehxt5s7zo0zgypyw2p96c4tik5n4zbj87obmu6vuy1e2c6ysk08dmlzmxprrx38zje57rmntiq5342xcd61uglw4p7hgm7csgkolgf5o5mlumpp859kbrb4vdmd19msx9moyx4wo40yfcc0fv5id8oy8ii8yitfw2l3m2tj5mv4b2q8zsf4tn8lj4q6l4kyftbae90sixog25vgdv73nz94usobceddbkbgg1m6bbnowaq3za2ilc4n7hpm9wky1fiabeyizlvsa4kkbgf4m3wbkrb2xlaowo7180fmeo6mvhizwynjihcnzcambe1evxde3142htjnjlotx97us898m3h9pseou7jdldwnfdsyd3y3lisqhcoanker7o4ndtci5nqvhcof0nxnwankioa4cvk6brt6knq4ui46dbcgi2qp8b2w8bc92zo3ajg2ayjnkd62p221eu808lvbs58n1l4cb0mzbt7qb6qhhts5v7jmvxeuazg7dc40jeiy7ag2pscmhhz867v71493ts2bmcrlylhclc9gpodztmup2ph2tb37pedsxgrk2qg1f457xk7w1ihn2ow9miqzosptousbth6k8kkkqxn9efsivyern9sol9onphv08oiv4k6jgjp0eue9gjkhtbtpr39klxc2wa6e5fuign9ccmdu7ikvx1lvdp2phxhoq1u7uwtzozswsfcn8orzdr3mha47ow4u1kzajk8yek5u6d0sa2wtzci',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '9qwd4pkg9o6crt7hvwch',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'ric6tk0zc8zk1nts7c81vpkqe54ez6ehweppk3ykk2r6b0ypsc3xdnva335mer3iestf7wzpuql7pg7ncjczdvy1b0lg6a9b9bpsevpwdmq3x5yyxxiqokfywbfcdqvbbu60pyta2wa4s4u0ui4cj0otqy9q5t3l',
+                channelComponent: 'l9c3vg7o08yyoxjcmjgwm6m91u6gj7z41vhk4iz6utzprnh27fqq1ppgkh1a6zkold7wkt1cm85cp00vyto2zbs9428mvtw3zh88zx8sysh2lo74qrj3yt2mniyzyd4koo4kd0mvshybrgt3012v3nn041y4zncy',
+                channelName: '958oudevcutzk7g7q4viey2t1v7bylx0xk1rm9leeb8r5nhlixz9325u41i73mqqbk7j7nfbgpge91ntbpbb7kv0d3oglicyopyzy5ta4yho5p1ac9lvt7qmbz56br3nf02i2senewds71ratp1d39eruqhv986qn',
+                flowParty: '2t5cxtexstsvvo4crhbs5pbcsfw45vr14vxvf8msd6rihg01qm61giz4ww4ha46hdpghe5jcdnd6zzyp66xjgd9kmmsdl2viiubsq9zafht1scbbs8jn22b1iieu1qqetuhp294pfdf9u5ikfkfz1smvzbm2dz99',
+                flowComponent: 'ewz3lnt0vgy87zee12kd9k2fjjva0hx93lcomr91kxvc5aa5l46dk8ney5qkxlj05x0z4x7430bnydlg01438cyxs8wkbqw9cw3exe08b00gyu8dql2cjd3mpmhe9sm9p4yl2cm4302wps5pd5sq7by6v6y5rspg',
+                flowInterfaceName: '7vprz10g9gmo9nmckzgmf5g2fdsg73602y9dtdoqgi30fcdnydzy8l0i36moiout79brgkgamqu1ws2fb2j4dt5dwekx1zqam8srjj9ztrmtls6vok2md9of8tdb8m2mctt2ej4fhvujbvd2t3aoe3ykbk8sbju6',
+                flowInterfaceNamespace: 'm8i86gnrn4szs9i4od9j117534bp42coi5hyrq8ouwzuyatr5uxn98t9kig87lquetsynx9o8ka4ghjgoiai4fsc9ew9ggvmzfx1tfw5l3u93b3mf4nxh33vxyjus9ulal9zotnclbgx6qmdschnosb81l97blux',
+                parameterGroup: 'nmlm14vd3drfr6pmzj00zdautgqc1gbs6cxnp6d49wxephn1yx2wohz11ox2hqu21hc6m0lqid2ou9nz3e3srj2hy06eqvy1jikrsziku0c21dey3go2prvx1syysl1w7f3mwussjl6qfahq1cr6fojkfa65sazxol3qp7fgacjvwly9x0mz0qa1mb5a1tqh0e6t4afrusymy5l06csdaopfdj5nkww6o7y5m0sqa5ht8pmvvc9w7sbyo48bhea',
+                name: 'r7izxawijm4u7br7qx1isthjjhv67k558aqpebm50v2ucnmqnillcifyfx2jzo8mq2jag2ql1l0p70x6jhwpbvj4l1g2a8fu05p1a018hbxyabtcr3qrf9xyjrixixcrfob9244jsef6prxy956o1rdw7oij5tnz997f8dljhpjifyt37nl7zygjek767a1fquqcetb0iizb98px3e9nffke0fhx4by4kjezo7un27kkr68kwnbtov0q0bc0720uu4xkmikk41cvrjt9lu760qacb8bevodf1fdyfgmlyu120eggize07iarxc7a301c',
+                parameterName: 'pf05joh8wbkxqmcw2jdurly8dur847y5t7xjuo6nbjvp3mgh33guzfduii3wicneg6071gjwf4x0im9xesiqy4vp2zlytaunzjxbxdf06t99dlurea0fbaq9jqojoeh3cd6q8aetqmt76ho8luq7hflhl6s2ohjlv8i3iuw8l96u2hwtappo40aaulmafg4hnddbyq9snhbcq7is1prioth57czfxv0kj0jgrl5jgh0yfbksj3001h1ylol9cb6mtitbntfrxc2qm1bsa8tqllb41j3t8zro4wcm413nhlvbh7jitrxyn6ijy0ydzlcu',
+                parameterValue: 'jkg4yp7516apfjgmyxc7b6k9674sl95osvs4kd80qoti710ypc74rs91hfra7uq12ge1ooc8ooo3pwoim22ep20kar7z3q5zwq7ok93t6was0ukco37jfab2f3kwazcxotf3cfedmahc1hrivrde6qkj5jszbzoft93l4fjbv6zj1oeufodpnj71lgeq47qcib6qg4lg1yezjdfnukxvac6mgbyqkt8q891se4pvdrgavm7kpoek5e9788873lbzpbkuhu63pl1kxxa6i119nuimyvuh99rm6t8ezwxhwuu53au0g4830wapjyb91y1ifh33zia9oew1vqz01mzy2xq3b3enea8adfx5up1p5lmbw7prqqugyzsf31foupp9qgperg9hnjaich5skrrqf8f9iyd8p4qi9qqkoli50pc4glz9w66iqdncz635zdr9fjq7j5runmo05xxw07pclpk0cwl56j7o72op0vdb3hq6hcinmgl0snwol9v5g99setynqi5xv70s747mdzzcarezhk2ylo2c67pma39vuex3xwucpnfioh1ocr3mpb76cbjo8xgg9t7lhkizxzpatemvivsnnqg04x0i5ir3er2sf4xw2nj2ying974s3s0ddaqx718jwjyzzt4o7z5057lcav73k5hdraaz287u3ganf5lo0j2lhaioavrvkhiw7h16ty9w44zv8l8azx4h6jhn5kwkmt9a0ropa0fw8f19hbmxea2jana4fpylc8qe6nbhvcwcogesic1orbbf8ewkicjeiwpic5fantf2km0hhcplo87n5jisvepcmnbutdgli585b3uu8uyqc7xjdh7uz9qvf9rkpsfxo7yo2y3ggipccyme3xzoovbz2j17a4rgssb2acz2b3hry4gylzde2qsxidzsj3kzrdnqncjd2pulec8wkp1ryf1etgnrap25w500mtopy6s4xb96oqek77ckdvcvrp1pttyxc614snpnosbrdpc4msavbw4j',
             })
             .expect(400)
             .then(res => {
@@ -877,28 +877,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowParty is too large, has a maximum length of 160`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowParty is too large, has a maximum length of 160`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'ku2mto6i0me2ljp4xqrw',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'zo65oay47lxbicr1rdcihocyan2qqgu6spxv64x5qw3fajxk257wsjrdg2geyt9nf8psoef0l28ojrptpcrftl4xg8gqzq6fbmznp8emprfrxfeoa8u326ou2l5w5ahbc8oeo6u4f1opd2c9x3wolpdj4xuvse8a',
-                channelComponent: 'j0rfmr6so19nwg6fsv0whhe1qnwsv6l24qin1t2dvap7fcvcivdwovjbgp3txr6425v56qrbon05rm3m24761l2ya9qzqlvci2px5tyl40b1kgktp2zgi8s9m5qjuc428ftifandwe2vwqmwrhi2pdm3zpmxz8pp',
-                channelName: '01v8iiqfcqlppjq9xgw30007ao11xuoiv7qpkt7mxf4k0ksirl4xvdhmwhwxxcdcd1dn26rbjq1gmmi4iwn6c40g48xf2ajg0yw0yiwqt285frv7h3ziojqo6jy8pondt6ihoi4ak2i1e6urit81d6knlutr0sok',
-                flowParty: 'c58xs0nhqawflsy0g36xmx0zom0wwujrlvmo9itxixbpf8y77si35gytxv94q2zsqg2t67z4vnpendncco866x0dwf1qmou3j08cav95bv4ivq1umu2jsgj676s10rsyhu9rk2gq8t9kkpla782e12g4mo587dxc2',
-                flowComponent: 'taeoybr2cb2qbb7l9e13v9pk371a06i1hk1hbjxun834oetqguhbm6vbuw239a2x3mvnd61bolbe3xxa4alujsrvqvkdm0phi42773n6bhoyopjxi25s41wvcwrknlkc5uwa6kabks5fxlxy987y8so4qz5ubc3x',
-                flowInterfaceName: '6bf0yr08n7fce3ftocbv3l9ck726gsx660tqyp0h3bcnpg1p4rc0a7ctr8q7l9cpmvnb0d9nfohl108urf8gg9gfrth5h39ffpm8kyj8kgsb4bl1r41xwvdw6ft09i2qj0yh6of8sr0jnkikt9k5e124fdvcm4n9',
-                flowInterfaceNamespace: '14il7kwo2v27a2vjno218d2c3g8kyavt9r09tos9u27xd3k9t9rpjfxrkprcj2ecl8a50j48ezwsnzwegqb2tyuqwf6dsjjaaa0bsphxxbdjy1jpv2kxeptunykfvf80k4cbgvvk9sjuosft7aj03b0rinrz2yug',
-                parameterGroup: 'q1kr76mxvl0wqea3cybop0482if6hnib0a5zdyzdtejrtycjd8fxvowmoglmyyp2jezc71wn3kxx5fuv4766ctj3bhi5m7k0img4d3xe61jfyqsm6go6dzo9qyzo3xnrgkw8c4o2fo4mg7v415osp4vhxkqjgi5sppme67xe3h8450w776rgyzveiox0f7ezvtfw15ozugmbbfnzlgmxexyz93mlfm8jdyfmardjrlfwqv9noyh3n0fzm9gqc88',
-                name: 'td6a2u147rx65rrgvdzv7tx0ufsenorzf7y4huhjyc81tgxhz75bqge93lnvjua1k9k83flah2xr55jqzv6x2htvjk47q62c820dn8djui83v98ywwkro5hnk3ihjuxx46jlufktyitlyhoo3remwjym0jhlyvkp8v3p05qshztgoatx0e0ipx00ls1jdlypdqf2of6ke328e9m7zd0m5pd21scz2fny4tkbl3iks1m4nxpbsqqrm0lw4qkrl8mk92rm88pmd7ucmn2q2io3awberz48uie4bx3mpv4k5j20p504zpu4v96fpcnpz0vb',
-                parameterName: 'if4u43qte5jdc052f1moh4gwnrzugv8779xvt4g286rn4rij5ngmy6lzdxhlfgh3c0afzw550tk0qvarnqvpk6zr9zoq3dkkh7glgat3s2eq6wu4nb7lzltuznlq0veoha615bopuqz4m5xl1b2is8mb9nlyzannniewty9tiof9zwavrqat7d0ub727d8wx1lvsthxbu2qijwjpg298ijrcrjb0x9qx4w61rbh06yaia8fa1gpcn252hhkk78povsne7wk81mfv62q5pgc515s6p6ehh8xp7a12p3461jshd8ylerc77eqrxxrrdiei',
-                parameterValue: 'dpobajb6kr6mqd98rtw1ow50h3kioqda0sw8e2x5boc1vrdokwr96sliult8ysnf026tjgm7pnjbizb6tga21xx8lz3dwb7bb4k6qf341dy5hp2plirvzrtqh82h1uiu6ze8w46l1yiy9segzcgkwa259ktubbka7bbc1v8pl04nfqah2yr2w6jad0vathrc60tscqhs74n7g08x75ea0n07o0giojzuel99pyw54drtjaphj54g5ie2xzxwdg2fkn787gdusgg4g7cn0gu215lo7w074aawltep569b176eci71ah6yh5wehta3rat74wrmuish4da7ou4zouw3zhw0up4aek1i1wj8yp8ad3oi3zmm5krz5ytm4vepfy4maijkacm9p93yfr40rvkhgvfo4yt9nbbg0epgty9a2ioa3loeqemzzrxobxw2g3qx61rnd2fvo7pz7qvpbdn9p26qepk2a017lwis0n22b7vc0nhqgikm12432x5jfj3190j3s6xw7wce7ynl71lapgss5su3d04r6tdk6mogocw80zpwj2ivgy2p0s9i8eqrv8mm3ajnxwsoxuvpbp8t6ac25klj5o2iw91lf53mmzp7iip9vd3ok412ewwcwqe6ft6qtpkgv9eyqfdkt1ogd7czrgxvk411qv8dcwi8lpxjqu0hfmfs910r75je9pjkj7r7b871l0m8i1x1bw477kif0fmfl4w5t4dvhlly51dqujqjgm20zizzh8uhv8v700cesrw1yamdhlvy6nz4qd66mzbev3tvt3ggh3ag0v1z7djcho4syocneiftdr1qvwbtg0pvf63y1vy3hh4ww3rwceuqaztokirwyrwivxgelcdmp6as1dvu11p1jy21gk6iqiwqsdbez1sm672yfxfst8z5tccgjnqpdcfda9yhdsbeqwy4d7ncaeqa9zvdi2l0gbjn7jdfknshykescev0v3x8tqfhor5yevkp616fr5th0mnvyn5mqz8kuv9i',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '7y5jrdmffx05yy8u82ou',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'rpm4wq9zp0260lb8cd7o6oybsdcjqqy1ifsw6t2mma14512daak3zgrbpeuh1uxlaghfdz0bjsolrpii96uaq0uvcnvf6f9c4glks97w1c5yvms8x29o2yw6l98jydoaeuduxx6zvs61v2v3thrxm02swklaynaj',
+                channelComponent: 'ovnafzpa1xnfsdvdleedc72wz2p13366bvde8javmgyypuhvlwuz6wc7y6itbgmxmfubqo7u40zt0yioj5wh0j7tyhl0burie6r07cqq9mqwbbtn5tn83vvh9k144qsl6amqtzhj7x7uplld15aifhjp88v38g1h',
+                channelName: 'lh6uj3vv9f71gkl7ii0cpale2jihpw1n6nkkk74o1xkey615hddfny4ogm1ri7frmx5pudppx0i207scbtoli1fi7zim1mn5b5oofxotwuawsfk5kff1ii1bd0g05oczaihqfqzjjhny428jnpz3bv6u0a68uj5g',
+                flowParty: 'sg2qge91k2zofmxoui3fwageejxl31k9pxtiykzwxols54ojga4zu0yhs3m4zkkstac5t1jfrqdb7l43j5b3hbgmsm7y6wkcfxb1xlrip4x45x3rv88xsr9er16tvcxwoy5xqmxoyv8kmhxnuwtyxrcvj0rd3xiav',
+                flowComponent: 'ezxfilbt5g62r5lq7uz3bmk17nnj7gq5gdd2fgt8iy4vm3xwl0qmq6udof34ajwr505udbyb8ejus5ruyyd6avfum732eyd6r7y414bijh05yzhycreeelm67fe95sh9julhopt64nxwrbajevfqhhh9opdexz8l',
+                flowInterfaceName: 'h36wtb3dqt74mfb4wqua02bacedcjjitxzb56acs6di02waome1nizfkwwmgwgjclb7o45m5oedva4d70lzihtrw2grcy9895wc4mpmtv1lqb0wxl12lqg4qmbn0t47p8x098fckadgh3p8c4r3s79dioit1yh3t',
+                flowInterfaceNamespace: 'j1f4k9gw4wvx7thf0zj0zstf4je3l64272lh8nonzcaw5jylxec7sqwq1zdp9k9bneg3rry0pv7648iosq6ds8ym29cj32petqy1feaygjfbred0xnkas4cwpim8y0gsbrxr9molbhfgwbtrtx8b0ag6dcbcin4v',
+                parameterGroup: 'jairq79tw456b7eg9b5lntj6b2idt5xnhnekcmuc3quuy9mlvmoskq2fl69dies49p8mfunvgf5xnxyn1owfiwok2gc23e7ubd7ps3yh6n6x08odlk8dxorzuwwzlun68ql0rwoo2ze05k82lzhbjx85jcfsvb4hnmw9qgq5hfmh4txl3316uukp986fj1uieggtduh6himoo33m27ckaudubz7jyx0xejkryi7xijtpud4qhs5kvvnftmmrnky',
+                name: 'g6sdkagtk1kogwukbqse88e93mou9994s35ulkuw6a8x28w9i2224glwjn3r6885r8vsnadgnboiid1qbcibj8uwciu15xxevfc68rq7wzwz0wp6lekxkue1abfrptnwe3wvyzmqq7mj32qsivai1cr3r7q4cnjr8zgue0rnvl0tfwjbrbw5huqlgnf6jf9apj6dnla53wnrh274h7djaf0khgfcyqswg1b5z1uzuzis1ik62272jz6wgovlomppnho6m9wm6m7lg41yfuo9m1934pzt7xtwviw54xwbb2mxm3nrh3dxao2lyrbs2tja',
+                parameterName: 'id5xp2ciyrn4o27y6j5fegt3fdh4ogvik8k995xf8rx8s7ieajf2a7ty4s65n44mg0s0n42u2rem2pufmtwn2sifaz5u7y1fticzldblnh95sdxb9yvjtggdxg5jbf1c89c3w1s2kygb029jeoysdavnwa73xb78u3zi1c6nqu6ecfeh4ytquro7mmf2qb8w8jjx1bbw3r37be3ozr5zejgtkmm9f4skvfhjiwm2d0jjvlklyljpsh2o4zjo8q1qvouut5r2yubyivi2x2rzyel3m3choc9joo0vjwhnl4gxkaftfa2lc0qxegz8ft92',
+                parameterValue: 'q83mqd2ajyv4oqlubqnjpkg91a0w3gjrjke7hhhe5ynxmsgeoaad4ugdkc5j9a66y5ohpuubq8yskfh6ot6ut9jq9n236w0dc3mpbk7cnzy50irqwftmibbzi65coi359m94npawm7vqjjpj2oswdc2t12vl3a7kgn880u1zliheng9msgql71r87p3gwljvxmxqcqoag2u8n4lzr1w53slpsgdhufq5vb2rrmje1i4u2bcwmuac2n0hfdkukuyqu0eulzopwcc19cvzcoegm8db2kq6rp3vjc4ybt82v5gp7p74cggud8mi491eojfi5wcz0zpq3c4dqywg9p9hnafvlms66qha2jmqm5aa9lkw978sfg779kb66bj82wq2mtq2wovjazco5lf23dyrjh84e688l70hsd2kk7sd9ia7frp972yh35ch0rgzmmv92f6wco9zx30xqtq8ct5g1ikaaarif9gb7weldah0njiul8nlieeutzysya2g3x6tg2q9u2h49lcsiigkldy7nr7g79t1kg48jcto8tszcovuez2x4he3n89a8d3qcsqnexv7n3859o5xr3a054ekuspzbpbx8t1qo3fxpvcmcdvp29g8fdp67qiuzuiltvcspy4mh6cnk5ekobwllw9ue8a1ig5xwzow2w5br2zxm3nurdr5siss0mw79uvsenviyntxc22jt7t9fcd25mty3hmf7j26puz4su8m1qmkqi1480r5mmgjzoxa1l0d7tkp1hnmfz9w641szn3ylk3gvhcwid72gt1bqtws0vt8bmo4o9veiiqietvhgg7v4mydigq6gc2b3i4fab3yyaeefhm454e6zq8lzktzybehw32o4ale56c9zs7ht9b7frqzifho28semrrgobu5pb3utmazjdvj83sblyhqyguq1xtvugo6ybomruxyylfpr9r72yaf13ax58jweiewjgctuurawyyhf4v6biak7ohdpdqbft29x5atsih7j715a36d',
             })
             .expect(400)
             .then(res => {
@@ -906,28 +906,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowComponent is too large, has a maximum length of 160`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowComponent is too large, has a maximum length of 160`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'vkn86r781v2fuog8n37q',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: '8h0qrqovzuvpvz3d6uxfvxtyr3uvwjre9y4bg62o6ete8yhk0q63o4ypt2c5vg2l3y2rrr9h6v9rnfmwgqzzuatw2o2dwbnz7uuouqpl1cyfvjlqrgiawl858p1t680cehqcfnui6xsxsbze8gckhuyi6vrjnnh1',
-                channelComponent: 'unxmmejsdtzby7609ioq50f4lrqu0fdq80xy79avcn22u0st3zwsn6ydz3dowuwnktj2bo7o4d22l15z555nipofwunytslex3b6xwrd0dqd6a486msv7ncwgl2fcljjwrbx7b0819vqaxgx3i1fkdeddy7e1wfo',
-                channelName: '4ubasglea1qke41juojb2otz45i1rf500nmen4jlhfwtv1r1y6sfekmjn3b42qg7t9uqbh8nvy6o2p44oqi4cgnnybgjgoebaashzs427ghf4th7uj6m9zoyvzx23121brz1sutde8gqnktcmrz6kf00cwkon2dr',
-                flowParty: '9i2czac81qci7yw8cf3pyvi0ccayxy28gzrruy8j9ds26mn1ulb2pjr30ywh3csz9qzzo5ww04hxhxuxtpcdntot910tliiukg5819n3b80qm21737rj6vb3u1bwb7k6681mzq2taoyo5oz52zr4a3t915akoyyq',
-                flowComponent: 'ihy7r20bout0ij6rzicvb4bqhfk44s2snx8sp259xx2z2g31rluq9gu4g7fnvdgoptl9mk45jbxeedz8mtsqk2yf0llrop2sf5ode62ufpplo0w65djjz2qzmdle2az4apvo5r0815ataokwyor5l8liw0litisap',
-                flowInterfaceName: 'qms42xa2uo2x8162smz5dygc2610q9qls26r7ngnggt6woe5di8vpq8wu28gaky2ix4aq8fkfzgv5c8x4c135gvuedqmgf02qr7uza0u3xin5vrkzb8ayxfcx7mo3nik4ombwut3j062aby611qhzi3l1axbbgrs',
-                flowInterfaceNamespace: 'yymsl5lyype35zx2wddn81ltzvcd4r2nbgw7u9l1e33fo289f5hbwoy6nmr6gnr63psellv395rq280s0ifrpvm2tb6pkk5ohszcs6tqn6yboa196ll18l3ocv44t2arkesu3j28ak4pvjj1w0ex2zkeymlgzfx4',
-                parameterGroup: 'pkm90rs6xij942ul81gh8byqahvs4xoa561i19qer0v1io9h1frlta8fo0yu23n5o1nhm6xgct117rxgq1alavdxxym9pq4tt7ymak4slokiumrzmlrdx8hlb6wqr9fxokxdn8p1tyo88klksfz4dzcgbdc9whr9mu30q7571i7sjqdh225met30cs3e0adiw2seh03ale8n8waeaw70d8g2o4hn2bvera1bm9v0s7cvz3sqw0sg79g28mn0vol',
-                name: 'veairscgkb37pp9bthi8gux8qzwo87lhbtqxh1laoo0ad0z9kgz1kqqet8zcg8bp1oto6oyrx04s3d3o9si7wv7skp7rfwvtyct6aw4kowvgm5k6if7p9slb95a6wqjoctkkitm9fsvpya66s8wse1deoxtuuqe4ru9o861jpb6taf053jjjfj0uus5v82gtbrjqk42g42fucjyq7bv8fyx157d8gu74bn3zsq7196n6ref1a0yrkub0bah9cc7k8dodvejcmviia485l7xadens4f4mkaio2jv2irhls85pwwt3ndc8hvd8fhnlxbur',
-                parameterName: 'cniqvzkr3isk5wf0dnagydwfjp3yx5o5ndt1okpau4v83nhyzyfd2ynvlo4y8q3e94ciuljt6a3v9boda1z1k3hnisaunsalxou0tmi0p6833twff7b1domohl6uxo4cghms5u7l90nmpz3g3lf45swgxs21jh9x92dzxhq86ocso06krhdwraietv0lfpru1005ra1ylnzuv2hmq5nwat69mchh9mmhv9objp1yse3a76uepd72fj0mfdhwgqpp8fenlkzp4n37gqtljc7gdbr9mk4o9w9rwrfncqqnvrvdk3mz8gijdl4ul14cll5b',
-                parameterValue: 'iuy7p9oy0abmsvsqsrwnpbcj68nyeqpbuw9qpq53xaez5q6pzal8lgd78wrb94r8ysf6iid96kmuh2l5iap2npa5nsjuxur0jkz7zjif97yxya165ex4jqe06dhhz8q4t7ywc82jh94dqiuxj9lrq1iwnp3haf61dgsxpt9btlmqfaf3bs34sle3750q0y1uuu11wyd66ge7eea5u88un52ztfpj7p3arrkvd8rlh48aar42dwz2glad4x9lt5b8na35w3ffe907zh6i39mf7sswqs35fev3xscnlj7tcusjgf6k9pjufiylx8sfldp91oinq19d0stun276tnzpmujwy7pr3jbd7vgscln9y1vlhdqwbjsbcnavxjxughxzboepoqacrxp7cz51cnts6wnij9vuf7fo0o1slrt5byho80uj78mkmbfx9zn2m2cuakxljxed2xcftme1k01igcy40nzim9fp25m6javveqocmmfjx51pckm1yd2mi64k48clm9tflp1gncjigqzzuix460s3gge0y1fdmykkl5dy6yg1ydnjugazzarijrct7ihn5v73h7lbqp1ua4q4fxb14rniip7eh5c995arvfd30femjdo5escv5fowzb02qf0cj0x3icuozpaw646cd9wwg74p18y4izqb7qcxp8wq1bf5c7na11m60ybb53j8j0prz4ua4i8wl88lak2h5r6n76forzqj7njrxv4c3ocebv44efvtxqxow0qxsaxff75vdkut9tp2gnwdya3zese7qsizbj8l295d1l7gdnh2s355hu0hig6sgqb8pga2wyega1demzbot2nv0sptuzb3que5x2c45dmkykukzpyu3thq0rbetb109d8t4vgr9uym81m53q6lbn5grofu3fq9wv97yi1smsb4yun6kn7tos2tjpks3op34g7us1mvbktrndazlnshhv8gr83d5lto45it6tb1tpx1tc9d8x3n63ml8m38ff33wqpy2ps6',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '4a36ydazxu5lcaynlk7r',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'aokrqbt403rwqq39dq4zd0dcxwu1reahecjm83jbcufsiqxja7bz4wak5757bjgbc5vk5ubidshbnow2muchqvtni7pkoc1x6sne9opzid0g4olwzokxpo9mdzi5r91qrj338zhrf2hclg076ex446mrfflk15ns',
+                channelComponent: '5a6c9wrh8hpet62gnk1el94sma4vczauid6fgr4r7m3ktz68r8u9ornasy7fslr7kztfwalncjs34hi8wgtn2uoantnhvpoq9xftui40zn0zqy25l368ynn4x5dielxvyxzpqy7esm95x87q43ofbie0opivv3as',
+                channelName: 'urqrlorpo4bj9rpfysamxgraoro04diigukrb6ow1omjdsri6ceum32uhwmc641sjwbiej6zxebxqpnyc2qzby50xz9wzahg804ifgi18or6ubkt92iitso3pvij41s3vhfajka68sbwsw5k6dl26ui38najrohn',
+                flowParty: 'suzfuth86ub3n9ehcaz9j4khbij7edbou3idi53u9gnm47ydqme4snmhp8fevs8eyvqia3ogr4czqjk24ufut5ui589go4jg8dv63rvr9ycwt8aky8hz6vajnmqjduq1yj66km3nu98ehao03hr7fhcdw5vmxxl9',
+                flowComponent: '4mk9bvvv8ihe3nsyip73y4hpv94n5x2z2uop4vuj6qmaych2futve805lcry5yp5pffh1xek9223j5282mldcybltib58kbbzf1b1esdb3jvvvk507ky5bnpubxzfjmjz4c8prwytprlibxil6glvoyzwzwjmpp78',
+                flowInterfaceName: 'vdtudr9i6j47qj7nud5vdvv6uqc2ir91pqq3i2d2deasd6upmjlk19svkag8vz22crcsom20xgi239x7km7m2xi0zowvt4varnpm1ktpdnvxiogc6wt7dzhfns4gl7sxppk157cu7w2segzrq2txhfycmbjsligx',
+                flowInterfaceNamespace: 'c46456kt3lv88844zylcqu9gj1ki17w51mj1fgy3scuxu4mrpor3mgbvh84yc8kx4jn6posrqqe4y10iy2ia9g29dypdorkken30vzdka4p6hxohvb67uhyck6mouqocqyrnibx1tr8yzmnwxc11nsj9vnit6tjo',
+                parameterGroup: 'tn6g90qo793gt9e3smabpg3g3azkdqh19luufpctwh1kfjvsbp6cxiijwqzzyxqzgqar89w6lgy4mytf0dhxnqujrsm08fafprgt2ifktgnt67sc8iq981pk4wyfu6elge4af2q69ww1nd1cyavkmgh93qqlj7pawddxi265aqf636f0pmsmw12q8njfqcwt46bb403hamwc5wxq8ho0xdfaqgiawbphhuqh98j3ibt4zwqd6wpyzilpnn8j9a7',
+                name: 'q3mqwy6nifx5x9femwa9y6931q627pr5raxgx755m1v6j9z27uu4fp4ijjnm915nh4kcdss4htw12t1jado3kbjg3ckpa3ya1mrnwfgl5monurosi5ixvtmonmxa0hxbm6egzxdzhrz28c7su8dxemg1jcrv4sy53vb1hsjxza6g9jadehafmnscty2wkvi8cfoyvd4fttejs8e2q53407zm6sgzx8h2423hig13pfsvshf3655g40srhfi2ndgvrbu0zgi2g6ke73wq796hykaxx4c2rylhqn9yxvxt3kacw0snaoz3j3zvqkotsc6g',
+                parameterName: 'fsz2mtyvv5ngd5m9mzjns1cx3z9v7e73k0thkbi48m6y4ckq4unugrjf0pwy848sp5eoi71597kwd4pb0i20ncgjzsh66q24t0617i8nmzrkor910v5199r8w2jrvok3tcgzmepodnz8stjookdiovuhmt1i7vx9qd6mjwat836ewsp2m5fy72wpg2xmzod65ujjdditun4yawpocsdf64ruztss10m309j5hcvjz9lzzbdeytq3b8jxrcekeoe09xzdpufrdcr3s85n72ljnmzinz9rp04yinttu27n7ez1qlbsfp9vsfuyniaobp5u',
+                parameterValue: '1v05eoa6cehzi3hhghze59vo6gkb8yp6flb2js1hajym8uhyh4ld3gna6jwj19x6w06m2gob55pta7mzvscsrvrlmzoppbu2u6azfz7zkgfhvhrjcv974o2h82z81osv2nl2mho0y6woda6zs2n8dmxc04qbypsf4mnshx7z11b2q1u6e06vnb9zgxw4i9iuwe7bu4i6ui3qygpfz57wgcc10oo5viok0nq3j35oig7pzzlyaiq2sy5rp2wf8l7nj9wednbiqkwq49en2oya7e0nwyo9hykki5ktl6oix81lfpvqywcqsi98eum3mgttiy7bkrqwmsjger0n0iilu55lcoeehf9py4u414bmg81mvtozgbf96wazujwhbyc7kw1l5uw25gum9pji89g2elpzpbrat0ps4q8e04jyfxyoncckzmgewssjpoh1zi1jsm1va4ddrnmx8r1wf5cegadz7ihi41d19vju6bsh4a1ugyzchfn7gi7twgt8s7ri8s918593t1kyby23p1lx2b60y6j3zkoefz611msvym2bs9fl35z3nfgdq3b2dlii4yusu869q0jedhbh1wmp6zqr8rot45oin4w14xavib5v2v7ujv85l3p65bdy9savcjrfcnalwif5aku3ygkivrbti5o9y7bifowjva1i1y2cmuk6x112r41cv2fl6m7atrpfldcr2t3daialw3yrl9oqvoejz60jer2fqg814c1205ob1vey7w736s1cuwfmqajz2gotbcmzbos5nhui4cabcm2net7oarjbqa5igzo8jsu8yhg7z10jpmg1g21ybrbckd4pnjyac4c4tv3aunun3wbbsaqn2htmabmnklgea19napuw6hww89ixa9uy97f6mgkdbut90riqaai9wu5jxt09onwzsbk7qnqkiaxojqq8om0mwo7az5frvlxf6s3zglkgxsjcd2jswc58uen3en17adj62djoo14yg5epszdjviiw1wmuvkqzrmzz',
             })
             .expect(400)
             .then(res => {
@@ -935,28 +935,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceName is too large, has a maximum length of 160`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceName is too large, has a maximum length of 160`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'ni53r9ch5ss6kp24zsft',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: '48cd7adoa4div41btma1a478tcbgcmfmvcmlu4clb6wujp1vl06srpkfl493z8f50971ah2amw7mgz0h79su9xipfnk3jsgp4n6p6p6d27goienjzt4rzfw1q17r9vzma9mwc3qq2c7fqe7hpxrspwd3h3y9ipg1',
-                channelComponent: 'fd19pwnfwpx5ifpyuew7o96hji7392cnspbv9vg294qxv9ij255oqujhyz6l07zeteovgv7kw3nyvoq82sc7otkwi8ve39p1yvijivr407c6208004an7dwclk8boqgin5x5vsabub37us1kafjh11ifyilasibs',
-                channelName: 'pof3afobfzbeltjjgwtclv6owf2jdkskw3pfozk1794dfkfb7wducgo6ulny6xpemw3ahhs9dgf7903e6ne5z4vnob0a6itvpq6lrnzgtv8gj89nk58d4w4b6jc6cgx2wfkj4lon5hq1z5ry6prp46idt56ls9s4',
-                flowParty: 'sut9nj3kmo78cl92ama17tzj1sqm7nexbb5awd0s8l9o8yd5aptv71b5j39bbwzoneh4oysw55l1s6u8i094akbxqfakag1wejp7cg1qe3mky999ki3llfctmqn6qn2imkl8x7lcu16h1j072aj7369x8zcv4xnf',
-                flowComponent: 'sdloxzw2lnengf9idnt9gdnaxtelbafprgvpmskjh3ucnyhy3nfqsjx7v1prndmubgd8lxy2xtj6sdlv41e8va7xhwx0wim2o1a0qmqdwkq7shvs3sk5ov5ceiq9i263g2bh3q4yr4k2gau9tk2j6uvjrb39ktk4',
-                flowInterfaceName: 'g22czsdwypq0jjpnyvx75rcfws9z5wib0au828r6em8r85rx0t3co7p3u9y0dse74t1gdldidift1qvzsspw413yyxiu5mj0kn4cvmctylszufz6tom2ugh66vy8ogsvr9t15eq3ni9nlkwbh3sb9378g8txj9maf',
-                flowInterfaceNamespace: 'tzsp4u0o7qwczzdgcbmcwp384fhx5qr7662dhhzezr08laxozk09dy0hgsfratfepb2lv85a9ozd8uwcsscy75qmfslvazqwcsznrs451h95kk1zvs8bdsn1qgani0sj30gy9a6e5d7ts9g6hts7ka85omc8vxn3',
-                parameterGroup: '8m25d192f9y1f35ax534hh7tvkfbg3zbn1gqmk9eg1js11tvlzyr7zpk1pu7f4tbzcrero2jzb8ig34mec0o0ro1s4v1dzb9x8ep6n5ylpm0fwdg02ulnobv1b7iq8yff4h3b2j2rolzfdr9iigvmq3zjl7dlkop1ykzqi13tbgyv1uhkjakbwlsg5aa0nxpshigy7v4d8ztmvnpkw3isnsz4fmkyynnpc0n93ma8umud2kbsy8x4hf9z5uaz67',
-                name: 'inv04ic69vq6xehpcnzi6v651jl05xvnvfhz3a3oijw5jueqnxjyy33lqsi1l5yhdxgnenqqthkvkn9w1733cpd9fpg5rzf73s4uesxz6r8gewg9atd10fiu6yley125mmzqw49tanww75uljxf4ntx1n8thn54rh48u1iamfv7tsb7n85hmj0zl0o5xtu0j5712ajzi3iswsmmxagjhpen8klitcwk53u8xizv89cqvhhrknl20ny0zsg5lbylzpxixc2c12k7mn22wr6rnqabdp2fpk1cnvnrj2qeit3qo8q7zseochhwckcdstmqj',
-                parameterName: 'x1cre944euo4fdz6shkw604ipbxaaxt5oialidhufbao76se3iwvajv8mfc9kkkco5rgrp3pzh39c6yi3akguplz5aainenodou7uvsfx1g5h36c85xy0ogjnb6tgmf0md946up5rff7g9ua7wbpetfdpivmkmq3m9vwdtwdjgpubfkvc17ci56gilrykvaki2ysxon323lrt9ljbgah4diimnhoi9g52vh1nf3mal4oe62c6flngzbk78ud3doct1fbcs4xzq6bdu08tew4eroyu61ssmlsl1rke5m88sbs2a9ii4m7ai93oo0xmzj2',
-                parameterValue: 'zq6snld6nmir6xyhbr11jhjwdpp9gprge08c2sznc9hgabwfro0cwn694hwwezng5y6nt03kyf2b89pi9pi4e4m7ms92bz63pl03tj87wzgpnb171kx2ryvf3juwsky721gqy91bsmwk91b008oub14wsn8eqk85596lwgfrla3rrtv3yxu3ultnh3otx5m34vfk6lk4lvzil2ie0sptcxxz6q0h12pzwr060aw5zm4ipyrlyb45h0auwumx7v4xx4wxnd2jn2odwjcjlgeprofbytaogmlgmbpsbg2t77pz7na5eukvh0zcoc13jj0j2y1i6n72ed1c3x9lrah9o0e93l3qk7da0y7acaeu7j3me06897dsu4jpy7dz9ecvsiek4mjo62mh4usoi6x1bwstpsgzuug6tsu69fk9g774h7d85tnaa6u8dfqu0q9s8av07v3mt67uc4igeown7zkpij7cfzwp1fqlimrjo0kreluaae97xq6rvnj8g7gamdle2os27m1h6933zo2fbhbertzet0zvkrltghhifkrstattybjh6bu8e1qwl8vdf6du9vsseph4gq2hc27qr3s9c0buy0qjcm8d392uj2r4ik70f0z9de57nokro2s40zek6old7084jq3wrmd5wnrtstoimq25qazruhgl6vfdsg23ttgwvchsnu92l7o9wyf034ryccicbe2sconr0mxrd8k8rvqdq3kk2svon32emjpbs5ocucdp5d6ms24aub3pesbxt5ubjb9co2bkug7tqwnrepsyhldnzwmnhce1uyhl99kp7cgh0utjr5fzh3iqd2bulkabw5y9cgfcfd88kxgax1pezzeh472subc051cbmgkza185jrf1kq2exccqrfehhoexg85n254qeqp5s8ct5xcykyzvwh1zydakc2m2xqebckk9i50ypzbzuocwk2o06qld2q3a4mirgqdiesr6xh4wqru6klse8617bl51ewd01y7uzbcv4al0',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'rq1w34udgd8dp2ti0c20',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'efemsbrpshf7onwggw0n857e7c0vro37gfr0varaazpl60g1aungm1uvyx7mi91f89n9v59b4e1e1krg5iqct53rzt9nhuuos8t0vp19yiwe1nctkymdtknmizyzl6jwxdupsucwlvud88ja7k1wd7gmx46qpaud',
+                channelComponent: 'xa9x7r4yak22yra4guph4uxea58an8r1lyhajzbm3wvq27lq9yr3ijtbjetka1wvu6nd449ezivc4f4g28l7a1cnjvacpd1u36ssjmo3w00fy3rl2ogb5d9c7taus9rjrpj0ttim2xjaompf8x5dvmjtwa0zwwbv',
+                channelName: 'uvejgg0n61bko0byyfkybtnvz19jh3umgapx7hegmszcy30zgzlgm5bfwlyif8k85jbnbsnw5uo8q9cf8rslxy8m6cawq2a5u8dw4jl5eqitimdpehctilvxmnkpsnnxfr8ie6ts0vmmn3udvwfeb2tik0l3zoz9',
+                flowParty: 'tp6483fbwddy1pqyf77fzxl6hwpqubo1ya1zpey48zl45wiv1i873av4e2jqax39bm7qsh9yxo21xqu62rgvgher42aj6xubh30eae2th1d82uyej9lwjusznwhp8tk7bnw6uohe11jm0n8nnd0d96mt4lha2bi0',
+                flowComponent: 'qv1wxhnik4if676cvw2vg1avw7y5xeyfrucn657t3kg87a49s1pfqjkg2tiojtjtt1j2aigybzy399lyamj65h28bm46wjnumfunceqh6l9siduvrhgpsaug3y40koup0vg1hobvy5try7csvd3kugkx7uvae35x',
+                flowInterfaceName: 'rt7dcbpwr67qugpptg5ghayqm10woafy5zooilkyuaftas3d8zy4mdp070ig1heuh2ggyj3qyuahffa616xetgdu6f6p8tgo52jeaqakfc8ygmupg1ykceijy65lcv3fc95k6veckecn89fw52m5cmm2byourbwex',
+                flowInterfaceNamespace: 'oconmvfcotx0he4ftxitnddlmxsobtnwqx86gyn4g7g1rx4omsu2hwo71is91p7v5gwui0woegqs299w2q3zjgkx7ps1jouadcu6doi5y0gnwjzqib78mtj1qf12yzghwdcq3rixqo9iuoefri3u436maizq8l37',
+                parameterGroup: 'xukhwensswefb45qg0cty7onipwffbt4xbdjoz6lde26to3vzdax30vn71ocux7vgdtmgcrarabk4u1mk0m9tdtn2njilvlt0e89rf4cld6l89jznpqud80bksz183yyy4afrgphymzfovvmf7padnrlo45b7hdvazdcz8mg5tsyo2yacbw35k3z29xt2czqjwx9xzbt96rx9340hbbe5h1dskyrcprpbg0jsow6iyfhpwlye4xdywvhjnvmwdu',
+                name: 'crvsvvs5t8vmwuql22f6ghejooqol2xvi9hrg8zbgww47ps3kqdc7ucvslxowqze56gxy1b716az1exy0nb0hwysizpki3xr0o5s3seyjcsd22vrqjlv0bksty6fhehpo6aoqa9wj40rlaij126p3g9syu0lxpu3pwl13fwf9adrctjieheo5aoey34hkfj333svn6ovht22ludn7u5oj1u6sgddebmv7yiojo3pvom61kae666tu2okoe9ah23h6n429z619udh1pae6usl552rofehrqh7tg913kftn7nkwjwqwk1ac3rmi22d6wbo',
+                parameterName: '6vtjeqgysf8ybv9i1bwvcuyd0ypjubeosv3cyazslp1y2l1bpk1326w8mbk0djkogpnnh6a9bzol8r551ddgr48802lbkgff2yrlpeol00oau3pnbaji2e4nycjbujtddo3wzjdtaekw9bazbwsdh04o7glfi0ldqxdq5cmb44wio26dzxhe7sdc49yek9mgwx43s2rrfh31zpv6sqre70ubxkwz9z3onq24klm9t4oxzb41iq3si9yb2pnaaau9pkp7qzqvb6xeekwkhas09drvw17z2zaewmsxf3lqniq4p4wz4tj78tds16b59pas',
+                parameterValue: '5nul2j4ca66npi4an6fr6le69o3el2clg5fbiwuqmjtb3xo2lw7pek9ije3bnvgr4pgfmav9b69p4s8ztb4jv9ygrbqnj0tpuoudvt3u32qlk03dqtwx6jvu37ryqvi86l2dmhhkg3hk535tlx9ukawq6s1pznwqk6rkke6arxlodxwbh6qpzlhqie4jg2mkssbgf75fms6f48fnl7r5f49g42zbqaany6zj1sq2u062b99epo45jx7uy5ppcffb5q4fzstgv2x7mk0y1fhayrwqj00vv5lec7hkjvx1ami3g0tt0jxlysw7xf8f4es05gmv7yxkb10j4k7g8m93cm67rdpxmesmn8cz7h57lfd2y7p79jxnviw97aemrqe137d9bd2pwg9vsuuixylmqdmnmzoor1jnxkeuag6k0vy9ftudr2d0zbx22q6ysml0im4zzieiqstixcqlfkoc736vy3hww7c7qxfmf6zopoyfkfhb9qwvs9xq2q2kk68napa265avbn5nqbciqsjhuvjt7oqjawfjfeyb5brwybt0cv7ed5grdkgw6ren8d91d3nbkbb627zpwuvzbrcpgrqioprbu8f04adaa46dl3378gdnkrtksudpra1hzmz3clxdda6gsloc4bpn69cgvhmlr6vbppz493zq516z4zoapp7m00h641txzdpo9o1q07bderlf3na4fk4ui1ydwj90rju8s6v1vo1uvh5xbcp1dcatdlkyndr5zuga64ly9ywn639ge9mjjfcgmuvzblwrtxc2mshgkl4u4s44mavaetatqyokr8sncs4xpm29f7nwj47bq4qqskyziyd5q4id0472o7ckt8eg5xzhby6ih7io8co6q7fy967z00uql4smwu1j9exyrf3abab6tz7niyzpbxqy5ad6qpis5o3hqgd0e3gq8km8o4hegv8cjkz985qqwsqtuwq280hg1gsztr6cwokx16oui5k0s47ip5nm3hlnad8cjf5nug2z',
             })
             .expect(400)
             .then(res => {
@@ -964,28 +964,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceNamespace is too large, has a maximum length of 160`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleFlowInterfaceNamespace is too large, has a maximum length of 160`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'z4k0r1upsennrf626t0s',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 't76kuzu114y52xp6464m5133meex4x5qo7yyoserzugtidtpyxi0g5hdj1kg5z1bkih9gbmf2xixudtyqqd39hsnwv5smm1c8qhehpdyoqht9d6vojeugunwcusuz248cm7zuz0ih623raif9w4ppgvaliaji6zs',
-                channelComponent: 'y8qkqaet3kyuwdx1ux2glbz52a7o92z2gcb37z9dxjqdpn3tqot9f1mvun4ufd318kj0jkxp3xmanu3erhaa190tbh8hh5l91zm97j3sn2fb9pyqlt84aq1ayuqhpoer31apmxtq5ww5jnypms89wufumtjwmoaa',
-                channelName: '5qbkweri8s3ycizz153yacmz6cklp2litrhrwo95nj09dmqmvjfz6lpac2v699s6dw4p528p5wygputllyr5y8reqc2208lgfx30zavzn5fs6dgilw6uygr9ahyurvif4wnndmj3fseo5rws49n6lb2g92nhlapv',
-                flowParty: 'pspab1uh130tkkd665ri4kxv48r0zf3t7hmdygnlqaclvwd3xpv8t74e0wvb2ls5ittyj430y7bcdc618nmil1kdw87bcj9utus1vagl6k0ckvfcodtwiavf6c2dcaaxax2q9i8gq2ja7dribbi1cltdwe51090t',
-                flowComponent: 'i5ifa8j3aw1ivc6dn4mqjdhoxy5x8ctngwvs2v8xzf7is0dunp1rim3594ixii1284r57xmli70d08r3i6uxmqznqxiemqq7r8lnoff53q8op7eypyo26kz84wh1dsfybotdvqlu02cqqqfevjxd45tomtvys8k3',
-                flowInterfaceName: 'qo5fng7bmesvdcidfblnmtszfj781vy0u4a1hw74coi0sce9g3gv0gad4rnv178bxcyttchgyuby1e3s7qses2tm0lp6tmjs23zowc33eh0mul17b2i01nvh8m2raex84f6uqcmqoh9saf6nr6e6pesq9l5biu0r',
-                flowInterfaceNamespace: 'jvzyhjv36y4k1q074eoqibvkcyj5ht3q28ql0y065evw2pvli8x2q071nmkuczzrybidiwu04lnfikudzkbg74h4soyoyo4w11vlbglwttzw1axkbs0e7i7lw6prikeyw7z1e2brziln2d7mh74spu6p7d6l3c8ps',
-                parameterGroup: 'f2zec19ohyx0yxozaff1dr7fsyl7gmync6xavuzjsbjni7l9w4u39dcejkdn5nfabj93smhrfk6or44m95vqd8kkjx5cy2u2yco6ynsgpowa1u8kj6qt5yb2opr51ense6dp9as0nig4szwp6b6tnjlo3hb78390m40fbd4alk3bgr4p77tkbeb9nvwh37ksukd4jnktaxvvet2ois7o31pyijrmuz5gbib0sobz9uq57dtl8p1zgg8i48zltqd',
-                name: 'pvu463kdrpi9v9tqpaifavylyqeu27yi0bx4b9j0nrbxb4t0qnq4u36529im4na5j7lpszpsko57j0lsjwghuqaet9it077zw2d5d5bob9s4a4dmymhdwdgwm2z71m65fcsb0g2ryw2cxwuw2vw9futivf0fsd1fp3hm36apqrj7efu1n3f383b5zfzrc4i0a84u5b8ln9g88qc9y3exy9enmi30pid8hzt435x9qefqve8wzmwamc3622mvckkg42ut0o0ed8hlnzhqsqnecrqin041510zka0yq879jyttyiy4yh0okupc0kvocw1i',
-                parameterName: '5k6uv04dfgswjisuxmupw621wq5nxbyyxsav7pdkpk1jo9hajrr1umhfolx9to9l9ig6zjnyhrdc7bqhv0ocv3jrcy42qj5ucxeb9fed1siqgiqzbk49f7wac7z1psr8glq1fu8c09thc2fzl9fpmmzphova9248hxrdmef1sfwzhnbka0hw71w1pbogjfuqzmbpjjnljdaseo0c909hdf35v11isicospz64giva9cqxt3bsg7mdkk6e4dhzvoks57fxob9ztnv9d25ag6t715c6dcumt01cwp5o5ithhy9wpimp78z4koylqsrfetj',
-                parameterValue: 'vhbk3r0amox0cyl37aslsqjte0zin8q2wp0hrfmd1106nlz4q2sqqlcegpny308g9214iw8a92h061zafphwzk0rf8d2c5p2wsy5g6di8srb921ys2scqdpb0xaxt0ucnxu0zr43w8cam7jibiuv6y5grbeoj5hxwrc4j4eq0rt6833bifs0zj4x4gv51rlgb3k88as6d2lqrdrn76l8wkwihytsla6zxa0t01rqag2qodeav7a74it17g9vlhkvplr2cvvq7zpjpor9nf9a83johgmjvzyyf9kqrv8lun31w09ow6d1f7phr2ypvpdkfbj26z96lgjaf4hvp2vpo7cgz2dawth3ziqlofi0va599splxxpa8r48v75bkqdc0xr3x3z4u8goptw40h2q2kxbnw56gotsqzbq7pcn0kp5w0x6k5tqbwnm51owwx7uwkirs1ozayz2jrr8zif7vrvkh8fie16jyxusail62agoxogchp8nrsntiw95f3r6nypjnzz0ac56zf1sfk2rxr6r3j98veoed7tvk5gar61h200d17acexbnidyckdn822i3t2j0g3mwebw34is986fjx56sj7o17lf76um0atksz4smscovlrtmlm8p7osws3iamzps1kmtdc67ona3yb1t5r2l3aksf4odl9ssh75tf7ninmvri48ibpj1lshm9vxn1estnx67wnay6iacxbuk3tuurl2jy5iuatyvk7z9lxb7h0wieny1n4fdc1kxt66srnk092n1mlas5k323aia5h3cu235zbzj1b85aibvlahe57xc09cle9xxox39o860bdzhkp315qizl52s2enf9ug845i07dpppcsdvi39c578o2dk32aggudz0a9yvwndbrfktfzjwghv64y9jdavome2dsjszjdstv59o2gzfxbo9j1l12uhrrmwqjetjhj2y0pnjxa98russ596w6gxeo59yzvjrstlxfmqfkukgszmlvwqt7yoejhz6179',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'hfotu55vtzz4kfxph63z',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'kqdqob4kj0vpof9jum9i31s9imbd4oo3hru1rduomxyxqlgy104ki49vkslhogfrrbjhaaatxufnlod806q769lpoca2b2r2zj2ndh7o1dm8h5qcc3b4orkt6u69jgi3sum9d2duenwcazlzlcpl93jfgqkymyyi',
+                channelComponent: 'ychq5e9wq4ezrnplzwenn9brg5dgyine3opcnpl3gvktge493icajk6xy2jmnihhob3em5i9x5838bygayi2w6lh4i2i1dtlksqj3y00qlob63wst2d4znrz0bsz01qr05t2bplr0lunnl8sznyhas7rc0ktaj7g',
+                channelName: 'gtjifzfo1gpg203m5v9r4l7k09rzc3w2vskt470weenrx9ugjox0gj8z7im2fuo9mk3eeivdw6ighepnq05ryszvn0gd8zklkayjkeh0p9xsxctdwis72qqd3le4opwq0hoesf55pc08g49nqqqcsbwh8c5o4bwq',
+                flowParty: 'wb6ncvpqvcp1tevwx3kprhiip82vxei5yvzf32copt7wf6q89at8uw0ns9dqttxjyl10jdtmncdek48flt3vmhvdc6jjsy5cxjy3c7oi328vku8828jobdip51w841wbfrao4fm1hgah3m721vtliy5yd8ucud2z',
+                flowComponent: 'z063dwz74sj75ckc9a8k9kcutme6axfy9lgs1bayturqx8ue7edg3v55j6s3y1h5vy9b0n7r8eks2m3nbyids6yzlj8trolwboyafiepnfntmggfft7iios9kqkw0a9g5zgmgm35ssf6etwma1xtpenj1qmbi6uy',
+                flowInterfaceName: 'uyeomanib1fbxyzl93ppwoosmcee767zxusx6xn84ieceox1w1dtiusdftb7lnvoeq0311eqp4vepbzp3se265xfvafd6v0uzcnv29pewg79tj0cjr3jotwn6prpke3vkqdx9toaxdssd1papt8otu1dneh4ahgp',
+                flowInterfaceNamespace: 'rquia7ud02zntstx9rpbtxrtf73d8p1fup03tt8rd56y427c0aqnp3oz9fqkshhae3yr6wda22cpcxzoa6b3cxy7dhcpd03h9q6a16q3bug3d4eakw2h8mp84kjr7l02n3xzo74izl04shrazwzdu9oy4cqkgatk8',
+                parameterGroup: 'ctpmjrvwc07nrk45t3jrh0v8hso8mm0ztnvj7hv1n4fk8c7l5pk5wgxax3ks6ftl75m2eml8u13v578y0xvjspl0k49y9fypj3juz87isv5ozgdoghnajfj7337qqprc6lasp7n68w9dof077o21fyx7c1sm9z6pfvef6twwuxbx7viy0yknt9egzv74bwvgp413qdge6fwbwj1dbxauzf17gefbjqa143rrefzzgtalml3j4fxthvavapee2he',
+                name: 'lehr4rmzcqc234p1wfo9jo7u0vkt05vhjha7o7zdofcxx16xwi2yqnw8ce9fe4wynmtt6znv1dnuxmte04pe5mic4tham4479x2h20s11um2rva7n84nrinbaatt1mrsg9b759vf99twkjlqjt81lrd2w5lvalh2zis8n4vi6aa5es3npriztamtdfgyd6pxrwviia74v4ju6u9k2z07fydnf6vv4v0awm6sgzb17tis9k5el7b7ulw0n6fmaqkda8qk7layig2awz0fn1w68rbsecfaeli6xbfjwi3f2a6wo6qrcsy1rrhw43f6y28l',
+                parameterName: 'k94b8bxhhunfl5evrqriuzswcp4oesfecyu6c82fgsp38jeng86n6pd7k84n89xl1740aek2c0yp1jnfp3gk42l6iu9qs1wuvqoh8tapx53j2w2x105o9l79fqzeaam0f3b62k0b45lo38upjtqd9dec71zz05frjkue50oohjf6bi84k6m7vyi5jwdsemurp68xq4k0l348uvit8lnvy6z5ncgd0a4br6kmlmw930igj923oxz67nmxrygc82v15mv2jjcszomat00luxun1wi49vys88eys861h0k3afr4qid7uysosjgmu4ojvsjy',
+                parameterValue: 'rbs65jn8fl1ugsq38itallbi5107chjle3mewi86eb6fryyavzyk22wuugg8g7l43jl16n2w6phun11uckj7yxlsfny340dgidae3af8mkc8qmjxpejin1vwjcp3yku574dxmr67i8snxa7n7ln5rob1znbck8er5aw4wkt64oo37oumvoleq1i9cipy00wjrt5slydivpn1t1geiaxg9ilfgbyn5sgu2bnksf2pzv6c61f87566oy7gggqojp6gb2e1e59d0qjq1vy92fzt8xrt70iq9hj8p7shigmxrkcij1j5kexkf580bltltk0yklf0tpwu5fkxoe69p92yz5ni8a0jqnc9kgxugr7glbkatak3rfcvq8ooowor1f74db3ybdl38eqr623zfitdkqi1xa38i5ncbac2c9tk9kdom0bvjl32vqgumvbpks8pocds5j1kihlrio3cyrilgg24o3z6j474p400v98jav7hug6pteih9ibqlq4ccvj8v1hjiehqjyjbxlthbwz61e2b2m0gyz6turt40emupnuiit57o67vexnlfk4iy83fmephgkw38phxuqckhexqcsavx6tcbhlus17gxahmda9or7fbwpqi5iqsmhlttkcwka7m039lg2puywd2qn66pth5uiqhhy04aso6fvjt9zo5mbybnu8x5fbr8uj8s677z3awoqm3tu81w6aps0o7es63yo596v3pe040dsyy3pbhiktpvngqro0u5fibv81z3pq9y4db045a64cz2epedqmpf74j8eag5xz4zvflp3869xxgyz8nu2wv3won92rzpsnvu5yw1q2s304o8g1epkytbfjcjxqzkc3zlncx0bs9kvavc4eydv50jcmv55gr30vpnn4b4ar5gsdcspgw5w9tvemye0bwh9jupz1uip11b6v3lkgbj80ki327d5ixd75ei4p4ewvscooiqyqec1or7q9mel9zl87cg5663jjtgf590ipzalvceiwv1jxb',
             })
             .expect(400)
             .then(res => {
@@ -993,28 +993,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleParameterGroup is too large, has a maximum length of 255`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleParameterGroup is too large, has a maximum length of 255`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: '7wo8k2ckjq6pxlp1i1ty',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: '496zjlb1q6un80y3t7bh9cvsttuazqtyihlrfxdwdn58dcve137avjxja5dk4olyeszd5meb5kfify19ywj90r6xclgov0rku3elty1iopolbiupxy7378r4vakh1cr1r5jodbs9mrt4rt3i4zxx43tij1k6snmw',
-                channelComponent: 'o0i11yeln538d3z5fpbzk0846ifxu3hocyr537rjjup8lzzdacfcf8juf2yk4b11c07gyitlc5sofqtpm0vsyzqhoycaj6g5h9b8aty5xs8mfsl3lde6hjqkmzbyu0hmgttlsbwoxu0hpvpxzyk3eol52xk1lgru',
-                channelName: 'qwfbke2j6szvaxuvn9zf3w6x8zaf0pthvss39euzahzlpgukygm4prrhfhg5z78bo8jg5ai85w1cod3bfkftu7jvmj4kd4n5xb3ufk0epqp4xoeecn7qtxb53hvvyxs9i89f4m7bpvs4z1usuek7j6ao472q6uex',
-                flowParty: 'ly3yi9xqttf39s3h3s4bell97o5h94uxwc5ymkuwmdly7nqal8eb0lqmk8u6ilo4sj6gi7efbca9fkdk4n6rgsl0ofp68zsvq3f6ffyteybsbf2tr7ge0h8jp4d2a9s80553ckjx8fxd5wsgu9aft7b87geawv4k',
-                flowComponent: 'hy4g4otg74g5g7xz1d0l6optz4b71zxreo0c7281pg6n0m7hsf4vhekz01o5nl9dn4jxcaw4yel9jgj19idzwvrxa71lutmg5mkjcaaopno95oz61eiz5a518h1qqlhmk344g2mchufqgdi9m3mwtjahatfto67d',
-                flowInterfaceName: 'lkpxo0me08dgstk0ryi1xj8z80tgn5tb63eooh2k43ivofn327xry93rfo2zdf5d1yipogjss2az3ugw3ssk3zorjmtgwm6nqei27xdn1o45r10ow46fvecvm8n9vo2akkl12enulx4piwuvh0x4r4i3f4rpsgge',
-                flowInterfaceNamespace: 'sil4sj1xg7qtmx9xrr2ghe6cjx4l8d258zw9juit1h4xxbzewt14un2ov3nf03xk5npduhqi3kna8kcg7ewvoai7wzw9rtlof7qej7bdu649xbeqazciumm28ubejw3zj0d9fm6x30o8bxpfzluhvcp18x8tie9s',
-                parameterGroup: 'wzya88hq9vmvfr5z85rljpr6qvtdttx5cmbuf2pkqqq1edkopj2dnvrh4249y9h4ysd5lrbivfrgggmzxfaozjh9ye911lqgt8ltxayqfn8lkblm3g64edojzi47c6nadr2wwu83rra0ljvf6xaoeoywekbjxub43jdvkxkcd706kl4h1mfbjwcrqvseu7gbrl1yvr8lpt1cayoftat4c46im6o9seq1vjqdngmn50gpxrcljwju6k61un8py2qw',
-                name: 'ic8nhw7pgrtzlhd8p68i6wa3mxzjd9oo07io40k8k8tczxmrdadpoohqb2pch4fl14gz5kina64vbri3vlnnaki9nzvdipd51t026jbkp8m4wszbahejhcbmavxu009hxvdu6zmr54lviomo8179aal29x9qq0101ch0dzmhvh2qfv2y6ppaln5vu9kidsk58wxyekk7i0wdavvskge2z35t4108k8e20618698ypqdziq3e7wsc6fnotbatp7a9wkf44lkbehpnb1d7nxh7py9990ddsjxnuqskb2qf29q6bbhmf9twuumscgnq1p5k',
-                parameterName: 'cjuj77z46sjihoffyh0q2gd4oe1zi14ku7xpi77jje0ldzlz6qcd1wasv9kejclfvcthe2vq1el3tczfcoislivu1x1qku3813s2elavd4ty2o28zeryqflkk3de97wssi1w8rj6hwp0v0fqq98y96jm9mtdqe14x8xxiupbh21bn2ug6gav0vf5jry7j77a0slaomasp6fuprf0i4wsiqm7krww0jlqbrcwk2is64x8akh1zy1dmjm7uucefodksm7u7bq0s4te3kurezvtxkh5trm2annvzu8c8iqnpuiec6p74mb296lyul2m8fm8',
-                parameterValue: 'jc4hms1wq44hdvvjjj3hnc9qv16hsgcl1p2oygev4lxqqdgl5axclpyeh5uda7oyucvgrah755hhgjm55wbthqbfkqq751ayo5ij7iv9wcrwmmznjnkckg2oa2xjf7qpetg9htn81yheq4se1rk58kn4rp7ky7n8qsgix2vba4yk6eba1ape9kbvdvgnfm67y46u7c240lfr7ragt0p2txp6xfh7e2sexl58ddfcbgpccihh8zngf0rgz4uyweq0bxu7mc2enas1x91s7hkz3aw3pehrvvhy3450yji6dadvpvrwu8d5z48p77q6jjq940ylts90yqgjuuzetybapfpftz5fej3gss4xsfh3kkx74j3sr6kfutnusly51d2uooja4njoseh6uzcxq43s7s4fo5lqb49z7illtp1y54nhb9chsh2dx368ynyffqil88k03ik00h1x3o8do9njyie4qiinjzp8w13fjrn87v8kd1zptjqm70hpkz2kkpgcibb44cbd28pnsem3vqoy020w45mq4z6nstqb7q78o7k6yjirx36xgb2hnxsiawbcabkhi06vpkki9wcpzvysn7vk1e9g6ujwzbgvmilgrjzo6e95rpbgmdmfzrrhjouxoj75hyhnzu6nukiffsywsfhbeow4jjixfrt4q7ofjgalslo7uwvx1evo6azszvxo3n5cg63mhe31yi21mb90lljqwydxgz71429gxvo17ngnto9jmv2ei6qzumoezgostiiwhyiq380j4flfpdr4ltkoid0somvh7bbh68kbmb543h3ba4yug80t8gr8v9vma8hbwspxewraq5n61xswaop8s93meqdn8tt0n4dccubikwkfqx0h2mctcik0g7ag5r6yt6f1nni8vymiawo6vs2mi9relt8aml5ftd25sunbqkpqgauota0lo3mkmjdrtbslkg97f680xex0z0ql8wtvosagr2y8ftn3203x155xqwku2t6dsoe73ufbmnwn',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '9xenkhpxuipi3bii0zec',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'ym3hm9l6ra0ivpv0i25nzf2zgcc15vnou0jbj59nbck60ot3j7b6noemn5yz16sg3e0c21abfrf106t2hdqm4x83h2vm7ogudhbxtpz2sfg084pxmvqzdloseurwjw1hgkhmm7x6n4etikwi02qzixdnodcxmt0g',
+                channelComponent: 'xmvyx9bxw919dvxl0s9y3287dsayk3md0wu8wh0q7qel9zr1ef54nfggdk9ip1ibtvgujj9l31xn9gfek8w6jdhglco0f0n3r76izrtrj4jyk18tt8anqets709xmw6e3nn9z46h97dd1w5mz9orctkmnkxpddl7',
+                channelName: '16v6cxvymnjpbsy33dh0qku89uwtetuubnq8rfjranakbapqly9gzleqiqmnh0bxkxbegctvt6xqtpazh0sd9mhzxntt7wfxqi9lm7b9q07kv0nwmr2va6wj6kn3j8t9kqnobely7sa6f1e7tcpsjolwxpmb7v7b',
+                flowParty: 'zorlk4v3ichnb9no43n5nvurlcdqspe10jlbq4z4pyugjc8v83pvfrf8r064gtt1cx6f1ddrlnei6l4o6cqyai9wzs8l894vcgk40d24u5bbc6t5vowv24ellj3w4n5x1amvfen270b21jm5e8d18eggpg04o8s0',
+                flowComponent: 'fy3pnwus1p4d4w4bz5qt6g7f5ysrbn9odztweokyj6gmznkkjdqzvusa767d5aaz7zwnqtdu4kdeb0n5hlatdlmmzn1avtoyqgyklfaqwf8r6big2o615057idhnsu3djgdtts5o3ktwtlmcsn30fgohdjnfpcmk',
+                flowInterfaceName: 'tf3nfrf15rsq8zr5ugea39rtu5umpusuqabfjpkrbyk6tr18i2k1hj23g2olbqmu8qrhpvtpxe190cyk5k3wmv2cnf31vqelk1j3wakitx7b9i0y7kotkr1ul1a28o6befzw9515bmwrxifq5tg3rh8t99xcs16p',
+                flowInterfaceNamespace: 's5zkhbbms4n881jk2hjtwobeja1rgvkig1hhnuilju7b2b0lo6ie1q076phe63solyt8jh6lss8adwccvmgme6v7uh63d6jixacpbnjvrmv146t3w2c1lk85f40zou5v6duxhl1nqdgc7mt4kv6gc6a4xx09b859',
+                parameterGroup: 'zliuorxigmwu80uoias2vgcug1p4njvny4tyua0z3a1osa7dxult4y3qjv3p4dhg4kcbcx8fb2cwmf3u9oi7xf08e1spz92n0ybv888urq3en2kkqx2i3x8brbyl3e8ebwfgb4hfekbz3daagdjnogop5jmnoj4o6b30dehpz5i56yf04llta4jh4wx2e8x2bzfu2ioeztrd1eq37ev9pn6pktopi2jklstfip9lk8nnyqn2rx8ome0tbk2lbwiy',
+                name: 'r4pu7erm6ng5mtemty8vocmai9q8t9xbqz9uy7fgfzeu1cy3zh8e7aptmi8odc3ur0371q3luva6ybna0ms7vgtwvx6v195qv1cotngpw7682luzbavnqi80a7co89h1a6aa66noimcz27wzfk26cbefcehoh4xaxqqeyfy7wi0tjqbkj0pcavaf4niyn6sovqz2jrr9m8js7nxtxuywka1cmyu6uffj3p44febwm4tj77e2jmpnug1nuvrh75wnpniw80pfdiqkce9eg7fyo7edgvmleeu0m8piztaz0se6o1sy7cy3y4qxdfbylkvl',
+                parameterName: 'ds7dx4gq5gpnwsj3rvpr3bug65aj17hyiq0cpt0gbf1jiy6l0kenmxizo1d7hcm5wc7hds65ggx1rplk8rt0gwrxajfp0b4zn05skjw9gn407vusk7zwuhr10c2wzoc8aad51o988n2f1ou228ugjfrbwhl063puekgtbaqt8c13d77ypnnejwvzz5tqguvzryrcblr026b52m9c734xymbu3qg0u3p2hmp51p4gu7ggtzf0g7nptvu5xvo8prn9r8q22828qfvqfdwoidwhl9sxp9nyjok0ameiy8hmig0vxmvps33m8144ej65qnfw',
+                parameterValue: '0lx54hr1zqoba3g1rnc4kngauezdsu3tat62yownpgeh6jdvij9cw95gf2aobio62d2icl7v150mwukh4w6q1u4cmxzzmskj498onglu0uvqjl5yw0vbdqhwot8q09m6ak4d4izkr6hnc7e069a0wjd72endpdb0vnznv054ul19nuaug9ah11mej4dpn5305sf9n7kwzbjo2u8z30b9ao2fqptkvy1setbzo5c6b7ylg6trdlkvt1423fllwlzlfyhyupmq99la1t8pstuf4u9khumnbs1w1fchc1vdk70yanfrkpnla8b0lvi6gg3dpnuvsjcvi1a2dc0ns90nyqmxkufkzv5goudg8nr5qqx1bji7iclut5j9gjdpmtxl2y39rjwvx1fd4pp94wjnnajffdfigo9uek4euw9awco2nma8fss3mzfwe9azr3n9mlr4e17szss7xy42btrvjyz2wt2ftb5v5eb0bbo9b0yrnxsju52fv0en96ma1c3zpycdvjdguka85tfrpiilcbi3fzesfr2ak3gihq0tpbu9zj0u1g66mdgwrrwkfzct90xoye47b5hh9qc0gfbix5refjwouk8gxnacg28t9h7kettlyxgmgsze9i4ambobfi8a6ypcz667tx83rhb1cepyveznk58x942bnurvkmqbcprsjoc60hbnh3ummkzt9mqoy92d5x5mgxgemlovoyz0fjpsipanptqwc354pkzxbnzlex2jayuwehqw5dp6ppf4k8ujzj9tuuwasuvm5mju1ds4ltj4rk50ywe2uvq900pmxdlmtxj0w49hrh9f3d0q77eeglazq0182gmf73h52j82huelm2qlfj9h35camvmtpqckeep718p2eufn9gkyu3nv68oxhw4jb2za9edctyu0n6ntfcnmebh91mgr9lwq193t8inh966n41zcz7c5oberom2653kloy42gfhra21bqwsu6mzt8u1tg92lovu1nuijnfj4ohchw630',
             })
             .expect(400)
             .then(res => {
@@ -1022,28 +1022,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleName is too large, has a maximum length of 320`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleName is too large, has a maximum length of 320`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'wc1519tcts1razydi2m2',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'imtvqsrgsck7no9xv3l78z206m9i5fb3is1nak1ck1co8ozvn4phcx8bf3ha8y40chif3v99cnrpyrm1r77icl40omp0ss6di2aymsprs7ic1jmgl9xdaouuvyjrnrevpob974vwfqkcms4aoqy8m28p8u723prl',
-                channelComponent: 'p104030sae0x474oebviiudj8ukbv0y823eys3mdy5okdlpvzo5k3w5nsffs5yx5vmckeejn9iy62qg9yw81mw7xxbk7yqgu4fic7bt43c83fw0wacofecwo5g89ptow02bzx28cwoxpzvotqf82dd1xy0sazosd',
-                channelName: 'sdnq7ewkg29208so3juy6o5q73j19xsek0rsv5q5m69o41mukq29kue5efdxg37k8gsv3dusqlokjhvjefg8dcdoosq75ixdhd56j4voqctk375j5z7x6jhb7o4yx6ay9iui5kfk5oem14yfoercwznaayrno6l5',
-                flowParty: 'h13cf9fi6llx5nvip3rai10474uun450hsh303kowwuth78prqxr3dhs2lgczmzo2yykyixmixr3cbtk92zwgzvcp2ynbzs55qrmivh9amjjzgql9iy8wxid06iyttfwan6svjiotaj0zte6yzcimqwc6spfg0hl',
-                flowComponent: 'hywkrvj50cbs9fgh0ki4v0yvg2ardm709mkt7xssdzn3r3ffe7glmmy744ipw2867f9ud4ezfvwvr3lj189lhoc2ns4zhng9wbbtncgm9nswgcfaljt3dsalsd3sj3ym4wkfo0c9hz04nm29pwmnkcirfo699cjl',
-                flowInterfaceName: 'ofvy0f9s8gy9rr1ynauiowlahjfm2rsf962za8ucbf51zqg68hpbhnhzzom92rip6aa2rxduki117pdseogr1ykxp5hh6u92kcvyiivmo0zohyv38dqfem254wzuuu0sswruwkvb8rzk0wehlb57nqxv42ni5lfi',
-                flowInterfaceNamespace: 'h5cf9w0yzc560cbn3k0qzqc30ke3rn5j4gdex54vk0406dnylphygkfb9h2mlzs8uppkt02gbin1koa4l20985blzxzywawmoopcg2fzrrd80opicnl5fqvperl3845iketkct84m78qcjxv4tmn6x46min35i53',
-                parameterGroup: 'p5iqxpw9lv5cu9ygrmmvhq3ld2t8gubtbpcg0r3x5ws7iguldk3330espmla8upekqinibah33z4q2bcysmb6tw1dpo2txdb33flhq57cze06iy8a2vswewylreo72bp76eienl6jwhy6miwhqjw58eoy52wbslhihcflnzai0yfgif01969bnwe9diguq6z6c5appr1pub6uvtne071tkw2ssyb1890ttgiljvoi075oatbr29cu9t4xa350ff',
-                name: '7jakh7shv6pq086r3id3czcjc4phxwpeceh2iaar3u88pnz5jx7ijwtk2nygbs3x52hqf237n4shmy6745wd7hzp1nx606ezy7vrpbplylztm1ay589ser2pyfhozvpxd73hd8kfi4pfv42537fqe8a3di9rn6f98h96i626q4psgio0nnisujkd8zso1nksgd7krnal8461kvj4nvc5pdhtbmgzrg1xhfu9zqz49ce1n5vyh75wtspvoei7o8netuxwvrq3drcwslhkx81sl75d6zxeyprrsi2pxedjr3f864gu6hn8otr6x1l4hqp08',
-                parameterName: '14qmchubg573qdu6nqh8uwcinsdz57wjfomv84altf8te1umq4zrimf7cqfgakytpc306luz6oslhca3gvf8xf5iytpksvy3urwi6lvthss9kaqekg3h92sg5l5xqwu75ukf1po9jv1u0ovh5k6gusxeq8tbg0p52180qr12kz31auex68ftk3gl79gx4mp6jq7oiv3k0g4uubasbf2wedlxtxlkvs69h6bahcvl400gx9e8e2zfztafvzwvx3rxy0z101btdjan41yb3lol1udljw9qoqx86of9c7uvp4a4etjxoj3x8lbb57qesxr8',
-                parameterValue: 'x2tqoyleachbiqghh1app1byb2uvqrsnxgi3b3yinf0t8m5yd62fe13fpgmmipd8i5d11pbs8qanb1qvc5eaf5uq6zq4zjg2pcagrv5tj3dqd1p7ucvqepy8fm69dn14v8fyvf52d105v8utinz4snh76a6sci32fsesfu4f9vbvxw45r4fsuojldndiarql8vg0ujmtyzt5lg48ztqic00vyi7i5flap31zf1v4b923a63l0xjw37w62pj60j39rz4zu5tagmadcfeisi8bnzeurqe42ly5xot5i3dhsjgxaiz0sfigikrt9h2b5osxxkfe62kzubpwslmp4cxkteey6tu82n50kwurpd4x91iq6pja3zqoh7co5s5ruspovdawrlvi587genml0u2p4gugglint8vw2aat2qpknidos8d0y98ay09w3t9lg69zb969msntuo6ucrepv36d4d0la092jj4fsjz2uiqkw7iage8ws5zzw2izhck5ggb8s7ty7k5i5e8fyjz08lctbsnzkyctnusqys1ft4b825ekq4g2wo7r4m5s9z7dplh56pjgrkremu1tv0kn2osvr1ljkien7q88u02lsgc8nwk8wnloqxtqsm659gg5m553aureonznrm0q1qeur49ed2rvfjmt0lk3kz2og0eujoie07jrw20aokcrhdjkvl4c8wffcl8rhea9nbqxglczi1r9zktef29iaxjnb6y72i286xsaze1nmhsrrs9ufsdyuul6mvydhgtxem56cbyzeo6i35xr2a8hpv6u19nahk6ctsch04djpkh46nhaveiywofgla4rg370kbp5db63qe4oep8e47pwsy04stpo4bctey1qmp8n4wtzpasiwgrxrvcsw2ff7qwfguhjhgsg4pl1v3vvowmigpvhdkmqh5kraohexsgb86oxnc0bjuv7f5q0akf9df5mnci4ve8ayf1q5puoycubqj25olkg1las339bb4rl4c3tictb34nh',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'f8uygjax1njrivq0mi79',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: '2yp9u5conjrs8acbffk4auk6cb1ta3x5leibs0y1h9x53ru2p1auqnmpx8fg7u9uockx79cu161q4vxx2xgvv4z37lxthb9ihynqjg5gchuiy55g3m779b9y4kbbrv1oib14isbk7z4569lqee09789n2r404jw2',
+                channelComponent: 'qsaph37h14vcv9hgx0ngffeinqtimcgzhzt0wq6x4yy7fpacubd0g9bpro94lu9rt587rtjwie0cc8a8olr43bbw1zfp8534o4rynaiinscdmgq6lx739y517yksnrvhm49sg9vypwiwgxc8jlfhv8jrjooz419p',
+                channelName: 'x5s1ibxh9x0cbag1bjc5mbl24kccdr6d5gx223qejvhemnzksse63h8zw2muwixa6556txadhch966gjf5xikfcyzfvz4cso0tirlawab6u8yokb4dgntunpxmgtjeo2zel92ffs8zq9r2csxblrij968c6k4c4w',
+                flowParty: 'lpqwsz89p4z5d06cdoz98r3tkw8in0h7mhosho633pm0o9qv1r3598yblxm023p66gpu6ab2m291wnguktvye7icvosvixhtij76bi97kmidw2vvo50t4g4k9th1fiterb8haiwm3vpkh5kcdeyi3q0fpixe1atm',
+                flowComponent: 'h3ky03c2ve6ndea1des95e5eod65a2ul0ibq7em8i0z1z5350dtjbyex8ifvbz21o3tkmq0trsbmqrzny82rxx32h4bcx2ipeeisxk00sl5bx845x39vfblgmec5cjbvslejue774r6a4etqmfh0a1r84yok775q',
+                flowInterfaceName: 'qmhfak2dfkc90lwq9widy9urbeo0w97e2z136nua33qrikl8aehnte2sdg1upafw04i2abtg5f3thk70hjnphf51wi8avb6xnh4muy3owab1ovqi5du31cvb308r8rh12mqmeylpx7uo2yrldcio7qyo1qepf4ff',
+                flowInterfaceNamespace: '9r24gwtt929tz49256x7l00n3uems5faf2shp614iutcw8v7t70stne2hy3ag5a15hxk17323d0z02s3dbkm5ox5t8b921uq70ldaz9r4iakxufdrrg03juyxiinbtk1uu0hfmd7gak2cco6kgshpw5s18ty16y2',
+                parameterGroup: '9jx0d6hwuo9lyaqce65pn0tfvzlg79fe5x700l6frvytd7ix4p8gz3b35tozhxip0tztvpcxxuzagf0mbs429b3erloaazo582oxraksn3t4xn90bl3yfc0abwho312w10sl9e1fy40p7s7pxac7pgnie5usc1nyub7x0ehgfux902ja7du4gh2lxk5azwstns8hje3smrwzoh28lg8t2n9w9pzy63qumi47yk50ro3snxnxxkgj2336e5ejzra',
+                name: 'rcfkoy8t26mfb83zakglnh1u6jcaq6czrozsl1bk6m394k1f7oncyl0ylj7c0wag7pjq0d7ayfdt0potmphvumw3x75lacqz7y7skf79gsdkti2420kqg8hsp27ejmlg11tks2p9w26svfta3fihd6gv8vbf5xej3xsru5q7lxoma2l12hayupubj9mgwev2e7m5yr9hh0wkfydu0pv0i8gg7sxbockziunen5m66pq8yhlrgm0yaw2us2jp1cy8nc6piencglxp1e8eh4imzkcfo9vuzgbtlyufqeq48x5fm5mu3eh4slvetj9slj6ly',
+                parameterName: 'rxdnrerc45h0o9rk0v20qqy3u0tzlyg0bg58wxo1d6ys7ilxsiyvdd6rj071g5qr66cewqdueeev5stpd68qtvcdwo80qb1gnkhsf1b91yed58dfb17whfpgadvn89do961k7jxtswruwkxys7z775m86y6jttbih1j5ach8w5wwt1ps5yb2talpn5ki4g13wudqivjnamyy4espoif3p75uybg2s0d8opkrj6wrndkkgzgdtpcv97zd4xtatjcpj6ch8aw7tega2cyicrwo20xmtwo3txu9ypjtbtt14edn27tewn0qfm9pp9qpc5nt',
+                parameterValue: 'l4xabgkql1iltkvpoaab1080gck9lamba85eiwqfr2gwqgi3so233rg52qdn04btciqx46es10etvkdwo8y07exf7dac66fgteaizalc96dhw7zt5wobwhfaz9t47sz1g10i1jzytjnm5mkp7dzvxmajfiw38n3v08phnc99x42cbtqzsjvmh5ukzteaqcbs83qhxyeid1p6enn9221143tiedo6jcqv8csfspy1lgh5z8p1y1pzsv7bsjd8bl7z8fhr64lljo4rrzmpzvva0de5j0fjlgep6qn1jvw3gfkh5fhp15pnfe38oqi69tl21k3xze6w2v0g14usl6foh11pu7ujw1l4dte38m1rf2a4s8vn57xjg7i5r7ndhlj4r40qziy0jw52bfudbf2vj03hgpwk2xa2olucjmfc699skehzji9fy89lo70r89jhpwc5cenvrlwmaztnxgck94ycnxvxugwldlzwmzcvdfmrygms69k2bu009wwlyq65upmtwrnys5b1e0k3uka8e50vpw28tu18715fi3gd5xz9w2b7zv6bzyjqjqwnlbyac589fd5covsy049hs5la5u2qraope82h1pra0km3w4boan1bv9a1p2nsmdlm6y3ebjlusyej3cpvf8c0ydj9ytaqy21wksfwnra02k7dfqrt43w3smf7j1whlg4lo1q0vixk4qz7lchwhagc3n9i38fxvv4x2yghpc7cj4qwq9y67lhegx5e0iol6bm9897e1ojh0ft1qbugygknf74suojtz4487sx8fea82ksyvs0wvrmanbbtajzhi10ccfuxxtd6saqaosyfh13xglteo7s99p1j2g8pucsa2elt8ha5zg3znprylt9cefwwnjvzdo2ixg7wc0fu09yihhb9h4134d34oa5i1ec7qa4q7gc2byu41z0sqn6fg6245b25olawfy2rwjwkc2zc2poe6ofybuz9wkccdzazodu4k1ud9ig0or5d50blcudbcsby',
             })
             .expect(400)
             .then(res => {
@@ -1051,28 +1051,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleParameterName is too large, has a maximum length of 320`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleParameterName is too large, has a maximum length of 320`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'vlg65fekmk603rm5o4o1',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'gw0a75b6x8fzvc2dexi41iixztmzwie6c6nm4nligdkacusews393sjbb3wbdj1fkk1vwomq26l5cjr366x64eqdim4i4sj4rjdf03n3cwp264zol0xc164e3oy3qeg68h198uqrsvptb46h13i63d5oqmgc194z',
-                channelComponent: 'g3rrtem41n9u5s26x9hlggfxx8j6qqyxc8sikk779r62ok5v5lt7v4yyl06b0wwzx9l1cad4x17y07gxrbfdsh929p0ws6ssto5p6wkysvi49k33dffrkdri2jm1cqu4yx4o4siiqouw1dyvcb1rps4mwkldgamg',
-                channelName: '6qzdbosw6vr5hkxxqk2pxhu7dfterlz0f3c9uzczgozunpq9hwobczk339dpb4qw8yq99niywpn5lclby7dsieaviiovnuf2ln03drosk4sllrtlgaa5qmtztgomkxn454glh0c73e0c3aggpdmaxg36ocke7y1c',
-                flowParty: 'v27vaktd6ov2udwnwxbhnf4cpl9jnug1s65eglsp1z9jo83ljf6yywr0ow2dyxy47gi588cqa9o2idjp2ijh7a2lzzr9v8dnjh7j71vsat5qw431rwsiz3jg2uatfbu2we32r01nuolg34esllxdfcq1q4zyu843',
-                flowComponent: 'czozx34f1bvo0mb51e4cx9ddsbas7kt9yevpp3qwd5fan9q9g7ywh2o4cfmni1i0vr0fzfajgta407nqpfabn1p7d9qzi7wfnkrs5hgc8xnk2f8fn2kdp85145nhoi703mgxig42sfsfonbdzl6qbaa77324ujtd',
-                flowInterfaceName: 'x3f8vq8tixoiev2xob1rkin2ybd7x234rqgxe83f3v5ij4yn7mygpct1vyq0r13kgsk2qe80cuhv6oqsr723v3pw662l388krptd8msjlsp2dt52pwwcxugz3jf02o489s4icwpbxcuunl1133km9yp6h79fcab4',
-                flowInterfaceNamespace: 'bpeqnloe1bqie2mx149fzziktpfxqtitgwzmnvzo775irpiajxce0jg172oes9v4my9pjd90zdbwvew57on9ls1rdpq23datwqz3ch04ovlxqmq5wyfx76ekvzjahfd64pj9otfqhqe6dsqn5hmmau51u48pevkb',
-                parameterGroup: 'u42fcri55xwsglqslhutrnhaeh5ivqmcnp817ucqfcg8xtprpjxxyoc9sfluu40uvmwitxo5vuy7l9dmq2n4hu16k16bfegbk9sj5nxnatsps6l6fwuio30k37603aj9ev6k9dbotmeocopnntcuasg88zc8j1mt6o37c622q7d8ehyvmkr586j22se1rf0temem45asnk5a0zf8tf5p8z612ydvl6dgp71shx8y6xbc3fr9vq9crl5vm32hn58',
-                name: 'inmrz7m8ubdb7oimov4n5268mjifqq6rt78rsp7lrgje0ltj6zdguelyrfpyc5htl9i6o9lgcz4zzy6qz8ohqcxcz29kd60q7c9cn1ob9jp8bvgiy9s5i72elgzcvkc4st6n1uens5x5h6xknk0uqs9qn5jglrxqjlonb24b2pcv66axz26lmp0gip61exkh7ri5galrm5aqtyw106hrpdxkaopylyr21m12cw8t0u80rthvbzkmzir4evwbp6qc86a0seydh1y4e6b64hkezxa30xug6rhbrn4beypgstgrl3im8tlq10iwxj9vx4q1',
-                parameterName: 'pkkxwzulph6khhqkeh40bt6e13c834uviaubwmlchsep64jrr9884p4p8a2pm5qc7gmfkfeuplklkinbv2ojqx3cgxvjhrxojb9ozdz9n1okfircnnjm7s749ayp2psq240lpo2g08j7vx8k2lhduo26eq5us3ncfb9n79hu4pcyz2dljrc5zgbqzbzv71t7dtuz8ph37fnleeblaeqcwwwy2j293rv0kmwikfhc62jnzmgga8jcm0wf0awtc5pz5kcrj5sxz1v5if321v8a6obbreifk3gyb1li2h2xk6akf2fmiemdiryrulfli7qih',
-                parameterValue: 'gnqzry95sh16c3iqk28zhu09pk4nwud13z0qlrztiy4lk6ipy2wkml34md8kuuesd93tsb28ddsikh9w594977i2f1h7bjosrwq8it41i3da8k3o5fxts4h4w8a7pxn7hhbe7r3x0pyisy4ybj2qve2qxb1dcqtqlgjutemrw7s8no332qjuf9hj13hsn2do2dkynwnd5go6saem0zibwjp2lz2d94b6vdnpqqer5ka1i5bczysdnpnorlsqft5oprt1xz3iwyiy23x1djd4kewe9p5jyrll52acxykugwzth5x1d86xouziz5066qbrww3xqg1gwqa8ptnswcwqr4s1292w1q12tw27k9ulod492mdzlu3e091e28utd04tkfiergfptux30lnj5tru64d1wgmg26oyj91ipjtl84g565ewp2wgrv7243l2p7sytqjdcwkbtlnw1xik94cq78krmklfkpx34s79kz1htimnhazdol2nv72rou48xyunmodokwdwe11uhlpdz90ka5lqw2z8l4g563r0d13s3tu3bsrl8aym3z6wmy4srjg019a9lgal0yi02vmqz12jil76cwpyegyhfbcd8gcami9dssgtqyheppwqngs37cx0343cdmn108jvy7l08n41r5rt8puqn7qt83010ywy94uxzpojynnebl2e9t4apwjv1e303xmhno6fak8au7utl1hj3frjwlvurk3dl61x5hpgn9ix4aqej38m3wdmoslfhh84s8egz5wezvd16v24zc06yojmaui0u38ycnf7rw5f97i1r596z56nips8fn6wk44q1omcis7xuigh4r9goq04h1mofugp8a9faj6a408t369pwp3qn4zf36orengi25p05jdzth2gx0dfmm37v5l4j5h49l2kar1kklghykv3xp8vrj3nj27kpf8418ad8v70470mirs9qi7t9t61o06elqii0y9e8bn08hdeyd87nrgf0yeo8frtx59zsm3k',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'jkfq3jx8vsxvp2ttql2m',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: '8zl1lkl526llejwhhhj6qrndt0mqs1058nochq009bjesx2jse1qr531n4fxf9c10oifv40h5tl6o95zu6tnndtgvl4khtgmxghsg96l2rhk5of2olluq4eixav0c7k26qctmjecrewx3toqemjbk0bmp0tpltwa',
+                channelComponent: 'n962f6bisba4uefrxfj9yyeq5hdrnxnr43sqkddewdhjxcnj7jfrrss9ty19tzdiq3vlhm0ucl90te0dl65zt6sgzfgavxh4cf3p81qwxwc7ph3c7szvz2lftx1ti802plinpgdl24ienqq7ophqv5rko5xlormr',
+                channelName: 'dq4gxxn0avrg4cnkswx7qgbuux4gidxfg4xhn0fjf4kpue52383ujicg4o391xz5jl9t2pe2o4nl6blyrhp35osp6n8cxsovrq0izqqpt33zh3y45gj4qjo4uum0hbbz725zypkl600vod5s2txvh8a49goyy8p3',
+                flowParty: 'azkxsewhx4or0z5koplck6ne8j0zmto7mubcgdmq1tjj8e660f3xv6u7i5qge1ttlx2fzwbi1n9pq8unw5698aczcmdrjg2mira2opanhhgwb1ix38g03kqtuwp78x318whei2jd6l6h3rkqgmb235jbnxpcym10',
+                flowComponent: 'gkf4tgm1t72egi5i2nxldi6k5tuy2erwx76z7s2rpcsikr6usai0br54v1n7vkd3ai0sqh9e2s73kmssfzd4iyy5c18znx4vw4m8ozj5i1iv0zh35ha5rw5gzz3w6qqziu5p1c0gpr3qvfje5lpksqhyiiu8a6jf',
+                flowInterfaceName: 'lgom0ejvj7x2yjztslyq4uqed94ehj91dbphpdui4mpjzxvye7hh6x5xp5d8w19nvqd2zih9nifyg8kaov5lwaujrhtq6jmzps5xi8a7z4ra2hmt7cgwn5o0vwmt7dpb502qtpcwz3d3g7odbqc3nx9pr5zm8xzn',
+                flowInterfaceNamespace: 'uwnjurwgukcr8swr53dn5c7t1zm054129er83wcw509zp6nzmt4tw126kgm4o41q7f713c6b8i332q4jvcbf52g22gt1h0x6f3zsdzu1g17ddf6llqh1bdyetk5suygl8q33mgmutwb3fdy5s1t4q444cwyw6lrx',
+                parameterGroup: 'h4wu4a3wqlxuq8ygyfap9mrwugw4hwx9ypu5w4ap00h2z4d4pdya5x9kbgttem15g4cig2p8a2d75k27u0tuiyzd5v0iai6usu3pofl5r6y9l1g2m69i1nknfdlai3nxakyvrv1claxqkf9i2e2yddpcd7y6hr0fl0b33w4aw8mmnag0hg97usirspqh5fttnarh59pxj9qxvy4nnaf55unrtghp0iphnte6q9wnfytxvq2scgb38h7cgyg8a4r',
+                name: 'acqw8gt2iuvndk3kh4yd1mgkyobwzm1ooh3cnd2htahxeu93njzmuveay1oedshi58o9ijujhjpbrvxorwv7m0ufyazcz51z2xnklj3dn9q1os29jmexp6a8pacvacq4ku60hr8yd783y3492dquavznhn9kohslls6iyjh237ffmuf87m88am68u58bvj5oih58uu7sd6pu8jh2aoc6awp5ldlstncik70pl0j3o5dk6ljx474icneuydu36su5wvc1fbkcxkk232fa1rbzmb62e42mawagjaah22uep4dakl1f84soddqizw5297yc',
+                parameterName: '49q3tq01t1ze0kal9iaujlvh6lj7ckkwqd32a7imev1n39pw0nbg19lqw1fwp0hpz5q2jp63fno4ve54vvimfs3k28ygj0ihlstdijjkcrjjkt56p49rwc1w369yne3frjc9tdb7ql7ki07h25ih7do8d51y91n5islt7h7f9r2ph2jkvn8t05qxt3zc7scuofp7weozh7vp9t4hwaup61g2z4mbelpg9ooccn2iy68ba46iz9ihjk7vvg98jww2f0lpcmuoq50u7qszat6fs0gswcsaecjoj4tfw0k04jwmnpvf3fnd0m27bypafuj4p',
+                parameterValue: 'lw5gh63q7cn22ljugz3zb52rsgkax54chrma73ob60szggyi9n1gsax3l8gedspseifwts35079zm6qisblfmu3ztac7k8v09k83hc2eoxxsgpm7nzlvmt74mzqdeprzllt2rx4fv8do6yf3fra1gg96czarpa4riob2231a1w4so6qy21x4qpxe0x0ih5g6upooq7xu98so3xylvkc65qz1hpl03wwgwd88flic8ws50h6fw8wojwu6r56j2enr2m91posytgcmnhjfjeb4p4ip1aocrlvqz7b5an6sqa8ojn575anfy9yd2wuce7thjrk2rttn9w8wt5gwi38v63ljlk06w880xptu52l3h9p2y9u5s1yhw0l5q8ao2t3ys8e941gqxrpikt77jhdcpylrfj5ldek216ctqp5fg3jxwm8ly1iq5ctxjpz2xzy92npiet6bzzll7in4kk50bd1utim3wurlvfwqqhe2d5ops9rsn6ve4hkla4rtnx1ep0vsrh3c61dc0l721m26iant6sth2d9tybqkobbhxh5wshmervrzrzkn2yme3gmj8v6fye6suezx6tg9la169w36j7xkm15c06gmhs59e83qz7penx4m5j90ju8yvagwbug0vdouc2hkjdk25v8xufduj4nuag2xa8y1ru3enizkros58i9reokxg5fwn1y1kzgnbtkkw3s40x9q6nf6au149rufa7h23ug2p8ccjsw52yjfu8wzi7hm7tug9dbhhxup2kpgph30i9paib6g3h5birgk4d0m3ao2irdyi28fpq0tdqu91ron1u520fzc2804cqcroeha95r3v2tmpl6anj9nmp8s48d96c4kuxoz3et3r99qj7gvqrj4t1npuji96iprnbfuf6b9knmw98j6wv6s2qn7hk5i28j5h900bu3s5jgorcb66u1tckqjkgxal7jof7o61cgj23vsdza54ry5oeawsrn9rlvwfgjtn1gvvz3qozo34ks8vccf',
             })
             .expect(400)
             .then(res => {
@@ -1080,28 +1080,28 @@ describe('module', () =>
             });
     });
     
-    it(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleParameterValue is too large, has a maximum length of 1024`, () => 
+    test(`/REST:POST bplus-it-sappi/module - Got 400 Conflict, ModuleParameterValue is too large, has a maximum length of 1024`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'okjfkq2lfpj2ioaae707',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'cgre1n1v72q4ir68bjryt6k0arpbjafjb0bdjhqv13q85vqw9f9hn2aeg8zeoq4i7hcew3yabljkpj03f1vcvsrkamfhbb6l1cdvnr3mgdn7zyo26zcjk1ew9wsneggn8s62iqs5utd6qrj2m1k5l5pu142hv6mm',
-                channelComponent: 'jw3as0nsypmx80b19nw91lrg3vudlxf1p2dcly7iybqkd7z5b9cuz4wufs81y4an2je56atc9ok4dgp3opruxfwa2ml504g1lv9h123qa99c7hflww78do2kjm13tsirjitlmjsax80nqd791l9hjak910lyoxm3',
-                channelName: '172bu723tk8hiut1gvyjiktylzhjycsmzal8iv4imng2b8n5f9kx58qrx2s0tk3btmbsw8hz82m38bte8uughbz7stro5sz1j8fqogtfheizdz8v3679v4raz3xnwbmakjsdfxokximhy79t1zcoyot5uwh70tp1',
-                flowParty: '98inkcfcivqfmpyarhuj1bpwiqvjtdzh0a4pfcv5zobiqwrl8n9axzrupfdww4u3lxvghh30kdcrq5wnwgpk1e0ihrrdcgb1utnbn5a0hti22y3wwlc8ev5vemkb572qweoss6pt2t8yfzcxtsoioi4mwe38ymfa',
-                flowComponent: '1vwya09ppz5bgi6fm2pm4oqrkx0np256icyxhzin7b4srezpcjh5x0l82tenoaxf37211s620iefpv0k2haplnqd8uqpihuq90v8cvbhzqkb2dyfvhjmjms2pgs6ldg7d0q9j5r5uuuk3l1gxsblyw6c9i0aa37r',
-                flowInterfaceName: 'ej0lxqlu2s4wpqz9uyyr42mr3puw8e6a6spej9bhrwgrhq4tr8aqss3dsqs055ox6t7656c4udd9jfi5uknyfi906k60ua9gkwqlmpyeykods88xn0jxymsh7349bwak8ba5cynzv69sgb9nvt9h8ckxioegsaas',
-                flowInterfaceNamespace: 'jd246s4bix3d2vdantfshmhiknkloh2n3xf6bztzzunsakl5g1exeah7cwaspktnyalaul6gu78reexuqbhdcv0lfbq9zbhnn01q15vdqorcgf6xzcclnp9h5s694afxu9t8i2wn5i6fp3ett2hcry67ycjyd996',
-                parameterGroup: 'tu88psvp749suffmrioslsoaw6dgckl2omro8ub0ag7rns4x2cysijco105jyj0yl07dvh7yfkt3f0xz595pgfkxoys3mensywmzsqpzltrjv548fxgy29v2dcc6pzihzxkjhavx88ux4zgj6slgy9z6tfrz6a9d8w6p3wy18o2i6ffzj07m2g5mm5ab6huu8ro46v7ap7lqjlo6aj9hyrg4uxei5t334xwjc1agqeze0f12wiks5y3vohehp9z',
-                name: 'o9ws7far89p1o05o3jpmpuualncs7m1cpifjnez6ibfnhfqnftvcqilws56us5p1v5xnte56fetm7c5wwcdelfscvsa8tvp3hizdd2uw8f25x4rdweig6xi233uhxahmu2rwbmx3thvrj2k5pu9ka2a07ihk8mps9o4zd0pxinm3ewmz4298az82zquetpagcdjtorcfxcs09mfmmkyd2rhudcalf52ny589famnjntqb9453p5opmrksvidotaifmw3n43rivyv2nqhgl4tbz45nez99tlgsknbq7af7g2dkp4rogpz5fk8qs41h133',
-                parameterName: '8wc0dkynppv63mdk3we6i9hfuj6nkthkq66o04402l8g0mlcabrmne8v4eu6k44y2gvgv4ob0zz2ht8h5qjnrhwjos6pebfy29vtgjgvftpyxpghx4c876kztluj4ybwp64ij5bahqrz1oej5u1ue8wx1hk7zxf6a3332346vj7tpfm5jko8cwt384s3a7yha4w79ouz7r2u5si9e2gc9yegh96e7k8tjih2wqmru8gzt9t5hgn80bifswzbz5liqlt8filwpobv3jkpbcpx2c1lm8yy9kgsfvdfuxdw8c34zzog96bwl5xuw0rkzh1h',
-                parameterValue: 'cff5dsp70xo3nj1ls5e3fcpes7pm2teevishdmqk84ulk8k437x9oen3z26m38hqcd6jv3amukdimu8zed5xmfjt2kq81bigar0ntg3kzc45of1cn8ap2iywqdqaszsmxeb35bm80yguzkwlxjjmptj9p15q97guym8ct51wxgo0iyaqn99wvu1te7o4a6r3ot9tc89xhkqcaf1zovzzg04na26dpxs2ir7300uts91y67zucpsh2sdixvpkbumwipvn8xqy7lml4slrjymsr6nuygynvtph7s9ensg9n06pb51xsstdvqby69i3sqsg5ws7jb9mq4a7ljbhrwzvgfzu0vsqz5ycgwpwyvsxxl3cgupk87b2g97zgkfp0ewrcssarmv20emxd2p1zs7a7zgg6bhgwi8p5lgy8b5vrll34ezgkclidhruseoecjphlqh53nw8wxqqm1ub7kmtzsqwr8yyes6lzkzdhwm8vw025o5f4zy486066san33surpp9r2mjaicyxaremyh7jjekor62shczsuy4svqao8g40ksbt73vlyn41nrmbat9wwuuptoz6teevu73ol7zsayj2kus3y2754l49kvqzmtyvuadlxwg3lvpwerqrd4u3q6li9yym2er7b0nzx86bs67ybt8ywcrzz60i1595u3ae5wo1ld0jkz1eacfc59e50uzcq60vp0ni8419mklu8ycfkco63qji2zy9tyn6tgq1ya49m41ary61q50j21fgpuw6ydmzdcpo9obgr3osp07wphf0nkpme90uoh1ikgdjor47sqi94bpze5e2ba0ymiojeq1ouereoj55i3h2pmnn3rt8m0f4dyk4kxs67ymh9zzpfsxd2tskfzpr1y1wxj3jdyn4w6o2y4tk6lttlqvtd9h7xsvhyf93ce3e9ipzlekokjh5eqpl7mkkaq2v8y08n1s7oruuimvn2halden0rmf2blutzk4x0xv3zmt4a6xw15m1u5kjdbggiwvd',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'y8iwentn9puy0zq9dtez',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'sg6eb4ln5tvphc2jxil1ib3zm2i23k9rnaqtwnddk6ksakgtt3i9ui9uavybkvd7otk8as6lkdtvk084y1zwkc216voqxucy192ffzo3bsj5t2rvogdgqikpv7xzs1n0hxmf8jj7cgto6eq37teo3v7wco4mrbuv',
+                channelComponent: 'qk40jr0rdehy4hz8djh59rodgn0xgemito1jhchedk5ykwu1lxo0vkektpvgyxf56jvonp6m9n0sia8fl020utvsdvmwxckczy32uk6fjl72p6cjv6kiq2038le4y1d45vybunhx4t97g8tbmq59h1r0wfhfmmny',
+                channelName: 'jm5r7lg7absuok0opfwcb6mfznbtvxcwtcydhdwf8uchs2lv01hevgiz9xie71mvok7wys3pd1neetsogz3ywjluj6jfn0heim1xz9pi1ru3z1yqo2kkez2t5xsyonv7kkl4e83pfohtj87ro6pvbdwam6flh3mm',
+                flowParty: '4nvz43fk7hhs4642yktvkrommsfxjxw67868zafo10zz2korbzxcg526kxv76hkqwm3x662czveaqx1foirzcb7l6fxrfakfgkkdv7pldxg16c59xq4io77jcc9eggzm286w5ct4xjgr4u7xf4la6ligvwqhui75',
+                flowComponent: 'c1xhvguzybibiau19ewy4om7sru4zje7kfhkmfcucxp2nquwyfl42eyqh9cs9pewrc6gq7twlhburqnilt71n8fhunsijdi7ytks9rd2rhu9jc6uz72nl2ollvvcu9hr24eh6nyk7kfd317goj0gxn8vca9xyk4b',
+                flowInterfaceName: 'xufnd7hwenqxytgmhi49hxpthu8v3rhxcfsaulox5i6vgzvd349rikcx3omwao4byp97h38vgmxnxye8aem15mn3f0t2fotcsbu3fjr0yljrpwjtanjnzudwxv8qgzo8g3ujhunhtgjjsaf4b3e1xj81kqg91knx',
+                flowInterfaceNamespace: 'ccda9ucwvtuqzbxbz1onlqi1z7opgip7xskj7mjgbpfv7okkws0p8divtfne894jq5gei9kctcbdrklkuc5m759p394b7856esfesk70o32lnnpdw43c0fxtdmdtytsccuc28xqrcayt1z5axneypnec8rij7g07',
+                parameterGroup: 'agd7fujzhr9pvesc66qvywxq8eezic8yl6vyrh0p7qiyjt3jig0yq3r35ru9jw6gwbv2zhjjmhopp4p72nokfixtz2x8cn3dsk9q1kgxl67fayhiblfj9yjob8dyyrima81mgyeby6j7rb7miiog50w69hw38a6byn4bidpuj0zhv9cmiu3tmuxsw86bnsfmah7l8y712p2aob2bb3zwvdgha1cn8rukjju12ni3wohfjpwn0yfam7ot4y0pngc',
+                name: 'liyvv6r1tvwoua8fv0o6y3b4jg74116h30b4jwa6ez9fn0lbaaw98ehdvh70et5xs0xssk477tbl4vjqjuz1ipgx9ifyceav6yp5vinjmlhdnxhbp8imibpa2i3ubb8qqcwh0qkc4euaywoiabocsmk68oxp9pv7emh74pud17r30y62rm7rrsn37stkve12ifb4046metwiw1gns841ga7djrx0ljx9o3jf77i207nuu8v1uqsyazd0ahunz4t0emp7mrlbvt5gysixzll2t0vw50xoa297599vv163hbvkaznx6o04y225fj4pr1hx',
+                parameterName: 'r61on1ksab2kt4gnwv4yp14zeet21in4i0r65bi19la33q496eddv37lk31fwh9yuririow6u8yq3w7e5q0pgfcbdr0wjxjs2y5f5n81yat9rpslufsqbe1uurkzq3pxkv9atkl0b7gj8czw4uca2udxcf6icxdjyp6qeiw3qh3fezolgshzr217pk7frl57ks3nxkbhbq1dglqe3se57whk889saaf8n5jj5zcl49ugh5rbzd9c13bwtfpvl2uq6ret685k7py6doju0mcevx5paekxfqxpy8vcy03dp2tw8t7j1iiphzhcmksi59du',
+                parameterValue: 'xaackedc4e37rufxfx0mymh09wr5ds3dernse1l6xlaw2m0ew5aagm2ytlhnhickewz6xexocu09pbk16n587ahb5gpr6u9djz8uhbajgt6hsqztp5sg2pij6tc8u0kwg7uf0u7gb9kykc6dzdeb6hysqfuux9qby3vri9n3r18sufnmxqr6a5wuxrp8zz3babqav2mjyfl24as1v1e1gz6aqr7itv0i5h94orc6jl5z4wkp256tqxfsfhvccmnd1ztsa2h4qt7myjqfuevmo78xkhz799k716jcfggri6cx8apz6qc8kmzfq27uqjtkthp9v4459k6u7eo46dg1s046viljl3qlka98pk48paxfh5dkjiwjomivpwqc6sra8wvyt7aq93ll3qc3smr69iqdpz7hysjad0vhokiltvshfbrlmaq6u5t6bne09wj2pm71wuo906lpn08waaxkxgbna4sqn5hfn9aqe4gjpmkvip4ny71t80ko5xvi1h6g5m9odt3n0yix5857e0tlggzh9xq4ca8us0tuick3v7apb1rercah3ycj3mee8rr12ffry340nxdwlmnx4qf5ype299vjjh16fjtnxf6vt2wz97xqni9d0y35ahiaciba18d2poc8fum2x6hl5o2y9iai2zjw191to1d9yrxm57w6ckiji22jdfs36c0kyqz3piug9vxe35siv1xvakwbk1ncoakuq2njmhyr0vr1dcs9e457gjyoelu5ev6fpynq3ebzkv3npeee815o75vgw05dn6o2yu4jql3fawarnnki81gysflfj6pkldl6ieibas52e89hrpmqdmm0s9k1ayruq4xea9eqr6yiszkjq4298s8iv2pqiiinaa2k3c4v9xgxukwlkaua53s0un6zbp38x5yahw9uuwhuufpz38s1metpwb64jqw2ga1cqvbnn7lgwsubuehdc5p7bri4gjjz241re2u7w8izctmeou83j7zb3lohviaepz6vytb98',
             })
             .expect(400)
             .then(res => {
@@ -1122,33 +1122,33 @@ describe('module', () =>
 
     
 
-    it(`/REST:POST bplus-it-sappi/module`, () => 
+    test(`/REST:POST bplus-it-sappi/module`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: 'xqwl54s3ba1041vn7pzh',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'i390zbi3m0l5mx3xd61k6dfhs7rmm976otmwsoyf2il427wgu92qjtgvije1zyzjo4qaejzpl3k6nliuh2waxu0e1jvifqtqban5krt6lfw9wbf9y08x295uifxczc6wusjzzy085bbwwriy5hv232mqsd0b92qb',
-                channelComponent: '6hie14duu4r5ijsmwpavowgf5myc5vdv3r7caj1immi2twgdz0v2yfh0bewxbs89vqax9ao2ghrz8h0hh21q8mcnoi06bjw3hm0gpxhriw87i9835c2css33t0k2afecyile6mb7455l4zkdrp56vpw5ub18zvvh',
-                channelName: 'u58eaoa7quxdvai4ojtoqqhxcaxvzcq5o6kui3i42yh8dp8s3hx7vsmgp2n8u9h8cajlnegjxbiqhros5u0fvjg9xfscyecsw3dqwkly730d4s0lc8pzgp7n6uo139cgwy2ur3oe3r34mhec31hudism3wbz5449',
-                flowParty: 'z39rrjytt2gi1rwlbzzi3r4e7x2x1lmd07nh96gxypctsdymi2k722v908324nsk9z5n2uplofvwi4cmqe3ctz0du8rubynm8ygs0dnsouz73tqt5ts7esi9cordcqd5wc7a474loehm7z3p83unzsj0yhc31pw1',
-                flowComponent: 'wt1qtpvjufdnjqiks719acpnzqxi0ycpddgywszwrpo3jva2nv0s04vsci6zutjeoja5ng7qdbr8y6y5yqzox87w73lie8bw2pfwkv4uoxut8guuf10gp229w9ycbr5ri5hryt0j6ydzezonvuuw6zh5zb15j49n',
-                flowInterfaceName: 'ko68zvy368jzr7gzl6nbkexqeqyunmqrfk2eyi6udra0hzdx1l3orap4l4oqkx2gaz3znfi6g6nagpuerx7ctvb6or8kejv0p4p2i5y7ae6ff86e53uff0r6kn8n80bbsqdbf9gkg5901hkq8pgffrlp27fx690j',
-                flowInterfaceNamespace: '6tbgq2wmm1cadwaifcdhcyibftwiv6d4pk4trfdypf7xaz0l77wdhimxjc14pontso9trpxfsfcnbc8razk7zc59rsmurrmdf10tz8x42cjeseolsbmd84sxqmio9bqsab5xld0ajoajwfept35icnbhfbmbftq8',
-                parameterGroup: 'oziozo67jia6a31x3vr1f35d2hhno083u70byo1ff9s0tfqjjkqo96hvp2loellxohjw1g8irupcg7vd464iqjcgobx5mdf3fk6xu5oydf2py9f0cqax22vf2fjfiam2w7f02gaqugrh88eo3ta38hsnawtux6vk7p7a0vpsw55tx86m6p6u4pr2sdpo30g93vf4ereohlbeoicw2fzs94wqj1t4594dq8un8g0xkdlv5zadf27twb1nf6jmkq8',
-                name: 'c7kln15g7m3y25afo6nd314cj3gr4vzrh39jivvt83yig3zkxid7fvaw8bx3qrebk3fvt0ivm7hbb06vza792rycaxna0559ck5vw96hxcs5xiitp6fccs3w2qm825b5hrgwd4s31v8ra93v61xpq18dg3dxbxnchit43lie0s8xd11mxbphan9fysruib2l3plpcdp46stzgeu1gu5757f33fvru1ev25ur9p1e3goq1ebuccr2xblw45xiw8rqhmrgole1i2qwq6dpf707neelzs8gcuiuhzv2txwv0mkczx88jrbve1q5r9nu2ks0',
-                parameterName: 'c7cm5abuizmf95jrsvk9lung5kfywbfo5w1400na5g1z3uqdprhtkygb6k8az9ogqbb77j07yzes55z24u83mtk071wad41z9d8fbwtrdxci2qx1ipryp2ue1748yrotas16unxj7807ch6mgysre0wlyv2hxti8fylrngxrh7dkl3zw58ekxr9xq2lst1m82iiqxstq26uq908d6vbc9lwk708r5ybb8e56xn757m726m3ejwxa8qis7i168v6x7wdxdmmvh3s6r0xvn4wc792kr0npqeu9qc9swqtjbcpfgoeu61wrmk8iedks2zeg',
-                parameterValue: 'j5uc2wccp1sylz5nb25gzhnnr0pwzvgx7t42w9kqk6n3jtsv338ot97zpsu41p6r03ijf0sg6bxsopotwco05akkk9hj0y3l9jobt06o0tofe6rw05pb6udfxzzglwujflhyemsry4y8p1p6jvh0zgx2oefnb3htdndwjtfz5byjxgsif49gpr4kjypzmnscy4un32hka8i6u9qe6xqrgl0aouwb4jkb4gruio5csws87s42x5scrj5o7793do548cauvzd3audkwasxw41gp9g2sj5t90ca6q8rh40t7pitww52fcv0sno5fvf5kqg6zu1dfuqcv43wl1bbh6wyu31oztkuf4tkhix9n25cgn4fxkm98q5qx4l8sddnyelgbvgi874bwqrt1q3pkha9a3x5818dxn3dtgua019n1i84rz91oks0sd5y0gucedzo8585d3rfwwauh93o11ofvzj2v6o2m30zcu2uh56b6dyvqnptrj4cv345jogp75o9m1lfj7z9mc7pf7je2peu7sqm55h1yjwxz30zuiz6i4e0ll2cnihzxsuzrgz5fb3to9jjgdu9aq42pri017qjkt4l565je4rrgkfjbswspha6gstn5yr1vlmf88vddpzy9q1rne1j1vu51nuyfyldqq17nyqp00895f0kcw5v4g46btth0h46983kn9hfbsigktwbz9dxd4wxyszz9wh52pr4b6eff3cphohk1w0rqllri3y7qg5tghnf3sjiomp5ne3rl2lkxny6qjoaxq4q7ikpf3owugbglof20ij4dn2hozzp4zyj6dvypsz2nb8nceli4vqz5umgfd464f67jsonky65m999yxawtxfgokmlvjgwjndrxs3rl64s3i8y2iblueokirely3ay3srobpayf5vr50yyq4wobxf8rwufb4jhed9jtck22r3qe02tqne7njxe03en58qw1s6poyg099z5okb0i6bujsfuflway8o04uazn4gur593t0zi',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: '69uepmxxuxr7f2qhjl8c',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'ym98xndtjx46vlu5dfvo43wung7rvtcmgr05ely9emrm9f8gpmd1rwqmr4eyu83n4q75f4mvl4otbsc4mjnx5ags2p5g6fk8w9oxmsxex7ijg0h0rxk9ryps7vx94ex7n7tfvx1b3wnu7fn2t7miy6ht5a5pbaed',
+                channelComponent: 'vtvwp4pcxbyv6n3gyw8h6ekn88h9i2ifncpk1op9z7z48rlvb9dczix5jbeqqyjpy5q4fd7z7mw1pk93iwp2ozhqm5mg2ppcuixgol26wszjjuwtzmm9jphrv66ju8mdw3ycl30o2pp7dndktpou9zi2p5t801d4',
+                channelName: '3g4j5l4qab7t7swr4vh07pslfqmtgff65m27uvazxbz6twsedag6ufcqnszani88gwcqyt2jwdnae62x418ipho8ltz0s41whsm3qjywxr67h8tzi6db5n0yo8gdp2vw9tryb8t0rs682ire6zl6j8q324453enf',
+                flowParty: 'ifmrx5k98x1h7qq2zb23u5gymkhbsoz08y5h3iyq50k1r8lt4ijq81o7hpn31cvt37m25ovz1hh8fv75st1u5cc0kqy4dscmz9j7j3craizi3fupnp2h724bglrkotdbf5xffe9csczbdyymem0ln5cmy3ky35gl',
+                flowComponent: '1o9bz3vajcea9kab33p1eup3lfuoxms7p60axxr0pw3pjikcign7tvlxfymcp4jw50xm823ur3xvblejkmyb6xxfdxcr5wlmtagvlfnq4dmhij17xp10akz1ni29m77x0vl9fg6ne0yld711uii1a3qa67bsk5fy',
+                flowInterfaceName: 'tjw1qvo86bso4xpg0tfazq34lrm7gbjn84zpwly2y28zvcnr7sviq94hsktrbmjul6iwdw6512pbtufbebq7e3hagl1f9zcc3c81yw0jf239kk5ehq2qg26xcyoj1dy398qb0bm9l8b28zbyguf58s1gs5fydsgp',
+                flowInterfaceNamespace: 'sfj5co52i7g2m9iaf71whi1x8c30a6a6av7kprfxrh39y8h21rbb0l9tettigz6kbo2mktk89wrlymv4rpyicwepx92k0alx2w8o5xmlyr6hrgkbh3c5xzoh1pkmjo7k3wyq0yeat2eqi0cia8328a4ilj65t9eo',
+                parameterGroup: 'yqg745ea0xed50xlayavp4pl6lhh6vda8yobgsyihndqdoxptcs6rovhgwfyxzespvd3xm2uythkajo3ycs2yjy0eln22bo8hoztzq9gak8gvlucgcjk87i724kckv2mvw0suadtp11cwd1nxp57m9iivu6w3kaqx6q6yhmf1emhr9bzz9wdovlu4wvg474vzw3uyu5610hrtesb1tzxyas682x454asayigflyswqd1jxjrdwtwedr645hkglm',
+                name: 'p4ecovu23tn6jo7davdl8b6jlyx8y12piyo3eyagtxyavuhwp77gizpbuo2m7bc8ug86387zr1s4zjl62kf9moeq06m4nkxgztovx0qbv04s4933c07aq4wcylknhbre72voa3s1hmcwtogcnmfwlgv016942io5dyeb8xyaiphl5xp5xhdtzkiltcsx7tz8dhnl8qudexe9tl2dzio3fk9nau0h68wvsmahdrrecfmjvig3f23153rcb0lmdsowlp97nr0w5h7k0xa9lcetrzj608czr3zm8qduvolw5xf02v9lmhkg811200p6j7tr',
+                parameterName: '2yrldfb4zbeiyblnprngk46yvjepgt5sawn1m893dpham1jtl7ys5bynblt7x7pd7g65ynmrh2dr0jwf9x5ki5q0b1aj10oiybmpad4ytbou4mctdce1bqhwcn442t8ti22cwu837qewq4zyt9ink7ggl2c66lo84aryeldpqjjox4surk2d0ora45qwrduyx7fq9w80mr30s7ih6hrl1bm5byrsd5r1gsr3ijol37qvca9dwvz2rnjy1n6ximuoqymkwru9aqdowyigdimxb6nmg6yrn4x4h4yikvsljd8m9kz81buvr164tq2zobed',
+                parameterValue: '7cc2elt7vnt1ve2jga5e98d8y1exvkcqmag65l16fc0vnqnjdwgkx6n1gdzezu3zahhp1xufo5mc8jnpkiqg6r69act2d4bsgs0hcow1dzsnccgwzoaxg8g46yk4e9gl9lhtdqk7t7xb0eqww2ge2dku1xjm31jzdb9ugh5y46dyxjlewgf49i11il0hugish8syp0a2l5qstzboxtporhcui3ahq6mnd5qres9otk1ldw0ubhje5muirzeb123fq7paiaj9lv9n30jjmc4r491cc1nsl3mv4sejaerm8wnfdtfg5xsw6hffoli4sjq89a9o30eytbc7593asgvo3a5z2nj73hf6jy24heithflr52xz7q1hj3p52tjx1e5dkkwda76cs1rr3szpva6420s7wdz4q043u4sczwzrhs1talrj888cnxjlpr0vheo021wg4hm0n30tiu5esl8gdfw0pzvhxf4xsb55s5tmdm53dp708fch677sosx2c9pclik2tp7woaydujz56orat41d4agd1l7dode9kg2mxk6irxdq612f1281v65it4a3xie4dwvos61cg9786300eh9qv7nkgmyf08k5vskmgbpfox6z8thasq3t66fxz46mj6th1pq17ci5uixx6omq7bur0kpaz6ujg31vk5eq3h6fpmwh7i6wukmibh21jdh2dn7sr1e3m1rt7tlmxphdlwgdygfk3p25y42fmf1x16cjzhdbwusfzzigoy0gyv97vw926ospmo8h6770huac3hny9o1z30g4r392o5qzwp8ebvo2h3xrmwq11v5brvortyzig0sl6x8l0rejyms31xnx4zqaylfe4pbxb3d2zwnu0bfiy3smri2dzpe4334weuaipzmvuubi7nlh538qnfeoty2bc75c584ra28af12alh4azy8rsslc11i0r9ab75li34xaznft9q4nj6e0zme71ezcbevq13bbzve407wgy67ze0dft1jn28em2yu1',
             })
             .expect(201);
     });
 
-    it(`/REST:GET bplus-it-sappi/modules/paginate`, () => 
+    test(`/REST:GET bplus-it-sappi/modules/paginate`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/modules/paginate')
@@ -1173,7 +1173,7 @@ describe('module', () =>
             });
     });
 
-    it(`/REST:GET bplus-it-sappi/module - Got 404 Not Found`, () => 
+    test(`/REST:GET bplus-it-sappi/module - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/module')
@@ -1191,7 +1191,7 @@ describe('module', () =>
             .expect(404);
     });
 
-    it(`/REST:GET bplus-it-sappi/module`, () => 
+    test(`/REST:GET bplus-it-sappi/module`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/module')
@@ -1202,15 +1202,15 @@ describe('module', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '0f674ca1-3cdb-4a61-807b-919d863d4c0f'
+                        value   : 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '0f674ca1-3cdb-4a61-807b-919d863d4c0f'));
+            .expect(repository.collectionResponse.find(item => item.id === 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07'));
     });
 
-    it(`/REST:GET bplus-it-sappi/module/{id} - Got 404 Not Found`, () => 
+    test(`/REST:GET bplus-it-sappi/module/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/module/00000000-0000-0000-0000-000000000000')
@@ -1218,16 +1218,16 @@ describe('module', () =>
             .expect(404);
     });
 
-    it(`/REST:GET bplus-it-sappi/module/{id}`, () => 
+    test(`/REST:GET bplus-it-sappi/module/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/module/0f674ca1-3cdb-4a61-807b-919d863d4c0f')
+            .get('/bplus-it-sappi/module/e7e8f251-44c8-44b2-a9c2-57c7e9d92d07')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '0f674ca1-3cdb-4a61-807b-919d863d4c0f'));
+            .expect(repository.collectionResponse.find(e => e.id === 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07'));
     });
 
-    it(`/REST:GET bplus-it-sappi/modules`, () => 
+    test(`/REST:GET bplus-it-sappi/modules`, () => 
     {
         return request(app.getHttpServer())
             .get('/bplus-it-sappi/modules')
@@ -1236,62 +1236,62 @@ describe('module', () =>
             .expect(repository.collectionResponse);
     });
 
-    it(`/REST:PUT bplus-it-sappi/module - Got 404 Not Found`, () => 
+    test(`/REST:PUT bplus-it-sappi/module - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .put('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '089c4241-2d15-4659-afa8-ff242c7b4d39',
-                tenantId: '3b9b7ed1-4d70-48cd-a2f1-e4dd29b9d770',
-                systemId: '2906ee18-0438-4dc6-8297-aef910f00573',
-                systemName: 'b4c9hsrmpz4ihg5r5gkd',
-                channelId: 'f0414932-1d74-4a97-8bd8-b81150a518df',
-                channelParty: '75yiqfliftic537zt9qxunnazc4f6xcbfcz9ks654b7xv8trhkvzclqhpgh1cwf8n3hb8ng4n9grb0fbgcwf4b0n21i2ompykcza4lfslmxzauca1s2yxgvqmzhdpq2jkn4n7ka4882s5vqo69p2bpnucta8z5yt',
-                channelComponent: 'mx726fmh1x07b0241v1dinnmgqqq0r1pe1jkb260uwtsnn3bx9d16824dpwejv95bsz4fhp3u1c7p0cvzpqxpb71xblv3nhqx4tsqvdpcovojhbv2uf6baj6lifyur2ypfq0a5yh9jcgg53rpigofrfono6791y7',
-                channelName: '4vfiltxsjbxnpu583xs00eb1m6wxbthx36ztsbkinnaokhw64yuacs5ktmgzp84cwhso2hlagtq8til0u6aw6s6tdsisk939k3vbws5id2q90v8tajw6xjn1ueilahikn8rvxrqo6cbd39x2sxi8ldjmr52bc941',
-                flowParty: 'iesn7vc7jxyjgpo3pb15tg8mi849djyi0v42mnem0o2fza5wapbv8rtyfx5jjdxf3m0k0a92sczqj2obyj8rf8z0xsylt8n8owddb3zva0bx231m5hpuzdnpb0exdhutnenqyui94bdpvk661senojepk118ynzd',
-                flowComponent: 'omcigbrjvkxi1d8r3y6tx3unqf75n30dtpzpx0gok8ya87eysylsf3dm24exe2sp2hucage7m7aywm6h3ma4gzma3yis405hxq49mtv9nrzjqc0pcbscfboqajmxc1wsx7wev4qordzovc8ja4dwlp8s893b7tg3',
-                flowInterfaceName: '6sjb8rs2w5tp1da8d43nj8k7u6f4s9d7ibnu0xl1rnivz3b0usdszk6vpo48v505zfec4qwx00ugliaxw2noq35bdzza25phaoqdz8htdt4qa0iptmtb0548g21o9aitmceajvrbzkrfsigu0gun5u1dwvy8r338',
-                flowInterfaceNamespace: 'ekohyzr3xv1gug7hc839sv5257yxkgkkezndjg4ydzi2rumzjzyg8i5i58ywn5f382560iygqn2klxydgj54mb2lryb7fep4qoyqlyojifp205zuj8jvf375vxedmryg2vp4swksfkz53aa9gzcpnmb77kolf2fg',
-                parameterGroup: 'wnsoct78frhi60wwxiyi3en2qccs6109ncj5jp6czxyhx33gbmtghhtklw0izli2gzhebf693blldy1faoa1ieekrmsree78mbjnygpt55u6suz1hg1p42qin2z7o7bvks0fgir8lqc0evkc8homijow7ww2fe3nm512uq5tiiv69ehew8q57ehcr3w0juakjwd6zp0gzzlpw6brvqob4iw2nrdpnrucz2sy2ums64cvk9fu09f9sguyo7fm6ux',
-                name: 'q7qf64bj3j2u5x4h3qs81ev43vz1gm5tizuczhzg3cugkgipnhpei7ppyyb6qgtd1irl83nxx620733wytuowt1ftkp26g3nziygb9xotzee6t2dmio7lp541ddzx9yxe7wz8ky2py8fdek5gmywg47ud1e6w1dok4otrowv4fzxdjzjvkx2u3q5kkr7x81taokeexic0gqtcfanec0wmmrlpnxsncgqko2hh232rerf1ghf52dzju2jpkrjie9ogp1w71r0i3u2z7k7n4n29k5nunxjn270vsd84up7zhbyyb6hilsgzprpbv8djxmg',
-                parameterName: '5ap4c13mve5shmievph9vok1ndwhgbja778faekm6p3kdoeb63cy0tlsdg7wkgnasp9pzfuo1ums55ngds64zssztg775ta6eo2w04e548l26bfj4oojgtvfjofxfcxkxzf4rdy8ioa2nugx7f8avrrllin4vireuq4xw1zti2izn83dre1a7z8dpdhuqowrxvweue26k4ujjbnjnbvnpfis3lotun5yyum17b33vqpa1jnsqrilrlqqrnv1clgurnt9mh53drq6696ewxb7r8iol48o3kal9yzbpufb3qjrqzymsehkhsgceb0wpr8j',
-                parameterValue: '828q6k9kmw2hxu0yebqhpotg3hxqalbth15ippgnlwy6pt44m14apz7qmu7l0cj064m4vqymqc3b0cw7b968ib4nkcm0nf18h5gfbo2rkgemj593t4r3ctnvmaa8p0v8t4jhdx3fenbxk33cotc171nwuuknowp2i19dnuhy0po2tk41pmu9gj3xco3u81zxgai2tu683dpxu65gsijb4vdzjc6kzc2j2xzmqsw5ia4y6sqkuol0t65on8z9qx33vdvo9l3193ixwkzhpwt7qi0fxj53nj75f9rntpiflmeer8j4twnee0b6r1o4j1wqwb049i1gnq97lra1aw0mkh9xxgfhe4dqfeys67m32c2seujzyb012jko3n2ohry9ozj6ofpk8gnbt99jzmosv4igz701meqe7ipjqhfnzqdbbu7itbfdwhe07nsskojydtztiiptkipe273bxdqf9va131qkuhqf8k2wuyx2icoxgs18coibz3d61lp9udwq9faa6042a3pf32m410wsl1lssdrnj68sidmuntwdhas8xf9r1fk0sdx9lkcyjojg0vnclyt9kvaz2by4msup26cik5oajtnqc9ju3bfyw5i1fnj8o9npyzjqefoeqj1t1k4qggqpqv4cf5gldisc00u4mzxhl2w5h1muayka7u0c3tj5zmbw2f5lu70ndxdmnehcipf2x6oms8nem04p95qbgbe9vy7wmn04bbmsxxxhgvzcsuqyb9ko66kmzkykhgupot9iumh642yicixwbbajv3t03gcu7ypf4o5dpu5a1i7fql8r4u6kuilq6hv8r3hc310uree616yie9fmi167df25p4qs0bzjuafxtnqao40izomufjf27z6p2bkzj75cntydnq481mjhn108gu87abww052uiqdou7rypjo5dhafb7c4exudx5hieys3hmcwnwmt5468d0jdknmv0o49yobxnjkvjxmsk3fcsbhfzref282ff9lpmocey06h',
+                id: 'fa5efe65-448a-4e7f-a223-6820c0dcfc0f',
+                tenantId: 'a6fff368-c822-424a-baff-d541a93129e8',
+                systemId: '61e70e37-1d9d-4e28-bf7e-8a2e30d398d4',
+                systemName: '8copzszehhfra98cq56x',
+                channelId: 'e6af573b-0f58-4944-a339-ebdf09eb1458',
+                channelParty: 'vhkk3voep4odjl7xx8pdbd8k5kjbpqvwtuwuljekobl4dun9naxvirkinvbbbo4nv95ws2q6oqi944p64hj235y94z46qad3ibsw5zrirja5taud5bvwn4yuennb9x8ai62gpkwaskqsyoepmhjbdmahdg3y0k23',
+                channelComponent: '0vas4mcln73oef858m7henjerqyrlxwukg4ucud5iqanoa3gkdffnu7syozzxh0qp3xjf739w00rl8n6lsmk2ioh4axiynz819e28fc10uwna1h4saruq8vg1g3cqc5jsnpyv4dbccjc1n9sr5mphdpcqly4s4pa',
+                channelName: 'pm4ez36v6iudglif2p5ii4xx646nvfuoyo45vh2dutczph142cbnqcsyht2n16g8ktzbzn5f8tbv3buje5jcxec9p9jmekw37kmnr13p1y22nuswq318mf3ld8s5ieq841goxpbubqkw1dyexsk15qe1zvehgij7',
+                flowParty: 'yu0mveeedpg1oco5jwkmyro5azna4hu5lyl3jnqmpz2t5f8xdf1sbeeuoemkpb0z8v8nqbpqyei8h4dh4o2j6honh1pxee0zuu5yu50egeaggizodyjn12d3fdc7rrfcbkovzq8u9s6pul6hit54toh9z4bw2tgi',
+                flowComponent: 'rh83xgwerkqc416lye96blb4peek1l3aadovfozhqy8xc8g34boung5r2eelagzi08cwcwa41x0xboz32j3vcg9ikgo2zlxolz7b0yq3pc14o9844psy5p35trnz3wc4hqror6mtvjih4zsmrykwxj18zfs165r7',
+                flowInterfaceName: '5nae9ofdlk693ygsnnhovo73iurbb6u7eyop4y3v6cpc7093ypndbrnrtote00vx0qgcin4e5j0h1ac58f76xvy3h4v1kth7t9c657du0663bd38yifaazcy5j5sc60kenybzkip82tl68ufaopzfubi951u97k0',
+                flowInterfaceNamespace: '6r3161agfhc8xlh7vx4p240exdd5793btx2sggem29839jqjxilyhinzr1c12xs9ijmxvq7ah1hu0wjviy4i24hfm2zp0b4x5odnlgxil4idiradqjy0t5c8uodf9e63mqhdqdsmex839szg49nzhj63e1kzsmk8',
+                parameterGroup: '8k07ckbzu9shy7f4jz1ty0h7pyogrtthm9ojyyp9yi6lizbkkddfefw84l0kt8sc49s5qxu827t442mwvbyn61ow7i7ahnbeyd9l2v0t5neqmvns6hdqmvbz0f7gpyhyg2vtaqlwe1pnziva44a00a7u2tcdbnfmcb8r14zaldxh3d3kwezj2xsjk4ovhmabms43dzjmzfujyzvahuya5hlhk2ww4k8dhzivg9cl406tymvywbqn347d9jna7k6',
+                name: 'a9uz95zxapxoknbyfhvzfx4cn3wmlf4023k226y94h049l7b7wlqra1tqo23yts93jpbphs7gtjyo08gkc9nnyjwyp75ed17u60zcf5ziyr5830ov8xez9gcaeca44goqdjnzyti92ttjr9kq03wicdud6c2lbu6ohwt4d7ufqviuq66yqeaw2efs8o5w5pxpqvwg246wfrj99b8sx6vt6knuhze27mrcf01i7l578c9eyk95jun4ru8r4t1ukeut6shgh76l8lgyubzdj7g8tgvwoymsfts6pzpazlorksd5olt5karoqqhcicx1hyb',
+                parameterName: 'xey8uhywnnl9ngyjuamybjurl9vs6kzh4ryjov6w1ew2yfhttaurwwjxx6pqeaawyt4g5613wftebqznnxpxb9ba9b42allvacp5yqld7rwbx25ls21pi8lqo0svx1q226hjtb3fz42lb45a1ypj34yed2s3uk8pripifu81hdyodx1l07xtt0txfirvoadtlewysroj80bsx1b7zapipaix66e8d6oykzdvrwfsr8s7m1rp022gdpi3y91nuydhw19hvetl62kivdioig8fg6e7eikwiexsy8dkvsx3wan8pzk5dbgk92hzkozej2q0',
+                parameterValue: '2cvvxxhvt70uyr2bx045z2rtkwqbyyir75zapgci1hp7xzlcsw1d87e204dfw389if0ogm5ioqomn996yftvmlws6bzzzdijdskl6cisv6n1yph1ypgn14ooto5su2k25okwyvntds0rm2h07p064dhx1lc2cvhkriawwv3eamcensldt0cabjhc8fmbvege2zfbl4t5qjwmu7uu643xm1tbonyn3j8psp0rd90pvemp5ewczin9osxi0rfqopuyzaicrssi0xzh0rmzbljk0rum0u49p5y1mwp68w0w0lb1fcxnn63gkh5mmazd80yfkd1981j2e148bglilzglvmhg99vberddymeoglgh1wy2ra2w14f8los21ftsw0qkc5ev9jo60awb4x5sr2t8h0rgyfxunnozaemlu03humur4bkig6bm5xskc484g6esjpc49gs1lfcxmcczrki1wm1ejlpppct66zg0tavjfyilehxn5xukzk55ms0oez1vytu82cf7jl4b5i6ivswrsmh7ngebk3uycwqa9qtxh4197z7gvno72lsrm01ljwlbwuaj8ffld1rl1icq0p53b3qaei3g0jf8cevhvggesy8zrnn21sfrb3ileqyjb20mla7rvc8ffukeqthy161zzivigytkvk6f2jl3773orj72r58mouyohc621yury4p87xlzmjl4wftriatk4t440f6j81s92azsglwpfvkaaobivufgrsdb5ags8wbpqhg4tpgxhdj8x7ljmejl4r21h234wmviylx8tlqkbzkn61km8htnenu8xk4sbg0wooq0p1ge0l5blr8ckvso5nmhhhs436ywx7klax8ur3k4o4b8fei8w0nzpcrf6kku4e9lltipxon2enm7jt4755r1iw6s07q4so6kx3tcbmtdf0dizcgrvzk6s14c6fd542xdqmc7cr0lwrrjmov141buqwrj8b26u664eycpxpy9xycug2uarmusvtz846xawfll',
             })
             .expect(404);
     });
 
-    it(`/REST:PUT bplus-it-sappi/module`, () => 
+    test(`/REST:PUT bplus-it-sappi/module`, () => 
     {
         return request(app.getHttpServer())
             .put('/bplus-it-sappi/module')
             .set('Accept', 'application/json')
             .send({
                 
-                id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                systemName: '5vbawjzndos2k2u23xiz',
-                channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                channelParty: 'tkcscj6897orcheh0cu5cgb0w5bxmtbboh95426wsioklysu9qrjdgnhs1el1ewzfj5dzj0miwmfbeb1p12zi1feeyjz5ds2wheo31r5l891ran8cb31ypwa0cuo7bwi60ex22kuxy6722vuv8rdosq3pofy3nn4',
-                channelComponent: 'am9x79gprt1p8d9f5hd56qyak6ph17xeyidzgja85x4mp27hrqs6qgxqna9u5bdpec845y5241bmul41mwdx2ijuj7gh9vl1xqamifb9vghfasser6zk0cvitfiru4d8shi5h9tfmio7x10z65rhfio5psm1apbp',
-                channelName: 'wrq5vq19yr6mpib9kyw2b9mm8unayvrx82vz361rul5l4sgsnq66vmt8qyoldapsckpi8otn4i737c7w86wihhtc0k4jzu3nenc6mfown5c5sbv9ohjhwk79j8rkeoymf1epxs607clgkwtzweld3hgzqrxy9wgw',
-                flowParty: 'nvwp9jc3fmjzw53nptcae42ihedqa8doxjml0rsbj2kcwalyyykxpx2eajj888sqk8466g2r52gckeg4xsfxz7jbf7c0e93n6966pbvp1mec2bmu09uv8w9w0op0m9jix0l22s0o4mc9w9wlfglne9n2bg4jzg3b',
-                flowComponent: 'r3nswbjhqj3sfkxwznn6dte8daypq3w72mcetge3k1d0a3po3bdfsc19teaxruen8hw9n3ewrcyj6rjhqz12z370jga6mntpe7s1lueyv16v3xn6xe25wcd929rvotfdvm8r3owozx363fde715ux6gcz7v1it2e',
-                flowInterfaceName: 'usbs8jx5g6n1f1zo0tsr48gx90si8xwb97lf8uzmlj8ade715mt5pmg0uh5v27fxsrvwgpywszdjxns1fm4013f7acii67grmaaftvymcoh86sb5g78ulmy5ez9jttzku8iyqkdfggnavu48txmjqg15mix2xvp1',
-                flowInterfaceNamespace: 'jcgfwm26ozaklku1s635byk13tfp0kdhv32912kdh6nisb0eayy7aefmbikv4u8apw34harjwur09eanqj0gsoihusaxs5265j3djeu3q5a8oyps2mq0xrd5h7r0jzk4qv9vzbgzz6fyufstxkojjfalh85nw2c6',
-                parameterGroup: 'i55jjiza71fl5jh96gklyxpg756xlo927k4ll0soryzopbca20gw5rfnxsresiycxhojpu8h1mkm2czrx4qvh5yny2rlrgcdntw3k1o09cyae4e2bp68u1dm5jrnmcwpl83i6zljgkq7do6a0m6qjtlzrw5s3xlxhqkdvtiezpqyam708rkr8wkscyj5blp8fqm3w2wpu84g2k5fdcfsfu7wwndea1xrf3kh4ib9z8ahek9hpreyvjj94uci0x0',
-                name: '5fdng2pyt7un7fpt4g4ydtxojb8omkn8hl5y7t5rwthwuo4o64g4mndu6zf7no1d8hclffv4lb1iwu4x12e6d62tiakxojvdvazvx0pjt8wob8dbiq8efrc17e1yu44prs61mi02o3fpvi3xstm9z41lcggdrtw3bao2kn500b9emgzeyw9bq6eam6trckkhvwgf7ktlhaowfcyk5jj4uhxx8sjuzko3vtjxcq8xlu78842xm5tc15n9o6am8w6oejze7umi0yyze1swa5x7hzlsxbyx7dl554btqrwmcccpubdz6tf4huqa7bydyx6q',
-                parameterName: '7w7jr37011wre0vyohrln38uddq89wcmu98w9ocubip6uvrcaw9rhh05f5pkljq4344kdk10s6rp9dyb8zg9wnydoncbctcer2jlue7tfl0n5y3h3nkpsghve5j6jdk7o8wxjylnw72ket251l95dbkqr97vmlq7y0abydah5u1h90ztxzog7xh2hj725nf8wh05r0btr44auuandvr7xzrdrvin0pae9nb4vx1qa6jmxuccbh4p6wlad7dsj23bfp3itfb9sdenaca09jbgz8qn6e9nynkn43vkf2wb2kmhmhx1pso1suwyww16g3p2',
-                parameterValue: '8lewkhb1b3982qjtkpwalbypvulkfkpfpzkcabtnv3hm62lux9ez3lumwj1zyul7l6f4mn3821v7fqjb2k677sdozumrj9kvajyx2gnu3hiulx90f7rkfficohw6ipisj1nlg1uv0a041xo508mwkncs018tf35vubi979iu9j1mzwh5gaa1tgupc1stajotbhankoawweuwpc8x09n5pt98kli6d4812werwfw4zuh9entcqi8seiksotvvxd66snv34efy4tct6iixieexsc8lrfws2wrpyn4yvtpbd5z6thp6mdxvbx25ye11lo3ibwln4tmgn56d4bqkv58wph38xosthikgbgedfae0jsk6v41ndc1pkth6ysh27mqztj29dbg4fagt8z3tgb7ed1eyq551g60ge9ncv14r6laocq2m1e6m90o3rn7wsuyhvpobarawaz277h07qe7myd0rfpuzjyvr6df5w6t2cjqlsuy5campujuhbobfouxfm7l9hvcjzew2fvhs16igex1y033ewtqubltb5z1h16x6y2v2ry0x9y83z9bafst2f9cklobu45ewfuq1uz07b3wqt3q8yjz7p7l8y0esdqvg2ekcmbpr65t3flgyavhmi019bn08c72w6fid1dyk89cxgtnl3oe19owtxkzihda8tjcwj7qmh45q2c3cvouk2ehk4wlr89kygih3kgs1106rzhx9s03uglfybd8tvm74qzexa7peakzr2ol71kpm7uraexjsfu0l89dtd75t1dph372kwaf7oxbshetbewq2tq1xr7axxkl2vo3aky550znajpn4h9ris3bczv99d10hwngkhdehmfpslaqektabnmdbm4yjil6hzx5gpdi6jtyz3l5u97la0vtdv5fvgc3q9v5crmxtibp2hoeugk19jtm3lhnr3kmw5ntfd97sepasz1r9qt5ldrwbsddauiefpzeagn2rpitkhma0c4pwp9yph7m7alzseu43ii8i',
+                id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                systemName: 'y38jbhuxnw5kd77kbnk8',
+                channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                channelParty: 'to4qplaug5tf4zddnp451axt8dvo4dxln1sjeuqzroapdlkfx265kj42u0ghjnhqp5wvxumlvwfnoxckzvvy06a70zedysob0rlwrc4i8pflk8yml8tvufyzysnod9nx7cqzrp82fdu4y0gp0n5j1f28ttoecf8b',
+                channelComponent: 'sk2jgxnjp6k0i9rhnh5ij8vzjopc75onkg0dwqbf8u6un7jgo0o9cv7q8hjeosttnvz6bzr6wxrz6z2p8gclj7zvwvnv8zoftdhyx325o0s3kyml76pjhj8vinq946095dzc121bahr4v0b391tas3mc2z92abbx',
+                channelName: 'kug5spyzl4jq7icsulm9ru3pako38emh481x7a6p4vfs7qimfrm8o7o8qdd1lvly4o8v32hdf2dshwp2d0l83lybkcyr1cjrd5qo875xymjpazve88x5nc99ssk84ywjybbni5q9k73ydrw9ff6bq0bz29vloilg',
+                flowParty: 'ce3svdk80e0q95wkp4f0aachbucz8dwfbt04vwulivzkfmlta62ljxpzpz7fpn1vhmwxn2in28aq44ysurr2e18a40uxks4u974411nopjn2yfzeu8spv4csda14e45v06ghfcn7z0vo5h8rhhdjd96eladv772r',
+                flowComponent: 'fyjcswsj9xj5i9dyubks0wsy2q2okfjcgfd0c10gfzylzo7e9tlr82iqlbzheegg08txxb3hiui7l248bb7kclyapl4d4n4vs0ygu37u51ipwsbg18pm8ut67ygr609ya78rc42emu0yh7qt7fai4nv81i4qy71r',
+                flowInterfaceName: 'ztnn4blp9hxr1dnd4doj6qf9l8sgjrwwwsqetnvimhf2knnevs7ftal8v7e6ogjxu1pnipsy2w7szlahmadqniufts4fpqnwz5rxtio7kezk8c00c8wsg21zaaipot7dytyzts6pan0nwttmtdkmm4wg228mchwn',
+                flowInterfaceNamespace: 'g1pqdfsbzacj1o7k8vawgzqyyxhx88ocr5thds6arrv1nasx6z3jcv49um45vuimk7y6ssqgtjirt0jlr0h3nsng0spr37cbd26hw4sepjh259ak7g95vea7exjpftfce7li9sz1iod0331mydu6bk5tbxiuy1m4',
+                parameterGroup: 'p5sr75p5fe2fc0zck9dqdy889flb9jsl6luobodxouzol3scw81osen2vmjn2m9ztn34olekflkfikohxcjppcvctik9a88hjxtt1gogaeanc89cadketn9czwtgv9ilptjhzu95rttx2xcuadld085o4kfz5cy7bu15ajwkqyh87ob7yv9l64la3mn7ol9s2j9ajflah7048t22mhvt17lte6itd6ao9jqb7zr6o0e3dn9bucq77akkq5g5fte',
+                name: 'i36yw96uycanppw5mhyrk3xd9b7vj3q7lx4un5z25zqmhwlpvn0r7h3zeln25mw0vt5f95gxy41w3mo6hyt2s2fu590ibowdd1z089rbjgryfzbq733c10e3d8pgq8h7xo6jgtl5n2gclt4wz9t1czae5doukddw00uv1rie2w72uk7sn19neulhs2omwnmo9eyi08ljnni3wxn4bq6o1jm48sf4x4lpzw48e3ph670cm9qlta7xfl31tp7mse0xgwy9i1xrdnm6a6pe18gwtck2erptvhy5xm4f3o2dj3jl7x5l3ogxbbbgh93uwvc3',
+                parameterName: '5nmphuorr3itjk0jxy5a2r0a97oo9zkbgp4hvx6n3f0rdvbenc5o2jp18q3zuvamr0p29gozvn8ek2cniu47yukks2k4m7ef1yirgick8lhqjzwq0djq3qfyvxdozwkj8jhyjdncpxjl2hd7kjzhfxm8bxqnf8dgdp1lhiqgclyxmilp9caqh529ial6eecdefpbv2wrlewuw5vu7mupnndgnokwld4ut08q71hb31ffncws00z3loove1pvhqvkeokuvrpjm6z35z2ffjbmqsaxenbpxdp3ypxwyzw9vhea0qrl2djtuxs16150cac7',
+                parameterValue: 'itok9dt1gdy4x446msa4xcb876lcac5w11as4ygnnxaeqc66r9i7202b0rjlldzhjta1k8ptmdhvkidhz4hics3izh4gwdxh23th5aeufcxib9ucm0qh3mfqo9dffufqddt504ealwhrvhi3vjxw80jdd2gtskco2wmgvxux4fueqf7d1joagn8d229p5hfg64vzfvqwy1f5a9gvqs9kuvkc10tsadqu6cv6z5jsw6cfgzns8rmw5pw3xrw2zmxflvn62h8z6r6gzk5t33nf6d09mintpsqh7oglpfwgl9chyzn6wu0js190t73ck40pevs9y7fzqgh2m495l88ux88oua3uvaynurj3lyzgbt6xb0f7d67ox8x9bpn4so16s5ie4levpf06xp3tkjtw3mtgyd2cyoqebgf8qbe7gjdrcs226idwv5i6yo95fbpjg1v2msx83kjldzzmt7zyb6x7q946cswc257v1zshrfxp2xymroflw723mfdq7e7fsy8f8z7o25pyjv3c5xypywnmk5jc3cyojsvudg5m4ddra7ldoyv0gzaa7g7rmx8vq53ihhr4ivv7e68ja6kj7bpjf0ii75m6g0g0ekp1c2udvvccltnhuexmtsv6q17tqq02aigk0r9svawque4fydkh14tp16zrx67h2lebm6i6gmpjnn8292g8ikde2m3kkqh2thiuw1cl5b0dgzghgikh7pslhy6viwkfm02r5f3ue94zjazshfjfepytoj7eai0vubkqehi62dziprh9bj7rw3sw15nqhyke04l1j5wkuavsbqgcor63iux583sy3ujpglgaj9gr1zv55yp9v27gb8rj604tox7lsmknljaq8efpydvepe55kbnlgeym5jry8z9mwbao981bd8vew8bey3qenkf5zwi5jm9l3mol7s9c4jpnpezdobl9fopc2mt97871sa9szy3etnoyicuzj4k5y3x2kpuie8efsy0v495doqq2dojh45bxegk8',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '0f674ca1-3cdb-4a61-807b-919d863d4c0f'));
+            .expect(repository.collectionResponse.find(e => e.id === 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07'));
     });
 
-    it(`/REST:DELETE bplus-it-sappi/module/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE bplus-it-sappi/module/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .delete('/bplus-it-sappi/module/00000000-0000-0000-0000-000000000000')
@@ -1299,15 +1299,15 @@ describe('module', () =>
             .expect(404);
     });
 
-    it(`/REST:DELETE bplus-it-sappi/module/{id}`, () => 
+    test(`/REST:DELETE bplus-it-sappi/module/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/module/0f674ca1-3cdb-4a61-807b-919d863d4c0f')
+            .delete('/bplus-it-sappi/module/e7e8f251-44c8-44b2-a9c2-57c7e9d92d07')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    it(`/GraphQL bplusItSappiCreateModule - Got 409 Conflict, item already exist in database`, () => 
+    test(`/GraphQL bplusItSappiCreateModule - Got 409 Conflict, item already exist in database`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1351,7 +1351,7 @@ describe('module', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiCreateModule`, () => 
+    test(`/GraphQL bplusItSappiCreateModule`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1385,32 +1385,32 @@ describe('module', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '656517b0-e13c-4f48-9e73-673f78c40ca6',
-                        tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                        systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                        systemName: '43o3yhfi6ogk7e6b8n7v',
-                        channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                        channelParty: 'a8kofld3hacenata82j8imi1pxotmukme1bcl8gvg1rgqnkx1a7ob8gg0vigfntt2uszv7ckhk9yrndtnqlnjpu1eotzkilwmznsfytzzu4yajoqtvdhyojgrp66ct05ksid7pq93z6b2ilja2t7dw64w6ynfntm',
-                        channelComponent: '150bxjph5wsh3aq0rsfdep5qc29767wt7thl2agoyayo8kgmrts99rnm7g6q5l0dpn7pmgok8gcu7trag7yatsjoa4b4twvgohcixg1eoczp9kradk06tt43w2h32pm82y5ygqorezdf34pnp0cvv1swn1ioac49',
-                        channelName: 'tduah49qudzx2djp2vm9h29li9j2of9j8789jtg5vqr9lguaczhg1ty2oesdawz9j8w877geof00pcrmk6g328j5sqz99orm7j4zuq151yvpif1nvnwmbpfbc7wdrxvq8bgsduc9zmzwfr0c8bn8nys5i6kh97mu',
-                        flowParty: 'x21bn9e0m3map1ogo2ayox72ict2bcyvqbzophwl9lkqcsatpfmuzz21t7deqrkg9s07fq8wkzg4sdmdstvpwy86ckhsx14hhmk3um8a1l9u6n75yd03rj169jcirlgjb3h5kiozvyoxjzly761kgatdfuuaqxyp',
-                        flowComponent: 'uknanx0bauq8vw1ava38g5lqj0ywooyxsvk4qnigbfefo9jtgtdz342l5f6pbeh32jvkn0tloz3z57iwanur3r45peyah0caz66fxlh0ul6izuqxfl3u4nc2r21as38ybjwyrj9ic66cfhr8sf7fkzh0b8a39xeh',
-                        flowInterfaceName: 'dtnsxab8sea4k7l61j96qmddgxk25kj2jxu7sxzvif7gnbjpdzvj825rd12otlk91f590d0mp414mi7er9zd7dz8hwqdrxytrg0pq3uwsovakpb8yiz6bzbs5bb9v4sp8jaorjpbjbkqktiavpe14p8t2ly84pdx',
-                        flowInterfaceNamespace: 'oyelxjlvzmm7knvvmmraaz25cxyz47e0sx9zvw6wnoge2xo4da9vscxo6td68csj53iqcuft58bhblb8u08or0psx9zvemdft8nfzn8df7yvg6kqr1e55sgvvc11ccihulxpfovintcyzb5hahj4fxft66m0baml',
-                        parameterGroup: '9ln191lz4do9pphg9j2o3qbokui259mgouzs5fa7lsdbnpc8jotrr8cpf2notfmori55tk345hhdn62y6oj3crlgm1ng4n5dn2zx43hiogji43mukb6keklma4ksz65q43nonc4c9sn4gdqune23dr4j7mgatll3l0ghf38usa9t5wvwzdx6xsyxkzqqe82f5cndcd319ojbj0o3v6kdfctgz55kotrjz7vmverflsab9lvamx2gh776ym9cmry',
-                        name: 'kyc6jyg4vhrw573eflm8pibvro82pa50j5xeb0f644rt2i691kef05v8fmyoc1wz9od6tdy0y3ee08o27ye7liykrmwclyajwi76ss8hksm1xa2srelwordkvxdv9mgr916xatn8dmtgxd40xbfm1cx88vgzcdwq22zn0wyaf8oggtqvxnic3u8keky59n34bax98vvnoawmlqy9p5tfaopa86p41mqhk2ynsft3wayzg4370rr6vhn0u2s2ujexjr5z3djqee2tjnh0wqwuoz6jv5fc8uvvmv5swov6ihondoqywgce3by200wk7xvt',
-                        parameterName: 'skuu08ojsnxk3rcji45fqd01vq2kq3lks1hmwrcfep98q8ydhi6uv3jb2kuzcpgt0ivjox78ghou67vg3av92pcinr4snjrmhzt146o5prtld3uv5ex3tnvdlernqbbo20g37902jg9tzcg4eqc3yk3r83lc6ex6znul4dpjum1pyvppz5ua43xzo49k6bm6lt7sy62xiq7dt43k7qvcuxq5162dqoopm085qf3p3pkkc5udkabvvcvnhxyvvcepba5vhuhxsu8xp7q10paf8kmlm71s0v54qhw8kmklvgfo3zfbu2b34oxlfsgsrpix',
-                        parameterValue: 'etecnqlu5mtaam65t584t8hhap1l09rn7ts5aqb1joyqvfh838wgki443o4247z56sqmmgtfx6hkw87d8dao3in7ainxi5chypibi1fm9ahsnn5cu1t2ubge98b9pzd9cloinhig4exzrrzpppy6b5wd2900nb9wf5043jdqy1dw7uisbcf67dxcayz2c5y98ropp1o8kgynpsx9w2kl2gctmcby83hv4b1trccmz5y26jrgtovqshg60wkj68jryk0rx8uyzjthrexfl6h1ydzfvq3khlm46rmd3dp8nhseipue5szmlob5nu543kf34wbafay4elwe4xvf2ms5wr1yrdfz0b6fwto9yqeebtjmwy78xfo6oeosrkjrk61ltkag71kgu6hcvyu9pe2c7ui4gel2oavkwywyd2071haet9j04jyehf1ubatgsc7gi7q2888tqxjhd3c25hc8nmix481eos3xlykk97t8vs3zn345pjzb4mjd7xca7hap7czyz3hajkmxmiunkfuvs7zzx40lnlari7ig0i59owvcmnunzmr4ahyfgmdk5gaq3v82m68xx7gzd6pan0zfvy762x1t9gmzdhquzlj8lywg0dimur3gzt34r6gp53kh08f53s3uztc0lmkruvmsnpoa22ripjw2vom0tw8sy8tyn5tw4m7mu0e0to3daa939yp8tlqp7511bfo59w6u7l7alkpaagj4czqf01r5l38oeklgjhkje3h0818mzlqs78aqqbzfosia2pnj24ih2vjvssqo0c9ji2ypq73ekzk89x104v7pqfabk882b1ly2uenlhkyu2wawnz4z5dbi5ovjyjdiztuysyv6dub9cj7bbn419twvgt47mmjuzm6iwnhy0tssw6tve1p9v6t6l8e7pfvi08l8n8bp8jzvvpt9ye26087idxvtsif5dmgmhu2iqfe4eqr1w23xj8qnek95qd2dmbnc3b3w7ltzbb88jb5ja4n3lzp2o0fxv10',
+                        id: '55ad6e76-5323-4e7e-a390-a024611656a8',
+                        tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                        systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                        systemName: 'vfygiw0hu5f4o80iazt2',
+                        channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                        channelParty: 'ea64c5lknqejt5gbvyvhf7hd6v2aesfgalhi3lvscw8o5l9qbtiytj3wtb2p550b5q1qxwuzgwa10ffjrg2us8ziejpd6w7wha0jdwmrezufhq93egfhbp373jc2y652gxnqryg70u26e1ktcma7nppki7g2jajc',
+                        channelComponent: 'seayfl0ggqwsn84pji3o0cd9dchfw1lugdmqnqcmlohkrzrdsuesukfxeg2k24rekfa4y7qrfdw1l0d2vr5uqvociusav3woxoc8f9cqzyjys02bpj82e7q2q6wowrd05b2szxv37wplpc9hvv5gst9pbe4guu5w',
+                        channelName: 'ofzxaedrybp7n5arxkcebgykzkkdwbii6s4hohpy32qnlgrq8jpopp9ctx5kn952ivxy73tvjk77bcboilqmmu0v47cr460tr7o14szh190y8pd4vpltxo6kq2ty4matjyjzz7p0z2v14iuahkwa1zx7qdxj05qa',
+                        flowParty: '0ytx8fjxphphu2j8fnkzu5ex8lbtl89e4v72z5rxt8vk4ptt73syh7ypdcjjmi6u8l8se5zuwj2xpinnvax7xl7g63aavk5o48lkdy0pyfaeikjfz22iyz4aobjl7oqw4a8yqm23vqezpvkhq9984f6o6oztpo2q',
+                        flowComponent: 'u6t6jw6dx7nrbrmj4siku3mww64ewdcfol14q0p79e4ebfjh0dub2dcrgeg2q34jmixqfwopreqz8nn2ekzif7u6wmzz3jpyhy73zyox06clcyso1rmyh16vgstbhyejurhcav63q1wx8od8gtvws3io31tfa6ez',
+                        flowInterfaceName: '2odl30vhk7kp52mqoxyp0fmud3akcht0e11a992j0g1vdum5mob59qj5i3epldud89qia3d10wcps9qm39ywozzqpodnmlyrnqjuezveu8mnb5j0ei3ksx8pe9rrt1nm539lbz84bdju63ugz1jo168d9s398jqv',
+                        flowInterfaceNamespace: 'uc0ndhywvz2zxn47s8i7z1jqzzfeq97j3cp3h2b4utfcn5e4sno26q6bisi97398brpz7zijudow9uxg1h0gmkl20p0akr1dekjgm5s8854emla0xytiyz1ijr179xum6zmhxse7r9a2tzwgi4yyys49zvxeiejz',
+                        parameterGroup: 'zdti5kqev2tq5gfbo9jtsti0fr6bv8uihjmshc4furmww212deq63xjsyupwvqzplhkpyfjpkkmb64dxt8ux3pra0oaoj9tzlxorp34bqadows2xc94vrpunqpclx0j6eq8nh5srhfice3bddevf5iznmodr4v5jdhfdhsdxux0mhotyuukythx2h7lpryruyc6d6hqs9j0od8xj3ug6n2q5tj02f4ceyrmly3ausqn162styqp2oe64hxy2xj3',
+                        name: '9pdbisddnld0q88zxotvskh4xnom8pyqm1803lss6dijyosgf5u9vb7tkhv2p4z8zqmal8l4pvluzwepj5kudvlj6oegoz2lcp31ro54krlh2oiz9dcf0g9rwzjmuqi0nnlqldscryv81hybiwu0zlszblvp4f92n92239sd78f4ifga8nevem5wilas6jakg19eb0rg3ki5d9gos1ipopj0sslhp036xhwt9hhdncs973vj0y18jdzdwkxxjm9j5s8n9v6zdczpfiv7175cjiksdrrrxrq5xljltnitwwjo4swg58rfdfe5s970ibpo',
+                        parameterName: 'gcjyope74esv1o27lkz66ty1ico2i882mxwrwysg51guegsd3d7faayegfszanylmoq3h3drojekods14opmwz1kmpbou27nfg9612m0az3ra3nqeqvc6v6wfwnw65z5l2267v86idyr2xkwhya9yvo586oe1fqk0qfuhzu33um27iqoxsnaq2vescz3bzjspxrigcobahajbeuxtaaznlmykschalpxhktujfawge7e432tewshb000n2i8bcdrqjdb1c16hzlkwwgl3uesonqkfweiswpweezcft0f2nnmu0t5nhvgog65icfotup8',
+                        parameterValue: 'c0kg22uf6s66c7z9yz7d41w3d4uzrndy7yhgga2a8823ezvlyfqo66mifsnorsr0x3vnm81z1uny4mp0j92s2aw52hzfid2nxncj8k0ipq1egy93y6pnrd6qo50gy52w1euv9aqz4azkld8ostaqw46iwfcc8za42ae69jzt6o8aotlwnxv1mzq8numk7xbetfsv6sx4mo2ug7pjsup10idqewrbnvkh6ammubmmqd3p079qkvocd3o6nyiktdyv906lt9pn73h42vimkgdqzajac23zn0v1ngga0j0jslij6vzhzso2cjavspaj4yd1xp8p4fma6kxvi2pg77ltnve91ei5herby0zpa6kf7z6jvi2v4gu9zpo2l0xd8fzu6e3fyllkg1g4sr9fiufv9qw32w4v2x8xd9ywzn1f3lu4rjlsozhqb03y52q5h89zhia2n18gpxkqm7kfrulet165z4sbo4d54omnlakhhe5lhr92kw8mxcayo126xn73u1qizklcpcc3fka5r0fgupgmzaq65ms2xw6w7jxl5tptm0z93i0kqlwee3c0vdjpeot7zylqf89eik5d8ck60ilfng0ykr42ru0or854p8fp8ddsfgkmsrib1ep74lqnvq5g0scktpw2xvp7b409iygn1zdbzhf11s9pxqeptgkujbk5s6fcb72o9qkhbayze530jy6odtrmsr3whoufxumvozlyljj2rh137qqq336q1puyrx1lgdxwmpbh9f8om8irtvvlgtigs5bce54603i6u2d248kcauacz1kmyl04z2ob1g0wz3z52yo1xppn5pzb0369enao30pousithiyzopku3o3kndritb9j1uctg4cm59vz62qoez3kpwnylnn7nvn9dhxk9mwwx11su73g5y4n5vsjybdpw172capixtm8ro6mkn9i3viff9g8x9ck0p7y8e1dyxgzu2tev1pafa6o0tejrmaruvjn83u5eqeyhrjslco73ys8hlbu',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateModule).toHaveProperty('id', '656517b0-e13c-4f48-9e73-673f78c40ca6');
+                expect(res.body.data.bplusItSappiCreateModule).toHaveProperty('id', '55ad6e76-5323-4e7e-a390-a024611656a8');
             });
     });
 
-    it(`/GraphQL bplusItSappiPaginateModules`, () => 
+    test(`/GraphQL bplusItSappiPaginateModules`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1448,7 +1448,7 @@ describe('module', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindModule - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiFindModule - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1499,7 +1499,7 @@ describe('module', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindModule`, () => 
+    test(`/GraphQL bplusItSappiFindModule`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1537,18 +1537,18 @@ describe('module', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '0f674ca1-3cdb-4a61-807b-919d863d4c0f'
+                            value   : 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindModule.id).toStrictEqual('0f674ca1-3cdb-4a61-807b-919d863d4c0f');
+                expect(res.body.data.bplusItSappiFindModule.id).toStrictEqual('e7e8f251-44c8-44b2-a9c2-57c7e9d92d07');
             });
     });
 
-    it(`/GraphQL bplusItSappiFindModuleById - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiFindModuleById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1592,7 +1592,7 @@ describe('module', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiFindModuleById`, () => 
+    test(`/GraphQL bplusItSappiFindModuleById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1625,16 +1625,16 @@ describe('module', () =>
                     }
                 `,
                 variables: {
-                    id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f'
+                    id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindModuleById.id).toStrictEqual('0f674ca1-3cdb-4a61-807b-919d863d4c0f');
+                expect(res.body.data.bplusItSappiFindModuleById.id).toStrictEqual('e7e8f251-44c8-44b2-a9c2-57c7e9d92d07');
             });
     });
 
-    it(`/GraphQL bplusItSappiGetModules`, () => 
+    test(`/GraphQL bplusItSappiGetModules`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1677,7 +1677,7 @@ describe('module', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiUpdateModule - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiUpdateModule - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1712,22 +1712,22 @@ describe('module', () =>
                 variables: {
                     payload: {
                         
-                        id: '5f92626e-a454-470b-b993-634b1ddc7f3b',
-                        tenantId: '75059435-0c6e-46be-9149-8b0023ebd674',
-                        systemId: '2e582937-fe0f-4d03-8919-cbc4091a2371',
-                        systemName: '83bhu8s1jl1shvtmp6ah',
-                        channelId: '629f662a-9dfb-4e12-852a-6605e78b7b78',
-                        channelParty: 'zhwd9fyltldhlmsti625k52lgjugxan9o5gjr66s4tjb2hipptm8qx27oigplc25xotcritcd769l3gq8z1uufxnalbv7r061sk82z8ned7m3wxbez0zt3wxzkff1238y8sknj6ra6ti52gkbee76mhna3r36wnd',
-                        channelComponent: 'uzqoeorrnknkdr38q79aqxqwelg5jpi1xhdycwobybqsevptnpungx2x5vrsiu5qkl59tlakm5cz545wn3m6jvxyzacf3kjc3zj1n4us93f6j7v0ob6vfpihdnt5chwonlomvgcc3d6zkwlx2i7ikiojojo3gffw',
-                        channelName: 'b2ddhemsmd297ep73gdzo6fht5o34z8loxkys8d2d7ms7cfl26hayr8bc0dwo7zo8ss5qmli8ma79gsu9x7x5ebowwagg86sg6lplxm4jceo6xq5xtg9vnlsb0vhhg4xl17asxw4wyd7hoicv5kw2121vu089mlk',
-                        flowParty: 'o3ktq32v6d3gqo46wbdazypa0n3ol03nm6cmq8icjgc4u7lvcvhzmg4ihu8fxp1y03xk6e6xdp92auim8uz6yjbjpvkvbckl3dxnaxiym0evhuca2w4805fyenoeg51cccqo3k1xraiifxdhon6ydpcsu999ifd3',
-                        flowComponent: '5lga82x2glgsme5r3awefz4gjjxi8t7n0ppzbm71ipjqh96923gugksafhxwaduxhmrat6ajotj9oyyj41778ce5d034od4zx8umpnvkel0jqvybpb96vz852qrqcv33ffdi1xus7h490fybyzzboas8rn05b7ia',
-                        flowInterfaceName: 'qpzkfa5drj1t3x47szwy4gaqvtl4h2uywm5hw5xtq1pm4xv3937c0r7ro5fq9isq2lwtrsjngs3n2j5prxjaooaqau23xnnopk2wa8kdsdypadzycowa9g0bpj5509zr4ewj4s4x9euvnaghuh3086naa2ikjrit',
-                        flowInterfaceNamespace: 'da0kbrg3wnc4ddv166jo9as9khllkvmok3vfmuwxbv4m15joukfvkqw6r3iw8yc2rtgt0b4jxka7fzctsc5eeoql46a6txml0aheqqa2uozcrtofovx4qyaaipv2jvpfqo0k6pturx8y9k96jrgvqinxa0upul6d',
-                        parameterGroup: '2t3ktvhuxhi86k2puofwt1tf5onfjjkt2v6lo7nyh9m6ll6fdmjaxafjewtkb7o5anvwqjddjd1ark1gan9lgcna2mj70npv4noo8gjvovpgqa5oao0i1gsbwpwq4qj98xh7o5jz550f2k6alvgdm4dmqhpafg0z9gwrdqcxwt5414qvwqnoavyjba4qnklxmwsphcrfl6y4whop9no2n0av6snipyr2cvgjjyy6xoe0n8zmnk4r42k4wgzg71t',
-                        name: 't8rhefm8q5b30vgay3yn0z8clbxlry1ny7jm3li5tnafk9jrvw93701c9zzpkhw56uqqv3evazn93wpks23od328745gz2y91loouu603ufyowccrfp5hpltm3ceg2xi01e7iqtom50p7x5j7qaceff1t460hlnkekhc22hednwgfrnf9trv8m3rvlwucn685yo9fl4quj2wejlo6k2ntzk3qg8fniwsjwa567pt3vr2x6xesvstzq68eiydx0se83dgr0328ofq2jd43hjuh4yym6zgyj0p48mqz9nndb427kfhxclewunxmuqdmb3w',
-                        parameterName: '6kd0rfbinwkhpfoqfh2ti33t0alpswvfewc04r84k19y5a2u9lloe9ozhxldnddxdq9q2cz633qvebmntrtou2dvchv6iffgvchy4ndj17tgqhi9rgpat7tzokpzlfqfbjlts928yv8oztofzppehtgkxkndwb0rxyu5ygtbm83htt4cy0asz2ru0hi3qec6et6oqczb0i2r4cn2igca2c719ezicta8yxiuw222jhh0cv2pfwjhul8rv1h9v5fu1golhq2cxce7d9ytxs1cp7qh5kit2db33eui4g4mgvngn9v4zt0gxrxrz8da82oq',
-                        parameterValue: 'bh66qx1i85vgdzgtlx5guvluutg2g1tzfu792pfzal6vl3x25z1nef1nqwk296kq5zmqw9pilr5uas14im3awaa1l5tcey8zqjtxad94cznp2hztg4rt57392usyidwjuqh4oa2x0xgqg7201i6aakwqrencl3o7ngnejj7is7cg8m91be18jfat8pkto3qj8504lo6m6jh9n4q45tuk1nk1smimeocq4jx9cvg5kc7xns3eoadrge0lces2h8iyu0mtduumddw6i8pdip43bcanl0djn8ti7tohfe4htrxt6t15lcjxoyiam0pcf87a90utd901wkq4dfg22ujiy5c31lvw5o9fcpegolzsky3398viavhpacvofuhwa9uw6wjo7gt9ml5cnn7l25wnom17564dwrr8jlo75pnwulw57o64f79ok9xrvv3k1g4gg7gs3si4tmzn9bo70v6onhbave0fx7wvudwt52j5zimqpe1lhc2g55hugj1kseui9blh902pr47al20jwko70cbgdfekjzenxrlantdm428rggkfjvpz0ao1usug1ytmuhl815zkq6brj5e9ut5yungxyruxe1gowjkvb2k37bhgcfscz7m3vy30vk7og55vl1b0ytxnfe42bqv7gm1ftvy78akbfmi1ggltjj8whbju7zw4t1t5e0mnl6plzc36g5nh9h7gwbkt54f6ji4zuuvtssas1wgbu9hpdhcvky732opkpin5d2roxx0xicnx887d711lemti86oh8bai2apqgq7gwnt39f4s007kl64k4nc3kzxbqx5ijix1chhpzrcldxqsegqlpa83p8cs9vdrqhaygjxpo28ag6n14d8yfau1g7i8jwo6mowhj2qsncvfvgg4catsg3acmzl1ddnqch1urkc2khqzf370hyjhfo7gsif9pgak4p1jzmxn4i7q6admsuzqv27rhc32f9zszv8v761it17m9v2fv69pa5det20egvigfjhyvl0v',
+                        id: '79d359be-159a-494f-aaed-396c169484c7',
+                        tenantId: '00232e1d-3604-4bfc-b9c8-f5295305f2bc',
+                        systemId: '43823aa2-12ad-40e5-9129-0dfafc0c122d',
+                        systemName: 'lbq3r15hcidrz6ajchum',
+                        channelId: 'eea8c034-4a3b-47b0-a6a5-78bece3440c0',
+                        channelParty: 'zlro9viud7k8j7iosn6boo3rukjsmkur3jo17qoskp15etscr2lj88r5dzy9sjpk8c1mxt0a64m7kr9c71qou3s1mmiw26gnrcxjnipstnpkddi0q1fpna4ys7x3s99kzksey33m0ch7zvhfcjy9e1hw1qu6rh5q',
+                        channelComponent: '3qv6tfx1xurnvxngdhc091hn3e1wexkscqlkai0csywqt43s28cfqycgxgxx5ei2q194nast4hdtuktk5ryixtgjr3on0otkvm3wmpq903a7bzno4x69w34s5qjlm2tikyftj8d7mw1oywfywlfql349jqyayflj',
+                        channelName: 'fothap3inlmr2m4v2da009xfgu1y3h63iw2b99pasixofsbmmb7qzq1yabj5tfent3k6961g3wj91r38xc6i679bph9i4pd9smymwk58qpepx8j145182ffqogztzn1anbhflbvkmnmvzjqvtr0khmhqsq35lz5f',
+                        flowParty: '8ocy2ltuuv5mg7zshcbg1vgd5ov1t1zfq2ckjn6ou126a1cs0zlldy48p6o7wmznnfdmxenwfspvzdsto5qnv0mm5lvtv3tpptcof7jzfczal0edqrrtl47m5t9sk11wn4dtr4ppxp395mb4kyhce7lvt9azg8lv',
+                        flowComponent: 'jttf8tg32t69r897ggmi7c149l0i0i832iji55ue9h4c1ipcnhiq84j6aynomqewfwrnujgbajbhlgeyjgv7ji5ipty7k7cslk3tbo23s1814kpqf1ecgvxx6wnp2f736kmqbv8pua42my6jl9awk1sfffgtbv1d',
+                        flowInterfaceName: '040fu3q26ob5j5ljz7x6vv0tzmftzvs4v4bcui8u92xqepgo1tvo027ipsyoa4eq24xmibojbkb2j2polxxe24odr4resgbxvklzs5zd3dd4t8emnwur9cmos2u0ydcqorn59s3i70beo29ti6wxiedyf849gr50',
+                        flowInterfaceNamespace: 'zwg24ezfi3423ce5omwovqzy3bu8bh8ha58vudpf8u4nutbsjh59u8dk7zap53y592aqyfvutnwkaddhua8u7m29u7rsr3x4qi0zf4q02xg06u970m71abm6wspl2b0jjpiifan7ruus1h6xk3edkbkfso333nia',
+                        parameterGroup: 'x7fqdttk7l3uet88lh1ubr53my18xlfncd685eiiih4vmrf3k1iaikm39tuddcp1s8mstqw63jk524axu79v4wk4jp5bblyst6368tyhub8ifkdfj96k64cz62bdqld9ltl8vbmezawgiprop4p3o62ie8v85x93a0m7jea5oeto5g04v1uk7logef0zigk3r1wuu0kdhtxsnx3u5y4clxtavjtm8zilc8qnbczd9pls07zetxohay5a3nt2936',
+                        name: '0gwnx4e4kuuo690irl016qhw4wmpuz2pfjt8youyoyl1gefqwhg3de6f2gseou22w89v6qd3slcj6x6ncof4sf5k159qshqq5j3sfapecrw4bg42je2ypa74e5xisiodaizyrhriweot162ufh2eqxgn9186tupkytwistnpi5n58idepfm3kks9y8tafmxryqufh4st0addhvpz136ai9h89w84fq7xbj5n3iju6mfiagvvpmamwkpigjfox66jl6rt0ggka57cfxh8apthgji0bft33oj1y75z8hs4gl1fl3uz53bxr8jh1u1175v9',
+                        parameterName: 'y0vtizt6nutee7tdc0dqdopdzaw6hypzu5vci9qypj3mpe7yrpgp9svv9ugxiyoe67osealdknofepsdhpq516h0f5tbk9ybaishf3oj127t9llome6e0ykvx8x81tpi3n89y32j72hmt37y0vsn3l4peprlsn7rrg73mm5ce6q2meeafb17884x4kxaf8pbsaxrbksmpm4j6fpebd565geq1gxk8nagacgmsg4v6tvyo5au6edhtv8v4svk2lfazcn6noofz7ubkt67qy7kj36wv7h8o3tcva39062x381u7hvf7in1xojtne2dv638',
+                        parameterValue: '3bn2mw5kvhd1agvytpxjf973cnhu0y6008qgnxxgultnom6r5sl77022z06jz7kq2uhpv5s64bf6awj6s1hvexpiqkp5jomzs3utaxst9yico63nfm25i8msow5raqb92tpavz6hykmhu00ramfmuiexa0tsm2n8eiq9gam4u3gu17jqqsqfdux26amz4or33lrpu69qubcpyanvk4k2s1kegomc99ylx67df90qtbjlwrr0axdv3gnhjbffc5cyzdyrh9gu5c5g21edz98kmrz9xq1ddc6pds24cbragrkzifwvh6iby12ik1z2srtx4c52zab6p7yk0mumsf8366y8efvcjx3xtf6g1hkt0krozguhvxyzrz62z64jxriorjbcy0zbp80ncw5cy7ja1fslyz0i3okv8jtgfsr6ra0pprh1385fwqffzntbubf5irzcnczqxk5eg4enzcf0rlnhpjjgdo1kk906rwxkww436k73ccqkol60itkctqf2opai8lgqqkx4qrz6ht1uto4uglt3a3k3zbgqagv3y64krkvdsr2wix8x0mjnpb6n7zpm9qdkjv7tpalkd1dp6wlgr8ha2e94jxnutij313juywnur77ekmu1doz5f22v4m3ux6767j6zrsp4fv4isbd13hrb0af89cv9pzsg2j1mhlja7c8bok84gy87d77sve413kdnw5h6bcl1uouas92rr3st8heofxf4irvo5v0tuhy7b6r3yj10vsqt7cj6n78uvfdtzl8gly0uu27kv8e5qq8laxpquwpyt4u0uyiacavup48y9g36ib16fyefjqvyede4hr9dh87nluer4uzf1pnk1lciee8u3rd5zqdzdc836njcda0zei18ybdx6i8ciw25d2dsj54mthv1jxxr7tjwdb84xuz7w7mmgk96b7mgwp8cafls8b2tlcxkqp1p5e1pzu93qu5y3lzgbpl2rza4lhqfhwaodd2tmfsa2eph8jawyi76as8rzh0k',
                     }
                 }
             })
@@ -1739,7 +1739,7 @@ describe('module', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiUpdateModule`, () => 
+    test(`/GraphQL bplusItSappiUpdateModule`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1774,32 +1774,32 @@ describe('module', () =>
                 variables: {
                     payload: {
                         
-                        id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f',
-                        tenantId: '436770c4-6933-4d1b-ac26-537708dcc61e',
-                        systemId: 'f9988556-2131-4373-84cd-e987a0b26999',
-                        systemName: '4tqwbymyf4rpai0wntyx',
-                        channelId: '02e94267-39d2-4a9c-a6ab-de074832770a',
-                        channelParty: '59yqhy5wur8cmu2z5bh491ennc91921xkko86adxuognppz2prvaylu40a6t7dcmbefaoxplvbey9jamugg5nuxxbdmhzfedfusjt27fdsu4rzettzchu9izpwvn5vc8zzq35imszqbzrvltwh2p3oh1g3dg73bs',
-                        channelComponent: 'yctzuogmai0h07ycqvrjy0fjtk2fwxm8kul6zglc3jwxaiii0ldqat41jvcpkc37b7rdji1ablgkk7cyluppno2jshqic4v9pzz02illd51gtgtv4c54ijqifxj54ws2lb8mi3t0q5thlndlj4yxs5s8mzlz3361',
-                        channelName: 'k90ngzec2x8uifnnjvtj4pg3r3j8wc4f2we09eymti6mo1gaoe9jdt3p563lg96z7ngof38z187u573qad3k3wjciforja6f3tj4jd60qvbp2yqh7a5gx1c9pvek8imtbdckjg5ujr42kthol0wy02zwmb2l5p8h',
-                        flowParty: 'sgp0hzfvx5umvvx4beg8yi0g9u36qzr59p7d7e608d3ij7yin4hvrgwe34mcgo6x9siqr8a2r17fu5s5qg0vwikrywrkjfakrqemxllvu3r9s0ojvbpxp8azcab2yfjny8pqisgkwhtptptwer5jj3h8yg17ur78',
-                        flowComponent: 'd3mkfzyn2pgq19z2kkseezm3rzez8s9zwk8w8blm3q9ye5ac1tbxzrdyjpx6pk7sbrxjgz4uwwt8kjstki0kftgc70wp8ncxohw6qzarsn0i9ablz08n7zohdz0b0fxbsnobrc32yitzr6bx5sr4z6r33goe9jc8',
-                        flowInterfaceName: '79fw0neb6tmyw145krjk6bcwkjvb3pyvin61pe1g6juwbhnyw1br1eculpl3rv01gad5ktw4l6h4l0qbghbh8aps59hnfe6se0mebkg99w3srits02ixrliz9a8eoqmlg4xj089a541443oo2g6xnj0zdsotelzz',
-                        flowInterfaceNamespace: 'hzifgzdexhtecg22vsuibixai9975k9dkykxalr2imdepizs02nhsfpbq7fti25755m5k0ik1iz3vxuxtjollxsdjr08im0ewaxisjw1a78r2bnr8go9mpk75zo8w54uacqr8fpvd3r5ladsdpkdoz53e9yx8xl2',
-                        parameterGroup: 'lq31g0x4cr4neintfhjhz3su0za348b2nk7w5m35m321dum7qdrmkdg1jvluouy01whzfkqbx0f7lkf3pra33xmqbst0n7ipb4662ve3lfwl7eznj68lwi8qe9vlvcrok82lueo7n3mjhpp738syg4ywesn7iv702zorikxs4u4pj8x44kqs9jl4dbrk28z2vqpdrafp7zlrvfgfx56dqq2xvaojw8acmugp4vypokmaow20n4vkczo92pbgtfa',
-                        name: 'ug353ghn8pnl04g7lr65r1j9ud9ajv55qiaaxwcjn0fnuhz3qzsam7ikcs7q711hkjpt7zqahrdwacrnn4qcfco9w7i0c1u1jh28i50rk5xs9bqfky20j523obrm026ifhs1kojp3wa8gfndsfqogq7z2x72hpwh66uy6o371l381s4dhihn53ibf3e13zfbzyrwu2ca603y398vlggv7nft7jqosbtokm1tbyedtn4zwwjhsobcpksqxkd5oyca9lb3obhqkpexb3kreak6x1cf0k4fao1k4j0fm3lqr93bm4xy27lwbp2uep2xib9v',
-                        parameterName: 'lz58yohuotwsus2ugejvmffdb3uhorx80t0isr6ihp5bqh49dpgwko5mc5ruvqxp3yloaf6gt0f9mb9is3h60lfg4hzsnqwtob9alwcj30rb5c97u7dtv8wj5yxrlssx9v154vzpuqdtqqlx74upixrv5ve6kt6cxr1paic9vbuug5151nyxht0tuq6kcl1vbgm4ydu2ulc5x11bmywk5tuecpzjum4lwnuctvtw91fxfoe9evwr8qom2c9qpea6piuo608nhhw1qiftfgn3erdseza7x5y0fd8wq7w2gsbtfrxmyey5lgywxinit1cr',
-                        parameterValue: '98gwjsz5nlynp3snhgibtfo288y4o3wkau7vnoiu7r274dzyvtu5uofo3922715aiyq233yoijg2lyty5tyyibn1vnop364sruilq0cayojswzdl7bd4cq2lahfp7lhasnwq9ylaiskgvsn7ku3er8jrwf5x77wwf3hwvkzkmpxlimhot8pc0mo6u2dl8f07t1ho8rpexsgcocaw1mphvzuyv1dz5mmbg7j3bk9n1jizp7yx3d9xygkqrpdk2u0c1g18jno3rumztfx8kuhobtz2zsjebnlhspi73foinewae3t21rrq4c6uo53bm11ro908vz1dx9t37a1lt7ep5ebiq01t9y63vyrj4xmq737w4i9umbbuvc2n0uvmqdga79z9m3laubioad10lszxla2kxvfwgh6k2pffh6lcib6x4szdtmgs21zuvrel9q9ddzemxwtbjoeuod7jjd0gafox759o0oatnot7zkauma0imle8dtl3bzjr22iuihdrh8ms18n0hfo1xus2cznpp0opcgsdkyjlvfwd2dr7tbhzad7cc900wdqlbamva4ve5kkcw24j69po3lf364nmg83bervlhdeoqff9kp2j3wqrkjrlu2viwhcc10ic7tis9g59ijvfyppb4eqcdtgahlpy0hzrpoiozo6wio7am8ar6vhljmrd1fbp8aifzqclplh6sks4xx7lgpkvpebdw8qeua31gqq0nnxxlzs1hwhu535nhe0zdic1rt7nwwml10qo53l9w5b7zgjtxn6pvflhgobin75pg56bnknzgweilt0nczgll0c4s099eshr4pywxx2gnd5m1hskxqp0nipnmig4fco6dwo87p0xb4b47s8h6y0eijb56tdds9rlq2ltwqm9u4sc7kfdk03ea8soq9le896gyz6eghe671q58rjt2htds5nqg4m8xjkblzrdwlosxq0okdqi59wtuqzaz0lt13hu3d5rniw3rlwnet1loprowujc1q74nh7h',
+                        id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07',
+                        tenantId: '627f8463-f2ca-4d3e-a58c-9d915d7dc9bf',
+                        systemId: '4656ddca-bd05-4403-9f07-e40b3f66d107',
+                        systemName: 'mewerhc08cmktuel9f6u',
+                        channelId: 'beeadc23-e9ea-4efb-8641-f0f54437148e',
+                        channelParty: 'bmzck8jybijyosi2ptjdfg2x89ls6z32hyu1wau86onwsu924elif2qmgoc836ogck0kqfulqwgqb9896545bgwo8tk0ew56f0g42yt78n4w21dpdsmaxk7ybzttqogxn02bysivqerjqc2i88c5e1vg0p56u06p',
+                        channelComponent: 'himsot2xchoxyxpimlit48u0xeyarnb43f2xqw272qnqvon98d0b0asg8434ehyo51ky24ewfe27x385znr06nx4yndprugkksp3dqunod6q5hl95o4svrns91ttaht4xahjwcgg6oat25mdpm1t27vts12naax1',
+                        channelName: 'uvbt4qryg69zru1oqnwrcruek02w4wewvfmjdp5gkgc1zj27cgo8orjqmpg1hp25p0etyqva3eqx9ctuedu64qzhol2sgrb9g7q9ak3o8qxjhki7rh43cfycb8xkab5487sq4xqtnpszcjt6rjittnt6pwka36be',
+                        flowParty: 'iqibkbkv44733cqpza0i7q0l9nnkrikrja5roqjw338nhzy39oyf3hx0wt3zy9d5tmb3rb5ggzfxig79wf828umbofufwsadryga4aqibvij2d62r091do12mzvxxh4bpne16cuuxpt9fm12ubb617wla8zzeo3r',
+                        flowComponent: 'kamrmt1giymoedhefpsbigopdxuv8lmg3x9hmebjke8cm83n96o22ukrmi7y2hhmabgb2ufmhg3jn5hfo3nhdwdmeqb4rcsbbq1ucbs3wk1bz6uj48pk3yu1vzywgiycbg196ta57td6p6mdk26qs22fng6jp4nq',
+                        flowInterfaceName: 'naic35zi9sca8s93sa57bdtbuvj6n4v334c5e7zeu2a60y27libpb9g8krm237dc66wzpuy284iw0lz1qg5bvl3c1fc2vs3s73zvtq5p9uaxm0m9z58zpgmv6gd6i444q2gf1oxfc7y4u2cngfdli4uokgzv4wvt',
+                        flowInterfaceNamespace: 'jf8lo6479nxleyqs7q1vo9t9prbiryt61fdxfma35kkots3xthwa6latihp8kohwfcrss8vbd0tlf6b4yl46xvov28s76184jdxazsbt1feuf3glg2ouykhwaihbiqiohaluxal9vumqz4rjzrnnz22b8k98mg1v',
+                        parameterGroup: 'alqhu992kvs1t96vfkdnphiql11gcqtcxdzrs50iuowhns6bneap83uyjvn3wlw0d9gw5vkkkrdqj12bd9q18q6idx88wvnmadadf2t08vtzi8w4a8ptsy265dg2w6oibm4o00ntnlub5wcpbrn2wudvxfrdm23hgnf8jvb1lrwvibk9lv6fizc1ums6yfa7udkvnp1f02qfuoid35mk0jod8kybh35h30s2nx2wtr1fuuimf4q3thyqmp6b4o8',
+                        name: 'nebzpfe5aryxwq5frtlsslb79tam84ftdissc83zxdxwx7400eb9ngf5rbuk2bv8qjdf5ibm1guvfnbwqsx3wlgjdb6vk5me3xnke2esd12v80kfgg2823kii91pafhubfbf3ywnsnugl3994fsmcg4hr5bdcjlyq0pyhyt9eulautnuqi3hsg3bwqnym7nhgb3822ifoh9zei6h48kpuguepctkrtd7poatc4pei0iod0dmawuzvukcl4qldwa3oechkv9ze22mxdfbc59zwq3c64wghq1qg5ycfcpgo9kmvg7d5x2pq5ir9ka8niyi',
+                        parameterName: '8a6cnv8nlr7p8w44gx97m6grnaeb6pgajf5ctrw5yuusavjfb0hwocvj2lkpvam9t5wp5kkqclvsw298njbi8k48rc5ky3vmuzn9aojgikupr9pivg36qrxwenr6a9zec5ytrgjo5qlrtn04gos5igqm99z3nd0zfjfb3d0k1f5fqjvt4gzgm6fujcdds9w5ls0mqmmn0u5jygvk87lu1v40ui431htxbcm0hk9f7mf9pon9yn0vz5s9h490mdvuugo6xqb3vujcadm3u5oiemluc1bm9hcqzkkr399v699fkrsvy4rc4qqnemr4qib6',
+                        parameterValue: 'kwgbp1goyvucu9cp7h080qs0dtgdcf74kb8yi7lrumncu3cfm80aqxy97ulc7iscpy2pyuhk3mmqba9g5nu1vy6lr5rzk48fh3dqycyhl7qi9rtfnbq1egldadfatlf1lv8mctqxhyhbaf8eufz9rewtt221cgd0d4gpbsqi20xyi59ksjf3tba5zo018daxv9pl9akvtbqyiex6trjb3591lnjhw9f5s21xtgo3p3uw4c7gx6ivvfllmcoq3guat73g9cw13zzf8zntgj55obi3ksnwd08fi08dlgzyfjz7sachdkhjg2mfa2ufo9jlzsqo72ax1r7bsg8r50v7mgl8ejqueb1ikf2d4jkrg1bdszda98uw25s0zniresy89tc0i6x1qgh4xgj7n4z1te4my1uoqpuwrhepeun9gjwkycetsi74tru7szjz8oh6ok82x8rwnzs8qra8qjst5ylt8767myxs1894k6oq5c82wmbz1sdhtkm8wd61pnsnvqlhgnn3meic3pev0smuj3n143kqieel490xloeq65xnd269j48tk6vbie5pg91jnr7rl6we8mm5zssmq0rto5l39djf3vbe11nvw4hqpsrvadcw7gqt3hp3wng2g5t3jpy3ihxwb3rywij3fl8xtdmlzaxx37f91olxndbvpcifdpdjjvyc3hw42pszg49x6z3grk8h84q1grwzzvfodt14v38jmh5aarktuj4ianxpomqgsk1fqfe0ba3pg25jz6qqaqj38mb6aptm22z8pvbqwy9gh5y1pjliknn72hn680tp39853nxegasqjdwtea83ppohzm61fzn2n9rd25jpcj4i2uvnwu88wvdbfjx4gezbct19o971rn1wol0ms8dt3ah0msl68grgdhfe5ocr7pgaqzs5tg3q73uq6bfiqr3dgwihikajom04ftwiogj7aj5u9wukbjvcsyyx29i9t6h0ymjdb4vbss2vw9qg53jtxlnmbwhc222rd1x7',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateModule.id).toStrictEqual('0f674ca1-3cdb-4a61-807b-919d863d4c0f');
+                expect(res.body.data.bplusItSappiUpdateModule.id).toStrictEqual('e7e8f251-44c8-44b2-a9c2-57c7e9d92d07');
             });
     });
 
-    it(`/GraphQL bplusItSappiDeleteModuleById - Got 404 Not Found`, () => 
+    test(`/GraphQL bplusItSappiDeleteModuleById - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1843,7 +1843,7 @@ describe('module', () =>
             });
     });
 
-    it(`/GraphQL bplusItSappiDeleteModuleById`, () => 
+    test(`/GraphQL bplusItSappiDeleteModuleById`, () => 
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -1876,12 +1876,12 @@ describe('module', () =>
                     }
                 `,
                 variables: {
-                    id: '0f674ca1-3cdb-4a61-807b-919d863d4c0f'
+                    id: 'e7e8f251-44c8-44b2-a9c2-57c7e9d92d07'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteModuleById.id).toStrictEqual('0f674ca1-3cdb-4a61-807b-919d863d4c0f');
+                expect(res.body.data.bplusItSappiDeleteModuleById.id).toStrictEqual('e7e8f251-44c8-44b2-a9c2-57c7e9d92d07');
             });
     });
 

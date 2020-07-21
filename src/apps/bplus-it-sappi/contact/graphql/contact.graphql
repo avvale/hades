@@ -71,7 +71,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateContact(payload: BplusItSappiCreateContactInput!): BplusItSappiContact
-    bplusItSappiInsertContacts(payload: [BplusItSappiCreateContactInput]!): Boolean!
+    bplusItSappiCreateContacts(payload: [BplusItSappiCreateContactInput]!): Boolean!
     bplusItSappiUpdateContact(payload: BplusItSappiUpdateContactInput!): BplusItSappiContact
     bplusItSappiDeleteContactById(id: ID!): BplusItSappiContact
     bplusItSappiDeleteContacts(query:[QueryStatementInput]): [BplusItSappiContact]!

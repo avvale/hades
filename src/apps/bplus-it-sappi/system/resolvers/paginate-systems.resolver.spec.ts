@@ -37,19 +37,19 @@ describe('PaginateSystemsResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('PaginateSystemsResolver should be defined', () => 
+    test('PaginateSystemsResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('PaginateSystemsResolver should be defined', () => 
+        test('PaginateSystemsResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a systems', async () => 
+        test('should return a systems', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(systems)));
             expect(await resolver.main([], [])).toBe(systems);

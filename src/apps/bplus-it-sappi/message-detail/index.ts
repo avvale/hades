@@ -1,6 +1,6 @@
 // controllers
 import { CreateMessageDetailController } from './controllers/create-message-detail.controller';
-import { InsertMessagesDetailController } from './controllers/insert-messages-detail.controller';
+import { CreateMessagesDetailController } from './controllers/create-messages-detail.controller';
 import { PaginateMessagesDetailController } from './controllers/paginate-messages-detail.controller';
 import { GetMessagesDetailController } from './controllers/get-messages-detail.controller';
 import { FindMessageDetailByIdController } from './controllers/find-message-detail-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteMessagesDetailController } from './controllers/delete-messages-de
 
 // resolvers
 import { CreateMessageDetailResolver } from './resolvers/create-message-detail.resolver';
-import { InsertMessagesDetailResolver } from './resolvers/insert-messages-detail.resolver';
+import { CreateMessagesDetailResolver } from './resolvers/create-messages-detail.resolver';
 import { PaginateMessagesDetailResolver } from './resolvers/paginate-messages-detail.resolver';
 import { GetMessagesDetailResolver } from './resolvers/get-messages-detail.resolver';
 import { FindMessageDetailResolver } from './resolvers/find-message-detail.resolver';
@@ -22,7 +22,7 @@ import { DeleteMessagesDetailResolver } from './resolvers/delete-messages-detail
 
 export const BplusItSappiMessageDetailControllers = [
     CreateMessageDetailController,
-    InsertMessagesDetailController,
+    CreateMessagesDetailController,
     PaginateMessagesDetailController,
     GetMessagesDetailController,
     FindMessageDetailByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiMessageDetailControllers = [
 
 export const BplusItSappiMessageDetailResolvers = [
     CreateMessageDetailResolver,
-    InsertMessagesDetailResolver,
+    CreateMessagesDetailResolver,
     PaginateMessagesDetailResolver,
     GetMessagesDetailResolver,
     FindMessageDetailResolver,

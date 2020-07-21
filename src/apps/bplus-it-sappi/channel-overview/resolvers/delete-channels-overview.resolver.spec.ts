@@ -37,19 +37,19 @@ describe('DeleteChannelsOverviewResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('DeleteChannelsOverviewResolver should be defined', () => 
+    test('DeleteChannelsOverviewResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('DeleteChannelsOverviewResolver should be defined', () => 
+        test('DeleteChannelsOverviewResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an channelsOverview deleted', async () => 
+        test('should return an channelsOverview deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channelsOverview)));
             expect(await resolver.main([])).toBe(channelsOverview);

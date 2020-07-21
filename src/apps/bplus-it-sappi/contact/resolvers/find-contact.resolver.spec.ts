@@ -37,19 +37,19 @@ describe('FindContactResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('FindContactResolver should be defined', () => 
+    test('FindContactResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        it('FindContactResolver should be defined', () => 
+        test('FindContactResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a contact', async () => 
+        test('should return a contact', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(contacts[0])));
             expect(await resolver.main([])).toBe(contacts[0]);

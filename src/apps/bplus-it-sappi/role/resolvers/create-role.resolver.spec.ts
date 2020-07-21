@@ -38,20 +38,19 @@ describe('CreateRoleResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('CreateRoleResolver should be defined', () => 
+    test('CreateRoleResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('CreateRoleResolver should be defined', () => 
+        test('CreateRoleResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an role created', async () => 
+        test('should return an role created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
             expect(await resolver.main(<BplusItSappiCreateRoleInput>roles[0])).toBe(roles[0]);

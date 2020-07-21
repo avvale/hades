@@ -1,6 +1,6 @@
 // commands
 import { CreateExecutionCommandHandler } from './application/create/create-execution.command-handler';
-import { InsertExecutionsCommandHandler } from './application/insert/insert-executions.command-handler';
+import { CreateExecutionsCommandHandler } from './application/create/create-executions.command-handler';
 import { UpdateExecutionCommandHandler } from './application/update/update-execution.command-handler';
 import { DeleteExecutionByIdCommandHandler } from './application/delete/delete-execution-by-id.command-handler';
 import { DeleteExecutionsCommandHandler } from './application/delete/delete-executions.command-handler';
@@ -13,12 +13,14 @@ import { FindExecutionByIdQueryHandler } from './application/find/find-execution
 
 // events
 import { CreatedExecutionEventHandler } from './application/events/created-execution.event-handler';
+import { CreatedExecutionsEventHandler } from './application/events/created-executions.event-handler';
 import { UpdatedExecutionEventHandler } from './application/events/updated-execution.event-handler';
 import { DeletedExecutionEventHandler } from './application/events/deleted-execution.event-handler';
+import { DeletedExecutionsEventHandler } from './application/events/deleted-executions.event-handler';
 
 // services
 import { CreateExecutionService } from './application/create/create-execution.service';
-import { InsertExecutionsService } from './application/insert/insert-executions.service';
+import { CreateExecutionsService } from './application/create/create-executions.service';
 import { PaginateExecutionsService } from './application/paginate/paginate-executions.service';
 import { GetExecutionsService } from './application/get/get-executions.service';
 import { FindExecutionService } from './application/find/find-execution.service';
@@ -41,7 +43,7 @@ export { ExecutionSagas } from './application/sagas/execution.sagas';
 export const BplusItSappiExecutionHandlers = [
     // commands
     CreateExecutionCommandHandler,
-    InsertExecutionsCommandHandler,
+    CreateExecutionsCommandHandler,
     UpdateExecutionCommandHandler,
     DeleteExecutionByIdCommandHandler,
     DeleteExecutionsCommandHandler,
@@ -54,13 +56,15 @@ export const BplusItSappiExecutionHandlers = [
 
     // events
     CreatedExecutionEventHandler,
+    CreatedExecutionsEventHandler,
     UpdatedExecutionEventHandler,
     DeletedExecutionEventHandler,
+    DeletedExecutionsEventHandler,
 ];
 
 export const BplusItSappiExecutionServices = [
     CreateExecutionService,
-    InsertExecutionsService,
+    CreateExecutionsService,
     PaginateExecutionsService,
     GetExecutionsService,
     FindExecutionService,

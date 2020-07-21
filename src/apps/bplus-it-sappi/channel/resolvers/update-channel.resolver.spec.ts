@@ -38,20 +38,19 @@ describe('UpdateChannelResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('UpdateChannelResolver should be defined', () => 
+    test('UpdateChannelResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('UpdateChannelResolver should be defined', () => 
+        test('UpdateChannelResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return a channel created', async () => 
+        test('should return a channel created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(channels[0])));
             expect(await resolver.main(<BplusItSappiUpdateChannelInput>channels[0])).toBe(channels[0]);

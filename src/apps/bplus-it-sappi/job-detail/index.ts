@@ -1,6 +1,6 @@
 // controllers
 import { CreateJobDetailController } from './controllers/create-job-detail.controller';
-import { InsertJobsDetailController } from './controllers/insert-jobs-detail.controller';
+import { CreateJobsDetailController } from './controllers/create-jobs-detail.controller';
 import { PaginateJobsDetailController } from './controllers/paginate-jobs-detail.controller';
 import { GetJobsDetailController } from './controllers/get-jobs-detail.controller';
 import { FindJobDetailByIdController } from './controllers/find-job-detail-by-id.controller';
@@ -11,7 +11,7 @@ import { DeleteJobsDetailController } from './controllers/delete-jobs-detail.con
 
 // resolvers
 import { CreateJobDetailResolver } from './resolvers/create-job-detail.resolver';
-import { InsertJobsDetailResolver } from './resolvers/insert-jobs-detail.resolver';
+import { CreateJobsDetailResolver } from './resolvers/create-jobs-detail.resolver';
 import { PaginateJobsDetailResolver } from './resolvers/paginate-jobs-detail.resolver';
 import { GetJobsDetailResolver } from './resolvers/get-jobs-detail.resolver';
 import { FindJobDetailResolver } from './resolvers/find-job-detail.resolver';
@@ -22,7 +22,7 @@ import { DeleteJobsDetailResolver } from './resolvers/delete-jobs-detail.resolve
 
 export const BplusItSappiJobDetailControllers = [
     CreateJobDetailController,
-    InsertJobsDetailController,
+    CreateJobsDetailController,
     PaginateJobsDetailController,
     GetJobsDetailController,
     FindJobDetailByIdController,
@@ -34,7 +34,7 @@ export const BplusItSappiJobDetailControllers = [
 
 export const BplusItSappiJobDetailResolvers = [
     CreateJobDetailResolver,
-    InsertJobsDetailResolver,
+    CreateJobsDetailResolver,
     PaginateJobsDetailResolver,
     GetJobsDetailResolver,
     FindJobDetailResolver,

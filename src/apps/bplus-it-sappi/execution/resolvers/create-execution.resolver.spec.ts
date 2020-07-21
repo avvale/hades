@@ -38,20 +38,19 @@ describe('CreateExecutionResolver', () =>
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    it('CreateExecutionResolver should be defined', () => 
+    test('CreateExecutionResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
-    // Test get method
     describe('main', () => 
     {
-        it('CreateExecutionResolver should be defined', () => 
+        test('CreateExecutionResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        it('should return an execution created', async () => 
+        test('should return an execution created', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(executions[0])));
             expect(await resolver.main(<BplusItSappiCreateExecutionInput>executions[0])).toBe(executions[0]);

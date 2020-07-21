@@ -82,7 +82,7 @@ type Query
 type Mutation
 {
     bplusItSappiCreateJobDetail(payload: BplusItSappiCreateJobDetailInput!): BplusItSappiJobDetail
-    bplusItSappiInsertJobsDetail(payload: [BplusItSappiCreateJobDetailInput]!): Boolean!
+    bplusItSappiCreateJobsDetail(payload: [BplusItSappiCreateJobDetailInput]!): Boolean!
     bplusItSappiUpdateJobDetail(payload: BplusItSappiUpdateJobDetailInput!): BplusItSappiJobDetail
     bplusItSappiDeleteJobDetailById(id: ID!): BplusItSappiJobDetail
     bplusItSappiDeleteJobsDetail(query:[QueryStatementInput]): [BplusItSappiJobDetail]!
