@@ -2,15 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
-import { DeleteLangByIdService } from './delete-lang-by-id.service';
-import { LangId } from './../../domain/value-objects';
+import { DeleteLangsService } from './delete-langs.service';
 import { ILangRepository } from './../../domain/lang.repository';
 import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
 
-describe('DeleteLangByIdService', () => 
+describe('DeleteLangsService', () => 
 {
-    let service: DeleteLangByIdService;
+    let service: DeleteLangsService;
     let repository: ILangRepository;
     let mockRepository: MockLangRepository;
 
@@ -21,36 +19,34 @@ describe('DeleteLangByIdService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                DeleteLangByIdService,
+                DeleteLangsService,
                 MockLangRepository,
                 { 
                     provide: ILangRepository,
                     useValue: {
-                        deleteById: (id) => {},
-                        findById: (id) => {}
+                        get: (queryStatements) => {},
+                        delete: (queryStatements) => {}
                     }
                 }
             ]
         }).compile();
 
-        service         = module.get(DeleteLangByIdService);
+        service         = module.get(DeleteLangsService);
         repository      = module.get(ILangRepository);
         mockRepository  = module.get(MockLangRepository);
     });
 
     describe('main', () => 
     {
-        it('DeleteLangByIdService should be defined', () => 
+        it('DeleteLangsService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
         it('should delete lang and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main(
-                new LangId(langs[0].id)
-            )).toBe(undefined);
+            jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
+            expect(await service.main([])).toBe(undefined);
         });
     });
 });
