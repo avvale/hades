@@ -12,6 +12,7 @@ aggregateProperties:
     nullable: false
   - name: code
     type: varchar
+    length: 50
     nullable: false
   - name: logo
     type: varchar
