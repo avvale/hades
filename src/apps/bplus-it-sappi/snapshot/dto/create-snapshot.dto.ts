@@ -4,6 +4,10 @@ import { CreateSystemSnapshotDto } from './create-system-snapshot.dto';
 import { CreateTenantSnapshotDto } from './create-tenant-snapshot.dto';
 import { CreateMessageOverviewSnapshotDto } from './create-message-overview-snapshot.dto';
 import { CreateChannelOverviewSnapshotDto } from './create-channel-overview-snapshot.dto';
+import { CreateJobOverviewSnapshotDto } from './create-job-overview-snapshot.dto';
+import { CreateMessageDetailSnapshotDto } from './create-message-detail-snapshot.dto';
+import { CreateChannelDetailSnapshotDto } from './create-channel-detail-snapshot.dto';
+import { CreateJobDetailSnapshotDto } from './create-job-detail-snapshot.dto';
 
 export class CreateSnapshotDto 
 {   
@@ -66,5 +70,68 @@ export class CreateSnapshotDto
             "unregistered": 0,
         }
     })
-    channelOverview:CreateChannelOverviewSnapshotDto;
+    channelOverview: CreateChannelOverviewSnapshotDto;
+
+    @ApiProperty({
+        type        : CreateJobOverviewSnapshotDto,
+        description : 'job overview object',
+        example     : { 
+            "cancelled": 0,
+            "completed": 999,
+            "error": 0,
+        }
+    })
+    jobOverview: CreateJobOverviewSnapshotDto;
+
+    @ApiProperty({
+        type        : [CreateMessageDetailSnapshotDto],
+        description : 'message details object',
+        example     : [{ 
+            status: 'ERROR',
+            startTimeAt: '2020-07-21 12:23:13',
+            scenario: 'dir://ICO/9dc25e232809330dacae8c438ee9c3da',
+            direction: 'OUTBOUND',
+            errorCategory: 'XI_J2EE_ADAPTER_SOAP',
+            errorCode: 'SOAP_ADAPTER_PROCESSING_ERROR',
+            errorLabel: '2003',
+            node: 8071536873,
+            protocol: '6810i98gcpgr0edip3a1',
+            qualityOfService: 'EO',
+            receiverParty: '',
+            receiverComponent: 'BC_SII_DASHBOARD',
+            receiverInterface: 'SI_IA_ProcesarLote',
+            receiverInterfaceNamespace: 'urn:techedgegroup.com:sii:lotes',
+            retries: 3,
+            size: 4502,
+            timesFailed: 4,
+            example: '1c9e4c0a-9e66-11ea-cf75-0000001ba2ce',
+            detail: '...'
+        }]
+    })
+    messageDetails: CreateMessageDetailSnapshotDto[];
+
+    @ApiProperty({
+        type        : [CreateChannelDetailSnapshotDto],
+        description : 'channel details object',
+        example     : [{ 
+            status: 'ERROR',
+            channelName: 'CC_S_REST',
+            channelComponent: 'BC_REST_CV',
+            channelParty: ''
+        }]
+    })
+    channelDetails: CreateChannelDetailSnapshotDto[];
+
+    @ApiProperty({
+        type        : [CreateJobDetailSnapshotDto],
+        description : 'job details object',
+        example     : [{ 
+            status: 'ERROR',
+            name: 'BPMMailReaderJob',
+            returnCode: 2029462869,
+            node: 'Server 00 00_18111',
+            user: ''
+        }]
+    })
+    jobDetails: CreateJobDetailSnapshotDto[];
 }
