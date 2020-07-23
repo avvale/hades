@@ -6,7 +6,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '5af64adc-1d7a-49ad-8fe4-6b3634a5cd08'
+        example     : '6fbfc255-fa28-4590-af22-3c2efeff3bfd'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'v'
+        example     : 'h'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'image [input here api field description]',
-        example     : 'c'
+        example     : 'o'
     })
     image: string;
     
@@ -33,7 +33,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'iso6392 [input here api field description]',
-        example     : 'b7'
+        example     : 'iu'
     })
     iso6392: string;
     
@@ -42,7 +42,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'iso6393 [input here api field description]',
-        example     : 'c8n'
+        example     : '5vc'
     })
     iso6393: string;
     
@@ -51,7 +51,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'ietf [input here api field description]',
-        example     : 'en4wp'
+        example     : 'gmv0g'
     })
     ietf: string;
     
@@ -60,7 +60,7 @@ export class LangDto
     @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
-        example     : 177310
+        example     : 440687
     })
     sort: number;
     
@@ -78,7 +78,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-22 01:10:19'
+        example     : '2020-07-23 07:39:40'
     })
     createdAt: string;
     
@@ -87,7 +87,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-22 14:12:39'
+        example     : '2020-07-23 15:29:05'
     })
     updatedAt: string;
     
@@ -96,7 +96,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-22 04:14:59'
+        example     : '2020-07-23 12:35:13'
     })
     deletedAt: string;
     

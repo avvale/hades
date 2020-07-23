@@ -2,22 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
-import { CreateResourceService } from './create-resource.service';
-import { 
-    ResourceId, 
-    ResourceBoundedContextId, 
-    ResourceName, 
-    ResourceHasCustomFields, 
-    ResourceHasAttachments
-    
-} from './../../domain/value-objects';
+import { CreateResourcesService } from './create-resources.service';
 import { IResourceRepository } from './../../domain/resource.repository';
 import { MockResourceRepository } from './../../infrastructure/mock/mock-resource.repository';
 
-describe('CreateResourceService', () => 
+describe('CreateResourcesService', () => 
 {
-    let service: CreateResourceService;
+    let service: CreateResourcesService;
     let repository: IResourceRepository;
     let mockRepository: MockResourceRepository;
 
@@ -28,38 +19,33 @@ describe('CreateResourceService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                CreateResourceService,
+                CreateResourcesService,
                 MockResourceRepository,
                 { 
                     provide: IResourceRepository,
                     useValue: {
-                        create: (item) => {}
+                        insert: (items) => {}
                     }
                 }
             ]
         }).compile();
 
-        service         = module.get(CreateResourceService);
+        service         = module.get(CreateResourcesService);
         repository      = module.get(IResourceRepository);
         mockRepository  = module.get(MockResourceRepository);
     });
 
     describe('main', () => 
     {
-        test('CreateResourceService should be defined', () => 
+        test('CreateResourcesService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a resource and emit event', async () => 
+        test('should create resources and emit event', async () => 
         {
             expect(await service.main(
-                new ResourceId(resources[0].id),
-                new ResourceBoundedContextId(resources[0].boundedContextId),
-                new ResourceName(resources[0].name),
-                new ResourceHasCustomFields(resources[0].hasCustomFields),
-                new ResourceHasAttachments(resources[0].hasAttachments),
-                
+                mockRepository.collectionSource
             )).toBe(undefined);
         });
     });

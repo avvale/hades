@@ -2,15 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { resources } from '@hades/admin/resource/infrastructure/seeds/resource.seed';
-import { DeleteResourceByIdService } from './delete-resource-by-id.service';
-import { ResourceId } from './../../domain/value-objects';
+import { DeleteResourcesService } from './delete-resources.service';
 import { IResourceRepository } from './../../domain/resource.repository';
 import { MockResourceRepository } from './../../infrastructure/mock/mock-resource.repository';
 
-describe('DeleteResourceByIdService', () => 
+describe('DeleteResourcesService', () => 
 {
-    let service: DeleteResourceByIdService;
+    let service: DeleteResourcesService;
     let repository: IResourceRepository;
     let mockRepository: MockResourceRepository;
 
@@ -21,36 +19,34 @@ describe('DeleteResourceByIdService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                DeleteResourceByIdService,
+                DeleteResourcesService,
                 MockResourceRepository,
                 { 
                     provide: IResourceRepository,
                     useValue: {
-                        deleteById: (id) => {},
-                        findById: (id) => {}
+                        get: (queryStatements) => {},
+                        delete: (queryStatements) => {}
                     }
                 }
             ]
         }).compile();
 
-        service         = module.get(DeleteResourceByIdService);
+        service         = module.get(DeleteResourcesService);
         repository      = module.get(IResourceRepository);
         mockRepository  = module.get(MockResourceRepository);
     });
 
     describe('main', () => 
     {
-        it('DeleteResourceByIdService should be defined', () => 
+        it('DeleteResourcesService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
         it('should delete resource and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main(
-                new ResourceId(resources[0].id)
-            )).toBe(undefined);
+            jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
+            expect(await service.main([])).toBe(undefined);
         });
     });
 });

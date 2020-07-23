@@ -3,48 +3,48 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateResourceDto 
 {   
     
-        @ApiProperty({
-            type        : String,
-            description : 'id [input here api field description]',
-            example     : 'e6fca3d1-f082-45d8-acef-1dc470294220'
-        })
-        id: string;
+    @ApiProperty({
+        type        : String,
+        description : 'id [input here api field description]',
+        example     : '577bec9c-af19-4a48-a5e3-0355abfb6dbf'
+    })
+    id: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'boundedContextId [input here api field description]',
-            example     : '8b3cb4a5-c55e-487c-a024-fc9c389fbcce'
-        })
-        boundedContextId: string;
+    @ApiProperty({
+        type        : String,
+        description : 'boundedContextId [input here api field description]',
+        example     : 'ca1e8b2e-7844-4259-9ee6-9d240cef8b62'
+    })
+    boundedContextId: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'name [input here api field description]',
-            example     : 'eey1v2i5j6ofdn49windlfmh2d9adts07pf9ojlrajh35mrgegr4374enxq8d6hstamnimwy8pkhvqwayyqo2h21u8iiuy2614fpdkj8wou4oggxm1q1gd8rl262xcox1j5eojy6xvxnh1jffc7ivvjhm0q5hxx27tkncgbkdwbfwfrj0cczg01s3swrusrvuxwvaz0fzcc8yibz0v65j7kqoo8xlghqq2492l44le36wi7l7sn8j8iecbf1tj2'
-        })
-        name: string;
+    @ApiProperty({
+        type        : String,
+        description : 'name [input here api field description]',
+        example     : 'nlci6l4ar240xzs459umfmq8y9ifodc9ow6wpne11salwy69pnydvw1aqdrg98fyrq1r4v8qawghwylccz1wax16vco8ddhiowpuncka7wv19fxolrxn4ijcla59jm451yon354k7nnss31tss5jgfqs9oo59nv809hkk3k8i2ik8swrc4bpd3xa56yuuy0xh5j7z33hvlkz1fjsvlpg2utic891ky6cils9d5ysbwajlreyfmry55u5c1qmvkq'
+    })
+    name: string;
     
     
     
-        @ApiProperty({
-            type        : Boolean,
-            description : 'hasCustomFields [input here api field description]',
-            example     : true
-        })
-        hasCustomFields: boolean;
+    @ApiProperty({
+        type        : Boolean,
+        description : 'hasCustomFields [input here api field description]',
+        example     : true
+    })
+    hasCustomFields: boolean;
     
     
     
-        @ApiProperty({
-            type        : Boolean,
-            description : 'hasAttachments [input here api field description]',
-            example     : true
-        })
-        hasAttachments: boolean;
+    @ApiProperty({
+        type        : Boolean,
+        description : 'hasAttachments [input here api field description]',
+        example     : false
+    })
+    hasAttachments: boolean;
     
     
 }
