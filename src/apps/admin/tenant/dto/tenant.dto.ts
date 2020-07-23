@@ -6,7 +6,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '3e7b7a20-1a8d-4385-bdb9-c32eeceecc9e'
+        example     : '6861ce3e-6eb2-4eb9-8ef3-44543f0adfe7'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'e'
+        example     : 'a'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'c'
+        example     : 'un013ekdd88e4v4ekae0q96jo0d3wijs3eyxy0e4ues6ol489o'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'logo [input here api field description]',
-        example     : 'w'
+        example     : 'c'
     })
     logo: string;
     
@@ -42,7 +42,7 @@ export class TenantDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : false
+        example     : true
     })
     isActive: boolean;
     
@@ -60,7 +60,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-21 15:56:10'
+        example     : '2020-07-23 01:46:19'
     })
     createdAt: string;
     
@@ -69,7 +69,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-21 14:45:51'
+        example     : '2020-07-23 15:49:33'
     })
     updatedAt: string;
     
@@ -78,7 +78,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-21 10:13:19'
+        example     : '2020-07-23 11:05:09'
     })
     deletedAt: string;
     

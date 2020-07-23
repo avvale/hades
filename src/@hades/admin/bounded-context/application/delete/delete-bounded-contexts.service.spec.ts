@@ -2,15 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { boundedContexts } from '@hades/admin/bounded-context/infrastructure/seeds/bounded-context.seed';
-import { DeleteBoundedContextByIdService } from './delete-bounded-context-by-id.service';
-import { BoundedContextId } from './../../domain/value-objects';
+import { DeleteBoundedContextsService } from './delete-bounded-contexts.service';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
 
-describe('DeleteBoundedContextByIdService', () => 
+describe('DeleteBoundedContextsService', () => 
 {
-    let service: DeleteBoundedContextByIdService;
+    let service: DeleteBoundedContextsService;
     let repository: IBoundedContextRepository;
     let mockRepository: MockBoundedContextRepository;
 
@@ -21,36 +19,34 @@ describe('DeleteBoundedContextByIdService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                DeleteBoundedContextByIdService,
+                DeleteBoundedContextsService,
                 MockBoundedContextRepository,
                 { 
                     provide: IBoundedContextRepository,
                     useValue: {
-                        deleteById: (id) => {},
-                        findById: (id) => {}
+                        get: (queryStatements) => {},
+                        delete: (queryStatements) => {}
                     }
                 }
             ]
         }).compile();
 
-        service         = module.get(DeleteBoundedContextByIdService);
+        service         = module.get(DeleteBoundedContextsService);
         repository      = module.get(IBoundedContextRepository);
         mockRepository  = module.get(MockBoundedContextRepository);
     });
 
     describe('main', () => 
     {
-        it('DeleteBoundedContextByIdService should be defined', () => 
+        it('DeleteBoundedContextsService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
         it('should delete boundedContext and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main(
-                new BoundedContextId(boundedContexts[0].id)
-            )).toBe(undefined);
+            jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
+            expect(await service.main([])).toBe(undefined);
         });
     });
 });

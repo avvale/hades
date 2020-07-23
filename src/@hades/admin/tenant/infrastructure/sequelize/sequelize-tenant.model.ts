@@ -29,7 +29,7 @@ export class AdminTenantModel extends Model<AdminTenantModel>
         field: 'code',
         primaryKey: false,
         allowNull: false,
-        type: DataTypes.STRING(undefined),
+        type: DataTypes.STRING(50),
     })
     code: string;
         

@@ -2,22 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { boundedContexts } from '@hades/admin/bounded-context/infrastructure/seeds/bounded-context.seed';
-import { CreateBoundedContextService } from './create-bounded-context.service';
-import { 
-    BoundedContextId, 
-    BoundedContextName, 
-    BoundedContextRoot, 
-    BoundedContextSort, 
-    BoundedContextIsActive
-    
-} from './../../domain/value-objects';
+import { CreateBoundedContextsService } from './create-bounded-contexts.service';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
 
-describe('CreateBoundedContextService', () => 
+describe('CreateBoundedContextsService', () => 
 {
-    let service: CreateBoundedContextService;
+    let service: CreateBoundedContextsService;
     let repository: IBoundedContextRepository;
     let mockRepository: MockBoundedContextRepository;
 
@@ -28,38 +19,33 @@ describe('CreateBoundedContextService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                CreateBoundedContextService,
+                CreateBoundedContextsService,
                 MockBoundedContextRepository,
                 { 
                     provide: IBoundedContextRepository,
                     useValue: {
-                        create: (item) => {}
+                        insert: (items) => {}
                     }
                 }
             ]
         }).compile();
 
-        service         = module.get(CreateBoundedContextService);
+        service         = module.get(CreateBoundedContextsService);
         repository      = module.get(IBoundedContextRepository);
         mockRepository  = module.get(MockBoundedContextRepository);
     });
 
     describe('main', () => 
     {
-        test('CreateBoundedContextService should be defined', () => 
+        test('CreateBoundedContextsService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a boundedContext and emit event', async () => 
+        test('should create boundedContexts and emit event', async () => 
         {
             expect(await service.main(
-                new BoundedContextId(boundedContexts[0].id),
-                new BoundedContextName(boundedContexts[0].name),
-                new BoundedContextRoot(boundedContexts[0].root),
-                new BoundedContextSort(boundedContexts[0].sort),
-                new BoundedContextIsActive(boundedContexts[0].isActive),
-                
+                mockRepository.collectionSource
             )).toBe(undefined);
         });
     });

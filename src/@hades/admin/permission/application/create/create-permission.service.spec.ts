@@ -10,8 +10,8 @@ import {
     PermissionName
     
 } from './../../domain/value-objects';
-import { IPermissionRepository } from '../../domain/permission.repository';
-import { MockPermissionRepository } from '../../infrastructure/mock/mock-permission.repository';
+import { IPermissionRepository } from './../../domain/permission.repository';
+import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
 
 describe('CreatePermissionService', () => 
 {
@@ -31,8 +31,7 @@ describe('CreatePermissionService', () =>
                 { 
                     provide: IPermissionRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -52,7 +51,6 @@ describe('CreatePermissionService', () =>
 
         test('should create a permission and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new PermissionId(permissions[0].id),
                 new PermissionBoundedContextId(permissions[0].boundedContextId),
