@@ -34,6 +34,16 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     tenant: AdminTenantModel;
              
         
+    @Column({
+        field: 'tenant_code',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(50),
+    })
+    tenantCode: string;
+        
+             
+        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({
@@ -140,6 +150,16 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
              
         
     @Column({
+        field: 'channel_sap_id',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(50),
+    })
+    channelSapId: string;
+        
+             
+        
+    @Column({
         field: 'channel_party',
         primaryKey: false,
         allowNull: true,
@@ -176,16 +196,6 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         type: DataTypes.TEXT,
     })
     detail: string;
-        
-             
-        
-    @Column({
-        field: 'example',
-        primaryKey: false,
-        allowNull: true,
-        type: DataTypes.STRING(160),
-    })
-    example: string;
         
              
         

@@ -33,6 +33,16 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     tenant: AdminTenantModel;
              
         
+    @Column({
+        field: 'tenant_code',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(50),
+    })
+    tenantCode: string;
+        
+             
+        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({
@@ -160,6 +170,26 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
         type: DataTypes.STRING(255),
     })
     user: string;
+        
+             
+        
+    @Column({
+        field: 'start_at',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.DATE,
+    })
+    startAt: string;
+        
+             
+        
+    @Column({
+        field: 'end_at',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.DATE,
+    })
+    endAt: string;
         
              
         

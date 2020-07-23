@@ -4,6 +4,7 @@ export class CreateFlowsCommand
         public readonly flows: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             systemId: string,
             systemName: string,
             scenario: string,

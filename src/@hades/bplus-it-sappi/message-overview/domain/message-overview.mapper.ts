@@ -5,6 +5,7 @@ import { MessageOverviewResponse } from './message-overview.response';
 import { 
     MessageOverviewId, 
     MessageOverviewTenantId, 
+    MessageOverviewTenantCode, 
     MessageOverviewSystemId, 
     MessageOverviewSystemName, 
     MessageOverviewExecutionId, 
@@ -70,6 +71,7 @@ export class MessageOverviewMapper implements IMapper
         return BplusItSappiMessageOverview.register(
             new MessageOverviewId(messageOverview.id),
             new MessageOverviewTenantId(messageOverview.tenantId),
+            new MessageOverviewTenantCode(messageOverview.tenantCode),
             new MessageOverviewSystemId(messageOverview.systemId),
             new MessageOverviewSystemName(messageOverview.systemName),
             new MessageOverviewExecutionId(messageOverview.executionId),
@@ -98,6 +100,7 @@ export class MessageOverviewMapper implements IMapper
         return new MessageOverviewResponse(
             messageOverview.id.value,
             messageOverview.tenantId.value,
+            messageOverview.tenantCode.value,
             messageOverview.systemId.value,
             messageOverview.systemName.value,
             messageOverview.executionId.value,

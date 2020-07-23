@@ -4,6 +4,7 @@ import { CreateContactService } from './create-contact.service';
 import { 
     ContactId, 
     ContactTenantId, 
+    ContactTenantCode, 
     ContactSystemId, 
     ContactSystemName, 
     ContactRoleId, 
@@ -32,6 +33,7 @@ export class CreateContactCommandHandler implements ICommandHandler<CreateContac
         await this.createContactService.main(
             new ContactId(command.id),
             new ContactTenantId(command.tenantId),
+            new ContactTenantCode(command.tenantCode),
             new ContactSystemId(command.systemId),
             new ContactSystemName(command.systemName),
             new ContactRoleId(command.roleId),

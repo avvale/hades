@@ -4,6 +4,7 @@ import { UpdateMessageOverviewService } from './update-message-overview.service'
 import { 
     MessageOverviewId, 
     MessageOverviewTenantId, 
+    MessageOverviewTenantCode, 
     MessageOverviewSystemId, 
     MessageOverviewSystemName, 
     MessageOverviewExecutionId, 
@@ -36,6 +37,7 @@ export class UpdateMessageOverviewCommandHandler implements ICommandHandler<Upda
         await this.updateMessageOverviewService.main(
             new MessageOverviewId(command.id),
             new MessageOverviewTenantId(command.tenantId, { undefinable: true }),
+            new MessageOverviewTenantCode(command.tenantCode, { undefinable: true }),
             new MessageOverviewSystemId(command.systemId, { undefinable: true }),
             new MessageOverviewSystemName(command.systemName, { undefinable: true }),
             new MessageOverviewExecutionId(command.executionId, { undefinable: true }),

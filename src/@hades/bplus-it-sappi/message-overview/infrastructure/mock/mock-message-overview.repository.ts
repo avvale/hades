@@ -7,6 +7,7 @@ import { IMessageOverviewRepository } from './../../domain/message-overview.repo
 import { 
     MessageOverviewId, 
     MessageOverviewTenantId, 
+    MessageOverviewTenantCode, 
     MessageOverviewSystemId, 
     MessageOverviewSystemName, 
     MessageOverviewExecutionId, 
@@ -67,6 +68,7 @@ export class MockMessageOverviewRepository implements IMessageOverviewRepository
             this.collectionSource.push(BplusItSappiMessageOverview.register(
                     new MessageOverviewId(itemCollection.id),
                     new MessageOverviewTenantId(itemCollection.tenantId),
+                    new MessageOverviewTenantCode(itemCollection.tenantCode),
                     new MessageOverviewSystemId(itemCollection.systemId),
                     new MessageOverviewSystemName(itemCollection.systemName),
                     new MessageOverviewExecutionId(itemCollection.executionId),

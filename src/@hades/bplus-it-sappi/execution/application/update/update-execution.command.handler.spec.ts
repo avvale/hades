@@ -42,7 +42,9 @@ describe('UpdateExecutionCommandHandler', () =>
                 new UpdateExecutionCommand(
                     executions[0].id,
                     executions[0].tenantId,
+                    executions[0].tenantCode,
                     executions[0].systemId,
+                    executions[0].systemName,
                     executions[0].type,
                     executions[0].monitoringStartAt,
                     executions[0].monitoringEndAt,

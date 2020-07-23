@@ -1,5 +1,6 @@
 export { MessageOverviewId } from './message-overview-id';
 export { MessageOverviewTenantId } from './message-overview-tenant-id';
+export { MessageOverviewTenantCode } from './message-overview-tenant-code';
 export { MessageOverviewSystemId } from './message-overview-system-id';
 export { MessageOverviewSystemName } from './message-overview-system-name';
 export { MessageOverviewExecutionId } from './message-overview-execution-id';

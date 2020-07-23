@@ -9,6 +9,7 @@ type BplusItSappiChannelOverview
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     executionId: ID!
@@ -32,6 +33,7 @@ input BplusItSappiCreateChannelOverviewInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     executionId: ID!
@@ -52,6 +54,7 @@ input BplusItSappiUpdateChannelOverviewInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     systemId: ID
     systemName: GraphQLString
     executionId: ID

@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { systems } from '@hades/bplus-it-sappi/system/infrastructure/seeds/system.seed';
 import { DeleteSystemByIdService } from './delete-system-by-id.service';
 import { SystemId } from './../../domain/value-objects';
-import { ISystemRepository } from '../../domain/system.repository';
-import { MockSystemRepository } from '../../infrastructure/mock/mock-system.repository';
+import { ISystemRepository } from './../../domain/system.repository';
+import { MockSystemRepository } from './../../infrastructure/mock/mock-system.repository';
 
 describe('DeleteSystemByIdService', () => 
 {

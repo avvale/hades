@@ -7,12 +7,14 @@ import { CreateModuleService } from './create-module.service';
 import { 
     ModuleId, 
     ModuleTenantId, 
+    ModuleTenantCode, 
     ModuleSystemId, 
     ModuleSystemName, 
     ModuleChannelId, 
     ModuleChannelParty, 
     ModuleChannelComponent, 
     ModuleChannelName, 
+    ModuleFlowId, 
     ModuleFlowParty, 
     ModuleFlowComponent, 
     ModuleFlowInterfaceName, 
@@ -23,8 +25,8 @@ import {
     ModuleParameterValue
     
 } from './../../domain/value-objects';
-import { IModuleRepository } from '../../domain/module.repository';
-import { MockModuleRepository } from '../../infrastructure/mock/mock-module.repository';
+import { IModuleRepository } from './../../domain/module.repository';
+import { MockModuleRepository } from './../../infrastructure/mock/mock-module.repository';
 
 describe('CreateModuleService', () => 
 {
@@ -44,8 +46,7 @@ describe('CreateModuleService', () =>
                 { 
                     provide: IModuleRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -65,16 +66,17 @@ describe('CreateModuleService', () =>
 
         test('should create a module and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new ModuleId(modules[0].id),
                 new ModuleTenantId(modules[0].tenantId),
+                new ModuleTenantCode(modules[0].tenantCode),
                 new ModuleSystemId(modules[0].systemId),
                 new ModuleSystemName(modules[0].systemName),
                 new ModuleChannelId(modules[0].channelId),
                 new ModuleChannelParty(modules[0].channelParty),
                 new ModuleChannelComponent(modules[0].channelComponent),
                 new ModuleChannelName(modules[0].channelName),
+                new ModuleFlowId(modules[0].flowId),
                 new ModuleFlowParty(modules[0].flowParty),
                 new ModuleFlowComponent(modules[0].flowComponent),
                 new ModuleFlowInterfaceName(modules[0].flowInterfaceName),

@@ -3,6 +3,8 @@ import { UpdateDataLakeCommand } from './update-data-lake.command';
 import { UpdateDataLakeService } from './update-data-lake.service';
 import { 
     DataLakeId, 
+    DataLakeTenantId, 
+    DataLakeTenantCode, 
     DataLakeData
     
 } from './../../domain/value-objects';
@@ -19,6 +21,8 @@ export class UpdateDataLakeCommandHandler implements ICommandHandler<UpdateDataL
         // call to use case and implements ValueObjects
         await this.updateDataLakeService.main(
             new DataLakeId(command.id),
+            new DataLakeTenantId(command.tenantId, { undefinable: true }),
+            new DataLakeTenantCode(command.tenantCode, { undefinable: true }),
             new DataLakeData(command.data, { undefinable: true }),
             
         )

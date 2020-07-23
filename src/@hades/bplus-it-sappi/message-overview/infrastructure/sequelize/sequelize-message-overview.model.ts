@@ -33,6 +33,16 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     tenant: AdminTenantModel;
              
         
+    @Column({
+        field: 'tenant_code',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(50),
+    })
+    tenantCode: string;
+        
+             
+        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({

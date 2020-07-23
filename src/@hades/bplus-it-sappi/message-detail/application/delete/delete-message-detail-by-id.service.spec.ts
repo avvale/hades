@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { messagesDetail } from '@hades/bplus-it-sappi/message-detail/infrastructure/seeds/message-detail.seed';
 import { DeleteMessageDetailByIdService } from './delete-message-detail-by-id.service';
 import { MessageDetailId } from './../../domain/value-objects';
-import { IMessageDetailRepository } from '../../domain/message-detail.repository';
-import { MockMessageDetailRepository } from '../../infrastructure/mock/mock-message-detail.repository';
+import { IMessageDetailRepository } from './../../domain/message-detail.repository';
+import { MockMessageDetailRepository } from './../../infrastructure/mock/mock-message-detail.repository';
 
 describe('DeleteMessageDetailByIdService', () => 
 {

@@ -3,6 +3,7 @@ import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
 import { BplusItSappiChannelModel } from '@hades/bplus-it-sappi/channel/infrastructure/sequelize/sequelize-channel.model';
+import { BplusItSappiFlowModel } from '@hades/bplus-it-sappi/flow/infrastructure/sequelize/sequelize-flow.model';
 
 @Table({ modelName: 'bplus_it_sappi_module', freezeTableName: true })
 export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel> 
@@ -31,6 +32,16 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @BelongsTo(() => AdminTenantModel)
     tenant: AdminTenantModel;
+             
+        
+    @Column({
+        field: 'tenant_code',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(50),
+    })
+    tenantCode: string;
+        
              
         
     @ForeignKey(() => BplusItSappiSystemModel)
@@ -101,6 +112,21 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     })
     channelName: string;
         
+             
+        
+    @ForeignKey(() => BplusItSappiFlowModel)
+    
+    @Column({
+        field: 'flow_id',
+        primaryKey: false,
+        allowNull: true,
+        type: DataTypes.UUID,
+    })
+    flowId: string;
+        
+    
+    @BelongsTo(() => BplusItSappiFlowModel)
+    flow: BplusItSappiFlowModel;
              
         
     @Column({

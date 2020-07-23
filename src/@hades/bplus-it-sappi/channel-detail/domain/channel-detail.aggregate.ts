@@ -2,6 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     ChannelDetailId, 
     ChannelDetailTenantId, 
+    ChannelDetailTenantCode, 
     ChannelDetailSystemId, 
     ChannelDetailSystemName, 
     ChannelDetailExecutionId, 
@@ -11,11 +12,11 @@ import {
     ChannelDetailExecutionMonitoringEndAt, 
     ChannelDetailStatus, 
     ChannelDetailChannelId, 
+    ChannelDetailChannelSapId, 
     ChannelDetailChannelParty, 
     ChannelDetailChannelComponent, 
     ChannelDetailChannelName, 
     ChannelDetailDetail, 
-    ChannelDetailExample, 
     ChannelDetailCreatedAt, 
     ChannelDetailUpdatedAt, 
     ChannelDetailDeletedAt
@@ -34,6 +35,7 @@ export class BplusItSappiChannelDetail extends AggregateRoot
     id: ChannelDetailId;
     tenantId: ChannelDetailTenantId;
     tenant: AdminTenant;
+    tenantCode: ChannelDetailTenantCode;
     systemId: ChannelDetailSystemId;
     system: BplusItSappiSystem;
     systemName: ChannelDetailSystemName;
@@ -46,21 +48,22 @@ export class BplusItSappiChannelDetail extends AggregateRoot
     status: ChannelDetailStatus;
     channelId: ChannelDetailChannelId;
     channel: BplusItSappiChannel;
+    channelSapId: ChannelDetailChannelSapId;
     channelParty: ChannelDetailChannelParty;
     channelComponent: ChannelDetailChannelComponent;
     channelName: ChannelDetailChannelName;
     detail: ChannelDetailDetail;
-    example: ChannelDetailExample;
     createdAt: ChannelDetailCreatedAt;
     updatedAt: ChannelDetailUpdatedAt;
     deletedAt: ChannelDetailDeletedAt;
     
-    constructor(id?: ChannelDetailId, tenantId?: ChannelDetailTenantId, systemId?: ChannelDetailSystemId, systemName?: ChannelDetailSystemName, executionId?: ChannelDetailExecutionId, executionType?: ChannelDetailExecutionType, executionExecutedAt?: ChannelDetailExecutionExecutedAt, executionMonitoringStartAt?: ChannelDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: ChannelDetailExecutionMonitoringEndAt, status?: ChannelDetailStatus, channelId?: ChannelDetailChannelId, channelParty?: ChannelDetailChannelParty, channelComponent?: ChannelDetailChannelComponent, channelName?: ChannelDetailChannelName, detail?: ChannelDetailDetail, example?: ChannelDetailExample, createdAt?: ChannelDetailCreatedAt, updatedAt?: ChannelDetailUpdatedAt, deletedAt?: ChannelDetailDeletedAt, )
+    constructor(id?: ChannelDetailId, tenantId?: ChannelDetailTenantId, tenantCode?: ChannelDetailTenantCode, systemId?: ChannelDetailSystemId, systemName?: ChannelDetailSystemName, executionId?: ChannelDetailExecutionId, executionType?: ChannelDetailExecutionType, executionExecutedAt?: ChannelDetailExecutionExecutedAt, executionMonitoringStartAt?: ChannelDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: ChannelDetailExecutionMonitoringEndAt, status?: ChannelDetailStatus, channelId?: ChannelDetailChannelId, channelSapId?: ChannelDetailChannelSapId, channelParty?: ChannelDetailChannelParty, channelComponent?: ChannelDetailChannelComponent, channelName?: ChannelDetailChannelName, detail?: ChannelDetailDetail, createdAt?: ChannelDetailCreatedAt, updatedAt?: ChannelDetailUpdatedAt, deletedAt?: ChannelDetailDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
+        this.tenantCode = tenantCode;
         this.systemId = systemId;
         this.systemName = systemName;
         this.executionId = executionId;
@@ -70,20 +73,20 @@ export class BplusItSappiChannelDetail extends AggregateRoot
         this.executionMonitoringEndAt = executionMonitoringEndAt;
         this.status = status;
         this.channelId = channelId;
+        this.channelSapId = channelSapId;
         this.channelParty = channelParty;
         this.channelComponent = channelComponent;
         this.channelName = channelName;
         this.detail = detail;
-        this.example = example;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
         
     }
 
-    static register (id: ChannelDetailId, tenantId: ChannelDetailTenantId, systemId: ChannelDetailSystemId, systemName: ChannelDetailSystemName, executionId: ChannelDetailExecutionId, executionType: ChannelDetailExecutionType, executionExecutedAt: ChannelDetailExecutionExecutedAt, executionMonitoringStartAt: ChannelDetailExecutionMonitoringStartAt, executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt, status: ChannelDetailStatus, channelId: ChannelDetailChannelId, channelParty: ChannelDetailChannelParty, channelComponent: ChannelDetailChannelComponent, channelName: ChannelDetailChannelName, detail: ChannelDetailDetail, example: ChannelDetailExample, createdAt: ChannelDetailCreatedAt, updatedAt: ChannelDetailUpdatedAt, deletedAt: ChannelDetailDeletedAt, ): BplusItSappiChannelDetail
+    static register (id: ChannelDetailId, tenantId: ChannelDetailTenantId, tenantCode: ChannelDetailTenantCode, systemId: ChannelDetailSystemId, systemName: ChannelDetailSystemName, executionId: ChannelDetailExecutionId, executionType: ChannelDetailExecutionType, executionExecutedAt: ChannelDetailExecutionExecutedAt, executionMonitoringStartAt: ChannelDetailExecutionMonitoringStartAt, executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt, status: ChannelDetailStatus, channelId: ChannelDetailChannelId, channelSapId: ChannelDetailChannelSapId, channelParty: ChannelDetailChannelParty, channelComponent: ChannelDetailChannelComponent, channelName: ChannelDetailChannelName, detail: ChannelDetailDetail, createdAt: ChannelDetailCreatedAt, updatedAt: ChannelDetailUpdatedAt, deletedAt: ChannelDetailDeletedAt, ): BplusItSappiChannelDetail
     {
-        return new BplusItSappiChannelDetail(id, tenantId, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, status, channelId, channelParty, channelComponent, channelName, detail, example, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiChannelDetail(id, tenantId, tenantCode, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, status, channelId, channelSapId, channelParty, channelComponent, channelName, detail, createdAt, updatedAt, deletedAt, );
     }
 
     created(channelDetail: BplusItSappiChannelDetail): void
@@ -92,6 +95,7 @@ export class BplusItSappiChannelDetail extends AggregateRoot
             new CreatedChannelDetailEvent(
                 channelDetail.id.value,
                 channelDetail.tenantId.value,
+                channelDetail.tenantCode.value,
                 channelDetail.systemId.value,
                 channelDetail.systemName.value,
                 channelDetail.executionId.value,
@@ -101,11 +105,11 @@ export class BplusItSappiChannelDetail extends AggregateRoot
                 channelDetail.executionMonitoringEndAt.value,
                 channelDetail.status.value,
                 channelDetail.channelId.value,
+                channelDetail.channelSapId.value,
                 channelDetail.channelParty?.value,
                 channelDetail.channelComponent.value,
                 channelDetail.channelName.value,
                 channelDetail.detail?.value,
-                channelDetail.example?.value,
                 channelDetail.createdAt?.value,
                 channelDetail.updatedAt?.value,
                 channelDetail.deletedAt?.value,
@@ -120,6 +124,7 @@ export class BplusItSappiChannelDetail extends AggregateRoot
             new UpdatedChannelDetailEvent(
                 channelDetail.id.value,
                 channelDetail.tenantId?.value,
+                channelDetail.tenantCode?.value,
                 channelDetail.systemId?.value,
                 channelDetail.systemName?.value,
                 channelDetail.executionId?.value,
@@ -129,11 +134,11 @@ export class BplusItSappiChannelDetail extends AggregateRoot
                 channelDetail.executionMonitoringEndAt?.value,
                 channelDetail.status?.value,
                 channelDetail.channelId?.value,
+                channelDetail.channelSapId?.value,
                 channelDetail.channelParty?.value,
                 channelDetail.channelComponent?.value,
                 channelDetail.channelName?.value,
                 channelDetail.detail?.value,
-                channelDetail.example?.value,
                 channelDetail.createdAt?.value,
                 channelDetail.updatedAt?.value,
                 channelDetail.deletedAt?.value,
@@ -148,6 +153,7 @@ export class BplusItSappiChannelDetail extends AggregateRoot
             new DeletedChannelDetailEvent(
                 channelDetail.id.value,
                 channelDetail.tenantId.value,
+                channelDetail.tenantCode.value,
                 channelDetail.systemId.value,
                 channelDetail.systemName.value,
                 channelDetail.executionId.value,
@@ -157,11 +163,11 @@ export class BplusItSappiChannelDetail extends AggregateRoot
                 channelDetail.executionMonitoringEndAt.value,
                 channelDetail.status.value,
                 channelDetail.channelId.value,
+                channelDetail.channelSapId.value,
                 channelDetail.channelParty?.value,
                 channelDetail.channelComponent.value,
                 channelDetail.channelName.value,
                 channelDetail.detail?.value,
-                channelDetail.example?.value,
                 channelDetail.createdAt?.value,
                 channelDetail.updatedAt?.value,
                 channelDetail.deletedAt?.value,
@@ -175,6 +181,7 @@ export class BplusItSappiChannelDetail extends AggregateRoot
         return {
             id: this.id.value,
             tenantId: this.tenantId.value,
+            tenantCode: this.tenantCode.value,
             systemId: this.systemId.value,
             systemName: this.systemName.value,
             executionId: this.executionId.value,
@@ -184,11 +191,11 @@ export class BplusItSappiChannelDetail extends AggregateRoot
             executionMonitoringEndAt: this.executionMonitoringEndAt.value,
             status: this.status.value,
             channelId: this.channelId.value,
+            channelSapId: this.channelSapId.value,
             channelParty: this.channelParty?.value,
             channelComponent: this.channelComponent.value,
             channelName: this.channelName.value,
             detail: this.detail?.value,
-            example: this.example?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

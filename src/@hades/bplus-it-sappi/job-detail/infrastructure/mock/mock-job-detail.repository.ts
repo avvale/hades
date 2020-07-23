@@ -7,6 +7,7 @@ import { IJobDetailRepository } from './../../domain/job-detail.repository';
 import { 
     JobDetailId, 
     JobDetailTenantId, 
+    JobDetailTenantCode, 
     JobDetailSystemId, 
     JobDetailSystemName, 
     JobDetailExecutionId, 
@@ -19,6 +20,8 @@ import {
     JobDetailReturnCode, 
     JobDetailNode, 
     JobDetailUser, 
+    JobDetailStartAt, 
+    JobDetailEndAt, 
     JobDetailCreatedAt, 
     JobDetailUpdatedAt, 
     JobDetailDeletedAt
@@ -63,6 +66,7 @@ export class MockJobDetailRepository implements IJobDetailRepository
             this.collectionSource.push(BplusItSappiJobDetail.register(
                     new JobDetailId(itemCollection.id),
                     new JobDetailTenantId(itemCollection.tenantId),
+                    new JobDetailTenantCode(itemCollection.tenantCode),
                     new JobDetailSystemId(itemCollection.systemId),
                     new JobDetailSystemName(itemCollection.systemName),
                     new JobDetailExecutionId(itemCollection.executionId),
@@ -75,6 +79,8 @@ export class MockJobDetailRepository implements IJobDetailRepository
                     new JobDetailReturnCode(itemCollection.returnCode),
                     new JobDetailNode(itemCollection.node),
                     new JobDetailUser(itemCollection.user),
+                    new JobDetailStartAt(itemCollection.startAt),
+                    new JobDetailEndAt(itemCollection.endAt),
                     new JobDetailCreatedAt(itemCollection.createdAt),
                     new JobDetailUpdatedAt(itemCollection.updatedAt),
                     new JobDetailDeletedAt(itemCollection.deletedAt),

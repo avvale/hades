@@ -42,6 +42,7 @@ describe('UpdateMessageOverviewCommandHandler', () =>
                 new UpdateMessageOverviewCommand(
                     messagesOverview[0].id,
                     messagesOverview[0].tenantId,
+                    messagesOverview[0].tenantCode,
                     messagesOverview[0].systemId,
                     messagesOverview[0].systemName,
                     messagesOverview[0].executionId,

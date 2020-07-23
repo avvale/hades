@@ -26,10 +26,12 @@ export class CreateChannelController
         await this.commandBus.dispatch(new CreateChannelCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.party,
             payload.component,
             payload.name,
+            payload.flowId,
             payload.flowParty,
             payload.flowComponent,
             payload.flowInterfaceName,

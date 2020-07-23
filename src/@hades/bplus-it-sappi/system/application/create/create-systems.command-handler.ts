@@ -4,6 +4,7 @@ import { CreateSystemsService } from './create-systems.service';
 import { 
     SystemId, 
     SystemTenantId, 
+    SystemTenantCode, 
     SystemName, 
     SystemTenantCode, 
     SystemEnvironment, 
@@ -29,6 +30,7 @@ export class CreateSystemsCommandHandler implements ICommandHandler<CreateSystem
                     return {
                         id: new SystemId(system.id),
                         tenantId: new SystemTenantId(system.tenantId),
+                        tenantCode: new SystemTenantCode(system.tenantCode),
                         name: new SystemName(system.name),
                         tenantCode: new SystemTenantCode(system.tenantCode),
                         environment: new SystemEnvironment(system.environment),

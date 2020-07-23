@@ -6,11 +6,13 @@ import { dataLakes } from '@hades/bplus-it-sappi/data-lake/infrastructure/seeds/
 import { CreateDataLakeService } from './create-data-lake.service';
 import { 
     DataLakeId, 
+    DataLakeTenantId, 
+    DataLakeTenantCode, 
     DataLakeData
     
 } from './../../domain/value-objects';
-import { IDataLakeRepository } from '../../domain/data-lake.repository';
-import { MockDataLakeRepository } from '../../infrastructure/mock/mock-data-lake.repository';
+import { IDataLakeRepository } from './../../domain/data-lake.repository';
+import { MockDataLakeRepository } from './../../infrastructure/mock/mock-data-lake.repository';
 
 describe('CreateDataLakeService', () => 
 {
@@ -30,8 +32,7 @@ describe('CreateDataLakeService', () =>
                 { 
                     provide: IDataLakeRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -51,9 +52,10 @@ describe('CreateDataLakeService', () =>
 
         test('should create a dataLake and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new DataLakeId(dataLakes[0].id),
+                new DataLakeTenantId(dataLakes[0].tenantId),
+                new DataLakeTenantCode(dataLakes[0].tenantCode),
                 new DataLakeData(dataLakes[0].data),
                 
             )).toBe(undefined);

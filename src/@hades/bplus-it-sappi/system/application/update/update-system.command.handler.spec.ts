@@ -42,6 +42,7 @@ describe('UpdateSystemCommandHandler', () =>
                 new UpdateSystemCommand(
                     systems[0].id,
                     systems[0].tenantId,
+                    systems[0].tenantCode,
                     systems[0].name,
                     systems[0].tenantCode,
                     systems[0].environment,

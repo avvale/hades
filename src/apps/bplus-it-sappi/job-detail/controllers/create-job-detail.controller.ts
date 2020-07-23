@@ -26,6 +26,7 @@ export class CreateJobDetailController
         await this.commandBus.dispatch(new CreateJobDetailCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.executionId,
@@ -38,6 +39,8 @@ export class CreateJobDetailController
             payload.returnCode,
             payload.node,
             payload.user,
+            payload.startAt,
+            payload.endAt,
             
         ));
 

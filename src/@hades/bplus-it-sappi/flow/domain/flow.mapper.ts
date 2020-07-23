@@ -5,6 +5,7 @@ import { FlowResponse } from './flow.response';
 import { 
     FlowId, 
     FlowTenantId, 
+    FlowTenantCode, 
     FlowSystemId, 
     FlowSystemName, 
     FlowScenario, 
@@ -72,6 +73,7 @@ export class FlowMapper implements IMapper
         return BplusItSappiFlow.register(
             new FlowId(flow.id),
             new FlowTenantId(flow.tenantId),
+            new FlowTenantCode(flow.tenantCode),
             new FlowSystemId(flow.systemId),
             new FlowSystemName(flow.systemName),
             new FlowScenario(flow.scenario),
@@ -102,6 +104,7 @@ export class FlowMapper implements IMapper
         return new FlowResponse(
             flow.id.value,
             flow.tenantId.value,
+            flow.tenantCode.value,
             flow.systemId.value,
             flow.systemName.value,
             flow.scenario.value,

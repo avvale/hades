@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { roles } from '@hades/bplus-it-sappi/role/infrastructure/seeds/role.seed';
 import { DeleteRoleByIdService } from './delete-role-by-id.service';
 import { RoleId } from './../../domain/value-objects';
-import { IRoleRepository } from '../../domain/role.repository';
-import { MockRoleRepository } from '../../infrastructure/mock/mock-role.repository';
+import { IRoleRepository } from './../../domain/role.repository';
+import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
 
 describe('DeleteRoleByIdService', () => 
 {

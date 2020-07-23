@@ -34,6 +34,16 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     tenant: AdminTenantModel;
              
         
+    @Column({
+        field: 'tenant_code',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(50),
+    })
+    tenantCode: string;
+        
+             
+        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({
@@ -129,7 +139,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     @Column({
         field: 'flow_id',
         primaryKey: false,
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.UUID,
     })
     flowId: string;
@@ -222,8 +232,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     @Column({
         field: 'direction',
         primaryKey: false,
-        allowNull: true,
-        type: DataTypes.STRING(20),
+        allowNull: false,
+        type: DataTypes.ENUM('INBOUND','OUTBOUND'),
     })
     direction: string;
         
@@ -253,9 +263,9 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         field: 'error_label',
         primaryKey: false,
         allowNull: true,
-        type: DataTypes.STRING(160),
+        type: DataTypes.SMALLINT.UNSIGNED,
     })
-    errorLabel: string;
+    errorLabel: number;
         
              
         

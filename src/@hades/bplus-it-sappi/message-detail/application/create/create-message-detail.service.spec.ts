@@ -7,6 +7,7 @@ import { CreateMessageDetailService } from './create-message-detail.service';
 import { 
     MessageDetailId, 
     MessageDetailTenantId, 
+    MessageDetailTenantCode, 
     MessageDetailSystemId, 
     MessageDetailSystemName, 
     MessageDetailScenario, 
@@ -40,8 +41,8 @@ import {
     MessageDetailTimesFailed
     
 } from './../../domain/value-objects';
-import { IMessageDetailRepository } from '../../domain/message-detail.repository';
-import { MockMessageDetailRepository } from '../../infrastructure/mock/mock-message-detail.repository';
+import { IMessageDetailRepository } from './../../domain/message-detail.repository';
+import { MockMessageDetailRepository } from './../../infrastructure/mock/mock-message-detail.repository';
 
 describe('CreateMessageDetailService', () => 
 {
@@ -61,8 +62,7 @@ describe('CreateMessageDetailService', () =>
                 { 
                     provide: IMessageDetailRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -82,10 +82,10 @@ describe('CreateMessageDetailService', () =>
 
         test('should create a messageDetail and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new MessageDetailId(messagesDetail[0].id),
                 new MessageDetailTenantId(messagesDetail[0].tenantId),
+                new MessageDetailTenantCode(messagesDetail[0].tenantCode),
                 new MessageDetailSystemId(messagesDetail[0].systemId),
                 new MessageDetailSystemName(messagesDetail[0].systemName),
                 new MessageDetailScenario(messagesDetail[0].scenario),

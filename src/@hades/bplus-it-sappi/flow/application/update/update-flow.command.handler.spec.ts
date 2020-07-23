@@ -42,6 +42,7 @@ describe('UpdateFlowCommandHandler', () =>
                 new UpdateFlowCommand(
                     flows[0].id,
                     flows[0].tenantId,
+                    flows[0].tenantCode,
                     flows[0].systemId,
                     flows[0].systemName,
                     flows[0].scenario,

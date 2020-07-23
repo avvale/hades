@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     RoleId, 
     RoleTenantId, 
+    RoleTenantCode, 
     RoleName, 
     RoleCreatedAt, 
     RoleUpdatedAt, 
@@ -26,6 +27,7 @@ export class CreateRolesService
         roles: {
             id: RoleId,
             tenantId: RoleTenantId,
+            tenantCode: RoleTenantCode,
             name: RoleName,
             
         } []
@@ -35,6 +37,7 @@ export class CreateRolesService
         const aggregateRoles = roles.map(role => BplusItSappiRole.register(
             role.id,
             role.tenantId,
+            role.tenantCode,
             role.name,
             new RoleCreatedAt(Utils.nowTimestamp()),
             new RoleUpdatedAt(Utils.nowTimestamp()),

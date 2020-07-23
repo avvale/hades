@@ -4,6 +4,7 @@ import { CreateJobsDetailService } from './create-jobs-detail.service';
 import { 
     JobDetailId, 
     JobDetailTenantId, 
+    JobDetailTenantCode, 
     JobDetailSystemId, 
     JobDetailSystemName, 
     JobDetailExecutionId, 
@@ -15,7 +16,9 @@ import {
     JobDetailName, 
     JobDetailReturnCode, 
     JobDetailNode, 
-    JobDetailUser
+    JobDetailUser, 
+    JobDetailStartAt, 
+    JobDetailEndAt
     
 } from './../../domain/value-objects';
 
@@ -35,6 +38,7 @@ export class CreateJobsDetailCommandHandler implements ICommandHandler<CreateJob
                     return {
                         id: new JobDetailId(jobDetail.id),
                         tenantId: new JobDetailTenantId(jobDetail.tenantId),
+                        tenantCode: new JobDetailTenantCode(jobDetail.tenantCode),
                         systemId: new JobDetailSystemId(jobDetail.systemId),
                         systemName: new JobDetailSystemName(jobDetail.systemName),
                         executionId: new JobDetailExecutionId(jobDetail.executionId),
@@ -47,6 +51,8 @@ export class CreateJobsDetailCommandHandler implements ICommandHandler<CreateJob
                         returnCode: new JobDetailReturnCode(jobDetail.returnCode),
                         node: new JobDetailNode(jobDetail.node),
                         user: new JobDetailUser(jobDetail.user),
+                        startAt: new JobDetailStartAt(jobDetail.startAt),
+                        endAt: new JobDetailEndAt(jobDetail.endAt),
                         
                     }
                 })

@@ -26,6 +26,7 @@ export class CreateChannelOverviewController
         await this.commandBus.dispatch(new CreateChannelOverviewCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.executionId,

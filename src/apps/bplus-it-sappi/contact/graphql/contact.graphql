@@ -4,6 +4,7 @@ type BplusItSappiContact
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     roleId: ID
@@ -26,6 +27,7 @@ input BplusItSappiCreateContactInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     roleId: ID
@@ -45,6 +47,7 @@ input BplusItSappiUpdateContactInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     systemId: ID
     systemName: GraphQLString
     roleId: ID

@@ -4,7 +4,9 @@ export class CreateExecutionsCommand
         public readonly executions: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             systemId: string,
+            systemName: string,
             type: string,
             monitoringStartAt: string,
             monitoringEndAt: string,

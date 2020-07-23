@@ -4,6 +4,7 @@ export class CreateMessagesOverviewCommand
         public readonly messagesOverview: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             systemId: string,
             systemName: string,
             executionId: string,

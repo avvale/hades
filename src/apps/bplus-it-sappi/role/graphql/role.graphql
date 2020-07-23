@@ -4,6 +4,7 @@ type BplusItSappiRole
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     name: GraphQLString!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
@@ -15,6 +16,7 @@ input BplusItSappiCreateRoleInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     name: GraphQLString!
     
 }
@@ -23,6 +25,7 @@ input BplusItSappiUpdateRoleInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     name: GraphQLString
     
 }

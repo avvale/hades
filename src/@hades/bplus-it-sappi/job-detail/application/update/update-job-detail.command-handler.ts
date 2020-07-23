@@ -4,6 +4,7 @@ import { UpdateJobDetailService } from './update-job-detail.service';
 import { 
     JobDetailId, 
     JobDetailTenantId, 
+    JobDetailTenantCode, 
     JobDetailSystemId, 
     JobDetailSystemName, 
     JobDetailExecutionId, 
@@ -15,7 +16,9 @@ import {
     JobDetailName, 
     JobDetailReturnCode, 
     JobDetailNode, 
-    JobDetailUser
+    JobDetailUser, 
+    JobDetailStartAt, 
+    JobDetailEndAt
     
 } from './../../domain/value-objects';
 
@@ -32,6 +35,7 @@ export class UpdateJobDetailCommandHandler implements ICommandHandler<UpdateJobD
         await this.updateJobDetailService.main(
             new JobDetailId(command.id),
             new JobDetailTenantId(command.tenantId, { undefinable: true }),
+            new JobDetailTenantCode(command.tenantCode, { undefinable: true }),
             new JobDetailSystemId(command.systemId, { undefinable: true }),
             new JobDetailSystemName(command.systemName, { undefinable: true }),
             new JobDetailExecutionId(command.executionId, { undefinable: true }),
@@ -44,6 +48,8 @@ export class UpdateJobDetailCommandHandler implements ICommandHandler<UpdateJobD
             new JobDetailReturnCode(command.returnCode),
             new JobDetailNode(command.node),
             new JobDetailUser(command.user),
+            new JobDetailStartAt(command.startAt, { undefinable: true }),
+            new JobDetailEndAt(command.endAt, { undefinable: true }),
             
         )
     }

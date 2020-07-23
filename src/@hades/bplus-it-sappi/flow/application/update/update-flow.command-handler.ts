@@ -4,6 +4,7 @@ import { UpdateFlowService } from './update-flow.service';
 import { 
     FlowId, 
     FlowTenantId, 
+    FlowTenantCode, 
     FlowSystemId, 
     FlowSystemName, 
     FlowScenario, 
@@ -38,6 +39,7 @@ export class UpdateFlowCommandHandler implements ICommandHandler<UpdateFlowComma
         await this.updateFlowService.main(
             new FlowId(command.id),
             new FlowTenantId(command.tenantId, { undefinable: true }),
+            new FlowTenantCode(command.tenantCode, { undefinable: true }),
             new FlowSystemId(command.systemId, { undefinable: true }),
             new FlowSystemName(command.systemName, { undefinable: true }),
             new FlowScenario(command.scenario, { undefinable: true }),

@@ -3,6 +3,7 @@ export class CreateMessageDetailCommand
     constructor(
         public readonly id: string,
         public readonly tenantId: string,
+        public readonly tenantCode: string,
         public readonly systemId: string,
         public readonly systemName: string,
         public readonly scenario: string,
@@ -23,7 +24,7 @@ export class CreateMessageDetailCommand
         public readonly direction: string,
         public readonly errorCategory: string,
         public readonly errorCode: string,
-        public readonly errorLabel: string,
+        public readonly errorLabel: number,
         public readonly node: number,
         public readonly protocol: string,
         public readonly qualityOfService: string,

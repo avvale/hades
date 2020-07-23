@@ -1,17 +1,18 @@
-import { StringValueObject } from '@hades/shared/domain/value-objects/string.value-object';
+import { SmallintValueObject } from '@hades/shared/domain/value-objects/smallint.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/validation-rules';
 
-export class MessageDetailErrorLabel extends StringValueObject 
+export class MessageDetailErrorLabel extends SmallintValueObject 
 {
-    public readonly type: 'MessageDetailErrorLabel';   
+    public readonly type: 'MessageDetailErrorLabel';
 
-    constructor(value: string, validationRules: ValidationRules = {}) 
+    constructor(value: number, validationRules: ValidationRules = {}) 
     {
         super(value, Object.assign({ 
             name: 'MessageDetailErrorLabel',
             nullable: true,
             undefinable: true,
-            maxLength: 160,            
+            maxLength: 6,
+            unsigned: true,
         }, validationRules));
     }
 }

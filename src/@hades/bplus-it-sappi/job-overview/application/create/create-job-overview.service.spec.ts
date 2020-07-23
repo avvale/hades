@@ -7,6 +7,7 @@ import { CreateJobOverviewService } from './create-job-overview.service';
 import { 
     JobOverviewId, 
     JobOverviewTenantId, 
+    JobOverviewTenantCode, 
     JobOverviewSystemId, 
     JobOverviewSystemName, 
     JobOverviewExecutionId, 
@@ -19,8 +20,8 @@ import {
     JobOverviewError
     
 } from './../../domain/value-objects';
-import { IJobOverviewRepository } from '../../domain/job-overview.repository';
-import { MockJobOverviewRepository } from '../../infrastructure/mock/mock-job-overview.repository';
+import { IJobOverviewRepository } from './../../domain/job-overview.repository';
+import { MockJobOverviewRepository } from './../../infrastructure/mock/mock-job-overview.repository';
 
 describe('CreateJobOverviewService', () => 
 {
@@ -40,8 +41,7 @@ describe('CreateJobOverviewService', () =>
                 { 
                     provide: IJobOverviewRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -61,10 +61,10 @@ describe('CreateJobOverviewService', () =>
 
         test('should create a jobOverview and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new JobOverviewId(jobsOverview[0].id),
                 new JobOverviewTenantId(jobsOverview[0].tenantId),
+                new JobOverviewTenantCode(jobsOverview[0].tenantCode),
                 new JobOverviewSystemId(jobsOverview[0].systemId),
                 new JobOverviewSystemName(jobsOverview[0].systemName),
                 new JobOverviewExecutionId(jobsOverview[0].executionId),

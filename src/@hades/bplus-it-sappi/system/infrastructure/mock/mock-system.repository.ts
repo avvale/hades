@@ -7,6 +7,7 @@ import { ISystemRepository } from './../../domain/system.repository';
 import { 
     SystemId, 
     SystemTenantId, 
+    SystemTenantCode, 
     SystemName, 
     SystemTenantCode, 
     SystemEnvironment, 
@@ -57,6 +58,7 @@ export class MockSystemRepository implements ISystemRepository
             this.collectionSource.push(BplusItSappiSystem.register(
                     new SystemId(itemCollection.id),
                     new SystemTenantId(itemCollection.tenantId),
+                    new SystemTenantCode(itemCollection.tenantCode),
                     new SystemName(itemCollection.name),
                     new SystemTenantCode(itemCollection.tenantCode),
                     new SystemEnvironment(itemCollection.environment),

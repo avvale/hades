@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     JobDetailId, 
     JobDetailTenantId, 
+    JobDetailTenantCode, 
     JobDetailSystemId, 
     JobDetailSystemName, 
     JobDetailExecutionId, 
@@ -16,6 +17,8 @@ import {
     JobDetailReturnCode, 
     JobDetailNode, 
     JobDetailUser, 
+    JobDetailStartAt, 
+    JobDetailEndAt, 
     JobDetailCreatedAt, 
     JobDetailUpdatedAt, 
     JobDetailDeletedAt
@@ -37,6 +40,7 @@ export class CreateJobsDetailService
         jobsDetail: {
             id: JobDetailId,
             tenantId: JobDetailTenantId,
+            tenantCode: JobDetailTenantCode,
             systemId: JobDetailSystemId,
             systemName: JobDetailSystemName,
             executionId: JobDetailExecutionId,
@@ -49,6 +53,8 @@ export class CreateJobsDetailService
             returnCode: JobDetailReturnCode,
             node: JobDetailNode,
             user: JobDetailUser,
+            startAt: JobDetailStartAt,
+            endAt: JobDetailEndAt,
             
         } []
     ): Promise<void>
@@ -57,6 +63,7 @@ export class CreateJobsDetailService
         const aggregateJobsDetail = jobsDetail.map(jobDetail => BplusItSappiJobDetail.register(
             jobDetail.id,
             jobDetail.tenantId,
+            jobDetail.tenantCode,
             jobDetail.systemId,
             jobDetail.systemName,
             jobDetail.executionId,
@@ -69,6 +76,8 @@ export class CreateJobsDetailService
             jobDetail.returnCode,
             jobDetail.node,
             jobDetail.user,
+            jobDetail.startAt,
+            jobDetail.endAt,
             new JobDetailCreatedAt(Utils.nowTimestamp()),
             new JobDetailUpdatedAt(Utils.nowTimestamp()),
             null

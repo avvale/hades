@@ -4,6 +4,7 @@ import { CreateMessageDetailService } from './create-message-detail.service';
 import { 
     MessageDetailId, 
     MessageDetailTenantId, 
+    MessageDetailTenantCode, 
     MessageDetailSystemId, 
     MessageDetailSystemName, 
     MessageDetailScenario, 
@@ -51,6 +52,7 @@ export class CreateMessageDetailCommandHandler implements ICommandHandler<Create
         await this.createMessageDetailService.main(
             new MessageDetailId(command.id),
             new MessageDetailTenantId(command.tenantId),
+            new MessageDetailTenantCode(command.tenantCode),
             new MessageDetailSystemId(command.systemId),
             new MessageDetailSystemName(command.systemName),
             new MessageDetailScenario(command.scenario),

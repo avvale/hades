@@ -3,6 +3,8 @@
 type BplusItSappiDataLake
 {
     id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
     data: JSON!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
@@ -13,6 +15,8 @@ type BplusItSappiDataLake
 input BplusItSappiCreateDataLakeInput
 {
     id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
     data: JSON!
     
 }
@@ -20,6 +24,8 @@ input BplusItSappiCreateDataLakeInput
 input BplusItSappiUpdateDataLakeInput
 {
     id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
     data: JSON
     
 }

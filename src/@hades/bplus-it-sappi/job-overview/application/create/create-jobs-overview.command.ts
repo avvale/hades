@@ -4,6 +4,7 @@ export class CreateJobsOverviewCommand
         public readonly jobsOverview: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             systemId: string,
             systemName: string,
             executionId: string,

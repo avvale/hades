@@ -5,6 +5,7 @@ import { ContactResponse } from './contact.response';
 import { 
     ContactId, 
     ContactTenantId, 
+    ContactTenantCode, 
     ContactSystemId, 
     ContactSystemName, 
     ContactRoleId, 
@@ -66,6 +67,7 @@ export class ContactMapper implements IMapper
         return BplusItSappiContact.register(
             new ContactId(contact.id),
             new ContactTenantId(contact.tenantId),
+            new ContactTenantCode(contact.tenantCode),
             new ContactSystemId(contact.systemId),
             new ContactSystemName(contact.systemName),
             new ContactRoleId(contact.roleId),
@@ -90,6 +92,7 @@ export class ContactMapper implements IMapper
         return new ContactResponse(
             contact.id.value,
             contact.tenantId.value,
+            contact.tenantCode.value,
             contact.systemId.value,
             contact.systemName.value,
             contact.roleId.value,

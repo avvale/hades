@@ -42,6 +42,7 @@ describe('CreateRoleCommandHandler', () =>
                 new CreateRoleCommand(
                     roles[0].id,
                     roles[0].tenantId,
+                    roles[0].tenantCode,
                     roles[0].name,
                     
                 )

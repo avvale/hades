@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { contacts } from '@hades/bplus-it-sappi/contact/infrastructure/seeds/contact.seed';
 import { DeleteContactByIdService } from './delete-contact-by-id.service';
 import { ContactId } from './../../domain/value-objects';
-import { IContactRepository } from '../../domain/contact.repository';
-import { MockContactRepository } from '../../infrastructure/mock/mock-contact.repository';
+import { IContactRepository } from './../../domain/contact.repository';
+import { MockContactRepository } from './../../infrastructure/mock/mock-contact.repository';
 
 describe('DeleteContactByIdService', () => 
 {

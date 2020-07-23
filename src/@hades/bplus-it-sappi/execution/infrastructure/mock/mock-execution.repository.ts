@@ -7,7 +7,9 @@ import { IExecutionRepository } from './../../domain/execution.repository';
 import { 
     ExecutionId, 
     ExecutionTenantId, 
+    ExecutionTenantCode, 
     ExecutionSystemId, 
+    ExecutionSystemName, 
     ExecutionType, 
     ExecutionMonitoringStartAt, 
     ExecutionMonitoringEndAt, 
@@ -56,7 +58,9 @@ export class MockExecutionRepository implements IExecutionRepository
             this.collectionSource.push(BplusItSappiExecution.register(
                     new ExecutionId(itemCollection.id),
                     new ExecutionTenantId(itemCollection.tenantId),
+                    new ExecutionTenantCode(itemCollection.tenantCode),
                     new ExecutionSystemId(itemCollection.systemId),
+                    new ExecutionSystemName(itemCollection.systemName),
                     new ExecutionType(itemCollection.type),
                     new ExecutionMonitoringStartAt(itemCollection.monitoringStartAt),
                     new ExecutionMonitoringEndAt(itemCollection.monitoringEndAt),

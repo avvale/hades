@@ -3,10 +3,12 @@ export class UpdatedChannelEvent
     constructor(
         public readonly id: string,
         public readonly tenantId: string,
+        public readonly tenantCode: string,
         public readonly systemId: string,
         public readonly party: string,
         public readonly component: string,
         public readonly name: string,
+        public readonly flowId: string,
         public readonly flowParty: string,
         public readonly flowComponent: string,
         public readonly flowInterfaceName: string,

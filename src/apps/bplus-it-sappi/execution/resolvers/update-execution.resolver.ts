@@ -21,7 +21,9 @@ export class UpdateExecutionResolver
         await this.commandBus.dispatch(new UpdateExecutionCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
+            payload.systemName,
             payload.type,
             payload.monitoringStartAt,
             payload.monitoringEndAt,

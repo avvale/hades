@@ -7,6 +7,7 @@ import { IRoleRepository } from './../../domain/role.repository';
 import { 
     RoleId, 
     RoleTenantId, 
+    RoleTenantCode, 
     RoleName, 
     RoleCreatedAt, 
     RoleUpdatedAt, 
@@ -52,6 +53,7 @@ export class MockRoleRepository implements IRoleRepository
             this.collectionSource.push(BplusItSappiRole.register(
                     new RoleId(itemCollection.id),
                     new RoleTenantId(itemCollection.tenantId),
+                    new RoleTenantCode(itemCollection.tenantCode),
                     new RoleName(itemCollection.name),
                     new RoleCreatedAt(itemCollection.createdAt),
                     new RoleUpdatedAt(itemCollection.updatedAt),

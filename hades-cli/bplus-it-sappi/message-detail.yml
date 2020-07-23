@@ -14,6 +14,10 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: AdminTenant
     relationshipModulePath: admin/tenant
+  - name: tenant_code
+    type: varchar
+    maxLength: 50
+    nullable: false
   - name: system_id
     type: id
     length: 36
@@ -54,7 +58,7 @@ aggregateProperties:
   - name: flow_id
     type: id
     length: 36
-    nullable: false
+    nullable: true
     relationship: many-to-one
     relationshipAggregate: BplusItSappiFlow
     relationshipModulePath: bplus-it-sappi/flow
@@ -96,9 +100,11 @@ aggregateProperties:
     type: timestamp
     nullable: true
   - name: direction
-    type: varchar
-    maxLength: 20
-    nullable: true
+    type: enum
+    enumOptions:
+      - INBOUND
+      - OUTBOUND
+    nullable: false
   - name: error_category
     type: varchar
     maxLength: 160
@@ -108,8 +114,8 @@ aggregateProperties:
     maxLength: 20
     nullable: true
   - name: error_label
-    type: varchar
-    maxLength: 160
+    type: smallint.unsigned
+    maxLength: 6
     nullable: true
   - name: node
     type: int.unsigned

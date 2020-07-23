@@ -68,19 +68,20 @@ describe('contact', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'ori8lbus5ipgehi5gkb4',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'uxvpxfhcfhtl6tzll4r3l3d2to7vtkxx3alnlimf4hu5k4cbx23o0buy8c7lqri1dbnvx9r6y1c20u1le42sb3ir538pj5ppum96mhqr4l20jp9ny1ucvg1352ks4wvye745naotmyxb5h2e1ydnny29blyyf92zbnzb4mvvsv4c92tkj7bs0cq6xaa5l6p5oau0kd7jqy9xd8sdd4xwi8j8l25kkm0tanz1k2386t5dptgqmjco4p4uul511ur',
-                name: 'wvp2hdt1xgb7xxs6p0xn7kl4yyguzer6rz3o0cjb0hml1ioxk4vbep6sk2i0gmazj9h5npmbndtczgplzjqynqznu94cgaok6tq7use4k0cyv7pyv007z5h2hf5e0rkz1rm3waotkwd2bikybdwjtov09xx95kujdzna580520o3jw79vui2l9t00pt7xoms9awystjar3odtbh1pmlapnwb22nl8ik6p40s0pzftq4a8l05nlpujwesplv6gsk',
-                surname: 'x04srk3hdbkhceqfvb1kd0sfgqbpanasvmtd22wxp0q78o7jsvk8idug15aurnd7hxh1ekh82wdfixl2wjery9x8acyzjah56rloxhzhsuit86v9x9igpk96lsakqiv5vhi4cefm4r4sn301hutp2hmmaomrs275tmexd0v0b9900b4b9kjedwtxtiye9a00m5njur32afgueb3w8j20l2pmqb2t0owoz63njjx12vggcme9esd72z1wi7mm27j',
-                email: 'rumwcy4gfom3oxqko3zvut7b9nd5adns1uctcvgmwua30peen42ey1hizbadyksz3pqsl8kchysu2spc8ozizeb4wd8e5ac76q9sdmeeqt7pdh6frx9dwlqw',
-                mobile: 'wk1ue9r7lg9diqgri3u76ths1izun064mtg5elm4ief5hqz95paq7m71zwzb',
-                area: 'q70skz8s84fv9x3ja3rqdrhyx5c15gyzoflyt86bnzi5l0ggj4tu2n8r48sss62i7ce4oea1keqze3ad7kdwms9bgsr9vkuyvip7541bhmalc24iewkwmolelrtf7ypq8euui7uqks2vlajywmubi38y9rfsg8vkznoubmgtaztl3yotr6sdb7hsga13iov5e8lsf6paynuf52i8parl6j3qi7xs58jujdfaunu6s537opsorxuqq6bputm70gz',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: '5lgz9ckrv69htj1duicp7at1suhwqh8sv9gd16q51jqo7qy483',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'jcmjkrjyqt8jzd6a5yfw',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'l27fed10omb9strw9rsgivivlkieduy0687sqqefx4fh3wrvidjw844tn565gsqdqlzphpcjd7n89bdihimlntl09ree83loiqjjue7kwtc9ggiwe8fh604bvpv01tstge7664gix306d1vsauze5yk12d75mb0f6ulps57si0pm4pxsp9ndv951fw76uqet32ze2m8mnnqxabb0ol9yb4is7pspqdncgs9wcdlm8vlbmhgcgnwm254mqpe1yqb',
+                name: '0pvl3m7202250r0vhru9srsogytfc295qz82ac01yhhlosg8w1ts6ze46veng9nsf4yucuu2xt5l1g13twc5u4pq6sfeecas8s22b5hpk3db39bl8q1jljt32la7oolvm20zxo2wp2w0mp1rrhj9ym6xnoocv9xqybjghzlppiwkv25muadbabll14zq9u2x4ml2b8xawm1fvfetzdto5rj7704b1juriaqmo20c45twhvi0mdvy8ojngnbyocf',
+                surname: 'wew11dtfujn4xneoyyfqg9csnlghs7qclpzlvff3xdr720jjzxbmmlxnh80c5irrigsft3uqfyp0v9msjhysa6rhulxl3dt1kt88n5xahmcytevblw5id0xgm8sdzgfq8wfso16lzs7hut38qyiq2ue2p4npar2qc7mgvsn1oz7klvx8xobfqd80wa44ch9gy3gym7wd8hp6tbiws5eepbpyj09jbr8j7y4n54kzvrnmolzy1yyetn7ca9i8r3m',
+                email: 'iuw7cwlv459ojx7cjelkjxprcnxvwqs0jruo7tilbu8mhpfq7qqmzyg4zfj9ybtcxdtg9h1w85varo8xy9tb4gls1mlfefulv6acqtxpmmwtstfwdz04qkp7',
+                mobile: 'tauwtv1lhex0uaq6rf9emt593cgvrc83u3hyufjne02tr0kcr1c5dhj3itpb',
+                area: '1iblp6lnw7hn0se0qei9w6zj763k9dshla75gdg0ihq89layqxuuwxl6wbrr9pztujhwylgcp52ebykduhf099q0q96dkeds1yru9yvh2w3io3agpzfqwex71fdvbz59hayc69e2rpl8ydvm0z84lys75me62byg5b8h4b2qmpnfnv2u2iyjye5gw1amukqg4ydtrrifvvyv98vthjywg9ivmku8uwprj3ipxfz2qmsw67ml2nn65gr2mcisqc9',
                 hasConsentEmail: false,
-                hasConsentMobile: true,
-                isActive: true,
+                hasConsentMobile: false,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -95,19 +96,20 @@ describe('contact', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'bivjjvh9o4eh2dnd0nh7',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: '0xf589hblho6pc9tmrifgpwo3dw8pmze88rxsc80fy9uclgvsnnv4zjvv136sly3iuv335l0o94fl8uena0dowloixlaxl7abkxvjveo9rwi659tf5pbflfvalsnieun4qrmtpw1r9gaj3ptjv2yvaz6cyby1hwrhb13425cx5ofa9wrqzsrb1eb73s42aeql2lytyr8ezgc910wulvndh1v1zhp6urkwvzp37hifl6ffkx6rw0rz2jun3o7x9u',
-                name: 'lkekh9y0xmdk398dm2lb3j2ixoz03xmbm073easj2c1psvow9rvowowu21vdexyi62hcfvvi561rmk5ocdcaygfn4rm32wmftvggf9x9fntopqn64bo85bwusfq8l1a18qj2e9ei9dduxg0c68qyd70klyklsoz4xja4evj0vgtp6x1j5ogw3p0qoj9zmwzb2968avjyuo3keaz6mm49gs81golnu6dt4m6pf8vwm1q4p0rqat265k0qm48ncl3',
-                surname: 'h18829wcenu9jh1m6ymodmtxp9p4slcg3s15rmwkuv10vchfgqv6qmtmvv1fcwql9dy60s2wbpak4wzextyi2xl2y0ckuhvptsoyqzxpds8j3q9ynu7v3n9zfjb0ywonzdnqbmvfwy36xkuowpij0qb2u94voh6a1f7f0zhvf41sr3cy4ll3v4nxv66kh5g9kk652951egx9kttngymf2qibzt8s1pchuyrjknczoy4m3ixvk8bdgvthr4e6ma1',
-                email: 'as25vojn7mmb9tewccajl30uo0pr7j11pgswtwsqxdwo9nl7s1hojzux5p6a02za3q05nl1ow411xejg5vcndzjahz58w1xoxsfbei3x958ww5gu033o8sas',
-                mobile: 'nxl2ondyeqkjlubaj0dlz7x441vdr2kctrbji58e0gqf8li8zsy7a42qnypc',
-                area: 'ixh8s6ogxgguvodatzem5r27ep0p654yeomssxqunwmylfwd7nxlmw4iavs0jnyubgrpalghivzm97q0q4pu2fkf2v4qrcq5xi6t0ht3ej8spsxso5qdfdseake765gzxmf32hb4phclhvape9fgcugu1tralez2tdmu9qhxepvautyaqnrn12f820k6zylps17x02ldnrdgqvqikxedfjaaj567rkt7sb4i4e9gtd576p81gtwv4yeljm2fqbi',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'ds6nvyerrbsqgh2qp9tj5n021v4myjqhtpnekv6atko9wajxu2',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'z3io1ct2nc8lpp7uml27',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'gqllsk28kkrsalid0c5e5jdb9lvhb6r08llnumsuwxpcx1jwhqvwuromlvl5fp7xj9idwl7hiy7x3tus6c3bxf5sjw9t5s2wexoi8jqx3xc78mhbnvw6dgiccy44oa1xnlnvp8rx7952wwt9qzl1kkquir3b2tnklymoxucjjcxfc44wm0itotozzie45ksbbdt7ioycvye1okuark07i1mnd187mf1zepsqkukv53e6t6h2jgwed13h37sye50',
+                name: 'i1e4hje8ab2hrjacxlhu67o1ej0ftyqtmy7cvqvmmpdljoj1lm7dhg719ybat8ds02ivlge60qkbmdboyv9vu9j3vc58l1gf785oxeo7m7q63s42r105ijzxcklq8jd4d2szah0ubyk23nw5pyau9df04pu9c7gdiy4kn2y7mx5stjxdsyyk9zhllwmhniewqt6oft2m7n85txnvhskpfuge56kwzr5kqy2xkkum1or4pp5ngeeenfijl6cnfp5',
+                surname: 'cur0ekyf555bq9lgkh6gyqryl4r91npkn4yhdbgzc128u8ob238dnxy774zr0r7s9gzpg5ra6hbavxt0b1bl8yqnmdhsrnkx0jt3ij342az7tx14r26c2r1aw7lnsgi8cmmx15ue8tgjji4cwkv1hfsih9dyj8lshf3dl4d0kyyk1t9c0frz8q20ra6btua035dstk4rphqc2yes90iy1qurd7bmo2xu7hqw3290w02gx3vypp7973wswhmscu6',
+                email: '3z94j4krjrl92qs8u7gzstun4ywk92lljv7i42jpo72t9kp01510t9lo2k9rsdpwcjnm0nhd3roucxjgarnhqar2d3tdkkccmmkiya7rq4ipzm7ikdagiuyg',
+                mobile: '9b3vecccb1finh0ur530tm9r5q9yawhxyq6an0ty1am5aqtrwtvuqce7rxhl',
+                area: 'a51s9aaeoux6gpaxb0e5ov4gnrf6zkb9wr1rc9op9q44awueanzu0lbtxysgwiswcnip0rer6sopz7dqlbz0oli2k9saemsb3hbwuwhbalt2q95sb11vendnckvke6wo5d4d4162y5jw9cjpipftyxfik0j7rg3ubp0i103uradfj4jeblunjc8w8fkyxee5ksss0luk5igqna7cuu7s6xu93meec9r2t0m53bf51cfa3jz3aqqp6yvz9bix2kv',
                 hasConsentEmail: true,
-                hasConsentMobile: false,
-                isActive: false,
+                hasConsentMobile: true,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -121,18 +123,19 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
                 tenantId: null,
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'qtbc3xfhzh4fyouzi2yv',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'gb8uhyt2bzo2gjp9m4wfvwflkpf8g8kx7xrhkyjufh4wxya27j7f8jp9lvvhfs9cglr3l6lnkx0nrs33zq0tn2kyx2ysr64dpjhyv1vv4lhizilnq9abh3vdvu8nsc8f7bd21celw04fxbjwim122w9uuohxck0781ihmop2dq5iqvo73hl5ckkllsa0l7lq7jozbejpalbcnkv0by3mx9quvimfydrjnc741s856ll7cksq39hqu83k6igen51',
-                name: 'xtq7eus7n6ekv7kx5638mvy1nvjnrw0kqt6e9p2u6oqty7rz79ywjt65tj9hwh6vuy1ooqkwsa3a0hzck94h7qrlqr5wq10szjzpnwg8hkw33m2w5jyfs60okmn903pisvv5bgt4bfj0um580rwljkdg0obqz42cnbhod9xojemfk8hfj8uq3aaj1mlh6w4xk2rvosnjfbs533bgdfsuhem9qfh696642ql1qbbxu6uhs4u7g23zwzkvcorgdnl',
-                surname: 'zjt3h01qrssfd0xyvwz7509k3dmk2e1wljrwvl4u06ztavrb7l0d01g2p69qtz5gpd7lckw3s13vyhe8pek0f1609mrtn7dcwrn9wugb9c69jhkpw21ndjb1olsli9ypq4q5jk2sndw1y51nj8sxnzw5fdwomx3p82ioch6wbwco78qwt4l23whf4b4ir3b9x6e62joc50bcaz002jvbxokmju5mtgiediqp8h4qubrsyaxkuifgqx9xzfloft1',
-                email: '2x5sriz7emhp3ec9c90xn0uvbmraimqa18dlocb3zbj73idcfguaxpatq2ypgfgtec71q1djhsrw0ahwxsekwxrhrxhb7my0eccz3mk44imort1j6iy291v0',
-                mobile: 'owrc7d7wfmtusdk8tgthv4hg8ydg4h3etbzys21b506dd8bp2ugf78o5tyo3',
-                area: 'p3hlqlc0eyivoimnuh1cqdhqot9tv50gq7ut4jx3efays6dxr9klgnzwa646v1fm18gc7a0maxn7tvbl85lymbfokbqazyfelvd3hqc9hkj2cxh2wyh1o8jl68y1rc9d7ak65vsa0vh4d4w0qy31y18s2xj11jbjo0kll849bhg9lxmt6a73l3y218i52afyy0hjjqoth512mxnf1kkmkw5mzopico6recnpvrn5gvlqw1vsk4r90k5qj6a8wxf',
-                hasConsentEmail: false,
+                tenantCode: 't98cxf3itenvdy6g4xu8rpqackc955o54wqbls1alv19nznscm',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '2eljjimwe5kpj64rn3hb',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'fb8skb1rbm6ltp9h2n2pi29w3lfcv3v6tvlogcszb7ohmtdf8zasirmger4yl72zq8rj2l28tv5fipoa133nz66tnpectv3oiawesxt6q7rmsyyi0r2k7qckcl0w7ep0w82wvr0ld210ub91yr84ujt2zqykv2cfpotsp28ctbcf6ftbi5f65dp84z8z2imckhyy1mkvkgkvbax2vhjz92sehypeh9j7oag7lfizoaysp6ixlgpvn7eo2jflh1a',
+                name: 'zc0f2u8s2wk6gzy4map1ekojtgqjyqik84bs74qr0ota613s21ypq4ko1q5oxdfepce4ss3fungkxrnkqmaut6y28lheqwzi8qh0eid21az3hxiiuiw23uarllfe07oz8gm9lc4mrlyvt47oufpcor1jjt7fv2stkfthldekkjw834ts2evyvyawlz0jw9eg6llb8tx1xqhvhn5se5ykftsl4crbqo5sb65v4fjf8josoya687p3gob0xftozo3',
+                surname: 'mzehxmr70enp876v45kxypi9scrvifkt5sofqvc34v5x2d165afbda3v79sdsco2svqq8yoovqacjtkly8ymtsiiu6n1ahu06yrptzutsf2w6uv7cl2ncw7sg40vp0m6gkpymaimjqds837qgeooj0aftn1ria9ohbyzcmcjztf7ly0t18mthnejexo4hls1g6cqgu29g8804z0w0jafr1wphd2w2lqyi5k2v7clalyc2otiidbipul8o911fhp',
+                email: 'kwzab8iszuy75st18vkzn6nfogfrvuwg4d06vshvz2pxixxnbn8r0li750i6luu9d623kcxc8bj4gi1w8pv45lh5ktv7yfm1fxytw2dwjll8vn9bvrucwv9p',
+                mobile: 'rzcw3q1wqdhq5urswkvt858m37unkgavsvdfutqtcw3te7n69ald2jociy1n',
+                area: 'rfsrqm28nh4lktojag2uy7ipmj5ssz3y67v6h7rbu3zunulzs9wevzpom1ch3i59kflv7qpsqewo0904xqfvh9fvjb8xebamdb7o73cgyw02kgm42pjhebhqhbsky8qlgxsdjewenmaacmrzgvupju11ctvbkonxe1txdu3d9wuns6u7ijgkpl6kz2tkjj6ob293jipavzpkj5bnjp4m376r6nuzw06o7ay4e3d3ad24tr3mpefjx6zlmymyj0g',
+                hasConsentEmail: true,
                 hasConsentMobile: true,
                 isActive: true,
             })
@@ -148,24 +151,81 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
                 
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'sycrlhmwg4gttg86426t',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'kh2pu4qdcu6jahns0fuk4qy73ba56lrrwcoca34z3u5lh5ca8f9p1jh7yo0zt8vturzuuibovlwnfrtog0gcw1dda4s4nr16nmf8959q7ymaauyqg25z9aq7ghfdje9ar876yv2ey9fkwn750ivvhmbxlwq771ua8rda95osbyn9ox14ciuzvdu9q65aqsaon7wreyk7dbpgjqlinjx9nlrlklzts6gmh79e6gims3s3sj96ruk8n2ct3sg9p1q',
-                name: 'veg0thzj1uzvcpgzwgm9oye7o98y9iwv5doy5m3j6lfmndv8d1byuc9s9rbe6fue1fw2134dd4wlzmgjccdtz5e7qv4uof5qsau5ay620ub5marm61izb962nywgeipn3i6n4fu3mn37yuqpf6als3byfslmlmdquzs5tyj63p00b61d0p3qpbz4ow7hvsduj1rgvbjbfghwa962t15m309m3h7896kh17a0gm1o7bwflkz5qmhezi808j4vv2n',
-                surname: 'duv6bojjemh2glcbt0coaqn5y2pfoapa4jacla0pnmk7qyrkt8f2kgyay9ll197ugke6mpvqsgisj3l7m41k0ks2mzdo59kawb6llo4n1bya558ihdob979lq67qwdlwjwpgkc09er6qc3nyd8iel9islqkku2digxld1tnp7zofsc76dk0kwbm2vd76ls37lia8xz6rjj4gpuls813ih93xtmqxzq28v6cucn2cfzth6pqd42478z1fz2bhpb5',
-                email: 'i9utw0x50qwo8qj7ic9j0ekkme1suvqitupkoccmaq7l4mwzn3srjvutn3d2yb17iecays05kjadft19k1j2re3v57r5lrad0kvvuaw87vuo3az7n1eujbst',
-                mobile: '2omuoclxkba5cnxcamdoj6p5p7fcscd6z9l9mi86r7e4wos04ia2681lefmm',
-                area: 'o4nwlir172wpan6qvcxmjz8n28b90a69vk2892nxfgkbiizsldvnwnyglptm6bt4v90w987svzr020mqt2rojch2rwirwb5760od12vhwbe9vibku1l8087i4au184xqnch8xyvi29j92h48ev1lprrg1o51gfy14oz4vomuulss5z6khynbfgeykzaykg0ygmvlm2nrqwdisl6fupqyxbf5zk0jzvyzsdne2dhapz8pqnq80ml8cvzb9z8eaz6',
-                hasConsentEmail: true,
+                tenantCode: '53k0u7num64d05nwjfyjctu3skb50q7nmpabsw3lllhhw62hzb',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '8acm7w29bisbxirczge6',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'z68a0jqzo6x9crt6t80yeir7wj59pj1c5t62ow7au7vdkrq1elwe1j1gt15takb2eb07vc3kaw1cliywalbhn6q1pzjyrqd73tbb8d4t38o205vt483pu4ipeb094f9p88vut9zl4567vmv5t3u3m5bdy9huumsky1l9m6y4kkcgolg8nxa00r6gy0wlqpzgvgjysvrvw2igbbb31b7zbco5teajsdpf2bk8jhruylc9bj5nl74gkhi90zcan9k',
+                name: '79r46le4coerfx8e9lwic71luho8usjp3uiqzxemz71kn8323bwpqpgwddaza9imh67ky6vcne43x4976oltfox94k2rde2d534ogtqkhjtyy371rac7aozjryqw6kk7xxb1m89qdbctnocig5762caysmce59x7v6zwysc1os2a6wrlcbpd4xbmuabkfrynieyxh8w0m5q4m3bjjilk8hk8oytfr7n11c2wyzum5mjb1yd4712js97j9l9umfn',
+                surname: 'dkj4c7z47dyufm0r1lxjc7427xxjgke4xxdnmdynvlitydcxv48kbciylcdrn3ugsvbxgaig3mgehnjb76lx021bh1az2lmanj0i5l6lvoo5w9gbqbzrtxu553gh8638x5cv3nxv8km1ckwk2ck9ouhe032psqebn5lbl52j2ogpytk24wq3qqd5bhw13nnr8k4b4i49o56zi5mhgq91u4ennbqk1317x71cey76s2urpctgpcmq7qpx2zc5zrt',
+                email: 'u3l7p6a5kbda30ut9gcytsvoxjdf26ev31dihq129vyp9fnsdkzoapkr582o7fyi4vseouseyyg1v064fjb5fpd8bg6w2oh88p4lnt3dvmho4rcte1menfbn',
+                mobile: 'l72inhf10ptxmzxho5j7brnbhubna3a5frq4ik1lkbxh4jxofmt01y4moicn',
+                area: 'ynzi5a82n7gp81943opvv5uf4mm30y1p9ccis91ybg4fdng2xxy6eig8d4amz31x1alvln59vyndczlqw79jtrae0tctmo2m3dbz49hb9ahbhd7euv6j4wnk2y1og3ikzmo7i61xp7qbcqraqpnp9rgkoxk7d7y60lpq7m5gdq4j7e9zdsxqehibesdoit4t7al7aozzuw31i1rvucdu2xo93tpn692sxgpfcjsdngk1irz0quly6jsip90ipu2',
+                hasConsentEmail: false,
+                hasConsentMobile: true,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactTenantId must be defined, can not be undefined');
+            });
+    });
+    
+    test(`/REST:POST bplus-it-sappi/contact - Got 400 Conflict, ContactTenantCode property can not to be null`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/contact')
+            .set('Accept', 'application/json')
+            .send({
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: null,
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '4dxhrcpi3muvcnpkltdh',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'xm0t3ldypqjzqx4lmktn35ypmzi7gucrx3sq14wf84ugteagg8tvs3ij06hva9xjftw2rjz3fkc1peck7siv0zj8goc698jr461oigf7hz4amz6tx8q79w90355k0unqrkcehc042js2a2b1v37s81zalbhg6ncb5hepza8x25fwewttkbmzy5hd4p6ttjm8h38kt6k5i1nx2xseobrk45o9tn4ra55w87e7yqdvkts0silkve86jjzn2xrgc9w',
+                name: '9gvz6jwuqxnko74ki6ftcbqpxq1wz6uvs94f0pmo2fdq1osylsks2wn871jukczi6d4h3uvp6sdpb5ia8lk2ewr8z0erncos5gvc43gvjz0xsx22ftdt7fv3955gr04vnf0ucx44s5icvsfxijux9jiko8wy327queyfgc77hr05fm404wzuzv5llbedpuofgo4o7hki0z83abc1zg0wvrc8c7hakbvjg9xzq9refnoeayrugl5dchs1y2400d6',
+                surname: 'sfi7avq4tm5usfhzjpnoheqgwe5m85tu61n31p32c7e88p6wuhi7pspfsty7kdhgqj5kj16gd0qo89ocksm4e2oxer3xp7far8iyodrhsqlt8twf99fozikl0p8alu8qdpl1pzb0fduuq6lysoperc8knv7aik1n1awgsbjxbpql05u2jc5v6ptsi5khabyhuj06bwit96bmg7ncy3yphm4idm0xhrlr6b20rq386kze7crho6kynd1h1oleylc',
+                email: '5s2lwzdehkbu8s3sbrg4a3zvqgkk50xzbqoyilgijcjuuxoznf8o8zu662u8c58w36tetvgk9t9tg6bk6nbvpi8yyg1nma0t7gb1aanlxuvm4597d2ege7sh',
+                mobile: 'a99uuoz0oefggs382c73hio7lauqfqq24d0jaxy55e73vd7glsahh37j3uup',
+                area: 'al8lrlrtkn5oydsvews99vmqh8bbkgsz5metryewp8sc91fdwfmynrhkb2v48dimpy1lkdk0xe01ocb12qs4y05hfantiaqasxl9bpqc2hy3ar1kziw369v4z5osnkyehbtotky4g4trcfkf6lzbic4ax10d6rrajjbqqzfx16524uwwh50quqivqcbwlmydidpfc5knpv5l05bgw51oz0pagq1run5n1maw8hicq7e7xs3ccoq0bg0sw6z9irw',
+                hasConsentEmail: false,
+                hasConsentMobile: true,
+                isActive: false,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactTenantCode must be defined, can not be null');
+            });
+    });
+
+    test(`/REST:POST bplus-it-sappi/contact - Got 400 Conflict, ContactTenantCode property can not to be undefined`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/contact')
+            .set('Accept', 'application/json')
+            .send({
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'udr805hugosw3sqyxz9y',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'bwodao1wfm9ddjk2fj5cbyjfcqzh5isifsb5fqd2yllujuphual917d80e163z3bhlg3awsb080xivk8cw74zkd39ot3q6abk2mjk5xekm9hfy9hyl5n80z1i7z5twfwaij1auiwpviorsamaf9xiww8nv714ac8dwjxu0q6tvywqdkyreosfu2a07mkgky5prq2ycmzza9qxp04ouikxcwcc6nfzn7hdw0rdqlkii5ki6de2bh0hhixx5f0w0s',
+                name: 'wblghuc4xj9nq01rpf3gda76r793gvkth2llwm9ggpqra9mp9kzbaelk2qz6q9tl8a22wxtzwb47x59b8fzangqh2uedwyfl6aqv7wcjaebayx4twuvufb6t028v7ycyy9at7j5806dt40fl99vrvgvhx9sx68q4r516692ofk8ttj4ul3tv5pz5bwvr1ar3yvmbnkd12io20mroaag7rx6hg0zske6f0v0q8469x66r9cqo84e12glc81w0a8x',
+                surname: 'xwz8px1b5ngamkt6bdytwa250ym01ct5uudo0hp4pe8h10ua1zl3nuq859felfja2z26eedwj6qs94et7mq5hl2lf894yomkmhmia7esji5i87wa5pc5idiibexcqtn0lbn10az601ap3tbpg0il684as2zeyyrqpfpt9esny0v6vxfuqpmpt7zv0ev9p85sywmy76xh9b56rv45l2jl52vv4n1cty4odh5iyqrvpbd23m0tttz7biu2ua4ydb9',
+                email: 'gh65x4go8jpgdrvc6uw7g2zb3duhiodbfrcqndp2fbesdsik2imr599m70va75v85fd0piwn5s7xhny1x4rw1pog44eghjzyvjexezjdgm0c0dpmye6s1zm6',
+                mobile: 'sbul6llzodwurl97b0zvbfra1y36opnqtu0wuuu81lif6tlp50ss7ahe1nyq',
+                area: 'xkziombhdoy0i5fs1q9jk26pd3dft7npes5gk3rlilca1rirclh2cbevvc5n8emi8askvr5iggdyk94el8uzxdwb5slmi2hv552dqbnro5rs8tehlz87mitmeyolhdmrjqa12sihtdtovstinh5aud7brv7kkvfozoiqlnw1xw760xn5n43vmzjteohglu9lewi3wgg31an53vhsxu0kj7gl86jn4jx0cfbeykfod47apy5yt03pcboedkffpbs',
+                hasConsentEmail: false,
                 hasConsentMobile: false,
                 isActive: true,
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for ContactTenantId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for ContactTenantCode must be defined, can not be undefined');
             });
     });
     
@@ -175,19 +235,20 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'l5azur2yzh3arisn79cxuo8hogl7w15r8hc2enp8q15673szcc',
                 systemId: null,
-                systemName: '04igahqmzhdh20456zxs',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: '3za7ui6vpl8zb8qyqkwn974s2qb86sy63hvb6qommkadxzxwt9pywugxa5kh34ih2jzfkldj5s23aofk99czx8hn4o10779uqlle6lfqmtkcfvvsvwyt3ve6aeey03u8sdc4pi7zq0hck4dl86fxnnx7c87l2s7bvw0m0uiyvu9rzebs17sdkser11csws9y0qe8co616gkarjkgdcmpqwnv4j8tdjxnrdz1oerr9tk4jwhuo7ls9p1h2wahrxy',
-                name: 'xirlm54m5ilnffbdzlku0p62lgy4hi4w4nyaowcbxx7poxqakwtbh8qduqdzjit3do6gv4b36yzjd1dnwrl83rcuemay7zqewikvnojm4sinxw3kt5cs026wtc9v7e1aqzi44xyf0rkv7vst1p5dffxy2lqjph1c99ke6msr6axzwmwridb5zwg4g3e3iev8j0znqzgqdzufdemy8h7ehzedlh6ac3p7csyoc72u6gnplj1bdy0s785yarh1zwf',
-                surname: 'b2hby90zk2dxjqyrayunwbip22hfwkpw3wm8aprqlo22xxlnyfh04d1a0j6itmcuaron4w4gr36ewste0gl8e7znfmlzenza9vvih9vqzdbdj2nig4loavi6xgf90aj7jhxuvxprblvo8m7bi2ixx2um11z6ts4ygk2l1yepyo5kxanvniv2br2r039gzv5f1y7zsnu238aye2qe2hc0tcua622rwi0dwjxb4uf4o82yjl3i0qzjob9i4hu8l6x',
-                email: 'ktr44wrrexzmzazfli3gxvrwjp4mzhcupxylo2i2rrqgiwr599ux8r7iy1ry817zqy9zat4wfdxusgmy0clhwcfoxq3231fhfntmme9lx4pgy6o3tpa2ffg1',
-                mobile: 'wdzoo7dexaa1qnl9ydkob08radni76q8g4m9lt6ssdmnao58untu1k1y2qt8',
-                area: '5pz5n47x06j1gey90tm4mb3jgows23lrdrgyozq9l7w754wq1wp1ozl2cufn3nmycztymhcncxxjfy88lf1uwo9x9fzyubhf6b5zbswc9rs7tmpxf9vmvi3tjom48ogottakkkoqhw041ylyqtbqd6sd9r31q4cn7zsqk60cjk8lu6632ax21rpe045tq2vw4xqfzm5xa9rr4fedtfcju9ry0y22p86geb56oaob9v01hj2kn0etjo65rw3q75t',
+                systemName: 'lhyojsithdf0zu8bfct3',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'pmbyfnlqskv2rhn6k8toe4utr9sfxxtp8n6gio6ty3j2se8vlw8vl5z1cae7qiauxbeuysz350cy5qvh325cwvs0te4x5ko3x70v35x7o60c1yr2u5g6wrjs7namahxky85roiyincdm95yjnm863hzlhrvf9kzf7d2oa4oitqomr0y9cxbyisw6ugck4gsiwydso1l3zj5oqutstux0skwnz5zoigkfx1vvkszx9jlofrjpp5p14biptmtywcm',
+                name: '19zj29o63dzriwj85abmwzsp67ixl0kd8n0h860ig5vyng45qvxe3zdbqv0rpxehtzty0ayuhb4ap1rnho9slldr2x10hixuh9dpwn9aeuubfadow947juozy0lngg020y8ij73ecwjbuvpl1q7zr05ptta45ttwyxw5nm7qk4h7xn02bfca1cc32bjpnpwpv18yxj629aianhcuph5m7xt21rlg6v2xaw1zn0xzn2n3caleslce27w2w54hm3v',
+                surname: '0d5dzb6mvs3m8rkvxoxxhv4z8l0sbh7wqlznvjf940ya3lomolpe1mrn9b3ybbyr4x4t6dnavtrc4qcx7uli0m9mvi1oregqb0lsq84eb1k852eb1fqfml662pixtc34upzegsralf77eigmx8mgwj7myto3veknecc2f283p33bletwsfw3zskxn73fi1bw87n41z6bovfdcxr0qj6apfp5d38uspahjsxvdg82cfiym0hatm5z5izpa63llqx',
+                email: '20cojf4gu31mfuy04bnjbtmcxu01m4g8su217vypwlu5xyv6u8jnj45fcj2tv9jvvg0k3tjujpmnibp2sad7hcpeng55yq281e2tzvumrfg8ql818fua6vbd',
+                mobile: 'mj1v02jn0orwoc7myfx0pvcjp9gt18aa792996sfmyk1w5hg43qoxxqnozsv',
+                area: 't4xzum7bjm6odk7i69dddlnvyg9paj34khtvc6ksljs8yy98i5wcjsf3a12w70gr16wks8xf0hceoer4yiv91muz3c2xpbogczijy5qvqyk177iiqlc19asifp7zejk2v7f1g1kx6w71d9kz9999lz2uvea55nyulo5rx6c7g0l2u1c7quyww50ac740qq2fykzqvhnoyr7prs0o26my89jvvuzihmguufv0o5hq04bxo5yf3coln6odkm9wj62',
                 hasConsentEmail: false,
-                hasConsentMobile: false,
+                hasConsentMobile: true,
                 isActive: true,
             })
             .expect(400)
@@ -202,20 +263,21 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'gf5qqmapox0od1yoc88tig2uxsmbcs41t7tq27us7utx89bl4j',
                 
-                systemName: 'rjc9937gfngoenxfp8x2',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: '9jz2rz1g44la8dj9jbik15cy8294neuompsfi0bvjb7wmu156plsy2wdac8p1sj7eskuwa7cf5pdinw06d35k32l3uhrtac2kzzk9rc6a3glbo4wic97gmykbwu19kzmegfx2a5l5sny11ql8q32dc82zcmohqlafa9uvaobkyjapnbb6tj47m0fwj481m4jpgguv61ko56uebkv1044o13xs2lpxgq5cycub7l53e2755serf0f2wgzk5rl7ly',
-                name: 'wqlqkqey0m6k7bqb61rcmdftl8shh8x46ju1cm3tnxegeclc41wcv0v2pnapas2lqsejezhqgtmopg5g2z3cwoplafshmqsdymnikzlt67uc8ksrctl07atj8rizkoqogb2b59rwhzjsci078w11i4yd2ukixbsld39stgrp28cbj5s943l2ojt82h066txcq3kzy7hfjjrmqo39tuiuyovn93eq19cl5cw7n056mogkx706k31415lbg66plw8',
-                surname: 'opxadvwawg3mfvrbmv2pzj7s0vet5rkkv2q9g2p68ewpwq55lqloj364ky3p3sgguh0813ro9splvqqeduuqj0ayu8p1j256phbwplcamwy8x0ivi4jkb6iuld9xm9i38rdf4cr33d9jkw13xshazfajjlwberz6epb1p96tt5yuzevnwfnp0kgoh2ccjtd4l8niajtaan4rwr4r6yiykyoxcuit2fvuokhagyeegezh6q2xba1hitejg2qqgha',
-                email: 'dplp25tx9fitcii9s99sq0nnczt269tlplhbbho5mrrxi2cf3dzqbg3fl6bi8c67qchkhyglq2lye11s5wxwyw512on3275n0p5s0kw147q8b0d6icj2kjtg',
-                mobile: '1oxvadyjxlng1e29cut35khzwtxmme7ukx0lzsmtz21oqd0ewypbulnr257j',
-                area: 'gke7otvz140fm0jpmjfnxc1cj8oungpg8y1fbrvg1sgr3sarde81em16vmdrhaaz41hya38ywv6ltihtjpl8xecbwu0o9gov8he08jkuac0904geypvjwxwcqgkjf0u3h7bvurin1wodtimmt1pkpilgd62sbcxsd3pq46n6tstqdgenhy3fb9j7fszq88qpyxud9drso1cggxql9gzjkz5fkbhkvilfny04fw92gbw5191d9cx04ty15nsip3i',
-                hasConsentEmail: false,
-                hasConsentMobile: true,
-                isActive: true,
+                systemName: 'aju2ob5hbudnxu2gxbi7',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'qpgdq77k55qf0qgajlzqnn7ui3mum07cukwpaeitlqeibgn80txqchdfs6hfp0q44tlgfarkj3zwxuzzm4kxboh5fmgqtsrelxkv22vketg9qalx84upfm4vbpv35gl574ve9knxpa2i1rhamhr9imnjne0tked2m7tmlodo8ngz02magpnas1mmkf891nel6816jzioggrzrvnvw8poe2hncwkr4wpfga98xox2qxq99vup60oemmggo4l583x',
+                name: 'saunj0hj7anfihfqpk2dfvz9kit19v1vm2y4p3jj69wez818omnxv6sgkdel6ojproptp2ho0uo2mxz5oqsvr1w0x5p5zymesvuhjx30ygalvzpggj99k9qpi0o2eotcvgqit0lwyej0h67kfnuq1d79edls2fa0uxvd5r94h4e3k5y1ynv37b4ugglylb2q3tlcleqospm8lziwkdl1n1yx3p0p7ym4mfset74gv1hu4lmdht61oidk3z033jg',
+                surname: '0rdtzitq4xe7vwei7s8tavl953h1s4ycjaa7tjj5n8zoluv4ky1pwzv33dr0hcgmgmk786lwqdtis46y06f5ummyrew2fpki2tn7i2w3j7jty7r7hfllsqe9fw6kn8oc5hm10i0wb683hedc0ahbkldgu67o0if8k4pjgnqnaelr5wx0kfv7tlsp59x2zqikchlmpi9v021dq0iamrxrv9n7svrtf95a2ftvcghh4c4kw0lmeglemlube6of6mn',
+                email: '8hl7lgffam9if2yleb8cmcibo7nmq987rwwydslsi2jaui8w3mp7g5a9w5x6qm19lk8o5hdjmcrg0doakisovgh0dt4hy9vzun223gta4jbjvzs2c4cmcyxz',
+                mobile: 'b45yxbvuvp9b4ehf6byedomhjh4m35hahpgoet5zyqrl3z8xhl8653kysvkm',
+                area: 'ujc4kq4ib1052kcniabp0b15x2qyk7m2izh4zrefjxmkyqqkc4lm9pdpfxn9lyc8zuga212wfzf0q39x78ingcubclz4o81l5jz5rwcfnxc5633ygrc8iowsur54og6j9cqd1yx3ihgk7lp2v50znxwypdkvrqosq9y5kakqnu9ay3710j5pf4izqr3hhoby6zjkfq9nqobn8ei2azvpd8bd8gueuf1yjas7x1mfz6bviy8h5lwmaa2l5biufah',
+                hasConsentEmail: true,
+                hasConsentMobile: false,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -229,18 +291,19 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'xxxteho7kbj1rkrz0sagtel1h26bfptran54ndg3qr4m0h2u1y',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
                 systemName: null,
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'br7cwuha0ajkk2nny5wk2qpbfzyk1db24ijmnbttojallc9de00g15lscnp0wnegy1ivtlnli8jl0kpdne5j5sttrfd7ecn0c9q5egjik2f9ghedbh1182mhh1j92b9wmwuqdgqhh5mejkwa9uw37m5qkku64f6307lbj8o63d8nfp0m07lhthid16c7jnp1dk3rkaalfzek13cogegklbvjut9mwvv9hjn4yoxc9f5heto1fwf3jiitiz3997g',
-                name: 'ridyognmqlkm87auydjnw7nseo1nbz6qcbb8k78wqfmz77o5hsjggvqrt8zz207hqmqnyal8moqo5focmdyecgjtt3iy93agfdo8csuafssk565nmwigelor3j5uwz44j4nc7qxzncpp1evpq4lf8ipnmketaslqn7nmbrvxkpg0zlf2tgs3f7kkysb1q0tegfpluzgux6sfi9dm7lzb29i4bx7yb1674zhi09qlvtqua08fo8jkn8sne406whi',
-                surname: '8nrrqhg5e2ukbtib04ajtu0qpwrj8smswbs6cztel8ds85z2ycpjx1nfrx9dcye7fxknojfp3dlj38y2lole8iupdml9kesycbi30p7ncr90mcw0hqti78cloiaeipjmltmzg2ytqmdaqh12zoogf1ofp4i2702c9d8bhvj0oclroxoyjmn1a1z6c2rwtlg9b7mpeo1fbgi7p6bui1ku7rsphvat3xyjpi2vohco1ru3lwczo6ihj57h716xtyg',
-                email: 'xmic7bqoa5nwxibyom98gnufckczj7q4gjgm3yah3699o7ozv7wld8d5es0usl0k779gy0wgkt86zcxw83enmuqbvafmb5fks0fqwgh1z2h1p91otkcromom',
-                mobile: 'qr45n4b9xldfkt4b3ctlwrr680p29q4arod3m4l1rcwclnvk60h67mv3irnt',
-                area: 'iyl82ks6u9l310ob51g01dhwdpt65ibrv1dxe7eml4bvyfqvlp87l6guuntz2i32dmj53z830mjesavh9gjodpe1lqv04vi0bf8mg4u7w13xa98agzxc26tkmsgoch3kyb9andqi9cksu3sk321sfbcnhw53h9agc8fhqc6wazgj5punfjdd7eexauha278gs8l53is0xw2d1o15du03p21x4zxcnmfrt7bk1yepgn0kg1x2i38q0c2a00tcfvp',
-                hasConsentEmail: false,
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: '657b6jxs4y14wpit2mofg62xtgl1uadqw95e9qpl7ybzrncg3yn1mvkyx4xg60ffpz9ogf71vbx1tu63ebf6lmf8x13xjhit4rtyayh4weogqds1dqkbe9hjs8vykql1kphui9y4ap2xi50v8dituj8d2v0i0ksde4bzng9bog9p6l00l31vijojoijz5irdm0grczvz0gv0zk8el3t78h92yssbiogw2vui8uhl25bpuu79h4u0r4xt7cuu25u',
+                name: 'z9sx5aesxpt2ds6codmbhbxtgs6s8v9dct729vzibwqytv0n9r59o9pfcyi1t6ghur25tug629bk70goo0r4vnwu1k0q8z57c9oj3xpqcq0asmkchxfud02tkoakavr3lvat1pcsi8xd63boy2i9tirtodrdwz1o7txfs636wb2hb7q2p50n88m6nown42ewz1cfdynjon0j8hd6rboykt5qrl3nay2e3coma0xm68rj9huzhp1wo4ewxhau794',
+                surname: 'xjo2hghpj8nzxxmp6xxxy5ue0b8rpz9qa01453ztgih5yvldb9siamkzlqwx4gf2hx0x0qge8kwdc43qqfszitf5q2ibvlsn1jqicdq4gdj97xtrb88t5jxelw3meyoti920b5lmdr7onvqnpcyzj87xr0vgq7mcaahkwxd5j2qral7gqphmielmi42lrsysw8y9bujfqpahfx1bd0ehv14w7nvge109en7hi1r7ofwg2ov9pjuhjybq8i0f1sb',
+                email: 'dtqx812ewc9bjjanf2dijavuy5zjtodqtp5fn551y2p00cojdvaujt00wncj89ebs1obb89refli9un2mi02a0ycsjqbg1gm9hrfs4a28mxe9u1z56p7sdk6',
+                mobile: 'd1bmjhnz1u3afblnhzwhloltg4hfes3dlsg4jhf624pua6y4taow1kk3tchz',
+                area: 'ecd737praahy8eczjnx9vm6ggfzlw236l8nbiqze8o4ju4ph17mt9fhm5kuynivmiudkhudafxek8wihcebbsbyt4oydkhl8mnu7dzc4vq1qgwibimzfyvaiqgm5wodc07m2gipwrrbq088x7xwx4yzr3pwc6z8k1pzn3uacjkvh32o17ty2ts428m2t7ai1e3m575qujgg23r8xbzua0xmzguufr6j0oi4481ug7roca99a87i199awms51wjx',
+                hasConsentEmail: true,
                 hasConsentMobile: true,
                 isActive: true,
             })
@@ -256,19 +319,20 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'h1jkksfkcul75t2ahbthok68y75aht619mpe1fubk5rzo9rzdh',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
                 
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'mdhzij08t0u24oi85dvwd51my8ghf5te4k9d36cdkt4od1l4pt92y3k8hz32xtx2bwi3b7sqij8spj7fnl4a45lxcu7qfedj5wfxkmqjyosb55cso1jsohts86cfhsw78f0epigqiiccjx3ka0o7vc9bhpc9br9wy9rwnstnfkj6j87qmdzu1nsygsvofkqnqxy5v4yneu7tpndop3mtcom8txo3eq4faoicflmtotiy1p2sq1o1d3rk8y5f8xx',
-                name: 'q8z48pt14f05hy8722zgu96ipc8uw95du8bctzsrukkd16ehyuy6boiehy8movvjy98bow3166ej1ioe7m8ffxg6c1rqfypi5badaruxbp1b1ut6b5x339rp4bnsj1ckq3pol1yjr6w96eu1a9o8jnaf0wfnq7vm8ql2nbb0p1r3h3pb2k5z3p29nwy9i658cvom3jtw4pb7a08bm9qlo56exeew3v0j2eci4sqz8flp9lks89zs51p682lb0ez',
-                surname: 'zuild9y3hhair2433n4ftmf5tnlqduuljkiao6ne3rmefisohsatbs8p09l2d4fgkjdn92myo6uqnz4x95mltceg0bzo952w2w1fn31fsx3vk1ujhvg7y74dd2o0uh6cep0mw54glie29awram2imyapcqdmnn0ydlcuq6lbwj9m8ewwzghwgqq3obl11vzhgrz9583h25bwzjry4rs2hdyyvp372fbysbu1t0sw3rdif7vv8g7unh7usbzsp31',
-                email: 'hqvqmijqyj067ldxr2ovy7606tg1z6yfaidjpj7gei0e4lvpzra744f7kja30gb93jkmoty240uj72o6gi31e1i366nfvne2vjdgkj6w7hzpmd95abwxb5ac',
-                mobile: 'qqsjhdrkmne7pwbmwugoa63weoshk8yixqab77xsf291rph70bqzu00893cd',
-                area: 'b4py7z8gwxjebu9xmhee0fkeech0ej4xydalnv193l6nijnfolzkowjgzr69pqxzul6zbh5ajxi655q92s6z6m448u5q8anec8o2rjwff6jgy0onbu82q5n0gjowebwosl7lc4upuof82yq0vh2tfnee09zpbdfhpfzxo0uhphh0wudednzgc89jna1iyktmzvimz1vuj4cmrtdg62n4b3jluvxxdm5fcdtpsz4ay5zxx9jgmstzc0hbjbepsyv',
-                hasConsentEmail: true,
-                hasConsentMobile: true,
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'fpfeh6wbzqsma1bfqzqjei9tth7dtuntpudmlait1tr9s64zev54q0dvktfeuapmbf9i39oq7mgrw3ry085fpkbmow9mbh0vbj4hk14urr9ikqrbd6sob23kw4bdqlhtzraq4aivmtudi1oaqhqft3gnwq37510l8fpg9qxjec2qud2q7p03iaizem22n85mybqeqfgmvew79mn2gpa4tbwvjqcpqq8imt1mno8waufuzpehv2wsu98bq4t0uud',
+                name: 'qynrm0jn3w93s5qkwsl0ksdvibra4435dfku1hbo6i3ad845y819x6j1uq291ne7a2y44u15baxq1shly8z7egwm5cmrsbkzod9ict0n28aopz3i8xmn60hvza8iij5ijzsmyyebiwkpq94fahcr3e1r6bdpb0kllxdpf2rb0ytz8ikk46tdj93xfqgkbc1rmxl0irozb7drkloc537hldj5gy4jrek92aa7inyq78m42veui47lc22djn0nf18',
+                surname: 'hri3f2p40b6m3mse4xs6z8k08lptd5gzae31v7u1303w92vn7dewekp4eymi5zjvd5nmllci9wcwtf8dy0l8jq665g910aqa9u691ud8npw7up1eppimu9gd3omm15tvfa133549sddp2pj3qc36ygmpexc9mg4vlrvycpark13r00rym54n225i3b1jpbyi0nohavg7ae0zz08oe943hsah78xzbbtajsh1858fnble56w0qp45tdszshd8qby',
+                email: 'dnvp4ze8dmaz7h1dqkf2kbqifcsshfkqn8py8sbwd6ovw1e1wmhjlv0g491ziyn3z1ce6so6jr4la4qstkmedplbc3meyzjwqqzqv2b31lqoo9sd4svmfz5s',
+                mobile: 'k3ggt790dik8nam0c7omz3f55wisecu63fb8ud289z57ybyovuulshx8x53w',
+                area: 'in5ws1sxys5mnngk6yir9swmkz84gw0cpoapzlgrcw2sdu1gschzfeuuwngtaq8wym2edsyapbulu3xfswm5v2td068n2riaixrdv56om6akalgfislmugpcrcto1cypdxguxshc72zw16oauphdfi1bnnibvwss8ptf8k4vcn8a5p3o8n5qjo8cu9mu856v3045vhu96c62ke64dtl16m5yi3s8rw9she5r02atidmvwvekwrk7oi6uh8rer6p',
+                hasConsentEmail: false,
+                hasConsentMobile: false,
                 isActive: false,
             })
             .expect(400)
@@ -283,19 +347,20 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'q5lsu6bepnuzb5o4fcvw',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'ely2gu0g531oepqlhubd9d1qgbjmumizi1ppm8e3hcl4lt0j1n4q4eec3sby9jrb2l69n119e7rh3dh5tkdxck2zaz34q7udyzc4imjqayefxmptkyp5oytt7valyp2x7azpw1qsidj44z0oglnsd0iri9h9ropecclvd9twsu5pt2tl0chct5bzuk2r9cweeecmr51ppetro7fklyqhq2o29ggmz5ilcl1go9doxafeeqomblexkg9b2w8mgdk',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: '2qzehnouac40j7t6bm1jifirxjl7nf04ddepby8g8qzrs5wdrc',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '1zkwybk3i77x5nm81xuu',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: '7nejsanygmk3440cbtmdi0xpkquv7oot4whaeqkoks8jbwsa4u4pcmppijvif9xewprsxysamu0t937kzz4k5exbuc5d8ddh2lfjhrjsuwbqn36t9evp71lyhmlyimi7hac76geqd5liwxmmegv0p6zgh2z7y40trop9ch8txfcetdon0wny7371vdf6qtg6fw79nfe9insh75wxocinqrll3rlx8z9j8bx3d1jq60zsafb7xteg04trme5qi6p',
                 name: null,
-                surname: '56xy8s6cv1xxuyk94tqk308ig6u32ikxremj9wmswq7qgm1ptgqkwr3l40rirwpl30u3v0r0pwgs6e8kizpa5onnggj96s7eoyhvqzs3rnnk4uv5ibr9tp9tf7cjscn0de8a7i5q5vua72pnhnxpouu3t4euclvitgl0j06c1vqi0daz9ycc0p9ktiz7f9t05qkjqpohjidequu6p8q8wtrpdhlhpq3crvauvpl93d6jlzf09uz59pwlfy7ff8s',
-                email: 't4kftsagyatr5hgzklvu8qi8mug6yvsnb1w25vrk2wwwime5c2vmn9u389h9iph3qiggwu707zlpy2j13lh2r3jrhed32kyu3l6vheuxy3s494j25ylo5kmk',
-                mobile: 'i46u5zeb8u6ffvbduoyfn08ty7qwiam7dvsya7muqe6ybeax1ttt0ggcx8b6',
-                area: '11609ewpbjsfdr5nn13skurvgebmimf28tb3qa87mnzkyjl564pml1zcaav2k2479w5jpfuop9kqvwd93gswmajjwo0ym3t4z6x0mnkb1oiwkbyzt3ceg70cc3ct4syg6czrg62jpdveqgyolgahletvawkka9iymrp8itasdtq967mo8o12rks3dttbrvtepp1nqqvcmmw9fpk1mvp4pgq43n9idxzwuvkage5ttst4xb4mjb3ptrtbruect2i',
-                hasConsentEmail: false,
-                hasConsentMobile: false,
+                surname: '1s2ks26x9j1mf9wg69uv5q8vfuwcwr81706xqyu2y2hs9z0ao0m6fqkfopyzv0b21ultorn77vjg47fkj6sp7126u2o2f0f9bjepronago4n7965bwb0wc9vcwfhq8z4exgig1bgd0vjw0whixryw2q2wvfo47tvkuas6a9ctfxq7oqpkf9dxhs2ymismth9hk8qvfwe944x0ys7xf7mqfp3q25vu898li9kfm7ex5krzxba2a5mdjnxma0j24c',
+                email: 'v03ob0kzf7hi19gsh5uqhh8k3i62urnuqbmsmt9wss5v7obdp7zy3xemoq45s7ijmnoz6ozk8iqsmsgk1gpe5i0whw3ph6ya54m92yogj3lx223tvs8bnltk',
+                mobile: 'fj76il1nrv9u3oquqc8zjz8k41zbrdz0ulaw20blq7nge7ywk796lnf8qi22',
+                area: 'oph2520je613pbp7gc90kqse3yp12jok8wbi53o30af4bp7yvet6c2bqr8vnzjwjo7np779dq40d02io2idyg04x0k0mzfkm0k363i825x3878op61rpfs2djae0lvifssy5auyu03pbir7dbbohzyjk13ffsxy0pluhbqnwkpqttj6wyzwfezooyjohfu0jb02zjs3r2a5ei37pplq7z9ipxu51utrj79le1btp2iuqhuosfvpkgmsb8vywrgd',
+                hasConsentEmail: true,
+                hasConsentMobile: true,
                 isActive: true,
             })
             .expect(400)
@@ -310,17 +375,18 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'xf8q2yrlcoxn5rghz7tj',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'g6rm84t13j9gon2d53wmukxivqdd1mx1l8dl8kx8jtpe2z5nkxlyx3e80oapzd268j460z1nocuvomd1mg73f404qcusooj9ggghpghuv75qnsskqai5pux58vcgdrcxwl1otzyp76fpqu74hqeif51cqyb4gyntxors9l6g6kvzb7av5zi67krgnnxfn857qglix6l8yecb0x56quh8kk9vg4r4xotpwwn76aclfowwq7oeh5yu1xajay0xq8r',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'fdq7y5y8w7aprz0qi2ffb1alzytonsj9rzewob7ez78zqew3km',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'kx18suk9suz71hn7t3am',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: '4dc1h0fxqh0p43nsw3qdqv6i9o1n33x0rqyy6ifnx79c3id3vxszz0ama7yk2zd3n2pymyazki9ds2rcha8g52w16kkz1vtjthosvwm0xkgdc4y1vblzof959ooct506avfwe0wbpr4z8o3qnnafwv162wgvei7z32d253wzcxxmuauupte88jlgkumniiiewgdv4hpfl94p6hmk06fkq1jr3yhe5ncbhve2oclpt8tv7019o0zop2tvwht83lt',
                 
-                surname: '1mkekwz3omu5qq8up3e7sym11t64tacdogax31twykd74uz8n3rebwmgpewfo6023lafsdccqv1rb39dxavjtuj120mq8ny9z5exkcogmfuokywymw0b15knq4ppgt6d5isuw9qjrgoq63efyqxywmmcow2wtosde3nti8e2tjm1p838lb2k41gb5yrei96zby9x71ugl02a1mfc7cbge6wes5jiq80tzxwt55qz8hiw3wnoafi7nz6bdha2qgs',
-                email: 'f13f58qra9fl8r6ui8dkm7o6p8tgo27dqbzccbzjl1w5wic8vrlfymboypfb2uhm4ah5lstiy12craxksdjuybxrl42zfhu37meuhajtn97eziyez9wgqsbg',
-                mobile: '4jaqj0nvsepp1zwfl1t1z7dmchutdpsdmdh2155lree44edodjzysabl1qq3',
-                area: 'wvswyv5w4bs1fzs1ofqrp9bboj13ly0u6kt1anhzjurkslhen91q8da1os1gpxw73gxgqbtnvtj8hh8y0k22038jrs9dpauxhafao9heommi4qco0xexgi67sndih3lppb6qqe5z71n00nm4bcyms892md6gjb0cfwc26d99y56gmklksxth6fyhipzr1c07qbcav9ko6krq6c5cpqe5cqb9cj7g3dje77gsrbxs2dqbdsgipw6dycgbafhct9x',
+                surname: 'w3k3v5raisllsqvtawl9912mq8zo2vf02dupgu1aleemhpn94cyda5hqxr1wkc4t4vqjttpio0yexcgrxhjz3x1ehgm18d22t7psdg8o9y4bt3q286rzg3gui5u826d91107me0m2wnbo5gldbu1rveancryi0684povb6cdvhvw5kfxs4rw524dq8e560131vkap7l8cccn33uujy3iz103a10q3y8xrfacsnfn660u85bei82jn0nbuic809s',
+                email: 'jd0sxbvfqph9cd2o52f00tcg3dj3qgtynouas38y42xvegjv6sejscglasw3pyyj8jio7idf9dvpj3vhsavkava7665sgeyu8t73wwxjsoe1cljj11dqrqb5',
+                mobile: 'vpky3mjjq68suldyik8h3fazmcio9zozgcf5mvl5hwyc6lecyzlmg5orxydm',
+                area: 'cr8rk8yrctyrpnltpjctmh95661z6a5wbgk8tpdeueyiumtvxc3993vo7qbkt3uef879x31vlp65bqasd3dsrgy7kbuh7qw3hnsa5i6wtwg83o53j87ctixgb7gecdxk7rzh1yqv1xewaqgnhrhy63dm7rmmx3odf1aumq8yd0q0ooly99oh0prixpaye0f0afzsrfevogldbtzzv2flipa9xr4qk44t8k8vb6bd09n7y4fo9yvcgg8hi5sbh95',
                 hasConsentEmail: false,
                 hasConsentMobile: true,
                 isActive: false,
@@ -337,19 +403,20 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'ygnyk8nejlcqv7ty4n1c',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'ne7vklg8wqqhtttz87vgl6gi5dnnewd5iqp3hpb29oj5l811ngsk6vwy2r5vvorh8ih9cpn4w9w1cs7oj1nafyjuhb69zejy6202cnpjo7kkwraqi25l71nl89qmbcga06jh1ta9yj14qtnrzorq4uptgzdo7dl139w82r1g2dirlb264caojjsvlttp6daawkk2f6ekguzn86fqryn13gccx6kiw5x5s8itgk949iaxat98ecslmtwdmikgum5',
-                name: 'ee7r4w09by7ztcjkw1v1x5s7xx360alo40a9m4xe44hhkinic57907z1ognpo5st2z3pire2jrwy9px17plekiovozuhwspxpzrqis3vurzq2ne3xcrxspbabkmeq4m1kbjocbrcq9jmytqoxz7gmn6my1vc44txu51ed26mudv7dq9m5jwita848b4oudmtjco4x9ytcrii21ld6gxp6k1y8cmhh8me277r34n8bibddfi5punta5nwp0fvk0l',
-                surname: 'rgacqgg1nk6f933fthwg485hz9wu599ram6z3ls6thej0mqqyg1c4iysqx5amd0d5lpk9s0n87glu27einh0vjaxowx7qk2l666x0ygcnsxmccx3lx0d8e495jeq42yck0kbgs0mdjf2y3fdwreachw54zzt3eairhqtwki7lcuob0qp1v5psx237l2uc0uh0n626q3tqjb4v3xr524o4rdhh1iz6wulusgct1pd94wwaz7rms0x9ko9qedu2h0',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: '1ybqiv8pwkgpdpjdba3077no4mqc4mb13l0mv4qhra6203ma2f',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'xsrktjhloxlnclmvmfqa',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'n5xaqs0z8eehyty3s5qfh054vmpgggojqm4mj7kss8w87wo0s8imp7mgdvvv2i9u5ay7fv5j54ewbfogfsayi7c0e784lwy2bhnsoo79bqqhb1eos6mhe60fy4d7p3pkf3qqz3ot6ypfw4581udd1kvs0r3wqtsjbumolcw7cbkfgtvdrgpbiqaui7giidgc7dm8xki8npdq2546xhlrhvpok9j2yn6tb0habomz8z67fzbsxz7ev7cyzsyzrji',
+                name: 'q1avpb8kqvm2x81mjm53odtie436mtbud7iivfbccpoisw342dlq8m20egnsa9xgjyj69yg5lai0s0jcgtv5vbo90n16xv1ctvb36h9svhe90zgit46na0mua8id8dxyltx0432u387yn2ygqix2prqlviz9q07fn893xpwdpdgk9ehc84pnxi311pnhj3ljvvje3mip6ouxa8xlykkehzzg5fbg2kijuuhlkrt7zzauwddwjgqoace90w8qlwm',
+                surname: 'teg3nwyvvmleahnvd6q3a98de7eiihyndyghq623npseuzj15y4wizrylfxwcgbmmt2xp7bkqjftp613u8pqtsspmk329zu1mnm78layjzsk23x2yhakyut076qf5scjb5jxpmcs0vysor91k6led5ghjomrzkqp7n14ny7povay9p6x0n35z1ejiat1itmkfjgzv9uo61fjqng6jumgob89vxucyyfudn5exmfgji33m9up5ob416kki5dedru',
                 email: null,
-                mobile: 'djb32jze9im6pp85d9r94b85r4lc6m5zf93yxib08sj67xeqqbf3jfzxvmnd',
-                area: '0xz2cjzesy6vbhrwxinjlm55mwqdm4t3on2lo1nc07a2qfz16m0hka594lg6mfbi1japvm1526gk85tglb3lyxqw0fz86bovdq4xyfa13mo4g2w15pv5i17j9wiv2d69uaxcd9nxbv5qvqibex77xfyve6pgmp96887jez6zitabbcw2lc1ubt9c5426y95lvu1ynyyr2u7n8dbasmd689g9citkbnf738gjnoscx8uzxn2vouzati6eaclkms7',
+                mobile: 'zqsdo82q2eezlewm45kx8blq3zjkcm2s3g5u2mt1a2pgd1q9uqpcuxo7mxdu',
+                area: 'jf9z4u5bxgotgfogueuo742rpsfx5q4mekvqxx9qxmmwb3011s2bcgaipaoytmah37hbh0pk864s2ogglj4vbwovubsalmhrlk3es36e5w4etpzk6uebuu8jo9neuflcbstpvv71bl9r4ptjwdxgw4pnu2jwboqu1hzax89zycx2nmchxeq0sywur2rpo794ye77gpivhjej9ur3ryt7e2p9f9dpbj7j2yt4cqyrkftl9eumgbny1qppc0q1iow',
                 hasConsentEmail: false,
-                hasConsentMobile: false,
+                hasConsentMobile: true,
                 isActive: false,
             })
             .expect(400)
@@ -364,17 +431,18 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: '66plpwb2w1aufw0xpqqy',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: '7xmerkdcmqxiurwsb3c73hw0yaz5jnii9yrby0jbrge2i6ood0nw84eux078p467n60vqzxdhvvwb5s8lnzw67czj5o7qspwt4k0z1xipnje13jfh6lf7cpvsv5rjq6l5s1tzanxt0dsmwo1trz5adgb1a075wxr3ti8anblf6tn1naoynms9zr5yz08yp438rjxpm5bz8q3hc96luldru6wlqu4n2xtl585io4hs5uuee9c0rznndks16enihm',
-                name: '07l95zv4kuvc6s440ctigue47stnytur9bpjlo80jd0mq0nh4t8szf51oeanxw3tltvxype0iylsnju3l56q1t5fksao9l59u7tq6ekz8l16ci0g6ss03yf129lhn7vusc6ivaeaqef0j0lzgwendx7ck4ztcd7f3u4x9kv2eenfcdh9yfyxxec145od49c7d8gzj58un9k1a5go1gp5csnzrmai4rcb2jpns9lgw7p5ugerosy2orzx0hjlty1',
-                surname: 'ed2a6kvcgh0iyh8h6j1ndhjt7nyzkf8a9x90s7jl2lx049v5t1rlk1en6bakjek1ee1wnmmhl7wfuw52gr73p1upfg7f8k689xok1oinuso5xk5tkito1boamz7s45r43qqiwo07tlga6n8kj70nt09k9ny2t4yfbf0n6gjubyd72z8mzkgf4dx8poexi814iru29h2fx0ffafsjuaoqlo7gmbp61c7t9p61jf9wsxt0ivv8hnm0a7lc5epit3u',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'z6l2oi13bw5dr4hg9bw732kqh38x3wvfs8ypakbrwaq7jcskc2',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '05vx491zn0vc2uxe60qy',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'bv37njpo4grgrkubvb108b2j3q3o9cnfwr51j6bf2didbckrbljq2vdpsh1g8fr1r4btzev0ke4weqce4rg8lo27uoig5lvl51s1xafo6o03lrg7t2d8pi3g08p4marewrbg3t7bxhzjvcsw8hq7m8u26l3ehhs6ikdpvdbktwzidzs90gzhjhxet08zkc0najz2aex8iz4lnhj788i8g7e3zm22z9h93ejs7hqc8no8s16uglvwaai8u2xwcfa',
+                name: '91hk0c5h9af3aluw2aups03ai4giajyofuiq76aitpdxeoj6pm1yfadu3z8fx4fedb5ww6nvz8qb03lgopk8dbegafek5bejz263h46m3lxqche4zeupkpd9lk2l83ofghjxmlmqobkow12fusx8cwo57ny23j264tdfp422mo5me814itpkhw2gryfrelc2xk31eh8l596b9j39wvl4huviyg49ilfea33b9snt7eeqrvj84l6x144dgdlcxrc',
+                surname: 'z2p8x9izkejo4eh04m4f0p7erc7yi1keiikd2heze2orvyd5o56dcvgmfwar4sa8o4vu1rezcard0eld68q4q9ns8au9dy2apevrvw6urtvkn4555r908uxyh65z2y154vxxs8brzqkctiaie86kr05xtb4t5dzwf043flao2q54u0uk97qp4wbcwtmt3rr6l19nrzhd95rfnece4qhqxii518tpatmobzprevy7zqqccwphztade59cw0gmend',
                 
-                mobile: '4ba9jumg3sxt196klyatqd9drpbddcv3d6dfingcg2rv2f7ahp28ddr9l2sm',
-                area: '378kiik971x9b31oko2pns3cyrsnv15eou5gou26khju1e0s72pgri7050e4dak8jh5yo7n3yzvgdnrb2gsobbquf5i1mdocxiazgglze2eaupiil78insirhxfbl8btr0ky2ijwlrcnmi6ssv385gnzmrocqezazm237xsasqh7r3y9m10lfq6d0st5tnlmopd65k4q8t6pxgb4zhknqqwuwrije5n2jhwkrbfezn9zx6egofuff7488juqz4o',
+                mobile: 'abh8ianr5aupgbizg9rn3o0zcn6zaaxeynwpmqn3g7rpzo2ngufkepksrsz8',
+                area: 'xnv3fhucwiylebn8ez0o5zc8fikqvliys5azlxkx0uztxchjo76cjsakpu4my8tstask4fi3rtumexbvr31mzrd9ubx5fzmyg2zbhgre3aau8q5svgg39taro4gd234bbh64f5ondsjwglic17r8zen2u3rl8vuwlbwx3qhqcxznuf1v2cdgb1ftgrycti2sqds901y8n60n732518xpv965c69gm1jv7ey6zt403fd3cia9jybg1k2df2yhg9r',
                 hasConsentEmail: true,
                 hasConsentMobile: false,
                 isActive: true,
@@ -391,19 +459,20 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'soa4tuldbsz9xrhb942t',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'zr4gtma3o9d0apwuar6ery43u4rcuz75msuul2z8z83nqkxzq1wqrko30rdteso70yzwoa06ehgy5t9gdpckyz5xtumdwm0id6rvkmy2abc0338517qsn1qxgextmdnvmya6fdcmoxhxca3xypm0iu3rddxbd4e8xydlfjrz0hsu18rgr0r77blxh3ncm6duijkwc3b9gu28jir2s9oyz2cplve4r6d4am45s2a4bodplx7vvafcnt1f9wrmt6l',
-                name: 'xn1rr6deubwhq16oafok76wuzh1lmvuuqmn314yfzbfemqzp7wp3d8zhovbvgbbaktv5kyl4zcvl9p2d58vndfluquwrms3uoi2fawg4yqp2rnsuszalm2kjw96oj21ei52zy28rr7cmap5hdn0engsy3e0odo0fvc8hek8lxzieedpnzk1vt8jvt89wcy0e4ww4i55ghlhp24z9287a581vv67q1g5kjdfyvga3jj9ztbz5bs0qr7p58p9dc3z',
-                surname: '61pyq875x240ns79bkdf2dhxfrtjjs3iob9558e5m1osxz1oq7tmp59t5mr390p3s0m73b5jm9j9f93xmlvkqgikfu3wzfcft84t3hakbyjrnjyj4udbv4hcy2rmghyjba5j10mbz6poo8goqhjss2774i2y43y690nz785a1ydduq9uw53c0cl2xglc56o5j5bdef83fodr0ea2j72c0iw5kf1jk77dq2cjsvrlg3hsx6no9azv0my1jw5wnyr',
-                email: 'nlx74xb5s37pkiwx0leo45z0jh2jxaecz778qgl43oi9qrai6hkagpfkmi5jjsxeobejzx4y3leh1lwf5b3tdc1qbh5t1k7i3keing3aow7iezexqr83dnam',
-                mobile: 'aqvibu1bk3y79lozlag41pf0yqy4rt5cmzeepl1xlclwrj0yn69b5a6n0q7v',
-                area: 'xqvr3t46nk3f0591l16ql2a5c6tmkuaoqru215yvbz7v9qdfg489by2e3in2ohyvmkjoa8z6a4zzphhhs99t57nbrlo0d6ckxuxfxwwinv56n2xr3fqhahdg58yk9xr96qsi1cmkbvmvek8of4fu9wrara11qrt70qhfw0xvn52bw7um0hyvpoh8ff4zlzk8fdwhg6oynk0okkyljnauesqualiw7u5txo32kxgxna5d9p8mudmcoywtbia7rl1',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: '9yijj3lcyywpulzhmuhtm4323zywbesd2umfpe3h5lzli8hizm',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'uompq72r9bj75wtrlemv',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'in7dzzz7i0ifky2n8k2ix2bw85c7d6ynpr3tlu125wae103msa6uul8jxhob68ug3o0u5d7kgyhorj48mguqrdbjhy6pmy4lhydumiqpxdf9x3ik5n8bbjm0n1imhevzhxc5sxgwynjjyejukbe8ysf6uy0j0cgei1uy0oju4k381368n021xkgw6reccxp7etii66o39ld6kwwwlu16kywjxsoa2vluf4bvb98maoytpyj2allm0t7hs0cp18r',
+                name: 'i9hd4lyk7yzo9p15gr2zig5qmeyxw2wp10cy9hdk1nfcwyslatorzty620oa8gzpparq54l7axxz9ciojerjer7u8a4hjw153g2q4vdot00gzb1xrzyh7t5eyzmwyma1mzl8t1ybud068np62g0dyjkoainbwuy4p3tjn52aoutetqwbyv31assvu527qqjoyu1fces5uxbplsx5gaokpma5xcaci39ixbittohp4dvhez5bx8ih4xwl2vy89k9',
+                surname: 'o4nom1y4zmzyjlxs26lhgq6xvkkn4qw8f2xl0z6x65vmgwsdth5c85j1qcb2vtoabjb3k2l3sys6he1o57tfu4vsfmzv4juan07y4b3rihicn12pw0svdhnckjneof3mz4pvgtm5kocdwxxug3vpewrfo7sskzurutzpb344hadovauparyfb7krdb09612fazop0v70q2wzs5yv10ybakmcuzy3s5jsg6pb6suzi7oba5yil09r6p9xblcthzf',
+                email: 'rqh0ndun3qhlzr0za0wemnonca21zbxs1vsljpoeja9a32vqixz8u9wxgqxglbrhwwhpn0pr2phz251wxncbg07xytvx8ebobd0oaenhiz55rwaffysayzjt',
+                mobile: 'pv5jmlsok6gbc5ei6xf4cfl6uubesb3rvz8pft209vleapnad8yjkhpinm0x',
+                area: 'eu4k2j3fwypd6jml0w4pkdokvyl8a4p5mj5e14d2p315i4w039mqlvwx5buxfdtj7b4hsdpxnmljq4krirtqgeoq69t4xag8ig7shcsasvzrojbviqnu82kkbel5ilrx7fss0rf2z07fj83rzy3q6ljkf2tsaz4u9fh389wiqxbns717lfvi0qnkgehwkrhj37jhc2akeqcoucvn8s7w7hsgl9hikb2sddya89jw4nsetw5xik8cby2amwlcwkc',
                 hasConsentEmail: null,
-                hasConsentMobile: true,
+                hasConsentMobile: false,
                 isActive: false,
             })
             .expect(400)
@@ -418,19 +487,20 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'nbjju5peogmh3wakzmrn',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'k3scazz9j2hjhu16aqyyyqt1khf2rqcgdxktfe4ronuczk0xrl41jn4zii0anp650j316bqvpn62i61ja3mzsexn2d8w2acbnqpstnhq99x6po75z1m85ja2lj29z7i36mklv4a8sv3qogigqb8yg85nxkjwhqec1ktgf8e1tcj0ysg5g25vh7o7rgwcip9ersv3l053e1p1xvufc4n822dzzl50z50ddqft4ed5z1wvfiffvie8cky2rkr4xea',
-                name: 'ig4rl24ry3wqcqsjmfw6acm9a6ke9hhng63ft374t22q212myw3r4c6qtl9qlbkawwowfreaasiac24lqbi1kgm3i0iwg2h5l9lwl6x5xrbjrbx4fq3h6sj0dssvhym00zwgrchot6q6md237pijf5l554bmjv1fm7d8ltchrhhc8u72irnd5x4scz6zuwte9eq5oci0m6s2246p4cq7o4tbfmjegkaeaxgn0hkk6vt33hkj4fkvt44knf2inxr',
-                surname: '1adpls5q51cstqcok3n5w0v3dt3cpsnk6z98knk4lmcux8gvn3hs43tptbrdbo9780mgr5zlqakrwt4ypsj8ucokd56ptxrpm89u2sjzegqx166czkftuaz9almnavt1jf5gqzlo24kao8jyt1s93oj2ed4h3ozlv5rjpqon0euo9suyfuu9bjbxq5moktk80mpkzhfy0hbc6p6lxfokq3mzpygj9lr2t0i77wwcehqo1i0nnkpw0u0thto6trv',
-                email: '7if2uohl08wcgxr4e2hrd3til18iro0fk9b76gmycvvx1rafc0mzsy311d8on7hipaeixcns8wtwdryh8l6wo91g7xoztih2bueexp66pqqstma0xkv8zt86',
-                mobile: 'rx0bs5g300iusugo8o93jripxomrdm0gvb5ux56j4q9bwc7j035bdo7tzw2t',
-                area: 'zbxa6ftbgkt1zdeoea9idwp6zlcry3oqw9q0ojdys1u5qrnywd9i6rtlfh3wyv58mh7upz5s88oaekwl1i5lozhtm8yya57rosgv8txhoweqj2eaonecjeb82md118r0njd9p3w1tiv076a9mlnd309vdqdvdzlo84u8xl839fe5hehjoz0n4xo9yyeulidb3xibca4wjsc64qmmtxaegrz0zp3j81zfo6nqijmdjadqpmsg6bvy521gxeyb090',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'pvcc3g9uakt6uql84krqjx7jllo6renx7hlpxe1bxzy5r3kb3b',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'rnawtbopaptkqjffo8q5',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'txodmzobpsbezy62ktovcxix45qo6ypdov84jlelp7h6h8mreo7eij53rg7t11amorvoeparz855mzigit3z5cllckm9qmupm30rbxjafzou9enh0duaqfdd89balo0vqxte8ezrfhxq95yba2xhbkbh4s5jg191gdoko9ia8q55ks7kqqa75weco031owhn2ikkvmyd19wrhh4b535xdsh62e72yilrxqyaf1uf6tyqo9v2ivodxt2xqz5ylqk',
+                name: 'n6xsdv1g0lvm420safkdepo7yu75hp3k5zssm5fn9neoru7482uc7tu1lcvy7s84a4aduuwho85x2k4pb9wpvoh388ky6pue56th0r9qghehtwl9p63bjlonkiai4j5bfn4ojhj5j65tsadq2bll861le1vw3ogirx96uogaw8ypy9bj3pchvq5pg5tsjmq8qf3xfd65d5j71w9j405ybs23m5yhj0sybqzs3t4vuflbskxtu2yiqp3tkk2w5pp',
+                surname: 'dw03n0r1atysiylf3gcipy6dgnutqiy4p6g2f0g661gagh8rfe3k49qiqfgd075idakysm5l3jacubb8ci6ok1347jqkikxxeuqbv6g4qvuewysltpusbrxurbotitbysxu58yj8donxtzk72i024nrm5nuwk6vlhuvewelqez90b4mgkt3cabag9hkww7mkjblf6qd16bepxiohtumf9ewvl68b7trdikvjq0159gff25xp59ivj4nzj9ua9yw',
+                email: 'vxybh6ju418suqm6jlk5zg8h80yl0049h5un0n6kf12pmiwum5006ewtfmgwngg0dcicklkcy6wzyxqzw7qs6flywojlgbxte6k95rva1jvj41xn65ut4u8r',
+                mobile: 'yqn5gsnleveg0bug9zolionqdsro9hoit6843wspdpghglhgtez7uc47fta8',
+                area: 'l0wpnfrt7mrokv8gib4f1jc3fq24xcdtzu0nyr9aiea3kdctoakwmd9tfvq4c87zn55zodatl0x69w2f1djkbx6ku5jc93abx2eckrlnkrlyi5c89t31yx4jq4qosi4nb5779cy8kgdcfkg5h44iukr3emwkhc1sx8tpa7tyipruxl99fq5lvix780q6l5gs4x8ydiq0vlowwdcgl4eh017ccjkncr0fgo7l7hsj9lnws1efv3rgqknd3b1kppu',
                 
-                hasConsentMobile: true,
+                hasConsentMobile: false,
                 isActive: true,
             })
             .expect(400)
@@ -445,20 +515,21 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: '4vzwyiqnugs8pvevgfmc',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'zr17jkvkovi94oshvwmg8j6ie2cbqwegw9w2yfdkqrcjz6a4ffsl0wuc4ey3nqwptd7yhjyqkq0ro75y1bt5fd4awzksfc3yagfuj63fx5etpt7xdcvv8692qbonwgpwrxbl8fp555mgz02hcnpttbjylbf0j69vq4rfuhsq0ipbchz4l3wsk7m402e2l13a1rcr3wkhjwcl34i08zzeqvmm5k60rv4zu8h97wrbt8eswwqbkx349nrl0i5002d',
-                name: '0vvhbng3u8gtt2og6mb317ptk7gmi0lu1gb1izkgnlhkv58eboia673p81tjo2x182q2gjlhhim4tu9u6hds8x9ffbtp1uky8hvpq2zfa1suy320zc7knxloldtkaercgv4lr30642n8xh6jy5y2t13wo9s2puy156jgrz22mfpo2888c2j2zr18jrfev4fhj5ozrvzpg2n8ku1xo9owvp33q107b2p4jnb0ds6022wq3zlxdyzsqebxiozbx02',
-                surname: 'spgpwgu518wq1qjcnsi2mhxrk38ru44tv2gcdrza02zdawl301c5yuyg00500cx6dmfs2bvxus1wzxqbewxk5yxsfw6t6yeilcyds4ty20bqxzw8njinvr6wepigetwanejlosss9r8ggohghdaszr0whsra6zjlngn56wgqa98yoliuz59nsy6z8pp5bs7haignmk9pgxxz1bezu9jzg4rhjlpzuchkpztcipq489vvoixt4mdp8cfxthgohgb',
-                email: '7tvhloz98sdxd0ndq6gw2jzs461f1z6llk2c7jec9nrl0xq598nsnull6pfdb51g2mrp8evmbctt8ab4ur49zc2x523br4cv2iwgj914ytfvj23hea3gbnbd',
-                mobile: 'zlnp9pb08kuijjkm5kipd2kvxfbji6mrl61mlbyn428zrludrkedv2mlcm23',
-                area: 'fmv5k3vkfvdvm62y8oe6d403u2mrceltyv41nbek31a8e9iu6sb6tbdhu4qftmazxbe1fjz73d30o5nszsf0v9d2gx4b3ntpuvdpqvipxey2zyalw0b79vyu01m0iptclv2ipvy7g937gzx8e32x7thsxiolupkyhi3y6f2grk9lp5y4kk5f9xwa1njqt6bmo0db7gbmbx593atnocw8zvkga29aza4w5fqziysypr3694hoo55hwmzib21slpl',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'bu5dblam7wqrhxm0c61dy6j4fk093po0ackhlfb9796t1pfhg8',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '93j4nf1nrve9lxh5sipa',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'uvrroa8nssevgb9b8a32ksjqardkqjwz2mm2qwx15g7c0dujfrrxvrttov7iz1ez1zz8fid4zkekie5lhdo62apra43z0ta7tdok4y79zayb48jx1273c1odx3k56h1m7hanef3t6h8ci0b94hzws2joqt05umzbbaqjdadnfzf6inbjemeqt0f8zlvgm3tmzdsl0arwyi4vuzrbsgwz3updl6p3i0un3bmx0dfea6djrw44fpnutee12tz7k6u',
+                name: '11h80xcgql5xk8k9vj368p1v4il6l7zy1tioy3sp358s6zxu5v4rlxeamf4b35cm90sfcu0wabiw0rd8i53f46eyjw622pw0dpzyw4qjzcdgyl2n1caqx6n9pmrh1423qwag1kbkwlrgkfbzmlvfojir5fxje9dl18q0v9cod9ma0hv9hullzigj7lwambglfysvgrl1hwlo55kmhb7zrgorhz86gi8uuo6jf811aquff5em771p9slfr9iuq5f',
+                surname: 'sukf4eo8w0ytxb9lxbkte5rvkr0hlsgaj98w3a5sah618jxoe1kno7c0265o9icrdf36ag43dvd8xxxsz52qcr4pjicqqo5t0o6iyo6xmonid16c4yqq7t03vjjn7au09wecligr5e3u1haa1d86twdbls036rrzdjmks1f4ma65g29ln07d4ffcylgztanh186l3vhltozek8hvi3lzdblz2l56ewq75ivsmhzw6dq4j3xs691vatrf8qji1a8',
+                email: 'g7jovmdonzhi4frnvk4t9laka1qaib3iln184ulryc5vcx500nbnfkzds8ozdeiscfdqyixvfctlmco3jg9zo84wtrlthshtte3rrx58hkxzqnxeu4fkq2rq',
+                mobile: 'ukl8v8kmdmk5hbavkm6c7a91t2yn3xec7j0ue9pc7hswv3kuh3kr2xvpslrx',
+                area: 'fs510jutag6rpni3pkf5df691ea8jpbtmptomkjbj11ahocuvl1tvbsimdmi9vj6weieigiftw8mxd03lnhlho1zsk3wi9mz77slqjh0zw61huywfpy2ozysbx8fwdqpr73yv6gpr01gwdva4xwpa8txstylmi8nuac1us48tqruwvkw3wm51e8tckpqm0h3mntx28q2djw5wsfp2uxfn0en7ac51wtinswqqwvmskem97jsk5o7cujkzgt8doc',
                 hasConsentEmail: false,
                 hasConsentMobile: null,
-                isActive: false,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -472,20 +543,21 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'azz2kyypf47gfcvbzy7z',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: '9ey40cecl2d1mk0k4cy6gv4kjottjpe9ogj1wfwxfx4zyj3fwr7e7h81r524j4pjqwrjrxsqqp9z34o9xrgrs9a0gw8rcyyoacoud2tk0lp0pb0f5xqtfirwqy2dyq0ry6l7yica6xuruzkctz8lhn0f28vgmlwxjc4q1xlaeo0889uku1nn7im4t05luwkxjlem71va99xhaftj7avawmdhk967ft5f4ii2pu9ezo4z6sfem9ikhaqvgoe5ot1',
-                name: 'oc7ok85vzoaf37zfmvz2nizeebnhfs5ohulzbgy4zldclcqkdyk29q38xidhlxf2ey8ql1d0cs8z060gpoe4bem60ojoc6hbnz5tuvgbq8tzn8mjf4oy9cxrzfdlq25euiym6us2oej3a1wqvo9c5mjx6wi7gx4chh1ejvh3st537ddvmkp6s4y35cbqdp5jj8i6q1elss0tac9n8xqd4zxioneyv5566juf8rr7dctxicrgkky6s44x9sxfeth',
-                surname: 'e7as1xw9xub27kfnrk4j0iy4bki35lc0gomyybpjz37uymgqvwbbw5pu2ipkpbr7heduf6n6hfuh8y085nxbl5r5n7m3if6sqjipj9oqz1vp23wg1owc1ijx5i9xi95qh9mhwgfq2e1nim0sd9hzmyi3t8azq68q5brry1zyrjevpc3rie60rjrmtnjayewox1l1wz1pxfei3oyyjza0ne4ad3wze203ln54u4guzglx8av9jd7llwgfow30s8q',
-                email: 'ug3n9yjr3om6dc3bbsb68ntxc73szhuuka2jeembybpskcoh12vmys74sz59vcb4ad7gi0o8sxo46h4uqyae9hkdgdl30vu6g6u2hmbpb7ww86h0sxmtpy94',
-                mobile: 'qxoiv6ppo30hhy1dxchfeuq4b5rlsg6dft97l8n2eixgc3l4xtkcefsyrnxk',
-                area: 'boo06tm75frl2k8p2b52dj6k5chuzfluws0n9qwr77gqy2k1qos0yjz2jysiymrrvv2p0okhxicev70v860itbxa17k3vb9tqzfagyg3zejdmgwhf51msa0ug6vhu9jvclo859bn1v1klbqg0gix2dpf8hsm0stcaj5q6g0h9wvnhejixuyz6gqd11r3ufro24yjvitz0l1qnb9f3iupfzdwavlqlvt76qhniyu2r8pk88cm4h81oqcwk30q6yl',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'bru8irb0q82rc23ot8c8ak13ailwq5jxnvnh66p8n2nky3ynly',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'yhgs6jvucg1etnk6mna1',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: '1tz3s8mbgdhg5tqgvsh7ntpuwzbpjf93jjngf0d24b8ee7fsgb3uoswpoblt8ls4f0zu9mjyi6iop9bfcm2xhi23habst3xe0qpo29hzcz5tutps67j4vlimn38nw06gy1qa3lqhig2s0ace7wup4fiy3iepthmjyzjtrd4jrhhy8vdg0bi2wbjllt4rvt4wakqgtse8j2kn0qyduev6y7851vboait1dqvj9v12yuxmo0764mit3gbs2v57cln',
+                name: 'dut5t4fu2zro3v0qo3780z07jqfu7karrwdvo75op37v56ewwh37447n7yoavv9vy3dz0cnjbshzxp4zj9jnerrsapuyvwdxc499ord4qyqmmeav8maeqjijcv7jcpba76vodwzvyeldcpeag00f33cmvapuwjlup2l41v1cx1p94pu8c3gmymew8eltmc23k7lx4sphhbqxrz72dek7sn8jt4iu79m2ux38y45sr51vlryywars02p9gbrwz50',
+                surname: '5oi5qdcvcbudgob5za3pp2xc9bel7e4i8faket04875oqrhr2askosq8pewt5ki31v4xv74y6dqf1l8oyl0jygfpsdrhfxn0fvw11wld0leussi4tacro6ogfmlbu9h6ogfyo32hd9cqwpukq54gy1isx1ekx14c8lacpoim3sr1zgjhe6qxigi142iajbgy1bkpfvh4q2jpi25026acxgrhgcgyf92106lxhm3i0oxdjzu38mjbk84pcsh1j3u',
+                email: 'pajqv23e48w705iilj1nz0wavjukgtchiy0sj19h8oqn9du3hcrazdwn0gtcrjn7kwfgsxt4ulxvjs2fbtrae8mkdzyczmogeeka24jsqzrvk87bo4x3czn2',
+                mobile: 'njhxolncl97mdw95ndrmhnz7cxk0vy1vcye7mcpn3nk6ctz77psj7mt78wh7',
+                area: 'eab17z4wcc32xq02astzvrqczxz6wf5abothax2lv8oy4mbibkj3y282q97rupaod1rgn44qimpjlge4jicce7vx2qq941sct9a78fwcvcd7fdm0wo7a08lplbv62dzvjf3lr95h3txfwjw8zmqw1cq8qfpqjfsqgcwmzzqgchr3tbq7teqf8dymkye1eoj1mrk1e3sfk75dqdlfhm0kjeypxqhfxytt4o97ypl27jz53rw21u3eq8i0x3fx7o5',
                 hasConsentEmail: false,
                 
-                isActive: true,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -499,17 +571,18 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'g6onwqqrk65ip85mkao2',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'gqqjaelbvi8b9ji9wb4c96pqnagnpkjzpmlwf33b7b57jhj0ic6afc80qw0u2mcxk29ey4wco8ze0kwlmk3yg529l5rgmuke77no61ham8ooj0v3c3x24qp21oroeo9d50ab72vq3h66zrd71oovuijcip2w7v7yb6x2fv4can2r848qp6cnrhwuxnwycndjqv5s9eaqg8kufbejmvbk4g63jbjupzm507p1j0y9qkwvg5a5jfhc3qcircln3bp',
-                name: 'qox7606tonyphhci57su7hefor15ml3ng66bh8us7pohkohtedo0e81lgkuo2cbkfpftm6ny28x98tuxhggygerwnog81e21f5bxods5vbe1f1h1hhhk2yft41x8uoxwn5k5hozg3fxv0pcefizui5377ycjjy04q2nq7unz36mierxs802vzmagy53ania68pb7nudzhzoxvfom2un8jgch1wgz5x3k9i2fumgq8s332j3x6svqm7d6mgss5t7',
-                surname: 'lmmwp0ru3uum0qo554o5h5epwrk39nurdxoytdzc5yau47cfjmndjcb9begd2ngxf9vrjbsgvylnkzm45jv016npddladr43gi2eeguwj83lpi9z9uyb79t62b8vhazjc8rd0sgurrhdwfs7duja1sr3wurxi8sihxgyubdzk0kragoacdza59lmh3lrsnvl3dzi0czzpzucurj09400fcaqlhocwnhr1vztpghvv6bd6ugoaxdg6xhm55p1u2a',
-                email: 'to7t1nt8aeacf3ng5wwaafr0r01v1bkybrqpd9wq7s2fyx3fezifofgvbsfi35vt38wcvbszd89praxa994gi0amop2tjyh2q7co3a7vkthi9tgasdpekw9m',
-                mobile: 'u7iqv7e77njxvbc4qfxi6mbwdk735eoswwsape8ldrz2os2s3l3pl1ai8n1t',
-                area: 'hs6mihhbpmmzfgoc87ad0c0na4mwd9mssc96ppj2wwxsslqr1qw2gy8ai5lsvdb2lch5zthmtds5kbzz12ot2fu3gdc6penwdr6cgj1pyviw6f0ctdwmgute2hjpmblcwrclbhy1vowav4g8nsaucv7g3gebmhwwwhoaqncusylu2yxaob5rc4nx3hst74dcdt7og8k6vqgctgk2c1sgmm62hyg9ttzrtdhe9sc31ux26tpbt3qzomzp9m04j5l',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'ygbyripv40irhn1kcnya9sl0a8to8x8rik3c8cg2gwffxnttc5',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'oswwib0721sb8lokaxwx',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'bqnbe81d792zqa7ihpfdux8qzg5gex3cjmhr4xz4j8vylm28n245ac1ve4za6v222ilsgfq8nwka3jjegdyq2ujar6oog3pgldnn1hfbdxq34npyjlg8pivfppb2yusn5wr64b1j0u4sf04n8zblydehqu9bn6b2dvaatu1nqqfls9hqhvis6ohd0f1hoq2ud4wc4kk1qyq22wzcjcymywc0vfyk363vlqhs2tzsgqya687dcn85np0blv5nfdo',
+                name: '4aab1md3ujj68hdoamqr01cbb2fbsoeubhkwws6uojwh6f2mzq54834h9gitl1ulguedza6z2zfi02oorsgomxi01n9godcusf13rhkvme3sh0i1hk9sqdwa5047opwntl2n459v9juuuirql1ju57hvh1xkuje8xslhtounnnxpgfn4ticqzzqeu34clvh4e52h82t4sshgkapal3v3r8hk3d2un60liekl5ay0zarrpf4wi0qmi4fmqi3xy9o',
+                surname: 'gwpbznusdv2yu2gwmuzkhszvj7837orcqixkfte2lftnvx4rplbeiobvrj1yk79s3y45hhqwv77q4l1p680400zt32i7cb8i5eh4hsda5cv1f3aag57ajbfgn6j7n1lexou3j8bmmkezbpnw2cemu3nu0vk2cbge62nhdwaiivfkkpeb6jdf6kkr5hf06b3sjmcbfg64wofjx0uyiy59mju8mdu0cqkc0orz7zcs26enq00plasqyr7sr3mkf5r',
+                email: 'h1umffs6tdgary5juxsmadweszjnz34okop7kyb1j5a5lpj1hkxq2ypx0qag0nhpye9qb9a7as2ec94rdryw346ckhtde7kpueiqga56alg79f9xu0ibhgo6',
+                mobile: '8ywdetpi5dlyauddoztx9fu8k9f7a5mvsaogybev5gn7vhzbjk3clnejiwcz',
+                area: '62xkyngtzi903n3plege4i5s3k0bd4p24tdavisabisbcghjlav52kbzpqkullt6s4z5550geo6s5vzjldhv3nmxqpqi1eprvmp08cjh5xzupt36th73ajngpwvfai6iipmvbv2vd14omehs84o6h4fm4998yed3pbbf5oltnxqs41n7okh0a7eguvxf71y78pz117h0zty0t291ebv9fisk0ia70myinmjgxb0o8grj6hmdgm4o58d4wsqo3kx',
                 hasConsentEmail: true,
                 hasConsentMobile: false,
                 isActive: null,
@@ -526,17 +599,18 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'fsgktoyuym1b8fg0ay37',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'drl23orc136nqh0uargugm6vo6blqk3uxqsyb79nzaeeoxj01am4eqmz05kqs7bgrls7ymrl1ihynez5a9j0nwqudqzgz16gtphw4c7hduuykqnn7hpm56ki2lv47ctre8wzjpqtextygmlivagqq721qx2y3swuh8ni8sd504eqrg238mkrchvl6q5opvxzkbre2i42py3ttgj5uwrvuyj69h7dgczdoztyso3bcktsxnnh618vh4jyviimxlh',
-                name: 'g4slorq91ffa5pphh94vu5355qevh81pc0u1hh96okk4fjn9y3i4mtv7ra48kw9iu072kj76kpftbc9r1gdc2z6oal2mmk5x46mdogbz1sy32hcid7wkqyqlfd3zopye6a71o0dxpotsugtowalgbu784tvkyad81pnjcf511jo4v5z482468eheg5verh7fmn1mu46qgwq3rux2n2tnl6ouzclpezr6qmlub4ssxv6wtykgr29i3v4hshkshzj',
-                surname: 'gfq8rf5ynohy54b9nlogahjc23yd2upg3p57qb3rxm1cl7w3skuopfgm6r63s85y2yxi9tdxrej8wexewvt5agwr48ywftr12yyvc8k9u65huhjvg5lbu1p9xbl72cl5zc3hqi8gmf5ua7xainr8xm28gwmullivkaummaa0qx6dfjcxpklx1awwl71irypj0pxleo8u9axtougbsvp2lfrwuasx194tf77291l89iekbe5n0ya700jrtq37e1z',
-                email: '3gp01vjdg619jejl2koipdt9c9u8inlihlypkx7gotau5a3at7y96vl67lo44wjpjlpa037mali3ojxf467mqe2ktu8yrbfggodhhgxrykuglh7j2af2iipk',
-                mobile: '77jerz0v10qtz3mmn8qi473z3ddkzg49cb5lt0m51bnxyx65cjqgthvqmhsy',
-                area: '3dyamo4to8qw4h48qfnfj8n5yvy8udypkru4kv85696xvbffn7vo9i6mvjt7cgb9ig8bizq856iic839ta1frag7wpk8x9jsei4zus470lp9w2qxk8j5eoewcbo57dysrnr53th15tpnr6iacbbtr8g5qj24my56984kjhkwrtg704hv4o6roedzyrgnyhtep72jawmmwsy2u1m4prfgiityq1ub93mk1r4c5rcfhzo6bqy66mw6grr8573u8l0',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'bcs1aou3dclfhngbnar2cdxqouuhm045eymw1j066lhy1lk8q6',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'w0g1hz0rd8cel05qa3xk',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'vdpeu5fm4kviocwonvpb8ohesvwd63f8acmgryjnivzwcughonlu41ismzoxd9wopvimioeup00l1vq2ujoqdh58eug0bsirtbru55qh0f9x8kkylzbnhz3ffxtunnamf8gmzwz0xr6v5xh7y7jv87mdgukyxs7cst115iz06a0ux14p5urm8go8rpiiwpjbpgi97lbx7jjsiytycbkwby3swqlompkbyex53j5t1md3vwpybh807cv6xmybioj',
+                name: 'd5g2ozg3vf3ayagcgihexo5cli8jor2kvogsckt8eqf6j17i909qlqmytkkrf0yaci70i2tp1s9guq9wk5fgy2tyz06u7m4hly2ae3fq8ew75sj7rvuarpjuvlpxbxoonskaufpvitqro6aidk85grfgnstc23if9eg4v9nuq6f5cxhqgnsfrkowf3tp0b5zwl9hxgmpncqj1c5f7p1cxgmkhs20rzlutyp7dul5llbolyvvzpg61se7nybzovr',
+                surname: '0cw1o5z5yx1gfnq3eapsvzn4lye2ovr1eog9p50jyc9qgnx7xbr59cf3n39lyq6wac2bvaix9l2h89hs2xcsuwyz36msyfkngdu8cmc8djbk7eeniupmc6v4piyc68bfxf8nsnokw2cc09lgwp15de8sp2k4or2h8v8wmhp2ek3jsuwhvam0rw72w6bza0on4vfzwhau6ds3jr6tn72hsnr7jf8sxs2c0vrcdcb2zpi445z8opfp2d7uw1rk4di',
+                email: 'tt50jknouuk84dy5xc9d5jp4fsqfv7s1gy1dljwco49wqiymzdevwh36gwwvoq3jfhje7jos5xjtq3id9n3g37c37d1lsbq9fen8pmmr4gedclitmxeeinn3',
+                mobile: '9tp6m5nt5cs2alq2x925d4otl0t737emnc35563wn6tlqzrw24tn4weyf136',
+                area: 'bmqcutihieu9smickhb3qmf5ufwdm2vei9m9ves88nnh1euw771vj81k7aeipdgwp6rkofcvndtv8jg5ju29glb5n69pstfkx1gyi7a7zblloz9ugbrioe2f5br49fm23ww8zqeqjm7iqe9wksqt2nac2gm5ijkaota3gh0b5w4h0z7ju3nhcs9lqvdrw1dq8mftnov8h7c396qzjy6w9dzbrasufj6g643e8cmz0fzrl5ilgtk65sn8hisalf3',
                 hasConsentEmail: false,
                 hasConsentMobile: true,
                 
@@ -555,18 +629,19 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: 'lu1hh1wmfkb30wqnoesirl2navb38qh5ar5va',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: '9tl09cxtbmvzt59z44fr',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'u4kcm7wxdopsk4e64pfxsbyj3jgwdctibci3nx7ajo94t005wluquk7hcmkrhp31oojgj72paz2xae8qvvpgqbmiqgwxllsqe5lt1hd7mqwh52j9yghsavv5hnal9sdb16779j890jo0m1400pt3lh4dg4yos4rb5fyt2xst8eyik74ua8wa0msfjcat7c1dw8252koj9fmzf228zapga3pgdab9gd1ksdsgumbe2kc7btpheb70hjzq4tlryqy',
-                name: '9mvqh3lk293zv6gwxq7bi5bewro6h7aughedf43zlemsk6dkstf643zhe3dv8h471seotjaqtcbj54o93oej0173ljclvm1i2tq84aib1g9ry19faoe5ad6vbrmitdm5jm8dxuk7vhd8gc971h9gk44unywj00ivrxuom554hoa05s1ykpsuevmldrp83erjd8116yaot1stf9corfqrh2eobqtaus2usmwnb0se8x5qf6r3r6inirbrjvijb9i',
-                surname: 'pd027mhd6kbw7cx1jzus7geahomjx384p15cgobnkkp4nygtj0hhun23zmcueohl8iz96aglt7ziyait8xmeotlycjk85bppq8n32tbvx5qjuz22f0j4uxz5f9r97l30ls893lu41wo1pje8gv5drydgfi6td8n10i9zb8d5yptbw93j5kwfddgsz21xx1ns1p3gmaxb6y38ppvlzo3n04ya65r62dcf9c8crk53kyd4pvh37f102njfp4vzqia',
-                email: 'yakbhutvh1r04l0wlhrt9yxmehhwu0gl0hm52w8ebiktvfakqahedw8vxx1892pq1lcf15gjkhr6zcq4ei835df646hi491z8m7etz71ykporxv84wh2fqod',
-                mobile: 'mwvy1b8bj69lnac1ee9sleq4ozd3kc1m7keojuzgx1uki7f23gx2wxhieqoa',
-                area: 'cbi853twc2pa4rejf089cnk3qp2hrefuj3vbkvabjgnsh5fq781yqcfrlzi0yz20newymcok8zjwzxuuabkycnnjf8yq6ywedw7xe5xrzd2i5jghcrqdyelsh7i3yulzcychwxiz2x52a974yrfa71chir9c0d2fdmfz5g1dy4j431b0bv61k8nq6fn18acgum4nfv7y79mpno8xzq1uhg8frof3mmz6vdj25p9ffpefjfaqn2zvp9q1mwe29lb',
-                hasConsentEmail: false,
+                id: 'klbpo67eojc5zai4wab0n1tp3ogrt42el1w4f',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'wievlxylub6cfn5puf9kv4qfxkyjdawn5uzm47cbpc0u32ea97',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '10vf1imj9ol5vpaqnrri',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'mxz14nhkbyax8l28zpn34qiasd86b71s26m7jhkhldy09qplbpj2uhon3zx2izlyrdut7e5k2pudj1c1t62rl3ubdpn5b5hqhgk0bdwuf6k4f3zh80sc38a4hrr5ejb4k9q9kfpxbhnlvn2vkm8pdgp2kwkpkmugnab33u5h2wyimyniyktq47omo3rh6q2bfg4gt9r0d050x3qmeu0jshxkkpkhnlejrchx81rs98v38bo1txykfa8f6ooz4et',
+                name: 'dmou3b0x9jhdc6i0u1uqxkh6u0vppjcf1j6rgq0qfa4gmyd6hz2smb3baji93j21aztekcxnumeretgvp2cjhdfocw909xfm20w3cybhjg9aqjfkknxkyn49fwr0mvj9lwlsfq59z51ovbqzztojaswfrce498ervcjmsrx2ntmcouj3iccim8pbxq68biz036lijs6iduow1493uuvrb7tp1ktrklwkbhz1nsj8yyodo45qet1xrqrdyagif1l',
+                surname: 'w990205jw8tipc1wtzhw67z6chmyzk188wyqph83wqy8v6japbamfmxcdfw2notglynu2q3vs4l7qjnc0mufojlqpqlnf50xi7a3aiyev9zjdj8pbsmdykh2ob5u07oesb1j7oxu2k2xmpzum36tu7cfszgpc9l1vd8zy05qkyhyto9suhxq49rqf82vcwebm346xugo1s1krzyhhov214gdflfhbtijg8hwjmcbbkoqaztuokdmjmcnhsbjgwt',
+                email: '6gwrx18yasb4klpkj8ihwzm37j33bdhgbd9juaa0huervp64zsuckystpe2r65betctnbjf3u9ygmldv9y5munxv9fgstrkph3i87llx1sxs92g217azidm0',
+                mobile: '8wvszlyrboj1rtipym06rixdbja5w042vtqecsa832lv10zgza8lnp2es4vl',
+                area: '4g87upuyme46m4unlpwxtkeol6cj66sw33jw3rkokvjk4ceta6xguit5mfvzhk2d6l7i18n7nckppl9t9wfw2ua4c761vaphhbz4xf8usyz019lfrs0etrm48i1ydff1oiz5ap0bfiff4ejuxaphi7fd1cuj3xa9z9doxnri4p6e2zmwydo1s4kuu5jg2lbhyfr7x5gdpjzoomy6gh1ec8x961nqdbuq3jueb3aj71ethvr7k8xs4brudshvhj4',
+                hasConsentEmail: true,
                 hasConsentMobile: true,
                 isActive: true,
             })
@@ -582,19 +657,20 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '6ffbqyxs3fdnn14pnjtnsfg9yzltp0kzuttzb',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: '7lr4h40sw7ult23d6c23',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'bx6u777ka2is774xwn5g2ng0een7k9fa4xeizlwdvzcttacrccpafnhseicsjdvjvohlxyq904v2izgxkmd7fljsiwql69le5n547x9ih703cipyxqzvvn5c8ypvg7n110m8czuy44xge1cgy0fjox1avac3zz7udkct214gq3xa7kwgl8q87nshl51bhgmqrn0hu9dy9828kbo2cdfa86ypop5av3i2t3o4yfzqr75n62uae7qzk7wmly3frx0',
-                name: 'p8ba6mjammx6aldub5ogaaihyrpdv12u5tlirv78blf6gf4qw4woe9to0yst68s7jbpq6rookmgicooj57p3kevl6f3r90n9c93uaotwuylrpthhwvznjgjfutjr8iurh5j9tb5uxfj3umoc7bve4aylrc5uks4d7vlwefpx9jgnyihnpnfdtvv51gekdekqa9wvu9bq6otogr5hs9fm7kj3hqdnb4f3v2if8gk4x9wgrtvjqo5m9a4ol6kr7ms',
-                surname: '6ghml1pk57fkz4qgskabudyrjqasvfgfqq5a0nfyqsr9gybt69zqr6yfe0m8hzgoy6ruizb29mnt4ut4nzjxseeqg6vjm9s9tg31auiyrfis72v7v1nefqcbmn7adnddcobglgdr63jv41x7ubu1ns7y2mwnrvnwwb93yof30fpnmld681o2jw880xr1e6bngh84becy5ul4xmk4zr3uty4qz93zkl5ic00a06jicw46kykh6ea771m82ygtzhc',
-                email: '9aekb0j7phck8gcv8xzpxvumhu2pzbt5cmegdc0vi6i0gww6b7rw7u6nns7cem3br76x7shx4otbgryfys6qvdrwxyna6tv2tvv6lfqmnnzyftbs7d26dz2p',
-                mobile: '6rq6zrm595oefclav0sgoyxzubxotya8tr121tsfb009dl009t3tagdc613a',
-                area: 'k9ozg07tbvc4b9d03nevefgt7g4kg8c1ruyup8fhon2kjvuwofqno8f6uydtkxz9xqxexrcieolwdrjuxv9bxyp6g51upaujd7g876hhokznfh2vrxrktdtpuzmvf7w71cdj7kxw453ii5yfvtxrbrmcmow2nixvt1imyhrs10ykutsyieud97i1l53vnpwbntin9lj3lif99455a8s09ik7j4dwt0ippjxfgp7ns28pyfexk6gv9uxvp0rpton',
-                hasConsentEmail: true,
-                hasConsentMobile: true,
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: 'pfbcqgedwgj3j7v9705cbc2fl1xpucp95e5jo',
+                tenantCode: 'dd4po3kosabmsjpb37j4skg0w6ux26ofacgsyzm7khj9ar6kf5',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'r1a44b8vfowz7kjf1dat',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'tzf3x5l6wfjamsc3wdc7op7txfxwn7ltmnq9k99bjco8l5fubjlvs5q0kegmfjydb5qokzfhy3pkpiqr75gxyy75042ynf8u49s6uwroo9lhvb617k86bqwfjmn5sv9djst2og4ef8mbgpxx3rw3hhhfzqqb08zvutafna0b3i3kf8h8zruq5sx6d2rez1fm3dfin5o29pk7lxlv7f91e6v20am1e48imwxog0wskf3wmzw7crxg2378igbmwo7',
+                name: 'cmbypejg3pb59grjy0qj19e1nrzbtqhw6qzm7twb5dvkhrqxnaxscsd5zkdikun39ml15tmdiiu4jsm8q7ulq56pesyhndpidf7m95quxlzgkj2cf8tyc0q557fzhnkpqep8hxxgcg6v91tobouf8qzs8rksdmrsbasu9bke9k7xptoi8l51eoprd5caqnv5t9t6cydhhrrim2xr9uxfvxc626t1uz8jyfcv50izhmzojaxzgssgy0loxz8cu43',
+                surname: 'g8bte4xk4npwbzffxpl4gyumr6s4yi44j6r5ng8kqt89esft6bg519d7tn813natpqmlr3n4kdjrd16tj4q8u7o5rxjl9rq4m5gwryd8912u0mn4eemwcjhcx9163nxjykb8xqmvcyrl0y6v16ggyxyip7lq9uykgyyvsf55ta9t6hh3diozyg118nryaletz9f7qyfe76e0xlfvs8lowbr1e9r37uztlk94de5tvlyd3kuly2iz374dgkf0vjj',
+                email: 'mqqcympqivch0a8ipi99xftps99iy104jgckhx59t5u90hzhsic6eb2dm6u8bvx0obcj3o5ykziwxku9r7zft9mznlwnim6zu7wzmyz3qqjdqo6paptkxtb0',
+                mobile: 'w0qubq4cszmaejmbx2dc3cyd6piqeh1j5n4m0ur18k3bcdr74p26a4m19l2l',
+                area: '3yyri54rhylj14ei52nu0a3ztslqokxsxunvr2jmrv2kuxqhb3ejlk08dq2i9me266jv18lamapiyygh2clnsx0qlp1y7kafki46ch9hgrfcnvcowpupuvewx7jynmsmg5l40wrn5scfbpy62ws6xl7qznheizkdtsoxlqxeka4z2woffp8bh4txrq7ikgt47zaxiuabjg5c1q9myjhicl2g0wdgg44cns5g10l5q7mjcscsiz7a0hwlrcq55xk',
+                hasConsentEmail: false,
+                hasConsentMobile: false,
                 isActive: false,
             })
             .expect(400)
@@ -609,19 +685,20 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: 'dwe7es4qtqmnmxruujh0yskpqz0v3fooeteh3',
-                systemName: 'z1hl09n5fgkbk3twcijo',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: '9wqvayl8zsxc2ahq2kk03xli0bfsewx6i15abo6jd3yhtmzknyppiavuim4m1iy2eh36eo1iqwxela60c8v5cinu1vqdw7yaed3m3kct20w9ltcz5yp1bjrvu8mmkan67v0rhqg0522xoz5crw3ohgw5nmscsxie50jua7j2v75jag7iykyzekq6raozvyksnfkqxe7ark2z4bvj8p54sqarxcw400xo2faqzsrddcyddf2bztr8ygwk8pgf51c',
-                name: 'eyzdocu60g2bj54r94rvawari7zf9w60qus21q6y4nibkh8r138jz8jdh33eo4h2e73ta2oi9on8vq9e72j846450zcj71ksr3uoranmrmblh384y2jiuhftteien0t3s4x0tlj3se755kj7wn29huxmg5ufurh58vif0gz37q1n0tz6v7dz4k5872uepuknns2dmp2hsoq3x8glhdu4wp5e6q10rkpqra80dwsd7oiag3bqjab4fxh9v95ab1j',
-                surname: 'n0c10c6oxy8ti3k6kdp07ya6wbhp6rkctfmb2eq46y6lhw7sc0d4np4wxmuv018gfzmpy535po7t1dil2dm01bp5wrtn584hvc0xltdm6gnxwpiv9bpgsk0o5u7597f2u7byrmahvhqfv0mnin8i8f3mcesf4g1gjyvftzfjpdn50h0hxv26wn03tnv1r23pm41m3ep4camoxr12y4n6rsc6iv3jzkymvezjkwfqb2188ge90rq599wdnchz9za',
-                email: 'l38817gldfe4anmoliiah0zwujc9ekn5j4aiu0sk1x40dek2iznuzwwkzmbm46yeevv0c87idfjpsl0lm340zg6943ycfrtjq2l0h16w37kkibx8uy17nf31',
-                mobile: '8uzysj31t0hvlovpe1bk3xuo960m7wsihxafklwr84kvwz21rc8892bi3jxo',
-                area: 'jguloov2zgh5a62surqzezmulcbiyzt53y3956dma22jsjj7hu9qc8v7hfk1akg9iqsi4s8ybsogqxmu9tc12lawz4cqaug5rmsvqt5amjrm69lihrmggox35df33ayqzl9jasejc8rmi06p3gxorpr0k46b0jvaidolwqxcufdhzxchths6suhtfzy91tv4d8zmneqkzmj6ua9q76auiep8p2gtfd1jkmh5d2l2852zhvktx72odo95le4fu3z',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'k9ks2097l11b2sy8uckto2d10kghqen4240360ib6syxowp79i',
+                systemId: 'jyjkuxrva972ktp3njidzz8ib2x4tuhoxgkud',
+                systemName: 'k2fgrxz9cyaw1rq42fcb',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: '5pw4t7hicasmgzkytd4gytdy192mc7g67xv27po1hlevsagq8a3jx49zvcwdhdz9v9gc2ei1hy5porfcoel0sedgmj7lbxsq0gfi00y17gk06qo3pup40t38nzwgquvyx6qk0lcar7a16za9prbgioos4iii8kikrma1bhskycu6gh81tz2qfrvmdumjcbb9lwi13ehlshh9vh2ltc27n498bgecurc318dhpd5edkpep2z6vv9y1kuzi0565zq',
+                name: 'kmh14jx84hehudruwcdsuuli0phflhjjlukx1ji976er4i5psfm7kv485de4eccst33sb7ubdoet0d0unm6gwert3mrkgqycgtw1vg0360rwc80w0r4cuul5hi28hjv9zttoebigp7ya0lffpopbxvza99ooyuc0smtzhgehyrdxibagg7mze9fn4gk504adsptpnfjkltr8j0xuzjhfuyx6jh5np3kfjhjre1a3mbsmutm0vpdfkeu8hyuduo7',
+                surname: 'giyohax2x805nvj8m970csv18hmk2ps9gdm5d2j9d7jn1tk4t5snv0n7srdmrflzsregsr7lcsthuav1ja3obl7lee0w1iy28b0yv0gxaul5f5itpmf4nujlzc95mxi7qw0wwlhnex72f9uhs8k3qj4ksloxw4yjmi4dbbscneq9qmol2mor2nztv5zohg43oaj5lgiwqccctxzsv09kry9lz6luny8ljine5u3noaof4hrkepnshlnauldbsfy',
+                email: 'cfcoqey5t12b8lcfyybkdd3ilv4ruieoj0iqj1zg5ddyv3oasqo1w7yh8mb8lg0gp2zjaukjjemt4uaypzi2bn4k4n0z2536htjbrwqj50n45u46hxdo34gj',
+                mobile: '1pco0x6w9s2j94wteo4jm8qzmb9id5bz3f1uvw12m86ixpzrloxbway7sfni',
+                area: 'glmh1y64oiy3nb1uxi2fswqqbxptsx19cwl9lvemulz0wsch139mpgp32z08febf5221a5kxipsaqjgs3vs5f1j0fturh8yuplorcbfs2y2rc7h991h59nfq0x7g8teecdupytgiz52qcjccy8s5pzw7x7tltzzmffx04n2xo1nn5iywop3zknfo7e8tn2xhmppmovxqs4hxsl9gx649wzil3o92kb3d4v5eg16y4yx3wtgcdecgthleeob1fcs',
                 hasConsentEmail: true,
-                hasConsentMobile: true,
+                hasConsentMobile: false,
                 isActive: true,
             })
             .expect(400)
@@ -636,19 +713,20 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'snh9wlkwwi5znb2vqp7x',
-                roleId: '83h43hh0a902xatpyn6wpoodb2zd17ynoff7s',
-                roleName: 'fe5x97ydw9rallo6uh8miyi3h1rhn9y6u8tst2sptwdjgm4011hob7j4motsb8r0ueczviph1tqsdykkhwekdpq815n5te15e9khtc24k6wi8lnfzvn74h6c1527igels1t6sojxlymanipnb5qzyij3am24md6jtgetdzt5g95vwe8i5ef5blqxdow7a4gdurmfoxdcbad3vliyim2bd20nwiiveb1bouri7tlcxle0c4etpj1fe1f2lcvqcd5',
-                name: 'p6vhg5cl6buphwxiug4fkjvybfhlk8xg0bzwii7p0tgm7mhd61kkcxa5cxy3m8wlq4pf1ssp4labeh2xxardhxr68bq3rd9517wsq4dwbuutrehzmerw88a4rek71myxyk8ze3nq3q5vmdj6l189sbh28fek5xuep81ge69pbri0juqnmhp0wezcod1q1o20a85u1oxckhiyyuntb261hr4ng50zfce2aj69mvg3zbpgpth5ndwpbeqnrv06qjk',
-                surname: '20g1s7wie69qfk6hr554n57pz7i57r9e5e58xdl5jxhhpcbyvhctv5s43qhri28xquuzi9np41jy2tacmuta7lqrm9cl1b6fcrhjiffuwynlxkniugckq249j9kg3limeva19yvencl094vsgrs7vma3x74q71kndteo5p2i0iw68kpav9mxhdshst30pea0aeejokvy3r623hynr051bl115l4an2kkadc3eivd5c2f2yfcw8z2hfcoius0alz',
-                email: 'xv6ok25i4ia4t3q7phira1w2zcdncyfj6ii4hqkg2rgvkwh8cgfabrp9rvnzdpshp39mav38x7pwlmdwac8keqmtofd5veofi5hi5xhnmdo4ztrxvklq4lff',
-                mobile: 'w9wm81oyfoskuygjjoqz3ek5muswlodlpzyf1x71z3fvslb3dm03i1al5g60',
-                area: 'ennoe08w8tjiyi9icnliow7wo47khgxi2bf1o6hnmn0vcalsyg3q7lz2f9v9r00j8l60g35yuyxs6jf6mkve9j68r9h785f3yvizu8wn3aemsh1mdlxnnkg7ipnrlvzsj2o9qnveawix9v4wkxnecuz34lh0qy38gmb0tph74dw7fskdjyk4qpu4io79ad7xlze5ml27o847jh8757fne3s2b669mrmjbi3vrxxv3a5eybqcvujxc1j24hmrw6z',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'eucvgh2kyzwd5k8levhj6t3od0n97khh5sdqbc0n011vez99io',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'llubt23p6dxxe2mhaqyb',
+                roleId: 'ierxq2l36uo8d50v88pdecwzz7bc40uf6b8b2',
+                roleName: 'q4kscs39viy9ze4fys97brjqh9mlv9jtbc0bx9jv3pawp5krnjcm09ydaxjc4yt4yk9uyspeilvm33louoqpg5rrqbfswy995gdup1v2lby3nlcj61jm5gt0ziuq4nzcmrnkuepn7vvysj33uq3k0sc68reolmdm3lg9e0sh2scwi8ndnqzyoywv1sg6sbxqa7zb1t5nb24iwtw39za2ysdngtgdamwlirrnwyak47l4nspqqgajungte0x194t',
+                name: 'y2wqv5bo9l0fjr7nmekpkvl8c8ep1agaig7yc0pdszqrhuto94vusf23yauze20i3nvxr37bdxcrwmiche1t7ghcxg3c0ot6o4zhsbyg26tmr6ax59632yqzrk1i1u9nfzp6yw31p10fie9vvstsak259zjfv6idu2kudt8rnpldk2peqfqlnohfcmso9z4524yk8vea2huo6tdfnp06k0sbzo9l070eu4vm1mr282fzvhtzhuzg86pk8sg9icj',
+                surname: 'gaq6477b2g5yk5b3kl4upz1cbxlj9zfdomdczlnsji0v1zfdtr61yfwj136o8ta0g1s9peaeajyb8claht86tg0x36cmxjdwqu929fcxoya90p23dgxofq5ryn0hp2csoc1ziim0jckj0jc1k8svqolq1klwel5h45bnpe1t3bhdmp8o6zg74fsdsmqqo942lbxnk0z94lpuxc5gucwvkxwa5bdq1d97wk3754z3jh71hvyua903v4gaeqe04vj',
+                email: 'q494iswb7err7fqtvrwcg7f9u9knqx28yleg41a0ll3txq8d6hj0mc82m0j40zjk52el05ko9qqpbh2bhdsqij3me6tr0l640v3eumtnv0c4uhdlven4ig3b',
+                mobile: 'd3phcw28unwzcox7cf7u3ak7j0e02jnrevbwm07rfae1cilieoikbe6545wo',
+                area: 'xwuwnu9wyf1xb9xtjtonnyg4e4x2m7vqmojkxn25gz09hfcmkvvw79dqm6r4kfvc1uc0wi8l70dpo9dy83rghktg077ozt4iaufr8cfeppq9bx7vuqcgrzcvqvfbs29yh3j1qx95xbp2ue0z8funq6tm9ct2hp9bhlo2g26z3wakokjsvio0mjki4yrtwsmnlt0nk2md20na1ysd8slwrdqdztbzq4tszfdj0pckluhaxwt8gu1zujsa72dwdd6',
                 hasConsentEmail: false,
-                hasConsentMobile: true,
+                hasConsentMobile: false,
                 isActive: true,
             })
             .expect(400)
@@ -659,26 +737,55 @@ describe('contact', () =>
     
 
     
+    test(`/REST:POST bplus-it-sappi/contact - Got 400 Conflict, ContactTenantCode is too large, has a maximum length of 50`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/contact')
+            .set('Accept', 'application/json')
+            .send({
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'ffk90uxa07i2ej14zkskcqi5r8id8cvhpnyhrzuiangq5uirg1j',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '66tzj0rlp8ajk4x0ktfw',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'iyfxtjfdugfqt5khb15lnskwktcxdfhdw6ekb0wg6xl9nn5tjqhqcry5mmoaxyu59yzxfeda2tz8ul5noj2we8vwebvmc6jf690jwyyz165b979px1p2jcudyztlzyysjpzlc6ozbfb246zoqirpdori1j3nhwzdz4gta7ux77mfx9z62vzdp5t8kqadc5sw1vv0rtdyus53ssrbw65vzm4j6x7e5sxnrqsqpgcfl0u3ar5gteec6hl86gju6eh',
+                name: '7tfan5gy80q2vu63glsoswnwyg9b7flk8hoe9qy42daguhhb2grhlrhysjccwqe2n68vijg7mr70njgun26dn8xah43ks0x5c1wgtfrqr9tqdq6jyxuq7e9s7mtjnmdenciejvrp2b09qqy1ltdhtz39xzefqyc0zb4nhggd7lo59y0v9nvu5q804eius7w50kjql71uy5ycjwzyz3njt9bvdt97xlu02s5kh47f0gw7wvgdbgyt8c2avtm5x9g',
+                surname: '9j9yu1dzeq5fss8f207s7ffp1qe2j6zpy8eoe5s1ee7heq6eoac7k2c6w0ul35v59ulxuuc90ww88atmo1n9wxggo31xxtu4shzw4bnczas5m7aunrkoc2fe5zvw33cw8g1fi96vdxlt6ierfifgmkxi4l91ozfw11i14ohme531km39ur1ik7z4mqtxh82p6kc1ey636vrbz67grts18lf7x94tct8bq95c67q4at0wh72brlriffh3y0r6ym6',
+                email: 'os7teys2406pk2yu6csqbbx4a5lj1px7zjinu8spv8zlfwb8u55if2sofvx7gwukwixkyzwukn0pnc2kvm4aimx1yz43oxejskrz0xvvw0izkn0pbt9cm0to',
+                mobile: '062vn9q3nsic823eqkkrptbq4ibb42jo80gd1743j936aw776oyh583zr3rq',
+                area: 'fuwskpw1x8fopu0hykb0tjjca096z25g6byyk0ooaxx6ilu95rhyfce3qrbkynzymad3gihhv8fg2yytc82b1d7ln8xtx4k57z71v9vwrg3ejpap5bjjc01b4g2d8auhzm34rd70r3e41k6yb5zwboqtgvoz0y26piroulhs884ekr0r6wv6sxs630vlxm70p8xixk47a9oweykc8xtxoldk0daa0sxw2ybds01eosnw4sl0ske1w3r7l34qviy',
+                hasConsentEmail: false,
+                hasConsentMobile: true,
+                isActive: true,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for ContactTenantCode is too large, has a maximum length of 50');
+            });
+    });
+    
     test(`/REST:POST bplus-it-sappi/contact - Got 400 Conflict, ContactSystemName is too large, has a maximum length of 20`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'unvaa5yua2ybl2kgq6qu9',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'we4sw9ci4tnxfhhkyu4ynf75nbbuhh5jjid3ydc5jukx7uo21a261eb6ol1w3723djx0sypi2879u22e41cav2ryxbk8gyfhh362pz6iora2xlew7wm0sz09yeg2fs7fc4zk8fo9ts2qrowb62ioa9pwb952rnji6416s2hl2tasxkyauzlkae3l1yy10xkbsprca397aypjt3lxkrtvm9r5eytpzfg6t3zr3128w4kagosutawn7b4q1vxrgqa',
-                name: 'f3aac38t8rl55gws5mue8ifdzno3stdr00xlsz5hqj1b2nnwi5t4betlzywqs3b8ey17vcboy56ft257of1g81aizrxkdlhrcw71yy37f4iu2c6chw7epz1656jidw54rqt02i2bvwxv8ospo3vw8l7pifoc40atgqji1mxxytz4xq9u741zyc40dvzi3im1uqqjfbjyjowfea835imfjfiw6eo9k7fdn9dm01log7j0fiulj1vash5v21eib7q',
-                surname: '6pgxt4d8g2okfcw772lsd7rjhx4ur4dorx60rypgl2n1twuwn59pfgm4c3hl5vk8kx288gcbm2tqbatwlcio9z59338bcurxildr5aulb711alb1iad2255v6n9g52ah58px7b3oguvrgkrkr30sn80gprr9vr307ajmhs8tdofblcxb56m4919klw9vkngmph24ifu1ws78uuvl8wv039ob326svtysj63i3zvbgw53wjyruc7ga34gpszb0n4',
-                email: 'kkh0hwzm5nqr1grlxpkdvxktxmzfiuke20bny3dlsfpskbl0gq6j0vdia1j1dtvv1qmjwlbztfia70wrge9tflpuxmdwqk2hih5lrpd9vnik8l7iuab67a3l',
-                mobile: '3mp3o77igp9t88fbjhln4cz15gqhwges1fo7iyevv0wfnm9q33l8ziiyo3ou',
-                area: 'hff9prv37ezj9meye9pe51ygwwcbx46ucod6o3uo8ff7d3u1azx3ecftik3thl5b289dxfwyu50lf1kys1aq7fb0ix9sgd64ye430czbkzl3glfusqkb2jpcld3f5gbddsb2hhq02zpuzlx3vvsmw3qk0hd4fg0yfeqq921jdh75k05cja2278tqmnkh7omp7rs7gxnyqnnhnqh6s05gelvs22f4ydca3psbdvoz1zks41y1vx2ach3f3gv8wmy',
-                hasConsentEmail: true,
-                hasConsentMobile: false,
-                isActive: true,
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'gzb3t1bgsi7gulgz3g19pazfitbp8kac23ox88ebezacka20y2',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '201zlh09fxoexcwf2go4k',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'pfjt83wi84fl256nrppd6e636v8dffn44kzf0yrt06s7wt2l6gcc1fk4hovsiy8agwihk1p01lfz2sz7ef4mrup91c0eugx3jipbl7dcdmm87l5oh1148acr8w539ul3wwnsnbn9j3l9op09gjvkt9l946nofjjtucaiig4vtoo5pcdncripiax09iprbss9xq9mwyiazlnm1keiziffdje9587efsoni789rqzrtqflvgofjxofre3vh6hcl92',
+                name: '0mj403ixf4cec81rp1vvapc1rz7l4qus1353t9x34z1o6aepy8vublw8rc36xy53hojl488p4jgfmxkymna7h4ddjfjavz03kqvnyo26ra0ktx9q59oq609xokdw7ciyxdaxe5gksz0l2emg7o0uidjn0stb1o20vq29w5vu8f5u5h3xb6xgt8xw4p97ddj0nbzhxwi11typwf38lk6sn4u5gavt2u6hft5o6lwblkvtcs43ym7lssw5d89ksx0',
+                surname: '6d0ep0g7pioeqngma3zw3zyajemrzt8aukwpt2fffo6t1udeixorxo0ikvd1npz31b3k1x92f5baq72r98nzobxwwq8yj7xw7b7owmc1qzstidcs4ie6gnvh399gnq9p0qmjv3nt9ipeakr3qmlza72ymocxpk2vc6clj1sc7nf98es4v22ikdo02cugge1658mwmb50phg5b4icpwq9pnfrt7scqfi2wl1bm61xfoflwdj6628x8bwwr68ddzv',
+                email: '3x82uzvhhw4u981j0egjac4txc4nkm16jhklruti65q3e1iw5dg4gjh3g4krbd93zmrv6gr4fv0xh89ja5jz6f4iyamf2gv7gqhsz97uo486s66dqs8i04jf',
+                mobile: 'xn5mjgvnnxapaar50h23a6wnbnd1p8yl6curgwe7ho6q0abptdo8ww6grh7d',
+                area: 'hvob5dva0xhikjzsontr5isopc5cmz2zeu6k61iwhhka6t354iyp9mt0tu8iarmzi4nhht333hfb9edm3awlbnfgb45v79p55rzus7xrbsixsghcubjjgdxsrr174chkiv8qxr24jcjvg9vztgk9po1xrqogawws2pukgf66wg5eipqhgjw4n9ulmv1izea4lzf5p6wak6ze1ryh123zuwdwwn6hq42i12fkdopx0jrtc0ansr6esfsjqu0gljt',
+                hasConsentEmail: false,
+                hasConsentMobile: true,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -692,18 +799,19 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: '597iqdiwqanfuwdnieq5',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'uqo0u9ma543z567cp98zdn9l62zqgldibf8xms4e7hxuuih59xnxmg987eet1u6ylmbd892fsjodsfg9e65k1lzujzldkmakowk43l36qr59tdit9ehz2jtrffkkwjzxjue0f9lx1x57alhh0yz9wh39k9aj770xq9frlgshfq8sl0fevyjjjnmdix3bbsh6y82z5ulqei3a2fz2snbpd7typjxhe1ku7nmj5wekh0syxbplf5l6q78c75tl1gjo',
-                name: '3aa3o9bwdw9hd4xl8tx8nz1jr29vtt420nsv2g17nt26nz8mqkilj17jah424ej8nc4xbci3a1scwpfdtsci7cp5sihpsgjtwbj9czum745hscsbkkzhex161ofcmeaodeufctjaxjwx6bdppsygn6633m03grmtiokcwtb6bx6z0wdifihl9xqlnsoj748mtcl5h98c94bal8tqylv1herf8hkscs573hxdsasisgk2rn2x6av871i9zjb1u0z',
-                surname: '1jbklqe3dx6gugbwvykgvggq0wglmlb0sikznv8bx9f0egqphxf7h1ayyzo6vufoszuvnoa9tvzjuacfg3n7xz58hve951vuvpooe3l1t7cfccfmvcc7kpwbzy80jqnu8ulyto5gu08iutobzlutrbedru1cy3madktf10masbdm05fuq4n140ofquujk6hxijhwnp2xy2409bfi7oxxndy49z9jvw1ezhci5s066jsv4utggut1ayu90g7a9bl',
-                email: '174mt5gysnf14kql26mal9swvma30iaz7z8ofc1xirei7azmercznc55p97l30e5i55gpr15tnpkt1xb700hb7j2xjfs6aon58ydwjgbnlij8w64af37z7of',
-                mobile: 'dri5yibm3uk68k0btvu25wca1y3rwhz6oo1e6qcitwuce5nptkn6hdgc7ksd',
-                area: 'eemh45so1lje4kki8qarerjq57ulyzzyxa5ke1b9f2a3dd5lwmc12g692pnr4knayvxpk8tmz2u2mb0kyeiuuurg7is7tvvqtl1qssxihg2hg33fd451kkna361yrj42d9qgs2uet53wscycne5whqcs804xs70w7qbh4flbl17y93dne2yvqx1aqy8uzc5yy5xtp1txcbi5lzrsd711cwv33thbsgf5d7hukppd14rzvn2tkh9jgmslrdh2fl6',
-                hasConsentEmail: false,
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: '8v6kf34y0h9ghduzeb2qfue56xc6j6autqfox06ech82r475h8',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '1ln6sjv5x4ghifo3juy0',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: '0lzr8w8zfzb0xm2gyhtlly0yhlv6avh8hrepcyuv6a708uiqmlwmiv56p46sotrq4rgbbkcp9ajr42vx4jtehyo72e7bwoxdfs2dpams3im63lam9vbxi9wyoghorq6fdtl96y3rpt9n5ytzf3oo5aegsabvmg32dbhqrh9fykis2x85u70zuwhqy906n0gkatgslz0qzmuydt29994y5ez76kvq461368rm9ydanopbtcni2efq4vjpu0n1p3k8',
+                name: 'rsoo03d8iakvudo029h1tzfagexkfo7amiv83azccq6b0s1kvr44p3suh9fdrg5sldzs635kdh019r7tzw1a3r2izpp099awryrlyixh3r6nqm0kl3b74axheyseglcn87456wnzs8u47ka7jrmb7hzp1pl1exbrqfogxpsb45g4kwegrg01ok3ygrof69ehblb1fxp1j86mbosoi05uu0bchen3z6dvqtxom97vtczkp7cii5q1sx7cn29bvcv',
+                surname: '0nlmbyzogjrqxus65cbpbjn629csy73ao1liq0yc4nblwk0bxmwj0neojmfn5nrb1wxb2q5i9rtqawdttkboqrk6v007lhvc3xu20392572dkq25pmdx1fvi07qqs5bv3dsesfb8r3akeuqs6shqu4q1enx84uwn1ahnuyq46y84odg35y2mq7r1eeyfjunjm1lvqkostqhmyc6ujhf84d9firu9byzghms8rlqb9edhyx24visqeadpn7hvu34',
+                email: 'idst1gvafffh0vzt6iolv831pnwyd087isr0srfhk28ktn9wv28mjhb5zwmdahb0kan3cqxl3g3kyb941j235tfeak39m87qgdddsysua6sx2429nw9ffx1x',
+                mobile: 'u60kxwkxvozo1jd12j4j8nv8c0hv4s9zod8q9a8sswky0yy4pk2s7krjsvwy',
+                area: '8rlk2viekmi3h0ks8hakvg9vst9b5agfa5d9viga24xinpun4ds3s78s4vz91we7whk1bgpwy6ouvh6t3ltlb72hzlu3malzl1wbvht8n85qb3lvmp6q1eb3k116jcgtw8bvxyskjn9ulje59uk5d7xrphditoo3eajeajlm3o2suzs20f5e4pqsck6q4s5l4jbqgv3dhlqizvcrrql3uwbyg4ephmjqfwc887lldud921utcdc8y2j5o627stq',
+                hasConsentEmail: true,
                 hasConsentMobile: false,
                 isActive: false,
             })
@@ -719,20 +827,21 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'jbuex324x6aygj7fy27b',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'ctgy8qm0w87lz0ibtzyyx9qcbh4jgqhvmvkd50ek34vykkfqfrlzqgcmcq4r1gcwslnxz99btzzmnfeb3lfelem8b7exjmed9e7ed3e1mm6u837nu0yic1w4lp1sy2i1027up4dvc7yz794xg08mlu13iv11113uv5wt6mxorffhh6kbo31tf9gjsyhuuxasql1q1l4bcev477g4a2cmhvyn8118o02khghl72uedxd3dh5kgic37auf86k385v',
-                name: 't9otpf7y411mru71ogo2e9fswfv50w2y0iayeybybhg2hv16qfvb0yqyea2oyimc912b212vdh6j1l9asyms7j3r84ud258cgwqa3fvo15fkogj94e0ynwmdbb89wk5x3ekfz0tc6almaj8tnusbu9lol8v35uewkjytht33vkaol15bqn9scjloy4wayt0y7q4wp9l5v1i3l8eygu5alovwfg5gwue7kp6ohlyw4a2oy0w45ssq4ukf7ocryeaj',
-                surname: 'puym59az0orr4c9vth9rn3eah0m6mgsgb18z6l8ffcz8pervr93xnnzefl8qgzdeoaq4cbg7ae3aphkomczymp30fajgn4sk15r5dagq1qupzhw2aqtz4600d3xwitb4pfwispyfq6dgpblsev0ksqjv0xvqi018xkbjyi4i349ucqgrj0bbriel8oqzypkzfn8arsc07uydvy2h49sofk3msytlwbk8wq17pm9ba50xr8yus8a2ra432epfrgc',
-                email: '8794t5l1la9onuf1u0e2pjmijcgccd3fm3vp1hotd3a3x2rbu5lohsnmgnphhh67r2krf2vd1cpjz6ds5xrxajehkbe9l3rcxnoydn59jazpajnzd25kjn1z',
-                mobile: 'zaxol7r7ubj2vg9ovz00w6qi71kr9zby8apa4jk37ghyonjbbp2pf4x5e3fs',
-                area: 'qi4qr2uue53j5sztzv2688aptf3ie46wwyw7r6j6hi23x5h7ti1h8lplr33evp9pr583kigpx523gbdlbe50o1wvof3xvgedsh1o842ch6uyln5q1ri95i8njzrqouf2s723he6rd242s923d5himx5538elyhxdcrim29e5lyech0tfet7av6i7762ggmgad3xnfjmaltboa1tue6qbq02ms8wg9qst8w0cp9hfdic3wpjv353fltrhfva7yxi',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'bgesum1my3rf4hm9c5zlchc251qnrxc92lh9nffdkh6v0nf6hg',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'tzwvzx0ysgqmlr31kgql',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'rojwyevzyy6whuku3vbn5wuzjepzkyp9ejn3dm0khgbaw0f80i5co15x9hj9rzvfmgzf3fd8to88z35yvp37zb8tv04mcqpmv8uyke0i7k3bv7uvowfl1ljli4o9f0fm7jrijmse47bse6c55qh5aa6af67hfulp6c3zpsf4pti2p3fgk5bmszzjxlwf1iwtjlxtmke3s6q9j0t0y8n2k3ybyzpa0h8bm6tkedrtjoijfzdgkj024iplgfwdi6p',
+                name: 'eihoz1b3zws181h9r13k4yhl8v1mm9zg5hltlzkrcdirpm0mhn7q8cq6862d7g5e9u82k5h1x593aw9jl6998xm0iittztyk5ustd1ehm2qgsuel90r1ov0ntmjg2yeay0b65usi35bc7vy2a25jgxhe8th7j4x5h9pxwwvo3s4yvswuw9izctxjs6k8pkid540efdzwuo8d5etz5q8fg18253vghiqkzfr6xz3ht7cmzrt9z679iqmeiughn5am',
+                surname: '79hpcgbp6s8hfzwf0doanltc21bfdkur5fr9lyh1ynaay2c23k9y3r8ciesyfpg9aqrota1f01r7yvbfyw6euwvztx5kwahkemeo7rwdbtffyqi7svkfra7yd8t00ab647e7wnqy4htqhujwr0wytve8jxj3e11yxge61erblwgcsx6vxmhhl06h0p7vdgr9cnz9y7vpergz853kq88nclg4tbg3ap6rytnp5n256cuvc94tpapdrmok28dypdx',
+                email: 'myj4hfclz1ech10rbyy772sy0zxulms5kpwlyo258tr7a7fbhy0nv1ajzfmocr8blwx93qzi2k6dz3fneg1lvja310wd8hrz65qe3p05kr1u05z8thi6anud',
+                mobile: 'gs0w222b0ehi4dp9rwfybqjbrb8gt276k27ysfup1n7mhn9iv1qix9qe7ek5',
+                area: '5sjmcnmjl0d9totack1yu1r0g2wm7zktlw4aa67dwogu2fqwambii3o6xyugmgcnfz7e1mj3te04shm52l816mdypcoo47kxiafl53uohtgbrammwu8ft56y1j6jhht0fpyc7ltg3dcn3ejy3nuwu1c1iyfwqpcf7bilmnqmpaf00h6hm9jdxqh1kgde2gj51s0hmflaoi2degw03hccbd3036fown4o6413fe21ejy2hfenybho2wmi3c7zo23',
                 hasConsentEmail: false,
                 hasConsentMobile: true,
-                isActive: true,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -746,18 +855,19 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'yl8pljkau2vc81hm821m',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 't2vl4ouolwgwrs1gubpeanrhsjjahwj9jefxjs07yhfs2ojez9k9b4p3hqx8dg4mh8jh2v1dffzirjyfhhetjpz6pokbg5xostcaftvz4iufco875znpcs6d35xrqai7f50bt05cc9xycxgjdmw2hoc6w821vo3ve5vg5cln17dkatm7m77kl33pk0kr8uc1eccsqxw19er9tc9ja9gajzs3p5g4keifp3c4fzztb4tvkp3jxr442q10yyrqw2x',
-                name: 'f0hiz8ncgxcteu2kpmwwot210vraqp78caun8roh6buo4vvj2qsbgj5ww8izhmqf49bh9sue4n58f6uxt0rjyiy8m53lg9dogv6irb8jvey2zxpwfk0rj8ed6rv9x5v5sx50rou3x3t2idzcvsjhdykhdm8kuogooztsifvqk4lkdbqedfhlxwgnheqlcthgb1p2sf2z8rnxngi1l7ay1zq2k0lb1smkbny97oq1apguqurwiebbtx7xtehyyzs',
-                surname: 'l5w23f0c5a7jgxfk9ghkdjha4j9bu5nuu9yulyx8le4jf3tc299g0s6qc3b0x5hkwsrilv8f347uw26oj8s8235jkuqe1kn9npkd3a0ob4pfht2240rihieckx45eih4yyzwoefuvcggdpfget42t3jcnjozfv6xpp34n1rc3kw6ky3yuwzhx5spiofxnln9sg94kyrzl5nhh5bs1p9p7e9ls6s1uyw6j8rabp0abrfoyi5x23xfy1hig49yikrk',
-                email: '6d1i2ouyg7hpdlsxipippxvo9gksrcs5bxoktgnkc2wkyuvs3ojopdoy2hk7kv8xfze3jt1rf8oxqit4rs811bwzkde82t7oa3e94jlomheyv92bebepx3i5',
-                mobile: 'ufuculc44jj9oi8kqg4o76pjqv6oznylnfm793uzrtdmpbnwkkqwc1wfjq3o',
-                area: 'l5nonjcgqun8isohb7fe908jz33iqz8qvrivle3zy6ajf2898gmgnhi35fw36c2n777x6hztkihaq31ve8ktsqigwbcgqmoddthg1enmikeqap88t32mxwr6cl08n9rwhd1pssxrgzx45wjj2hjrok77lwjb063dej1iptlcv4cjqijzgojhgli3tgze801rmu8lthtcuq1vtrn753nywqbip97idmyld9k4xyewgi95sguqvo9p7mf3kfbv994',
-                hasConsentEmail: true,
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'ge9mq3qgxzvop0ccedzvedmeduqq0q4xu3y3u9v7c7ca13ctfs',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'fxn32c50p59wotwm9rl5',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'z2e6vadkgnx3d4e9h2ysa06i4hh1gh8ht3va20m1b5ic44dk8lcd8wuzmwit2zmgj5nvsdvyst453458eqols689zlmnigslil8j9nbnojjz1ftxpuovymaf8gqw68cw4skwh58h7prgm1yl1jdbpjcw71i7tztt2qbxg0jg2zqshedlbiv130hm75cjhx7kolpixdzcv91p27t3fif6pqkrmdifimimz8gmv6mzzownnmqlonrol29sp5pvb7l',
+                name: 'k6va59ui040le25r50f2erxl49zbtm4w7crzk5b4sbcmovdfbvwvs3ao9o1t4p3p5eqai6jl4gcwp2jl7qp5f7vsguwttuftb5rzw9o8rdv7qq4x7qk402qvkbs2a7dr26gsw5gyg2hit1i1z9x46xe5nsh8p1az52ok05l4n9bp20rt0cotw0tl2upnl4j5rt5mlxz253w1suqsy6ntg7n9cpaxkco548dsmmv8j24zrx63hx7nxlnrvxae16p',
+                surname: 'jbvmmmue7r21xfu1vv42knwb2ro6aox55oejf5h9k3tz4akp8tf3n17118wmfds0cp8djes3go8hp2z56eugtkk7tct8rohu2ir3g9goy7yrq98id5cpab8jutdwgxtwjeqi2514y4vkc7b5ir790rza18gnzq71erv7zcwpjq5dqxy909f9eukcqujlaf59flw6rupknld2l9nnktnqy5vt08nnwxn618q12ov21saz7qflchj69js4e1gfzpwb',
+                email: 'elfnhxirarsxsg2x7hcqtyrnouk473rk9ouqky3f2d4oqe0msckemmod7cpw191qqy5thlg4rfl90xcc95fun1yg152znmlm5rk06twy63z9i5uq94557nkh',
+                mobile: 'suy7vgtv4xhdousqk6u7kyjwqzyriqrb14ecioav5y9w8o40i8xs5nutc016',
+                area: '6qzqszd8dnd2jr1gv2jr57vhza4gh2bx3yqt5q17kualibonigowbf3ml8530z68q34w06rq91fhmykbwg6g49e9rqgwmwlptrk4u69nue81y2k66p64yn3nh3hmivpqexru8ewyfjyabkkajufcrn5043cjkdcrejogjzjqu2665vw7gnd2j1j8pni2yz7b7jimiriyen6ht6z0ua96vll5q1kt4t5638se4jubh4pe4ud2902ez0gk9gihp1d',
+                hasConsentEmail: false,
                 hasConsentMobile: true,
                 isActive: false,
             })
@@ -773,20 +883,21 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: '165x1t0t4glppiljfu4c',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'qjatucusfv1on97yvuslbdfbqta6652ljdrk6ocvj4xyrmu0mom7i4kwyc0gaprdaz3xnyt20tn3xtjf8e29gixxqwyqs5v0cv05yv025z6bp78xx6kt2hshteo2srs6obdxcb4h1dh68mtj5yihq71oek7u6n4efcc3nzpl1gnb0fxjxu3plj5kjeqjtvciqg1am4lpdbd4z3ok97ylp08jfs9ew2ub1k50q85m7nz4zcxlss50cpg7tq3wxeu',
-                name: 'nji35vxmbnkno80spilr8yyukeyi1xmpgwzpx0qxtwn16obyrl1ygj95zilk2vcdronzl8faq05vmosmwhp7s9tey5kpw58jm4o6zeafpfwiyl9l9j7ajbkkfwtzdoc9fua0n1w5znxg5jkr4ezcd96z1vl1kue1qd68n4b2951lqiyjybl91pz1mmmprubwuytoluzsnlpd1qqiarqwhkos5itdokah5bdfb5dfj0q42ogtmnhwx7r7al2z2pt',
-                surname: 'iapqvpbrscvnponlckfhdi2gf19lishgo4b1b9izzllaorohtjm9sfknjaei07m4hfx80hujkp7c6zt73gwthfsc9xi1qgwvwg13c2fw1qrz70z0z39iinz6ygkvgz6cmufrga7w0py4cot943g5vg7x1cmwhk6lvn7pmpdjuf0q4qmed6opztr1dr9jadnium86hu6sf7ovchbz0m5pkczodktg08qq49ufdhleksqexh5nldld0752sdk3nm5',
-                email: 'ity89c9yrxrksl9jiz1ssreghhqu9dpr0bm8w9j0y2jlu113bn4izmqypzcdjjt6rv84d1b0ivt32dd1l5celptky0xcyqb9kcql4ku87dnx4g2cp7h5srfym',
-                mobile: 'dcjn652oy13lvqoma6638ydt2dzziyb89s5f9xpl0oglgv684gyrm2az6ucn',
-                area: 'r2vknky3gqkt5x89vn20q84nbb158uzcg8w5t6tfqk821oarsw02jz8mwo3q1h4ru9r4b4wsxzit9oc1xvdd0e1dop6cshge2s8vbg2338j4falsd2zfieg7bbbtx83w0qth5v0mx8wa2nh4mn0igzjzbixzlg35ix7z0g93r4rsucvek9f6apf7cwiaqajdr86nguwr476kc226h1tyfad3cufw8awijjmbm07iu8nso9ofb8p2b9j9t9txu62',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'alhm51musqmx2wak8fdd2w63q20up4cats5afwwylkmv6n402s',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'ff2owr8az4ryk7fu8ufu',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: '4f9xnebes0a8s25yi1d4703dwzu930qyvzdp709mund48zvc2l35szgcypu89i1h51l3aom4c20rrpguq93mm2fe2aq2k88f9h2nu9bfefx99r5eensrrl5e3ldc842t4kjeb44qbzpqg0e1set7av7bu86j5jxvowqd888y6ttdohv809ww4cbxuiw2dog82q6bixy2wt0lyrgzgm5ik5f099waq4sycpema7ta7jc2fspbw5z2n6gcq8zomwt',
+                name: 'a4q7jjy79i4jzv76sqbfm0u3cxoke6zur54nx43i1kmohvyldzv4fh692ahe240yqrbeosh19enf52olmux4mlfgdcx6m8a3qvk9ob85db0dg0yxey2pzjrr8eqrazg304maaui5xrpv44v6078ywvd921kbqqfja4bjxphnsth2hzxbc1itrrjkw692tccppoh6zqxuwcpgxgbxperv88zvrffa51rjnqmvtlpb16u7r464pxx9iok4r2u166z',
+                surname: '54ow6ilit6uodb7f0bh8jxntedg2q5wpcxxp1o46zuofw17p32qwdub0ms10pw4e55fnxg06t0gka2l2vyj6nmn1pao4p3gjg5d24s5alli3k1pxzluqtnveqdfmbwqmxuq6mdpf5p6rlgl5ejblm2qv48262688gqyv35hcg8xviep24nyde91ri7vmmraega3jbphpzrntqtgyzx3xli0qk2qxx438w349z2ow0tb79472ck22ktobq51qlsp',
+                email: 'kxbsvnrvq5qwrktzgj777ipq037a1bclox70256bj1tbp7cf0g6hol8gmc3gg5skysszl8zqqw6zdxgpmvwptmchly11gc8dvytse3u6w9umt0mlbyz4ww9it',
+                mobile: '3oci2bb75f3j6uc4dzop4cben18jiku97822f8hzvdfu4wn5f7y8fuby6iz2',
+                area: 'bt7983k88tipu5onfj6blsadgol6t7jawo9pwtymi9rwmm4t12bqygem6z4g80roq0xt76e1xe702amuf0wgr83elk02clipjfj17fw9ij73n5i1cq8s2expvdljcl6tt83iy5ogk9kf92avc232l6iwrnjtceeobfaq1az6iigta1jxas6cwzrdct4gfvsyf28kl86qlsuegfocm134r4k0zzh9mkp47q0idxks5tvaw2qho9fdyi2km254um9',
                 hasConsentEmail: false,
                 hasConsentMobile: false,
-                isActive: false,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -800,17 +911,18 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'aj2icm41sizt0yb0ubtj',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'nyuah2l10ajzuzq1bzq5iojeeqi0rky49t4nnrkksaq5itjujl9ev1wvx898iezmjowvxsz1zsuj9xc5imccksdea1uhadvajffm5xu91pkfkat5t2p23shadad8tww699eio57a21qvihti7ul1oi1chu5ri8f2b5t9u807ztqsz40j7aow22nwrd19gczl1gke8cb3nx11adv0s2ue5kfawfwpruoynv5c88lqdfs2lkxcjylxdnbgb6ff7ic',
-                name: 'sp585fdcima7sa3ha9x2vge47njhu0s7acpdvm08uwdxbh73d6mbc2fsrnbdqg0g4pat207vlu1ccca0eeeem8010bp7mivni5inai1pwr6pop0pjszdtfzr00k4j6kryt2n4rq2a3v9kr9y3494do357swhwnlpzl9w4kz6bexibzgtaqs5apf2sgjtw6w9r5dsdaqt7p737iqu790u5owszusp86s68rmcaq902nuac88njww86drviuj17wl',
-                surname: 'n9i2rf0dzx8fi86ikhh185yh73sk87vjszrqp53xew92dg36fqu51fl89ugtcvc1eh6wwz22xr7ry2pdqw5c2r72en9fq1m1xs83a8l9kmueadlfya6tgow0jqgpsrhxe0nh2kycwrafsznovp5i2oolias1qm7pz8dikz7j5r58sk5olldgkdqscid2k1f8mphyklwhpl0a16v49s1rize6cmvgg4r2hgl9uybdu7laqhbbd1uisy64yvp7350',
-                email: '5o70z0f353k46bbuprvo3c38skj20wp5w3st7z9os6v06g9g8efqu0lsh3gcoamii0wo1pv5gnp86dcpyfvwj7ggntb39i6844c5ros44mp4anm5kig5n5jo',
-                mobile: '5v35sq8fozn60wp62xy8ydhuywenr57q2vfnnop8zzphzlwcw6cy4u78orqjd',
-                area: 't2l67blqr12sb7r5dol7fkoam5l6mcl4xpi25my4g8jchb53bk2fx6cyuzah1gi6q30kci8k1hsq3q8qm4n1tovi434r7m9c0v5iacf3gvp2iex1cd0ymnfyb923xjsse0wytgdnwxifqv0dq4cb7yziu0kb2k4qqlq4dnaz27o8zuo954nbtjvp5kkxhk2xi3pt1m687sm030ubleiuu48x36nfg5serelwgzjya7zlp8vhl55foaxlrnem0wj',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'nte36iql759ii6q80bhouzokhtjwbkrygb0s3qihupwrosdl4s',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '2gfg9q1jumx5wcr2wval',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'du12zcg9epc69fkegb9xa77lxta0pjh2tgm5ani5v6r8nocuea864ntgdf2o3bfui3eivw6jux4ajebl3ck923zpemeldk7a7z5saafwm7zmnakpewyx3bmmqzhw2n1fdcxqtmjau95ua94s2en0v9wtqqr5d6h398k7kf6267jggrt1mc50q71sqmtop5u5bw3axlvhevxebypos4w1nsxlgfiip4aowhbm4cz34gvxvnjalhe04fub7ref0hw',
+                name: 'wjip6y2ur2h4hl3jmbyjo06wfpi32mb26unulz3upxjpfecqij38uuvrz1twzlmsncrzot4l3d3i4a4lg9pidbvfig8khynjn9wftxim811cs6nj2gcihs9v70rm4y2a3tuwyrp5swk6ldfmcsy0trweha5bc2bvry2q94p985b5ft1lx3ec1qjlus1c2azugfapm5pblqodmmox9riidglv7u2o8cjz9oio1o1e22bha9b900y00h9siw5ipem',
+                surname: 'elt8ipsvu6e481n2441b81wjz3hofc1zwjvr5jq2p0gh7kpcvirtysrkx65sxx66x5o6p74xxm9cq8suz2pbyh6wb1a8s52d8s49vlf7bg37ib1ed5jhv48n6ir9w1pd50krhlcailrqq7yctzo4c7x26e49tsbwkqlm57okxz84ymt6prvwh8f87uq3bog329pi26uppso4kugr15jhxe6q8k7vmwhgcfgepkt3b6lu13jzc534ypusbj7zyta',
+                email: 'dapv1c7yss126zrgb3k48yu0bx5aqm3avndaveigtw58coocbz1sivuymfs98wb8fxkcbpsqvs7p7w5j42tlherfbxhiz62wb56h7ano7h74trb54onh8jfh',
+                mobile: '390i73q878h5mclnqvrwrga129hecq338q7ev4yu9jdlxn9fj0d7c6fapplxi',
+                area: '0stj3yu6i9z9d1glpn6b5pkyncy6dlv3amq27whlid782pt3y994xaeyx4uabq9bz0eaf3v9x7q7su217p4jshcb2kscm00g6ngijb54fzpzoeo76zlkno3yrdwdooihiwy05lscky6vmib1pluq8jymhh7nz281v7sowb9mfilc6les7c3zyzq6rzy4q09x4dh9x8bmhfsv0qhbcw3oatmwr69r4ifaf4sswurilg9i2mq1ib5ahopgpuwz7ot',
                 hasConsentEmail: false,
                 hasConsentMobile: true,
                 isActive: false,
@@ -827,18 +939,19 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: '1a5ee2qazahalgf6exk4',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'aypca6lsk7b8omnx381bm0e0l6fax7n78l6fx4dbzjggg9ba18zab8jjmcr1ie5a6bmop1bdw5bftxx0pt1gb71dy9f97g9znsqgw8boixnwumqjfusoz4gzcpmlq0025uf0qwzw5ni5entwfo4t91fm5gbp0a0qum4e27qjv6ql7sqh5bw96bom0z3ww3w9g1sxvh8syob9ttkx0wvoem9po4lr6w832h0120jt48pw03lc83585l7f8gy34a2',
-                name: 'hzavuy6jr9pdw2vprjbsd8prgmmke5csyzc5d2qjfvyzzft0umg50i38ifx7ul7tfh9j5k4i4nlt40pzgcww1zj60arxnyh6bntvjq0yqb18um3zppb7lva72w1c0t6qhze3o3e3z0j3vp8b6b6e0klv23yzq1jj1w4890dg2cg30jb9sy623khx9ypnibswa7tc6qk0tcmr1y1xm1jrx24004y36mrkxgk0act3r8w9z2d33e9dtztmgq94lwh',
-                surname: 'd06lim26eu7atds5f3ebc8txpi5u9dxhwdlk95yq76iw7x6v9ja0wtvkbeihrz4hqfc0y3gldepjp4wkld70d7k9ujrusqecj94xdw1iri62p2in9h7ucb1101lbtoplqkh9sk0huidfinfxx1alelmyjptjrhwuyx82l1f68s6p34pr11764apit2fkl9xd4fztt0fpg4c1z2qn7beolovunbqrfbae7v64nxyerwcco9on2llodd0xvlloizb',
-                email: 'dvt418ahe1u0ugwjp8r8zx292wtkd4iouhinl8hxt21ojy5dtdhao9in3sy8s4g3ofh3ij87mbsphcgd78lcm6kramrx7lmd576fkt4qp64h8pr01arlkukh',
-                mobile: 'yg7e122ge3j6szjwc3i1knoodlma94x03uuub2pei1oh94l9th2xnwdjqiza',
-                area: 'dlq84sizgrrhyr38sis2duzeqgg2lir0x2f6vcptdtn7qeutg1mixlm8cx7awm7ztjpmr8s6dxb7v34ykl9hyz443ox0bze3cu61e6dfn4ph3914vay9mh5r2ankou2h9322sxhi47aeemr9anf1te7dyarij94zmzyvzyq1x3skppug8rsagssc19xkpv9aabn9mhyhp7eva04s09y3j8gqayls0yetueob0mqybnd7aup0aym1cvnfxtjt8m79',
-                hasConsentEmail: false,
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'pwuoe6zyy3s33s2fr4lavf0habvpkhnigi5xhr08vt1153r5j1',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '6gba22skqmhqofei2lrq',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'ae0g6lwy3o084jn8jedvum6yrms2m015tykwiiti113fly4onk6ql45387kzbtewl4jnlq491hnxoghfby8behdc8mgwgab3faojswuio05cq432lyj15f2vtorg1vby1ljyud5ghicckysrvudl1z9pzhg520mc6ewjuv0eulevc2hdmklpg2yur13a4635m5lefkhiwozsqrgxlrursqk639ayxi6urg1v3lqjst89zb4t28uklxfekvjww7d',
+                name: 'lhu9cvd2lu12xwp0srtdfi82od3q8o8w23o8okwk7c0vcq3s7g6xm3dofv5f403ike2e7n6c7hhg4oeypedu2j44qbs8kdam7eh1jr3kt0pwk302ew4dwq7fckaksamu30ib1l8rgsm8f9gz4cw61ko0z1iaxn41wq6fn6ag74nsjele3f77r2hdo5gjhh5v8scgq02b2ksv9snk0222uj08ngg9pyzuh3b2upyiu3ldxdkumhv0ulqf6fm0a16',
+                surname: 'b9ctuzvi39s88w6akcjvsgbq4b7p20ya89zlmr6svy9vdbudnhxiyxe0taivwhgkpzc21rp7dtmzsvx642ub5ua2h7tox7ucci8rcqz7i6uqhhrphj4xyoforzyfxomwoen1h1haqa3doqghbfhqesnj4bf711ol8m17gfi7nfotmdlhohouh0uat4yk2h7xr964o57nw9cpk3buvtcllv2civxn08caggvjom6gh7cptju57f6l7b6w8i6yq91',
+                email: 'fn5qxkbsdq1hsdyo6rx3m66lyxqo6sk36wr7nq49zo0lgj8cxm3boz5p5pzps24xulapo1k0qwaqshqdq81fsvz6fmiw0bziexycg4119na4fz5opzze31lj',
+                mobile: 'ybyinyf1wmlk0jx79ulbr6yjccc56q3kjsgtvyg8ti7jm5ygn4eq3z7qf09a',
+                area: '4t8lib7vym3dz7m8wcqwxtz4oqhqv8ou0dubki3vaiqyqn96mu560s5l15oz9ql6zfj1bgoxxe9qua3r01cnivpuubz5f3cwxslull7rq087e34quyi5msxvn7favlo4grulnzq3ij2lvlj2bxsksgqx6nd5ulj14btwp3p0w806ndtxqjg7xzjccow69n66ph9rdjxcwp2v8o76bvqdw9eujn477hij0mbs4bfh8mi5zh6npi0meu9kshdz2uga',
+                hasConsentEmail: true,
                 hasConsentMobile: true,
                 isActive: true,
             })
@@ -862,19 +975,20 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: '6gi2cv5vliwlsyih4b8o',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: '7m5q9herwtbsmuzvkb59iaisw7cj2364pod7j3hcjkah1a1lk4tv71rxebfbg9poecjoqnc5krtwz1ty1ecw59u1ce7l0nat3vezx6yrhsw63n1c1he65e4onfzjkgwwoiln4wl0tyjyhu26hnyznyi7zl7ipt57w3iafnr4j05n2hjpe62fl9i3r7tg25jqwhjmo22r1ylg2p5h0y9e9wzpbg3zs5okgmyssckes306qddbih0mkzcesvdkg2g',
-                name: 'eyc3yt6o26epb47nqqb6mh9dbhe765s0twja0swmsn0zal73ubotaqtf9ldx1g367u78vnuzbwpndn5cee1rbcd2smb6nop3zupl33ws6pu11iuk1feihjfsexq4sufefsidl0zzp4u018gjp4urcydcgewfp39kmes5uwpko99ogxfnuwfzojmfdg5qfisdmwfc3pqz8l3o10fb2w6hszhzfi9vsug20rugrr90r6pb0u2lks2urjsk5tc2gku',
-                surname: '6rvems687jvm27k7lk98kck5v6c0d2nki3meh29uv5e8bbc9swswz0i0sht80ybmrd2rnpxqohlh9c2pucxh3wv7cs1ykxbg6r3v4raa84mijvbmbg2x5k5ydvu8sy6cv3sbvb0p28oo8py1bo8hyc433j7jspa2sq6tfo95t606t3bimaatnmgmakhqpn3otkw5f7nc516e5srb96q5muohpkucf2flwzua3pv4836fzq7gm2rdp1du9k07mlo',
-                email: 'kxe2e0aql14b6vhlajk3hyeq6367jcp1eyjegbxz3xoo833ku47flc04ebk02ln6xs45w3f6zo2gz32mpjgej5zdxjv9clcsy5me21ybyynjrzevxy8mgqmh',
-                mobile: 'leiekqh7c78eoewc3mrcbonoeomjyn5ixi68r22x5d3ztmpdteyielvyvbrh',
-                area: 'm29t4ucncvnc8ct9s4y6ttkm92zqrtseyaz74uw1e8xf5w94dhe01een3pc37vkumm2cnjxs9c56wfbu4v0iyt1n2bxzi4b2d5hfd48gzzquobdnxawhpdwirccn1ydh27vzfngr2kyxld426d64a7ofvbbcnp2zl4hr3dinnkxz57n3wmvi6nyr9hc7y7wx074ry0a6vhni0fcxdh4ccoqqzcvbc2k6xvzgztksp65w03moh3cmcqtrtuewonz',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: '26deqkhex6uqzkrdgaa66esavtd6u9o8yqya6joh06pgnkhdrq',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'tsugdfag0kecvzvsbe8f',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: '0f0qprs31z9f1vbbp41d75av598yuyuclaioypk4b2rfkfrobbl2k6qjnbacdnwto9ijn546uu7aixl9s8ipcz8et4ovfiq6g6pk6lb56kfjrpq5j8en9ogqni572apwdri1fswkp8mrpbcbaaddiw81yufzzf506cwzpp8kpwoitsn7pd1qon5bvkoqlngnwuxroowpfw0a25elc25ivqccpzoe6he6t45mstnkgwnaag499trvxvb2h72v4mx',
+                name: 'h803iby6xf8zfxpxa88k4hun0cttkx4ga9147feo61sjh5gfd8cwi6pppfrkmcivv5izdv8ag24025e072klko0xsl0fd8ywf05lozujmsyknnva6z0s1p1uqy6522x57jgov09olrusikiytf7c3uwlb2mhabc8t5vo1994xl38mwhbysmqc0t4t23y1xagj3ncam48a4g8she6gwfhw24sjlteyev9ch9q9iu3p4asflxordjv1l9cxvrromd',
+                surname: 'x7w3enns4b46f3ve780e4dkh44kunk5pe8qxmuolh5gy249d2rzwkarztkuxk3atz5lmtu62ilk63cm7c9vyvcd8csbm8epsrq8mrp8ecxc6z9un9pbhilr9kizkhlqjhbgs65fzp5cqojo9ik9vypj137yu4xsnekt2x4s4mmvxmccglgj2cb33e1uih29mb8yy13d8zy1q8pl7og7azvuk06fx43dlmi0253s2nhuz6yibbfer382o25ilclm',
+                email: '8fva1gw2ipph701a7z6morwq10z6pgkcaiocz5y2amdksdfd9rpm5czdxg1ww2pcbc2ce1npa8fc86c2mi6lju9jlujxxblssbfulpwh9gn97tk1xyrttl70',
+                mobile: 'm7fibx171jypv816s6w26knqel9bneo3puzx0tft1njy465n1yfr5layfjhu',
+                area: 'y2odvt7glbwvdluu9k265n32p9nje3mb71w5ey750iq980e9cmsu24ol6zrzegeznde47lzj0ckatmru9477ys4if0qs4ydr6o1zm5porhc7hp8lzjd6o2xmo5pemdv5c1qzvmlu51cfmuit2y0165129h6wzb2s20kw0rm9tm1fea0caf7dcsthwpr8sbhr14gbjxof5l8yunt39vop5420ws8e1th0a9tmkxf2082j6758t6si41m5tpqtp7a',
                 hasConsentEmail: 'true',
-                hasConsentMobile: false,
+                hasConsentMobile: true,
                 isActive: true,
             })
             .expect(400)
@@ -889,17 +1003,18 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'fymktqpll7cfegm1agxq',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'eg5fxcbvv9saxqkyvsp60ponbh8pwvo6qs8o0p59367se1zthn2gmi6kjgg8ylprvu9ighxf24lfw38rj0c19g5uylfbt6iriur7vwnfoucj9p3xjmfwmx233xilj5nhq5uv9ovco9iuypc1ysevnmdk2bv2sl6cqbi4h2zxsdb3frch8vejqu0kq8kn5776od0k6s6npl3zlykqlaskn2i5s15uzmbrozlx6n0mtgjrslqbwqu0kaxbf5kwj1d',
-                name: '6zan5qbbt0bte0fmhfkhbcz2i3ufoe48rx17y0d85totx073lk7vfk3699v9w1m9bc4jpen4pssauhv156mdw88h673ipie70ocgnidsmgbub0wv7x5y36j1zkpcw81d01rb82mvbyrs7ogjdc2h1fbe0vygytedstshu5gadefsexln68a1rf5yb5wgle4xb6qomjkx8onlbcatp8yhdc93qrlyvzmgeijbywok2b5sbxfzoyyo6jt2ocd9r1n',
-                surname: 'fea3n882ev8p7loyoge44gombfpjt1idgj2o5slre7qxs1aw2sg8eo50rlblmdaw8oguk8vwv6mhhrazge79pd1gwzyng3p3v01e1bw9a38egpfde807dqkpedybzsw3exn04l2xue2nawwtzgbr2iddx2fcdyybwd3atj5yuncrt6by4s2t9eta97fhgcox7edy8so33z2raczpm8yqb3j2ff0zkjx8pqwnebvf2hbfal4r8s5w1ihz4sq5vwj',
-                email: 'jupax8t7i7psb6hkq21dvu33pc56rnyay8v6qx8s7evq9y3b20qu00e9kwaexs52yu5om4f89nt53zcrbimcs09yulidsjoo5h6hv0q7ps4ylj38b7dmqmen',
-                mobile: 'xve0d1nl8w807pzf7a8xupssipz0exh9syx28ff00tb5hiipa3nsw1fta7e1',
-                area: 'saoqqupuiai2jdhov70i1h3lef2gqckh6mbwnz1gljkvzcf3w1xhhfdy4zfczr7mk44xcjsw033kksd9ipqjetlp7gvkwzqg39t890hwkst0ou6nnrzonlb9by6y6uj8hbrldr60u8jh9m408xfnk4brc70u6pw5919clsz7vcrgdsqe8s1go8wy2cmvx97b1z4ltl2yqtzfikbx5z2ow7sg5h2x26dlo53ubuj56t3nnjkl1ote55vptkq4b9h',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'g9cp5gf31hq6b56tzd973h3vwdbi1nliqm61ui0f19ubaq6j39',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'zqpjz41z04in49jz2i2f',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'suzdgb8vgbdsokbvlbabytcpv9gd1qe1w403mqviz6e9um2rmkvq7yokeelzi4eg8ewzchzspltn95q6k724jrx2j7ym0sz36oaw7njo8h4dxhkxo39o3ia89eht1rffhvilslyoojsn1l63vvdztsujrbda29ip7pult5aqsmcieo77uxzmqsi4cmjkj5bxiswbvsoljcnomzgu6vbahabq9dkychfuaw2vuxwnni423ts38voq6dp5ywmj8yt',
+                name: 'o3r4t468to4iyq89062nmsvzrlwkdzj9shtnfvwxdkak2khegde7haqaec2mriobsihb02cbtbt779ba16s3pglcve5lwe9yagiuz6v4h0cxyxg8oyfqynolrkbi56gqxubslkt0vx4wp1zjp1t3d3qdz4vwwog542uytwr4eosh1e4hdl8ggn39c0zkcog2gimyhl4kij3ugmq76qlj3h63jrlfpym3hr04mgi2u57owqcaz1nv97jj6vlrszk',
+                surname: '74rgw908lajfgl2q7ulje4fe4t8rbr4zo3xx8w0521t4t9sxjz5bao73pyqa1xf36d7j080im5g7tnkx1so9irgq42tbvv1x5mapefvrw8cuuxa2cawhsb2cshh36mlu1q3bvtyn0vrmzx6z0gf0g3wnenrf6bz9ncjib5wxpbkmpcuyrozlsmym6mm906cxrc1ujk7gbcs9zrdpmob5hdipqays3zvvm83rsuwxwlwppzmyemhd3cwj7kvmduf',
+                email: 't0ds3h5wczmlgxtgvsd93prleno5xcxlfwxlig2mkiwbh7pwpki1zsdf9hblc7cigowk7qwltgaorv9zet9it67t3r8rc0slylrs7ajxjakxuipgxlxnft02',
+                mobile: 'y6cnqh7vomvrd650g7yrki6p7osmr0akshn4yo1aseqtjnc51as0r3koyi8n',
+                area: 'v5bn8iy6q2s0bmq8bq9xda1tx8h0wclko5o0vz1kvxomllh1vutu0b3x40dmaiuunute7iygbxibxb1ko2jp9n3ntkhxo4bohs63hxfzr8lhkvs4vj8vga082w2nmsstbr9n0qz8fjjn6tmvi56ubbszmht68w5m3qbvux5rluasobysw58gmhsdvwa2mgvlc2nel6g6c88du10eerjnqrit5xsf68ard5e2gt3d5l1z6hiui3z1lsmlmrrxnyu',
                 hasConsentEmail: true,
                 hasConsentMobile: 'true',
                 isActive: false,
@@ -916,17 +1031,18 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: '01ai8sxu8yfwk99bi7yu',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: 'h2ndsjzxsz87k9znwxycpb8fi34bdvy71qemmle9n30ae9x7u6b9om18vag27h56p4aqqav7ji6prlxvu8a1oigy8n6ly2tsdzbxogfqzx77ab1z3ra3q4t0qkc9h5e581huoiwjsoob79598c0mob9xzh359k974x1bdq857wq05ld28xnhvw6b50y351gosj5f1kvy65p4zmkfjom93ehqdh4xa9dtelt5k77oounms4md5k328ml7u41qw3e',
-                name: 'ughyr5d5s1itiqmtin6dgaq7nwum1swe1tmlovfccgkwfkuhapqzsevyxvfciqjh2uh4tod09ph5r9hn5sj8zuvw07a0ifucivhpoyxbyxbsnz0t2vv00yk3nimf6o8hr0osbkc4nezc9v0vhqfnmprewr8l5z6gr31sa6vnh4469ksc0i0y9gzghyrfoo628dvimh6tn7v69rri3uqnrr1gzcr2h6k7an8kc09sctmk4ufrreaest9jwoix60w',
-                surname: 'px1an5zduguxay46vs4di9nzyqyw4ex8fn1sy4il0xk31cccpjvl5dkft22yq9gsfab05mhw2hy1j1gvatbh1o1dw3u331yq8lvycslcoo4eocyf7nckgzs9eob14p306edsclv1947ffaeqyxpg9vxx0i81x6732ulccx7j66hal1x8ne4qq5dtnb0s0fq291y6fk3rejabt2l455st6wvq9l4o6qews5x6y5ses5q771m4102vd5tmgv3bna5',
-                email: 'gvqo9r8fvq19razotyzs5xsdw41dv44p767xds32g0zssliab0eibgna8wctzvolc4l2czdy2od168btpa2lbnqbqt31ecxkr4vbrpymu1ksu4m06s5pwc2g',
-                mobile: 'mpgc9e6b9klgwgbtt5t1089ps0f9rb8y1wxgtr9rsjqth93cebqv41j7q0w2',
-                area: 'hrjw8ktrio7jwmvhcdr41ah2wa7k3uq7abygix93mart10ae3j3fet8otm9w2gb4gibmvjmy9uronze43ijudtf7emrk8as99h9v1y0ufj9g2rp6zix9c1ju5jjam69sbcc5icorzc8xyqwvntl4z0kbjo6k74l0pcvrpe4tek3vl42nuny3k97zbtlqacsz5eyqom23glebrt8e7ae0p1b1x43ax6h8iciejuvjna6umk9m98xawzwwlti0muh',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'yt8kpduvikk2gbv3j6in1dll50r9c8thl5jh0c3ji6d34eqs09',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'unidk1hkrb6cvgke4zsy',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'j2lkvy95wlfpi0liav6k467d7w79tmtj0xu9tvn72mn3r336nsm7zxnz3g1tq38ebbpfvbots93zt6h4gjccj34txi9ecifua040snj5nycisf6vzzga3scpj6ge10s5dt845n9lc0in4kst15utc6iymochf3jbuhhlomcj9iktxydgwzvny8ivumjqrw5mb1ypi4jtgi4f48nhic6v86vul6i0vw0gpu0hw3i1v2g3mo15ualmh3shaghpk6t',
+                name: '0rtlgscyyu8jct74bngk1d1fgj3jc2ozetg6iijr6xqjmo2qf57veiixlz4ar7aozrgd6wep7z2r5rikkordqvqcpw0257kuf33czfypljs7uh58onxtnloxu46nw85n520pd1vee2facdblr4ngnjjhwda63x0ymvkg9u7glw8qchlojnjw62w4lcxifsvvbaj8cvj6ir7500zqbwsspi9twebute0dmsxfkogh89o9uj9kdyt5d8jks4bap18',
+                surname: 'k07ibu1jlttxkv15ihe5bez21atiz01jbizvbd3f3h8c3umr0hs01f5ap1fxkcg0izowr0v3fv0j893kmbtg3jw71xxjn61nrk1ajyjnpqoethow3uhbkafesvyhhndxusi4otdi42hggczooww9wrtpb3lsc58mdf8zs3w2e75hpaqzw1gd8a5pna00xobwg4smbz6kovpni5rwsoaz4dqt54o9pwmariqp36bvsfnb0jvpm84djbphiiy5n8a',
+                email: 'i1pjh6p791oz3oflfl9p57rubizexov0qd144ens5mzj9d1v0pli25zigekb071uqyd1vfo6kubcu4bx6tpzibc19jl2gutlbdlz4b2xzpxzg9jrka0tl6ps',
+                mobile: 'tuavrkb573dxys9bfsqoro3grfgnxvpnt3hcymn1mx5be7nsh2584x8newaf',
+                area: 'p1efk47nzy87xk3bl3yf4dyg9veoaldg2abi4fu2502keaxg3ayn0axokb158ivwqtq2lux3jyaxdbqpgqbl62e0jmbh1gv2mm660fxgezkpcc7h72tngsh6ohj1wcqzipxw7g1nwpb6pdmuoaks0v70a85fc28fc1f56n0h9tas5rwoyf8ntt2ywpygi8wyh411rrwseypsvyirvfovguxh7b3wgk502suhnne6mxn4qq1axp9unwz4jxg1cxv',
                 hasConsentEmail: true,
                 hasConsentMobile: true,
                 isActive: 'true',
@@ -948,17 +1064,18 @@ describe('contact', () =>
             .post('/bplus-it-sappi/contact')
             .set('Accept', 'application/json')
             .send({
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: 'k2a9oizvteon6rnnx008',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: '8hwjvf75ecj056iefmq9a50ytui71zvirhkd401anc5y0pukq8egch70y1l6k3ogai0eo0ya0rovc93atns8tsizqos9b53dl3dhnkki0oa77grkd90008dkl6psr0wjdx72m45yjjolo055zcz2wmxhuiikbxtw0t6thsw5ft79rz6ln0el6qd2ruetodtsz0hungknc9fx1524tenhhxabrbnijp7vs785lwojlz1cvdequbvvfk78z5posyr',
-                name: 'rii1pr69570cpx2yvx0t6gi3pzeajuksjxjpkodqboixcuxpj5z3vs0hru58hrc8t435c80d33ojrh0vqvjdbukfklsqwss22oha07fj6icoce5znl581hoout5c49r422dtkzm2mff7glqvfdthl5jdvyml7z17nq0fond74uif7c0rul2vebw3r8s115bbahf2iqycl0s6khuhonhs1ezqll5m60h8millhnyst0nimdhjj088d5sz1bkjkgj',
-                surname: '8c5acqb8q1c1ri2s7249ehvdg29ehl2enx275d8cssr13ohoz6cb2ghemkns1kqd4j85jsmf191bnlrtjh5kcav0f4jhmhtkghlevm74qj2ax2gck307iuxap82ymrih3l9rxcslprpa5jrs8njw3hutljyun78aftn76sedhuazynxanxpkdvzhsj1v9u7cu7h2hc5v8asgwvcr62u711ucvsfab9bk16csvd0icb1dy39ted9eb8es2a5t7vs',
-                email: 'ormq5u7qwurf74st5qiuutkbvdn4mo7ymifhkicxsbl931oonhhe9betf5yeoz7a3djl5y5x925r0vmoy71rmgwh36wsuwz8279a6oztjmk6asibe6qsm8yq',
-                mobile: 'dwmu0236j35r2ozjylyyoa3lnurxjw6z6oxrkmt83afu3aic2rylo911zifx',
-                area: 'olag0c45vhi0e06qcpnefbvt2cglnh9kp3vu0sehstsai44lqymx9zdyscv8qcccbbtbxcjuskdxx7vzsma0ygm4t5n7t0xemxhkz239vcqn4o5nduefbpqqrdbvp38za6tlp68ub51cdqnoo5tad5kl3q8getjn2qpmeu1u41u6crufrqaz5cmeqdjwqna3zu4rbcoeq9m1dk8coxnvzgagkcez6num5pvbqhr6ht75tkmsgcdqsjvt5bdyz8v',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: 'kpr6ghtmqw67vts3pmdhuh8j1dpzif5wqa2w5aosx0xd9qbbib',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: 'f8qhuzqadxxhldyhhsod',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: '5wgdniyqcae2fggytb4vcgvtw6xl8au2j3i0jtrbaa0xzhv5u13n2b6k5bxhxxedpewwr9ltgl7l76wxznhclyjdh1xbv5i0t3qaal7khk7u1tqek3om0f9ptpnptb31faglam9ss8t5nzbh785d7t39fpdygk38mysftquwyutnhsp2y43pugbfa3j002nhov7eij44hcydv7f1rfag1e8vkvy4i0zhngx9l0xl82bruy981qzgs0lpa59p0nn',
+                name: 'mf48cm8fqt7ddjz14au298gpe0hnozzb3e5tj68szbkzbmfhb4z9c9q67fpbm1fjbi32lamnt68ju6u38a0yog9j6xixo98bg5x216a3yhqz318klinp4gp9jm9z38m1zfh611b2ns3v5ssjmt1arxcm4xcd9wjttm58xp3wcnssmbuysba2nief69sx2nkzpy1lf6761oz622gzzu2f0upx1ykyxhybktokhcw131ve1ny0107nvv45t83qka0',
+                surname: '81n26c4ov1rurgs6f7ew83j8oxf072mxzllks7y3gwu3pw1t3rndvlshflx8dvvgdfxshoowzro9e0onu0xemrw1eooqis3j3ymtdtp8tui7w82ydsqvwcav8zylrobcwsft8cwyvw4ojti9yz8zm4w5fqio0fk7yth3y6v9p22ic2ha9qxum7n0f97bn1eqrpt83xejh3x8fhpabsdpfpz7zq0nw9f2d8ny80xo9iun0a7jg6iufgtov1lhb3t',
+                email: 'vygjolk84xg8xi6svvf75ojja22zc9divsy7o4mcgi05qricssax99t8eo0swwk4kx1g3pw3s5bbvoruiwfwjbxmc7rdggs05ad9b7y3qu7baghbpzf75zu6',
+                mobile: 'r9d2b3ri53raqgqfj8s24yamd9cj1jxamb60bdr0h6j6nr3w7bhoxzud8hgr',
+                area: 'duhm6ldx2e2ovubjufgigfo4rumu8qbv2mu7rjnabgo5x9uih5ksk2aitvhubi0ljtxtj90hkj70k0n2zfpkvzii9413uaypota25mp8n4vw27h0apv39h7rt9lde7mers8bm614qotygsanj6i1trsy7cs9sxysd7g7x6bmwbujs295aty90l6v95cprqftnpkycela64df1x1rspqxjwjc5lkelsw4ka5zx34cy3txwuztnid5gi8t8bojrh0',
                 hasConsentEmail: false,
                 hasConsentMobile: false,
                 isActive: false,
@@ -1020,12 +1137,12 @@ describe('contact', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '32ec5b5c-16a3-4070-9194-b71ff8e678cb'
+                        value   : 'c300a290-1bfe-4329-9384-b1626fcfece0'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '32ec5b5c-16a3-4070-9194-b71ff8e678cb'));
+            .expect(repository.collectionResponse.find(item => item.id === 'c300a290-1bfe-4329-9384-b1626fcfece0'));
     });
 
     test(`/REST:GET bplus-it-sappi/contact/{id} - Got 404 Not Found`, () => 
@@ -1039,10 +1156,10 @@ describe('contact', () =>
     test(`/REST:GET bplus-it-sappi/contact/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/contact/32ec5b5c-16a3-4070-9194-b71ff8e678cb')
+            .get('/bplus-it-sappi/contact/c300a290-1bfe-4329-9384-b1626fcfece0')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '32ec5b5c-16a3-4070-9194-b71ff8e678cb'));
+            .expect(repository.collectionResponse.find(e => e.id === 'c300a290-1bfe-4329-9384-b1626fcfece0'));
     });
 
     test(`/REST:GET bplus-it-sappi/contacts`, () => 
@@ -1061,18 +1178,19 @@ describe('contact', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'a7ea0eac-84ae-4309-9124-4d2251ae6cb1',
-                tenantId: 'ff6b52fe-5994-46d3-b281-fbcbbe059aef',
-                systemId: '8719c234-d60d-463e-86f1-935c0a9bfb36',
-                systemName: '50nrcqxivpx17scx06ov',
-                roleId: '10ce1510-5584-4d39-b55f-060de4253d0e',
-                roleName: 'gltpqnus409txab32txolj67ze4e1u7rrij92q7tw8ntsczdq3oojx5nusufg792v1lhpnmv7s5rusc11iqczhkgo32sddu9kis0i76yjjg3tw17o44foet1v2yq6lwa86yh2x2vi2z3dvar64q48bu0nxyeyfw9wk40j0ogo5ifl3hey6dckft51hskuzapvolv4tby5zpku2nqtpd3d7mtu6tjh8leghxqyt760ygtvny055m81qk76h516gm',
-                name: 'cbko1bxigxol7k70v9n0ba7x5booa5xrsc7uqzjtubcqt7ggyd9r7101n5yik3x90dgk3o9cjxbh59fljtj79nzf2p52zcdm8tlwhco42q0zeh1gr5ajhalv69a3cjpo23ynlzoelp1t2xxcyiwy85atgws7ku9mt4b81ijha82ee9961atbi6e5t0lhcev0xktc9z081ctjfbhyn30v00j68y9lo9krybijhbewm81mdg3hvx23dkq4jng3nuu',
-                surname: '7om06qeqbly66r3nvwdohgayl9kr9gmhaeyj1n494n0frbiecb0311s3hw1bnf8jz5xo4ak01gf9gjtgz1o41pc6ftawo7pwc7g9jk8h2u01ul13a2a6r35zwxzsx5mdg0xgub8uh6bppx6clh1mrwrkhadx0w1coevplrrkujl6qb3t2c87iyysaruuzpn9tao38p77j3h33b22rr4ws5tubatnb7fojy0t87363coape0x03wkufitna2431e',
-                email: '6fcxrrwp1ic7o1i4xdd47v94p4mi6bt8pguoi237qiuno93jca0j6ab1dxqh2qofvq5vkrxs7ivia6x6q523wczzq1ly6s1x1ujgdeukcmurwz1yyhmfvdmj',
-                mobile: 'xvjweamqbz3j6i0tu0q0cmucxnqo00ucqj033768y0k0xdjxl3qowm8hi2z6',
-                area: 'ufxckwwv78otvdqb94j23shjzn5osq82gmeooz5kbofhjwj0sgq9oy6099dmm26kie76x196p6ywg8rzquwhbg894tg6w9fag0e61ekr6zzryijk3puyxfaitp5b8brg7g0hjcau04r61fj70bcskzc0m63a84ilzr7g41xtu8ub8rg32qp0oz115v1ge53e146mzmzmdrr548wouts0pt2j3hv1s2suvgl1cjgs7kgzt0yi76qedncinxta2va',
-                hasConsentEmail: false,
+                id: '014f1345-5f07-4644-a84c-a9ec197f8de2',
+                tenantId: '1ccb2014-b3ab-4bb5-a240-9e5f773292f3',
+                tenantCode: '4pffojwd6urlrfypwnuk6dfxbdm5zvm99mw1nuasqmezt8ngfx',
+                systemId: 'b1dbc842-659c-480d-a6f0-435e8d9372af',
+                systemName: 'bn3kb4a4wquqiaf2y6vx',
+                roleId: '3cab30b5-f0cb-4586-a5a0-cb6424421ae7',
+                roleName: '28fwq103lunwq9l0u2a0b8ugs15eyy5ncdv17xb1zilgx7ocjftitziyzqfvxldaswxelle1sa7x6nok34hk6hnapxufe3bbkqii2uezgy0dl2vdadw54lrdhqxko2f8zzsumanryxbrnc1foo0fc64zkl39mp5v503nw4ogcc5dohewtw1k6rd22jaom1j3t6yug9amjm5ggxj3oah8i2llz1prkp1i0qzj6dkvu8jnc9zigrf5w8h8wcx3f0o',
+                name: 'af5cbo19ca9jmdmef12tpqx9dpep181xak4a2b665x21ont5fwaz87ssgiuddkvh0f85ln9rxbavdjznmitc66fbnt14jz21wmrkzb42yxqt5cgxd6ubje6ox86riyo8vdy1cv3h6rst6e2t7t63icokwym1wn5jk4f23qofezqsljbx4eqyca1ayg2gv0kop4oulllpdn5majbq53ip6ya6qoqnpya0jtm5c952z2hz827m4yi0wwr8g4i6uhn',
+                surname: 'n14v935t5e6dnx918vepeacrscneflzxjuahpcdo2yhdzb6wdl4dx4zoxg0r2r77zq9denkirjz5ipnxo7hzoyzbamy9ebtunc06j0z4a1a9rtqjo1aman4h675ged1nhh5urbhva1wnk3ais1vf1ryml07ktuo1y58xqn0xchp09jvd28gp4t32lz1laevjqik50ywxjqywzic251pxifboxigvfl5eayj0kf1b93voywmk6z7qlvkzi89a7xi',
+                email: '6jyo1jd8jisvzqk12r9ugu0u11ol3kt51bqe7biiuskagsfvo30udbd9id3uru2jok353br81gah5ls8odfm4yej4s0l19eixuvludwz0mynsy5rodceba8h',
+                mobile: '02dfhh4ltxhl8wahqo8c8wq3sfeshkwmsmqi8h5tljz8rjavbetkgwc0j99o',
+                area: 'bpnn4xuktpbpydj5fgvas9rv7c8vfmr4to3qt6fv3lh1lz6fbk6ibtcbtm1914e5btwnfgb8t92zw7qixapozszqrcygi1daqje16ux94k9m9s27ncih2m0e83x3thiw53fbwatg2v4kf4dqkkcmcfsq52fxglcpxb34r4vg3e38f515tr1adzew3ztl0z1mx2qnqkbejvi7sa0u26w96ge2l8y88r7l3bttneiwjv1fqvm8fpw73jlmrvsg8rh',
+                hasConsentEmail: true,
                 hasConsentMobile: true,
                 isActive: true,
             })
@@ -1086,23 +1204,24 @@ describe('contact', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                systemName: '8ok9aqtwarl70fpb8zq8',
-                roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                roleName: '6kcjh4xcpyjpdl2ia3y3ct272t1d7xv7p3s2e4dz54wvjcuv6babi0fusajwvug8ue5apw55g023oipw5wflfc4x1d4c5xvz54edc8i4oen1yxsxpp0wgv0w5yu6nwkvk85vengg0ymmjtts8cidt0ih78y5yowi275klrxch559jz4ghrv9yi9atssy91fkwus5tz2mbkkh2anqovxeb7ftvqbf54x4n1oxvcjq2yrdnrcuhzo3n6m8xh7t6kl',
-                name: '2nw7tc9p0tdj0ok5d9vbdasn80kitj31zb0983ilqccsyydmdx167pw17y2fho0n6niypc2voebdaarh5veekepxvddhbm5rdvi4yi9jgjy4l10vl2dcz3vji63tcnbr2tw1ez6axx4rz99jg2z35bavxgj3if4fvymuh51fw1yzz6ob26b4oitk3hvudkm36b6vgg1br0ieg22oowh29u5xyvwmio9f6kghlh5p7tx09yg4744n9tdnj8yhfw3',
-                surname: 'btpztqlges18l7d9b2c66f682ja15p2z7xt2ucmkyar6tgqcto2th9e960quna44i3f6yloo11p6dhoj3ga92kkb3r0k02xm3p6thl3h19mjccz6cxr0ntx9v4ve4m8d8l7389hyi0vo7v0fo1o7f035xwlrzlwi8vfqjcj77ab4egpserf8t9t1aepxkv9ls9ghkx4ulif668mkvbtvpjanzgfd907h0og75uqab2hb54acsr4a750sk57hdbz',
-                email: 'vlv8sfdift9t7nao49u0gpm3d2k7bjsnwbperqfhwcevjmjattiq8h73jk1bt7z4d119ai85okq8ccwwms4lfhuaztt711v3vw4uyuizrartotu2a1i6vmhn',
-                mobile: 'pfxaftjc9rooohuw2euwv6duaheejh3iqry80qzsi15j91ybh3w0qdf5220s',
-                area: '82l9v3uc3n2t1gm2u6435bomkgr5flne4zsqp1z6m3rul830yowg2v26fg27u1dp75ju9zac33xwgrruxzph47gra37v3trrdnt33n7juzg0746lpue7a01nkymft3p9x7xeqdibnoplm65itlukyyr1tfb722kwqmxx1boqzxsgdcw3lsg8r20dx4eyk03hcozoor6rnvnoweqnqre2opummqmgmtt9nv7s112hwxzt9ypqfzhkm0oevqx3fkb',
+                id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                tenantCode: '6ild7jel1iyn914s43iedj7sib5ds902f4ef5kr6u4r20w96ht',
+                systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                systemName: '389e9bx83zxp8agna8x1',
+                roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                roleName: 'au48593efjby0l0e4c980ejrmnwu7j4gtdpostzvj0ddds75i4fn2hivbh75yif281e9dgx2cv6x5iyvtmfgbm49ycvl4vogc0nbyq8zc7s6pst48x7h2vy3q76ndfwucnh42wnvknk9jycil3cgzdqqwzfyw78anyko9q78iz83y21hj94o06zxubzmb1dircd8obtwaiqhogrhth47o17f3757vlafw9ua28d7s6ny30zdkbd7wb4c8hcczzg',
+                name: 'ycxy3x0b3zdy4z3w87df6ctb1mlp4bp4tepthf1bzgfsgmd9pl8o33zcks2s7emm0bc6hwmp4oq7dhj242q3nd6nom08r5hldgkkl4ktx4gwftngm6hubbe4g1d0npaliy2e37u5vv6e9onx23793k8mwh1pisdvlagxd0rzudsq5z4625gudse9ilmv9ngst7vtxe5ggvhr98z8xteocbwsa79f6nrd2j964ozarq57tgbg9bd6c4gunx94p6j',
+                surname: 'lgi2qfwnbsaimpldz7fx8jdn4nz4fe7ijxooj1kw24hxammcac43ehlmg73m62nub4po0mk7d3x1rzqeag7ctrj845ju6t8ahnou0ljc66if6nqbon5rxzegz17qcfss3kdxmplmnvu5wjodnfvb0aho9iyekbyek7ozax31u5b57rynyeqso23zf8cwcx3uc935lvgu3pgwt9jeemqkty7dl5tzfmeyhdyqievz12o9l7tomsrx7id18mh2lij',
+                email: 'b01slp41xqjbnuhv4qpftuvreyfa98um44kddrb6iyx7oufzdr1d4ugz8xltlc4vl8ip7a28ir92p8u1gk0b6f00tgyuvayetzri1jpu4y2t74i7ci8q2k6t',
+                mobile: 'pc6bryk21nudn62zu122fo4139lv3rnuqgm40w37corajqbhi932sdl5craa',
+                area: 'qe80x3wbjz7rnl45905fb1fifrfftwa9u59h50u98wtbfk2yrwjjkir0ukgeyqm2x69ahz2g0d2vjq5chfe016vvf9vs4itwqlwh9p42e0tvwmb3yxbxt4ei3n6gue90ogrfqs7qm679pfyvsn330n3kxaejqk7ry22n2engbiwfd96pr7te9475e7g9433u3o8zo3l50m7pc4touy8wwwyd358yhz92l6pkja5pclixrfn5qpwa18uou7qodwq',
                 hasConsentEmail: true,
-                hasConsentMobile: false,
+                hasConsentMobile: true,
                 isActive: false,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '32ec5b5c-16a3-4070-9194-b71ff8e678cb'));
+            .expect(repository.collectionResponse.find(e => e.id === 'c300a290-1bfe-4329-9384-b1626fcfece0'));
     });
 
     test(`/REST:DELETE bplus-it-sappi/contact/{id} - Got 404 Not Found`, () => 
@@ -1116,7 +1235,7 @@ describe('contact', () =>
     test(`/REST:DELETE bplus-it-sappi/contact/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/contact/32ec5b5c-16a3-4070-9194-b71ff8e678cb')
+            .delete('/bplus-it-sappi/contact/c300a290-1bfe-4329-9384-b1626fcfece0')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -1134,6 +1253,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1176,6 +1296,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1195,26 +1316,27 @@ describe('contact', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'ce3fb822-e3b8-4a46-8092-93c19b7a2a16',
-                        tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                        systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                        systemName: '7gkuo7sg7bpt28rzzjn1',
-                        roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                        roleName: '84v46zdhapf47oeiolgbw1bijr8tc6dukujyr09895gyjm7jp8ylhwn9zw5vtj5g3y7kljswb23ihl050obh9jzn6it31qfcl4esp5jtlizsf1s9indci1nu5p2j9xs685ln5crcesm09eckm4gfsyatic0whmhpxz285aonfzvzveme80mqukaiib7morkah2ch9ku94n42l5pxm52y4vcirrj4kbnadg9ndobgfkyluuarmls2du85btsz6qh',
-                        name: 'blk262b8pb1rbyrw4njtdf3ykotbmr1ytneeupg1b6hoj9zexyv87fquprp36kae2j5emvcjklz55hcol08l43uhr6sros1b8bo2g6utfbw7reem67739si8bnso268dkjipwj1fjjsuxwe1br1vkbd2k36lp69y2yc2v1jfewal7mp2pe62t9jile5rkjotttyaq5v75ji8d736hj0vdsyhsli47vr2uhyn62h7wg9m0g00vk5vk4tcmu35o5o',
-                        surname: 'ogqwmcgr3u5o5wx8qtqnsowot0y9058q1zxgebzuog3l6ucej6n3ty5ph74ehexkooiefkzl7dm3drh8cat9rmgnlxloh8jeddy5i73cax3x54rbsag3uxicqkrdhklrk2h1qkyfv57zorg9s2jfhqv3dz9edfhog5n8pszga67we2kmoadhwu6yhia1qm3nlxl7iw9sk7yz0ydtteufx58c4xwv7tp43gxwj9aly5f3rgl5bed08isd2jgvzp0',
-                        email: 'vwz72hsjdrq2yv53jth3b56ipdgpdo4cezayskhxj4e4gw1rt9n9muqsbbmbjbn6d7p2n36u4r1ennmcfd8c45o895yvpepzllzol8etnu7t4n8el2w82gl7',
-                        mobile: 'txq2n7s3dayt7ed99wmpxh8cncuou0ovqcn6p5xk1c0gb93flclu3nwz96x8',
-                        area: 'r6boa0ouap7pvmxyll7o39oz5z3vii8n7ejtc3zewjdcy6m3qizh7tebpsuyayx3hyaum0r46zp8hpjh7odvsev1hqsbfzlpmkmtiolualzzq7fv3xznuy2ntjsro13yfxmb3otvy8s2qqeo60xjcvkdvhysfeg122r5kuu81mto8hrgr7sih4tefy8jj8f1dwnpg4gidjlng3gs8461hl5lxll05ne6g76co8e3m0ju3yxdn2nl1wt5kfz22ih',
+                        id: 'a1cd789d-4ec8-4fab-bdfa-4cccd326b9c2',
+                        tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                        tenantCode: '1g5w11umswf0xkasxdhl2zyjfobzo0ha5tteryv810ycqhn9sw',
+                        systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                        systemName: '461vbrhkpyyxzxwpcyf2',
+                        roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                        roleName: 'iq95tly75dhwm9l0u17fie2ti5skatu73f9b1w8sn105e88kz7thdn5bofet1hx55jvwt8dq38hd63qo9jw6mh1p0mcgf4ofhnx2fxvinfveo1bx5c2jmh4vfkr5wq40jonc6fdz86jtaarj3ynsw19lfihymw586wizm27lwgkfkw9efaesqffyttp495og7o4mkylnej1hwvza3icxg0jcm4ftuvnfga8tqbdjiengtuclhbo3a970z9adymg',
+                        name: 'to7ds5ahc8lm3msvri7zkq6eq8yplv2eodiukh8kej9rg6r6t0p06p7w6jvpivlsktjeulog0yaceaazly2bj0ug11uh3hzqcs7fw8i6kft4peja6185vo6czw343y1b6ciwshqdtsugsiao3t4q6tygdchto0eiqm5l3wjo5d5d4dmfsfp6s56djqugswp16t6r5ji4fa20qjwtf1fqnax1icaku46gsnxsxwx1rt1yw3e9f9n26nlialaebga',
+                        surname: 'hc1njytudqpllxxj7gc6exon22socdcejpp2p3l3cceuoyy6nynlbr6w4knoqs7q34j0qinujv03q0niu99mktzh6fv1uuh6s2y2i6aoqapfr1xuu64oes4jopq42xqazzjgoooze468lt3ty0d9tapkzuv3xr207675lw2xzlr1dws8mahiyqtd7hw4v8gxzetnb8k2y6ml1ilifhjms08u89li0p2q054f5kuwfyofpt8w3jbcqno079uibxf',
+                        email: '91w1wi30akgm41eq72pyademje9oqynveis6lpvv38anbkow4cpdr3e1526ehms1yfp0g0dkorl65av9bxv2bxhfi2d9c61d00t4n3alw3gwzu92wz4x23tf',
+                        mobile: '66hni9nx1629gs7lh6xwc2cq067cum10wa497krkb45bvllgfrduihvjgb3c',
+                        area: 'yvhhzr2mg3pp9oyaiag2fbf8t6p3729blkndmje0pudac5kc6ypbztxxovx1pqk26iu354igwj6ddza9n14734vq2j62t5dalg48j97p1zngq210oxa8fiikzbwfea746vomczxkecne9xo1kke042rkzr85sflky68wd9swn1hrsuevw1hpgkq7fja9slobmgmgb7n1g469gs50rhkok6q6i2vzfx7uhz0f4070jzz98s1kgt08s7726cp8ef3',
                         hasConsentEmail: false,
-                        hasConsentMobile: false,
+                        hasConsentMobile: true,
                         isActive: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateContact).toHaveProperty('id', 'ce3fb822-e3b8-4a46-8092-93c19b7a2a16');
+                expect(res.body.data.bplusItSappiCreateContact).toHaveProperty('id', 'a1cd789d-4ec8-4fab-bdfa-4cccd326b9c2');
             });
     });
 
@@ -1269,6 +1391,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1318,6 +1441,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1341,14 +1465,14 @@ describe('contact', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '32ec5b5c-16a3-4070-9194-b71ff8e678cb'
+                            value   : 'c300a290-1bfe-4329-9384-b1626fcfece0'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindContact.id).toStrictEqual('32ec5b5c-16a3-4070-9194-b71ff8e678cb');
+                expect(res.body.data.bplusItSappiFindContact.id).toStrictEqual('c300a290-1bfe-4329-9384-b1626fcfece0');
             });
     });
 
@@ -1365,6 +1489,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1407,6 +1532,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1425,12 +1551,12 @@ describe('contact', () =>
                     }
                 `,
                 variables: {
-                    id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb'
+                    id: 'c300a290-1bfe-4329-9384-b1626fcfece0'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindContactById.id).toStrictEqual('32ec5b5c-16a3-4070-9194-b71ff8e678cb');
+                expect(res.body.data.bplusItSappiFindContactById.id).toStrictEqual('c300a290-1bfe-4329-9384-b1626fcfece0');
             });
     });
 
@@ -1447,6 +1573,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1488,6 +1615,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1508,20 +1636,21 @@ describe('contact', () =>
                 variables: {
                     payload: {
                         
-                        id: '293d3bf3-a481-44c8-87d0-1dba5d6ddb56',
-                        tenantId: '77ce1e68-096b-43be-ad7a-44e9680861ef',
-                        systemId: '987fd26a-61bd-4bdb-8a92-36ac766fec3c',
-                        systemName: '5g1yd7fw1rj2ja9c1mte',
-                        roleId: '0a34b50c-4838-4dda-9599-a21c6fae2ab9',
-                        roleName: '67c69bg5dhgmvrdfpv53df3xbpkxd34usgqx1rf6vu9trsrmosymdfsdm1xhk52dmrvq55wzofe7hkln0ahjd609hts11dux6xjvop69z6z125f71h1ymdrog5gy5gvlmkv83zg5u9dl8276cj90d6wa98l5nhjkpfzi8oqxqt2zck0xlz4bghpenl31eqqhv6n0rmjvnh1m8m9ist8e6rtnk2y9zbp5hg16xu2od2oxbbc2vykyw6s94rn5tlt',
-                        name: '2i4h6hwdqncn5zc8qhn3of0xp7tew8tyqfmxbkc52tfhx5aopf8vobpqzepinbanzfjcs6rvi0bfvjk862ijbkcwqo0bth2fc6u9lg2qctt89uv71geytemwvoveoa1g0ok4bddm5alk2vfu869vl80nwgqpsgwu1mf3ameq28xz8414ttfo6sqhjjcb4n35eo5gz50jdpfwgh0zghhmkygwep7q73jiihmcy91u00bo3kd3407zga8cpz3d1t2',
-                        surname: '26ova3me1gfi8l2o3et5khknjr6ktgusq6xkru1k19r71ucrpa6iduei30gyqow4mlv7u3zbusyjjte13fq0lefni46tshpzhehfbat83hla8fuo8m7lcfj04h3n0fytsyop8yd999c918zn7yaeo4854x7daaq6r0p68pxz43dg3thrut5rd9smn6ly3v5mrizdtjj08fm7bstsx3e67655lb2viwnlcc2ycjrnvn0tn3v76z11ei6mt5ynkgf',
-                        email: '82q9j14pr0zo5qcn3c8mmpgho4hqwsi3nsd51grt9e5stgh6ayhl2oouqz938guu33e8g1e2b6mnlenlcegg5valw5lfsnfyt3iu6306o7yauiepi1dwdqzd',
-                        mobile: '54gbc7t28vi540imj1y4bfunu3cmuskl6bfkztaumwl8nfdj5q2spotsqb4s',
-                        area: 'nm3fxlub18ecdm3lomgtglhlf4h4nuznkajr86i1nleppy5t3qdr2n3pkiffu8lw1za4d5s5zwatyxg7j2a1kw0y4ji4r2ajqel4ecclrfb0tdki6vhm4e4p9pdlrwzzzkx6vk10jlmnom7z0nemqb09evz4lojs0hkio9yr5kb1rg4x0fw50p8liyj33em7w4wh8ori04f5ayioqwtw9ufigyk85oz92fl2mv4plcw1huxl47ntnme8ryh4e9u',
-                        hasConsentEmail: true,
+                        id: 'd0f61436-7cd8-41a9-bad5-7909695f37c4',
+                        tenantId: '4391151b-cc48-4b71-928c-dd9b16d6a450',
+                        tenantCode: 'hug255eybj1253jlnegv4h4isaeq8dz54htidyiw4fy11cglgh',
+                        systemId: '5bf5cc16-5e3c-44c9-b4c6-dbab217249d0',
+                        systemName: 'by2lmm7cwsoy4yuw2ayx',
+                        roleId: '63f251b7-906a-4308-b124-c77c988c2484',
+                        roleName: 'vw8g3w51oa6o37vpb4uvdac4y5c8i8ybbekv3nviwcnlel4im6uvvu5f3k3bshq3922igwsufsg10djj7kf1b4ozqhdtmw1k7sr59rakzuujcwgrm1tl76ecgb45mnnl3sfmv7aoritt27jdb3aacd6mmywyqn0m5ws6wycfn27t8na95ftxwipugqj7a58o73ys42txz3zagdgfboe9qjztpd0x4l7x5uv9zyk16lyfo2s0uhrl8b3393o5kgv',
+                        name: 'bjyjjlm7aze9cr70564dgk7ke635puz5xs4nqaxhgu7l7yup9iwm7aea0t0wo9b8jym0jkqir8sh6nad446qgovt8gr321dbbc89kclrqnguomsdp3leqd4dzejfgooftvrubfdkfkk79bupwxznsmpi4txxwhn6hccb2s5ram0ghg4n7fco3lue8gft795hidob32cb97qffvdkiorvffx9ca5e3r1ssgm17znz2razfrq37gxx893ik2y4tzm',
+                        surname: '4y0c35lz387z9mu7m7ugw6v40dhuj20vvw8pzqbt9mt7lrkjngfwtkt7vrikmfwnab4hwwtvirgoyqa5iayyrvnv8sjw57x1171xoh5pz8jnpd7v2kdcgutmd7ixc85xowqlvjpbl20ggocnz9ix684q2hscfpbw52mjt3uzps8444vfvxmxj9iy4ll4q5en13rlqct9kssxn9y0lfa3ayohm3t7isxyn678v0onigphwafqpeyh7pjyyhhjfbm',
+                        email: '4sz11uwwsfdcklr16rx41sbn3n9ypsm8sl2lr76u6p192sfox5t3y21gjavg93o4cvk8xm05186vpglwknelibrc8lbv2ctbr8nemvm1nmtanwas3uzayljr',
+                        mobile: 'f8487uu0mxv5doouwifd3g018o0ik6htouk0x0t5egvwz51r0343wr7jnst9',
+                        area: 'rxg2cbcoyhsxjtl3c1bcjocbibf9fg4q7x4txklp8bftoemqvtt58pl3fl9t0r5ymn7141g88cg6snx593s8r9u06n78ljtg27dx236a90aqpubwbckrh8occfmbevz5mpj5xe2bjsagynrtkw267q8z6zmylrwnn2zwvy0q0uk6e9uduyfulimmry93nj89bzreee707f10pq5qreknw2121egnq0kyhly58m8fschlyxwqbt43m3ixfbvy7es',
+                        hasConsentEmail: false,
                         hasConsentMobile: false,
-                        isActive: true,
+                        isActive: false,
                     }
                 }
             })
@@ -1546,6 +1675,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1566,26 +1696,27 @@ describe('contact', () =>
                 variables: {
                     payload: {
                         
-                        id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb',
-                        tenantId: '31088825-f57c-4fa3-9757-103a534e9206',
-                        systemId: '3f34a134-de5e-403f-b00a-95954bf10fa4',
-                        systemName: 'dluh9qlmtuv3dyrwg2dw',
-                        roleId: '329b2892-f556-451b-8d96-e301f8b7a390',
-                        roleName: 'eacuja7vx2x57k3j2cmd67gso4pvhuu6ighkly6phdrz4dalqcknmn98qsms11aoc5m3sjukop62f1rpf95ydmb0dci39kgitydu7jjfwzx0vdb1i5x7ew96osl9gm2vyzs7orhzi5rhycmj06lkklu4cinv9pw8idavziqpm338i0cukbnw3sd0w98850pygyjgteoae2qrr6x86dpypwaqlf7l0m2m3zu7d76jw622x7drx0bp9xqs6i2o2zu',
-                        name: '5y9hzfdmbacsz6hsoqq7ee30bekyjgeweubt33ct23cq0mjgyepvfm6xfd61rq0xt9h2ywh24xyj2vzd8tv3f0o448qet88a5948fdy32n8jn10x0ya6qinmaj39sbhgrdtqg3a65fsuo70yach5o50cr5l6e1bbdium8n7iubrp7zomkkyrc3vx759nbms7ntkwz7pcqndazrdcbipzq8bj0sffc9nkdj8jj8n737g0emmy48fx7nuxyihl306',
-                        surname: 'tpfpo3b2mpb48f54zvss6dkw0y1yspnub4q7xkvyyhrhmcukyp2p3wxiv40cu1zm5ksm0uaypijbi0tg2piy35qbawxsmisw2d6u4xp62s5bjvsbah85x53agw6c1rzwlcycjzqjx21mtf7f56id4smc28dhz7c5nfr0ftbp7c2sm3sqbik28rb7lcoticy1vpkj8yq7euxwt3e914iaus589wgv89wp0zzfgp6xsxy3wp88th54ejjxwgekc28',
-                        email: 'rb9yytp80m27rpbuq3lrpnue5xl2qin47hnnwn8xg6xhkr3655q8goo15rp1kzgyl36gu7ki8ezijlt03f239bv6ph9r50v27sm43n07g2gph5rnz5j7f4mi',
-                        mobile: 'x9yefvpfq8tncgorzsa0v6xgk2gjfeeuizp4mryx5p1zdhu2oi1l0k65a1c2',
-                        area: 'sbkbvou2iojz413xztzdxqtylhj14wpt7whccre369lgu44hjkiuxgczq8zdn3rkm7v0wi5jmch7n3yqakvhmrd25n5z36efq0b1fsjyd23epjndn0wi31imdxoqjlpbew394pk0hk258bbw6w4l64qebovpx3e60uke44k2pq5ue8wchbdjhyfy2guka0hc89nsa0lz9yf7l2mfxu008sqaguhta13oojn2sayx4lnmrfp0m4j8anzn6fy7qcf',
-                        hasConsentEmail: true,
-                        hasConsentMobile: true,
+                        id: 'c300a290-1bfe-4329-9384-b1626fcfece0',
+                        tenantId: '6a4c3e39-3938-46d8-be10-02ae6113b5a5',
+                        tenantCode: 'w35qc1qi8duvi9zuk2x6srqmx3vyvmbpbfm1bdgrquutlvz6xv',
+                        systemId: '51d2a3ec-260a-40ca-8a92-b8a1f9f022f8',
+                        systemName: 'bymb9x2z7jmll8nrn9ji',
+                        roleId: 'b1279008-b3a0-4753-9fe2-11c1bd1b9613',
+                        roleName: 'pa7rdyvj3lu2d0fypefbcyejdlrdhc6cl2bj05rn0upgzkf5j25d6py9qb00ug6wenj2jb5tnhmu2clbf4jfhw7gwfi9gt2mio7lptx3ul1kfmlo5l0h5npiww8zyn9vvw99eke017ubhdmkjwtw42tugrlzyj8ibaejomyw2dffjz19ck8pye4exj5bgrw5cm5w7o7wulryvxzp66qoxs39as9vpzrpjpo6is7iwputunifup7f9fv40p60uzx',
+                        name: '6cmwa7uqoiwpnzrey54msckipg8vmqohtebs4509hoabwtmtfrzkszizlujywnep3n9nfgyr96aepyqp0aim6mdes3sypelm9ok4n36t8ok05t134x8pw0xku7q9jl8d440spewnd34kb1biw8bdhw7oeb1zagnulj6eyaqukkeg8da2dtx9vnwn9zk9s1yo7ffmvhndomkzmcudaxnubn3ol5jho3vw3zjaiv7ys6094r6lgh1ukdlgtb75u4d',
+                        surname: '1us2hylzih33c2bfyby5usru9yb03lt3l7p4baugafzal0jcpjdf67noxupsj9mmfggb7pfhpt47jae4nsy0s5t38dcq413nlhqbnbk65cvc78y400g4pfgm4vlajeam3w42mtropfxphc83eg9aec812d6ockv3ofjoe28gvze7zsg19wcaiymom730xenlz938enhd972vk5tekim9748j2zw8vizb3o2dh5gljth5rsrfmxq1qtxc7gf594k',
+                        email: 'nrt2ohs6fgrks7ssjqn1ihquhdsca9cnk0au0q5uzhtoeunw1resjlktdzgy4f90n4ozvarfuye1ymxgfs7vmt7ljns3cnh1z8rmofdwqhgr6ts5r1f0xg8d',
+                        mobile: 'x273pncalrp1xmlmqlk087th9hyq3uo5bw94dcl2m477ngif4ej3m90zdo2z',
+                        area: 'n2fo54hr1ril7c775flmsgysqklsmvj8346gs5nccjm145xztw2lukhh4a3b9u59m8yfkh33jl3cly2b1aqe2himea6o0wd5wq48fybn8qqcov8e4y6kc37xhx4rrfnnugqvitx236yqon9qsqxcxsq98oskm7kskxj9a1msoc3bjf27tvssby9hinz077u5mav0d34v7iuitih30s8noicnyo0fvyi7l6agc1asw8doangmam10kzpr8kkx7nk',
+                        hasConsentEmail: false,
+                        hasConsentMobile: false,
                         isActive: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateContact.id).toStrictEqual('32ec5b5c-16a3-4070-9194-b71ff8e678cb');
+                expect(res.body.data.bplusItSappiUpdateContact.id).toStrictEqual('c300a290-1bfe-4329-9384-b1626fcfece0');
             });
     });
 
@@ -1602,6 +1733,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1644,6 +1776,7 @@ describe('contact', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             systemId
                             systemName
                             roleId
@@ -1662,12 +1795,12 @@ describe('contact', () =>
                     }
                 `,
                 variables: {
-                    id: '32ec5b5c-16a3-4070-9194-b71ff8e678cb'
+                    id: 'c300a290-1bfe-4329-9384-b1626fcfece0'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteContactById.id).toStrictEqual('32ec5b5c-16a3-4070-9194-b71ff8e678cb');
+                expect(res.body.data.bplusItSappiDeleteContactById.id).toStrictEqual('c300a290-1bfe-4329-9384-b1626fcfece0');
             });
     });
 

@@ -26,7 +26,9 @@ export class CreateExecutionController
         await this.commandBus.dispatch(new CreateExecutionCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
+            payload.systemName,
             payload.type,
             payload.monitoringStartAt,
             payload.monitoringEndAt,

@@ -9,8 +9,8 @@ export class MessageDetailFlowId extends UuidValueObject
     {
         super(value, Object.assign({ 
             name: 'MessageDetailFlowId',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
         }, validationRules));
     }
 }

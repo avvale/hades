@@ -14,6 +14,10 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: AdminTenant
     relationshipModulePath: admin/tenant
+  - name: tenant_code
+    type: varchar
+    maxLength: 50
+    nullable: false
   - name: system_id
     type: id
     length: 36
@@ -64,6 +68,10 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: BplusItSappiChannel
     relationshipModulePath: bplus-it-sappi/channel
+  - name: channel_sap_id
+    type: varchar
+    maxLength: 50
+    nullable: false
   - name: channel_party
     type: varchar
     maxLength: 160
@@ -78,10 +86,6 @@ aggregateProperties:
     nullable: false
   - name: detail
     type: text
-    nullable: true
-  - name: example
-    type: varchar
-    maxLength: 160
     nullable: true
   - name: created_at
     type: timestamp

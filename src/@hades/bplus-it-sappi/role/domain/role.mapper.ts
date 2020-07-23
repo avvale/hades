@@ -5,6 +5,7 @@ import { RoleResponse } from './role.response';
 import { 
     RoleId, 
     RoleTenantId, 
+    RoleTenantCode, 
     RoleName, 
     RoleCreatedAt, 
     RoleUpdatedAt, 
@@ -55,6 +56,7 @@ export class RoleMapper implements IMapper
         return BplusItSappiRole.register(
             new RoleId(role.id),
             new RoleTenantId(role.tenantId),
+            new RoleTenantCode(role.tenantCode),
             new RoleName(role.name),
             new RoleCreatedAt(role.createdAt),
             new RoleUpdatedAt(role.updatedAt),
@@ -68,6 +70,7 @@ export class RoleMapper implements IMapper
         return new RoleResponse(
             role.id.value,
             role.tenantId.value,
+            role.tenantCode.value,
             role.name.value,
             role.createdAt.value,
             role.updatedAt.value,

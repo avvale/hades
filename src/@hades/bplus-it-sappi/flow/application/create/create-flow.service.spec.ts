@@ -7,6 +7,7 @@ import { CreateFlowService } from './create-flow.service';
 import { 
     FlowId, 
     FlowTenantId, 
+    FlowTenantCode, 
     FlowSystemId, 
     FlowSystemName, 
     FlowScenario, 
@@ -27,8 +28,8 @@ import {
     FlowData
     
 } from './../../domain/value-objects';
-import { IFlowRepository } from '../../domain/flow.repository';
-import { MockFlowRepository } from '../../infrastructure/mock/mock-flow.repository';
+import { IFlowRepository } from './../../domain/flow.repository';
+import { MockFlowRepository } from './../../infrastructure/mock/mock-flow.repository';
 
 describe('CreateFlowService', () => 
 {
@@ -48,8 +49,7 @@ describe('CreateFlowService', () =>
                 { 
                     provide: IFlowRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -69,10 +69,10 @@ describe('CreateFlowService', () =>
 
         test('should create a flow and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new FlowId(flows[0].id),
                 new FlowTenantId(flows[0].tenantId),
+                new FlowTenantCode(flows[0].tenantCode),
                 new FlowSystemId(flows[0].systemId),
                 new FlowSystemName(flows[0].systemName),
                 new FlowScenario(flows[0].scenario),

@@ -6,6 +6,8 @@ import { QueryStatementInput, Command } from '@hades/shared/domain/persistence/s
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { 
     DataLakeId, 
+    DataLakeTenantId, 
+    DataLakeTenantCode, 
     DataLakeData, 
     DataLakeCreatedAt, 
     DataLakeUpdatedAt, 
@@ -50,6 +52,8 @@ export class MockDataLakeRepository implements IDataLakeRepository
             
             this.collectionSource.push(BplusItSappiDataLake.register(
                     new DataLakeId(itemCollection.id),
+                    new DataLakeTenantId(itemCollection.tenantId),
+                    new DataLakeTenantCode(itemCollection.tenantCode),
                     new DataLakeData(itemCollection.data),
                     new DataLakeCreatedAt(itemCollection.createdAt),
                     new DataLakeUpdatedAt(itemCollection.updatedAt),

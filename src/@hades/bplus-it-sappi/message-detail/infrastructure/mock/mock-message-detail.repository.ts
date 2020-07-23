@@ -7,6 +7,7 @@ import { IMessageDetailRepository } from './../../domain/message-detail.reposito
 import { 
     MessageDetailId, 
     MessageDetailTenantId, 
+    MessageDetailTenantCode, 
     MessageDetailSystemId, 
     MessageDetailSystemName, 
     MessageDetailScenario, 
@@ -82,6 +83,7 @@ export class MockMessageDetailRepository implements IMessageDetailRepository
             this.collectionSource.push(BplusItSappiMessageDetail.register(
                     new MessageDetailId(itemCollection.id),
                     new MessageDetailTenantId(itemCollection.tenantId),
+                    new MessageDetailTenantCode(itemCollection.tenantCode),
                     new MessageDetailSystemId(itemCollection.systemId),
                     new MessageDetailSystemName(itemCollection.systemName),
                     new MessageDetailScenario(itemCollection.scenario),

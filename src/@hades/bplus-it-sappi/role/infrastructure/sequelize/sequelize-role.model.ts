@@ -32,6 +32,16 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
              
         
     @Column({
+        field: 'tenant_code',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(50),
+    })
+    tenantCode: string;
+        
+             
+        
+    @Column({
         field: 'name',
         primaryKey: false,
         allowNull: false,

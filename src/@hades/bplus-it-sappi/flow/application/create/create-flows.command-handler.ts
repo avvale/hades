@@ -4,6 +4,7 @@ import { CreateFlowsService } from './create-flows.service';
 import { 
     FlowId, 
     FlowTenantId, 
+    FlowTenantCode, 
     FlowSystemId, 
     FlowSystemName, 
     FlowScenario, 
@@ -41,6 +42,7 @@ export class CreateFlowsCommandHandler implements ICommandHandler<CreateFlowsCom
                     return {
                         id: new FlowId(flow.id),
                         tenantId: new FlowTenantId(flow.tenantId),
+                        tenantCode: new FlowTenantCode(flow.tenantCode),
                         systemId: new FlowSystemId(flow.systemId),
                         systemName: new FlowSystemName(flow.systemName),
                         scenario: new FlowScenario(flow.scenario),

@@ -42,6 +42,7 @@ describe('UpdateJobOverviewCommandHandler', () =>
                 new UpdateJobOverviewCommand(
                     jobsOverview[0].id,
                     jobsOverview[0].tenantId,
+                    jobsOverview[0].tenantCode,
                     jobsOverview[0].systemId,
                     jobsOverview[0].systemName,
                     jobsOverview[0].executionId,

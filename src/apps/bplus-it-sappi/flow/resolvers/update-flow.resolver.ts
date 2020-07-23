@@ -21,6 +21,7 @@ export class UpdateFlowResolver
         await this.commandBus.dispatch(new UpdateFlowCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.scenario,

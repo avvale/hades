@@ -4,6 +4,7 @@ export class CreateContactsCommand
         public readonly contacts: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             systemId: string,
             systemName: string,
             roleId?: string,

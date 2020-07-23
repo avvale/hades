@@ -7,15 +7,17 @@ import { CreateExecutionService } from './create-execution.service';
 import { 
     ExecutionId, 
     ExecutionTenantId, 
+    ExecutionTenantCode, 
     ExecutionSystemId, 
+    ExecutionSystemName, 
     ExecutionType, 
     ExecutionMonitoringStartAt, 
     ExecutionMonitoringEndAt, 
     ExecutionExecutedAt
     
 } from './../../domain/value-objects';
-import { IExecutionRepository } from '../../domain/execution.repository';
-import { MockExecutionRepository } from '../../infrastructure/mock/mock-execution.repository';
+import { IExecutionRepository } from './../../domain/execution.repository';
+import { MockExecutionRepository } from './../../infrastructure/mock/mock-execution.repository';
 
 describe('CreateExecutionService', () => 
 {
@@ -35,8 +37,7 @@ describe('CreateExecutionService', () =>
                 { 
                     provide: IExecutionRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -56,11 +57,12 @@ describe('CreateExecutionService', () =>
 
         test('should create a execution and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new ExecutionId(executions[0].id),
                 new ExecutionTenantId(executions[0].tenantId),
+                new ExecutionTenantCode(executions[0].tenantCode),
                 new ExecutionSystemId(executions[0].systemId),
+                new ExecutionSystemName(executions[0].systemName),
                 new ExecutionType(executions[0].type),
                 new ExecutionMonitoringStartAt(executions[0].monitoringStartAt),
                 new ExecutionMonitoringEndAt(executions[0].monitoringEndAt),

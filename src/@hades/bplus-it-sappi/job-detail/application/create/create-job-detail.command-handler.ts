@@ -4,6 +4,7 @@ import { CreateJobDetailService } from './create-job-detail.service';
 import { 
     JobDetailId, 
     JobDetailTenantId, 
+    JobDetailTenantCode, 
     JobDetailSystemId, 
     JobDetailSystemName, 
     JobDetailExecutionId, 
@@ -15,7 +16,9 @@ import {
     JobDetailName, 
     JobDetailReturnCode, 
     JobDetailNode, 
-    JobDetailUser
+    JobDetailUser, 
+    JobDetailStartAt, 
+    JobDetailEndAt
     
 } from './../../domain/value-objects';
 
@@ -32,6 +35,7 @@ export class CreateJobDetailCommandHandler implements ICommandHandler<CreateJobD
         await this.createJobDetailService.main(
             new JobDetailId(command.id),
             new JobDetailTenantId(command.tenantId),
+            new JobDetailTenantCode(command.tenantCode),
             new JobDetailSystemId(command.systemId),
             new JobDetailSystemName(command.systemName),
             new JobDetailExecutionId(command.executionId),
@@ -44,6 +48,8 @@ export class CreateJobDetailCommandHandler implements ICommandHandler<CreateJobD
             new JobDetailReturnCode(command.returnCode),
             new JobDetailNode(command.node),
             new JobDetailUser(command.user),
+            new JobDetailStartAt(command.startAt),
+            new JobDetailEndAt(command.endAt),
             
         );
     }

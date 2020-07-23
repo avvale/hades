@@ -26,6 +26,7 @@ export class UpdateContactController
         await this.commandBus.dispatch(new UpdateContactCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.roleId,

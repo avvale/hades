@@ -21,6 +21,7 @@ export class UpdateChannelDetailResolver
         await this.commandBus.dispatch(new UpdateChannelDetailCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.executionId,
@@ -30,11 +31,11 @@ export class UpdateChannelDetailResolver
             payload.executionMonitoringEndAt,
             payload.status,
             payload.channelId,
+            payload.channelSapId,
             payload.channelParty,
             payload.channelComponent,
             payload.channelName,
             payload.detail,
-            payload.example,
             
         ));
         

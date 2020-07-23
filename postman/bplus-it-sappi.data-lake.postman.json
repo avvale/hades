@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "48cdf6d3-ecab-4d3b-acac-07eb771a4566",
+		"_postman_id"   : "fda19a8d-4471-43e2-836b-eb905a4444e8",
 		"name"          : "@hades - bplus-it-sappi/data-lake",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -13,8 +13,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($payload:BplusItSappiCreateDataLakeInput!)\n{\n\tbplusItSappiCreateDataLake (payload:$payload)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"e9392915-c9f6-4303-bfcb-9a56077e4778\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+						"query": "mutation ($payload:BplusItSappiCreateDataLakeInput!)\n{\n\tbplusItSappiCreateDataLake (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\ttenantCode\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"075d6ff6-accf-4f73-9651-ac474c56439e\", \n\t\t\"tenantId\": \"ebdd867a-086e-462c-b8f5-90f645199afd\", \n\t\t\"tenantCode\": \"unq03z571zuxgt2xra9nrppt73nvqebxh9b1x414otcmksxmds\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
 					}
 				},
 				"url": {
@@ -38,7 +38,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[BplusItSappiCreateDataLakeInput]!)\n{\n\tbplusItSappiCreateDataLakes (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"a761b8d7-686f-4293-8a40-4aa18e3a6a45\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b26ea89c-8d03-46d1-8371-b27df0630220\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9834be16-80e1-4eca-9d1e-bbd9220f2eac\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d31902cb-acb9-4d35-b2c0-7976fcbb54f0\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"471d6d76-aaf8-4bd8-8e5b-c5327cc50b72\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4a66c982-4c75-4410-aa23-f1c75ec29d81\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"61a822a7-2a48-4172-a951-f195c31fd2cf\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e22c2429-4f0d-45da-a171-4898c65f74c6\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dc242ece-9624-4954-8a16-f9f8cdd4ddc7\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cb5f0f06-62ab-4250-9c38-d480db6b4533\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"450afa68-fa9f-4160-a5d9-6bf5eb77d7d0\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a16d7595-793e-4a07-9a0b-597e672e63e3\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3d6f742d-93ca-4a99-8309-8c4526414548\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"68eaa1e8-8f80-40ed-8cb2-51d11b3ee8b1\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d76110fb-667f-416f-a2b1-4b93403020d8\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7566c21f-a32a-4927-b0ae-028ffd5f42ab\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2a37a078-7c30-4d98-b851-674e9090f776\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f3e6984a-5b8e-40f0-ab73-44a6f0d1223c\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"532b98b2-9ad4-4f2d-a978-180e1d84f58d\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a1b50b38-8b02-48b6-88c6-4e1655a649a5\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"1773dcb2-c117-4e69-ba48-f436c8678d91\", \n\t\t\t\"tenantId\": \"2ec97599-8923-465a-b2f4-bb3f5c5a7e99\", \n\t\t\t\"tenantCode\": \"8zzxrhsdobnpjn3feo42ff8maac7qskl5hpwnhyl31b47kxqjx\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3373f0c8-0072-4c3f-8cb3-099a9fe8011f\", \n\t\t\t\"tenantId\": \"eb707d57-5b16-42e2-bf0d-6421a4417259\", \n\t\t\t\"tenantCode\": \"knyks178fvlz1buwwcyj4x9fmdhp2sdbm7rfh8ajxxzqgvguln\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"70303f25-6b7a-427b-b308-5375420af8ce\", \n\t\t\t\"tenantId\": \"ba627513-f0fe-4ffa-b652-6edc43d903e6\", \n\t\t\t\"tenantCode\": \"fx45zlo9rejp64b0v32gio8wbfd4jhktt9obo7yoqepu8j5tes\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d1f55adc-2f0f-40b2-9421-7d92572c8ed5\", \n\t\t\t\"tenantId\": \"d77f7bea-b7d9-4589-aec6-d9a966fb44e3\", \n\t\t\t\"tenantCode\": \"j86g5pr1utsv6x8mxf34wrz4xv9n47pos1kl8hkannn8419uia\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"58bddd84-ed2b-4104-a7c6-736c3a6fd780\", \n\t\t\t\"tenantId\": \"7d1f32f6-93f4-4f14-b5b5-151bab570c2d\", \n\t\t\t\"tenantCode\": \"r1xp6u1pasljp15zlsn0ev6kqknra12k6jcakh069u1wvtehjm\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2c7beb0b-304a-4f56-95c4-757cbf9a56cb\", \n\t\t\t\"tenantId\": \"f3c7ec4b-460e-4d38-8670-92b7a087faff\", \n\t\t\t\"tenantCode\": \"m7tbkz0fcwmd23qqh2j0c938ofmuq3v91z9ow5rb39udkxb5wx\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dbdd0c7e-2bc0-48da-8338-cc9cdd460a8c\", \n\t\t\t\"tenantId\": \"f4ca7d3c-507e-4f93-83fa-e2d6ec4ce30f\", \n\t\t\t\"tenantCode\": \"vizdm4y1j5l86kowkq8rro5zbo4iea81vj0269fm5q4tswxxep\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e54614a5-1136-416f-b8a1-e4271af82a26\", \n\t\t\t\"tenantId\": \"c12a6d6e-4a15-4871-99d0-6304610817e3\", \n\t\t\t\"tenantCode\": \"krl91563a4oh3oqx062hwwfu96836q3mrajhc9apssane4evpa\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0927f515-8341-4ed9-a94f-639e99700144\", \n\t\t\t\"tenantId\": \"fa21c597-3e79-452d-af80-09a104a70df7\", \n\t\t\t\"tenantCode\": \"ie2j0kazkia27p4ws1bltwbbl26w9tstp3nhgnhmwbfbhjbbxt\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b73d2fa3-0538-4716-ba92-bb720a58faaa\", \n\t\t\t\"tenantId\": \"856cf3e2-f5c6-4508-9f36-88aeee42b175\", \n\t\t\t\"tenantCode\": \"zx2m222761lofaeq98c7fay6i40suprge1yf9tlxq5mcm5prr0\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b770103b-aa27-4f9c-b595-b1ea30cb1c26\", \n\t\t\t\"tenantId\": \"39e4922c-5cd8-4b7b-b49e-80185b03cb8b\", \n\t\t\t\"tenantCode\": \"5z39n8kc3cadqg6ndd46c1pxj161mhnuxnqncxvdj4yetwrvum\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"34fdcd81-bc72-4666-88c5-821dc354351e\", \n\t\t\t\"tenantId\": \"19a8a342-41db-43d3-a4a8-bd5337071ec6\", \n\t\t\t\"tenantCode\": \"9abw624c8vsjixykz88xgts1cgtb6iiq4zi6ny7mz4q68voobx\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"49a8a79a-43e3-4b02-b035-8383873959cf\", \n\t\t\t\"tenantId\": \"f5ce7adb-d3af-4f51-b61f-1efeefa62de1\", \n\t\t\t\"tenantCode\": \"3xy4xrahvkzzkvljbje188s4wk3lddwbwx9g37r0r2dz9841jr\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"87b853d9-2c9f-4f25-907d-fb0451187dcd\", \n\t\t\t\"tenantId\": \"dc255f2f-a7b8-4dc7-9c29-9241b5394340\", \n\t\t\t\"tenantCode\": \"f5d35793yd92j03b6h9mb4b5c2bs4p3rhop5p1anz32hxfob5i\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6631cf93-2bfb-484f-adc4-6dafdd739077\", \n\t\t\t\"tenantId\": \"d5522be7-f9d0-4a86-9ff1-530594f8d87d\", \n\t\t\t\"tenantCode\": \"azxvh14yad8r3tc6d6dd8rzj2kh7cnuuhstzj815ium534l8ih\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"82b2897a-31c4-4d8f-9395-39b402999a05\", \n\t\t\t\"tenantId\": \"378866b3-f6ee-49a8-bf2c-a190da2a6994\", \n\t\t\t\"tenantCode\": \"ry1kwpfzan6vuwimv7fr3jdpdp5ca4f6rjsz36xltcnwtqa8kv\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e0980814-d97a-465e-a693-a4fe187f4e2a\", \n\t\t\t\"tenantId\": \"eb0f80dd-fd72-4b31-a2c0-d0b03195d4ff\", \n\t\t\t\"tenantCode\": \"7nhtijc8pbp111qpapue08wz7z9lt8c4mpjqyaevjj59lcl045\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3f03d221-0539-4f91-bf76-1fedffda2f4b\", \n\t\t\t\"tenantId\": \"b3e9688b-0957-4354-afa7-b6f7eec4c8e9\", \n\t\t\t\"tenantCode\": \"lri7d0h6xh0yv6uk13qvkef8wjlbtg144gxsz2rrhyod1nt3kh\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"68ea8d67-9e59-4458-b9a3-b26c9c930267\", \n\t\t\t\"tenantId\": \"5a81a818-e9c1-40e4-a2fa-8ae60b770ba0\", \n\t\t\t\"tenantCode\": \"ksxwflv3cnc1c59pi8zakvanimo42xycegh2xur8mvg26ej43n\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"fcf40100-e1d9-4c1a-a0f8-02818e58fc79\", \n\t\t\t\"tenantId\": \"09bb0999-f195-42b8-9d46-f2ebed1d9405\", \n\t\t\t\"tenantCode\": \"s32garyzyv1ebo7ora05ofuyjycxxmfajtdtlvomaf8v16jin4\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -85,8 +85,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetDataLakes (query: $query)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"e9392915-c9f6-4303-bfcb-9a56077e4778\"\n\t\t}\n\t]\n}"
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiGetDataLakes (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\ttenantCode\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"075d6ff6-accf-4f73-9651-ac474c56439e\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -109,8 +109,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindDataLake (query: $query)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"e9392915-c9f6-4303-bfcb-9a56077e4778\"\n\t\t}\n\t]\n}"
+						"query": "query ($query:[QueryStatementInput])\n{\n\tbplusItSappiFindDataLake (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\ttenantCode\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"075d6ff6-accf-4f73-9651-ac474c56439e\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -133,8 +133,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($id:ID)\n{\n\tbplusItSappiFindDataLakeById (id:$id)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"e9392915-c9f6-4303-bfcb-9a56077e4778\"\n}"
+						"query": "query ($id:ID)\n{\n\tbplusItSappiFindDataLakeById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\ttenantCode\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"075d6ff6-accf-4f73-9651-ac474c56439e\"\n}"
 					}
 				},
 				"url": {
@@ -157,8 +157,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($payload:BplusItSappiUpdateDataLakeInput!)\n{\n\tbplusItSappiUpdateDataLake (payload:$payload)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"e9392915-c9f6-4303-bfcb-9a56077e4778\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+						"query": "mutation ($payload:BplusItSappiUpdateDataLakeInput!)\n{\n\tbplusItSappiUpdateDataLake (payload:$payload)\n\t{\n\t\tid\n\t\ttenantId\n\t\ttenantCode\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"075d6ff6-accf-4f73-9651-ac474c56439e\", \n\t\t\"tenantId\": \"ebdd867a-086e-462c-b8f5-90f645199afd\", \n\t\t\"tenantCode\": \"vz1w0srywl7cf6k40s6i9gnx22slfyrcdg43ahl1mp0b8h2zvv\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
 					}
 				},
 				"url": {
@@ -181,8 +181,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteDataLakeById (id:$id)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"e9392915-c9f6-4303-bfcb-9a56077e4778\"\n}"
+						"query": "mutation ($id:ID!)\n{\n\tbplusItSappiDeleteDataLakeById (id:$id)\n\t{\n\t\tid\n\t\ttenantId\n\t\ttenantCode\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"075d6ff6-accf-4f73-9651-ac474c56439e\"\n}"
 					}
 				},
 				"url": {
@@ -205,7 +205,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteDataLakes (query: $query)\n\t{\n\t\tid\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"query": "mutation ($query:[QueryStatementInput])\n{\n\tbplusItSappiDeleteDataLakes (query: $query)\n\t{\n\t\tid\n\t\ttenantId\n\t\ttenantCode\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"CONTAINS\",\n\t\t\t\"value\": \"%%\"\n\t\t}\n\t]\n}"
 					}
 				},
@@ -235,7 +235,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"e9392915-c9f6-4303-bfcb-9a56077e4778\", \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"raw"   : "{\n\t\"id\": \"075d6ff6-accf-4f73-9651-ac474c56439e\", \n\t\"tenantId\": \"ebdd867a-086e-462c-b8f5-90f645199afd\", \n\t\"tenantCode\": \"pneldptf93ecmb9reux7tva3z9f64p23tg7siyx765aq5biytv\", \n\t\"data\": { \"foo\" : \"bar\" }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -269,7 +269,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"42b54244-99cd-4fcb-bef8-6a705e3e063f\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"7faf3b46-83a5-4096-8370-7acca1687900\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"4daaa761-97aa-469c-8cc3-97ad555bbdc0\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"d43dd41a-d832-4251-a72a-12beac864299\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"4703f524-1fb9-4fe5-a63a-5f8e7d41d2a2\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6cfd1403-112c-4a77-8469-820227244c4e\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"be929c22-5ea5-4499-9206-e31869e9ed48\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6237cedb-b585-4fb1-b0c6-0c5cc6b1ce80\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"b4b86a3b-ad12-47c2-bffc-4f140e19b4aa\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"60c12174-fd47-4f9e-8f63-bcc0ab8923bd\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"ac65e601-a0b4-4ccd-838f-36e3cb05f3d2\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"0dc07f40-f005-4f31-9033-06361b547535\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"e83f2c4f-afb3-4662-959c-1bf008c4d77c\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"ab7e3add-2395-4698-b5a3-e71c9f0dc126\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"1227e6e0-ae8a-4e6a-a011-b54e72d1e0bc\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"9b4cc2cf-4669-475b-b4c6-c93f8feb3247\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"dbf19cb4-ff87-4452-9122-ad4a4eeb735c\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"39973ab5-34aa-43a2-b8fa-477b7d070882\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"0b9e9efe-4c9a-4ba7-9fe0-dc790acb3e4a\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"0ef24bdf-ddbc-47e7-a219-022e1f4acac4\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"fc979e1d-5e9b-40e0-8290-8c3fbbb94db3\", \n\t\t\"tenantId\": \"1c678ba8-668c-446e-8eec-2f6891bbab56\", \n\t\t\"tenantCode\": \"4argmzv9fep5enyxxk8lix5dc1sdzbtif8u603h0k2sekwba2v\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"c661cae1-e708-454a-a78e-fc5677648f01\", \n\t\t\"tenantId\": \"628fdf78-1fac-4ccf-bd7f-8e4dc3ee8194\", \n\t\t\"tenantCode\": \"vsy5lhs2nyb1ue8lcuhd54ua1r84ovvy9f57rggqp86y8g85wt\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"3f733ec8-343b-4125-8153-42616955eb06\", \n\t\t\"tenantId\": \"4c7659d7-0151-4dfb-9efb-1b10c5db0c34\", \n\t\t\"tenantCode\": \"m9f8krji6e9lnk4u5c42vlup49xv14f5fes81aog0r4hkk7hla\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6ad0f367-bac6-408f-bbf3-a971f8bf3750\", \n\t\t\"tenantId\": \"065e6eea-90d3-4b80-b044-ab0a99b786fb\", \n\t\t\"tenantCode\": \"b74oqpakpos2bbj6muauu11yedrm1abc4sladq0ostelmkgk69\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5340dfb8-d6af-42a9-94b5-04c83ed550f6\", \n\t\t\"tenantId\": \"074f6839-c97a-465b-b339-987a89ff763e\", \n\t\t\"tenantCode\": \"8fn0is52h1yzfhyikc4ir7zxacy6t89bfehbjxt364fhl8spya\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"ec2fb048-5c8e-4705-9d95-53515da55d4b\", \n\t\t\"tenantId\": \"adb28ab3-d637-420b-815e-32e7ad5c907b\", \n\t\t\"tenantCode\": \"sstpxr408016s6wqxd2p796iffo72zy2x0ixl2zz8p4rhjym9i\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"cc6dd17c-877a-4e59-b1ee-0efbfaa6a23d\", \n\t\t\"tenantId\": \"9745fe8a-75bf-45d6-8d6a-9446738d1a3f\", \n\t\t\"tenantCode\": \"02t7n81cd97mdlkc5t9kmcq47hqjajsy5xvvibz10f1az24pjr\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"86f06924-233e-4dae-962a-41196a454761\", \n\t\t\"tenantId\": \"45c03d7c-cfdf-4bbf-b1c6-77a4e64665d9\", \n\t\t\"tenantCode\": \"l50yipurz14z782c2ywuuwfffwdzeyekt7trbvaf8razhi5xxe\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"81729806-efb9-4c8f-a71c-a8f93988c281\", \n\t\t\"tenantId\": \"ebdd2ef5-771d-4ccc-bea5-02959957f7d4\", \n\t\t\"tenantCode\": \"be412qrbx6giwziozg90evyc3g45s975ifxwege9dp3b2sfw7w\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"daa5ce36-089f-4581-94a2-5744b1da6fcb\", \n\t\t\"tenantId\": \"d9c46f6c-e8ab-47ac-b918-20ca5a3b3b71\", \n\t\t\"tenantCode\": \"jtoke1fsqk5icgdf26zyvgi7h71sqyk5ttmpte9uvc4wfemshs\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"97d5790c-8392-44fe-93c7-cbaba9948ff9\", \n\t\t\"tenantId\": \"21803bdd-1d9e-495e-9d47-641884fec450\", \n\t\t\"tenantCode\": \"0ggkekmd6w7pg2xfmcuwavyek42pskbcj01repy4vvce7pdqxu\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6d2fc3f4-18b6-46bb-8667-14c8ce3e095c\", \n\t\t\"tenantId\": \"77f989f6-8ee0-4990-9259-941c71d0b599\", \n\t\t\"tenantCode\": \"lt2s0fghmahg1qt7k50wungovmobje5gyctc0n7c3xka2m5m49\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"565c5b89-8018-4559-ad12-31bfcd3ce8a8\", \n\t\t\"tenantId\": \"81c0c9ff-8013-4e00-8859-839292d6bb0f\", \n\t\t\"tenantCode\": \"6mejahc4w4weazuz8u1xkvkwgdfd0tbx2rbbccqz6gry0z2xoy\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"72a3fdf3-6718-48fa-864a-4c4a0a6f4721\", \n\t\t\"tenantId\": \"305e5253-365d-438c-acec-4a4baab2a16b\", \n\t\t\"tenantCode\": \"9s77epj10a1ia4i97n1886ejnj3ovbom5u761xz5atwbktsszm\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"e384e036-bff1-4e46-b0da-332192f6650c\", \n\t\t\"tenantId\": \"46b6f5fc-3e5d-4154-af59-22c3686d9f03\", \n\t\t\"tenantCode\": \"5yjilxmzznw2p8r76zuqcxj14uvedmi3xhl3srkm5521hu3169\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"49c3d64b-01fc-4bed-b0fb-019b622adfb1\", \n\t\t\"tenantId\": \"9cd2cef5-3378-4490-ba0f-1bbe33227ac6\", \n\t\t\"tenantCode\": \"1o0qfnb6djlv00j78rlyg72e2dl9auw1qb7d475ks4wv7j4aue\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"c39c4b15-3f6a-442f-8689-d33fde076bd2\", \n\t\t\"tenantId\": \"12f26fce-750a-4419-876b-a36ed6ed3680\", \n\t\t\"tenantCode\": \"50u47mgekpizjm0kruv0776x2cgf33fgcezlg616p2ac6g728g\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"59ca5071-1d12-4668-b64d-fac496eb8636\", \n\t\t\"tenantId\": \"c61c0ad3-bb04-43d3-9b42-7330de32d324\", \n\t\t\"tenantCode\": \"ef1cy7o8v25qlovv379jw4zjmxnz4dlr726pu6oqqbw91aek9h\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"91293fcd-8c87-48ca-aeca-dfb0f13e38e7\", \n\t\t\"tenantId\": \"39c23c4c-ea76-411e-9cc7-9d3a612dd7e1\", \n\t\t\"tenantCode\": \"exaypw17onh8htwi6sud4nr5bvlsp6yscrpbuh344wgpbg4gvw\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"7d61304d-bc8a-4fb1-b839-d2738af37d7f\", \n\t\t\"tenantId\": \"51446852-a969-472a-b952-bcf638daf2d8\", \n\t\t\"tenantCode\": \"si1op637kasnnsrn6p65cd8l7wjzu8nic1wxd48x1xoepkzgyq\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -344,7 +344,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"e9392915-c9f6-4303-bfcb-9a56077e4778\"\n\t\t}\n\t]\n}",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"075d6ff6-accf-4f73-9651-ac474c56439e\"\n\t\t}\n\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -381,7 +381,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"e9392915-c9f6-4303-bfcb-9a56077e4778\"\n\t\t}\n\t]\n}",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"075d6ff6-accf-4f73-9651-ac474c56439e\"\n\t\t}\n\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -426,14 +426,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/bplus-it-sappi/data-lake/e9392915-c9f6-4303-bfcb-9a56077e4778",
+					"raw": "{{URL}}/bplus-it-sappi/data-lake/075d6ff6-accf-4f73-9651-ac474c56439e",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"bplus-it-sappi",
 						"data-lake",
-						"e9392915-c9f6-4303-bfcb-9a56077e4778"
+						"075d6ff6-accf-4f73-9651-ac474c56439e"
 					]
 				}
 			},
@@ -453,7 +453,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"e9392915-c9f6-4303-bfcb-9a56077e4778\", \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"raw"   : "{\n\t\"id\": \"075d6ff6-accf-4f73-9651-ac474c56439e\", \n\t\"tenantId\": \"ebdd867a-086e-462c-b8f5-90f645199afd\", \n\t\"tenantCode\": \"y275vu1c7x08f556653p8bgrhoqye0zt2ij9xdxepjvkcphzmf\", \n\t\"data\": { \"foo\" : \"bar\" }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -495,14 +495,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/bplus-it-sappi/data-lake/e9392915-c9f6-4303-bfcb-9a56077e4778",
+					"raw": "{{URL}}/bplus-it-sappi/data-lake/075d6ff6-accf-4f73-9651-ac474c56439e",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"bplus-it-sappi",
 						"data-lake",
-						"e9392915-c9f6-4303-bfcb-9a56077e4778"
+						"075d6ff6-accf-4f73-9651-ac474c56439e"
 					]
 				}
 			},
@@ -545,7 +545,7 @@
     ],
     "variable": [
 		{
-			"id": "622eaaa5-a3a9-48ea-b4de-07e251980470",
+			"id": "7d931df7-2973-46e4-a531-99be3d05a76a",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

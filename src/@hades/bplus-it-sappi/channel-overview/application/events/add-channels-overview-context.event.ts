@@ -26,6 +26,7 @@ export class AddChannelsOverviewContextEvent extends AggregateRoot
                     new CreatedChannelOverviewEvent(
                         channelOverview.id.value,
                         channelOverview.tenantId.value,
+                        channelOverview.tenantCode.value,
                         channelOverview.systemId.value,
                         channelOverview.systemName.value,
                         channelOverview.executionId.value,
@@ -57,6 +58,7 @@ export class AddChannelsOverviewContextEvent extends AggregateRoot
                     new DeletedChannelOverviewEvent(
                         channelOverview.id.value,
                         channelOverview.tenantId.value,
+                        channelOverview.tenantCode.value,
                         channelOverview.systemId.value,
                         channelOverview.systemName.value,
                         channelOverview.executionId.value,

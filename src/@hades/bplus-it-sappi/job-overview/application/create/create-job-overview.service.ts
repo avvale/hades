@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     JobOverviewId, 
     JobOverviewTenantId, 
+    JobOverviewTenantCode, 
     JobOverviewSystemId, 
     JobOverviewSystemName, 
     JobOverviewExecutionId, 
@@ -33,6 +34,7 @@ export class CreateJobOverviewService
     public async main(
         id: JobOverviewId,
         tenantId: JobOverviewTenantId,
+        tenantCode: JobOverviewTenantCode,
         systemId: JobOverviewSystemId,
         systemName: JobOverviewSystemName,
         executionId: JobOverviewExecutionId,
@@ -50,6 +52,7 @@ export class CreateJobOverviewService
         const jobOverview = BplusItSappiJobOverview.register(
             id,
             tenantId,
+            tenantCode,
             systemId,
             systemName,
             executionId,

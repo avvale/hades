@@ -21,6 +21,7 @@ export class UpdateMessageOverviewResolver
         await this.commandBus.dispatch(new UpdateMessageOverviewCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.executionId,

@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { jobsDetail } from '@hades/bplus-it-sappi/job-detail/infrastructure/seeds/job-detail.seed';
 import { DeleteJobDetailByIdService } from './delete-job-detail-by-id.service';
 import { JobDetailId } from './../../domain/value-objects';
-import { IJobDetailRepository } from '../../domain/job-detail.repository';
-import { MockJobDetailRepository } from '../../infrastructure/mock/mock-job-detail.repository';
+import { IJobDetailRepository } from './../../domain/job-detail.repository';
+import { MockJobDetailRepository } from './../../infrastructure/mock/mock-job-detail.repository';
 
 describe('DeleteJobDetailByIdService', () => 
 {

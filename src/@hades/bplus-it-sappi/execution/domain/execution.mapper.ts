@@ -5,7 +5,9 @@ import { ExecutionResponse } from './execution.response';
 import { 
     ExecutionId, 
     ExecutionTenantId, 
+    ExecutionTenantCode, 
     ExecutionSystemId, 
+    ExecutionSystemName, 
     ExecutionType, 
     ExecutionMonitoringStartAt, 
     ExecutionMonitoringEndAt, 
@@ -59,7 +61,9 @@ export class ExecutionMapper implements IMapper
         return BplusItSappiExecution.register(
             new ExecutionId(execution.id),
             new ExecutionTenantId(execution.tenantId),
+            new ExecutionTenantCode(execution.tenantCode),
             new ExecutionSystemId(execution.systemId),
+            new ExecutionSystemName(execution.systemName),
             new ExecutionType(execution.type),
             new ExecutionMonitoringStartAt(execution.monitoringStartAt),
             new ExecutionMonitoringEndAt(execution.monitoringEndAt),
@@ -76,7 +80,9 @@ export class ExecutionMapper implements IMapper
         return new ExecutionResponse(
             execution.id.value,
             execution.tenantId.value,
+            execution.tenantCode.value,
             execution.systemId.value,
+            execution.systemName.value,
             execution.type.value,
             execution.monitoringStartAt.value,
             execution.monitoringEndAt.value,

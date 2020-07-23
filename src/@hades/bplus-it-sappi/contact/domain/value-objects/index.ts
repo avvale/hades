@@ -1,5 +1,6 @@
 export { ContactId } from './contact-id';
 export { ContactTenantId } from './contact-tenant-id';
+export { ContactTenantCode } from './contact-tenant-code';
 export { ContactSystemId } from './contact-system-id';
 export { ContactSystemName } from './contact-system-name';
 export { ContactRoleId } from './contact-role-id';

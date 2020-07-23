@@ -21,6 +21,7 @@ export class CreateMessageDetailResolver
         await this.commandBus.dispatch(new CreateMessageDetailCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.scenario,

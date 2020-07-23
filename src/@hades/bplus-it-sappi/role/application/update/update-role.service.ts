@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     RoleId, 
     RoleTenantId, 
+    RoleTenantCode, 
     RoleName, 
     RoleCreatedAt, 
     RoleUpdatedAt, 
@@ -24,6 +25,7 @@ export class UpdateRoleService
     public async main(
         id: RoleId,
         tenantId?: RoleTenantId,
+        tenantCode?: RoleTenantCode,
         name?: RoleName,
         
     ): Promise<void>
@@ -32,6 +34,7 @@ export class UpdateRoleService
         const role = BplusItSappiRole.register(
             id,
             tenantId,
+            tenantCode,
             name,
             null,
             new RoleUpdatedAt(Utils.nowTimestamp()),

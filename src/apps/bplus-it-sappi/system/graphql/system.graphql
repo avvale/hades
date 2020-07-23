@@ -4,6 +4,7 @@ type BplusItSappiSystem
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     name: GraphQLString!
     tenantCode: GraphQLString!
     environment: GraphQLString!
@@ -20,6 +21,7 @@ input BplusItSappiCreateSystemInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     name: GraphQLString!
     tenantCode: GraphQLString!
     environment: GraphQLString!
@@ -33,6 +35,7 @@ input BplusItSappiUpdateSystemInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     name: GraphQLString
     tenantCode: GraphQLString
     environment: GraphQLString

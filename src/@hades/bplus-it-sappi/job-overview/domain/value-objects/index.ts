@@ -1,5 +1,6 @@
 export { JobOverviewId } from './job-overview-id';
 export { JobOverviewTenantId } from './job-overview-tenant-id';
+export { JobOverviewTenantCode } from './job-overview-tenant-code';
 export { JobOverviewSystemId } from './job-overview-system-id';
 export { JobOverviewSystemName } from './job-overview-system-name';
 export { JobOverviewExecutionId } from './job-overview-execution-id';

@@ -26,6 +26,7 @@ export class CreateJobOverviewController
         await this.commandBus.dispatch(new CreateJobOverviewCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.executionId,

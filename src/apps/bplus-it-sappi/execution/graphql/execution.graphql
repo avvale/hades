@@ -9,7 +9,9 @@ type BplusItSappiExecution
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
+    systemName: GraphQLString!
     type: BplusItSappiExecutionType!
     monitoringStartAt: GraphQLTimestamp!
     monitoringEndAt: GraphQLTimestamp!
@@ -24,7 +26,9 @@ input BplusItSappiCreateExecutionInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
+    systemName: GraphQLString!
     type: BplusItSappiExecutionType!
     monitoringStartAt: GraphQLTimestamp!
     monitoringEndAt: GraphQLTimestamp!
@@ -36,7 +40,9 @@ input BplusItSappiUpdateExecutionInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     systemId: ID
+    systemName: GraphQLString
     type: BplusItSappiExecutionType
     monitoringStartAt: GraphQLTimestamp
     monitoringEndAt: GraphQLTimestamp

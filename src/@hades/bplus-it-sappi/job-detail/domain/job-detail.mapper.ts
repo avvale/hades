@@ -5,6 +5,7 @@ import { JobDetailResponse } from './job-detail.response';
 import { 
     JobDetailId, 
     JobDetailTenantId, 
+    JobDetailTenantCode, 
     JobDetailSystemId, 
     JobDetailSystemName, 
     JobDetailExecutionId, 
@@ -17,6 +18,8 @@ import {
     JobDetailReturnCode, 
     JobDetailNode, 
     JobDetailUser, 
+    JobDetailStartAt, 
+    JobDetailEndAt, 
     JobDetailCreatedAt, 
     JobDetailUpdatedAt, 
     JobDetailDeletedAt
@@ -66,6 +69,7 @@ export class JobDetailMapper implements IMapper
         return BplusItSappiJobDetail.register(
             new JobDetailId(jobDetail.id),
             new JobDetailTenantId(jobDetail.tenantId),
+            new JobDetailTenantCode(jobDetail.tenantCode),
             new JobDetailSystemId(jobDetail.systemId),
             new JobDetailSystemName(jobDetail.systemName),
             new JobDetailExecutionId(jobDetail.executionId),
@@ -78,6 +82,8 @@ export class JobDetailMapper implements IMapper
             new JobDetailReturnCode(jobDetail.returnCode),
             new JobDetailNode(jobDetail.node),
             new JobDetailUser(jobDetail.user),
+            new JobDetailStartAt(jobDetail.startAt),
+            new JobDetailEndAt(jobDetail.endAt),
             new JobDetailCreatedAt(jobDetail.createdAt),
             new JobDetailUpdatedAt(jobDetail.updatedAt),
             new JobDetailDeletedAt(jobDetail.deletedAt),
@@ -90,6 +96,7 @@ export class JobDetailMapper implements IMapper
         return new JobDetailResponse(
             jobDetail.id.value,
             jobDetail.tenantId.value,
+            jobDetail.tenantCode.value,
             jobDetail.systemId.value,
             jobDetail.systemName.value,
             jobDetail.executionId.value,
@@ -102,6 +109,8 @@ export class JobDetailMapper implements IMapper
             jobDetail.returnCode.value,
             jobDetail.node.value,
             jobDetail.user.value,
+            jobDetail.startAt.value,
+            jobDetail.endAt.value,
             jobDetail.createdAt.value,
             jobDetail.updatedAt.value,
             jobDetail.deletedAt.value,

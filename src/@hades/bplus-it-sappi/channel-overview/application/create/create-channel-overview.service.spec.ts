@@ -7,6 +7,7 @@ import { CreateChannelOverviewService } from './create-channel-overview.service'
 import { 
     ChannelOverviewId, 
     ChannelOverviewTenantId, 
+    ChannelOverviewTenantCode, 
     ChannelOverviewSystemId, 
     ChannelOverviewSystemName, 
     ChannelOverviewExecutionId, 
@@ -22,8 +23,8 @@ import {
     ChannelOverviewUnregistered
     
 } from './../../domain/value-objects';
-import { IChannelOverviewRepository } from '../../domain/channel-overview.repository';
-import { MockChannelOverviewRepository } from '../../infrastructure/mock/mock-channel-overview.repository';
+import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
+import { MockChannelOverviewRepository } from './../../infrastructure/mock/mock-channel-overview.repository';
 
 describe('CreateChannelOverviewService', () => 
 {
@@ -43,8 +44,7 @@ describe('CreateChannelOverviewService', () =>
                 { 
                     provide: IChannelOverviewRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -64,10 +64,10 @@ describe('CreateChannelOverviewService', () =>
 
         test('should create a channelOverview and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new ChannelOverviewId(channelsOverview[0].id),
                 new ChannelOverviewTenantId(channelsOverview[0].tenantId),
+                new ChannelOverviewTenantCode(channelsOverview[0].tenantCode),
                 new ChannelOverviewSystemId(channelsOverview[0].systemId),
                 new ChannelOverviewSystemName(channelsOverview[0].systemName),
                 new ChannelOverviewExecutionId(channelsOverview[0].executionId),

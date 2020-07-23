@@ -26,6 +26,7 @@ export class AddRolesContextEvent extends AggregateRoot
                     new CreatedRoleEvent(
                         role.id.value,
                         role.tenantId.value,
+                        role.tenantCode.value,
                         role.name.value,
                         role.createdAt?.value,
                         role.updatedAt?.value,
@@ -45,6 +46,7 @@ export class AddRolesContextEvent extends AggregateRoot
                     new DeletedRoleEvent(
                         role.id.value,
                         role.tenantId.value,
+                        role.tenantCode.value,
                         role.name.value,
                         role.createdAt?.value,
                         role.updatedAt?.value,

@@ -26,6 +26,7 @@ export class UpdateChannelOverviewController
         await this.commandBus.dispatch(new UpdateChannelOverviewCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.executionId,

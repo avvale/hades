@@ -4,6 +4,7 @@ export class CreateRolesCommand
         public readonly roles: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             name: string,
             
         } []

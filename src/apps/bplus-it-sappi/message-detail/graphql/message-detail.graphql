@@ -14,11 +14,17 @@ enum BplusItSappiMessageDetailStatus {
     WAITING
         
 }
+enum BplusItSappiMessageDetailDirection {
+    INBOUND
+    OUTBOUND
+        
+}
 
 type BplusItSappiMessageDetail
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     scenario: GraphQLString
@@ -27,7 +33,7 @@ type BplusItSappiMessageDetail
     executionExecutedAt: GraphQLTimestamp!
     executionMonitoringStartAt: GraphQLTimestamp!
     executionMonitoringEndAt: GraphQLTimestamp!
-    flowId: ID!
+    flowId: ID
     flowParty: GraphQLString
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
@@ -36,10 +42,10 @@ type BplusItSappiMessageDetail
     detail: GraphQLString
     example: GraphQLString
     startTimeAt: GraphQLTimestamp
-    direction: GraphQLString
+    direction: BplusItSappiMessageDetailDirection!
     errorCategory: GraphQLString
     errorCode: GraphQLString
-    errorLabel: GraphQLString
+    errorLabel: GraphQLInt
     node: GraphQLInt
     protocol: GraphQLString
     qualityOfService: GraphQLString
@@ -60,6 +66,7 @@ input BplusItSappiCreateMessageDetailInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     scenario: GraphQLString
@@ -68,7 +75,7 @@ input BplusItSappiCreateMessageDetailInput
     executionExecutedAt: GraphQLTimestamp!
     executionMonitoringStartAt: GraphQLTimestamp!
     executionMonitoringEndAt: GraphQLTimestamp!
-    flowId: ID!
+    flowId: ID
     flowParty: GraphQLString
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
@@ -77,10 +84,10 @@ input BplusItSappiCreateMessageDetailInput
     detail: GraphQLString
     example: GraphQLString
     startTimeAt: GraphQLTimestamp
-    direction: GraphQLString
+    direction: BplusItSappiMessageDetailDirection!
     errorCategory: GraphQLString
     errorCode: GraphQLString
-    errorLabel: GraphQLString
+    errorLabel: GraphQLInt
     node: GraphQLInt
     protocol: GraphQLString
     qualityOfService: GraphQLString
@@ -98,6 +105,7 @@ input BplusItSappiUpdateMessageDetailInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     systemId: ID
     systemName: GraphQLString
     scenario: GraphQLString
@@ -115,10 +123,10 @@ input BplusItSappiUpdateMessageDetailInput
     detail: GraphQLString
     example: GraphQLString
     startTimeAt: GraphQLTimestamp
-    direction: GraphQLString
+    direction: BplusItSappiMessageDetailDirection
     errorCategory: GraphQLString
     errorCode: GraphQLString
-    errorLabel: GraphQLString
+    errorLabel: GraphQLInt
     node: GraphQLInt
     protocol: GraphQLString
     qualityOfService: GraphQLString

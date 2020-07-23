@@ -7,6 +7,7 @@ import { CreateContactService } from './create-contact.service';
 import { 
     ContactId, 
     ContactTenantId, 
+    ContactTenantCode, 
     ContactSystemId, 
     ContactSystemName, 
     ContactRoleId, 
@@ -21,8 +22,8 @@ import {
     ContactIsActive
     
 } from './../../domain/value-objects';
-import { IContactRepository } from '../../domain/contact.repository';
-import { MockContactRepository } from '../../infrastructure/mock/mock-contact.repository';
+import { IContactRepository } from './../../domain/contact.repository';
+import { MockContactRepository } from './../../infrastructure/mock/mock-contact.repository';
 
 describe('CreateContactService', () => 
 {
@@ -42,8 +43,7 @@ describe('CreateContactService', () =>
                 { 
                     provide: IContactRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -63,10 +63,10 @@ describe('CreateContactService', () =>
 
         test('should create a contact and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new ContactId(contacts[0].id),
                 new ContactTenantId(contacts[0].tenantId),
+                new ContactTenantCode(contacts[0].tenantCode),
                 new ContactSystemId(contacts[0].systemId),
                 new ContactSystemName(contacts[0].systemName),
                 new ContactRoleId(contacts[0].roleId),

@@ -4,6 +4,7 @@ import { UpdateChannelDetailService } from './update-channel-detail.service';
 import { 
     ChannelDetailId, 
     ChannelDetailTenantId, 
+    ChannelDetailTenantCode, 
     ChannelDetailSystemId, 
     ChannelDetailSystemName, 
     ChannelDetailExecutionId, 
@@ -13,11 +14,11 @@ import {
     ChannelDetailExecutionMonitoringEndAt, 
     ChannelDetailStatus, 
     ChannelDetailChannelId, 
+    ChannelDetailChannelSapId, 
     ChannelDetailChannelParty, 
     ChannelDetailChannelComponent, 
     ChannelDetailChannelName, 
-    ChannelDetailDetail, 
-    ChannelDetailExample
+    ChannelDetailDetail
     
 } from './../../domain/value-objects';
 
@@ -34,6 +35,7 @@ export class UpdateChannelDetailCommandHandler implements ICommandHandler<Update
         await this.updateChannelDetailService.main(
             new ChannelDetailId(command.id),
             new ChannelDetailTenantId(command.tenantId, { undefinable: true }),
+            new ChannelDetailTenantCode(command.tenantCode, { undefinable: true }),
             new ChannelDetailSystemId(command.systemId, { undefinable: true }),
             new ChannelDetailSystemName(command.systemName, { undefinable: true }),
             new ChannelDetailExecutionId(command.executionId, { undefinable: true }),
@@ -43,11 +45,11 @@ export class UpdateChannelDetailCommandHandler implements ICommandHandler<Update
             new ChannelDetailExecutionMonitoringEndAt(command.executionMonitoringEndAt, { undefinable: true }),
             new ChannelDetailStatus(command.status, { undefinable: true }),
             new ChannelDetailChannelId(command.channelId, { undefinable: true }),
+            new ChannelDetailChannelSapId(command.channelSapId, { undefinable: true }),
             new ChannelDetailChannelParty(command.channelParty),
             new ChannelDetailChannelComponent(command.channelComponent, { undefinable: true }),
             new ChannelDetailChannelName(command.channelName, { undefinable: true }),
             new ChannelDetailDetail(command.detail),
-            new ChannelDetailExample(command.example),
             
         )
     }

@@ -4,6 +4,7 @@ import { UpdateContactService } from './update-contact.service';
 import { 
     ContactId, 
     ContactTenantId, 
+    ContactTenantCode, 
     ContactSystemId, 
     ContactSystemName, 
     ContactRoleId, 
@@ -32,6 +33,7 @@ export class UpdateContactCommandHandler implements ICommandHandler<UpdateContac
         await this.updateContactService.main(
             new ContactId(command.id),
             new ContactTenantId(command.tenantId, { undefinable: true }),
+            new ContactTenantCode(command.tenantCode, { undefinable: true }),
             new ContactSystemId(command.systemId, { undefinable: true }),
             new ContactSystemName(command.systemName, { undefinable: true }),
             new ContactRoleId(command.roleId),

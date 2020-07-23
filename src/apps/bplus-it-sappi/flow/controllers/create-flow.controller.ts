@@ -26,6 +26,7 @@ export class CreateFlowController
         await this.commandBus.dispatch(new CreateFlowCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.scenario,

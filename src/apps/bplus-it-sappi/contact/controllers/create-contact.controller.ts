@@ -26,6 +26,7 @@ export class CreateContactController
         await this.commandBus.dispatch(new CreateContactCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.roleId,

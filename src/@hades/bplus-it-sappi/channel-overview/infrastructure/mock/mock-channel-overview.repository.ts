@@ -7,6 +7,7 @@ import { IChannelOverviewRepository } from './../../domain/channel-overview.repo
 import { 
     ChannelOverviewId, 
     ChannelOverviewTenantId, 
+    ChannelOverviewTenantCode, 
     ChannelOverviewSystemId, 
     ChannelOverviewSystemName, 
     ChannelOverviewExecutionId, 
@@ -64,6 +65,7 @@ export class MockChannelOverviewRepository implements IChannelOverviewRepository
             this.collectionSource.push(BplusItSappiChannelOverview.register(
                     new ChannelOverviewId(itemCollection.id),
                     new ChannelOverviewTenantId(itemCollection.tenantId),
+                    new ChannelOverviewTenantCode(itemCollection.tenantCode),
                     new ChannelOverviewSystemId(itemCollection.systemId),
                     new ChannelOverviewSystemName(itemCollection.systemName),
                     new ChannelOverviewExecutionId(itemCollection.executionId),

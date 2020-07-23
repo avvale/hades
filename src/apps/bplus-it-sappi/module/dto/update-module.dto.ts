@@ -3,147 +3,165 @@ import { ApiProperty } from '@nestjs/swagger';
 export class UpdateModuleDto 
 {   
     
-        @ApiProperty({
-            type        : String,
-            description : 'id [input here api field description]',
-            example     : 'bac4e3ad-e299-467e-b9f8-81453a5badc2'
-        })
-        id: string;
+    @ApiProperty({
+        type        : String,
+        description : 'id [input here api field description]',
+        example     : 'c8ec6789-ae6b-4acd-b3ae-3d48cfd8ce53'
+    })
+    id: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'tenantId [input here api field description]',
-            example     : 'c87deb8b-4968-4e99-82e5-8b88b24983be'
-        })
-        tenantId: string;
+    @ApiProperty({
+        type        : String,
+        description : 'tenantId [input here api field description]',
+        example     : 'ec9d7cef-6b13-4354-a789-de58439230f1'
+    })
+    tenantId: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'systemId [input here api field description]',
-            example     : '8df2ea6d-c3f6-4e2e-9a08-691a8bf00288'
-        })
-        systemId: string;
+    @ApiProperty({
+        type        : String,
+        description : 'tenantCode [input here api field description]',
+        example     : 'si665sqsfh7l0cepuq0poikrtf99az2la3ariv2gooivfs2hv7'
+    })
+    tenantCode: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'systemName [input here api field description]',
-            example     : 'n53jxto4uq447xmijiae'
-        })
-        systemName: string;
+    @ApiProperty({
+        type        : String,
+        description : 'systemId [input here api field description]',
+        example     : 'a0f79650-b44e-4018-aed6-c2105c2f0d08'
+    })
+    systemId: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'channelId [input here api field description]',
-            example     : '441e74fd-7959-4f83-b022-82ce46141f3b'
-        })
-        channelId: string;
+    @ApiProperty({
+        type        : String,
+        description : 'systemName [input here api field description]',
+        example     : 'pch8ww02yqp05a79d4ix'
+    })
+    systemName: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'channelParty [input here api field description]',
-            example     : 'tmvronun65y05fo998xyp7lws1z0n309yuk5w5zbou1m132v9wzzm9wunsv5v0mby8pi84kyxs98to5n48zah0efqoxu7o6aoox3agr33rwye3t7xcpk4ai1s667u56b0rpys4xpsq43z86ws2q8lp236vr1iyu3'
-        })
-        channelParty: string;
+    @ApiProperty({
+        type        : String,
+        description : 'channelId [input here api field description]',
+        example     : '19a8be96-fe40-4976-9d4d-bd9d3b26d8bd'
+    })
+    channelId: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'channelComponent [input here api field description]',
-            example     : 'upoe5d9dn6pa2qb8lykxjd1nvwhtpqz055vv2dzg3ro07x8gpq7i9n6bzc8gjavy63oioik7qwlgpmlden083xl66hway5mkmkoikqcsfuhdmailgbyp9u783ppcer66x41mcb91eircp3cyxsfxjqqhgsgqy0j1'
-        })
-        channelComponent: string;
+    @ApiProperty({
+        type        : String,
+        description : 'channelParty [input here api field description]',
+        example     : '3fcc75xbpttadlgfiz5l6ru81p2yir07v4xla8btxlo7fzoszwl23wauw3oa4ium0d9gcnadzzmajkmc6zpvfxnvnpp8syqeo3mauy2e9a8tmw6f2pnnxytrkkgi3hq4dr4aayu8ywsmw9fl7tvpq3nyacqr48vr'
+    })
+    channelParty: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'channelName [input here api field description]',
-            example     : 'gxnqfs1r5a22kgd9obybh1cuqpfxm7f8f22s93115ibeolqtx6dkkqirkp3n40hftextjh34uan1t2w1mozvcav9la3g0svxwcr1r5opbyyz7jxn98r1z2y5ti9atx3irm53a5vaiogp0a6tsxvuge24og8tv9q3'
-        })
-        channelName: string;
+    @ApiProperty({
+        type        : String,
+        description : 'channelComponent [input here api field description]',
+        example     : '2i84tve0j6yey9l0c2ygd3fob6qmju264ymo5wt70j77slcms99z9wcpr22x3o72cblkwt9syiywlj8mqwxvp9lubscs7gy5nr7sgcuvavuhwrfkkjy8h0u5gfnebaybq7nm09ravec7wwrqcbh0cnz6t884f6df'
+    })
+    channelComponent: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'flowParty [input here api field description]',
-            example     : 'n7f5t7c3rd1em3ey0r8gh5xwinrndpot7ve4nhee98po8vavp8gb0b3ixlrk3clff7z88yh0xda0d7ms4ctue4t71r0svmqrsnjknywnknv71sqmmmiy2kmnurgoavrrwobqnavkxfkd990nlx3hu4d8b14yiwrj'
-        })
-        flowParty: string;
+    @ApiProperty({
+        type        : String,
+        description : 'channelName [input here api field description]',
+        example     : 'te4ts57d2xvabk26ekhc7g6orkcd6wf0sy5w9cl3a0l8uivsfvuqfbj4fot2w6klreldecobcbmdgbrl9y9rduph09rg0cjlapdgkgk234uk0n25gu0qjv4a8uqpgymgg77j8pmrz4dt5bya2yf2lbhwwli25nyw'
+    })
+    channelName: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'flowComponent [input here api field description]',
-            example     : 'w04n4fcwj6jo6bdr4gfk2cimkdywz7lzlpbvy6ltyl67z6ovvtkauv8fje7qr58mym5b3rt0xoneefvt53doa2wbam2hofjeb7mhxr86gyqovdgq7zzfhanqmxoi3tiebdp8zeo8t9l0r62bjd8gyvj5g25ice5f'
-        })
-        flowComponent: string;
+    @ApiProperty({
+        type        : String,
+        description : 'flowId [input here api field description]',
+        example     : 'c10bc3f2-cd95-499d-a95d-188526a6815c'
+    })
+    flowId: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'flowInterfaceName [input here api field description]',
-            example     : 'e6pu20xns81s7a4tpzqwwo7uifa6xbngan1eqy4tv4c4530pi1qlntg32kkpwuu1egz7567omxctiletybxrrer39yxxsn8nw4k5l2e3qavrwjujeop06kgmaxsl6sntq4hrya9os850i9r0f95c1n5myrvv80gw'
-        })
-        flowInterfaceName: string;
+    @ApiProperty({
+        type        : String,
+        description : 'flowParty [input here api field description]',
+        example     : 'ovzi0jupu6szcng68pm1yauibrt7tyo9z7aqgj2e1snxbijkjtfg0gyr18qqmpkzmvt0bpl5vcywvv6kuayrk0gr1jds27vq7ukniaztrt2khtf6jz4w86kapki9j3rqe4whrxjob3p4kw0hh65ewwddrmsb25ax'
+    })
+    flowParty: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'flowInterfaceNamespace [input here api field description]',
-            example     : 'ejqbo4ujd61mh5artv92rp6ip5tmwxnl9r4q8obud4of974bdgzodjurcnsi5qdcx0zwbzzvvkzneuqxivv44d88a05t4ikbxqqd5nagmxnzj9dpqlr0gtt1nr3k89jw5vzvgfdv7mke8m78pzahvof61ehgv0dy'
-        })
-        flowInterfaceNamespace: string;
+    @ApiProperty({
+        type        : String,
+        description : 'flowComponent [input here api field description]',
+        example     : 'u4rw4yeyfws0rpvya8rr8ys2qr0c63zs69ftid7ahrxco9rxnc09uqoqc4k5bhwd631kjke1ajy8b15wxp16zakmbfsafgcnlwxp3oenfyi5vzvlioafxmotfxj2s14izxnlrs7r9hz43q4lt6kekz6y19ep5obq'
+    })
+    flowComponent: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'parameterGroup [input here api field description]',
-            example     : 'v74dcv79beb13v7flxizsrv9ikqzii3anahgj9v9oqbngthrk4noxzz3ngw8i60mf3kx7d1aqau1s4z2k228pcv6l20jfnpoevdfumjh5rvt9nv4pinysavl9f5v9cfk8nj1n4f30bs2v61l8dllqo5hhank564u7y0m1sd2h54w1gqb95ftlintd0e4gufo5mq1iam9ueqwkipmk3n14f8dzkmox1drhugpbe8gfg0m8nwednhukswfqmooo9c'
-        })
-        parameterGroup: string;
+    @ApiProperty({
+        type        : String,
+        description : 'flowInterfaceName [input here api field description]',
+        example     : 'gsn2ic1oxuxf9zt2pfyp5ogg94fsu1shzcf7t86r3b8zhnlyfp9qd51gisjixf6hd1i9m7j6b1il7jm9zffmlbm0w1qbn0iytzraztw4ilmvmn6xyqqioslx32xp72kxyhgy6p23lv7s3azshot5t3k1vstaojkd'
+    })
+    flowInterfaceName: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'name [input here api field description]',
-            example     : '7cchrluv4kjshx5hd9sloabfe00yh4s88e0p2l2x7d4ajs6738rd6m0lao0ubwwgjctom3nsilkpisgilmo92ff8slmkgcfgklxh06hm6i6fx4mepfa6ibe8wv1aae0tse7g0ufbb76n4drg8ynu2ndq562bqrpdlylu70vojps2vts722b1noxdnjc2uht7w16v5pvnhbecspbuq3lxo62eqv7rm2cc4zqist669o5rfroks7p01yzzcqpq5rlecs0z7gngyipb7sglozpbdmqu2gz3l40qd728v7upjbms9qpbkrfpgba9oephic5w'
-        })
-        name: string;
+    @ApiProperty({
+        type        : String,
+        description : 'flowInterfaceNamespace [input here api field description]',
+        example     : 'x2is2rmm2cgzz0eqmbvsnu1hedlxgq1muw46a2oc4yokmvgy1r8k0tf4tdxpkb4skp55t25m5qoz8rxr2qc1npn9iju9x0c7tqzh9fkwqgdesxnw4qalva00e2dz1v8gecgffknyow8ic9krz1716qopfbikalvh'
+    })
+    flowInterfaceNamespace: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'parameterName [input here api field description]',
-            example     : 'yooprnxj5qsj1o1mxb2f8kgwvunzolog9wcasy3esk8g6rwjcojltyk8evun0ko1oaegrazb2p82e39spkf9ed7p0k1ligkly0fyf5pqoe97gutrxjz2d0z022srsrw9jg2yst59q1w2t3y6sj0kbktmqcx3hp8hc8rpxvwc6ts132hieeea1swb0femgg0uwuz490841gnv5v09fshefir7zirrti9wdirspu9vi0p2lrzd5xzppsd4nwmyh2c5w4464jtuvvjb1b40v23mi2m7e30bqxzrni80fnv7b7jjths7lta0trl29m3oczgo'
-        })
-        parameterName: string;
+    @ApiProperty({
+        type        : String,
+        description : 'parameterGroup [input here api field description]',
+        example     : 'i1c91ic0sfsxw9kt9qvqycd9exa0myn89n95g1w5ehb2tg8cgkq3emqbxr7t5j8m01hlj128d1lvwni0g84thmsouy4xrmwz5fxt86nwyjcbxp5qv0y3yuzej0l41wxpqlbqi612tccnbk82hezveys161d6j1x3gaxrzbb1qsyxgfsulqy6ajv7vp2f7pcns5xfau0e9me9mn89thq6ywilp9urjrmng7nvj9nu7z72kehf1322l1sdositkcd'
+    })
+    parameterGroup: string;
     
     
     
-        @ApiProperty({
-            type        : String,
-            description : 'parameterValue [input here api field description]',
-            example     : '5t9qzxwa9758thntmg668uuljiz8svhgeq9ewvpeumsjrol64vscbliu3kitt37wsdbivnwr8pcusq18zw1c2ph438tgn8rfrsyrigi0n758w0ajmezvpdgg3fvykwt10zsp6x86t2auralaj50zyo5s75gmv83n9rlp7smhane2on7rjkgsvolrav4tobz8pirtarnpjv91hf90ktww0vg5c41aib8a0b78r9ds1ozdddyziomxliyzswfw3mf0vinu3gbr0g9xwqba5rcvh2mdo3avk8l07llmrmz3678ajux1vtb20eizs4gb7s1k5z4l7a2o6afuzfh5rnalcqv7e2hmgyde2jm2m90xqagibvqfa2cwcgbmupozapfyzyo0hq9ha8sx5006aytuz5y1qqbskkb9wwytp05p4otcboqso5ejq8p4zl546x8q1iecigoezga5kbzeoig24ybodpkf0em4b22a5iwe2eyjej3ecq8valc71bc6ztmcg6borily4bsttq7ia2m6t2jltbbessvc6jve11dh2tmj893rczvoc6h539t66jo3fd1eovwo9adm46dthz2sf45tlx01b77zc0ljbwushe940z9k16iyol4n47xz6zovkt75oyniv67jahhwwzc6x60b0c80en3fhdxy58fva1xr6j2hnv59xngjoi99yaisj8o2rzshq8z1rrprah9ylkpyzubqh6tzd0v9rj4rmbdnkavif26ebrwcum4c9sholztult3fwwgwco5jmxz8cmdukfbow3gygt69bd2z1u6p6gje0z65z759yqheho9iyo83tqm7hq2jo7r7e4xbjbrtmhscmja3mlvyui5289cugjfn4jl1eri2a4a1q1pjvme87451t8y09p2o819sefh64a0kk9ai85sm7z2pyiqjcwnhxt9iza6yn0pe595syrt974t848d3d06hkp433fr0njmqen7it7q0xxb49yxjrxp11ysd5bsvk1cvi5uq'
-        })
-        parameterValue: string;
+    @ApiProperty({
+        type        : String,
+        description : 'name [input here api field description]',
+        example     : 'mgoueyepqdpca1jccankm5lvb34qv1zzjfsic73tudr135qa1hfiquvwienztvjof688kiyn4btysj0oc35ksmdgbchqfstim0jhz0gj5u3559wo744jobxb59ztnxc40hkz0yljkzby8ldpyvjuwafpdlrosgjgqorvndwhknrhpeq2a425oel0oa3u7kk6ov5q2ew9mvcylfhjmqq7qvuoh470acrlzei2apwri655z5npxj7k2ytxf9qg3t19j3mx4kc6wpsuqne0egyxkqh5jtrcny6ihbj8wliyvrhnpcxkj9d3jovhe3gemh6l'
+    })
+    name: string;
+    
+    
+    
+    @ApiProperty({
+        type        : String,
+        description : 'parameterName [input here api field description]',
+        example     : 'rfilp86id6l35fhk6e11o2gojdikbn0ekc65yy76r4ehq1lqakrxwwo0s0p7sj0ypn52ai8c5pehzkt3ax5crycq9rso9wkxry2f5cy4850p15hvw0uial0wlfsvkhqm8dxvqu6iyj0m1tbm9z58uwvs5utd5mvo6p0yuw5kz54qmp1jlz84snlsav1wfdr16whdvl4852flxx8mxzhbiwfidx4e4t7at0daueyh9qg3v5peh7pgpsqnv58rrjy0u8n4dslob10btd2tjr53tswobx7hub8o41n36x1it2scrn1ua1u2tnj0u66aytqx'
+    })
+    parameterName: string;
+    
+    
+    
+    @ApiProperty({
+        type        : String,
+        description : 'parameterValue [input here api field description]',
+        example     : 'krj4ur70qx458f97fzwz5mrz0rdfdcgp1abxkynky1xuc09p7yr877g3062fir5qmvww1ghm5mu26sfzh50oeowxoxos60fs9tch9hetm8s3gwakqr6bog378k2txog1k9ahdf8jt9vpd1m4lk0tw9jemdzgpo2ocgullfqxf5zdmm79vgqngx8fxdjl49d1fae89z9qfxvltixpu2v4w45ghqbsbo2ozv6bzdlbn0th2v3f2mhsisn0ti6egpq0m3mofk2swl347k2smc61yfk9gyvclddguptb76ntljf9eh6oyywwc1jfua89my6hcjbkjl747x9w2zq1llxexh8d0mtcxw53fw67jq631za3yr73632a1bhysfkbit5g3jgv353qzxoeg7fvndkmoll3qkt1yi39s4eyyfcmxsnplqchwu4tsnf10wwox4wybuqlkslukq64q6nl5yt7a53atfwis5f4yfk2bx82cev4bc4lshtjgdicglgayutx8vdw9o9hwxidlcscautj0v1tsslikk0h6bss5apf7wxypz9zqj5n032gbsgmsf21m2yx0sz2bch95o5k6ccvjogbhl6yg5etd5ngl4wakhex69q0sta57pfkawarq60fvd1867f7qavjczu4ifvnrjq2smc55pgq345yqzpnqu168g3h68oudvllld2fqgc8p30iq0mq8l9684p9tjzvxsz2y22wgxgq10o0zzz940092lndn9hu4pa8qerlxmy9bcha2b08urbkqx2yjlztobmkuix6g3dgwiomhxkay1dj0r886uy7gspc6tnqy7c1jc4ztbnsovp650k68qt5dcii6xtag1bmk2p6s5uv2p9aidg3kkd1o4xufrdxhft9tbfejvctpzybon6yvmep9rp2upwht8m3fwi43f8ao49lcflglw9nyjfyrh6uzwlfgekz0fk0gs6sjpezcbv8n5v5whdql4fdsossexn5svisq1jxlu4c5c01ufervucy'
+    })
+    parameterValue: string;
     
     
 }

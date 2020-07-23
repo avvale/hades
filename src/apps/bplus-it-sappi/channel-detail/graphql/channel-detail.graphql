@@ -18,6 +18,7 @@ type BplusItSappiChannelDetail
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     executionId: ID!
@@ -27,11 +28,11 @@ type BplusItSappiChannelDetail
     executionMonitoringEndAt: GraphQLTimestamp!
     status: BplusItSappiChannelDetailStatus!
     channelId: ID!
+    channelSapId: GraphQLString!
     channelParty: GraphQLString
     channelComponent: GraphQLString!
     channelName: GraphQLString!
     detail: GraphQLString
-    example: GraphQLString
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -42,6 +43,7 @@ input BplusItSappiCreateChannelDetailInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     executionId: ID!
@@ -51,11 +53,11 @@ input BplusItSappiCreateChannelDetailInput
     executionMonitoringEndAt: GraphQLTimestamp!
     status: BplusItSappiChannelDetailStatus!
     channelId: ID!
+    channelSapId: GraphQLString!
     channelParty: GraphQLString
     channelComponent: GraphQLString!
     channelName: GraphQLString!
     detail: GraphQLString
-    example: GraphQLString
     
 }
 
@@ -63,6 +65,7 @@ input BplusItSappiUpdateChannelDetailInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     systemId: ID
     systemName: GraphQLString
     executionId: ID
@@ -72,11 +75,11 @@ input BplusItSappiUpdateChannelDetailInput
     executionMonitoringEndAt: GraphQLTimestamp
     status: BplusItSappiChannelDetailStatus
     channelId: ID
+    channelSapId: GraphQLString
     channelParty: GraphQLString
     channelComponent: GraphQLString
     channelName: GraphQLString
     detail: GraphQLString
-    example: GraphQLString
     
 }
 

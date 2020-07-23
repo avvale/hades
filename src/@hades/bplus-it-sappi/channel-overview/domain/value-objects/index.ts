@@ -1,5 +1,6 @@
 export { ChannelOverviewId } from './channel-overview-id';
 export { ChannelOverviewTenantId } from './channel-overview-tenant-id';
+export { ChannelOverviewTenantCode } from './channel-overview-tenant-code';
 export { ChannelOverviewSystemId } from './channel-overview-system-id';
 export { ChannelOverviewSystemName } from './channel-overview-system-name';
 export { ChannelOverviewExecutionId } from './channel-overview-execution-id';

@@ -21,6 +21,7 @@ export class UpdateJobOverviewResolver
         await this.commandBus.dispatch(new UpdateJobOverviewCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.executionId,

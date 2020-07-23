@@ -4,6 +4,7 @@ export class CreateJobsDetailCommand
         public readonly jobsDetail: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             systemId: string,
             systemName: string,
             executionId: string,
@@ -16,6 +17,8 @@ export class CreateJobsDetailCommand
             returnCode?: number,
             node?: string,
             user?: string,
+            startAt: string,
+            endAt: string,
             
         } []
     ) {}

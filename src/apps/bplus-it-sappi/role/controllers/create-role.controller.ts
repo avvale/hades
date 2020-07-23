@@ -26,6 +26,7 @@ export class CreateRoleController
         await this.commandBus.dispatch(new CreateRoleCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.name,
             
         ));

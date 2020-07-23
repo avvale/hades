@@ -4,6 +4,7 @@ import { CreateChannelsOverviewService } from './create-channels-overview.servic
 import { 
     ChannelOverviewId, 
     ChannelOverviewTenantId, 
+    ChannelOverviewTenantCode, 
     ChannelOverviewSystemId, 
     ChannelOverviewSystemName, 
     ChannelOverviewExecutionId, 
@@ -36,6 +37,7 @@ export class CreateChannelsOverviewCommandHandler implements ICommandHandler<Cre
                     return {
                         id: new ChannelOverviewId(channelOverview.id),
                         tenantId: new ChannelOverviewTenantId(channelOverview.tenantId),
+                        tenantCode: new ChannelOverviewTenantCode(channelOverview.tenantCode),
                         systemId: new ChannelOverviewSystemId(channelOverview.systemId),
                         systemName: new ChannelOverviewSystemName(channelOverview.systemName),
                         executionId: new ChannelOverviewExecutionId(channelOverview.executionId),

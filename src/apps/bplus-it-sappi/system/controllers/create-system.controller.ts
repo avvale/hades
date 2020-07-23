@@ -26,6 +26,7 @@ export class CreateSystemController
         await this.commandBus.dispatch(new CreateSystemCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.name,
             payload.tenantCode,
             payload.environment,

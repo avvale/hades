@@ -4,6 +4,7 @@ import { CreateSystemService } from './create-system.service';
 import { 
     SystemId, 
     SystemTenantId, 
+    SystemTenantCode, 
     SystemName, 
     SystemTenantCode, 
     SystemEnvironment, 
@@ -26,6 +27,7 @@ export class CreateSystemCommandHandler implements ICommandHandler<CreateSystemC
         await this.createSystemService.main(
             new SystemId(command.id),
             new SystemTenantId(command.tenantId),
+            new SystemTenantCode(command.tenantCode),
             new SystemName(command.name),
             new SystemTenantCode(command.tenantCode),
             new SystemEnvironment(command.environment),

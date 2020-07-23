@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     SystemId, 
     SystemTenantId, 
+    SystemTenantCode, 
     SystemName, 
     SystemTenantCode, 
     SystemEnvironment, 
@@ -29,6 +30,7 @@ export class UpdateSystemService
     public async main(
         id: SystemId,
         tenantId?: SystemTenantId,
+        tenantCode?: SystemTenantCode,
         name?: SystemName,
         tenantCode?: SystemTenantCode,
         environment?: SystemEnvironment,
@@ -42,6 +44,7 @@ export class UpdateSystemService
         const system = BplusItSappiSystem.register(
             id,
             tenantId,
+            tenantCode,
             name,
             tenantCode,
             environment,

@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ChannelOverviewId, 
     ChannelOverviewTenantId, 
+    ChannelOverviewTenantCode, 
     ChannelOverviewSystemId, 
     ChannelOverviewSystemName, 
     ChannelOverviewExecutionId, 
@@ -36,6 +37,7 @@ export class UpdateChannelOverviewService
     public async main(
         id: ChannelOverviewId,
         tenantId?: ChannelOverviewTenantId,
+        tenantCode?: ChannelOverviewTenantCode,
         systemId?: ChannelOverviewSystemId,
         systemName?: ChannelOverviewSystemName,
         executionId?: ChannelOverviewExecutionId,
@@ -56,6 +58,7 @@ export class UpdateChannelOverviewService
         const channelOverview = BplusItSappiChannelOverview.register(
             id,
             tenantId,
+            tenantCode,
             systemId,
             systemName,
             executionId,

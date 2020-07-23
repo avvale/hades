@@ -5,6 +5,7 @@ import { ChannelOverviewResponse } from './channel-overview.response';
 import { 
     ChannelOverviewId, 
     ChannelOverviewTenantId, 
+    ChannelOverviewTenantCode, 
     ChannelOverviewSystemId, 
     ChannelOverviewSystemName, 
     ChannelOverviewExecutionId, 
@@ -67,6 +68,7 @@ export class ChannelOverviewMapper implements IMapper
         return BplusItSappiChannelOverview.register(
             new ChannelOverviewId(channelOverview.id),
             new ChannelOverviewTenantId(channelOverview.tenantId),
+            new ChannelOverviewTenantCode(channelOverview.tenantCode),
             new ChannelOverviewSystemId(channelOverview.systemId),
             new ChannelOverviewSystemName(channelOverview.systemName),
             new ChannelOverviewExecutionId(channelOverview.executionId),
@@ -92,6 +94,7 @@ export class ChannelOverviewMapper implements IMapper
         return new ChannelOverviewResponse(
             channelOverview.id.value,
             channelOverview.tenantId.value,
+            channelOverview.tenantCode.value,
             channelOverview.systemId.value,
             channelOverview.systemName.value,
             channelOverview.executionId.value,

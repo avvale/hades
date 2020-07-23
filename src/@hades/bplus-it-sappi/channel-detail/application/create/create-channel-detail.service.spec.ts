@@ -7,6 +7,7 @@ import { CreateChannelDetailService } from './create-channel-detail.service';
 import { 
     ChannelDetailId, 
     ChannelDetailTenantId, 
+    ChannelDetailTenantCode, 
     ChannelDetailSystemId, 
     ChannelDetailSystemName, 
     ChannelDetailExecutionId, 
@@ -16,15 +17,15 @@ import {
     ChannelDetailExecutionMonitoringEndAt, 
     ChannelDetailStatus, 
     ChannelDetailChannelId, 
+    ChannelDetailChannelSapId, 
     ChannelDetailChannelParty, 
     ChannelDetailChannelComponent, 
     ChannelDetailChannelName, 
-    ChannelDetailDetail, 
-    ChannelDetailExample
+    ChannelDetailDetail
     
 } from './../../domain/value-objects';
-import { IChannelDetailRepository } from '../../domain/channel-detail.repository';
-import { MockChannelDetailRepository } from '../../infrastructure/mock/mock-channel-detail.repository';
+import { IChannelDetailRepository } from './../../domain/channel-detail.repository';
+import { MockChannelDetailRepository } from './../../infrastructure/mock/mock-channel-detail.repository';
 
 describe('CreateChannelDetailService', () => 
 {
@@ -44,8 +45,7 @@ describe('CreateChannelDetailService', () =>
                 { 
                     provide: IChannelDetailRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -65,10 +65,10 @@ describe('CreateChannelDetailService', () =>
 
         test('should create a channelDetail and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new ChannelDetailId(channelsDetail[0].id),
                 new ChannelDetailTenantId(channelsDetail[0].tenantId),
+                new ChannelDetailTenantCode(channelsDetail[0].tenantCode),
                 new ChannelDetailSystemId(channelsDetail[0].systemId),
                 new ChannelDetailSystemName(channelsDetail[0].systemName),
                 new ChannelDetailExecutionId(channelsDetail[0].executionId),
@@ -78,11 +78,11 @@ describe('CreateChannelDetailService', () =>
                 new ChannelDetailExecutionMonitoringEndAt(channelsDetail[0].executionMonitoringEndAt),
                 new ChannelDetailStatus(channelsDetail[0].status),
                 new ChannelDetailChannelId(channelsDetail[0].channelId),
+                new ChannelDetailChannelSapId(channelsDetail[0].channelSapId),
                 new ChannelDetailChannelParty(channelsDetail[0].channelParty),
                 new ChannelDetailChannelComponent(channelsDetail[0].channelComponent),
                 new ChannelDetailChannelName(channelsDetail[0].channelName),
                 new ChannelDetailDetail(channelsDetail[0].detail),
-                new ChannelDetailExample(channelsDetail[0].example),
                 
             )).toBe(undefined);
         });

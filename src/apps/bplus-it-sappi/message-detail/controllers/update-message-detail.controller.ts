@@ -26,6 +26,7 @@ export class UpdateMessageDetailController
         await this.commandBus.dispatch(new UpdateMessageDetailCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.scenario,

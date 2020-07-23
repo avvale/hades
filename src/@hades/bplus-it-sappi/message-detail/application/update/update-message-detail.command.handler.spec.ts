@@ -42,6 +42,7 @@ describe('UpdateMessageDetailCommandHandler', () =>
                 new UpdateMessageDetailCommand(
                     messagesDetail[0].id,
                     messagesDetail[0].tenantId,
+                    messagesDetail[0].tenantCode,
                     messagesDetail[0].systemId,
                     messagesDetail[0].systemName,
                     messagesDetail[0].scenario,

@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { flows } from '@hades/bplus-it-sappi/flow/infrastructure/seeds/flow.seed';
 import { DeleteFlowByIdService } from './delete-flow-by-id.service';
 import { FlowId } from './../../domain/value-objects';
-import { IFlowRepository } from '../../domain/flow.repository';
-import { MockFlowRepository } from '../../infrastructure/mock/mock-flow.repository';
+import { IFlowRepository } from './../../domain/flow.repository';
+import { MockFlowRepository } from './../../infrastructure/mock/mock-flow.repository';
 
 describe('DeleteFlowByIdService', () => 
 {

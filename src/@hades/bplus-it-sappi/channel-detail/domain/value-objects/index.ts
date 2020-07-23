@@ -1,5 +1,6 @@
 export { ChannelDetailId } from './channel-detail-id';
 export { ChannelDetailTenantId } from './channel-detail-tenant-id';
+export { ChannelDetailTenantCode } from './channel-detail-tenant-code';
 export { ChannelDetailSystemId } from './channel-detail-system-id';
 export { ChannelDetailSystemName } from './channel-detail-system-name';
 export { ChannelDetailExecutionId } from './channel-detail-execution-id';
@@ -9,11 +10,11 @@ export { ChannelDetailExecutionMonitoringStartAt } from './channel-detail-execut
 export { ChannelDetailExecutionMonitoringEndAt } from './channel-detail-execution-monitoring-end-at';
 export { ChannelDetailStatus } from './channel-detail-status';
 export { ChannelDetailChannelId } from './channel-detail-channel-id';
+export { ChannelDetailChannelSapId } from './channel-detail-channel-sap-id';
 export { ChannelDetailChannelParty } from './channel-detail-channel-party';
 export { ChannelDetailChannelComponent } from './channel-detail-channel-component';
 export { ChannelDetailChannelName } from './channel-detail-channel-name';
 export { ChannelDetailDetail } from './channel-detail-detail';
-export { ChannelDetailExample } from './channel-detail-example';
 export { ChannelDetailCreatedAt } from './channel-detail-created-at';
 export { ChannelDetailUpdatedAt } from './channel-detail-updated-at';
 export { ChannelDetailDeletedAt } from './channel-detail-deleted-at';

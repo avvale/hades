@@ -7,6 +7,7 @@ import { CreateJobDetailService } from './create-job-detail.service';
 import { 
     JobDetailId, 
     JobDetailTenantId, 
+    JobDetailTenantCode, 
     JobDetailSystemId, 
     JobDetailSystemName, 
     JobDetailExecutionId, 
@@ -18,11 +19,13 @@ import {
     JobDetailName, 
     JobDetailReturnCode, 
     JobDetailNode, 
-    JobDetailUser
+    JobDetailUser, 
+    JobDetailStartAt, 
+    JobDetailEndAt
     
 } from './../../domain/value-objects';
-import { IJobDetailRepository } from '../../domain/job-detail.repository';
-import { MockJobDetailRepository } from '../../infrastructure/mock/mock-job-detail.repository';
+import { IJobDetailRepository } from './../../domain/job-detail.repository';
+import { MockJobDetailRepository } from './../../infrastructure/mock/mock-job-detail.repository';
 
 describe('CreateJobDetailService', () => 
 {
@@ -42,8 +45,7 @@ describe('CreateJobDetailService', () =>
                 { 
                     provide: IJobDetailRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -63,10 +65,10 @@ describe('CreateJobDetailService', () =>
 
         test('should create a jobDetail and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new JobDetailId(jobsDetail[0].id),
                 new JobDetailTenantId(jobsDetail[0].tenantId),
+                new JobDetailTenantCode(jobsDetail[0].tenantCode),
                 new JobDetailSystemId(jobsDetail[0].systemId),
                 new JobDetailSystemName(jobsDetail[0].systemName),
                 new JobDetailExecutionId(jobsDetail[0].executionId),
@@ -79,6 +81,8 @@ describe('CreateJobDetailService', () =>
                 new JobDetailReturnCode(jobsDetail[0].returnCode),
                 new JobDetailNode(jobsDetail[0].node),
                 new JobDetailUser(jobsDetail[0].user),
+                new JobDetailStartAt(jobsDetail[0].startAt),
+                new JobDetailEndAt(jobsDetail[0].endAt),
                 
             )).toBe(undefined);
         });

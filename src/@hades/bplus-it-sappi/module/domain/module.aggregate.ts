@@ -2,12 +2,14 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     ModuleId, 
     ModuleTenantId, 
+    ModuleTenantCode, 
     ModuleSystemId, 
     ModuleSystemName, 
     ModuleChannelId, 
     ModuleChannelParty, 
     ModuleChannelComponent, 
     ModuleChannelName, 
+    ModuleFlowId, 
     ModuleFlowParty, 
     ModuleFlowComponent, 
     ModuleFlowInterfaceName, 
@@ -27,12 +29,14 @@ import { DeletedModuleEvent } from './../application/events/deleted-module.event
 import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.aggregate';
 import { BplusItSappiChannel } from '@hades/bplus-it-sappi/channel/domain/channel.aggregate';
+import { BplusItSappiFlow } from '@hades/bplus-it-sappi/flow/domain/flow.aggregate';
 
 export class BplusItSappiModule extends AggregateRoot
 {
     id: ModuleId;
     tenantId: ModuleTenantId;
     tenant: AdminTenant;
+    tenantCode: ModuleTenantCode;
     systemId: ModuleSystemId;
     system: BplusItSappiSystem;
     systemName: ModuleSystemName;
@@ -41,6 +45,8 @@ export class BplusItSappiModule extends AggregateRoot
     channelParty: ModuleChannelParty;
     channelComponent: ModuleChannelComponent;
     channelName: ModuleChannelName;
+    flowId: ModuleFlowId;
+    flow: BplusItSappiFlow;
     flowParty: ModuleFlowParty;
     flowComponent: ModuleFlowComponent;
     flowInterfaceName: ModuleFlowInterfaceName;
@@ -53,18 +59,20 @@ export class BplusItSappiModule extends AggregateRoot
     updatedAt: ModuleUpdatedAt;
     deletedAt: ModuleDeletedAt;
     
-    constructor(id?: ModuleId, tenantId?: ModuleTenantId, systemId?: ModuleSystemId, systemName?: ModuleSystemName, channelId?: ModuleChannelId, channelParty?: ModuleChannelParty, channelComponent?: ModuleChannelComponent, channelName?: ModuleChannelName, flowParty?: ModuleFlowParty, flowComponent?: ModuleFlowComponent, flowInterfaceName?: ModuleFlowInterfaceName, flowInterfaceNamespace?: ModuleFlowInterfaceNamespace, parameterGroup?: ModuleParameterGroup, name?: ModuleName, parameterName?: ModuleParameterName, parameterValue?: ModuleParameterValue, createdAt?: ModuleCreatedAt, updatedAt?: ModuleUpdatedAt, deletedAt?: ModuleDeletedAt, )
+    constructor(id?: ModuleId, tenantId?: ModuleTenantId, tenantCode?: ModuleTenantCode, systemId?: ModuleSystemId, systemName?: ModuleSystemName, channelId?: ModuleChannelId, channelParty?: ModuleChannelParty, channelComponent?: ModuleChannelComponent, channelName?: ModuleChannelName, flowId?: ModuleFlowId, flowParty?: ModuleFlowParty, flowComponent?: ModuleFlowComponent, flowInterfaceName?: ModuleFlowInterfaceName, flowInterfaceNamespace?: ModuleFlowInterfaceNamespace, parameterGroup?: ModuleParameterGroup, name?: ModuleName, parameterName?: ModuleParameterName, parameterValue?: ModuleParameterValue, createdAt?: ModuleCreatedAt, updatedAt?: ModuleUpdatedAt, deletedAt?: ModuleDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
+        this.tenantCode = tenantCode;
         this.systemId = systemId;
         this.systemName = systemName;
         this.channelId = channelId;
         this.channelParty = channelParty;
         this.channelComponent = channelComponent;
         this.channelName = channelName;
+        this.flowId = flowId;
         this.flowParty = flowParty;
         this.flowComponent = flowComponent;
         this.flowInterfaceName = flowInterfaceName;
@@ -79,9 +87,9 @@ export class BplusItSappiModule extends AggregateRoot
         
     }
 
-    static register (id: ModuleId, tenantId: ModuleTenantId, systemId: ModuleSystemId, systemName: ModuleSystemName, channelId: ModuleChannelId, channelParty: ModuleChannelParty, channelComponent: ModuleChannelComponent, channelName: ModuleChannelName, flowParty: ModuleFlowParty, flowComponent: ModuleFlowComponent, flowInterfaceName: ModuleFlowInterfaceName, flowInterfaceNamespace: ModuleFlowInterfaceNamespace, parameterGroup: ModuleParameterGroup, name: ModuleName, parameterName: ModuleParameterName, parameterValue: ModuleParameterValue, createdAt: ModuleCreatedAt, updatedAt: ModuleUpdatedAt, deletedAt: ModuleDeletedAt, ): BplusItSappiModule
+    static register (id: ModuleId, tenantId: ModuleTenantId, tenantCode: ModuleTenantCode, systemId: ModuleSystemId, systemName: ModuleSystemName, channelId: ModuleChannelId, channelParty: ModuleChannelParty, channelComponent: ModuleChannelComponent, channelName: ModuleChannelName, flowId: ModuleFlowId, flowParty: ModuleFlowParty, flowComponent: ModuleFlowComponent, flowInterfaceName: ModuleFlowInterfaceName, flowInterfaceNamespace: ModuleFlowInterfaceNamespace, parameterGroup: ModuleParameterGroup, name: ModuleName, parameterName: ModuleParameterName, parameterValue: ModuleParameterValue, createdAt: ModuleCreatedAt, updatedAt: ModuleUpdatedAt, deletedAt: ModuleDeletedAt, ): BplusItSappiModule
     {
-        return new BplusItSappiModule(id, tenantId, systemId, systemName, channelId, channelParty, channelComponent, channelName, flowParty, flowComponent, flowInterfaceName, flowInterfaceNamespace, parameterGroup, name, parameterName, parameterValue, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiModule(id, tenantId, tenantCode, systemId, systemName, channelId, channelParty, channelComponent, channelName, flowId, flowParty, flowComponent, flowInterfaceName, flowInterfaceNamespace, parameterGroup, name, parameterName, parameterValue, createdAt, updatedAt, deletedAt, );
     }
 
     created(module: BplusItSappiModule): void
@@ -90,12 +98,14 @@ export class BplusItSappiModule extends AggregateRoot
             new CreatedModuleEvent(
                 module.id.value,
                 module.tenantId.value,
+                module.tenantCode.value,
                 module.systemId.value,
                 module.systemName.value,
                 module.channelId.value,
                 module.channelParty?.value,
                 module.channelComponent.value,
                 module.channelName.value,
+                module.flowId?.value,
                 module.flowParty?.value,
                 module.flowComponent.value,
                 module.flowInterfaceName.value,
@@ -118,12 +128,14 @@ export class BplusItSappiModule extends AggregateRoot
             new UpdatedModuleEvent(
                 module.id.value,
                 module.tenantId?.value,
+                module.tenantCode?.value,
                 module.systemId?.value,
                 module.systemName?.value,
                 module.channelId?.value,
                 module.channelParty?.value,
                 module.channelComponent?.value,
                 module.channelName?.value,
+                module.flowId?.value,
                 module.flowParty?.value,
                 module.flowComponent?.value,
                 module.flowInterfaceName?.value,
@@ -146,12 +158,14 @@ export class BplusItSappiModule extends AggregateRoot
             new DeletedModuleEvent(
                 module.id.value,
                 module.tenantId.value,
+                module.tenantCode.value,
                 module.systemId.value,
                 module.systemName.value,
                 module.channelId.value,
                 module.channelParty?.value,
                 module.channelComponent.value,
                 module.channelName.value,
+                module.flowId?.value,
                 module.flowParty?.value,
                 module.flowComponent.value,
                 module.flowInterfaceName.value,
@@ -173,12 +187,14 @@ export class BplusItSappiModule extends AggregateRoot
         return {
             id: this.id.value,
             tenantId: this.tenantId.value,
+            tenantCode: this.tenantCode.value,
             systemId: this.systemId.value,
             systemName: this.systemName.value,
             channelId: this.channelId.value,
             channelParty: this.channelParty?.value,
             channelComponent: this.channelComponent.value,
             channelName: this.channelName.value,
+            flowId: this.flowId?.value,
             flowParty: this.flowParty?.value,
             flowComponent: this.flowComponent.value,
             flowInterfaceName: this.flowInterfaceName.value,

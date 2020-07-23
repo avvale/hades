@@ -4,6 +4,7 @@ import { UpdateSystemService } from './update-system.service';
 import { 
     SystemId, 
     SystemTenantId, 
+    SystemTenantCode, 
     SystemName, 
     SystemTenantCode, 
     SystemEnvironment, 
@@ -26,6 +27,7 @@ export class UpdateSystemCommandHandler implements ICommandHandler<UpdateSystemC
         await this.updateSystemService.main(
             new SystemId(command.id),
             new SystemTenantId(command.tenantId, { undefinable: true }),
+            new SystemTenantCode(command.tenantCode, { undefinable: true }),
             new SystemName(command.name, { undefinable: true }),
             new SystemTenantCode(command.tenantCode, { undefinable: true }),
             new SystemEnvironment(command.environment, { undefinable: true }),

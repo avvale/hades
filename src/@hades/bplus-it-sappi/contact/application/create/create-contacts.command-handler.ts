@@ -4,6 +4,7 @@ import { CreateContactsService } from './create-contacts.service';
 import { 
     ContactId, 
     ContactTenantId, 
+    ContactTenantCode, 
     ContactSystemId, 
     ContactSystemName, 
     ContactRoleId, 
@@ -35,6 +36,7 @@ export class CreateContactsCommandHandler implements ICommandHandler<CreateConta
                     return {
                         id: new ContactId(contact.id),
                         tenantId: new ContactTenantId(contact.tenantId),
+                        tenantCode: new ContactTenantCode(contact.tenantCode),
                         systemId: new ContactSystemId(contact.systemId),
                         systemName: new ContactSystemName(contact.systemName),
                         roleId: new ContactRoleId(contact.roleId),

@@ -4,6 +4,7 @@ import { UpdateMessageDetailService } from './update-message-detail.service';
 import { 
     MessageDetailId, 
     MessageDetailTenantId, 
+    MessageDetailTenantCode, 
     MessageDetailSystemId, 
     MessageDetailSystemName, 
     MessageDetailScenario, 
@@ -51,6 +52,7 @@ export class UpdateMessageDetailCommandHandler implements ICommandHandler<Update
         await this.updateMessageDetailService.main(
             new MessageDetailId(command.id),
             new MessageDetailTenantId(command.tenantId, { undefinable: true }),
+            new MessageDetailTenantCode(command.tenantCode, { undefinable: true }),
             new MessageDetailSystemId(command.systemId, { undefinable: true }),
             new MessageDetailSystemName(command.systemName, { undefinable: true }),
             new MessageDetailScenario(command.scenario),
@@ -59,7 +61,7 @@ export class UpdateMessageDetailCommandHandler implements ICommandHandler<Update
             new MessageDetailExecutionExecutedAt(command.executionExecutedAt, { undefinable: true }),
             new MessageDetailExecutionMonitoringStartAt(command.executionMonitoringStartAt, { undefinable: true }),
             new MessageDetailExecutionMonitoringEndAt(command.executionMonitoringEndAt, { undefinable: true }),
-            new MessageDetailFlowId(command.flowId, { undefinable: true }),
+            new MessageDetailFlowId(command.flowId),
             new MessageDetailFlowParty(command.flowParty),
             new MessageDetailFlowComponent(command.flowComponent, { undefinable: true }),
             new MessageDetailFlowInterfaceName(command.flowInterfaceName, { undefinable: true }),
@@ -68,7 +70,7 @@ export class UpdateMessageDetailCommandHandler implements ICommandHandler<Update
             new MessageDetailDetail(command.detail),
             new MessageDetailExample(command.example),
             new MessageDetailStartTimeAt(command.startTimeAt),
-            new MessageDetailDirection(command.direction),
+            new MessageDetailDirection(command.direction, { undefinable: true }),
             new MessageDetailErrorCategory(command.errorCategory),
             new MessageDetailErrorCode(command.errorCode),
             new MessageDetailErrorLabel(command.errorLabel),

@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ContactId, 
     ContactTenantId, 
+    ContactTenantCode, 
     ContactSystemId, 
     ContactSystemName, 
     ContactRoleId, 
@@ -37,6 +38,7 @@ export class CreateContactsService
         contacts: {
             id: ContactId,
             tenantId: ContactTenantId,
+            tenantCode: ContactTenantCode,
             systemId: ContactSystemId,
             systemName: ContactSystemName,
             roleId: ContactRoleId,
@@ -57,6 +59,7 @@ export class CreateContactsService
         const aggregateContacts = contacts.map(contact => BplusItSappiContact.register(
             contact.id,
             contact.tenantId,
+            contact.tenantCode,
             contact.systemId,
             contact.systemName,
             contact.roleId,

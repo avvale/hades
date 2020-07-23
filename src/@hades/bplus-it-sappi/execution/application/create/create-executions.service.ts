@@ -4,7 +4,9 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ExecutionId, 
     ExecutionTenantId, 
+    ExecutionTenantCode, 
     ExecutionSystemId, 
+    ExecutionSystemName, 
     ExecutionType, 
     ExecutionMonitoringStartAt, 
     ExecutionMonitoringEndAt, 
@@ -30,7 +32,9 @@ export class CreateExecutionsService
         executions: {
             id: ExecutionId,
             tenantId: ExecutionTenantId,
+            tenantCode: ExecutionTenantCode,
             systemId: ExecutionSystemId,
+            systemName: ExecutionSystemName,
             type: ExecutionType,
             monitoringStartAt: ExecutionMonitoringStartAt,
             monitoringEndAt: ExecutionMonitoringEndAt,
@@ -43,7 +47,9 @@ export class CreateExecutionsService
         const aggregateExecutions = executions.map(execution => BplusItSappiExecution.register(
             execution.id,
             execution.tenantId,
+            execution.tenantCode,
             execution.systemId,
+            execution.systemName,
             execution.type,
             execution.monitoringStartAt,
             execution.monitoringEndAt,

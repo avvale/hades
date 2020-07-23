@@ -32,6 +32,16 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     tenant: AdminTenantModel;
              
         
+    @Column({
+        field: 'tenant_code',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(50),
+    })
+    tenantCode: string;
+        
+             
+        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({
@@ -45,6 +55,16 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @BelongsTo(() => BplusItSappiSystemModel)
     system: BplusItSappiSystemModel;
+             
+        
+    @Column({
+        field: 'system_name',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(20),
+    })
+    systemName: string;
+        
              
         
     @Column({

@@ -4,6 +4,7 @@ import { CreateChannelsDetailService } from './create-channels-detail.service';
 import { 
     ChannelDetailId, 
     ChannelDetailTenantId, 
+    ChannelDetailTenantCode, 
     ChannelDetailSystemId, 
     ChannelDetailSystemName, 
     ChannelDetailExecutionId, 
@@ -13,11 +14,11 @@ import {
     ChannelDetailExecutionMonitoringEndAt, 
     ChannelDetailStatus, 
     ChannelDetailChannelId, 
+    ChannelDetailChannelSapId, 
     ChannelDetailChannelParty, 
     ChannelDetailChannelComponent, 
     ChannelDetailChannelName, 
-    ChannelDetailDetail, 
-    ChannelDetailExample
+    ChannelDetailDetail
     
 } from './../../domain/value-objects';
 
@@ -37,6 +38,7 @@ export class CreateChannelsDetailCommandHandler implements ICommandHandler<Creat
                     return {
                         id: new ChannelDetailId(channelDetail.id),
                         tenantId: new ChannelDetailTenantId(channelDetail.tenantId),
+                        tenantCode: new ChannelDetailTenantCode(channelDetail.tenantCode),
                         systemId: new ChannelDetailSystemId(channelDetail.systemId),
                         systemName: new ChannelDetailSystemName(channelDetail.systemName),
                         executionId: new ChannelDetailExecutionId(channelDetail.executionId),
@@ -46,11 +48,11 @@ export class CreateChannelsDetailCommandHandler implements ICommandHandler<Creat
                         executionMonitoringEndAt: new ChannelDetailExecutionMonitoringEndAt(channelDetail.executionMonitoringEndAt),
                         status: new ChannelDetailStatus(channelDetail.status),
                         channelId: new ChannelDetailChannelId(channelDetail.channelId),
+                        channelSapId: new ChannelDetailChannelSapId(channelDetail.channelSapId),
                         channelParty: new ChannelDetailChannelParty(channelDetail.channelParty),
                         channelComponent: new ChannelDetailChannelComponent(channelDetail.channelComponent),
                         channelName: new ChannelDetailChannelName(channelDetail.channelName),
                         detail: new ChannelDetailDetail(channelDetail.detail),
-                        example: new ChannelDetailExample(channelDetail.example),
                         
                     }
                 })

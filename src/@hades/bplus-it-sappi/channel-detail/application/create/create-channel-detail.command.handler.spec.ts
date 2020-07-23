@@ -42,6 +42,7 @@ describe('CreateChannelDetailCommandHandler', () =>
                 new CreateChannelDetailCommand(
                     channelsDetail[0].id,
                     channelsDetail[0].tenantId,
+                    channelsDetail[0].tenantCode,
                     channelsDetail[0].systemId,
                     channelsDetail[0].systemName,
                     channelsDetail[0].executionId,
@@ -51,11 +52,11 @@ describe('CreateChannelDetailCommandHandler', () =>
                     channelsDetail[0].executionMonitoringEndAt,
                     channelsDetail[0].status,
                     channelsDetail[0].channelId,
+                    channelsDetail[0].channelSapId,
                     channelsDetail[0].channelParty,
                     channelsDetail[0].channelComponent,
                     channelsDetail[0].channelName,
                     channelsDetail[0].detail,
-                    channelsDetail[0].example,
                     
                 )
             )).toBe(undefined);

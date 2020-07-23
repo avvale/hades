@@ -4,6 +4,7 @@ import { CreateMessageOverviewService } from './create-message-overview.service'
 import { 
     MessageOverviewId, 
     MessageOverviewTenantId, 
+    MessageOverviewTenantCode, 
     MessageOverviewSystemId, 
     MessageOverviewSystemName, 
     MessageOverviewExecutionId, 
@@ -36,6 +37,7 @@ export class CreateMessageOverviewCommandHandler implements ICommandHandler<Crea
         await this.createMessageOverviewService.main(
             new MessageOverviewId(command.id),
             new MessageOverviewTenantId(command.tenantId),
+            new MessageOverviewTenantCode(command.tenantCode),
             new MessageOverviewSystemId(command.systemId),
             new MessageOverviewSystemName(command.systemName),
             new MessageOverviewExecutionId(command.executionId),

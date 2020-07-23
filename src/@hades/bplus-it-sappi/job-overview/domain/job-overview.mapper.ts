@@ -5,6 +5,7 @@ import { JobOverviewResponse } from './job-overview.response';
 import { 
     JobOverviewId, 
     JobOverviewTenantId, 
+    JobOverviewTenantCode, 
     JobOverviewSystemId, 
     JobOverviewSystemName, 
     JobOverviewExecutionId, 
@@ -64,6 +65,7 @@ export class JobOverviewMapper implements IMapper
         return BplusItSappiJobOverview.register(
             new JobOverviewId(jobOverview.id),
             new JobOverviewTenantId(jobOverview.tenantId),
+            new JobOverviewTenantCode(jobOverview.tenantCode),
             new JobOverviewSystemId(jobOverview.systemId),
             new JobOverviewSystemName(jobOverview.systemName),
             new JobOverviewExecutionId(jobOverview.executionId),
@@ -86,6 +88,7 @@ export class JobOverviewMapper implements IMapper
         return new JobOverviewResponse(
             jobOverview.id.value,
             jobOverview.tenantId.value,
+            jobOverview.tenantCode.value,
             jobOverview.systemId.value,
             jobOverview.systemName.value,
             jobOverview.executionId.value,

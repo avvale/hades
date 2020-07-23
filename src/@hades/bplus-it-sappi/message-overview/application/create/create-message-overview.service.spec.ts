@@ -7,6 +7,7 @@ import { CreateMessageOverviewService } from './create-message-overview.service'
 import { 
     MessageOverviewId, 
     MessageOverviewTenantId, 
+    MessageOverviewTenantCode, 
     MessageOverviewSystemId, 
     MessageOverviewSystemName, 
     MessageOverviewExecutionId, 
@@ -25,8 +26,8 @@ import {
     MessageOverviewWaiting
     
 } from './../../domain/value-objects';
-import { IMessageOverviewRepository } from '../../domain/message-overview.repository';
-import { MockMessageOverviewRepository } from '../../infrastructure/mock/mock-message-overview.repository';
+import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
+import { MockMessageOverviewRepository } from './../../infrastructure/mock/mock-message-overview.repository';
 
 describe('CreateMessageOverviewService', () => 
 {
@@ -46,8 +47,7 @@ describe('CreateMessageOverviewService', () =>
                 { 
                     provide: IMessageOverviewRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -67,10 +67,10 @@ describe('CreateMessageOverviewService', () =>
 
         test('should create a messageOverview and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new MessageOverviewId(messagesOverview[0].id),
                 new MessageOverviewTenantId(messagesOverview[0].tenantId),
+                new MessageOverviewTenantCode(messagesOverview[0].tenantCode),
                 new MessageOverviewSystemId(messagesOverview[0].systemId),
                 new MessageOverviewSystemName(messagesOverview[0].systemName),
                 new MessageOverviewExecutionId(messagesOverview[0].executionId),

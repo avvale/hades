@@ -15,6 +15,7 @@ type BplusItSappiJobDetail
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     executionId: ID!
@@ -27,6 +28,8 @@ type BplusItSappiJobDetail
     returnCode: GraphQLInt
     node: GraphQLString
     user: GraphQLString
+    startAt: GraphQLTimestamp!
+    endAt: GraphQLTimestamp!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -37,6 +40,7 @@ input BplusItSappiCreateJobDetailInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     executionId: ID!
@@ -49,6 +53,8 @@ input BplusItSappiCreateJobDetailInput
     returnCode: GraphQLInt
     node: GraphQLString
     user: GraphQLString
+    startAt: GraphQLTimestamp!
+    endAt: GraphQLTimestamp!
     
 }
 
@@ -56,6 +62,7 @@ input BplusItSappiUpdateJobDetailInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     systemId: ID
     systemName: GraphQLString
     executionId: ID
@@ -68,6 +75,8 @@ input BplusItSappiUpdateJobDetailInput
     returnCode: GraphQLInt
     node: GraphQLString
     user: GraphQLString
+    startAt: GraphQLTimestamp
+    endAt: GraphQLTimestamp
     
 }
 

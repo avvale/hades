@@ -2,6 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     ContactId, 
     ContactTenantId, 
+    ContactTenantCode, 
     ContactSystemId, 
     ContactSystemName, 
     ContactRoleId, 
@@ -31,6 +32,7 @@ export class BplusItSappiContact extends AggregateRoot
     id: ContactId;
     tenantId: ContactTenantId;
     tenant: AdminTenant;
+    tenantCode: ContactTenantCode;
     systemId: ContactSystemId;
     system: BplusItSappiSystem;
     systemName: ContactSystemName;
@@ -49,12 +51,13 @@ export class BplusItSappiContact extends AggregateRoot
     updatedAt: ContactUpdatedAt;
     deletedAt: ContactDeletedAt;
     
-    constructor(id?: ContactId, tenantId?: ContactTenantId, systemId?: ContactSystemId, systemName?: ContactSystemName, roleId?: ContactRoleId, roleName?: ContactRoleName, name?: ContactName, surname?: ContactSurname, email?: ContactEmail, mobile?: ContactMobile, area?: ContactArea, hasConsentEmail?: ContactHasConsentEmail, hasConsentMobile?: ContactHasConsentMobile, isActive?: ContactIsActive, createdAt?: ContactCreatedAt, updatedAt?: ContactUpdatedAt, deletedAt?: ContactDeletedAt, )
+    constructor(id?: ContactId, tenantId?: ContactTenantId, tenantCode?: ContactTenantCode, systemId?: ContactSystemId, systemName?: ContactSystemName, roleId?: ContactRoleId, roleName?: ContactRoleName, name?: ContactName, surname?: ContactSurname, email?: ContactEmail, mobile?: ContactMobile, area?: ContactArea, hasConsentEmail?: ContactHasConsentEmail, hasConsentMobile?: ContactHasConsentMobile, isActive?: ContactIsActive, createdAt?: ContactCreatedAt, updatedAt?: ContactUpdatedAt, deletedAt?: ContactDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
+        this.tenantCode = tenantCode;
         this.systemId = systemId;
         this.systemName = systemName;
         this.roleId = roleId;
@@ -73,9 +76,9 @@ export class BplusItSappiContact extends AggregateRoot
         
     }
 
-    static register (id: ContactId, tenantId: ContactTenantId, systemId: ContactSystemId, systemName: ContactSystemName, roleId: ContactRoleId, roleName: ContactRoleName, name: ContactName, surname: ContactSurname, email: ContactEmail, mobile: ContactMobile, area: ContactArea, hasConsentEmail: ContactHasConsentEmail, hasConsentMobile: ContactHasConsentMobile, isActive: ContactIsActive, createdAt: ContactCreatedAt, updatedAt: ContactUpdatedAt, deletedAt: ContactDeletedAt, ): BplusItSappiContact
+    static register (id: ContactId, tenantId: ContactTenantId, tenantCode: ContactTenantCode, systemId: ContactSystemId, systemName: ContactSystemName, roleId: ContactRoleId, roleName: ContactRoleName, name: ContactName, surname: ContactSurname, email: ContactEmail, mobile: ContactMobile, area: ContactArea, hasConsentEmail: ContactHasConsentEmail, hasConsentMobile: ContactHasConsentMobile, isActive: ContactIsActive, createdAt: ContactCreatedAt, updatedAt: ContactUpdatedAt, deletedAt: ContactDeletedAt, ): BplusItSappiContact
     {
-        return new BplusItSappiContact(id, tenantId, systemId, systemName, roleId, roleName, name, surname, email, mobile, area, hasConsentEmail, hasConsentMobile, isActive, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiContact(id, tenantId, tenantCode, systemId, systemName, roleId, roleName, name, surname, email, mobile, area, hasConsentEmail, hasConsentMobile, isActive, createdAt, updatedAt, deletedAt, );
     }
 
     created(contact: BplusItSappiContact): void
@@ -84,6 +87,7 @@ export class BplusItSappiContact extends AggregateRoot
             new CreatedContactEvent(
                 contact.id.value,
                 contact.tenantId.value,
+                contact.tenantCode.value,
                 contact.systemId.value,
                 contact.systemName.value,
                 contact.roleId?.value,
@@ -110,6 +114,7 @@ export class BplusItSappiContact extends AggregateRoot
             new UpdatedContactEvent(
                 contact.id.value,
                 contact.tenantId?.value,
+                contact.tenantCode?.value,
                 contact.systemId?.value,
                 contact.systemName?.value,
                 contact.roleId?.value,
@@ -136,6 +141,7 @@ export class BplusItSappiContact extends AggregateRoot
             new DeletedContactEvent(
                 contact.id.value,
                 contact.tenantId.value,
+                contact.tenantCode.value,
                 contact.systemId.value,
                 contact.systemName.value,
                 contact.roleId?.value,
@@ -161,6 +167,7 @@ export class BplusItSappiContact extends AggregateRoot
         return {
             id: this.id.value,
             tenantId: this.tenantId.value,
+            tenantCode: this.tenantCode.value,
             systemId: this.systemId.value,
             systemName: this.systemName.value,
             roleId: this.roleId?.value,

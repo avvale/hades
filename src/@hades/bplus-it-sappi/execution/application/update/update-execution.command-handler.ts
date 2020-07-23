@@ -4,7 +4,9 @@ import { UpdateExecutionService } from './update-execution.service';
 import { 
     ExecutionId, 
     ExecutionTenantId, 
+    ExecutionTenantCode, 
     ExecutionSystemId, 
+    ExecutionSystemName, 
     ExecutionType, 
     ExecutionMonitoringStartAt, 
     ExecutionMonitoringEndAt, 
@@ -25,7 +27,9 @@ export class UpdateExecutionCommandHandler implements ICommandHandler<UpdateExec
         await this.updateExecutionService.main(
             new ExecutionId(command.id),
             new ExecutionTenantId(command.tenantId, { undefinable: true }),
+            new ExecutionTenantCode(command.tenantCode, { undefinable: true }),
             new ExecutionSystemId(command.systemId, { undefinable: true }),
+            new ExecutionSystemName(command.systemName, { undefinable: true }),
             new ExecutionType(command.type, { undefinable: true }),
             new ExecutionMonitoringStartAt(command.monitoringStartAt, { undefinable: true }),
             new ExecutionMonitoringEndAt(command.monitoringEndAt, { undefinable: true }),

@@ -2,7 +2,9 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     ExecutionId, 
     ExecutionTenantId, 
+    ExecutionTenantCode, 
     ExecutionSystemId, 
+    ExecutionSystemName, 
     ExecutionType, 
     ExecutionMonitoringStartAt, 
     ExecutionMonitoringEndAt, 
@@ -23,8 +25,10 @@ export class BplusItSappiExecution extends AggregateRoot
     id: ExecutionId;
     tenantId: ExecutionTenantId;
     tenant: AdminTenant;
+    tenantCode: ExecutionTenantCode;
     systemId: ExecutionSystemId;
     system: BplusItSappiSystem;
+    systemName: ExecutionSystemName;
     type: ExecutionType;
     monitoringStartAt: ExecutionMonitoringStartAt;
     monitoringEndAt: ExecutionMonitoringEndAt;
@@ -33,13 +37,15 @@ export class BplusItSappiExecution extends AggregateRoot
     updatedAt: ExecutionUpdatedAt;
     deletedAt: ExecutionDeletedAt;
     
-    constructor(id?: ExecutionId, tenantId?: ExecutionTenantId, systemId?: ExecutionSystemId, type?: ExecutionType, monitoringStartAt?: ExecutionMonitoringStartAt, monitoringEndAt?: ExecutionMonitoringEndAt, executedAt?: ExecutionExecutedAt, createdAt?: ExecutionCreatedAt, updatedAt?: ExecutionUpdatedAt, deletedAt?: ExecutionDeletedAt, )
+    constructor(id?: ExecutionId, tenantId?: ExecutionTenantId, tenantCode?: ExecutionTenantCode, systemId?: ExecutionSystemId, systemName?: ExecutionSystemName, type?: ExecutionType, monitoringStartAt?: ExecutionMonitoringStartAt, monitoringEndAt?: ExecutionMonitoringEndAt, executedAt?: ExecutionExecutedAt, createdAt?: ExecutionCreatedAt, updatedAt?: ExecutionUpdatedAt, deletedAt?: ExecutionDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
+        this.tenantCode = tenantCode;
         this.systemId = systemId;
+        this.systemName = systemName;
         this.type = type;
         this.monitoringStartAt = monitoringStartAt;
         this.monitoringEndAt = monitoringEndAt;
@@ -50,9 +56,9 @@ export class BplusItSappiExecution extends AggregateRoot
         
     }
 
-    static register (id: ExecutionId, tenantId: ExecutionTenantId, systemId: ExecutionSystemId, type: ExecutionType, monitoringStartAt: ExecutionMonitoringStartAt, monitoringEndAt: ExecutionMonitoringEndAt, executedAt: ExecutionExecutedAt, createdAt: ExecutionCreatedAt, updatedAt: ExecutionUpdatedAt, deletedAt: ExecutionDeletedAt, ): BplusItSappiExecution
+    static register (id: ExecutionId, tenantId: ExecutionTenantId, tenantCode: ExecutionTenantCode, systemId: ExecutionSystemId, systemName: ExecutionSystemName, type: ExecutionType, monitoringStartAt: ExecutionMonitoringStartAt, monitoringEndAt: ExecutionMonitoringEndAt, executedAt: ExecutionExecutedAt, createdAt: ExecutionCreatedAt, updatedAt: ExecutionUpdatedAt, deletedAt: ExecutionDeletedAt, ): BplusItSappiExecution
     {
-        return new BplusItSappiExecution(id, tenantId, systemId, type, monitoringStartAt, monitoringEndAt, executedAt, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiExecution(id, tenantId, tenantCode, systemId, systemName, type, monitoringStartAt, monitoringEndAt, executedAt, createdAt, updatedAt, deletedAt, );
     }
 
     created(execution: BplusItSappiExecution): void
@@ -61,7 +67,9 @@ export class BplusItSappiExecution extends AggregateRoot
             new CreatedExecutionEvent(
                 execution.id.value,
                 execution.tenantId.value,
+                execution.tenantCode.value,
                 execution.systemId.value,
+                execution.systemName.value,
                 execution.type.value,
                 execution.monitoringStartAt.value,
                 execution.monitoringEndAt.value,
@@ -80,7 +88,9 @@ export class BplusItSappiExecution extends AggregateRoot
             new UpdatedExecutionEvent(
                 execution.id.value,
                 execution.tenantId?.value,
+                execution.tenantCode?.value,
                 execution.systemId?.value,
+                execution.systemName?.value,
                 execution.type?.value,
                 execution.monitoringStartAt?.value,
                 execution.monitoringEndAt?.value,
@@ -99,7 +109,9 @@ export class BplusItSappiExecution extends AggregateRoot
             new DeletedExecutionEvent(
                 execution.id.value,
                 execution.tenantId.value,
+                execution.tenantCode.value,
                 execution.systemId.value,
+                execution.systemName.value,
                 execution.type.value,
                 execution.monitoringStartAt.value,
                 execution.monitoringEndAt.value,
@@ -117,7 +129,9 @@ export class BplusItSappiExecution extends AggregateRoot
         return {
             id: this.id.value,
             tenantId: this.tenantId.value,
+            tenantCode: this.tenantCode.value,
             systemId: this.systemId.value,
+            systemName: this.systemName.value,
             type: this.type.value,
             monitoringStartAt: this.monitoringStartAt.value,
             monitoringEndAt: this.monitoringEndAt.value,

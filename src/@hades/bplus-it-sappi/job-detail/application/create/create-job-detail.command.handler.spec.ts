@@ -42,6 +42,7 @@ describe('CreateJobDetailCommandHandler', () =>
                 new CreateJobDetailCommand(
                     jobsDetail[0].id,
                     jobsDetail[0].tenantId,
+                    jobsDetail[0].tenantCode,
                     jobsDetail[0].systemId,
                     jobsDetail[0].systemName,
                     jobsDetail[0].executionId,
@@ -54,6 +55,8 @@ describe('CreateJobDetailCommandHandler', () =>
                     jobsDetail[0].returnCode,
                     jobsDetail[0].node,
                     jobsDetail[0].user,
+                    jobsDetail[0].startAt,
+                    jobsDetail[0].endAt,
                     
                 )
             )).toBe(undefined);

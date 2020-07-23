@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { executions } from '@hades/bplus-it-sappi/execution/infrastructure/seeds/execution.seed';
 import { DeleteExecutionByIdService } from './delete-execution-by-id.service';
 import { ExecutionId } from './../../domain/value-objects';
-import { IExecutionRepository } from '../../domain/execution.repository';
-import { MockExecutionRepository } from '../../infrastructure/mock/mock-execution.repository';
+import { IExecutionRepository } from './../../domain/execution.repository';
+import { MockExecutionRepository } from './../../infrastructure/mock/mock-execution.repository';
 
 describe('DeleteExecutionByIdService', () => 
 {

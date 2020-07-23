@@ -4,7 +4,9 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ExecutionId, 
     ExecutionTenantId, 
+    ExecutionTenantCode, 
     ExecutionSystemId, 
+    ExecutionSystemName, 
     ExecutionType, 
     ExecutionMonitoringStartAt, 
     ExecutionMonitoringEndAt, 
@@ -28,7 +30,9 @@ export class CreateExecutionService
     public async main(
         id: ExecutionId,
         tenantId: ExecutionTenantId,
+        tenantCode: ExecutionTenantCode,
         systemId: ExecutionSystemId,
+        systemName: ExecutionSystemName,
         type: ExecutionType,
         monitoringStartAt: ExecutionMonitoringStartAt,
         monitoringEndAt: ExecutionMonitoringEndAt,
@@ -40,7 +44,9 @@ export class CreateExecutionService
         const execution = BplusItSappiExecution.register(
             id,
             tenantId,
+            tenantCode,
             systemId,
+            systemName,
             type,
             monitoringStartAt,
             monitoringEndAt,

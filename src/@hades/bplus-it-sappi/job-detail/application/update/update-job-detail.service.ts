@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     JobDetailId, 
     JobDetailTenantId, 
+    JobDetailTenantCode, 
     JobDetailSystemId, 
     JobDetailSystemName, 
     JobDetailExecutionId, 
@@ -16,6 +17,8 @@ import {
     JobDetailReturnCode, 
     JobDetailNode, 
     JobDetailUser, 
+    JobDetailStartAt, 
+    JobDetailEndAt, 
     JobDetailCreatedAt, 
     JobDetailUpdatedAt, 
     JobDetailDeletedAt
@@ -35,6 +38,7 @@ export class UpdateJobDetailService
     public async main(
         id: JobDetailId,
         tenantId?: JobDetailTenantId,
+        tenantCode?: JobDetailTenantCode,
         systemId?: JobDetailSystemId,
         systemName?: JobDetailSystemName,
         executionId?: JobDetailExecutionId,
@@ -47,6 +51,8 @@ export class UpdateJobDetailService
         returnCode?: JobDetailReturnCode,
         node?: JobDetailNode,
         user?: JobDetailUser,
+        startAt?: JobDetailStartAt,
+        endAt?: JobDetailEndAt,
         
     ): Promise<void>
     {        
@@ -54,6 +60,7 @@ export class UpdateJobDetailService
         const jobDetail = BplusItSappiJobDetail.register(
             id,
             tenantId,
+            tenantCode,
             systemId,
             systemName,
             executionId,
@@ -66,6 +73,8 @@ export class UpdateJobDetailService
             returnCode,
             node,
             user,
+            startAt,
+            endAt,
             null,
             new JobDetailUpdatedAt(Utils.nowTimestamp()),
             null

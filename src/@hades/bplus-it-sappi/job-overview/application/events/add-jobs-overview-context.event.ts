@@ -26,6 +26,7 @@ export class AddJobsOverviewContextEvent extends AggregateRoot
                     new CreatedJobOverviewEvent(
                         jobOverview.id.value,
                         jobOverview.tenantId.value,
+                        jobOverview.tenantCode.value,
                         jobOverview.systemId.value,
                         jobOverview.systemName.value,
                         jobOverview.executionId.value,
@@ -54,6 +55,7 @@ export class AddJobsOverviewContextEvent extends AggregateRoot
                     new DeletedJobOverviewEvent(
                         jobOverview.id.value,
                         jobOverview.tenantId.value,
+                        jobOverview.tenantCode.value,
                         jobOverview.systemId.value,
                         jobOverview.systemName.value,
                         jobOverview.executionId.value,

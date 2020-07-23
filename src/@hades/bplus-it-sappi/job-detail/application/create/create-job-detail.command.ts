@@ -3,6 +3,7 @@ export class CreateJobDetailCommand
     constructor(
         public readonly id: string,
         public readonly tenantId: string,
+        public readonly tenantCode: string,
         public readonly systemId: string,
         public readonly systemName: string,
         public readonly executionId: string,
@@ -15,6 +16,8 @@ export class CreateJobDetailCommand
         public readonly returnCode: number,
         public readonly node: string,
         public readonly user: string,
+        public readonly startAt: string,
+        public readonly endAt: string,
         
     ) {}
 }

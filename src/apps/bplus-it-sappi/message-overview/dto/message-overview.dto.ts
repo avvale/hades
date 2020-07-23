@@ -6,7 +6,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '4748233b-58ad-403c-af15-a50883004ad7'
+        example     : '6121f161-a148-4e86-9a4f-17702ba0e0f6'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'b134d494-8c2f-4a8a-b09b-5eb46bb7bf35'
+        example     : '96585ecd-8986-4a3e-b1b1-fce865f754e9'
     })
     tenantId: string;
     
@@ -23,8 +23,17 @@ export class MessageOverviewDto
     
     @ApiProperty({
         type        : String,
+        description : 'tenantCode [input here api field description]',
+        example     : '5k7ycmaqxpefdyr0ytzxx0sojx2rbb5dt6vr96gmpftvj0l3hh'
+    })
+    tenantCode: string;
+    
+    
+    
+    @ApiProperty({
+        type        : String,
         description : 'systemId [input here api field description]',
-        example     : '6c312827-8454-4b70-a629-29d8ee54e684'
+        example     : 'a0a3ac43-1659-410d-b646-53d5e5ab400f'
     })
     systemId: string;
     
@@ -33,7 +42,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'iy87grqfbzn24p8fr6nm'
+        example     : 'jzv11e9hxc7y5jql3wgs'
     })
     systemName: string;
     
@@ -42,7 +51,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '0b59269a-5fbf-4f9c-ae41-985a5712b85b'
+        example     : 'b8bd3c32-4f4c-4794-87af-9ae80e128de1'
     })
     executionId: string;
     
@@ -61,7 +70,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-21 17:48:48'
+        example     : '2020-07-23 09:26:11'
     })
     executionExecutedAt: string;
     
@@ -70,7 +79,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-21 16:59:42'
+        example     : '2020-07-23 15:10:33'
     })
     executionMonitoringStartAt: string;
     
@@ -79,7 +88,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-21 15:23:59'
+        example     : '2020-07-23 10:04:48'
     })
     executionMonitoringEndAt: string;
     
@@ -88,7 +97,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'numberMax [input here api field description]',
-        example     : 6818023058
+        example     : 5734522184
     })
     numberMax: number;
     
@@ -97,7 +106,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'numberDays [input here api field description]',
-        example     : 3667351826
+        example     : 6155246294
     })
     numberDays: number;
     
@@ -106,7 +115,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'success [input here api field description]',
-        example     : 7827666231
+        example     : 9340190501
     })
     success: number;
     
@@ -115,7 +124,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'cancelled [input here api field description]',
-        example     : 7323167448
+        example     : 7747164524
     })
     cancelled: number;
     
@@ -124,7 +133,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'delivering [input here api field description]',
-        example     : 7794878388
+        example     : 8274274388
     })
     delivering: number;
     
@@ -133,7 +142,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'error [input here api field description]',
-        example     : 2518817323
+        example     : 7409773350
     })
     error: number;
     
@@ -142,7 +151,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'holding [input here api field description]',
-        example     : 5469820409
+        example     : 3526190546
     })
     holding: number;
     
@@ -151,7 +160,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'toBeDelivered [input here api field description]',
-        example     : 5108279604
+        example     : 2705868576
     })
     toBeDelivered: number;
     
@@ -160,7 +169,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'waiting [input here api field description]',
-        example     : 2760488514
+        example     : 1170201666
     })
     waiting: number;
     
@@ -169,7 +178,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-21 22:46:31'
+        example     : '2020-07-23 04:38:00'
     })
     createdAt: string;
     
@@ -178,7 +187,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-21 20:05:14'
+        example     : '2020-07-23 09:49:45'
     })
     updatedAt: string;
     
@@ -187,7 +196,7 @@ export class MessageOverviewDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-21 04:28:09'
+        example     : '2020-07-23 10:57:02'
     })
     deletedAt: string;
     

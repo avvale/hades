@@ -7,6 +7,7 @@ import { CreateSystemService } from './create-system.service';
 import { 
     SystemId, 
     SystemTenantId, 
+    SystemTenantCode, 
     SystemName, 
     SystemTenantCode, 
     SystemEnvironment, 
@@ -15,8 +16,8 @@ import {
     SystemCancelledAt
     
 } from './../../domain/value-objects';
-import { ISystemRepository } from '../../domain/system.repository';
-import { MockSystemRepository } from '../../infrastructure/mock/mock-system.repository';
+import { ISystemRepository } from './../../domain/system.repository';
+import { MockSystemRepository } from './../../infrastructure/mock/mock-system.repository';
 
 describe('CreateSystemService', () => 
 {
@@ -36,8 +37,7 @@ describe('CreateSystemService', () =>
                 { 
                     provide: ISystemRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -57,10 +57,10 @@ describe('CreateSystemService', () =>
 
         test('should create a system and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new SystemId(systems[0].id),
                 new SystemTenantId(systems[0].tenantId),
+                new SystemTenantCode(systems[0].tenantCode),
                 new SystemName(systems[0].name),
                 new SystemTenantCode(systems[0].tenantCode),
                 new SystemEnvironment(systems[0].environment),

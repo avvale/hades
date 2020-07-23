@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ChannelDetailId, 
     ChannelDetailTenantId, 
+    ChannelDetailTenantCode, 
     ChannelDetailSystemId, 
     ChannelDetailSystemName, 
     ChannelDetailExecutionId, 
@@ -13,11 +14,11 @@ import {
     ChannelDetailExecutionMonitoringEndAt, 
     ChannelDetailStatus, 
     ChannelDetailChannelId, 
+    ChannelDetailChannelSapId, 
     ChannelDetailChannelParty, 
     ChannelDetailChannelComponent, 
     ChannelDetailChannelName, 
     ChannelDetailDetail, 
-    ChannelDetailExample, 
     ChannelDetailCreatedAt, 
     ChannelDetailUpdatedAt, 
     ChannelDetailDeletedAt
@@ -39,6 +40,7 @@ export class CreateChannelsDetailService
         channelsDetail: {
             id: ChannelDetailId,
             tenantId: ChannelDetailTenantId,
+            tenantCode: ChannelDetailTenantCode,
             systemId: ChannelDetailSystemId,
             systemName: ChannelDetailSystemName,
             executionId: ChannelDetailExecutionId,
@@ -48,11 +50,11 @@ export class CreateChannelsDetailService
             executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt,
             status: ChannelDetailStatus,
             channelId: ChannelDetailChannelId,
+            channelSapId: ChannelDetailChannelSapId,
             channelParty: ChannelDetailChannelParty,
             channelComponent: ChannelDetailChannelComponent,
             channelName: ChannelDetailChannelName,
             detail: ChannelDetailDetail,
-            example: ChannelDetailExample,
             
         } []
     ): Promise<void>
@@ -61,6 +63,7 @@ export class CreateChannelsDetailService
         const aggregateChannelsDetail = channelsDetail.map(channelDetail => BplusItSappiChannelDetail.register(
             channelDetail.id,
             channelDetail.tenantId,
+            channelDetail.tenantCode,
             channelDetail.systemId,
             channelDetail.systemName,
             channelDetail.executionId,
@@ -70,11 +73,11 @@ export class CreateChannelsDetailService
             channelDetail.executionMonitoringEndAt,
             channelDetail.status,
             channelDetail.channelId,
+            channelDetail.channelSapId,
             channelDetail.channelParty,
             channelDetail.channelComponent,
             channelDetail.channelName,
             channelDetail.detail,
-            channelDetail.example,
             new ChannelDetailCreatedAt(Utils.nowTimestamp()),
             new ChannelDetailUpdatedAt(Utils.nowTimestamp()),
             null

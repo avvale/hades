@@ -4,6 +4,7 @@ export class CreateSystemsCommand
         public readonly systems: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             name: string,
             tenantCode: string,
             environment: string,

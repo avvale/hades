@@ -9,6 +9,7 @@ type BplusItSappiJobOverview
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     executionId: ID!
@@ -29,6 +30,7 @@ input BplusItSappiCreateJobOverviewInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     executionId: ID!
@@ -46,6 +48,7 @@ input BplusItSappiUpdateJobOverviewInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     systemId: ID
     systemName: GraphQLString
     executionId: ID

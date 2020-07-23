@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     JobOverviewId, 
     JobOverviewTenantId, 
+    JobOverviewTenantCode, 
     JobOverviewSystemId, 
     JobOverviewSystemName, 
     JobOverviewExecutionId, 
@@ -35,6 +36,7 @@ export class CreateJobsOverviewService
         jobsOverview: {
             id: JobOverviewId,
             tenantId: JobOverviewTenantId,
+            tenantCode: JobOverviewTenantCode,
             systemId: JobOverviewSystemId,
             systemName: JobOverviewSystemName,
             executionId: JobOverviewExecutionId,
@@ -53,6 +55,7 @@ export class CreateJobsOverviewService
         const aggregateJobsOverview = jobsOverview.map(jobOverview => BplusItSappiJobOverview.register(
             jobOverview.id,
             jobOverview.tenantId,
+            jobOverview.tenantCode,
             jobOverview.systemId,
             jobOverview.systemName,
             jobOverview.executionId,

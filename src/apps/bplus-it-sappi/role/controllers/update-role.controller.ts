@@ -26,6 +26,7 @@ export class UpdateRoleController
         await this.commandBus.dispatch(new UpdateRoleCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.name,
             
         ));

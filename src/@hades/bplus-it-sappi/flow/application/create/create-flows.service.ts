@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     FlowId, 
     FlowTenantId, 
+    FlowTenantCode, 
     FlowSystemId, 
     FlowSystemName, 
     FlowScenario, 
@@ -43,6 +44,7 @@ export class CreateFlowsService
         flows: {
             id: FlowId,
             tenantId: FlowTenantId,
+            tenantCode: FlowTenantCode,
             systemId: FlowSystemId,
             systemName: FlowSystemName,
             scenario: FlowScenario,
@@ -69,6 +71,7 @@ export class CreateFlowsService
         const aggregateFlows = flows.map(flow => BplusItSappiFlow.register(
             flow.id,
             flow.tenantId,
+            flow.tenantCode,
             flow.systemId,
             flow.systemName,
             flow.scenario,

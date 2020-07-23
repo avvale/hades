@@ -2,6 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     RoleId, 
     RoleTenantId, 
+    RoleTenantCode, 
     RoleName, 
     RoleCreatedAt, 
     RoleUpdatedAt, 
@@ -18,17 +19,19 @@ export class BplusItSappiRole extends AggregateRoot
     id: RoleId;
     tenantId: RoleTenantId;
     tenant: AdminTenant;
+    tenantCode: RoleTenantCode;
     name: RoleName;
     createdAt: RoleCreatedAt;
     updatedAt: RoleUpdatedAt;
     deletedAt: RoleDeletedAt;
     
-    constructor(id?: RoleId, tenantId?: RoleTenantId, name?: RoleName, createdAt?: RoleCreatedAt, updatedAt?: RoleUpdatedAt, deletedAt?: RoleDeletedAt, )
+    constructor(id?: RoleId, tenantId?: RoleTenantId, tenantCode?: RoleTenantCode, name?: RoleName, createdAt?: RoleCreatedAt, updatedAt?: RoleUpdatedAt, deletedAt?: RoleDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
+        this.tenantCode = tenantCode;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -36,9 +39,9 @@ export class BplusItSappiRole extends AggregateRoot
         
     }
 
-    static register (id: RoleId, tenantId: RoleTenantId, name: RoleName, createdAt: RoleCreatedAt, updatedAt: RoleUpdatedAt, deletedAt: RoleDeletedAt, ): BplusItSappiRole
+    static register (id: RoleId, tenantId: RoleTenantId, tenantCode: RoleTenantCode, name: RoleName, createdAt: RoleCreatedAt, updatedAt: RoleUpdatedAt, deletedAt: RoleDeletedAt, ): BplusItSappiRole
     {
-        return new BplusItSappiRole(id, tenantId, name, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiRole(id, tenantId, tenantCode, name, createdAt, updatedAt, deletedAt, );
     }
 
     created(role: BplusItSappiRole): void
@@ -47,6 +50,7 @@ export class BplusItSappiRole extends AggregateRoot
             new CreatedRoleEvent(
                 role.id.value,
                 role.tenantId.value,
+                role.tenantCode.value,
                 role.name.value,
                 role.createdAt?.value,
                 role.updatedAt?.value,
@@ -62,6 +66,7 @@ export class BplusItSappiRole extends AggregateRoot
             new UpdatedRoleEvent(
                 role.id.value,
                 role.tenantId?.value,
+                role.tenantCode?.value,
                 role.name?.value,
                 role.createdAt?.value,
                 role.updatedAt?.value,
@@ -77,6 +82,7 @@ export class BplusItSappiRole extends AggregateRoot
             new DeletedRoleEvent(
                 role.id.value,
                 role.tenantId.value,
+                role.tenantCode.value,
                 role.name.value,
                 role.createdAt?.value,
                 role.updatedAt?.value,
@@ -91,6 +97,7 @@ export class BplusItSappiRole extends AggregateRoot
         return {
             id: this.id.value,
             tenantId: this.tenantId.value,
+            tenantCode: this.tenantCode.value,
             name: this.name.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,

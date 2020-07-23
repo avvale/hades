@@ -7,6 +7,7 @@ import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { 
     JobOverviewId, 
     JobOverviewTenantId, 
+    JobOverviewTenantCode, 
     JobOverviewSystemId, 
     JobOverviewSystemName, 
     JobOverviewExecutionId, 
@@ -61,6 +62,7 @@ export class MockJobOverviewRepository implements IJobOverviewRepository
             this.collectionSource.push(BplusItSappiJobOverview.register(
                     new JobOverviewId(itemCollection.id),
                     new JobOverviewTenantId(itemCollection.tenantId),
+                    new JobOverviewTenantCode(itemCollection.tenantCode),
                     new JobOverviewSystemId(itemCollection.systemId),
                     new JobOverviewSystemName(itemCollection.systemName),
                     new JobOverviewExecutionId(itemCollection.executionId),

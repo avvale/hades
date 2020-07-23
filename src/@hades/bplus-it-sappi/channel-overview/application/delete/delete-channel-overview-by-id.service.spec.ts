@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { channelsOverview } from '@hades/bplus-it-sappi/channel-overview/infrastructure/seeds/channel-overview.seed';
 import { DeleteChannelOverviewByIdService } from './delete-channel-overview-by-id.service';
 import { ChannelOverviewId } from './../../domain/value-objects';
-import { IChannelOverviewRepository } from '../../domain/channel-overview.repository';
-import { MockChannelOverviewRepository } from '../../infrastructure/mock/mock-channel-overview.repository';
+import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
+import { MockChannelOverviewRepository } from './../../infrastructure/mock/mock-channel-overview.repository';
 
 describe('DeleteChannelOverviewByIdService', () => 
 {

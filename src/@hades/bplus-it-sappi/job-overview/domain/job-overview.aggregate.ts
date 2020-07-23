@@ -2,6 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     JobOverviewId, 
     JobOverviewTenantId, 
+    JobOverviewTenantCode, 
     JobOverviewSystemId, 
     JobOverviewSystemName, 
     JobOverviewExecutionId, 
@@ -29,6 +30,7 @@ export class BplusItSappiJobOverview extends AggregateRoot
     id: JobOverviewId;
     tenantId: JobOverviewTenantId;
     tenant: AdminTenant;
+    tenantCode: JobOverviewTenantCode;
     systemId: JobOverviewSystemId;
     system: BplusItSappiSystem;
     systemName: JobOverviewSystemName;
@@ -45,12 +47,13 @@ export class BplusItSappiJobOverview extends AggregateRoot
     updatedAt: JobOverviewUpdatedAt;
     deletedAt: JobOverviewDeletedAt;
     
-    constructor(id?: JobOverviewId, tenantId?: JobOverviewTenantId, systemId?: JobOverviewSystemId, systemName?: JobOverviewSystemName, executionId?: JobOverviewExecutionId, executionType?: JobOverviewExecutionType, executionExecutedAt?: JobOverviewExecutionExecutedAt, executionMonitoringStartAt?: JobOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: JobOverviewExecutionMonitoringEndAt, cancelled?: JobOverviewCancelled, completed?: JobOverviewCompleted, error?: JobOverviewError, createdAt?: JobOverviewCreatedAt, updatedAt?: JobOverviewUpdatedAt, deletedAt?: JobOverviewDeletedAt, )
+    constructor(id?: JobOverviewId, tenantId?: JobOverviewTenantId, tenantCode?: JobOverviewTenantCode, systemId?: JobOverviewSystemId, systemName?: JobOverviewSystemName, executionId?: JobOverviewExecutionId, executionType?: JobOverviewExecutionType, executionExecutedAt?: JobOverviewExecutionExecutedAt, executionMonitoringStartAt?: JobOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: JobOverviewExecutionMonitoringEndAt, cancelled?: JobOverviewCancelled, completed?: JobOverviewCompleted, error?: JobOverviewError, createdAt?: JobOverviewCreatedAt, updatedAt?: JobOverviewUpdatedAt, deletedAt?: JobOverviewDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
+        this.tenantCode = tenantCode;
         this.systemId = systemId;
         this.systemName = systemName;
         this.executionId = executionId;
@@ -67,9 +70,9 @@ export class BplusItSappiJobOverview extends AggregateRoot
         
     }
 
-    static register (id: JobOverviewId, tenantId: JobOverviewTenantId, systemId: JobOverviewSystemId, systemName: JobOverviewSystemName, executionId: JobOverviewExecutionId, executionType: JobOverviewExecutionType, executionExecutedAt: JobOverviewExecutionExecutedAt, executionMonitoringStartAt: JobOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: JobOverviewExecutionMonitoringEndAt, cancelled: JobOverviewCancelled, completed: JobOverviewCompleted, error: JobOverviewError, createdAt: JobOverviewCreatedAt, updatedAt: JobOverviewUpdatedAt, deletedAt: JobOverviewDeletedAt, ): BplusItSappiJobOverview
+    static register (id: JobOverviewId, tenantId: JobOverviewTenantId, tenantCode: JobOverviewTenantCode, systemId: JobOverviewSystemId, systemName: JobOverviewSystemName, executionId: JobOverviewExecutionId, executionType: JobOverviewExecutionType, executionExecutedAt: JobOverviewExecutionExecutedAt, executionMonitoringStartAt: JobOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: JobOverviewExecutionMonitoringEndAt, cancelled: JobOverviewCancelled, completed: JobOverviewCompleted, error: JobOverviewError, createdAt: JobOverviewCreatedAt, updatedAt: JobOverviewUpdatedAt, deletedAt: JobOverviewDeletedAt, ): BplusItSappiJobOverview
     {
-        return new BplusItSappiJobOverview(id, tenantId, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, cancelled, completed, error, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiJobOverview(id, tenantId, tenantCode, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, cancelled, completed, error, createdAt, updatedAt, deletedAt, );
     }
 
     created(jobOverview: BplusItSappiJobOverview): void
@@ -78,6 +81,7 @@ export class BplusItSappiJobOverview extends AggregateRoot
             new CreatedJobOverviewEvent(
                 jobOverview.id.value,
                 jobOverview.tenantId.value,
+                jobOverview.tenantCode.value,
                 jobOverview.systemId.value,
                 jobOverview.systemName.value,
                 jobOverview.executionId.value,
@@ -102,6 +106,7 @@ export class BplusItSappiJobOverview extends AggregateRoot
             new UpdatedJobOverviewEvent(
                 jobOverview.id.value,
                 jobOverview.tenantId?.value,
+                jobOverview.tenantCode?.value,
                 jobOverview.systemId?.value,
                 jobOverview.systemName?.value,
                 jobOverview.executionId?.value,
@@ -126,6 +131,7 @@ export class BplusItSappiJobOverview extends AggregateRoot
             new DeletedJobOverviewEvent(
                 jobOverview.id.value,
                 jobOverview.tenantId.value,
+                jobOverview.tenantCode.value,
                 jobOverview.systemId.value,
                 jobOverview.systemName.value,
                 jobOverview.executionId.value,
@@ -149,6 +155,7 @@ export class BplusItSappiJobOverview extends AggregateRoot
         return {
             id: this.id.value,
             tenantId: this.tenantId.value,
+            tenantCode: this.tenantCode.value,
             systemId: this.systemId.value,
             systemName: this.systemName.value,
             executionId: this.executionId.value,

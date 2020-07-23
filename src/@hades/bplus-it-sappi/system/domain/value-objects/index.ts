@@ -1,5 +1,6 @@
 export { SystemId } from './system-id';
 export { SystemTenantId } from './system-tenant-id';
+export { SystemTenantCode } from './system-tenant-code';
 export { SystemName } from './system-name';
 export { SystemTenantCode } from './system-tenant-code';
 export { SystemEnvironment } from './system-environment';

@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     FlowId, 
     FlowTenantId, 
+    FlowTenantCode, 
     FlowSystemId, 
     FlowSystemName, 
     FlowScenario, 
@@ -41,6 +42,7 @@ export class CreateFlowService
     public async main(
         id: FlowId,
         tenantId: FlowTenantId,
+        tenantCode: FlowTenantCode,
         systemId: FlowSystemId,
         systemName: FlowSystemName,
         scenario: FlowScenario,
@@ -66,6 +68,7 @@ export class CreateFlowService
         const flow = BplusItSappiFlow.register(
             id,
             tenantId,
+            tenantCode,
             systemId,
             systemName,
             scenario,

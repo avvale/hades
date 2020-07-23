@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     SystemId, 
     SystemTenantId, 
+    SystemTenantCode, 
     SystemName, 
     SystemTenantCode, 
     SystemEnvironment, 
@@ -31,6 +32,7 @@ export class CreateSystemsService
         systems: {
             id: SystemId,
             tenantId: SystemTenantId,
+            tenantCode: SystemTenantCode,
             name: SystemName,
             tenantCode: SystemTenantCode,
             environment: SystemEnvironment,
@@ -45,6 +47,7 @@ export class CreateSystemsService
         const aggregateSystems = systems.map(system => BplusItSappiSystem.register(
             system.id,
             system.tenantId,
+            system.tenantCode,
             system.name,
             system.tenantCode,
             system.environment,

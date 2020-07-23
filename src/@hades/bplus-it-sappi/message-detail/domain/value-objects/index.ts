@@ -1,5 +1,6 @@
 export { MessageDetailId } from './message-detail-id';
 export { MessageDetailTenantId } from './message-detail-tenant-id';
+export { MessageDetailTenantCode } from './message-detail-tenant-code';
 export { MessageDetailSystemId } from './message-detail-system-id';
 export { MessageDetailSystemName } from './message-detail-system-name';
 export { MessageDetailScenario } from './message-detail-scenario';

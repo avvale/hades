@@ -26,7 +26,9 @@ export class AddExecutionsContextEvent extends AggregateRoot
                     new CreatedExecutionEvent(
                         execution.id.value,
                         execution.tenantId.value,
+                        execution.tenantCode.value,
                         execution.systemId.value,
+                        execution.systemName.value,
                         execution.type.value,
                         execution.monitoringStartAt.value,
                         execution.monitoringEndAt.value,
@@ -49,7 +51,9 @@ export class AddExecutionsContextEvent extends AggregateRoot
                     new DeletedExecutionEvent(
                         execution.id.value,
                         execution.tenantId.value,
+                        execution.tenantCode.value,
                         execution.systemId.value,
+                        execution.systemName.value,
                         execution.type.value,
                         execution.monitoringStartAt.value,
                         execution.monitoringEndAt.value,

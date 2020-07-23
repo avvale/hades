@@ -4,10 +4,12 @@ export class CreateChannelsCommand
         public readonly channels: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             systemId: string,
             party?: string,
             component: string,
             name: string,
+            flowId?: string,
             flowParty: string,
             flowComponent: string,
             flowInterfaceName: string,

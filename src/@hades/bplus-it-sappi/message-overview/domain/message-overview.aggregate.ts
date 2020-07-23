@@ -2,6 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     MessageOverviewId, 
     MessageOverviewTenantId, 
+    MessageOverviewTenantCode, 
     MessageOverviewSystemId, 
     MessageOverviewSystemName, 
     MessageOverviewExecutionId, 
@@ -35,6 +36,7 @@ export class BplusItSappiMessageOverview extends AggregateRoot
     id: MessageOverviewId;
     tenantId: MessageOverviewTenantId;
     tenant: AdminTenant;
+    tenantCode: MessageOverviewTenantCode;
     systemId: MessageOverviewSystemId;
     system: BplusItSappiSystem;
     systemName: MessageOverviewSystemName;
@@ -57,12 +59,13 @@ export class BplusItSappiMessageOverview extends AggregateRoot
     updatedAt: MessageOverviewUpdatedAt;
     deletedAt: MessageOverviewDeletedAt;
     
-    constructor(id?: MessageOverviewId, tenantId?: MessageOverviewTenantId, systemId?: MessageOverviewSystemId, systemName?: MessageOverviewSystemName, executionId?: MessageOverviewExecutionId, executionType?: MessageOverviewExecutionType, executionExecutedAt?: MessageOverviewExecutionExecutedAt, executionMonitoringStartAt?: MessageOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: MessageOverviewExecutionMonitoringEndAt, numberMax?: MessageOverviewNumberMax, numberDays?: MessageOverviewNumberDays, success?: MessageOverviewSuccess, cancelled?: MessageOverviewCancelled, delivering?: MessageOverviewDelivering, error?: MessageOverviewError, holding?: MessageOverviewHolding, toBeDelivered?: MessageOverviewToBeDelivered, waiting?: MessageOverviewWaiting, createdAt?: MessageOverviewCreatedAt, updatedAt?: MessageOverviewUpdatedAt, deletedAt?: MessageOverviewDeletedAt, )
+    constructor(id?: MessageOverviewId, tenantId?: MessageOverviewTenantId, tenantCode?: MessageOverviewTenantCode, systemId?: MessageOverviewSystemId, systemName?: MessageOverviewSystemName, executionId?: MessageOverviewExecutionId, executionType?: MessageOverviewExecutionType, executionExecutedAt?: MessageOverviewExecutionExecutedAt, executionMonitoringStartAt?: MessageOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: MessageOverviewExecutionMonitoringEndAt, numberMax?: MessageOverviewNumberMax, numberDays?: MessageOverviewNumberDays, success?: MessageOverviewSuccess, cancelled?: MessageOverviewCancelled, delivering?: MessageOverviewDelivering, error?: MessageOverviewError, holding?: MessageOverviewHolding, toBeDelivered?: MessageOverviewToBeDelivered, waiting?: MessageOverviewWaiting, createdAt?: MessageOverviewCreatedAt, updatedAt?: MessageOverviewUpdatedAt, deletedAt?: MessageOverviewDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
+        this.tenantCode = tenantCode;
         this.systemId = systemId;
         this.systemName = systemName;
         this.executionId = executionId;
@@ -85,9 +88,9 @@ export class BplusItSappiMessageOverview extends AggregateRoot
         
     }
 
-    static register (id: MessageOverviewId, tenantId: MessageOverviewTenantId, systemId: MessageOverviewSystemId, systemName: MessageOverviewSystemName, executionId: MessageOverviewExecutionId, executionType: MessageOverviewExecutionType, executionExecutedAt: MessageOverviewExecutionExecutedAt, executionMonitoringStartAt: MessageOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: MessageOverviewExecutionMonitoringEndAt, numberMax: MessageOverviewNumberMax, numberDays: MessageOverviewNumberDays, success: MessageOverviewSuccess, cancelled: MessageOverviewCancelled, delivering: MessageOverviewDelivering, error: MessageOverviewError, holding: MessageOverviewHolding, toBeDelivered: MessageOverviewToBeDelivered, waiting: MessageOverviewWaiting, createdAt: MessageOverviewCreatedAt, updatedAt: MessageOverviewUpdatedAt, deletedAt: MessageOverviewDeletedAt, ): BplusItSappiMessageOverview
+    static register (id: MessageOverviewId, tenantId: MessageOverviewTenantId, tenantCode: MessageOverviewTenantCode, systemId: MessageOverviewSystemId, systemName: MessageOverviewSystemName, executionId: MessageOverviewExecutionId, executionType: MessageOverviewExecutionType, executionExecutedAt: MessageOverviewExecutionExecutedAt, executionMonitoringStartAt: MessageOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: MessageOverviewExecutionMonitoringEndAt, numberMax: MessageOverviewNumberMax, numberDays: MessageOverviewNumberDays, success: MessageOverviewSuccess, cancelled: MessageOverviewCancelled, delivering: MessageOverviewDelivering, error: MessageOverviewError, holding: MessageOverviewHolding, toBeDelivered: MessageOverviewToBeDelivered, waiting: MessageOverviewWaiting, createdAt: MessageOverviewCreatedAt, updatedAt: MessageOverviewUpdatedAt, deletedAt: MessageOverviewDeletedAt, ): BplusItSappiMessageOverview
     {
-        return new BplusItSappiMessageOverview(id, tenantId, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, numberMax, numberDays, success, cancelled, delivering, error, holding, toBeDelivered, waiting, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiMessageOverview(id, tenantId, tenantCode, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, numberMax, numberDays, success, cancelled, delivering, error, holding, toBeDelivered, waiting, createdAt, updatedAt, deletedAt, );
     }
 
     created(messageOverview: BplusItSappiMessageOverview): void
@@ -96,6 +99,7 @@ export class BplusItSappiMessageOverview extends AggregateRoot
             new CreatedMessageOverviewEvent(
                 messageOverview.id.value,
                 messageOverview.tenantId.value,
+                messageOverview.tenantCode.value,
                 messageOverview.systemId.value,
                 messageOverview.systemName.value,
                 messageOverview.executionId.value,
@@ -126,6 +130,7 @@ export class BplusItSappiMessageOverview extends AggregateRoot
             new UpdatedMessageOverviewEvent(
                 messageOverview.id.value,
                 messageOverview.tenantId?.value,
+                messageOverview.tenantCode?.value,
                 messageOverview.systemId?.value,
                 messageOverview.systemName?.value,
                 messageOverview.executionId?.value,
@@ -156,6 +161,7 @@ export class BplusItSappiMessageOverview extends AggregateRoot
             new DeletedMessageOverviewEvent(
                 messageOverview.id.value,
                 messageOverview.tenantId.value,
+                messageOverview.tenantCode.value,
                 messageOverview.systemId.value,
                 messageOverview.systemName.value,
                 messageOverview.executionId.value,
@@ -185,6 +191,7 @@ export class BplusItSappiMessageOverview extends AggregateRoot
         return {
             id: this.id.value,
             tenantId: this.tenantId.value,
+            tenantCode: this.tenantCode.value,
             systemId: this.systemId.value,
             systemName: this.systemName.value,
             executionId: this.executionId.value,

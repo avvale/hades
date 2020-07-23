@@ -26,6 +26,7 @@ export class AddSystemsContextEvent extends AggregateRoot
                     new CreatedSystemEvent(
                         system.id.value,
                         system.tenantId.value,
+                        system.tenantCode.value,
                         system.name.value,
                         system.tenantCode.value,
                         system.environment.value,
@@ -50,6 +51,7 @@ export class AddSystemsContextEvent extends AggregateRoot
                     new DeletedSystemEvent(
                         system.id.value,
                         system.tenantId.value,
+                        system.tenantCode.value,
                         system.name.value,
                         system.tenantCode.value,
                         system.environment.value,

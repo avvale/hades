@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { dataLakes } from '@hades/bplus-it-sappi/data-lake/infrastructure/seeds/data-lake.seed';
 import { DeleteDataLakeByIdService } from './delete-data-lake-by-id.service';
 import { DataLakeId } from './../../domain/value-objects';
-import { IDataLakeRepository } from '../../domain/data-lake.repository';
-import { MockDataLakeRepository } from '../../infrastructure/mock/mock-data-lake.repository';
+import { IDataLakeRepository } from './../../domain/data-lake.repository';
+import { MockDataLakeRepository } from './../../infrastructure/mock/mock-data-lake.repository';
 
 describe('DeleteDataLakeByIdService', () => 
 {

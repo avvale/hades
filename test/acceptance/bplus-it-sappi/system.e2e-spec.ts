@@ -68,13 +68,14 @@ describe('system', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'a',
-                tenantCode: '9',
-                environment: 'y',
-                version: '8',
-                isActive: false,
-                cancelledAt: '2020-07-21 11:11:09',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: '2lfhg7nzps0qp70x74j8ocavip5w78rihr0dp2lehci9poqdlb',
+                name: 's',
+                tenantCode: 'i',
+                environment: 'n',
+                version: 'c',
+                isActive: true,
+                cancelledAt: '2020-07-23 01:16:09',
             })
             .expect(400)
             .then(res => {
@@ -89,13 +90,14 @@ describe('system', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'o',
-                tenantCode: 'v',
-                environment: '2',
-                version: '1',
-                isActive: true,
-                cancelledAt: '2020-07-21 07:35:40',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: 'tynva8fn8mos0impjjxn09h0tnhp90o1v00qcn7k4tqcm2gpgy',
+                name: '2',
+                tenantCode: 'w',
+                environment: 't',
+                version: 's',
+                isActive: false,
+                cancelledAt: '2020-07-23 04:42:28',
             })
             .expect(400)
             .then(res => {
@@ -109,14 +111,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
                 tenantId: null,
-                name: 'u',
-                tenantCode: '9',
-                environment: 'v',
-                version: 'g',
+                tenantCode: 'f080gvkukbken01es6zanwmto9ouuegzzqud79wpg1pz40409a',
+                name: 'e',
+                tenantCode: 'c',
+                environment: '9',
+                version: '9',
                 isActive: true,
-                cancelledAt: '2020-07-21 10:24:49',
+                cancelledAt: '2020-07-23 06:40:11',
             })
             .expect(400)
             .then(res => {
@@ -130,60 +133,19 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
                 
-                name: 'y',
-                tenantCode: '2',
-                environment: 'w',
-                version: 'q',
-                isActive: true,
-                cancelledAt: '2020-07-21 04:59:01',
+                tenantCode: 'e9y40f53semed91nr0m5rk5yt9jz0dmlwiz7z8kmdu8iohh7o2',
+                name: '8',
+                tenantCode: 'e',
+                environment: 's',
+                version: 'a',
+                isActive: false,
+                cancelledAt: '2020-07-22 22:23:37',
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for SystemTenantId must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemName property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/bplus-it-sappi/system')
-            .set('Accept', 'application/json')
-            .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: null,
-                tenantCode: 'j',
-                environment: 'v',
-                version: 'p',
-                isActive: false,
-                cancelledAt: '2020-07-21 12:15:35',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for SystemName must be defined, can not be null');
-            });
-    });
-
-    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemName property can not to be undefined`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/bplus-it-sappi/system')
-            .set('Accept', 'application/json')
-            .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                
-                tenantCode: '5',
-                environment: 'w',
-                version: 'n',
-                isActive: false,
-                cancelledAt: '2020-07-21 12:08:19',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for SystemName must be defined, can not be undefined');
             });
     });
     
@@ -193,14 +155,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'u',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
                 tenantCode: null,
-                environment: 't',
-                version: 'a',
+                name: 'l',
+                tenantCode: null,
+                environment: '7',
+                version: 'z',
                 isActive: true,
-                cancelledAt: '2020-07-21 13:07:31',
+                cancelledAt: '2020-07-22 20:55:15',
             })
             .expect(400)
             .then(res => {
@@ -214,14 +177,103 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'h',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
                 
-                environment: 'q',
-                version: 'v',
+                name: 'q',
+                
+                environment: 'i',
+                version: 'q',
+                isActive: false,
+                cancelledAt: '2020-07-23 05:28:37',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for SystemTenantCode must be defined, can not be undefined');
+            });
+    });
+    
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemName property can not to be null`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/system')
+            .set('Accept', 'application/json')
+            .send({
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: '0i28k6r0p1w8j4qeq3l0o7g0072l7nd3ysyb6d6vz2c93axeqj',
+                name: null,
+                tenantCode: 'i',
+                environment: 'y',
+                version: 'g',
+                isActive: false,
+                cancelledAt: '2020-07-22 19:32:32',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for SystemName must be defined, can not be null');
+            });
+    });
+
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemName property can not to be undefined`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/system')
+            .set('Accept', 'application/json')
+            .send({
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: 'nb8qk40gq9q9nqjqdkgg50tzrh617fx46shhzfqc1cv8jq6gl3',
+                
+                tenantCode: 'g',
+                environment: 'i',
+                version: 'n',
                 isActive: true,
-                cancelledAt: '2020-07-21 08:52:56',
+                cancelledAt: '2020-07-22 23:03:11',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for SystemName must be defined, can not be undefined');
+            });
+    });
+    
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantCode property can not to be null`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/system')
+            .set('Accept', 'application/json')
+            .send({
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: null,
+                name: 'p',
+                tenantCode: null,
+                environment: 'l',
+                version: 'r',
+                isActive: false,
+                cancelledAt: '2020-07-22 19:28:17',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for SystemTenantCode must be defined, can not be null');
+            });
+    });
+
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantCode property can not to be undefined`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/system')
+            .set('Accept', 'application/json')
+            .send({
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                
+                name: 'a',
+                
+                environment: 'j',
+                version: 'y',
+                isActive: false,
+                cancelledAt: '2020-07-22 23:49:52',
             })
             .expect(400)
             .then(res => {
@@ -235,14 +287,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'n',
-                tenantCode: 'l',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: 'dfrhk17grzn2y39ei3u0dffic1bp6vjjwi6kot85y0j1gd259p',
+                name: 's',
+                tenantCode: 'i',
                 environment: null,
-                version: '5',
+                version: '9',
                 isActive: true,
-                cancelledAt: '2020-07-21 15:43:27',
+                cancelledAt: '2020-07-23 07:31:48',
             })
             .expect(400)
             .then(res => {
@@ -256,14 +309,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: '4',
-                tenantCode: 'c',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: 'hebasu5bdj9ywwx0xm7ak30kx18rxrn4rsrtq3f572tjg2ntz9',
+                name: '9',
+                tenantCode: '6',
                 
-                version: 't',
+                version: 'x',
                 isActive: false,
-                cancelledAt: '2020-07-21 04:50:42',
+                cancelledAt: '2020-07-22 20:56:57',
             })
             .expect(400)
             .then(res => {
@@ -277,14 +331,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'a',
-                tenantCode: 'l',
-                environment: '7',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: 'tnz8lwt3k9jxqx54vqqtcf1n75y6iucnpq5cglgtsw4jyic0vz',
+                name: 'v',
+                tenantCode: '2',
+                environment: 'u',
                 version: null,
-                isActive: true,
-                cancelledAt: '2020-07-21 14:35:36',
+                isActive: false,
+                cancelledAt: '2020-07-23 11:17:10',
             })
             .expect(400)
             .then(res => {
@@ -298,14 +353,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: '2',
-                tenantCode: '7',
-                environment: 'j',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: 'cdalycv7p04wu430qg4dsq3q56fe48q17giu9xukrcwb4vxzuy',
+                name: 'p',
+                tenantCode: 't',
+                environment: 'f',
                 
-                isActive: true,
-                cancelledAt: '2020-07-21 14:11:26',
+                isActive: false,
+                cancelledAt: '2020-07-22 22:21:36',
             })
             .expect(400)
             .then(res => {
@@ -319,14 +375,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'o',
-                tenantCode: '2',
-                environment: 'n',
-                version: 'o',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: '40ga6ivfp8hf5r5bbufbdb1mqbhbtrup0l6az2x25vhw70lybn',
+                name: 'f',
+                tenantCode: 'q',
+                environment: 'x',
+                version: 'h',
                 isActive: null,
-                cancelledAt: '2020-07-22 00:21:49',
+                cancelledAt: '2020-07-23 17:44:13',
             })
             .expect(400)
             .then(res => {
@@ -340,14 +397,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'l',
-                tenantCode: '2',
-                environment: 'n',
-                version: 'x',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: '7vrr09hjqfh8s91dxt0j3na1n9tsdyjafgcthowcyskydtsyzc',
+                name: 'z',
+                tenantCode: '0',
+                environment: 'k',
+                version: 'o',
                 
-                cancelledAt: '2020-07-21 13:05:39',
+                cancelledAt: '2020-07-23 12:26:37',
             })
             .expect(400)
             .then(res => {
@@ -363,14 +421,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'rwscz11zll7m9ujo4wfguooy70yu5wxj8jxzb',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'u',
-                tenantCode: 'a',
-                environment: 'w',
-                version: '5',
+                id: 'rcunk9mu3p1p6hrfs2xrkylmzfqg2a4r7tbor',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: 'r8ft7rspwt6hbinskw1z5m7hdbhk1r9xj6diip5dplhbstx2tr',
+                name: '8',
+                tenantCode: '7',
+                environment: '4',
+                version: '0',
                 isActive: true,
-                cancelledAt: '2020-07-21 03:01:26',
+                cancelledAt: '2020-07-23 14:14:30',
             })
             .expect(400)
             .then(res => {
@@ -384,14 +443,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: '3bufyilr8o8udun72h18qswj9tl7nfxiuhnzl',
-                name: 'n',
-                tenantCode: 't',
-                environment: 'd',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: '01wcul42qo8s5cywedlrjlr2hk45hule53w0x',
+                tenantCode: 'dp5ya0mw3kztspm2ba8gz7laj7ik0czfpx3uk5e6v20p0xtrto',
+                name: 'w',
+                tenantCode: 'd',
+                environment: 'u',
                 version: 'q',
                 isActive: true,
-                cancelledAt: '2020-07-21 17:38:36',
+                cancelledAt: '2020-07-23 09:28:01',
             })
             .expect(400)
             .then(res => {
@@ -400,6 +460,28 @@ describe('system', () =>
     });
     
 
+    
+    test(`/REST:POST bplus-it-sappi/system - Got 400 Conflict, SystemTenantCode is too large, has a maximum length of 50`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/system')
+            .set('Accept', 'application/json')
+            .send({
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: '7wijuueszwuxvu2flyjag01jictc5ccjrpp6trmzbupi6b47bre',
+                name: 'l',
+                tenantCode: '',
+                environment: 'x',
+                version: 'k',
+                isActive: false,
+                cancelledAt: '2020-07-23 12:39:00',
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for SystemTenantCode is too large, has a maximum length of 50');
+            });
+    });
     
 
     
@@ -415,14 +497,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'z',
-                tenantCode: 'o',
-                environment: 'a',
-                version: '5',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: 'ewcacnnjslzyuwt2jxgi03fr5voibb6q2bkntkkv7im9hcpojj',
+                name: 'g',
+                tenantCode: 'z',
+                environment: 't',
+                version: 'l',
                 isActive: 'true',
-                cancelledAt: '2020-07-21 20:36:24',
+                cancelledAt: '2020-07-23 06:19:53',
             })
             .expect(400)
             .then(res => {
@@ -440,12 +523,13 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: '0',
-                tenantCode: 'b',
-                environment: '9',
-                version: '7',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: 'up9qdfex9rde18l9r476l3p7ka19pvlaj167g3o0c26y0qr0qn',
+                name: 'l',
+                tenantCode: 'h',
+                environment: 'e',
+                version: '2',
                 isActive: true,
                 cancelledAt: 'XXXXXXXX',
             })
@@ -462,14 +546,15 @@ describe('system', () =>
             .post('/bplus-it-sappi/system')
             .set('Accept', 'application/json')
             .send({
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: '7',
-                tenantCode: 'r',
-                environment: '3',
-                version: 'x',
-                isActive: false,
-                cancelledAt: '2020-07-21 06:45:40',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: '18hys3toyrmtkfum8q64cp7zd60ay9i0btckubv84ifwv3uo8x',
+                name: 'b',
+                tenantCode: 'q',
+                environment: 'g',
+                version: '3',
+                isActive: true,
+                cancelledAt: '2020-07-22 22:59:05',
             })
             .expect(201);
     });
@@ -528,12 +613,12 @@ describe('system', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '155d7aea-3a8b-4094-9b3d-2dee69f8ff57'
+                        value   : '3f839078-5306-4e8d-af37-a68968a8c38b'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '155d7aea-3a8b-4094-9b3d-2dee69f8ff57'));
+            .expect(repository.collectionResponse.find(item => item.id === '3f839078-5306-4e8d-af37-a68968a8c38b'));
     });
 
     test(`/REST:GET bplus-it-sappi/system/{id} - Got 404 Not Found`, () => 
@@ -547,10 +632,10 @@ describe('system', () =>
     test(`/REST:GET bplus-it-sappi/system/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/system/155d7aea-3a8b-4094-9b3d-2dee69f8ff57')
+            .get('/bplus-it-sappi/system/3f839078-5306-4e8d-af37-a68968a8c38b')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '155d7aea-3a8b-4094-9b3d-2dee69f8ff57'));
+            .expect(repository.collectionResponse.find(e => e.id === '3f839078-5306-4e8d-af37-a68968a8c38b'));
     });
 
     test(`/REST:GET bplus-it-sappi/systems`, () => 
@@ -569,14 +654,15 @@ describe('system', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '23eb74ef-b548-4eb4-b4c4-0b000ab807ba',
-                tenantId: 'aa01f6af-dba9-4585-a7ff-bc6830749797',
-                name: '9',
-                tenantCode: '1',
-                environment: 'w',
-                version: 'o',
-                isActive: false,
-                cancelledAt: '2020-07-21 12:12:42',
+                id: 'cadbb9f2-85b5-46b7-b86b-f4a6a07ca3d3',
+                tenantId: '26d80588-bd3b-444d-9e31-d7b733acdc31',
+                tenantCode: 'nkel8z696mrbirlsij6bmjesjw8bwbeny6wdiz9mp3kadtk9b0',
+                name: 'u',
+                tenantCode: 'a',
+                environment: 'o',
+                version: 'i',
+                isActive: true,
+                cancelledAt: '2020-07-23 09:40:54',
             })
             .expect(404);
     });
@@ -588,17 +674,18 @@ describe('system', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                name: 'q',
-                tenantCode: 'h',
-                environment: '2',
-                version: '4',
+                id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                tenantCode: 'vkk2v8p8xktehlklhkrsuhnhn10mdhu9dsa1eagoep301jddxz',
+                name: '2',
+                tenantCode: '6',
+                environment: '4',
+                version: '3',
                 isActive: false,
-                cancelledAt: '2020-07-21 18:47:54',
+                cancelledAt: '2020-07-23 14:30:48',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '155d7aea-3a8b-4094-9b3d-2dee69f8ff57'));
+            .expect(repository.collectionResponse.find(e => e.id === '3f839078-5306-4e8d-af37-a68968a8c38b'));
     });
 
     test(`/REST:DELETE bplus-it-sappi/system/{id} - Got 404 Not Found`, () => 
@@ -612,7 +699,7 @@ describe('system', () =>
     test(`/REST:DELETE bplus-it-sappi/system/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/system/155d7aea-3a8b-4094-9b3d-2dee69f8ff57')
+            .delete('/bplus-it-sappi/system/3f839078-5306-4e8d-af37-a68968a8c38b')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -630,6 +717,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -666,6 +754,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -679,20 +768,21 @@ describe('system', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '8ea56890-f0c3-4587-9a43-5894a5c40948',
-                        tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
-                        name: 'g',
-                        tenantCode: 'g',
-                        environment: '0',
-                        version: '1',
-                        isActive: true,
-                        cancelledAt: '2020-07-21 09:50:56',
+                        id: 'fb111051-99ba-4371-a09a-bfbcde981829',
+                        tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                        tenantCode: 'mcghnq89a5od1pnuhreotx29txg8yo93b8pi2wbtdth9s4uywp',
+                        name: 'r',
+                        tenantCode: 'f',
+                        environment: 's',
+                        version: 'b',
+                        isActive: false,
+                        cancelledAt: '2020-07-23 08:27:35',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateSystem).toHaveProperty('id', '8ea56890-f0c3-4587-9a43-5894a5c40948');
+                expect(res.body.data.bplusItSappiCreateSystem).toHaveProperty('id', 'fb111051-99ba-4371-a09a-bfbcde981829');
             });
     });
 
@@ -747,6 +837,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -790,6 +881,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -807,14 +899,14 @@ describe('system', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '155d7aea-3a8b-4094-9b3d-2dee69f8ff57'
+                            value   : '3f839078-5306-4e8d-af37-a68968a8c38b'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindSystem.id).toStrictEqual('155d7aea-3a8b-4094-9b3d-2dee69f8ff57');
+                expect(res.body.data.bplusItSappiFindSystem.id).toStrictEqual('3f839078-5306-4e8d-af37-a68968a8c38b');
             });
     });
 
@@ -831,6 +923,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -867,6 +960,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -879,12 +973,12 @@ describe('system', () =>
                     }
                 `,
                 variables: {
-                    id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57'
+                    id: '3f839078-5306-4e8d-af37-a68968a8c38b'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindSystemById.id).toStrictEqual('155d7aea-3a8b-4094-9b3d-2dee69f8ff57');
+                expect(res.body.data.bplusItSappiFindSystemById.id).toStrictEqual('3f839078-5306-4e8d-af37-a68968a8c38b');
             });
     });
 
@@ -901,6 +995,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -936,6 +1031,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -950,14 +1046,15 @@ describe('system', () =>
                 variables: {
                     payload: {
                         
-                        id: 'cd0b3bf1-7680-4b46-ac19-08f3183c039f',
-                        tenantId: 'e32f0185-5264-4419-a2ca-9631472c6f4a',
-                        name: 'i',
-                        tenantCode: 'b',
-                        environment: '5',
-                        version: 'c',
+                        id: 'd90d4ff7-c1c7-495c-adc9-c52f840bd88c',
+                        tenantId: '4f389676-24ad-495f-ae71-3baf4e94a5f1',
+                        tenantCode: '4dlzn87uqex8mu3l5ydghcw2kdst9jf8ym4p1s5zkoitd4r1ni',
+                        name: 'a',
+                        tenantCode: 'e',
+                        environment: 'z',
+                        version: 'n',
                         isActive: true,
-                        cancelledAt: '2020-07-21 19:50:53',
+                        cancelledAt: '2020-07-23 10:50:45',
                     }
                 }
             })
@@ -982,6 +1079,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -996,20 +1094,21 @@ describe('system', () =>
                 variables: {
                     payload: {
                         
-                        id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57',
-                        tenantId: 'a75c37c6-fd48-4632-9624-dcf977c42fe4',
+                        id: '3f839078-5306-4e8d-af37-a68968a8c38b',
+                        tenantId: 'f98f3681-6b53-45c6-bc4e-8d76f871f02f',
+                        tenantCode: 'r5gj2rtfswzc3vusp7k1d1nbvuedcgrq168kth7t5g2y65a57v',
                         name: 'j',
-                        tenantCode: 't',
-                        environment: 'a',
-                        version: 'e',
+                        tenantCode: 'd',
+                        environment: 't',
+                        version: 'p',
                         isActive: true,
-                        cancelledAt: '2020-07-21 20:41:21',
+                        cancelledAt: '2020-07-23 09:11:33',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateSystem.id).toStrictEqual('155d7aea-3a8b-4094-9b3d-2dee69f8ff57');
+                expect(res.body.data.bplusItSappiUpdateSystem.id).toStrictEqual('3f839078-5306-4e8d-af37-a68968a8c38b');
             });
     });
 
@@ -1026,6 +1125,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -1062,6 +1162,7 @@ describe('system', () =>
                         {   
                             id
                             tenantId
+                            tenantCode
                             name
                             tenantCode
                             environment
@@ -1074,12 +1175,12 @@ describe('system', () =>
                     }
                 `,
                 variables: {
-                    id: '155d7aea-3a8b-4094-9b3d-2dee69f8ff57'
+                    id: '3f839078-5306-4e8d-af37-a68968a8c38b'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteSystemById.id).toStrictEqual('155d7aea-3a8b-4094-9b3d-2dee69f8ff57');
+                expect(res.body.data.bplusItSappiDeleteSystemById.id).toStrictEqual('3f839078-5306-4e8d-af37-a68968a8c38b');
             });
     });
 

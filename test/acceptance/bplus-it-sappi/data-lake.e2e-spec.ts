@@ -68,6 +68,8 @@ describe('data-lake', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
+                tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                tenantCode: '4en5g06gi9tqtpxxdng4ltmnd86kik1n2hpmeiz5rkq2487hb4',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -83,11 +85,81 @@ describe('data-lake', () =>
             .set('Accept', 'application/json')
             .send({
                 
+                tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                tenantCode: 'j2v3766bbfbge6scttktp8yka0rl22cvspttz0h36nzlqv4o3g',
                 data: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for DataLakeId must be defined, can not be undefined');
+            });
+    });
+    
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeTenantId property can not to be null`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/data-lake')
+            .set('Accept', 'application/json')
+            .send({
+                id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                tenantId: null,
+                tenantCode: 'xcg3xed164obpuyivkzw01uf7b1agiwz52sgsa1nkmkzgiznpe',
+                data: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeTenantId must be defined, can not be null');
+            });
+    });
+
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeTenantId property can not to be undefined`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/data-lake')
+            .set('Accept', 'application/json')
+            .send({
+                id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                
+                tenantCode: 'xxfvvlvzo5bize2yknd63mayl6ywd05coyoq67gkq1x5mu5liz',
+                data: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeTenantId must be defined, can not be undefined');
+            });
+    });
+    
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeTenantCode property can not to be null`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/data-lake')
+            .set('Accept', 'application/json')
+            .send({
+                id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                tenantCode: null,
+                data: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeTenantCode must be defined, can not be null');
+            });
+    });
+
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeTenantCode property can not to be undefined`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/data-lake')
+            .set('Accept', 'application/json')
+            .send({
+                id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                
+                data: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeTenantCode must be defined, can not be undefined');
             });
     });
     
@@ -97,7 +169,9 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: 'e9392915-c9f6-4303-bfcb-9a56077e4778',
+                id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                tenantCode: 'bm9ryt6aavmkcltw536i74ad7t7h7cpe9a1jvh9ky0vne2q59v',
                 data: null,
             })
             .expect(400)
@@ -112,7 +186,9 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: 'e9392915-c9f6-4303-bfcb-9a56077e4778',
+                id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                tenantCode: '7pb50oqyf7q5qfdorkzb7mtbxpkwrjuoghkuqlrvxmxe6poh39',
                 
             })
             .expect(400)
@@ -129,7 +205,9 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: 'a8w7r0qsy99xc5n9c0cnzntiu8vv9feipz9pt',
+                id: 'p1tt2p9tpqn4ua1eaxcpqgtex47v2gc0j2hf5',
+                tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                tenantCode: 'tncgfkm6fmtfebv7ru98ibq04dyshf2stmp07zqtl4jwn9ga52',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -138,7 +216,41 @@ describe('data-lake', () =>
             });
     });
     
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeTenantId is not allowed, must be a length of 36`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/data-lake')
+            .set('Accept', 'application/json')
+            .send({
+                id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                tenantId: 'iepoix0buuretbmon9biluw7o6bfyoxdj4i62',
+                tenantCode: 'xjywagut9iwdqtmdjrh4v3f8a7xdhfnokpu8yst99ntenz0tv4',
+                data: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeTenantId is not allowed, must be a length of 36');
+            });
+    });
+    
 
+    
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeTenantCode is too large, has a maximum length of 50`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/data-lake')
+            .set('Accept', 'application/json')
+            .send({
+                id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                tenantCode: 'xhy74lnhlfvff8o42gz6iks318mc0qui492xvqzfnlz7fxs4xs6',
+                data: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeTenantCode is too large, has a maximum length of 50');
+            });
+    });
     
 
     
@@ -159,7 +271,9 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: 'e9392915-c9f6-4303-bfcb-9a56077e4778',
+                id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                tenantCode: '7gphtzi6bkkjqni2hth24582l9drouchbe87lh331m81rodpas',
                 data: { "foo" : "bar" },
             })
             .expect(201);
@@ -219,12 +333,12 @@ describe('data-lake', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : 'e9392915-c9f6-4303-bfcb-9a56077e4778'
+                        value   : '075d6ff6-accf-4f73-9651-ac474c56439e'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'e9392915-c9f6-4303-bfcb-9a56077e4778'));
+            .expect(repository.collectionResponse.find(item => item.id === '075d6ff6-accf-4f73-9651-ac474c56439e'));
     });
 
     test(`/REST:GET bplus-it-sappi/data-lake/{id} - Got 404 Not Found`, () => 
@@ -238,10 +352,10 @@ describe('data-lake', () =>
     test(`/REST:GET bplus-it-sappi/data-lake/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/data-lake/e9392915-c9f6-4303-bfcb-9a56077e4778')
+            .get('/bplus-it-sappi/data-lake/075d6ff6-accf-4f73-9651-ac474c56439e')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e9392915-c9f6-4303-bfcb-9a56077e4778'));
+            .expect(repository.collectionResponse.find(e => e.id === '075d6ff6-accf-4f73-9651-ac474c56439e'));
     });
 
     test(`/REST:GET bplus-it-sappi/data-lakes`, () => 
@@ -260,7 +374,9 @@ describe('data-lake', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '194bb453-6f6d-4332-b8c7-2d3b3e6c75a8',
+                id: 'fac4c4c6-03f5-4625-b154-fda6ea882fee',
+                tenantId: '8defd589-6c60-43b9-a2d9-9e3799994e0f',
+                tenantCode: 'f0o5shneg1iqpkmvcz53m26ltszfkef1cb430ieraw588tvkkk',
                 data: { "foo" : "bar" },
             })
             .expect(404);
@@ -273,11 +389,13 @@ describe('data-lake', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'e9392915-c9f6-4303-bfcb-9a56077e4778',
+                id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                tenantCode: '8rwi6b3ldkq7c5ko0m64swmldmojk5jdixfpx9eak3y5dl0sy4',
                 data: { "foo" : "bar" },
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e9392915-c9f6-4303-bfcb-9a56077e4778'));
+            .expect(repository.collectionResponse.find(e => e.id === '075d6ff6-accf-4f73-9651-ac474c56439e'));
     });
 
     test(`/REST:DELETE bplus-it-sappi/data-lake/{id} - Got 404 Not Found`, () => 
@@ -291,7 +409,7 @@ describe('data-lake', () =>
     test(`/REST:DELETE bplus-it-sappi/data-lake/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/data-lake/e9392915-c9f6-4303-bfcb-9a56077e4778')
+            .delete('/bplus-it-sappi/data-lake/075d6ff6-accf-4f73-9651-ac474c56439e')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -308,6 +426,8 @@ describe('data-lake', () =>
                         bplusItSappiCreateDataLake (payload:$payload)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -338,6 +458,8 @@ describe('data-lake', () =>
                         bplusItSappiCreateDataLake (payload:$payload)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -346,14 +468,16 @@ describe('data-lake', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '022709c4-4b83-4675-acb0-feafef3a7ca9',
+                        id: '8b7c537b-2029-492e-8aec-9893272388ea',
+                        tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                        tenantCode: 'h7mpz70fxy1inlrlhpte459vkle3ha4nr57en55zxkubfhnsph',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateDataLake).toHaveProperty('id', '022709c4-4b83-4675-acb0-feafef3a7ca9');
+                expect(res.body.data.bplusItSappiCreateDataLake).toHaveProperty('id', '8b7c537b-2029-492e-8aec-9893272388ea');
             });
     });
 
@@ -407,6 +531,8 @@ describe('data-lake', () =>
                         bplusItSappiFindDataLake (query:$query)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -444,6 +570,8 @@ describe('data-lake', () =>
                         bplusItSappiFindDataLake (query:$query)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -456,14 +584,14 @@ describe('data-lake', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'e9392915-c9f6-4303-bfcb-9a56077e4778'
+                            value   : '075d6ff6-accf-4f73-9651-ac474c56439e'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindDataLake.id).toStrictEqual('e9392915-c9f6-4303-bfcb-9a56077e4778');
+                expect(res.body.data.bplusItSappiFindDataLake.id).toStrictEqual('075d6ff6-accf-4f73-9651-ac474c56439e');
             });
     });
 
@@ -479,6 +607,8 @@ describe('data-lake', () =>
                         bplusItSappiFindDataLakeById (id:$id)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -509,6 +639,8 @@ describe('data-lake', () =>
                         bplusItSappiFindDataLakeById (id:$id)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -516,12 +648,12 @@ describe('data-lake', () =>
                     }
                 `,
                 variables: {
-                    id: 'e9392915-c9f6-4303-bfcb-9a56077e4778'
+                    id: '075d6ff6-accf-4f73-9651-ac474c56439e'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindDataLakeById.id).toStrictEqual('e9392915-c9f6-4303-bfcb-9a56077e4778');
+                expect(res.body.data.bplusItSappiFindDataLakeById.id).toStrictEqual('075d6ff6-accf-4f73-9651-ac474c56439e');
             });
     });
 
@@ -537,6 +669,8 @@ describe('data-lake', () =>
                         bplusItSappiGetDataLakes (query:$query)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -566,6 +700,8 @@ describe('data-lake', () =>
                         bplusItSappiUpdateDataLake (payload:$payload)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -575,7 +711,9 @@ describe('data-lake', () =>
                 variables: {
                     payload: {
                         
-                        id: 'b74a55ca-b9db-4d09-a705-33631d1b2bc9',
+                        id: '69eb9856-a344-455b-8d6f-7c6f05dfba34',
+                        tenantId: '14f05b49-187c-4caf-87d8-7bb44f3068f9',
+                        tenantCode: '4r85sasofjsi7d3jwufirc74q9hmq5g4m0py15tfj5xi0sqcd1',
                         data: { "foo" : "bar" },
                     }
                 }
@@ -600,6 +738,8 @@ describe('data-lake', () =>
                         bplusItSappiUpdateDataLake (payload:$payload)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -609,14 +749,16 @@ describe('data-lake', () =>
                 variables: {
                     payload: {
                         
-                        id: 'e9392915-c9f6-4303-bfcb-9a56077e4778',
+                        id: '075d6ff6-accf-4f73-9651-ac474c56439e',
+                        tenantId: 'ebdd867a-086e-462c-b8f5-90f645199afd',
+                        tenantCode: '2jdj2y03g6a4616ramd5hhmrrzkbnsaj9wag8vctdjb3c6f346',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateDataLake.id).toStrictEqual('e9392915-c9f6-4303-bfcb-9a56077e4778');
+                expect(res.body.data.bplusItSappiUpdateDataLake.id).toStrictEqual('075d6ff6-accf-4f73-9651-ac474c56439e');
             });
     });
 
@@ -632,6 +774,8 @@ describe('data-lake', () =>
                         bplusItSappiDeleteDataLakeById (id:$id)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -662,6 +806,8 @@ describe('data-lake', () =>
                         bplusItSappiDeleteDataLakeById (id:$id)
                         {   
                             id
+                            tenantId
+                            tenantCode
                             data
                             createdAt
                             updatedAt
@@ -669,12 +815,12 @@ describe('data-lake', () =>
                     }
                 `,
                 variables: {
-                    id: 'e9392915-c9f6-4303-bfcb-9a56077e4778'
+                    id: '075d6ff6-accf-4f73-9651-ac474c56439e'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteDataLakeById.id).toStrictEqual('e9392915-c9f6-4303-bfcb-9a56077e4778');
+                expect(res.body.data.bplusItSappiDeleteDataLakeById.id).toStrictEqual('075d6ff6-accf-4f73-9651-ac474c56439e');
             });
     });
 

@@ -4,6 +4,7 @@ import { CreateRoleService } from './create-role.service';
 import { 
     RoleId, 
     RoleTenantId, 
+    RoleTenantCode, 
     RoleName
     
 } from './../../domain/value-objects';
@@ -21,6 +22,7 @@ export class CreateRoleCommandHandler implements ICommandHandler<CreateRoleComma
         await this.createRoleService.main(
             new RoleId(command.id),
             new RoleTenantId(command.tenantId),
+            new RoleTenantCode(command.tenantCode),
             new RoleName(command.name),
             
         );

@@ -4,6 +4,7 @@ import { UpdateChannelOverviewService } from './update-channel-overview.service'
 import { 
     ChannelOverviewId, 
     ChannelOverviewTenantId, 
+    ChannelOverviewTenantCode, 
     ChannelOverviewSystemId, 
     ChannelOverviewSystemName, 
     ChannelOverviewExecutionId, 
@@ -33,6 +34,7 @@ export class UpdateChannelOverviewCommandHandler implements ICommandHandler<Upda
         await this.updateChannelOverviewService.main(
             new ChannelOverviewId(command.id),
             new ChannelOverviewTenantId(command.tenantId, { undefinable: true }),
+            new ChannelOverviewTenantCode(command.tenantCode, { undefinable: true }),
             new ChannelOverviewSystemId(command.systemId, { undefinable: true }),
             new ChannelOverviewSystemName(command.systemName, { undefinable: true }),
             new ChannelOverviewExecutionId(command.executionId, { undefinable: true }),

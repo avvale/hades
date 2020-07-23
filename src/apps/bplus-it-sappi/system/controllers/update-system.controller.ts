@@ -26,6 +26,7 @@ export class UpdateSystemController
         await this.commandBus.dispatch(new UpdateSystemCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.name,
             payload.tenantCode,
             payload.environment,

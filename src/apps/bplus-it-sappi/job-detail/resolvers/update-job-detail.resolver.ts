@@ -21,6 +21,7 @@ export class UpdateJobDetailResolver
         await this.commandBus.dispatch(new UpdateJobDetailCommand(
             payload.id,
             payload.tenantId,
+            payload.tenantCode,
             payload.systemId,
             payload.systemName,
             payload.executionId,
@@ -33,6 +34,8 @@ export class UpdateJobDetailResolver
             payload.returnCode,
             payload.node,
             payload.user,
+            payload.startAt,
+            payload.endAt,
             
         ));
         

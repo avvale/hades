@@ -5,6 +5,7 @@ import { SystemResponse } from './system.response';
 import { 
     SystemId, 
     SystemTenantId, 
+    SystemTenantCode, 
     SystemName, 
     SystemTenantCode, 
     SystemEnvironment, 
@@ -60,6 +61,7 @@ export class SystemMapper implements IMapper
         return BplusItSappiSystem.register(
             new SystemId(system.id),
             new SystemTenantId(system.tenantId),
+            new SystemTenantCode(system.tenantCode),
             new SystemName(system.name),
             new SystemTenantCode(system.tenantCode),
             new SystemEnvironment(system.environment),
@@ -78,6 +80,7 @@ export class SystemMapper implements IMapper
         return new SystemResponse(
             system.id.value,
             system.tenantId.value,
+            system.tenantCode.value,
             system.name.value,
             system.tenantCode.value,
             system.environment.value,

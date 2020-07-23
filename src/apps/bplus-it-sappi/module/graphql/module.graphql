@@ -4,12 +4,14 @@ type BplusItSappiModule
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     channelId: ID!
     channelParty: GraphQLString
     channelComponent: GraphQLString!
     channelName: GraphQLString!
+    flowId: ID
     flowParty: GraphQLString
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
@@ -28,12 +30,14 @@ input BplusItSappiCreateModuleInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     channelId: ID!
     channelParty: GraphQLString
     channelComponent: GraphQLString!
     channelName: GraphQLString!
+    flowId: ID
     flowParty: GraphQLString
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
@@ -49,12 +53,14 @@ input BplusItSappiUpdateModuleInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     systemId: ID
     systemName: GraphQLString
     channelId: ID
     channelParty: GraphQLString
     channelComponent: GraphQLString
     channelName: GraphQLString
+    flowId: ID
     flowParty: GraphQLString
     flowComponent: GraphQLString
     flowInterfaceName: GraphQLString

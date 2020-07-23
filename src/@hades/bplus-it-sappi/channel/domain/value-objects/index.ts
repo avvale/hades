@@ -1,9 +1,11 @@
 export { ChannelId } from './channel-id';
 export { ChannelTenantId } from './channel-tenant-id';
+export { ChannelTenantCode } from './channel-tenant-code';
 export { ChannelSystemId } from './channel-system-id';
 export { ChannelParty } from './channel-party';
 export { ChannelComponent } from './channel-component';
 export { ChannelName } from './channel-name';
+export { ChannelFlowId } from './channel-flow-id';
 export { ChannelFlowParty } from './channel-flow-party';
 export { ChannelFlowComponent } from './channel-flow-component';
 export { ChannelFlowInterfaceName } from './channel-flow-interface-name';

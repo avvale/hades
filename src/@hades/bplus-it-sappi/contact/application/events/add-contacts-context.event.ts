@@ -26,6 +26,7 @@ export class AddContactsContextEvent extends AggregateRoot
                     new CreatedContactEvent(
                         contact.id.value,
                         contact.tenantId.value,
+                        contact.tenantCode.value,
                         contact.systemId.value,
                         contact.systemName.value,
                         contact.roleId?.value,
@@ -56,6 +57,7 @@ export class AddContactsContextEvent extends AggregateRoot
                     new DeletedContactEvent(
                         contact.id.value,
                         contact.tenantId.value,
+                        contact.tenantCode.value,
                         contact.systemId.value,
                         contact.systemName.value,
                         contact.roleId?.value,

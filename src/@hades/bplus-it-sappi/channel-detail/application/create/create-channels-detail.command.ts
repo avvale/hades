@@ -4,6 +4,7 @@ export class CreateChannelsDetailCommand
         public readonly channelsDetail: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             systemId: string,
             systemName: string,
             executionId: string,
@@ -13,11 +14,11 @@ export class CreateChannelsDetailCommand
             executionMonitoringEndAt: string,
             status: string,
             channelId: string,
+            channelSapId: string,
             channelParty?: string,
             channelComponent: string,
             channelName: string,
             detail?: string,
-            example?: string,
             
         } []
     ) {}

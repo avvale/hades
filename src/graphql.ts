@@ -358,11 +358,15 @@ export interface BplusItSappiUpdateContactInput {
 
 export interface BplusItSappiCreateDataLakeInput {
     id: string;
+    tenantId: string;
+    tenantCode: GraphQLString;
     data: JSON;
 }
 
 export interface BplusItSappiUpdateDataLakeInput {
     id: string;
+    tenantId?: string;
+    tenantCode?: GraphQLString;
     data?: JSON;
 }
 
@@ -651,12 +655,14 @@ export interface BplusItSappiUpdateModuleInput {
 export interface BplusItSappiCreateRoleInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     name: GraphQLString;
 }
 
 export interface BplusItSappiUpdateRoleInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
     name?: GraphQLString;
 }
 
@@ -1023,6 +1029,8 @@ export interface BplusItSappiContact {
 
 export interface BplusItSappiDataLake {
     id: string;
+    tenantId: string;
+    tenantCode: GraphQLString;
     data: JSON;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
@@ -1194,6 +1202,7 @@ export interface BplusItSappiModule {
 export interface BplusItSappiRole {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     name: GraphQLString;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;

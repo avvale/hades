@@ -1,11 +1,13 @@
 export { ModuleId } from './module-id';
 export { ModuleTenantId } from './module-tenant-id';
+export { ModuleTenantCode } from './module-tenant-code';
 export { ModuleSystemId } from './module-system-id';
 export { ModuleSystemName } from './module-system-name';
 export { ModuleChannelId } from './module-channel-id';
 export { ModuleChannelParty } from './module-channel-party';
 export { ModuleChannelComponent } from './module-channel-component';
 export { ModuleChannelName } from './module-channel-name';
+export { ModuleFlowId } from './module-flow-id';
 export { ModuleFlowParty } from './module-flow-party';
 export { ModuleFlowComponent } from './module-flow-component';
 export { ModuleFlowInterfaceName } from './module-flow-interface-name';

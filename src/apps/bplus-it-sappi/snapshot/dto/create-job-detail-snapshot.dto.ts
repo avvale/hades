@@ -37,4 +37,18 @@ export class CreateJobDetailSnapshotDto
         example     : '...'
     })
     user: string;
+
+    @ApiProperty({
+        type        : String,
+        description : 'Timestamp when job start',
+        example     : '2020-07-22 19:31:22'
+    })
+    startAt: string;
+    
+    @ApiProperty({
+        type        : String,
+        description : 'Timestamp when job end',
+        example     : '2020-07-23 10:25:59'
+    })
+    endAt: string;
 }

@@ -42,6 +42,7 @@ describe('UpdateContactCommandHandler', () =>
                 new UpdateContactCommand(
                     contacts[0].id,
                     contacts[0].tenantId,
+                    contacts[0].tenantCode,
                     contacts[0].systemId,
                     contacts[0].systemName,
                     contacts[0].roleId,

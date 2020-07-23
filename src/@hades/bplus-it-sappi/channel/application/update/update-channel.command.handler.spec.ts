@@ -42,10 +42,12 @@ describe('UpdateChannelCommandHandler', () =>
                 new UpdateChannelCommand(
                     channels[0].id,
                     channels[0].tenantId,
+                    channels[0].tenantCode,
                     channels[0].systemId,
                     channels[0].party,
                     channels[0].component,
                     channels[0].name,
+                    channels[0].flowId,
                     channels[0].flowParty,
                     channels[0].flowComponent,
                     channels[0].flowInterfaceName,

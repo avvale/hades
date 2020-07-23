@@ -25,6 +25,8 @@ export class UpdateDataLakeController
     {
         await this.commandBus.dispatch(new UpdateDataLakeCommand(
             payload.id,
+            payload.tenantId,
+            payload.tenantCode,
             payload.data,
             
         ));

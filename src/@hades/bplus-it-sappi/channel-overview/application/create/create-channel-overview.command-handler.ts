@@ -4,6 +4,7 @@ import { CreateChannelOverviewService } from './create-channel-overview.service'
 import { 
     ChannelOverviewId, 
     ChannelOverviewTenantId, 
+    ChannelOverviewTenantCode, 
     ChannelOverviewSystemId, 
     ChannelOverviewSystemName, 
     ChannelOverviewExecutionId, 
@@ -33,6 +34,7 @@ export class CreateChannelOverviewCommandHandler implements ICommandHandler<Crea
         await this.createChannelOverviewService.main(
             new ChannelOverviewId(command.id),
             new ChannelOverviewTenantId(command.tenantId),
+            new ChannelOverviewTenantCode(command.tenantCode),
             new ChannelOverviewSystemId(command.systemId),
             new ChannelOverviewSystemName(command.systemName),
             new ChannelOverviewExecutionId(command.executionId),

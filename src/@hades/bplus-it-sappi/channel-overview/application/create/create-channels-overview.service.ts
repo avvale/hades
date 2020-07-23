@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ChannelOverviewId, 
     ChannelOverviewTenantId, 
+    ChannelOverviewTenantCode, 
     ChannelOverviewSystemId, 
     ChannelOverviewSystemName, 
     ChannelOverviewExecutionId, 
@@ -38,6 +39,7 @@ export class CreateChannelsOverviewService
         channelsOverview: {
             id: ChannelOverviewId,
             tenantId: ChannelOverviewTenantId,
+            tenantCode: ChannelOverviewTenantCode,
             systemId: ChannelOverviewSystemId,
             systemName: ChannelOverviewSystemName,
             executionId: ChannelOverviewExecutionId,
@@ -59,6 +61,7 @@ export class CreateChannelsOverviewService
         const aggregateChannelsOverview = channelsOverview.map(channelOverview => BplusItSappiChannelOverview.register(
             channelOverview.id,
             channelOverview.tenantId,
+            channelOverview.tenantCode,
             channelOverview.systemId,
             channelOverview.systemName,
             channelOverview.executionId,

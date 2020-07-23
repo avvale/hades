@@ -7,6 +7,7 @@ import { IContactRepository } from './../../domain/contact.repository';
 import { 
     ContactId, 
     ContactTenantId, 
+    ContactTenantCode, 
     ContactSystemId, 
     ContactSystemName, 
     ContactRoleId, 
@@ -63,6 +64,7 @@ export class MockContactRepository implements IContactRepository
             this.collectionSource.push(BplusItSappiContact.register(
                     new ContactId(itemCollection.id),
                     new ContactTenantId(itemCollection.tenantId),
+                    new ContactTenantCode(itemCollection.tenantCode),
                     new ContactSystemId(itemCollection.systemId),
                     new ContactSystemName(itemCollection.systemName),
                     new ContactRoleId(itemCollection.roleId),

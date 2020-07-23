@@ -4,6 +4,34 @@ export class CreateMessageDetailSnapshotDto
 {   
     @ApiProperty({
         type        : String,
+        description : 'flowParty [input here api field description]',
+        example     : '4nn4r8vqn0wybqmti7be2nxj558ze5ctqxml8l4ngrsq9vw9qh23vw7izzcp8g6xe3vkzao9qts2bcql28ayyd2t92pvpdowqq36j2mpxtnvtftfenpepnzz8xylo7hezugqdm6899hg8wnyulh0u7n5r7f4ryt9'
+    })
+    flowParty: string;
+    
+    @ApiProperty({
+        type        : String,
+        description : 'flowComponent [input here api field description]',
+        example     : 'BC_SII_BROKER'
+    })
+    flowComponent: string;  
+    
+    @ApiProperty({
+        type        : String,
+        description : 'flowInterfaceName [input here api field description]',
+        example     : 'SI_IA_ProcesarLote'
+    })
+    flowInterfaceName: string;
+    
+    @ApiProperty({
+        type        : String,
+        description : 'flowInterfaceNamespace [input here api field description]',
+        example     : 'urn:techedgegroup.com:sii:lotes'
+    })
+    flowInterfaceNamespace: string;
+    
+    @ApiProperty({
+        type        : String,
         description : 'status [input here api field description]',
         example     : 'ERROR',
         enum        : ['SUCCESS','CANCELLED','DELIVERING','ERROR','HOLDING','TO_BE_DELIVERED','WAITING']
@@ -46,11 +74,11 @@ export class CreateMessageDetailSnapshotDto
     errorCode: string;
 
     @ApiProperty({
-        type        : String,
+        type        : Number,
         description : 'errorLabel [input here api field description]',
-        example     : '2003'
+        example     : 522201
     })
-    errorLabel: string;
+    errorLabel: number;
 
     @ApiProperty({
         type        : Number,

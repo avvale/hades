@@ -26,6 +26,7 @@ export class AddJobsDetailContextEvent extends AggregateRoot
                     new CreatedJobDetailEvent(
                         jobDetail.id.value,
                         jobDetail.tenantId.value,
+                        jobDetail.tenantCode.value,
                         jobDetail.systemId.value,
                         jobDetail.systemName.value,
                         jobDetail.executionId.value,
@@ -38,6 +39,8 @@ export class AddJobsDetailContextEvent extends AggregateRoot
                         jobDetail.returnCode?.value,
                         jobDetail.node?.value,
                         jobDetail.user?.value,
+                        jobDetail.startAt.value,
+                        jobDetail.endAt.value,
                         jobDetail.createdAt?.value,
                         jobDetail.updatedAt?.value,
                         jobDetail.deletedAt?.value,
@@ -56,6 +59,7 @@ export class AddJobsDetailContextEvent extends AggregateRoot
                     new DeletedJobDetailEvent(
                         jobDetail.id.value,
                         jobDetail.tenantId.value,
+                        jobDetail.tenantCode.value,
                         jobDetail.systemId.value,
                         jobDetail.systemName.value,
                         jobDetail.executionId.value,
@@ -68,6 +72,8 @@ export class AddJobsDetailContextEvent extends AggregateRoot
                         jobDetail.returnCode?.value,
                         jobDetail.node?.value,
                         jobDetail.user?.value,
+                        jobDetail.startAt.value,
+                        jobDetail.endAt.value,
                         jobDetail.createdAt?.value,
                         jobDetail.updatedAt?.value,
                         jobDetail.deletedAt?.value,

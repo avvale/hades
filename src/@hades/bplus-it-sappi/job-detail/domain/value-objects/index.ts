@@ -1,5 +1,6 @@
 export { JobDetailId } from './job-detail-id';
 export { JobDetailTenantId } from './job-detail-tenant-id';
+export { JobDetailTenantCode } from './job-detail-tenant-code';
 export { JobDetailSystemId } from './job-detail-system-id';
 export { JobDetailSystemName } from './job-detail-system-name';
 export { JobDetailExecutionId } from './job-detail-execution-id';
@@ -12,6 +13,8 @@ export { JobDetailName } from './job-detail-name';
 export { JobDetailReturnCode } from './job-detail-return-code';
 export { JobDetailNode } from './job-detail-node';
 export { JobDetailUser } from './job-detail-user';
+export { JobDetailStartAt } from './job-detail-start-at';
+export { JobDetailEndAt } from './job-detail-end-at';
 export { JobDetailCreatedAt } from './job-detail-created-at';
 export { JobDetailUpdatedAt } from './job-detail-updated-at';
 export { JobDetailDeletedAt } from './job-detail-deleted-at';

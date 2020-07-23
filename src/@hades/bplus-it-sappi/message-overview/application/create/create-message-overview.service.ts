@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     MessageOverviewId, 
     MessageOverviewTenantId, 
+    MessageOverviewTenantCode, 
     MessageOverviewSystemId, 
     MessageOverviewSystemName, 
     MessageOverviewExecutionId, 
@@ -39,6 +40,7 @@ export class CreateMessageOverviewService
     public async main(
         id: MessageOverviewId,
         tenantId: MessageOverviewTenantId,
+        tenantCode: MessageOverviewTenantCode,
         systemId: MessageOverviewSystemId,
         systemName: MessageOverviewSystemName,
         executionId: MessageOverviewExecutionId,
@@ -62,6 +64,7 @@ export class CreateMessageOverviewService
         const messageOverview = BplusItSappiMessageOverview.register(
             id,
             tenantId,
+            tenantCode,
             systemId,
             systemName,
             executionId,

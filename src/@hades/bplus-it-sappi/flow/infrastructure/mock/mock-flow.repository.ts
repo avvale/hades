@@ -7,6 +7,7 @@ import { IFlowRepository } from './../../domain/flow.repository';
 import { 
     FlowId, 
     FlowTenantId, 
+    FlowTenantCode, 
     FlowSystemId, 
     FlowSystemName, 
     FlowScenario, 
@@ -69,6 +70,7 @@ export class MockFlowRepository implements IFlowRepository
             this.collectionSource.push(BplusItSappiFlow.register(
                     new FlowId(itemCollection.id),
                     new FlowTenantId(itemCollection.tenantId),
+                    new FlowTenantCode(itemCollection.tenantCode),
                     new FlowSystemId(itemCollection.systemId),
                     new FlowSystemName(itemCollection.systemName),
                     new FlowScenario(itemCollection.scenario),

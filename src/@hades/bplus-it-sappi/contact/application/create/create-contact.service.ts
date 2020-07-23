@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ContactId, 
     ContactTenantId, 
+    ContactTenantCode, 
     ContactSystemId, 
     ContactSystemName, 
     ContactRoleId, 
@@ -35,6 +36,7 @@ export class CreateContactService
     public async main(
         id: ContactId,
         tenantId: ContactTenantId,
+        tenantCode: ContactTenantCode,
         systemId: ContactSystemId,
         systemName: ContactSystemName,
         roleId: ContactRoleId,
@@ -54,6 +56,7 @@ export class CreateContactService
         const contact = BplusItSappiContact.register(
             id,
             tenantId,
+            tenantCode,
             systemId,
             systemName,
             roleId,

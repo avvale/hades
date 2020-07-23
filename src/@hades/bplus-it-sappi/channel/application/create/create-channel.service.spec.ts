@@ -7,10 +7,12 @@ import { CreateChannelService } from './create-channel.service';
 import { 
     ChannelId, 
     ChannelTenantId, 
+    ChannelTenantCode, 
     ChannelSystemId, 
     ChannelParty, 
     ChannelComponent, 
     ChannelName, 
+    ChannelFlowId, 
     ChannelFlowParty, 
     ChannelFlowComponent, 
     ChannelFlowInterfaceName, 
@@ -36,8 +38,8 @@ import {
     ChannelLastChangedAt
     
 } from './../../domain/value-objects';
-import { IChannelRepository } from '../../domain/channel.repository';
-import { MockChannelRepository } from '../../infrastructure/mock/mock-channel.repository';
+import { IChannelRepository } from './../../domain/channel.repository';
+import { MockChannelRepository } from './../../infrastructure/mock/mock-channel.repository';
 
 describe('CreateChannelService', () => 
 {
@@ -57,8 +59,7 @@ describe('CreateChannelService', () =>
                 { 
                     provide: IChannelRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -78,14 +79,15 @@ describe('CreateChannelService', () =>
 
         test('should create a channel and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new ChannelId(channels[0].id),
                 new ChannelTenantId(channels[0].tenantId),
+                new ChannelTenantCode(channels[0].tenantCode),
                 new ChannelSystemId(channels[0].systemId),
                 new ChannelParty(channels[0].party),
                 new ChannelComponent(channels[0].component),
                 new ChannelName(channels[0].name),
+                new ChannelFlowId(channels[0].flowId),
                 new ChannelFlowParty(channels[0].flowParty),
                 new ChannelFlowComponent(channels[0].flowComponent),
                 new ChannelFlowInterfaceName(channels[0].flowInterfaceName),

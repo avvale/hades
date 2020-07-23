@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     MessageOverviewId, 
     MessageOverviewTenantId, 
+    MessageOverviewTenantCode, 
     MessageOverviewSystemId, 
     MessageOverviewSystemName, 
     MessageOverviewExecutionId, 
@@ -41,6 +42,7 @@ export class CreateMessagesOverviewService
         messagesOverview: {
             id: MessageOverviewId,
             tenantId: MessageOverviewTenantId,
+            tenantCode: MessageOverviewTenantCode,
             systemId: MessageOverviewSystemId,
             systemName: MessageOverviewSystemName,
             executionId: MessageOverviewExecutionId,
@@ -65,6 +67,7 @@ export class CreateMessagesOverviewService
         const aggregateMessagesOverview = messagesOverview.map(messageOverview => BplusItSappiMessageOverview.register(
             messageOverview.id,
             messageOverview.tenantId,
+            messageOverview.tenantCode,
             messageOverview.systemId,
             messageOverview.systemName,
             messageOverview.executionId,

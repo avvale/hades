@@ -4,6 +4,7 @@ export class CreateChannelsOverviewCommand
         public readonly channelsOverview: {
             id: string,
             tenantId: string,
+            tenantCode: string,
             systemId: string,
             systemName: string,
             executionId: string,

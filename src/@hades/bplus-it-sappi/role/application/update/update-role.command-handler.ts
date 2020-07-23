@@ -4,6 +4,7 @@ import { UpdateRoleService } from './update-role.service';
 import { 
     RoleId, 
     RoleTenantId, 
+    RoleTenantCode, 
     RoleName
     
 } from './../../domain/value-objects';
@@ -21,6 +22,7 @@ export class UpdateRoleCommandHandler implements ICommandHandler<UpdateRoleComma
         await this.updateRoleService.main(
             new RoleId(command.id),
             new RoleTenantId(command.tenantId, { undefinable: true }),
+            new RoleTenantCode(command.tenantCode, { undefinable: true }),
             new RoleName(command.name, { undefinable: true }),
             
         )

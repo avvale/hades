@@ -5,6 +5,7 @@ import { MessageDetailResponse } from './message-detail.response';
 import { 
     MessageDetailId, 
     MessageDetailTenantId, 
+    MessageDetailTenantCode, 
     MessageDetailSystemId, 
     MessageDetailSystemName, 
     MessageDetailScenario, 
@@ -85,6 +86,7 @@ export class MessageDetailMapper implements IMapper
         return BplusItSappiMessageDetail.register(
             new MessageDetailId(messageDetail.id),
             new MessageDetailTenantId(messageDetail.tenantId),
+            new MessageDetailTenantCode(messageDetail.tenantCode),
             new MessageDetailSystemId(messageDetail.systemId),
             new MessageDetailSystemName(messageDetail.systemName),
             new MessageDetailScenario(messageDetail.scenario),
@@ -128,6 +130,7 @@ export class MessageDetailMapper implements IMapper
         return new MessageDetailResponse(
             messageDetail.id.value,
             messageDetail.tenantId.value,
+            messageDetail.tenantCode.value,
             messageDetail.systemId.value,
             messageDetail.systemName.value,
             messageDetail.scenario.value,

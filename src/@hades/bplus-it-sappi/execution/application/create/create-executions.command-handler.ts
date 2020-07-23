@@ -4,7 +4,9 @@ import { CreateExecutionsService } from './create-executions.service';
 import { 
     ExecutionId, 
     ExecutionTenantId, 
+    ExecutionTenantCode, 
     ExecutionSystemId, 
+    ExecutionSystemName, 
     ExecutionType, 
     ExecutionMonitoringStartAt, 
     ExecutionMonitoringEndAt, 
@@ -28,7 +30,9 @@ export class CreateExecutionsCommandHandler implements ICommandHandler<CreateExe
                     return {
                         id: new ExecutionId(execution.id),
                         tenantId: new ExecutionTenantId(execution.tenantId),
+                        tenantCode: new ExecutionTenantCode(execution.tenantCode),
                         systemId: new ExecutionSystemId(execution.systemId),
+                        systemName: new ExecutionSystemName(execution.systemName),
                         type: new ExecutionType(execution.type),
                         monitoringStartAt: new ExecutionMonitoringStartAt(execution.monitoringStartAt),
                         monitoringEndAt: new ExecutionMonitoringEndAt(execution.monitoringEndAt),

@@ -26,6 +26,7 @@ export class AddFlowsContextEvent extends AggregateRoot
                     new CreatedFlowEvent(
                         flow.id.value,
                         flow.tenantId.value,
+                        flow.tenantCode.value,
                         flow.systemId.value,
                         flow.systemName.value,
                         flow.scenario.value,
@@ -62,6 +63,7 @@ export class AddFlowsContextEvent extends AggregateRoot
                     new DeletedFlowEvent(
                         flow.id.value,
                         flow.tenantId.value,
+                        flow.tenantCode.value,
                         flow.systemId.value,
                         flow.systemName.value,
                         flow.scenario.value,

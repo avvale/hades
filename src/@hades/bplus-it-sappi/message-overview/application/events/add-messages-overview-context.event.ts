@@ -26,6 +26,7 @@ export class AddMessagesOverviewContextEvent extends AggregateRoot
                     new CreatedMessageOverviewEvent(
                         messageOverview.id.value,
                         messageOverview.tenantId.value,
+                        messageOverview.tenantCode.value,
                         messageOverview.systemId.value,
                         messageOverview.systemName.value,
                         messageOverview.executionId.value,
@@ -60,6 +61,7 @@ export class AddMessagesOverviewContextEvent extends AggregateRoot
                     new DeletedMessageOverviewEvent(
                         messageOverview.id.value,
                         messageOverview.tenantId.value,
+                        messageOverview.tenantCode.value,
                         messageOverview.systemId.value,
                         messageOverview.systemName.value,
                         messageOverview.executionId.value,

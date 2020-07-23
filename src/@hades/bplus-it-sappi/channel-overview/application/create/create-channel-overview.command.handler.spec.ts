@@ -42,6 +42,7 @@ describe('CreateChannelOverviewCommandHandler', () =>
                 new CreateChannelOverviewCommand(
                     channelsOverview[0].id,
                     channelsOverview[0].tenantId,
+                    channelsOverview[0].tenantCode,
                     channelsOverview[0].systemId,
                     channelsOverview[0].systemName,
                     channelsOverview[0].executionId,

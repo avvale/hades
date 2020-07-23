@@ -4,6 +4,7 @@ import { CreateJobsOverviewService } from './create-jobs-overview.service';
 import { 
     JobOverviewId, 
     JobOverviewTenantId, 
+    JobOverviewTenantCode, 
     JobOverviewSystemId, 
     JobOverviewSystemName, 
     JobOverviewExecutionId, 
@@ -33,6 +34,7 @@ export class CreateJobsOverviewCommandHandler implements ICommandHandler<CreateJ
                     return {
                         id: new JobOverviewId(jobOverview.id),
                         tenantId: new JobOverviewTenantId(jobOverview.tenantId),
+                        tenantCode: new JobOverviewTenantCode(jobOverview.tenantCode),
                         systemId: new JobOverviewSystemId(jobOverview.systemId),
                         systemName: new JobOverviewSystemName(jobOverview.systemName),
                         executionId: new JobOverviewExecutionId(jobOverview.executionId),

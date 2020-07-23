@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ChannelDetailId, 
     ChannelDetailTenantId, 
+    ChannelDetailTenantCode, 
     ChannelDetailSystemId, 
     ChannelDetailSystemName, 
     ChannelDetailExecutionId, 
@@ -13,11 +14,11 @@ import {
     ChannelDetailExecutionMonitoringEndAt, 
     ChannelDetailStatus, 
     ChannelDetailChannelId, 
+    ChannelDetailChannelSapId, 
     ChannelDetailChannelParty, 
     ChannelDetailChannelComponent, 
     ChannelDetailChannelName, 
     ChannelDetailDetail, 
-    ChannelDetailExample, 
     ChannelDetailCreatedAt, 
     ChannelDetailUpdatedAt, 
     ChannelDetailDeletedAt
@@ -37,6 +38,7 @@ export class CreateChannelDetailService
     public async main(
         id: ChannelDetailId,
         tenantId: ChannelDetailTenantId,
+        tenantCode: ChannelDetailTenantCode,
         systemId: ChannelDetailSystemId,
         systemName: ChannelDetailSystemName,
         executionId: ChannelDetailExecutionId,
@@ -46,11 +48,11 @@ export class CreateChannelDetailService
         executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt,
         status: ChannelDetailStatus,
         channelId: ChannelDetailChannelId,
+        channelSapId: ChannelDetailChannelSapId,
         channelParty: ChannelDetailChannelParty,
         channelComponent: ChannelDetailChannelComponent,
         channelName: ChannelDetailChannelName,
         detail: ChannelDetailDetail,
-        example: ChannelDetailExample,
         
     ): Promise<void>
     {
@@ -58,6 +60,7 @@ export class CreateChannelDetailService
         const channelDetail = BplusItSappiChannelDetail.register(
             id,
             tenantId,
+            tenantCode,
             systemId,
             systemName,
             executionId,
@@ -67,11 +70,11 @@ export class CreateChannelDetailService
             executionMonitoringEndAt,
             status,
             channelId,
+            channelSapId,
             channelParty,
             channelComponent,
             channelName,
             detail,
-            example,
             new ChannelDetailCreatedAt(Utils.nowTimestamp()),
             new ChannelDetailUpdatedAt(Utils.nowTimestamp()),
             null

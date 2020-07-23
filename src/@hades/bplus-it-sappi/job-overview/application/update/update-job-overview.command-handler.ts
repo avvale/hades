@@ -4,6 +4,7 @@ import { UpdateJobOverviewService } from './update-job-overview.service';
 import { 
     JobOverviewId, 
     JobOverviewTenantId, 
+    JobOverviewTenantCode, 
     JobOverviewSystemId, 
     JobOverviewSystemName, 
     JobOverviewExecutionId, 
@@ -30,6 +31,7 @@ export class UpdateJobOverviewCommandHandler implements ICommandHandler<UpdateJo
         await this.updateJobOverviewService.main(
             new JobOverviewId(command.id),
             new JobOverviewTenantId(command.tenantId, { undefinable: true }),
+            new JobOverviewTenantCode(command.tenantCode, { undefinable: true }),
             new JobOverviewSystemId(command.systemId, { undefinable: true }),
             new JobOverviewSystemName(command.systemName, { undefinable: true }),
             new JobOverviewExecutionId(command.executionId, { undefinable: true }),

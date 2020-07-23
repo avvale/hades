@@ -14,10 +14,12 @@ type BplusItSappiChannel
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     party: GraphQLString
     component: GraphQLString!
     name: GraphQLString!
+    flowId: ID
     flowParty: GraphQLString!
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
@@ -51,10 +53,12 @@ input BplusItSappiCreateChannelInput
 {
     id: ID!
     tenantId: ID!
+    tenantCode: GraphQLString!
     systemId: ID!
     party: GraphQLString
     component: GraphQLString!
     name: GraphQLString!
+    flowId: ID
     flowParty: GraphQLString!
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
@@ -85,10 +89,12 @@ input BplusItSappiUpdateChannelInput
 {
     id: ID!
     tenantId: ID
+    tenantCode: GraphQLString
     systemId: ID
     party: GraphQLString
     component: GraphQLString
     name: GraphQLString
+    flowId: ID
     flowParty: GraphQLString
     flowComponent: GraphQLString
     flowInterfaceName: GraphQLString

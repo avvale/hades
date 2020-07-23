@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { modules } from '@hades/bplus-it-sappi/module/infrastructure/seeds/module.seed';
 import { DeleteModuleByIdService } from './delete-module-by-id.service';
 import { ModuleId } from './../../domain/value-objects';
-import { IModuleRepository } from '../../domain/module.repository';
-import { MockModuleRepository } from '../../infrastructure/mock/mock-module.repository';
+import { IModuleRepository } from './../../domain/module.repository';
+import { MockModuleRepository } from './../../infrastructure/mock/mock-module.repository';
 
 describe('DeleteModuleByIdService', () => 
 {
