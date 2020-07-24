@@ -6,7 +6,7 @@ export class CreatePermissionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'fd846731-17e0-41fd-91d3-ef3d4dc1003e'
+        example     : 'a8bded5b-ee95-42cd-9c84-8dd81c3535bd'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreatePermissionDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : '54c076d7-bfae-4a64-820c-2e916b9061c4'
+        example     : 'c89c5b9b-9b31-4747-b556-b994fc310fab'
     })
     boundedContextId: string;
     
@@ -24,7 +24,7 @@ export class CreatePermissionDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '5xpktmer2k77ver06ae5q6tldzg53sgemd0iouuphn5wbybrdt0afvrhfkv84g8bsj5553b657fwkqi6iusmnrfogkxr6vuxcdsr0ltqa16p4ac4dqmxeyvkcoec6fvz5plgyno9ywx9ju7bqqnsv1zuxewonyid5gh8iniutbksjiyjqfvdo977oyoeari0lzf9s9xy8p6au1h57p5gatpqbrhif0hgpjyyy8iee630mxvu5pp4oqsofv6696n'
+        example     : 'uziq7ywmmj145qzpy29820mgzi80lh93ipd65vl9k1tlkysq63lgmql1evgpy1s77sttcqzsxhyrpernusah92fid7rsx23af8xb80buk56remkgqbgkfjq6tdgimlypfxmdlp11oawua351131kwfrqxx17ddqz16497jqlqqdrwj64wu80bdmus4pqa5e5oi2eopcg873l17veyx5hdlzsv3ctjwa533153kczc62hwddu7xqox9cakc8opyx'
     })
     name: string;
     

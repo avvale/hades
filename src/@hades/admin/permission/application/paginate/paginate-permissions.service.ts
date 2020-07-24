@@ -11,8 +11,8 @@ export class PaginatePermissionsService
         private readonly repository: IPermissionRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<AdminPermission>>
+    public async main(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<AdminPermission>>
     {        
-        return await this.repository.paginate(queryStatements, constraint);
+        return await this.repository.paginate(queryStatements, constraints);
     }
 }

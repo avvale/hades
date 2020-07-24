@@ -6,7 +6,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '577bec9c-af19-4a48-a5e3-0355abfb6dbf'
+        example     : 'eb375bd5-0f7a-4b15-b617-8ace4437c646'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : 'ca1e8b2e-7844-4259-9ee6-9d240cef8b62'
+        example     : '14e8adae-7ae9-4146-817e-36f43618ad8b'
     })
     boundedContextId: string;
     
@@ -24,7 +24,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'doeplc1akrb2qmp4l81eobe7xvrwiy31o9xs660j4wf0jf3ssyqnoqay7j3t0qc32q6v7lbqg9tnq59xvtqhzcbsf7iw01xzjyk3ryn8su9bz69jg2h3p45rt8juao2m50l72cqo9habti32skjkzjh5qqar2lp3pyebus8vn8x9pcet4ins5zi56o7xik1s88m7vla6pkspnherwbxzcs04p2id1wq2vglzk9vyfxivdnx7dkpx2yvx0vk0ydq'
+        example     : 'slvou8hzpro46j6s80fyebqstzzmnagsau6twocqibxahz3g0vchfjb63njf79znag7mx883t9vik29c8ycxlultrix8yd2ih15u35hf82cdm46zdbllfjwrsk7c2aj3uokrvloyjun7phpt4wp09455xc9wqzp136f4xyrcdsamwphmpamwv5ag31wavd1nwtgr0r73ppajsbsmnnid6utnu3dzcjiboy9r8q55iskob0898zlyk51xryddgzb'
     })
     name: string;
     
@@ -51,7 +51,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-23 02:40:15'
+        example     : '2020-07-23 13:34:49'
     })
     createdAt: string;
     
@@ -60,7 +60,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-23 08:07:04'
+        example     : '2020-07-23 23:15:33'
     })
     updatedAt: string;
     
@@ -69,7 +69,7 @@ export class ResourceDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-23 04:38:51'
+        example     : '2020-07-24 11:23:11'
     })
     deletedAt: string;
     

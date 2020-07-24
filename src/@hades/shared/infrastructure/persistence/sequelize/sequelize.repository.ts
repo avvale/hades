@@ -19,15 +19,15 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         return {}
     }
 
-    async paginate(queryStatements: QueryStatementInput[] = [], constraint: QueryStatementInput[] = []): Promise<Pagination<Aggregate>>
+    async paginate(queryStatements: QueryStatementInput[] = [], constraints: QueryStatementInput[] = []): Promise<Pagination<Aggregate>>
     {
         // get count total records from sql service library
         const total = await this.repository.count(
-            this.criteria.implements(constraint, this.builder())
+            this.criteria.implements(constraints, this.builder())
         );
 
         const { count, rows } = await this.repository.findAndCountAll(
-            this.criteria.implements(constraint.concat(queryStatements), this.builder())
+            this.criteria.implements(constraints.concat(queryStatements), this.builder())
         );
 
         return { 

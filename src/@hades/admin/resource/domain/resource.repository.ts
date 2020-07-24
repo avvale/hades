@@ -10,7 +10,7 @@ export abstract class IResourceRepository implements IRepository<AdminResource>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<AdminResource>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<AdminResource>>;
 
     // create a single record
     abstract async create(resource: AdminResource): Promise<void>;

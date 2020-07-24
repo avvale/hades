@@ -10,7 +10,7 @@ export abstract class IPermissionRepository implements IRepository<AdminPermissi
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<AdminPermission>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<AdminPermission>>;
 
     // create a single record
     abstract async create(permission: AdminPermission): Promise<void>;

@@ -11,8 +11,8 @@ export class PaginateBoundedContextsService
         private readonly repository: IBoundedContextRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<AdminBoundedContext>>
+    public async main(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<AdminBoundedContext>>
     {        
-        return await this.repository.paginate(queryStatements, constraint);
+        return await this.repository.paginate(queryStatements, constraints);
     }
 }
