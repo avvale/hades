@@ -10,7 +10,7 @@ export abstract class IBoundedContextRepository implements IRepository<AdminBoun
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<AdminBoundedContext>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<AdminBoundedContext>>;
 
     // create a single record
     abstract async create(boundedContext: AdminBoundedContext): Promise<void>;

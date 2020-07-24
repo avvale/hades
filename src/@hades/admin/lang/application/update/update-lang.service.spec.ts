@@ -12,7 +12,10 @@ import {
     LangIso6393, 
     LangIetf, 
     LangSort, 
-    LangIsActive
+    LangIsActive, 
+    LangCreatedAt, 
+    LangUpdatedAt, 
+    LangDeletedAt
     
 } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';

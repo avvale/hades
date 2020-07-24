@@ -10,7 +10,7 @@ export abstract class ITenantRepository implements IRepository<AdminTenant>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<AdminTenant>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<AdminTenant>>;
 
     // create a single record
     abstract async create(tenant: AdminTenant): Promise<void>;

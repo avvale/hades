@@ -6,7 +6,7 @@ export class CreateResourceDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '577bec9c-af19-4a48-a5e3-0355abfb6dbf'
+        example     : 'eb375bd5-0f7a-4b15-b617-8ace4437c646'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateResourceDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : 'ca1e8b2e-7844-4259-9ee6-9d240cef8b62'
+        example     : '14e8adae-7ae9-4146-817e-36f43618ad8b'
     })
     boundedContextId: string;
     
@@ -24,7 +24,7 @@ export class CreateResourceDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'nlci6l4ar240xzs459umfmq8y9ifodc9ow6wpne11salwy69pnydvw1aqdrg98fyrq1r4v8qawghwylccz1wax16vco8ddhiowpuncka7wv19fxolrxn4ijcla59jm451yon354k7nnss31tss5jgfqs9oo59nv809hkk3k8i2ik8swrc4bpd3xa56yuuy0xh5j7z33hvlkz1fjsvlpg2utic891ky6cils9d5ysbwajlreyfmry55u5c1qmvkq'
+        example     : '7e0ibrerocux62gpkv3i9t5q9y5m5dsjgspx55bd2it1vibdx27rw200mgykthwxkw0ifys7vii1taii23qcr41xrwmbmhtx6owism6suwk6zmzoepfrngic00wjicfqnxy7szswzli19z8bzv34q4ayswt7y4gcu3jwol5679tir39zxbwxdpp6rb95za9upr4e2s2q7g82emne576b0t4r8icvuj4ky7iy92fpt4tlb4k7v97sdfz1jowe97y'
     })
     name: string;
     
@@ -42,7 +42,7 @@ export class CreateResourceDto
     @ApiProperty({
         type        : Boolean,
         description : 'hasAttachments [input here api field description]',
-        example     : false
+        example     : true
     })
     hasAttachments: boolean;
     

@@ -6,7 +6,7 @@ export class UpdateTenantDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '6861ce3e-6eb2-4eb9-8ef3-44543f0adfe7'
+        example     : 'a705f952-7805-49a5-8239-ea5e38486f36'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateTenantDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '1'
+        example     : 'l'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class UpdateTenantDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'dskxdmub02fp3yxexfhrt9imvi2til3s5n8viyg8kovxrqr0y0'
+        example     : '66de8p1a63o48ollke65j4nfwaqqae0odaxodr23ymaogqeqvt'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class UpdateTenantDto
     @ApiProperty({
         type        : String,
         description : 'logo [input here api field description]',
-        example     : 'b'
+        example     : '4'
     })
     logo: string;
     

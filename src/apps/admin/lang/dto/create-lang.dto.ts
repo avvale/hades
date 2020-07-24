@@ -6,7 +6,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '6fbfc255-fa28-4590-af22-3c2efeff3bfd'
+        example     : '7935d89d-bc14-46e8-9e30-8ba56a34ba52'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'r'
+        example     : 'p'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'image [input here api field description]',
-        example     : '4'
+        example     : '9'
     })
     image: string;
     
@@ -33,7 +33,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'iso6392 [input here api field description]',
-        example     : '0k'
+        example     : 'u6'
     })
     iso6392: string;
     
@@ -42,7 +42,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'iso6393 [input here api field description]',
-        example     : 'go7'
+        example     : 'n79'
     })
     iso6393: string;
     
@@ -51,7 +51,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'ietf [input here api field description]',
-        example     : 'af1qf'
+        example     : '1t84u'
     })
     ietf: string;
     
@@ -60,7 +60,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
-        example     : 598290
+        example     : 143363
     })
     sort: number;
     

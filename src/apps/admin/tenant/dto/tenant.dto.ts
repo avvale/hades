@@ -6,7 +6,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '6861ce3e-6eb2-4eb9-8ef3-44543f0adfe7'
+        example     : 'a705f952-7805-49a5-8239-ea5e38486f36'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'a'
+        example     : 's'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'un013ekdd88e4v4ekae0q96jo0d3wijs3eyxy0e4ues6ol489o'
+        example     : 'cotet0spesfnr1trggwu2m58zm2ejlifze9pssly2d43y5t62l'
     })
     code: string;
     
@@ -42,7 +42,7 @@ export class TenantDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : true
+        example     : false
     })
     isActive: boolean;
     
@@ -60,7 +60,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-23 01:46:19'
+        example     : '2020-07-23 18:24:03'
     })
     createdAt: string;
     
@@ -69,7 +69,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-23 15:49:33'
+        example     : '2020-07-24 06:16:08'
     })
     updatedAt: string;
     
@@ -78,7 +78,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-23 11:05:09'
+        example     : '2020-07-23 13:27:27'
     })
     deletedAt: string;
     
