@@ -25,6 +25,14 @@ describe('StringValueObject', () =>
             expect(mockStringValueObject.value).toBe('Hello World');
         });
 
+        test('MockStringValueObject should be defined with toString method, Hello World value', () => 
+        {
+            const mockStringValueObject = new MockStringValueObject('Hello World', {
+                name: 'MockStringValueObject'
+            });
+            expect(mockStringValueObject.toString()).toBe('Hello World');
+        });
+
         test('MockStringValueObject should be null with empty value', () => 
         {
             const mockStringValueObject = new MockStringValueObject('', {
