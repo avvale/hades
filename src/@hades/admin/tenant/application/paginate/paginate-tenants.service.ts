@@ -11,8 +11,8 @@ export class PaginateTenantsService
         private readonly repository: ITenantRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<AdminTenant>>
+    public async main(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<AdminTenant>>
     {        
-        return await this.repository.paginate(queryStatements, constraint);
+        return await this.repository.paginate(queryStatements, constraints);
     }
 }
