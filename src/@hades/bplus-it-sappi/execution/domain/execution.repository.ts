@@ -10,7 +10,7 @@ export abstract class IExecutionRepository implements IRepository<BplusItSappiEx
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<BplusItSappiExecution>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<BplusItSappiExecution>>;
 
     // create a single record
     abstract async create(execution: BplusItSappiExecution): Promise<void>;

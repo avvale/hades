@@ -10,7 +10,7 @@ export abstract class IChannelOverviewRepository implements IRepository<BplusItS
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<BplusItSappiChannelOverview>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<BplusItSappiChannelOverview>>;
 
     // create a single record
     abstract async create(channelOverview: BplusItSappiChannelOverview): Promise<void>;

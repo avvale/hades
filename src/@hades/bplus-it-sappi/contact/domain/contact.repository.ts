@@ -10,7 +10,7 @@ export abstract class IContactRepository implements IRepository<BplusItSappiCont
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<BplusItSappiContact>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<BplusItSappiContact>>;
 
     // create a single record
     abstract async create(contact: BplusItSappiContact): Promise<void>;

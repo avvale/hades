@@ -40,12 +40,12 @@ describe('DeleteModuleByIdService', () =>
 
     describe('main', () => 
     {
-        it('DeleteModuleByIdService should be defined', () => 
+        test('DeleteModuleByIdService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should delete module and emit event', async () => 
+        test('should delete module and emit event', async () => 
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

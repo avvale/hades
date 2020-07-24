@@ -10,7 +10,7 @@ export abstract class IDataLakeRepository implements IRepository<BplusItSappiDat
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<BplusItSappiDataLake>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<BplusItSappiDataLake>>;
 
     // create a single record
     abstract async create(dataLake: BplusItSappiDataLake): Promise<void>;

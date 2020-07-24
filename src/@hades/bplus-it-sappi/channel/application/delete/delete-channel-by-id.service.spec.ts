@@ -40,12 +40,12 @@ describe('DeleteChannelByIdService', () =>
 
     describe('main', () => 
     {
-        it('DeleteChannelByIdService should be defined', () => 
+        test('DeleteChannelByIdService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should delete channel and emit event', async () => 
+        test('should delete channel and emit event', async () => 
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

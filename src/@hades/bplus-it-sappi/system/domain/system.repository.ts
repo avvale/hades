@@ -10,7 +10,7 @@ export abstract class ISystemRepository implements IRepository<BplusItSappiSyste
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<BplusItSappiSystem>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<BplusItSappiSystem>>;
 
     // create a single record
     abstract async create(system: BplusItSappiSystem): Promise<void>;

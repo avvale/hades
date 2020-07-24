@@ -38,12 +38,12 @@ describe('DeleteExecutionsService', () =>
 
     describe('main', () => 
     {
-        it('DeleteExecutionsService should be defined', () => 
+        test('DeleteExecutionsService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should delete execution and emit event', async () => 
+        test('should delete execution and emit event', async () => 
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main([])).toBe(undefined);

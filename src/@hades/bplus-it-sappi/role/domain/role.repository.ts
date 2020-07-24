@@ -10,7 +10,7 @@ export abstract class IRoleRepository implements IRepository<BplusItSappiRole>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<BplusItSappiRole>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<BplusItSappiRole>>;
 
     // create a single record
     abstract async create(role: BplusItSappiRole): Promise<void>;

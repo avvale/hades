@@ -6,7 +6,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '4bf7d91c-c237-47d6-a93c-246e32a8d58e'
+        example     : 'e636b2a9-ee7d-497d-a883-416b32afc714'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'e69bc319-5758-430f-bf39-1b56a867a12a'
+        example     : 'ed0938ec-0d62-439e-86cb-794b0b61e2f2'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'gt1ozxn02a69c6dsmja3mow87s8fdc92deljbobq48h37yx2a7'
+        example     : '9q6tlfmyhu99eeyx4xq8prwli3k35n8h6md3uncpm2pycli47k'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '856c8fb7-d652-42ed-913b-6fc419c5dd58'
+        example     : 'dd23336f-d048-422d-a38c-4c41d9da6581'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : '8pb3bk3eya58e37pb3wd'
+        example     : 'ghqkqf0f7x7j8fben9e8'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '1c2fc88e-5b8a-4001-af0a-c998e76bee0d'
+        example     : '1d26e770-ca38-42fb-b0b9-6c173a189292'
     })
     executionId: string;
     
@@ -70,7 +70,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-23 18:08:05'
+        example     : '2020-07-24 15:29:24'
     })
     executionExecutedAt: string;
     
@@ -79,7 +79,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-23 14:15:10'
+        example     : '2020-07-24 06:57:50'
     })
     executionMonitoringStartAt: string;
     
@@ -88,7 +88,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-23 10:24:06'
+        example     : '2020-07-24 13:17:22'
     })
     executionMonitoringEndAt: string;
     
@@ -107,7 +107,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelId [input here api field description]',
-        example     : '1fc7e637-dadf-49ed-962f-25f7c02c9687'
+        example     : '27585f04-6232-43cd-b3fc-1b7e6f9dcf9f'
     })
     channelId: string;
     
@@ -116,7 +116,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelSapId [input here api field description]',
-        example     : 'jpjj2ifc3t8y8avz6d2l8u1heu5awaoamd6wyi8mfv1j1hvvp1'
+        example     : 'ct14qgzzswnot6nf55qhz5305cqpxym7m1et6tjcj2f98rwyiw'
     })
     channelSapId: string;
     
@@ -125,7 +125,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelParty [input here api field description]',
-        example     : 'l279pjs5cybkqbxju1k8i1cbur9zx6yn7vfl7niwtbr1cf8c4trd1j1urn2nu9sqnz138new8nc92r2vy77t8ix19difunz9m9cfx6625120tsyuiaiblnls0uzui3ru1tv9kqxk97wpvkw8tq8we16bbeg1zxq6'
+        example     : 'xrwtfih6nppe9wu35rqsfi0yk4hdkl1g5zm9l5q8r91zggnyggtrkcvvxf4gs9isx09wo05m6k45hkj7ici21fr31k7ozobowj3sfjp0aezafzbxhexta4o8v25rm4l84l3pru5ml00c12himt5sfkepsjs8399z'
     })
     channelParty: string;
     
@@ -134,7 +134,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelComponent [input here api field description]',
-        example     : 'k6xlkeghbj9mq7q7kz4hjm9rmrd8or0ndlymwtmxszs7pi8chvo50lmfljp4gn1tw4ch4lycuk6bogjuo1pgx860itp9ulcmnp9j2uy11rdb5ju7x61lj93u41oea4emjgk7v810byomkfhy3e30s4wvbtyhjreg'
+        example     : '0ilnvesor02wrxeuax9ghdpwf6x9vzlnf6b3av5tl2y1box7sgczt27eti7r8uxxux7x7ybarprod0fd30cbg2nj3yn9qu5yuno9bxdps4htgenhds1iohb9g3ifin7bai0p0fd3ispk5zh7fh02vcvr96i3sguy'
     })
     channelComponent: string;
     
@@ -143,7 +143,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelName [input here api field description]',
-        example     : 'rjxf214u2y2ll2p7dma76m1k9xrm3lszqus0dzugvfjxqf7f3u4rf3wyoklrtt7r0mdnqurap5x480qu3dndqku8ynf059jdyxn2yq0ofqwdzlelp8t8zmotwlo1e9p1l8wxpbzmhb6764uk4v48pbicd17vjniz'
+        example     : '8l6drayfvmki7mburez8cnbrs79h2324i1s5jimlr9kgnmyubiyrnp9tkrqca259x1zzf2eiec8dbs2vyklzg3wr8dl3qetsz0i6t7fb1xwnep1xo3d2pucy3eer1olzflre09r94v8zfas0q8tp02kxsjqxkjc7'
     })
     channelName: string;
     
@@ -152,7 +152,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'detail [input here api field description]',
-        example     : 'Sunt ut mollitia non optio rem sit eveniet ad quis. Qui autem veniam quia cumque similique. Ullam ut corporis ab quos autem nemo rerum et. Ea praesentium sunt et eum. Aperiam quia excepturi cum accusamus quo omnis ut possimus pariatur.'
+        example     : 'Fugit molestias doloremque molestiae soluta aut enim quam vel. Et asperiores sapiente harum omnis qui ad aut voluptatum minus. Dolor quasi nam ipsa.'
     })
     detail: string;
     

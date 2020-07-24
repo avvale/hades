@@ -10,7 +10,7 @@ export abstract class IFlowRepository implements IRepository<BplusItSappiFlow>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<BplusItSappiFlow>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<BplusItSappiFlow>>;
 
     // create a single record
     abstract async create(flow: BplusItSappiFlow): Promise<void>;

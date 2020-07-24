@@ -10,7 +10,7 @@ export abstract class IMessageOverviewRepository implements IRepository<BplusItS
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<BplusItSappiMessageOverview>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<BplusItSappiMessageOverview>>;
 
     // create a single record
     abstract async create(messageOverview: BplusItSappiMessageOverview): Promise<void>;

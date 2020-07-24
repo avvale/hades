@@ -10,7 +10,7 @@ export abstract class IJobOverviewRepository implements IRepository<BplusItSappi
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<BplusItSappiJobOverview>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<BplusItSappiJobOverview>>;
 
     // create a single record
     abstract async create(jobOverview: BplusItSappiJobOverview): Promise<void>;
