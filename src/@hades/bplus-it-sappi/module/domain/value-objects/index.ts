@@ -1,7 +1,6 @@
 export { ModuleId } from './module-id';
 export { ModuleTenantId } from './module-tenant-id';
 export { ModuleTenantCode } from './module-tenant-code';
-export { ModuleVersion } from './module-version';
 export { ModuleSystemId } from './module-system-id';
 export { ModuleSystemName } from './module-system-name';
 export { ModuleChannelId } from './module-channel-id';
@@ -13,6 +12,7 @@ export { ModuleFlowParty } from './module-flow-party';
 export { ModuleFlowComponent } from './module-flow-component';
 export { ModuleFlowInterfaceName } from './module-flow-interface-name';
 export { ModuleFlowInterfaceNamespace } from './module-flow-interface-namespace';
+export { ModuleVersion } from './module-version';
 export { ModuleParameterGroup } from './module-parameter-group';
 export { ModuleName } from './module-name';
 export { ModuleParameterName } from './module-parameter-name';

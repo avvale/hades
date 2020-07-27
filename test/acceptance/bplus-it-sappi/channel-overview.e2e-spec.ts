@@ -68,21 +68,21 @@ describe('channel-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'wajetz9wis452cz05puxdr7dan7nfmna5r6so1swx5j1d1sh8k',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'zc1f8xo6nfa0ofkuj99n',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'c4lt4m6xvrznc37a7tto66tgfigucxaesplmgxa76j59vfb5f2',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'cprn8q1j5otemg8c938b',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 23:52:12',
-                executionMonitoringStartAt: '2020-07-27 00:12:11',
-                executionMonitoringEndAt: '2020-07-26 19:34:15',
-                error: 2300353396,
-                inactive: 3179771629,
-                successful: 2192487845,
-                stopped: 1886124639,
-                unknown: 1071653851,
-                unregistered: 9515685223,
+                executionExecutedAt: '2020-07-27 01:27:37',
+                executionMonitoringStartAt: '2020-07-27 16:33:01',
+                executionMonitoringEndAt: '2020-07-27 07:11:09',
+                error: 1237506874,
+                inactive: 2812589049,
+                successful: 9157659623,
+                stopped: 8756798297,
+                unknown: 4872240088,
+                unregistered: 4684004268,
             })
             .expect(400)
             .then(res => {
@@ -97,21 +97,21 @@ describe('channel-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '9fmbg94snrumo9ye5murjiujziw8f0vx4u1vuea9vb8vgcf4zt',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'atkhpnxrpbzsawe8riss',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 00:34:06',
-                executionMonitoringStartAt: '2020-07-27 08:01:23',
-                executionMonitoringEndAt: '2020-07-27 05:14:06',
-                error: 2890978388,
-                inactive: 3848256550,
-                successful: 9602355608,
-                stopped: 6617083436,
-                unknown: 4313778265,
-                unregistered: 9303564620,
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'hvtn5n3cp9fvptfh452rxxd2w9rbcw3r7lv3wj5zoq7s2n0gtv',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '8rgrq7rnrj6gqlzoudhy',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 12:22:55',
+                executionMonitoringStartAt: '2020-07-27 09:50:04',
+                executionMonitoringEndAt: '2020-07-27 06:55:28',
+                error: 1835806736,
+                inactive: 3270900567,
+                successful: 3646924136,
+                stopped: 8951635983,
+                unknown: 1686145254,
+                unregistered: 3087782994,
             })
             .expect(400)
             .then(res => {
@@ -125,22 +125,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
                 tenantId: null,
-                tenantCode: '9ic4hihjahjuk1l3441kt2m1owbeo8de7fao4dfj9m0eo8jkgy',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '7ojrcwz9jif8kfvhj0ha',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                tenantCode: '7ri2gg65jk5x79jri6roicnrkqhz9y8t4hpv0k67owtspb0d0i',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'alfk41p8yb0y1zfs38v9',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 21:21:40',
-                executionMonitoringStartAt: '2020-07-26 22:43:14',
-                executionMonitoringEndAt: '2020-07-27 07:30:49',
-                error: 7258400870,
-                inactive: 3459491354,
-                successful: 6740120765,
-                stopped: 4659696700,
-                unknown: 8128417856,
-                unregistered: 2622684473,
+                executionExecutedAt: '2020-07-27 14:03:11',
+                executionMonitoringStartAt: '2020-07-27 00:25:48',
+                executionMonitoringEndAt: '2020-07-26 23:01:12',
+                error: 4836866680,
+                inactive: 9529181649,
+                successful: 5594097378,
+                stopped: 9619449815,
+                unknown: 6037595122,
+                unregistered: 8864134529,
             })
             .expect(400)
             .then(res => {
@@ -154,22 +154,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
                 
-                tenantCode: '14l1a7uygzkhb8v09qjzpv8zgbjsebvkgih2vjf8dmvkdns27m',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'ljt9ol5ssflt5pe5czg8',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 12:35:01',
-                executionMonitoringStartAt: '2020-07-27 01:07:15',
-                executionMonitoringEndAt: '2020-07-26 22:30:34',
-                error: 1873887726,
-                inactive: 4996389554,
-                successful: 2244389725,
-                stopped: 4788471341,
-                unknown: 6712805778,
-                unregistered: 2862224448,
+                tenantCode: 'ykc6gb7ofrmbsmw0krhut03p6gh5njcbuab8tqwdl2a84s5l3u',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'jdbjxdyu9v48dtn5krbs',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 07:59:24',
+                executionMonitoringStartAt: '2020-07-27 16:36:57',
+                executionMonitoringEndAt: '2020-07-26 19:45:14',
+                error: 3304167947,
+                inactive: 3201486345,
+                successful: 9647458539,
+                stopped: 6991586495,
+                unknown: 6087079558,
+                unregistered: 5270085618,
             })
             .expect(400)
             .then(res => {
@@ -183,22 +183,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
                 tenantCode: null,
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '3xqp8vab5b9wlibcl932',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'bxcy3mu2d41j0j9gsbvi',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 19:16:03',
-                executionMonitoringStartAt: '2020-07-26 22:24:10',
-                executionMonitoringEndAt: '2020-07-27 02:26:21',
-                error: 3140068628,
-                inactive: 8346519522,
-                successful: 4067088553,
-                stopped: 7856619169,
-                unknown: 8920196787,
-                unregistered: 7895293009,
+                executionExecutedAt: '2020-07-27 02:33:26',
+                executionMonitoringStartAt: '2020-07-27 00:21:39',
+                executionMonitoringEndAt: '2020-07-27 12:04:57',
+                error: 2245071412,
+                inactive: 4761669205,
+                successful: 2765394013,
+                stopped: 2139309554,
+                unknown: 1588651549,
+                unregistered: 6467624786,
             })
             .expect(400)
             .then(res => {
@@ -212,22 +212,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
                 
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '9b0d3k1c8ju5ogtqfmd2',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 't9l72tl1suxtw130gmcp',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 10:08:03',
-                executionMonitoringStartAt: '2020-07-27 13:23:00',
-                executionMonitoringEndAt: '2020-07-27 13:38:19',
-                error: 9021086226,
-                inactive: 7083496889,
-                successful: 7136949913,
-                stopped: 3650729842,
-                unknown: 6456374342,
-                unregistered: 8492629669,
+                executionExecutedAt: '2020-07-27 11:11:34',
+                executionMonitoringStartAt: '2020-07-26 23:20:49',
+                executionMonitoringEndAt: '2020-07-27 02:04:07',
+                error: 9794729150,
+                inactive: 7670663217,
+                successful: 7051445399,
+                stopped: 9454124205,
+                unknown: 7789190951,
+                unregistered: 4285191512,
             })
             .expect(400)
             .then(res => {
@@ -241,22 +241,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'yw68fhd2ii1yu80dpufvugbm85dugifix3eg3jo109v1ig2cxw',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'cmbp1pdp3fvt7c796yxwquo7p5kwbpy3g1ybbca50vc200ltt2',
                 systemId: null,
-                systemName: 'g42x48naa95b1h9w7ldv',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                systemName: 'fyg9z9eecw4zdqmef31u',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 12:36:23',
-                executionMonitoringStartAt: '2020-07-27 07:15:56',
-                executionMonitoringEndAt: '2020-07-26 18:36:02',
-                error: 1899843158,
-                inactive: 9977082201,
-                successful: 8152626287,
-                stopped: 7941630898,
-                unknown: 6289053959,
-                unregistered: 3763735418,
+                executionExecutedAt: '2020-07-27 07:19:15',
+                executionMonitoringStartAt: '2020-07-27 11:52:08',
+                executionMonitoringEndAt: '2020-07-27 02:44:04',
+                error: 2305192502,
+                inactive: 8496998868,
+                successful: 3761182995,
+                stopped: 6507620126,
+                unknown: 5853909266,
+                unregistered: 8186948858,
             })
             .expect(400)
             .then(res => {
@@ -270,22 +270,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'z0todvker4o47h0memuglqdcjz3uolible079lbihr655m9uel',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '7a10a4gw539358clkkkdyxavlz9ti7h0ws8i6yw7daeh30xjqu',
                 
-                systemName: 'zjkz2s04ieaflopgir0c',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                systemName: 'i6xla9vem843xx5d49aq',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 02:39:37',
-                executionMonitoringStartAt: '2020-07-27 12:28:49',
-                executionMonitoringEndAt: '2020-07-26 17:18:54',
-                error: 1929647331,
-                inactive: 5747108814,
-                successful: 7894891159,
-                stopped: 7334933482,
-                unknown: 4334187704,
-                unregistered: 5633340561,
+                executionExecutedAt: '2020-07-26 22:07:21',
+                executionMonitoringStartAt: '2020-07-27 04:06:52',
+                executionMonitoringEndAt: '2020-07-26 21:55:48',
+                error: 9167072861,
+                inactive: 7262659346,
+                successful: 8422620275,
+                stopped: 2254237692,
+                unknown: 3701659038,
+                unregistered: 5557151364,
             })
             .expect(400)
             .then(res => {
@@ -299,22 +299,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '37tpaxbnzp8893fagddmu2fdr3sloob2vm73jcf4kupa3ulbwp',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 've1sva0lt2jt43yz66w7b7oqkuw4s9b3v6m0v5a5gc9y3xra2r',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
                 systemName: null,
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 00:15:28',
-                executionMonitoringStartAt: '2020-07-27 04:58:03',
-                executionMonitoringEndAt: '2020-07-27 15:53:21',
-                error: 2092957645,
-                inactive: 3512620630,
-                successful: 7716540948,
-                stopped: 1429347585,
-                unknown: 3781548364,
-                unregistered: 6960737377,
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 17:25:16',
+                executionMonitoringStartAt: '2020-07-27 15:57:23',
+                executionMonitoringEndAt: '2020-07-27 05:55:53',
+                error: 5307729430,
+                inactive: 1603258016,
+                successful: 4023830433,
+                stopped: 5569282292,
+                unknown: 5435425993,
+                unregistered: 4843936580,
             })
             .expect(400)
             .then(res => {
@@ -328,22 +328,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '83hqldrxt0zlypdcx31fto9ynif14oij9vxfg10sznputpmm1r',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '6m15hpvvknxcescmy0qlkyb9ey2rtcuhzhefti02kheni4ef5s',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
                 
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 00:44:54',
-                executionMonitoringStartAt: '2020-07-26 23:38:51',
-                executionMonitoringEndAt: '2020-07-27 00:08:06',
-                error: 7954652421,
-                inactive: 7090982317,
-                successful: 3415035432,
-                stopped: 7453760065,
-                unknown: 2844544173,
-                unregistered: 2708371556,
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-26 23:51:16',
+                executionMonitoringStartAt: '2020-07-27 08:11:33',
+                executionMonitoringEndAt: '2020-07-27 01:02:02',
+                error: 2060877554,
+                inactive: 9102050538,
+                successful: 5990105526,
+                stopped: 7216774548,
+                unknown: 7623974269,
+                unregistered: 3890766182,
             })
             .expect(400)
             .then(res => {
@@ -357,22 +357,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'ekt8n8fh5marab4nfe9ngt5dn80vhlwhniov7ezj4v146j89ix',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '3yj0s3ugqe70zae2grp4',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'ynyc3yulk44pnkjfe3z6f2m0ag0eerv9dgy2dhfe8ys7ftpri4',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'epv3kt965q1pwg9ao18e',
                 executionId: null,
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 15:02:57',
-                executionMonitoringStartAt: '2020-07-27 10:53:36',
-                executionMonitoringEndAt: '2020-07-27 13:34:53',
-                error: 8496405074,
-                inactive: 9700847659,
-                successful: 9308339625,
-                stopped: 9243848739,
-                unknown: 4574185550,
-                unregistered: 2256396777,
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 11:30:45',
+                executionMonitoringStartAt: '2020-07-26 21:30:40',
+                executionMonitoringEndAt: '2020-07-27 14:33:24',
+                error: 1923089348,
+                inactive: 6488719288,
+                successful: 9821939394,
+                stopped: 2012950693,
+                unknown: 4863321413,
+                unregistered: 9468903847,
             })
             .expect(400)
             .then(res => {
@@ -386,22 +386,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'to75i9dd4jbcg7kskulidvjetxrejpccals94by7nblb4fu3j4',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'q8yo94n5k06gg8xwgwsz',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'bb7vc2e6vdevpq5l90a93sssl70r6ihahd0cdzzp682pwcse89',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '3bkedxs6dufayrqojcfp',
                 
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 14:18:34',
-                executionMonitoringStartAt: '2020-07-27 09:00:01',
-                executionMonitoringEndAt: '2020-07-26 16:42:03',
-                error: 1376621464,
-                inactive: 2751980080,
-                successful: 4033862094,
-                stopped: 9669756305,
-                unknown: 1722438733,
-                unregistered: 3387593709,
+                executionExecutedAt: '2020-07-27 00:18:04',
+                executionMonitoringStartAt: '2020-07-27 08:37:32',
+                executionMonitoringEndAt: '2020-07-27 17:30:28',
+                error: 6939799287,
+                inactive: 6549937779,
+                successful: 2985371168,
+                stopped: 3195317921,
+                unknown: 3488950762,
+                unregistered: 3415355218,
             })
             .expect(400)
             .then(res => {
@@ -415,22 +415,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'i01jtk1ezprg30emhu8832wd1ccugem1lqmj380khjub6qyv2k',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'k3jv2hgkf2cdeoeu6hz8',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '6p50j6cc5yypfinkjh9l1fzy8g85qks98os3g8p80vrkudjtf0',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'igu4ygxlhtch8tn4nlra',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: null,
-                executionExecutedAt: '2020-07-27 14:42:26',
-                executionMonitoringStartAt: '2020-07-27 09:30:26',
-                executionMonitoringEndAt: '2020-07-27 04:11:47',
-                error: 1247792461,
-                inactive: 9628322749,
-                successful: 8001869305,
-                stopped: 5584345482,
-                unknown: 1683309200,
-                unregistered: 8557940665,
+                executionExecutedAt: '2020-07-27 16:42:57',
+                executionMonitoringStartAt: '2020-07-27 07:33:32',
+                executionMonitoringEndAt: '2020-07-27 00:49:29',
+                error: 8481894200,
+                inactive: 1113456986,
+                successful: 3658001124,
+                stopped: 2838416623,
+                unknown: 6210457002,
+                unregistered: 2767520563,
             })
             .expect(400)
             .then(res => {
@@ -444,22 +444,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'nirn7yh6d8n4n10etypdkd9zmolgobnmuy0yuk6mevkil0khar',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'uv7zcjk3744vtdj3aj1g',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '4tl7o0t7vpngxnjgltytje0eavdzegm8lgerlhwszvi8ce9vkj',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'u7zktyv1blmfqcsye8i6',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 
-                executionExecutedAt: '2020-07-27 02:24:31',
-                executionMonitoringStartAt: '2020-07-27 13:33:29',
-                executionMonitoringEndAt: '2020-07-26 22:16:01',
-                error: 7739066755,
-                inactive: 9634326519,
-                successful: 7657815658,
-                stopped: 3350732011,
-                unknown: 6071372143,
-                unregistered: 7237996758,
+                executionExecutedAt: '2020-07-27 06:43:10',
+                executionMonitoringStartAt: '2020-07-27 01:25:32',
+                executionMonitoringEndAt: '2020-07-27 02:23:53',
+                error: 5354157423,
+                inactive: 7216368051,
+                successful: 7708568947,
+                stopped: 5083518897,
+                unknown: 9628970293,
+                unregistered: 1922380145,
             })
             .expect(400)
             .then(res => {
@@ -473,22 +473,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '1fkcxsetshyapuwdo8f42fcfny6lant0it59tqyjyodxa6qv94',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'z141wpxhsnuf14izli1r',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'qoh777sgo14uxhqsuu8o181htnfh9gbgzidjkrtn5lnb3nio3m',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'ndv6cey419ugx1qd3tmn',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
                 executionExecutedAt: null,
-                executionMonitoringStartAt: '2020-07-27 06:08:52',
-                executionMonitoringEndAt: '2020-07-27 05:55:45',
-                error: 6341441918,
-                inactive: 3249050534,
-                successful: 3481697724,
-                stopped: 6264648357,
-                unknown: 3737214277,
-                unregistered: 3888322388,
+                executionMonitoringStartAt: '2020-07-27 14:15:30',
+                executionMonitoringEndAt: '2020-07-27 10:37:14',
+                error: 7886492093,
+                inactive: 7027744312,
+                successful: 8073497615,
+                stopped: 6137720877,
+                unknown: 5028150255,
+                unregistered: 7256401220,
             })
             .expect(400)
             .then(res => {
@@ -502,22 +502,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'df2rewzy6d2pqmp0ip60mionji9nsoc75m497ctzuyshntwc41',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'nyxpk3jq55y0f5pevofz',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '4tr31qyn7kfg2d7ijxvbte87u4f8cnufir0wgnh7x1m2hby88y',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'vnlegougmi05denb38vu',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
                 
-                executionMonitoringStartAt: '2020-07-26 20:09:41',
-                executionMonitoringEndAt: '2020-07-27 06:09:50',
-                error: 3989078519,
-                inactive: 2880436362,
-                successful: 6001260802,
-                stopped: 5545286662,
-                unknown: 1363757990,
-                unregistered: 7131102957,
+                executionMonitoringStartAt: '2020-07-26 23:48:41',
+                executionMonitoringEndAt: '2020-07-27 04:18:25',
+                error: 7737555568,
+                inactive: 9819456103,
+                successful: 6972815909,
+                stopped: 9773403406,
+                unknown: 6271709912,
+                unregistered: 8001897695,
             })
             .expect(400)
             .then(res => {
@@ -531,22 +531,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '07msfrsyma5r6p4et750u2gdxvu0d279t8iycttr5jep5ughbh',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'mzdqpeiku9lvqu1pvkfh',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'cp01ay3kp0yros21us9n18e5ytgk2t1g8ti8ilmbixuqp18tzs',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'uped8rrzhxks3ugtkac8',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-26 18:14:16',
+                executionExecutedAt: '2020-07-26 21:02:56',
                 executionMonitoringStartAt: null,
-                executionMonitoringEndAt: '2020-07-27 09:46:32',
-                error: 2151493286,
-                inactive: 4622572517,
-                successful: 1701333637,
-                stopped: 4463727568,
-                unknown: 5087044976,
-                unregistered: 7868427933,
+                executionMonitoringEndAt: '2020-07-27 02:10:22',
+                error: 9596429329,
+                inactive: 2828458773,
+                successful: 5910693722,
+                stopped: 6542668127,
+                unknown: 6665801458,
+                unregistered: 7529610953,
             })
             .expect(400)
             .then(res => {
@@ -560,22 +560,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'uwrsswfe2c2ilm06imfpse6oy3nhvl1ydxx78q7kc8hqwtfjrp',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '17mrxhe69o6bjn94n4c2',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'px2wypbchzadjc6jwbc1x084lgra8pgl00le7s866tssbm8a3p',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '3f4ywdzt9vyf4aglcejq',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 04:02:28',
+                executionExecutedAt: '2020-07-27 11:11:42',
                 
-                executionMonitoringEndAt: '2020-07-27 09:28:00',
-                error: 6512784798,
-                inactive: 5511215432,
-                successful: 9602031965,
-                stopped: 4581420731,
-                unknown: 4178036587,
-                unregistered: 8726717714,
+                executionMonitoringEndAt: '2020-07-27 03:43:42',
+                error: 6651603889,
+                inactive: 6568606872,
+                successful: 4915937527,
+                stopped: 5289799080,
+                unknown: 7238417597,
+                unregistered: 3246598911,
             })
             .expect(400)
             .then(res => {
@@ -589,22 +589,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'bjywp5uskwvhh788q40beah6jba3j5t8erfm9o1ekegn38u4ne',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'mwnyyzs23a8he6yoi9z1',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '5hwn5nh14pf4o953ywj26wsysfbzp7mds4wure1xjxqgo7cey2',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '14iajk1ftq8u3p68up3y',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 10:07:05',
-                executionMonitoringStartAt: '2020-07-26 21:20:20',
+                executionExecutedAt: '2020-07-27 00:59:00',
+                executionMonitoringStartAt: '2020-07-27 08:16:01',
                 executionMonitoringEndAt: null,
-                error: 2493801848,
-                inactive: 7765827830,
-                successful: 8596740336,
-                stopped: 5734288404,
-                unknown: 1952660852,
-                unregistered: 5125244878,
+                error: 1822647661,
+                inactive: 6376472777,
+                successful: 4839023109,
+                stopped: 2072723659,
+                unknown: 1443523105,
+                unregistered: 5659871017,
             })
             .expect(400)
             .then(res => {
@@ -618,22 +618,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'czgju5bckzky7x962d97yqongdis9u9pd8pv0n80l9bh9vvc1m',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'ju47rj7y55abmffzsp2o',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 05:54:29',
-                executionMonitoringStartAt: '2020-07-27 10:52:44',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '2n8mj6srxd9m9x6j0vq64zc55rkitash834qqwiiaotpxxxont',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '5sdxb63fz7agtzbmb33i',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 09:17:59',
+                executionMonitoringStartAt: '2020-07-27 04:01:12',
                 
-                error: 8409650196,
-                inactive: 1291017613,
-                successful: 7184119835,
-                stopped: 7984978009,
-                unknown: 8004476920,
-                unregistered: 8116420647,
+                error: 1028497525,
+                inactive: 8547843615,
+                successful: 5417561416,
+                stopped: 3141911905,
+                unknown: 9033310035,
+                unregistered: 9227119537,
             })
             .expect(400)
             .then(res => {
@@ -649,22 +649,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'mdvfmcg65n4txe1kffmyfzyr0x45v7h6u34wi',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'wjvywe8ho5keq3dpz6nzwi6i54s8fxhxo3dxnomvarpyfqr0jm',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '9hgra9kxlhtgem481kkb',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: '62kuo9xub58wb0hev00sg6o6btjbfw5y35lpe',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'l3ufrnp3eop6kifddwiib7mz9vfgeupoj3ti524leqr8zehzqr',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '2cl6bhs13qcvkqj5me6n',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 05:59:21',
-                executionMonitoringStartAt: '2020-07-26 16:59:28',
-                executionMonitoringEndAt: '2020-07-26 19:03:38',
-                error: 3538666839,
-                inactive: 5070926068,
-                successful: 4104085505,
-                stopped: 6717070081,
-                unknown: 7973347798,
-                unregistered: 4542286157,
+                executionExecutedAt: '2020-07-26 22:55:00',
+                executionMonitoringStartAt: '2020-07-27 06:50:39',
+                executionMonitoringEndAt: '2020-07-27 16:20:20',
+                error: 7831069941,
+                inactive: 6247326466,
+                successful: 6494596141,
+                stopped: 8358000827,
+                unknown: 6211742238,
+                unregistered: 3270117665,
             })
             .expect(400)
             .then(res => {
@@ -678,22 +678,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: 'ii7bye07eu4jsfq7ajf28yixs8abmjeh1vpa2',
-                tenantCode: 'niv15dajlyteluyh5xvukq090upk05sc25x5qagwgne0oriq1j',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '5vnwjvrbbo05sthrr9ds',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 01:45:33',
-                executionMonitoringStartAt: '2020-07-27 00:36:04',
-                executionMonitoringEndAt: '2020-07-27 01:11:48',
-                error: 5676302826,
-                inactive: 6852166584,
-                successful: 1610445232,
-                stopped: 8526881863,
-                unknown: 4579712237,
-                unregistered: 5231978435,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'uv8dtc02aj8wuxr1qpqr1xhqlninj3g9rpnwa',
+                tenantCode: 'd6rhdwiihcauiki9woldqm4qc9ty9xabaapuq47c9umftuky7z',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '1quaxvhimd80zi1mhwwd',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 00:41:41',
+                executionMonitoringStartAt: '2020-07-27 05:13:26',
+                executionMonitoringEndAt: '2020-07-27 16:33:01',
+                error: 4918219557,
+                inactive: 5054962283,
+                successful: 9084323857,
+                stopped: 8851712298,
+                unknown: 5994445604,
+                unregistered: 7887959498,
             })
             .expect(400)
             .then(res => {
@@ -707,22 +707,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '34kxma1a6ju9u23cu28aejrdi5jciwzhymne6zgkj45pnjz2iu',
-                systemId: 'pwwu96674ifnrdc89t3plards4kovgu8kmk46',
-                systemName: 'ighj69doocxj9mf8li9o',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 15:27:17',
-                executionMonitoringStartAt: '2020-07-26 23:11:01',
-                executionMonitoringEndAt: '2020-07-26 23:08:38',
-                error: 1870024981,
-                inactive: 4220467294,
-                successful: 2723044039,
-                stopped: 3160223614,
-                unknown: 8386659719,
-                unregistered: 1508474054,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'u2kfc83o2zye3ryjwel7ph9ybnjjf75u7v1m925m9o1wrl0qne',
+                systemId: 'o0zlpc8or5tlzpjq0dcr1lpifimwthxuqwytb',
+                systemName: 'lh7unben2hfcqwkrt7gk',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-26 20:24:36',
+                executionMonitoringStartAt: '2020-07-27 15:24:01',
+                executionMonitoringEndAt: '2020-07-27 11:20:33',
+                error: 9372528252,
+                inactive: 3143297962,
+                successful: 4475896857,
+                stopped: 2827098710,
+                unknown: 5995535832,
+                unregistered: 4803211717,
             })
             .expect(400)
             .then(res => {
@@ -736,22 +736,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'qy000voube9gh6kkguq3w7zgmo5byc5lg6gqale0cd0ydlb74j',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'vu2b3orwsgzaa5xpuvgu',
-                executionId: 'mbay0tdorr1z9j4j4mbt0gjncjegenb020ory',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 03:39:27',
-                executionMonitoringStartAt: '2020-07-27 12:04:50',
-                executionMonitoringEndAt: '2020-07-27 01:03:46',
-                error: 7358273761,
-                inactive: 4402720569,
-                successful: 8663629113,
-                stopped: 7968029793,
-                unknown: 3049508252,
-                unregistered: 8763102668,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '7cquwzkp6rqojjuwmzhdotci4gdh6gc2npjkwyn5pffm9gn2ok',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'asz48gvov39051kp9i2v',
+                executionId: 'pqebrx2x41lsd5bw1tdvfjiep9oeuwsp3c4to',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 05:29:11',
+                executionMonitoringStartAt: '2020-07-27 12:33:19',
+                executionMonitoringEndAt: '2020-07-26 20:10:17',
+                error: 6918777969,
+                inactive: 8450689854,
+                successful: 9326267280,
+                stopped: 8540936136,
+                unknown: 7780390477,
+                unregistered: 3111416876,
             })
             .expect(400)
             .then(res => {
@@ -767,22 +767,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'ujo3dzxi4r2woo0dgmmsy7byud5yoe6aqwj7fc5sxg3q1g9p2vl',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'yzyoz5br8fc1080wnkyl',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'ikaxowitsvnciiwpovwojc7ibjqqm9ifggbg4utyoznnniielbx',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'pfyei66zwuulsgsx69s7',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 08:28:35',
-                executionMonitoringStartAt: '2020-07-27 02:27:56',
-                executionMonitoringEndAt: '2020-07-27 07:28:50',
-                error: 7798906936,
-                inactive: 6687055374,
-                successful: 5221352919,
-                stopped: 1423558177,
-                unknown: 5138874895,
-                unregistered: 3762703411,
+                executionExecutedAt: '2020-07-27 07:10:52',
+                executionMonitoringStartAt: '2020-07-26 23:16:22',
+                executionMonitoringEndAt: '2020-07-27 16:31:01',
+                error: 8532114181,
+                inactive: 2728168587,
+                successful: 2501010087,
+                stopped: 8620013935,
+                unknown: 6015808627,
+                unregistered: 1560486574,
             })
             .expect(400)
             .then(res => {
@@ -796,22 +796,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'ws0f97xukkwyl5k1m5l4a91w5mc8q7lxk5qcmkd0mwg1odyriw',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '05sfr31osolppeyu7n4ob',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'bfjugg8zeq0kv3vjz6hinuq8xubepgog3cxicw949hqkakn6d3',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'e5hquo42w4wfawwckyjl4',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 06:48:03',
-                executionMonitoringStartAt: '2020-07-27 00:54:03',
-                executionMonitoringEndAt: '2020-07-26 17:36:00',
-                error: 5193130667,
-                inactive: 7969978889,
-                successful: 5435045275,
-                stopped: 1937492814,
-                unknown: 4692600426,
-                unregistered: 7463007677,
+                executionExecutedAt: '2020-07-27 06:22:21',
+                executionMonitoringStartAt: '2020-07-26 20:02:19',
+                executionMonitoringEndAt: '2020-07-27 07:01:59',
+                error: 6201043057,
+                inactive: 7010142856,
+                successful: 3550566672,
+                stopped: 4783749919,
+                unknown: 5499974639,
+                unregistered: 7196339102,
             })
             .expect(400)
             .then(res => {
@@ -825,22 +825,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '3du7rtoc4gxi08nmysf1zg4u7kn5aa4zk8753137cw1hr0d0je',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '4rp8q1xtdqd9ivb7v3kr',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 05:01:34',
-                executionMonitoringStartAt: '2020-07-26 23:51:32',
-                executionMonitoringEndAt: '2020-07-27 02:09:57',
-                error: 62706039604,
-                inactive: 3226770333,
-                successful: 5962313221,
-                stopped: 1165941527,
-                unknown: 2071005623,
-                unregistered: 9664713063,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '6g12twqfuydpayzh63v4mhnsxhza1x3rilmsu8s6z8r0qmck1x',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'vvz72z38zcke577723y4',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 04:46:19',
+                executionMonitoringStartAt: '2020-07-27 01:48:46',
+                executionMonitoringEndAt: '2020-07-27 07:43:13',
+                error: 65273856969,
+                inactive: 1472780859,
+                successful: 8568499981,
+                stopped: 6070254039,
+                unknown: 1239087022,
+                unregistered: 7392408041,
             })
             .expect(400)
             .then(res => {
@@ -854,22 +854,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 't24syuefhf26a2wu19kq6ceh6k7k37s6t0bbmnx7z1m87kxe1r',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'abwdn3dg6unamxekkwvh',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 06:53:36',
-                executionMonitoringStartAt: '2020-07-27 11:29:43',
-                executionMonitoringEndAt: '2020-07-27 00:21:32',
-                error: 5112197864,
-                inactive: 28834759125,
-                successful: 5827449207,
-                stopped: 3090825411,
-                unknown: 8671125729,
-                unregistered: 2210681302,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '8excst62xmsg2z511cbhrgv2j8dlhlpy760r2q9bx2diho3drx',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '268entq7rdlsm4u3tnj6',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 04:56:49',
+                executionMonitoringStartAt: '2020-07-27 03:43:06',
+                executionMonitoringEndAt: '2020-07-26 19:16:55',
+                error: 2838764225,
+                inactive: 30695187841,
+                successful: 4739249771,
+                stopped: 6107610203,
+                unknown: 5843871478,
+                unregistered: 8861522197,
             })
             .expect(400)
             .then(res => {
@@ -883,22 +883,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'qg88wddz7106bogci76rl1fa7csgpbrrdpng90h2r2jrompgvn',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'a25zf4x9fqvuortzsrvf',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 21:11:21',
-                executionMonitoringStartAt: '2020-07-27 00:49:00',
-                executionMonitoringEndAt: '2020-07-27 04:08:17',
-                error: 1360286254,
-                inactive: 5229718482,
-                successful: 59190640181,
-                stopped: 8676302132,
-                unknown: 5047310855,
-                unregistered: 8140719945,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'ojuj49gs2lbo9nhb3g8823imtujvsj3scayir7xibnuf7nfj4j',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'u5w4f234wqmd2wtntlrh',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 08:35:13',
+                executionMonitoringStartAt: '2020-07-27 00:19:49',
+                executionMonitoringEndAt: '2020-07-26 20:38:28',
+                error: 2437251688,
+                inactive: 4291794971,
+                successful: 10296206633,
+                stopped: 1750346128,
+                unknown: 8014018223,
+                unregistered: 9977273297,
             })
             .expect(400)
             .then(res => {
@@ -912,22 +912,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '86zfy2cnfyuu6oyo7nxzxi8cs85y713aw7bwddn7bv7omrasbf',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'm6xtr3xeezqs80ym3mt9',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 12:23:17',
-                executionMonitoringStartAt: '2020-07-27 13:10:26',
-                executionMonitoringEndAt: '2020-07-27 11:24:27',
-                error: 1482545385,
-                inactive: 6245201639,
-                successful: 6871872929,
-                stopped: 83596220009,
-                unknown: 1487625043,
-                unregistered: 9323145830,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'i3cemakbw70y07nknhexm4sqv0mxrs6ymupquvo24hhsyye21k',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'n2ak7lmn0npzl1ljyhhm',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 08:48:25',
+                executionMonitoringStartAt: '2020-07-27 06:19:27',
+                executionMonitoringEndAt: '2020-07-26 23:34:19',
+                error: 1650365359,
+                inactive: 6977048639,
+                successful: 1270309536,
+                stopped: 47876629785,
+                unknown: 6271291707,
+                unregistered: 6839393628,
             })
             .expect(400)
             .then(res => {
@@ -941,22 +941,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '0nsp9ffjufk0hzsl367b16mro4bknzibxyy5udykicdlmhx1u4',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'vwqbmy7ebxf5rbjr6fs9',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'dt4l4nzd0lmbkze82aft0ngrg3jdkjfhpjsnv3t5437xsjbp18',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'a9dtpi63t5zuloa1oj4q',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 21:42:35',
-                executionMonitoringStartAt: '2020-07-27 13:58:58',
-                executionMonitoringEndAt: '2020-07-27 06:56:53',
-                error: 6741074006,
-                inactive: 5298442410,
-                successful: 5084300170,
-                stopped: 4877767608,
-                unknown: 70106401692,
-                unregistered: 7079461615,
+                executionExecutedAt: '2020-07-26 19:42:07',
+                executionMonitoringStartAt: '2020-07-27 05:14:36',
+                executionMonitoringEndAt: '2020-07-27 01:22:20',
+                error: 4768367577,
+                inactive: 3199156470,
+                successful: 3872786419,
+                stopped: 2764183672,
+                unknown: 17128286616,
+                unregistered: 3329933266,
             })
             .expect(400)
             .then(res => {
@@ -970,22 +970,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '6vrk0kv3rer8qjizwvxg8a6q4nxg75i0rd3utl60j8wp94bonl',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'wb1i06llhbexj7w02q9f',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'va5rnmsuaimtw2ua3s08pi1tuix80ivf4q1wn52o26v0m55iwz',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '2xdg2hgltorqsauoc30b',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 14:20:54',
-                executionMonitoringStartAt: '2020-07-26 21:24:34',
-                executionMonitoringEndAt: '2020-07-27 14:23:20',
-                error: 9154407246,
-                inactive: 1395295418,
-                successful: 1649438971,
-                stopped: 8384068625,
-                unknown: 5718852456,
-                unregistered: 59415021681,
+                executionExecutedAt: '2020-07-27 11:51:25',
+                executionMonitoringStartAt: '2020-07-27 12:08:58',
+                executionMonitoringEndAt: '2020-07-26 19:54:19',
+                error: 7548169761,
+                inactive: 8543214439,
+                successful: 1428422142,
+                stopped: 6462306060,
+                unknown: 5041142591,
+                unregistered: 74294968069,
             })
             .expect(400)
             .then(res => {
@@ -1005,22 +1005,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'astf5db3gxsof4yt07dimlte1wbw24acug5ad8ygqxig353dkq',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '8idtyrfas1nc2a9owbfm',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: '85us6ed0ssecijshrg51ivkt58u86ljfw8nhihhqb005xkr3tf',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '9bihims0gy7cfdziieax',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 03:47:47',
-                executionMonitoringStartAt: '2020-07-27 13:09:58',
-                executionMonitoringEndAt: '2020-07-26 22:22:22',
+                executionExecutedAt: '2020-07-27 18:01:02',
+                executionMonitoringStartAt: '2020-07-27 17:37:18',
+                executionMonitoringEndAt: '2020-07-27 07:31:55',
                 error: -9,
-                inactive: 2883565996,
-                successful: 9454039785,
-                stopped: 2861492690,
-                unknown: 1216029148,
-                unregistered: 4838376685,
+                inactive: 1621866202,
+                successful: 4362926077,
+                stopped: 6857582828,
+                unknown: 9567269607,
+                unregistered: 9843669788,
             })
             .expect(400)
             .then(res => {
@@ -1034,22 +1034,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'p9i57xbujqu08ls57yoq5a8jpm4d2kwaucb4c8jprk1dg7yn63',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'nyiev1d9xo045j7p0wfc',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'k9ehhll9umey6w75f2lrakrpcyk1cn5ac0p7rt40v2yyz2pfgl',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '4k1q868g982nam9ltpl7',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 03:34:27',
-                executionMonitoringStartAt: '2020-07-26 19:18:24',
-                executionMonitoringEndAt: '2020-07-27 02:12:23',
-                error: 5647563638,
+                executionExecutedAt: '2020-07-27 10:20:31',
+                executionMonitoringStartAt: '2020-07-26 23:23:10',
+                executionMonitoringEndAt: '2020-07-27 10:28:21',
+                error: 9269273080,
                 inactive: -9,
-                successful: 9179740437,
-                stopped: 4273509709,
-                unknown: 6818874427,
-                unregistered: 4052705422,
+                successful: 7066727550,
+                stopped: 9663947850,
+                unknown: 2775210819,
+                unregistered: 2178957351,
             })
             .expect(400)
             .then(res => {
@@ -1063,22 +1063,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'v4hcozt8fia0d5as15uijzmvgqh162810rh6otuck5g1no13u3',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'irqzji6yzpat1ooe32dw',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 09:36:04',
-                executionMonitoringStartAt: '2020-07-26 18:44:20',
-                executionMonitoringEndAt: '2020-07-26 16:41:50',
-                error: 8960855143,
-                inactive: 5990947472,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'fbkh3ybu1ygasyk9vr8nxn1ptazrfu6xxf0g2iu9ydu3bo6v5h',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'xph50t311imkcybrx5fz',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 00:45:37',
+                executionMonitoringStartAt: '2020-07-27 07:39:05',
+                executionMonitoringEndAt: '2020-07-27 03:21:08',
+                error: 6512058053,
+                inactive: 4056621483,
                 successful: -9,
-                stopped: 7377775752,
-                unknown: 6042703922,
-                unregistered: 7341251254,
+                stopped: 2527132740,
+                unknown: 6006766864,
+                unregistered: 4750599181,
             })
             .expect(400)
             .then(res => {
@@ -1092,22 +1092,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'f986wxyibsosgei9vqc3chb9h2mmrrucm9ob521eh3b1p1llq9',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'tk0l4zc779yxqhawkt0c',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 06:19:36',
-                executionMonitoringStartAt: '2020-07-27 11:24:38',
-                executionMonitoringEndAt: '2020-07-26 22:07:47',
-                error: 5947776196,
-                inactive: 5172782848,
-                successful: 3055788489,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'c9d6k2i3vsvfjhvywllxpk3uxt9hse16vszizhi7pnupr85pc3',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'glvuuj1jrh8ukntr2w70',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 09:26:17',
+                executionMonitoringStartAt: '2020-07-27 18:17:55',
+                executionMonitoringEndAt: '2020-07-27 00:44:24',
+                error: 2220439800,
+                inactive: 2737151608,
+                successful: 8795111805,
                 stopped: -9,
-                unknown: 6800947453,
-                unregistered: 1781927803,
+                unknown: 7854953959,
+                unregistered: 9479429290,
             })
             .expect(400)
             .then(res => {
@@ -1121,22 +1121,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'fbyhfwfji88qwvsa8q0deun3y3yt0m2zn30kvqze8yzil20csj',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'izdqjsal5m88hxd4i8va',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'w0k6u63rr3aoltlmal73ud0xpizen3runxi6l19rwfazm2h00w',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'dmloxk20nf8jvphekxa8',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 07:59:08',
-                executionMonitoringStartAt: '2020-07-27 11:34:04',
-                executionMonitoringEndAt: '2020-07-27 16:00:32',
-                error: 2627754960,
-                inactive: 8716284907,
-                successful: 7960249986,
-                stopped: 8720619312,
+                executionExecutedAt: '2020-07-27 11:23:42',
+                executionMonitoringStartAt: '2020-07-26 23:42:47',
+                executionMonitoringEndAt: '2020-07-27 16:56:26',
+                error: 5784089456,
+                inactive: 4713916533,
+                successful: 3229942302,
+                stopped: 7664206775,
                 unknown: -9,
-                unregistered: 2916010428,
+                unregistered: 3804382349,
             })
             .expect(400)
             .then(res => {
@@ -1150,21 +1150,21 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'd1zdzqy6gxujjbssnt0kx5j1tem3su65jmto81dh5u45eyzr74',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'vgf2s7pi22afzehpd05v',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 18:43:51',
-                executionMonitoringStartAt: '2020-07-26 16:49:46',
-                executionMonitoringEndAt: '2020-07-27 14:32:18',
-                error: 8222445873,
-                inactive: 1004344145,
-                successful: 9660620341,
-                stopped: 8612065392,
-                unknown: 6286478100,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'xwdtdc0tg25b9a210i1dq2f3yfumzeueo1dlqsmwg5avtji5lz',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'bkxqpp58n18zzxam7qga',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 00:47:26',
+                executionMonitoringStartAt: '2020-07-27 01:20:23',
+                executionMonitoringEndAt: '2020-07-27 10:28:51',
+                error: 3654630925,
+                inactive: 8486212124,
+                successful: 7649980569,
+                stopped: 2374767633,
+                unknown: 1348797225,
                 unregistered: -9,
             })
             .expect(400)
@@ -1183,22 +1183,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'kq8ih3gr1borvs0ndvsguqd0tn8xk07ls2mk620m2j8fvkokcc',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: '763cn9m9du7rfjdzhtge',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'k20676wpfm43rlx6qp5hi9z5yoe9nhvttndrjvzt3zpco3zqes',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'ss7ty7oauajxq9km8v43',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'XXXX',
-                executionExecutedAt: '2020-07-27 12:16:48',
-                executionMonitoringStartAt: '2020-07-26 23:10:56',
-                executionMonitoringEndAt: '2020-07-26 18:16:01',
-                error: 2254184227,
-                inactive: 1378054943,
-                successful: 5220139725,
-                stopped: 9782436953,
-                unknown: 2487051729,
-                unregistered: 5828194402,
+                executionExecutedAt: '2020-07-27 04:35:52',
+                executionMonitoringStartAt: '2020-07-27 05:46:13',
+                executionMonitoringEndAt: '2020-07-27 03:38:09',
+                error: 6073389495,
+                inactive: 3527529098,
+                successful: 7911176166,
+                stopped: 6426651821,
+                unknown: 1133728894,
+                unregistered: 6696102392,
             })
             .expect(400)
             .then(res => {
@@ -1214,22 +1214,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'f7jgfrsfq75jc8znzqijkbrwahgpqyxsf72pyr4q84cte6pjmc',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'h2cazxdu94bq1m9cv6sf',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'DETAIL',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'v9x818cyqb2c3umuemseho70pzfnl5sxp9fpusifhirp6w1vai',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'rfxlusrefgtztb2z13a7',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'SUMMARY',
                 executionExecutedAt: 'XXXXXXXX',
-                executionMonitoringStartAt: '2020-07-27 00:19:31',
-                executionMonitoringEndAt: '2020-07-27 09:18:02',
-                error: 8378331973,
-                inactive: 3686719928,
-                successful: 8624203019,
-                stopped: 7280145804,
-                unknown: 6339364041,
-                unregistered: 2454662794,
+                executionMonitoringStartAt: '2020-07-27 03:36:44',
+                executionMonitoringEndAt: '2020-07-27 12:27:56',
+                error: 7841424120,
+                inactive: 5771323182,
+                successful: 3995802231,
+                stopped: 7466469474,
+                unknown: 9029118685,
+                unregistered: 5086721781,
             })
             .expect(400)
             .then(res => {
@@ -1243,22 +1243,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'h00y16faclym5mmfl01y90ouxpodwi9d55twneid3rfxf4jgo3',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'ldka48mmwxbiow5pop9r',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'mt6amx3gn7q7tv7akdl43q3bgikctd1scyrgmuvhud72kycgvt',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '6v228qe8nisz71l9u28g',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 18:33:42',
+                executionExecutedAt: '2020-07-27 06:58:51',
                 executionMonitoringStartAt: 'XXXXXXXX',
-                executionMonitoringEndAt: '2020-07-27 09:44:46',
-                error: 2473893936,
-                inactive: 2167656440,
-                successful: 9717565533,
-                stopped: 5910948072,
-                unknown: 9781991683,
-                unregistered: 6737113995,
+                executionMonitoringEndAt: '2020-07-27 12:02:26',
+                error: 7142215277,
+                inactive: 1667058724,
+                successful: 6631279706,
+                stopped: 8781940689,
+                unknown: 6712022524,
+                unregistered: 2828962164,
             })
             .expect(400)
             .then(res => {
@@ -1272,22 +1272,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: 'xh8o3uwynbj2w054aw5psfz7yecm0qy2v3gl6n7yhylkw5xpy6',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'l3ekg69ep8fbl9u5ov2s',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'lsn5e8tkjyyeiwz6ja6yypg1bt3we90xlv57feuqixds9b56s3',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: '003o6l8j9cd2go07iq12',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 06:33:04',
-                executionMonitoringStartAt: '2020-07-27 03:57:16',
+                executionExecutedAt: '2020-07-26 19:34:27',
+                executionMonitoringStartAt: '2020-07-27 12:18:09',
                 executionMonitoringEndAt: 'XXXXXXXX',
-                error: 4617657824,
-                inactive: 6032685798,
-                successful: 1203807031,
-                stopped: 7201892978,
-                unknown: 1522579859,
-                unregistered: 4703057597,
+                error: 2283048159,
+                inactive: 9716884199,
+                successful: 7289151838,
+                stopped: 6365312670,
+                unknown: 7271552484,
+                unregistered: 8012435835,
             })
             .expect(400)
             .then(res => {
@@ -1302,22 +1302,22 @@ describe('channel-overview', () =>
             .post('/bplus-it-sappi/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '01xm3vodq3utqarbni27sdiq5pf20v4vm3omxwhdepja41t54l',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'gmz3gw0crygzirr5waew',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 14:29:11',
-                executionMonitoringStartAt: '2020-07-27 07:47:06',
-                executionMonitoringEndAt: '2020-07-26 19:34:36',
-                error: 5808049706,
-                inactive: 9224790414,
-                successful: 4792186544,
-                stopped: 5360749356,
-                unknown: 6729442759,
-                unregistered: 2773381032,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'e479j7p3lfc1bygg8dt552tyxc1uyrej9ug825kttgfm936ok7',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'rx1hd4m6ybnfi940hvfw',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 06:36:22',
+                executionMonitoringStartAt: '2020-07-27 09:03:18',
+                executionMonitoringEndAt: '2020-07-27 01:05:48',
+                error: 9607399198,
+                inactive: 5073914532,
+                successful: 7272185072,
+                stopped: 4944769531,
+                unknown: 8423746301,
+                unregistered: 8256034594,
             })
             .expect(201);
     });
@@ -1376,12 +1376,12 @@ describe('channel-overview', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '15dbe3d6-e1cd-4391-b444-f1eef640ee86'
+                        value   : 'a4f45071-c1b0-4e25-b695-e467d2c2e859'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '15dbe3d6-e1cd-4391-b444-f1eef640ee86'));
+            .expect(repository.collectionResponse.find(item => item.id === 'a4f45071-c1b0-4e25-b695-e467d2c2e859'));
     });
 
     test(`/REST:GET bplus-it-sappi/channel-overview/{id} - Got 404 Not Found`, () => 
@@ -1395,10 +1395,10 @@ describe('channel-overview', () =>
     test(`/REST:GET bplus-it-sappi/channel-overview/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/channel-overview/15dbe3d6-e1cd-4391-b444-f1eef640ee86')
+            .get('/bplus-it-sappi/channel-overview/a4f45071-c1b0-4e25-b695-e467d2c2e859')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '15dbe3d6-e1cd-4391-b444-f1eef640ee86'));
+            .expect(repository.collectionResponse.find(e => e.id === 'a4f45071-c1b0-4e25-b695-e467d2c2e859'));
     });
 
     test(`/REST:GET bplus-it-sappi/channels-overview`, () => 
@@ -1417,22 +1417,22 @@ describe('channel-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'fdef5928-dab1-454f-b3a9-828f302f3de7',
-                tenantId: 'fe9f6db0-bbf9-451b-b35b-52fd23d572ab',
-                tenantCode: 'n12e9erhefbqe080wesnmqeahk0p48g36xsut3c2yqlgujrz4r',
-                systemId: '190a542f-3ae3-4a53-9923-018b57e9818f',
-                systemName: 'ytiho36mzqv2d4bc3wri',
-                executionId: '59000eb9-602b-4f73-998a-43ccfe1a1cdb',
+                id: '4a1e3502-53bc-417a-8ebc-3cd27fe48a47',
+                tenantId: '81b83863-2bb5-41d1-9ffa-ec2aebd3854a',
+                tenantCode: '1e9fju5waf4k6gertdphxa5eu75kotxmgzw4lriiu9zg1r7wew',
+                systemId: 'afac1a60-3ecf-48fb-8d8b-cd0ea65f533c',
+                systemName: 'olguraej2xin3j14fyw0',
+                executionId: '0d559f9f-cc3d-46e9-bf77-c11bc4fbbb4a',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 02:36:59',
-                executionMonitoringStartAt: '2020-07-26 23:59:09',
-                executionMonitoringEndAt: '2020-07-27 08:49:47',
-                error: 1627459798,
-                inactive: 5597792856,
-                successful: 7151527545,
-                stopped: 8850655145,
-                unknown: 6252756481,
-                unregistered: 5540479676,
+                executionExecutedAt: '2020-07-27 13:54:47',
+                executionMonitoringStartAt: '2020-07-27 02:49:36',
+                executionMonitoringEndAt: '2020-07-27 11:35:01',
+                error: 8935892252,
+                inactive: 9311200929,
+                successful: 1821895472,
+                stopped: 2491563363,
+                unknown: 7546237439,
+                unregistered: 4361772215,
             })
             .expect(404);
     });
@@ -1444,25 +1444,25 @@ describe('channel-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                tenantCode: '4z42kku0sgs6duz88qae1vtr09uwt0vd50dxadvgeo4zjuf109',
-                systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                systemName: 'plgmui49utycnpqk7g9h',
-                executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 13:52:43',
-                executionMonitoringStartAt: '2020-07-27 11:58:58',
-                executionMonitoringEndAt: '2020-07-27 16:14:16',
-                error: 6069201465,
-                inactive: 8750711753,
-                successful: 7296732423,
-                stopped: 6560620484,
-                unknown: 2719207054,
-                unregistered: 8519249478,
+                id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                tenantCode: 'k4b44s2ehjfmbwnt28bvtk99gec2mvlz7r81wli5nv7bgfu1qp',
+                systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                systemName: 'yhapj1ivabd5ium1l3hh',
+                executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 11:37:49',
+                executionMonitoringStartAt: '2020-07-27 17:30:07',
+                executionMonitoringEndAt: '2020-07-27 03:21:03',
+                error: 5698017698,
+                inactive: 1307746123,
+                successful: 2089774631,
+                stopped: 8373345138,
+                unknown: 7164952680,
+                unregistered: 8892863102,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '15dbe3d6-e1cd-4391-b444-f1eef640ee86'));
+            .expect(repository.collectionResponse.find(e => e.id === 'a4f45071-c1b0-4e25-b695-e467d2c2e859'));
     });
 
     test(`/REST:DELETE bplus-it-sappi/channel-overview/{id} - Got 404 Not Found`, () => 
@@ -1476,7 +1476,7 @@ describe('channel-overview', () =>
     test(`/REST:DELETE bplus-it-sappi/channel-overview/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/channel-overview/15dbe3d6-e1cd-4391-b444-f1eef640ee86')
+            .delete('/bplus-it-sappi/channel-overview/a4f45071-c1b0-4e25-b695-e467d2c2e859')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -1559,28 +1559,28 @@ describe('channel-overview', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'e9dc4997-db33-4371-bf7d-9228c05c5983',
-                        tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                        tenantCode: 'd6xgqw1ravxvsbvsupuhgimaenqaczwsyuzvzdabm5q1r03w3p',
-                        systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                        systemName: 'mw1lc0w0jnhonvfm0hqr',
-                        executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                        executionType: 'DETAIL',
-                        executionExecutedAt: '2020-07-27 12:38:45',
-                        executionMonitoringStartAt: '2020-07-26 19:24:36',
-                        executionMonitoringEndAt: '2020-07-27 03:40:11',
-                        error: 5860498803,
-                        inactive: 9073000672,
-                        successful: 5925412179,
-                        stopped: 9207096639,
-                        unknown: 3630946836,
-                        unregistered: 5907662679,
+                        id: 'f69478ff-6da7-4618-a5aa-2a5b5181ea38',
+                        tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                        tenantCode: 'p03a3g4j4klx3n84zpo8bbhd5g3x7vkyjw0cnvsq8di31ithp3',
+                        systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                        systemName: '21gao6stbay8qqdktc5d',
+                        executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                        executionType: 'SUMMARY',
+                        executionExecutedAt: '2020-07-27 17:28:48',
+                        executionMonitoringStartAt: '2020-07-27 04:15:28',
+                        executionMonitoringEndAt: '2020-07-27 00:32:34',
+                        error: 5010929633,
+                        inactive: 4415774974,
+                        successful: 5158818074,
+                        stopped: 1279638598,
+                        unknown: 9621398169,
+                        unregistered: 2060847917,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateChannelOverview).toHaveProperty('id', 'e9dc4997-db33-4371-bf7d-9228c05c5983');
+                expect(res.body.data.bplusItSappiCreateChannelOverview).toHaveProperty('id', 'f69478ff-6da7-4618-a5aa-2a5b5181ea38');
             });
     });
 
@@ -1711,14 +1711,14 @@ describe('channel-overview', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '15dbe3d6-e1cd-4391-b444-f1eef640ee86'
+                            value   : 'a4f45071-c1b0-4e25-b695-e467d2c2e859'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindChannelOverview.id).toStrictEqual('15dbe3d6-e1cd-4391-b444-f1eef640ee86');
+                expect(res.body.data.bplusItSappiFindChannelOverview.id).toStrictEqual('a4f45071-c1b0-4e25-b695-e467d2c2e859');
             });
     });
 
@@ -1799,12 +1799,12 @@ describe('channel-overview', () =>
                     }
                 `,
                 variables: {
-                    id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86'
+                    id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindChannelOverviewById.id).toStrictEqual('15dbe3d6-e1cd-4391-b444-f1eef640ee86');
+                expect(res.body.data.bplusItSappiFindChannelOverviewById.id).toStrictEqual('a4f45071-c1b0-4e25-b695-e467d2c2e859');
             });
     });
 
@@ -1886,22 +1886,22 @@ describe('channel-overview', () =>
                 variables: {
                     payload: {
                         
-                        id: '8efb05f9-dd75-4c60-83de-d98fbbcedaaf',
-                        tenantId: '22ff2cc7-cf7e-46ca-8365-d3f6e84bbd77',
-                        tenantCode: 'wy1xxfugaiz539im3s43hfi1biqd4eq84ieuzf9wxria33vs3t',
-                        systemId: '984df020-e6e3-4524-a06b-9dbe11eb9c52',
-                        systemName: 'bw8qeisqo6ivhj5ouuhx',
-                        executionId: 'c2c5c937-0924-45df-9db0-b6bebaed33da',
-                        executionType: 'DETAIL',
-                        executionExecutedAt: '2020-07-27 03:50:20',
-                        executionMonitoringStartAt: '2020-07-27 02:38:10',
-                        executionMonitoringEndAt: '2020-07-27 04:57:57',
-                        error: 8003650079,
-                        inactive: 6870204349,
-                        successful: 7694526417,
-                        stopped: 3026352187,
-                        unknown: 3425077183,
-                        unregistered: 1223503628,
+                        id: '8d4e4bc4-cdd1-4349-b515-85532c90c0cf',
+                        tenantId: '0fd2b8dc-242b-4a63-bb97-c3fe7577148b',
+                        tenantCode: 'rrzr3rqdkarb7zbft555zdsiy3yvxr6g0gtkmllzkamdlzwhx3',
+                        systemId: '181ae2fd-8ab5-43e0-8932-007bd31736a3',
+                        systemName: '8ityog2aabk6t384wicg',
+                        executionId: '7394f93a-514b-4ba9-ac53-73aa72cb345f',
+                        executionType: 'SUMMARY',
+                        executionExecutedAt: '2020-07-27 02:57:54',
+                        executionMonitoringStartAt: '2020-07-27 14:36:40',
+                        executionMonitoringEndAt: '2020-07-26 20:20:51',
+                        error: 7884029065,
+                        inactive: 3739950847,
+                        successful: 4894960034,
+                        stopped: 2001101520,
+                        unknown: 6966047012,
+                        unregistered: 8920132275,
                     }
                 }
             })
@@ -1948,28 +1948,28 @@ describe('channel-overview', () =>
                 variables: {
                     payload: {
                         
-                        id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86',
-                        tenantId: '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f',
-                        tenantCode: '478yn3sa3mdec5ygbqugedoruuzy0dv28toez3cf9dp1rmug9y',
-                        systemId: 'b64c6669-e2f5-44a4-89b8-4690542e1fed',
-                        systemName: '1pk4v7gemmgatftzdijt',
-                        executionId: 'b3536620-65f5-436b-adec-ebe82dfe8502',
-                        executionType: 'SUMMARY',
-                        executionExecutedAt: '2020-07-27 12:58:12',
-                        executionMonitoringStartAt: '2020-07-27 09:00:09',
-                        executionMonitoringEndAt: '2020-07-26 19:04:31',
-                        error: 7673952824,
-                        inactive: 9684912765,
-                        successful: 5154160516,
-                        stopped: 7771335638,
-                        unknown: 5536203617,
-                        unregistered: 1904618248,
+                        id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859',
+                        tenantId: 'a410202b-ff8a-41a7-9297-e8d54e5885ee',
+                        tenantCode: 'xwef2ahcemapnnd2dvvp823hx9rwu875kl6tamocaxoxm9ns1u',
+                        systemId: '424156bc-1a5e-4782-bf03-a868628fcb02',
+                        systemName: 'ifpvxvb6av9e3xtkvgy9',
+                        executionId: '869702f1-92d3-4ddd-a713-62922495ff60',
+                        executionType: 'DETAIL',
+                        executionExecutedAt: '2020-07-27 13:30:27',
+                        executionMonitoringStartAt: '2020-07-27 10:19:50',
+                        executionMonitoringEndAt: '2020-07-27 10:31:31',
+                        error: 7253692775,
+                        inactive: 2113406132,
+                        successful: 1115824947,
+                        stopped: 3301121150,
+                        unknown: 2946899071,
+                        unregistered: 1474864230,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateChannelOverview.id).toStrictEqual('15dbe3d6-e1cd-4391-b444-f1eef640ee86');
+                expect(res.body.data.bplusItSappiUpdateChannelOverview.id).toStrictEqual('a4f45071-c1b0-4e25-b695-e467d2c2e859');
             });
     });
 
@@ -2050,12 +2050,12 @@ describe('channel-overview', () =>
                     }
                 `,
                 variables: {
-                    id: '15dbe3d6-e1cd-4391-b444-f1eef640ee86'
+                    id: 'a4f45071-c1b0-4e25-b695-e467d2c2e859'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteChannelOverviewById.id).toStrictEqual('15dbe3d6-e1cd-4391-b444-f1eef640ee86');
+                expect(res.body.data.bplusItSappiDeleteChannelOverviewById.id).toStrictEqual('a4f45071-c1b0-4e25-b695-e467d2c2e859');
             });
     });
 

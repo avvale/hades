@@ -6,7 +6,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '15dbe3d6-e1cd-4391-b444-f1eef640ee86'
+        example     : 'a4f45071-c1b0-4e25-b695-e467d2c2e859'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '18d0e2ae-3169-4729-8bf5-ebc76dfe1c0f'
+        example     : 'a410202b-ff8a-41a7-9297-e8d54e5885ee'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : '10ur10kof3wqf8qtybsa71i9kk29slhpn9m8wee6givwty4v05'
+        example     : 'n89fdb81b6saapby10e61skuqd08lw4guvjm5m9b8wbysxx2cb'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : 'b64c6669-e2f5-44a4-89b8-4690542e1fed'
+        example     : '424156bc-1a5e-4782-bf03-a868628fcb02'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : '22ytfx80bq7xg3uc6ytm'
+        example     : 'mc7twsnusezh5qfr43md'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : 'b3536620-65f5-436b-adec-ebe82dfe8502'
+        example     : '869702f1-92d3-4ddd-a713-62922495ff60'
     })
     executionId: string;
     
@@ -60,7 +60,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionType [input here api field description]',
-        example     : 'DETAIL',
+        example     : 'SUMMARY',
         enum        : ['SUMMARY','DETAIL']
     })
     executionType: string;
@@ -70,7 +70,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-27 03:23:39'
+        example     : '2020-07-27 09:50:56'
     })
     executionExecutedAt: string;
     
@@ -79,7 +79,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-27 14:46:06'
+        example     : '2020-07-27 07:38:41'
     })
     executionMonitoringStartAt: string;
     
@@ -88,7 +88,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-26 20:13:31'
+        example     : '2020-07-27 06:14:07'
     })
     executionMonitoringEndAt: string;
     
@@ -97,7 +97,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'error [input here api field description]',
-        example     : 8430294870
+        example     : 2599954609
     })
     error: number;
     
@@ -106,7 +106,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'inactive [input here api field description]',
-        example     : 1853768741
+        example     : 7173131384
     })
     inactive: number;
     
@@ -115,7 +115,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'successful [input here api field description]',
-        example     : 6109878918
+        example     : 8512169371
     })
     successful: number;
     
@@ -124,7 +124,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'stopped [input here api field description]',
-        example     : 2350650688
+        example     : 1567418543
     })
     stopped: number;
     
@@ -133,7 +133,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'unknown [input here api field description]',
-        example     : 2106976260
+        example     : 3218618131
     })
     unknown: number;
     
@@ -142,7 +142,7 @@ export class UpdateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'unregistered [input here api field description]',
-        example     : 2919232195
+        example     : 9315623388
     })
     unregistered: number;
     

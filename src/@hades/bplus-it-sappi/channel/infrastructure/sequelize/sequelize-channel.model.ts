@@ -44,16 +44,6 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         
              
         
-    @Column({
-        field: 'version',
-        primaryKey: false,
-        allowNull: false,
-        type: DataTypes.STRING(20),
-    })
-    version: string;
-        
-             
-        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({
@@ -67,6 +57,16 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @BelongsTo(() => BplusItSappiSystemModel)
     system: BplusItSappiSystemModel;
+             
+        
+    @Column({
+        field: 'system_name',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(20),
+    })
+    systemName: string;
+        
              
         
     @Column({
@@ -151,6 +151,16 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         type: DataTypes.STRING(160),
     })
     flowInterfaceNamespace: string;
+        
+             
+        
+    @Column({
+        field: 'version',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(20),
+    })
+    version: string;
         
              
         

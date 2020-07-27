@@ -3,7 +3,6 @@ import {
     ModuleId, 
     ModuleTenantId, 
     ModuleTenantCode, 
-    ModuleVersion, 
     ModuleSystemId, 
     ModuleSystemName, 
     ModuleChannelId, 
@@ -15,6 +14,7 @@ import {
     ModuleFlowComponent, 
     ModuleFlowInterfaceName, 
     ModuleFlowInterfaceNamespace, 
+    ModuleVersion, 
     ModuleParameterGroup, 
     ModuleName, 
     ModuleParameterName, 
@@ -38,7 +38,6 @@ export class BplusItSappiModule extends AggregateRoot
     tenantId: ModuleTenantId;
     tenant: AdminTenant;
     tenantCode: ModuleTenantCode;
-    version: ModuleVersion;
     systemId: ModuleSystemId;
     system: BplusItSappiSystem;
     systemName: ModuleSystemName;
@@ -53,6 +52,7 @@ export class BplusItSappiModule extends AggregateRoot
     flowComponent: ModuleFlowComponent;
     flowInterfaceName: ModuleFlowInterfaceName;
     flowInterfaceNamespace: ModuleFlowInterfaceNamespace;
+    version: ModuleVersion;
     parameterGroup: ModuleParameterGroup;
     name: ModuleName;
     parameterName: ModuleParameterName;
@@ -61,14 +61,13 @@ export class BplusItSappiModule extends AggregateRoot
     updatedAt: ModuleUpdatedAt;
     deletedAt: ModuleDeletedAt;
     
-    constructor(id?: ModuleId, tenantId?: ModuleTenantId, tenantCode?: ModuleTenantCode, version?: ModuleVersion, systemId?: ModuleSystemId, systemName?: ModuleSystemName, channelId?: ModuleChannelId, channelParty?: ModuleChannelParty, channelComponent?: ModuleChannelComponent, channelName?: ModuleChannelName, flowId?: ModuleFlowId, flowParty?: ModuleFlowParty, flowComponent?: ModuleFlowComponent, flowInterfaceName?: ModuleFlowInterfaceName, flowInterfaceNamespace?: ModuleFlowInterfaceNamespace, parameterGroup?: ModuleParameterGroup, name?: ModuleName, parameterName?: ModuleParameterName, parameterValue?: ModuleParameterValue, createdAt?: ModuleCreatedAt, updatedAt?: ModuleUpdatedAt, deletedAt?: ModuleDeletedAt, )
+    constructor(id?: ModuleId, tenantId?: ModuleTenantId, tenantCode?: ModuleTenantCode, systemId?: ModuleSystemId, systemName?: ModuleSystemName, channelId?: ModuleChannelId, channelParty?: ModuleChannelParty, channelComponent?: ModuleChannelComponent, channelName?: ModuleChannelName, flowId?: ModuleFlowId, flowParty?: ModuleFlowParty, flowComponent?: ModuleFlowComponent, flowInterfaceName?: ModuleFlowInterfaceName, flowInterfaceNamespace?: ModuleFlowInterfaceNamespace, version?: ModuleVersion, parameterGroup?: ModuleParameterGroup, name?: ModuleName, parameterName?: ModuleParameterName, parameterValue?: ModuleParameterValue, createdAt?: ModuleCreatedAt, updatedAt?: ModuleUpdatedAt, deletedAt?: ModuleDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;
-        this.version = version;
         this.systemId = systemId;
         this.systemName = systemName;
         this.channelId = channelId;
@@ -80,6 +79,7 @@ export class BplusItSappiModule extends AggregateRoot
         this.flowComponent = flowComponent;
         this.flowInterfaceName = flowInterfaceName;
         this.flowInterfaceNamespace = flowInterfaceNamespace;
+        this.version = version;
         this.parameterGroup = parameterGroup;
         this.name = name;
         this.parameterName = parameterName;
@@ -90,9 +90,9 @@ export class BplusItSappiModule extends AggregateRoot
         
     }
 
-    static register (id: ModuleId, tenantId: ModuleTenantId, tenantCode: ModuleTenantCode, version: ModuleVersion, systemId: ModuleSystemId, systemName: ModuleSystemName, channelId: ModuleChannelId, channelParty: ModuleChannelParty, channelComponent: ModuleChannelComponent, channelName: ModuleChannelName, flowId: ModuleFlowId, flowParty: ModuleFlowParty, flowComponent: ModuleFlowComponent, flowInterfaceName: ModuleFlowInterfaceName, flowInterfaceNamespace: ModuleFlowInterfaceNamespace, parameterGroup: ModuleParameterGroup, name: ModuleName, parameterName: ModuleParameterName, parameterValue: ModuleParameterValue, createdAt: ModuleCreatedAt, updatedAt: ModuleUpdatedAt, deletedAt: ModuleDeletedAt, ): BplusItSappiModule
+    static register (id: ModuleId, tenantId: ModuleTenantId, tenantCode: ModuleTenantCode, systemId: ModuleSystemId, systemName: ModuleSystemName, channelId: ModuleChannelId, channelParty: ModuleChannelParty, channelComponent: ModuleChannelComponent, channelName: ModuleChannelName, flowId: ModuleFlowId, flowParty: ModuleFlowParty, flowComponent: ModuleFlowComponent, flowInterfaceName: ModuleFlowInterfaceName, flowInterfaceNamespace: ModuleFlowInterfaceNamespace, version: ModuleVersion, parameterGroup: ModuleParameterGroup, name: ModuleName, parameterName: ModuleParameterName, parameterValue: ModuleParameterValue, createdAt: ModuleCreatedAt, updatedAt: ModuleUpdatedAt, deletedAt: ModuleDeletedAt, ): BplusItSappiModule
     {
-        return new BplusItSappiModule(id, tenantId, tenantCode, version, systemId, systemName, channelId, channelParty, channelComponent, channelName, flowId, flowParty, flowComponent, flowInterfaceName, flowInterfaceNamespace, parameterGroup, name, parameterName, parameterValue, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiModule(id, tenantId, tenantCode, systemId, systemName, channelId, channelParty, channelComponent, channelName, flowId, flowParty, flowComponent, flowInterfaceName, flowInterfaceNamespace, version, parameterGroup, name, parameterName, parameterValue, createdAt, updatedAt, deletedAt, );
     }
 
     created(module: BplusItSappiModule): void
@@ -102,7 +102,6 @@ export class BplusItSappiModule extends AggregateRoot
                 module.id.value,
                 module.tenantId.value,
                 module.tenantCode.value,
-                module.version.value,
                 module.systemId.value,
                 module.systemName.value,
                 module.channelId.value,
@@ -114,6 +113,7 @@ export class BplusItSappiModule extends AggregateRoot
                 module.flowComponent.value,
                 module.flowInterfaceName.value,
                 module.flowInterfaceNamespace.value,
+                module.version.value,
                 module.parameterGroup?.value,
                 module.name?.value,
                 module.parameterName?.value,
@@ -133,7 +133,6 @@ export class BplusItSappiModule extends AggregateRoot
                 module.id.value,
                 module.tenantId?.value,
                 module.tenantCode?.value,
-                module.version?.value,
                 module.systemId?.value,
                 module.systemName?.value,
                 module.channelId?.value,
@@ -145,6 +144,7 @@ export class BplusItSappiModule extends AggregateRoot
                 module.flowComponent?.value,
                 module.flowInterfaceName?.value,
                 module.flowInterfaceNamespace?.value,
+                module.version?.value,
                 module.parameterGroup?.value,
                 module.name?.value,
                 module.parameterName?.value,
@@ -164,7 +164,6 @@ export class BplusItSappiModule extends AggregateRoot
                 module.id.value,
                 module.tenantId.value,
                 module.tenantCode.value,
-                module.version.value,
                 module.systemId.value,
                 module.systemName.value,
                 module.channelId.value,
@@ -176,6 +175,7 @@ export class BplusItSappiModule extends AggregateRoot
                 module.flowComponent.value,
                 module.flowInterfaceName.value,
                 module.flowInterfaceNamespace.value,
+                module.version.value,
                 module.parameterGroup?.value,
                 module.name?.value,
                 module.parameterName?.value,
@@ -194,7 +194,6 @@ export class BplusItSappiModule extends AggregateRoot
             id: this.id.value,
             tenantId: this.tenantId.value,
             tenantCode: this.tenantCode.value,
-            version: this.version.value,
             systemId: this.systemId.value,
             systemName: this.systemName.value,
             channelId: this.channelId.value,
@@ -206,6 +205,7 @@ export class BplusItSappiModule extends AggregateRoot
             flowComponent: this.flowComponent.value,
             flowInterfaceName: this.flowInterfaceName.value,
             flowInterfaceNamespace: this.flowInterfaceNamespace.value,
+            version: this.version.value,
             parameterGroup: this.parameterGroup?.value,
             name: this.name?.value,
             parameterName: this.parameterName?.value,

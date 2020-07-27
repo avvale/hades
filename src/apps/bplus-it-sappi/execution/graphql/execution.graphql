@@ -10,13 +10,13 @@ type BplusItSappiExecution
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
-    version: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
+    version: GraphQLString!
     type: BplusItSappiExecutionType!
+    executedAt: GraphQLTimestamp!
     monitoringStartAt: GraphQLTimestamp!
     monitoringEndAt: GraphQLTimestamp!
-    executedAt: GraphQLTimestamp!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -28,13 +28,13 @@ input BplusItSappiCreateExecutionInput
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
-    version: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
+    version: GraphQLString!
     type: BplusItSappiExecutionType!
+    executedAt: GraphQLTimestamp!
     monitoringStartAt: GraphQLTimestamp!
     monitoringEndAt: GraphQLTimestamp!
-    executedAt: GraphQLTimestamp!
     
 }
 
@@ -43,13 +43,13 @@ input BplusItSappiUpdateExecutionInput
     id: ID!
     tenantId: ID
     tenantCode: GraphQLString
-    version: GraphQLString
     systemId: ID
     systemName: GraphQLString
+    version: GraphQLString
     type: BplusItSappiExecutionType
+    executedAt: GraphQLTimestamp
     monitoringStartAt: GraphQLTimestamp
     monitoringEndAt: GraphQLTimestamp
-    executedAt: GraphQLTimestamp
     
 }
 

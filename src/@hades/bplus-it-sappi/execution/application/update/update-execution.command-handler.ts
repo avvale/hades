@@ -5,13 +5,13 @@ import {
     ExecutionId, 
     ExecutionTenantId, 
     ExecutionTenantCode, 
-    ExecutionVersion, 
     ExecutionSystemId, 
     ExecutionSystemName, 
+    ExecutionVersion, 
     ExecutionType, 
+    ExecutionExecutedAt, 
     ExecutionMonitoringStartAt, 
-    ExecutionMonitoringEndAt, 
-    ExecutionExecutedAt
+    ExecutionMonitoringEndAt
     
 } from './../../domain/value-objects';
 
@@ -29,13 +29,13 @@ export class UpdateExecutionCommandHandler implements ICommandHandler<UpdateExec
             new ExecutionId(command.id),
             new ExecutionTenantId(command.tenantId, { undefinable: true }),
             new ExecutionTenantCode(command.tenantCode, { undefinable: true }),
-            new ExecutionVersion(command.version, { undefinable: true }),
             new ExecutionSystemId(command.systemId, { undefinable: true }),
             new ExecutionSystemName(command.systemName, { undefinable: true }),
+            new ExecutionVersion(command.version, { undefinable: true }),
             new ExecutionType(command.type, { undefinable: true }),
+            new ExecutionExecutedAt(command.executedAt, { undefinable: true }),
             new ExecutionMonitoringStartAt(command.monitoringStartAt, { undefinable: true }),
             new ExecutionMonitoringEndAt(command.monitoringEndAt, { undefinable: true }),
-            new ExecutionExecutedAt(command.executedAt, { undefinable: true }),
             
         )
     }

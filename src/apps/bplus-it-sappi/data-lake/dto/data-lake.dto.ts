@@ -6,7 +6,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '52de01a0-3269-4fd7-9618-0a7340d072da'
+        example     : '1eb23b09-0f99-40e1-896f-d60538de81f4'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '89cb2ed4-d365-4d4a-9e0a-7b3e7ba6af5a'
+        example     : '4306784b-4920-4fd0-a89b-bbb0e038cb56'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : '5uquizuq15daymsdgyuar96b32ug6d5xhzf35mb3df7wb8k52l'
+        example     : 'nro7acotxp3ghsmtfc13g6t72tf3z572jfaiqfj0qs4zefbj1k'
     })
     tenantCode: string;
     
@@ -42,7 +42,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-26 21:32:54'
+        example     : '2020-07-27 09:44:32'
     })
     createdAt: string;
     
@@ -51,7 +51,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-27 11:12:04'
+        example     : '2020-07-27 15:33:02'
     })
     updatedAt: string;
     
@@ -60,7 +60,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-27 08:14:22'
+        example     : '2020-07-27 15:08:46'
     })
     deletedAt: string;
     

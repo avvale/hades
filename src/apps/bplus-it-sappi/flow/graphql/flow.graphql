@@ -5,9 +5,9 @@ type BplusItSappiFlow
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
-    version: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
+    version: GraphQLString!
     scenario: GraphQLString!
     party: GraphQLString
     component: GraphQLString!
@@ -35,9 +35,9 @@ input BplusItSappiCreateFlowInput
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
-    version: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
+    version: GraphQLString!
     scenario: GraphQLString!
     party: GraphQLString
     component: GraphQLString!
@@ -62,9 +62,9 @@ input BplusItSappiUpdateFlowInput
     id: ID!
     tenantId: ID
     tenantCode: GraphQLString
-    version: GraphQLString
     systemId: ID
     systemName: GraphQLString
+    version: GraphQLString
     scenario: GraphQLString
     party: GraphQLString
     component: GraphQLString

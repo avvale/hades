@@ -4,6 +4,13 @@ export class CreateExecutionSnapshotDto
 { 
     @ApiProperty({
         type        : String,
+        description : 'version [input here api field description]',
+        example     : '1.0.0'
+    })
+    version: string;
+
+    @ApiProperty({
+        type        : String,
         description : 'type [input here api field description]',
         example     : 'SUMMARY'
     })

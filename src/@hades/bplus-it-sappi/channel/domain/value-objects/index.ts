@@ -1,8 +1,8 @@
 export { ChannelId } from './channel-id';
 export { ChannelTenantId } from './channel-tenant-id';
 export { ChannelTenantCode } from './channel-tenant-code';
-export { ChannelVersion } from './channel-version';
 export { ChannelSystemId } from './channel-system-id';
+export { ChannelSystemName } from './channel-system-name';
 export { ChannelParty } from './channel-party';
 export { ChannelComponent } from './channel-component';
 export { ChannelName } from './channel-name';
@@ -11,6 +11,7 @@ export { ChannelFlowParty } from './channel-flow-party';
 export { ChannelFlowComponent } from './channel-flow-component';
 export { ChannelFlowInterfaceName } from './channel-flow-interface-name';
 export { ChannelFlowInterfaceNamespace } from './channel-flow-interface-namespace';
+export { ChannelVersion } from './channel-version';
 export { ChannelAdapterType } from './channel-adapter-type';
 export { ChannelDirection } from './channel-direction';
 export { ChannelTransportProtocol } from './channel-transport-protocol';

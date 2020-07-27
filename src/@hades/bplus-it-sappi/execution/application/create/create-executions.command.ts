@@ -5,13 +5,13 @@ export class CreateExecutionsCommand
             id: string,
             tenantId: string,
             tenantCode: string,
-            version: string,
             systemId: string,
             systemName: string,
+            version: string,
             type: string,
+            executedAt: string,
             monitoringStartAt: string,
             monitoringEndAt: string,
-            executedAt: string,
             
         } []
     ) {}

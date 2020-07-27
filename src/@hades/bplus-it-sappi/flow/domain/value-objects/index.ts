@@ -1,9 +1,9 @@
 export { FlowId } from './flow-id';
 export { FlowTenantId } from './flow-tenant-id';
 export { FlowTenantCode } from './flow-tenant-code';
-export { FlowVersion } from './flow-version';
 export { FlowSystemId } from './flow-system-id';
 export { FlowSystemName } from './flow-system-name';
+export { FlowVersion } from './flow-version';
 export { FlowScenario } from './flow-scenario';
 export { FlowParty } from './flow-party';
 export { FlowComponent } from './flow-component';

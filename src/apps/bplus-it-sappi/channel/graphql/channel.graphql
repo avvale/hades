@@ -15,8 +15,8 @@ type BplusItSappiChannel
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
-    version: GraphQLString!
     systemId: ID!
+    systemName: GraphQLString!
     party: GraphQLString
     component: GraphQLString!
     name: GraphQLString!
@@ -25,6 +25,7 @@ type BplusItSappiChannel
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
     flowInterfaceNamespace: GraphQLString!
+    version: GraphQLString!
     adapterType: GraphQLString
     direction: BplusItSappiChannelDirection!
     transportProtocol: GraphQLString
@@ -55,8 +56,8 @@ input BplusItSappiCreateChannelInput
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
-    version: GraphQLString!
     systemId: ID!
+    systemName: GraphQLString!
     party: GraphQLString
     component: GraphQLString!
     name: GraphQLString!
@@ -65,6 +66,7 @@ input BplusItSappiCreateChannelInput
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
     flowInterfaceNamespace: GraphQLString!
+    version: GraphQLString!
     adapterType: GraphQLString
     direction: BplusItSappiChannelDirection!
     transportProtocol: GraphQLString
@@ -92,8 +94,8 @@ input BplusItSappiUpdateChannelInput
     id: ID!
     tenantId: ID
     tenantCode: GraphQLString
-    version: GraphQLString
     systemId: ID
+    systemName: GraphQLString
     party: GraphQLString
     component: GraphQLString
     name: GraphQLString
@@ -102,6 +104,7 @@ input BplusItSappiUpdateChannelInput
     flowComponent: GraphQLString
     flowInterfaceName: GraphQLString
     flowInterfaceNamespace: GraphQLString
+    version: GraphQLString
     adapterType: GraphQLString
     direction: BplusItSappiChannelDirection
     transportProtocol: GraphQLString

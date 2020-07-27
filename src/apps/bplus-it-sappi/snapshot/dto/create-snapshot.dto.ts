@@ -33,6 +33,7 @@ export class CreateSnapshotDto
         type        : CreateExecutionSnapshotDto,
         description : 'execution object',
         example     : { 
+            "version": "1.0.0",
             "type": "SUMMARY",
             "monitoringStartAt": "2020-07-17 10:51:32",
             "monitoringEndAt": "'2020-07-17 06:08:00",
@@ -93,7 +94,7 @@ export class CreateSnapshotDto
             direction: 'OUTBOUND',
             errorCategory: 'XI_J2EE_ADAPTER_SOAP',
             errorCode: 'SOAP_ADAPTER_PROCESSING_ERROR',
-            errorLabel: '2003',
+            errorLabel: 2003,
             node: 8071536873,
             protocol: '6810i98gcpgr0edip3a1',
             qualityOfService: 'EO',
@@ -108,7 +109,7 @@ export class CreateSnapshotDto
             detail: '...'
         }]
     })
-    messageDetails: CreateMessageDetailSnapshotDto[];
+    messagesDetail: CreateMessageDetailSnapshotDto[];
 
     @ApiProperty({
         type        : [CreateChannelDetailSnapshotDto],
@@ -120,7 +121,7 @@ export class CreateSnapshotDto
             channelParty: ''
         }]
     })
-    channelDetails: CreateChannelDetailSnapshotDto[];
+    channelsDetail: CreateChannelDetailSnapshotDto[];
 
     @ApiProperty({
         type        : [CreateJobDetailSnapshotDto],
@@ -133,5 +134,5 @@ export class CreateSnapshotDto
             user: ''
         }]
     })
-    jobDetails: CreateJobDetailSnapshotDto[];
+    jobsDetail: CreateJobDetailSnapshotDto[];
 }

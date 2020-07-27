@@ -22,13 +22,13 @@ export class UpdateExecutionResolver
             payload.id,
             payload.tenantId,
             payload.tenantCode,
-            payload.version,
             payload.systemId,
             payload.systemName,
+            payload.version,
             payload.type,
+            payload.executedAt,
             payload.monitoringStartAt,
             payload.monitoringEndAt,
-            payload.executedAt,
             
         ));
         

@@ -5,7 +5,6 @@ type BplusItSappiModule
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
-    version: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     channelId: ID!
@@ -17,6 +16,7 @@ type BplusItSappiModule
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
     flowInterfaceNamespace: GraphQLString!
+    version: GraphQLString!
     parameterGroup: GraphQLString
     name: GraphQLString
     parameterName: GraphQLString
@@ -32,7 +32,6 @@ input BplusItSappiCreateModuleInput
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
-    version: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     channelId: ID!
@@ -44,6 +43,7 @@ input BplusItSappiCreateModuleInput
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
     flowInterfaceNamespace: GraphQLString!
+    version: GraphQLString!
     parameterGroup: GraphQLString
     name: GraphQLString
     parameterName: GraphQLString
@@ -56,7 +56,6 @@ input BplusItSappiUpdateModuleInput
     id: ID!
     tenantId: ID
     tenantCode: GraphQLString
-    version: GraphQLString
     systemId: ID
     systemName: GraphQLString
     channelId: ID
@@ -68,6 +67,7 @@ input BplusItSappiUpdateModuleInput
     flowComponent: GraphQLString
     flowInterfaceName: GraphQLString
     flowInterfaceNamespace: GraphQLString
+    version: GraphQLString
     parameterGroup: GraphQLString
     name: GraphQLString
     parameterName: GraphQLString

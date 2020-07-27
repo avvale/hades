@@ -42,16 +42,6 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
         
              
         
-    @Column({
-        field: 'version',
-        primaryKey: false,
-        allowNull: false,
-        type: DataTypes.STRING(20),
-    })
-    version: string;
-        
-             
-        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({
@@ -78,12 +68,32 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
              
         
     @Column({
+        field: 'version',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(20),
+    })
+    version: string;
+        
+             
+        
+    @Column({
         field: 'type',
         primaryKey: false,
         allowNull: false,
         type: DataTypes.ENUM('SUMMARY','DETAIL'),
     })
     type: string;
+        
+             
+        
+    @Column({
+        field: 'executed_at',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.DATE,
+    })
+    executedAt: string;
         
              
         
@@ -104,16 +114,6 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
         type: DataTypes.DATE,
     })
     monitoringEndAt: string;
-        
-             
-        
-    @Column({
-        field: 'executed_at',
-        primaryKey: false,
-        allowNull: false,
-        type: DataTypes.DATE,
-    })
-    executedAt: string;
         
              
         

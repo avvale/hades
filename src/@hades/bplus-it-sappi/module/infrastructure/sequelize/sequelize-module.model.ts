@@ -44,16 +44,6 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         
              
         
-    @Column({
-        field: 'version',
-        primaryKey: false,
-        allowNull: false,
-        type: DataTypes.STRING(20),
-    })
-    version: string;
-        
-             
-        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({
@@ -176,6 +166,16 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         type: DataTypes.STRING(160),
     })
     flowInterfaceNamespace: string;
+        
+             
+        
+    @Column({
+        field: 'version',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(20),
+    })
+    version: string;
         
              
         

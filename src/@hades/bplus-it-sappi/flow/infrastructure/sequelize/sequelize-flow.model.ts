@@ -42,16 +42,6 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
         
              
         
-    @Column({
-        field: 'version',
-        primaryKey: false,
-        allowNull: false,
-        type: DataTypes.STRING(20),
-    })
-    version: string;
-        
-             
-        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({
@@ -74,6 +64,16 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
         type: DataTypes.STRING(20),
     })
     systemName: string;
+        
+             
+        
+    @Column({
+        field: 'version',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(20),
+    })
+    version: string;
         
              
         

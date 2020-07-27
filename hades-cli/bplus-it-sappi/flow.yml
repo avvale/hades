@@ -18,10 +18,6 @@ aggregateProperties:
     type: varchar
     maxLength: 50
     nullable: false
-  - name: version
-    type: varchar
-    maxLength: 20
-    nullable: false
   - name: system_id
     type: id
     length: 36
@@ -30,6 +26,10 @@ aggregateProperties:
     relationshipAggregate: BplusItSappiSystem
     relationshipModulePath: bplus-it-sappi/system
   - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: version
     type: varchar
     maxLength: 20
     nullable: false

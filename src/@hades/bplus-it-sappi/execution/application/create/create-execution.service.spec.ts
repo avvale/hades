@@ -8,13 +8,13 @@ import {
     ExecutionId, 
     ExecutionTenantId, 
     ExecutionTenantCode, 
-    ExecutionVersion, 
     ExecutionSystemId, 
     ExecutionSystemName, 
+    ExecutionVersion, 
     ExecutionType, 
+    ExecutionExecutedAt, 
     ExecutionMonitoringStartAt, 
-    ExecutionMonitoringEndAt, 
-    ExecutionExecutedAt
+    ExecutionMonitoringEndAt
     
 } from './../../domain/value-objects';
 import { IExecutionRepository } from './../../domain/execution.repository';
@@ -62,13 +62,13 @@ describe('CreateExecutionService', () =>
                 new ExecutionId(executions[0].id),
                 new ExecutionTenantId(executions[0].tenantId),
                 new ExecutionTenantCode(executions[0].tenantCode),
-                new ExecutionVersion(executions[0].version),
                 new ExecutionSystemId(executions[0].systemId),
                 new ExecutionSystemName(executions[0].systemName),
+                new ExecutionVersion(executions[0].version),
                 new ExecutionType(executions[0].type),
+                new ExecutionExecutedAt(executions[0].executedAt),
                 new ExecutionMonitoringStartAt(executions[0].monitoringStartAt),
                 new ExecutionMonitoringEndAt(executions[0].monitoringEndAt),
-                new ExecutionExecutedAt(executions[0].executedAt),
                 
             )).toBe(undefined);
         });

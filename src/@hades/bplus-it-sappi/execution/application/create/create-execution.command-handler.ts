@@ -5,13 +5,13 @@ import {
     ExecutionId, 
     ExecutionTenantId, 
     ExecutionTenantCode, 
-    ExecutionVersion, 
     ExecutionSystemId, 
     ExecutionSystemName, 
+    ExecutionVersion, 
     ExecutionType, 
+    ExecutionExecutedAt, 
     ExecutionMonitoringStartAt, 
-    ExecutionMonitoringEndAt, 
-    ExecutionExecutedAt
+    ExecutionMonitoringEndAt
     
 } from './../../domain/value-objects';
 
@@ -29,13 +29,13 @@ export class CreateExecutionCommandHandler implements ICommandHandler<CreateExec
             new ExecutionId(command.id),
             new ExecutionTenantId(command.tenantId),
             new ExecutionTenantCode(command.tenantCode),
-            new ExecutionVersion(command.version),
             new ExecutionSystemId(command.systemId),
             new ExecutionSystemName(command.systemName),
+            new ExecutionVersion(command.version),
             new ExecutionType(command.type),
+            new ExecutionExecutedAt(command.executedAt),
             new ExecutionMonitoringStartAt(command.monitoringStartAt),
             new ExecutionMonitoringEndAt(command.monitoringEndAt),
-            new ExecutionExecutedAt(command.executedAt),
             
         );
     }
