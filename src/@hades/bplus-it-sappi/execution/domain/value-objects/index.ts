@@ -1,6 +1,7 @@
 export { ExecutionId } from './execution-id';
 export { ExecutionTenantId } from './execution-tenant-id';
 export { ExecutionTenantCode } from './execution-tenant-code';
+export { ExecutionVersion } from './execution-version';
 export { ExecutionSystemId } from './execution-system-id';
 export { ExecutionSystemName } from './execution-system-name';
 export { ExecutionType } from './execution-type';

@@ -43,6 +43,7 @@ describe('CreateModuleCommandHandler', () =>
                     modules[0].id,
                     modules[0].tenantId,
                     modules[0].tenantCode,
+                    modules[0].version,
                     modules[0].systemId,
                     modules[0].systemName,
                     modules[0].channelId,

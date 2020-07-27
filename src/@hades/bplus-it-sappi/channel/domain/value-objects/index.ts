@@ -1,6 +1,7 @@
 export { ChannelId } from './channel-id';
 export { ChannelTenantId } from './channel-tenant-id';
 export { ChannelTenantCode } from './channel-tenant-code';
+export { ChannelVersion } from './channel-version';
 export { ChannelSystemId } from './channel-system-id';
 export { ChannelParty } from './channel-party';
 export { ChannelComponent } from './channel-component';

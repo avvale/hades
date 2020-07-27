@@ -5,10 +5,9 @@ type BplusItSappiSystem
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
-    name: GraphQLString!
-    tenantCode: GraphQLString!
-    environment: GraphQLString!
     version: GraphQLString!
+    name: GraphQLString!
+    environment: GraphQLString!
     isActive: GraphQLBoolean!
     cancelledAt: GraphQLTimestamp
     createdAt: GraphQLTimestamp
@@ -22,10 +21,9 @@ input BplusItSappiCreateSystemInput
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
-    name: GraphQLString!
-    tenantCode: GraphQLString!
-    environment: GraphQLString!
     version: GraphQLString!
+    name: GraphQLString!
+    environment: GraphQLString!
     isActive: GraphQLBoolean!
     cancelledAt: GraphQLTimestamp
     
@@ -36,10 +34,9 @@ input BplusItSappiUpdateSystemInput
     id: ID!
     tenantId: ID
     tenantCode: GraphQLString
-    name: GraphQLString
-    tenantCode: GraphQLString
-    environment: GraphQLString
     version: GraphQLString
+    name: GraphQLString
+    environment: GraphQLString
     isActive: GraphQLBoolean
     cancelledAt: GraphQLTimestamp
     

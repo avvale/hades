@@ -3,6 +3,7 @@ import {
     ChannelId, 
     ChannelTenantId, 
     ChannelTenantCode, 
+    ChannelVersion, 
     ChannelSystemId, 
     ChannelParty, 
     ChannelComponent, 
@@ -49,6 +50,7 @@ export class BplusItSappiChannel extends AggregateRoot
     tenantId: ChannelTenantId;
     tenant: AdminTenant;
     tenantCode: ChannelTenantCode;
+    version: ChannelVersion;
     systemId: ChannelSystemId;
     system: BplusItSappiSystem;
     party: ChannelParty;
@@ -83,13 +85,14 @@ export class BplusItSappiChannel extends AggregateRoot
     updatedAt: ChannelUpdatedAt;
     deletedAt: ChannelDeletedAt;
     
-    constructor(id?: ChannelId, tenantId?: ChannelTenantId, tenantCode?: ChannelTenantCode, systemId?: ChannelSystemId, party?: ChannelParty, component?: ChannelComponent, name?: ChannelName, flowId?: ChannelFlowId, flowParty?: ChannelFlowParty, flowComponent?: ChannelFlowComponent, flowInterfaceName?: ChannelFlowInterfaceName, flowInterfaceNamespace?: ChannelFlowInterfaceNamespace, adapterType?: ChannelAdapterType, direction?: ChannelDirection, transportProtocol?: ChannelTransportProtocol, messageProtocol?: ChannelMessageProtocol, adapterEngineName?: ChannelAdapterEngineName, url?: ChannelUrl, username?: ChannelUsername, remoteHost?: ChannelRemoteHost, remotePort?: ChannelRemotePort, directory?: ChannelDirectory, fileSchema?: ChannelFileSchema, proxyHost?: ChannelProxyHost, proxyPort?: ChannelProxyPort, destination?: ChannelDestination, adapterStatus?: ChannelAdapterStatus, softwareComponentName?: ChannelSoftwareComponentName, responsibleUserAccountName?: ChannelResponsibleUserAccountName, lastChangeUserAccount?: ChannelLastChangeUserAccount, lastChangedAt?: ChannelLastChangedAt, createdAt?: ChannelCreatedAt, updatedAt?: ChannelUpdatedAt, deletedAt?: ChannelDeletedAt, )
+    constructor(id?: ChannelId, tenantId?: ChannelTenantId, tenantCode?: ChannelTenantCode, version?: ChannelVersion, systemId?: ChannelSystemId, party?: ChannelParty, component?: ChannelComponent, name?: ChannelName, flowId?: ChannelFlowId, flowParty?: ChannelFlowParty, flowComponent?: ChannelFlowComponent, flowInterfaceName?: ChannelFlowInterfaceName, flowInterfaceNamespace?: ChannelFlowInterfaceNamespace, adapterType?: ChannelAdapterType, direction?: ChannelDirection, transportProtocol?: ChannelTransportProtocol, messageProtocol?: ChannelMessageProtocol, adapterEngineName?: ChannelAdapterEngineName, url?: ChannelUrl, username?: ChannelUsername, remoteHost?: ChannelRemoteHost, remotePort?: ChannelRemotePort, directory?: ChannelDirectory, fileSchema?: ChannelFileSchema, proxyHost?: ChannelProxyHost, proxyPort?: ChannelProxyPort, destination?: ChannelDestination, adapterStatus?: ChannelAdapterStatus, softwareComponentName?: ChannelSoftwareComponentName, responsibleUserAccountName?: ChannelResponsibleUserAccountName, lastChangeUserAccount?: ChannelLastChangeUserAccount, lastChangedAt?: ChannelLastChangedAt, createdAt?: ChannelCreatedAt, updatedAt?: ChannelUpdatedAt, deletedAt?: ChannelDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;
+        this.version = version;
         this.systemId = systemId;
         this.party = party;
         this.component = component;
@@ -124,9 +127,9 @@ export class BplusItSappiChannel extends AggregateRoot
         
     }
 
-    static register (id: ChannelId, tenantId: ChannelTenantId, tenantCode: ChannelTenantCode, systemId: ChannelSystemId, party: ChannelParty, component: ChannelComponent, name: ChannelName, flowId: ChannelFlowId, flowParty: ChannelFlowParty, flowComponent: ChannelFlowComponent, flowInterfaceName: ChannelFlowInterfaceName, flowInterfaceNamespace: ChannelFlowInterfaceNamespace, adapterType: ChannelAdapterType, direction: ChannelDirection, transportProtocol: ChannelTransportProtocol, messageProtocol: ChannelMessageProtocol, adapterEngineName: ChannelAdapterEngineName, url: ChannelUrl, username: ChannelUsername, remoteHost: ChannelRemoteHost, remotePort: ChannelRemotePort, directory: ChannelDirectory, fileSchema: ChannelFileSchema, proxyHost: ChannelProxyHost, proxyPort: ChannelProxyPort, destination: ChannelDestination, adapterStatus: ChannelAdapterStatus, softwareComponentName: ChannelSoftwareComponentName, responsibleUserAccountName: ChannelResponsibleUserAccountName, lastChangeUserAccount: ChannelLastChangeUserAccount, lastChangedAt: ChannelLastChangedAt, createdAt: ChannelCreatedAt, updatedAt: ChannelUpdatedAt, deletedAt: ChannelDeletedAt, ): BplusItSappiChannel
+    static register (id: ChannelId, tenantId: ChannelTenantId, tenantCode: ChannelTenantCode, version: ChannelVersion, systemId: ChannelSystemId, party: ChannelParty, component: ChannelComponent, name: ChannelName, flowId: ChannelFlowId, flowParty: ChannelFlowParty, flowComponent: ChannelFlowComponent, flowInterfaceName: ChannelFlowInterfaceName, flowInterfaceNamespace: ChannelFlowInterfaceNamespace, adapterType: ChannelAdapterType, direction: ChannelDirection, transportProtocol: ChannelTransportProtocol, messageProtocol: ChannelMessageProtocol, adapterEngineName: ChannelAdapterEngineName, url: ChannelUrl, username: ChannelUsername, remoteHost: ChannelRemoteHost, remotePort: ChannelRemotePort, directory: ChannelDirectory, fileSchema: ChannelFileSchema, proxyHost: ChannelProxyHost, proxyPort: ChannelProxyPort, destination: ChannelDestination, adapterStatus: ChannelAdapterStatus, softwareComponentName: ChannelSoftwareComponentName, responsibleUserAccountName: ChannelResponsibleUserAccountName, lastChangeUserAccount: ChannelLastChangeUserAccount, lastChangedAt: ChannelLastChangedAt, createdAt: ChannelCreatedAt, updatedAt: ChannelUpdatedAt, deletedAt: ChannelDeletedAt, ): BplusItSappiChannel
     {
-        return new BplusItSappiChannel(id, tenantId, tenantCode, systemId, party, component, name, flowId, flowParty, flowComponent, flowInterfaceName, flowInterfaceNamespace, adapterType, direction, transportProtocol, messageProtocol, adapterEngineName, url, username, remoteHost, remotePort, directory, fileSchema, proxyHost, proxyPort, destination, adapterStatus, softwareComponentName, responsibleUserAccountName, lastChangeUserAccount, lastChangedAt, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiChannel(id, tenantId, tenantCode, version, systemId, party, component, name, flowId, flowParty, flowComponent, flowInterfaceName, flowInterfaceNamespace, adapterType, direction, transportProtocol, messageProtocol, adapterEngineName, url, username, remoteHost, remotePort, directory, fileSchema, proxyHost, proxyPort, destination, adapterStatus, softwareComponentName, responsibleUserAccountName, lastChangeUserAccount, lastChangedAt, createdAt, updatedAt, deletedAt, );
     }
 
     created(channel: BplusItSappiChannel): void
@@ -136,6 +139,7 @@ export class BplusItSappiChannel extends AggregateRoot
                 channel.id.value,
                 channel.tenantId.value,
                 channel.tenantCode.value,
+                channel.version.value,
                 channel.systemId.value,
                 channel.party?.value,
                 channel.component.value,
@@ -179,6 +183,7 @@ export class BplusItSappiChannel extends AggregateRoot
                 channel.id.value,
                 channel.tenantId?.value,
                 channel.tenantCode?.value,
+                channel.version?.value,
                 channel.systemId?.value,
                 channel.party?.value,
                 channel.component?.value,
@@ -222,6 +227,7 @@ export class BplusItSappiChannel extends AggregateRoot
                 channel.id.value,
                 channel.tenantId.value,
                 channel.tenantCode.value,
+                channel.version.value,
                 channel.systemId.value,
                 channel.party?.value,
                 channel.component.value,
@@ -264,6 +270,7 @@ export class BplusItSappiChannel extends AggregateRoot
             id: this.id.value,
             tenantId: this.tenantId.value,
             tenantCode: this.tenantCode.value,
+            version: this.version.value,
             systemId: this.systemId.value,
             party: this.party?.value,
             component: this.component.value,

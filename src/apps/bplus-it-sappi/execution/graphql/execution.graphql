@@ -10,6 +10,7 @@ type BplusItSappiExecution
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
+    version: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     type: BplusItSappiExecutionType!
@@ -27,6 +28,7 @@ input BplusItSappiCreateExecutionInput
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
+    version: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     type: BplusItSappiExecutionType!
@@ -41,6 +43,7 @@ input BplusItSappiUpdateExecutionInput
     id: ID!
     tenantId: ID
     tenantCode: GraphQLString
+    version: GraphQLString
     systemId: ID
     systemName: GraphQLString
     type: BplusItSappiExecutionType

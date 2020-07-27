@@ -3,6 +3,7 @@ import {
     FlowId, 
     FlowTenantId, 
     FlowTenantCode, 
+    FlowVersion, 
     FlowSystemId, 
     FlowSystemName, 
     FlowScenario, 
@@ -38,6 +39,7 @@ export class BplusItSappiFlow extends AggregateRoot
     tenantId: FlowTenantId;
     tenant: AdminTenant;
     tenantCode: FlowTenantCode;
+    version: FlowVersion;
     systemId: FlowSystemId;
     system: BplusItSappiSystem;
     systemName: FlowSystemName;
@@ -61,13 +63,14 @@ export class BplusItSappiFlow extends AggregateRoot
     updatedAt: FlowUpdatedAt;
     deletedAt: FlowDeletedAt;
     
-    constructor(id?: FlowId, tenantId?: FlowTenantId, tenantCode?: FlowTenantCode, systemId?: FlowSystemId, systemName?: FlowSystemName, scenario?: FlowScenario, party?: FlowParty, component?: FlowComponent, interfaceName?: FlowInterfaceName, interfaceNamespace?: FlowInterfaceNamespace, iflowName?: FlowIflowName, responsibleUserAccount?: FlowResponsibleUserAccount, lastChangeUserAccount?: FlowLastChangeUserAccount, lastChangedAt?: FlowLastChangedAt, folderPath?: FlowFolderPath, description?: FlowDescription, application?: FlowApplication, isCritical?: FlowIsCritical, isComplex?: FlowIsComplex, fieldGroupId?: FlowFieldGroupId, data?: FlowData, createdAt?: FlowCreatedAt, updatedAt?: FlowUpdatedAt, deletedAt?: FlowDeletedAt, )
+    constructor(id?: FlowId, tenantId?: FlowTenantId, tenantCode?: FlowTenantCode, version?: FlowVersion, systemId?: FlowSystemId, systemName?: FlowSystemName, scenario?: FlowScenario, party?: FlowParty, component?: FlowComponent, interfaceName?: FlowInterfaceName, interfaceNamespace?: FlowInterfaceNamespace, iflowName?: FlowIflowName, responsibleUserAccount?: FlowResponsibleUserAccount, lastChangeUserAccount?: FlowLastChangeUserAccount, lastChangedAt?: FlowLastChangedAt, folderPath?: FlowFolderPath, description?: FlowDescription, application?: FlowApplication, isCritical?: FlowIsCritical, isComplex?: FlowIsComplex, fieldGroupId?: FlowFieldGroupId, data?: FlowData, createdAt?: FlowCreatedAt, updatedAt?: FlowUpdatedAt, deletedAt?: FlowDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;
+        this.version = version;
         this.systemId = systemId;
         this.systemName = systemName;
         this.scenario = scenario;
@@ -92,9 +95,9 @@ export class BplusItSappiFlow extends AggregateRoot
         
     }
 
-    static register (id: FlowId, tenantId: FlowTenantId, tenantCode: FlowTenantCode, systemId: FlowSystemId, systemName: FlowSystemName, scenario: FlowScenario, party: FlowParty, component: FlowComponent, interfaceName: FlowInterfaceName, interfaceNamespace: FlowInterfaceNamespace, iflowName: FlowIflowName, responsibleUserAccount: FlowResponsibleUserAccount, lastChangeUserAccount: FlowLastChangeUserAccount, lastChangedAt: FlowLastChangedAt, folderPath: FlowFolderPath, description: FlowDescription, application: FlowApplication, isCritical: FlowIsCritical, isComplex: FlowIsComplex, fieldGroupId: FlowFieldGroupId, data: FlowData, createdAt: FlowCreatedAt, updatedAt: FlowUpdatedAt, deletedAt: FlowDeletedAt, ): BplusItSappiFlow
+    static register (id: FlowId, tenantId: FlowTenantId, tenantCode: FlowTenantCode, version: FlowVersion, systemId: FlowSystemId, systemName: FlowSystemName, scenario: FlowScenario, party: FlowParty, component: FlowComponent, interfaceName: FlowInterfaceName, interfaceNamespace: FlowInterfaceNamespace, iflowName: FlowIflowName, responsibleUserAccount: FlowResponsibleUserAccount, lastChangeUserAccount: FlowLastChangeUserAccount, lastChangedAt: FlowLastChangedAt, folderPath: FlowFolderPath, description: FlowDescription, application: FlowApplication, isCritical: FlowIsCritical, isComplex: FlowIsComplex, fieldGroupId: FlowFieldGroupId, data: FlowData, createdAt: FlowCreatedAt, updatedAt: FlowUpdatedAt, deletedAt: FlowDeletedAt, ): BplusItSappiFlow
     {
-        return new BplusItSappiFlow(id, tenantId, tenantCode, systemId, systemName, scenario, party, component, interfaceName, interfaceNamespace, iflowName, responsibleUserAccount, lastChangeUserAccount, lastChangedAt, folderPath, description, application, isCritical, isComplex, fieldGroupId, data, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiFlow(id, tenantId, tenantCode, version, systemId, systemName, scenario, party, component, interfaceName, interfaceNamespace, iflowName, responsibleUserAccount, lastChangeUserAccount, lastChangedAt, folderPath, description, application, isCritical, isComplex, fieldGroupId, data, createdAt, updatedAt, deletedAt, );
     }
 
     created(flow: BplusItSappiFlow): void
@@ -104,6 +107,7 @@ export class BplusItSappiFlow extends AggregateRoot
                 flow.id.value,
                 flow.tenantId.value,
                 flow.tenantCode.value,
+                flow.version.value,
                 flow.systemId.value,
                 flow.systemName.value,
                 flow.scenario.value,
@@ -137,6 +141,7 @@ export class BplusItSappiFlow extends AggregateRoot
                 flow.id.value,
                 flow.tenantId?.value,
                 flow.tenantCode?.value,
+                flow.version?.value,
                 flow.systemId?.value,
                 flow.systemName?.value,
                 flow.scenario?.value,
@@ -170,6 +175,7 @@ export class BplusItSappiFlow extends AggregateRoot
                 flow.id.value,
                 flow.tenantId.value,
                 flow.tenantCode.value,
+                flow.version.value,
                 flow.systemId.value,
                 flow.systemName.value,
                 flow.scenario.value,
@@ -202,6 +208,7 @@ export class BplusItSappiFlow extends AggregateRoot
             id: this.id.value,
             tenantId: this.tenantId.value,
             tenantCode: this.tenantCode.value,
+            version: this.version.value,
             systemId: this.systemId.value,
             systemName: this.systemName.value,
             scenario: this.scenario.value,

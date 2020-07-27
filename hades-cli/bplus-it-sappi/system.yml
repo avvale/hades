@@ -18,16 +18,13 @@ aggregateProperties:
     type: varchar
     maxLength: 50
     nullable: false
+  - name: version
+    type: varchar
+    nullable: false
   - name: name
     type: varchar
     nullable: false
-  - name: tenant_code
-    type: varchar
-    nullable: false
   - name: environment
-    type: varchar
-    nullable: false
-  - name: version
     type: varchar
     nullable: false
   - name: is_active

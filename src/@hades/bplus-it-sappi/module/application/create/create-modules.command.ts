@@ -5,6 +5,7 @@ export class CreateModulesCommand
             id: string,
             tenantId: string,
             tenantCode: string,
+            version: string,
             systemId: string,
             systemName: string,
             channelId: string,

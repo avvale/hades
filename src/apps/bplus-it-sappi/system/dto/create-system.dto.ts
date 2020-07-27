@@ -6,7 +6,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'c4925865-d8bc-4350-a8c9-6ebd86c72a43'
+        example     : 'b136e272-cbcf-4fcf-99c8-792a60dca591'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'd17ef18b-88db-4e36-8373-92ab91820f7a'
+        example     : 'd7dd29de-caac-4819-8f63-0e2f037c15db'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : '7vnd0849pv3wpet3zy358udphexrqbv4954nuavm9m9uptfz0p'
+        example     : 'uqqlj0scqh6bde4s1cdjn3l25quouz5f0m2k9p4zjcozmiaapb'
     })
     tenantCode: string;
     
@@ -32,8 +32,17 @@ export class CreateSystemDto
     
     @ApiProperty({
         type        : String,
+        description : 'version [input here api field description]',
+        example     : '7'
+    })
+    version: string;
+    
+    
+    
+    @ApiProperty({
+        type        : String,
         description : 'name [input here api field description]',
-        example     : '3'
+        example     : '4'
     })
     name: string;
     
@@ -41,35 +50,17 @@ export class CreateSystemDto
     
     @ApiProperty({
         type        : String,
-        description : 'tenantCode [input here api field description]',
-        example     : '6'
-    })
-    tenantCode: string;
-    
-    
-    
-    @ApiProperty({
-        type        : String,
         description : 'environment [input here api field description]',
-        example     : 'v'
+        example     : 'h'
     })
     environment: string;
     
     
     
     @ApiProperty({
-        type        : String,
-        description : 'version [input here api field description]',
-        example     : 'u'
-    })
-    version: string;
-    
-    
-    
-    @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : false
+        example     : true
     })
     isActive: boolean;
     
@@ -78,7 +69,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'cancelledAt [input here api field description]',
-        example     : '2020-07-24 01:55:37'
+        example     : '2020-07-26 22:51:18'
     })
     cancelledAt: string;
     

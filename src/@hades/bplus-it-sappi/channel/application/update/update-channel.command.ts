@@ -4,6 +4,7 @@ export class UpdateChannelCommand
         public readonly id: string,
         public readonly tenantId?: string,
         public readonly tenantCode?: string,
+        public readonly version?: string,
         public readonly systemId?: string,
         public readonly party?: string,
         public readonly component?: string,

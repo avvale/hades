@@ -4,6 +4,7 @@ export class DeletedFlowEvent
         public readonly id: string,
         public readonly tenantId: string,
         public readonly tenantCode: string,
+        public readonly version: string,
         public readonly systemId: string,
         public readonly systemName: string,
         public readonly scenario: string,

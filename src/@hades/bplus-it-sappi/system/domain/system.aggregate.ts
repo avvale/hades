@@ -3,10 +3,9 @@ import {
     SystemId, 
     SystemTenantId, 
     SystemTenantCode, 
-    SystemName, 
-    SystemTenantCode, 
-    SystemEnvironment, 
     SystemVersion, 
+    SystemName, 
+    SystemEnvironment, 
     SystemIsActive, 
     SystemCancelledAt, 
     SystemCreatedAt, 
@@ -25,27 +24,25 @@ export class BplusItSappiSystem extends AggregateRoot
     tenantId: SystemTenantId;
     tenant: AdminTenant;
     tenantCode: SystemTenantCode;
-    name: SystemName;
-    tenantCode: SystemTenantCode;
-    environment: SystemEnvironment;
     version: SystemVersion;
+    name: SystemName;
+    environment: SystemEnvironment;
     isActive: SystemIsActive;
     cancelledAt: SystemCancelledAt;
     createdAt: SystemCreatedAt;
     updatedAt: SystemUpdatedAt;
     deletedAt: SystemDeletedAt;
     
-    constructor(id?: SystemId, tenantId?: SystemTenantId, tenantCode?: SystemTenantCode, name?: SystemName, tenantCode?: SystemTenantCode, environment?: SystemEnvironment, version?: SystemVersion, isActive?: SystemIsActive, cancelledAt?: SystemCancelledAt, createdAt?: SystemCreatedAt, updatedAt?: SystemUpdatedAt, deletedAt?: SystemDeletedAt, )
+    constructor(id?: SystemId, tenantId?: SystemTenantId, tenantCode?: SystemTenantCode, version?: SystemVersion, name?: SystemName, environment?: SystemEnvironment, isActive?: SystemIsActive, cancelledAt?: SystemCancelledAt, createdAt?: SystemCreatedAt, updatedAt?: SystemUpdatedAt, deletedAt?: SystemDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;
-        this.name = name;
-        this.tenantCode = tenantCode;
-        this.environment = environment;
         this.version = version;
+        this.name = name;
+        this.environment = environment;
         this.isActive = isActive;
         this.cancelledAt = cancelledAt;
         this.createdAt = createdAt;
@@ -54,9 +51,9 @@ export class BplusItSappiSystem extends AggregateRoot
         
     }
 
-    static register (id: SystemId, tenantId: SystemTenantId, tenantCode: SystemTenantCode, name: SystemName, tenantCode: SystemTenantCode, environment: SystemEnvironment, version: SystemVersion, isActive: SystemIsActive, cancelledAt: SystemCancelledAt, createdAt: SystemCreatedAt, updatedAt: SystemUpdatedAt, deletedAt: SystemDeletedAt, ): BplusItSappiSystem
+    static register (id: SystemId, tenantId: SystemTenantId, tenantCode: SystemTenantCode, version: SystemVersion, name: SystemName, environment: SystemEnvironment, isActive: SystemIsActive, cancelledAt: SystemCancelledAt, createdAt: SystemCreatedAt, updatedAt: SystemUpdatedAt, deletedAt: SystemDeletedAt, ): BplusItSappiSystem
     {
-        return new BplusItSappiSystem(id, tenantId, tenantCode, name, tenantCode, environment, version, isActive, cancelledAt, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiSystem(id, tenantId, tenantCode, version, name, environment, isActive, cancelledAt, createdAt, updatedAt, deletedAt, );
     }
 
     created(system: BplusItSappiSystem): void
@@ -66,10 +63,9 @@ export class BplusItSappiSystem extends AggregateRoot
                 system.id.value,
                 system.tenantId.value,
                 system.tenantCode.value,
-                system.name.value,
-                system.tenantCode.value,
-                system.environment.value,
                 system.version.value,
+                system.name.value,
+                system.environment.value,
                 system.isActive.value,
                 system.cancelledAt?.value,
                 system.createdAt?.value,
@@ -87,10 +83,9 @@ export class BplusItSappiSystem extends AggregateRoot
                 system.id.value,
                 system.tenantId?.value,
                 system.tenantCode?.value,
-                system.name?.value,
-                system.tenantCode?.value,
-                system.environment?.value,
                 system.version?.value,
+                system.name?.value,
+                system.environment?.value,
                 system.isActive?.value,
                 system.cancelledAt?.value,
                 system.createdAt?.value,
@@ -108,10 +103,9 @@ export class BplusItSappiSystem extends AggregateRoot
                 system.id.value,
                 system.tenantId.value,
                 system.tenantCode.value,
-                system.name.value,
-                system.tenantCode.value,
-                system.environment.value,
                 system.version.value,
+                system.name.value,
+                system.environment.value,
                 system.isActive.value,
                 system.cancelledAt?.value,
                 system.createdAt?.value,
@@ -128,10 +122,9 @@ export class BplusItSappiSystem extends AggregateRoot
             id: this.id.value,
             tenantId: this.tenantId.value,
             tenantCode: this.tenantCode.value,
-            name: this.name.value,
-            tenantCode: this.tenantCode.value,
-            environment: this.environment.value,
             version: this.version.value,
+            name: this.name.value,
+            environment: this.environment.value,
             isActive: this.isActive.value,
             cancelledAt: this.cancelledAt?.value,
             createdAt: this.createdAt?.value,

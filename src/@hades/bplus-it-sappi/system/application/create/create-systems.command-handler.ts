@@ -5,10 +5,9 @@ import {
     SystemId, 
     SystemTenantId, 
     SystemTenantCode, 
-    SystemName, 
-    SystemTenantCode, 
-    SystemEnvironment, 
     SystemVersion, 
+    SystemName, 
+    SystemEnvironment, 
     SystemIsActive, 
     SystemCancelledAt
     
@@ -31,10 +30,9 @@ export class CreateSystemsCommandHandler implements ICommandHandler<CreateSystem
                         id: new SystemId(system.id),
                         tenantId: new SystemTenantId(system.tenantId),
                         tenantCode: new SystemTenantCode(system.tenantCode),
-                        name: new SystemName(system.name),
-                        tenantCode: new SystemTenantCode(system.tenantCode),
-                        environment: new SystemEnvironment(system.environment),
                         version: new SystemVersion(system.version),
+                        name: new SystemName(system.name),
+                        environment: new SystemEnvironment(system.environment),
                         isActive: new SystemIsActive(system.isActive),
                         cancelledAt: new SystemCancelledAt(system.cancelledAt),
                         

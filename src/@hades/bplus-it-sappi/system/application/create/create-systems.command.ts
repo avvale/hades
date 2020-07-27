@@ -5,10 +5,9 @@ export class CreateSystemsCommand
             id: string,
             tenantId: string,
             tenantCode: string,
-            name: string,
-            tenantCode: string,
-            environment: string,
             version: string,
+            name: string,
+            environment: string,
             isActive: boolean,
             cancelledAt?: string,
             

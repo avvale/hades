@@ -5,6 +5,7 @@ type BplusItSappiModule
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
+    version: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     channelId: ID!
@@ -31,6 +32,7 @@ input BplusItSappiCreateModuleInput
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
+    version: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
     channelId: ID!
@@ -54,6 +56,7 @@ input BplusItSappiUpdateModuleInput
     id: ID!
     tenantId: ID
     tenantCode: GraphQLString
+    version: GraphQLString
     systemId: ID
     systemName: GraphQLString
     channelId: ID

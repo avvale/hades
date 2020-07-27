@@ -42,6 +42,16 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
              
         
     @Column({
+        field: 'version',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(undefined),
+    })
+    version: string;
+        
+             
+        
+    @Column({
         field: 'name',
         primaryKey: false,
         allowNull: false,
@@ -52,32 +62,12 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
              
         
     @Column({
-        field: 'tenant_code',
-        primaryKey: false,
-        allowNull: false,
-        type: DataTypes.STRING(undefined),
-    })
-    tenantCode: string;
-        
-             
-        
-    @Column({
         field: 'environment',
         primaryKey: false,
         allowNull: false,
         type: DataTypes.STRING(undefined),
     })
     environment: string;
-        
-             
-        
-    @Column({
-        field: 'version',
-        primaryKey: false,
-        allowNull: false,
-        type: DataTypes.STRING(undefined),
-    })
-    version: string;
         
              
         

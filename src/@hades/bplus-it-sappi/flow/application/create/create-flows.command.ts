@@ -5,6 +5,7 @@ export class CreateFlowsCommand
             id: string,
             tenantId: string,
             tenantCode: string,
+            version: string,
             systemId: string,
             systemName: string,
             scenario: string,

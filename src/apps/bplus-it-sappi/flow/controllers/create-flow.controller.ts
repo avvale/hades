@@ -27,6 +27,7 @@ export class CreateFlowController
             payload.id,
             payload.tenantId,
             payload.tenantCode,
+            payload.version,
             payload.systemId,
             payload.systemName,
             payload.scenario,

@@ -8,10 +8,9 @@ import {
     SystemId, 
     SystemTenantId, 
     SystemTenantCode, 
-    SystemName, 
-    SystemTenantCode, 
-    SystemEnvironment, 
     SystemVersion, 
+    SystemName, 
+    SystemEnvironment, 
     SystemIsActive, 
     SystemCancelledAt
     
@@ -61,10 +60,9 @@ describe('CreateSystemService', () =>
                 new SystemId(systems[0].id),
                 new SystemTenantId(systems[0].tenantId),
                 new SystemTenantCode(systems[0].tenantCode),
-                new SystemName(systems[0].name),
-                new SystemTenantCode(systems[0].tenantCode),
-                new SystemEnvironment(systems[0].environment),
                 new SystemVersion(systems[0].version),
+                new SystemName(systems[0].name),
+                new SystemEnvironment(systems[0].environment),
                 new SystemIsActive(systems[0].isActive),
                 new SystemCancelledAt(systems[0].cancelledAt),
                 

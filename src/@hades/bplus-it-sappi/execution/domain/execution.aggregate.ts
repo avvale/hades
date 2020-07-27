@@ -3,6 +3,7 @@ import {
     ExecutionId, 
     ExecutionTenantId, 
     ExecutionTenantCode, 
+    ExecutionVersion, 
     ExecutionSystemId, 
     ExecutionSystemName, 
     ExecutionType, 
@@ -26,6 +27,7 @@ export class BplusItSappiExecution extends AggregateRoot
     tenantId: ExecutionTenantId;
     tenant: AdminTenant;
     tenantCode: ExecutionTenantCode;
+    version: ExecutionVersion;
     systemId: ExecutionSystemId;
     system: BplusItSappiSystem;
     systemName: ExecutionSystemName;
@@ -37,13 +39,14 @@ export class BplusItSappiExecution extends AggregateRoot
     updatedAt: ExecutionUpdatedAt;
     deletedAt: ExecutionDeletedAt;
     
-    constructor(id?: ExecutionId, tenantId?: ExecutionTenantId, tenantCode?: ExecutionTenantCode, systemId?: ExecutionSystemId, systemName?: ExecutionSystemName, type?: ExecutionType, monitoringStartAt?: ExecutionMonitoringStartAt, monitoringEndAt?: ExecutionMonitoringEndAt, executedAt?: ExecutionExecutedAt, createdAt?: ExecutionCreatedAt, updatedAt?: ExecutionUpdatedAt, deletedAt?: ExecutionDeletedAt, )
+    constructor(id?: ExecutionId, tenantId?: ExecutionTenantId, tenantCode?: ExecutionTenantCode, version?: ExecutionVersion, systemId?: ExecutionSystemId, systemName?: ExecutionSystemName, type?: ExecutionType, monitoringStartAt?: ExecutionMonitoringStartAt, monitoringEndAt?: ExecutionMonitoringEndAt, executedAt?: ExecutionExecutedAt, createdAt?: ExecutionCreatedAt, updatedAt?: ExecutionUpdatedAt, deletedAt?: ExecutionDeletedAt, )
     {
         super();
         
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;
+        this.version = version;
         this.systemId = systemId;
         this.systemName = systemName;
         this.type = type;
@@ -56,9 +59,9 @@ export class BplusItSappiExecution extends AggregateRoot
         
     }
 
-    static register (id: ExecutionId, tenantId: ExecutionTenantId, tenantCode: ExecutionTenantCode, systemId: ExecutionSystemId, systemName: ExecutionSystemName, type: ExecutionType, monitoringStartAt: ExecutionMonitoringStartAt, monitoringEndAt: ExecutionMonitoringEndAt, executedAt: ExecutionExecutedAt, createdAt: ExecutionCreatedAt, updatedAt: ExecutionUpdatedAt, deletedAt: ExecutionDeletedAt, ): BplusItSappiExecution
+    static register (id: ExecutionId, tenantId: ExecutionTenantId, tenantCode: ExecutionTenantCode, version: ExecutionVersion, systemId: ExecutionSystemId, systemName: ExecutionSystemName, type: ExecutionType, monitoringStartAt: ExecutionMonitoringStartAt, monitoringEndAt: ExecutionMonitoringEndAt, executedAt: ExecutionExecutedAt, createdAt: ExecutionCreatedAt, updatedAt: ExecutionUpdatedAt, deletedAt: ExecutionDeletedAt, ): BplusItSappiExecution
     {
-        return new BplusItSappiExecution(id, tenantId, tenantCode, systemId, systemName, type, monitoringStartAt, monitoringEndAt, executedAt, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiExecution(id, tenantId, tenantCode, version, systemId, systemName, type, monitoringStartAt, monitoringEndAt, executedAt, createdAt, updatedAt, deletedAt, );
     }
 
     created(execution: BplusItSappiExecution): void
@@ -68,6 +71,7 @@ export class BplusItSappiExecution extends AggregateRoot
                 execution.id.value,
                 execution.tenantId.value,
                 execution.tenantCode.value,
+                execution.version.value,
                 execution.systemId.value,
                 execution.systemName.value,
                 execution.type.value,
@@ -89,6 +93,7 @@ export class BplusItSappiExecution extends AggregateRoot
                 execution.id.value,
                 execution.tenantId?.value,
                 execution.tenantCode?.value,
+                execution.version?.value,
                 execution.systemId?.value,
                 execution.systemName?.value,
                 execution.type?.value,
@@ -110,6 +115,7 @@ export class BplusItSappiExecution extends AggregateRoot
                 execution.id.value,
                 execution.tenantId.value,
                 execution.tenantCode.value,
+                execution.version.value,
                 execution.systemId.value,
                 execution.systemName.value,
                 execution.type.value,
@@ -130,6 +136,7 @@ export class BplusItSappiExecution extends AggregateRoot
             id: this.id.value,
             tenantId: this.tenantId.value,
             tenantCode: this.tenantCode.value,
+            version: this.version.value,
             systemId: this.systemId.value,
             systemName: this.systemName.value,
             type: this.type.value,

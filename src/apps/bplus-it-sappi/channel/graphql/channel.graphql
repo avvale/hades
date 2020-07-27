@@ -15,6 +15,7 @@ type BplusItSappiChannel
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
+    version: GraphQLString!
     systemId: ID!
     party: GraphQLString
     component: GraphQLString!
@@ -54,6 +55,7 @@ input BplusItSappiCreateChannelInput
     id: ID!
     tenantId: ID!
     tenantCode: GraphQLString!
+    version: GraphQLString!
     systemId: ID!
     party: GraphQLString
     component: GraphQLString!
@@ -90,6 +92,7 @@ input BplusItSappiUpdateChannelInput
     id: ID!
     tenantId: ID
     tenantCode: GraphQLString
+    version: GraphQLString
     systemId: ID
     party: GraphQLString
     component: GraphQLString

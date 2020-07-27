@@ -1,6 +1,7 @@
 export { ModuleId } from './module-id';
 export { ModuleTenantId } from './module-tenant-id';
 export { ModuleTenantCode } from './module-tenant-code';
+export { ModuleVersion } from './module-version';
 export { ModuleSystemId } from './module-system-id';
 export { ModuleSystemName } from './module-system-name';
 export { ModuleChannelId } from './module-channel-id';

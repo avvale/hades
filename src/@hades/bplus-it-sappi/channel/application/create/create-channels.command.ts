@@ -5,6 +5,7 @@ export class CreateChannelsCommand
             id: string,
             tenantId: string,
             tenantCode: string,
+            version: string,
             systemId: string,
             party?: string,
             component: string,

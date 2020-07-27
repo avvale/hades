@@ -44,6 +44,16 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         
              
         
+    @Column({
+        field: 'version',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(20),
+    })
+    version: string;
+        
+             
+        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({

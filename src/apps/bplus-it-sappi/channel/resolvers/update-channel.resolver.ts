@@ -22,6 +22,7 @@ export class UpdateChannelResolver
             payload.id,
             payload.tenantId,
             payload.tenantCode,
+            payload.version,
             payload.systemId,
             payload.party,
             payload.component,

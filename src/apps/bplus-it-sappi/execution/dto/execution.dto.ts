@@ -6,7 +6,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'd3046332-f5fd-4442-93de-348bbedcc904'
+        example     : 'ac34d5a2-d81d-4df8-83cd-c8a18286bdf6'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'b66505b5-5a81-4dcb-a4cc-5a3496cddad2'
+        example     : '6fdccd80-3a60-423f-b172-be145ef75423'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'w7q8b9z6ciboa5hid4t1nfollx707tjzmpar49sx5ypx8bk0fu'
+        example     : 'uwaachloh227upm0cblh1hforjnzy8dx5bhcosz6c2i5655ywz'
     })
     tenantCode: string;
     
@@ -32,8 +32,17 @@ export class ExecutionDto
     
     @ApiProperty({
         type        : String,
+        description : 'version [input here api field description]',
+        example     : 'ekpww9a11lbj405dskyc'
+    })
+    version: string;
+    
+    
+    
+    @ApiProperty({
+        type        : String,
         description : 'systemId [input here api field description]',
-        example     : '9ec2e907-81f8-4274-b4df-9981263b6aa0'
+        example     : '0e8502fb-f75c-481a-abdb-3138fc066c1d'
     })
     systemId: string;
     
@@ -42,7 +51,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : '4svqtn3069mt9kga2gt3'
+        example     : '3bxpdq8nr1gdhahk2ad6'
     })
     systemName: string;
     
@@ -51,7 +60,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'type [input here api field description]',
-        example     : 'DETAIL',
+        example     : 'SUMMARY',
         enum        : ['SUMMARY','DETAIL']
     })
     type: string;
@@ -61,7 +70,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'monitoringStartAt [input here api field description]',
-        example     : '2020-07-24 01:15:16'
+        example     : '2020-07-27 06:59:41'
     })
     monitoringStartAt: string;
     
@@ -70,7 +79,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'monitoringEndAt [input here api field description]',
-        example     : '2020-07-24 17:32:54'
+        example     : '2020-07-27 02:58:06'
     })
     monitoringEndAt: string;
     
@@ -79,7 +88,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'executedAt [input here api field description]',
-        example     : '2020-07-24 09:43:58'
+        example     : '2020-07-27 03:23:20'
     })
     executedAt: string;
     
@@ -88,7 +97,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-24 15:27:39'
+        example     : '2020-07-27 03:00:01'
     })
     createdAt: string;
     
@@ -97,7 +106,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-24 06:14:24'
+        example     : '2020-07-27 12:54:46'
     })
     updatedAt: string;
     
@@ -106,7 +115,7 @@ export class ExecutionDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-24 14:27:47'
+        example     : '2020-07-27 10:04:59'
     })
     deletedAt: string;
     

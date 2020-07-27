@@ -22,10 +22,9 @@ export class CreateSystemResolver
             payload.id,
             payload.tenantId,
             payload.tenantCode,
-            payload.name,
-            payload.tenantCode,
-            payload.environment,
             payload.version,
+            payload.name,
+            payload.environment,
             payload.isActive,
             payload.cancelledAt,
             

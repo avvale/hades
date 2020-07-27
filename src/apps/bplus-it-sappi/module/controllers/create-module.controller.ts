@@ -27,6 +27,7 @@ export class CreateModuleController
             payload.id,
             payload.tenantId,
             payload.tenantCode,
+            payload.version,
             payload.systemId,
             payload.systemName,
             payload.channelId,

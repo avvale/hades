@@ -5,6 +5,7 @@ export class CreateExecutionsCommand
             id: string,
             tenantId: string,
             tenantCode: string,
+            version: string,
             systemId: string,
             systemName: string,
             type: string,

@@ -71,6 +71,11 @@ export enum BplusItSappiMessageDetailStatus {
     WAITING = "WAITING"
 }
 
+export enum BplusItSappiMessageDetailDirection {
+    INBOUND = "INBOUND",
+    OUTBOUND = "OUTBOUND"
+}
+
 export enum BplusItSappiMessageOverviewExecutionType {
     SUMMARY = "SUMMARY",
     DETAIL = "DETAIL"
@@ -187,6 +192,7 @@ export interface AdminUpdateTenantInput {
 export interface BplusItSappiCreateChannelDetailInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     executionId: string;
@@ -196,16 +202,17 @@ export interface BplusItSappiCreateChannelDetailInput {
     executionMonitoringEndAt: GraphQLTimestamp;
     status: BplusItSappiChannelDetailStatus;
     channelId: string;
+    channelSapId: GraphQLString;
     channelParty?: GraphQLString;
     channelComponent: GraphQLString;
     channelName: GraphQLString;
     detail?: GraphQLString;
-    example?: GraphQLString;
 }
 
 export interface BplusItSappiUpdateChannelDetailInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
     systemId?: string;
     systemName?: GraphQLString;
     executionId?: string;
@@ -215,16 +222,17 @@ export interface BplusItSappiUpdateChannelDetailInput {
     executionMonitoringEndAt?: GraphQLTimestamp;
     status?: BplusItSappiChannelDetailStatus;
     channelId?: string;
+    channelSapId?: GraphQLString;
     channelParty?: GraphQLString;
     channelComponent?: GraphQLString;
     channelName?: GraphQLString;
     detail?: GraphQLString;
-    example?: GraphQLString;
 }
 
 export interface BplusItSappiCreateChannelOverviewInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     executionId: string;
@@ -243,6 +251,7 @@ export interface BplusItSappiCreateChannelOverviewInput {
 export interface BplusItSappiUpdateChannelOverviewInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
     systemId?: string;
     systemName?: GraphQLString;
     executionId?: string;
@@ -261,10 +270,13 @@ export interface BplusItSappiUpdateChannelOverviewInput {
 export interface BplusItSappiCreateChannelInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
+    version: GraphQLString;
     systemId: string;
     party?: GraphQLString;
     component: GraphQLString;
     name: GraphQLString;
+    flowId?: string;
     flowParty: GraphQLString;
     flowComponent: GraphQLString;
     flowInterfaceName: GraphQLString;
@@ -293,10 +305,13 @@ export interface BplusItSappiCreateChannelInput {
 export interface BplusItSappiUpdateChannelInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
+    version?: GraphQLString;
     systemId?: string;
     party?: GraphQLString;
     component?: GraphQLString;
     name?: GraphQLString;
+    flowId?: string;
     flowParty?: GraphQLString;
     flowComponent?: GraphQLString;
     flowInterfaceName?: GraphQLString;
@@ -325,6 +340,7 @@ export interface BplusItSappiUpdateChannelInput {
 export interface BplusItSappiCreateContactInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     roleId?: string;
@@ -342,6 +358,7 @@ export interface BplusItSappiCreateContactInput {
 export interface BplusItSappiUpdateContactInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
     systemId?: string;
     systemName?: GraphQLString;
     roleId?: string;
@@ -373,7 +390,10 @@ export interface BplusItSappiUpdateDataLakeInput {
 export interface BplusItSappiCreateExecutionInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
+    version: GraphQLString;
     systemId: string;
+    systemName: GraphQLString;
     type: BplusItSappiExecutionType;
     monitoringStartAt: GraphQLTimestamp;
     monitoringEndAt: GraphQLTimestamp;
@@ -383,7 +403,10 @@ export interface BplusItSappiCreateExecutionInput {
 export interface BplusItSappiUpdateExecutionInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
+    version?: GraphQLString;
     systemId?: string;
+    systemName?: GraphQLString;
     type?: BplusItSappiExecutionType;
     monitoringStartAt?: GraphQLTimestamp;
     monitoringEndAt?: GraphQLTimestamp;
@@ -393,6 +416,8 @@ export interface BplusItSappiUpdateExecutionInput {
 export interface BplusItSappiCreateFlowInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
+    version: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     scenario: GraphQLString;
@@ -416,6 +441,8 @@ export interface BplusItSappiCreateFlowInput {
 export interface BplusItSappiUpdateFlowInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
+    version?: GraphQLString;
     systemId?: string;
     systemName?: GraphQLString;
     scenario?: GraphQLString;
@@ -439,6 +466,7 @@ export interface BplusItSappiUpdateFlowInput {
 export interface BplusItSappiCreateJobDetailInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     executionId: string;
@@ -451,11 +479,14 @@ export interface BplusItSappiCreateJobDetailInput {
     returnCode?: GraphQLInt;
     node?: GraphQLString;
     user?: GraphQLString;
+    startAt: GraphQLTimestamp;
+    endAt: GraphQLTimestamp;
 }
 
 export interface BplusItSappiUpdateJobDetailInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
     systemId?: string;
     systemName?: GraphQLString;
     executionId?: string;
@@ -468,11 +499,14 @@ export interface BplusItSappiUpdateJobDetailInput {
     returnCode?: GraphQLInt;
     node?: GraphQLString;
     user?: GraphQLString;
+    startAt?: GraphQLTimestamp;
+    endAt?: GraphQLTimestamp;
 }
 
 export interface BplusItSappiCreateJobOverviewInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     executionId: string;
@@ -488,6 +522,7 @@ export interface BplusItSappiCreateJobOverviewInput {
 export interface BplusItSappiUpdateJobOverviewInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
     systemId?: string;
     systemName?: GraphQLString;
     executionId?: string;
@@ -503,6 +538,7 @@ export interface BplusItSappiUpdateJobOverviewInput {
 export interface BplusItSappiCreateMessageDetailInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     scenario?: GraphQLString;
@@ -511,7 +547,7 @@ export interface BplusItSappiCreateMessageDetailInput {
     executionExecutedAt: GraphQLTimestamp;
     executionMonitoringStartAt: GraphQLTimestamp;
     executionMonitoringEndAt: GraphQLTimestamp;
-    flowId: string;
+    flowId?: string;
     flowParty?: GraphQLString;
     flowComponent: GraphQLString;
     flowInterfaceName: GraphQLString;
@@ -520,10 +556,10 @@ export interface BplusItSappiCreateMessageDetailInput {
     detail?: GraphQLString;
     example?: GraphQLString;
     startTimeAt?: GraphQLTimestamp;
-    direction?: GraphQLString;
+    direction: BplusItSappiMessageDetailDirection;
     errorCategory?: GraphQLString;
     errorCode?: GraphQLString;
-    errorLabel?: GraphQLString;
+    errorLabel?: GraphQLInt;
     node?: GraphQLInt;
     protocol?: GraphQLString;
     qualityOfService?: GraphQLString;
@@ -539,6 +575,7 @@ export interface BplusItSappiCreateMessageDetailInput {
 export interface BplusItSappiUpdateMessageDetailInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
     systemId?: string;
     systemName?: GraphQLString;
     scenario?: GraphQLString;
@@ -556,10 +593,10 @@ export interface BplusItSappiUpdateMessageDetailInput {
     detail?: GraphQLString;
     example?: GraphQLString;
     startTimeAt?: GraphQLTimestamp;
-    direction?: GraphQLString;
+    direction?: BplusItSappiMessageDetailDirection;
     errorCategory?: GraphQLString;
     errorCode?: GraphQLString;
-    errorLabel?: GraphQLString;
+    errorLabel?: GraphQLInt;
     node?: GraphQLInt;
     protocol?: GraphQLString;
     qualityOfService?: GraphQLString;
@@ -575,6 +612,7 @@ export interface BplusItSappiUpdateMessageDetailInput {
 export interface BplusItSappiCreateMessageOverviewInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     executionId: string;
@@ -596,6 +634,7 @@ export interface BplusItSappiCreateMessageOverviewInput {
 export interface BplusItSappiUpdateMessageOverviewInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
     systemId?: string;
     systemName?: GraphQLString;
     executionId?: string;
@@ -617,12 +656,15 @@ export interface BplusItSappiUpdateMessageOverviewInput {
 export interface BplusItSappiCreateModuleInput {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
+    version: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     channelId: string;
     channelParty?: GraphQLString;
     channelComponent: GraphQLString;
     channelName: GraphQLString;
+    flowId?: string;
     flowParty?: GraphQLString;
     flowComponent: GraphQLString;
     flowInterfaceName: GraphQLString;
@@ -636,12 +678,15 @@ export interface BplusItSappiCreateModuleInput {
 export interface BplusItSappiUpdateModuleInput {
     id: string;
     tenantId?: string;
+    tenantCode?: GraphQLString;
+    version?: GraphQLString;
     systemId?: string;
     systemName?: GraphQLString;
     channelId?: string;
     channelParty?: GraphQLString;
     channelComponent?: GraphQLString;
     channelName?: GraphQLString;
+    flowId?: string;
     flowParty?: GraphQLString;
     flowComponent?: GraphQLString;
     flowInterfaceName?: GraphQLString;
@@ -669,10 +714,10 @@ export interface BplusItSappiUpdateRoleInput {
 export interface BplusItSappiCreateSystemInput {
     id: string;
     tenantId: string;
-    name: GraphQLString;
     tenantCode: GraphQLString;
-    environment: GraphQLString;
     version: GraphQLString;
+    name: GraphQLString;
+    environment: GraphQLString;
     isActive: GraphQLBoolean;
     cancelledAt?: GraphQLTimestamp;
 }
@@ -680,10 +725,10 @@ export interface BplusItSappiCreateSystemInput {
 export interface BplusItSappiUpdateSystemInput {
     id: string;
     tenantId?: string;
-    name?: GraphQLString;
     tenantCode?: GraphQLString;
-    environment?: GraphQLString;
     version?: GraphQLString;
+    name?: GraphQLString;
+    environment?: GraphQLString;
     isActive?: GraphQLBoolean;
     cancelledAt?: GraphQLTimestamp;
 }
@@ -932,6 +977,7 @@ export interface AdminTenant {
 export interface BplusItSappiChannelDetail {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     executionId: string;
@@ -941,11 +987,11 @@ export interface BplusItSappiChannelDetail {
     executionMonitoringEndAt: GraphQLTimestamp;
     status: BplusItSappiChannelDetailStatus;
     channelId: string;
+    channelSapId: GraphQLString;
     channelParty?: GraphQLString;
     channelComponent: GraphQLString;
     channelName: GraphQLString;
     detail?: GraphQLString;
-    example?: GraphQLString;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -954,6 +1000,7 @@ export interface BplusItSappiChannelDetail {
 export interface BplusItSappiChannelOverview {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     executionId: string;
@@ -975,10 +1022,13 @@ export interface BplusItSappiChannelOverview {
 export interface BplusItSappiChannel {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
+    version: GraphQLString;
     systemId: string;
     party?: GraphQLString;
     component: GraphQLString;
     name: GraphQLString;
+    flowId?: string;
     flowParty: GraphQLString;
     flowComponent: GraphQLString;
     flowInterfaceName: GraphQLString;
@@ -1010,6 +1060,7 @@ export interface BplusItSappiChannel {
 export interface BplusItSappiContact {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     roleId?: string;
@@ -1040,7 +1091,10 @@ export interface BplusItSappiDataLake {
 export interface BplusItSappiExecution {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
+    version: GraphQLString;
     systemId: string;
+    systemName: GraphQLString;
     type: BplusItSappiExecutionType;
     monitoringStartAt: GraphQLTimestamp;
     monitoringEndAt: GraphQLTimestamp;
@@ -1053,6 +1107,8 @@ export interface BplusItSappiExecution {
 export interface BplusItSappiFlow {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
+    version: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     scenario: GraphQLString;
@@ -1079,6 +1135,7 @@ export interface BplusItSappiFlow {
 export interface BplusItSappiJobDetail {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     executionId: string;
@@ -1091,6 +1148,8 @@ export interface BplusItSappiJobDetail {
     returnCode?: GraphQLInt;
     node?: GraphQLString;
     user?: GraphQLString;
+    startAt: GraphQLTimestamp;
+    endAt: GraphQLTimestamp;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -1099,6 +1158,7 @@ export interface BplusItSappiJobDetail {
 export interface BplusItSappiJobOverview {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     executionId: string;
@@ -1117,6 +1177,7 @@ export interface BplusItSappiJobOverview {
 export interface BplusItSappiMessageDetail {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     scenario?: GraphQLString;
@@ -1125,7 +1186,7 @@ export interface BplusItSappiMessageDetail {
     executionExecutedAt: GraphQLTimestamp;
     executionMonitoringStartAt: GraphQLTimestamp;
     executionMonitoringEndAt: GraphQLTimestamp;
-    flowId: string;
+    flowId?: string;
     flowParty?: GraphQLString;
     flowComponent: GraphQLString;
     flowInterfaceName: GraphQLString;
@@ -1134,10 +1195,10 @@ export interface BplusItSappiMessageDetail {
     detail?: GraphQLString;
     example?: GraphQLString;
     startTimeAt?: GraphQLTimestamp;
-    direction?: GraphQLString;
+    direction: BplusItSappiMessageDetailDirection;
     errorCategory?: GraphQLString;
     errorCode?: GraphQLString;
-    errorLabel?: GraphQLString;
+    errorLabel?: GraphQLInt;
     node?: GraphQLInt;
     protocol?: GraphQLString;
     qualityOfService?: GraphQLString;
@@ -1156,6 +1217,7 @@ export interface BplusItSappiMessageDetail {
 export interface BplusItSappiMessageOverview {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     executionId: string;
@@ -1180,12 +1242,15 @@ export interface BplusItSappiMessageOverview {
 export interface BplusItSappiModule {
     id: string;
     tenantId: string;
+    tenantCode: GraphQLString;
+    version: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
     channelId: string;
     channelParty?: GraphQLString;
     channelComponent: GraphQLString;
     channelName: GraphQLString;
+    flowId?: string;
     flowParty?: GraphQLString;
     flowComponent: GraphQLString;
     flowInterfaceName: GraphQLString;
@@ -1212,10 +1277,10 @@ export interface BplusItSappiRole {
 export interface BplusItSappiSystem {
     id: string;
     tenantId: string;
-    name: GraphQLString;
     tenantCode: GraphQLString;
-    environment: GraphQLString;
     version: GraphQLString;
+    name: GraphQLString;
+    environment: GraphQLString;
     isActive: GraphQLBoolean;
     cancelledAt?: GraphQLTimestamp;
     createdAt?: GraphQLTimestamp;

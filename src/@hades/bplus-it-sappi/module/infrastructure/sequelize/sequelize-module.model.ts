@@ -44,6 +44,16 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         
              
         
+    @Column({
+        field: 'version',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.STRING(20),
+    })
+    version: string;
+        
+             
+        
     @ForeignKey(() => BplusItSappiSystemModel)
     
     @Column({

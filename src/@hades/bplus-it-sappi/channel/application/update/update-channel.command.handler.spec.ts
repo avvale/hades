@@ -43,6 +43,7 @@ describe('UpdateChannelCommandHandler', () =>
                     channels[0].id,
                     channels[0].tenantId,
                     channels[0].tenantCode,
+                    channels[0].version,
                     channels[0].systemId,
                     channels[0].party,
                     channels[0].component,

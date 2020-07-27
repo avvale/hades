@@ -27,6 +27,7 @@ export class CreateExecutionController
             payload.id,
             payload.tenantId,
             payload.tenantCode,
+            payload.version,
             payload.systemId,
             payload.systemName,
             payload.type,
