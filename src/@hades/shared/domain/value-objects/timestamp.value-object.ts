@@ -13,6 +13,6 @@ export abstract class TimestampValueObject extends StringValueObject
 
     private ensureIsValidTimestamp(timeStamp: string): void
     {
-        if (timeStamp !== null && !((new Date(timeStamp)).getTime() > 0)) throw new BadRequestException(`Value for ${this.validationRules.name} has to be a timestamp value`);
+        if (timeStamp !== null && !((new Date(timeStamp)).getTime() > 0)) throw new BadRequestException(`Value for ${this.validationRules.name} has to be a timestamp value, value ${this.value} is a not valid timestamp`);
     }
 }
