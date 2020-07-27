@@ -201,7 +201,7 @@ export interface BplusItSappiCreateChannelDetailInput {
     executionMonitoringStartAt: GraphQLTimestamp;
     executionMonitoringEndAt: GraphQLTimestamp;
     status: BplusItSappiChannelDetailStatus;
-    channelId: string;
+    channelId?: string;
     channelSapId: GraphQLString;
     channelParty?: GraphQLString;
     channelComponent: GraphQLString;
@@ -988,7 +988,7 @@ export interface BplusItSappiChannelDetail {
     executionMonitoringStartAt: GraphQLTimestamp;
     executionMonitoringEndAt: GraphQLTimestamp;
     status: BplusItSappiChannelDetailStatus;
-    channelId: string;
+    channelId?: string;
     channelSapId: GraphQLString;
     channelParty?: GraphQLString;
     channelComponent: GraphQLString;
