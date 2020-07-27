@@ -11,7 +11,7 @@ export class MessageDetailErrorCode extends StringValueObject
             name: 'MessageDetailErrorCode',
             nullable: true,
             undefinable: true,
-            maxLength: 20,            
+            maxLength: 50,            
         }, validationRules));
     }
 }

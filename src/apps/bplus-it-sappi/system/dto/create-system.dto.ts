@@ -6,7 +6,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'dcb392b9-7456-4ab4-87fa-433736e684d0'
+        example     : 'e07689d2-ca55-4464-8263-0b001b76c7a7'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '5cccbc40-c574-4977-9ed6-de4ad5da75a4'
+        example     : '4880ce55-d8d1-454a-885a-0fa45def548a'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'oab8871s23zisnxq5moqqz2fwasupamzq8u84579h5xvs049j6'
+        example     : '9qijyjol9xtb84bza0yoxeccivtd3hciz8jnevx1d0gpetiutn'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'version [input here api field description]',
-        example     : 'm'
+        example     : 'l'
     })
     version: string;
     
@@ -42,7 +42,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '5'
+        example     : 'z'
     })
     name: string;
     
@@ -60,7 +60,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : false
+        example     : true
     })
     isActive: boolean;
     
@@ -69,7 +69,7 @@ export class CreateSystemDto
     @ApiProperty({
         type        : String,
         description : 'cancelledAt [input here api field description]',
-        example     : '2020-07-27 13:52:29'
+        example     : '2020-07-27 20:16:28'
     })
     cancelledAt: string;
     

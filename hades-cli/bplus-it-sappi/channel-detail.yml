@@ -64,7 +64,7 @@ aggregateProperties:
   - name: channel_id
     type: id
     length: 36
-    nullable: false
+    nullable: true
     relationship: many-to-one
     relationshipAggregate: BplusItSappiChannel
     relationshipModulePath: bplus-it-sappi/channel

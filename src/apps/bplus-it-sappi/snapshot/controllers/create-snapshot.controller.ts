@@ -72,10 +72,7 @@ export class CreateSnapshotController
             ]
         )); */
 
-        console.log(tenant);
-
-
-        /* const executionId = uuidv4();
+        const executionId = uuidv4();
         const execution = await this.commandBus.dispatch(new CreateExecutionCommand(
             executionId,
             tenant.id,
@@ -96,7 +93,7 @@ export class CreateSnapshotController
             tenant.code,
             system.id,
             system.name,
-            execution.id,
+            executionId,
             payload.execution.type,
             payload.execution.executedAt,
             payload.execution.monitoringStartAt,
@@ -119,7 +116,7 @@ export class CreateSnapshotController
             tenant.code,
             system.id,
             system.name,
-            execution.id,
+            executionId,
             payload.execution.type,
             payload.execution.executedAt,
             payload.execution.monitoringStartAt,
@@ -139,7 +136,7 @@ export class CreateSnapshotController
             tenant.code,
             system.id,
             system.name,
-            execution.id,
+            executionId,
             payload.execution.type,
             payload.execution.executedAt,
             payload.execution.monitoringStartAt,
@@ -233,6 +230,6 @@ export class CreateSnapshotController
                 endAt: job.endAt
             }
         });
-        this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail)); */
+        this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
     } 
 }

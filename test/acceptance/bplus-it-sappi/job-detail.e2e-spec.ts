@@ -68,22 +68,22 @@ describe('job-detail', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'uli6r497qctavtt1b90q6yg05vhj08e9n8z6idrohtoxfwoqjh',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '30hl5n8fbik60tfyudmi',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'dl5n62m28cc101rrpglozkcocu741dvy821pxqk6kksna1t2gz',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'oivnwmgwukl2wf2gb89y',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 13:53:35',
-                executionMonitoringStartAt: '2020-07-27 01:57:45',
-                executionMonitoringEndAt: '2020-07-26 20:56:16',
+                executionExecutedAt: '2020-07-27 08:04:56',
+                executionMonitoringStartAt: '2020-07-27 02:40:24',
+                executionMonitoringEndAt: '2020-07-27 18:55:47',
                 status: 'CANCELLED',
-                name: '20cuaukjo10tbfp1n439mnc5qptpcvxzicdeuozaho6r4rlqu1fhem9gxjkbv4v55xacuyvlxxqhtdzoapzb8f2cihazdvy5g021ov9loqsk5v2oql1ngjdc5csjhnuhamr3s3bi39ai8enxgta2p8hamdi4wuwd9ti7xie73c9ycb3oqactyvghbsqxl5dou0uhn3xodtxg6yp73lkoo5eguqj20m9rgvux81hbqutms4h6351078cr0a69upy',
-                returnCode: 2907248510,
-                node: '7ojjbt3kct4tzqoz0qw5cfo8vkm9zfg1opvrp2iacxrkeqfp57b527ut9jqelpss2hcpwexft0wpgb7fh3afdh1wt5dvnq0rqc6lopkrql2kyihzl3vjmupmli7wta5gs3ek2w27galw4amu7hndrs0l0lldjeeo',
-                user: 'v07qtzsgkd1dlbu8bvoy9x31wzzlkisawkrsuczfsriif3950uqilz9sf6xcwddr8e390phc8j8yb3dga2tk1bx1xk0zgfb567z4h54r5t7imbuyovcedlv3kxvjmmmr7iwcietne60dpnu0lej3vzl37gn8cx0v5g10roznzjqliwrja3qhyw2bdfduhqxit31kn5ik8dbstcdmlco3m86f89k8qw1m50wt0r88x7gea8fwr1qnrwkd779y1tx',
-                startAt: '2020-07-27 09:47:19',
-                endAt: '2020-07-26 20:45:42',
+                name: 'e8c0uk8nbt9je4od25t36cjs34br1vu8m59nlkjta69n50db8y06lnkh0w1v7ehq7a539bp17l5mxkhovfivl4qpg0qlgw4l9bm7gfqduj4hthjuca5p7gjs3817axkm198zlczicbk7au25lpgp055puo0g9aejt7kb51eugt6g88gghz2isgaqgknftjwvsqrtmp3rno33v7ririlahzlqmurutwxoqdxfsxao1na0l8gjco226yxnuysl6m8',
+                returnCode: 2276016955,
+                node: '0d1hbir0txbvrts4e8lr1q30w8t3586of1bkqjevb478w8jigaqsqcw311wi8sn6372yfcudcyv9zkeh98ubvg6hrporv8zykq8xj3u7f1i5t3wuucqsdk6oet26j3nej0ep785754krowlk5lws3wb6hy629x4o',
+                user: 'pomu0d7hkucw1h425m4u534l81fmcbdoyk2npp3a9z866gisqrlnvrzutdbgha4q6r0xd22j0baiiaxgm22qmglqoszco1rk7dyk5rm4ar4gexurg2eh7a9hlhayei0j0s9ontqh0mcalex6oooj22r4tv2pj2pom9g84ihnwq7krjr3mqoaj02f24mwn8upereq99399cr13nao5bn7qtdljqctaeaupcyqq554kc8f59q4jkh23vsqvr9gls1',
+                startAt: '2020-07-27 15:10:37',
+                endAt: '2020-07-27 10:22:32',
             })
             .expect(400)
             .then(res => {
@@ -98,22 +98,22 @@ describe('job-detail', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'fn73x5btschkx0fnzk0pak1akss4da0zl7o6188gy9emkzq74l',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'ig3m9x9z8cyb68ppzotu',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 21:02:03',
-                executionMonitoringStartAt: '2020-07-27 17:49:59',
-                executionMonitoringEndAt: '2020-07-26 19:09:20',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'owilfcvqztzb2j3mua3rm898gov8nwxbic28n5b8qk3cho1ttz',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'rkesgyqkwdtm7bbqz51j',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 05:00:57',
+                executionMonitoringStartAt: '2020-07-27 05:26:18',
+                executionMonitoringEndAt: '2020-07-27 11:05:10',
                 status: 'COMPLETED',
-                name: 'ldf7otfcx3h6gew9s9000fclysc0fpzfaoj470idq96qiqzdmzry96sm1svo98war00gelu3oklkqbyv05x0cgop42wz8f8q86ob1lp27q6t30s2di3qhntcgjmsc60zgftbclj8eklwn44rse0w45ibew8ji2z1438vxigks3igb89o8zp5oku6qn6a592b08suvbimp013sm6q8fl9cny8nyq62ivgokztct51fr4j9sc8lm6tt2ba3g11lhx',
-                returnCode: 2015435380,
-                node: '0f2xbtvin32xw29m4b3w527x0i42jnxrjquzwbt5q9l3137wcbtjqh92nt5b2tqw0fi2x0752hcfrdmtlkxuum33s7iagjbuog1bdd7jmwi6zh32419qr5p5so1hj5pxf8ez625t4hjci682fhxrh00fem7xtm29',
-                user: 'x5b5r1us28cgyubdsaxryouixi604y1q7j9o207fydc7cgigl20x6llvm2wpva91iyyk7aukbzn3pexy9gdlfg0mjp4z16213u7by7h50htrbi4nn9lk7ace0b4n7nxppj8hpba1dc3oa174v4c1ookpicrv422iwj197d22bfzeck1yt5r5yl98tzzfu4ogezazg67eb6js6nqjt0ls5tff3eyjitz59diyb1nby126rysqt9mj7cv5lnb77xm',
-                startAt: '2020-07-27 06:16:50',
-                endAt: '2020-07-27 01:29:19',
+                name: 'chin9n8wdf1gl7sseqsd6tig3mwahoul3tobaj5y2qso8d6d2p69eut85b076ywiwrmd6c4czlv41lnqr7tekhs27dibpxgzxvxhd0bqujvoeuh6bcw5jewmpx3xemewa333i5d54ozrtzxggyt9v6rwzzcn4skwuzrmrgg7vuecwenixg08e97o7cbsal67ftl6ydz8rcrl26s0tizduoiimbne44adnpdl0a20vi783om61i9cx50cat23d72',
+                returnCode: 9082764024,
+                node: 'zpcsu61pozkvx1pm8mvr1tz0h336otfi6i8rq21tmkgmovkmnp7t8ay9owzi97owjbpfwuydx6wth5y0duj9afhf7c1vmbpw4puxj44e03ckbkjcexi7en74w6xzy7ynl9hygdsj81jagskpx5awd94yjhndizjh',
+                user: '46ymr7q55sskts7xjwmjyutoim6elrle04kvpt2y9fq36nt6ntjxyjj2ek8dplsjob8uklw23agqtdoye9jb7ze4w9qov5e5v6hyz72ig3cntqmewdhih6w5m5xtgomxsdhtu6v4y1ha74z25677m4zscvkip8ogz1rurl29zni9pkl9ctc6h818s6rzw1y9img01glbdzawcwbvrzyax9ljjwx0bbm53nioh8v46n0c26enoj4achmnya6lzls',
+                startAt: '2020-07-27 01:42:31',
+                endAt: '2020-07-27 02:03:38',
             })
             .expect(400)
             .then(res => {
@@ -127,23 +127,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
                 tenantId: null,
-                tenantCode: '3im6zwaapuv1vcp62zixxg4gry0o7ybtabd05pap2obuv66z6j',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'xf9oajaiwh6ynu52ol7u',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                tenantCode: 'y46lbjcu8n1pdxjgqsos5k9rinorzxx3yrhgobf8qoe1oeoht6',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'tp81dxrfq9akkew2pnj9',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 17:00:48',
-                executionMonitoringStartAt: '2020-07-27 08:35:08',
-                executionMonitoringEndAt: '2020-07-27 11:17:20',
-                status: 'CANCELLED',
-                name: '1gzrztvair8g609osxwbrp4zcqantk3w15b68z1i3ej76xqjwfdy7t1em4n6y7jtmqo8m0n6pohdx5hol2esm6lq8i1gsllgfxq9iby49xs1oqa36j8imox2mdxvxlp5fo679y1ajk63a0xremeak56n4z121wbxkoy05g4tzc9h2b4bl6oakr7t9xu93aupbewn7knpnhtm7ko7nnoa8szt6sc3bo83jj8rihsugv758xq9myz1qy2199x6dpv',
-                returnCode: 5800659408,
-                node: 'v77ejexrbd7ul1zmeaz1gvnrro2ewx5b24xjx63w88wpyk78otxs3ggvtikqi0d7r7rgxmtt5h8fd9xdz32ju7v9vmoebkzet5wri0xbog74uyuypf6r1vntp4nxbjb8kr9umtd57zzsw1y4eradamxgiauvhaog',
-                user: '9cvo6t23t1etreywqvg1wfayfnesk7gbws7x1zg32x5ttp9144e9o44uog6o91suj60xwsy5f7x6ksp9p4ihh5atvmllsw9dt3exofjbeuwallz1q8knu3qnqp10mlt1usxapm3jm41baj8oi74a6cof2hvimk96lyze892r87g32tc33g4m52o6r1w538148xn4f3xstp84rv3zgi9wuz0g9csiwudo854dnxzpxuxh68aismkk05y1ej7w6n8',
-                startAt: '2020-07-26 19:51:14',
-                endAt: '2020-07-27 12:17:05',
+                executionExecutedAt: '2020-07-27 17:44:57',
+                executionMonitoringStartAt: '2020-07-27 23:01:02',
+                executionMonitoringEndAt: '2020-07-27 19:29:05',
+                status: 'ERROR',
+                name: 'aj9ubn1x7a5z7f0tf4sdrgksrrkykyqj2ujxrq9oy6fra55odtenpke2n5q69d3e1bcfogbtn46dqmge4j6kavqfwb9dpzni4cep9bvyi138j7eh0lzhk2v1a5dap8hafmq60r02a09yiot8fjbe2cscux23v10mjg0uly6lhosbu8c1ibrm3dyn5ld327z83yfi2s8qb90xyrh5q0gfh7vbjo1znc14etuirujptcq0bypaix9hhm6wt48c50t',
+                returnCode: 6173304083,
+                node: '9670h37nbnnuun5kduz59iokw195zm3ufy0rcxsgs6jynmj77ijafmy2z6baq6mcn0lwxyp112ad3a5ctz96g2nyj8wqfefzabs58xxr62zpefzyci76vjqvbco541r6uwthdbskli7gm6nb2s0nw6fj0vn4o7gt',
+                user: 'b0h6xckalhqgf1lhld7qbvev0nifdyca79kd9trgw0z2eqd3gr119dnw7igjp1d3en6wbhbfphphtvqzg258zp8ywuawnc113gbpukjvxk133vthfymlgshnwifce9c27uhk7rmy3bvegtbn4sm2l5p9qlet4s31833eey4comrn295e6y9y7jtw2z7lfujvdww03xpwrlp5zbe1583s7yfofnotiq5yekyyq7tz5d6d0wkpj8pk7x3wq2fj7tu',
+                startAt: '2020-07-27 03:14:38',
+                endAt: '2020-07-27 04:46:30',
             })
             .expect(400)
             .then(res => {
@@ -157,23 +157,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
                 
-                tenantCode: '2hc5nxfumbk1cqfy3sgzesta5p8gk5oidr1hv9zy3sdjls75v1',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'azqu86ncmocqbslt0koi',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                tenantCode: 'kbtr2qa365yj813vgql6cneags62jf1o70c8zhsvq8pyxbpvnw',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'tgkxwliksbnfw1ilcwxc',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 13:04:04',
-                executionMonitoringStartAt: '2020-07-27 03:37:04',
-                executionMonitoringEndAt: '2020-07-27 17:57:58',
+                executionExecutedAt: '2020-07-27 07:46:58',
+                executionMonitoringStartAt: '2020-07-27 09:17:27',
+                executionMonitoringEndAt: '2020-07-27 03:01:55',
                 status: 'CANCELLED',
-                name: '9okdtk8h4h68osqtrmn5m4bh5x97tu05ppydkrl5d7nj7rj08n3rc4it3rdv2j85nn8x8gqps3erussl6k87go13hjabsye65qy1lc49x8t3d8avmjd2ylab96ss2vvo6tvnbk4ygghazp8sqjlgzjn0gumdico8u03blds45l3ucy0588lfcodd7jnn1ugfnllwu7atrrgmfr81hu192qrx1dlrqiyvx5irid5tyb6uphmvuad6n6ykwalrw9y',
-                returnCode: 3772555684,
-                node: '5zq3kdr4aq3ds7v9h8ocvusllgtiul1080f52qwquj0bujbmzjvfc7li77tm1kmsi2cst3siwir4w41vkths0lfouhubjuhs5nc0t214ac30krkj4wxal3t3uy872kz3nx5qi4wfy3eohnhm3ay0b9wfa9w69nn5',
-                user: '55ntmlis2uqd8a4c1hq7mimghpunbs29i0ka2zbnfqki6grwk3ir6dsw0lcetqc9dfaic2b2z5h87hggoxoabflifqmi3mqf9g12837jf297mqmujm0tkt5evkxxs0jrw26okvdpyksrpzhz6lh75148pfkx3eyizgbldp1ey6dqsrubv9zm3mc6zy3bxsb1h3e5gdbik7afol5l8v5ejtxqmg3vx7tsxq0bxlpb7qstb6evnpgnwvt9edu1d4w',
-                startAt: '2020-07-27 09:29:05',
-                endAt: '2020-07-27 07:06:53',
+                name: 'yze31t4fqn53phb700agxf4yn9mq2kpw6lm0os0h819p679h3ypsd4l1cj83mhtgme6j7ze06ezwqoqoz08co3mog0hocbtuidjp1i4x2ps4wya4zcopttr4adbsdhn9e3hz975zyph01l9mif5qz9ix55gdn8saep8nh2uz676cxu4kwggycjstxenwnf8p2w5utb54css0pj512otahurq8eajk8fzb12yg3pbxh78xjlmybfcpwlsszhau6v',
+                returnCode: 7435223259,
+                node: 'uzyehblf0biihwqkc7d5id9e6b0ti6nk3e5wooxn9ol0grquwt4ycxkaxzg4eqrxgcmd6z6r08fji6a84z1sxhl1k5t901nmnbstj8cuk8udq5m9erbuw1hz7e26sscprrpw7z1grr6de4lvl87bso1vzt9bmv5f',
+                user: 'dvupp97r6kb2vx1v4lywcxktay0b2hlvtpwhzpddwo6ri2v0d1lgw98atlwmuytouxbdbx3fnqw9kyg5lia09ecd2ewjthglkd5vwsw6khnwv90cc30oiqwc0zz7po7lrzh2pcd1ya9mp46sw295mmowk297wvjiwkwbzly7uwko8zihuzc77v1ph8lzjnn4cncdm477z0e9wpq8wq5g6yq3yvytimjgmcan9hl75xgdiaggcag4xhrziycshi4',
+                startAt: '2020-07-27 07:54:22',
+                endAt: '2020-07-27 23:18:57',
             })
             .expect(400)
             .then(res => {
@@ -187,23 +187,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
                 tenantCode: null,
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'mwsc5joierfanvlud005',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 22:30:30',
-                executionMonitoringStartAt: '2020-07-27 04:25:50',
-                executionMonitoringEndAt: '2020-07-27 08:48:35',
-                status: 'COMPLETED',
-                name: 'pacprwputvl7tq3bcjq4f5yrbs23xwpy8duh1um4ifnnox0pyoff8oizes3ay41pxd1t10xg8h7h6xb9793ekfkeo7yai18gjgq05cum3b6195p9s7zzpy19fhoprwmbwmgw9c9yyxg7pyhf9bs066yc0zhze16igo0u1xm1x7qzgsrw8owwge8ulg2w0aqwzyvan54nminqwsv8d5wa4y8beierybw42r9ubnb5myx5o93lvza5sqpiswui955',
-                returnCode: 9985460663,
-                node: 'marugunsgqjaz5fmqp2q569v5402y96silxycxmn5klhwtlrl8avox1yz5qf3whwexj4uwo1tsppnq2liy5qo2kajcr2gs4nkrhw4e4rzeoma8fpkxawm0ejvd9korbi0jwmjllcaq28x72xvspyoap1yyp7agy4',
-                user: 'b6n1iw9ylsifixywcds0ii30xvolpnb716fwqjp5i60q9y1pw6aauj5og9tyevhnhd8foe52k8xuiikk5rwyjdqm14gxedi5e54bdr0mprvp8bc59bgta14xjbscpfcumhbz4dh40hl96ekpqf6uwuh1k8okytx77rw7cw7ucbygx0e8nmpdjaxsgi96bbzqmgyszr6put05jjlox6314jt2ou04vxi84rch9roy9yr9fgz94td40pydbdoj0xo',
-                startAt: '2020-07-26 23:00:38',
-                endAt: '2020-07-27 07:07:11',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: '4ueut61q3iofryl6t4ty',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 07:02:41',
+                executionMonitoringStartAt: '2020-07-28 00:30:04',
+                executionMonitoringEndAt: '2020-07-27 10:10:42',
+                status: 'CANCELLED',
+                name: 'qvwflyeo3gsob50qonmyq4n3exddxfnoqtxwsonsf4v8rh8pucj7sfvia8vlxcx5dwg151dr8avtmdz9ks8swjwl1tl02of8nw0emth7icxf2gqgsfguyody2s746acxxu6gg8gmtuee8rij9492mphnr6x5m3dok3nt5f89l16c060hk9tryny1k6o6o3mtkmg2fenjw9liyuyh6dis6xlcdidca8ydrwrfudutk38qdvqfhlz55sj5uqeoooj',
+                returnCode: 2092253503,
+                node: 'p10ud2kclynh5xi9a8nxr43e3g570utbp7bab3n25p72ixdp4reutxplggt9ilbxsea3wkq7ombv328hp82qq8xxsakss3szekx7f3hubzfp34hjewkneyu0f2w89qpf583gd8kfjff2mr8molwt60nayjxx6wfa',
+                user: 'q97mihaxfur1eezp00ewmwb0dtro2z40vmt56wz0r6xxad3f9jifjgx84b7dx63bqvk9z5ykqjz0d5da30wvzihjwn5yetf3idg6qezq1cjgk88dysk92dk7rcn7qby71ebls5km1r64qf0j9g1winfa1skzxt59610ff8f6ebfwjlgxw0ge7lxpqpjac6cdlq5avku35gij1wh6izhpi3wnvdzkhvtdi589rkgiec4jl9cfnk4r1sq0c39v036',
+                startAt: '2020-07-27 04:08:12',
+                endAt: '2020-07-27 12:07:59',
             })
             .expect(400)
             .then(res => {
@@ -217,23 +217,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
                 
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'hr1ct4b1wak61a0firum',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 't52tnozxiq9tq7c8v14b',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 11:38:04',
-                executionMonitoringStartAt: '2020-07-27 03:44:55',
-                executionMonitoringEndAt: '2020-07-27 15:56:22',
+                executionExecutedAt: '2020-07-27 16:51:00',
+                executionMonitoringStartAt: '2020-07-27 23:46:27',
+                executionMonitoringEndAt: '2020-07-27 04:19:36',
                 status: 'ERROR',
-                name: 'aiz7s9mdz2tb1rkqyasc6qx17f5x18vuukckkkbknjte46pk4r2gywu8xj6chmvii1wete3kvz91i60cepl3ve0ghd9t193ddpgbfy0jhr4270n8hugfkty86xenk0fkfpgiyl5ks5uu0xea9pi758ht0r4mtmxvi3troniebh011r3kj1n614rcvos8nrw84ytbxp7ib5bfcuhyb4lf800637xt832pqdq6hm81fr70x1h7yt42lkfw2hlohiy',
-                returnCode: 5056438181,
-                node: 'k3hgmiixmbdazrxlqpus8fb0hzrhjzgoc30tc4cjetraazu2mcd7gsxk1q7e6gm7arz1gee1yildowynpv6ubmct3kplxegxbc0gvk465mflkiequo0dm08bjwd66q9l4te4qpxqpq7denxa2e67xogzgx4c18v0',
-                user: 'vxd0om6sjh1p2ja4bkft7vw2e4a68aqw1ogucjm999r6ku3w2qfqhtvg3bf0yx09t7hv723yl6nm8681dd95z8r8lu37dlhh6inst0ujuh5ckujx0dn00pfqcy3x09ma1oq8gn9gitwx1l32syr3jzvlhst1hi6bstvvqur7q6sr5wwn459h2euj4ivtni8729v12h7edf7cpg5k62v3nai9qp0pwplwfbs9jzejnj3h1su1j4h9idmkrksndzg',
-                startAt: '2020-07-27 03:16:47',
-                endAt: '2020-07-27 11:07:04',
+                name: 'cvwch4s87vr10jol4rcs4hkynk466me0mqypm9e7h9t0zj8yq04l3xldw41qjm8u7lhg7iwu7wrvu8wvc8vkxynu7tc3oqh1vz3s90u3loipwgpbwfgwceq0robnsqfgc8k1kct45c79loy0owe7hop6mbjwd1bwhn0g2cba93o12u5vksf7ynb4let72avukff6pozfqvifrh76160vyh7xcdjesenkrchdwootwie417juiloipz5j0shgwmj',
+                returnCode: 4117278632,
+                node: '2lkq8xhox0f3dh5nowknxb9nirtf7m3ga6hxcxji0fg3qqsmoq6xuj8si60nh55mw8ff1oxbtstu9i2ihbqfs5bb9mycci5jwu1z3spdnk3h49zghj15lh3kjuc5oqxnixxam8athwmcuvfabfz4x2d56bhfkmlq',
+                user: 't1p7flqb90ysvl3s8l02pys1p8atl5f2dqvbdok5e8ujq7rht3rwq8fiftdec49ubd9sfnc2xezd41vysf12fh2mfgw65j05rllfqwqs0gachaj87zhs3rcmnoenwjzbir8zhme5qntnu3e62e25v1a1zt1c1a4833qplkv1mqtpd5vea7orv7er66xng6tftkorah2lzi3qnlgbkwy3ic596w2fn8tyy5rrmr4tf32m73u33gsqdysq7bnpile',
+                startAt: '2020-07-27 03:39:43',
+                endAt: '2020-07-27 04:30:11',
             })
             .expect(400)
             .then(res => {
@@ -247,23 +247,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '11v9iqszik5xpie3p4xmdmq8tarik8jl7tq8v82rowccdoy59o',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'xkxgjatpt0o1o8jkqrs1ywhomxepve7qwd9upvc9vqv6j026sb',
                 systemId: null,
-                systemName: 'r5w3r0bsjgerv9xvpq6s',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 00:38:44',
-                executionMonitoringStartAt: '2020-07-27 12:57:51',
-                executionMonitoringEndAt: '2020-07-27 08:05:17',
-                status: 'CANCELLED',
-                name: '6fibgh8j29e2it9qhyq9cxh0gslwuw1h027oub4xx7xgtwbygh8or08yagf3wp26uaeo2htjqu98b52v4g9lrz3xwiz6vatcvipvy2eoqhbeohoqe9hy0rec8y0zhyker1jsc2sazk8k9d1q6u2upy69qzcsh2ucxjv2ma13zsi2kpfglk4jboz7ykwjrt7zd9l48v0ybqq6k94osqvg6iyi65fope86qdorqyuhdrri1122pn9vexfljo6dpny',
-                returnCode: 1675341391,
-                node: '17b6a3hgd0ejbfpn0rh3m1anedi3sx8pvb4o5838j11co6g0a7z2liwxt7iiqebst3jezhhnymvg601s1y49p4g70eocszase4abhy1fxwcyb0o63kguds37zteg89qa3y1rm9ag887j3xofnf93dfk1tobr9xis',
-                user: 'tbljcys9jfi74izt127e2o0v69miufnu3z7rnlf40phj86hxu1c4078nfrfwdhzjczmhgax76dbw23nerocylhsz15tbokxfmdfeq56l5vtmn14a3zqp9m67lsv5w5szfgltcc7fxij7bx8hi2puzcebfe8gk4sz5bwldav64x1couia7m65pw1x8sj6518gt8asp41xs8k3q27zb7vxelitzdq2ipt5qpdxjpg1nq0uj4jjw0nuqhiyayqy745',
-                startAt: '2020-07-26 22:47:58',
-                endAt: '2020-07-27 01:50:02',
+                systemName: 's59y1jho81ielg06eqok',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 05:35:49',
+                executionMonitoringStartAt: '2020-07-27 15:51:05',
+                executionMonitoringEndAt: '2020-07-27 19:32:30',
+                status: 'ERROR',
+                name: 'olgvyjbuyv6axjhr11e8thyfu9d0kplxmh1cquewkir45rdlvuupc31tfwhccklxzioom9sq3v6zxyxonrf296767bduo8mmvmylr1spkzzmeip3agrrnpnevv9u102fvpp1vpd8b06l80h9uz8cnup3ldmvui6bo3bm0t7lmf4gk84idjsb9v98kugexx006pu40zchsiaf8dlskx2sibrc31gs1von9ej58qavpqvcl3mb66je9zgeg8ahzeh',
+                returnCode: 6665150438,
+                node: '3eilfvoz9fuofcftodgytgu9lninrn3as0efr9vwh6orax88u939vzrin7y15dr66o7goofn15ufyb1376yproutarb3geoshv4p5jopd2yn0vdpot3psqw23kmf3tzpunye4ea4ej8fux572qkycpr65tfzd7as',
+                user: 'koxfkcdfjvw3uxllnakbr3aoqh8mofykp21d684olzw43ym9w8m4ig7gy5xtfr73k75a886irkrz7fisj81u2tchq8p9c1mh49ryhpbt8cuw94doghleznqdd2kyrw1g984w4xqxh4ct1wwmrgt503lt9xf2w95d6rlr33l91o38cm17ma6vzcog1d7bgy0jo5655gykukv20lrsmn8w7uxdvhqb2pgaglfyp5f48t8lfesrfj2zxynru3zf84l',
+                startAt: '2020-07-27 02:45:43',
+                endAt: '2020-07-27 19:06:14',
             })
             .expect(400)
             .then(res => {
@@ -277,23 +277,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'iwhmo8oeafixaxqutthqgxl9vr8nu5kqvmqvrcd5gprps830os',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'fmll2u13t5is9mdxt1f36ppm7pj3a8xmcsew53mt7camvp3bwy',
                 
-                systemName: 'qrfpewaiynyfkdobwp96',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                systemName: 'xuk8zwgvcm767ibzpycr',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 04:16:44',
-                executionMonitoringStartAt: '2020-07-27 17:48:10',
-                executionMonitoringEndAt: '2020-07-27 16:16:03',
-                status: 'CANCELLED',
-                name: 'zj1r15wilcbq3049pf7hntiqi0wkxp5sm933yvbz743vp1i78hp7lxc6jc31znk303cnfy4rezqxjn1u353cft21se9c7xugchnrkrlr1sw54e9m0qoi81q5in50rokj89bi9r1usp8iblaoshzxbt5s99934eo1ay4y782g57f17exo8o2aj7noyjnl6wtpw4bd77e8gn8nfi0p4gmuyybzu2f5htaw9hea8wkn2prhd2mm6k94p8plp8xh124',
-                returnCode: 9979237345,
-                node: '0kwbyitelbbumu0oyyvzmmz6s8mhlizryisgnq6rh3l1io1qey0opcl0x4t9pkyu65p8etdzfz25mi5tzp1axuebrh36kvskj6qivs0kbs6unp4ktnvct33gqluprdd9mnflkqlkrfvpc6octmz775nt2mk49y37',
-                user: 'q4td1rk0odsdsnu8x0zhxm8apfuj7y7nmc28h0dw649gu18xjpbqyaadrs2n4ugd477gbukveh5o31s8x6gixydal982nslv8cfhgotc7nj547phtzd3f0xcftn9sgdv33amfyg1kjo90uqtbrkbfvyb4nimph925ryb3bl7bnd9kcidiybq204418ex6fkpz3u862mlo5yd6x67dcdgkkpj5396bx8wv4qt0klgljwb3as765kkyrjn59ebetx',
-                startAt: '2020-07-27 04:49:20',
-                endAt: '2020-07-27 14:20:23',
+                executionExecutedAt: '2020-07-28 00:35:01',
+                executionMonitoringStartAt: '2020-07-27 18:33:25',
+                executionMonitoringEndAt: '2020-07-27 21:32:41',
+                status: 'ERROR',
+                name: 'ujwkpyzbjrcgjrer9f5v9v3p0si1b120hn9hr3bf4xvctppzxgo5l6jizzx4xuiuqwmuq9tyd4gg9vu1ojlf5glbvtfam255krxgm8p3qigkrnwm8mkx2w5aa7z36w14rv6kvqam5cmmprp2kxrixyi3pvxvvpmjkgzg6mvxfda29sytfj8ds7k5fc1qoou9ulyg7q9sacy2v62f27nv4iowjbbhym7gyl1ngm1exo8nj5kjoddhnfvm8zd0f8s',
+                returnCode: 7401664300,
+                node: 'wvgtofe22atlmrdvu3hrwyjrlolodyokj837x1wjkujzqcb4n6pw8eyq8697dsmkzhux2bzpdv7abhx4oenhunaxb4x5m0q5ueyptvmfjo2nhw7vdq6rbk4gn534uub9ufm0cypq5cs4rq93q5eujmujg9g8v0ya',
+                user: 'c8hd0o0s36mnjac4c2hl8bks9z2tc2yxqhk3sa2kt61cr39b6gs0y6saa6u1tjzaa3m9b55h0k6vxgk8gxwbqkwcwxvercbaumycvn63l68mrpkd1kika8klqacx3329lb8oomxturjvdx5p5ycqma1fpcta2hykkvs66kc3co92t211sp7pk96hm5bxqg4a9wo5lhgcj19j08gkph8qih2h6h8qwsbkqeurpw3ss5m8gdc5jgbdsufekxogaam',
+                startAt: '2020-07-27 21:24:32',
+                endAt: '2020-07-27 04:51:20',
             })
             .expect(400)
             .then(res => {
@@ -307,23 +307,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'mqreizzuv0dbe24x23u7agwwkw5wxao1vv4e16gffc44uj5dti',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'lougzm417rh27r14huhah09ec5v096nidgcyf2xpod1tk0tgx9',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
                 systemName: null,
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 13:24:39',
-                executionMonitoringStartAt: '2020-07-27 07:06:27',
-                executionMonitoringEndAt: '2020-07-27 18:21:24',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 19:51:34',
+                executionMonitoringStartAt: '2020-07-27 06:01:35',
+                executionMonitoringEndAt: '2020-07-27 13:47:44',
                 status: 'COMPLETED',
-                name: 'vftll9wu7munqjmy993n933sgg6sp8kpg93x7xwpqa02ms4ad20o5p9apjlhwo2xa35b3ephpzmkrfotqq4arsbx93kxqgna4sgyhy5siv11b6dlf98vmd5tidlxk76g76ikcf4icbz3d9bprx0kcpowx57a15kauc5qu9t9j8as9ijh3ui1hlozc22e2295rvgb4x9svfawq29j7w5ho2j90t4uam1bg23224g6l6rgiys6e1lf9gmm7kz3cq3',
-                returnCode: 6399097520,
-                node: 'fc8of2ay44knehx8m08g0xjdvta40co85o6s6ha7tpxftpo1ftgbuw42eri1uhi7r0iy2rq4hfmtpb4t0xr44nbco6w17ew4qha6utq7sn4vhu6gh7qwyr2m4zn91gdyci6enafo4446nl48bac5aolm3gezzy2l',
-                user: 'pql14j828h2ubrqmp4ucpglztt1ubgqz5m6u1q6gy89mgh972nvdxt50bdb2cs9tkk89nsbb2r9mwyi55x2bdns7xtc7con2g6ooj0r1ym9bcu6qyvabbejmrqdior2qn3716ifm2bst76mt1fhjslrwmo4yqacbk2dnbdv1my2d98zrbhxi8w5evqq80b6adw22gafdx1n12e9slp1t2mhurgaxh6w82suvptw0l4at9q434a1tgv9tnstwnv8',
-                startAt: '2020-07-27 17:19:35',
-                endAt: '2020-07-27 03:33:55',
+                name: 'pl0p6tuqomjr8e3otmhch11un572mmfu7rc3v7v0svstima0j34lu99b9oy0edr0ndwasvek32jzlrrsjk1s6t1wvpqqe0c22sb6bpw3vvx5atll1fq7e72xf9u0bhyqm4ifdmdfhjpnjf2sqwawrw4go4dmip6y70g1b7ufe5oyoudoq0v0sznqgp0ly1f2ft7c2tohqc9rfuvc6m3mb55qp1lxu5cjhq2d9bsxqz3onr5pr498geaa93x0gzk',
+                returnCode: 7552825928,
+                node: 'g3eda2y7ytrf7hf3x6tye61936jab0b25dv27yre2wlqch56be2ialy0n8fsbxms0wkrq6pkiuqo4vs6j76sq4t5taaj7ub6uohtwodwjpxtyo9735l87pnhdjqun8esfrkw58bp85pbandavx9qziqzk3ixb4xd',
+                user: 'huccjg4ft2ggrx47rlxnana3br4wkz8zm4ly8js8r2hfa71g2or0aslakvypc960pdabp9u5xmr0bmwnu5bbkisygli8bw58l5v4oqbasg2p6b475m13iihn8q4ojztm4i845yd02c94nmerj9lexzsawlfc3ufslrtwm0zlp72fhx7lqn0y1fifxkdxgsi30vcn6pzv10zhk46jrgnb7hl1bykb1wm8csgl4inp9l22qhru5tpse2vidhqux6j',
+                startAt: '2020-07-27 11:44:51',
+                endAt: '2020-07-27 08:34:53',
             })
             .expect(400)
             .then(res => {
@@ -337,23 +337,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'dvk2drbhlmkrkx93tlrs8zh7yi47xvlefqs2l4jimwggp2ftms',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: '8nxtsbwzy2rjiuedh4hso8m7oeqskcx50ab86ljcixezoc4zyb',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
                 
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 09:43:57',
-                executionMonitoringStartAt: '2020-07-26 19:34:58',
-                executionMonitoringEndAt: '2020-07-27 12:13:03',
-                status: 'COMPLETED',
-                name: '5ssbgzdy6gddnm70go2dirnucjeviuodvbs8d0a72ttlr5bvx2fqyq683te92mjsoahxmidh01w5hc0d6k11nb0pklafjzrtnaxyvm6x8lydhh1xgxokckdj9evkfoz4hiw06jrhy5xx6nkwikhi29yihrr48ss5afsbowunuq19g1rydk2f6kptuf12l1lab3fpw38onr0uz25gtdac15ox4rgni0nw2zmb1ordz45fvkmwtkd2p1zc85b7wo5',
-                returnCode: 8470993118,
-                node: 'prkwawt7ptv6a5azis31uytuy0hqk3x67bw27s3bo5285dghmqrvuugc73v30rydfww59rbvwm1yce2llm9xk2sn7rqafw7af6xwc3mox0l4cusb5nnh6jkrgghj2fo3x9ax5zmjc1iztq67jwpuk9tw2t9du5nh',
-                user: '6w9ue3y830cbh3ztjomal9fhyzut4xn3rgonjjnhnkt2nu4qelcb3auyssazf409hjyoqvwksmhuct5a9oeqkx1pg8fxhgntxysxzhajdg4b057d9kugmnysvzsn5tb3mfiub7lj06bxtxayuukj7iqyv3mxmlp5w4yog8g1kz0ax5mqdr1ldrvp01vhrrhyck243sov7mzr3idt7xxy0xfyhl4o3w5iv1z2jxuvo5k45a11ca0i84z6j9nlos5',
-                startAt: '2020-07-27 06:33:53',
-                endAt: '2020-07-27 11:39:10',
+                executionExecutedAt: '2020-07-27 12:36:27',
+                executionMonitoringStartAt: '2020-07-27 21:11:20',
+                executionMonitoringEndAt: '2020-07-27 13:47:52',
+                status: 'CANCELLED',
+                name: '2jttrjl9r9yt1n9j7klfcf9if7zq83jnzmst7kv80lmtvg9qinw3dwhznw0uzw3f1aa2xo9vzkr3xhoq21ht93b32x17p8swxm5lw1nuizwud7xw4vzr2xlkzxmh9f0v7ntpmp4ew2uetf7y38z5ymrkzsrit1mskof7r25er7tul9s3asjt28dqbymqqwmmqs9bkx0w7m2jdspf893bd2clpw0cnrtbtgp3696nf6jm3c753nkk33bnwzmoi4v',
+                returnCode: 6509643975,
+                node: 'q9kwvmlrmdmpmobsatqib2bp7oxcyt1sxlbruv7np0g1s9rcby82vzrycd2e54i84x4o4o58b11ml648kmxfwkkiqj7u9bwxjprpsrjhazx7koskutwvpsi60qc54xfeedy6u1cvzjbzi24vj35fi0tv22oz8ypq',
+                user: 'vrjs6s2w3lzklgrq7wrhi6t7xyu9ztdphfhpryl7uhnlsw4uicd6gm5uep735bci82xn2j4aeoxzz5omik06zo5jbziykhyfwx5pdfyty5ku796lmxpxm0656dqo431qumhkqx2s4kmb82iajzgqapca9kxgshfaooye8lsas2kt7qo26ndbdtn9vctk0rkya80egr5sj6blr5cz092wwimfq0hllb8me4np8gd9gquckk43zrpbsg1b5i4mzih',
+                startAt: '2020-07-27 11:30:45',
+                endAt: '2020-07-27 23:27:40',
             })
             .expect(400)
             .then(res => {
@@ -367,23 +367,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'dz38cgymhb25m29o34vvw5l1gfghf7f52v3k509j192o0mtnns',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'pi05inbd2fee2b2iu8n9',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'p2jp28n7wmxxub2lfre3sw7k0k63ca8chbrhyd8xf6rcad3ku6',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'vhddox87xbsgqlxqdi4z',
                 executionId: null,
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 08:51:30',
-                executionMonitoringStartAt: '2020-07-27 17:48:41',
-                executionMonitoringEndAt: '2020-07-27 04:24:58',
-                status: 'COMPLETED',
-                name: 'ax212zxp8ugg6p6og6jrzu3ohldd1s7s104ew2t4ixhdadkr4rvq7y3xm8ut3ijtwsqzu1cx5v1173rswgrd4xl6qo4y6hzr8r6znn63mca2idd2hqsov2i5mtebvapb0y0ask34w5vvbtxlt7b05kcrmq37bommp4i71gsamr47zgmnalu7utt1ip8a2556q84fivwakyi4yp2677o3opbdx6noygpdo6crb5npwpgglbw8ybxqm9jymskscnu',
-                returnCode: 9648683981,
-                node: 'f3j0z9qm9lzwfw8cf6fnixrtveesrpm7y2iuny32lkqebcyopl6x8yf4clvm68ytw7t0z4t4uljs8m39nedikx2v1i7q7gztjq67uope2xs8kuhr4m5v3hra9d7tz0bybi7gzhy3x6q5yp5div70fbwpfskzsnci',
-                user: 'bgj8ohk1fb1kei16oppecdzawfke6e2vum4296jravg3asz65n93e5f8ocielkftxenr2zy4a12khhoapemmcjcix5xtx0gq2w04g05kbxoyjxmv39yo03r91ttqtfpypqll5yvwfn3meqmftrnnqhp43znkhp1kagux6wjc0jfbuyyd8c87zhby179gv1crjnabtc1oswcduvxwwk9p2cal801yuuxi5hwziaxasr45sjplqgkrfnq3eg4q9jg',
-                startAt: '2020-07-27 11:23:58',
-                endAt: '2020-07-27 06:30:08',
+                executionExecutedAt: '2020-07-27 01:42:56',
+                executionMonitoringStartAt: '2020-07-27 12:45:16',
+                executionMonitoringEndAt: '2020-07-27 10:09:13',
+                status: 'CANCELLED',
+                name: 'gifl5us0x4b0aswnnrgmjkb9rnsqhwuytd92766c6j9olra9j8ur6u55199esk3tmzargo56rjpfrg8lbh3235e7dztt4xrs9phz0yl8frh7we8s0nl4cuch0gbjx3cpnevz0ijw6stu3auuy1ad1qatdm4jxz3kpt68a4712x7xix427cwrspy61t85foyh0w7i1z9wfmr4poqt5807yjhlrhl5zzighfgf52rfkoab571gbemkj9ezhs2wu3k',
+                returnCode: 1864567020,
+                node: 'xpgvmx6kdf1b7ma2c2u0nbpagqqqstmo0i6qxas3t02g2jav66z0b9enets5whh6xxjvgv591qe9twji4r8yqfz4bgbd6fo4b8faakcac84ygovjpnbhgln5djcxsh94ua85ivf0f64d5c6rlxp4yve6t00jxpid',
+                user: 'uxb44zyzzeeynj2tb8gxf6nzfs43jrl5c0orkyhxyau9so5evs4qi8ooiiuczvkuiumcssqh1wzz9xp3h1b73t53vfvd5exen60r75e6az26ulv24yih0hbdksg0cvurrkr53xv3k0ww4wna1oagvnc8xlz475kmiapf22k21f0alrqesw47qjquusw5cllylganmbyoqo3gnp7xt878yh6odzwogvifdnr2h76h2e9ky1g42a67wvd76barp8s',
+                startAt: '2020-07-27 08:18:02',
+                endAt: '2020-07-27 14:42:20',
             })
             .expect(400)
             .then(res => {
@@ -397,23 +397,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'ue4me4kfbfwfmz0t18kl2au9ud4qcugeg9v95v9kwsl19hc38j',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'm1q9sqrnlafipwmql7wb',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: '6ck6odfxvfcmhug0gjsiberrxuiqdi6mfu1j0rvrmxk29fnzat',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'v18l8nkcdl3dsujr6bwf',
                 
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 06:47:29',
-                executionMonitoringStartAt: '2020-07-27 08:23:40',
-                executionMonitoringEndAt: '2020-07-26 22:49:23',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 06:57:59',
+                executionMonitoringStartAt: '2020-07-27 03:18:32',
+                executionMonitoringEndAt: '2020-07-27 06:10:00',
                 status: 'CANCELLED',
-                name: 'rybj28sbotycdd434zmkq1trb69l6xv5rx7vhtuido48mc0gxngba0tkm0dy8wqmfuyvjdutg34ag92o954ivc2j4hk3pq7malvslz5165n14e31ir6akewd3vhsa3gzv6leo9klvs7hjj477rhfbjkejboqybntg929we9thots9bto9pslzof64u01a1jv7wlinkg4qrc2p5n0ytuidbh13qlw15vrq3cy7gikeabzqjvqrbz1j14rv5aws3a',
-                returnCode: 9425027824,
-                node: 'kt8hkmaj2jjjey6auwhsq6slp909srxkkdsvcuxoltnkdn44abmgl6rbwonuklppg2mtejqq37mwkomd4eoat1o6d3qxfk80gp8o78e1r51qfca9h0crdae57dz0q2564aziwds2d515jzc6pgok3eswx2ul8o8q',
-                user: '4uncko41f7ihzvt79ge0v17o8omtecrppd3lukjdvpxawk9wkxhsh7t9ffnpstv85nzjeg5t1yujo0tmyb4scvq71mryauz14vrnkbbnn7srrixm9zf6ln7rddjyc6c6x4x41qxi6r49t9vxhmum030bh8b17vopvp8tzgpsl15ai54tjpmko3czeb4t3a1g38tg0v9evxxi28aegu5cbc0xlh45wu8sibbdxvc13svm6buc8mzil4pyvpu4tid',
-                startAt: '2020-07-27 17:04:14',
-                endAt: '2020-07-26 22:36:13',
+                name: 'dfzfd3wh603r7y5ou8e03qmfmg8syq05vhuxs8xh7rjhrcxk3u0aofnpl6wtc37i09lkwgknljleadzpt4hiqe1kw8ksl84wiwvbmpewkhp7w1qpz6mblduxvy1jejjz77lqz13bbfriw2idcf7ybnbya3xm6h2p1a05o4juw45cs3eldsqm61roa27f42n9j0s51h20p5jti0wfdckgxp477zu5hu6ecko6ws06ylxht00qdgk25iyqxox4bvp',
+                returnCode: 1084714842,
+                node: '988d0pq4vwnexuqat81l3plu9iujah1v9tnqrzgtt4etcoq39cj2gou2t1xnd7b9bei9lt2kbyytbfvfp8hq3irf3hr1v6q3h2k0sd5ngts0l8x6jog3yxqfpabhgn4bfvbasgop8p0zkxutn4m2aci6ey2qr4bu',
+                user: '3dwjyj1st166l9frcxrmdw39xphnw7ggl3b726b0i26y60awu4293tz7i51xnynoqsxd5me5olco3jlb09smv6w699xs2uzgb3waw940svt85gv51mwhmecb5xpxp4xavfdec3z9w29ts7st6o57bnomkwcjtmacwd8crrl9os5ljh3o675t0yiipux9o6iw09tfeafqa0jvob1qpwrammt2vp2t7g3ys00id7kl8uscwsftt3pvvgwo9o68z8r',
+                startAt: '2020-07-27 16:38:46',
+                endAt: '2020-07-27 08:56:48',
             })
             .expect(400)
             .then(res => {
@@ -427,23 +427,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '266daetlkqdcdxrbqlopn7a35tjvzndvzifikymt0zaklq6pma',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '376to46fbl83dlor5p01',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: '31cwyipvgjlarfvctvx8q7drp7zblywkcqqub067g2qvacxj5f',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: '63apf905glyrazdifier',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: null,
-                executionExecutedAt: '2020-07-26 19:35:31',
-                executionMonitoringStartAt: '2020-07-27 10:56:15',
-                executionMonitoringEndAt: '2020-07-26 19:07:03',
+                executionExecutedAt: '2020-07-27 04:26:33',
+                executionMonitoringStartAt: '2020-07-27 07:16:09',
+                executionMonitoringEndAt: '2020-07-27 22:44:55',
                 status: 'ERROR',
-                name: 't7hlfvs094c2r8yofypocvm2zo5jzseubbgwyn90de6cx35wriosekqz3oerb87rn1fiddz4ocgrzi83oluipt4h77565jaqjus7x2k4ify11nmoaapwc55l05bfckcxh71mryvb5iev9gy3s2jqlp0qntfzf824yusbxyhdxzf7d92vylvtfqtvldqzu3nllufwmay8x5y23v517e0knvbegkrg1ymm4n808xr8ehvnavu3d6wlyp8syubk95w',
-                returnCode: 8015741312,
-                node: '9uk173h75edwzpdo8f4qdiuyfu6n3unlp4wql61ia35qoevb3gvjaipa9wk78mcb92krksv1xgq2ogpbctdz3ob93l5wfo4b1uqjwzztn71lyagiz089iwtj97tupiw9y5uvt4eb5qsm3putykjnbx509ynehdpc',
-                user: 'sy2ki5jh7gkgv9pq2rmjvndmtd3qpb0a971i5dlexwlxehcppcva448hzzwvfsj8um5xkst84l7kwubprmxc2slacpafhh1n1egea50kxi9ynspmspfzhdhr81f0zsc3f9hnyfhzhf47fqehynbht0j5um36xameu0xye6t632tdvca155zzyq69krokbpsdpycscppuq0u53yggcjuaz8h0xdj95l11908xj1pb5tmoetk9wqavngjylio9xin',
-                startAt: '2020-07-27 03:36:19',
-                endAt: '2020-07-27 15:25:53',
+                name: 'cvgxwmvvn9aj72rxp7e3a34ytkxqqfes1tjnffu2byi001zafh59wdi69dm3l3f416nqhorntchlicchg68e80ppd0rz98iwgnhjrtzwx2i4j6ly7e0wy5qhkghrl1bk899ygpw07lhqfpdevwnt1xce0o6p6srqes59tooa2lxu5erluz12hn7dqtbqf83gppda3jhh4zebe7byblsvn01wksxwzkana7h837v0b8ttuig9f0r4on7qr7tv6ud',
+                returnCode: 3624743395,
+                node: 'acctompqlh3fqvshs0xg2d7ujtrfrxne3ggai2j2q1atmp8w7i4dojb1y9fkjqdng6vh5x8fkuenwziv1bvmtzvdezlcyus1ic3p9x07l2h997xmz9nv95qrgcm0x81bhyynytfc7hiyq91dafrg88s5hxm0nuye',
+                user: 'ftlgqrwbr9hnnoth8v8gl12yffarp5htovnqu4pim802v4lsk5yiqi237t9nyodyyz2zcfbpcnwih92orzgggzxlsaow4t3a46o3ele0iuq9wd28wkt6g7wc87inhwuye0jihs8jrbdxnlcqeyaejjmey7ek1f1bi67kn3ve4w49x7yvkpp8e87nrzr3ldez1sypob6gbokdhyfcvps8ihwoal7gnf2w0hiyhsjra9wr5louktv1pf3m88bisve',
+                startAt: '2020-07-27 10:53:52',
+                endAt: '2020-07-27 22:36:59',
             })
             .expect(400)
             .then(res => {
@@ -457,23 +457,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'udpn3l42180zi7mclbf5g1r04dsjw44tddna6pl1d1hwii5pdz',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'kx9irdr1x0v52c88zql7',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: '7qyi04lbuvywz9suzg0ju9pxw3dx5kgl11ptqeic76dkm9fgiv',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'vogltswy83t288e9bgbt',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 
-                executionExecutedAt: '2020-07-27 02:34:37',
-                executionMonitoringStartAt: '2020-07-27 10:32:36',
-                executionMonitoringEndAt: '2020-07-27 05:00:31',
-                status: 'COMPLETED',
-                name: 'l2x335u7lobt3tyw3t0s9ru1qb7aw9fxdzabxpb4mam8vakonkoyirjawr5rwb4xahz1n6def9r38f7ywi2n03avu5huyfgp8xibz51sgr1p0i4e3vpswps1bagb816gwrti0n6k0bv1aowywuc555d1ijpo6hn7fp1924mqyzcirnroe06haeaojpmj8lmjcbhq5oo2m4s6bfhcx17ucwzrnkm09nay3urpexhkhyn578jz0yi4expzyntyl7x',
-                returnCode: 5219949101,
-                node: '49m52f7pjqjgiv2yw6k9tj9clui0sm1zpduvfynryh2a57fbnoyg9cf8hr3vqiojtugcabgh5wu49eescylcrb1upmd5fppc3ihe6bdehge4h13mz0timp0qjaurxcjh4p4jdk8owz7a47ayj5qnbkxqylsornk0',
-                user: '09a7d56zuuyo9ho77bbajtfqsrkb82zwb8150ebvd3iamsljlf4jrg6i3vq3wvok7n0il8fphllloj7q03p2l3u6wloldh39e33c0gkv1z0bx6cmaloukgyq0y1bcdogxsc1x1pgbjy57mtxhr6lxhoqftxdaqezqopc3lmq9ucyk9kcrsqva7ibvzlt4b98amvjqq1g8m0rrx6m267s7qks0zxd1v83rmrlcj63e7tqzfsuspzddloig4bb1g7',
-                startAt: '2020-07-27 06:39:34',
-                endAt: '2020-07-27 10:32:15',
+                executionExecutedAt: '2020-07-27 19:43:09',
+                executionMonitoringStartAt: '2020-07-27 09:03:36',
+                executionMonitoringEndAt: '2020-07-27 21:33:01',
+                status: 'CANCELLED',
+                name: 'ctrvd41tldb7ps4ptt5543skmp32u6946y8ld1jn5xnw7zfn7kfgx6xdzv91p28bihye6gs3cvd2n55pn2o7uwbftfty5f02z68uflmdhem1m8syemboqp83xs00a792fr6145t6ygtuieatgtp2tl4fdowu1odmmzrng9zi33wv1f2rjr42i39kvvoeivkw569ng7v3i8e14crqymxabsevksgr8w9cuwm6et92bfvsz3138so7zkc3pnffxcg',
+                returnCode: 8841881970,
+                node: 'czaa0fng9i5rarqvz7v23nqmpd5jln87u17jf70emrurs77bp6em1qbqdcyfl28x47p9s0510k08fv9n17nimxoimluhi9k2rg07nl9d2wcgt47f2t1aeinzq16jnmunvgz0jqye2vs4a7crewx5lokys7zqlzkq',
+                user: 'vmyyiqjaxitv2pc4o4hrblm93t2zm1jumoi7ldm9x60vma5tde25lzpvd78givibjucxeemo9ohk1an2e2ibw2oaopqhety0dews8p7jctyg3ng7idyv55nhdkb6h30pqyd8a2d9x55tc1ve2kpoovyun823k7np9iggw97vrka9o97qq3w9xyu52q6sxqdhozx4h6pq35fy4dw90wu1jn8pisghhuwz6a4ei80sioui1ejuedbsnhd1nxnqxwt',
+                startAt: '2020-07-27 19:57:46',
+                endAt: '2020-07-27 02:45:35',
             })
             .expect(400)
             .then(res => {
@@ -487,23 +487,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 's83k9r2yn5jzysj3dfpntbwfd2baeva5lp483x92qjfay83pe6',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'ultkxnzgl8bdpw74rdt8',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'DETAIL',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'dmqm43yhrs3vthwo7pf7ni7dvbodo3t2g7o2qssdv82caq6ht4',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: '3adzmog9annvtnrnnvyb',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'SUMMARY',
                 executionExecutedAt: null,
-                executionMonitoringStartAt: '2020-07-27 12:21:22',
-                executionMonitoringEndAt: '2020-07-27 05:43:13',
+                executionMonitoringStartAt: '2020-07-27 07:58:24',
+                executionMonitoringEndAt: '2020-07-27 20:45:29',
                 status: 'ERROR',
-                name: 'qa7jrigfj4p694rlfo5vpr1actbyzih6n0m56gtala0dy9blo9sl00q0woou71kqcaegkq3jo3g0zjftia9tpi39lwpm0tg535ytc4sy4qsm0fqaonnamlr52bdfptsmno1nerm9h7i3p2vgxz5fpxiy6fm3unlh2wfu9befo1hsddob8lvnztdeuln7vjco2hs5yaw89nhkqdymqy0mfdhtirenn89ho8091w36tsaz8yy2t1zrwu2mpn17ily',
-                returnCode: 4249679569,
-                node: 'xb2rce4595of9obt6iitrv22m9z5d2xdg1hw7pjjsv5vc4ewzxum558d7w6xz2th364q2yibmf17lpmk1r0fsprklpxbhwjghyuf9aosx10hzgqo88k1r6336fvk9ltq8vn7xmowicq0nox31751jmgncm68eai4',
-                user: 'xm0l84d3mowrlgsivzpjlrm53c31va0dxi1j4f4r2uowznaod4sogt8yeysx4sk60z2y7fodzi2bhciyp2hh36rqimxokxkycpcm2wbess3lknxf8ss5tfp6pth846kkf7i3u9ljdb1b8at8qr180yz6clp99v73ohmmigfaomjaamdv6dcqd7l34g2qua99jgkt22agiyr8wsduugjkz0i8vh4o0mfko9nbcf4xlvi7rgsjdpm6q4y2zhgusmy',
-                startAt: '2020-07-27 08:57:04',
-                endAt: '2020-07-27 06:53:40',
+                name: 'io0jfg1kg8lmt1xzowx8qy84rbvrcx9kk1d249830towiityekaj3s94v5a8pgyfwedkkdg5e8o7hwy2ykizax8dsvibsksx4ic4ypvxtcrn3i562uioo6nggrlrvns2p2und2f12fwl9nw9wcmznuehs5ny5fmrdb6epupr7cu7zy5eqid7lkyzxkewrzk4wmwxsz8glzymdo9qssytc8jln4vo0p5sgbxsqhfqag600rvbo2a0e4u217k3kbf',
+                returnCode: 2129037165,
+                node: 'hokrfsv7idljzmg07atsgubrmyldep2o4rf4fj01i8sm4a8tnig4u77w5kcvitadvrf8sbcspwd4hr7sb5wppa3mv7so01ifw09hej49sj4abrb8lv6izs2eedfirnmchmxh4q5h0a40agloqybmoq16t8jecz1o',
+                user: '5zhp4535oegemvd7an79798yb6upwajh3vknwb8c5ypq6bj4eksme7ge05ynt1c9ic16usziv3vfjs1yn9ojmadt4v66oe5nudbp4beevu2eqzswyxjd90kgsslqos1b1m0dsri35lgy8z4h02fhc43uq4c21goojwvp7bl8zjzk3a45y6ufzxyyreusv1w9w83zyrxw63kiia0g70u1v75aqyjk5ki38o7ecfq0ymh357qqtcg43bchh32mylx',
+                startAt: '2020-07-27 10:25:31',
+                endAt: '2020-07-27 21:01:51',
             })
             .expect(400)
             .then(res => {
@@ -517,23 +517,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'u84eatwfmv95rd42i8xcxx66llj17acg7mmtrl70rox9udi2g0',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'igh04kagnsunkxckpyg1',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'jmhu95bf5nk8yazh6npheesl68plwiv9nl7wbmonsewruua4db',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'd273o8j7dutw8oeuzj88',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'SUMMARY',
                 
-                executionMonitoringStartAt: '2020-07-27 00:49:06',
-                executionMonitoringEndAt: '2020-07-27 03:17:36',
-                status: 'ERROR',
-                name: 'ddbj1cbve26wpvay1wxkqrwhy16wkdme8e909tnqqb4g2y4kq6r9c0mtrnnq2mha29qwjr2k1jvvtpdd5mwaj59q4iwuu0zg7971t5ubbzdon7bruttetj8bw5c2v5tcq4g28g39l6zxjzxkwlafmqipgqv42rjp6t8x3ptfxqub0gasninns3d7t5vdz1blk5alj8ut9ardvot2j1rlemxqmxrptng0kzv0kfczjh2yrr1ol3raaajdpgaic2k',
-                returnCode: 7177733193,
-                node: 'd2oopxyiwzgro48u5axa1cwt1zlkz1bjtof2f68642z2p1z3bipbzooe1k3uthbpm7permpxw6ysesoshjj77q807928rdbpwnhyxqko8i6siqeekzq5bxwi2we237zyhmspz2yxbc36wg6i9v4ealwl4ok9wa7j',
-                user: 'u609eemnmv90hrfnwjyh51f47ot0dhse4prt6mhl34w49p4144m12pfrgpqwmqc6cg5vnlx803uhc59e8mz25zusqrca6e7r1823j5viui39esk8eznanrws1ph1ld1d2bghgktkvn54iphwp0ds1awppd0gwxzqbk14u7xv1z48ida7sqarx2a5pksyr2adul3wkstt9fnufj1ckcpc3zb2h2map7tb3syacaluwi4xpr28b3lfq7gzwf5l174',
-                startAt: '2020-07-27 08:08:53',
-                endAt: '2020-07-26 21:40:14',
+                executionMonitoringStartAt: '2020-07-27 13:32:35',
+                executionMonitoringEndAt: '2020-07-27 10:26:04',
+                status: 'COMPLETED',
+                name: 'mb4vu184rpkbmjv285jy92cfqzydtm0pwxfq2xlo07p9jgj3dgbx55re23h45v25p3dppy319l1q5yjajtfazc6dhvkdh5a8mwl8hseywcd834bm4bi28ex0uvih69u6is45wdm626vc740zhbssbh0isviiqy9qsrs241iek38659ectdqpwhjx02qjr9y78adsoqfnuy5dj6gndcjn560orgx9yfjjp4dr7i558a4ojnnlm9ixrfqv5dc9oap',
+                returnCode: 5194995231,
+                node: 'jsc320sifqn79ho63565w95jqbid7lngnfrz1vsqoi9ognjcci8t7w8j8u6z1tjl5u7hys4x4nr13hufjfddwgmo3c39cbg8wdgj6mwv394064i299hqghxnb0qonvprff6qcr0qv0cwxil592ewcueyjz7iylhr',
+                user: 'rv25sys5cd7l93lck5xddk278u2oc1ktps7gan399axb4h9wvc7vxabip3oeziqb5pe4wyrvqu2r0ywhfxe675uuqug14ovuvm217khotnc10f3vyiurdync3si2srothcntp5gecua9a85t8ipzu8djd0rcws3n5n04zy7qank1iwj1gcd30wwjgjanplnq3trg7gwvhy42km7oigpat0tzsmkika4cczi6i44qmsmg2ehle9p90fmb45d8ojf',
+                startAt: '2020-07-27 18:20:16',
+                endAt: '2020-07-27 04:42:57',
             })
             .expect(400)
             .then(res => {
@@ -547,23 +547,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'w023uomwtjrvk1lz99mbcz8ffpd2285fjhqyl2aw51gl8ngm0f',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'kprsl4sspuxats7p22ef',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'de7ctz2hvj6hp8i1zy3kq2myzdl42nsw7uvz59khkr2pi8qrll',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'p0kwdcw8onsbd85uqix9',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 21:24:07',
+                executionExecutedAt: '2020-07-27 22:49:20',
                 executionMonitoringStartAt: null,
-                executionMonitoringEndAt: '2020-07-27 16:17:35',
-                status: 'CANCELLED',
-                name: 'dhugw8ogk9qqvlgbdzkjwhwae5elqv1oddbbp5ph9ytxov9juhdcqeoudo9t3fkg19s3ychbopomxxwgbyxnzpd20nrldgixiqz8qcivrprfc25mu8xxy87h97jboqxfe0pbr0t6f15g5mds2tul4wujso69hi4no1vur6p2gvvari0quj53xwle3ki998fa3m4jxyi2n8y59ub2jwvhazbtnb9k8l5ddysq49hsodo5heuk815q0gz00durzb5',
-                returnCode: 3992107634,
-                node: '6kehmk5vz6j1xyl293x7i0prrgaqsuk2vad5vnhgoft4420ypaphkqb0xnfz5pdwpso41bosq6b7wewyousrfgndft85ax915vu9lbzseg8qnhcp488ycsb0ltm8hazeaq1bpoc9ef9cc4k7vwu58euwlt1ul8e7',
-                user: 'wkncljtxztj0dukb255x0u25iy8ssqtd4sx0x3ezoflxcdw4hnum8892rxh2hfsy2mibqntcp15zia6g1k2lkdcnfqf2gi6lbeu30yjnrz1my7b8ggazoi80gcykskpazpdt08ga4rdhcoqu3c2h4wofkkmh4e907nj0ovxwx7u8rky3a63tnzw0rlk6ht0ypm9gkvduvqyzljw0umwkiltoylah3481xugesy1k7z5rnhc13rim9g5a4xx49ip',
-                startAt: '2020-07-27 10:03:02',
-                endAt: '2020-07-27 12:23:42',
+                executionMonitoringEndAt: '2020-07-27 17:15:32',
+                status: 'ERROR',
+                name: 'bo6rda7ra1ez9245cs4aaduamn1m9sszspnwb3gabx74tpoo6hz5vopeuxj7x6m5088dxekbi6xusdzk21jvecmxlkemv684dcm9rhh7ajk939kbzrumpi3vxtio6e25m5nsp5es5isf8850241gtxf4iobvsj14hgybzhfazy9xy96ai5yafs4fgxt8w9imbietms8biily0ovrwyq17okp3vu867x4nd6m2woupg7a7vd7yw4iztbe6lqgoz5',
+                returnCode: 6389695807,
+                node: '0xp3xyzorz5nryk781mrk5pbcggl9z73b44s3jzke3uv0t40v42dtoxcyvkf0lac4w7q7v1zx6hwvfvysu0kotpejq57vtmn664i6wgvn2qbvfswyidiy22bw9ab3jfftpcbkkbf53bjtiiywudo454kzo6g13vd',
+                user: 'nypd3hakw7s9zlc2xz79wvl5yanowg371jtnorv0n1ek4rjw3klmhyf7qz67ty8wxbv96mn74po9shw1dictks69ld5s0wsyb2qna6l7l3bntkisvbjhitlc8brqovbzxce3pbiejnx11rmexj04y50kk1zm6q5i93p1dnjta9bdgyihp4muvrd6mf7yfc757my1ecx2bn72ct3hoo0qgn0e6vzpa12kltis0pwm7o55byvih7vx6twlixnqd2t',
+                startAt: '2020-07-27 04:22:13',
+                endAt: '2020-07-27 11:11:03',
             })
             .expect(400)
             .then(res => {
@@ -577,23 +577,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'kfstoo9mp0mnplbfdq9lhgaonvo1c804td3hl30na4hur3b5gw',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '9dqgqprebx36t7vdtmrz',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'n4uz10z6eetatp6rvaj35n7epjbdoqh8750x152rw140l28gqa',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'cyd2716dj2np0ujf5srk',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 13:35:17',
+                executionExecutedAt: '2020-07-27 11:40:46',
                 
-                executionMonitoringEndAt: '2020-07-27 06:09:24',
-                status: 'ERROR',
-                name: 'egm849em9oxaoww0u1geihwtu9gop8p9j9boi2sn2ak0xolq5hfo1wpvnnjt73x5slcpv6lmyuyuw3ql8ph0sxerlw5v1emyea3jt67tpzrocytu3iizd3w20b4gq8big4ygtyd2ubo446ivn4zppz6v91ads4nc24u3h2e4d4vpy1a46lam3p4xqxoasf87yvo99lmw0zuxtuc75mnqcitxgbm4jhsuk4e7otlx3cit0b3osqzut46sa0fmshe',
-                returnCode: 6376948412,
-                node: 'oxq6w9jdmbhrwxgu8zsnr7kstx0dmmqzo4cbe7pcbiviycltukjv6tcrph93l3lzglwl0ayc4hwuv7h2u3h26cknvfkokkvxd1qdqszkyutrj891sfrdfr84j5aoma59xr4nipv4m1e05v1p77c10vylxaw9ggou',
-                user: '9q0m2ah66l4wx1d5l3lf1xfekri3gm4e5nb5s81d8eg4tvzmlbdsd3a2wpyqs7cnqm2cuoahrm9avf7xukt8njo1g1qedn9hlyqm0jsortw69d2pmmkpq4dr0ub6eqrldxasaoloctj4bhedh6d7avv78ihrgzzzmy96xintt9dlhwqo1q8vvc156zfo7uqq7yws88a4aq1xqrdwez8tzrbi4p2kv76oj83kmijflxq3wc2lmw7tqinnw6ymcd0',
-                startAt: '2020-07-27 16:47:52',
-                endAt: '2020-07-26 20:35:56',
+                executionMonitoringEndAt: '2020-07-27 09:09:11',
+                status: 'CANCELLED',
+                name: 'x4hufv1vd0je9whncd5pvi2fjzvfuo2yv28ue0xctdp29p27rrk5nny8c0vcikqis30rks7bg3or2297yncst1os1yu26nrgm2g7dozdip5lrazrwvh26xrufu50ammnkmw2fd865c95o5cbhqw0ll6oh2zvoezbma77mm3qj1g1s037dzt9la4erqwnyfbr4tq96wi45623sxxb51iwld5784s4tiuweh0fq99xz30pd2ge6ywuo2m4u7g8lt5',
+                returnCode: 6622604529,
+                node: '3ue2zssym4hk9a2kp413zybhbgznqzq48ki3x39miumn19koif6as9mngti0f472myvcti7g6ud9fbbq843er300i2sk9e1s69zeh7kezfgxypdfnjl26fbf8fxng72ovlu7sx0w3s4zqob5v89lew0a84cpioqx',
+                user: '7n4qlohadpo48mfn16xcuuq2d09oiw115zdp053o8ugzgx6yheow71ywziq3egfdwnxv5vshwvnppb4zse61he59oktz2bz7caxnn7lcrs041s87hj8srmbch2g002tdkxeirk0ut6wsyit2x9a0v8973mg9ohra6ql0fdhzfve9e7p99ceskuawpea65qg85rs6rz2ha8h1jj2dctgucx42qcelqm6m47zzonjjvxg84rdgwq7b2xe66hqljii',
+                startAt: '2020-07-27 19:13:13',
+                endAt: '2020-07-27 07:52:03',
             })
             .expect(400)
             .then(res => {
@@ -607,23 +607,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '95xk8w54fpuebus2fu5q6mh5z3ro3f9gerhawqrfglamk9h6e9',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'ep2i91hpmwr4vv3m4g6c',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-26 20:42:39',
-                executionMonitoringStartAt: '2020-07-26 23:07:08',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'adgosdkv4nzvip7m7yb57pbe5di3l55fy93sftgjncjbp7nqtl',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'h5pa2nv35mp05bocpi0o',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 20:56:11',
+                executionMonitoringStartAt: '2020-07-27 19:51:00',
                 executionMonitoringEndAt: null,
-                status: 'ERROR',
-                name: 'nt5vmc0mxondcvlfbuy90znf0rq7b8f2gw4ibyc3fqsun1n7vlz5tovfph7m4xd5acs3sqb6ovicnbm8xms0tst8g46m841y8vcjvtqzasjh88qjoerkw9wg8kco9gktg1iulr8cnruyf0ugye9p5h039b2atshl65psswstvvh6t6vwalbwvwgfjbbd9672uaywdkplltz68a1j7xkbulx5i9ahbh4gaj0ar7cb7x702pa78fgx3kwvfpp7opu',
-                returnCode: 4766048695,
-                node: 'cq3hlo7s4x25t9pkk7xs3qnjkcltg1263sb2nzgbpllwqkn5u2rw35ov1z4da46wq4lu3xn4xtwjol2fxs6trro3cv7u4xqnw2err3b1qdpmyd2b9lwq7wlftw1zdnq32ydktsmamu26rye4xkyrseu1yx2hcep4',
-                user: '76ub9wztdyox4qkwovle8bejez5vi1lhohiznx02thd1pblm10symjjipqbuxpmoll0p90gkdvl3rvg0wa7ox4r4pxn1v92aevbc16fu1v05l5kmtm9yavq7uhrgjlr4hptfqeokuy8vfasbidkm29yz8s34xxgv0xitfe95yumfrzu4jviegnazc1y5krqfyyirt2hyuzphdn29jzur9jknpf85wtha28kjb5bbfz966s9nir1jb5yb0euvp9v',
-                startAt: '2020-07-27 06:51:18',
-                endAt: '2020-07-27 15:55:34',
+                status: 'COMPLETED',
+                name: 'x94vccpaty17xdjz2e3s8w1dsds9og1gu194gihney3tn4jk4cbe5ibjv2cw20x9h6frz6uqzkyy7siaj81nfteyjd0j78grnf9xvc05uxmzxjsw2t4bxxn7qzzijc4ovopwga1pmehacjipexq86w0ffzbjb2i7rjv3y2la4lo0dag4jemxihb063m32rvahvynv36xga2u0ravsdkejkfgwzcp5bm90nh0w52fxnucf3iunc3rb8ftxlz0acv',
+                returnCode: 5114758050,
+                node: 'ao9ha6hpl1tje1u8qqwjkzihwk6b8gwodfjaihc7kan6jxlr7zpz90xzh9qo155pepnsgacmpeu52eha7a6uk6exc2878iifzpeq7aw11enitxx4kcrm1w31oa9rjnoesf5odkuiulto6j7o3ijengofe3wotnsl',
+                user: 'ax3vz7zozbceuc3p18fr4dz6xslcn4gy7sd45n7t25vsnqf30a0zh38cil84xp72104u900i2cmoz887djd6uqyg3n2q2ey7gptpd3jllgcactse6wb63b6140ewph47oowi8tr5ufcfldz0onl4kj17dfcyq7oxixyt9wpw68a8ke5o0kv4ptv5fkxbw6nfb3c42a246ltgldsbdi4fmva658jenqcmbk1ku6t54zba2rcexsqmy4euvkaelc9',
+                startAt: '2020-07-27 23:59:45',
+                endAt: '2020-07-27 04:23:06',
             })
             .expect(400)
             .then(res => {
@@ -637,23 +637,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '20jumakjg58j6itb2dkcbhz4loa4ix9mhqwtuia6csqa45c8u5',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '6jku3h4thr0mapwl59rz',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 13:07:10',
-                executionMonitoringStartAt: '2020-07-26 19:39:58',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'o6k1xdn7rgwuf5p5a6cihwy3l6h0gg2tem006qlcfl8iz9jgkh',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'rneciw8mc5vg544ekr0f',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 18:28:16',
+                executionMonitoringStartAt: '2020-07-27 04:38:31',
                 
-                status: 'COMPLETED',
-                name: 'rm7uawc1zdhs82xvzh1rq0spchld9brlzyt8nzsqkppgw5bm2to6ofjrw0l4biqseu425m6uu5h5lhqbott7agbknvu68q9uwop4fvineqeqm2gqfsx636g7o4tru17u277ff6j4icrvl39hoy6n6yydsll0fwihcjcd6gl3ln8jjl0ppjnoiqggibqa3my2jv3p1cq6yr5e1trrzgq3x6st93ljxbn55slc2bx2qiuemtl8soz3y71nny8osg7',
-                returnCode: 5722338910,
-                node: 'rmo8ho32fb5jnss1ol3j906kk1ycni0kqmku6v02up7jdyord3aua7emdi592efh7avob3llo9adio3w66h0260eltu5bmr8h0nsc1zh0pqpzioi2rjstozzhslz6ic7q6lulin4t9lsqioib13n7m03l4zo9zd6',
-                user: '9u8kumslq0mzevftfbc37nflxfc15ga6idx85uoivyjonlwetbowcgtd4wighngxp0vfwe0wl7r21tmip138fdf70p246tu9mywczmxlzyuo8pzimoq5zjdchgrpyv1mb71587dst9o3o650e9ovyfc2qoyd10r2vr1r5out9c8cuxmn9hd3tdkaimrz5ngr11ydvbr8nyqqxc7c53yqooibcwbc933pfke6mek9b6qufwxrrn6b1qx4ur8mein',
-                startAt: '2020-07-27 14:09:55',
-                endAt: '2020-07-27 11:53:32',
+                status: 'ERROR',
+                name: 'qm143hx9hcqv0ab1cg6724d7vdgbpwfngcssnba0td8ctpmrdp536k3etr2k3xsmr9d3eeb92pigc1q3lma0uj73hdb91x8u0uxi6ohpv37ohlaqos65vcxvsk8f2px4mtf16u6ccwn9z6j1x5lyr3kw6t5cv3d0krhuf7lwhsqy3vynp80gn0jrrtxjnudfy2ysm8bnhuyf291w7hi3kj9vwbyqm1p86uhon7gvd23kls0pxk4x8n6bs10fof2',
+                returnCode: 5049722030,
+                node: 'ncp0bv1swbqiv649gootz94548woel3zym38xs6a870jyvd5hcnetq231v0l9l89vkdk6s0kk9c5z3u46g0t7x492ixjhud45ztr4uo4v4u6u63bbned2v27l4iqnija8kxjd5lmni7murgdjfq7olhoq2v6dkgl',
+                user: 'cy9cc8fnqd8wuzafhmvh5wmlgiygnstxv9qu1a64jp4dg3sexh08asjev5qrl4285489n47aggypyyzek4imun6kb3y8ipltk63yy5e3ye832anrvrll5jwj0hz12brqfaz7y9czn430wg69l9jb9u14hpsotjzfutw8u2vhmub8xnxxxocza19tznkait5z9rsnl90offuvmv8l9wez7630lqf4v9cvli3ic2mcwrqfe6p1ot3z446mq8jiob3',
+                startAt: '2020-07-27 12:35:48',
+                endAt: '2020-07-27 13:34:21',
             })
             .expect(400)
             .then(res => {
@@ -667,23 +667,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'dk07qn7hq3042kxk69f6bac44srxwg18831ybsiirsphumf7r1',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'zepnhkv8oy82sgepty6i',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 12:46:25',
-                executionMonitoringStartAt: '2020-07-26 19:55:03',
-                executionMonitoringEndAt: '2020-07-27 11:10:32',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'bd2ize5quarz54bnm9hfvmn4ab2y54vd0qxbg365u71h0r5sla',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'lee1h1ewbl5m56cvh6jh',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 15:36:41',
+                executionMonitoringStartAt: '2020-07-28 00:43:57',
+                executionMonitoringEndAt: '2020-07-27 09:36:45',
                 status: null,
-                name: 'ej4wj25qsy7ib9hibhor3l1n5hne2ojnqkddseiczk4qeoq296cmo9w7ytujulg818wua18f7dxhsl6ui9jb1jblaeh3bqo5u26x69r7469w6wdmzeytc6o2t1y3dq6xcs0w53b05qf5zr0s5njcb9ia3e02j7nw1ecf43gdb7yh49a1hhga1bk3nt29psrck0gihck140g722yjqa4to7wknfordl4l6ii3xikt881voll0k8hjp7pkb2qqodv',
-                returnCode: 6001749979,
-                node: 'd5e69pic0016q9bbsscu4b0iyv17tfht8npi5xe7xr4xjoro6zm77ihac8nwbg74c55q6vyaoe6cliw8b3zxcsakhsr6unnl6qkdrj5pqeat0ncecuy80dzjb8enobkt8t0bcvhxtq2c9c6rn74nu068dmtteqxz',
-                user: '2kb3helpnt1uthzi4h06ut7frlxxnts0jv3lllk0dmme83h4j1s99nd8pjarggr3tnjayj447yhjy39di37mwpdzox0e7w0tk3iwkx3v8ng0a35999emr3u9jrehbw4hcxf2llxc8gybdqfkguxh4u7db19zytvn7s8pty49z9zaha6x6tzzttn8mppo1pd9kvdkha7kl1zmh86mf95pqcuix5ddglqn74reeujjci0b3unqrgx51txvh5cxagl',
-                startAt: '2020-07-27 01:17:43',
-                endAt: '2020-07-27 09:47:07',
+                name: 'a736gcm75opdcmrgozxvgraccfmfo83y241k2tjn1hqhe4y3btvydmt1lj4to8mmze4507un915twaun5vo7qb10em5skhgvezx9hr494i97zvwgk6xh178cjyf7gc21baccsvscx1spi1gjn9tiwsfkokl3u0vbktqw2hhtuciwrldd1ogxj3xgy3uuasnojfna3s0ai1obbtlpy5h4nq3l7vj51cdrd66iyan2zut72hysdltqtjjwpe78c8q',
+                returnCode: 5478285729,
+                node: '0mw7f53urpxd0zqxcl58dlolm8vr66zhohqe0srsay0wrkg4gjknbe3b6hmuxslf484dk2ph383p79ewpsy4v44j0jrrb3gn978y57hvaa8v38pwu2mgplzgwl2skhwrw2ahr2b2ylip5bbulab9tit9op4p0n4t',
+                user: '92y5w10sa0nod5p357g5giaax4f6zc33yjj2cmzp8k3v7a7nd60gnf91y2cipm71hgxq79wl1xccbb4zmbwigc7vc3p6sim8ji2181g30mizw1epho5ppxcc892uso1jw7g5dyu7ey6o9h3ei61enmo7mcd8zzqqen9sbwqc59xbu2i4k7wememd238z1o0ygle1dhffepncey61mhdbochbjqf9lcuz1tlqqgj7uqb2q8dh3wsxmiabmiudm9f',
+                startAt: '2020-07-27 15:38:14',
+                endAt: '2020-07-27 01:57:18',
             })
             .expect(400)
             .then(res => {
@@ -697,23 +697,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'vfr4imj9aflcy0pamyt2poffz1w1isd97nneptsmqyxxrc5unm',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 't3or5reokinwj0x0eevw',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 23:10:11',
-                executionMonitoringStartAt: '2020-07-27 12:39:38',
-                executionMonitoringEndAt: '2020-07-27 05:11:03',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'fzhe18kim8s7qdiae1puwh66bqe7fpvyrpffoklvzhr1i58q8n',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'wmymfuatfbf7xiz03mad',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 23:38:55',
+                executionMonitoringStartAt: '2020-07-27 02:32:28',
+                executionMonitoringEndAt: '2020-07-27 08:20:28',
                 
-                name: 'l5t5geqjg69kaa974op44g2rpqzr7oz2ctusxxdfk1we2a0rjc73u9na9kslpfcs0z7rzugeinasd2nyq1oh93w9zwqu0bwjvjxx95l4alxys6g4agqqnnsf045v7aghudr2ln3n4lh7iurzai1ljvnxlbr3v5tdwlsu68a5uv7nl3nd1urbe41tg08af8e9c2fk6k9rtx5aaq2gueed32m91xi6cmf5bcnny0dtlyjt10scgc26g8ucalhx7ly',
-                returnCode: 6938261978,
-                node: 'qvty1z3eks7rg8hjcj129mhw7xkw4o6twg0a3pxonc7u5y6b9xskhq23je2doig4i9rlvhme8xzhfbb40p0l6yh0v1juqyvalaw88guw1s51t3tgwdn3z06qmf2jmmjcogj8du58vr1eu8pug4lkswjjxh6b12o6',
-                user: 'acyf38k3oa08p10mroymsia5zaaly0rn03jzwcpwapiovqg304au89v66adjc7ysass9jm46mpa3asr767ynd1ar53olwvrtelqzbskyfi5n8qqjn3jwxwomzoclpaaj233fm406b9rgltgzij4ou8gslsh5a5ns29cd82m7jbkq3ryess37bhfo95hy42jrcsdq44mza54a29cr8jkikmkeubvamj3xu5vokmkipp1909uyldonf8al4qkj3ig',
-                startAt: '2020-07-27 11:30:50',
-                endAt: '2020-07-26 21:28:49',
+                name: 'chvpwf5y9depa9lnpfn5u38uqku56ey96s7qv5r91y9efegklccplic09buuyfgkh584h2n3ajig01cem6qswwfcq0qfi3bfq7jxfgwaxata6zvg4epw4q2w28jx154vhiub1hy6i5jw1unutbb675naiibmxv3zzyy07zy979jmyiyirv0st4jbvjqkd7gpnac3wjtw9zftv04jvv4ftdhgg2gab5btmkaf5xx6iiehtn26zcomwg7v9yj34qb',
+                returnCode: 5788917039,
+                node: 'mbr10vgfb9llgb7f244pm3mh10gb4e5dbuz2sfzy8jwhm498a776lw3rxqtgaqv07n02m7vbj276t1xtr25k874wlk93j4hsw812id3z1ltalo84k4228n8tco3bu2h7y6qs34a8jxvavm78qr9849igzybezt41',
+                user: 'vd1m4kclk6sacos3nt8hybswkthtqbvyqyv56ctdse3q6hbt3ub02xuyz266s0awzc3kzgqy837fpilbdnwrh29mh55sd7nwl6eaus9dxx6iox8sojicwc86yppdwdouwbwvqnw9walwq4zhbbcmf4g8mu71hwqck5t73pzd2dgcvsed0ffcxblvt1iyq0y45jznhze844im3ciitfxq9wlkmrj4z2lfv8tix3u116z40h10p5c57kqo9bjom4b',
+                startAt: '2020-07-27 21:28:26',
+                endAt: '2020-07-27 18:48:48',
             })
             .expect(400)
             .then(res => {
@@ -727,23 +727,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '089vye7q0z1zthocnaqigypxwesg92vkcpnt0ifwr874wmzqqd',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'r7bkmbrt7qtsmfklgapz',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 17:35:54',
-                executionMonitoringStartAt: '2020-07-27 16:39:17',
-                executionMonitoringEndAt: '2020-07-27 04:08:13',
-                status: 'ERROR',
-                name: 'h05f523tjrbd1g00to67d007qr3sw7nucd0sh2sbbel1ehlmv4dec0odwwi6ppw67mz3rotea77fspxolpv6qae2ocujl6wnjciu4ylkspevd5pdstlu2rn7ldop7i5fttkfoa43yp3scnz72cp1x3titbtv4b8ghkbo5j4ac16l0w8l8fmmqot4lcppfqjnvzxkecuj65ylk41skhyzcnpqp2ab13jf1diiu5eulql863yjv2xs9iysdtox068',
-                returnCode: 3073908184,
-                node: 'i5t02on44pa8trobur78idm4z1eki150wz92clrubhjr7xnepti6tg2dyq1lbmwd8iz0or9hykx9sw6qsaapotee3shgud6gt6gxs4u2w7t9d0nj8xigcy9wz3j1ysqdhr22afgrhxhm93fuwcf4rg1lq8zdirg0',
-                user: 'eoxp7t3dvrv84lwj04lih2jew2qlq4umt6jklmjvrm62k7avmqxvxk9xznri7m5m62y518oxeyl2z0xa80qw9blvqadqk8pulpi39szth03vms50zyj1goli58n4h2ik52zvw2ebbam6zr278q2j6ofregklhmamokci21m1j3wy1ttyk4tw9soe6q7ii80338t8ycm2k0qjurodti9s6ad1em3d74eipvd1x3n8r7q0l2tidrtkzbft86o33de',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'vbhya0cgmzmpeyj4lundr85m0n1cq4tzzl8fdt8gb32ral86t9',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: '8u1ijwkwleti5k0u6i9p',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-28 00:45:25',
+                executionMonitoringStartAt: '2020-07-27 05:15:08',
+                executionMonitoringEndAt: '2020-07-27 19:00:46',
+                status: 'CANCELLED',
+                name: 'qd8ul5p2mgenerxq29tpki5jqb90n2wmbqf8fl3xs1nr8foj1sfup47s7crwmq5i2c91dfium9ze58u9xpw8lrwq5h3736pp3ozmk0voqm877v9nac9e9xpo2i8g04fh24jdh8aa097ifn5t0rvjqtowpzabeypp8judfel0fluo6w3t4nf4uwzx7bi7u9xx132iidepa9973caner9r8glz1akwg264rmxg86kl6dawnjizc1bvfo8xz7ztmcj',
+                returnCode: 8541847724,
+                node: 'iov6sofyrkli73glebfz17wmf423ggpwyn6ef70ogbrkvb9qn30aloiga8di0sux693e00jatl83zb1n606g0cvp3i1jxr6xi5e3qpja4zdix2p5qupxqoi540tjleh55x3b8mqyvnes6fjvneuq6loqett13370',
+                user: 'e6wt53ah979q4a6n0tec2vhmb1sfco36533vd0ytfoywe6lnrjbxd5br4fq3y3m7yr7jpaayid019zbsorloux1a337nppwi9t2si2lbsu6udyx3ezyxwvx5ba873ft5hl848niygewuawmviay5278qndyhxw9zqf7v9muekn213vz5o43t7tzth9pyh16tu5yf80z1bpisq5gve9vntzjiaxcvu5ggmbmpm0tzfvao11jmxqd234l5tm7ievd',
                 startAt: null,
-                endAt: '2020-07-26 20:29:15',
+                endAt: '2020-07-27 06:12:13',
             })
             .expect(400)
             .then(res => {
@@ -757,23 +757,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'zfig3yq3th015bfdgl64xox2ytqi98n73akh9l5p56xfaddpne',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'vgrfgtgk8jxptvje3z5x',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'qu96urup4brx1glbibf983gz3vylbramrgct2otnvtol7mhjr4',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'mo3gctn7biyedniy48lc',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 20:12:04',
-                executionMonitoringStartAt: '2020-07-27 13:08:26',
-                executionMonitoringEndAt: '2020-07-27 05:16:14',
-                status: 'CANCELLED',
-                name: 'ctxlxfz846ua5died1v05rd2s72vzhzly86kxpgbj3zd94yl1kzhxgpii4hsldbra95ll7kr26bfmpqr035v2qdku8bobae79yih65xiabj604ja7bylqymf3jyf4tdhfi6lkyoqs9778kzlv6eg72dm3he01g6gxafeads0o411ffl2jyj4q56bb8j02qkc8fj2mcc5z0dpf7u0euswvcea5h9lnp61otljh271iszakkp2q85otlflilopkml',
-                returnCode: 4951108548,
-                node: 'y3sicdbtdpuu7g7tv79bb63hgjv9yomzndcfl5f0batee2zz9zwr27jhi02zlgt9pqpf5lj3m51mpthit0elpgjt2mlcplu0h0w8wttfa1nbg2juldtl91mene791t8bdm322eg9582b3c8yxi8dzox850a93hrg',
-                user: 'r00aal2ug9u0w8g8b663g8zk0f5qja5lbc23vbad24qak46p49hi2rc4ibbex16gjlauc6pbe0dq5of0tqoc526nph0zk0idmumckzkhxkgb3gmzdomwf5wduvt61k0gia5lxi65p3ohi666ymho2y15kguew07k59n0e1f0t8ovyeyapqlyk4qay6l92egze9ztdfzv60pw1v1mec5bvcf898cjaebht6buktgrxhl0v4mrqw1i8f8m706lup8',
+                executionExecutedAt: '2020-07-27 04:23:51',
+                executionMonitoringStartAt: '2020-07-27 09:38:20',
+                executionMonitoringEndAt: '2020-07-28 00:52:00',
+                status: 'ERROR',
+                name: 'nh7100ickifpl9gkojdg06cxoakky4gadf4ze8ev0hec9w19y6b7fdhteet84sw9qxel40i2fnsllnnxkmxha018vsnfyr6hrw9qknb3dt3ww63qcxxe4gtlyaxi12eh6bxq106nwm029lr8nseq701ygelfu28el8e0gav7bsp1kej616pu3evq3ozdlpxil9oa4rgtkwhh4znscau9dv2i5x0k8h3hhocmrwybgj1wlis9p8k1ig150zn1pli',
+                returnCode: 8223955736,
+                node: 'oew3syf44sp13uvj8e9phqjjazpfo6zmb9y5p03rfv0j063eq6dxjygffzwq7gh1mj98rhi1nc4k7hy77k6rzekhlmyf8dwb39acsxgpc6d9cix3hkepz6off32kfcx8bpr14hpgp9b0zflqd4dybo6bpep0z6e2',
+                user: 'ornb3emh46bhy6vhpurb45dsdh16kf6i3o8to6t3zwfkwgpi92d5277bbdv5zpv83wudsi7le64e249ms5z0hnrmnacp3egkejyqr731jcyb7e5ju34id5q20yfsfha2zsgqoipp2m7nsjqzs548lbio9vlrcntspedhfqek83gw54rcxgnkmpva0gvdimo93qlhdeqjek4o8ct499l5egtrxyxfe2hiz1eq4c6op7i1tq0xe2uupky0p00m2os',
                 
-                endAt: '2020-07-26 23:13:42',
+                endAt: '2020-07-27 02:53:09',
             })
             .expect(400)
             .then(res => {
@@ -787,22 +787,22 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '2wjmcr6gbqpc4d6l73hn5y0xjmihf5zhkjn025ydijomcqf7kq',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'o6zfgrmsj2okdmh920zg',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 14:43:16',
-                executionMonitoringStartAt: '2020-07-27 09:47:09',
-                executionMonitoringEndAt: '2020-07-27 11:30:01',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'tgppfp23yy2vx7u1xykypamklnh2q8fxxxp6pf14api9hbsez1',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'gcoz5c8hgtmtkelhnuaq',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 22:36:28',
+                executionMonitoringStartAt: '2020-07-27 18:56:28',
+                executionMonitoringEndAt: '2020-07-27 08:58:58',
                 status: 'COMPLETED',
-                name: '4jowd4pfsct3rwmmalg95jaz266pkh1f2kz0w02kz6h8ad7v14kggg0zm56yiqqdzwh1jbbnncuz3tb1thzvy0mceigdk3gx3pqh86zlq8q3oodxxkpcvg4imty8fv1xd2p661fn59jiltx84305xtg56hnbrtccsw80a071hmma67odz75k5bf16g1i6txk0cpqy96pgis75wntswnv1hy4ocqzb7ypsh1iswq42r37jzh419b6oyl3mp4y2dz',
-                returnCode: 3174364377,
-                node: 'my26dpwe6e165jaimrrbcb9xdt5qy9pp4tatalmfr5d2o64x1a91axfzqfj2rgi9dcseliebzdvo3vgbodmnza22g3xitdzrqja7ggucpva96wrlfdwe6efoimzuiu03la7iv16itp1xexv9l1pjdkiu41iz17mf',
-                user: '4q0tu4cjodb7fr8j6ipxg2utl30wyjg1btl0tg667m9jaipnxep9f20upuqwvb50tslccwjqkibugz27cov5mo3szpdcpl23v9qc9ou391o25fjcwukkmmhjo7xstn2k66q0zo1hkzmw9mixkl2cdbi0ki84f9vmoamug0wybhseqku0lscwafbdvz5q17e1lydk6xl4fvgdn9vino6l0orint2nw8xkmt8l5dos19fescvdcz6o49erqi6pf6f',
-                startAt: '2020-07-27 17:05:12',
+                name: 'dkvgkvflpj8ugxsq3f934mh04aikoxiv59exs0txqn9s8x3uwc1h6k3co4wki3oimxjbbax5a2qfibdkunu3yynl2ry4eaj5n900f83znqaj03t30pormxq19p6jitu5ayash6ak0g10wbad3v57xhuz66ufvfterdrq4ff8mveg2umxmmn6n96vtf0d3mrnndxuqlv7hm0usaypj47ok9qv6f40j783x43f3mk7p8s36uxb1rxwyntgmedrrnr',
+                returnCode: 1442774673,
+                node: 'jowzv4ibz1blsnm83d7151nmgt1rtgf54jtlrg9gsf9kaokbwvnb1na4menpc2gbjg1h8opsyl1mm6x8kil2pvvsnjawne190a47tfwwyhmshvig1goyd1g7wjgsjb7g9qrzjzuwqy9vt1f7m13o02lcr1j1f2y0',
+                user: '73nyx03jg123bbxizdeihjo39zo3es0i28ijxk2iir6lh2eqfpdl79zhpa2rfdchb2na02oyqqyuhz1532x4m0xmia3kxviaw2zo0kolsj7km02rnk62ilhfhg6h764yim6qsrc0wugfmw0e24l32pgcudynqpm9s99rz4t1dy9yoqhrqkdzgrkoqee8hw2hv2zj5kiyeilhxqn99blxfehpza2gk7uauc4ykeuyymesqziiud42739y0d5qker',
+                startAt: '2020-07-27 19:18:27',
                 endAt: null,
             })
             .expect(400)
@@ -817,22 +817,22 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'hsxrnzjm098s0zb35dgbpprcenpkrpm5ugj6uifq92c42tcvme',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '5rhlmagqf40u9ep8vs4z',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'e8nwie2w14hl42xuci2jemhoxuk1986b58nm4kkfhi9ayejk58',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'rmhuiubjgm3oyn9o1tpb',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 08:37:31',
-                executionMonitoringStartAt: '2020-07-27 12:07:02',
-                executionMonitoringEndAt: '2020-07-26 20:42:29',
+                executionExecutedAt: '2020-07-28 00:39:06',
+                executionMonitoringStartAt: '2020-07-27 21:05:07',
+                executionMonitoringEndAt: '2020-07-27 23:03:24',
                 status: 'COMPLETED',
-                name: '0mqaml5ow5cm20vyzjs36jk8s0cv9az6uhbbyo71m75lcnbrggzl67l4bj34jedsq2z2bhn0zvvccg7sy92v987cbmauer7heqln19pfifl6e03wefd5but0pkl0kblqjasd4gd8seo9sg8h8ouemvhxmjppo63hbr0spjqyu2hmv8yrgumpu7ha7fzsgbg1v6mx5von33d4hmik4571epbn0zvigfweyyp6etcjogqps25wl0cytmug70jkuzr',
-                returnCode: 4663207639,
-                node: 'ye2itykatiaqi1b2r1p5z9gh1sows4hc0hwazbixgz46eakzwwwk97z2y42fr7vhqwuv3tmsc61wif97g1zp9w89akctx9plzjlgnihbv8rdr9yoypubf2xj1gnzse22kam50e5ia2x9hwequiu3ejyqvelplqvi',
-                user: 'gs3ot1xyjyxy876xjaefzs60se3xble634prgjg3z9f00qqxncn2vmnxwneylkze3vcelu6hwtwy88utbwbmc3g9d5acn72pqq89apm13f681fykwh0kp3bbqftqwgx3nvh2cl8o3vydbk574yrg56ddkjzlfr9xrv106a3bttx6459zcd4wregx6qcu4li8gia49iz7f5juvt7euqe0o8zusvoe00lfwe082249s1obpkpt3uryjzm5ptn71fn',
-                startAt: '2020-07-27 09:11:22',
+                name: '4lejcg70r6jaj9absarti9ia01a1hh6j5lgv1xuoxddowqpcma5dbbsb2sdfhlk6c34v5qw9fdfmeg0bmhc4kv3wa3hv68u39nt981gzzwg9a9kyhkj2getde03unr3eynlebf03n11qs5r6iounlnyza7i4gtlrqy1wi80x2xkehs2d892w7axgcgpoq0w1ofi2srger0t6wqdtrjdifqvxm3juk3znjo0erdmbsy22z0lsb0kzyw0oj0zyqma',
+                returnCode: 8352571804,
+                node: 'recpv23tq8v1mzj3kcct5wwa6ewaj0j6bvqa2tqiqxyezjdc4vxwg1pf20ocpg319kymge3jmsaq1x4qg04fcd3nlummbm5lzci3w9amuhfr3uy3yftt0qjs71hpjxbccihjc9rew0sgmec76eybuwshcf4tucvx',
+                user: 'qih208u2fih3nk7eykavyjtc9z3eatafcaaap5wypx4qgz56p0a1y7gzvnsdjc0watnwmwwcje7cly15t249q0rew1cnocqmnvgc1izslyiiq7u1o83gcn5bwb4qppnjdqhe5nlx8vua7goi6yrj4ulz6o8oqfciilt813ome971rlr3hfyj4ruwgk4jt8yjsxqb3ldy82uigjac91dx2al3sdq4nfwf01hobezh3li7b5eui56g5ploel3v3ks',
+                startAt: '2020-07-27 22:54:31',
                 
             })
             .expect(400)
@@ -849,23 +849,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: 'zhf7kyewlt8z4g2rqwrbd7u2rxbpiyygdo6ff',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'a5twchl1sm92ghzhe5r23fer0djiuid82fzhuzxtlg7n8squdw',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'rkeal4dl655835zl9uxq',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '2pqwi6a06sht2i0uvkk2742geefqvrh3pu5aq',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: '0rt1kix5zmj6y607tbwnkrjzdunycne5xw7rq9vutdpdgd5h2f',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'snld8ov8zzkrdlouwj8g',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 05:06:54',
-                executionMonitoringStartAt: '2020-07-27 10:54:25',
-                executionMonitoringEndAt: '2020-07-27 13:25:59',
-                status: 'ERROR',
-                name: '1aqyb7u7f1swxf812y0b6i3yzlwygddeh3bb2bgzlmn6mdicc2iuqjmvp6m6o6s7m04m2m2wnps04yth8td8frroirieh7gqkaj0fa827ow6bxsmwd13c364lb6viegb99puqc7g83huy3srunipoeyn429z28twsat8nnde7b3dn7qwos18xf5bywgbhetenptymvmsz4vxkc0kfpwzi3x3qf7xbskrd4zoncsmb2mkh31whhgs2xzkiagnie8',
-                returnCode: 9490149510,
-                node: '40y68uulhl2uplhta6sb996ib1dphybkvin2p705mqeeaiwha54d1vvo63lkmmhe6h3ez4n341y3315bup0uywp8463ad4pu8sr7pjcygkwlk2czxcbd2rfo32ajs8q6ek6qrm6jx6q0wxg7n1g9nel8s45m4t2g',
-                user: 'ebbqm1wrom2gu9f2nxe2mljgcdlgbqbupqiv24l7d077dsscd55oh77z0t2b4gmkeh9l875khz5etgqdw4l8bc6qqv8kq2xeu1bcrwqlf7yl1s91mntwer9fx7yh049xzjlic2m4ghu4ngqree2ul7asev7jujl5u8hxw2zjkpxbrrrbgqyiqqowiehi1liissvqvbew56l1bun2jmi3fo9yy9ooej3m3l0ljhu4nzkxpzmtxko6bmlpdz72kwr',
-                startAt: '2020-07-26 18:42:33',
-                endAt: '2020-07-27 05:00:54',
+                executionExecutedAt: '2020-07-27 19:51:55',
+                executionMonitoringStartAt: '2020-07-27 23:36:07',
+                executionMonitoringEndAt: '2020-07-27 20:15:43',
+                status: 'COMPLETED',
+                name: 'fhb8eplboyiioycjog1ibrfr5sn6u6xluv1kexf8ty1l6pwgfiep66hsevs3rdkrfywm8c187i8gy5zrhz1gu9p9dlk96b8upl0qjdiwwak7oov9fe53psr7rj3g9zr6jqo0p5k4t8th10d1gcsn7a8zsc1emasu9em9uc9ez1xvop8rmkhdqiwy9baeov5tqi1m1yq5cubg7xhxp1f2ncuhkheedq8aktco0m5rjv9aoh1hghhxemw4134ticp',
+                returnCode: 7320163456,
+                node: 'sj756h2aavgf8hxy92vmiyl0j367zg9idz27uigyrxlk2x0x2455zf8n8l1wl03k2pw5skbov8wr9vxgfn19bmmusyljpbo6gsib4n08dcfw2739et55ksx4jvt0rhoxubaxlmlxjryjqp38dflquldmxlr5oiv0',
+                user: 'q5vv7csuhs9tlbildd56uq63ktkiva0vi11x5rvf7sfjzyf25s88jhqy9qs9uawjuivzfbz2ihpikowuvy16oi1yswylh75oyg91o9juqvh4earb5qct474vegaeivql3rvz9kmih1cbadyce8gjwc20z862pxqhewqhvykxnw20kdzth7pbjfyvgezlynd9ii8yrd12oqienyhoumsmsjac5zqit7sn7fu97fr3g95dx7nqey7mjxpcvcw9dym',
+                startAt: '2020-07-27 22:14:26',
+                endAt: '2020-07-27 08:48:02',
             })
             .expect(400)
             .then(res => {
@@ -879,23 +879,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '5u83v7i8xrkn3tujm1747xu4xmzq2gk0i2z45',
-                tenantCode: 'phcelg4fv6izj59cjo139ljckh88d4m3hmbkoeqzymdltrl0ze',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'i0b455hsdcl2t4tef1sy',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 09:15:36',
-                executionMonitoringStartAt: '2020-07-26 21:08:57',
-                executionMonitoringEndAt: '2020-07-27 05:20:15',
-                status: 'COMPLETED',
-                name: 'jtswa0c9grrckweu74lblg5qhcbi13nbq1eoxd0x3ok2ww6degeli5of2u4rbdxe0urbfp0ge6mprspvae8ykdkrw4wm6d2wzsp0e4b75ft4i81hha3kz22kza8es5m07ufih9wauo3vcld4mxv0o0aohtz929flyfcm83sz48t7d5hv0nge858l76mbvp0mbr7mtyn2oeszixyhpbkcrgumt43s8t40x3bk3g4q4g214ku7hpcpizte775wbk7',
-                returnCode: 3551852783,
-                node: 'm4jkk6q6bl9iwx58w8sliojuan6v94xwkz6y0kwbond4ni9ed9venogo3jxu8u00s0incb8i7yk0dii73w2c7b1u4ebbr41fj91nzfeimgqv893zgu1tckoou83txxtrtmdf6qkrt2qqt115no1sn2dj021pgp9z',
-                user: 'wp3lintz3xptaqgmfz8exktsm3hiaffjt7neezlnta2mpqgl6tl9lj2oirb3s2nnumwrhg88sm3gr2xb8tehfuxgqd83j11b1y42fm7f825mqkblb6ee4prsoueonx8ydp49ts5eaxkfpqihbq3blbmi20bfc4sdac9g248fvaw1f0alr09yuuax2i09h5g9t2hnqmp7p1nsfgpjh76wfccym54c26k4jtrezqmmp6zs2rjabugmm6pb37a7u76',
-                startAt: '2020-07-27 01:48:19',
-                endAt: '2020-07-27 07:28:49',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'o3sxi16dylfqlumizxewak2yc91ie4qmj5qkk',
+                tenantCode: 'p7fti9opw4x13vki5odk6c4d59sbb77ck0yjggg5ov6vaf83mz',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: '84g52rx09warrky3njap',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 10:02:57',
+                executionMonitoringStartAt: '2020-07-27 17:24:05',
+                executionMonitoringEndAt: '2020-07-27 12:00:18',
+                status: 'CANCELLED',
+                name: 'y5fkn1zmlrkum04iqh37hl6l8wmrjfiyaenkiw6oo35ddoez8watzhmkwhvgpmr0n6719yjdbucprj0or4no1pnrhod20augrgdydao95wbmkcleaxf7qccdjl5gry07t8bdo59x6q70pk2zvchxcaev7ybmboh0xmljsi37v3et55x5e9hrzac55j1ffehquh3j77thsp9hovkgo7a733rlm2zv82hv4h7p7et1mg4yfxjktoejjzuxsinuu4b',
+                returnCode: 4669866324,
+                node: '5rsw336m0ey8esenn99rtz3sazuft3g84wy38hciikeneaup1n2pkbj61er55hlm2wp6otezq0keeffmpbyeohsve0ry0b79lszzfydn6whj4nsneac61shaxb97km4dj98uav83cskbj8fy566jnqxnhg76p9mh',
+                user: 'ockohz7y224njlksckt95j63eatehvm8cson4omwia663vi50mmtb9p8styrilqup8vwtwefilhvsdzochsu4rcifsjg6kfopwjoel0i8dnzpdrtbiwtlbdso4y3szu05utpu0ccnn150o0w8bh31i2gjlh0rjfjhlc6lrzogu8esnicw4hssr4njzzz38qmmgnu2qwgn1tedken79cyvhajlnlo2bfc0mbl0h6bwt4t3qtzrcjfbcpe663unih',
+                startAt: '2020-07-27 23:45:27',
+                endAt: '2020-07-27 16:49:56',
             })
             .expect(400)
             .then(res => {
@@ -909,23 +909,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'nezh5ackie2seid8ofchjmycv28i6esvaah9otgg9rs7st7rva',
-                systemId: 'wqaojkwxw9oapzhydimtymdflnp4e5lem04li',
-                systemName: 'w02riw85thoa8o37z37o',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: '1qkt7tbibu2l9z6o8xt4l7w1qsg8fgm2v9r5j5kihgeajpxg23',
+                systemId: 'x7u9299xdfm1m5gzvrqkjvl14llpof6e14ceg',
+                systemName: '7vfv29hfrkdnnv80r8rt',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 00:26:18',
-                executionMonitoringStartAt: '2020-07-26 23:34:02',
-                executionMonitoringEndAt: '2020-07-27 01:29:14',
+                executionExecutedAt: '2020-07-27 10:32:10',
+                executionMonitoringStartAt: '2020-07-28 00:05:27',
+                executionMonitoringEndAt: '2020-07-27 14:25:08',
                 status: 'COMPLETED',
-                name: '62lv5uwururgzbzjwwjh78h1wtvkejct2q2ln7v246ji1rvjayeggl8yit4m6ctij0mcfz0ujwf0zrgecblfrr6nm7f0yis9ekb7ud0ig9dxsamwgah0yoghfz86e8oxil5mb1ujyf2o1ntdsiwko0c6siowh3hd5xks6c8fcpcg1t330krv90sdug9f689u7o1aae608qfa107uykzbkq3jzro6aba6t5erdisrucr5j84g36gz7yq57439o1b',
-                returnCode: 9241680202,
-                node: 'ylod6pnvma8oyvkcwqezjao708ary4j5jj2ju7ucxapagsx3iacg309dz1i5jxjarlsx8ckj3jjw1e7aiixfbhl9cgzsuzeun4usqcs216g1xlt0gfkyk9nz8hmdbdlsucds7npqt0r74udcbmqvczmuydxbo8m8',
-                user: 'nnq4bu7m605hxolp9fyga06qq2vzh3wm7mwlo1uqe77amzfs8a878ux723d3j9f092wfqchj9gya4zst5u6p7hsdbn6blaz85qwvbh50aqrchnals8go7onnjfaio34xio39796vrom7jchi962d4rxq80gdtknbip80vtsm7463cr49sl74em10oxczq9tlmu04w50vrtzh7sst5hd3monws4rxj2itl22yltrbuo9hwicziz9hcqhtqmsyxzn',
-                startAt: '2020-07-27 13:47:11',
-                endAt: '2020-07-27 07:13:05',
+                name: 'x7jq27n69t529oh6meg5w8l64x74itp77snxpsi81jzxopn2hmuc3cl33hnzz33dx7v2zkme30czwmkgy2uh0j8dbj66reo8g63avojbkpx3rnz58ejxlbzi2arf5pi2b2xaxedjzgdic1tapblbcxhtc2nso1pex572f6egj731d9ixdgovxrd6ma8l736th8nr9ekcfzg87hm5azex2ha3nlaihtv0q3xts5ewsp9pomqwgsv20c2yxc040dd',
+                returnCode: 8435310541,
+                node: 'ori4lypw5c49xin2bhkmerldbmtoxq7giss8m7cgv3n6ohr3080xobxzuifc1uivqewic3yu1t3opag7ncre2af7e3ztfvswuhf4rcqu2e4g2by6l656dpcntt0n5jkpsf1d30ju1o6mhzdcxzhdpc39wwgyzio3',
+                user: 'cpth87ayp2wwyhtohs9wyivueb6pbh04lviu13fniwejwusv8sw61ne079w7i72m0zna1aj6l533feqrn30h3k7ls6b2a2pv4mdjsav2fik7fzw3g2l8ezh659flw3rl3dp5jf98tnla6sjleka1s31phlfkzlfl9quzznlpwk03icolxitn24kgkesv7ermfxpyjmyjfin1llvvr28ywsumq5hsrbxdih2i9p1axoozgn8jc9opebzk43harm7',
+                startAt: '2020-07-27 16:24:52',
+                endAt: '2020-07-27 02:28:59',
             })
             .expect(400)
             .then(res => {
@@ -939,23 +939,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '2kqqtucyhix330trfu8pzgnhavdjmr52sd1nmmkikntykuyivt',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '3fjgcm2noz3i795nwo12',
-                executionId: '755o16oenoqet33smujcbojz6u0p5tgqg63qu',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 10:51:20',
-                executionMonitoringStartAt: '2020-07-26 23:53:48',
-                executionMonitoringEndAt: '2020-07-27 11:24:08',
-                status: 'COMPLETED',
-                name: 'vdlbzohr35373p5ly6pkrx6s5bp42m4a0rb3y447zxqflxoi0w3n0kn4h6msh779wn6lulz1zg62ks9c5190t9qm54e40jn0a3ges39kot41vd6j0kzgcbovx8i5s91r1u6owqkby7ssbj98j0g0qa2f7yrhr9wcsvua8oc7m1lequg78x2bpa9zl4detegnoulzko0i46f2qo6iwe6j3lhb094lutlz6v310q27fz2xz2aevpx6vn24dso3m6r',
-                returnCode: 4745748452,
-                node: '1axa5d4r6sk7rqoh02dx1jgma8lr0zpg4zurevr63opnwgkc9q67r9heuo9ez9e1rte8f07se6o3t1ethqo212qpwsa6wtt1heslds6eefohxwwk3odtks9wk1ulvze33ega2oagjupa4o17a3758okgpg2t4vgu',
-                user: 'c0hp94vwef6up5k1bhg5ilioxcgwyqsf6d7b2im9xoqo595s0rc3gt2j3c8znkh90ab3bztzwbqd2jsa9eadlkscjhqfhnwussw6ju5s2use1ihi5v4nzygj9x6xfvwcbalh6ww6um5qsob7b7wat9qx72hl0vgq9lfs6ohrczg8v7gwz75erztog8dbs73b0w8chw327j3uss928sn95dm1z0z0bgwd58oefk9oxudhzjz4qpyu7smzgzo95z1',
-                startAt: '2020-07-27 10:06:22',
-                endAt: '2020-07-27 07:13:25',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'i2v13y07bkgio40b6avntkxzeknojjhexrqc7ilr5x8rgc80tc',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: '05f0ts0wlquslm52mq4c',
+                executionId: 'ufm0x1ahxtajs69ik0owxx96ibkt7gfprn44m',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 22:53:39',
+                executionMonitoringStartAt: '2020-07-27 18:40:34',
+                executionMonitoringEndAt: '2020-07-27 21:37:50',
+                status: 'ERROR',
+                name: 'v2lhfn1xrl5pm9r5mmvmtdqosny8e9jw3r9tr6z8m3cvpdl8kbq5x54oputtcg66v2xvripqtq0f3gbk6az7kemq36wk1n7eg2gqax98hhu8nlvc82g9s8tw1mn1nazno4lrz7l2cp9v215ukhvm84f8g5m7gkpjbk6ppitnw3gipfv04uzlm3dvg9ph8katdxg2xu3nvwwwtknsf33pwxoues3rytmud4tbrzhjltcbuyk930226s7r8c9k2dr',
+                returnCode: 7914221362,
+                node: 'hmm8tldgs8a36hha6hoag7jj22bqk054kzv4l3kvgjxi9tvhd2dipkb9vzrithasmr04x3jkv7tc69qmyzpkrxncdgs0moajhf9cfwli10d8hjtfvttlafy4j5ony3wd5pwadr1u46e5cjwj5uh065ws29wbmrpd',
+                user: 'hl4tu59hfhb29q5vzp5i7hez83sn8o1db7z24i633pst6xamny7vssxhj8o2ngzbw9pgklv9qku3zzv2esag7zcj9dvy2u4grzym60zo4jn1v6dbvckagtjp8fxwf7pmsuq3vbgjtwk25k0cegsr9egyv64sq577wgntqi5u9ct0omr3echzxhegkd51yrigeekbs4cg7027bl8n4wyqrssu5ecm7lfru9kuxdtyig6gvxsn57ljp1rf14p2v6e',
+                startAt: '2020-07-27 11:32:30',
+                endAt: '2020-07-27 16:20:57',
             })
             .expect(400)
             .then(res => {
@@ -971,23 +971,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'iazmplo9efnt7qy3184yfbeuxc4b3mckvsosuy3tuaaqgnq7r0c',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'p2q8jjdh62ebomm460bh',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 13:38:04',
-                executionMonitoringStartAt: '2020-07-27 04:16:09',
-                executionMonitoringEndAt: '2020-07-27 03:42:02',
-                status: 'COMPLETED',
-                name: '9wqo9adagpilkphrujon0t0kshq6wgj137clcghfs9kj8yf7v2zivtiblsjh9g2pp4hm0dvlchmk9i7li06te5temm9l59cnlco5t9nil9muqneihfnoq6tg8tm7zg30rgzng5q1ys3pgjrc3pc79ormehpho956etme4h9m6zyjxx01433mfzppxwcr6jqa53fwor8nyb9unjsgm3u7z4xh941wzr0a0t2yf4vhrkzhndkrzybfzemf2jwmj9f',
-                returnCode: 2442394958,
-                node: 'nbhzxx6ja25srt4fxjstf7yv9iiq9577b10g7ka2t93jkgsgff0g7o29vh1960g338l6igxxc38gog2ddfx91c8cqsg4ktkvnr0lpi28jh4jsizixc0eyrgmzj67ti9ysoa4sh778syb0xpv7zjhvt92dj4vke1a',
-                user: 'nva4czw2r96xi282jubck0wgdl3in5yn2h9dpenkwla5hjyq601yopfzds3kxg1q0pa0671n23kuhnxax64ahzfdzwagpqfxfa7h9cywi2adqbj2zd8pv3wjbn9ooqm2t9iwx1gq8ap6ufjsylqe4lc0iy20e2ldqq5q5oae90cdjwni3aujhrmc68zk4p3l1fhi522budfx2n1n644nu29xc7xm1tf1uqzkgivaosdgnjiclvej3hkat584g93',
-                startAt: '2020-07-26 23:38:50',
-                endAt: '2020-07-27 18:16:00',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'p5m4cau196synkl97jog8yuewkyvuzbldynvkz2t52qh3loftjp',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'p862alh1y0rq5xnutijh',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 02:08:17',
+                executionMonitoringStartAt: '2020-07-27 02:12:17',
+                executionMonitoringEndAt: '2020-07-27 08:39:27',
+                status: 'CANCELLED',
+                name: '3liomur1zvt78witvk4ap8jxg74ew99ce5ddfsmdhq2zqgfj99l9rmp3lycuf9tr1xvoydwos7r1q02j5ivasr89nfvsyjz32axmghoqhs4ycjpy0z08lwc2y3zpy7jyt9dsc9ab4u3msgiq8grj1j6a3iapkbrw4h4bdt0ikm6xt21xnqchz9lv6ui651u57e8239zuu56z0mk0kdecs61dhl2fn2qvu800234b9cvz24manl1g2se8qqriptz',
+                returnCode: 2643601647,
+                node: 'hfmx3ksq30n5bqcrnmt04az3lm3k0rx10pxt337jpqmrap3k897tefueyhpeikfdrf8u6z16u4snj5wh9qfacomkgep2xe8j0bqqbhpvbkh8d8oa7icp32ec8ecdtvx2ukm5kvfveg77283o4zgolv4sfq8bhbye',
+                user: 'tulpsc3qdg756l7if7b4zvwpzmn9b0xuz3k3mkkgd1eqn8lrzboow98j1mtifbpd197v1m2w78jobphlvlmvq1piq6i8i2w68lgexsdzl8ty73o7rvbn5cilziof9089k6ub49sg7kz80xjle7192nw5mfszr4d7q676xzmyw77ksshgp52951oy98e8pzuezzxc2dupgvkjuf3jkasdo79xne31v7l5rp4f217b36unhucs8bnc4hp08qgen7m',
+                startAt: '2020-07-27 20:03:14',
+                endAt: '2020-07-27 21:17:05',
             })
             .expect(400)
             .then(res => {
@@ -1001,23 +1001,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'px3klprk5awz6ozrsguzrbev15yvd5mn23jxzgpk6fk36nuvlw',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '7wt07kaybjqw2wtvz5n6v',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-26 22:29:29',
-                executionMonitoringStartAt: '2020-07-27 13:22:25',
-                executionMonitoringEndAt: '2020-07-26 19:02:21',
-                status: 'CANCELLED',
-                name: 's65qcbmk52iwnsf3x29ojcsn1zhoiyzp7c0lyjpdh8312ook5hvv934m44ueek1k9cxpbewqdsm170j2klsfhmnxtdks0dw46y7joaai2bntdef1lgbky2f7fpff4gqtkwhasy7wzw6827ey4lkb4ijex63c22yvz2uk0kjy3thlthnwp1jquwc1mo8dwqg35i7uyab76vli3j96bg56xuni5qkjidho0hczfy94rcjb8gek6tgn8id0hnm7vbh',
-                returnCode: 2497289184,
-                node: '97qydi3y5h1jdjo1a6t0z9e4s36e1bh6gtehosiye2n66pwfc5b0ua8j86qa80gc9weat3du71f7pe89130f2bqevk84sioo4rhyps2nzuoiy6v31hm7rbly0e1lw20h9pprocasigyrhab3ii7k21ky2eqxahv9',
-                user: 'nmnviext856ohoeqhxv1984mn9ex4b4btq0s2a8xcosrd9k66c87ofumzj432b7h1i0s318nyn22bryfv1g7722tnlqm8200k4unsq9815vtwjiuxup5g9tldszzyi5cyrsraudmuf88ybhl0r6m1h7zm6f07ja0073i35akzmtfywe8n573rqxoa7y483joo3mpz5nz5d04y01dx3n7mgj7cvg5qc9hgvtbj5xw50gb1ujfrxzb5ttywaikck5',
-                startAt: '2020-07-27 09:17:26',
-                endAt: '2020-07-27 00:20:42',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'l8kj37i90ry7m2z24t344vckwo3fgvbarh2j8a23jap84tlx7j',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'c3yd4t1pvzy8ha5a7fd2a',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 05:35:57',
+                executionMonitoringStartAt: '2020-07-27 20:22:50',
+                executionMonitoringEndAt: '2020-07-27 13:40:09',
+                status: 'ERROR',
+                name: 'yc69v7dbhzar27hbgz7mz18m52u6u55x2hv00x9c55squl28maperj28b068bacrvk7jjmi32klqgf374tkbzvns7q3tidh7nl2r72g0uzw7axu2tv5bkvuxstt12svuazxrgk0tpx197ngasdy0l1rwti4vh52x84hnrkq5ppu8y0ykq2v6s8yf7turffnlf70ui6xjqux0glt1w7nvup715zthyt2z38mncqwj7goitjjm0uh0skbi37jvm59',
+                returnCode: 6621493458,
+                node: 'ijn36w6vmjkd9kyc1i4t8w1134widgr0ist4pzq7dolv96hdim8mqzjvuujmfe42ts9nsbcka2embn3ru5hjr9ia6h3ombvvo43b5xoh5y1ldk20hooh4iyduptdw7pbqvtljiug8ehbpmq9flr1u5n43sic38m0',
+                user: 'cr3vhehc0mxr14gooz7hwz3h1z0rguxabccfkxvmniron77v8v85hdgxum1x3q5sd7uvy70629af60o9j8l8r2qvfjnmxuairpo6rmtfvs8zxkroxrlip6i24jzl77nws47ixx2tsgir28czn314zhlgrsxss7qzskfx76hwzn1dtrkv7maozveay87xb3byiw107rq4auj6qldqjqfi30ybb4jw321xb36lk40g3ciglihenlpg2hlhax6oljr',
+                startAt: '2020-07-27 15:33:17',
+                endAt: '2020-07-27 06:15:31',
             })
             .expect(400)
             .then(res => {
@@ -1031,23 +1031,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'mvzhvsqopa6ikl0s8jteoj64jc5o5a90n3gbysd6kn8ui7k4c8',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '9thg207u4hkno8eq2r7o',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-26 21:35:01',
-                executionMonitoringStartAt: '2020-07-27 09:08:12',
-                executionMonitoringEndAt: '2020-07-27 07:56:41',
-                status: 'ERROR',
-                name: '5hx95wryc7qy9z5kbvjeqr6jtqz36adr298yzh54oq7cdoscgr5o2lbylrx43vogiorrhxmmo1h0thgnoee9zmyverip647x4eazif1tp2elpp5okoq6zzzc9ewiuv7b1o9khjmzkw3iu4xm0uoeoyu98h2gmbl337bb8dtf4jjvw08d16s32exqo5hibhyspvh5ckijuar2rr4w146rv0pv84x2bjjj83cn1uiyquqiy03w7soizh75gkefkvld',
-                returnCode: 2809035257,
-                node: 'hm3zjep0mtaiqmj9r47p57l299xfp4434fr0653q57tilyz6pcsudpq8zfpfu23p483jtir4ccnk6eckfi865ljhe4k4azgoa8l5ke2hh250iws1e5crfp1kdqnjul4th6uwyxn58oei28vdcg62ao0sx4o0f6hz',
-                user: 'd1gvd1m5nh1ttzin9f0z64mxqrckcre3ce7futsdzdrxbaaffz5k953bx1g4l1sheaovruip95t4hvswb1ql6slzmcpcpfvmyvf0bb51q9jpw9q9x9b33kscq7swlg7jei6ajg7mkx3tx04db0nbevam0bn24i8k9n0jahd4bxs5tt6tpus9qwsq5umdqi25b96q6n0zccd95dmd87xyc35p9o1o41agifavpqwpxkt79g33azcwasr6ij34ma1',
-                startAt: '2020-07-26 22:01:20',
-                endAt: '2020-07-27 17:54:44',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'ker5axm5c2yvz9pofetf9t1nhyrnj243ns3atu61pijc3znjg3',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'yyn1beja4ciqa5ubo6aj',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 21:39:24',
+                executionMonitoringStartAt: '2020-07-27 18:36:44',
+                executionMonitoringEndAt: '2020-07-27 08:39:50',
+                status: 'CANCELLED',
+                name: '4oynr8gea40js2mjvmswnqtwvhnhqvvd6zrnv97cmpcjulqv7yiydvtxgzgi5pjuupkqn4xxu5rfl89t36ndvroikozhcijd1f9bcd56bntxxw5tokqwdjqswx28a002dqkm9yznb27wtcmdi2rb6ps2t6oltt2ypf3i0pw9dvrn73vzr2a1ymsg4kqczkqjn591mienj9f15tcq9eif61znh8z35stexnnj22ri0au7jurhkk3y5bxmnayg6oks',
+                returnCode: 8654039584,
+                node: '3g2hdzv4zpm87x5kgpvkdlg1yz8zsrcxciaybr9wl91m7k9yya02ctta0fxbat2zvgztdv0zf21w7qijw4xchklnco4derlc6zcyebzs7tke0psj2rgh1gypwi26a0it9otctxdes5iszlf514u75y2lqcbkxoww',
+                user: '2o79cn9v8fi45xdpkp43rertlzou7h1hs36t7als9cs9wxhp5xgpqfcbw4y21wikl3sfrbcvvzxgvvz57exh2ie63he080a4tyrgz0wsb3l6rc9ojyf3kria9zl8clf80mgazz1aumk15q4kkgk10deldo8iz0whb5jm1ab60pqlqx3p041c9rgbt1yerydqvno9mfo0ui4c6y9ufva4xuy9s21bvwgf9wx5dqribrv8eukn4ex0wqf926uc13d',
+                startAt: '2020-07-27 12:08:12',
+                endAt: '2020-07-27 23:52:22',
             })
             .expect(400)
             .then(res => {
@@ -1061,23 +1061,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '1mdzu87lnv9v7xygdyfzs5imlf8uec3a0ipud0au28s2sjtt3u',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '0k5ngbyy4c0r6c8zzxs6',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 00:43:02',
-                executionMonitoringStartAt: '2020-07-27 06:41:38',
-                executionMonitoringEndAt: '2020-07-26 23:23:35',
-                status: 'COMPLETED',
-                name: 'sijp8maq21d4ros5j4ewf9o7kb3zm6ok02od39n12ef8kk31lu9nahcy39ily0f0mjab40chzvapphjc1c1mxuaafv50n3fsq7xgguniw6pht4e80fvnqtr4nmsousxq2or34f64gpgourhju28c4zy26di5lkui5g4w1u8g8ij5ri0r2fkjpv64pxnk75bwekirk668v6f4aokdolu7wob4vz1or2ssa7ku2yhwu2bekqh0sq3bp5ynbjvb5a1',
-                returnCode: 56995727810,
-                node: 'l85l4isv64t1z5nuzl0b2z6xjg93duct6ppc3mg07zn6u0pe7sxgt60x14afbo4xezi1gq3jftr7xa162t7wfqsfmet7kce9647gxvshy8lkkezguhg8kx80rzfqicwdbvyse5axsc690pb1ewnhqtr9cw7dq2gm',
-                user: '01us2105oglvuxwagbt37rhksq97d2mp9rw4qld02r6mx22276cjkck22q6ox43c0n89o4s9oneql4c9thncmwdfluhkge21e5wgj29d5b860trzey760tda8lzab485swcwgle9bmize022jb0fefexzyvemv8lszwveavge3lmd0kl8f3hacm1jarudunvrs37beplvrkzp25d5o0bh57yawc6mvvwr1bcj1trmcnkb8qyjumtel1r7pw635z',
-                startAt: '2020-07-27 08:26:24',
-                endAt: '2020-07-27 10:24:01',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: '3yzk1mcx0o3ezhg98zyn213f1ces3r71x7rsfg9oqw8eyzjjs6',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: '2el6kcnmgnicpoaz50mm',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 22:16:38',
+                executionMonitoringStartAt: '2020-07-27 02:55:26',
+                executionMonitoringEndAt: '2020-07-27 20:11:41',
+                status: 'ERROR',
+                name: '1c793y3afmnrw6b2617z0jmcb2d3fru6tpfr6ojfl68r8oin30hyuq8x7c45y5s6ubc6lo0dxjlz5v96u6lyw21x4koubngn65sz0n4t48dpk3w062xrohpxfjxi5y1a3zw89eau1nb2fftxk9xmaef370c6t8wnlx3syngonlgtqey13khrcfuza5rw9775727eiyte309bao4p5l2ooxidmx82z86lzo3hlsmzfw2cjrju3vxx340kto7h3vp',
+                returnCode: 85240174782,
+                node: 'keu00fj0htbkxtfdxuvhrogtfmmju7d1pzv3g45sqruh3vzwi433bampawy76j0kigt5vmtmqrejooele379kx0gs5le8emdkpgg1ahdbvbq3powqt5lpltbsp2liibq1zb7oj3p82ay7jgcu41lzjv3xd9lzd3t',
+                user: 'zh22mzmvkfr407pyas5p79sguh3z01e6beitopa7vd4ofj1le67eeozja87uzpmgcv8mjvhn4da80pjhzn0zd1sngmth0ef1zsvna9uq44f909oltymh01uez7kn4aqtbab0kbk4m30hqx3j0qw567krsxqcd2yhhah86r1r1qex41xsgqp3vvd1a7k8uzpso794kgeivu2fd4j8pw8y3apwu6u6k1m3yx93nifnqcv4232hzs6n89lkxodzudq',
+                startAt: '2020-07-27 07:38:30',
+                endAt: '2020-07-27 23:14:25',
             })
             .expect(400)
             .then(res => {
@@ -1091,23 +1091,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '2cbz4wnbrrko72b5tlqnj5d8mzt43jnj81hej4w6nxwjv9r0qp',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'wjt9yu7rh73vc7t6lhou',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: '3v9kmn6bdss7812c9euyzssnmhmegrqi07xkhuf8du4lce7sru',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'fl0sffj7knp3gnxh5tp8',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 01:25:37',
-                executionMonitoringStartAt: '2020-07-26 21:48:30',
-                executionMonitoringEndAt: '2020-07-27 08:19:22',
-                status: 'COMPLETED',
-                name: 'i4pt3y4rniqom4prrf92fymiece956m0ijwl4okxbrgd9yqn4otwwpai0f8puvu00rdrpxw7u9ai3i8ssfzx4tw5hm9mi98x3eoxxsoojwo8grve1kfm426gf5irrwbowxlxfx1khuuhfgj9jzbayxk2nmuzhfnjgwzvse7j78ctqh6nvy8xy2tbflc5y5t7vi9dg352xf8pph0xg6rd7w2yssyzhtyu3duq4oi38ti81ekkufksltkqko9ywrf',
-                returnCode: 7963816263,
-                node: 'vd3ye89tbregn8u09buq5pv7z813xphxvuiqawlv1lm4jxdbdg2cbk3zcdzku765o5jwypcom00ongz7ubi6m9xcvcclimfs8ylocecy6mu2glocin8ycn0ysugwjaakn9zl23gwkkoqu34i5rzumoe8lemsrwe2e',
-                user: 'to5ia0bp84b939je6ns0z32xtwo5k5twvpzjezbhi8u6jpkqgwsvddlrz68ij28y70eou6b3uauwxwo1i70vc9faszq0yaek4a6g90ucwttvfxugphy5xumvuq57j0lrfae1c0be671rx7a0cmatjvl90qsqh2eyfdmpolm2i0becmsi7ka03a7cgkwnfor32iokpu3ar60nouk7uxkzx8mwu35w9wepo84s4izr4u0142kxamjpl988fjkrdvi',
-                startAt: '2020-07-27 14:11:28',
-                endAt: '2020-07-27 07:43:17',
+                executionExecutedAt: '2020-07-27 16:43:51',
+                executionMonitoringStartAt: '2020-07-27 15:14:18',
+                executionMonitoringEndAt: '2020-07-27 21:56:06',
+                status: 'CANCELLED',
+                name: '5cnfk37inuf0t6ip3u34sz98mry1ggvjeo39akb8yhca0cmp4nua0rl447nubsdv1sdlqagav3m0e5lv5ppoa7q463dr06f4xlfxfcehroqlqq81r3jge2bwkox9b4urmtlhm56uz3f0l9qjk6esxluq45ekscsn6vp8q226e7bs48hzou935twqt3spcye9gl8qxmdx3qs7sdlirohxbjzah207lx2gqbrzaxcmgazve0n0lbrawpr4h8b5ub1',
+                returnCode: 3548208750,
+                node: 'pv5untklj1gd3a437lcohwrkvd3mot1ag00rzbke5hzs1cyh71ep1f0kioaeatx77coohe5jh5hs4njehzazh4ufrykn1jddgo3lp2apx8wo8qd7t4a97hqbhgwbsjs5v1fyxc7r0rne3vvyauv58oqq5ihmbhv00',
+                user: '7e0dr2oxic4qufds7lof42swaa0on13o9oeqk8g49v4k94546og77szwcnfr02xxxh223fa430uz1qzom30u08rr8ora5qxyzf4j7fh19upkv90s54wajy8dwc2p2vh6tqabvoddbf672zvgj6d1h0dikf10ny3blh29a8vppq2mxodz95kanvjj7huyn84e1oe3gegwxb8klbhxul0xlc990e7qk2ltm37o3iq4davbcc3z7m4hnvqkml81sm4',
+                startAt: '2020-07-27 17:29:20',
+                endAt: '2020-07-27 04:25:22',
             })
             .expect(400)
             .then(res => {
@@ -1121,23 +1121,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'tt2qdnc4wvfgrb9zkqsmnf6ye2n8kwze356oevi7hwjoii56sr',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'o3ywcvv85ypetgs2l6u3',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 01:54:05',
-                executionMonitoringStartAt: '2020-07-27 14:25:42',
-                executionMonitoringEndAt: '2020-07-27 06:43:14',
-                status: 'ERROR',
-                name: '6d0tcmluqshkbt0a07ikp34go5lm5kixrqm2vl4lbcbql8q9bo5mfbsis7mb1dz3x7poi938r7xzgswh5roiz9oudacw8kub4a8osv1ya5cl78or1oc1aezt6snxnf5bu8zl6pzk3napp2ukce3wq1weehyw1tvomfsq96jx02bohvg6sulzgzn3l4dqqd5fp21mid1gl4x8jbfxgdtgzf5iccqhitu0q6nxe0mwm5gdf3xajxmjeb6isl43si8',
-                returnCode: 6489012267,
-                node: 'nyt56qxcwdvb9m719scxc3mwwrbk01ez3p6986vi4i2yto0gyxpb8u8b20zxpom7pkrn4nrvpfwec5mier1ae1clvxgrjp3avbl78xg6r5nx9zk0skl99kj172bvfl7e0mg9s3c1umoj8u5a1242ud7s9ihqkiau',
-                user: 'co43b589fcfde0q0mdunu338y2z7d844w9q7554jcn8v6ras4sz2c69xdpgqcjmexwzamkb29b6h7jrkumc53spg1hgpnqypkhu728puit09mec5m08ucax74f2c6e8j43fo93d9s3v5geyffon66x8qjy0uanlbol3pws0lthulcn473ty7a2vawaqu74rztvubq32lz1gzfh08q0xkvfeasrdkng4oyacm06m5momtuvik7foymc2ew9c4hq5u',
-                startAt: '2020-07-26 19:12:24',
-                endAt: '2020-07-27 00:05:08',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'ek1mbkhli2i76hzn5f5jducrsutg6iwcf44o7krkypbfik57t9',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'mlduli66scrsr9ljroxl',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 14:28:43',
+                executionMonitoringStartAt: '2020-07-27 15:38:54',
+                executionMonitoringEndAt: '2020-07-27 07:08:46',
+                status: 'CANCELLED',
+                name: '18zpdznm9cozds8y14rkucic43j5pgdyhyngwaw60ikgw3kwpkovezi6vncg6i2nryhztdtbz66lfnfp22xkkzs4v7aalwnpjkdhzv5asc91ohozwiscjeoy5hsgcf2jb04fkeq6rbze2m95o4rexn3je9ps64c2icvhp1slredfe05uaa1tkiv1trmnlbbgx1l657cn1ul5sutdhhgp3dq92noe37vufcp44r8c2xx95t4iflzl9jrnkkuqecj',
+                returnCode: 1913691480,
+                node: '8y4442m757lzhsln3sbj0dsxhywh1zpv4wb43n6s55ylns4i36k06f74c75xi0uednpd5nyu7vp184ajmlexdwsnq14djeud1gkp104si73lrj34mby2zwvn4lncwol1zoid7yg4d8it04r8xdaxxiaf64cggv7l',
+                user: 'vg7wq5p3rak8qqepwwf3xfqhipv6q32dd3v42cacq2ijyoyiq53qv04cok5k0o5r8x4y8wovoa5bhljen0tbmxtxtcc0ggklrb2my6j042qzb5c3kqma98f17am15xs3w3bnpxmnizt2smltyl7l95ngk8sd0oem9zl0hpdqvy400p2l6fwzuadzq4i0u3d384ab16n1nzn3a8gsz8ohadp1lg7z1cex58oi43jcg0oujfp7xgb4o69gubuwis1j',
+                startAt: '2020-07-27 10:14:09',
+                endAt: '2020-07-27 20:27:37',
             })
             .expect(400)
             .then(res => {
@@ -1155,23 +1155,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '4db8utx5v7yj9iftp69n6iy1yhpxdwa8oclt96c32l7ngiv9q1',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '5m6o9i4hlqkr1jwqptrk',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-26 18:43:51',
-                executionMonitoringStartAt: '2020-07-27 18:00:57',
-                executionMonitoringEndAt: '2020-07-27 14:42:46',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'wp1y4f4vbanrrv6mk62gt22wdd6lseo88jgdifyj9ecyoou7kd',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'sg6fi3lcpjoel7jexsqj',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 10:36:58',
+                executionMonitoringStartAt: '2020-07-27 09:47:14',
+                executionMonitoringEndAt: '2020-07-27 11:06:58',
                 status: 'COMPLETED',
-                name: 'azyuvwrcycn09xgjawso95u3mgfhzhxn61v6koos42zo98do4aljp3gb25pqn078r0tyzgyxfgzk5p8szlgawbjggm18rhrp1jhtwkqofup0stw1jkkbhkqrd43m7rwounb6jpc176ewa3kvp79vpi6c0ho97sgwq63j2iv3g3qo9zky64quuozdm6io810hktvjkn65d1qpuu8f376jv7wg6960kbwgj4qtnv4d6apgn9qc5p9whca19pii8k9',
+                name: 'o6ko2mj14j2b9m6vk3o00i279viyhx7e76tiw7rp78dvwu4zcjhcsojdqtn60j3klrya9x3bydel1d8pebgkazmex7pv7oj1r5uxfxieo5cmrt7d08d19779s7ogxny2s2wpqxxluhi2527ufl41ni789f2dl6x91qz30794t63p75igvt2ck5nr9fsusft7y8s2nu5znx5p8yd6aac399dys2gd5z054004etaysr24ufdc66ndigtp0nytx2y',
                 returnCode: 100.10,
-                node: '2lhv4994bv1ly9ehexwrhmt9f91k5e8gtjgi6mlkgmol7jp7femppo00h2ar9zpkcuv2gl8x4aq58kg88opkbee828j33britfh59dv84cj0fok4tble5utbrw5smw365o6ywi3rqnu45hbljae1zwnnff3ug14j',
-                user: '12tavdzouzf2j47etrkwwcki8zsz630nj5et04s7s3fqw7uon1gz0gich68jx222goyjudaz29cthob8zmilwxo1y8s6on0ns65xgxj6oykj31jjg880dr11twlvtqi360v72yik78vcoa8y5i4lh8iqcu7hroknchfopf1805qqijcrqjjm8dosczzcrdwo3q924p98gxy1m53frsubgynaarsl9zro709fg2g3h0xk77edthnyzrj7nk43wy9',
-                startAt: '2020-07-27 17:24:19',
-                endAt: '2020-07-27 12:28:05',
+                node: '28vsabcckufqlyn6ef73acknbxlx5t7j2zr0nu5f85o6o17d76x61z54k7q28hz3c9kxlbxaxvnrmeqk6q9we73neujuysoffeibkrih2zw50idfq4a7kkcejsilx35a3lkhke8ghdv38brzbiv4ucli1nqbprhf',
+                user: 'q8hn8ou29ok02o1jed8wievxksjorrldpcda1r6jsh67z2grz0grfveu6ofq76zymhzel4o357v41jwq5rq7h0d6qktorv96sw9olry6kize7oi1t7jjmrhocspit531dv5qwmtcrm409ormlpkz84cxg7cihzv0lto3e76inn39rw1ird5qtsv7cwrzewgaadkx3uzgl8tszpmzym1a07d2hx09pp2q9owh49n6h619361etk2ka2eda28awyi',
+                startAt: '2020-07-28 00:08:57',
+                endAt: '2020-07-27 11:40:05',
             })
             .expect(400)
             .then(res => {
@@ -1191,23 +1191,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'u2ht3gw89jb6l85uom7h114ikexvh0zab5tw2rmv11qus82z9b',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'wengcoifhti0v7ots1tl',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'jzi7j8cquo0w2pageccxt9ex3lsk0x3aukg6c2ob3urs02yacn',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'etjzshy75ycb3yynj6km',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'XXXX',
-                executionExecutedAt: '2020-07-27 02:55:29',
-                executionMonitoringStartAt: '2020-07-27 03:51:24',
-                executionMonitoringEndAt: '2020-07-26 23:20:11',
+                executionExecutedAt: '2020-07-27 14:05:52',
+                executionMonitoringStartAt: '2020-07-27 16:45:37',
+                executionMonitoringEndAt: '2020-07-27 19:06:25',
                 status: 'ERROR',
-                name: '2q7jqb13rb4o7zp8zv3rb8p21bgf1iyhf2wyvdiucaz95m3w5ch4tb0roc75iajt1qek6zidtn1gbc7at0m5i6d0wkfjwvt5of5ohxtuesxrzi0c67qz9ytu5exmnn7z2hgjgb6gtbmxbg8nknv9hhwgv4qij4iv23gx9ca0odrtxwd151zvib9eplbsmqnvboqc7ux3lbtcry0s2hd8s03h39b4u1r00xm3wek60q0mvx5hvh9x3i3z1of4z6m',
-                returnCode: 3752329359,
-                node: '44mawnex51phhpqpdr2q4c9gq9m4xfxhcnf6ay3hs0nxzks5085hq99uwmcgsg1kiinl4vn0nwl5uso6vax79yo5rg9sd0fwr011kqcsecx4d6jaj6sfi891phifnt4oj9pkp1y8z50dj1f88eoldd25zc5lou1a',
-                user: 'hxirwokrkv8e73wiv53e25j4o3c5fb1tlazvq2m111rdzbmck6fp7cltus6jo201yox65h5o608nr2t6qm9xc3cmllmwme6d6s6h6s2fy66v5qkxpmhvudzkcfa6dtcu1ajhe9p872aungqutrtphjw6rj778th3e0mnl0qe2y5qx98zx6wmbhmhtodkyep11c82ts1vwn5342een12t2tzqx7drk9zmcsfx4ybf3ebrbihbgfc2qxy58kw315x',
-                startAt: '2020-07-27 06:30:44',
-                endAt: '2020-07-27 15:19:18',
+                name: 'e80nyu7n86s6rijsspazsj3iha2uiwoqs2zqpfrd7ofou23dqx7a4imqkqf3qnezbjkq9vnpj8zwged8y8l11zrxh82lqbri1b7x7wk8vf8kmeswkouoxeqk86mdb0s0r8be6195pzx2c6xbb61gw40ege05ydczptgzvpu5cetupwuhl0ahj4fxkvsta2wfpj1qel90f7i31azqvxr96797rkkhhjg5z4ealc6r8mbsh6zpl200i9pvqwd7qhl',
+                returnCode: 4528697000,
+                node: '0s9dyzzm3m51p6t9exti08abewxrwb2zi201m814m6e1tn8069jlr7epuvhveh3l7wtffvu1mp67jiuz9aeervzd5fn81ohhyc6aftean6xoorrl1l4sr8iz04no30sxip2rwsx3fpw55mmb4h3lurc7o6rzwmeq',
+                user: '1zjo7n9khj0lek5fnf8jarqib48lq1chk6mglpmyrbwjqyng3ftai2ierxjd0ylillaczl7l4un1172o3txlc9w5p2yj48ehhf3msmyk1fiqy9b79zl44dcze18rim60y62j5hphyczfe422osce2iga09ukzeehxeumkzriv59nb5ly3z7bnv4nbdc5xwvj0h6cbw9e9vzzma32an2gciz3wu8skjk7jmbkdvj5icb9b6ag7evmzw45t5lqzx4',
+                startAt: '2020-07-27 16:27:34',
+                endAt: '2020-07-27 02:09:43',
             })
             .expect(400)
             .then(res => {
@@ -1221,23 +1221,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'upfgy1da086l77rnpv1u5qu1jhspwfhp8eek7lzmme5ym7c9ox',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '3ojq5s2gbz7mkv51m4xh',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 03:28:35',
-                executionMonitoringStartAt: '2020-07-27 08:54:13',
-                executionMonitoringEndAt: '2020-07-27 02:12:23',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'rfhbdj1m1dl4yodbw9gqiz4h24txu5093q8t4tb58duijg40zl',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'wqt87q2sku09cuyohf2x',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 11:41:06',
+                executionMonitoringStartAt: '2020-07-27 19:07:19',
+                executionMonitoringEndAt: '2020-07-27 23:50:21',
                 status: 'XXXX',
-                name: 'f7tkuii0aukm6ij0mhjea1jx0pae7qaqc02rcbpfvwke9l3ize8xk5scjxi832tgj00mqod1s8g8if988glws4z09sdimxstqagtufqe7r6pd2uclm1n2efd3nvz7t6vocbgwqqklwccc6m6pw10wynf9yymu629cird28l6w6gc1a0qsi2x97cd3fd75248tqkazqgvrybj3u84y8kxd245gmnwydo0vq1ce4ke4tl8urtvgxbv5gkx7ee308a',
-                returnCode: 2349264688,
-                node: 'y0ae68lxlwr4qfeer55l9ud92hl8dtnwld2f3ke7f2mw6fdluqd0yjn35r60ufsftvqr9pmvwyq62lp8cjkxw04m55shej9ij08z8hal441umte52ytkbt1age2cmh4bqhrwtyy2u2y9i1pq41rphwo8yvjuqf07',
-                user: 't7e1a328ckj13ofoizu598dhh77flca451nkjywv0lhybfulunvmo0f7u81vxew30pep74jehyqj93bvmuub0ccecp2kv2hfca2uw3i97yhbp6eh47fvxd79ekj1jwor8xct7tnh1bit8jgcfnyj6lkw3vlig093n2ec5x5v7fkhkmm8gpcnrzro8oo65d7sgqyt9gu3rmz02eaz73nftgb3vskewata9o0myeikmw6mdyk1grps7jrpkygcgid',
-                startAt: '2020-07-27 04:28:47',
-                endAt: '2020-07-27 05:11:28',
+                name: 'mauowh08ehf5c2eekxmo2n1mzdt7gwsgwf4xhxwrygpa83ow89yk2lwmbjx5s0xgumib2b7r1vwrfaxxne5oefedb1je8so0sm12j4pxnessrwyybiqprdotk6cvj63q3bfvfm7os0rxl9mwa8mauy3ecmg2zqup8gs0irnqmjwdd0tq2fukv5ph03a7i90t71i8mdqqqdj4w1gebywlyxy1uxcknrm8ar9lphdpfgornpjajwec0vxk6t1d4b4',
+                returnCode: 8339432123,
+                node: '3cxes6gl38zs1tjofvwamky10i35w5ay9gp2ceq0gxc4s205ce27y4mrvbiecqiommufpf4ux6ceq15hqgift1slfbh6u31r9aikia9h2w8djim338899mxld1kq5i0tj09nr0zfi8ohbsoxs7m1c7pkq5ejjkl2',
+                user: '98208alv40y31vjlfrvts0mnar2d6djm8vu6dghg1qo2u6eux9mg4v5fa4zi0wd5c0otlzc2rsxi4kh3fpbpbxgjsv8m0jf4b7t81bz5i8xpb9rm4dgqzwssho5ufoxkoadypq8vd07b2qudwi7z0a09vnbsrcy2951vnaksgcubtpqx79xod45o8ehat279ruvcwehf0b2b0n9oe6ysh6lsa32gc3wfjoo4gdfcgghmukvjhgt6vx7owydywnz',
+                startAt: '2020-07-27 00:55:24',
+                endAt: '2020-07-27 13:18:30',
             })
             .expect(400)
             .then(res => {
@@ -1253,23 +1253,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'aawrukst10nr8csbsga8fnzfyhy7d4i7vofvyn692h5w6f6ti3',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'ry6hwxze455z1un76j6v',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'mtn1wxyvdh960491fg6p17qeimpnwapa9uzgr32g4e52uwtade',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: '8ts5zh2v587pswbn12es',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'SUMMARY',
                 executionExecutedAt: 'XXXXXXXX',
-                executionMonitoringStartAt: '2020-07-27 02:37:29',
-                executionMonitoringEndAt: '2020-07-26 21:43:40',
-                status: 'ERROR',
-                name: 'm9qtdb17kvo6dcvttwdlbzlwb1my1k46n5ab1gbossrouhposaf50vfqkge1oqrhrirp9bjg22dg6k9brp3dzv6jkkrwvmu24sovvwas5p9fn4az0jyh7gdb0hqxxv75svpho2oqk4jk85cn3081lj9qz4itpbjhml0k45pqtxvu52j3q1rln77phq2my51ylpkrdofeb0g3odqwvl3rcryxfgmg27s8ib01v5ck6elkuflivy7y2sye4sn4l1t',
-                returnCode: 5240079454,
-                node: '3qjln8ljyv0m2yth9tq11aca68hpqwf7w4v32lz7w4fq7ktywxzgps5flz503ci0ppjtpr4qv0j2q2mj7solajtq1140pyzvqxqtczd498znjs2num0t2l4t120k44t5637qyqptx3u1tdedcj1q4myrcm4mr793',
-                user: 'xohu2e3elcdidk6hoxum8mqyd47f9s84gj5kia3ay8kv7dm34tbu6chyfeccoq6wbdcz8xvrn95qw7nfdc8bemq0fiuug6p5bfg09fazvcafrk8b90b4wka198rbiipo0z1v2dzgdwrzsgmsfcephwyz63x8srgjmk16tajw9tow8vvuzki7ae4ghotm5ayhui2lqevj0a16zerf0dksgcv2ndq1732ufuiu2p5ruxp2uz7p2vqpjzp7hszxvzb',
-                startAt: '2020-07-27 08:57:56',
-                endAt: '2020-07-27 13:48:03',
+                executionMonitoringStartAt: '2020-07-27 22:12:22',
+                executionMonitoringEndAt: '2020-07-28 00:48:24',
+                status: 'CANCELLED',
+                name: 'pjkgw7783dapzrxm9xrbolb40y48b156dkd0mypz7j1ebulpr4r0xd0qf7dq4ktem4a60mztu192t4z4ntg2lp1ac3m8bpqbhsujozsclupdxcqv15aswmsju2v4pd9nzdf8w3gpuyzcaf8rpdg9obnfxoesiu4p3xokp4habeoydnckjjygrj1yugc6jln2ja1hpvw4pgsousvuskekbvne9h2rkhuf9p9pe2lyfrg1ril2qt7s8fzeg5xtv5t',
+                returnCode: 9804786907,
+                node: '8yk233sl66hrazj4gzihoceoaf3xfdv2uvuabqptijg6glhetjxuy4jn1cqd6xqnv5w1orktvtdza74ba7d44q9zjttxqqcikc6sinsy86xuhbhd7t3r88isodaf5jfnc2tr1s3j6dhj61ob6hexqwsdwhx8v2lr',
+                user: 'm82gdclj1r1g4d22vy84ky3tizv2wtof1ldrtmy0ej4ahyrhirwnaaxw78emxnjvlln6oa8cirrqotefwb5ntx3uralsukc9nzwxykjt0gxkpj3y4qrq0uam50e59acwa0vxhywfn6brqp91uj6uyeupmj90oizmxwd591slqpvn05s2a9jpuo04srujxy4kwhaaikca96xlclf4mxw3kjg2dxye2nysk8e2qf2ftl2arul7y8cbtedcd1gg47m',
+                startAt: '2020-07-27 08:07:04',
+                endAt: '2020-07-27 03:07:46',
             })
             .expect(400)
             .then(res => {
@@ -1283,23 +1283,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'iag7obet0ngpmb2igkd6lrw4mlfunnr37edpolwqvdr5fdqh3i',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'qyzjueinpdveda9hadvo',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'p7ggllxny6bf581zkn2pvyw1xi4w5ar1ix3ys4grh005xy97mb',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'rkkupcf9g2xh15tr4u7e',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-26 23:20:06',
+                executionExecutedAt: '2020-07-27 09:54:09',
                 executionMonitoringStartAt: 'XXXXXXXX',
-                executionMonitoringEndAt: '2020-07-27 15:24:25',
-                status: 'COMPLETED',
-                name: '4fdiipc0nqw3mkeg9y53xnecgwsjkhps530sbblg96xhsvri2l1fkzviqeukbd6mbcq38l6gasdlyh250nbv7om0pox6wfqbtzqmv40efjhcihcqz8avahxidbce974jjbhdqlgbdwxfc6g45vdgw50glkhutjetlk5rbvzp3gts6d938xj6bgmzfrm1grm9uraepjn0utbablko673eu2elce60lh4tenfrarkm1jop23bydd3yhuo905tk59y',
-                returnCode: 8283878580,
-                node: '7vv923gksksd7hcksuwmgsez8gu6736ar75rngkjx4a8zymxs0z7qw37i28dlo2eb46uf64mehbd34k6pq6sqwb0fkf4xr11uldtfxrsdo69id07sbngtcbmx9512n09o2qv12e17ysuy8t88yf8t4c55irch4le',
-                user: '4eywc9yg5x7vjnnlfk0qkvlthwfy87xehd455f8y07yjzx1nisu2v37w0wvzb18yu0evtkgeyxk6qxkvc9atsgu86ppuwr3qs31xcky05h3cyxgkrn5zbnjh4bj7xqea5jwvzzh07egyn4sdmad9z8sz19m0tf88o9affns9k2yi73at3ibm74al172f3j54oc1zq9bi7icbelpgjk33bsxjp6qae5c7s16m17dpx7wtyqfsmzqy63tnah4q50f',
-                startAt: '2020-07-26 22:34:09',
-                endAt: '2020-07-27 16:06:33',
+                executionMonitoringEndAt: '2020-07-28 00:12:52',
+                status: 'CANCELLED',
+                name: 'djxlme8bgdyhnky0hhdo4f8soqncfsgznun21msy4jkekho0u2yag7fuae5drbclhubjwbyf96igx7kcj35imx23b95879ow1id0wxlgv5vmstpur5iap6zy9geuzzt793wyesg8lxfv0jlte36gwkgbem2q7apm45135bdsvh1sic8fwim75wl8u5zmjyow7xgqis0511zja9g1474y662o7d01bacyyrqomft1va9es899puf05gs3oyvb9w5',
+                returnCode: 4924472188,
+                node: '4hgj7z4rakkpv848iehccxpwvwa7ifjdrbxm44b30ebh5vwe3cl9recsisijbsn123g30ddc8dab5oxiidpici23s4t2llnhb8h9a1p3fopxnw8dgj4yse5y4hup1wyflo7wp9k1mfpmhw91ccit3dshorm20wvs',
+                user: 'uk6pzxggmk6kdmrpvnaezh2f16giqzaqqb9zgbaya6nq97kx1b9ufbqowrbzy46rwy6696d2ugku9f9zajsls3yp4bt7w8uqwae6kzv4saitdjk2zpik9w0fn821n2hbovc807q7vtuplknxerhctdmyfrvd83n3dg9thigmzd48njzk21p1iisvoijb4f8wuw1qrtfuu2gm0egnmz6tqh0jqmqb0d0dt3d9bu2qxwm0dlbg02g1m7ht9bfab0n',
+                startAt: '2020-07-27 11:20:29',
+                endAt: '2020-07-27 17:33:47',
             })
             .expect(400)
             .then(res => {
@@ -1313,23 +1313,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'i39rprddjtgcec2vyffwq6kg6cantw3qz8ornoo71hvt7ew9nt',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'xycvdcqa9luwp6bou76r',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 17:59:42',
-                executionMonitoringStartAt: '2020-07-27 12:31:16',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'c18mln81mwqezl5wc01sb9mkyxt5104jkzomnln81rojrcow6l',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'oqs595u43sivhxvrlkng',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-07-27 03:20:18',
+                executionMonitoringStartAt: '2020-07-27 11:17:32',
                 executionMonitoringEndAt: 'XXXXXXXX',
                 status: 'CANCELLED',
-                name: 'qjbak00ishv1c406hju16xbyt8yjpjlftbo8av9x0zc2ni10uxzdcdz4tul14tpgblh9p0g8oqz1achkth6qdtsk4uyuvn4sxpsc47ammffoayibvxwd61jx80plbnvs8wy0gqmlhyap4hxowkjwjtwzg9yr4s67m8sl05mibafcylmxx117sequtdojdz0ode8geuvx1tucirrb3ykupzuwv63davuw91usedswolnxhohr6v5315moeuf5aum',
-                returnCode: 6708179154,
-                node: 'm7ot1u6seurd4c2izaujwtzd4sfs4kbxr736tfl1hr0tfypxcbfcr2hr7l53wgv55a6ax53s0luhjw99tgma74uwr4sh3osm1e2v7u4gh0tbsaidxdib36uf7deafghdebh7ol0aixuav4tgqr9pi68z2mfu4us7',
-                user: 'a4epwf0dbf6uvwj2l2ocyjnlki3u3qucxb69rx28uubmapnecfimep1xhnwd61qkai2bkz8tpjy8l48mlnmm2sggw2d8ja62uufg3ir5mv23nmniuxkx60o0wxtrlth0oxn91ki84nxg7b74681mvq9n6ztvswe3hp9t06fim30q31ni6rjnozppfymiyr05lcrvx2m5k0ncarzq8jvf8xqu68iqxrijfqj9ahlc47do029ypwplfjusaozsw96',
-                startAt: '2020-07-27 16:48:30',
-                endAt: '2020-07-27 01:17:26',
+                name: 'rbqrjiz1ndv4x9fibihxl24dvc0huntc4k4rv799maei43bds2a5pcj0la8bptaqw92q05uq8ix9lurqvuj0ljqmcw2ovqgqn2o9lr5esp1pnd4eiaxkbdjk0zv7ygahl8oy8fwqeg8rga3pzhn6965a7t9lebg33yv7tcj6w59lbylj5wl2h677igcwxu2dqo1kq333oi0b9eocgou34vwzdkuxyjn5hjeob5gwqvy6ng7ivk296pat9ulyrhn',
+                returnCode: 5797165804,
+                node: '538lj0bdnxpvofdx2wdrfzntkifxu2zf05ki4pm5vvqsgiov78nn5i621csu6qm8chvt29y62d2u2hbvkk8izkgp7kmtg6jzbyysv3uq8rqejosgl2o1r9g1afr2no4vj05m6urz4sgbfwt94oeeepm08aczmnwp',
+                user: 'yi2iulhk15bs5pow8h4ulef3wlisxs70rju2hnpi5edmkve8lvgvy8m3r4cusq9ajjoss5wgws4gfrkgza3fts7mxanp9gmif1q9f5iieff76dw0ozgmjsotv8hakn4edad46uq7103z9budv1a8i86w78gfnwtz0pu8lngkltysc5rtkgcr5ny5iod9x538nfb6hqenfb3dfmnygfzuad0r3yjas6a67sbbjo2p6flfnxueg6617fnsfixsdgy',
+                startAt: '2020-07-27 02:45:36',
+                endAt: '2020-07-27 05:09:23',
             })
             .expect(400)
             .then(res => {
@@ -1343,23 +1343,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'efrop2st4k8mm5ninlv700o0rkkiv1zaqhwojl2te55qczel06',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'j73rnes10psimig0l6oy',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'wer2h0xefj4z8rs5d7hhm4fupy5mdtpppbgi4xfx3273s21pyh',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'yhmdtxrm7mhg0fcmo3og',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 09:07:54',
-                executionMonitoringStartAt: '2020-07-27 10:45:38',
-                executionMonitoringEndAt: '2020-07-27 02:12:09',
+                executionExecutedAt: '2020-07-27 11:07:49',
+                executionMonitoringStartAt: '2020-07-27 12:41:09',
+                executionMonitoringEndAt: '2020-07-27 10:31:36',
                 status: 'ERROR',
-                name: 'w80oh5i227xege5mrkcyaf6c7th2w4jcsd7garbxtb2u3ayd5xye22mk0nyfh3w147lj1eui03v5ewhg6m96mku09hwtm16shpcl04zmy844q0b4dtv13r8f3ptljheksvak0zu1jbp9iutlihccdbo6fsljf95brz0dljn83417psahbh1zfcz8u5v2piky5ha2g3pda3jv5lza6rv1ncsbfx8vl6b6xe9de2iplr65zdo1j9x7eyo7x007jmz',
-                returnCode: 5436180616,
-                node: 'h4p3dkjs1btfjhiau03y7n0slrcnh02pa0am48p77974djnf7rbdg5yhzuspz11srxw9lxn0y8nueumk45ysfjoqzxv0aq4o2380vaxb4mwpo5kcw6c7ikfvpabv8ormp6lnqv6b4j5k580blf2i7emxl18ubvdx',
-                user: 'h60jt4hj92f7s3qyayophww00z2c24fi8lntm8wkn14z2sg77s48tgznbhw21cwoftzu9kdi6g6ijkx9zw0x0z78b5ys45vvrlxc520oyb4p73bwojw4xasu9l0ja85ezcyy6jfi7829ggs8g5wpg77eahita5afz1uznerncocevykox2d29hgjmjpiv0u4j4cdgs3dc4h45ikcdgk6uzecwpvagtjb98ngk7yf3tavgajmypbrhws3cdwudrz',
+                name: 'y2z727mpffbpp66f8bk0e8ejzgj6qdf1fcmqs0a73vz432mefsluc7vcxtg2qv8fm78zd0btvkj0qskg3nfj8gbvo72zobe2q4qddzi4o7hos89zyg8b5gqdt1wicf91oc5zroi24nhj6e1bzgq1gomnxcnsefg4iol707l5969hej4780t5766yik626fj3q35t0n04a9kf0d2v1iw9zjlxmtxzspma3p6din01gzmlvdfqx2h7iymt52bhv7p',
+                returnCode: 9244430625,
+                node: 'eg0l08h7sthsj9xynew3lc6t001odpmhud689qwq9kdmiygx6z562lbwarfa3wpct2jjozkmbem0okuzuok3vhipuazyr9ozir1pf2ruqmxquri7g6y588adoprwg82t84ov8xf66z8tip3wh5oupaujr9tz47vm',
+                user: 'rmpzcnjm8m03ssmey66op3q9qdxkkr4639cldqv434wb2gzrrni00ks8b5gbvyc4uj1ncgq0bbojrffqgw2qxvlef28nh3y7why5jae83tk8zwqgihdgflc0kra32a4iggxk08pw7eo3z34wu6xmlate206y4ewbbxmatkw90r16b6ww12sle9pt561dkxzy3qmjqqyzrzyevi8mgpij7p28jpke7rp6zawvy88wtrven3w940c4qn89m6qswik',
                 startAt: 'XXXXXXXX',
-                endAt: '2020-07-27 07:27:49',
+                endAt: '2020-07-27 14:42:57',
             })
             .expect(400)
             .then(res => {
@@ -1373,22 +1373,22 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: 'h0f7zjmbedw3wqx5enc3mqkygf1c3oyralnyjdd81pzq4mjpmo',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'lm9ej4rq63uk2em17mo6',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'tcaa93md7ydygcc586lgk6atwmr3x5rdaye8sludlb5opsd5db',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: '0f7kn91cpqqhvdis9vr8',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 17:18:12',
-                executionMonitoringStartAt: '2020-07-27 10:56:36',
-                executionMonitoringEndAt: '2020-07-27 08:09:30',
+                executionExecutedAt: '2020-07-27 20:46:40',
+                executionMonitoringStartAt: '2020-07-27 21:29:46',
+                executionMonitoringEndAt: '2020-07-27 03:25:27',
                 status: 'CANCELLED',
-                name: 'cabnkp3e70zg5gto1g770gjr7y8d6lvxrypetfgtksnn12075y14aerfizfvnya3q4248nblwivqh4jizlv9tvqw2cnz12s55059uecjrngikix4qbgkrqhtk1brjg6o8ptpa7jy3pg3996ldzl2xz3wg3lo2mxrtj1swewkc19p78vibs1jmjdm9o9domqgv1j1co1usbwuz967cob5yfu8vb0uv23w583t8juireehtfzcm4ek41lgdw0bayu',
-                returnCode: 2383326041,
-                node: 'flwr8jvf6ctkif1ozqnay7qtpdn2xytdekfg6mcpmafumw2q3g7rewv1noq1wimivlbzdedpld21rlw82l8f0e51v3fubu3ckctj7wd9g7dg16fd7o5voooo5yvr0g78c1tnpzrbouj3nfd5cs8rl1u5nzhrabcf',
-                user: 'a48rodi5itiz6pssxfo15w7gymg7nb7ergot0ymy1sj79429e6x3baudttbfxawq0hr4dcaicddckx1cyqt3mo7w8p9oa5fccfun3j9yz2tzsrnplj0m909vk40cyszdjmuf7ie4n0loikwdvkfeetuclohf0rd9x7td15s4vuuktwlax9qa281iumgmei5mklvrvbwk8jklw100whkpt45a4hz7juxoh234ldvkxbya6mruim2rcgs8384yezn',
-                startAt: '2020-07-27 13:02:20',
+                name: 'g28av7bu639h009a2tndfvrrqcs0wharnhgkn91pu6qng8qfj75to41u7tos7c731atirdqgjgn18h0mcg2qkhumuhqkzlwmb2o2jbnza8pp63ty3df3ykff1d8r9gqrrge4klcas63nvqhdi3kictklbwzebmn4frswm555f93qelonh1fgdgwtcrk3gkeqs4tfroz5s876qprum7bhlxso1adjzxne5flhw12102sa1bk132dsji731t7zbdc',
+                returnCode: 1181258098,
+                node: 'dzq62lbl576fvf2ri8ju876b0kutp90brvuk5duic0por4bha2t2nqm4cqa9jsynhyl7srm7k5inhrhlows0buy4wfkl6unu0wd6awm1wwnb6eb1r1ueoqwf5f8n1fqzfd1csovhzecncdu40emxqyyd8resvw8x',
+                user: 'xi7w0top5dq1mq4jphcnrylecqje0oo67kn97dtrbdw42x80w74y4kltqsifnyt21mflmqqyvccicq8y8s6bk2efaadetz1ade63msde7wsugwlx07kb802cmvc9wui5z5ugy5r85h0hxascb98j6zl6be9450q67pz0bv5r25kjo9cykln8xhnmofihgqw37c82gorr7zv3ag8nnr1krwtot89y9km2wrmfuphf6qfm0elccqgtydqgyc4ytf2',
+                startAt: '2020-07-27 01:04:20',
                 endAt: 'XXXXXXXX',
             })
             .expect(400)
@@ -1404,23 +1404,23 @@ describe('job-detail', () =>
             .post('/bplus-it-sappi/job-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '9fvgiug64dp4mnxgyjjdzhznzsmhpw9h270ffr7zpwghgcxswt',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: 'x6l3q89dcvn41da14xow',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'h42fwrlnelb79rylj3edenwdmuno8mzx58idxsev7gesspkdau',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: '2wl36wuirylqyau3mxfg',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-27 00:05:14',
-                executionMonitoringStartAt: '2020-07-26 20:57:45',
-                executionMonitoringEndAt: '2020-07-27 14:59:07',
-                status: 'CANCELLED',
-                name: 'oji48q2dfqh6kn5hjlc0yzyxws7rnjv9c0butd175suo8gy5udrtf2xx7d3zq04xcfyjmpwr1il04wpz7go2ks3z92o0u296skxypei8xa4sznpk3sf7kj2lblgi0xittk8thx7dmg7122gpslv3agaaoskiwmc7qmp1bspi5duu6bydry11s6s4xas7htwzirylmpgrxdvugdv61qvsmbnw84rvnzlp3fv81csgap8tjcf07m6te24zizjgwf5',
-                returnCode: 5286773718,
-                node: '95v4ucy7fxuhnvz3yp6t1g35jgtd2bolcov4q5vycwp4pnvd7vonb9zspncsfnpys2je0h1eys3jpky60z2g4kqqmw2esrfo89rns6ep5vfrq08p51d4d9cwetymft3pa8do2no20l3b2j40nh9lyfxj8roq35cu',
-                user: '22evsfm00xnkmry0c2as70i8vcbtpm5t6ywbhywrj7sultmnzkneazq81uuqsq396in1oi4nvi2gc737rmuk0ubgwuve2vee1jnmpxqerzr5nml8gml5l4xh7wl67ca5iuv98yheuhqjyewx8vd0xhzdaew2kuje8jr7n3mj84yeqqk7jzrz6rkf0tfy8ssvocnk9h9b94wiwl4d55d66ov76dcujw5sytrafnxx6k1jr1znuea0taiq34s5gcg',
-                startAt: '2020-07-27 12:14:13',
-                endAt: '2020-07-27 18:31:53',
+                executionExecutedAt: '2020-07-27 18:09:25',
+                executionMonitoringStartAt: '2020-07-27 13:36:02',
+                executionMonitoringEndAt: '2020-07-27 03:35:27',
+                status: 'ERROR',
+                name: 'i81gqjizunk89sqc7pf4wfth8zijgkgjfsb5e7regvvl15wv43jb7q44vnfjy8d713v70f75q95wymzyfxh5qozoxwdo8domaaqamolnp0pt119a7mlasmm81ylwowk5af4ck7kef1ktkhkwy82xflqtxqitu22ckqwr0bfdvh30qgkxfhpo04r1lett0acu2c02e6x9q8csariicpvpaplcvjxorik2ov5zo886ugfoai1nzdeffeuo1qwb7wa',
+                returnCode: 3861199368,
+                node: '1r3dme4jab5mty9lqlt0bfv468zdqv949ngha5lvod3d4jb1h2c354ki67whk1htxxpjcxd8ryhs4vsgjphyvdgvtotlnavd9qasc9jr3i6wwrxcdbnqj4a2m3rmmf0lk3peb1dhomen81fmgc4722wbaugzrdha',
+                user: 'no8z4of7qaj8yyd006z5xez2p6z87j2d39txej7ph9jlrm561wtsi01j0je5jnmfubrka2856x1z8nh9s99wcby3irjr7dj33g51twdnsflhqtcdsr9jdw73zj1azvc2xyv79xzpwxisjcnnmuvvq4ydwsvj1sz1ydvkyv9bl5o3yl2ykstzoggos2s5cms9bteq93wf1mofils8zmvt8w0qq5rbcddmg1mzwgk5vbge6vr5vq8t98vrvhip7ob',
+                startAt: '2020-07-27 14:12:50',
+                endAt: '2020-07-27 02:49:53',
             })
             .expect(201);
     });
@@ -1479,12 +1479,12 @@ describe('job-detail', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '24af86f1-ca66-463e-9ec3-225a479de7b4'
+                        value   : '4d3aa02f-09dc-445e-914b-8f762921b63e'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '24af86f1-ca66-463e-9ec3-225a479de7b4'));
+            .expect(repository.collectionResponse.find(item => item.id === '4d3aa02f-09dc-445e-914b-8f762921b63e'));
     });
 
     test(`/REST:GET bplus-it-sappi/job-detail/{id} - Got 404 Not Found`, () => 
@@ -1498,10 +1498,10 @@ describe('job-detail', () =>
     test(`/REST:GET bplus-it-sappi/job-detail/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/job-detail/24af86f1-ca66-463e-9ec3-225a479de7b4')
+            .get('/bplus-it-sappi/job-detail/4d3aa02f-09dc-445e-914b-8f762921b63e')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '24af86f1-ca66-463e-9ec3-225a479de7b4'));
+            .expect(repository.collectionResponse.find(e => e.id === '4d3aa02f-09dc-445e-914b-8f762921b63e'));
     });
 
     test(`/REST:GET bplus-it-sappi/jobs-detail`, () => 
@@ -1520,23 +1520,23 @@ describe('job-detail', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '0bb65c60-cc06-4eb4-844f-b5e4173ebb80',
-                tenantId: '388ccd47-4684-4c71-8836-f453f5f7fd91',
-                tenantCode: '5cx8i9e3gop092mwkr04zt51gr69rfb37yuu5zxtgp0a3fefib',
-                systemId: '5280b0f1-1deb-4c20-bd3e-acd282743e5a',
-                systemName: 'wnia25bwycjhcxxhobuv',
-                executionId: 'ad900457-31f5-404f-add3-d243908befab',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-27 07:23:25',
-                executionMonitoringStartAt: '2020-07-27 06:43:26',
-                executionMonitoringEndAt: '2020-07-27 07:15:20',
-                status: 'CANCELLED',
-                name: 'c2136dojv2mvu3abwh0i3f6mfi1d1s7emdl3njlydrgb3y7820vgqy6zndc7mby455w29f9weakizxg73s2p2w4oa905374zufne2soowi3g2bllcnsgf0wprvkc5a4pzhth3acte8x8sydc9hzui7eohsvlgv6wxwzbudl5rzstody4wsnb9gcwsfy5lfitk2zr2lv6h3vj6zd54ny7w8vpwoidu5jv821641hgx7gdsyhvjd125qzo2joyee3',
-                returnCode: 9671412743,
-                node: '62xu957yzxrabe9ufhyed3mhzk7sdz69lo79d42y1fhetpwh0zvhacuxzoi93dk0dbhj1rwqy5uiihwou99s135vi9n4dvn30uz948fwxgcqfi52ifa3aw9i6wkzw01updme1ckhnplxst6pop612tyvca8qi5y9',
-                user: 'dk4d50w4fgkr7m56ldcln9t1x7x75ede24uez2shcoy19lzk2ngrgytg70hqljz5wkdnen4tjtrhgsgv5qbi88nxt546kfd74w2e5rc267yb98kxvg24orpo842o4x18qdgubwmoz95v4dhg6clr81t6xbb69rntd0qs1srfzudvs1ie0xymhv2ehsg40dzqdudfpw5ifcjigmq62q79uhptggze07ki48gv0ciz7qhaooohz2839igcqm2g7ra',
-                startAt: '2020-07-26 21:25:53',
-                endAt: '2020-07-27 13:32:08',
+                id: 'c81edfd6-6ae4-464e-bfdb-763e57e1c857',
+                tenantId: '6de8f832-c1bb-4cad-829c-e717aecc9f00',
+                tenantCode: 'km79u0vsggzg43s9xwje5t6scilohb2z3xn5w886s4kywxx42q',
+                systemId: '1ee9cffb-365d-4574-9769-a4079fa992cf',
+                systemName: 'vbgytif5lqx5f68zqhmj',
+                executionId: 'df366571-8e87-43b9-b023-03c206c5a422',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 22:31:13',
+                executionMonitoringStartAt: '2020-07-27 06:51:08',
+                executionMonitoringEndAt: '2020-07-27 18:17:58',
+                status: 'ERROR',
+                name: 'brq4fvj1oi8zmwdfolrn3r335a2irts0xkqw6vzfsk9jtdj7k1k1848b5o33hlxbs7grj2lz63fsn80m3y29i80rskdudlkwkwybmvphuzwgv21vqa4v693f9rdalijradt578y0mshga8vchi0m1otyfhlmjnre059q0t1fgx7uha6uywt4aerxarnxifcx5fy6ckk61yw5ss0fs2gfnr90hgwop2hrjrp3hn0y5vy9vmrbho9j6k8tuum03a6',
+                returnCode: 3450568831,
+                node: 'uey4umgpgevoplx4n3kbu4e6z13m5a3cx574gd731oc0c8dvmcryx5nmc97ksd8ammnfkwsfrh8bluexs5fy3ciy1xfycrdncu8utgsftq7angqubhsqm7ho5ctjri07lwk47pp66dw25mlw4p85j5r1i8s6me9f',
+                user: 'u3g8t378v8jze25a0xdpided2mq0w3zofnd6b0eggh9p0f4uhvzee6iuyy0iuu0lkpchik3gaj7qmkhbfhgc0b3in5oetfo5jcfl4yhm55k7mrsomkx53cxbksvuq53b8jrebybrrt2u0ggndkrizt5itihwhvm4udoukdlyhfb8shvk3ns21vdlbkpija0nienvxfi6f9esoai9btzzhv22tiup8l8czlbgi4nwn8hha59n6lv2pbgz1kdzi6t',
+                startAt: '2020-07-27 02:36:01',
+                endAt: '2020-07-27 12:18:03',
             })
             .expect(404);
     });
@@ -1548,26 +1548,26 @@ describe('job-detail', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                tenantCode: '00x6vios1nnpd2tml0w7qnxymxhgekcc0s9q3lllwga2345ypi',
-                systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                systemName: '2roz8pizcwljro5j4bev',
-                executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-26 22:21:34',
-                executionMonitoringStartAt: '2020-07-27 15:25:32',
-                executionMonitoringEndAt: '2020-07-27 06:31:25',
+                id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                tenantCode: 'jn2ibrmislt3ei7nnyx5pk1tshn8ra55wcqfka7ibxl1xtw6yt',
+                systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                systemName: 'rpioowf32ytgyvsbhctz',
+                executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-07-27 14:44:07',
+                executionMonitoringStartAt: '2020-07-27 17:32:24',
+                executionMonitoringEndAt: '2020-07-27 15:14:47',
                 status: 'ERROR',
-                name: '54lv278505bnvzrz6jlq9v5mr1k8ynfnszjcajk2zvytvbw1j6vupl1yn4tomblq253bx6tj4syennkb044vn31avagzjkyzoqr6li5bjmvqc7b56d7484ayya6lv4x5cgmkotc4x1tc14xgnm3rberbx39dhb44wgkyi0tdh160b5cd82ma1ltk32haq0wha69qhfadvann1pxm66eh1etfa1iyi9g92eqxprvgrfb095iykykw3iq9ghrgiea',
-                returnCode: 7119305104,
-                node: 'gsqxrgrorshmp441mfrshdzkas49ttq82puryxgm0y16ksh1nbfhundjiw00k3rf7v8vxb9zd0613m5ag84et18x9g06kamb3toovmnorxzvwsd4a7ai1kx01nbtv4e6nr442kbcg5pszvi0i3gxdwt6h74v6vft',
-                user: '5e5mt8wy7hn58t7npx51jagbbjsmw7p444nqajp6hg5y3jk4vqx8jnf1e07ue42qt0cakhy0cdkicuwhc2nwlcohmvmgjz0oroa5gsr0mufa8zib3b9pkgsk0uirm2y0on30d8moat2pvfutv9ef2abqjdavyupeelr5e3hbcb0vgw110gs0wfawv1nz1kl6p0aycvggytzzvgco7240sctc2mmadjb4xdazg344n4uudfwkiersitv1c72ylk2',
-                startAt: '2020-07-27 13:24:40',
-                endAt: '2020-07-27 18:31:53',
+                name: 'e4bzc7cks8wwz6rcnoey9lsf6acak8e96wu5u4ez5fzx2nls7djlbf13ebj6pmykw80gb8xgj1wsmfxyzfnsmsafvcnt6j352zssmhzzatya2ixdoqfznfrzek8tgajky7j20cv19lgcs6uzwzrfjhcfvcrejp23om5qz40hbfhkjymb0v2k9tu1w3wsmhfjpia1a9kyiwudrgk9nxtsa2wiqnjchfm7xcbwm67iat1ok5ue49dorv4p7gsi7nq',
+                returnCode: 8015896654,
+                node: 's0wsxs79t1l9goq5hwllyygg7l2aiu4i88mqjoyspc67lj8tx9exhgkhxdm579agas6pn02b2bwt87zu5whnsd0m7q9bnj1a7gooev5raovb0wdqxbkyqr7a89y8f07a34jxm2731nl4ka6zdnthiriuh526b87q',
+                user: 'trdkbv3t2txgvdjciimy1cgjjrw71t64nc1l5bqyet24p1t91hz7qtd8j68vut7cunz3ov7hoedrr156le3ux4cu6vv5i5ga54l2x9v398mchrapb1ld26ii7z02tnm2bqba0cepq7x22981336jjg2ge3wm9ekicxdym6naxqkit8ec0c987w2a6qcuumo9gbdwjj3cep95365nqwueg48gv935g14hpqviqfef5f5nmkezs8zxl1qw5rd9ai3',
+                startAt: '2020-07-27 15:27:51',
+                endAt: '2020-07-27 02:38:28',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '24af86f1-ca66-463e-9ec3-225a479de7b4'));
+            .expect(repository.collectionResponse.find(e => e.id === '4d3aa02f-09dc-445e-914b-8f762921b63e'));
     });
 
     test(`/REST:DELETE bplus-it-sappi/job-detail/{id} - Got 404 Not Found`, () => 
@@ -1581,7 +1581,7 @@ describe('job-detail', () =>
     test(`/REST:DELETE bplus-it-sappi/job-detail/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/job-detail/24af86f1-ca66-463e-9ec3-225a479de7b4')
+            .delete('/bplus-it-sappi/job-detail/4d3aa02f-09dc-445e-914b-8f762921b63e')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -1666,29 +1666,29 @@ describe('job-detail', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'b7248fe9-2b74-4d81-aeca-1ad0aee78fc4',
-                        tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                        tenantCode: 'izw5jfv7fnvplwga0shokza9u7f7n6vpb0noykgbbwsv4u659e',
-                        systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                        systemName: '55tyyk5n2syycz9bculb',
-                        executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                        executionType: 'SUMMARY',
-                        executionExecutedAt: '2020-07-27 04:11:09',
-                        executionMonitoringStartAt: '2020-07-27 03:12:21',
-                        executionMonitoringEndAt: '2020-07-26 19:42:46',
+                        id: '6feb0ad9-2589-4e4f-8888-20bf516b3869',
+                        tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                        tenantCode: 'wq6yptovmehcmpvkmp5pfaprk0l8h6hrzcj7f1ttg4zljg5yiq',
+                        systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                        systemName: 'rwj57rkyubcpthunlf2r',
+                        executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                        executionType: 'DETAIL',
+                        executionExecutedAt: '2020-07-27 15:58:49',
+                        executionMonitoringStartAt: '2020-07-27 02:15:15',
+                        executionMonitoringEndAt: '2020-07-27 10:12:14',
                         status: 'COMPLETED',
-                        name: 'gk8q1cd49nwp3cha75f9da28eo55tjyuwzmo9bnfz35dw4lmtrqb0u6r86eo4zt7tvixyz9bjishue9azhmviksn8aplm7nniuwy6gl36dyo4jm7owyxq5v6png9ww4niouzxaih2l8g9a5zbl8m2jdnesp7yl2t24uwd8gmurvn5hlxd4yma253c3u21qz46u1pyf0ab7gcm9dd03ho0xnz71kqith2nxe7cw9x4gmdkzh9llco9m63xy75ln1',
-                        returnCode: 6892590715,
-                        node: '6af4tjsf7ph410y2dyjup2jnek7xtr512r6yugw5zesjwc8v7b7smq80m610quili5gbxncgovf2zgjuaj6e02zgxiq7xj0n94yvru9t6151iab104b8r0ob85z9khn0yqkrhlry4dg9dl1236eip40scbdpi9rc',
-                        user: 'pm878p84e2wvlgm0kxvlewn7j0tnro8w9zx61kx0javnhs1l21a890xif2d75qjfs69oecfccisf8vged928j6ftcurd1wpvjzqikubm9x0siosglw16z5snsm3lmqramirf4peqot1u97pol443n44anw3f0pyi0hk7ttx2l0itb5b4oks2ot96gijwoehkh19mpr16aa8cc9wjpbfl9a2ok5qsqqe5bncuximtxvehqtroz4nxj0dfbn0xu7l',
-                        startAt: '2020-07-27 07:25:53',
-                        endAt: '2020-07-27 12:18:14',
+                        name: 'g4nsoxjmedt4a4ekzdgdn6vgx8dryp1q2lh4vgwiqllvrq7nne2ztpkupg44thl1utak2lgr8z6xib3d4aun2m8tewm9x94ysg56gubsbwwxj00y7emr70e5lqtvxd511gj2btqkbqa4x5j7lvwq5vb03vai7s9enl2ywy8tnmgye2p87az9yk36yjvjgbofas64dvi2znbiw9okr319xkr1jglkbkfainftg8gs4ja0ohzqzcf0l47tjm1xcmj',
+                        returnCode: 4734826127,
+                        node: 'mi76isfgkkwxjhywmvisej47v7usqf53s7ofumjm79knd43yj3l6dd8qmjwr90wydal55x9i1pqrj0e96fw3c5tvcxg6uh8bb6chy7f6tia47zwz0v6j1x32toz7jpe76vh4g0k1d21c8wm2s9d4bz6udaq16aio',
+                        user: 'ljxgorv843vc2k9m3zrippddc2p31w9hp7v2qvdefnxygctsmfkeybfhqjexbr86iuczbvr77kwlikn1vrf2cafs326oj0rx2i3r40gc8o3ay85zi38xt6jrypzgc6738lsczc6is8tkuit7ocjrpxih8olmb5iltnzk7jbfacfaargw4fz0bwutnigazyoxn8k04pljumut9skzimrli0ovma8uzone9g2wl3x10290ogy76b0kv7528nuws0v',
+                        startAt: '2020-07-27 05:18:08',
+                        endAt: '2020-07-27 11:37:39',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateJobDetail).toHaveProperty('id', 'b7248fe9-2b74-4d81-aeca-1ad0aee78fc4');
+                expect(res.body.data.bplusItSappiCreateJobDetail).toHaveProperty('id', '6feb0ad9-2589-4e4f-8888-20bf516b3869');
             });
     });
 
@@ -1821,14 +1821,14 @@ describe('job-detail', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '24af86f1-ca66-463e-9ec3-225a479de7b4'
+                            value   : '4d3aa02f-09dc-445e-914b-8f762921b63e'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindJobDetail.id).toStrictEqual('24af86f1-ca66-463e-9ec3-225a479de7b4');
+                expect(res.body.data.bplusItSappiFindJobDetail.id).toStrictEqual('4d3aa02f-09dc-445e-914b-8f762921b63e');
             });
     });
 
@@ -1911,12 +1911,12 @@ describe('job-detail', () =>
                     }
                 `,
                 variables: {
-                    id: '24af86f1-ca66-463e-9ec3-225a479de7b4'
+                    id: '4d3aa02f-09dc-445e-914b-8f762921b63e'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindJobDetailById.id).toStrictEqual('24af86f1-ca66-463e-9ec3-225a479de7b4');
+                expect(res.body.data.bplusItSappiFindJobDetailById.id).toStrictEqual('4d3aa02f-09dc-445e-914b-8f762921b63e');
             });
     });
 
@@ -2000,23 +2000,23 @@ describe('job-detail', () =>
                 variables: {
                     payload: {
                         
-                        id: '8d0bf8bf-5077-42cd-b2b0-1a1fe9b589bd',
-                        tenantId: 'bcc492cc-4996-4398-ad2c-ed001610513f',
-                        tenantCode: 'a3vtt8ul3o99wt2mcuqelbf7earnch33k2kwwotxtvbs4kpq17',
-                        systemId: '809b9fdc-2103-40d3-a4ad-8298c0ca3430',
-                        systemName: 'g8wlmqqhblajde36fkxb',
-                        executionId: '4038fbbe-1294-413d-8466-fa23d1b18c0e',
-                        executionType: 'SUMMARY',
-                        executionExecutedAt: '2020-07-26 21:04:20',
-                        executionMonitoringStartAt: '2020-07-27 02:12:28',
-                        executionMonitoringEndAt: '2020-07-27 09:31:33',
-                        status: 'COMPLETED',
-                        name: '6isimr9h87sj0iobwqqu8rk3kb3uh20oa3pi8ko3x4ehxy8xq77gcob66e0krr8ajnwrk0zw683mg8tiniqrfnsy7w8v7lwfnaav7wh94kjcqk6fjx5ij1k2u19aqzojom2ukp8cfnjqas4amq9ogw98vlctazblg53e9gn7p7ui9lee1szu52mpe1kis6rppoyak3tmvpa7e63yd2zfo3wnumu29dex7bxuxobl5hf2brvk16lmizsstc8i4ke',
-                        returnCode: 6726448969,
-                        node: 'okefer8dxklj47hkgrx0emuloq3jrqlj8rd3ry7oezutl8h0waukipvpymu7ycwu6cm60tw76amt0s8vrvg0pettfs42w9anpcd5fd5aktfyn9eu080nd777yji46v5org1sf5gurfj8n7s19a4pjxidf48o8rf7',
-                        user: 'x8yk8rj2yoviar9gg0r2yz0ukryi5ydl1m8af3iq713bvb9ui6wtv0ma2908j4ph5eodom2jje3el6k3yech3e6bp721cycqawn8jhk6geut9lscbzwhofoivzkv2s2x086u2c41ub6hlhhomewjtzu1c6j75008d34xu6qq7nz27yc7ymk4zlh9bd7g2dgwfo4qgj740w0etao1kjtmp5n6wj5l3533lzhddvtm8005a1pg3ua7kv6meo7zf9j',
-                        startAt: '2020-07-27 14:39:58',
-                        endAt: '2020-07-27 06:31:03',
+                        id: 'a44b2630-2dcc-44f8-a014-a3a1fc325724',
+                        tenantId: 'f7acd9d0-9e69-4e20-a1a2-1863543096a0',
+                        tenantCode: 'dy7otgj0g1pr0bz789yffvha5g70mqxblvpz6bfx9w8ib9m5ej',
+                        systemId: '4d3abb02-83e3-4daf-b067-1680fa2eb32e',
+                        systemName: 'qmz14fziq4aqepexfkz5',
+                        executionId: '43d88af0-b813-4d21-9a47-270f30efc68d',
+                        executionType: 'DETAIL',
+                        executionExecutedAt: '2020-07-27 02:57:33',
+                        executionMonitoringStartAt: '2020-07-27 11:51:43',
+                        executionMonitoringEndAt: '2020-07-27 03:50:02',
+                        status: 'ERROR',
+                        name: 'xjr1dnihaex507q0gckasq6h54zkvnetszdzvwoqd9zfg3ugk7lmtke58zgg9yu8yxhyukt31i52dfwn3uspza907jhufv0eid2ny5zsb9tv6kjwcpsx3wxpx28pmii7a9qja2s0rjbfak7qt7h1ozp267klq361jzpm3w6nb0jpexhf7e0mvlao1tpn7q7ijbj02rrh97h9d55i93wbez6m0gsqfy5mbu91107gx3kc28wlet6q55hyf22utdm',
+                        returnCode: 9905303261,
+                        node: 'ebkn442yhjotzh272r2mg5rwip4d7q36qoneon4ir3k8w65y5s1pz5ac91kwruegougxnccynccpdr9ddt7q5891xgdd7g5zrgpt14sogfgvta3oo0iwbis3uufzl97lr0xjvzc1mqk7hdn0i4bt5b6vk2eed22h',
+                        user: 'cfrmo4g97b7knt60ol2n8zy51fb4nxvsepd5xnodgog7lytzpfbblcd8b4yu1z8ij8we9st5oy3fy5sc8fsvn3oi01lc5k73mc8bosp3fnf9lb0ndxlcgghkgsiu0y2jmrj733wld0jcdi3yymnyyws4dm3dv126s6vk8sj7gghlckcs0y6g224eq0w762lkc1yws5lb0pz4ctlh3vo1jmmiaxsn08bl27eg1bucwg88aw3l18k3465anfgik0i',
+                        startAt: '2020-07-27 17:39:53',
+                        endAt: '2020-07-27 06:56:37',
                     }
                 }
             })
@@ -2064,29 +2064,29 @@ describe('job-detail', () =>
                 variables: {
                     payload: {
                         
-                        id: '24af86f1-ca66-463e-9ec3-225a479de7b4',
-                        tenantId: '85be8694-947e-4a9e-b932-5efd98d56480',
-                        tenantCode: 'iu0s5vtykpdplyo5sizak4qk5fpikdv7ktxor00mnb551jud9r',
-                        systemId: 'a41580c4-2f5a-47ce-8ab1-6a7584b4f5f8',
-                        systemName: 'okq5kvhe79la3xbyt1jc',
-                        executionId: '452508ad-9976-4bc0-9ae8-266fcf4f626c',
-                        executionType: 'DETAIL',
-                        executionExecutedAt: '2020-07-26 19:22:44',
-                        executionMonitoringStartAt: '2020-07-26 19:18:39',
-                        executionMonitoringEndAt: '2020-07-27 10:09:31',
-                        status: 'ERROR',
-                        name: 'tne99ewvmtie3ytfdjp9l4kqdbvehowrbtht4uw5o8jog0bxgitjs5m9a1hh74uo9tqgkmytukpenj6lebka2281d89v4dosigmedrgu1lx2qyynahuthixy0mq5oxa0e6su144fxc5mg3919z62tif9pwxj7r7e5ff48q4wvj3swuew8whj0u7e5adqzfz7tjqurj2yzoiv36xl5rjt87aywg08i53nth2jd0m0jt10jl8lfmfwfbtxonan0yq',
-                        returnCode: 9734264139,
-                        node: 'pzxjqole2wg0w7rnsul3lp7g0jqyh7vkydpkbbvfg851tsozjjs1ia6qsnnwijqd0677f01cx4okps5v1cboriuy8sdwielk598mwn6eer2tije9y70xy6c7ou15cex0szqx9y69iklmn7wit07pwrg2d6gwe00w',
-                        user: 'pamtumyug2v6yjmhiwzl43jlfvo0ezw1qlzf4lgeeo7u7a3qawlk9xp09sar76w6czeags5cik0snbppgzacgohhnkqii7vm7xiz2j6b7py7n5imb9lmsfjiml8nw63e5ag2doxtfyl22fiw086eojzq268icj8tjlhhphjyrrwk5f9dik9ysetqfiyt2cgryphpf42z8qhbezljjyeebfzegru5e4vifq9h3s3ufl0cde3sd54kk1vgjapdpzm',
-                        startAt: '2020-07-27 03:12:33',
-                        endAt: '2020-07-27 10:23:50',
+                        id: '4d3aa02f-09dc-445e-914b-8f762921b63e',
+                        tenantId: 'b7ef8f9a-5525-4206-88db-da0a0d5c25a5',
+                        tenantCode: 'm4umhmcn1mcoqvuuoasqsnqfkpmsncek0bzsovga3mkuuszjex',
+                        systemId: 'd1044a1b-7fdc-47ea-9065-8f232f9f8240',
+                        systemName: 'fat3k04autb6ilf2zgv2',
+                        executionId: '55bb5b6d-7c55-41b5-9f8d-0a4b84685596',
+                        executionType: 'SUMMARY',
+                        executionExecutedAt: '2020-07-27 11:00:28',
+                        executionMonitoringStartAt: '2020-07-27 07:18:20',
+                        executionMonitoringEndAt: '2020-07-27 11:28:38',
+                        status: 'CANCELLED',
+                        name: '41besjp3a41pjuxqb23kgvxafjas988izn99flgklrgje3g42lg6vcuqu81argib2jnlntu31bznkrr5ad05p4vojh94021b4vofwxya7jl5v0nbk0owuktdbxojwikrp8srsoq6obr7xlbupg36w5x9zy9isuiw9adk6yjvcnio0fkbu4aawst4ffnumkoq24x58ww1m1mg0nkecw1hpd8jnipe5z8xtcm9gh031ohrgg2e2ku2grik3l221oa',
+                        returnCode: 4902655815,
+                        node: 'zodcsvzm20zfkiukja0kxfu3cs5dsx0fpaedxoe4fsduut86rz37uf095p76m5mlx5pvz2chtvx3wwxda6qzbjpqmthxg5ky8yk76zz7a4byayg3i3mxvnbeazxp10qzlue8213dgj7aoo4h3hn1sdmyxad0cfxv',
+                        user: 'q18xsun3cegzj6235fkae3h3qcmcrzv2mvru7heodj1gia5zgy6nhdbgcspvjp6zo8j7ad04b9o1tpvrea82rm3fmdpa4ipljr60k87ws5f80bw80ekds7e1ldz0guyezhubm238sbkux4jbefxsk3bgm2ga88mbhatyt6csjri89srmh84ziwzfy9rfws3ei9cl08a45537pi6dtbdxha6av9hxm76rx31snqskpqbx0b7enpme66iw3xxj9rg',
+                        startAt: '2020-07-27 05:59:37',
+                        endAt: '2020-07-27 12:28:25',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateJobDetail.id).toStrictEqual('24af86f1-ca66-463e-9ec3-225a479de7b4');
+                expect(res.body.data.bplusItSappiUpdateJobDetail.id).toStrictEqual('4d3aa02f-09dc-445e-914b-8f762921b63e');
             });
     });
 
@@ -2169,12 +2169,12 @@ describe('job-detail', () =>
                     }
                 `,
                 variables: {
-                    id: '24af86f1-ca66-463e-9ec3-225a479de7b4'
+                    id: '4d3aa02f-09dc-445e-914b-8f762921b63e'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteJobDetailById.id).toStrictEqual('24af86f1-ca66-463e-9ec3-225a479de7b4');
+                expect(res.body.data.bplusItSappiDeleteJobDetailById.id).toStrictEqual('4d3aa02f-09dc-445e-914b-8f762921b63e');
             });
     });
 

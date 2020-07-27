@@ -139,7 +139,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     @Column({
         field: 'channel_id',
         primaryKey: false,
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.UUID,
     })
     channelId: string;

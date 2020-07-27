@@ -111,7 +111,7 @@ aggregateProperties:
     nullable: true
   - name: error_code
     type: varchar
-    maxLength: 20
+    maxLength: 50
     nullable: true
   - name: error_label
     type: smallint.unsigned

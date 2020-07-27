@@ -44,7 +44,7 @@ export class UpdateChannelDetailCommandHandler implements ICommandHandler<Update
             new ChannelDetailExecutionMonitoringStartAt(command.executionMonitoringStartAt, { undefinable: true }),
             new ChannelDetailExecutionMonitoringEndAt(command.executionMonitoringEndAt, { undefinable: true }),
             new ChannelDetailStatus(command.status, { undefinable: true }),
-            new ChannelDetailChannelId(command.channelId, { undefinable: true }),
+            new ChannelDetailChannelId(command.channelId),
             new ChannelDetailChannelSapId(command.channelSapId, { undefinable: true }),
             new ChannelDetailChannelParty(command.channelParty),
             new ChannelDetailChannelComponent(command.channelComponent, { undefinable: true }),

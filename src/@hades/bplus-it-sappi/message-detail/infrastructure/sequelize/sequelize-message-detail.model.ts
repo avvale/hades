@@ -253,7 +253,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         field: 'error_code',
         primaryKey: false,
         allowNull: true,
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(50),
     })
     errorCode: string;
         

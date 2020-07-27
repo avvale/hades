@@ -88,6 +88,10 @@ export class CreateSnapshotDto
         type        : [CreateMessageDetailSnapshotDto],
         description : 'message details object',
         example     : [{ 
+            flowParty: '',
+            flowComponent: 'BC_SII_BROKER',
+            flowInterfaceName: 'SI_IA_ProcesarLote',
+            flowInterfaceNamespace: 'urn:techedgegroup.com:sii:lotes',
             status: 'ERROR',
             startTimeAt: '2020-07-21 12:23:13',
             scenario: 'dir://ICO/9dc25e232809330dacae8c438ee9c3da',
