@@ -1,6 +1,8 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
+declare const Buffer;
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -53,8 +55,29 @@ export class CreateSnapshotController
             ]
         ));
 
+        /* const flow = await this.queryBus.ask(new FindFlowQuery(
+            [
+                {
+                    command: Command.WHERE,
+                    column: 'tenant_code',
+                    operator: Operator.EQUALS,
+                    value: payload.tenant.code
+                },
+                {
+                    command: Command.WHERE,
+                    column: 'system_name',
+                    operator: Operator.EQUALS,
+                    value: payload.system.name
+                }
+            ]
+        )); */
+
+        console.log(tenant);
+
+
+        /* const executionId = uuidv4();
         const execution = await this.commandBus.dispatch(new CreateExecutionCommand(
-            'id: string',
+            executionId,
             tenant.id,
             tenant.code,
             system.id,
@@ -66,9 +89,9 @@ export class CreateSnapshotController
             payload.execution.monitoringEndAt
         ));
 
-        // create message overview
+        const messageOverviewId = uuidv4();
         this.commandBus.dispatch(new CreateMessageOverviewCommand(
-            'id: string',
+            messageOverviewId,
             tenant.id,
             tenant.code,
             system.id,
@@ -89,9 +112,9 @@ export class CreateSnapshotController
             payload.messageOverview.waiting
         ));
 
-        // create channel overview
+        const channelOverviewId = uuidv4();
         this.commandBus.dispatch(new CreateChannelOverviewCommand(
-            'id: string',
+            channelOverviewId,
             tenant.id,
             tenant.code,
             system.id,
@@ -109,8 +132,9 @@ export class CreateSnapshotController
             payload.channelOverview.unregistered
         ));
 
+        const jobOverviewId = uuidv4();
         this.commandBus.dispatch(new CreateJobOverviewCommand(
-            'id: string',
+            jobOverviewId,
             tenant.id,
             tenant.code,
             system.id,
@@ -127,24 +151,24 @@ export class CreateSnapshotController
 
         const messagesDetail = payload.messagesDetail.map(message => {
             return {
-                id: 'id: string',
+                id: uuidv4(),
                 tenantId: tenant.id,
                 tenantCode: tenant.code,
                 systemId: system.id,
                 systemName: system.name,
                 scenario: message.scenario,
-                executionId: 'string',
+                executionId: executionId,
                 executionType: payload.execution.type,
                 executionExecutedAt: payload.execution.executedAt,
                 executionMonitoringStartAt: payload.execution.monitoringStartAt,
                 executionMonitoringEndAt: payload.execution.monitoringEndAt,
-                flowId: 'string',
+                flowId: null,
                 flowParty: message.flowParty,
                 flowComponent: message.flowComponent,
                 flowInterfaceName: message.flowInterfaceName,
                 flowInterfaceNamespace: message.flowInterfaceNamespace,
                 status: message.status,
-                detail: message.detail,
+                detail: Buffer.from(message.detail, 'base64').toString('utf-8'),
                 example: message.example,
                 startTimeAt: message.startTimeAt,
                 direction: message.direction,
@@ -167,35 +191,35 @@ export class CreateSnapshotController
 
         const channelsDetail = payload.channelsDetail.map(channel => {
             return {
-                id: 'id: string',
+                id: uuidv4(),
                 tenantId: tenant.id,
                 tenantCode: tenant.code,
                 systemId: system.id,
                 systemName: system.name,
-                executionId: 'string',
+                executionId: executionId,
                 executionType: payload.execution.type,
                 executionExecutedAt: payload.execution.executedAt,
                 executionMonitoringStartAt: payload.execution.monitoringStartAt,
                 executionMonitoringEndAt: payload.execution.monitoringEndAt,
                 status: channel.status,
-                channelId: 'id: string',
+                channelId: null,
                 channelSapId: channel.channelSapId,
                 channelParty: channel.channelParty,
                 channelComponent: channel.channelComponent,
                 channelName: channel.channelName,
-                detail: channel.detail
+                detail: Buffer.from(channel.detail, 'base64').toString('utf-8')
             }
         });
         this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
 
         const jobsDetail = payload.jobsDetail.map(job => {
             return {
-                id: 'id: string',
+                id: uuidv4(),
                 tenantId: tenant.id,
                 tenantCode: tenant.code,
                 systemId: system.id,
                 systemName: system.name,
-                executionId: 'string',
+                executionId: executionId,
                 executionType: payload.execution.type,
                 executionExecutedAt: payload.execution.executedAt,
                 executionMonitoringStartAt: payload.execution.monitoringStartAt,
@@ -209,6 +233,6 @@ export class CreateSnapshotController
                 endAt: job.endAt
             }
         });
-        this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
+        this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail)); */
     } 
 }

@@ -106,7 +106,7 @@ export class CreateSnapshotDto
             size: 4502,
             timesFailed: 4,
             example: '1c9e4c0a-9e66-11ea-cf75-0000001ba2ce',
-            detail: '...'
+            detail: 'aG9sYSBtdW5kbw=='
         }]
     })
     messagesDetail: CreateMessageDetailSnapshotDto[];
@@ -116,9 +116,11 @@ export class CreateSnapshotDto
         description : 'channel details object',
         example     : [{ 
             status: 'ERROR',
+            channelSapId: '045A58RT',
             channelName: 'CC_S_REST',
             channelComponent: 'BC_REST_CV',
-            channelParty: ''
+            channelParty: '',
+            detail: 'aG9sYSBtdW5kbw=='
         }]
     })
     channelsDetail: CreateChannelDetailSnapshotDto[];
@@ -131,7 +133,9 @@ export class CreateSnapshotDto
             name: 'BPMMailReaderJob',
             returnCode: 2029462869,
             node: 'Server 00 00_18111',
-            user: ''
+            user: '',
+            startAt: '27-05-2020 07:50:09',
+            endAt: '27-05-2020 07:50:09'
         }]
     })
     jobsDetail: CreateJobDetailSnapshotDto[];
