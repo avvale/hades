@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import * as validate from 'uuid-validate';
 import { StringValueObject } from './string.value-object';
@@ -13,11 +14,8 @@ export abstract class UuidValueObject extends StringValueObject
     }
 
     private ensureIsValidUuid(): void
-    { 
-        if (!validate(this.value, 4))
-        {
-            // TODO, lanzar error de uuid no válido
-        }
+    {     
+        if (!validate(this.value, 4)) throw new BadRequestException(`Value for ${this.validationRules.name} has value: ${this.value}, not allowed for uuid`);  
     }
 
     private checkIfIsNull(): void
