@@ -138,8 +138,8 @@ export class CreateSnapshotDto
             returnCode: 2029462869,
             node: 'Server 00 00_18111',
             user: '',
-            startAt: '27-05-2020 07:50:09',
-            endAt: '27-05-2020 07:50:09'
+            startAt: '2020-07-17 02:11:04',
+            endAt: '2020-07-17 02:11:04'
         }]
     })
     jobsDetail: CreateJobDetailSnapshotDto[];
