@@ -74,7 +74,7 @@ export class CreateSnapshotController
             payload.execution.monitoringEndAt
         ));
 
-        this.commandBus.dispatch(new CreateDataLakeCommand(
+        await this.commandBus.dispatch(new CreateDataLakeCommand(
             uuidv4(),
             executionId,
             tenant.id,
@@ -83,7 +83,7 @@ export class CreateSnapshotController
         ))
 
         const messageOverviewId = uuidv4();
-        this.commandBus.dispatch(new CreateMessageOverviewCommand(
+        await this.commandBus.dispatch(new CreateMessageOverviewCommand(
             messageOverviewId,
             tenant.id,
             tenant.code,
@@ -106,7 +106,7 @@ export class CreateSnapshotController
         ));
 
         const channelOverviewId = uuidv4();
-        this.commandBus.dispatch(new CreateChannelOverviewCommand(
+        await this.commandBus.dispatch(new CreateChannelOverviewCommand(
             channelOverviewId,
             tenant.id,
             tenant.code,
@@ -126,7 +126,7 @@ export class CreateSnapshotController
         ));
 
         const jobOverviewId = uuidv4();
-        this.commandBus.dispatch(new CreateJobOverviewCommand(
+        await this.commandBus.dispatch(new CreateJobOverviewCommand(
             jobOverviewId,
             tenant.id,
             tenant.code,
@@ -180,7 +180,7 @@ export class CreateSnapshotController
                 timesFailed: message.timesFailed,
             }
         });
-        this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
+        await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
 
         const channelsDetail = payload.channelsDetail.map(channel => {
             return {
@@ -203,7 +203,7 @@ export class CreateSnapshotController
                 detail: Buffer.from(channel.detail, 'base64').toString('utf-8')
             }
         });
-        this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
+        await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
 
         const jobsDetail = payload.jobsDetail.map(job => {
             return {
@@ -226,7 +226,7 @@ export class CreateSnapshotController
                 endAt: job.endAt
             }
         });
-        this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
+        await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
 
         return {
             statusCode: 200,
