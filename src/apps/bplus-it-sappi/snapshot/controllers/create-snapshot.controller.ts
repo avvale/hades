@@ -1,5 +1,5 @@
 import { CreateDataLakeCommand } from './../../../../@hades/bplus-it-sappi/data-lake/application/create/create-data-lake.command';
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
@@ -34,6 +34,10 @@ export class CreateSnapshotController
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CreateSnapshotDto })
     async main(@Body() payload: CreateSnapshotDto)
     {
+        if (!Array.isArray(payload.messagesDetail)) throw new BadRequestException(`The property messagesDetail does not exist or is not an array`);
+        if (!Array.isArray(payload.channelsDetail)) throw new BadRequestException(`The property channelsDetail does not exist or is not an array`);
+        if (!Array.isArray(payload.jobsDetail)) throw new BadRequestException(`The property jobsDetail does not exist or is not an array`);
+
         const tenant = await this.queryBus.ask(new FindTenantQuery(
             [
                 {
