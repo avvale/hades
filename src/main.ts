@@ -1,12 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { urlencoded, json } from 'express';
 import { EnvironmentService } from '@hades/shared/domain/environment/environment.service';
 import { AppModule } from './app.module';
 import { LoggerService } from './apps/core/modules/logger/logger.service';
 
 async function bootstrap() 
 {
-    const app                   = await NestFactory.create(AppModule, { logger: false });
+    const app                   = await NestFactory.create(AppModule, {logger: false});
     const environmentService    = app.get(EnvironmentService);
     const loggerService         = app.get(LoggerService);
 
@@ -19,7 +20,10 @@ async function bootstrap()
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('api', app, document);
     
+    app.use(json({ limit: environmentService.get<string>('APP_LIMIT_REQUEST_SIZE') }));
+    app.use(urlencoded({ extended: true, limit: environmentService.get<string>('APP_LIMIT_REQUEST_SIZE') }));
     app.useLogger(loggerService);
+    
     await app.listen(environmentService.get<number>('APP_PORT'));
 }
 bootstrap();
