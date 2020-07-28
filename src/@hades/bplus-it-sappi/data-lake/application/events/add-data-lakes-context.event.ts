@@ -25,9 +25,10 @@ export class AddDataLakesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(dataLake => 
                     new CreatedDataLakeEvent(
                         dataLake.id.value,
+                        dataLake.executionId.value,
                         dataLake.tenantId.value,
                         dataLake.tenantCode.value,
-                        dataLake.data.value,
+                        dataLake.payload.value,
                         dataLake.createdAt?.value,
                         dataLake.updatedAt?.value,
                         dataLake.deletedAt?.value,
@@ -45,9 +46,10 @@ export class AddDataLakesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(dataLake => 
                     new DeletedDataLakeEvent(
                         dataLake.id.value,
+                        dataLake.executionId.value,
                         dataLake.tenantId.value,
                         dataLake.tenantCode.value,
-                        dataLake.data.value,
+                        dataLake.payload.value,
                         dataLake.createdAt?.value,
                         dataLake.updatedAt?.value,
                         dataLake.deletedAt?.value,

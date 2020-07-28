@@ -3,9 +3,10 @@ export class CreateDataLakesCommand
     constructor(
         public readonly dataLakes: {
             id: string,
+            executionId: string,
             tenantId: string,
             tenantCode: string,
-            data: any,
+            payload: any,
             
         } []
     ) {}

@@ -377,16 +377,18 @@ export interface BplusItSappiUpdateContactInput {
 
 export interface BplusItSappiCreateDataLakeInput {
     id: string;
+    executionId: string;
     tenantId: string;
     tenantCode: GraphQLString;
-    data: JSON;
+    payload: JSON;
 }
 
 export interface BplusItSappiUpdateDataLakeInput {
     id: string;
+    executionId?: string;
     tenantId?: string;
     tenantCode?: GraphQLString;
-    data?: JSON;
+    payload?: JSON;
 }
 
 export interface BplusItSappiCreateExecutionInput {
@@ -1083,9 +1085,10 @@ export interface BplusItSappiContact {
 
 export interface BplusItSappiDataLake {
     id: string;
+    executionId: string;
     tenantId: string;
     tenantCode: GraphQLString;
-    data: JSON;
+    payload: JSON;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

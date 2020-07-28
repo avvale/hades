@@ -20,9 +20,10 @@ export class CreateDataLakeResolver
     {
         await this.commandBus.dispatch(new CreateDataLakeCommand(
             payload.id,
+            payload.executionId,
             payload.tenantId,
             payload.tenantCode,
-            payload.data,
+            payload.payload,
             
         ));
         

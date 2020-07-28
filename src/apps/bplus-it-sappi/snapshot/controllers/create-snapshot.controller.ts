@@ -1,3 +1,4 @@
+import { CreateDataLakeCommand } from './../../../../@hades/bplus-it-sappi/data-lake/application/create/create-data-lake.command';
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
@@ -55,25 +56,8 @@ export class CreateSnapshotController
             ]
         ));
 
-        /* const flow = await this.queryBus.ask(new FindFlowQuery(
-            [
-                {
-                    command: Command.WHERE,
-                    column: 'tenant_code',
-                    operator: Operator.EQUALS,
-                    value: payload.tenant.code
-                },
-                {
-                    command: Command.WHERE,
-                    column: 'system_name',
-                    operator: Operator.EQUALS,
-                    value: payload.system.name
-                }
-            ]
-        )); */
-
         const executionId = uuidv4();
-        const execution = await this.commandBus.dispatch(new CreateExecutionCommand(
+        await this.commandBus.dispatch(new CreateExecutionCommand(
             executionId,
             tenant.id,
             tenant.code,
@@ -85,6 +69,14 @@ export class CreateSnapshotController
             payload.execution.monitoringStartAt,
             payload.execution.monitoringEndAt
         ));
+
+        this.commandBus.dispatch(new CreateDataLakeCommand(
+            uuidv4(),
+            executionId,
+            tenant.id,
+            tenant.code,
+            payload
+        ))
 
         const messageOverviewId = uuidv4();
         this.commandBus.dispatch(new CreateMessageOverviewCommand(
@@ -231,5 +223,10 @@ export class CreateSnapshotController
             }
         });
         this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
+
+        return {
+            code: 200,
+            status: ''
+        };
     } 
 }

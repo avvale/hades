@@ -6,9 +6,10 @@ import { dataLakes } from '@hades/bplus-it-sappi/data-lake/infrastructure/seeds/
 import { CreateDataLakeService } from './create-data-lake.service';
 import { 
     DataLakeId, 
+    DataLakeExecutionId, 
     DataLakeTenantId, 
     DataLakeTenantCode, 
-    DataLakeData
+    DataLakePayload
     
 } from './../../domain/value-objects';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
@@ -54,9 +55,10 @@ describe('CreateDataLakeService', () =>
         {
             expect(await service.main(
                 new DataLakeId(dataLakes[0].id),
+                new DataLakeExecutionId(dataLakes[0].executionId),
                 new DataLakeTenantId(dataLakes[0].tenantId),
                 new DataLakeTenantCode(dataLakes[0].tenantCode),
-                new DataLakeData(dataLakes[0].data),
+                new DataLakePayload(dataLakes[0].payload),
                 
             )).toBe(undefined);
         });

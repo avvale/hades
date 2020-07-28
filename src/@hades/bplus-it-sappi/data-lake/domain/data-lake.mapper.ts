@@ -4,9 +4,10 @@ import { BplusItSappiDataLake } from './data-lake.aggregate';
 import { DataLakeResponse } from './data-lake.response';
 import { 
     DataLakeId, 
+    DataLakeExecutionId, 
     DataLakeTenantId, 
     DataLakeTenantCode, 
-    DataLakeData, 
+    DataLakePayload, 
     DataLakeCreatedAt, 
     DataLakeUpdatedAt, 
     DataLakeDeletedAt
@@ -55,9 +56,10 @@ export class DataLakeMapper implements IMapper
     {
         return BplusItSappiDataLake.register(
             new DataLakeId(dataLake.id),
+            new DataLakeExecutionId(dataLake.executionId),
             new DataLakeTenantId(dataLake.tenantId),
             new DataLakeTenantCode(dataLake.tenantCode),
-            new DataLakeData(dataLake.data),
+            new DataLakePayload(dataLake.payload),
             new DataLakeCreatedAt(dataLake.createdAt),
             new DataLakeUpdatedAt(dataLake.updatedAt),
             new DataLakeDeletedAt(dataLake.deletedAt),
@@ -69,9 +71,10 @@ export class DataLakeMapper implements IMapper
     {
         return new DataLakeResponse(
             dataLake.id.value,
+            dataLake.executionId.value,
             dataLake.tenantId.value,
             dataLake.tenantCode.value,
-            dataLake.data.value,
+            dataLake.payload.value,
             dataLake.createdAt.value,
             dataLake.updatedAt.value,
             dataLake.deletedAt.value,

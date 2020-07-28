@@ -7,6 +7,13 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
+  - name: execution_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: BplusItSappiExecution
+    relationshipModulePath: bplus-it-sappi/execution
   - name: tenant_id
     type: id
     length: 36
@@ -18,7 +25,7 @@ aggregateProperties:
     type: varchar
     maxLength: 50
     nullable: false
-  - name: data
+  - name: payload
     type: json
     nullable: false
   - name: created_at

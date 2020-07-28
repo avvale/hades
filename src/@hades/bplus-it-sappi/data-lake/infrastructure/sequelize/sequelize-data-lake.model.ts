@@ -1,5 +1,6 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
+import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infrastructure/sequelize/sequelize-execution.model';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 
 @Table({ modelName: 'bplus_it_sappi_data_lake', freezeTableName: true })
@@ -14,6 +15,21 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     })
     id: string;
         
+             
+        
+    @ForeignKey(() => BplusItSappiExecutionModel)
+    
+    @Column({
+        field: 'execution_id',
+        primaryKey: false,
+        allowNull: false,
+        type: DataTypes.UUID,
+    })
+    executionId: string;
+        
+    
+    @BelongsTo(() => BplusItSappiExecutionModel)
+    execution: BplusItSappiExecutionModel;
              
         
     @ForeignKey(() => AdminTenantModel)
@@ -42,12 +58,12 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
              
         
     @Column({
-        field: 'data',
+        field: 'payload',
         primaryKey: false,
         allowNull: false,
         type: DataTypes.JSON,
     })
-    data: any;
+    payload: any;
         
              
         

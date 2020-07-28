@@ -68,9 +68,10 @@ describe('data-lake', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
-                tenantCode: 'k6hv6u2iy04dy00qst5vi27cmsb7r47963ttvmqzvihu0kx205',
-                data: { "foo" : "bar" },
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: 'awr860zlv08g321mmli9dtdiuvcfjcfurja29pzm2hs95hgx5r',
+                payload: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
@@ -85,13 +86,50 @@ describe('data-lake', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
-                tenantCode: 'rgvc5uzygmthglygguydutmlecu7g5pbtazb5bx60m4umanrm5',
-                data: { "foo" : "bar" },
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: '3dss4ogmvmlkuset5t3102xxa763eoavqli6mg1vhqsx8bbrhr',
+                payload: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for DataLakeId must be defined, can not be undefined');
+            });
+    });
+    
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeExecutionId property can not to be null`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/data-lake')
+            .set('Accept', 'application/json')
+            .send({
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: null,
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: 'urn9glxkathfjrt04qsybvdhy7pxvk9tv2pa3hr96idnhxwlad',
+                payload: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeExecutionId must be defined, can not be null');
+            });
+    });
+
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeExecutionId property can not to be undefined`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/data-lake')
+            .set('Accept', 'application/json')
+            .send({
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: 'de09qudbyd1q4sz1tudovlv3bvefdfp8o2ugi7u15wzuxup6hd',
+                payload: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeExecutionId must be defined, can not be undefined');
             });
     });
     
@@ -101,10 +139,11 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
                 tenantId: null,
-                tenantCode: 'yhv6jxauahkgda87v50wckqzk9wmh29ois0o50efrs6teeqnvs',
-                data: { "foo" : "bar" },
+                tenantCode: 'nb8r9z908p4rxe6cnbw9cb422rwaj093nlt0um04jsr07x3um9',
+                payload: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
@@ -118,10 +157,11 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
                 
-                tenantCode: 'ny608mus3dl6pi3d0548ff49qn3arjoysteilub46m35o9snhi',
-                data: { "foo" : "bar" },
+                tenantCode: 'hrrtzqtp5e9htqt9rn0o3c9qvn6jbzdn2dzaz45btpvrs183zj',
+                payload: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
@@ -135,10 +175,11 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
-                tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
                 tenantCode: null,
-                data: { "foo" : "bar" },
+                payload: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
@@ -152,10 +193,11 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
-                tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
                 
-                data: { "foo" : "bar" },
+                payload: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
@@ -163,37 +205,39 @@ describe('data-lake', () =>
             });
     });
     
-    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeData property can not to be null`, () => 
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakePayload property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
-                tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
-                tenantCode: 'xmhhn03kcn4dnse6dfocaqwdygexrsmmuvu5m32sjcyuzyp4z4',
-                data: null,
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: 'fv0zl8k1372kiwlta66q0wt4zk3oqp2pwem2ku46gwti8um14q',
+                payload: null,
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for DataLakeData must be defined, can not be null');
+                expect(res.body.message).toContain('Value for DataLakePayload must be defined, can not be null');
             });
     });
 
-    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeData property can not to be undefined`, () => 
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakePayload property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
-                tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
-                tenantCode: 'mzie149254gmiiiocvmz0f3hersnutcna9vsu0npx6naf6m0g3',
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: '86zrhpg2a3gk0zvb0qkw62qi5mosppwwy6p0m02aj2xk60foch',
                 
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for DataLakeData must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for DataLakePayload must be defined, can not be undefined');
             });
     });
     
@@ -205,14 +249,33 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: 'm8wwx5sorz8d5gmeoug96kvncqrc1m4241j4f',
-                tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
-                tenantCode: '3nig5rm157kmkfz3w89gdv0bo6w7spttlf4j2tmqxxbcfgcnhk',
-                data: { "foo" : "bar" },
+                id: 'wrbdoqxrkgjcqmgcnktblaok1ifxmi6vyfrgr',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: '20x2hosi4kzksmdq3jc5ps9h6ft3m3ateg6m1k1hjyakkvlqdx',
+                payload: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for DataLakeId is not allowed, must be a length of 36');
+            });
+    });
+    
+    test(`/REST:POST bplus-it-sappi/data-lake - Got 400 Conflict, DataLakeExecutionId is not allowed, must be a length of 36`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/bplus-it-sappi/data-lake')
+            .set('Accept', 'application/json')
+            .send({
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: 'yt291fjwvsfh33s1dcwa3xr5s80fgkxotz73b',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: 'oou6qkicxxrhqaa4v14nb628q4cscv23b2gvdog81aphg0wqx1',
+                payload: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for DataLakeExecutionId is not allowed, must be a length of 36');
             });
     });
     
@@ -222,10 +285,11 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
-                tenantId: 'vnkyyxyxk2ko4w3pl7izoxduwxeu0sfur83a8',
-                tenantCode: 'jt5onodond8p9bt65iu8yfy52e5rc0hbqkrzsjbyw6z0kcxox7',
-                data: { "foo" : "bar" },
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: 'ok7rjd8564okmkszzahzyxfe0gu6j2smoim0w',
+                tenantCode: 'eqahhi6ofdtrsl5o5qzikog7wa732opwa7306xt9dhpji8b24q',
+                payload: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
@@ -241,10 +305,11 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
-                tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
-                tenantCode: 'vfmijmesszyddjtmztjjsmkvxgfnaji6rkyu4qidmvmxzydrahu',
-                data: { "foo" : "bar" },
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: 'tvgc044h5u6axp2pgs8b4xi4n4ap7f2tif9t8e9iubfg47imnh5',
+                payload: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
@@ -271,10 +336,11 @@ describe('data-lake', () =>
             .post('/bplus-it-sappi/data-lake')
             .set('Accept', 'application/json')
             .send({
-                id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
-                tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
-                tenantCode: 'ls2w0b1mpogj4ed053io8rxp6ajou90vxmeqb483n32eha2pg4',
-                data: { "foo" : "bar" },
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: 'mjy0wsovysyns6q8i9hr0ouwxrtdrdsl7157cr3ib0wvv1sup0',
+                payload: { "foo" : "bar" },
             })
             .expect(201);
     });
@@ -333,12 +399,12 @@ describe('data-lake', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194'
+                        value   : '4058f96e-53d0-49c1-a34b-14d25dd9730e'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194'));
+            .expect(repository.collectionResponse.find(item => item.id === '4058f96e-53d0-49c1-a34b-14d25dd9730e'));
     });
 
     test(`/REST:GET bplus-it-sappi/data-lake/{id} - Got 404 Not Found`, () => 
@@ -352,10 +418,10 @@ describe('data-lake', () =>
     test(`/REST:GET bplus-it-sappi/data-lake/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/data-lake/9f06ed7e-4a33-44c9-b8e4-9e48f1f62194')
+            .get('/bplus-it-sappi/data-lake/4058f96e-53d0-49c1-a34b-14d25dd9730e')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194'));
+            .expect(repository.collectionResponse.find(e => e.id === '4058f96e-53d0-49c1-a34b-14d25dd9730e'));
     });
 
     test(`/REST:GET bplus-it-sappi/data-lakes`, () => 
@@ -374,10 +440,11 @@ describe('data-lake', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '90f1edae-98ca-4260-88ec-cec301045322',
-                tenantId: '611872a0-8bd7-476b-a1cf-7d1f0b81d4db',
-                tenantCode: 'tjvbqjkjk8ua7k7lfw99lderdpkfnt5ge1seyi2x4y4w63isg3',
-                data: { "foo" : "bar" },
+                id: '5915063a-4928-4fc4-b6b6-bf4d24b7a305',
+                executionId: 'a0948f47-f8a6-46c1-b81d-d3b602c3a3ab',
+                tenantId: 'b2d8a0c9-91e2-4f91-826d-f040520ad759',
+                tenantCode: '5ry1kme2eljop027rji3qtzgdwsiizy7ha2mohpk9ffx3zbz4z',
+                payload: { "foo" : "bar" },
             })
             .expect(404);
     });
@@ -389,13 +456,14 @@ describe('data-lake', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
-                tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
-                tenantCode: 'rvrjly7ns0q982xjf71en46c7rvji4rw0nguv0s75mprb9qkcd',
-                data: { "foo" : "bar" },
+                id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                tenantCode: 'uz138v4gfxbnvs9agrz9kembesg99cz95xrxo8zrp03fjexpro',
+                payload: { "foo" : "bar" },
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194'));
+            .expect(repository.collectionResponse.find(e => e.id === '4058f96e-53d0-49c1-a34b-14d25dd9730e'));
     });
 
     test(`/REST:DELETE bplus-it-sappi/data-lake/{id} - Got 404 Not Found`, () => 
@@ -409,7 +477,7 @@ describe('data-lake', () =>
     test(`/REST:DELETE bplus-it-sappi/data-lake/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/data-lake/9f06ed7e-4a33-44c9-b8e4-9e48f1f62194')
+            .delete('/bplus-it-sappi/data-lake/4058f96e-53d0-49c1-a34b-14d25dd9730e')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -426,9 +494,10 @@ describe('data-lake', () =>
                         bplusItSappiCreateDataLake (payload:$payload)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -458,9 +527,10 @@ describe('data-lake', () =>
                         bplusItSappiCreateDataLake (payload:$payload)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -468,16 +538,17 @@ describe('data-lake', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '3dd2e6f5-459a-474c-bc6d-e31ef8768c9b',
-                        tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
-                        tenantCode: 'fvl82l4o6bcp4x45h56s7kfpy6vszvyg5swbmxjwpi8wax8wje',
-                        data: { "foo" : "bar" },
+                        id: 'fbb3646c-9340-464b-ad00-5d461893f2fb',
+                        executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                        tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                        tenantCode: 'gmmd9zkpfhd7wg47wa0uztwogugnw7flu1uqs4n6pofmu6nzq7',
+                        payload: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateDataLake).toHaveProperty('id', '3dd2e6f5-459a-474c-bc6d-e31ef8768c9b');
+                expect(res.body.data.bplusItSappiCreateDataLake).toHaveProperty('id', 'fbb3646c-9340-464b-ad00-5d461893f2fb');
             });
     });
 
@@ -531,9 +602,10 @@ describe('data-lake', () =>
                         bplusItSappiFindDataLake (query:$query)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -570,9 +642,10 @@ describe('data-lake', () =>
                         bplusItSappiFindDataLake (query:$query)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -584,14 +657,14 @@ describe('data-lake', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194'
+                            value   : '4058f96e-53d0-49c1-a34b-14d25dd9730e'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindDataLake.id).toStrictEqual('9f06ed7e-4a33-44c9-b8e4-9e48f1f62194');
+                expect(res.body.data.bplusItSappiFindDataLake.id).toStrictEqual('4058f96e-53d0-49c1-a34b-14d25dd9730e');
             });
     });
 
@@ -607,9 +680,10 @@ describe('data-lake', () =>
                         bplusItSappiFindDataLakeById (id:$id)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -639,21 +713,22 @@ describe('data-lake', () =>
                         bplusItSappiFindDataLakeById (id:$id)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194'
+                    id: '4058f96e-53d0-49c1-a34b-14d25dd9730e'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindDataLakeById.id).toStrictEqual('9f06ed7e-4a33-44c9-b8e4-9e48f1f62194');
+                expect(res.body.data.bplusItSappiFindDataLakeById.id).toStrictEqual('4058f96e-53d0-49c1-a34b-14d25dd9730e');
             });
     });
 
@@ -669,9 +744,10 @@ describe('data-lake', () =>
                         bplusItSappiGetDataLakes (query:$query)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -700,9 +776,10 @@ describe('data-lake', () =>
                         bplusItSappiUpdateDataLake (payload:$payload)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -711,10 +788,11 @@ describe('data-lake', () =>
                 variables: {
                     payload: {
                         
-                        id: '6faa2354-2638-45f5-b425-39362a351c2f',
-                        tenantId: 'a97fb37a-2bf1-4076-a802-3b789add47a8',
-                        tenantCode: 'jsvh8eqko7rz3r4bc2esxnqor7wxq969trq4r5qrl41m7mg1kx',
-                        data: { "foo" : "bar" },
+                        id: '26552bc9-e281-44dc-8ff8-72a3b3121a22',
+                        executionId: '0d23d342-d9ea-451d-b69e-0f0a50b9a24d',
+                        tenantId: '82c1b6cf-3a5d-40a0-90ce-6ac699281542',
+                        tenantCode: 'dv28pxw143mbohx6gsi1ug9zo2wghe7riqaiqshfm9pnqvz551',
+                        payload: { "foo" : "bar" },
                     }
                 }
             })
@@ -738,9 +816,10 @@ describe('data-lake', () =>
                         bplusItSappiUpdateDataLake (payload:$payload)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -749,16 +828,17 @@ describe('data-lake', () =>
                 variables: {
                     payload: {
                         
-                        id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194',
-                        tenantId: '4c064f13-40b4-48d4-8e06-a7a2dad70cb1',
-                        tenantCode: '7updwao1jph0v2uej8suju9g6h39ldw1gjhlgw4u8mcc8bbqcm',
-                        data: { "foo" : "bar" },
+                        id: '4058f96e-53d0-49c1-a34b-14d25dd9730e',
+                        executionId: '20ed4e44-96db-4e2c-9299-fc9a6870b1a7',
+                        tenantId: '25d537fc-7e09-4b55-85a7-e74fae70e0de',
+                        tenantCode: 'wp0la4rlhrke5ojt2cf9a2yncx4834zq3s2xyh6lyemi12nwaw',
+                        payload: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateDataLake.id).toStrictEqual('9f06ed7e-4a33-44c9-b8e4-9e48f1f62194');
+                expect(res.body.data.bplusItSappiUpdateDataLake.id).toStrictEqual('4058f96e-53d0-49c1-a34b-14d25dd9730e');
             });
     });
 
@@ -774,9 +854,10 @@ describe('data-lake', () =>
                         bplusItSappiDeleteDataLakeById (id:$id)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -806,21 +887,22 @@ describe('data-lake', () =>
                         bplusItSappiDeleteDataLakeById (id:$id)
                         {   
                             id
+                            executionId
                             tenantId
                             tenantCode
-                            data
+                            payload
                             createdAt
                             updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: '9f06ed7e-4a33-44c9-b8e4-9e48f1f62194'
+                    id: '4058f96e-53d0-49c1-a34b-14d25dd9730e'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteDataLakeById.id).toStrictEqual('9f06ed7e-4a33-44c9-b8e4-9e48f1f62194');
+                expect(res.body.data.bplusItSappiDeleteDataLakeById.id).toStrictEqual('4058f96e-53d0-49c1-a34b-14d25dd9730e');
             });
     });
 

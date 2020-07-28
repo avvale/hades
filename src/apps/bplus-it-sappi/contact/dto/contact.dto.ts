@@ -6,7 +6,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '7229ef37-da9b-4a52-85b8-d195873c6f8d'
+        example     : 'af06e73a-a913-4312-868b-9aefef33dc29'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '9661d7e7-019c-41c3-bc61-44e69a44c7f4'
+        example     : 'b741d8e2-973c-4e89-88c3-ada737c839ca'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'zp58fv8xriodkq5ttp9eana05fcc9a63t8r789y593uc8te3nq'
+        example     : 'uxukk70cbs9c4i9tw008dbm0u6tqu1cgx0xs81fxwy8zelvwj5'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : 'eee9f9e7-3598-40cc-a476-0d73d877a52a'
+        example     : '083426f0-6fac-44f3-8805-43894eab80e1'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : '5hzlr8z1met7qoct0kya'
+        example     : 'skb8ciqpptyryyy2l43a'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'roleId [input here api field description]',
-        example     : '977070f6-62e9-4738-a02b-df061466b504'
+        example     : '360a5cd6-ab91-40df-a0ea-9a99a91260f5'
     })
     roleId: string;
     
@@ -60,7 +60,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'roleName [input here api field description]',
-        example     : 'gaqhp1okeaafmeajzvv6vg8qova99qm2cwd7cqxegjh7ppw19a1vqm5yhq7d9w73n24sjvbphszft1n1zmz60m7rmvtbxm2oyn9xvt1pzun9mgd9hswk6ihlyz2wfhqernwutes8tzabdegbitryabcsyptk1lo7fk48zkfp1gyzwjgrwunh7fikyfx5z17x6zk5frrrqq0srcutd9zlijzx261crf4klc4zrgsfo5zwveiszzmm6qdjflmhkr4'
+        example     : 'iv5agwwa1n2ycwc40h1qb3bf501ltxu64yb9zi1hyqk5jxctky35zn8u6g04zr13vqwsjusnko5oklyjlj5nzaoh28fizc418bnc1m91hnii4cpnek632tr5bx2lxo41pvjytwtoa0haal84nz8apjqfmhkjkfm6lrn60168nv06flru5dye89eof9gwqou8h48lzi5aasusmpssxkcb2k403aittbpmy69j5ofmprb0ga29tm64t8ekttl3snn'
     })
     roleName: string;
     
@@ -69,7 +69,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'acrxcrtfsjw2z9wioxq80yolibpylxhosbnd02uzpeaaemapfpizufrwwt3uxmytvpit43p63fdjy9616rezlph39nnau4ub21q08tezzf1g43rbxmbsc168swbvfmxi3yhcds0yvrhl25jt2fzl7m5sqqs9yaz9o8naeol1ukvxf3zx8dk94ppr0c9dqvpqk04qboac9hucc4cpaacl74d7lcl7x8ctz9p080rydaewpluexwd80re1rqu9n1h'
+        example     : 'h2bbykoxkexcgvntr2qhnltf1u1p9e4no82l221wacg885jfb1b1ocsxszctwnbjaslz54qw0nxun3z5o9yhkwr31ujsfcg6pfxnss61fc8b184i117o0aooyth9ui91aiy93le9sopkj9lon16prnycgtre2yqxewstybcmmmhmg1cupm2eli9qteoyn76ie8j7ic04gz62h2zolqax8twosfybbh93cmmktmrv1n70aavkgcf46278g1ca0nb'
     })
     name: string;
     
@@ -78,7 +78,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'surname [input here api field description]',
-        example     : 'ajjs6800fv8stjv11cqrzmvqjcza6s004e1ut3jqa53cy7np75kk3kcrmz92afo29mxb795vrvod6ht3bqd9lion1aj2s0a28yectugtps47jab4m0n061d7flnz7akrsdoy5eyx5t5qm4wevglikrs3cyqsahlrx8tobg46shqw44g92vnoco1egb4qzcy4nduazgxefebnjyr0vyc0onnbjp8cl4e3ed314aalgc3ss1alwxz4qvncoqyba8n'
+        example     : 'h88m1nhh4kdctvdoi5h38d8os76jr063f65vv3iuwaad55znv82qows8bs5way5l747lmvhikb56iy75qipvpn654zc22qlb4qkrq0m80xe9z62mhyqqydstto3f9log55xvr4fqemyl5m22m8rypf3ydecyt2rh32v31azrvoql3khrzq5tjrzmku5bfubu806g366ocprbnotugvw9xhml35ei4dl1sxrh9xuw16ylh5lhkldiekw5kdy05pt'
     })
     surname: string;
     
@@ -87,7 +87,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'email [input here api field description]',
-        example     : 'ti0qfj8mk198825lhaw8bsoc88ssr8bvfiaoei92bd0r2sqdoobg1ax3f3kywsrr8pq0c9cvo0xv2ah5q3lrlhwlbzlwe8b3hhiapbx4kwpyqq6cmb4b4idb'
+        example     : '4fewtgqptxbwuf6lsu82pycjm1ebf8i0nhpuobp2j4kaxnptp796n1y3oo6xw0z4fbrj41g48ko1kj2l8fcs1jplezvj4mk2dqwr4vhe8s69p79wa5y8yz9v'
     })
     email: string;
     
@@ -96,7 +96,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'mobile [input here api field description]',
-        example     : '6d14zihn7nagrbmq2qp07tve3u1scku4g24eqsquwvmhvdxyyubssaswlvb2'
+        example     : 'gdg0nf5399up2amb0zictvs748gvgxr73wemapwupndl6ku63r1fxlk77q8o'
     })
     mobile: string;
     
@@ -105,7 +105,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'area [input here api field description]',
-        example     : 'dj5z2u7ye3r5uh8ad9zwrb4194x931lu05ufnyxnirl41cz3sdbmyi1c32139sjjwme18ddn0bnxk1s00gbmkpjlgjczmbrw0fe6x4uptaomwbq59a69uoz36231vbhmiestzuf6tf635q5ngnou48vn7jpwsiok080u2ta4ewi2nlam6ghccnzj92j8d54pg4y7tvxwbt81znphbk8p51s4td2576xvsapjhl50c9zpo534r26ravgh2gjkixc'
+        example     : 'u19xkhggw5szdo4nxjabih52a0j3f0vo1spkqb4h1dnwmg8ql9qd3z6cx9r86ns1ri6xsaq30zmtgq1b1h60zr5s6a5g9lqdq2senlx8p9ff9n0scr9z32amhsx5x2czb7jcuj8cwsbkxhcivqml7w84e4pqk8dsofkglu3cjizoubhs8jg6qwfdwdpcqoa4zr30mm9gqflfg4bz4ari1opvolzl39num9q3gnme4c6wpnme3qyw83c138bxad0'
     })
     area: string;
     
@@ -123,7 +123,7 @@ export class ContactDto
     @ApiProperty({
         type        : Boolean,
         description : 'hasConsentMobile [input here api field description]',
-        example     : false
+        example     : true
     })
     hasConsentMobile: boolean;
     
@@ -141,7 +141,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-27 21:54:29'
+        example     : '2020-07-28 05:46:09'
     })
     createdAt: string;
     
@@ -150,7 +150,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-28 00:52:05'
+        example     : '2020-07-27 18:04:40'
     })
     updatedAt: string;
     
@@ -159,7 +159,7 @@ export class ContactDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-27 01:46:58'
+        example     : '2020-07-28 02:55:34'
     })
     deletedAt: string;
     
