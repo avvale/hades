@@ -11,7 +11,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
 {
     public readonly repository: any;
     public readonly criteria: ICriteria;
-    public readonly entityName: string;
+    public readonly aggregateName: string;
     public readonly mapper: IMapper;
 
     builder(): Object
@@ -48,7 +48,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
             }
         );
         
-        if (entityInDB) throw new ConflictException(`Error to create ${this.entityName}, the id ${entity['id']['value']} already exist in database`);
+        if (entityInDB) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${entity['id']['value']} already exist in database`);
         
         try
         {
@@ -71,7 +71,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
             this.criteria.implements(queryStatements, this.builder())
         );
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!entity) throw new NotFoundException(`${this.aggregateName} not found`);
 
         // map value to create value objects
         return <Aggregate>this.mapper.mapObjectToAggregate(entity);
@@ -88,7 +88,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
             }
         );
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!entity) throw new NotFoundException(`${this.aggregateName} not found`);
 
         return <Aggregate>this.mapper.mapObjectToAggregate(entity);
     }
@@ -114,7 +114,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
             }
         );
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!entity) throw new NotFoundException(`${this.aggregateName} not found`);
 
         // clean undefined fields
         const objectLiteral = this.cleanUndefined(entity.toDTO());
@@ -133,7 +133,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
             }
         );
 
-        if (!entity) throw new NotFoundException(`${this.entityName} not found`);
+        if (!entity) throw new NotFoundException(`${this.aggregateName} not found`);
 
         await entity.destroy();
     }
