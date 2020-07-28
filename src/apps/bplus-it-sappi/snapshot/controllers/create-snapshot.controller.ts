@@ -225,8 +225,8 @@ export class CreateSnapshotController
         this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
 
         return {
-            code: 200,
-            status: ''
+            statusCode: 200,
+            message: 'Snapshot successfully registered'
         };
     } 
 }
