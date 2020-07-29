@@ -11,7 +11,8 @@ export abstract class UuidValueObject extends StringValueObject
     
     set value(value: string)
     {
-        if (!validate(value, 4)) throw new BadRequestException(`Value for ${this.validationRules.name} has value: ${this.value}, not allowed for uuid`);
+        // null and undefined validation checked in StringValueObject
+        if (value && !validate(value, 4)) throw new BadRequestException(`Value for ${this.validationRules.name} has value: ${this.value}, not allowed for uuid`);
 
         super.value = value;
     }
