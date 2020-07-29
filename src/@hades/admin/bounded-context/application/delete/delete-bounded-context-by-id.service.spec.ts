@@ -40,12 +40,12 @@ describe('DeleteBoundedContextByIdService', () =>
 
     describe('main', () => 
     {
-        it('DeleteBoundedContextByIdService should be defined', () => 
+        test('DeleteBoundedContextByIdService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should delete boundedContext and emit event', async () => 
+        test('should delete boundedContext and emit event', async () => 
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

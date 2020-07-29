@@ -5,6 +5,7 @@ moduleNames: permissions
 aggregateProperties:
   - name: id
     type: id
+    primaryKey: true
     length: 36
     nullable: false
   - name: bounded_context_id

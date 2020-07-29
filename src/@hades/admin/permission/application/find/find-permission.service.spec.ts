@@ -37,12 +37,12 @@ describe('FindPermissionService', () =>
 
     describe('main', () => 
     {
-        it('FindPermissionService should be defined', () => 
+        test('FindPermissionService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should find permission', async () => 
+        test('should find permission', async () => 
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main([])).toBe(mockRepository.collectionSource[0]);

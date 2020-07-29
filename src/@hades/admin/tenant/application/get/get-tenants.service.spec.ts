@@ -37,12 +37,12 @@ describe('GetTenantsService', () =>
 
     describe('main', () => 
     {
-        it('GetTenantsService should be defined', () => 
+        test('GetTenantsService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should get tenants', async () => 
+        test('should get tenants', async () => 
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
             expect(await service.main([])).toBe(mockRepository.collectionSource);

@@ -6,7 +6,7 @@ export class CreateBoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '9de10197-9c32-4f68-8ae9-acf02f56ed77'
+        example     : '026a47ba-5353-480b-bc65-9a0bf9402f6b'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateBoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'zhxk9yy5aug0vg9l0g04q9athm2r978i9zo4f125l2up26zu7bo5gww1b6cw1rahdy4uxrgoiu3w8p65l2aq3h1wc3wajntl3y1sfvnju0mzet6lajmcw43362jfg6pxz3iso11hagmimz8vs6cqckotgepvaim7u77l06u7ojc23df7h3bi0ehmy1f9akmost7ldpcls4m1iirqm6esqdng9lkumwiydh84zk9i8jbgmezbnfv08vzo0f36vt1'
+        example     : 'eda7mvkyrq1s2m8etzfjf1x7qjys8t9tp8t4v37i50568ba7nxb0r4xqhfpvk9wwpgkiqe1h1yr2a6pl63fiwnyz8ocx2j92ysu4hce7phmqdvcfa3g11x6ibt4jtj6ktty4vse2ejd2ld9jaab6219rphaz6570h1uuvuamhxw9pdq5gjua7812zy53up1qztlpuwfuctx8shesf2f4g70jfv2828a6u6x9xgi3r7xfapd3cni7p4f75b2a243'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateBoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'root [input here api field description]',
-        example     : 'nhl7gllcwot3malp97ra'
+        example     : 'i254ijki20js9fg3dnkk'
     })
     root: string;
     
@@ -33,7 +33,7 @@ export class CreateBoundedContextDto
     @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
-        example     : 770011
+        example     : 512163
     })
     sort: number;
     
@@ -42,7 +42,7 @@ export class CreateBoundedContextDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : false
+        example     : true
     })
     isActive: boolean;
     
