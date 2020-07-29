@@ -11,6 +11,7 @@ export class PermissionId extends UuidValueObject
             name: 'PermissionId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

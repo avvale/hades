@@ -6,7 +6,7 @@ export class UpdatePermissionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'dc694634-ad9b-4f35-9087-284a376220eb'
+        example     : '627c5997-66bf-4e3d-80f6-7a26763a2ebf'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdatePermissionDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : '2ccdda47-9886-451e-9dc2-928db63e43cd'
+        example     : '17b0817f-fbe8-41e3-a7d2-061e71833fb3'
     })
     boundedContextId: string;
     
@@ -24,7 +24,7 @@ export class UpdatePermissionDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'py7avtc4wrk0g3rsjmlr9l0byuun98hqvyep718fd6y61ia2uo7e3mvg9loewjpaihb5q4t0tp4v9vdq6p5ad5981n5gub0msesygdcvhljhcb2ofl19zio466s3jh3825qid9suk0tgb05p8edlih1m7jr7ihcg1w9tsmtzk01rpsd19cotx3hdwjrt7wgxq2sckygosf4gfgv31zsuv1xh5nj8t29zkxbw373una4gz1nxzup1pmimx5w7pox'
+        example     : 'pziixgna63fash1uh1hc2brw56s7ohwxtqeoqqklgbu8e4i8q1q191zc2uac8zlsoxtnidiymwyrbtfyafzz1e3jvjv298fgen8ccm3p2d7h0fhkq3kmhouhxxtua43duxnsc9lhe2olsuaiieh2ya7yjyyfn9wn7cy8itci4xh5ya3yb9qqf3u6kuat09wex33ivualz088sxj91pcaq40jelp6ppbnwh1pwkkl1wdp7j1b9msnxrcahilgm0f'
     })
     name: string;
     

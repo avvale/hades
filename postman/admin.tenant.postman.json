@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "6ff55c67-5994-41d9-85d9-667591a76512",
+		"_postman_id"   : "40c5d9fc-09c0-40a3-bf42-5af700709c5d",
 		"name"          : "@hades - admin/tenant",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -14,7 +14,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:AdminCreateTenantInput!)\n{\n\tadminCreateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316\", \n\t\t\"name\": \"u\", \n\t\t\"code\": \"jss1nfgrja0lir104xqu7j8i3pjpj5w1uj7ujf1h9clmiwa67p\", \n\t\t\"logo\": \"c\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"1b552b0d-1718-4b66-b041-b74e81731088\", \n\t\t\"name\": \"c\", \n\t\t\"code\": \"b813jjx4zj9l060ynph95h0lys3y1hg05mppbyjzsguisxq1zi\", \n\t\t\"logo\": \"n\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
 					}
 				},
 				"url": {
@@ -38,7 +38,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[AdminCreateTenantInput]!)\n{\n\tadminCreateTenants (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"19f8cd5d-4912-4a96-b456-365854c6a3fd\", \n\t\t\t\"name\": \"m\", \n\t\t\t\"code\": \"5q988fb92r074qw1a91jqyvxto6qdfuwkc5mlk9t7564i5h2yr\", \n\t\t\t\"logo\": \"3\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5268ad69-35d6-4f8d-898a-028f70d6d038\", \n\t\t\t\"name\": \"c\", \n\t\t\t\"code\": \"lrjtinwe6ayfaxng5hhh7hy7wwik0s85qv3d88ackucax9jvw2\", \n\t\t\t\"logo\": \"k\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"105e1187-1eca-422a-8de3-2e9084d8669a\", \n\t\t\t\"name\": \"w\", \n\t\t\t\"code\": \"peatp39zbx9or1dwddvqyixwr6z6qi8i3bs7bkdm9h9bx8e6is\", \n\t\t\t\"logo\": \"y\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"901af7db-e0e8-4ad6-843e-db8adf67b94e\", \n\t\t\t\"name\": \"8\", \n\t\t\t\"code\": \"s5ydnq32pdd14kwq8tu31cc7ruzulwo8vcwgdot4qnjgihpbqc\", \n\t\t\t\"logo\": \"9\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b3e97836-baf9-4a58-aa98-4a577442ab81\", \n\t\t\t\"name\": \"3\", \n\t\t\t\"code\": \"1p4uwk8va65gjkqvvalbxarphffy9fh54uy16mlopbd6bvvrqb\", \n\t\t\t\"logo\": \"6\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"812eaecf-96e8-457d-80eb-1676f051cbe7\", \n\t\t\t\"name\": \"2\", \n\t\t\t\"code\": \"q2sqbcvgprrpijkqo6m3r5br1pm9npv2gziesx1n0f3e0rhy8a\", \n\t\t\t\"logo\": \"b\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8937d397-b870-4c7b-99c2-856aae28a493\", \n\t\t\t\"name\": \"2\", \n\t\t\t\"code\": \"kctxci5ix43iii7ye05816ypjt1ic1evrd2uylsgzzd0hgu5qm\", \n\t\t\t\"logo\": \"b\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"aa4cd82d-1b60-4a42-9f10-9bbdbde0dbf6\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"code\": \"ye4kntnnnmd4nad8u86gfg19s7j1bqcwfkbs4ta4gqwyhcw9hn\", \n\t\t\t\"logo\": \"s\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"39c81630-5d39-4c8f-83bb-8c6e6f6ea4f1\", \n\t\t\t\"name\": \"c\", \n\t\t\t\"code\": \"hcnaz744ikkotz8tkreqxta1low3xogfeaflsuhxq4zhjroc98\", \n\t\t\t\"logo\": \"2\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"91119e13-d4c0-4a0f-89f0-217112ad340a\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"code\": \"ncm2aa2989rnlma2j5kjviw1wroft9qdwyipy9ydmkz4k1wh9q\", \n\t\t\t\"logo\": \"r\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"df26ac46-f0de-4fac-96c0-6a740b4c282e\", \n\t\t\t\"name\": \"0\", \n\t\t\t\"code\": \"3kxrgpis7r6kv3lgx0jbd0sle1h1h6t3v44o9vo3xjw7huhziv\", \n\t\t\t\"logo\": \"6\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"74abe4d4-1c66-4ae2-8ede-4f606cc2e7c1\", \n\t\t\t\"name\": \"q\", \n\t\t\t\"code\": \"gcv672oc6itswfjkbeozczw4tpr2t2bpjfjmn5l3jozgef4zj7\", \n\t\t\t\"logo\": \"8\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"74fbe7c2-0cae-4b6b-8d43-14c8bae82114\", \n\t\t\t\"name\": \"u\", \n\t\t\t\"code\": \"m59mm98s1qdhyfckn7oylu6g0jqe1w7316a77zbx0pnzxi3nbn\", \n\t\t\t\"logo\": \"w\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4058cbfa-090c-4866-ad3b-732c845092d6\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"code\": \"l5fpithtuib9cindv6ge4rvxp2u6qvd7f98568tir0uxb8g9cm\", \n\t\t\t\"logo\": \"v\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3c0dfec7-047f-4fd8-a153-e8958e61648f\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"code\": \"jp9php8jcwr0nxlek43l3k39necwnnxt9zwc5dta4lhak6eqok\", \n\t\t\t\"logo\": \"x\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f331d2ce-f99e-4f14-b692-00a62b94b339\", \n\t\t\t\"name\": \"o\", \n\t\t\t\"code\": \"91nhigmhqsqpd11t5i7a3j3bowedfzxy3x889n5odw98cemhj7\", \n\t\t\t\"logo\": \"w\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"03c38466-57c9-4192-8180-26e1bc2730f6\", \n\t\t\t\"name\": \"5\", \n\t\t\t\"code\": \"w1a9herjjj8rf2a63jntgoicd3san2tbuar7fx02dfix3u08jg\", \n\t\t\t\"logo\": \"j\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"15266394-418d-4695-88f5-8c0b78ac2e0a\", \n\t\t\t\"name\": \"3\", \n\t\t\t\"code\": \"m7fvfc8ck35n8vo8fg7s5ehd3ofhm7rn7fq66z8oxkdx9jjrym\", \n\t\t\t\"logo\": \"z\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c6944630-b923-4740-acae-df4bbcf1245e\", \n\t\t\t\"name\": \"8\", \n\t\t\t\"code\": \"8hvgseo1u9nodvg1mftlq4kfgaftxgavlgf5z4k0mp9qt525e6\", \n\t\t\t\"logo\": \"s\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"eb6ff69c-eff0-4f47-b741-1b37c82a5540\", \n\t\t\t\"name\": \"l\", \n\t\t\t\"code\": \"1vqoq22zmfaarg1e8ovnstrcza66v70hdnw5yy16xzsn3d0cki\", \n\t\t\t\"logo\": \"g\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"6955bbc8-b503-4615-909a-20dd51fa21bc\", \n\t\t\t\"name\": \"r\", \n\t\t\t\"code\": \"77v35do4l8ynld28tdbn5f58dr5mq5r7vv0etz7snoqa2jw5px\", \n\t\t\t\"logo\": \"x\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c724e6f9-ae46-4a44-8a71-469f1bffb596\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"code\": \"j1w3uaw21y9fh95q8dpvqdag23btp4livbjkbxu6w2ccc420eu\", \n\t\t\t\"logo\": \"b\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"517ff3d8-92af-4511-9827-a9900f2e8e90\", \n\t\t\t\"name\": \"9\", \n\t\t\t\"code\": \"h673upmdit409rnjeh34z7mpy1vhxp99a1h4nnj47aarmofl1t\", \n\t\t\t\"logo\": \"9\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"130f4c2e-bee2-4209-b934-3c032f63e74b\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"code\": \"ug305eaip7wv2o53hdvdxnof7a2o353w20cdqieorkwio96jbq\", \n\t\t\t\"logo\": \"w\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5199f8f2-16ab-4cbe-91a2-96f10a7bec48\", \n\t\t\t\"name\": \"m\", \n\t\t\t\"code\": \"1q9zc47pnpgr0airlncpthzdp165tzx3sc8ijq5hkjuws2il5f\", \n\t\t\t\"logo\": \"j\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3ae28555-0e2f-4a23-89a7-8399e079b804\", \n\t\t\t\"name\": \"1\", \n\t\t\t\"code\": \"51egnk8eohs9cc12pv8zfvlh4gybxhmr210m5w0djmgf78h6kt\", \n\t\t\t\"logo\": \"w\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0fb5f426-f2ba-4e89-9c43-5a722c8d4a4c\", \n\t\t\t\"name\": \"y\", \n\t\t\t\"code\": \"wlcs14rbixnrpfot8mgvfs7aldpy43t7e088mf58fz849ptjhf\", \n\t\t\t\"logo\": \"e\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3629d4a5-9c67-4b21-9ad0-782505fbead7\", \n\t\t\t\"name\": \"c\", \n\t\t\t\"code\": \"cis054fcrqd0tp16jb86axghryciq1hrd5ly1p3w7bfbumko3n\", \n\t\t\t\"logo\": \"u\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f9d89430-1b3e-4a0a-81ba-57e17a0f60ed\", \n\t\t\t\"name\": \"f\", \n\t\t\t\"code\": \"5yvcvy6xq618ith1ohwskefxgeac6ycwm6og47nx0hb5qrhgbn\", \n\t\t\t\"logo\": \"d\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c3ba0a6b-8785-4ac0-909a-ba8cca42af60\", \n\t\t\t\"name\": \"r\", \n\t\t\t\"code\": \"uowfe97ckrn0mo28rlgp7yqx7nzmvzb2tj4gkeomidv32uxyyb\", \n\t\t\t\"logo\": \"w\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"336ed85e-d431-4480-9825-0b36f313117c\", \n\t\t\t\"name\": \"x\", \n\t\t\t\"code\": \"ho7kzxbyqvdzxi2bh3nwe97ke63izjqwrrmtiqgbrqnp4xvh8y\", \n\t\t\t\"logo\": \"d\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"48008324-30f2-4f04-8ad0-7e0e95eef619\", \n\t\t\t\"name\": \"6\", \n\t\t\t\"code\": \"961qsgpcyw3d49uz3oaba4ti0f39wu6gdgymt5pazjm1c438b2\", \n\t\t\t\"logo\": \"y\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"72a2f54b-677f-4d5e-a61d-4163579818c5\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"code\": \"njiaezz4agphpqfgppsk90j0l93rw8wdgomttkpxbm8cnjpzcq\", \n\t\t\t\"logo\": \"v\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c99224ad-c51d-400a-9513-af510993257c\", \n\t\t\t\"name\": \"p\", \n\t\t\t\"code\": \"rs8300ms56gsl08p430lj8q946duglvzzpgh6j3n9simsjyhh3\", \n\t\t\t\"logo\": \"p\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5d6182b8-56ac-4678-acf8-93848ed76ba7\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"code\": \"6tz37q3xway593szb5zm8plw6emtoclfpqlfw61kfy02mr61of\", \n\t\t\t\"logo\": \"2\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3623b3a9-e5b0-4837-9915-88a6cfc8a4cc\", \n\t\t\t\"name\": \"e\", \n\t\t\t\"code\": \"xz96n0qtawr2g7hfm5csy1p0eoezl7paac08flhmtfra7n6b4e\", \n\t\t\t\"logo\": \"7\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"728335f7-dc9d-4cb8-9267-66f42d613b19\", \n\t\t\t\"name\": \"q\", \n\t\t\t\"code\": \"sl3byt36kwdyvndwepjkmronu596uyp76yrxvv9gfqpu37awnz\", \n\t\t\t\"logo\": \"t\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bde2ce7d-18f8-4103-aad2-6fb9afb43bb2\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"code\": \"hr12cpag78poukbdxm3qg4v0dc4ojv9k1nrw09q4yeey3dy8nt\", \n\t\t\t\"logo\": \"u\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"67af62ca-2eb5-4a76-98d5-df0dfc12456f\", \n\t\t\t\"name\": \"4\", \n\t\t\t\"code\": \"ns5ahxc3mcvgnyt6zdglprz775otw2cstpmwrp7w9cb9xxchh7\", \n\t\t\t\"logo\": \"3\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7806394d-98e1-4fa6-ba04-2fbbda33db9b\", \n\t\t\t\"name\": \"c\", \n\t\t\t\"code\": \"k2s3mee8w7u92ca1mdvd10boev60l3dwxrzboyq42d6zsryv27\", \n\t\t\t\"logo\": \"s\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -86,7 +86,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:[QueryStatementInput])\n{\n\tadminGetTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316\"\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"1b552b0d-1718-4b66-b041-b74e81731088\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -110,7 +110,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:[QueryStatementInput])\n{\n\tadminFindTenant (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316\"\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"1b552b0d-1718-4b66-b041-b74e81731088\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -134,7 +134,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($id:ID)\n{\n\tadminFindTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316\"\n}"
+						"variables": "{\n\t\"id\": \"1b552b0d-1718-4b66-b041-b74e81731088\"\n}"
 					}
 				},
 				"url": {
@@ -158,7 +158,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:AdminUpdateTenantInput!)\n{\n\tadminUpdateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316\", \n\t\t\"name\": \"m\", \n\t\t\"code\": \"lincj4ywfsag3hc4ngyrglsqp6hj0svw9mlnxrs24nozxyg9gx\", \n\t\t\"logo\": \"w\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"1b552b0d-1718-4b66-b041-b74e81731088\", \n\t\t\"name\": \"t\", \n\t\t\"code\": \"uvtnlxg4yd90i0rw33lhvwfkerhbeg53i9xws2pz91e7jma4wj\", \n\t\t\"logo\": \"f\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
 					}
 				},
 				"url": {
@@ -182,7 +182,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($id:ID!)\n{\n\tadminDeleteTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316\"\n}"
+						"variables": "{\n\t\"id\": \"1b552b0d-1718-4b66-b041-b74e81731088\"\n}"
 					}
 				},
 				"url": {
@@ -235,7 +235,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316\", \n\t\"name\": \"n\", \n\t\"code\": \"l3lx5u4cbj1bda0gmu1qwsu2bbbr4l89xmbnkj7upcuixjwfmx\", \n\t\"logo\": \"u\", \n\t\"isActive\": false, \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"raw"   : "{\n\t\"id\": \"1b552b0d-1718-4b66-b041-b74e81731088\", \n\t\"name\": \"x\", \n\t\"code\": \"jfsvjthfppwt2lgd7xm4oy5fi0z62rii48v39hey9npdoxgz2b\", \n\t\"logo\": \"v\", \n\t\"isActive\": false, \n\t\"data\": { \"foo\" : \"bar\" }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -269,7 +269,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"58204e0d-408f-4728-ab47-3de82c35277f\", \n\t\t\"name\": \"o\", \n\t\t\"code\": \"l4dnrk0ivoe6ld6j5z2n7ypgdwz7w1i8pakr26iw90x17fqjj9\", \n\t\t\"logo\": \"f\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"05a53f74-dea0-4f41-8b23-dff5011d7a2d\", \n\t\t\"name\": \"a\", \n\t\t\"code\": \"rfpnennw47boq48wnh09wiki3r57rgy7llq1sewo1uha73hkhl\", \n\t\t\"logo\": \"c\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5205edb3-9678-49f1-9256-89eb9f1691be\", \n\t\t\"name\": \"c\", \n\t\t\"code\": \"qijdkonkh3mexvg3cp5ipa7lu0yyokykk8ncsaqkdx1vbeonsp\", \n\t\t\"logo\": \"w\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"46bb530e-190e-4a47-ada6-4a681dce6086\", \n\t\t\"name\": \"u\", \n\t\t\"code\": \"nnmxq1ssk13iq2tvwm7rjknzjndr4nu7jhebrqnrfqzuip98mn\", \n\t\t\"logo\": \"x\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"2636d33e-b704-46bd-a2ef-627313a2feac\", \n\t\t\"name\": \"d\", \n\t\t\"code\": \"ym951zm4cio2g8b7zdveltw87pv6amllfpbijume8k90yaygq9\", \n\t\t\"logo\": \"r\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"e1ac81b7-f3f0-492f-bcec-2121c111bd34\", \n\t\t\"name\": \"j\", \n\t\t\"code\": \"4a27y2qcrclszdqgqhtj7wfk8hnemdo7esgss9xxtrhk613r5h\", \n\t\t\"logo\": \"2\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"46fbb85f-8b91-4954-bef6-c2e899951a73\", \n\t\t\"name\": \"f\", \n\t\t\"code\": \"5wbfo36rr6w4p4ukramv1n9ebho3y2y8m9fvby6yu1uexrwlkj\", \n\t\t\"logo\": \"g\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"35809ced-c76f-40e3-ac48-d5fda783a21e\", \n\t\t\"name\": \"3\", \n\t\t\"code\": \"0k65s8jm4hvgwtjnkcgbbpgkedknaqclgxivq7craz3cfmnty9\", \n\t\t\"logo\": \"j\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"029b2d8c-04a0-481b-ac1c-f5f4783f41df\", \n\t\t\"name\": \"g\", \n\t\t\"code\": \"ndpe5ch5nc6yy34786y0l0xsf50c2bqfr6sj19f2fi1ntin323\", \n\t\t\"logo\": \"d\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"2d8b67ca-8651-44fe-a4f3-0cf7fa37c9c3\", \n\t\t\"name\": \"6\", \n\t\t\"code\": \"7raqln8rhunvkqtsc4xocdla3adtqhqk2rnymijdh7v6spfr4r\", \n\t\t\"logo\": \"s\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"ab19a6b1-ebcc-49a5-8f84-af7339a368fd\", \n\t\t\"name\": \"e\", \n\t\t\"code\": \"nw5ttqhsu9sowcrroglwhei0fstsnv2wxcobzuxwieyf9s97pj\", \n\t\t\"logo\": \"i\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5edadf9f-03ea-411e-9924-5d8fe1e75bae\", \n\t\t\"name\": \"w\", \n\t\t\"code\": \"1qd8j2ihah8skhnsotyw5sp04bx7seeqdbh7j4l1ml30smjf1e\", \n\t\t\"logo\": \"l\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"e8d2853f-b932-4487-9789-4ae191b9a5e6\", \n\t\t\"name\": \"6\", \n\t\t\"code\": \"mzuo0urwmh6lkyofxtowr27lm09frrb42or1am190he9g03u6b\", \n\t\t\"logo\": \"t\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"1617dc3b-60b5-472e-a5af-49fa4060ecf8\", \n\t\t\"name\": \"w\", \n\t\t\"code\": \"ynj2t9yur7cyk68qripl06mcfi590vmrncdhcrhvfc0nc1dyua\", \n\t\t\"logo\": \"c\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"a2fc9c18-f8fe-4bc0-a801-433a423e16cd\", \n\t\t\"name\": \"j\", \n\t\t\"code\": \"g36qxuvymb0mn21nfm11drpzghs25eko2krhcbxm0tlimyybyc\", \n\t\t\"logo\": \"r\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"4caede9b-c28c-4907-9d9b-c726731129c8\", \n\t\t\"name\": \"6\", \n\t\t\"code\": \"w7mvrsecbknmdupqa17bssqqbhnfapmvefu5c1bh1jxxyuhrwt\", \n\t\t\"logo\": \"d\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"30c03126-fde8-4172-93af-9b4b3bd1347d\", \n\t\t\"name\": \"6\", \n\t\t\"code\": \"m27oau034wp80rtsjix204q0082tqkqpaljsqv5ikexysf51w3\", \n\t\t\"logo\": \"t\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"f618852b-46b4-4118-9b36-1dac307ef768\", \n\t\t\"name\": \"u\", \n\t\t\"code\": \"8cyclshlnsuli126g3ucj5b69wc3tbxv5z5k3omm8qfvbubyo5\", \n\t\t\"logo\": \"9\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5392a0a9-712b-4233-9749-c53bb19d09ae\", \n\t\t\"name\": \"r\", \n\t\t\"code\": \"qhimo0r8f7t24d20humzywxylhm7c8zf4q1garsejaz2bw9hqo\", \n\t\t\"logo\": \"9\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"b453906b-46e6-4c55-9b84-defb73f25068\", \n\t\t\"name\": \"z\", \n\t\t\"code\": \"i19bupx35z1w48y9x072odb3zzpfj4c6t7lcsiw5csgxewo5gg\", \n\t\t\"logo\": \"0\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"eb465630-3ede-4fc6-9749-8fe82ee59a27\", \n\t\t\"name\": \"5\", \n\t\t\"code\": \"8t3p71n0yfct84yh3wu303559qpbawq49b5s554dndzybiebas\", \n\t\t\"logo\": \"p\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"87030381-0dda-481d-a684-d14ced196fd3\", \n\t\t\"name\": \"0\", \n\t\t\"code\": \"rl01eqf4b845wtk5lf36izwd4l85o2vhhz4pr6knwg1ysvzjra\", \n\t\t\"logo\": \"5\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"62ff6105-b0d2-485f-9422-a101e62684ec\", \n\t\t\"name\": \"p\", \n\t\t\"code\": \"nph9nzpbi3a8i6mthm6tzgiku08b12bjtmh585btmgjhj7uvqi\", \n\t\t\"logo\": \"n\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"8a143b0a-f83a-41cd-adf1-6f773470cf6f\", \n\t\t\"name\": \"x\", \n\t\t\"code\": \"iyl8pwu07221cvim4s5m2k3a9di78151j8qttqw2mcw5d0pelx\", \n\t\t\"logo\": \"0\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"23241737-6ac9-462c-a620-f74a33df3d0d\", \n\t\t\"name\": \"2\", \n\t\t\"code\": \"yzhakhsb93yzgjjfkbr60dnq2ipkrnm1f3t2tsuy1gt7g1ronq\", \n\t\t\"logo\": \"7\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"c2c56cc7-a735-48ee-84dc-79b6459372c3\", \n\t\t\"name\": \"v\", \n\t\t\"code\": \"e7hc476u6ly3hwzj6euwyxi4pe2u7rwyz97lzk711svltugq4d\", \n\t\t\"logo\": \"5\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5d9cb9ce-d12f-498b-b2a7-f296d6de2256\", \n\t\t\"name\": \"y\", \n\t\t\"code\": \"5ia6fo8nnpeyaz71j22lbnpwayxfzktxv02b2ry0inujflt4u5\", \n\t\t\"logo\": \"v\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"99f99d71-7eae-429b-9b72-7506eb29cf6f\", \n\t\t\"name\": \"s\", \n\t\t\"code\": \"4hz8e83yh95cg5iwlgjyknacmhph4xr5zd3tmwggt3mwvj9bst\", \n\t\t\"logo\": \"o\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6fe7918f-9735-45b9-9381-e191534213b1\", \n\t\t\"name\": \"a\", \n\t\t\"code\": \"iil4f1wnag6alr60y84jbvjeyjuf7iizll7zkurs08f8mhxhlk\", \n\t\t\"logo\": \"i\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"e4f5a10b-4b0f-43fd-bd87-969868db9571\", \n\t\t\"name\": \"r\", \n\t\t\"code\": \"5qahsvza3gn3pwamv07000u3gbxgcst4da5z7pesufo312zvq2\", \n\t\t\"logo\": \"7\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"b585c6f5-c0f4-42db-ac14-566985ac4536\", \n\t\t\"name\": \"8\", \n\t\t\"code\": \"7k687hcuxv10kmo8u44ip0umx7q8vfbxzm72ahgtde50erhufc\", \n\t\t\"logo\": \"x\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"2f8a7fba-4e8f-4f9a-8976-9dc96e040bc0\", \n\t\t\"name\": \"e\", \n\t\t\"code\": \"5ozui5m156zarc631pl3qrnokzqqsu51q2xsnbzsifs68ikswi\", \n\t\t\"logo\": \"a\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"80225ebd-bbe9-42d0-81b5-0c3d34ee0d9d\", \n\t\t\"name\": \"6\", \n\t\t\"code\": \"7htpni2hy7nduqwl117pyyre6okx9tjq9yzk91euqaadorvdgd\", \n\t\t\"logo\": \"w\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"1042a202-c39e-4994-b311-72c62e334b01\", \n\t\t\"name\": \"3\", \n\t\t\"code\": \"zvxy7sxr6piq9vcfpmtbn5gsnz9cne7opfwx5coub8hfchvsdq\", \n\t\t\"logo\": \"f\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"e0d9064d-8953-4a57-a558-ff35d87fb86d\", \n\t\t\"name\": \"u\", \n\t\t\"code\": \"w98m6hn0ytj5e2v45letjx2e7zcowwpd7m87uw8821ov8vgezu\", \n\t\t\"logo\": \"p\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"2099cdec-8099-4a3a-a234-3a8ed844fe7f\", \n\t\t\"name\": \"4\", \n\t\t\"code\": \"b5xtisvq7hdthx8e1qkterrwjdzv9rkkyvpx88adbr8tvpia4q\", \n\t\t\"logo\": \"h\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"fd7a18a3-3bbd-4bdf-8904-dba9973ffed2\", \n\t\t\"name\": \"1\", \n\t\t\"code\": \"7mb3g80zoo67vdsol0h44lvthrfbsgbjpmpw9dkg0y4ma2skil\", \n\t\t\"logo\": \"4\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"1783620f-8839-4bda-b458-02b42a8ef098\", \n\t\t\"name\": \"u\", \n\t\t\"code\": \"dwc9hv09p11vgl2jvd5jnlc5zw8jw0sos0dhhy7xgqzuuwrkn6\", \n\t\t\"logo\": \"d\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"4d08ea63-d6db-4acb-b68a-d740db474b6e\", \n\t\t\"name\": \"g\", \n\t\t\"code\": \"lw3fcr3roidx7ii2i8m3e3n5pquz5nn6bq57guu0npogto8u30\", \n\t\t\"logo\": \"t\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"fe53b083-12c0-4b9c-b7f2-66d6bdd30637\", \n\t\t\"name\": \"a\", \n\t\t\"code\": \"d0v25ikb4qlw64azygx2dvgw7fqj0fofobr4mos1ezjzndd19s\", \n\t\t\"logo\": \"k\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -344,7 +344,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316\"\n\t\t}\n\t]\n}",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"1b552b0d-1718-4b66-b041-b74e81731088\"\n\t\t}\n\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -381,7 +381,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316\"\n\t\t}\n\t]\n}",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"1b552b0d-1718-4b66-b041-b74e81731088\"\n\t\t}\n\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -426,14 +426,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/admin/tenant/39e96ab0-63d6-4e7d-882c-9cbe5d2aa316",
+					"raw": "{{URL}}/admin/tenant/1b552b0d-1718-4b66-b041-b74e81731088",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin",
 						"tenant",
-						"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316"
+						"1b552b0d-1718-4b66-b041-b74e81731088"
 					]
 				}
 			},
@@ -453,7 +453,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316\", \n\t\"name\": \"d\", \n\t\"code\": \"0sar1lwukp2sow3zjl4hdo1frivq8oksy61kep96frlfwfw9ic\", \n\t\"logo\": \"v\", \n\t\"isActive\": false, \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"raw"   : "{\n\t\"id\": \"1b552b0d-1718-4b66-b041-b74e81731088\", \n\t\"name\": \"v\", \n\t\"code\": \"fg0rjexywpfgqt0voicx3u8sjlp2fornlhj89ar3286doassdb\", \n\t\"logo\": \"y\", \n\t\"isActive\": false, \n\t\"data\": { \"foo\" : \"bar\" }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -495,14 +495,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/admin/tenant/39e96ab0-63d6-4e7d-882c-9cbe5d2aa316",
+					"raw": "{{URL}}/admin/tenant/1b552b0d-1718-4b66-b041-b74e81731088",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin",
 						"tenant",
-						"39e96ab0-63d6-4e7d-882c-9cbe5d2aa316"
+						"1b552b0d-1718-4b66-b041-b74e81731088"
 					]
 				}
 			},
@@ -545,7 +545,7 @@
     ],
     "variable": [
 		{
-			"id": "419848e6-6629-4ce6-8482-dbfc5651cd27",
+			"id": "806b348e-1b23-4858-85e1-2893e0edc716",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

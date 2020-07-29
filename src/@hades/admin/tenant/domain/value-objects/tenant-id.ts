@@ -11,6 +11,7 @@ export class TenantId extends UuidValueObject
             name: 'TenantId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

@@ -6,7 +6,7 @@ export class UpdateLangDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '3e5b1cd6-6860-48b3-b4b4-a442d46a981d'
+        example     : '90adffbc-f061-427e-873f-b06380a8cf31'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateLangDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'o'
+        example     : '6'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class UpdateLangDto
     @ApiProperty({
         type        : String,
         description : 'image [input here api field description]',
-        example     : '0'
+        example     : 'a'
     })
     image: string;
     
@@ -33,7 +33,7 @@ export class UpdateLangDto
     @ApiProperty({
         type        : String,
         description : 'iso6392 [input here api field description]',
-        example     : 'nt'
+        example     : 'ac'
     })
     iso6392: string;
     
@@ -42,7 +42,7 @@ export class UpdateLangDto
     @ApiProperty({
         type        : String,
         description : 'iso6393 [input here api field description]',
-        example     : '23o'
+        example     : '5dv'
     })
     iso6393: string;
     
@@ -51,7 +51,7 @@ export class UpdateLangDto
     @ApiProperty({
         type        : String,
         description : 'ietf [input here api field description]',
-        example     : 'honc3'
+        example     : 'up76r'
     })
     ietf: string;
     
@@ -60,7 +60,7 @@ export class UpdateLangDto
     @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
-        example     : 880708
+        example     : 172182
     })
     sort: number;
     

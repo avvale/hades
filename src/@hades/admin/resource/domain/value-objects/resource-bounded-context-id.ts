@@ -11,6 +11,7 @@ export class ResourceBoundedContextId extends UuidValueObject
             name: 'ResourceBoundedContextId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }
