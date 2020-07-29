@@ -51,7 +51,7 @@ describe('CreateChannelDetailCommandHandler', () =>
                     channelsDetail[0].executionMonitoringStartAt,
                     channelsDetail[0].executionMonitoringEndAt,
                     channelsDetail[0].status,
-                    channelsDetail[0].channelId,
+                    channelsDetail[0].channelHash,
                     channelsDetail[0].channelSapId,
                     channelsDetail[0].channelParty,
                     channelsDetail[0].channelComponent,

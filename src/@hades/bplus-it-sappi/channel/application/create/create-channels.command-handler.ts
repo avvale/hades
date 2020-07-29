@@ -3,6 +3,7 @@ import { CreateChannelsCommand } from './create-channels.command';
 import { CreateChannelsService } from './create-channels.service';
 import { 
     ChannelId, 
+    ChannelHash, 
     ChannelTenantId, 
     ChannelTenantCode, 
     ChannelSystemId, 
@@ -53,6 +54,7 @@ export class CreateChannelsCommandHandler implements ICommandHandler<CreateChann
                 .map(channel => { 
                     return {
                         id: new ChannelId(channel.id),
+                        hash: new ChannelHash(channel.hash),
                         tenantId: new ChannelTenantId(channel.tenantId),
                         tenantCode: new ChannelTenantCode(channel.tenantCode),
                         systemId: new ChannelSystemId(channel.systemId),

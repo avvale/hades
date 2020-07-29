@@ -41,6 +41,7 @@ describe('CreateChannelCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateChannelCommand(
                     channels[0].id,
+                    channels[0].hash,
                     channels[0].tenantId,
                     channels[0].tenantCode,
                     channels[0].systemId,

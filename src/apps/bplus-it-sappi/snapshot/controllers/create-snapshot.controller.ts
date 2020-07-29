@@ -1,4 +1,5 @@
-import { CreateDataLakeCommand } from './../../../../@hades/bplus-it-sappi/data-lake/application/create/create-data-lake.command';
+import { CreateDataLakeCommand } from '@hades/bplus-it-sappi/data-lake/application/create/create-data-lake.command';
+import { Utils } from '@hades/shared/domain/lib/utils';
 import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
@@ -155,7 +156,7 @@ export class CreateSnapshotController
                 executionExecutedAt: payload.execution.executedAt,
                 executionMonitoringStartAt: payload.execution.monitoringStartAt,
                 executionMonitoringEndAt: payload.execution.monitoringEndAt,
-                flowId: null,
+                flowHash: Utils.sha1(tenant.code + system.name + message.flowParty + message.flowComponent +  message.flowInterfaceName + message.flowInterfaceNamespace),
                 flowParty: message.flowParty,
                 flowComponent: message.flowComponent,
                 flowInterfaceName: message.flowInterfaceName,
@@ -195,7 +196,7 @@ export class CreateSnapshotController
                 executionMonitoringStartAt: payload.execution.monitoringStartAt,
                 executionMonitoringEndAt: payload.execution.monitoringEndAt,
                 status: channel.status,
-                channelId: null,
+                channelHash: Utils.sha1(tenant.code + system.name + channel.channelParty + channel.channelComponent + channel.channelName),
                 channelSapId: channel.channelSapId,
                 channelParty: channel.channelParty,
                 channelComponent: channel.channelComponent,

@@ -13,6 +13,7 @@ enum BplusItSappiChannelAdapterStatus {
 type BplusItSappiChannel
 {
     id: ID!
+    hash: GraphQLString!
     tenantId: ID!
     tenantCode: GraphQLString!
     systemId: ID!
@@ -54,6 +55,7 @@ type BplusItSappiChannel
 input BplusItSappiCreateChannelInput
 {
     id: ID!
+    hash: GraphQLString!
     tenantId: ID!
     tenantCode: GraphQLString!
     systemId: ID!
@@ -92,6 +94,7 @@ input BplusItSappiCreateChannelInput
 input BplusItSappiUpdateChannelInput
 {
     id: ID!
+    hash: GraphQLString
     tenantId: ID
     tenantCode: GraphQLString
     systemId: ID

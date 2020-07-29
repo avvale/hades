@@ -3,6 +3,7 @@ import { UpdateFlowCommand } from './update-flow.command';
 import { UpdateFlowService } from './update-flow.service';
 import { 
     FlowId, 
+    FlowHash, 
     FlowTenantId, 
     FlowTenantCode, 
     FlowSystemId, 
@@ -39,6 +40,7 @@ export class UpdateFlowCommandHandler implements ICommandHandler<UpdateFlowComma
         // call to use case and implements ValueObjects
         await this.updateFlowService.main(
             new FlowId(command.id),
+            new FlowHash(command.hash, { undefinable: true }),
             new FlowTenantId(command.tenantId, { undefinable: true }),
             new FlowTenantCode(command.tenantCode, { undefinable: true }),
             new FlowSystemId(command.systemId, { undefinable: true }),

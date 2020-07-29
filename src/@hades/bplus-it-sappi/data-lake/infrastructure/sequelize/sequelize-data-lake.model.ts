@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany } from 'sequelize-typescript';
+import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infrastructure/sequelize/sequelize-execution.model';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
@@ -7,23 +7,31 @@ import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/s
 export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel> 
 { 
         
+    
     @Column({
         field: 'id',
         primaryKey: true,
         allowNull: false,
         type: DataTypes.UUID,
+        
     })
     id: string;
         
              
         
-    @ForeignKey(() => BplusItSappiExecutionModel)
     
     @Column({
         field: 'execution_id',
         primaryKey: false,
         allowNull: false,
         type: DataTypes.UUID,
+        
+        references: {
+            model: BplusItSappiExecutionModel,
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION',
     })
     executionId: string;
         
@@ -32,13 +40,19 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     execution: BplusItSappiExecutionModel;
              
         
-    @ForeignKey(() => AdminTenantModel)
     
     @Column({
         field: 'tenant_id',
         primaryKey: false,
         allowNull: false,
         type: DataTypes.UUID,
+        
+        references: {
+            model: AdminTenantModel,
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION',
     })
     tenantId: string;
         
@@ -47,51 +61,61 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     tenant: AdminTenantModel;
              
         
+    
     @Column({
         field: 'tenant_code',
         primaryKey: false,
         allowNull: false,
         type: DataTypes.STRING(50),
+        
     })
     tenantCode: string;
         
              
         
+    
     @Column({
         field: 'payload',
         primaryKey: false,
         allowNull: false,
         type: DataTypes.JSON,
+        
     })
     payload: any;
         
              
         
+    
     @Column({
         field: 'created_at',
         primaryKey: false,
         allowNull: true,
         type: DataTypes.DATE,
+        
     })
     createdAt: string;
         
              
         
+    
     @Column({
         field: 'updated_at',
         primaryKey: false,
         allowNull: true,
         type: DataTypes.DATE,
+        
     })
     updatedAt: string;
         
              
         
+    
     @Column({
         field: 'deleted_at',
         primaryKey: false,
         allowNull: true,
         type: DataTypes.DATE,
+        
     })
     deletedAt: string;
         

@@ -25,6 +25,7 @@ export class AddFlowsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(flow => 
                     new CreatedFlowEvent(
                         flow.id.value,
+                        flow.hash.value,
                         flow.tenantId.value,
                         flow.tenantCode.value,
                         flow.systemId.value,
@@ -63,6 +64,7 @@ export class AddFlowsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(flow => 
                     new DeletedFlowEvent(
                         flow.id.value,
+                        flow.hash.value,
                         flow.tenantId.value,
                         flow.tenantCode.value,
                         flow.systemId.value,

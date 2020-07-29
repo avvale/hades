@@ -1,4 +1,5 @@
 export { ChannelId } from './channel-id';
+export { ChannelHash } from './channel-hash';
 export { ChannelTenantId } from './channel-tenant-id';
 export { ChannelTenantCode } from './channel-tenant-code';
 export { ChannelSystemId } from './channel-system-id';

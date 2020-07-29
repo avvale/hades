@@ -5,10 +5,18 @@ moduleNames: flows
 aggregateProperties:
   - name: id
     type: id
+    primaryKey: true
     length: 36
     nullable: false
+  - name: hash
+    type: char
+    
+    length: 40
+    nullable: false
+    index: unique
   - name: tenant_id
     type: id
+    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -16,10 +24,12 @@ aggregateProperties:
     relationshipModulePath: admin/tenant
   - name: tenant_code
     type: varchar
+    primaryKey: false
     maxLength: 50
     nullable: false
   - name: system_id
     type: id
+    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -27,78 +37,99 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/system
   - name: system_name
     type: varchar
+    primaryKey: false
     maxLength: 20
     nullable: false
   - name: version
     type: varchar
+    primaryKey: false
     maxLength: 20
     nullable: false
   - name: scenario
     type: varchar
+    primaryKey: false
     maxLength: 60
     nullable: false
   - name: party
     type: varchar
+    primaryKey: false
     maxLength: 160
     nullable: true
   - name: component
     type: varchar
+    primaryKey: false
     maxLength: 160
     nullable: false
   - name: interface_name
     type: varchar
+    primaryKey: false
     maxLength: 160
     nullable: false
   - name: interface_namespace
     type: varchar
+    primaryKey: false
     maxLength: 160
     nullable: false
   - name: iflow_name
     type: varchar
+    primaryKey: false
     maxLength: 160
     nullable: true
   - name: responsible_user_account
     type: varchar
+    primaryKey: false
     maxLength: 20
     nullable: true
   - name: last_change_user_account
     type: varchar
+    primaryKey: false
     maxLength: 20
     nullable: true
   - name: last_changed_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: folder_path
     type: varchar
+    primaryKey: false
     maxLength: 255
     nullable: true
   - name: description
     type: varchar
+    primaryKey: false
     maxLength: 255
     nullable: true
   - name: application
     type: varchar
+    primaryKey: false
     maxLength: 60
     nullable: true
   - name: is_critical
     type: boolean
+    primaryKey: false
     nullable: false
   - name: is_complex
     type: boolean
+    primaryKey: false
     nullable: false
   - name: field_group_id
     type: id
+    primaryKey: false
     length: 36
     nullable: true
   - name: data
     type: json
+    primaryKey: false
     nullable: true
   - name: created_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
+    primaryKey: false
     nullable: true

@@ -3,6 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     FlowId, 
+    FlowHash, 
     FlowTenantId, 
     FlowTenantCode, 
     FlowSystemId, 
@@ -44,6 +45,7 @@ export class CreateFlowsService
     public async main(
         flows: {
             id: FlowId,
+            hash: FlowHash,
             tenantId: FlowTenantId,
             tenantCode: FlowTenantCode,
             systemId: FlowSystemId,
@@ -72,6 +74,7 @@ export class CreateFlowsService
         // create object with factory pattern
         const aggregateFlows = flows.map(flow => BplusItSappiFlow.register(
             flow.id,
+            flow.hash,
             flow.tenantId,
             flow.tenantCode,
             flow.systemId,

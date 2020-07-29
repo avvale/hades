@@ -6,6 +6,7 @@ import { flows } from '@hades/bplus-it-sappi/flow/infrastructure/seeds/flow.seed
 import { UpdateFlowService } from './update-flow.service';
 import { 
     FlowId, 
+    FlowHash, 
     FlowTenantId, 
     FlowTenantCode, 
     FlowSystemId, 
@@ -75,6 +76,7 @@ describe('UpdateFlowService', () =>
         {
             expect(await service.main(
                 new FlowId(flows[0].id),
+                new FlowHash(flows[0].hash),
                 new FlowTenantId(flows[0].tenantId),
                 new FlowTenantCode(flows[0].tenantCode),
                 new FlowSystemId(flows[0].systemId),

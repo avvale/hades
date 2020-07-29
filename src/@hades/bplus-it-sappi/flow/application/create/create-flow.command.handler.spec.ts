@@ -41,6 +41,7 @@ describe('CreateFlowCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateFlowCommand(
                     flows[0].id,
+                    flows[0].hash,
                     flows[0].tenantId,
                     flows[0].tenantCode,
                     flows[0].systemId,

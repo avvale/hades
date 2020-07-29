@@ -3,6 +3,7 @@ export class CreateChannelsCommand
     constructor(
         public readonly channels: {
             id: string,
+            hash: string,
             tenantId: string,
             tenantCode: string,
             systemId: string,

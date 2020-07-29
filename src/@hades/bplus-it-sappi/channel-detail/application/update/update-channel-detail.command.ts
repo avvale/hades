@@ -12,7 +12,7 @@ export class UpdateChannelDetailCommand
         public readonly executionMonitoringStartAt?: string,
         public readonly executionMonitoringEndAt?: string,
         public readonly status?: string,
-        public readonly channelId?: string,
+        public readonly channelHash?: string,
         public readonly channelSapId?: string,
         public readonly channelParty?: string,
         public readonly channelComponent?: string,

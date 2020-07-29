@@ -3,6 +3,7 @@ export class CreateFlowsCommand
     constructor(
         public readonly flows: {
             id: string,
+            hash: string,
             tenantId: string,
             tenantCode: string,
             systemId: string,

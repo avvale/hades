@@ -11,7 +11,7 @@ import {
     MessageDetailExecutionExecutedAt, 
     MessageDetailExecutionMonitoringStartAt, 
     MessageDetailExecutionMonitoringEndAt, 
-    MessageDetailFlowId, 
+    MessageDetailFlowHash, 
     MessageDetailFlowParty, 
     MessageDetailFlowComponent, 
     MessageDetailFlowInterfaceName, 
@@ -45,7 +45,6 @@ import { DeletedMessageDetailEvent } from './../application/events/deleted-messa
 import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.aggregate';
 import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.aggregate';
-import { BplusItSappiFlow } from '@hades/bplus-it-sappi/flow/domain/flow.aggregate';
 
 export class BplusItSappiMessageDetail extends AggregateRoot
 {
@@ -63,8 +62,7 @@ export class BplusItSappiMessageDetail extends AggregateRoot
     executionExecutedAt: MessageDetailExecutionExecutedAt;
     executionMonitoringStartAt: MessageDetailExecutionMonitoringStartAt;
     executionMonitoringEndAt: MessageDetailExecutionMonitoringEndAt;
-    flowId: MessageDetailFlowId;
-    flow: BplusItSappiFlow;
+    flowHash: MessageDetailFlowHash;
     flowParty: MessageDetailFlowParty;
     flowComponent: MessageDetailFlowComponent;
     flowInterfaceName: MessageDetailFlowInterfaceName;
@@ -91,7 +89,7 @@ export class BplusItSappiMessageDetail extends AggregateRoot
     updatedAt: MessageDetailUpdatedAt;
     deletedAt: MessageDetailDeletedAt;
     
-    constructor(id?: MessageDetailId, tenantId?: MessageDetailTenantId, tenantCode?: MessageDetailTenantCode, systemId?: MessageDetailSystemId, systemName?: MessageDetailSystemName, scenario?: MessageDetailScenario, executionId?: MessageDetailExecutionId, executionType?: MessageDetailExecutionType, executionExecutedAt?: MessageDetailExecutionExecutedAt, executionMonitoringStartAt?: MessageDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: MessageDetailExecutionMonitoringEndAt, flowId?: MessageDetailFlowId, flowParty?: MessageDetailFlowParty, flowComponent?: MessageDetailFlowComponent, flowInterfaceName?: MessageDetailFlowInterfaceName, flowInterfaceNamespace?: MessageDetailFlowInterfaceNamespace, status?: MessageDetailStatus, detail?: MessageDetailDetail, example?: MessageDetailExample, startTimeAt?: MessageDetailStartTimeAt, direction?: MessageDetailDirection, errorCategory?: MessageDetailErrorCategory, errorCode?: MessageDetailErrorCode, errorLabel?: MessageDetailErrorLabel, node?: MessageDetailNode, protocol?: MessageDetailProtocol, qualityOfService?: MessageDetailQualityOfService, receiverParty?: MessageDetailReceiverParty, receiverComponent?: MessageDetailReceiverComponent, receiverInterface?: MessageDetailReceiverInterface, receiverInterfaceNamespace?: MessageDetailReceiverInterfaceNamespace, retries?: MessageDetailRetries, size?: MessageDetailSize, timesFailed?: MessageDetailTimesFailed, createdAt?: MessageDetailCreatedAt, updatedAt?: MessageDetailUpdatedAt, deletedAt?: MessageDetailDeletedAt, )
+    constructor(id?: MessageDetailId, tenantId?: MessageDetailTenantId, tenantCode?: MessageDetailTenantCode, systemId?: MessageDetailSystemId, systemName?: MessageDetailSystemName, scenario?: MessageDetailScenario, executionId?: MessageDetailExecutionId, executionType?: MessageDetailExecutionType, executionExecutedAt?: MessageDetailExecutionExecutedAt, executionMonitoringStartAt?: MessageDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: MessageDetailExecutionMonitoringEndAt, flowHash?: MessageDetailFlowHash, flowParty?: MessageDetailFlowParty, flowComponent?: MessageDetailFlowComponent, flowInterfaceName?: MessageDetailFlowInterfaceName, flowInterfaceNamespace?: MessageDetailFlowInterfaceNamespace, status?: MessageDetailStatus, detail?: MessageDetailDetail, example?: MessageDetailExample, startTimeAt?: MessageDetailStartTimeAt, direction?: MessageDetailDirection, errorCategory?: MessageDetailErrorCategory, errorCode?: MessageDetailErrorCode, errorLabel?: MessageDetailErrorLabel, node?: MessageDetailNode, protocol?: MessageDetailProtocol, qualityOfService?: MessageDetailQualityOfService, receiverParty?: MessageDetailReceiverParty, receiverComponent?: MessageDetailReceiverComponent, receiverInterface?: MessageDetailReceiverInterface, receiverInterfaceNamespace?: MessageDetailReceiverInterfaceNamespace, retries?: MessageDetailRetries, size?: MessageDetailSize, timesFailed?: MessageDetailTimesFailed, createdAt?: MessageDetailCreatedAt, updatedAt?: MessageDetailUpdatedAt, deletedAt?: MessageDetailDeletedAt, )
     {
         super();
         
@@ -106,7 +104,7 @@ export class BplusItSappiMessageDetail extends AggregateRoot
         this.executionExecutedAt = executionExecutedAt;
         this.executionMonitoringStartAt = executionMonitoringStartAt;
         this.executionMonitoringEndAt = executionMonitoringEndAt;
-        this.flowId = flowId;
+        this.flowHash = flowHash;
         this.flowParty = flowParty;
         this.flowComponent = flowComponent;
         this.flowInterfaceName = flowInterfaceName;
@@ -135,9 +133,9 @@ export class BplusItSappiMessageDetail extends AggregateRoot
         
     }
 
-    static register (id: MessageDetailId, tenantId: MessageDetailTenantId, tenantCode: MessageDetailTenantCode, systemId: MessageDetailSystemId, systemName: MessageDetailSystemName, scenario: MessageDetailScenario, executionId: MessageDetailExecutionId, executionType: MessageDetailExecutionType, executionExecutedAt: MessageDetailExecutionExecutedAt, executionMonitoringStartAt: MessageDetailExecutionMonitoringStartAt, executionMonitoringEndAt: MessageDetailExecutionMonitoringEndAt, flowId: MessageDetailFlowId, flowParty: MessageDetailFlowParty, flowComponent: MessageDetailFlowComponent, flowInterfaceName: MessageDetailFlowInterfaceName, flowInterfaceNamespace: MessageDetailFlowInterfaceNamespace, status: MessageDetailStatus, detail: MessageDetailDetail, example: MessageDetailExample, startTimeAt: MessageDetailStartTimeAt, direction: MessageDetailDirection, errorCategory: MessageDetailErrorCategory, errorCode: MessageDetailErrorCode, errorLabel: MessageDetailErrorLabel, node: MessageDetailNode, protocol: MessageDetailProtocol, qualityOfService: MessageDetailQualityOfService, receiverParty: MessageDetailReceiverParty, receiverComponent: MessageDetailReceiverComponent, receiverInterface: MessageDetailReceiverInterface, receiverInterfaceNamespace: MessageDetailReceiverInterfaceNamespace, retries: MessageDetailRetries, size: MessageDetailSize, timesFailed: MessageDetailTimesFailed, createdAt: MessageDetailCreatedAt, updatedAt: MessageDetailUpdatedAt, deletedAt: MessageDetailDeletedAt, ): BplusItSappiMessageDetail
+    static register (id: MessageDetailId, tenantId: MessageDetailTenantId, tenantCode: MessageDetailTenantCode, systemId: MessageDetailSystemId, systemName: MessageDetailSystemName, scenario: MessageDetailScenario, executionId: MessageDetailExecutionId, executionType: MessageDetailExecutionType, executionExecutedAt: MessageDetailExecutionExecutedAt, executionMonitoringStartAt: MessageDetailExecutionMonitoringStartAt, executionMonitoringEndAt: MessageDetailExecutionMonitoringEndAt, flowHash: MessageDetailFlowHash, flowParty: MessageDetailFlowParty, flowComponent: MessageDetailFlowComponent, flowInterfaceName: MessageDetailFlowInterfaceName, flowInterfaceNamespace: MessageDetailFlowInterfaceNamespace, status: MessageDetailStatus, detail: MessageDetailDetail, example: MessageDetailExample, startTimeAt: MessageDetailStartTimeAt, direction: MessageDetailDirection, errorCategory: MessageDetailErrorCategory, errorCode: MessageDetailErrorCode, errorLabel: MessageDetailErrorLabel, node: MessageDetailNode, protocol: MessageDetailProtocol, qualityOfService: MessageDetailQualityOfService, receiverParty: MessageDetailReceiverParty, receiverComponent: MessageDetailReceiverComponent, receiverInterface: MessageDetailReceiverInterface, receiverInterfaceNamespace: MessageDetailReceiverInterfaceNamespace, retries: MessageDetailRetries, size: MessageDetailSize, timesFailed: MessageDetailTimesFailed, createdAt: MessageDetailCreatedAt, updatedAt: MessageDetailUpdatedAt, deletedAt: MessageDetailDeletedAt, ): BplusItSappiMessageDetail
     {
-        return new BplusItSappiMessageDetail(id, tenantId, tenantCode, systemId, systemName, scenario, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, flowId, flowParty, flowComponent, flowInterfaceName, flowInterfaceNamespace, status, detail, example, startTimeAt, direction, errorCategory, errorCode, errorLabel, node, protocol, qualityOfService, receiverParty, receiverComponent, receiverInterface, receiverInterfaceNamespace, retries, size, timesFailed, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiMessageDetail(id, tenantId, tenantCode, systemId, systemName, scenario, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, flowHash, flowParty, flowComponent, flowInterfaceName, flowInterfaceNamespace, status, detail, example, startTimeAt, direction, errorCategory, errorCode, errorLabel, node, protocol, qualityOfService, receiverParty, receiverComponent, receiverInterface, receiverInterfaceNamespace, retries, size, timesFailed, createdAt, updatedAt, deletedAt, );
     }
 
     created(messageDetail: BplusItSappiMessageDetail): void
@@ -155,7 +153,7 @@ export class BplusItSappiMessageDetail extends AggregateRoot
                 messageDetail.executionExecutedAt.value,
                 messageDetail.executionMonitoringStartAt.value,
                 messageDetail.executionMonitoringEndAt.value,
-                messageDetail.flowId?.value,
+                messageDetail.flowHash.value,
                 messageDetail.flowParty?.value,
                 messageDetail.flowComponent.value,
                 messageDetail.flowInterfaceName.value,
@@ -201,7 +199,7 @@ export class BplusItSappiMessageDetail extends AggregateRoot
                 messageDetail.executionExecutedAt?.value,
                 messageDetail.executionMonitoringStartAt?.value,
                 messageDetail.executionMonitoringEndAt?.value,
-                messageDetail.flowId?.value,
+                messageDetail.flowHash?.value,
                 messageDetail.flowParty?.value,
                 messageDetail.flowComponent?.value,
                 messageDetail.flowInterfaceName?.value,
@@ -247,7 +245,7 @@ export class BplusItSappiMessageDetail extends AggregateRoot
                 messageDetail.executionExecutedAt.value,
                 messageDetail.executionMonitoringStartAt.value,
                 messageDetail.executionMonitoringEndAt.value,
-                messageDetail.flowId?.value,
+                messageDetail.flowHash.value,
                 messageDetail.flowParty?.value,
                 messageDetail.flowComponent.value,
                 messageDetail.flowInterfaceName.value,
@@ -292,7 +290,7 @@ export class BplusItSappiMessageDetail extends AggregateRoot
             executionExecutedAt: this.executionExecutedAt.value,
             executionMonitoringStartAt: this.executionMonitoringStartAt.value,
             executionMonitoringEndAt: this.executionMonitoringEndAt.value,
-            flowId: this.flowId?.value,
+            flowHash: this.flowHash.value,
             flowParty: this.flowParty?.value,
             flowComponent: this.flowComponent.value,
             flowInterfaceName: this.flowInterfaceName.value,

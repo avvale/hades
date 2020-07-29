@@ -3,6 +3,7 @@ import { CreateFlowsCommand } from './create-flows.command';
 import { CreateFlowsService } from './create-flows.service';
 import { 
     FlowId, 
+    FlowHash, 
     FlowTenantId, 
     FlowTenantCode, 
     FlowSystemId, 
@@ -42,6 +43,7 @@ export class CreateFlowsCommandHandler implements ICommandHandler<CreateFlowsCom
                 .map(flow => { 
                     return {
                         id: new FlowId(flow.id),
+                        hash: new FlowHash(flow.hash),
                         tenantId: new FlowTenantId(flow.tenantId),
                         tenantCode: new FlowTenantCode(flow.tenantCode),
                         systemId: new FlowSystemId(flow.systemId),

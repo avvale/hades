@@ -5,10 +5,12 @@ moduleNames: contacts
 aggregateProperties:
   - name: id
     type: id
+    primaryKey: true
     length: 36
     nullable: false
   - name: tenant_id
     type: id
+    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -16,10 +18,12 @@ aggregateProperties:
     relationshipModulePath: admin/tenant
   - name: tenant_code
     type: varchar
+    primaryKey: false
     maxLength: 50
     nullable: false
   - name: system_id
     type: id
+    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -27,10 +31,12 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/system
   - name: system_name
     type: varchar
+    primaryKey: false
     maxLength: 20
     nullable: false
   - name: role_id
     type: id
+    primaryKey: false
     length: 36
     nullable: true
     relationship: many-to-one
@@ -38,43 +44,55 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/role
   - name: role_name
     type: varchar
+    primaryKey: false
     maxLength: 255
     nullable: true
   - name: name
     type: varchar
+    primaryKey: false
     maxLength: 255
     nullable: false
   - name: surname
     type: varchar
+    primaryKey: false
     maxLength: 255
     nullable: true
   - name: email
     type: varchar
+    primaryKey: false
     maxLength: 120
     nullable: false
   - name: mobile
     type: varchar
+    primaryKey: false
     maxLength: 60
     nullable: true
   - name: area
     type: varchar
+    primaryKey: false
     maxLength: 255
     nullable: true
   - name: has_consent_email
     type: boolean
+    primaryKey: false
     nullable: false
   - name: has_consent_mobile
     type: boolean
+    primaryKey: false
     nullable: false
   - name: is_active
     type: boolean
+    primaryKey: false
     nullable: false
   - name: created_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
+    primaryKey: false
     nullable: true

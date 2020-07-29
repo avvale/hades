@@ -27,7 +27,7 @@ type BplusItSappiChannelDetail
     executionMonitoringStartAt: GraphQLTimestamp!
     executionMonitoringEndAt: GraphQLTimestamp!
     status: BplusItSappiChannelDetailStatus!
-    channelId: ID
+    channelHash: GraphQLString!
     channelSapId: GraphQLString!
     channelParty: GraphQLString
     channelComponent: GraphQLString!
@@ -52,7 +52,7 @@ input BplusItSappiCreateChannelDetailInput
     executionMonitoringStartAt: GraphQLTimestamp!
     executionMonitoringEndAt: GraphQLTimestamp!
     status: BplusItSappiChannelDetailStatus!
-    channelId: ID
+    channelHash: GraphQLString!
     channelSapId: GraphQLString!
     channelParty: GraphQLString
     channelComponent: GraphQLString!
@@ -74,7 +74,7 @@ input BplusItSappiUpdateChannelDetailInput
     executionMonitoringStartAt: GraphQLTimestamp
     executionMonitoringEndAt: GraphQLTimestamp
     status: BplusItSappiChannelDetailStatus
-    channelId: ID
+    channelHash: GraphQLString
     channelSapId: GraphQLString
     channelParty: GraphQLString
     channelComponent: GraphQLString

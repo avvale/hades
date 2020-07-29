@@ -3,6 +3,7 @@ import { CreateFlowCommand } from './create-flow.command';
 import { CreateFlowService } from './create-flow.service';
 import { 
     FlowId, 
+    FlowHash, 
     FlowTenantId, 
     FlowTenantCode, 
     FlowSystemId, 
@@ -39,6 +40,7 @@ export class CreateFlowCommandHandler implements ICommandHandler<CreateFlowComma
         // call to use case and implements ValueObjects
         await this.createFlowService.main(
             new FlowId(command.id),
+            new FlowHash(command.hash),
             new FlowTenantId(command.tenantId),
             new FlowTenantCode(command.tenantCode),
             new FlowSystemId(command.systemId),

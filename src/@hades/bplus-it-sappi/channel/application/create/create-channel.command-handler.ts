@@ -3,6 +3,7 @@ import { CreateChannelCommand } from './create-channel.command';
 import { CreateChannelService } from './create-channel.service';
 import { 
     ChannelId, 
+    ChannelHash, 
     ChannelTenantId, 
     ChannelTenantCode, 
     ChannelSystemId, 
@@ -50,6 +51,7 @@ export class CreateChannelCommandHandler implements ICommandHandler<CreateChanne
         // call to use case and implements ValueObjects
         await this.createChannelService.main(
             new ChannelId(command.id),
+            new ChannelHash(command.hash),
             new ChannelTenantId(command.tenantId),
             new ChannelTenantCode(command.tenantCode),
             new ChannelSystemId(command.systemId),

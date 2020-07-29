@@ -9,7 +9,7 @@ export { ChannelDetailExecutionExecutedAt } from './channel-detail-execution-exe
 export { ChannelDetailExecutionMonitoringStartAt } from './channel-detail-execution-monitoring-start-at';
 export { ChannelDetailExecutionMonitoringEndAt } from './channel-detail-execution-monitoring-end-at';
 export { ChannelDetailStatus } from './channel-detail-status';
-export { ChannelDetailChannelId } from './channel-detail-channel-id';
+export { ChannelDetailChannelHash } from './channel-detail-channel-hash';
 export { ChannelDetailChannelSapId } from './channel-detail-channel-sap-id';
 export { ChannelDetailChannelParty } from './channel-detail-channel-party';
 export { ChannelDetailChannelComponent } from './channel-detail-channel-component';

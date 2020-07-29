@@ -13,7 +13,7 @@ export class CreateMessagesDetailCommand
             executionExecutedAt: string,
             executionMonitoringStartAt: string,
             executionMonitoringEndAt: string,
-            flowId?: string,
+            flowHash: string,
             flowParty?: string,
             flowComponent: string,
             flowInterfaceName: string,

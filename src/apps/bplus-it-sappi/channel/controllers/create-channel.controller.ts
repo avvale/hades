@@ -25,6 +25,7 @@ export class CreateChannelController
     {
         await this.commandBus.dispatch(new CreateChannelCommand(
             payload.id,
+            payload.hash,
             payload.tenantId,
             payload.tenantCode,
             payload.systemId,

@@ -4,6 +4,7 @@ import { BplusItSappiFlow } from './flow.aggregate';
 import { FlowResponse } from './flow.response';
 import { 
     FlowId, 
+    FlowHash, 
     FlowTenantId, 
     FlowTenantCode, 
     FlowSystemId, 
@@ -73,6 +74,7 @@ export class FlowMapper implements IMapper
     {
         return BplusItSappiFlow.register(
             new FlowId(flow.id),
+            new FlowHash(flow.hash),
             new FlowTenantId(flow.tenantId),
             new FlowTenantCode(flow.tenantCode),
             new FlowSystemId(flow.systemId),
@@ -105,6 +107,7 @@ export class FlowMapper implements IMapper
     {
         return new FlowResponse(
             flow.id.value,
+            flow.hash.value,
             flow.tenantId.value,
             flow.tenantCode.value,
             flow.systemId.value,

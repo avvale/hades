@@ -9,7 +9,7 @@ export { MessageDetailExecutionType } from './message-detail-execution-type';
 export { MessageDetailExecutionExecutedAt } from './message-detail-execution-executed-at';
 export { MessageDetailExecutionMonitoringStartAt } from './message-detail-execution-monitoring-start-at';
 export { MessageDetailExecutionMonitoringEndAt } from './message-detail-execution-monitoring-end-at';
-export { MessageDetailFlowId } from './message-detail-flow-id';
+export { MessageDetailFlowHash } from './message-detail-flow-hash';
 export { MessageDetailFlowParty } from './message-detail-flow-party';
 export { MessageDetailFlowComponent } from './message-detail-flow-component';
 export { MessageDetailFlowInterfaceName } from './message-detail-flow-interface-name';

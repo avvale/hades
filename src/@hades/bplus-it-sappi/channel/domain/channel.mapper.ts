@@ -4,6 +4,7 @@ import { BplusItSappiChannel } from './channel.aggregate';
 import { ChannelResponse } from './channel.response';
 import { 
     ChannelId, 
+    ChannelHash, 
     ChannelTenantId, 
     ChannelTenantCode, 
     ChannelSystemId, 
@@ -84,6 +85,7 @@ export class ChannelMapper implements IMapper
     {
         return BplusItSappiChannel.register(
             new ChannelId(channel.id),
+            new ChannelHash(channel.hash),
             new ChannelTenantId(channel.tenantId),
             new ChannelTenantCode(channel.tenantCode),
             new ChannelSystemId(channel.systemId),
@@ -127,6 +129,7 @@ export class ChannelMapper implements IMapper
     {
         return new ChannelResponse(
             channel.id.value,
+            channel.hash.value,
             channel.tenantId.value,
             channel.tenantCode.value,
             channel.systemId.value,

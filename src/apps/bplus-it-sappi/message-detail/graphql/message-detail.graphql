@@ -33,7 +33,7 @@ type BplusItSappiMessageDetail
     executionExecutedAt: GraphQLTimestamp!
     executionMonitoringStartAt: GraphQLTimestamp!
     executionMonitoringEndAt: GraphQLTimestamp!
-    flowId: ID
+    flowHash: GraphQLString!
     flowParty: GraphQLString
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
@@ -75,7 +75,7 @@ input BplusItSappiCreateMessageDetailInput
     executionExecutedAt: GraphQLTimestamp!
     executionMonitoringStartAt: GraphQLTimestamp!
     executionMonitoringEndAt: GraphQLTimestamp!
-    flowId: ID
+    flowHash: GraphQLString!
     flowParty: GraphQLString
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
@@ -114,7 +114,7 @@ input BplusItSappiUpdateMessageDetailInput
     executionExecutedAt: GraphQLTimestamp
     executionMonitoringStartAt: GraphQLTimestamp
     executionMonitoringEndAt: GraphQLTimestamp
-    flowId: ID
+    flowHash: GraphQLString
     flowParty: GraphQLString
     flowComponent: GraphQLString
     flowInterfaceName: GraphQLString

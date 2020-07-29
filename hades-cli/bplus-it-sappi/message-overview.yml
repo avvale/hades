@@ -5,10 +5,12 @@ moduleNames: messages-overview
 aggregateProperties:
   - name: id
     type: id
+    primaryKey: true
     length: 36
     nullable: false
   - name: tenant_id
     type: id
+    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -16,10 +18,12 @@ aggregateProperties:
     relationshipModulePath: admin/tenant
   - name: tenant_code
     type: varchar
+    primaryKey: false
     maxLength: 50
     nullable: false
   - name: system_id
     type: id
+    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -27,10 +31,12 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/system
   - name: system_name
     type: varchar
+    primaryKey: false
     maxLength: 20
     nullable: false
   - name: execution_id
     type: id
+    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -38,61 +44,77 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/execution
   - name: execution_type
     type: enum
+    primaryKey: false
     enumOptions:
       - SUMMARY
       - DETAIL
     nullable: false
   - name: execution_executed_at
     type: timestamp
+    primaryKey: false
     nullable: false
   - name: execution_monitoring_start_at
     type: timestamp
+    primaryKey: false
     nullable: false
   - name: execution_monitoring_end_at
     type: timestamp
+    primaryKey: false
     nullable: false
   - name: number_max
     type: int.unsigned
+    primaryKey: false
     maxLength: 10
     nullable: true
   - name: number_days
     type: int.unsigned
+    primaryKey: false
     maxLength: 10
     nullable: true
   - name: success
     type: int.unsigned
+    primaryKey: false
     maxLength: 10
     nullable: true
   - name: cancelled
     type: int.unsigned
+    primaryKey: false
     maxLength: 10
     nullable: true
   - name: delivering
     type: int.unsigned
+    primaryKey: false
     maxLength: 10
     nullable: true
   - name: error
     type: int.unsigned
+    primaryKey: false
     maxLength: 10
     nullable: true
   - name: holding
     type: int.unsigned
+    primaryKey: false
     maxLength: 10
     nullable: true
   - name: to_be_delivered
     type: int.unsigned
+    primaryKey: false
     maxLength: 10
     nullable: true
   - name: waiting
     type: int.unsigned
+    primaryKey: false
     maxLength: 10
     nullable: true
   - name: created_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
+    primaryKey: false
     nullable: true

@@ -2,6 +2,7 @@ export class DeletedFlowEvent
 {
     constructor(
         public readonly id: string,
+        public readonly hash: string,
         public readonly tenantId: string,
         public readonly tenantCode: string,
         public readonly systemId: string,

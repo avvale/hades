@@ -20,6 +20,7 @@ export class UpdateChannelResolver
     {
         await this.commandBus.dispatch(new UpdateChannelCommand(
             payload.id,
+            payload.hash,
             payload.tenantId,
             payload.tenantCode,
             payload.systemId,

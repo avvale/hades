@@ -1,4 +1,5 @@
 export { FlowId } from './flow-id';
+export { FlowHash } from './flow-hash';
 export { FlowTenantId } from './flow-tenant-id';
 export { FlowTenantCode } from './flow-tenant-code';
 export { FlowSystemId } from './flow-system-id';

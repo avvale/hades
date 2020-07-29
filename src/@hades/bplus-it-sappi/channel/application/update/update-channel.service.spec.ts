@@ -6,6 +6,7 @@ import { channels } from '@hades/bplus-it-sappi/channel/infrastructure/seeds/cha
 import { UpdateChannelService } from './update-channel.service';
 import { 
     ChannelId, 
+    ChannelHash, 
     ChannelTenantId, 
     ChannelTenantCode, 
     ChannelSystemId, 
@@ -86,6 +87,7 @@ describe('UpdateChannelService', () =>
         {
             expect(await service.main(
                 new ChannelId(channels[0].id),
+                new ChannelHash(channels[0].hash),
                 new ChannelTenantId(channels[0].tenantId),
                 new ChannelTenantCode(channels[0].tenantCode),
                 new ChannelSystemId(channels[0].systemId),

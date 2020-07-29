@@ -35,7 +35,7 @@ export class UpdateMessageDetailController
             payload.executionExecutedAt,
             payload.executionMonitoringStartAt,
             payload.executionMonitoringEndAt,
-            payload.flowId,
+            payload.flowHash,
             payload.flowParty,
             payload.flowComponent,
             payload.flowInterfaceName,

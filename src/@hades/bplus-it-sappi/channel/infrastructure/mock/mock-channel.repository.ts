@@ -6,6 +6,7 @@ import { QueryStatementInput, Command } from '@hades/shared/domain/persistence/s
 import { IChannelRepository } from './../../domain/channel.repository';
 import { 
     ChannelId, 
+    ChannelHash, 
     ChannelTenantId, 
     ChannelTenantCode, 
     ChannelSystemId, 
@@ -81,6 +82,7 @@ export class MockChannelRepository implements IChannelRepository
             
             this.collectionSource.push(BplusItSappiChannel.register(
                     new ChannelId(itemCollection.id),
+                    new ChannelHash(itemCollection.hash),
                     new ChannelTenantId(itemCollection.tenantId),
                     new ChannelTenantCode(itemCollection.tenantCode),
                     new ChannelSystemId(itemCollection.systemId),

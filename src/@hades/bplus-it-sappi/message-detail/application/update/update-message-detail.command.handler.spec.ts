@@ -51,7 +51,7 @@ describe('UpdateMessageDetailCommandHandler', () =>
                     messagesDetail[0].executionExecutedAt,
                     messagesDetail[0].executionMonitoringStartAt,
                     messagesDetail[0].executionMonitoringEndAt,
-                    messagesDetail[0].flowId,
+                    messagesDetail[0].flowHash,
                     messagesDetail[0].flowParty,
                     messagesDetail[0].flowComponent,
                     messagesDetail[0].flowInterfaceName,

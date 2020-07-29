@@ -20,6 +20,7 @@ export class UpdateFlowResolver
     {
         await this.commandBus.dispatch(new UpdateFlowCommand(
             payload.id,
+            payload.hash,
             payload.tenantId,
             payload.tenantCode,
             payload.systemId,

@@ -30,7 +30,7 @@ export class UpdateChannelDetailResolver
             payload.executionMonitoringStartAt,
             payload.executionMonitoringEndAt,
             payload.status,
-            payload.channelId,
+            payload.channelHash,
             payload.channelSapId,
             payload.channelParty,
             payload.channelComponent,

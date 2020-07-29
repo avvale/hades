@@ -20,6 +20,7 @@ export class CreateFlowResolver
     {
         await this.commandBus.dispatch(new CreateFlowCommand(
             payload.id,
+            payload.hash,
             payload.tenantId,
             payload.tenantCode,
             payload.systemId,

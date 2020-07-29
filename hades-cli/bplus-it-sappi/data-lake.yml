@@ -5,10 +5,12 @@ moduleNames: data-lakes
 aggregateProperties:
   - name: id
     type: id
+    primaryKey: true
     length: 36
     nullable: false
   - name: execution_id
     type: id
+    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -16,6 +18,7 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/execution
   - name: tenant_id
     type: id
+    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -23,17 +26,22 @@ aggregateProperties:
     relationshipModulePath: admin/tenant
   - name: tenant_code
     type: varchar
+    primaryKey: false
     maxLength: 50
     nullable: false
   - name: payload
     type: json
+    primaryKey: false
     nullable: false
   - name: created_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
+    primaryKey: false
     nullable: true

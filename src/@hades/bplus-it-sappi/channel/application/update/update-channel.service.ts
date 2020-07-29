@@ -3,6 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ChannelId, 
+    ChannelHash, 
     ChannelTenantId, 
     ChannelTenantCode, 
     ChannelSystemId, 
@@ -53,6 +54,7 @@ export class UpdateChannelService
 
     public async main(
         id: ChannelId,
+        hash?: ChannelHash,
         tenantId?: ChannelTenantId,
         tenantCode?: ChannelTenantCode,
         systemId?: ChannelSystemId,
@@ -91,6 +93,7 @@ export class UpdateChannelService
         // create object with factory pattern
         const channel = BplusItSappiChannel.register(
             id,
+            hash,
             tenantId,
             tenantCode,
             systemId,

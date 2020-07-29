@@ -13,7 +13,7 @@ export class CreateChannelsDetailCommand
             executionMonitoringStartAt: string,
             executionMonitoringEndAt: string,
             status: string,
-            channelId?: string,
+            channelHash: string,
             channelSapId: string,
             channelParty?: string,
             channelComponent: string,

@@ -6,6 +6,7 @@ import { QueryStatementInput, Command } from '@hades/shared/domain/persistence/s
 import { IFlowRepository } from './../../domain/flow.repository';
 import { 
     FlowId, 
+    FlowHash, 
     FlowTenantId, 
     FlowTenantCode, 
     FlowSystemId, 
@@ -70,6 +71,7 @@ export class MockFlowRepository implements IFlowRepository
             
             this.collectionSource.push(BplusItSappiFlow.register(
                     new FlowId(itemCollection.id),
+                    new FlowHash(itemCollection.hash),
                     new FlowTenantId(itemCollection.tenantId),
                     new FlowTenantCode(itemCollection.tenantCode),
                     new FlowSystemId(itemCollection.systemId),

@@ -12,7 +12,7 @@ export class CreatedMessageDetailEvent
         public readonly executionExecutedAt: string,
         public readonly executionMonitoringStartAt: string,
         public readonly executionMonitoringEndAt: string,
-        public readonly flowId: string,
+        public readonly flowHash: string,
         public readonly flowParty: string,
         public readonly flowComponent: string,
         public readonly flowInterfaceName: string,

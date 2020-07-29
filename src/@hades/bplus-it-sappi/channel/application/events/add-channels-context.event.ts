@@ -25,6 +25,7 @@ export class AddChannelsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(channel => 
                     new CreatedChannelEvent(
                         channel.id.value,
+                        channel.hash.value,
                         channel.tenantId.value,
                         channel.tenantCode.value,
                         channel.systemId.value,
@@ -74,6 +75,7 @@ export class AddChannelsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(channel => 
                     new DeletedChannelEvent(
                         channel.id.value,
+                        channel.hash.value,
                         channel.tenantId.value,
                         channel.tenantCode.value,
                         channel.systemId.value,

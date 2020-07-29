@@ -3,6 +3,7 @@ import { UpdateChannelCommand } from './update-channel.command';
 import { UpdateChannelService } from './update-channel.service';
 import { 
     ChannelId, 
+    ChannelHash, 
     ChannelTenantId, 
     ChannelTenantCode, 
     ChannelSystemId, 
@@ -50,6 +51,7 @@ export class UpdateChannelCommandHandler implements ICommandHandler<UpdateChanne
         // call to use case and implements ValueObjects
         await this.updateChannelService.main(
             new ChannelId(command.id),
+            new ChannelHash(command.hash, { undefinable: true }),
             new ChannelTenantId(command.tenantId, { undefinable: true }),
             new ChannelTenantCode(command.tenantCode, { undefinable: true }),
             new ChannelSystemId(command.systemId, { undefinable: true }),
