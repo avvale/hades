@@ -4,7 +4,6 @@ import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
-declare const Buffer;
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -162,7 +161,7 @@ export class CreateSnapshotController
                 flowInterfaceName: message.flowInterfaceName,
                 flowInterfaceNamespace: message.flowInterfaceNamespace,
                 status: message.status,
-                detail: Buffer.from(message.detail, 'base64').toString('utf-8'),
+                detail: Utils.base64Decode(message.detail),
                 example: message.example,
                 startTimeAt: message.startTimeAt,
                 direction: message.direction,
@@ -201,7 +200,7 @@ export class CreateSnapshotController
                 channelParty: channel.channelParty,
                 channelComponent: channel.channelComponent,
                 channelName: channel.channelName,
-                detail: Buffer.from(channel.detail, 'base64').toString('utf-8')
+                detail: Utils.base64Decode(channel.detail)
             }
         });
         await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
