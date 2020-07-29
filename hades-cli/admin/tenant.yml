@@ -5,30 +5,39 @@ moduleNames: tenants
 aggregateProperties:
   - name: id
     type: id
+    primaryKey: true
     length: 36
     nullable: false
   - name: name
     type: varchar
+    primaryKey: false
     nullable: false
   - name: code
     type: varchar
+    primaryKey: false
     maxLength: 50
     nullable: false
   - name: logo
     type: varchar
+    primaryKey: false
     nullable: true
   - name: is_active
     type: boolean
+    primaryKey: false
     nullable: false
   - name: data
     type: json
+    primaryKey: false
     nullable: true
   - name: created_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
+    primaryKey: false
     nullable: true

@@ -5,10 +5,12 @@ moduleNames: resources
 aggregateProperties:
   - name: id
     type: id
+    primaryKey: true
     length: 36
     nullable: false
   - name: bounded_context_id
     type: id
+    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -16,20 +18,26 @@ aggregateProperties:
     relationshipModulePath: admin/bounded-context
   - name: name
     type: varchar
+    primaryKey: false
     maxLength: 255
     nullable: false
   - name: has_custom_fields
     type: boolean
+    primaryKey: false
     nullable: false
   - name: has_attachments
     type: boolean
+    primaryKey: false
     nullable: false
   - name: created_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
+    primaryKey: false
     nullable: true

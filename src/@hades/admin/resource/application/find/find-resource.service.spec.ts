@@ -37,12 +37,12 @@ describe('FindResourceService', () =>
 
     describe('main', () => 
     {
-        it('FindResourceService should be defined', () => 
+        test('FindResourceService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should find resource', async () => 
+        test('should find resource', async () => 
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main([])).toBe(mockRepository.collectionSource[0]);

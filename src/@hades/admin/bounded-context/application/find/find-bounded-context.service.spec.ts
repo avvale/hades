@@ -37,12 +37,12 @@ describe('FindBoundedContextService', () =>
 
     describe('main', () => 
     {
-        it('FindBoundedContextService should be defined', () => 
+        test('FindBoundedContextService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should find boundedContext', async () => 
+        test('should find boundedContext', async () => 
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main([])).toBe(mockRepository.collectionSource[0]);

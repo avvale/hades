@@ -38,12 +38,12 @@ describe('PaginateResourcesService', () =>
 
     describe('main', () => 
     {
-        it('PaginateResourcesService should be defined', () => 
+        test('PaginateResourcesService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should paginate resources', async () => 
+        test('should paginate resources', async () => 
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,

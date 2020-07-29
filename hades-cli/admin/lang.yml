@@ -5,39 +5,50 @@ moduleNames: langs
 aggregateProperties:
   - name: id
     type: id
+    primaryKey: true
     length: 36
     nullable: false
   - name: name
     type: varchar
+    primaryKey: false
     nullable: false
   - name: image
     type: varchar
+    primaryKey: false
     nullable: true
   - name: iso_639_2
     type: char
+    primaryKey: false
     length: 2
     nullable: false
   - name: iso_639_3
     type: char
+    primaryKey: false
     length: 3
     nullable: false
   - name: ietf
     type: char
+    primaryKey: false
     length: 5
     nullable: false
   - name: sort
     type: smallint.unsigned
+    primaryKey: false
     maxLength: 6
     nullable: true
   - name: is_active
     type: boolean
+    primaryKey: false
     nullable: false
   - name: created_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
+    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
+    primaryKey: false
     nullable: true
