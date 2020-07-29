@@ -10,7 +10,6 @@ aggregateProperties:
     nullable: false
   - name: bounded_context_id
     type: id
-    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -18,18 +17,14 @@ aggregateProperties:
     relationshipModulePath: admin/bounded-context
   - name: name
     type: varchar
-    primaryKey: false
     maxLength: 255
     nullable: false
   - name: created_at
     type: timestamp
-    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
-    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
-    primaryKey: false
     nullable: true
