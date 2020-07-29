@@ -6,7 +6,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'a319c589-7551-4076-8bdb-655aa0c4597a'
+        example     : '39e96ab0-63d6-4e7d-882c-9cbe5d2aa316'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'j'
+        example     : 'u'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'fv6sfj8cqhk9a1hwq33g8qik6yuwdarj2hazzwle8nr3lwtzil'
+        example     : 'rbvrhueaxoe6timenyurthwp318xwzw3g4cwe6ycr01j5l7b6i'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'logo [input here api field description]',
-        example     : '4'
+        example     : 'f'
     })
     logo: string;
     
@@ -42,7 +42,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : false
+        example     : true
     })
     isActive: boolean;
     

@@ -65,9 +65,9 @@ describe('resource', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: 'zwo9jj3wdup9rlb6vjw96szb5laj6lhs9c20h6nfflnija7i20uvlbebbmynp8xtytqc7tasr168foz6vw6akhd99frmqdu2hq478pb6ged2w7d08cq2nhb9r2ubnvadg7walb4uquu0usap12qbj0l9wl8qz5pxxa2me1tndfq7qwth29b4cmyi74zkfvtvns1m7ops6xlblc9ztm0tfftzgvqqrrnv9sv3y0indj3d8atw72iycz5xcbc7hjv',
-                hasCustomFields: false,
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: 'moaj4w5d556m996qr2wpipnuwov8ctr0bl3yifz3zl2rm1eyip2wa9aq8cgnd96432et9ce85vgkvpuqo7pfwd1p4h2jl4t4nkrwhewbnw69a9ln23hl45fnwvm8e4b36kx0k3dq1zj61fuqqd6r616fxqrjpwo02ptnlkmncqshdgt9q35che59mpk4o6tii8kql6nr7qtktrmtosgti58a22wygzssqoiaize4oftdn3gh9st9kwf9mndgvxr',
+                hasCustomFields: true,
                 hasAttachments: true,
             })
             .expect(400)
@@ -83,10 +83,10 @@ describe('resource', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: 'uwp49as8z8mtdgaatxwru5keyf12ejfqer2dmwe8nkt16rcmq45xit8qpliubsgqwyfzth8b4s6zjmnmekq133q96gz8g1vqd5kzn69ksltrwutsslncc3bnpzz41s1oclgexxndf2e9i2mifc6kq0g6cujg3blim9be4as3cfe5693qo7rwqjj4ftbvfmci1241j4rasqqcvxbxesui9z8mysauagowd4j7x79nviy6oum0fy8ulzb6eoyvg7k',
-                hasCustomFields: false,
-                hasAttachments: true,
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: 'teo1chc1mlz14ro3la9ygob6hyhdifgmvfr6lqcaew8bj8ameg3tbm4qu57fwkp978txi9ex0x17cwtrwkwyhzewdthhprbvlyhs9r91ri4jrztwoz9krmnn4xe8pruqsfze47o7f513ndhqdz6psb97nvelaa8t7cowokbicf23890biqwe9prxmv1jv3ri2lq1v6uzzmi793gsb963uw6z3i2tsp0605aeso58kyvv8vz2sqixoj064qck0qm',
+                hasCustomFields: true,
+                hasAttachments: false,
             })
             .expect(400)
             .then(res => {
@@ -100,10 +100,10 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
                 boundedContextId: null,
-                name: 'ptowqgksi7j9y14f8bgc445iisfpxvq15ojqouqcc9v4ey5zwouu7qqeii68mcdzx7gelh458x2ztlmw8mfd59r554v5oiy128f1onk0ucbu3dhd7yquerc2hhzbvfoinooa6zs5ydbk8zsbnwcp0yssjocoxthojbazdwotm9uuy2n2yn5kvcr5rbt0vi121picqf8rg677cw373b23sd8wh57xkzebvtle23af0poaof7bzt1d90b5hnx95ep',
-                hasCustomFields: true,
+                name: 'v8tgghalktuee2bdnxnuptmysn3kvu0lkab1yo7xtrmbpkc8r1j0qq3e1a9fvkshiuocyxfwyejdt8d1vcg3dwcpa3xi38uvpmdq1rpz50s44gvuqgdvcgeu2sm74j2s0vuqzfgclvooj6ihfcj9f0wuo5fr4kv74c9enckxo4hqt7msjssj3wr047fv7k92ka936oumlwuxm7dwwliox9ij1ykzwmfxzjcus5nhv8vxq1gp2pu0syjpz2qlbd1',
+                hasCustomFields: false,
                 hasAttachments: false,
             })
             .expect(400)
@@ -118,9 +118,9 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
                 
-                name: 'kf54thmr0n4nwkooz1kuzs02vb1n99727p7owetn3gmah6pj5rmwrwrayioid6m33boxderbx6eiduur5m765b153mylxumc5vrl1ygybgbl4unjsg484t30fdlcz3g7q7qrch4p59d154yu8pwapj38at7cozj139d4q5quyv1brfkq2s7lnkgqmmvttlgcch6x9ew71u5swtq635edyvsowxcq9equy3gwtexa4chme03c0quth6677yft0je',
+                name: 'joknpbxajh8q2bsaffc0osvvi3acangv4h3vc1vno63khnuxsflzrifqtear4bwoul0oyd8penyj5wtaerv0p233g7bx1f0uo1s9ehqj3qgbwgzgh2jwtgxz8jxxtpgbe96b98prfgq1blmelv64lvifss55dc0zk9uj473092sxket4syku4uyxwi3dh2wc9cl3ojqasnetb2chi59n6o661gg0ydlq7v93fo7ub3100xrnsl14jh4se4l9syu',
                 hasCustomFields: true,
                 hasAttachments: true,
             })
@@ -136,8 +136,8 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
                 name: null,
                 hasCustomFields: false,
                 hasAttachments: false,
@@ -154,10 +154,10 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
                 
-                hasCustomFields: true,
+                hasCustomFields: false,
                 hasAttachments: false,
             })
             .expect(400)
@@ -172,11 +172,11 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: '7d73xzea0yv8efy1dodoqr8cqhur4l4k6a25balmim3uy9rmdan775z5sc09warkwhnjlnmzypd50yfwf72x6yl84l5b82j3a1957lw6w1ghnps2q3go175png0tugh1hbn3olf39ypxi9hhdzryqwylae9pvbki3y570z413eidz3pkq30q249nm5dwh0pw18t8y89rkfnakcwllz0lsux8dp9uxrm6jbp46hkz4dm1tcyi03rmqfxooxdqfqz',
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: 'wp9draqa0e8pp0m5v0blceym7vy9ou2i60i6f5e5a4ytddscnbjyif00rhr3wn2x9s7fh5eghd56fxy2gio0rak6r6dvky4zi6f73rzx51dvq4z76lmlcgfl0te1bv0rvj4er3itfofmhkbumyncurjt6vkq109kbpmyxqa433tg21nvll6ol0aqp2c816an3em1epcxem6davqbglbxsd9n739koll5retzo7201v9ti6nrhik1ukbeap5kk8g',
                 hasCustomFields: null,
-                hasAttachments: true,
+                hasAttachments: false,
             })
             .expect(400)
             .then(res => {
@@ -190,11 +190,11 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: 'flxzydzxvexw33de4lcptd5ez5ukd4colr52jz3km6ytorifg10t2kack8xfyprwww8m713irsw4hafo7if53wbont2y5dnz5lk4vhyk54ga7vijhnouv7vglxmk31d89wzbrwmkxuc9n4ccsxvslbv049wlz7gdp1d8wwknmqbng7ode2u3v6xz7damdv70xnn7pb4b7z7719q1moe4nszbpvwe5qwi4lvitch5xfcdgvn9pnhh6q7w1c4kovi',
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: '1pa8tykf5ccca6ww64ytpdz3eshmozpbaf50den99lto38uf53arvc3inucaenmg7o5tbm61qh6hgs2fsu8gzvx68an21jdzisbi3dcpskwhudetqlcgjwmhb99mglfx3rb27xs4iwhn0pwm49yhem2m93j9sgwqo1wjbvl7i1rvipgau7wddwgvufb4zr9zx3hq02apifa0evx6ukpg55obeqwmv7z74y5z3dvjoihmwlid23yq20expnqdvz5',
                 
-                hasAttachments: false,
+                hasAttachments: true,
             })
             .expect(400)
             .then(res => {
@@ -208,9 +208,9 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: 'aapgo8ookjtbrfdnlydnodrh2wuge1vtcat5wdlmi7fupbf0anpwibqqhgrivi1l0awk1zkuat55lodi3efmsnz3q25u7muofsb3od53lphrq3j7ugcbxdz1xpqbysxor0qct2ot8zlpxa1w3yae62bk5so2qlhzmag849qtbhq5nyqada6iasv0mrsp95rvgjug2ylxw4o7o8qiw2naxsr81hvubobtl9e6sph9kp5t5t7dy0pz4fh85ypjjjv',
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: 'xmvr1ck43rwzusjg3mprgxzzjgfdi4xkqj888awwo9otbwux66zkh3e6fjxogpw67xup8f2ooriw359g6eyqrahtzzizsacmzhn6y26fsqknw3csqfpytd8yjnpf00aq5kflywjosb1sqd220u211bio8qy2m3vhbygbaj2wwfn2cp1gflz85e9m7t6dy9mzxuw9d6nz4h55lh901lx75tueq0jzmel8qf0gbhrcs3dekr09xxviywp0der250u',
                 hasCustomFields: false,
                 hasAttachments: null,
             })
@@ -226,10 +226,10 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: 'kybar6u571ko6zkuqvi8xwjqnwl2y13yv17fzqlyyrxft6trn8q0kz52jcesk7lixbc6gcxa8q8exn3zipn608k4ps7o9s5ldk4nuiza96bzlgphq8je2qfetp3jkxevhjtfwr6ylt1egbpjbzegq9d26kqcm6a62iumjj8jl6etrqj41d6c8ept45o5qip0ife94qg9aycf34ngohtl5o5ezs1ow8kp4l88cmziqqn2mtpir8kx1mdouy5ugly',
-                hasCustomFields: false,
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: 'dt4xwc8d0qj9ktg6g6k590cabwvxvq8ugekpwwbpmvwn7s1irbix0ajsk53brpcuvt3t8hks7dn3gbrdzfgl1erqmdx0krunpdua1x107it1t21xdv2jp3c86g6qrm6uuu1pcqe5isr8n9dv5d328g9li5f2pdni7uejkqzsb86fy6vhyjrqzuc1bv2s5imbhg10amlul69898fe7m7c6o51l1hln5qj06yiiy3zxbago86gvereaa1yhmlqdb9',
+                hasCustomFields: true,
                 
             })
             .expect(400)
@@ -246,11 +246,11 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'krh2tc4sgcujmxerp784m9tud1m5clurtvzpd',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: '5opurrd605ua4c63fd73n4sruc89vm36lppf1ucqhppitsaudubj53ngkbuu8k9h3b3xi7ghxtaz1bsxi57pl3ws86yybegl51z7n7a7k94haj5hbwwb20iouhzjg3jhqj9ozvo36eu6oqi1gnnwjbesvgxhdqvxmwut45xfgru0m3fcbqhc0pwh1r46r03s0pbfpzp5nn7mbvwkprnczm9x0c745x1z5ake9qs82pmtvp8t8knlwk1q0cu2u9q',
+                id: 'a3rxcu9akhcev23adr9q4ioa32i95jgiiadc5',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: '5wn7uzti92vhe58pqwv96r4h7unaqnvpox1rv0wo4ufm38msjlqulmoio49vyw5bbz4mcswjf3oqsantrr3q1qdr3xedpptt9v7lghm1u1vlv3gk9jwgajkj7ge5c4o9m2jchkqfbwn40a9yq4r0w279jmttyv7jzrjeiped6353gtkrfyzqgw35709214v72hkpwljtddd3b06355w846ivicunp4832et0xstszzredjtoooisizsjq1f30xa',
                 hasCustomFields: false,
-                hasAttachments: false,
+                hasAttachments: true,
             })
             .expect(400)
             .then(res => {
@@ -264,11 +264,11 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'hevj32xs4h3em8bwdpxdphya0ug5vcobe71h8',
-                name: 'pnepoc1nb1kenfo5kq5qyzb0cc0ubmow22w6ygekvcs227yvhxzn5e2qoqqii8xtllalzightxh2m9eprfd1enj91q41u3a9nvvndoh1cidg7b9jo1521herl1xos6zp2mld9d8lqo4yxt6bqm5x2h0jkqecmuwmpk0omf0rop06prfvfpk1vt7qj2a3vp4raeulq5sdxzinjgjjok6yj7o2p4frfk4680ss3vrae4gdydnlhohpmace5p58puf',
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: 'g972vs3ob2z64oaht21wqaejzsbtbp477vfad',
+                name: 'tlj4duttgerq0behouvmlytzc01jbfx6w8xcs63ln0amjoc2ezsdd5he39oulj7rtg5aifn5qeihokijphgkmt50998kcslw1f6mzmizs1ara5ctak3f36bbw2a2gpel0cubgciag0cwfesn9xge4yqjsiza38ra1ftkg80xoohieppraqfj8ebizwt6zhgj72r8x1ewurg7lrugjz1xy76xd0o4o8mxmvxlghcljzuuq3okzpz6fyt8d18qzy2',
                 hasCustomFields: false,
-                hasAttachments: true,
+                hasAttachments: false,
             })
             .expect(400)
             .then(res => {
@@ -284,10 +284,10 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: 'h70ygptt99zox5bt4i3vw30u1j6m74vwqbkvq7m1lsntntr1a43ckf0iiwbhtrzqvf3q65a982vozk3ustncepfu4665s69fozmuytwt46i03130ccykbebf68z3t9q21s592ilo14qs723nul95feb4j55i3wqexispli6eoxsjixyqichboeagdtmq4w4wsmhcxdexjrox4x46yjtf4y1yfy8ypyhsj6nlwhqgrqi05oszajj6w83eiaf1wlkw',
-                hasCustomFields: true,
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: 'su1bdc9b35n3mqhx9xrijpnlfny0ay3t7n6a9grca0n36t8b5xk2o7495q8ovcc2kyg1q5gad7m80mx00a5alcmo1tt69nq7zcprqjhkpmqozfbbjicyru190nsgek7w9yzz5yy0uo7801st33rwjznp9fo0n4liz4rsaxbsxfijfsvja1ap2ddausbw34f05atwk0ojt26ew3jbjlwmiepsrkzxj591ooyojy08py9ywld06tajcecmj9hf7km9',
+                hasCustomFields: false,
                 hasAttachments: true,
             })
             .expect(400)
@@ -310,9 +310,9 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: 'qt8tx12r7ax07sngm9ia58838nh4hcm1hjal61euv4ov91jkd73880j4s6bttlkrdtv4hu2ts5ogsb34hbcjm6p62yls5dr26vwr03ue01r9s2koia2dip7x733d5e1npk47m46u1kltdladbpkr2ct8w81kpmtednvusqm0z94l048gns4pu7t50d83m6f4xbymf16786wmelo628aoncexymxtz35mgf7i217zxkvjdqp4nlsw981687l8md4',
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: 'ql7uwsoap7k9a7yxro61pjkuoz4n1zx82s323f5n2jw891vcve7gao16vvzkr4js1t4f51qxrfv4m9k0vv5dt8i5ibpyw7yilvhulrths244uewj19lhug4ixmrv9wmdafklhhbzvujbrrta4usr1ce2b1u4qe6llya5etk7kpuv27sald1ywvxeus7lbl4afdqwqcmx06l0bhk3lfub4188e4q3lwnblz8yrfb45uzkva64bnauff0z8x0hhoy',
                 hasCustomFields: 'true',
                 hasAttachments: false,
             })
@@ -328,10 +328,10 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: 'mo6jiyhhqy3nkqcm6tkhptp1ck6b9cnopo3kktslud6rnn4fusmzzgjhlze4itpsdpt77bh1dz4ph9l31ychzudf9q8q6rqlop1qr65wgofu6texbxdzxbtnfo1uyuubpbtbc6tmjpj26lyhp38p8hrkeffjo24bj4itepamx4fq476kh2tm9ucudj1xqxxv3cje1ldsj1bb201a6c2zjkl4u6sh1lhbfwlelsg79urmnyspico1yu5jc4fo45v',
-                hasCustomFields: true,
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: 'pl468r0bz8420r7djcu2r318hq03z1lgbpz4hi2xfe29jsgdglbrhe04nrzss963ie5hjhilrp8w9szzgumnumypt9sffb3sjzjsziwvz08mn8l0lnuunzmzqs56yhs4du5fnafl3o2idhbvba8du14tfnal9c9rposh8wj3a9qn6ah652082xok5ct6vpv51htrtvazo27uelzryxajk7xdexshgz9n8nunpubiqalaj02xq9gtf7p0q4vxp0e',
+                hasCustomFields: false,
                 hasAttachments: 'true',
             })
             .expect(400)
@@ -351,9 +351,9 @@ describe('resource', () =>
             .post('/admin/resource')
             .set('Accept', 'application/json')
             .send({
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: 'fbo4nn3l3l4tnlwle1ruql8q0ho9dt1gzh90wqixeu8zd8alun5uey8oxi8vt7enssk2wdlf3xmiqnsadkgzr616o8n5yeq480oq7jox5z50quwpn3som5f5z5tihzilp2vngo7owc23t66nj2rmaz9k4dxplwz0nl7xpz2gdm481sue0dc86utbykadvt7gymzm0u8mq52higrz5vzqe70xcru49t8yp4ls32ov5l9dq3f4ur63bh1xuppuj5p',
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: '0zvkurh130zkq0c8zjklhv0j4ii0euj9g5n4freo7b7qvrla2ruliv3eg3175trpubqejwb2rth62abhv7dy9a8d3n9l5sqwp3e9zrctz03jv7uf263ndimtlxlfnoqrsqmm78u9gfmfu8a69vlnqmxmccdn7s5ey7fdlgynnqihe3wc8go4axulg1ia04sqfu6z3q941nwmy4abid9xzcbb3533c9qw0zhx80cq8rie4cisim208gcfa4b45zr',
                 hasCustomFields: false,
                 hasAttachments: false,
             })
@@ -414,12 +414,12 @@ describe('resource', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : 'be31694e-e0bc-405f-bb9c-c12206802ef8'
+                        value   : '82de173d-4131-41ea-b965-15c2ed26f75c'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'be31694e-e0bc-405f-bb9c-c12206802ef8'));
+            .expect(repository.collectionResponse.find(item => item.id === '82de173d-4131-41ea-b965-15c2ed26f75c'));
     });
 
     test(`/REST:GET admin/resource/{id} - Got 404 Not Found`, () => 
@@ -433,10 +433,10 @@ describe('resource', () =>
     test(`/REST:GET admin/resource/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/resource/be31694e-e0bc-405f-bb9c-c12206802ef8')
+            .get('/admin/resource/82de173d-4131-41ea-b965-15c2ed26f75c')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'be31694e-e0bc-405f-bb9c-c12206802ef8'));
+            .expect(repository.collectionResponse.find(e => e.id === '82de173d-4131-41ea-b965-15c2ed26f75c'));
     });
 
     test(`/REST:GET admin/resources`, () => 
@@ -455,9 +455,9 @@ describe('resource', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '773cfb69-d0aa-4cf3-832b-4f6615add41b',
-                boundedContextId: '4638b3c4-b9c5-4c6d-ad26-14938be6dc8e',
-                name: 'yn1u9jpwixxetzob90zptcm0zxaocz0vp0j825qftcjyz70exabscruzqga10o4o5tfk7y3fv7cq9atsx66g79z33pfpq0vsgwgrvb3z5db4ulyh396ullamiald22xwvay60kep5tnrsqxamk5k1vqowumqg9ox0ixj0euatp4v01m3pd3z984gd18ekkdej8eskt4lmydpx3k955m4zfi4t8ngokljscivuwlth149xlrc6o2773x20z2vs00',
+                id: 'd2c87aa1-5bda-4173-970b-d468a1bb0b0b',
+                boundedContextId: 'ec43cfb8-fce2-464c-b780-e91c1bce7365',
+                name: '5el9fejogbfp3mu90zr8lj6mm7nft09wkjefjbmlz39i7s4yd3b6winporlatltby76e2z0peievcscje1q7lrmuhpl3tzdhdzp9j1lj8h11odu96xizjke6dprnxhoq506vz20a5aqax9j9gs6gdp7yzayve299htrfpjhmkhl6wpnv40115ttopwmzrbgn97jygre4qnc7783m8aiq7cy4h6e9biu5sa57wdwaxsx0ocs8qak2sntlquhkt8b',
                 hasCustomFields: false,
                 hasAttachments: false,
             })
@@ -471,14 +471,14 @@ describe('resource', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                name: 'nqoztfo858q4vybu4zhofvk9y7jsgpn3zzjm08qh1kx40o5b0i0wu1ad9dc4ld6t86tpghxljv277wf66tuvdmp6zzj1o2mrb8f3klazigoncqlthi07gflj5pe5ftz0ht2klacgo62nxbklzvmk43ldfab2kn6ig8w3pr2rwx9eebvt3mmtm0kasocn3uzdm1q9v15vnegy832ntdcnkngl2xvtg6fufew1hvcs3z2klziogfsar4e0zd8a9jy',
-                hasCustomFields: true,
+                id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                name: '06shf8supdz69dcx1oe9pd1trq5b7edk95vzk49nlpoa90kh21st6h7wthvsh4vnt558vhwjfbh2scyz0df7fadmx0aewwd4a6j70gm8ipq7egmquwfl05drwzjl99uehbx3csv0xh2vp7u9c84sgh00h8wlm4a4dzclwv8smp4nwzigr7imxgp9cdi4xfsp55gty1vblpjvc9nmgdfpcyzcffcepbwf9ef1mu2mvvknkfj0jcwnsbgxrjm69uc',
+                hasCustomFields: false,
                 hasAttachments: false,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'be31694e-e0bc-405f-bb9c-c12206802ef8'));
+            .expect(repository.collectionResponse.find(e => e.id === '82de173d-4131-41ea-b965-15c2ed26f75c'));
     });
 
     test(`/REST:DELETE admin/resource/{id} - Got 404 Not Found`, () => 
@@ -492,7 +492,7 @@ describe('resource', () =>
     test(`/REST:DELETE admin/resource/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/admin/resource/be31694e-e0bc-405f-bb9c-c12206802ef8')
+            .delete('/admin/resource/82de173d-4131-41ea-b965-15c2ed26f75c')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -553,17 +553,17 @@ describe('resource', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '4c3b8da3-d109-4015-8388-1973ae653ec5',
-                        boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                        name: 's9lli9mi9e23e7tgc0by2vi4apymibafuv9z77quzjrfgf6jq3roln6igpuuqkhop6trscm22wkk1r46ln6wnsef2ard2rqskp4un7dl6svox6zf4jld32j21cyoeci66i5be8wwt4qwtr33s6uw4mxl8q1w4c8095tftxij2tfvz3dof6tk1doxd90b9ff0xwb0sifrpodhbem6ayrxuffqqryvejgk6m1p6kfdahlofqph2tzixw50uh86d0q',
+                        id: '4e2716e2-cfe3-4664-a519-145bf1d96512',
+                        boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                        name: 'dyi8i17fs0wpyqjn3qtzeor6nubs0eqstoehyerlzxyw2zk4mi2q6zgcg4994vnvh36ge4zj92jyxff9g8ua3b8ji0v5krtrrzpn6vkvvtfbw80eqnqrsh77gq7exbf0jgllhhzh56o7jkqbta3wlpms7szvm2k7l1r4l906ysy1ckfm1soxle9gkpj1x3gpivpo69pj84d62xqnzkaf2gu5gyvfgvfdvc3v93w09sme9kvvpfr3yv82b02qe27',
                         hasCustomFields: true,
-                        hasAttachments: true,
+                        hasAttachments: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateResource).toHaveProperty('id', '4c3b8da3-d109-4015-8388-1973ae653ec5');
+                expect(res.body.data.adminCreateResource).toHaveProperty('id', '4e2716e2-cfe3-4664-a519-145bf1d96512');
             });
     });
 
@@ -672,14 +672,14 @@ describe('resource', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'be31694e-e0bc-405f-bb9c-c12206802ef8'
+                            value   : '82de173d-4131-41ea-b965-15c2ed26f75c'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindResource.id).toStrictEqual('be31694e-e0bc-405f-bb9c-c12206802ef8');
+                expect(res.body.data.adminFindResource.id).toStrictEqual('82de173d-4131-41ea-b965-15c2ed26f75c');
             });
     });
 
@@ -738,12 +738,12 @@ describe('resource', () =>
                     }
                 `,
                 variables: {
-                    id: 'be31694e-e0bc-405f-bb9c-c12206802ef8'
+                    id: '82de173d-4131-41ea-b965-15c2ed26f75c'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindResourceById.id).toStrictEqual('be31694e-e0bc-405f-bb9c-c12206802ef8');
+                expect(res.body.data.adminFindResourceById.id).toStrictEqual('82de173d-4131-41ea-b965-15c2ed26f75c');
             });
     });
 
@@ -803,11 +803,11 @@ describe('resource', () =>
                 variables: {
                     payload: {
                         
-                        id: '1718deb1-040f-4d58-9907-00a1327e8ae3',
-                        boundedContextId: '86e2ca68-c19d-4b1f-bb8d-ef216dd2d65e',
-                        name: 'znhe1032ybsm9ipaqkwowio7bwwd6ukoudv2w83x33l01girikql0t8a70jp5ueuaswj9skhamwd8fcyhts1yjtl3cc87n97zsbvnmdt98x1urne0egv48j70f4hoyuvcrpujxxiz6lcytuy2dzd29pj6prbc8pzkhdckz0aqtloz22t0x3upc5jnjhalclp0a3ed448qrdqgfi7xxgq0id8ypnqsrgbprdod4bblhaluejtu4h84fjypcyanhq',
-                        hasCustomFields: false,
-                        hasAttachments: true,
+                        id: 'def7497b-0411-41e4-bc37-39ea4fb403a0',
+                        boundedContextId: 'f56442c9-4556-4935-b8f0-db553d9b62fd',
+                        name: 'gm9gatfujz6k699tyebat5vo21cm24ptz2857cz8pyjaq42pw0u1661zi8sru0uqfsdorg7miqt1bkh2f19y7oj4np3z2z8jwvlygll3o5wbpt5gx59naz2nxl8uv98bkkpktahqec1b29wd6tl3yj05sprz3dwok0fn787t58lwz2fmhx85qij3td2rdyyxomepawqg61365p1p48b586kljd0zoy5lcajmuesdurhar0qgy2isj9qmyot3sfg',
+                        hasCustomFields: true,
+                        hasAttachments: false,
                     }
                 }
             })
@@ -843,9 +843,9 @@ describe('resource', () =>
                 variables: {
                     payload: {
                         
-                        id: 'be31694e-e0bc-405f-bb9c-c12206802ef8',
-                        boundedContextId: 'b8f3d565-b9ed-403d-998f-26b70f67d093',
-                        name: 'b1pbzncr11hof9jv3kcrcaqyt9fjx7qx4bgliwa3bas105tv72xg1wa36i667h3zufrobr20qe8f9rti25hrsximhr4okg0flfghf9kg0nl9nmf80p07egwmk68x4fdle1v2942zwffflam5371avyx6hhtb8c8up82xo0t6p7y0rmgezb8l708qlgaurojmabnkfjnu0hl9gbt9fq6xt2ltqo4qh82l889emf7lwo2okvdu28bruobhyzusl7w',
+                        id: '82de173d-4131-41ea-b965-15c2ed26f75c',
+                        boundedContextId: '4f6e89b9-a871-4aa3-bfd6-427dc76c3499',
+                        name: '7niagpw5258b0aqgnl76cs09i4ltz1efttbx60zk4to1bjrgctft2ewlhzkr6pwhc3zppiz470bf64edku3zjjmb2a1cguih6uitb7tn02dj4k4qv5yojtbmx0mcm4iladptvgzcb78569js58n13r9ea6cyoxb4tovfn6kfl6ewqyp3l8bsc26fake0l8ml2r6ugty8xc0f5193fb9s8jxi1qd682pw1drj39fn0vmohunxsl47nde19c8jncv',
                         hasCustomFields: true,
                         hasAttachments: false,
                     }
@@ -853,7 +853,7 @@ describe('resource', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateResource.id).toStrictEqual('be31694e-e0bc-405f-bb9c-c12206802ef8');
+                expect(res.body.data.adminUpdateResource.id).toStrictEqual('82de173d-4131-41ea-b965-15c2ed26f75c');
             });
     });
 
@@ -912,12 +912,12 @@ describe('resource', () =>
                     }
                 `,
                 variables: {
-                    id: 'be31694e-e0bc-405f-bb9c-c12206802ef8'
+                    id: '82de173d-4131-41ea-b965-15c2ed26f75c'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteResourceById.id).toStrictEqual('be31694e-e0bc-405f-bb9c-c12206802ef8');
+                expect(res.body.data.adminDeleteResourceById.id).toStrictEqual('82de173d-4131-41ea-b965-15c2ed26f75c');
             });
     });
 
