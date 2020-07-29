@@ -15,8 +15,8 @@ import {
     TagIsSessionRequired
     
 } from './../../domain/value-objects';
-import { ITagRepository } from '../../domain/tag.repository';
-import { MockTagRepository } from '../../infrastructure/mock/mock-tag.repository';
+import { ITagRepository } from './../../domain/tag.repository';
+import { MockTagRepository } from './../../infrastructure/mock/mock-tag.repository';
 
 describe('CreateTagService', () => 
 {
@@ -36,8 +36,7 @@ describe('CreateTagService', () =>
                 { 
                     provide: ITagRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -57,7 +56,6 @@ describe('CreateTagService', () =>
 
         test('should create a tag and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new TagId(tags[0].id),
                 new TagCode(tags[0].code),

@@ -12,8 +12,8 @@ import {
     ActionData
     
 } from './../../domain/value-objects';
-import { IActionRepository } from '../../domain/action.repository';
-import { MockActionRepository } from '../../infrastructure/mock/mock-action.repository';
+import { IActionRepository } from './../../domain/action.repository';
+import { MockActionRepository } from './../../infrastructure/mock/mock-action.repository';
 
 describe('CreateActionService', () => 
 {
@@ -33,8 +33,7 @@ describe('CreateActionService', () =>
                 { 
                     provide: IActionRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -54,7 +53,6 @@ describe('CreateActionService', () =>
 
         test('should create a action and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new ActionId(actions[0].id),
                 new ActionTagId(actions[0].tagId),

@@ -13,8 +13,8 @@ import {
     SessionExpiredAt
     
 } from './../../domain/value-objects';
-import { ISessionRepository } from '../../domain/session.repository';
-import { MockSessionRepository } from '../../infrastructure/mock/mock-session.repository';
+import { ISessionRepository } from './../../domain/session.repository';
+import { MockSessionRepository } from './../../infrastructure/mock/mock-session.repository';
 
 describe('CreateSessionService', () => 
 {
@@ -34,8 +34,7 @@ describe('CreateSessionService', () =>
                 { 
                     provide: ISessionRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -55,7 +54,6 @@ describe('CreateSessionService', () =>
 
         test('should create a session and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new SessionId(sessions[0].id),
                 new SessionIp(sessions[0].ip),

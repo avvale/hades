@@ -6,7 +6,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
+        example     : '20da9779-7e32-474a-bb18-e80dc5561456'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class TagDto
     @ApiProperty({
         type        : Number,
         description : 'code [input here api field description]',
-        example     : 7894005846
+        example     : 2370980920
     })
     code: number;
     
@@ -24,7 +24,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '0d7ba885-0f6d-4149-8d2b-8e15081fa80c'
+        example     : '8252d797-ad18-4335-b200-078de890abe9'
     })
     tenantId: string;
     
@@ -33,7 +33,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'xh7qwmqkhydd6ew7sgeu59xhz5t60yac2ljuqzn8dfjaow1qkj'
+        example     : '6soyrzn2w1fsocjwyiracniilc49y3d1pwwjarw868obs1ac3p'
     })
     tenantCode: string;
     
@@ -42,7 +42,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'urlBase [input here api field description]',
-        example     : 'p1ybmzjt1thrl9i9rsjrcp27pvyo7klnb35rp65mudg6ci055od4oflcug26mk2w5e387ecmgezjf5bawjigcjeqn0poogjfr4bbxwumix70qn0m50nn12mo1vfrx41kyxgmkdccce1d2gcssguwnkt7oynduckjzjzqcgptqov8tjifdntm2clbhyk3zhy683p7wxecqsxpx3kdl87wdjgkwxstgnyz0gbgen5dwkwfg2pk9k0fm1hgqjub1sj'
+        example     : 'tycf5t9ffeymhal4a8bj5379eocxlscaa7plo50h2wzro3ddky6ic9cbfxrwd8x5bf3f2gz864kqtqunzxp47uccqj1j0qonsom9decztwtarr2tlvcvwttotlej9rx49h23yhgeydlwqo0893n8yegnd3gpha98nlp8wu45smoeudj5r7librn5uben7qbnraeu7hfbsa54gqimmllrtsa7ahdhms8tgaqtpre8xxrkr37q8hng1h2k2ca8jkl'
     })
     urlBase: string;
     
@@ -60,7 +60,7 @@ export class TagDto
     @ApiProperty({
         type        : Number,
         description : 'offset [input here api field description]',
-        example     : 354912
+        example     : 572505
     })
     offset: number;
     
@@ -78,7 +78,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-21 19:02:30'
+        example     : '2020-07-28 18:08:35'
     })
     createdAt: string;
     
@@ -87,7 +87,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-21 02:26:04'
+        example     : '2020-07-29 08:44:47'
     })
     updatedAt: string;
     
@@ -96,7 +96,7 @@ export class TagDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-21 01:40:53'
+        example     : '2020-07-29 08:39:50'
     })
     deletedAt: string;
     

@@ -10,7 +10,7 @@ export abstract class ISummaryRepository implements IRepository<NfcSummary>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<NfcSummary>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<NfcSummary>>;
 
     // create a single record
     abstract async create(summary: NfcSummary): Promise<void>;

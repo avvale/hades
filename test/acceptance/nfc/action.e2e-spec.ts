@@ -68,9 +68,9 @@ describe('action', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
-                type: 'ZAP',
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
+                type: 'MULESOFT',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -86,9 +86,9 @@ describe('action', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
                 type: 'TCI',
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -103,10 +103,10 @@ describe('action', () =>
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
+                id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0',
                 tagId: null,
-                type: 'TCI',
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                type: 'MULESOFT',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -121,10 +121,10 @@ describe('action', () =>
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
+                id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0',
                 
-                type: 'MULESOFT',
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                type: 'TCI',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -139,10 +139,10 @@ describe('action', () =>
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
-                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0',
+                tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
                 type: null,
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -157,10 +157,10 @@ describe('action', () =>
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
-                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0',
+                tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
                 
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -177,10 +177,10 @@ describe('action', () =>
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'kwcsuhnf4jvaj5jep73g2fsrug2db7eaw07vy',
-                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
-                type: 'TCI',
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                id: '80tdkgqxvvjkkgextbbtlzbgw9nzlo39b82eg',
+                tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
+                type: 'CMS',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -195,10 +195,10 @@ describe('action', () =>
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
-                tagId: 'm6bve1nb89t6rtzdzfsamcc17o4pkh50cs5ps',
-                type: 'TCI',
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0',
+                tagId: 'wouvtf80tnk14bs86gc5fp6ftvnbv6m4qst44',
+                type: 'ZAP',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -213,10 +213,10 @@ describe('action', () =>
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
-                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
-                type: 'MULESOFT',
-                sectionId: 'to97v0icqu7j9zgldsu4xr1e9464kmq7v5osu',
+                id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0',
+                tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
+                type: 'TCI',
+                sectionId: 'nzbphxqxb9c9wnmqk9exrxgz9175ur3mjsoj1',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -243,10 +243,10 @@ describe('action', () =>
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
-                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
+                id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0',
+                tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
                 type: 'XXXX',
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -264,10 +264,10 @@ describe('action', () =>
             .post('/nfc/action')
             .set('Accept', 'application/json')
             .send({
-                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
-                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
-                type: 'TCI',
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0',
+                tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
+                type: 'ZAP',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(201);
@@ -327,12 +327,12 @@ describe('action', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : 'e8172046-483a-4019-80ae-4490f4d43deb'
+                        value   : 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'e8172046-483a-4019-80ae-4490f4d43deb'));
+            .expect(repository.collectionResponse.find(item => item.id === 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0'));
     });
 
     test(`/REST:GET nfc/action/{id} - Got 404 Not Found`, () => 
@@ -346,10 +346,10 @@ describe('action', () =>
     test(`/REST:GET nfc/action/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/nfc/action/e8172046-483a-4019-80ae-4490f4d43deb')
+            .get('/nfc/action/ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e8172046-483a-4019-80ae-4490f4d43deb'));
+            .expect(repository.collectionResponse.find(e => e.id === 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0'));
     });
 
     test(`/REST:GET nfc/actions`, () => 
@@ -368,10 +368,10 @@ describe('action', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '184387d7-d49f-4780-8ba4-7122b12b914b',
-                tagId: '08997a82-9a50-45fc-8bc3-af1ce88ba4d7',
-                type: 'CMS',
-                sectionId: 'ee0e4035-0779-4649-b24b-b88e8f7a85d4',
+                id: 'a485a116-b35d-44d6-a845-f640fcbe1f31',
+                tagId: '6c97412e-26ae-4819-9e81-ecb81d23b6ff',
+                type: 'ZAP',
+                sectionId: 'de241487-975a-467a-a678-0307871e5bb1',
                 data: { "foo" : "bar" },
             })
             .expect(404);
@@ -384,14 +384,14 @@ describe('action', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'e8172046-483a-4019-80ae-4490f4d43deb',
-                tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
-                type: 'ZAP',
-                sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0',
+                tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
+                type: 'TCI',
+                sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                 data: { "foo" : "bar" },
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e8172046-483a-4019-80ae-4490f4d43deb'));
+            .expect(repository.collectionResponse.find(e => e.id === 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0'));
     });
 
     test(`/REST:DELETE nfc/action/{id} - Got 404 Not Found`, () => 
@@ -405,7 +405,7 @@ describe('action', () =>
     test(`/REST:DELETE nfc/action/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/nfc/action/e8172046-483a-4019-80ae-4490f4d43deb')
+            .delete('/nfc/action/ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -466,17 +466,17 @@ describe('action', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '51999ad5-caa6-4c93-9d59-e0e3c0eeb837',
-                        tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
-                        type: 'ZAP',
-                        sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                        id: 'a39f6a56-c59b-44bc-b85f-410d15630e96',
+                        tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
+                        type: 'MULESOFT',
+                        sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcCreateAction).toHaveProperty('id', '51999ad5-caa6-4c93-9d59-e0e3c0eeb837');
+                expect(res.body.data.nfcCreateAction).toHaveProperty('id', 'a39f6a56-c59b-44bc-b85f-410d15630e96');
             });
     });
 
@@ -585,14 +585,14 @@ describe('action', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'e8172046-483a-4019-80ae-4490f4d43deb'
+                            value   : 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindAction.id).toStrictEqual('e8172046-483a-4019-80ae-4490f4d43deb');
+                expect(res.body.data.nfcFindAction.id).toStrictEqual('ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0');
             });
     });
 
@@ -651,12 +651,12 @@ describe('action', () =>
                     }
                 `,
                 variables: {
-                    id: 'e8172046-483a-4019-80ae-4490f4d43deb'
+                    id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindActionById.id).toStrictEqual('e8172046-483a-4019-80ae-4490f4d43deb');
+                expect(res.body.data.nfcFindActionById.id).toStrictEqual('ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0');
             });
     });
 
@@ -716,10 +716,10 @@ describe('action', () =>
                 variables: {
                     payload: {
                         
-                        id: '6511753e-0fee-43a5-aef3-770299d4769e',
-                        tagId: '13c0ea68-e077-44d7-965e-cca933fb4f35',
-                        type: 'CMS',
-                        sectionId: 'f90cd7aa-b4aa-4a1b-b9d3-f69eab7bd92c',
+                        id: 'bdb4d643-2607-433b-90d7-677816fb3d94',
+                        tagId: '917a632f-8ec4-4d61-b966-578912c512fe',
+                        type: 'MULESOFT',
+                        sectionId: '99310e30-8413-4b13-b057-1c9799fd875e',
                         data: { "foo" : "bar" },
                     }
                 }
@@ -756,17 +756,17 @@ describe('action', () =>
                 variables: {
                     payload: {
                         
-                        id: 'e8172046-483a-4019-80ae-4490f4d43deb',
-                        tagId: 'ce122498-b97f-4fe8-8be8-6f9501184207',
-                        type: 'TCI',
-                        sectionId: 'e761f69c-99c0-42d7-a627-126f44b62d5b',
+                        id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0',
+                        tagId: 'b21327e5-d59d-4392-8109-3415bf7f4f80',
+                        type: 'CMS',
+                        sectionId: '02ebdb92-d2a2-4f32-92a8-1ee141200665',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcUpdateAction.id).toStrictEqual('e8172046-483a-4019-80ae-4490f4d43deb');
+                expect(res.body.data.nfcUpdateAction.id).toStrictEqual('ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0');
             });
     });
 
@@ -825,12 +825,12 @@ describe('action', () =>
                     }
                 `,
                 variables: {
-                    id: 'e8172046-483a-4019-80ae-4490f4d43deb'
+                    id: 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcDeleteActionById.id).toStrictEqual('e8172046-483a-4019-80ae-4490f4d43deb');
+                expect(res.body.data.nfcDeleteActionById.id).toStrictEqual('ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0');
             });
     });
 

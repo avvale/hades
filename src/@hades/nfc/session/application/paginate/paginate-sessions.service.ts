@@ -11,8 +11,8 @@ export class PaginateSessionsService
         private readonly repository: ISessionRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<NfcSession>>
+    public async main(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<NfcSession>>
     {        
-        return await this.repository.paginate(queryStatements, constraint);
+        return await this.repository.paginate(queryStatements, constraints);
     }
 }

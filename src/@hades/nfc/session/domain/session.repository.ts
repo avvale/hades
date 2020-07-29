@@ -10,7 +10,7 @@ export abstract class ISessionRepository implements IRepository<NfcSession>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<NfcSession>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<NfcSession>>;
 
     // create a single record
     abstract async create(session: NfcSession): Promise<void>;

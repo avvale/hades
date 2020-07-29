@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { actions } from '@hades/nfc/action/infrastructure/seeds/action.seed';
 import { DeleteActionByIdService } from './delete-action-by-id.service';
 import { ActionId } from './../../domain/value-objects';
-import { IActionRepository } from '../../domain/action.repository';
-import { MockActionRepository } from '../../infrastructure/mock/mock-action.repository';
+import { IActionRepository } from './../../domain/action.repository';
+import { MockActionRepository } from './../../infrastructure/mock/mock-action.repository';
 
 describe('DeleteActionByIdService', () => 
 {
@@ -40,12 +40,12 @@ describe('DeleteActionByIdService', () =>
 
     describe('main', () => 
     {
-        it('DeleteActionByIdService should be defined', () => 
+        test('DeleteActionByIdService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should delete action and emit event', async () => 
+        test('should delete action and emit event', async () => 
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

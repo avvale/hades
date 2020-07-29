@@ -12,8 +12,8 @@ import {
     SummaryCounter
     
 } from './../../domain/value-objects';
-import { ISummaryRepository } from '../../domain/summary.repository';
-import { MockSummaryRepository } from '../../infrastructure/mock/mock-summary.repository';
+import { ISummaryRepository } from './../../domain/summary.repository';
+import { MockSummaryRepository } from './../../infrastructure/mock/mock-summary.repository';
 
 describe('CreateSummaryService', () => 
 {
@@ -33,8 +33,7 @@ describe('CreateSummaryService', () =>
                 { 
                     provide: ISummaryRepository,
                     useValue: {
-                        create: (item) => {},
-                        findById: (id) => {}
+                        create: (item) => {}
                     }
                 }
             ]
@@ -54,7 +53,6 @@ describe('CreateSummaryService', () =>
 
         test('should create a summary and emit event', async () => 
         {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
                 new SummaryId(summaries[0].id),
                 new SummaryTagId(summaries[0].tagId),

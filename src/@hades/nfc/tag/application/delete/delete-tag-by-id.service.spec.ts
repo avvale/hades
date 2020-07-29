@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { tags } from '@hades/nfc/tag/infrastructure/seeds/tag.seed';
 import { DeleteTagByIdService } from './delete-tag-by-id.service';
 import { TagId } from './../../domain/value-objects';
-import { ITagRepository } from '../../domain/tag.repository';
-import { MockTagRepository } from '../../infrastructure/mock/mock-tag.repository';
+import { ITagRepository } from './../../domain/tag.repository';
+import { MockTagRepository } from './../../infrastructure/mock/mock-tag.repository';
 
 describe('DeleteTagByIdService', () => 
 {
@@ -40,12 +40,12 @@ describe('DeleteTagByIdService', () =>
 
     describe('main', () => 
     {
-        it('DeleteTagByIdService should be defined', () => 
+        test('DeleteTagByIdService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should delete tag and emit event', async () => 
+        test('should delete tag and emit event', async () => 
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

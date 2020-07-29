@@ -68,13 +68,13 @@ describe('tag', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                code: 8435416767,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'tj7q8lftni9akezx7f2nrq8htggt446ttc4p4jj0293ea47v3e',
-                urlBase: 'agzhkwpnib8tpdhmr3lvd8k6oybspq97qx8uoj7hxg9d4wsicqn1eawu011lac764zskfs01nusllpx14zkq3pjfcgfn3jdemc0jwb43e2za65k7pzzl6pxhd41cpjwwnxup6r0foccp2qeanqtjc62t3iikap4awlyekncg0es5nry9z8rdyo6vxevqsp555bgrag5w56ii9ug05lltugrbtgpopwff7kfx4sabl1ancoug4jnqjp6dzqsxe1o',
+                code: 7655555786,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: 'n4dkres4b7l82w9bvs8ybxquibm9zgwaedj3or99tr9spkw08o',
+                urlBase: 'raqnps1cwrx8hjaa1ki3aiyij9lkls0olysjx3cm9ghekcsk64v3f6rv8fajsc57ewfh2rv1af706eqzo71385m6kybbd6qaambfrekregp6ss187ejmdctd99r2p1e7dqvhk8dbrkjglam4hlq5oufmrpzs1r9nge9875ssuyl906x6bi0xx3vggfapwisjgo2vymtq1drreh9va1b0jdrjptmm8670j09o9bv5o1iyfj30igh9p88qkha2usu',
                 params: { "foo" : "bar" },
-                offset: 805794,
-                isSessionRequired: false,
+                offset: 374521,
+                isSessionRequired: true,
             })
             .expect(400)
             .then(res => {
@@ -89,13 +89,13 @@ describe('tag', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                code: 9132639037,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'g51bxm2di60c8lqncmzdi8704vhjf93v9pfnj6hbieob4de1ju',
-                urlBase: 'f3fkx8jwn27o19zx5zk2deqztdktm1qux7grhr3akq9f085llxfmx4ec23vfzqeyhz0g79l7bf9cbw19x90anj5qvvm9dxc6pnz4i6i8a4ns5ne627hxgit7suor7bw0ekurt2q2y0c4qf1lv0ynrne0nr305u1y97rz1v5sm9v1d3k4461vxjwlg0hehogaei2vr4kscoxeb6klvpltbv3asugb91owd716qvagp4c932wk7jvzxvith1rv3f7',
+                code: 9569276932,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: 'pkrlo883jvtawvou630hi2knzpbfwtlgd5m2r9tqh3ryvok2w4',
+                urlBase: 'o0u5y0m7x53yokm35jlv0syb2fe9t72ytcupy9t5vnmmwrps5fh8nhqj7lwtjn2pce5pdtepqal7maj031xjbkhgh4eq5cwt4nkjpper4z89wl91ym1wp9b3knv4phmk6rjroovaeh7dvspwo0anwz24uc3e1jixs9tmpoqiyyju1zxgam3ddb2oc4mdlistmy1s4x5pjflnkop2yzlrhutu74x0gj0ofcxl691p1t4jkkyx0cv1wl0qily1slg',
                 params: { "foo" : "bar" },
-                offset: 933397,
-                isSessionRequired: false,
+                offset: 673055,
+                isSessionRequired: true,
             })
             .expect(400)
             .then(res => {
@@ -109,14 +109,14 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
                 code: null,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'ocd990z8uq45ak2cqcnjkxv29z36vskmjyk9tj0vs4ttr0g80e',
-                urlBase: 'zxwmrswcjomnwatjj6780bzgzuyluq2e2v5c65vyw67efmikmo9coi6d2t9qofj2nilzegyre47ufo59nt1oqlt7x68u84y8vve2mlaj4vh1hzdkirqudnqxjkr5gug6vqh8tf8tmlfeee4c6adin9d552wvsczaie2nyzopf7jvon3zk1l04z6gz1upjoilrqq5c655aafqhmy8b0ichvk2yu3xr1qkbcggeh1ffexq971wkrxqtcsndxiavq4',
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: 'fhx7t5ogg1dwbvbdh56ywq9zhpd6awmda37d6vkes06j1juyp5',
+                urlBase: 'nsnsl22k13fjf7aa11t1mykkbvbofkaa8m09crj2ua445c1lf7bwtsb9b8ehkiua8l8so0vrcuau7gzals09zzjtspdob18psy3qz03s5ci5jqafe53fxqr8vhe3zc3j240zwhh5h4ycl7chdif9d7yc404f6gzczhldbr5huulf1abkj0pel5bsj26l7hbncknk3vpk1xwyfrsxjkqfw5b95wkih048gcamsakbdyqhu3js55e82e4s5mt5n1l',
                 params: { "foo" : "bar" },
-                offset: 347310,
-                isSessionRequired: false,
+                offset: 456624,
+                isSessionRequired: true,
             })
             .expect(400)
             .then(res => {
@@ -130,13 +130,13 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
                 
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: '7u2s81xxclsynnxyin1iag037e7gfhyiuwcv8o10ndsdqtageg',
-                urlBase: '6pjag5w3o78uto3suvdhlnwmhxcv2t3nv0dj7vyj79hl5cox55axcnqg39bwjl9futf1oobth9uhocoeq7eur759qppcjcou87c9b4yg4mwrqdryfa6nzjotnu9qkf1ek99w1z31vkhhovxua2f129yfen5rgxq631lk5oyi6rtm4zkddu6wf3r6wyrxw4vnffofq2nwpthvqbt962i560sqa5ka2gcnnwxr6tc9g8fm71rbibdq463tc4aa5l6',
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: 'ga2ejoihpgot23tjf4p28o14yr7sy9d4bt2shjkvj1wlgm6cp1',
+                urlBase: 'dqn7u3cvegv7qrh6hc3glalyh3da7ddid87bycbcmvdytv3fd74b1nen8ipsst0bsoix3tnvaaslawngopwlmuqb2zkvlgmmrmsnbaxfm2vm5uj0c9enkt8zs8zlnz5d9i04ifgh5be6es7jaj3e9db4gyvb96yvcmsda8l7xkt51jaotnmal7wgw2uk4711jag1yw7rfrhjvysip0b5oa5n2901htomgnhu9w4sv604lthfdzue8ghy4lfio99',
                 params: { "foo" : "bar" },
-                offset: 657926,
+                offset: 993030,
                 isSessionRequired: false,
             })
             .expect(400)
@@ -151,14 +151,14 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 6524890596,
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 7356123170,
                 tenantId: null,
-                tenantCode: 'x44js8wwmxu8bovgn4p561ja4q3aqagalr6qhy1s232yglvuzw',
-                urlBase: 'o1sn2p0h41uwzqhqsnnkr6whqd192wdevcq8ik4mhb3m2vj7dr96ffejho9cwhi126dzch76rvm6vopsjb0s9kjy6xum5tc012dippbev1v52x55k2ck5tkmgf1mxrrnj8l3d5dlfhccm3dz729h8c0hrwgo811ofwuw8yqxiwq84dzh3t73az2dggts8zv0jaibt0s7dvbq994coyd7l1c3hde2268cemxj8wdq20qvjnad83vl817qn9djvui',
+                tenantCode: '01po39aqzfzuy066tldtz5q0wwcnwins84ddrg94gflcy9uxsv',
+                urlBase: 'rmu18lq8qguxkkeqsnlksy4hstns4gj4hv737qvs76mpudrs73ap2uzymlg9eidhgph2ugry0u2d7wss8gqmo7fxveygtnwsfxt6vkiwfetg1xpfgld3eygraismope5pa3eyroeu63541julxw7st6vxt89x8km8cexm6lbnem3sdqp0dbqjvwo27o2og3bxxfxtyhx5s4bignqg0r3x75308v4e62qj6pmnt2cfuh9j5hnzlxhm7p5sopn0a1',
                 params: { "foo" : "bar" },
-                offset: 219545,
-                isSessionRequired: false,
+                offset: 274723,
+                isSessionRequired: true,
             })
             .expect(400)
             .then(res => {
@@ -172,14 +172,14 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 1127903536,
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 5770133864,
                 
-                tenantCode: 'p9ywroaqtonwtrdrmpzq0d91cb49hdol2hxqcwgv20e969hupo',
-                urlBase: 'ua53fctk5ghxvzase3wms6kjpghjroznf5db079qf1qbhzd46omujpakpy6gig8dgxgpke43xgwd8yo7britm7q7hvfcodhk52tysuqfqvinfwan2izs1ssow5f0kelwknkv05iol2oqhbdpaow2wub2cne4k0uy9y97jrq9g5tndy6nfi8y95mxtpuuwdno542hfdehyz972phmd9nhi6vpcdc7jqh7d7a991sk3k9e3b3n51pr20tbc7zxj72',
+                tenantCode: '8y1947ql78ef77ddyid6ttsvoa12ua9tec9ytobhtnkt6ac2wc',
+                urlBase: 'ni2ur6cetyp1aaco0kb96g4apwziko27zusrmop84h2i3dvf2o5hhefya6lgkq38ubpx0wa95guhzhwcym7zk5lc70ci3y4xucm9vdioyeg8l381435z9l0w2v7m7k3uzqx40xbih99p1pscb5hxs2t2zvfd6985axu4qvzapz3idbz62nt7l7a6dnq2bf1zdj1wwwo9ejuzvybpduhg5fv6bzltfj257dm8c1basce6ofnaw8nd3mmpklkhnaf',
                 params: { "foo" : "bar" },
-                offset: 820083,
-                isSessionRequired: true,
+                offset: 951325,
+                isSessionRequired: false,
             })
             .expect(400)
             .then(res => {
@@ -193,13 +193,13 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 8225418341,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 3270515902,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
                 tenantCode: null,
-                urlBase: '3nzmezu8zctgww8qe2bz4aclalam5mtpzxoknkzr7c7zhqyba4y41wk4gwpv1iaxfoptyhzlz0ayw0ar8vey7z64s4ufgjnr5d6a1uvstad1segv0wn103gi7t12bosqrdff2jzp0v8u1xjwd7e02425wpqqf65isobmh2ph2xyqb5siy2xeobvpnaw0l0kuh5y5qpuoj43mmuksrt5lrkbnuzyydqo0etluzc9mnayft8rthgxaop5gcpymbmc',
+                urlBase: 'bfefys9s5rdb2j58yfqy2lt96nnmy76sxdh8iysng2mf5oc77b43h5hef4y50vnssznp30v3mhh7r4q37eyhl2m1541pu057vmmjwqf1xd71cf2cv4p46dalejm01wijiyxqrw6ckxtnydymfpmkqbdn1qg6pbkhd1ek0q4knlqjlza91msk12b9iiucoqz04anvkdjrmlo3h488yo55qopeafdtb0qmwa4u5zznov3kfqbjyx1c8l1ozg22knt',
                 params: { "foo" : "bar" },
-                offset: 610757,
+                offset: 889507,
                 isSessionRequired: true,
             })
             .expect(400)
@@ -214,13 +214,13 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 4080694127,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 1101984706,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
                 
-                urlBase: 'ihy4eafo0y2gzqy7bkc3ehlsaols956azt5c348fvjo4dk3h54cwb1o2bq43tvwhuxtjibyghzuwhjr8cnbqsvfaejkpq9bwosn7ukkbpqlz5xkr5wnmqitw04tct0rbnit0fwkwtbaoc3be5o4j6k0v3dy44mhkz92mb1mz32l6eyonfuoq9ryiptjxw7zik94399b9eqhed0g0a6al7u92b0186dhkhv43ip9ulhf9z2zfyf0k2qsx5ffme7i',
+                urlBase: 'j5bpyxwslq39th1nc8wuv1iubjtru0885hgytvhka1k30x8cmef7yb9xgblzgf5c4c237hzixj1gli7sjt9u1p6zi1orshnyicm4hcbpx5iyjtx63jm4v3hxy71flmbu4y24ap0s21j2ggxj6oxusnn63a50zfjqqla6brrfrj3ls0vffhq4ex9h51j9kzmqvm1mhv7s3avfxnc5ta3tvu9olhtfqzvus2w9s9s7omw1ep4ymh63bzvruekzbzm',
                 params: { "foo" : "bar" },
-                offset: 485809,
+                offset: 707030,
                 isSessionRequired: false,
             })
             .expect(400)
@@ -235,14 +235,14 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 7061254416,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: '9lrtsvsvpedpeopkr0njgkfr8f7srq1snvmx1m1xyisblkqgbh',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 8694286119,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: 'znhu5l0661uyt1ywx3uu9i5sh3gj1u8bzuszdaredzmm7s1p3t',
                 urlBase: null,
                 params: { "foo" : "bar" },
-                offset: 583965,
-                isSessionRequired: true,
+                offset: 633739,
+                isSessionRequired: false,
             })
             .expect(400)
             .then(res => {
@@ -256,13 +256,13 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 3645543680,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: '6hfze4lhnc1vr4rfubynyv38jj1ndh2f79jzntdxfoxvw14rm2',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 4282806107,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: '529blr1me7c699drlo52n3p5zg5s5pfemgohed9cl4yf1mowc2',
                 
                 params: { "foo" : "bar" },
-                offset: 821699,
+                offset: 302572,
                 isSessionRequired: true,
             })
             .expect(400)
@@ -279,13 +279,13 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'ty3zzp0g07o3r5b5zwd4iqa6julpy6g5mwfgd',
-                code: 1991985609,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'yv5mm2vru4vz8oihniw1vrgov46e25crilapr6uzlyvogkixdn',
-                urlBase: '8s551qyai5rh3hp5ey3kw7470yfuhu0kwn7qb1755qycmjxolaw1oprw1ilvs934wp0ljcdl3u1bhhwdxr4j9tn9cejn0wv0is9tqjvd5u40ljr5i0poyi5lkt7mj9dkq5jcceagwh1wr0jamf17bl4qld5mn4m065glubt92rexpixba7f58ujqxhvgsyezj38ev5j42d2wnml9mfgz2p517oan0gb1753etcefxg8t2pc3esvhq3sizhva3h7',
+                id: '3z7rg5mx1r1669zcjev2xmbvql1gj304fgqtj',
+                code: 7042995248,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: 'oymonv29kb31ypgvkyn8kcy52eeta70cyozj96xt8dc93x4qxk',
+                urlBase: 'qhxzau3agltt5rfpdo2zhgvm8qwkjeyyx5z0c6ocpqd0pgf1tkfweuf4wtcgonch8wpy0e12wjk205fsf9rkuz1l39tv1ououv7og3vfld2foopjxlag1gnthb6f7c5b5ru77c9vhwdh6yog80rkgi3bhs4i5p1o1ul081gc6uk2tkb69c65a3udqeuxr89yhtesmcke1b0rpqin6h3nx8nzgmtg8zu9evfdp13wxn0a648lasc7tzeh8ii0mok',
                 params: { "foo" : "bar" },
-                offset: 267792,
+                offset: 936895,
                 isSessionRequired: true,
             })
             .expect(400)
@@ -300,13 +300,13 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 4720976373,
-                tenantId: '3wusj0sop87jicbpq85dwt2y8hgz9nxneyqzd',
-                tenantCode: 'fddk2cte6849ieubhtxjoam5tpmpcbci0vxnxkbr3dd2lxsula',
-                urlBase: 'vuthp1kmymrwrij3qo8vj4u3rdp8p7tszgho49xxs91u7fz95re6fwexvszckb1qv8m944oojp3k3d2ecdw519ap8m8v31nil6brwd1667enc4m046numbiog7exddy4n45re9u5rvy0as6brd5z047rfcmsb2bcsdirs2gx6agai6ekyv5hkebjvsxgwoyhoo26n89yuorhfsv23m8tcdldx4q96chrtea42fywr9tku0d61iskq8wv2uzv1kp',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 2025399222,
+                tenantId: 'q2ekgw22kmu1o6gzdtz2ijc8uduc52vc534zl',
+                tenantCode: 'd7ksvw0dci31f9xs1guu78nqepypwaf2487c2cbdz2e1lzlnbe',
+                urlBase: 'u6gr9244g5v78yggvdus5a1s1c2l28ko6g3ih8aissidf5w6upuokcyr7czh0urr6jq9kn3vu3g9bqnz4onshx5io3vjvn2acucmbnj5wdqexvcyg0jtoh7m4tlh77sn21cd1h53w8wa7irzmwl910bzwmh3sef5185lqze9hk1fwjpbjmilvvrjkhjclhu0yjuqquhc6qdwg47hkq5c4myfkfp1kh3w9h3q0n2fvg1wb2b3d4eo4z5mn70ty94',
                 params: { "foo" : "bar" },
-                offset: 137753,
+                offset: 406054,
                 isSessionRequired: false,
             })
             .expect(400)
@@ -323,13 +323,13 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 83942716396,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'kqtlhqy09p510nfhfxl7i27vf3skhte1uwojh87eq4bw6bqvwq',
-                urlBase: 'owmai97ife47fj3wfrtt3cb1ovsyzzwu7d7fsr7dfs1fu8jebckajc35p52mfmmjfnbb4lwu41lwkii0peh7wmwpwl8g5clwxpte4uf6dxapzk1sbgd88ya4erdwrnhhrmqukafeq9k8low2qotks8flbxwlecu4j7qpycva5nunhuwgbu4y1esgvk3y578gco95aulf7u3m3zycu28ef8rrq566gya685emtxbny7yzh8arkg0z6fkxrcg3iwz',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 60553264568,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: 'tq57p6olx95i8getfhw158nx1zrwyf0gckbr1afznn1r2cywf7',
+                urlBase: 'yliqboucs3vnvywr6pk63f31ch9r8tf3c21nm0hdq1bs4mkxr2htthj4uwjq4k8fyn2kxpdat92gp62gwzmelojwx372nvebvdy6ttfe72zh1mlz1bszykaphw8cguovbi6mfe7bl2vqh66lx4owf61tf4y1xiwhgkmb2woaad5cgw35y7xuemz3vw6bmnicd4qnu6rwt0ep021jjolxbin1wbucw0hqg2sr3i2thwsye9acohbocey0ft2rmqd',
                 params: { "foo" : "bar" },
-                offset: 195372,
+                offset: 126606,
                 isSessionRequired: true,
             })
             .expect(400)
@@ -344,14 +344,14 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 6876942501,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'mnnjlnum0dcwbnjeil1ujzmb1e3pe69t5qn7gp7t1sc53ozyafe',
-                urlBase: 'zt0no46lrw4pzl6zwb1qsh9dx0b8ucqqdbgeyjow3gwpn3zk6q4ut002r8nfutu54zs6d3i9wak875xek8hisvjwkaooancd6awl5xu9k9k7fuh32r7gijajfwkf21js9obgn4thjn2mfdp2etorwmkzys00k9s77dwuswlr1ipzei35gxthoxhjtt34p8vcx10d96o6vsuwwknhl15q5g52w7foogg736nqcmsc2pfjolotr0g34u83s93dp0i',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 6859470325,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: '87edkr0qsemm1c1lxul9dmrrnn0dwlc68h2qeos4f845zuik5qh',
+                urlBase: 'kuqmvlpv1pcwdv9l9cqpl5lhlerc8e2h0r2lfib1ypgtn9yf8ej6xovuiybv30r7qk85fltlm55ie4yaeaua35f0gupdttwd6clz5u6xqqeyu9r0qifkdfjjor63cjy846kcbplwaq21v4gymgg07oleigznbmp647jxmudns1br56f3vagh7ktw529u5snq3n40sdaihcy0q45nnx7b0n939noyho4orfm5elqlqidp3zei64va0iswkkm5c7s',
                 params: { "foo" : "bar" },
-                offset: 815878,
-                isSessionRequired: true,
+                offset: 581600,
+                isSessionRequired: false,
             })
             .expect(400)
             .then(res => {
@@ -365,14 +365,14 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 2635683217,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: '7cp44464yg6dk5wf63b29pemnzeaknhdj10pe5jvx2xe5zqhp3',
-                urlBase: 'ki1vatx80x8llg28bt9dfhitvqz2oc85wls7w8xxs442r7mg0pajp1hoi87kvmk8hj8iw82bapfne8851bjl7nf4qhec2jvt28maklanr5b2ixw0qn6p5wxd4stp0rn6yye1e6sa8f2mmrobskbvmu7913lh5m68enbyzc0r1tacdkkd4yuszboemfg5siufh4kdfb4wv2mx3a7xpikny6rlo5lend3efztvjbr5s28tgr2rbdbi8feh34010sjb',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 1244649818,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: 'n88r08dfnc4f5vvykukh29hjz49lluxgn4uej17o7avd8obsdc',
+                urlBase: 'uhh5uq23gahe5n65al09gjfqeay6tqk2wg065bml2yx0krpdzhilaw8fx38hcv0s6d6u787omwmjplnfzforyv40gr7i8pii1oo32oc8hzo6lom60itqcrb60orh8ujs50oeqgszkj8kc256ry1vpem8s6cx1cu1f54d6uncuhzh6bboim0qwpbj0rn5bwjdcuc7l9487x4k2qiosz4t6r9s6w8bpd13e2ml26z0q7dmj5v0ywbncue1xodlo7ku',
                 params: { "foo" : "bar" },
-                offset: 672233,
-                isSessionRequired: true,
+                offset: 143750,
+                isSessionRequired: false,
             })
             .expect(400)
             .then(res => {
@@ -386,13 +386,13 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 7345755934,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'vc7r9e4o36z5p1q8gtk57vbedignw51u789g68trcnyr6gapzk',
-                urlBase: '9ctlgn3enfniv4p80k90h22a6a0pa93t24ffuugo2k5l0im727srkmzanrld4arp86eac7qbqfdc6utczplur9m1g1vwzjqfgxrv7lilnv1ke5sya9x6ioxxqq4zmkpcn2g716oughfszuhl6vpg30oqtlstur7ogajfgbow0j0xxw6uhhjgzme3i1ozvomz1z9hh1b2ag1e05oory29piqw847pt4mez5q221fqvy4xcm577uvy7n7252ityev',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 1209912961,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: '81a12tdv3iwt4xzsfxcl8fb5gcfpiefagve8ksnuv8b3gsxdfl',
+                urlBase: 'n8yiamua839p11fvxfwk5bbn94fu9evxd5zi6i59sxp3kv3zgwvgxfp59pipa7y4kkxk0yt3orimooagh83iysg28bhxpnwxlbofz5k9ib2068zuguil25dtr6k0po6iqsiy899enbfgsbjahpfvuz4jvpj3vyn9k75zjtqu79i3fr5l9ngq3dxhwr08gijx7yrei5dzesfryus7m4bifzitktossvk5v0rf7e82wnttlx3kd18ux74qto11n7a',
                 params: { "foo" : "bar" },
-                offset: 9180752,
+                offset: 7475271,
                 isSessionRequired: true,
             })
             .expect(400)
@@ -413,14 +413,14 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
                 code: -9,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'm0xbpq2pjpnl0v8ycm806uj6uaizrgdtp2jfccc3dep882nd4f',
-                urlBase: 'dgv6f1xjw6mich43vvwn59xpjzazww6pzaalnqxxbdtl5qsafi2yu9p90b1148nlyzsqt5spvto9inzbakcioni5g6rwzjzli1h44cinsu37rc0x5q8gwzuqxzklsur3j1diayrq12fs05a5jvce61ricgfbn35uc7zi9fixlkerh67i1974zg82hin7dqkin94qzuwamavfzdh8h2hh5gpkcnrpuncicxwekczrnbh49j7hscwza574jusolvl',
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: 'xk60ncf7qtqgwucsafia5tdkeke566dk9124e4d6msdcnub6qf',
+                urlBase: '603n661ipr3vflth403wy4vstxzhgympth7oy27y5jmcq3m429tyzbb70ljvshjqjdwpy9dp7y47m869n6mbrinr138cui0q6p36igkwvv9ryy424hvowcb868ywmhqhad9xp3bih9zl7hppxi7jxjiwu0qlw8cfdjwpy6ydbm9t39jokyftcka7x39147irthk49r5pr3nvxiwx2dso6zh6ftzofkc4c30yi735eee77f41rqci1y5xqhxv0z2',
                 params: { "foo" : "bar" },
-                offset: 891438,
-                isSessionRequired: true,
+                offset: 894523,
+                isSessionRequired: false,
             })
             .expect(400)
             .then(res => {
@@ -436,13 +436,13 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 9513449411,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'x8julkcvz9lys7laxinm45uj91soyrezv0kcx9zrrzxurke291',
-                urlBase: '0n567a7cl1q8108slh0sjf8u9u6oxqoqxk5lypqy3a1iag8xmxcfqejd4c0e1gimdyqqi5fqkuiccobwojvmapdfg35727wi8p2mtstk0np41epqsiu6aa8mf2utj4p19jm0dud9b52627dpmgyka6j62u03jvk2mgviyodbayrte7gf7966hbxxl0k6kuxbxwxxs7hk3jfa1xvb9ahqpoej6u4el0j8z21t3ucxvi2vuval2aaaoaz8ifmdc69',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 9101210801,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: '3vqx0j5jncjuy86w1lhzn60aaeosiwlt4mhklroyodlkbmcyzl',
+                urlBase: '36v99zyf02p369emfgeeo71qysmkoxafxlwofnu5r67ozcrkgiwkvc8shvxgnisd5vzfa9wjtyjzve2nmeqo8h4ahbietpy7qq8l9534ugxwlei70n3eo9e0fkzdqsubqe8uzkrng8n74q3nt4pou1polikwu5r2dqc1vhlw8h4lcz2ud2jk64ksizd1ykkn33vyvf40laz240y1ogh0arfozni7l9skufzqn1tacs6biujan2z58tkyzl32fd0',
                 params: { "foo" : "bar" },
-                offset: 870387,
+                offset: 108771,
                 isSessionRequired: 'true',
             })
             .expect(400)
@@ -462,13 +462,13 @@ describe('tag', () =>
             .post('/nfc/tag')
             .set('Accept', 'application/json')
             .send({
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 4190009602,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'upshzyzwue2f119awy1rnlqyspm2u3j08w1jn6ve2kf65s276a',
-                urlBase: 'kwkjnpgrqcegq8yqdzyjdqrxhewexa6nh30ytmwcfv10cl2gwz3uqvagvffba7rsnvjvq1ngchctuf4016ox5q3n1396qu6xwctyfu4vb7lu50l4i27xiwk0i22geh1ns6s8tuin4yx09hq0mpfdgj7hfe4m16v7d2eppr2md18px32bg7c1tiveoryjiozibw156kbc443bwz8aesotmuwnfdrrfb4tev9at8x20xobhx5zpyf2clvfn6b3rwa',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 4593404242,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: 'uq5qjxie3br1oq9a0o69b906x7jz659ceubsswvhmhsw676xv2',
+                urlBase: '7c695s30uxrbz4z1luj159kddadsdkr8zmuhaau435q663pghkj1calve2rgcfw3xidz54g9jrmzld2ct67vcc7ed8m83luir9x5czrzyyutzmg1yz7qmgc82ambofxg48a8xdoynpbof5fslk84098gb253z6esq81iha98ves5g12jfwnac622z5m5up182wmw24locnouxzwq84or6n3yge2mj9bs4xpood2wlzp3s0kgja2ate7yvmm7i8a',
                 params: { "foo" : "bar" },
-                offset: 959278,
+                offset: 442383,
                 isSessionRequired: true,
             })
             .expect(201);
@@ -528,12 +528,12 @@ describe('tag', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
+                        value   : '20da9779-7e32-474a-bb18-e80dc5561456'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'));
+            .expect(repository.collectionResponse.find(item => item.id === '20da9779-7e32-474a-bb18-e80dc5561456'));
     });
 
     test(`/REST:GET nfc/tag/{id} - Got 404 Not Found`, () => 
@@ -547,10 +547,10 @@ describe('tag', () =>
     test(`/REST:GET nfc/tag/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/nfc/tag/b14beb99-e0e8-4e6f-9505-a59263cd6eed')
+            .get('/nfc/tag/20da9779-7e32-474a-bb18-e80dc5561456')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'));
+            .expect(repository.collectionResponse.find(e => e.id === '20da9779-7e32-474a-bb18-e80dc5561456'));
     });
 
     test(`/REST:GET nfc/tags`, () => 
@@ -569,13 +569,13 @@ describe('tag', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '94e92f30-08f5-4618-8097-5574fadf8216',
-                code: 7888663153,
-                tenantId: 'e1640f4a-c35e-4d6e-b966-164c9aedfe87',
-                tenantCode: 'bkck3yfd9gtzgxgs39b0w64lilntytxc1ktkrihuahdckgzk01',
-                urlBase: 'hykwxuyppxlribqdypxcc9bb4q372dlmi6g6jujc1bbcb1sd1a1a0ivct882mob72d4hi60iexyl1c2xq1qjvecq21zbyteuby043zrsjqw7fssm3t2dho4t4axd0ibpo5evbjpr1nn5wswqmqguvrjfym8zohtor546t8foulm7blhnnk8bp6hsszcd5bizw08mw8twbh8aqnjhphuybar1ln2vl2rrr54u8otq2clldgadlcmyorz063965t3',
+                id: '3ce018b3-58f8-4a1c-a603-34d32c02b84c',
+                code: 2594523010,
+                tenantId: 'cde3fe02-4645-405a-b948-99cee12d6e6f',
+                tenantCode: '2kv78h26cek8i91ta8439lpngqcxshsdi1uw65z8ushrqodsox',
+                urlBase: 'atna3hi85vbhidp8gu8pja8sfrpfwjoaqg46qm19khge8eb2prrqbkdazer9ln3ibl8vh2i0k01y2nyvxqwmitbu1yaw1f8qon0s0qogr48dokdxee34hnyynh9ckj89l3kpbqe8t33s14uh75y3oq2c725v09qetz1ri091dksc25nlt91fledegfuvh8kkxgczi4iwo474dgh9gqwg5atkjaxca9nv1zdaunjlswwnpvfy1yefpmetgop2z3x',
                 params: { "foo" : "bar" },
-                offset: 335731,
+                offset: 839688,
                 isSessionRequired: true,
             })
             .expect(404);
@@ -588,17 +588,17 @@ describe('tag', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                code: 8310569140,
-                tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                tenantCode: 'oirgqnsb1154pd52f5slqedydaesp9dd6c81r3k5lw6iprhxa7',
-                urlBase: '5ztqrf17ykin35kko2tznn7ffusj834gh22tipc6dk3utl178v49qg9mfrkeeksyt306epxpkcorpuq9zy9wgkwrh4i54r9hye25711etcvohdme0sm1z3mdn98sblq4d9cfmzl6qh0jm49czclu9lcbs7e02nja9ifquijfmg9qu0ivgi8kkgkv0j7uugj6pjspxz81gmymuiogya5luzwh3b0ajxqylnujo9i39q9rr0kuud7g79vp8x8gcik',
+                id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                code: 4790839580,
+                tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                tenantCode: '5jfnfbhucxdl4bu4alofma2u0tc8ezcq7jppkd0scgdpo85jep',
+                urlBase: '7stegffqlgk1x2gle49plzmpbcdtkdwenhkhd76tk5egs2dyb1hb53652t49izr9t995814kumvpnsspcrihkfsg3lkan7elb0upz14k6pftxxyqhyhuaifsbneod7mrihleyky28g3w3i3egfeoqw9utqvcw9prelms5z6j7wewbjny0px5bgnuptknscoq2kc1is7bh1yd74fb2t1jptodi2xik7jk3qe65bumfp2scd675zrrlb943fxiuze',
                 params: { "foo" : "bar" },
-                offset: 324571,
-                isSessionRequired: true,
+                offset: 655857,
+                isSessionRequired: false,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'));
+            .expect(repository.collectionResponse.find(e => e.id === '20da9779-7e32-474a-bb18-e80dc5561456'));
     });
 
     test(`/REST:DELETE nfc/tag/{id} - Got 404 Not Found`, () => 
@@ -612,7 +612,7 @@ describe('tag', () =>
     test(`/REST:DELETE nfc/tag/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/nfc/tag/b14beb99-e0e8-4e6f-9505-a59263cd6eed')
+            .delete('/nfc/tag/20da9779-7e32-474a-bb18-e80dc5561456')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -679,20 +679,20 @@ describe('tag', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '664f8a4b-d548-4994-9dce-d293e0d646c4',
-                        code: 4159135457,
-                        tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                        tenantCode: 'evetxg037eb0v0ovu2tkoqxpokews84s6cdop8wfsvv5jnke8q',
-                        urlBase: 'dyggmdgjxr7azt0bkglg1etfdwz2g0o5kqjv65v1yiqzgsrp2eignxqqkn9rw4485zth43kdsdsnnrwonzhyizekjv5j9ss2xm90gdlyozg4y067bewda9xxkwucon7ylljyyk5f473rc2oscn4uu8pfuwcv9ghvrahu3utzi1t39pbs5fmoprj0mjfsjayyq63kvpkzri335b3xqo8fugu0w4o7xjx88qcsyvmihcb08jodv1nqsk2251hp28y',
+                        id: '4a3ca1cf-23d5-425c-bb58-ebeb1c9c5272',
+                        code: 1897789991,
+                        tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                        tenantCode: 't5ixin42x1bi2hrfr3icqqn7iijz8wtguap12elj794c66yklb',
+                        urlBase: 'om8ux3759yv056pj2ffqyaclaod5v2tzkzsx2n2zq60yheipkt9ts32k5ybltgbl8a0hj8rrp0oo1l45n67qmd38822aqw1nkxgpjidjnp4rpesetifgnzbk8so0ilh593ky6p5jpssks771sx4xxqjiomqum26r00y77bkk13ig99sfutusplxlh93z1lg80h64414lfseqzlo1ylosx6rqr2pcat1634d4w9b37vd7cyxa1w3j7ya4m1nsger',
                         params: { "foo" : "bar" },
-                        offset: 331717,
-                        isSessionRequired: false,
+                        offset: 702018,
+                        isSessionRequired: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcCreateTag).toHaveProperty('id', '664f8a4b-d548-4994-9dce-d293e0d646c4');
+                expect(res.body.data.nfcCreateTag).toHaveProperty('id', '4a3ca1cf-23d5-425c-bb58-ebeb1c9c5272');
             });
     });
 
@@ -807,14 +807,14 @@ describe('tag', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
+                            value   : '20da9779-7e32-474a-bb18-e80dc5561456'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindTag.id).toStrictEqual('b14beb99-e0e8-4e6f-9505-a59263cd6eed');
+                expect(res.body.data.nfcFindTag.id).toStrictEqual('20da9779-7e32-474a-bb18-e80dc5561456');
             });
     });
 
@@ -879,12 +879,12 @@ describe('tag', () =>
                     }
                 `,
                 variables: {
-                    id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
+                    id: '20da9779-7e32-474a-bb18-e80dc5561456'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindTagById.id).toStrictEqual('b14beb99-e0e8-4e6f-9505-a59263cd6eed');
+                expect(res.body.data.nfcFindTagById.id).toStrictEqual('20da9779-7e32-474a-bb18-e80dc5561456');
             });
     });
 
@@ -950,14 +950,14 @@ describe('tag', () =>
                 variables: {
                     payload: {
                         
-                        id: '73c4343a-093c-44ec-92d5-c592e4e5d1d4',
-                        code: 3335423371,
-                        tenantId: '62455bda-3795-4426-959d-02f1bb0f9f62',
-                        tenantCode: 'zuj1yqhhpm9dg13r8wl90dn6j3vl4wcktit5ph8dp1ci9i4gls',
-                        urlBase: 'ne7gzkl5q1pe9mqu8g0fjd4scexn3afqxj71i8xuc2s2ov8fcj24hq7reb0or07hv7ai7a9cmzv7wfo0klno8uk3ith8n19tg2pwdb3g96cx3aadqi7yr271d303y59wx93ac2iw7w4lrtwzyn5571au1e7atrvq5ih31gwhap4psfznw822qejwlh9o9slgts7jpgd3neb8ytka0opieyyd1ftkhmj9wpmomiqw34lbumurf3g4h53gh9kkosa',
+                        id: '4fc9a696-3f94-4882-8101-2ba5860b9672',
+                        code: 7329414634,
+                        tenantId: 'ccfbc5d9-a50f-4b80-9445-5a13e2db7963',
+                        tenantCode: 'inkqqgjxpb33qpzlepcwv4geeeub8rt574stijm6zc87ikjage',
+                        urlBase: '9aludnr8bf3vmb9al9w6jhpg6a6pytv5z4gjymq801c2a982d7lgqkpko5nbc3ve4dogwbqapj85jpytgwctkmd0q770o5fk3bhcygnuvb0ejiqnv0j436epxujgbjqcifmcvortt5r4ucy1dirkmbfesbizpbq0gva3oa1vofdmirkfr55ttjprnzmucexdzgolcsu3gxqy8ilo96t8x3idvh5ungpofoijubu2x4yr8z3b90zellyogj6uvt9',
                         params: { "foo" : "bar" },
-                        offset: 515892,
-                        isSessionRequired: false,
+                        offset: 749133,
+                        isSessionRequired: true,
                     }
                 }
             })
@@ -996,20 +996,20 @@ describe('tag', () =>
                 variables: {
                     payload: {
                         
-                        id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed',
-                        code: 6104985809,
-                        tenantId: '0d7ba885-0f6d-4149-8d2b-8e15081fa80c',
-                        tenantCode: '82uex9r6n1ezzclgomyhqi4k4q2715h11u4e2pbrxworqg8gn6',
-                        urlBase: 'dkaqktth9ux9d58xrxen2a0yexxwbdvava3zgb6amm1gcqc96yswxmo3srsjc6n5q19o72innm5v0y50bkkkny4zp4wv1gpy4zehih1x5vfn0nuoiej7vcds44nqzcg4cuwg2wz1nsq435zfx0yurxkvqm7rd2nbl9tsrhiodqdwguixmc0o33w65hvyrydghsv1fh2u2b7srvadlu85q4p7j45j9a0tyfvl4e55ebdlmox1adp45pd8nor4fkt',
+                        id: '20da9779-7e32-474a-bb18-e80dc5561456',
+                        code: 7257841194,
+                        tenantId: '8252d797-ad18-4335-b200-078de890abe9',
+                        tenantCode: '48ekgnb823dyrowgmbptdbskdjeaof3rxy8g9jcn0si82lluf7',
+                        urlBase: '1xvnjip8pm1x780wbjw5jrhxnzixauoz0lttu9dgg4wampt89yc2bh7pozwh9shbouv1wgukn9dewbxooz1edqiiq950nct9xd62prp9y94pgcpezd3eok5jyr42znm31dif9xywjog4iznyu7mz1k8v68htzfpwo4nhb80463kmhxdb28rim1v53omzih44mps42ny5p82ztimnlb1z7zgaj94755wrhn0c8yw91fmxrpm3ghzb1g1a5psr330',
                         params: { "foo" : "bar" },
-                        offset: 366562,
+                        offset: 176585,
                         isSessionRequired: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcUpdateTag.id).toStrictEqual('b14beb99-e0e8-4e6f-9505-a59263cd6eed');
+                expect(res.body.data.nfcUpdateTag.id).toStrictEqual('20da9779-7e32-474a-bb18-e80dc5561456');
             });
     });
 
@@ -1074,12 +1074,12 @@ describe('tag', () =>
                     }
                 `,
                 variables: {
-                    id: 'b14beb99-e0e8-4e6f-9505-a59263cd6eed'
+                    id: '20da9779-7e32-474a-bb18-e80dc5561456'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcDeleteTagById.id).toStrictEqual('b14beb99-e0e8-4e6f-9505-a59263cd6eed');
+                expect(res.body.data.nfcDeleteTagById.id).toStrictEqual('20da9779-7e32-474a-bb18-e80dc5561456');
             });
     });
 

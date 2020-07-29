@@ -10,7 +10,7 @@ export abstract class ITagRepository implements IRepository<NfcTag>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<NfcTag>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<NfcTag>>;
 
     // create a single record
     abstract async create(tag: NfcTag): Promise<void>;

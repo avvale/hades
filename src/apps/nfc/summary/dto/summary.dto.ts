@@ -6,7 +6,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'aa40bb3f-c2a2-4196-a17c-4c77e54cc5c9'
+        example     : '4a588db1-5149-466c-85aa-e52a60d6e35b'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'tagId [input here api field description]',
-        example     : 'ec1d4999-3670-4cb7-9ac2-990874b484ae'
+        example     : '4e16d9fd-085d-49a1-9974-0783d41f9f11'
     })
     tagId: string;
     
@@ -24,7 +24,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '8f5e233c-18e5-454b-8ea1-93a855544e21'
+        example     : 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c'
     })
     tenantId: string;
     
@@ -33,7 +33,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'accessAt [input here api field description]',
-        example     : '2020-07-21 07:30:23'
+        example     : '2020-07-29 10:57:21'
     })
     accessAt: string;
     
@@ -42,7 +42,7 @@ export class SummaryDto
     @ApiProperty({
         type        : Number,
         description : 'counter [input here api field description]',
-        example     : 7357411594
+        example     : 6692794782
     })
     counter: number;
     
@@ -51,7 +51,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-21 02:18:05'
+        example     : '2020-07-28 17:29:22'
     })
     createdAt: string;
     
@@ -60,7 +60,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-21 19:27:28'
+        example     : '2020-07-29 01:34:26'
     })
     updatedAt: string;
     
@@ -69,7 +69,7 @@ export class SummaryDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-21 03:35:03'
+        example     : '2020-07-28 17:40:15'
     })
     deletedAt: string;
     

@@ -6,7 +6,7 @@ export class ActionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'e8172046-483a-4019-80ae-4490f4d43deb'
+        example     : 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class ActionDto
     @ApiProperty({
         type        : String,
         description : 'tagId [input here api field description]',
-        example     : 'ce122498-b97f-4fe8-8be8-6f9501184207'
+        example     : 'b21327e5-d59d-4392-8109-3415bf7f4f80'
     })
     tagId: string;
     
@@ -34,7 +34,7 @@ export class ActionDto
     @ApiProperty({
         type        : String,
         description : 'sectionId [input here api field description]',
-        example     : 'e761f69c-99c0-42d7-a627-126f44b62d5b'
+        example     : '02ebdb92-d2a2-4f32-92a8-1ee141200665'
     })
     sectionId: string;
     
@@ -52,7 +52,7 @@ export class ActionDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-21 06:09:11'
+        example     : '2020-07-28 18:01:44'
     })
     createdAt: string;
     
@@ -61,7 +61,7 @@ export class ActionDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-21 17:11:41'
+        example     : '2020-07-28 16:55:10'
     })
     updatedAt: string;
     
@@ -70,7 +70,7 @@ export class ActionDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-21 13:36:17'
+        example     : '2020-07-29 12:21:22'
     })
     deletedAt: string;
     

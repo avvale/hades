@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { sessions } from '@hades/nfc/session/infrastructure/seeds/session.seed';
 import { DeleteSessionByIdService } from './delete-session-by-id.service';
 import { SessionId } from './../../domain/value-objects';
-import { ISessionRepository } from '../../domain/session.repository';
-import { MockSessionRepository } from '../../infrastructure/mock/mock-session.repository';
+import { ISessionRepository } from './../../domain/session.repository';
+import { MockSessionRepository } from './../../infrastructure/mock/mock-session.repository';
 
 describe('DeleteSessionByIdService', () => 
 {
@@ -40,12 +40,12 @@ describe('DeleteSessionByIdService', () =>
 
     describe('main', () => 
     {
-        it('DeleteSessionByIdService should be defined', () => 
+        test('DeleteSessionByIdService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should delete session and emit event', async () => 
+        test('should delete session and emit event', async () => 
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(

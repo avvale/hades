@@ -10,7 +10,7 @@ export abstract class IActionRepository implements IRepository<NfcAction>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<NfcAction>>;
+    abstract async paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<NfcAction>>;
 
     // create a single record
     abstract async create(action: NfcAction): Promise<void>;

@@ -11,8 +11,8 @@ export class PaginateSummariesService
         private readonly repository: ISummaryRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<NfcSummary>>
+    public async main(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<NfcSummary>>
     {        
-        return await this.repository.paginate(queryStatements, constraint);
+        return await this.repository.paginate(queryStatements, constraints);
     }
 }

@@ -5,8 +5,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { summaries } from '@hades/nfc/summary/infrastructure/seeds/summary.seed';
 import { DeleteSummaryByIdService } from './delete-summary-by-id.service';
 import { SummaryId } from './../../domain/value-objects';
-import { ISummaryRepository } from '../../domain/summary.repository';
-import { MockSummaryRepository } from '../../infrastructure/mock/mock-summary.repository';
+import { ISummaryRepository } from './../../domain/summary.repository';
+import { MockSummaryRepository } from './../../infrastructure/mock/mock-summary.repository';
 
 describe('DeleteSummaryByIdService', () => 
 {
@@ -40,12 +40,12 @@ describe('DeleteSummaryByIdService', () =>
 
     describe('main', () => 
     {
-        it('DeleteSummaryByIdService should be defined', () => 
+        test('DeleteSummaryByIdService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should delete summary and emit event', async () => 
+        test('should delete summary and emit event', async () => 
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
