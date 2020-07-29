@@ -11,6 +11,7 @@ export class ExecutionId extends UuidValueObject
             name: 'ExecutionId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

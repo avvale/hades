@@ -42,8 +42,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -78,8 +77,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',

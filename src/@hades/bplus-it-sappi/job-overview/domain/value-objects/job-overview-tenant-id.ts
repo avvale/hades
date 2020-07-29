@@ -11,6 +11,7 @@ export class JobOverviewTenantId extends UuidValueObject
             name: 'JobOverviewTenantId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

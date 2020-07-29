@@ -69,11 +69,6 @@ aggregateProperties:
     type: char
     length: 40
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: BplusItSappiChannel
-    relationshipModulePath: bplus-it-sappi/channel
-    relationshipKey: hash
-    relationshipField: channel
   - name: channel_sap_id
     type: varchar
     maxLength: 50

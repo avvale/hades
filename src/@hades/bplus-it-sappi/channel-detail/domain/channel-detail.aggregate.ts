@@ -28,7 +28,6 @@ import { DeletedChannelDetailEvent } from './../application/events/deleted-chann
 import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.aggregate';
 import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.aggregate';
-import { BplusItSappiChannel } from '@hades/bplus-it-sappi/channel/domain/channel.aggregate';
 
 export class BplusItSappiChannelDetail extends AggregateRoot
 {
@@ -47,7 +46,6 @@ export class BplusItSappiChannelDetail extends AggregateRoot
     executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt;
     status: ChannelDetailStatus;
     channelHash: ChannelDetailChannelHash;
-    channel: BplusItSappiChannel;
     channelSapId: ChannelDetailChannelSapId;
     channelParty: ChannelDetailChannelParty;
     channelComponent: ChannelDetailChannelComponent;

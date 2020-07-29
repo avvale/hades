@@ -11,6 +11,7 @@ export class ModuleChannelId extends UuidValueObject
             name: 'ModuleChannelId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

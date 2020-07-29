@@ -30,8 +30,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -66,8 +65,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -102,8 +100,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',

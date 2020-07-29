@@ -11,6 +11,7 @@ export class DataLakeTenantId extends UuidValueObject
             name: 'DataLakeTenantId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

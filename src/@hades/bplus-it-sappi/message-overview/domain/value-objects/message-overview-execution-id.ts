@@ -11,6 +11,7 @@ export class MessageOverviewExecutionId extends UuidValueObject
             name: 'MessageOverviewExecutionId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

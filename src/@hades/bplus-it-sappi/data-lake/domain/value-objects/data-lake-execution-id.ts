@@ -11,6 +11,7 @@ export class DataLakeExecutionId extends UuidValueObject
             name: 'DataLakeExecutionId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

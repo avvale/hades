@@ -3,7 +3,6 @@ import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
 import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infrastructure/sequelize/sequelize-execution.model';
-import { BplusItSappiChannelModel } from '@hades/bplus-it-sappi/channel/infrastructure/sequelize/sequelize-channel.model';
 
 @Table({ modelName: 'bplus_it_sappi_channel_detail', freezeTableName: true })
 export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDetailModel> 
@@ -31,8 +30,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -67,8 +65,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -103,8 +100,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -181,8 +177,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     status: string;
         
              
-        
-    @ForeignKey(() => BplusItSappiChannelModel)    
+            
     
     
     @Column({
@@ -191,18 +186,9 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         allowNull: false,
         type: DataTypes.CHAR(40),
         
-        references: {
-            
-            key: 'hash'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION',
     })
     channelHash: string;
         
-    
-    @BelongsTo(() => BplusItSappiChannelModel)
-    channel: BplusItSappiChannelModel;
              
             
     

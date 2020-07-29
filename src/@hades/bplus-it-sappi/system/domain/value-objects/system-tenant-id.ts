@@ -11,6 +11,7 @@ export class SystemTenantId extends UuidValueObject
             name: 'SystemTenantId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

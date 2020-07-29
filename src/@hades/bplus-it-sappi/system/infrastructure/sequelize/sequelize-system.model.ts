@@ -28,8 +28,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',

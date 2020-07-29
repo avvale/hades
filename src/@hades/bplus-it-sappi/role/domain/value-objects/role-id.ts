@@ -11,6 +11,7 @@ export class RoleId extends UuidValueObject
             name: 'RoleId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

@@ -11,6 +11,7 @@ export class MessageDetailSystemId extends UuidValueObject
             name: 'MessageDetailSystemId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

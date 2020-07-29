@@ -11,6 +11,7 @@ export class RoleTenantId extends UuidValueObject
             name: 'RoleTenantId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

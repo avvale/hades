@@ -45,7 +45,6 @@ import { DeletedMessageDetailEvent } from './../application/events/deleted-messa
 import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
 import { BplusItSappiSystem } from '@hades/bplus-it-sappi/system/domain/system.aggregate';
 import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.aggregate';
-import { BplusItSappiFlow } from '@hades/bplus-it-sappi/flow/domain/flow.aggregate';
 
 export class BplusItSappiMessageDetail extends AggregateRoot
 {
@@ -64,7 +63,6 @@ export class BplusItSappiMessageDetail extends AggregateRoot
     executionMonitoringStartAt: MessageDetailExecutionMonitoringStartAt;
     executionMonitoringEndAt: MessageDetailExecutionMonitoringEndAt;
     flowHash: MessageDetailFlowHash;
-    flow: BplusItSappiFlow;
     flowParty: MessageDetailFlowParty;
     flowComponent: MessageDetailFlowComponent;
     flowInterfaceName: MessageDetailFlowInterfaceName;

@@ -11,6 +11,7 @@ export class ChannelOverviewSystemId extends UuidValueObject
             name: 'ChannelOverviewSystemId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

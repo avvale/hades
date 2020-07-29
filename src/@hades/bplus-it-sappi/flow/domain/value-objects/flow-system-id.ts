@@ -11,6 +11,7 @@ export class FlowSystemId extends UuidValueObject
             name: 'FlowSystemId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

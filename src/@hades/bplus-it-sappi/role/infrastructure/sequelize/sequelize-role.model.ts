@@ -28,8 +28,7 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',

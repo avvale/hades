@@ -77,8 +77,8 @@ export class CreateSnapshotController
 
         await this.commandBus.dispatch(new CreateDataLakeCommand(
             uuidv4(),
-            executionId,
             tenant.id,
+            executionId,
             tenant.code,
             payload
         ))

@@ -11,6 +11,7 @@ export class ModuleTenantId extends UuidValueObject
             name: 'ModuleTenantId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

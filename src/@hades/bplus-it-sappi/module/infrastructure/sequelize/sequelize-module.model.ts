@@ -31,8 +31,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -67,8 +66,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -103,8 +101,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -165,8 +162,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         allowNull: true,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',

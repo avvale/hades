@@ -29,8 +29,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -65,8 +64,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',

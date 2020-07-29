@@ -29,8 +29,7 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -52,8 +51,7 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',

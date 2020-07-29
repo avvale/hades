@@ -11,6 +11,7 @@ export class FlowFieldGroupId extends UuidValueObject
             name: 'FlowFieldGroupId',
             nullable: true,
             undefinable: true,
+            length: 36
         }, validationRules));
     }
 }

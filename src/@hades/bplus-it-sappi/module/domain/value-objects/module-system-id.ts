@@ -11,6 +11,7 @@ export class ModuleSystemId extends UuidValueObject
             name: 'ModuleSystemId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

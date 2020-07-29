@@ -6,7 +6,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'a8a619c0-f32a-48f1-8b56-87821e187ac9'
+        example     : 'c4bb892b-4cb5-4747-bc8b-390d5d0d139c'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'db5bad96-c700-4aee-a85c-dfe278dc97f1'
+        example     : '8a31e12b-018d-43e9-8d58-8746bae6b01a'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 's2d91srhhj4wghmxywo91pa6bt6sm6xm347ee5sn3j6gccby39'
+        example     : 'n7xek9k2s6art67atvgfdfhc4fmopufmve89a5z5pfe2xhe0ix'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '9daa226c-1e69-4364-859f-98f77ce408a0'
+        example     : '484039ed-36fe-48ad-9862-3ee3a36c0f04'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'uaameod2ctnrnulkqe82'
+        example     : 'af41kn4yzoo2oa3r1uja'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '3d9ed954-a7e6-4415-9558-c588f3a67d5f'
+        example     : '656afb0e-aeb8-4710-905d-df224440e09a'
     })
     executionId: string;
     
@@ -70,7 +70,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-29 09:11:23'
+        example     : '2020-07-29 15:59:20'
     })
     executionExecutedAt: string;
     
@@ -79,7 +79,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-29 10:25:50'
+        example     : '2020-07-29 10:42:02'
     })
     executionMonitoringStartAt: string;
     
@@ -88,7 +88,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-29 00:32:52'
+        example     : '2020-07-29 01:49:50'
     })
     executionMonitoringEndAt: string;
     
@@ -97,7 +97,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'status [input here api field description]',
-        example     : 'SUCCESSFUL',
+        example     : 'UNKNOWN',
         enum        : ['ERROR','INACTIVE','SUCCESSFUL','STOPPED','UNKNOWN','UNREGISTERED']
     })
     status: string;
@@ -107,7 +107,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelHash [input here api field description]',
-        example     : 'a1rz4g7a5kcjuuow5o4z2c495e2lcecp2rtg7b3a'
+        example     : '2ss3p84ohm6ja3pb2102dgxmli6zt8d60z6yd1kc'
     })
     channelHash: string;
     
@@ -116,7 +116,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelSapId [input here api field description]',
-        example     : 'g2jca8tdv9zmrf7izuj42fm3z9mnk6hvobi7yditqz0nawds1b'
+        example     : 'djifqgns5t71ycwl1feyz4433866k12ieh4py3lm410r3qe7yy'
     })
     channelSapId: string;
     
@@ -125,7 +125,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelParty [input here api field description]',
-        example     : '96d5p58ghev2z9ilke7mia8dzme2fg4f06jnm5xwirt4eal36i78xz1xbqiky30j6ygypznylcv32jksofs1mushw7jiybier0j0194edh696xpc5wwqg69vx7eqhakwtq45voo9u1r4lf4jd3dm87t740i2pp8s'
+        example     : '9d06in2idywvkxjm7dqk8ki3wxtxsp8la1swfgxbkrdoww32t1q9y4nphrg5qxewn1htyvtp0bee5q8r6nj9dhd2kkwcwqi8xo7ztza8vabfgxpewxq0tbjrtij7fao5mhmcq9mrj88sii7eeeelo3hu98prr7fh'
     })
     channelParty: string;
     
@@ -134,7 +134,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelComponent [input here api field description]',
-        example     : 'm456xq516hr92z78i1gnsloq51ucx4845etljskjc689nyzitr35gvx81cc8pvc8lmg8zpcd20oyqy7lxgjtlx9pcvoi4h19t4swxwb2xmtip4y0pd6tkbjz8fxmkm8eesazmf5h9gj2zv75toupv3u8mlebdkvi'
+        example     : 'qfdxi02bf7yw6tj6meqfgnenugyllpdertiqo05sfi9wa1ngxm9qi1f5r9225xty5p6act0696ufss2l1pa6ibz729imepa7ljmedws9pigvwlj8oq6l9g6412g9g42vz344ka5rhx0wx41an7ds2ttue2v5rcee'
     })
     channelComponent: string;
     
@@ -143,7 +143,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelName [input here api field description]',
-        example     : 's2lqo6ch1bjcqmvlmexoi72bhfe50twfye6ay738h7ldpilp2hyxd0byect6c1utjwtzsx5gebzbyjrg1x8w14br67qb1sqxuc4mr9o3s4tw7ikzcbyh8tc6pwu053o0o6bxbogi06kbxbdhs36mebld9xn8ma5b'
+        example     : 'vl05g2qenrxxlmkqnt5jke2a5zglsbelpwajif1toyxtyfxi3kxjlknqis3ijer2a0exa1z8tw34q71bo0xeomfutu7imtiaku04v61mlq2xtc7plm6wiebbkik3fcptwnn3zwopv78th537r6aasip341d7fqp1'
     })
     channelName: string;
     
@@ -152,7 +152,7 @@ export class CreateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'detail [input here api field description]',
-        example     : 'Sed qui aspernatur eum debitis sunt. Beatae est corporis in esse placeat quia adipisci. Aut vitae dolorem. Excepturi non ullam rerum nulla quibusdam. Illo nisi quod rerum provident tempora. Eius deleniti velit et vel voluptas voluptatum tempore odit perspiciatis.'
+        example     : 'Quos et quis iusto voluptatem optio perferendis quia. Exercitationem harum id. Cupiditate sit voluptatum hic.'
     })
     detail: string;
     

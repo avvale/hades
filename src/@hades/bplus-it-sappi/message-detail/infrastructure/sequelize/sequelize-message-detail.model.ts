@@ -3,7 +3,6 @@ import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
 import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infrastructure/sequelize/sequelize-execution.model';
-import { BplusItSappiFlowModel } from '@hades/bplus-it-sappi/flow/infrastructure/sequelize/sequelize-flow.model';
 
 @Table({ modelName: 'bplus_it_sappi_message_detail', freezeTableName: true })
 export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDetailModel> 
@@ -31,8 +30,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -67,8 +65,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -116,8 +113,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -181,8 +177,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     executionMonitoringEndAt: string;
         
              
-        
-    @ForeignKey(() => BplusItSappiFlowModel)    
+            
     
     
     @Column({
@@ -191,18 +186,9 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         allowNull: false,
         type: DataTypes.CHAR(40),
         
-        references: {
-            
-            key: 'hash'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION',
     })
     flowHash: string;
         
-    
-    @BelongsTo(() => BplusItSappiFlowModel)
-    flow: BplusItSappiFlowModel;
              
             
     

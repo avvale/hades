@@ -11,6 +11,7 @@ export class JobDetailSystemId extends UuidValueObject
             name: 'JobDetailSystemId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

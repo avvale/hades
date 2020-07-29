@@ -11,6 +11,7 @@ export class JobDetailExecutionId extends UuidValueObject
             name: 'JobDetailExecutionId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

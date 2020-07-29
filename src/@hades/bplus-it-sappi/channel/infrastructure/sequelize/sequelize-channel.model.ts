@@ -44,8 +44,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -80,8 +79,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -155,8 +153,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         allowNull: true,
         type: DataTypes.UUID,
         
-        references: {
-            
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',

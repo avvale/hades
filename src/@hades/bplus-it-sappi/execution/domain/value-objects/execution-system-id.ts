@@ -11,6 +11,7 @@ export class ExecutionSystemId extends UuidValueObject
             name: 'ExecutionSystemId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

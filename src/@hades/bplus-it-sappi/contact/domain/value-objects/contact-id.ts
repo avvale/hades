@@ -11,6 +11,7 @@ export class ContactId extends UuidValueObject
             name: 'ContactId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

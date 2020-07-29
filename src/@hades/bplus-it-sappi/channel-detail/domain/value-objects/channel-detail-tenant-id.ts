@@ -11,6 +11,7 @@ export class ChannelDetailTenantId extends UuidValueObject
             name: 'ChannelDetailTenantId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

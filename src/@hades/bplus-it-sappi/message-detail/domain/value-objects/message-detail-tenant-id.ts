@@ -11,6 +11,7 @@ export class MessageDetailTenantId extends UuidValueObject
             name: 'MessageDetailTenantId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }
