@@ -1,30 +1,23 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 
 @Table({ modelName: 'bplus_it_sappi_system', freezeTableName: true })
 export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel> 
 { 
-        
-    
+
     @Column({
         field: 'id',
         primaryKey: true,
         allowNull: false,
-        type: DataTypes.UUID,
-        
+        type: DataTypes.UUID
     })
     id: string;
-        
-             
-        
-    
+
     @Column({
         field: 'tenant_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: AdminTenantModel,
             key: 'id'
@@ -33,13 +26,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
         onDelete: 'NO ACTION',
     })
     tenantId: string;
-        
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
-             
-        
-    
+
     @Column({
         field: 'tenant_code',
         
@@ -47,11 +34,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
         type: DataTypes.STRING(50),
         
     })
-    tenantCode: string;
-        
-             
-        
-    
+
     @Column({
         field: 'version',
         
@@ -62,20 +45,17 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     version: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'name',
-        
         allowNull: false,
         type: DataTypes.STRING(undefined),
         
     })
     name: string;
-        
-             
-        
-    
+
     @Column({
         field: 'environment',
         
@@ -85,9 +65,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     })
     environment: string;
         
-             
-        
-    
+
     @Column({
         field: 'is_active',
         
@@ -98,7 +76,8 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     isActive: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'cancelled_at',
@@ -110,7 +89,8 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     cancelledAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -122,7 +102,8 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -134,7 +115,8 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infrastructure/sequelize/sequelize-execution.model';
@@ -6,7 +6,8 @@ import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infr
 @Table({ modelName: 'bplus_it_sappi_data_lake', freezeTableName: true })
 export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -19,7 +20,7 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
         
              
         
-    
+   
     @Column({
         field: 'tenant_id',
         
@@ -35,9 +36,7 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
+
              
         
     
@@ -55,12 +54,11 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
         onDelete: 'NO ACTION',
     })
     executionId: string;
-        
     
-    @BelongsTo(() => BplusItSappiExecutionModel)
-    execution: BplusItSappiExecutionModel;
+  
              
-        
+            
+    
     
     @Column({
         field: 'tenant_code',
@@ -72,7 +70,8 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     tenantCode: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'payload',
@@ -84,7 +83,8 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     payload: any;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -96,7 +96,8 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -108,7 +109,8 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

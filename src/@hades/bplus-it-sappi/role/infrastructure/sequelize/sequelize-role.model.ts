@@ -1,12 +1,10 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 
 @Table({ modelName: 'bplus_it_sappi_role', freezeTableName: true })
 export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel> 
 { 
-        
-    
     @Column({
         field: 'id',
         primaryKey: true,
@@ -16,15 +14,10 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     })
     id: string;
         
-             
-        
-    
     @Column({
         field: 'tenant_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: AdminTenantModel,
             key: 'id'
@@ -35,10 +28,9 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     tenantId: string;
         
     
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
-        
+            
+    
     
     @Column({
         field: 'tenant_code',
@@ -50,7 +42,8 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     tenantCode: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'name',
@@ -62,7 +55,8 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     name: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -74,7 +68,8 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -86,7 +81,8 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
@@ -7,8 +7,6 @@ import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infr
 @Table({ modelName: 'bplus_it_sappi_message_detail', freezeTableName: true })
 export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDetailModel> 
 { 
-        
-    
     @Column({
         field: 'id',
         primaryKey: true,
@@ -17,10 +15,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         
     })
     id: string;
-        
-             
-        
-    
+
+  
     @Column({
         field: 'tenant_id',
         
@@ -35,13 +31,9 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         onDelete: 'NO ACTION',
     })
     tenantId: string;
-        
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
-             
-        
-    
+
+   
+
     @Column({
         field: 'tenant_code',
         
@@ -52,8 +44,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     tenantCode: string;
         
              
-        
-    
+  
     @Column({
         field: 'system_id',
         
@@ -68,12 +59,11 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         onDelete: 'NO ACTION',
     })
     systemId: string;
-        
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
+
+   
              
-        
+            
+    
     
     @Column({
         field: 'system_name',
@@ -85,7 +75,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     systemName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'scenario',
@@ -98,13 +89,10 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         
              
         
-    
     @Column({
         field: 'execution_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: BplusItSappiExecutionModel,
             key: 'id'
@@ -114,11 +102,10 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     })
     executionId: string;
         
-    
-    @BelongsTo(() => BplusItSappiExecutionModel)
-    execution: BplusItSappiExecutionModel;
+
              
-        
+            
+    
     
     @Column({
         field: 'execution_type',
@@ -130,7 +117,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     executionType: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_executed_at',
@@ -142,7 +130,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     executionExecutedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_monitoring_start_at',
@@ -154,7 +143,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     executionMonitoringStartAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_monitoring_end_at',
@@ -166,7 +156,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     executionMonitoringEndAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_hash',
@@ -178,7 +169,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     flowHash: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_party',
@@ -190,7 +182,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     flowParty: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_component',
@@ -202,7 +195,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     flowComponent: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_interface_name',
@@ -214,7 +208,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     flowInterfaceName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_interface_namespace',
@@ -226,7 +221,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     flowInterfaceNamespace: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'status',
@@ -238,7 +234,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     status: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'detail',
@@ -250,7 +247,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     detail: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'example',
@@ -262,7 +260,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     example: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'start_time_at',
@@ -274,7 +273,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     startTimeAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'direction',
@@ -286,7 +286,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     direction: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'error_category',
@@ -298,7 +299,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     errorCategory: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'error_code',
@@ -310,7 +312,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     errorCode: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'error_label',
@@ -322,7 +325,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     errorLabel: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'node',
@@ -334,7 +338,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     node: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'protocol',
@@ -346,7 +351,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     protocol: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'quality_of_service',
@@ -358,7 +364,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     qualityOfService: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'receiver_party',
@@ -370,7 +377,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     receiverParty: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'receiver_component',
@@ -382,7 +390,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     receiverComponent: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'receiver_interface',
@@ -394,7 +403,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     receiverInterface: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'receiver_interface_namespace',
@@ -406,7 +416,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     receiverInterfaceNamespace: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'retries',
@@ -418,7 +429,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     retries: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'size',
@@ -430,7 +442,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     size: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'times_failed',
@@ -442,7 +455,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     timesFailed: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -454,7 +468,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -466,7 +481,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

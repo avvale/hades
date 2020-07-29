@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
@@ -6,7 +6,6 @@ import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastruc
 @Table({ modelName: 'bplus_it_sappi_execution', freezeTableName: true })
 export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel> 
 { 
-        
     
     @Column({
         field: 'id',
@@ -16,16 +15,11 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
         
     })
     id: string;
-        
-             
-        
     
     @Column({
         field: 'tenant_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: AdminTenantModel,
             key: 'id'
@@ -34,12 +28,10 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
         onDelete: 'NO ACTION',
     })
     tenantId: string;
-        
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
+
              
-        
+            
+    
     
     @Column({
         field: 'tenant_code',
@@ -49,16 +41,11 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
         
     })
     tenantCode: string;
-        
-             
-        
-    
+          
     @Column({
         field: 'system_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: BplusItSappiSystemModel,
             key: 'id'
@@ -67,13 +54,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
         onDelete: 'NO ACTION',
     })
     systemId: string;
-        
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
-             
-        
-    
+
     @Column({
         field: 'system_name',
         
@@ -84,7 +65,8 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     systemName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'version',
@@ -96,7 +78,8 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     version: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'type',
@@ -108,7 +91,8 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     type: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'executed_at',
@@ -120,7 +104,8 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     executedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'monitoring_start_at',
@@ -132,7 +117,8 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     monitoringStartAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'monitoring_end_at',
@@ -144,7 +130,8 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     monitoringEndAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -156,7 +143,8 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -168,7 +156,8 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

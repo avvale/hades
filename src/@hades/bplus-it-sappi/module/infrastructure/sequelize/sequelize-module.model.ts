@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
@@ -9,7 +9,6 @@ import { BplusItSappiFlowModel } from '@hades/bplus-it-sappi/flow/infrastructure
 export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel> 
 { 
         
-    
     @Column({
         field: 'id',
         primaryKey: true,
@@ -21,7 +20,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         
              
         
-    
+       
     @Column({
         field: 'tenant_id',
         
@@ -38,10 +37,9 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     tenantId: string;
         
     
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
-        
+            
+    
     
     @Column({
         field: 'tenant_code',
@@ -53,8 +51,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     tenantCode: string;
         
              
-        
-    
+     
     @Column({
         field: 'system_id',
         
@@ -69,13 +66,10 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         onDelete: 'NO ACTION',
     })
     systemId: string;
-        
     
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
+
              
-        
-    
+
     @Column({
         field: 'system_name',
         
@@ -86,8 +80,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     systemName: string;
         
              
-        
-    
+     
     @Column({
         field: 'channel_id',
         
@@ -102,12 +95,11 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         onDelete: 'NO ACTION',
     })
     channelId: string;
-        
     
-    @BelongsTo(() => BplusItSappiChannelModel)
-    channel: BplusItSappiChannelModel;
+ 
              
-        
+            
+    
     
     @Column({
         field: 'channel_party',
@@ -119,7 +111,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     channelParty: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'channel_component',
@@ -131,7 +124,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     channelComponent: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'channel_name',
@@ -141,16 +135,11 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         
     })
     channelName: string;
-        
-             
-        
-    
+
     @Column({
         field: 'flow_id',
-        
         allowNull: true,
         type: DataTypes.UUID,
-        
         references: {
             model: BplusItSappiFlowModel,
             key: 'id'
@@ -159,12 +148,11 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         onDelete: 'NO ACTION',
     })
     flowId: string;
-        
     
-    @BelongsTo(() => BplusItSappiFlowModel)
-    flow: BplusItSappiFlowModel;
+   
              
-        
+            
+    
     
     @Column({
         field: 'flow_party',
@@ -176,7 +164,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     flowParty: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_component',
@@ -188,7 +177,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     flowComponent: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_interface_name',
@@ -200,7 +190,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     flowInterfaceName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_interface_namespace',
@@ -212,7 +203,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     flowInterfaceNamespace: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'version',
@@ -224,7 +216,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     version: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'parameter_group',
@@ -236,7 +229,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     parameterGroup: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'name',
@@ -248,7 +242,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     name: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'parameter_name',
@@ -260,7 +255,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     parameterName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'parameter_value',
@@ -272,7 +268,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     parameterValue: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -284,7 +281,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -296,7 +294,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

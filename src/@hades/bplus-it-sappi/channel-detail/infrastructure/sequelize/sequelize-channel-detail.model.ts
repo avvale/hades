@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
@@ -8,26 +8,18 @@ import { BplusItSappiChannelModel } from '@hades/bplus-it-sappi/channel/infrastr
 @Table({ modelName: 'bplus_it_sappi_channel_detail', freezeTableName: true })
 export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDetailModel> 
 { 
-        
-    
     @Column({
         field: 'id',
         primaryKey: true,
         allowNull: false,
-        type: DataTypes.UUID,
-        
+        type: DataTypes.UUID
     })
     id: string;
-        
-             
-        
-    
+
     @Column({
         field: 'tenant_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: AdminTenantModel,
             key: 'id'
@@ -37,11 +29,10 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
+   
              
-        
+            
+    
     
     @Column({
         field: 'tenant_code',
@@ -52,9 +43,6 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     tenantCode: string;
         
-             
-        
-    
     @Column({
         field: 'system_id',
         
@@ -69,13 +57,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         onDelete: 'NO ACTION',
     })
     systemId: string;
-        
     
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
-             
-        
-    
+
     @Column({
         field: 'system_name',
         
@@ -85,9 +68,6 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     systemName: string;
         
-             
-        
-    
     @Column({
         field: 'execution_id',
         
@@ -102,12 +82,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         onDelete: 'NO ACTION',
     })
     executionId: string;
-        
-    
-    @BelongsTo(() => BplusItSappiExecutionModel)
-    execution: BplusItSappiExecutionModel;
-             
-        
+
     
     @Column({
         field: 'execution_type',
@@ -119,7 +94,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     executionType: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_executed_at',
@@ -131,7 +107,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     executionExecutedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_monitoring_start_at',
@@ -143,7 +120,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     executionMonitoringStartAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_monitoring_end_at',
@@ -155,7 +133,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     executionMonitoringEndAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'status',
@@ -168,13 +147,11 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         
              
         
-    
+ 
     @Column({
         field: 'channel_hash',
-        
         allowNull: false,
         type: DataTypes.CHAR(40),
-        
         references: {
             model: BplusItSappiChannelModel,
             key: 'hash'
@@ -184,11 +161,10 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     channelHash: string;
         
-    
-    @BelongsTo(() => BplusItSappiChannelModel)
-    channel: BplusItSappiChannelModel;
+   
              
-        
+            
+    
     
     @Column({
         field: 'channel_sap_id',
@@ -200,7 +176,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     channelSapId: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'channel_party',
@@ -212,7 +189,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     channelParty: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'channel_component',
@@ -224,7 +202,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     channelComponent: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'channel_name',
@@ -236,7 +215,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     channelName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'detail',
@@ -248,7 +228,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     detail: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -260,7 +241,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -272,7 +254,8 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

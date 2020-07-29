@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
@@ -7,8 +7,6 @@ import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infr
 @Table({ modelName: 'bplus_it_sappi_channel_overview', freezeTableName: true })
 export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelOverviewModel> 
 { 
-        
-    
     @Column({
         field: 'id',
         primaryKey: true,
@@ -17,16 +15,11 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
         
     })
     id: string;
-        
-             
-        
     
     @Column({
         field: 'tenant_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: AdminTenantModel,
             key: 'id'
@@ -36,12 +29,9 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     })
     tenantId: string;
         
-    
     @BelongsTo(() => AdminTenantModel)
     tenant: AdminTenantModel;
              
-        
-    
     @Column({
         field: 'tenant_code',
         
@@ -51,9 +41,7 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     })
     tenantCode: string;
         
-             
-        
-    
+  
     @Column({
         field: 'system_id',
         
@@ -68,12 +56,10 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
         onDelete: 'NO ACTION',
     })
     systemId: string;
-        
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
+
              
-        
+            
+    
     
     @Column({
         field: 'system_name',
@@ -85,8 +71,7 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     systemName: string;
         
              
-        
-    
+ 
     @Column({
         field: 'execution_id',
         
@@ -101,12 +86,10 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
         onDelete: 'NO ACTION',
     })
     executionId: string;
-        
-    
-    @BelongsTo(() => BplusItSappiExecutionModel)
-    execution: BplusItSappiExecutionModel;
+
              
-        
+            
+    
     
     @Column({
         field: 'execution_type',
@@ -118,7 +101,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     executionType: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_executed_at',
@@ -130,7 +114,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     executionExecutedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_monitoring_start_at',
@@ -142,7 +127,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     executionMonitoringStartAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_monitoring_end_at',
@@ -154,7 +140,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     executionMonitoringEndAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'error',
@@ -166,7 +153,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     error: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'inactive',
@@ -178,7 +166,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     inactive: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'successful',
@@ -190,7 +179,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     successful: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'stopped',
@@ -202,7 +192,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     stopped: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'unknown',
@@ -214,7 +205,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     unknown: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'unregistered',
@@ -226,7 +218,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     unregistered: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -238,7 +231,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -250,7 +244,8 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

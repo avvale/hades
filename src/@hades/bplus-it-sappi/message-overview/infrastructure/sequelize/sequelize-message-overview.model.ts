@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
@@ -7,8 +7,6 @@ import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infr
 @Table({ modelName: 'bplus_it_sappi_message_overview', freezeTableName: true })
 export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageOverviewModel> 
 { 
-        
-    
     @Column({
         field: 'id',
         primaryKey: true,
@@ -18,15 +16,11 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     })
     id: string;
         
-             
-        
-    
+      
     @Column({
         field: 'tenant_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: AdminTenantModel,
             key: 'id'
@@ -35,12 +29,9 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
         onDelete: 'NO ACTION',
     })
     tenantId: string;
-        
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
-             
-        
+
+  
+
     
     @Column({
         field: 'tenant_code',
@@ -51,15 +42,11 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     })
     tenantCode: string;
         
-             
-        
-    
+
     @Column({
         field: 'system_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: BplusItSappiSystemModel,
             key: 'id'
@@ -69,11 +56,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     })
     systemId: string;
         
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
-             
-        
+  
+
     
     @Column({
         field: 'system_name',
@@ -84,9 +68,7 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     })
     systemName: string;
         
-             
-        
-    
+       
     @Column({
         field: 'execution_id',
         
@@ -102,11 +84,10 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     })
     executionId: string;
         
-    
-    @BelongsTo(() => BplusItSappiExecutionModel)
-    execution: BplusItSappiExecutionModel;
+
              
-        
+            
+    
     
     @Column({
         field: 'execution_type',
@@ -118,7 +99,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     executionType: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_executed_at',
@@ -130,7 +112,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     executionExecutedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_monitoring_start_at',
@@ -142,7 +125,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     executionMonitoringStartAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_monitoring_end_at',
@@ -154,7 +138,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     executionMonitoringEndAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'number_max',
@@ -166,7 +151,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     numberMax: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'number_days',
@@ -178,7 +164,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     numberDays: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'success',
@@ -190,7 +177,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     success: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'cancelled',
@@ -202,7 +190,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     cancelled: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'delivering',
@@ -214,7 +203,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     delivering: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'error',
@@ -226,7 +216,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     error: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'holding',
@@ -238,7 +229,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     holding: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'to_be_delivered',
@@ -250,7 +242,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     toBeDelivered: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'waiting',
@@ -262,7 +255,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     waiting: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -274,7 +268,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -286,7 +281,8 @@ export class BplusItSappiMessageOverviewModel extends Model<BplusItSappiMessageO
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

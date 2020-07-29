@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
@@ -8,38 +8,26 @@ import { BplusItSappiModuleModel } from '@hades/bplus-it-sappi/module/infrastruc
 @Table({ modelName: 'bplus_it_sappi_channel', freezeTableName: true })
 export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel> 
 { 
-        
-    @Unique
     @Column({
         field: 'id',
         primaryKey: true,
         allowNull: false,
         type: DataTypes.UUID,
-        
     })
     id: string;
-        
-             
-        
-    
+
+    @Unique
     @Column({
         field: 'hash',
-        primaryKey: true,
         allowNull: false,
-        type: DataTypes.CHAR(40),
-        
+        type: DataTypes.CHAR(40)
     })
     hash: string;
-        
-             
-        
-    
+  
     @Column({
         field: 'tenant_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: AdminTenantModel,
             key: 'id'
@@ -48,13 +36,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         onDelete: 'NO ACTION',
     })
     tenantId: string;
-        
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
-             
-        
-    
+
     @Column({
         field: 'tenant_code',
         
@@ -81,12 +63,11 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         onDelete: 'NO ACTION',
     })
     systemId: string;
-        
+
     
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
              
-        
+            
+    
     
     @Column({
         field: 'system_name',
@@ -98,7 +79,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     systemName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'party',
@@ -110,7 +92,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     party: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'component',
@@ -122,7 +105,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     component: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'name',
@@ -150,12 +134,11 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         onDelete: 'NO ACTION',
     })
     flowId: string;
-        
-    
-    @BelongsTo(() => BplusItSappiFlowModel)
-    flow: BplusItSappiFlowModel;
+
+   
              
-        
+            
+    
     
     @Column({
         field: 'flow_party',
@@ -167,7 +150,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     flowParty: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_component',
@@ -179,7 +163,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     flowComponent: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_interface_name',
@@ -191,7 +176,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     flowInterfaceName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'flow_interface_namespace',
@@ -203,7 +189,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     flowInterfaceNamespace: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'version',
@@ -215,7 +202,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     version: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'adapter_type',
@@ -227,7 +215,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     adapterType: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'direction',
@@ -239,7 +228,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     direction: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'transport_protocol',
@@ -251,7 +241,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     transportProtocol: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'message_protocol',
@@ -263,7 +254,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     messageProtocol: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'adapter_engine_name',
@@ -275,7 +267,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     adapterEngineName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'url',
@@ -287,7 +280,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     url: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'username',
@@ -299,7 +293,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     username: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'remote_host',
@@ -311,7 +306,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     remoteHost: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'remote_port',
@@ -323,7 +319,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     remotePort: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'directory',
@@ -335,7 +332,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     directory: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'file_schema',
@@ -347,7 +345,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     fileSchema: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'proxy_host',
@@ -359,7 +358,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     proxyHost: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'proxy_port',
@@ -371,7 +371,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     proxyPort: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'destination',
@@ -383,7 +384,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     destination: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'adapter_status',
@@ -395,7 +397,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     adapterStatus: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'software_component_name',
@@ -407,7 +410,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     softwareComponentName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'responsible_user_account_name',
@@ -419,7 +423,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     responsibleUserAccountName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'last_change_user_account',
@@ -431,7 +436,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     lastChangeUserAccount: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'last_changed_at',
@@ -448,7 +454,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @HasMany(() => BplusItSappiModuleModel)
     modules: BplusItSappiModuleModel[];
          
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -460,7 +467,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -472,7 +480,8 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

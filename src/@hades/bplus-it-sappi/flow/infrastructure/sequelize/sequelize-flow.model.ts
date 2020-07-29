@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
@@ -6,38 +6,26 @@ import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastruc
 @Table({ modelName: 'bplus_it_sappi_flow', freezeTableName: true })
 export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel> 
 { 
-        
-    @Unique
     @Column({
         field: 'id',
         primaryKey: true,
         allowNull: false,
-        type: DataTypes.UUID,
-        
+        type: DataTypes.UUID
     })
     id: string;
-        
-             
-        
     
+    @Unique
     @Column({
         field: 'hash',
-        primaryKey: true,
         allowNull: false,
-        type: DataTypes.CHAR(40),
-        
+        type: DataTypes.CHAR(40)    
     })
     hash: string;
         
-             
-        
-    
     @Column({
         field: 'tenant_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: AdminTenantModel,
             key: 'id'
@@ -48,10 +36,10 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     tenantId: string;
         
     
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
+
              
-        
+            
+    
     
     @Column({
         field: 'tenant_code',
@@ -64,6 +52,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
         
              
         
+  
+    
     
     @Column({
         field: 'system_id',
@@ -81,10 +71,10 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     systemId: string;
         
     
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
+
              
-        
+            
+    
     
     @Column({
         field: 'system_name',
@@ -96,7 +86,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     systemName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'version',
@@ -108,7 +99,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     version: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'scenario',
@@ -120,7 +112,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     scenario: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'party',
@@ -132,7 +125,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     party: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'component',
@@ -144,7 +138,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     component: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'interface_name',
@@ -156,7 +151,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     interfaceName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'interface_namespace',
@@ -168,7 +164,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     interfaceNamespace: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'iflow_name',
@@ -180,7 +177,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     iflowName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'responsible_user_account',
@@ -192,7 +190,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     responsibleUserAccount: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'last_change_user_account',
@@ -204,7 +203,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     lastChangeUserAccount: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'last_changed_at',
@@ -216,7 +216,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     lastChangedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'folder_path',
@@ -228,7 +229,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     folderPath: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'description',
@@ -240,7 +242,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     description: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'application',
@@ -252,7 +255,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     application: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'is_critical',
@@ -264,7 +268,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     isCritical: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'is_complex',
@@ -276,7 +281,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     isComplex: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'field_group_id',
@@ -288,7 +294,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     fieldGroupId: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'data',
@@ -300,7 +307,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     data: any;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -312,7 +320,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -324,7 +333,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

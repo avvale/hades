@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
@@ -7,7 +7,8 @@ import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infr
 @Table({ modelName: 'bplus_it_sappi_job_detail', freezeTableName: true })
 export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -20,6 +21,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
         
              
         
+ 
+    
     
     @Column({
         field: 'tenant_id',
@@ -37,10 +40,9 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     tenantId: string;
         
     
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
-             
-        
+
+            
+    
     
     @Column({
         field: 'tenant_code',
@@ -52,7 +54,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     tenantCode: string;
         
              
-        
+
+    
     
     @Column({
         field: 'system_id',
@@ -69,11 +72,10 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     })
     systemId: string;
         
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
+
              
-        
+            
+    
     
     @Column({
         field: 'system_name',
@@ -85,7 +87,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     systemName: string;
         
              
-        
+   
+    
     
     @Column({
         field: 'execution_id',
@@ -103,10 +106,10 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     executionId: string;
         
     
-    @BelongsTo(() => BplusItSappiExecutionModel)
-    execution: BplusItSappiExecutionModel;
+   
              
-        
+            
+    
     
     @Column({
         field: 'execution_type',
@@ -118,7 +121,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     executionType: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_executed_at',
@@ -130,7 +134,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     executionExecutedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_monitoring_start_at',
@@ -142,7 +147,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     executionMonitoringStartAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'execution_monitoring_end_at',
@@ -154,7 +160,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     executionMonitoringEndAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'status',
@@ -166,7 +173,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     status: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'name',
@@ -178,7 +186,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     name: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'return_code',
@@ -190,7 +199,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     returnCode: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'node',
@@ -202,7 +212,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     node: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'user',
@@ -214,7 +225,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     user: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'start_at',
@@ -226,7 +238,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     startAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'end_at',
@@ -238,7 +251,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     endAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -250,7 +264,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -262,7 +277,8 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

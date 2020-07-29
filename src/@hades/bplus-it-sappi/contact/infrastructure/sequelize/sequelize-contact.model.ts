@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
@@ -7,7 +7,8 @@ import { BplusItSappiRoleModel } from '@hades/bplus-it-sappi/role/infrastructure
 @Table({ modelName: 'bplus_it_sappi_contact', freezeTableName: true })
 export class BplusItSappiContactModel extends Model<BplusItSappiContactModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -20,7 +21,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
         
              
         
-    
+     
     @Column({
         field: 'tenant_id',
         
@@ -35,12 +36,11 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
         onDelete: 'NO ACTION',
     })
     tenantId: string;
-        
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
+
+ 
              
-        
+            
+    
     
     @Column({
         field: 'tenant_code',
@@ -53,7 +53,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
         
              
         
-    
+ 
     @Column({
         field: 'system_id',
         
@@ -70,10 +70,10 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     systemId: string;
         
     
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
+  
              
-        
+            
+    
     
     @Column({
         field: 'system_name',
@@ -86,7 +86,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
         
              
         
-    
+     
     @Column({
         field: 'role_id',
         
@@ -102,11 +102,10 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     })
     roleId: string;
         
-    
-    @BelongsTo(() => BplusItSappiRoleModel)
-    role: BplusItSappiRoleModel;
+ 
              
-        
+            
+    
     
     @Column({
         field: 'role_name',
@@ -118,7 +117,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     roleName: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'name',
@@ -130,7 +130,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     name: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'surname',
@@ -142,7 +143,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     surname: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'email',
@@ -154,7 +156,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     email: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'mobile',
@@ -166,7 +169,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     mobile: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'area',
@@ -178,7 +182,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     area: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'has_consent_email',
@@ -190,7 +195,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     hasConsentEmail: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'has_consent_mobile',
@@ -202,7 +208,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     hasConsentMobile: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'is_active',
@@ -214,7 +221,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     isActive: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -226,7 +234,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -238,7 +247,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',
