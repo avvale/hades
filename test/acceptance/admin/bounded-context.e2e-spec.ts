@@ -65,10 +65,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'qw5o9mb82r0byk9itahioy4mas6a997a2xrplvj19b51x1fyrd4i86i9vxioczpl5fw5r7biqrdkeuw6pngs0w7m6gr42q1tzxacpp3tyjs4rty00d8k8ycdd8bjeaukfu4j19241vi0vw48l42idqv6e318yxkpummgm2jbouu5tvj6fxjw1oc7ymxqmxglwfg3s5fzr6tu4tg6v2fcaclj9jxgi6g8w7iiyzuy8ppjube7noqob754cp2xnbn',
-                root: 'qqmyf0vnnnkkeqelia2x',
-                sort: 468536,
-                isActive: true,
+                name: 'f7q88qu37no7vz51e0ky7ywvp1hmzg9ldzohqdjdq58p3izqimhvrkhxc4fo5elobwajo0q2oz2wbn47im7lzunwsze0ksie8wdxv6r9xj7ow7s21vxedzjlxnno0mrikqrrdw2gb2631adrnedicyldqj0aghelnlt40gkdkqvb2hiq6x2j4xvhrzz8jw0n7eu3it9x9f0nb2qzko1zrf31p11c2yca33rc9xacyn1o5gq67dckp1ayr5oltsn',
+                root: 'ng9691e5gh6g20ciu0zp',
+                sort: 286154,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -83,10 +83,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                name: 'ofu6of4rkxuv3znmadt7gt39t5n7vetromgn8pqihalacodiypc0ed2wdwbo26siawplzugw0c6cxhgsjssfnc36nnuovs2jywzzsxwpm1l6dhylsxtsz4ud8ln7leix5c7hze0cwgdlglvplmpp9t6po81futpvntw8jbt9cbly3nc7tw03votwy6n4fzgl9cgru2wwm6uqbn9dbo4boz8kfezm1qbw6qsg4b8oixhsg0uze130uisqcpwictg',
-                root: 'acktu2etdqmfltgzgd8t',
-                sort: 275874,
-                isActive: false,
+                name: 'ddz2kqj4dk65mao9mopfbteg90w92f2zu4vkssk89uut8lzqc1ungaxo2dpav02x051xel3ftsgf3j0i5k9gstvn0aqvskc1l60dyzckvlfsisf4qwg61mr2w4ccr7dkljqpjx2yf5j5qyr569x8qy0444a6wdc1sd5pv4mn38l49lypbkliys6c1vlni6pkeigzvex7zowf0x3kw4jej756gur2nq491yl73w6dtrsa4adwfsjz02exsgjwv1o',
+                root: '6eqmlplv29gzn6afqmuc',
+                sort: 745796,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -100,10 +100,10 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
                 name: null,
-                root: 'mxbbye68ipf9vla6ekxb',
-                sort: 139490,
+                root: 'ju23evfiouz0zsj8e5z5',
+                sort: 519031,
                 isActive: true,
             })
             .expect(400)
@@ -118,10 +118,10 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
                 
-                root: '5cylys91qfl8v6x4ljj7',
-                sort: 970524,
+                root: 'hrln4dtds6gex7mjjrdg',
+                sort: 659688,
                 isActive: true,
             })
             .expect(400)
@@ -136,10 +136,10 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: 'hnqk8tnuuxnafoshnoepw3ivxe08fzpc34mnhjrgde4qoadga4dpzowrcgw8c9v2l3t4rg0cgx1x6obbdtyoqbgffpia4rdywfi9hp5yhkh9k5ljjzl1h06sp6nmvce0lyoowjhgoalyid26xy7pyz4mg8uh4t6y777in5ikukruyiv6o6qygf1hm5or9le9wum7b3pz3jtvplgb4g4uaftkxre07fue56eppdlkrpx1szuovypu9p6394qvbxh',
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'pwvehneww24jr44p4h0cqjiv0vem7soxyy06og91dxniq5iluft2016adtq659286ivg431chpjsxka59s1v260wb8d63b2c261pmiqf096sut5hr1by1nv3qqv066bl8pkycex86xi8txb3w9bjveze5k7gyk0bspyx337lwrx6k8j41p60o0s6w4cizb8pyo8qzry031zzovg0r0gfbzmy1lcumooyoh2gbm3u4p7bm8nqhutuxpeic7e3bte',
                 root: null,
-                sort: 882493,
+                sort: 423453,
                 isActive: false,
             })
             .expect(400)
@@ -154,10 +154,10 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: '3v5z6j7p1pm5z4r63nb9xbpret8rlfinu5992vsmr3pqir6hpw5c4j6echdmrlzp79gzqpbligoaq61l0ohaz0fxj2hc0cn0twag4yt3orkvexjkjim0670hqkx2zl95pnj4mtozmmp96sjcsvyax3zaw54i4vovxz6spti1i8by6r6swq6alrt8vjtsryfnl079kwi526xcxb2a2fjs7wt9kbj5vgsp2jb8ifqp3fnpqjiwrydsn4jujnooedz',
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'j056k0pddz5hsdkqqppq4so76rzdrtbkr9t0w52u6odp3zxtikd8cav4pojy6adrngwyr0ey8sgvyxnazja5j8uu48zftkpmdtap4oyt4tu031k8l771vqjercady2csxz2e797esiou80r2pwnwi9eqg2dlymbh62m4ob29c7gfotk4icyq9gtmqhw4xdy9kk94zntry8uzedfemaabbloo45cz5k87pel5igd2pha8rhso39guydk8xnqbfvk',
                 
-                sort: 721392,
+                sort: 365576,
                 isActive: true,
             })
             .expect(400)
@@ -172,9 +172,9 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: 'h4eo2us27j1bd424rfu2dmxwq5yc7yvenl059fv3xmk5foszsn28dcbq1p7f5jo6ii9jmdzd3e51ma5kuv28ha0b0fbtzs4dspnn2nka4loc63lv65fgm1o18rxbb80j1thr1n14xhawhrz98tbktd329ozmbx7i8dwgh99t2b78iqjrcels5cpa143d95k2ku707z5c21z4xzogrvuk22iuz19bce9y9a7ivntfn0166y57qgr69d7vo5kwb7w',
-                root: '7y98gb9wq7vwnvb5kkhq',
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'zq1y3fi3ds1jxtajzkmhstrec90y33n6jpki5ylo1rpc9iwdjehq9m813j1wqka9reje517ao9zmd1x5s3h00gw923fl3y215d5g50693yhmj1jidhnpsu86l3xhovf7skky6f968ow3d5d5oe06w5m1ngqmh2n00ijnzb85s2gbhrkqfu7uzlkxthm11qw1oup5qian0d2uklubpq6qux0aofdet3o0chaod7v6dmvngozzz2wterfe3uclnu4',
+                root: 'hmqb5khw974ol7v1e4bp',
                 sort: null,
                 isActive: false,
             })
@@ -190,9 +190,9 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: 'woohnny11jtrrzmdpirocv5ce8033xok3elxk14ojq4j6jf0uy06qztdhguapwa7mwavbkdaneeyl6wna6g1x583kriqpvse9dibb51oxnifehr0o7ud4kh5bnu9upwr2d4efvgewta79vtc587ue5ctinprny72juom69bo0l73zomiysiihzs8moeel1645a40q93xh950j4r1qdhjddopflxz147uwbw0ckpktc1eh3fiakbu5hxm872namy',
-                root: 'ja9f2245wrp0pgaxyaks',
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'q1l1wq3ppxmeitv983d0eqnykkygtzcngsfrd8tz6m8zlfvvf6qzo3su0bvtdje0ryuz5prr11zjqqvfews1epxunlqq73996jiwymcwc0awd9txsatuadk2fzcp7gta5lju7l7txu5z2fmpf5ygkas6wfrmwn7u7lkbt5thas8xud58tfrnjogh0mrnluw8ln7331n15kh5yvhb7ek1caz8j7b1trkjxwa8jfu2vdu5enoth8c15ia39mv9geb',
+                root: 'hkliauckyd9norsyzlmz',
                 
                 isActive: true,
             })
@@ -208,10 +208,10 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: '2yd1tlk8rb26bb8xunkyhp00mbb3ak24uk0qkh3wx52fjz35bznh7f7lxydzu7r7qby3rp04sa8nqrm2nvht3yhje5ulc6i20logrp1dylaoz7ypcga73ww2ht70l4serb04zvsweq03i4br4rugupksgjc0mw255zk4rbvuq8if06ogbgyt42nja0za692pc50psey3k4dki2i9x753fzyxygecx4pw09ey2f0io54eqqzis2sqd0vi2zfqndr',
-                root: '8luyv0jl5gni0keydlh9',
-                sort: 811562,
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: '3sesy25vwojz9bin76ypy33yyep9aco0a7942c9bnlcckyyx1ikf1105jpq7vwcqy014193agqvihshwx9xtl6qxxcgxt3mrxqsktsic6flyvufdal4f1q4b39f3akfaxzj4s6y6sp1ua6tdyukxbghkipfqqaj8it1tq9rdl1ars1gheemfqerpbpzwlep2ji0of8jgabody6ojftdd7zcy4sfflr6oz4f20zosartn28x8cyvyy66kxve2u0n',
+                root: 'nsk4ryj3djnmzw1064li',
+                sort: 295531,
                 isActive: null,
             })
             .expect(400)
@@ -226,10 +226,10 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: '4zrosibrffchgcm8hzwe4d8jioxoog197z50sd915p6b1cgvzwjoh9c58zetnvin61pu671jy71op1z1cgeqgkvg4z7psl5ju510u8711akeeycqa6l2jux8xztkc5blewei1q1jv05yv3ohlf5alcdmlr7tfd4t2i3big8ck06lqbqi7l5e1oefc179p5xujz7yj2dnpfg1wrj98lnn740w65y477vrjarwsyih7wz0zrg0ch2p8rnute5j661',
-                root: 'bhhqh9h1f6dvt35c45xb',
-                sort: 241872,
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'keed76x255kdlcgaee9dueyp7a3k2n9u38nitou0bl2yh37jz8j15oxtzjrq1fve350j6w5ktt7zt1qr0h2od5y1z21hqst1v70e17mqafvbb4sp7y056vvpoadtpkezs0vfdax5nlyydn2y0distao5mw0nycz5qfrolqf0d8nwy2axmkfe9x1rqvcvx7p7q0pk2zfgggui5dt9tn7xr0wga9b4ihtd5fbro491nqqdgj721qwidf8va1yoh68',
+                root: '5d1vkms7nz5uckdp50bc',
+                sort: 963491,
                 
             })
             .expect(400)
@@ -246,10 +246,10 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: 'yjdqct7v1o37yqpl4isic66r6eytdtp7wmsyt',
-                name: '8k7p8hp047f3xvdkq3ushm4u74vc46tqv4yh9cuqkw4s5m2g4kl9elabpucqzrdg988mcczitzn8sg3dhpya4x120wi1u1nlhl51jhynzazif1uyffokwf1pmdmwjl5vnxea3adfnuhrs9xrly5ebbjqp5vw3djo9zbkzz1asmt0ewra0zb5k6sk2ttq5ap84nnyfing7krgzp3huu4ej8qghrb7c99ylahtdhi6q2t850t4axqf8zveznptu72',
-                root: 'ka40cz0ijlekvr55iz3p',
-                sort: 684899,
+                id: '3v6wo3bqb5tn93tm5403qfy5aegsbf0wjzx2u',
+                name: 'btxwllvk92d719vv1ypw3w7zzqjbveuv1ia7aa9njef2908m7da9xvamgidoigde1aub2sq6kbokj5jo0vf31la87bf57oilwbtjgs22f5gz0o5xd1e9zgcg6yyjcx6cscz2r5cx3kk9s39y0kiggxf3jogr6lm0hfbgwajazuwzhrm6nzzyfykn15w99w4u6b3qibzzeb4hjsif1xyqmnhib7t9iyhg6tilam8xd514mu257zotrm63qih2244',
+                root: 'as5nao6ms4m449zcw2ij',
+                sort: 886832,
                 isActive: false,
             })
             .expect(400)
@@ -266,11 +266,11 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: 'rddox9bxe0aqnhqv171efrm0f2al6atffuzprqpts1hx3i7xoxtdgqqc0nvlxnrsespj489vmowsbh0421j2tu4y26vuozjvfk389wtvvgedp8jao8tqkkai6yjtbji1nbk7xom6nkhoge8uu1yaw39zdletez07muukl88yqeds400ublxgyxo7hzzg5gq1tih2zj2qdbr3274vt4bkw9aw3g0no4hxbdctp5cj65jnlw0552pso97u87b5fgka',
-                root: 'qobknxwekyq3nj7r33tb',
-                sort: 231077,
-                isActive: true,
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'outigpdg612qburtzeh7papzvwh2pc2fumh6m40uzterznjprtpj5tnzodas7aevprmchfo1a6b0e57hb5mu14ezf194ayough1wyprmer1x79u0x4vez3zpkw6m7aaadeqs8xjzzrsy0w5ewlymc1arf1qciphca7e9c2cfvabsm3awezn1rvs3658zu8z0rk9413csyofqamurtvc2sb13pxmdqec5z3s0z4u9kdaskhonmc8gtsq2sjctafmc',
+                root: '97u1jktpykrspeep38jm',
+                sort: 646998,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -284,11 +284,11 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: 'qjgsk3fo314fzxjlh708bx9kg7bz8svs6trf27dvs5c1li3jhmwqh6edonhwtrp26zxs3a1zfuyvlv56notwb09tizcnlfi0i2pa6xethabp2zino8xqbo0ld1ynlscoru0juy9xpofltgtfqlpf50306xb0gmnihnpip7lhxm4hrn2ujx13pk4ch9j6zudbitej4le3593t498pul1t77ow5o2haiwus7n5va6lmxmm2912uqd5o889csflly7',
-                root: 'k64puqp88il0rs9kwtlh8',
-                sort: 435315,
-                isActive: true,
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'ye9lfc1hugmdr4acu6kv8odv3c0y5ocs6nrsi76l10kvpgz9gocwq2q24o7fnwfcferkie6yc4p8j0o6y44jsf0obka8qvtmcrqze6ozhjdm7r99i1q7uej8hhvcy3rdfdvrmgb5zgfeyip5s2v02wm73drw10sdoz710m0ns6zf2xi240nc21a1nmvvhhn9312bpz7xxy3fs3kfgz2enjy0smsmdlwq2orx8ufydqr62yv8a2iiojqsa7mqz61',
+                root: 'ocvvp5z1wk88gds2jefut',
+                sort: 974366,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -302,11 +302,11 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: 'r29czum1u5tciva7w981yt3vgdcvc84wsc7yij27a5899uhjza81d8bjl9jltb2nupyylfe3fqcyfb4onh0h063fcvphty8hizjq439qqms82szohcdd14qaka84u2sw0awtp37hctao9um7jnti4iwedzvihf6nm0qdas17cl8985zuktxegnxr7v3rc0lxufy4fty47n3q3cjjv43ctrmrshi6b62203zai05eco00vk4mbscjpr62onfkv2x',
-                root: 'pe999baxic2zxrlt8w2c',
-                sort: 3283925,
-                isActive: true,
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'ktwp2an7ys7iao53rn1e7wpb28cuy5nmhsaozkq03dommfuhs6bwjyxms4t7bz7i2ahla79z1l22mwv5fiqbriu8r5jp8lbvglwajed1ugmbdlqnsn3xcsutlir06kc7a97mi4udnxafb61c5w1lqp4n4xd2ksunam5pq1b63i0g6tauwbt73gtn6bxncqg9gvfg41yb6rzkbt3d55vwlv4vgwt05zq34xjj8ij7jufhlwtl3q4ys1ekd385wwj',
+                root: 'e36cqa4njw74v84top6d',
+                sort: 7977406,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -328,10 +328,10 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: 'vwk9vyhbp048ws027y9t3tp7igmduobnoryaeuuc3jnz9n7ebqrf138x377tywpj9tli7h7n87rt6tocqojkjarzjnv355t9tbhxd9qix4jrxnesrxedasled8n9imfmshmssihq04dxzqlijyr773r833miou193u5owzoe0ju5m0k8j4loc5o5xk1gdsnk35px98oel9q8v12s0jcf6xqbu4lmeb4n8wt9xq9c1iauf5evdmwut5m4tcqie77',
-                root: 'k22ece14ljcpxub8abxp',
-                sort: 434776,
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'b1mccd2hkxu9tvqns56ltub4fbz39svftoo88oazyqcwovx8nycum5w1fqgb1hf8j5euvi4s13b2btays97xlur3jw3sms1p9c1x4bsqyym2cis7d1inglgo7xacd02v4ywn51azfzobh6e5vy4yswt5vri2jyn9ygqspyl6oxrums1cu0e8t8au5y0pmd6uniimx4myc3h5kdp7x05rvfgg76eqdkqymruqq02z14bcb7ku885b5skz6ad928v',
+                root: 'gzihdoctt72u0tgy1yak',
+                sort: 340129,
                 isActive: 'true',
             })
             .expect(400)
@@ -351,10 +351,10 @@ describe('bounded-context', () =>
             .post('/admin/bounded-context')
             .set('Accept', 'application/json')
             .send({
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: '76zf3mwfgojyoibphr2y51jevendgy13ski0f8xdw9winibw69p26q8ao41egjmdndb0j0qm4mjwhk83v9yhe8vhtd97h8s2oaa127tu15ijb956qw3v4b9zi9m5y0v7ygbv5zqqj5957bnjusi1i1y6j2okrpkay82ezk7xm9obdepjcvzv5di5xygajlaz29r7pz4jmyzh6zgxcflus1nsx6b67l1h3k7rv13p2kn5ckqkzyj489ybdr1gzta',
-                root: '5coet7h5aq02r1wmkit6',
-                sort: 651112,
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'jsw9riqqdgjvl82d19lse43y5pa1pdvh1hh5fwsorpql5bso0rcyclnk2486ubz308c0h5lak2r7cu7vyf1vyvbv3zzbqb59z0t0u0mvak9rmenl7dgio0aw6dr2j6g75c8fqt3w1jih9vov7i6cghebgmvmm9h4urk9eq5cy20x2zk116boeiel4bmgvhixmr6p5pmw5op72bj78g5yy0lv7sknfxcyoobujgwfawbp8642jlm32187mybprcv',
+                root: 'mvou5j9vbhiwz7mczqku',
+                sort: 738923,
                 isActive: true,
             })
             .expect(201);
@@ -414,12 +414,12 @@ describe('bounded-context', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '026a47ba-5353-480b-bc65-9a0bf9402f6b'
+                        value   : 'e50c37f3-be72-4502-89a4-a5771b08744e'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '026a47ba-5353-480b-bc65-9a0bf9402f6b'));
+            .expect(repository.collectionResponse.find(item => item.id === 'e50c37f3-be72-4502-89a4-a5771b08744e'));
     });
 
     test(`/REST:GET admin/bounded-context/{id} - Got 404 Not Found`, () => 
@@ -433,10 +433,10 @@ describe('bounded-context', () =>
     test(`/REST:GET admin/bounded-context/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/bounded-context/026a47ba-5353-480b-bc65-9a0bf9402f6b')
+            .get('/admin/bounded-context/e50c37f3-be72-4502-89a4-a5771b08744e')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '026a47ba-5353-480b-bc65-9a0bf9402f6b'));
+            .expect(repository.collectionResponse.find(e => e.id === 'e50c37f3-be72-4502-89a4-a5771b08744e'));
     });
 
     test(`/REST:GET admin/bounded-contexts`, () => 
@@ -455,11 +455,11 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '8109466e-0f8b-4ab5-b669-cd1e0cd4fb50',
-                name: 'abypeauf0soeurx55trqetu3wu70f6954cmkxqtckvrobjond5rw8sh2kqf6uh5yfekuf34iqnfzbwt7mgh51zicmbl2ms9upiayrk2i3j40f5enpdqvlaptmvzw5m5v9tia6i0imnptowpgq6klkjz6uk7wdcsm7akrcqz8b582th2kzpvbqa1njl8byukozbcoh0g05iwza5booa4286kxti7ntcxz7f4ifk1nzc6jdcvsdvmihowtshc5xnk',
-                root: 'fk8xyr3a9olmqnmoqs85',
-                sort: 580458,
-                isActive: true,
+                id: '4eac58c4-e391-4701-9345-5cf99d6ac236',
+                name: 'r2fjj0nfsrvjpa603jpq2mcuikbojmag6lajrn8b3bqwb9eca80bhkkwnefeiaz04nrlh7ymfj8e67ya1wbrp95opts4ehr3t9b90cvolkddksr1evn7s0mq6u2qcfeqbimpy6l4gc1g7u8m8l2xo2s3jbss9y80henddcjgf3eylg2uoman3d5jt31gjwvg2nrz50fiylp4rk3tslickhzojpq2seobemo65eki3k3p2w1r6mmemw01m128omx',
+                root: 'sdjjix7yn3hj4arvjieg',
+                sort: 919777,
+                isActive: false,
             })
             .expect(404);
     });
@@ -471,14 +471,14 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                name: '4ucohg1rjyeddmdmn181kamq0m8bmiondyqt1n1wrqarewwitmd3xlk5ivhuxg63s5xfbjsrvadlq99xku5fdw3jtsztp2ewprk8cgu87qbmnygnky60q0l3ngapcaop1m0ajo4uiby6d17fj548mfq3kmiv9dp7g9xdldfg36lw35p1td3s9fk985s2ywgltuvvrox2wge36rgi6du7s5d8vjfw1228ojhs66fvv6hphixpku9zr0bc0sjp7xu',
-                root: 'ydctkdap3tyqx2rdq4hh',
-                sort: 980416,
+                id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                name: 'm1llcrlpvikvbrivybu3cm782pp4nrwv8oc9owudxiophmruoak6c0iqidhfjk92ysus5wf2hqaxeub5yhrjvevqm6ylemq6fbsoxcg9udc91xb3goawr5tdxrg0kftmqb8p0kiu4no9fi1g2ohu5nrvijch8rx35q0hkui86r730nn53aiouuld3vh9e4qddpsdtpbq2lmnqtfqz678vrefu73cfzoaxlzehs5cxzkykyc2ddlg9jzbbnr9cm4',
+                root: 'itk3jzrkwctoojd8zxrs',
+                sort: 594323,
                 isActive: true,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '026a47ba-5353-480b-bc65-9a0bf9402f6b'));
+            .expect(repository.collectionResponse.find(e => e.id === 'e50c37f3-be72-4502-89a4-a5771b08744e'));
     });
 
     test(`/REST:DELETE admin/bounded-context/{id} - Got 404 Not Found`, () => 
@@ -492,7 +492,7 @@ describe('bounded-context', () =>
     test(`/REST:DELETE admin/bounded-context/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/admin/bounded-context/026a47ba-5353-480b-bc65-9a0bf9402f6b')
+            .delete('/admin/bounded-context/e50c37f3-be72-4502-89a4-a5771b08744e')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -553,17 +553,17 @@ describe('bounded-context', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '3f3ec0ef-31fd-420d-a2d9-42f2d34f009e',
-                        name: 'ngmw5nqe5wdyubu6e6fhyhrlvsl63fsaszji1z3g2etb8v6gaqtfbr8atjvizckyvxv34o0uhcuyyaay0bxq7pvs66fvn2fjnysivgq9v7gchkpid8ua99ueenr3xygkvw3roxitj2frym9gx29rsolpt84ma4nx00y5p6jt7mlydtfn9ann2tsswnrsvwu2dtmmzv251ande0xbgj2sxcjz0h5t9dw6ijck61kyixl70whlc1hdv797qxeo21g',
-                        root: 'vp1x12kb7ky4vhlozy5z',
-                        sort: 356097,
-                        isActive: true,
+                        id: '03876000-6792-4818-8a36-8b208cd5af1d',
+                        name: '7wv5op8qxh7f4cwdcg4f62g9oo8agqsk8dsptx2xulmgvdhotnztgo5xfsqzorm4k6gbvuyg6mltcvj8dbd1442ksdffxbnke33dz80u1gmkrry2znpwfy49aukbgbpy3u3vkgoyn0nqik3ot1tigvjbgjwvmpgr061zi7725s01tytfyf9jr1h07qtr08fchkdbpvtvv5hu5jglhgp8prr5fn9qtojrol4nk70q04w568np6hupj3bt3d6as90',
+                        root: '9a02kdrpuy1xpvoywuao',
+                        sort: 657279,
+                        isActive: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateBoundedContext).toHaveProperty('id', '3f3ec0ef-31fd-420d-a2d9-42f2d34f009e');
+                expect(res.body.data.adminCreateBoundedContext).toHaveProperty('id', '03876000-6792-4818-8a36-8b208cd5af1d');
             });
     });
 
@@ -672,14 +672,14 @@ describe('bounded-context', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '026a47ba-5353-480b-bc65-9a0bf9402f6b'
+                            value   : 'e50c37f3-be72-4502-89a4-a5771b08744e'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindBoundedContext.id).toStrictEqual('026a47ba-5353-480b-bc65-9a0bf9402f6b');
+                expect(res.body.data.adminFindBoundedContext.id).toStrictEqual('e50c37f3-be72-4502-89a4-a5771b08744e');
             });
     });
 
@@ -738,12 +738,12 @@ describe('bounded-context', () =>
                     }
                 `,
                 variables: {
-                    id: '026a47ba-5353-480b-bc65-9a0bf9402f6b'
+                    id: 'e50c37f3-be72-4502-89a4-a5771b08744e'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindBoundedContextById.id).toStrictEqual('026a47ba-5353-480b-bc65-9a0bf9402f6b');
+                expect(res.body.data.adminFindBoundedContextById.id).toStrictEqual('e50c37f3-be72-4502-89a4-a5771b08744e');
             });
     });
 
@@ -803,10 +803,10 @@ describe('bounded-context', () =>
                 variables: {
                     payload: {
                         
-                        id: '375d0e69-3409-4826-9d55-6ee4b665c5fe',
-                        name: 'gndjk83jt4kw1lxle4lun3lumbebnvbrtesnvgse7ysi4b2cp7mjc49p3vzs8eoxh1v53ecavsrzubr2q3pc6cclcatygmz3xea6863385u5xq2npauebzqo2uuu10jyeamtucpp0j6c7akib42df7pyg4agu8q3jhem183y98alm6cpx7q7dq6ewkx51soxwup90mehxfdt6z4hcvpc7ddjctfoza9619thv8tm0qozqad6fy497vmz9633c4i',
-                        root: 'yf1lhxupil4rzo2zfw9k',
-                        sort: 902945,
+                        id: '779e1594-40ba-4424-9d64-a97806e31175',
+                        name: 'hg4lgp3igr85uoaofeq5818n6xepg5a2ndgw8ah6mesqfeuyeq0n3zya7tvgk99f1dc5yr6bvn3mmr4ugos091mk18o2xtulajmmjs3xgy0jgkoq63000sm7ysslfdd2gjuuv1rl2vmlh8f19dibrf78n3abnv8505fsgkrp9f9iiqkgu88w04mo0vlcqit24rn9fqji74cchfuc4wiyshx1snrhx7glmg8hine2fs6sfzaxb38gpy0bvn6x73b',
+                        root: 'ixwiaynv81st94hs14pt',
+                        sort: 904591,
                         isActive: false,
                     }
                 }
@@ -843,17 +843,17 @@ describe('bounded-context', () =>
                 variables: {
                     payload: {
                         
-                        id: '026a47ba-5353-480b-bc65-9a0bf9402f6b',
-                        name: 'fzwz60e1862loscmt5nnygd81rfck1kia3cecrapdms8tja6u45a9o0wem00y9djy6qs86ttyjmw523hbaruk1o2ro41vmr9m0c8px8zzqtcncuj7i4ne7i1duurzlj53g0fhemguzt2j5gsxomhdlxym5capbj8b67sy6daykogzg98fuseosipe70keytiei0rp9pvm461zmri5g6ldmriyujf1kms57jzcvnj80mhxcnx5859flnhfu15het',
-                        root: '09vq05nruo752orf5pgz',
-                        sort: 853786,
+                        id: 'e50c37f3-be72-4502-89a4-a5771b08744e',
+                        name: 'yb2q65359e5z9ky0smhuviam6emsusqpvsvb29mjd2mjrc5cyx2n3lbov6o7sqdguoixi3facfvnn5zeujyjw9azmivdf4tbdjl6m1t3bkivipmquj4y5iws0zfakqp2kttgcm6lnkwyz9yrxc5bb4zc8cgapc7oaebzd7zs3e760ex51ho6xvn11dlxis0vz9mza46shoqh2alltjs4z9unva95px2nf578dbetpylntt1lwlylk022z0kjccu',
+                        root: 'xq1rvp200mbd0ydvuzwf',
+                        sort: 582270,
                         isActive: false,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateBoundedContext.id).toStrictEqual('026a47ba-5353-480b-bc65-9a0bf9402f6b');
+                expect(res.body.data.adminUpdateBoundedContext.id).toStrictEqual('e50c37f3-be72-4502-89a4-a5771b08744e');
             });
     });
 
@@ -912,12 +912,12 @@ describe('bounded-context', () =>
                     }
                 `,
                 variables: {
-                    id: '026a47ba-5353-480b-bc65-9a0bf9402f6b'
+                    id: 'e50c37f3-be72-4502-89a4-a5771b08744e'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteBoundedContextById.id).toStrictEqual('026a47ba-5353-480b-bc65-9a0bf9402f6b');
+                expect(res.body.data.adminDeleteBoundedContextById.id).toStrictEqual('e50c37f3-be72-4502-89a4-a5771b08744e');
             });
     });
 

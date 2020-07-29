@@ -6,7 +6,7 @@ export class CreateResourceDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'c34b46f1-704c-41a5-a72c-437207d9d9cd'
+        example     : 'be31694e-e0bc-405f-bb9c-c12206802ef8'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateResourceDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : '2276f645-3ac7-4558-a209-dc824837f280'
+        example     : 'b8f3d565-b9ed-403d-998f-26b70f67d093'
     })
     boundedContextId: string;
     
@@ -24,7 +24,7 @@ export class CreateResourceDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '138wd6g1hsq5pla682fgry8p7y196urzue3vey733vbf7bml6j9xcq6akv6i69n6abj89050bfch9an1fx0x6ffmrion8acpbtbpmaisbatt0lao8aylpt3umshdhv5ff3th1nf39mhsvd6ehq2qf81dsdqmeoadbjei2clo44d1q3e3s74gr87ngygr2g510356swkr3akc46btzb704wmqp2e0brutsx6jzbz8x072nbattrxlqhfu2hcwaax'
+        example     : 'evyknlt99ochgsqkubb9wb8p5dz0c5k46td1rq8svm65ie439rpadquwj0ivmsij5tl546peziwc6gllabkz8ls04ek4lw6vd3t82espyzx3c54lr7bwmm201vg8ukryx9c66z140x81o8hnxd0yxbtkn1fjaa98u29c0ny0ii91azxszz75qac1lrsgvrhyt0wpls6jdf67dqok8bhix9v35ln13rcszqmqhyyycmnf1cillmerr7iv5p1ze0w'
     })
     name: string;
     
@@ -33,7 +33,7 @@ export class CreateResourceDto
     @ApiProperty({
         type        : Boolean,
         description : 'hasCustomFields [input here api field description]',
-        example     : false
+        example     : true
     })
     hasCustomFields: boolean;
     

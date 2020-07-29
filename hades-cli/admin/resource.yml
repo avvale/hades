@@ -15,6 +15,7 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: AdminBoundedContext
     relationshipModulePath: admin/bounded-context
+    relationshipField: boundedContext
   - name: name
     type: varchar
     maxLength: 255

@@ -6,7 +6,7 @@ export class PermissionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'e7244e3c-b7c9-4637-91e4-8b13af8d8da8'
+        example     : 'be6c6cac-18f1-4b99-981e-c928c6342868'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class PermissionDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : 'db8d5efc-fbd4-4fac-be3e-334dcc2881c6'
+        example     : '4eefa322-b9b9-4e1a-bd9b-f8d82ff1952d'
     })
     boundedContextId: string;
     
@@ -24,7 +24,7 @@ export class PermissionDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'a5a17m2uvftwg3qv9f6z6qlv6wr73vqjmvh88j7p5di53l0yyilzpr0wr5xgva8hfiy1wcti2fa2lrh06q38qt35d4m155ygicdois8o6hfoo4p2rc67z1gezsxcxjwhwsnkmz9hx9fk6ilgvtzjd3bef2r2r9bfrz9l3v5wi6fhbsmidsik9pycemsgym6zz40qh0ndwrkz35wn0hf7mwh92j61gmd8zz6i5qh28lsoamddxpawrxsmvrtp4cu'
+        example     : 'edagt8vsprz1annwsylvyyms53kwultx2ju7a3oyu364q8y7qj666p7c4ekq5t1e5u0jvmp29d3prbsaql35rsjvx8r4w47ylcrbii1kpxgazvjiagcaaruavdgt417ma14ohn8xs7lclv37ckbb9g4huvujwyk4jv9pqy77l2mcfypxiy4nq9h4sh60269jpzuqmo0iiy8irjibp256zt0ldtju0c6je97vqiph5li0rx850jk1skbd0pkvlgp'
     })
     name: string;
     
@@ -33,7 +33,7 @@ export class PermissionDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-29 01:58:49'
+        example     : '2020-07-29 10:26:02'
     })
     createdAt: string;
     
@@ -42,7 +42,7 @@ export class PermissionDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-28 23:40:48'
+        example     : '2020-07-29 16:25:14'
     })
     updatedAt: string;
     
@@ -51,7 +51,7 @@ export class PermissionDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-28 18:59:35'
+        example     : '2020-07-28 20:10:16'
     })
     deletedAt: string;
     

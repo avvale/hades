@@ -1,10 +1,11 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
 @Table({ modelName: 'admin_lang', freezeTableName: true })
 export class AdminLangModel extends Model<AdminLangModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -16,11 +17,12 @@ export class AdminLangModel extends Model<AdminLangModel>
     id: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(undefined),
         
@@ -28,11 +30,12 @@ export class AdminLangModel extends Model<AdminLangModel>
     name: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'image',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(undefined),
         
@@ -40,11 +43,12 @@ export class AdminLangModel extends Model<AdminLangModel>
     image: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'iso_639_2',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.CHAR(2),
         
@@ -52,11 +56,12 @@ export class AdminLangModel extends Model<AdminLangModel>
     iso6392: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'iso_639_3',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.CHAR(3),
         
@@ -64,11 +69,12 @@ export class AdminLangModel extends Model<AdminLangModel>
     iso6393: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'ietf',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.CHAR(5),
         
@@ -76,11 +82,12 @@ export class AdminLangModel extends Model<AdminLangModel>
     ietf: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'sort',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.SMALLINT.UNSIGNED,
         
@@ -88,11 +95,12 @@ export class AdminLangModel extends Model<AdminLangModel>
     sort: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'is_active',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
@@ -100,11 +108,12 @@ export class AdminLangModel extends Model<AdminLangModel>
     isActive: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -112,11 +121,12 @@ export class AdminLangModel extends Model<AdminLangModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -124,11 +134,12 @@ export class AdminLangModel extends Model<AdminLangModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
