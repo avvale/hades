@@ -38,12 +38,12 @@ describe('DeletePermissionsService', () =>
 
     describe('main', () => 
     {
-        it('DeletePermissionsService should be defined', () => 
+        test('DeletePermissionsService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should delete permission and emit event', async () => 
+        test('should delete permission and emit event', async () => 
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main([])).toBe(undefined);

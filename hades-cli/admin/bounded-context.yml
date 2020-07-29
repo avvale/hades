@@ -5,6 +5,7 @@ moduleNames: bounded-contexts
 aggregateProperties:
   - name: id
     type: id
+    primaryKey: true
     length: 36
     nullable: false
   - name: name

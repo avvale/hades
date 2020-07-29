@@ -38,12 +38,12 @@ describe('DeleteBoundedContextsService', () =>
 
     describe('main', () => 
     {
-        it('DeleteBoundedContextsService should be defined', () => 
+        test('DeleteBoundedContextsService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should delete boundedContext and emit event', async () => 
+        test('should delete boundedContext and emit event', async () => 
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
             expect(await service.main([])).toBe(undefined);

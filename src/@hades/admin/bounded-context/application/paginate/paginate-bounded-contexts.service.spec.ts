@@ -38,12 +38,12 @@ describe('PaginateBoundedContextsService', () =>
 
     describe('main', () => 
     {
-        it('PaginateBoundedContextsService should be defined', () => 
+        test('PaginateBoundedContextsService should be defined', () => 
         {
             expect(service).toBeDefined();
         });
 
-        it('should paginate boundedContexts', async () => 
+        test('should paginate boundedContexts', async () => 
         {
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,
