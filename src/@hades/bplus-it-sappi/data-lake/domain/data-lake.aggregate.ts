@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     DataLakeId, 
-    DataLakeExecutionId, 
     DataLakeTenantId, 
+    DataLakeExecutionId, 
     DataLakeTenantCode, 
     DataLakePayload, 
     DataLakeCreatedAt, 
@@ -13,27 +13,29 @@ import {
 import { CreatedDataLakeEvent } from './../application/events/created-data-lake.event';
 import { UpdatedDataLakeEvent } from './../application/events/updated-data-lake.event';
 import { DeletedDataLakeEvent } from './../application/events/deleted-data-lake.event';
-import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.aggregate';
 import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
+import { BplusItSappiExecution } from '@hades/bplus-it-sappi/execution/domain/execution.aggregate';
 
 export class BplusItSappiDataLake extends AggregateRoot
 {
     id: DataLakeId;
-    executionId: DataLakeExecutionId;
     tenantId: DataLakeTenantId;
+    tenant: AdminTenant;
+    executionId: DataLakeExecutionId;
+    execution: BplusItSappiExecution;
     tenantCode: DataLakeTenantCode;
     payload: DataLakePayload;
     createdAt: DataLakeCreatedAt;
     updatedAt: DataLakeUpdatedAt;
     deletedAt: DataLakeDeletedAt;
     
-    constructor(id?: DataLakeId, executionId?: DataLakeExecutionId, tenantId?: DataLakeTenantId, tenantCode?: DataLakeTenantCode, payload?: DataLakePayload, createdAt?: DataLakeCreatedAt, updatedAt?: DataLakeUpdatedAt, deletedAt?: DataLakeDeletedAt, )
+    constructor(id?: DataLakeId, tenantId?: DataLakeTenantId, executionId?: DataLakeExecutionId, tenantCode?: DataLakeTenantCode, payload?: DataLakePayload, createdAt?: DataLakeCreatedAt, updatedAt?: DataLakeUpdatedAt, deletedAt?: DataLakeDeletedAt, )
     {
         super();
         
         this.id = id;
-        this.executionId = executionId;
         this.tenantId = tenantId;
+        this.executionId = executionId;
         this.tenantCode = tenantCode;
         this.payload = payload;
         this.createdAt = createdAt;
@@ -42,9 +44,9 @@ export class BplusItSappiDataLake extends AggregateRoot
         
     }
 
-    static register (id: DataLakeId, executionId: DataLakeExecutionId, tenantId: DataLakeTenantId, tenantCode: DataLakeTenantCode, payload: DataLakePayload, createdAt: DataLakeCreatedAt, updatedAt: DataLakeUpdatedAt, deletedAt: DataLakeDeletedAt, ): BplusItSappiDataLake
+    static register (id: DataLakeId, tenantId: DataLakeTenantId, executionId: DataLakeExecutionId, tenantCode: DataLakeTenantCode, payload: DataLakePayload, createdAt: DataLakeCreatedAt, updatedAt: DataLakeUpdatedAt, deletedAt: DataLakeDeletedAt, ): BplusItSappiDataLake
     {
-        return new BplusItSappiDataLake(id, executionId, tenantId, tenantCode, payload, createdAt, updatedAt, deletedAt, );
+        return new BplusItSappiDataLake(id, tenantId, executionId, tenantCode, payload, createdAt, updatedAt, deletedAt, );
     }
 
     created(dataLake: BplusItSappiDataLake): void
@@ -52,8 +54,8 @@ export class BplusItSappiDataLake extends AggregateRoot
         this.apply(
             new CreatedDataLakeEvent(
                 dataLake.id.value,
-                dataLake.executionId.value,
                 dataLake.tenantId.value,
+                dataLake.executionId.value,
                 dataLake.tenantCode.value,
                 dataLake.payload.value,
                 dataLake.createdAt?.value,
@@ -69,8 +71,8 @@ export class BplusItSappiDataLake extends AggregateRoot
         this.apply(
             new UpdatedDataLakeEvent(
                 dataLake.id.value,
-                dataLake.executionId?.value,
                 dataLake.tenantId?.value,
+                dataLake.executionId?.value,
                 dataLake.tenantCode?.value,
                 dataLake.payload?.value,
                 dataLake.createdAt?.value,
@@ -86,8 +88,8 @@ export class BplusItSappiDataLake extends AggregateRoot
         this.apply(
             new DeletedDataLakeEvent(
                 dataLake.id.value,
-                dataLake.executionId.value,
                 dataLake.tenantId.value,
+                dataLake.executionId.value,
                 dataLake.tenantCode.value,
                 dataLake.payload.value,
                 dataLake.createdAt?.value,
@@ -102,8 +104,8 @@ export class BplusItSappiDataLake extends AggregateRoot
     {
         return {
             id: this.id.value,
-            executionId: this.executionId.value,
             tenantId: this.tenantId.value,
+            executionId: this.executionId.value,
             tenantCode: this.tenantCode.value,
             payload: this.payload.value,
             createdAt: this.createdAt?.value,

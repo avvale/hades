@@ -36,6 +36,9 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     })
     tenantId: string;
         
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
         
     
@@ -66,6 +69,9 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     })
     systemId: string;
         
+    
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
         
     
@@ -108,6 +114,9 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     })
     executionId: string;
         
+    
+    @BelongsTo(() => BplusItSappiExecutionModel)
+    execution: BplusItSappiExecutionModel;
              
         
     

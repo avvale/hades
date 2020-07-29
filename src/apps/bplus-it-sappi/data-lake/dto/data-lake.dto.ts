@@ -6,7 +6,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '3fb56be9-0dcf-4ad4-b067-e8f034d611b4'
+        example     : '90240803-7088-4213-8baa-b860ff4a1e56'
     })
     id: string;
     
@@ -14,17 +14,8 @@ export class DataLakeDto
     
     @ApiProperty({
         type        : String,
-        description : 'executionId [input here api field description]',
-        example     : '86e52565-fd29-49aa-a725-49f65c6fc6b4'
-    })
-    executionId: string;
-    
-    
-    
-    @ApiProperty({
-        type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'fe9bd58e-16d2-4c6d-aad6-0970005c5437'
+        example     : '8823ba36-c450-4258-a1c3-e0e9364f9859'
     })
     tenantId: string;
     
@@ -32,8 +23,17 @@ export class DataLakeDto
     
     @ApiProperty({
         type        : String,
+        description : 'executionId [input here api field description]',
+        example     : '1bfa2492-7c38-4547-9999-c0be618a06d0'
+    })
+    executionId: string;
+    
+    
+    
+    @ApiProperty({
+        type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'vxgj8ahs0hys37tzyva5w8d06fyvf75a4r6mv7pcs72tmqr32x'
+        example     : 'ny2aotam2ddf02rop7ajn0mopvagyd6m80rbwo6hkf1ocf7y5z'
     })
     tenantCode: string;
     
@@ -51,7 +51,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-29 04:31:11'
+        example     : '2020-07-29 14:38:02'
     })
     createdAt: string;
     
@@ -60,7 +60,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-28 21:57:01'
+        example     : '2020-07-28 22:05:21'
     })
     updatedAt: string;
     
@@ -69,7 +69,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-29 04:15:39'
+        example     : '2020-07-29 14:55:50'
     })
     deletedAt: string;
     

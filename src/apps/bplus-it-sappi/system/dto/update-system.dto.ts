@@ -6,7 +6,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '96ae451f-4a7d-4f06-b621-0e2cfbebf73c'
+        example     : '5b27155f-2eef-495e-aaad-e1dec35563e4'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'cc586174-97d1-46c3-b6ec-8c0e9780b825'
+        example     : '664a71c0-0489-4399-8f23-86a193c0bb52'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'r1mzqqso7g87w2xbcwi5cy0k5on87bw1e5dug7vnkqkzn7pzh7'
+        example     : 'y8pgsrp515flev20epw81bb3xr201i5ni9uab8zhsi2y1uzkqy'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'version [input here api field description]',
-        example     : 'z'
+        example     : '8'
     })
     version: string;
     
@@ -42,7 +42,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'p'
+        example     : '2'
     })
     name: string;
     
@@ -51,7 +51,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'environment [input here api field description]',
-        example     : 'c'
+        example     : '3'
     })
     environment: string;
     
@@ -60,7 +60,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : false
+        example     : true
     })
     isActive: boolean;
     
@@ -69,7 +69,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'cancelledAt [input here api field description]',
-        example     : '2020-07-29 06:32:26'
+        example     : '2020-07-29 03:19:08'
     })
     cancelledAt: string;
     

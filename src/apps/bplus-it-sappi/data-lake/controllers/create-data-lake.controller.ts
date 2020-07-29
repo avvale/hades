@@ -25,8 +25,8 @@ export class CreateDataLakeController
     {
         await this.commandBus.dispatch(new CreateDataLakeCommand(
             payload.id,
-            payload.executionId,
             payload.tenantId,
+            payload.executionId,
             payload.tenantCode,
             payload.payload,
             

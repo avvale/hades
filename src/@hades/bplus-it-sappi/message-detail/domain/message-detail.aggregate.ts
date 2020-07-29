@@ -50,11 +50,14 @@ export class BplusItSappiMessageDetail extends AggregateRoot
 {
     id: MessageDetailId;
     tenantId: MessageDetailTenantId;
+    tenant: AdminTenant;
     tenantCode: MessageDetailTenantCode;
     systemId: MessageDetailSystemId;
+    system: BplusItSappiSystem;
     systemName: MessageDetailSystemName;
     scenario: MessageDetailScenario;
     executionId: MessageDetailExecutionId;
+    execution: BplusItSappiExecution;
     executionType: MessageDetailExecutionType;
     executionExecutedAt: MessageDetailExecutionExecutedAt;
     executionMonitoringStartAt: MessageDetailExecutionMonitoringStartAt;

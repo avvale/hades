@@ -20,8 +20,8 @@ export class UpdateDataLakeResolver
     {
         await this.commandBus.dispatch(new UpdateDataLakeCommand(
             payload.id,
-            payload.executionId,
             payload.tenantId,
+            payload.executionId,
             payload.tenantCode,
             payload.payload,
             

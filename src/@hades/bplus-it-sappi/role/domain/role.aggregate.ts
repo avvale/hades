@@ -18,6 +18,7 @@ export class BplusItSappiRole extends AggregateRoot
 {
     id: RoleId;
     tenantId: RoleTenantId;
+    tenant: AdminTenant;
     tenantCode: RoleTenantCode;
     name: RoleName;
     createdAt: RoleCreatedAt;

@@ -41,8 +41,8 @@ describe('CreateDataLakeCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateDataLakeCommand(
                     dataLakes[0].id,
-                    dataLakes[0].executionId,
                     dataLakes[0].tenantId,
+                    dataLakes[0].executionId,
                     dataLakes[0].tenantCode,
                     dataLakes[0].payload,
                     

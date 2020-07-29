@@ -1,7 +1,7 @@
 import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infrastructure/sequelize/sequelize-execution.model';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
+import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infrastructure/sequelize/sequelize-execution.model';
 
 @Table({ modelName: 'bplus_it_sappi_data_lake', freezeTableName: true })
 export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel> 
@@ -21,24 +21,6 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
         
     
     @Column({
-        field: 'execution_id',
-        
-        allowNull: false,
-        type: DataTypes.UUID,
-        
-        references: {
-            model: BplusItSappiExecutionModel,
-            key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION',
-    })
-    executionId: string;
-        
-             
-        
-    
-    @Column({
         field: 'tenant_id',
         
         allowNull: false,
@@ -53,6 +35,30 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     })
     tenantId: string;
         
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
+             
+        
+    
+    @Column({
+        field: 'execution_id',
+        
+        allowNull: false,
+        type: DataTypes.UUID,
+        
+        references: {
+            model: BplusItSappiExecutionModel,
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION',
+    })
+    executionId: string;
+        
+    
+    @BelongsTo(() => BplusItSappiExecutionModel)
+    execution: BplusItSappiExecutionModel;
              
         
     

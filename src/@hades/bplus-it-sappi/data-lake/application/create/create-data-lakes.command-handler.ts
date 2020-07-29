@@ -3,8 +3,8 @@ import { CreateDataLakesCommand } from './create-data-lakes.command';
 import { CreateDataLakesService } from './create-data-lakes.service';
 import { 
     DataLakeId, 
-    DataLakeExecutionId, 
     DataLakeTenantId, 
+    DataLakeExecutionId, 
     DataLakeTenantCode, 
     DataLakePayload
     
@@ -25,8 +25,8 @@ export class CreateDataLakesCommandHandler implements ICommandHandler<CreateData
                 .map(dataLake => { 
                     return {
                         id: new DataLakeId(dataLake.id),
-                        executionId: new DataLakeExecutionId(dataLake.executionId),
                         tenantId: new DataLakeTenantId(dataLake.tenantId),
+                        executionId: new DataLakeExecutionId(dataLake.executionId),
                         tenantCode: new DataLakeTenantCode(dataLake.tenantCode),
                         payload: new DataLakePayload(dataLake.payload),
                         

@@ -36,6 +36,9 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     })
     tenantId: string;
         
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
         
     
@@ -66,6 +69,9 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     })
     systemId: string;
         
+    
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
         
     
@@ -96,6 +102,9 @@ export class BplusItSappiJobDetailModel extends Model<BplusItSappiJobDetailModel
     })
     executionId: string;
         
+    
+    @BelongsTo(() => BplusItSappiExecutionModel)
+    execution: BplusItSappiExecutionModel;
              
         
     

@@ -36,6 +36,9 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     })
     tenantId: string;
         
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
         
     
@@ -66,6 +69,9 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     })
     systemId: string;
         
+    
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
         
     
@@ -96,6 +102,9 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     })
     roleId: string;
         
+    
+    @BelongsTo(() => BplusItSappiRoleModel)
+    role: BplusItSappiRoleModel;
              
         
     

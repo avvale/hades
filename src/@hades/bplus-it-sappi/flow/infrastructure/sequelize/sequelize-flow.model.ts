@@ -47,6 +47,9 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     })
     tenantId: string;
         
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
         
     
@@ -77,6 +80,9 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     })
     systemId: string;
         
+    
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
         
     

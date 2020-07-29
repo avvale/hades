@@ -49,6 +49,9 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     })
     tenantId: string;
         
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
         
     
@@ -79,6 +82,9 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     })
     systemId: string;
         
+    
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
         
     
@@ -145,6 +151,9 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     })
     flowId: string;
         
+    
+    @BelongsTo(() => BplusItSappiFlowModel)
+    flow: BplusItSappiFlowModel;
              
         
     

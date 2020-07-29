@@ -3,8 +3,8 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     DataLakeId, 
-    DataLakeExecutionId, 
     DataLakeTenantId, 
+    DataLakeExecutionId, 
     DataLakeTenantCode, 
     DataLakePayload, 
     DataLakeCreatedAt, 
@@ -25,8 +25,8 @@ export class UpdateDataLakeService
 
     public async main(
         id: DataLakeId,
-        executionId?: DataLakeExecutionId,
         tenantId?: DataLakeTenantId,
+        executionId?: DataLakeExecutionId,
         tenantCode?: DataLakeTenantCode,
         payload?: DataLakePayload,
         
@@ -35,8 +35,8 @@ export class UpdateDataLakeService
         // create object with factory pattern
         const dataLake = BplusItSappiDataLake.register(
             id,
-            executionId,
             tenantId,
+            executionId,
             tenantCode,
             payload,
             null,

@@ -34,6 +34,9 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     })
     tenantId: string;
         
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
         
     

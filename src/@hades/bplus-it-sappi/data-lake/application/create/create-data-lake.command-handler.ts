@@ -3,8 +3,8 @@ import { CreateDataLakeCommand } from './create-data-lake.command';
 import { CreateDataLakeService } from './create-data-lake.service';
 import { 
     DataLakeId, 
-    DataLakeExecutionId, 
     DataLakeTenantId, 
+    DataLakeExecutionId, 
     DataLakeTenantCode, 
     DataLakePayload
     
@@ -22,8 +22,8 @@ export class CreateDataLakeCommandHandler implements ICommandHandler<CreateDataL
         // call to use case and implements ValueObjects
         await this.createDataLakeService.main(
             new DataLakeId(command.id),
-            new DataLakeExecutionId(command.executionId),
             new DataLakeTenantId(command.tenantId),
+            new DataLakeExecutionId(command.executionId),
             new DataLakeTenantCode(command.tenantCode),
             new DataLakePayload(command.payload),
             

@@ -33,10 +33,13 @@ export class BplusItSappiJobDetail extends AggregateRoot
 {
     id: JobDetailId;
     tenantId: JobDetailTenantId;
+    tenant: AdminTenant;
     tenantCode: JobDetailTenantCode;
     systemId: JobDetailSystemId;
+    system: BplusItSappiSystem;
     systemName: JobDetailSystemName;
     executionId: JobDetailExecutionId;
+    execution: BplusItSappiExecution;
     executionType: JobDetailExecutionType;
     executionExecutedAt: JobDetailExecutionExecutedAt;
     executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt;

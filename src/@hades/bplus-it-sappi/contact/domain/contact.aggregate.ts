@@ -31,10 +31,13 @@ export class BplusItSappiContact extends AggregateRoot
 {
     id: ContactId;
     tenantId: ContactTenantId;
+    tenant: AdminTenant;
     tenantCode: ContactTenantCode;
     systemId: ContactSystemId;
+    system: BplusItSappiSystem;
     systemName: ContactSystemName;
     roleId: ContactRoleId;
+    role: BplusItSappiRole;
     roleName: ContactRoleName;
     name: ContactName;
     surname: ContactSurname;

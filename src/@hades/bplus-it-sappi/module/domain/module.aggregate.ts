@@ -36,14 +36,18 @@ export class BplusItSappiModule extends AggregateRoot
 {
     id: ModuleId;
     tenantId: ModuleTenantId;
+    tenant: AdminTenant;
     tenantCode: ModuleTenantCode;
     systemId: ModuleSystemId;
+    system: BplusItSappiSystem;
     systemName: ModuleSystemName;
     channelId: ModuleChannelId;
+    channel: BplusItSappiChannel;
     channelParty: ModuleChannelParty;
     channelComponent: ModuleChannelComponent;
     channelName: ModuleChannelName;
     flowId: ModuleFlowId;
+    flow: BplusItSappiFlow;
     flowParty: ModuleFlowParty;
     flowComponent: ModuleFlowComponent;
     flowInterfaceName: ModuleFlowInterfaceName;
