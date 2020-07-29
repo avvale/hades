@@ -7,6 +7,9 @@ import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infr
 @Table({ modelName: 'bplus_it_sappi_channel_overview', freezeTableName: true })
 export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelOverviewModel> 
 { 
+            
+    
+    
     @Column({
         field: 'id',
         primaryKey: true,
@@ -15,13 +18,20 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
         
     })
     id: string;
+        
+             
+        
+    @ForeignKey(() => AdminTenantModel)    
+    
     
     @Column({
         field: 'tenant_id',
+        
         allowNull: false,
         type: DataTypes.UUID,
+        
         references: {
-            model: AdminTenantModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -29,9 +39,13 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     })
     tenantId: string;
         
+    
     @BelongsTo(() => AdminTenantModel)
     tenant: AdminTenantModel;
              
+            
+    
+    
     @Column({
         field: 'tenant_code',
         
@@ -41,7 +55,11 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     })
     tenantCode: string;
         
-  
+             
+        
+    @ForeignKey(() => BplusItSappiSystemModel)    
+    
+    
     @Column({
         field: 'system_id',
         
@@ -49,14 +67,17 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiSystemModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     systemId: string;
-
+        
+    
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
             
     
@@ -71,7 +92,10 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
     systemName: string;
         
              
- 
+        
+    @ForeignKey(() => BplusItSappiExecutionModel)    
+    
+    
     @Column({
         field: 'execution_id',
         
@@ -79,14 +103,17 @@ export class BplusItSappiChannelOverviewModel extends Model<BplusItSappiChannelO
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiExecutionModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     executionId: string;
-
+        
+    
+    @BelongsTo(() => BplusItSappiExecutionModel)
+    execution: BplusItSappiExecutionModel;
              
             
     

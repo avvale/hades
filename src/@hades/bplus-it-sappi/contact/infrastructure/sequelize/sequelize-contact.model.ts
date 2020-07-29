@@ -21,7 +21,9 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
         
              
         
-     
+    @ForeignKey(() => AdminTenantModel)    
+    
+    
     @Column({
         field: 'tenant_id',
         
@@ -29,15 +31,17 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
         type: DataTypes.UUID,
         
         references: {
-            model: AdminTenantModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     tenantId: string;
-
- 
+        
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
             
     
@@ -53,7 +57,9 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
         
              
         
- 
+    @ForeignKey(() => BplusItSappiSystemModel)    
+    
+    
     @Column({
         field: 'system_id',
         
@@ -61,7 +67,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiSystemModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -70,7 +76,8 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     systemId: string;
         
     
-  
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
             
     
@@ -86,7 +93,9 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
         
              
         
-     
+    @ForeignKey(() => BplusItSappiRoleModel)    
+    
+    
     @Column({
         field: 'role_id',
         
@@ -94,7 +103,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiRoleModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -102,7 +111,9 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     })
     roleId: string;
         
- 
+    
+    @BelongsTo(() => BplusItSappiRoleModel)
+    role: BplusItSappiRoleModel;
              
             
     

@@ -6,6 +6,8 @@ import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastruc
 @Table({ modelName: 'bplus_it_sappi_execution', freezeTableName: true })
 export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel> 
 { 
+            
+    
     
     @Column({
         field: 'id',
@@ -15,20 +17,30 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
         
     })
     id: string;
+        
+             
+        
+    @ForeignKey(() => AdminTenantModel)    
+    
     
     @Column({
         field: 'tenant_id',
+        
         allowNull: false,
         type: DataTypes.UUID,
+        
         references: {
-            model: AdminTenantModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     tenantId: string;
-
+        
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
             
     
@@ -41,20 +53,34 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
         
     })
     tenantCode: string;
-          
+        
+             
+        
+    @ForeignKey(() => BplusItSappiSystemModel)    
+    
+    
     @Column({
         field: 'system_id',
+        
         allowNull: false,
         type: DataTypes.UUID,
+        
         references: {
-            model: BplusItSappiSystemModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     systemId: string;
-
+        
+    
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
+             
+            
+    
+    
     @Column({
         field: 'system_name',
         

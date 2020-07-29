@@ -8,20 +8,31 @@ import { BplusItSappiChannelModel } from '@hades/bplus-it-sappi/channel/infrastr
 @Table({ modelName: 'bplus_it_sappi_channel_detail', freezeTableName: true })
 export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDetailModel> 
 { 
+            
+    
+    
     @Column({
         field: 'id',
         primaryKey: true,
         allowNull: false,
-        type: DataTypes.UUID
+        type: DataTypes.UUID,
+        
     })
     id: string;
-
+        
+             
+        
+    @ForeignKey(() => AdminTenantModel)    
+    
+    
     @Column({
         field: 'tenant_id',
+        
         allowNull: false,
         type: DataTypes.UUID,
+        
         references: {
-            model: AdminTenantModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -29,7 +40,9 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     tenantId: string;
         
-   
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
             
     
@@ -43,6 +56,11 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     tenantCode: string;
         
+             
+        
+    @ForeignKey(() => BplusItSappiSystemModel)    
+    
+    
     @Column({
         field: 'system_id',
         
@@ -50,15 +68,21 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiSystemModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     systemId: string;
+        
     
-
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
+             
+            
+    
+    
     @Column({
         field: 'system_name',
         
@@ -68,6 +92,11 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     systemName: string;
         
+             
+        
+    @ForeignKey(() => BplusItSappiExecutionModel)    
+    
+    
     @Column({
         field: 'execution_id',
         
@@ -75,14 +104,20 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiExecutionModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     executionId: string;
-
+        
+    
+    @BelongsTo(() => BplusItSappiExecutionModel)
+    execution: BplusItSappiExecutionModel;
+             
+            
+    
     
     @Column({
         field: 'execution_type',
@@ -147,13 +182,17 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         
              
         
- 
+    @ForeignKey(() => BplusItSappiChannelModel)    
+    
+    
     @Column({
         field: 'channel_hash',
+        
         allowNull: false,
         type: DataTypes.CHAR(40),
+        
         references: {
-            model: BplusItSappiChannelModel,
+            
             key: 'hash'
         },
         onUpdate: 'CASCADE',
@@ -161,7 +200,9 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     channelHash: string;
         
-   
+    
+    @BelongsTo(() => BplusItSappiChannelModel)
+    channel: BplusItSappiChannelModel;
              
             
     

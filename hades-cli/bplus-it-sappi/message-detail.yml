@@ -63,6 +63,7 @@ aggregateProperties:
     type: char
     length: 40
     nullable: false
+    relationship: many-to-one
     relationshipAggregate: BplusItSappiFlow
     relationshipModulePath: bplus-it-sappi/flow
     relationshipKey: hash

@@ -8,7 +8,9 @@ import { BplusItSappiFlowModel } from '@hades/bplus-it-sappi/flow/infrastructure
 @Table({ modelName: 'bplus_it_sappi_module', freezeTableName: true })
 export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel> 
 { 
-        
+            
+    
+    
     @Column({
         field: 'id',
         primaryKey: true,
@@ -20,7 +22,9 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         
              
         
-       
+    @ForeignKey(() => AdminTenantModel)    
+    
+    
     @Column({
         field: 'tenant_id',
         
@@ -28,7 +32,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         type: DataTypes.UUID,
         
         references: {
-            model: AdminTenantModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -37,6 +41,8 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     tenantId: string;
         
     
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
             
     
@@ -51,7 +57,10 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     tenantCode: string;
         
              
-     
+        
+    @ForeignKey(() => BplusItSappiSystemModel)    
+    
+    
     @Column({
         field: 'system_id',
         
@@ -59,17 +68,21 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiSystemModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     systemId: string;
+        
     
-
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
-
+            
+    
+    
     @Column({
         field: 'system_name',
         
@@ -80,7 +93,10 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     systemName: string;
         
              
-     
+        
+    @ForeignKey(() => BplusItSappiChannelModel)    
+    
+    
     @Column({
         field: 'channel_id',
         
@@ -88,15 +104,17 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiChannelModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     channelId: string;
+        
     
- 
+    @BelongsTo(() => BplusItSappiChannelModel)
+    channel: BplusItSappiChannelModel;
              
             
     
@@ -135,21 +153,30 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         
     })
     channelName: string;
-
+        
+             
+        
+    @ForeignKey(() => BplusItSappiFlowModel)    
+    
+    
     @Column({
         field: 'flow_id',
+        
         allowNull: true,
         type: DataTypes.UUID,
+        
         references: {
-            model: BplusItSappiFlowModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     flowId: string;
+        
     
-   
+    @BelongsTo(() => BplusItSappiFlowModel)
+    flow: BplusItSappiFlowModel;
              
             
     

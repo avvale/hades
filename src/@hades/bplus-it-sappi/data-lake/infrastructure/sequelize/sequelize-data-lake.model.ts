@@ -20,7 +20,9 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
         
              
         
-   
+    @ForeignKey(() => AdminTenantModel)    
+    
+    
     @Column({
         field: 'tenant_id',
         
@@ -28,7 +30,7 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
         type: DataTypes.UUID,
         
         references: {
-            model: AdminTenantModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -36,9 +38,13 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     })
     tenantId: string;
         
-
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
         
+    @ForeignKey(() => BplusItSappiExecutionModel)    
+    
     
     @Column({
         field: 'execution_id',
@@ -47,15 +53,17 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiExecutionModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     executionId: string;
+        
     
-  
+    @BelongsTo(() => BplusItSappiExecutionModel)
+    execution: BplusItSappiExecutionModel;
              
             
     

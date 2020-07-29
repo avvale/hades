@@ -3,10 +3,14 @@ import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
 import { BplusItSappiExecutionModel } from '@hades/bplus-it-sappi/execution/infrastructure/sequelize/sequelize-execution.model';
+import { BplusItSappiFlowModel } from '@hades/bplus-it-sappi/flow/infrastructure/sequelize/sequelize-flow.model';
 
 @Table({ modelName: 'bplus_it_sappi_message_detail', freezeTableName: true })
 export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDetailModel> 
 { 
+            
+    
+    
     @Column({
         field: 'id',
         primaryKey: true,
@@ -15,8 +19,12 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         
     })
     id: string;
-
-  
+        
+             
+        
+    @ForeignKey(() => AdminTenantModel)    
+    
+    
     @Column({
         field: 'tenant_id',
         
@@ -24,16 +32,21 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         type: DataTypes.UUID,
         
         references: {
-            model: AdminTenantModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     tenantId: string;
-
-   
-
+        
+    
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
+             
+            
+    
+    
     @Column({
         field: 'tenant_code',
         
@@ -44,7 +57,10 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     tenantCode: string;
         
              
-  
+        
+    @ForeignKey(() => BplusItSappiSystemModel)    
+    
+    
     @Column({
         field: 'system_id',
         
@@ -52,15 +68,17 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiSystemModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
     systemId: string;
-
-   
+        
+    
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
             
     
@@ -89,12 +107,17 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         
              
         
+    @ForeignKey(() => BplusItSappiExecutionModel)    
+    
+    
     @Column({
         field: 'execution_id',
+        
         allowNull: false,
         type: DataTypes.UUID,
+        
         references: {
-            model: BplusItSappiExecutionModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -102,7 +125,9 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     })
     executionId: string;
         
-
+    
+    @BelongsTo(() => BplusItSappiExecutionModel)
+    execution: BplusItSappiExecutionModel;
              
             
     
@@ -156,7 +181,8 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     executionMonitoringEndAt: string;
         
              
-            
+        
+    @ForeignKey(() => BplusItSappiFlowModel)    
     
     
     @Column({
@@ -165,9 +191,18 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         allowNull: false,
         type: DataTypes.CHAR(40),
         
+        references: {
+            
+            key: 'hash'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION',
     })
     flowHash: string;
         
+    
+    @BelongsTo(() => BplusItSappiFlowModel)
+    flow: BplusItSappiFlowModel;
              
             
     

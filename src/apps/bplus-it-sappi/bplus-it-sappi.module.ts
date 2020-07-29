@@ -47,21 +47,20 @@ import { BplusItSappiSnapshotControllers, BplusItSappiSnapshotResolvers } from '
         ...BplusItSappiServices,
         ...BplusItSappiRepositories,
         ...BplusItSappiSagas,
+        ...BplusItSappiRoleResolvers,
         ...BplusItSappiDataLakeResolvers,
         ...BplusItSappiSystemResolvers,
         ...BplusItSappiExecutionResolvers,
-        ...BplusItSappiFlowResolvers,
-        ...BplusItSappiChannelResolvers,
-        ...BplusItSappiRoleResolvers,
         ...BplusItSappiJobOverviewResolvers,
         ...BplusItSappiContactResolvers,
-        ...BplusItSappiJobDetailResolvers,
         ...BplusItSappiChannelOverviewResolvers,
         ...BplusItSappiChannelDetailResolvers,
-        ...BplusItSappiModuleResolvers,
+        ...BplusItSappiJobDetailResolvers,
         ...BplusItSappiMessageOverviewResolvers,
-        ...BplusItSappiMessageDetailResolvers,
-        ...BplusItSappiSnapshotResolvers
+        ...BplusItSappiModuleResolvers,
+        ...BplusItSappiFlowResolvers,
+        ...BplusItSappiChannelResolvers,
+        ...BplusItSappiMessageDetailResolvers
     ]
 })
 export class BplusItSappiModule {}

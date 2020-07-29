@@ -5,6 +5,9 @@ import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/s
 @Table({ modelName: 'bplus_it_sappi_role', freezeTableName: true })
 export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel> 
 { 
+            
+    
+    
     @Column({
         field: 'id',
         primaryKey: true,
@@ -14,12 +17,19 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     })
     id: string;
         
+             
+        
+    @ForeignKey(() => AdminTenantModel)    
+    
+    
     @Column({
         field: 'tenant_id',
+        
         allowNull: false,
         type: DataTypes.UUID,
+        
         references: {
-            model: AdminTenantModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -28,6 +38,8 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     tenantId: string;
         
     
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
             
     

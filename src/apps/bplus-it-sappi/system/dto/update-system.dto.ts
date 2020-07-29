@@ -6,7 +6,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '135bc1be-5eee-42a4-bc5a-f7494b6309ad'
+        example     : '3633431b-485a-4f60-a765-ae3a615af774'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '943f657d-3c00-432c-9a27-1e5146298e3b'
+        example     : '034a2a4b-f28f-4538-bf51-c88fb4c14744'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'ey4v8dy6fglatgrrbu3o6z7xafwt48txyrtgj0cc10b3n9io00'
+        example     : 'o6peubf0jqqt08kku6080ntqzqou99g6f7yav5lsy3ffql4ylg'
     })
     tenantCode: string;
     
@@ -42,7 +42,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '8'
+        example     : '2'
     })
     name: string;
     
@@ -51,7 +51,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'environment [input here api field description]',
-        example     : 'y'
+        example     : 'u'
     })
     environment: string;
     
@@ -69,7 +69,7 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'cancelledAt [input here api field description]',
-        example     : '2020-07-29 03:04:23'
+        example     : '2020-07-29 02:40:15'
     })
     cancelledAt: string;
     

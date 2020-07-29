@@ -19,15 +19,11 @@ export class AdminResourceModel extends Model<AdminResourceModel>
         
              
         
-    @ForeignKey(() => AdminBoundedContextModel)    
-    
-    
+    @ForeignKey(() => AdminBoundedContextModel)
     @Column({
         field: 'bounded_context_id',
-        
         allowNull: false,
         type: DataTypes.UUID,
-        
         references: {
             model: AdminBoundedContextModel,
             key: 'id'

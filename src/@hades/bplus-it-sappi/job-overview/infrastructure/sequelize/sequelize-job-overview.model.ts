@@ -20,7 +20,9 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     id: string;
         
              
-
+        
+    @ForeignKey(() => AdminTenantModel)    
+    
     
     @Column({
         field: 'tenant_id',
@@ -29,7 +31,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
         type: DataTypes.UUID,
         
         references: {
-            model: AdminTenantModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -38,7 +40,8 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     tenantId: string;
         
     
-
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
             
     
@@ -53,7 +56,8 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     tenantCode: string;
         
              
-   
+        
+    @ForeignKey(() => BplusItSappiSystemModel)    
     
     
     @Column({
@@ -63,7 +67,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiSystemModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -71,7 +75,9 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     })
     systemId: string;
         
-
+    
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
             
     
@@ -86,7 +92,8 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     systemName: string;
         
              
-     
+        
+    @ForeignKey(() => BplusItSappiExecutionModel)    
     
     
     @Column({
@@ -96,7 +103,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiExecutionModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -105,7 +112,8 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     executionId: string;
         
     
-
+    @BelongsTo(() => BplusItSappiExecutionModel)
+    execution: BplusItSappiExecutionModel;
              
             
     

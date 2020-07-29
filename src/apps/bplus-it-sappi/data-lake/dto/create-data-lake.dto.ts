@@ -6,7 +6,7 @@ export class CreateDataLakeDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '3c46b090-73e2-4df1-b096-a3ee0e36ad19'
+        example     : 'd11275b8-b8a1-4513-90f6-ceeb4695c4af'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateDataLakeDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'b754bbd1-4244-4f61-9487-c39accabb904'
+        example     : '523b1cc3-9b8c-42c0-9484-f80dfa067d83'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class CreateDataLakeDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : 'd71015ce-053e-4da9-a867-a4d4abe81021'
+        example     : '6f016261-4989-4bf3-b3ef-3b71d1cab58f'
     })
     executionId: string;
     
@@ -33,7 +33,7 @@ export class CreateDataLakeDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : '0e5xlv6fzmmqj3wo2k7v2vewsbztja0z9nbxfz8mywf9nqn6yl'
+        example     : '3mahwcl9gb192c0aeqvt10unx0xg0fkmu3mx2iw8w1m2u7v492'
     })
     tenantCode: string;
     

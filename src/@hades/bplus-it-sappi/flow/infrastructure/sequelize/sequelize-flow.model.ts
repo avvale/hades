@@ -6,28 +6,44 @@ import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastruc
 @Table({ modelName: 'bplus_it_sappi_flow', freezeTableName: true })
 export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel> 
 { 
-    @Column({
-        field: 'id',
-        primaryKey: true,
-        allowNull: false,
-        type: DataTypes.UUID
-    })
-    id: string;
+            
     
     @Unique
     @Column({
-        field: 'hash',
+        field: 'id',
+        
         allowNull: false,
-        type: DataTypes.CHAR(40)    
+        type: DataTypes.UUID,
+        
+    })
+    id: string;
+        
+             
+            
+    
+    
+    @Column({
+        field: 'hash',
+        primaryKey: true,
+        allowNull: false,
+        type: DataTypes.CHAR(40),
+        
     })
     hash: string;
         
+             
+        
+    @ForeignKey(() => AdminTenantModel)    
+    
+    
     @Column({
         field: 'tenant_id',
+        
         allowNull: false,
         type: DataTypes.UUID,
+        
         references: {
-            model: AdminTenantModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -36,7 +52,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     tenantId: string;
         
     
-
+    @BelongsTo(() => AdminTenantModel)
+    tenant: AdminTenantModel;
              
             
     
@@ -52,7 +69,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
         
              
         
-  
+    @ForeignKey(() => BplusItSappiSystemModel)    
     
     
     @Column({
@@ -62,7 +79,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
         type: DataTypes.UUID,
         
         references: {
-            model: BplusItSappiSystemModel,
+            
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -71,7 +88,8 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     systemId: string;
         
     
-
+    @BelongsTo(() => BplusItSappiSystemModel)
+    system: BplusItSappiSystemModel;
              
             
     

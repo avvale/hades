@@ -6,7 +6,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'b10b028b-1e7b-4098-aae2-18bbaf2fec38'
+        example     : 'c2d1f6a7-aea1-4075-9f2f-81fb389b3c4e'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'hash [input here api field description]',
-        example     : 'mv0bo3zc2ixg7x8tu47njvh763wi4ddvt1c0t7x7'
+        example     : 'b8bg9xnrcg05mmxkun7ixxv70l0rm2vkb6v1my0v'
     })
     hash: string;
     
@@ -24,7 +24,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '48132ca9-66fd-4019-b9dd-620337ddbe56'
+        example     : 'c9f4327d-1e85-4dff-80d6-f566e5e1f272'
     })
     tenantId: string;
     
@@ -33,7 +33,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'e5fwnm3y1gz9piwkk0hfpqzsebthg5gvvbf45o3n8loqs5cx1c'
+        example     : 'q907amp3uyegwp7hd0f9wsl4ajn6kao3bt4qhmavfwao31gq0j'
     })
     tenantCode: string;
     
@@ -42,7 +42,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : 'f98b30fe-06f8-460f-bff1-8d567c29fedd'
+        example     : '3f141849-f618-493d-97ae-909e79b3c0e9'
     })
     systemId: string;
     
@@ -51,7 +51,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'fzok3uoxcfofpdqkeohh'
+        example     : 'ubbfw9lggregfdq8wi9p'
     })
     systemName: string;
     
@@ -60,7 +60,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'version [input here api field description]',
-        example     : 'h5z8duwsu8lv4ukz47oe'
+        example     : 'nljejvmtm6j54nk070zh'
     })
     version: string;
     
@@ -69,7 +69,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'scenario [input here api field description]',
-        example     : '6h822q4dt2flncka97ndtsx6thd87wajwed35079a2om1t7ty3pqp0z3sd48'
+        example     : 'v0klds8q4yxp0d8o1w6pa8vvd2z6nh15118p2rfu7otfpl212kifb30ovje8'
     })
     scenario: string;
     
@@ -78,7 +78,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'party [input here api field description]',
-        example     : '73vrmz29wtd9octp2a2u9drbextdtf734y2kdnh917e4nawwo93f2mn4fixh4jm58o5l3huqgfgehrw3749n2woha55wi5ld5kqtty689nfxtoj17qp0k9d723o7ofohvy8am09buvnat82n0v1u5g12415bmpse'
+        example     : 'fqsdseb05yzssyexmuepftv4lom3wfcdpteoq0kgucpgbw318mpuqr0d2hurjti2y71dvgzkyt3jeuyji281uw9zxhovxcslzlg57eweebc69hg8wt4grmh2kyyvw28kf7w83y1zehi6e0d3gssifg2by1bbablf'
     })
     party: string;
     
@@ -87,7 +87,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'component [input here api field description]',
-        example     : 'oum4i0qweu3xxavxf4zo5a5nj6wyg40n8l58na266byiukv0wjml61m24w9hyeotuewzyk23ebhk7xwbwrkpcvgrl3amcp7mwh4b0xl54a82jfftytuk1lipwh7pqlmr263ceeom51vicc4rnm83qde5emjb4xw5'
+        example     : '7annj0bnffiwnd2aduptje1dtxowcgn2kbtg7ykggqo5obxkumezlsbrtlb8g9w3br85b2way0zrnhy62d4gtb0fe4ehir6n1mdnavren31ogngdxqrefykliusivezq8y1jhe9elfp5fa49gi7e5x8bpef6lciz'
     })
     component: string;
     
@@ -96,7 +96,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'interfaceName [input here api field description]',
-        example     : '4icnwmaiinya6j7lvlr5axpiedabp7qymy3b5abltt5hr8rmdj1obbac7pk9drg4kiauvxr3kfw802gktemmhkdlro5yfjlugtpkihyzkmyp27n1wlyerutsy1a6qvwhxuq94gkrg4rrusjuj5kpx5ov7va35x31'
+        example     : 'gcuwb5nadw85mslu0vk56lpiahmmn3q64hade0pqjhrklo4qt7cn15e2vgtdt2qajb52916vdzf7ncpvcb6un582v6mjur3b7cmujzl4ivwiv0b33bs8ydrcmok2v5m120pvo1u7demtkq4laxwp3yx5ff7t9er1'
     })
     interfaceName: string;
     
@@ -105,7 +105,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'interfaceNamespace [input here api field description]',
-        example     : 'bxzlaurpxd3poki2jvqahf81iu7y53pe3od2kwofxity4jzhxt422xbscn66q8wqla5fqxfwidv9ot3n6of0avtyq7wton5d1n983e6g6zedx4eu8bs034amvuzyoafjza6fv6j1l4f6lrhdoj9aokdseudf52ux'
+        example     : 'tusvacpd0li449u52b5igq5uue1slr601721jy2bz5b9ki2zxak4qnlnfnjk42fa0e6r4thcf91y9x4un3zlg3qxu0p43djzmk7zl7izd6z6ojjkdrkj6ff2jm3zgd4fmdikpkky8pl72t5y7c9bsb40plzwakot'
     })
     interfaceNamespace: string;
     
@@ -114,7 +114,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'iflowName [input here api field description]',
-        example     : 'xcyew81fkke6wy7pbhhl8fdxxgyf2i60vxcfoxjb3mf2e79gsuubbuwylzujc5dc74mrwuy3ow4xjsgcupv337g94477dnpbh9ndu7w7ek9exclz5948p7avakincxpc18hn2ihmwmvqcbu8vjxpvd92jmocl7kw'
+        example     : 'xvt2aum22i289sj4nrt1esi20u73a4ezlymkk1ml3y29pi82v45qm4s2st8pk6u2eqtkbi8lwgvpmjevd82mgxow6blsds7uveoyfnc6zqdwuoy12tt98qjeaptq4oc7m322j0pvmix4jhbhand8zhsb8f4t59yz'
     })
     iflowName: string;
     
@@ -123,7 +123,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'responsibleUserAccount [input here api field description]',
-        example     : 'd7thpp5ro2t7yof4w49q'
+        example     : '1kjljt61nj8cosmsro89'
     })
     responsibleUserAccount: string;
     
@@ -132,7 +132,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'lastChangeUserAccount [input here api field description]',
-        example     : '0sfsmrvh84ugmqmqvau2'
+        example     : 'ahenlqi2t36303sd47ks'
     })
     lastChangeUserAccount: string;
     
@@ -141,7 +141,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'lastChangedAt [input here api field description]',
-        example     : '2020-07-29 03:37:49'
+        example     : '2020-07-29 08:28:23'
     })
     lastChangedAt: string;
     
@@ -150,7 +150,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'folderPath [input here api field description]',
-        example     : '7ww1lkpkdioi17xssyv5nbxku3oz6acu82zq7973bpn2q4xv8bwakypsjpy4099d5ijkvska4jlc7wfeuhsrfuhqi19cogvfsoi6p1pskz6yct2o5c1jics8s3fbx5zhrh3mb7d83ia4hesczb2n7uwcjk6envy88354jquooi72m1u4qkd8nzsvhzql9yglu55l21tf8srm6844edtca7qlct6n84ufglvzhcl2yja8qomtsrhr3s4sgzoznye'
+        example     : 'j6f2ru3cw9hbjpjqeruil20k2caf5jjtxye33pto80v6ov50r6ykqb7i9td6y2gqh2pyld6taqr25mewjf6ee50cdledtynemqfhygfomeyr8hd2jy2s7odsegc27gw8rin15814y0uy0ulwyfl4zl7gvhn77ick9h2lkihfd7uxekvfog2ptvwpm31j16e4pcxkeqlcwqt2b1vhrvgztvi34qya00xsov0z5izz0jop9ti285pg5dnv1ezwsyp'
     })
     folderPath: string;
     
@@ -159,7 +159,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'description [input here api field description]',
-        example     : 'av34uz59q7n5ow2w4gds55ojnr05chmuliywpplulqlew1udcc0umnj5u58o9uztkjv6wbk3xyl6f9591cqy03o7f4aqmclszi11j42ilbg74gtg5i05iv5ftupfaxnm3ztiwr0xw9zvzy3cvm9a4ikd4ran9se13vl34fub097dqjwem4lohf9t3cnoxp5r376na1m1zfwiajo1ca8063f6t5w6w3kvauqh5zq4puoolbp03hh4y5mobk54jwj'
+        example     : 'cydtfi3x5upar1hf9jna8nw9oy4aluz44bc55y6ab0a877kl9qw3nkk4jg1h3e194n1c81t9sf6casi3sjm2qqkdl3hqhl1q9n23otwg63b3ktkbwcx2qiblmih11pjrrze5g02gh4l05qqpbqk38vd4sxrhxhhksqn3enewwv8auuzj4h9ulabvmba5q466aciqkpi3bmv67xn73v24tmca32l912c1v7c7ehctfkkpr9n46tiu63i8oz672j6'
     })
     description: string;
     
@@ -168,7 +168,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'application [input here api field description]',
-        example     : 'cdp45nselg91yd32ho2wl4ufina9nc42jw4kenxog1bwooadp6gr1s57t6in'
+        example     : 'xu1ojzm31hn9e15oo14r0edzkl0iaz1vp071qvliq88kcpexoouzlqti9pms'
     })
     application: string;
     
@@ -177,7 +177,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : Boolean,
         description : 'isCritical [input here api field description]',
-        example     : false
+        example     : true
     })
     isCritical: boolean;
     
@@ -186,7 +186,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : Boolean,
         description : 'isComplex [input here api field description]',
-        example     : true
+        example     : false
     })
     isComplex: boolean;
     
@@ -195,7 +195,7 @@ export class UpdateFlowDto
     @ApiProperty({
         type        : String,
         description : 'fieldGroupId [input here api field description]',
-        example     : '0bec15a5-9dc4-4383-b536-3fa9e4446819'
+        example     : '61d7c7e5-118c-4aa3-8a94-562c0805e506'
     })
     fieldGroupId: string;
     
