@@ -21,7 +21,7 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -34,15 +34,12 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -54,7 +51,7 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     
     @Column({
         field: 'name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(255),
         
@@ -66,7 +63,7 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -78,7 +75,7 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -90,7 +87,7 @@ export class BplusItSappiRoleModel extends Model<BplusItSappiRoleModel>
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

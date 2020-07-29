@@ -23,7 +23,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -36,15 +36,12 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -56,7 +53,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'system_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -69,15 +66,12 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     })
     systemId: string;
         
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
              
         
     
     @Column({
         field: 'system_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -89,7 +83,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'scenario',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(60),
         
@@ -101,7 +95,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'execution_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -114,15 +108,12 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     })
     executionId: string;
         
-    
-    @BelongsTo(() => BplusItSappiExecutionModel)
-    execution: BplusItSappiExecutionModel;
              
         
     
     @Column({
         field: 'execution_type',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.ENUM('SUMMARY','DETAIL'),
         
@@ -134,7 +125,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'execution_executed_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -146,7 +137,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'execution_monitoring_start_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -158,7 +149,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'execution_monitoring_end_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -170,7 +161,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'flow_hash',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.CHAR(40),
         
@@ -182,7 +173,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'flow_party',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -194,7 +185,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'flow_component',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -206,7 +197,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'flow_interface_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -218,7 +209,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'flow_interface_namespace',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -230,7 +221,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'status',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.ENUM('SUCCESS','CANCELLED','DELIVERING','ERROR','HOLDING','TO_BE_DELIVERED','WAITING'),
         
@@ -242,7 +233,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'detail',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.TEXT,
         
@@ -254,7 +245,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'example',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -266,7 +257,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'start_time_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -278,7 +269,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'direction',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.ENUM('INBOUND','OUTBOUND'),
         
@@ -290,7 +281,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'error_category',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -302,7 +293,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'error_code',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(50),
         
@@ -314,7 +305,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'error_label',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.SMALLINT.UNSIGNED,
         
@@ -326,7 +317,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'node',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
@@ -338,7 +329,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'protocol',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(20),
         
@@ -350,7 +341,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'quality_of_service',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(20),
         
@@ -362,7 +353,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'receiver_party',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -374,7 +365,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'receiver_component',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -386,7 +377,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'receiver_interface',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -398,7 +389,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'receiver_interface_namespace',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -410,7 +401,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'retries',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
@@ -422,7 +413,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'size',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
@@ -434,7 +425,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'times_failed',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
@@ -446,7 +437,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -458,7 +449,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -470,7 +461,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

@@ -24,7 +24,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -37,15 +37,12 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -57,7 +54,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'system_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -70,15 +67,12 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     systemId: string;
         
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
              
         
     
     @Column({
         field: 'system_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -90,7 +84,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'execution_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -103,15 +97,12 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     executionId: string;
         
-    
-    @BelongsTo(() => BplusItSappiExecutionModel)
-    execution: BplusItSappiExecutionModel;
              
         
     
     @Column({
         field: 'execution_type',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.ENUM('SUMMARY','DETAIL'),
         
@@ -123,7 +114,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'execution_executed_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -135,7 +126,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'execution_monitoring_start_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -147,7 +138,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'execution_monitoring_end_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -159,7 +150,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'status',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.ENUM('ERROR','INACTIVE','SUCCESSFUL','STOPPED','UNKNOWN','UNREGISTERED'),
         
@@ -171,7 +162,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'channel_hash',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.CHAR(40),
         
@@ -184,15 +175,12 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     })
     channelHash: string;
         
-    
-    @BelongsTo(() => BplusItSappiChannelModel)
-    channelHash: BplusItSappiChannelModel;
              
         
     
     @Column({
         field: 'channel_sap_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -204,7 +192,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'channel_party',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -216,7 +204,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'channel_component',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -228,7 +216,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'channel_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -240,7 +228,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'detail',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.TEXT,
         
@@ -252,7 +240,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -264,7 +252,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -276,7 +264,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

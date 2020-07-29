@@ -29,13 +29,10 @@ export class BplusItSappiJobOverview extends AggregateRoot
 {
     id: JobOverviewId;
     tenantId: JobOverviewTenantId;
-    tenant: AdminTenant;
     tenantCode: JobOverviewTenantCode;
     systemId: JobOverviewSystemId;
-    system: BplusItSappiSystem;
     systemName: JobOverviewSystemName;
     executionId: JobOverviewExecutionId;
-    execution: BplusItSappiExecution;
     executionType: JobOverviewExecutionType;
     executionExecutedAt: JobOverviewExecutionExecutedAt;
     executionMonitoringStartAt: JobOverviewExecutionMonitoringStartAt;

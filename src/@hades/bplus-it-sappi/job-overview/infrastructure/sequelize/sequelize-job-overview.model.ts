@@ -23,7 +23,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -36,15 +36,12 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -56,7 +53,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'system_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -69,15 +66,12 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     })
     systemId: string;
         
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
              
         
     
     @Column({
         field: 'system_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -89,7 +83,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'execution_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -102,15 +96,12 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     })
     executionId: string;
         
-    
-    @BelongsTo(() => BplusItSappiExecutionModel)
-    execution: BplusItSappiExecutionModel;
              
         
     
     @Column({
         field: 'execution_type',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.ENUM('SUMMARY','DETAIL'),
         
@@ -122,7 +113,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'execution_executed_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -134,7 +125,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'execution_monitoring_start_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -146,7 +137,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'execution_monitoring_end_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -158,7 +149,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'cancelled',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
@@ -170,7 +161,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'completed',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
@@ -182,7 +173,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'error',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
@@ -194,7 +185,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -206,7 +197,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -218,7 +209,7 @@ export class BplusItSappiJobOverviewModel extends Model<BplusItSappiJobOverviewM
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

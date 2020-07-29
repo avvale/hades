@@ -25,10 +25,8 @@ export class BplusItSappiExecution extends AggregateRoot
 {
     id: ExecutionId;
     tenantId: ExecutionTenantId;
-    tenant: AdminTenant;
     tenantCode: ExecutionTenantCode;
     systemId: ExecutionSystemId;
-    system: BplusItSappiSystem;
     systemName: ExecutionSystemName;
     version: ExecutionVersion;
     type: ExecutionType;

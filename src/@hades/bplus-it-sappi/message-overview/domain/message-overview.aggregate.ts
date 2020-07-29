@@ -35,13 +35,10 @@ export class BplusItSappiMessageOverview extends AggregateRoot
 {
     id: MessageOverviewId;
     tenantId: MessageOverviewTenantId;
-    tenant: AdminTenant;
     tenantCode: MessageOverviewTenantCode;
     systemId: MessageOverviewSystemId;
-    system: BplusItSappiSystem;
     systemName: MessageOverviewSystemName;
     executionId: MessageOverviewExecutionId;
-    execution: BplusItSappiExecution;
     executionType: MessageOverviewExecutionType;
     executionExecutedAt: MessageOverviewExecutionExecutedAt;
     executionMonitoringStartAt: MessageOverviewExecutionMonitoringStartAt;

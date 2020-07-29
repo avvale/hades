@@ -24,7 +24,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -37,15 +37,12 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -57,7 +54,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'system_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -70,15 +67,12 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     })
     systemId: string;
         
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
              
         
     
     @Column({
         field: 'system_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -90,7 +84,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'channel_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -103,15 +97,12 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     })
     channelId: string;
         
-    
-    @BelongsTo(() => BplusItSappiChannelModel)
-    channel: BplusItSappiChannelModel;
              
         
     
     @Column({
         field: 'channel_party',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -123,7 +114,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'channel_component',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -135,7 +126,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'channel_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -147,7 +138,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'flow_id',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.UUID,
         
@@ -160,15 +151,12 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     })
     flowId: string;
         
-    
-    @BelongsTo(() => BplusItSappiFlowModel)
-    flow: BplusItSappiFlowModel;
              
         
     
     @Column({
         field: 'flow_party',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -180,7 +168,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'flow_component',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -192,7 +180,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'flow_interface_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -204,7 +192,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'flow_interface_namespace',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -216,7 +204,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'version',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -228,7 +216,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'parameter_group',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(255),
         
@@ -240,7 +228,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'name',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(320),
         
@@ -252,7 +240,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'parameter_name',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(320),
         
@@ -264,7 +252,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'parameter_value',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(1024),
         
@@ -276,7 +264,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -288,7 +276,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -300,7 +288,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

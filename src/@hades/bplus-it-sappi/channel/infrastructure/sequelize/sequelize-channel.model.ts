@@ -9,7 +9,7 @@ import { BplusItSappiModuleModel } from '@hades/bplus-it-sappi/module/infrastruc
 export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel> 
 { 
         
-    
+    @Unique
     @Column({
         field: 'id',
         primaryKey: true,
@@ -21,10 +21,10 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         
              
         
-    @Unique
+    
     @Column({
         field: 'hash',
-        primaryKey: false,
+        primaryKey: true,
         allowNull: false,
         type: DataTypes.CHAR(40),
         
@@ -36,7 +36,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -49,15 +49,12 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -69,7 +66,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'system_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -82,15 +79,12 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     })
     systemId: string;
         
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
              
         
     
     @Column({
         field: 'system_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -102,7 +96,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'party',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -114,7 +108,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'component',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -126,7 +120,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -138,7 +132,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'flow_id',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.UUID,
         
@@ -151,15 +145,12 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     })
     flowId: string;
         
-    
-    @BelongsTo(() => BplusItSappiFlowModel)
-    flow: BplusItSappiFlowModel;
              
         
     
     @Column({
         field: 'flow_party',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -171,7 +162,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'flow_component',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -183,7 +174,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'flow_interface_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -195,7 +186,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'flow_interface_namespace',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -207,7 +198,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'version',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -219,7 +210,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'adapter_type',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(60),
         
@@ -231,7 +222,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'direction',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.ENUM('SENDER','RECEIVER'),
         
@@ -243,7 +234,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'transport_protocol',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(60),
         
@@ -255,7 +246,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'message_protocol',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(60),
         
@@ -267,7 +258,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'adapter_engine_name',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -279,7 +270,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'url',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(320),
         
@@ -291,7 +282,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'username',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(60),
         
@@ -303,7 +294,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'remote_host',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -315,7 +306,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'remote_port',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
@@ -327,7 +318,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'directory',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(1024),
         
@@ -339,7 +330,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'file_schema',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(1024),
         
@@ -351,7 +342,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'proxy_host',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(60),
         
@@ -363,7 +354,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'proxy_port',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
@@ -375,7 +366,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'destination',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -387,7 +378,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'adapter_status',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.ENUM('ACTIVE','INACTIVE'),
         
@@ -399,7 +390,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'software_component_name',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -411,7 +402,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'responsible_user_account_name',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(20),
         
@@ -423,7 +414,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'last_change_user_account',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(20),
         
@@ -435,7 +426,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'last_changed_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -452,7 +443,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -464,7 +455,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -476,7 +467,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

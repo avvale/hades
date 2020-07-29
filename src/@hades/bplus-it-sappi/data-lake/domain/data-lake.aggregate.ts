@@ -20,9 +20,7 @@ export class BplusItSappiDataLake extends AggregateRoot
 {
     id: DataLakeId;
     executionId: DataLakeExecutionId;
-    execution: BplusItSappiExecution;
     tenantId: DataLakeTenantId;
-    tenant: AdminTenant;
     tenantCode: DataLakeTenantCode;
     payload: DataLakePayload;
     createdAt: DataLakeCreatedAt;

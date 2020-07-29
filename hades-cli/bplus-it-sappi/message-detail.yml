@@ -15,6 +15,7 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: AdminTenant
     relationshipModulePath: admin/tenant
+    relationshipField: tenant
   - name: tenant_code
     type: varchar
     maxLength: 50
@@ -26,6 +27,7 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: BplusItSappiSystem
     relationshipModulePath: bplus-it-sappi/system
+    relationshipField: system
   - name: system_name
     type: varchar
     maxLength: 20
@@ -41,6 +43,7 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: BplusItSappiExecution
     relationshipModulePath: bplus-it-sappi/execution
+    relationshipField: execution
   - name: execution_type
     type: enum
     enumOptions:
@@ -63,6 +66,7 @@ aggregateProperties:
     relationshipAggregate: BplusItSappiFlow
     relationshipModulePath: bplus-it-sappi/flow
     relationshipKey: hash
+    relationshipField: flow
   - name: flow_party
     type: varchar
     maxLength: 160

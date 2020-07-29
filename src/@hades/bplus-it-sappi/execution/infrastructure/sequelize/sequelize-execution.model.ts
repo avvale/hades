@@ -22,7 +22,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -35,15 +35,12 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -55,7 +52,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @Column({
         field: 'system_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -68,15 +65,12 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     })
     systemId: string;
         
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
              
         
     
     @Column({
         field: 'system_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -88,7 +82,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @Column({
         field: 'version',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -100,7 +94,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @Column({
         field: 'type',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.ENUM('SUMMARY','DETAIL'),
         
@@ -112,7 +106,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @Column({
         field: 'executed_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -124,7 +118,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @Column({
         field: 'monitoring_start_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -136,7 +130,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @Column({
         field: 'monitoring_end_at',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.DATE,
         
@@ -148,7 +142,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -160,7 +154,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -172,7 +166,7 @@ export class BplusItSappiExecutionModel extends Model<BplusItSappiExecutionModel
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

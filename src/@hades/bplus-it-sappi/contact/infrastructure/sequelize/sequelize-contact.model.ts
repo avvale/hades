@@ -23,7 +23,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -36,15 +36,12 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -56,7 +53,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'system_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -69,15 +66,12 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     })
     systemId: string;
         
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
              
         
     
     @Column({
         field: 'system_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -89,7 +83,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'role_id',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.UUID,
         
@@ -102,15 +96,12 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     })
     roleId: string;
         
-    
-    @BelongsTo(() => BplusItSappiRoleModel)
-    role: BplusItSappiRoleModel;
              
         
     
     @Column({
         field: 'role_name',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(255),
         
@@ -122,7 +113,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(255),
         
@@ -134,7 +125,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'surname',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(255),
         
@@ -146,7 +137,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'email',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(120),
         
@@ -158,7 +149,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'mobile',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(60),
         
@@ -170,7 +161,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'area',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(255),
         
@@ -182,7 +173,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'has_consent_email',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
@@ -194,7 +185,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'has_consent_mobile',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
@@ -206,7 +197,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'is_active',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
@@ -218,7 +209,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -230,7 +221,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -242,7 +233,7 @@ export class BplusItSappiContactModel extends Model<BplusItSappiContactModel>
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

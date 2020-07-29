@@ -22,7 +22,7 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     
     @Column({
         field: 'execution_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -35,15 +35,12 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     })
     executionId: string;
         
-    
-    @BelongsTo(() => BplusItSappiExecutionModel)
-    execution: BplusItSappiExecutionModel;
              
         
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -56,15 +53,12 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -76,7 +70,7 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     
     @Column({
         field: 'payload',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.JSON,
         
@@ -88,7 +82,7 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -100,7 +94,7 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -112,7 +106,7 @@ export class BplusItSappiDataLakeModel extends Model<BplusItSappiDataLakeModel>
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

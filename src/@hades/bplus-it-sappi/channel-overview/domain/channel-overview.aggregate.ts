@@ -32,13 +32,10 @@ export class BplusItSappiChannelOverview extends AggregateRoot
 {
     id: ChannelOverviewId;
     tenantId: ChannelOverviewTenantId;
-    tenant: AdminTenant;
     tenantCode: ChannelOverviewTenantCode;
     systemId: ChannelOverviewSystemId;
-    system: BplusItSappiSystem;
     systemName: ChannelOverviewSystemName;
     executionId: ChannelOverviewExecutionId;
-    execution: BplusItSappiExecution;
     executionType: ChannelOverviewExecutionType;
     executionExecutedAt: ChannelOverviewExecutionExecutedAt;
     executionMonitoringStartAt: ChannelOverviewExecutionMonitoringStartAt;

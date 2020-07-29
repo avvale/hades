@@ -39,10 +39,8 @@ export class BplusItSappiFlow extends AggregateRoot
     id: FlowId;
     hash: FlowHash;
     tenantId: FlowTenantId;
-    tenant: AdminTenant;
     tenantCode: FlowTenantCode;
     systemId: FlowSystemId;
-    system: BplusItSappiSystem;
     systemName: FlowSystemName;
     version: FlowVersion;
     scenario: FlowScenario;

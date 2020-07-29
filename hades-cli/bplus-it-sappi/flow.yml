@@ -8,11 +8,12 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
+    index: unique
   - name: hash
     type: char
+    primaryKey: true
     length: 40
     nullable: false
-    index: unique
   - name: tenant_id
     type: id
     length: 36
@@ -20,6 +21,7 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: AdminTenant
     relationshipModulePath: admin/tenant
+    relationshipField: tenant
   - name: tenant_code
     type: varchar
     maxLength: 50
@@ -31,6 +33,7 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: BplusItSappiSystem
     relationshipModulePath: bplus-it-sappi/system
+    relationshipField: system
   - name: system_name
     type: varchar
     maxLength: 20

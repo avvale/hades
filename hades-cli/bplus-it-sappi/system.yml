@@ -15,6 +15,7 @@ aggregateProperties:
     relationship: many-to-one
     relationshipAggregate: AdminTenant
     relationshipModulePath: admin/tenant
+    relationshipField: tenant
   - name: tenant_code
     type: varchar
     maxLength: 50

@@ -22,7 +22,6 @@ export class BplusItSappiSystem extends AggregateRoot
 {
     id: SystemId;
     tenantId: SystemTenantId;
-    tenant: AdminTenant;
     tenantCode: SystemTenantCode;
     version: SystemVersion;
     name: SystemName;

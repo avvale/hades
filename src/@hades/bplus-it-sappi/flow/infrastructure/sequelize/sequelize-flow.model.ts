@@ -7,7 +7,7 @@ import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastruc
 export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel> 
 { 
         
-    
+    @Unique
     @Column({
         field: 'id',
         primaryKey: true,
@@ -19,10 +19,10 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
         
              
         
-    @Unique
+    
     @Column({
         field: 'hash',
-        primaryKey: false,
+        primaryKey: true,
         allowNull: false,
         type: DataTypes.CHAR(40),
         
@@ -34,7 +34,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -47,15 +47,12 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -67,7 +64,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'system_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -80,15 +77,12 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     })
     systemId: string;
         
-    
-    @BelongsTo(() => BplusItSappiSystemModel)
-    system: BplusItSappiSystemModel;
              
         
     
     @Column({
         field: 'system_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -100,7 +94,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'version',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(20),
         
@@ -112,7 +106,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'scenario',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(60),
         
@@ -124,7 +118,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'party',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -136,7 +130,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'component',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -148,7 +142,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'interface_name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -160,7 +154,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'interface_namespace',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(160),
         
@@ -172,7 +166,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'iflow_name',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(160),
         
@@ -184,7 +178,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'responsible_user_account',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(20),
         
@@ -196,7 +190,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'last_change_user_account',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(20),
         
@@ -208,7 +202,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'last_changed_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -220,7 +214,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'folder_path',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(255),
         
@@ -232,7 +226,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'description',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(255),
         
@@ -244,7 +238,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'application',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(60),
         
@@ -256,7 +250,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'is_critical',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
@@ -268,7 +262,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'is_complex',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
@@ -280,7 +274,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'field_group_id',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.UUID,
         
@@ -292,7 +286,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'data',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.JSON,
         
@@ -304,7 +298,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -316,7 +310,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -328,7 +322,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

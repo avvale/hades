@@ -51,16 +51,13 @@ export class BplusItSappiChannel extends AggregateRoot
     id: ChannelId;
     hash: ChannelHash;
     tenantId: ChannelTenantId;
-    tenant: AdminTenant;
     tenantCode: ChannelTenantCode;
     systemId: ChannelSystemId;
-    system: BplusItSappiSystem;
     systemName: ChannelSystemName;
     party: ChannelParty;
     component: ChannelComponent;
     name: ChannelName;
     flowId: ChannelFlowId;
-    flow: BplusItSappiFlow;
     flowParty: ChannelFlowParty;
     flowComponent: ChannelFlowComponent;
     flowInterfaceName: ChannelFlowInterfaceName;

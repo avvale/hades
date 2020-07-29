@@ -21,7 +21,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     
     @Column({
         field: 'tenant_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -34,15 +34,12 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
         
     
     @Column({
         field: 'tenant_code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -54,7 +51,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     
     @Column({
         field: 'version',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(undefined),
         
@@ -66,7 +63,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     
     @Column({
         field: 'name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(undefined),
         
@@ -78,7 +75,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     
     @Column({
         field: 'environment',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(undefined),
         
@@ -90,7 +87,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     
     @Column({
         field: 'is_active',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
@@ -102,7 +99,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     
     @Column({
         field: 'cancelled_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -114,7 +111,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -126,7 +123,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -138,7 +135,7 @@ export class BplusItSappiSystemModel extends Model<BplusItSappiSystemModel>
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

@@ -6,7 +6,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'ae008f8e-ddb6-4374-a6cf-ed3eecb7b94e'
+        example     : '53608938-c593-479c-8108-1a59c2816e4b'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '43777a04-a36e-469f-aaf4-6cb50c337ad2'
+        example     : '98be3d28-a456-41d7-9de3-bd0ae7af5db4'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : '03h4v9l6kfqaxftprytqbif3r4dn4mzhmhg66m2b49bb47kri9'
+        example     : '1myet8h51uulxz02p85yx6d6ed928r6eciaxlu0s35cdjdgnv9'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '6f4936cb-a575-443d-a56e-fcaf30374132'
+        example     : 'a55a3c94-264d-42ae-a660-ec31f6d8441f'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'dj51rndkas48nqt2kxef'
+        example     : 'kmpkklsccbt1zfi2xgzq'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '0d6c9946-06a1-4f1b-8e33-6c2cb7fca1db'
+        example     : '7e31cd1c-833c-448e-8eb8-275494c5ffe7'
     })
     executionId: string;
     
@@ -70,7 +70,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-28 17:55:31'
+        example     : '2020-07-28 17:58:49'
     })
     executionExecutedAt: string;
     
@@ -79,7 +79,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-29 00:21:02'
+        example     : '2020-07-28 20:12:08'
     })
     executionMonitoringStartAt: string;
     
@@ -88,7 +88,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-29 04:12:11'
+        example     : '2020-07-29 07:31:03'
     })
     executionMonitoringEndAt: string;
     
@@ -97,7 +97,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'error [input here api field description]',
-        example     : 6570199010
+        example     : 8636771614
     })
     error: number;
     
@@ -106,7 +106,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'inactive [input here api field description]',
-        example     : 7907277699
+        example     : 4292575801
     })
     inactive: number;
     
@@ -115,7 +115,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'successful [input here api field description]',
-        example     : 2865890968
+        example     : 6365025399
     })
     successful: number;
     
@@ -124,7 +124,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'stopped [input here api field description]',
-        example     : 7334057394
+        example     : 9482689658
     })
     stopped: number;
     
@@ -133,7 +133,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'unknown [input here api field description]',
-        example     : 5209053528
+        example     : 3397670045
     })
     unknown: number;
     
@@ -142,7 +142,7 @@ export class CreateChannelOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'unregistered [input here api field description]',
-        example     : 8249468145
+        example     : 8827942704
     })
     unregistered: number;
     

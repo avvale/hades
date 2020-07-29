@@ -34,20 +34,16 @@ export class BplusItSappiChannelDetail extends AggregateRoot
 {
     id: ChannelDetailId;
     tenantId: ChannelDetailTenantId;
-    tenant: AdminTenant;
     tenantCode: ChannelDetailTenantCode;
     systemId: ChannelDetailSystemId;
-    system: BplusItSappiSystem;
     systemName: ChannelDetailSystemName;
     executionId: ChannelDetailExecutionId;
-    execution: BplusItSappiExecution;
     executionType: ChannelDetailExecutionType;
     executionExecutedAt: ChannelDetailExecutionExecutedAt;
     executionMonitoringStartAt: ChannelDetailExecutionMonitoringStartAt;
     executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt;
     status: ChannelDetailStatus;
     channelHash: ChannelDetailChannelHash;
-    channelHash: BplusItSappiChannel;
     channelSapId: ChannelDetailChannelSapId;
     channelParty: ChannelDetailChannelParty;
     channelComponent: ChannelDetailChannelComponent;
