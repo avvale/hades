@@ -1,11 +1,12 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminBoundedContextModel } from '@hades/admin/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model';
 
 @Table({ modelName: 'admin_resource', freezeTableName: true })
 export class AdminResourceModel extends Model<AdminResourceModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -18,10 +19,12 @@ export class AdminResourceModel extends Model<AdminResourceModel>
         
              
         
+    @ForeignKey(() => AdminBoundedContextModel)    
+    
     
     @Column({
         field: 'bounded_context_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
@@ -38,11 +41,12 @@ export class AdminResourceModel extends Model<AdminResourceModel>
     @BelongsTo(() => AdminBoundedContextModel)
     boundedContext: AdminBoundedContextModel;
              
-        
+            
+    
     
     @Column({
         field: 'name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(255),
         
@@ -50,11 +54,12 @@ export class AdminResourceModel extends Model<AdminResourceModel>
     name: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'has_custom_fields',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
@@ -62,11 +67,12 @@ export class AdminResourceModel extends Model<AdminResourceModel>
     hasCustomFields: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'has_attachments',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
@@ -74,11 +80,12 @@ export class AdminResourceModel extends Model<AdminResourceModel>
     hasAttachments: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -86,11 +93,12 @@ export class AdminResourceModel extends Model<AdminResourceModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -98,11 +106,12 @@ export class AdminResourceModel extends Model<AdminResourceModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         

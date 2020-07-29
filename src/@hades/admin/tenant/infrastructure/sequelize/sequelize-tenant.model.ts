@@ -1,10 +1,11 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
 @Table({ modelName: 'admin_tenant', freezeTableName: true })
 export class AdminTenantModel extends Model<AdminTenantModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -16,11 +17,12 @@ export class AdminTenantModel extends Model<AdminTenantModel>
     id: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(undefined),
         
@@ -28,11 +30,12 @@ export class AdminTenantModel extends Model<AdminTenantModel>
     name: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'code',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(50),
         
@@ -40,11 +43,12 @@ export class AdminTenantModel extends Model<AdminTenantModel>
     code: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'logo',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.STRING(undefined),
         
@@ -52,11 +56,12 @@ export class AdminTenantModel extends Model<AdminTenantModel>
     logo: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'is_active',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
@@ -64,11 +69,12 @@ export class AdminTenantModel extends Model<AdminTenantModel>
     isActive: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'data',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.JSON,
         
@@ -76,11 +82,12 @@ export class AdminTenantModel extends Model<AdminTenantModel>
     data: any;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -88,11 +95,12 @@ export class AdminTenantModel extends Model<AdminTenantModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -100,11 +108,12 @@ export class AdminTenantModel extends Model<AdminTenantModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
