@@ -1,11 +1,12 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminBoundedContextModel } from '@hades/admin/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model';
 
 @Table({ modelName: 'admin_permission', freezeTableName: true })
 export class AdminPermissionModel extends Model<AdminPermissionModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -18,15 +19,16 @@ export class AdminPermissionModel extends Model<AdminPermissionModel>
         
              
         
+    @ForeignKey(() => AdminBoundedContextModel)    
+    
     
     @Column({
         field: 'bounded_context_id',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            model: AdminBoundedContextModel,
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -38,11 +40,12 @@ export class AdminPermissionModel extends Model<AdminPermissionModel>
     @BelongsTo(() => AdminBoundedContextModel)
     boundedContext: AdminBoundedContextModel;
              
-        
+            
+    
     
     @Column({
         field: 'name',
-        primaryKey: false,
+        
         allowNull: false,
         type: DataTypes.STRING(255),
         
@@ -50,11 +53,12 @@ export class AdminPermissionModel extends Model<AdminPermissionModel>
     name: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -62,11 +66,12 @@ export class AdminPermissionModel extends Model<AdminPermissionModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
@@ -74,11 +79,12 @@ export class AdminPermissionModel extends Model<AdminPermissionModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',
-        primaryKey: false,
+        
         allowNull: true,
         type: DataTypes.DATE,
         
