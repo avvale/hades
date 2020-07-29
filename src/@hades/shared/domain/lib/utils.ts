@@ -1,5 +1,6 @@
 import * as moment from 'moment';
-import * as crypto from 'crypto'; 
+import * as crypto from 'crypto';
+declare const Buffer;
 
 export class Utils
 {
@@ -14,5 +15,15 @@ export class Utils
         generator.update(data);  
         
         return generator.digest('hex');
-   }
+    }
+   
+    public static base64Encode(data: string): string
+    {
+        return Buffer.from(data).toString('base64');
+    }
+
+    public static base64Decode(data: string): string
+    {
+        return Buffer.from(data, 'base64').toString('utf-8')
+    }
 }
