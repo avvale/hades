@@ -6,7 +6,7 @@ export class UpdateResourceDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'be31694e-e0bc-405f-bb9c-c12206802ef8'
+        example     : 'f5c3a70e-8612-4d93-8db4-f7aff287d97c'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateResourceDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : 'b8f3d565-b9ed-403d-998f-26b70f67d093'
+        example     : '1b503db2-81ee-4471-9ade-b9e1fd85a745'
     })
     boundedContextId: string;
     
@@ -24,7 +24,7 @@ export class UpdateResourceDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'ianuea0mqen78rahy0iwb13chpceyhfm3usmuc8tw9zsv9q40qhjx1nz0u9mz1jg3dtq36o5rjg5rnbel1dh1vg3z9pg0shz9fbdqgio67b0vwh8t4p4bitu9tc8eyfgeuk8ejq6pizi8y8e349flnlfk291i5hflga5cq0s0rz329uf9uebullrjco254kvhyeo2wh1ry9c7l16cetej0gk0tcw2fce1q6bl3ubwy6a90ytev2xpcpe57m59sq'
+        example     : 'xanhdkwu5602ogua4talgf1oqpea73dwg5dsu7lexa8f13r017xusm1mid4814udkfkagwdq1yk202xc34myxy934dz0oyg2o77fultztd1jo3ifb88qlbk4ngeq9pekyt0pnn4e9vuuyevj26qmzutmhkyjfqhwo5o49doszcen91ggic8e46gle4pv41kgi65t0yxxc2mqmsiymek08l3cq9o04k2crgjwdm9eslnabro0p60d6s6mdfufrfc'
     })
     name: string;
     

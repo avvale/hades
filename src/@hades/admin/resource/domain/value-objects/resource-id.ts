@@ -11,6 +11,7 @@ export class ResourceId extends UuidValueObject
             name: 'ResourceId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

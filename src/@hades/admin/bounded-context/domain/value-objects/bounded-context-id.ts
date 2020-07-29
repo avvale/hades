@@ -11,6 +11,7 @@ export class BoundedContextId extends UuidValueObject
             name: 'BoundedContextId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

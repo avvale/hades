@@ -28,8 +28,7 @@ export class AdminPermissionModel extends Model<AdminPermissionModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            model: AdminBoundedContextModel,
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',

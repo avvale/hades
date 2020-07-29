@@ -6,7 +6,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'fcd0ecfb-f34a-479d-a6d0-035e412ea237'
+        example     : '90adffbc-f061-427e-873f-b06380a8cf31'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'g'
+        example     : 'z'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'image [input here api field description]',
-        example     : 'k'
+        example     : 'h'
     })
     image: string;
     
@@ -33,7 +33,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'iso6392 [input here api field description]',
-        example     : 'yh'
+        example     : 'a1'
     })
     iso6392: string;
     
@@ -42,7 +42,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'iso6393 [input here api field description]',
-        example     : '0yt'
+        example     : '1qi'
     })
     iso6393: string;
     
@@ -51,7 +51,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'ietf [input here api field description]',
-        example     : 'y5o78'
+        example     : '3au5v'
     })
     ietf: string;
     
@@ -60,7 +60,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
-        example     : 111289
+        example     : 308651
     })
     sort: number;
     
@@ -69,7 +69,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : false
+        example     : true
     })
     isActive: boolean;
     

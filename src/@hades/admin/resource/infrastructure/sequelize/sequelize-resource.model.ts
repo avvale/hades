@@ -25,7 +25,6 @@ export class AdminResourceModel extends Model<AdminResourceModel>
         allowNull: false,
         type: DataTypes.UUID,
         references: {
-            model: AdminBoundedContextModel,
             key: 'id'
         },
         onUpdate: 'CASCADE',
