@@ -10,7 +10,6 @@ aggregateProperties:
     nullable: false
   - name: tenant_id
     type: id
-    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -18,38 +17,29 @@ aggregateProperties:
     relationshipModulePath: admin/tenant
   - name: tenant_code
     type: varchar
-    primaryKey: false
     maxLength: 50
     nullable: false
   - name: version
     type: varchar
-    primaryKey: false
     nullable: false
   - name: name
     type: varchar
-    primaryKey: false
     nullable: false
   - name: environment
     type: varchar
-    primaryKey: false
     nullable: false
   - name: is_active
     type: boolean
-    primaryKey: false
     nullable: false
   - name: cancelled_at
     type: timestamp
-    primaryKey: false
     nullable: true
   - name: created_at
     type: timestamp
-    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
-    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
-    primaryKey: false
     nullable: true

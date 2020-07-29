@@ -10,7 +10,6 @@ aggregateProperties:
     nullable: false
   - name: tenant_id
     type: id
-    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -18,12 +17,10 @@ aggregateProperties:
     relationshipModulePath: admin/tenant
   - name: tenant_code
     type: varchar
-    primaryKey: false
     maxLength: 50
     nullable: false
   - name: system_id
     type: id
-    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -31,12 +28,10 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/system
   - name: system_name
     type: varchar
-    primaryKey: false
     maxLength: 20
     nullable: false
   - name: execution_id
     type: id
-    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -44,26 +39,21 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/execution
   - name: execution_type
     type: enum
-    primaryKey: false
     enumOptions:
       - SUMMARY
       - DETAIL
     nullable: false
   - name: execution_executed_at
     type: timestamp
-    primaryKey: false
     nullable: false
   - name: execution_monitoring_start_at
     type: timestamp
-    primaryKey: false
     nullable: false
   - name: execution_monitoring_end_at
     type: timestamp
-    primaryKey: false
     nullable: false
   - name: status
     type: enum
-    primaryKey: false
     enumOptions:
       - ERROR
       - INACTIVE
@@ -74,7 +64,6 @@ aggregateProperties:
     nullable: false
   - name: channel_hash
     type: char
-    primaryKey: false
     length: 40
     nullable: false
     relationship: many-to-one
@@ -83,37 +72,29 @@ aggregateProperties:
     relationshipKey: hash
   - name: channel_sap_id
     type: varchar
-    primaryKey: false
     maxLength: 50
     nullable: false
   - name: channel_party
     type: varchar
-    primaryKey: false
     maxLength: 160
     nullable: true
   - name: channel_component
     type: varchar
-    primaryKey: false
     maxLength: 160
     nullable: false
   - name: channel_name
     type: varchar
-    primaryKey: false
     maxLength: 160
     nullable: false
   - name: detail
     type: text
-    primaryKey: false
     nullable: true
   - name: created_at
     type: timestamp
-    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
-    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
-    primaryKey: false
     nullable: true

@@ -10,7 +10,6 @@ aggregateProperties:
     nullable: false
   - name: tenant_id
     type: id
-    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -18,12 +17,10 @@ aggregateProperties:
     relationshipModulePath: admin/tenant
   - name: tenant_code
     type: varchar
-    primaryKey: false
     maxLength: 50
     nullable: false
   - name: system_id
     type: id
-    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -31,12 +28,10 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/system
   - name: system_name
     type: varchar
-    primaryKey: false
     maxLength: 20
     nullable: false
   - name: channel_id
     type: id
-    primaryKey: false
     length: 36
     nullable: false
     relationship: many-to-one
@@ -44,22 +39,18 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/channel
   - name: channel_party
     type: varchar
-    primaryKey: false
     maxLength: 160
     nullable: true
   - name: channel_component
     type: varchar
-    primaryKey: false
     maxLength: 160
     nullable: false
   - name: channel_name
     type: varchar
-    primaryKey: false
     maxLength: 160
     nullable: false
   - name: flow_id
     type: id
-    primaryKey: false
     length: 36
     nullable: true
     relationship: many-to-one
@@ -67,58 +58,46 @@ aggregateProperties:
     relationshipModulePath: bplus-it-sappi/flow
   - name: flow_party
     type: varchar
-    primaryKey: false
     maxLength: 160
     nullable: true
   - name: flow_component
     type: varchar
-    primaryKey: false
     maxLength: 160
     nullable: false
   - name: flow_interface_name
     type: varchar
-    primaryKey: false
     maxLength: 160
     nullable: false
   - name: flow_interface_namespace
     type: varchar
-    primaryKey: false
     maxLength: 160
     nullable: false
   - name: version
     type: varchar
-    primaryKey: false
     maxLength: 20
     nullable: false
   - name: parameter_group
     type: varchar
-    primaryKey: false
     maxLength: 255
     nullable: true
   - name: name
     type: varchar
-    primaryKey: false
     maxLength: 320
     nullable: true
   - name: parameter_name
     type: varchar
-    primaryKey: false
     maxLength: 320
     nullable: true
   - name: parameter_value
     type: varchar
-    primaryKey: false
     maxLength: 1024
     nullable: true
   - name: created_at
     type: timestamp
-    primaryKey: false
     nullable: true
   - name: updated_at
     type: timestamp
-    primaryKey: false
     nullable: true
   - name: deleted_at
     type: timestamp
-    primaryKey: false
     nullable: true
