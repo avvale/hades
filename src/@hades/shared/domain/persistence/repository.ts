@@ -13,7 +13,7 @@ export interface IRepository<Aggregate>
     create(item: Aggregate): Promise<void>;
 
     // create a single or multiple records
-    insert(items: Aggregate[]): Promise<void>;
+    insert(items: Aggregate[], options: object): Promise<void>;
 
     // find a single record
     find(query: QueryStatementInput[]): Promise<Aggregate | null>;

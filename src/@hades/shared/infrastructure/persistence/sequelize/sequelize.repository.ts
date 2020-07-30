@@ -6,6 +6,7 @@ import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
+import { BulkCreateOption } from '@hades/shared/infrastructure/persistence/sequelize/types/shared/bulk-create-options';
 
 export abstract class SequelizeRepository<Aggregate extends AggregateBase>
 {
@@ -60,9 +61,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         }
     }
 
-    async insert(entities: Aggregate[]): Promise<void>
+    async insert(entities: Aggregate[], options: BulkCreateOption = {}): Promise<void>
     {
-        await this.repository.bulkCreate(entities.map(item => item.toDTO()));
+        await this.repository.bulkCreate(entities.map(item => item.toDTO()), options);
     }
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Aggregate> 
