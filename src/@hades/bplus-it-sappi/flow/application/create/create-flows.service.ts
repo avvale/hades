@@ -102,7 +102,7 @@ export class CreateFlowsService
         ));
         
         // insert
-        await this.repository.insert(aggregateFlows);
+        await this.repository.insert(aggregateFlows, { updateOnDuplicate: ['version'] });
 
         // create AddFlowsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

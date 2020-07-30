@@ -439,8 +439,8 @@ export interface BplusItSappiCreateFlowInput {
     folderPath?: GraphQLString;
     description?: GraphQLString;
     application?: GraphQLString;
-    isCritical: GraphQLBoolean;
-    isComplex: GraphQLBoolean;
+    isCritical?: GraphQLBoolean;
+    isComplex?: GraphQLBoolean;
     fieldGroupId?: string;
     data?: JSON;
 }
@@ -1135,8 +1135,8 @@ export interface BplusItSappiFlow {
     folderPath?: GraphQLString;
     description?: GraphQLString;
     application?: GraphQLString;
-    isCritical: GraphQLBoolean;
-    isComplex: GraphQLBoolean;
+    isCritical?: GraphQLBoolean;
+    isComplex?: GraphQLBoolean;
     fieldGroupId?: string;
     data?: JSON;
     createdAt?: GraphQLTimestamp;

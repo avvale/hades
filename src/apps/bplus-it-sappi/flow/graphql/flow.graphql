@@ -21,8 +21,8 @@ type BplusItSappiFlow
     folderPath: GraphQLString
     description: GraphQLString
     application: GraphQLString
-    isCritical: GraphQLBoolean!
-    isComplex: GraphQLBoolean!
+    isCritical: GraphQLBoolean
+    isComplex: GraphQLBoolean
     fieldGroupId: ID
     data: JSON
     createdAt: GraphQLTimestamp
@@ -52,8 +52,8 @@ input BplusItSappiCreateFlowInput
     folderPath: GraphQLString
     description: GraphQLString
     application: GraphQLString
-    isCritical: GraphQLBoolean!
-    isComplex: GraphQLBoolean!
+    isCritical: GraphQLBoolean
+    isComplex: GraphQLBoolean
     fieldGroupId: ID
     data: JSON
     

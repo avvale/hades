@@ -1,5 +1,5 @@
 import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiOperation, ApiBody } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
 
@@ -9,9 +9,9 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import { FindTenantQuery } from '@hades/admin/tenant/application/find/find-tenant.query';
 import { FindSystemQuery } from '@hades/bplus-it-sappi/system/application/find/find-system.query';
-import { CreateFlowCatalogDto } from './../dto/create-flow-catalog.dto';
+import { CreateFlowsCommand } from '@hades/bplus-it-sappi/flow/application/create/create-flows.command';
 import { Utils } from '@hades/shared/domain/lib/utils';
-
+import { CreateFlowDto } from './../../flow/dto/create-flow.dto';
  
 @ApiTags('[bplus-it-sappi] catalog/flow')
 @Controller('bplus-it-sappi/catalog/flow')
@@ -24,8 +24,9 @@ export class CreateFlowCatalogController
 
     @Post()
     @ApiOperation({ summary: 'Create or update catalog flow' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: [CreateFlowCatalogDto] })
-    async main(@Body() payload: CreateFlowCatalogDto[])
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: [CreateFlowDto] })
+    @ApiBody({ type: [CreateFlowDto] })
+    async main(@Body() payload: CreateFlowDto[])
     {
         if (!Array.isArray(payload)) throw new BadRequestException(`The payload is not an array`);
         if (payload.length === 0) throw new BadRequestException(`The payload is empty`);
@@ -56,9 +57,9 @@ export class CreateFlowCatalogController
             return {
                 id: uuidv4(),
                 hash: Utils.sha1(flow.tenantCode + flow.party + flow.component + flow.interfaceName + flow.interfaceNamespace),
-                tenantId: '',
+                tenantId: tenant.id,
                 tenantCode: flow.tenantCode,
-                systemId: '',
+                systemId: system.id,
                 systemName: flow.systemName,
                 version: flow.version,
                 scenario: flow.scenario,
@@ -75,7 +76,7 @@ export class CreateFlowCatalogController
                 application: flow.application
             }
         });
-        // this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
+        this.commandBus.dispatch(new CreateFlowsCommand(flowCatalog))
         
         return {
             statusCode: 200,

@@ -9,8 +9,8 @@ export class FlowIsCritical extends BooleanValueObject
     {
         super(value, Object.assign({ 
             name: 'FlowIsCritical',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
         }, validationRules));
     }
 }

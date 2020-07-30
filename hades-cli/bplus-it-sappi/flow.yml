@@ -90,10 +90,10 @@ aggregateProperties:
     nullable: true
   - name: is_critical
     type: boolean
-    nullable: false
+    nullable: true
   - name: is_complex
     type: boolean
-    nullable: false
+    nullable: true
   - name: field_group_id
     type: id
     length: 36

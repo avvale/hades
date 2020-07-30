@@ -17,6 +17,7 @@ import { BplusItSappiModuleControllers, BplusItSappiModuleResolvers } from './mo
 import { BplusItSappiMessageOverviewControllers, BplusItSappiMessageOverviewResolvers } from './message-overview';
 import { BplusItSappiMessageDetailControllers, BplusItSappiMessageDetailResolvers } from './message-detail';
 import { BplusItSappiSnapshotControllers, BplusItSappiSnapshotResolvers } from './snapshot';
+import { BplusItSappiCatalogControllers, BplusItSappiCatalogResolvers } from './catalog';
 
 @Module({
     imports: [
@@ -40,7 +41,8 @@ import { BplusItSappiSnapshotControllers, BplusItSappiSnapshotResolvers } from '
         ...BplusItSappiModuleControllers,
         ...BplusItSappiMessageOverviewControllers,
         ...BplusItSappiMessageDetailControllers,
-        ...BplusItSappiSnapshotControllers
+        ...BplusItSappiSnapshotControllers,
+        ...BplusItSappiCatalogControllers
     ],
     providers: [
         ...BplusItSappiHandlers,

@@ -58,8 +58,8 @@ export class UpdateFlowCommandHandler implements ICommandHandler<UpdateFlowComma
             new FlowFolderPath(command.folderPath),
             new FlowDescription(command.description),
             new FlowApplication(command.application),
-            new FlowIsCritical(command.isCritical, { undefinable: true }),
-            new FlowIsComplex(command.isComplex, { undefinable: true }),
+            new FlowIsCritical(command.isCritical),
+            new FlowIsComplex(command.isComplex),
             new FlowFieldGroupId(command.fieldGroupId),
             new FlowData(command.data),
             

@@ -6,7 +6,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'c4bb892b-4cb5-4747-bc8b-390d5d0d139c'
+        example     : '502a5f46-8674-49ff-9c7c-9c608bc06786'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '8a31e12b-018d-43e9-8d58-8746bae6b01a'
+        example     : '33b3b361-a914-4658-bc9e-d141522a506b'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'mqa3px3ni8eggdx4yroz8t8js6ank2o3m4c61h7lg84x5yuy8s'
+        example     : 'e0w4mx0bo4v3y7661kfh3fbuqe63xuzoaw5icfv0ry7i9gxzjk'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '484039ed-36fe-48ad-9862-3ee3a36c0f04'
+        example     : 'de86c386-6677-4382-b18f-7bedb33a7b09'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'jcphymx2mia1r34fm8ll'
+        example     : 'kbx51drvs0mt5l435f1l'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '656afb0e-aeb8-4710-905d-df224440e09a'
+        example     : '97409111-8a55-4be9-a414-e586b1b3b3c0'
     })
     executionId: string;
     
@@ -60,7 +60,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionType [input here api field description]',
-        example     : 'SUMMARY',
+        example     : 'DETAIL',
         enum        : ['SUMMARY','DETAIL']
     })
     executionType: string;
@@ -70,7 +70,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-29 16:21:20'
+        example     : '2020-07-29 21:07:01'
     })
     executionExecutedAt: string;
     
@@ -79,7 +79,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-29 15:32:17'
+        example     : '2020-07-29 03:54:14'
     })
     executionMonitoringStartAt: string;
     
@@ -88,7 +88,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-29 08:12:46'
+        example     : '2020-07-29 13:54:04'
     })
     executionMonitoringEndAt: string;
     
@@ -97,7 +97,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'status [input here api field description]',
-        example     : 'ERROR',
+        example     : 'STOPPED',
         enum        : ['ERROR','INACTIVE','SUCCESSFUL','STOPPED','UNKNOWN','UNREGISTERED']
     })
     status: string;
@@ -107,7 +107,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelHash [input here api field description]',
-        example     : '5ai78s19mk5sclkwpnn1i3b82gkjzn5oxrtb6463'
+        example     : 'woet9m7w3c3mmzk63n6p8o6lpsyua3n8ksldxkx1'
     })
     channelHash: string;
     
@@ -116,7 +116,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelSapId [input here api field description]',
-        example     : '2bj9kjj1cw9emq1vja38hzmluk2vitylx7ncvwr0ihsf5ecrga'
+        example     : '00555slmcm8psj5r0hbl7c8uepptuobof6xzkcr55jokn5k8wh'
     })
     channelSapId: string;
     
@@ -125,7 +125,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelParty [input here api field description]',
-        example     : 'quax5xows9mph3ydnsxje89d91l7n2gcs8d1ij29h043d7kd9c1eyomoiu3kxemf3ih6wuosgwik9ca5rn5kuh90whkh1f49hiqgc6sre8mrfdmayj4letmz7532hnzn5qed6om2qnbgaz0hagse3nmce8koaguq'
+        example     : 'yyxhk8lvfz6iyrujvmupcwa7u8o88bd5m8ehbnc9u7exgiqm602baymap8v1h37gt70pfn87q3hvmt4o16znbpzv2r7fymp0gf38o4bf2zsa6867d9e3wmflw6zwml1eh9qvsdeq6nwg2sj0fruw52i40kk1to7f'
     })
     channelParty: string;
     
@@ -134,7 +134,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelComponent [input here api field description]',
-        example     : 'y44qvo5hsrqvhp3u2j76kly42rzvp2hfhmfz1a1il0yk2yjlflurz8ncptx0vn9z239avdrv2vvwkxbfmh8whdjftm1xeszqx8ltbgnnymuj99bq1xqe34ggxh0fhsv7s02davol91c7lsv3ijerixyzp03oh1f9'
+        example     : '4h0t2yybd4rnyivdk8n5v4gfxbgq1piy8z2bj6ja4i2n9yujwsjlsupmvurv3yy51qt0w4efocaqque9cxsqa62o15xuboqjrft1fkh60np92lc3wrp9nkzbf90yaqil2tn3ubivcwjr3i6881c4tae70xmbxbwc'
     })
     channelComponent: string;
     
@@ -143,7 +143,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'channelName [input here api field description]',
-        example     : 'y4xduuwgk45l24q7yytwf7mbzy1j9tbmvtpgx8fkeg7bx1vh4uoo37fgnp8s3huxsksj58giwh1nippqjwdh50wldeaj0731aiua9y6slopkl3y2vmyep73a35hfsfy8yvy92pry6js00wh6xvx05n77v3ir4ls3'
+        example     : 'ufkabtj4911hoets7x9j4u03259lnx2q9qyw9hu8vd5wknn4rbl8icsmk0wu2xd3suiwirh0uvvaxm2waxukp2mpvl1qpj21a59dplwflechv4d9qc05zodkgy2yu861bc8rnj9iyram9jxxbi5zmea259dsjmrt'
     })
     channelName: string;
     
@@ -152,7 +152,7 @@ export class UpdateChannelDetailDto
     @ApiProperty({
         type        : String,
         description : 'detail [input here api field description]',
-        example     : 'Repudiandae vitae saepe harum. Est molestiae mollitia recusandae voluptate omnis. Ut officiis aliquam iusto quo iure quia nesciunt. Suscipit sed et aliquid voluptate.'
+        example     : 'Debitis omnis dolores quisquam. Quia quo perferendis maxime ipsa. Fuga sapiente et enim placeat cupiditate eum. Incidunt dolore optio exercitationem libero a harum consequatur sit. Illo omnis et ipsam numquam corrupti tempore.'
     })
     detail: string;
     

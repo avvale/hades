@@ -21,8 +21,8 @@ export class CreateFlowsCommand
             folderPath?: string,
             description?: string,
             application?: string,
-            isCritical: boolean,
-            isComplex: boolean,
+            isCritical?: boolean,
+            isComplex?: boolean,
             fieldGroupId?: string,
             data?: any,
             

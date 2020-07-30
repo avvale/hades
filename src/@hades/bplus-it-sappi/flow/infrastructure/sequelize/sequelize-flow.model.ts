@@ -277,7 +277,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     @Column({
         field: 'is_critical',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.BOOLEAN,
         
     })
@@ -290,7 +290,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     @Column({
         field: 'is_complex',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.BOOLEAN,
         
     })
