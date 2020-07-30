@@ -76,7 +76,7 @@ export class CreateFlowCatalogController
                 application: flow.application
             }
         });
-        this.commandBus.dispatch(new CreateFlowsCommand(flowCatalog))
+        await this.commandBus.dispatch(new CreateFlowsCommand(flowCatalog))
         
         return {
             statusCode: 200,
