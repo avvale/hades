@@ -46,7 +46,7 @@ export class UpdateFlowCommandHandler implements ICommandHandler<UpdateFlowComma
             new FlowSystemId(command.systemId, { undefinable: true }),
             new FlowSystemName(command.systemName, { undefinable: true }),
             new FlowVersion(command.version, { undefinable: true }),
-            new FlowScenario(command.scenario, { undefinable: true }),
+            new FlowScenario(command.scenario),
             new FlowParty(command.party),
             new FlowComponent(command.component, { undefinable: true }),
             new FlowInterfaceName(command.interfaceName, { undefinable: true }),

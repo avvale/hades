@@ -16,7 +16,7 @@ export abstract class IMessageOverviewRepository implements IRepository<BplusItS
     abstract async create(messageOverview: BplusItSappiMessageOverview): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(messagesOverview: BplusItSappiMessageOverview[]): Promise<void>;
+    abstract async insert(messagesOverview: BplusItSappiMessageOverview[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<BplusItSappiMessageOverview | null>;

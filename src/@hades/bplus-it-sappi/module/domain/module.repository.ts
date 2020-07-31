@@ -16,7 +16,7 @@ export abstract class IModuleRepository implements IRepository<BplusItSappiModul
     abstract async create(module: BplusItSappiModule): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(modules: BplusItSappiModule[]): Promise<void>;
+    abstract async insert(modules: BplusItSappiModule[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<BplusItSappiModule | null>;

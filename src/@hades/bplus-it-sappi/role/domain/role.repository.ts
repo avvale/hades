@@ -16,7 +16,7 @@ export abstract class IRoleRepository implements IRepository<BplusItSappiRole>
     abstract async create(role: BplusItSappiRole): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(roles: BplusItSappiRole[]): Promise<void>;
+    abstract async insert(roles: BplusItSappiRole[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<BplusItSappiRole | null>;

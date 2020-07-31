@@ -44,7 +44,7 @@ aggregateProperties:
   - name: scenario
     type: varchar
     maxLength: 60
-    nullable: false
+    nullable: true
   - name: party
     type: varchar
     maxLength: 160

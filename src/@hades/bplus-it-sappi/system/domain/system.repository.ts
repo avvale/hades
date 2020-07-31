@@ -16,7 +16,7 @@ export abstract class ISystemRepository implements IRepository<BplusItSappiSyste
     abstract async create(system: BplusItSappiSystem): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(systems: BplusItSappiSystem[]): Promise<void>;
+    abstract async insert(systems: BplusItSappiSystem[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<BplusItSappiSystem | null>;

@@ -16,7 +16,7 @@ export abstract class IDataLakeRepository implements IRepository<BplusItSappiDat
     abstract async create(dataLake: BplusItSappiDataLake): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(dataLakes: BplusItSappiDataLake[]): Promise<void>;
+    abstract async insert(dataLakes: BplusItSappiDataLake[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<BplusItSappiDataLake | null>;

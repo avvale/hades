@@ -16,7 +16,7 @@ export abstract class IContactRepository implements IRepository<BplusItSappiCont
     abstract async create(contact: BplusItSappiContact): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(contacts: BplusItSappiContact[]): Promise<void>;
+    abstract async insert(contacts: BplusItSappiContact[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<BplusItSappiContact | null>;

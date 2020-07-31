@@ -9,7 +9,7 @@ export class CreateFlowsCommand
             systemId: string,
             systemName: string,
             version: string,
-            scenario: string,
+            scenario?: string,
             party?: string,
             component: string,
             interfaceName: string,

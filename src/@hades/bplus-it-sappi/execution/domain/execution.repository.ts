@@ -16,7 +16,7 @@ export abstract class IExecutionRepository implements IRepository<BplusItSappiEx
     abstract async create(execution: BplusItSappiExecution): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(executions: BplusItSappiExecution[]): Promise<void>;
+    abstract async insert(executions: BplusItSappiExecution[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<BplusItSappiExecution | null>;

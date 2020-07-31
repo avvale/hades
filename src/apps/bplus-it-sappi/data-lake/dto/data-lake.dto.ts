@@ -6,7 +6,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '244c2b66-0b57-4ad9-a726-77fe5d84b9c1'
+        example     : 'de62920f-e158-4b9d-9eca-0e29b758ab56'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '0a51c3bd-212f-4088-8606-28f3324b6995'
+        example     : '4e20aa29-4526-444c-a1a4-1977bb855144'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : 'cdf189f8-6d6b-437f-9d6c-0e63eaa7492d'
+        example     : '6cf13f7b-e530-427a-bc63-2a3b6f520bbf'
     })
     executionId: string;
     
@@ -33,7 +33,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'c0r8lur1xh0bj520epj3n41t4bzx1j1avy81sc36wnsbw1aoyi'
+        example     : 'f3olnjswzelluq390r6ah0a9idt1uzjptm7vfd8m7zrjaeg3n9'
     })
     tenantCode: string;
     
@@ -51,7 +51,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-29 16:35:36'
+        example     : '2020-07-31 00:00:10'
     })
     createdAt: string;
     
@@ -60,7 +60,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-29 04:37:27'
+        example     : '2020-07-30 15:39:22'
     })
     updatedAt: string;
     
@@ -69,7 +69,7 @@ export class DataLakeDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-29 22:10:41'
+        example     : '2020-07-31 12:55:36'
     })
     deletedAt: string;
     

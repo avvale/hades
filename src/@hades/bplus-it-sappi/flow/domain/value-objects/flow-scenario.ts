@@ -9,8 +9,8 @@ export class FlowScenario extends StringValueObject
     {
         super(value, Object.assign({ 
             name: 'FlowScenario',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
             maxLength: 60,            
         }, validationRules));
     }

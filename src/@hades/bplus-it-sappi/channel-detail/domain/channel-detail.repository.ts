@@ -16,7 +16,7 @@ export abstract class IChannelDetailRepository implements IRepository<BplusItSap
     abstract async create(channelDetail: BplusItSappiChannelDetail): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(channelsDetail: BplusItSappiChannelDetail[]): Promise<void>;
+    abstract async insert(channelsDetail: BplusItSappiChannelDetail[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<BplusItSappiChannelDetail | null>;

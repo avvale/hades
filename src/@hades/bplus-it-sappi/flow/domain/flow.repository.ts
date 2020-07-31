@@ -16,7 +16,7 @@ export abstract class IFlowRepository implements IRepository<BplusItSappiFlow>
     abstract async create(flow: BplusItSappiFlow): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(flows: BplusItSappiFlow[], options: object): Promise<void>;
+    abstract async insert(flows: BplusItSappiFlow[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<BplusItSappiFlow | null>;

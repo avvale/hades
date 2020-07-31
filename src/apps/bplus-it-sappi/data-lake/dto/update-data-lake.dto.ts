@@ -6,7 +6,7 @@ export class UpdateDataLakeDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '244c2b66-0b57-4ad9-a726-77fe5d84b9c1'
+        example     : 'de62920f-e158-4b9d-9eca-0e29b758ab56'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateDataLakeDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '0a51c3bd-212f-4088-8606-28f3324b6995'
+        example     : '4e20aa29-4526-444c-a1a4-1977bb855144'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateDataLakeDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : 'cdf189f8-6d6b-437f-9d6c-0e63eaa7492d'
+        example     : '6cf13f7b-e530-427a-bc63-2a3b6f520bbf'
     })
     executionId: string;
     
@@ -33,7 +33,7 @@ export class UpdateDataLakeDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'o5q05y53itjqgbtjdxcqet9rwhn27mv7w73vhvozfjtdrjezbh'
+        example     : '9twjkppj8nvmb2c2llypib1g2ve3lm8swb66qn9jj7qkyq868f'
     })
     tenantCode: string;
     

@@ -121,7 +121,7 @@ export class BplusItSappiFlowModel extends Model<BplusItSappiFlowModel>
     @Column({
         field: 'scenario',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(60),
         
     })

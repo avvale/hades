@@ -427,7 +427,7 @@ export interface BplusItSappiCreateFlowInput {
     systemId: string;
     systemName: GraphQLString;
     version: GraphQLString;
-    scenario: GraphQLString;
+    scenario?: GraphQLString;
     party?: GraphQLString;
     component: GraphQLString;
     interfaceName: GraphQLString;
@@ -1123,7 +1123,7 @@ export interface BplusItSappiFlow {
     systemId: string;
     systemName: GraphQLString;
     version: GraphQLString;
-    scenario: GraphQLString;
+    scenario?: GraphQLString;
     party?: GraphQLString;
     component: GraphQLString;
     interfaceName: GraphQLString;

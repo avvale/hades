@@ -16,7 +16,7 @@ export abstract class IJobDetailRepository implements IRepository<BplusItSappiJo
     abstract async create(jobDetail: BplusItSappiJobDetail): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(jobsDetail: BplusItSappiJobDetail[]): Promise<void>;
+    abstract async insert(jobsDetail: BplusItSappiJobDetail[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<BplusItSappiJobDetail | null>;
