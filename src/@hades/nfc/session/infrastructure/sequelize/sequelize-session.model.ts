@@ -1,11 +1,12 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { NfcTagModel } from '@hades/nfc/tag/infrastructure/sequelize/sequelize-tag.model';
 
 @Table({ modelName: 'nfc_session', freezeTableName: true })
 export class NfcSessionModel extends Model<NfcSessionModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -17,7 +18,8 @@ export class NfcSessionModel extends Model<NfcSessionModel>
     id: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'ip',
@@ -30,6 +32,8 @@ export class NfcSessionModel extends Model<NfcSessionModel>
         
              
         
+    @ForeignKey(() => NfcTagModel)    
+    
     
     @Column({
         field: 'tag_id',
@@ -37,8 +41,7 @@ export class NfcSessionModel extends Model<NfcSessionModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            model: NfcTagModel,
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -46,11 +49,9 @@ export class NfcSessionModel extends Model<NfcSessionModel>
     })
     tagId: string;
         
-    
-    @BelongsTo(() => NfcTagModel)
-    tag: NfcTagModel;
              
-        
+            
+    
     
     @Column({
         field: 'uid',
@@ -62,7 +63,8 @@ export class NfcSessionModel extends Model<NfcSessionModel>
     uid: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'counter',
@@ -74,7 +76,8 @@ export class NfcSessionModel extends Model<NfcSessionModel>
     counter: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'expired_at',
@@ -86,7 +89,8 @@ export class NfcSessionModel extends Model<NfcSessionModel>
     expiredAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -98,7 +102,8 @@ export class NfcSessionModel extends Model<NfcSessionModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -110,7 +115,8 @@ export class NfcSessionModel extends Model<NfcSessionModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

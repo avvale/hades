@@ -6,7 +6,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '8c6289c8-867f-4118-94f2-c6fc1fcc12e0'
+        example     : 'b1020d1d-0ff7-423d-a233-6bf4d4a14b88'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'ip [input here api field description]',
-        example     : 'cuh8cna6tcd2eoq'
+        example     : '50yhm7kw0q0wxmj'
     })
     ip: string;
     
@@ -24,7 +24,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'tagId [input here api field description]',
-        example     : 'e7600155-7e11-4dcc-bccf-52b0d13b9ccd'
+        example     : 'c3e53abc-9041-4dc5-b118-1243430c03a4'
     })
     tagId: string;
     
@@ -33,7 +33,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'uid [input here api field description]',
-        example     : 'l54xs1uwdq90s821akmfdxs3hst069fausfi7ngkv5r4bgljtgkf6iaic9a2mayv'
+        example     : 'up4lkb5tn7go7eqt2i2q0ex3th7vq9fnczat13w3esgykuq56dp0c8ofoihyjr1l'
     })
     uid: string;
     
@@ -42,7 +42,7 @@ export class SessionDto
     @ApiProperty({
         type        : Number,
         description : 'counter [input here api field description]',
-        example     : 359938
+        example     : 284054
     })
     counter: number;
     
@@ -51,7 +51,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'expiredAt [input here api field description]',
-        example     : '2020-07-28 15:22:39'
+        example     : '2020-08-03 17:27:39'
     })
     expiredAt: string;
     
@@ -60,7 +60,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-28 22:22:56'
+        example     : '2020-08-03 17:46:26'
     })
     createdAt: string;
     
@@ -69,7 +69,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-29 05:24:22'
+        example     : '2020-08-03 17:56:10'
     })
     updatedAt: string;
     
@@ -78,7 +78,7 @@ export class SessionDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-28 23:32:36'
+        example     : '2020-08-03 14:23:14'
     })
     deletedAt: string;
     

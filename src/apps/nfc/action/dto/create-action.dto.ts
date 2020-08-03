@@ -6,7 +6,7 @@ export class CreateActionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'ee7fd538-50e8-4cc3-b7ac-5fe18e396ee0'
+        example     : 'c8c8ffb7-a2f6-40e5-9510-780dcefd036e'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateActionDto
     @ApiProperty({
         type        : String,
         description : 'tagId [input here api field description]',
-        example     : 'b21327e5-d59d-4392-8109-3415bf7f4f80'
+        example     : '2ff08fc5-1866-4a56-9d0d-39383d9c4e38'
     })
     tagId: string;
     
@@ -34,7 +34,7 @@ export class CreateActionDto
     @ApiProperty({
         type        : String,
         description : 'sectionId [input here api field description]',
-        example     : '02ebdb92-d2a2-4f32-92a8-1ee141200665'
+        example     : '5a75015f-af05-4611-b047-7bd15e670544'
     })
     sectionId: string;
     

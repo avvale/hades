@@ -1,11 +1,12 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { NfcTagModel } from '@hades/nfc/tag/infrastructure/sequelize/sequelize-tag.model';
 
 @Table({ modelName: 'nfc_action', freezeTableName: true })
 export class NfcActionModel extends Model<NfcActionModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -18,6 +19,8 @@ export class NfcActionModel extends Model<NfcActionModel>
         
              
         
+    @ForeignKey(() => NfcTagModel)    
+    
     
     @Column({
         field: 'tag_id',
@@ -25,8 +28,7 @@ export class NfcActionModel extends Model<NfcActionModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            model: NfcTagModel,
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -34,11 +36,9 @@ export class NfcActionModel extends Model<NfcActionModel>
     })
     tagId: string;
         
-    
-    @BelongsTo(() => NfcTagModel)
-    tag: NfcTagModel;
              
-        
+            
+    
     
     @Column({
         field: 'type',
@@ -50,7 +50,8 @@ export class NfcActionModel extends Model<NfcActionModel>
     type: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'section_id',
@@ -62,7 +63,8 @@ export class NfcActionModel extends Model<NfcActionModel>
     sectionId: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'data',
@@ -74,7 +76,8 @@ export class NfcActionModel extends Model<NfcActionModel>
     data: any;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -86,7 +89,8 @@ export class NfcActionModel extends Model<NfcActionModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -98,7 +102,8 @@ export class NfcActionModel extends Model<NfcActionModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

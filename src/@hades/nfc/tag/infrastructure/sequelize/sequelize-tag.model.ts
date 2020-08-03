@@ -1,11 +1,12 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 
 @Table({ modelName: 'nfc_tag', freezeTableName: true })
 export class NfcTagModel extends Model<NfcTagModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -17,7 +18,8 @@ export class NfcTagModel extends Model<NfcTagModel>
     id: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'code',
@@ -30,6 +32,8 @@ export class NfcTagModel extends Model<NfcTagModel>
         
              
         
+    @ForeignKey(() => AdminTenantModel)    
+    
     
     @Column({
         field: 'tenant_id',
@@ -37,8 +41,7 @@ export class NfcTagModel extends Model<NfcTagModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            model: AdminTenantModel,
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -46,11 +49,9 @@ export class NfcTagModel extends Model<NfcTagModel>
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
-        
+            
+    
     
     @Column({
         field: 'tenant_code',
@@ -62,7 +63,8 @@ export class NfcTagModel extends Model<NfcTagModel>
     tenantCode: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'url_base',
@@ -74,7 +76,8 @@ export class NfcTagModel extends Model<NfcTagModel>
     urlBase: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'params',
@@ -86,7 +89,8 @@ export class NfcTagModel extends Model<NfcTagModel>
     params: any;
         
              
-        
+            
+    
     
     @Column({
         field: 'offset',
@@ -98,7 +102,8 @@ export class NfcTagModel extends Model<NfcTagModel>
     offset: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'is_session_required',
@@ -110,7 +115,8 @@ export class NfcTagModel extends Model<NfcTagModel>
     isSessionRequired: boolean;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -122,7 +128,8 @@ export class NfcTagModel extends Model<NfcTagModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -134,7 +141,8 @@ export class NfcTagModel extends Model<NfcTagModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

@@ -16,7 +16,7 @@ export abstract class ISessionRepository implements IRepository<NfcSession>
     abstract async create(session: NfcSession): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(sessions: NfcSession[]): Promise<void>;
+    abstract async insert(sessions: NfcSession[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<NfcSession | null>;

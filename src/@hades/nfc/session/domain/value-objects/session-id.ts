@@ -11,6 +11,7 @@ export class SessionId extends UuidValueObject
             name: 'SessionId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

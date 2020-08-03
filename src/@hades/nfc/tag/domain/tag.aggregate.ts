@@ -23,7 +23,6 @@ export class NfcTag extends AggregateRoot
     id: TagId;
     code: TagCode;
     tenantId: TagTenantId;
-    tenant: AdminTenant;
     tenantCode: TagTenantCode;
     urlBase: TagUrlBase;
     params: TagParams;

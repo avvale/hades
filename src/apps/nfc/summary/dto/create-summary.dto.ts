@@ -6,7 +6,7 @@ export class CreateSummaryDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '4a588db1-5149-466c-85aa-e52a60d6e35b'
+        example     : '47ab947e-e34c-4a41-8c1f-553b00b5e074'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateSummaryDto
     @ApiProperty({
         type        : String,
         description : 'tagId [input here api field description]',
-        example     : '4e16d9fd-085d-49a1-9974-0783d41f9f11'
+        example     : 'd9ccf76c-1368-4705-94cb-c26a91976043'
     })
     tagId: string;
     
@@ -24,7 +24,7 @@ export class CreateSummaryDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c'
+        example     : 'df4da993-53ab-4140-9aea-693b81839dcb'
     })
     tenantId: string;
     
@@ -33,7 +33,7 @@ export class CreateSummaryDto
     @ApiProperty({
         type        : String,
         description : 'accessAt [input here api field description]',
-        example     : '2020-07-29 07:57:14'
+        example     : '2020-08-03 04:50:15'
     })
     accessAt: string;
     
@@ -42,7 +42,7 @@ export class CreateSummaryDto
     @ApiProperty({
         type        : Number,
         description : 'counter [input here api field description]',
-        example     : 8185513962
+        example     : 2842099503
     })
     counter: number;
     

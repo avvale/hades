@@ -6,7 +6,7 @@ export class CreateSessionDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '8c6289c8-867f-4118-94f2-c6fc1fcc12e0'
+        example     : 'b1020d1d-0ff7-423d-a233-6bf4d4a14b88'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateSessionDto
     @ApiProperty({
         type        : String,
         description : 'ip [input here api field description]',
-        example     : '8hfa71grqlu0hly'
+        example     : '9x1f04q6fo42jih'
     })
     ip: string;
     
@@ -24,7 +24,7 @@ export class CreateSessionDto
     @ApiProperty({
         type        : String,
         description : 'tagId [input here api field description]',
-        example     : 'e7600155-7e11-4dcc-bccf-52b0d13b9ccd'
+        example     : 'c3e53abc-9041-4dc5-b118-1243430c03a4'
     })
     tagId: string;
     
@@ -33,7 +33,7 @@ export class CreateSessionDto
     @ApiProperty({
         type        : String,
         description : 'uid [input here api field description]',
-        example     : '1vfprlkz5gmkg5mw65amtcllb4ry8w3kycqi3zv5gedr9p4zrcgnm888cqwckc71'
+        example     : 'n4nm1jy4avdi2e14t672n9ftyaxxgmfofpj34ro5wc2raep347lkx2j9gif13m2i'
     })
     uid: string;
     
@@ -42,7 +42,7 @@ export class CreateSessionDto
     @ApiProperty({
         type        : Number,
         description : 'counter [input here api field description]',
-        example     : 272134
+        example     : 260291
     })
     counter: number;
     
@@ -51,7 +51,7 @@ export class CreateSessionDto
     @ApiProperty({
         type        : String,
         description : 'expiredAt [input here api field description]',
-        example     : '2020-07-28 23:49:21'
+        example     : '2020-08-02 20:22:59'
     })
     expiredAt: string;
     

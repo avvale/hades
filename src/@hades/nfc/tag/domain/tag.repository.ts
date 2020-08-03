@@ -16,7 +16,7 @@ export abstract class ITagRepository implements IRepository<NfcTag>
     abstract async create(tag: NfcTag): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(tags: NfcTag[]): Promise<void>;
+    abstract async insert(tags: NfcTag[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<NfcTag | null>;

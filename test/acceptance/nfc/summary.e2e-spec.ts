@@ -68,10 +68,10 @@ describe('summary', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-29 11:59:42',
-                counter: 7261743801,
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-03 01:11:37',
+                counter: 1698749643,
             })
             .expect(400)
             .then(res => {
@@ -86,10 +86,10 @@ describe('summary', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-29 03:35:46',
-                counter: 5643186802,
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-03 05:23:26',
+                counter: 9085701527,
             })
             .expect(400)
             .then(res => {
@@ -103,11 +103,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
                 tagId: null,
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-29 08:11:05',
-                counter: 6646205102,
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-03 04:19:51',
+                counter: 3588776676,
             })
             .expect(400)
             .then(res => {
@@ -121,11 +121,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
                 
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-29 06:35:35',
-                counter: 2995750307,
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-03 18:16:01',
+                counter: 1761783544,
             })
             .expect(400)
             .then(res => {
@@ -139,11 +139,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
                 tenantId: null,
-                accessAt: '2020-07-29 05:54:02',
-                counter: 8819425996,
+                accessAt: '2020-08-03 00:40:29',
+                counter: 2663177138,
             })
             .expect(400)
             .then(res => {
@@ -157,11 +157,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
                 
-                accessAt: '2020-07-28 21:14:40',
-                counter: 1830365714,
+                accessAt: '2020-08-03 02:30:04',
+                counter: 5855773236,
             })
             .expect(400)
             .then(res => {
@@ -175,11 +175,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
                 accessAt: null,
-                counter: 5438522393,
+                counter: 7498816613,
             })
             .expect(400)
             .then(res => {
@@ -193,11 +193,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
                 
-                counter: 8599777133,
+                counter: 7507240285,
             })
             .expect(400)
             .then(res => {
@@ -211,10 +211,10 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-29 01:47:25',
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-03 04:44:59',
                 counter: null,
             })
             .expect(400)
@@ -229,10 +229,10 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-29 02:25:07',
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-02 20:07:14',
                 
             })
             .expect(400)
@@ -249,11 +249,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: 'uhr6jap5wjbgp62znf2d4cfie6j2dyi8e5faf',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-28 19:20:27',
-                counter: 1314343826,
+                id: '7d8opdhy2oliup1g7lboomznwkw2213ci627l',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-02 21:19:49',
+                counter: 9321513694,
             })
             .expect(400)
             .then(res => {
@@ -267,11 +267,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: 'gxmkml6vs7uym2tmz64brk6l0ygzhnku5wy3k',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-29 08:45:59',
-                counter: 7768632838,
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'ykgeydjmz0xjxydys1e2nzn43is3ffxxwaf2y',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-03 05:37:38',
+                counter: 3087364184,
             })
             .expect(400)
             .then(res => {
@@ -285,11 +285,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'etfhr98884rfd15cxfkxq3lhwdg0s9hffh4qm',
-                accessAt: '2020-07-28 17:54:35',
-                counter: 3475610851,
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'jsdh2dbys6yji6de35nhldnt3aexsdgpunwpn',
+                accessAt: '2020-08-03 16:19:05',
+                counter: 7411527089,
             })
             .expect(400)
             .then(res => {
@@ -305,11 +305,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-28 20:33:04',
-                counter: 35058867703,
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-03 10:08:52',
+                counter: 83180268138,
             })
             .expect(400)
             .then(res => {
@@ -329,10 +329,10 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-28 13:41:24',
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-03 03:34:55',
                 counter: -9,
             })
             .expect(400)
@@ -353,11 +353,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
                 accessAt: 'XXXXXXXX',
-                counter: 2228362829,
+                counter: 9936174792,
             })
             .expect(400)
             .then(res => {
@@ -372,11 +372,11 @@ describe('summary', () =>
             .post('/nfc/summary')
             .set('Accept', 'application/json')
             .send({
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-28 16:49:08',
-                counter: 5455196494,
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-03 03:34:32',
+                counter: 4302000412,
             })
             .expect(201);
     });
@@ -417,7 +417,7 @@ describe('summary', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '00000000-0000-0000-0000-000000000000'
+                        value   : 'c1a7049c-50bb-4fc4-80a8-6c4b725496b7'
                     }
                 ]
             })
@@ -435,18 +435,18 @@ describe('summary', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '4a588db1-5149-466c-85aa-e52a60d6e35b'
+                        value   : '47ab947e-e34c-4a41-8c1f-553b00b5e074'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '4a588db1-5149-466c-85aa-e52a60d6e35b'));
+            .expect(repository.collectionResponse.find(item => item.id === '47ab947e-e34c-4a41-8c1f-553b00b5e074'));
     });
 
     test(`/REST:GET nfc/summary/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/nfc/summary/00000000-0000-0000-0000-000000000000')
+            .get('/nfc/summary/17aed0ed-d36e-4b60-82f0-e7c615c7f3e1')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -454,10 +454,10 @@ describe('summary', () =>
     test(`/REST:GET nfc/summary/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/nfc/summary/4a588db1-5149-466c-85aa-e52a60d6e35b')
+            .get('/nfc/summary/47ab947e-e34c-4a41-8c1f-553b00b5e074')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '4a588db1-5149-466c-85aa-e52a60d6e35b'));
+            .expect(repository.collectionResponse.find(e => e.id === '47ab947e-e34c-4a41-8c1f-553b00b5e074'));
     });
 
     test(`/REST:GET nfc/summaries`, () => 
@@ -476,11 +476,11 @@ describe('summary', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'ea4b2b18-943c-495c-8c99-14a1402108ba',
-                tagId: 'cd484004-7a6c-4f72-b541-dee205bff0f0',
-                tenantId: '52e2385e-e14f-418c-9c58-f0d2f16eeacc',
-                accessAt: '2020-07-28 20:07:36',
-                counter: 6063670299,
+                id: '16de539e-cded-4c5b-bbdd-33bba1d21250',
+                tagId: '8303aee0-b228-447d-82dd-7619134f28c9',
+                tenantId: '995f2e9f-c9dd-4691-9b1c-c04aa69e3659',
+                accessAt: '2020-08-03 00:55:21',
+                counter: 4568031905,
             })
             .expect(404);
     });
@@ -492,20 +492,20 @@ describe('summary', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                accessAt: '2020-07-28 21:28:12',
-                counter: 9134483378,
+                id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                accessAt: '2020-08-03 13:34:34',
+                counter: 8990695325,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '4a588db1-5149-466c-85aa-e52a60d6e35b'));
+            .expect(repository.collectionResponse.find(e => e.id === '47ab947e-e34c-4a41-8c1f-553b00b5e074'));
     });
 
     test(`/REST:DELETE nfc/summary/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/nfc/summary/00000000-0000-0000-0000-000000000000')
+            .delete('/nfc/summary/4a4c5905-6e92-45cc-8e0a-1aaeef838feb')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -513,7 +513,7 @@ describe('summary', () =>
     test(`/REST:DELETE nfc/summary/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/nfc/summary/4a588db1-5149-466c-85aa-e52a60d6e35b')
+            .delete('/nfc/summary/47ab947e-e34c-4a41-8c1f-553b00b5e074')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -574,17 +574,17 @@ describe('summary', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'd0f4b531-619f-48e9-9960-7dffe1717f08',
-                        tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                        tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                        accessAt: '2020-07-28 21:35:06',
-                        counter: 2690725387,
+                        id: '39c3843d-73f2-45ce-9274-06421221ceba',
+                        tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                        tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                        accessAt: '2020-08-03 10:54:03',
+                        counter: 8594251431,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcCreateSummary).toHaveProperty('id', 'd0f4b531-619f-48e9-9960-7dffe1717f08');
+                expect(res.body.data.nfcCreateSummary).toHaveProperty('id', '39c3843d-73f2-45ce-9274-06421221ceba');
             });
     });
 
@@ -653,7 +653,7 @@ describe('summary', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '00000000-0000-0000-0000-000000000000'
+                            value   : 'af4c192f-a793-42d7-8efd-5f8d62580040'
                         }
                     ]
                 }
@@ -693,14 +693,14 @@ describe('summary', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '4a588db1-5149-466c-85aa-e52a60d6e35b'
+                            value   : '47ab947e-e34c-4a41-8c1f-553b00b5e074'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindSummary.id).toStrictEqual('4a588db1-5149-466c-85aa-e52a60d6e35b');
+                expect(res.body.data.nfcFindSummary.id).toStrictEqual('47ab947e-e34c-4a41-8c1f-553b00b5e074');
             });
     });
 
@@ -726,7 +726,7 @@ describe('summary', () =>
                     }
                 `,
                 variables: {
-                    id: '00000000-0000-0000-0000-000000000000'
+                    id: '7333d400-1353-4fe8-b4f2-b298741e8c3c'
                 }
             })
             .expect(200)
@@ -759,12 +759,12 @@ describe('summary', () =>
                     }
                 `,
                 variables: {
-                    id: '4a588db1-5149-466c-85aa-e52a60d6e35b'
+                    id: '47ab947e-e34c-4a41-8c1f-553b00b5e074'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcFindSummaryById.id).toStrictEqual('4a588db1-5149-466c-85aa-e52a60d6e35b');
+                expect(res.body.data.nfcFindSummaryById.id).toStrictEqual('47ab947e-e34c-4a41-8c1f-553b00b5e074');
             });
     });
 
@@ -824,11 +824,11 @@ describe('summary', () =>
                 variables: {
                     payload: {
                         
-                        id: '3441c352-38ad-4a0c-9129-c4bc8c1142db',
-                        tagId: '702263ee-adb9-4139-91fd-334f073e772a',
-                        tenantId: '629de35c-6ca2-4c99-bf16-a616e570b206',
-                        accessAt: '2020-07-29 11:01:01',
-                        counter: 9313836464,
+                        id: 'eadc3513-ba7e-4e7f-b82a-57f8cb32a79a',
+                        tagId: 'f002d289-92ab-4bd8-b402-1850c311a961',
+                        tenantId: '64540021-89a7-4e57-8092-42ede2521e87',
+                        accessAt: '2020-08-02 23:21:12',
+                        counter: 7175797609,
                     }
                 }
             })
@@ -864,17 +864,17 @@ describe('summary', () =>
                 variables: {
                     payload: {
                         
-                        id: '4a588db1-5149-466c-85aa-e52a60d6e35b',
-                        tagId: '4e16d9fd-085d-49a1-9974-0783d41f9f11',
-                        tenantId: 'e2f886d9-7cbd-4c9d-99b0-070d84bdc09c',
-                        accessAt: '2020-07-29 03:52:04',
-                        counter: 8790925630,
+                        id: '47ab947e-e34c-4a41-8c1f-553b00b5e074',
+                        tagId: 'd9ccf76c-1368-4705-94cb-c26a91976043',
+                        tenantId: 'df4da993-53ab-4140-9aea-693b81839dcb',
+                        accessAt: '2020-08-03 00:11:37',
+                        counter: 5754589850,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcUpdateSummary.id).toStrictEqual('4a588db1-5149-466c-85aa-e52a60d6e35b');
+                expect(res.body.data.nfcUpdateSummary.id).toStrictEqual('47ab947e-e34c-4a41-8c1f-553b00b5e074');
             });
     });
 
@@ -900,7 +900,7 @@ describe('summary', () =>
                     }
                 `,
                 variables: {
-                    id: '00000000-0000-0000-0000-000000000000'
+                    id: '3bede51f-2fcb-4414-a945-417fcee6cba9'
                 }
             })
             .expect(200)
@@ -933,12 +933,12 @@ describe('summary', () =>
                     }
                 `,
                 variables: {
-                    id: '4a588db1-5149-466c-85aa-e52a60d6e35b'
+                    id: '47ab947e-e34c-4a41-8c1f-553b00b5e074'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.nfcDeleteSummaryById.id).toStrictEqual('4a588db1-5149-466c-85aa-e52a60d6e35b');
+                expect(res.body.data.nfcDeleteSummaryById.id).toStrictEqual('47ab947e-e34c-4a41-8c1f-553b00b5e074');
             });
     });
 

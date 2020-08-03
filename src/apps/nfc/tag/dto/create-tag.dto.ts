@@ -6,7 +6,7 @@ export class CreateTagDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '20da9779-7e32-474a-bb18-e80dc5561456'
+        example     : 'd3dee798-f6cf-4df9-9217-fa39aecca96d'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateTagDto
     @ApiProperty({
         type        : Number,
         description : 'code [input here api field description]',
-        example     : 3269781693
+        example     : 6776507598
     })
     code: number;
     
@@ -24,7 +24,7 @@ export class CreateTagDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '8252d797-ad18-4335-b200-078de890abe9'
+        example     : 'ed76b37c-6380-4331-8d33-a8bde35e16fa'
     })
     tenantId: string;
     
@@ -33,7 +33,7 @@ export class CreateTagDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'v7o9mxqlqy56no0wyfrsv6d1qgi6p3yu9zor6a3pqikras3ngn'
+        example     : 'sfm97vtioxnvthhpjwiecp07r82p9erwd50ci5ah22ul7qs5r8'
     })
     tenantCode: string;
     
@@ -42,7 +42,7 @@ export class CreateTagDto
     @ApiProperty({
         type        : String,
         description : 'urlBase [input here api field description]',
-        example     : '4iqjptig2q45emt3fyyvro66lq2kwiyyo65mrsqh2ian3vr9ryttjddm27k5q483u6tx50n6t845sn5a8xditlrs7kja6c76wcxfojvz1glm2g34uxmqwp6z49f9gvd1824dql189gqf6btkzqrcyrdo9ggancv6pu03b5vpvybon71kjuyjn63ms7uwisoeq46cfq424k6knlatgmex0io2w5zx76ikzierkh07spw4drtvh85xayzinzyo2sj'
+        example     : '3zfbqbm0qtvr1ruuf75odcyp9c5wtvqesvd0f2g871npi2djctfcybk2eg2jg3z0xxni29gnhqyghs9oy4jhx6337cpycb4n7yt1ugnklo5dpjhckz5yi2ea7ls07zuqb182qjr2rvr10n1brqthb7q8b5ux7inf7r9o671xg29izotefoywt33we79uc7shx8t5a54dke5vzura5h9w5amua607gkfia1jy7ns0zqito5hr84t4ol5hhabzxa4'
     })
     urlBase: string;
     
@@ -60,7 +60,7 @@ export class CreateTagDto
     @ApiProperty({
         type        : Number,
         description : 'offset [input here api field description]',
-        example     : 145283
+        example     : 432941
     })
     offset: number;
     

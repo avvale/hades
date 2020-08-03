@@ -1,4 +1,4 @@
-import { Column, Model, Table, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { NfcTagModel } from '@hades/nfc/tag/infrastructure/sequelize/sequelize-tag.model';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
@@ -6,7 +6,8 @@ import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/s
 @Table({ modelName: 'nfc_summary', freezeTableName: true })
 export class NfcSummaryModel extends Model<NfcSummaryModel> 
 { 
-        
+            
+    
     
     @Column({
         field: 'id',
@@ -19,6 +20,8 @@ export class NfcSummaryModel extends Model<NfcSummaryModel>
         
              
         
+    @ForeignKey(() => NfcTagModel)    
+    
     
     @Column({
         field: 'tag_id',
@@ -26,8 +29,7 @@ export class NfcSummaryModel extends Model<NfcSummaryModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            model: NfcTagModel,
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -35,11 +37,10 @@ export class NfcSummaryModel extends Model<NfcSummaryModel>
     })
     tagId: string;
         
-    
-    @BelongsTo(() => NfcTagModel)
-    tag: NfcTagModel;
              
         
+    @ForeignKey(() => AdminTenantModel)    
+    
     
     @Column({
         field: 'tenant_id',
@@ -47,8 +48,7 @@ export class NfcSummaryModel extends Model<NfcSummaryModel>
         allowNull: false,
         type: DataTypes.UUID,
         
-        references: {
-            model: AdminTenantModel,
+        references: {  
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -56,11 +56,9 @@ export class NfcSummaryModel extends Model<NfcSummaryModel>
     })
     tenantId: string;
         
-    
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
              
-        
+            
+    
     
     @Column({
         field: 'access_at',
@@ -72,7 +70,8 @@ export class NfcSummaryModel extends Model<NfcSummaryModel>
     accessAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'counter',
@@ -84,7 +83,8 @@ export class NfcSummaryModel extends Model<NfcSummaryModel>
     counter: number;
         
              
-        
+            
+    
     
     @Column({
         field: 'created_at',
@@ -96,7 +96,8 @@ export class NfcSummaryModel extends Model<NfcSummaryModel>
     createdAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'updated_at',
@@ -108,7 +109,8 @@ export class NfcSummaryModel extends Model<NfcSummaryModel>
     updatedAt: string;
         
              
-        
+            
+    
     
     @Column({
         field: 'deleted_at',

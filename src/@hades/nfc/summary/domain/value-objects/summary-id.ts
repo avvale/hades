@@ -11,6 +11,7 @@ export class SummaryId extends UuidValueObject
             name: 'SummaryId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

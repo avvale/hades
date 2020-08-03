@@ -11,6 +11,7 @@ export class TagId extends UuidValueObject
             name: 'TagId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

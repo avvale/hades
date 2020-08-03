@@ -20,9 +20,7 @@ export class NfcSummary extends AggregateRoot
 {
     id: SummaryId;
     tagId: SummaryTagId;
-    tag: NfcTag;
     tenantId: SummaryTenantId;
-    tenant: AdminTenant;
     accessAt: SummaryAccessAt;
     counter: SummaryCounter;
     createdAt: SummaryCreatedAt;

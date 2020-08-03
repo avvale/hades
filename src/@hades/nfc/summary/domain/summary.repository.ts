@@ -16,7 +16,7 @@ export abstract class ISummaryRepository implements IRepository<NfcSummary>
     abstract async create(summary: NfcSummary): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(summaries: NfcSummary[]): Promise<void>;
+    abstract async insert(summaries: NfcSummary[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<NfcSummary | null>;

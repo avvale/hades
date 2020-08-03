@@ -11,6 +11,7 @@ export class ActionSectionId extends UuidValueObject
             name: 'ActionSectionId',
             nullable: true,
             undefinable: true,
+            length: 36
         }, validationRules));
     }
 }

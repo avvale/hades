@@ -11,6 +11,7 @@ export class SummaryTenantId extends UuidValueObject
             name: 'SummaryTenantId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }

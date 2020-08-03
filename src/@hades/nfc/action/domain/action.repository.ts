@@ -16,7 +16,7 @@ export abstract class IActionRepository implements IRepository<NfcAction>
     abstract async create(action: NfcAction): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(actions: NfcAction[]): Promise<void>;
+    abstract async insert(actions: NfcAction[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<NfcAction | null>;

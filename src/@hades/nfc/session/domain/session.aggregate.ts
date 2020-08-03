@@ -21,7 +21,6 @@ export class NfcSession extends AggregateRoot
     id: SessionId;
     ip: SessionIp;
     tagId: SessionTagId;
-    tag: NfcTag;
     uid: SessionUid;
     counter: SessionCounter;
     expiredAt: SessionExpiredAt;

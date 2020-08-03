@@ -19,7 +19,6 @@ export class NfcAction extends AggregateRoot
 {
     id: ActionId;
     tagId: ActionTagId;
-    tag: NfcTag;
     type: ActionType;
     sectionId: ActionSectionId;
     data: ActionData;

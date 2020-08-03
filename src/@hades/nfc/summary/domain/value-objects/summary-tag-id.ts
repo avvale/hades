@@ -11,6 +11,7 @@ export class SummaryTagId extends UuidValueObject
             name: 'SummaryTagId',
             nullable: false,
             undefinable: false,
+            length: 36
         }, validationRules));
     }
 }
