@@ -1,18 +1,18 @@
 import { StringValueObject } from './string.value-object';
-import { ValidationRules } from './../lib/validation-rules';
 import { BadRequestException } from '@nestjs/common';
+import * as moment from 'moment-timezone';
 
 export abstract class TimestampValueObject extends StringValueObject
 {
-    constructor(value: string, validationRules: ValidationRules = {}) 
+    get value(): string
     {
-        super(value, validationRules);
-       
-        this.ensureIsValidTimestamp(value);
-    }
+        return super.value;
+    } 
 
-    private ensureIsValidTimestamp(timeStamp: string): void
+    set value(value: string)
     {
-        if (timeStamp !== null && !((new Date(timeStamp)).getTime() > 0)) throw new BadRequestException(`Value for ${this.validationRules.name} has to be a timestamp value, value ${this.value} is a not valid timestamp`);
+        if (value !== null && !((new Date(value)).getTime() > 0)) throw new BadRequestException(`Value for ${this.validationRules.name} has to be a timestamp value, value ${value} is a not valid timestamp`);
+
+        super.value = moment(value).tz(process.env.TZ).format('YYYY-MM-DD H:mm:ss');
     }
 }
