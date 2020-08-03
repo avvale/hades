@@ -1,3 +1,6 @@
+# hades-cli
+*.origin.ts
+
 # compiled output
 /dist
 /tmp
