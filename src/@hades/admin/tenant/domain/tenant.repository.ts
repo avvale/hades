@@ -16,7 +16,7 @@ export abstract class ITenantRepository implements IRepository<AdminTenant>
     abstract async create(tenant: AdminTenant): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(tenants: AdminTenant[]): Promise<void>;
+    abstract async insert(tenants: AdminTenant[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<AdminTenant | null>;

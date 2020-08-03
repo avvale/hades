@@ -16,7 +16,7 @@ export abstract class ILangRepository implements IRepository<AdminLang>
     abstract async create(lang: AdminLang): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(langs: AdminLang[]): Promise<void>;
+    abstract async insert(langs: AdminLang[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<AdminLang | null>;

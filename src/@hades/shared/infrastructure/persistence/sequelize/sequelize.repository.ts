@@ -60,9 +60,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         }
     }
 
-    async insert(entities: Aggregate[]): Promise<void>
+    async insert(entities: Aggregate[], options: object = {}): Promise<void>
     {
-        await this.repository.bulkCreate(entities.map(item => item.toDTO()));
+        await this.repository.bulkCreate(entities.map(item => item.toDTO()), options);
     }
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Aggregate> 

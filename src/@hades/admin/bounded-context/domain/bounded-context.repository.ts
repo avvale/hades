@@ -16,7 +16,7 @@ export abstract class IBoundedContextRepository implements IRepository<AdminBoun
     abstract async create(boundedContext: AdminBoundedContext): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(boundedContexts: AdminBoundedContext[]): Promise<void>;
+    abstract async insert(boundedContexts: AdminBoundedContext[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<AdminBoundedContext | null>;
