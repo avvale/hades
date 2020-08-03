@@ -6,7 +6,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '1b552b0d-1718-4b66-b041-b74e81731088'
+        example     : 'd5071f5a-4c79-4e89-80be-88caf6f35bd9'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'y'
+        example     : '4'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'vuldrl4rydk0slcc9diew3t6nxccdb8zv7jl2zstps6rkb3pzi'
+        example     : 'iu82tpqh9frp7e28ku2ekop044tyrj4ou0td2gqm5o3sp7aa2i'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'logo [input here api field description]',
-        example     : 'k'
+        example     : 'd'
     })
     logo: string;
     

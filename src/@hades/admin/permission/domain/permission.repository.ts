@@ -16,7 +16,7 @@ export abstract class IPermissionRepository implements IRepository<AdminPermissi
     abstract async create(permission: AdminPermission): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(permissions: AdminPermission[]): Promise<void>;
+    abstract async insert(permissions: AdminPermission[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<AdminPermission | null>;

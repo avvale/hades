@@ -65,10 +65,10 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'i',
-                code: 'm5yeubqoqfl5roi2nyk8m6cn6j37pbfnd5zyduaapo8fr8enfz',
-                logo: 'o',
-                isActive: false,
+                name: 'z',
+                code: 'wl7oeo1gcdxtnzntyi60do4c86q9cs20mtg65r0yl5lt0vunkt',
+                logo: '3',
+                isActive: true,
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -84,10 +84,10 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                name: 'i',
-                code: 'zlq1874sfwct2dbmny0uk6tnn4mlo6yo39k5qsyksr79ix6nzu',
-                logo: 'd',
-                isActive: true,
+                name: 'k',
+                code: 'v93zi7xy7f76q20xvcoa6fn3ugviftqk22f1neuiv4cu52pxxn',
+                logo: 'e',
+                isActive: false,
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -102,11 +102,11 @@ describe('tenant', () =>
             .post('/admin/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '1b552b0d-1718-4b66-b041-b74e81731088',
+                id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
                 name: null,
-                code: 'm443x8bn5ajwelt1lo4k4halcyi411wo0do7jo24xzokj5uyzg',
-                logo: 'z',
-                isActive: true,
+                code: 'sukce7y9k8ymanian2mhrlyxehsmsi90cunuyc8giohtf6uhvu',
+                logo: 'i',
+                isActive: false,
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -121,11 +121,11 @@ describe('tenant', () =>
             .post('/admin/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '1b552b0d-1718-4b66-b041-b74e81731088',
+                id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
                 
-                code: 'qwp482x3k78w5piqtlnow1ggabxfzs5j0o65i9yzm4h4nza26r',
-                logo: 'k',
-                isActive: false,
+                code: 'rpog9b0tloixjgflppbshwexk9w3li30chpq9shncrfebf99rx',
+                logo: 'l',
+                isActive: true,
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -140,11 +140,11 @@ describe('tenant', () =>
             .post('/admin/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '1b552b0d-1718-4b66-b041-b74e81731088',
-                name: 'p',
+                id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
+                name: 'k',
                 code: null,
-                logo: 'd',
-                isActive: true,
+                logo: '4',
+                isActive: false,
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -159,10 +159,10 @@ describe('tenant', () =>
             .post('/admin/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '1b552b0d-1718-4b66-b041-b74e81731088',
-                name: '4',
+                id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
+                name: 'w',
                 
-                logo: 'x',
+                logo: '8',
                 isActive: false,
                 data: { "foo" : "bar" },
             })
@@ -178,10 +178,10 @@ describe('tenant', () =>
             .post('/admin/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '1b552b0d-1718-4b66-b041-b74e81731088',
-                name: 'j',
-                code: 'mv4qnuazyilojiues1dv8y95kg559i05n9ddxgwocov5pbt900',
-                logo: 'f',
+                id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
+                name: 'k',
+                code: 'q132xv8nuae5kosubzos5g51iu558o7yfsiivg3900ed6yc88m',
+                logo: 'm',
                 isActive: null,
                 data: { "foo" : "bar" },
             })
@@ -197,10 +197,10 @@ describe('tenant', () =>
             .post('/admin/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '1b552b0d-1718-4b66-b041-b74e81731088',
-                name: '6',
-                code: 'rxr3iry5bh8y1vpt5pqe57zbb4869p5lb6ohptxyeqe0co7yqk',
-                logo: 'z',
+                id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
+                name: '9',
+                code: '4rcnvgbxqdoq0wlhjfru3iqjax30zlxghj8anvyd1g5aynkjq1',
+                logo: 'g',
                 
                 data: { "foo" : "bar" },
             })
@@ -218,10 +218,10 @@ describe('tenant', () =>
             .post('/admin/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: 'xjcz73szvdy3gc1qpm9avzmsbiidwelws6rx9',
-                name: 'w',
-                code: 'ld2guepuu1acj04lw5p1uoppl6qf79ttnpaf2kmp6s04xcllhs',
-                logo: 'o',
+                id: '38izl2vkrxdoj093zt1rsuywddzpycvf7hm9z',
+                name: 'u',
+                code: 'k6ds3pqyvqaq3s6poc6y8l2klnwg45antygopt25dsscxk7w63',
+                logo: 'e',
                 isActive: true,
                 data: { "foo" : "bar" },
             })
@@ -239,11 +239,11 @@ describe('tenant', () =>
             .post('/admin/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '1b552b0d-1718-4b66-b041-b74e81731088',
-                name: 'u',
-                code: 'w2hxl5377v67rpulyz8oyhtsnbpeo3xbibbtsjjlinpr5wp1yhg',
-                logo: 'l',
-                isActive: true,
+                id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
+                name: '2',
+                code: 'gklntwghvnui6tazqezz22olbjoeodl5ppgm3w46uon8i832tkd',
+                logo: '0',
+                isActive: false,
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -266,10 +266,10 @@ describe('tenant', () =>
             .post('/admin/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '1b552b0d-1718-4b66-b041-b74e81731088',
-                name: 'h',
-                code: 'ofj530fzzwujfupm54ziekva7khz0aodxbcmer4ei71nty6s6b',
-                logo: 'w',
+                id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
+                name: 'n',
+                code: 'n5c34ymz7372tysadjifb17ar68z65x281pr8k0iioz6vrpjk7',
+                logo: 'h',
                 isActive: 'true',
                 data: { "foo" : "bar" },
             })
@@ -290,11 +290,11 @@ describe('tenant', () =>
             .post('/admin/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '1b552b0d-1718-4b66-b041-b74e81731088',
-                name: 'd',
-                code: 'obij8o8c77z3fog744fper1e0xg8co1w1lpk8mqzsizi0qbz81',
-                logo: 'b',
-                isActive: true,
+                id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
+                name: 'i',
+                code: 'btqlw8zuhcygaisw125if1458vysx6cru8xoktrgq067l700ff',
+                logo: 'v',
+                isActive: false,
                 data: { "foo" : "bar" },
             })
             .expect(201);
@@ -336,7 +336,7 @@ describe('tenant', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '5fb93c0b-8e31-4e68-8ac0-9a9a0fc4965f'
+                        value   : 'ec120690-72be-4c85-9260-32bd3fec4a6e'
                     }
                 ]
             })
@@ -354,18 +354,18 @@ describe('tenant', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '1b552b0d-1718-4b66-b041-b74e81731088'
+                        value   : 'd5071f5a-4c79-4e89-80be-88caf6f35bd9'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '1b552b0d-1718-4b66-b041-b74e81731088'));
+            .expect(repository.collectionResponse.find(item => item.id === 'd5071f5a-4c79-4e89-80be-88caf6f35bd9'));
     });
 
     test(`/REST:GET admin/tenant/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/tenant/f831fb0f-6a3f-46cf-8682-605fd18fe3f3')
+            .get('/admin/tenant/3e165e80-1ec4-47e4-8c4f-429e914112c2')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -373,10 +373,10 @@ describe('tenant', () =>
     test(`/REST:GET admin/tenant/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/tenant/1b552b0d-1718-4b66-b041-b74e81731088')
+            .get('/admin/tenant/d5071f5a-4c79-4e89-80be-88caf6f35bd9')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '1b552b0d-1718-4b66-b041-b74e81731088'));
+            .expect(repository.collectionResponse.find(e => e.id === 'd5071f5a-4c79-4e89-80be-88caf6f35bd9'));
     });
 
     test(`/REST:GET admin/tenants`, () => 
@@ -395,11 +395,11 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '1ee5e79e-8819-46c1-bb8e-6f90c1f69b47',
-                name: 'k',
-                code: 'ep19i4ubvmhho108e7oql69836ncinsds24s8ah7u40iqnswpg',
-                logo: '0',
-                isActive: true,
+                id: '1ce43130-4a2a-471c-9d73-d5d631c78967',
+                name: 'z',
+                code: 'beuonjgt8xanmxnoed98f5cr52izfnrlzlbzpvw49k4viln56k',
+                logo: '9',
+                isActive: false,
                 data: { "foo" : "bar" },
             })
             .expect(404);
@@ -412,21 +412,21 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '1b552b0d-1718-4b66-b041-b74e81731088',
-                name: 'u',
-                code: 'dh4gvyuodqj1ghmngt0eetj6bdtdsa92rvou898i9758ixeqbu',
-                logo: 'e',
+                id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
+                name: 'e',
+                code: 'a2cw3vtvhsafrv4ju1gbf41ujpo7pmonhg9aae9sxb2l9byhbg',
+                logo: '3',
                 isActive: false,
                 data: { "foo" : "bar" },
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '1b552b0d-1718-4b66-b041-b74e81731088'));
+            .expect(repository.collectionResponse.find(e => e.id === 'd5071f5a-4c79-4e89-80be-88caf6f35bd9'));
     });
 
     test(`/REST:DELETE admin/tenant/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/admin/tenant/deb5a078-65fb-4141-bf08-c49ded53d168')
+            .delete('/admin/tenant/4bd40cf7-878e-4a91-a069-2c89b8f92401')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -434,7 +434,7 @@ describe('tenant', () =>
     test(`/REST:DELETE admin/tenant/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/admin/tenant/1b552b0d-1718-4b66-b041-b74e81731088')
+            .delete('/admin/tenant/d5071f5a-4c79-4e89-80be-88caf6f35bd9')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -497,18 +497,18 @@ describe('tenant', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'e17649a6-17d5-44d2-a19c-d3234ea49db6',
-                        name: 'a',
-                        code: 'a78ojqtsrrzsx7srum6p2tn45csmu0lzysi9k6mg28zdrnpacv',
-                        logo: 'l',
-                        isActive: false,
+                        id: '2d98b48b-f78f-448a-b09b-37ecc716f6d8',
+                        name: '4',
+                        code: 'kooc1vz4dbixmueiyolclae8d8i73cjcnty6540jh6b6rmozz0',
+                        logo: '7',
+                        isActive: true,
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateTenant).toHaveProperty('id', 'e17649a6-17d5-44d2-a19c-d3234ea49db6');
+                expect(res.body.data.adminCreateTenant).toHaveProperty('id', '2d98b48b-f78f-448a-b09b-37ecc716f6d8');
             });
     });
 
@@ -578,7 +578,7 @@ describe('tenant', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '61e38777-f65d-48bf-9082-c0ead0cc60be'
+                            value   : 'cad490a2-4194-4045-baab-2359b46fbbbc'
                         }
                     ]
                 }
@@ -619,14 +619,14 @@ describe('tenant', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '1b552b0d-1718-4b66-b041-b74e81731088'
+                            value   : 'd5071f5a-4c79-4e89-80be-88caf6f35bd9'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindTenant.id).toStrictEqual('1b552b0d-1718-4b66-b041-b74e81731088');
+                expect(res.body.data.adminFindTenant.id).toStrictEqual('d5071f5a-4c79-4e89-80be-88caf6f35bd9');
             });
     });
 
@@ -653,7 +653,7 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '0f6f8bf9-d1a7-429f-90bb-c8991ddc24fb'
+                    id: '94c4284f-8dc7-42c9-b616-895b7403bb48'
                 }
             })
             .expect(200)
@@ -687,12 +687,12 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '1b552b0d-1718-4b66-b041-b74e81731088'
+                    id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindTenantById.id).toStrictEqual('1b552b0d-1718-4b66-b041-b74e81731088');
+                expect(res.body.data.adminFindTenantById.id).toStrictEqual('d5071f5a-4c79-4e89-80be-88caf6f35bd9');
             });
     });
 
@@ -754,11 +754,11 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         
-                        id: 'fecc11aa-2693-4b24-a99b-e12eb9ac79e5',
-                        name: 't',
-                        code: 'z5aftvrv0t6xy81tqoc0lnqsdonnjoy0x4oukj67fhkb1r59rh',
-                        logo: 'u',
-                        isActive: true,
+                        id: '83fc9070-2da8-4f56-a808-3d6efeeb45ee',
+                        name: 'y',
+                        code: 'xehqgoxb130fn81avdxp4fda20bq5ojtucb86i4yh3o2qa1lze',
+                        logo: '4',
+                        isActive: false,
                         data: { "foo" : "bar" },
                     }
                 }
@@ -796,10 +796,10 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         
-                        id: '1b552b0d-1718-4b66-b041-b74e81731088',
-                        name: 'f',
-                        code: 'xuihybt43iogxxwaj8cwtx7f6jyf801t1vh5ows5ux6ez41u0c',
-                        logo: 'x',
+                        id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9',
+                        name: 'u',
+                        code: 'f9219u22mb67enpdgpp5i40jshutsua5bf6vgozc50ygst9scv',
+                        logo: 'w',
                         isActive: false,
                         data: { "foo" : "bar" },
                     }
@@ -807,7 +807,7 @@ describe('tenant', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateTenant.id).toStrictEqual('1b552b0d-1718-4b66-b041-b74e81731088');
+                expect(res.body.data.adminUpdateTenant.id).toStrictEqual('d5071f5a-4c79-4e89-80be-88caf6f35bd9');
             });
     });
 
@@ -834,7 +834,7 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '945d8923-f783-42be-a5e2-3a3bc094acae'
+                    id: '87166249-eeec-4683-92ff-8e28a4509b0d'
                 }
             })
             .expect(200)
@@ -868,12 +868,12 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '1b552b0d-1718-4b66-b041-b74e81731088'
+                    id: 'd5071f5a-4c79-4e89-80be-88caf6f35bd9'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteTenantById.id).toStrictEqual('1b552b0d-1718-4b66-b041-b74e81731088');
+                expect(res.body.data.adminDeleteTenantById.id).toStrictEqual('d5071f5a-4c79-4e89-80be-88caf6f35bd9');
             });
     });
 

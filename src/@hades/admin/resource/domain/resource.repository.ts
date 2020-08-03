@@ -16,7 +16,7 @@ export abstract class IResourceRepository implements IRepository<AdminResource>
     abstract async create(resource: AdminResource): Promise<void>;
 
     // create a single or multiple records
-    abstract async insert(resources: AdminResource[]): Promise<void>;
+    abstract async insert(resources: AdminResource[], options?: object): Promise<void>;
 
     // find a single record
     abstract async find(query: QueryStatementInput[]): Promise<AdminResource | null>;
