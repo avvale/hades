@@ -1,12 +1,12 @@
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
 declare const Buffer;
 
 export class Utils
 {
     public static nowTimestamp(): string
-    {
-        return moment().format('YYYY-MM-DD h:mm:ss');
+    {   
+        return moment().tz(process.env.TZ).format('YYYY-MM-DD H:mm:ss');
     }
 
     public static sha1(data: string): string
