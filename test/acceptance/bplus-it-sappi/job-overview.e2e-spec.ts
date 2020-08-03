@@ -68,18 +68,18 @@ describe('job-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'ods05vaxq5kfnxsrcin5n5m3bsfhtsnmzl8yk42821hf51if80',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: '8jpqf6pvitrox2coheip',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 23:39:18',
-                executionMonitoringStartAt: '2020-07-31 12:09:03',
-                executionMonitoringEndAt: '2020-07-31 12:44:08',
-                cancelled: 4505230699,
-                completed: 1459730439,
-                error: 6938300010,
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: '2jk219daaeoh0wpcoft23opmsw2c3pkt3655ssr35d0lozbemd',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'js54kzpflf2s0db8it1b',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 15:39:15',
+                executionMonitoringStartAt: '2020-08-03 15:16:13',
+                executionMonitoringEndAt: '2020-08-02 20:11:13',
+                cancelled: 6634212436,
+                completed: 9206309636,
+                error: 7203867351,
             })
             .expect(400)
             .then(res => {
@@ -94,18 +94,18 @@ describe('job-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'kt1lm8wb3wh4vtg1jgp39tfr6oj2j3ld35055k3k016321ra7o',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'tin4qc66xp9wuttd4wfy',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'tf357mxv4i8hnth4u1e2wtcqlorsoqlju72hv6023hca00frcj',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: '8ce7y2u33k5oabykmv5d',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 11:25:55',
-                executionMonitoringStartAt: '2020-07-30 23:18:42',
-                executionMonitoringEndAt: '2020-07-31 04:57:20',
-                cancelled: 4745623270,
-                completed: 1085331768,
-                error: 6581197339,
+                executionExecutedAt: '2020-08-03 15:19:46',
+                executionMonitoringStartAt: '2020-08-03 08:06:23',
+                executionMonitoringEndAt: '2020-08-03 05:07:14',
+                cancelled: 9979974186,
+                completed: 2245933128,
+                error: 2409534046,
             })
             .expect(400)
             .then(res => {
@@ -119,19 +119,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
                 tenantId: null,
-                tenantCode: 'qnod6e5ch1fvutve1o3vlfopyx0jevackszcsfjig5ssq9evoj',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'kdspuh5p8f0f05rve33l',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                tenantCode: 'df8q1hnn1gzm2j2gmzd52funfpcbpfs3nlc1zccru2dluzlxlx',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: '78a64eay0snlx5bcwvxh',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 11:33:41',
-                executionMonitoringStartAt: '2020-07-31 00:24:31',
-                executionMonitoringEndAt: '2020-07-31 04:33:29',
-                cancelled: 1070333719,
-                completed: 3415895157,
-                error: 4569099812,
+                executionExecutedAt: '2020-08-03 12:20:35',
+                executionMonitoringStartAt: '2020-08-03 16:15:46',
+                executionMonitoringEndAt: '2020-08-03 14:35:24',
+                cancelled: 8579016837,
+                completed: 5650072323,
+                error: 8338632776,
             })
             .expect(400)
             .then(res => {
@@ -145,19 +145,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
                 
-                tenantCode: 'u7a7kq36rd446i4h5kn7ymz2mrqa9subwq6n2jtz898mse59kt',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'uj9sy6k2hiu1j09d3tlk',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 12:09:44',
-                executionMonitoringStartAt: '2020-07-31 11:02:02',
-                executionMonitoringEndAt: '2020-07-31 11:47:58',
-                cancelled: 4015401800,
-                completed: 2197748692,
-                error: 4160966351,
+                tenantCode: 'cw215erbnu3avumwu1jdibq4z6wevg31mlgvtq518nj7ce6p9l',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'b697z9s0vlrtdhd7p24u',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-02 21:28:54',
+                executionMonitoringStartAt: '2020-08-03 11:23:52',
+                executionMonitoringEndAt: '2020-08-03 13:13:45',
+                cancelled: 1546103505,
+                completed: 9757025925,
+                error: 6946121974,
             })
             .expect(400)
             .then(res => {
@@ -171,19 +171,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
                 tenantCode: null,
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'u7p34ytjavddm6e4yoy5',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 23:24:08',
-                executionMonitoringStartAt: '2020-07-30 21:16:26',
-                executionMonitoringEndAt: '2020-07-30 21:34:22',
-                cancelled: 8774790597,
-                completed: 3494846311,
-                error: 5801226100,
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'uo4bxtowyg8s9t470yqr',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 15:11:14',
+                executionMonitoringStartAt: '2020-08-02 23:12:56',
+                executionMonitoringEndAt: '2020-08-03 11:40:03',
+                cancelled: 2576314787,
+                completed: 4623081497,
+                error: 9565956054,
             })
             .expect(400)
             .then(res => {
@@ -197,19 +197,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
                 
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'qwk294dy9tpdwmh7mnsf',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 00:19:10',
-                executionMonitoringStartAt: '2020-07-31 10:40:17',
-                executionMonitoringEndAt: '2020-07-30 21:12:44',
-                cancelled: 6418512574,
-                completed: 5862099255,
-                error: 7629678974,
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'b3qsnpj214atijtqqhk1',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 11:21:28',
+                executionMonitoringStartAt: '2020-08-03 02:06:18',
+                executionMonitoringEndAt: '2020-08-02 22:09:33',
+                cancelled: 3967894856,
+                completed: 4977141579,
+                error: 8733533853,
             })
             .expect(400)
             .then(res => {
@@ -223,19 +223,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'bkwo9jf0lqksyffnrv56nbe1rnuoqjm7zx92cb8vmgcjl4nu8c',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'y5ot9l83h7lzojjrsqtpiut7v9ganb67m3h5yqgrxvm4mx5msh',
                 systemId: null,
-                systemName: 'rr0n8fs393xxcsk6268q',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                systemName: 'n0bq2nu7j993qp8353pi',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 22:46:16',
-                executionMonitoringStartAt: '2020-07-30 20:46:46',
-                executionMonitoringEndAt: '2020-07-31 11:54:42',
-                cancelled: 2257409769,
-                completed: 2789700138,
-                error: 1487023832,
+                executionExecutedAt: '2020-08-03 01:20:06',
+                executionMonitoringStartAt: '2020-08-03 13:42:06',
+                executionMonitoringEndAt: '2020-08-03 04:14:05',
+                cancelled: 9965886258,
+                completed: 8199642291,
+                error: 1761258286,
             })
             .expect(400)
             .then(res => {
@@ -249,19 +249,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'sefp5g814no2ibc1ms1w85qd19pfx6q4ub4zmr8s7fzy01mcfo',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'cj5ivqss9ht35hxa3x6zo3a97pd37vwyqtgeyp6f3jpbtjicqe',
                 
-                systemName: '350tm18cyv4o8tgf44fo',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 02:11:54',
-                executionMonitoringStartAt: '2020-07-31 00:08:35',
-                executionMonitoringEndAt: '2020-07-30 23:13:31',
-                cancelled: 3596232260,
-                completed: 5704306425,
-                error: 2845963804,
+                systemName: 'fck4f45e8maak191pyqt',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-02 21:36:17',
+                executionMonitoringStartAt: '2020-08-03 03:39:40',
+                executionMonitoringEndAt: '2020-08-03 06:09:20',
+                cancelled: 6291139934,
+                completed: 5527190694,
+                error: 4680333550,
             })
             .expect(400)
             .then(res => {
@@ -275,19 +275,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'k6k8vh65zbf2dolwq7q4pewqzkfs2kc4zohv0dtjpg4kwr9dn1',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'ezxl9w4qibotr5pyqm2f8xhewqx14d6kknl5e7zotabmg2vhl8',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
                 systemName: null,
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 10:22:50',
-                executionMonitoringStartAt: '2020-07-30 15:53:07',
-                executionMonitoringEndAt: '2020-07-31 11:19:20',
-                cancelled: 8287726846,
-                completed: 7302760176,
-                error: 7179903798,
+                executionExecutedAt: '2020-08-02 21:52:55',
+                executionMonitoringStartAt: '2020-08-03 15:08:54',
+                executionMonitoringEndAt: '2020-08-03 09:17:22',
+                cancelled: 1570203882,
+                completed: 9923113248,
+                error: 8040807405,
             })
             .expect(400)
             .then(res => {
@@ -301,19 +301,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'dsgt48rulb5ous11fw0vx4n15e9posdujrtpbonif7xetra4zl',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'r3lx1cboik01onar3exbltneddybk08dz1hgvc6k4oyh7f2euf',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
                 
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 21:04:34',
-                executionMonitoringStartAt: '2020-07-30 16:13:19',
-                executionMonitoringEndAt: '2020-07-30 23:56:12',
-                cancelled: 5964330581,
-                completed: 4339554453,
-                error: 9712805303,
+                executionExecutedAt: '2020-08-03 08:36:33',
+                executionMonitoringStartAt: '2020-08-03 04:11:30',
+                executionMonitoringEndAt: '2020-08-03 08:56:32',
+                cancelled: 1511384068,
+                completed: 4113612435,
+                error: 3610350607,
             })
             .expect(400)
             .then(res => {
@@ -327,19 +327,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'vv1cph1owwcowzons89beirgoyknj5kl0pdxi4f8bd1j0gnzy6',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'tsnz3uqyr8ualodlp8kx',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'jb14jpp8rrgt7og522r9d7rkbshhuxxj0l5fooxnssfzlx9ewq',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'ittvgv93c8tfv9qt3z8m',
                 executionId: null,
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 12:56:56',
-                executionMonitoringStartAt: '2020-07-30 23:29:54',
-                executionMonitoringEndAt: '2020-07-31 02:49:25',
-                cancelled: 8937433147,
-                completed: 2225226831,
-                error: 7785362252,
+                executionExecutedAt: '2020-08-02 20:30:37',
+                executionMonitoringStartAt: '2020-08-02 23:44:26',
+                executionMonitoringEndAt: '2020-08-03 06:16:23',
+                cancelled: 9232184580,
+                completed: 4269676874,
+                error: 8368235661,
             })
             .expect(400)
             .then(res => {
@@ -353,19 +353,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'px5p2kdzrgmnc3nb06ycwt2ch98ocvff63d9muostbj303o3yg',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'w2mboshoguaemdtgdsxw',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: '7dxrl1lh8e0224jdwjifyi1ialbbbchylrs1szcl1ie1bmqxif',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: '77v93hsakjzzb8l9r5q2',
                 
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 12:31:09',
-                executionMonitoringStartAt: '2020-07-31 10:16:06',
-                executionMonitoringEndAt: '2020-07-30 14:52:08',
-                cancelled: 5605855024,
-                completed: 8524707146,
-                error: 9203130438,
+                executionExecutedAt: '2020-08-03 09:33:01',
+                executionMonitoringStartAt: '2020-08-03 13:19:07',
+                executionMonitoringEndAt: '2020-08-03 05:35:58',
+                cancelled: 9851157867,
+                completed: 4364841496,
+                error: 4222755669,
             })
             .expect(400)
             .then(res => {
@@ -379,19 +379,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: '79jwy1has5xyi9w6480pp631nx1xs13rsyzxpovs4hktmunaft',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'itm9hwdwyd6s5axgd5mf',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'c0hvcm6m2zou8phql45pdtijoh7puqwcp95r1722mcb2816gnz',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'fhaarc7k3p1nfxh98ltl',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: null,
-                executionExecutedAt: '2020-07-30 15:53:45',
-                executionMonitoringStartAt: '2020-07-31 02:07:58',
-                executionMonitoringEndAt: '2020-07-31 06:55:11',
-                cancelled: 5407052078,
-                completed: 9218381216,
-                error: 8225057140,
+                executionExecutedAt: '2020-08-03 05:52:56',
+                executionMonitoringStartAt: '2020-08-03 17:06:45',
+                executionMonitoringEndAt: '2020-08-03 06:20:24',
+                cancelled: 5500013428,
+                completed: 1239394519,
+                error: 2856055052,
             })
             .expect(400)
             .then(res => {
@@ -405,19 +405,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: '9b8ip4z70a2owdozvjy4kacn31u2wt418is8sos1o6gikv8xff',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'kqusgrmzi1cglfmw63a5',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'ivvlg5tw9qy0z354vgxeydc0ywergir73ic5532rxzme5zgzct',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: '8limko0p2uwoksl9u9xl',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 
-                executionExecutedAt: '2020-07-31 11:51:33',
-                executionMonitoringStartAt: '2020-07-31 04:36:08',
-                executionMonitoringEndAt: '2020-07-31 01:19:29',
-                cancelled: 8665281288,
-                completed: 5702050344,
-                error: 1362774493,
+                executionExecutedAt: '2020-08-03 05:43:16',
+                executionMonitoringStartAt: '2020-08-03 00:14:05',
+                executionMonitoringEndAt: '2020-08-03 02:18:34',
+                cancelled: 9511277646,
+                completed: 8998224057,
+                error: 2950429602,
             })
             .expect(400)
             .then(res => {
@@ -431,19 +431,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: '0x20s6fcpv8kt75lwghxzdflkqchc04whyxtw973w9yudhzvhg',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'if8otklspzde5pksltet',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'nza88w4eeu6tctrki6r1l9irq2zzc773qkd0ea0egu604nvx0t',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'a7172qxkvo3qqshdgsmo',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'DETAIL',
                 executionExecutedAt: null,
-                executionMonitoringStartAt: '2020-07-30 22:56:40',
-                executionMonitoringEndAt: '2020-07-31 02:11:29',
-                cancelled: 7482916446,
-                completed: 3359751610,
-                error: 6715141911,
+                executionMonitoringStartAt: '2020-08-03 03:43:41',
+                executionMonitoringEndAt: '2020-08-03 00:00:28',
+                cancelled: 5747469447,
+                completed: 9562193726,
+                error: 4301111752,
             })
             .expect(400)
             .then(res => {
@@ -457,19 +457,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'hy22i6jardxp3dytdnvbt89mznh0ar9hqdlfn68kp0v343nxsl',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'm28h8lliargz7nfcol21',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'SUMMARY',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'zz8w1zcfsidgsccc6dhjovhls2pyxdhi1oqqfbd3y4sr2ounv7',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: '67ccojoye0anyvd2s04f',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'DETAIL',
                 
-                executionMonitoringStartAt: '2020-07-31 03:39:25',
-                executionMonitoringEndAt: '2020-07-31 07:24:22',
-                cancelled: 7333182067,
-                completed: 7186165482,
-                error: 6649581621,
+                executionMonitoringStartAt: '2020-08-03 13:11:11',
+                executionMonitoringEndAt: '2020-08-03 06:42:18',
+                cancelled: 6114811334,
+                completed: 8110015436,
+                error: 1544553156,
             })
             .expect(400)
             .then(res => {
@@ -483,19 +483,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'gujx1wfz8wopv7h4zqu1vy8gz009k1war916l6t4ucd20japkv',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'ecvnsgq02fuf3jb4uaeh',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'mciwyzm80ij2txdljjtcla6e6ludv59hsqrjbw8qfbqqxv88tg',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'wgilowp6g4f2miqmrp15',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 09:50:07',
+                executionExecutedAt: '2020-08-03 02:42:14',
                 executionMonitoringStartAt: null,
-                executionMonitoringEndAt: '2020-07-31 11:00:24',
-                cancelled: 3060565818,
-                completed: 8477235162,
-                error: 9278697155,
+                executionMonitoringEndAt: '2020-08-02 22:13:06',
+                cancelled: 7752940455,
+                completed: 5768727628,
+                error: 4797087614,
             })
             .expect(400)
             .then(res => {
@@ -509,19 +509,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: '8qx4rwq8tfhxe47jdf8i1nitd14ee3p01o1p9jup5bliv838a6',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: '7k3qa9mw9as76q8mckn0',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'imxiz4l2z1idk835fq04kst7g2724ddasf4t7ols735vhc9hvw',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'z33azkmb8xan1x55kvon',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 18:47:16',
+                executionExecutedAt: '2020-08-03 03:55:06',
                 
-                executionMonitoringEndAt: '2020-07-30 21:38:27',
-                cancelled: 4847293827,
-                completed: 1650399786,
-                error: 7736058684,
+                executionMonitoringEndAt: '2020-08-03 00:14:33',
+                cancelled: 4713962601,
+                completed: 4026412013,
+                error: 8852510083,
             })
             .expect(400)
             .then(res => {
@@ -535,19 +535,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'ds0wjj1zzteevlzn6msgl0jel9xe1nsoq0vtcutkw7zmi7igqg',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'y9teqjuvnadnf943qllt',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: '6sb9pwdcgrthse9rnsjimhhtti700skfpa0apsf0mzipl3oyih',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'zhpnoacm6elnqi4t44wx',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 20:58:14',
-                executionMonitoringStartAt: '2020-07-30 23:29:26',
+                executionExecutedAt: '2020-08-03 12:04:52',
+                executionMonitoringStartAt: '2020-08-03 07:47:32',
                 executionMonitoringEndAt: null,
-                cancelled: 1697228585,
-                completed: 4405704214,
-                error: 4513676714,
+                cancelled: 6183845028,
+                completed: 7387524416,
+                error: 3368537971,
             })
             .expect(400)
             .then(res => {
@@ -561,19 +561,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: '10je9tehais37ifog2j47mbg6gh8mjkbkupp5s94stkitalx5a',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: '6foph18322x9vrozq9wu',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 21:14:41',
-                executionMonitoringStartAt: '2020-07-30 15:19:30',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: '9ulrele7s5d3y5vfwsptfica021h0x8j986z7dd60v9xkrtn18',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: '4mdjth30ol8dvbhk7r3y',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-02 22:18:47',
+                executionMonitoringStartAt: '2020-08-03 10:32:20',
                 
-                cancelled: 7340118523,
-                completed: 5433539634,
-                error: 3504929537,
+                cancelled: 2543873940,
+                completed: 9858463376,
+                error: 7678359730,
             })
             .expect(400)
             .then(res => {
@@ -589,19 +589,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 't4eksafwgigung5koyq7ivmjxombmdvzl8pno',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'suin0x92wbu2ci3jqq7pc80dni31377si53l5ttgo1j7uszdcm',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'lgha5es5tajuksdr5kbx',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'y2hkd98qt28u4qb72sxlp2olrthhvapssdsrp',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: '2r7fl86wr3fvb94dqpjvf7o6bziyk1hs4tqg86qdj9x1n30v8e',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'y4fq1d7biio8z3vntjei',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 22:11:12',
-                executionMonitoringStartAt: '2020-07-30 20:50:45',
-                executionMonitoringEndAt: '2020-07-30 21:15:04',
-                cancelled: 9910497279,
-                completed: 3236235510,
-                error: 1784056720,
+                executionExecutedAt: '2020-08-03 06:13:36',
+                executionMonitoringStartAt: '2020-08-03 03:41:24',
+                executionMonitoringEndAt: '2020-08-03 04:39:19',
+                cancelled: 5503584036,
+                completed: 5718931438,
+                error: 3855556257,
             })
             .expect(400)
             .then(res => {
@@ -615,19 +615,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '9scy9xw08d19i75dfp5ovebnc9whn8ty0p72i',
-                tenantCode: '8tl86of48h911n9thyati1svdeql7tn9pdoe29hg9m3u7otjez',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: '6ewz5c7tj4goum0sp5ry',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 14:26:54',
-                executionMonitoringStartAt: '2020-07-30 15:44:19',
-                executionMonitoringEndAt: '2020-07-30 22:47:33',
-                cancelled: 9734125912,
-                completed: 8991965852,
-                error: 6501748771,
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: 'hrcq2tsb98zh6d19l2kkq7k7y4ov11hadte1o',
+                tenantCode: '20irguak7ae8eeopa8nabkj5vv4s1m3qd357ps7jyvh7beph8i',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'jq0ip6zuq6o6gpqo0z2g',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-02 18:35:44',
+                executionMonitoringStartAt: '2020-08-02 22:57:11',
+                executionMonitoringEndAt: '2020-08-02 23:29:10',
+                cancelled: 7583349376,
+                completed: 4183155857,
+                error: 9043183109,
             })
             .expect(400)
             .then(res => {
@@ -641,19 +641,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'yi8q2d9xn46p0w2kcd1mvtyzt9oanq9nxk4qqql2ebsqorm4ut',
-                systemId: 'ecwdgezha1fxprodpols9rybey20jcvd16n9j',
-                systemName: 'qbighak94fyiclqpb96b',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'ff3ymkso0dq8cn9n7zexg67bk25h35gn4naa53cdloyzj5punu',
+                systemId: 'siaoirz05x4c5g0ea7k789q4owzzzf227z7xe',
+                systemName: 'u4ndgkg37e3t40sd775n',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 18:22:06',
-                executionMonitoringStartAt: '2020-07-31 13:13:40',
-                executionMonitoringEndAt: '2020-07-31 05:54:11',
-                cancelled: 2088842379,
-                completed: 2870819736,
-                error: 1448282047,
+                executionExecutedAt: '2020-08-03 05:11:31',
+                executionMonitoringStartAt: '2020-08-03 00:59:48',
+                executionMonitoringEndAt: '2020-08-03 09:51:27',
+                cancelled: 7653202880,
+                completed: 2458455710,
+                error: 2255082543,
             })
             .expect(400)
             .then(res => {
@@ -667,19 +667,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: '2mv4dzjv5vo2q9l2cmsurqe39nlutjv2yc0lbqogtbp7ee3w7u',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'n6wahqgb42xhc1tptanm',
-                executionId: 'g68g1gyh7gfnvamtbg3vohqo2eo9t27u54xlm',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'rugnk708osrtcpe1sgb78w75vu3f78ln1s0ns2nl095n61h92a',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'md67l5xvdxrf3t7ux0fz',
+                executionId: 'hr8rhycszpxd86qsv56rrn2drqiosqfuiqf7l',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 21:58:36',
-                executionMonitoringStartAt: '2020-07-31 05:26:48',
-                executionMonitoringEndAt: '2020-07-30 22:14:24',
-                cancelled: 6299543361,
-                completed: 5179263368,
-                error: 3933626091,
+                executionExecutedAt: '2020-08-03 07:45:06',
+                executionMonitoringStartAt: '2020-08-03 11:51:57',
+                executionMonitoringEndAt: '2020-08-03 08:35:44',
+                cancelled: 4403104216,
+                completed: 8743577593,
+                error: 2405253942,
             })
             .expect(400)
             .then(res => {
@@ -695,19 +695,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'z7wawkfe5yluhppk32j3t90fhsspitzid1qt6uzrgirdgxk4eic',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 's1ackgklliceas8wyvzl',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'ezefpps1gxrpbe4wykdizk9551zc5480qk0cflig7qvr9f06tty',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: '45pprw2a6qyy12562qrd',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 02:40:09',
-                executionMonitoringStartAt: '2020-07-30 16:38:27',
-                executionMonitoringEndAt: '2020-07-31 03:22:01',
-                cancelled: 6767490740,
-                completed: 1159074836,
-                error: 8947680633,
+                executionExecutedAt: '2020-08-03 17:11:41',
+                executionMonitoringStartAt: '2020-08-03 07:54:54',
+                executionMonitoringEndAt: '2020-08-03 10:02:57',
+                cancelled: 5530299167,
+                completed: 7200305684,
+                error: 7849232020,
             })
             .expect(400)
             .then(res => {
@@ -721,19 +721,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'vl8hcoerh1ef8a05ylpe7ir7bdjkgb8te9nxxg5e7217q18yan',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'stsq8uqytzpt59oa7oobi',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'f4wjt45fl1gb307ujacw29y2du21v2era11tmkhte9wzm0tfil',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: '4aybctlu1l9okhsmukvld',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 17:36:25',
-                executionMonitoringStartAt: '2020-07-31 11:47:40',
-                executionMonitoringEndAt: '2020-07-31 09:07:10',
-                cancelled: 2437773886,
-                completed: 6938586569,
-                error: 8856970591,
+                executionExecutedAt: '2020-08-03 08:45:22',
+                executionMonitoringStartAt: '2020-08-03 02:57:39',
+                executionMonitoringEndAt: '2020-08-02 23:56:35',
+                cancelled: 8952689968,
+                completed: 6576241416,
+                error: 4651474710,
             })
             .expect(400)
             .then(res => {
@@ -747,19 +747,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'cp9ud3sgyuum1ug8xfel8ifl6sfwlvx0f71w0ldmdq1rskhlml',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'usrh51uk48ybf9yv9325',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'c8a49izcvfyb3e4gytvjv5j8y7n2lipf7rjh25yrgtsxhljbod',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'o1e5olvvulpegy11x8o0',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 10:05:29',
-                executionMonitoringStartAt: '2020-07-31 00:19:13',
-                executionMonitoringEndAt: '2020-07-30 17:12:09',
-                cancelled: 89052285571,
-                completed: 2691961980,
-                error: 8065622072,
+                executionExecutedAt: '2020-08-03 05:05:01',
+                executionMonitoringStartAt: '2020-08-03 17:38:57',
+                executionMonitoringEndAt: '2020-08-02 23:52:05',
+                cancelled: 96992980920,
+                completed: 3138092982,
+                error: 2236702105,
             })
             .expect(400)
             .then(res => {
@@ -773,19 +773,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'vzmtulx8wb1osjtbo1ms6nf6kpbdcroaykfsxwh0qmbyo6p4ak',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'k2ogzu7j4qzs2mz38n8j',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 's2z0k8ecqezvlfpynta4kddp3a5lf6ctt6dnp1qhhn0w4orors',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'j8huua4clph9qx1os8vo',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 13:42:12',
-                executionMonitoringStartAt: '2020-07-31 07:06:21',
-                executionMonitoringEndAt: '2020-07-31 00:02:55',
-                cancelled: 9370784994,
-                completed: 73129361722,
-                error: 5547657342,
+                executionExecutedAt: '2020-08-03 07:39:34',
+                executionMonitoringStartAt: '2020-08-03 04:44:09',
+                executionMonitoringEndAt: '2020-08-03 02:16:40',
+                cancelled: 9717682843,
+                completed: 93386314724,
+                error: 7498922312,
             })
             .expect(400)
             .then(res => {
@@ -799,19 +799,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'm1ezj6trs8hlp2l9jzolykv3yyw5bqvqgjpmyvyglu3i4lmh9m',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: '3nhk4obybrbom0kxwjib',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'iawmzsl46frihb2k1lui9qu9ic51v1xxfmbhi4g6gj3xrxb236',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: '36aj87g6wfx34nxj3icb',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 20:28:47',
-                executionMonitoringStartAt: '2020-07-30 18:37:34',
-                executionMonitoringEndAt: '2020-07-31 01:06:08',
-                cancelled: 5746998034,
-                completed: 2969459029,
-                error: 18158739702,
+                executionExecutedAt: '2020-08-03 17:30:58',
+                executionMonitoringStartAt: '2020-08-03 15:22:56',
+                executionMonitoringEndAt: '2020-08-02 20:56:37',
+                cancelled: 3580158003,
+                completed: 5721404816,
+                error: 18366280347,
             })
             .expect(400)
             .then(res => {
@@ -831,19 +831,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'eh182vpz7j59gkj87kz8jpfulc58vjzc3qkthpcy6s0u4s5evx',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'l81qo4jvwtzm5ql74qo7',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 02:22:21',
-                executionMonitoringStartAt: '2020-07-30 21:39:29',
-                executionMonitoringEndAt: '2020-07-31 13:17:00',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'odfcae039la1qqc8gsjj1nb7mdc8aeht88tjrcz1p5sp97seq7',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'rdi8qffflsesxcb9s4m5',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 01:14:47',
+                executionMonitoringStartAt: '2020-08-03 07:53:24',
+                executionMonitoringEndAt: '2020-08-03 04:00:42',
                 cancelled: -9,
-                completed: 7746828659,
-                error: 2967515757,
+                completed: 6121146005,
+                error: 3030739498,
             })
             .expect(400)
             .then(res => {
@@ -857,19 +857,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'ksbxzspdfyq29xd6onb07jvu3riwbvvxycsou3it9t73ofog6y',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'ey6mhuh016en79eu9x1y',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'qlzuzc8zfi0mlpyhju33j3nlr3fx8mygxg1mys7kbfi8uptzjt',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'dsmsm3xqmcvh1w007ae7',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 01:44:37',
-                executionMonitoringStartAt: '2020-07-31 05:18:28',
-                executionMonitoringEndAt: '2020-07-31 10:20:54',
-                cancelled: 7058367656,
+                executionExecutedAt: '2020-08-02 22:39:06',
+                executionMonitoringStartAt: '2020-08-03 11:35:50',
+                executionMonitoringEndAt: '2020-08-03 10:53:50',
+                cancelled: 1403706583,
                 completed: -9,
-                error: 1929491217,
+                error: 6430651690,
             })
             .expect(400)
             .then(res => {
@@ -883,18 +883,18 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'zowz2kkwamo30i4odtxmi5nv6dl9u88pf4f9mpyosqjmiyi7y1',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'gocw3lnd5hs59kp4rrpr',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'd48hwq2zfvivgcro267oz6el52cpqcs3zfsyesmsvxberx3fqb',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'nmrvfk5le1atikvok1vl',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 11:52:41',
-                executionMonitoringStartAt: '2020-07-31 03:19:11',
-                executionMonitoringEndAt: '2020-07-30 14:45:11',
-                cancelled: 7868761331,
-                completed: 6127888353,
+                executionExecutedAt: '2020-08-03 02:20:12',
+                executionMonitoringStartAt: '2020-08-03 03:20:39',
+                executionMonitoringEndAt: '2020-08-03 15:40:42',
+                cancelled: 6817343707,
+                completed: 1229174308,
                 error: -9,
             })
             .expect(400)
@@ -913,19 +913,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'e0rhs2i4l4y65z6gqjn4vy4xdnvwmivr7bu52pn0lgr8z3pn7w',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'rgbpdfjr9wrpvl2iq5ol',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'axjlliey3w8ae1c9a84pczufhcvxk2si69i70x2zcn2kdr3lcm',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 's367fr7pfmq2tm9ne84s',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'XXXX',
-                executionExecutedAt: '2020-07-31 07:58:30',
-                executionMonitoringStartAt: '2020-07-31 10:07:38',
-                executionMonitoringEndAt: '2020-07-31 00:42:20',
-                cancelled: 3340276785,
-                completed: 7819931704,
-                error: 4674161707,
+                executionExecutedAt: '2020-08-02 21:55:49',
+                executionMonitoringStartAt: '2020-08-03 07:56:03',
+                executionMonitoringEndAt: '2020-08-03 08:55:49',
+                cancelled: 6052409715,
+                completed: 2714797084,
+                error: 1031779615,
             })
             .expect(400)
             .then(res => {
@@ -941,19 +941,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: '3vtl4tdoggg4a9podg2dfdubwhtt87zicv0kkoipbug2dqwxmx',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'bqf00vfnyb1ddse3pvrp',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'ys6xk2aqlw9cutx65myicidanw592ejwx3hpw2mb9x4mvgmvjh',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'sczmmfwwfa9353psjkm5',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'DETAIL',
                 executionExecutedAt: 'XXXXXXXX',
-                executionMonitoringStartAt: '2020-07-31 04:30:02',
-                executionMonitoringEndAt: '2020-07-31 03:36:49',
-                cancelled: 3768446001,
-                completed: 9319772272,
-                error: 5039100807,
+                executionMonitoringStartAt: '2020-08-02 20:32:01',
+                executionMonitoringEndAt: '2020-08-03 10:02:28',
+                cancelled: 4382929493,
+                completed: 4285870688,
+                error: 6477050048,
             })
             .expect(400)
             .then(res => {
@@ -967,19 +967,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: '4d0tz9drq4ezarb82ftuj472g1kly8bgayism7g7xkbcyyqgis',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'vumgu4wq3iit904szvcu',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 20:05:33',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'bs9wg91bje9l105787umx1lvr87ncx6vsujqgwvp4pd6x3jcqv',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'p0j0e8kg59gnmme1mhac',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-02 23:20:50',
                 executionMonitoringStartAt: 'XXXXXXXX',
-                executionMonitoringEndAt: '2020-07-31 00:36:55',
-                cancelled: 3726183542,
-                completed: 2772573549,
-                error: 8041407758,
+                executionMonitoringEndAt: '2020-08-03 16:44:52',
+                cancelled: 1960127017,
+                completed: 3593512569,
+                error: 8680038311,
             })
             .expect(400)
             .then(res => {
@@ -993,19 +993,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'pe9b2pcrn40ew8gadi09htxsbjfi9933elg5i4348wuz9dg3yi',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'gdkpvk1hqv7kbzxhoy0s',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 14:37:11',
-                executionMonitoringStartAt: '2020-07-30 16:50:39',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'kh2qrexcgc6li3vgwxfkh6vyi9dakbqhh1vhi2d85x3u7rlqv1',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'e3c1zj45k6wub3a41665',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 06:05:00',
+                executionMonitoringStartAt: '2020-08-03 06:25:44',
                 executionMonitoringEndAt: 'XXXXXXXX',
-                cancelled: 9004053108,
-                completed: 2930296481,
-                error: 1746536822,
+                cancelled: 9364937711,
+                completed: 7781281568,
+                error: 7340037869,
             })
             .expect(400)
             .then(res => {
@@ -1020,19 +1020,19 @@ describe('job-overview', () =>
             .post('/bplus-it-sappi/job-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'b26zpofasq6u91xfwh5jfijp41s52pu6sytgewkq46l35xaeqi',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: '7j9guojqb0z13d5gkbyz',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 20:39:35',
-                executionMonitoringStartAt: '2020-07-30 19:38:21',
-                executionMonitoringEndAt: '2020-07-31 09:16:46',
-                cancelled: 1052615815,
-                completed: 2504591603,
-                error: 8963901051,
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: 'ftojl0q6dzotv2y5d5vnryi0kytzsx3uu15hfd0wo9ngf3cn1q',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: 'edso411mp8c91y63f6wp',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 15:39:02',
+                executionMonitoringStartAt: '2020-08-02 23:06:38',
+                executionMonitoringEndAt: '2020-08-03 16:22:49',
+                cancelled: 7946241675,
+                completed: 5923233423,
+                error: 4592274150,
             })
             .expect(201);
     });
@@ -1073,7 +1073,7 @@ describe('job-overview', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '228237b1-24df-4e46-a8f6-cd501e27a1ee'
+                        value   : '90a2d324-a9e7-4e83-b481-af0fb108a23d'
                     }
                 ]
             })
@@ -1091,18 +1091,18 @@ describe('job-overview', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : 'e57466a5-40a4-48ba-8b83-cbd6dd80d137'
+                        value   : 'cef152b6-5cb4-4bde-8e87-db647bdef79d'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'e57466a5-40a4-48ba-8b83-cbd6dd80d137'));
+            .expect(repository.collectionResponse.find(item => item.id === 'cef152b6-5cb4-4bde-8e87-db647bdef79d'));
     });
 
     test(`/REST:GET bplus-it-sappi/job-overview/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/job-overview/0a0831b1-2f12-4c08-a6e7-26427d86def0')
+            .get('/bplus-it-sappi/job-overview/dfcebfba-412f-400e-9d78-a68efb84003c')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -1110,10 +1110,10 @@ describe('job-overview', () =>
     test(`/REST:GET bplus-it-sappi/job-overview/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/job-overview/e57466a5-40a4-48ba-8b83-cbd6dd80d137')
+            .get('/bplus-it-sappi/job-overview/cef152b6-5cb4-4bde-8e87-db647bdef79d')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e57466a5-40a4-48ba-8b83-cbd6dd80d137'));
+            .expect(repository.collectionResponse.find(e => e.id === 'cef152b6-5cb4-4bde-8e87-db647bdef79d'));
     });
 
     test(`/REST:GET bplus-it-sappi/jobs-overview`, () => 
@@ -1132,19 +1132,19 @@ describe('job-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'a6b07734-7eba-436f-86e4-f4f9c8bb19b9',
-                tenantId: '0173521e-9783-4494-b009-86fa7e2b4a6a',
-                tenantCode: '8n55h4s75a46o0syaus3kb5hduyv1vlsualw4alf17f6r3msxq',
-                systemId: '2d979030-881c-45aa-83ae-1b8af46b1200',
-                systemName: '1bbpfbc3ry7ccqqlaapy',
-                executionId: '512b58bf-9f7d-4f3a-92d6-ba3cda8f1f85',
+                id: '55ec1cc7-cea6-4ee0-a38a-8ee80f5970aa',
+                tenantId: 'fbfb5522-4e64-42cb-ba66-5cbca3926ee4',
+                tenantCode: '4ivyn2xgnqs22vsicdx2q41q04tcg4opfnd58xddh67wl8qqvb',
+                systemId: '7a2192fb-f267-485a-8788-e11447dcf749',
+                systemName: 'qoiz6a4353v7xro63mtj',
+                executionId: '4b9efc3a-b720-4535-9af3-4acd9c0934de',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 22:11:21',
-                executionMonitoringStartAt: '2020-07-31 05:29:26',
-                executionMonitoringEndAt: '2020-07-30 14:52:58',
-                cancelled: 7345287602,
-                completed: 1340388541,
-                error: 2569024218,
+                executionExecutedAt: '2020-08-02 22:07:42',
+                executionMonitoringStartAt: '2020-08-03 07:26:38',
+                executionMonitoringEndAt: '2020-08-03 08:04:31',
+                cancelled: 3694342095,
+                completed: 1185410474,
+                error: 2157905780,
             })
             .expect(404);
     });
@@ -1156,28 +1156,28 @@ describe('job-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                tenantCode: 'igogua27ivj7rhfin4or5tdbrbsdsrl3wvp3q959z8qcdb51cs',
-                systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                systemName: 'xujaykvdvvippu3ityp8',
-                executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                tenantCode: '34h3621mojkuunfh9qni8gcvcgsi8zjq7226iv2xjb1gl0yfyv',
+                systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                systemName: '4hbay26flfe6gnl8rf86',
+                executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 21:30:15',
-                executionMonitoringStartAt: '2020-07-31 04:24:33',
-                executionMonitoringEndAt: '2020-07-31 04:50:55',
-                cancelled: 9908507396,
-                completed: 2743797720,
-                error: 9683200244,
+                executionExecutedAt: '2020-08-03 11:47:42',
+                executionMonitoringStartAt: '2020-08-03 13:32:39',
+                executionMonitoringEndAt: '2020-08-03 17:41:51',
+                cancelled: 6134704103,
+                completed: 9842808064,
+                error: 5434511283,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e57466a5-40a4-48ba-8b83-cbd6dd80d137'));
+            .expect(repository.collectionResponse.find(e => e.id === 'cef152b6-5cb4-4bde-8e87-db647bdef79d'));
     });
 
     test(`/REST:DELETE bplus-it-sappi/job-overview/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/job-overview/3fb5ac5c-5417-42f5-a2ee-4a591b3606dc')
+            .delete('/bplus-it-sappi/job-overview/a3f973ea-ec3f-4e64-b0fc-216ca43e13bd')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -1185,7 +1185,7 @@ describe('job-overview', () =>
     test(`/REST:DELETE bplus-it-sappi/job-overview/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/job-overview/e57466a5-40a4-48ba-8b83-cbd6dd80d137')
+            .delete('/bplus-it-sappi/job-overview/cef152b6-5cb4-4bde-8e87-db647bdef79d')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -1262,25 +1262,25 @@ describe('job-overview', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '6d22b01a-0b41-4581-95c9-eb269013c282',
-                        tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                        tenantCode: 'mcli0z8p0kgvwt7kr1auuhxzva61kb25gisszmvte4ysgs4q8t',
-                        systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                        systemName: 'd2eythsupjqibdllsr44',
-                        executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
-                        executionType: 'SUMMARY',
-                        executionExecutedAt: '2020-07-30 18:27:44',
-                        executionMonitoringStartAt: '2020-07-30 22:57:47',
-                        executionMonitoringEndAt: '2020-07-30 19:49:05',
-                        cancelled: 6132227794,
-                        completed: 4459809684,
-                        error: 3050714861,
+                        id: '87c8d1e4-4f42-4086-a79e-dc1418d3e1c9',
+                        tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                        tenantCode: 'hd04demhxhx3r4aglwbw7cibxrtaxgq1nseqxm696h9deawg3s',
+                        systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                        systemName: '64cfe822svmcngunw209',
+                        executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
+                        executionType: 'DETAIL',
+                        executionExecutedAt: '2020-08-03 04:38:14',
+                        executionMonitoringStartAt: '2020-08-03 12:12:44',
+                        executionMonitoringEndAt: '2020-08-03 01:05:14',
+                        cancelled: 2264592647,
+                        completed: 3263914656,
+                        error: 2780200702,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateJobOverview).toHaveProperty('id', '6d22b01a-0b41-4581-95c9-eb269013c282');
+                expect(res.body.data.bplusItSappiCreateJobOverview).toHaveProperty('id', '87c8d1e4-4f42-4086-a79e-dc1418d3e1c9');
             });
     });
 
@@ -1357,7 +1357,7 @@ describe('job-overview', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'e2084c9e-9382-4f9f-9ea0-641d8cb1a030'
+                            value   : '5fed4284-cf75-4716-bbe3-1cc1eec273b8'
                         }
                     ]
                 }
@@ -1405,14 +1405,14 @@ describe('job-overview', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'e57466a5-40a4-48ba-8b83-cbd6dd80d137'
+                            value   : 'cef152b6-5cb4-4bde-8e87-db647bdef79d'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindJobOverview.id).toStrictEqual('e57466a5-40a4-48ba-8b83-cbd6dd80d137');
+                expect(res.body.data.bplusItSappiFindJobOverview.id).toStrictEqual('cef152b6-5cb4-4bde-8e87-db647bdef79d');
             });
     });
 
@@ -1446,7 +1446,7 @@ describe('job-overview', () =>
                     }
                 `,
                 variables: {
-                    id: '9677e559-1f10-4cf2-b0f4-bf5462b18359'
+                    id: '5d521478-cca7-424b-afbd-65d714b5a034'
                 }
             })
             .expect(200)
@@ -1487,12 +1487,12 @@ describe('job-overview', () =>
                     }
                 `,
                 variables: {
-                    id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137'
+                    id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindJobOverviewById.id).toStrictEqual('e57466a5-40a4-48ba-8b83-cbd6dd80d137');
+                expect(res.body.data.bplusItSappiFindJobOverviewById.id).toStrictEqual('cef152b6-5cb4-4bde-8e87-db647bdef79d');
             });
     });
 
@@ -1568,19 +1568,19 @@ describe('job-overview', () =>
                 variables: {
                     payload: {
                         
-                        id: 'cec5b38a-dbb6-4012-b01e-395dda2ed821',
-                        tenantId: '20f0c801-aa1e-4fa7-9fe5-07ac4eb5433c',
-                        tenantCode: 'kj8cz7f6p9n5kifyrchdywj83up5j02xv54hzglytc60l2puzd',
-                        systemId: '921515dd-ea1c-44dc-8f40-ddcb277b2f70',
-                        systemName: 's9eo0bcmzoc0n2czw772',
-                        executionId: '92f8d731-cd39-471f-90d8-e5f065a58803',
-                        executionType: 'DETAIL',
-                        executionExecutedAt: '2020-07-30 23:07:47',
-                        executionMonitoringStartAt: '2020-07-30 15:38:15',
-                        executionMonitoringEndAt: '2020-07-31 10:56:34',
-                        cancelled: 7793167876,
-                        completed: 8122361727,
-                        error: 1816122294,
+                        id: '4c4039e6-1fd1-491f-b435-5ce876f99f38',
+                        tenantId: '91853ed1-ddd5-464c-9fbd-9a0512c2a1df',
+                        tenantCode: 'a8jmwl0n1mw9xv6hdeqxyjycz56ja0y8zgaqakbxaa145wf1x9',
+                        systemId: '6a49b5c4-f12b-4f87-a4da-3d7154fcfc6c',
+                        systemName: 'ls4r495jyp9pftd5d77p',
+                        executionId: 'a65a0bea-ec68-4205-8c42-d6491bc5f6c3',
+                        executionType: 'SUMMARY',
+                        executionExecutedAt: '2020-08-02 23:23:45',
+                        executionMonitoringStartAt: '2020-08-03 11:19:04',
+                        executionMonitoringEndAt: '2020-08-03 05:26:54',
+                        cancelled: 3596188958,
+                        completed: 2838949688,
+                        error: 7949500496,
                     }
                 }
             })
@@ -1624,25 +1624,25 @@ describe('job-overview', () =>
                 variables: {
                     payload: {
                         
-                        id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137',
-                        tenantId: '90a5fdbd-49c9-4f8f-a8d9-92ffc4d707e1',
-                        tenantCode: 'nqmt00uh50lp9g80677mfja28dc13gmi9gkj6vgahh4qvsdxgr',
-                        systemId: 'fc8ef8de-a1f5-4958-8864-8351b9263f8f',
-                        systemName: 'jc8aml9penva1ryryh2d',
-                        executionId: 'b2567ea7-1d38-420b-8ab0-e98087672709',
+                        id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d',
+                        tenantId: '3c094bcc-81c4-45d5-bf3c-9fa973bf0cc3',
+                        tenantCode: 'dj96ql4u74beyrd6vcr3u6ldjxp5nousa8f9t5suumujwcoe2m',
+                        systemId: '47242f1e-225b-4775-a350-6e0d7e43db0c',
+                        systemName: 'ljp3n7m0ekq307aeskh9',
+                        executionId: '3892e556-c03a-40c9-ae1e-fe5fc55c2ea4',
                         executionType: 'DETAIL',
-                        executionExecutedAt: '2020-07-31 12:00:15',
-                        executionMonitoringStartAt: '2020-07-31 08:53:20',
-                        executionMonitoringEndAt: '2020-07-31 00:40:01',
-                        cancelled: 7194700310,
-                        completed: 3941638663,
-                        error: 2180163123,
+                        executionExecutedAt: '2020-08-02 20:22:15',
+                        executionMonitoringStartAt: '2020-08-03 12:30:11',
+                        executionMonitoringEndAt: '2020-08-03 02:48:42',
+                        cancelled: 3038133282,
+                        completed: 9845060255,
+                        error: 3466332513,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateJobOverview.id).toStrictEqual('e57466a5-40a4-48ba-8b83-cbd6dd80d137');
+                expect(res.body.data.bplusItSappiUpdateJobOverview.id).toStrictEqual('cef152b6-5cb4-4bde-8e87-db647bdef79d');
             });
     });
 
@@ -1676,7 +1676,7 @@ describe('job-overview', () =>
                     }
                 `,
                 variables: {
-                    id: '38677fbd-8e4e-41f4-a93f-0ee80ace26fe'
+                    id: '398ffef4-792a-4662-a32c-9623a8be636a'
                 }
             })
             .expect(200)
@@ -1717,12 +1717,12 @@ describe('job-overview', () =>
                     }
                 `,
                 variables: {
-                    id: 'e57466a5-40a4-48ba-8b83-cbd6dd80d137'
+                    id: 'cef152b6-5cb4-4bde-8e87-db647bdef79d'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteJobOverviewById.id).toStrictEqual('e57466a5-40a4-48ba-8b83-cbd6dd80d137');
+                expect(res.body.data.bplusItSappiDeleteJobOverviewById.id).toStrictEqual('cef152b6-5cb4-4bde-8e87-db647bdef79d');
             });
     });
 

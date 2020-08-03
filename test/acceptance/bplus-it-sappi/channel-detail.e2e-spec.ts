@@ -68,22 +68,22 @@ describe('channel-detail', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '2z6b4l0k3b0p6cpnazsd2w2wiracnbpmkdzhyphjbao783dxyw',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'lrque96iz7nadkbuh4y0',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 13:22:09',
-                executionMonitoringStartAt: '2020-07-30 19:24:19',
-                executionMonitoringEndAt: '2020-07-31 12:42:31',
-                status: 'STOPPED',
-                channelHash: 'l7ateclxy4e5y95j5odm5iplh5bw1dq2jkxy9ndv',
-                channelSapId: 'l9vwvmc28k7ybwd50w3tvea08n1bak4be7af83jfbj441bd3m3',
-                channelParty: '4elvgum1sbeeo81vzo70frdrxs1vhvjnugjr7s4d8y9iu6t0yfdgy4mgz62h3xcmi9lptz52uhq4wqhq57wuiyu015aosypxgy7rjfekav9p24ih375h8j87tgsbhu82cbwfp9eyaq6tbkvin4dvlvdpyk6pitc8',
-                channelComponent: 'lqlvvb3wab666j8omdk9an9n6mc1n66cohxq0vwjbtgyjvofha4hhkiskimruse5k0we6fvgwoqks3uug7qnigls60nty7tpvvpe12cqkw4hhbww0hqnzesd8beav2qguwcjvb8brd471f6nqk5uzdzn804c42s0',
-                channelName: 'l6h11b72td1r8uu1bnpl4ggw4v9nafpvxqg6dvssu4uxc1qg77p024a05p21zh3cug90cpsv3y8zsyh7myxtii1ak1v0aqtsgb77ahrikthjbxc1ahc8f61370nc9z42rx374kvpka18ysglcjg06slffc3hgmtg',
-                detail: 'Quo repudiandae iure neque ut officia. Qui iure et sequi repellendus et. Maxime est tenetur qui. Fugit occaecati qui natus tempore. Magnam vitae ut.',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'tn2he550c9r1w88hlwpp582v0l1j8mcpmcix7bl0kfkzqar0pe',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'ci9klyxae3vvc9hfsj8c',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-02 19:25:18',
+                executionMonitoringStartAt: '2020-08-03 10:08:03',
+                executionMonitoringEndAt: '2020-08-03 11:17:08',
+                status: 'SUCCESSFUL',
+                channelHash: 'ihv3pp0k5a2w1jvs00aa5edykuohrj0c4kf0vrt3',
+                channelSapId: 'ozuhotq01jca7ri6k9fyrxqfkur3073t89k2ij66glo4pkx3hg',
+                channelParty: 'mm0y2homjn0o59qmj5t238u78z7yvix8zhy95600j9admls4k403t3km6poj6o0aiuznjx9l85ie1aas6tzckjctirsjy4tvakh4ix5u5gh0yyof8pvuqhfir1hf5qh0y0dca0b42wbz6f6k6lv09blvmlmw8gbd',
+                channelComponent: 'd2zqzemcwo13tesfwcis78c89r00npgscmm9yu7rhptn1kr820k5pkyyejqohwq74sehplt414065h3bnvf7ijsmoq2uu6o5tl1cr3uadwjnrs4anaq6f8l4rtbj6jxnctcny4ynqlklwu6qytommzb0a9paaj6p',
+                channelName: '10mp9zah1spyajwcbidsfi3u5bs4x4ebj9rd9oaivm1pf03gi2dj1k0a0199dydy5tpairhh22jxp8d0qr75qd2bpcfi69vcxhjuhxre3sgf03th2n4elkmvugfq6yvki8073mk7w3ghc66z3c2lgqa3vvpduc4f',
+                detail: 'Quod numquam quibusdam. Nulla sequi rerum distinctio quos. Iste aut natus animi. Voluptatibus ut dolores eum ut rerum ut sint molestias nihil.',
             })
             .expect(400)
             .then(res => {
@@ -98,22 +98,22 @@ describe('channel-detail', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'n12g8hs41ntmurqlgoqgaw5urux67cqmdbiiv1lwn3wybzknuq',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '7bg7fkjphlv8ypad622k',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'py01rl0tedc34pehqtsfgk8nzgzz7ey86wujkdxqltyntdd417',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'b7w5a0129opa5lidwx40',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 17:54:28',
-                executionMonitoringStartAt: '2020-07-31 06:26:54',
-                executionMonitoringEndAt: '2020-07-31 00:18:20',
-                status: 'STOPPED',
-                channelHash: 'zranpzxdi47m9rlv6pqzk89l14mv15vmqvu44bty',
-                channelSapId: 'rhmtcecnqsnapzj5xstt1yw2q3pq0si70d3um3x4bv7a7mdxv6',
-                channelParty: '5cret767c50pdbapj463u61a5cfrhspqcuxqmxavpwh2nfwoe85gfbu3uog0x2oje47ezx5i9um3gxqh6bwixs5dzpvqsbf4an6ea1b6r6es15kxkkrchk6q8yx5yrlfxd3f4bfxpp1tt3pfcbzt2526ivb0sr4k',
-                channelComponent: 'euhs0smiwq86kofi4offprlq3k71x0vlldija9hm57xxf8gollwg9j4zpagew8mpx43dpykjfjvm9c85u0gevv1ceju23v4pyirp8lqv5jkyohm8j5mz74zjo11s9h3j1nriu527cwwa9ogktspi8rya6lf4fvmu',
-                channelName: '3of9sudhcle6cqqt1zyxk23zcth9lpaowy1uskhghww0r0b04d1u9mewn8krp3ybphaljtmcz1c8qdg4vu0cr6goofoq7rv3ojs7exwlap6gbr53paxuqjptrxfzybkxpwtwivn4izhg3xzri3qpkdisvgs6m1i4',
-                detail: 'Ducimus doloremque et rem expedita distinctio voluptas eaque eos. Quo earum magnam quos reprehenderit sunt. Dolorem aliquam assumenda nesciunt.',
+                executionExecutedAt: '2020-08-02 18:41:47',
+                executionMonitoringStartAt: '2020-08-02 23:40:46',
+                executionMonitoringEndAt: '2020-08-03 08:06:03',
+                status: 'ERROR',
+                channelHash: 'uqewvsuuh1qgc2komxxe366ejfw3agum7j45nr5h',
+                channelSapId: '1ttds45bqw9bpwktnaflnh8pq984uddd10ev8wytaeyu4t3t6k',
+                channelParty: '6jn1gz4lyyxdtncvut9phdw1egs251cjduvgdvjn3s7mczwuxpol7hg25gd5nfh8wa1csr0c7t2d9es538w8qn87kw8im9umnbkvtzgmexzq5vlh2vcy0j07g434c8d0qxs5cws27y0bqjouvy7rk5r23pj0gr43',
+                channelComponent: 'z11mi4l3kz831ejqljyxqlq283azmv2k6z7qcm2n8aov86fmzjrmcjiqtjolyd0ba5ce6pma76t0i2qhrxtp2sl6m0t135bfzyhxi276oylqvcjv8vuoxmpusnmztnj1m5fwvaw4dkobl07xk7n6wb7hdavt66a6',
+                channelName: '50pegm5xszke1he9uxy6xmlicb1mjh5di7959a5sniys54q9l8ebm9a679jqw474khexjxzgdmq4wz6193x8h9d630f5gbioyxtu4pe9a4pwvlp2sgmv5jmhtisvg4yalnczv2ivbvswu647m33ly78ah7v14qtd',
+                detail: 'Amet et et consequatur voluptas sed nisi alias magnam. Deserunt sint eaque praesentium ut dolorem libero. Hic ducimus sit asperiores voluptatem voluptas aut ut quidem et. Est maiores soluta.',
             })
             .expect(400)
             .then(res => {
@@ -127,23 +127,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
                 tenantId: null,
-                tenantCode: 'cl9g2u1iukupqg6tupoqg1ddsq2z397hoj6nbwxda79sqz4dd1',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'tvou39zqo3nd7b1jilwd',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 12:41:37',
-                executionMonitoringStartAt: '2020-07-30 22:51:19',
-                executionMonitoringEndAt: '2020-07-31 00:57:10',
-                status: 'STOPPED',
-                channelHash: 'cteio0n5myp1kgkvuxzlcwd2fba5j2vdh585kcqp',
-                channelSapId: 'xtsgxqp6tb1c9m2p1e0d9tsz3po51r0131xry3j0gn2ts3vmf7',
-                channelParty: '39oko2d4rpy36ti4k3j2hcjwxrcynck45w7lgu2vbe5mfm1qv9mw3vw9cvo0ce229diqdobex2g5uz0iirb15d6fcx5yfxtdnbiex8ya6rjiep961bqs6n4qggx5phxtgkdrix5z0ezg6ug6zo8as1ldt8w69qgn',
-                channelComponent: '8lfvnkne8yprs5s3x04e6gzptp5lsprfqe8bba34tga6dg435jkuh4w7md659157lxdlsh89jk8dnactsyvzac29o30vwhqwlliv3usjaykp417p4x4edv4y6evmbcqfh6kzd8cn3rvjj0nt9ptonx6x0n6fm72h',
-                channelName: 'foc1pb7whighha4ffk40hlry0rl1zr50w5xa0j5aavrxqhv2p9rtq2zgq5w8idyizhuocs0lzehitolbkl14wtr5w3qp24l9kk7xpvhbmp39utsoqcntliqrpjysjzjbb9j6vyyotbrni228ot3b60guwqoyfifd',
-                detail: 'Eum voluptatum vitae est expedita id sit molestiae. Aliquid ratione et soluta voluptatibus veniam hic enim laudantium dolor. Incidunt laudantium voluptatem voluptatibus similique fugit. Optio enim quia.',
+                tenantCode: '7f3eqvh7pg44997tdpe7wyfgsycnufer6y8cuqdicfm43tejf2',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'sa4cgnf9ay6wgvqgu5cv',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 02:20:46',
+                executionMonitoringStartAt: '2020-08-03 15:45:49',
+                executionMonitoringEndAt: '2020-08-03 14:42:37',
+                status: 'SUCCESSFUL',
+                channelHash: '1j0505r6pm5xhczpt3e241qxf5pactqgfpjz1tjv',
+                channelSapId: 'j0gkqoj6jvav7g9iz0xzz8qvz2um9nl8xto7njrg2w07ox5xn4',
+                channelParty: '8bsrfbcs6dhaqfhmnefyhad5sixvr5z20jyfl66woqp9glj2xts3h3fg8b1myt2yy46prx4xxypn7uqf6c5qiy98lsdvde9zsf0k5z4rtqyzuvlbukli0cjxhqpmzi5ao9t4znmi6y7fioz5kumhhu28x90bssnb',
+                channelComponent: '5jxcd3k9jbhqt53nibg1uqxre1d0956hbbnawrphywnnnaswvaz0awyanua2yjo9nfgcbtx9rb4s2f53yk8l01tgyubmp9ohfn22ua4k3vjqrq3n9b0h3xm85a957szjku2s6tvafb8zuxmxaw2075mz5p050y70',
+                channelName: 'xevz6hbedrd2k21yvfejhlef9tvyio9sfvb0vm9cej0cto0dkeeg6853b4f2w5kucygb45kzjfgdvc6i0gox2pw2a2hseykq0it9dm8vrljb4g4ufs4fekyh6xyf89ler9q7gy0mrudxu132fgtx5qc5ao5ks5ho',
+                detail: 'Perspiciatis sint quia recusandae non tempora. Ipsum deserunt earum. A aut eius quisquam.',
             })
             .expect(400)
             .then(res => {
@@ -157,23 +157,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
                 
-                tenantCode: 'g68l1gmc99rz7oxg9zkzsa3fnj5jkxrv7xmpj645kyqo9ccokh',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '15mo0beur0lgyfln8mjo',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 15:34:16',
-                executionMonitoringStartAt: '2020-07-31 05:03:01',
-                executionMonitoringEndAt: '2020-07-30 23:16:35',
-                status: 'STOPPED',
-                channelHash: '9ixyhwgvkepnd27p7fazfmpk08phwvs7nafyfmfd',
-                channelSapId: '64c5sxykizoehzjxq2u2my5fx7fufgpolykkjnazupug5wbtgk',
-                channelParty: 'arvctxnu63mfmw8bt8lduhqph4qnpwt1hwjampfzpb2b9qtjl23ituegx6uiqmhhs4efnafixebt6wtpr7xijrs2q006b6esjvd5o594t3g4ok250bj7cbiyydltrfpc9h0a9hm7ofywku4fgjo28ysd9mtpxjff',
-                channelComponent: '1hkbkul4py0jme46kz2hs3d3ymr93rc45yzcfk8w8usesto69l59d71ddmcsz16jmpfmsbv1fcip44tg8pyt9be3jyg5ocs06xwbgkxo9u44vc38ev32v3p7rpc55bg4gjuiuzunh7ht0tdtkaamc97s3naqoo80',
-                channelName: 'k7rqixtnf723c3q2s0mn8o69u2tbxr60asg1z2eu2zydha3lmnlttc0oaeu5n4oek6rvh59k464gr3g1s0oqqhxamji0c24p5bl74fa8ogpt5tgxp2hbenna6xtcxo54r3h0reqpuf9bixo92c9slwos052fxopl',
-                detail: 'Deserunt amet dolorem aut architecto quos et et. Aut fugiat eum non libero quia quaerat repudiandae quis. Dolores ratione laudantium dolores eaque nesciunt velit iure blanditiis voluptatum. Consequuntur asperiores fugit quia culpa et a laboriosam et delectus. Quis voluptas quisquam iure nihil aperiam in accusantium. Quos consequatur eos rem impedit excepturi dolores quis ut quia.',
+                tenantCode: '5g2wi8xhoj2ut4sz1pqukbu0c29qt2s9w9n4arbqqfu2s4qq6w',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'r3m57bhs2m9izil4s7fi',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 13:52:59',
+                executionMonitoringStartAt: '2020-08-03 10:04:06',
+                executionMonitoringEndAt: '2020-08-03 14:09:01',
+                status: 'SUCCESSFUL',
+                channelHash: 'ejxzw3gwb9ifxc4lsu0zlbf9y7etcgukjycmudsb',
+                channelSapId: 'eqg3ze9njei0166ei3p656plyyz1q5kjmdcbcazxjosvuiy6u1',
+                channelParty: 'krnnfe4d0gf043e2ui6ylit6574ob42axfja2a177ymd1oepc5q7h1bjrykxfncgmj05mrcqrmgz4ce4q8ybc863wrfducz3vkc0r3x5b64f4e44filyxb3y0auz6q0rinvkz7mgqo2r6v5dd3pwl2j4tfbsyehv',
+                channelComponent: 'pbkhlubik0w2mwtlt4vo81wgwt26vrwcuoddabtjdk1putm3vp7bkulyya9s2ph3hk9wfy9h0laymljzhc7e3kpia9ksxm6fqwu2rp3ykcad3ffqebjk90tjn9qtpacnraoq8r1vuyytlqvgojnill7zyhe31kgr',
+                channelName: 'zkaoo8flulqnwp9x0btt7x2gyt283qxrrs7c7r3jx8u5qn39r7c1b38pe8no1802a92i2z3yajh04bpfmxcr708vyy9ecuhzdtxzsvm6phhi6lhkg61bb0gu7giqf0pfw5as69lr3swbl1ocj29awt0zmb3ky73c',
+                detail: 'Nam molestiae dolores. Quia itaque quod. Quia ipsum maxime. Magni qui enim. Odio officiis ut eos sint sint fugiat consequatur reiciendis velit.',
             })
             .expect(400)
             .then(res => {
@@ -187,23 +187,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
                 tenantCode: null,
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'vcyajejh00qdgits2qnl',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'hcp92t7ocg4lxlg88h1w',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 10:31:08',
-                executionMonitoringStartAt: '2020-07-30 18:42:18',
-                executionMonitoringEndAt: '2020-07-31 05:54:14',
-                status: 'SUCCESSFUL',
-                channelHash: 'lvdmladoepzcou2ffwi8g8gb83a2mj0k3p7ofl53',
-                channelSapId: 'qsd6pfkwtue54qal3zafjhxv90imsi74dn2o92a8a5a8n5r6md',
-                channelParty: 'u4j7bmgi16u0shz8pb7z9fhuih5fj85wzzbdtyw3t8s0to6mlqkx4t2capfo9ftvm2zt3q63b07n93loyh1l7gdr6cof3di69psad9anicfc5uhvunp6p05lyeja2ffbduxs9i5gi9kvw1u2p57522a8cn3ovww8',
-                channelComponent: 'q2mul1r14n7z38o5bnijl2br2zrl2aychhi2midkxmu6kaqtfw6eo17w43cda1r43yyl94eozkc80s55e9y2866qv0a7s8fq6ufec7lcn1j7act0irbrbj7363b0a11k48qfdwzeu2cskp35i8hejrtfvbluue54',
-                channelName: '8tkf9szowk1wrks4rvv3temv9xddgzpzzn642pt4j5nh0rkj0zque5fc6v4ucmtsi2zq1xoo5sisb22uknsvm33t0mllptnrfmnuokxxj8684h7dt8haeugwbkvv4rhr7nvfhf7ezgaho1fg6wmzuimp3xe8es5p',
-                detail: 'Enim dolor laudantium accusamus quam dolores. Consequatur odit optio provident odio repellat. Ipsa dolorum perferendis. Eaque laudantium aut alias non quod adipisci molestias beatae.',
+                executionExecutedAt: '2020-08-03 08:58:59',
+                executionMonitoringStartAt: '2020-08-02 21:50:11',
+                executionMonitoringEndAt: '2020-08-03 15:05:03',
+                status: 'INACTIVE',
+                channelHash: 'gt7313hsck54hzxiyvihauynp1m3adsk5dxp9znh',
+                channelSapId: 'zdw6mu0j91w5mbk6malb79sxua1loe7vtkm32d9hcl0xib2q33',
+                channelParty: '4s8gycpe9r8oo899kqqbm6469xnnsapldz3yi0o5z6b2adu04k1iensqkpv2ak44glahic7o5cc1hr1a8qg8ysyc6l5ex3cm2a6yky9c2w3kcxgp2qrq21x2dpc5mw91cyzkvz6gk0cfstwkdbbp3m1g5ecv8voy',
+                channelComponent: 'myboanq5c2jgqrvhahz1a3cya1kildyig6lqznzg0l8yka98c9u0vlpeefhplb9l4zysv8cnt7ia4hfaj71nckmjxf7t395o9c0wuz3j9i1xt6xgw0ncn2mp632fn7n6o69n7ag8a3tudydwtdt2l6mrz3u1hoph',
+                channelName: 'irsh456y5f2062twre4qh548kn9lidurp8c7d1bx0tu4mot6bvjhstzhqccqphxzkfbb3h43l1wt22o1geqv8nxp79pop0v1xqehnymeehpeiaro35rjon87d7jl0y88ux2nl06wqy5pvizz4qmuqytis04zdayo',
+                detail: 'Eligendi eius temporibus repellat ad eos repudiandae. Qui nam dolores molestias veniam ex. Enim numquam ut id quisquam corporis ut explicabo.',
             })
             .expect(400)
             .then(res => {
@@ -217,23 +217,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
                 
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'lczc78d9keqx20gf9lrl',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 14:37:54',
-                executionMonitoringStartAt: '2020-07-30 21:53:07',
-                executionMonitoringEndAt: '2020-07-31 10:57:49',
-                status: 'UNKNOWN',
-                channelHash: 'r9fp0lr9eg6idhzpbvhrog6r8boss57esex4bkwj',
-                channelSapId: 'zbjo21zk85uihud40nohpicdl9g8uso49xv37008gi0y5qgvrb',
-                channelParty: '7s52gj19psf4ugwh79553bbpjrnd8e85nl58h5zrqbzvgpgrjdfujwtjyvr1dkyvbzbakwk7ueg0rqu3elmlmj9yvurr4ci7mq63hsyoeyle6ejnne2v6mmmzq9mh3w71cxfjx6fbq4dpi44ftz9pt3u1fi3j6rt',
-                channelComponent: 'esrq8kg4hankoc8rvd8e6poljbdyqpjlg73oq8u90dzvw7rg64nxng08gig9ovnv2p9za74tdnjh3sgicvyqhn290cz8i5171lf2l6hjl0zsrwavo4v2xq6jyr3xq3vwqlpz4055f4g14e0gox9j43789is2j45x',
-                channelName: 'temdqk9w63no1s092r8mkj3zvybudxc526lhiq3ws3gh005xdxkd5gc7ah88rq2yaccx5le5zp90d4ktfmuoy7nix3qf88zwpvqzm8ol3w6e192nlvvh7km8a6e9zp3fo6gcspjtf5lrebpm6i6tejilpnym3wm6',
-                detail: 'In beatae delectus quam nesciunt et laborum quos et. Est tempora molestiae ducimus et reprehenderit maiores dolorem qui aliquid. Harum omnis optio in incidunt sint accusamus pariatur.',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'yma5rjyerb0ohpf615ri',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 16:45:08',
+                executionMonitoringStartAt: '2020-08-02 23:52:16',
+                executionMonitoringEndAt: '2020-08-03 13:52:33',
+                status: 'UNREGISTERED',
+                channelHash: 'b51uu2qwx8uuy5rhyek89sha51amlrstzhpok3k3',
+                channelSapId: '448gsxh8g2mtb4beh1xp80jokax9kmzmeuauffd67qugtpn216',
+                channelParty: 'cqj18frkmtgz5zbwb982zgu346vf6xn61jqodidl488bjwoo7vkpwh2oifmwp2qjori5b81mzocd7hiw5l951qli9qd9hlxcqsyshnpcjxe1873zqcyxyfcm3oj0hvdh992rno67lov4kas226nyxhukn42p0m0k',
+                channelComponent: 'xsdax5myu0frcifut1r0q99nwbcxqvjpa7qk04nxo8xhd7kqtp9icjz6xx8h2theqn4gj0ziv4semiltsp2zed781sv77z7z9u3qfrb33e6u18la9pu1mt4xrmlt8a3yq3fyrpxbflv6vzop9tnuk4l7tx3kl9d7',
+                channelName: 'b6gr0821d7ec2k9bzbm9u6k0z5rys2v5qkupjhumv6bo0u68oganuwm9u3dj902hhcr392zskh32h31z3up4n955thgkwyiun8ealk1z3zf230j06fh9t6z0hsoy7xhsedla3rfwq92ytxtote4ntwt8yox8emuw',
+                detail: 'Et voluptatem maxime distinctio et quis. Consectetur cum tempora rerum molestiae. Omnis rerum distinctio eos a doloremque. Et soluta explicabo.',
             })
             .expect(400)
             .then(res => {
@@ -247,23 +247,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'epy3fpati2qdlsvxyjx0rabs746yxyjqxet8es6r2z9bsnphxk',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'x0q8kpw0vq9ubhwt2sx8sirx1ld2jbewtcuspgim7pmme7y4bd',
                 systemId: null,
-                systemName: 'zm79diijdflf6slstze8',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 23:50:55',
-                executionMonitoringStartAt: '2020-07-31 06:18:49',
-                executionMonitoringEndAt: '2020-07-31 11:20:33',
-                status: 'UNKNOWN',
-                channelHash: 'dxvcf0uvsa0vnjtimkz3csmrkn89dqvtpt4d1xq3',
-                channelSapId: '86nn7z09adoi3ykdl22si9gq60nw3804tchjahmjzhwds9j4gv',
-                channelParty: '40nkhmtsaq7cy8mpyjgkybncf26qu34xgzawwhnco3x35ihkneed1de38f5b84z3y40ghrryd05s7zeknvp2tgk104vwj0pd9h7sxa4jf1sv1u3mc4bpj0pr17afmzxi4c6tyiay6f9341we7gf5s27abe740cdn',
-                channelComponent: '67g71rrfw8jnrl832y7mez0ul0zfspifk27hzb34mcbbd7kfjx6mye284yfisjx72lzrb2mcmwa0q289ykf2o24edofj2iiwyc5l51mddsld0diov19o6tm7wikbgmjdte9yt9zvw2w65l1byoxbabc3qu2go39h',
-                channelName: 'hw1xsplgor07lyjrouf35vk5wnc7wtxutg9sws976jcb1c6zy43d0y0xvikulswu9yijpwo41hhgxa18zoixsugessb6ib3v3g8mscueuji8garn80k8bvkiz493p11cuh3npheil75ffu133bo3sl14a56uuujq',
-                detail: 'Mollitia voluptatum natus vero minus enim et reprehenderit consequatur sed. Qui vitae qui laborum quidem qui. Est molestiae culpa soluta eos dolorum nesciunt aut.',
+                systemName: 'p2lct6unwajo300lfnm3',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 04:36:36',
+                executionMonitoringStartAt: '2020-08-03 09:48:59',
+                executionMonitoringEndAt: '2020-08-03 01:57:52',
+                status: 'ERROR',
+                channelHash: 'l2ludqpi19ilz5mrawqv5v92yxbyih6vdxur823i',
+                channelSapId: '4gjuyamgs36ip1enf1d5wfpam8sex8toatqb0mqeqvnesrz5bk',
+                channelParty: 'ied72n427v1kbosy425nhf25lypy024mn4d6s2iy5lo81xj57h7i25gw0axncxoydhfiqae068l0h7inxuk89u8dook7uzc9gub6mlxhthy2xa9qf952nx58ynea0t2kguj3gqi1tqvju7kd3yun4kha0iqc52z7',
+                channelComponent: 'gngtsq10hr0hf2q2qpynhtco563tkulp8quyo3se3v1zxkvk36ux7tiek15ngwaddw2d0snbqks2yx8ld1444x58efkieemqn9q1hzbi2plsqtcldja4bg63mah6smhe4ns4swbebr8tbwarlmk0i5pogq1si77z',
+                channelName: '2ll8p12gwhkq98kxps7ip3zbktn5dhh95r034epdub5m3gtnhk6n0cuik4qydkokeprizf79c2f3hocxsx4s9brbvuc68bso3cplbxmqkxdwo7a61xa4zlud3xxuh3wn962q4sgw25radx6ndqpd4y1474rebubq',
+                detail: 'Eum maxime suscipit dolores repudiandae voluptas. Animi ratione vero ducimus et. Sit natus eligendi repellat. Illo nobis provident et perferendis.',
             })
             .expect(400)
             .then(res => {
@@ -277,23 +277,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'y1aghuk0ohtsfjz9mkk6jw6xqi8qfnzqs2ozkwwf7krm30r9ee',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'kog0v7ybyyxlo5afv2oz19e2bed9aorxw2bp0oh3yzg77rymc5',
                 
-                systemName: 'x6z6nqlhd9fuv6ea3tr4',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 19:28:02',
-                executionMonitoringStartAt: '2020-07-30 23:41:10',
-                executionMonitoringEndAt: '2020-07-31 02:38:09',
-                status: 'UNKNOWN',
-                channelHash: '29lxdq5c0iizdtwg0vl7qbu20uegcthjqyqgfpr5',
-                channelSapId: 's2qg6jjqk0u7mbuby26hixpbw92a3wczqpqp7ez5c259fdiuss',
-                channelParty: 'he4u8zn3e52n4zmln4zozw8pwywvh0j2viqgmf69fg0laofzhernbf24netwcwpsaeeflc0eolypws8gwu4gwq596kgyhht2rvgyjfkx03c9g9lr09u8jqh9tib8p8vwlxia3adf0xhkoraw4go2mnws6wmm9csz',
-                channelComponent: '51tgafmbu3m38ih1dp4w213v2gmspnk9uqie2cuc7xoo5nd2354hc5jemh9vf6dw5ysgmnrq5d8z4955hngrd2z51z7jl9okdg5ftp8kk1wuk6bbi8i3kx2n24frcecdsgulornl1gzg62zmj6eja347zs3b9eof',
-                channelName: 'i798ebcjalq72tpok6xs6hy36s3w1nlevslbpyszrsyzvh1mxrutd28o0m87ux5vm69lozdk5l43cukrqowkncazo1namom1a8ndlhbrj1busmairvi6xhsp6k3vzoc57utza8ll7ic31qn2tqxfgwp32kbi2108',
-                detail: 'Sit iure est quae doloremque vel. Cupiditate delectus quos amet aut rerum molestiae eveniet velit est. Voluptatibus ut nulla qui placeat accusantium. Voluptas culpa accusantium magnam sed.',
+                systemName: 'zxglry1ptlol089f1tfq',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 15:55:49',
+                executionMonitoringStartAt: '2020-08-03 18:25:57',
+                executionMonitoringEndAt: '2020-08-02 22:25:22',
+                status: 'SUCCESSFUL',
+                channelHash: '45hy5drgqqcqidtjbaom4pffsfedltuypljunjeo',
+                channelSapId: 'rlwfkugsmkn520uovi9lsehexeefnur4mtkw8kj5y8r0qbzzlg',
+                channelParty: '0l94yd8o4u7eqfhar2woaki1hdnkzxcwnsy75rb0hwnropyydnw2rrf7thi5h4eu967cc9gkdmk1i81y4kh3h21iv1ad7laxicwhr5prjdp6sbcaga3mzvp8b33xk42smvgixnzmfcawjqv0pxhhvialhret124f',
+                channelComponent: 'c22zpcm38g56soiti7r6pea34vmj4c1anwkzs71uehq3b79ncu0u3gjnd60wxltq5mwjn7y3zixd8fnzmvx7m746yz1s879ya5wy812z3j3rhmlsei44o0kl2mm0n43ey1cpdqzbyxbuba2iaktohpop4tcmllm5',
+                channelName: '5914n0zcrmaays5306ecqackuxyle2s10ubzdkyj5qcl4kfjhfbtvqv2gqaexv7ftfexppapts3yamrd0c6tnelqg3f8ybmm2szodb7fsk8ex8flv8ht5m6529mpi00y7w0rz0dkflt1zohjuymtrq3touu0tqd4',
+                detail: 'Adipisci qui qui illum. Praesentium aut architecto ducimus quis est quia iure quis corporis. Quas et aliquid unde adipisci qui error debitis autem.',
             })
             .expect(400)
             .then(res => {
@@ -307,23 +307,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'vd5sn6wa1z0aqrvs6wm7keqj03r1k4bxmfvdspyxv9rzp3voja',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: '4cooan99qetoufz3f1kj6xpp1055qiz65xxtds8ufb99yd0tmc',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
                 systemName: null,
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 08:22:10',
-                executionMonitoringStartAt: '2020-07-31 05:40:18',
-                executionMonitoringEndAt: '2020-07-30 18:14:05',
-                status: 'INACTIVE',
-                channelHash: 'ndkolw2cjwi5pdg3qstga54zmx2q46689myqk3u8',
-                channelSapId: '9oe3of0ewwws7pjm16r5nov87ak7k9iri9azh0dzrub4qszmw8',
-                channelParty: 'zlmi1hqi0qyll81zp2k16fw8qil5kjyvfu3o4odddcs33vnd953jr9ur5xydzm81a0xr1x6qzt6ajua7r6spbdojkcvp4o31p3bbmieay7v4o7uavflvngsfltgk3dreg3klune4q2vwzfoxzxeh9wzxdpa9rf8v',
-                channelComponent: 'u0rqu2iqm5mu465xsggetcjpbl2ajpfcsxupx0fp9p34ynhem8lad22rd58zasw11s1s2k4xacvqxnzeh8i2y63yu8dj5g1evqclpa38dj3za1tpnuimr6o4t78n7olsxlwkbjz4qvwce38l0namdgmk7mlgfvh9',
-                channelName: 'i59i94xy4rrtyfrnzr40z9995spq43li39q019w909zrqowcprlv57vv16i9gqt0e19nhsh8a79u83sk0900guonj99p7crc1oxbxhns7t7og05qbdv4xztjeyly6irt2jpvlfwiq94zdbh7hsivdqupqa5wut6e',
-                detail: 'Laudantium eaque ad omnis minima enim adipisci quas autem. Non est voluptatum omnis repellat omnis neque. A sequi unde. Aut assumenda ut quisquam. Vel et quia repudiandae fuga provident ut enim ea.',
+                executionExecutedAt: '2020-08-03 08:07:15',
+                executionMonitoringStartAt: '2020-08-03 18:20:44',
+                executionMonitoringEndAt: '2020-08-03 13:34:31',
+                status: 'SUCCESSFUL',
+                channelHash: 'h0tjjwsn6tz658mrgwwj9ao3dr5bmfg7nece4cv3',
+                channelSapId: 'e7et0u8ff9ninfqiko3fv2si2ink53x6devee9mwaxxg7o2nju',
+                channelParty: 'u8ns2u30v13g8k2vq1unn0phndov6gt5gi99w6ucsdnd5v8duugiejfza1j5g4ioh8fn51tktzl9eke39nijsdh233n78wnxp91ajfdryzewp5fdasxpm76z6x63lmvnedmn679z3oumpde1lbeeo4z7r7b704ed',
+                channelComponent: 'cnjgi4oibxhlg8lh13opa9s7oua8u8jjlpbkldhz6edu7szv40fw2lkx0lg8mes8e8m6w5er5g8a62sjtikslovntoopaqg0jep65yptjlgr4rg12iz4ixp28qef3wb1ficqoso1pfc7erlbo86qr1dnv2jj8gqr',
+                channelName: 'o3h9nmzqcsge9haid27qklvucwkqnnqc1l6ikhr4giql41wbkc585cxpd7bctqmk8fwfd2btu6lxq0zjo6o71vgfcatdjdi0pq29e4mbhmcnkcv07j8pwdpd14stvktnfmlkyw28it22ejn7p864qzoicxl4c5l7',
+                detail: 'Et quia illo eveniet praesentium eligendi dignissimos distinctio. Repudiandae reprehenderit perspiciatis cupiditate quaerat quae. Sit quam sed natus. Eveniet expedita ipsa tempore corporis voluptate aut. Soluta ex impedit facilis quia quis dolorem incidunt aspernatur autem.',
             })
             .expect(400)
             .then(res => {
@@ -337,23 +337,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '1qs3k2ldovranmdqgtzy045bfzrez5yoa8vf5m5ijxq3l2o8z4',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: '6atcatbsb7erxfwqcn118tw27a17cw66npw68u0rm0lmhntyqh',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
                 
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 02:23:22',
-                executionMonitoringStartAt: '2020-07-31 12:10:01',
-                executionMonitoringEndAt: '2020-07-31 11:01:39',
-                status: 'INACTIVE',
-                channelHash: '0td6ijgmmmmvb2e5mfn0x4ooewzaz4804xavn7ua',
-                channelSapId: '5mdikmsz1ikhuelo9n7w2p6xvpnhnaga6dmoz6r7zrd9bqn3l1',
-                channelParty: 'ar3ai41w1e9d089ry9xpct0e2mdf3a9mznen5rqz0nj0r9k9kf2hhyn66vhkpkbjl74o9gjicro2cz1q9c6cp3h4lzbb6svhk8udjnavjetr39oyskgeod0mivl7523yiktynhail4qj1a4g8ycf5une5466o25g',
-                channelComponent: '44xjx8wafti9gl6z3nquxgudu9f5xlbou7w76g8en0u1vwyudquuh10mcnr4bqawri8ndi0w0jllyixy5yqpngln5nigal9t9ujw8shatnuyhelwcmq3dzrm2qlsjg2ladl10k4r59yu81cxwqb901jvw0c4op18',
-                channelName: '6o5sqk01yeejoa6pdtq891c3xl5sfnyfcxwl5t3uabubvgxkz6nd4ivguqnxgl0d361vt7xcoq1osbkvropmnu9oc34di9ww4350ujdtiq6tpa14modhragge9t3gcpe9ldcx3am8e5p48q0sbxpz2i3gkipeqdl',
-                detail: 'Incidunt possimus est rerum officia. Enim voluptas non. Eaque dignissimos a accusamus fuga nam. Omnis nam vero corporis et repellat qui maiores expedita quidem. Laboriosam voluptas beatae ut deserunt eum et sed omnis.',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 10:10:25',
+                executionMonitoringStartAt: '2020-08-03 01:08:34',
+                executionMonitoringEndAt: '2020-08-03 13:55:02',
+                status: 'UNREGISTERED',
+                channelHash: '1ibmz2vz266fprsn4a8am4mgb7ykadk4rkic1cbb',
+                channelSapId: 'g2woeu8sbk9evqoln0q16gjzppubgcj853w2li82hqkm241x39',
+                channelParty: 'j1kllcun10in10ekrlhv34s2dzdnk9o0epb4gnr6e5t2f12so2agsjoue5thz1l1jf2f4kxx8rgect3z5bvxhobjf3vi3rvjrqye861tcpuux8wi34gc6n3rvas6m8kxa8ixoa3ayyi9ygegtvd0aqv3fb5d1mm2',
+                channelComponent: 'f3y6at5wljiaef8mvbvr41j6lkpghzk1u8bxgchhh5zr94cz9psz4jlvdxc2u0as7rr1uo436bhn2srby9aqy5cdny9c7oyduduvjh2fu857ytat2gilxdsg8hvwgxndf6nj74enyr6vv2k7d3ilga3dl0wvzfri',
+                channelName: '9nqbpzn0k8a7xhb6ok9w8exb619h2ukfylzmsgza845itr8auvhx0bueuxharmotg90t1wqgpujm10tx1wrohl57xklw1ajp3haw6g1p0vjoe6oiuql4z3f46z6mcnabp47f9zhmzdorvaoihgpq09knbhwo27rp',
+                detail: 'Quos expedita qui minima aut accusantium consequatur. Debitis accusantium veniam. Maxime in quis aut et aut amet.',
             })
             .expect(400)
             .then(res => {
@@ -367,23 +367,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'l6fpazuzlqqodlc6dcb2wqmxwd4sme69zpkm6mswmglpjlesri',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'zjp3iaob9fv5ty41l4qu',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'nipadhfohdbcz6spwl80x3pe3qd9uc1bflhzdlo964erjif0tx',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'szglgn38jdrjevns602t',
                 executionId: null,
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 05:42:46',
-                executionMonitoringStartAt: '2020-07-31 09:07:56',
-                executionMonitoringEndAt: '2020-07-30 23:53:09',
-                status: 'STOPPED',
-                channelHash: 'e5mbddwgj66difflxgkct1q5ohch3fmm0x207omu',
-                channelSapId: 'v62q9dfn1g3yju3ggu4jalxw2vl7s05zjrsvt1iqn8krm9ilgr',
-                channelParty: 'fvfv98opqttzjmuo7rh0m1goim5irn5iu6fuaz76qqxc53qijzbhhdm96cfqgnvafmhutgh83ieo04hncwh7a5wtltx6a1omk94lbx6tyobgwkx04rpoiycaggg86dn1ycc1b2v2o2fie2a5wkihtz4qsbsa18d8',
-                channelComponent: 'fhe1lxnjbh7mr3w65nur36oul8g3u0svaxj3d0xfdo9525rgk27bi9t0i4xa0od2eb3tdvl6t82egtwxu2kta0zmxcmw2s7jlrf7nepdubk5ti7imkged03h25gus80o9063txmv0248qohbmptznl25ygmv21pe',
-                channelName: 'dxukc422v25m5gemzzsntu3iw5qzpn1lyi2g62wa4jw7kub8x632ndisp0npfwz1qazjxkq19si8pp0xumaah0uk5cxxvt7svn2boq0cw6lcsqv7wlqih0dy3zt1txquhn6artomg47ivt1007dxalfcq0nd81tt',
-                detail: 'Sint voluptatibus incidunt sit voluptatem accusantium. Sint totam est odit iure commodi fugiat. Vel perspiciatis necessitatibus voluptas illo.',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 16:19:54',
+                executionMonitoringStartAt: '2020-08-02 18:30:48',
+                executionMonitoringEndAt: '2020-08-03 10:10:52',
+                status: 'UNKNOWN',
+                channelHash: '62x1aj3zw9fmpdvlvzq3dd7xbchfkjm5ktp20he1',
+                channelSapId: 'oy1whsfp8418gepftkz6f9yyu9sctna99mwfvlm93ddibpbwb8',
+                channelParty: 'qpi3i7jiforg704qugqwyme85r00zupzsh6109iuooyfx8pl11zjr3zzcs5at92a6n85tu2u4o0my8fdttzr6z4q6w1cjfpf9rznw7qm49ry2f02pvi52pujfqb0e1q7rnbdrpyo3v8j013bbvh21g0dbirh75im',
+                channelComponent: 'zhtmgnuif2gdjutfwcy5icg2p63x9ezrp20zs3wjmie11cimvevo4bgq0vylgdg552cggcxvgil387hkoid0iim4yafnxzyatwjg2dw7mzu7a97zim5djrcnx5vn0bt08933to4ibfu26z5d7yudn6mgisikh9u8',
+                channelName: 'ouf1taprmg0knncuoy6janqncxrxsqo5cw17z7p1y786s7959lvghmzlujk1cd3cedt48nmwwbdbzo9xvpuj2iws7kg4xur4pt0e8db94nfifiht3l5j7tasw2ccczdev0uwarolzxqye169h6iserjw22ha865x',
+                detail: 'Sunt voluptates nostrum occaecati. Consectetur numquam molestias minima deserunt quasi et magnam aut accusamus. Beatae autem qui odio fugit molestias. Assumenda dolore quas. Qui quam doloribus consequatur quas voluptas ullam inventore distinctio. Deserunt id aperiam laudantium at laborum eaque officia.',
             })
             .expect(400)
             .then(res => {
@@ -397,23 +397,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '51dmb86ceyjeov8telh1ippas1xt2qqzuswqlrtfhqthwc0vqm',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'nyez6ufe6ahqfi49gd0n',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 't1tq5fdc0ds0dy8nrxs1ld36n5bfxdqasffyjwcsa57cazwpag',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: '0h8ed9e7f65awbagd9la',
                 
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 15:09:49',
-                executionMonitoringStartAt: '2020-07-30 20:05:15',
-                executionMonitoringEndAt: '2020-07-31 08:09:11',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 12:14:35',
+                executionMonitoringStartAt: '2020-08-03 15:23:13',
+                executionMonitoringEndAt: '2020-08-03 16:17:23',
                 status: 'ERROR',
-                channelHash: 'soecw4lejoqsa1p8vrxyemomzrepnw5ntziq53md',
-                channelSapId: 'ghadhtvo9ecevh395twtpbzr4nuklxdjhb27ztw4vau2vwlg7n',
-                channelParty: '3iehf8hfr9tri5os851lynpqccaora0jx697le04vfr2vsud9uns0gffx3y04sajtoolu1tegib3aayi5kfmbqiuawauaq75s5yjo4moxu9ne2j1h8fvmpjnpsgd8un97he5hzkfmgdceqxwtla9z2z14t8wp7y8',
-                channelComponent: 'l9rmz0z01xmjht5gcshndgmhb6urs1r6i6jhpa1o2mhc484uclcgjqzyb59o5e3d3cn58yzu142986x27ewpeuxmer7y85xlm23wbhv7jhorh62gc4rj4in974jqnnfcs074zpaj3z4odc9nrbpsni8zhisj5nls',
-                channelName: 'reuc3abrlc8zqfhglblkisjwu7r2hb50qttrb7mi0v0o282kodwefj1nnm5cgwq85y80yec60s0ieg1k75xi1gotgiftv74m7ppggpo88f4904afxfy2bm37ktt8x2mxjkyuhx3ruxg2cpotexnmg7qm8syhyj6a',
-                detail: 'Voluptates voluptate et labore asperiores et. Soluta voluptatem reiciendis saepe. Repudiandae sint et quisquam sapiente eveniet numquam. Commodi voluptate aliquam aliquam ducimus eos. Asperiores qui sed consequatur facere recusandae tempore tempore consequatur. Temporibus sit asperiores enim quis.',
+                channelHash: 'fif5e7sfnp139k9iyz2ze9lvrl73p8ll53m6bdzl',
+                channelSapId: 'olgg5zkcr9ioeju6270fgj797z5dq4dprf02l50amcqnn9l7e3',
+                channelParty: 'tudq8t9ix8prr1b7oman75nvv45txl1jitn0il1maifd3mx3ssyv46lzq56wd283uf689d3b5r5q59577xzlywtx4xyews9ae6cdk8vtdnqs2w7uwx9u2xumqamxj5qxtzxx74srmlly32ve0wu2m3hvd3pswt6i',
+                channelComponent: '4sbnlka7anoxro30ak82ry83io1liccxp63eqg5c5ttu9sz1ljrc2jpwty7dnw7sr426aatn893tlfmj1rmw1a583sp9783xl0hdd9au9v0vvrx8kr70fwbwtg3hds0yxm1jbjd9ut4tovtzhdyvwd9mrygi217d',
+                channelName: '9q0t1rzf70o2ddy48p221dy4zq6chfjwnuhs0elpqt1xmnzx2smgbjca5tp1kvefskovvl8hwq43kpbypyqfobdirsj1pk1od4x3hb0nxxlzfqlksf9j45wkjn5rmxegt2gur5xk9gjl1gxj1zu33sxe6i46lnse',
+                detail: 'Consequuntur doloribus velit voluptatem eligendi et molestiae. Vel et velit veritatis. Quae dolor hic quod expedita. Et inventore distinctio dolore voluptatum dolorem accusamus totam.',
             })
             .expect(400)
             .then(res => {
@@ -427,23 +427,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'l6lo6yytsbhw369h7ozbz6k1lmbdehyv1w7fl65dey96zcelv4',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'm1rnlwggjwynqevubg84',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: '1zqgylefoq1u6dgfng1nlricpj3o8bawnlrkc87dlx8dowe3u8',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'rgsm7y6a45zuplo7kh5r',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: null,
-                executionExecutedAt: '2020-07-30 22:03:14',
-                executionMonitoringStartAt: '2020-07-31 08:58:55',
-                executionMonitoringEndAt: '2020-07-30 17:01:09',
-                status: 'SUCCESSFUL',
-                channelHash: 'h8cp6p6pw45novtdm51n8zotraudqq21of13i4qs',
-                channelSapId: 'xclwuka6opnuump411whmqd56awqlg7yxpnf305o5jjmuivck6',
-                channelParty: 'dexul2y3q2gllkj3j6ph4pxswb061dfh8k7sm2411qheryelsez8n2wjo2axkwsyfi74sofaiivc2ujdc7p7w4ubf3xih228ovlbb9w7pxuif724ya0c76c11vies4bxnyth0e77c5j4us8ob7osr0h7dck6n8gs',
-                channelComponent: 'oldn4ga5z9lwvr6gh6v7tkirxhjscmwqeagdje6s26jvu1scurdm9na4o393ylz10ltnvfac7u4qn4njbiiszb1u3fchr08grot5hp49jt18aw8rsg9fcam7mnsyaopstcysf68omydwtchn2021z72619g0euv7',
-                channelName: 'ua027shs3ktu378y4ukp0hlvrc6p3c4ffrxcia6nwsnlq65rb57w6fl4jeocvqad0i4iq6r8jlwc6hdez30pepd0n9pxy789jouxowgj2d1h66png7fmfqfcdm5vi17soe608aswe4jsgtho0y4bmxh4yh46l5wa',
-                detail: 'Asperiores et ut saepe delectus laboriosam voluptatibus. Perferendis facilis odio saepe et corporis commodi amet repudiandae reprehenderit. Vero praesentium voluptas enim natus vel placeat quo dicta repellat. Id voluptas nostrum id quidem nobis provident laboriosam fugiat eos. Cum aut doloremque aut dolores est temporibus fuga. Natus occaecati quo soluta culpa quisquam.',
+                executionExecutedAt: '2020-08-03 17:14:12',
+                executionMonitoringStartAt: '2020-08-03 03:06:30',
+                executionMonitoringEndAt: '2020-08-03 05:19:24',
+                status: 'INACTIVE',
+                channelHash: 'gokaoph743go952vl4jrhoohz8gf1lmd208fbisb',
+                channelSapId: 'ioui3tgv4awx4j7xwhonghic01y01lv8tn5x1x133zm7ig6p6d',
+                channelParty: 'q6wvfxtlyiyxfozc0kpstvip7vt9ux1ja367kvs6k4argqeo7pxkq6wxajffj86oyfc2g1yofngo08wb320alr39jdklsirxh5c0f9op5hp58oez9tkixmwh5lguy6yygr5ocduw04mp27uc7kpugellij0d76ir',
+                channelComponent: 'pl7406hjm323pc8vz3f368w98m6pnn8bsykzouqph7x9ho9qe08g15vv7rolbw4wt6i70r8myl4fg45j001z6loglfntawkvbeabaj43wa5je4z0kdygk4o6t5tgkdem2zmqbyprm6k4fegxzggqinfca77m13da',
+                channelName: 'c35x6pdswthjaxbzspup5gm786g2hzfdsejskkzi2rcgq9xkf7ikcaes404rsc3rd86o5ofortfnf2swn5lxbd5vflv18tb20cjrygq7xy13v07ldvg2d4ed1716x9bkuxjkym818jmtn505kkycf7ixu43frtqi',
+                detail: 'Quis aut tempore libero inventore provident esse impedit debitis blanditiis. Nulla fugit laborum vero eum veniam deleniti excepturi. Dignissimos assumenda et sunt ea odio. Eos sed praesentium cupiditate amet sunt et. Et fugiat et veniam vel et eos delectus debitis adipisci. Odit dolores eum cum placeat quibusdam sit molestias.',
             })
             .expect(400)
             .then(res => {
@@ -457,23 +457,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'i033b95km59ru430hnkfcho4ea73cmuo6u8y5xx5q65qlu1dpp',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '5n8zd9v3hkygyj6suqx2',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: '1ln45a6g264yrpnnvtzfl5jszdhu5yjsh1ik77mua3fld73f2k',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'z2uqfq9hwkk1issscyol',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 
-                executionExecutedAt: '2020-07-30 22:11:02',
-                executionMonitoringStartAt: '2020-07-30 16:03:30',
-                executionMonitoringEndAt: '2020-07-31 10:25:59',
+                executionExecutedAt: '2020-08-02 22:25:11',
+                executionMonitoringStartAt: '2020-08-03 15:17:33',
+                executionMonitoringEndAt: '2020-08-03 12:26:40',
                 status: 'UNREGISTERED',
-                channelHash: 'cwx6uwyk7dpeohvg6g2jaue4x2mq8v6ac39yhu76',
-                channelSapId: 'wxenzdmjibui96nkusklzkh7gw0a4vge61n87fps7trkg0egqa',
-                channelParty: 'h5t8veb9ptfep39visny96dawy3h7zlto0gvuaum2u0knv2vpy7glm8iyr86uib5aew51r2qs7wvzvd9a3sk6hyjjavzpkk98u7q579k875b1x9l9mnetozhawvy011j6dwb2fc6loqzxqkld1dkqiajr1646ev4',
-                channelComponent: 'gvdbwgsme67vinrl6878jdgohng1vezkvo404bhgpvha026cr19nm4dmkgu96z9h09ahx9queqdlvj1eebwe4j24k5q2umif8krlln88p9mqp0u1x5w9vln261ggodqduqfrm1f3c8qfj7ffzqo9m08bsj9bb7a5',
-                channelName: 'fasoxdib5kbjgez5x1f05osswcnmvg24dnv9zyollbft4af44nqpqnfzi6t21xrb7xn7yhcfl4s9gixdyewwpk5ek6c0njjc3ysczpwlvh13d5ar5hwjw1qq4g3rxwdk9gogzbyiciv3flmago2tttuot0ekbtke',
-                detail: 'Debitis quia adipisci aliquam veniam nam commodi. Rerum est quo. Provident quo aliquam in unde blanditiis iusto veritatis. Nemo libero non voluptatem deserunt quisquam quam quia. Qui molestiae sint. Voluptatum delectus debitis omnis sint doloremque.',
+                channelHash: '6m1gehjc9i2ep0lcrjr71xkzqxa79wj7pckvoo0i',
+                channelSapId: '8y0lblkq19uio478xbeh7zf1wnjanmas5rs2l2op1z8b7h9xxc',
+                channelParty: 'lhz0r7gb8cvxu101c8v550pblrjotj2p6r2axbxhx45bi0ra6njr06xlaji9r5xa4rawde85wvqa56m3861zlroq1znqn1taex2qv84j51eau7xp8rxnimasmlypv23pid0n8xnusmlbygrm0lyoqfm6qgqnveuv',
+                channelComponent: 'lst6z3v2sqsrvnuypnskh63dxe367suk3luka69lk6fzzf3u75iwjp2sfrga1f9g9i244zggxtc99koqqf1kp41gnz8d38er9ou4jixkulc16vva2cxe6346qj4v4ovrcz29xwi10m0j5il3q7ql31x92n6t75ed',
+                channelName: '085vz6n3bncivdi41a00zlzgkqwu1060htk6qwbxj2w6ssqpf9xg54mg64hdemlx8vqht2cn0fecow1bc4p0r9fy8c1b1o06s588gaavfx15ftl808cvossfdeyxcjjyq7v9oshut3ldkjowhj8qxxxqbb5dckth',
+                detail: 'Mollitia excepturi ut qui praesentium. Fugit alias eum deserunt quo quis consequatur eligendi. Officiis voluptatibus incidunt. Consequatur commodi voluptatibus. Architecto nulla ut sit odit suscipit. Facere dolores minima est dolorem commodi eum.',
             })
             .expect(400)
             .then(res => {
@@ -487,23 +487,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '98zxqaimkg0sqignixll0ziect9olg3xvho0ixobx6ujet49q6',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'ikiunlymggn4xs7xl9z5',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'ognfn8lyppk18mtar7mq4qf3cmvt3ivx5ywxsg64r3qdmp11cg',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'hwrgxwv0vmtgyziyaav6',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
                 executionExecutedAt: null,
-                executionMonitoringStartAt: '2020-07-31 00:46:31',
-                executionMonitoringEndAt: '2020-07-30 14:32:03',
-                status: 'UNREGISTERED',
-                channelHash: '2z51qlnn8rgsb2tm85e6n56brqp2uj9rwce81pah',
-                channelSapId: '8yrdzoklshhe9o4yoqk30in5kqnkv3x5w3wifmlok86h78da1p',
-                channelParty: '9d0p78z0ykxtmrtcjq6y54mvm72e1gz3hs832vevc9jmntbefuxc1f86w9anfzjv3y2lsyg83st7aks8gix4mzkn23zfygu1n9mx0aojh6vfva31xotl2ovt7k39lva2betf5imsvhuxi38teggw6yi23a9m9x2q',
-                channelComponent: '8jif02c6rry1omq5nw3lc64b8w2ib4bpe0a5zllzsvehim4aj966m6s1igh81txfqcowzc8hi8of17b30zt57fkuz41j4bztj20aldxm6q4iuojq1md14lf797zv5mlbcj79622v2bgi4havralwgvzyazhstleb',
-                channelName: 'rvx7h3nv2oj56g66kgt1ib0it6endnwjafpuob4cn1wnpi9uycsa2oyy52kwg85ttxc5zsr9hfk9uyp58raqdr8o8c8se4msbb77d2fdcru5mnz88d5ypulilooj56n13fwy9ekv2hvud12wh6997ef25t01lub7',
-                detail: 'Cumque mollitia ab aperiam quos iusto perferendis non et. Eos iste accusantium iste ea. Illum itaque enim corrupti qui fugit et earum suscipit. Non fugit nisi tempore doloremque esse. Dolorem illum magnam non quia provident.',
+                executionMonitoringStartAt: '2020-08-03 08:27:36',
+                executionMonitoringEndAt: '2020-08-03 01:09:52',
+                status: 'SUCCESSFUL',
+                channelHash: 'tkxik8w3qaxfh167x0f9vlpxkf08vic028md8hxt',
+                channelSapId: 'z775piac6r2s6hxf5rf90z2a1gjnu8is9n3ehz0t12a7pc9zm8',
+                channelParty: 'ng4eqoonw1g2hl5acf4wpa4iclwnvi7phxrvaa7i694ds0t8kwcll2nyxgp3mvrscpbpcxhtswaohz3poslqgypn81xza2kgry4jk6nnt8989v3h6fogag0ha0yhhfwzmqr44qtnh191y9343qhx8cfmg877gjpk',
+                channelComponent: 'xjescq3aebxuqb683yg9kv8vtj3z7781xvyg2pbm9dmoa9zpuqj86dnzn3v1o3jduknu5bo58v0lohd3oq2cx69oudynx6kj2633g2wnx9ae7y0s8drv1kifz2rog3ijdh0hivs53s4xnconrgn3dkqtmac9zsf1',
+                channelName: 'sar04abglq135938bt0ih5yccpkl9m2y50ukdqtufh8oevx0veersddoaprpbg9dd5cc6blgd3tkwx65fbi4y4p6w6z9ix0pgs5drdr67qytfzhtf5y1fx4sqrzjo9zz3mq7c88r71sb5zy3p6s00bdwwbfb5cgh',
+                detail: 'Distinctio non fuga distinctio. Laudantium ut est. Voluptas ex at. Blanditiis quia vel dolor. Omnis similique non et cupiditate necessitatibus sequi. Modi autem maiores ipsa libero quia laborum.',
             })
             .expect(400)
             .then(res => {
@@ -517,23 +517,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'vb75t4ko1nk077q58kozaqc94vgxbgy0eanztxubiqt43qd7zl',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '8kqsg7aminulh30a908q',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'ndyd1rdfhvgmheyyaliw7uw0d4dutjfp9msutlkgag8uqhuxn7',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: '7mk6kh1sr9h41crdb4od',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
                 
-                executionMonitoringStartAt: '2020-07-31 04:56:53',
-                executionMonitoringEndAt: '2020-07-31 01:22:14',
-                status: 'UNKNOWN',
-                channelHash: '9lp1zhfcjz5z3jw4brwcopu60l0ny2pvc7n90ue2',
-                channelSapId: '8julcdo9anvvayv18hullknq8tf2jvkr5zd8gpnpj32qqdtqn4',
-                channelParty: 'sk5vgi0o4dptcoyv39os4xa6ocgnu1wzapvore8e0mzrvxb6ncel4po9hz3jiwc0s8dffg3elk9woa6lzvf3g70j31u284al1zpyl48rbi6jg4vv8c7hv2l64rrccjpy3rp09mllzeakdyn5189jg5flr9htund3',
-                channelComponent: 'tyw2t5diu97zxmsh2fzlzxzen3r9cdee9bkugltiaw5o8gubmwyvtm15m7q4v228x2c19mjr2jazywol6arhwmezdyaswuj797t8tre7ybuj6oynxxj8z28p6qrrevjyp00nid06cukvc0mnfxrfc7613n3u1vw6',
-                channelName: 'byctdygr7d5x8y0eeek1g48d8zk9d2j5uwe4lzyicze3ofjbmxd6a0mzzzr9h8zj31255bbd8f24crzf8hx620572s8l51mr5zcvwb78ul0q4492k7y4u8qg5ezmzet06nvua3ihjbn0bqn9smx646nqt2w5nk2n',
-                detail: 'Similique et quia totam et illo ut. Enim necessitatibus est quo libero consequatur temporibus temporibus molestiae ut. Et cumque nostrum. Voluptatibus consectetur aspernatur doloremque fugiat. Et alias aliquam sit quos placeat.',
+                executionMonitoringStartAt: '2020-08-03 13:26:08',
+                executionMonitoringEndAt: '2020-08-03 04:39:04',
+                status: 'INACTIVE',
+                channelHash: 'wccoxo8lqawoq26nnobtyhkjd4jwihrpnk2alo9c',
+                channelSapId: '76syednjv93rp4jlay8jj5udtd46cdcpyd50xnsjmzdyrcpjrk',
+                channelParty: 'btcabqzu0z89dq8k7nv1gb3nmmem8qsbuiltfchtf8anwavvobkrx1co0krdf3dgsgq6jkg0frngwrzjdjemky218sn4wiiqt612tvablycj5birblw1p6zh70pycmslx19a8z1hfu2vl75ml0zprxz57l21gm32',
+                channelComponent: 's06enyq4ruj72z7z71bg5qi0msub99jlschwaeljs14in10xkc274dyv23w5f2txprbsrgv95r9s3l3uoepjx2ncieb0jpyqhchas2gai228b9qjr0fuco280an5anl9ic35cqck5cdab6kglvb0xg2in43wldye',
+                channelName: 'xu6smv5alrpscmb1ykc06j6575041eevud2z7cd49ugwei997keslxs7bsf1kwkmxn3r7ajcro6ijrm0v6azyxzal5zcigl83fh4gu19rcrktqcjga4j3gdolob6ezag7o50ari1mkmw3ap3f07bn8yvjpqmghjc',
+                detail: 'Dolores quo nulla quibusdam quo. Dolorem similique molestiae. Quas est dicta voluptatem illum sit laudantium rem dolorem quia. Qui id et dolore et nam quia. Libero quos aperiam. Labore repellendus similique veritatis molestiae saepe quidem hic voluptatum.',
             })
             .expect(400)
             .then(res => {
@@ -547,23 +547,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '38f5woiwmb13e7u4s67uw7pzcq4fbmmajyebcyta146slzmyha',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '58bvt78z29cwtoh8jt0w',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 00:42:16',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: '7ufinzrzy4w4nst8dy5dx3v4x7gcglhr1rniwm2hnbwmp4mq7s',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'clbaagulfxphzzf5u0ek',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 13:12:07',
                 executionMonitoringStartAt: null,
-                executionMonitoringEndAt: '2020-07-31 09:57:48',
-                status: 'SUCCESSFUL',
-                channelHash: 'juhvq34svdpgovi8vq7u3kvln1xhfpr17t1zc953',
-                channelSapId: '6l75ubm5ha7bf70tn1nswlvsslght3q8mvr0orjlgsbghfuuwg',
-                channelParty: 'lhiykq30tv14b2ekeqxzse476h6b57m7r4jsu5fq34qkdjxmr9b7ce7kq74mi873plb4zvgq7yr6znq7o7o534rbhzvxeb1vipbsdqrmslnu3xo8el2b8owq8yi8i3xs9f2i8tp0resjtv4vwxm4gw2ki0zn06c6',
-                channelComponent: '0vegslkwl7v6rjumzff2ler8jyv84nhy3o9x0l01p3oghv0t6h1m1et9kdq2owjkd1s6d9xrlr5mimnwjtozeum2up34utwszeg6zk8f398d307163ezll7b5dqj2g327wskcl16lj1wkp4mo4yh3c6omju03xze',
-                channelName: 'ypexrvek1w6f2d4bb34phr8mugfusqad1tbqqeh3049ya8y6c6zuwqaihpw9cic4bjv28pzel2t6wco8ypf4wigm26m4onfv6ze3cunwoa8px548v6jdhry2hbfephob3i11bgwuzregbh13nvr81wvc3z5vba0h',
-                detail: 'Corporis est asperiores ea quibusdam. Perspiciatis dolore assumenda exercitationem recusandae cumque natus facilis doloribus. Animi eos quas dolorum numquam ut. Aut quia nostrum quos illo iure et fugiat qui non.',
+                executionMonitoringEndAt: '2020-08-02 20:53:03',
+                status: 'STOPPED',
+                channelHash: 'z92a4xcqjnmxznieni6ugufzxclvrf5g9y93ju1o',
+                channelSapId: 'rjbmde4sidijkws97vcp7hbxuolr5ft2n540cpvhshxdevctuy',
+                channelParty: 'w8chhhboojnjwr2cm8clh81isvd894qq4uegb9klrsmr7uvjmvwb7l0x7or4ldyj7wcdo0g4rkio5gn20emjda9mwroabu8zct3j18odtds2vz304zg26oiymaio7knledhdwzrspwwnyganwzvcd0wki9b7adki',
+                channelComponent: '7flrbhvry52r5aid3npyxq2fug6ak2vau8mgrzm5qfe67db8mcqa6lyvw3c5bw684j1fl2qm3hnjurv0racsouc7z6008k33gu9ls8gdmz33udvkabvi6z23q26c8mleey55ncw6haxdtjyipwg2b212q91mkhk4',
+                channelName: 'ognki4y3g6g56ip9ouru1wu9szmfne7yt9z4xl29jqkggtqfzes4d60pi6of2wfgl7u83q9sg4fg4fm3hve65czcvyiqgu88tn5mt5xswo4vsh0wu4menhjrav125j2p5637jsb3bmdsn8jvqk835ge4kcmhyyzz',
+                detail: 'Id voluptatem ut ea id ut. Saepe tenetur veniam officia voluptates enim tenetur quia consequatur. Sit accusamus qui aspernatur delectus.',
             })
             .expect(400)
             .then(res => {
@@ -577,23 +577,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'en6jvrrbpxsyvt3hpelbfirzo5skmwrq3aajqyhvzyryd6ql4g',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'hp17g5iqa5ruwefme8ej',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'x81m2zcyvakvc38zqby15qomqnvcvcf9ndzmwavwxmqr98m5td',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: '5fmzfzu9o80h6uav0zyi',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 05:16:19',
+                executionExecutedAt: '2020-08-02 22:45:29',
                 
-                executionMonitoringEndAt: '2020-07-31 11:03:58',
-                status: 'STOPPED',
-                channelHash: 'msoc4elnpivgu1naovza71q4e5blfta1z1zjvxm9',
-                channelSapId: '01869plgoi61w9wsdhx0ueas99wgfwst32euxszz29eqbhoash',
-                channelParty: 'otq46cd7qxdrmfpjqv386dn0zh2rai7awrnmwb7bsy6yt6vnadaw19ectlc6j38mxzld0kjog7cufqgbdbodl8jjk0ghkp803f7i2csp7ofjv0na1gpsw1yu5qnd6xy2utostdt5yin969mrk9fjo7pn4vmc0geo',
-                channelComponent: 'u5fm124bnubqad3cwnlgl8w0n09ed7hjix114itsgrpu7a8s4pwqfttmiz2ydp02w6lv4xo7eqyku2rapt3dce1myy5of26zv6bh3kesn25idghwdzaiofdsw4t4j28hamzx9j761itjdm3vc1hhi8kqm4kjtsda',
-                channelName: 'v0y1pgm4v941t17xnr019ffk42pxp3bmktifplgej67uojffy3co4s1s1m7qezf2y7jm0akhs7ncwyqhq6735zxoorr321o54yqi07nadk5xh21h1dee1mooqlmut8ix6tfe5fnabhnywp6m5tfsw0bci98t3qu0',
-                detail: 'Fugiat itaque aperiam eos voluptates quos voluptas quod est hic. Qui ea officia sint ratione natus qui a. Temporibus quod nihil aut voluptate dolores odit tempora. Est molestiae harum illum ducimus.',
+                executionMonitoringEndAt: '2020-08-03 16:13:54',
+                status: 'SUCCESSFUL',
+                channelHash: '4hxljfj7yrlarlnwb8t143xv5apmie359cbumwfs',
+                channelSapId: 'iaya68bzfftx2w3egoydx8c3h5by84kqgzjmtxp62vgxo8fw3j',
+                channelParty: 'h71i0vqwb56ipnlge1srikzz66fbgbikm8pupcu2v84v369pkjn2iyqz7vfc2bpv3j9zzt4q8pmerdlwqhycoqwhnbcppqma9501ys8aj5sec3k1dvi9n25t2bd9cwsl07ovp16raavqemllmvxd7j3qp8hms3rx',
+                channelComponent: '6bp877de6l6qty7eqjrbn3dv7v5jxw9pqqw6yuqguoggumpy13fmmuueukuilwenaugqic3vtlqm18al98ecnk977ljrps1y6vxq65yk8axa0txqnmlbf9uzcnlixqei559b04v7q0vjbcjd6pmoc4wmbw3rd49q',
+                channelName: 'fl6s2gfrcpb5xrcyj8ac7fu8kpc0gkk2r04tw3uuxy5lvi07uevjka2bd0yl89tgvzienkox0bz887iw2etc5cne3g34vuddjl9gumb148t74qkgyxtikv51d9txve2npz38vxw0zuksbq5kpjyhbvk4u0gryjh8',
+                detail: 'Odit eum praesentium itaque repellendus facilis ab officiis velit. Et aut et in amet alias saepe aut vel dolores. Autem tempore natus magni cupiditate ea velit nemo molestiae eos. Animi quo ipsa ipsum optio sequi voluptatum esse dolorem.',
             })
             .expect(400)
             .then(res => {
@@ -607,23 +607,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'ftkpgbw0p82qgiqgrfzjugm44lipw75zbkm4fggq8j486wccr5',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'ei9sk9xq5kwzw6yoztel',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'nwlj8zbxmmockdamtxx4qn3fearaji7wat9ss8iyaoj3a65mys',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'd96nov5jzkok0fuzlyt9',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 00:58:10',
-                executionMonitoringStartAt: '2020-07-31 12:45:22',
+                executionExecutedAt: '2020-08-03 10:10:10',
+                executionMonitoringStartAt: '2020-08-03 05:03:41',
                 executionMonitoringEndAt: null,
-                status: 'SUCCESSFUL',
-                channelHash: '0tzaa60pztdjj3qemskb5wm3dc9kw14d17wqxkfz',
-                channelSapId: 'x9n2e1ydzrood88vbpolo9zvca0bkobxlc7a9om1wh7fhrzatc',
-                channelParty: '3g92p6ywfqx8ct8q2520es1ozolqnwjg0wckslsax0n7ww7ts9cu0dum6dtae6c9nrx7jutakp6yedqb2orwc44moshqr6jwfwhhole7m5s6wvak2nod235y8myygq196bcwia0d5ejjn1kqdcxfls1hzxhiqy73',
-                channelComponent: 'fax5jfa5zoz0h31qp2ahybcto576w76khzq8y77bq7htyhsd3ylq30lotn6x87tssldcrzalzuy7k74co88dfdbngw06vqgs21lbuladd9pl0opz3vttv9s71ulamyj6pfl9fg3s9kevgk7157lodq6jo2rtd15j',
-                channelName: '4u1n4m85s4r6qs569ivvegvljzr92vzdiep57xyg2tzsfic3ux0tohcu88ep57dptmirqmde0tpyi62pxgwj775fe1lechtjb3smb6icd074hry1yc8p8outi4bh1stkeyao4yp0tdd0ckwbcxk6ekgvqi4aoahr',
-                detail: 'Esse quia ab possimus ad mollitia illo sit debitis nisi. Non eos qui. Voluptatem in ut corrupti aut. Dolorum perspiciatis quos quis magni natus laudantium facere et.',
+                status: 'ERROR',
+                channelHash: 'gljkmzmpaxbtna6lzw1ajr6usd3gyopqvpys9cnt',
+                channelSapId: 'ilpj17n2iofhrf48lgp1hn41apo39irhceer6j8aiypj90rnzh',
+                channelParty: 'uj8t37yjbq41e98ro8u718cdfnsz04c7upsp1gb774inyikbc17k6rya1begl9i4qvi0v4edwc29g4aycd70rsxnar26wpex486bu8uhxm37rv1eulvndzloesh8du34bs1l0eqs9l0wgkzqf08ot9bf6xui6psu',
+                channelComponent: '0pvlehbmkc2nc26agq08a8p25lj2ms9l3o8654x7ss1rsta44v24fcksn6ybivi2fck9u9uey6l6dhdsbamkrnfu1pbolejmmcvo3gk1ekcauy08bv09vhtfepwtw7wjuqmyhm8ygpgekvhwtw7ut0sozu9e6d5f',
+                channelName: 'qfxj896305nijb433d1wpa9dmaf0davaz48scispagnj6iixxeoyaxw92uzc7r2fnc7zggd693lllwwhdbk9u553xq6jue4fm2x5em8iyto1l7nl5b0ikxf5u9dufpzvp6cte191a0lzan2nwjscucgmef1rgovw',
+                detail: 'Qui praesentium magnam soluta unde. Vel alias accusamus ea tempore cumque non alias quo nulla. Minima nihil omnis enim nulla culpa. Officiis velit delectus corporis aliquid velit. Qui nisi impedit aliquam quibusdam et fugiat. Corrupti culpa assumenda excepturi.',
             })
             .expect(400)
             .then(res => {
@@ -637,23 +637,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'wukbilxkf3pb21msw6e4jksbymhk1z01m7ultoez7qs258rpv1',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '177qfqrhuhx1ri2jme7z',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: '5q19ts2fpfocn6yivgkatkcj33d685kodob7b0s3rg0q82i2sn',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'be4wimiaoecbz1e4p0uf',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 16:47:15',
-                executionMonitoringStartAt: '2020-07-31 04:06:07',
+                executionExecutedAt: '2020-08-03 15:02:09',
+                executionMonitoringStartAt: '2020-08-03 15:23:16',
                 
-                status: 'STOPPED',
-                channelHash: '685ces85juh765s8kfx1bdyr20gb1bzuf5lgawl2',
-                channelSapId: 'jt03reyyzf1ykony0rxicgf23hpxvgszp49116v0snlge2bag6',
-                channelParty: '0ducl9sxz39iumwb3irfsys4tumam9lrr88186od0tg8jxzxe0gr4jtbz3j38uh2pii8n65ff3hkve6gpgnv6m0r6um90xtqwmfkks987nnqkzvvxt0u34mghs7t6o65ajrbmbdbc4qckxncfrvn914upemts5rr',
-                channelComponent: 'a0x8sw1q5eekw7n4sjn4toyracztgqpz4ddyol86yzcizbzg1yvftd4rnj9wig8lmcidkgtyje1u4on918dm9c8kirp4cxrly8k09zvrsybd6k5sws2ohbmdcp3kkhgudnumjav03euv987ig0z4fo5a5zhje9wu',
-                channelName: 'yke63onubykoi1etdjgcx9xu1mnbo33xcrbstu40v6sora5k60a4o88d27h2t9nxad79yn7ayis3j3fzf6xsp7qod0z7j5w631b1a933uogw6p1i5fb4mt89i0ylvfqpp16ondygjnhzxqrym6h3delq00yxw2w3',
-                detail: 'Dolore totam unde voluptates est quae voluptatem. Quia sapiente eum laborum vero similique molestias quidem dolor in. Repudiandae velit et omnis facere iste eos impedit quia sed. Odit dolorem sequi ab officia quia magnam consequatur temporibus. Aut et fugit quia veniam et quibusdam aspernatur dolores. Iure ducimus hic sunt sit molestiae quisquam eos quia.',
+                status: 'UNKNOWN',
+                channelHash: 'u7lxmlekqkm8i9xymq8soux4choo6bu1ovje0hhm',
+                channelSapId: '1iewe61erayrcyqppyx2v5a6kzpbpdryo87q7zyczzmquyccms',
+                channelParty: 'hcuouwvovt2txdezy9p1utoe1lyralobe34vdhuv3hi71p3vf56sq1fzj1clhvb1k2tu7rzf6wrzl70y6hwgif9k1nk93rgwdk09aa0w5meo6rhl1c75ulp1wlf3kp2e1tbs15fs8jtaq06458hl2ixvlliaanhx',
+                channelComponent: 'uw80beao2x9u0u7patpygo20asjdg847sa778umopoi0wdmyhd60rzrbhargru953r4pts8g7uxn9u6n7gdo4d8e4tcrdi0176ke33ykk1um9yv09en9453qfv69mwn35qp6k0e6jq48ghq0o89hahablccanukm',
+                channelName: 'edje5hkb5ldyi2jmywat9ha9n414sfj15ba97fd9zezgut37py7v9ng8tk6ugsy4m8cnfuad5mk2bh0dh18fi4d79923d5xom1hhih1qma4l36d6i9sis36gujinm3aqcohg57l1rn37vjbdemr6pg4qbingpkil',
+                detail: 'Labore aut inventore ducimus sapiente dicta sed. Debitis sed consequatur magni. Incidunt dignissimos optio sit eos aut adipisci quod eaque. Qui nostrum nihil dolores ut laudantium sed.',
             })
             .expect(400)
             .then(res => {
@@ -667,23 +667,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'lez8hnbut7defoj1pkgczndyz7n6utt91l7zdlv754q36o2228',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'flehl4fmh95knykiwob0',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 22:45:03',
-                executionMonitoringStartAt: '2020-07-31 03:21:53',
-                executionMonitoringEndAt: '2020-07-31 08:23:00',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'nlcrdl58n7qziggjqwumm95v97okbrr51446xfvdptr3lhuwjh',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'ao8q9uwg9xdy7b3zw64z',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-02 21:37:48',
+                executionMonitoringStartAt: '2020-08-02 23:21:52',
+                executionMonitoringEndAt: '2020-08-03 08:01:03',
                 status: null,
-                channelHash: 'n8tg3kvx4ur878umdzp0mxy7ii6qrmrsx1snm18n',
-                channelSapId: '0zcz2i2r83grsckv3o4wdpqcl70p4umdnmco91fgm9wrm2mynm',
-                channelParty: 'in9pb5kbkw6a1epp7fbj87g3k5116xts7zo4mbnwfqhjsu2pl05bqw9bqxazp5x0c6bzxs3iqjbqhbc8gz9cskihjo6gdb6j4mwbjn1pn4zmujgsr5sxayutm37c42rft97wmlvtuq4ht5deuk3jdb513auqfztq',
-                channelComponent: 'kg9a9m1599qjdxiomubj6bz7xzv64t368fj12cm4hzrp1bhlqqfd42bpdg8wfg6fln6dxzxeaexqfi1ztekj4p2yhwx1vhfo8nj791y66gp0xv0q9buv1k03x6lklqcq463vsvw5igpz4hb9vcz22qc436ot9nbx',
-                channelName: 'aoqhx9eg8p7d7bxhh1vxto7suxrvccvo2dpth506rnfpz5ooanpel62fdkz1chaoc9ojqo6k0ls8gxczby1tixmp7w2bzc1b6el5ypbb15di4i3j8xnjcvvt05x5rng47sk5excmbz5m8qt2juswoup63c59r6dq',
-                detail: 'Et sit enim totam sed dolor cum. Et qui ducimus quas officia et et occaecati incidunt. Voluptate nobis sint facilis autem.',
+                channelHash: 'ne8gitu9cuxixy4mdn4y65mzvpsbyysgq1mbuemo',
+                channelSapId: 'ix1p8f4upyetjm3cug9sthrf7rpxmkf2xjjul9kzj7jymikxrb',
+                channelParty: '5fwjw7ldw2mh9unv4sz7yj0o4a6eh2h6jesph3mcwvmso88ld25u93to9jm162lvpiulicthxvtus1kwab7so1k0fx0n44wjtb8a0c804mz91t2tlsvypvwl6jt3ynpmbdu4pb701fjwbo3sp4imdkzoiuxlhb6r',
+                channelComponent: 'x2stlhy8mxwn1c7im3hwweawx8246s69otectalulothvzrv4rk7lv3hftvswwnk3nrwpu5uyigjzaesgc0y8m16teareygr1v4dki85vvw8oarx4qt33084ry6iwyu6xh890ondj6kk2ryo1tlhsncveb279h1j',
+                channelName: '3mf0qxtdh1vhvoqz778jq14ha3wfsi5d29iu7ax2f0roq7d09toblgtdzl4g6m4i31aq23dt5reepq85ik6doojq5prlw90tv6l50gy3967iyfkei8yud7huq7gwl6n303vg3xppk8bc8qpl0m0mw7uh7ltlieeh',
+                detail: 'Laudantium possimus amet culpa atque enim non minima. Dolorem commodi cupiditate. Libero aut magnam qui recusandae alias ea. Ipsam quas atque dolorem. Esse ut nostrum nesciunt.',
             })
             .expect(400)
             .then(res => {
@@ -697,23 +697,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '0oa73bizc1pute20sv6tzjp6hc06ijy67o53nv5niq5z12orhn',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '0urvxl319sf54r8mbryp',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 21:50:55',
-                executionMonitoringStartAt: '2020-07-31 06:20:19',
-                executionMonitoringEndAt: '2020-07-31 01:14:45',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'vtqpmnayal2k4klytga9px9ml6enhcnetsz32rnb5xyxhxc2ep',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'cli89ilf8shryzswmjdj',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 14:29:25',
+                executionMonitoringStartAt: '2020-08-02 18:33:02',
+                executionMonitoringEndAt: '2020-08-03 15:57:07',
                 
-                channelHash: 'afamsjds71zg2p8rfzen2bkdkqk5i0j35jva23t1',
-                channelSapId: 'mfjxm9sneaj9npr1gy8zcu16q9cwthnn4sw6fdfk6tl008iqfs',
-                channelParty: 'obhm9izugi95wjytd54jbfnqn99xh5a752j1u0cy46x589btbfvacxyxz9rg5m37ra9g8hoav5y30nm8z7lz3evntj1a7u7y6udz9zoxa73i7sp841lxacyof4m97ikh2xzzea1f3jgsk3uoqhouvgkwnklvu4d8',
-                channelComponent: 'atdxyoup8qu6lzijq2nz572k8l2vxp641kpdmbjwq7b915jaox64r80heuc21nwq281nhx5edv6mu2n7is3pee9nhalx6t1s2fw3rew6ch9zre0tks4k8j6jmlta4j61o6l1fv8687s03nllv7bfmhpmz9obivib',
-                channelName: 'zjzhnsdo2odfyu61ubpz4l47t2kn2wcjsn4v5hvdgh9x1kdjg8wxoi3om4lacjn3yalv14zts40f3bm90czdawzlh4euycdcid2mx0q5j2nr88fjaykjbpq9kr1wdjkmr54aa014haqyrs1678usjcv6f5qgqn2z',
-                detail: 'Dolores maiores libero voluptas. Commodi rerum ut maiores cumque ex ut in. Error cum cupiditate dolorum animi. Cupiditate et non qui corporis sit exercitationem ea non. Quis hic itaque ad voluptatem sit sed quis quos.',
+                channelHash: 'q3y8z75llewwhzdlkc3gk6gdts5u70a3or17xdz5',
+                channelSapId: 'qtd8hjewiaq97zhvw65rbw0537ckz3oa41dvpcy0in9g99c028',
+                channelParty: 'rdr85nipgy0c77bareg68vomshrfderjdrsn4o8wkyf6hertpm35jirgfsgf1adhfi8t5ul1iobo69kbnp0m83v3l3vi06vjpt38mgs9nk2ok90bnzr3mu6nmbw2ngkjo1tbilgkh3rxku2qlmyoqyg30a52p826',
+                channelComponent: '19cqp6r0bfpgvmlnqd29zt2fpxxhz2vmtg2hq1q851y6e4tcyq9cqqc8n9k4ni6rjymqcqgv8rkwbqnbbpu2crl505t3fndy79m52qos9k0skcb8t5b1gjt4le1x19nj8lr0fvo2gswjy5qp323rb2xudpn9vqhy',
+                channelName: 'hf8tmem62dga1ju61pc3mmoqgk3kjaldyalgk63gib4e2ujlsbuc3g18oz97h1vjdoyjfdo7s1m40tsyi2t8c46m1o99e04ihobsl0ylma2lb1doa52ehmemryvxclflx8w66laxs6fyago83ljkzjcwqn2vf6kk',
+                detail: 'Voluptatum labore unde. Tenetur consequatur quod dolorum doloremque repellendus. Quos alias quia. Alias sapiente et et occaecati voluptatibus cum. Sint debitis rerum voluptatem doloremque ullam sit.',
             })
             .expect(400)
             .then(res => {
@@ -727,23 +727,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '27hlpsa468dofhun7wo3o8l4upccs18dt30rpfr4bd7kjrapcl',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'ftw8syk000ofckic5b2d',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 23:00:05',
-                executionMonitoringStartAt: '2020-07-30 16:00:25',
-                executionMonitoringEndAt: '2020-07-31 08:28:57',
-                status: 'UNREGISTERED',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'qy41stx839id1rdsytue8i9n1ipbr8haf48g0oikyisoyl0xpa',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'vx4o1zl0677teiv1ngk3',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 05:36:10',
+                executionMonitoringStartAt: '2020-08-03 17:33:11',
+                executionMonitoringEndAt: '2020-08-03 17:34:30',
+                status: 'STOPPED',
                 channelHash: null,
-                channelSapId: 'p4jt95t4ysvunfzp301dmr5yga7m4h8x0vk0lmyy9b1hfv8gn4',
-                channelParty: '797g7fli4p4tujacedhf7wlx4kvjvmfxojejpykyukzbbi92qqwog7305dsfhdg9t6dfy3ovulotrztl7h2ya4yoetah7p4k5uj0qxwus2yvporycqjk04ndr5cvri53ocrp5beomlik48pte7rqiszv3i5kgt30',
-                channelComponent: 'ufrnoa5m93lf9dhtrknv8bxejj2xd7kfv87jc1cqud8wet2xtyj3lxw4evk3d5bhqo267t2xuzpzlmdlzlqpcqt2i21iznv6wwz6tq0fm17ce9cwq1rgl05ojcwtm8ds0azy55tzmzr85ep6n5ht8rhbnesg5lgc',
-                channelName: '2rfgfs28cft0cxjqihgygg5wwh78vrta0w9t1fmuwnsal1j2fbaoc9v2zsjcnhwcao2sby4fcx8a1p3ab5dhm6ns3pmpzyydt1g42snr784gr01zecxu1bnc13ruyziz33nmus323rcal13cn71lxwpocvqx3iis',
-                detail: 'Cumque voluptas mollitia dicta velit. Fugiat reprehenderit reprehenderit. Omnis dicta veritatis cum exercitationem voluptatem quae distinctio. Voluptatem architecto expedita molestias autem ut est aliquam doloremque. Ratione fugiat rem commodi. Quod est aut laudantium quasi ea maxime vel fugit.',
+                channelSapId: 'y4m65f0ktvi64tqg2iopljmi888vfvvrktdkdnx3ts6edhu6r3',
+                channelParty: 'qsbz3wtx4s20qdceudpjfbtvodqjmeuuux023r14hx523t4ay5xi982x8nbc6a64nmx7bg47r60v90bdiggvvmuv4miq7b3pjgo8nzbutbjlpctdm5pg294pjrh965f8ug50jfugxbvqjwjvvqchqqm50ftaitlz',
+                channelComponent: 'z761lruv52h490uvbttuez5mc4r4k33vmyvxmm78hyaond57wxbzesra1czno8sxukgkob200f4n2r3gk873jm34f4vzhuqmbb54hnxl9a2e0doixic8aabrj0p5fvq00x9uc3dybm9h5nqzbovmojcv1wiz0que',
+                channelName: '9l59qzdovpcnn7b2tspnnbqjmtzi9p7wvxd6rkx2tw1fvx2iy6hhietosvezq0mttmmtkw87rj5h4ofk26hmba143kiznh25430tdhox6y8aw3mpcizer4esda8k6tsqudalwdtwqr80i6m0blrlnluo6dw8t7gi',
+                detail: 'Et quia amet praesentium quos. Ea assumenda voluptas harum voluptatem. Odit ut natus atque sint. Ut illum dignissimos incidunt cum.',
             })
             .expect(400)
             .then(res => {
@@ -757,23 +757,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '2lkjidbu6j08fu8whu930r38suxi8pay6axjuvxq8fb5wxj4ba',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'ilxadcr8sst6joz1b0mp',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 02:53:36',
-                executionMonitoringStartAt: '2020-07-30 15:02:49',
-                executionMonitoringEndAt: '2020-07-31 01:21:04',
-                status: 'STOPPED',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'ok5uraf9vug990uo82dglt5y9mlhlbg8n174c49ms0e5u6w9mz',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'm2689axpr6yed5tdvbzz',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 04:33:04',
+                executionMonitoringStartAt: '2020-08-03 05:22:57',
+                executionMonitoringEndAt: '2020-08-02 20:44:45',
+                status: 'UNREGISTERED',
                 
-                channelSapId: 'ue718svpkd9o3w65ynihwwun6lhij87jb2yhmdj7ra2au0gebe',
-                channelParty: 'ey98b2jsg5y9bglgkp2bcjzocmspcfh8b0di6jevjr2ipfrjp1px4e1a1ysj5cecsg1gz84gz23q8q6hm4yiv5ew7ho82h4zfwqmqcdku7n2b09q6tyfupfezki6yuxnzwm348ncoy8kkrnrdkup91iq3d2tawpx',
-                channelComponent: 'h40nkxj79hk5bx1kxb2xbm2eiz5havjn6qil1s7n06mm0chr0eluzti09fvcobytvcvzh6urcsum6efworr4r83w1btr3v6ze49u85dm8lgk6si68v2jcm6r19u3pxkvmyqj9inp3jcorjd1dddw0x04wy40gn6a',
-                channelName: 'wifwkczkkgnfu9zl02ybr5jj9dwlpsl4d9e66vsfmtnqqifsqrsn1y2hpkmyy92fehm55otw41tm79pqb4t8jl04u2sl9zlv150u9cx417yy2bxg05evzz5pad55d7m0h5bgavzhxdli0v0hdzdcs6kxdicq3jv7',
-                detail: 'Hic ut doloribus. Dolorum quae eum ullam est amet inventore maxime aut qui. Tempore facere sint voluptatem. Hic cupiditate est ipsam harum aliquam ea eius esse.',
+                channelSapId: 'f26f0jhwgkrfm6g31c8dslr12jf41tkinll6ni8tuzohuno8k0',
+                channelParty: 'q5q3m8balkhg7e7db7y4i1ekulhpx9prtn4l3ztrmcbscl8b4ku6nfya20h6sm81avsyyajys8er2zx0gqz17b46bb4wy41e9acnqmhjleja0gos14pwgflwbbmmr6ufqjmyy4nliek8o7ohhc7mf7c1w2mhwepo',
+                channelComponent: 'abyxeruzvhgn2nui09zqt7usw7lyke571vdyj5a0spyaqzii6szl1qj8l2o84w8nb2p85mjs8aiv7cwxigi83oxcuvxkqlcfbvep4em9okpc7n547ynlii45votv4yvirlfwyxwkngddwfekq2ntpdcv4skcifwy',
+                channelName: '4xq4zdfex1x212t7y2sq4rjrgqygqlx500pbrsimt8zoww9e73jbeot5l19whhh80iapqgg26szq4xf852jlp8krrah4bil4hpwa698hu8pa3vz18202fuukclib8r0gvqja1ka8cl6iop1tvdoxeiv7rfobia92',
+                detail: 'Deleniti soluta voluptatibus porro. Optio impedit animi. Iste alias pariatur ea quis corrupti eum aliquid vel.',
             })
             .expect(400)
             .then(res => {
@@ -787,23 +787,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'iqh2q3fy7o7l0azmh18s5t21hj5cbdrsbmasvxvpb4s7tshvw6',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'src9rm4dhxa94b7r5xfx',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 07:53:25',
-                executionMonitoringStartAt: '2020-07-30 23:27:23',
-                executionMonitoringEndAt: '2020-07-30 15:30:59',
-                status: 'INACTIVE',
-                channelHash: '40q6s5wdkmdk157y8i3bdr38akpj0arslf9ryijg',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'f22uxncyljgkd4j3k1sma9ohxkb6vm2uh1r4ji4m6mdmwecm06',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'sn8uk32rvev8rufyxx6b',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-02 21:47:36',
+                executionMonitoringStartAt: '2020-08-03 04:39:28',
+                executionMonitoringEndAt: '2020-08-03 13:44:02',
+                status: 'UNKNOWN',
+                channelHash: '7ttrdl7qmwycj7vqxwayxpxl1po0fw2ix1zbicyn',
                 channelSapId: null,
-                channelParty: '121y209rzcn4usv9kilmhmcwwiea8finkkz32zu7ssg91f9n7sxhpg9tpdq79al4853mi97x4c1lv5qkmwmuynm793jdvc5bzlomo6gcjzjd3tychtqqt8wdfjag42r8cfuxh06aun9jaulo8kknoxr2xmw4d0z8',
-                channelComponent: 'u18onku29znv8lyj9srl8kqzk9fa2ox904iq1k30p9ngcfvdr2056crm1zaw893ktm8sd2ojsetxa4osxm91g6bh8nk1fok7srdxbofjf0abn1kebczjj1ijj4cr4vrusmv1qcr4mik00nyyju8xvvokpz3suho4',
-                channelName: 'yf4bedhs2gthohtx5xt3o3ttoh0jznm1wh5qsfdfhrx95b83628ygdc76suul2dlozjwjrecdavd36x4ba5001h08e6nc9ngcn7b69ecwyaexgpti90m7sq3q9mchbbe1wfwdfpvo48ai6rgo5t7fdk7h6dgsmf3',
-                detail: 'Quia placeat est. Aperiam cum quasi in reprehenderit beatae aut nemo veritatis. Sequi et commodi at. Rerum adipisci dolorem. Culpa itaque ratione suscipit omnis dolor est fugiat. Non molestiae quia itaque vitae amet dolor eos voluptate.',
+                channelParty: 'b21f3ul4wyxwtu843byf823q4kgw6r1t3dx5wafq0yg03ulzt59ueax34326x64ojbsj7rghzy9bhg9szpnm7v9dpyw1wrpxvik30id5rz93tthjictun39xi7osn99gli14us6knr18g6pq25yafle9ydjne41b',
+                channelComponent: 'ovyydx5f8gple0dykwrfbtislcnewozm2gc3rn1e8qok5hy0mps4fvvk8rnb5klfmo594ar35zwnpru1z7ljk1zyiiev7enc7nqw9sr69zp0qkck69zd5x7yqch72chtxor7acx39uzk5gmgcd8duh1jdzkyz14w',
+                channelName: '3famg730k1czww0zrd34ut7z7sq154twiwx8wmiu5976247apugvvqvjs1cp7obkti8244e6jxene9ox7rfy7sgvqshn4edmbte5u1p7g3f0etqsrn9h8r2by7odxd0hr3ml76st8s3y7xcqm8ttpol11xpgrs1w',
+                detail: 'Molestiae quis officiis est dolorem libero corporis. Repellat et voluptas qui id animi. Cumque quo sequi placeat excepturi soluta est id. Odit similique excepturi sapiente hic autem magnam neque velit cum.',
             })
             .expect(400)
             .then(res => {
@@ -817,23 +817,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'hsik2im8fvcu6iek7x5ududbijvrodulb3ck71crn0qflr2m0s',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'qef1hx82vcms5y5301m1',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 06:21:33',
-                executionMonitoringStartAt: '2020-07-31 08:21:28',
-                executionMonitoringEndAt: '2020-07-30 23:56:12',
-                status: 'UNKNOWN',
-                channelHash: 'gotuocu3pw3okryt49q7w3xqx8h5sjuqcsj3vwjr',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'i4qt4y3nhim0ns471t1rnm4kzrpjxjq7nvobgyz0t5jyxgvzh7',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: '3g0rzkip809fs9n2emo9',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 13:00:10',
+                executionMonitoringStartAt: '2020-08-02 20:10:44',
+                executionMonitoringEndAt: '2020-08-03 14:04:29',
+                status: 'STOPPED',
+                channelHash: 'orvv1d8y9qj0vjamvx3b7xpcmgy1676z06zy2zlb',
                 
-                channelParty: '52vdxjgxb67zy5d1hmj230b473eoxjixk0mat2b4ni1xkqtakg85sgty755udjgn4gzv7gu4v0aec79dayyf9c1boc0cort66hpcycnodz1vlo9xl6zp9tyq9hsgqnsz1loo72gow2irj6qomuaiiu3q901evveb',
-                channelComponent: 'ebwke7ogbrz624tama5xzbljhewokiuu4bncfhaz01pvpw1vudrtquxxduxhmfdxr3kvz9fvx4oq5n478kk3b0pe6xikkt4kkj6s97y1nr2mzi8i3u7u5rtyb0ci2witec3cws8x8i24ri2z00b7nfqbscqdvw85',
-                channelName: '8t1oide5wp93c9e8ps07r1h337j7y91x6r0jdd0boaor1u6r92rh93fczdepbnwb9ae8e38ewrcp3etu1nntg1fc3wehl15a22a9jwke1flh0h3oe1tg09fw5pyk0tpte0gtkjxdi15150evgje8hguaid8km6no',
-                detail: 'Dolorem ut voluptatem et. Natus vero dolorum molestias quo quia. Deserunt voluptatem qui ut odio sint non voluptatem quis. Explicabo sint id ipsum et dolorem.',
+                channelParty: 'nnj0g7w5k715xeo1dekcu7h1chsakkihaiol6lq8c8peg419opqu5w17mha06tauaswp6f3baepct9p67lkdpf9pfng64b0weoccuuafgpft9yl98pnzpg630vvywzcijteiru6meuf0fkjfdcg6klnf1nrb1581',
+                channelComponent: '55b0mgc31fo1v3qike09o18yej05ibjgpfn6ngll9rm3qgo9r0vpr9y50smlieh4agtporapmmhjc4c1l7xtuh0bj99k7ql5qks4rd84dfr4s3n03hyu8vbc1dxlrzeajh9l753wkr6plrlqjtyaetjba7pqo26w',
+                channelName: '41o3gn0k4gds3zpbd0r2az0uke6fqlovue7x7fle8xxtiam2b02z5iejxggcxgiwwcudwdfj0y8a7ti5fl6ccdfdzz1ezygks1lkat8n7mvt3ettz9irtjxnssn3l1mwfmfj7cwd1v34vd0rk8626k7t3lta9z7m',
+                detail: 'Praesentium sed sunt quaerat velit minima. Aliquid voluptas ut voluptatem in eius. Dolores veritatis ut esse ut quae cumque placeat repellendus qui. Aut aut in at vel aut distinctio quam veniam.',
             })
             .expect(400)
             .then(res => {
@@ -847,23 +847,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '5azjmq1brd6v38thj94eqe866igsx6hptrbmc7fk42b4fcxibz',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '1xm1uvfaspsh7ws5ime5',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'vnjvtyzdlw3tteil34ljhq59k5re9bqgbouldhv0s3ecjhodk6',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: '1blilmq2h56yv4amiewc',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 00:55:38',
-                executionMonitoringStartAt: '2020-07-30 21:08:37',
-                executionMonitoringEndAt: '2020-07-30 16:23:02',
-                status: 'SUCCESSFUL',
-                channelHash: 'tj6bvdq156s5l8oaxkqvy0zy05rq1on8ceyamh66',
-                channelSapId: '274b35oqictp4whzdurs3dirddpesctp69fkb796qsmpk1f37s',
-                channelParty: '1jfi69n7ax9bsh6n69t9b0bu97vfsqrg3h9ulat1d5mfhl7oifmnhvnkzeznv6yd9757a7t3uz1xdeacyy6jdzmo797sopg6rau3ml5w9bt2e2j89rreioid7yaqr5f8rxg41xxpbnrjb2wzpsqcjhm145r0po1g',
+                executionExecutedAt: '2020-08-03 07:25:56',
+                executionMonitoringStartAt: '2020-08-02 21:54:43',
+                executionMonitoringEndAt: '2020-08-03 07:06:50',
+                status: 'ERROR',
+                channelHash: 'iwfvh9mv71olklko38k1320pq0sg0ixt1xyvuap9',
+                channelSapId: 'mun9ky5wzhrdk2zaragzx6wupc4mrjruwwuca7mtnt0c24qqd4',
+                channelParty: 'fyqjntvgfkhr360iqgxpbz66t1ljqfn94zyd4ac2s2xevapmxnia7bra14qtafnq7qz87oqgt3sm9izjo4lb8qbaal5j8gu82mxkrvsofnyln9sm3zsvlw1ro9y0gboog0hruwy2o4lvwi5wmuzibrr123cfxuxk',
                 channelComponent: null,
-                channelName: 'aykj5gcvr693m6awelc02615rgn5qqfqd0e4u9h4o1yy8945bnzmlbztaulujou30fffn6x03vp6ycmosh04hmzi81cb07db4zltbudemun7us4lxf1d3olodetw6u20qoqkvow6brojw5mfz2jloolhrliwyzln',
-                detail: 'Molestiae quo at sed consequatur molestias modi amet. Doloremque quis praesentium molestiae laborum. Quaerat ratione voluptas ut a consequatur. Nihil voluptas voluptas facilis nobis recusandae et aliquid. Omnis delectus ut quisquam quam molestiae quibusdam. Illum et quos id nostrum ipsum.',
+                channelName: 'puabe8cixhn9j51c5aia4z3jk7et0awaolk6yezci82z1x0hl64rwncfd2bn9w4nq9b2biisnn2yx3v8gzibtgtce41goxnbr6oj4x85bam0j724zghv34pgkjd3uwgxiaa8lpuv4in6dwq0lewo5u2i7qpb44b7',
+                detail: 'Incidunt reiciendis totam rerum et sint. Ab et eum vitae quia saepe. Porro impedit dolor doloribus asperiores dolorum aut soluta quas. Voluptates quia similique accusantium dolorem culpa et non pariatur tempore. Consequatur facere aut dicta.',
             })
             .expect(400)
             .then(res => {
@@ -877,23 +877,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'an5jl7mpblttgf461ltp5ch0uobcesnqo1iu8y8tvbgg15xamf',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'sjyx0c5g7oizz283xkda',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 10:27:04',
-                executionMonitoringStartAt: '2020-07-31 05:56:02',
-                executionMonitoringEndAt: '2020-07-30 22:44:51',
-                status: 'SUCCESSFUL',
-                channelHash: 'dllc3qwzz33p6qt50tv1d1b7qnwzfo3vntwk2ao8',
-                channelSapId: 'f94sspuop7n40172iez22s6ofnxjasan6lkf56l6r0h5upmcx2',
-                channelParty: 'vzt9uzhe1x4wq42luw5cpohiofotxis0ay118okx0ch2jf7vjb2kh9wss4ehvkg346sslkwjlbnf4ygin61s84lik2g0dbh0fkr8ys8hlzbkcnte5tym3e448o27xuiw317cknhigpmn9c73u0878n16u6nr1sbi',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'g78dxf7fr6yi8widdq3radndb18fwiffi2swx94ks3a1h1wg5a',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 's6y5w30sd4gdt0vqix4h',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 01:43:23',
+                executionMonitoringStartAt: '2020-08-03 07:43:17',
+                executionMonitoringEndAt: '2020-08-03 01:38:10',
+                status: 'UNKNOWN',
+                channelHash: 'p3vztarmhwxquxjqflxmcgcy4y2cs0mj8ukg3rna',
+                channelSapId: '5jvag648dj00yojcay04cx92vplg90qplwptwzyei0bjp7m9ih',
+                channelParty: '6z2fbj8tzogm318y7q0ejn62npwd46xrtz1rddeotfx2d0vxmphsu59wv0bv1dif5z2j1m97u3l3ryk307cmla389unrziwtimpt7qcs3p51atc9z4fak18kfbzy1ldlzsvlt0u4llzrjrxak4vrnu6fe7okw6i9',
                 
-                channelName: '43u9okzg598op6f76f8psn7896uhb4s24e1h9p4e3ujeylfueup4vx50ctrdua1r7nwi1b582zyqk4dp3fz6bpgntv1m2fop8gb3te8wmtyalx7gss08va5z201ntfqoyng8ri9f029y589py9o0yikuyjldqt3x',
-                detail: 'Dolor necessitatibus autem et nesciunt tempora quidem quisquam aut. Animi dicta quis omnis nihil ut illo. Quaerat et minus. Sint inventore quas quia. Ut saepe ut magni rerum quas nobis. Quisquam facere id.',
+                channelName: 'yhe26vmlwczr07f6hipduk24jl6y94byxrzn0yyirq64opvimpjc84q2x0jwyekwbgpvcpk3ld0qof5siy2uwzrcbekghctypfip3ydqlof5gufzwtddaqeoxjp0sxxblmopcbrpbz5ktmubsy5kis1ajbi6g073',
+                detail: 'Iure dolor totam ut reiciendis aliquid dicta. Voluptate odio dolorem in dolorem. Id expedita fugit. Ducimus quisquam sit. Quae autem dolorum. Qui nesciunt eligendi a.',
             })
             .expect(400)
             .then(res => {
@@ -907,23 +907,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'kwzx57p3w99ceajwxoe8hzuozvamzg9190zfhs89pjimzcklji',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'klzmf0p6x12kesf6uhti',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 07:52:12',
-                executionMonitoringStartAt: '2020-07-31 03:53:19',
-                executionMonitoringEndAt: '2020-07-30 20:37:35',
-                status: 'ERROR',
-                channelHash: '47mhg73ciiebr7r9ta89fhv7ji65pjwvlamj8euw',
-                channelSapId: '85isrmrpxcyukji3hi325ff26tcr83df90d8lu7j29whso3lac',
-                channelParty: 'ebqhrehiy5cubp67ynchiufkwt385t20hwh9rloq4yq1t02hw49sjj35lst1d5gig6ead1levoav5k19crxvmw01qjbnovtfera291afy01zpn394gx0h6le73pld217b7rbpa0fvltvs1qmk0q7uljpx2w6xvbs',
-                channelComponent: 'zvnfptxlp6mjqsjx0znal0axhss3hrhfx7dv6zqj092x4vu57slzne5iach9cxrcf5qnuhmelm7k5mcwx81e75vk4zhm0k4ooopiki9oaxqmkp725x1234syw3wfqzcl9qk2j7fshcup2abliv8trwtz1784qb0b',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'hdbklbjl55rsjm6fb4jeaxunqfglci7wqqjy3v2b821udzcar9',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'jh2hoy6bjv9kzqcwho7v',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 01:53:15',
+                executionMonitoringStartAt: '2020-08-03 10:53:32',
+                executionMonitoringEndAt: '2020-08-03 08:34:10',
+                status: 'UNKNOWN',
+                channelHash: 'f7zmzumprwirexfntf523w30qtb7sfx7radphu5e',
+                channelSapId: 'xc1vwt7qb9x8x0xekpdu31zbixngbfzbbtp2ppqjs28mc05lf6',
+                channelParty: 't4kzdpfhnorlrzwfi91c7w0xa7t4oi1lsbkngogu2gxkje6wz11hn0mg5y7lcz733ew0xss2btkba8n9x2hte8eqhwd6vndso4y6su6wqqrix0hycgl0at54xcrl5zw7hik5ri83r6vop98og06pw2g8vmbytxkr',
+                channelComponent: '2mtv5ezvhum67uwoigtix83scv336b1z0qkaqvk2e11f74ruc5bdynqo2hskeydsisl3075v2rtcznnbgh3s1xidfkijsswza547pajtwcbq2cjq6sex3rn0152tycu29uwcocbcoiptssqb19bnl0z5tu404ibl',
                 channelName: null,
-                detail: 'Aspernatur culpa accusamus nam voluptatem. Nulla aspernatur quod. Id doloremque dolorem sapiente animi. Dolorem voluptatem et provident iusto est non ut quo. Pariatur maiores distinctio iste esse sit accusantium et. Nulla et quia cupiditate maxime sunt et omnis dolore quaerat.',
+                detail: 'Sapiente sit maxime. Facilis est itaque consectetur reprehenderit beatae. Exercitationem consequatur aspernatur quibusdam dolore sunt molestias blanditiis.',
             })
             .expect(400)
             .then(res => {
@@ -937,23 +937,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'bokda14wl86hih3kitu5to4l4fmf86t0dm5dmxt1in810g5q6e',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'dd6187eh218bh48fp3uj',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 07:43:30',
-                executionMonitoringStartAt: '2020-07-31 05:26:45',
-                executionMonitoringEndAt: '2020-07-30 18:32:20',
-                status: 'INACTIVE',
-                channelHash: 'yextkz0983ym4cv6hz8lqcu30k2ukg5oc286zjve',
-                channelSapId: 'jg8tcmrku4oeknjuhpy3ok5ov8i0yqbhohr781fk8s8tqx1n8g',
-                channelParty: 'fdkj543c8eb9bhkow7ryy1tid83rhyx8c54vwdkfbnaj8kwbpzivwuh183pflfibajds24ct1u9yvs0rpjz9dhqgn2c5dr0yj88hza08z3kxigds96zfo43l9yppsmd6tu6d4kldbsvp8olnyvqv1otbeint7rjc',
-                channelComponent: '3xzhwo4wcnrmo7t738xu0tekpzqctqz2fbmgy9kawganqrs499xrg63ix2m0dft7egh8h2op8100188xmsxq710pzjv5ob4h9xii34ybnfogkafq12tz8qmyd3hpb3icn9j262swtn6wv6qwhbbosgmjz5lk6f3f',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'e57rixh9i4fw8x8qgqih7nx7imvo8pksuxw00ul5ijn38r3ciy',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'gxgqf3ablysy0gfl475a',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 07:41:03',
+                executionMonitoringStartAt: '2020-08-02 19:33:54',
+                executionMonitoringEndAt: '2020-08-03 02:56:02',
+                status: 'SUCCESSFUL',
+                channelHash: 'mrt5orhp04tsdbsi5wzs8pxdurji923ziffpilwm',
+                channelSapId: 'rztyx3tcu0p9u1kx8puumvvdctwhkepzqyqx10drz16cdh84xx',
+                channelParty: '37jigq31jq18pe9m4c75ilo5qwokfofxbj8l1w5kh1vvje6vg4bizno0hdbxzz2uo3129oev8xesyq1j2nellswr41g4ngt03s19n92c7szpqffhn6vtpfm4ydj5xb9e2lwh5bzyi4c4usk5ljw420bu6zfoa3tv',
+                channelComponent: 'eg63huafea8ryjc6r7kuxfvcpytktu5z0g3kuxd7e0zg7uk9gh3mouvhpsdo8ky5jftn4hphoo0xrb4co88ataumb6ikq5ej46rcfb4m59pw99z5la1a845cinn9bti7zrwrlynp5zp7d0luqsqc385snv754acv',
                 
-                detail: 'Inventore sequi voluptates. Eos recusandae suscipit quam. Rerum id quasi in molestias aut repellendus eos qui occaecati.',
+                detail: 'Suscipit et sequi ipsam et tenetur beatae et. Ut esse culpa voluptatem quod expedita delectus incidunt. Nobis sit animi alias dolor quis. Veritatis porro id sed sint molestiae dolorem totam. Soluta quae ut.',
             })
             .expect(400)
             .then(res => {
@@ -969,23 +969,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: 't0xv4ck9m4azepd8ft0fmijcvb65zw3c34u72',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'y2gp8cle4ztobufhnmpiv3owivn2sf2waezi5uylodaegh2mi3',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'mrp2f6hb8bygl36vi1mq',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: '0j27pimj99l58tgo5gbg04jieldyt4jqi3ryn',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'xkq3owhyioubcdnftiogihtqp0vix7owp7jf4e9bql4v5nuy2i',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'uoyekjbb0jvhb764gsku',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 03:23:51',
-                executionMonitoringStartAt: '2020-07-31 05:53:01',
-                executionMonitoringEndAt: '2020-07-31 12:45:36',
-                status: 'STOPPED',
-                channelHash: '99d5qmlr7bnrivep6wbxz2cbwt27wr3588gechcv',
-                channelSapId: '2gqjwn2hsfi85hf04zhoqxrkyan7rbll1aa1zrb1nh8kuk0bwt',
-                channelParty: 'z6hu1foec5g5956thlzr8w757nlyftwuirdr2esrpvs2xvfwslqga4hh3u6lqmzsk8lhkpaqt8mwoqmgx1m6rf7somvqp3rkbgll9fapvzrar91yrmxbk7kccdtiogn1a0vy875c3sq278alt4jk32z7limjm7w9',
-                channelComponent: 'mbux8pq4ldttos0cyglgcmogqzw47xqjdnmdsnow2ahjwbmibbsf8tq1ri2ikpfrry86okojlp7t62dyas32v1suzy7cu2r3z8ttslomcn9r2s418drmrsji3evhd1nklc4v6g11sfs6gdxveo8sag3ag8u2s1lq',
-                channelName: 'qso2g0grux9k2lddq3fvj37877lvlrpjcgwrpxyzjg2yif169im4oxy7uj6nys4skufr708zuebft9bc8led2jz1u9usme8p1vxntl2432kvt48d6j22qkymcd295gf9vijqep2y0khv13ea574umz3tz7ahq5m0',
-                detail: 'Sit inventore et consectetur et commodi incidunt qui. Hic expedita quaerat molestiae. Tempore nulla aut.',
+                executionExecutedAt: '2020-08-03 15:41:31',
+                executionMonitoringStartAt: '2020-08-03 16:59:50',
+                executionMonitoringEndAt: '2020-08-03 09:37:15',
+                status: 'ERROR',
+                channelHash: '1aghyjyxrdf8bveckktp1yz7uobtlbnx5j88bdx4',
+                channelSapId: 'qscas7i0t5qhjb786c74srnmmr0u7ahgpasbf5tjbp2k2muq54',
+                channelParty: '6v9kk6q7y667uimev0r2lwiag73tgo7azx4swlbtw0a32jg995lm7n33eg0gffbk0nshht6seep7veghatsgqqm1aouu12750ejlgtmsspxrxmu12vt8dv2bpdxht6oqckfe0h38rf2a5dd0n5cmopr22xubcnpm',
+                channelComponent: '2d8zqetachf9y2t3wejoughcgvjnt5w0ym5xo01of12djmrityt63u4i2n9nbmohkqrqr8ryr3lxoi7doa4svznrxf0lqxf3ws0pf80skupxf8zmdv7azo3kxvzr8ela5m8bqlqw2ku0ftbafse32nla4heu7oc0',
+                channelName: 'kv4b291eqxfmew0jlxpo0fo9t76n73kgj6e2jlwewvzebhc7fpjfcvyfbhr6b801exypycro83dt6quq8mx7h30d0shj68e245qewd5c9bhwswzjip8i0zpouzup1qz20wvrt1w1v28qhwy2wshxswwa69ybesjk',
+                detail: 'Eos quasi quia iure id magnam deserunt optio. Occaecati nemo non quo iusto quo provident sapiente. Ipsam qui est velit rerum blanditiis animi est.',
             })
             .expect(400)
             .then(res => {
@@ -999,23 +999,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: 'kx6g7fqrrge1xknzto2zyjlfpp36dqcvgs2wn',
-                tenantCode: '4gj4rdc6bndc2acj14s728lpp1b1kmw0dr7hvcbptmxbk3jymf',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '0hyfm9jafvjqd8mz81kx',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: 'hfwge720b1a90z1payoqvakbxf9eibigv7gi4',
+                tenantCode: 'vc6188adsmn3ux1l1b4ndal9wj903t1xefl7ah9l34ppy0m6u3',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: '3e3hpa2iu6kqeyjfu148',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 10:20:18',
-                executionMonitoringStartAt: '2020-07-30 18:10:43',
-                executionMonitoringEndAt: '2020-07-31 09:57:58',
-                status: 'UNREGISTERED',
-                channelHash: '01hoyomveefwkt7vpjdqsg9fo26d34bs9hdfz27t',
-                channelSapId: 'zaazl0ghgx08hb3kgm3dgd3pbim71rse15sx029mvrx0erprx4',
-                channelParty: 'p0yuicwcngsizoxerogziauj3dzpmhdz7h8273f138e3jogubpw9tlg0v15ujarar4wxhftilz8j8zgnsqye0wsa19f6rir4r0cg77z10aizzvn46yuvaogtoydk7x7zsla5kkytnb1qk56qdqxb5joyrtwuhs5c',
-                channelComponent: 'rmnzlw9j6krkvopnqnputyvrod158sjphr6dvfladybcej9z5vc6wjc4jthel9y806uzqb1lfxcley6onlz6uetya82i66d6x8ra46pqu0ryd2kk5l34jl752bi7kqi06ar5jwf7hfvso4xcv1jx7w4k2ujrhn6x',
-                channelName: 'ubxqf8t9t4lfbnulkcvessooeq96bhagx3nthw4w3cfq0ks5sl122bm2tohvztakb65ntcg8t1p2so88q1pqyy7d89c26stbb06zar1xtvdosc017d8x4ma6dkfanm7kzme0air22sxi4q7uoh1foe0wf20pipaq',
-                detail: 'Assumenda quidem odio debitis. Illo harum ut amet magni. Nisi cum alias et natus natus culpa libero amet. Ut voluptate vel rerum nemo possimus quasi cupiditate sint.',
+                executionExecutedAt: '2020-08-03 12:15:03',
+                executionMonitoringStartAt: '2020-08-03 17:12:20',
+                executionMonitoringEndAt: '2020-08-03 15:37:24',
+                status: 'SUCCESSFUL',
+                channelHash: 'kxhoks2xzm6ud0k7bq4dxjnpx22pzvh3hzxwvucy',
+                channelSapId: 'z05jeqys11utwl3a31bgfxi2xl2qyrsqvpbhrnjxelcxd6cu8x',
+                channelParty: '334v77ftb61sclrvaaek57zsadhpy278m01dpufglbfx1zt8zc8ly7euk479eii3mblhgkpan77kb7cv753sbs4le1brskk1cc971uqsu1j2anq54vn1t7me0wk3ych5hvdgnqxcesj23pvhh05bthdqozvnnmoz',
+                channelComponent: '9f9tsb2jxszo5346lz2azuj9b5zc0fktoujmxchinkgdp5kdm8j529ka8kzdyc11bv9p1ak2buz7vtoui61xj6atq6wjq9ew4mlhc59jqbwhx1wvlf4t2l66dt5q7tdrmmgh6fmi9qffgjjiy4mkql95i2chyh1j',
+                channelName: 'xrnnj75gzwku9o3ztgsg26hjrzoolhg9shnao632tf2c1dos590ii99p0s1tq69ufm28waeazhvg2blrsu02y35b6b1irwcjtng861zudngc8mq96dmsbhleocnq2qeaqgv4prco2xpy3z33ox33xax5jipbotxs',
+                detail: 'Qui consequatur porro. Deserunt soluta unde adipisci rerum tempora laudantium. Alias reprehenderit consequatur omnis.',
             })
             .expect(400)
             .then(res => {
@@ -1029,23 +1029,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'h2aj2kblzqb0j9tl7bcfg9zh4u38ton76xc5s3l7bbz5pk71rn',
-                systemId: '5wgdyra8bnk9l1dfkjpaspuowns7o8def6ehx',
-                systemName: 'w7e57da8whzlra77n3m0',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: '9mwzqguyuq36xp0bhxzia766j6ieukpt9klnx788wl3a6q3vew',
+                systemId: 'c8w9c5relih70ovc3k5iqp8umhlne6k60n20l',
+                systemName: '3rh5id389w7jqq8vb699',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 03:11:28',
-                executionMonitoringStartAt: '2020-07-30 19:38:47',
-                executionMonitoringEndAt: '2020-07-30 23:51:07',
-                status: 'INACTIVE',
-                channelHash: 'n9xx77blsoriy96rft935jmouxu5akt1ifq1jluq',
-                channelSapId: '27n9plw3q7xc7s946y9csh9q0qo5lorm2r50w55zxwglxb00cy',
-                channelParty: 'oqufuwc7hj45zzvdvpspsz36clel300o9p3kb5qvdd6ts6cy2er144ju9oooioqpxushvn0werjn208dfjii13afp8fcy8jk4sqh9d7n01m46i6r6mqryqpw39wmd8p5udtm3t0jhhlsm68zum9s5h8co1rg0cbm',
-                channelComponent: 'hshdnw720rjcyqqmv7b6qi5uthxsvnr4r3rh8008ykdhfjrlqwe1rslcqudpeualuozq0pmhh87iyu57l2uqdduq4v39c9qcl5xullgz2mwkj29ugb93lucren63k9621x84cl93524c79nxvq861a4hpon0bly2',
-                channelName: '0l8j9u2727o18shck2nszs4cwwlxm78y8qxoht5gi9trl0obaxggrzqx2ys1sca1zdgp6onnrt7hnqp34wnfcrp7y18tofpldqtgcxj0sovgnoqrmk2oc8xhum2mrqprvz6l8y206glznnuezwd1k1fqpr2remex',
-                detail: 'Non aut blanditiis ipsam. Placeat assumenda a minima earum tenetur illum accusantium nisi est. Consequatur vel molestiae facere excepturi beatae. Et totam omnis doloribus culpa illo eum nemo. Itaque praesentium eius. Cum ut neque vel aliquid est minus qui ea.',
+                executionExecutedAt: '2020-08-03 07:57:45',
+                executionMonitoringStartAt: '2020-08-03 02:17:22',
+                executionMonitoringEndAt: '2020-08-03 14:11:51',
+                status: 'SUCCESSFUL',
+                channelHash: 'bax1bnzzyp9ruyywqgjiu3awrymkw9ou0lzjghmv',
+                channelSapId: 'l6wlryt37wauxs4htxa91qe0kztn8o94ohcja9p0rm70bo3gib',
+                channelParty: '0hxjna936ehcxg9gsa64jbbapq10sl5tl7hi167k42rd9oct0p6nzrjnqcllvnqv0xa6epbqs6ifbi3yjsgggxyfk0sh9izyvfbt76wwnao8rg3gcl17og81s3o8ay61t941cm0587jn4x40y106r1pfu4sr8er9',
+                channelComponent: '18w7g1vs4vhqrnhry3v08yyn2wrn1gaax8qbx7c0lndu984i07h1pdaslznfsudws0yu8putmkhfrb7kv1f6btrrqjwm3s3qdiexk9nbvvnwpyk7fiz11z3maxtw0vjrn4bdkpuzjtcxs8juz3h0u4x82vzv7aq7',
+                channelName: 'zb7tuf212vv7dso6o9pvvrwb5h63q7w8mseq7h4yj93vov58x3voxz8mdp9xzea0i2cnmf9hw6keqqlnkjuyxim2l6mtfgniyecruj8vmmh9lav80o2pztouiczu3skm1d3dd7ofq7fecilor0xltqk80iq1o0dg',
+                detail: 'Veritatis voluptas corrupti voluptates perferendis enim. Culpa minima quo ea minima labore quia. Tempora odit sequi a harum exercitationem delectus aut sed sapiente. Minus ut modi ab similique dolorem. Et dolores repellendus.',
             })
             .expect(400)
             .then(res => {
@@ -1059,23 +1059,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '82rak9m87o4slc284osthizr34ome9vxtrnlhlbw3vthgsi414',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'zndpz81b798kljf80qvq',
-                executionId: '3pkqutqh9f7nvmy47p1ffamrrg3lhh4sfhiv7',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 18:25:12',
-                executionMonitoringStartAt: '2020-07-31 06:12:55',
-                executionMonitoringEndAt: '2020-07-31 07:51:43',
-                status: 'UNKNOWN',
-                channelHash: 'zvb6g8fpq9wxyoudpk9etyqlatpe9acen447kgeo',
-                channelSapId: 'orjv5z4ctbvqwxce4mqrpip3tvx698l9id0zx0bq4jg70xr7sk',
-                channelParty: 'e7be2y33kbe2mpvu2du4fjbh89skm4wgt1lw3i0j0lp4rqte5ico6nasjpne5qryslffsnz8qt932fmr7kmnaa6nvobzg3nzzzsu76kukmhzbkbbk30p4dmfaldtvatykt7g3e2l7qrj8a0bjk174kr3qfkzqlpj',
-                channelComponent: 'l48wquzqciwvze7kky5mtgv8mcx5lyf10idexkm48yarribzw4uhs6d9oql9llh87cwvznn89sp4w45d3mfxrat7f4wl7k3uv3xjdhi5c04ydnroc1uop2eukfym95vyjou0fidj6wjp26z0sah37qlbqnxech0h',
-                channelName: 'lin9cl2u5su81usyizdf7osztbvnksp19mlzbjryuok8wmumpf0xylbdekiqby6mp3q8dxo730eckk9tzzw5cv6bcww6loy3laujrn6x0sbbvlxpeosx61rroo6ewbhnhptxoedgxmy67tnkxyl5sn7fhl0s2ggo',
-                detail: 'Corporis dolor ut aut velit cum sint. Rerum est ea sed. Voluptas et maxime quae voluptatibus. Quisquam labore est eum aut iste ad ea asperiores.',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'fdf8ie3y6tbflcjym9bwzyxn5v19syhoab1sbi5nsy06wtxzmr',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: '7ny7nm3jy2v4t8st169y',
+                executionId: 'yz8xwhyhw35hphkt9pnql5iz7x3lqwxiryr1j',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 02:39:56',
+                executionMonitoringStartAt: '2020-08-03 10:54:42',
+                executionMonitoringEndAt: '2020-08-03 00:15:55',
+                status: 'INACTIVE',
+                channelHash: 'ivznna2q6z6ys27c3hfbsez4mkxpbb1yzkflubc7',
+                channelSapId: 'hko5qc8n20f6zb4e9snmcgru275nvvlwxubkdqxhb1ww5yx4wf',
+                channelParty: 'o2nqwibrbvdh5u2cden67zjn5wi4xzhd4663k8rak64bocbdofugmb3171qkodeajirir3jnx0mzywizt12p04lsxgepq5a859prpbidnom1u3z136aaomt698dz8i42p3aeutix3nydeaijbtg5i24brg9kn73x',
+                channelComponent: 'mgu1x3nlpoof43v839yg7hlsallsxcpuci683vi0dzu7b7xaxqir2xuog9i64hn0y28ub08b6m4g0z1f29e3vjve1elk30daxh8y6vanilyimpzsmsbduhcwqqasrvoccysagyqmwhcrndzprrnq5vu7xlulpb8d',
+                channelName: 'w9e1mrmivc709l5gry7g0y0t66xdcgupstoyxtk2h0f5hhb5dkttpsc9u3mp6x5i6kx4au864m1spokzbuuw1png2iqagdo2u57knpomulhftte2tdtayzk1kwbh4hxbkm7o6enjphuf4p8hy8929kscvwe13leu',
+                detail: 'Sed magnam corporis accusantium eaque ea excepturi quis beatae. Et ut repudiandae ad cumque. Aut minus molestiae distinctio eum quos necessitatibus sit. Exercitationem alias numquam consequatur voluptatibus optio est sit dicta omnis. Itaque voluptatem autem libero corporis vel voluptatibus quis.',
             })
             .expect(400)
             .then(res => {
@@ -1089,23 +1089,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'fd9iqyd1gfszl7l69gq00jsmwetjn9ep737eze3h6dz4rndfgn',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'hcw7dkfc3r2b8vn4oruw',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 23:55:05',
-                executionMonitoringStartAt: '2020-07-31 08:21:02',
-                executionMonitoringEndAt: '2020-07-31 12:13:23',
-                status: 'ERROR',
-                channelHash: '21ubxgo7yw6nxrjdyytdasrbuj0gkpum6ewxka016',
-                channelSapId: 'an8r4ro23adgxm1ewovcyh6d2mqi5oof2f4678xqe86avnzjc7',
-                channelParty: 'zetnrudgxntsdlg1l5fhegzjn7y8cwi4n9mkvlw5kpycbqv0483a48px6bhwpsaujrnpj1t0qtkpvak6aarhlilbhvjnp74rcrgj7dt41yht478mvoy46evmjakfy38lh2z8ltbaq3iz9utdz2eljvqnskv4fvt5',
-                channelComponent: '3jyd7534any3w5c1o3is8myoe5tayfbjppsts614ccqgbsj4iq2u99qsc34sbbsyc1pdl8xle3zpoco7yj7delgoveu34w4lus29w9y3ko8kkgixkz88zibqjpu97556cy2te47o8y4w7lji2ktkca29omyw9uem',
-                channelName: 'pkpm6yqzl5ffcpqzq3jvyx2dgx50shvmjhg8pvdf7jmjjkyng68qqgblbtpwyqoser2ffv3cd7y6d28ow84bmjgcy8aikmizlpx5eaf63emv3nmlkdqqchy81g1autmr4gb40q9ucmfwxigf49d4jk26tdqlem0o',
-                detail: 'Blanditiis inventore corrupti nisi. Tempora nesciunt voluptatem ut exercitationem non. Excepturi est recusandae.',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: '14wxl2h9nktdaolrqnh9azo0w7uekd1krtxe027yy61v5zmqtd',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'rsvpt25eylsp1ct1kdg3',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 09:20:31',
+                executionMonitoringStartAt: '2020-08-03 18:14:24',
+                executionMonitoringEndAt: '2020-08-03 18:27:07',
+                status: 'SUCCESSFUL',
+                channelHash: '7z0pudx6derfmqts070b9tyji6epoybpg9s3ca9t3',
+                channelSapId: 'g0u6v02bui8bfat5zgwtqehk8x04pxwi03w1se68idujzl390t',
+                channelParty: 'o00o5a4xcfvdivl4tdpjy4swgnuju5g93dytwkmx39oex490zto3hrfjfqfpioe1fmv5ej6mp7ojwu2or1j587b2ijscy6fvfbj3jywyvl6ry5w53uhia4vot36cf5h376re9qrjzfy2llmam2phz5me8msb0qqj',
+                channelComponent: 'fu0p16egp0urwnvs7qnkv0r3aq7ca4h4bpg6mce89ecxn11t6vsa816aezm022u5a4nszm35ogzacdlvtztnc20zfyb4ne3meqxcyn1dmr0xmr4gyz37t6ocxi28oc5jxmvfah53kq9itlocp3jvkhhb5kjgdn59',
+                channelName: '40ti4serlwb0dgm2zlqmrgbzu8cwfg7hxh5o0nl2t89vxz3yyll6a1al9l4be5n8r8qw68c8x8qfrdde4plplxcl6e5wipt3mx9sisnnvwvnmi5sbea2o28g356sqknxztytxrp92mdr636mnnztkpqu5xa8bqrg',
+                detail: 'A amet ut. Enim id quisquam sit repellat ea dolores nemo. Temporibus omnis laudantium omnis quo sed beatae consequuntur. Sed aut aut dolore. Et earum quo iure fuga. Repudiandae in totam accusantium harum non quos ut blanditiis.',
             })
             .expect(400)
             .then(res => {
@@ -1121,23 +1121,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'k5ekt48ddum9gcpa7lky5v1rqbsnlqxio6u482iaa51hlycduaz',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '6hc9rhdtm2cn4mpcu4ej',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'a51k7ux4qwym39uyla73obzcy1gwc230a5kzy7rsydbmzib4scm',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'nu7nv8b5hnhozgcsssa6',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 21:29:09',
-                executionMonitoringStartAt: '2020-07-30 19:16:19',
-                executionMonitoringEndAt: '2020-07-31 04:10:16',
-                status: 'UNREGISTERED',
-                channelHash: 'rgluaze4x6190577hondkw0o19wfgs223dn4j854',
-                channelSapId: 'oypf0q5d5ep7ic94xky5qa23jat8kdnj3xolm1kkq4050wnu56',
-                channelParty: 'r24xlxhj54fm8yjrjmmmsn50hgs6d1kbxdhrkuyfefo6j374ut1b4t1gkfv0sovtouig5qv92s21ruyiuthhrcldipdxpkpm437274z6qdau0mpc6x8i6amuv37im7yqh3kymntcs3neqts1r16256re2xi9qqf9',
-                channelComponent: 'elpkulbd062f7r5wqhdsmhdvsnrh7c38ar1srh4k0qeugnqfzo1x9itoag62xkraug43onlu0rn1xcweithbxnd7p4uxxhyd3x0ybboonkn2sxynyhvifh8xv53zjlkql03dvcit87j23l6ia7sf8wq8zzdo518d',
-                channelName: 'jguj7fy9lcuv775dtqw4w7ztlrbgd6g71hnjsegsmvnccw8diw3y0rmht4j8hkh00iux7ws7onrt1zjumwynv08sd7pp5qvcpgod106yp4nd8mjimxsakrxqfmxeaf4zsv9emvfq94g9a9c2pjizge629164ds59',
-                detail: 'Ut blanditiis praesentium neque qui distinctio accusamus quo rerum. Occaecati officiis impedit itaque mollitia consequatur sed ut ab consequatur. Et impedit maxime vitae cupiditate quam reprehenderit natus. Necessitatibus voluptatum corporis aut voluptatem qui eaque. Ut est aut voluptatem dolor. Doloremque architecto dolorem consequatur.',
+                executionExecutedAt: '2020-08-02 20:36:38',
+                executionMonitoringStartAt: '2020-08-02 18:55:29',
+                executionMonitoringEndAt: '2020-08-03 16:02:47',
+                status: 'ERROR',
+                channelHash: 'j7c4pookd7yyke5tzntxwwslwj9ylmuyx6ghhid5',
+                channelSapId: 'ji87sl0fvtv1ciu6y58qc93fr6s7n8lr50fhbndkvurn2snj8r',
+                channelParty: 'b5wzabe0pyvvnb9hnta1bgn0sw4jwsidtzko71o8no5dss0cq83l4vostasdoylvosha74384667vrp6ka5l9ft8bmw7uz4p67warp6o680tyqeeldjmqnafesk93uy1diapa3pff8p3wh4jn4fxp6udg7fln2h2',
+                channelComponent: 'fgaox3pc74jj0ig927u4imby5l0g543r46vh4i9riaere4z80224vr0r8jeghnsigmfdhb4bcftlgolnytgrrdqfgdst9760wgkfao5el8owvdgkaulbvlrm2ltxlnfu87pk0j5dem5hct2lb7thb7s3y738mjdj',
+                channelName: '9azdpx6j9q76nmu0z15pdux9fu6wffn16za7mhsx1ljf56g739b14z76z8q1zwo2coaane8d7en501mu1hi1u93drwqkc6okagntqbyh0z7ijty8qzfxdyj5hob7yl2k7jy7mbwoiih546csb5sv5a7u64z8l2lu',
+                detail: 'Ut molestiae dolorem rerum qui soluta. Voluptas animi in tenetur voluptatum. Et doloremque accusantium voluptatem amet ea voluptatum omnis. Sunt veritatis ut et quam et nihil voluptatem impedit pariatur. Molestiae odio et.',
             })
             .expect(400)
             .then(res => {
@@ -1151,23 +1151,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'mnx7sjluvptp4azl1rqa8lm10zt760bbcri7mnt0ziu807m6am',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '1zje3rr4sr0tnel6qoq48',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'jv77a6x84c3acvwmpxot4mm5r0sbd2nx9yxg7dlsm2fnq5qwpj',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'ypk0oihw0uew2fszev4f0',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 04:21:50',
-                executionMonitoringStartAt: '2020-07-30 15:56:15',
-                executionMonitoringEndAt: '2020-07-31 00:19:01',
-                status: 'STOPPED',
-                channelHash: 'jnsr29zorzcgajoykj6hctv3eqi5haxzqjjxtz1p',
-                channelSapId: 'c2thikdnioj8lo433gfpuao3hkt9mvt3fklwcc6umoxanhwgf5',
-                channelParty: 'ze74r2hy53b6l4j2nywwsfwnhi2ozji729ifc5d5fcq02yywqg3lsi0l65sauzk0cnccm1tmu10fleybe1v4qnu0yhncldtduquulf85hck7f13clzj65pgt83e2dqdmy0zorginaynk54swe5vezzv9l15ft0pv',
-                channelComponent: 'orjkfnk9mbv6gw300f61qynmflce8siimuaclamdzzyte1cghhknstwkoakry18rq0g7391o5wibk4330q8j6sk3y8r2b0n9cdfsrr0uz2f7op1rlcuw8d4nn6poyiuu3dp48c0ibki6hh4ysqnopytco1y77iqo',
-                channelName: 'te7cn46j5daxjck5oyts33xczkl6acrpks5j77hxp65vc0erk4kvom3ddt6i37gte7w7z7j94qd2oo3m0iskwo3ypiq62na20qpbg2upq255q9feffsdd70edaykrgvdtd72uuuav2v4z6cfxlxzkje329y6ejeg',
-                detail: 'Enim sint laboriosam similique aut voluptatibus illum est ut. Iusto eveniet ea doloribus. Labore deserunt quibusdam vitae deleniti eos voluptatem. Eligendi libero excepturi sed cupiditate similique quae.',
+                executionExecutedAt: '2020-08-03 14:59:29',
+                executionMonitoringStartAt: '2020-08-03 08:33:36',
+                executionMonitoringEndAt: '2020-08-03 15:59:36',
+                status: 'UNKNOWN',
+                channelHash: 'jyeqzy3rlm15mp3ydztg27s6zjtg6ol5h683fdcd',
+                channelSapId: 'ywgnnki0lkzmkmpy1ddwnyde9u6bbe0kpackcx6k44ckjxsynl',
+                channelParty: 'yxgjdo17ebvnqa6kw8au77wvl07zz1rr33o1v05dpr7x026xlio74jkez84k89n2kuenn0snsaugsz643xok0xa59qg6lou11ldkbtjz3b8ac65010qhleufou4qjr4rymut3si7puhx0c7ai0envc06hvwnq5ao',
+                channelComponent: 'yvs51kbt6oq3o88i9r8jq01kanqzds3q8ghpuqeh3i1nwa6u79xkdb50m624we98fpdr5lwkmnelz3g6lfm5bq8hptf4ays7fkya53bvl6un4kmpetahp5zryxidg37h2ca7f33hd5nx84pxb68x0iqdo7cxrozs',
+                channelName: '2xsy5fpbbjyb2tmgszvqzewfvlhh5t6uz8xjqd7qpn8wx6mpz17ig6l3zfmgtza1j4lx1q94nrzc4ne3bw8obwd91td0renr5wfemgvzd0ntqmoxl3ccn6djsezrzc3fm62tqery950tiieml8el69y2jyum84kc',
+                detail: 'Voluptates sint aut nihil provident sunt quia. Quis optio porro doloremque consequatur aut. Est quae aut non. Dicta laborum minus.',
             })
             .expect(400)
             .then(res => {
@@ -1181,23 +1181,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '7kcxdu2x5ylchqlkr0myzfe5ki1g4qf703abgwa6q8gktnsiyg',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'm4nsl8szbt5qp6ww12dz',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'x6y4r2rfwsbupf68buhpo4p1wqfbavwablv6tueb5sbtfh2dw4',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'f8uudh4p0sl3uewhzni4',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 05:35:22',
-                executionMonitoringStartAt: '2020-07-30 19:05:24',
-                executionMonitoringEndAt: '2020-07-30 18:40:59',
-                status: 'INACTIVE',
-                channelHash: 'uwsrkdyvnpsed3xcmnxt6yi2eizor07nbfzgfwih',
-                channelSapId: 'umady12tq2sejkgvt6j8s2wszcl2eo2zkugtojaf34xbigtam4t',
-                channelParty: '4sg9jbhz8d6qp4enh2smkgl8mgbqldbdpcrrkgzpyhi755ti3rop880jjgnz7rbppdgm66lc06onv77gebjs3kb8a26s060odtyc5t86vqjrb57tltabp8oqzxr0ktgteixxdl2cters5b8y7yfycnvfxt0b58mc',
-                channelComponent: 'w7vj7gwqemefw3mi40xo0aqbpzms32ctym01ag7xt3lp2feizcg68f4sk5kzb53c4g0cczl19b8gj0yv89ax46d7ud66edetkb9489iidetmi4bqcrzbip8ff1fjxcrwkoc0w5njofc19y4jjwus3y36236ztxwp',
-                channelName: '0h3q95mvxvryovcjwdi2qng3dictzu8z4ewkpvzojo38gcog6q6jkpl62k3953rgfjzfq48byf64n2geqfbs0izh6s2sbbctzhbm09f9g10jj2kajudho5i12io375cn28op5hk322b79k1ddxiitj1nd2op85ul',
-                detail: 'Magnam sed fugiat nulla fugiat repellendus architecto dicta. Et officiis ipsum deserunt quia aut fuga quidem excepturi. Aut dolores quo qui occaecati aut inventore iusto eum error.',
+                executionExecutedAt: '2020-08-03 17:09:59',
+                executionMonitoringStartAt: '2020-08-03 09:21:01',
+                executionMonitoringEndAt: '2020-08-03 16:50:40',
+                status: 'UNKNOWN',
+                channelHash: 'fh3sxpwergig2e4hq1oh8aeufpywe5vkq8k4tbjx',
+                channelSapId: 'syfpbyamt1fosctydhq0wxb7m9gm0p12fkindph1kk3anyvhh5p',
+                channelParty: '8ibr7c9gnqzm6jngepjv8lgez248r2nvrym2o5j8phl1feafzx9mhakkvmiz380n6qia9j23gyc61hx44n8dzjjodur8os8jdqrkw4361monk3bjcpbdrh01qngd1skfnmf3wfctdd445jvsmc0wrzgi2ihxl79f',
+                channelComponent: 'rwl66qtzaux7kbumo8s8p08uh8xvu0beipfik1idooe8mzxffdtz8wrbe92zv09g5n4u2iz7ke6spsrgkusfp6nbyixwzys1ypg5ta7i4ockfnxqm9eben4ko89wvlvilub0k1xubscyxpjkvypq6iapjih7witz',
+                channelName: '85qa0i0kvxq3wvthkt9x67jo280vaxrqhmzebupmxokimwshnyn7c40jvvljkgpfmmsz1sdd7pa3suh3zv7fpq7maqfc4g6f3jtna7emzcaj21b2o8hrhsxjas9jmnuk699y6y4t4ma6qxh0i4ysd83c8omlp2r0',
+                detail: 'Sed cum numquam sit non. Nihil omnis omnis temporibus iste recusandae et voluptas. Ad eveniet totam officia. Et neque in unde totam eum ut recusandae.',
             })
             .expect(400)
             .then(res => {
@@ -1211,23 +1211,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'zq36ovmetukc0fbumoqw5j5p36ynsckpjd8hujn27sgdsoap50',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'utz4faf2gatc3lbyvnas',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'ua62jz99ycttp8c328nl9e7yjnt83e5osynepgveaenh51b9y9',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'uyxhvnwxoqgw8p9nw7oo',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-31 06:03:42',
-                executionMonitoringStartAt: '2020-07-31 06:47:40',
-                executionMonitoringEndAt: '2020-07-30 15:45:09',
-                status: 'SUCCESSFUL',
-                channelHash: 'cmsuh9z35onej4zjobodkocsm7lllg8ftyiggjzc',
-                channelSapId: 'bxn6npor1ltgda0hcdoc3btn75cc92am55a9pgs1n0yursr56z',
-                channelParty: 'kqdtmrvstlnirle121hefjc32q96q7247sng1xy1pz4spfkt18rm5wq6raam4xzp4xlclns44gcpwc40vtrj51z9ub284plewscmuu7drh24zk2my45xauezvt44kfp2mddjbvkmno8jqf3b5srp8cqy2akvkjge0',
-                channelComponent: '6k9x94wqxh4id0qwgsmbpcwd9xuu9aquy5diqdwnoqoiyrxvvngru2dlqbqcup030ab17fmzofphdhlioc7hlyjt7ykucs5qxf3u8bblkj0ae6pflzrxlsrcicw0ikkcu71w6evei2rc9awg9ch2nsd8l98etwc8',
-                channelName: '2h6xi6yt0xvqa98win2zqbxai2awwh9sr171zsse369jkyiul9wghy7nqro2w8n2cgf8d8hzoboket5eh7td0hg9ida300zyrq18c6767wtbinbsba8saydocgchlyh752ekvab9no4iry32at00rtp0zwy4xtyp',
-                detail: 'Facere dolores itaque qui ut facilis vel. Dolorum dolor omnis voluptatem voluptas esse. Eum sapiente molestiae architecto eaque molestiae. Et libero quibusdam sint rerum laboriosam nesciunt ullam cum amet. Aut est quisquam nostrum.',
+                executionExecutedAt: '2020-08-02 21:47:41',
+                executionMonitoringStartAt: '2020-08-03 10:34:40',
+                executionMonitoringEndAt: '2020-08-02 22:08:55',
+                status: 'UNKNOWN',
+                channelHash: 'vl0dgqbbbqt27k74d4vzfuuwmfw7j03us7mct8o5',
+                channelSapId: '7u71qntcbkd00c1r1tsotud681byjlt5h3bzvm43651kei0bxq',
+                channelParty: 'nvow36enf8ca9ukw10e1vlkywqf7fxwls9l8x251w9dikl0ibhw8r3nr2gwx4vdv8cjrfr2ilxpmt05pf2e6z5cursvqjuehm6fy8777x2ynx98zwqwy22z6201zmbiw2uu8x2g87cvyhafebp5g4nwkdryt4sxva',
+                channelComponent: 'hvfxcutkozx94klevim5ns4h6p08terh214dksgmdm07wdhxzbld5lnj5esvp2xc9jw304ohp31uak29coq1tivruozesjp0qa2x307xy8fenc25wg3s4np1vprgq84cku6bkzia1zfpduu9yv0tf4065ejtwda0',
+                channelName: 'z7z4j7yapgbtmjvkoqfz008945rerqv1ecvesq3c0eyg12tm2u6vgwpqvi0n9wci0uuvi09mr1ud3pn3oc7doty4ec3pk8anroaipgyvjswb372ue4oofx3pbioxj8av3l6sly7wvmd2388voqmjkp56rjsywjvl',
+                detail: 'Architecto quia illum qui commodi. Voluptatem odit et similique quasi. Et vel officiis quo voluptatem dolor voluptates. Placeat non eum aut non. Facilis earum atque iure eius autem veritatis omnis sunt atque. Labore id ut quo ratione repellendus architecto.',
             })
             .expect(400)
             .then(res => {
@@ -1241,23 +1241,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'arlz8rlwh486bjvuo4f8lmofaddezdinb3umqp2qtxewtenjj5',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'gio5csaeergg2mv5xeft',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'y8kih0sum7kjw6hugzpbbicks53oqvxrunz2w5p52z6s8tdlnm',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'q7qk1g3w6qut21k5yp1b',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 14:32:55',
-                executionMonitoringStartAt: '2020-07-30 20:45:02',
-                executionMonitoringEndAt: '2020-07-31 08:15:29',
-                status: 'UNKNOWN',
-                channelHash: 'v0d42vgwyidcd6ewvo85g4t0yndz9s57y5jjhfuc',
-                channelSapId: '6wta86y2wylz06htk4rbt8p1eifwac439njxb5qrrlsi5p7ozt',
-                channelParty: 'f9j9phjhm1fs9w6r5drss7ecjjg9dsrlvtimgc7x975hma3fflgjd03slvguabld2o7796qmorbl11huog7hmjwtscs0hohkej6nmi5difmcv7lcz3xof0ljw36isw8s9314o4txkmaowmjs3kwmcxntcste8bba',
-                channelComponent: 'njg57vrt9srfjr8y5dj2ifiphbi8y2uvyruvb6s4cv9m1bmiid40xa7kfjqvh6kpffgl9gay0ap53ekwxeimxahd0dhdevz22devcp906ai6cuzn8wp7h131b166uxtpuvb7vupt5e5ut1ublcx1sh6mr0fne7izg',
-                channelName: 'ovc26wipoflnhniaokxdzt5t9ysf6sxygsy1gvwt6g7kmrrkv3gm83xzeu453588nig4dsz12e93f696ljclrlhv2jo7oymimx5419ccd0l3tb1i2wrqra4w87hul1iaxiq4s9ba82x4o7qpmwrvi3gbd5scnjik',
-                detail: 'Sint enim dolorem ut debitis quia. Et minima exercitationem autem aut est qui dolores architecto sunt. Dolorum cupiditate eligendi omnis voluptas tempore. Vel totam et hic numquam non. Consequuntur occaecati consequatur molestias eos laudantium.',
+                executionExecutedAt: '2020-08-03 16:37:53',
+                executionMonitoringStartAt: '2020-08-03 10:38:40',
+                executionMonitoringEndAt: '2020-08-03 09:15:06',
+                status: 'UNREGISTERED',
+                channelHash: 'rfzeenmmvgmvbf9e4y12r9obozdhyq9mfjdaea4p',
+                channelSapId: '59npxznpp16y6wf3bib0id4tegip68x9lioyhlx4gdihpggvvy',
+                channelParty: '4ov7sdujb5ldrum997h6w3ejfidjoe5g2uwlzujw0xdu41kvw3o7jwz5wgcy1iv8fp4atvauthfc6cf6spnjfxu7j8hh6791fu9snvgdr3vp4c18pxal275dogmlbbluvx6goxamt647tuvcximr07ak4ye5796n',
+                channelComponent: '0d861ot78uxzmum9dryzg7mqz38mrfnzdfm9h413omc5eco15iw7xlwrj9o7bs7csw84xtst23r7zg2etpgtj7tvaitf24crbhf18p16vxr3vk1jr9ys9xmd3ra6vuf4vi1u9qbfwftkds3zvchrg7ba4ialcmyb1',
+                channelName: 'zhz5lpvluanbidt0ztl7bdixtmi1gxtxjah31jg555u3ug5po3gkzzekptwvbvndio15wmabkgp19gmi0d09v27lbe3c3h2vm3fq7di2xh4lrn8xxv995jaezv15xcwqxo83lxuqxvu4tqznwxp1wxvrh65i0zw5',
+                detail: 'Minima omnis totam et. Qui mollitia itaque. Ab ea rerum voluptatem quod eveniet.',
             })
             .expect(400)
             .then(res => {
@@ -1271,23 +1271,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'fvthufzgzbyfavntv9j6ljh4xdz7dl41h6forwgsffm2u36bzt',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'hia9063pad0r2d0ofxzm',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'xfs3f244592p138jva1qmnmpsaqzjzopqmu0uw12se5axl0e3r',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'la2r7rj2etg1jnkq18dc',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 12:50:54',
-                executionMonitoringStartAt: '2020-07-31 07:06:43',
-                executionMonitoringEndAt: '2020-07-31 11:34:06',
-                status: 'UNKNOWN',
-                channelHash: '7n78d8hnm7vcwutrg6bs2z60tdotqxm3yxqn8djr',
-                channelSapId: 'plwb2p5h3y475gsijtp402ewkbnar6s9ib98abj1mbah4gnlig',
-                channelParty: 'okyzrm82aoog2vq3w481swu1ssdrktzruly2s65v2s42rz45cwsatomub18lrmtylr1ekysd2cqwiz51yhrn1qtqbmj35wka91fbplyo8i8a71ecphikaktwu0tv5m2lofrfbpycp9ju6spn757g7grj67w1gkxz',
-                channelComponent: 'ara6slnzrut44bssy483vtij9c3f2519ekuwb2yrqissigw6hqhwqg9wc73ggswotwp01uypz5lp86z4gg6zvvic9oyfwvwptst4pennsl12uxy7v7lmsbc62265boxktpc96youdi7wqaf3nkxa5vu8x4ahwctv',
-                channelName: '75l2y2l9b3md2mtzwyz6ljh2xa6huk6qit0homz8q2058hu5aodcwn1keixyuxpn28i22vcdmsxeh019ucyq9dfaahzwjj9z30euvxcis5uxolosndde3pc9kiwz7lrorlj6ll8l9hq3ah0d55bbke7s24hdjl540',
-                detail: 'Repellat et in. Nisi modi quis velit necessitatibus qui. Aut quis et unde tempore est. Consectetur debitis qui unde. Ducimus non sequi voluptatem est est velit voluptate saepe omnis. Omnis numquam quisquam voluptatum vero.',
+                executionExecutedAt: '2020-08-02 23:28:31',
+                executionMonitoringStartAt: '2020-08-02 18:42:40',
+                executionMonitoringEndAt: '2020-08-03 00:05:57',
+                status: 'UNREGISTERED',
+                channelHash: 'qwcd6f4bv79gfb742pk9h1k5umch8pj8e8hj96zv',
+                channelSapId: '0k1o48g93vsz8rxu3xnidf1kvujceprw4ls6fier2707p9vuoy',
+                channelParty: 'ika7qpb6imq6x7s8a3ahb2o6p1o2i3pn9l1uasnms91u1ith1iquiftadjzjy2sffakovsftj51988cfjgce2tqu6axsosoeywr4niac5ncu4asqtk309y37npw48nu6am6c7glhkpx8gdabgs409m7eabmueefx',
+                channelComponent: '3of2je0owolhm6qpcdkd0vwpgzkscochnc4cdpn2oz30zkxgeonjkx28e1o3gvnsqhwnkz56wqgxg3zg386g1nnr7q8zdbj6yo2e5h5bfi47kpspp9t5dkhs9xedrm9wkcsonhv3nbzv7qljzj15gnubnojpevt5',
+                channelName: '7c8f81p5wwct09fsv92v1ubra8ktk0wfp9tcpeoszcjyvt2bx6tqm9yi493bfwoielg02xxy9nk0oj99xwb4tqiza9dyusx0bpeih0bgkuueydljhy35dw92td5mjqkymwcun0wv87m13nmjbvwqd4hwrwjsyu17o',
+                detail: 'Error earum soluta officia labore cumque. Ducimus a consequuntur accusamus. Quia voluptatem et facere velit ut. Consequatur voluptatem non mollitia eos unde dolorem eveniet quis voluptas.',
             })
             .expect(400)
             .then(res => {
@@ -1311,23 +1311,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'r2i1lpublxrtek5jyb7u6f4jglri8e91eca6zz1gdslkoqntgi',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'zif5393b6t8jwjt4z3jy',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'y2llcev3wv1e5okm3am4fgs4v45u0rhvl4gz1itpaj5iexyeg9',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'g25vn7nwdxnxoa5pexmd',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'XXXX',
-                executionExecutedAt: '2020-07-31 09:37:51',
-                executionMonitoringStartAt: '2020-07-31 08:52:33',
-                executionMonitoringEndAt: '2020-07-31 07:59:26',
-                status: 'SUCCESSFUL',
-                channelHash: 't1m031xhxo6obcrxapnuhizc7qgjnkac8pbkmtw2',
-                channelSapId: 'mm102ogsad9dwc569w58pre1lrulwbrgzerfcqdi7cot0se2xa',
-                channelParty: 'wzxl8jjvs829lbopq4f6cle3xhjgpdz5mcj17swqchss3p70xwd3c6xst93wfvmg0lo5qw2is1dtedr2ujhivajpy40gchcalpa2fxaeuq9glhk0lkvncocyypco2okk3vmj98o9ifsfydh7twxw61zo65tqmgvf',
-                channelComponent: 'bnsf3a8qx6dx00o8fovp2l9cli8lcpeogwg2w7tj284x58sus3bnlk7wias8xekp1ydgjt3ip95tjq9xgpulcgrt4jkpjo1jtp92ugzfk8jcrn0xwhi9ow7wbnbstbes1jh1zovbr5teytaeaqacfp20p6vhik0v',
-                channelName: 'y6dr9ks804rjr0aui868ltvobmfe1lkyfgetl908jw85xrogki0yw6birzlqxwvbqzh53fc521yaerkihyoi1znzuct9dcngo8t0akq8im4xqkqzp3eui14my7eibzb14p25rxl4ao9yn0qrjzcjhplfy729ic27',
-                detail: 'Impedit consequuntur exercitationem magnam nihil voluptatum dolore ut. Sapiente ut error nulla enim aut. Dignissimos quo architecto.',
+                executionExecutedAt: '2020-08-03 13:09:16',
+                executionMonitoringStartAt: '2020-08-03 05:40:31',
+                executionMonitoringEndAt: '2020-08-03 15:36:41',
+                status: 'STOPPED',
+                channelHash: '6vwo2ufyjqbelhsprd24vuywrmaehnk9tq82tsjk',
+                channelSapId: '63lrjna6l9pvjftwgsnsaz508vsis9oy27jnw3luyos2z3cb06',
+                channelParty: 'mncoda311c938yryyq854pg9sgqnpzqkamzx5pg0lgwlzkl92z68sppmfsothpkm8z5ve22ilrsfw7vf0dq77bfjkfkgb5iq5ohw8bpeutlz5e4zni36i46j5guv9mc2tx5ufzhmpjvekvcv5kq7ncybfuaqhlq6',
+                channelComponent: '2epu7cgevbixegsxbwwfxabpmazkwqb8m35kmrnzphgzdsruay5lao5i20j5dvfdwxx67aqjmrcn3gs0j9h43vtnxw6xcq4mkx10lslntxqp7zrm2uoowq82uh8cktzukd48fhno5obvsg0zvvbqsn69q1i9yk0v',
+                channelName: 'ujowlljfeg3sgwamleotmcm0arm3wwc8nn1ltdrfptelo6s13dkj9m5y7tpkneah8x5orzff72uk48vi4hfkrjqq222gy7kygz44qnuzolene1ous32y6fmd5hivq5w1iw4e17re0izambimd8r3qsuleyvgy1do',
+                detail: 'Dolorem cumque et nihil consequatur eius amet eos. Magni excepturi est vero facilis dicta. Placeat et dignissimos ipsum consequatur blanditiis odio ratione eaque est. Blanditiis eligendi beatae quo.',
             })
             .expect(400)
             .then(res => {
@@ -1341,23 +1341,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'gmslt03ih8lgne525zhobj1qtn4uudd05q3glq443ycl99eckw',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: '7rv1qyuhymih24nen9cr',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'c3z4ncdzyfikydcca2feddltzbafnrw10u7lz3m1narpwbba2v',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: '6mpxa6duti3w5g3j163b',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 04:29:22',
-                executionMonitoringStartAt: '2020-07-30 18:57:25',
-                executionMonitoringEndAt: '2020-07-30 18:14:21',
+                executionExecutedAt: '2020-08-03 02:40:43',
+                executionMonitoringStartAt: '2020-08-03 12:25:44',
+                executionMonitoringEndAt: '2020-08-03 08:22:33',
                 status: 'XXXX',
-                channelHash: 'uxrr145gkad94d9j6k8rmk19vthao38nna6zvu9v',
-                channelSapId: 'da6x97pleh0mq3v1h07eyo6efin9ugk8zef3s8ke1a3runz2s1',
-                channelParty: '3ir592o3hp2ij3z6h3y61emws34nz5fo3h0v8ffon7t55rya6girgt06s7tboz968vqvjd1i2hqdpqedterjst2hk67jrrcvb9y97c1s5dfasjfuav3zbzus3cj2xml8w7ps2aljqt0l4hy3istc90wmbvfbm0nh',
-                channelComponent: '540ok67bm1thw8975bcf5gtxabvzpyzcd4ykatm68yd95h1jlisoj2o3ii9qervmqz1239rzsfwiawt3pm7b28omxx63iozwr975llj3jmf3yjwexx5twx4pduwp042z6acibr6ajvxvq7ey0qmrdavwmnri74mj',
-                channelName: '12jjyf388jxuijrnm59zmrm1wnv7ac7oz2yl0ez99yrez43k6rf9ywqbocfsirhp76piyth6gl53r3dg2fwnksm6dxw1fkbixvjhe8xqvcuvxkiebq6za3fo73yn5f8aog5e8szv9xyc4kvh7oxfpm7bit8vxukq',
-                detail: 'Reiciendis incidunt sunt veniam in facilis ullam earum omnis autem. Rerum dolor in esse sequi eveniet et. Omnis et soluta dolore quis quas qui. Maxime deserunt dolorem repudiandae ea. Sed libero qui aut assumenda tempore accusantium laborum enim esse. Id quia explicabo odio.',
+                channelHash: 'rdawqim0pwgtadem3ecqxpa0ltjr1ptjcy5kpk81',
+                channelSapId: 'qphhss4q4cktro716un1ohje7rjzvv53z477i7u3mv9djx8txu',
+                channelParty: 'tu0wgaizal8qcbasu2vi9p5wnt49tpdmv2ifxmzeedcvuaku80wntzewyg4236qibrge0svsf0dlulaz5689h0p3s9q14ta86rfsbb9s7q9trsk4gnzfrcz89rm3alajckdx89rzw0w59gkcsutgcn3x37bnoxiv',
+                channelComponent: 'yil6kxtnqr9rhi645rmqd7w1cjdv15pj181c5auos1w3nhlxsfiyvzn3tkg19mhx5ijl7951qj75lkb4j5e39azvgvy6mpie9k67n8xzc0dioctqszur3nlefa3q20hwor29ew9f4eh6mhgtdzyurvxddatr6nsn',
+                channelName: '11zfspdnp2d22hz7hm6mz8t4vb9z7sype3lns2jqy9ioidhzxbwihet6j3zp9mbszuko1k7j6wi9naw6h26cyos4mluddjl3f07uaeuxejqw1qy3foak0dkxp03d7ertq0wauyctn7109ftyyqkl83thsokr4ct9',
+                detail: 'Officia magnam aliquid ut consequuntur vel consectetur ut inventore. Ipsum optio voluptatem. Nihil amet pariatur doloremque rem sint animi inventore quis id. Voluptatibus officia cupiditate sit recusandae. Rerum tenetur qui quia. Voluptatem totam dolorum id error quo.',
             })
             .expect(400)
             .then(res => {
@@ -1373,23 +1373,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: '600dnynp2qoputlz3fixw6qp2z23bg7n0gz1g3o4fus37s0dme',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'hlvxry2uump5vp4bjqfo',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: '7r51ouwytryd20fufzcaph0sq09cct1guj7qbd3dvxggapit7r',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'sv9c69oyp27jf8k51ldx',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'SUMMARY',
                 executionExecutedAt: 'XXXXXXXX',
-                executionMonitoringStartAt: '2020-07-30 19:48:01',
-                executionMonitoringEndAt: '2020-07-30 22:57:52',
-                status: 'INACTIVE',
-                channelHash: '4clsbexgr5c5mpxyun70j1mnzh6p5suz9a6h59bt',
-                channelSapId: '1ro7uypk35qt2uszzqcdx1gk4l41dipmu7tp9wawm994ape0le',
-                channelParty: 'rzmqqauz07vu2u01r0ic5ma1qwdx5do9y4pxrltc9qvmn0lindka5fhjmrmbws6fvl6q8n5kmnahm1styw7isaym4hghgl6a7paam761x9va87yn6a2htwz2wsfr6n9impquorgvi0k9f63fzobpiijutbqdjvdw',
-                channelComponent: 'nn05y3r07tz9c6c9j9u1qkaiag48pbs1z4fzfltevf5rqgimfncm6awkr2xnscd1x0w7wqdyfpdqm31ynuvljm69zjjm1poquixyx0jxgijm1s1g9di5aey6806juwx9bbxrpobsdjuyou3dywcruqjsvifc5yey',
-                channelName: 'qv9lrnuopguzapoizk2fvw1y8d1bn7pd4ra6yp9ili39bxsb4f60hw363982uuypq5jnr78qh8z1o89i0mkrollu2c1ogrcaswx5uiul2ag4ay3y7vn6foy28jynq5ot0hqldbon8w1t93vw3nirj3inq6q13fnp',
-                detail: 'Aut ut quia magnam rerum. Accusantium autem assumenda qui voluptates dolores quod ut quisquam esse. Voluptatem eum provident delectus eum quo pariatur dolore minima architecto.',
+                executionMonitoringStartAt: '2020-08-03 13:09:34',
+                executionMonitoringEndAt: '2020-08-03 16:07:52',
+                status: 'STOPPED',
+                channelHash: 'xmliryue67y7gi3hvz76lb9husnkmcxczwxj12jt',
+                channelSapId: 'qcy752sbih7tkpdtocpyzv71oiourioitqtmztcnpbzwfduxhx',
+                channelParty: 'b2mpekwknre7gyynqua2ztrzadven1qxx28iogm96kkg2hkobtok7x5fdmx0may8gfr76yy7bi2nozl2qtibw71hlfpk5sxs27p5413p94ag9v2ybzsp3z56lunndudisy6ke5kyefr7h24qx3a6wc53nrpgsarh',
+                channelComponent: '5k18mytoo27jyzls177xofi8uql3msdarmeehl2oolygc70qlxx9g3q3h0t5t6bxg9x7fetmptil31ggm15s9g29ncc8pbt9gj7mvqj9bu062dacd04dkixzn0ysg4cvfqgpij4a90gtst5m6m9fikkym2m72y2a',
+                channelName: 'ztulz5jtyk5bd2kgpg7eii2dn70kqw47yu5vsj5146xznoitcxx99dlsmsbzwlz287tqxibcx55rxtrke3v8lpg5oonkeg2t38om46ncz1n3e9hkiu8mh40iz2t9rrnkhuia1y1icryvjamsk1g0wie2nnvlrubt',
+                detail: 'Commodi eius quam ea omnis quo facilis et voluptatibus ut. Exercitationem aut dolores earum placeat dolores natus accusantium quia delectus. Delectus iure alias quibusdam necessitatibus occaecati dolores. Quas natus molestias iure sunt. Corrupti consequatur quae occaecati nostrum eum officia non qui est. Nesciunt dolor optio optio quis.',
             })
             .expect(400)
             .then(res => {
@@ -1403,23 +1403,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'brm3j8bxiyev7pa9muekzcz472luphs92i28fgx4fr87q93lsz',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'j98sf0p759di3gt2uu97',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'wa2skizrm2j2yd2v03xqp9jvvkyj972bk1wmnjzx4b06tvwj10',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 't2vuyucvf76ozbad7obe',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 19:40:21',
+                executionExecutedAt: '2020-08-03 15:23:22',
                 executionMonitoringStartAt: 'XXXXXXXX',
-                executionMonitoringEndAt: '2020-07-31 05:33:31',
-                status: 'SUCCESSFUL',
-                channelHash: 'aai1k0gst9lbuged61svt43k100c3oa6vcyzeduk',
-                channelSapId: 's69wbp09wrxkd65k3mn4c8zvj3wwoktqfkynqa9ge2lpq6bzwl',
-                channelParty: 'wqbk0camy0flxy9cat027295zfa2033fobpek7gi0vsyhhmh6j7kf2ogvro0cjr5eht4vx3wkw47ywuucieevivpfrl21am16prvhaa63xfbv7s3z3g0ojvi7lmv1c7zysxlargo3axddeta2636q85fjje0nfs6',
-                channelComponent: 'ik3zfuyv56843p7znatyqkx1liam0jtyx4bghq4ik4vz8xv7a2n4aoq6a6uysuf1d9ttvo9lklii7y936chc4v4b8hchrqzlop5b8ydhohvm9rqbpo9aa4viuyb6xvtpyep87edt3o3c9cofou672pnsdd58nprj',
-                channelName: 'yo3o8h9ezj7po16yhjx9pje34p551t4k7u7amqgokgpo1xz0jusv37q1no28f8n85fn14qow0n2xib7s45aojlhcp5ux9zhmixo48f660vmn52et95gi5qesqfozzbsonr5c0qv1gawjt3ne3ddjj41k7xqb5l7v',
-                detail: 'Facere voluptates ut dolore. Ratione iure rerum. Maiores dolores est omnis blanditiis sit delectus veritatis quod animi. Soluta non dolores cupiditate et sint animi enim neque rerum.',
+                executionMonitoringEndAt: '2020-08-03 03:48:26',
+                status: 'ERROR',
+                channelHash: 'z7tfiqn01cjnfo5832t3ymy60o6x001fpmwynk5a',
+                channelSapId: 'e9yunf1roah63tod7hmzjr4vjbz017zaxuzrideaokysc34grw',
+                channelParty: 'e28ljxkgiipsuch3p7tvgkm93hp41hcic3p0eahch6f20e67qbyftpcp1fni93ydqdui7fzw9a34g7rrjp4r6y1y1y5zzdm31u30urbx7y1f24oopf2fb0cfaw6m3qkos28tvxh7e8sbw8sqdvo9cervcfu8ygrs',
+                channelComponent: 's3mel05ue9bt118svw17fr732nzohzlr1mnhnu49q8a8ot4wtz6rnjnhx9z8m8oi1wa8uxq6ie236v8ndjowde42ux6sjc0muyhr2c28jwf2iqwek7im923eqg52mhmzjccgfw2stx5e3q3jjltjzbmcaq9yvawg',
+                channelName: 'pful337v40jvrf8lezy9nn42oe2tkqatygppggf1m2feexs2vsiw920z42wd7rfoy2sk4sqdze0nxefl7t7qxkf44qn5yz4ldn9egwenbs4jadvspf5nga6ivpxn7a96wldugg7oo8p3k9sow1pwsld9m0vl36fb',
+                detail: 'Voluptates ipsam magnam. Delectus nihil hic est odit nostrum quia. Porro aut et consequatur numquam odit. Laboriosam doloribus minus sed. Fugit consequatur necessitatibus harum doloremque a nisi rerum.',
             })
             .expect(400)
             .then(res => {
@@ -1433,23 +1433,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'zuw5v3ys52edi8af4ad08srbvvil7g2ezwtc0kthpak6cz71tl',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'ry8kagb0xrawrgvzmupq',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-30 17:39:55',
-                executionMonitoringStartAt: '2020-07-31 08:20:01',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'l40i4sifklsj1pqadukeijgds88gn2jgza5be7onjaj0qo41lo',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'ieww3jmq929b2epkwh9d',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-02 23:43:44',
+                executionMonitoringStartAt: '2020-08-02 19:54:46',
                 executionMonitoringEndAt: 'XXXXXXXX',
-                status: 'SUCCESSFUL',
-                channelHash: 'ea8gp76hovtw259zmw6gqm18n658yab8wlitfs35',
-                channelSapId: 'riov5xqklt7ej8ww9onw7ruzq2kxd4rhz3wvn7gnnvo23lxrfs',
-                channelParty: 'wo8ddzpzkk5ln2ai4fiz4tofh8zvsrkrl4q7rt1zk0cfgs7wos3w25e0mqqufp4twceeqf40wz1zjnfs927skuk2of6oudj7e2ii76bhzbaz31ociah3p7oa3c8wdvjmp99qe3qiczpbvbs5uo3n8ar0lw0s873k',
-                channelComponent: '0wz96krzqu78ypvwq2jmqjw9zlo2f3nolvv4sxbyx8wz4vybtkmo2oikctbgp8mexoa8smn186fgk7622x4lkedtx00vxibmdfkzcxy6tav04mb4si5y4tv2mvipop6m7n1n6r6c0p40soqnx2ppfq7rrqbb8xce',
-                channelName: 'kpdw908rcd30rxa63ic053g86czqogooi8gpnupwnj7dlkh59sylqhtfn3datjn3i3fdiponlkshw8twxni81kpdzsed82w3tve00b7r9wxvwjy15enke1w02qv8j5lb21a7wmv7c13j2qv6k4uib6y1dup1rqro',
-                detail: 'Nobis ab harum totam quo dolor vel repellat natus. Quia quam fugiat. Excepturi hic aperiam optio dolorem quod et ipsum qui. Quaerat repudiandae expedita natus sint error.',
+                status: 'ERROR',
+                channelHash: 'y3k369q6sgkcqyejw4yhqxo81dhk1pv06p1cqwj0',
+                channelSapId: 'hjsxf0j0mibvdizgc0p8zdiparrwmxj92lik9feppoubct83a7',
+                channelParty: 'mmtwluskd9rl4gdmp9j99ux4v6w81s3ynlzpyhm1nsv30nlz49v11wtvrojpukh9w2eivltxlmlmbinujszpoc7kk3gldr78126mdnyvizm8ag1djvu7gqseg0jn7wx39cv8ufnst6y0361anwwdsuvhx8388hv9',
+                channelComponent: 'kmsgcstrqf5hwwms3a47pksapqnr254hscjksn6kqgsvedzsdvfa5maxjn5xlbwhvz0wq3mpuhd87nt4avczydjyocs7gu1gza0z2dys34qw98cmgd5juhks7hswyucfjxo5ui6ml1mt4yt9mui3l1f08py83dm1',
+                channelName: '55606p2wnl687ndu82w5s36ybt1i9zu4a9rahktbsim27dpai4r76mlkyb8wjjig5gcjtel6qla0sji1d1ak8x5omuazn13yujl07a5blfhzkvuqkzrlgu0xdzkb9l3zmg1d64cn8oigxtf1threfja6y86x9x4w',
+                detail: 'Praesentium nam similique tempore commodi qui. Officiis iusto et voluptatem fugit perferendis sequi aut quae sunt. Aperiam excepturi delectus illo corporis.',
             })
             .expect(400)
             .then(res => {
@@ -1464,23 +1464,23 @@ describe('channel-detail', () =>
             .post('/bplus-it-sappi/channel-detail')
             .set('Accept', 'application/json')
             .send({
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'kbf51l9mzr00au1xiqvpuyw3qmprcu6hyfs29xmk0pw4byhmx9',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'on7tm3boylc742zn3jg2',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-07-31 13:46:02',
-                executionMonitoringStartAt: '2020-07-30 23:27:26',
-                executionMonitoringEndAt: '2020-07-30 15:08:09',
-                status: 'STOPPED',
-                channelHash: '09srw4f3invweqrl3bsxzrnezv08mqgxdwmw1hll',
-                channelSapId: 'iqh99w6ma0mqqh7two0llld5cr9jiyu1ohv4s7noycirnl6muw',
-                channelParty: 'sh2ynd0l81uppkc2y4ztf8z775h14iv008wzi9qjns2sk8ymoosz2a8ivamxw50l739b3fv97ihkfia3lg2hg37rga248kyxse9f7v0beus9e5vh8ksbv62p0z235op3umkz0hm93yo74gvu9i4rpqrnfwk9mj3s',
-                channelComponent: 'spgct1sxmlxi59qi2t1awzkjloa1ex8hqt7rlx7af7hklkq7z99lyo10slwv95soijsskqe47xj2mv04wwap9gojhnb0905lihtstuz3jisw45nj35mudb8l72v8igvitvxkn513tla5m7iqmcigqizyc4ark0iq',
-                channelName: 'xnd5pmxeiofimc6xyzaetvuj6lop6mijr4p6ofei8rouq1aeiju1jjbfjemu01s9zprftb730dx3xywowk7oqggexc27ay849nybkng38b6d9xsf69lwibvqp46myrc050ecyak4hmaho6hppkgmsaw9kkrfsyjd',
-                detail: 'Ducimus rerum inventore. Velit cum eos cum. Voluptatem saepe est voluptatem dolorem sit facere enim. Sequi aliquam hic.',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'w4gif6dvd7orykhi8f03qqktnjwq8wwxvvl7fxbmxbbxo3fan5',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'evw4gwyiy64fvca23918',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-08-03 07:26:48',
+                executionMonitoringStartAt: '2020-08-03 03:35:16',
+                executionMonitoringEndAt: '2020-08-03 06:55:45',
+                status: 'SUCCESSFUL',
+                channelHash: 'zm0qmuw571al7tvtd24j47noo14vr5a76a9qrrf0',
+                channelSapId: 'hmujzlq90xw85cy2wt5y1zyq5ju12gdo82yo5sg6lcesx7v2lp',
+                channelParty: 'lnbnwshmxg9tq08k6xgdhcd023k5wqrp6i7g49kl8zfl97bdd2damd47o53s5jrnj10n90efwv19kdcfoavtfqumuunekd2g6rdvl2soshzazqrdrdukng9d0cyw8bgqjneus2y3qhc1catg8447ib2z3t9a3qm8',
+                channelComponent: '1xqf9c2ugcyx5fzv4zg4muh0231wl95p42qh3s3b7m268bh2bslk1s6cbzmma17oyxpr92tjd1ye5y92eqlm6cawy5b1ndb4ks87u3saaautps73pk59prodrvxdlskxxmvjehwuwqrkz73ggqbn6x3o87zynsw5',
+                channelName: '4b63bi1q9ve37xh2tyvqu2x4ocsct4obglfmsvfd8ir479sdqlvxucjjgugbqpyy7ge2eu7zyf7odw3uzi4lz4pv1djqk52a9zi6kimjzh7w3kr7zuytm3tw34l9l30mrfkzbibqbhwdj0jgikh792lb2ymfk5xa',
+                detail: 'Repellat quaerat quisquam minus accusamus laudantium nemo. Rerum corporis est placeat omnis. Voluptate numquam illo suscipit sit quo eius. Cupiditate minima perferendis facere quisquam.',
             })
             .expect(201);
     });
@@ -1521,7 +1521,7 @@ describe('channel-detail', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '0415fa2a-e13f-45e3-852c-925c4c4d09f9'
+                        value   : 'e491c021-409b-418a-8f23-15bacbf22dcf'
                     }
                 ]
             })
@@ -1539,18 +1539,18 @@ describe('channel-detail', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '8336595c-4691-44db-bb63-a7fd9c7f8349'
+                        value   : 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '8336595c-4691-44db-bb63-a7fd9c7f8349'));
+            .expect(repository.collectionResponse.find(item => item.id === 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce'));
     });
 
     test(`/REST:GET bplus-it-sappi/channel-detail/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/channel-detail/396c065d-07da-4d2c-82df-08d2050badec')
+            .get('/bplus-it-sappi/channel-detail/f37d4fc3-02e6-42e0-bdc5-66b0a2f3f6fb')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -1558,10 +1558,10 @@ describe('channel-detail', () =>
     test(`/REST:GET bplus-it-sappi/channel-detail/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/bplus-it-sappi/channel-detail/8336595c-4691-44db-bb63-a7fd9c7f8349')
+            .get('/bplus-it-sappi/channel-detail/e5b32fe5-fe04-4a9a-9857-08840cf8b9ce')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '8336595c-4691-44db-bb63-a7fd9c7f8349'));
+            .expect(repository.collectionResponse.find(e => e.id === 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce'));
     });
 
     test(`/REST:GET bplus-it-sappi/channels-detail`, () => 
@@ -1580,23 +1580,23 @@ describe('channel-detail', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '2b4d51e2-a408-4b88-a465-c671aa7aa00d',
-                tenantId: '78f4a2f9-e03a-419e-b262-b7635d4ff915',
-                tenantCode: '6lx1xkbka76e57em0z8gjmd48f326y5d0sgysajim5hmnf3g11',
-                systemId: 'e0d048d0-b5fc-469a-a29b-cf0af39e0ecd',
-                systemName: 't5mwf2jnt89xvxd84b53',
-                executionId: 'ee37cbf6-1277-406f-811e-b429c791a165',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 16:16:50',
-                executionMonitoringStartAt: '2020-07-30 18:15:49',
-                executionMonitoringEndAt: '2020-07-31 08:18:59',
-                status: 'UNREGISTERED',
-                channelHash: '9p5800vr7v8wx8zqu4w86vg5o1tfzweos1it2e7m',
-                channelSapId: '7hwkivm1ticqfialtlax4joabfrkv223qky0qd69q8m605748x',
-                channelParty: 'jehpqqgdft5pndmiluvucb9e3um7pchlcvcyqgl1rh93milihrfn0bot6pg4h6w45sdkvta8j7699n110chc4ema1jt5zfbsgjxi25gstn3w8vlrj3z25hfd1x7z3y1lf8wlh7na1rgu8wbooa0ziy1ni23dckj4',
-                channelComponent: '0vb2bserfqsa85nvhy3nxbo7vvap2b7nehd0tcvqi9cgfo5c1cakh2wmdtu7o7olysa0yjq4kpemyzs7hmg7wuwbkwz8lkhcnmbcsf0w246u3ftov1xhj4cqyp3bhe67d7ucfnbjcdx8liu28a4f4ho60kkzod33',
-                channelName: '2bfrfk9ceuaegs3lpwgnawhguz627psm5gmf04m49sp9n0u39r3g031phlk1esqscaths7gtjh0gp4uytpe6ljwbqtn63fvmjw6jxp17alhrc3bxa0y9g90s8cvetc2shj9sol18h1rebr0i1578fffpe4vi20r8',
-                detail: 'Aut vel quae porro eos quae. Itaque nam amet ipsa beatae nulla aliquid veritatis est vitae. Molestiae nihil assumenda adipisci ut nihil sapiente sunt unde. Asperiores dolores eveniet eum ratione omnis sint. Et enim rerum.',
+                id: 'c1d7eea3-ebf2-42d4-a98c-9534457656d6',
+                tenantId: '69f77711-6088-4c8d-b1df-40f52a13ef31',
+                tenantCode: 'ao2yeh3zxm4o4kumccw7b300z2x8qber9bx3kwh01ac7nq6e6i',
+                systemId: '6fe18402-d008-49c2-9ea0-18ac4a217128',
+                systemName: 'roiiiokjg1dg17o0xocn',
+                executionId: '9f81859a-b7c6-4330-ab93-d5fa7dc09a64',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 16:46:57',
+                executionMonitoringStartAt: '2020-08-03 03:03:25',
+                executionMonitoringEndAt: '2020-08-03 17:41:08',
+                status: 'ERROR',
+                channelHash: 'i4eyqvhlldnsrchh5tg8oa4veasegafzeudar2dy',
+                channelSapId: 'sm5y5kmfnh8xnyk5vez8a590z4z85sdi0hoal6qumse25tso25',
+                channelParty: 'trk71i0h3w8v7p120taymj205p5jtp7mhuk3j0cvevu5ehl9va67exe0uk0eugadbwbvq85ypt1tnfzc5lcwlf29v3wi88vaj65cmnt4ar0v889fg8al65cdyd4jbcmcp7wdr6a06uaz7ct2ex5oh4tprq2t05et',
+                channelComponent: 'ogbfg98zmxxp71afees1raev1831kfnoy13a9ih30j06vzcmbpf21dn8ql8o0saobvoq2cb2desvccpr8eaapem4m8kviiosahq26mgujlcrt5766ix3464frfgifezow1cr0v5quuzdfylyx8ehrihsvvhwcyaa',
+                channelName: '3jads7333rrom3687nann63sb0wzop046j9o47jrxi9l0veb29y69hotrzpzkhjb4cl8pb4h3rhu126w75xgvh8oil4qwfarh1l0qx6cw6j3bxs8s52aqdd01hjoh9s6ievwo33rkltp8p9j6ycjqmgsfj3sj2u5',
+                detail: 'Magnam fuga repellat iusto qui tenetur ratione repudiandae ut et. Esse qui quas. Non dolores saepe rem aperiam qui.',
             })
             .expect(404);
     });
@@ -1608,32 +1608,32 @@ describe('channel-detail', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                tenantCode: 'ohpmux13t2rhg5dgr49r1m5xn9o4u4dm6okshkvwqjtdrnohwd',
-                systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                systemName: 'gu2bjv95qq5ftm1jzguv',
-                executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-07-30 13:57:39',
-                executionMonitoringStartAt: '2020-07-31 04:51:24',
-                executionMonitoringEndAt: '2020-07-31 07:17:53',
-                status: 'UNREGISTERED',
-                channelHash: '2fm4bh3asl2f2vjh5j9qxgpfv27ipzg9en671awm',
-                channelSapId: 'eh3og7t7apiofz7f92jrnnc75r1vwn8mz2h34ov7p23d9fvm46',
-                channelParty: '2c2f36lg0qle4hv5sq3hru3q00aaatias8lrkqzj4a5ww5f52llpm8lkxenaqmygb6o56xbmq7ttvv1w2f6fq5h6ohyynq16xve4ln2mnpdajs4iqj01ayxjp4fgijdzvt741unz1tv53zob9zm2ffs63r53y8k6',
-                channelComponent: '4v8zv7xcaeipa7j7j1xdksobmnivhwudo7x6345a7ss5m3y0a6ixrhffvapwykxf05ktqzpn5602yguqdg0fw3ckc4jdbd61kbto9r2yo1pyy7abtd7zywh6sbsv9p7l1qtc3oub3dq7enqf9o05p4ebq5jphapc',
-                channelName: '618k6onxo1vx9qqvkfg684oubenlysjwth00arpvw47cjzs4t8h7tk4bbp455lkpchezcjtic400gliz68lqt0gg0edo5ury30s7gqza1m3zsy4niuz23t4lrvlxbv5wh8q1cpae8koxkzy80ptcl0wcn97j19lz',
-                detail: 'Iusto iure quia sit culpa. Ipsum consequatur repellendus non vero consequatur ipsum. Doloremque rerum praesentium omnis impedit perspiciatis.',
+                id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                tenantCode: 'ggkg5d8npiavh569i1g4boydwya36sh4d5c3wa9unqqxd32luh',
+                systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                systemName: 'zgixbqlh5sxu6gn4qq63',
+                executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-08-03 07:38:38',
+                executionMonitoringStartAt: '2020-08-03 12:13:50',
+                executionMonitoringEndAt: '2020-08-03 00:49:03',
+                status: 'INACTIVE',
+                channelHash: 'vtfzct91k37mh59u7gzbpvccs3d1h2z18uwecsni',
+                channelSapId: 'rx0tbpftc1jetchxt10mp3cmdxd94rmg8gm1px2bs9ffpxbxxe',
+                channelParty: 'aboyz4preotzldc90uh96q0oztav3v6668985miwoegwx3rc0fptswnawubtojzidmcyh1jzggbfty54urulazjedo18ioxd1z52ekhm10b41vpnf84l1fmp35q2avdwxmzsn01wfcjikvsrgrlmpi4ll4zxiq9o',
+                channelComponent: 'tay78mvh3sxh84gt6ald9purfgkkxr5x1ihefiybl33iqjqy3kmxhs4c99fayn9op9jyfwynzbbmy46owrmt9o7tnx3gmhrb3ljvp2yvn014daqw5l5gwkk0y85p8k4wp7b5km3h63cjxghistry5wehjrss62sp',
+                channelName: 'hu964gf6yhx2q5pdkkjaq7bfs2g0v1uh3y4jzew7l6aoq13v0cl32q2l744qiqq9lxo8sf6f4g0acz8il9t8h6obexb24yxty468vah3nfhj6wvqlhqvi8uur2s814vb2n192ul02726nzl5hs5xxj75dokp8zi4',
+                detail: 'Dicta rerum voluptatem consequatur laborum sed. Qui rem quia. Consequatur aut voluptas quia accusantium et sed. Tenetur qui beatae tempore ex ad non nostrum cum atque.',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '8336595c-4691-44db-bb63-a7fd9c7f8349'));
+            .expect(repository.collectionResponse.find(e => e.id === 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce'));
     });
 
     test(`/REST:DELETE bplus-it-sappi/channel-detail/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/channel-detail/7da153c7-a584-4459-9e38-eaed13af37d3')
+            .delete('/bplus-it-sappi/channel-detail/23d1ff63-4b9c-4c20-9b6f-e49a68a61aa0')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -1641,7 +1641,7 @@ describe('channel-detail', () =>
     test(`/REST:DELETE bplus-it-sappi/channel-detail/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/bplus-it-sappi/channel-detail/8336595c-4691-44db-bb63-a7fd9c7f8349')
+            .delete('/bplus-it-sappi/channel-detail/e5b32fe5-fe04-4a9a-9857-08840cf8b9ce')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -1726,29 +1726,29 @@ describe('channel-detail', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'b28853f2-48ad-4e0f-a0ef-81b3b1310f97',
-                        tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                        tenantCode: 'kia21p1hvhtc9a3yn4w4gqy9igbwxyavgl5te5pwf2ybmp67u6',
-                        systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                        systemName: 'gnggpodgaqltpnx7ig23',
-                        executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                        id: '3196a3d7-9446-4ac6-9f1c-4007fefc8a87',
+                        tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                        tenantCode: 'fq7xljfe5a3gmr1cp9n9p7nc3sjf2jon0lg3y8fscnshisyu7o',
+                        systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                        systemName: 'bqa3b4nc79d50oxj4but',
+                        executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                         executionType: 'SUMMARY',
-                        executionExecutedAt: '2020-07-31 00:09:53',
-                        executionMonitoringStartAt: '2020-07-31 03:21:28',
-                        executionMonitoringEndAt: '2020-07-31 09:47:39',
-                        status: 'ERROR',
-                        channelHash: 'qf72jo8dflrwh322ef74h3g48n7ze4d13h5vuqyo',
-                        channelSapId: 'rl5thyypay7bpv12rwucc6ap0ny0pv4pcbn3o90r3mca47l7ig',
-                        channelParty: 'v3vmj7wqc9hb2nvzqbo6yz5ol0uvsp8zglceupcahjwqpg8hh2ynsulm0gmpcq56rh2du3xnsyih3issn6hplxgrotpbyqg6kp1mc6p3asq1uv8h3a8th10cef1jdgvn4rmqgwxrkkr0fypdackegi8xl5qn2yk1',
-                        channelComponent: '3dpglvq9901ysle7gr80b6sqq3iu0wvsk75aw4efvn37nkch2jbfj1ghuzhvesfni5a2pl9jt3ln0katcev8kk46bzj3l40wlbobi7ljlxy14q6gdp8zwh06n2ftj3zfati2rp0e489tv4ddr1kdw0d2ah7u87by',
-                        channelName: '077ia2tgjmoshjw430x31f7iovwecotnrcjwb2e0q1dz037fe47rm5kavjkcc6o7ga4tc1m5iuszbvbqaxg5mqku3xhpe6s9a24wgkoer5uh5iagixiljtzu6mjco5s20cmwoagmfe9fjfyc73yb8o5wb1q5ngse',
-                        detail: 'Cum aut natus quibusdam. Nobis tenetur praesentium aut sunt tempora dolorum. Non quia dolores dolorum. Quos quis ea culpa corrupti voluptas nobis quaerat iusto. Aut minus et.',
+                        executionExecutedAt: '2020-08-03 04:08:51',
+                        executionMonitoringStartAt: '2020-08-03 06:13:35',
+                        executionMonitoringEndAt: '2020-08-02 23:28:16',
+                        status: 'UNKNOWN',
+                        channelHash: '98lqg2q84vc1j1rz8g2mi44e8sqw2cjq21l3rg66',
+                        channelSapId: 'uu64w3vsj0fki4z6xba2tpxmivgdf5n88u56v8o9bnrcpvvl36',
+                        channelParty: '54c74e4srscjqbjfnm6jqntaezj1erk13bls8g2wrnrawa39cce6h7cd75byka1f62ihked7ct4s4fhq4ri1crcfsrc0c3yjikyuqwk50sf6z7wluwzu7q2gdiy7c9zgrr4ha0rbg4name94xy2ls2c0utezsmrm',
+                        channelComponent: 'kk4tvlbnvhvwams9evpalnw9yziuwlthqgdfpgdi9okobcx93ftswqiactebhfpsu8o0z7c2j3z94qz9gekgox0ndr9frti2f6fy6x1yt4fo0enz7wyp7d7pn3o7xz3z9kf9ghcohbzpcbn0kupog6w69m8lsb7j',
+                        channelName: '6rgcd2d6ovlw7tld3zctjivx29y7xd8syqkm9532iq8exv9f9m7bpf0pi0h2f4gdwmxdsnnfoarminpmpd9w0dh16lbixcllnoxuue6r3ohi172cc51v2kgzmblxlwhisqxxnyk4qcyq4fay3a3so8paa4g1fbd8',
+                        detail: 'Voluptatem vel eveniet veniam esse maiores. Quasi voluptatibus eligendi et illo aut. Ipsa aut qui facere aut cum voluptatem ea.',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiCreateChannelDetail).toHaveProperty('id', 'b28853f2-48ad-4e0f-a0ef-81b3b1310f97');
+                expect(res.body.data.bplusItSappiCreateChannelDetail).toHaveProperty('id', '3196a3d7-9446-4ac6-9f1c-4007fefc8a87');
             });
     });
 
@@ -1829,7 +1829,7 @@ describe('channel-detail', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : 'c6228059-808e-48ee-a653-7dbaae90d1e5'
+                            value   : 'b537e81e-e6f6-424d-87f0-19db07cb96d9'
                         }
                     ]
                 }
@@ -1881,14 +1881,14 @@ describe('channel-detail', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '8336595c-4691-44db-bb63-a7fd9c7f8349'
+                            value   : 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindChannelDetail.id).toStrictEqual('8336595c-4691-44db-bb63-a7fd9c7f8349');
+                expect(res.body.data.bplusItSappiFindChannelDetail.id).toStrictEqual('e5b32fe5-fe04-4a9a-9857-08840cf8b9ce');
             });
     });
 
@@ -1926,7 +1926,7 @@ describe('channel-detail', () =>
                     }
                 `,
                 variables: {
-                    id: 'd2061469-9be7-4364-acec-96790998fcc2'
+                    id: 'aff04cfa-d730-466a-9cb2-62fb4f475893'
                 }
             })
             .expect(200)
@@ -1971,12 +1971,12 @@ describe('channel-detail', () =>
                     }
                 `,
                 variables: {
-                    id: '8336595c-4691-44db-bb63-a7fd9c7f8349'
+                    id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiFindChannelDetailById.id).toStrictEqual('8336595c-4691-44db-bb63-a7fd9c7f8349');
+                expect(res.body.data.bplusItSappiFindChannelDetailById.id).toStrictEqual('e5b32fe5-fe04-4a9a-9857-08840cf8b9ce');
             });
     });
 
@@ -2060,23 +2060,23 @@ describe('channel-detail', () =>
                 variables: {
                     payload: {
                         
-                        id: '7d9ff659-97cc-44f9-b9e2-a3f120b15189',
-                        tenantId: 'dda7fba9-489a-48bb-9709-5006ccc9e0a7',
-                        tenantCode: '5ed6um8x90vhajyu4fezge1r0stk83v3xw44sjha8m9mtxslh5',
-                        systemId: '02db0ff1-a335-4e7f-86f6-8f027b097fec',
-                        systemName: 'd8pd0nap66tvdvkbu9ew',
-                        executionId: '762beae5-481e-446f-b07e-aa14b50fa90b',
+                        id: 'b6aea91b-4b47-44af-a9c8-c8d5b670e7d0',
+                        tenantId: '5a931277-c48a-4bc2-9fb7-3e88c9f7792b',
+                        tenantCode: 'ivc0bst27e57oth70llvb97tdawu3q6qt0s7g2mpcrtbjv5v5x',
+                        systemId: '6ffd3fd7-cbd6-43ef-a2ad-f7a1b195bbe2',
+                        systemName: '8hkw7c4z7lpwh5q0np97',
+                        executionId: '1a8d3857-5081-4e1f-b03f-7d15df4cf91d',
                         executionType: 'DETAIL',
-                        executionExecutedAt: '2020-07-31 04:43:37',
-                        executionMonitoringStartAt: '2020-07-31 13:20:52',
-                        executionMonitoringEndAt: '2020-07-31 04:21:10',
-                        status: 'STOPPED',
-                        channelHash: 'l2ne47v6o42kbbya65qvi0xqec5naclj2v6an08l',
-                        channelSapId: 'uhsdxwgs8wpo27a85dok3q07fj3wgk9t3h78pv88otf5a839uv',
-                        channelParty: 'bjft0w17c6ginf8yya9h32gwnxf4cmq0fxb8qpgdl6qi55a045ae5h6ek7bsfcbcjpvrla8t0pyb2z6f8hvdix36m20ql6wj6kv9k5f4zq8mfol4chkcqxlkrrekmgv0ynkevl5jwl3rx8bs3kgvps5crxgth89h',
-                        channelComponent: 'geeidfrnkngdwlunl6z6i9ig2z5fz5ht602xc8n118yg2vv1co56u9mmfhvw2gdso6sdtfi99lzek3n5m3pxltwwmumvdcynyxsnw67g3yow61vnddfgtf0bb9kdp0u5e4pgzndembbq2a4gd716lgceyvb52bsq',
-                        channelName: 's1jnnir05ryqua94uwex31568ij41oqh7qhp6bbu5kd8v253kbrv3xikv5sdqji95mcp66rnlmb9yc90w98wp0x5xdq6x6y7ijahzc09q77s3pa4wmd2couc2gfcgjc8ov8rsxior6oicu2ixpbq6u5a9dm04n58',
-                        detail: 'In accusamus sint atque. Officiis quis velit commodi autem facilis et ut et. Nesciunt dolore quis occaecati ut quasi. Provident non minima necessitatibus nisi quasi exercitationem. Natus dolorem laborum in non aut.',
+                        executionExecutedAt: '2020-08-03 07:14:35',
+                        executionMonitoringStartAt: '2020-08-03 02:58:57',
+                        executionMonitoringEndAt: '2020-08-02 19:52:52',
+                        status: 'SUCCESSFUL',
+                        channelHash: 'ctwp7gsvks2d4g44sdhb5p48le55mrbyzprhhqfv',
+                        channelSapId: 'bfofwb3iqp93u1m47n3hkxte7vzc74l93lyhszlxnzvpz0sco0',
+                        channelParty: 'f2qdzz6din43wn3hx8flgjwv66ys1yu691v99r7x4frwuggjdb6a7sip71awvomzzu5n0pznedkb5tgl5br0p6ziy6m04m98ka0d8ys0kd0qs1huia40rgdq8cjmsj7u3kn3x2dj5hie9ipgxhrh3xhn7o6ntmu8',
+                        channelComponent: '2tnvepoqr3oxpjnmyekddwsw3xb3bbpv3sg3rthskkzxxqf8y9q8mf9spjm9genhwgod2j8hlry941yvi80a1xd7lv80bcaaehqd7rncgypzh5q2ljnakkxpjjulauirq0eka7tmyf8z7tul4wdhlr5cc1aftezx',
+                        channelName: '11tdvpy5ht7dfweqahrr2czs8rvulwstjxjxurzdbpz9fq256rv0r69swvthgpmghq8c8f6vkcycrxtepld14bj9wkebngfsgl947mv7kobv32cel89uyljjar3go9ghvwrod1i8h60vzf1mt9vhdmw3lelkxo2i',
+                        detail: 'Velit cumque alias sint odit id quasi aut dolorem mollitia. Magni facilis ducimus ullam accusamus odio quod id. Neque eum incidunt ipsa.',
                     }
                 }
             })
@@ -2124,29 +2124,29 @@ describe('channel-detail', () =>
                 variables: {
                     payload: {
                         
-                        id: '8336595c-4691-44db-bb63-a7fd9c7f8349',
-                        tenantId: '8c12e5b7-3d27-4955-ae4f-10e545033b47',
-                        tenantCode: 'ke3pa82x8vaoilkej88x9qvfi5j296rlo64sh9f7rydq0vsjbo',
-                        systemId: '72677ac2-de78-44cd-b75d-06bb7299013a',
-                        systemName: 'hgwi1zdd33j61duwgo8o',
-                        executionId: 'f85cbdbe-36bb-42ec-8c66-c929c1d74a50',
+                        id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce',
+                        tenantId: '50256894-b4a5-44f5-808a-cc75dec00e7b',
+                        tenantCode: 'd9x8qjht2kxdjaojbofiitntc0pnhs1311eizc602syhyva5pz',
+                        systemId: '02e4d2a1-7d30-4d85-8502-f34baf5e5e9a',
+                        systemName: 'ndgazjdig2p5yzkfxrit',
+                        executionId: '143be2e1-e31b-4a87-8a70-5fe8ee6318da',
                         executionType: 'DETAIL',
-                        executionExecutedAt: '2020-07-30 23:24:58',
-                        executionMonitoringStartAt: '2020-07-31 07:19:28',
-                        executionMonitoringEndAt: '2020-07-30 20:35:15',
-                        status: 'INACTIVE',
-                        channelHash: 'cei9fk5rwagf5dufksslq3n1b10y261m0r5r4o24',
-                        channelSapId: 'oz8hz15jorbdvipu499tny0i6w19kju7pynb1yjcg41jlz30jy',
-                        channelParty: 'gezk5p16hd8xb4dwerrt35pro21mhq6tr9in2fysdjhh2bowxr4zpwo3xi5mloyzvacwjwknz4bcm5zyooxl5fbgjdinajtq0hpqnj9j9o11j4kgbi7d9903j8e6aev554ezworo8qmtbt2gd6umgzekstyo75qb',
-                        channelComponent: 'v1oxw8trz1rn9pc1gvkaq96lrohma7g9rbrln4etpqa4k4lyroburwnqvsho66euqzqxixqgwpuixmrp02q6kse8ym3bbr5unl9yz5gmq2go79usm9ckxbu8kl8xhfwj6rz3vg8ii41wohybopfpmfzu5oucu9qj',
-                        channelName: 'vvrkufx3wwt1joh8ghyksker04rc1dzfxe35o8dxw7c7kd5yu7pgl8of8tvco124o58t7vy0z64kn83x4yxxyydbg3qlexma08vy18k5uqf3olvidrrgqqdnl88ebxpxub2hu0svcpg9lsd78m9w5gunh2i47n2h',
-                        detail: 'Voluptatem qui quidem sapiente consequatur tenetur impedit. Quaerat qui quam. Eligendi repellendus quod. Ea omnis sunt enim.',
+                        executionExecutedAt: '2020-08-03 04:02:11',
+                        executionMonitoringStartAt: '2020-08-03 02:46:07',
+                        executionMonitoringEndAt: '2020-08-02 19:06:00',
+                        status: 'STOPPED',
+                        channelHash: 'hoqwnluux2rgrcy20eeolxx3uwh3nka2lmg8tlfo',
+                        channelSapId: 'sxrtmjh79ti42grc342jkyzr4o5fnzfmx25ogo2j0ljbh5jerl',
+                        channelParty: '8p2v1c6mtfno66fhd9fom7n9qagfq30ms0f43laplilkr1kwd8cxvo4obz63ru98bksezzem79wcod0bn7kgo9l22gptr0mixada76h4y8xu6on92owljkq9l1ro0gvllcgh4cfj657ba7oc7ajccrmi6jmcaklj',
+                        channelComponent: 'uh255a08vqm11ggprcinihge7xplt11yb0jxh7o5fxjs528ommefr8783cvlmykaf46brl0i14dpco6h13ibkzrqkp6xfy36lpfepu6pyo75gbptqj8ag6vka1upb8iqmo0wahd2r4u6frfa9g2h3zku792yml54',
+                        channelName: 'h473agt50q4rx4r9uu2z15p40iu2o153y348j26q46f2s4s3b1gptawqohc7lrfbipzqxb1mr59svosap8pb6xy2odq22ov3t5gks6enhpbh3cxevsi7vrwgk4ia5db0fc7tyng4qleow97tjkf92knu6mikwvsr',
+                        detail: 'Laboriosam quos voluptas accusamus natus occaecati maiores fugit. Tempora minima molestiae. Illum illo natus sed quia. Est suscipit cumque illum. Exercitationem animi dolores non numquam. Et dolores expedita id rem.',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiUpdateChannelDetail.id).toStrictEqual('8336595c-4691-44db-bb63-a7fd9c7f8349');
+                expect(res.body.data.bplusItSappiUpdateChannelDetail.id).toStrictEqual('e5b32fe5-fe04-4a9a-9857-08840cf8b9ce');
             });
     });
 
@@ -2184,7 +2184,7 @@ describe('channel-detail', () =>
                     }
                 `,
                 variables: {
-                    id: '3e2d20c8-58ac-4d64-af39-f39eef561936'
+                    id: '84cd796a-37d0-4c93-b260-477e49bc0b84'
                 }
             })
             .expect(200)
@@ -2229,12 +2229,12 @@ describe('channel-detail', () =>
                     }
                 `,
                 variables: {
-                    id: '8336595c-4691-44db-bb63-a7fd9c7f8349'
+                    id: 'e5b32fe5-fe04-4a9a-9857-08840cf8b9ce'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.bplusItSappiDeleteChannelDetailById.id).toStrictEqual('8336595c-4691-44db-bb63-a7fd9c7f8349');
+                expect(res.body.data.bplusItSappiDeleteChannelDetailById.id).toStrictEqual('e5b32fe5-fe04-4a9a-9857-08840cf8b9ce');
             });
     });
 

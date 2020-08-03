@@ -1,0 +1,470 @@
+[
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/create/create-data-lake.command-handler.ts",
+        "integrity": "sha1:62a19ff38877540244005c5948be8ddf872943e4"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/create/create-data-lake.command.handler.spec.ts",
+        "integrity": "sha1:34b8363c64388d37349968bab3c08b3420b0741f"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/create/create-data-lake.command.ts",
+        "integrity": "sha1:bfae6be9233b659c6e8dc766e9b39e5979e4ca40"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/create/create-data-lake.service.spec.ts",
+        "integrity": "sha1:1d40b5b909f205612e3082fda1df8d188bb4679b"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/create/create-data-lake.service.ts",
+        "integrity": "sha1:afa1d6bff96a875c18f1f659101869d5078ab706"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/create/create-data-lakes.command-handler.ts",
+        "integrity": "sha1:a3f6711b0145e92ac6d923acf15dd12a285f9984"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/create/create-data-lakes.command.handler.spec.ts",
+        "integrity": "sha1:a36b9ad286b9ad8ed1d780177acbc01326de71e4"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/create/create-data-lakes.command.ts",
+        "integrity": "sha1:404dc2b9e27700688b1f45d345627c601d05728c"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/create/create-data-lakes.service.spec.ts",
+        "integrity": "sha1:6ca13e5fbfb260642e2e452309ac5a60a2f596cf"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/create/create-data-lakes.service.ts",
+        "integrity": "sha1:3040bb2341cb657efe55ef02157ed75976e75071"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lake-by-id.command-handler.ts",
+        "integrity": "sha1:5e8ebd9b2c166279fe8adc1267083125780656dd"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lake-by-id.command.handler.spec.ts",
+        "integrity": "sha1:8dc9a6a50fc43f77d2e46a78582308c775ff7f00"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lake-by-id.command.ts",
+        "integrity": "sha1:32b7638c6f5b8f33a24aaa9b002315860f6f8e0e"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lake-by-id.service.spec.ts",
+        "integrity": "sha1:b2d9bcb6fdee2f9027b41fde393ec02a01568c14"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lake-by-id.service.ts",
+        "integrity": "sha1:e0cde2b2af04092a5037da4d66572bdc71a7a1a7"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lakes.command-handler.ts",
+        "integrity": "sha1:0bec4e3b2c642d4d8c22d9c9a53634ce8a87cc81"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lakes.command.handler.spec.ts",
+        "integrity": "sha1:ffe5a00b13aa5979b88505fc2569ed1dd066112b"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lakes.command.ts",
+        "integrity": "sha1:3285aa7c553d163989e02960a44f5b161bcce1c4"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lakes.service.spec.ts",
+        "integrity": "sha1:6347daabade31c77a13329fd6a91cf3956b15bd5"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/delete/delete-data-lakes.service.ts",
+        "integrity": "sha1:e72411af91cb9d1bbddab4e29ff327964c4d9d10"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/add-data-lakes-context.event.ts",
+        "integrity": "sha1:a224500ccceca83e2995fcd34334a5eef9464f5f"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/created-data-lake.event-handler.ts",
+        "integrity": "sha1:f37e24f9ab3914b6a656beb25b2ce3736f19ead1"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/created-data-lake.event.ts",
+        "integrity": "sha1:98c2ac34916171f194c0b2c4ad4f55d6436f1efb"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/created-data-lakes.event-handler.ts",
+        "integrity": "sha1:10f2d5ff120e6bce56f7d424a84db7670d3e97b2"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/created-data-lakes.event.ts",
+        "integrity": "sha1:97a8f39e0cd630194da65f19908c0f23575190e2"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/deleted-data-lake.event-handler.ts",
+        "integrity": "sha1:128b1265326c74472422e1740c1018f438b88c08"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/deleted-data-lake.event.ts",
+        "integrity": "sha1:6412c611709365bec28f7cda9ab401e7b5e7e219"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/deleted-data-lakes.event-handler.ts",
+        "integrity": "sha1:a192fb7a3b3cf484c9ff140376e6c6383a600411"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/deleted-data-lakes.event.ts",
+        "integrity": "sha1:89866a5a02fc9181a76aae34b79d37d4190fa8cd"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/updated-data-lake.event-handler.ts",
+        "integrity": "sha1:5a41eb230750ce97c8113a9223567331e143dabc"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/events/updated-data-lake.event.ts",
+        "integrity": "sha1:6c416e8ccdbf015f238bb8f9ad370c4c5762319b"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/find/find-data-lake-by-id.query-handler.ts",
+        "integrity": "sha1:96a89b3dad627956b958188bf23558cff5b9ae71"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/find/find-data-lake-by-id.query.handler.spec.ts",
+        "integrity": "sha1:0dac55e6330ae1f31fa6268e6e5adf5baabb2d09"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/find/find-data-lake-by-id.query.ts",
+        "integrity": "sha1:a8cad4fb06ae80149c3175cca949a238bd580c57"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/find/find-data-lake-by-id.service.spec.ts",
+        "integrity": "sha1:1131fe5d00a2ba778c1f5293a3597f01bd09194c"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/find/find-data-lake-by-id.service.ts",
+        "integrity": "sha1:7ed1c00ec10e3eb36d3cbb7517125fd01acf7929"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/find/find-data-lake.query-handler.ts",
+        "integrity": "sha1:bc8c5e810ce19be00a012fde4793a88dc80e9094"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/find/find-data-lake.query.handler.spec.ts",
+        "integrity": "sha1:c7bafdedf4a0d0a48cdb8ebf535078c13958ef37"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/find/find-data-lake.query.ts",
+        "integrity": "sha1:a1d80fa635dc5e0e2f7a9c720eee2d7e86994a64"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/find/find-data-lake.service.spec.ts",
+        "integrity": "sha1:4e7da734a085cfeca71a30359296b7727ff644d7"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/find/find-data-lake.service.ts",
+        "integrity": "sha1:a1a6578b24efeca6eee72c4c968690caa48bf829"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/get/get-data-lakes.query-handler.ts",
+        "integrity": "sha1:ebacf622e5ad7cafa49a3c01ea81fd6328fb5ca6"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/get/get-data-lakes.query.handler.spec.ts",
+        "integrity": "sha1:5f28ddbc4e86bc653eb705b99baba1c5b2e3d5b6"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/get/get-data-lakes.query.ts",
+        "integrity": "sha1:e47f3d9a9fe29fbfe3ddcc085f69c1e691a7846c"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/get/get-data-lakes.service.spec.ts",
+        "integrity": "sha1:e5677d2f985feb6c411ce7651fdd90e8c5c70641"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/get/get-data-lakes.service.ts",
+        "integrity": "sha1:d44f87c00bd3ab614c93c496e721c944abce2033"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/paginate/paginate-data-lakes.query-handler.ts",
+        "integrity": "sha1:dd5b5eecdee6fa4c529684bb740aa4f1603745b5"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/paginate/paginate-data-lakes.query.handler.spec.ts",
+        "integrity": "sha1:ddc66f074d5090fe2c85a6479e9f47b29a432f22"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/paginate/paginate-data-lakes.query.ts",
+        "integrity": "sha1:005ad98ba664ab88a674d34a28f0ce165b217610"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/paginate/paginate-data-lakes.service.spec.ts",
+        "integrity": "sha1:ae344bfc0171dc5de4f2fd99059cbc41e97af10b"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/paginate/paginate-data-lakes.service.ts",
+        "integrity": "sha1:424dc623dfb73fca94d38f4af1124133822234ca"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/sagas/data-lake.sagas.ts",
+        "integrity": "sha1:a3fbc38168a9ffc9c34e907d879ce7daec4257e5"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/update/update-data-lake.command-handler.ts",
+        "integrity": "sha1:c49f0066cba49fb6c5c7102c213ffc7f783a6e32"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/update/update-data-lake.command.handler.spec.ts",
+        "integrity": "sha1:5202de00014180c41dbba31ef247bc23279e917e"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/update/update-data-lake.command.ts",
+        "integrity": "sha1:e8b810a79a70693101bbf0543afee68e4386c118"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/update/update-data-lake.service.spec.ts",
+        "integrity": "sha1:ad7b50494c0a7dd54bc781a5bb50d3817a79b8cd"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/application/update/update-data-lake.service.ts",
+        "integrity": "sha1:1549bdcb8f094af93c3349e14113e54d1be29ea4"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/data-lake.aggregate.ts",
+        "integrity": "sha1:a5e2f76a325edbcd1dfe8e4b2b543b478da28069"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/data-lake.mapper.ts",
+        "integrity": "sha1:e6297fa74431116fcce66f08c4061c78b82fc640"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/data-lake.repository.ts",
+        "integrity": "sha1:2ec7f5d99ce4b5cfef7941f4dd01c866a30712a6"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/data-lake.response.ts",
+        "integrity": "sha1:c022516d53625bd653917a1287b89cd694deb821"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/value-objects/index.ts",
+        "integrity": "sha1:98ded1cee8e1b32d7c41eea1fa0292eec97abc25"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/index.ts",
+        "integrity": "sha1:1af7d99163e3f910163200bef102f56ba8bd2bd1"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/infrastructure/mock/mock-data-lake.repository.ts",
+        "integrity": "sha1:7d33dbd68068d5a3e2ebb2fe129a66ccc5f6ef4b"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/infrastructure/seeds/data-lake.seed.ts",
+        "integrity": "sha1:4f4f9d55e99889ba437a77099c7a2c8fb16d25bc"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/infrastructure/sequelize/sequelize-data-lake.model.ts",
+        "integrity": "sha1:90fb309019c41b5fc35bb20441c761a00f099673"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/infrastructure/sequelize/sequelize-data-lake.repository.ts",
+        "integrity": "sha1:6db1f89288eb74f8e03acdcf9a9719be5e1ef134"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/value-objects/data-lake-id.ts",
+        "integrity": "sha1:eb0edbf43ff428c870fc0230d95000eb44f47044"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/value-objects/data-lake-tenant-id.ts",
+        "integrity": "sha1:3c9aaee44b969ab03cbbe9fc6710b263545e5467"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/value-objects/data-lake-execution-id.ts",
+        "integrity": "sha1:f9455624190a31d412480e4374a8e1e05a0235df"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/value-objects/data-lake-tenant-code.ts",
+        "integrity": "sha1:629cf8199c89146826b95f335c2d58e4e3cd07c7"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/value-objects/data-lake-payload.ts",
+        "integrity": "sha1:8b25d87257e57dc8be4215f6a7203e9a5dea6bf4"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/value-objects/data-lake-created-at.ts",
+        "integrity": "sha1:bb2c3850c47e1882989d7b568a7ae8d256190344"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/value-objects/data-lake-updated-at.ts",
+        "integrity": "sha1:f1b23a968f3ee630d39cea43f4f751f1df7bf41e"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/data-lake/domain/value-objects/data-lake-deleted-at.ts",
+        "integrity": "sha1:d34bcedd5243be7f430f14250594c372067fc088"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/create-data-lake.controller.spec.ts",
+        "integrity": "sha1:4fe8ab6cdbf2e138d03a01ae8f56195f0f5dc669"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/create-data-lake.controller.ts",
+        "integrity": "sha1:deb833090d3716e3c4d229da3aa39e4409be4347"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/create-data-lakes.controller.spec.ts",
+        "integrity": "sha1:3d34c5258b2512961eca4363ee52aa3c8ddbce4b"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/create-data-lakes.controller.ts",
+        "integrity": "sha1:e9bcb68805e80ca406103ea455ba2171e4888c95"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/delete-data-lake-by-id.controller.spec.ts",
+        "integrity": "sha1:4b92cbcd0b4b94fe1bb0a3c964ced66e50e1086c"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/delete-data-lake-by-id.controller.ts",
+        "integrity": "sha1:ae301cb390c16144162c1e5edd140dcbdaedeac7"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/delete-data-lakes.controller.spec.ts",
+        "integrity": "sha1:7f1613c6358ae879ae9238086f0405e9d78476f4"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/delete-data-lakes.controller.ts",
+        "integrity": "sha1:fff5d4fb771208c093a6817be557e269ae93705e"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/find-data-lake-by-id.controller.spec.ts",
+        "integrity": "sha1:5cc6ec3e9d65a38fe7bf8548256f3543d1acd7be"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/find-data-lake-by-id.controller.ts",
+        "integrity": "sha1:556ba02e4c39a0f2a0eddcfdb090823444a84385"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/find-data-lake.controller.spec.ts",
+        "integrity": "sha1:47eeb19af282b8feff057f7fc9943f8af8b9d9c3"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/find-data-lake.controller.ts",
+        "integrity": "sha1:f787d03cb8ca4398fd45493571a35bd8145c8134"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/get-data-lakes.controller.spec.ts",
+        "integrity": "sha1:46cbdbb57e39425b4dd42e29d1cd22e4d55c8ef9"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/get-data-lakes.controller.ts",
+        "integrity": "sha1:cf922deda182ec55a491d6d85fea70a9256c702a"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/paginate-data-lakes.controller.spec.ts",
+        "integrity": "sha1:1b3684a74157c6096ef72e32e78262415808eb78"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/paginate-data-lakes.controller.ts",
+        "integrity": "sha1:3efbaf200b1c7a0de6e19ae036b93a644b4c7f47"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/update-data-lake.controller.spec.ts",
+        "integrity": "sha1:b916a1b360677c007c449fa02f06b62d52b66c28"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/controllers/update-data-lake.controller.ts",
+        "integrity": "sha1:b65740220f1d47ece2e7fc1121c13a9f30765397"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/dto/data-lake.dto.ts",
+        "integrity": "sha1:ccef47a194f3dea3a3b1a65800145661cd948cc3"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/dto/create-data-lake.dto.ts",
+        "integrity": "sha1:0b1e16d787dad5d4b1a17000eb5e7080b5dc510e"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/dto/update-data-lake.dto.ts",
+        "integrity": "sha1:5733414a82c813c9c4a18fc705ce4bf1d3072737"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/graphql/data-lake.graphql",
+        "integrity": "sha1:714cc001c2b934bf4d9583b520f20664a933c488"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/index.ts",
+        "integrity": "sha1:2d69382c16d0e62211ec83b73bc7b0685b6c4c9b"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/create-data-lake.resolver.spec.ts",
+        "integrity": "sha1:2056cb58b5f61475e2b26d6b29555d4de4c9643d"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/create-data-lake.resolver.ts",
+        "integrity": "sha1:b16bf0f7934fc40a532a4b2654f91f4cd9ce83f6"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/create-data-lakes.resolver.spec.ts",
+        "integrity": "sha1:fc756ec75db7f492b2bf3207d1655db5b905170c"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/create-data-lakes.resolver.ts",
+        "integrity": "sha1:14237b1069f9904278647e5b7abfacc4cd477f54"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/delete-data-lake-by-id.resolver.spec.ts",
+        "integrity": "sha1:df5154e457c9f4518904235f58812acb21457304"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/delete-data-lake-by-id.resolver.ts",
+        "integrity": "sha1:f4e154e0a525f0ae747875cb1484f91ad7b17ef9"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/delete-data-lakes.resolver.spec.ts",
+        "integrity": "sha1:8aef0a1cd3c5c33c3f09e0c487e0f6220af0001d"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/delete-data-lakes.resolver.ts",
+        "integrity": "sha1:0b44efa0635da04174caa603a70441f718494da0"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/find-data-lake-by-id.resolver.spec.ts",
+        "integrity": "sha1:d18e693a227560c7a2f0727f3179be48edac3307"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/find-data-lake-by-id.resolver.ts",
+        "integrity": "sha1:d39960f98d520e3c69b374c97639454916fadd73"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/find-data-lake.resolver.spec.ts",
+        "integrity": "sha1:c07e4dbee0626d2944f46de0c2fdfbd0f64f61f6"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/find-data-lake.resolver.ts",
+        "integrity": "sha1:90401bc09677ae3b4b8c0f6608e87f8baec35ec7"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/get-data-lakes.resolver.spec.ts",
+        "integrity": "sha1:4fa28c36a7dee0b98aea241e64f715f82c19f931"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/get-data-lakes.resolver.ts",
+        "integrity": "sha1:993652258ac5c1eba430c2b383c58aca6253068e"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/paginate-data-lakes.resolver.spec.ts",
+        "integrity": "sha1:64a55722c0ffe3a0b849005cce19ba713dca9c10"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/paginate-data-lakes.resolver.ts",
+        "integrity": "sha1:e7cf61705420cb831077739c85577d638621ae21"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/update-data-lake.resolver.spec.ts",
+        "integrity": "sha1:159cef8daa3a49caa46f3d8e03ace0d7bb2afdef"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/data-lake/resolvers/update-data-lake.resolver.ts",
+        "integrity": "sha1:a02225c6c354de31bbc5dd2e5f708ef676bd00b9"
+    },
+    {
+        "path": "postman/bplus-it-sappi.data-lake.postman.json",
+        "integrity": "sha1:dc28956376338d454d2049dddaf7c09f0d869d0b"
+    }
+]

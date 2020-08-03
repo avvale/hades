@@ -1,0 +1,514 @@
+[
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/create/create-channel-overview.command-handler.ts",
+        "integrity": "sha1:27f1a44f2db47e21907b9143ccfe2aa1ed8175cb"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/create/create-channel-overview.command.handler.spec.ts",
+        "integrity": "sha1:e337f73e2d7180e8016f3177dc27d0b1eb151333"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/create/create-channel-overview.command.ts",
+        "integrity": "sha1:4191136d24a256188a96f8974844d00dff8baa67"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/create/create-channel-overview.service.spec.ts",
+        "integrity": "sha1:affbfde94abc31957fc20ed9799c2a05f0845a62"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/create/create-channel-overview.service.ts",
+        "integrity": "sha1:00e399349a811802442865024d88c7c1d868ce8c"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/create/create-channels-overview.command-handler.ts",
+        "integrity": "sha1:ae45877fe3a0c5de3d7f7134195040383c17c822"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/create/create-channels-overview.command.handler.spec.ts",
+        "integrity": "sha1:212c863e44b025f9810555d1058a70d9d4734c03"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/create/create-channels-overview.command.ts",
+        "integrity": "sha1:7575ef2be0a3879ad3f5bc24e9bda0c5a1d1bd27"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/create/create-channels-overview.service.spec.ts",
+        "integrity": "sha1:2c48aa220dc823d2eb936659761b097ab8eeba6b"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/create/create-channels-overview.service.ts",
+        "integrity": "sha1:781f137d983275a91a70f88eaeeeb5e4ec0b9e8d"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/delete/delete-channel-overview-by-id.command-handler.ts",
+        "integrity": "sha1:eb6cdc4920451ba9b02cb1e9878613ec1a1febc6"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/delete/delete-channel-overview-by-id.command.handler.spec.ts",
+        "integrity": "sha1:8e87503fcc27b134c59627c6fe3ea6fcc91ff4a3"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/delete/delete-channel-overview-by-id.command.ts",
+        "integrity": "sha1:dab6c2eaa1b37f8f4e577795aca5cdb173828f86"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/delete/delete-channel-overview-by-id.service.spec.ts",
+        "integrity": "sha1:940b90ea1c088f7baab8fb8fec223cedcbefb914"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/delete/delete-channel-overview-by-id.service.ts",
+        "integrity": "sha1:c40d6d5fcee4339dcbab450b8b659da0c42376b0"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/delete/delete-channels-overview.command-handler.ts",
+        "integrity": "sha1:59ffaa159147bf04c4f3ddb57d407b8d5925a087"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/delete/delete-channels-overview.command.handler.spec.ts",
+        "integrity": "sha1:ac0d71f28c1aa8b0cbeae2edf3aed313f6c620a9"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/delete/delete-channels-overview.command.ts",
+        "integrity": "sha1:15f14c02f49361b2e9d2557ad42d0632a97c48d6"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/delete/delete-channels-overview.service.spec.ts",
+        "integrity": "sha1:077fd2acf96806d300d2517ead3c7f597cdd13f0"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/delete/delete-channels-overview.service.ts",
+        "integrity": "sha1:1db66751f945440ba789e6c56bf356b9950a0254"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/add-channels-overview-context.event.ts",
+        "integrity": "sha1:d6de7e0ca3cd4ce6d4f7ecbfaa078eff18823325"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/created-channel-overview.event-handler.ts",
+        "integrity": "sha1:a9be6357b63f1eb1bd0e10c97e69074a1f66216a"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/created-channel-overview.event.ts",
+        "integrity": "sha1:490733c37fc8798d4153be4c384fb1c8373b58f5"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/created-channels-overview.event-handler.ts",
+        "integrity": "sha1:1b429a69be7dedab8fe5723bdc7dd1306008e998"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/created-channels-overview.event.ts",
+        "integrity": "sha1:e7a2d08b6938e5ec785c7a1cb52e1e08fe726488"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/deleted-channel-overview.event-handler.ts",
+        "integrity": "sha1:536af64386f02f0629f7a4c446599d27fabf0601"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/deleted-channel-overview.event.ts",
+        "integrity": "sha1:fc2813b4f82b23bb4a247b6568de2748282aebb2"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/deleted-channels-overview.event-handler.ts",
+        "integrity": "sha1:0a319b65d7b8079115571af1d51c0bc5110fe888"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/deleted-channels-overview.event.ts",
+        "integrity": "sha1:2b943ed1ccf7807b84d9baed720d691f9ac006ca"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/updated-channel-overview.event-handler.ts",
+        "integrity": "sha1:1df43e04acb38f153cd7fdbfc2b169445b0ba951"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/events/updated-channel-overview.event.ts",
+        "integrity": "sha1:85a6b5e75fb3000e909f147aa3c3f4e1f383d401"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview-by-id.query-handler.ts",
+        "integrity": "sha1:52a722c8e6f00abe3a990e24f3c63744d7354db9"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview-by-id.query.handler.spec.ts",
+        "integrity": "sha1:c4f9b489930a848a83dff44a22a7f22d86bf05da"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview-by-id.query.ts",
+        "integrity": "sha1:25097ecaf5a62b27584c7d536ac14e65e870f3ae"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview-by-id.service.spec.ts",
+        "integrity": "sha1:b0791923024a476865c186de15675f27c8a8c7ed"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview-by-id.service.ts",
+        "integrity": "sha1:92b4fd287c9d884b787b4e84cc5304835a92dbd1"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview.query-handler.ts",
+        "integrity": "sha1:a85c3f9a7ca5efc7b542ebf7148ec9bb26fc1e3c"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview.query.handler.spec.ts",
+        "integrity": "sha1:06b3e16475f6fa206b637fccc130f0f27fb56748"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview.query.ts",
+        "integrity": "sha1:3c6b897709b8a955d9b20f6dabcf0b895875da68"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview.service.spec.ts",
+        "integrity": "sha1:ab7540df06162402621be191d51a57253cfa6f00"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/find/find-channel-overview.service.ts",
+        "integrity": "sha1:b0867287286553f4225deca78336d432c8b927e4"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/get/get-channels-overview.query-handler.ts",
+        "integrity": "sha1:6df0229942ce4454c9f9d8e57e81c4994238a9ab"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/get/get-channels-overview.query.handler.spec.ts",
+        "integrity": "sha1:9f24aa57ac7cd1a9852ba0494a22d5612f73ac48"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/get/get-channels-overview.query.ts",
+        "integrity": "sha1:b3ba596159e93e89448186e27aafcef40829c6cc"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/get/get-channels-overview.service.spec.ts",
+        "integrity": "sha1:1bf4164f72b3652c00beeee2ce99118d1962e323"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/get/get-channels-overview.service.ts",
+        "integrity": "sha1:a9ba322d73440432923532f20ccc764ab6f06f61"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/paginate/paginate-channels-overview.query-handler.ts",
+        "integrity": "sha1:de2108584b43b248746d91eef4291896173e82f3"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/paginate/paginate-channels-overview.query.handler.spec.ts",
+        "integrity": "sha1:d32534197cce4186c143ea2f58ff8d1f501d82e4"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/paginate/paginate-channels-overview.query.ts",
+        "integrity": "sha1:fd4864ef43362c051ff04aa354a3b9fa63aa5202"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/paginate/paginate-channels-overview.service.spec.ts",
+        "integrity": "sha1:f77a32079ed5cd0275e0971d26d721c6622c9ea0"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/paginate/paginate-channels-overview.service.ts",
+        "integrity": "sha1:1331e9a5ac036742ca892e0b0b81fbc068687d5f"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/sagas/channel-overview.sagas.ts",
+        "integrity": "sha1:8bc1b3e817a24f519c1a29920f9307327a3af447"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/update/update-channel-overview.command-handler.ts",
+        "integrity": "sha1:8792b65ab6feb392de917833fa83cc9291941a57"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/update/update-channel-overview.command.handler.spec.ts",
+        "integrity": "sha1:eb18b730e59a2eaf2d4adbc4c8835e0a7c0676d5"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/update/update-channel-overview.command.ts",
+        "integrity": "sha1:8534a4f65192356bef9b5409e60775b4efdfb0f6"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/update/update-channel-overview.service.spec.ts",
+        "integrity": "sha1:4f1cc8c68c09a6cac9a5fbeb1d089f45a3ba5e65"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/application/update/update-channel-overview.service.ts",
+        "integrity": "sha1:86d25b938fcaaf83c7e2a823f459b82bfb05bdaa"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/channel-overview.aggregate.ts",
+        "integrity": "sha1:dc6712ffc25e5a85eec444901813569cc2c560ac"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/channel-overview.mapper.ts",
+        "integrity": "sha1:1d99f84e0e071fc5d2dfabf5dd1da8111d6770e1"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/channel-overview.repository.ts",
+        "integrity": "sha1:1dec0f8a674f89c077d14d5e1815aeb44541106d"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/channel-overview.response.ts",
+        "integrity": "sha1:b70314a319bbfd9a36898db31d808336fd357e1f"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/index.ts",
+        "integrity": "sha1:15bb0172c3ca1ddee9e044137d4a58d358f69061"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/index.ts",
+        "integrity": "sha1:82f066633fcf16224b3e865b6e7edfd8e30db35a"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/infrastructure/mock/mock-channel-overview.repository.ts",
+        "integrity": "sha1:0f1202b4ab97c8908391f6629c7c45f360fa1d4f"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/infrastructure/seeds/channel-overview.seed.ts",
+        "integrity": "sha1:356e7c2e3478982ce78b40804feb6ef1c04a665e"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/infrastructure/sequelize/sequelize-channel-overview.model.ts",
+        "integrity": "sha1:2ef7b266bd2bc5a80da3acde4cf56e0ac20d8a19"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/infrastructure/sequelize/sequelize-channel-overview.repository.ts",
+        "integrity": "sha1:13e002be9fd03b324ff3b088e6f98016dd7e87e7"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-id.ts",
+        "integrity": "sha1:03c300d85e2b9ee555ba515f8f0386777df9199a"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-tenant-id.ts",
+        "integrity": "sha1:7487b250ed04a3ed6e27265fb83467db7d8c52fc"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-tenant-code.ts",
+        "integrity": "sha1:5efd2728a71e74604c0408bdf23d1d0d1c818185"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-system-id.ts",
+        "integrity": "sha1:245cc532fb7a22a5d5bbf07d220a3db06373ebde"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-system-name.ts",
+        "integrity": "sha1:7e989ec657232bbd7cc0c95f50d8e00ce1b70d3e"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-execution-id.ts",
+        "integrity": "sha1:88348bc0a58e21122f037200e338d7b1c8b2d825"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-execution-type.ts",
+        "integrity": "sha1:6562cd381e4fc75a1092a6d0ddd81813dedd09fd"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-execution-executed-at.ts",
+        "integrity": "sha1:6def0adc0587f7c53af3df96632e14aa021af3a4"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-execution-monitoring-start-at.ts",
+        "integrity": "sha1:bb2bab6acc0aed4d3475dfa23b7878fc72887705"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-execution-monitoring-end-at.ts",
+        "integrity": "sha1:b0d2be56bdeb6ac7d6f6b6631582b3fdaf34a75f"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-error.ts",
+        "integrity": "sha1:924039834523ab41231fe64954b40430221107ad"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-inactive.ts",
+        "integrity": "sha1:ab466821704e615eca8d6dbab4fb234f80058db1"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-successful.ts",
+        "integrity": "sha1:e3cf32c998e649c739709ac4384d544838e43fc8"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-stopped.ts",
+        "integrity": "sha1:afc8c8a93af314e6b3084841aaf1dae4b9e88258"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-unknown.ts",
+        "integrity": "sha1:8ad358165d100b881505b66f749ab7225736af83"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-unregistered.ts",
+        "integrity": "sha1:b5eed3e359288d5ca785702cc683894c985ab16f"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-created-at.ts",
+        "integrity": "sha1:a196bacf97ee4f99b29ff1e2765047e6d5f44d68"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-updated-at.ts",
+        "integrity": "sha1:5f8192c37d838b922f058795abf2a78bc643ace1"
+    },
+    {
+        "path": "src/@hades/bplus-it-sappi/channel-overview/domain/value-objects/channel-overview-deleted-at.ts",
+        "integrity": "sha1:278a9ee11d2e1f946fbc98853d61c517e262e9eb"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/create-channel-overview.controller.spec.ts",
+        "integrity": "sha1:af4966dff504de6a9ec41a138d5acbbd90eacab4"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/create-channel-overview.controller.ts",
+        "integrity": "sha1:ac27d2868e98ce8ca7a7ad80c15a3a9ec81f62fa"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/create-channels-overview.controller.spec.ts",
+        "integrity": "sha1:01dfc871f4a7865115f0eb67604af08fa55bc312"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/create-channels-overview.controller.ts",
+        "integrity": "sha1:9648bc996457c1399eb7d08fe77d545d56fc6bfb"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/delete-channel-overview-by-id.controller.spec.ts",
+        "integrity": "sha1:be0ebd97d6b182781700bdec5a9fa77db97a6c2d"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/delete-channel-overview-by-id.controller.ts",
+        "integrity": "sha1:41ef61098448927634c8220bb86a6b435de32e67"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/delete-channels-overview.controller.spec.ts",
+        "integrity": "sha1:fdb101cd6e8745497532ec750b4f04eb3238762c"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/delete-channels-overview.controller.ts",
+        "integrity": "sha1:af1fe1ae0d8331b2436fd493ed78348dd3f8b4e6"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/find-channel-overview-by-id.controller.spec.ts",
+        "integrity": "sha1:4ee0c51026cdef709984b2339681efca799ea4ac"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/find-channel-overview-by-id.controller.ts",
+        "integrity": "sha1:d5513515e17087da139c917262664f91850f26f3"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/find-channel-overview.controller.spec.ts",
+        "integrity": "sha1:f1361e1a089ab3c296010ae704050664d4749177"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/find-channel-overview.controller.ts",
+        "integrity": "sha1:ebc878d46fcf5f5c4cd8c1b14d3317ba6d75b6c2"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/get-channels-overview.controller.spec.ts",
+        "integrity": "sha1:6c52f6a0d6e95647b743acb8a80d1c55a78d3f54"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/get-channels-overview.controller.ts",
+        "integrity": "sha1:b6f362f62a5c9138d9448ecfadb60277b7f11ac4"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/paginate-channels-overview.controller.spec.ts",
+        "integrity": "sha1:2e8d7e681d67dfadf5d45cc5a6ca2667a83ecde6"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/paginate-channels-overview.controller.ts",
+        "integrity": "sha1:1743155bfc85f33f5708608421d28dae0dc35477"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/update-channel-overview.controller.spec.ts",
+        "integrity": "sha1:19a701828ef143dbd0ab18872ae42091ff4b6815"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/controllers/update-channel-overview.controller.ts",
+        "integrity": "sha1:93a6f65fb05a1dfa1246815cf37d7cb776fe91d8"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/dto/channel-overview.dto.ts",
+        "integrity": "sha1:f139ef315f4d41d92794fe3650ac67f58bc1e13a"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/dto/create-channel-overview.dto.ts",
+        "integrity": "sha1:14efc2ccbd3717d3e52cac89785e7182d8718fe2"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/dto/update-channel-overview.dto.ts",
+        "integrity": "sha1:f7e1c49fa1dbc4799b5e0706355ae2d285c6804b"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/graphql/channel-overview.graphql",
+        "integrity": "sha1:eca9c87e2fcffc759ec36158164defc1499ef9c6"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/index.ts",
+        "integrity": "sha1:8b4be95f8342bea639cdf3637de3b0eaa04628f8"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/create-channel-overview.resolver.spec.ts",
+        "integrity": "sha1:bb385a13ed2ceaf52459a0e960760dbb38feb083"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/create-channel-overview.resolver.ts",
+        "integrity": "sha1:af54b92c6cbdb7708d8a5b12480ab971f11f2837"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/create-channels-overview.resolver.spec.ts",
+        "integrity": "sha1:50a513ff1baeddede03f1abfc5fb97b4030768d6"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/create-channels-overview.resolver.ts",
+        "integrity": "sha1:858b03ff124bac901957954e5043b03405d5bc77"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/delete-channel-overview-by-id.resolver.spec.ts",
+        "integrity": "sha1:fcd7d823ee59483057677b0abb30ae54a6aec1ed"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/delete-channel-overview-by-id.resolver.ts",
+        "integrity": "sha1:2e40998bc507126e5c7d42a8a2012e5d365ea4d0"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/delete-channels-overview.resolver.spec.ts",
+        "integrity": "sha1:02209e68ba6a16f9dd31169943e60bdc6be5f40a"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/delete-channels-overview.resolver.ts",
+        "integrity": "sha1:3ab7971645876df1af9fd250bbb67d0df1f9af37"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/find-channel-overview-by-id.resolver.spec.ts",
+        "integrity": "sha1:1dcdce9aac9aabb698d7c112d740967920e138aa"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/find-channel-overview-by-id.resolver.ts",
+        "integrity": "sha1:618f8074f663636686ec3fa1377c83919f84311e"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/find-channel-overview.resolver.spec.ts",
+        "integrity": "sha1:3a5ee69fc6b4a91e348b2bf11a35b1b19da59f4b"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/find-channel-overview.resolver.ts",
+        "integrity": "sha1:da97506418f6b553568e898a5072512d62ff36c9"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/get-channels-overview.resolver.spec.ts",
+        "integrity": "sha1:18c73bc5972a14ef9f5cfa3a1b374fb97d8673ba"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/get-channels-overview.resolver.ts",
+        "integrity": "sha1:051a2edd7807e882ec0ea2c23486f7a7cd7ce1c7"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/paginate-channels-overview.resolver.spec.ts",
+        "integrity": "sha1:3651c01df0a872f6ae4273e224651c849610d79b"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/paginate-channels-overview.resolver.ts",
+        "integrity": "sha1:b505738ebaaa03ba1e0fcb9ce8515542634a2d2c"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/update-channel-overview.resolver.spec.ts",
+        "integrity": "sha1:1796502e4d8d68b72ccfa6adf1f4056fdeb29b1e"
+    },
+    {
+        "path": "src/apps/bplus-it-sappi/channel-overview/resolvers/update-channel-overview.resolver.ts",
+        "integrity": "sha1:3674b05a615c183618a1baf79f45af016d6c26ee"
+    },
+    {
+        "path": "postman/bplus-it-sappi.channel-overview.postman.json",
+        "integrity": "sha1:e58b4caf592b30464acb63dd1d3c05d80275e079"
+    }
+]

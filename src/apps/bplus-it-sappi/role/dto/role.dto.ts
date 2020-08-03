@@ -6,7 +6,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'e3ffad00-ece6-433a-970c-be9c3fdd80f0'
+        example     : 'f6261375-4e4f-4d23-863c-31d056d49303'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '36b92846-24ba-40e2-9cf1-19c0a571f5bd'
+        example     : '58a8a3fd-0d64-4d0c-9afd-d87ee3374bbc'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'wkvy9s271doqn0hyvvjst60cfdeznewf6krclmp28acyupww91'
+        example     : '6h7mextuwz4ipbjt6xw467ottky8e2becprw7ympnf0yf3tueq'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'kir4unn2ltefrxgp4scorbemjmz50a6nlhi6wt30qq49p44hp7t8qqb41fv64g50mxmbezp69dgdelvvbz793w7g26a9nojk8588i3h1bvcrk5hx9t8z31htjnvu2kawni1okm0p897zaya3l8824ia9p2qm6lzvhq2jtqwspgs6kzm3c8kfcwyuqiynmu2jt3hdsg5qcm6qrxiwgcjcgl14wz7jl49wyjprxj1wfttxgg52w2xj9rlxaqv14bl'
+        example     : 'y6hrnbi23svjhw9j10d25kmxtqxp1yd9vxwbte2e8kuxzaqn5mef15l81w9ymd52bsgyqqriuhz982q57jjg1sx2pqr4xsayvl13djzf7pt9y7u5zfdled0shg8hkhly3si0cc79b17d91xsyln5cdzjquft0z0tstpau29e1kamq5q8a0p80esnhno5cztsc4m45pud7j3sfx62pja6byiox3p7e86bbtf4bxmr3qo8dc68pbh8rsl6pr7iqgz'
     })
     name: string;
     
@@ -42,7 +42,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-07-30 15:08:39'
+        example     : '2020-08-03 10:53:39'
     })
     createdAt: string;
     
@@ -51,7 +51,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-07-31 05:41:56'
+        example     : '2020-08-03 15:08:11'
     })
     updatedAt: string;
     
@@ -60,7 +60,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-07-30 19:26:18'
+        example     : '2020-08-03 06:12:34'
     })
     deletedAt: string;
     

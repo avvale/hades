@@ -6,7 +6,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '63e94615-5741-48f8-8632-fb55e367792f'
+        example     : '7d41aa45-7431-4e79-aadc-eb95aca1ea02'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'ba7aeb09-5232-4001-b6f0-10c0d1c492b1'
+        example     : 'a649482b-1ca5-45dc-99d1-8690b37f148b'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'z5r2ta4p6lojj3i9nxx1qjmgvkg4wqbgwsh2mn0nozig8u3tz5'
+        example     : '0obzk8kwoqyokmftxxxshaz1q4jki6nqr2afrx08q2ena4hwbs'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '52f4eaa8-2be9-4460-9fd6-cc50c9a18b6d'
+        example     : 'c54583b2-fec0-451f-a242-d0b420eb0e08'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : '24jpu7la1gn6fcs8kvom'
+        example     : 'l04x93bgfvgplee9v0xe'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '8c80c82b-c12f-4e1e-b5e6-9eeb23a16783'
+        example     : 'd0d02e01-04a9-4e55-9204-79480e083c31'
     })
     executionId: string;
     
@@ -70,7 +70,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-07-31 09:50:13'
+        example     : '2020-08-03 06:53:28'
     })
     executionExecutedAt: string;
     
@@ -79,7 +79,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-07-31 03:56:18'
+        example     : '2020-08-03 02:02:53'
     })
     executionMonitoringStartAt: string;
     
@@ -88,7 +88,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-07-31 08:15:44'
+        example     : '2020-08-03 12:12:58'
     })
     executionMonitoringEndAt: string;
     
@@ -97,7 +97,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'status [input here api field description]',
-        example     : 'CANCELLED',
+        example     : 'COMPLETED',
         enum        : ['CANCELLED','COMPLETED','ERROR']
     })
     status: string;
@@ -107,7 +107,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'stc3ta2hnha8m19w2ibfopqvbc3kgdnxcfydtvhjb7xlmu4krzvjqpufyqh86q2qakhr312hfwds43it4gqt7ugjgqluifufnmzz51ocevvz74d8ni9wj5kkvn5gfpunsp0f9g3zs9o5y3fvkftiwnfxlzyizj87r0w8vrofaholz2evn8cal6sdanch994ihrwqtvxjjut1zvrhb0umcs93jqgtcuy42wsipzkwg23d2yop8dmo12znslmz46i'
+        example     : 's4wqh6mamtd5h3btw7u2hllvbwfsy3ssd1zoxbjyzaydxszf4nr2z9sm1jldvx4j4h1mt2t4lyilcyccvzmpurvteyo31bg4zz256yyou6s6iozqocqb4xzvjg8b9bbb0fy4t0moqb1gz0o6xim9clsirwk3lawi0sg0ay6bmmsni2jkeojvmxjyw193lksvufefkfzyq409k1eo8b30esg3194zuoqjq6jl6453p6qi9lmiu4nzz4rpo7w0pjh'
     })
     name: string;
     
@@ -116,7 +116,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : Number,
         description : 'returnCode [input here api field description]',
-        example     : 6089120948
+        example     : 6357325549
     })
     returnCode: number;
     
@@ -125,7 +125,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'node [input here api field description]',
-        example     : 'cu2qoiuw3gm6u0aeuiqlqfmq0y67s83p8y6fkehx54t1x9gr4nuip989ib89bqh9nmx4lmtc2ayzlsivt1iptjx5eqv11aumsrnve30dsvlgwuenb9rbo8lkzfytc3n3ganyd35u9jgl239e4tkoqv4exyw9m8rg'
+        example     : 'qh4rrbvyw1qpwxkt0m9nfytcvb6wr4ba9g33gebas1c1cjuw261n2cbh6h1g1jsot2uwh6mtt38tcjyt41uhepatmuo3kzjeu0ksz9udxoy11caj3i9bw3j7s4j3k9w9und5l3dsi4ji2dz4pkrmhe6srg4tcwu9'
     })
     node: string;
     
@@ -134,7 +134,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'user [input here api field description]',
-        example     : 'ajq0aucsgggi089vppwyru6wo0c8g2n0oo9dqk7hve5j7qb1fsp3o8zfxtfn502r4pv1cojjyh8klicz44pjs5cqm6f0vz6imxprr0u45wq146m44yejtlx8d8yw777cmhxsug6356rgj2nkkcsg092xsjmga0kckn5sm86j6hfb0yqb5f3b68vlcthdi9zgnwb8mrd9bqrnwfjgz8yrocldrq7alkpw0k2ccbriqqi4ovufcajbfjag0hg8oxl'
+        example     : 'ml6b8jd2b61fj9zongwd69vw9y2gncoalgc0ixw2zfrlztayztoepla3m57lbat3jo3hl63ih5f9pucc5f8iph78ifmw3rnqpv05zfjle50teityu4z65rpuwr357e4ifymhiks0h737c9fbgw50tl2z0knwys9voco3a2q209grg11ev0yv6ie4ar8uelm6kpdf338eu9dlb93djixzrji690sqct8si7dim83zk1vqaqyxwy5z34113svkm6l'
     })
     user: string;
     
@@ -143,7 +143,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'startAt [input here api field description]',
-        example     : '2020-07-31 06:50:50'
+        example     : '2020-08-02 23:09:47'
     })
     startAt: string;
     
@@ -152,7 +152,7 @@ export class UpdateJobDetailDto
     @ApiProperty({
         type        : String,
         description : 'endAt [input here api field description]',
-        example     : '2020-07-30 22:13:48'
+        example     : '2020-08-02 18:39:36'
     })
     endAt: string;
     
