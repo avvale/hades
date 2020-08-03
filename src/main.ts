@@ -23,6 +23,8 @@ async function bootstrap()
     app.use(json({ limit: environmentService.get<string>('APP_LIMIT_REQUEST_SIZE') }));
     app.use(urlencoded({ extended: true, limit: environmentService.get<string>('APP_LIMIT_REQUEST_SIZE') }));
     app.useLogger(loggerService);
+
+    process.env.TZ = environmentService.get<string>('APP_TIMEZONE');
     
     await app.listen(environmentService.get<number>('APP_PORT'));
 }
