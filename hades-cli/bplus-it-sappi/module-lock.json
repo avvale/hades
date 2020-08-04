@@ -1,0 +1,529 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/create/create-module.command-handler.ts",
+            "integrity": "sha1:d4aa8f39b0b0c0dc2912a374383ca2b8309a706f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/create/create-module.command.handler.spec.ts",
+            "integrity": "sha1:d829bdd29475570c76f6c2fa78a025507734839e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/create/create-module.command.ts",
+            "integrity": "sha1:349e38abf39cccfdabda9534669b33fd5ff721c3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/create/create-module.service.spec.ts",
+            "integrity": "sha1:ab4f6bb309f0e050d77473a42b2e8a7f5a2eca6a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/create/create-module.service.ts",
+            "integrity": "sha1:6cd9c1bcff80fe121aeaa9e3e5456c093bb12438"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/create/create-modules.command-handler.ts",
+            "integrity": "sha1:8cece036095ed4500f65c19450bc7876fb5bfb56"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/create/create-modules.command.handler.spec.ts",
+            "integrity": "sha1:01d921d46608c247d05a8acaef3aa3152f427d98"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/create/create-modules.command.ts",
+            "integrity": "sha1:5a86eca5c3afd6a4c068fedf459705d26e67fa61"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/create/create-modules.service.spec.ts",
+            "integrity": "sha1:09a6395d8d23351842f633bb57a767c601e4610e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/create/create-modules.service.ts",
+            "integrity": "sha1:af5bc3b4f075a7d7b244748d6254c53fd1c721e1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/delete/delete-module-by-id.command-handler.ts",
+            "integrity": "sha1:9870eeb04c780436daca9849b1a7eeecc45c19c8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/delete/delete-module-by-id.command.handler.spec.ts",
+            "integrity": "sha1:80034f57df4c7f5341330b8dd735ec60436f4c71"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/delete/delete-module-by-id.command.ts",
+            "integrity": "sha1:35285279615b23a4e2695bb6799877f46f6ea314"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/delete/delete-module-by-id.service.spec.ts",
+            "integrity": "sha1:8b7d8f3607723c97b59ae7be56755cde65003749"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/delete/delete-module-by-id.service.ts",
+            "integrity": "sha1:45c5916a4ff95a9f7c597f663b573ea6b04ba0cb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/delete/delete-modules.command-handler.ts",
+            "integrity": "sha1:295435cab9aecd72e6acc4c6bed3a091634f17e5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/delete/delete-modules.command.handler.spec.ts",
+            "integrity": "sha1:0bf424c4032b3670b2279681846078072247e520"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/delete/delete-modules.command.ts",
+            "integrity": "sha1:3b5e6a8d462c2996b4421524d6e2db729284c65b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/delete/delete-modules.service.spec.ts",
+            "integrity": "sha1:c860de6739d2791ab303bc3f8bcc8525e0f0b6ff"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/delete/delete-modules.service.ts",
+            "integrity": "sha1:ffc994da95ecdb02e147863338c11b9f9cdf1373"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/add-modules-context.event.ts",
+            "integrity": "sha1:3e2263d7fc67e2b5c12267084158f6e57cbf7321"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/created-module.event-handler.ts",
+            "integrity": "sha1:0371ece39577568541b56050e299d5132f04de85"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/created-module.event.ts",
+            "integrity": "sha1:f203bf0778099d099f63d1aee45891b8aca2e9dc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/created-modules.event-handler.ts",
+            "integrity": "sha1:aa65f7f17516ad7e6294eba91d858de0d42ddad1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/created-modules.event.ts",
+            "integrity": "sha1:ef7d0d664abce2ff28b96400799480dad421a03b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/deleted-module.event-handler.ts",
+            "integrity": "sha1:1aa402c0d3b29d45b5a7832dfb166851e913029f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/deleted-module.event.ts",
+            "integrity": "sha1:bbeaafdfa88856121d5075516386d83798b5926b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/deleted-modules.event-handler.ts",
+            "integrity": "sha1:025af24377654ed8e1ef3f868dfccdd6b76e65a3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/deleted-modules.event.ts",
+            "integrity": "sha1:4fcaae8c80fbd3a40d5f0bde73d2e545bfd9ddab"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/updated-module.event-handler.ts",
+            "integrity": "sha1:879c88327064a3bd61e557532cb32268c587ac5e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/events/updated-module.event.ts",
+            "integrity": "sha1:789a0fee49be0d002b4f18dc18989dcd6e036b95"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/find/find-module-by-id.query-handler.ts",
+            "integrity": "sha1:31951375ff14b5d40929e986de5b0569ae37e020"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/find/find-module-by-id.query.handler.spec.ts",
+            "integrity": "sha1:edefe6a360e1fe12f6064323bfda9b5c133cf88c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/find/find-module-by-id.query.ts",
+            "integrity": "sha1:c91539180dad0526e66ae2668f0ca1f17647f51b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/find/find-module-by-id.service.spec.ts",
+            "integrity": "sha1:19062b4a5bbc0cd0c770a3c6ac01b9624db98abd"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/find/find-module-by-id.service.ts",
+            "integrity": "sha1:696d90a4b6729847a2b9f6900f7dde9e6b6e5f77"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/find/find-module.query-handler.ts",
+            "integrity": "sha1:2e659719d7f6d0dac81fa555e1e85d0dba59089c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/find/find-module.query.handler.spec.ts",
+            "integrity": "sha1:0aa0a25f25cde634e10e8f674ce0667bc882cd52"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/find/find-module.query.ts",
+            "integrity": "sha1:686416a5ca71b774f9b2dfd61b68e73cac4aab4c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/find/find-module.service.spec.ts",
+            "integrity": "sha1:f9c20196a31b4d66099374caffe16c1b907ef2cb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/find/find-module.service.ts",
+            "integrity": "sha1:02bd305ea81042b12c61f9cfcd0935f8d2815d08"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/get/get-modules.query-handler.ts",
+            "integrity": "sha1:b69a813b3748ca75c6ea79d0034eedd6332f181c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/get/get-modules.query.handler.spec.ts",
+            "integrity": "sha1:5dddc9c8eb2ebb75ac1b121fcfc4cad991455c11"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/get/get-modules.query.ts",
+            "integrity": "sha1:ed2f23e1f6801940ead635a0f51b6169e7725732"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/get/get-modules.service.spec.ts",
+            "integrity": "sha1:6c0e510676b2c8bb0d19e9a9449d7082120b983a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/get/get-modules.service.ts",
+            "integrity": "sha1:532aebfc7dea0347d77ea44a6be7a7149a961d05"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/paginate/paginate-modules.query-handler.ts",
+            "integrity": "sha1:2fe06e4c7d98749e09bd7033b52562547a585fdc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/paginate/paginate-modules.query.handler.spec.ts",
+            "integrity": "sha1:c5a54a072882d949be2e9d2841fbb17c460e9dd8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/paginate/paginate-modules.query.ts",
+            "integrity": "sha1:935f8f00f48699ecaf2b5546116c45faf1aea0d7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/paginate/paginate-modules.service.spec.ts",
+            "integrity": "sha1:35043466a315b8676939f483c6edc53d2dd62343"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/paginate/paginate-modules.service.ts",
+            "integrity": "sha1:590158cb110e5bbc55710a962b1a243065eb5e64"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/sagas/module.sagas.ts",
+            "integrity": "sha1:c02ee19cf71467029c176329ba8708d604a2759d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/update/update-module.command-handler.ts",
+            "integrity": "sha1:06fc11a6e34b6318f4a38339c3d25f99d9546a64"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/update/update-module.command.handler.spec.ts",
+            "integrity": "sha1:cb1a34fe43d25a435a651d8281a597092f665e7c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/update/update-module.command.ts",
+            "integrity": "sha1:2d18f37710241e5f816863b1963d923fa6710651"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/update/update-module.service.spec.ts",
+            "integrity": "sha1:a027ee4ff531a4eb762a49eed64eb1c845951503"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/application/update/update-module.service.ts",
+            "integrity": "sha1:7edabc7321697b680088caf12925b21436e59153"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/module.aggregate.ts",
+            "integrity": "sha1:d7c50947487800782143d3c85ed07fc04dccd6b7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/module.mapper.ts",
+            "integrity": "sha1:9dd4e6ca8b8c0bb309e006c8a6be6f5addf6eef1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/module.repository.ts",
+            "integrity": "sha1:da23b7e6fc317ba048ba767fe79e8b2434cad334"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/module.response.ts",
+            "integrity": "sha1:9bd6a090d296fccfede48a6cf73eb01c979fdc5c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/index.ts",
+            "integrity": "sha1:70fa50f4951e9606c5384704ded4c2230906177c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/index.ts",
+            "integrity": "sha1:92b814dfcf22b66d0d54f0b6428e6a9f52f0b7b4"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/infrastructure/mock/mock-module.repository.ts",
+            "integrity": "sha1:c50429c90ae9734df91fbb25d2c49a521f8f097e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/infrastructure/seeds/module.seed.ts",
+            "integrity": "sha1:4f6e35cd917473db69b13b8adebe6bae9e19b646"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/infrastructure/sequelize/sequelize-module.model.ts",
+            "integrity": "sha1:60a9070674b6f0fe970ac28c94cf500425e00664"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/infrastructure/sequelize/sequelize-module.repository.ts",
+            "integrity": "sha1:a510f9c3e8f671913e0e92a3cab72bf4a43f656a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-id.ts",
+            "integrity": "sha1:f285d4b912991f02f7083e67b8e477a58994228b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-tenant-id.ts",
+            "integrity": "sha1:3c75299bbda60adff4e2dbbe51ab78f0a8f9063d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-tenant-code.ts",
+            "integrity": "sha1:4f3398585b41ccbbe84aba547916525299da92df"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-system-id.ts",
+            "integrity": "sha1:a79c0176ecbdc9c59eb1ed4f05b1b0037073526e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-system-name.ts",
+            "integrity": "sha1:4de352cf72ce9fc845d274a09e39e9ad696d6e38"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-channel-id.ts",
+            "integrity": "sha1:40b202a614ad4aa13c5bc889b9e1605db0419abb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-channel-party.ts",
+            "integrity": "sha1:35830f65c4b16ca55c770f9b03ea57fa8d37d16a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-channel-component.ts",
+            "integrity": "sha1:5e9127905e019c35c9cf3cf6727cdc79d6cdbd7f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-channel-name.ts",
+            "integrity": "sha1:4360526302e7369d017d834610a4852495fca123"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-flow-hash.ts",
+            "integrity": "sha1:11df53076ca42d33fbd07f75752e484fd73daa26"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-flow-party.ts",
+            "integrity": "sha1:0edb1c7eeb640c790c78764301496909a535a910"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-flow-component.ts",
+            "integrity": "sha1:e19816f07937479a28f2f5e4b30092b4fcd8c393"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-flow-interface-name.ts",
+            "integrity": "sha1:17b745e0cbf4ddf1aaf6fc9564bba65ecb892b5b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-flow-interface-namespace.ts",
+            "integrity": "sha1:a6b6603a4b726ef9bbb3b39284dfcead9bb0352d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-version.ts",
+            "integrity": "sha1:25a780973f064b34e6437914c7502e8e0a86cd49"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-parameter-group.ts",
+            "integrity": "sha1:b99144a96696e8926d9bef4694125ab61822366c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-name.ts",
+            "integrity": "sha1:0d5660556f465e1e40a31f3f77d423619a9f34ce"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-parameter-name.ts",
+            "integrity": "sha1:ef2e02511e2f7807e207c950c23535cac17c015f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-parameter-value.ts",
+            "integrity": "sha1:c91f5085a20a03403259288196ae033ac28ed35d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-created-at.ts",
+            "integrity": "sha1:6f1dcab49f42b29e16a46e90538c0aece77f321a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-updated-at.ts",
+            "integrity": "sha1:8c5db7ec7a9fa5d63290e8af883619509b613def"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-deleted-at.ts",
+            "integrity": "sha1:64b692cda8c67545589742748091a13d727f2597"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/create-module.controller.spec.ts",
+            "integrity": "sha1:f2ddfa1623862f5cc2cbe8489eed4fbe53dfe23a"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/create-module.controller.ts",
+            "integrity": "sha1:fccb451860ab6ebe03596802847a0247c84cb983"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/create-modules.controller.spec.ts",
+            "integrity": "sha1:01d141657d385f8b5b72a2b18767f9dbe1f1b66d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/create-modules.controller.ts",
+            "integrity": "sha1:6b1691e733ddd761603c2728785db3160737e183"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/delete-module-by-id.controller.spec.ts",
+            "integrity": "sha1:49454fe870811962e05e78891d8d3bea8912e647"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/delete-module-by-id.controller.ts",
+            "integrity": "sha1:3f7fd62dd724d51abfc05ae7c00f43c433e930c1"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/delete-modules.controller.spec.ts",
+            "integrity": "sha1:6e99fe1db7214b0359763f8f3f886779730a2442"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/delete-modules.controller.ts",
+            "integrity": "sha1:440efb0984016c79ac5539040a42179495ab1262"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/find-module-by-id.controller.spec.ts",
+            "integrity": "sha1:9e60528c9968ec59090903e5c99a2db79d6608c4"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/find-module-by-id.controller.ts",
+            "integrity": "sha1:d01a7693cc1d4cd3f5579b61d8fd35963c754dd0"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/find-module.controller.spec.ts",
+            "integrity": "sha1:11e218b749044d4c2f4cf40f22ace481378c1268"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/find-module.controller.ts",
+            "integrity": "sha1:8586e2c506b130a07aa394de18b726843dcc682a"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/get-modules.controller.spec.ts",
+            "integrity": "sha1:e6b9e91d6a62f1aed99233a9b9870b10b8ccaf8d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/get-modules.controller.ts",
+            "integrity": "sha1:0d6475e1f33f379862f3ccb073126709d011055c"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/paginate-modules.controller.spec.ts",
+            "integrity": "sha1:da41f813164438c7c47c41bb90a3198de94ea152"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/paginate-modules.controller.ts",
+            "integrity": "sha1:7c2f495215b69d0df69b3902f31028bc40956d1e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/update-module.controller.spec.ts",
+            "integrity": "sha1:fb04e6ea3f3f8a120edb9f07c83f8d51bc86fb07"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/controllers/update-module.controller.ts",
+            "integrity": "sha1:eb47664ecd403ec851a841c9c7f960612e20b616"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/dto/module.dto.ts",
+            "integrity": "sha1:122c8ff0af1b476ceebe5160c9bf1b903df30b28"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/dto/create-module.dto.ts",
+            "integrity": "sha1:1996fe32723532365a7db12e520ad460ef567550"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/dto/update-module.dto.ts",
+            "integrity": "sha1:8d0e5e5975b28843295a0a1d7922c5f09355af77"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/graphql/module.graphql",
+            "integrity": "sha1:028f33abb632e45fc6c7e3c0ca5af5c96fd9dea8"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/index.ts",
+            "integrity": "sha1:82777238a559a02a9f0544f5f0d27764c5c7131e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/create-module.resolver.spec.ts",
+            "integrity": "sha1:f77556444866189b026fc0f84c60fcd06bd70539"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/create-module.resolver.ts",
+            "integrity": "sha1:1263b2829e53e164a6975041d8612dbba4ce5f3d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/create-modules.resolver.spec.ts",
+            "integrity": "sha1:f05b69c0b6d65fa4377a9978829af4b0c4d30ac2"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/create-modules.resolver.ts",
+            "integrity": "sha1:617a793c185dcd02ed0023bffb4b0f3f041b8cf3"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/delete-module-by-id.resolver.spec.ts",
+            "integrity": "sha1:5403a87b4249c1e9587d04ea8210eb73f551f1da"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/delete-module-by-id.resolver.ts",
+            "integrity": "sha1:b90ce0628368ad7f637df127597f0aa285eb2729"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/delete-modules.resolver.spec.ts",
+            "integrity": "sha1:3c30598a5b80edcc488f4a38c063c830a5ff6cd2"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/delete-modules.resolver.ts",
+            "integrity": "sha1:f588259c01931928c81f0ae2b147ea2ab3d154e2"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/find-module-by-id.resolver.spec.ts",
+            "integrity": "sha1:628d8ddfaa56d162dbf42c54f2c28bdf5d580350"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/find-module-by-id.resolver.ts",
+            "integrity": "sha1:ce5dcd1df4346ef3ef6958c537d82537f418aed3"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/find-module.resolver.spec.ts",
+            "integrity": "sha1:f8287c2a26beba83b33517da78de8975d7ffa653"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/find-module.resolver.ts",
+            "integrity": "sha1:63e76d2698e14c3b5ab134d9b543526c3f7f5118"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/get-modules.resolver.spec.ts",
+            "integrity": "sha1:2f313d674a4918ba72501c828a7f0cf2ad993651"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/get-modules.resolver.ts",
+            "integrity": "sha1:1ab8fb9bedb0e52142b3917340ff3d55c6ac661e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/paginate-modules.resolver.spec.ts",
+            "integrity": "sha1:02fe675e96d546b44b988bd5b7e0c631424d1e1f"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/paginate-modules.resolver.ts",
+            "integrity": "sha1:b3316f20e8691d5f19f081b6b07e497f9d5e19da"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/update-module.resolver.spec.ts",
+            "integrity": "sha1:5bb947d3a13e8485c46a59cd1169afb797267f89"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/module/resolvers/update-module.resolver.ts",
+            "integrity": "sha1:6474fda9a1547891f6a65d0d5d3e3a26dfee173f"
+        },
+        {
+            "path": "postman/bplus-it-sappi.module.postman.json",
+            "integrity": "sha1:6749a4e30f810f721aa2293935a0e83573d27aee"
+        }
+    ]
+}

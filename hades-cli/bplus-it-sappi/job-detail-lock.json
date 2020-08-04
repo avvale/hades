@@ -1,0 +1,521 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/create/create-job-detail.command-handler.ts",
+            "integrity": "sha1:2fe328fb9e01cd416525fbf5cf13d8809b789b9c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/create/create-job-detail.command.handler.spec.ts",
+            "integrity": "sha1:f08ed091979c89b7d03f561038e730cf977e46e8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/create/create-job-detail.command.ts",
+            "integrity": "sha1:9060f8f81c4c298db69dc9eb51448da08dd491d0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/create/create-job-detail.service.spec.ts",
+            "integrity": "sha1:f8350e64f1c0e5134fb0c9c0a943471e9c8dc0d3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/create/create-job-detail.service.ts",
+            "integrity": "sha1:27f2c0f88a96d37761034c513202b1a25309821f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/create/create-jobs-detail.command-handler.ts",
+            "integrity": "sha1:ced62f21151acc84986c459f19d450d653be9547"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/create/create-jobs-detail.command.handler.spec.ts",
+            "integrity": "sha1:c164010c0bac1ed1780a5f547806bed6eb3d1880"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/create/create-jobs-detail.command.ts",
+            "integrity": "sha1:b8da0018b82b5e0e9c5fc59d4abe34a319da73b7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/create/create-jobs-detail.service.spec.ts",
+            "integrity": "sha1:d5d003d43ca3de09ccc3b4281ac4e123a0da3927"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/create/create-jobs-detail.service.ts",
+            "integrity": "sha1:ddf23829da1fe4df24497abdee9eaafc0f739adc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/delete/delete-job-detail-by-id.command-handler.ts",
+            "integrity": "sha1:4fa55d1d7c5d74dd02df253ec76a500e4f16d58d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/delete/delete-job-detail-by-id.command.handler.spec.ts",
+            "integrity": "sha1:a203578baa965fa28250fa547e1c06c6fcdee53e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/delete/delete-job-detail-by-id.command.ts",
+            "integrity": "sha1:d529f17d0571052f3eded6c9a78b80cf0100a02b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/delete/delete-job-detail-by-id.service.spec.ts",
+            "integrity": "sha1:486c16cfa2b5e879fa5758ccad3f24740ed0b5f0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/delete/delete-job-detail-by-id.service.ts",
+            "integrity": "sha1:b2f93593ef3d8a90f27f23ee500c0917e54d9419"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/delete/delete-jobs-detail.command-handler.ts",
+            "integrity": "sha1:4ef5942daf1d5ba0a4f47dac18c0759e057680b4"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/delete/delete-jobs-detail.command.handler.spec.ts",
+            "integrity": "sha1:4913d895ccd872576ee0ea7a965d987883bbe50b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/delete/delete-jobs-detail.command.ts",
+            "integrity": "sha1:81214edd7fae0ccfee8c4d172e391f0f80110e7b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/delete/delete-jobs-detail.service.spec.ts",
+            "integrity": "sha1:f9aabf33afa253f8a80bc95319cc6f0306451246"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/delete/delete-jobs-detail.service.ts",
+            "integrity": "sha1:c66070e310978e4b37f6429bb9142288d545174d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/add-jobs-detail-context.event.ts",
+            "integrity": "sha1:602a7a3a4d785e0ad5574f84dc1dd1a9ca341939"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/created-job-detail.event-handler.ts",
+            "integrity": "sha1:85bfeebb8586d1fc9b657837491bab744d07fde1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/created-job-detail.event.ts",
+            "integrity": "sha1:c03c392176328bed843d24c438e6b55377529f38"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/created-jobs-detail.event-handler.ts",
+            "integrity": "sha1:05c2b6fa9fab5e1fe5a043933c901b19361ce4a7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/created-jobs-detail.event.ts",
+            "integrity": "sha1:666f3dfab846c9b505086b0fdfd19d893ea846fc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/deleted-job-detail.event-handler.ts",
+            "integrity": "sha1:f5e99b2d149f5d38a1ae079577450a6e8fd9c796"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/deleted-job-detail.event.ts",
+            "integrity": "sha1:9d243843b1fcaad17f50451e6768d5b17f37e823"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/deleted-jobs-detail.event-handler.ts",
+            "integrity": "sha1:b52f9e6b1c35f02d10f157a16eaf805c28fcb091"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/deleted-jobs-detail.event.ts",
+            "integrity": "sha1:1eee8dbc8a010d3a732432d94725c16480971c06"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/updated-job-detail.event-handler.ts",
+            "integrity": "sha1:6723f2e51d02a9fa974aa746c83b01a4086428d5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/events/updated-job-detail.event.ts",
+            "integrity": "sha1:69f3359b298e10560f34e0e661fc08f84c27e59f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/find/find-job-detail-by-id.query-handler.ts",
+            "integrity": "sha1:29837cca3eceaa8c5fe6e37d13c10579571ad5c4"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/find/find-job-detail-by-id.query.handler.spec.ts",
+            "integrity": "sha1:38c5eae6a1592eaecf81227227073d1ca984e3ff"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/find/find-job-detail-by-id.query.ts",
+            "integrity": "sha1:adab4e10c7be65bbfac528914cf59cb832d2ea6c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/find/find-job-detail-by-id.service.spec.ts",
+            "integrity": "sha1:e40c4b649e1a08b12327625bdbcba6899cf10db6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/find/find-job-detail-by-id.service.ts",
+            "integrity": "sha1:26366ee413a7297372f2e8e98b76db312195dcea"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/find/find-job-detail.query-handler.ts",
+            "integrity": "sha1:a54fb375a7bf21f14e0ca7654dbc68055f7010a9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/find/find-job-detail.query.handler.spec.ts",
+            "integrity": "sha1:e51e0a66f01caf340ef38a18414a61cf4d4bc84b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/find/find-job-detail.query.ts",
+            "integrity": "sha1:96a3ea34fe119aedc799d188e3cfa585e88bb0c5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/find/find-job-detail.service.spec.ts",
+            "integrity": "sha1:915e6e484ff79013ad281c85bb5b2e25bcfb69c7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/find/find-job-detail.service.ts",
+            "integrity": "sha1:d9fc1b78b4e0d6aadab15f640a763131cca9ff8a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/get/get-jobs-detail.query-handler.ts",
+            "integrity": "sha1:4840944b03f569db639540443411ae33c4957cdf"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/get/get-jobs-detail.query.handler.spec.ts",
+            "integrity": "sha1:1e41a85cc5158124dae3f5a9adf911f2d89b4416"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/get/get-jobs-detail.query.ts",
+            "integrity": "sha1:86d8f4260314a3a796acdc9a5d0109e161c6526d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/get/get-jobs-detail.service.spec.ts",
+            "integrity": "sha1:57cbc4c0b65a9689b50136ac09c00a8f423e35c1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/get/get-jobs-detail.service.ts",
+            "integrity": "sha1:cb689c37747c3cc750fdafe4fec5ff4f91aaad32"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/paginate/paginate-jobs-detail.query-handler.ts",
+            "integrity": "sha1:44be82b80526cf3ef21bb0df171794d9049761c4"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/paginate/paginate-jobs-detail.query.handler.spec.ts",
+            "integrity": "sha1:29803e896390f9c9798266a822ab69abac2d7204"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/paginate/paginate-jobs-detail.query.ts",
+            "integrity": "sha1:53f758802f626006981d562ceb80bd73f0154221"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/paginate/paginate-jobs-detail.service.spec.ts",
+            "integrity": "sha1:4f16c0d54ffdba56c378083909e535eb439dea6d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/paginate/paginate-jobs-detail.service.ts",
+            "integrity": "sha1:e90c237ca2fdb963f7852928790977a5fdb2005e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/sagas/job-detail.sagas.ts",
+            "integrity": "sha1:c3bf434d238063e7a8b07d04b853ed57e99c7fa2"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/update/update-job-detail.command-handler.ts",
+            "integrity": "sha1:91327f8fedeb3e90e75537ad58a125eefa3a85df"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/update/update-job-detail.command.handler.spec.ts",
+            "integrity": "sha1:6a8235b5b6be495ca74f88ff695f8a49dd209bef"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/update/update-job-detail.command.ts",
+            "integrity": "sha1:b3de58ab4adc6398cb9ab2b006774752276ce159"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/update/update-job-detail.service.spec.ts",
+            "integrity": "sha1:9de4971ff3fc84c72186aed6dc4c762dff30dfce"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/application/update/update-job-detail.service.ts",
+            "integrity": "sha1:1287111a9cf54f41b6e4ceed16d1202f576f0690"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/job-detail.aggregate.ts",
+            "integrity": "sha1:107fa3bda26f0dc4f17d873a28c15962e4c8d248"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/job-detail.mapper.ts",
+            "integrity": "sha1:63e8440fa100f3e8f12c87b7f70439ebe97b05a6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/job-detail.repository.ts",
+            "integrity": "sha1:cfddbf0e3f572cfa392885901c0845ca2b66e4b7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/job-detail.response.ts",
+            "integrity": "sha1:457065f700a046c88c2b6a92fb57c177e1da0040"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/index.ts",
+            "integrity": "sha1:978daff2d57900ba62dc15043aaa53034e7bbefb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/index.ts",
+            "integrity": "sha1:d46419ebb5881b4b78db3755a53d1c798f3238b0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/infrastructure/mock/mock-job-detail.repository.ts",
+            "integrity": "sha1:dd54a2c8f095402a2a18bf6e8f984ff619eebfd5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/infrastructure/seeds/job-detail.seed.ts",
+            "integrity": "sha1:cfbfabb71490cc269e8f91b31bbc7a56f4ad1b94"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/infrastructure/sequelize/sequelize-job-detail.model.ts",
+            "integrity": "sha1:479d051f52df121204267bc5371618f9046a21d6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/infrastructure/sequelize/sequelize-job-detail.repository.ts",
+            "integrity": "sha1:ad04633bb199d8e6c9d91b773153426b988caafe"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-id.ts",
+            "integrity": "sha1:fa2d8a0579f3de15578d526ceca7d281d6f26991"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-tenant-id.ts",
+            "integrity": "sha1:0172b6baeb3676710f224650c243c8c7d8fd5120"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-tenant-code.ts",
+            "integrity": "sha1:bdc7029e519795e9a1e0ef0ae7999835e7422563"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-system-id.ts",
+            "integrity": "sha1:dfd07aacd81568db11932e7a62c8aad49e03c0df"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-system-name.ts",
+            "integrity": "sha1:55e4d73a542346def6e2b482d8d9601c3072cfc4"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-execution-id.ts",
+            "integrity": "sha1:a635ba3a31d20adf4cc8b1dd8c75970cc883c25c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-execution-type.ts",
+            "integrity": "sha1:805ae3afc4f07e3fc235fddaa6b7209e538bb658"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-execution-executed-at.ts",
+            "integrity": "sha1:df64e6f8996cb223e3ed13998c20c56b68d68583"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-execution-monitoring-start-at.ts",
+            "integrity": "sha1:954b092b4aafecfd249fa6027702fecf463973a3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-execution-monitoring-end-at.ts",
+            "integrity": "sha1:67e3a1faa9c96c7b342da4bf7ac40835d75717ad"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-status.ts",
+            "integrity": "sha1:e981129a3701668162755f0d1360cfc8747ae87b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-name.ts",
+            "integrity": "sha1:6b96e8b6a1177fc3924c46c8a150b6b4b5c64910"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-return-code.ts",
+            "integrity": "sha1:247f7ae3e1b493009589740a705af7d2346c0962"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-node.ts",
+            "integrity": "sha1:570492c1504a5b065d53b6de8c1310b708d4e092"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-user.ts",
+            "integrity": "sha1:da6f7dac41ad0177da0e7eb124c6671a3dbf4860"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-start-at.ts",
+            "integrity": "sha1:68eca014838c748c79ea246f93b72f749c69cd20"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-end-at.ts",
+            "integrity": "sha1:688ad90597a8a80b07c4f6cb17aba642e5382420"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-created-at.ts",
+            "integrity": "sha1:fb80a980fa2b673695bbc0b174924faef53a927b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-updated-at.ts",
+            "integrity": "sha1:47d924985f95da4116b3bdfb963de728514a2bdd"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/job-detail/domain/value-objects/job-detail-deleted-at.ts",
+            "integrity": "sha1:8f8aad0d17526c5849e02ecfdd6586bfe4e3c949"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/create-job-detail.controller.spec.ts",
+            "integrity": "sha1:7146f13f6a25d131dc14b465c1453ab38812185f"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/create-job-detail.controller.ts",
+            "integrity": "sha1:6d66cdfbd5674ee80774e2ecffdb27dce43a2c5d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/create-jobs-detail.controller.spec.ts",
+            "integrity": "sha1:fc92b1d51122d20002bc308751f773a567b240c2"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/create-jobs-detail.controller.ts",
+            "integrity": "sha1:a16e6bfb398577275e97756d10d139f70347e1b1"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/delete-job-detail-by-id.controller.spec.ts",
+            "integrity": "sha1:b05f9bff4950b726c3b648c195bde103455d6969"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/delete-job-detail-by-id.controller.ts",
+            "integrity": "sha1:42688fbb9f784d4b7bad572bbca2e4093fa6cceb"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/delete-jobs-detail.controller.spec.ts",
+            "integrity": "sha1:b1b0c30d969df92a0f484f19e43e2f7faba472f6"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/delete-jobs-detail.controller.ts",
+            "integrity": "sha1:02abc4de1528ab2514c1406625f68678237acf29"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/find-job-detail-by-id.controller.spec.ts",
+            "integrity": "sha1:b071e97afe714f0e4b1896b9979c4c6ae799ab5b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/find-job-detail-by-id.controller.ts",
+            "integrity": "sha1:cd79abe7985bd92ed216c184b891eb1703cfed50"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/find-job-detail.controller.spec.ts",
+            "integrity": "sha1:93ab551f3876c86816012ae8f6e7e049f1bc8bed"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/find-job-detail.controller.ts",
+            "integrity": "sha1:18c46e2ca0420a532c34be1c47a853bc1bcfdb16"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/get-jobs-detail.controller.spec.ts",
+            "integrity": "sha1:e7f23b0e72b46d67651771168b529bf52e205265"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/get-jobs-detail.controller.ts",
+            "integrity": "sha1:0acac08afd2ddc164729187a6ae3616f3223c474"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/paginate-jobs-detail.controller.spec.ts",
+            "integrity": "sha1:8d149c1a76095daca72505ab05bde33c3a5d6a74"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/paginate-jobs-detail.controller.ts",
+            "integrity": "sha1:e879fe377879e819e6f454f4bf76139c58938099"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/update-job-detail.controller.spec.ts",
+            "integrity": "sha1:5b313c38f608ad2b5c304ef0b4ceea84e995045b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/controllers/update-job-detail.controller.ts",
+            "integrity": "sha1:3f477c5cb7b4f6ea90a83a4d590d4cd9d9198c25"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/dto/job-detail.dto.ts",
+            "integrity": "sha1:7bf7845c8a84f56217041b293812d02bfa387eb9"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/dto/create-job-detail.dto.ts",
+            "integrity": "sha1:f83d56db5eedf44df4c8136f01167d9820c4aa8e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/dto/update-job-detail.dto.ts",
+            "integrity": "sha1:52cb37cc76e86055130c8025ffc96978b666c503"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/graphql/job-detail.graphql",
+            "integrity": "sha1:9256f256d5138f7a991ecd4d192dacbb0f799fe1"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/index.ts",
+            "integrity": "sha1:dc094c011d864553fc32a46dc7ce2f384ce5b223"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/create-job-detail.resolver.spec.ts",
+            "integrity": "sha1:e0d38b4603aff52fd27b651d19398b0be58aef19"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/create-job-detail.resolver.ts",
+            "integrity": "sha1:00a012debcaabf3d199b2bd7832f19cded9ff442"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/create-jobs-detail.resolver.spec.ts",
+            "integrity": "sha1:60a0d4f15896d7ef797a51fbd9f252ca42eeb074"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/create-jobs-detail.resolver.ts",
+            "integrity": "sha1:b5d752e8834a2535335e9b35e5cac4d3fccb4295"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/delete-job-detail-by-id.resolver.spec.ts",
+            "integrity": "sha1:d5d23eb6c60b2cf9bc1154a582b25966997ef8f3"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/delete-job-detail-by-id.resolver.ts",
+            "integrity": "sha1:82cc9c6bb76a9332a60c2f8a6d9d9e7d69719509"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/delete-jobs-detail.resolver.spec.ts",
+            "integrity": "sha1:3b2564547437e2f6c8df532d720a1af769a2b5cb"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/delete-jobs-detail.resolver.ts",
+            "integrity": "sha1:2084f693c14186f6c50f9f20fca032a27ef0e9c1"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/find-job-detail-by-id.resolver.spec.ts",
+            "integrity": "sha1:e453352d3b910616a2e9b408e17dea4cc9983b19"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/find-job-detail-by-id.resolver.ts",
+            "integrity": "sha1:ed3824a2fdca09d661544aca56518e80a83ce9b8"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/find-job-detail.resolver.spec.ts",
+            "integrity": "sha1:997feb4c06bfcac23caf276a0c6ec35ffa70737b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/find-job-detail.resolver.ts",
+            "integrity": "sha1:fe75e3e3226372da83f1de7b988890c70f9d0a86"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/get-jobs-detail.resolver.spec.ts",
+            "integrity": "sha1:925ad368f8ddcc2b612a3edbcca5f225477d4bba"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/get-jobs-detail.resolver.ts",
+            "integrity": "sha1:8b6bbaef6276a832dd3ecb0bc74803a013bf2f42"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/paginate-jobs-detail.resolver.spec.ts",
+            "integrity": "sha1:7d0e60b01d6f85c1fa80ce907261c701529acb1a"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/paginate-jobs-detail.resolver.ts",
+            "integrity": "sha1:1043e7f8b2302368550a178a525fcd5250d220e4"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/update-job-detail.resolver.spec.ts",
+            "integrity": "sha1:44b5005fb0f978f80ee43a019cf0aee463baefcb"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/job-detail/resolvers/update-job-detail.resolver.ts",
+            "integrity": "sha1:60e77f52760aba4ffab448019eb40f48f8b46bfa"
+        },
+        {
+            "path": "postman/bplus-it-sappi.job-detail.postman.json",
+            "integrity": "sha1:5c5f2ca95b98bf2500d0b584f042442fae5a35ed"
+        }
+    ]
+}

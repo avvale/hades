@@ -1,0 +1,589 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/create/create-message-detail.command-handler.ts",
+            "integrity": "sha1:74c34b2a68401e74e831673f6a671fc297ac6008"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/create/create-message-detail.command.handler.spec.ts",
+            "integrity": "sha1:5300e3eadf85412897639bac45f9040de5f68c00"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/create/create-message-detail.command.ts",
+            "integrity": "sha1:47f59e20b9576f5f8aafd2f18abf54474d30c0d0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/create/create-message-detail.service.spec.ts",
+            "integrity": "sha1:3cf4749ce91904470a12fa8c4fb869406e054658"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/create/create-message-detail.service.ts",
+            "integrity": "sha1:686faefa29295da9ca9ade909fcf7bf89c1b1390"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/create/create-messages-detail.command-handler.ts",
+            "integrity": "sha1:d2af072a145e3b2b9e74969ff23b02deefe71056"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/create/create-messages-detail.command.handler.spec.ts",
+            "integrity": "sha1:9f410dca6235aa952e464ca51c0fa23635119fd1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/create/create-messages-detail.command.ts",
+            "integrity": "sha1:4b3a8ddc75b329011af3f38e11042e823f04263a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/create/create-messages-detail.service.spec.ts",
+            "integrity": "sha1:59c153e5ab3c93911406f945963880a81ee5d1a1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/create/create-messages-detail.service.ts",
+            "integrity": "sha1:f9602efbfe7fa3618ec191746c508375353adf71"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/delete/delete-message-detail-by-id.command-handler.ts",
+            "integrity": "sha1:90e78f8a0e4e3c7b6690bb77c09643ad5b143612"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/delete/delete-message-detail-by-id.command.handler.spec.ts",
+            "integrity": "sha1:f054c5bf5b904f405e000b7d2874382b2eb2a85a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/delete/delete-message-detail-by-id.command.ts",
+            "integrity": "sha1:e6173d08f067a1e8bf2c1f3d8ce9eced9ee14a06"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/delete/delete-message-detail-by-id.service.spec.ts",
+            "integrity": "sha1:717689cf360f60c96472b989e9c71d189984c4da"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/delete/delete-message-detail-by-id.service.ts",
+            "integrity": "sha1:81ceb57ff452558c70f7e521a9854b52f0cad3e8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/delete/delete-messages-detail.command-handler.ts",
+            "integrity": "sha1:87490fb0718c6d89c5637d1872f471e96c0b221d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/delete/delete-messages-detail.command.handler.spec.ts",
+            "integrity": "sha1:63ae6a139b4838d2fd6163fd836b451648eb97e6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/delete/delete-messages-detail.command.ts",
+            "integrity": "sha1:f8721c6d15b9e2a25b94b85b6b907d6669cb8c7b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/delete/delete-messages-detail.service.spec.ts",
+            "integrity": "sha1:abab0ee2d4d1a29f3336e304aad685a0ebf264f9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/delete/delete-messages-detail.service.ts",
+            "integrity": "sha1:8862509b5f73951efd9d3b46c2af3364ba577350"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/add-messages-detail-context.event.ts",
+            "integrity": "sha1:9aa8df643f6e50c705494221b4d2dda322d2eb32"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/created-message-detail.event-handler.ts",
+            "integrity": "sha1:a424ac2ce54e47fb638ac0966e671ce27bd53c5e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/created-message-detail.event.ts",
+            "integrity": "sha1:05b7844e1709c1237e89995514c0e29964de93dd"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/created-messages-detail.event-handler.ts",
+            "integrity": "sha1:d62a5f28fcfee1d3314cc29e13986a4439bb8168"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/created-messages-detail.event.ts",
+            "integrity": "sha1:813cd3d17e70e22f398515f5e1912e0369e2828e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/deleted-message-detail.event-handler.ts",
+            "integrity": "sha1:777e1f84c181b074d6feb5c3cdd81b7b55d03f71"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/deleted-message-detail.event.ts",
+            "integrity": "sha1:1a08fe99db45d5976c886a6a0a8a39d03d2428e7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/deleted-messages-detail.event-handler.ts",
+            "integrity": "sha1:1db133de4be0c3f4d82a15911a5215c8fb84a5c2"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/deleted-messages-detail.event.ts",
+            "integrity": "sha1:b08d58cc5b8e827d1f7ac073e6a99f723da222f7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/updated-message-detail.event-handler.ts",
+            "integrity": "sha1:415f3555467b770413e66aedb747c650b2ae76b7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/events/updated-message-detail.event.ts",
+            "integrity": "sha1:526280c3f20dfb043999c09f20e92f84053355ba"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/find/find-message-detail-by-id.query-handler.ts",
+            "integrity": "sha1:697650a46d490eda460ea8038d8b9093a96f06f6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/find/find-message-detail-by-id.query.handler.spec.ts",
+            "integrity": "sha1:cb0b436876d8ce613b01b222ae49d505e3c21317"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/find/find-message-detail-by-id.query.ts",
+            "integrity": "sha1:ccad52387d42cb47bdcc9faab5dfb02a3e378e28"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/find/find-message-detail-by-id.service.spec.ts",
+            "integrity": "sha1:9e3efb5cc9315352096007667d9609d61859b07e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/find/find-message-detail-by-id.service.ts",
+            "integrity": "sha1:87a27ffb2364b44684ae3b697f3a97ee73d48ac9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/find/find-message-detail.query-handler.ts",
+            "integrity": "sha1:b6920d1183caf25bd39234d39a7998188f733b0d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/find/find-message-detail.query.handler.spec.ts",
+            "integrity": "sha1:1f58c7a75d4c6127274e6492fbb518b78a824380"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/find/find-message-detail.query.ts",
+            "integrity": "sha1:73ef303965dedcef4e9917e0f18d15230036c30e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/find/find-message-detail.service.spec.ts",
+            "integrity": "sha1:07e31a2fb2aa7be0da69afa1d348303b21f4c681"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/find/find-message-detail.service.ts",
+            "integrity": "sha1:ccc301518b2da8eb15654f3a77bf0d9356e37258"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/get/get-messages-detail.query-handler.ts",
+            "integrity": "sha1:88a8abdfc040719751b7c44d79755c977bfe85d0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/get/get-messages-detail.query.handler.spec.ts",
+            "integrity": "sha1:56beb12508e100bf68ca5c493ee16a1f99a08f47"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/get/get-messages-detail.query.ts",
+            "integrity": "sha1:413b9ad615a3a1f736c27d5c17845daf7131a57b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/get/get-messages-detail.service.spec.ts",
+            "integrity": "sha1:f714f2e824be451068d14414f1f670cd02137bfa"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/get/get-messages-detail.service.ts",
+            "integrity": "sha1:db9632fa44a49b66c52b6df7d6025446c29db277"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/paginate/paginate-messages-detail.query-handler.ts",
+            "integrity": "sha1:6f93c185ef48c859a620154af0b91f29b03d705a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/paginate/paginate-messages-detail.query.handler.spec.ts",
+            "integrity": "sha1:298f8921b61d969f7b2cde067a4e4bfda527b9b1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/paginate/paginate-messages-detail.query.ts",
+            "integrity": "sha1:fcbfba0b43a7c79c675bf26c0253bb903129fcb9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/paginate/paginate-messages-detail.service.spec.ts",
+            "integrity": "sha1:100743f19f402cdd3212813bdbc71d728bb359d5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/paginate/paginate-messages-detail.service.ts",
+            "integrity": "sha1:0ca34d91d7432dc6cc8b71cec2b190aad71ae825"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/sagas/message-detail.sagas.ts",
+            "integrity": "sha1:22d8ecd7a5f316fb24de8548e8128a59c063430d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/update/update-message-detail.command-handler.ts",
+            "integrity": "sha1:03bb5c57217d43cf8686dec495449f4dc19aa74a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/update/update-message-detail.command.handler.spec.ts",
+            "integrity": "sha1:db87b3a36a18993282eee453730150fab37678cd"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/update/update-message-detail.command.ts",
+            "integrity": "sha1:b934672fa6db47765ed188ac49613abdcf78162d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/update/update-message-detail.service.spec.ts",
+            "integrity": "sha1:fdfc7b820b496daf48152d7afa1e7e34f773b2b8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/application/update/update-message-detail.service.ts",
+            "integrity": "sha1:8ae39a984436c1992051e2c0a2e9d898add2255c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/message-detail.aggregate.ts",
+            "integrity": "sha1:d9098c7fc92a15d1b7095f4e12cdb1a0885c1df0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/message-detail.mapper.ts",
+            "integrity": "sha1:bdce8edc6246ff2ef698a599578cc3fd93673727"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/message-detail.repository.ts",
+            "integrity": "sha1:df0d037fb31a0b1a6129de8bb2a2da419607ccac"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/message-detail.response.ts",
+            "integrity": "sha1:36b20ce6b56b219092577274f27ceb8d0d713498"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/index.ts",
+            "integrity": "sha1:e94d3b45e6393e870b2224509ac7179f8fa70e3e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/index.ts",
+            "integrity": "sha1:1a7e4a824b48865fda62aa2f974ca1f23aff5493"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/infrastructure/mock/mock-message-detail.repository.ts",
+            "integrity": "sha1:20f95a112c189cc2b2a81b723467cc774c689377"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/infrastructure/seeds/message-detail.seed.ts",
+            "integrity": "sha1:f07b9513e454ed4820160b35c0e50395da38af6b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/infrastructure/sequelize/sequelize-message-detail.model.ts",
+            "integrity": "sha1:d6fc304ee3056580c14d62496a207562a89f63a7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/infrastructure/sequelize/sequelize-message-detail.repository.ts",
+            "integrity": "sha1:a310aaae5d57a6173d08f9c47a92cfaddef9c1b9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-id.ts",
+            "integrity": "sha1:ec0be6293b708b5db732e83a1425f6b38c0b496b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-tenant-id.ts",
+            "integrity": "sha1:2b6c8a126d93314a6bb5a84b288a78727cda0159"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-tenant-code.ts",
+            "integrity": "sha1:a25dd8132f31f9a0b9d3256e331705d0faa3d40e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-system-id.ts",
+            "integrity": "sha1:9c92763f55d286a22f87535c239b98fe7d451353"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-system-name.ts",
+            "integrity": "sha1:77152291b64c35c06687cc8562a5b210edbb0ed6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-scenario.ts",
+            "integrity": "sha1:3b0c16a1ff7114eff68c6a9ef69f462fafc127f0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-execution-id.ts",
+            "integrity": "sha1:154472ead75ec57f347cd421d679afef053bf396"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-execution-type.ts",
+            "integrity": "sha1:8e77d69a823c73578a2bf670400269e360fbcda8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-execution-executed-at.ts",
+            "integrity": "sha1:c4e271898bc810e87fc23a15b4c9f0daed0c95f7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-execution-monitoring-start-at.ts",
+            "integrity": "sha1:af348110bf2df92ac764ba42b4f23b73dcf37507"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-execution-monitoring-end-at.ts",
+            "integrity": "sha1:343a1d2d0f1a63a11d2f418ecab10ad2a16d6d0d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-flow-hash.ts",
+            "integrity": "sha1:c834336bd9544127a92f36b81d628421c38c4e44"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-flow-party.ts",
+            "integrity": "sha1:0e35143c3187507c03ee81d3e701e2a704fed98f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-flow-component.ts",
+            "integrity": "sha1:6ca2f52568733a199ba0b7fdda742d3d5a12ca44"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-flow-interface-name.ts",
+            "integrity": "sha1:3306d53116b8d94a98f3ff75a7d0f6214577c309"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-flow-interface-namespace.ts",
+            "integrity": "sha1:72328c9cb72090f3ef4f6afb8e82b2daedf5c9bc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-status.ts",
+            "integrity": "sha1:00ec417602bb9057d923efba5885f0f8c8d2b52b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-detail.ts",
+            "integrity": "sha1:bdeea8af2c4c5ddb3850a5a108a42f334dfb1af1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-example.ts",
+            "integrity": "sha1:91c725095a4875516846ea84d6829d97f7270e36"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-start-time-at.ts",
+            "integrity": "sha1:6ced5d76886d1ad96e8d19e2ca00d7e78620ae5d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-direction.ts",
+            "integrity": "sha1:2dc31d9227ad0dc2cb0834520fe4504cdab1af25"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-error-category.ts",
+            "integrity": "sha1:aae793e7ec2ba2723b37401937469e9a1d4052f8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-error-code.ts",
+            "integrity": "sha1:bdf3e6d14cfe56ec7c23e37f2d46f081c212a87b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-error-label.ts",
+            "integrity": "sha1:0f86564dd24ee78dedbfe569a1a71925e3d68756"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-node.ts",
+            "integrity": "sha1:752d80c87ad2ab2b9af141bff850f4a9f1e29b50"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-protocol.ts",
+            "integrity": "sha1:7943ab30e8df408843ec8c99a487dcdcc855e1ac"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-quality-of-service.ts",
+            "integrity": "sha1:0070f4057dd5c3b2dab451693dad2cda73cce845"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-receiver-party.ts",
+            "integrity": "sha1:76f8ae8681b5b15935b06fdb6d8905713dc3e490"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-receiver-component.ts",
+            "integrity": "sha1:7e739a7661f3df02d9c4b0740c67075ce16797f5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-receiver-interface.ts",
+            "integrity": "sha1:38f058d104d853a7b65b8f3d0ccbfdb01cd38d4b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-receiver-interface-namespace.ts",
+            "integrity": "sha1:9eaf657a7043d39fe1f12ff0168736bc392384f2"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-retries.ts",
+            "integrity": "sha1:46a4ab784957fd1b218451abe430eae1e8d9ae12"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-size.ts",
+            "integrity": "sha1:6a8cbf01f79397abb8bf9630772df1218aa80bc0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-times-failed.ts",
+            "integrity": "sha1:2ae130bac77d3831e7395d6f4acc489b83f802fb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-created-at.ts",
+            "integrity": "sha1:d14bcf1331335af23575193bdaf6afd76c9952f0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-updated-at.ts",
+            "integrity": "sha1:111a1a9f5e6edefd6f046bf4b1b27fbfb59c5fbc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/message-detail/domain/value-objects/message-detail-deleted-at.ts",
+            "integrity": "sha1:ffa3aadca943835ed371dc5bcc5d9d8493d2096e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/create-message-detail.controller.spec.ts",
+            "integrity": "sha1:622f089a5c419ef91c108fd939ec7e7fabc28d64"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/create-message-detail.controller.ts",
+            "integrity": "sha1:75c33681e89c06a36858e6339bfb3569b83efcd3"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/create-messages-detail.controller.spec.ts",
+            "integrity": "sha1:77db5a16b763e5b9e9128092599966c07c2241fc"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/create-messages-detail.controller.ts",
+            "integrity": "sha1:32c85a9c157c5e384b5caf36122870992ad26964"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/delete-message-detail-by-id.controller.spec.ts",
+            "integrity": "sha1:dd66ca80caf01da734006c8371dd5052ec55d932"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/delete-message-detail-by-id.controller.ts",
+            "integrity": "sha1:137a568b7ef099e859cbdffca58d3934629129fc"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/delete-messages-detail.controller.spec.ts",
+            "integrity": "sha1:9215d216941a8273be7828f17db90ad411aee1ab"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/delete-messages-detail.controller.ts",
+            "integrity": "sha1:ac5d0d87cc0244b201e168e891472d264cfa8f57"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/find-message-detail-by-id.controller.spec.ts",
+            "integrity": "sha1:140e3609ff9e1eb5c974284509c8aab8ac6f2788"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/find-message-detail-by-id.controller.ts",
+            "integrity": "sha1:16aaef934e6a7bbd2a8cbd647daf4051b74e0f9b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/find-message-detail.controller.spec.ts",
+            "integrity": "sha1:2db8db7b1efdf0f418e3b5a46e9ae1e7835b9d9e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/find-message-detail.controller.ts",
+            "integrity": "sha1:9c6cb3958b78222c467c1bd536ae43cffae3e6b5"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/get-messages-detail.controller.spec.ts",
+            "integrity": "sha1:b0d396fc2241a5d41b7a038c0bd160d940586e5c"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/get-messages-detail.controller.ts",
+            "integrity": "sha1:af487938f7df17bb8774d08b14e4e107e7138ed1"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/paginate-messages-detail.controller.spec.ts",
+            "integrity": "sha1:a7abdb2c6e1d9375b872d6ff7c8405123835608c"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/paginate-messages-detail.controller.ts",
+            "integrity": "sha1:1a08d504fd3028667d4da29a57e096b089180833"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/update-message-detail.controller.spec.ts",
+            "integrity": "sha1:ec16c27ce683463d3efd4184ff59f6d67a894994"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/controllers/update-message-detail.controller.ts",
+            "integrity": "sha1:7ea14298d43ee89cb221cac3e650a918f1a2041c"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/dto/message-detail.dto.ts",
+            "integrity": "sha1:c7f969697f72734f5abfff98910927d3a2404d66"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/dto/create-message-detail.dto.ts",
+            "integrity": "sha1:d972e7dc17b8f0bda2e57458abab6d6883f2eee0"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/dto/update-message-detail.dto.ts",
+            "integrity": "sha1:838a6e7938a85484ecefdf83c8544628a8139472"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/graphql/message-detail.graphql",
+            "integrity": "sha1:095ddcab4e81e16f369c583b15d32be6ae00c2ed"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/index.ts",
+            "integrity": "sha1:392232739fed7b39153202d730cee6fbe727be35"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/create-message-detail.resolver.spec.ts",
+            "integrity": "sha1:bcad86914dc580d6b57e1374933846deaec5ff5b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/create-message-detail.resolver.ts",
+            "integrity": "sha1:6026930a379a9f370da027e42bdf8fc1faf4621b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/create-messages-detail.resolver.spec.ts",
+            "integrity": "sha1:56ebbe21c0b8ce8e9f692a8c7532b75e1f06bbb6"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/create-messages-detail.resolver.ts",
+            "integrity": "sha1:da6129410e8c6d27b22ea29935a4c117e248df3d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/delete-message-detail-by-id.resolver.spec.ts",
+            "integrity": "sha1:a7c6a616f009e488cd75e063744200845279f6dd"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/delete-message-detail-by-id.resolver.ts",
+            "integrity": "sha1:1d3bc1bea5bfcda9c2cb9f30b1a7e37991f97ff2"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/delete-messages-detail.resolver.spec.ts",
+            "integrity": "sha1:3ed571767a0b31043c772bd4114ffbfdb0885bd8"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/delete-messages-detail.resolver.ts",
+            "integrity": "sha1:716aa79394e5344c9cf8cbed3dd7cad21c13a11d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/find-message-detail-by-id.resolver.spec.ts",
+            "integrity": "sha1:00bc1e57228544964abb457b4aa10fc21290e7f4"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/find-message-detail-by-id.resolver.ts",
+            "integrity": "sha1:1c254981b38b57e726c3b5053e6a3ac6a598a9e7"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/find-message-detail.resolver.spec.ts",
+            "integrity": "sha1:c1c829aeeb398293cef0afe020686c96e2ae0bd1"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/find-message-detail.resolver.ts",
+            "integrity": "sha1:fc75276ba1087ad4bc1e1b776120fdb7d489d57e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/get-messages-detail.resolver.spec.ts",
+            "integrity": "sha1:2923fa0215393d866efdf9c92894e1a24bc78559"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/get-messages-detail.resolver.ts",
+            "integrity": "sha1:713de21b899cdedab429a3f17e93b051abd65c7f"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/paginate-messages-detail.resolver.spec.ts",
+            "integrity": "sha1:2a12e578d394f441df3896b826e9b0ad5555fd48"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/paginate-messages-detail.resolver.ts",
+            "integrity": "sha1:e311ae5d855f97c1ab71cd2f066aaba669b84ad8"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/update-message-detail.resolver.spec.ts",
+            "integrity": "sha1:2b0276d8f567b3884f4f71366f854416679ab037"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/message-detail/resolvers/update-message-detail.resolver.ts",
+            "integrity": "sha1:91e4465e4ebc471781acfd9ee9784c50541499e5"
+        },
+        {
+            "path": "postman/bplus-it-sappi.message-detail.postman.json",
+            "integrity": "sha1:579b7b7203bb90d3c22697465fdc1cc8efe77efe"
+        }
+    ]
+}

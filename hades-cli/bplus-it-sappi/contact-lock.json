@@ -1,0 +1,513 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/create/create-contact.command-handler.ts",
+            "integrity": "sha1:6f65578d353585a6b0ec69d50e2f5d3d0f3da5b3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/create/create-contact.command.handler.spec.ts",
+            "integrity": "sha1:70c678fa8e949a259916fe067eac1a2f0c87ed9e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/create/create-contact.command.ts",
+            "integrity": "sha1:6f0bc7ab4ba14142832c2c326620bd0ed66827db"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/create/create-contact.service.spec.ts",
+            "integrity": "sha1:397d4c0881eba3f590eac0f652a2d9e84e8d1131"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/create/create-contact.service.ts",
+            "integrity": "sha1:cdf1c49d7cf526b36a411111f3d669e04b3bfeee"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/create/create-contacts.command-handler.ts",
+            "integrity": "sha1:4f2365c6c061e7f2debbd3caff5a4b7305b43337"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/create/create-contacts.command.handler.spec.ts",
+            "integrity": "sha1:b6a8fa79c27c3a1c6e129085da0f05e0bafe986e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/create/create-contacts.command.ts",
+            "integrity": "sha1:95d24a0e141e77bfc9f3ec2e27a4d666934980e2"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/create/create-contacts.service.spec.ts",
+            "integrity": "sha1:414b3e537caa2179fcc277fd670a688ec8010586"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/create/create-contacts.service.ts",
+            "integrity": "sha1:9b75d14fe2f8f8fc97e8571adc90e0db5797fb04"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/delete/delete-contact-by-id.command-handler.ts",
+            "integrity": "sha1:dbe9fcceec36bb119032851a9a24468819c1d902"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/delete/delete-contact-by-id.command.handler.spec.ts",
+            "integrity": "sha1:d11ea223381ae5e99833e5169d74a36b396e610d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/delete/delete-contact-by-id.command.ts",
+            "integrity": "sha1:60a4f4bf4fb36dd12924ef5c17733288ec501b0d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/delete/delete-contact-by-id.service.spec.ts",
+            "integrity": "sha1:3af104d9e77c63970ba3cdc7448fcb964cf98694"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/delete/delete-contact-by-id.service.ts",
+            "integrity": "sha1:a19ee13ad2dedfa1264a7fecaef026a2779b6f1c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/delete/delete-contacts.command-handler.ts",
+            "integrity": "sha1:c9fbf05f499025998e421e93f2a031b99044cbaa"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/delete/delete-contacts.command.handler.spec.ts",
+            "integrity": "sha1:84643bdbc51163abfe27911b828c8bc40230f5fa"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/delete/delete-contacts.command.ts",
+            "integrity": "sha1:d1ec9f97765ae879a2d76d51083a95eb6a3e938d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/delete/delete-contacts.service.spec.ts",
+            "integrity": "sha1:c6086a4318774e45802408901a582711c37f38a8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/delete/delete-contacts.service.ts",
+            "integrity": "sha1:abecb66daecd256db60a8bbdc1b04e2c4cc437ad"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/add-contacts-context.event.ts",
+            "integrity": "sha1:a1b5d29b90d75316095e2c40539a4b1406962d76"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/created-contact.event-handler.ts",
+            "integrity": "sha1:3157170a605608c77c17dbd05f068e1754fcec76"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/created-contact.event.ts",
+            "integrity": "sha1:16639a136ec2e5da7ad4e2e3e562321f0c8c1840"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/created-contacts.event-handler.ts",
+            "integrity": "sha1:7a7520c03ca1434ed668c7bfba40d1f126141278"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/created-contacts.event.ts",
+            "integrity": "sha1:0a32272dc8c75c42565d97767f28395ef06903fb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/deleted-contact.event-handler.ts",
+            "integrity": "sha1:1860bd65c2dfe1022eb408f473de3ffab52d76fd"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/deleted-contact.event.ts",
+            "integrity": "sha1:a38649f394a1aad81871fbc141f4401dbdf929d5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/deleted-contacts.event-handler.ts",
+            "integrity": "sha1:d75ca508f9dae2324ca1f08ccaad0ab9ef1b7903"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/deleted-contacts.event.ts",
+            "integrity": "sha1:71f88c54e63a5d69a6763fd9263dd8c401b880cb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/updated-contact.event-handler.ts",
+            "integrity": "sha1:42e41a29e226e8ac825eb3232093c07e907597aa"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/events/updated-contact.event.ts",
+            "integrity": "sha1:77dc64da694d8e165716e55af342c67a06268569"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/find/find-contact-by-id.query-handler.ts",
+            "integrity": "sha1:4c07594576807c56b049e77203be82f39891a260"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/find/find-contact-by-id.query.handler.spec.ts",
+            "integrity": "sha1:b6e5c3d2101eb6d12db679a5f81185f37935063c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/find/find-contact-by-id.query.ts",
+            "integrity": "sha1:b3bf5a053c340cc601759540bcc3d308d6556d3f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/find/find-contact-by-id.service.spec.ts",
+            "integrity": "sha1:5a749d581fc71682c0d4c0bd28bd3c9f90fd18dc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/find/find-contact-by-id.service.ts",
+            "integrity": "sha1:37a4d5c87e7ed5c0009499b79efea7ebd06b175f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/find/find-contact.query-handler.ts",
+            "integrity": "sha1:fd9784342fa8f9b8aef5759984b318c93c1c36d0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/find/find-contact.query.handler.spec.ts",
+            "integrity": "sha1:db698b237d0ffc350cc55481a8da2a7ecaf6752c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/find/find-contact.query.ts",
+            "integrity": "sha1:e3098d2436da221d52f3d49e2382a6ac2acd31b2"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/find/find-contact.service.spec.ts",
+            "integrity": "sha1:cef8cec2eb99998585a46451cbee23476fd15559"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/find/find-contact.service.ts",
+            "integrity": "sha1:b0680a4a49bdc921aca811076028def9d242a868"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/get/get-contacts.query-handler.ts",
+            "integrity": "sha1:52612acd24551bcaad917b9d28d789e0120f456c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/get/get-contacts.query.handler.spec.ts",
+            "integrity": "sha1:b5d62afab1d8f5838fff91ffbf3795a578a411ec"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/get/get-contacts.query.ts",
+            "integrity": "sha1:6207adf7360eb928962de3e0bd238f30192ee1e5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/get/get-contacts.service.spec.ts",
+            "integrity": "sha1:88ceb2a44e445c509a799f3a38c72b92dc2337a8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/get/get-contacts.service.ts",
+            "integrity": "sha1:a8ca74bdfe01d9aff6f58c11df921ad9064ea44f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/paginate/paginate-contacts.query-handler.ts",
+            "integrity": "sha1:e47e5664747ba4a04d19bddc1fd6af16a62de3a4"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/paginate/paginate-contacts.query.handler.spec.ts",
+            "integrity": "sha1:5dad998817f60c20ce16cef8ec70743b5ce0b2c5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/paginate/paginate-contacts.query.ts",
+            "integrity": "sha1:0ccc8917eeecb42aac0f994f4c4ba3a83ae1a712"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/paginate/paginate-contacts.service.spec.ts",
+            "integrity": "sha1:f1efff9186c461808b3df85589301beca4e9168b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/paginate/paginate-contacts.service.ts",
+            "integrity": "sha1:ab1cb592791a278f9016e5917bc20866339793fa"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/sagas/contact.sagas.ts",
+            "integrity": "sha1:f7022935153bc7aec9d326354913d545b3a9be55"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/update/update-contact.command-handler.ts",
+            "integrity": "sha1:be3f680da19630b9b7f1533ff14e994bd6819398"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/update/update-contact.command.handler.spec.ts",
+            "integrity": "sha1:75edc20ceb5acd9488a3f454dd88bc8fd48c8ad8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/update/update-contact.command.ts",
+            "integrity": "sha1:477e28f2fabd488f93b623483486ca524f284050"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/update/update-contact.service.spec.ts",
+            "integrity": "sha1:d835d2d08f003f0c6986779cc3fa7942b5a5c791"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/application/update/update-contact.service.ts",
+            "integrity": "sha1:3a8b1eb44cb5b6b1c91d5e1ea8610f200829abf3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/contact.aggregate.ts",
+            "integrity": "sha1:5b0ea7cc48a6ff2cf7aeaca9b28092bc204f3d62"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/contact.mapper.ts",
+            "integrity": "sha1:9f85fb3285df35cf21c90757c29b43ce12e005b1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/contact.repository.ts",
+            "integrity": "sha1:35a923ee9394b5c105b64a398153e2bbefa962d3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/contact.response.ts",
+            "integrity": "sha1:7c831033a9ff2b1021d441e7f9ced1e2d124da34"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/index.ts",
+            "integrity": "sha1:00853d63ad8ed9d86c4a5506aad3578fd4afd39b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/index.ts",
+            "integrity": "sha1:410a8b7f547dd72d9528a7e4abf20e27fefef5e2"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/infrastructure/mock/mock-contact.repository.ts",
+            "integrity": "sha1:2ab7d9c592af5c76b85026376cb5b232865bc6cb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/infrastructure/seeds/contact.seed.ts",
+            "integrity": "sha1:f804b0d63de43951163912ac4998c2e9d38e1082"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/infrastructure/sequelize/sequelize-contact.model.ts",
+            "integrity": "sha1:524c8a277e841666422a03a54136f11fac22c3fd"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/infrastructure/sequelize/sequelize-contact.repository.ts",
+            "integrity": "sha1:e4426396b814d46b9dbffac21baa04d7266fcddd"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-id.ts",
+            "integrity": "sha1:db68e584b9a38ead04623af60a8a5108995e648e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-tenant-id.ts",
+            "integrity": "sha1:e454ffaf7e6c321d09429b3700f1d4e019f2d63a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-tenant-code.ts",
+            "integrity": "sha1:469a380d6c16735ca6ec1c044d70f9ff093cac1c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-system-id.ts",
+            "integrity": "sha1:c3b47b4d8bfc59b550a2ca4321b70de28d78d619"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-system-name.ts",
+            "integrity": "sha1:1fd456fdd340ee527f960211b112c074e0c5cf76"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-role-id.ts",
+            "integrity": "sha1:d87968f725d0f7671c68c2556d0d247010aec99c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-role-name.ts",
+            "integrity": "sha1:72c6ee9ec97857fc0f847b6e3d121c4d688449fe"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-name.ts",
+            "integrity": "sha1:383b251c34992c95af85de35b3a28afd76af8d8b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-surname.ts",
+            "integrity": "sha1:aadc6e835669b8991115baaef17c7efb662d197c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-email.ts",
+            "integrity": "sha1:7a1f29f9ad0e89e6a602220481807589f65673d6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-mobile.ts",
+            "integrity": "sha1:fef27318fd7029293de49e341349611d0929a09c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-area.ts",
+            "integrity": "sha1:00083418b87280bcc90747ab78e2f5c438bccec9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-has-consent-email.ts",
+            "integrity": "sha1:690e5c41c4db5c8fcbba1753b63dbc30198c192e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-has-consent-mobile.ts",
+            "integrity": "sha1:8cd58d5f63fff108d5d67047dcb02c1a649f466a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-is-active.ts",
+            "integrity": "sha1:73dfe8e9f4a92e2fb3c100b9151505aaaa69e698"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-created-at.ts",
+            "integrity": "sha1:d98e59c8294ffef6e9885ebac59a30be44080656"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-updated-at.ts",
+            "integrity": "sha1:4fab0de87c3571b890f2636a1425baf270bd2a88"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/contact/domain/value-objects/contact-deleted-at.ts",
+            "integrity": "sha1:beb67e90315999ae6ddff50b7c36a2fe0d0d20fe"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/create-contact.controller.spec.ts",
+            "integrity": "sha1:c3907cf21e572bd7739a7d11bd592d411d6f9ec1"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/create-contact.controller.ts",
+            "integrity": "sha1:c8edb9eb84c0463f22b1366e01b68b4ab5694c78"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/create-contacts.controller.spec.ts",
+            "integrity": "sha1:0f746aad36c6d617f0ad4ca6894de906c0ba8f5e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/create-contacts.controller.ts",
+            "integrity": "sha1:f260071c73b6d16b5a32e5f1a420ad56ffced85e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/delete-contact-by-id.controller.spec.ts",
+            "integrity": "sha1:0840e59541e6d3f136b418e28f9964e84379a01d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/delete-contact-by-id.controller.ts",
+            "integrity": "sha1:f1703fc48049d74cc6ec105c2e4bff87428f8be7"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/delete-contacts.controller.spec.ts",
+            "integrity": "sha1:bcf53416a95eeb4f563d50f3d33fd11505a8d91c"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/delete-contacts.controller.ts",
+            "integrity": "sha1:e4379ba88d85ea72a29ee13fb08dc8894235c384"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/find-contact-by-id.controller.spec.ts",
+            "integrity": "sha1:d879d5d20ca44c54db47f76bf38741680a8ada01"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/find-contact-by-id.controller.ts",
+            "integrity": "sha1:28eac909240c897d9f6e6c69c1c564f7e7970d80"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/find-contact.controller.spec.ts",
+            "integrity": "sha1:517bea95b674045cd4d2b890cb8516b455567001"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/find-contact.controller.ts",
+            "integrity": "sha1:5cedc7f4a213f15edecc0f4cc27b7892a345dafa"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/get-contacts.controller.spec.ts",
+            "integrity": "sha1:0c6590a5027ff216ea3aeb3f08fc3cb21746a893"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/get-contacts.controller.ts",
+            "integrity": "sha1:0201f02c2b2da3e26bca48f2374902ca18832665"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/paginate-contacts.controller.spec.ts",
+            "integrity": "sha1:2a1565ce705c00b116bddc30fd82c52ba7035157"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/paginate-contacts.controller.ts",
+            "integrity": "sha1:b78806e1acf889c72b48b0d077a1cb105223b412"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/update-contact.controller.spec.ts",
+            "integrity": "sha1:72106c1ca0716805cfc45e58f6d5ad52ec9bc14d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/controllers/update-contact.controller.ts",
+            "integrity": "sha1:034b69925fa4eed69db9e810a4e9baea966534ca"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/dto/contact.dto.ts",
+            "integrity": "sha1:113e0101ec8fc44d83d47fc4fc1d5a9d5569fcac"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/dto/create-contact.dto.ts",
+            "integrity": "sha1:a73c0fc454a7932841f3bb0dfa12e314a7c95726"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/dto/update-contact.dto.ts",
+            "integrity": "sha1:860e8370ac63077076ca6318a804c07c574ac9a3"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/graphql/contact.graphql",
+            "integrity": "sha1:858faea9f34071b6a7b9d0cb9d6e65c1d22bb4ef"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/index.ts",
+            "integrity": "sha1:38170630cd2adb244d8200aea755da617b6fbc0f"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/create-contact.resolver.spec.ts",
+            "integrity": "sha1:df09518634b55f53ecb9ab43a0b56ad7b4ad24d0"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/create-contact.resolver.ts",
+            "integrity": "sha1:c2e09886fdc2dd844f61ccb320a64c19bc88c5ed"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/create-contacts.resolver.spec.ts",
+            "integrity": "sha1:35af0719ba4330cc7176444ba260e8d5102de354"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/create-contacts.resolver.ts",
+            "integrity": "sha1:6ce1522896ac5ebb63008930620e6e7636b2142a"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/delete-contact-by-id.resolver.spec.ts",
+            "integrity": "sha1:800f311bfbc0e45ecd05989776217d0559df512f"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/delete-contact-by-id.resolver.ts",
+            "integrity": "sha1:3e7711a392fa0b963a04b5d751447fa2890eaf28"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/delete-contacts.resolver.spec.ts",
+            "integrity": "sha1:0ccd53c0ead5a7d5f9add8f1e8d16740e9292231"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/delete-contacts.resolver.ts",
+            "integrity": "sha1:24d59be651b229e3d9747fc170ce25c7fbc4633e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/find-contact-by-id.resolver.spec.ts",
+            "integrity": "sha1:3ac98233f9d71186c922ce3c450f0f1f14443e8c"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/find-contact-by-id.resolver.ts",
+            "integrity": "sha1:d36c04d5a34122e1f1fd9a255916f5e5baa49f07"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/find-contact.resolver.spec.ts",
+            "integrity": "sha1:680d54277675abc2af8323bb350a5ff46c90150f"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/find-contact.resolver.ts",
+            "integrity": "sha1:4d2fc1fc43986c83a1f29fd45be292fea9e42a52"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/get-contacts.resolver.spec.ts",
+            "integrity": "sha1:9888f012d0f1135db3b4ff6a424ea5433547ce3a"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/get-contacts.resolver.ts",
+            "integrity": "sha1:ce440252cb93da48d94f6b400d3c6fb374b49930"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/paginate-contacts.resolver.spec.ts",
+            "integrity": "sha1:f61415c09c9a99dfb29941b7fce9bd449e77d0ba"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/paginate-contacts.resolver.ts",
+            "integrity": "sha1:fe290e4eb05633f115441b3d3f367e69840fe80f"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/update-contact.resolver.spec.ts",
+            "integrity": "sha1:08553127d1452b8c01205abaebe2b031401292db"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/contact/resolvers/update-contact.resolver.ts",
+            "integrity": "sha1:d6e94ca65141851f298f0612aa208aacf0c93946"
+        },
+        {
+            "path": "postman/bplus-it-sappi.contact.postman.json",
+            "integrity": "sha1:c34044c18ff0aaf3739c8e6b6f6674067554db07"
+        }
+    ]
+}

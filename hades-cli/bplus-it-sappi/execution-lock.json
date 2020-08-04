@@ -1,0 +1,493 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/create/create-execution.command-handler.ts",
+            "integrity": "sha1:dcafa9c70b2195a1b63e1b5db51086c7acdbd52a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/create/create-execution.command.handler.spec.ts",
+            "integrity": "sha1:40a22b93dc6be81054cd35c3a6ea52091cf7aef3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/create/create-execution.command.ts",
+            "integrity": "sha1:9f320dd2dd08c1c59176865c1624e72e95d66bec"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/create/create-execution.service.spec.ts",
+            "integrity": "sha1:607d975a09d8f232aa7e3b75b11515253af6d4eb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/create/create-execution.service.ts",
+            "integrity": "sha1:ae41ac56d0ae54ecdad108824833eec481c88108"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/create/create-executions.command-handler.ts",
+            "integrity": "sha1:f3c482ccdb95a339dc4ff0688e9896be7e0f4cb1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/create/create-executions.command.handler.spec.ts",
+            "integrity": "sha1:97328dc02218a6cd00200050b090390fe83cb9d0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/create/create-executions.command.ts",
+            "integrity": "sha1:7ea0c9cf74fe3d132bed2ba3e7da4ec52e8b7b4e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/create/create-executions.service.spec.ts",
+            "integrity": "sha1:b5d18aedecbdc80c084d94ebedf47269796b5cf7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/create/create-executions.service.ts",
+            "integrity": "sha1:8f273d449c4e559c4d5519955f306aac2d9cd5cb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/delete/delete-execution-by-id.command-handler.ts",
+            "integrity": "sha1:dc27907da01928ed502affd5466ef8204bf680b3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/delete/delete-execution-by-id.command.handler.spec.ts",
+            "integrity": "sha1:60f20bea5db509711c12d18b8411f75fd290d588"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/delete/delete-execution-by-id.command.ts",
+            "integrity": "sha1:72a0dd8295586b8cd844b1d00186ec0829ccb15d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/delete/delete-execution-by-id.service.spec.ts",
+            "integrity": "sha1:ddcb7a7fb57191a0468d08f3263c17393afd2523"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/delete/delete-execution-by-id.service.ts",
+            "integrity": "sha1:f04b9e62d6503efd254091a315fb46977bf7aa35"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/delete/delete-executions.command-handler.ts",
+            "integrity": "sha1:99d99a6caa04731a20e92033edc3c72f404ace85"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/delete/delete-executions.command.handler.spec.ts",
+            "integrity": "sha1:64977c76f21afb279f21d9cbc7e6c3eba085abb9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/delete/delete-executions.command.ts",
+            "integrity": "sha1:ac4853a5a11d6eaa322c62b715c381773261d794"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/delete/delete-executions.service.spec.ts",
+            "integrity": "sha1:32f4c87f0aff02cc2cceaa105f41535460967356"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/delete/delete-executions.service.ts",
+            "integrity": "sha1:694c919930f4955deb53714777535abf037b16d3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/add-executions-context.event.ts",
+            "integrity": "sha1:51e53190517bee955000f4ba635ae022729f2eff"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/created-execution.event-handler.ts",
+            "integrity": "sha1:2857a88372ef7c8f1be304ad31dfb2b4e5ea4f10"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/created-execution.event.ts",
+            "integrity": "sha1:7d71ec4c3fe88dba0b69ab94f7a079aa728bedc6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/created-executions.event-handler.ts",
+            "integrity": "sha1:5858667f8da607df214fb83fb78b72fad8ca0ff7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/created-executions.event.ts",
+            "integrity": "sha1:c055abbdf6fe01a940df5c48d1289ccee82b5d8b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/deleted-execution.event-handler.ts",
+            "integrity": "sha1:2cfed8fd601a9b75b27b38002495f4d59e042de3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/deleted-execution.event.ts",
+            "integrity": "sha1:1e1bb5431cde205d78dbf21d6930c4f67499a35a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/deleted-executions.event-handler.ts",
+            "integrity": "sha1:5e1b9f12a3732d3b612e2fbc74befc195a9fc8dc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/deleted-executions.event.ts",
+            "integrity": "sha1:a6a5aee76353501858bb3ad6f94b1111832e5e92"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/updated-execution.event-handler.ts",
+            "integrity": "sha1:a76f3ad623d6022ee8be371624a717167f7a4c41"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/events/updated-execution.event.ts",
+            "integrity": "sha1:5ee0dd85d60b441051882b2ca07f102c6a50d565"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/find/find-execution-by-id.query-handler.ts",
+            "integrity": "sha1:bac46d04fe6e3744f4cf9555c1edab0904850580"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/find/find-execution-by-id.query.handler.spec.ts",
+            "integrity": "sha1:8011195a60cc883ddce710ef475a4efecfffe0b1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/find/find-execution-by-id.query.ts",
+            "integrity": "sha1:592865196c3ebe200e15ef7bd151e456768862da"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/find/find-execution-by-id.service.spec.ts",
+            "integrity": "sha1:a78e2c75566a4ed7d24895fce8f4bd54d00984fb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/find/find-execution-by-id.service.ts",
+            "integrity": "sha1:8b4c9b7cdc5780d901b89b41f94d53b577f25327"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/find/find-execution.query-handler.ts",
+            "integrity": "sha1:1b716401823c0e5911380e5314ce80dfe7b901df"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/find/find-execution.query.handler.spec.ts",
+            "integrity": "sha1:c8545eb3e5887b30c6a9049a5f8d87ee883dcfbd"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/find/find-execution.query.ts",
+            "integrity": "sha1:f337cb62358673ba79c278905ab9913d6151a355"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/find/find-execution.service.spec.ts",
+            "integrity": "sha1:83e0e2659a4a6aaa078020c85308c808b84f24a8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/find/find-execution.service.ts",
+            "integrity": "sha1:e91e517b3952c313fb9bb85c809bf60e0c4399bf"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/get/get-executions.query-handler.ts",
+            "integrity": "sha1:7bbb8dd78623a1ebdcb47acab13579336a9afcd2"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/get/get-executions.query.handler.spec.ts",
+            "integrity": "sha1:e81d2871263bc67b88e33f465144e5e79cc46151"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/get/get-executions.query.ts",
+            "integrity": "sha1:1e0368bc7268ebdf477ac19be16eb50e68ad139f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/get/get-executions.service.spec.ts",
+            "integrity": "sha1:0c4c196ef05ac4cb7761b227d07186805266031b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/get/get-executions.service.ts",
+            "integrity": "sha1:39e017c5c6460ac838422557c333e4a38d6ae93c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/paginate/paginate-executions.query-handler.ts",
+            "integrity": "sha1:8b937d91b0c6cb2daac257b89e85bbbbe4f934e8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/paginate/paginate-executions.query.handler.spec.ts",
+            "integrity": "sha1:50c4fa0805d392f6c7fd07cd95045f9be2a005fd"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/paginate/paginate-executions.query.ts",
+            "integrity": "sha1:472de67298789b09984d6063fdf0e3554a80ab6b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/paginate/paginate-executions.service.spec.ts",
+            "integrity": "sha1:d99518d9886ed0281fb5e5986c3b96f8f0225ec0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/paginate/paginate-executions.service.ts",
+            "integrity": "sha1:c925dbbc94822ed3cec4f2f2d2cd3f7a645aa3c7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/sagas/execution.sagas.ts",
+            "integrity": "sha1:3e9b3d9dc521c8488c4a38b3430e86b2c2b9b0ad"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/update/update-execution.command-handler.ts",
+            "integrity": "sha1:48982e87417608bc237f61d9436247403d34eccb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/update/update-execution.command.handler.spec.ts",
+            "integrity": "sha1:c8bda8a991ef8009dadb14da54ebd4c6e81d39d4"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/update/update-execution.command.ts",
+            "integrity": "sha1:6b1aefe3949563f4eb07b5d80922d80ca311722b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/update/update-execution.service.spec.ts",
+            "integrity": "sha1:1f0e65c9410a994c26d46deeb81f7bd3d21ce0c8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/application/update/update-execution.service.ts",
+            "integrity": "sha1:96535abbc632da45f4a831ebb535897534ae68f6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/execution.aggregate.ts",
+            "integrity": "sha1:b5489b426616e15e54ed108897d22e5c93a31c39"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/execution.mapper.ts",
+            "integrity": "sha1:a68b4beba8456ed098831ed55072f8fdce599a9f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/execution.repository.ts",
+            "integrity": "sha1:91507fafcf96a53c2e7c5f39154a40ec6fa331f9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/execution.response.ts",
+            "integrity": "sha1:4f7fbb35ad54df9021b95769a201f783ec7bf9d1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/index.ts",
+            "integrity": "sha1:2774584ddc46f5df41a26b3ae95a841cf11d34a0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/index.ts",
+            "integrity": "sha1:c7a820169cc52e60901bafb42f85de4c3524095b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/infrastructure/mock/mock-execution.repository.ts",
+            "integrity": "sha1:63b67d15bd2c958a1dbfa93705eab71a2e6c8214"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/infrastructure/seeds/execution.seed.ts",
+            "integrity": "sha1:73aa516963f0e07882ad431618a8f67c9dfd0e0f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/infrastructure/sequelize/sequelize-execution.model.ts",
+            "integrity": "sha1:0719b0ea0093216c098fea5eae7f6b3e3c8daa61"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/infrastructure/sequelize/sequelize-execution.repository.ts",
+            "integrity": "sha1:75bdae5e4ba0c507efeb9542b7967fee93dec9ee"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-id.ts",
+            "integrity": "sha1:fc28a9ae6e2d71c8d49277685c649c814a2e1eaf"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-tenant-id.ts",
+            "integrity": "sha1:2f08137198d322ef8d7b62b6071cd01d573690ae"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-tenant-code.ts",
+            "integrity": "sha1:5779ca94184546b97208300b5cf32501d7758e1a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-system-id.ts",
+            "integrity": "sha1:07ed59b1820e5a391b6ee0e1a37cef0779ae30f1"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-system-name.ts",
+            "integrity": "sha1:accff6d456a7890446eedd48c366c4657fcab93f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-version.ts",
+            "integrity": "sha1:c1ca13d80b5507e59538809e48c66409eaf81305"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-type.ts",
+            "integrity": "sha1:713a27a349258959d370ac0f007318699b10ace0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-executed-at.ts",
+            "integrity": "sha1:eaf8284b45ee7681a4f661a889a51670efcaf522"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-monitoring-start-at.ts",
+            "integrity": "sha1:07f742a96c71df72d3273de6fbf9133337e24a59"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-monitoring-end-at.ts",
+            "integrity": "sha1:129da7619a9083f8a7d8df9e32540e721819af87"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-created-at.ts",
+            "integrity": "sha1:bf26bc1adf918b5d52b29b502c56f8481ddce5cb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-updated-at.ts",
+            "integrity": "sha1:3c181b256a4851df75f6a273939c33348be936ac"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/execution/domain/value-objects/execution-deleted-at.ts",
+            "integrity": "sha1:a27accbb68a643b81479c1b6ba06c6c84bd7c2ca"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/create-execution.controller.spec.ts",
+            "integrity": "sha1:1ae6c25088805d9b55e4ff37ced802c74658a5a7"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/create-execution.controller.ts",
+            "integrity": "sha1:7c6dd7ff8d227f8be6a040fc73424b71dfeb3029"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/create-executions.controller.spec.ts",
+            "integrity": "sha1:57b1f628822813eab836fd5202e756cf4749d441"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/create-executions.controller.ts",
+            "integrity": "sha1:c69ef7d7e6e4cc75a32660525d3aad033da3d503"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/delete-execution-by-id.controller.spec.ts",
+            "integrity": "sha1:54eaab33da204ecc65541cb313417eb9820e5813"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/delete-execution-by-id.controller.ts",
+            "integrity": "sha1:d4034b82544c046b394ecbf04f6b63ab3abb5ea0"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/delete-executions.controller.spec.ts",
+            "integrity": "sha1:a6e6d391a008d950cc2e2c0199c48e7594cb8d11"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/delete-executions.controller.ts",
+            "integrity": "sha1:32296f5f2892f871b08a63dd1f9f0376d95cee90"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/find-execution-by-id.controller.spec.ts",
+            "integrity": "sha1:c4120d1cc304577feefc671a40b81b9e8da8a11b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/find-execution-by-id.controller.ts",
+            "integrity": "sha1:a8f357e1b81e8d8e5e260d1870d9e81cf21d2f9f"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/find-execution.controller.spec.ts",
+            "integrity": "sha1:dbd9efbb5af3e6ff26a24cd7601579691709b476"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/find-execution.controller.ts",
+            "integrity": "sha1:baf02e8c02c1217f531d6eb31327be24927a6006"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/get-executions.controller.spec.ts",
+            "integrity": "sha1:7ebf4301f0d3b0bc867568b2f18b47c63ef11187"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/get-executions.controller.ts",
+            "integrity": "sha1:77e1afd1114ba938113435b0fa2220f0939d3274"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/paginate-executions.controller.spec.ts",
+            "integrity": "sha1:12f045438098c6803182589e3c2feac6e1327960"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/paginate-executions.controller.ts",
+            "integrity": "sha1:2680ceba1d1c7735be776630b62df6aa2619b8d9"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/update-execution.controller.spec.ts",
+            "integrity": "sha1:5f515d189bca8e6b2d77cef5596fbed1e48b561d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/controllers/update-execution.controller.ts",
+            "integrity": "sha1:84d00b3426c21a548e7af10ec66143367f5b4c54"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/dto/execution.dto.ts",
+            "integrity": "sha1:b4c5453720abe6b1a70cf697e6c82c2629d0e722"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/dto/create-execution.dto.ts",
+            "integrity": "sha1:32845c0de7610548176d9e20ca5fffd6553964f7"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/dto/update-execution.dto.ts",
+            "integrity": "sha1:5ec502c675a679bcfe6f0456b002336d0c5e80ab"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/graphql/execution.graphql",
+            "integrity": "sha1:e9058597b61fcbd034ab79e14f54f12e3d9afd19"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/index.ts",
+            "integrity": "sha1:37a876d8abe43c5a770297d374e98523600b921c"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/create-execution.resolver.spec.ts",
+            "integrity": "sha1:e0028ecfa0de19e4ea099109e1b5a40bbe50ddd0"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/create-execution.resolver.ts",
+            "integrity": "sha1:8ef275a15eb2fc69c0c42e4cad95b48039227117"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/create-executions.resolver.spec.ts",
+            "integrity": "sha1:c59a4d291a82ee6b42965e9317f195093b1d9d6d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/create-executions.resolver.ts",
+            "integrity": "sha1:e952b742dc547c92d6fb9fc428eb9d131d7debdc"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/delete-execution-by-id.resolver.spec.ts",
+            "integrity": "sha1:80d0990c9d1c1865782b4c4301f22ac78e8a126b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/delete-execution-by-id.resolver.ts",
+            "integrity": "sha1:f2482ff33bb7891e7c3b9bd402f702c8a4af86bf"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/delete-executions.resolver.spec.ts",
+            "integrity": "sha1:baca6f897a79ea47575138d50f3cb515497449a6"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/delete-executions.resolver.ts",
+            "integrity": "sha1:d3d3a084f6e3f47b95d1d5cc61f041985d915f48"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/find-execution-by-id.resolver.spec.ts",
+            "integrity": "sha1:cb7c2d7b6360ef613be71bbfe913598feb36d07e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/find-execution-by-id.resolver.ts",
+            "integrity": "sha1:0c7046fa8a32e7378d173d45c1b581103daa9fd4"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/find-execution.resolver.spec.ts",
+            "integrity": "sha1:5025d378f1b9470ca948c392c0dc1e36dcbb0b31"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/find-execution.resolver.ts",
+            "integrity": "sha1:aef3dd0622b19932a36385c71d905af96f44156c"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/get-executions.resolver.spec.ts",
+            "integrity": "sha1:6a639bc360ae8c0ab03dabd104808ce347776682"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/get-executions.resolver.ts",
+            "integrity": "sha1:512f6ced7dc778ebb9ca429f74f1fbd227011d61"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/paginate-executions.resolver.spec.ts",
+            "integrity": "sha1:ac951470d8402b7fcc507d7e929a45e7f7512da7"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/paginate-executions.resolver.ts",
+            "integrity": "sha1:0ef9131ce5b0e659e64134eb3a4a88da1fb462c6"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/update-execution.resolver.spec.ts",
+            "integrity": "sha1:bcbcaab7b5610641f2a9e3622d9a30ea978d0b0b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/execution/resolvers/update-execution.resolver.ts",
+            "integrity": "sha1:12d97c9f5b594b8118b315e89b1bea8279348656"
+        },
+        {
+            "path": "postman/bplus-it-sappi.execution.postman.json",
+            "integrity": "sha1:58f2e6a7bce1e8de83bed362f64044e184e4b3d2"
+        }
+    ]
+}
