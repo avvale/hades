@@ -31,6 +31,7 @@ export class CreateFlowCatalogController
         if (!Array.isArray(payload)) throw new BadRequestException(`The payload is not an array`);
         if (payload.length === 0) throw new BadRequestException(`The payload is empty`);
 
+        // get tenant
         const tenant = await this.queryBus.ask(new FindTenantQuery(
             [
                 {
@@ -42,6 +43,7 @@ export class CreateFlowCatalogController
             ]
         ));
 
+        // get system
         const system = await this.queryBus.ask(new FindSystemQuery(
             [
                 {
@@ -56,7 +58,7 @@ export class CreateFlowCatalogController
         const flowCatalog = payload.map(flow => {
             return {
                 id: uuidv4(),
-                hash: Utils.sha1(flow.tenantCode + flow.party + flow.component + flow.interfaceName + flow.interfaceNamespace),
+                hash: Utils.sha1(flow.tenantCode + flow.systemName + flow.party + flow.component + flow.interfaceName + flow.interfaceNamespace),
                 tenantId: tenant.id,
                 tenantCode: flow.tenantCode,
                 systemId: system.id,
