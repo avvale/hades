@@ -29,7 +29,7 @@ export class UpdateModuleController
             payload.tenantCode,
             payload.systemId,
             payload.systemName,
-            payload.channelId,
+            payload.channelHash,
             payload.channelParty,
             payload.channelComponent,
             payload.channelName,

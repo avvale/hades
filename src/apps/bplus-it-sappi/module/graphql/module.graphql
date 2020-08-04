@@ -7,7 +7,7 @@ type BplusItSappiModule
     tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
-    channelId: ID!
+    channelHash: GraphQLString!
     channelParty: GraphQLString
     channelComponent: GraphQLString!
     channelName: GraphQLString!
@@ -34,7 +34,7 @@ input BplusItSappiCreateModuleInput
     tenantCode: GraphQLString!
     systemId: ID!
     systemName: GraphQLString!
-    channelId: ID!
+    channelHash: GraphQLString!
     channelParty: GraphQLString
     channelComponent: GraphQLString!
     channelName: GraphQLString!
@@ -58,7 +58,7 @@ input BplusItSappiUpdateModuleInput
     tenantCode: GraphQLString
     systemId: ID
     systemName: GraphQLString
-    channelId: ID
+    channelHash: GraphQLString
     channelParty: GraphQLString
     channelComponent: GraphQLString
     channelName: GraphQLString

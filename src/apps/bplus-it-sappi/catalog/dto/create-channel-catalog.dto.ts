@@ -2,51 +2,12 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateChannelCatalogDto 
 {   
-    
-    @ApiProperty({
-        type        : String,
-        description : 'id [input here api field description]',
-        example     : 'ca360478-6988-4e28-86d3-10aa75f73e68'
-    })
-    id: string;
-    
-    
-    
-    @ApiProperty({
-        type        : String,
-        description : 'hash [input here api field description]',
-        example     : 'zm2n6w16bxqbjzer3gzp3xym0341dkeg3aeydhsx'
-    })
-    hash: string;
-    
-    
-    
-    @ApiProperty({
-        type        : String,
-        description : 'tenantId [input here api field description]',
-        example     : 'dcd78845-0d79-4bed-b02f-47a91163fdfd'
-    })
-    tenantId: string;
-    
-    
-    
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
         example     : 'ijb1t0mav11ryt85avsh7aezb70msjp90l8n84lssjdlmxfn9c'
     })
     tenantCode: string;
-    
-    
-    
-    @ApiProperty({
-        type        : String,
-        description : 'systemId [input here api field description]',
-        example     : '3f03b1bb-71d3-4d16-8ef1-00949a1aad44'
-    })
-    systemId: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -55,16 +16,12 @@ export class CreateChannelCatalogDto
     })
     systemName: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'party [input here api field description]',
         example     : 't02tzizdta5hif4a3k7l6vv6qg94o42cj3r9bpu8rdt9xd9u8eworyujvp5o3o1jpuror0ngq08ka57cixbw8250s3mbw8urwq6hdn303895ewstvuzj5hghv3z3qloqslru0fpjeammknml6x00yax5i9twz41g'
     })
     party: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -73,25 +30,12 @@ export class CreateChannelCatalogDto
     })
     component: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
         example     : '6s3wnje70dnzwhyxfcvgp4ywuq0ou4wq10hyy7cnu3pzbegzes5wd6qubz9yq4i2zu2jdtfs2uc94lf2ys4ohdb2luao6mtzoj5csnn5qg5ec98y9x1hix4j8yq40vd4rzvu60cnstxdtxb84t1cn4o5rhftlp5i'
     })
     name: string;
-    
-    
-    
-    @ApiProperty({
-        type        : String,
-        description : 'flowId [input here api field description]',
-        example     : 'b6547879-31de-4289-8e9c-6c2a75de6604'
-    })
-    flowId: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -100,16 +44,12 @@ export class CreateChannelCatalogDto
     })
     flowParty: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'flowComponent [input here api field description]',
         example     : 'p5fve552i683espshekvypp3fv5pvlms92tz676tqlso9poz0xscxens8qdtie3g1ok0hd24m3eim2zxw8bndfck8rdlkz78gq21d7tlnvzlalqtborcn3yshx2c0p7xqscgy2d3roj0cu128pfdf6kfncna4wcb'
     })
     flowComponent: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -118,16 +58,12 @@ export class CreateChannelCatalogDto
     })
     flowInterfaceName: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'flowInterfaceNamespace [input here api field description]',
         example     : '1lledh2ttjr6c4ew03bpgfoe3mom0e5xtlykrzcdaj5wppp9pzn9o95ztjdmnz19pwgrw7qx1wcfl1lgv8r9kbb9y0a8ttc95mlc8b5ik25mzxaj5qi3f3boqnrnhp0fn1rhr6k8m55mu3ndl4zk0c1xxzptet95'
     })
     flowInterfaceNamespace: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -136,16 +72,12 @@ export class CreateChannelCatalogDto
     })
     version: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'adapterType [input here api field description]',
         example     : 'zv2onddht7guxli7q78zfqcv05pfozz34xzf9z21kvjzb9cps02ozgxrdqyn'
     })
     adapterType: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -155,16 +87,12 @@ export class CreateChannelCatalogDto
     })
     direction: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'transportProtocol [input here api field description]',
         example     : 'jf6ji3pg3vm41rpcpiqu2mn9jna85eg3y07ri8ky2f30scn7n5vfyuhx3587'
     })
     transportProtocol: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -173,16 +101,12 @@ export class CreateChannelCatalogDto
     })
     messageProtocol: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'adapterEngineName [input here api field description]',
         example     : 'fu4ytyhqcms1nmhas8d6t3qj0l05lwh0cwgytvas1typ46wa03ngdxbwpo8aitlzi2qmgayidfv8sh830mxqyxuo3dgcalfrnsxo9gaso9jedtvzwhgnt8kkl1sosu88sxyyzzlthbpovgtbd4glkutmspqk6fil'
     })
     adapterEngineName: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -191,16 +115,12 @@ export class CreateChannelCatalogDto
     })
     url: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'username [input here api field description]',
         example     : 'owuqrkn25tfn70te52pxv5c9z9y8nn6d88bmmc72y8h97c5y5anm0ahtbwyn'
     })
     username: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -209,16 +129,12 @@ export class CreateChannelCatalogDto
     })
     remoteHost: string;
     
-    
-    
     @ApiProperty({
         type        : Number,
         description : 'remotePort [input here api field description]',
         example     : 1066105938
     })
     remotePort: number;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -227,16 +143,12 @@ export class CreateChannelCatalogDto
     })
     directory: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'fileSchema [input here api field description]',
         example     : 'seikcf198sd9q2zyo53x4y7buri0rnosg9syexmi96q38qgcqkd9m7eup88l72cskq8vvk33yrd0pgs30vwkhya7fv6afihwrtc822j5vzqrvurw7nc2u5icdvjmx8zf59ljcj37h3wozhu3t30rb3vkms581l647hi4hpcvgqlxkmtdin3ges79wzmgz2f5l6cfuvfhq1f1cw65iorbchm88t4kqi2pxlfk951laoeif6itll880nltkuppx8zb30rndmoklg5p0uxjvjxito9629bm74ybquvav0c2ieqwj6g9vyhl5a6nb41iqpdvag3unfpczrpnsqnir5j8s3ar1uwk97ca8ze9ys3wgr4y5otk390x3zitzthsr1idjahg1f1gco4dkm0d5stdfo4qx36m043jvp51yzca5waufd8v0quivc4mizm9ium89m4c4ql31w29epmismwlzz8wpn45jzvsuoeuozi5rz7ryesvxdyl6n9ta5a0ehd2s3afj00w6isrmjhvnv4l0nmurqlkckj4h2sa7cfxfzbem9ucdswhgd09evl6jv0ffvv8wh1uzulcmym6usq7gbxvjjnnn5rm9heg441j6ymxmx9maptufyzh1ucs7ik2i66nviq3hep0dnh4v91xay0jkgijids0wjp2pi9w756gg8mzk9w2h0klk1s5lc41v4vs4qb49ce1t2znnepnsj5k0fcscrozkskqzoyma0crv7y3uhzsy1b1s8p374mq16sluk3rphkqyl198t97sov3oxxwg01pprfsj52z1p96wtgsh6gm81iedz6vuxin1ftd3ynn8v8qt0y8vl61bab619fvzmbnsptelt8ufo87gnv2fgpitume29xmdhtn9dp0peqte92hxxwnnjqavmbc9zibcck1gsilttov3ovaccercxwoxu7brr9n3ps9jxedtqqeahcxlkcwqleb0ider130vsh38t4p81p9zowxlwt726u2sp6czl3y1ejz'
     })
     fileSchema: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -245,8 +157,6 @@ export class CreateChannelCatalogDto
     })
     proxyHost: string;
     
-    
-    
     @ApiProperty({
         type        : Number,
         description : 'proxyPort [input here api field description]',
@@ -254,16 +164,12 @@ export class CreateChannelCatalogDto
     })
     proxyPort: number;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'destination [input here api field description]',
         example     : '3g3a4qwfnqvost8hdp4hb78wzc5zz5edhi33f8a6uigg3l8fxpayk4by1lyn7oqzakrwzmmdq0hxhtmgmw3t9f8ad2i0yqklroiwnl9jq91k8u613v35l0y7bfr8b4a7hh2mi8oyyyni8ddhepc52sal61bufeaa'
     })
     destination: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -273,16 +179,12 @@ export class CreateChannelCatalogDto
     })
     adapterStatus: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'softwareComponentName [input here api field description]',
         example     : '2ykxrmb2s1q4vkikar5rh0ex1ux60iboox0mhwv6cberpp724wrelm0axytod0bnbauoco84griug4tsnimm8825piqjunlddmsymxljq58quq855mxny0x6xuja3ja40pl5dxtdx6yllnu3l27z0cykcrwvlnv8'
     })
     softwareComponentName: string;
-    
-    
     
     @ApiProperty({
         type        : String,
@@ -291,8 +193,6 @@ export class CreateChannelCatalogDto
     })
     responsibleUserAccountName: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'lastChangeUserAccount [input here api field description]',
@@ -300,14 +200,10 @@ export class CreateChannelCatalogDto
     })
     lastChangeUserAccount: string;
     
-    
-    
     @ApiProperty({
         type        : String,
         description : 'lastChangedAt [input here api field description]',
         example     : '2020-08-03 01:27:08'
     })
     lastChangedAt: string;
-    
-    
 }

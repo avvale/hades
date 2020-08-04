@@ -7,7 +7,7 @@ export class CreateModulesCommand
             tenantCode: string,
             systemId: string,
             systemName: string,
-            channelId: string,
+            channelHash: string,
             channelParty?: string,
             channelComponent: string,
             channelName: string,

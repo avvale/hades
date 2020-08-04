@@ -66,7 +66,7 @@ export class CreateChannelCatalogController
                 party: channel.party,
                 component: channel.component,
                 name: channel.name,
-                // flowHash: '',
+                flowHash: Utils.sha1(channel.tenantCode + channel.systemName + channel.flowParty + channel.flowComponent + channel.flowInterfaceName + channel.flowInterfaceNamespace),
                 flowParty: channel.flowParty,
                 flowComponent: channel.flowComponent,
                 flowInterfaceName: channel.flowInterfaceName,

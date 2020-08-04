@@ -32,14 +32,11 @@ aggregateProperties:
     type: varchar
     maxLength: 20
     nullable: false
-  - name: channel_id
-    type: id
-    length: 36
+  - name: channel_hash
+    type: char
+    length: 40
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: BplusItSappiChannel
-    relationshipModulePath: bplus-it-sappi/channel
-    relationshipField: channel
+    index: index
   - name: channel_party
     type: varchar
     maxLength: 160

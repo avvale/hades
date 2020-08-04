@@ -667,7 +667,7 @@ export interface BplusItSappiCreateModuleInput {
     tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
-    channelId: string;
+    channelHash: GraphQLString;
     channelParty?: GraphQLString;
     channelComponent: GraphQLString;
     channelName: GraphQLString;
@@ -689,7 +689,7 @@ export interface BplusItSappiUpdateModuleInput {
     tenantCode?: GraphQLString;
     systemId?: string;
     systemName?: GraphQLString;
-    channelId?: string;
+    channelHash?: GraphQLString;
     channelParty?: GraphQLString;
     channelComponent?: GraphQLString;
     channelName?: GraphQLString;
@@ -1257,7 +1257,7 @@ export interface BplusItSappiModule {
     tenantCode: GraphQLString;
     systemId: string;
     systemName: GraphQLString;
-    channelId: string;
+    channelHash: GraphQLString;
     channelParty?: GraphQLString;
     channelComponent: GraphQLString;
     channelName: GraphQLString;

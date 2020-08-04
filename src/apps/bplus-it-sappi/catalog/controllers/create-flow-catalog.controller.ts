@@ -11,8 +11,8 @@ import { FindTenantQuery } from '@hades/admin/tenant/application/find/find-tenan
 import { FindSystemQuery } from '@hades/bplus-it-sappi/system/application/find/find-system.query';
 import { CreateFlowsCommand } from '@hades/bplus-it-sappi/flow/application/create/create-flows.command';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { CreateFlowDto } from './../../flow/dto/create-flow.dto';
- 
+import { CreateFlowCatalogDto } from './../dto/create-flow-catalog.dto';
+
 @ApiTags('[bplus-it-sappi] catalog/flow')
 @Controller('bplus-it-sappi/catalog/flow')
 export class CreateFlowCatalogController 
@@ -24,9 +24,9 @@ export class CreateFlowCatalogController
 
     @Post()
     @ApiOperation({ summary: 'Create or update catalog flow' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: [CreateFlowDto] })
-    @ApiBody({ type: [CreateFlowDto] })
-    async main(@Body() payload: CreateFlowDto[])
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: [CreateFlowCatalogDto] })
+    @ApiBody({ type: [CreateFlowCatalogDto] })
+    async main(@Body() payload: CreateFlowCatalogDto[])
     {
         if (!Array.isArray(payload)) throw new BadRequestException(`The payload is not an array`);
         if (payload.length === 0) throw new BadRequestException(`The payload is empty`);

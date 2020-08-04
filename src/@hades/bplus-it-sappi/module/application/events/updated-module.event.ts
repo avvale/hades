@@ -6,7 +6,7 @@ export class UpdatedModuleEvent
         public readonly tenantCode: string,
         public readonly systemId: string,
         public readonly systemName: string,
-        public readonly channelId: string,
+        public readonly channelHash: string,
         public readonly channelParty: string,
         public readonly channelComponent: string,
         public readonly channelName: string,

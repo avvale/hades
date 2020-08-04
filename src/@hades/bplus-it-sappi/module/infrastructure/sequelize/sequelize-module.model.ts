@@ -2,7 +2,6 @@ import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, In
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
-import { BplusItSappiChannelModel } from '@hades/bplus-it-sappi/channel/infrastructure/sequelize/sequelize-channel.model';
 
 @Table({ modelName: 'bplus_it_sappi_module', freezeTableName: true })
 export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel> 
@@ -90,27 +89,18 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     systemName: string;
         
              
-        
-    @ForeignKey(() => BplusItSappiChannelModel)    
-    
+            
+    @Index
     
     @Column({
-        field: 'channel_id',
+        field: 'channel_hash',
         
         allowNull: false,
-        type: DataTypes.UUID,
+        type: DataTypes.CHAR(40),
         
-        references: {  
-            key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION',
     })
-    channelId: string;
+    channelHash: string;
         
-    
-    @BelongsTo(() => BplusItSappiChannelModel)
-    channel: BplusItSappiChannelModel;
              
             
     

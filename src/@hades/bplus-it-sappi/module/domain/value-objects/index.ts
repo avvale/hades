@@ -3,7 +3,7 @@ export { ModuleTenantId } from './module-tenant-id';
 export { ModuleTenantCode } from './module-tenant-code';
 export { ModuleSystemId } from './module-system-id';
 export { ModuleSystemName } from './module-system-name';
-export { ModuleChannelId } from './module-channel-id';
+export { ModuleChannelHash } from './module-channel-hash';
 export { ModuleChannelParty } from './module-channel-party';
 export { ModuleChannelComponent } from './module-channel-component';
 export { ModuleChannelName } from './module-channel-name';

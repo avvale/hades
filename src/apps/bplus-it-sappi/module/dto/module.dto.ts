@@ -6,7 +6,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'f26d5b55-921b-406a-8cb0-d6a9ceaf4fe3'
+        example     : '9fc6c034-941e-4237-8561-9c0d549b37e5'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '1787f2da-553b-478a-a053-4391096a0367'
+        example     : 'a32de94a-766c-4f44-a089-18678c3d49ee'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'zv2a5ml9n59e2kruluedbxpbz8stoeqfzcu0p6z7lw22blxn6j'
+        example     : 'v78jsfxt8ep1uc7g1n8wifv8f8e74ccumzcgkgvi392vm88lhw'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '1abcd568-4333-415c-b2d2-66cab2e5f8b2'
+        example     : '1a7aaf01-5e7e-43bf-bdee-acb54d74296e'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'q7vmkxp1o81avdt3d34v'
+        example     : 'lxgpiofgl5qijp14axpf'
     })
     systemName: string;
     
@@ -50,17 +50,17 @@ export class ModuleDto
     
     @ApiProperty({
         type        : String,
-        description : 'channelId [input here api field description]',
-        example     : '084234c9-60f8-4fbb-8be1-73fbae827d7b'
+        description : 'channelHash [input here api field description]',
+        example     : 'e2n6h29ebfd0birtb85c9ch42kwbxpjnecy70ykv'
     })
-    channelId: string;
+    channelHash: string;
     
     
     
     @ApiProperty({
         type        : String,
         description : 'channelParty [input here api field description]',
-        example     : 'f4egzxf2e8purf0pts0doe7r6cp8yekz8tpiblwxq3i9cw8wx9phwkj3r8eoecr0fn6vak0ednv73cjev82dlqrcz0mhpaznz2818jjholg1felvma5016vgeu8tvk59vkp8a2i7bnc6avwv0ye93vyxhi09x78v'
+        example     : '6gimjg0q4vtlxeq4xfmhngxycef4rhgvkh093tl5axaymq9p72k3gx6mjyhmyh6folzqp63eyu2yxmzbzm9s6iuw54yoi8si1006jyj3cpslx1p4xfuyccva49eogeyuyro4xqstotyuijwvcjpd2hyxpmhpwnp1'
     })
     channelParty: string;
     
@@ -69,7 +69,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'channelComponent [input here api field description]',
-        example     : 'bw782ktbcisu15zms090emsxzem92cbkyz82erpocvi63kp27kbbyqdv9d7to93qpovpee4vt32e28tqjf6qw9ab905dh9243eumnkvfi7l02hu1ihpfvj9ugo1fk77udlltfuxq1syqql250ujoc4bqinb9hwtp'
+        example     : 'bf97xi2fvn98x5xe3866gjw2oembc8l53vv0auwudky0u5aek8o49nb9vomks2vktb1jimnpy07wcinghz3nxmgf5xb6s0mpmrdrfq0zgl239lz29fdkxm5wt72j57cww4l0iv6ga2q1tps8mtz2cui61sj5kcbs'
     })
     channelComponent: string;
     
@@ -78,7 +78,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'channelName [input here api field description]',
-        example     : 'johba5cbemigrudy26vlsxpqze4ccf5ekj24e62cje2ep96yqh6jqwtwe5567u6qtrczo9vtvdxu8qgi90htmbfyz3tdcsxdutwcefi4e3y4k4wxcngnv64059jz69fpzh11s4ju7yxb8u6vkd2haii4jvr0yf61'
+        example     : 'ijlb75itv32rvtz2230arm2m3sn9tbt2q6ctw8rok170k057fb5rcco36ezm71un7bh0qkwqb5w7p5z301h9wa2wxqknj3nwx8963ohpf91350kzlai3dbsdtso8wbnzovpgmz34e4rc2t9nsblnk8b219p0r36s'
     })
     channelName: string;
     
@@ -87,7 +87,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'flowHash [input here api field description]',
-        example     : '94apt7t8ihfqfo2yoxmgit1vvrker74qfrb96ymm'
+        example     : '0j881fk5k62wrcd1fcff81jhxubess16mtne898f'
     })
     flowHash: string;
     
@@ -96,7 +96,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'flowParty [input here api field description]',
-        example     : 'xslpx0wsc87slp7lvt7i4wp826a4tmpy3l1il6r7ta8djbnt2tfg6cuczzk5sv6stxzwye3dfywpdor8cihlbvipgocvejhogmbn05zty1bqifw11puy5ng593s40w7il8fbmm2li0638azhxsrugjey478omxf0'
+        example     : 'pud6tkc5uxlno43gxrluqr120ciguqqrc8txop7vwgq9oe4e4rcd4dg6ro2v7x4tu2jwanewajgort3j238twusb36mkg1av2c6ly9zc6pzquajhdmrjb8663hx0bcmjf0ozavrdjxrqt2hl5oye1pgls3a8peb0'
     })
     flowParty: string;
     
@@ -105,7 +105,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'flowComponent [input here api field description]',
-        example     : 'k5fqgxi2jtcj8p5qq05rgaocwmtbo15pywz6ddwqh10ejs2xo8jveakoyz7mnnc7c562s4hnlq5ts7bwsg8q77j1i2fqkhepmul7rb6ueyf0wct99xdkqcwcdwmrfjcm5y2bp36a7y3qw0uwb8u1x9mlqc5zzdbm'
+        example     : 'cmtz42v5q47ax10yza08turyt5mb31z7jxox9rp2z2qtl24wv7mt0b7oepr9aur8ahpwtgrqo1ofwemi4ki75h00poxcbo824n5gi63lbjvu9sqq1w7njabygm5yuuv3e3b761n6him2a766o134i7rl7il66hfa'
     })
     flowComponent: string;
     
@@ -114,7 +114,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'flowInterfaceName [input here api field description]',
-        example     : 'u8yjpskm7zozb0zvd2gy92b8bhg2attzl3hkrebs9gclfjkvptjuo5xxizmzsfvfpvwmgtwki3bzfx6i4tbfdvlk857tim1nhrduscg6xcnrb9sf6svmvmgurxv1b46fq1z8ipndxsgic5qx5en9pko2jvlauw0s'
+        example     : 'g0e4usvxhwrl2nf2tvpab5rv35zyrfrwvo4idwe9si02a8pgshdta0ky0mwu3x5uw0hmpupfe97m7uypqq3udcn1wacdq4kjg8czznlofy3spg6r0cjil0f3rrqu2kg9j6zelzedmtj87sf4pjlrfkzqwnszv7wq'
     })
     flowInterfaceName: string;
     
@@ -123,7 +123,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'flowInterfaceNamespace [input here api field description]',
-        example     : 'renwyo3e58o1zgen66zgp12kle222mxvwpwwwc8v4rwbk9ulkpat4t5sw71q0rpo0ge8a2pi035tmyzpfy6onff2cxiieruuglgy1slk7dw2s47k16us28zgufoip2712kme7kjhf9ablpvn9p80wb1lt4q9krd1'
+        example     : 'vq48xlas4izg1n0btagqmevlivrv5d12lunphziokdvvhdup0b0xlhoxkoj2ggxjlzdz8s53w9my6guo70q39u5p3lubyl8h6b7x9qeynwd022wih2dpkdskhpyc1qgqd1alzhphr0lwd01x1vcpsxqjenab9h7v'
     })
     flowInterfaceNamespace: string;
     
@@ -132,7 +132,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'version [input here api field description]',
-        example     : 'm5f106xyzp33cwpb4cnw'
+        example     : 'syrnx4bnyi5l8ug0x9o8'
     })
     version: string;
     
@@ -141,7 +141,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'parameterGroup [input here api field description]',
-        example     : 'w1auz41rf26ozfs7qp9anro4jxwt76pymdh9vy6stln96y0lugvq5ojj5m19n0aouu2ws5d0qobrxd0z1lriyk7dp0al3mbq8zxnooa7ye96b4ojkep1iy8em8pz7h0s7v8x3fnoy368cm4raf9vn41cyrolpff9gf824gzxlbq24pa861pdsg45u16acblgbu1csatr46jlvdwbbzkrn82d4g3ctnawfivzvpin4duy0g1px2o7tbekk5rru8q'
+        example     : 'tfmxhxz863slwhndhqdl4wgpvoa996uph8spaxpvp9hgytz2w24md3alu1mxkgu2sce8uzlpozsbnphhif7xndhtbvz8lkvnjqimik0h8zm89aifaq4d73objrxa5rsgwk9iw7xv5ofz4vdtxuo3nroheu6xfrtlm77fgmx6er1qx1wxtcapsy36ira6mzqtax311kkyi4r6j8t9gymerjm9ogxf3lx0eho76h0iqzysj394c4irud9h039uaoh'
     })
     parameterGroup: string;
     
@@ -150,7 +150,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '9yvyznp1riwo7aqqg8li2y6z98k40nl1efpcor32qc9jutdbg87nk4o08nhymmrhyz4qsv8bc92ethtdi9t2v9tm2znis0sozrzt5dg9i74s217gpwnm541uje6jdxs8odd76xwtha5px4179h5xeg55vda1f4uiveiexexgbqfke0k2fkh6hei9udm09p0swu2qtf5c1hoi5epswu41gyk5pg0zzvulbmtuy0ldushfsh2ay8a584hiw3lyk2ocqkqks688m2be3drq9hadywxa6pkkthba62s8hcdufd0m8tvj08wseegadbnhl4i2'
+        example     : 'm5z1trpm60ecr21lu8ix2iznrydyopl8q1z4dmeac70y383wzumcs98nrobdimg701gyvki3tezmffbdgll8rem9n984ue7jcgtk3kl9c1dwsc9truqao10a7ri5orwevga663gsvtgwxpx5v79vwo3onyyx0p95hsnncb81p2ivg1ukqkc0t7869c3n30xxjdmr42m0bc3dqfpvrs9oolu6cgfxy87hhsdde1p0xvqbdp4yf4xbr40e33r96crnkn5dwbzlgso3lzee49kert1gz9vphzbc9rni1jbbpke3y7yal2vxoid7yanlieps'
     })
     name: string;
     
@@ -159,7 +159,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'parameterName [input here api field description]',
-        example     : 'v3b0enogu1jz5e55de4s5i7zqrfefjovljbrl8kyl5afi1q3ie8oisyrsoht3yot43mm4khj3c06tfhv3gweadrafyvrgom1cmykvxr422fip339x7p8ftk96wo91kx2rpgh00ppr9z8otmwk4f7d8r2cry55e9r8q3ee0kf2t2kk5zuazjkis37s0dqzx2imrsxjbsdfqnpfrx694yl75g131hpebyvtz09qurp0tlcwpxxx31iysyskutuw2ver3xbcnkhnxro5lhwm93uec87xvcu2sdv1afvls1csmoeuvxucbrf7lfikmc4clcd'
+        example     : 'qtstd27t1rt4bpaklclbl8a5ozcnh7ns4x7dfzyggh9llp913h5vr1ozhvz0yztr9tppw6tqhmesuiwd89l7xhzmqnn4yfhewkck5ndlg3sdax13hyffyqhvkifvfxm50sd7sybxezpfdwkkm5fqztzh8sgwtkuwayvf06eif8aqdmrpmdgtflmmjwrgsxd4xee0337pg9gilb64oxg9q6ml8dkxl1o8kp1ks5tg51l6x0zj4kgcscetkmss5lxqv792wlkzxg2vry1592eiyv9vz13ll0212rzzqbpc7jrdy56k4vx6j79x2pj892at'
     })
     parameterName: string;
     
@@ -168,7 +168,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'parameterValue [input here api field description]',
-        example     : 'xclbjzynwcx36kg98ntrxvyxgy713a9bsmp6dmmi6occdrke092wtnuriq8f9hocq56761p5qcnan20j9g8hji3lekd3u7vm0aztewttnhvw2adzxq9yowppytetkn5gbkjzvcdt5emjuya0ov5ls93ltcb02yweo992nuqrieo5io9vq7f4hfoanyletwdp1tp8fht9wayb9zszs368008pq5z95f2z1xmv72dlcksbp31n8np81a5l9zlo1a6kkpcexxr91k3805bhlprgpkkz8rljbhh9c48x4it0bqvuklj0w2rtjax9cfo92z0fqiu2u52h93d8utlsjsjtcxtet8bov66483how380nftl48i0zd27m5esak662ndpmd8m3ep6ro4fwobg711du3sns32v9ads0c8gvzf4on0dstydpa4hgvlwz71oiueihzt5u1e0tyx91259n7p843b283c2st13myb0cizniebl6gugoa56ctblbiww1pdvtzo5jmep9lervwweak7olvv7ipqsw3bxixzssoctnt9gc803c3a5a4bup929v6q9yjt0izt24wjhra7q8te2c7jo1dmpvkwisukjjlqblovhmqzp0jmozyqhrft7hqwd2hlkrsit0ahzcofp5bz72hioaevsxc1gmgsy3xbujuegs4s73u30g1tg75uwaoscwqzlkpr33zvt4801p8r635d52ab9xbzt9q1ss8nju06zpmtb86u9zolxdwzd0x6ae87c38hy24dxtrlqq7w6xp3q7c52krjsshsospptkmhgna84ygilhk5prqway1snim44jgezsqfasax6cnvrt29n88udghcnpieor0gvjaziezktzij1ahs271fllih2frxiqxclybhshyw6ki3orsiadgdq5gn3ut0lm9v0udtidzbodzksfp9uuwpaehtq7khtl88jrx72kndhj0100phx3e0visb7dno244rl6ng5z1c7m3sy9pao5ek0rvtm'
+        example     : 'd2myz48er7j57xnn0k4kcm95si5njc6hq02imnnpwild2yi0500lbqxbftnm424j2l9tyjbch1axmwh2jkhblga4dwmtcejvfz8d654ji3b25b3ip8gppvm5sihsxuwmc0272n9kcpi88rvs0odpgrfv76txebovjftyaw2a1dx66yzv0ny0k3w3um23ksuw8tvcjed5y0ijemxte6rnk41etq2dmxnu711u330c4ubfbk968ctz0bt3jgn98pg0br2v7nebmab21ss4swli6hc3bp1p24yn1sfghjfmx6se20ypsukhmlr50rek3k606y96mw7ogqbtbaxqkifxhhm7hy2mzbrw32ju8rr9dj150ctpqj3lslq2bkl4z64ytt8wr7c7vk69fj72vzzfd3tuh0n0xrqhcqdf0sy4fihetbzd3y77ryr6mil3yzv4ezoloo9kcxb7udumum52nw7oh0tog7ewh7h9bfkpio1d3v97q2m3nwrhhipigxhjny7se2auhc4yvqayfe8j9d8zck9wbqgjp5q58jqcog4q3bg3or3bcgsh4vmutjmhxt3dikcq0hf9sxiulefldfl86qys0563303lk88yzlzlaljnfgku3848dyqnytaxlc0agnvl1hkhfway97wmtlc6zzsfpyxeuyh720m250pt6th3d2ih9bfuav22ydzqsi3s86uw4ecb5fg44appz3l7htx0p5krmsqbeboaneiw1tle3jrzl95gvgjmntrh6045ewkh6fy75itb3c5pwu7ebhrpbrd2va0i0o4wftbbfs5moocltww8zi4og4b4imicah2zs03f20a7gbj2aeiprmw6gfl0zg8vt8efaow701m2abdy63jk2o7t9u45hlkkf28gdc5w4berbawhhhn2d7zwjisfksylyj2377bwhvhbhz9oyk0r7m8efn75qgw5m7bgxj2bghecp47fam08hemp084zra578as10o1cdggzp101169ewzzmpope'
     })
     parameterValue: string;
     
@@ -177,7 +177,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-08-03 22:54:16'
+        example     : '2020-08-04 13:48:04'
     })
     createdAt: string;
     
@@ -186,7 +186,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-08-04 02:12:23'
+        example     : '2020-08-04 08:48:38'
     })
     updatedAt: string;
     
@@ -195,7 +195,7 @@ export class ModuleDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-08-04 12:19:47'
+        example     : '2020-08-04 15:27:35'
     })
     deletedAt: string;
     

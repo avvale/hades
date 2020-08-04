@@ -102,7 +102,18 @@ export class CreateFlowsService
         ));
         
         // insert
-        await this.repository.insert(aggregateFlows, { updateOnDuplicate: ['version', 'scenario', 'iflowName', 'responsibleUserAccount', 'lastChangeUserAccount', 'lastChangedAt', 'folderPath', 'description', 'application', 'updatedAt'] });
+        await this.repository.insert(aggregateFlows, { updateOnDuplicate: [
+            'version', 
+            'scenario', 
+            'iflowName', 
+            'responsibleUserAccount', 
+            'lastChangeUserAccount', 
+            'lastChangedAt', 
+            'folderPath', 
+            'description', 
+            'application', 
+            'updatedAt'
+        ] });
 
         // create AddFlowsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
