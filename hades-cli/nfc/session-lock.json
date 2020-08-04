@@ -1,474 +1,477 @@
-[
-    {
-        "path": "src/@hades/nfc/session/application/create/create-session.command-handler.ts",
-        "integrity": "sha1:fe3aa9317831e3d2712d5190b9718d11afe6387a"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/create/create-session.command.handler.spec.ts",
-        "integrity": "sha1:242c239a97ba1bf66369c0efb8a4625d762eae98"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/create/create-session.command.ts",
-        "integrity": "sha1:34f0ddd9314c7a6c3d8ad5a2b914331d39e0d233"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/create/create-session.service.spec.ts",
-        "integrity": "sha1:1ad342278984bdcfcec67743e3ecbb95cffea93c"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/create/create-session.service.ts",
-        "integrity": "sha1:f50a8717bc7bd8d2348bd6abb7325fe906d6efd3"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/create/create-sessions.command-handler.ts",
-        "integrity": "sha1:8ff22e8aa0ce4786b4d739a0dd53edf30d2c3934"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/create/create-sessions.command.handler.spec.ts",
-        "integrity": "sha1:32344598d39c8fde3aa753d8cc21d626e7d12691"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/create/create-sessions.command.ts",
-        "integrity": "sha1:661c02f8b1954b8f986384e017ffb7053a2b4b1d"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/create/create-sessions.service.spec.ts",
-        "integrity": "sha1:36b112d694b8c46f94de763e07393084354b186e"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/create/create-sessions.service.ts",
-        "integrity": "sha1:4c77d4c17dfbffbe116b6f7d364fd73df13de5dd"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/delete/delete-session-by-id.command-handler.ts",
-        "integrity": "sha1:e2a880df05d59f57bb62bcb32df6e54c161411e1"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/delete/delete-session-by-id.command.handler.spec.ts",
-        "integrity": "sha1:4b328b5f027139a552ce18642e6020c011603f3d"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/delete/delete-session-by-id.command.ts",
-        "integrity": "sha1:a4e4c29fdc697a1d3c6bce5f8d5d6076c5cead05"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/delete/delete-session-by-id.service.spec.ts",
-        "integrity": "sha1:69d063262298b2c75d81b95e71a933a92ce0eed0"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/delete/delete-session-by-id.service.ts",
-        "integrity": "sha1:2d05a3e4ec9f605f78aa59bf6b5e66a831d02818"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/delete/delete-sessions.command-handler.ts",
-        "integrity": "sha1:eacf5df1d8ab4626590ee582e84cf1a68545fa3f"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/delete/delete-sessions.command.handler.spec.ts",
-        "integrity": "sha1:9e1747cac395f54ebbd6bbea89d432639e9512d1"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/delete/delete-sessions.command.ts",
-        "integrity": "sha1:c447d703738cb69c52899e9fc7397afea65681a3"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/delete/delete-sessions.service.spec.ts",
-        "integrity": "sha1:70b87d5205d2d806a8eb598d059cecbd5809c8af"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/delete/delete-sessions.service.ts",
-        "integrity": "sha1:2fafb8bbd9a36b93a7973a117ee64cbd9f3b72ca"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/add-sessions-context.event.ts",
-        "integrity": "sha1:375369e99ba2d5bcc801c550a8a5df626f71c52a"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/created-session.event-handler.ts",
-        "integrity": "sha1:230a6846988b0e1ef4d56253660da5d45b831f63"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/created-session.event.ts",
-        "integrity": "sha1:bd53aebbd66d9e75da07ad658908816f9c3ee4bd"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/created-sessions.event-handler.ts",
-        "integrity": "sha1:a2a290656ae04c894a3854e5294ed7d272b9a277"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/created-sessions.event.ts",
-        "integrity": "sha1:0bebdaf09c8010d038a2721a29046d781f90690c"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/deleted-session.event-handler.ts",
-        "integrity": "sha1:0b16ff40aa82b1be250bade941b0b85d5cc13ab6"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/deleted-session.event.ts",
-        "integrity": "sha1:82c70feb8d82e29c417331eafd1f5bb6e2b163a9"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/deleted-sessions.event-handler.ts",
-        "integrity": "sha1:cfceaa520aac8861b6a7d5949379af893136d34c"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/deleted-sessions.event.ts",
-        "integrity": "sha1:2a5771ad1af4e4bf448b732082509387a3d158d9"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/updated-session.event-handler.ts",
-        "integrity": "sha1:4a35597409b75ebbef6699d6464cc87360c0fb81"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/events/updated-session.event.ts",
-        "integrity": "sha1:0ca0e502ab5a32fbd7b68f57dc9cc8be3ef677a6"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/find/find-session-by-id.query-handler.ts",
-        "integrity": "sha1:e99f2dd80a7363a3ef7a1e12f82e4b7f72fcf070"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/find/find-session-by-id.query.handler.spec.ts",
-        "integrity": "sha1:c70d4aa90bb9eb2362e85285e4200625f83efe68"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/find/find-session-by-id.query.ts",
-        "integrity": "sha1:4eaa3a2ccf82a664a84fef6842b8eff96c97f62c"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/find/find-session-by-id.service.spec.ts",
-        "integrity": "sha1:109feb6ee60dccc18937033062b068438679e8b9"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/find/find-session-by-id.service.ts",
-        "integrity": "sha1:c8c3881ab2ee2d64d9e316e0ea2c73e0a4199644"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/find/find-session.query-handler.ts",
-        "integrity": "sha1:9283f3ccff9d5ac77f7d59a532481c70635d2ac8"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/find/find-session.query.handler.spec.ts",
-        "integrity": "sha1:a48a40e79fb631dbebf4c96bcca30de46c70bc5a"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/find/find-session.query.ts",
-        "integrity": "sha1:6637f989888410dc4d8ef3e77bea71eecd0e9a30"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/find/find-session.service.spec.ts",
-        "integrity": "sha1:1f146c361decdeeba870f49ea9554bf654321cb6"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/find/find-session.service.ts",
-        "integrity": "sha1:c4ec2895dca2fb9f9d032d8b86027273b484632a"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/get/get-sessions.query-handler.ts",
-        "integrity": "sha1:9b79d28186acb6e3d2b46e17d8c4705183c34ba4"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/get/get-sessions.query.handler.spec.ts",
-        "integrity": "sha1:21ed1ee8ee773f579d64c43b8f1eee54076d42d2"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/get/get-sessions.query.ts",
-        "integrity": "sha1:982f0e85d646a29aedb780807a7cb071ef4d8f53"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/get/get-sessions.service.spec.ts",
-        "integrity": "sha1:db55a59c9dd061e7ec13e49eb9de2773cee6e132"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/get/get-sessions.service.ts",
-        "integrity": "sha1:45914ff79ff842791477c1def63d630658718b92"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/paginate/paginate-sessions.query-handler.ts",
-        "integrity": "sha1:e95fb426b1c83c5dff4e7ae2cd6671852ca36245"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/paginate/paginate-sessions.query.handler.spec.ts",
-        "integrity": "sha1:9758b10f48158d742920a163f971a5d40839f2f8"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/paginate/paginate-sessions.query.ts",
-        "integrity": "sha1:e5ba38a31f5808f7774eef60d86347067f135bdb"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/paginate/paginate-sessions.service.spec.ts",
-        "integrity": "sha1:9a281bbe3446da15b9469379d94dcf37d659f308"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/paginate/paginate-sessions.service.ts",
-        "integrity": "sha1:037f65dbd5973f5001203d3d65a41aa0eb44efe4"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/sagas/session.sagas.ts",
-        "integrity": "sha1:e698ada32ff2a4c03435c511530a809d12df2923"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/update/update-session.command-handler.ts",
-        "integrity": "sha1:63e0d4d0f1f4b7f816cc56aa3a82b6c4ba8ab3b2"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/update/update-session.command.handler.spec.ts",
-        "integrity": "sha1:c94731a0f85814bb11f45bf0082048638ace73ac"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/update/update-session.command.ts",
-        "integrity": "sha1:4f8829e8720485a7f805ef525a30e703ead24ef0"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/update/update-session.service.spec.ts",
-        "integrity": "sha1:9fc210f9804eca426207421f89fe228e765eb3c7"
-    },
-    {
-        "path": "src/@hades/nfc/session/application/update/update-session.service.ts",
-        "integrity": "sha1:9c7d5163e8608be5bc31504e42130cbb7e6e888d"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/session.aggregate.ts",
-        "integrity": "sha1:9a33d49901dff49a2f84432c00121711d97036c0"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/session.mapper.ts",
-        "integrity": "sha1:61fd7566ad746e68915d3f3fdf789be3064d5d34"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/session.repository.ts",
-        "integrity": "sha1:caf6246c3c49f82cacb8a0a0e6f05f3edbfe4e55"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/session.response.ts",
-        "integrity": "sha1:30ae12f30fae97ee348235d0351056c447bc2660"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/value-objects/index.ts",
-        "integrity": "sha1:1349dd434bc7a629595bc6db7c947f332d8c4acc"
-    },
-    {
-        "path": "src/@hades/nfc/session/index.ts",
-        "integrity": "sha1:7cbddef1cae76608d46cf04728bc8cf3201a2015"
-    },
-    {
-        "path": "src/@hades/nfc/session/infrastructure/mock/mock-session.repository.ts",
-        "integrity": "sha1:b09d80d622b3a1e317e8c4a7eb4fd647b451cfe7"
-    },
-    {
-        "path": "src/@hades/nfc/session/infrastructure/seeds/session.seed.ts",
-        "integrity": "sha1:02b65463ff7968be681cb6239a8d58d4d909f340"
-    },
-    {
-        "path": "src/@hades/nfc/session/infrastructure/sequelize/sequelize-session.model.ts",
-        "integrity": "sha1:9fbbfa5621ffb2a3f7130d99ecfc6fa175241e01"
-    },
-    {
-        "path": "src/@hades/nfc/session/infrastructure/sequelize/sequelize-session.repository.ts",
-        "integrity": "sha1:b2f8f2b393956e4bf65815238e501517b5a292b7"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/value-objects/session-id.ts",
-        "integrity": "sha1:b87c837a1cba2ad87eef78c3a1094c48a129c713"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/value-objects/session-ip.ts",
-        "integrity": "sha1:beb3695b5b6ed34e5587ebf7f0aa3e9a380167be"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/value-objects/session-tag-id.ts",
-        "integrity": "sha1:2cace1e5bc58ebda2e9bed17a7e8f29faff6c183"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/value-objects/session-uid.ts",
-        "integrity": "sha1:4fdbdc5ab9f374030c40ff573d1509906f6be4ba"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/value-objects/session-counter.ts",
-        "integrity": "sha1:38f9ad188f099525cefaae0031ea2c292a78f380"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/value-objects/session-expired-at.ts",
-        "integrity": "sha1:777328b580d4b6aba30cb814b39dec5c6ecc38a5"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/value-objects/session-created-at.ts",
-        "integrity": "sha1:d1ac53bc7b57c4bc628465e4316e8786c8e3011b"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/value-objects/session-updated-at.ts",
-        "integrity": "sha1:a5e383b938c3583a693426aaec88371c261ff605"
-    },
-    {
-        "path": "src/@hades/nfc/session/domain/value-objects/session-deleted-at.ts",
-        "integrity": "sha1:d04f2378e1d6f707752471a2d6a62790ec182a9f"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/create-session.controller.spec.ts",
-        "integrity": "sha1:bb517b0cf93acc9a1772c704b2021ad88ec6e085"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/create-session.controller.ts",
-        "integrity": "sha1:5f2e50e5eeb27568919faa4de35d14152398cc86"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/create-sessions.controller.spec.ts",
-        "integrity": "sha1:1384f5528ad47bc6433eb0286f8cbf08065c3801"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/create-sessions.controller.ts",
-        "integrity": "sha1:064f160e1c112d57d121b3e1c4bd541b39fe1e5d"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/delete-session-by-id.controller.spec.ts",
-        "integrity": "sha1:848af94b812e5b88f872469ac1631f9589cfe255"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/delete-session-by-id.controller.ts",
-        "integrity": "sha1:92e55d359d1776da1a17e86076613f392271ae01"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/delete-sessions.controller.spec.ts",
-        "integrity": "sha1:ba5a3c9f7ba0d6da225697c7203f34add99d06d8"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/delete-sessions.controller.ts",
-        "integrity": "sha1:122add5296240df5a419ddcf3866f7e5ca513b56"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/find-session-by-id.controller.spec.ts",
-        "integrity": "sha1:8bba06f7074bac493db12bcb6698a3ce57575b50"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/find-session-by-id.controller.ts",
-        "integrity": "sha1:e25dafd38b953467b39186a6f30f11ec070e8647"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/find-session.controller.spec.ts",
-        "integrity": "sha1:c03715405d683a6fa0c35625a7dccb679a8707cd"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/find-session.controller.ts",
-        "integrity": "sha1:8d8f66a0ad46222e3eed69baeddaf6ad2c07fe29"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/get-sessions.controller.spec.ts",
-        "integrity": "sha1:359f1f83dd913a046c47e64cb8bb34cceb50b435"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/get-sessions.controller.ts",
-        "integrity": "sha1:5ddc9a62fe69cb0139d924c74f425530bb3ab7f2"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/paginate-sessions.controller.spec.ts",
-        "integrity": "sha1:c92e8c3e0fd5e6ca70c7ae2a1cb231c5ff2d370e"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/paginate-sessions.controller.ts",
-        "integrity": "sha1:0c8b970d4f9938ca2bd276a22a677004d85370e8"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/update-session.controller.spec.ts",
-        "integrity": "sha1:e18727d6f004113a2e482b9f98bc61e2c5cd713f"
-    },
-    {
-        "path": "src/apps/nfc/session/controllers/update-session.controller.ts",
-        "integrity": "sha1:714b61e591973a19ca6f343278e08c57faeb1d41"
-    },
-    {
-        "path": "src/apps/nfc/session/dto/session.dto.ts",
-        "integrity": "sha1:1ef6a2aaf1a85a23365e64a7ff33e69458f895e4"
-    },
-    {
-        "path": "src/apps/nfc/session/dto/create-session.dto.ts",
-        "integrity": "sha1:2736b2b200ddfdf85d0f09ce3ba96c56c0f5d602"
-    },
-    {
-        "path": "src/apps/nfc/session/dto/update-session.dto.ts",
-        "integrity": "sha1:3a943054079538f77679ed8283575e858fc1cec3"
-    },
-    {
-        "path": "src/apps/nfc/session/graphql/session.graphql",
-        "integrity": "sha1:1d9823c0a9ed391f67f72a85a6848078e070faf7"
-    },
-    {
-        "path": "src/apps/nfc/session/index.ts",
-        "integrity": "sha1:415fb366205b730378e92b606fc168749c0f9321"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/create-session.resolver.spec.ts",
-        "integrity": "sha1:c38e505fca4e987dd4cfc567e520716e1bfe7d0f"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/create-session.resolver.ts",
-        "integrity": "sha1:827ffdc180c42ae0a6aea8284dee36315d807b20"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/create-sessions.resolver.spec.ts",
-        "integrity": "sha1:dae92acd03bf8ea8e46fb395c5680eff5d6aafda"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/create-sessions.resolver.ts",
-        "integrity": "sha1:563ac2f8d0d19bcd7b669ac6bbe59a26b3529cff"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/delete-session-by-id.resolver.spec.ts",
-        "integrity": "sha1:7d6c4a75d861f3388faeebedc61141decbb4604d"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/delete-session-by-id.resolver.ts",
-        "integrity": "sha1:ee54043b33ca92841f503f38497f0c68b4885674"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/delete-sessions.resolver.spec.ts",
-        "integrity": "sha1:d60015bb3d303aab58e19a5242b1744f555f1ce1"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/delete-sessions.resolver.ts",
-        "integrity": "sha1:7602e2a8a7182954896013cdff83082e36366f31"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/find-session-by-id.resolver.spec.ts",
-        "integrity": "sha1:322eb78fa222d28b66b06f82c4ab9b6138b064d9"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/find-session-by-id.resolver.ts",
-        "integrity": "sha1:9573ab14aa62b1cb9ba1e91efebe22f74e7e2bd2"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/find-session.resolver.spec.ts",
-        "integrity": "sha1:081eaead59cdf68cd1c312718515e31e6c9511af"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/find-session.resolver.ts",
-        "integrity": "sha1:d0efbc4dee3b98c8806f9245999d2f90ac56fdd9"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/get-sessions.resolver.spec.ts",
-        "integrity": "sha1:d39456555cd3bdabe99fe97bb61bf345bf3d7157"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/get-sessions.resolver.ts",
-        "integrity": "sha1:f98e0ababb77a701c2cd7d77943aa3c87ef57270"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/paginate-sessions.resolver.spec.ts",
-        "integrity": "sha1:460f138c6f3517b1041229e31cb572a2a9ed14c7"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/paginate-sessions.resolver.ts",
-        "integrity": "sha1:193b6ec2179f763a73312600137ad4a9962abecb"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/update-session.resolver.spec.ts",
-        "integrity": "sha1:2492f6bbd55ac2b6f6684456191b4f30113a9a2d"
-    },
-    {
-        "path": "src/apps/nfc/session/resolvers/update-session.resolver.ts",
-        "integrity": "sha1:94b74c556ba31b841660c4b11c9b4ff7de09435d"
-    },
-    {
-        "path": "postman/nfc.session.postman.json",
-        "integrity": "sha1:7139866346ac8a5e3515854f3adba294a290c7f3"
-    }
-]
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/nfc/session/application/create/create-session.command-handler.ts",
+            "integrity": "sha1:fe3aa9317831e3d2712d5190b9718d11afe6387a"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/create/create-session.command.handler.spec.ts",
+            "integrity": "sha1:242c239a97ba1bf66369c0efb8a4625d762eae98"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/create/create-session.command.ts",
+            "integrity": "sha1:34f0ddd9314c7a6c3d8ad5a2b914331d39e0d233"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/create/create-session.service.spec.ts",
+            "integrity": "sha1:1ad342278984bdcfcec67743e3ecbb95cffea93c"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/create/create-session.service.ts",
+            "integrity": "sha1:f50a8717bc7bd8d2348bd6abb7325fe906d6efd3"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/create/create-sessions.command-handler.ts",
+            "integrity": "sha1:8ff22e8aa0ce4786b4d739a0dd53edf30d2c3934"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/create/create-sessions.command.handler.spec.ts",
+            "integrity": "sha1:32344598d39c8fde3aa753d8cc21d626e7d12691"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/create/create-sessions.command.ts",
+            "integrity": "sha1:661c02f8b1954b8f986384e017ffb7053a2b4b1d"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/create/create-sessions.service.spec.ts",
+            "integrity": "sha1:36b112d694b8c46f94de763e07393084354b186e"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/create/create-sessions.service.ts",
+            "integrity": "sha1:4c77d4c17dfbffbe116b6f7d364fd73df13de5dd"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/delete/delete-session-by-id.command-handler.ts",
+            "integrity": "sha1:e2a880df05d59f57bb62bcb32df6e54c161411e1"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/delete/delete-session-by-id.command.handler.spec.ts",
+            "integrity": "sha1:4b328b5f027139a552ce18642e6020c011603f3d"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/delete/delete-session-by-id.command.ts",
+            "integrity": "sha1:a4e4c29fdc697a1d3c6bce5f8d5d6076c5cead05"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/delete/delete-session-by-id.service.spec.ts",
+            "integrity": "sha1:69d063262298b2c75d81b95e71a933a92ce0eed0"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/delete/delete-session-by-id.service.ts",
+            "integrity": "sha1:2d05a3e4ec9f605f78aa59bf6b5e66a831d02818"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/delete/delete-sessions.command-handler.ts",
+            "integrity": "sha1:eacf5df1d8ab4626590ee582e84cf1a68545fa3f"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/delete/delete-sessions.command.handler.spec.ts",
+            "integrity": "sha1:9e1747cac395f54ebbd6bbea89d432639e9512d1"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/delete/delete-sessions.command.ts",
+            "integrity": "sha1:c447d703738cb69c52899e9fc7397afea65681a3"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/delete/delete-sessions.service.spec.ts",
+            "integrity": "sha1:70b87d5205d2d806a8eb598d059cecbd5809c8af"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/delete/delete-sessions.service.ts",
+            "integrity": "sha1:2fafb8bbd9a36b93a7973a117ee64cbd9f3b72ca"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/add-sessions-context.event.ts",
+            "integrity": "sha1:375369e99ba2d5bcc801c550a8a5df626f71c52a"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/created-session.event-handler.ts",
+            "integrity": "sha1:230a6846988b0e1ef4d56253660da5d45b831f63"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/created-session.event.ts",
+            "integrity": "sha1:bd53aebbd66d9e75da07ad658908816f9c3ee4bd"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/created-sessions.event-handler.ts",
+            "integrity": "sha1:a2a290656ae04c894a3854e5294ed7d272b9a277"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/created-sessions.event.ts",
+            "integrity": "sha1:0bebdaf09c8010d038a2721a29046d781f90690c"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/deleted-session.event-handler.ts",
+            "integrity": "sha1:0b16ff40aa82b1be250bade941b0b85d5cc13ab6"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/deleted-session.event.ts",
+            "integrity": "sha1:82c70feb8d82e29c417331eafd1f5bb6e2b163a9"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/deleted-sessions.event-handler.ts",
+            "integrity": "sha1:cfceaa520aac8861b6a7d5949379af893136d34c"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/deleted-sessions.event.ts",
+            "integrity": "sha1:2a5771ad1af4e4bf448b732082509387a3d158d9"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/updated-session.event-handler.ts",
+            "integrity": "sha1:4a35597409b75ebbef6699d6464cc87360c0fb81"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/events/updated-session.event.ts",
+            "integrity": "sha1:0ca0e502ab5a32fbd7b68f57dc9cc8be3ef677a6"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/find/find-session-by-id.query-handler.ts",
+            "integrity": "sha1:e99f2dd80a7363a3ef7a1e12f82e4b7f72fcf070"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/find/find-session-by-id.query.handler.spec.ts",
+            "integrity": "sha1:c70d4aa90bb9eb2362e85285e4200625f83efe68"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/find/find-session-by-id.query.ts",
+            "integrity": "sha1:4eaa3a2ccf82a664a84fef6842b8eff96c97f62c"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/find/find-session-by-id.service.spec.ts",
+            "integrity": "sha1:109feb6ee60dccc18937033062b068438679e8b9"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/find/find-session-by-id.service.ts",
+            "integrity": "sha1:c8c3881ab2ee2d64d9e316e0ea2c73e0a4199644"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/find/find-session.query-handler.ts",
+            "integrity": "sha1:9283f3ccff9d5ac77f7d59a532481c70635d2ac8"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/find/find-session.query.handler.spec.ts",
+            "integrity": "sha1:a48a40e79fb631dbebf4c96bcca30de46c70bc5a"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/find/find-session.query.ts",
+            "integrity": "sha1:6637f989888410dc4d8ef3e77bea71eecd0e9a30"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/find/find-session.service.spec.ts",
+            "integrity": "sha1:1f146c361decdeeba870f49ea9554bf654321cb6"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/find/find-session.service.ts",
+            "integrity": "sha1:c4ec2895dca2fb9f9d032d8b86027273b484632a"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/get/get-sessions.query-handler.ts",
+            "integrity": "sha1:9b79d28186acb6e3d2b46e17d8c4705183c34ba4"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/get/get-sessions.query.handler.spec.ts",
+            "integrity": "sha1:21ed1ee8ee773f579d64c43b8f1eee54076d42d2"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/get/get-sessions.query.ts",
+            "integrity": "sha1:982f0e85d646a29aedb780807a7cb071ef4d8f53"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/get/get-sessions.service.spec.ts",
+            "integrity": "sha1:db55a59c9dd061e7ec13e49eb9de2773cee6e132"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/get/get-sessions.service.ts",
+            "integrity": "sha1:45914ff79ff842791477c1def63d630658718b92"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/paginate/paginate-sessions.query-handler.ts",
+            "integrity": "sha1:e95fb426b1c83c5dff4e7ae2cd6671852ca36245"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/paginate/paginate-sessions.query.handler.spec.ts",
+            "integrity": "sha1:9758b10f48158d742920a163f971a5d40839f2f8"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/paginate/paginate-sessions.query.ts",
+            "integrity": "sha1:e5ba38a31f5808f7774eef60d86347067f135bdb"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/paginate/paginate-sessions.service.spec.ts",
+            "integrity": "sha1:9a281bbe3446da15b9469379d94dcf37d659f308"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/paginate/paginate-sessions.service.ts",
+            "integrity": "sha1:037f65dbd5973f5001203d3d65a41aa0eb44efe4"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/sagas/session.sagas.ts",
+            "integrity": "sha1:e698ada32ff2a4c03435c511530a809d12df2923"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/update/update-session.command-handler.ts",
+            "integrity": "sha1:63e0d4d0f1f4b7f816cc56aa3a82b6c4ba8ab3b2"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/update/update-session.command.handler.spec.ts",
+            "integrity": "sha1:c94731a0f85814bb11f45bf0082048638ace73ac"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/update/update-session.command.ts",
+            "integrity": "sha1:4f8829e8720485a7f805ef525a30e703ead24ef0"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/update/update-session.service.spec.ts",
+            "integrity": "sha1:9fc210f9804eca426207421f89fe228e765eb3c7"
+        },
+        {
+            "path": "src/@hades/nfc/session/application/update/update-session.service.ts",
+            "integrity": "sha1:9c7d5163e8608be5bc31504e42130cbb7e6e888d"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/session.aggregate.ts",
+            "integrity": "sha1:9a33d49901dff49a2f84432c00121711d97036c0"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/session.mapper.ts",
+            "integrity": "sha1:61fd7566ad746e68915d3f3fdf789be3064d5d34"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/session.repository.ts",
+            "integrity": "sha1:caf6246c3c49f82cacb8a0a0e6f05f3edbfe4e55"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/session.response.ts",
+            "integrity": "sha1:30ae12f30fae97ee348235d0351056c447bc2660"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/value-objects/index.ts",
+            "integrity": "sha1:1349dd434bc7a629595bc6db7c947f332d8c4acc"
+        },
+        {
+            "path": "src/@hades/nfc/session/index.ts",
+            "integrity": "sha1:7cbddef1cae76608d46cf04728bc8cf3201a2015"
+        },
+        {
+            "path": "src/@hades/nfc/session/infrastructure/mock/mock-session.repository.ts",
+            "integrity": "sha1:b09d80d622b3a1e317e8c4a7eb4fd647b451cfe7"
+        },
+        {
+            "path": "src/@hades/nfc/session/infrastructure/seeds/session.seed.ts",
+            "integrity": "sha1:02b65463ff7968be681cb6239a8d58d4d909f340"
+        },
+        {
+            "path": "src/@hades/nfc/session/infrastructure/sequelize/sequelize-session.model.ts",
+            "integrity": "sha1:9fbbfa5621ffb2a3f7130d99ecfc6fa175241e01"
+        },
+        {
+            "path": "src/@hades/nfc/session/infrastructure/sequelize/sequelize-session.repository.ts",
+            "integrity": "sha1:b2f8f2b393956e4bf65815238e501517b5a292b7"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/value-objects/session-id.ts",
+            "integrity": "sha1:b87c837a1cba2ad87eef78c3a1094c48a129c713"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/value-objects/session-ip.ts",
+            "integrity": "sha1:beb3695b5b6ed34e5587ebf7f0aa3e9a380167be"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/value-objects/session-tag-id.ts",
+            "integrity": "sha1:2cace1e5bc58ebda2e9bed17a7e8f29faff6c183"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/value-objects/session-uid.ts",
+            "integrity": "sha1:4fdbdc5ab9f374030c40ff573d1509906f6be4ba"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/value-objects/session-counter.ts",
+            "integrity": "sha1:38f9ad188f099525cefaae0031ea2c292a78f380"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/value-objects/session-expired-at.ts",
+            "integrity": "sha1:777328b580d4b6aba30cb814b39dec5c6ecc38a5"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/value-objects/session-created-at.ts",
+            "integrity": "sha1:d1ac53bc7b57c4bc628465e4316e8786c8e3011b"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/value-objects/session-updated-at.ts",
+            "integrity": "sha1:a5e383b938c3583a693426aaec88371c261ff605"
+        },
+        {
+            "path": "src/@hades/nfc/session/domain/value-objects/session-deleted-at.ts",
+            "integrity": "sha1:d04f2378e1d6f707752471a2d6a62790ec182a9f"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/create-session.controller.spec.ts",
+            "integrity": "sha1:bb517b0cf93acc9a1772c704b2021ad88ec6e085"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/create-session.controller.ts",
+            "integrity": "sha1:5f2e50e5eeb27568919faa4de35d14152398cc86"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/create-sessions.controller.spec.ts",
+            "integrity": "sha1:1384f5528ad47bc6433eb0286f8cbf08065c3801"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/create-sessions.controller.ts",
+            "integrity": "sha1:064f160e1c112d57d121b3e1c4bd541b39fe1e5d"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/delete-session-by-id.controller.spec.ts",
+            "integrity": "sha1:848af94b812e5b88f872469ac1631f9589cfe255"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/delete-session-by-id.controller.ts",
+            "integrity": "sha1:92e55d359d1776da1a17e86076613f392271ae01"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/delete-sessions.controller.spec.ts",
+            "integrity": "sha1:ba5a3c9f7ba0d6da225697c7203f34add99d06d8"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/delete-sessions.controller.ts",
+            "integrity": "sha1:122add5296240df5a419ddcf3866f7e5ca513b56"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/find-session-by-id.controller.spec.ts",
+            "integrity": "sha1:8bba06f7074bac493db12bcb6698a3ce57575b50"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/find-session-by-id.controller.ts",
+            "integrity": "sha1:e25dafd38b953467b39186a6f30f11ec070e8647"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/find-session.controller.spec.ts",
+            "integrity": "sha1:c03715405d683a6fa0c35625a7dccb679a8707cd"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/find-session.controller.ts",
+            "integrity": "sha1:8d8f66a0ad46222e3eed69baeddaf6ad2c07fe29"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/get-sessions.controller.spec.ts",
+            "integrity": "sha1:359f1f83dd913a046c47e64cb8bb34cceb50b435"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/get-sessions.controller.ts",
+            "integrity": "sha1:5ddc9a62fe69cb0139d924c74f425530bb3ab7f2"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/paginate-sessions.controller.spec.ts",
+            "integrity": "sha1:c92e8c3e0fd5e6ca70c7ae2a1cb231c5ff2d370e"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/paginate-sessions.controller.ts",
+            "integrity": "sha1:0c8b970d4f9938ca2bd276a22a677004d85370e8"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/update-session.controller.spec.ts",
+            "integrity": "sha1:e18727d6f004113a2e482b9f98bc61e2c5cd713f"
+        },
+        {
+            "path": "src/apps/nfc/session/controllers/update-session.controller.ts",
+            "integrity": "sha1:714b61e591973a19ca6f343278e08c57faeb1d41"
+        },
+        {
+            "path": "src/apps/nfc/session/dto/session.dto.ts",
+            "integrity": "sha1:1ef6a2aaf1a85a23365e64a7ff33e69458f895e4"
+        },
+        {
+            "path": "src/apps/nfc/session/dto/create-session.dto.ts",
+            "integrity": "sha1:2736b2b200ddfdf85d0f09ce3ba96c56c0f5d602"
+        },
+        {
+            "path": "src/apps/nfc/session/dto/update-session.dto.ts",
+            "integrity": "sha1:3a943054079538f77679ed8283575e858fc1cec3"
+        },
+        {
+            "path": "src/apps/nfc/session/graphql/session.graphql",
+            "integrity": "sha1:1d9823c0a9ed391f67f72a85a6848078e070faf7"
+        },
+        {
+            "path": "src/apps/nfc/session/index.ts",
+            "integrity": "sha1:415fb366205b730378e92b606fc168749c0f9321"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/create-session.resolver.spec.ts",
+            "integrity": "sha1:c38e505fca4e987dd4cfc567e520716e1bfe7d0f"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/create-session.resolver.ts",
+            "integrity": "sha1:827ffdc180c42ae0a6aea8284dee36315d807b20"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/create-sessions.resolver.spec.ts",
+            "integrity": "sha1:dae92acd03bf8ea8e46fb395c5680eff5d6aafda"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/create-sessions.resolver.ts",
+            "integrity": "sha1:563ac2f8d0d19bcd7b669ac6bbe59a26b3529cff"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/delete-session-by-id.resolver.spec.ts",
+            "integrity": "sha1:7d6c4a75d861f3388faeebedc61141decbb4604d"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/delete-session-by-id.resolver.ts",
+            "integrity": "sha1:ee54043b33ca92841f503f38497f0c68b4885674"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/delete-sessions.resolver.spec.ts",
+            "integrity": "sha1:d60015bb3d303aab58e19a5242b1744f555f1ce1"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/delete-sessions.resolver.ts",
+            "integrity": "sha1:7602e2a8a7182954896013cdff83082e36366f31"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/find-session-by-id.resolver.spec.ts",
+            "integrity": "sha1:322eb78fa222d28b66b06f82c4ab9b6138b064d9"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/find-session-by-id.resolver.ts",
+            "integrity": "sha1:9573ab14aa62b1cb9ba1e91efebe22f74e7e2bd2"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/find-session.resolver.spec.ts",
+            "integrity": "sha1:081eaead59cdf68cd1c312718515e31e6c9511af"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/find-session.resolver.ts",
+            "integrity": "sha1:d0efbc4dee3b98c8806f9245999d2f90ac56fdd9"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/get-sessions.resolver.spec.ts",
+            "integrity": "sha1:d39456555cd3bdabe99fe97bb61bf345bf3d7157"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/get-sessions.resolver.ts",
+            "integrity": "sha1:f98e0ababb77a701c2cd7d77943aa3c87ef57270"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/paginate-sessions.resolver.spec.ts",
+            "integrity": "sha1:460f138c6f3517b1041229e31cb572a2a9ed14c7"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/paginate-sessions.resolver.ts",
+            "integrity": "sha1:193b6ec2179f763a73312600137ad4a9962abecb"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/update-session.resolver.spec.ts",
+            "integrity": "sha1:2492f6bbd55ac2b6f6684456191b4f30113a9a2d"
+        },
+        {
+            "path": "src/apps/nfc/session/resolvers/update-session.resolver.ts",
+            "integrity": "sha1:94b74c556ba31b841660c4b11c9b4ff7de09435d"
+        },
+        {
+            "path": "postman/nfc.session.postman.json",
+            "integrity": "sha1:7139866346ac8a5e3515854f3adba294a290c7f3"
+        }
+    ]
+}

@@ -1,470 +1,473 @@
-[
-    {
-        "path": "src/@hades/nfc/summary/application/create/create-summary.command-handler.ts",
-        "integrity": "sha1:68cddb0fc6382265f3358a7a2fdc4f0e5561d19e"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/create/create-summary.command.handler.spec.ts",
-        "integrity": "sha1:9e186451ac33bd33f088fa36d6dffe6862245e81"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/create/create-summary.command.ts",
-        "integrity": "sha1:09f8c93911349ef7d589ebbd920b49f7ddae44de"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/create/create-summary.service.spec.ts",
-        "integrity": "sha1:16de540758338537f39b0a024ccbeced49cbcc7e"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/create/create-summary.service.ts",
-        "integrity": "sha1:57f8169bcea418c712d1cd136e1d4058dcb3655d"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/create/create-summaries.command-handler.ts",
-        "integrity": "sha1:444ef88d124784a7266f3bd134f70fab2bc2ff68"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/create/create-summaries.command.handler.spec.ts",
-        "integrity": "sha1:32853fca3402b248c05c4d7bc37be97836dd14f4"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/create/create-summaries.command.ts",
-        "integrity": "sha1:8e241325dee95dc6ee235f0f532ed8994b2c6047"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/create/create-summaries.service.spec.ts",
-        "integrity": "sha1:6bf1ea3c757bfbf1b56817587d34fe66e953ec72"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/create/create-summaries.service.ts",
-        "integrity": "sha1:274a1994f87008171f0969c0c643a9dce35ee297"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/delete/delete-summary-by-id.command-handler.ts",
-        "integrity": "sha1:bb877be0ec6d4cf54fdeb6be939f2ed9ed48a1ef"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/delete/delete-summary-by-id.command.handler.spec.ts",
-        "integrity": "sha1:19a08e09f090af5014f7b6037d57afd894091490"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/delete/delete-summary-by-id.command.ts",
-        "integrity": "sha1:6955a17dbbd9e9cdda5c8a5f0f52961f5cf3b20e"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/delete/delete-summary-by-id.service.spec.ts",
-        "integrity": "sha1:eb163054bfa112d7ce2dcd806487ce8ebc2c9263"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/delete/delete-summary-by-id.service.ts",
-        "integrity": "sha1:0c5d174ac1f5e96c897ed3e622f74845ec51baae"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/delete/delete-summaries.command-handler.ts",
-        "integrity": "sha1:f6fcf04b484b63c98b2bbf53bcd29914ee076749"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/delete/delete-summaries.command.handler.spec.ts",
-        "integrity": "sha1:a60436347c4db6629cbfd7a701e50f96ba6a775f"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/delete/delete-summaries.command.ts",
-        "integrity": "sha1:42a1d555f99c50332e4c3260571596b1dc1b2efb"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/delete/delete-summaries.service.spec.ts",
-        "integrity": "sha1:ce09aa06c3019b90029df32daeebacc5d40ffee9"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/delete/delete-summaries.service.ts",
-        "integrity": "sha1:3ed50c5c9c5c175f1de0f734c2d48f9d7acbb281"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/add-summaries-context.event.ts",
-        "integrity": "sha1:d77353a5dbda1eedeedd261881b5563075528956"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/created-summary.event-handler.ts",
-        "integrity": "sha1:436b257c3121c8efea1b45b15749f18965e2cbf7"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/created-summary.event.ts",
-        "integrity": "sha1:e92c719e6dc9f9bb9a3b9c273a272b276cf46cad"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/created-summaries.event-handler.ts",
-        "integrity": "sha1:0c5f2a7431fa3f3fe688ce482102ea94bb6775e2"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/created-summaries.event.ts",
-        "integrity": "sha1:8be329570ee5c570c7060034d0e88844bbaf6996"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/deleted-summary.event-handler.ts",
-        "integrity": "sha1:9a0281e0bd3b07bd4e2ca08ca83bbca5fb2eb3c6"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/deleted-summary.event.ts",
-        "integrity": "sha1:5fd34a22d418bba3b248617ec183177a31a9f448"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/deleted-summaries.event-handler.ts",
-        "integrity": "sha1:58e583653caf131e0ca3efc401c4d18f78c191e6"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/deleted-summaries.event.ts",
-        "integrity": "sha1:969570dca7bd3f31290a800fb6c40ca03af355ad"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/updated-summary.event-handler.ts",
-        "integrity": "sha1:0c79a1b43072764c21abacf73675057d439dae74"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/events/updated-summary.event.ts",
-        "integrity": "sha1:2bfe0dc63cf34971b7c582ea54b62d0cc99f8bf1"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/find/find-summary-by-id.query-handler.ts",
-        "integrity": "sha1:22b19d7dd94315a8245a164961b951724a946905"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/find/find-summary-by-id.query.handler.spec.ts",
-        "integrity": "sha1:77cdfe3a9a3775e4cfd6549a37bc7a4da705db92"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/find/find-summary-by-id.query.ts",
-        "integrity": "sha1:54890ffa4f9a0b15ed636bd9d529f128b77e995c"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/find/find-summary-by-id.service.spec.ts",
-        "integrity": "sha1:6102af5011c74c855e290fa5af8c803dcd065a9d"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/find/find-summary-by-id.service.ts",
-        "integrity": "sha1:5d019f73394b1330bdd577851752dbc89231048b"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/find/find-summary.query-handler.ts",
-        "integrity": "sha1:344149b13b20f7334830ba1b982615e288413e77"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/find/find-summary.query.handler.spec.ts",
-        "integrity": "sha1:0c694e93fa8bb06c9c304801dc14a4430358121b"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/find/find-summary.query.ts",
-        "integrity": "sha1:b8bb8f59ebc912a6ce7de55c09f4ccae8e2d6608"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/find/find-summary.service.spec.ts",
-        "integrity": "sha1:11a26590d9bb461a2d1862ce189ea82a2d902ab5"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/find/find-summary.service.ts",
-        "integrity": "sha1:4e5964dfe79fce0d3fcc286d809d300096c41b08"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/get/get-summaries.query-handler.ts",
-        "integrity": "sha1:7c3b4327b62829ad0615954e770c467c7ffa0a9f"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/get/get-summaries.query.handler.spec.ts",
-        "integrity": "sha1:7446b47a01de6e43902f0980e52ded8a93318956"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/get/get-summaries.query.ts",
-        "integrity": "sha1:bb17b4027a87043d0da2cdadea16e3a3ebcfa79c"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/get/get-summaries.service.spec.ts",
-        "integrity": "sha1:0a969c4683307ebad20e31eabf6c0161f7c25341"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/get/get-summaries.service.ts",
-        "integrity": "sha1:630f1e85b5eb39981357155458611f3ea19b8f14"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/paginate/paginate-summaries.query-handler.ts",
-        "integrity": "sha1:2ae49c817aec04e17e81f24a8777322f74446459"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/paginate/paginate-summaries.query.handler.spec.ts",
-        "integrity": "sha1:b100662ff0616e49fccba045f0399c237a9d7c30"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/paginate/paginate-summaries.query.ts",
-        "integrity": "sha1:0a56f85650c25d406ad7a64edb40986e9cd4464c"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/paginate/paginate-summaries.service.spec.ts",
-        "integrity": "sha1:188f15cc3df232cf4a16602537735056b16a6259"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/paginate/paginate-summaries.service.ts",
-        "integrity": "sha1:958f33f7e65029d19433531dd9278d735e5414e8"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/sagas/summary.sagas.ts",
-        "integrity": "sha1:2147c9a4971084da21eb78ad60cb955f541fcb7e"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/update/update-summary.command-handler.ts",
-        "integrity": "sha1:d2f192af3a1909879e5fcf0118adef6cf83c6189"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/update/update-summary.command.handler.spec.ts",
-        "integrity": "sha1:3c7115193289f18031cd6f255ae9d1280e3ed13d"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/update/update-summary.command.ts",
-        "integrity": "sha1:824dc24dba82167df5532f98d6c3aea03714601b"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/update/update-summary.service.spec.ts",
-        "integrity": "sha1:bfd7a09667fe15a7d0c31be613f29bcddde1a329"
-    },
-    {
-        "path": "src/@hades/nfc/summary/application/update/update-summary.service.ts",
-        "integrity": "sha1:174f64d4f8eadd3dc735da25059642e947e5d668"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/summary.aggregate.ts",
-        "integrity": "sha1:734208bdc75960f462bf8364dee8c1401bef64f9"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/summary.mapper.ts",
-        "integrity": "sha1:9f88f8c71d18ea4ac437a20654c838eb4e380790"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/summary.repository.ts",
-        "integrity": "sha1:3dcdfbae37d9b00b963adcdab5f30a3b635c2d8a"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/summary.response.ts",
-        "integrity": "sha1:6e6759b8c23b436fc468170740278c0c15b54408"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/value-objects/index.ts",
-        "integrity": "sha1:50b2de920234106b1212b461cbecc7b11a4f8b4c"
-    },
-    {
-        "path": "src/@hades/nfc/summary/index.ts",
-        "integrity": "sha1:56144489f6ee73c74598e868a844613065346a0c"
-    },
-    {
-        "path": "src/@hades/nfc/summary/infrastructure/mock/mock-summary.repository.ts",
-        "integrity": "sha1:296b5acc9b181da1efa2505f8ea06e0de7d5dd92"
-    },
-    {
-        "path": "src/@hades/nfc/summary/infrastructure/seeds/summary.seed.ts",
-        "integrity": "sha1:6371e9a075ce1f684cd67cc511f139e5e55a3e22"
-    },
-    {
-        "path": "src/@hades/nfc/summary/infrastructure/sequelize/sequelize-summary.model.ts",
-        "integrity": "sha1:e8ba82c68ca3824db0d42a6c32941dafc1775e30"
-    },
-    {
-        "path": "src/@hades/nfc/summary/infrastructure/sequelize/sequelize-summary.repository.ts",
-        "integrity": "sha1:dd644ee7e9b66b99f4fb0dac7348c092c0617079"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/value-objects/summary-id.ts",
-        "integrity": "sha1:0956cbbd37aa680fe1c6c360becf4d695b6f61d4"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/value-objects/summary-tag-id.ts",
-        "integrity": "sha1:9c63d85d670edbbea26625bd57baec149b1c612b"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/value-objects/summary-tenant-id.ts",
-        "integrity": "sha1:2f0c131db0e168b1314db05028a551ce6b2b0f9c"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/value-objects/summary-access-at.ts",
-        "integrity": "sha1:5b8c12f5835f60d6123b2798eb5ad48cb667bff3"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/value-objects/summary-counter.ts",
-        "integrity": "sha1:36ca425e5fd6db00d8f4a01ec37daddf3964d1cf"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/value-objects/summary-created-at.ts",
-        "integrity": "sha1:c88a7d7fc32435931de5273ee8a05bc95e741f99"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/value-objects/summary-updated-at.ts",
-        "integrity": "sha1:54e30bca4d929db01ae305e590dcc1aa09326b9a"
-    },
-    {
-        "path": "src/@hades/nfc/summary/domain/value-objects/summary-deleted-at.ts",
-        "integrity": "sha1:318165f9e3e00b9788827b06ba467f2a4bcdd8d1"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/create-summary.controller.spec.ts",
-        "integrity": "sha1:c583510dcea8881b10362d4c9fb61e716671dac2"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/create-summary.controller.ts",
-        "integrity": "sha1:a5e184c638f179c46e7548679f1182992ceda23e"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/create-summaries.controller.spec.ts",
-        "integrity": "sha1:f2aae5d8228a7542d8a6220072cc9f3194f70d3a"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/create-summaries.controller.ts",
-        "integrity": "sha1:1c233e5434a1e6b05bb247d85f6afbe183e5f8bd"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/delete-summary-by-id.controller.spec.ts",
-        "integrity": "sha1:c25c692ab1a8ca96228b06c8b91a4add7cc2c645"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/delete-summary-by-id.controller.ts",
-        "integrity": "sha1:f60066722f66485db4f4dce6a4a40dbba921dfbf"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/delete-summaries.controller.spec.ts",
-        "integrity": "sha1:ac8393985d735a7907b954e7d08554a02aff4735"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/delete-summaries.controller.ts",
-        "integrity": "sha1:f4a980bd524b21a40a5aa1e5163d7ae3fd6d428a"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/find-summary-by-id.controller.spec.ts",
-        "integrity": "sha1:25f66e0ada3f99eb352f75460ed09a9d56290831"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/find-summary-by-id.controller.ts",
-        "integrity": "sha1:4f3c4006b6cb4abc8156f0fbf7f08dada7998c2e"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/find-summary.controller.spec.ts",
-        "integrity": "sha1:4b125b051546ef2ad3b63df4fd53f7663999a2ea"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/find-summary.controller.ts",
-        "integrity": "sha1:c73c8c9210c54f7f8f3ee57216cc897fc5ff4840"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/get-summaries.controller.spec.ts",
-        "integrity": "sha1:80bb9cc30f8d0b89aba7e29d9d01312e1f0d52fd"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/get-summaries.controller.ts",
-        "integrity": "sha1:f55d97980a6b31601a8f795c994cf4e939fd3a89"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/paginate-summaries.controller.spec.ts",
-        "integrity": "sha1:3cdeb5fda6718bdcd6d3fb1619daf1f92742c873"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/paginate-summaries.controller.ts",
-        "integrity": "sha1:7584f6b8765682c01e493578d6536e1696a20ca4"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/update-summary.controller.spec.ts",
-        "integrity": "sha1:1e9d90755dc3c2e1aa091fce4244ceecd3741f8e"
-    },
-    {
-        "path": "src/apps/nfc/summary/controllers/update-summary.controller.ts",
-        "integrity": "sha1:9d093cc46847c48ed58391281e4261cc54cbeac7"
-    },
-    {
-        "path": "src/apps/nfc/summary/dto/summary.dto.ts",
-        "integrity": "sha1:284e9d88128e39c30d5122a41b16227d9a29c939"
-    },
-    {
-        "path": "src/apps/nfc/summary/dto/create-summary.dto.ts",
-        "integrity": "sha1:8a5d2d5436abff76d8fb51af3c9adcb51a82b497"
-    },
-    {
-        "path": "src/apps/nfc/summary/dto/update-summary.dto.ts",
-        "integrity": "sha1:33cf1a8ba581163da4b083052b74dd27664981af"
-    },
-    {
-        "path": "src/apps/nfc/summary/graphql/summary.graphql",
-        "integrity": "sha1:68c20471b9931436028dfd3c8bd50ebb361266e7"
-    },
-    {
-        "path": "src/apps/nfc/summary/index.ts",
-        "integrity": "sha1:47c573b56b6f1bb5817f8d6631f9db7185129d8f"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/create-summary.resolver.spec.ts",
-        "integrity": "sha1:3b1347d99681c24003090fa83553d8b4583f7faa"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/create-summary.resolver.ts",
-        "integrity": "sha1:079732561612d6f9cebfa47f8ff7fe56abb3cac5"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/create-summaries.resolver.spec.ts",
-        "integrity": "sha1:1b65a4627899aa2021ead0df7ee4079a8e55f125"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/create-summaries.resolver.ts",
-        "integrity": "sha1:8d9a88c108b8ccbb83aa31e2f3a441c8513421bd"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/delete-summary-by-id.resolver.spec.ts",
-        "integrity": "sha1:a2ae340ad615267e6a7751b1cb31f85895081940"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/delete-summary-by-id.resolver.ts",
-        "integrity": "sha1:4e924b7b9e37c6ac8011429a8c8d3c0e997b7397"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/delete-summaries.resolver.spec.ts",
-        "integrity": "sha1:a7298bc86856f899ac7fe85f3ba68067189b635d"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/delete-summaries.resolver.ts",
-        "integrity": "sha1:e28360d2e23ee78a91b45411e6387f676d35fc26"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/find-summary-by-id.resolver.spec.ts",
-        "integrity": "sha1:f01ec977dda35deddc825e6a21e48e74de688f11"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/find-summary-by-id.resolver.ts",
-        "integrity": "sha1:ff779205a11627927c41b4062d045f54e1b0478b"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/find-summary.resolver.spec.ts",
-        "integrity": "sha1:ca9e149a5eec25ee4a11dfb7f957acb23e9bbe17"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/find-summary.resolver.ts",
-        "integrity": "sha1:e4f2c7b19c7adefa806a30a4d3b067e899e5c9c5"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/get-summaries.resolver.spec.ts",
-        "integrity": "sha1:42d0ab793795a89cddbec8400f864688e56f9180"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/get-summaries.resolver.ts",
-        "integrity": "sha1:ac0784a23b287c9364cafcce063d52dbfb12ee5f"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/paginate-summaries.resolver.spec.ts",
-        "integrity": "sha1:93aaf4892edbdb6aa30bf44e23145eb8d72bcc4e"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/paginate-summaries.resolver.ts",
-        "integrity": "sha1:5bbe08d2c1f4ab7e45e2af10a27ce6252ef83be7"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/update-summary.resolver.spec.ts",
-        "integrity": "sha1:68362e3a1a8b3b7807fb5c68c8d41cbb2259301a"
-    },
-    {
-        "path": "src/apps/nfc/summary/resolvers/update-summary.resolver.ts",
-        "integrity": "sha1:fbb82ea0f07f938a047e0f6fcf347b0836bb353f"
-    },
-    {
-        "path": "postman/nfc.summary.postman.json",
-        "integrity": "sha1:ee697088c2ac123501e677246fe9d7e0c8dfbdc6"
-    }
-]
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/nfc/summary/application/create/create-summary.command-handler.ts",
+            "integrity": "sha1:68cddb0fc6382265f3358a7a2fdc4f0e5561d19e"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/create/create-summary.command.handler.spec.ts",
+            "integrity": "sha1:9e186451ac33bd33f088fa36d6dffe6862245e81"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/create/create-summary.command.ts",
+            "integrity": "sha1:09f8c93911349ef7d589ebbd920b49f7ddae44de"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/create/create-summary.service.spec.ts",
+            "integrity": "sha1:16de540758338537f39b0a024ccbeced49cbcc7e"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/create/create-summary.service.ts",
+            "integrity": "sha1:57f8169bcea418c712d1cd136e1d4058dcb3655d"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/create/create-summaries.command-handler.ts",
+            "integrity": "sha1:444ef88d124784a7266f3bd134f70fab2bc2ff68"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/create/create-summaries.command.handler.spec.ts",
+            "integrity": "sha1:32853fca3402b248c05c4d7bc37be97836dd14f4"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/create/create-summaries.command.ts",
+            "integrity": "sha1:8e241325dee95dc6ee235f0f532ed8994b2c6047"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/create/create-summaries.service.spec.ts",
+            "integrity": "sha1:6bf1ea3c757bfbf1b56817587d34fe66e953ec72"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/create/create-summaries.service.ts",
+            "integrity": "sha1:274a1994f87008171f0969c0c643a9dce35ee297"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/delete/delete-summary-by-id.command-handler.ts",
+            "integrity": "sha1:bb877be0ec6d4cf54fdeb6be939f2ed9ed48a1ef"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/delete/delete-summary-by-id.command.handler.spec.ts",
+            "integrity": "sha1:19a08e09f090af5014f7b6037d57afd894091490"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/delete/delete-summary-by-id.command.ts",
+            "integrity": "sha1:6955a17dbbd9e9cdda5c8a5f0f52961f5cf3b20e"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/delete/delete-summary-by-id.service.spec.ts",
+            "integrity": "sha1:eb163054bfa112d7ce2dcd806487ce8ebc2c9263"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/delete/delete-summary-by-id.service.ts",
+            "integrity": "sha1:0c5d174ac1f5e96c897ed3e622f74845ec51baae"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/delete/delete-summaries.command-handler.ts",
+            "integrity": "sha1:f6fcf04b484b63c98b2bbf53bcd29914ee076749"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/delete/delete-summaries.command.handler.spec.ts",
+            "integrity": "sha1:a60436347c4db6629cbfd7a701e50f96ba6a775f"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/delete/delete-summaries.command.ts",
+            "integrity": "sha1:42a1d555f99c50332e4c3260571596b1dc1b2efb"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/delete/delete-summaries.service.spec.ts",
+            "integrity": "sha1:ce09aa06c3019b90029df32daeebacc5d40ffee9"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/delete/delete-summaries.service.ts",
+            "integrity": "sha1:3ed50c5c9c5c175f1de0f734c2d48f9d7acbb281"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/add-summaries-context.event.ts",
+            "integrity": "sha1:d77353a5dbda1eedeedd261881b5563075528956"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/created-summary.event-handler.ts",
+            "integrity": "sha1:436b257c3121c8efea1b45b15749f18965e2cbf7"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/created-summary.event.ts",
+            "integrity": "sha1:e92c719e6dc9f9bb9a3b9c273a272b276cf46cad"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/created-summaries.event-handler.ts",
+            "integrity": "sha1:0c5f2a7431fa3f3fe688ce482102ea94bb6775e2"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/created-summaries.event.ts",
+            "integrity": "sha1:8be329570ee5c570c7060034d0e88844bbaf6996"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/deleted-summary.event-handler.ts",
+            "integrity": "sha1:9a0281e0bd3b07bd4e2ca08ca83bbca5fb2eb3c6"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/deleted-summary.event.ts",
+            "integrity": "sha1:5fd34a22d418bba3b248617ec183177a31a9f448"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/deleted-summaries.event-handler.ts",
+            "integrity": "sha1:58e583653caf131e0ca3efc401c4d18f78c191e6"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/deleted-summaries.event.ts",
+            "integrity": "sha1:969570dca7bd3f31290a800fb6c40ca03af355ad"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/updated-summary.event-handler.ts",
+            "integrity": "sha1:0c79a1b43072764c21abacf73675057d439dae74"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/events/updated-summary.event.ts",
+            "integrity": "sha1:2bfe0dc63cf34971b7c582ea54b62d0cc99f8bf1"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/find/find-summary-by-id.query-handler.ts",
+            "integrity": "sha1:22b19d7dd94315a8245a164961b951724a946905"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/find/find-summary-by-id.query.handler.spec.ts",
+            "integrity": "sha1:77cdfe3a9a3775e4cfd6549a37bc7a4da705db92"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/find/find-summary-by-id.query.ts",
+            "integrity": "sha1:54890ffa4f9a0b15ed636bd9d529f128b77e995c"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/find/find-summary-by-id.service.spec.ts",
+            "integrity": "sha1:6102af5011c74c855e290fa5af8c803dcd065a9d"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/find/find-summary-by-id.service.ts",
+            "integrity": "sha1:5d019f73394b1330bdd577851752dbc89231048b"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/find/find-summary.query-handler.ts",
+            "integrity": "sha1:344149b13b20f7334830ba1b982615e288413e77"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/find/find-summary.query.handler.spec.ts",
+            "integrity": "sha1:0c694e93fa8bb06c9c304801dc14a4430358121b"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/find/find-summary.query.ts",
+            "integrity": "sha1:b8bb8f59ebc912a6ce7de55c09f4ccae8e2d6608"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/find/find-summary.service.spec.ts",
+            "integrity": "sha1:11a26590d9bb461a2d1862ce189ea82a2d902ab5"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/find/find-summary.service.ts",
+            "integrity": "sha1:4e5964dfe79fce0d3fcc286d809d300096c41b08"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/get/get-summaries.query-handler.ts",
+            "integrity": "sha1:7c3b4327b62829ad0615954e770c467c7ffa0a9f"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/get/get-summaries.query.handler.spec.ts",
+            "integrity": "sha1:7446b47a01de6e43902f0980e52ded8a93318956"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/get/get-summaries.query.ts",
+            "integrity": "sha1:bb17b4027a87043d0da2cdadea16e3a3ebcfa79c"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/get/get-summaries.service.spec.ts",
+            "integrity": "sha1:0a969c4683307ebad20e31eabf6c0161f7c25341"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/get/get-summaries.service.ts",
+            "integrity": "sha1:630f1e85b5eb39981357155458611f3ea19b8f14"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/paginate/paginate-summaries.query-handler.ts",
+            "integrity": "sha1:2ae49c817aec04e17e81f24a8777322f74446459"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/paginate/paginate-summaries.query.handler.spec.ts",
+            "integrity": "sha1:b100662ff0616e49fccba045f0399c237a9d7c30"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/paginate/paginate-summaries.query.ts",
+            "integrity": "sha1:0a56f85650c25d406ad7a64edb40986e9cd4464c"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/paginate/paginate-summaries.service.spec.ts",
+            "integrity": "sha1:188f15cc3df232cf4a16602537735056b16a6259"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/paginate/paginate-summaries.service.ts",
+            "integrity": "sha1:958f33f7e65029d19433531dd9278d735e5414e8"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/sagas/summary.sagas.ts",
+            "integrity": "sha1:2147c9a4971084da21eb78ad60cb955f541fcb7e"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/update/update-summary.command-handler.ts",
+            "integrity": "sha1:d2f192af3a1909879e5fcf0118adef6cf83c6189"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/update/update-summary.command.handler.spec.ts",
+            "integrity": "sha1:3c7115193289f18031cd6f255ae9d1280e3ed13d"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/update/update-summary.command.ts",
+            "integrity": "sha1:824dc24dba82167df5532f98d6c3aea03714601b"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/update/update-summary.service.spec.ts",
+            "integrity": "sha1:bfd7a09667fe15a7d0c31be613f29bcddde1a329"
+        },
+        {
+            "path": "src/@hades/nfc/summary/application/update/update-summary.service.ts",
+            "integrity": "sha1:174f64d4f8eadd3dc735da25059642e947e5d668"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/summary.aggregate.ts",
+            "integrity": "sha1:734208bdc75960f462bf8364dee8c1401bef64f9"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/summary.mapper.ts",
+            "integrity": "sha1:9f88f8c71d18ea4ac437a20654c838eb4e380790"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/summary.repository.ts",
+            "integrity": "sha1:3dcdfbae37d9b00b963adcdab5f30a3b635c2d8a"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/summary.response.ts",
+            "integrity": "sha1:6e6759b8c23b436fc468170740278c0c15b54408"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/value-objects/index.ts",
+            "integrity": "sha1:50b2de920234106b1212b461cbecc7b11a4f8b4c"
+        },
+        {
+            "path": "src/@hades/nfc/summary/index.ts",
+            "integrity": "sha1:56144489f6ee73c74598e868a844613065346a0c"
+        },
+        {
+            "path": "src/@hades/nfc/summary/infrastructure/mock/mock-summary.repository.ts",
+            "integrity": "sha1:296b5acc9b181da1efa2505f8ea06e0de7d5dd92"
+        },
+        {
+            "path": "src/@hades/nfc/summary/infrastructure/seeds/summary.seed.ts",
+            "integrity": "sha1:6371e9a075ce1f684cd67cc511f139e5e55a3e22"
+        },
+        {
+            "path": "src/@hades/nfc/summary/infrastructure/sequelize/sequelize-summary.model.ts",
+            "integrity": "sha1:e8ba82c68ca3824db0d42a6c32941dafc1775e30"
+        },
+        {
+            "path": "src/@hades/nfc/summary/infrastructure/sequelize/sequelize-summary.repository.ts",
+            "integrity": "sha1:dd644ee7e9b66b99f4fb0dac7348c092c0617079"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/value-objects/summary-id.ts",
+            "integrity": "sha1:0956cbbd37aa680fe1c6c360becf4d695b6f61d4"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/value-objects/summary-tag-id.ts",
+            "integrity": "sha1:9c63d85d670edbbea26625bd57baec149b1c612b"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/value-objects/summary-tenant-id.ts",
+            "integrity": "sha1:2f0c131db0e168b1314db05028a551ce6b2b0f9c"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/value-objects/summary-access-at.ts",
+            "integrity": "sha1:5b8c12f5835f60d6123b2798eb5ad48cb667bff3"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/value-objects/summary-counter.ts",
+            "integrity": "sha1:36ca425e5fd6db00d8f4a01ec37daddf3964d1cf"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/value-objects/summary-created-at.ts",
+            "integrity": "sha1:c88a7d7fc32435931de5273ee8a05bc95e741f99"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/value-objects/summary-updated-at.ts",
+            "integrity": "sha1:54e30bca4d929db01ae305e590dcc1aa09326b9a"
+        },
+        {
+            "path": "src/@hades/nfc/summary/domain/value-objects/summary-deleted-at.ts",
+            "integrity": "sha1:318165f9e3e00b9788827b06ba467f2a4bcdd8d1"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/create-summary.controller.spec.ts",
+            "integrity": "sha1:c583510dcea8881b10362d4c9fb61e716671dac2"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/create-summary.controller.ts",
+            "integrity": "sha1:a5e184c638f179c46e7548679f1182992ceda23e"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/create-summaries.controller.spec.ts",
+            "integrity": "sha1:f2aae5d8228a7542d8a6220072cc9f3194f70d3a"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/create-summaries.controller.ts",
+            "integrity": "sha1:1c233e5434a1e6b05bb247d85f6afbe183e5f8bd"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/delete-summary-by-id.controller.spec.ts",
+            "integrity": "sha1:c25c692ab1a8ca96228b06c8b91a4add7cc2c645"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/delete-summary-by-id.controller.ts",
+            "integrity": "sha1:f60066722f66485db4f4dce6a4a40dbba921dfbf"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/delete-summaries.controller.spec.ts",
+            "integrity": "sha1:ac8393985d735a7907b954e7d08554a02aff4735"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/delete-summaries.controller.ts",
+            "integrity": "sha1:f4a980bd524b21a40a5aa1e5163d7ae3fd6d428a"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/find-summary-by-id.controller.spec.ts",
+            "integrity": "sha1:25f66e0ada3f99eb352f75460ed09a9d56290831"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/find-summary-by-id.controller.ts",
+            "integrity": "sha1:4f3c4006b6cb4abc8156f0fbf7f08dada7998c2e"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/find-summary.controller.spec.ts",
+            "integrity": "sha1:4b125b051546ef2ad3b63df4fd53f7663999a2ea"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/find-summary.controller.ts",
+            "integrity": "sha1:c73c8c9210c54f7f8f3ee57216cc897fc5ff4840"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/get-summaries.controller.spec.ts",
+            "integrity": "sha1:80bb9cc30f8d0b89aba7e29d9d01312e1f0d52fd"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/get-summaries.controller.ts",
+            "integrity": "sha1:f55d97980a6b31601a8f795c994cf4e939fd3a89"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/paginate-summaries.controller.spec.ts",
+            "integrity": "sha1:3cdeb5fda6718bdcd6d3fb1619daf1f92742c873"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/paginate-summaries.controller.ts",
+            "integrity": "sha1:7584f6b8765682c01e493578d6536e1696a20ca4"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/update-summary.controller.spec.ts",
+            "integrity": "sha1:1e9d90755dc3c2e1aa091fce4244ceecd3741f8e"
+        },
+        {
+            "path": "src/apps/nfc/summary/controllers/update-summary.controller.ts",
+            "integrity": "sha1:9d093cc46847c48ed58391281e4261cc54cbeac7"
+        },
+        {
+            "path": "src/apps/nfc/summary/dto/summary.dto.ts",
+            "integrity": "sha1:284e9d88128e39c30d5122a41b16227d9a29c939"
+        },
+        {
+            "path": "src/apps/nfc/summary/dto/create-summary.dto.ts",
+            "integrity": "sha1:8a5d2d5436abff76d8fb51af3c9adcb51a82b497"
+        },
+        {
+            "path": "src/apps/nfc/summary/dto/update-summary.dto.ts",
+            "integrity": "sha1:33cf1a8ba581163da4b083052b74dd27664981af"
+        },
+        {
+            "path": "src/apps/nfc/summary/graphql/summary.graphql",
+            "integrity": "sha1:68c20471b9931436028dfd3c8bd50ebb361266e7"
+        },
+        {
+            "path": "src/apps/nfc/summary/index.ts",
+            "integrity": "sha1:47c573b56b6f1bb5817f8d6631f9db7185129d8f"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/create-summary.resolver.spec.ts",
+            "integrity": "sha1:3b1347d99681c24003090fa83553d8b4583f7faa"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/create-summary.resolver.ts",
+            "integrity": "sha1:079732561612d6f9cebfa47f8ff7fe56abb3cac5"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/create-summaries.resolver.spec.ts",
+            "integrity": "sha1:1b65a4627899aa2021ead0df7ee4079a8e55f125"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/create-summaries.resolver.ts",
+            "integrity": "sha1:8d9a88c108b8ccbb83aa31e2f3a441c8513421bd"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/delete-summary-by-id.resolver.spec.ts",
+            "integrity": "sha1:a2ae340ad615267e6a7751b1cb31f85895081940"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/delete-summary-by-id.resolver.ts",
+            "integrity": "sha1:4e924b7b9e37c6ac8011429a8c8d3c0e997b7397"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/delete-summaries.resolver.spec.ts",
+            "integrity": "sha1:a7298bc86856f899ac7fe85f3ba68067189b635d"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/delete-summaries.resolver.ts",
+            "integrity": "sha1:e28360d2e23ee78a91b45411e6387f676d35fc26"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/find-summary-by-id.resolver.spec.ts",
+            "integrity": "sha1:f01ec977dda35deddc825e6a21e48e74de688f11"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/find-summary-by-id.resolver.ts",
+            "integrity": "sha1:ff779205a11627927c41b4062d045f54e1b0478b"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/find-summary.resolver.spec.ts",
+            "integrity": "sha1:ca9e149a5eec25ee4a11dfb7f957acb23e9bbe17"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/find-summary.resolver.ts",
+            "integrity": "sha1:e4f2c7b19c7adefa806a30a4d3b067e899e5c9c5"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/get-summaries.resolver.spec.ts",
+            "integrity": "sha1:42d0ab793795a89cddbec8400f864688e56f9180"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/get-summaries.resolver.ts",
+            "integrity": "sha1:ac0784a23b287c9364cafcce063d52dbfb12ee5f"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/paginate-summaries.resolver.spec.ts",
+            "integrity": "sha1:93aaf4892edbdb6aa30bf44e23145eb8d72bcc4e"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/paginate-summaries.resolver.ts",
+            "integrity": "sha1:5bbe08d2c1f4ab7e45e2af10a27ce6252ef83be7"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/update-summary.resolver.spec.ts",
+            "integrity": "sha1:68362e3a1a8b3b7807fb5c68c8d41cbb2259301a"
+        },
+        {
+            "path": "src/apps/nfc/summary/resolvers/update-summary.resolver.ts",
+            "integrity": "sha1:fbb82ea0f07f938a047e0f6fcf347b0836bb353f"
+        },
+        {
+            "path": "postman/nfc.summary.postman.json",
+            "integrity": "sha1:ee697088c2ac123501e677246fe9d7e0c8dfbdc6"
+        }
+    ]
+}
