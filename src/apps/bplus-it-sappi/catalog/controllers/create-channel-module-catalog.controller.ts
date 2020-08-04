@@ -11,11 +11,11 @@ import { FindTenantQuery } from '@hades/admin/tenant/application/find/find-tenan
 import { FindSystemQuery } from '@hades/bplus-it-sappi/system/application/find/find-system.query';
 import { CreateChannelsCommand } from '@hades/bplus-it-sappi/channel/application/create/create-channels.command';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { CreateChannelCatalogDto } from './../dto/create-channel-catalog.dto';
+import { CreateChannelModuleCatalogDto } from './../dto/create-channel-module-catalog.dto';
 
-@ApiTags('[bplus-it-sappi] catalog/channel')
-@Controller('bplus-it-sappi/catalog/channel')
-export class CreateChannelCatalogController 
+@ApiTags('[bplus-it-sappi] catalog/channel-module')
+@Controller('bplus-it-sappi/catalog/channel-module')
+export class CreateChannelModuleCatalogController 
 {
     constructor(
         private readonly commandBus: ICommandBus,
@@ -24,9 +24,9 @@ export class CreateChannelCatalogController
 
     @Post()
     @ApiOperation({ summary: 'Create or update catalog channel and modules' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: [CreateChannelCatalogDto] })
-    @ApiBody({ type: [CreateChannelCatalogDto] })
-    async main(@Body() payload: CreateChannelCatalogDto[])
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CreateChannelModuleCatalogDto })
+    @ApiBody({ type: CreateChannelModuleCatalogDto })
+    async main(@Body() payload: CreateChannelModuleCatalogDto)
     {
         if (!Array.isArray(payload)) throw new BadRequestException(`The payload is not an array`);
         if (payload.length === 0) throw new BadRequestException(`The payload is empty`);

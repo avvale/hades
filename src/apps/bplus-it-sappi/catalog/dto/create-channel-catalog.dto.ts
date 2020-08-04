@@ -4,20 +4,6 @@ export class CreateChannelCatalogDto
 {   
     @ApiProperty({
         type        : String,
-        description : 'tenantCode [input here api field description]',
-        example     : 'ijb1t0mav11ryt85avsh7aezb70msjp90l8n84lssjdlmxfn9c'
-    })
-    tenantCode: string;
-    
-    @ApiProperty({
-        type        : String,
-        description : 'systemName [input here api field description]',
-        example     : 'mrav9096p0ogkemppaaz'
-    })
-    systemName: string;
-    
-    @ApiProperty({
-        type        : String,
         description : 'party [input here api field description]',
         example     : 't02tzizdta5hif4a3k7l6vv6qg94o42cj3r9bpu8rdt9xd9u8eworyujvp5o3o1jpuror0ngq08ka57cixbw8250s3mbw8urwq6hdn303895ewstvuzj5hghv3z3qloqslru0fpjeammknml6x00yax5i9twz41g'
     })

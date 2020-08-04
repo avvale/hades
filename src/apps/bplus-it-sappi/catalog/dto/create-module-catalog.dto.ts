@@ -4,20 +4,6 @@ export class CreateModuleCatalogDto
 {   
     @ApiProperty({
         type        : String,
-        description : 'tenantCode [input here api field description]',
-        example     : 'qpad6jxmpjkchp4nwrck11qj8s2oc4xswn9wcegc2kqt9bobnv'
-    })
-    tenantCode: string;
-    
-    @ApiProperty({
-        type        : String,
-        description : 'systemName [input here api field description]',
-        example     : 'heik6a5bmr9sy16ekpw3'
-    })
-    systemName: string;
-    
-    @ApiProperty({
-        type        : String,
         description : 'channelParty [input here api field description]',
         example     : 'ff65h15m4qs0cwet1w1hq10rqjo2vuuxy6rk2e8jhbd2s6g9b0ql4ti2hdy02o1v3aneribcv2gdwovikz6c3h4ighl4tha0ayz0sogqxna2jp20428p10165uih2vg3u1dskfog9ridu07b36v2nqiu9j7x5tgw'
     })
