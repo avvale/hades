@@ -1,542 +1,545 @@
-[
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flow.command-handler.ts",
-        "integrity": "sha1:40843686cebdc4d6044fa978c8ce9d428dd725a6"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flow.command.handler.spec.ts",
-        "integrity": "sha1:717d5393915185b45bfa254ba422184edcfc6376"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flow.command.ts",
-        "integrity": "sha1:cdc4e08237b2ef3f8308c9e0e86f5ce6d641a56e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flow.service.spec.ts",
-        "integrity": "sha1:22d8466d69a1517f73d01df4afde0cac7b69bd51"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flow.service.ts",
-        "integrity": "sha1:d41481b63edb43c80b628b48e3da231fab2f4051"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flows.command-handler.ts",
-        "integrity": "sha1:cd4aec035bc74199d246c07636f685f03f14290c"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flows.command.handler.spec.ts",
-        "integrity": "sha1:737e08bf0deb861bc3e109fa9e939f972f3ad8bb"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flows.command.ts",
-        "integrity": "sha1:9c10a97e08ad76c8c94b1bdb3c700f80577c0c1c"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flows.service.spec.ts",
-        "integrity": "sha1:25d44a02a12a3d9ae65909f1f59755a419546664"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flows.service.ts",
-        "integrity": "sha1:25601fbe2da944aea2bc4c9240716ad4448180c3"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.command-handler.ts",
-        "integrity": "sha1:56f24f2dff638a9e3a34202a15ce9311b040c7c5"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.command.handler.spec.ts",
-        "integrity": "sha1:c9877d562021393721ff0a5da7922e125ff6b84f"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.command.ts",
-        "integrity": "sha1:436e787faafc51535d2869ecbb9b349ea59ed118"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.service.spec.ts",
-        "integrity": "sha1:96c2ab2801b30670697fc45f7460cf3c6bc0c1ae"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.service.ts",
-        "integrity": "sha1:3d89f247779ea427be9374f8e4c3fcdfb72540c2"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flows.command-handler.ts",
-        "integrity": "sha1:b951e7d8f194865367eea03b0c7b4f977ea91b62"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flows.command.handler.spec.ts",
-        "integrity": "sha1:a251c8eae1a458e7a8a764e64200a2617b1426f3"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flows.command.ts",
-        "integrity": "sha1:d026065d455437cbff729ca7dd060f6133779299"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flows.service.spec.ts",
-        "integrity": "sha1:9775b3ed7a67a23e8c07b92d468ba4d10ed72840"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flows.service.ts",
-        "integrity": "sha1:c9abec25dbf9a4389468d83d68e34b0cece58bf6"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/add-flows-context.event.ts",
-        "integrity": "sha1:c32040d3d7f1f5d0dd77ccfd963062ce6ce4811e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/created-flow.event-handler.ts",
-        "integrity": "sha1:bf0e16c61855102091b74b4e475d77455d7d25cc"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/created-flow.event.ts",
-        "integrity": "sha1:1ce787f89f6f16e65c35416004838e84c939a9ab"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/created-flows.event-handler.ts",
-        "integrity": "sha1:cd6dd1bddaf7f3b530438be606be3d795bfad53a"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/created-flows.event.ts",
-        "integrity": "sha1:42f0e5275bc8a306c97748b0f1d3bbce222f224d"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/deleted-flow.event-handler.ts",
-        "integrity": "sha1:8035d34e7ddca2de41e2a2cc967a06a98cebd7b7"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/deleted-flow.event.ts",
-        "integrity": "sha1:07a83f3174685c0439e03025741b078ee1aba839"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/deleted-flows.event-handler.ts",
-        "integrity": "sha1:13e8dcc45fc866d08265af679378e497474458f0"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/deleted-flows.event.ts",
-        "integrity": "sha1:53fa2a63ccef51136da5d957506ed30edf2128b9"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/updated-flow.event-handler.ts",
-        "integrity": "sha1:dfded94448aa2870fe0d6742c41a8da565471221"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/events/updated-flow.event.ts",
-        "integrity": "sha1:3b83b0fd6f7f5bc7d9f0caa933feff9de7e9129a"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.query-handler.ts",
-        "integrity": "sha1:c95351c3be5e4b6ce863b9b1b11d195e95dbadac"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.query.handler.spec.ts",
-        "integrity": "sha1:cae70fa94d2052189c7d5bb2c38c1787982861da"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.query.ts",
-        "integrity": "sha1:47a672cae22ade8c84e38ac17a816fe8a765cb85"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.service.spec.ts",
-        "integrity": "sha1:f899344324505bdf68f23ad96edc488a241c4798"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.service.ts",
-        "integrity": "sha1:95b264e7e7670228e5560c1770d57075a8bcd6f9"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow.query-handler.ts",
-        "integrity": "sha1:1f39e782ff270c2cdbd83b7183b750daecc63c45"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow.query.handler.spec.ts",
-        "integrity": "sha1:18bc1e5685c0ea3a5d9c41b20eb55d4965831c3f"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow.query.ts",
-        "integrity": "sha1:a691b08a7d8bfc9975169c670d022e6eed1a7393"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow.service.spec.ts",
-        "integrity": "sha1:6f962d32d5709c4184d222f5116022fbd45c484c"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow.service.ts",
-        "integrity": "sha1:4af09af2a822dc24f29e79c1324735598c7259f3"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/get/get-flows.query-handler.ts",
-        "integrity": "sha1:bcac18dbbcfa3e6c4b3904e39382bd2b6893b95e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/get/get-flows.query.handler.spec.ts",
-        "integrity": "sha1:eff64477bf3d9757fc94970c2addb544335273dc"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/get/get-flows.query.ts",
-        "integrity": "sha1:3fe242f39e95046cbb1f5cd592e99fead57e6703"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/get/get-flows.service.spec.ts",
-        "integrity": "sha1:cd994c1bafd9df9cbbab579863e610f6b17cf15f"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/get/get-flows.service.ts",
-        "integrity": "sha1:9061d39220e951a3876f81a5ba467d0289f15855"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/paginate/paginate-flows.query-handler.ts",
-        "integrity": "sha1:27c669623c9eb6ad832e501d0eaef6fb84e6519f"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/paginate/paginate-flows.query.handler.spec.ts",
-        "integrity": "sha1:1e64066bff7bdaeb06573e5ea015127919f81888"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/paginate/paginate-flows.query.ts",
-        "integrity": "sha1:c86cb2e40bca10c8575868777412ac7dc0f94d28"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/paginate/paginate-flows.service.spec.ts",
-        "integrity": "sha1:23bce497c0191a6455397c15238174573ce8449f"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/paginate/paginate-flows.service.ts",
-        "integrity": "sha1:a78285e9cb6f3d76f66709dc261a7f27cd5a8915"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/sagas/flow.sagas.ts",
-        "integrity": "sha1:343d930990ce4e7770e5b15d4f8523a2ccbc80ce"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/update/update-flow.command-handler.ts",
-        "integrity": "sha1:7074bfe71225df5e424285af284b8d3e46f30dc2"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/update/update-flow.command.handler.spec.ts",
-        "integrity": "sha1:702ed2e8218d8eefd0fe500da3d7bd0c3c8c76e8"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/update/update-flow.command.ts",
-        "integrity": "sha1:31427eee5f9e736b46913355e3f929f7fc5a1479"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/update/update-flow.service.spec.ts",
-        "integrity": "sha1:5b65af6175898838665fad2e991f85d656b9db3e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/application/update/update-flow.service.ts",
-        "integrity": "sha1:a3f5079ac76d01d32a27fbc3e5a2c052675ec654"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/flow.aggregate.ts",
-        "integrity": "sha1:a0983fc8557e49c2f4b8dcb03c6c9e2b3a735ca3"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/flow.mapper.ts",
-        "integrity": "sha1:61bf10b7e09cf4b614c6dc9348bc5ef7b976d0d9"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/flow.repository.ts",
-        "integrity": "sha1:a39539c0d5ba35fb64d90eb7bbd7199eea17e1f0"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/flow.response.ts",
-        "integrity": "sha1:ec11f2d07fee7a4b0abdddbe9025987c86264eb2"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/index.ts",
-        "integrity": "sha1:cc4acee888d32ccfc93f218c62f1f249ff9fb06d"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/index.ts",
-        "integrity": "sha1:c9b4eb3033380c6845b373e710e8d9123219c688"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/infrastructure/mock/mock-flow.repository.ts",
-        "integrity": "sha1:382666bdf6c58142c79d2522a3053bd5da065a5f"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/infrastructure/seeds/flow.seed.ts",
-        "integrity": "sha1:f5dfb49da07a2fef85b57f8f684291e09eaf44bc"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/infrastructure/sequelize/sequelize-flow.model.ts",
-        "integrity": "sha1:5da809edebbc969a924fbb05e7386bcbf07cda35"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/infrastructure/sequelize/sequelize-flow.repository.ts",
-        "integrity": "sha1:b322dc35dc996007a1d31a9f5890096cbbaa19b7"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-id.ts",
-        "integrity": "sha1:3a69653ab2236847e7a2f8967c95ba7d0a00f8fe"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-hash.ts",
-        "integrity": "sha1:133695afeb3dd6292d01fccfc627e7ea3038ec3b"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-tenant-id.ts",
-        "integrity": "sha1:2ffe3aa37a215c84cc1a5549a0dedb444e7ac860"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-tenant-code.ts",
-        "integrity": "sha1:4b47410e5ce943542337888a2322df32e4dd4b38"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-system-id.ts",
-        "integrity": "sha1:f0afb0c1b16b7e3b8e82d7f50022c32e573aaeb9"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-system-name.ts",
-        "integrity": "sha1:34d99a2b1c8d9c7a84f760927fabd882af661696"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-version.ts",
-        "integrity": "sha1:cf9016c95d5b484fde0c4e672f073de6789704fb"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-scenario.ts",
-        "integrity": "sha1:55ec304289d7bfe614e16b4195008d97960b27ef"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-party.ts",
-        "integrity": "sha1:402fb800111ea67016b51c759c3df88bdb723ffa"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-component.ts",
-        "integrity": "sha1:a892060596f69e4aa03caef2852cddfa21cbf0a7"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-interface-name.ts",
-        "integrity": "sha1:bc51af357cdf974b6cc7299d69e4bf156517a64d"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-interface-namespace.ts",
-        "integrity": "sha1:286865b6a8e1151e48840dfb9a73c3c66030fc7d"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-iflow-name.ts",
-        "integrity": "sha1:2d9ba2f033636f23939600e65268a75e5dd3890a"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-responsible-user-account.ts",
-        "integrity": "sha1:e59e9128a0b845e3bfa6c376715606e2004772c3"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-last-change-user-account.ts",
-        "integrity": "sha1:b523d3b26d2948b96436e71a57dc3cbbb4011c89"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-last-changed-at.ts",
-        "integrity": "sha1:adad65281168f8739e0a867dfd31bd6c5a594073"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-folder-path.ts",
-        "integrity": "sha1:9415881e7fc851fa7688cb0d00d48c5ca4ca2487"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-description.ts",
-        "integrity": "sha1:b43499ee757173550a78195770bbfaf4a91600ac"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-application.ts",
-        "integrity": "sha1:69c1e50cb0a91300b54ea6eb85c811db9c91db60"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-is-critical.ts",
-        "integrity": "sha1:3d6e9aab4ec1097afc17e905fe70162a242ee406"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-is-complex.ts",
-        "integrity": "sha1:e1c755bbfb07a0dfaf423eae3f9a0dcd0abbef54"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-field-group-id.ts",
-        "integrity": "sha1:61aaf1a0b7a2afe8848903993e936fac6caaa860"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-data.ts",
-        "integrity": "sha1:0e9003aa3fc50bc9d0560de4675f0d149dfe2286"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-created-at.ts",
-        "integrity": "sha1:f32564ce4d5db16ff2d7ca0b2ce56ea71ad39178"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-updated-at.ts",
-        "integrity": "sha1:55224f44bf0e7bb39748936d0b8f45e960513d6e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-deleted-at.ts",
-        "integrity": "sha1:1f58e9a1464d7074c6d7934472cdf33f614e8181"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/create-flow.controller.spec.ts",
-        "integrity": "sha1:ac11c7f1d76ac7f01565616a234ece8868d852b8"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/create-flow.controller.ts",
-        "integrity": "sha1:f2cb32de3cb0325b5ecd8316e804566816465eb4"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/create-flows.controller.spec.ts",
-        "integrity": "sha1:8dbb7d7eb8267dbaee08e6b288c72ad8f88241d4"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/create-flows.controller.ts",
-        "integrity": "sha1:b0eee7d06d044e4efa5a5a44c3e87bed56de5a93"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/delete-flow-by-id.controller.spec.ts",
-        "integrity": "sha1:3ff7dc5d5aac1595b5106518182a19fc5c025df6"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/delete-flow-by-id.controller.ts",
-        "integrity": "sha1:7a57eb8c9b45a5ccf1f11317d7637435982026f6"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/delete-flows.controller.spec.ts",
-        "integrity": "sha1:8e62c752e9438d18d74a87f8a47b8eef09657057"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/delete-flows.controller.ts",
-        "integrity": "sha1:692178be814a406e56c2d9f446764c2149d8dfaa"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/find-flow-by-id.controller.spec.ts",
-        "integrity": "sha1:349e317acf201539bd2b6398534e054fd9f2db65"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/find-flow-by-id.controller.ts",
-        "integrity": "sha1:d22220752ae1cee3956a52bc3d700a78d875f269"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/find-flow.controller.spec.ts",
-        "integrity": "sha1:8131cdd0c47b0200e5fa99446c1bd04ad1359aca"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/find-flow.controller.ts",
-        "integrity": "sha1:e31b9e4783eb9b7ffeb8ea2ae8cc68cf84435d64"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/get-flows.controller.spec.ts",
-        "integrity": "sha1:eff017d17ab6f6e1bd95563f114888291a563e6c"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/get-flows.controller.ts",
-        "integrity": "sha1:47bcef2a5e8a725217d56d322df9e4f1bf8f7ae6"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/paginate-flows.controller.spec.ts",
-        "integrity": "sha1:1c61b1b83a14537c519478d4403d83f5a91d0227"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/paginate-flows.controller.ts",
-        "integrity": "sha1:0d2a10cab8123617d9ed097dbc28184272533372"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/update-flow.controller.spec.ts",
-        "integrity": "sha1:de580aa757608ce493e0376c3b694e7aa9795c26"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/controllers/update-flow.controller.ts",
-        "integrity": "sha1:b4541213959f77d5cd860a46538cabf13134d807"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/dto/flow.dto.ts",
-        "integrity": "sha1:e46c8efe9aab8a01e110a6067b8ee0e2de2dd734"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/dto/create-flow.dto.ts",
-        "integrity": "sha1:e4730bea99d64da52cf4f979c3710f2e53ba7e1a"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/dto/update-flow.dto.ts",
-        "integrity": "sha1:028b92a463508dd17c390cc9515835aab71c796b"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/graphql/flow.graphql",
-        "integrity": "sha1:b5c46c86f7f2bb69f06ed6af429a6f4e5ad91e30"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/index.ts",
-        "integrity": "sha1:6196f9143114b7890115c10cbafc91c332b8613d"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/create-flow.resolver.spec.ts",
-        "integrity": "sha1:2e0e1c352699527ec86a5af211ecdfa0e6b92f9d"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/create-flow.resolver.ts",
-        "integrity": "sha1:6b9151894b141d5f2048ccfc166f9ba0b46f71f1"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/create-flows.resolver.spec.ts",
-        "integrity": "sha1:a31fe1da20f8ba1fb4eb07e3264d047150ce9c27"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/create-flows.resolver.ts",
-        "integrity": "sha1:3a55f77f3fa63c4a8a10b3944509e2520b340e83"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/delete-flow-by-id.resolver.spec.ts",
-        "integrity": "sha1:4c49e8575d8542bac27b8cd576d240d56cd92aab"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/delete-flow-by-id.resolver.ts",
-        "integrity": "sha1:2a41304b122159cb31f14082fd121c2b66fa4129"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/delete-flows.resolver.spec.ts",
-        "integrity": "sha1:394c38485a56a010b372a68eb328fcc7d2f5930b"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/delete-flows.resolver.ts",
-        "integrity": "sha1:72b60241808a168bed7eda6e5352cafe12134233"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/find-flow-by-id.resolver.spec.ts",
-        "integrity": "sha1:0bac2ea4e18859e26cb537636f9433d826e89f4e"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/find-flow-by-id.resolver.ts",
-        "integrity": "sha1:fda36b959cb6de85705a8d1a09a434dd9f79bd3b"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/find-flow.resolver.spec.ts",
-        "integrity": "sha1:90c38da2f5d0b70d05e2ba76ca3bcf7a5c7094ab"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/find-flow.resolver.ts",
-        "integrity": "sha1:daf44ac448807de1b235c857e237a15a5b7180b8"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/get-flows.resolver.spec.ts",
-        "integrity": "sha1:1e9a0de74f565ce845caa088bbe7da2928d42d6b"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/get-flows.resolver.ts",
-        "integrity": "sha1:b79aa48ea6dd2d68e43576c518716ef17bba28c6"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/paginate-flows.resolver.spec.ts",
-        "integrity": "sha1:7ca73fbf001c4ba4735fd54f3b95d417b88fbd00"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/paginate-flows.resolver.ts",
-        "integrity": "sha1:817782404dea856ab5c15203bc923dbe83b1db75"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/update-flow.resolver.spec.ts",
-        "integrity": "sha1:61dcd27197275ac60a479c80740a56323694ee38"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/flow/resolvers/update-flow.resolver.ts",
-        "integrity": "sha1:35d624850715c9d991a352d69f398995686f4936"
-    },
-    {
-        "path": "postman/bplus-it-sappi.flow.postman.json",
-        "integrity": "sha1:962b32192e8da88bc65f9806c36c3b8dccd0ab1c"
-    }
-]
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flow.command-handler.ts",
+            "integrity": "sha1:40843686cebdc4d6044fa978c8ce9d428dd725a6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flow.command.handler.spec.ts",
+            "integrity": "sha1:717d5393915185b45bfa254ba422184edcfc6376"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flow.command.ts",
+            "integrity": "sha1:cdc4e08237b2ef3f8308c9e0e86f5ce6d641a56e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flow.service.spec.ts",
+            "integrity": "sha1:22d8466d69a1517f73d01df4afde0cac7b69bd51"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flow.service.ts",
+            "integrity": "sha1:d41481b63edb43c80b628b48e3da231fab2f4051"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flows.command-handler.ts",
+            "integrity": "sha1:cd4aec035bc74199d246c07636f685f03f14290c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flows.command.handler.spec.ts",
+            "integrity": "sha1:737e08bf0deb861bc3e109fa9e939f972f3ad8bb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flows.command.ts",
+            "integrity": "sha1:9c10a97e08ad76c8c94b1bdb3c700f80577c0c1c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flows.service.spec.ts",
+            "integrity": "sha1:25d44a02a12a3d9ae65909f1f59755a419546664"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/create/create-flows.service.ts",
+            "integrity": "sha1:25601fbe2da944aea2bc4c9240716ad4448180c3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.command-handler.ts",
+            "integrity": "sha1:56f24f2dff638a9e3a34202a15ce9311b040c7c5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.command.handler.spec.ts",
+            "integrity": "sha1:c9877d562021393721ff0a5da7922e125ff6b84f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.command.ts",
+            "integrity": "sha1:436e787faafc51535d2869ecbb9b349ea59ed118"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.service.spec.ts",
+            "integrity": "sha1:96c2ab2801b30670697fc45f7460cf3c6bc0c1ae"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flow-by-id.service.ts",
+            "integrity": "sha1:3d89f247779ea427be9374f8e4c3fcdfb72540c2"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flows.command-handler.ts",
+            "integrity": "sha1:b951e7d8f194865367eea03b0c7b4f977ea91b62"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flows.command.handler.spec.ts",
+            "integrity": "sha1:a251c8eae1a458e7a8a764e64200a2617b1426f3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flows.command.ts",
+            "integrity": "sha1:d026065d455437cbff729ca7dd060f6133779299"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flows.service.spec.ts",
+            "integrity": "sha1:9775b3ed7a67a23e8c07b92d468ba4d10ed72840"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/delete/delete-flows.service.ts",
+            "integrity": "sha1:c9abec25dbf9a4389468d83d68e34b0cece58bf6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/add-flows-context.event.ts",
+            "integrity": "sha1:c32040d3d7f1f5d0dd77ccfd963062ce6ce4811e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/created-flow.event-handler.ts",
+            "integrity": "sha1:bf0e16c61855102091b74b4e475d77455d7d25cc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/created-flow.event.ts",
+            "integrity": "sha1:1ce787f89f6f16e65c35416004838e84c939a9ab"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/created-flows.event-handler.ts",
+            "integrity": "sha1:cd6dd1bddaf7f3b530438be606be3d795bfad53a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/created-flows.event.ts",
+            "integrity": "sha1:42f0e5275bc8a306c97748b0f1d3bbce222f224d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/deleted-flow.event-handler.ts",
+            "integrity": "sha1:8035d34e7ddca2de41e2a2cc967a06a98cebd7b7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/deleted-flow.event.ts",
+            "integrity": "sha1:07a83f3174685c0439e03025741b078ee1aba839"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/deleted-flows.event-handler.ts",
+            "integrity": "sha1:13e8dcc45fc866d08265af679378e497474458f0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/deleted-flows.event.ts",
+            "integrity": "sha1:53fa2a63ccef51136da5d957506ed30edf2128b9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/updated-flow.event-handler.ts",
+            "integrity": "sha1:dfded94448aa2870fe0d6742c41a8da565471221"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/events/updated-flow.event.ts",
+            "integrity": "sha1:3b83b0fd6f7f5bc7d9f0caa933feff9de7e9129a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.query-handler.ts",
+            "integrity": "sha1:c95351c3be5e4b6ce863b9b1b11d195e95dbadac"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.query.handler.spec.ts",
+            "integrity": "sha1:cae70fa94d2052189c7d5bb2c38c1787982861da"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.query.ts",
+            "integrity": "sha1:47a672cae22ade8c84e38ac17a816fe8a765cb85"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.service.spec.ts",
+            "integrity": "sha1:f899344324505bdf68f23ad96edc488a241c4798"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow-by-id.service.ts",
+            "integrity": "sha1:95b264e7e7670228e5560c1770d57075a8bcd6f9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow.query-handler.ts",
+            "integrity": "sha1:1f39e782ff270c2cdbd83b7183b750daecc63c45"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow.query.handler.spec.ts",
+            "integrity": "sha1:18bc1e5685c0ea3a5d9c41b20eb55d4965831c3f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow.query.ts",
+            "integrity": "sha1:a691b08a7d8bfc9975169c670d022e6eed1a7393"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow.service.spec.ts",
+            "integrity": "sha1:6f962d32d5709c4184d222f5116022fbd45c484c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/find/find-flow.service.ts",
+            "integrity": "sha1:4af09af2a822dc24f29e79c1324735598c7259f3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/get/get-flows.query-handler.ts",
+            "integrity": "sha1:bcac18dbbcfa3e6c4b3904e39382bd2b6893b95e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/get/get-flows.query.handler.spec.ts",
+            "integrity": "sha1:eff64477bf3d9757fc94970c2addb544335273dc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/get/get-flows.query.ts",
+            "integrity": "sha1:3fe242f39e95046cbb1f5cd592e99fead57e6703"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/get/get-flows.service.spec.ts",
+            "integrity": "sha1:cd994c1bafd9df9cbbab579863e610f6b17cf15f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/get/get-flows.service.ts",
+            "integrity": "sha1:9061d39220e951a3876f81a5ba467d0289f15855"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/paginate/paginate-flows.query-handler.ts",
+            "integrity": "sha1:27c669623c9eb6ad832e501d0eaef6fb84e6519f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/paginate/paginate-flows.query.handler.spec.ts",
+            "integrity": "sha1:1e64066bff7bdaeb06573e5ea015127919f81888"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/paginate/paginate-flows.query.ts",
+            "integrity": "sha1:c86cb2e40bca10c8575868777412ac7dc0f94d28"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/paginate/paginate-flows.service.spec.ts",
+            "integrity": "sha1:23bce497c0191a6455397c15238174573ce8449f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/paginate/paginate-flows.service.ts",
+            "integrity": "sha1:a78285e9cb6f3d76f66709dc261a7f27cd5a8915"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/sagas/flow.sagas.ts",
+            "integrity": "sha1:343d930990ce4e7770e5b15d4f8523a2ccbc80ce"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/update/update-flow.command-handler.ts",
+            "integrity": "sha1:7074bfe71225df5e424285af284b8d3e46f30dc2"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/update/update-flow.command.handler.spec.ts",
+            "integrity": "sha1:702ed2e8218d8eefd0fe500da3d7bd0c3c8c76e8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/update/update-flow.command.ts",
+            "integrity": "sha1:31427eee5f9e736b46913355e3f929f7fc5a1479"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/update/update-flow.service.spec.ts",
+            "integrity": "sha1:5b65af6175898838665fad2e991f85d656b9db3e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/application/update/update-flow.service.ts",
+            "integrity": "sha1:a3f5079ac76d01d32a27fbc3e5a2c052675ec654"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/flow.aggregate.ts",
+            "integrity": "sha1:a0983fc8557e49c2f4b8dcb03c6c9e2b3a735ca3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/flow.mapper.ts",
+            "integrity": "sha1:61bf10b7e09cf4b614c6dc9348bc5ef7b976d0d9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/flow.repository.ts",
+            "integrity": "sha1:a39539c0d5ba35fb64d90eb7bbd7199eea17e1f0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/flow.response.ts",
+            "integrity": "sha1:ec11f2d07fee7a4b0abdddbe9025987c86264eb2"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/index.ts",
+            "integrity": "sha1:cc4acee888d32ccfc93f218c62f1f249ff9fb06d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/index.ts",
+            "integrity": "sha1:c9b4eb3033380c6845b373e710e8d9123219c688"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/infrastructure/mock/mock-flow.repository.ts",
+            "integrity": "sha1:382666bdf6c58142c79d2522a3053bd5da065a5f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/infrastructure/seeds/flow.seed.ts",
+            "integrity": "sha1:73e39746dd5f4b72f1e81d89cf5a420cd70318a0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/infrastructure/sequelize/sequelize-flow.model.ts",
+            "integrity": "sha1:5da809edebbc969a924fbb05e7386bcbf07cda35"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/infrastructure/sequelize/sequelize-flow.repository.ts",
+            "integrity": "sha1:b322dc35dc996007a1d31a9f5890096cbbaa19b7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-id.ts",
+            "integrity": "sha1:3a69653ab2236847e7a2f8967c95ba7d0a00f8fe"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-hash.ts",
+            "integrity": "sha1:133695afeb3dd6292d01fccfc627e7ea3038ec3b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-tenant-id.ts",
+            "integrity": "sha1:2ffe3aa37a215c84cc1a5549a0dedb444e7ac860"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-tenant-code.ts",
+            "integrity": "sha1:4b47410e5ce943542337888a2322df32e4dd4b38"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-system-id.ts",
+            "integrity": "sha1:f0afb0c1b16b7e3b8e82d7f50022c32e573aaeb9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-system-name.ts",
+            "integrity": "sha1:34d99a2b1c8d9c7a84f760927fabd882af661696"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-version.ts",
+            "integrity": "sha1:cf9016c95d5b484fde0c4e672f073de6789704fb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-scenario.ts",
+            "integrity": "sha1:55ec304289d7bfe614e16b4195008d97960b27ef"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-party.ts",
+            "integrity": "sha1:402fb800111ea67016b51c759c3df88bdb723ffa"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-component.ts",
+            "integrity": "sha1:a892060596f69e4aa03caef2852cddfa21cbf0a7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-interface-name.ts",
+            "integrity": "sha1:bc51af357cdf974b6cc7299d69e4bf156517a64d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-interface-namespace.ts",
+            "integrity": "sha1:286865b6a8e1151e48840dfb9a73c3c66030fc7d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-iflow-name.ts",
+            "integrity": "sha1:2d9ba2f033636f23939600e65268a75e5dd3890a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-responsible-user-account.ts",
+            "integrity": "sha1:e59e9128a0b845e3bfa6c376715606e2004772c3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-last-change-user-account.ts",
+            "integrity": "sha1:b523d3b26d2948b96436e71a57dc3cbbb4011c89"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-last-changed-at.ts",
+            "integrity": "sha1:adad65281168f8739e0a867dfd31bd6c5a594073"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-folder-path.ts",
+            "integrity": "sha1:9415881e7fc851fa7688cb0d00d48c5ca4ca2487"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-description.ts",
+            "integrity": "sha1:b43499ee757173550a78195770bbfaf4a91600ac"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-application.ts",
+            "integrity": "sha1:69c1e50cb0a91300b54ea6eb85c811db9c91db60"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-is-critical.ts",
+            "integrity": "sha1:3d6e9aab4ec1097afc17e905fe70162a242ee406"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-is-complex.ts",
+            "integrity": "sha1:e1c755bbfb07a0dfaf423eae3f9a0dcd0abbef54"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-field-group-id.ts",
+            "integrity": "sha1:61aaf1a0b7a2afe8848903993e936fac6caaa860"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-data.ts",
+            "integrity": "sha1:0e9003aa3fc50bc9d0560de4675f0d149dfe2286"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-created-at.ts",
+            "integrity": "sha1:f32564ce4d5db16ff2d7ca0b2ce56ea71ad39178"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-updated-at.ts",
+            "integrity": "sha1:55224f44bf0e7bb39748936d0b8f45e960513d6e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/flow/domain/value-objects/flow-deleted-at.ts",
+            "integrity": "sha1:1f58e9a1464d7074c6d7934472cdf33f614e8181"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/create-flow.controller.spec.ts",
+            "integrity": "sha1:ac11c7f1d76ac7f01565616a234ece8868d852b8"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/create-flow.controller.ts",
+            "integrity": "sha1:f2cb32de3cb0325b5ecd8316e804566816465eb4"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/create-flows.controller.spec.ts",
+            "integrity": "sha1:8dbb7d7eb8267dbaee08e6b288c72ad8f88241d4"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/create-flows.controller.ts",
+            "integrity": "sha1:b0eee7d06d044e4efa5a5a44c3e87bed56de5a93"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/delete-flow-by-id.controller.spec.ts",
+            "integrity": "sha1:3ff7dc5d5aac1595b5106518182a19fc5c025df6"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/delete-flow-by-id.controller.ts",
+            "integrity": "sha1:7a57eb8c9b45a5ccf1f11317d7637435982026f6"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/delete-flows.controller.spec.ts",
+            "integrity": "sha1:8e62c752e9438d18d74a87f8a47b8eef09657057"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/delete-flows.controller.ts",
+            "integrity": "sha1:692178be814a406e56c2d9f446764c2149d8dfaa"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/find-flow-by-id.controller.spec.ts",
+            "integrity": "sha1:349e317acf201539bd2b6398534e054fd9f2db65"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/find-flow-by-id.controller.ts",
+            "integrity": "sha1:d22220752ae1cee3956a52bc3d700a78d875f269"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/find-flow.controller.spec.ts",
+            "integrity": "sha1:8131cdd0c47b0200e5fa99446c1bd04ad1359aca"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/find-flow.controller.ts",
+            "integrity": "sha1:e31b9e4783eb9b7ffeb8ea2ae8cc68cf84435d64"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/get-flows.controller.spec.ts",
+            "integrity": "sha1:eff017d17ab6f6e1bd95563f114888291a563e6c"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/get-flows.controller.ts",
+            "integrity": "sha1:47bcef2a5e8a725217d56d322df9e4f1bf8f7ae6"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/paginate-flows.controller.spec.ts",
+            "integrity": "sha1:1c61b1b83a14537c519478d4403d83f5a91d0227"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/paginate-flows.controller.ts",
+            "integrity": "sha1:0d2a10cab8123617d9ed097dbc28184272533372"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/update-flow.controller.spec.ts",
+            "integrity": "sha1:de580aa757608ce493e0376c3b694e7aa9795c26"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/controllers/update-flow.controller.ts",
+            "integrity": "sha1:b4541213959f77d5cd860a46538cabf13134d807"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/dto/flow.dto.ts",
+            "integrity": "sha1:3d50618ed75eae970c5d356c59af5cfb7733cea0"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/dto/create-flow.dto.ts",
+            "integrity": "sha1:413438b9995b7302a8cd77b7443dd5cf1baaf547"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/dto/update-flow.dto.ts",
+            "integrity": "sha1:f068da94afa91985bcbe37302810ca9a3df575dc"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/graphql/flow.graphql",
+            "integrity": "sha1:b5c46c86f7f2bb69f06ed6af429a6f4e5ad91e30"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/index.ts",
+            "integrity": "sha1:6196f9143114b7890115c10cbafc91c332b8613d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/create-flow.resolver.spec.ts",
+            "integrity": "sha1:2e0e1c352699527ec86a5af211ecdfa0e6b92f9d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/create-flow.resolver.ts",
+            "integrity": "sha1:6b9151894b141d5f2048ccfc166f9ba0b46f71f1"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/create-flows.resolver.spec.ts",
+            "integrity": "sha1:a31fe1da20f8ba1fb4eb07e3264d047150ce9c27"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/create-flows.resolver.ts",
+            "integrity": "sha1:3a55f77f3fa63c4a8a10b3944509e2520b340e83"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/delete-flow-by-id.resolver.spec.ts",
+            "integrity": "sha1:4c49e8575d8542bac27b8cd576d240d56cd92aab"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/delete-flow-by-id.resolver.ts",
+            "integrity": "sha1:2a41304b122159cb31f14082fd121c2b66fa4129"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/delete-flows.resolver.spec.ts",
+            "integrity": "sha1:394c38485a56a010b372a68eb328fcc7d2f5930b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/delete-flows.resolver.ts",
+            "integrity": "sha1:72b60241808a168bed7eda6e5352cafe12134233"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/find-flow-by-id.resolver.spec.ts",
+            "integrity": "sha1:0bac2ea4e18859e26cb537636f9433d826e89f4e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/find-flow-by-id.resolver.ts",
+            "integrity": "sha1:fda36b959cb6de85705a8d1a09a434dd9f79bd3b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/find-flow.resolver.spec.ts",
+            "integrity": "sha1:90c38da2f5d0b70d05e2ba76ca3bcf7a5c7094ab"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/find-flow.resolver.ts",
+            "integrity": "sha1:daf44ac448807de1b235c857e237a15a5b7180b8"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/get-flows.resolver.spec.ts",
+            "integrity": "sha1:1e9a0de74f565ce845caa088bbe7da2928d42d6b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/get-flows.resolver.ts",
+            "integrity": "sha1:b79aa48ea6dd2d68e43576c518716ef17bba28c6"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/paginate-flows.resolver.spec.ts",
+            "integrity": "sha1:7ca73fbf001c4ba4735fd54f3b95d417b88fbd00"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/paginate-flows.resolver.ts",
+            "integrity": "sha1:817782404dea856ab5c15203bc923dbe83b1db75"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/update-flow.resolver.spec.ts",
+            "integrity": "sha1:61dcd27197275ac60a479c80740a56323694ee38"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/flow/resolvers/update-flow.resolver.ts",
+            "integrity": "sha1:35d624850715c9d991a352d69f398995686f4936"
+        },
+        {
+            "path": "postman/bplus-it-sappi.flow.postman.json",
+            "integrity": "sha1:c71c9d3a4603a25d05741af17ecd8a7244ad2d4e"
+        }
+    ]
+}

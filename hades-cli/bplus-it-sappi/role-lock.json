@@ -1,466 +1,469 @@
-[
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/create/create-role.command-handler.ts",
-        "integrity": "sha1:6d01f91f0b93dc1ac26dd46638747e03f506517e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/create/create-role.command.handler.spec.ts",
-        "integrity": "sha1:94cc47b7c85a6fddbf82d75c6adc45e5e6976a79"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/create/create-role.command.ts",
-        "integrity": "sha1:dd011e747958f03893ed1813e1595a34f1d0a650"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/create/create-role.service.spec.ts",
-        "integrity": "sha1:41cb6639511397fe9dbea26163505f6415a78a79"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/create/create-role.service.ts",
-        "integrity": "sha1:f21702eab834af12f965a4e4ddb642f03193eae8"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/create/create-roles.command-handler.ts",
-        "integrity": "sha1:23d97d61f3c02b240ebc923b77c68a2b0e509edc"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/create/create-roles.command.handler.spec.ts",
-        "integrity": "sha1:574320178433961cc8e64c8cbe205dce44977d76"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/create/create-roles.command.ts",
-        "integrity": "sha1:581caef1d9d2180ee5fab4f78e6e8a171e2a9d48"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/create/create-roles.service.spec.ts",
-        "integrity": "sha1:b3c729cac5b10e697070916e1b7a8d19f646dfeb"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/create/create-roles.service.ts",
-        "integrity": "sha1:3fd57eafdfb3781f4ad1256a54c14e70f6494867"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.command-handler.ts",
-        "integrity": "sha1:3a788c4bb7f4e28c5ef057e8104d27eba54381b3"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.command.handler.spec.ts",
-        "integrity": "sha1:0ae7ac98b820206c619d6994c5a996ffe49ea1cb"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.command.ts",
-        "integrity": "sha1:2a96fff14be3b1dea3e03fc47a03c43114d687af"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.service.spec.ts",
-        "integrity": "sha1:3526a3aa8f53b739f7dc2d6d37512fce2219d796"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.service.ts",
-        "integrity": "sha1:2d718c417c9109ffa0c20501ce7d31a497880c9b"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-roles.command-handler.ts",
-        "integrity": "sha1:2ed7bc2d820019d17e474ac73254486c4af23ab6"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-roles.command.handler.spec.ts",
-        "integrity": "sha1:407dac0268221a13ee14ba85062745dc3b44ad2c"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-roles.command.ts",
-        "integrity": "sha1:2d64f092723dd3595e0c8efdad331d2c07404dd7"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-roles.service.spec.ts",
-        "integrity": "sha1:8f521916c21ac5f693aab69b93caacc3356fd164"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-roles.service.ts",
-        "integrity": "sha1:c9e790e66b62806b165e6ab92ca68aea99e5bdc9"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/add-roles-context.event.ts",
-        "integrity": "sha1:1ff10631f9aba21430cf58355e655ca2a1406ea0"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/created-role.event-handler.ts",
-        "integrity": "sha1:fc66d028c00bad52f248ed98df3b8022549c00f4"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/created-role.event.ts",
-        "integrity": "sha1:df43b8ac59a109c1111817d33ec467006293395a"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/created-roles.event-handler.ts",
-        "integrity": "sha1:73347309e54269fb97d4548b2f029dedf95ccea0"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/created-roles.event.ts",
-        "integrity": "sha1:48d3ed828bd60d4ac1f44e6516815ce6df91c6ba"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/deleted-role.event-handler.ts",
-        "integrity": "sha1:458b4291f4c1b982daf671f055952ad7476b0d0e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/deleted-role.event.ts",
-        "integrity": "sha1:4373a8944dbe6db57a382ac30688f9ff715959ae"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/deleted-roles.event-handler.ts",
-        "integrity": "sha1:8adb06bfd56342d516cb4baa2ed854984c5cac7b"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/deleted-roles.event.ts",
-        "integrity": "sha1:f5db7d684acf3376cfe9f4f0bc45c3ee6a494a2e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/updated-role.event-handler.ts",
-        "integrity": "sha1:9c8e4ec5430b2b5271e08f47a694aa515bef83f4"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/events/updated-role.event.ts",
-        "integrity": "sha1:622cc49898b0c7dce9dff8a98ed01d5fd574bdcc"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/find/find-role-by-id.query-handler.ts",
-        "integrity": "sha1:5f8ab9a6760df1b00f9eef6f1ac429a54a00e893"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/find/find-role-by-id.query.handler.spec.ts",
-        "integrity": "sha1:a3d709c606dccd4529691e203d0dfeebb72f787b"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/find/find-role-by-id.query.ts",
-        "integrity": "sha1:a30c7e43b993be334dae5849f498ea63b1a23aad"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/find/find-role-by-id.service.spec.ts",
-        "integrity": "sha1:fef5ace3ba2a52da8618c5bcb440c025d40d06ca"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/find/find-role-by-id.service.ts",
-        "integrity": "sha1:0dc6b6f9f56133a8a5d3c6d282da2984a8072368"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/find/find-role.query-handler.ts",
-        "integrity": "sha1:b1829234818e917c41af8086b6e80e68e9dc95e7"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/find/find-role.query.handler.spec.ts",
-        "integrity": "sha1:cdc15be42a8bf2916cd2d789b2dc7d79ed612c65"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/find/find-role.query.ts",
-        "integrity": "sha1:a4c42a5b38f2ac0e27266e036fe846c43c08f8d0"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/find/find-role.service.spec.ts",
-        "integrity": "sha1:28fc1b2cc1665c54d8a3216e1b1b261f86f1429e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/find/find-role.service.ts",
-        "integrity": "sha1:97f147e00f8991818981c1376c070ed2983ccca6"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/get/get-roles.query-handler.ts",
-        "integrity": "sha1:b0e034f28e587f70c01c92ea5070160465970c14"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/get/get-roles.query.handler.spec.ts",
-        "integrity": "sha1:90fcddaf4da3bba5499887bcb412061a7d020a31"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/get/get-roles.query.ts",
-        "integrity": "sha1:137cec200140b19edde47e9a8a06802b887746cd"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/get/get-roles.service.spec.ts",
-        "integrity": "sha1:9cbcdc10006a3a3d7b06d4a4fca8c68f8b1e1edf"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/get/get-roles.service.ts",
-        "integrity": "sha1:ffc688565725a213cdfdf8f193f5e9d151de0b56"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/paginate/paginate-roles.query-handler.ts",
-        "integrity": "sha1:27e70ef0829eabbe56a09c12f0305890146f673e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/paginate/paginate-roles.query.handler.spec.ts",
-        "integrity": "sha1:24e4af33814802811d7a624eac630606660030a3"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/paginate/paginate-roles.query.ts",
-        "integrity": "sha1:b9b4477886f09447755ee33230d58f8346b3aa24"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/paginate/paginate-roles.service.spec.ts",
-        "integrity": "sha1:9dd047f9e9ff9b57441d00800ab6d634407f6608"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/paginate/paginate-roles.service.ts",
-        "integrity": "sha1:fbde351e61ca5e70ed1cf327c35c96ebe586ea40"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/sagas/role.sagas.ts",
-        "integrity": "sha1:bddb552115b94c8b2d307d8efbf80e2f368fb8e9"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/update/update-role.command-handler.ts",
-        "integrity": "sha1:56ea78e8c93a25f9439bf97c7dd66701c056fc0f"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/update/update-role.command.handler.spec.ts",
-        "integrity": "sha1:ab9d0acbdb8501d68b7b6e3636a458cd02ebb4ca"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/update/update-role.command.ts",
-        "integrity": "sha1:7bf9a7088a62642fbce693b52c90f4a7124e44be"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/update/update-role.service.spec.ts",
-        "integrity": "sha1:282c4c00a0bb4362e0baf126db114dd172562dd5"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/application/update/update-role.service.ts",
-        "integrity": "sha1:b3ff05e9f3f0b2fcaa0a9d4ab60b9e60525464f6"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/role.aggregate.ts",
-        "integrity": "sha1:98c0f0312db8b9d38f2bd9e787e70a46e329d919"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/role.mapper.ts",
-        "integrity": "sha1:0e4554239cf9a8327ee5d0e06dcee9d3795fb408"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/role.repository.ts",
-        "integrity": "sha1:d884a451f65786f10d14ae6a17cb4d4f72a3d579"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/role.response.ts",
-        "integrity": "sha1:858fbfc0f08e0f67701f04fa89a81b1caabeafdc"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/index.ts",
-        "integrity": "sha1:6e5540cf79da11a33f60e31f9a436924a878d4e7"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/index.ts",
-        "integrity": "sha1:82c2401402734d9fd0b80f61430fc4da3033ee55"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/infrastructure/mock/mock-role.repository.ts",
-        "integrity": "sha1:e9290dccdec66ebfc6d206d6d6a73520767eca5d"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/infrastructure/seeds/role.seed.ts",
-        "integrity": "sha1:4a8b54ccf5769d493de88ad1b405d13905e58640"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/infrastructure/sequelize/sequelize-role.model.ts",
-        "integrity": "sha1:3bddee6b9eef40c0c4b7f9cb1a701037cd4e2bb9"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/infrastructure/sequelize/sequelize-role.repository.ts",
-        "integrity": "sha1:b7dd89d0806ec51f3928a88a4fab18af12ffda40"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-id.ts",
-        "integrity": "sha1:6b4227743ac372154a2b3d1f47ca4afcf8f1d623"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-tenant-id.ts",
-        "integrity": "sha1:11b553780572421c81df9eb5480eb0a52f19ee68"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-tenant-code.ts",
-        "integrity": "sha1:51b9d65ea8ae76ec8bb5d7a503c294abc154e570"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-name.ts",
-        "integrity": "sha1:21703f321d3139d2a1c43534934d4ffd774b3618"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-created-at.ts",
-        "integrity": "sha1:981ce3bfed580699656b340bd8913d0ea7ea424e"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-updated-at.ts",
-        "integrity": "sha1:68dd6e756b58213fd295c8319ba2b3a5d6b3f922"
-    },
-    {
-        "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-deleted-at.ts",
-        "integrity": "sha1:222acff10bfd34e31fe53e85b84bfb7e126eaaf3"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/create-role.controller.spec.ts",
-        "integrity": "sha1:84f4d67e234d62ab1216b999d70333740a99fcfa"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/create-role.controller.ts",
-        "integrity": "sha1:286cd64151b33af726f59e78469e869261c4e64b"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/create-roles.controller.spec.ts",
-        "integrity": "sha1:2d63782132b4e2f12d3c12d0152d7230d73748de"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/create-roles.controller.ts",
-        "integrity": "sha1:99513b7f88e0acc1199a7854ac9cec0697b96550"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/delete-role-by-id.controller.spec.ts",
-        "integrity": "sha1:9516c579f32d3b011206f3cf99bd7856aa57caaf"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/delete-role-by-id.controller.ts",
-        "integrity": "sha1:de607db0d9ae6eebda0b319dc409c7069db8cb6d"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/delete-roles.controller.spec.ts",
-        "integrity": "sha1:da087550cae0df83a40333f7ff68b85289dfc22d"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/delete-roles.controller.ts",
-        "integrity": "sha1:2be38d15a5c61ba9646bef56a7d319fea69eb1f9"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/find-role-by-id.controller.spec.ts",
-        "integrity": "sha1:72079968091ed0ac8e10377359a8bce40546e1bf"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/find-role-by-id.controller.ts",
-        "integrity": "sha1:0d2b4e3966b44d792ff48ecbf4b39c31abf12040"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/find-role.controller.spec.ts",
-        "integrity": "sha1:de61b426d21e96fdb2fc66affadcfb125735f9cd"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/find-role.controller.ts",
-        "integrity": "sha1:d630f4ff3b5243faad1b3c84b8520c58daf28156"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/get-roles.controller.spec.ts",
-        "integrity": "sha1:a9376c5e2bb516cb5c3020c48d3a33bd13603d34"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/get-roles.controller.ts",
-        "integrity": "sha1:f40aa1b48285b7bbd8b177d9d1a3f58384f4b1e5"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/paginate-roles.controller.spec.ts",
-        "integrity": "sha1:36a6a57a87fb7cd59db605c44da6e7e8c97639a9"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/paginate-roles.controller.ts",
-        "integrity": "sha1:e28cb4cdd56bcf0e9802085ce086fb3034b5cbef"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/update-role.controller.spec.ts",
-        "integrity": "sha1:87807ab75f62f63df857540fe128bf1d5330ee95"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/controllers/update-role.controller.ts",
-        "integrity": "sha1:bd2d0e195148db8da57098cdede09fb9a329734d"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/dto/role.dto.ts",
-        "integrity": "sha1:54558651804f8a79c33b1991d48669da150be5ab"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/dto/create-role.dto.ts",
-        "integrity": "sha1:8385c178d8eb8c027dcb77af985978c37362074a"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/dto/update-role.dto.ts",
-        "integrity": "sha1:fb3e08bb0d15c1daccdcdb4a1f4a315c96633cca"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/graphql/role.graphql",
-        "integrity": "sha1:e6d7eb5fcd153be9b630c61af9acbba2a151ee7c"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/index.ts",
-        "integrity": "sha1:f5744aea76744252326426a4cdf0371fd25f05fa"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/create-role.resolver.spec.ts",
-        "integrity": "sha1:32f52471945766eca48d5a0d58311225163338a1"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/create-role.resolver.ts",
-        "integrity": "sha1:50a7cc6f8f7e73c553bda03c17ed2e74b18418a5"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/create-roles.resolver.spec.ts",
-        "integrity": "sha1:ca336e3681b66fa88db6833c8e96632df0331ace"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/create-roles.resolver.ts",
-        "integrity": "sha1:be8d287d2e3b95111ec61bc6de97796d51f13e9d"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/delete-role-by-id.resolver.spec.ts",
-        "integrity": "sha1:7e8863f947885b09093164a3746b7fb1de6ab2ec"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/delete-role-by-id.resolver.ts",
-        "integrity": "sha1:4d68c95415835477f036e229cf48226ed6232fc7"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/delete-roles.resolver.spec.ts",
-        "integrity": "sha1:ae085d8a4ccf50727e72f24cf9769b4903eec83f"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/delete-roles.resolver.ts",
-        "integrity": "sha1:3bb57bef65154b59d89de8387c6aee7c87a65d7b"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/find-role-by-id.resolver.spec.ts",
-        "integrity": "sha1:ba00ca753790b41543cf43ec6aa2b8741feb527a"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/find-role-by-id.resolver.ts",
-        "integrity": "sha1:f1fd1c61bc77676919cfb7d9403ade108c88bd3e"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/find-role.resolver.spec.ts",
-        "integrity": "sha1:b4e36445f889b7a4ac45989b0db90aaa0f8311c9"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/find-role.resolver.ts",
-        "integrity": "sha1:662a78bf1a227f41f032ae904cda8e2e6512561e"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/get-roles.resolver.spec.ts",
-        "integrity": "sha1:eb5ea1d59749ef43102f42defa6afe39fef143ad"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/get-roles.resolver.ts",
-        "integrity": "sha1:548a3eb62417a6c1f2786c84735bef5745398762"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/paginate-roles.resolver.spec.ts",
-        "integrity": "sha1:cde19672a7b82cd29f99c0f19dab9f5f379f1ad2"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/paginate-roles.resolver.ts",
-        "integrity": "sha1:515ed3cd2cf961b754b2c3fd8d92e3731579e912"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/update-role.resolver.spec.ts",
-        "integrity": "sha1:ca98157a8084bb6f6173129ee2750e3bc7bef79d"
-    },
-    {
-        "path": "src/apps/bplus-it-sappi/role/resolvers/update-role.resolver.ts",
-        "integrity": "sha1:aabb9d7aa6dde366474ac89a4f1745f9dabf92f1"
-    },
-    {
-        "path": "postman/bplus-it-sappi.role.postman.json",
-        "integrity": "sha1:921063a2b12fa6fc89974e6701abbc52132b81c8"
-    }
-]
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/create/create-role.command-handler.ts",
+            "integrity": "sha1:6d01f91f0b93dc1ac26dd46638747e03f506517e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/create/create-role.command.handler.spec.ts",
+            "integrity": "sha1:94cc47b7c85a6fddbf82d75c6adc45e5e6976a79"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/create/create-role.command.ts",
+            "integrity": "sha1:dd011e747958f03893ed1813e1595a34f1d0a650"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/create/create-role.service.spec.ts",
+            "integrity": "sha1:41cb6639511397fe9dbea26163505f6415a78a79"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/create/create-role.service.ts",
+            "integrity": "sha1:f21702eab834af12f965a4e4ddb642f03193eae8"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/create/create-roles.command-handler.ts",
+            "integrity": "sha1:23d97d61f3c02b240ebc923b77c68a2b0e509edc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/create/create-roles.command.handler.spec.ts",
+            "integrity": "sha1:574320178433961cc8e64c8cbe205dce44977d76"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/create/create-roles.command.ts",
+            "integrity": "sha1:581caef1d9d2180ee5fab4f78e6e8a171e2a9d48"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/create/create-roles.service.spec.ts",
+            "integrity": "sha1:b3c729cac5b10e697070916e1b7a8d19f646dfeb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/create/create-roles.service.ts",
+            "integrity": "sha1:3fd57eafdfb3781f4ad1256a54c14e70f6494867"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.command-handler.ts",
+            "integrity": "sha1:3a788c4bb7f4e28c5ef057e8104d27eba54381b3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.command.handler.spec.ts",
+            "integrity": "sha1:0ae7ac98b820206c619d6994c5a996ffe49ea1cb"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.command.ts",
+            "integrity": "sha1:2a96fff14be3b1dea3e03fc47a03c43114d687af"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.service.spec.ts",
+            "integrity": "sha1:3526a3aa8f53b739f7dc2d6d37512fce2219d796"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-role-by-id.service.ts",
+            "integrity": "sha1:2d718c417c9109ffa0c20501ce7d31a497880c9b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-roles.command-handler.ts",
+            "integrity": "sha1:2ed7bc2d820019d17e474ac73254486c4af23ab6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-roles.command.handler.spec.ts",
+            "integrity": "sha1:407dac0268221a13ee14ba85062745dc3b44ad2c"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-roles.command.ts",
+            "integrity": "sha1:2d64f092723dd3595e0c8efdad331d2c07404dd7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-roles.service.spec.ts",
+            "integrity": "sha1:8f521916c21ac5f693aab69b93caacc3356fd164"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/delete/delete-roles.service.ts",
+            "integrity": "sha1:c9e790e66b62806b165e6ab92ca68aea99e5bdc9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/add-roles-context.event.ts",
+            "integrity": "sha1:1ff10631f9aba21430cf58355e655ca2a1406ea0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/created-role.event-handler.ts",
+            "integrity": "sha1:fc66d028c00bad52f248ed98df3b8022549c00f4"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/created-role.event.ts",
+            "integrity": "sha1:df43b8ac59a109c1111817d33ec467006293395a"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/created-roles.event-handler.ts",
+            "integrity": "sha1:73347309e54269fb97d4548b2f029dedf95ccea0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/created-roles.event.ts",
+            "integrity": "sha1:48d3ed828bd60d4ac1f44e6516815ce6df91c6ba"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/deleted-role.event-handler.ts",
+            "integrity": "sha1:458b4291f4c1b982daf671f055952ad7476b0d0e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/deleted-role.event.ts",
+            "integrity": "sha1:4373a8944dbe6db57a382ac30688f9ff715959ae"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/deleted-roles.event-handler.ts",
+            "integrity": "sha1:8adb06bfd56342d516cb4baa2ed854984c5cac7b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/deleted-roles.event.ts",
+            "integrity": "sha1:f5db7d684acf3376cfe9f4f0bc45c3ee6a494a2e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/updated-role.event-handler.ts",
+            "integrity": "sha1:9c8e4ec5430b2b5271e08f47a694aa515bef83f4"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/events/updated-role.event.ts",
+            "integrity": "sha1:622cc49898b0c7dce9dff8a98ed01d5fd574bdcc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/find/find-role-by-id.query-handler.ts",
+            "integrity": "sha1:5f8ab9a6760df1b00f9eef6f1ac429a54a00e893"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/find/find-role-by-id.query.handler.spec.ts",
+            "integrity": "sha1:a3d709c606dccd4529691e203d0dfeebb72f787b"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/find/find-role-by-id.query.ts",
+            "integrity": "sha1:a30c7e43b993be334dae5849f498ea63b1a23aad"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/find/find-role-by-id.service.spec.ts",
+            "integrity": "sha1:fef5ace3ba2a52da8618c5bcb440c025d40d06ca"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/find/find-role-by-id.service.ts",
+            "integrity": "sha1:0dc6b6f9f56133a8a5d3c6d282da2984a8072368"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/find/find-role.query-handler.ts",
+            "integrity": "sha1:b1829234818e917c41af8086b6e80e68e9dc95e7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/find/find-role.query.handler.spec.ts",
+            "integrity": "sha1:cdc15be42a8bf2916cd2d789b2dc7d79ed612c65"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/find/find-role.query.ts",
+            "integrity": "sha1:a4c42a5b38f2ac0e27266e036fe846c43c08f8d0"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/find/find-role.service.spec.ts",
+            "integrity": "sha1:28fc1b2cc1665c54d8a3216e1b1b261f86f1429e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/find/find-role.service.ts",
+            "integrity": "sha1:97f147e00f8991818981c1376c070ed2983ccca6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/get/get-roles.query-handler.ts",
+            "integrity": "sha1:b0e034f28e587f70c01c92ea5070160465970c14"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/get/get-roles.query.handler.spec.ts",
+            "integrity": "sha1:90fcddaf4da3bba5499887bcb412061a7d020a31"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/get/get-roles.query.ts",
+            "integrity": "sha1:137cec200140b19edde47e9a8a06802b887746cd"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/get/get-roles.service.spec.ts",
+            "integrity": "sha1:9cbcdc10006a3a3d7b06d4a4fca8c68f8b1e1edf"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/get/get-roles.service.ts",
+            "integrity": "sha1:ffc688565725a213cdfdf8f193f5e9d151de0b56"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/paginate/paginate-roles.query-handler.ts",
+            "integrity": "sha1:27e70ef0829eabbe56a09c12f0305890146f673e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/paginate/paginate-roles.query.handler.spec.ts",
+            "integrity": "sha1:24e4af33814802811d7a624eac630606660030a3"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/paginate/paginate-roles.query.ts",
+            "integrity": "sha1:b9b4477886f09447755ee33230d58f8346b3aa24"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/paginate/paginate-roles.service.spec.ts",
+            "integrity": "sha1:9dd047f9e9ff9b57441d00800ab6d634407f6608"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/paginate/paginate-roles.service.ts",
+            "integrity": "sha1:fbde351e61ca5e70ed1cf327c35c96ebe586ea40"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/sagas/role.sagas.ts",
+            "integrity": "sha1:bddb552115b94c8b2d307d8efbf80e2f368fb8e9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/update/update-role.command-handler.ts",
+            "integrity": "sha1:56ea78e8c93a25f9439bf97c7dd66701c056fc0f"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/update/update-role.command.handler.spec.ts",
+            "integrity": "sha1:ab9d0acbdb8501d68b7b6e3636a458cd02ebb4ca"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/update/update-role.command.ts",
+            "integrity": "sha1:7bf9a7088a62642fbce693b52c90f4a7124e44be"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/update/update-role.service.spec.ts",
+            "integrity": "sha1:282c4c00a0bb4362e0baf126db114dd172562dd5"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/application/update/update-role.service.ts",
+            "integrity": "sha1:b3ff05e9f3f0b2fcaa0a9d4ab60b9e60525464f6"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/role.aggregate.ts",
+            "integrity": "sha1:98c0f0312db8b9d38f2bd9e787e70a46e329d919"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/role.mapper.ts",
+            "integrity": "sha1:0e4554239cf9a8327ee5d0e06dcee9d3795fb408"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/role.repository.ts",
+            "integrity": "sha1:d884a451f65786f10d14ae6a17cb4d4f72a3d579"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/role.response.ts",
+            "integrity": "sha1:858fbfc0f08e0f67701f04fa89a81b1caabeafdc"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/index.ts",
+            "integrity": "sha1:6e5540cf79da11a33f60e31f9a436924a878d4e7"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/index.ts",
+            "integrity": "sha1:82c2401402734d9fd0b80f61430fc4da3033ee55"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/infrastructure/mock/mock-role.repository.ts",
+            "integrity": "sha1:e9290dccdec66ebfc6d206d6d6a73520767eca5d"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/infrastructure/seeds/role.seed.ts",
+            "integrity": "sha1:4a8b54ccf5769d493de88ad1b405d13905e58640"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/infrastructure/sequelize/sequelize-role.model.ts",
+            "integrity": "sha1:3bddee6b9eef40c0c4b7f9cb1a701037cd4e2bb9"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/infrastructure/sequelize/sequelize-role.repository.ts",
+            "integrity": "sha1:b7dd89d0806ec51f3928a88a4fab18af12ffda40"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-id.ts",
+            "integrity": "sha1:6b4227743ac372154a2b3d1f47ca4afcf8f1d623"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-tenant-id.ts",
+            "integrity": "sha1:11b553780572421c81df9eb5480eb0a52f19ee68"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-tenant-code.ts",
+            "integrity": "sha1:51b9d65ea8ae76ec8bb5d7a503c294abc154e570"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-name.ts",
+            "integrity": "sha1:21703f321d3139d2a1c43534934d4ffd774b3618"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-created-at.ts",
+            "integrity": "sha1:981ce3bfed580699656b340bd8913d0ea7ea424e"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-updated-at.ts",
+            "integrity": "sha1:68dd6e756b58213fd295c8319ba2b3a5d6b3f922"
+        },
+        {
+            "path": "src/@hades/bplus-it-sappi/role/domain/value-objects/role-deleted-at.ts",
+            "integrity": "sha1:222acff10bfd34e31fe53e85b84bfb7e126eaaf3"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/create-role.controller.spec.ts",
+            "integrity": "sha1:84f4d67e234d62ab1216b999d70333740a99fcfa"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/create-role.controller.ts",
+            "integrity": "sha1:286cd64151b33af726f59e78469e869261c4e64b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/create-roles.controller.spec.ts",
+            "integrity": "sha1:2d63782132b4e2f12d3c12d0152d7230d73748de"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/create-roles.controller.ts",
+            "integrity": "sha1:99513b7f88e0acc1199a7854ac9cec0697b96550"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/delete-role-by-id.controller.spec.ts",
+            "integrity": "sha1:9516c579f32d3b011206f3cf99bd7856aa57caaf"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/delete-role-by-id.controller.ts",
+            "integrity": "sha1:de607db0d9ae6eebda0b319dc409c7069db8cb6d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/delete-roles.controller.spec.ts",
+            "integrity": "sha1:da087550cae0df83a40333f7ff68b85289dfc22d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/delete-roles.controller.ts",
+            "integrity": "sha1:2be38d15a5c61ba9646bef56a7d319fea69eb1f9"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/find-role-by-id.controller.spec.ts",
+            "integrity": "sha1:72079968091ed0ac8e10377359a8bce40546e1bf"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/find-role-by-id.controller.ts",
+            "integrity": "sha1:0d2b4e3966b44d792ff48ecbf4b39c31abf12040"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/find-role.controller.spec.ts",
+            "integrity": "sha1:de61b426d21e96fdb2fc66affadcfb125735f9cd"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/find-role.controller.ts",
+            "integrity": "sha1:d630f4ff3b5243faad1b3c84b8520c58daf28156"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/get-roles.controller.spec.ts",
+            "integrity": "sha1:a9376c5e2bb516cb5c3020c48d3a33bd13603d34"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/get-roles.controller.ts",
+            "integrity": "sha1:f40aa1b48285b7bbd8b177d9d1a3f58384f4b1e5"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/paginate-roles.controller.spec.ts",
+            "integrity": "sha1:36a6a57a87fb7cd59db605c44da6e7e8c97639a9"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/paginate-roles.controller.ts",
+            "integrity": "sha1:e28cb4cdd56bcf0e9802085ce086fb3034b5cbef"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/update-role.controller.spec.ts",
+            "integrity": "sha1:87807ab75f62f63df857540fe128bf1d5330ee95"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/controllers/update-role.controller.ts",
+            "integrity": "sha1:bd2d0e195148db8da57098cdede09fb9a329734d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/dto/role.dto.ts",
+            "integrity": "sha1:54558651804f8a79c33b1991d48669da150be5ab"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/dto/create-role.dto.ts",
+            "integrity": "sha1:8385c178d8eb8c027dcb77af985978c37362074a"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/dto/update-role.dto.ts",
+            "integrity": "sha1:fb3e08bb0d15c1daccdcdb4a1f4a315c96633cca"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/graphql/role.graphql",
+            "integrity": "sha1:e6d7eb5fcd153be9b630c61af9acbba2a151ee7c"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/index.ts",
+            "integrity": "sha1:f5744aea76744252326426a4cdf0371fd25f05fa"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/create-role.resolver.spec.ts",
+            "integrity": "sha1:32f52471945766eca48d5a0d58311225163338a1"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/create-role.resolver.ts",
+            "integrity": "sha1:50a7cc6f8f7e73c553bda03c17ed2e74b18418a5"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/create-roles.resolver.spec.ts",
+            "integrity": "sha1:ca336e3681b66fa88db6833c8e96632df0331ace"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/create-roles.resolver.ts",
+            "integrity": "sha1:be8d287d2e3b95111ec61bc6de97796d51f13e9d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/delete-role-by-id.resolver.spec.ts",
+            "integrity": "sha1:7e8863f947885b09093164a3746b7fb1de6ab2ec"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/delete-role-by-id.resolver.ts",
+            "integrity": "sha1:4d68c95415835477f036e229cf48226ed6232fc7"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/delete-roles.resolver.spec.ts",
+            "integrity": "sha1:ae085d8a4ccf50727e72f24cf9769b4903eec83f"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/delete-roles.resolver.ts",
+            "integrity": "sha1:3bb57bef65154b59d89de8387c6aee7c87a65d7b"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/find-role-by-id.resolver.spec.ts",
+            "integrity": "sha1:ba00ca753790b41543cf43ec6aa2b8741feb527a"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/find-role-by-id.resolver.ts",
+            "integrity": "sha1:f1fd1c61bc77676919cfb7d9403ade108c88bd3e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/find-role.resolver.spec.ts",
+            "integrity": "sha1:b4e36445f889b7a4ac45989b0db90aaa0f8311c9"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/find-role.resolver.ts",
+            "integrity": "sha1:662a78bf1a227f41f032ae904cda8e2e6512561e"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/get-roles.resolver.spec.ts",
+            "integrity": "sha1:eb5ea1d59749ef43102f42defa6afe39fef143ad"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/get-roles.resolver.ts",
+            "integrity": "sha1:548a3eb62417a6c1f2786c84735bef5745398762"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/paginate-roles.resolver.spec.ts",
+            "integrity": "sha1:cde19672a7b82cd29f99c0f19dab9f5f379f1ad2"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/paginate-roles.resolver.ts",
+            "integrity": "sha1:515ed3cd2cf961b754b2c3fd8d92e3731579e912"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/update-role.resolver.spec.ts",
+            "integrity": "sha1:ca98157a8084bb6f6173129ee2750e3bc7bef79d"
+        },
+        {
+            "path": "src/apps/bplus-it-sappi/role/resolvers/update-role.resolver.ts",
+            "integrity": "sha1:aabb9d7aa6dde366474ac89a4f1745f9dabf92f1"
+        },
+        {
+            "path": "postman/bplus-it-sappi.role.postman.json",
+            "integrity": "sha1:921063a2b12fa6fc89974e6701abbc52132b81c8"
+        }
+    ]
+}
