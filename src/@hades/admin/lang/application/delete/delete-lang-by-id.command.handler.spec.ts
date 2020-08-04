@@ -11,7 +11,7 @@ describe('DeleteLangByIdCommandHandler', () =>
     let commandHandler: DeleteLangByIdCommandHandler;
     let service: DeleteLangByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

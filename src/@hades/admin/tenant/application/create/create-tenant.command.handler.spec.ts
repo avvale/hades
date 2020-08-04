@@ -11,7 +11,7 @@ describe('CreateTenantCommandHandler', () =>
     let commandHandler: CreateTenantCommandHandler;
     let service: CreateTenantService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

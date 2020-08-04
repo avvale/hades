@@ -11,7 +11,7 @@ describe('DeleteDataLakeByIdCommandHandler', () =>
     let commandHandler: DeleteDataLakeByIdCommandHandler;
     let service: DeleteDataLakeByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

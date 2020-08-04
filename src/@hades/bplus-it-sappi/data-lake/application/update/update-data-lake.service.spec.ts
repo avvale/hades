@@ -24,7 +24,7 @@ describe('UpdateDataLakeService', () =>
     let repository: IDataLakeRepository;
     let mockRepository: MockDataLakeRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

@@ -11,7 +11,7 @@ describe('DeleteContactByIdCommandHandler', () =>
     let commandHandler: DeleteContactByIdCommandHandler;
     let service: DeleteContactByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

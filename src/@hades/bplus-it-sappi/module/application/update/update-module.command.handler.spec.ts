@@ -11,7 +11,7 @@ describe('UpdateModuleCommandHandler', () =>
     let commandHandler: UpdateModuleCommandHandler;
     let service: UpdateModuleService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

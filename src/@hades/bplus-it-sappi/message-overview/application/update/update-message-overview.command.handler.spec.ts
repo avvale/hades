@@ -11,7 +11,7 @@ describe('UpdateMessageOverviewCommandHandler', () =>
     let commandHandler: UpdateMessageOverviewCommandHandler;
     let service: UpdateMessageOverviewService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

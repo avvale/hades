@@ -17,7 +17,7 @@ describe('PaginateBoundedContextsQueryHandler', () =>
     let repository: MockBoundedContextRepository;
     let mapper: BoundedContextMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

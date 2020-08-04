@@ -10,7 +10,7 @@ describe('DeleteDataLakesCommandHandler', () =>
     let commandHandler: DeleteDataLakesCommandHandler;
     let service: DeleteDataLakesService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

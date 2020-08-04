@@ -15,7 +15,7 @@ describe('FindMessageDetailQueryHandler', () =>
     let repository: MockMessageDetailRepository;
     let mapper: MessageDetailMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

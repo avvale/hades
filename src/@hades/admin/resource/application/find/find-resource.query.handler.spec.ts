@@ -15,7 +15,7 @@ describe('FindResourceQueryHandler', () =>
     let repository: MockResourceRepository;
     let mapper: ResourceMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

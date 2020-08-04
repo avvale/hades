@@ -15,7 +15,7 @@ describe('FindSystemQueryHandler', () =>
     let repository: MockSystemRepository;
     let mapper: SystemMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

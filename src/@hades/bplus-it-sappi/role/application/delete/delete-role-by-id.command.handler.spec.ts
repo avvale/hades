@@ -11,7 +11,7 @@ describe('DeleteRoleByIdCommandHandler', () =>
     let commandHandler: DeleteRoleByIdCommandHandler;
     let service: DeleteRoleByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

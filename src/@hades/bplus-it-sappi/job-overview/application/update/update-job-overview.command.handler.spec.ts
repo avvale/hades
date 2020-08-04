@@ -11,7 +11,7 @@ describe('UpdateJobOverviewCommandHandler', () =>
     let commandHandler: UpdateJobOverviewCommandHandler;
     let service: UpdateJobOverviewService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

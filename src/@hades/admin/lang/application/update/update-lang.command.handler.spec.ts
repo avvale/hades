@@ -11,7 +11,7 @@ describe('UpdateLangCommandHandler', () =>
     let commandHandler: UpdateLangCommandHandler;
     let service: UpdateLangService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

@@ -14,7 +14,7 @@ describe('DeleteExecutionByIdService', () =>
     let repository: IExecutionRepository;
     let mockRepository: MockExecutionRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

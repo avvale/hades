@@ -15,7 +15,7 @@ describe('GetFlowsQueryHandler', () =>
     let repository: MockFlowRepository;
     let mapper: FlowMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

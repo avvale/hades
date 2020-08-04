@@ -12,7 +12,7 @@ describe('FindJobDetailService', () =>
     let repository: IJobDetailRepository;
     let mockRepository: MockJobDetailRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

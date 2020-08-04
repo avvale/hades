@@ -15,7 +15,7 @@ describe('GetJobsOverviewQueryHandler', () =>
     let repository: MockJobOverviewRepository;
     let mapper: JobOverviewMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

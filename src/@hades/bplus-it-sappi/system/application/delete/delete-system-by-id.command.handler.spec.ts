@@ -11,7 +11,7 @@ describe('DeleteSystemByIdCommandHandler', () =>
     let commandHandler: DeleteSystemByIdCommandHandler;
     let service: DeleteSystemByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

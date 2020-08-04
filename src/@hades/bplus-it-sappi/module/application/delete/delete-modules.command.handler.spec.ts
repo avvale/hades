@@ -10,7 +10,7 @@ describe('DeleteModulesCommandHandler', () =>
     let commandHandler: DeleteModulesCommandHandler;
     let service: DeleteModulesService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

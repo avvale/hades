@@ -12,7 +12,7 @@ describe('DeleteModulesService', () =>
     let repository: IModuleRepository;
     let mockRepository: MockModuleRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

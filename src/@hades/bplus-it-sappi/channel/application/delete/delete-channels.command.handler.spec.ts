@@ -10,7 +10,7 @@ describe('DeleteChannelsCommandHandler', () =>
     let commandHandler: DeleteChannelsCommandHandler;
     let service: DeleteChannelsService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

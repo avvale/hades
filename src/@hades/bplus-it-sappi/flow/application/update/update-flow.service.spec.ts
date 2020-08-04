@@ -42,7 +42,7 @@ describe('UpdateFlowService', () =>
     let repository: IFlowRepository;
     let mockRepository: MockFlowRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

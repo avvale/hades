@@ -11,7 +11,7 @@ describe('DeletePermissionByIdCommandHandler', () =>
     let commandHandler: DeletePermissionByIdCommandHandler;
     let service: DeletePermissionByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

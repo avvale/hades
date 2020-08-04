@@ -17,7 +17,7 @@ describe('PaginateContactsQueryHandler', () =>
     let repository: MockContactRepository;
     let mapper: ContactMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

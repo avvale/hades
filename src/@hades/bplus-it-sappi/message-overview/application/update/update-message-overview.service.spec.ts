@@ -38,7 +38,7 @@ describe('UpdateMessageOverviewService', () =>
     let repository: IMessageOverviewRepository;
     let mockRepository: MockMessageOverviewRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

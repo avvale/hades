@@ -11,7 +11,7 @@ describe('CreateDataLakeCommandHandler', () =>
     let commandHandler: CreateDataLakeCommandHandler;
     let service: CreateDataLakeService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

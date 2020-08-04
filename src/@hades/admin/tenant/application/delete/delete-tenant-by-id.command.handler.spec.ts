@@ -11,7 +11,7 @@ describe('DeleteTenantByIdCommandHandler', () =>
     let commandHandler: DeleteTenantByIdCommandHandler;
     let service: DeleteTenantByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

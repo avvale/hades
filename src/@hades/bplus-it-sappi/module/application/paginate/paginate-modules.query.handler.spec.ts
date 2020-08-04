@@ -17,7 +17,7 @@ describe('PaginateModulesQueryHandler', () =>
     let repository: MockModuleRepository;
     let mapper: ModuleMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

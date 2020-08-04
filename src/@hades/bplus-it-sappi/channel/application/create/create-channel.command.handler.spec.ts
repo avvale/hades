@@ -11,7 +11,7 @@ describe('CreateChannelCommandHandler', () =>
     let commandHandler: CreateChannelCommandHandler;
     let service: CreateChannelService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

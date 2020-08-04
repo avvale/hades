@@ -11,7 +11,7 @@ describe('UpdateDataLakeCommandHandler', () =>
     let commandHandler: UpdateDataLakeCommandHandler;
     let service: UpdateDataLakeService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

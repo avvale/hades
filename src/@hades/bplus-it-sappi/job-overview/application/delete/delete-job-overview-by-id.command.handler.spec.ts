@@ -11,7 +11,7 @@ describe('DeleteJobOverviewByIdCommandHandler', () =>
     let commandHandler: DeleteJobOverviewByIdCommandHandler;
     let service: DeleteJobOverviewByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

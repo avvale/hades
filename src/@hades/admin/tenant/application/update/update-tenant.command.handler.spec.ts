@@ -11,7 +11,7 @@ describe('UpdateTenantCommandHandler', () =>
     let commandHandler: UpdateTenantCommandHandler;
     let service: UpdateTenantService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

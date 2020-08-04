@@ -11,7 +11,7 @@ describe('UpdateChannelOverviewCommandHandler', () =>
     let commandHandler: UpdateChannelOverviewCommandHandler;
     let service: UpdateChannelOverviewService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

@@ -14,7 +14,7 @@ describe('DeleteChannelByIdService', () =>
     let repository: IChannelRepository;
     let mockRepository: MockChannelRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

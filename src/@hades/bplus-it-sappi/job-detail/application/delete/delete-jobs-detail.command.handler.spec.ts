@@ -10,7 +10,7 @@ describe('DeleteJobsDetailCommandHandler', () =>
     let commandHandler: DeleteJobsDetailCommandHandler;
     let service: DeleteJobsDetailService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

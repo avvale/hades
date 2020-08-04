@@ -34,7 +34,7 @@ describe('UpdateContactService', () =>
     let repository: IContactRepository;
     let mockRepository: MockContactRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

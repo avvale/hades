@@ -12,7 +12,7 @@ describe('CreateRolesService', () =>
     let repository: IRoleRepository;
     let mockRepository: MockRoleRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

@@ -11,7 +11,7 @@ describe('DeleteChannelByIdCommandHandler', () =>
     let commandHandler: DeleteChannelByIdCommandHandler;
     let service: DeleteChannelByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

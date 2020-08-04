@@ -16,7 +16,7 @@ describe('FindJobDetailByIdQueryHandler', () =>
     let repository: MockJobDetailRepository;
     let mapper: JobDetailMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

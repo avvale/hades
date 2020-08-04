@@ -10,7 +10,7 @@ describe('DeleteFlowsCommandHandler', () =>
     let commandHandler: DeleteFlowsCommandHandler;
     let service: DeleteFlowsService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

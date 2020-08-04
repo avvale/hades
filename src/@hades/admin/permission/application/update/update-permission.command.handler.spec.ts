@@ -11,7 +11,7 @@ describe('UpdatePermissionCommandHandler', () =>
     let commandHandler: UpdatePermissionCommandHandler;
     let service: UpdatePermissionService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

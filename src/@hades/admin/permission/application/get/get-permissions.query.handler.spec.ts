@@ -15,7 +15,7 @@ describe('GetPermissionsQueryHandler', () =>
     let repository: MockPermissionRepository;
     let mapper: PermissionMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

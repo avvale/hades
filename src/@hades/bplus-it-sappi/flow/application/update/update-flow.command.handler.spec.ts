@@ -11,7 +11,7 @@ describe('UpdateFlowCommandHandler', () =>
     let commandHandler: UpdateFlowCommandHandler;
     let service: UpdateFlowService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

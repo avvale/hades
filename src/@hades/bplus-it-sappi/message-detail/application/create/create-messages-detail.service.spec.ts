@@ -12,7 +12,7 @@ describe('CreateMessagesDetailService', () =>
     let repository: IMessageDetailRepository;
     let mockRepository: MockMessageDetailRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

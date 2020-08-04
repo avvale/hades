@@ -11,7 +11,7 @@ describe('CreateJobOverviewCommandHandler', () =>
     let commandHandler: CreateJobOverviewCommandHandler;
     let service: CreateJobOverviewService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

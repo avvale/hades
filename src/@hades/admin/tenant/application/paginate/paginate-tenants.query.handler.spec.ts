@@ -17,7 +17,7 @@ describe('PaginateTenantsQueryHandler', () =>
     let repository: MockTenantRepository;
     let mapper: TenantMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

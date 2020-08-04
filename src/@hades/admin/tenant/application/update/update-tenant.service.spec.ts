@@ -25,7 +25,7 @@ describe('UpdateTenantService', () =>
     let repository: ITenantRepository;
     let mockRepository: MockTenantRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

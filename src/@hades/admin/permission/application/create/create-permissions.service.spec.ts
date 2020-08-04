@@ -12,7 +12,7 @@ describe('CreatePermissionsService', () =>
     let repository: IPermissionRepository;
     let mockRepository: MockPermissionRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

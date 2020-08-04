@@ -11,7 +11,7 @@ describe('CreateContactsCommandHandler', () =>
     let commandHandler: CreateContactsCommandHandler;
     let service: CreateContactsService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

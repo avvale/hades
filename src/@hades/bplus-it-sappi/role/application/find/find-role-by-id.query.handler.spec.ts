@@ -16,7 +16,7 @@ describe('FindRoleByIdQueryHandler', () =>
     let repository: MockRoleRepository;
     let mapper: RoleMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

@@ -15,7 +15,7 @@ describe('FindChannelDetailQueryHandler', () =>
     let repository: MockChannelDetailRepository;
     let mapper: ChannelDetailMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

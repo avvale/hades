@@ -15,7 +15,7 @@ describe('FindDataLakeQueryHandler', () =>
     let repository: MockDataLakeRepository;
     let mapper: DataLakeMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

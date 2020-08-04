@@ -12,7 +12,7 @@ describe('GetSystemsService', () =>
     let repository: ISystemRepository;
     let mockRepository: MockSystemRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

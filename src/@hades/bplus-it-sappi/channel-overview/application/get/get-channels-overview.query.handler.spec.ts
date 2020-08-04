@@ -15,7 +15,7 @@ describe('GetChannelsOverviewQueryHandler', () =>
     let repository: MockChannelOverviewRepository;
     let mapper: ChannelOverviewMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

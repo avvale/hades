@@ -17,7 +17,7 @@ describe('PaginateExecutionsQueryHandler', () =>
     let repository: MockExecutionRepository;
     let mapper: ExecutionMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

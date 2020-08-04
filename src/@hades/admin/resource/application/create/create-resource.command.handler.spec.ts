@@ -11,7 +11,7 @@ describe('CreateResourceCommandHandler', () =>
     let commandHandler: CreateResourceCommandHandler;
     let service: CreateResourceService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

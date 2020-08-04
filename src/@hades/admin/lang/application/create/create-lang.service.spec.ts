@@ -24,7 +24,7 @@ describe('CreateLangService', () =>
     let repository: ILangRepository;
     let mockRepository: MockLangRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

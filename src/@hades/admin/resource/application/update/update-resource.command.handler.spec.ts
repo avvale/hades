@@ -11,7 +11,7 @@ describe('UpdateResourceCommandHandler', () =>
     let commandHandler: UpdateResourceCommandHandler;
     let service: UpdateResourceService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
