@@ -18,11 +18,11 @@ export abstract class TimestampValueObject extends StringValueObject
 
         if (process.env.TZ) 
         {
-            super.value = moment(value).tz(process.env.TZ).format('YYYY-MM-DD H:mm:ss');
+            super.value = moment(value).tz(process.env.TZ).format('YYYY-MM-DD HH:mm:ss');
         }
         else
         {
-            super.value = moment(value).format('YYYY-MM-DD H:mm:ss');
+            super.value = moment(value).format('YYYY-MM-DD HH:mm:ss');
         }
     }
 }
