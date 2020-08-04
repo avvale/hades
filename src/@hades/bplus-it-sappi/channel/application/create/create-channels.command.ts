@@ -11,7 +11,7 @@ export class CreateChannelsCommand
             party?: string,
             component: string,
             name: string,
-            flowId?: string,
+            flowHash: string,
             flowParty: string,
             flowComponent: string,
             flowInterfaceName: string,

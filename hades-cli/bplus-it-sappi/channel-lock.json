@@ -3,43 +3,43 @@
     "files": [
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channel.command-handler.ts",
-            "integrity": "sha1:931a0f34c186b98b5f6de0d76f8807e7d2bdb34f"
+            "integrity": "sha1:7cfc19eeda50861f0300f40caf0259af70cd38fe"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channel.command.handler.spec.ts",
-            "integrity": "sha1:5baa446919e9cb5eb220a46faca286a03d6a0861"
+            "integrity": "sha1:336386240f024bc0349b74e514c62dd2c556855c"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channel.command.ts",
-            "integrity": "sha1:3a3da4619d783a21ed2102409f2746bd6e84b7a1"
+            "integrity": "sha1:e48d25555445f8ba7d97addcbac85742bacb636c"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channel.service.spec.ts",
-            "integrity": "sha1:c5775512de17e2435b0986a08a637bca4231c214"
+            "integrity": "sha1:f0d6b957e84fcdc5f129e9eadda096390cce08b2"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channel.service.ts",
-            "integrity": "sha1:f8bd45ec62bd9a37e541c3efde4ab809aef36b86"
+            "integrity": "sha1:77d141fea2e9d4d89a8a2e3d3f4c76cebc88f45f"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channels.command-handler.ts",
-            "integrity": "sha1:030d2fd6171305984bc2972f0622b923c0c78c4b"
+            "integrity": "sha1:ce2bbaa007f3980ac354393414fd093b8a6ed6dc"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channels.command.handler.spec.ts",
-            "integrity": "sha1:4d994af363bce58de01f2db83cb5d445932296c4"
+            "integrity": "sha1:6d579439b57a04a9771017b82e69d6089119771e"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channels.command.ts",
-            "integrity": "sha1:6a03889dc1671e3b868622afc609ec13c674432c"
+            "integrity": "sha1:36cd9005045a705758c6f649dfe466b08f1aac6a"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channels.service.spec.ts",
-            "integrity": "sha1:0578decad38d2b56bf67cd4d6014d057c648112d"
+            "integrity": "sha1:c50f5a6884717c0ceb85c6a73da0a5978d630e3c"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channels.service.ts",
-            "integrity": "sha1:641fb5b06e1c1d6c47a8bd83c72125417f243bbe"
+            "integrity": "sha1:a6ba883fc90daf343132b5c3b8d035d0a5f17aed"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/delete/delete-channel-by-id.command-handler.ts",
@@ -47,7 +47,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/delete/delete-channel-by-id.command.handler.spec.ts",
-            "integrity": "sha1:308d91d814f25fedd235b4a10f5f8bb71f38e0b9"
+            "integrity": "sha1:cafa416096447034691b3d2bec36b85eaeeb18d5"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/delete/delete-channel-by-id.command.ts",
@@ -55,7 +55,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/delete/delete-channel-by-id.service.spec.ts",
-            "integrity": "sha1:1ffe81620d6ad6d9cd015f2a19a4b032a91f216c"
+            "integrity": "sha1:d00f965cff498d8f380143d3d6b2e18e00f3f00c"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/delete/delete-channel-by-id.service.ts",
@@ -67,7 +67,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/delete/delete-channels.command.handler.spec.ts",
-            "integrity": "sha1:3d1d7917b60fa885f60373d62134c8f9cae0a395"
+            "integrity": "sha1:e69574ed9a06f0a0a03909bfe2aacee37af99815"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/delete/delete-channels.command.ts",
@@ -75,7 +75,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/delete/delete-channels.service.spec.ts",
-            "integrity": "sha1:668998b90e9d38812365d0c6ac88b6d18f299306"
+            "integrity": "sha1:3d84b021f0503d291afe646eb188ff43c33fe26c"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/delete/delete-channels.service.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/events/add-channels-context.event.ts",
-            "integrity": "sha1:951c4e8539c85e47369aade54321fe4f0866f602"
+            "integrity": "sha1:664c777e33a780896962b8f665f200f91a9471ac"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/events/created-channel.event-handler.ts",
@@ -91,7 +91,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/events/created-channel.event.ts",
-            "integrity": "sha1:35a0931fec2ae7982daa65632058dfb82f1f461f"
+            "integrity": "sha1:7dd4bb9877f101c8d62f34071f982bed844a3d21"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/events/created-channels.event-handler.ts",
@@ -107,7 +107,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/events/deleted-channel.event.ts",
-            "integrity": "sha1:30fe218fff23b46565de8a06b6054f1f8ede1d39"
+            "integrity": "sha1:62672111b0f321b8b575c787dcf99cc5d59ae340"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/events/deleted-channels.event-handler.ts",
@@ -123,7 +123,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/events/updated-channel.event.ts",
-            "integrity": "sha1:f4351f678bfbc2a0d70e478c1bacd9515fcb3e6a"
+            "integrity": "sha1:38c4ffcb3ebe78e7b8ce310967c4f1cb51e33f54"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/find/find-channel-by-id.query-handler.ts",
@@ -131,7 +131,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/find/find-channel-by-id.query.handler.spec.ts",
-            "integrity": "sha1:366b55d7d3f6e0d93b179aba818fbbfdd28bb29c"
+            "integrity": "sha1:ec5ce46d037072b7d9c966c07431a8c3ca71675f"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/find/find-channel-by-id.query.ts",
@@ -139,7 +139,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/find/find-channel-by-id.service.spec.ts",
-            "integrity": "sha1:5bb656f1f873e54a1db0960340e3ab982302f2eb"
+            "integrity": "sha1:92d989ee7491de288f0f953ee27078f03b52155c"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/find/find-channel-by-id.service.ts",
@@ -151,7 +151,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/find/find-channel.query.handler.spec.ts",
-            "integrity": "sha1:a0761c52b4a49668d29acf864f5086f9975e831c"
+            "integrity": "sha1:e99e8d38b72aa781f41afa9db2c76ee2fca0ab27"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/find/find-channel.query.ts",
@@ -159,7 +159,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/find/find-channel.service.spec.ts",
-            "integrity": "sha1:5cd6bacdfc610f9792eb8de26c11866cd8f1d0eb"
+            "integrity": "sha1:fe66d32eb1b1ae72c65258b7c7a6f473a841bf70"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/find/find-channel.service.ts",
@@ -171,7 +171,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/get/get-channels.query.handler.spec.ts",
-            "integrity": "sha1:7ecd8832b82884c0951ee9cec819dd57ffee6278"
+            "integrity": "sha1:bf97e7c31e49b4e7bde3a3322403e0788a24574a"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/get/get-channels.query.ts",
@@ -179,7 +179,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/get/get-channels.service.spec.ts",
-            "integrity": "sha1:1bb5904e0bd607bc967c1eef8f9a14b4d3589827"
+            "integrity": "sha1:acc53eee318d4ddaaa08cc44f760ac932b8fef9a"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/get/get-channels.service.ts",
@@ -191,7 +191,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/paginate/paginate-channels.query.handler.spec.ts",
-            "integrity": "sha1:8bf338055ed471f3cbb28916e525beadf149516c"
+            "integrity": "sha1:cda03faea08e00701ea4cfd8f218f203f5f69fa3"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/paginate/paginate-channels.query.ts",
@@ -199,7 +199,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/paginate/paginate-channels.service.spec.ts",
-            "integrity": "sha1:2196657481f4a07f065c8a79f67588272fce6a14"
+            "integrity": "sha1:0816e7158d89590c481b4a9674b647f98fda03cd"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/paginate/paginate-channels.service.ts",
@@ -211,31 +211,31 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/update/update-channel.command-handler.ts",
-            "integrity": "sha1:ace76dc5a1540743ba81733f3500ecdaf6eb353d"
+            "integrity": "sha1:5a039b7ceac1cd0bb3f5d75dc11d789c415b3f4e"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/update/update-channel.command.handler.spec.ts",
-            "integrity": "sha1:680456e10e7dc388014b2a82160571163158b146"
+            "integrity": "sha1:71bf0e577c5df3a8745f2d63bdd65911d95b66ab"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/update/update-channel.command.ts",
-            "integrity": "sha1:4c5e92e38a06dac8756a2ff70b67a6525a2c5c73"
+            "integrity": "sha1:bda8a3b795c1a04463b22ac7a1a6861ab38732d1"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/update/update-channel.service.spec.ts",
-            "integrity": "sha1:deff4f228e1dcad1b0e30a3079caa340efebd34b"
+            "integrity": "sha1:a335aee80ec9c37f42c602169926c2752eee1f98"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/update/update-channel.service.ts",
-            "integrity": "sha1:b4fb9d7825ba516ae06202bf7677093c49c49131"
+            "integrity": "sha1:f9ad85d692d54f16208e6d3bf194cfcba02fe2ef"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/channel.aggregate.ts",
-            "integrity": "sha1:7ae78d5ef8c83cdd62aa748244118c42efdc29d9"
+            "integrity": "sha1:9bca06fea912e574dde504e2d96b5ada657d7d18"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/channel.mapper.ts",
-            "integrity": "sha1:a968921aa6cd1b467f9de25e9f7eca1b989c26a6"
+            "integrity": "sha1:4e290cf410ce15096c7c563d14cf7a62be16f45b"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/channel.repository.ts",
@@ -243,11 +243,11 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/channel.response.ts",
-            "integrity": "sha1:16a73a529e286e87dac55e2441c366b20b53491a"
+            "integrity": "sha1:d329baf3fa29f9b301e7322630945f97bb19e8c1"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/index.ts",
-            "integrity": "sha1:3a24f89251c1aada1fd0067628e2e51161362beb"
+            "integrity": "sha1:23a267840958ca18a3dd879fd141350e1826af4f"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/index.ts",
@@ -255,15 +255,15 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/infrastructure/mock/mock-channel.repository.ts",
-            "integrity": "sha1:2de5d11e467d2d1dd65b6fc2298ecb4357bdfd3b"
+            "integrity": "sha1:43659e61e04b182242e6477c39a4490bdca0bd40"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/infrastructure/seeds/channel.seed.ts",
-            "integrity": "sha1:76c65598ee2737cba96ab34280981f7c0b178c64"
+            "integrity": "sha1:0c64d52c767d4dcba4c195551a08f547225d436b"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/infrastructure/sequelize/sequelize-channel.model.ts",
-            "integrity": "sha1:945e63d73422c6a7cfe896ed3f8471e1da278b3f"
+            "integrity": "sha1:b6bf0100161ffba04c22864c16f8d948e5c717f4"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/infrastructure/sequelize/sequelize-channel.repository.ts",
@@ -306,8 +306,8 @@
             "integrity": "sha1:559f94044165c6853e46d4b6561ac612811a7b67"
         },
         {
-            "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-flow-id.ts",
-            "integrity": "sha1:17fab1ec4865a561616e8492b224fbe9843afd92"
+            "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-flow-hash.ts",
+            "integrity": "sha1:558d68ffcd25972d336d17f93b0541537e885951"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-flow-party.ts",
@@ -419,15 +419,15 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/create-channel.controller.spec.ts",
-            "integrity": "sha1:e76bd27a43ffa8480e7b3d45d17775b50624d442"
+            "integrity": "sha1:494b0739f0c92b75a2e1cee2908e38f32bf9980b"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/create-channel.controller.ts",
-            "integrity": "sha1:47ffe6fe17dc3f1a1100141895f15b9d1e816212"
+            "integrity": "sha1:c11e15871604f4bc340b62630aca3ba7153d4f75"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/create-channels.controller.spec.ts",
-            "integrity": "sha1:75e499efe0277e4d3f60ef8c4f440bad6967676d"
+            "integrity": "sha1:838c2fe09a462408529c93e97b57be9669bcf873"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/create-channels.controller.ts",
@@ -435,7 +435,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/delete-channel-by-id.controller.spec.ts",
-            "integrity": "sha1:144d30d635d9fc0bd952dbb378f60cf11f84e090"
+            "integrity": "sha1:a06f1ba3b7d7b4494d2d6c712559f688a3dca088"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/delete-channel-by-id.controller.ts",
@@ -443,7 +443,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/delete-channels.controller.spec.ts",
-            "integrity": "sha1:2a4a0659b977a5ba0681977be3fc66bf2162bad0"
+            "integrity": "sha1:c55f4406521a01f0838b401a0e35318b821a54ab"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/delete-channels.controller.ts",
@@ -451,7 +451,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/find-channel-by-id.controller.spec.ts",
-            "integrity": "sha1:2f46caed798031e057b6011a99d9a24cc9cecf8e"
+            "integrity": "sha1:968a3460595ccf0e7393a7d6cbfa01c6eca22b9b"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/find-channel-by-id.controller.ts",
@@ -459,7 +459,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/find-channel.controller.spec.ts",
-            "integrity": "sha1:a08286bf5c17041e04222cf5d6aa2d8399379808"
+            "integrity": "sha1:728b202ad5132df599e0eef30d932f327a9309f6"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/find-channel.controller.ts",
@@ -467,7 +467,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/get-channels.controller.spec.ts",
-            "integrity": "sha1:fe3957ac9e2395de6e1bed60c55e269795a9397c"
+            "integrity": "sha1:128fc11f0dcbf58b0f067a0815f48d039a59bcab"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/get-channels.controller.ts",
@@ -475,7 +475,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/paginate-channels.controller.spec.ts",
-            "integrity": "sha1:bf7c2286f903f9d771d7f4429843a5485785b986"
+            "integrity": "sha1:119793f45319f14cea198ddb216348952da940ba"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/paginate-channels.controller.ts",
@@ -483,27 +483,27 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/update-channel.controller.spec.ts",
-            "integrity": "sha1:cddf282f59374424020f7f7fe6f40202e0991114"
+            "integrity": "sha1:f944f1ff6ee44c81c6919826379b1021d241302f"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/controllers/update-channel.controller.ts",
-            "integrity": "sha1:96ec08f7da8c92250ee1de3ff39fb077404d04ef"
+            "integrity": "sha1:4ccd49ade949eb8d64116eb435a9753420239e77"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/dto/channel.dto.ts",
-            "integrity": "sha1:7559addb80d08a12c85a416f408b105946347c31"
+            "integrity": "sha1:a2d03175b50df53d66de1c83b952aead8c2781a8"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/dto/create-channel.dto.ts",
-            "integrity": "sha1:917d405d05cd63c0cf4575c076f2023b4c018cd6"
+            "integrity": "sha1:4e0d007c645af33898fbbc55304a4c2f9421a972"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/dto/update-channel.dto.ts",
-            "integrity": "sha1:b7264e0a4f1ad8aead761f8c4ec3befd5746ca4c"
+            "integrity": "sha1:a03733512f2b6b931aa34585eee4380e0e23aaa7"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/graphql/channel.graphql",
-            "integrity": "sha1:0edf76fc1c2109dc7ebbb2d5592345937bd9836f"
+            "integrity": "sha1:0d49eebf8ac1a79ab81d78c2eb9691ae5bffc50a"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/index.ts",
@@ -511,15 +511,15 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/create-channel.resolver.spec.ts",
-            "integrity": "sha1:eb78ebadede656f364befff0d5f9881df8f84cf2"
+            "integrity": "sha1:8f37494eb16ab4221dd181011f57becfc6873afa"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/create-channel.resolver.ts",
-            "integrity": "sha1:bffa00cedcdbd715c69591bedcc14e39dcbd0b00"
+            "integrity": "sha1:79b7b899442628f8bf16653448567b64d3d596c3"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/create-channels.resolver.spec.ts",
-            "integrity": "sha1:297be4ae3dcbcfb4f5510a6a4908dea636aef2ec"
+            "integrity": "sha1:fba5e64fd608739c1e5a3d099fde5fc6c87a1fd8"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/create-channels.resolver.ts",
@@ -527,7 +527,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/delete-channel-by-id.resolver.spec.ts",
-            "integrity": "sha1:d46f4054239f98ba8792ab8be62deaf3117df4ba"
+            "integrity": "sha1:6e9194f3bfc7e24db5776143718624f26ce7ac86"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/delete-channel-by-id.resolver.ts",
@@ -535,7 +535,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/delete-channels.resolver.spec.ts",
-            "integrity": "sha1:5b13396dc50a2c32dd9f99e1d8912facbb5b1544"
+            "integrity": "sha1:a6d74f1036e08f486d8db470fb4f954bb0a44d75"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/delete-channels.resolver.ts",
@@ -543,7 +543,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/find-channel-by-id.resolver.spec.ts",
-            "integrity": "sha1:1d8620dc907a099e0f8664daacbfba68f156283e"
+            "integrity": "sha1:1e4ea92c577c8e29975b063deece6494cf80499b"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/find-channel-by-id.resolver.ts",
@@ -551,7 +551,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/find-channel.resolver.spec.ts",
-            "integrity": "sha1:755fccf97acd469fd6be9d69ed24c3663f5d7cdc"
+            "integrity": "sha1:d4b9a9f8cc874d0683952bc246abbca7f7d99e5c"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/find-channel.resolver.ts",
@@ -559,7 +559,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/get-channels.resolver.spec.ts",
-            "integrity": "sha1:947d3f5549a609a58ce068cf6ea35055322dff2f"
+            "integrity": "sha1:a4a3ec29793e893415382def4212ff6d04fb74a0"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/get-channels.resolver.ts",
@@ -567,7 +567,7 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/paginate-channels.resolver.spec.ts",
-            "integrity": "sha1:46b7e2e30768a1c092406e642ff1b29abdaea643"
+            "integrity": "sha1:5231e32ce13ae04e563da6787a579fd8bcda0bd5"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/paginate-channels.resolver.ts",
@@ -575,15 +575,15 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/update-channel.resolver.spec.ts",
-            "integrity": "sha1:dc18f291997eafefee03efcd3bf2c3c7315d4ff1"
+            "integrity": "sha1:885b6ab96ca3d1818e1552aa7bef6d4cd75ef21e"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/resolvers/update-channel.resolver.ts",
-            "integrity": "sha1:daa1ec7155f5e3a12e22a5c1c13b5b698ad645ed"
+            "integrity": "sha1:03023505c17cebd5fe7de3f781ff31aaccf52333"
         },
         {
             "path": "postman/bplus-it-sappi.channel.postman.json",
-            "integrity": "sha1:09753c72057e6d0c6d3abbcb6705b058fca4bd59"
+            "integrity": "sha1:3795509215944fb54ca01dd0522c12cc30f3187c"
         }
     ]
 }

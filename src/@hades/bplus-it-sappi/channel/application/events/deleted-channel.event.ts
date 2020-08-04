@@ -10,7 +10,7 @@ export class DeletedChannelEvent
         public readonly party: string,
         public readonly component: string,
         public readonly name: string,
-        public readonly flowId: string,
+        public readonly flowHash: string,
         public readonly flowParty: string,
         public readonly flowComponent: string,
         public readonly flowInterfaceName: string,

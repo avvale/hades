@@ -7,7 +7,7 @@ export { ChannelSystemName } from './channel-system-name';
 export { ChannelParty } from './channel-party';
 export { ChannelComponent } from './channel-component';
 export { ChannelName } from './channel-name';
-export { ChannelFlowId } from './channel-flow-id';
+export { ChannelFlowHash } from './channel-flow-hash';
 export { ChannelFlowParty } from './channel-flow-party';
 export { ChannelFlowComponent } from './channel-flow-component';
 export { ChannelFlowInterfaceName } from './channel-flow-interface-name';

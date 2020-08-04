@@ -69,6 +69,7 @@ aggregateProperties:
     type: char
     length: 40
     nullable: false
+    index: index
   - name: channel_sap_id
     type: varchar
     maxLength: 50

@@ -28,7 +28,7 @@ export class CreateChannelResolver
             payload.party,
             payload.component,
             payload.name,
-            payload.flowId,
+            payload.flowHash,
             payload.flowParty,
             payload.flowComponent,
             payload.flowInterfaceName,

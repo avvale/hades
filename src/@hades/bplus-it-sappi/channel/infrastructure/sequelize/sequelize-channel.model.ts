@@ -2,7 +2,6 @@ import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, In
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
-import { BplusItSappiFlowModel } from '@hades/bplus-it-sappi/flow/infrastructure/sequelize/sequelize-flow.model';
 import { BplusItSappiModuleModel } from '@hades/bplus-it-sappi/module/infrastructure/sequelize/sequelize-module.model';
 
 @Table({ modelName: 'bplus_it_sappi_channel', freezeTableName: true })
@@ -143,27 +142,18 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     name: string;
         
              
-        
-    @ForeignKey(() => BplusItSappiFlowModel)    
-    
+            
+    @Index
     
     @Column({
-        field: 'flow_id',
+        field: 'flow_hash',
         
-        allowNull: true,
-        type: DataTypes.UUID,
+        allowNull: false,
+        type: DataTypes.CHAR(40),
         
-        references: {  
-            key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION',
     })
-    flowId: string;
+    flowHash: string;
         
-    
-    @BelongsTo(() => BplusItSappiFlowModel)
-    flow: BplusItSappiFlowModel;
              
             
     

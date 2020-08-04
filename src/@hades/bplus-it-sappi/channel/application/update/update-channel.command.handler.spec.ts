@@ -49,7 +49,7 @@ describe('UpdateChannelCommandHandler', () =>
                     channels[0].party,
                     channels[0].component,
                     channels[0].name,
-                    channels[0].flowId,
+                    channels[0].flowHash,
                     channels[0].flowParty,
                     channels[0].flowComponent,
                     channels[0].flowInterfaceName,

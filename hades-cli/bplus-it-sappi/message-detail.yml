@@ -63,6 +63,7 @@ aggregateProperties:
     type: char
     length: 40
     nullable: false
+    index: index
   - name: flow_party
     type: varchar
     maxLength: 160

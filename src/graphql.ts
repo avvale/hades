@@ -277,7 +277,7 @@ export interface BplusItSappiCreateChannelInput {
     party?: GraphQLString;
     component: GraphQLString;
     name: GraphQLString;
-    flowId?: string;
+    flowHash: GraphQLString;
     flowParty: GraphQLString;
     flowComponent: GraphQLString;
     flowInterfaceName: GraphQLString;
@@ -314,7 +314,7 @@ export interface BplusItSappiUpdateChannelInput {
     party?: GraphQLString;
     component?: GraphQLString;
     name?: GraphQLString;
-    flowId?: string;
+    flowHash?: GraphQLString;
     flowParty?: GraphQLString;
     flowComponent?: GraphQLString;
     flowInterfaceName?: GraphQLString;
@@ -1037,7 +1037,7 @@ export interface BplusItSappiChannel {
     party?: GraphQLString;
     component: GraphQLString;
     name: GraphQLString;
-    flowId?: string;
+    flowHash: GraphQLString;
     flowParty: GraphQLString;
     flowComponent: GraphQLString;
     flowInterfaceName: GraphQLString;
