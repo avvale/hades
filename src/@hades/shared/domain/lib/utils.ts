@@ -1,6 +1,6 @@
 import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
-declare const Buffer;
+declare const Buffer: any;
 
 export class Utils
 {
