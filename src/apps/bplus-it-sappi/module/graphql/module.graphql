@@ -11,7 +11,7 @@ type BplusItSappiModule
     channelParty: GraphQLString
     channelComponent: GraphQLString!
     channelName: GraphQLString!
-    flowId: ID
+    flowHash: GraphQLString!
     flowParty: GraphQLString
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
@@ -38,7 +38,7 @@ input BplusItSappiCreateModuleInput
     channelParty: GraphQLString
     channelComponent: GraphQLString!
     channelName: GraphQLString!
-    flowId: ID
+    flowHash: GraphQLString!
     flowParty: GraphQLString
     flowComponent: GraphQLString!
     flowInterfaceName: GraphQLString!
@@ -62,7 +62,7 @@ input BplusItSappiUpdateModuleInput
     channelParty: GraphQLString
     channelComponent: GraphQLString
     channelName: GraphQLString
-    flowId: ID
+    flowHash: GraphQLString
     flowParty: GraphQLString
     flowComponent: GraphQLString
     flowInterfaceName: GraphQLString

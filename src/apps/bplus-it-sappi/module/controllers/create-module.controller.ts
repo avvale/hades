@@ -33,7 +33,7 @@ export class CreateModuleController
             payload.channelParty,
             payload.channelComponent,
             payload.channelName,
-            payload.flowId,
+            payload.flowHash,
             payload.flowParty,
             payload.flowComponent,
             payload.flowInterfaceName,

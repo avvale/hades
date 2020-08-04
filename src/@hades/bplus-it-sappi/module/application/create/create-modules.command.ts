@@ -11,7 +11,7 @@ export class CreateModulesCommand
             channelParty?: string,
             channelComponent: string,
             channelName: string,
-            flowId?: string,
+            flowHash: string,
             flowParty?: string,
             flowComponent: string,
             flowInterfaceName: string,
