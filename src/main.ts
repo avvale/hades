@@ -25,7 +25,7 @@ async function bootstrap()
     app.useLogger(loggerService);
 
     // set timezone
-    process.env.TZ = environmentService.get<string>('APP_TIMEZONE');
+    if (environmentService.get<string>('APP_TIMEZONE')) process.env.TZ = environmentService.get<string>('APP_TIMEZONE');
     
     await app.listen(environmentService.get<number>('APP_PORT'));
 }
