@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateChannelOverviewSnapshotDto 
+export class CreateChannelOverviewSnapshotObjectDto 
 {   
     @ApiProperty({
         type        : Number,

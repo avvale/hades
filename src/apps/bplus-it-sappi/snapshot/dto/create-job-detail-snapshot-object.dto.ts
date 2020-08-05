@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateJobDetailSnapshotDto 
+export class CreateJobDetailSnapshotObjectDto 
 {   
     @ApiProperty({
         type        : String,

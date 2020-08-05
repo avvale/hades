@@ -1,71 +1,81 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreateTenantCatalogDto } from './create-tenant-catalog.dto';
-import { CreateSystemCatalogDto } from './create-system-catalog.dto';
-import { CreateChannelCatalogDto } from './create-channel-catalog.dto';
-import { CreateModuleCatalogDto } from './create-module-catalog.dto';
+import { CreateTenantCatalogObjectDto } from './create-tenant-catalog-object.dto';
+import { CreateSystemCatalogObjectDto } from './create-system-catalog-object.dto';
+import { CreateChannelCatalogObjectDto } from './create-channel-catalog-object.dto';
+import { CreateModuleCatalogObjectDto } from './create-module-catalog-object.dto';
 
 export class CreateChannelModuleCatalogDto 
 {   
     @ApiProperty({
-        type        : CreateTenantCatalogDto,
+        type        : CreateTenantCatalogObjectDto,
         description : 'tenant object',
         example     : { 
             "code": "TECHEDGE"
         }
     })
-    tenant: CreateTenantCatalogDto;
+    tenant: CreateTenantCatalogObjectDto;
 
     @ApiProperty({
-        type        : CreateSystemCatalogDto,
+        type        : CreateSystemCatalogObjectDto,
         description : 'system object',
         example     : { 
             "name": "PIJ"
         }
     })
-    system: CreateSystemCatalogDto;
+    system: CreateSystemCatalogObjectDto;
 
     @ApiProperty({
-        type        : [CreateChannelCatalogDto],
+        type        : [CreateChannelCatalogObjectDto],
         description : 'message details object',
-        example     : [{ 
-            flowParty: '',
-            flowComponent: 'BC_SII_BROKER',
-            flowInterfaceName: 'SI_IA_ProcesarLote',
-            flowInterfaceNamespace: 'urn:techedgegroup.com:sii:lotes',
-            status: 'ERROR',
-            startTimeAt: '2020-07-21 12:23:13',
-            scenario: 'dir://ICO/9dc25e232809330dacae8c438ee9c3da',
-            direction: 'OUTBOUND',
-            errorCategory: 'XI_J2EE_ADAPTER_SOAP',
-            errorCode: 'SOAP_ADAPTER_PROCESSING_ERROR',
-            errorLabel: 2003,
-            node: 8071536873,
-            protocol: '6810i98gcpgr0edip3a1',
-            qualityOfService: 'EO',
-            receiverParty: '',
-            receiverComponent: 'BC_SII_DASHBOARD',
-            receiverInterface: 'SI_IA_ProcesarLote',
-            receiverInterfaceNamespace: 'urn:techedgegroup.com:sii:lotes',
-            retries: 3,
-            size: 4502,
-            timesFailed: 4,
-            example: '1c9e4c0a-9e66-11ea-cf75-0000001ba2ce',
-            detail: 'aG9sYSBtdW5kbw=='
+        example     : [{
+            party: 'SAMPLE_CHANNEL_PARTY',
+            component: 'SAMPLE_CHANNEL_COMPONENT',
+            name: 'SAMPLE_CHANNEL_NAME',
+            flowParty: 'SAMPLE_CHANNEL_FLOWPARTY',
+            flowComponent: 'SAMPLE_CHANNEL_FLOWCOMPONENT',
+            flowInterfaceName: 'SAMPLE_CHANNEL_FLOWINTERFACE',
+            flowInterfaceNamespace: 'SAMPLE_CHANNEL_FLOWINTERFACENAMESPACE',
+            version: '0.0.0',
+            adapterType: 'FILE',
+            direction: 'FILE',
+            transportProtocol: 'FILE',
+            messageProtocol: 'FILE',
+            adapterEngineName: 'ADAPTER_ENGINE',
+            url: 'http://loremipsumdolorsitamet.mock',
+            username: 'loremipsumdolorsitamet',
+            remoteHost: '192.168.0.0.1',
+            remotePort: 8888,
+            directory: 'mock/folder/directory',
+            fileSchema: 'sample_file.xml',
+            proxyHost: 'http://loremipsumdolorsitamet.mock',
+            proxyPort: 8888,
+            destination: 'SAMPLE_CHANNEL_DESTINATION',
+            adapterStatus: 'SAMPLE_CHANNEL_DESTINATION',
+            softwareComponentName: 'SAMPLE_CHANNEL_SOFTWARE',
+            responsibleUserAccountName: 'loremipsum',
+            lastChangeUserAccount: 'loremipsum',
+            lastChangedAt: '2020-07-06 19:24:52',
         }]
     })
-    channels: CreateChannelCatalogDto[];
+    channels: CreateChannelCatalogObjectDto[];
 
     @ApiProperty({
-        type        : [CreateModuleCatalogDto],
+        type        : [CreateModuleCatalogObjectDto],
         description : 'channel details object',
         example     : [{ 
-            status: 'ERROR',
-            channelSapId: '045A58RT',
-            channelName: 'CC_S_REST',
-            channelComponent: 'BC_REST_CV',
-            channelParty: '',
-            detail: 'aG9sYSBtdW5kbw=='
+            channelParty: 'SAMPLE_CHANNEL_PARTY',
+            channelComponent: 'SAMPLE_CHANNEL_COMPONENT',
+            channelName: 'SAMPLE_CHANNEL_NAME',
+            flowParty: 'SAMPLE_FLOW_PARTY',
+            flowComponent: 'SAMPLE_FLOW_COMPONENT',
+            flowInterfaceName: 'SAMPLE_FLOW_INTERFACE_NAME',
+            flowInterfaceNamespace: 'SAMPLE_FLOW_INTERFACE_NAMESPACE',
+            version: '0.0.0',
+            parameterGroup: 'SAMPLE_PARAMETER_GROUP',
+            name: 'SAMPLE_MODULE_NAME',
+            parameterName: 'SAMPLE_PARAMETER_NAME',
+            parameterValue: 'SAMPLE_PARAMETER_VALUE',
         }]
     })
-    modules: CreateModuleCatalogDto[];
+    modules: CreateModuleCatalogObjectDto[];
 }

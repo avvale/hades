@@ -1,36 +1,36 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreateExecutionSnapshotDto } from './create-execution-snapshot.dto';
-import { CreateSystemSnapshotDto } from './create-system-snapshot.dto';
-import { CreateTenantSnapshotDto } from './create-tenant-snapshot.dto';
-import { CreateMessageOverviewSnapshotDto } from './create-message-overview-snapshot.dto';
-import { CreateChannelOverviewSnapshotDto } from './create-channel-overview-snapshot.dto';
-import { CreateJobOverviewSnapshotDto } from './create-job-overview-snapshot.dto';
-import { CreateMessageDetailSnapshotDto } from './create-message-detail-snapshot.dto';
-import { CreateChannelDetailSnapshotDto } from './create-channel-detail-snapshot.dto';
-import { CreateJobDetailSnapshotDto } from './create-job-detail-snapshot.dto';
+import { CreateExecutionSnapshotObjectDto } from './create-execution-snapshot-object.dto';
+import { CreateSystemSnapshotObjectDto } from './create-system-snapshot-object.dto';
+import { CreateTenantSnapshotObjectDto } from './create-tenant-snapshot-object.dto';
+import { CreateMessageOverviewSnapshotObjectDto } from './create-message-overview-snapshot-object.dto';
+import { CreateChannelOverviewSnapshotObjectDto } from './create-channel-overview-snapshot-object.dto';
+import { CreateJobOverviewSnapshotObjectDto } from './create-job-overview-snapshot-object.dto';
+import { CreateMessageDetailSnapshotObjectDto } from './create-message-detail-snapshot-object.dto';
+import { CreateChannelDetailSnapshotObjectDto } from './create-channel-detail-snapshot-object.dto';
+import { CreateJobDetailSnapshotObjectDto } from './create-job-detail-snapshot-object.dto';
 
 export class CreateSnapshotDto 
 {   
     @ApiProperty({
-        type        : CreateTenantSnapshotDto,
+        type        : CreateTenantSnapshotObjectDto,
         description : 'tenant object',
         example     : { 
             "code": "TECHEDGE"
         }
     })
-    tenant: CreateTenantSnapshotDto;
+    tenant: CreateTenantSnapshotObjectDto;
 
     @ApiProperty({
-        type        : CreateSystemSnapshotDto,
+        type        : CreateSystemSnapshotObjectDto,
         description : 'system object',
         example     : { 
             "name": "PIJ"
         }
     })
-    system: CreateSystemSnapshotDto;
+    system: CreateSystemSnapshotObjectDto;
 
     @ApiProperty({
-        type        : CreateExecutionSnapshotDto,
+        type        : CreateExecutionSnapshotObjectDto,
         description : 'execution object',
         example     : { 
             "version": "1.0.0",
@@ -40,10 +40,10 @@ export class CreateSnapshotDto
             "executedAt": "2020-07-17 02:11:04"
         }
     })
-    execution: CreateExecutionSnapshotDto;
+    execution: CreateExecutionSnapshotObjectDto;
 
     @ApiProperty({
-        type        : CreateMessageOverviewSnapshotDto,
+        type        : CreateMessageOverviewSnapshotObjectDto,
         description : 'message overview object',
         example     : { 
             "numberMax": 9999,
@@ -57,10 +57,10 @@ export class CreateSnapshotDto
             "waiting": 0,
         }
     })
-    messageOverview: CreateMessageOverviewSnapshotDto;
+    messageOverview: CreateMessageOverviewSnapshotObjectDto;
 
     @ApiProperty({
-        type        : CreateChannelOverviewSnapshotDto,
+        type        : CreateChannelOverviewSnapshotObjectDto,
         description : 'channel overview object',
         example     : { 
             "error": 5,
@@ -71,10 +71,10 @@ export class CreateSnapshotDto
             "unregistered": 0,
         }
     })
-    channelOverview: CreateChannelOverviewSnapshotDto;
+    channelOverview: CreateChannelOverviewSnapshotObjectDto;
 
     @ApiProperty({
-        type        : CreateJobOverviewSnapshotDto,
+        type        : CreateJobOverviewSnapshotObjectDto,
         description : 'job overview object',
         example     : { 
             "cancelled": 0,
@@ -82,10 +82,10 @@ export class CreateSnapshotDto
             "error": 0,
         }
     })
-    jobOverview: CreateJobOverviewSnapshotDto;
+    jobOverview: CreateJobOverviewSnapshotObjectDto;
 
     @ApiProperty({
-        type        : [CreateMessageDetailSnapshotDto],
+        type        : [CreateMessageDetailSnapshotObjectDto],
         description : 'message details object',
         example     : [{ 
             flowParty: '',
@@ -113,10 +113,10 @@ export class CreateSnapshotDto
             detail: 'aG9sYSBtdW5kbw=='
         }]
     })
-    messagesDetail: CreateMessageDetailSnapshotDto[];
+    messagesDetail: CreateMessageDetailSnapshotObjectDto[];
 
     @ApiProperty({
-        type        : [CreateChannelDetailSnapshotDto],
+        type        : [CreateChannelDetailSnapshotObjectDto],
         description : 'channel details object',
         example     : [{ 
             status: 'ERROR',
@@ -127,10 +127,10 @@ export class CreateSnapshotDto
             detail: 'aG9sYSBtdW5kbw=='
         }]
     })
-    channelsDetail: CreateChannelDetailSnapshotDto[];
+    channelsDetail: CreateChannelDetailSnapshotObjectDto[];
 
     @ApiProperty({
-        type        : [CreateJobDetailSnapshotDto],
+        type        : [CreateJobDetailSnapshotObjectDto],
         description : 'job details object',
         example     : [{ 
             status: 'ERROR',
@@ -142,5 +142,5 @@ export class CreateSnapshotDto
             endAt: '2020-07-17 02:11:04'
         }]
     })
-    jobsDetail: CreateJobDetailSnapshotDto[];
+    jobsDetail: CreateJobDetailSnapshotObjectDto[];
 }

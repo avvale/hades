@@ -24,13 +24,12 @@ export class CreateFlowCatalogController
 
     @Post()
     @ApiOperation({ summary: 'Create or update catalog flow' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: [CreateFlowCatalogDto] })
-    @ApiBody({ type: [CreateFlowCatalogDto] })
-    async main(@Body() payload: CreateFlowCatalogDto[])
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CreateFlowCatalogDto })
+    @ApiBody({ type: CreateFlowCatalogDto })
+    async main(@Body() payload: CreateFlowCatalogDto)
     {
-        if (!Array.isArray(payload)) throw new BadRequestException(`The payload is not an array`);
-        if (payload.length === 0) throw new BadRequestException(`The payload is empty`);
-
+        if (!Array.isArray(payload.flows)) throw new BadRequestException(`The property flows does not exist or is not an array`);
+        
         // get tenant
         const tenant = await this.queryBus.ask(new FindTenantQuery(
             [
@@ -38,7 +37,7 @@ export class CreateFlowCatalogController
                     command: Command.WHERE,
                     column: 'code',
                     operator: Operator.EQUALS,
-                    value: payload[0].tenantCode
+                    value: payload.tenant.code
                 }
             ]
         ));
@@ -50,19 +49,19 @@ export class CreateFlowCatalogController
                     command: Command.WHERE,
                     column: 'name',
                     operator: Operator.EQUALS,
-                    value: payload[0].systemName
+                    value: payload.system.name
                 }
             ]
         ));
 
-        const flowCatalog = payload.map(flow => {
+        const flowsCatalog = payload.flows.map(flow => {
             return {
                 id: uuidv4(),
-                hash: Utils.sha1(flow.tenantCode + flow.systemName + flow.party + flow.component + flow.interfaceName + flow.interfaceNamespace),
+                hash: Utils.sha1(tenant.code + system.name + flow.party + flow.component + flow.interfaceName + flow.interfaceNamespace),
                 tenantId: tenant.id,
-                tenantCode: flow.tenantCode,
+                tenantCode: tenant.code,
                 systemId: system.id,
-                systemName: flow.systemName,
+                systemName: system.name,
                 version: flow.version,
                 scenario: flow.scenario,
                 party: flow.party,
@@ -78,7 +77,7 @@ export class CreateFlowCatalogController
                 application: flow.application
             }
         });
-        await this.commandBus.dispatch(new CreateFlowsCommand(flowCatalog))
+        await this.commandBus.dispatch(new CreateFlowsCommand(flowsCatalog));
         
         return {
             statusCode: 200,

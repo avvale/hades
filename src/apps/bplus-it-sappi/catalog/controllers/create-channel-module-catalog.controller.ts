@@ -10,8 +10,10 @@ import { Command, Operator } from '@hades/shared/domain/persistence/sql-statemen
 import { FindTenantQuery } from '@hades/admin/tenant/application/find/find-tenant.query';
 import { FindSystemQuery } from '@hades/bplus-it-sappi/system/application/find/find-system.query';
 import { CreateChannelsCommand } from '@hades/bplus-it-sappi/channel/application/create/create-channels.command';
-import { Utils } from '@hades/shared/domain/lib/utils';
+import { CreateModulesCommand } from '@hades/bplus-it-sappi/module/application/create/create-modules.command';
 import { CreateChannelModuleCatalogDto } from './../dto/create-channel-module-catalog.dto';
+import { DeleteModulesCommand } from '@hades/bplus-it-sappi/module/application/delete/delete-modules.command';
+import { Utils } from '@hades/shared/domain/lib/utils';
 
 @ApiTags('[bplus-it-sappi] catalog/channel-module')
 @Controller('bplus-it-sappi/catalog/channel-module')
@@ -93,9 +95,50 @@ export class CreateChannelModuleCatalogController
                 lastChangedAt: channel.lastChangedAt
             }
         });
-        await this.commandBus.dispatch(new CreateChannelsCommand(channelsCatalog))
+        await this.commandBus.dispatch(new CreateChannelsCommand(channelsCatalog));
 
-        // borrar y crear módulos
+        // delete all modules from tenant and system
+        await this.commandBus.dispatch(new DeleteModulesCommand(
+            [
+                {
+                    command: Command.WHERE,
+                    column: 'tenant_code',
+                    operator: Operator.EQUALS,
+                    value: tenant.code
+                },
+                {
+                    command: Command.WHERE,
+                    column: 'system_name',
+                    operator: Operator.EQUALS,
+                    value: system.name
+                }
+            ]
+        ));
+
+        const modulesCatalog = payload.modules.map(module => {
+            return {
+                id: uuidv4(),
+                tenantId: tenant.id,
+                tenantCode: tenant.code,
+                systemId: system.id,
+                systemName: system.name,
+                channelHash: Utils.sha1(tenant.code + system.name + module.channelParty + module.channelComponent + module.channelName),
+                channelParty: module.channelParty,
+                channelComponent: module.channelComponent,
+                channelName: module.channelName,
+                flowHash: Utils.sha1(tenant.code + system.name + module.flowParty + module.flowComponent + module.flowInterfaceName + module.flowInterfaceNamespace),
+                flowParty: module.flowParty,
+                flowComponent: module.flowComponent,
+                flowInterfaceName: module.flowInterfaceName,
+                flowInterfaceNamespace: module.flowInterfaceNamespace,
+                version: module.version,
+                parameterGroup: module.parameterGroup,
+                name: module.name,
+                parameterName: module.parameterName,
+                parameterValue: module.parameterValue,
+            }
+        });
+        await this.commandBus.dispatch(new CreateModulesCommand(modulesCatalog));
         
         return {
             statusCode: 200,

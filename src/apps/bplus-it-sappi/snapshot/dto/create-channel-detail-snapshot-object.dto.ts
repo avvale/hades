@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateChannelDetailSnapshotDto 
+export class CreateChannelDetailSnapshotObjectDto 
 {   
     @ApiProperty({
         type        : String,

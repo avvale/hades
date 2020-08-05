@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateSystemSnapshotDto 
+export class CreateSystemCatalogObjectDto 
 {   
     @ApiProperty({
         type        : String,

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateMessageOverviewSnapshotDto 
+export class CreateMessageOverviewSnapshotObjectDto 
 {
     @ApiProperty({
         type        : Number,

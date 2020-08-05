@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateExecutionSnapshotDto 
+export class CreateExecutionSnapshotObjectDto 
 { 
     @ApiProperty({
         type        : String,

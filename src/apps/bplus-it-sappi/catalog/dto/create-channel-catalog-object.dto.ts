@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateChannelCatalogDto 
+export class CreateChannelCatalogObjectDto 
 {   
     @ApiProperty({
         type        : String,
