@@ -6,7 +6,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'b585d1e4-eb5e-4076-b982-70ecc5227411'
+        example     : '7177e09a-1df1-4b27-a273-5112a3697fef'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '002908f2-11ac-4181-b637-d865c26f17f9'
+        example     : 'b7d1c6a6-29cf-4b1a-8c97-71c0872b6975'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'bm58thncnsu6867rezohma6e6g7wb0i7gxteglczjrahqqfksu'
+        example     : '20z1b75gq8macpl09u58pajp9eo9hbjeyngjqdbdxibyis7cou'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : 'a895ac45-eec7-40da-98cb-59cb967f94b8'
+        example     : 'f74efb3b-8457-463a-b01d-653ceb095230'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'og6ceqizgavedvfbb8j9'
+        example     : 'f2sj4ilt1uo9gahzr6zg'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : 'e636d3f9-d962-4d03-941c-d00f058313ec'
+        example     : '2d3af225-0f90-4788-b75c-67a0e981e504'
     })
     executionId: string;
     
@@ -60,7 +60,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionType [input here api field description]',
-        example     : 'DETAIL',
+        example     : 'SUMMARY',
         enum        : ['SUMMARY','DETAIL']
     })
     executionType: string;
@@ -70,7 +70,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-08-04 02:54:39'
+        example     : '2020-08-04 14:40:10'
     })
     executionExecutedAt: string;
     
@@ -79,7 +79,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-08-03 16:30:45'
+        example     : '2020-08-04 19:25:47'
     })
     executionMonitoringStartAt: string;
     
@@ -88,7 +88,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-08-04 06:46:22'
+        example     : '2020-08-05 01:15:24'
     })
     executionMonitoringEndAt: string;
     
@@ -97,7 +97,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'cancelled [input here api field description]',
-        example     : 4638198190
+        example     : 7168466504
     })
     cancelled: number;
     
@@ -106,7 +106,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'completed [input here api field description]',
-        example     : 8661306420
+        example     : 2613283618
     })
     completed: number;
     
@@ -115,7 +115,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'error [input here api field description]',
-        example     : 8629229622
+        example     : 7697624219
     })
     error: number;
     
@@ -124,7 +124,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-08-03 22:05:01'
+        example     : '2020-08-04 20:01:13'
     })
     createdAt: string;
     
@@ -133,7 +133,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-08-04 04:07:47'
+        example     : '2020-08-04 23:25:59'
     })
     updatedAt: string;
     
@@ -142,7 +142,7 @@ export class JobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-08-04 13:03:54'
+        example     : '2020-08-04 14:20:23'
     })
     deletedAt: string;
     

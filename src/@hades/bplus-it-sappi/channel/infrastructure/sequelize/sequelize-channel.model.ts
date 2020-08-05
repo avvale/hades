@@ -2,7 +2,6 @@ import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, In
 import { DataTypes } from 'sequelize';
 import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { BplusItSappiSystemModel } from '@hades/bplus-it-sappi/system/infrastructure/sequelize/sequelize-system.model';
-import { BplusItSappiModuleModel } from '@hades/bplus-it-sappi/module/infrastructure/sequelize/sequelize-module.model';
 
 @Table({ modelName: 'bplus_it_sappi_channel', freezeTableName: true })
 export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel> 
@@ -143,7 +142,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
         
              
             
-    @Index
+    // @Index
     
     @Column({
         field: 'flow_hash',
@@ -467,11 +466,6 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     lastChangedAt: string;
         
              
-        
-        
-    @HasMany(() => BplusItSappiModuleModel)
-    modules: BplusItSappiModuleModel[];
-         
             
     
     

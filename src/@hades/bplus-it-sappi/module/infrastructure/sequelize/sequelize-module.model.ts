@@ -90,7 +90,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         
              
             
-    @Index
+    // @Index
     
     @Column({
         field: 'channel_hash',
@@ -142,7 +142,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         
              
             
-    @Index
+    // @Index
     
     @Column({
         field: 'flow_hash',

@@ -178,7 +178,7 @@ export class BplusItSappiMessageDetailModel extends Model<BplusItSappiMessageDet
         
              
             
-    @Index
+    // @Index
     
     @Column({
         field: 'flow_hash',

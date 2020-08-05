@@ -6,7 +6,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '06285d2d-62df-428b-857d-f52c1510d28d'
+        example     : 'e57c96ab-d835-46a5-8e04-ec1206e434bd'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '0b9307a6-02de-466b-a2f9-f5b805430e80'
+        example     : '281b89e2-ab8b-46a5-ba0f-164f318e3cf1'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : '6o1nksfyjmdz7jroujlv3hoxy7cwqfne3tpb2w3rcn7680zc01'
+        example     : 'eo6kxka20071zxwiji531bq31iezrj681qgzefu1wcv17lxbuh'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '7fc3a9c6-e88a-4bf2-a6e0-25ac8e5e1dd0'
+        example     : '38d0528b-0ed5-4887-bd06-6e6463bbbf61'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'ftszvujhjs6b9sbq9q71'
+        example     : 'yj2iniykt0nkkr9dq0nx'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'scenario [input here api field description]',
-        example     : 'tsucjfu68086umi1gb708i2hqj6mwvx7mhooh04piyayywwe3ahgbs5g45dz'
+        example     : 'oijj3humuigu0qx64gcxjzk7zo5b0z20x3a1fd0e75cbik2htpr6wn97bjqh'
     })
     scenario: string;
     
@@ -60,7 +60,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : '007725de-94ce-425a-b101-485f94f9dd59'
+        example     : 'cefcaa5d-dd61-4a06-b105-ba3efec7a674'
     })
     executionId: string;
     
@@ -69,7 +69,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionType [input here api field description]',
-        example     : 'SUMMARY',
+        example     : 'DETAIL',
         enum        : ['SUMMARY','DETAIL']
     })
     executionType: string;
@@ -79,7 +79,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-08-04 02:39:06'
+        example     : '2020-08-04 17:48:12'
     })
     executionExecutedAt: string;
     
@@ -88,7 +88,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-08-04 10:26:31'
+        example     : '2020-08-05 06:38:51'
     })
     executionMonitoringStartAt: string;
     
@@ -97,7 +97,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-08-03 19:24:20'
+        example     : '2020-08-05 06:08:27'
     })
     executionMonitoringEndAt: string;
     
@@ -106,7 +106,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'flowHash [input here api field description]',
-        example     : 'em6s6sfb0mzkmiv34o5589xf2e9swoa5jqnom9il'
+        example     : '6bxcpwkub6e16xzvsn9vzdo7k2vl18va1h2e8wrr'
     })
     flowHash: string;
     
@@ -115,7 +115,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'flowParty [input here api field description]',
-        example     : '3lhbb98m69rfj4fhi96jmwpt9cmqjdul56g0k2zduyl5x84h3vtd1u56htro21ksxjpo3snmd57mcnsljj1nmelxtbbgrsopegicq5duu8dexfiqebhl1o6bw5r8p1l3u82ysn901ck4z2ce0t5wonizp5y1nkk7'
+        example     : 'lyz48chzcjlayp89rlgw5bvwk9p7b75c93ic8qx8iroehu4qa7g6hs6h24ebm43njmih0i4f3gxjidni18mbvy95fs4fmn7oqm8hxh3yctjb9mlpdqop8dms0xyx3vq2ogpwzy20dkfviiwsye9zugqqg1cq2ru9'
     })
     flowParty: string;
     
@@ -124,7 +124,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'flowComponent [input here api field description]',
-        example     : 'h69qvmm6ba2713deyay808pcpdd3coka4lhlcc2tv5qw7gjpcauwp9buyr1cds84s7avoaeg1t4pxnc3ql624qsmzjokoh0rmr1zn2x4c90ojb2zmnuww8uf2sp6vm9knjradmklcwt1wih6lumk4hmie1u2jiip'
+        example     : 'a99gt1fhesejnq9el6k5wx8daon9ma0579zr6mgtupvjcwnnthkzdy3e95svor1bn622t58m9k0bkjln7i28qlx2r777xsa8igqrgt1cdiobigakyvfe06wogmdd72ui35d6kzhtcpre67zxwax67gszvtvmkfv8'
     })
     flowComponent: string;
     
@@ -133,7 +133,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'flowInterfaceName [input here api field description]',
-        example     : '6t0l95y96i37972i7fovy57ywbfv47hlqdiez2plheiuzx1sc8jvygpkpylhbusdt05kztk6q44qhkvyjrwh9ul7vyfhhzc7whp3mm331g8h6346eot7nzxl8gkt9upcg0lg9imx4ji2cocre1mlg83km62gfgsq'
+        example     : '2oqq1uzez47jiu130rkantnsyfczc3jzveiu9860v1hu2b7uo2q0d0hs6ukgzzx6020e1808q4t701l8ye68rmlvhpviam02dfaqen3bnj5l81mud8nf5nu6gimnnvsll818v8kt74c0eza2dxhb27c79rsxpigj'
     })
     flowInterfaceName: string;
     
@@ -142,7 +142,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'flowInterfaceNamespace [input here api field description]',
-        example     : 'lczpn4ut1qvzchh2gbok0gljqbzbm6z2v996bnb7fzsjsa6xjhv3mmn2aioxnm202nb1f9uaqlagw7u5rd4f1k4mya5z3okjzhltkttbqgtpp4yrwoyw5hy030yfp1dkzjbs7uat81u5tbsqyq10timjkg7tz6ye'
+        example     : '2qmwioa3swv1303j9mdp1qbemnnfp3va88h44q7mbjcweoof9ny8p3vkg2mnabwdyxfohz37qhjb19e78ddrl9sdiva6jjtffbhcaxoa6dwyykchz1yf1y9lquoeuhy0lr3mnq4zs37xd9zrgy9vih9wxxqaqzp3'
     })
     flowInterfaceNamespace: string;
     
@@ -151,7 +151,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'status [input here api field description]',
-        example     : 'HOLDING',
+        example     : 'TO_BE_DELIVERED',
         enum        : ['SUCCESS','CANCELLED','DELIVERING','ERROR','HOLDING','TO_BE_DELIVERED','WAITING']
     })
     status: string;
@@ -161,7 +161,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'detail [input here api field description]',
-        example     : 'Voluptatibus rerum quisquam voluptas fugiat dicta. Et itaque modi animi aspernatur fugit dicta quae esse et. Similique quisquam quis. Nobis consequuntur velit et. Hic facilis voluptas quia cupiditate magni.'
+        example     : 'Ducimus ad aliquam corporis omnis ut distinctio in quia. Nam id ut. Expedita perspiciatis corporis temporibus saepe tempora est numquam. Ut beatae dolores atque quasi reiciendis quia enim. Est vero occaecati aspernatur et doloremque. Aliquid distinctio dolorem.'
     })
     detail: string;
     
@@ -170,7 +170,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'example [input here api field description]',
-        example     : 'dmy7y3k49xdkdhdimesq2wflkssjg5hsv1rzg7h196455uracjp9zszc7106jf8qqmt3c24l6qv7ccjta69w2mt0duzraqjj8i63mlud0g4b1b28fbk097ov9je64v1n0ja8bg3v8kqp7itgm57t4jb3gj7155zd'
+        example     : 'b0zlg13p3gidnlmbcm1ig8xawyy09i5g859qwo83tp9f62c90jyoas00y3s5nm74pr8jyyc69wxpuqm9ogxjgkojbyjd0kr5zr8qk3xyttrywi91e083x32p32p0g1olb7sdptl7x5riuz8obiqzp7ffp3gcsycy'
     })
     example: string;
     
@@ -179,7 +179,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'startTimeAt [input here api field description]',
-        example     : '2020-08-04 02:56:13'
+        example     : '2020-08-04 18:17:26'
     })
     startTimeAt: string;
     
@@ -188,7 +188,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'direction [input here api field description]',
-        example     : 'INBOUND',
+        example     : 'OUTBOUND',
         enum        : ['INBOUND','OUTBOUND']
     })
     direction: string;
@@ -198,7 +198,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'errorCategory [input here api field description]',
-        example     : 'powaxxm8atb2h6w7fhpzu3ppizbrjts6edgmmemvsoa1pvnwo1c8l47ps8npcgcji5fyi06xcey3m55ier5sehcf2sfy4q6whv531sxro7xfe5xl098zwwz4uka51dek54i9aypt7ggo4o6frz100e143bni141w'
+        example     : 'gr8si663olw0s0xdaa01jumq94lfssl9mzhlr8t4o3ka5gi189gye085anwhl1kjtjqstdfpgp2z7g0b6s0lj7itrjtq7jkldmxjjh9qtcty9lyeb6pz9k3kzengc2lq1grrg3h0xzh2ixpj6ov8occuivtu80r5'
     })
     errorCategory: string;
     
@@ -207,7 +207,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'errorCode [input here api field description]',
-        example     : 'kul9ochzj7nxy9211qwd55zp3n0zy1f9kybqu1uvkgv6iw1b4q'
+        example     : 'qtk0psp3u2pq3utz8lrgccf4fhnwgtpr38qva2a50cy1r7p0kd'
     })
     errorCode: string;
     
@@ -216,7 +216,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : Number,
         description : 'errorLabel [input here api field description]',
-        example     : 423428
+        example     : 710666
     })
     errorLabel: number;
     
@@ -225,7 +225,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : Number,
         description : 'node [input here api field description]',
-        example     : 3276617894
+        example     : 1897484154
     })
     node: number;
     
@@ -234,7 +234,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'protocol [input here api field description]',
-        example     : 'cvolh7dnmcav0ck21sav'
+        example     : '233us14p1qwquuiba3cn'
     })
     protocol: string;
     
@@ -243,7 +243,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'qualityOfService [input here api field description]',
-        example     : '6y0phjl1orwgxy2si341'
+        example     : 'c9krqpqeg8qfbzsce0qb'
     })
     qualityOfService: string;
     
@@ -252,7 +252,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'receiverParty [input here api field description]',
-        example     : 'l1yewn2zdr153w0jik8nla4ws34x1vbld7cztz9lrwwbrax2zet26vda3pn8yqese0r21lipb83g3kwec1gki6vg5hl5oq5bvy17q2n7qes12c4m4qqqrqvnd04j6nkgn2vso2o3zbld182rdcxk5rtnql99xb8z'
+        example     : 'arf1aw8z5mqdpc1fog730n5lvtqzdxaf9g2zuvozjwcjehbe9povtctbrknqs929ltjnm5zzommuv16w810b4h0lb6e3pq6o3m2qyt9w6b06v78gv3cxok30lgo6t3oyybaqbfx6dk0dguelawyy8pzqm4fphmeb'
     })
     receiverParty: string;
     
@@ -261,7 +261,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'receiverComponent [input here api field description]',
-        example     : 'fcyp9tvxwoz3bbfbwltngwxhg2vcy1947au7ms95dpjd4u1kx00gqny44fbwwzh3012yxr724ktsr6x0acjx13i476h6yhwj45h649wk3r7ndu00n23wa6s03k462nl6ptwgmr2ngvdydo76k7kdpvf1taaiftwu'
+        example     : 'fs30voan5dioiqufwdixjx90fk5jl63sc67yc2jf5fqbn76b5xqg242dr1hrocs1m6v6kwig2btnybkpti3a7fg3bxng3rfjeai0awdpp5hns1cmtn8wf9o9pb0l4foquce1m8nhe9h9ca41v52s5v00xmy73b4z'
     })
     receiverComponent: string;
     
@@ -270,7 +270,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'receiverInterface [input here api field description]',
-        example     : '5k2sp13vyh4zo2hteb4to17v60lt27aynzembgy0fokwumax8y7wqz03jm9wfvs5fn5ap9bhh6f96zgfwblb0e0jqqs166iili9t6b9a1xmg2dig2d8f3s0hqlr2eoonnghrao9pi8nu931g4cmkkd2anxcsx7t1'
+        example     : '3qzzcdk7j8xysirtvtyrwgqvlziuuqjoca7ckt24786si6d7xq2va9hgb2rseqk54gb4l73d1uk77dgm78cfn0w1wzyx4vhhppv3ft58lkndebm7f8726eqxyfzl06o4veaxseyhmhvopxuejnhua246y03r5ke0'
     })
     receiverInterface: string;
     
@@ -279,7 +279,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : String,
         description : 'receiverInterfaceNamespace [input here api field description]',
-        example     : 'hro4ywcod76w8wrnht16mqeit874zm8c05luqhd0m68pjoebl3siwxgncj9vpdaepky5tyr09nwaaqe5y0gpw1ahka19uhvvb9dfmct5qfs4zj6irroklt3dio2z3nlffnhzlkgnecf758e0w8p0bdhus8orpzxn'
+        example     : '4i1c45c41397ced89jtko160fdwn5mgznj0feq8hefx853864wqb4g4kp2f67rdgrtqc2ovno7zx0083s11wqqrp40m86i1wuf89tg22dp2f76wieicuc9e40aa5892x6l7abml9zbls71eyon5b15qj8pntrmzo'
     })
     receiverInterfaceNamespace: string;
     
@@ -288,7 +288,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : Number,
         description : 'retries [input here api field description]',
-        example     : 9207483353
+        example     : 6259700439
     })
     retries: number;
     
@@ -297,7 +297,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : Number,
         description : 'size [input here api field description]',
-        example     : 3030712852
+        example     : 5431062878
     })
     size: number;
     
@@ -306,7 +306,7 @@ export class UpdateMessageDetailDto
     @ApiProperty({
         type        : Number,
         description : 'timesFailed [input here api field description]',
-        example     : 1955563564
+        example     : 1699851600
     })
     timesFailed: number;
     

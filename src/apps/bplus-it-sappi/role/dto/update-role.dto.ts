@@ -6,7 +6,7 @@ export class UpdateRoleDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'ec2837a8-9eee-4322-ad8a-d3d7d980ffbb'
+        example     : '1852c4c5-065d-4339-87ec-ac0250ed36cf'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateRoleDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '5accecd0-2bc3-4c36-810f-22977ac0d21a'
+        example     : '6e4bce49-333b-4441-b565-3adc6914baaf'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateRoleDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : '5diczwt6b2884t3b7dpxoae3u2wkyuuexf1umxix7wolbdsw20'
+        example     : '0kyoy8wsfqezesscngj96dt87vhbv58jq5j7jl0dpa06cuj44v'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class UpdateRoleDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'i82mycvhirrcxp1md2n33m4cjouoefn771tobpeocret7gl5ac26tx4yklssmpw21x41d53hnen7ohzqzmhkc6venunvizn8wffk4mtz2i7bskh7je5xcyrro18wm10rlphegnohp8ty9b8vobhvz3znw0iy4no1pei235x7y0jxzl07tpqzsk13e5giizldfj4nbjerht0hfqr6277xcefa9qe6nalkboo6byapzckm5n57oc72s02o78zz921'
+        example     : 'c1cx2txltv3qkof5sfeq1hpt3a4s5fuyko5yf3naptzpteh1e2unzqrujs3zcaujoqgl6unmmc89iaxg6gp5agciqb2gnq9mn41gtp4fd3efh35hw4knr1vd596n2w0zf55phn4ffl14c5dtgn98e0alpjque4wgm9drw4xgri0dymh1002p366endtgulcnxc0ibb5vk43k26gx7v6j3c0mmnw718u0nvrik5frtxvqd39no2dam037mcknfvh'
     })
     name: string;
     

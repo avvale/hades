@@ -6,7 +6,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'b585d1e4-eb5e-4076-b982-70ecc5227411'
+        example     : '7177e09a-1df1-4b27-a273-5112a3697fef'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : '002908f2-11ac-4181-b637-d865c26f17f9'
+        example     : 'b7d1c6a6-29cf-4b1a-8c97-71c0872b6975'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : '2ijcwvvs0ug2up41mkiys6h645ln40hj2owl3tywru6dyckhzp'
+        example     : 'nlu6eoyn8govwmy4bw0bl7hydxktttcy7debxh1miy5wy8wezg'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : 'a895ac45-eec7-40da-98cb-59cb967f94b8'
+        example     : 'f74efb3b-8457-463a-b01d-653ceb095230'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'fcjjltvywum4dyvsa917'
+        example     : 'nw7dyog0x3jtvek2adbg'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionId [input here api field description]',
-        example     : 'e636d3f9-d962-4d03-941c-d00f058313ec'
+        example     : '2d3af225-0f90-4788-b75c-67a0e981e504'
     })
     executionId: string;
     
@@ -60,7 +60,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionType [input here api field description]',
-        example     : 'SUMMARY',
+        example     : 'DETAIL',
         enum        : ['SUMMARY','DETAIL']
     })
     executionType: string;
@@ -70,7 +70,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionExecutedAt [input here api field description]',
-        example     : '2020-08-04 02:13:58'
+        example     : '2020-08-04 14:32:33'
     })
     executionExecutedAt: string;
     
@@ -79,7 +79,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringStartAt [input here api field description]',
-        example     : '2020-08-03 22:44:01'
+        example     : '2020-08-05 03:01:49'
     })
     executionMonitoringStartAt: string;
     
@@ -88,7 +88,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : String,
         description : 'executionMonitoringEndAt [input here api field description]',
-        example     : '2020-08-04 01:54:07'
+        example     : '2020-08-05 04:32:11'
     })
     executionMonitoringEndAt: string;
     
@@ -97,7 +97,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'cancelled [input here api field description]',
-        example     : 3441168766
+        example     : 3126257255
     })
     cancelled: number;
     
@@ -106,7 +106,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'completed [input here api field description]',
-        example     : 9538538501
+        example     : 9493918716
     })
     completed: number;
     
@@ -115,7 +115,7 @@ export class UpdateJobOverviewDto
     @ApiProperty({
         type        : Number,
         description : 'error [input here api field description]',
-        example     : 4706703285
+        example     : 5849123047
     })
     error: number;
     

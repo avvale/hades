@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/flow/infrastructure/seeds/flow.seed.ts",
-            "integrity": "sha1:52e8fc34e5e59fa5f4becf023956fb57722c6c51"
+            "integrity": "sha1:32611594de892081ca7bf97b17921ed5dd9b7321"
         },
         {
             "path": "src/@hades/bplus-it-sappi/flow/infrastructure/sequelize/sequelize-flow.model.ts",
@@ -447,15 +447,15 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/flow/dto/flow.dto.ts",
-            "integrity": "sha1:bad0469d10c7a8c3a19ee5643c3690baeb694114"
+            "integrity": "sha1:bce27d20c6426fe9ce779abf8e9e6a74c7f303b6"
         },
         {
             "path": "src/apps/bplus-it-sappi/flow/dto/create-flow.dto.ts",
-            "integrity": "sha1:1508495a3f0472bdf8f6a3f937d6371b0e3919ad"
+            "integrity": "sha1:78fcb0b5b8ab171423469d99a2f36a4f9d1abdbb"
         },
         {
             "path": "src/apps/bplus-it-sappi/flow/dto/update-flow.dto.ts",
-            "integrity": "sha1:bff22e7b20490ce471c544a9eca176b0978ee90a"
+            "integrity": "sha1:b57d33c2ab296e2e8c4d85121713a5c8b1d173c8"
         },
         {
             "path": "src/apps/bplus-it-sappi/flow/graphql/flow.graphql",
@@ -539,7 +539,7 @@
         },
         {
             "path": "postman/bplus-it-sappi.flow.postman.json",
-            "integrity": "sha1:bed91c4ed3ad624ec6b5dff7a7b9db3e78537256"
+            "integrity": "sha1:272161be504810729cebb0efc8565a5f899c6fe0"
         }
     ]
 }

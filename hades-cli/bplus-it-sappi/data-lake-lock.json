@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/data-lake/infrastructure/seeds/data-lake.seed.ts",
-            "integrity": "sha1:ba294c33e5f237cd417a0d7691cda1af8f693100"
+            "integrity": "sha1:ebb64ab11e06fc68f4fe57f6525d5ec5a3fd8754"
         },
         {
             "path": "src/@hades/bplus-it-sappi/data-lake/infrastructure/sequelize/sequelize-data-lake.model.ts",
@@ -375,15 +375,15 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/data-lake/dto/data-lake.dto.ts",
-            "integrity": "sha1:f2b6c2b02fd094970b5261d53ddbfea6e611762c"
+            "integrity": "sha1:187340698948498aaae1c9792d76b389f5ec2b02"
         },
         {
             "path": "src/apps/bplus-it-sappi/data-lake/dto/create-data-lake.dto.ts",
-            "integrity": "sha1:f382d44599c5084795ca87d4be1bff2a22511e31"
+            "integrity": "sha1:16091686eae5dff0d0874d95fa31612d915e7d6c"
         },
         {
             "path": "src/apps/bplus-it-sappi/data-lake/dto/update-data-lake.dto.ts",
-            "integrity": "sha1:2ee7cb469553b78ba67f75995e78a56ef496b7c5"
+            "integrity": "sha1:633441a782a677c0ad190e076aff5e909f16bcd6"
         },
         {
             "path": "src/apps/bplus-it-sappi/data-lake/graphql/data-lake.graphql",
@@ -467,7 +467,7 @@
         },
         {
             "path": "postman/bplus-it-sappi.data-lake.postman.json",
-            "integrity": "sha1:30abaacb85243837cd8f2da64a5d4ff7eeab42b2"
+            "integrity": "sha1:a1cc3cd066bf056a852668a6a32796d8e6a5d8f1"
         }
     ]
 }

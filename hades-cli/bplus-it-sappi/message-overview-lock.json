@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/message-overview/infrastructure/seeds/message-overview.seed.ts",
-            "integrity": "sha1:2e8fe65e55d47bde4fbb547792d9ea79563378a7"
+            "integrity": "sha1:003e768421ca0618620e0d16b4d256aad9d9702a"
         },
         {
             "path": "src/@hades/bplus-it-sappi/message-overview/infrastructure/sequelize/sequelize-message-overview.model.ts",
@@ -431,15 +431,15 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/message-overview/dto/message-overview.dto.ts",
-            "integrity": "sha1:4099d5af6257592e3b017bab1a9947fd06ef8cb2"
+            "integrity": "sha1:5f759d32c70c3a5f971e4678ae4b07a053e10349"
         },
         {
             "path": "src/apps/bplus-it-sappi/message-overview/dto/create-message-overview.dto.ts",
-            "integrity": "sha1:757a00cf0a6abcedd0ece8c533121ac6e5e55481"
+            "integrity": "sha1:0af18134d10eee23889269b43d9ecb0536c40415"
         },
         {
             "path": "src/apps/bplus-it-sappi/message-overview/dto/update-message-overview.dto.ts",
-            "integrity": "sha1:b499cc4625ec71c4b9e90d7ea0e680d80f4534f7"
+            "integrity": "sha1:9be01e2f9a9306c0b2d0cd84dfa25a3d0c9e5ec2"
         },
         {
             "path": "src/apps/bplus-it-sappi/message-overview/graphql/message-overview.graphql",
@@ -523,7 +523,7 @@
         },
         {
             "path": "postman/bplus-it-sappi.message-overview.postman.json",
-            "integrity": "sha1:1d97227caeb7d85b6d96ceace9573e541184eee2"
+            "integrity": "sha1:8d4f4ddc25d0155c9303ab69d44760a34a9ec9ff"
         }
     ]
 }

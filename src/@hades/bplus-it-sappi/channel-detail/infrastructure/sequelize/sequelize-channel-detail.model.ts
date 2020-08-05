@@ -178,7 +178,7 @@ export class BplusItSappiChannelDetailModel extends Model<BplusItSappiChannelDet
         
              
             
-    @Index
+    // @Index
     
     @Column({
         field: 'channel_hash',

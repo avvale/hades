@@ -153,12 +153,6 @@ aggregateProperties:
   - name: last_changed_at
     type: timestamp
     nullable: true
-  - name: modules
-    type: BplusItSappiModule
-    relationship: one-to-many
-    relationshipAggregate: BplusItSappiModule
-    relationshipModulePath: bplus-it-sappi/module
-    relationshipField: module
   - name: created_at
     type: timestamp
     nullable: true

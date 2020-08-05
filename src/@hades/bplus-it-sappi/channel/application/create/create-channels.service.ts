@@ -136,28 +136,29 @@ export class CreateChannelsService
         
         // insert
         await this.repository.insert(aggregateChannels, { updateOnDuplicate: [
-            'version', 
-            'adapterType', 
-            'direction', 
-            'transportProtocol', 
-            'messageProtocol', 
-            'adapterEngineName', 
-            'url', 
-            'username', 
-            'remoteHost', 
-            'remotePort', 
-            'directory',
-            'fileSchema',
-            'proxyHost',
-            'proxyPort',
-            'destination',
-            'adapterStatus',
-            'softwareComponentName',
-            'responsibleUserAccountName',
-            'lastChangeUserAccount',
-            'lastChangedAt',
-            'updatedAt'
-        ] });
+                'version', 
+                'adapterType', 
+                'direction', 
+                'transportProtocol', 
+                'messageProtocol', 
+                'adapterEngineName', 
+                'url', 
+                'username', 
+                'remoteHost', 
+                'remotePort', 
+                'directory',
+                'fileSchema',
+                'proxyHost',
+                'proxyPort',
+                'destination',
+                'adapterStatus',
+                'softwareComponentName',
+                'responsibleUserAccountName',
+                'lastChangeUserAccount',
+                'lastChangedAt',
+                'updatedAt'
+            ] 
+        });
 
         // create AddChannelsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

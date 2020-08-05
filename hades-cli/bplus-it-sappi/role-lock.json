@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/role/infrastructure/seeds/role.seed.ts",
-            "integrity": "sha1:e628108050654c0e77c4b3c36bcaf21e7582eab6"
+            "integrity": "sha1:737f3779b74fcde9073069a7292debf37bf7c491"
         },
         {
             "path": "src/@hades/bplus-it-sappi/role/infrastructure/sequelize/sequelize-role.model.ts",
@@ -371,15 +371,15 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/role/dto/role.dto.ts",
-            "integrity": "sha1:d299ae390fd2e71864fd8dd28eae48601620c73d"
+            "integrity": "sha1:0a1a41ddf1c6e139ab3b6a2b0e39ab926f5c1ba4"
         },
         {
             "path": "src/apps/bplus-it-sappi/role/dto/create-role.dto.ts",
-            "integrity": "sha1:925a56f432a00d95ee90e6767d9e2b003c1af138"
+            "integrity": "sha1:344cb94afee9bb993c670a0ac0b3f5b2292cd439"
         },
         {
             "path": "src/apps/bplus-it-sappi/role/dto/update-role.dto.ts",
-            "integrity": "sha1:f98748cdc458b72c05311f9db35a3749eb1817b6"
+            "integrity": "sha1:c774d908cb8ce9a8f68ee81f689fb91656ed7d5d"
         },
         {
             "path": "src/apps/bplus-it-sappi/role/graphql/role.graphql",
@@ -463,7 +463,7 @@
         },
         {
             "path": "postman/bplus-it-sappi.role.postman.json",
-            "integrity": "sha1:000c0ad5846a2bf6bed7e0465223b26b9b984f52"
+            "integrity": "sha1:3d4bed17d8f7ffefa61c9af235d1331371097ab7"
         }
     ]
 }

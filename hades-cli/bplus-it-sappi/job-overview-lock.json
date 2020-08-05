@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/job-overview/infrastructure/seeds/job-overview.seed.ts",
-            "integrity": "sha1:4b16bcc4ff3171ca68259300700e6c3b08090f94"
+            "integrity": "sha1:e079b1a64d1798d079d85adcd238ee775ffbcac4"
         },
         {
             "path": "src/@hades/bplus-it-sappi/job-overview/infrastructure/sequelize/sequelize-job-overview.model.ts",
@@ -407,15 +407,15 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/job-overview/dto/job-overview.dto.ts",
-            "integrity": "sha1:ca57c94f68736864aafb4a066467e76d18806a77"
+            "integrity": "sha1:97554888ea112e70a9d2d296202b3b2864313c99"
         },
         {
             "path": "src/apps/bplus-it-sappi/job-overview/dto/create-job-overview.dto.ts",
-            "integrity": "sha1:3a85295ffbc5b87b8a7b8aad53c30e523c1f1410"
+            "integrity": "sha1:2aa67c38457d7bbbc46217ac3184f72e26206a39"
         },
         {
             "path": "src/apps/bplus-it-sappi/job-overview/dto/update-job-overview.dto.ts",
-            "integrity": "sha1:39c6d0350736f0ce4c4240606fea86d310344176"
+            "integrity": "sha1:d354c432a355f035333638f84cda4411a3a73b5d"
         },
         {
             "path": "src/apps/bplus-it-sappi/job-overview/graphql/job-overview.graphql",
@@ -499,7 +499,7 @@
         },
         {
             "path": "postman/bplus-it-sappi.job-overview.postman.json",
-            "integrity": "sha1:2e27c3635ed4989f2da998871c6f0910775b5443"
+            "integrity": "sha1:4c9ca9862591aad954ea7776ebe6ed4a090a11ee"
         }
     ]
 }
