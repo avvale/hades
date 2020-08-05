@@ -69,7 +69,7 @@ export class SequelizeCriteria implements ICriteria
                     _.set(queryBuilder, ['offset'], queryStatement.value);
                     break;
                 case Command.ORDER_BY:
-                    _.set(queryBuilder, ['order'], [queryStatement.column, <'ASC' | 'DESC'>this._operatorMapping(queryStatement.operator, true)]);
+                    _.set(queryBuilder, ['order'], [[queryStatement.column, <'ASC' | 'DESC'>this._operatorMapping(queryStatement.operator, true)]]);
                     break;
             }
         }
@@ -86,11 +86,9 @@ export class SequelizeCriteria implements ICriteria
     private _operatorMapping(operator: Operator, isOrderByOperator: boolean = false): symbol | string
     {
         // check if is order by operator the operator type
-        if (isOrderByOperator && (operator && operator !== Operator.ASC && operator !== Operator.DESC))
-        {
-            throw new BadRequestException(`For orderBy operation you must define ASC or DESC operator`);
-        }
-        
+        if (isOrderByOperator && !operator) operator = Operator.ASC;
+        if (isOrderByOperator && (operator !== Operator.ASC && operator !== Operator.DESC)) throw new BadRequestException(`For orderBy operation you must define ASC or DESC operator`);
+
         switch(operator)
         {
             case Operator.ASC:
