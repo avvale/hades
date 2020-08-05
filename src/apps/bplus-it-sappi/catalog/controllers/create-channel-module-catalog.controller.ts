@@ -28,8 +28,8 @@ export class CreateChannelModuleCatalogController
     @ApiBody({ type: CreateChannelModuleCatalogDto })
     async main(@Body() payload: CreateChannelModuleCatalogDto)
     {
-        if (!Array.isArray(payload)) throw new BadRequestException(`The payload is not an array`);
-        if (payload.length === 0) throw new BadRequestException(`The payload is empty`);
+        if (!Array.isArray(payload.channels)) throw new BadRequestException(`The property channels does not exist or is not an array`);
+        if (!Array.isArray(payload.modules)) throw new BadRequestException(`The property modules does not exist or is not an array`);
 
         // get tenant
         const tenant = await this.queryBus.ask(new FindTenantQuery(
@@ -38,7 +38,7 @@ export class CreateChannelModuleCatalogController
                     command: Command.WHERE,
                     column: 'code',
                     operator: Operator.EQUALS,
-                    value: payload[0].tenantCode
+                    value: payload.tenant.code
                 }
             ]
         ));
@@ -50,23 +50,23 @@ export class CreateChannelModuleCatalogController
                     command: Command.WHERE,
                     column: 'name',
                     operator: Operator.EQUALS,
-                    value: payload[0].systemName
+                    value: payload.system.name
                 }
             ]
         ));
 
-        const channelCatalog = payload.map(channel => {
+        const channelCatalog = payload.channels.map(channel => {
             return {
                 id: uuidv4(),
-                hash: Utils.sha1(channel.tenantCode + channel.systemName + channel.party + channel.component + channel.name),
+                hash: Utils.sha1(tenant.code + system.name + channel.party + channel.component + channel.name),
                 tenantId: tenant.id,
-                tenantCode: channel.tenantCode,
+                tenantCode: tenant.code,
                 systemId: system.id,
-                systemName: channel.systemName,
+                systemName: system.name,
                 party: channel.party,
                 component: channel.component,
                 name: channel.name,
-                flowHash: Utils.sha1(channel.tenantCode + channel.systemName + channel.flowParty + channel.flowComponent + channel.flowInterfaceName + channel.flowInterfaceNamespace),
+                flowHash: Utils.sha1(tenant.code + system.name + channel.flowParty + channel.flowComponent + channel.flowInterfaceName + channel.flowInterfaceNamespace),
                 flowParty: channel.flowParty,
                 flowComponent: channel.flowComponent,
                 flowInterfaceName: channel.flowInterfaceName,
