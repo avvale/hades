@@ -57,7 +57,7 @@ export class CreateFlowCatalogController
         const flowsCatalog = payload.flows.map(flow => {
             return {
                 id: uuidv4(),
-                hash: Utils.sha1(tenant.code + system.name + flow.party + flow.component + flow.interfaceName + flow.interfaceNamespace),
+                hash: Utils.sha1(tenant.code + system.name + (flow.party ? flow.party : '') + flow.component + flow.interfaceName + flow.interfaceNamespace),
                 tenantId: tenant.id,
                 tenantCode: tenant.code,
                 systemId: system.id,
