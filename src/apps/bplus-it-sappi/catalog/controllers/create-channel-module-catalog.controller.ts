@@ -55,7 +55,7 @@ export class CreateChannelModuleCatalogController
             ]
         ));
 
-        const channelCatalog = payload.channels.map(channel => {
+        const channelsCatalog = payload.channels.map(channel => {
             return {
                 id: uuidv4(),
                 hash: Utils.sha1(tenant.code + system.name + channel.party + channel.component + channel.name),
@@ -93,7 +93,7 @@ export class CreateChannelModuleCatalogController
                 lastChangedAt: channel.lastChangedAt
             }
         });
-        await this.commandBus.dispatch(new CreateChannelsCommand(channelCatalog))
+        await this.commandBus.dispatch(new CreateChannelsCommand(channelsCatalog))
 
         // borrar y crear módulos
         
