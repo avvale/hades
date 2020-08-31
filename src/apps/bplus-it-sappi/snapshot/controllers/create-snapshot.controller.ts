@@ -184,7 +184,20 @@ export class CreateSnapshotController
                 timesFailed: message.timesFailed,
             }
         });
-        await this.commandBus.dispatch(new DeleteMessagesDetailCommand([{ command: Command.TRUNCATE }]));
+        await this.commandBus.dispatch(new DeleteMessagesDetailCommand([
+            {
+                command: Command.WHERE,
+                column: 'tenant_code',
+                operator: Operator.EQUALS,
+                value: tenant.code
+            },
+            {
+                command: Command.WHERE,
+                column: 'system_name',
+                operator: Operator.EQUALS,
+                value: system.name
+            }
+        ]));
         await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
 
         const channelsDetail = payload.channelsDetail.map(channel => {
@@ -208,7 +221,20 @@ export class CreateSnapshotController
                 detail: Utils.base64Decode(channel.detail)
             }
         });
-        await this.commandBus.dispatch(new DeleteChannelsCommand([{ command: Command.TRUNCATE }]));
+        await this.commandBus.dispatch(new DeleteChannelsCommand([
+            {
+                command: Command.WHERE,
+                column: 'tenant_code',
+                operator: Operator.EQUALS,
+                value: tenant.code
+            },
+            {
+                command: Command.WHERE,
+                column: 'system_name',
+                operator: Operator.EQUALS,
+                value: system.name
+            }
+        ]));
         await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
 
         const jobsDetail = payload.jobsDetail.map(job => {
@@ -232,7 +258,20 @@ export class CreateSnapshotController
                 endAt: job.endAt
             }
         });
-        await this.commandBus.dispatch(new DeleteJobsDetailCommand([{ command: Command.TRUNCATE }]));
+        await this.commandBus.dispatch(new DeleteJobsDetailCommand([
+            {
+                command: Command.WHERE,
+                column: 'tenant_code',
+                operator: Operator.EQUALS,
+                value: tenant.code
+            },
+            {
+                command: Command.WHERE,
+                column: 'system_name',
+                operator: Operator.EQUALS,
+                value: system.name
+            }
+        ]));
         await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
 
         return {
