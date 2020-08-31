@@ -9,8 +9,8 @@ export class ChannelFlowInterfaceNamespace extends StringValueObject
     {
         super(value, Object.assign({ 
             name: 'ChannelFlowInterfaceNamespace',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
             maxLength: 160,            
         }, validationRules));
     }

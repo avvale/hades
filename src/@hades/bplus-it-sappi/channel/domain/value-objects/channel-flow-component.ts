@@ -9,8 +9,8 @@ export class ChannelFlowComponent extends StringValueObject
     {
         super(value, Object.assign({ 
             name: 'ChannelFlowComponent',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
             maxLength: 160,            
         }, validationRules));
     }

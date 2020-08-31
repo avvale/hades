@@ -147,7 +147,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @Column({
         field: 'flow_hash',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.CHAR(40),
         
     })
@@ -160,7 +160,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @Column({
         field: 'flow_party',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(160),
         
     })
@@ -173,7 +173,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @Column({
         field: 'flow_component',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(160),
         
     })
@@ -186,7 +186,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @Column({
         field: 'flow_interface_name',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(160),
         
     })
@@ -199,7 +199,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @Column({
         field: 'flow_interface_namespace',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(160),
         
     })
@@ -212,7 +212,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @Column({
         field: 'version',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(20),
         
     })
@@ -238,7 +238,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @Column({
         field: 'direction',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.ENUM('SENDER','RECEIVER'),
         
     })
@@ -407,7 +407,7 @@ export class BplusItSappiChannelModel extends Model<BplusItSappiChannelModel>
     @Column({
         field: 'adapter_status',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.ENUM('ACTIVE','INACTIVE'),
         
     })

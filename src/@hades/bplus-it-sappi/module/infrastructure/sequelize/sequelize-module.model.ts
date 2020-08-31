@@ -147,7 +147,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     @Column({
         field: 'flow_hash',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.CHAR(40),
         
     })
@@ -173,7 +173,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     @Column({
         field: 'flow_component',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(160),
         
     })
@@ -186,7 +186,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     @Column({
         field: 'flow_interface_name',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(160),
         
     })
@@ -199,7 +199,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
     @Column({
         field: 'flow_interface_namespace',
         
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(160),
         
     })

@@ -9,8 +9,8 @@ export class ChannelAdapterStatus extends EnumValueObject
     {
         super(value, Object.assign({ 
             name: 'ChannelAdapterStatus',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
             enumOptions:  ['ACTIVE','INACTIVE'],
         }, validationRules));
     }

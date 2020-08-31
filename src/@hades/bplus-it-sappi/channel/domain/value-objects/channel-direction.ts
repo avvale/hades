@@ -9,8 +9,8 @@ export class ChannelDirection extends EnumValueObject
     {
         super(value, Object.assign({ 
             name: 'ChannelDirection',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
             enumOptions:  ['SENDER','RECEIVER'],
         }, validationRules));
     }

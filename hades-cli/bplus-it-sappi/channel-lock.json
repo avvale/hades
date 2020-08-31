@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channels.command.ts",
-            "integrity": "sha1:36cd9005045a705758c6f649dfe466b08f1aac6a"
+            "integrity": "sha1:93c10eaf686b86f0ffa91df831369ebe94b30501"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/create/create-channels.service.spec.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/events/add-channels-context.event.ts",
-            "integrity": "sha1:664c777e33a780896962b8f665f200f91a9471ac"
+            "integrity": "sha1:42cad58e8da78c9bedcd9ed9db094a479a5548a6"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/events/created-channel.event-handler.ts",
@@ -211,7 +211,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/update/update-channel.command-handler.ts",
-            "integrity": "sha1:5a039b7ceac1cd0bb3f5d75dc11d789c415b3f4e"
+            "integrity": "sha1:a87686d6491ebf6b19f63ab9c9cb894822128b7e"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/application/update/update-channel.command.handler.spec.ts",
@@ -231,7 +231,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/channel.aggregate.ts",
-            "integrity": "sha1:9bca06fea912e574dde504e2d96b5ada657d7d18"
+            "integrity": "sha1:afc48c232498c625863d41c85ac36e5f70a408c6"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/channel.mapper.ts",
@@ -259,11 +259,11 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/infrastructure/seeds/channel.seed.ts",
-            "integrity": "sha1:d6a58b3a2a4b1985d8d37da7b85177575326e2de"
+            "integrity": "sha1:dda51402d049537cd32857739691ad641b5ee3ba"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/infrastructure/sequelize/sequelize-channel.model.ts",
-            "integrity": "sha1:94fdc5e8ff05b3f1fab8287f5587d4b1b0d69a0f"
+            "integrity": "sha1:44d06ca1ca3e1debdaa73cb4c0d9980676d35aec"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/infrastructure/sequelize/sequelize-channel.repository.ts",
@@ -307,27 +307,27 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-flow-hash.ts",
-            "integrity": "sha1:558d68ffcd25972d336d17f93b0541537e885951"
+            "integrity": "sha1:0697f6d9618c5b482d29e208dee5373349fdfb5c"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-flow-party.ts",
-            "integrity": "sha1:7843d7d4b5382de7bc7c0d6853454fb8816861ca"
+            "integrity": "sha1:103db6ede03f2d3ead649ec6fb285ea31e0c4b53"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-flow-component.ts",
-            "integrity": "sha1:9cb42a5265927bfb18c345ac210a79ea15eae414"
+            "integrity": "sha1:f4be7dedc3a462ba01acc1566981bceb8dbb1c5f"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-flow-interface-name.ts",
-            "integrity": "sha1:a2ae3d8aaa23930d1b2ba49b06caaf543322c9d6"
+            "integrity": "sha1:15e62eef711b6eb97ae88faaa45016e5ee08968b"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-flow-interface-namespace.ts",
-            "integrity": "sha1:622b47e6e13a52de9f6738bc5aa2c55c290a32b3"
+            "integrity": "sha1:a4468235da68ff755f84784510fa9d3b5b446392"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-version.ts",
-            "integrity": "sha1:74916dd78e9f8b815b20a7c7ee05c7276ac12719"
+            "integrity": "sha1:696fd7249d7901a23779dc9b61c41f81c40047c7"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-adapter-type.ts",
@@ -335,7 +335,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-direction.ts",
-            "integrity": "sha1:2da8ce41c30a0cb2d16d415ca3a7fb38aae3ade3"
+            "integrity": "sha1:72f7b5c52c75739d3eadd385699f2dd7476c02cb"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-transport-protocol.ts",
@@ -387,7 +387,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-adapter-status.ts",
-            "integrity": "sha1:9e6485ce7d3de5c8f4331f2ff86eee41b9c68616"
+            "integrity": "sha1:7a3220dd5dc971f7b3ff38187500d5d82ea57db8"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/domain/value-objects/channel-software-component-name.ts",
@@ -491,19 +491,19 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/dto/channel.dto.ts",
-            "integrity": "sha1:55ea667eeed8c1d2f2afbfdc11495d65b8ee7a3c"
+            "integrity": "sha1:786aa50c9f7654a7e44afdd4a0349f1472691b03"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/dto/create-channel.dto.ts",
-            "integrity": "sha1:9a71889b7b069165bd85e4545eb6d8d67dae13c0"
+            "integrity": "sha1:e9a21166ef5bc9588892aad480ef77b02acee881"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/dto/update-channel.dto.ts",
-            "integrity": "sha1:129612bb3b34cc0b8568d7820708e1b5162d4275"
+            "integrity": "sha1:92b801c483cb1581dd522e196f0615189021efb9"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/graphql/channel.graphql",
-            "integrity": "sha1:0d49eebf8ac1a79ab81d78c2eb9691ae5bffc50a"
+            "integrity": "sha1:d15b1646cffc92b471797485a0ddf23fd80afe4d"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/index.ts",
@@ -583,7 +583,7 @@
         },
         {
             "path": "postman/bplus-it-sappi.channel.postman.json",
-            "integrity": "sha1:1e0b32622af9f9df4214d959d616e382c73d3565"
+            "integrity": "sha1:f4182a7e4f386991d7aa544a26506ba3873f3751"
         }
     ]
 }

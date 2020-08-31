@@ -9,8 +9,8 @@ export class ChannelFlowInterfaceName extends StringValueObject
     {
         super(value, Object.assign({ 
             name: 'ChannelFlowInterfaceName',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
             maxLength: 160,            
         }, validationRules));
     }

@@ -21,14 +21,14 @@ type BplusItSappiChannel
     party: GraphQLString
     component: GraphQLString!
     name: GraphQLString!
-    flowHash: GraphQLString!
-    flowParty: GraphQLString!
-    flowComponent: GraphQLString!
-    flowInterfaceName: GraphQLString!
-    flowInterfaceNamespace: GraphQLString!
-    version: GraphQLString!
+    flowHash: GraphQLString
+    flowParty: GraphQLString
+    flowComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
+    version: GraphQLString
     adapterType: GraphQLString
-    direction: BplusItSappiChannelDirection!
+    direction: BplusItSappiChannelDirection
     transportProtocol: GraphQLString
     messageProtocol: GraphQLString
     adapterEngineName: GraphQLString
@@ -41,7 +41,7 @@ type BplusItSappiChannel
     proxyHost: GraphQLString
     proxyPort: GraphQLInt
     destination: GraphQLString
-    adapterStatus: BplusItSappiChannelAdapterStatus!
+    adapterStatus: BplusItSappiChannelAdapterStatus
     softwareComponentName: GraphQLString
     responsibleUserAccountName: GraphQLString
     lastChangeUserAccount: GraphQLString
@@ -63,14 +63,14 @@ input BplusItSappiCreateChannelInput
     party: GraphQLString
     component: GraphQLString!
     name: GraphQLString!
-    flowHash: GraphQLString!
-    flowParty: GraphQLString!
-    flowComponent: GraphQLString!
-    flowInterfaceName: GraphQLString!
-    flowInterfaceNamespace: GraphQLString!
-    version: GraphQLString!
+    flowHash: GraphQLString
+    flowParty: GraphQLString
+    flowComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
+    version: GraphQLString
     adapterType: GraphQLString
-    direction: BplusItSappiChannelDirection!
+    direction: BplusItSappiChannelDirection
     transportProtocol: GraphQLString
     messageProtocol: GraphQLString
     adapterEngineName: GraphQLString
@@ -83,7 +83,7 @@ input BplusItSappiCreateChannelInput
     proxyHost: GraphQLString
     proxyPort: GraphQLInt
     destination: GraphQLString
-    adapterStatus: BplusItSappiChannelAdapterStatus!
+    adapterStatus: BplusItSappiChannelAdapterStatus
     softwareComponentName: GraphQLString
     responsibleUserAccountName: GraphQLString
     lastChangeUserAccount: GraphQLString

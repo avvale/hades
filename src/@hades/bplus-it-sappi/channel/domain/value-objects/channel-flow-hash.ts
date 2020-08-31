@@ -9,8 +9,8 @@ export class ChannelFlowHash extends StringValueObject
     {
         super(value, Object.assign({ 
             name: 'ChannelFlowHash',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
             length: 40,            
         }, validationRules));
     }

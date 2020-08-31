@@ -52,7 +52,7 @@ aggregateProperties:
   - name: flow_hash
     type: char
     length: 40
-    nullable: false
+    nullable: true
     index: index
   - name: flow_party
     type: varchar
@@ -61,15 +61,15 @@ aggregateProperties:
   - name: flow_component
     type: varchar
     maxLength: 160
-    nullable: false
+    nullable: true
   - name: flow_interface_name
     type: varchar
     maxLength: 160
-    nullable: false
+    nullable: true
   - name: flow_interface_namespace
     type: varchar
     maxLength: 160
-    nullable: false
+    nullable: true
   - name: version
     type: varchar
     maxLength: 20

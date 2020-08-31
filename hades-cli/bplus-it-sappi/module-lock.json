@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/application/create/create-modules.command.ts",
-            "integrity": "sha1:9c042a256f8478c6167e30f7901fc85d1126b15f"
+            "integrity": "sha1:6a8b150aa90f709ab79e423ae312feed6c3157bd"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/application/create/create-modules.service.spec.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/application/events/add-modules-context.event.ts",
-            "integrity": "sha1:9a3a5a5e0b8727dd1e0194e231a08c1a4753ab08"
+            "integrity": "sha1:132095cfe4affb5300bb629c8c8f97c8308b3f65"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/application/events/created-module.event-handler.ts",
@@ -211,7 +211,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/application/update/update-module.command-handler.ts",
-            "integrity": "sha1:421464561bd6329d985cc726b59ce702539a9c63"
+            "integrity": "sha1:243a761f49ec5add7fd68ac6f13ab51e8d552b4f"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/application/update/update-module.command.handler.spec.ts",
@@ -231,7 +231,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/domain/module.aggregate.ts",
-            "integrity": "sha1:0c604f7bf4daa563114048979471e13d2d88c872"
+            "integrity": "sha1:4216a92ab2909d5f6b9e6e68e28c977bcf148032"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/domain/module.mapper.ts",
@@ -259,11 +259,11 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/infrastructure/seeds/module.seed.ts",
-            "integrity": "sha1:6338b53c5cc1fd8b20461668e4a6cc717ce31255"
+            "integrity": "sha1:4fe12b22a8372da34e33ac9c8ee4e660ebd050af"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/infrastructure/sequelize/sequelize-module.model.ts",
-            "integrity": "sha1:7b08089717656a35c09376605b60ccdc81b5be11"
+            "integrity": "sha1:1ec728b79d99a627926c2ec2bd5b0844d927b762"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/infrastructure/sequelize/sequelize-module.repository.ts",
@@ -307,7 +307,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-flow-hash.ts",
-            "integrity": "sha1:11df53076ca42d33fbd07f75752e484fd73daa26"
+            "integrity": "sha1:05fe5ce496e23be11b724b897cc06191a1ed2d5b"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-flow-party.ts",
@@ -315,15 +315,15 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-flow-component.ts",
-            "integrity": "sha1:e19816f07937479a28f2f5e4b30092b4fcd8c393"
+            "integrity": "sha1:d88b1f56180aa5eb5c112a06346ab7985a296f89"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-flow-interface-name.ts",
-            "integrity": "sha1:17b745e0cbf4ddf1aaf6fc9564bba65ecb892b5b"
+            "integrity": "sha1:c86132804b073e81dea84ec1c03cc66182751404"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-flow-interface-namespace.ts",
-            "integrity": "sha1:a6b6603a4b726ef9bbb3b39284dfcead9bb0352d"
+            "integrity": "sha1:ec01cb7e1cda775da130db8d6d50313edffff0f3"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-version.ts",
@@ -431,19 +431,19 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/module/dto/module.dto.ts",
-            "integrity": "sha1:d7f32a3d25ca7cdce35239afa9cd7022be14177d"
+            "integrity": "sha1:2187931ed2e116d42f8ebeba24df85971fd05310"
         },
         {
             "path": "src/apps/bplus-it-sappi/module/dto/create-module.dto.ts",
-            "integrity": "sha1:0f2480470d0ef8ab00fe424ac3f9270e039b0763"
+            "integrity": "sha1:57d7e8a3fedccdb442cc5318d959719325ff0208"
         },
         {
             "path": "src/apps/bplus-it-sappi/module/dto/update-module.dto.ts",
-            "integrity": "sha1:d1f1619c16019ee74cc124124641302dd8a64d11"
+            "integrity": "sha1:515d3a8cc361b274a75c4e1799df717e2d4c3de0"
         },
         {
             "path": "src/apps/bplus-it-sappi/module/graphql/module.graphql",
-            "integrity": "sha1:3984e39cb7dbca0629ff1e47485f32f5292c68bf"
+            "integrity": "sha1:efd6e7843bafc1d6cc0c7f041506f7b34545621a"
         },
         {
             "path": "src/apps/bplus-it-sappi/module/index.ts",
@@ -523,7 +523,7 @@
         },
         {
             "path": "postman/bplus-it-sappi.module.postman.json",
-            "integrity": "sha1:55081ad8486d2cdf18799ca0c434d78f0224e761"
+            "integrity": "sha1:db8c9b4e66bb48c510bad583d386e24eb62be6a6"
         }
     ]
 }

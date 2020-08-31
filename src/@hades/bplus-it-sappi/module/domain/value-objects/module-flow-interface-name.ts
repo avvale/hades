@@ -9,8 +9,8 @@ export class ModuleFlowInterfaceName extends StringValueObject
     {
         super(value, Object.assign({ 
             name: 'ModuleFlowInterfaceName',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
             maxLength: 160,            
         }, validationRules));
     }

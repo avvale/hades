@@ -11,11 +11,11 @@ type BplusItSappiModule
     channelParty: GraphQLString
     channelComponent: GraphQLString!
     channelName: GraphQLString!
-    flowHash: GraphQLString!
+    flowHash: GraphQLString
     flowParty: GraphQLString
-    flowComponent: GraphQLString!
-    flowInterfaceName: GraphQLString!
-    flowInterfaceNamespace: GraphQLString!
+    flowComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
     version: GraphQLString!
     parameterGroup: GraphQLString
     name: GraphQLString
@@ -38,11 +38,11 @@ input BplusItSappiCreateModuleInput
     channelParty: GraphQLString
     channelComponent: GraphQLString!
     channelName: GraphQLString!
-    flowHash: GraphQLString!
+    flowHash: GraphQLString
     flowParty: GraphQLString
-    flowComponent: GraphQLString!
-    flowInterfaceName: GraphQLString!
-    flowInterfaceNamespace: GraphQLString!
+    flowComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
     version: GraphQLString!
     parameterGroup: GraphQLString
     name: GraphQLString
