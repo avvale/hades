@@ -8,7 +8,8 @@ export enum Command
     LIMIT = "LIMIT",
     OFFSET = "OFFSET",
     ORDER_BY = "ORDER_BY",
-    WHERE = "WHERE"
+    WHERE = "WHERE",
+    TRUNCATE = "TRUNCATE"
 }
 
 export enum Operator
