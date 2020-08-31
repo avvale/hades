@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { CreateFlowChannelCatalogObjectDto } from './create-flow-channel-catalog-object.dto';
 
 export class CreateFlowCatalogObjectDto 
 {   
@@ -92,4 +93,15 @@ export class CreateFlowCatalogObjectDto
         example     : 'cyfu4oy7gdjpiootblb7bt414h5ab8t2hsct8creqefm84p98405sgk2mj44'
     })
     application: string;
+
+    @ApiProperty({
+        type        : [CreateFlowChannelCatalogObjectDto],
+        description : 'channel list that belong to this flow',
+        example     : [{
+            party: 'SAMPLE_CHANNEL_PARTY',
+            component: 'SAMPLE_CHANNEL_COMPONENT',
+            name: 'SAMPLE_CHANNEL_NAME'
+        }]
+    })
+    channels: CreateFlowChannelCatalogObjectDto[];
 }
