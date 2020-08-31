@@ -208,7 +208,7 @@ export class CreateSnapshotController
                 detail: Utils.base64Decode(channel.detail)
             }
         });
-        await this.commandBus.dispatch(new DeleteChannelsCommand);
+        await this.commandBus.dispatch(new DeleteChannelsCommand([{ command: Command.TRUNCATE }]));
         await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
 
         const jobsDetail = payload.jobsDetail.map(job => {
@@ -232,7 +232,7 @@ export class CreateSnapshotController
                 endAt: job.endAt
             }
         });
-        await this.commandBus.dispatch(new DeleteJobsDetailCommand);
+        await this.commandBus.dispatch(new DeleteJobsDetailCommand([{ command: Command.TRUNCATE }]));
         await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
 
         return {
