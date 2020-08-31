@@ -184,7 +184,7 @@ export class CreateSnapshotController
                 timesFailed: message.timesFailed,
             }
         });
-        await this.commandBus.dispatch(new DeleteMessagesDetailCommand);
+        await this.commandBus.dispatch(new DeleteMessagesDetailCommand([{ command: Command.TRUNCATE }]));
         await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
 
         const channelsDetail = payload.channelsDetail.map(channel => {
