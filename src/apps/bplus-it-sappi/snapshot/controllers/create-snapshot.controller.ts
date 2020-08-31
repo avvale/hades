@@ -16,9 +16,12 @@ import { CreateExecutionCommand } from '@hades/bplus-it-sappi/execution/applicat
 import { CreateChannelOverviewCommand } from '@hades/bplus-it-sappi/channel-overview/application/create/create-channel-overview.command';
 import { CreateSnapshotDto } from './../dto/create-snapshot.dto';
 import { CreateJobOverviewCommand } from '@hades/bplus-it-sappi/job-overview/application/create/create-job-overview.command';
+import { DeleteMessagesDetailCommand } from '@hades/bplus-it-sappi/message-detail/application/delete/delete-messages-detail.command';
 import { CreateMessagesDetailCommand } from '@hades/bplus-it-sappi/message-detail/application/create/create-messages-detail.command';
 import { CreateChannelsDetailCommand } from '@hades/bplus-it-sappi/channel-detail/application/create/create-channels-detail.command';
 import { CreateJobsDetailCommand } from '@hades/bplus-it-sappi/job-detail/application/create/create-jobs-detail.command';
+import { DeleteChannelsCommand } from '@hades/bplus-it-sappi/channel/application/delete/delete-channels.command';
+import { DeleteJobsDetailCommand } from '@hades/bplus-it-sappi/job-detail/application/delete/delete-jobs-detail.command';
 
 @ApiTags('[bplus-it-sappi] snapshot')
 @Controller('bplus-it-sappi/snapshot')
@@ -34,6 +37,7 @@ export class CreateSnapshotController
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CreateSnapshotDto })
     async main(@Body() payload: CreateSnapshotDto)
     {
+        // guard clause
         if (!Array.isArray(payload.messagesDetail)) throw new BadRequestException(`The property messagesDetail does not exist or is not an array`);
         if (!Array.isArray(payload.channelsDetail)) throw new BadRequestException(`The property channelsDetail does not exist or is not an array`);
         if (!Array.isArray(payload.jobsDetail)) throw new BadRequestException(`The property jobsDetail does not exist or is not an array`);
@@ -180,6 +184,7 @@ export class CreateSnapshotController
                 timesFailed: message.timesFailed,
             }
         });
+        await this.commandBus.dispatch(new DeleteMessagesDetailCommand);
         await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
 
         const channelsDetail = payload.channelsDetail.map(channel => {
@@ -203,6 +208,7 @@ export class CreateSnapshotController
                 detail: Utils.base64Decode(channel.detail)
             }
         });
+        await this.commandBus.dispatch(new DeleteChannelsCommand);
         await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
 
         const jobsDetail = payload.jobsDetail.map(job => {
@@ -226,6 +232,7 @@ export class CreateSnapshotController
                 endAt: job.endAt
             }
         });
+        await this.commandBus.dispatch(new DeleteJobsDetailCommand);
         await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
 
         return {
