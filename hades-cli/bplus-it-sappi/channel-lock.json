@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/infrastructure/seeds/channel.seed.ts",
-            "integrity": "sha1:dda51402d049537cd32857739691ad641b5ee3ba"
+            "integrity": "sha1:ad67021f37f756661bef0dc453761e891b90a519"
         },
         {
             "path": "src/@hades/bplus-it-sappi/channel/infrastructure/sequelize/sequelize-channel.model.ts",
@@ -491,15 +491,15 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/dto/channel.dto.ts",
-            "integrity": "sha1:786aa50c9f7654a7e44afdd4a0349f1472691b03"
+            "integrity": "sha1:d197d4f48f9883027b73721b1c137e9f456fba56"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/dto/create-channel.dto.ts",
-            "integrity": "sha1:e9a21166ef5bc9588892aad480ef77b02acee881"
+            "integrity": "sha1:37cd5ddfbf2393a007dbf05e4a8af2bdc3ce64cc"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/dto/update-channel.dto.ts",
-            "integrity": "sha1:92b801c483cb1581dd522e196f0615189021efb9"
+            "integrity": "sha1:54b5d36d0bad376a69a2c06807601e1d2ba61e78"
         },
         {
             "path": "src/apps/bplus-it-sappi/channel/graphql/channel.graphql",
@@ -583,7 +583,7 @@
         },
         {
             "path": "postman/bplus-it-sappi.channel.postman.json",
-            "integrity": "sha1:f4182a7e4f386991d7aa544a26506ba3873f3751"
+            "integrity": "sha1:c29086c67f6c4323d686874c50d9462d3817e837"
         }
     ]
 }
