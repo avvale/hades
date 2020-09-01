@@ -14,7 +14,7 @@ export abstract class TimestampValueObject extends StringValueObject
         // first pass value to super to pass validations
         super.value = value;
 
-        if (value !== null && !((new Date(value)).getTime() > 0)) throw new BadRequestException(`Value for ${this.validationRules.name} has to be a timestamp value, value ${value} is a not valid timestamp`);
+        if (value !== null && value !== undefined && !((new Date(value)).getTime() > 0)) throw new BadRequestException(`Value for ${this.validationRules.name} has to be a timestamp value, value ${value} is a not valid timestamp`);
 
         if (process.env.TZ) 
         {
