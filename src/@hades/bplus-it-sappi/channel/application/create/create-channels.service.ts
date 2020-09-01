@@ -136,6 +136,11 @@ export class CreateChannelsService
         
         // insert
         await this.repository.insert(aggregateChannels, { updateOnDuplicate: [
+                'flowHash',
+                'flowParty',
+                'flowComponent',
+                'flowInterfaceName',
+                'flowInterfaceNamespace',
                 'version', 
                 'adapterType', 
                 'direction', 

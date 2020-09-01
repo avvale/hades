@@ -58,7 +58,35 @@ export class CreateChannelModuleCatalogController
             ]
         ));
 
+        // get all channels only with data to relate flows
+        const channelsCatalogRecorded = await this.queryBus.ask(new GetChannelsQuery(
+            [
+                {
+                    command: Command.ATTRIBUTES,
+                    value: [
+                        'id',
+                        'hash',
+                        'tenantId',
+                        'tenantCode',
+                        'systemId',
+                        'systemName',
+                        'component',
+                        'name',
+                        'flowHash',
+                        'flowParty',
+                        'flowComponent',
+                        'flowInterfaceName',
+                        'flowInterfaceNamespace'
+                    ]
+                }
+            ]
+        ));
+
         const channelsCatalog = payload.channels.map(channel => {
+            
+            const hash                      = Utils.sha1(tenant.code + system.name + (channel.party ? channel.party : '') + channel.component + channel.name);
+            const channelCatalogRecorded    = channelsCatalogRecorded.find(channel => channel.hash === hash);
+
             return {
                 id: uuidv4(),
                 hash: Utils.sha1(tenant.code + system.name + (channel.party ? channel.party : '') + channel.component + channel.name),
@@ -69,6 +97,11 @@ export class CreateChannelModuleCatalogController
                 party: channel.party,
                 component: channel.component,
                 name: channel.name,
+                flowHash: channelCatalogRecorded.flowHash,
+                flowParty: channelCatalogRecorded.flowParty,
+                flowComponent: channelCatalogRecorded.flowComponent,
+                flowInterfaceName: channelCatalogRecorded.flowInterfaceName,
+                flowInterfaceNamespace: channelCatalogRecorded.flowInterfaceNamespace,
                 version: channel.version,
                 adapterType: channel.adapterType,
                 direction: channel.direction,
@@ -93,32 +126,6 @@ export class CreateChannelModuleCatalogController
         });
         await this.commandBus.dispatch(new CreateChannelsCommand(channelsCatalog));
 
-        // get all channels to relate flow with modules
-        const channels = await this.queryBus.ask(new GetChannelsQuery(
-            [
-                {
-                    command: Command.ATTRIBUTES,
-                    value: [
-                        'id',
-                        'hash',
-                        'tenantId',
-                        'tenantCode',
-                        'systemId',
-                        'systemName',
-                        'component',
-                        'name',
-                        'flowHash',
-                        'flowParty',
-                        'flowComponent',
-                        'flowInterfaceName',
-                        'flowInterfaceNamespace'
-                    ]
-                }
-            ]
-        ));
-
-        console.log(channels);
-
         // delete all modules from tenant and system
         await this.commandBus.dispatch(new DeleteModulesCommand(
             [
@@ -137,7 +144,10 @@ export class CreateChannelModuleCatalogController
             ]
         ));
 
-        /* const modulesCatalog = payload.modules.map(module => {
+        const modulesCatalog = payload.modules.map(module => {
+
+            const channelHash               = Utils.sha1(tenant.code + system.name + (module.channelParty ? module.channelParty : '') + module.channelComponent + module.channelName);
+            const channelCatalogRecorded    = channelsCatalogRecorded.find(channel => channel.hash === channelHash);
 
             return {
                 id: uuidv4(),
@@ -145,15 +155,15 @@ export class CreateChannelModuleCatalogController
                 tenantCode: tenant.code,
                 systemId: system.id,
                 systemName: system.name,
-                channelHash: Utils.sha1(tenant.code + system.name + (module.channelParty ? module.channelParty : '') + module.channelComponent + module.channelName),
+                channelHash: channelHash,
                 channelParty: module.channelParty,
                 channelComponent: module.channelComponent,
                 channelName: module.channelName,
-                flowHash: null,
-                flowParty: null,
-                flowComponent: null,
-                flowInterfaceName: null,
-                flowInterfaceNamespace: null,
+                flowHash: channelCatalogRecorded.flowHash,
+                flowParty: channelCatalogRecorded.flowParty,
+                flowComponent: channelCatalogRecorded.flowComponent,
+                flowInterfaceName: channelCatalogRecorded.flowInterfaceName,
+                flowInterfaceNamespace: channelCatalogRecorded.flowInterfaceNamespace,
                 version: module.version,
                 parameterGroup: module.parameterGroup,
                 name: module.name,
@@ -161,7 +171,7 @@ export class CreateChannelModuleCatalogController
                 parameterValue: module.parameterValue,
             }
         });
-        await this.commandBus.dispatch(new CreateModulesCommand(modulesCatalog)); */
+        await this.commandBus.dispatch(new CreateModulesCommand(modulesCatalog));
         
         return {
             statusCode: 200,
