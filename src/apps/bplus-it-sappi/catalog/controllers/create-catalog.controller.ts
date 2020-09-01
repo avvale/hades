@@ -178,8 +178,8 @@ export class CreateCatalogController
 
         const modulesCatalog = payload.modules.map(module => {
 
-            const channelHash               = Utils.sha1(tenant.code + system.name + (module.channelParty ? module.channelParty : '') + module.channelComponent + module.channelName);
-            const channelsWithFlow          = channelsWithFlows.find(channel => channel.hash === channelHash);
+            const channelHash       = Utils.sha1(tenant.code + system.name + (module.channelParty ? module.channelParty : '') + module.channelComponent + module.channelName);
+            const channelsWithFlow  = channelsWithFlows.find(channel => channel.hash === channelHash);
 
             return {
                 id: uuidv4(),
