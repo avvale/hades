@@ -20,8 +20,8 @@ import { DeleteMessagesDetailCommand } from '@hades/bplus-it-sappi/message-detai
 import { CreateMessagesDetailCommand } from '@hades/bplus-it-sappi/message-detail/application/create/create-messages-detail.command';
 import { CreateChannelsDetailCommand } from '@hades/bplus-it-sappi/channel-detail/application/create/create-channels-detail.command';
 import { CreateJobsDetailCommand } from '@hades/bplus-it-sappi/job-detail/application/create/create-jobs-detail.command';
-import { DeleteChannelsCommand } from '@hades/bplus-it-sappi/channel/application/delete/delete-channels.command';
 import { DeleteJobsDetailCommand } from '@hades/bplus-it-sappi/job-detail/application/delete/delete-jobs-detail.command';
+import { DeleteChannelsDetailCommand } from '@hades/bplus-it-sappi/channel-detail/application/delete/delete-channels-detail.command';
 
 @ApiTags('[bplus-it-sappi] snapshot')
 @Controller('bplus-it-sappi/snapshot')
@@ -187,15 +187,15 @@ export class CreateSnapshotController
         await this.commandBus.dispatch(new DeleteMessagesDetailCommand([
             {
                 command: Command.WHERE,
-                column: 'tenant_code',
+                column: 'tenantId',
                 operator: Operator.EQUALS,
-                value: tenant.code
+                value: tenant.id
             },
             {
                 command: Command.WHERE,
-                column: 'system_name',
+                column: 'systemId',
                 operator: Operator.EQUALS,
-                value: system.name
+                value: system.id
             }
         ]));
         await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
@@ -221,18 +221,18 @@ export class CreateSnapshotController
                 detail: Utils.base64Decode(channel.detail)
             }
         });
-        await this.commandBus.dispatch(new DeleteChannelsCommand([
+        await this.commandBus.dispatch(new DeleteChannelsDetailCommand([
             {
                 command: Command.WHERE,
-                column: 'tenant_code',
+                column: 'tenantId',
                 operator: Operator.EQUALS,
-                value: tenant.code
+                value: tenant.id
             },
             {
                 command: Command.WHERE,
-                column: 'system_name',
+                column: 'systemId',
                 operator: Operator.EQUALS,
-                value: system.name
+                value: system.id
             }
         ]));
         await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
@@ -261,15 +261,15 @@ export class CreateSnapshotController
         await this.commandBus.dispatch(new DeleteJobsDetailCommand([
             {
                 command: Command.WHERE,
-                column: 'tenant_code',
+                column: 'tenantId',
                 operator: Operator.EQUALS,
-                value: tenant.code
+                value: tenant.id
             },
             {
                 command: Command.WHERE,
-                column: 'system_name',
+                column: 'systemId',
                 operator: Operator.EQUALS,
-                value: system.name
+                value: system.id
             }
         ]));
         await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
