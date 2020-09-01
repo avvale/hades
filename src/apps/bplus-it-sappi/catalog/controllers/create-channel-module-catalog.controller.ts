@@ -13,6 +13,7 @@ import { CreateChannelsCommand } from '@hades/bplus-it-sappi/channel/application
 import { CreateModulesCommand } from '@hades/bplus-it-sappi/module/application/create/create-modules.command';
 import { CreateChannelModuleCatalogDto } from './../dto/create-channel-module-catalog.dto';
 import { DeleteModulesCommand } from '@hades/bplus-it-sappi/module/application/delete/delete-modules.command';
+import { GetChannelsQuery } from '@hades/bplus-it-sappi/channel/application/get/get-channels.query';
 import { Utils } from '@hades/shared/domain/lib/utils';
 
 @ApiTags('[bplus-it-sappi] catalog/channel-module')
@@ -92,6 +93,32 @@ export class CreateChannelModuleCatalogController
         });
         await this.commandBus.dispatch(new CreateChannelsCommand(channelsCatalog));
 
+        // get all channels to relate flow with modules
+        const channels = await this.queryBus.ask(new GetChannelsQuery(
+            [
+                {
+                    command: Command.ATTRIBUTES,
+                    value: [
+                        'id',
+                        'hash',
+                        'tenantId',
+                        'tenantCode',
+                        'systemId',
+                        'systemName',
+                        'component',
+                        'name',
+                        'flowHash',
+                        'flowParty',
+                        'flowComponent',
+                        'flowInterfaceName',
+                        'flowInterfaceNamespace'
+                    ]
+                }
+            ]
+        ));
+
+        console.log(channels);
+
         // delete all modules from tenant and system
         await this.commandBus.dispatch(new DeleteModulesCommand(
             [
@@ -110,9 +137,8 @@ export class CreateChannelModuleCatalogController
             ]
         ));
 
-        const modulesCatalog = payload.modules.map(module => {
+        /* const modulesCatalog = payload.modules.map(module => {
 
-            
             return {
                 id: uuidv4(),
                 tenantId: tenant.id,
@@ -123,11 +149,11 @@ export class CreateChannelModuleCatalogController
                 channelParty: module.channelParty,
                 channelComponent: module.channelComponent,
                 channelName: module.channelName,
-                flowHash: Utils.sha1(tenant.code + system.name + (module.flowParty ? module.flowParty : '') + module.flowComponent + module.flowInterfaceName + module.flowInterfaceNamespace),
-                flowParty: module.flowParty,
-                flowComponent: module.flowComponent,
-                flowInterfaceName: module.flowInterfaceName,
-                flowInterfaceNamespace: module.flowInterfaceNamespace,
+                flowHash: null,
+                flowParty: null,
+                flowComponent: null,
+                flowInterfaceName: null,
+                flowInterfaceNamespace: null,
                 version: module.version,
                 parameterGroup: module.parameterGroup,
                 name: module.name,
@@ -135,7 +161,7 @@ export class CreateChannelModuleCatalogController
                 parameterValue: module.parameterValue,
             }
         });
-        await this.commandBus.dispatch(new CreateModulesCommand(modulesCatalog));
+        await this.commandBus.dispatch(new CreateModulesCommand(modulesCatalog)); */
         
         return {
             statusCode: 200,
