@@ -184,7 +184,7 @@ export class CreateSnapshotController
                 timesFailed: message.timesFailed,
             }
         });
-        await this.commandBus.dispatch(new DeleteMessagesDetailCommand([
+        /* await this.commandBus.dispatch(new DeleteMessagesDetailCommand([
             {
                 command: Command.WHERE,
                 column: 'tenantId',
@@ -197,7 +197,7 @@ export class CreateSnapshotController
                 operator: Operator.EQUALS,
                 value: system.id
             }
-        ]));
+        ])); */
         await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
 
         const channelsDetail = payload.channelsDetail.map(channel => {
