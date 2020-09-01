@@ -10,15 +10,15 @@ import { Command, Operator } from '@hades/shared/domain/persistence/sql-statemen
 import { FindTenantQuery } from '@hades/admin/tenant/application/find/find-tenant.query';
 import { FindSystemQuery } from '@hades/bplus-it-sappi/system/application/find/find-system.query';
 import { CreateChannelsCommand } from '@hades/bplus-it-sappi/channel/application/create/create-channels.command';
-import { CreateModulesCommand } from '@hades/bplus-it-sappi/module/application/create/create-modules.command';
-import { CreateChannelModuleCatalogDto } from './../dto/create-channel-module-catalog.dto';
+import { CreateFlowsCommand } from '@hades/bplus-it-sappi/flow/application/create/create-flows.command';
 import { DeleteModulesCommand } from '@hades/bplus-it-sappi/module/application/delete/delete-modules.command';
-import { GetChannelsQuery } from '@hades/bplus-it-sappi/channel/application/get/get-channels.query';
+import { CreateModulesCommand } from '@hades/bplus-it-sappi/module/application/create/create-modules.command';
 import { Utils } from '@hades/shared/domain/lib/utils';
+import { CreateCatalogDto } from './../dto/create-catalog.dto';
 
-@ApiTags('[bplus-it-sappi] catalog/channel-module')
-@Controller('bplus-it-sappi/catalog/channel-module')
-export class CreateChannelModuleCatalogController 
+@ApiTags('[bplus-it-sappi] catalog')
+@Controller('bplus-it-sappi/catalog')
+export class CreateCatalogController 
 {
     constructor(
         private readonly commandBus: ICommandBus,
@@ -26,14 +26,13 @@ export class CreateChannelModuleCatalogController
     ) {}
 
     @Post()
-    @ApiOperation({ summary: 'Create or update catalog channel and modules' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CreateChannelModuleCatalogDto })
-    @ApiBody({ type: CreateChannelModuleCatalogDto })
-    async main(@Body() payload: CreateChannelModuleCatalogDto)
+    @ApiOperation({ summary: 'Create or update catalog, flows, channels and modules' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CreateCatalogDto })
+    @ApiBody({ type: CreateCatalogDto })
+    async main(@Body() payload: CreateCatalogDto)
     {
-        if (!Array.isArray(payload.channels)) throw new BadRequestException(`The property channels does not exist or is not an array`);
-        if (!Array.isArray(payload.modules)) throw new BadRequestException(`The property modules does not exist or is not an array`);
-
+        if (!Array.isArray(payload.flows)) throw new BadRequestException(`The property flows does not exist or is not an array`);
+        
         // get tenant
         const tenant = await this.queryBus.ask(new FindTenantQuery(
             [
@@ -45,6 +44,7 @@ export class CreateChannelModuleCatalogController
                 }
             ]
         ));
+
 
         // get system
         const system = await this.queryBus.ask(new FindSystemQuery(
@@ -58,38 +58,69 @@ export class CreateChannelModuleCatalogController
             ]
         ));
 
-        // get all channels only with data to relate flows
-        const channelsCatalogRecorded = await this.queryBus.ask(new GetChannelsQuery(
-            [
-                {
-                    command: Command.ATTRIBUTES,
-                    value: [
-                        'id',
-                        'hash',
-                        'tenantId',
-                        'tenantCode',
-                        'systemId',
-                        'systemName',
-                        'component',
-                        'name',
-                        'flowHash',
-                        'flowParty',
-                        'flowComponent',
-                        'flowInterfaceName',
-                        'flowInterfaceNamespace'
-                    ]
-                }
-            ]
-        ));
 
-        const channelsCatalog = payload.channels.map(channel => {
-            
-            const hash                      = Utils.sha1(tenant.code + system.name + (channel.party ? channel.party : '') + channel.component + channel.name);
-            const channelCatalogRecorded    = channelsCatalogRecorded.find(channel => channel.hash === hash);
+        // create flows
+        const channelsWithFlows = [];
+        const flowsCatalog = payload.flows.map(flow => {
+
+            // register channels with related id and flow, to complete the rest of the data later
+            if (Array.isArray(flow.channels)) 
+            {
+                for (const channel of flow.channels)
+                {
+                    channelsWithFlows.push({
+                        id: uuidv4(),
+                        hash: Utils.sha1(tenant.code + system.name + (channel.party ? channel.party : '') + channel.component + channel.name),
+                        tenantId: tenant.id,
+                        tenantCode: tenant.code,
+                        systemId: system.id,
+                        systemName: system.name,
+                        party: channel.party,
+                        component: channel.component,
+                        name: channel.name,
+                        flowHash: Utils.sha1(tenant.code + system.name + (flow.party ? flow.party : '') + flow.component + flow.interfaceName + flow.interfaceNamespace),
+                        flowParty: flow.party,
+                        flowComponent: flow.component,
+                        flowInterfaceName: flow.interfaceName,
+                        flowInterfaceNamespace: flow.interfaceNamespace,
+                    });
+                }
+            }
 
             return {
                 id: uuidv4(),
-                hash: Utils.sha1(tenant.code + system.name + (channel.party ? channel.party : '') + channel.component + channel.name),
+                hash: Utils.sha1(tenant.code + system.name + (flow.party ? flow.party : '') + flow.component + flow.interfaceName + flow.interfaceNamespace),
+                tenantId: tenant.id,
+                tenantCode: tenant.code,
+                systemId: system.id,
+                systemName: system.name,
+                version: flow.version,
+                scenario: flow.scenario,
+                party: flow.party,
+                component: flow.component,
+                interfaceName: flow.interfaceName,
+                interfaceNamespace: flow.interfaceNamespace,
+                iflowName: flow.iflowName,
+                responsibleUserAccount: flow.responsibleUserAccount,
+                lastChangeUserAccount: flow.lastChangeUserAccount,
+                lastChangedAt: flow.lastChangedAt,
+                folderPath: flow.folderPath,
+                description: flow.description,
+                application: flow.application
+            }
+        });
+        await this.commandBus.dispatch(new CreateFlowsCommand(flowsCatalog));
+
+
+        // create channels
+        const channelsCatalog = payload.channels.map(channel => {
+            
+            const hash              = Utils.sha1(tenant.code + system.name + (channel.party ? channel.party : '') + channel.component + channel.name);
+            const channelsWithFlow  = channelsWithFlows.find(channel => channel.hash === hash);
+
+            return {
+                id: uuidv4(),
+                hash: hash,
                 tenantId: tenant.id,
                 tenantCode: tenant.code,
                 systemId: system.id,
@@ -97,11 +128,11 @@ export class CreateChannelModuleCatalogController
                 party: channel.party,
                 component: channel.component,
                 name: channel.name,
-                flowHash: channelCatalogRecorded.flowHash,
-                flowParty: channelCatalogRecorded.flowParty,
-                flowComponent: channelCatalogRecorded.flowComponent,
-                flowInterfaceName: channelCatalogRecorded.flowInterfaceName,
-                flowInterfaceNamespace: channelCatalogRecorded.flowInterfaceNamespace,
+                flowHash: channelsWithFlow?.flowHash,
+                flowParty: channelsWithFlow?.flowParty,
+                flowComponent: channelsWithFlow?.flowComponent,
+                flowInterfaceName: channelsWithFlow?.flowInterfaceName,
+                flowInterfaceNamespace: channelsWithFlow?.flowInterfaceNamespace,
                 version: channel.version,
                 adapterType: channel.adapterType,
                 direction: channel.direction,
@@ -126,6 +157,7 @@ export class CreateChannelModuleCatalogController
         });
         await this.commandBus.dispatch(new CreateChannelsCommand(channelsCatalog));
 
+
         // delete all modules from tenant and system
         await this.commandBus.dispatch(new DeleteModulesCommand(
             [
@@ -147,7 +179,7 @@ export class CreateChannelModuleCatalogController
         const modulesCatalog = payload.modules.map(module => {
 
             const channelHash               = Utils.sha1(tenant.code + system.name + (module.channelParty ? module.channelParty : '') + module.channelComponent + module.channelName);
-            const channelCatalogRecorded    = channelsCatalogRecorded.find(channel => channel.hash === channelHash);
+            const channelsWithFlow          = channelsWithFlows.find(channel => channel.hash === channelHash);
 
             return {
                 id: uuidv4(),
@@ -159,11 +191,11 @@ export class CreateChannelModuleCatalogController
                 channelParty: module.channelParty,
                 channelComponent: module.channelComponent,
                 channelName: module.channelName,
-                flowHash: channelCatalogRecorded.flowHash,
-                flowParty: channelCatalogRecorded.flowParty,
-                flowComponent: channelCatalogRecorded.flowComponent,
-                flowInterfaceName: channelCatalogRecorded.flowInterfaceName,
-                flowInterfaceNamespace: channelCatalogRecorded.flowInterfaceNamespace,
+                flowHash: channelsWithFlow.flowHash,
+                flowParty: channelsWithFlow.flowParty,
+                flowComponent: channelsWithFlow.flowComponent,
+                flowInterfaceName: channelsWithFlow.flowInterfaceName,
+                flowInterfaceNamespace: channelsWithFlow.flowInterfaceNamespace,
                 version: module.version,
                 parameterGroup: module.parameterGroup,
                 name: module.name,

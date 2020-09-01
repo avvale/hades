@@ -1,12 +1,10 @@
 // controllers
-import { CreateFlowCatalogController } from './controllers/create-flow-catalog.controller';
-import { CreateChannelModuleCatalogController } from './controllers/create-channel-module-catalog.controller';
+import { CreateCatalogController } from './controllers/create-catalog.controller';
 
 // resolvers
 
 export const BplusItSappiCatalogControllers = [
-    CreateFlowCatalogController,
-    CreateChannelModuleCatalogController
+    CreateCatalogController,
 ];
 
 export const BplusItSappiCatalogResolvers = [];
