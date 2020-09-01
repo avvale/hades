@@ -9,7 +9,8 @@ export enum Command
     OFFSET = "OFFSET",
     ORDER_BY = "ORDER_BY",
     WHERE = "WHERE",
-    TRUNCATE = "TRUNCATE"
+    TRUNCATE = "TRUNCATE",
+    ATTRIBUTES = "ATTRIBUTES",
 }
 
 export enum Operator
