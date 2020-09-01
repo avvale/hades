@@ -199,7 +199,7 @@ export class CreateSnapshotController
             },
             {
                 command: Command.LIMIT,
-                value: 50000
+                value: 30000
             }
         ]));
         await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
@@ -240,7 +240,7 @@ export class CreateSnapshotController
             },
             {
                 command: Command.LIMIT,
-                value: 50000
+                value: 30000
             }
         ]));
         await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
@@ -281,7 +281,7 @@ export class CreateSnapshotController
             },
             {
                 command: Command.LIMIT,
-                value: 50000
+                value: 30000
             }
         ]));
         await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
