@@ -184,7 +184,7 @@ export class CreateSnapshotController
                 timesFailed: message.timesFailed,
             }
         });
-        /* await this.commandBus.dispatch(new DeleteMessagesDetailCommand([
+        await this.commandBus.dispatch(new DeleteMessagesDetailCommand([
             {
                 command: Command.WHERE,
                 column: 'tenantId',
@@ -196,8 +196,12 @@ export class CreateSnapshotController
                 column: 'systemId',
                 operator: Operator.EQUALS,
                 value: system.id
+            },
+            {
+                command: Command.LIMIT,
+                value: 150000
             }
-        ])); */
+        ]));
         await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
 
         const channelsDetail = payload.channelsDetail.map(channel => {
@@ -233,6 +237,10 @@ export class CreateSnapshotController
                 column: 'systemId',
                 operator: Operator.EQUALS,
                 value: system.id
+            },
+            {
+                command: Command.LIMIT,
+                value: 150000
             }
         ]));
         await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
@@ -270,6 +278,10 @@ export class CreateSnapshotController
                 column: 'systemId',
                 operator: Operator.EQUALS,
                 value: system.id
+            },
+            {
+                command: Command.LIMIT,
+                value: 150000
             }
         ]));
         await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
