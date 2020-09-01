@@ -68,11 +68,6 @@ export class CreateChannelModuleCatalogController
                 party: channel.party,
                 component: channel.component,
                 name: channel.name,
-                flowHash: Utils.sha1(tenant.code + system.name + (channel.flowParty ? channel.flowParty : '') + channel.flowComponent + channel.flowInterfaceName + channel.flowInterfaceNamespace),
-                flowParty: channel.flowParty,
-                flowComponent: channel.flowComponent,
-                flowInterfaceName: channel.flowInterfaceName,
-                flowInterfaceNamespace: channel.flowInterfaceNamespace,
                 version: channel.version,
                 adapterType: channel.adapterType,
                 direction: channel.direction,
@@ -116,6 +111,8 @@ export class CreateChannelModuleCatalogController
         ));
 
         const modulesCatalog = payload.modules.map(module => {
+
+            
             return {
                 id: uuidv4(),
                 tenantId: tenant.id,

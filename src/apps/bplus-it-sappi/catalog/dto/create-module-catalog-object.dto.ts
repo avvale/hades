@@ -25,34 +25,6 @@ export class CreateModuleCatalogObjectDto
     
     @ApiProperty({
         type        : String,
-        description : 'flowParty [input here api field description]',
-        example     : '6iiugydwjojnu1j4sge2ljs3csbswjpd0urf7562hbxi84nobe7mk49zaq7ck6jd6g5eji58nh6qiivocknzgxznewrmwu4790uwqdrkq694foxrat7janv0bdgel72gzxqs1q1gjmgwkgcvg1cfx0wutnu475cg'
-    })
-    flowParty: string;
-    
-    @ApiProperty({
-        type        : String,
-        description : 'flowComponent [input here api field description]',
-        example     : 'cfdpcfqtcdi5rd3jf4yzdpxt65oumn0zt49yjxsbvrwwdxfmurrenwfsagnmtmh4vzov8sy8dn6ns19tcz9grdkpg7iotn6g21ltsfwvu1o58z82typbzjqqqhblzxi8e5wwjwv4fsefon0p7teqt7cxgei3ylhv'
-    })
-    flowComponent: string;
-    
-    @ApiProperty({
-        type        : String,
-        description : 'flowInterfaceName [input here api field description]',
-        example     : 'mq52fzmmluv58fnexygfgb4p3mfh18jv5rfs6jeyokywudge1d02roddwuejsye5y41lwkvb65gu39narsmzm3k6zfg9x048ywcv0bljo2d7xlu7i4jqoo9slvda4f7gmhuxtziyyfbf09tipw5lyuendjff7abl'
-    })
-    flowInterfaceName: string;
-    
-    @ApiProperty({
-        type        : String,
-        description : 'flowInterfaceNamespace [input here api field description]',
-        example     : '6igl45o17s9s59g1ubhzb5sc6wlht4bl4rxtwjla3meqrtilzf0rvrekxthb1igsuit1xtsqvevgpunwrofte5aolkdsmonajuo0p3qbqx2d7lx5xifuz3645suxo31z3ks87lxwpv93svjfnz6e9tfh2919od5e'
-    })
-    flowInterfaceNamespace: string;
-    
-    @ApiProperty({
-        type        : String,
         description : 'version [input here api field description]',
         example     : '8k4joqyaqu5m1qsg80iu'
     })

@@ -9,6 +9,7 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import { FindTenantQuery } from '@hades/admin/tenant/application/find/find-tenant.query';
 import { FindSystemQuery } from '@hades/bplus-it-sappi/system/application/find/find-system.query';
+import { CreateChannelsCommand } from '@hades/bplus-it-sappi/channel/application/create/create-channels.command';
 import { CreateFlowsCommand } from '@hades/bplus-it-sappi/flow/application/create/create-flows.command';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { CreateFlowCatalogDto } from './../dto/create-flow-catalog.dto';
@@ -54,7 +55,33 @@ export class CreateFlowCatalogController
             ]
         ));
 
+        const channelsCatalog = [];
         const flowsCatalog = payload.flows.map(flow => {
+
+            // register channels with related id and flow, to complete the rest of the data later
+            if (Array.isArray(flow.channels)) 
+            {
+                for (const channel of flow.channels)
+                {
+                    channelsCatalog.push({
+                        id: uuidv4(),
+                        hash: Utils.sha1(tenant.code + system.name + (channel.party ? channel.party : '') + channel.component + channel.name),
+                        tenantId: tenant.id,
+                        tenantCode: tenant.code,
+                        systemId: system.id,
+                        systemName: system.name,
+                        party: channel.party,
+                        component: channel.component,
+                        name: channel.name,
+                        flowHash: Utils.sha1(tenant.code + system.name + (flow.party ? flow.party : '') + flow.component + flow.interfaceName + flow.interfaceNamespace),
+                        flowParty: flow.party,
+                        flowComponent: flow.component,
+                        flowInterfaceName: flow.interfaceName,
+                        flowInterfaceNamespace: flow.interfaceNamespace,
+                    });
+                }
+            }
+
             return {
                 id: uuidv4(),
                 hash: Utils.sha1(tenant.code + system.name + (flow.party ? flow.party : '') + flow.component + flow.interfaceName + flow.interfaceNamespace),
@@ -78,6 +105,7 @@ export class CreateFlowCatalogController
             }
         });
         await this.commandBus.dispatch(new CreateFlowsCommand(flowsCatalog));
+        await this.commandBus.dispatch(new CreateChannelsCommand(channelsCatalog));
         
         return {
             statusCode: 200,

@@ -25,34 +25,6 @@ export class CreateChannelCatalogObjectDto
     
     @ApiProperty({
         type        : String,
-        description : 'flowParty [input here api field description]',
-        example     : 'esm03aizhstbtx7fcq1ddxm90pwx0mpiddb70jut2utv5n5298pf8kcyumd8nbzrtt4a7caopdcvjvcnsswxtwk1aup13mgz3qxtbxbpg809u9tssuhlpn9xhokmtuhhpym8rtxft29w3b8i1bsthgrpp0mqbqi3'
-    })
-    flowParty: string;
-    
-    @ApiProperty({
-        type        : String,
-        description : 'flowComponent [input here api field description]',
-        example     : 'p5fve552i683espshekvypp3fv5pvlms92tz676tqlso9poz0xscxens8qdtie3g1ok0hd24m3eim2zxw8bndfck8rdlkz78gq21d7tlnvzlalqtborcn3yshx2c0p7xqscgy2d3roj0cu128pfdf6kfncna4wcb'
-    })
-    flowComponent: string;
-    
-    @ApiProperty({
-        type        : String,
-        description : 'flowInterfaceName [input here api field description]',
-        example     : 'wfxcl8q1r07orvcke78rxwtjdcaymlnkpc55kin4tmuet2vgygckwrznp6n29sfrnpnhzav37xveijft9xkrjku2it1g5jxsi51l39eq22agfo0zwoh2xbyh11mnwkxeeu3pgz0omgwwnw21ie3nk63nyn09gjk6'
-    })
-    flowInterfaceName: string;
-    
-    @ApiProperty({
-        type        : String,
-        description : 'flowInterfaceNamespace [input here api field description]',
-        example     : '1lledh2ttjr6c4ew03bpgfoe3mom0e5xtlykrzcdaj5wppp9pzn9o95ztjdmnz19pwgrw7qx1wcfl1lgv8r9kbb9y0a8ttc95mlc8b5ik25mzxaj5qi3f3boqnrnhp0fn1rhr6k8m55mu3ndl4zk0c1xxzptet95'
-    })
-    flowInterfaceNamespace: string;
-    
-    @ApiProperty({
-        type        : String,
         description : 'version [input here api field description]',
         example     : 'kqfc7hlgbryxbechna30'
     })
