@@ -203,7 +203,7 @@ export class CreateSnapshotController
             },
             {
                 command: Command.LIMIT,
-                value: 50000
+                value: 20000
             }
         ]));
         await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
@@ -248,7 +248,7 @@ export class CreateSnapshotController
             },
             {
                 command: Command.LIMIT,
-                value: 50000
+                value: 20000
             }
         ]));
         await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
@@ -293,14 +293,14 @@ export class CreateSnapshotController
             },
             {
                 command: Command.LIMIT,
-                value: 50000
+                value: 20000
             }
         ]));
         await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
 
         return {
             statusCode: 200,
-            message: 'Snapshot successfully registered 50000'
+            message: 'Snapshot successfully registered'
         };
     } 
 }
