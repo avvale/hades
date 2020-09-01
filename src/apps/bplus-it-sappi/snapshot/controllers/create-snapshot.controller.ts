@@ -198,8 +198,12 @@ export class CreateSnapshotController
                 value: system.id
             },
             {
+                command: Command.ORDER_BY,
+                column: 'tenantId'
+            },
+            {
                 command: Command.LIMIT,
-                value: 100
+                value: 50000
             }
         ]));
         await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
@@ -239,8 +243,12 @@ export class CreateSnapshotController
                 value: system.id
             },
             {
+                command: Command.ORDER_BY,
+                column: 'tenantId'
+            },
+            {
                 command: Command.LIMIT,
-                value: 100
+                value: 50000
             }
         ]));
         await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
@@ -280,15 +288,19 @@ export class CreateSnapshotController
                 value: system.id
             },
             {
+                command: Command.ORDER_BY,
+                column: 'tenantId'
+            },
+            {
                 command: Command.LIMIT,
-                value: 100
+                value: 50000
             }
         ]));
         await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
 
         return {
             statusCode: 200,
-            message: 'Snapshot successfully registered 100'
+            message: 'Snapshot successfully registered 50000'
         };
     } 
 }
