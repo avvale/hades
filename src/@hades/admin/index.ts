@@ -3,27 +3,31 @@ import { AdminTenantHandlers, AdminTenantServices, AdminTenantModel, ITenantRepo
 import { AdminBoundedContextHandlers, AdminBoundedContextServices, AdminBoundedContextModel, IBoundedContextRepository, SequelizeBoundedContextRepository, BoundedContextSagas } from './bounded-context';
 import { AdminPermissionHandlers, AdminPermissionServices, AdminPermissionModel, IPermissionRepository, SequelizePermissionRepository, PermissionSagas } from './permission';
 import { AdminResourceHandlers, AdminResourceServices, AdminResourceModel, IResourceRepository, SequelizeResourceRepository, ResourceSagas } from './resource';
+import { AdminRoleHandlers, AdminRoleServices, AdminRoleModel, IRoleRepository, SequelizeRoleRepository, RoleSagas } from './role';
 
 export const AdminHandlers = [
     ...AdminLangHandlers,
     ...AdminTenantHandlers,
     ...AdminBoundedContextHandlers,
     ...AdminPermissionHandlers,
-    ...AdminResourceHandlers
+    ...AdminResourceHandlers,
+    ...AdminRoleHandlers
 ];
 export const AdminServices = [
     ...AdminLangServices,
     ...AdminTenantServices,
     ...AdminBoundedContextServices,
     ...AdminPermissionServices,
-    ...AdminResourceServices
+    ...AdminResourceServices,
+    ...AdminRoleServices
 ];
 export const AdminModels = [
     AdminLangModel,
     AdminTenantModel,
     AdminBoundedContextModel,
     AdminPermissionModel,
-    AdminResourceModel
+    AdminResourceModel,
+    AdminRoleModel
 ];
 export const AdminRepositories = [
     {
@@ -45,6 +49,10 @@ export const AdminRepositories = [
     {
         provide: IResourceRepository,
         useClass: SequelizeResourceRepository
+    },
+    {
+        provide: IRoleRepository,
+        useClass: SequelizeRoleRepository
     }
 ];
 export const AdminSagas = [
@@ -52,5 +60,6 @@ export const AdminSagas = [
     TenantSagas,
     BoundedContextSagas,
     PermissionSagas,
-    ResourceSagas
+    ResourceSagas,
+    RoleSagas
 ];

@@ -1,0 +1,45 @@
+
+
+type AdminRole
+{
+    id: ID!
+    name: GraphQLString!
+    isMaster: GraphQLBoolean!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input AdminCreateRoleInput
+{
+    id: ID!
+    name: GraphQLString!
+    isMaster: GraphQLBoolean!
+    
+}
+
+input AdminUpdateRoleInput
+{
+    id: ID!
+    name: GraphQLString
+    isMaster: GraphQLBoolean
+    
+}
+
+type Query 
+{
+    adminFindRole(query:[QueryStatementInput]): AdminRole
+    adminFindRoleById(id:ID): AdminRole
+    adminGetRoles(query:[QueryStatementInput]): [AdminRole]!
+    adminPaginateRoles(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    adminCreateRole(payload: AdminCreateRoleInput!): AdminRole
+    adminCreateRoles(payload: [AdminCreateRoleInput]!): Boolean!
+    adminUpdateRole(payload: AdminUpdateRoleInput!): AdminRole
+    adminDeleteRoleById(id: ID!): AdminRole
+    adminDeleteRoles(query:[QueryStatementInput]): [AdminRole]!
+}

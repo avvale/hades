@@ -96,6 +96,18 @@ export interface AdminUpdateResourceInput {
     hasAttachments?: GraphQLBoolean;
 }
 
+export interface AdminCreateRoleInput {
+    id: string;
+    name: GraphQLString;
+    isMaster: GraphQLBoolean;
+}
+
+export interface AdminUpdateRoleInput {
+    id: string;
+    name?: GraphQLString;
+    isMaster?: GraphQLBoolean;
+}
+
 export interface AdminCreateTenantInput {
     id: string;
     name: GraphQLString;
@@ -149,6 +161,10 @@ export interface IQuery {
     adminFindResourceById(id?: string): AdminResource | Promise<AdminResource>;
     adminGetResources(query?: QueryStatementInput[]): AdminResource[] | Promise<AdminResource[]>;
     adminPaginateResources(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    adminFindRole(query?: QueryStatementInput[]): AdminRole | Promise<AdminRole>;
+    adminFindRoleById(id?: string): AdminRole | Promise<AdminRole>;
+    adminGetRoles(query?: QueryStatementInput[]): AdminRole[] | Promise<AdminRole[]>;
+    adminPaginateRoles(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     adminFindTenant(query?: QueryStatementInput[]): AdminTenant | Promise<AdminTenant>;
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
@@ -176,6 +192,11 @@ export interface IMutation {
     adminUpdateResource(payload: AdminUpdateResourceInput): AdminResource | Promise<AdminResource>;
     adminDeleteResourceById(id: string): AdminResource | Promise<AdminResource>;
     adminDeleteResources(query?: QueryStatementInput[]): AdminResource[] | Promise<AdminResource[]>;
+    adminCreateRole(payload: AdminCreateRoleInput): AdminRole | Promise<AdminRole>;
+    adminCreateRoles(payload: AdminCreateRoleInput[]): boolean | Promise<boolean>;
+    adminUpdateRole(payload: AdminUpdateRoleInput): AdminRole | Promise<AdminRole>;
+    adminDeleteRoleById(id: string): AdminRole | Promise<AdminRole>;
+    adminDeleteRoles(query?: QueryStatementInput[]): AdminRole[] | Promise<AdminRole[]>;
     adminCreateTenant(payload: AdminCreateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminCreateTenants(payload: AdminCreateTenantInput[]): boolean | Promise<boolean>;
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
@@ -212,6 +233,15 @@ export interface AdminResource {
     name: GraphQLString;
     hasCustomFields: GraphQLBoolean;
     hasAttachments: GraphQLBoolean;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface AdminRole {
+    id: string;
+    name: GraphQLString;
+    isMaster: GraphQLBoolean;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
