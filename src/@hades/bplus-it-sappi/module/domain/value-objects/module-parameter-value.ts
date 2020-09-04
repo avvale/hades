@@ -11,7 +11,7 @@ export class ModuleParameterValue extends StringValueObject
             name: 'ModuleParameterValue',
             nullable: true,
             undefinable: true,
-            maxLength: 1024,            
+            maxLength: 2048,            
         }, validationRules));
     }
 }

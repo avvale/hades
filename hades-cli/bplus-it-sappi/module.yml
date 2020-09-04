@@ -88,7 +88,7 @@ aggregateProperties:
     nullable: true
   - name: parameter_value
     type: varchar
-    maxLength: 1024
+    maxLength: 2048
     nullable: true
   - name: created_at
     type: timestamp

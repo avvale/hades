@@ -265,7 +265,7 @@ export class BplusItSappiModuleModel extends Model<BplusItSappiModuleModel>
         field: 'parameter_value',
         
         allowNull: true,
-        type: DataTypes.STRING(1024),
+        type: DataTypes.STRING(2048),
         
     })
     parameterValue: string;

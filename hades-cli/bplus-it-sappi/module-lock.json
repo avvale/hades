@@ -259,11 +259,11 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/infrastructure/seeds/module.seed.ts",
-            "integrity": "sha1:4fe12b22a8372da34e33ac9c8ee4e660ebd050af"
+            "integrity": "sha1:208c3eb896c7faffdb3bf80164055dee08bdf708"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/infrastructure/sequelize/sequelize-module.model.ts",
-            "integrity": "sha1:1ec728b79d99a627926c2ec2bd5b0844d927b762"
+            "integrity": "sha1:1f0dc054ed6be557d93dc1e8464e2bdacc3f3b43"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/infrastructure/sequelize/sequelize-module.repository.ts",
@@ -343,7 +343,7 @@
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-parameter-value.ts",
-            "integrity": "sha1:c91f5085a20a03403259288196ae033ac28ed35d"
+            "integrity": "sha1:105640bfefb4ee472693854dbc28515ecfe8d89b"
         },
         {
             "path": "src/@hades/bplus-it-sappi/module/domain/value-objects/module-created-at.ts",
@@ -431,15 +431,15 @@
         },
         {
             "path": "src/apps/bplus-it-sappi/module/dto/module.dto.ts",
-            "integrity": "sha1:2187931ed2e116d42f8ebeba24df85971fd05310"
+            "integrity": "sha1:184937f91f8fa3d70ff18e3c5ee03334b6433a06"
         },
         {
             "path": "src/apps/bplus-it-sappi/module/dto/create-module.dto.ts",
-            "integrity": "sha1:57d7e8a3fedccdb442cc5318d959719325ff0208"
+            "integrity": "sha1:4c2f86bb7c6a2c1e217b77574aca2dcc8da17cf3"
         },
         {
             "path": "src/apps/bplus-it-sappi/module/dto/update-module.dto.ts",
-            "integrity": "sha1:515d3a8cc361b274a75c4e1799df717e2d4c3de0"
+            "integrity": "sha1:a7424d717a2fb081b70852788f10f02820b3614b"
         },
         {
             "path": "src/apps/bplus-it-sappi/module/graphql/module.graphql",
@@ -523,7 +523,7 @@
         },
         {
             "path": "postman/bplus-it-sappi.module.postman.json",
-            "integrity": "sha1:db8c9b4e66bb48c510bad583d386e24eb62be6a6"
+            "integrity": "sha1:3b06cc9fe7f9716472daf33b95a3c5927b6d1d1b"
         }
     ]
 }
