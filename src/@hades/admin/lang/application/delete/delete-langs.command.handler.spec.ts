@@ -10,7 +10,7 @@ describe('DeleteLangsCommandHandler', () =>
     let commandHandler: DeleteLangsCommandHandler;
     let service: DeleteLangsService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

@@ -11,7 +11,7 @@ describe('UpdateBoundedContextCommandHandler', () =>
     let commandHandler: UpdateBoundedContextCommandHandler;
     let service: UpdateBoundedContextService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

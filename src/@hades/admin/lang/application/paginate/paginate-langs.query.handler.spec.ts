@@ -17,7 +17,7 @@ describe('PaginateLangsQueryHandler', () =>
     let repository: MockLangRepository;
     let mapper: LangMapper;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

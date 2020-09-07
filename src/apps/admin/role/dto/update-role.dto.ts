@@ -6,7 +6,7 @@ export class UpdateRoleDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '40d09675-d86b-4634-a169-6156e4250d5f'
+        example     : 'cebc18b9-d3c4-42bb-8df2-3004d5072344'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateRoleDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'cjn3cuhnvknyfw6oiqcbk2143rjs9d4iwtky0pf1ar3uy8n3p42ypagcyaqh1kd0187m1ia7gxqzxnjr9ko4x69y9yki8prvrf2k6tw9i9mug03xbzrxxs65zny4828m9cnos0w565irnjeqnz1d2k0ydg9veypazl7qdksyvde1iwdg99fppy7r8rnv2gc4y7hitf96o67tyyqj4aevwg93g13dv5f6ffqkfz3r8mghhexdkf6u50qzs95z2tw'
+        example     : 'e1hbglzdvxsbfr20u2uu9g59gll1egzctyq0gozh7nbip7c7vnnt61p1k07grew7lf7ei29s30r0qwhlxxxo776bf8iyk7npdi08chaxz1p4m2dptlx4f3vnbqe9p9pu60zdu7uy442sffqvahxdlucggl4dlsdn5g4ompoxhzt0b6vv6uj57k2tpoq0wi5w505wgbe46qjcl0k274wmy7q278br13xhv2vgtzhpalrgxca560g6aoy94c2yi3s'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class UpdateRoleDto
     @ApiProperty({
         type        : Boolean,
         description : 'isMaster [input here api field description]',
-        example     : false
+        example     : true
     })
     isMaster: boolean;
     

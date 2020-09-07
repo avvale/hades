@@ -1,4 +1,4 @@
-export class CreateBoundedContextsCommand 
+export class CreateBoundedContextsCommand
 {
     constructor(
         public readonly boundedContexts: {

@@ -1,4 +1,4 @@
-export class CreateRolesCommand 
+export class CreateRolesCommand
 {
     constructor(
         public readonly roles: {

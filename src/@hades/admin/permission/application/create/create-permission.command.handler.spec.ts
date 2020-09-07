@@ -11,7 +11,7 @@ describe('CreatePermissionCommandHandler', () =>
     let commandHandler: CreatePermissionCommandHandler;
     let service: CreatePermissionService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

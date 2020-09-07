@@ -11,7 +11,7 @@ describe('DeleteBoundedContextByIdCommandHandler', () =>
     let commandHandler: DeleteBoundedContextByIdCommandHandler;
     let service: DeleteBoundedContextByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

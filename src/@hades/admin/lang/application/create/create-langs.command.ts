@@ -1,4 +1,4 @@
-export class CreateLangsCommand 
+export class CreateLangsCommand
 {
     constructor(
         public readonly langs: {

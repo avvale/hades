@@ -12,7 +12,7 @@ describe('DeleteBoundedContextsService', () =>
     let repository: IBoundedContextRepository;
     let mockRepository: MockBoundedContextRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
