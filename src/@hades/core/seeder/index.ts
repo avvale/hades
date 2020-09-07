@@ -8,19 +8,27 @@ async function bootstrap()
     // @hades directory
     const hadesPath = path.join(__dirname, '../..');
 
+    // read bounded context
     fs.readdirSync(hadesPath).forEach(async file => {
         
         // get stats about the current file
-        const hadesFilePath = path.join(hadesPath, file);
+        const hadesBoundedContextPath = path.join(hadesPath, file);
 
         // get stats about the current file
-        const stats = fs.statSync(hadesFilePath);
+        const stats = fs.statSync(hadesBoundedContextPath);
         
         if (stats.isDirectory() && skipFiles.indexOf(file) === -1)
         {
-            console.log(file);
+            // read modules
+            fs.readdirSync(hadesBoundedContextPath).forEach(async file => {
+                
+                // get stats about the current file
+                const hadesModulePath = path.join(hadesBoundedContextPath, file);
+                
+                console.log(hadesModulePath);
+                
+            });   
         }
-        
     });
 }
 bootstrap();
