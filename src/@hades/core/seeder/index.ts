@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from 'src/app.module';
 
 async function bootstrap() 
 {
@@ -25,10 +27,18 @@ async function bootstrap()
                 // get stats about the current file
                 const hadesModulePath = path.join(hadesBoundedContextPath, file);
                 
-                console.log(hadesModulePath);
+                // read seeds
+                /* fs.readdirSync(hadesBoundedContextPath).forEach(async file => {
+                }); */
                 
             });   
         }
     });
+
+    NestFactory.createApplicationContext(AppModule).then(appContext => {
+
+        
+    });
+
 }
 bootstrap();
