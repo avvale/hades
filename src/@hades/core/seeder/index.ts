@@ -3,6 +3,9 @@ import * as path from 'path';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from 'src/app.module';
 
+// import { CreateLangsCommand } from '@hades/admin/lang/application/create/create-langs.command';
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+
 async function bootstrap() 
 {
     const skipFiles: string[] = ['core', 'shared'];
@@ -36,8 +39,8 @@ async function bootstrap()
     });
 
     NestFactory.createApplicationContext(AppModule).then(appContext => {
+        const commandBus = appContext.get(ICommandBus);
 
-        
     });
 
 }
