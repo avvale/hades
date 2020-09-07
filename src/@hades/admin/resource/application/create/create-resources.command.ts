@@ -1,4 +1,4 @@
-export class CreateResourcesCommand 
+export class CreateResourcesCommand
 {
     constructor(
         public readonly resources: {

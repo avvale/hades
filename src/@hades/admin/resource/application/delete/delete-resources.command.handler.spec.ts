@@ -10,7 +10,7 @@ describe('DeleteResourcesCommandHandler', () =>
     let commandHandler: DeleteResourcesCommandHandler;
     let service: DeleteResourcesService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

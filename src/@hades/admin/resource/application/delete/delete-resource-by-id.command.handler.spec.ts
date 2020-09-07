@@ -11,7 +11,7 @@ describe('DeleteResourceByIdCommandHandler', () =>
     let commandHandler: DeleteResourceByIdCommandHandler;
     let service: DeleteResourceByIdService;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

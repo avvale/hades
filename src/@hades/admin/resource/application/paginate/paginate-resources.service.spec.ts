@@ -13,7 +13,7 @@ describe('PaginateResourcesService', () =>
     let repository: IResourceRepository;
     let mockRepository: MockResourceRepository;
 
-    beforeEach(async () => 
+    beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
