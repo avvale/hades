@@ -30,6 +30,14 @@ export enum Operator {
     NOT_EQUALS = "NOT_EQUALS"
 }
 
+export enum GrantType {
+    authorization_code = "authorization_code",
+    client_credentials = "client_credentials",
+    implicit = "implicit",
+    password = "password",
+    refresh_token = "refresh_token"
+}
+
 export interface AdminCreateBoundedContextInput {
     id: string;
     name: GraphQLString;
@@ -133,6 +141,12 @@ export interface QueryStatementInput {
     value?: Any;
 }
 
+export interface OAuthCreateCredentialInput {
+    username: GraphQLString;
+    password: GraphQLString;
+    grantType: GrantType;
+}
+
 export interface AdminBoundedContext {
     id: string;
     name: GraphQLString;
@@ -169,6 +183,7 @@ export interface IQuery {
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    _empty(): string | Promise<string>;
 }
 
 export interface IMutation {
@@ -202,6 +217,7 @@ export interface IMutation {
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
 }
 
 export interface AdminLang {
@@ -263,6 +279,14 @@ export interface Pagination {
     total: number;
     count: number;
     rows: JSON[];
+}
+
+export interface OAuthCredential {
+    tokenType: string;
+    accessToken: string;
+    refreshToken?: string;
+    expiresIn?: number;
+    scope?: string;
 }
 
 export type JSON = any;
