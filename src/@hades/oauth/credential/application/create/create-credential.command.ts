@@ -1,10 +1,8 @@
 export class CreateCredentialCommand
 {
     constructor(
-        public readonly credential: {
-            username: string,
-            password: string,
-            grantType: string
-        }
+        public readonly username: string,
+        public readonly password: string,
+        public readonly grantType: string,
     ) {}
 }

@@ -1,46 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     CredentialUsername,
-    CredentialPassword
+    CredentialPassword,
+    CredentialGrantType,
 } from './../../domain/value-objects';
-import { ILangRepository } from './../../domain/lang.repository';
-import { AdminLang } from './../../domain/lang.aggregate';
+import { OAuthCredential } from './../../domain/credential.aggregate';
 
 @Injectable()
 export class CreateCredentialService
 {
     constructor(
-        private readonly publisher: EventPublisher,
-        private readonly repository: ILangRepository
+        private readonly publisher: EventPublisher
     ) {}
 
     public async main(
         username: CredentialUsername,
         password: CredentialPassword,
-        
-        
+        grantType: CredentialGrantType
     ): Promise<void>
     {
         // create object with factory pattern
-        const lang = AdminLang.register(
-            name,
+        const credential = OAuthCredential.register(
+            username,
             password,
-            new LangCreatedAt(Utils.nowTimestamp()),
-            new LangUpdatedAt(Utils.nowTimestamp()),
-            null
+            grantType
         );
         
         // create
-        await this.repository.create(lang);
+        // await this.repository.create(credential);
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const langRegister = this.publisher.mergeObjectContext(
-            lang
+        const credentialRegister = this.publisher.mergeObjectContext(
+            credential
         );
         
-        langRegister.created(lang); // apply event to model events
-        langRegister.commit(); // commit all events of model
+        credentialRegister.created(credential); // apply event to model events
+        credentialRegister.commit(); // commit all events of model
     }
 }

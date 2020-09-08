@@ -12,10 +12,14 @@ export class CreateCredentialResolver
         private readonly commandBus: ICommandBus
     ) {}
 
-    @Mutation('oAuthCreateCredentials')
+    @Mutation('oAuthCreateCredential')
     async main(@Args('payload') payload: OAuthCreateCredentialInput)
     {
-        await this.commandBus.dispatch(new CreateCredentialCommand(payload));
+        await this.commandBus.dispatch(new CreateCredentialCommand(
+            payload.username,
+            payload.password,
+            payload.grantType
+        ));
         return true;
     }
 }

@@ -3,13 +3,8 @@ import { CreateCredentialCommand } from './create-credential.command';
 import { CreateCredentialService } from './create-credential.service';
 import { 
     CredentialUsername, 
-    LangImage, 
-    LangIso6392, 
-    LangIso6393, 
-    LangIetf, 
-    LangSort, 
-    LangIsActive
-    
+    CredentialPassword, 
+    CredentialGrantType,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateCredentialCommand)
@@ -23,14 +18,9 @@ export class CreateCredentialCommandHandler implements ICommandHandler<CreateCre
     {
         // call to use case and implements ValueObjects
         await this.createCredentialService.main(
-            new LangName(command.name),
-            new LangImage(command.image),
-            new LangIso6392(command.iso6392),
-            new LangIso6393(command.iso6393),
-            new LangIetf(command.ietf),
-            new LangSort(command.sort),
-            new LangIsActive(command.isActive),
-            
+            new CredentialUsername(command.username),
+            new CredentialPassword(command.password),
+            new CredentialGrantType(command.grantType),
         );
     }
 }

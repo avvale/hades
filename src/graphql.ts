@@ -57,7 +57,7 @@ export interface Pagination {
     rows: JSON[];
 }
 
-export interface OAuthCredentials {
+export interface OAuthCredential {
     tokenType: string;
     accessToken: string;
     refreshToken?: string;
@@ -66,7 +66,7 @@ export interface OAuthCredentials {
 }
 
 export interface IMutation {
-    oAuthCreateCredentials(payload: OAuthCreateCredentialInput): OAuthCredentials | Promise<OAuthCredentials>;
+    oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
 }
 
 export type JSON = any;
