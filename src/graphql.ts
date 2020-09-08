@@ -30,6 +30,14 @@ export enum Operator {
     NOT_EQUALS = "NOT_EQUALS"
 }
 
+export enum GrantType {
+    authorization_code = "authorization_code",
+    client_credentials = "client_credentials",
+    implicit = "implicit",
+    password = "password",
+    refresh_token = "refresh_token"
+}
+
 export interface QueryStatementInput {
     command: Command;
     column?: string;
@@ -37,10 +45,28 @@ export interface QueryStatementInput {
     value?: Any;
 }
 
+export interface OAuthCreateCredentialInput {
+    username: GraphQLString;
+    password: GraphQLString;
+    grantType: GrantType;
+}
+
 export interface Pagination {
     total: number;
     count: number;
     rows: JSON[];
+}
+
+export interface OAuthCredentials {
+    tokenType: string;
+    accessToken: string;
+    refreshToken?: string;
+    expiresIn?: number;
+    scope?: string;
+}
+
+export interface IMutation {
+    oAuthCreateCredentials(payload: OAuthCreateCredentialInput): OAuthCredentials | Promise<OAuthCredentials>;
 }
 
 export type JSON = any;
