@@ -23,7 +23,7 @@ export class CreateCredentialResolver
 
         return {
             token_type: 'bearer',
-            access_token: 'access_token_faker'
+            access_token: 'access_token_faker',
             refresh_token: 'refresh_token_faker',
             expires_in: '',
             scope: ''
