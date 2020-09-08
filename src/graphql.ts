@@ -65,6 +65,10 @@ export interface OAuthCredential {
     scope?: string;
 }
 
+export interface IQuery {
+    _empty(): string | Promise<string>;
+}
+
 export interface IMutation {
     oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
 }
