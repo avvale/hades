@@ -65,12 +65,12 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'w',
-                image: '5',
-                iso6392: 'nt',
-                iso6393: '1tw',
-                ietf: '74ytf',
-                sort: 651055,
+                name: 'z',
+                image: 'y',
+                iso6392: '0r',
+                iso6393: '627',
+                ietf: '7or1y',
+                sort: 271281,
                 isActive: true,
             })
             .expect(400)
@@ -86,12 +86,12 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                name: 'k',
-                image: '2',
-                iso6392: 'jo',
-                iso6393: 'd6n',
-                ietf: 'x2veu',
-                sort: 382882,
+                name: 't',
+                image: 'b',
+                iso6392: 't4',
+                iso6393: '9qx',
+                ietf: 'r4qps',
+                sort: 538486,
                 isActive: true,
             })
             .expect(400)
@@ -106,13 +106,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
                 name: null,
-                image: 'm',
-                iso6392: 't4',
-                iso6393: 'lvt',
-                ietf: 'zbxy0',
-                sort: 393577,
+                image: 'o',
+                iso6392: '9n',
+                iso6393: '6cd',
+                ietf: '5c34x',
+                sort: 808143,
                 isActive: false,
             })
             .expect(400)
@@ -127,14 +127,14 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
                 
-                image: 'b',
-                iso6392: 'b0',
-                iso6393: 'g3o',
-                ietf: '5xstu',
-                sort: 614864,
-                isActive: true,
+                image: 'h',
+                iso6392: '0b',
+                iso6393: '5h4',
+                ietf: 'zkl41',
+                sort: 948147,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -148,14 +148,14 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 'r',
-                image: 'n',
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: '4',
+                image: 'u',
                 iso6392: null,
-                iso6393: '78f',
-                ietf: 'thb4i',
-                sort: 815484,
-                isActive: false,
+                iso6393: 'v2d',
+                ietf: 'tolot',
+                sort: 679648,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -169,13 +169,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 'm',
-                image: '0',
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: 'y',
+                image: 'w',
                 
-                iso6393: '6j1',
-                ietf: '7q49u',
-                sort: 192718,
+                iso6393: 'zsf',
+                ietf: 'bzrv1',
+                sort: 902878,
                 isActive: false,
             })
             .expect(400)
@@ -190,13 +190,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: '4',
-                image: 'q',
-                iso6392: 'w9',
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: 'r',
+                image: '8',
+                iso6392: 'lb',
                 iso6393: null,
-                ietf: 'ihbf9',
-                sort: 237384,
+                ietf: 'drzo5',
+                sort: 376137,
                 isActive: true,
             })
             .expect(400)
@@ -211,13 +211,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: '8',
-                image: '2',
-                iso6392: 'ar',
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: '1',
+                image: 'o',
+                iso6392: 'ao',
                 
-                ietf: 'zoycg',
-                sort: 492840,
+                ietf: 'lf6hn',
+                sort: 357840,
                 isActive: false,
             })
             .expect(400)
@@ -232,13 +232,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 'k',
-                image: 'n',
-                iso6392: 'ry',
-                iso6393: 'zg6',
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: 'a',
+                image: 'b',
+                iso6392: 'n9',
+                iso6393: 'z6i',
                 ietf: null,
-                sort: 846141,
+                sort: 610172,
                 isActive: false,
             })
             .expect(400)
@@ -253,13 +253,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 's',
-                image: 'v',
-                iso6392: 'pd',
-                iso6393: '7my',
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: 'y',
+                image: 'w',
+                iso6392: 'uw',
+                iso6393: 'u4i',
                 
-                sort: 563838,
+                sort: 466722,
                 isActive: false,
             })
             .expect(400)
@@ -274,13 +274,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 'w',
-                image: 'e',
-                iso6392: 'b4',
-                iso6393: '63r',
-                ietf: 'qdzu5',
-                sort: 315207,
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: '5',
+                image: 'q',
+                iso6392: '3u',
+                iso6393: 'qhe',
+                ietf: '2vitw',
+                sort: 450360,
                 isActive: null,
             })
             .expect(400)
@@ -295,13 +295,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 'x',
-                image: 'k',
-                iso6392: 'wz',
-                iso6393: 'vpt',
-                ietf: 'ylmum',
-                sort: 373751,
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: 'v',
+                image: 'r',
+                iso6392: '0q',
+                iso6393: 'ilw',
+                ietf: 'wjcgz',
+                sort: 876854,
                 
             })
             .expect(400)
@@ -318,14 +318,14 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: 'ejnv13dhi2ul76mazi6ygrdqmwnhrp38u4co6',
-                name: 'v',
-                image: 'u',
-                iso6392: 'dm',
-                iso6393: 'abf',
-                ietf: 'tsk1b',
-                sort: 644251,
-                isActive: false,
+                id: 'uze4lafojmyphxj33njmg00ikfimhyxrg3gcr',
+                name: '1',
+                image: '7',
+                iso6392: 'bd',
+                iso6393: '0c9',
+                ietf: 'p4ccp',
+                sort: 979045,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -339,13 +339,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 'z',
-                image: '4',
-                iso6392: '2sf',
-                iso6393: 'd3f',
-                ietf: 'xhhp8',
-                sort: 218243,
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: 'f',
+                image: 'o',
+                iso6392: 'gsi',
+                iso6393: 'u64',
+                ietf: '9fzz7',
+                sort: 542900,
                 isActive: true,
             })
             .expect(400)
@@ -360,14 +360,14 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 'r',
-                image: 'v',
-                iso6392: 't5',
-                iso6393: 'ex47',
-                ietf: 'y16s8',
-                sort: 907510,
-                isActive: true,
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: 'a',
+                image: 'o',
+                iso6392: 'w5',
+                iso6393: 'kiuo',
+                ietf: 'b5mv0',
+                sort: 428855,
+                isActive: false,
             })
             .expect(400)
             .then(res => {
@@ -381,13 +381,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 'z',
-                image: '4',
-                iso6392: 'ng',
-                iso6393: 'fkm',
-                ietf: 'fef8k6',
-                sort: 649324,
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: '8',
+                image: 't',
+                iso6392: 'gf',
+                iso6393: '2nt',
+                ietf: 'v2jua4',
+                sort: 122933,
                 isActive: false,
             })
             .expect(400)
@@ -404,14 +404,14 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: '8',
-                image: 'f',
-                iso6392: 'ad',
-                iso6393: 'bm0',
-                ietf: 'xjv9l',
-                sort: 5212044,
-                isActive: false,
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: 'm',
+                image: 'v',
+                iso6392: '5k',
+                iso6393: 't8w',
+                ietf: 'a2cf4',
+                sort: 9030493,
+                isActive: true,
             })
             .expect(400)
             .then(res => {
@@ -433,13 +433,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 'l',
-                image: 'a',
-                iso6392: 'ly',
-                iso6393: 'g7d',
-                ietf: 'p3glw',
-                sort: 802682,
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: 'v',
+                image: 'g',
+                iso6392: '5i',
+                iso6393: 'j9v',
+                ietf: 'i4fs2',
+                sort: 443841,
                 isActive: 'true',
             })
             .expect(400)
@@ -459,13 +459,13 @@ describe('lang', () =>
             .post('/admin/lang')
             .set('Accept', 'application/json')
             .send({
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: 'x',
-                image: '8',
-                iso6392: 'ao',
-                iso6393: '4j3',
-                ietf: '1j6hc',
-                sort: 737179,
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: 'y',
+                image: '0',
+                iso6392: 'f9',
+                iso6393: 'mw1',
+                ietf: '5t2tt',
+                sort: 388460,
                 isActive: false,
             })
             .expect(201);
@@ -507,7 +507,7 @@ describe('lang', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '8989b3fc-fe18-417c-88b8-3d81aa64c23b'
+                        value   : '90472b23-5fd8-4349-9f2f-f4f0b3f53f69'
                     }
                 ]
             })
@@ -525,18 +525,18 @@ describe('lang', () =>
                         command : Command.WHERE,
                         column  : 'id',
                         operator: Operator.EQUALS,
-                        value   : '4b4ae985-8236-4755-a00a-54ac24af8e1b'
+                        value   : 'e302e6cf-7705-48d3-bf3b-30b6efd01bce'
                     }
                 ]
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '4b4ae985-8236-4755-a00a-54ac24af8e1b'));
+            .expect(repository.collectionResponse.find(item => item.id === 'e302e6cf-7705-48d3-bf3b-30b6efd01bce'));
     });
 
     test(`/REST:GET admin/lang/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/lang/36989ebd-fec3-4b8c-b88c-4f46a8dee46a')
+            .get('/admin/lang/dc03cf6c-9694-4ee1-9ab5-3d1196cefef0')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -544,10 +544,10 @@ describe('lang', () =>
     test(`/REST:GET admin/lang/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/lang/4b4ae985-8236-4755-a00a-54ac24af8e1b')
+            .get('/admin/lang/e302e6cf-7705-48d3-bf3b-30b6efd01bce')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '4b4ae985-8236-4755-a00a-54ac24af8e1b'));
+            .expect(repository.collectionResponse.find(e => e.id === 'e302e6cf-7705-48d3-bf3b-30b6efd01bce'));
     });
 
     test(`/REST:GET admin/langs`, () => 
@@ -566,13 +566,13 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'd0d23d0d-0213-4e07-93ee-35f757fe7499',
-                name: 'n',
-                image: '5',
-                iso6392: 'nu',
-                iso6393: 'ayc',
-                ietf: 'u58vw',
-                sort: 490467,
+                id: '9ca1e065-b27f-49ba-8e7b-34cabfb4cc34',
+                name: 'g',
+                image: '4',
+                iso6392: '0g',
+                iso6393: 'p5d',
+                ietf: 'wkq9y',
+                sort: 704395,
                 isActive: true,
             })
             .expect(404);
@@ -585,23 +585,23 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                name: '2',
-                image: 'x',
-                iso6392: '28',
-                iso6393: '8ua',
-                ietf: 'ni6m5',
-                sort: 884668,
+                id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                name: '7',
+                image: '3',
+                iso6392: 'xz',
+                iso6393: 'vpd',
+                ietf: '2amfg',
+                sort: 277630,
                 isActive: false,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '4b4ae985-8236-4755-a00a-54ac24af8e1b'));
+            .expect(repository.collectionResponse.find(e => e.id === 'e302e6cf-7705-48d3-bf3b-30b6efd01bce'));
     });
 
     test(`/REST:DELETE admin/lang/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/admin/lang/b8aeefa3-5efe-462c-9bef-1a95d6eb94f7')
+            .delete('/admin/lang/0dc0dcaf-f08c-4089-935d-9ddac6eb260f')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -609,7 +609,7 @@ describe('lang', () =>
     test(`/REST:DELETE admin/lang/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/admin/lang/4b4ae985-8236-4755-a00a-54ac24af8e1b')
+            .delete('/admin/lang/e302e6cf-7705-48d3-bf3b-30b6efd01bce')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -676,20 +676,20 @@ describe('lang', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '67d36b89-6b53-4d88-87ad-cd0c652d75e5',
-                        name: 'w',
-                        image: '0',
-                        iso6392: 'e7',
-                        iso6393: 't8b',
-                        ietf: '6phbv',
-                        sort: 602220,
-                        isActive: false,
+                        id: 'a03ebf8c-6ea6-4974-bf7a-6d4218fcf284',
+                        name: '6',
+                        image: 'q',
+                        iso6392: '6x',
+                        iso6393: 'vtf',
+                        ietf: '2qa2z',
+                        sort: 282449,
+                        isActive: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateLang).toHaveProperty('id', '67d36b89-6b53-4d88-87ad-cd0c652d75e5');
+                expect(res.body.data.adminCreateLang).toHaveProperty('id', 'a03ebf8c-6ea6-4974-bf7a-6d4218fcf284');
             });
     });
 
@@ -761,7 +761,7 @@ describe('lang', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '434d1e11-1b85-4c07-b510-02bac6169b1d'
+                            value   : '4df9f6e1-3480-4b32-b06e-69410452c192'
                         }
                     ]
                 }
@@ -804,14 +804,14 @@ describe('lang', () =>
                             command : Command.WHERE,
                             column  : 'id',
                             operator: Operator.EQUALS,
-                            value   : '4b4ae985-8236-4755-a00a-54ac24af8e1b'
+                            value   : 'e302e6cf-7705-48d3-bf3b-30b6efd01bce'
                         }
                     ]
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindLang.id).toStrictEqual('4b4ae985-8236-4755-a00a-54ac24af8e1b');
+                expect(res.body.data.adminFindLang.id).toStrictEqual('e302e6cf-7705-48d3-bf3b-30b6efd01bce');
             });
     });
 
@@ -840,7 +840,7 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '4e1e9b24-4aaf-4a86-b26b-d2932f2836eb'
+                    id: 'bd0b2267-77f6-47a7-972f-3b2016970697'
                 }
             })
             .expect(200)
@@ -876,12 +876,12 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '4b4ae985-8236-4755-a00a-54ac24af8e1b'
+                    id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindLangById.id).toStrictEqual('4b4ae985-8236-4755-a00a-54ac24af8e1b');
+                expect(res.body.data.adminFindLangById.id).toStrictEqual('e302e6cf-7705-48d3-bf3b-30b6efd01bce');
             });
     });
 
@@ -947,14 +947,14 @@ describe('lang', () =>
                 variables: {
                     payload: {
                         
-                        id: 'dd02b08e-baf6-4084-be52-ccd648617a05',
-                        name: 'g',
-                        image: '4',
-                        iso6392: 't2',
-                        iso6393: 'j02',
-                        ietf: 'd2lot',
-                        sort: 387166,
-                        isActive: true,
+                        id: 'bc4ad9d9-81f4-43ad-967d-2eab76b65aef',
+                        name: 'k',
+                        image: '1',
+                        iso6392: '1j',
+                        iso6393: 'kdk',
+                        ietf: '8r39h',
+                        sort: 271897,
+                        isActive: false,
                     }
                 }
             })
@@ -993,20 +993,20 @@ describe('lang', () =>
                 variables: {
                     payload: {
                         
-                        id: '4b4ae985-8236-4755-a00a-54ac24af8e1b',
-                        name: '5',
-                        image: 's',
-                        iso6392: '6h',
-                        iso6393: 'ylf',
-                        ietf: 'qel0l',
-                        sort: 502281,
-                        isActive: false,
+                        id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce',
+                        name: 'i',
+                        image: 'y',
+                        iso6392: 'mn',
+                        iso6393: 'wdb',
+                        ietf: 'v3sd8',
+                        sort: 204166,
+                        isActive: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateLang.id).toStrictEqual('4b4ae985-8236-4755-a00a-54ac24af8e1b');
+                expect(res.body.data.adminUpdateLang.id).toStrictEqual('e302e6cf-7705-48d3-bf3b-30b6efd01bce');
             });
     });
 
@@ -1035,7 +1035,7 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '18ca767a-48ed-4da4-9b68-c211c0422efa'
+                    id: '82dfcd3d-7436-4d33-a28c-2879b45bfc2b'
                 }
             })
             .expect(200)
@@ -1071,12 +1071,12 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '4b4ae985-8236-4755-a00a-54ac24af8e1b'
+                    id: 'e302e6cf-7705-48d3-bf3b-30b6efd01bce'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteLangById.id).toStrictEqual('4b4ae985-8236-4755-a00a-54ac24af8e1b');
+                expect(res.body.data.adminDeleteLangById.id).toStrictEqual('e302e6cf-7705-48d3-bf3b-30b6efd01bce');
             });
     });
 

@@ -7,6 +7,7 @@ import { AdminTenantControllers, AdminTenantResolvers } from './tenant';
 import { AdminBoundedContextControllers, AdminBoundedContextResolvers } from './bounded-context';
 import { AdminPermissionControllers, AdminPermissionResolvers } from './permission';
 import { AdminResourceControllers, AdminResourceResolvers } from './resource';
+import { AdminRoleControllers, AdminRoleResolvers } from './role';
 
 @Module({
     imports: [
@@ -18,7 +19,8 @@ import { AdminResourceControllers, AdminResourceResolvers } from './resource';
         ...AdminTenantControllers,
         ...AdminBoundedContextControllers,
         ...AdminPermissionControllers,
-        ...AdminResourceControllers
+        ...AdminResourceControllers,
+        ...AdminRoleControllers
     ],
     providers: [
         ...AdminHandlers,
@@ -29,7 +31,8 @@ import { AdminResourceControllers, AdminResourceResolvers } from './resource';
         ...AdminTenantResolvers,
         ...AdminBoundedContextResolvers,
         ...AdminPermissionResolvers,
-        ...AdminResourceResolvers
+        ...AdminResourceResolvers,
+        ...AdminRoleResolvers
     ]
 })
 export class AdminModule {}

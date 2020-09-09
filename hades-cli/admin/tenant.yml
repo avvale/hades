@@ -15,6 +15,7 @@ aggregateProperties:
     type: varchar
     maxLength: 50
     nullable: false
+    index: index
   - name: logo
     type: varchar
     nullable: true

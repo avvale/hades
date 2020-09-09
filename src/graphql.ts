@@ -105,6 +105,14 @@ export enum Operator {
     NOT_EQUALS = "NOT_EQUALS"
 }
 
+export enum GrantType {
+    authorization_code = "authorization_code",
+    client_credentials = "client_credentials",
+    implicit = "implicit",
+    password = "password",
+    refresh_token = "refresh_token"
+}
+
 export interface AdminCreateBoundedContextInput {
     id: string;
     name: GraphQLString;
@@ -169,6 +177,18 @@ export interface AdminUpdateResourceInput {
     name?: GraphQLString;
     hasCustomFields?: GraphQLBoolean;
     hasAttachments?: GraphQLBoolean;
+}
+
+export interface AdminCreateRoleInput {
+    id: string;
+    name: GraphQLString;
+    isMaster: GraphQLBoolean;
+}
+
+export interface AdminUpdateRoleInput {
+    id: string;
+    name?: GraphQLString;
+    isMaster?: GraphQLBoolean;
 }
 
 export interface AdminCreateTenantInput {
@@ -748,6 +768,26 @@ export interface QueryStatementInput {
     value?: Any;
 }
 
+export interface OAuthCreateApplicationInput {
+    id: string;
+    code: GraphQLString;
+    secret: GraphQLString;
+    name: GraphQLString;
+}
+
+export interface OAuthUpdateApplicationInput {
+    id: string;
+    code?: GraphQLString;
+    secret?: GraphQLString;
+    name?: GraphQLString;
+}
+
+export interface OAuthCreateCredentialInput {
+    username: GraphQLString;
+    password: GraphQLString;
+    grantType: GrantType;
+}
+
 export interface AdminBoundedContext {
     id: string;
     name: GraphQLString;
@@ -776,10 +816,15 @@ export interface IQuery {
     adminFindResourceById(id?: string): AdminResource | Promise<AdminResource>;
     adminGetResources(query?: QueryStatementInput[]): AdminResource[] | Promise<AdminResource[]>;
     adminPaginateResources(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    adminFindRole(query?: QueryStatementInput[]): AdminRole | Promise<AdminRole>;
+    adminFindRoleById(id?: string): AdminRole | Promise<AdminRole>;
+    adminGetRoles(query?: QueryStatementInput[]): AdminRole[] | Promise<AdminRole[]>;
+    adminPaginateRoles(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     adminFindTenant(query?: QueryStatementInput[]): AdminTenant | Promise<AdminTenant>;
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+<<<<<<< HEAD
     bplusItSappiFindChannelDetail(query?: QueryStatementInput[]): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
     bplusItSappiFindChannelDetailById(id?: string): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
     bplusItSappiGetChannelsDetail(query?: QueryStatementInput[]): BplusItSappiChannelDetail[] | Promise<BplusItSappiChannelDetail[]>;
@@ -836,6 +881,14 @@ export interface IQuery {
     bplusItSappiFindSystemById(id?: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiGetSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
     bplusItSappiPaginateSystems(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+=======
+    oAuthFindApplication(query?: QueryStatementInput[]): OAuthApplication | Promise<OAuthApplication>;
+    oAuthFindApplicationById(id?: string): OAuthApplication | Promise<OAuthApplication>;
+    oAuthGetApplications(query?: QueryStatementInput[]): OAuthApplication[] | Promise<OAuthApplication[]>;
+    oAuthPaginateApplications(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    oAuthFindMe(): JSON | Promise<JSON>;
+    oAuthFindMePermissions(): JSON[] | Promise<JSON[]>;
+>>>>>>> bounded-context/admin
 }
 
 export interface IMutation {
@@ -859,11 +912,17 @@ export interface IMutation {
     adminUpdateResource(payload: AdminUpdateResourceInput): AdminResource | Promise<AdminResource>;
     adminDeleteResourceById(id: string): AdminResource | Promise<AdminResource>;
     adminDeleteResources(query?: QueryStatementInput[]): AdminResource[] | Promise<AdminResource[]>;
+    adminCreateRole(payload: AdminCreateRoleInput): AdminRole | Promise<AdminRole>;
+    adminCreateRoles(payload: AdminCreateRoleInput[]): boolean | Promise<boolean>;
+    adminUpdateRole(payload: AdminUpdateRoleInput): AdminRole | Promise<AdminRole>;
+    adminDeleteRoleById(id: string): AdminRole | Promise<AdminRole>;
+    adminDeleteRoles(query?: QueryStatementInput[]): AdminRole[] | Promise<AdminRole[]>;
     adminCreateTenant(payload: AdminCreateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminCreateTenants(payload: AdminCreateTenantInput[]): boolean | Promise<boolean>;
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+<<<<<<< HEAD
     bplusItSappiCreateChannelDetail(payload: BplusItSappiCreateChannelDetailInput): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
     bplusItSappiCreateChannelsDetail(payload: BplusItSappiCreateChannelDetailInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateChannelDetail(payload: BplusItSappiUpdateChannelDetailInput): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
@@ -934,6 +993,14 @@ export interface IMutation {
     bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiDeleteSystemById(id: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiDeleteSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
+=======
+    oAuthCreateApplication(payload: OAuthCreateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
+    oAuthCreateApplications(payload: OAuthCreateApplicationInput[]): boolean | Promise<boolean>;
+    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
+    oAuthDeleteApplicationById(id: string): OAuthApplication | Promise<OAuthApplication>;
+    oAuthDeleteApplications(query?: QueryStatementInput[]): OAuthApplication[] | Promise<OAuthApplication[]>;
+    oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
+>>>>>>> bounded-context/admin
 }
 
 export interface AdminLang {
@@ -965,6 +1032,15 @@ export interface AdminResource {
     name: GraphQLString;
     hasCustomFields: GraphQLBoolean;
     hasAttachments: GraphQLBoolean;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface AdminRole {
+    id: string;
+    name: GraphQLString;
+    isMaster: GraphQLBoolean;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -1304,6 +1380,24 @@ export interface Pagination {
     total: number;
     count: number;
     rows: JSON[];
+}
+
+export interface OAuthApplication {
+    id: string;
+    code: GraphQLString;
+    secret: GraphQLString;
+    name: GraphQLString;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface OAuthCredential {
+    token_type: GraphQLString;
+    access_token: GraphQLString;
+    refresh_token?: GraphQLString;
+    expires_in?: GraphQLInt;
+    scope?: GraphQLString;
 }
 
 export type JSON = any;

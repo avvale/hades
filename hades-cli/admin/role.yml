@@ -1,0 +1,26 @@
+version: 1.0.0
+boundedContextName: admin
+moduleName: role
+moduleNames: roles
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: is_master
+    type: boolean
+    nullable: false
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

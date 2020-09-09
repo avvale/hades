@@ -1,4 +1,4 @@
-export class CreatePermissionsCommand 
+export class CreatePermissionsCommand
 {
     constructor(
         public readonly permissions: {

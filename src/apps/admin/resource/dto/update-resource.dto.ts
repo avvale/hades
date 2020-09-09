@@ -6,7 +6,7 @@ export class UpdateResourceDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'a06e9d16-bddb-4f2c-b9bd-4dab319949a8'
+        example     : 'ca9c61ea-b7d0-40f5-87ea-6238bd504cfd'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateResourceDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : '6418ef3e-8d2a-4555-a5a0-e1e611036456'
+        example     : 'fd5147f0-8c9a-42fd-9562-1770439a07c6'
     })
     boundedContextId: string;
     
@@ -24,7 +24,7 @@ export class UpdateResourceDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'n3vclmpqzfek4s9y3lg72850e60z5wmdppsmiifwbzpftw4x7wh2zj13ildvtdoo7zgee8ksa2rh8570uoojw79tk8ytog5236ig7hb1nrcwwsqtinzbh5okshv9cuf4midkt1adnlrghzc3xil3dvslpknb9zaey57ax81xxtl7pydzkg69skiseqpm96mkpwljiejczaapvlg4ewqikblx9zcidrx7rv2uvwl72cjy7k4wez6sgnslq3ydlmf'
+        example     : '4xef3tgox5ce9x395tuszve26vtdk12rzjm2dnn75j4l21makqefjwajl24rctmpk66o15i92p9vocz473rrln24bonim6bn5ldfqdenhu7byk2z10y23o3qnbaz5aic8959w0k8m1eol9fp0orn40kgy9lqfrgq6zqdo7x0l34un3cw95mye1cbq3qje1wi682y9hyja76yc7dqll6x6amqhjxytla226lukapx57ei15kulyvjvw1vw1wmr7j'
     })
     name: string;
     
@@ -42,7 +42,7 @@ export class UpdateResourceDto
     @ApiProperty({
         type        : Boolean,
         description : 'hasAttachments [input here api field description]',
-        example     : false
+        example     : true
     })
     hasAttachments: boolean;
     

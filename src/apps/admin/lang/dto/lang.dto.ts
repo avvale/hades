@@ -6,7 +6,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '4b4ae985-8236-4755-a00a-54ac24af8e1b'
+        example     : 'e302e6cf-7705-48d3-bf3b-30b6efd01bce'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'y'
+        example     : '0'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'image [input here api field description]',
-        example     : 'e'
+        example     : 'z'
     })
     image: string;
     
@@ -33,7 +33,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'iso6392 [input here api field description]',
-        example     : 'dx'
+        example     : 'fe'
     })
     iso6392: string;
     
@@ -42,7 +42,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'iso6393 [input here api field description]',
-        example     : 'm81'
+        example     : '8pn'
     })
     iso6393: string;
     
@@ -51,7 +51,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'ietf [input here api field description]',
-        example     : 'vvzkg'
+        example     : 'av0lf'
     })
     ietf: string;
     
@@ -60,7 +60,7 @@ export class LangDto
     @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
-        example     : 730254
+        example     : 136669
     })
     sort: number;
     
@@ -69,7 +69,7 @@ export class LangDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : true
+        example     : false
     })
     isActive: boolean;
     
@@ -78,7 +78,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-08-03 15:20:36'
+        example     : '2020-09-07 16:26:02'
     })
     createdAt: string;
     
@@ -87,7 +87,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-08-03 11:53:29'
+        example     : '2020-09-07 15:31:59'
     })
     updatedAt: string;
     
@@ -96,7 +96,7 @@ export class LangDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-08-03 02:25:44'
+        example     : '2020-09-07 09:31:34'
     })
     deletedAt: string;
     

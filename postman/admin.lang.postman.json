@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "975febda-a483-46c5-b1a5-0d5425748e6e",
+		"_postman_id"   : "bd1bbb70-25ea-4678-a5c5-316f84249db6",
 		"name"          : "@hades - admin/lang",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -14,7 +14,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:AdminCreateLangInput!)\n{\n\tadminCreateLang (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"4b4ae985-8236-4755-a00a-54ac24af8e1b\", \n\t\t\"name\": \"8\", \n\t\t\"image\": \"y\", \n\t\t\"iso6392\": \"9o\", \n\t\t\"iso6393\": \"7vh\", \n\t\t\"ietf\": \"tvl87\", \n\t\t\"sort\": 936259, \n\t\t\"isActive\": false\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"e302e6cf-7705-48d3-bf3b-30b6efd01bce\", \n\t\t\"name\": \"d\", \n\t\t\"image\": \"r\", \n\t\t\"iso6392\": \"a7\", \n\t\t\"iso6393\": \"irh\", \n\t\t\"ietf\": \"2ay95\", \n\t\t\"sort\": 307873, \n\t\t\"isActive\": true\n\t}\n}"
 					}
 				},
 				"url": {
@@ -38,7 +38,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[AdminCreateLangInput]!)\n{\n\tadminCreateLangs (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"54604aed-79d2-4afe-9eea-355381820462\", \n\t\t\t\"name\": \"5\", \n\t\t\t\"image\": \"3\", \n\t\t\t\"iso6392\": \"ns\", \n\t\t\t\"iso6393\": \"svp\", \n\t\t\t\"ietf\": \"yu2g2\", \n\t\t\t\"sort\": 644549, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"29117db3-5c5f-48d7-8b00-48ab994e6a6a\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"image\": \"8\", \n\t\t\t\"iso6392\": \"9o\", \n\t\t\t\"iso6393\": \"5ko\", \n\t\t\t\"ietf\": \"63jr3\", \n\t\t\t\"sort\": 926308, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"360a90f4-2db0-45b1-b2fd-f0bd98335550\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"image\": \"1\", \n\t\t\t\"iso6392\": \"ko\", \n\t\t\t\"iso6393\": \"h4n\", \n\t\t\t\"ietf\": \"9cahi\", \n\t\t\t\"sort\": 954264, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b4cda32f-fe94-4327-8552-e9540198736f\", \n\t\t\t\"name\": \"o\", \n\t\t\t\"image\": \"u\", \n\t\t\t\"iso6392\": \"qp\", \n\t\t\t\"iso6393\": \"gy4\", \n\t\t\t\"ietf\": \"oaxau\", \n\t\t\t\"sort\": 300323, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ac78e91b-4a6d-4f32-8f96-68ba1bba17a6\", \n\t\t\t\"name\": \"6\", \n\t\t\t\"image\": \"f\", \n\t\t\t\"iso6392\": \"mk\", \n\t\t\t\"iso6393\": \"bzf\", \n\t\t\t\"ietf\": \"fh608\", \n\t\t\t\"sort\": 793538, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"703ec3d3-c473-4cd8-a87e-0cd83bab2d14\", \n\t\t\t\"name\": \"8\", \n\t\t\t\"image\": \"f\", \n\t\t\t\"iso6392\": \"yx\", \n\t\t\t\"iso6393\": \"6u2\", \n\t\t\t\"ietf\": \"ptovc\", \n\t\t\t\"sort\": 443124, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"fba5f6cb-566e-44a6-81cb-27ab322c7a04\", \n\t\t\t\"name\": \"p\", \n\t\t\t\"image\": \"t\", \n\t\t\t\"iso6392\": \"ay\", \n\t\t\t\"iso6393\": \"swn\", \n\t\t\t\"ietf\": \"8w6v7\", \n\t\t\t\"sort\": 125960, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6d2ce53c-c44d-4d7b-9db5-fe1ca9f4bf80\", \n\t\t\t\"name\": \"a\", \n\t\t\t\"image\": \"g\", \n\t\t\t\"iso6392\": \"gb\", \n\t\t\t\"iso6393\": \"9o6\", \n\t\t\t\"ietf\": \"13t5u\", \n\t\t\t\"sort\": 879098, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"76b7a391-2582-4fad-bda3-8b314cc6ac3a\", \n\t\t\t\"name\": \"f\", \n\t\t\t\"image\": \"8\", \n\t\t\t\"iso6392\": \"tm\", \n\t\t\t\"iso6393\": \"ngr\", \n\t\t\t\"ietf\": \"d6wy9\", \n\t\t\t\"sort\": 638966, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"89da1845-8f96-4587-acd3-5614e47b0743\", \n\t\t\t\"name\": \"o\", \n\t\t\t\"image\": \"p\", \n\t\t\t\"iso6392\": \"00\", \n\t\t\t\"iso6393\": \"tq6\", \n\t\t\t\"ietf\": \"yyk0s\", \n\t\t\t\"sort\": 708469, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e9bba45e-7a4e-4c5c-8aad-ce7705f31955\", \n\t\t\t\"name\": \"7\", \n\t\t\t\"image\": \"y\", \n\t\t\t\"iso6392\": \"e1\", \n\t\t\t\"iso6393\": \"qmd\", \n\t\t\t\"ietf\": \"yczq7\", \n\t\t\t\"sort\": 939737, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"98e5b8f1-24cc-42e4-8485-8d8575371d55\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"image\": \"w\", \n\t\t\t\"iso6392\": \"yq\", \n\t\t\t\"iso6393\": \"o9n\", \n\t\t\t\"ietf\": \"v83ea\", \n\t\t\t\"sort\": 600140, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a240e4d9-2f80-4595-bc25-fc0fb626ca30\", \n\t\t\t\"name\": \"t\", \n\t\t\t\"image\": \"h\", \n\t\t\t\"iso6392\": \"pb\", \n\t\t\t\"iso6393\": \"chb\", \n\t\t\t\"ietf\": \"qa26l\", \n\t\t\t\"sort\": 678303, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3df33d30-03dc-43e3-9017-717441944722\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"image\": \"w\", \n\t\t\t\"iso6392\": \"es\", \n\t\t\t\"iso6393\": \"wk5\", \n\t\t\t\"ietf\": \"sgkxt\", \n\t\t\t\"sort\": 292341, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e2587efd-b2d8-4754-9b35-9c093c647f21\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"image\": \"v\", \n\t\t\t\"iso6392\": \"40\", \n\t\t\t\"iso6393\": \"drq\", \n\t\t\t\"ietf\": \"gvzaq\", \n\t\t\t\"sort\": 131133, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"db281a68-3d53-4627-b11a-b43ce8fbeeab\", \n\t\t\t\"name\": \"p\", \n\t\t\t\"image\": \"g\", \n\t\t\t\"iso6392\": \"6l\", \n\t\t\t\"iso6393\": \"lx0\", \n\t\t\t\"ietf\": \"ht5hp\", \n\t\t\t\"sort\": 571328, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bd7e4db2-5aa8-4299-b0d8-586500bb5d84\", \n\t\t\t\"name\": \"y\", \n\t\t\t\"image\": \"a\", \n\t\t\t\"iso6392\": \"ld\", \n\t\t\t\"iso6393\": \"eeg\", \n\t\t\t\"ietf\": \"p9b34\", \n\t\t\t\"sort\": 683442, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"99e0a7f5-8d3a-48fe-916b-e9c158ae8512\", \n\t\t\t\"name\": \"1\", \n\t\t\t\"image\": \"m\", \n\t\t\t\"iso6392\": \"8z\", \n\t\t\t\"iso6393\": \"84n\", \n\t\t\t\"ietf\": \"y6jza\", \n\t\t\t\"sort\": 804664, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"faf5b9ea-06f1-473b-8fd9-67bc81c38582\", \n\t\t\t\"name\": \"j\", \n\t\t\t\"image\": \"9\", \n\t\t\t\"iso6392\": \"67\", \n\t\t\t\"iso6393\": \"8ks\", \n\t\t\t\"ietf\": \"2q4yk\", \n\t\t\t\"sort\": 825783, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"40edfeb5-638c-4e06-a1ad-e860a164dc55\", \n\t\t\t\"name\": \"q\", \n\t\t\t\"image\": \"p\", \n\t\t\t\"iso6392\": \"9t\", \n\t\t\t\"iso6393\": \"0ak\", \n\t\t\t\"ietf\": \"1p70f\", \n\t\t\t\"sort\": 420791, \n\t\t\t\"isActive\": true\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"94bae000-bcb9-4dea-8349-a687d951bcdf\", \n\t\t\t\"name\": \"e\", \n\t\t\t\"image\": \"o\", \n\t\t\t\"iso6392\": \"d7\", \n\t\t\t\"iso6393\": \"sot\", \n\t\t\t\"ietf\": \"8l6eg\", \n\t\t\t\"sort\": 959549, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a92986ab-dfe5-49f2-996c-b89778fbc974\", \n\t\t\t\"name\": \"4\", \n\t\t\t\"image\": \"v\", \n\t\t\t\"iso6392\": \"zw\", \n\t\t\t\"iso6393\": \"oe1\", \n\t\t\t\"ietf\": \"vzi8c\", \n\t\t\t\"sort\": 915072, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f686f30e-50ed-4651-adf8-4c6b80edcdd9\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"image\": \"w\", \n\t\t\t\"iso6392\": \"3k\", \n\t\t\t\"iso6393\": \"km7\", \n\t\t\t\"ietf\": \"pp0cr\", \n\t\t\t\"sort\": 866983, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"af1ee48e-96ae-4e20-b9c5-e39697f0f7f0\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"image\": \"d\", \n\t\t\t\"iso6392\": \"px\", \n\t\t\t\"iso6393\": \"zm1\", \n\t\t\t\"ietf\": \"cng6m\", \n\t\t\t\"sort\": 265991, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b1c32cd2-b423-484b-bbc5-35386de83ee8\", \n\t\t\t\"name\": \"6\", \n\t\t\t\"image\": \"x\", \n\t\t\t\"iso6392\": \"qx\", \n\t\t\t\"iso6393\": \"lzm\", \n\t\t\t\"ietf\": \"nc9ni\", \n\t\t\t\"sort\": 446151, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f6f58b20-dc65-46fe-8950-f6301bcedc2a\", \n\t\t\t\"name\": \"j\", \n\t\t\t\"image\": \"u\", \n\t\t\t\"iso6392\": \"kt\", \n\t\t\t\"iso6393\": \"wpo\", \n\t\t\t\"ietf\": \"a7i7e\", \n\t\t\t\"sort\": 479196, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ae1d3be7-4e29-465d-ac3d-36d013bf5d4d\", \n\t\t\t\"name\": \"x\", \n\t\t\t\"image\": \"x\", \n\t\t\t\"iso6392\": \"h3\", \n\t\t\t\"iso6393\": \"m9g\", \n\t\t\t\"ietf\": \"ktpaz\", \n\t\t\t\"sort\": 462065, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4e9453a0-8f0e-4b4e-b2b4-c16dbb9af60a\", \n\t\t\t\"name\": \"m\", \n\t\t\t\"image\": \"o\", \n\t\t\t\"iso6392\": \"il\", \n\t\t\t\"iso6393\": \"ysv\", \n\t\t\t\"ietf\": \"omqsf\", \n\t\t\t\"sort\": 609116, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7d89217c-6b66-415b-af9a-27487325d7c6\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"image\": \"l\", \n\t\t\t\"iso6392\": \"nd\", \n\t\t\t\"iso6393\": \"8tq\", \n\t\t\t\"ietf\": \"uo1tv\", \n\t\t\t\"sort\": 353828, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"27eb3e53-c8cf-4356-a773-10bb1cd6eaf4\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"image\": \"w\", \n\t\t\t\"iso6392\": \"oc\", \n\t\t\t\"iso6393\": \"47k\", \n\t\t\t\"ietf\": \"19zgs\", \n\t\t\t\"sort\": 443629, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b8223efc-5af7-40d1-a4b8-4777dabc2fab\", \n\t\t\t\"name\": \"m\", \n\t\t\t\"image\": \"j\", \n\t\t\t\"iso6392\": \"x5\", \n\t\t\t\"iso6393\": \"nd0\", \n\t\t\t\"ietf\": \"z4rot\", \n\t\t\t\"sort\": 905448, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f7f6fb9d-0b76-455a-9be0-47fbaf087aef\", \n\t\t\t\"name\": \"2\", \n\t\t\t\"image\": \"o\", \n\t\t\t\"iso6392\": \"yn\", \n\t\t\t\"iso6393\": \"e34\", \n\t\t\t\"ietf\": \"wyqo8\", \n\t\t\t\"sort\": 636720, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cba017b0-e5bd-490a-9755-1e19164962f0\", \n\t\t\t\"name\": \"u\", \n\t\t\t\"image\": \"r\", \n\t\t\t\"iso6392\": \"vm\", \n\t\t\t\"iso6393\": \"0jz\", \n\t\t\t\"ietf\": \"zdiux\", \n\t\t\t\"sort\": 287929, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5a0489fb-2a02-4da4-96f6-fbb2e34cd3e9\", \n\t\t\t\"name\": \"o\", \n\t\t\t\"image\": \"k\", \n\t\t\t\"iso6392\": \"pm\", \n\t\t\t\"iso6393\": \"vfi\", \n\t\t\t\"ietf\": \"7uj8l\", \n\t\t\t\"sort\": 674278, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c010eef9-5894-4afa-8150-ed3e6039c39b\", \n\t\t\t\"name\": \"s\", \n\t\t\t\"image\": \"5\", \n\t\t\t\"iso6392\": \"fj\", \n\t\t\t\"iso6393\": \"osd\", \n\t\t\t\"ietf\": \"khig3\", \n\t\t\t\"sort\": 547732, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ebf46d29-8b4f-4257-9ea8-fc05a95f922c\", \n\t\t\t\"name\": \"j\", \n\t\t\t\"image\": \"q\", \n\t\t\t\"iso6392\": \"iy\", \n\t\t\t\"iso6393\": \"oll\", \n\t\t\t\"ietf\": \"dvhx1\", \n\t\t\t\"sort\": 347343, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a02814ba-12fd-4c06-aa8f-f6fb06b386c8\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"image\": \"x\", \n\t\t\t\"iso6392\": \"ny\", \n\t\t\t\"iso6393\": \"oea\", \n\t\t\t\"ietf\": \"fll0l\", \n\t\t\t\"sort\": 360228, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f64da1e5-c1ee-42e3-83b3-ed9a21fd3a3b\", \n\t\t\t\"name\": \"x\", \n\t\t\t\"image\": \"q\", \n\t\t\t\"iso6392\": \"s0\", \n\t\t\t\"iso6393\": \"xax\", \n\t\t\t\"ietf\": \"847y3\", \n\t\t\t\"sort\": 280020, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a84387b1-bcbc-4042-b720-0f9dc91bdf8b\", \n\t\t\t\"name\": \"3\", \n\t\t\t\"image\": \"3\", \n\t\t\t\"iso6392\": \"f7\", \n\t\t\t\"iso6393\": \"3rw\", \n\t\t\t\"ietf\": \"rupt3\", \n\t\t\t\"sort\": 346221, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0c40f9dd-7c18-4e50-87a5-2aa131f7b076\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"image\": \"q\", \n\t\t\t\"iso6392\": \"wf\", \n\t\t\t\"iso6393\": \"elg\", \n\t\t\t\"ietf\": \"8dgjm\", \n\t\t\t\"sort\": 429202, \n\t\t\t\"isActive\": false\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -86,7 +86,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:[QueryStatementInput])\n{\n\tadminGetLangs (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"4b4ae985-8236-4755-a00a-54ac24af8e1b\"\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"e302e6cf-7705-48d3-bf3b-30b6efd01bce\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -110,7 +110,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:[QueryStatementInput])\n{\n\tadminFindLang (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"4b4ae985-8236-4755-a00a-54ac24af8e1b\"\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"e302e6cf-7705-48d3-bf3b-30b6efd01bce\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -134,7 +134,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($id:ID)\n{\n\tadminFindLangById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"4b4ae985-8236-4755-a00a-54ac24af8e1b\"\n}"
+						"variables": "{\n\t\"id\": \"e302e6cf-7705-48d3-bf3b-30b6efd01bce\"\n}"
 					}
 				},
 				"url": {
@@ -158,7 +158,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:AdminUpdateLangInput!)\n{\n\tadminUpdateLang (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"4b4ae985-8236-4755-a00a-54ac24af8e1b\", \n\t\t\"name\": \"2\", \n\t\t\"image\": \"d\", \n\t\t\"iso6392\": \"1s\", \n\t\t\"iso6393\": \"g9h\", \n\t\t\"ietf\": \"zr6m0\", \n\t\t\"sort\": 927839, \n\t\t\"isActive\": false\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"e302e6cf-7705-48d3-bf3b-30b6efd01bce\", \n\t\t\"name\": \"j\", \n\t\t\"image\": \"m\", \n\t\t\"iso6392\": \"4h\", \n\t\t\"iso6393\": \"e6x\", \n\t\t\"ietf\": \"3put4\", \n\t\t\"sort\": 393401, \n\t\t\"isActive\": false\n\t}\n}"
 					}
 				},
 				"url": {
@@ -182,7 +182,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($id:ID!)\n{\n\tadminDeleteLangById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"4b4ae985-8236-4755-a00a-54ac24af8e1b\"\n}"
+						"variables": "{\n\t\"id\": \"e302e6cf-7705-48d3-bf3b-30b6efd01bce\"\n}"
 					}
 				},
 				"url": {
@@ -235,7 +235,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"4b4ae985-8236-4755-a00a-54ac24af8e1b\", \n\t\"name\": \"m\", \n\t\"image\": \"m\", \n\t\"iso6392\": \"7j\", \n\t\"iso6393\": \"1ql\", \n\t\"ietf\": \"alq83\", \n\t\"sort\": 309022, \n\t\"isActive\": false\n}",
+					"raw"   : "{\n\t\"id\": \"e302e6cf-7705-48d3-bf3b-30b6efd01bce\", \n\t\"name\": \"r\", \n\t\"image\": \"c\", \n\t\"iso6392\": \"hc\", \n\t\"iso6393\": \"lue\", \n\t\"ietf\": \"l2o86\", \n\t\"sort\": 168100, \n\t\"isActive\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -269,7 +269,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"83aa039d-4e31-4d70-9a02-6b720b9a98a1\", \n\t\t\"name\": \"h\", \n\t\t\"image\": \"v\", \n\t\t\"iso6392\": \"rb\", \n\t\t\"iso6393\": \"2au\", \n\t\t\"ietf\": \"nfa32\", \n\t\t\"sort\": 380135, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"1efad5d4-8372-4b66-bf0c-4e06821e2998\", \n\t\t\"name\": \"c\", \n\t\t\"image\": \"k\", \n\t\t\"iso6392\": \"ab\", \n\t\t\"iso6393\": \"bb7\", \n\t\t\"ietf\": \"ebbzu\", \n\t\t\"sort\": 300545, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"127994b2-5e43-4c4d-81a4-7ad3de4e0d4c\", \n\t\t\"name\": \"0\", \n\t\t\"image\": \"p\", \n\t\t\"iso6392\": \"44\", \n\t\t\"iso6393\": \"qhr\", \n\t\t\"ietf\": \"9at5i\", \n\t\t\"sort\": 793599, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"c3d5a3ab-d4a4-41b2-9057-4c71a4b0110a\", \n\t\t\"name\": \"u\", \n\t\t\"image\": \"b\", \n\t\t\"iso6392\": \"a3\", \n\t\t\"iso6393\": \"y4i\", \n\t\t\"ietf\": \"ti9ma\", \n\t\t\"sort\": 685145, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"e3010f14-0f3f-4165-93f3-207bba0833a1\", \n\t\t\"name\": \"0\", \n\t\t\"image\": \"6\", \n\t\t\"iso6392\": \"m8\", \n\t\t\"iso6393\": \"z20\", \n\t\t\"ietf\": \"9inrq\", \n\t\t\"sort\": 698394, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"9558141e-4f77-4c23-a70b-bd2b791c1c8c\", \n\t\t\"name\": \"z\", \n\t\t\"image\": \"c\", \n\t\t\"iso6392\": \"bv\", \n\t\t\"iso6393\": \"9dv\", \n\t\t\"ietf\": \"7uhev\", \n\t\t\"sort\": 234375, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"9f836a44-ccc7-4b34-bd84-fb93ec860764\", \n\t\t\"name\": \"5\", \n\t\t\"image\": \"a\", \n\t\t\"iso6392\": \"qc\", \n\t\t\"iso6393\": \"r6x\", \n\t\t\"ietf\": \"goc18\", \n\t\t\"sort\": 157657, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"7e63ada2-5a21-4034-bbf2-74e5576b0b0a\", \n\t\t\"name\": \"2\", \n\t\t\"image\": \"p\", \n\t\t\"iso6392\": \"xf\", \n\t\t\"iso6393\": \"h7d\", \n\t\t\"ietf\": \"b4krr\", \n\t\t\"sort\": 450747, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"86614584-f5be-4336-b7ee-a8e958f6091c\", \n\t\t\"name\": \"c\", \n\t\t\"image\": \"v\", \n\t\t\"iso6392\": \"bt\", \n\t\t\"iso6393\": \"9pq\", \n\t\t\"ietf\": \"th7gq\", \n\t\t\"sort\": 866102, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"dd4a8bce-f605-4dfa-8e0c-f8db4ee5232d\", \n\t\t\"name\": \"y\", \n\t\t\"image\": \"k\", \n\t\t\"iso6392\": \"3j\", \n\t\t\"iso6393\": \"0hk\", \n\t\t\"ietf\": \"0exmn\", \n\t\t\"sort\": 872097, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"30fea8c1-8b59-4fdc-a5d4-02f0002b0d6d\", \n\t\t\"name\": \"z\", \n\t\t\"image\": \"o\", \n\t\t\"iso6392\": \"m6\", \n\t\t\"iso6393\": \"i7d\", \n\t\t\"ietf\": \"k9pm6\", \n\t\t\"sort\": 156870, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"55d70af1-0aee-4bee-ada8-b7d29b790d36\", \n\t\t\"name\": \"d\", \n\t\t\"image\": \"q\", \n\t\t\"iso6392\": \"x8\", \n\t\t\"iso6393\": \"vj2\", \n\t\t\"ietf\": \"sp8wq\", \n\t\t\"sort\": 931789, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"34146632-a4f6-4019-99e6-f861cba42990\", \n\t\t\"name\": \"e\", \n\t\t\"image\": \"i\", \n\t\t\"iso6392\": \"lw\", \n\t\t\"iso6393\": \"xjj\", \n\t\t\"ietf\": \"yq8ds\", \n\t\t\"sort\": 115198, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"67ec45be-fd65-4e4d-bd91-507cf86f886c\", \n\t\t\"name\": \"i\", \n\t\t\"image\": \"c\", \n\t\t\"iso6392\": \"2e\", \n\t\t\"iso6393\": \"g3v\", \n\t\t\"ietf\": \"sifxs\", \n\t\t\"sort\": 275447, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"87efe148-8358-4f44-894f-cedcb7017790\", \n\t\t\"name\": \"9\", \n\t\t\"image\": \"8\", \n\t\t\"iso6392\": \"fh\", \n\t\t\"iso6393\": \"uzq\", \n\t\t\"ietf\": \"pspsk\", \n\t\t\"sort\": 105645, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"a784eaf5-1759-4501-b96f-f90e2be51577\", \n\t\t\"name\": \"u\", \n\t\t\"image\": \"r\", \n\t\t\"iso6392\": \"1a\", \n\t\t\"iso6393\": \"4tm\", \n\t\t\"ietf\": \"i1aqw\", \n\t\t\"sort\": 584198, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"e03690d2-c744-41ed-8503-1e7367660e56\", \n\t\t\"name\": \"2\", \n\t\t\"image\": \"v\", \n\t\t\"iso6392\": \"6e\", \n\t\t\"iso6393\": \"m4a\", \n\t\t\"ietf\": \"kpq1y\", \n\t\t\"sort\": 748085, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"77edf2b0-23ce-454e-8e63-9b358854e1c2\", \n\t\t\"name\": \"t\", \n\t\t\"image\": \"v\", \n\t\t\"iso6392\": \"15\", \n\t\t\"iso6393\": \"na0\", \n\t\t\"ietf\": \"mqm1w\", \n\t\t\"sort\": 508516, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"10ee4e9d-d22a-4a6f-8ef4-6b7eded4d9fa\", \n\t\t\"name\": \"9\", \n\t\t\"image\": \"k\", \n\t\t\"iso6392\": \"qq\", \n\t\t\"iso6393\": \"xsf\", \n\t\t\"ietf\": \"egdod\", \n\t\t\"sort\": 414920, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"65e23467-cd03-4e2f-85f9-cbae55a20b41\", \n\t\t\"name\": \"d\", \n\t\t\"image\": \"v\", \n\t\t\"iso6392\": \"1j\", \n\t\t\"iso6393\": \"aa6\", \n\t\t\"ietf\": \"86t3j\", \n\t\t\"sort\": 513882, \n\t\t\"isActive\": false\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"d156fe11-5885-4c95-acd8-a1bb2a288829\", \n\t\t\"name\": \"v\", \n\t\t\"image\": \"j\", \n\t\t\"iso6392\": \"1j\", \n\t\t\"iso6393\": \"66q\", \n\t\t\"ietf\": \"ozval\", \n\t\t\"sort\": 261620, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"7cace7c9-5912-4cf5-a5a6-3513e0b13be0\", \n\t\t\"name\": \"1\", \n\t\t\"image\": \"0\", \n\t\t\"iso6392\": \"p6\", \n\t\t\"iso6393\": \"bs0\", \n\t\t\"ietf\": \"wgqq2\", \n\t\t\"sort\": 239021, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"77d2c86a-3910-4f27-a727-2c3b348d18de\", \n\t\t\"name\": \"h\", \n\t\t\"image\": \"2\", \n\t\t\"iso6392\": \"65\", \n\t\t\"iso6393\": \"6mg\", \n\t\t\"ietf\": \"plfyz\", \n\t\t\"sort\": 599141, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"7906b31f-7df3-49ce-b2c8-d5d2c85300ec\", \n\t\t\"name\": \"q\", \n\t\t\"image\": \"f\", \n\t\t\"iso6392\": \"cg\", \n\t\t\"iso6393\": \"wha\", \n\t\t\"ietf\": \"95bx2\", \n\t\t\"sort\": 724267, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"6f4f856b-10b9-45df-8a9a-744352b0889d\", \n\t\t\"name\": \"q\", \n\t\t\"image\": \"1\", \n\t\t\"iso6392\": \"sl\", \n\t\t\"iso6393\": \"g57\", \n\t\t\"ietf\": \"nla5z\", \n\t\t\"sort\": 778670, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"d63bfd8e-87d0-405c-bb1b-de066cdba1b0\", \n\t\t\"name\": \"2\", \n\t\t\"image\": \"u\", \n\t\t\"iso6392\": \"al\", \n\t\t\"iso6393\": \"fbk\", \n\t\t\"ietf\": \"nhed1\", \n\t\t\"sort\": 497595, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"236db4bb-3ee3-41e3-a3f7-3c0e292e68a9\", \n\t\t\"name\": \"s\", \n\t\t\"image\": \"s\", \n\t\t\"iso6392\": \"q9\", \n\t\t\"iso6393\": \"1uy\", \n\t\t\"ietf\": \"opl9o\", \n\t\t\"sort\": 620132, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"413ea272-c04f-4304-ab25-8a40a153c0b5\", \n\t\t\"name\": \"g\", \n\t\t\"image\": \"p\", \n\t\t\"iso6392\": \"pl\", \n\t\t\"iso6393\": \"uzm\", \n\t\t\"ietf\": \"toox9\", \n\t\t\"sort\": 375791, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"2786eb42-0cf2-4b3b-9c98-caf3d2be0cbe\", \n\t\t\"name\": \"b\", \n\t\t\"image\": \"o\", \n\t\t\"iso6392\": \"1f\", \n\t\t\"iso6393\": \"kad\", \n\t\t\"ietf\": \"vkeps\", \n\t\t\"sort\": 271198, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"b71dd239-3048-49b8-919a-4a279ca60703\", \n\t\t\"name\": \"y\", \n\t\t\"image\": \"u\", \n\t\t\"iso6392\": \"51\", \n\t\t\"iso6393\": \"a4i\", \n\t\t\"ietf\": \"za68w\", \n\t\t\"sort\": 302496, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"e55130e6-aa87-40d3-9833-3cf62c117a96\", \n\t\t\"name\": \"2\", \n\t\t\"image\": \"p\", \n\t\t\"iso6392\": \"fl\", \n\t\t\"iso6393\": \"6dr\", \n\t\t\"ietf\": \"bzkqu\", \n\t\t\"sort\": 305878, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"2fc46d3e-8447-43d7-9bce-3fe2db77553e\", \n\t\t\"name\": \"d\", \n\t\t\"image\": \"6\", \n\t\t\"iso6392\": \"bt\", \n\t\t\"iso6393\": \"mmw\", \n\t\t\"ietf\": \"d1645\", \n\t\t\"sort\": 504692, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"39a366c3-7284-4991-80c8-1f05d1beed81\", \n\t\t\"name\": \"n\", \n\t\t\"image\": \"a\", \n\t\t\"iso6392\": \"z0\", \n\t\t\"iso6393\": \"mjo\", \n\t\t\"ietf\": \"ma2ev\", \n\t\t\"sort\": 757638, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"addf89e4-f565-4f2b-b038-f8cfb2563e54\", \n\t\t\"name\": \"k\", \n\t\t\"image\": \"i\", \n\t\t\"iso6392\": \"zi\", \n\t\t\"iso6393\": \"gx5\", \n\t\t\"ietf\": \"121wh\", \n\t\t\"sort\": 611380, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"625db3b6-c9b4-4ade-af1a-90015efda50e\", \n\t\t\"name\": \"3\", \n\t\t\"image\": \"g\", \n\t\t\"iso6392\": \"l9\", \n\t\t\"iso6393\": \"f9i\", \n\t\t\"ietf\": \"b6luu\", \n\t\t\"sort\": 800252, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"d266a90d-da74-4956-a922-bba98f1b2a26\", \n\t\t\"name\": \"c\", \n\t\t\"image\": \"y\", \n\t\t\"iso6392\": \"0i\", \n\t\t\"iso6393\": \"kfu\", \n\t\t\"ietf\": \"kh1h3\", \n\t\t\"sort\": 505793, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"67e90dbc-3f27-427d-a983-c253ecc2da57\", \n\t\t\"name\": \"f\", \n\t\t\"image\": \"d\", \n\t\t\"iso6392\": \"f6\", \n\t\t\"iso6393\": \"7wq\", \n\t\t\"ietf\": \"r1jt3\", \n\t\t\"sort\": 407637, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"327ebee4-839c-488f-8667-0c889470e828\", \n\t\t\"name\": \"t\", \n\t\t\"image\": \"8\", \n\t\t\"iso6392\": \"dg\", \n\t\t\"iso6393\": \"wqj\", \n\t\t\"ietf\": \"heieq\", \n\t\t\"sort\": 278561, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"e82daa61-8b54-4a8a-908a-362c8d31b7c7\", \n\t\t\"name\": \"l\", \n\t\t\"image\": \"x\", \n\t\t\"iso6392\": \"t4\", \n\t\t\"iso6393\": \"lub\", \n\t\t\"ietf\": \"2jt2n\", \n\t\t\"sort\": 555163, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"e1d966f7-bf96-414e-b8ed-2070c304bd5a\", \n\t\t\"name\": \"5\", \n\t\t\"image\": \"m\", \n\t\t\"iso6392\": \"tg\", \n\t\t\"iso6393\": \"5p1\", \n\t\t\"ietf\": \"fqdrd\", \n\t\t\"sort\": 629174, \n\t\t\"isActive\": false\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -344,7 +344,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"4b4ae985-8236-4755-a00a-54ac24af8e1b\"\n\t\t}\n\t]\n}",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"e302e6cf-7705-48d3-bf3b-30b6efd01bce\"\n\t\t}\n\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -381,7 +381,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"4b4ae985-8236-4755-a00a-54ac24af8e1b\"\n\t\t}\n\t]\n}",
+					"raw": "{\n\t\"query\":\n\t[\n\t\t{\n\t\t\t\"command\": \"WHERE\",\n\t\t\t\"column\": \"id\",\n\t\t\t\"operator\": \"EQUALS\",\n\t\t\t\"value\": \"e302e6cf-7705-48d3-bf3b-30b6efd01bce\"\n\t\t}\n\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -426,14 +426,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/admin/lang/4b4ae985-8236-4755-a00a-54ac24af8e1b",
+					"raw": "{{URL}}/admin/lang/e302e6cf-7705-48d3-bf3b-30b6efd01bce",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin",
 						"lang",
-						"4b4ae985-8236-4755-a00a-54ac24af8e1b"
+						"e302e6cf-7705-48d3-bf3b-30b6efd01bce"
 					]
 				}
 			},
@@ -453,7 +453,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"4b4ae985-8236-4755-a00a-54ac24af8e1b\", \n\t\"name\": \"c\", \n\t\"image\": \"0\", \n\t\"iso6392\": \"tw\", \n\t\"iso6393\": \"nqd\", \n\t\"ietf\": \"yc7md\", \n\t\"sort\": 300019, \n\t\"isActive\": false\n}",
+					"raw"   : "{\n\t\"id\": \"e302e6cf-7705-48d3-bf3b-30b6efd01bce\", \n\t\"name\": \"a\", \n\t\"image\": \"3\", \n\t\"iso6392\": \"ji\", \n\t\"iso6393\": \"o8y\", \n\t\"ietf\": \"9uyb8\", \n\t\"sort\": 155372, \n\t\"isActive\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -495,14 +495,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/admin/lang/4b4ae985-8236-4755-a00a-54ac24af8e1b",
+					"raw": "{{URL}}/admin/lang/e302e6cf-7705-48d3-bf3b-30b6efd01bce",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin",
 						"lang",
-						"4b4ae985-8236-4755-a00a-54ac24af8e1b"
+						"e302e6cf-7705-48d3-bf3b-30b6efd01bce"
 					]
 				}
 			},
@@ -545,7 +545,7 @@
     ],
     "variable": [
 		{
-			"id": "fabc7383-0c7e-4e77-b8cd-c5db8c0e35df",
+			"id": "b9ec38e5-ca36-4945-bff6-c300f802067c",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"
