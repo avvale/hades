@@ -1,8 +1,7 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query } from '@nestjs/graphql';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { CreateCredentialCommand } from '@hades/oauth/credential/application/create/create-credential.command';
 
 @Resolver()
 export class FindMePermissionsResolver
@@ -11,7 +10,7 @@ export class FindMePermissionsResolver
         private readonly queryBus: IQueryBus
     ) {}
 
-    @Mutation('oAuthFindMePermissions')
+    @Query('oAuthFindMePermissions')
     async main()
     {
         return [
