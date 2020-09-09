@@ -183,7 +183,8 @@ export interface IQuery {
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
-    _empty(): string | Promise<string>;
+    oAuthFindMe(): JSON | Promise<JSON>;
+    oAuthFindMePermissions(): JSON[] | Promise<JSON[]>;
 }
 
 export interface IMutation {
