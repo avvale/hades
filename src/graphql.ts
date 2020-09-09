@@ -45,6 +45,20 @@ export interface QueryStatementInput {
     value?: Any;
 }
 
+export interface OAuthCreateApplicationInput {
+    id: string;
+    code: GraphQLString;
+    secret: GraphQLString;
+    name: GraphQLString;
+}
+
+export interface OAuthUpdateApplicationInput {
+    id: string;
+    code?: GraphQLString;
+    secret?: GraphQLString;
+    name?: GraphQLString;
+}
+
 export interface OAuthCreateCredentialInput {
     username: GraphQLString;
     password: GraphQLString;
@@ -57,20 +71,40 @@ export interface Pagination {
     rows: JSON[];
 }
 
-export interface OAuthCredential {
-    tokenType: string;
-    accessToken: string;
-    refreshToken?: string;
-    expiresIn?: number;
-    scope?: string;
+export interface OAuthApplication {
+    id: string;
+    code: GraphQLString;
+    secret: GraphQLString;
+    name: GraphQLString;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
 }
 
 export interface IQuery {
-    _empty(): string | Promise<string>;
+    oAuthFindApplication(query?: QueryStatementInput[]): OAuthApplication | Promise<OAuthApplication>;
+    oAuthFindApplicationById(id?: string): OAuthApplication | Promise<OAuthApplication>;
+    oAuthGetApplications(query?: QueryStatementInput[]): OAuthApplication[] | Promise<OAuthApplication[]>;
+    oAuthPaginateApplications(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    oAuthFindMe(): JSON | Promise<JSON>;
+    oAuthFindMePermissions(): JSON[] | Promise<JSON[]>;
 }
 
 export interface IMutation {
+    oAuthCreateApplication(payload: OAuthCreateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
+    oAuthCreateApplications(payload: OAuthCreateApplicationInput[]): boolean | Promise<boolean>;
+    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
+    oAuthDeleteApplicationById(id: string): OAuthApplication | Promise<OAuthApplication>;
+    oAuthDeleteApplications(query?: QueryStatementInput[]): OAuthApplication[] | Promise<OAuthApplication[]>;
     oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
+}
+
+export interface OAuthCredential {
+    token_type: GraphQLString;
+    access_token: GraphQLString;
+    refresh_token?: GraphQLString;
+    expires_in?: GraphQLInt;
+    scope?: GraphQLString;
 }
 
 export type JSON = any;
