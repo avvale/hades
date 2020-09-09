@@ -824,7 +824,6 @@ export interface IQuery {
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
-<<<<<<< HEAD
     bplusItSappiFindChannelDetail(query?: QueryStatementInput[]): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
     bplusItSappiFindChannelDetailById(id?: string): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
     bplusItSappiGetChannelsDetail(query?: QueryStatementInput[]): BplusItSappiChannelDetail[] | Promise<BplusItSappiChannelDetail[]>;
@@ -881,14 +880,12 @@ export interface IQuery {
     bplusItSappiFindSystemById(id?: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiGetSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
     bplusItSappiPaginateSystems(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
-=======
     oAuthFindApplication(query?: QueryStatementInput[]): OAuthApplication | Promise<OAuthApplication>;
     oAuthFindApplicationById(id?: string): OAuthApplication | Promise<OAuthApplication>;
     oAuthGetApplications(query?: QueryStatementInput[]): OAuthApplication[] | Promise<OAuthApplication[]>;
     oAuthPaginateApplications(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     oAuthFindMe(): JSON | Promise<JSON>;
     oAuthFindMePermissions(): JSON[] | Promise<JSON[]>;
->>>>>>> bounded-context/admin
 }
 
 export interface IMutation {
@@ -922,7 +919,6 @@ export interface IMutation {
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
-<<<<<<< HEAD
     bplusItSappiCreateChannelDetail(payload: BplusItSappiCreateChannelDetailInput): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
     bplusItSappiCreateChannelsDetail(payload: BplusItSappiCreateChannelDetailInput[]): boolean | Promise<boolean>;
     bplusItSappiUpdateChannelDetail(payload: BplusItSappiUpdateChannelDetailInput): BplusItSappiChannelDetail | Promise<BplusItSappiChannelDetail>;
@@ -993,14 +989,12 @@ export interface IMutation {
     bplusItSappiUpdateSystem(payload: BplusItSappiUpdateSystemInput): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiDeleteSystemById(id: string): BplusItSappiSystem | Promise<BplusItSappiSystem>;
     bplusItSappiDeleteSystems(query?: QueryStatementInput[]): BplusItSappiSystem[] | Promise<BplusItSappiSystem[]>;
-=======
     oAuthCreateApplication(payload: OAuthCreateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
     oAuthCreateApplications(payload: OAuthCreateApplicationInput[]): boolean | Promise<boolean>;
     oAuthUpdateApplication(payload: OAuthUpdateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
     oAuthDeleteApplicationById(id: string): OAuthApplication | Promise<OAuthApplication>;
     oAuthDeleteApplications(query?: QueryStatementInput[]): OAuthApplication[] | Promise<OAuthApplication[]>;
     oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
->>>>>>> bounded-context/admin
 }
 
 export interface AdminLang {
