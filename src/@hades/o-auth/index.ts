@@ -5,7 +5,6 @@ export const OAuthHandlers = [
     ...OAuthApplicationHandlers,
     ...OAuthCredentialHandlers
 ];
-];
 export const OAuthServices = [
     ...OAuthApplicationServices,
     ...OAuthCredentialServices
