@@ -283,11 +283,11 @@ export interface Pagination {
 }
 
 export interface OAuthCredential {
-    token_type: string;
-    access_token: string;
-    refresh_token?: string;
-    expires_in?: number;
-    scope?: string;
+    token_type: GraphQLString;
+    access_token: GraphQLString;
+    refresh_token?: GraphQLString;
+    expires_in?: GraphQLInt;
+    scope?: GraphQLString;
 }
 
 export type JSON = any;
