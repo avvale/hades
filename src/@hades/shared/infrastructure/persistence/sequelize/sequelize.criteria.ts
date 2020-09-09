@@ -36,7 +36,7 @@ export class SequelizeCriteria implements ICriteria
                     break;
 
                 case Command.WHERE:
-                    _.set(queryBuilder, ['where', queryStatement.column, this._operatorMapping(queryStatement.operator)], queryStatement.value);
+                    _.set(queryBuilder, ['where', '$' + queryStatement.column + '$', this._operatorMapping(queryStatement.operator)], queryStatement.value);
                     break;
 
                 case Command.TRUNCATE:
