@@ -17,7 +17,7 @@ export class FindMePermissionsResolver
             {
                 createdAt: null,
                 deletedAt: null,
-                uuid: '03eff917-097a-41db-9401-f73e63fec943',
+                id: '03eff917-097a-41db-9401-f73e63fec943',
                 laravelThroughKey: '78982281-2974-4fac-8bbb-cadbffe0aa27',
                 name: 'admin.permission.role.create',
                 package: {
