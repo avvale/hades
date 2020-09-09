@@ -141,6 +141,20 @@ export interface QueryStatementInput {
     value?: Any;
 }
 
+export interface OAuthCreateApplicationInput {
+    id: string;
+    code: GraphQLString;
+    secret: GraphQLString;
+    name: GraphQLString;
+}
+
+export interface OAuthUpdateApplicationInput {
+    id: string;
+    code?: GraphQLString;
+    secret?: GraphQLString;
+    name?: GraphQLString;
+}
+
 export interface OAuthCreateCredentialInput {
     username: GraphQLString;
     password: GraphQLString;
@@ -183,6 +197,10 @@ export interface IQuery {
     adminFindTenantById(id?: string): AdminTenant | Promise<AdminTenant>;
     adminGetTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
     adminPaginateTenants(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    oAuthFindApplication(query?: QueryStatementInput[]): OAuthApplication | Promise<OAuthApplication>;
+    oAuthFindApplicationById(id?: string): OAuthApplication | Promise<OAuthApplication>;
+    oAuthGetApplications(query?: QueryStatementInput[]): OAuthApplication[] | Promise<OAuthApplication[]>;
+    oAuthPaginateApplications(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
     oAuthFindMe(): JSON | Promise<JSON>;
     oAuthFindMePermissions(): JSON[] | Promise<JSON[]>;
 }
@@ -218,6 +236,11 @@ export interface IMutation {
     adminUpdateTenant(payload: AdminUpdateTenantInput): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenantById(id: string): AdminTenant | Promise<AdminTenant>;
     adminDeleteTenants(query?: QueryStatementInput[]): AdminTenant[] | Promise<AdminTenant[]>;
+    oAuthCreateApplication(payload: OAuthCreateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
+    oAuthCreateApplications(payload: OAuthCreateApplicationInput[]): boolean | Promise<boolean>;
+    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
+    oAuthDeleteApplicationById(id: string): OAuthApplication | Promise<OAuthApplication>;
+    oAuthDeleteApplications(query?: QueryStatementInput[]): OAuthApplication[] | Promise<OAuthApplication[]>;
     oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
 }
 
@@ -280,6 +303,16 @@ export interface Pagination {
     total: number;
     count: number;
     rows: JSON[];
+}
+
+export interface OAuthApplication {
+    id: string;
+    code: GraphQLString;
+    secret: GraphQLString;
+    name: GraphQLString;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
 }
 
 export interface OAuthCredential {
