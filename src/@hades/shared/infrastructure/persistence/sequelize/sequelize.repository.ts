@@ -88,7 +88,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
             }
         );
 
-        if (!entity) throw new NotFoundException(`${this.aggregateName} not found`);
+        if (!entity) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
 
         return <Aggregate>this.mapper.mapObjectToAggregate(entity);
     }
