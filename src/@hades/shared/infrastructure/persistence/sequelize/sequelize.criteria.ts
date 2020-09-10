@@ -36,7 +36,8 @@ export class SequelizeCriteria implements ICriteria
                     break;
 
                 case Command.WHERE:
-                    _.set(queryBuilder, ['where', '$' + queryStatement.column + '$', this._operatorMapping(queryStatement.operator)], queryStatement.value);
+                    const [tableName, columnName] = this.breakDownColumnName(queryStatement.column);
+                    _.set(queryBuilder, ['where', columnName, this._operatorMapping(queryStatement.operator)], queryStatement.value);
                     break;
 
                 case Command.TRUNCATE:
@@ -80,7 +81,8 @@ export class SequelizeCriteria implements ICriteria
                     _.set(queryBuilder, ['offset'], queryStatement.value);
                     break;
                 case Command.ORDER_BY:
-                    _.set(queryBuilder, ['order'], [[queryStatement.column, <'ASC' | 'DESC'>this._operatorMapping(queryStatement.operator, true)]]);
+                    const [tableName, columnName] = this.breakDownColumnName(queryStatement.column);
+                    _.set(queryBuilder, ['order'], [[columnName, <'ASC' | 'DESC'>this._operatorMapping(queryStatement.operator, true)]]);
                     break;
             }
         }
@@ -132,4 +134,8 @@ export class SequelizeCriteria implements ICriteria
         }
     }
 
+    private breakDownColumnName(columnName: string)
+    {
+        return columnName.split('.');
+    }
 }
