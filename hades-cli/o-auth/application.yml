@@ -8,6 +8,10 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
   - name: code
     type: varchar
     maxLength: 20
@@ -16,9 +20,8 @@ aggregateProperties:
     type: varchar
     maxLength: 90
     nullable: false
-  - name: name
-    type: varchar
-    maxLength: 255
+  - name: is_master
+    type: boolean
     nullable: false
   - name: created_at
     type: timestamp
