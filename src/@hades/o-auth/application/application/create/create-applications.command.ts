@@ -3,9 +3,10 @@ export class CreateApplicationsCommand
     constructor(
         public readonly applications: {
             id: string,
+            name: string,
             code: string,
             secret: string,
-            name: string,
+            isMaster: boolean,
             
         } []
     ) {}

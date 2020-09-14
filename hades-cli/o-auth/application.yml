@@ -14,7 +14,7 @@ aggregateProperties:
     nullable: false
   - name: code
     type: varchar
-    maxLength: 20
+    maxLength: 50
     nullable: false
   - name: secret
     type: varchar

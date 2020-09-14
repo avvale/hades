@@ -41,9 +41,10 @@ describe('UpdateApplicationCommandHandler', () =>
             expect(await commandHandler.execute(
                 new UpdateApplicationCommand(
                     applications[0].id,
+                    applications[0].name,
                     applications[0].code,
                     applications[0].secret,
-                    applications[0].name,
+                    applications[0].isMaster,
                     
                 )
             )).toBe(undefined);

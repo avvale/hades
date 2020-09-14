@@ -3,9 +3,10 @@
 type OAuthApplication
 {
     id: ID!
+    name: GraphQLString!
     code: GraphQLString!
     secret: GraphQLString!
-    name: GraphQLString!
+    isMaster: GraphQLBoolean!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -15,18 +16,20 @@ type OAuthApplication
 input OAuthCreateApplicationInput
 {
     id: ID!
+    name: GraphQLString!
     code: GraphQLString!
     secret: GraphQLString!
-    name: GraphQLString!
+    isMaster: GraphQLBoolean!
     
 }
 
 input OAuthUpdateApplicationInput
 {
     id: ID!
+    name: GraphQLString
     code: GraphQLString
     secret: GraphQLString
-    name: GraphQLString
+    isMaster: GraphQLBoolean
     
 }
 

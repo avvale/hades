@@ -11,7 +11,7 @@ export class ApplicationCode extends StringValueObject
             name: 'ApplicationCode',
             nullable: false,
             undefinable: false,
-            maxLength: 20,            
+            maxLength: 50,            
         }, validationRules));
     }
 }

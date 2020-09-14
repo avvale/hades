@@ -25,9 +25,10 @@ export class AddApplicationsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(application => 
                     new CreatedApplicationEvent(
                         application.id.value,
+                        application.name.value,
                         application.code.value,
                         application.secret.value,
-                        application.name.value,
+                        application.isMaster.value,
                         application.createdAt?.value,
                         application.updatedAt?.value,
                         application.deletedAt?.value,
@@ -45,9 +46,10 @@ export class AddApplicationsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(application => 
                     new DeletedApplicationEvent(
                         application.id.value,
+                        application.name.value,
                         application.code.value,
                         application.secret.value,
-                        application.name.value,
+                        application.isMaster.value,
                         application.createdAt?.value,
                         application.updatedAt?.value,
                         application.deletedAt?.value,

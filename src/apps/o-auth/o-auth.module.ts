@@ -4,6 +4,9 @@ import { SharedModule } from './../shared/shared.module';
 import { OAuthModels, OAuthHandlers, OAuthServices, OAuthRepositories, OAuthSagas } from '@hades/o-auth';
 import { OAuthCredentialControllers, OAuthCredentialResolvers } from './credential';
 import { OAuthApplicationControllers, OAuthApplicationResolvers } from './application';
+import { OAuthClientControllers, OAuthClientResolvers } from './client';
+import { OAuthAccessTokenControllers, OAuthAccessTokenResolvers } from './access-token';
+import { OAuthRefreshTokenControllers, OAuthRefreshTokenResolvers } from './refresh-token';
 
 @Module({
     imports: [
@@ -12,7 +15,10 @@ import { OAuthApplicationControllers, OAuthApplicationResolvers } from './applic
     ],
     controllers: [
         ...OAuthCredentialControllers,
-        ...OAuthApplicationControllers
+        ...OAuthApplicationControllers,
+        ...OAuthClientControllers,
+        ...OAuthAccessTokenControllers,
+        ...OAuthRefreshTokenControllers
     ],
     providers: [
         ...OAuthHandlers,
@@ -20,7 +26,10 @@ import { OAuthApplicationControllers, OAuthApplicationResolvers } from './applic
         ...OAuthRepositories,
         ...OAuthSagas,
         ...OAuthCredentialResolvers,
-        ...OAuthApplicationResolvers
+        ...OAuthApplicationResolvers,
+        ...OAuthClientResolvers,
+        ...OAuthAccessTokenResolvers,
+        ...OAuthRefreshTokenResolvers
     ]
 })
 export class OAuthModule {}

@@ -31,7 +31,7 @@ import { DeleteApplicationsService } from './application/delete/delete-applicati
 
 // models
 export { OAuthApplicationModel } from './infrastructure/sequelize/sequelize-application.model';
-
+export { OAuthApplicationsClientsModel } from './infrastructure/sequelize/sequelize-applications-clients.model';
 
 // repository
 export { IApplicationRepository } from './domain/application.repository';

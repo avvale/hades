@@ -6,9 +6,10 @@ import { applications } from '@hades/o-auth/application/infrastructure/seeds/app
 import { CreateApplicationService } from './create-application.service';
 import { 
     ApplicationId, 
+    ApplicationName, 
     ApplicationCode, 
     ApplicationSecret, 
-    ApplicationName
+    ApplicationIsMaster
     
 } from './../../domain/value-objects';
 import { IApplicationRepository } from './../../domain/application.repository';
@@ -54,9 +55,10 @@ describe('CreateApplicationService', () =>
         {
             expect(await service.main(
                 new ApplicationId(applications[0].id),
+                new ApplicationName(applications[0].name),
                 new ApplicationCode(applications[0].code),
                 new ApplicationSecret(applications[0].secret),
-                new ApplicationName(applications[0].name),
+                new ApplicationIsMaster(applications[0].isMaster),
                 
             )).toBe(undefined);
         });

@@ -25,9 +25,10 @@ export class CreateApplicationController
     {
         await this.commandBus.dispatch(new CreateApplicationCommand(
             payload.id,
+            payload.name,
             payload.code,
             payload.secret,
-            payload.name,
+            payload.isMaster,
             
         ));
 

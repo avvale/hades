@@ -3,9 +3,10 @@ import { CreateApplicationCommand } from './create-application.command';
 import { CreateApplicationService } from './create-application.service';
 import { 
     ApplicationId, 
+    ApplicationName, 
     ApplicationCode, 
     ApplicationSecret, 
-    ApplicationName
+    ApplicationIsMaster
     
 } from './../../domain/value-objects';
 
@@ -21,9 +22,10 @@ export class CreateApplicationCommandHandler implements ICommandHandler<CreateAp
         // call to use case and implements ValueObjects
         await this.createApplicationService.main(
             new ApplicationId(command.id),
+            new ApplicationName(command.name),
             new ApplicationCode(command.code),
             new ApplicationSecret(command.secret),
-            new ApplicationName(command.name),
+            new ApplicationIsMaster(command.isMaster),
             
         );
     }

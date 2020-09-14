@@ -1,9 +1,10 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     ApplicationId, 
+    ApplicationName, 
     ApplicationCode, 
     ApplicationSecret, 
-    ApplicationName, 
+    ApplicationIsMaster, 
     ApplicationCreatedAt, 
     ApplicationUpdatedAt, 
     ApplicationDeletedAt
@@ -16,30 +17,32 @@ import { DeletedApplicationEvent } from './../application/events/deleted-applica
 export class OAuthApplication extends AggregateRoot
 {
     id: ApplicationId;
+    name: ApplicationName;
     code: ApplicationCode;
     secret: ApplicationSecret;
-    name: ApplicationName;
+    isMaster: ApplicationIsMaster;
     createdAt: ApplicationCreatedAt;
     updatedAt: ApplicationUpdatedAt;
     deletedAt: ApplicationDeletedAt;
     
-    constructor(id?: ApplicationId, code?: ApplicationCode, secret?: ApplicationSecret, name?: ApplicationName, createdAt?: ApplicationCreatedAt, updatedAt?: ApplicationUpdatedAt, deletedAt?: ApplicationDeletedAt, )
+    constructor(id?: ApplicationId, name?: ApplicationName, code?: ApplicationCode, secret?: ApplicationSecret, isMaster?: ApplicationIsMaster, createdAt?: ApplicationCreatedAt, updatedAt?: ApplicationUpdatedAt, deletedAt?: ApplicationDeletedAt, )
     {
         super();
         
         this.id = id;
+        this.name = name;
         this.code = code;
         this.secret = secret;
-        this.name = name;
+        this.isMaster = isMaster;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
         
     }
 
-    static register (id: ApplicationId, code: ApplicationCode, secret: ApplicationSecret, name: ApplicationName, createdAt: ApplicationCreatedAt, updatedAt: ApplicationUpdatedAt, deletedAt: ApplicationDeletedAt, ): OAuthApplication
+    static register (id: ApplicationId, name: ApplicationName, code: ApplicationCode, secret: ApplicationSecret, isMaster: ApplicationIsMaster, createdAt: ApplicationCreatedAt, updatedAt: ApplicationUpdatedAt, deletedAt: ApplicationDeletedAt, ): OAuthApplication
     {
-        return new OAuthApplication(id, code, secret, name, createdAt, updatedAt, deletedAt, );
+        return new OAuthApplication(id, name, code, secret, isMaster, createdAt, updatedAt, deletedAt, );
     }
 
     created(application: OAuthApplication): void
@@ -47,9 +50,10 @@ export class OAuthApplication extends AggregateRoot
         this.apply(
             new CreatedApplicationEvent(
                 application.id.value,
+                application.name.value,
                 application.code.value,
                 application.secret.value,
-                application.name.value,
+                application.isMaster.value,
                 application.createdAt?.value,
                 application.updatedAt?.value,
                 application.deletedAt?.value,
@@ -63,9 +67,10 @@ export class OAuthApplication extends AggregateRoot
         this.apply(
             new UpdatedApplicationEvent(
                 application.id.value,
+                application.name?.value,
                 application.code?.value,
                 application.secret?.value,
-                application.name?.value,
+                application.isMaster?.value,
                 application.createdAt?.value,
                 application.updatedAt?.value,
                 application.deletedAt?.value,
@@ -79,9 +84,10 @@ export class OAuthApplication extends AggregateRoot
         this.apply(
             new DeletedApplicationEvent(
                 application.id.value,
+                application.name.value,
                 application.code.value,
                 application.secret.value,
-                application.name.value,
+                application.isMaster.value,
                 application.createdAt?.value,
                 application.updatedAt?.value,
                 application.deletedAt?.value,
@@ -94,9 +100,10 @@ export class OAuthApplication extends AggregateRoot
     {
         return {
             id: this.id.value,
+            name: this.name.value,
             code: this.code.value,
             secret: this.secret.value,
-            name: this.name.value,
+            isMaster: this.isMaster.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

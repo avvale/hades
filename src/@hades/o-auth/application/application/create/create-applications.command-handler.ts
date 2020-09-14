@@ -3,9 +3,10 @@ import { CreateApplicationsCommand } from './create-applications.command';
 import { CreateApplicationsService } from './create-applications.service';
 import { 
     ApplicationId, 
+    ApplicationName, 
     ApplicationCode, 
     ApplicationSecret, 
-    ApplicationName
+    ApplicationIsMaster
     
 } from './../../domain/value-objects';
 
@@ -24,9 +25,10 @@ export class CreateApplicationsCommandHandler implements ICommandHandler<CreateA
                 .map(application => { 
                     return {
                         id: new ApplicationId(application.id),
+                        name: new ApplicationName(application.name),
                         code: new ApplicationCode(application.code),
                         secret: new ApplicationSecret(application.secret),
-                        name: new ApplicationName(application.name),
+                        isMaster: new ApplicationIsMaster(application.isMaster),
                         
                     }
                 })

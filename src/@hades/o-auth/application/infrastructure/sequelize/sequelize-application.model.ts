@@ -21,10 +21,23 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     
     
     @Column({
+        field: 'name',
+        
+        allowNull: false,
+        type: DataTypes.STRING(255),
+        
+    })
+    name: string;
+        
+             
+            
+    
+    
+    @Column({
         field: 'code',
         
         allowNull: false,
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(50),
         
     })
     code: string;
@@ -47,13 +60,13 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     
     
     @Column({
-        field: 'name',
+        field: 'is_master',
         
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.BOOLEAN,
         
     })
-    name: string;
+    isMaster: boolean;
         
              
             

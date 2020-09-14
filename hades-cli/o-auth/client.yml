@@ -1,0 +1,59 @@
+version: 1.0.0
+boundedContextName: o-auth
+moduleName: client
+moduleNames: clients
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: grant_type
+    type: enum
+    enumOptions:
+      - AUTHORIZATION_CODE
+      - CLIENT_CREDENTIALS
+      - PASSWORD_GRANT
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: secret
+    type: varchar
+    maxLength: 90
+    nullable: false
+  - name: auth_url
+    type: varchar
+    maxLength: 2048
+    nullable: true
+  - name: redirect
+    type: varchar
+    maxLength: 2048
+    nullable: true
+  - name: resource_codes
+    type: json
+    nullable: false
+  - name: expired_access_token
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: expired_refresh_token
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: is_revoked
+    type: boolean
+    nullable: false
+  - name: is_master
+    type: boolean
+    nullable: false
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

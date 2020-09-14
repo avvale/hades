@@ -3,9 +3,10 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ApplicationId, 
+    ApplicationName, 
     ApplicationCode, 
     ApplicationSecret, 
-    ApplicationName, 
+    ApplicationIsMaster, 
     ApplicationCreatedAt, 
     ApplicationUpdatedAt, 
     ApplicationDeletedAt
@@ -26,9 +27,10 @@ export class CreateApplicationsService
     public async main(
         applications: {
             id: ApplicationId,
+            name: ApplicationName,
             code: ApplicationCode,
             secret: ApplicationSecret,
-            name: ApplicationName,
+            isMaster: ApplicationIsMaster,
             
         } []
     ): Promise<void>
@@ -36,9 +38,10 @@ export class CreateApplicationsService
         // create object with factory pattern
         const aggregateApplications = applications.map(application => OAuthApplication.register(
             application.id,
+            application.name,
             application.code,
             application.secret,
-            application.name,
+            application.isMaster,
             new ApplicationCreatedAt(Utils.nowTimestamp()),
             new ApplicationUpdatedAt(Utils.nowTimestamp()),
             null

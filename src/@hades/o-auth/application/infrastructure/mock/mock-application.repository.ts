@@ -6,9 +6,10 @@ import { QueryStatementInput, Command } from '@hades/shared/domain/persistence/s
 import { IApplicationRepository } from './../../domain/application.repository';
 import { 
     ApplicationId, 
+    ApplicationName, 
     ApplicationCode, 
     ApplicationSecret, 
-    ApplicationName, 
+    ApplicationIsMaster, 
     ApplicationCreatedAt, 
     ApplicationUpdatedAt, 
     ApplicationDeletedAt
@@ -52,9 +53,10 @@ export class MockApplicationRepository implements IApplicationRepository
             
             this.collectionSource.push(OAuthApplication.register(
                     new ApplicationId(itemCollection.id),
+                    new ApplicationName(itemCollection.name),
                     new ApplicationCode(itemCollection.code),
                     new ApplicationSecret(itemCollection.secret),
-                    new ApplicationName(itemCollection.name),
+                    new ApplicationIsMaster(itemCollection.isMaster),
                     new ApplicationCreatedAt(itemCollection.createdAt),
                     new ApplicationUpdatedAt(itemCollection.updatedAt),
                     new ApplicationDeletedAt(itemCollection.deletedAt),

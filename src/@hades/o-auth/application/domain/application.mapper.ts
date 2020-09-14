@@ -4,9 +4,10 @@ import { OAuthApplication } from './application.aggregate';
 import { ApplicationResponse } from './application.response';
 import { 
     ApplicationId, 
+    ApplicationName, 
     ApplicationCode, 
     ApplicationSecret, 
-    ApplicationName, 
+    ApplicationIsMaster, 
     ApplicationCreatedAt, 
     ApplicationUpdatedAt, 
     ApplicationDeletedAt
@@ -55,9 +56,10 @@ export class ApplicationMapper implements IMapper
     {
         return OAuthApplication.register(
             new ApplicationId(application.id),
+            new ApplicationName(application.name),
             new ApplicationCode(application.code),
             new ApplicationSecret(application.secret),
-            new ApplicationName(application.name),
+            new ApplicationIsMaster(application.isMaster),
             new ApplicationCreatedAt(application.createdAt),
             new ApplicationUpdatedAt(application.updatedAt),
             new ApplicationDeletedAt(application.deletedAt),
@@ -69,9 +71,10 @@ export class ApplicationMapper implements IMapper
     {
         return new ApplicationResponse(
             application.id.value,
+            application.name.value,
             application.code.value,
             application.secret.value,
-            application.name.value,
+            application.isMaster.value,
             application.createdAt.value,
             application.updatedAt.value,
             application.deletedAt.value,

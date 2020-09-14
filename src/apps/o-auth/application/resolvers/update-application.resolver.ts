@@ -20,9 +20,10 @@ export class UpdateApplicationResolver
     {
         await this.commandBus.dispatch(new UpdateApplicationCommand(
             payload.id,
+            payload.name,
             payload.code,
             payload.secret,
-            payload.name,
+            payload.isMaster,
             
         ));
         

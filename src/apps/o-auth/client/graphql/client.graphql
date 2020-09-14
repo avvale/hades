@@ -1,0 +1,75 @@
+
+enum OAuthClientGrantType {
+    AUTHORIZATION_CODE
+    CLIENT_CREDENTIALS
+    PASSWORD_GRANT
+        
+}
+
+type OAuthClient
+{
+    id: ID!
+    grantType: OAuthClientGrantType!
+    name: GraphQLString!
+    secret: GraphQLString!
+    authUrl: GraphQLString
+    redirect: GraphQLString
+    resourceCodes: JSON!
+    expiredAccessToken: GraphQLInt
+    expiredRefreshToken: GraphQLInt
+    isRevoked: GraphQLBoolean!
+    isMaster: GraphQLBoolean!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input OAuthCreateClientInput
+{
+    id: ID!
+    grantType: OAuthClientGrantType!
+    name: GraphQLString!
+    secret: GraphQLString!
+    authUrl: GraphQLString
+    redirect: GraphQLString
+    resourceCodes: JSON!
+    expiredAccessToken: GraphQLInt
+    expiredRefreshToken: GraphQLInt
+    isRevoked: GraphQLBoolean!
+    isMaster: GraphQLBoolean!
+    
+}
+
+input OAuthUpdateClientInput
+{
+    id: ID!
+    grantType: OAuthClientGrantType
+    name: GraphQLString
+    secret: GraphQLString
+    authUrl: GraphQLString
+    redirect: GraphQLString
+    resourceCodes: JSON
+    expiredAccessToken: GraphQLInt
+    expiredRefreshToken: GraphQLInt
+    isRevoked: GraphQLBoolean
+    isMaster: GraphQLBoolean
+    
+}
+
+type Query 
+{
+    oAuthFindClient(query:[QueryStatementInput]): OAuthClient
+    oAuthFindClientById(id:ID): OAuthClient
+    oAuthGetClients(query:[QueryStatementInput]): [OAuthClient]!
+    oAuthPaginateClients(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+}
+
+type Mutation
+{
+    oAuthCreateClient(payload: OAuthCreateClientInput!): OAuthClient
+    oAuthCreateClients(payload: [OAuthCreateClientInput]!): Boolean!
+    oAuthUpdateClient(payload: OAuthUpdateClientInput!): OAuthClient
+    oAuthDeleteClientById(id: ID!): OAuthClient
+    oAuthDeleteClients(query:[QueryStatementInput]): [OAuthClient]!
+}

@@ -3,9 +3,10 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     ApplicationId, 
+    ApplicationName, 
     ApplicationCode, 
     ApplicationSecret, 
-    ApplicationName, 
+    ApplicationIsMaster, 
     ApplicationCreatedAt, 
     ApplicationUpdatedAt, 
     ApplicationDeletedAt
@@ -24,18 +25,20 @@ export class CreateApplicationService
 
     public async main(
         id: ApplicationId,
+        name: ApplicationName,
         code: ApplicationCode,
         secret: ApplicationSecret,
-        name: ApplicationName,
+        isMaster: ApplicationIsMaster,
         
     ): Promise<void>
     {
         // create object with factory pattern
         const application = OAuthApplication.register(
             id,
+            name,
             code,
             secret,
-            name,
+            isMaster,
             new ApplicationCreatedAt(Utils.nowTimestamp()),
             new ApplicationUpdatedAt(Utils.nowTimestamp()),
             null
