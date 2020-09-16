@@ -40,7 +40,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
     async create(aggregate: Aggregate): Promise<void>
     {
         // check if exist object in database, if allow save aggregate with the same uuid, update this aggregate in database instead of create it
-        const aggregateInDB = await this.repository.findOne(
+        const modelInDB = await this.repository.findOne(
             {
                 where: {
                     id: aggregate['id']['value']
@@ -48,7 +48,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
             }
         );
         
-        if (aggregateInDB) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${aggregate['id']['value']} already exist in database`);
+        if (modelInDB) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${aggregate['id']['value']} already exist in database`);
         
         try
         {
@@ -60,27 +60,27 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         }
     }
 
-    async insert(entities: Aggregate[], options: object = {}): Promise<void>
+    async insert(aggregates: Aggregate[], options: object = {}): Promise<void>
     {
-        await this.repository.bulkCreate(entities.map(item => item.toDTO()), options);
+        await this.repository.bulkCreate(aggregates.map(item => item.toDTO()), options);
     }
 
     async find(queryStatements: QueryStatementInput[] = []): Promise<Aggregate> 
     {
-        const aggregate = await this.repository.findOne(
+        const model = await this.repository.findOne(
             this.criteria.implements(queryStatements, this.builder())
         );
 
-        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
+        if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
 
         // map value to create value objects
-        return <Aggregate>this.mapper.mapObjectToAggregate(aggregate);
+        return <Aggregate>this.mapper.mapObjectToAggregate(model);
     }
 
     async findById(id: UuidValueObject): Promise<Aggregate>
     {
         // value is already mapped
-        const aggregate = await this.repository.findOne(
+        const model = await this.repository.findOne(
             {
                 where: {
                     id: id.value
@@ -88,25 +88,25 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
             }
         );
 
-        if (!aggregate) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
+        if (!model) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
 
-        return <Aggregate>this.mapper.mapObjectToAggregate(aggregate);
+        return <Aggregate>this.mapper.mapObjectToAggregate(model);
     }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Aggregate[]> 
     {
-        const entities = await this.repository.findAll(
+        const models = await this.repository.findAll(
             this.criteria.implements(queryStatements, this.builder())
         );
 
         // map values to create value objects
-        return <Aggregate[]>this.mapper.mapObjectsToAggregates(entities);
+        return <Aggregate[]>this.mapper.mapObjectsToAggregates(models);
     }
 
     async update(aggregate: Aggregate): Promise<void> 
     { 
-        // check that aggregate exist
-        const aggregateInDB = await this.repository.findOne(
+        // check that model exist
+        const modelInDB = await this.repository.findOne(
             {
                 where: {
                     id: aggregate['id']['value']
@@ -119,13 +119,13 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         // clean undefined fields
         const objectLiteral = this.cleanUndefined(aggregate.toDTO());
 
-        await aggregateInDB.update(objectLiteral);
+        await modelInDB.update(objectLiteral);
     }
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
         // check that aggregate exist
-        const aggregate = await this.repository.findOne(
+        const model = await this.repository.findOne(
             {
                 where: {
                     id: id.value
@@ -133,9 +133,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
             }
         );
 
-        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
+        if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        await aggregate.destroy();
+        await model.destroy();
     }
 
     async delete(queryStatements: QueryStatementInput[] = []): Promise<void> 
