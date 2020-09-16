@@ -36,8 +36,18 @@ export class SequelizeCriteria implements ICriteria
                     break;
 
                 case Command.WHERE:
-                    _.set(queryBuilder, ['where', queryStatement.column, this._operatorMapping(queryStatement.operator)], queryStatement.value);
+                    const [tableName, columnName] = this.breakDownColumnName(queryStatement.column);
+                    _.set(queryBuilder, ['where', columnName, this._operatorMapping(queryStatement.operator)], queryStatement.value);
                     break;
+
+                case Command.TRUNCATE:
+                    _.set(queryBuilder, ['truncate'], true);
+                    break;
+
+                case Command.ATTRIBUTES:
+                    _.set(queryBuilder, ['attributes'], queryStatement.value);
+                    break;
+
 
                 default:
                     throw new BadRequestException(`Command ${queryStatement.command} not allowed, use any of the following commands: WHERE`);
@@ -60,6 +70,8 @@ export class SequelizeCriteria implements ICriteria
             switch(queryStatement.command)
             {
                 case Command.WHERE:
+                case Command.TRUNCATE:
+                case Command.ATTRIBUTES:
                     // avoid execute this commands
                     break;
                 case Command.LIMIT:
@@ -69,7 +81,8 @@ export class SequelizeCriteria implements ICriteria
                     _.set(queryBuilder, ['offset'], queryStatement.value);
                     break;
                 case Command.ORDER_BY:
-                    _.set(queryBuilder, ['order'], [queryStatement.column, <'ASC' | 'DESC'>this._operatorMapping(queryStatement.operator, true)]);
+                    const [tableName, columnName] = this.breakDownColumnName(queryStatement.column);
+                    _.set(queryBuilder, ['order'], [[columnName, <'ASC' | 'DESC'>this._operatorMapping(queryStatement.operator, true)]]);
                     break;
             }
         }
@@ -86,11 +99,9 @@ export class SequelizeCriteria implements ICriteria
     private _operatorMapping(operator: Operator, isOrderByOperator: boolean = false): symbol | string
     {
         // check if is order by operator the operator type
-        if (isOrderByOperator && (operator && operator !== Operator.ASC && operator !== Operator.DESC))
-        {
-            throw new BadRequestException(`For orderBy operation you must define ASC or DESC operator`);
-        }
-        
+        if (isOrderByOperator && !operator) operator = Operator.ASC;
+        if (isOrderByOperator && (operator !== Operator.ASC && operator !== Operator.DESC)) throw new BadRequestException(`For orderBy operation you must define ASC or DESC operator`);
+
         switch(operator)
         {
             case Operator.ASC:
@@ -123,4 +134,8 @@ export class SequelizeCriteria implements ICriteria
         }
     }
 
+    private breakDownColumnName(columnName: string)
+    {
+        return columnName.split('.');
+    }
 }

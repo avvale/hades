@@ -7,13 +7,13 @@ export interface IRepository<Aggregate>
     repository: any;
     
     // paginate records
-    paginate(queryStatements: QueryStatementInput[], constraint: QueryStatementInput[]): Promise<Pagination<Aggregate>>;
+    paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<Aggregate>>;
 
     // create a single record
     create(item: Aggregate): Promise<void>;
 
     // create a single or multiple records
-    insert(items: Aggregate[]): Promise<void>;
+    insert(items: Aggregate[], options: object): Promise<void>;
 
     // find a single record
     find(query: QueryStatementInput[]): Promise<Aggregate | null>;

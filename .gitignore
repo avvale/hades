@@ -1,5 +1,9 @@
+# hades-cli
+*.origin.ts
+
 # compiled output
 /dist
+/tmp
 /node_modules
 .env
 
