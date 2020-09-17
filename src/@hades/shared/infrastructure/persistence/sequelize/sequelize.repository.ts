@@ -75,7 +75,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     async find(queryStatements: QueryStatementInput[] = []): Promise<Aggregate> 
     {
         const model = await this.repository.findOne(
-            this.criteria.implements(queryStatements, this.builder())
+            this.composeStatementFindHook( // call hook
+                this.criteria.implements(queryStatements, this.builder())
+            )
         );
 
         if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
@@ -83,6 +85,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         // map value to create value objects
         return <Aggregate>this.mapper.mapModelToAggregate(model);
     }
+
+    // hook to add findOptions
+    composeStatementFindHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     async findById(id: UuidValueObject): Promise<Aggregate>
     {
