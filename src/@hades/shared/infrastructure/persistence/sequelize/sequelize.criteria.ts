@@ -136,6 +136,8 @@ export class SequelizeCriteria implements ICriteria
 
     private breakDownColumnName(columnName: string)
     {
+        if (columnName.indexOf('.') === -1) return [undefined, columnName];
+        
         return columnName.split('.');
     }
 }

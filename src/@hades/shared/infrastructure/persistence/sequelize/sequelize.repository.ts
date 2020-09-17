@@ -102,18 +102,23 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         return <Aggregate>this.mapper.mapModelToAggregate(model);
     }
 
-    // hook called after update aggregate
+    // hook to add findOptions
     composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Aggregate[]> 
     {
         const models = await this.repository.findAll(
-            this.criteria.implements(queryStatements, this.builder())
+            this.composeStatementGetHook(
+                this.criteria.implements(queryStatements, this.builder())
+            )
         );
 
         // map values to create value objects
         return <Aggregate[]>this.mapper.mapModelsToAggregates(models);
     }
+
+    // hook to add findOptions
+    composeStatementGetHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     async update(aggregate: Aggregate): Promise<void> 
     { 
