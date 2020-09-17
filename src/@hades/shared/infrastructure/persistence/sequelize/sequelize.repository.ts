@@ -1,4 +1,6 @@
 import { ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
+import { FindOptions } from 'sequelize/types';
+import { Model } from 'sequelize-typescript';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IMapper } from '@hades/shared/domain/lib/mapper';
@@ -7,7 +9,7 @@ import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-o
 import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 
-export abstract class SequelizeRepository<Aggregate extends AggregateBase>
+export abstract class SequelizeRepository<Aggregate extends AggregateBase, ModelClass>
 {
     public readonly repository: any;
     public readonly criteria: ICriteria;
@@ -52,13 +54,18 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         
         try
         {
-            await this.repository.create(aggregate.toDTO());
+            const model = await this.repository.create(aggregate.toDTO());
+
+            this.createdAggregateHook(aggregate, model);
         }
         catch (error) 
         {
             throw new ConflictException(error.message);
         }
     }
+
+    // hook called after create aggregate
+    createdAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
 
     async insert(aggregates: Aggregate[], options: object = {}): Promise<void>
     {
@@ -81,17 +88,22 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
     {
         // value is already mapped
         const model = await this.repository.findOne(
-            {
-                where: {
-                    id: id.value
+            this.composeStatementFindByIdHook( // call hook
+                {
+                    where: {
+                        id: id.value
+                    }
                 }
-            }
+            )
         );
 
         if (!model) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
 
         return <Aggregate>this.mapper.mapObjectToAggregate(model);
     }
+
+    // hook called after update aggregate
+    composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     async get(queryStatements: QueryStatementInput[] = []): Promise<Aggregate[]> 
     {
@@ -119,8 +131,13 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         // clean undefined fields
         const objectLiteral = this.cleanUndefined(aggregate.toDTO());
 
-        await modelInDB.update(objectLiteral);
+        const model = await modelInDB.update(objectLiteral);
+
+        this.updatedAggregateHook(aggregate, model);
     }
+
+    // hook called after update aggregate
+    updatedAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
