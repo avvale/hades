@@ -1,5 +1,5 @@
 import { AggregateBase } from "@hades/shared/domain/lib/aggregate-base";
-import { ObjectLiteral } from "@hades/shared/domain/lib/object-literal";
+import { ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 
 export interface IMapper
 {

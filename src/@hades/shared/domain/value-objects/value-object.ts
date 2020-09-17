@@ -1,6 +1,6 @@
 import { BadRequestException } from '@nestjs/common';
 import { IValueObject } from './value-object.interface';
-import { ValidationRules } from './../lib/validation-rules';
+import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
 export abstract class ValueObject<T> implements IValueObject<T>
 {
