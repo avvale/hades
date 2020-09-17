@@ -1,4 +1,4 @@
-import { ObjectLiteral } from './object-literal';
+import { ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 
 export interface AggregateBase
 {

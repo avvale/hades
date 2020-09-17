@@ -4,7 +4,7 @@ import { Model } from 'sequelize-typescript';
 import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
+import { ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
