@@ -35,7 +35,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         return { 
             total, 
             count, 
-            rows: <Aggregate[]>this.mapper.mapObjectsToAggregates(rows) // map values to create value objects
+            rows: <Aggregate[]>this.mapper.mapModelsToAggregates(rows) // map values to create value objects
         };
     }
     
@@ -81,7 +81,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
 
         // map value to create value objects
-        return <Aggregate>this.mapper.mapObjectToAggregate(model);
+        return <Aggregate>this.mapper.mapModelToAggregate(model);
     }
 
     async findById(id: UuidValueObject): Promise<Aggregate>
@@ -99,7 +99,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
 
         if (!model) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
 
-        return <Aggregate>this.mapper.mapObjectToAggregate(model);
+        return <Aggregate>this.mapper.mapModelToAggregate(model);
     }
 
     // hook called after update aggregate
@@ -112,7 +112,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         );
 
         // map values to create value objects
-        return <Aggregate[]>this.mapper.mapObjectsToAggregates(models);
+        return <Aggregate[]>this.mapper.mapModelsToAggregates(models);
     }
 
     async update(aggregate: Aggregate): Promise<void> 
