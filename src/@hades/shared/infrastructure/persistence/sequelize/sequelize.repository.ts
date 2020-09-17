@@ -29,7 +29,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         );
 
         const { count, rows } = await this.repository.findAndCountAll(
-            this.criteria.implements(constraints.concat(queryStatements), this.builder())
+            this.composeStatementPaginateHook(
+                this.criteria.implements(constraints.concat(queryStatements), this.builder())
+            )
         );
 
         return { 
@@ -38,6 +40,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
             rows: <Aggregate[]>this.mapper.mapModelsToAggregates(rows) // map values to create value objects
         };
     }
+
+    // hook to add findOptions
+    composeStatementPaginateHook(findOptions: FindOptions): FindOptions { return findOptions; }
     
     async create(aggregate: Aggregate): Promise<void>
     {
