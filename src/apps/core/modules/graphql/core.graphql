@@ -9,12 +9,10 @@ scalar GraphQLBoolean
 scalar GraphQLISODateTime
 scalar GraphQLTimestamp
 
-union Includeable = String | [String] 
-
 input QueryStatement 
 {
     where: JSON
-    include: Includeable
+    include: [String]
     order: JSON
     limit: Int
     offset: Int
