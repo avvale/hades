@@ -9,42 +9,15 @@ scalar GraphQLBoolean
 scalar GraphQLISODateTime
 scalar GraphQLTimestamp
 
-enum Command
-{
-    COUNT
-    LIMIT
-    OFFSET
-    ORDER_BY
-    WHERE
-}
+union Includeable = String | [String] 
 
-enum Operator 
+input QueryStatement 
 {
-    ASC
-    CONTAINS
-    DESC
-    EQUALS
-    GREATER
-    GREATER_OR_EQ
-    IN
-    IS_NOT_NULL
-    IS_NULL
-    LOWER
-    LOWER_OR_EQ
-    NOT_CONTAINS
-    NOT_EQUALS
-}
-
-input QueryStatementInput 
-{
-    "Command for query statement"
-    command: Command!
-    "Column over execute query statement"
-    column: String
-    "Operator for query statement"
-    operator: Operator
-    "Value for statement"
-    value: Any
+    where: JSON
+    include: Includeable
+    order: JSON
+    limit: Int
+    offset: Int
 }
 
 type Pagination 

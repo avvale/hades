@@ -1,7 +1,7 @@
 import { ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
 import { FindOptions } from 'sequelize/types';
 import { Model } from 'sequelize-typescript';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
@@ -16,21 +16,17 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     public readonly aggregateName: string;
     public readonly mapper: IMapper;
 
-    builder(): Object
-    {
-        return {}
-    }
-
-    async paginate(queryStatements: QueryStatementInput[] = [], constraints: QueryStatementInput[] = []): Promise<Pagination<Aggregate>>
+    async paginate(query: QueryStatement, constraint: QueryStatement): Promise<Pagination<Aggregate>>
     {
         // get count total records from sql service library
         const total = await this.repository.count(
-            this.criteria.implements(constraints, this.builder())
+            this.criteria.implements(constraint)
         );
 
+        // get records
         const { count, rows } = await this.repository.findAndCountAll(
-            this.composeStatementPaginateHook(
-                this.criteria.implements(constraints.concat(queryStatements), this.builder())
+            this.criteria.implements(
+                this.composeStatementPaginateHook(query)
             )
         );
 
@@ -42,8 +38,62 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementPaginateHook(findOptions: FindOptions): FindOptions { return findOptions; }
-    
+    composeStatementPaginateHook(query: QueryStatement): QueryStatement { return query; }
+
+    async find(query: QueryStatement): Promise<Aggregate> 
+    {
+        const model = await this.repository.findOne(
+            this.criteria.implements(
+                this.composeStatementFindHook(query)
+            )
+        );
+
+        if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
+
+        // map value to create value objects
+        return <Aggregate>this.mapper.mapModelToAggregate(model);
+    }
+
+    // hook to add findOptions
+    composeStatementFindHook(query: QueryStatement): QueryStatement { return query; }
+
+    async findById(id: UuidValueObject): Promise<Aggregate>
+    {
+        // value is already mapped
+        const model = await this.repository.findOne(
+            this.criteria.implements(
+                this.composeStatementFindByIdHook({ where: { id: id.value }})
+            )
+        );
+
+        if (!model) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
+
+        return <Aggregate>this.mapper.mapModelToAggregate(model);
+    }
+
+    // hook to add findOptions
+    composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
+
+    // get multiple records
+    async get(query: QueryStatement): Promise<Aggregate[]> 
+    {
+        const models = await this.repository.findAll(
+            this.criteria.implements(
+                this.composeStatementGetHook(query)
+            )
+        );
+
+        // map values to create value objects
+        return <Aggregate[]>this.mapper.mapModelsToAggregates(models);
+    }
+
+    // hook to add findOptions
+    composeStatementGetHook(query: QueryStatement): QueryStatement { return query; }
+
+    // ******************
+    // ** side effects **
+    // ******************
+
     async create(aggregate: Aggregate): Promise<void>
     {
         // check if exist object in database, if allow save aggregate with the same uuid, update this aggregate in database instead of create it
@@ -76,59 +126,6 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     {
         await this.repository.bulkCreate(aggregates.map(item => item.toDTO()), options);
     }
-
-    async find(queryStatements: QueryStatementInput[] = []): Promise<Aggregate> 
-    {
-        const model = await this.repository.findOne(
-            this.composeStatementFindHook( // call hook
-                this.criteria.implements(queryStatements, this.builder())
-            )
-        );
-
-        if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
-
-        // map value to create value objects
-        return <Aggregate>this.mapper.mapModelToAggregate(model);
-    }
-
-    // hook to add findOptions
-    composeStatementFindHook(findOptions: FindOptions): FindOptions { return findOptions; }
-
-    async findById(id: UuidValueObject): Promise<Aggregate>
-    {
-        // value is already mapped
-        const model = await this.repository.findOne(
-            this.composeStatementFindByIdHook( // call hook
-                {
-                    where: {
-                        id: id.value
-                    }
-                }
-            )
-        );
-
-        if (!model) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
-
-        return <Aggregate>this.mapper.mapModelToAggregate(model);
-    }
-
-    // hook to add findOptions
-    composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
-
-    async get(queryStatements: QueryStatementInput[] = []): Promise<Aggregate[]> 
-    {
-        const models = await this.repository.findAll(
-            this.composeStatementGetHook(
-                this.criteria.implements(queryStatements, this.builder())
-            )
-        );
-
-        // map values to create value objects
-        return <Aggregate[]>this.mapper.mapModelsToAggregates(models);
-    }
-
-    // hook to add findOptions
-    composeStatementGetHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     async update(aggregate: Aggregate): Promise<void> 
     { 
@@ -170,13 +167,13 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         await model.destroy();
     }
 
-    async delete(queryStatements: QueryStatementInput[] = []): Promise<void> 
+    async delete(query: QueryStatement): Promise<void> 
     {
-        if (!Array.isArray(queryStatements) || queryStatements.length === 0) throw new BadRequestException(`To delete multiple records, you must define a query statement`);
+        if (!query.where) throw new BadRequestException(`To delete multiple records, you must define a where statement`);
 
         // check that aggregate exist
         await this.repository.destroy(
-            this.criteria.implements(queryStatements, this.builder())
+            this.criteria.implements(query)
         );
     }
 
