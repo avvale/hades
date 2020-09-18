@@ -27,4 +27,20 @@ export class Utils
     {
         return Buffer.from(data, 'base64').toString('utf-8')
     }
+
+    // map deeply object keys 
+    public static deepMapKeys(obj, fn): Object
+    {
+        return Array.isArray(obj)
+            ? obj.map(val => Utils.deepMapKeys(val, fn))
+            : typeof obj === 'object'
+                ? Object.keys(obj).reduce((acc, current) => {
+                    const key = fn(current);
+                    const val = obj[current];
+                    acc[key] =
+                        val !== null && typeof val === 'object' ? Utils.deepMapKeys(val, fn) : val;
+                    return acc;
+                }, {})
+                : obj;   
+    }
 }
