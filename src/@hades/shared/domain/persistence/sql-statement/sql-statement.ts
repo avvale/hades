@@ -52,16 +52,13 @@ export interface IndexHint
     values: string[];
 }
 
-export interface Filterable 
+export class QueryStatement
 {
     /**
      * Attribute has to be matched for rows to be selected for the given action.
      */
     where?: any;
-}
-
-export interface Projectable 
-{
+    
     /**
      * A list of the attributes that you want to select. To rename an attribute, you can pass an array, with
      * two elements - the first is the name of the attribute in the DB (or some kind of expression such as
@@ -69,16 +66,7 @@ export interface Projectable
      * have in the returned instance
      */
     attributes?: any;
-}
 
-// MySQL only.
-export interface IndexHintable 
-{    
-    indexHints?: IndexHint[];
-}
-
-export interface QueryStatement extends Filterable, Projectable, IndexHintable
-{
     /**
      * A list of associations to eagerly load using a left join (a single association is also supported). Supported is either
      * `{ include: Model1 }`, `{ include: [ Model1, Model2, ...]}`, `{ include: [{ model: Model1, as: 'Alias' }]}` or
@@ -137,6 +125,11 @@ export interface QueryStatement extends Filterable, Projectable, IndexHintable
      * Use sub queries (internal)
      */
     subQuery?: boolean;
+
+    /**
+     * MySQL only
+     */
+    indexHints?: IndexHint[];
 }
 
 
