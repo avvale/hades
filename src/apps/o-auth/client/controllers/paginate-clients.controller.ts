@@ -5,7 +5,7 @@ import { ClientDto } from './../dto/client.dto';
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginateClientsQuery } from '@hades/o-auth/client/application/paginate/paginate-clients.query';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 
 @ApiTags('[o-auth] client')
@@ -19,10 +19,10 @@ export class PaginateClientsController
     @Get()
     @ApiOperation({ summary: 'Paginate clients' })
     @ApiOkResponse({ description: 'The records has been paginated successfully.', type: Pagination })
-    @ApiQuery({ name: 'queryStatements', type: [QueryStatementInput] })
-    @ApiQuery({ name: 'constraint', type: [QueryStatementInput] })
-    async main(@Body('query') queryStatements: QueryStatementInput[], @Body('constraint') constraint: QueryStatementInput[])
+    @ApiQuery({ name: 'queryStatement', type: QueryStatement })
+    @ApiQuery({ name: 'constraint', type: QueryStatement })
+    async main(@Body('query') queryStatement: QueryStatement, @Body('constraint') constraint: QueryStatement)
     {
-        return await this.queryBus.ask(new PaginateClientsQuery(queryStatements, constraint));   
+        return await this.queryBus.ask(new PaginateClientsQuery(queryStatement, constraint));   
     }
 }

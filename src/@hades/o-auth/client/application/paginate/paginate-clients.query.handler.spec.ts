@@ -5,7 +5,6 @@ import { PaginateClientsQueryHandler } from './paginate-clients.query-handler';
 import { MockClientRepository } from '@hades/o-auth/client/infrastructure/mock/mock-client.repository';
 import { IClientRepository } from '@hades/o-auth/client/domain/client.repository';
 import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
-import { Command } from '@hades/shared/domain/persistence/sql-statement-input';
 import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response';
 import { PaginateClientsQuery } from './paginate-clients.query';
 import { PaginateClientsService } from './paginate-clients.service';
@@ -60,16 +59,10 @@ describe('PaginateClientsQueryHandler', () =>
             )));
             expect(await queryHandler.execute(
                 new PaginateClientsQuery(
-                    [
-                        {
-                            'command': Command.OFFSET,
-                            'value': 0
-                        },
-                        {
-                            'command': Command.LIMIT,
-                            'value': 10
-                        }
-                    ]
+                    {
+                        offset: 0,
+                        limit: 10
+                    }
                 )
             )).toStrictEqual(
                 new PaginationResponse(

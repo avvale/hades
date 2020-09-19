@@ -2,10 +2,10 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateApplicationCommand } from './create-application.command';
 import { CreateApplicationService } from './create-application.service';
 import { 
-    ApplicationId, 
-    ApplicationName, 
-    ApplicationCode, 
-    ApplicationSecret, 
+    ApplicationId,
+    ApplicationName,
+    ApplicationCode,
+    ApplicationSecret,
     ApplicationIsMaster
     
 } from './../../domain/value-objects';

@@ -52,7 +52,7 @@ describe('DeleteRefreshTokensResolver', () =>
         test('should return an refreshTokens deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
-            expect(await resolver.main([])).toBe(refreshTokens);
+            expect(await resolver.main({})).toBe(refreshTokens);
         });
     });
 });

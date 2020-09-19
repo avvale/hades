@@ -1,28 +1,37 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
+import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { OAuthAccessToken } from './access-token.aggregate';
 import { AccessTokenResponse } from './access-token.response';
 import { 
-    AccessTokenId, 
-    AccessTokenClientId, 
-    AccessTokenToken, 
-    AccessTokenName, 
-    AccessTokenIsRevoked, 
-    AccessTokenExpiresAt, 
-    AccessTokenCreatedAt, 
-    AccessTokenUpdatedAt, 
+    AccessTokenId,
+    AccessTokenClientId,
+    AccessTokenToken,
+    AccessTokenName,
+    AccessTokenIsRevoked,
+    AccessTokenExpiresAt,
+    AccessTokenCreatedAt,
+    AccessTokenUpdatedAt,
     AccessTokenDeletedAt
     
 } from './value-objects';
+import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
+
+
 
 export class AccessTokenMapper implements IMapper
 {
+    constructor(
+        public options: MapperOptions = { eagerLoading: true }
+    ) {}
+    
     /**
      * Map object to aggregate
      * @param accessToken
      */
-    mapObjectToAggregate(accessToken: ObjectLiteral): OAuthAccessToken
+    mapModelToAggregate(accessToken: ObjectLiteral): OAuthAccessToken
     {
+        if (!accessToken) return;
+
         return this.makeAggregate(accessToken);
     }
 
@@ -30,9 +39,11 @@ export class AccessTokenMapper implements IMapper
      * Map array of objects to array aggregates
      * @param accessTokens 
      */
-    mapObjectsToAggregates(accessTokens: ObjectLiteral[]): OAuthAccessToken[]
+    mapModelsToAggregates(accessTokens: ObjectLiteral[]): OAuthAccessToken[]
     {
-        return accessTokens.map(accessToken  => this.makeAggregate(accessToken ));
+        if (!Array.isArray(accessTokens)) return;
+        
+        return accessTokens.map(accessToken  => this.makeAggregate(accessToken));
     }
 
     /**
@@ -50,6 +61,8 @@ export class AccessTokenMapper implements IMapper
      */
     mapAggregatesToResponses(accessTokens: OAuthAccessToken[]): AccessTokenResponse[]
     {
+        if (!Array.isArray(accessTokens)) return;
+
         return accessTokens.map(accessToken => this.makeResponse(accessToken));
     }
 
@@ -65,12 +78,18 @@ export class AccessTokenMapper implements IMapper
             new AccessTokenCreatedAt(accessToken.createdAt),
             new AccessTokenUpdatedAt(accessToken.updatedAt),
             new AccessTokenDeletedAt(accessToken.deletedAt),
-              
+            
+            this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapModelToAggregate(accessToken.client) : undefined,
+            
+            
+            
         );
     }
 
     private makeResponse(accessToken: OAuthAccessToken): AccessTokenResponse
     {
+        if (!accessToken) return;
+        
         return new AccessTokenResponse(
             accessToken.id.value,
             accessToken.clientId.value,
@@ -81,6 +100,10 @@ export class AccessTokenMapper implements IMapper
             accessToken.createdAt.value,
             accessToken.updatedAt.value,
             accessToken.deletedAt.value,
+            
+            this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapAggregateToResponse(accessToken.client) : undefined,
+            
+            
             
         );
     }

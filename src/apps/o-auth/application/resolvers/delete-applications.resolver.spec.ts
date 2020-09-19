@@ -52,7 +52,7 @@ describe('DeleteApplicationsResolver', () =>
         test('should return an applications deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications)));
-            expect(await resolver.main([])).toBe(applications);
+            expect(await resolver.main({})).toBe(applications);
         });
     });
 });

@@ -15,7 +15,7 @@ export class FindClientQueryHandler implements IQueryHandler<FindClientQuery>
 
     async execute(query: FindClientQuery): Promise<ClientResponse>
     {
-        const client = await this.findClientService.main(query.queryStatements);
+        const client = await this.findClientService.main(query.queryStatement);
 
         return this.mapper.mapAggregateToResponse(client);
     }

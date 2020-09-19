@@ -1,3 +1,6 @@
+
+
+
 export class ClientResponse 
 {
     constructor(
@@ -15,6 +18,9 @@ export class ClientResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
+        
+        
+        
         
     ) {}
 }

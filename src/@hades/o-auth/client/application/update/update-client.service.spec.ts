@@ -5,19 +5,19 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 import { UpdateClientService } from './update-client.service';
 import { 
-    ClientId, 
-    ClientGrantType, 
-    ClientName, 
-    ClientSecret, 
-    ClientAuthUrl, 
-    ClientRedirect, 
-    ClientResourceCodes, 
-    ClientExpiredAccessToken, 
-    ClientExpiredRefreshToken, 
-    ClientIsRevoked, 
-    ClientIsMaster, 
-    ClientCreatedAt, 
-    ClientUpdatedAt, 
+    ClientId,
+    ClientGrantType,
+    ClientName,
+    ClientSecret,
+    ClientAuthUrl,
+    ClientRedirect,
+    ClientResourceCodes,
+    ClientExpiredAccessToken,
+    ClientExpiredRefreshToken,
+    ClientIsRevoked,
+    ClientIsMaster,
+    ClientCreatedAt,
+    ClientUpdatedAt,
     ClientDeletedAt
     
 } from './../../domain/value-objects';

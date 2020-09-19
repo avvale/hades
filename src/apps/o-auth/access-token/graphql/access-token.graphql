@@ -3,7 +3,7 @@
 type OAuthAccessToken
 {
     id: ID!
-    clientId: ID!
+    client: OAuthClient!
     token: GraphQLString!
     name: GraphQLString
     isRevoked: GraphQLBoolean!
@@ -38,10 +38,10 @@ input OAuthUpdateAccessTokenInput
 
 type Query 
 {
-    oAuthFindAccessToken(query:[QueryStatementInput]): OAuthAccessToken
+    oAuthFindAccessToken(query:QueryStatement): OAuthAccessToken
     oAuthFindAccessTokenById(id:ID): OAuthAccessToken
-    oAuthGetAccessTokens(query:[QueryStatementInput]): [OAuthAccessToken]!
-    oAuthPaginateAccessTokens(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+    oAuthGetAccessTokens(query:QueryStatement): [OAuthAccessToken]!
+    oAuthPaginateAccessTokens(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
 type Mutation
@@ -50,5 +50,5 @@ type Mutation
     oAuthCreateAccessTokens(payload: [OAuthCreateAccessTokenInput]!): Boolean!
     oAuthUpdateAccessToken(payload: OAuthUpdateAccessTokenInput!): OAuthAccessToken
     oAuthDeleteAccessTokenById(id: ID!): OAuthAccessToken
-    oAuthDeleteAccessTokens(query:[QueryStatementInput]): [OAuthAccessToken]!
+    oAuthDeleteAccessTokens(query:QueryStatement): [OAuthAccessToken]!
 }

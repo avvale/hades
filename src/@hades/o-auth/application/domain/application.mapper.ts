@@ -1,27 +1,35 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
+import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { OAuthApplication } from './application.aggregate';
 import { ApplicationResponse } from './application.response';
 import { 
-    ApplicationId, 
-    ApplicationName, 
-    ApplicationCode, 
-    ApplicationSecret, 
-    ApplicationIsMaster, 
-    ApplicationCreatedAt, 
-    ApplicationUpdatedAt, 
+    ApplicationId,
+    ApplicationName,
+    ApplicationCode,
+    ApplicationSecret,
+    ApplicationIsMaster,
+    ApplicationCreatedAt,
+    ApplicationUpdatedAt,
     ApplicationDeletedAt
     
 } from './value-objects';
 
+
+
 export class ApplicationMapper implements IMapper
 {
+    constructor(
+        public options: MapperOptions = { eagerLoading: true }
+    ) {}
+    
     /**
      * Map object to aggregate
      * @param application
      */
-    mapObjectToAggregate(application: ObjectLiteral): OAuthApplication
+    mapModelToAggregate(application: ObjectLiteral): OAuthApplication
     {
+        if (!application) return;
+
         return this.makeAggregate(application);
     }
 
@@ -29,9 +37,11 @@ export class ApplicationMapper implements IMapper
      * Map array of objects to array aggregates
      * @param applications 
      */
-    mapObjectsToAggregates(applications: ObjectLiteral[]): OAuthApplication[]
+    mapModelsToAggregates(applications: ObjectLiteral[]): OAuthApplication[]
     {
-        return applications.map(application  => this.makeAggregate(application ));
+        if (!Array.isArray(applications)) return;
+        
+        return applications.map(application  => this.makeAggregate(application));
     }
 
     /**
@@ -49,6 +59,8 @@ export class ApplicationMapper implements IMapper
      */
     mapAggregatesToResponses(applications: OAuthApplication[]): ApplicationResponse[]
     {
+        if (!Array.isArray(applications)) return;
+
         return applications.map(application => this.makeResponse(application));
     }
 
@@ -63,12 +75,17 @@ export class ApplicationMapper implements IMapper
             new ApplicationCreatedAt(application.createdAt),
             new ApplicationUpdatedAt(application.updatedAt),
             new ApplicationDeletedAt(application.deletedAt),
-              
+            
+            
+            
+            
         );
     }
 
     private makeResponse(application: OAuthApplication): ApplicationResponse
     {
+        if (!application) return;
+        
         return new ApplicationResponse(
             application.id.value,
             application.name.value,
@@ -78,6 +95,9 @@ export class ApplicationMapper implements IMapper
             application.createdAt.value,
             application.updatedAt.value,
             application.deletedAt.value,
+            
+            
+            
             
         );
     }

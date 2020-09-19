@@ -49,7 +49,7 @@ describe('FindAccessTokenController', () =>
         test('should return a accessToken', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens[0])));
-            expect(await controller.main([])).toBe(accessTokens[0]);
+            expect(await controller.main({})).toBe(accessTokens[0]);
         });
     });
 });

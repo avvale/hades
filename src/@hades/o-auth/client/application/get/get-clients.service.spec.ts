@@ -24,7 +24,7 @@ describe('GetClientsService', () =>
                 { 
                     provide: IClientRepository,
                     useValue: {
-                        get: (queryStatements) => {}
+                        get: (queryStatement) => {}
                     }
                 }
             ]
@@ -45,7 +45,7 @@ describe('GetClientsService', () =>
         test('should get clients', async () => 
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
-            expect(await service.main([])).toBe(mockRepository.collectionSource);
+            expect(await service.main({})).toBe(mockRepository.collectionSource);
         });
     });
 });

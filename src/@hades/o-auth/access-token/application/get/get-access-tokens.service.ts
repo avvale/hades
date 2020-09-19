@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { OAuthAccessToken } from './../../domain/access-token.aggregate';
 
@@ -10,8 +10,8 @@ export class GetAccessTokensService
         private readonly repository: IAccessTokenRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[]): Promise<OAuthAccessToken[]>
+    public async main(queryStatement: QueryStatement): Promise<OAuthAccessToken[]>
     {        
-        return await this.repository.get(queryStatements);
+        return await this.repository.get(queryStatement);
     }
 }

@@ -12,6 +12,6 @@ export class DeleteRefreshTokensCommandHandler implements ICommandHandler<Delete
     async execute(command: DeleteRefreshTokensCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteRefreshTokensService.main(command.queryStatements);
+        await this.deleteRefreshTokensService.main(command.queryStatement);
     }
 }

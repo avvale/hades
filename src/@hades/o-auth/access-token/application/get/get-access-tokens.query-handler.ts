@@ -15,6 +15,6 @@ export class GetAccessTokensQueryHandler implements IQueryHandler<GetAccessToken
 
     async execute(query: GetAccessTokensQuery): Promise<AccessTokenResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getAccessTokensService.main(query.queryStatements));
+        return this.mapper.mapAggregatesToResponses(await this.getAccessTokensService.main(query.queryStatement));
     }
 }

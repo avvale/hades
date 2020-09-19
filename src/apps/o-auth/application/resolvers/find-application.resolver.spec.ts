@@ -52,7 +52,7 @@ describe('FindApplicationResolver', () =>
         test('should return a application', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
-            expect(await resolver.main([])).toBe(applications[0]);
+            expect(await resolver.main({})).toBe(applications[0]);
         });
     });
 });

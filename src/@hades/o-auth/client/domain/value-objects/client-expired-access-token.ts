@@ -1,5 +1,5 @@
 import { IntValueObject } from '@hades/shared/domain/value-objects/int.value-object';
-import { ValidationRules } from '@hades/shared/domain/lib/validation-rules';
+import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
 export class ClientExpiredAccessToken extends IntValueObject 
 {

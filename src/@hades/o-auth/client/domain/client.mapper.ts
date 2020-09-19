@@ -1,33 +1,41 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
+import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { OAuthClient } from './client.aggregate';
 import { ClientResponse } from './client.response';
 import { 
-    ClientId, 
-    ClientGrantType, 
-    ClientName, 
-    ClientSecret, 
-    ClientAuthUrl, 
-    ClientRedirect, 
-    ClientResourceCodes, 
-    ClientExpiredAccessToken, 
-    ClientExpiredRefreshToken, 
-    ClientIsRevoked, 
-    ClientIsMaster, 
-    ClientCreatedAt, 
-    ClientUpdatedAt, 
+    ClientId,
+    ClientGrantType,
+    ClientName,
+    ClientSecret,
+    ClientAuthUrl,
+    ClientRedirect,
+    ClientResourceCodes,
+    ClientExpiredAccessToken,
+    ClientExpiredRefreshToken,
+    ClientIsRevoked,
+    ClientIsMaster,
+    ClientCreatedAt,
+    ClientUpdatedAt,
     ClientDeletedAt
     
 } from './value-objects';
 
+
+
 export class ClientMapper implements IMapper
 {
+    constructor(
+        public options: MapperOptions = { eagerLoading: true }
+    ) {}
+    
     /**
      * Map object to aggregate
      * @param client
      */
-    mapObjectToAggregate(client: ObjectLiteral): OAuthClient
+    mapModelToAggregate(client: ObjectLiteral): OAuthClient
     {
+        if (!client) return;
+
         return this.makeAggregate(client);
     }
 
@@ -35,9 +43,11 @@ export class ClientMapper implements IMapper
      * Map array of objects to array aggregates
      * @param clients 
      */
-    mapObjectsToAggregates(clients: ObjectLiteral[]): OAuthClient[]
+    mapModelsToAggregates(clients: ObjectLiteral[]): OAuthClient[]
     {
-        return clients.map(client  => this.makeAggregate(client ));
+        if (!Array.isArray(clients)) return;
+        
+        return clients.map(client  => this.makeAggregate(client));
     }
 
     /**
@@ -55,6 +65,8 @@ export class ClientMapper implements IMapper
      */
     mapAggregatesToResponses(clients: OAuthClient[]): ClientResponse[]
     {
+        if (!Array.isArray(clients)) return;
+
         return clients.map(client => this.makeResponse(client));
     }
 
@@ -75,12 +87,17 @@ export class ClientMapper implements IMapper
             new ClientCreatedAt(client.createdAt),
             new ClientUpdatedAt(client.updatedAt),
             new ClientDeletedAt(client.deletedAt),
-              
+            
+            
+            
+            
         );
     }
 
     private makeResponse(client: OAuthClient): ClientResponse
     {
+        if (!client) return;
+        
         return new ClientResponse(
             client.id.value,
             client.grantType.value,
@@ -96,6 +113,9 @@ export class ClientMapper implements IMapper
             client.createdAt.value,
             client.updatedAt.value,
             client.deletedAt.value,
+            
+            
+            
             
         );
     }

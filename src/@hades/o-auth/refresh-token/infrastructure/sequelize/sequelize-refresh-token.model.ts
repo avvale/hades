@@ -5,7 +5,7 @@ import { OAuthAccessTokenModel } from '@hades/o-auth/access-token/infrastructure
 @Table({ modelName: 'o_auth_refresh_token', freezeTableName: true })
 export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel> 
 { 
-            
+        
     
     
     @Column({
@@ -14,12 +14,13 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         allowNull: false,
         type: DataTypes.UUID,
         
+        
     })
     id: string;
         
              
         
-    @ForeignKey(() => OAuthAccessTokenModel)    
+    @ForeignKey(() => OAuthAccessTokenModel)
     
     
     @Column({
@@ -27,6 +28,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         
         allowNull: false,
         type: DataTypes.UUID,
+        
         
         references: {  
             key: 'id'
@@ -40,7 +42,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
     @BelongsTo(() => OAuthAccessTokenModel)
     accessToken: OAuthAccessTokenModel;
              
-            
+        
     
     
     @Column({
@@ -49,11 +51,12 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         allowNull: false,
         type: DataTypes.TEXT,
         
+        
     })
     token: string;
         
              
-            
+        
     
     
     @Column({
@@ -62,11 +65,12 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
+        
     })
     isRevoked: boolean;
         
              
-            
+        
     
     
     @Column({
@@ -75,11 +79,12 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         allowNull: true,
         type: DataTypes.DATE,
         
+        
     })
     expiresAt: string;
         
              
-            
+        
     
     
     @Column({
@@ -88,11 +93,12 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         allowNull: true,
         type: DataTypes.DATE,
         
+        
     })
     createdAt: string;
         
              
-            
+        
     
     
     @Column({
@@ -101,11 +107,12 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         allowNull: true,
         type: DataTypes.DATE,
         
+        
     })
     updatedAt: string;
         
              
-            
+        
     
     
     @Column({
@@ -113,6 +120,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         
         allowNull: true,
         type: DataTypes.DATE,
+        
         
     })
     deletedAt: string;

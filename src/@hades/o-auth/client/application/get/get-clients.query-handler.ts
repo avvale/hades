@@ -15,6 +15,6 @@ export class GetClientsQueryHandler implements IQueryHandler<GetClientsQuery>
 
     async execute(query: GetClientsQuery): Promise<ClientResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getClientsService.main(query.queryStatements));
+        return this.mapper.mapAggregatesToResponses(await this.getClientsService.main(query.queryStatement));
     }
 }

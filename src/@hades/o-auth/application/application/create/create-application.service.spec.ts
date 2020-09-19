@@ -5,10 +5,10 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 import { CreateApplicationService } from './create-application.service';
 import { 
-    ApplicationId, 
-    ApplicationName, 
-    ApplicationCode, 
-    ApplicationSecret, 
+    ApplicationId,
+    ApplicationName,
+    ApplicationCode,
+    ApplicationSecret,
     ApplicationIsMaster
     
 } from './../../domain/value-objects';

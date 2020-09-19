@@ -5,7 +5,6 @@ import { IApplicationRepository } from '@hades/o-auth/application/domain/applica
 import { MockApplicationRepository } from '@hades/o-auth/application/infrastructure/mock/mock-application.repository';
 import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
 import { OAuthModule } from './../../../src/apps/o-auth/o-auth.module';
-import { Command, Operator } from '@hades/shared/domain/persistence/sql-statement-input';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
@@ -25,14 +24,7 @@ describe('application', () =>
                     GraphQLConfigModule,
                     SequelizeModule.forRootAsync({
                         useFactory: () => ({
-                            dialect: 'mysql',
-                            host: 'localhost',
-                            port: 3306,
-                            username: 'root',
-                            password: 'root',
-                            database: 'test',
-                            synchronize: false,
-                            autoLoadModels: true,
+                            validateOnly: true,
                             models: [],
                         })
                     })
@@ -65,9 +57,9 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: '0vlmurb7pegmcjs1o156iknsmoy7dsxcp15ut2qv2u24jkxwo2u6kjdq5rskoike0ug3166jvfwofpm18q1cmla42wwcybsthn7zeyuz2vn31u2g4i2e8ub1aqci1zppvnkz159f27dl74za4i648lp4lodyvcqdz6rni1ovexmxh3x3p6uvh2jhk9whx8vd1mpy4vpbgfnxkv2naepyobqq17vug1o9q16s47n1m54p6wiv8uzlx2py0ds1gc6',
-                code: '4ibnnanq9kq10eq5y3il5esyah8fmkbx7btu5x44mckbze9d65',
-                secret: '5trtiqhihtnci6onkn0b3yeu5l6kr68pdivja3z30z2ju6qucklapzcaa99fyef2urr8xvuottg49rf7bkiadu6p15',
+                name: '4ns7bks271v98m2r6vzpr2r812aeeu58t5ssmhpwcgaoioby651vk9i7ezywuzwwf9lsn8j89xdobls50ijbnb7chzkd4xuqhz0feelv1m3bgy8rcssx09amo482w2cha69brjw879auz7pf1332jqm7nkt7ktbma5slareldiargkiqd6gn3e84bns4bsn8ej0xavaywawphzasoa4ajo0c3xtrscy7fyvttdqcze1wxdsbns7ghr1qx4kgox5',
+                code: 'r9u8wvkw13y9hk69mswajidy1ys1qcstf1bb6nns2qu6ojkdkc',
+                secret: '9fy3y9bp4gvcctf3j7y288z6c4n5cir2z5fuc0flm25q1qf9np9su8o4owtqg44bzxhs3f4nqlzycdneg4gj0sbz1b',
                 isMaster: false,
             })
             .expect(400)
@@ -83,9 +75,9 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                name: 't14w2711bbwrleqkvo9velputpu0m70aq35a6bs728cmwdifku04twqybfqw6ofl6xt2ciyqtcfsst2vpgjvnroyjnuqudsmclwrjjpzd2o76hunem47w5q4fz95vx9fcz6xaeq2w9dli3mvsqlznagabc7qotge8k0c6kspsrlmem88yy3l4wdmel84jjhux9zpwcil6qpy83sxgrgo2rnj7lqjbebmwiru2dki7hkxgmtiop6lvdxpq5lqy4p',
-                code: '3nt90xc69wu2gvkzthnk6pqt9w7ytv34ljpo055w8p9jpn52vs',
-                secret: 'stbvtnnnns0m0q61trao1irgic89qsjfcngnd3w5jy5r57omtd3a0zgwaauzi0u4gwmiqza9t2r5krahi0e7nl4kjk',
+                name: '0iuibzc0wb63j2egbfacnz044n6vnhh5dleo4jn390nbtggqxtml6vtll8qitufm74cmalimvk1hpni08a9ges9qzo4refhdha0spzdjhgvfwfd1e6joqoun5nbn48lbh6eawo439r3fwenujqayyow3qanhwjegh6bf6w6gbkdw88chs9rf88tuutuhseoc209brunfdodfpyi2vto0qte5cafoj1p2g5ttphpahtsun8wxrn9cuhv53l0h5bb',
+                code: 'da46m0dwrr89i287qruk2hqgcjdyzp4twkolga1elpvaf50fvy',
+                secret: 'v7khelqwamtr116wo17xrtu25oc69cv0hgq7ajcwgv1o6vlj3mh669tbmb8jz8hulor4ihc599k80lkxj89y992cgl',
                 isMaster: false,
             })
             .expect(400)
@@ -100,11 +92,11 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
                 name: null,
-                code: 'gzkwlpp4hijgpblcxx62e9dcwzuttyguzz5dnhko1wthdia24j',
-                secret: 'dvo4fpr48sw3e4v5cby9q0hnk65b1zcodyoz7kt7wc4zyfd8cyszv4u2q26z4eci0uaq9gtoxjaqb2q5ovu10sstmo',
-                isMaster: true,
+                code: '24rynkiqephdezrhblvt1hdppe5x3ju7fi0m7y91zbutwfzr1j',
+                secret: 'qfm0dyi1kbd2pvyqeghklow2rrjvl4lj1qw6xkjm99zvj6h61ffyciptpdvimbef4m45fsot144idllwgjd24h012n',
+                isMaster: false,
             })
             .expect(400)
             .then(res => {
@@ -118,10 +110,10 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
                 
-                code: 'lnx1dyvvtef684hlqp0m4nt9zulkvvk2sk25bmx1aghb2zljat',
-                secret: '08yywhdsg6vkxxjb45d1r2jcyhqkwfodxpegdz7hed71xzz0arloq4by4qimqswx1ef0llr72zmdhjxq4ikpppyfwc',
+                code: '3xhq3onapgoacki4ju5zr22jazq7hmsipcq9zxz8siqk30sz45',
+                secret: 'w3sn0ww7sdalpzijsmg5yjjgnlcvmrz19vcaawys24vfg8g0c40xi7rbni1839dtm0zkoa4r235lvuzfayz8wn9jdo',
                 isMaster: false,
             })
             .expect(400)
@@ -136,10 +128,10 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: '489jo4inlm5s1j69mcr7sjhg7qegzcnbrjoxxo1t0w8tbqgjoeerqecsaf3xkfpbmjxlogs47vg594dk77zlqtc99n9vpzb0yusidjfwk20f018upoauuw16q5yjzo2du9idbiy7rkxdeqbu56anlco8s5jmimq4619gbku3xbakgdmm1jt6wdimxplc5jpblaa8sxgs7908qcc8lgl5oblw8inhrgdhq05oz4ser615j9b9eemzo8whsud5gfe',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: '61f28fdeaqnbr6x5eqdc0djw63ntvz4skbcpt23rh0kos889fceqzxgm741rayullo853hy2u9jre8fmmycs000dguq9fj3rx2lj8w3rcv83fxwy0mtbi79nbdminl9nr9al4e52ae173zn6dyjjm7qd2wro3qdrudqi5ts4kccshyest8bhak59di2uwmyvkxavlit79ogl6v0u450zo2z070ptj27ynwolx6fvkx0gdg8itd4s3uvnq208ze9',
                 code: null,
-                secret: '5i3co2g7szpoznf6dgq2iv0avgzxbpqc9wqg2lp771o5hqsvfufr64aq0nmnwurg6cv3ao3ax80bk1ammktvpx3oj0',
+                secret: '7kwtidpdpgh1ofk34e5dqrsxtmq2fspirbdk52uz44q5199y0wvzvqrhw12ce0nimzf2svy5nq4esl8ynzgy4m2wq3',
                 isMaster: false,
             })
             .expect(400)
@@ -154,11 +146,11 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: 'ivnvg1nlxb2nig8aqbtb58ougxfu5uthdm5xkb9s132et6839ftz3pjunmhdzddd39tps3bwaj9hqr5z6iaw1bhuxnf6c7qfgp8l0b8g6q6xvjlnzs4usf3okpb0pypufuz1x1phlwo7k0vv3q7cnrw7fy5vfekupz3bw1brav08pei697s5go1znxlt0ldzivweyn29jc4tx1exrji8cn3bmy6tqozsmqnk48bpd9f5iwpix93dd9qkabnwryz',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: 'fhqdetqx2smzpoydadpo90tin2bpsyyaf353vo9ff3fc0meyr7j4wh2jlqmywezgmajxuygjnvm93p9qgkihaktk4rny57hvlu25mkr4cr6v4fg4tavd5ziz8mg9v8vk7eq45mppdq6f2klmbfc3jgw826osxxkt9qz4wfykf890coyo12tixdhe8145esnl0lyfzencj4ycn1tn1eiowyqi32jz9b5ga5cyamo2tgqncgmtm9hh8jtnppvax18',
                 
-                secret: 'rouacl1ija8revav6gauair0aq1eudbaq98sohgcxh90ad6xv89hlsu9ozhqiv2iapfdjbgcjd5usmn9nn1w4cks7c',
-                isMaster: false,
+                secret: '3hbm7zzdh0c6abk2bb7c644mlcfmmzgkyy30uz7pl6vr5n3m9y7on08g8dvqiqwu4s95z12j9s32xnxut1ftjkwcrw',
+                isMaster: true,
             })
             .expect(400)
             .then(res => {
@@ -172,11 +164,11 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: '7qn86cjauxu2f90gwsn59ep1yon9ff8fi8im9f15oid9eudt6d3rfnv1wdxsravib94l766wkwur3juxbk95wwplztjbwlbadjjijq1o2sabanc0rb99mauhtnztbbocr0q3vz3hjpgs1nb77q3vfobga8gtotxg5w912ci0jbhgr5ioptqcmufrvy0ix4iit2ny3xkr3ibgvbq0ie9um19m7cvenhcfxgj1aofcln9fxtnr7mcobwf1ys44imv',
-                code: '0n9o33jeiuukwiywicn60wlp9wk0g3vh1hzsi5mccz6vxt2p2v',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: '62u1a3tyg21mnihllh7wrcdlu1hc8a5lw5entkl0jm9gk0s3jrn4qb8ra7vy6fg7pixv9ncopirjujevxdg11immr98h0d9s6nmtep5haexclv3nk8r5wfxaxme6nvc86t9nuyniiyz76uf2vo51uspd54rhnabs36k8wbjy57s35ohs8rah4g851w0o2ipqidy6l7q1o1obf2h85dox40xpkuyn34xy5iw0xomlz76e0ynufkm7xr5tmy0ewu9',
+                code: 'f8nccdszg1551zaur5yc8fpmt8f7w41nsbn03k1gfewbcqk59e',
                 secret: null,
-                isMaster: false,
+                isMaster: true,
             })
             .expect(400)
             .then(res => {
@@ -190,9 +182,9 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: '8wf8pedx237le6t3jxkh7ldsvea02u72n7plen62zlvjgkupw12rp8urtoh6sv3t6umbk1knlz9dxlxifb41f2x7tuokivttby2scr02cfg2fnm84tjprxzo3rtizj1cakw9y0reu7jlc4qpj0zv1azcaj08q3sjq0sqmp4zpshyja1balnu03zvn74c8m5hei07uol2ssjg07h0jj7xdvvekmggmwgwm269sst0b34j565fzcyvx4dsur81d8g',
-                code: 'c8cwt678nvtb86kg1njorons7gpamg7cyfnfhdq9ba3fmvtdpj',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: 'o8e2dq6fu6n02p0oogmvx2j2fi5mxty61ieji9i8ko5v02jco73e9c0ch1hjtqqcd4u33a4ox3u47gyn8v1wixmvsy4zghjdoj2cmsycgj6tdcc3psp654u3xx3c04cvjgz7a1bv2xalt8igwyxmn3new12g404v1nb290z41rtqn1vgo7zy8gvlo82gagatmxtklvm1qipo3t0nlg49w47wwomonoby7hdkgu661mjt9bk07mjm97hw1nsoz5t',
+                code: '01ous7fs2idhl9ya78ejx6h571yzth32ketmjsuzf07p0rqf25',
                 
                 isMaster: true,
             })
@@ -208,10 +200,10 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: 'irpd9kk8xxyvhji6wqzbaj26ucwb53dcr7vd44jzwlyvamniu5ld7qm46tq9051elyznfgde48mtjcnk4lga6b5k14xtqa0mku2n866h5t4lvhp3nvb36y6ix58t7m7ddkktveb69c80h1el3wzbi65ka7gf2u04g5tfg925la7fj98u0p7yanmuy8j5vej52ybnqwmkrvjostqx6caq2iexju8yikpnvmbrwz3d1vbhx7kpngx72hlyiukl32w',
-                code: 'r9ccbkub2rc1riiwnutkgaa5csiu19msyp9s9q2z78y6mw72wi',
-                secret: 'kol5orfkrb1txmnvkospxdszz3q1l7etyw89qj9853up8fs9xry3g5inv2jpckto8zp7sk71yge8rg58nqdb877gcp',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: '7vts4b0n296ewnfmllc89d1f0i5q22jpiz3wdi53faekymtfc6jjx73iuqoftd4h003drd9o2za8e6bp0gm05t5098lkg5fi632p7kg759b8osfr70f5eazerjn1mq4eihq2yiqlgrgaae26yzg5cf2dprmaw3oq3nuz77t98wv4r1hpsibaomvrca187fwbjef8hu18a3fyvijzp2xnqh14a72dl9fnbazukvugph5smyh92n4x7rsprex2tph',
+                code: '8a8nemp84r6y53o7flvkq8tdle4lw4qu63l188entgguh8xpbk',
+                secret: '1rrzpoelb0undghe4aua61860mj3rjhvftkc0rt02lfoylhk1bqm0hwd6n2cb7ntynr2eclnkhbxz415cnqgwzywu1',
                 isMaster: null,
             })
             .expect(400)
@@ -226,10 +218,10 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: 'kuwmxpceme8kbv83u662d79ivtxvmt0w7jl8hb5li4r94dwcd6bgmxz2x8x339mm9uq2kg7x73kocsm0dcpzz82yoe70n2334jb2edkbw66iv7naa2kvv607ukz3s8zli6brg1ykmo6xrpeza07oz3bg9pk90hvsb33kpcg4trxhv61acv6zeqlnkvq3zrc2ot0x06wv6kby4tih91qdk3bnp3uq8x6vms60gik5997qc85sojw7o7y4fk9cdf6',
-                code: 'psj0f96crz42wxnh15v80i8jmotxvzq7aw9ozmxv34yil5vtmy',
-                secret: '3imgh2g2crw8650d82p612q4biy3rnrnf5yj6hn38ma3d2fg9kimjan80075mveqz6hc1m1rzkv1lngajicoh6v9lb',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: 'maet0083gc2hj8katzb0d9suh6mo8nx2zqm5d6rs4y6ns4fjdjbtm7345mq1apft1y7cjgat34e3wf054nixu17gprnsqpx0whnaod0d6o1ka5wlhdmvix864z29ss9uzat3u344z8xto5kon51uq0ixj64dsesfks942ifdg5zxux4yxmmwlz8n0x1top60q6gedeqpoy53fu8b1wdy7h2keirtigejkffhpr4wwtbcmoqmwsv4b71za6szkn2',
+                code: 'mqh5b1syblqoadshyr7ejxwslr8f4wu00ckg4dqmyvw0mwzxlv',
+                secret: 'fkab5l8kotcrafva88109hsws77c70pjgsdd8ng7u4nwl1hx93kn5nvp9ntt9z5hv02mtxlimu6pll3zy9wfcbrntp',
                 
             })
             .expect(400)
@@ -246,10 +238,10 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'e7e6kmedoc4322otgtqvcwz2hlgpt5t4x2grd',
-                name: 'z1t0z0plzvuv803xtq50hvhoyzjis4t7u9tkaliiu7562nnf0zombv3ipx3qry15gth24xok5e0ii2ellum1lbuxgftxiff727ciq9g3x3riq7n9kyi10jdg7b1hhsmh7szkqhrce84ygklkjyf6wj3uqo2lhv622d926jpok6bhu8n9ckxkbx9dtd36fqenure3m3qujn2l58w7cv1jz03o6iiveb38gx107akth7ce7ctlku01dc1zz6tgg8r',
-                code: 'hq169yzk26jsqpemkpbqxpw3w0cy1gm8h048v4w7a4slubbnui',
-                secret: '4w0pu3vxjnn4drexwy2k0cnpr8ucpow9ea52dnssh9qpjvrdj3cd1h7ze5dnskd2hn937vrsnwyqjev5fev4xmrnzo',
+                id: 'fnac6i26dfkzxls21j1zo2avxlt2s96mlb3if',
+                name: 'hbr9xxxheq94eyln3ehredq4grg58os227o4kq6t2wlq6s5xrplqula4nj4e6ibv0e75234iq4cj0wyh9s1jj34ke4tvglqk2w0lihsm8wde5vx7xx99164m13ebj0w9tfbx4kfbrk35cf49gqof8mhdou5y53q8s30qemgr30gxmphn13s3iun50rg0rzdpbupif28htovzhexlba66s3odvux3okef5hcutr0qx86bzcc6lr394e27xmenhd0',
+                code: 't3si0x97s1nmqo2mwjq5mh6gqaln2thlumhjljr16tz0so27dv',
+                secret: 'tkhliox8pkn7mhbwr8l32mcvtl6e6i7a0lzlckqmg0d0jklnc8qg91tvo3de7car71ntgq9yq6x6aqqzuuawyfx5i9',
                 isMaster: false,
             })
             .expect(400)
@@ -266,11 +258,11 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: '2m658yuoj2dzzgg6rmivz2lz1jp3q2v21bgtmjc70apc694c3uttgj47j5flk66yx5zph8zji9qxyw9ckvuwbj0co9049yodd4rgweaaxp43es5atj3rq36qlo7my6e48xgx2safg5wm72bs4cb84vkvk781rtfe2gsedlk48iou97gx4zzd0deuaoq74jfzknh72vs2e2j9ehzaga7ijmk5rf539nmj84refl8878jj4uozu0t4um0254rk1dxh',
-                code: 'ufql1f0x9ddsi8bbg8ynoxv0xyssgub0nf5jn4ennzbtnmjdej',
-                secret: '7ynj7pz19lwrbclji4limkg5f4pmo33g1jeba038bxo1iip1zppq1nntqpgxf2r38zo99xralqehavux2ps1bo9pcg',
-                isMaster: true,
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: '10pkl4aehl75sily4pxxq9qoqs7bc5errauvanlknb0fpyfkh9ivjc74bbn2vr45qscjso2nssoczf9aidewrsovvy2fpz0ahagx99u1q49pquloy7uc6mxoglecrzhlnrqc08lwgq1jorts07decbr8s3okijul2c03jlir59t45k0yd3bht3n641n6dbhxanzc3ml0p6n3epp54zxoplebrsr88is9tdvqw95pn582uujzux6r8wkmhe9dcr1x',
+                code: 'ns0xzb6pj83aa79izm4kfxufo9tde574yv4oecj2bovoi2ixmt',
+                secret: 'y7cy7ecgp634mhb4iju5q7s077otnwd3dltjyg1kotx4p35w5zqxg4x8shpwat121ftqzae8k9gpt6egrje4f1uki2',
+                isMaster: false,
             })
             .expect(400)
             .then(res => {
@@ -284,10 +276,10 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: 'am56jk1g92tdw88xikbj6u0qo731hr7ue4thia2xakn6nguk1zgrx4r3s5xw4ba0zbvaecbyg2keqc0m0ll92aiwit3dff16owq0323gkamazcxmbpfwmymymcr4v1e0nxqum7i2k3hm1exts5qpvpsxbfxvkxdx0eoroobz4qlitaifty7n786umrh5wk7u0hvgk0vldfvnxopmzybkj4gbbwfv50bo2kn8x28us94ug3s3zs4fk6ybeeu009m',
-                code: '4w2425xiec37f65ozr6v5e2i2x65adi4p8h5x8z1dtoks9b18c9',
-                secret: 'jl7tyc2s14kkoaffqgr1b9k0aqk49a9pr7rqxwjysr1a4hcv44e08r28lqkul9p9b0c0qp8fxrsh135i406vin2dc4',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: 'gev70dc5eivywee3kyd8dwvz6238jjqclf7hr9btzm8kns10oxzqcwegmngd875w93451f8y1aaif79gavtblbt6p5rhbhryjah8zcg1rsjoozwftn16e4jrb4srqztr54qveb6qvxcotpkraljbsvoqorwrsifxotumqrkdvhmt6tmdj73j02mtyznhl73qocjoe7lvf8sw4njqqk8vmcz16m6x0zpdnd7em6e47fpaogd8op72vj5ijb1l0eu',
+                code: 'harjo25hssgb5vxwbkq3khhh32g88o7iianpfqxjttao8oxp5u4',
+                secret: 'u1nxqtl5ebx1lf9gdqyu02vfgtj7jy2fyrc5envxdufvnhardpfla74bqz8vun8gp7cw76ki42ta2n2n9emddhren8',
                 isMaster: false,
             })
             .expect(400)
@@ -302,10 +294,10 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: '6wprjmzcfak7m44l1sxjjxxmqe83ulp9zk9q704i4ps2h6ocdf7edgfiy9n8xg7w61zfhkyxth3b8zjuxa9qxrp6k7g4wuprkhjef443zoimcqruxcfyxft9bszvvuoe0lmrkz0byttarzfq2wiktudefhpvr7o6a2fp3rdulsi72uga62dvrd2au3hyzfunuxzfdkif8ndj4t7rg63k17j9dienxbv8x576efkf5tg4ouyz61cpnc5e4x266ah',
-                code: 'kpdk9ijtfjwzzckcq96k0zjpqoybuydp1nsgoqx242tz6elvln',
-                secret: '5m03ylmhotcf602y6tdkw06ds0248rwzxkgs2hb691a3to79u6s0yul1r9gcv208u4suyaj2n086cpyrbwwhtjm415v',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: 'z8z1hps19n7f8wg9lc7wdntzztfhxwsa046ix9t7h0em6x2ifurzbgpporgdb3fowk687rsqoojeeavne7f1a4d3s0phn0vrsi06jviijhsqjhsm03oza1i91f5o3g482wtuw8jymbmapzkbh51w3ht6ov5qon1v19ugmb72gm2j3adu8xa5cb2ol5mdxvea166lw1tsuuw2epzs51qlqfsprbhn8mpmmze2wc45zv52yu8ljygg4rnk9rwfmvw',
+                code: 'sln31lyjga5o4aakyk9knl03wy8tsa3no4m7bra2lumjpqh7x0',
+                secret: 'bebpojo28bq0eevpwwysdlky4lu10xd7mfelfcwtocesv4finbkhmehdw7clh5lyj0bb8z2p4zypu4e4ux7fmh8r387',
                 isMaster: true,
             })
             .expect(400)
@@ -328,10 +320,10 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: 'u499dzzhgge5ilqy27yf1qg7znjp7lihsoiem1oacv7elc4k1c6pjd1x4p6bcq3mojuhwlrdcwvklkybunrsyhuqh6pn2xvmg7smzevt0dk31mihny9m9t7hqeqm5foorlza6fawdd970m1y5qaa7xoxe86gb5mubk5q7ecyqxx80gqt1rs720q0lpt37y60h8hser2258xu6c6e447e1670nkfenfoyxvq31y5fgi8a9ejxybq1p49gd4oc72a',
-                code: '3k2siougcnvohtr4v81z89pj7iaovefzyu086rhpp267uoegil',
-                secret: '0xeiqemti5yo1y4m2173stuvodbpyctxwdb0fgybtrirm4tf4rtinzfsn0ch5qf4cku48qtoghfiim65081qtswudz',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: 'd5xvj7fsog8bxf8g8nwi9wsc360i6dce8gkx0t7dfaavelfb4k9zq9l3ljin2wh3htq9a51ppo7cgzojfk0y5a8xkjamyqiqubpbvkgnhegmznq7u11qloy4lst9u0ewqgmbs4m22fleg26wxbcr0c3hjz8jn4et19yb0icfp1zi6au0lcm2feje3fo0hay1h9lj40oxs7o6bl1cuhch17duzmvmrqvb5tdgzkd8qfdta0xhh8j9ol5jnab080e',
+                code: 'g4qizd3pgs1vzqxcy9jqkayglhxeubt37koz41rddvt72kjabl',
+                secret: 'ut9g69r6wydidf97ivyfdq5dw8mibpjc5nvnkv64m09k20lwnd13sz4squr0pxcswq2tkun7qlkc5vgj1ujsfzyplp',
                 isMaster: 'true',
             })
             .expect(400)
@@ -351,10 +343,10 @@ describe('application', () =>
             .post('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: 'gibezlm4qi2y8a27amirymp3enaeshnjqj69mp4ub1cwhaepdm5z87cnsinluayi2j4r8pkp1cn56tubwcti627x0af4c1p59lqinb9upn4pzxq80vxubcocsei7ls6y9agyprxchaj997ntfo9yd8q3ac3l1gefrr8uwj5ct2paiocc9mj3ymlonvmvl2954uvhgfenf0xc4tbjuwgwnxfmqddy6xl9o3u096u0decm2di9dqxiqblfsld3ag9',
-                code: 'wknc8n7s6dl9biu8lebi98k8t7dpif4u7h59ra03zdnhnym8bx',
-                secret: 'ciopf394hpy2wb6aoe7hf9kz2qym1hkmry8ix6li51m49qzc5j9hcgqixd130q66htxbum2cgeauweqjqafcy1w82t',
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: '6dyqkhlakv82aeppft4mmjcimulbizg5gki6nq2klizpwa6nirmbgozsoiw61987gi1wpahbtw0stvx9ruqh0ei6czsxkujlsv7vnpdot2iuy05xrqaj5xyp358hc9ppzrz6o3pd5r8nlzw9943axty86r17kk6z0dn5n4bhtt36nlesoseo6q43l7oaq51zv00zlylcaonv3e8mtcowjj5s9o57rzidk1xronizb5faai2wfhod3712gtl3b5q',
+                code: '6fkgn94wriqw8q0vmrnd3ut5eelbhvod8d6az01uuoxk0kq0np',
+                secret: '9tujpf1lg6ezdke415remx98un09neii08orl4kfiiuduaweuexcui1l8pg27b1vv0q2vw2ojzlbi1r5j1601j71p0',
                 isMaster: true,
             })
             .expect(201);
@@ -366,22 +358,17 @@ describe('application', () =>
             .get('/o-auth/applications/paginate')
             .set('Accept', 'application/json')
             .send({
-                query: [
-                    {
-                        command: Command.OFFSET,
-                        value: 0
-                    },
-                    {
-                        command: Command.LIMIT,
-                        value: 10
-                    }
-                ]
+                query: 
+                {
+                    offset: 0,
+                    limit: 5
+                }
             })
             .expect(200)
             .expect({ 
                 total   : repository.collectionResponse.length, 
                 count   : repository.collectionResponse.length, 
-                rows    : repository.collectionResponse.slice(0, 10)
+                rows    : repository.collectionResponse.slice(0, 5)
             });
     });
 
@@ -391,14 +378,13 @@ describe('application', () =>
             .get('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                query: [
+                query: 
+                {
+                    where: 
                     {
-                        command : Command.WHERE,
-                        column  : 'id',
-                        operator: Operator.EQUALS,
-                        value   : '4ff6d372-ed09-467c-98a7-fb62dba1882f'
+                        id: '759a05b3-f0bd-453f-b3fd-5e1eb7d95599'
                     }
-                ]
+                }
             })
             .expect(404);
     });
@@ -409,23 +395,22 @@ describe('application', () =>
             .get('/o-auth/application')
             .set('Accept', 'application/json')
             .send({
-                query: [
+                query: 
+                {
+                    where: 
                     {
-                        command : Command.WHERE,
-                        column  : 'id',
-                        operator: Operator.EQUALS,
-                        value   : 'a519ff03-db35-49ee-9162-bb4398fa8e45'
+                        id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25'
                     }
-                ]
+                }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'a519ff03-db35-49ee-9162-bb4398fa8e45'));
+            .expect(repository.collectionResponse.find(item => item.id === 'b31a1e0f-8494-44b6-93fc-e144abbc9e25'));
     });
 
     test(`/REST:GET o-auth/application/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/o-auth/application/3316dd58-8f25-4d67-a271-2e3451a5b535')
+            .get('/o-auth/application/c3f93f34-cf53-4d87-8de5-89501794c359')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -433,10 +418,10 @@ describe('application', () =>
     test(`/REST:GET o-auth/application/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/o-auth/application/a519ff03-db35-49ee-9162-bb4398fa8e45')
+            .get('/o-auth/application/b31a1e0f-8494-44b6-93fc-e144abbc9e25')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'a519ff03-db35-49ee-9162-bb4398fa8e45'));
+            .expect(repository.collectionResponse.find(e => e.id === 'b31a1e0f-8494-44b6-93fc-e144abbc9e25'));
     });
 
     test(`/REST:GET o-auth/applications`, () => 
@@ -455,10 +440,10 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'd488db08-5d23-43cd-be4a-f0c2ec1fa6f6',
-                name: '2ibtglk5ewa5uj0zui9qxpj3q1hnrbjczedm2p50raytp7jntdii8qkmmexpj1kgs7n90m1mmifqr35znl9thjopps7b5ewsptdwfxyvqxeir1lrizpmw9jkp6pijm0o0crkbk7a7a9enosryipjt4b2p5yf6lovx1dwwi8j63rfjvntoq9edyohbgh1oik9kjurrj3dfl4wp2vs152vzh5ej36g8c8ackysjvoozy08sf27s3tap2x757rqhe4',
-                code: '58dpje7vkeynl30uef26fk4g6fzjl9zaxlndsqof5b4rmf56ly',
-                secret: 'jei9yvxockwnhrdei5pfhtrscbfbzrvs8vgtx9efhhm2i7dgm8pg4xut5e50dpjp8cnw1civuxgbxui8xbbcevdlh6',
+                id: '51b88b43-f819-417b-861f-566d22c93b26',
+                name: 'zr56scj3eq24e4ohzat7dpvp0tq029w4sekzo4lfj2hm1glcrv2ysg81z9dcbf3s8mu2is95j75jrj6o2xr95fyoor8yk8tk9tcvpegzows455vy1ndvd01rfdulnc4tyb5xcq1y5rmabz8ehj3ata91e6o2d671f8cftt6l2ivrg06x0gv6695q71uykv9rp19mzz2vbav5iucp4gbj20a5isd4w0r8m7dv5suewaw6kp10dz0vuro9qi7q7sy',
+                code: 'pbpnud4rh0s4b7s4dlh2qpgm7txyjqun4pm9fmf8bkawzs36t1',
+                secret: '1z0djhrs8vgbb7tpf2879ir24n0g09p6t5bwzkset5q3yg6nr19qjllws6ptghysvw6p2u2j7so50r3f31ntgky8wm',
                 isMaster: true,
             })
             .expect(404);
@@ -471,20 +456,20 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                name: '10f526acr6guw6kphhr3jtkoxnosys243ji1jy83lr3j0qq2s19g22h1xj832xzvl285q7bi9pwd56iqdawmwrr7t9k082r4c3j5449waa1bffxr3z0y4wo80kq4j0zic8oknwjkhxkub1d38wehgg70cdxdztzlkvmbrhv3lw36xjxx6zxhoiv0b2fut4uot1o93hnswab10cabx10ecd4zy0e2mqqumyedplanpxpj79s47x099fv1k1ptr60',
-                code: 'c00h6kpsrtd7ers2pkuuydm6p6qfpydxbfzwtssfg902zcs01l',
-                secret: 'vsafs1l2h6ghbqlgj87lofnyvstgxxk77406n8g6ns46g34h8sji5p69lke4vn0vjdhgxrwvdo1kzfnp9owmh3vn6n',
-                isMaster: false,
+                id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                name: '3lt78y7o5g4fuk6pjxb2svps01vxoy9f83hvrtgii83boxooizzpmqj50746wgxszmy5sui0wl1prqaips1j3oeh0ng8h65h6fc0dq00sp1541v4txsylx9o8324gtko5wrrqvr1yjcojqfr1epszj2pwkowrqevego2hurwb7qfhbghwkpfiucpnnc5720lq21e11wqh2r9c0ud411iiifsqpvvwjaoixfxt02559n166lza8iorisf5hircl1',
+                code: 'wyixzfalqgmlcuedh1l9ry3okdgb1dj0e3br063raexhknlkt9',
+                secret: 'm3obdffwlr6cvb7ce0jnzfhdu79gbu2wo00w3ozpegreig996q98q5p2mbgv3w43ov4k8abxy5l2gimbe2q3hkwh4f',
+                isMaster: true,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'a519ff03-db35-49ee-9162-bb4398fa8e45'));
+            .expect(repository.collectionResponse.find(e => e.id === 'b31a1e0f-8494-44b6-93fc-e144abbc9e25'));
     });
 
     test(`/REST:DELETE o-auth/application/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/application/a1ed10b5-48c2-4c0d-ba9c-411ea37d897a')
+            .delete('/o-auth/application/f8956891-d6bf-4d1a-81d5-b1fb74e7aead')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -492,7 +477,7 @@ describe('application', () =>
     test(`/REST:DELETE o-auth/application/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/application/a519ff03-db35-49ee-9162-bb4398fa8e45')
+            .delete('/o-auth/application/b31a1e0f-8494-44b6-93fc-e144abbc9e25')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -518,7 +503,8 @@ describe('application', () =>
                         }
                     }
                 `,
-                variables: {
+                variables: 
+                {
                     payload: _.omit(repository.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
                 }
             })
@@ -553,17 +539,17 @@ describe('application', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '9acc3cac-f1f3-4295-9e21-c30d19da8275',
-                        name: 'o32rhkxag7dqkhqnecmzn99qvt7wmlgh2ydvchhidkc8dqz92z6t21yuatjpw7inq5a7rljd83c6vx9wqqzicjhr18rywftjhzvk7ntjtr3q1vzh8bw33vhv2tnz9cgovto6m2l4yucqt79rmz8im0cqsx53a1g3r0ol2utnsuxgttanvxzbew8ntgklv595rwz8uo5sgbp3i2kdexn95y9r4p31cx499ofiq0cb3gpcvgthzs4f4ivtieyyl0l',
-                        code: 'tt1wx0vz2vun9k6stckvtqo3gwe1qy5q7zuu6vh05byiedf3yo',
-                        secret: 'wgfm4qt2ndrr2p300a8lnnx26hqxtesd1b2t1oy7v2wua63u013aqago9s3nzzbne3on1agzc6iu690823g28jkzby',
-                        isMaster: false,
+                        id: 'c3e5f8e2-700e-4691-b3f6-2217bc48d769',
+                        name: 'sx7hbi7plhyzqz7m2dlr55ftbv63i0dx71v5v9gaqn7h0w841sqzpu256p50zz5n30sba8nv0e09vad8ktgalzczj86smyxv2732zvsvg4m1p9hfnp9jqsitos0g8rr4vfmop7fc52wf4obb4vlx9xzbqqw8fpt5bzzt2yx57zybog1gkucpt2x87sgeiu8cdm7fr3h9e7wdxm45bwf1czot2i8sz8cclc0vuw9cm2928xietrix4pe7ttwrusi',
+                        code: 'arjqzvo2znd8yuo8wl60u3ccjvy5iidjbtxhj9aihiz0iqwz94',
+                        secret: 'q54gu86usq31vl4zejwztge461ptuez0qjg0n2veh4cgblxmkpe8ic2hcs7dz8z723iiuos57m4px64oogs84rolsr',
+                        isMaster: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthCreateApplication).toHaveProperty('id', '9acc3cac-f1f3-4295-9e21-c30d19da8275');
+                expect(res.body.data.oAuthCreateApplication).toHaveProperty('id', 'c3e5f8e2-700e-4691-b3f6-2217bc48d769');
             });
     });
 
@@ -574,7 +560,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({ 
                 query: `
-                    query ($query:[QueryStatementInput] $constraint:[QueryStatementInput])
+                    query ($query:QueryStatement $constraint:QueryStatement)
                     {
                         oAuthPaginateApplications (query:$query constraint:$constraint)
                         {   
@@ -584,24 +570,20 @@ describe('application', () =>
                         }
                     }
                 `,
-                variables: {
-                    query: [
-                        {
-                            "command": "OFFSET",
-                            "value": 0
-                        },
-                        {
-                            "command": "LIMIT",
-                            "value": 10
-                        }
-                    ]
+                variables: 
+                {
+                    query: 
+                    {
+                        offset: 0,
+                        limit: 5
+                    }
                 }
             })
             .expect(200)
             .then(res => {
                 expect(res.body.data.oAuthPaginateApplications.total).toBe(repository.collectionResponse.length);
                 expect(res.body.data.oAuthPaginateApplications.count).toBe(repository.collectionResponse.length);
-                expect(res.body.data.oAuthPaginateApplications.rows).toStrictEqual(repository.collectionResponse.slice(0, 10));
+                expect(res.body.data.oAuthPaginateApplications.rows).toStrictEqual(repository.collectionResponse.slice(0, 5));
             });
     });
 
@@ -612,7 +594,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({ 
                 query: `
-                    query ($query:[QueryStatementInput])
+                    query ($query:QueryStatement)
                     {
                         oAuthFindApplication (query:$query)
                         {   
@@ -626,15 +608,15 @@ describe('application', () =>
                         }
                     }
                 `,
-                variables: {
-                    query: [
+                variables: 
+                {
+                    query: 
+                    {
+                        where: 
                         {
-                            command : Command.WHERE,
-                            column  : 'id',
-                            operator: Operator.EQUALS,
-                            value   : 'b10bf3a9-2db3-4ede-abc7-4e811d0889a6'
+                            id: 'c2ad2efa-3eab-44a3-b4c3-e2168bcbee00'
                         }
-                    ]
+                    }
                 }
             })
             .expect(200)
@@ -652,7 +634,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({ 
                 query: `
-                    query ($query:[QueryStatementInput])
+                    query ($query:QueryStatement)
                     {
                         oAuthFindApplication (query:$query)
                         {   
@@ -666,20 +648,20 @@ describe('application', () =>
                         }
                     }
                 `,
-                variables: {
-                    query: [
+                variables: 
+                {
+                    query: 
+                    {
+                        where: 
                         {
-                            command : Command.WHERE,
-                            column  : 'id',
-                            operator: Operator.EQUALS,
-                            value   : 'a519ff03-db35-49ee-9162-bb4398fa8e45'
+                            id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25'
                         }
-                    ]
+                    }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthFindApplication.id).toStrictEqual('a519ff03-db35-49ee-9162-bb4398fa8e45');
+                expect(res.body.data.oAuthFindApplication.id).toStrictEqual('b31a1e0f-8494-44b6-93fc-e144abbc9e25');
             });
     });
 
@@ -705,7 +687,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: '18b45c50-f125-4830-a197-531154ed2ce5'
+                    id: '642e8b4a-d7a0-4872-ad34-09633410b39b'
                 }
             })
             .expect(200)
@@ -738,12 +720,12 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: 'a519ff03-db35-49ee-9162-bb4398fa8e45'
+                    id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthFindApplicationById.id).toStrictEqual('a519ff03-db35-49ee-9162-bb4398fa8e45');
+                expect(res.body.data.oAuthFindApplicationById.id).toStrictEqual('b31a1e0f-8494-44b6-93fc-e144abbc9e25');
             });
     });
 
@@ -754,7 +736,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({ 
                 query: `
-                    query ($query:[QueryStatementInput])
+                    query ($query:QueryStatement)
                     {
                         oAuthGetApplications (query:$query)
                         {   
@@ -768,7 +750,7 @@ describe('application', () =>
                         }
                     }
                 `,
-                variables: { }
+                variables: {}
             })
             .expect(200)
             .then(res => {
@@ -803,10 +785,10 @@ describe('application', () =>
                 variables: {
                     payload: {
                         
-                        id: '48afb732-38a0-47a0-95fd-4d5266f4c166',
-                        name: 'k58e6wzdnnepjsuxn03zrklj4f3obdly1jx1oz65yhgbqanjkqazz53szaoc5pdb254w4xbiacceii3cmopl3bkys30df4dlldkaxoppahfrdpq9teilg8ewvmebgcjesksjb3n9t5e8hif6wyd3wxkd4quf349ps00jpz83xdx0f5rz5ydrprmk5w1rti9pa2nk2sm0avmgymkp1jw32316b56imw2ccro51ox1vcjrzlz4nsze7gi3dhud5ho',
-                        code: 'vk31j7r8899c4g56f9bnn2n1wo9eyp81xxft16in8o01zq00jk',
-                        secret: '0427kfbvfqniczs721zl87ps9xq0oyjyy20ry90l9tly8m5n2jrm5v1662q3g5r137edj7qgs5jounn2yn308ms4x5',
+                        id: '00311c0b-3585-46c7-9619-42953690150f',
+                        name: 'eqo5q8c3gou2nagv9qc4me9htaxdqjgvl5tyzzebwnp7av93o7xwkcc77b9dy558ndepnqsr374eoevv7n1x7gf3r0tnjqexlsn4kc0vdw29aqphw7rbhid6mo2x2dt0l1nsdkls1exv3gr327sfzmf1en2ciiwwv5ixe089ds4wm6o74gxunnu4mr7yise53wa4lx8hszp9mzg8zzeqm2l7wya09egdxoxnujpia3c5p1swc08f345m22e5kry',
+                        code: 'a337rqy6a2jl1xprccs5if1rhgc4g2utggri19wkg9dsarxew1',
+                        secret: 'o5o3rji7httl9j20p37c3fk3h0kvzg5e5a8y4cck8i81fb9vybqtdzlc5oyaa0q3d80pyfcer33szqw7udjvbycls1',
                         isMaster: true,
                     }
                 }
@@ -843,17 +825,17 @@ describe('application', () =>
                 variables: {
                     payload: {
                         
-                        id: 'a519ff03-db35-49ee-9162-bb4398fa8e45',
-                        name: 'dtufmo4jnp1tff5o7bol59ysf6u4ys1j18jreriqkkss8lxfw8tf78z899cc3mnj5b6ygwobhqqk5fvubomgjqtpy6vajke2za0x611e0hgau5agnwe71qmnvc2glvir9cyfqmnkaw6gthcl2fizcdsrngi7n1oleimnsu07yek3ojqzr72u3b2pg9vgi2cko4cvm6llmpqb2v5bw30b2p0w8why8u505xbsovq9vbo6whvm99yymkrw539xpml',
-                        code: 'gtoybxt4j7raanp602i2sls7e2f43vdnh65vnemarkz2f8ep7s',
-                        secret: '7y4marit0k4ea5tti2rpe2xmu4h7nxtvcr4esyluaxtkkdijjbq2egyij34keqiby80swtlb1egp40mev7abi4cin2',
-                        isMaster: false,
+                        id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25',
+                        name: 'rc8hu6k44q2w9pl3fur81zsnncvkf39vfa9kzsxkj62zkzt8rs6sktf0yfs9k1f69gqg83xbe54iss1gszjhqknrhglw945km8ddc5kowoacbwlxpyjg6tydwmzaqpkr2bpxnn536oej6lcwjcemokzgk3xgu4o1ymrjbpo4wb9lx4g5e2tovr8uifne24venqlyi1s7kx5hq8kgc10scwvrqk05pkxn0mcowq1ha5yqeb4c9gp02iy0fkpzgdn',
+                        code: 'y6r722fxu3zex6jd87s5jx63exknpmt67nyviufvxtp573qmj6',
+                        secret: 'jzewcei1abokmhqy3rczih23xn177o6xdbxg0hw6jggtl1l2itfx4gw7j1rq0qx92q3oh1937142vizh11ooy2raxq',
+                        isMaster: true,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthUpdateApplication.id).toStrictEqual('a519ff03-db35-49ee-9162-bb4398fa8e45');
+                expect(res.body.data.oAuthUpdateApplication.id).toStrictEqual('b31a1e0f-8494-44b6-93fc-e144abbc9e25');
             });
     });
 
@@ -879,7 +861,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: '68218cfe-92d5-4bbd-b7c2-f5bca0aa7fc6'
+                    id: '0e646d41-a322-4d58-8605-205de9cc66f3'
                 }
             })
             .expect(200)
@@ -912,12 +894,12 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: 'a519ff03-db35-49ee-9162-bb4398fa8e45'
+                    id: 'b31a1e0f-8494-44b6-93fc-e144abbc9e25'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthDeleteApplicationById.id).toStrictEqual('a519ff03-db35-49ee-9162-bb4398fa8e45');
+                expect(res.body.data.oAuthDeleteApplicationById.id).toStrictEqual('b31a1e0f-8494-44b6-93fc-e144abbc9e25');
             });
     });
 

@@ -24,8 +24,8 @@ describe('DeleteApplicationsService', () =>
                 { 
                     provide: IApplicationRepository,
                     useValue: {
-                        get: (queryStatements) => {},
-                        delete: (queryStatements) => {}
+                        get: (queryStatement) => {},
+                        delete: (queryStatement) => {}
                     }
                 }
             ]
@@ -46,7 +46,7 @@ describe('DeleteApplicationsService', () =>
         test('should delete application and emit event', async () => 
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
-            expect(await service.main([])).toBe(undefined);
+            expect(await service.main({})).toBe(undefined);
         });
     });
 });

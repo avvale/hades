@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
-    ApplicationId, 
-    ApplicationName, 
-    ApplicationCode, 
-    ApplicationSecret, 
-    ApplicationIsMaster, 
-    ApplicationCreatedAt, 
-    ApplicationUpdatedAt, 
+    ApplicationId,
+    ApplicationName,
+    ApplicationCode,
+    ApplicationSecret,
+    ApplicationIsMaster,
+    ApplicationCreatedAt,
+    ApplicationUpdatedAt,
     ApplicationDeletedAt
     
 } from './../../domain/value-objects';
@@ -35,7 +35,7 @@ export class CreateApplicationsService
         } []
     ): Promise<void>
     {
-        // create object with factory pattern
+        // create aggregate with factory pattern
         const aggregateApplications = applications.map(application => OAuthApplication.register(
             application.id,
             application.name,

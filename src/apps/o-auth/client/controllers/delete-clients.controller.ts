@@ -5,7 +5,7 @@ import { ClientDto } from './../dto/client.dto';
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { GetClientsQuery } from '@hades/o-auth/client/application/get/get-clients.query';
 import { DeleteClientsCommand } from '@hades/o-auth/client/application/delete/delete-clients.command';
 
@@ -21,13 +21,13 @@ export class DeleteClientsController
     @Delete()
     @ApiOperation({ summary: 'Delete clients in batch according to query' })
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [ClientDto] })
-    @ApiBody({ type: [QueryStatementInput] })
-    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
-    async main(@Body('query') queryStatements: QueryStatementInput[])
+    @ApiBody({ type: QueryStatement })
+    @ApiQuery({ name: 'query', type: QueryStatement })
+    async main(@Body('query') queryStatement: QueryStatement)
     {
-        const clients = await this.queryBus.ask(new GetClientsQuery(queryStatements));
+        const clients = await this.queryBus.ask(new GetClientsQuery(queryStatement));
 
-        await this.commandBus.dispatch(new DeleteClientsCommand(queryStatements));
+        await this.commandBus.dispatch(new DeleteClientsCommand(queryStatement));
 
         return clients;
     }

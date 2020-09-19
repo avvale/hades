@@ -1,13 +1,13 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { 
-    AccessTokenId, 
-    AccessTokenClientId, 
-    AccessTokenToken, 
-    AccessTokenName, 
-    AccessTokenIsRevoked, 
-    AccessTokenExpiresAt, 
-    AccessTokenCreatedAt, 
-    AccessTokenUpdatedAt, 
+    AccessTokenId,
+    AccessTokenClientId,
+    AccessTokenToken,
+    AccessTokenName,
+    AccessTokenIsRevoked,
+    AccessTokenExpiresAt,
+    AccessTokenCreatedAt,
+    AccessTokenUpdatedAt,
     AccessTokenDeletedAt
     
 } from './value-objects';
@@ -16,11 +16,12 @@ import { UpdatedAccessTokenEvent } from './../application/events/updated-access-
 import { DeletedAccessTokenEvent } from './../application/events/deleted-access-token.event';
 import { OAuthClient } from '@hades/o-auth/client/domain/client.aggregate';
 
+
+
 export class OAuthAccessToken extends AggregateRoot
 {
     id: AccessTokenId;
     clientId: AccessTokenClientId;
-    client: OAuthClient;
     token: AccessTokenToken;
     name: AccessTokenName;
     isRevoked: AccessTokenIsRevoked;
@@ -29,7 +30,12 @@ export class OAuthAccessToken extends AggregateRoot
     updatedAt: AccessTokenUpdatedAt;
     deletedAt: AccessTokenDeletedAt;
     
-    constructor(id?: AccessTokenId, clientId?: AccessTokenClientId, token?: AccessTokenToken, name?: AccessTokenName, isRevoked?: AccessTokenIsRevoked, expiresAt?: AccessTokenExpiresAt, createdAt?: AccessTokenCreatedAt, updatedAt?: AccessTokenUpdatedAt, deletedAt?: AccessTokenDeletedAt, )
+    // eager relationship
+    client: OAuthClient;
+    
+    
+    
+    constructor(id?: AccessTokenId, clientId?: AccessTokenClientId, token?: AccessTokenToken, name?: AccessTokenName, isRevoked?: AccessTokenIsRevoked, expiresAt?: AccessTokenExpiresAt, createdAt?: AccessTokenCreatedAt, updatedAt?: AccessTokenUpdatedAt, deletedAt?: AccessTokenDeletedAt, client?: OAuthClient, )
     {
         super();
         
@@ -43,11 +49,16 @@ export class OAuthAccessToken extends AggregateRoot
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
         
+        // eager relationship
+        this.client = client;
+        
+        
+        
     }
 
-    static register (id: AccessTokenId, clientId: AccessTokenClientId, token: AccessTokenToken, name: AccessTokenName, isRevoked: AccessTokenIsRevoked, expiresAt: AccessTokenExpiresAt, createdAt: AccessTokenCreatedAt, updatedAt: AccessTokenUpdatedAt, deletedAt: AccessTokenDeletedAt, ): OAuthAccessToken
+    static register (id: AccessTokenId, clientId: AccessTokenClientId, token: AccessTokenToken, name: AccessTokenName, isRevoked: AccessTokenIsRevoked, expiresAt: AccessTokenExpiresAt, createdAt: AccessTokenCreatedAt, updatedAt: AccessTokenUpdatedAt, deletedAt: AccessTokenDeletedAt, client?: OAuthClient, ): OAuthAccessToken
     {
-        return new OAuthAccessToken(id, clientId, token, name, isRevoked, expiresAt, createdAt, updatedAt, deletedAt, );
+        return new OAuthAccessToken(id, clientId, token, name, isRevoked, expiresAt, createdAt, updatedAt, deletedAt, client, );
     }
 
     created(accessToken: OAuthAccessToken): void
@@ -116,6 +127,11 @@ export class OAuthAccessToken extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
+            
+            // eager relationship
+            client: this.client?.toDTO(),
+            
+            
             
         }
     }

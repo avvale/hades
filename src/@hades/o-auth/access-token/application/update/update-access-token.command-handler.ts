@@ -2,11 +2,11 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateAccessTokenCommand } from './update-access-token.command';
 import { UpdateAccessTokenService } from './update-access-token.service';
 import { 
-    AccessTokenId, 
-    AccessTokenClientId, 
-    AccessTokenToken, 
-    AccessTokenName, 
-    AccessTokenIsRevoked, 
+    AccessTokenId,
+    AccessTokenClientId,
+    AccessTokenToken,
+    AccessTokenName,
+    AccessTokenIsRevoked,
     AccessTokenExpiresAt
     
 } from './../../domain/value-objects';

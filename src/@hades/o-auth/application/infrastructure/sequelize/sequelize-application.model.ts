@@ -4,7 +4,7 @@ import { DataTypes } from 'sequelize';
 @Table({ modelName: 'o_auth_application', freezeTableName: true })
 export class OAuthApplicationModel extends Model<OAuthApplicationModel> 
 { 
-            
+        
     
     
     @Column({
@@ -13,11 +13,12 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
         allowNull: false,
         type: DataTypes.UUID,
         
+        
     })
     id: string;
         
              
-            
+        
     
     
     @Column({
@@ -26,11 +27,12 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
         allowNull: false,
         type: DataTypes.STRING(255),
         
+        
     })
     name: string;
         
              
-            
+        
     
     
     @Column({
@@ -39,11 +41,12 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
         allowNull: false,
         type: DataTypes.STRING(50),
         
+        
     })
     code: string;
         
              
-            
+        
     
     
     @Column({
@@ -52,11 +55,12 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
         allowNull: false,
         type: DataTypes.STRING(90),
         
+        
     })
     secret: string;
         
              
-            
+        
     
     
     @Column({
@@ -65,11 +69,12 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
+        
     })
     isMaster: boolean;
         
              
-            
+        
     
     
     @Column({
@@ -78,11 +83,12 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
         allowNull: true,
         type: DataTypes.DATE,
         
+        
     })
     createdAt: string;
         
              
-            
+        
     
     
     @Column({
@@ -91,11 +97,12 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
         allowNull: true,
         type: DataTypes.DATE,
         
+        
     })
     updatedAt: string;
         
              
-            
+        
     
     
     @Column({
@@ -103,6 +110,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
         
         allowNull: true,
         type: DataTypes.DATE,
+        
         
     })
     deletedAt: string;

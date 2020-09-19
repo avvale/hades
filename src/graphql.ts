@@ -6,30 +6,6 @@
 
 /* tslint:disable */
 /* eslint-disable */
-export enum Command {
-    COUNT = "COUNT",
-    LIMIT = "LIMIT",
-    OFFSET = "OFFSET",
-    ORDER_BY = "ORDER_BY",
-    WHERE = "WHERE"
-}
-
-export enum Operator {
-    ASC = "ASC",
-    CONTAINS = "CONTAINS",
-    DESC = "DESC",
-    EQUALS = "EQUALS",
-    GREATER = "GREATER",
-    GREATER_OR_EQ = "GREATER_OR_EQ",
-    IN = "IN",
-    IS_NOT_NULL = "IS_NOT_NULL",
-    IS_NULL = "IS_NULL",
-    LOWER = "LOWER",
-    LOWER_OR_EQ = "LOWER_OR_EQ",
-    NOT_CONTAINS = "NOT_CONTAINS",
-    NOT_EQUALS = "NOT_EQUALS"
-}
-
 export enum OAuthClientGrantType {
     AUTHORIZATION_CODE = "AUTHORIZATION_CODE",
     CLIENT_CREDENTIALS = "CLIENT_CREDENTIALS",
@@ -44,11 +20,12 @@ export enum GrantType {
     refresh_token = "refresh_token"
 }
 
-export interface QueryStatementInput {
-    command: Command;
-    column?: string;
-    operator?: Operator;
-    value?: Any;
+export interface QueryStatement {
+    where?: JSON;
+    include?: string[];
+    order?: JSON;
+    limit?: number;
+    offset?: number;
 }
 
 export interface OAuthCreateAccessTokenInput {
@@ -143,7 +120,7 @@ export interface Pagination {
 
 export interface OAuthAccessToken {
     id: string;
-    clientId: string;
+    client: OAuthClient;
     token: GraphQLString;
     name?: GraphQLString;
     isRevoked: GraphQLBoolean;
@@ -154,24 +131,24 @@ export interface OAuthAccessToken {
 }
 
 export interface IQuery {
-    oAuthFindAccessToken(query?: QueryStatementInput[]): OAuthAccessToken | Promise<OAuthAccessToken>;
+    oAuthFindAccessToken(query?: QueryStatement): OAuthAccessToken | Promise<OAuthAccessToken>;
     oAuthFindAccessTokenById(id?: string): OAuthAccessToken | Promise<OAuthAccessToken>;
-    oAuthGetAccessTokens(query?: QueryStatementInput[]): OAuthAccessToken[] | Promise<OAuthAccessToken[]>;
-    oAuthPaginateAccessTokens(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
-    oAuthFindApplication(query?: QueryStatementInput[]): OAuthApplication | Promise<OAuthApplication>;
+    oAuthGetAccessTokens(query?: QueryStatement): OAuthAccessToken[] | Promise<OAuthAccessToken[]>;
+    oAuthPaginateAccessTokens(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    oAuthFindApplication(query?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
     oAuthFindApplicationById(id?: string): OAuthApplication | Promise<OAuthApplication>;
-    oAuthGetApplications(query?: QueryStatementInput[]): OAuthApplication[] | Promise<OAuthApplication[]>;
-    oAuthPaginateApplications(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
-    oAuthFindClient(query?: QueryStatementInput[]): OAuthClient | Promise<OAuthClient>;
+    oAuthGetApplications(query?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
+    oAuthPaginateApplications(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    oAuthFindClient(query?: QueryStatement): OAuthClient | Promise<OAuthClient>;
     oAuthFindClientById(id?: string): OAuthClient | Promise<OAuthClient>;
-    oAuthGetClients(query?: QueryStatementInput[]): OAuthClient[] | Promise<OAuthClient[]>;
-    oAuthPaginateClients(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    oAuthGetClients(query?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
+    oAuthPaginateClients(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     oAuthFindMe(): JSON | Promise<JSON>;
     oAuthFindMePermissions(): JSON[] | Promise<JSON[]>;
-    oAuthFindRefreshToken(query?: QueryStatementInput[]): OAuthRefreshToken | Promise<OAuthRefreshToken>;
+    oAuthFindRefreshToken(query?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthFindRefreshTokenById(id?: string): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthGetRefreshTokens(query?: QueryStatementInput[]): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
-    oAuthPaginateRefreshTokens(query?: QueryStatementInput[], constraint?: QueryStatementInput[]): Pagination | Promise<Pagination>;
+    oAuthGetRefreshTokens(query?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
+    oAuthPaginateRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
@@ -179,23 +156,23 @@ export interface IMutation {
     oAuthCreateAccessTokens(payload: OAuthCreateAccessTokenInput[]): boolean | Promise<boolean>;
     oAuthUpdateAccessToken(payload: OAuthUpdateAccessTokenInput): OAuthAccessToken | Promise<OAuthAccessToken>;
     oAuthDeleteAccessTokenById(id: string): OAuthAccessToken | Promise<OAuthAccessToken>;
-    oAuthDeleteAccessTokens(query?: QueryStatementInput[]): OAuthAccessToken[] | Promise<OAuthAccessToken[]>;
+    oAuthDeleteAccessTokens(query?: QueryStatement): OAuthAccessToken[] | Promise<OAuthAccessToken[]>;
     oAuthCreateApplication(payload: OAuthCreateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
     oAuthCreateApplications(payload: OAuthCreateApplicationInput[]): boolean | Promise<boolean>;
     oAuthUpdateApplication(payload: OAuthUpdateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
     oAuthDeleteApplicationById(id: string): OAuthApplication | Promise<OAuthApplication>;
-    oAuthDeleteApplications(query?: QueryStatementInput[]): OAuthApplication[] | Promise<OAuthApplication[]>;
+    oAuthDeleteApplications(query?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
     oAuthCreateClient(payload: OAuthCreateClientInput): OAuthClient | Promise<OAuthClient>;
     oAuthCreateClients(payload: OAuthCreateClientInput[]): boolean | Promise<boolean>;
     oAuthUpdateClient(payload: OAuthUpdateClientInput): OAuthClient | Promise<OAuthClient>;
     oAuthDeleteClientById(id: string): OAuthClient | Promise<OAuthClient>;
-    oAuthDeleteClients(query?: QueryStatementInput[]): OAuthClient[] | Promise<OAuthClient[]>;
+    oAuthDeleteClients(query?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
     oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
     oAuthCreateRefreshToken(payload: OAuthCreateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthCreateRefreshTokens(payload: OAuthCreateRefreshTokenInput[]): boolean | Promise<boolean>;
     oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthDeleteRefreshTokenById(id: string): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthDeleteRefreshTokens(query?: QueryStatementInput[]): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
+    oAuthDeleteRefreshTokens(query?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
 }
 
 export interface OAuthApplication {
@@ -236,7 +213,7 @@ export interface OAuthCredential {
 
 export interface OAuthRefreshToken {
     id: string;
-    accessTokenId: string;
+    accessToken: OAuthAccessToken;
     token: GraphQLString;
     isRevoked: GraphQLBoolean;
     expiresAt?: GraphQLTimestamp;

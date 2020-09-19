@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
-    RefreshTokenId, 
-    RefreshTokenAccessTokenId, 
-    RefreshTokenToken, 
-    RefreshTokenIsRevoked, 
-    RefreshTokenExpiresAt, 
-    RefreshTokenCreatedAt, 
-    RefreshTokenUpdatedAt, 
+    RefreshTokenId,
+    RefreshTokenAccessTokenId,
+    RefreshTokenToken,
+    RefreshTokenIsRevoked,
+    RefreshTokenExpiresAt,
+    RefreshTokenCreatedAt,
+    RefreshTokenUpdatedAt,
     RefreshTokenDeletedAt
     
 } from './../../domain/value-objects';
@@ -32,7 +32,7 @@ export class CreateRefreshTokenService
         
     ): Promise<void>
     {
-        // create object with factory pattern
+        // create aggregate with factory pattern
         const refreshToken = OAuthRefreshToken.register(
             id,
             accessTokenId,

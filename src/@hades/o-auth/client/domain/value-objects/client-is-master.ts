@@ -1,5 +1,5 @@
 import { BooleanValueObject } from '@hades/shared/domain/value-objects/boolean.value-object';
-import { ValidationRules } from '@hades/shared/domain/lib/validation-rules';
+import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
 export class ClientIsMaster extends BooleanValueObject 
 {

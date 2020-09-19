@@ -1,5 +1,6 @@
-import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
@@ -8,7 +9,7 @@ import { RefreshTokenMapper } from './../../domain/refresh-token.mapper';
 import { OAuthRefreshTokenModel } from './sequelize-refresh-token.model';
 
 @Injectable()
-export class SequelizeRefreshTokenRepository extends SequelizeRepository<OAuthRefreshToken> implements IRefreshTokenRepository
+export class SequelizeRefreshTokenRepository extends SequelizeRepository<OAuthRefreshToken, OAuthRefreshTokenModel> implements IRefreshTokenRepository
 {
     public readonly aggregateName: string = 'OAuthRefreshToken';
     public readonly mapper: RefreshTokenMapper = new RefreshTokenMapper();
@@ -20,6 +21,5 @@ export class SequelizeRefreshTokenRepository extends SequelizeRepository<OAuthRe
     ) {
         super();
     }
-
     
 }

@@ -1,8 +1,8 @@
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 
 export class GetAccessTokensQuery
 {
     constructor(
-        public queryStatements: QueryStatementInput[] = []
+        public queryStatement: QueryStatement
     ) {}
 }

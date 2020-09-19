@@ -4,7 +4,7 @@ import { RefreshTokenDto } from './../dto/refresh-token.dto';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { GetRefreshTokensQuery } from '@hades/o-auth/refresh-token/application/get/get-refresh-tokens.query';
 
 @ApiTags('[o-auth] refresh-token')
@@ -18,10 +18,10 @@ export class GetRefreshTokensController
     @Get()
     @ApiOperation({ summary: 'Find refresh-tokens according to query' })
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [RefreshTokenDto] })
-    @ApiBody({ type: [QueryStatementInput] })
-    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
-    async main(@Body('query') queryStatements: QueryStatementInput[])
+    @ApiBody({ type: QueryStatement })
+    @ApiQuery({ name: 'query', type: QueryStatement })
+    async main(@Body('query') queryStatement: QueryStatement)
     {
-        return await this.queryBus.ask(new GetRefreshTokensQuery(queryStatements));   
+        return await this.queryBus.ask(new GetRefreshTokensQuery(queryStatement));   
     }
 }

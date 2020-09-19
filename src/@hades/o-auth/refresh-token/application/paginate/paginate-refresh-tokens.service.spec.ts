@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
-import { Command } from '@hades/shared/domain/persistence/sql-statement-input';
 
 // custom items
 import { PaginateRefreshTokensService } from './paginate-refresh-tokens.service';
@@ -25,7 +24,7 @@ describe('PaginateRefreshTokensService', () =>
                 { 
                     provide: IRefreshTokenRepository,
                     useValue: {
-                        paginate: (queryStatements, constraints) => {}
+                        paginate: (queryStatement, constraints) => {}
                     }
                 }
             ]
@@ -50,16 +49,10 @@ describe('PaginateRefreshTokensService', () =>
                 count: mockRepository.collectionSource.slice(0,10).length,
                 rows: mockRepository.collectionSource.slice(0,10)
             })));
-            expect(await service.main([
-                {
-                    'command': Command.OFFSET,
-                    'value': 0
-                },
-                {
-                    'command': Command.LIMIT,
-                    'value': 10
-                }
-            ], [])).toStrictEqual({
+            expect(await service.main({
+                offset: 0,
+                limit: 10
+            })).toStrictEqual({
                 total: mockRepository.collectionSource.slice(0,10).length,
                 count: mockRepository.collectionSource.slice(0,10).length,
                 rows: mockRepository.collectionSource.slice(0,10)

@@ -5,14 +5,14 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 import { UpdateAccessTokenService } from './update-access-token.service';
 import { 
-    AccessTokenId, 
-    AccessTokenClientId, 
-    AccessTokenToken, 
-    AccessTokenName, 
-    AccessTokenIsRevoked, 
-    AccessTokenExpiresAt, 
-    AccessTokenCreatedAt, 
-    AccessTokenUpdatedAt, 
+    AccessTokenId,
+    AccessTokenClientId,
+    AccessTokenToken,
+    AccessTokenName,
+    AccessTokenIsRevoked,
+    AccessTokenExpiresAt,
+    AccessTokenCreatedAt,
+    AccessTokenUpdatedAt,
     AccessTokenDeletedAt
     
 } from './../../domain/value-objects';

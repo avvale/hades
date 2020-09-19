@@ -15,6 +15,6 @@ export class GetApplicationsQueryHandler implements IQueryHandler<GetApplication
 
     async execute(query: GetApplicationsQuery): Promise<ApplicationResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getApplicationsService.main(query.queryStatements));
+        return this.mapper.mapAggregatesToResponses(await this.getApplicationsService.main(query.queryStatement));
     }
 }

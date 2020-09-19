@@ -49,7 +49,7 @@ describe('GetClientsController', () =>
         test('should return a clients', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients)));
-            expect(await controller.main([])).toBe(clients);
+            expect(await controller.main({})).toBe(clients);
         });
     });
 });

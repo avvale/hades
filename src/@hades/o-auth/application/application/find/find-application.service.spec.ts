@@ -24,7 +24,7 @@ describe('FindApplicationService', () =>
                 { 
                     provide: IApplicationRepository,
                     useValue: {
-                        find: (queryStatements) => {}
+                        find: (queryStatement) => {}
                     }
                 }
             ]
@@ -45,7 +45,7 @@ describe('FindApplicationService', () =>
         test('should find application', async () => 
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main([])).toBe(mockRepository.collectionSource[0]);
+            expect(await service.main({})).toBe(mockRepository.collectionSource[0]);
         });
     });
 });

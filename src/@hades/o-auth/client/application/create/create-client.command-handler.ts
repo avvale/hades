@@ -2,16 +2,16 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateClientCommand } from './create-client.command';
 import { CreateClientService } from './create-client.service';
 import { 
-    ClientId, 
-    ClientGrantType, 
-    ClientName, 
-    ClientSecret, 
-    ClientAuthUrl, 
-    ClientRedirect, 
-    ClientResourceCodes, 
-    ClientExpiredAccessToken, 
-    ClientExpiredRefreshToken, 
-    ClientIsRevoked, 
+    ClientId,
+    ClientGrantType,
+    ClientName,
+    ClientSecret,
+    ClientAuthUrl,
+    ClientRedirect,
+    ClientResourceCodes,
+    ClientExpiredAccessToken,
+    ClientExpiredRefreshToken,
+    ClientIsRevoked,
     ClientIsMaster
     
 } from './../../domain/value-objects';

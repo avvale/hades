@@ -3,7 +3,7 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { GetAccessTokensQuery } from '@hades/o-auth/access-token/application/get/get-access-tokens.query';
 import { DeleteAccessTokensCommand } from '@hades/o-auth/access-token/application/delete/delete-access-tokens.command';
 
@@ -16,11 +16,11 @@ export class DeleteAccessTokensResolver
     ) {}
 
     @Mutation('oAuthDeleteAccessTokens')
-    async main(@Args('query') queryStatements: QueryStatementInput[])
+    async main(@Args('query') queryStatement: QueryStatement)
     {
-        const accessTokens = await this.queryBus.ask(new GetAccessTokensQuery(queryStatements));
+        const accessTokens = await this.queryBus.ask(new GetAccessTokensQuery(queryStatement));
 
-        await this.commandBus.dispatch(new DeleteAccessTokensCommand(queryStatements));
+        await this.commandBus.dispatch(new DeleteAccessTokensCommand(queryStatement));
 
         return accessTokens;
     }

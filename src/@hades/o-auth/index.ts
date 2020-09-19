@@ -1,8 +1,8 @@
 import { OAuthApplicationHandlers, OAuthApplicationServices, OAuthApplicationModel, IApplicationRepository, SequelizeApplicationRepository, ApplicationSagas, OAuthApplicationsClientsModel } from './application';
 import { OAuthCredentialHandlers, OAuthCredentialServices } from './credential';
 import { OAuthClientHandlers, OAuthClientServices, OAuthClientModel, IClientRepository, SequelizeClientRepository, ClientSagas } from './client';
-import { OAuthAccessTokenHandlers, OAuthAccessTokenServices, OAuthAccessTokenModel, IAccessTokenRepository, SequelizeAccessTokenRepository, AccessTokenSagas } from './access-token';
-import { OAuthRefreshTokenHandlers, OAuthRefreshTokenServices, OAuthRefreshTokenModel, IRefreshTokenRepository, SequelizeRefreshTokenRepository, RefreshTokenSagas } from './refresh-token';
+import { OAuthAccessTokenHandlers, OAuthAccessTokenServices, OAuthAccessTokenModel, IAccessTokenRepository, SequelizeAccessTokenRepository, AccessTokenSagas, client } from './access-token';
+import { OAuthRefreshTokenHandlers, OAuthRefreshTokenServices, OAuthRefreshTokenModel, IRefreshTokenRepository, SequelizeRefreshTokenRepository, RefreshTokenSagas, accessToken } from './refresh-token';
 
 export const OAuthHandlers = [
     ...OAuthApplicationHandlers,
@@ -23,7 +23,9 @@ export const OAuthModels = [
     OAuthApplicationsClientsModel,
     OAuthClientModel,
     OAuthAccessTokenModel,
-    OAuthRefreshTokenModel
+    OAuthRefreshTokenModel,
+    client,
+    accessToken
 ];
 export const OAuthRepositories = [
     {

@@ -49,7 +49,7 @@ describe('DeleteClientsController', () =>
         test('should return an clients deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients)));
-            expect(await controller.main([])).toBe(clients);
+            expect(await controller.main({})).toBe(clients);
         });
     });
 });

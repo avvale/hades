@@ -24,7 +24,7 @@ describe('FindRefreshTokenService', () =>
                 { 
                     provide: IRefreshTokenRepository,
                     useValue: {
-                        find: (queryStatements) => {}
+                        find: (queryStatement) => {}
                     }
                 }
             ]
@@ -45,7 +45,7 @@ describe('FindRefreshTokenService', () =>
         test('should find refreshToken', async () => 
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main([])).toBe(mockRepository.collectionSource[0]);
+            expect(await service.main({})).toBe(mockRepository.collectionSource[0]);
         });
     });
 });

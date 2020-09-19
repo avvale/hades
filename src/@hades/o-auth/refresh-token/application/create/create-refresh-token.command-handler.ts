@@ -2,10 +2,10 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateRefreshTokenCommand } from './create-refresh-token.command';
 import { CreateRefreshTokenService } from './create-refresh-token.service';
 import { 
-    RefreshTokenId, 
-    RefreshTokenAccessTokenId, 
-    RefreshTokenToken, 
-    RefreshTokenIsRevoked, 
+    RefreshTokenId,
+    RefreshTokenAccessTokenId,
+    RefreshTokenToken,
+    RefreshTokenIsRevoked,
     RefreshTokenExpiresAt
     
 } from './../../domain/value-objects';

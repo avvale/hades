@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { IApplicationRepository } from './../../domain/application.repository';
 import { OAuthApplication } from './../../domain/application.aggregate';
@@ -11,8 +11,8 @@ export class PaginateApplicationsService
         private readonly repository: IApplicationRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<OAuthApplication>>
+    public async main(queryStatement: QueryStatement, constraint: QueryStatement = {}): Promise<Pagination<OAuthApplication>>
     {        
-        return await this.repository.paginate(queryStatements, constraints);
+        return await this.repository.paginate(queryStatement, constraint);
     }
 }

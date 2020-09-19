@@ -49,7 +49,7 @@ describe('DeleteAccessTokensController', () =>
         test('should return an accessTokens deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens)));
-            expect(await controller.main([])).toBe(accessTokens);
+            expect(await controller.main({})).toBe(accessTokens);
         });
     });
 });

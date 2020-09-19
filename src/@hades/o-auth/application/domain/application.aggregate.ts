@@ -1,18 +1,20 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { 
-    ApplicationId, 
-    ApplicationName, 
-    ApplicationCode, 
-    ApplicationSecret, 
-    ApplicationIsMaster, 
-    ApplicationCreatedAt, 
-    ApplicationUpdatedAt, 
+    ApplicationId,
+    ApplicationName,
+    ApplicationCode,
+    ApplicationSecret,
+    ApplicationIsMaster,
+    ApplicationCreatedAt,
+    ApplicationUpdatedAt,
     ApplicationDeletedAt
     
 } from './value-objects';
 import { CreatedApplicationEvent } from './../application/events/created-application.event';
 import { UpdatedApplicationEvent } from './../application/events/updated-application.event';
 import { DeletedApplicationEvent } from './../application/events/deleted-application.event';
+
+
 
 export class OAuthApplication extends AggregateRoot
 {
@@ -24,6 +26,10 @@ export class OAuthApplication extends AggregateRoot
     createdAt: ApplicationCreatedAt;
     updatedAt: ApplicationUpdatedAt;
     deletedAt: ApplicationDeletedAt;
+    
+    // eager relationship
+    
+    
     
     constructor(id?: ApplicationId, name?: ApplicationName, code?: ApplicationCode, secret?: ApplicationSecret, isMaster?: ApplicationIsMaster, createdAt?: ApplicationCreatedAt, updatedAt?: ApplicationUpdatedAt, deletedAt?: ApplicationDeletedAt, )
     {
@@ -37,6 +43,10 @@ export class OAuthApplication extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+        
+        // eager relationship
+        
+        
         
     }
 
@@ -107,6 +117,10 @@ export class OAuthApplication extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
+            
+            // eager relationship
+            
+            
             
         }
     }

@@ -1,5 +1,5 @@
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
-import { ValidationRules } from '@hades/shared/domain/lib/validation-rules';
+import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
 export class RefreshTokenAccessTokenId extends UuidValueObject
 {

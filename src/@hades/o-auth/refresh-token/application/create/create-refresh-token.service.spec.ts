@@ -5,10 +5,10 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 import { CreateRefreshTokenService } from './create-refresh-token.service';
 import { 
-    RefreshTokenId, 
-    RefreshTokenAccessTokenId, 
-    RefreshTokenToken, 
-    RefreshTokenIsRevoked, 
+    RefreshTokenId,
+    RefreshTokenAccessTokenId,
+    RefreshTokenToken,
+    RefreshTokenIsRevoked,
     RefreshTokenExpiresAt
     
 } from './../../domain/value-objects';

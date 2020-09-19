@@ -12,6 +12,6 @@ export class DeleteApplicationsCommandHandler implements ICommandHandler<DeleteA
     async execute(command: DeleteApplicationsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteApplicationsService.main(command.queryStatements);
+        await this.deleteApplicationsService.main(command.queryStatement);
     }
 }

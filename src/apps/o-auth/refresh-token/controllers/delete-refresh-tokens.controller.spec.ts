@@ -49,7 +49,7 @@ describe('DeleteRefreshTokensController', () =>
         test('should return an refreshTokens deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
-            expect(await controller.main([])).toBe(refreshTokens);
+            expect(await controller.main({})).toBe(refreshTokens);
         });
     });
 });

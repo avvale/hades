@@ -12,6 +12,6 @@ export class DeleteAccessTokensCommandHandler implements ICommandHandler<DeleteA
     async execute(command: DeleteAccessTokensCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteAccessTokensService.main(command.queryStatements);
+        await this.deleteAccessTokensService.main(command.queryStatement);
     }
 }

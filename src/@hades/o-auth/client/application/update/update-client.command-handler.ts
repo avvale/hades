@@ -2,16 +2,16 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateClientCommand } from './update-client.command';
 import { UpdateClientService } from './update-client.service';
 import { 
-    ClientId, 
-    ClientGrantType, 
-    ClientName, 
-    ClientSecret, 
-    ClientAuthUrl, 
-    ClientRedirect, 
-    ClientResourceCodes, 
-    ClientExpiredAccessToken, 
-    ClientExpiredRefreshToken, 
-    ClientIsRevoked, 
+    ClientId,
+    ClientGrantType,
+    ClientName,
+    ClientSecret,
+    ClientAuthUrl,
+    ClientRedirect,
+    ClientResourceCodes,
+    ClientExpiredAccessToken,
+    ClientExpiredRefreshToken,
+    ClientIsRevoked,
     ClientIsMaster
     
 } from './../../domain/value-objects';

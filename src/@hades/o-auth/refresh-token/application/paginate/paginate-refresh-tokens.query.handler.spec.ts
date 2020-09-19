@@ -5,7 +5,6 @@ import { PaginateRefreshTokensQueryHandler } from './paginate-refresh-tokens.que
 import { MockRefreshTokenRepository } from '@hades/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.repository';
 import { IRefreshTokenRepository } from '@hades/o-auth/refresh-token/domain/refresh-token.repository';
 import { RefreshTokenMapper } from '@hades/o-auth/refresh-token/domain/refresh-token.mapper';
-import { Command } from '@hades/shared/domain/persistence/sql-statement-input';
 import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response';
 import { PaginateRefreshTokensQuery } from './paginate-refresh-tokens.query';
 import { PaginateRefreshTokensService } from './paginate-refresh-tokens.service';
@@ -60,16 +59,10 @@ describe('PaginateRefreshTokensQueryHandler', () =>
             )));
             expect(await queryHandler.execute(
                 new PaginateRefreshTokensQuery(
-                    [
-                        {
-                            'command': Command.OFFSET,
-                            'value': 0
-                        },
-                        {
-                            'command': Command.LIMIT,
-                            'value': 10
-                        }
-                    ]
+                    {
+                        offset: 0,
+                        limit: 10
+                    }
                 )
             )).toStrictEqual(
                 new PaginationResponse(

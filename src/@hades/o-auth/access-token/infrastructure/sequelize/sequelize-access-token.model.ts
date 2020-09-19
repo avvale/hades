@@ -5,7 +5,7 @@ import { OAuthClientModel } from '@hades/o-auth/client/infrastructure/sequelize/
 @Table({ modelName: 'o_auth_access_token', freezeTableName: true })
 export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel> 
 { 
-            
+        
     
     
     @Column({
@@ -14,12 +14,13 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         allowNull: false,
         type: DataTypes.UUID,
         
+        
     })
     id: string;
         
              
         
-    @ForeignKey(() => OAuthClientModel)    
+    @ForeignKey(() => OAuthClientModel)
     
     
     @Column({
@@ -27,6 +28,7 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         
         allowNull: false,
         type: DataTypes.UUID,
+        
         
         references: {  
             key: 'id'
@@ -40,7 +42,7 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
     @BelongsTo(() => OAuthClientModel)
     client: OAuthClientModel;
              
-            
+        
     
     
     @Column({
@@ -49,11 +51,12 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         allowNull: false,
         type: DataTypes.TEXT,
         
+        
     })
     token: string;
         
              
-            
+        
     
     
     @Column({
@@ -62,11 +65,12 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         allowNull: true,
         type: DataTypes.STRING(255),
         
+        
     })
     name: string;
         
              
-            
+        
     
     
     @Column({
@@ -75,11 +79,12 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
+        
     })
     isRevoked: boolean;
         
              
-            
+        
     
     
     @Column({
@@ -88,11 +93,12 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         allowNull: true,
         type: DataTypes.DATE,
         
+        
     })
     expiresAt: string;
         
              
-            
+        
     
     
     @Column({
@@ -101,11 +107,12 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         allowNull: true,
         type: DataTypes.DATE,
         
+        
     })
     createdAt: string;
         
              
-            
+        
     
     
     @Column({
@@ -114,11 +121,12 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         allowNull: true,
         type: DataTypes.DATE,
         
+        
     })
     updatedAt: string;
         
              
-            
+        
     
     
     @Column({
@@ -126,6 +134,7 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         
         allowNull: true,
         type: DataTypes.DATE,
+        
         
     })
     deletedAt: string;

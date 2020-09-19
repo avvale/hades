@@ -4,7 +4,7 @@ import { ClientDto } from './../dto/client.dto';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { GetClientsQuery } from '@hades/o-auth/client/application/get/get-clients.query';
 
 @ApiTags('[o-auth] client')
@@ -18,10 +18,10 @@ export class GetClientsController
     @Get()
     @ApiOperation({ summary: 'Find clients according to query' })
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [ClientDto] })
-    @ApiBody({ type: [QueryStatementInput] })
-    @ApiQuery({ name: 'query', type: [QueryStatementInput] })
-    async main(@Body('query') queryStatements: QueryStatementInput[])
+    @ApiBody({ type: QueryStatement })
+    @ApiQuery({ name: 'query', type: QueryStatement })
+    async main(@Body('query') queryStatement: QueryStatement)
     {
-        return await this.queryBus.ask(new GetClientsQuery(queryStatements));   
+        return await this.queryBus.ask(new GetClientsQuery(queryStatement));   
     }
 }

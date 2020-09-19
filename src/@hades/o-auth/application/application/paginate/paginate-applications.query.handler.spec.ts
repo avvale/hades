@@ -5,7 +5,6 @@ import { PaginateApplicationsQueryHandler } from './paginate-applications.query-
 import { MockApplicationRepository } from '@hades/o-auth/application/infrastructure/mock/mock-application.repository';
 import { IApplicationRepository } from '@hades/o-auth/application/domain/application.repository';
 import { ApplicationMapper } from '@hades/o-auth/application/domain/application.mapper';
-import { Command } from '@hades/shared/domain/persistence/sql-statement-input';
 import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response';
 import { PaginateApplicationsQuery } from './paginate-applications.query';
 import { PaginateApplicationsService } from './paginate-applications.service';
@@ -60,16 +59,10 @@ describe('PaginateApplicationsQueryHandler', () =>
             )));
             expect(await queryHandler.execute(
                 new PaginateApplicationsQuery(
-                    [
-                        {
-                            'command': Command.OFFSET,
-                            'value': 0
-                        },
-                        {
-                            'command': Command.LIMIT,
-                            'value': 10
-                        }
-                    ]
+                    {
+                        offset: 0,
+                        limit: 10
+                    }
                 )
             )).toStrictEqual(
                 new PaginationResponse(

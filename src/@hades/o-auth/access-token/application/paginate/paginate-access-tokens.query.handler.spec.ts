@@ -5,7 +5,6 @@ import { PaginateAccessTokensQueryHandler } from './paginate-access-tokens.query
 import { MockAccessTokenRepository } from '@hades/o-auth/access-token/infrastructure/mock/mock-access-token.repository';
 import { IAccessTokenRepository } from '@hades/o-auth/access-token/domain/access-token.repository';
 import { AccessTokenMapper } from '@hades/o-auth/access-token/domain/access-token.mapper';
-import { Command } from '@hades/shared/domain/persistence/sql-statement-input';
 import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response';
 import { PaginateAccessTokensQuery } from './paginate-access-tokens.query';
 import { PaginateAccessTokensService } from './paginate-access-tokens.service';
@@ -60,16 +59,10 @@ describe('PaginateAccessTokensQueryHandler', () =>
             )));
             expect(await queryHandler.execute(
                 new PaginateAccessTokensQuery(
-                    [
-                        {
-                            'command': Command.OFFSET,
-                            'value': 0
-                        },
-                        {
-                            'command': Command.LIMIT,
-                            'value': 10
-                        }
-                    ]
+                    {
+                        offset: 0,
+                        limit: 10
+                    }
                 )
             )).toStrictEqual(
                 new PaginationResponse(

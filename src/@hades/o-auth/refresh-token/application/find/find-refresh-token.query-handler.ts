@@ -15,7 +15,7 @@ export class FindRefreshTokenQueryHandler implements IQueryHandler<FindRefreshTo
 
     async execute(query: FindRefreshTokenQuery): Promise<RefreshTokenResponse>
     {
-        const refreshToken = await this.findRefreshTokenService.main(query.queryStatements);
+        const refreshToken = await this.findRefreshTokenService.main(query.queryStatement);
 
         return this.mapper.mapAggregateToResponse(refreshToken);
     }

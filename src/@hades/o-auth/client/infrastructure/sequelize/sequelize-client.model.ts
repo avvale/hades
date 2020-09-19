@@ -4,7 +4,7 @@ import { DataTypes } from 'sequelize';
 @Table({ modelName: 'o_auth_client', freezeTableName: true })
 export class OAuthClientModel extends Model<OAuthClientModel> 
 { 
-            
+        
     
     
     @Column({
@@ -13,11 +13,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: false,
         type: DataTypes.UUID,
         
+        
     })
     id: string;
         
              
-            
+        
     
     
     @Column({
@@ -26,11 +27,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: false,
         type: DataTypes.ENUM('AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD_GRANT'),
         
+        
     })
     grantType: string;
         
              
-            
+        
     
     
     @Column({
@@ -39,11 +41,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: false,
         type: DataTypes.STRING(255),
         
+        
     })
     name: string;
         
              
-            
+        
     
     
     @Column({
@@ -52,11 +55,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: false,
         type: DataTypes.STRING(90),
         
+        
     })
     secret: string;
         
              
-            
+        
     
     
     @Column({
@@ -65,11 +69,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: true,
         type: DataTypes.STRING(2048),
         
+        
     })
     authUrl: string;
         
              
-            
+        
     
     
     @Column({
@@ -78,11 +83,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: true,
         type: DataTypes.STRING(2048),
         
+        
     })
     redirect: string;
         
              
-            
+        
     
     
     @Column({
@@ -91,11 +97,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: false,
         type: DataTypes.JSON,
         
+        
     })
     resourceCodes: any;
         
              
-            
+        
     
     
     @Column({
@@ -104,11 +111,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
+        
     })
     expiredAccessToken: number;
         
              
-            
+        
     
     
     @Column({
@@ -117,11 +125,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,
         
+        
     })
     expiredRefreshToken: number;
         
              
-            
+        
     
     
     @Column({
@@ -130,11 +139,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
+        
     })
     isRevoked: boolean;
         
              
-            
+        
     
     
     @Column({
@@ -143,11 +153,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
+        
     })
     isMaster: boolean;
         
              
-            
+        
     
     
     @Column({
@@ -156,11 +167,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: true,
         type: DataTypes.DATE,
         
+        
     })
     createdAt: string;
         
              
-            
+        
     
     
     @Column({
@@ -169,11 +181,12 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         allowNull: true,
         type: DataTypes.DATE,
         
+        
     })
     updatedAt: string;
         
              
-            
+        
     
     
     @Column({
@@ -181,6 +194,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         
         allowNull: true,
         type: DataTypes.DATE,
+        
         
     })
     deletedAt: string;

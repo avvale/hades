@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { OAuthRefreshToken } from './../../domain/refresh-token.aggregate';
 
@@ -10,8 +10,8 @@ export class GetRefreshTokensService
         private readonly repository: IRefreshTokenRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[]): Promise<OAuthRefreshToken[]>
+    public async main(queryStatement: QueryStatement): Promise<OAuthRefreshToken[]>
     {        
-        return await this.repository.get(queryStatements);
+        return await this.repository.get(queryStatement);
     }
 }

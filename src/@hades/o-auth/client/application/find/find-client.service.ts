@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { IClientRepository } from './../../domain/client.repository';
 import { OAuthClient } from './../../domain/client.aggregate';
 
@@ -10,8 +10,8 @@ export class FindClientService
         private readonly repository: IClientRepository
     ) {}
 
-    public async main(queryStatements: QueryStatementInput[]): Promise<OAuthClient>
+    public async main(queryStatement: QueryStatement): Promise<OAuthClient>
     {        
-        return await this.repository.find(queryStatements);
+        return await this.repository.find(queryStatement);
     }
 }

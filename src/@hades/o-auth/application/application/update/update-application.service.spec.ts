@@ -5,13 +5,13 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 import { UpdateApplicationService } from './update-application.service';
 import { 
-    ApplicationId, 
-    ApplicationName, 
-    ApplicationCode, 
-    ApplicationSecret, 
-    ApplicationIsMaster, 
-    ApplicationCreatedAt, 
-    ApplicationUpdatedAt, 
+    ApplicationId,
+    ApplicationName,
+    ApplicationCode,
+    ApplicationSecret,
+    ApplicationIsMaster,
+    ApplicationCreatedAt,
+    ApplicationUpdatedAt,
     ApplicationDeletedAt
     
 } from './../../domain/value-objects';

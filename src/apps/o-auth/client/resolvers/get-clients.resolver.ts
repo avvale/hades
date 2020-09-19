@@ -2,7 +2,7 @@ import { Resolver, Query, Args } from '@nestjs/graphql';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { GetClientsQuery } from '@hades/o-auth/client/application/get/get-clients.query';
 import { OAuthClient } from './../../../../graphql';
 
@@ -14,8 +14,8 @@ export class GetClientsResolver
     ) {}
 
     @Query('oAuthGetClients')
-    async main(@Args('query') queryStatements: QueryStatementInput[]): Promise<OAuthClient[]>
+    async main(@Args('query') queryStatement: QueryStatement): Promise<OAuthClient[]>
     {
-        return await this.queryBus.ask(new GetClientsQuery(queryStatements));
+        return await this.queryBus.ask(new GetClientsQuery(queryStatement));
     }
 }

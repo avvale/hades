@@ -15,6 +15,6 @@ export class GetRefreshTokensQueryHandler implements IQueryHandler<GetRefreshTok
 
     async execute(query: GetRefreshTokensQuery): Promise<RefreshTokenResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getRefreshTokensService.main(query.queryStatements));
+        return this.mapper.mapAggregatesToResponses(await this.getRefreshTokensService.main(query.queryStatement));
     }
 }

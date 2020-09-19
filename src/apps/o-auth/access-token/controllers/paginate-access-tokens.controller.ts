@@ -5,7 +5,7 @@ import { AccessTokenDto } from './../dto/access-token.dto';
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginateAccessTokensQuery } from '@hades/o-auth/access-token/application/paginate/paginate-access-tokens.query';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 
 @ApiTags('[o-auth] access-token')
@@ -19,10 +19,10 @@ export class PaginateAccessTokensController
     @Get()
     @ApiOperation({ summary: 'Paginate access-tokens' })
     @ApiOkResponse({ description: 'The records has been paginated successfully.', type: Pagination })
-    @ApiQuery({ name: 'queryStatements', type: [QueryStatementInput] })
-    @ApiQuery({ name: 'constraint', type: [QueryStatementInput] })
-    async main(@Body('query') queryStatements: QueryStatementInput[], @Body('constraint') constraint: QueryStatementInput[])
+    @ApiQuery({ name: 'queryStatement', type: QueryStatement })
+    @ApiQuery({ name: 'constraint', type: QueryStatement })
+    async main(@Body('query') queryStatement: QueryStatement, @Body('constraint') constraint: QueryStatement)
     {
-        return await this.queryBus.ask(new PaginateAccessTokensQuery(queryStatements, constraint));   
+        return await this.queryBus.ask(new PaginateAccessTokensQuery(queryStatement, constraint));   
     }
 }

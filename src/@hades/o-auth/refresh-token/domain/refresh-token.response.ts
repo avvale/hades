@@ -1,3 +1,7 @@
+import { AccessTokenResponse } from '@hades/o-auth/access-token/domain/access-token.response';
+
+
+
 export class RefreshTokenResponse 
 {
     constructor(
@@ -9,6 +13,10 @@ export class RefreshTokenResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
+        
+        public readonly accessToken: AccessTokenResponse,
+        
+        
         
     ) {}
 }

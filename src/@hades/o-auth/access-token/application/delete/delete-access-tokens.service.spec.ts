@@ -24,8 +24,8 @@ describe('DeleteAccessTokensService', () =>
                 { 
                     provide: IAccessTokenRepository,
                     useValue: {
-                        get: (queryStatements) => {},
-                        delete: (queryStatements) => {}
+                        get: (queryStatement) => {},
+                        delete: (queryStatement) => {}
                     }
                 }
             ]
@@ -46,7 +46,7 @@ describe('DeleteAccessTokensService', () =>
         test('should delete accessToken and emit event', async () => 
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
-            expect(await service.main([])).toBe(undefined);
+            expect(await service.main({})).toBe(undefined);
         });
     });
 });

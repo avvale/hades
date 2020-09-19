@@ -12,7 +12,7 @@ export class PaginateAccessTokensQueryHandler implements IQueryHandler<PaginateA
 
     async execute(query: PaginateAccessTokensQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateAccessTokensService.main(query.queryStatements, query.constraint)
+        const { total, count, rows } = await this.paginateAccessTokensService.main(query.queryStatement, query.constraint)
 
         return new PaginationResponse(
             total, 

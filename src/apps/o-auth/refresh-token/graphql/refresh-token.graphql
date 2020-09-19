@@ -3,7 +3,7 @@
 type OAuthRefreshToken
 {
     id: ID!
-    accessTokenId: ID!
+    accessToken: OAuthAccessToken!
     token: GraphQLString!
     isRevoked: GraphQLBoolean!
     expiresAt: GraphQLTimestamp
@@ -35,10 +35,10 @@ input OAuthUpdateRefreshTokenInput
 
 type Query 
 {
-    oAuthFindRefreshToken(query:[QueryStatementInput]): OAuthRefreshToken
+    oAuthFindRefreshToken(query:QueryStatement): OAuthRefreshToken
     oAuthFindRefreshTokenById(id:ID): OAuthRefreshToken
-    oAuthGetRefreshTokens(query:[QueryStatementInput]): [OAuthRefreshToken]!
-    oAuthPaginateRefreshTokens(query:[QueryStatementInput] constraint:[QueryStatementInput]): Pagination!
+    oAuthGetRefreshTokens(query:QueryStatement): [OAuthRefreshToken]!
+    oAuthPaginateRefreshTokens(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
 type Mutation
@@ -47,5 +47,5 @@ type Mutation
     oAuthCreateRefreshTokens(payload: [OAuthCreateRefreshTokenInput]!): Boolean!
     oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput!): OAuthRefreshToken
     oAuthDeleteRefreshTokenById(id: ID!): OAuthRefreshToken
-    oAuthDeleteRefreshTokens(query:[QueryStatementInput]): [OAuthRefreshToken]!
+    oAuthDeleteRefreshTokens(query:QueryStatement): [OAuthRefreshToken]!
 }

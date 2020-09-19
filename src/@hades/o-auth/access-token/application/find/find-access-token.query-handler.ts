@@ -15,7 +15,7 @@ export class FindAccessTokenQueryHandler implements IQueryHandler<FindAccessToke
 
     async execute(query: FindAccessTokenQuery): Promise<AccessTokenResponse>
     {
-        const accessToken = await this.findAccessTokenService.main(query.queryStatements);
+        const accessToken = await this.findAccessTokenService.main(query.queryStatement);
 
         return this.mapper.mapAggregateToResponse(accessToken);
     }

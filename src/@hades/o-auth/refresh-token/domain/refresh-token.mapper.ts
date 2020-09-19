@@ -1,27 +1,36 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
+import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { OAuthRefreshToken } from './refresh-token.aggregate';
 import { RefreshTokenResponse } from './refresh-token.response';
 import { 
-    RefreshTokenId, 
-    RefreshTokenAccessTokenId, 
-    RefreshTokenToken, 
-    RefreshTokenIsRevoked, 
-    RefreshTokenExpiresAt, 
-    RefreshTokenCreatedAt, 
-    RefreshTokenUpdatedAt, 
+    RefreshTokenId,
+    RefreshTokenAccessTokenId,
+    RefreshTokenToken,
+    RefreshTokenIsRevoked,
+    RefreshTokenExpiresAt,
+    RefreshTokenCreatedAt,
+    RefreshTokenUpdatedAt,
     RefreshTokenDeletedAt
     
 } from './value-objects';
+import { AccessTokenMapper } from '@hades/o-auth/access-token/domain/access-token.mapper';
+
+
 
 export class RefreshTokenMapper implements IMapper
 {
+    constructor(
+        public options: MapperOptions = { eagerLoading: true }
+    ) {}
+    
     /**
      * Map object to aggregate
      * @param refreshToken
      */
-    mapObjectToAggregate(refreshToken: ObjectLiteral): OAuthRefreshToken
+    mapModelToAggregate(refreshToken: ObjectLiteral): OAuthRefreshToken
     {
+        if (!refreshToken) return;
+
         return this.makeAggregate(refreshToken);
     }
 
@@ -29,9 +38,11 @@ export class RefreshTokenMapper implements IMapper
      * Map array of objects to array aggregates
      * @param refreshTokens 
      */
-    mapObjectsToAggregates(refreshTokens: ObjectLiteral[]): OAuthRefreshToken[]
+    mapModelsToAggregates(refreshTokens: ObjectLiteral[]): OAuthRefreshToken[]
     {
-        return refreshTokens.map(refreshToken  => this.makeAggregate(refreshToken ));
+        if (!Array.isArray(refreshTokens)) return;
+        
+        return refreshTokens.map(refreshToken  => this.makeAggregate(refreshToken));
     }
 
     /**
@@ -49,6 +60,8 @@ export class RefreshTokenMapper implements IMapper
      */
     mapAggregatesToResponses(refreshTokens: OAuthRefreshToken[]): RefreshTokenResponse[]
     {
+        if (!Array.isArray(refreshTokens)) return;
+
         return refreshTokens.map(refreshToken => this.makeResponse(refreshToken));
     }
 
@@ -63,12 +76,18 @@ export class RefreshTokenMapper implements IMapper
             new RefreshTokenCreatedAt(refreshToken.createdAt),
             new RefreshTokenUpdatedAt(refreshToken.updatedAt),
             new RefreshTokenDeletedAt(refreshToken.deletedAt),
-              
+            
+            this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapModelToAggregate(refreshToken.accessToken) : undefined,
+            
+            
+            
         );
     }
 
     private makeResponse(refreshToken: OAuthRefreshToken): RefreshTokenResponse
     {
+        if (!refreshToken) return;
+        
         return new RefreshTokenResponse(
             refreshToken.id.value,
             refreshToken.accessTokenId.value,
@@ -78,6 +97,10 @@ export class RefreshTokenMapper implements IMapper
             refreshToken.createdAt.value,
             refreshToken.updatedAt.value,
             refreshToken.deletedAt.value,
+            
+            this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapAggregateToResponse(refreshToken.accessToken) : undefined,
+            
+            
             
         );
     }

@@ -2,7 +2,7 @@ import { Resolver, Query, Args } from '@nestjs/graphql';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { FindApplicationQuery } from '@hades/o-auth/application/application/find/find-application.query';
 import { OAuthApplication } from './../../../../graphql';
 
@@ -14,8 +14,8 @@ export class FindApplicationResolver
     ) {}
 
     @Query('oAuthFindApplication')
-    async main(@Args('query') queryStatements: QueryStatementInput[]): Promise<OAuthApplication>
+    async main(@Args('query') queryStatement: QueryStatement): Promise<OAuthApplication>
     {
-        return await this.queryBus.ask(new FindApplicationQuery(queryStatements));
+        return await this.queryBus.ask(new FindApplicationQuery(queryStatement));
     }
 }

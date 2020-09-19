@@ -2,19 +2,19 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
-    ClientId, 
-    ClientGrantType, 
-    ClientName, 
-    ClientSecret, 
-    ClientAuthUrl, 
-    ClientRedirect, 
-    ClientResourceCodes, 
-    ClientExpiredAccessToken, 
-    ClientExpiredRefreshToken, 
-    ClientIsRevoked, 
-    ClientIsMaster, 
-    ClientCreatedAt, 
-    ClientUpdatedAt, 
+    ClientId,
+    ClientGrantType,
+    ClientName,
+    ClientSecret,
+    ClientAuthUrl,
+    ClientRedirect,
+    ClientResourceCodes,
+    ClientExpiredAccessToken,
+    ClientExpiredRefreshToken,
+    ClientIsRevoked,
+    ClientIsMaster,
+    ClientCreatedAt,
+    ClientUpdatedAt,
     ClientDeletedAt
     
 } from './../../domain/value-objects';
@@ -44,7 +44,7 @@ export class CreateClientService
         
     ): Promise<void>
     {
-        // create object with factory pattern
+        // create aggregate with factory pattern
         const client = OAuthClient.register(
             id,
             grantType,

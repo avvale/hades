@@ -1,24 +1,26 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { 
-    ClientId, 
-    ClientGrantType, 
-    ClientName, 
-    ClientSecret, 
-    ClientAuthUrl, 
-    ClientRedirect, 
-    ClientResourceCodes, 
-    ClientExpiredAccessToken, 
-    ClientExpiredRefreshToken, 
-    ClientIsRevoked, 
-    ClientIsMaster, 
-    ClientCreatedAt, 
-    ClientUpdatedAt, 
+    ClientId,
+    ClientGrantType,
+    ClientName,
+    ClientSecret,
+    ClientAuthUrl,
+    ClientRedirect,
+    ClientResourceCodes,
+    ClientExpiredAccessToken,
+    ClientExpiredRefreshToken,
+    ClientIsRevoked,
+    ClientIsMaster,
+    ClientCreatedAt,
+    ClientUpdatedAt,
     ClientDeletedAt
     
 } from './value-objects';
 import { CreatedClientEvent } from './../application/events/created-client.event';
 import { UpdatedClientEvent } from './../application/events/updated-client.event';
 import { DeletedClientEvent } from './../application/events/deleted-client.event';
+
+
 
 export class OAuthClient extends AggregateRoot
 {
@@ -36,6 +38,10 @@ export class OAuthClient extends AggregateRoot
     createdAt: ClientCreatedAt;
     updatedAt: ClientUpdatedAt;
     deletedAt: ClientDeletedAt;
+    
+    // eager relationship
+    
+    
     
     constructor(id?: ClientId, grantType?: ClientGrantType, name?: ClientName, secret?: ClientSecret, authUrl?: ClientAuthUrl, redirect?: ClientRedirect, resourceCodes?: ClientResourceCodes, expiredAccessToken?: ClientExpiredAccessToken, expiredRefreshToken?: ClientExpiredRefreshToken, isRevoked?: ClientIsRevoked, isMaster?: ClientIsMaster, createdAt?: ClientCreatedAt, updatedAt?: ClientUpdatedAt, deletedAt?: ClientDeletedAt, )
     {
@@ -55,6 +61,10 @@ export class OAuthClient extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+        
+        // eager relationship
+        
+        
         
     }
 
@@ -149,6 +159,10 @@ export class OAuthClient extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
+            
+            // eager relationship
+            
+            
             
         }
     }

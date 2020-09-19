@@ -15,7 +15,7 @@ export class FindApplicationQueryHandler implements IQueryHandler<FindApplicatio
 
     async execute(query: FindApplicationQuery): Promise<ApplicationResponse>
     {
-        const application = await this.findApplicationService.main(query.queryStatements);
+        const application = await this.findApplicationService.main(query.queryStatement);
 
         return this.mapper.mapAggregateToResponse(application);
     }

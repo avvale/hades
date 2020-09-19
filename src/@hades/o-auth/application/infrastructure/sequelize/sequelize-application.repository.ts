@@ -1,5 +1,6 @@
-import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IApplicationRepository } from './../../domain/application.repository';
@@ -8,7 +9,7 @@ import { ApplicationMapper } from './../../domain/application.mapper';
 import { OAuthApplicationModel } from './sequelize-application.model';
 
 @Injectable()
-export class SequelizeApplicationRepository extends SequelizeRepository<OAuthApplication> implements IApplicationRepository
+export class SequelizeApplicationRepository extends SequelizeRepository<OAuthApplication, OAuthApplicationModel> implements IApplicationRepository
 {
     public readonly aggregateName: string = 'OAuthApplication';
     public readonly mapper: ApplicationMapper = new ApplicationMapper();
@@ -20,6 +21,5 @@ export class SequelizeApplicationRepository extends SequelizeRepository<OAuthApp
     ) {
         super();
     }
-
     
 }

@@ -49,7 +49,7 @@ describe('FindApplicationController', () =>
         test('should return a application', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
-            expect(await controller.main([])).toBe(applications[0]);
+            expect(await controller.main({})).toBe(applications[0]);
         });
     });
 });

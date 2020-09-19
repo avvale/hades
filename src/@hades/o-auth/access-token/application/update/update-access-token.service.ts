@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
-    AccessTokenId, 
-    AccessTokenClientId, 
-    AccessTokenToken, 
-    AccessTokenName, 
-    AccessTokenIsRevoked, 
-    AccessTokenExpiresAt, 
-    AccessTokenCreatedAt, 
-    AccessTokenUpdatedAt, 
+    AccessTokenId,
+    AccessTokenClientId,
+    AccessTokenToken,
+    AccessTokenName,
+    AccessTokenIsRevoked,
+    AccessTokenExpiresAt,
+    AccessTokenCreatedAt,
+    AccessTokenUpdatedAt,
     AccessTokenDeletedAt
     
 } from './../../domain/value-objects';
@@ -34,7 +34,7 @@ export class UpdateAccessTokenService
         
     ): Promise<void>
     {        
-        // create object with factory pattern
+        // create aggregate with factory pattern
         const accessToken = OAuthAccessToken.register(
             id,
             clientId,

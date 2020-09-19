@@ -3,7 +3,7 @@ import { Resolver, Query, Args } from '@nestjs/graphql';
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginateClientsQuery } from '@hades/o-auth/client/application/paginate/paginate-clients.query';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { Pagination } from './../../../../graphql';
 
 @Resolver()
@@ -14,8 +14,8 @@ export class PaginateClientsResolver
     ) {}
 
     @Query('oAuthPaginateClients')
-    async main(@Args('query') queryStatements: QueryStatementInput[], @Args('constraint') constraint: QueryStatementInput[]): Promise<Pagination>
+    async main(@Args('query') queryStatement: QueryStatement, @Args('constraint') constraint: QueryStatement): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateClientsQuery(queryStatements, constraint));   
+        return await this.queryBus.ask(new PaginateClientsQuery(queryStatement, constraint));   
     }
 }
