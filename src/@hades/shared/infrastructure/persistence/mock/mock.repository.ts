@@ -4,7 +4,7 @@ import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { TimestampValueObject } from '@hades/shared/domain/value-objects/timestamp.value-object';
-
+const cleanDeep = require('clean-deep');
 
 @Injectable()
 export abstract class MockRepository<Aggregate extends AggregateBase>
@@ -16,7 +16,14 @@ export abstract class MockRepository<Aggregate extends AggregateBase>
 
     get collectionResponse(): any[]
     { 
-        return this.collectionSource.map(author => author.toDTO());
+        // to match objects, the http output excludes undefined values
+        return this.collectionSource.map(item => cleanDeep(item.toDTO(), {
+                nullValues: false,
+                emptyStrings: false,
+                emptyObjects: false,
+                emptyArrays: false
+            })
+        );
     }
 
     async paginate(query: QueryStatement, constraint: QueryStatement): Promise<Pagination<Aggregate>>
@@ -47,7 +54,7 @@ export abstract class MockRepository<Aggregate extends AggregateBase>
 
     async find(queryStatement: QueryStatement): Promise<Aggregate> 
     {
-        const aggregate = this.collectionSource.find(item => item.id === queryStatement.where.id);
+        const aggregate = this.collectionSource.find(item => item.id.value === queryStatement.where.id);
 
         if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
