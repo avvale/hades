@@ -1,58 +1,117 @@
 import { ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
-import { QueryStatementInput } from '@hades/shared/domain/persistence/sql-statement-input';
+import { FindOptions } from 'sequelize/types';
+import { Model } from 'sequelize-typescript';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { ObjectLiteral } from '@hades/shared/domain/lib/object-literal';
+import { ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 
-export abstract class SequelizeRepository<Aggregate extends AggregateBase>
+export abstract class SequelizeRepository<Aggregate extends AggregateBase, ModelClass>
 {
     public readonly repository: any;
     public readonly criteria: ICriteria;
     public readonly aggregateName: string;
     public readonly mapper: IMapper;
 
-    builder(): Object
-    {
-        return {}
-    }
-
-    async paginate(queryStatements: QueryStatementInput[] = [], constraints: QueryStatementInput[] = []): Promise<Pagination<Aggregate>>
+    async paginate(query: QueryStatement, constraint: QueryStatement): Promise<Pagination<Aggregate>>
     {
         // get count total records from sql service library
         const total = await this.repository.count(
-            this.criteria.implements(constraints, this.builder())
+            this.criteria.implements(constraint)
         );
 
+        // get records
         const { count, rows } = await this.repository.findAndCountAll(
-            this.criteria.implements(constraints.concat(queryStatements), this.builder())
+            this.criteria.implements(
+                this.composeStatementPaginateHook(query)
+            )
         );
 
         return { 
             total, 
             count, 
-            rows: <Aggregate[]>this.mapper.mapObjectsToAggregates(rows) // map values to create value objects
+            rows: <Aggregate[]>this.mapper.mapModelsToAggregates(rows) // map values to create value objects
         };
     }
-    
-    async create(entity: Aggregate): Promise<void>
+
+    // hook to add findOptions
+    composeStatementPaginateHook(query: QueryStatement): QueryStatement { return query; }
+
+    async find(query: QueryStatement): Promise<Aggregate> 
     {
-        // check if exist object in database, if allow save entity with the same uuid, update this entity in database instead of create it
-        const entityInDB = await this.repository.findOne(
+        const model = await this.repository.findOne(
+            this.criteria.implements(
+                this.composeStatementFindHook(query)
+            )
+        );
+
+        if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
+
+        // map value to create value objects
+        return <Aggregate>this.mapper.mapModelToAggregate(model);
+    }
+
+    // hook to add findOptions
+    composeStatementFindHook(query: QueryStatement): QueryStatement { return query; }
+
+    async findById(id: UuidValueObject): Promise<Aggregate>
+    {
+        // value is already mapped
+        const model = await this.repository.findOne(
+            this.criteria.implements(
+                this.composeStatementFindByIdHook({ where: { id: id.value }})
+            )
+        );
+
+        if (!model) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
+
+        return <Aggregate>this.mapper.mapModelToAggregate(model);
+    }
+
+    // hook to add findOptions
+    composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
+
+    // get multiple records
+    async get(query: QueryStatement): Promise<Aggregate[]> 
+    {
+        const models = await this.repository.findAll(
+            this.criteria.implements(
+                this.composeStatementGetHook(query)
+            )
+        );
+
+        // map values to create value objects
+        return <Aggregate[]>this.mapper.mapModelsToAggregates(models);
+    }
+
+    // hook to add findOptions
+    composeStatementGetHook(query: QueryStatement): QueryStatement { return query; }
+
+    // ******************
+    // ** side effects **
+    // ******************
+
+    async create(aggregate: Aggregate): Promise<void>
+    {
+        // check if exist object in database, if allow save aggregate with the same uuid, update this aggregate in database instead of create it
+        const modelInDB = await this.repository.findOne(
             {
                 where: {
-                    id: entity['id']['value']
+                    id: aggregate['id']['value']
                 }
             }
         );
         
-        if (entityInDB) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${entity['id']['value']} already exist in database`);
+        if (modelInDB) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${aggregate['id']['value']} already exist in database`);
         
         try
         {
-            await this.repository.create(entity.toDTO());
+            const model = await this.repository.create(aggregate.toDTO());
+
+            this.createdAggregateHook(aggregate, model);
         }
         catch (error) 
         {
@@ -60,72 +119,42 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
         }
     }
 
-    async insert(entities: Aggregate[], options: object = {}): Promise<void>
+    // hook called after create aggregate
+    createdAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
+
+    async insert(aggregates: Aggregate[], options: object = {}): Promise<void>
     {
-        await this.repository.bulkCreate(entities.map(item => item.toDTO()), options);
+        await this.repository.bulkCreate(aggregates.map(item => item.toDTO()), options);
     }
 
-    async find(queryStatements: QueryStatementInput[] = []): Promise<Aggregate> 
-    {
-        const entity = await this.repository.findOne(
-            this.criteria.implements(queryStatements, this.builder())
-        );
-
-        if (!entity) throw new NotFoundException(`${this.aggregateName} not found`);
-
-        // map value to create value objects
-        return <Aggregate>this.mapper.mapObjectToAggregate(entity);
-    }
-
-    async findById(id: UuidValueObject): Promise<Aggregate>
-    {
-        // value is already mapped
-        const entity = await this.repository.findOne(
-            {
-                where: {
-                    id: id.value
-                }
-            }
-        );
-
-        if (!entity) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
-
-        return <Aggregate>this.mapper.mapObjectToAggregate(entity);
-    }
-
-    async get(queryStatements: QueryStatementInput[] = []): Promise<Aggregate[]> 
-    {
-        const entities = await this.repository.findAll(
-            this.criteria.implements(queryStatements, this.builder())
-        );
-
-        // map values to create value objects
-        return <Aggregate[]>this.mapper.mapObjectsToAggregates(entities);
-    }
-
-    async update(entity: Aggregate): Promise<void> 
+    async update(aggregate: Aggregate): Promise<void> 
     { 
-        // check that entity exist
-        const entityInDB = await this.repository.findOne(
+        // check that model exist
+        const modelInDB = await this.repository.findOne(
             {
                 where: {
-                    id: entity['id']['value']
+                    id: aggregate['id']['value']
                 }
             }
         );
 
-        if (!entity) throw new NotFoundException(`${this.aggregateName} not found`);
+        if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
         // clean undefined fields
-        const objectLiteral = this.cleanUndefined(entity.toDTO());
+        const objectLiteral = this.cleanUndefined(aggregate.toDTO());
 
-        await entityInDB.update(objectLiteral);
+        const model = await modelInDB.update(objectLiteral);
+
+        this.updatedAggregateHook(aggregate, model);
     }
+
+    // hook called after update aggregate
+    updatedAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
-        // check that entity exist
-        const entity = await this.repository.findOne(
+        // check that aggregate exist
+        const model = await this.repository.findOne(
             {
                 where: {
                     id: id.value
@@ -133,29 +162,29 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase>
             }
         );
 
-        if (!entity) throw new NotFoundException(`${this.aggregateName} not found`);
+        if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
 
-        await entity.destroy();
+        await model.destroy();
     }
 
-    async delete(queryStatements: QueryStatementInput[] = []): Promise<void> 
+    async delete(query: QueryStatement): Promise<void> 
     {
-        if (!Array.isArray(queryStatements) || queryStatements.length === 0) throw new BadRequestException(`To delete multiple records, you must define a query statement`);
+        if (!query.where) throw new BadRequestException(`To delete multiple records, you must define a where statement`);
 
-        // check that entity exist
+        // check that aggregate exist
         await this.repository.destroy(
-            this.criteria.implements(queryStatements, this.builder())
+            this.criteria.implements(query)
         );
     }
 
-    cleanUndefined(entity: ObjectLiteral): ObjectLiteral
+    cleanUndefined(aggregate: ObjectLiteral): ObjectLiteral
     {
         // clean properties object from undefined values
-        for (const property in entity )
+        for (const property in aggregate )
         {
             // can to be null for nullable values
-            if (entity[property] === undefined) delete entity[property];
+            if (aggregate[property] === undefined) delete aggregate[property];
         }
-        return entity;
+        return aggregate;
     }
 }

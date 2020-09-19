@@ -1,3 +1,13 @@
+export interface MapperOptions 
+{
+    eagerLoading: boolean;
+}
+
+export interface ObjectLiteral 
+{
+    [key: string]: any;
+}
+
 export interface ValidationRules
 {
     name?: string,

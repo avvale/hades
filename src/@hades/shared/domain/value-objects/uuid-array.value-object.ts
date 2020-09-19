@@ -4,7 +4,7 @@ export abstract class UuidArrayValueObject extends ValueObject<string[]>
 {
     get length(): number
     {
-        return super.value.length;
+        return super.value?.length;
     }
 
     isArray(): boolean

@@ -1,4 +1,4 @@
-import { ValidationRules } from '@hades/shared/domain/lib/validation-rules';
+import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
 // custom items
 import { StringValueObject } from './string.value-object';
