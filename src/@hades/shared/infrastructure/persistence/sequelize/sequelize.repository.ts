@@ -16,7 +16,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     public readonly aggregateName: string;
     public readonly mapper: IMapper;
 
-    async paginate(query: QueryStatement, constraint: QueryStatement): Promise<Pagination<Aggregate>>
+    async paginate(queryStatement: QueryStatement, constraint: QueryStatement): Promise<Pagination<Aggregate>>
     {
         // get count total records from sql service library
         const total = await this.repository.count(
@@ -26,7 +26,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         // get records
         const { count, rows } = await this.repository.findAndCountAll(
             this.criteria.implements(
-                this.composeStatementPaginateHook(query)
+                this.composeStatementPaginateHook(queryStatement)
             )
         );
 
@@ -38,13 +38,13 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementPaginateHook(query: QueryStatement): QueryStatement { return query; }
+    composeStatementPaginateHook(queryStatement: QueryStatement): QueryStatement { return queryStatement; }
 
-    async find(query: QueryStatement): Promise<Aggregate> 
+    async find(queryStatement: QueryStatement): Promise<Aggregate> 
     {
         const model = await this.repository.findOne(
             this.criteria.implements(
-                this.composeStatementFindHook(query)
+                this.composeStatementFindHook(queryStatement)
             )
         );
 
@@ -55,7 +55,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementFindHook(query: QueryStatement): QueryStatement { return query; }
+    composeStatementFindHook(queryStatement: QueryStatement): QueryStatement { return queryStatement; }
 
     async findById(id: UuidValueObject): Promise<Aggregate>
     {
@@ -75,11 +75,11 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     // get multiple records
-    async get(query: QueryStatement): Promise<Aggregate[]> 
+    async get(queryStatement: QueryStatement): Promise<Aggregate[]> 
     {
         const models = await this.repository.findAll(
             this.criteria.implements(
-                this.composeStatementGetHook(query)
+                this.composeStatementGetHook(queryStatement)
             )
         );
 
@@ -88,7 +88,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementGetHook(query: QueryStatement): QueryStatement { return query; }
+    composeStatementGetHook(queryStatement: QueryStatement): QueryStatement { return queryStatement; }
 
     // ******************
     // ** side effects **
@@ -167,13 +167,13 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         await model.destroy();
     }
 
-    async delete(query: QueryStatement): Promise<void> 
+    async delete(queryStatement: QueryStatement): Promise<void> 
     {
-        if (!query.where) throw new BadRequestException(`To delete multiple records, you must define a where statement`);
+        if (!queryStatement.where) throw new BadRequestException(`To delete multiple records, you must define a where statement`);
 
         // check that aggregate exist
         await this.repository.destroy(
-            this.criteria.implements(query)
+            this.criteria.implements(queryStatement)
         );
     }
 
