@@ -14,7 +14,7 @@ export class GetApplicationsResolver
     ) {}
 
     @Query('oAuthGetApplications')
-    async main(@Args('query') queryStatement: QueryStatement): Promise<OAuthApplication[]>
+    async main(@Args('query') queryStatement?: QueryStatement): Promise<OAuthApplication[]>
     {
         return await this.queryBus.ask(new GetApplicationsQuery(queryStatement));
     }

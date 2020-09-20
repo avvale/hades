@@ -10,7 +10,7 @@ export class GetAccessTokensService
         private readonly repository: IAccessTokenRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement): Promise<OAuthAccessToken[]>
+    public async main(queryStatement?: QueryStatement): Promise<OAuthAccessToken[]>
     {        
         return await this.repository.get(queryStatement);
     }

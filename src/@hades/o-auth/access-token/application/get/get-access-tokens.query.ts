@@ -3,6 +3,6 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 export class GetAccessTokensQuery
 {
     constructor(
-        public queryStatement: QueryStatement
+        public queryStatement?: QueryStatement
     ) {}
 }

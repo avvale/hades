@@ -20,7 +20,7 @@ export class GetClientsController
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [ClientDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement)
     {
         return await this.queryBus.ask(new GetClientsQuery(queryStatement));   
     }

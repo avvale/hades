@@ -10,7 +10,7 @@ export class FindApplicationService
         private readonly repository: IApplicationRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement): Promise<OAuthApplication>
+    public async main(queryStatement?: QueryStatement): Promise<OAuthApplication>
     {        
         return await this.repository.find(queryStatement);
     }

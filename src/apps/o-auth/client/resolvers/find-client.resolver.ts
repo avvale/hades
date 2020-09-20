@@ -14,7 +14,7 @@ export class FindClientResolver
     ) {}
 
     @Query('oAuthFindClient')
-    async main(@Args('query') queryStatement: QueryStatement): Promise<OAuthClient>
+    async main(@Args('query') queryStatement?: QueryStatement): Promise<OAuthClient>
     {
         return await this.queryBus.ask(new FindClientQuery(queryStatement));
     }

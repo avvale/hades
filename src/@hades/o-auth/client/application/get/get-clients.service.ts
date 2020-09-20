@@ -10,7 +10,7 @@ export class GetClientsService
         private readonly repository: IClientRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement): Promise<OAuthClient[]>
+    public async main(queryStatement?: QueryStatement): Promise<OAuthClient[]>
     {        
         return await this.repository.get(queryStatement);
     }

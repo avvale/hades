@@ -10,7 +10,7 @@ export class FindAccessTokenService
         private readonly repository: IAccessTokenRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement): Promise<OAuthAccessToken>
+    public async main(queryStatement?: QueryStatement): Promise<OAuthAccessToken>
     {        
         return await this.repository.find(queryStatement);
     }

@@ -3,6 +3,6 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 export class FindRefreshTokenQuery
 {
     constructor(
-        public queryStatement: QueryStatement
+        public queryStatement?: QueryStatement
     ) {}
 }

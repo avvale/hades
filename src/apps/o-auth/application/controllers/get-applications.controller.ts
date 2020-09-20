@@ -20,7 +20,7 @@ export class GetApplicationsController
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [ApplicationDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement)
     {
         return await this.queryBus.ask(new GetApplicationsQuery(queryStatement));   
     }

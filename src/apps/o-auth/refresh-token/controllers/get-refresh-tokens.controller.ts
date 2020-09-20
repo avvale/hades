@@ -20,7 +20,7 @@ export class GetRefreshTokensController
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [RefreshTokenDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement)
     {
         return await this.queryBus.ask(new GetRefreshTokensQuery(queryStatement));   
     }

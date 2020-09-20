@@ -14,7 +14,7 @@ export class GetClientsResolver
     ) {}
 
     @Query('oAuthGetClients')
-    async main(@Args('query') queryStatement: QueryStatement): Promise<OAuthClient[]>
+    async main(@Args('query') queryStatement?: QueryStatement): Promise<OAuthClient[]>
     {
         return await this.queryBus.ask(new GetClientsQuery(queryStatement));
     }

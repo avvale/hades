@@ -14,7 +14,7 @@ export class FindApplicationResolver
     ) {}
 
     @Query('oAuthFindApplication')
-    async main(@Args('query') queryStatement: QueryStatement): Promise<OAuthApplication>
+    async main(@Args('query') queryStatement?: QueryStatement): Promise<OAuthApplication>
     {
         return await this.queryBus.ask(new FindApplicationQuery(queryStatement));
     }

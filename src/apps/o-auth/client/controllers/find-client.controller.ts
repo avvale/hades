@@ -20,7 +20,7 @@ export class FindClientController
     @ApiOkResponse({ description: 'The record has been successfully created.', type: ClientDto })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement)
     {
         return await this.queryBus.ask(new FindClientQuery(queryStatement));   
     }

@@ -49,7 +49,7 @@ describe('PaginateAccessTokensController', () =>
         test('should return a accessTokens', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens)));
-            expect(await controller.main([], [])).toBe(accessTokens);
+            expect(await controller.main()).toBe(accessTokens);
         });
     });
 });

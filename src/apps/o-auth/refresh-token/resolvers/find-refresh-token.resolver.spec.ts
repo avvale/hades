@@ -52,7 +52,7 @@ describe('FindRefreshTokenResolver', () =>
         test('should return a refreshToken', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens[0])));
-            expect(await resolver.main({})).toBe(refreshTokens[0]);
+            expect(await resolver.main()).toBe(refreshTokens[0]);
         });
     });
 });

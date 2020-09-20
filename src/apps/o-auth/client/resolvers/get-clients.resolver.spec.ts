@@ -52,7 +52,7 @@ describe('GetClientsResolver', () =>
         test('should return a clients', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients)));
-            expect(await resolver.main({})).toBe(clients);
+            expect(await resolver.main()).toBe(clients);
         });
     });
 });

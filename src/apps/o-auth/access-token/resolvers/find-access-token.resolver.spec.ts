@@ -52,7 +52,7 @@ describe('FindAccessTokenResolver', () =>
         test('should return a accessToken', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens[0])));
-            expect(await resolver.main({})).toBe(accessTokens[0]);
+            expect(await resolver.main()).toBe(accessTokens[0]);
         });
     });
 });

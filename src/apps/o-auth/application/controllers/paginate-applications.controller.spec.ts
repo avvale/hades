@@ -49,7 +49,7 @@ describe('PaginateApplicationsController', () =>
         test('should return a applications', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications)));
-            expect(await controller.main([], [])).toBe(applications);
+            expect(await controller.main()).toBe(applications);
         });
     });
 });

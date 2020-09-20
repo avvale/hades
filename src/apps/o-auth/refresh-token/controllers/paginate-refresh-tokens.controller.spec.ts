@@ -49,7 +49,7 @@ describe('PaginateRefreshTokensController', () =>
         test('should return a refreshTokens', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
-            expect(await controller.main([], [])).toBe(refreshTokens);
+            expect(await controller.main()).toBe(refreshTokens);
         });
     });
 });

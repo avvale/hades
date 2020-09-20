@@ -10,7 +10,7 @@ export class GetRefreshTokensService
         private readonly repository: IRefreshTokenRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement): Promise<OAuthRefreshToken[]>
+    public async main(queryStatement?: QueryStatement): Promise<OAuthRefreshToken[]>
     {        
         return await this.repository.get(queryStatement);
     }

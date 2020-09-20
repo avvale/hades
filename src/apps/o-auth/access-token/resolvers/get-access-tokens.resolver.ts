@@ -14,7 +14,7 @@ export class GetAccessTokensResolver
     ) {}
 
     @Query('oAuthGetAccessTokens')
-    async main(@Args('query') queryStatement: QueryStatement): Promise<OAuthAccessToken[]>
+    async main(@Args('query') queryStatement?: QueryStatement): Promise<OAuthAccessToken[]>
     {
         return await this.queryBus.ask(new GetAccessTokensQuery(queryStatement));
     }

@@ -14,7 +14,7 @@ export class GetRefreshTokensResolver
     ) {}
 
     @Query('oAuthGetRefreshTokens')
-    async main(@Args('query') queryStatement: QueryStatement): Promise<OAuthRefreshToken[]>
+    async main(@Args('query') queryStatement?: QueryStatement): Promise<OAuthRefreshToken[]>
     {
         return await this.queryBus.ask(new GetRefreshTokensQuery(queryStatement));
     }
