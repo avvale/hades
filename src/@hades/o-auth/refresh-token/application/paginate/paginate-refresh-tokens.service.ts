@@ -11,7 +11,7 @@ export class PaginateRefreshTokensService
         private readonly repository: IRefreshTokenRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement, constraint: QueryStatement = {}): Promise<Pagination<OAuthRefreshToken>>
+    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<OAuthRefreshToken>>
     {        
         return await this.repository.paginate(queryStatement, constraint);
     }

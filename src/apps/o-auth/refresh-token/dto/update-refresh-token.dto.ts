@@ -6,7 +6,7 @@ export class UpdateRefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'b160900a-ca08-478c-a564-7425049b2ffc'
+        example     : 'a744b29b-0483-4a8d-ad34-f34bf2ebe040'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateRefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'accessTokenId [input here api field description]',
-        example     : '9b230849-92aa-4f0d-8137-c4cb9e78216b'
+        example     : 'b8d3db3a-2583-4735-b934-145d0d19bc5b'
     })
     accessTokenId: string;
     
@@ -24,7 +24,7 @@ export class UpdateRefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'token [input here api field description]',
-        example     : 'Molestiae cupiditate veniam tempora enim porro. Earum optio occaecati. Quia libero omnis optio sunt numquam esse. Ab molestiae vitae necessitatibus nihil totam deleniti placeat aut.'
+        example     : 'Natus quae dicta aut qui. Non possimus minus. Minima maxime et qui. Accusamus eos voluptatibus voluptatem cupiditate culpa soluta accusantium ea. Sint eos tenetur et voluptatem necessitatibus tempore voluptatem.'
     })
     token: string;
     
@@ -33,7 +33,7 @@ export class UpdateRefreshTokenDto
     @ApiProperty({
         type        : Boolean,
         description : 'isRevoked [input here api field description]',
-        example     : true
+        example     : false
     })
     isRevoked: boolean;
     
@@ -42,7 +42,7 @@ export class UpdateRefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'expiresAt [input here api field description]',
-        example     : '2020-09-20 05:33:26'
+        example     : '2020-09-20 16:02:42'
     })
     expiresAt: string;
     

@@ -12,7 +12,7 @@ export class DeleteAccessTokensService
         private readonly repository: IAccessTokenRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement): Promise<void>
+    public async main(queryStatement?: QueryStatement): Promise<void>
     {   
         // get object to delete
         const accessTokens = await this.repository.get(queryStatement);

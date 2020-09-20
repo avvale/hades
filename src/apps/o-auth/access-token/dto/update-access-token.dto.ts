@@ -6,7 +6,7 @@ export class UpdateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'cc9fb6ca-b741-42f4-8511-9b4058fb6c38'
+        example     : '56b7a133-4e47-4b8e-90c7-5e0b10355ec5'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : '7cd4ed81-8c63-4b05-8efa-3e45aa4d9dc6'
+        example     : '627a36ef-faf1-4221-9c39-940293e6ab79'
     })
     clientId: string;
     
@@ -24,7 +24,7 @@ export class UpdateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'token [input here api field description]',
-        example     : 'Rerum ab odio non est nisi. Qui dolores perferendis accusamus ab excepturi ipsum. Quam iusto ut commodi et corporis qui eligendi impedit rerum. Consequatur iste neque. Repudiandae doloribus distinctio molestiae sunt ut sapiente. Labore omnis reprehenderit hic nemo deleniti similique.'
+        example     : 'Cum autem eligendi corrupti quaerat in eveniet sint. Sed ducimus voluptatem vitae odio similique sunt est et illo. Veritatis at consectetur accusamus ipsum a et laboriosam.'
     })
     token: string;
     
@@ -33,7 +33,7 @@ export class UpdateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'ex94dctfqj9xrdxcd5n20cx0ux786z2gdcwozsvzyw4fszdvjibeaa1jxrwglzrhquxbqcb9mz9qynmujxxdjf1cfy1ubieyvpqje0d58yoh4y0096rw0h60rrvz9wpmixjr2mhob1k3dgoi06wjgwxmg2ejfvz31j764gn2hlbyjpzutct0zs4oa6ld8ev1dxtsih33y17ip7r3vaw2fa50imaac7b3cfeto8dbuff87u73nly0begvkpsnesk'
+        example     : '28rtvuttozil1wadpgvfvqshs5zrulbl1jadqu0j9d1c3dvyqpuxpipj7b8nddpw9ij6n5v5fui5exlrscd9uf1d92xefmfyqxsumrxa5mbq8exmu4gfhvlezxg5h03auxwbii1l5ovcl5dy3y421uhmxwj0r0mbi6b0ocq1we79bocc0tnsa4s50czgahbo5l2puub68hdrsci8ll7pynn5v1ophczvx9qz48n6v6dvifhr3kg0dbyphkwpsxo'
     })
     name: string;
     
@@ -51,7 +51,7 @@ export class UpdateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'expiresAt [input here api field description]',
-        example     : '2020-09-20 01:40:48'
+        example     : '2020-09-20 04:55:45'
     })
     expiresAt: string;
     

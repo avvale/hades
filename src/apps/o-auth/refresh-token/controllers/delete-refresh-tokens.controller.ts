@@ -23,7 +23,7 @@ export class DeleteRefreshTokensController
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [RefreshTokenDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement)
     {
         const refreshTokens = await this.queryBus.ask(new GetRefreshTokensQuery(queryStatement));
 

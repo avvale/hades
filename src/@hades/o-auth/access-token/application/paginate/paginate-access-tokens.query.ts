@@ -3,7 +3,7 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 export class PaginateAccessTokensQuery
 {
     constructor(
-        public queryStatement: QueryStatement,
-        public constraint: QueryStatement = {},
+        public queryStatement?: QueryStatement,
+        public constraint?: QueryStatement
     ) {}
 }

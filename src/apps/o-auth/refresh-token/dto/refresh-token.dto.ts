@@ -6,7 +6,7 @@ export class RefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'b160900a-ca08-478c-a564-7425049b2ffc'
+        example     : 'a744b29b-0483-4a8d-ad34-f34bf2ebe040'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class RefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'accessTokenId [input here api field description]',
-        example     : '9b230849-92aa-4f0d-8137-c4cb9e78216b'
+        example     : 'b8d3db3a-2583-4735-b934-145d0d19bc5b'
     })
     accessTokenId: string;
     
@@ -24,7 +24,7 @@ export class RefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'token [input here api field description]',
-        example     : 'Alias deleniti sint quis. Qui delectus itaque aperiam sunt id laudantium vero. Fuga qui qui dicta quo unde. Ea quia est eveniet rerum. Vero odit sapiente deserunt ut.'
+        example     : 'Facilis voluptatum mollitia. Nobis quas vel labore aut accusantium quaerat eius. At et necessitatibus quia. Ab ut distinctio deserunt porro eum.'
     })
     token: string;
     
@@ -42,7 +42,7 @@ export class RefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'expiresAt [input here api field description]',
-        example     : '2020-09-20 02:12:21'
+        example     : '2020-09-20 10:16:42'
     })
     expiresAt: string;
     
@@ -51,7 +51,7 @@ export class RefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-09-20 03:40:46'
+        example     : '2020-09-20 04:55:02'
     })
     createdAt: string;
     
@@ -60,7 +60,7 @@ export class RefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-09-20 05:28:02'
+        example     : '2020-09-20 08:22:16'
     })
     updatedAt: string;
     
@@ -69,7 +69,7 @@ export class RefreshTokenDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-09-20 10:30:27'
+        example     : '2020-09-20 03:17:29'
     })
     deletedAt: string;
     

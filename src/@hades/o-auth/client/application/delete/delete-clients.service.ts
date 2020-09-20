@@ -12,7 +12,7 @@ export class DeleteClientsService
         private readonly repository: IClientRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement): Promise<void>
+    public async main(queryStatement?: QueryStatement): Promise<void>
     {   
         // get object to delete
         const clients = await this.repository.get(queryStatement);

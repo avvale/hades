@@ -12,7 +12,7 @@ export class DeleteApplicationsService
         private readonly repository: IApplicationRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement): Promise<void>
+    public async main(queryStatement?: QueryStatement): Promise<void>
     {   
         // get object to delete
         const applications = await this.repository.get(queryStatement);

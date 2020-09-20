@@ -45,7 +45,7 @@ describe('FindAccessTokenService', () =>
         test('should find accessToken', async () => 
         {
             jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main({})).toBe(mockRepository.collectionSource[0]);
+            expect(await service.main()).toBe(mockRepository.collectionSource[0]);
         });
     });
 });

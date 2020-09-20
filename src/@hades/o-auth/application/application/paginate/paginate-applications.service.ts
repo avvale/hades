@@ -11,7 +11,7 @@ export class PaginateApplicationsService
         private readonly repository: IApplicationRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement, constraint: QueryStatement = {}): Promise<Pagination<OAuthApplication>>
+    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<OAuthApplication>>
     {        
         return await this.repository.paginate(queryStatement, constraint);
     }

@@ -6,7 +6,7 @@ export class ApplicationDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'c9bcd7d2-a670-49e5-a90a-dd55226fad87'
+        example     : 'fe3c8ea6-40ba-40bb-bcac-bbd13039a1c6'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class ApplicationDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '2cq4utxdf91jxdxndpacg0b4k74zg7xrob1adbbrx7gfd4nprv8gwkmrv9uk95chff4dyyszx5sselavwati64szxblvcxos5a3h7gefw778tx7szlfa8m5y7yzgcasev104hxe9mn5sqr3wl8oevomjqet2cs3r4lmpj9ufulnv3eb5e757dqff35s6du6j44plx2438oc9kn26e4l9ch8h85plcbk5rlliu46z1pruemgkzb1czak1ffk2bwv'
+        example     : '9d3ibo52y31gsk3pqfxkch1mkpokckmjwaxz6qruphzh0aqlid3pck59gm8bsh1xsdcvobl6ht54nv3oaz01feabpavx4zef8tm8o8phbgeoafsytu6rblsie2pk3p5nad52vbm5l2acgswj33ewdg8xczktpwo9y1bcgm6yw651j89hoqxodgluzmmp48c5roj4kdr0f9d2yjqgkmgxoydg7975dgt3vd7phsm7wc0signxia6ypp6k6okx1gp'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class ApplicationDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'xjimgbi92nlfwjonzy1dg13rkgdzkumef9ltg0s5voz9g4a9mf'
+        example     : '4j7e5x2f9skl2quf2xvdn7qqhts5zxe43ghieetkoge43xonm3'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class ApplicationDto
     @ApiProperty({
         type        : String,
         description : 'secret [input here api field description]',
-        example     : '1srfun9ltwo8gowsqjkyyax0pqj3qx7f78geyklj1gytkn25gckogjw5qiuxj8o98r1r3xpqfmq4f8nrn33khbea7m'
+        example     : '1il0wuoydyak5f1k2uweyqvlv7chi23uyy93mdmmlebpg0dmlt20lru3sf5mvxhzynyb8ohuv2ui0p8dqlq1b64gqo'
     })
     secret: string;
     
@@ -42,7 +42,7 @@ export class ApplicationDto
     @ApiProperty({
         type        : Boolean,
         description : 'isMaster [input here api field description]',
-        example     : true
+        example     : false
     })
     isMaster: boolean;
     
@@ -51,7 +51,7 @@ export class ApplicationDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-09-20 05:09:42'
+        example     : '2020-09-20 08:09:45'
     })
     createdAt: string;
     
@@ -60,7 +60,7 @@ export class ApplicationDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-09-20 05:22:09'
+        example     : '2020-09-20 01:22:04'
     })
     updatedAt: string;
     
@@ -69,7 +69,7 @@ export class ApplicationDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-09-19 16:33:29'
+        example     : '2020-09-19 23:32:00'
     })
     deletedAt: string;
     

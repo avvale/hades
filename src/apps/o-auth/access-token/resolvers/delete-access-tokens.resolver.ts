@@ -16,7 +16,7 @@ export class DeleteAccessTokensResolver
     ) {}
 
     @Mutation('oAuthDeleteAccessTokens')
-    async main(@Args('query') queryStatement: QueryStatement)
+    async main(@Args('query') queryStatement?: QueryStatement)
     {
         const accessTokens = await this.queryBus.ask(new GetAccessTokensQuery(queryStatement));
 

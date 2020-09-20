@@ -6,7 +6,7 @@ export class UpdateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'c9bcd7d2-a670-49e5-a90a-dd55226fad87'
+        example     : 'fe3c8ea6-40ba-40bb-bcac-bbd13039a1c6'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'pcebuxeylpryi2gskcuulp1lvb0tlb9jfq9hxb9tfov40rt4hlsq2yakla3rgbtfa716ogbnbx7khte3hhkbdh9j3s8s6sf7aaio7a2kebn3wczipzx82587yrkcds9d5zahhi8nqsw2x97dp0m63eregyw9h5ku93a2jb084m4eg0sq7v23h7nan4xd86xu9pmd09sslzmpj9d9mco1p3rbsekfujy222xo68fv3nspv7auyqt7oj45hl44zb6'
+        example     : 'z9yz0f3xmscrkbflukv25nzx3hhh9u3zifnor9aeiesf1qgc1rktldyufjlw5tqv2ctzo8xe4f0lji47nr6rm1uay885oo3j79v6phwr00hbm2j9y1g18j68kg18t8scm0yjumb4g8axc1a2bv13p61z70nnw5zg49vucltpvj62gu04y5phpl3thg7g5slc63ip3yx2s4uf87ufemujnc4m8bsm1ye2xm1eajex0yynkjgamcxymwwrqxc5q1o'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class UpdateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'ec9oiye9esrcahzitdq7h39dh29fp2g2jmra2ca0qgpgl2kqh4'
+        example     : '1hyc7thhr72tf53il9rc5dahkwvjetzoedxyoz2qsc70kungqq'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class UpdateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'secret [input here api field description]',
-        example     : 'rr8yjyrhkgep6dtjswn4ssyewnvic86kuhfsacy1qzhkji0gmev2d4fwgqah9vw5h9s63pskx60r7fe1anqtj05fyc'
+        example     : 'r436whma7tgro6bjwgzkl5n0z63vbw59d6c1tq0s9xb2wmcy7bo3vxqduq1uyiporknnmlflnyjinh85v0s6zkis24'
     })
     secret: string;
     

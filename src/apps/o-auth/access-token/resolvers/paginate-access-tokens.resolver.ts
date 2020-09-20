@@ -14,7 +14,7 @@ export class PaginateAccessTokensResolver
     ) {}
 
     @Query('oAuthPaginateAccessTokens')
-    async main(@Args('query') queryStatement: QueryStatement, @Args('constraint') constraint: QueryStatement): Promise<Pagination>
+    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement): Promise<Pagination>
     {
         return await this.queryBus.ask(new PaginateAccessTokensQuery(queryStatement, constraint));   
     }

@@ -23,7 +23,7 @@ export class DeleteClientsController
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [ClientDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement)
     {
         const clients = await this.queryBus.ask(new GetClientsQuery(queryStatement));
 

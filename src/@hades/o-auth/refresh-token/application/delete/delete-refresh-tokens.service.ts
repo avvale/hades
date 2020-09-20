@@ -12,7 +12,7 @@ export class DeleteRefreshTokensService
         private readonly repository: IRefreshTokenRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement): Promise<void>
+    public async main(queryStatement?: QueryStatement): Promise<void>
     {   
         // get object to delete
         const refreshTokens = await this.repository.get(queryStatement);

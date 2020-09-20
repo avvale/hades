@@ -11,7 +11,7 @@ export class PaginateClientsService
         private readonly repository: IClientRepository
     ) {}
 
-    public async main(queryStatement: QueryStatement, constraint: QueryStatement = {}): Promise<Pagination<OAuthClient>>
+    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<OAuthClient>>
     {        
         return await this.repository.paginate(queryStatement, constraint);
     }

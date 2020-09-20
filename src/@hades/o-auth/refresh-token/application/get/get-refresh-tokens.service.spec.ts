@@ -45,7 +45,7 @@ describe('GetRefreshTokensService', () =>
         test('should get refreshTokens', async () => 
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
-            expect(await service.main({})).toBe(mockRepository.collectionSource);
+            expect(await service.main()).toBe(mockRepository.collectionSource);
         });
     });
 });

@@ -16,7 +16,7 @@ export class DeleteClientsResolver
     ) {}
 
     @Mutation('oAuthDeleteClients')
-    async main(@Args('query') queryStatement: QueryStatement)
+    async main(@Args('query') queryStatement?: QueryStatement)
     {
         const clients = await this.queryBus.ask(new GetClientsQuery(queryStatement));
 

@@ -21,7 +21,7 @@ export class PaginateApplicationsController
     @ApiOkResponse({ description: 'The records has been paginated successfully.', type: Pagination })
     @ApiQuery({ name: 'queryStatement', type: QueryStatement })
     @ApiQuery({ name: 'constraint', type: QueryStatement })
-    async main(@Body('query') queryStatement: QueryStatement, @Body('constraint') constraint: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
     {
         return await this.queryBus.ask(new PaginateApplicationsQuery(queryStatement, constraint));   
     }

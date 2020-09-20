@@ -23,7 +23,7 @@ export class DeleteAccessTokensController
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [AccessTokenDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement)
     {
         const accessTokens = await this.queryBus.ask(new GetAccessTokensQuery(queryStatement));
 

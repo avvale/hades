@@ -49,7 +49,7 @@ describe('DeleteApplicationsController', () =>
         test('should return an applications deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications)));
-            expect(await controller.main({})).toBe(applications);
+            expect(await controller.main()).toBe(applications);
         });
     });
 });

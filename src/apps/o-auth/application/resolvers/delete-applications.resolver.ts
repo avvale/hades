@@ -16,7 +16,7 @@ export class DeleteApplicationsResolver
     ) {}
 
     @Mutation('oAuthDeleteApplications')
-    async main(@Args('query') queryStatement: QueryStatement)
+    async main(@Args('query') queryStatement?: QueryStatement)
     {
         const applications = await this.queryBus.ask(new GetApplicationsQuery(queryStatement));
 

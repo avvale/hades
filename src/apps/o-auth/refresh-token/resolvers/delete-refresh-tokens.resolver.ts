@@ -16,7 +16,7 @@ export class DeleteRefreshTokensResolver
     ) {}
 
     @Mutation('oAuthDeleteRefreshTokens')
-    async main(@Args('query') queryStatement: QueryStatement)
+    async main(@Args('query') queryStatement?: QueryStatement)
     {
         const refreshTokens = await this.queryBus.ask(new GetRefreshTokensQuery(queryStatement));
 

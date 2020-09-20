@@ -52,7 +52,7 @@ describe('DeleteClientsResolver', () =>
         test('should return an clients deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients)));
-            expect(await resolver.main({})).toBe(clients);
+            expect(await resolver.main()).toBe(clients);
         });
     });
 });
