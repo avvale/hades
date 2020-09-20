@@ -173,9 +173,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         await model.destroy();
     }
 
-    async delete(queryStatement: QueryStatement): Promise<void> 
+    async delete(queryStatement?: QueryStatement): Promise<void> 
     {
-        if (!queryStatement.where) throw new BadRequestException(`To delete multiple records, you must define a where statement`);
+        if (!queryStatement || !queryStatement.where) throw new BadRequestException(`To delete multiple records, you must define a where statement`);
 
         // check that aggregate exist
         await this.repository.destroy(
