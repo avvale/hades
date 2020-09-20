@@ -8,6 +8,7 @@ import { ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
+const cleanDeep = require('clean-deep');
 
 export abstract class SequelizeRepository<Aggregate extends AggregateBase, ModelClass>
 {
@@ -16,7 +17,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     public readonly aggregateName: string;
     public readonly mapper: IMapper;
 
-    async paginate(queryStatement: QueryStatement, constraint: QueryStatement): Promise<Pagination<Aggregate>>
+    async paginate(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<Aggregate>>
     {
         // get count total records from sql service library
         const total = await this.repository.count(
@@ -38,9 +39,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementPaginateHook(queryStatement: QueryStatement): QueryStatement { return queryStatement; }
+    composeStatementPaginateHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
 
-    async find(queryStatement: QueryStatement): Promise<Aggregate> 
+    async find(queryStatement?: QueryStatement): Promise<Aggregate> 
     {
         const model = await this.repository.findOne(
             this.criteria.implements(
@@ -55,7 +56,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementFindHook(queryStatement: QueryStatement): QueryStatement { return queryStatement; }
+    composeStatementFindHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
 
     async findById(id: UuidValueObject): Promise<Aggregate>
     {
@@ -75,7 +76,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     // get multiple records
-    async get(queryStatement: QueryStatement): Promise<Aggregate[]> 
+    async get(queryStatement?: QueryStatement): Promise<Aggregate[]> 
     {
         const models = await this.repository.findAll(
             this.criteria.implements(
@@ -88,7 +89,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementGetHook(queryStatement: QueryStatement): QueryStatement { return queryStatement; }
+    composeStatementGetHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
 
     // ******************
     // ** side effects **
@@ -141,7 +142,12 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
 
         // clean undefined fields
-        const objectLiteral = this.cleanUndefined(aggregate.toDTO());
+        const objectLiteral = cleanDeep(aggregate.toDTO(), {
+            nullValues: false,
+            emptyStrings: false,
+            emptyObjects: false,
+            emptyArrays: false
+        })
 
         const model = await modelInDB.update(objectLiteral);
 
@@ -175,16 +181,5 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         await this.repository.destroy(
             this.criteria.implements(queryStatement)
         );
-    }
-
-    cleanUndefined(aggregate: ObjectLiteral): ObjectLiteral
-    {
-        // clean properties object from undefined values
-        for (const property in aggregate )
-        {
-            // can to be null for nullable values
-            if (aggregate[property] === undefined) delete aggregate[property];
-        }
-        return aggregate;
     }
 }
