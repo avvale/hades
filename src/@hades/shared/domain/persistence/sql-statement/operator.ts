@@ -7,7 +7,7 @@ export enum Operator
 
     // utils
     col = '[col]',                          // = "user"."organization_id" (PG example) or "user.organization_id" (MySQL example)
-    join = '[join]'
+    join = '[join]',
 
     // Basics
     startsWith = '[startsWith]',            // LIKE 'hat%'
