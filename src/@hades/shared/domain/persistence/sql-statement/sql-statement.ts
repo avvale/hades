@@ -3,49 +3,6 @@ import { IndexHints } from './index-hints';
 
 export type Any = any;
 
-export enum Operator
-{
-    eq = 'eq',
-    ne = 'ne',
-    gte = 'gte',
-    gt = 'gt',
-    lte = 'lte',
-    lt = 'lt',
-    not = 'not',
-    is = 'is',
-    in = 'in',
-    notIn = 'notIn',
-    like = 'like',
-    notLike = 'notLike',
-    iLike = 'iLike',
-    notILike = 'notILike',
-    startsWith = 'startsWith',
-    endsWith = 'endsWith',
-    substring = 'substring',
-    regexp = 'regexp',
-    notRegexp = 'notRegexp',
-    iRegexp = 'iRegexp',
-    notIRegexp = 'notIRegexp',
-    between = 'between',
-    notBetween = 'notBetween',
-    overlap = 'overlap',
-    contains = 'contains',
-    contained = 'contained',
-    adjacent = 'adjacent',
-    strictLeft = 'strictLeft',
-    strictRight = 'strictRight',
-    noExtendRight = 'noExtendRight',
-    noExtendLeft = 'noExtendLeft',
-    and = 'and',
-    or = 'or',
-    any = 'any',
-    all = 'all',
-    values = 'values',
-    col = 'col',
-    placeholder = 'placeholder',
-    join = 'join'
-}
-
 export interface IndexHint 
 {
     type: IndexHints;
