@@ -7,6 +7,7 @@ type OAuthApplication
     code: GraphQLString!
     secret: GraphQLString!
     isMaster: GraphQLBoolean!
+    clients: [OAuthClient]
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -20,6 +21,7 @@ input OAuthCreateApplicationInput
     code: GraphQLString!
     secret: GraphQLString!
     isMaster: GraphQLBoolean!
+    clientIds: [ID]
     
 }
 
@@ -30,6 +32,7 @@ input OAuthUpdateApplicationInput
     code: GraphQLString
     secret: GraphQLString
     isMaster: GraphQLBoolean
+    clientIds: [ID]
     
 }
 

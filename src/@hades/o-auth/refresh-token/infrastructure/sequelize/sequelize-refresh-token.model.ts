@@ -77,11 +77,11 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         field: 'expires_at',
         
         allowNull: true,
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER.UNSIGNED,
         
         
     })
-    expiresAt: string;
+    expiresAt: number;
         
              
         

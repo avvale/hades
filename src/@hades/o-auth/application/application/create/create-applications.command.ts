@@ -7,6 +7,7 @@ export class CreateApplicationsCommand
             code: string,
             secret: string,
             isMaster: boolean,
+            clientIds?: string[],
             
         } []
     ) {}

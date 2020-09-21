@@ -29,6 +29,7 @@ export class UpdateApplicationController
             payload.code,
             payload.secret,
             payload.isMaster,
+            payload.clientIds,
             
         ));
 

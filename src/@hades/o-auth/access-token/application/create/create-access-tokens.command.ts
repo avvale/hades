@@ -7,7 +7,7 @@ export class CreateAccessTokensCommand
             token: string,
             name?: string,
             isRevoked: boolean,
-            expiresAt?: string,
+            expiresAt?: number,
             
         } []
     ) {}

@@ -11,7 +11,7 @@ aggregateProperties:
   - name: grant_type
     type: enum
     enumOptions:
-      - AUTHORIZATION_CODE
+      - AUTHORIZATON_CODE
       - CLIENT_CREDENTIALS
       - PASSWORD_GRANT
     nullable: false
@@ -31,7 +31,7 @@ aggregateProperties:
     type: varchar
     maxLength: 2048
     nullable: true
-  - name: resource_codes
+  - name: application_codes
     type: json
     nullable: false
   - name: expired_access_token
@@ -48,6 +48,23 @@ aggregateProperties:
   - name: is_master
     type: boolean
     nullable: false
+  - name: applications
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: application
+    relationshipAggregate: OAuthApplication
+    relationshipModulePath: o-auth/application
+    intermediateModel: OAuthApplicationsClientsModel
+    intermediateModelModuleSection: o-auth/application
+    intermediateModelFile: applications-clients
+  - name: access_tokens
+    type: OAuthAccessToken
+    nullable: true
+    relationship: one-to-many
+    relationshipSingularName: access_token
+    relationshipAggregate: OAuthAccessToken
+    relationshipModulePath: o-auth/access-token
   - name: created_at
     type: timestamp
     nullable: true

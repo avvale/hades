@@ -10,6 +10,7 @@ import {
     ApplicationCode,
     ApplicationSecret,
     ApplicationIsMaster,
+    ApplicationClientIds,
     ApplicationCreatedAt,
     ApplicationUpdatedAt,
     ApplicationDeletedAt
@@ -62,6 +63,7 @@ describe('UpdateApplicationService', () =>
                 new ApplicationCode(applications[0].code),
                 new ApplicationSecret(applications[0].secret),
                 new ApplicationIsMaster(applications[0].isMaster),
+                new ApplicationClientIds(applications[0].clientIds),
                 
             )).toBe(undefined);
         });

@@ -8,6 +8,7 @@ import {
     ApplicationCode,
     ApplicationSecret,
     ApplicationIsMaster,
+    ApplicationClientIds,
     ApplicationCreatedAt,
     ApplicationUpdatedAt,
     ApplicationDeletedAt
@@ -52,6 +53,7 @@ export class MockApplicationRepository extends MockRepository<OAuthApplication> 
                     new ApplicationCode(itemCollection.code),
                     new ApplicationSecret(itemCollection.secret),
                     new ApplicationIsMaster(itemCollection.isMaster),
+                    new ApplicationClientIds(itemCollection.clientIds),
                     new ApplicationCreatedAt(itemCollection.createdAt),
                     new ApplicationUpdatedAt(itemCollection.updatedAt),
                     new ApplicationDeletedAt(itemCollection.deletedAt),

@@ -25,11 +25,12 @@ export class UpdateClientResolver
             payload.secret,
             payload.authUrl,
             payload.redirect,
-            payload.resourceCodes,
+            payload.applicationCodes,
             payload.expiredAccessToken,
             payload.expiredRefreshToken,
             payload.isRevoked,
             payload.isMaster,
+            payload.applicationIds,
             
         ));
         

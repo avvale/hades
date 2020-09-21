@@ -8,11 +8,12 @@ import {
     ClientSecret,
     ClientAuthUrl,
     ClientRedirect,
-    ClientResourceCodes,
+    ClientApplicationCodes,
     ClientExpiredAccessToken,
     ClientExpiredRefreshToken,
     ClientIsRevoked,
     ClientIsMaster,
+    ClientApplicationIds,
     ClientCreatedAt,
     ClientUpdatedAt,
     ClientDeletedAt
@@ -36,11 +37,12 @@ export class CreateClientService
         secret: ClientSecret,
         authUrl: ClientAuthUrl,
         redirect: ClientRedirect,
-        resourceCodes: ClientResourceCodes,
+        applicationCodes: ClientApplicationCodes,
         expiredAccessToken: ClientExpiredAccessToken,
         expiredRefreshToken: ClientExpiredRefreshToken,
         isRevoked: ClientIsRevoked,
         isMaster: ClientIsMaster,
+        applicationIds: ClientApplicationIds,
         
     ): Promise<void>
     {
@@ -52,11 +54,12 @@ export class CreateClientService
             secret,
             authUrl,
             redirect,
-            resourceCodes,
+            applicationCodes,
             expiredAccessToken,
             expiredRefreshToken,
             isRevoked,
             isMaster,
+            applicationIds,
             new ClientCreatedAt(Utils.nowTimestamp()),
             new ClientUpdatedAt(Utils.nowTimestamp()),
             null

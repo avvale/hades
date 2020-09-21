@@ -8,6 +8,7 @@ import {
     ApplicationCode,
     ApplicationSecret,
     ApplicationIsMaster,
+    ApplicationClientIds,
     ApplicationCreatedAt,
     ApplicationUpdatedAt,
     ApplicationDeletedAt
@@ -15,6 +16,7 @@ import {
 } from './value-objects';
 
 
+import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
 
 export class ApplicationMapper implements IMapper
 {
@@ -72,12 +74,14 @@ export class ApplicationMapper implements IMapper
             new ApplicationCode(application.code),
             new ApplicationSecret(application.secret),
             new ApplicationIsMaster(application.isMaster),
+            new ApplicationClientIds(application.clientIds),
             new ApplicationCreatedAt(application.createdAt),
             new ApplicationUpdatedAt(application.updatedAt),
             new ApplicationDeletedAt(application.deletedAt),
             
             
             
+            this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapModelsToAggregates(application.clients) : undefined,
             
         );
     }
@@ -92,12 +96,14 @@ export class ApplicationMapper implements IMapper
             application.code.value,
             application.secret.value,
             application.isMaster.value,
+            application.clientIds.value,
             application.createdAt.value,
             application.updatedAt.value,
             application.deletedAt.value,
             
             
             
+            this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapAggregatesToResponses(application.clients) : undefined,
             
         );
     }

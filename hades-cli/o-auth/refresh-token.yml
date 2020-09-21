@@ -24,7 +24,8 @@ aggregateProperties:
     type: boolean
     nullable: false
   - name: expires_at
-    type: timestamp
+    type: int.unsigned
+    maxLength: 10
     nullable: true
   - name: created_at
     type: timestamp

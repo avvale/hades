@@ -6,7 +6,8 @@ import {
     ApplicationName,
     ApplicationCode,
     ApplicationSecret,
-    ApplicationIsMaster
+    ApplicationIsMaster,
+    ApplicationClientIds
     
 } from './../../domain/value-objects';
 
@@ -26,6 +27,7 @@ export class UpdateApplicationCommandHandler implements ICommandHandler<UpdateAp
             new ApplicationCode(command.code, { undefinable: true }),
             new ApplicationSecret(command.secret, { undefinable: true }),
             new ApplicationIsMaster(command.isMaster, { undefinable: true }),
+            new ApplicationClientIds(command.clientIds),
             
         )
     }

@@ -9,18 +9,21 @@ import {
     ClientSecret,
     ClientAuthUrl,
     ClientRedirect,
-    ClientResourceCodes,
+    ClientApplicationCodes,
     ClientExpiredAccessToken,
     ClientExpiredRefreshToken,
     ClientIsRevoked,
     ClientIsMaster,
+    ClientApplicationIds,
     ClientCreatedAt,
     ClientUpdatedAt,
     ClientDeletedAt
     
 } from './value-objects';
 
+import { AccessTokenMapper } from '@hades/o-auth/access-token/domain/access-token.mapper';
 
+import { ApplicationMapper } from '@hades/o-auth/application/domain/application.mapper';
 
 export class ClientMapper implements IMapper
 {
@@ -79,17 +82,20 @@ export class ClientMapper implements IMapper
             new ClientSecret(client.secret),
             new ClientAuthUrl(client.authUrl),
             new ClientRedirect(client.redirect),
-            new ClientResourceCodes(client.resourceCodes),
+            new ClientApplicationCodes(client.applicationCodes),
             new ClientExpiredAccessToken(client.expiredAccessToken),
             new ClientExpiredRefreshToken(client.expiredRefreshToken),
             new ClientIsRevoked(client.isRevoked),
             new ClientIsMaster(client.isMaster),
+            new ClientApplicationIds(client.applicationIds),
             new ClientCreatedAt(client.createdAt),
             new ClientUpdatedAt(client.updatedAt),
             new ClientDeletedAt(client.deletedAt),
             
             
+            this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapModelsToAggregates(client.accessTokens) : undefined,
             
+            this.options.eagerLoading ? new ApplicationMapper({ eagerLoading: false }).mapModelsToAggregates(client.applications) : undefined,
             
         );
     }
@@ -105,17 +111,20 @@ export class ClientMapper implements IMapper
             client.secret.value,
             client.authUrl.value,
             client.redirect.value,
-            client.resourceCodes.value,
+            client.applicationCodes.value,
             client.expiredAccessToken.value,
             client.expiredRefreshToken.value,
             client.isRevoked.value,
             client.isMaster.value,
+            client.applicationIds.value,
             client.createdAt.value,
             client.updatedAt.value,
             client.deletedAt.value,
             
             
+            this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapAggregatesToResponses(client.accessTokens) : undefined,
             
+            this.options.eagerLoading ? new ApplicationMapper({ eagerLoading: false }).mapAggregatesToResponses(client.applications) : undefined,
             
         );
     }

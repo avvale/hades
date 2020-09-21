@@ -5,6 +5,7 @@ import {
     ApplicationCode,
     ApplicationSecret,
     ApplicationIsMaster,
+    ApplicationClientIds,
     ApplicationCreatedAt,
     ApplicationUpdatedAt,
     ApplicationDeletedAt
@@ -15,6 +16,7 @@ import { UpdatedApplicationEvent } from './../application/events/updated-applica
 import { DeletedApplicationEvent } from './../application/events/deleted-application.event';
 
 
+import { OAuthClient } from '@hades/o-auth/client/domain/client.aggregate';
 
 export class OAuthApplication extends AggregateRoot
 {
@@ -23,6 +25,7 @@ export class OAuthApplication extends AggregateRoot
     code: ApplicationCode;
     secret: ApplicationSecret;
     isMaster: ApplicationIsMaster;
+    clientIds: ApplicationClientIds;
     createdAt: ApplicationCreatedAt;
     updatedAt: ApplicationUpdatedAt;
     deletedAt: ApplicationDeletedAt;
@@ -30,8 +33,9 @@ export class OAuthApplication extends AggregateRoot
     // eager relationship
     
     
+    clients: OAuthClient[];
     
-    constructor(id?: ApplicationId, name?: ApplicationName, code?: ApplicationCode, secret?: ApplicationSecret, isMaster?: ApplicationIsMaster, createdAt?: ApplicationCreatedAt, updatedAt?: ApplicationUpdatedAt, deletedAt?: ApplicationDeletedAt, )
+    constructor(id?: ApplicationId, name?: ApplicationName, code?: ApplicationCode, secret?: ApplicationSecret, isMaster?: ApplicationIsMaster, clientIds?: ApplicationClientIds, createdAt?: ApplicationCreatedAt, updatedAt?: ApplicationUpdatedAt, deletedAt?: ApplicationDeletedAt, clients?: OAuthClient[], )
     {
         super();
         
@@ -40,6 +44,7 @@ export class OAuthApplication extends AggregateRoot
         this.code = code;
         this.secret = secret;
         this.isMaster = isMaster;
+        this.clientIds = clientIds;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -47,12 +52,13 @@ export class OAuthApplication extends AggregateRoot
         // eager relationship
         
         
+        this.clients = clients;
         
     }
 
-    static register (id: ApplicationId, name: ApplicationName, code: ApplicationCode, secret: ApplicationSecret, isMaster: ApplicationIsMaster, createdAt: ApplicationCreatedAt, updatedAt: ApplicationUpdatedAt, deletedAt: ApplicationDeletedAt, ): OAuthApplication
+    static register (id: ApplicationId, name: ApplicationName, code: ApplicationCode, secret: ApplicationSecret, isMaster: ApplicationIsMaster, clientIds: ApplicationClientIds, createdAt: ApplicationCreatedAt, updatedAt: ApplicationUpdatedAt, deletedAt: ApplicationDeletedAt, clients?: OAuthClient[], ): OAuthApplication
     {
-        return new OAuthApplication(id, name, code, secret, isMaster, createdAt, updatedAt, deletedAt, );
+        return new OAuthApplication(id, name, code, secret, isMaster, clientIds, createdAt, updatedAt, deletedAt, clients, );
     }
 
     created(application: OAuthApplication): void
@@ -64,6 +70,7 @@ export class OAuthApplication extends AggregateRoot
                 application.code.value,
                 application.secret.value,
                 application.isMaster.value,
+                application.clientIds?.value,
                 application.createdAt?.value,
                 application.updatedAt?.value,
                 application.deletedAt?.value,
@@ -81,6 +88,7 @@ export class OAuthApplication extends AggregateRoot
                 application.code?.value,
                 application.secret?.value,
                 application.isMaster?.value,
+                application.clientIds?.value,
                 application.createdAt?.value,
                 application.updatedAt?.value,
                 application.deletedAt?.value,
@@ -98,6 +106,7 @@ export class OAuthApplication extends AggregateRoot
                 application.code.value,
                 application.secret.value,
                 application.isMaster.value,
+                application.clientIds?.value,
                 application.createdAt?.value,
                 application.updatedAt?.value,
                 application.deletedAt?.value,
@@ -114,6 +123,7 @@ export class OAuthApplication extends AggregateRoot
             code: this.code.value,
             secret: this.secret.value,
             isMaster: this.isMaster.value,
+            clientIds: this.clientIds?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
@@ -121,6 +131,7 @@ export class OAuthApplication extends AggregateRoot
             // eager relationship
             
             
+            clients: this.clients?.map(item => item.toDTO()),
             
         }
     }

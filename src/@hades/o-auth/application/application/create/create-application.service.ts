@@ -7,6 +7,7 @@ import {
     ApplicationCode,
     ApplicationSecret,
     ApplicationIsMaster,
+    ApplicationClientIds,
     ApplicationCreatedAt,
     ApplicationUpdatedAt,
     ApplicationDeletedAt
@@ -29,6 +30,7 @@ export class CreateApplicationService
         code: ApplicationCode,
         secret: ApplicationSecret,
         isMaster: ApplicationIsMaster,
+        clientIds: ApplicationClientIds,
         
     ): Promise<void>
     {
@@ -39,6 +41,7 @@ export class CreateApplicationService
             code,
             secret,
             isMaster,
+            clientIds,
             new ApplicationCreatedAt(Utils.nowTimestamp()),
             new ApplicationUpdatedAt(Utils.nowTimestamp()),
             null

@@ -1,5 +1,9 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
+import { OAuthAccessTokenModel } from '@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model';
+import { OAuthApplicationModel } from '@hades/o-auth/application/infrastructure/sequelize/sequelize-application.model';
+    
+import { OAuthApplicationsClientsModel } from '@hades/o-auth/application/infrastructure/sequelize/sequelize-applications-clients.model';
 
 @Table({ modelName: 'o_auth_client', freezeTableName: true })
 export class OAuthClientModel extends Model<OAuthClientModel> 
@@ -25,7 +29,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         field: 'grant_type',
         
         allowNull: false,
-        type: DataTypes.ENUM('AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD_GRANT'),
+        type: DataTypes.ENUM('AUTHORIZATON_CODE','CLIENT_CREDENTIALS','PASSWORD_GRANT'),
         
         
     })
@@ -92,14 +96,14 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     
     
     @Column({
-        field: 'resource_codes',
+        field: 'application_codes',
         
         allowNull: false,
         type: DataTypes.JSON,
         
         
     })
-    resourceCodes: any;
+    applicationCodes: any;
         
              
         
@@ -158,6 +162,19 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     isMaster: boolean;
         
              
+        
+            
+    @BelongsToMany(() => OAuthApplicationModel, () => OAuthApplicationsClientsModel)
+    applicationIds: OAuthApplicationModel[];
+
+    @BelongsToMany(() => OAuthApplicationModel, () => OAuthApplicationsClientsModel)
+    applications: OAuthApplicationModel[];
+     
+        
+        
+    @HasMany(() => OAuthAccessTokenModel)
+    access_tokens: OAuthAccessTokenModel[];
+         
         
     
     

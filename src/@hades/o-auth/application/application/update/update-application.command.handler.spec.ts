@@ -45,6 +45,7 @@ describe('UpdateApplicationCommandHandler', () =>
                     applications[0].code,
                     applications[0].secret,
                     applications[0].isMaster,
+                    applications[0].clientIds,
                     
                 )
             )).toBe(undefined);

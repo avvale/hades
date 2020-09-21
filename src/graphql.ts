@@ -7,17 +7,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export enum OAuthClientGrantType {
-    AUTHORIZATION_CODE = "AUTHORIZATION_CODE",
+    AUTHORIZATON_CODE = "AUTHORIZATON_CODE",
     CLIENT_CREDENTIALS = "CLIENT_CREDENTIALS",
     PASSWORD_GRANT = "PASSWORD_GRANT"
-}
-
-export enum GrantType {
-    authorization_code = "authorization_code",
-    client_credentials = "client_credentials",
-    implicit = "implicit",
-    password = "password",
-    refresh_token = "refresh_token"
 }
 
 export interface QueryStatement {
@@ -34,7 +26,7 @@ export interface OAuthCreateAccessTokenInput {
     token: GraphQLString;
     name?: GraphQLString;
     isRevoked: GraphQLBoolean;
-    expiresAt?: GraphQLTimestamp;
+    expiresAt?: GraphQLInt;
 }
 
 export interface OAuthUpdateAccessTokenInput {
@@ -43,7 +35,7 @@ export interface OAuthUpdateAccessTokenInput {
     token?: GraphQLString;
     name?: GraphQLString;
     isRevoked?: GraphQLBoolean;
-    expiresAt?: GraphQLTimestamp;
+    expiresAt?: GraphQLInt;
 }
 
 export interface OAuthCreateApplicationInput {
@@ -52,6 +44,7 @@ export interface OAuthCreateApplicationInput {
     code: GraphQLString;
     secret: GraphQLString;
     isMaster: GraphQLBoolean;
+    clientIds?: string[];
 }
 
 export interface OAuthUpdateApplicationInput {
@@ -60,6 +53,7 @@ export interface OAuthUpdateApplicationInput {
     code?: GraphQLString;
     secret?: GraphQLString;
     isMaster?: GraphQLBoolean;
+    clientIds?: string[];
 }
 
 export interface OAuthCreateClientInput {
@@ -69,11 +63,12 @@ export interface OAuthCreateClientInput {
     secret: GraphQLString;
     authUrl?: GraphQLString;
     redirect?: GraphQLString;
-    resourceCodes: JSON;
+    applicationCodes: JSON;
     expiredAccessToken?: GraphQLInt;
     expiredRefreshToken?: GraphQLInt;
     isRevoked: GraphQLBoolean;
     isMaster: GraphQLBoolean;
+    applicationIds?: string[];
 }
 
 export interface OAuthUpdateClientInput {
@@ -83,17 +78,12 @@ export interface OAuthUpdateClientInput {
     secret?: GraphQLString;
     authUrl?: GraphQLString;
     redirect?: GraphQLString;
-    resourceCodes?: JSON;
+    applicationCodes?: JSON;
     expiredAccessToken?: GraphQLInt;
     expiredRefreshToken?: GraphQLInt;
     isRevoked?: GraphQLBoolean;
     isMaster?: GraphQLBoolean;
-}
-
-export interface OAuthCreateCredentialInput {
-    username: GraphQLString;
-    password: GraphQLString;
-    grantType: GrantType;
+    applicationIds?: string[];
 }
 
 export interface OAuthCreateRefreshTokenInput {
@@ -101,7 +91,7 @@ export interface OAuthCreateRefreshTokenInput {
     accessTokenId: string;
     token: GraphQLString;
     isRevoked: GraphQLBoolean;
-    expiresAt?: GraphQLTimestamp;
+    expiresAt?: GraphQLInt;
 }
 
 export interface OAuthUpdateRefreshTokenInput {
@@ -109,7 +99,7 @@ export interface OAuthUpdateRefreshTokenInput {
     accessTokenId?: string;
     token?: GraphQLString;
     isRevoked?: GraphQLBoolean;
-    expiresAt?: GraphQLTimestamp;
+    expiresAt?: GraphQLInt;
 }
 
 export interface Pagination {
@@ -124,7 +114,8 @@ export interface OAuthAccessToken {
     token: GraphQLString;
     name?: GraphQLString;
     isRevoked: GraphQLBoolean;
-    expiresAt?: GraphQLTimestamp;
+    expiresAt?: GraphQLInt;
+    refreshTokens?: OAuthRefreshToken[];
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -143,8 +134,6 @@ export interface IQuery {
     oAuthFindClientById(id?: string): OAuthClient | Promise<OAuthClient>;
     oAuthGetClients(query?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
     oAuthPaginateClients(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    oAuthFindMe(): JSON | Promise<JSON>;
-    oAuthFindMePermissions(): JSON[] | Promise<JSON[]>;
     oAuthFindRefreshToken(query?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthFindRefreshTokenById(id?: string): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthGetRefreshTokens(query?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
@@ -167,7 +156,6 @@ export interface IMutation {
     oAuthUpdateClient(payload: OAuthUpdateClientInput): OAuthClient | Promise<OAuthClient>;
     oAuthDeleteClientById(id: string): OAuthClient | Promise<OAuthClient>;
     oAuthDeleteClients(query?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
-    oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
     oAuthCreateRefreshToken(payload: OAuthCreateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthCreateRefreshTokens(payload: OAuthCreateRefreshTokenInput[]): boolean | Promise<boolean>;
     oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
@@ -181,6 +169,7 @@ export interface OAuthApplication {
     code: GraphQLString;
     secret: GraphQLString;
     isMaster: GraphQLBoolean;
+    clients?: OAuthClient[];
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -193,22 +182,16 @@ export interface OAuthClient {
     secret: GraphQLString;
     authUrl?: GraphQLString;
     redirect?: GraphQLString;
-    resourceCodes: JSON;
+    applicationCodes: JSON;
     expiredAccessToken?: GraphQLInt;
     expiredRefreshToken?: GraphQLInt;
     isRevoked: GraphQLBoolean;
     isMaster: GraphQLBoolean;
+    applications?: OAuthApplication[];
+    accessTokens?: OAuthAccessToken[];
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
-}
-
-export interface OAuthCredential {
-    token_type: GraphQLString;
-    access_token: GraphQLString;
-    refresh_token?: GraphQLString;
-    expires_in?: GraphQLInt;
-    scope?: GraphQLString;
 }
 
 export interface OAuthRefreshToken {
@@ -216,7 +199,7 @@ export interface OAuthRefreshToken {
     accessToken: OAuthAccessToken;
     token: GraphQLString;
     isRevoked: GraphQLBoolean;
-    expiresAt?: GraphQLTimestamp;
+    expiresAt?: GraphQLInt;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

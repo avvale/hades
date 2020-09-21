@@ -6,6 +6,7 @@ export class UpdateApplicationCommand
         public readonly code?: string,
         public readonly secret?: string,
         public readonly isMaster?: boolean,
+        public readonly clientIds?: string[],
         
     ) {}
 }

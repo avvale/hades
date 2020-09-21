@@ -24,6 +24,7 @@ export class UpdateApplicationResolver
             payload.code,
             payload.secret,
             payload.isMaster,
+            payload.clientIds,
             
         ));
         

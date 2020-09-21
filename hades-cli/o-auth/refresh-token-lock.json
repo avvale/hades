@@ -11,7 +11,7 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/create/create-refresh-token.command.ts",
-            "integrity": "sha1:466d5675db399dc72394de21a71697bb09a85d54"
+            "integrity": "sha1:0657cb56a397517adc5b865deaa46481f496ffd1"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/create/create-refresh-token.service.spec.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.command.ts",
-            "integrity": "sha1:ef14d77574bfeb6d86cfe94156dbaf988c19fac6"
+            "integrity": "sha1:94af7b66e9c0f1a0ee1262bf014e10cc36ac1d34"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.service.spec.ts",
@@ -91,7 +91,7 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/events/created-refresh-token.event.ts",
-            "integrity": "sha1:f59d537e16198d659068a4bab5279855da23f573"
+            "integrity": "sha1:261829eb50be1580bec6cad09726f04715bc1866"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/events/created-refresh-tokens.event-handler.ts",
@@ -107,7 +107,7 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/events/deleted-refresh-token.event.ts",
-            "integrity": "sha1:889fa4e6315df5fc3281e3403bbdbee48af99dcc"
+            "integrity": "sha1:c901fb0334154d189c9c0878a10391f462200f99"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/events/deleted-refresh-tokens.event-handler.ts",
@@ -123,7 +123,7 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/events/updated-refresh-token.event.ts",
-            "integrity": "sha1:35026667d964b77652ec9df20c37835e2c55b90a"
+            "integrity": "sha1:933b741bd0a2396432fa43147fe1b71ba03def48"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/find/find-refresh-token-by-id.query-handler.ts",
@@ -219,7 +219,7 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/update/update-refresh-token.command.ts",
-            "integrity": "sha1:5b4fcdeba45d16be7f13565134f1085da3d009ee"
+            "integrity": "sha1:b946ebe61bfcb7e8404640f9773c7350d7433e99"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/application/update/update-refresh-token.service.spec.ts",
@@ -243,7 +243,7 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/domain/refresh-token.response.ts",
-            "integrity": "sha1:7b989a47f2df2bcd15870593da5e23aae8f5667e"
+            "integrity": "sha1:34e380ac10a4d981a6649bdf985491100206975d"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/domain/value-objects/index.ts",
@@ -259,11 +259,11 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed.ts",
-            "integrity": "sha1:b42b13e624a67b390acccb4d6401af4521a6eaa3"
+            "integrity": "sha1:ad4459b95074d5f055344eb440ecf67f1d88e760"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.model.ts",
-            "integrity": "sha1:d24084a3f23b8d7624b2560b0201b8619d7bf825"
+            "integrity": "sha1:e86573f57bf03533c2876fbe69cfcb8b5b756740"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.repository.ts",
@@ -287,7 +287,7 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/domain/value-objects/refresh-token-expires-at.ts",
-            "integrity": "sha1:6ef36e1cb1ea08460a367d05f60697e311ee9cc6"
+            "integrity": "sha1:77c42302ff87fb04991025001694236cca760670"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/domain/value-objects/refresh-token-created-at.ts",
@@ -375,19 +375,19 @@
         },
         {
             "path": "src/apps/o-auth/refresh-token/dto/refresh-token.dto.ts",
-            "integrity": "sha1:7e5c7ba301adcb161daf2260ab4f42cf1d1841c7"
+            "integrity": "sha1:6821c969ca9fede7bfbd297ad19f0427192c2863"
         },
         {
             "path": "src/apps/o-auth/refresh-token/dto/create-refresh-token.dto.ts",
-            "integrity": "sha1:2b455068a4562b6c2be9fc8cd1066cd33211bfd0"
+            "integrity": "sha1:be2fa2093a9459363c476919b53a3d0ea91d699b"
         },
         {
             "path": "src/apps/o-auth/refresh-token/dto/update-refresh-token.dto.ts",
-            "integrity": "sha1:7d94094bcda68c033209bc11ed6f089efbc2c21a"
+            "integrity": "sha1:11fdd32a7a239d7d664c31869381f9e32293298c"
         },
         {
             "path": "src/apps/o-auth/refresh-token/graphql/refresh-token.graphql",
-            "integrity": "sha1:0ff18705d408f7800feb7f135bc0223166727c39"
+            "integrity": "sha1:9788999c9acb8754f308da1c158ba73bd62e3367"
         },
         {
             "path": "src/apps/o-auth/refresh-token/index.ts",
@@ -472,10 +472,6 @@
         {
             "path": "src/apps/o-auth/refresh-token/seeder/seeder.ts",
             "integrity": "sha1:4b1fe04f30a4e74ef5132fa2e68d450815d28d0a"
-        },
-        {
-            "path": "postman/o-auth.refresh-token.postman.json",
-            "integrity": "sha1:e8e5d465648c5a5f8a17a6d6c585620e6b9e1652"
         }
     ]
 }

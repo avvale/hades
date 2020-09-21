@@ -29,6 +29,7 @@ export class CreateApplicationController
             payload.code,
             payload.secret,
             payload.isMaster,
+            payload.clientIds,
             
         ));
 

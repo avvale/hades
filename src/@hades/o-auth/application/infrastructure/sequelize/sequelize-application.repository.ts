@@ -22,4 +22,22 @@ export class SequelizeApplicationRepository extends SequelizeRepository<OAuthApp
         super();
     }
     
+    // hook called after create aggregate
+    createdAggregateHook(aggregate: OAuthApplication, model: OAuthApplicationModel) 
+    {
+        // add many to many relation
+        
+        if (aggregate.clientIds.length > 0) model.$add('clientIds', aggregate.clientIds.value);
+        
+    }
+
+    // hook called after create aggregate
+    updatedAggregateHook(aggregate: OAuthApplication, model: OAuthApplicationModel) 
+    {
+         // set many to many relation
+        
+        if (aggregate.clientIds.isArray()) model.$set('clientIds', aggregate.clientIds.value);
+         
+    }
+    
 }

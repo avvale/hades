@@ -8,11 +8,12 @@ import {
     ClientSecret,
     ClientAuthUrl,
     ClientRedirect,
-    ClientResourceCodes,
+    ClientApplicationCodes,
     ClientExpiredAccessToken,
     ClientExpiredRefreshToken,
     ClientIsRevoked,
-    ClientIsMaster
+    ClientIsMaster,
+    ClientApplicationIds
     
 } from './../../domain/value-objects';
 
@@ -33,11 +34,12 @@ export class UpdateClientCommandHandler implements ICommandHandler<UpdateClientC
             new ClientSecret(command.secret, { undefinable: true }),
             new ClientAuthUrl(command.authUrl),
             new ClientRedirect(command.redirect),
-            new ClientResourceCodes(command.resourceCodes, { undefinable: true }),
+            new ClientApplicationCodes(command.applicationCodes, { undefinable: true }),
             new ClientExpiredAccessToken(command.expiredAccessToken),
             new ClientExpiredRefreshToken(command.expiredRefreshToken),
             new ClientIsRevoked(command.isRevoked, { undefinable: true }),
             new ClientIsMaster(command.isMaster, { undefinable: true }),
+            new ClientApplicationIds(command.applicationIds),
             
         )
     }

@@ -1,6 +1,7 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { OAuthClientModel } from '@hades/o-auth/client/infrastructure/sequelize/sequelize-client.model';
+import { OAuthRefreshTokenModel } from '@hades/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.model';
 
 @Table({ modelName: 'o_auth_access_token', freezeTableName: true })
 export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel> 
@@ -91,13 +92,18 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         field: 'expires_at',
         
         allowNull: true,
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER.UNSIGNED,
         
         
     })
-    expiresAt: string;
+    expiresAt: number;
         
              
+        
+        
+    @HasMany(() => OAuthRefreshTokenModel)
+    refresh_tokens: OAuthRefreshTokenModel[];
+         
         
     
     

@@ -11,11 +11,12 @@ import {
     ClientSecret,
     ClientAuthUrl,
     ClientRedirect,
-    ClientResourceCodes,
+    ClientApplicationCodes,
     ClientExpiredAccessToken,
     ClientExpiredRefreshToken,
     ClientIsRevoked,
     ClientIsMaster,
+    ClientApplicationIds,
     ClientCreatedAt,
     ClientUpdatedAt,
     ClientDeletedAt
@@ -69,11 +70,12 @@ describe('UpdateClientService', () =>
                 new ClientSecret(clients[0].secret),
                 new ClientAuthUrl(clients[0].authUrl),
                 new ClientRedirect(clients[0].redirect),
-                new ClientResourceCodes(clients[0].resourceCodes),
+                new ClientApplicationCodes(clients[0].applicationCodes),
                 new ClientExpiredAccessToken(clients[0].expiredAccessToken),
                 new ClientExpiredRefreshToken(clients[0].expiredRefreshToken),
                 new ClientIsRevoked(clients[0].isRevoked),
                 new ClientIsMaster(clients[0].isMaster),
+                new ClientApplicationIds(clients[0].applicationIds),
                 
             )).toBe(undefined);
         });

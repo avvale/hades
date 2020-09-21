@@ -6,7 +6,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '8d20a56d-bf5f-46ee-9ab6-959ee4c287c3'
+        example     : '6fc34f16-c1db-45ef-b887-8beeda142bee'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '7v1sold7hkvrp8u35k4tf1mzwc0kbbrlz8my5jnoo8j3qni1s1f9t81dxugw3sfg7b6bv5spsesrzl6ephyo2assad5t7rj5qtbn3n8l86ve1tn6jm1ialxezmys8dwu48z6p80huiynykyuavzxe15q7mk6b4iu9c6kd588zacmzzpd33v96sxngqttzhmv624zkof3ohr07ik4spz42lh1o9y5nwoqscv7mafrpln70c9um1dy7mqndd8zvre'
+        example     : 'jo2avnnxtheo23ll3pstqnpwkni1ccc10w4r7a87hz93e9edsinrp3i29lo7fjp57vykn84puuznztaqfdwipn0sf4o1bnnhz1ay8qn0ypwn1trudtt9pujrxf0e2a0mu7ska886k57qxf4fqmgvhn8memz3tbigb2rxv79sgq6q13qtzv0um82e6af8opl90ffaby4h1ih0d1l5o3ln8fvk8ot62d4qx80b7i7xkopk8qwtnh4cbbasooz9zq4'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'iownzvpa7yzd700w8pr8gtvdui3iwdr4mfzloys3iawi1cl7wf'
+        example     : 'rtdmfs17xn2mt65nav1t57lgcp0yx13eiu1ljtqtg94vmjmylv'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'secret [input here api field description]',
-        example     : '3a35yixzvdnncqare7u7ksy2p7sycywuz7r8xegdfdej4i8t23yiz0vnp6rhztoztcu1r3hbslo31sjya8fp3m8i6k'
+        example     : 'zkkkmuy77jkhnkfu2m8adnflv7nq79fp8q4h5yyxw0j4n4j9uxdwtow3ynjlxzaf2v4mgyf03ji9x8renpcn0kgtjz'
     })
     secret: string;
     
@@ -42,9 +42,18 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : Boolean,
         description : 'isMaster [input here api field description]',
-        example     : false
+        example     : true
     })
     isMaster: boolean;
+    
+    
+    
+    @ApiProperty({
+        type        : [String],
+        description : 'clientIds [input here api field description]',
+        example     : '',
+    })
+    clientIds: string[];
     
     
 }

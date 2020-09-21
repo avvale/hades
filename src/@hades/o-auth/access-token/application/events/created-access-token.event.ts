@@ -6,7 +6,7 @@ export class CreatedAccessTokenEvent
         public readonly token: string,
         public readonly name: string,
         public readonly isRevoked: boolean,
-        public readonly expiresAt: string,
+        public readonly expiresAt: number,
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,

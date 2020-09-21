@@ -24,6 +24,7 @@ export class CreateApplicationResolver
             payload.code,
             payload.secret,
             payload.isMaster,
+            payload.clientIds,
             
         ));
         

@@ -6,7 +6,7 @@ export class CreateRefreshTokensCommand
             accessTokenId: string,
             token: string,
             isRevoked: boolean,
-            expiresAt?: string,
+            expiresAt?: number,
             
         } []
     ) {}

@@ -1,5 +1,8 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
+import { OAuthClientModel } from '@hades/o-auth/client/infrastructure/sequelize/sequelize-client.model';
+    
+import { OAuthApplicationsClientsModel } from '@hades/o-auth/application/infrastructure/sequelize/sequelize-applications-clients.model';
 
 @Table({ modelName: 'o_auth_application', freezeTableName: true })
 export class OAuthApplicationModel extends Model<OAuthApplicationModel> 
@@ -74,6 +77,14 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     isMaster: boolean;
         
              
+        
+            
+    @BelongsToMany(() => OAuthClientModel, () => OAuthApplicationsClientsModel)
+    clientIds: OAuthClientModel[];
+
+    @BelongsToMany(() => OAuthClientModel, () => OAuthApplicationsClientsModel)
+    clients: OAuthClientModel[];
+     
         
     
     

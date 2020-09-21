@@ -9,7 +9,8 @@ import {
     ApplicationName,
     ApplicationCode,
     ApplicationSecret,
-    ApplicationIsMaster
+    ApplicationIsMaster,
+    ApplicationClientIds
     
 } from './../../domain/value-objects';
 import { IApplicationRepository } from './../../domain/application.repository';
@@ -59,6 +60,7 @@ describe('CreateApplicationService', () =>
                 new ApplicationCode(applications[0].code),
                 new ApplicationSecret(applications[0].secret),
                 new ApplicationIsMaster(applications[0].isMaster),
+                new ApplicationClientIds(applications[0].clientIds),
                 
             )).toBe(undefined);
         });

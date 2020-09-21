@@ -6,7 +6,7 @@ export class UpdateAccessTokenCommand
         public readonly token?: string,
         public readonly name?: string,
         public readonly isRevoked?: boolean,
-        public readonly expiresAt?: string,
+        public readonly expiresAt?: number,
         
     ) {}
 }

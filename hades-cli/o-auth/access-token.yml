@@ -28,8 +28,16 @@ aggregateProperties:
     type: boolean
     nullable: false
   - name: expires_at
-    type: timestamp
+    type: int.unsigned
+    maxLength: 10
     nullable: true
+  - name: refresh_tokens
+    type: OAuthRefreshToken
+    nullable: true
+    relationship: one-to-many
+    relationshipSingularName: refresh_token
+    relationshipAggregate: OAuthRefreshToken
+    relationshipModulePath: o-auth/refresh-token
   - name: created_at
     type: timestamp
     nullable: true

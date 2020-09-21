@@ -6,7 +6,8 @@ import {
     ApplicationName,
     ApplicationCode,
     ApplicationSecret,
-    ApplicationIsMaster
+    ApplicationIsMaster,
+    ApplicationClientIds
     
 } from './../../domain/value-objects';
 
@@ -26,6 +27,7 @@ export class CreateApplicationCommandHandler implements ICommandHandler<CreateAp
             new ApplicationCode(command.code),
             new ApplicationSecret(command.secret),
             new ApplicationIsMaster(command.isMaster),
+            new ApplicationClientIds(command.clientIds),
             
         );
     }

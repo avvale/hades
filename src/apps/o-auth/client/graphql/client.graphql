@@ -1,6 +1,6 @@
 
 enum OAuthClientGrantType {
-    AUTHORIZATION_CODE
+    AUTHORIZATON_CODE
     CLIENT_CREDENTIALS
     PASSWORD_GRANT
         
@@ -14,11 +14,13 @@ type OAuthClient
     secret: GraphQLString!
     authUrl: GraphQLString
     redirect: GraphQLString
-    resourceCodes: JSON!
+    applicationCodes: JSON!
     expiredAccessToken: GraphQLInt
     expiredRefreshToken: GraphQLInt
     isRevoked: GraphQLBoolean!
     isMaster: GraphQLBoolean!
+    applications: [OAuthApplication]
+    accessTokens: [OAuthAccessToken]
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -33,11 +35,12 @@ input OAuthCreateClientInput
     secret: GraphQLString!
     authUrl: GraphQLString
     redirect: GraphQLString
-    resourceCodes: JSON!
+    applicationCodes: JSON!
     expiredAccessToken: GraphQLInt
     expiredRefreshToken: GraphQLInt
     isRevoked: GraphQLBoolean!
     isMaster: GraphQLBoolean!
+    applicationIds: [ID]
     
 }
 
@@ -49,11 +52,12 @@ input OAuthUpdateClientInput
     secret: GraphQLString
     authUrl: GraphQLString
     redirect: GraphQLString
-    resourceCodes: JSON
+    applicationCodes: JSON
     expiredAccessToken: GraphQLInt
     expiredRefreshToken: GraphQLInt
     isRevoked: GraphQLBoolean
     isMaster: GraphQLBoolean
+    applicationIds: [ID]
     
 }
 

@@ -5,7 +5,7 @@ export class UpdateRefreshTokenCommand
         public readonly accessTokenId?: string,
         public readonly token?: string,
         public readonly isRevoked?: boolean,
-        public readonly expiresAt?: string,
+        public readonly expiresAt?: number,
         
     ) {}
 }

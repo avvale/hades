@@ -8,11 +8,12 @@ export class CreateClientsCommand
             secret: string,
             authUrl?: string,
             redirect?: string,
-            resourceCodes: any,
+            applicationCodes: any,
             expiredAccessToken?: number,
             expiredRefreshToken?: number,
             isRevoked: boolean,
             isMaster: boolean,
+            applicationIds?: string[],
             
         } []
     ) {}
