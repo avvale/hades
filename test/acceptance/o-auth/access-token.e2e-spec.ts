@@ -57,11 +57,11 @@ describe('access-token', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                token: 'Nihil molestiae quo recusandae aliquid ducimus et omnis consequuntur et. Et est quos illum ut vero. Tempora qui vel in. Iusto deleniti dolore aut quam ea. Eos autem et perspiciatis aut eligendi ipsum rerum.',
-                name: '2apurknxx4n94lj4qi2dql2jvgo70b1adg5209325xgkfu72s72e209dwd6mxxx8wxw1xl61yetzdk6c5cvrrbta54nkyclki1iwd0i08r1wypm1o9687adj8cptzjw4dr94vb2ro9zy925opkc7017uwqwhx7lv9mj7qmmz2vshsvedgeqvbyieeqmj3vkmm86w7ai0atwsodbr88m4wejjcrxonmpyphhf9k0eqxa62j4nehsbxykcabid8xk',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'Aliquam dignissimos id fuga repellat suscipit soluta nemo dolorum. Aspernatur magni tenetur laudantium recusandae ut. Vel odio eaque eveniet repellendus qui nesciunt vel iusto dignissimos.',
+                name: 'ow7sgzjask0gn2v8h1owu34meyah3m4qb77k79xyndifb5wjfhi0u7693b2k6w2iekp0fv81ppwstp74pgvqaehga04rrhi64ilj8n9p781zdt70rvzx3rj517y1fiupbj1mj1s4abmjfdvkp1rmtkm291t3jfhvjdtel66v3ae83j7chci0bhfi0ny9090hw6jlgf4px3jmd4qfr7t0xy68swazck8ie0aet0nx2prkha7tquqqfsz53q0b8tt',
                 isRevoked: false,
-                expiresAt: '2020-09-21 01:58:54',
+                expiresAt: 7635457234,
             })
             .expect(400)
             .then(res => {
@@ -76,11 +76,11 @@ describe('access-token', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                token: 'Numquam nihil tempore eaque voluptatum culpa aut tempore ut est. Alias autem in in quae voluptas accusamus ipsam aspernatur sed. Est omnis temporibus nostrum sapiente. Omnis fuga autem id magni aut consequuntur consequatur qui cumque. Vel consequatur perferendis expedita fugiat repudiandae ea quo. Et qui rerum.',
-                name: '1e4a0dt2pcls5au26ai5e2vc2ucb790fjq6m79bfsini2ws4pfcw4rpxcxiezwag66r4zoaof1u8vaba8f24divfg9w9z9d9mctagka8y5l3yobkdm0ts5h7zuxf05mf50xxqves2i029jfpvkpfuhhdh0zteldbp7i2k7zh263vb7crbtls4aptn5h2cif98ymxkaukwdlgreuycraoub7hr3zsuozk6hka1pf5w2cdnxf6021s1v6dvgyiy5v',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'Dolores aut aut veritatis. Rerum esse sunt animi consequuntur eos asperiores. Et nam temporibus nulla rem praesentium soluta. Velit voluptatem sed enim autem quae voluptas aliquam. Quibusdam maiores excepturi voluptatum voluptas quod maiores omnis qui inventore.',
+                name: '74wkucat1gr1mt011dl9csx5xtq73ngrzq9gtbid3gxdacpk5w7a2lktynptb3ocak5b8qijl00gy3q9ho62tjwcxddmk9y1fmls3z6zogvq0f7myjc3s8vw786du6xtrmhpd35ybrfd8mk33rhx9jj3a85v0gf98g2xpkihdo3ebtpzuez82lu33pel6i5dq5c1bchf5qtcyur1u88814ybsbfc2yil9phe9sjhmv5tdi4imllq4hmkxh2k6ne',
                 isRevoked: true,
-                expiresAt: '2020-09-21 00:27:24',
+                expiresAt: 3892994388,
             })
             .expect(400)
             .then(res => {
@@ -94,12 +94,12 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
                 clientId: null,
-                token: 'Ullam nemo et. Reiciendis non animi iure corporis ab. Voluptas eligendi est aut necessitatibus autem eos nemo blanditiis. Voluptatem ex necessitatibus.',
-                name: 'nlt2ypxnqc83o9ei67yzi1s8vcbdr0rdhb4yvmzenb4i5olbqo7yh73rdv2jbjkyux3sv3gzzlbvo3dawnuj4qblh2ppzcldf3kaubqps4qi5qyfg6wx9e1n4gip5mv39zs2dc325gr609fcf2oz7juofz84xoweptpyv9ia7xdviwwnc79faa3shdvekmtpliwrs966g1ozw7nvu8uisxzzy9tk7247e6axik4wxeqbamiy7zrj40qoy6847vm',
-                isRevoked: true,
-                expiresAt: '2020-09-20 22:18:41',
+                token: 'Voluptatem optio doloribus praesentium sed. Veniam impedit voluptas illo tempore natus facilis ipsam. Illum expedita vel enim libero. Et vero deleniti aspernatur quasi. Esse quas amet minima.',
+                name: 'gvz7b3gozqs3j6bly477x4ttyy43ywaf2p9kt3ukq12pv1f5cfobhd29if6lgp57u2n241ex2uy8w8po1kmfs09xwm35s2bxvb5r883j2m9a6w81lci38ev40alv7maajjt8i98kndabpqyv4lokcu5akndn7f3tyrjm81i2o1hqu8o3kjkbffbmqe5tc2he33opeknc51coif7as96rzvsrh2w7eztz3up2aair2uz4ienxpsx34rmn3xr5mag',
+                isRevoked: false,
+                expiresAt: 3364576114,
             })
             .expect(400)
             .then(res => {
@@ -113,12 +113,12 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
                 
-                token: 'Error dignissimos quae et qui. Consectetur illo tempora. Quod similique ipsa. Eum odio id iusto tempore eveniet et eos placeat dolore. Veritatis enim cumque quia quam et est. Iste culpa temporibus numquam eum saepe sunt rerum laudantium corporis.',
-                name: '48b4pxvxvjk09hn4nuph28933cuo4nn8lc03plvham720jkw73h54ox7rovm1ucnywkyph8bpktti0wst4jvt53gdhqseg43r7fvpsvvmouvi3zqxbkv76mj7rfrb5fsnpyajd4u4k5xj5uwhhd0slks6l2hqs5lyccgreb4fv258owteq4q8c5pucflkzat9l5rwhj9vjwl15kmcdgzsrxwfmptd9l7gincqy7uan5d3ghdyo6kadr57aiste7',
-                isRevoked: true,
-                expiresAt: '2020-09-20 13:06:18',
+                token: 'Laborum dignissimos ratione reprehenderit at quis aperiam dignissimos. Eius sit similique enim est dicta asperiores rerum. Quia id et. Quas velit est sint similique maiores pariatur quia.',
+                name: 's40t3ut9iaepqd9adzq0txn7ouvt957wcr9htu5gxbll89t9t1j3r3hqnq6o1xbvgoj3cnt3k1tvrnbxgsadwlgoo1onn05351s70xxrkfzfhzbg1qiuiqyjd1cyfiu84fncpozin2d83dix4ejghjjveoqpqawozfs7ndtq3hc9tltakzg9co5dw9h2d1vg8227fd7hng373zd41sfd18lv7km05p51k8i8dd7gy706zu4s6gc3bcjjfjx40p1',
+                isRevoked: false,
+                expiresAt: 7022639340,
             })
             .expect(400)
             .then(res => {
@@ -132,12 +132,12 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
                 token: null,
-                name: 'w2o6pekhn9177zg7ua9v9wwfnicsi6rulbde9f9knrreazxffw78amtvaw46jjq4obicnhclxz6m3mniy95v6wo6pjalih0dsy6xgz63usacyt4er25240aph5qfvidl3xh9pi7qy519eq5mfz1iywcg9ulpis6nhnwwaasrsuhhdu0sg9yaudnr0bum6qpjyr94pkl9jtepmd9o5202ih4obkru2u2zxwmoe1bbxy5t36s29cxfyvzrko35su9',
+                name: 'aa2wdhrqhwqjofvjdmedzxl0k7a31lar6lhsxwphkxoz51gqrfsellh5zu8fvs0m1rd1zps01jzyra5qvd0ldkptymiix06a24rkc58072kg37tcr9wkyy0874op8pczl1k90p0uqjqykxbiyqzvsff68b0cyb1sg35bgtuy40808j0f9dqlk7ee7xlx8n313cohurn5i0dk7axpcoorywkwq5x84fu39vjak9xw41s278wvinmwjdw8tnf9pzr',
                 isRevoked: true,
-                expiresAt: '2020-09-20 17:16:06',
+                expiresAt: 8967666074,
             })
             .expect(400)
             .then(res => {
@@ -151,12 +151,12 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
                 
-                name: 'p6ybnfvueazcjoc9c6mlcz3e6olvhdc0469ch19p0mfxns0b9427iraiajrdmatr580f9yws7qndax8zc7yxm4pt6d5cyhgo2htux12y49o7u4vwr0gz9gouzsdzif95axrd8b408m6p8w657ieuotcywmrjx58cbghlwltcv204ifk9in31aj0nu3wte4sulvwwobrlr61y0mny4wy1r1pko4b3yglcaoite6vpyqjv6pxlplry1tc0z61zy09',
+                name: 'izzxc2lqb8d2aagm5guixjofs5v7z4nh245n68mth45kzv91js5p2bftd9826vlmmdlbfzzusxa6sgqcueze434rblzrq946c3h7h2amrphc5z1rql39y7agyicuevjh1vfbra9d0fpilighfafg4lolzw0io0ti79b3o0fp3gg5qpaext8t26a19nwgh1crj8fppnkbddoxayikexhtjyxljapn4jyqt8b28xkwbqejevuygwybgr1za3x8a8h',
                 isRevoked: false,
-                expiresAt: '2020-09-20 14:58:05',
+                expiresAt: 4571729488,
             })
             .expect(400)
             .then(res => {
@@ -170,12 +170,12 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                token: 'Quia blanditiis totam rerum tempora quae enim. Expedita in soluta quo repudiandae error. Rerum quo earum sapiente eaque quasi aliquam. Porro aut dolorum amet mollitia laboriosam. Dolorem dolor non.',
-                name: '2n1npp4nwpai0rjougq2n21awqbus8dinjwmtb37565lb5hy0ayxvqzaz2bphtjqy3wcwb98fd7ovntprqj0sk27a0ka7br7555pqp3xl84npi7qri4jerqis77x9wxs6g7r3fjc9qqls54rdzjwrbxmflollzslobtr3hu8flssibw2u8l5o5xsqywbhppfiu8gp6u9ed8pxivgp2dh78ikq5wst11gqkjg7vxeui3grxe9rj3u6sdcf28vx2v',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'Porro architecto deleniti. Accusantium vel ad enim quia laborum alias illo dolorem quo. Aut provident dolores numquam numquam repudiandae. Odit enim sit voluptatibus impedit dolor sint. Dolor voluptas ducimus maiores sequi voluptatem accusamus. Iste eligendi velit repellendus.',
+                name: 's1qzdh8x3un44k19gtqidnnmnmjm2nbd5zis7n414gvp5huo37hlpop5vohecka14z2b5p8tun1429yv5te52r6jrqjf091i2y6riqh6lapolky312sf47o5gjnm3l9tnhafsm08knku7k41rlziqezfakf1zh150lc41wlz6ozkcrrxqj5hwfl2zlhy2ovwdrl27q3pzquqlddmz0emixgfk4xbews5fon4ta3xx5eug1wejz48c4ixqeltr9t',
                 isRevoked: null,
-                expiresAt: '2020-09-20 22:32:57',
+                expiresAt: 1423063265,
             })
             .expect(400)
             .then(res => {
@@ -189,12 +189,12 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                token: 'Reprehenderit rerum illo reprehenderit accusantium quibusdam delectus debitis cupiditate. Ut placeat dolores repellendus sed necessitatibus. Autem esse enim consequatur qui omnis est. Cupiditate temporibus culpa numquam. Vel sapiente ut ut autem id similique iure aut. Consequuntur consequatur et eos.',
-                name: 'eshjpao0rti7yvwkd30hczw6k5abcx7d0trotwyr0jpbnbodrzkx1udqeltcu48emnwt1s0jmwed384qrmet4mfc8ww6jfg2w54gwgx1o4gg2bu2m5ix2zkrf9ewtlnm7uhgjmzg2i0udpw0ws82tbuwuswev6pfw82gzzsuojhs8tjt952oxzzvh14mih2jvit11vxpfnwvu2qvq0zsw9i2y8qdqhsnv0lc6ytm9fasbr9lvzdgyczwhly5h7f',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'Repudiandae pariatur beatae natus et numquam voluptatem dignissimos. Illo porro distinctio esse vel ut odit. Voluptatem tempora pariatur.',
+                name: 'y829v19hlg3ei862x96yljduompaqjjrsvqshgfwqricmulpd40nggi79td8ve4bo9tiptmxn5ethmyy24v35irz692u1mcq8me0hj6cla0ai6n7d683dpcck71ux9yktobsmdtwwo9l27grq7a4hggyzhm7nfkawg1ml3knealfaligrnzwoe2qmqnqs0isfgi8gwioawlughfp6wjgzyv9ddpsmjuf8mlp9xv26jvwai2ja7akuedul5cywwq',
                 
-                expiresAt: '2020-09-20 13:36:58',
+                expiresAt: 9945399444,
             })
             .expect(400)
             .then(res => {
@@ -210,12 +210,12 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'k5rreojlt9fbjgqh5wlv3fgvne7nyxq89ez9l',
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                token: 'Dicta fugit non recusandae dolor. Blanditiis et perspiciatis omnis error fuga consectetur. Aut distinctio aut et iste temporibus sed. Repellat cupiditate dignissimos qui nam occaecati architecto. Perspiciatis labore dignissimos earum ducimus. Velit mollitia nihil atque qui placeat.',
-                name: 'vm0wp11bdanb4318ef662e21lz048kspcz0472mqs8z9hpoy73p86u88w3e4jcgov7rqkjy749145tgecmy8cqvm1r1b6r9rkoghcqzd5z6x7zcmurceq8xrsuh5b7mykv1c5jz62f2zdk09d8elehwbnsv0239ew4pl4flezhohigukcwtqrpmv7v9zcbik071f4i9zfxgfnp3vdf2z4edrqmgicf97jip7gxpgvj54rjzsb8o7yyclj93s9gl',
+                id: 'cd9m9fcxf8wt95vt3l62bjvlnf52fdye2g8ud',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'Sit qui id. Quia fugiat blanditiis est eius sint animi laudantium quia ab. Impedit adipisci ad cum et illum. Ducimus soluta blanditiis dolor sint ex eos ullam.',
+                name: 'ngc24bkamyywt0uwke0j9vdng3c9243qa6e0glk4zrkrtyzsb5omx2rkxy5bf2u55xurtcnb74sz7q4338c8ljapecgxv4jey1ch7dqpma4mp4gxj8ulasap6bpcp1n2xu5a1geaefqmy6a72st6wb8l9aeyjvf81gpoptzhmr90tijw6trv3ap56njnc12oh55jua3aykvbd6aliw6bmruheng6sq5qu78un9rxh5060482j81qrqpd1kh128v',
                 isRevoked: true,
-                expiresAt: '2020-09-20 20:36:35',
+                expiresAt: 7015278952,
             })
             .expect(400)
             .then(res => {
@@ -229,12 +229,12 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                clientId: 's6x4jlke0zvrd3t9cpi0y1yq2d8gua5qocqp6',
-                token: 'Quo assumenda autem non et ipsam placeat sunt recusandae omnis. Vitae tempore dolor. Et velit ipsam totam excepturi non.',
-                name: 'kqasyqtl03q0slu8xzki4h48j434oqdnpuwcl8g7r5y136zefwb10rl6qlheul9umk2wg14uatrde6ntegs71ttjcfect8a0qt2tf3a4d2ndtq9jljb2jy3bmi6pqnslpztuvosak8clpniaq4md4kkvge5q25k1m7a33fmep1acildve9xx7nqelhdoz6mecpl9t14tzypb3fcr29208ddxcy1ofl7z2fzscbxbch4ti0wib56os1ulotm95r6',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'duo6axncca8y0tf720c10vedcmrwoa91pq2ux',
+                token: 'Cumque nulla rerum porro eum. Quas ducimus aut voluptatem id quia eius. Modi qui dolore doloremque asperiores nam quia quis delectus. Libero vero culpa voluptas recusandae. Et doloremque beatae occaecati.',
+                name: '0ffvlpsrw8wb50n3jbu2ggqryb5r3tmd3lfm1rxa0zfly21wi3odfg0yd81k4y7j0jd2xuy5ylj18zjzp9rkumbl7cx4qpabvg56kkv0jf3431rh4czcmrdkw3h1259n6zb0p6eh72oyvjhlosk8w3yn000yt86awp95s8zze3vb171clnyppsi4ili23wotpncpobdmfpwrglw9kdik5lkfupgd7rsy0is3qrldwqjwgo0qpwet0d5q7xu8r8r',
                 isRevoked: true,
-                expiresAt: '2020-09-20 23:59:34',
+                expiresAt: 8199611830,
             })
             .expect(400)
             .then(res => {
@@ -250,16 +250,35 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                token: 'Repudiandae ab quaerat rem perspiciatis adipisci dolores. Sunt quas quos quae at non. Sunt harum officiis minus.',
-                name: '2pb69it6sxj1eb5m04rvaza58be813yuxbawahn5bxepp5pstumukhz0ev3qx34hnhsbcx90orctx4rb2t1qfr2medkr46vtt7zujyzpa9nsc081vzpb74zxuwm7hbxjt5crt4z51i9z12z5cmevd5cr1r4hklco7e08609za8l6qi9l373mrr9qkg421xbid8x8efsosgj8yjdkqdyztir1wrzmgcmsd26iwba5vb9fg1eq6dy7y8kgigsosq7m',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'Ratione molestiae eveniet commodi rerum saepe repudiandae sed. Explicabo quasi repudiandae et tempora. Omnis sint est. Impedit itaque inventore consectetur doloremque.',
+                name: 'lhbtkwvzg50glbcn4nhxwo9f4anao0rh17swmrqgs4x9pud7rj9c1bywlkrz32hfsnh6jw5l6x7hym8oomdga1sn9hmtbc7uuz5ui8cnkh2nautv6773oxy5mnf124lu0s72bf8dwvj2pr4mqrr658rw010hlgkbz6x1xknqjpra0ziq4unnlyguhbqu3fsbhxklse85s9xbaf5ije36j085zesvgxydph4u0qtouhjkrcu33k7ugy0yech9i2sr',
                 isRevoked: true,
-                expiresAt: '2020-09-21 04:59:54',
+                expiresAt: 3870625843,
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for AccessTokenName is too large, has a maximum length of 255');
+            });
+    });
+    
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenExpiresAt is too large, has a maximum length of 10`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/access-token')
+            .set('Accept', 'application/json')
+            .send({
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'At sunt ratione. Voluptatem dolore harum et maxime. Aliquid quis sint non odio. Ex repudiandae incidunt ipsa maxime qui et ut. Amet quia aliquam amet.',
+                name: 'ydl7ajexnspxm4g45th7gg5tvk4a49j8b7f4sma2kmnv289i7iwlupdkfczsdbfpn6eg4ri13i9ap2lah10dpnrw4ndh0obwf84zyh051ochxs77f8b7xjrqigcfa13j0eww1s2q9bb0mqesb0ciesysjbfl5etnvbytqh6o8lvxe0o026x80neurqzvqu4u5j1kp2lq2gwqywgaa64s4fqfdbjkbu8djzzry72lnmk6b2so1rwjehv0jcjn2ei',
+                isRevoked: false,
+                expiresAt: 83598187779,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccessTokenExpiresAt is too large, has a maximum length of 10');
             });
     });
     
@@ -269,6 +288,25 @@ describe('access-token', () =>
     
     
     
+    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenExpiresAt must have a positive sign`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/access-token')
+            .set('Accept', 'application/json')
+            .send({
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'Est quos rerum. Quia quia nisi ab libero. Sed nihil ipsam veritatis et fugiat et quam et molestiae. Non natus nostrum perferendis dolore veniam in maiores ex ad. Et amet minima fuga sed in consectetur.',
+                name: 'pp1bt7ssdmv8a6esf7zhxgfhop2yzpjq9w3fojzs3p1x2564kw3vqmnie3dn75d6k16si1la0y46yl99mmbxgs1cwha4sitegs7bhdqqbcr9hu4ufcmvermromoilv4zmv98rqvvdmlxina8ji6b8bmlqx803jn9z8m23l11tcyd0rs69nc6023c04f2j256fnymamx9ah5f2ql9qr0wg5gc4eprwnlkdxlinarzhktar2ke27659gpuy0te1g1',
+                isRevoked: false,
+                expiresAt: -9,
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('The numerical value for AccessTokenExpiresAt must have a positive sign, this field does not accept negative values');
+            });
+    });
+    
 
     
     test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenIsRevoked has to be a boolean value`, () => 
@@ -277,12 +315,12 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                token: 'Dicta qui aspernatur. Et sapiente fuga tenetur reiciendis exercitationem sed. Quia et nulla soluta. Omnis perferendis impedit accusamus molestiae ut cupiditate. Vel veniam ipsum illum id perspiciatis qui aut.',
-                name: 'qe89oy6k05rprpy8tvo9z9563jpcip4j574f61bq2jg9y16fadjuw1639i5ittdohs4ucyme6vkitgs9onzh2nej6ebld17f7qsge9eds2fk0dj2j8r8su488fbuu018pl3sm03z3ldzx0rojl7ezu51zhl2mziy5qao9gm9mtw9qq6r10uq3p862zapvzh6divzhhn9hllpnbyg2cfxiq1zeorharjbmq7a17visi817vuhazu9ei0as75u1n1',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'Ratione sed voluptatem cumque est et fugiat quia. Sit porro tempora alias. Dolorum quod id sed temporibus ut. Voluptatibus vel repellendus id.',
+                name: 'n7xqtph5bf3ck4ix4wgvybxbokm0eqqcy2fkwhlz4sn5ty3j3catfr1os34x9bhddtq1ajg7saxcbt4epv0dy7lkecnzpo0d7xcj2kyjz6hgk4bju80mwoswcugqsdb4nq5um8gq8z73tz0tbdciubt1q2zyw2jl76zei9kykyi32nflb7llt8fibi5ns0agvwebyre0boagh2i994x6lipgvdmmsqepa6bn2f18nxp01ovzhvqulegl31wikpx',
                 isRevoked: 'true',
-                expiresAt: '2020-09-21 01:07:19',
+                expiresAt: 6487249376,
             })
             .expect(400)
             .then(res => {
@@ -294,25 +332,6 @@ describe('access-token', () =>
     
 
     
-    test(`/REST:POST o-auth/access-token - Got 400 Conflict, AccessTokenExpiresAt has to be a timestamp value`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/o-auth/access-token')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                token: 'Doloremque eveniet aut sint ipsam distinctio ullam. At et nulla explicabo earum ipsum. Aut repellendus sunt sit nulla in. Quis voluptas nesciunt voluptatem iste libero sit aut.',
-                name: 'al5pd5a9byozdb7ru5x1812znvy7dtehl974r86mfrm1tu9uaml7fsnouargfz3jsqqlc6d4cioleg1270qwqid7ospqer5gjwj60j9eb05y2dq2eurfjdkwf84mgyv9mex1snfh40yy5p05lm0b2a0z1wcn0dhuucbh3yru4m8yk7zp53x2q5ksqdyvl8kt4pgd9up030m3019pj7fb80dhweimb4gf3tfgulww3addqxaaj59tkb8rkoupaik',
-                isRevoked: false,
-                expiresAt: 'XXXXXXXX',
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for AccessTokenExpiresAt has to be a timestamp value');
-            });
-    });
-    
 
     test(`/REST:POST o-auth/access-token`, () => 
     {
@@ -320,12 +339,12 @@ describe('access-token', () =>
             .post('/o-auth/access-token')
             .set('Accept', 'application/json')
             .send({
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                token: 'Porro ut eaque ut quia in. Molestiae amet voluptatem et omnis. Et atque et odit aliquid.',
-                name: 'h9g06vzm8e07g2fgc7o9iznbb3t2j3gl7dsla4bzdjk09swum3ocycuktynu5zbi846ssur49e9ai4f8y91rqkqp7tencvgpg4ptrmmwppzcpyljc383rori9ndo1dzn4x64sscr6q73i9od69wwvq3c1khncw944o6lxsbmyj1scw4tgbz318c78jfgps7wik0r3vj4zt9o4in9d3z49ujwsgtyc78g207a0fm6bbceknztgvkmvjmsa01bifa',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'Vel aut in officia explicabo. Sunt voluptatum sed aperiam optio officiis omnis aut commodi harum. Eum dolorem sed quas. Perspiciatis est commodi non quo dolor inventore harum reiciendis. Mollitia temporibus expedita deleniti itaque provident omnis aspernatur minima. Dolorem accusantium quia.',
+                name: 'ddh3kk3vd51uxrgia52eb50pnr3oflr9jxhzvatugbwps7lm0j5ssu2fbh0mb3h2s4ckdft9ixqwk2e9w8n99be5hnb5mfnnp719khyp4ccb4ph9oybkdamd6svy5ucseck38j1rz40e65qsl2ldt0x1vkuueqrsy6paezl8mn3x2lbvqe7ph0kcbkwvtf7vyi29emp9tvqg5xh97ou5v36k5ertn9a6m752oy1noyl0xema3hf3hv04y9k3o2u',
                 isRevoked: false,
-                expiresAt: '2020-09-20 13:56:44',
+                expiresAt: 4303119014,
             })
             .expect(201);
     });
@@ -360,7 +379,7 @@ describe('access-token', () =>
                 {
                     where: 
                     {
-                        id: 'dafce937-c3b7-4cc7-b5bc-e9ce6643104f'
+                        id: '18d2b3f8-7db7-4af5-bf8d-3de2fcd9cc69'
                     }
                 }
             })
@@ -377,18 +396,18 @@ describe('access-token', () =>
                 {
                     where: 
                     {
-                        id: 'aca2f62d-123c-4830-a6b8-828c4d95b661'
+                        id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'aca2f62d-123c-4830-a6b8-828c4d95b661'));
+            .expect(repository.collectionResponse.find(item => item.id === '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe'));
     });
 
     test(`/REST:GET o-auth/access-token/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/o-auth/access-token/f17dd2af-888d-437f-9140-83643ae94c05')
+            .get('/o-auth/access-token/4978ed9e-432d-4848-b0de-6f9fced230f2')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -396,10 +415,10 @@ describe('access-token', () =>
     test(`/REST:GET o-auth/access-token/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/o-auth/access-token/aca2f62d-123c-4830-a6b8-828c4d95b661')
+            .get('/o-auth/access-token/7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'aca2f62d-123c-4830-a6b8-828c4d95b661'));
+            .expect(repository.collectionResponse.find(e => e.id === '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe'));
     });
 
     test(`/REST:GET o-auth/access-tokens`, () => 
@@ -418,12 +437,12 @@ describe('access-token', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '82bafe25-8e4d-41da-9a46-f9b8668558c4',
-                clientId: '5e8a4fd0-172f-466e-9fb9-393acf7427a9',
-                token: 'Tempore quae enim veniam eveniet tenetur. Vel maxime eum eveniet. Omnis omnis labore. Sed magni ea rerum est officiis nisi quia blanditiis doloremque. Nam et doloremque dolor eos repellat blanditiis voluptatem.',
-                name: 'bwf0xzseylubpoze06r0d71cc15acjh4ev7mc4nrg3rp6vwhymnmrlaxm2gqp79jxxn2bd706etltpp6b5yrir0vtnk9j8q825yuaz55yt0hm3posv81ouago1hmtxocrwpo11tjoi6d7jnbj0wark2hl3gyy10uqj82gpdyp0zzxgvdvpnxw9u7d11xqnqki6u1dr6g8sjp3tfnkwizfy3qx4apkj5uy3hw78iij0pjvxk6r4p232zudyftooy',
+                id: '1ca1f815-c8ea-4df5-b6b0-e68516636553',
+                clientId: '09317fdd-a3d9-4617-9060-522b222b1a43',
+                token: 'Voluptatem quas voluptatem numquam delectus cupiditate sit veniam dolores sed. Quos quis error ut nulla fugiat architecto suscipit. Est voluptatem minima expedita rerum officiis voluptatibus dicta velit. Quis ut eius id assumenda maxime ut id. Omnis quia rerum aliquam incidunt suscipit adipisci.',
+                name: 'text2mczdjqe2y59c6t7w4chxn16wf2zbc9wteewu3mvw5855b9q95v87bebhhgzoz7ja9r9x3rejnvmuoz6c9t95mnfqz2ujt3hrjqf72jsyd484dkzfyky6d5uhysf3asfg4g0pebglv8cd6y8yyn42i73q52t1ge5lxrnc6irx2nph7zb3kcs3de0li6k73315zzsx0udls5zso4btq35rr38iakxgkvsdnyq5mg8ivajas8y46w0ojyvp53',
                 isRevoked: false,
-                expiresAt: '2020-09-20 17:39:15',
+                expiresAt: 3441062886,
             })
             .expect(404);
     });
@@ -435,21 +454,21 @@ describe('access-token', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                token: 'Fugiat ut possimus. Doloribus debitis laudantium sequi numquam qui aut delectus soluta. Adipisci eum officia omnis reiciendis et neque.',
-                name: 'ix380w927j67e9b2gg4vxmyydllrp73ruzb613pa5ro7xb0vawf9xm5elnvz0h8pd4humguu9v87j5wuhxdtn4g8k5q50b2z75zkfvlh5hwwpirgsp3nnb5actaq5ran14ywk9p9ubc3w5wrooo4pr9mdsnwmzyt7p999h3hwep2y5rqvt4ddb42ppjr1oy72jxz8ihuq7h549si81nsti5qmkx4267v7kw0werxq5yoquedveegf04mk716n5e',
-                isRevoked: true,
-                expiresAt: '2020-09-20 15:50:15',
+                id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                token: 'Suscipit vel natus tempora iste. Dicta placeat eveniet. Itaque non laboriosam voluptatibus officiis magni suscipit. Tempore voluptatem consequatur. Quo nostrum qui laboriosam magni. Consequatur nobis vel ipsam est aut officia ipsum.',
+                name: 'gpwb4xipg6rvr7cekgnlsmjzcayy92zw8ajlcjyn3a8y7k3h0x3kcyb8gru5of4chtggzoa61wucsdmzfcn6zp302t6mwqcm06k00vhd5r373jmx4irjixo6tt1zziq0p5llu7o83oy1yxqxppbggwmp0cacfevbb027edf0kxbih5mubxns92tkiz02z5mnjgqs92pw2x5vdoi20dxponup3w64do9ttfxwxtod1agow521vmkzxtbgapmsn2j',
+                isRevoked: false,
+                expiresAt: 7279130336,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'aca2f62d-123c-4830-a6b8-828c4d95b661'));
+            .expect(repository.collectionResponse.find(e => e.id === '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe'));
     });
 
     test(`/REST:DELETE o-auth/access-token/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/access-token/b2548edb-745b-4038-b127-990022e4e2fc')
+            .delete('/o-auth/access-token/58874fb8-f106-4306-ad41-8cae2c8fd571')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -457,7 +476,7 @@ describe('access-token', () =>
     test(`/REST:DELETE o-auth/access-token/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/access-token/aca2f62d-123c-4830-a6b8-828c4d95b661')
+            .delete('/o-auth/access-token/7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -519,18 +538,18 @@ describe('access-token', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '29e8c0b7-d1ed-4ed2-b6a7-a73735822d8c',
-                        clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                        token: 'Temporibus fuga omnis ut. Necessitatibus minima quasi. Et distinctio accusamus a quia unde qui labore velit iure. Velit sed animi hic exercitationem dolor porro autem voluptates. A reiciendis tempore autem sint corporis. In maxime dolor est sunt.',
-                        name: 'tq7c5mhm82j8h8r1qx4f2h89s5ryufb3fq0artmkfz0xc69anfigoe6jdnmkomz1pkbloqo45e9qavwhs96grlii4slvoo5ucfzai901edeen9adorbk813ntm5lleskiqskwjjkn1ac9v00esjxoa3tvhttgy8ee7sldq37kg345opk0e7rxouzxsr1f4kyjd0n68e7p96cpl1s73573ii7gth9idnpd2v0ci4q1qoksr0224891yoyw6igl8a',
-                        isRevoked: true,
-                        expiresAt: '2020-09-20 12:01:37',
+                        id: '0b5009e4-f458-473e-a687-aaa5c008b15c',
+                        clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                        token: 'Explicabo et enim iure architecto doloribus sunt vel dolore. Et minima dolorum. Eveniet ut aliquid et accusantium nihil blanditiis hic voluptatem.',
+                        name: '5koahzf9fynbuj0geglccfakdf54h2nr1mv0tdipcwqr7izzww4bmtwq06aa4ijqh0u8dm84mjo5z48t2jvf4ysj6p9tfkjwa7jxhypf1bynt932j4idvstybcdinwsng1nhv81evml8u06cvsmi57or3ge6hxmy4xpbrceolm0td5lboi7xtksjz87wiyghe59t700aft1lwv70sl3rxrd8up5g4y1scqrime0uevcl4qx2vymkuj74rk93i0t',
+                        isRevoked: false,
+                        expiresAt: 1955773988,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthCreateAccessToken).toHaveProperty('id', '29e8c0b7-d1ed-4ed2-b6a7-a73735822d8c');
+                expect(res.body.data.oAuthCreateAccessToken).toHaveProperty('id', '0b5009e4-f458-473e-a687-aaa5c008b15c');
             });
     });
 
@@ -595,7 +614,7 @@ describe('access-token', () =>
                     {
                         where: 
                         {
-                            id: 'd372287f-38ac-44e6-9776-1bd2658090ba'
+                            id: 'e61c8fef-e991-4f1b-8c7a-723e8cb5efb7'
                         }
                     }
                 }
@@ -635,14 +654,14 @@ describe('access-token', () =>
                     {
                         where: 
                         {
-                            id: 'aca2f62d-123c-4830-a6b8-828c4d95b661'
+                            id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthFindAccessToken.id).toStrictEqual('aca2f62d-123c-4830-a6b8-828c4d95b661');
+                expect(res.body.data.oAuthFindAccessToken.id).toStrictEqual('7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe');
             });
     });
 
@@ -668,7 +687,7 @@ describe('access-token', () =>
                     }
                 `,
                 variables: {
-                    id: '32a47fe2-025a-4e4f-ab30-ecbf525df7f1'
+                    id: '285229fe-f239-435a-b112-7c3159f9d5e9'
                 }
             })
             .expect(200)
@@ -701,12 +720,12 @@ describe('access-token', () =>
                     }
                 `,
                 variables: {
-                    id: 'aca2f62d-123c-4830-a6b8-828c4d95b661'
+                    id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthFindAccessTokenById.id).toStrictEqual('aca2f62d-123c-4830-a6b8-828c4d95b661');
+                expect(res.body.data.oAuthFindAccessTokenById.id).toStrictEqual('7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe');
             });
     });
 
@@ -766,12 +785,12 @@ describe('access-token', () =>
                 variables: {
                     payload: {
                         
-                        id: 'fb8a19c3-7e67-4123-85fa-c738fe377e8c',
-                        clientId: '2b8e2655-b73e-454e-9261-2b14e189cb04',
-                        token: 'Sit culpa atque quo minima nihil expedita assumenda aut totam. Non omnis vel magnam odio hic et aliquam. Culpa in voluptas. Omnis doloremque in. Deleniti iusto maiores illum fugit explicabo quis ut. Voluptatem modi earum est culpa optio magnam dolor facere.',
-                        name: '0ttzu9su9r2srw5q84cfrlopfo6y5fyc6gdk23b1d3485kodl43jcyaihgworvbu4zufmubhu5w2fx9wb5x6s8cofskg7tdy4sbi0l8ayn63131nkzx7dx8p0izf9nliqpqz2i0jc16hdcokpx2sae78by6z8kj3ns7r2grl9n9bk1x18ai0btzte7a3ka9a6jps3a7voxdhpoit5mrszxj1824zc9073c6tcy3j62txkznl2l3bexc614g75gp',
+                        id: 'ee014e4a-7391-4d2b-90a6-f83416a71d18',
+                        clientId: '1d0c88c1-59ee-42e8-8775-9fc0970af0d1',
+                        token: 'Nemo quaerat enim. Nihil accusantium laudantium eos eos ratione beatae sit eveniet. Autem omnis perferendis.',
+                        name: 'uvg53apgmp3s942ni8hjdik9ivwca8lpbwab1rkn81yt6q07xi0r7h8uon5mphz2hscnqtyo7z3di4pymbslozlgz3gsu2gkb6t5b4tk2zc2dffhfxgi9fzucw1qcil8nd7sz2xc2lkt095qway93wh0uqbd6hmbnr15k7bhjw3barcuszs5edckxvymjourl0f09t2ghjs2drs7at2aerhs3t34wfsqbyqg1rcgkzfn669086br5v0aoqdbf50',
                         isRevoked: false,
-                        expiresAt: '2020-09-20 17:29:47',
+                        expiresAt: 2375650884,
                     }
                 }
             })
@@ -807,18 +826,18 @@ describe('access-token', () =>
                 variables: {
                     payload: {
                         
-                        id: 'aca2f62d-123c-4830-a6b8-828c4d95b661',
-                        clientId: 'b2cd938f-6b5a-401e-97cb-e78355e4b54c',
-                        token: 'Neque incidunt sequi porro dolorum amet magni eum. Hic enim consectetur tenetur illum. Blanditiis aut odit quia. Veniam fugiat est sit. Architecto ut voluptatem inventore tenetur provident quia.',
-                        name: '2dqauavozcqt7c6grdx83vieh7ut9cutawhtdvuo61qt9ms8juflb9zkes1hgno5mwl7s1jidg9mktqtsevlwqcojggeoau8wgrgr6bg32qhj2mm2ngs1ichu8axi1yeque4v65c3543scdm5cqwliklanqbtxfftbfdt7ht09ycbrlueuve7t64c0nuzisa8whxel2ogfhnywus08jbecyc3s0vpskrqqsja8hwj4s5gpmkl16gcp009lb4a22',
+                        id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe',
+                        clientId: 'fb3168dd-ee1a-4480-9d24-a433d007eff0',
+                        token: 'Veritatis doloremque reprehenderit sed sunt eos vitae deserunt. Molestiae minima sequi nostrum neque qui ex. Eaque aspernatur iste laudantium esse. Veniam eum qui repellendus voluptatum ipsam.',
+                        name: 'kw2qltxqzlynyoyghm6lnlnkqszk2nr9z304kyn3z02ugwqoxuyuw84g3cvyjfzel1q56wlkyk36peecthp9e95zk191t33chqknv0awo7mqiqa2cyhf4icfszfnlhaw51kqtgdpqkmiazpn10p28lk9jpbx3gx02wp1qvmax94dg9kdunh1myqukoxusvx4wawbyr17f4rjsn5p6wv6y2a5lmi2jq0dp957w9ux3x10juy83fbcoxa5recikv4',
                         isRevoked: false,
-                        expiresAt: '2020-09-20 15:51:23',
+                        expiresAt: 4584853191,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthUpdateAccessToken.id).toStrictEqual('aca2f62d-123c-4830-a6b8-828c4d95b661');
+                expect(res.body.data.oAuthUpdateAccessToken.id).toStrictEqual('7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe');
             });
     });
 
@@ -844,7 +863,7 @@ describe('access-token', () =>
                     }
                 `,
                 variables: {
-                    id: '5a30b805-5e22-4892-aee5-bffb7c7ac1c5'
+                    id: '2c97c6f8-f646-4b01-bc6e-0be362ea47d4'
                 }
             })
             .expect(200)
@@ -877,12 +896,12 @@ describe('access-token', () =>
                     }
                 `,
                 variables: {
-                    id: 'aca2f62d-123c-4830-a6b8-828c4d95b661'
+                    id: '7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.oAuthDeleteAccessTokenById.id).toStrictEqual('aca2f62d-123c-4830-a6b8-828c4d95b661');
+                expect(res.body.data.oAuthDeleteAccessTokenById.id).toStrictEqual('7a3f6bd4-7616-40cc-a7d6-ddd18657e0fe');
             });
     });
 
