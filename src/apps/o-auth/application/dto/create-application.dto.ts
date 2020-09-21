@@ -6,7 +6,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'fe3c8ea6-40ba-40bb-bcac-bbd13039a1c6'
+        example     : '8d20a56d-bf5f-46ee-9ab6-959ee4c287c3'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '4rkgqjjprdvmcq2x9ppw0gg3qp789d1z2swdzdc1lboc195kl88npu4bj2sefp94k2e2jhkhz1r9cexqe8apx1uc5rm34l2d41b6s7aqcv9zym7i5gydtoplr91rexi082u3v1t36bx31lkg545910u68hdivayll3fm70wcv1o0v4lqtdkns6bjrk7h71p92hbyjwvp510b1a8qwrnrcanwtznzzgar8qazvn32e4wivy086iahscmp8ldqgz9'
+        example     : '7v1sold7hkvrp8u35k4tf1mzwc0kbbrlz8my5jnoo8j3qni1s1f9t81dxugw3sfg7b6bv5spsesrzl6ephyo2assad5t7rj5qtbn3n8l86ve1tn6jm1ialxezmys8dwu48z6p80huiynykyuavzxe15q7mk6b4iu9c6kd588zacmzzpd33v96sxngqttzhmv624zkof3ohr07ik4spz42lh1o9y5nwoqscv7mafrpln70c9um1dy7mqndd8zvre'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'cyyo3m3olt4skmnsot8amn98b4a3tzdxzfqltny9etxbqec0jo'
+        example     : 'iownzvpa7yzd700w8pr8gtvdui3iwdr4mfzloys3iawi1cl7wf'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'secret [input here api field description]',
-        example     : 'm68r6a4ql4rhi25k26b8iqxvqp4sf4g07a3odzkxdcdkdnqnw90bwhsghold3a28cj72f4bfk2nb5a7qzh395w55lo'
+        example     : '3a35yixzvdnncqare7u7ksy2p7sycywuz7r8xegdfdej4i8t23yiz0vnp6rhztoztcu1r3hbslo31sjya8fp3m8i6k'
     })
     secret: string;
     

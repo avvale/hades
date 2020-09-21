@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed.ts",
-            "integrity": "sha1:ccaf17e4398fd3aea6691c5cc99399440dee87b9"
+            "integrity": "sha1:b42b13e624a67b390acccb4d6401af4521a6eaa3"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.model.ts",
@@ -375,15 +375,15 @@
         },
         {
             "path": "src/apps/o-auth/refresh-token/dto/refresh-token.dto.ts",
-            "integrity": "sha1:6ba268dbb1e33d23403d7ebfa7852b3ad63c8468"
+            "integrity": "sha1:7e5c7ba301adcb161daf2260ab4f42cf1d1841c7"
         },
         {
             "path": "src/apps/o-auth/refresh-token/dto/create-refresh-token.dto.ts",
-            "integrity": "sha1:629152afaabf5188f57eebcbbd37c47c0c363847"
+            "integrity": "sha1:2b455068a4562b6c2be9fc8cd1066cd33211bfd0"
         },
         {
             "path": "src/apps/o-auth/refresh-token/dto/update-refresh-token.dto.ts",
-            "integrity": "sha1:8972f2542257f2a9bf2b622c91f4dd59fde87d0c"
+            "integrity": "sha1:7d94094bcda68c033209bc11ed6f089efbc2c21a"
         },
         {
             "path": "src/apps/o-auth/refresh-token/graphql/refresh-token.graphql",
@@ -475,7 +475,7 @@
         },
         {
             "path": "postman/o-auth.refresh-token.postman.json",
-            "integrity": "sha1:f3c2106101722ac8a5ef7a21996fb8d5cfe77733"
+            "integrity": "sha1:e8e5d465648c5a5f8a17a6d6c585620e6b9e1652"
         }
     ]
 }
