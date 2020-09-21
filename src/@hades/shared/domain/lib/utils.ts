@@ -1,9 +1,16 @@
+import { Moment } from 'moment';
 import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
 declare const Buffer: any;
 
 export class Utils
 {
+    public static now(): Moment
+    {   
+        if (process.env.TZ) return moment().tz(process.env.TZ);
+        return moment();
+    }
+
     public static nowTimestamp(): string
     {   
         if (process.env.TZ) return moment().tz(process.env.TZ).format('YYYY-MM-DD H:mm:ss');
