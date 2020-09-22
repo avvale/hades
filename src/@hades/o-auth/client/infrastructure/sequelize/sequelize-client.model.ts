@@ -96,20 +96,6 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     
     
     @Column({
-        field: 'application_codes',
-        
-        allowNull: false,
-        type: DataTypes.JSON,
-        
-        
-    })
-    applicationCodes: any;
-        
-             
-        
-    
-    
-    @Column({
         field: 'expired_access_token',
         
         allowNull: true,
@@ -173,7 +159,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         
         
     @HasMany(() => OAuthAccessTokenModel)
-    access_tokens: OAuthAccessTokenModel[];
+    accessTokens: OAuthAccessTokenModel[];
          
         
     

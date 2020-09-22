@@ -11,9 +11,9 @@ aggregateProperties:
   - name: grant_type
     type: enum
     enumOptions:
-      - AUTHORIZATON_CODE
+      - AUTHORIZATION_CODE
       - CLIENT_CREDENTIALS
-      - PASSWORD_GRANT
+      - PASSWORD
     nullable: false
   - name: name
     type: varchar
@@ -31,9 +31,6 @@ aggregateProperties:
     type: varchar
     maxLength: 2048
     nullable: true
-  - name: application_codes
-    type: json
-    nullable: false
   - name: expired_access_token
     type: int.unsigned
     maxLength: 10

@@ -25,7 +25,6 @@ export class CreateClientResolver
             payload.secret,
             payload.authUrl,
             payload.redirect,
-            payload.applicationCodes,
             payload.expiredAccessToken,
             payload.expiredRefreshToken,
             payload.isRevoked,

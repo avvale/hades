@@ -46,7 +46,6 @@ describe('CreateClientCommandHandler', () =>
                     clients[0].secret,
                     clients[0].authUrl,
                     clients[0].redirect,
-                    clients[0].applicationCodes,
                     clients[0].expiredAccessToken,
                     clients[0].expiredRefreshToken,
                     clients[0].isRevoked,
