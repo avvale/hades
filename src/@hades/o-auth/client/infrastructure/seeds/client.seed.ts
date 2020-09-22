@@ -6,7 +6,6 @@ export const clients = [
         secret: 'om9QPNdkNJc09JgzTTwvcL4897E5EhbAGWqwkwtA',
         authUrl: null,
         redirect: null,
-        applicationCodes: ["quasar"],
         expiredAccessToken: 3600,
         expiredRefreshToken: 7200,
         isRevoked: false,
