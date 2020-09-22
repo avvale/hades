@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { OAuthClientModel } from '@hades/o-auth/client/infrastructure/sequelize/sequelize-client.model';
 import { OAuthRefreshTokenModel } from '@hades/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.model';
@@ -6,16 +6,11 @@ import { OAuthRefreshTokenModel } from '@hades/o-auth/refresh-token/infrastructu
 @Table({ modelName: 'o_auth_access_token', freezeTableName: true })
 export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel> 
 { 
-        
-    
-    
     @Column({
         field: 'id',
         primaryKey: true,
         allowNull: false,
-        type: DataTypes.UUID,
-        
-        
+        type: DataTypes.UUID      
     })
     id: string;
         
@@ -69,25 +64,14 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         
     })
     name: string;
-        
-             
-        
-    
-    
+
     @Column({
         field: 'is_revoked',
-        
         allowNull: false,
-        type: DataTypes.BOOLEAN,
-        
-        
+        type: DataTypes.BOOLEAN,  
     })
     isRevoked: boolean;
         
-             
-        
-    
-    
     @Column({
         field: 'expires_at',
         
@@ -97,16 +81,10 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         
     })
     expiresAt: number;
-        
+
+    @HasOne(() => OAuthRefreshTokenModel)
+    refreshToken: OAuthRefreshTokenModel;
              
-        
-        
-    @HasMany(() => OAuthRefreshTokenModel)
-    refresh_tokens: OAuthRefreshTokenModel[];
-         
-        
-    
-    
     @Column({
         field: 'created_at',
         

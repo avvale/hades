@@ -7,9 +7,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export enum OAuthClientGrantType {
-    AUTHORIZATON_CODE = "AUTHORIZATON_CODE",
+    AUTHORIZATION_CODE = "AUTHORIZATION_CODE",
     CLIENT_CREDENTIALS = "CLIENT_CREDENTIALS",
-    PASSWORD_GRANT = "PASSWORD_GRANT"
+    PASSWORD = "PASSWORD"
 }
 
 export interface QueryStatement {
@@ -86,6 +86,16 @@ export interface OAuthUpdateClientInput {
     applicationIds?: string[];
 }
 
+export interface OAuthCreateCredentialInput {
+    grantType: OAuthClientGrantType;
+    username?: GraphQLString;
+    password?: GraphQLString;
+    accessTokenId?: string;
+    refreshToken?: GraphQLString;
+    clientSecret?: GraphQLString;
+    redirect?: GraphQLString;
+}
+
 export interface OAuthCreateRefreshTokenInput {
     id: string;
     accessTokenId: string;
@@ -156,6 +166,7 @@ export interface IMutation {
     oAuthUpdateClient(payload: OAuthUpdateClientInput): OAuthClient | Promise<OAuthClient>;
     oAuthDeleteClientById(id: string): OAuthClient | Promise<OAuthClient>;
     oAuthDeleteClients(query?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
+    oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
     oAuthCreateRefreshToken(payload: OAuthCreateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthCreateRefreshTokens(payload: OAuthCreateRefreshTokenInput[]): boolean | Promise<boolean>;
     oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
@@ -192,6 +203,13 @@ export interface OAuthClient {
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
+}
+
+export interface OAuthCredential {
+    tokenType: string;
+    accessToken: string;
+    refreshToken?: string;
+    expiresIn?: number;
 }
 
 export interface OAuthRefreshToken {

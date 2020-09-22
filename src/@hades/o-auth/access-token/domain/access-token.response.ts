@@ -15,11 +15,7 @@ export class AccessTokenResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        
         public readonly client: ClientResponse,
-        
-        public readonly refreshTokens: RefreshTokenResponse[],
-        
-        
+        public readonly refreshToken: RefreshTokenResponse
     ) {}
 }

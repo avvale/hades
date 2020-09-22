@@ -1,8 +1,8 @@
 
 enum OAuthClientGrantType {
-    AUTHORIZATON_CODE
+    AUTHORIZATION_CODE
     CLIENT_CREDENTIALS
-    PASSWORD_GRANT
+    PASSWORD
         
 }
 

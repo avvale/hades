@@ -17,7 +17,7 @@ export class ClientDto
         type        : String,
         description : 'grantType [input here api field description]',
         example     : 'CLIENT_CREDENTIALS',
-        enum        : ['AUTHORIZATON_CODE','CLIENT_CREDENTIALS','PASSWORD_GRANT']
+        enum        : ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD']
     })
     grantType: string;
     

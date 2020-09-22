@@ -15,9 +15,7 @@ import {
     
 } from './value-objects';
 import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
-
 import { RefreshTokenMapper } from '@hades/o-auth/refresh-token/domain/refresh-token.mapper';
-
 
 export class AccessTokenMapper implements IMapper
 {
@@ -82,7 +80,7 @@ export class AccessTokenMapper implements IMapper
             
             this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapModelToAggregate(accessToken.client) : undefined,
             
-            this.options.eagerLoading ? new RefreshTokenMapper({ eagerLoading: false }).mapModelsToAggregates(accessToken.refreshTokens) : undefined,
+            this.options.eagerLoading ? new RefreshTokenMapper({ eagerLoading: false }).mapModelToAggregate(accessToken.refreshToken) : undefined,
             
             
         );
@@ -105,7 +103,7 @@ export class AccessTokenMapper implements IMapper
             
             this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapAggregateToResponse(accessToken.client) : undefined,
             
-            this.options.eagerLoading ? new RefreshTokenMapper({ eagerLoading: false }).mapAggregatesToResponses(accessToken.refreshTokens) : undefined,
+            this.options.eagerLoading ? new RefreshTokenMapper({ eagerLoading: false }).mapAggregateToResponse(accessToken.refreshToken) : undefined,
             
             
         );

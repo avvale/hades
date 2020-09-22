@@ -29,7 +29,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
         field: 'grant_type',
         
         allowNull: false,
-        type: DataTypes.ENUM('AUTHORIZATON_CODE','CLIENT_CREDENTIALS','PASSWORD_GRANT'),
+        type: DataTypes.ENUM('AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD'),
         
         
     })

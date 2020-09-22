@@ -15,8 +15,8 @@ export class UpdateClientDto
     @ApiProperty({
         type        : String,
         description : 'grantType [input here api field description]',
-        example     : 'PASSWORD_GRANT',
-        enum        : ['AUTHORIZATON_CODE','CLIENT_CREDENTIALS','PASSWORD_GRANT']
+        example     : 'PASSWORD',
+        enum        : ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD']
     })
     grantType: string;
     
