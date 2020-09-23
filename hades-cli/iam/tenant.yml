@@ -1,26 +1,30 @@
 version: 1.0.0
 boundedContextName: iam
-moduleName: resource
-moduleNames: resources
+moduleName: tenant
+moduleNames: tenants
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     length: 36
     nullable: false
-  - name: bounded_context_id
-    type: id
-    length: 36
-    nullable: false
-    relationship: many-to-one
-    relationshipAggregate: AdminBoundedContext
-    relationshipModulePath: iam/bounded-context
-    relationshipKey: id
-    relationshipField: boundedContext
   - name: name
     type: varchar
-    maxLength: 255
     nullable: false
+  - name: code
+    type: varchar
+    maxLength: 50
+    nullable: false
+    index: index
+  - name: logo
+    type: varchar
+    nullable: true
+  - name: is_active
+    type: boolean
+    nullable: false
+  - name: data
+    type: json
+    nullable: true
   - name: created_at
     type: timestamp
     nullable: true

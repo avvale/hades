@@ -1,0 +1,489 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command-handler.ts",
+            "integrity": "sha1:1f8d8905e005c60b46ffe68f0c2cc38e33405cbd"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command.handler.spec.ts",
+            "integrity": "sha1:99310a44d0a676bcc28df85aaffe739e823116c4"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command.ts",
+            "integrity": "sha1:41d4abc4e9cc9c58af0166c455e1a506656b4c7e"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.service.spec.ts",
+            "integrity": "sha1:33a82c8f5c02cfc3a1567946fe76f60acfa98d79"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.service.ts",
+            "integrity": "sha1:1c304bf185739c07c9efbc95c3074a96797c8741"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.command-handler.ts",
+            "integrity": "sha1:a1abafd7c9aa9807b7468f2bce1ea51e4725ea61"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.command.handler.spec.ts",
+            "integrity": "sha1:cb73f7555bc3b7bae57912635d4fb9ab1e56b32c"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.command.ts",
+            "integrity": "sha1:f280f40fac877db7f26e9375655915e256587b65"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.service.spec.ts",
+            "integrity": "sha1:004e02d9146f2881701afbda86a16d287dcf77f6"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/create/create-bounded-contexts.service.ts",
+            "integrity": "sha1:8ba3809cb1e761164fefc41056b119e8c0761169"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-context-by-id.command-handler.ts",
+            "integrity": "sha1:451a154bc88f2868f0bfd929eec7db045cb2d570"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-context-by-id.command.handler.spec.ts",
+            "integrity": "sha1:a60b6e6704fb73cfe42f9ce28b83d0f86d54a1fd"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-context-by-id.command.ts",
+            "integrity": "sha1:2f9e666bda3191d44bbc5afe76c108077f875cc1"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-context-by-id.service.spec.ts",
+            "integrity": "sha1:04a50e1e2ecb0b719815675519c358ee1be46a09"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-context-by-id.service.ts",
+            "integrity": "sha1:1d3e18d4ce1cee23547b5580933895b65df13ce9"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-contexts.command-handler.ts",
+            "integrity": "sha1:02e8235758fce3a297e4d111444946deffc88747"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-contexts.command.handler.spec.ts",
+            "integrity": "sha1:a080b2e1dd31c63e1dee9afe7d2fbf2857b00108"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-contexts.command.ts",
+            "integrity": "sha1:0b8535581d9e3addae69ca7720f8af702490fb6e"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-contexts.service.spec.ts",
+            "integrity": "sha1:680b5c3f50805a73d12b0552f97a673c7f0c54f1"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/delete/delete-bounded-contexts.service.ts",
+            "integrity": "sha1:459a5fe4c65a1a7f458c314ce67eff8bba28a0cc"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/add-bounded-contexts-context.event.ts",
+            "integrity": "sha1:bab8915a7b225d34611da54ee1003d8e07754c2a"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/created-bounded-context.event-handler.ts",
+            "integrity": "sha1:8826068f1c7110d3434f6941398d60b7c826a352"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/created-bounded-context.event.ts",
+            "integrity": "sha1:eab366a45e35f5c0d83d6aad97d3dda5f125231a"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/created-bounded-contexts.event-handler.ts",
+            "integrity": "sha1:d568a21f5d8d99117d26b9c22d77777751187cbe"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/created-bounded-contexts.event.ts",
+            "integrity": "sha1:0a9ed348a7d65afee1bbda07f39af126cffe1f32"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/deleted-bounded-context.event-handler.ts",
+            "integrity": "sha1:f0d3223fc985e3bb1c21384cd4ea68c430bfcd32"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/deleted-bounded-context.event.ts",
+            "integrity": "sha1:0476defd910e6e7a36e466f43ff3904b7f77ed8b"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/deleted-bounded-contexts.event-handler.ts",
+            "integrity": "sha1:210bbdfa5fd8f4e76b1a26484a0ec772a6280e0f"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/deleted-bounded-contexts.event.ts",
+            "integrity": "sha1:f9a2023d10b16a6914c8b7d8c0ce4c3af8c6ed79"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/updated-bounded-context.event-handler.ts",
+            "integrity": "sha1:47ab8a8a44edbd2505bd3150afbe6580ee7c371a"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/events/updated-bounded-context.event.ts",
+            "integrity": "sha1:8816d5044438b7373e9ffb9e3921384e40d4cd31"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context-by-id.query-handler.ts",
+            "integrity": "sha1:a1da566dd08d75c13a76a0e97ec89338b49a25f0"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context-by-id.query.handler.spec.ts",
+            "integrity": "sha1:9b8329ec13d11cb08e7c03a8ebb5f0082665cfdd"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context-by-id.query.ts",
+            "integrity": "sha1:82efd09f4c90163f60dc076109156b5607597946"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context-by-id.service.spec.ts",
+            "integrity": "sha1:1ec66e7c2ce68a6457427ba273782639f831418b"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context-by-id.service.ts",
+            "integrity": "sha1:6fa2d83dcd4190e2760fef1305bfcaa25162e0ec"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context.query-handler.ts",
+            "integrity": "sha1:d1a19a7a00b05a03733510f95c67218375a1e53b"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context.query.handler.spec.ts",
+            "integrity": "sha1:f3dff45be101f871fd92160d3f1040bcde330ad0"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context.query.ts",
+            "integrity": "sha1:a506795842bbc5ba7228e79609ca9d66593d7b9e"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context.service.spec.ts",
+            "integrity": "sha1:d4fa30800622acd22ae71ffb2f939cbea82685b9"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/find/find-bounded-context.service.ts",
+            "integrity": "sha1:3c9a732c0fec57e43be06efc0c3dbe7b1255df65"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/get/get-bounded-contexts.query-handler.ts",
+            "integrity": "sha1:787110de74274ecdf3efbe375d00d77541a69a0b"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/get/get-bounded-contexts.query.handler.spec.ts",
+            "integrity": "sha1:5cdafb18c9f615e8e1ee6216c58115f2eb0fbd40"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/get/get-bounded-contexts.query.ts",
+            "integrity": "sha1:22ff114269cc0071ec1823fad596417810d1159a"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/get/get-bounded-contexts.service.spec.ts",
+            "integrity": "sha1:4f6fa7506594b40b10e4f9fb8b6a3c9b1edd6b54"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/get/get-bounded-contexts.service.ts",
+            "integrity": "sha1:028bc736b5be1e6f80cd186a2e8d61c0fe53b9d3"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/paginate/paginate-bounded-contexts.query-handler.ts",
+            "integrity": "sha1:71a2d2e6367897bb1f26310913a4853e1d402276"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/paginate/paginate-bounded-contexts.query.handler.spec.ts",
+            "integrity": "sha1:d18b5dd305f73b92b80798f658265f0ddfe5360e"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/paginate/paginate-bounded-contexts.query.ts",
+            "integrity": "sha1:8e8d305d53e1589b64c07ac78910d78294e672be"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/paginate/paginate-bounded-contexts.service.spec.ts",
+            "integrity": "sha1:e7d4ede60e0a098e9f285de69743685622a23a58"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/paginate/paginate-bounded-contexts.service.ts",
+            "integrity": "sha1:1a2bec99a2c90f759516265acf38a6d37cd16989"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/sagas/bounded-context.sagas.ts",
+            "integrity": "sha1:44cb572cc28bc3c32a33a7f958f891e697a5444e"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.command-handler.ts",
+            "integrity": "sha1:a3d3c6802b0b357c82e057b57a4fab0f762d4a31"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.command.handler.spec.ts",
+            "integrity": "sha1:d5e0e8902f1614df52ee65bc75527e100cef607b"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.command.ts",
+            "integrity": "sha1:2258852911087c5d756d6bc6e915f5483673c179"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.service.spec.ts",
+            "integrity": "sha1:7893fac19c9cd291f4725b359c7cb63c973cd8ab"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/application/update/update-bounded-context.service.ts",
+            "integrity": "sha1:06b694c4a9fd9a9dd59a72464ef9c5dc74ce294e"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/bounded-context.aggregate.ts",
+            "integrity": "sha1:1d7fefb98ae3b16b591d46e4bccc3065efb8bd72"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/bounded-context.mapper.ts",
+            "integrity": "sha1:e95a3b44f252aba853fbfdfea8a1b4c16c8cb171"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/bounded-context.repository.ts",
+            "integrity": "sha1:0e18936aa014c6211470542809970c657b355c45"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/bounded-context.response.ts",
+            "integrity": "sha1:5b49bc188b36152b38f5fcd7036b036b670755e1"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/value-objects/index.ts",
+            "integrity": "sha1:7c91381a7c886b353f19d2522f1926eaa00fa48f"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/index.ts",
+            "integrity": "sha1:5af2d2ffc3b386872a30fbfd3d70a7537c2c68d0"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/infrastructure/mock/mock-bounded-context.repository.ts",
+            "integrity": "sha1:5948296b819565e24ec1e0cffa81a2295505b310"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed.ts",
+            "integrity": "sha1:4dfb1dd676318397e1c378dbc600816ab9ce7ae8"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model.ts",
+            "integrity": "sha1:262182ac285d3b1f4520a351cde39c4bb2e3270a"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.repository.ts",
+            "integrity": "sha1:f37e662a61c4ab76cbbddf5ee0df49d1dec9716f"
+        },
+        {
+            "path": "src/@hades/iam/index.ts",
+            "integrity": "sha1:af35c5f0d05e7f4e41e05bad0ac7019a202c2465"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/value-objects/bounded-context-id.ts",
+            "integrity": "sha1:9764a0a9287d7a1a640ddcbd1c66fd06420b00e1"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/value-objects/bounded-context-name.ts",
+            "integrity": "sha1:ce10ec1fc958c1b50b9cb2455fccf7db52108fd5"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/value-objects/bounded-context-root.ts",
+            "integrity": "sha1:4da509706a6295e7202a1923186bbc401fbd2305"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/value-objects/bounded-context-sort.ts",
+            "integrity": "sha1:69bb5f33b76db6ed47e74bbafdedc51212c7392b"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/value-objects/bounded-context-is-active.ts",
+            "integrity": "sha1:59b99c86f71641ba5c126007ff44c4b227af93c3"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/value-objects/bounded-context-created-at.ts",
+            "integrity": "sha1:c53e5ee7ef9e79ba56ce54a12ec8d73f6724c8d4"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/value-objects/bounded-context-updated-at.ts",
+            "integrity": "sha1:8ebb8c8a09e8f818d4e9eb0ee1911f8a3ce51ede"
+        },
+        {
+            "path": "src/@hades/iam/bounded-context/domain/value-objects/bounded-context-deleted-at.ts",
+            "integrity": "sha1:570cd9162911cdedb8da1e610396307679016dcf"
+        },
+        {
+            "path": "src/apps/iam/iam.module.ts",
+            "integrity": "sha1:91508ea42936b5c8e109f00ba860903db44d3414"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/create-bounded-context.controller.spec.ts",
+            "integrity": "sha1:485c88c2a85cccdccef75d38cd0640c7cb316139"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/create-bounded-context.controller.ts",
+            "integrity": "sha1:7f2e2d2fa70202104b371224f71fefe191642d8f"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/create-bounded-contexts.controller.spec.ts",
+            "integrity": "sha1:82d37f357fbcedcc2fa8dd8881a6da6ea0350336"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/create-bounded-contexts.controller.ts",
+            "integrity": "sha1:71c5e33a2252d29bf7128cd5fe0bd5d36b8b6f5b"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/delete-bounded-context-by-id.controller.spec.ts",
+            "integrity": "sha1:c2daf766eb3e45dbcbac7c84049bf5658128ed54"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/delete-bounded-context-by-id.controller.ts",
+            "integrity": "sha1:09892063323ffd77f2eb7ab99fcad5bcaf721c1d"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/delete-bounded-contexts.controller.spec.ts",
+            "integrity": "sha1:b6889c3e1e66dd9bafce7a5ebff8f99aa6bf1971"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/delete-bounded-contexts.controller.ts",
+            "integrity": "sha1:a60ca8ed4dd134f290f156bd274be090a9145fce"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/find-bounded-context-by-id.controller.spec.ts",
+            "integrity": "sha1:269fb731ed88f316c1596ca7a0448536a09b5b38"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/find-bounded-context-by-id.controller.ts",
+            "integrity": "sha1:f6f740df2bcf0b4c33a544366fdeebdcca460233"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/find-bounded-context.controller.spec.ts",
+            "integrity": "sha1:7961f18d1e38ebf3405920aa210588124dbd2fc7"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/find-bounded-context.controller.ts",
+            "integrity": "sha1:c86635c8bb946823050d8dd1fb6312737d388219"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/get-bounded-contexts.controller.spec.ts",
+            "integrity": "sha1:8a3bddccaad252a31a1c9e325347bbc39fce88d9"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/get-bounded-contexts.controller.ts",
+            "integrity": "sha1:3295ca8fadc9768f728eb37987139422c1b5f940"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/paginate-bounded-contexts.controller.spec.ts",
+            "integrity": "sha1:7394ed5f5de7ba8bb06a21a15a4772456d9747a9"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/paginate-bounded-contexts.controller.ts",
+            "integrity": "sha1:442d094a47e2941877a0bdab101fd5f648d42ca4"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/update-bounded-context.controller.spec.ts",
+            "integrity": "sha1:3eefb46f947c0a139df2e046d63c07e4df037b9d"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/controllers/update-bounded-context.controller.ts",
+            "integrity": "sha1:2ba74eebe421b256f688a95c12155933cb2a091d"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/dto/bounded-context.dto.ts",
+            "integrity": "sha1:e96ffec217cc94045511d2ff75674f523f91a3b8"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/dto/create-bounded-context.dto.ts",
+            "integrity": "sha1:431808da748af29d78e53b4608785f8537676ac0"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/dto/update-bounded-context.dto.ts",
+            "integrity": "sha1:07bbd384aed65041e3c11a720eabe22be6b4d489"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/graphql/bounded-context.graphql",
+            "integrity": "sha1:3947273d2d424b296a6358aa22a6416ddb3768a2"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/index.ts",
+            "integrity": "sha1:07887f91596676e6d69080676146af74f90ab1d9"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/create-bounded-context.resolver.spec.ts",
+            "integrity": "sha1:8561a6eea4d3ee72958dc597253407c212db14f2"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/create-bounded-context.resolver.ts",
+            "integrity": "sha1:1f09232adc42a41c170fcc22b87724f517955363"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/create-bounded-contexts.resolver.spec.ts",
+            "integrity": "sha1:b95914b0b98bce4bf40ce0c1ebddb0b2020fe4f3"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/create-bounded-contexts.resolver.ts",
+            "integrity": "sha1:b132b1f55b60f78ac06104bca2d50469f401bdaf"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/delete-bounded-context-by-id.resolver.spec.ts",
+            "integrity": "sha1:31087bacf9df0ee5ab3d7bd44533243a262c958c"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/delete-bounded-context-by-id.resolver.ts",
+            "integrity": "sha1:4e96fa21d103b1c2c2dc04475dda9fda3a0355ce"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/delete-bounded-contexts.resolver.spec.ts",
+            "integrity": "sha1:23a20181cff0d51ebeb2e1e1084a1197e72408ad"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/delete-bounded-contexts.resolver.ts",
+            "integrity": "sha1:89af6991c5b9096dc90f0bf80e4d3e4b0d91f0a0"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/find-bounded-context-by-id.resolver.spec.ts",
+            "integrity": "sha1:53bbd72439e68b585baceaef140c6d914dd9e5e8"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/find-bounded-context-by-id.resolver.ts",
+            "integrity": "sha1:5e72a38dbc12c1320f20721f6b2747e02750e988"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/find-bounded-context.resolver.spec.ts",
+            "integrity": "sha1:a9f028e2fa5ce942e0f6cacc5aab591899c9c441"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/find-bounded-context.resolver.ts",
+            "integrity": "sha1:fd574bd2d7f49cbd851553d2b0de490f9f5414c1"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/get-bounded-contexts.resolver.spec.ts",
+            "integrity": "sha1:53d983c531f8b1c52551a756afdcc22d06dc4cfa"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/get-bounded-contexts.resolver.ts",
+            "integrity": "sha1:63b627c9d3bdaf611807e66a8eff1cddac54f2ba"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/paginate-bounded-contexts.resolver.spec.ts",
+            "integrity": "sha1:00dc3b0c0264f15512a8372f8141ffbbb2918d2d"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/paginate-bounded-contexts.resolver.ts",
+            "integrity": "sha1:2624e59e145d7249d6dad6d14c4f510afd332e83"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/update-bounded-context.resolver.spec.ts",
+            "integrity": "sha1:f03e722d94cb91d630e7fc2e4c3e5c0c1d40885c"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/resolvers/update-bounded-context.resolver.ts",
+            "integrity": "sha1:fecf9b0e943f785f9d4c2d63f4d286e2f2fefb74"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/seeder/seeder.module.ts",
+            "integrity": "sha1:53bfa55ad48bc2981632a3fbf9bbeeb881101d9f"
+        },
+        {
+            "path": "src/apps/iam/bounded-context/seeder/seeder.ts",
+            "integrity": "sha1:7f782058d7847dfd0977b244c7924c4cc9167f77"
+        },
+        {
+            "path": "postman/iam.bounded-context.postman.json",
+            "integrity": "sha1:856c0c83609ae226253c13b66bea9d5559ca8e3a"
+        }
+    ]
+}

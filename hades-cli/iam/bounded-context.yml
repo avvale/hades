@@ -14,7 +14,7 @@ aggregateProperties:
     nullable: false
   - name: root
     type: varchar
-    maxLength: 20
+    maxLength: 30
     nullable: false
   - name: sort
     type: smallint.unsigned
@@ -23,6 +23,13 @@ aggregateProperties:
   - name: is_active
     type: boolean
     nullable: false
+  - name: permissions
+    type: IamPermission
+    nullable: true
+    relationship: one-to-many
+    relationshipSingularName: permission
+    relationshipAggregate: IamPermission
+    relationshipModulePath: iam/permission
   - name: created_at
     type: timestamp
     nullable: true
