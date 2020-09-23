@@ -18,9 +18,8 @@ export class CreateCredentialResolver
     @Mutation('oAuthCreateCredential')
     async main(@Args('payload') payload: OAuthCreateCredentialInput, @Context() context)
     {
+        // get application and clients with header authorization basic authentication
         const application = await this.queryBus.ask(new FindApplicationByAuthorizationHeaderQuery(context.req.headers.authorization))
-        
-        console.log(application);
 
         await this.commandBus.dispatch(new CreateCredentialCommand(
             payload.grantType,
