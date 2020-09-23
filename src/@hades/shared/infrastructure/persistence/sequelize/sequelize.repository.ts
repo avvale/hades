@@ -4,7 +4,6 @@ import { Model } from 'sequelize-typescript';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
@@ -39,7 +38,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementPaginateHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
+    async composeStatementPaginateHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
 
     async find(queryStatement?: QueryStatement): Promise<Aggregate> 
     {
@@ -56,7 +55,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementFindHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
+    async composeStatementFindHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
 
     async findById(id: UuidValueObject): Promise<Aggregate>
     {
@@ -73,7 +72,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
+    async composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     // get multiple records
     async get(queryStatement?: QueryStatement): Promise<Aggregate[]> 
@@ -89,7 +88,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementGetHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
+    async composeStatementGetHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
 
     // ******************
     // ** side effects **
@@ -121,12 +120,17 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook called after create aggregate
-    createdAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
+    async createdAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
 
     async insert(aggregates: Aggregate[], options: object = {}): Promise<void>
     {
         await this.repository.bulkCreate(aggregates.map(item => item.toDTO()), options);
+
+        this.insertedAggregateHook(aggregates);
     }
+
+    // hook called after insert aggregates
+    async insertedAggregateHook(aggregates: Aggregate[]) {}
 
     async update(aggregate: Aggregate): Promise<void> 
     { 
@@ -155,7 +159,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook called after update aggregate
-    updatedAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
+    async updatedAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
 
     async deleteById(id: UuidValueObject): Promise<void> 
     {
