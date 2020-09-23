@@ -1,0 +1,54 @@
+
+
+type OAuthApplication
+{
+    id: ID!
+    name: GraphQLString!
+    code: GraphQLString!
+    secret: GraphQLString!
+    isMaster: GraphQLBoolean!
+    clients: [OAuthClient]
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input OAuthCreateApplicationInput
+{
+    id: ID!
+    name: GraphQLString!
+    code: GraphQLString!
+    secret: GraphQLString!
+    isMaster: GraphQLBoolean!
+    clientIds: [ID]
+    
+}
+
+input OAuthUpdateApplicationInput
+{
+    id: ID!
+    name: GraphQLString
+    code: GraphQLString
+    secret: GraphQLString
+    isMaster: GraphQLBoolean
+    clientIds: [ID]
+    
+}
+
+type Query 
+{
+    oAuthFindApplication(query:QueryStatement): OAuthApplication
+    oAuthFindApplicationById(id:ID): OAuthApplication
+    oAuthGetApplications(query:QueryStatement): [OAuthApplication]!
+    oAuthPaginateApplications(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    oAuthCreateApplication(payload: OAuthCreateApplicationInput!): OAuthApplication
+    oAuthCreateApplications(payload: [OAuthCreateApplicationInput]!): Boolean!
+    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput!): OAuthApplication
+    oAuthDeleteApplicationById(id: ID!): OAuthApplication
+    oAuthDeleteApplications(query:QueryStatement): [OAuthApplication]!
+}
