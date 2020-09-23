@@ -15,6 +15,27 @@ aggregateProperties:
   - name: is_master
     type: boolean
     nullable: false
+  - name: permissions
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: permission
+    relationshipAggregate: IamPermission
+    relationshipModulePath: iam/permission
+    intermediateModel: IamPermissionsRolesModel
+    intermediateModelModuleSection: iam/permission
+    intermediateModelFile: permissions-roles
+  - name: accounts
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: account
+    relationshipAggregate: IamAccount
+    relationshipModulePath: iam/account
+    intermediateTable: iam_roles_accounts
+    intermediateModel: IamRolesAccountsModel
+    intermediateModelModuleSection: iam/role
+    intermediateModelFile: roles-accounts
   - name: created_at
     type: timestamp
     nullable: true
