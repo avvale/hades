@@ -1,0 +1,32 @@
+version: 1.0.0
+boundedContextName: iam
+moduleName: resource
+moduleNames: resources
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: bounded_context_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminBoundedContext
+    relationshipModulePath: iam/bounded-context
+    relationshipKey: id
+    relationshipField: boundedContext
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true
