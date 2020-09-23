@@ -38,7 +38,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    async composeStatementPaginateHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
+    composeStatementPaginateHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
 
     async find(queryStatement?: QueryStatement): Promise<Aggregate> 
     {
@@ -55,7 +55,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    async composeStatementFindHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
+    composeStatementFindHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
 
     async findById(id: UuidValueObject): Promise<Aggregate>
     {
@@ -72,7 +72,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    async composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
+    composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     // get multiple records
     async get(queryStatement?: QueryStatement): Promise<Aggregate[]> 
@@ -88,7 +88,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    async composeStatementGetHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
+    composeStatementGetHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
 
     // ******************
     // ** side effects **
