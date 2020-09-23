@@ -14,14 +14,19 @@ export class FindApplicationByAuthorizationHeaderService
     {
         if (!authorizationHeader.value.startsWith('Basic ')) throw new BadRequestException(`Authorization header has not a valid value, current value is: ${authorizationHeader.value}`);
         
+        // get code from basic authorization header encrypted in base64
         const [basic, encode] = authorizationHeader.value.split(' ');
         
+        // decrypt code from base64 to string
         const decode = Buffer.from(encode, 'base64').toString();
         
+        // check that code only have one :
         if ((decode.match(/:/g) || []).length !== 1) throw new BadRequestException(`Authorization header has not a valid value, current decode value is: ${decode}`);
 
-        const [code, secret] = decode.split(':')
+        // separate code from secret
+        const [code, secret] = decode.split(':');
 
+        // get application with clients associated
         return await this.repository.find({ 
             where: { 
                 code: code,
