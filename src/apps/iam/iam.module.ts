@@ -3,6 +3,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from './../shared/shared.module';
 import { IamModels, IamHandlers, IamServices, IamRepositories, IamSagas } from '@hades/iam';
 import { IamBoundedContextControllers, IamBoundedContextResolvers } from './bounded-context';
+import { IamPermissionControllers, IamPermissionResolvers } from './permission';
 
 @Module({
     imports: [
@@ -12,14 +13,16 @@ import { IamBoundedContextControllers, IamBoundedContextResolvers } from './boun
             ])
     ],
     controllers: [
-        ...IamBoundedContextControllers
+        ...IamBoundedContextControllers,
+        ...IamPermissionControllers
     ],
     providers: [
         ...IamHandlers,
         ...IamServices,
         ...IamRepositories,
         ...IamSagas,
-        ...IamBoundedContextResolvers
+        ...IamBoundedContextResolvers,
+        ...IamPermissionResolvers
     ]
 })
 export class IamModule {}
