@@ -18,6 +18,7 @@ export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, 
     constructor(
         @InjectModel(OAuthClientModel)
         public readonly repository: typeof OAuthClientModel,
+        @InjectModel(OAuthApplicationsClientsModel)
         public readonly repositoryIntermediate: typeof OAuthApplicationsClientsModel,
         public readonly criteria: ICriteria
     ) {
