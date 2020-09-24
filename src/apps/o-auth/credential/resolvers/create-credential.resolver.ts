@@ -18,13 +18,21 @@ export class CreateCredentialResolver
     @Mutation('oAuthCreateCredential')
     async main(@Args('payload') payload: OAuthCreateCredentialInput, @Context() context)
     {
+        // consulto las cuentas para obtener el usuario bajo user y password
+        
         // get application and clients with header authorization basic authentication
         const application = await this.queryBus.ask(new FindApplicationByAuthorizationHeaderQuery(context.req.headers.authorization))
+
+        // compruebo que el usuario tiene un client para esta aplicación
+
+
+        // si está todo correcto creo una credencial 
 
         await this.commandBus.dispatch(new CreateCredentialCommand(
             payload.grantType,
             payload.username,
             payload.password,
+            // payload.clientIds,
             payload.accessTokenId,
             payload.refreshToken,
             payload.clientSecret,
