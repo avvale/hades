@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
+import * as bcrypt from 'bcrypt';
 declare const Buffer: any;
 
 export class Utils
@@ -49,5 +50,10 @@ export class Utils
                     return acc;
                 }, {})
                 : obj;   
+    }
+
+    public static hash(password: string, saltRounds: number = 10): string
+    {   
+        return bcrypt.hashSync(password, saltRounds);
     }
 }
