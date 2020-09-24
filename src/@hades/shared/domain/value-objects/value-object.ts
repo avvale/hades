@@ -1,11 +1,12 @@
 import { BadRequestException } from '@nestjs/common';
 import { IValueObject } from './value-object.interface';
-import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
+import { ObjectLiteral, ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
 export abstract class ValueObject<T> implements IValueObject<T>
 {
     public readonly type: string;
     public validationRules: ValidationRules;
+    public data: ObjectLiteral;
     
     protected _value: T;
     get value(): T
@@ -20,12 +21,15 @@ export abstract class ValueObject<T> implements IValueObject<T>
         this._value = value;
     }
     
-    constructor(value: T, validationRules: ValidationRules = {}) 
+    constructor(value: T, validationRules: ValidationRules = {}, data = {}) 
     {
         // first get validationRules value to be used in value accessors methods
         this.validationRules = validationRules;
 
         // second call to accessor value method
         this.value = value;
+
+        // additional data for customize behavior value object
+        this.data = data;
     }
 }
