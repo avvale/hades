@@ -6,7 +6,7 @@ export class CreateAccountDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '39a835ee-32a8-41ef-a186-bb67e7d429df'
+        example     : '4d0ac56d-f3b0-438d-8300-893a83247ff8'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateAccountDto
     @ApiProperty({
         type        : String,
         description : 'type [input here api field description]',
-        example     : 'SERVICE',
+        example     : 'USER',
         enum        : ['USER','SERVICE']
     })
     type: string;
@@ -25,7 +25,7 @@ export class CreateAccountDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'vq7qxwwu23bz5685pw6curyxy4xo5j9k50vi4nd1ibum2yyaqlrrav9scvzwomww31lj7ido5nchdxhf6eyjaimi5lvbk2ful6cq81cc4lz2y6sb7ym2yrah2gd7oabwnf1v0t34xcjxyyw01e4cy5s1ts4tpde3c7u8mcqtgxq8q339gyp1k01n59fapiafu2z8srwx1ou3acxq2q9397tdpib8cg04v2knc86708003yg779vhmsn2k3gh50m'
+        example     : 'umzjs6tahi2je6ws81ki7g3fqkm5tx1g3q6c52yof8ofwa3vg6rw47w0pwpv7yuygdzv70kw4nzy3sqqnhfc4re3ylr2oy88tix7oiqyg9n8tfknnoxzy6ray6c0f1ug1vpr832kioo6vdbh0rp4j9hwzcb0617rjs2e6v4ub4b0m1tmqa562dwo93zzxd78dq9kwi4fnm6elbclahw8qhhc1fuprcllr2sosf5chw4pyph3zxnhp779t9jgjah'
     })
     name: string;
     
@@ -43,7 +43,7 @@ export class CreateAccountDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : 'fda397b2-2dc1-4f94-88fa-92a08076df97'
+        example     : '7f54f196-12ab-47f6-aada-06243f1d4b22'
     })
     clientId: string;
     

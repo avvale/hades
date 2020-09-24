@@ -3,10 +3,10 @@ import { DataTypes } from 'sequelize';
 import { IamUserModel } from '@hades/iam/user/infrastructure/sequelize/sequelize-user.model';
 import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-role.model';
     
-import { OAuthRolesAccountsModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
+import { IamRolesAccountsModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
     
-import { OAuthTenantsAccountsModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model';
+import { IamTenantsAccountsModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model';
 
 @Table({ modelName: 'iam_account', freezeTableName: true })
 export class IamAccountModel extends Model<IamAccountModel> 
@@ -125,18 +125,18 @@ export class IamAccountModel extends Model<IamAccountModel>
                      
         
                     
-    @BelongsToMany(() => IamRoleModel, () => OAuthRolesAccountsModel)
+    @BelongsToMany(() => IamRoleModel, () => IamRolesAccountsModel)
     roleIds: IamRoleModel[];
 
-    @BelongsToMany(() => IamRoleModel, () => OAuthRolesAccountsModel)
+    @BelongsToMany(() => IamRoleModel, () => IamRolesAccountsModel)
     roles: IamRoleModel[];
      
         
                     
-    @BelongsToMany(() => IamTenantModel, () => OAuthTenantsAccountsModel)
+    @BelongsToMany(() => IamTenantModel, () => IamTenantsAccountsModel)
     tenantIds: IamTenantModel[];
 
-    @BelongsToMany(() => IamTenantModel, () => OAuthTenantsAccountsModel)
+    @BelongsToMany(() => IamTenantModel, () => IamTenantsAccountsModel)
     tenants: IamTenantModel[];
      
         

@@ -41,7 +41,7 @@ aggregateProperties:
     relationshipSingularName: role
     relationshipAggregate: IamRole
     relationshipModulePath: iam/role
-    intermediateModel: OAuthRolesAccountsModel
+    intermediateModel: IamRolesAccountsModel
     intermediateModelModuleSection: iam/role
     intermediateModelFile: roles-accounts
   - name: tenants
@@ -51,7 +51,7 @@ aggregateProperties:
     relationshipSingularName: tenant
     relationshipAggregate: IamTenant
     relationshipModulePath: iam/tenant
-    intermediateModel: OAuthTenantsAccountsModel
+    intermediateModel: IamTenantsAccountsModel
     intermediateModelModuleSection: iam/tenant
     intermediateModelFile: tenants-accounts
   - name: user

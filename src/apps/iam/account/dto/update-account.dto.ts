@@ -6,7 +6,7 @@ export class UpdateAccountDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '39a835ee-32a8-41ef-a186-bb67e7d429df'
+        example     : '4d0ac56d-f3b0-438d-8300-893a83247ff8'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateAccountDto
     @ApiProperty({
         type        : String,
         description : 'type [input here api field description]',
-        example     : 'SERVICE',
+        example     : 'USER',
         enum        : ['USER','SERVICE']
     })
     type: string;
@@ -25,7 +25,7 @@ export class UpdateAccountDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'o7uiipk3uuvtvsi3786d19kah952jrr04v5sc5bwgttl6pb72zb5wtczbq0t6lkyahfc1ckyg61sabnrtq8a7acg69jlyu0sn5l4g14lc5v1y2y55lfbkrfuw11y30p3jki2h6sksopqo2v7u2zew22ojnioj32qs6bubt23mbvyuy5sv6e11itvafep1a47x2ep42jn25f43wwiqaun2wkx6b1fbtvk0upqhictna5hf4ljlmewh3sj79mp0wr'
+        example     : 'q4c0t48stc6b54x2op8bvucdwu10am2jsy45awf9xgrslxr2qjzciosa3zjy9uduxzz07t0w4y9f7cooi14vxs42840v8k4mgtalkj0phxox2n38ll0f0193u1crhah4xfu0v1sz18l6x1zp0u3tf0fkewrtogxm5pwq0fjh0mhiidwjdh8ehjw4nnphmeds77pt5b123wjjnn8pohud8irjtmf3rkjr7amgo9a1bmfmfaq41wahpj8lo32jaxy'
     })
     name: string;
     
@@ -34,7 +34,7 @@ export class UpdateAccountDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : true
+        example     : false
     })
     isActive: boolean;
     
@@ -43,7 +43,7 @@ export class UpdateAccountDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : 'fda397b2-2dc1-4f94-88fa-92a08076df97'
+        example     : '7f54f196-12ab-47f6-aada-06243f1d4b22'
     })
     clientId: string;
     

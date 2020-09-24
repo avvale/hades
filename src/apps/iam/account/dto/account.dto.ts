@@ -8,7 +8,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '39a835ee-32a8-41ef-a186-bb67e7d429df'
+        example     : '4d0ac56d-f3b0-438d-8300-893a83247ff8'
     })
     id: string;
     
@@ -27,7 +27,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '82ysyohw121jsbunzg5ieurxtac30b65dmhtponuw97bwvu46n7yk4svqyk0w9lh7vtk6i4qj40zk00zmi3hcljxjw3vrthu41bvqscsmpuw4ku2elcw4yoxpdbybs0aih2l82xzxav37dqnln64xdzrmo63ph8nhxud0bgspcb3dr9eje2b3r52nvd4pjlntlg1xrr3vd7r8zs6cxbnlqv52jk9n82cci2iudkn0m20pby0y6gs3ah1gv23y57'
+        example     : 'akcabdtpul2igz9b3ioxhe1nxwvca826pxggw8spaaw7kumjs5y7m3h1tx6p0bi6yadfivgpfgpo5zlsdk8s8pddlho85xg66xl116v4vmjiocbhgv5hj63d5s21z7dqd0ymk6xflu3nii9l7oveafajemh9x8wmq8jht13qd5ynhmmefc4ni20i8sww9ia05d6s7v5ll0opbqfzt0z9tcxjay5ns7a5lw62kztw99urhhvmbbafknu5ehivl8k'
     })
     name: string;
     
@@ -45,7 +45,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : 'fda397b2-2dc1-4f94-88fa-92a08076df97'
+        example     : '7f54f196-12ab-47f6-aada-06243f1d4b22'
     })
     clientId: string;
     
@@ -99,7 +99,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-09-23 21:15:45'
+        example     : '2020-09-24 06:07:22'
     })
     createdAt: string;
     
@@ -108,7 +108,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-09-24 07:15:58'
+        example     : '2020-09-24 15:41:31'
     })
     updatedAt: string;
     
@@ -117,7 +117,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-09-24 03:45:33'
+        example     : '2020-09-24 06:29:33'
     })
     deletedAt: string;
     
