@@ -21,7 +21,7 @@ export abstract class ValueObject<T> implements IValueObject<T>
         this._value = value;
     }
     
-    constructor(value: T, validationRules: ValidationRules = {}, data = {}) 
+    constructor(value: T, validationRules: ValidationRules = {}, data: DataValueObject = {}) 
     {
         // first get validationRules value to be used in value accessors methods
         this.validationRules = validationRules;
