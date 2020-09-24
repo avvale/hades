@@ -19,3 +19,8 @@ export interface ValidationRules
     enumOptions?: string[];
     unsigned?: boolean;
 }
+
+export interface DataValueObject
+{
+    isEncrypt?: boolean
+}
