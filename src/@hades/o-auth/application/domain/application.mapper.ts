@@ -16,6 +16,7 @@ import {
 } from './value-objects';
 
 
+
 import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
 
 export class ApplicationMapper implements IMapper
@@ -81,6 +82,8 @@ export class ApplicationMapper implements IMapper
             
             
             
+            
+            
             this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapModelsToAggregates(application.clients) : undefined,
             
         );
@@ -100,6 +103,8 @@ export class ApplicationMapper implements IMapper
             application.createdAt.value,
             application.updatedAt.value,
             application.deletedAt.value,
+            
+            
             
             
             

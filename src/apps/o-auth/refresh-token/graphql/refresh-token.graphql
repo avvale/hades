@@ -3,7 +3,7 @@
 type OAuthRefreshToken
 {
     id: ID!
-    accessToken: OAuthAccessToken!
+    accessTokenId: ID!
     token: GraphQLString!
     isRevoked: GraphQLBoolean!
     expiresAt: GraphQLInt

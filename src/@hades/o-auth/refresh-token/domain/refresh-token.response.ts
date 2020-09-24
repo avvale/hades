@@ -2,6 +2,7 @@ import { AccessTokenResponse } from '@hades/o-auth/access-token/domain/access-to
 
 
 
+
 export class RefreshTokenResponse 
 {
     constructor(
@@ -15,6 +16,8 @@ export class RefreshTokenResponse
         public readonly deletedAt: string,
         
         public readonly accessToken: AccessTokenResponse,
+        
+        
         
         
         

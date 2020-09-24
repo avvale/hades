@@ -14,9 +14,10 @@ import {
 import { CreatedAccessTokenEvent } from './../application/events/created-access-token.event';
 import { UpdatedAccessTokenEvent } from './../application/events/updated-access-token.event';
 import { DeletedAccessTokenEvent } from './../application/events/deleted-access-token.event';
+import { OAuthRefreshToken } from '@hades/o-auth/refresh-token/domain/refresh-token.aggregate';
+
 import { OAuthClient } from '@hades/o-auth/client/domain/client.aggregate';
 
-import { OAuthRefreshToken } from '@hades/o-auth/refresh-token/domain/refresh-token.aggregate';
 
 
 export class OAuthAccessToken extends AggregateRoot
@@ -32,12 +33,14 @@ export class OAuthAccessToken extends AggregateRoot
     deletedAt: AccessTokenDeletedAt;
     
     // eager relationship
-    client: OAuthClient;
     
     refreshToken: OAuthRefreshToken;
     
+    client: OAuthClient;
     
-    constructor(id?: AccessTokenId, clientId?: AccessTokenClientId, token?: AccessTokenToken, name?: AccessTokenName, isRevoked?: AccessTokenIsRevoked, expiresAt?: AccessTokenExpiresAt, createdAt?: AccessTokenCreatedAt, updatedAt?: AccessTokenUpdatedAt, deletedAt?: AccessTokenDeletedAt, client?: OAuthClient, refreshToken?: OAuthRefreshToken, )
+    
+    
+    constructor(id?: AccessTokenId, clientId?: AccessTokenClientId, token?: AccessTokenToken, name?: AccessTokenName, isRevoked?: AccessTokenIsRevoked, expiresAt?: AccessTokenExpiresAt, createdAt?: AccessTokenCreatedAt, updatedAt?: AccessTokenUpdatedAt, deletedAt?: AccessTokenDeletedAt, refreshToken?: OAuthRefreshToken, client?: OAuthClient, )
     {
         super();
         
@@ -52,16 +55,18 @@ export class OAuthAccessToken extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
-        this.client = client;
         
         this.refreshToken = refreshToken;
+        
+        this.client = client;
+        
         
         
     }
 
-    static register (id: AccessTokenId, clientId: AccessTokenClientId, token: AccessTokenToken, name: AccessTokenName, isRevoked: AccessTokenIsRevoked, expiresAt: AccessTokenExpiresAt, createdAt: AccessTokenCreatedAt, updatedAt: AccessTokenUpdatedAt, deletedAt: AccessTokenDeletedAt, client?: OAuthClient, refreshToken?: OAuthRefreshToken): OAuthAccessToken
+    static register (id: AccessTokenId, clientId: AccessTokenClientId, token: AccessTokenToken, name: AccessTokenName, isRevoked: AccessTokenIsRevoked, expiresAt: AccessTokenExpiresAt, createdAt: AccessTokenCreatedAt, updatedAt: AccessTokenUpdatedAt, deletedAt: AccessTokenDeletedAt, refreshToken?: OAuthRefreshToken, client?: OAuthClient, ): OAuthAccessToken
     {
-        return new OAuthAccessToken(id, clientId, token, name, isRevoked, expiresAt, createdAt, updatedAt, deletedAt, client, refreshToken, );
+        return new OAuthAccessToken(id, clientId, token, name, isRevoked, expiresAt, createdAt, updatedAt, deletedAt, refreshToken, client, );
     }
 
     created(accessToken: OAuthAccessToken): void
@@ -132,9 +137,11 @@ export class OAuthAccessToken extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
-            client: this.client?.toDTO(),
             
             refreshToken: this.refreshToken?.toDTO(),
+            
+            client: this.client?.toDTO(),
+            
             
             
         }

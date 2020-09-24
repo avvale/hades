@@ -20,6 +20,7 @@ import {
     
 } from './value-objects';
 
+
 import { AccessTokenMapper } from '@hades/o-auth/access-token/domain/access-token.mapper';
 
 import { ApplicationMapper } from '@hades/o-auth/application/domain/application.mapper';
@@ -91,6 +92,8 @@ export class ClientMapper implements IMapper
             new ClientDeletedAt(client.deletedAt),
             
             
+            
+            
             this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapModelsToAggregates(client.accessTokens) : undefined,
             
             this.options.eagerLoading ? new ApplicationMapper({ eagerLoading: false }).mapModelsToAggregates(client.applications) : undefined,
@@ -117,6 +120,8 @@ export class ClientMapper implements IMapper
             client.createdAt.value,
             client.updatedAt.value,
             client.deletedAt.value,
+            
+            
             
             
             this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapAggregatesToResponses(client.accessTokens) : undefined,

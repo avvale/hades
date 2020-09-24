@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { OAuthAccessTokenModel } from '@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model';
 import { OAuthApplicationModel } from '@hades/o-auth/application/infrastructure/sequelize/sequelize-application.model';
@@ -21,7 +21,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     id: string;
         
-             
+                     
         
     
     
@@ -35,7 +35,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     grantType: string;
         
-             
+                     
         
     
     
@@ -49,7 +49,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     name: string;
         
-             
+                     
         
     
     
@@ -63,7 +63,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     secret: string;
         
-             
+                     
         
     
     
@@ -77,7 +77,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     authUrl: string;
         
-             
+                     
         
     
     
@@ -91,7 +91,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     redirect: string;
         
-             
+                     
         
     
     
@@ -105,7 +105,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     expiredAccessToken: number;
         
-             
+                     
         
     
     
@@ -119,7 +119,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     expiredRefreshToken: number;
         
-             
+                     
         
     
     
@@ -133,7 +133,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     isRevoked: boolean;
         
-             
+                     
         
     
     
@@ -147,9 +147,9 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     isMaster: boolean;
         
-             
+                     
         
-            
+                    
     @BelongsToMany(() => OAuthApplicationModel, () => OAuthApplicationsClientsModel)
     applicationIds: OAuthApplicationModel[];
 
@@ -157,7 +157,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     applications: OAuthApplicationModel[];
      
         
-        
+                
     @HasMany(() => OAuthAccessTokenModel)
     accessTokens: OAuthAccessTokenModel[];
          
@@ -174,7 +174,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     createdAt: string;
         
-             
+                     
         
     
     
@@ -188,7 +188,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     updatedAt: string;
         
-             
+                     
         
     
     
@@ -202,5 +202,5 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     })
     deletedAt: string;
         
-            
+                    
 }

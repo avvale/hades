@@ -16,6 +16,7 @@ import { UpdatedApplicationEvent } from './../application/events/updated-applica
 import { DeletedApplicationEvent } from './../application/events/deleted-application.event';
 
 
+
 import { OAuthClient } from '@hades/o-auth/client/domain/client.aggregate';
 
 export class OAuthApplication extends AggregateRoot
@@ -31,6 +32,8 @@ export class OAuthApplication extends AggregateRoot
     deletedAt: ApplicationDeletedAt;
     
     // eager relationship
+    
+    
     
     
     clients: OAuthClient[];
@@ -50,6 +53,8 @@ export class OAuthApplication extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
+        
+        
         
         
         this.clients = clients;
@@ -129,6 +134,8 @@ export class OAuthApplication extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             
             
             clients: this.clients?.map(item => item.toDTO()),

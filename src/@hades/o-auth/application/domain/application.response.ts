@@ -1,5 +1,6 @@
 
 
+
 import { ClientResponse } from '@hades/o-auth/client/domain/client.response';
 
 export class ApplicationResponse 
@@ -14,6 +15,8 @@ export class ApplicationResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
+        
+        
         
         
         

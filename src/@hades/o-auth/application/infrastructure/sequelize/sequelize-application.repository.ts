@@ -34,7 +34,7 @@ export class SequelizeApplicationRepository extends SequelizeRepository<OAuthApp
     // hook called after create aggregate
     async updatedAggregateHook(aggregate: OAuthApplication, model: OAuthApplicationModel) 
     {
-         // set many to many relation
+        // set many to many relation
         
         if (aggregate.clientIds.isArray()) await model.$set('clientIds', aggregate.clientIds.value);
          

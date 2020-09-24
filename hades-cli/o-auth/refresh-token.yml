@@ -15,7 +15,7 @@ aggregateProperties:
     relationship: one-to-one
     relationshipAggregate: OAuthAccessToken
     relationshipModulePath: o-auth/access-token
-    relationshipField: access_token
+    relationshipField: accessToken
   - name: token
     type: text
     nullable: false

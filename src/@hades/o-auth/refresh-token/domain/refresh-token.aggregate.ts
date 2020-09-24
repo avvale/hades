@@ -17,6 +17,7 @@ import { OAuthAccessToken } from '@hades/o-auth/access-token/domain/access-token
 
 
 
+
 export class OAuthRefreshToken extends AggregateRoot
 {
     id: RefreshTokenId;
@@ -30,6 +31,8 @@ export class OAuthRefreshToken extends AggregateRoot
     
     // eager relationship
     accessToken: OAuthAccessToken;
+    
+    
     
     
     
@@ -48,6 +51,8 @@ export class OAuthRefreshToken extends AggregateRoot
         
         // eager relationship
         this.accessToken = accessToken;
+        
+        
         
         
         
@@ -123,6 +128,8 @@ export class OAuthRefreshToken extends AggregateRoot
             
             // eager relationship
             accessToken: this.accessToken?.toDTO(),
+            
+            
             
             
             

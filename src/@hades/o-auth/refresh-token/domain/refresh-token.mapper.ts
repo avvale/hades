@@ -17,6 +17,7 @@ import { AccessTokenMapper } from '@hades/o-auth/access-token/domain/access-toke
 
 
 
+
 export class RefreshTokenMapper implements IMapper
 {
     constructor(
@@ -81,6 +82,8 @@ export class RefreshTokenMapper implements IMapper
             
             
             
+            
+            
         );
     }
 
@@ -99,6 +102,8 @@ export class RefreshTokenMapper implements IMapper
             refreshToken.deletedAt.value,
             
             this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapAggregateToResponse(refreshToken.accessToken) : undefined,
+            
+            
             
             
             

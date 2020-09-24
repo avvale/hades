@@ -8,7 +8,7 @@ type OAuthAccessToken
     name: GraphQLString
     isRevoked: GraphQLBoolean!
     expiresAt: GraphQLInt
-    refreshTokens: [OAuthRefreshToken]
+    refreshToken: OAuthRefreshToken
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
