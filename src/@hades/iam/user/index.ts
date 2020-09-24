@@ -10,6 +10,7 @@ import { PaginateUsersQueryHandler } from './application/paginate/paginate-users
 import { GetUsersQueryHandler } from './application/get/get-users.query-handler';
 import { FindUserQueryHandler } from './application/find/find-user.query-handler';
 import { FindUserByIdQueryHandler } from './application/find/find-user-by-id.query-handler';
+import { FindUserByUsernamePasswordQueryHandler } from './application/find/find-user-by-username-password.query-handler';
 
 // events
 import { CreatedUserEventHandler } from './application/events/created-user.event-handler';
@@ -25,6 +26,7 @@ import { PaginateUsersService } from './application/paginate/paginate-users.serv
 import { GetUsersService } from './application/get/get-users.service';
 import { FindUserService } from './application/find/find-user.service';
 import { FindUserByIdService } from './application/find/find-user-by-id.service';
+import { FindUserByUsernamePasswordService } from './application/find/find-user-by-username-password.service';
 import { UpdateUserService } from './application/update/update-user.service';
 import { DeleteUserByIdService } from './application/delete/delete-user-by-id.service';
 import { DeleteUsersService } from './application/delete/delete-users.service';
@@ -53,6 +55,7 @@ export const IamUserHandlers = [
     GetUsersQueryHandler,
     FindUserQueryHandler,
     FindUserByIdQueryHandler,
+    FindUserByUsernamePasswordQueryHandler,
 
     // events
     CreatedUserEventHandler,
@@ -69,6 +72,7 @@ export const IamUserServices = [
     GetUsersService,
     FindUserService,
     FindUserByIdService,
+    FindUserByUsernamePasswordService,
     UpdateUserService,
     DeleteUserByIdService,
     DeleteUsersService,
