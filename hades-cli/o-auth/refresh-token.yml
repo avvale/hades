@@ -12,11 +12,10 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
-    relationship: many-to-one
+    relationship: one-to-one
     relationshipAggregate: OAuthAccessToken
     relationshipModulePath: o-auth/access-token
-    relationshipKey: id
-    relationshipField: accessToken
+    relationshipField: access_token
   - name: token
     type: text
     nullable: false

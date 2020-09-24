@@ -31,11 +31,10 @@ aggregateProperties:
     type: int.unsigned
     maxLength: 10
     nullable: true
-  - name: refresh_tokens
+  - name: refresh_token
     type: OAuthRefreshToken
     nullable: true
-    relationship: one-to-many
-    relationshipSingularName: refresh_token
+    relationship: one-to-one
     relationshipAggregate: OAuthRefreshToken
     relationshipModulePath: o-auth/refresh-token
   - name: created_at
