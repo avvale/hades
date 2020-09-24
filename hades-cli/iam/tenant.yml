@@ -10,14 +10,15 @@ aggregateProperties:
     nullable: false
   - name: name
     type: varchar
+    maxLength: 255
     nullable: false
   - name: code
     type: varchar
     maxLength: 50
     nullable: false
-    index: index
   - name: logo
     type: varchar
+    maxLength: 255
     nullable: true
   - name: is_active
     type: boolean
@@ -25,6 +26,17 @@ aggregateProperties:
   - name: data
     type: json
     nullable: true
+  - name: accounts
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: account
+    relationshipAggregate: IamAccount
+    relationshipModulePath: iam/account
+    intermediateTable: iam_tenants_accounts
+    intermediateModel: IamTenantsAccountsModel
+    intermediateModelModuleSection: iam/tenant
+    intermediateModelFile: tenants-accounts
   - name: created_at
     type: timestamp
     nullable: true

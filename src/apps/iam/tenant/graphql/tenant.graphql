@@ -1,0 +1,57 @@
+
+
+type IamTenant
+{
+    id: ID!
+    name: GraphQLString!
+    code: GraphQLString!
+    logo: GraphQLString
+    isActive: GraphQLBoolean!
+    data: JSON
+    accounts: [IamAccount]
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input IamCreateTenantInput
+{
+    id: ID!
+    name: GraphQLString!
+    code: GraphQLString!
+    logo: GraphQLString
+    isActive: GraphQLBoolean!
+    data: JSON
+    accountIds: [ID]
+    
+}
+
+input IamUpdateTenantInput
+{
+    id: ID!
+    name: GraphQLString
+    code: GraphQLString
+    logo: GraphQLString
+    isActive: GraphQLBoolean
+    data: JSON
+    accountIds: [ID]
+    
+}
+
+type Query 
+{
+    iamFindTenant(query:QueryStatement): IamTenant
+    iamFindTenantById(id:ID): IamTenant
+    iamGetTenants(query:QueryStatement): [IamTenant]!
+    iamPaginateTenants(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    iamCreateTenant(payload: IamCreateTenantInput!): IamTenant
+    iamCreateTenants(payload: [IamCreateTenantInput]!): Boolean!
+    iamUpdateTenant(payload: IamUpdateTenantInput!): IamTenant
+    iamDeleteTenantById(id: ID!): IamTenant
+    iamDeleteTenants(query:QueryStatement): [IamTenant]!
+}
