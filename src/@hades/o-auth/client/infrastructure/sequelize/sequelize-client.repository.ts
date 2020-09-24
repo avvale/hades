@@ -26,7 +26,7 @@ export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, 
     }
     
     // hook called after create aggregate
-    async updatedAggregateHookcreatedAggregateHook(aggregate: OAuthClient, model: OAuthClientModel) 
+    async createdAggregateHook(aggregate: OAuthClient, model: OAuthClientModel) 
     {
         // add many to many relation
         
@@ -37,7 +37,7 @@ export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, 
     // hook called after create aggregate
     async updatedAggregateHook(aggregate: OAuthClient, model: OAuthClientModel) 
     {
-         // set many to many relation
+        // set many to many relation
         
         if (aggregate.applicationIds.isArray()) await model.$set('applicationIds', aggregate.applicationIds.value);
          

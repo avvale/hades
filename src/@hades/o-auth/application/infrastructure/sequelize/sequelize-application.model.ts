@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { OAuthClientModel } from '@hades/o-auth/client/infrastructure/sequelize/sequelize-client.model';
     
@@ -20,7 +20,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     })
     id: string;
         
-             
+                     
         
     
     
@@ -34,7 +34,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     })
     name: string;
         
-             
+                     
         
     
     
@@ -48,7 +48,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     })
     code: string;
         
-             
+                     
         
     
     
@@ -62,7 +62,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     })
     secret: string;
         
-             
+                     
         
     
     
@@ -76,9 +76,9 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     })
     isMaster: boolean;
         
-             
+                     
         
-            
+                    
     @BelongsToMany(() => OAuthClientModel, () => OAuthApplicationsClientsModel)
     clientIds: OAuthClientModel[];
 
@@ -98,7 +98,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     })
     createdAt: string;
         
-             
+                     
         
     
     
@@ -112,7 +112,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     })
     updatedAt: string;
         
-             
+                     
         
     
     
@@ -126,5 +126,5 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     })
     deletedAt: string;
         
-            
+                    
 }

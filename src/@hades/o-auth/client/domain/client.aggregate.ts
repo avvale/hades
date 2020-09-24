@@ -20,6 +20,7 @@ import { CreatedClientEvent } from './../application/events/created-client.event
 import { UpdatedClientEvent } from './../application/events/updated-client.event';
 import { DeletedClientEvent } from './../application/events/deleted-client.event';
 
+
 import { OAuthAccessToken } from '@hades/o-auth/access-token/domain/access-token.aggregate';
 
 import { OAuthApplication } from '@hades/o-auth/application/domain/application.aggregate';
@@ -42,6 +43,8 @@ export class OAuthClient extends AggregateRoot
     deletedAt: ClientDeletedAt;
     
     // eager relationship
+    
+    
     
     accessTokens: OAuthAccessToken[];
     
@@ -67,6 +70,8 @@ export class OAuthClient extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
+        
+        
         
         this.accessTokens = accessTokens;
         
@@ -167,6 +172,8 @@ export class OAuthClient extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             
             accessTokens: this.accessTokens?.map(item => item.toDTO()),
             

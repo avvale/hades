@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { OAuthAccessTokenModel } from '@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model';
 
@@ -18,7 +18,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
     })
     id: string;
         
-             
+                     
         
     @ForeignKey(() => OAuthAccessTokenModel)
     
@@ -30,18 +30,13 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         type: DataTypes.UUID,
         
         
-        references: {  
-            key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION',
     })
     accessTokenId: string;
         
-    
+        
     @BelongsTo(() => OAuthAccessTokenModel)
     accessToken: OAuthAccessTokenModel;
-             
+                 
         
     
     
@@ -55,7 +50,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
     })
     token: string;
         
-             
+                     
         
     
     
@@ -69,7 +64,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
     })
     isRevoked: boolean;
         
-             
+                     
         
     
     
@@ -83,7 +78,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
     })
     expiresAt: number;
         
-             
+                     
         
     
     
@@ -97,7 +92,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
     })
     createdAt: string;
         
-             
+                     
         
     
     
@@ -111,7 +106,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
     })
     updatedAt: string;
         
-             
+                     
         
     
     
@@ -125,5 +120,5 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
     })
     deletedAt: string;
         
-            
+                    
 }

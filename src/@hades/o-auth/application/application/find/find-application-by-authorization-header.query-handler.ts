@@ -18,8 +18,6 @@ export class FindApplicationByAuthorizationHeaderQueryHandler implements IQueryH
     {
         const application = await this.findApplicationByAuthorizationHeaderService.main(new ApplicationAuthorizationHeader(query.authorizationHeader));
 
-        console.log(application)
-
         return this.mapper.mapAggregateToResponse(application);
     }
 }

@@ -14,8 +14,11 @@ import {
     AccessTokenDeletedAt
     
 } from './value-objects';
-import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
 import { RefreshTokenMapper } from '@hades/o-auth/refresh-token/domain/refresh-token.mapper';
+
+import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
+
+
 
 export class AccessTokenMapper implements IMapper
 {
@@ -78,9 +81,11 @@ export class AccessTokenMapper implements IMapper
             new AccessTokenUpdatedAt(accessToken.updatedAt),
             new AccessTokenDeletedAt(accessToken.deletedAt),
             
-            this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapModelToAggregate(accessToken.client) : undefined,
             
             this.options.eagerLoading ? new RefreshTokenMapper({ eagerLoading: false }).mapModelToAggregate(accessToken.refreshToken) : undefined,
+            
+            this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapModelToAggregate(accessToken.client) : undefined,
+            
             
             
         );
@@ -101,9 +106,11 @@ export class AccessTokenMapper implements IMapper
             accessToken.updatedAt.value,
             accessToken.deletedAt.value,
             
-            this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapAggregateToResponse(accessToken.client) : undefined,
             
             this.options.eagerLoading ? new RefreshTokenMapper({ eagerLoading: false }).mapAggregateToResponse(accessToken.refreshToken) : undefined,
+            
+            this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapAggregateToResponse(accessToken.client) : undefined,
+            
             
             
         );

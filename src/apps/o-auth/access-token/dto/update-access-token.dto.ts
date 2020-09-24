@@ -6,7 +6,7 @@ export class UpdateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'fccc7357-a0b1-4e74-8890-825947f99c5d'
+        example     : '060fded3-7730-49d9-be73-7c0076f39471'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : '4e0fe39a-79bc-4ee9-a008-2120c9c4d2d1'
+        example     : 'e237907a-6d33-4f0e-b77a-103d6bff5a35'
     })
     clientId: string;
     
@@ -24,7 +24,7 @@ export class UpdateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'token [input here api field description]',
-        example     : 'Eos voluptatum libero sint. Eos eos nostrum dignissimos sit in aut ut voluptas. Est rerum aspernatur nobis et doloremque deleniti. Itaque enim consequatur facere consequuntur corporis. Doloribus eos nesciunt et sit explicabo voluptate.'
+        example     : 'Aut inventore qui est. Officia enim et maiores. Hic animi nostrum aut libero explicabo.'
     })
     token: string;
     
@@ -33,7 +33,7 @@ export class UpdateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '676dol2gkzgre5nl33m3y5dtdfbrudldjg7vp0vtsclg6jjouhv0cc3cla418xcsz0z6blym7cdsp1rhgkaq7q8s6wzvimjddfd9g9wvhykgaovi095rtvyirz97g599hjf9d3ut121nkd9jdcuolm34xp3kw82i7dgczpqwgqsnbmfv0x3luw0vkyhfyxtqxpcpjespl5cl1j9gbszc2b0twpw964wqmcv1c1i60vujmzemqrd4wi0ug22r8mc'
+        example     : 'qc1wwvphpyz35pxh0f3582uebiih46g9utz14pmqki00ndis9q4tq1xnicps4l6gz1ktzzdq0adwa9kqn3g7rr329v6mk3otvzu8k1j61h5cr31265obqnujrcz55k9pdd3h2bz75a6740d05q4w425jkehgp7bc73ztmnndgfbfr36gtynqxxs7x13vukstwuknw9a60nzothydfhzkpna6vj9gl0nb20uk8ws1uko831i0jrxfeo6dkbcn2uh'
     })
     name: string;
     
@@ -51,7 +51,7 @@ export class UpdateAccessTokenDto
     @ApiProperty({
         type        : Number,
         description : 'expiresAt [input here api field description]',
-        example     : 4131945578
+        example     : 5533839728
     })
     expiresAt: number;
     

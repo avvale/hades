@@ -123,7 +123,7 @@ export interface OAuthAccessToken {
     name?: GraphQLString;
     isRevoked: GraphQLBoolean;
     expiresAt?: GraphQLInt;
-    refreshTokens?: OAuthRefreshToken[];
+    refreshToken?: OAuthRefreshToken;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -211,7 +211,7 @@ export interface OAuthCredential {
 
 export interface OAuthRefreshToken {
     id: string;
-    accessToken: OAuthAccessToken;
+    accessTokenId: string;
     token: GraphQLString;
     isRevoked: GraphQLBoolean;
     expiresAt?: GraphQLInt;
