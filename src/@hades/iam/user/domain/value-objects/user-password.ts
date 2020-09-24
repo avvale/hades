@@ -1,7 +1,7 @@
-import { StringValueObject } from '@hades/shared/domain/value-objects/string.value-object';
+import { PasswordValueObject } from '@hades/shared/domain/value-objects/password.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class UserPassword extends StringValueObject 
+export class UserPassword extends PasswordValueObject 
 {
     public readonly type: 'UserPassword';   
 

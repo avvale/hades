@@ -41,7 +41,7 @@ aggregateProperties:
     maxLength: 120
     nullable: false
   - name: password
-    type: varchar
+    type: password
     maxLength: 255
     nullable: false
   - name: remember_token
