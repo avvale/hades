@@ -8,7 +8,7 @@ export const users = [
         mobile: null,
         langId: null,
         username: 'john@gmail.com',
-        password: '123456',
+        password: '1111',
         rememberToken: null,
         data: null
     }
