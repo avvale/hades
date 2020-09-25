@@ -22,6 +22,11 @@ export class FindUserByUsernamePasswordService
         
         if (user && bcrypt.compareSync(password.value, user.password.value)) 
         {
+            // set validation rule to undefinedable
+            user.password.validationRules = Object.assign(user.password.validationRules, { 
+                undefinable: true,
+            })
+           
             // delete password from response
             user.password.value = undefined;
 
