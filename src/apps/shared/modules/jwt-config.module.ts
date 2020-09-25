@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { EnvironmentService } from '@hades/shared/domain/environment/environment.service';
-import { EnvironmentModule } from './../../../shared/modules/environment.module';
+import { EnvironmentModule } from './environment.module';
  
 @Module({
     imports: [        
