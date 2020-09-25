@@ -19,11 +19,11 @@ export class FindUserByUsernamePasswordService
             },
             include: ['account']
         });
-
-        if (user && bcrypt.compareSync(password, user.password)) 
+        
+        if (user && bcrypt.compareSync(password.value, user.password.value)) 
         {
             // delete password from response
-            user.password = undefined;
+            user.password.value = undefined;
 
             return user;
         }

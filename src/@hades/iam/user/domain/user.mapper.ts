@@ -83,7 +83,7 @@ export class UserMapper implements IMapper
             new UserMobile(user.mobile),
             new UserLangId(user.langId),
             new UserUsername(user.username),
-            new UserPassword(user.password, {}, {isEncrypt: false}),
+            new UserPassword(user.password),
             new UserRememberToken(user.rememberToken),
             new UserData(user.data),
             new UserCreatedAt(user.createdAt),
