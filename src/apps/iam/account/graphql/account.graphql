@@ -57,6 +57,7 @@ input IamUpdateAccountInput
 type Query 
 {
     iamFindAccount(query:QueryStatement): IamAccount
+    iamFindMeAccount: IamAccount
     iamFindAccountById(id:ID): IamAccount
     iamGetAccounts(query:QueryStatement): [IamAccount]!
     iamPaginateAccounts(query:QueryStatement constraint:QueryStatement): Pagination!
