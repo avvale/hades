@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
 declare const Buffer: any;
 
 export class Utils
@@ -55,5 +56,10 @@ export class Utils
     public static hash(password: string, saltRounds: number = 10): string
     {   
         return bcrypt.hashSync(password, saltRounds);
+    }
+
+    public static uuid(): string
+    {   
+        return uuidv4();
     }
 }
