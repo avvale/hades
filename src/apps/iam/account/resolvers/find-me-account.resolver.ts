@@ -3,9 +3,10 @@ import { JwtService } from '@nestjs/jwt';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-account-by-id.query';
+import { FindAccessTokenByIdQuery } from '@hades/o-auth/access-token/application/find/find-access-token-by-id.query';
 import { JwtToken } from '@hades/shared/domain/lib/hades.types';
 import { IamAccount } from './../../../../graphql';
+import { FindAccountQuery } from '@hades/iam/account/application/find/find-account.query';
 
 @Resolver()
 export class FindMeAccountResolver
@@ -18,13 +19,20 @@ export class FindMeAccountResolver
     @Query('iamFindMeAccount')
     async main(@Context() context): Promise<IamAccount>
     {
-        // return await this.queryBus.ask(new FindAccountByIdQuery(id));
+        // get token from Headers
+        const jwtToken: JwtToken = <JwtToken>this.jwtService.decode(context.req.headers.authorization.replace('Bearer ', ''));
 
-        const jwtToken: JwtToken =  this.jwtService.decode(context.req.headers.authorization.replace('Bearer ', ''));
+        // get access token from database
+        const accessToken = await this.queryBus.ask(new FindAccessTokenByIdQuery(jwtToken.jit));
 
-        
-        
+        // get account who belongs this token
+        const account = await this.queryBus.ask(new FindAccountQuery({
+            where: {
+                id: accessToken.accountId
+            },
+            include: ['user']
+        }));
 
-        return null;
+        return account;
     }
 }
