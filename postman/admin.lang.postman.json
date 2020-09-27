@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "0e510578-4e5b-4332-a058-e16e3339ccd3",
+		"name"          : "@hades - admin/lang",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - adminCreateLang",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminCreateLangInput!)\n{\n\tadminCreateLang (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"c80cb940-c8dc-48c4-98c4-5757700aaa81\", \n\t\t\"name\": \"p\", \n\t\t\"image\": \"a\", \n\t\t\"iso6392\": \"m7\", \n\t\t\"iso6393\": \"6wm\", \n\t\t\"ietf\": \"9begg\", \n\t\t\"sort\": 150779, \n\t\t\"isActive\": true\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminCreateLangs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[AdminCreateLangInput]!)\n{\n\tadminCreateLangs (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"5f301dc8-f4f0-49a1-8bd6-8a9febe55708\", \n\t\t\t\"name\": \"e\", \n\t\t\t\"image\": \"3\", \n\t\t\t\"iso6392\": \"zd\", \n\t\t\t\"iso6393\": \"m4n\", \n\t\t\t\"ietf\": \"6hwcy\", \n\t\t\t\"sort\": 866897, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bc19c4f1-7e65-47f7-9c9c-ed6cf8d78eb2\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"image\": \"w\", \n\t\t\t\"iso6392\": \"us\", \n\t\t\t\"iso6393\": \"2am\", \n\t\t\t\"ietf\": \"5q2d8\", \n\t\t\t\"sort\": 220389, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a92a2fad-0232-4b3a-aab3-d5b83e032f4c\", \n\t\t\t\"name\": \"e\", \n\t\t\t\"image\": \"o\", \n\t\t\t\"iso6392\": \"v1\", \n\t\t\t\"iso6393\": \"zfb\", \n\t\t\t\"ietf\": \"v5knh\", \n\t\t\t\"sort\": 560521, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ae0aa473-922f-4d04-af52-77bc443085ad\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"image\": \"0\", \n\t\t\t\"iso6392\": \"ad\", \n\t\t\t\"iso6393\": \"4f8\", \n\t\t\t\"ietf\": \"m4dct\", \n\t\t\t\"sort\": 613892, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4859e243-536e-4b9a-bcc0-f8a3353d1af2\", \n\t\t\t\"name\": \"x\", \n\t\t\t\"image\": \"u\", \n\t\t\t\"iso6392\": \"2t\", \n\t\t\t\"iso6393\": \"7pp\", \n\t\t\t\"ietf\": \"0w03t\", \n\t\t\t\"sort\": 617107, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"83cf7433-befb-4fee-a9f2-bcc7500021f3\", \n\t\t\t\"name\": \"9\", \n\t\t\t\"image\": \"w\", \n\t\t\t\"iso6392\": \"bz\", \n\t\t\t\"iso6393\": \"03s\", \n\t\t\t\"ietf\": \"xwd69\", \n\t\t\t\"sort\": 199588, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9bed9f0e-4d9c-4bbe-a7d3-86adc2630287\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"image\": \"p\", \n\t\t\t\"iso6392\": \"fr\", \n\t\t\t\"iso6393\": \"z6f\", \n\t\t\t\"ietf\": \"ggq8w\", \n\t\t\t\"sort\": 290738, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"afeb742d-1854-48f0-b2e1-bf0326531ba0\", \n\t\t\t\"name\": \"w\", \n\t\t\t\"image\": \"s\", \n\t\t\t\"iso6392\": \"zf\", \n\t\t\t\"iso6393\": \"hni\", \n\t\t\t\"ietf\": \"ji3ok\", \n\t\t\t\"sort\": 545831, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d61c825f-783b-426d-92f9-bdc17fbcac09\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"image\": \"8\", \n\t\t\t\"iso6392\": \"5z\", \n\t\t\t\"iso6393\": \"lyp\", \n\t\t\t\"ietf\": \"48462\", \n\t\t\t\"sort\": 220841, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ec64cf7e-7c01-45ca-9c69-2f0233a9dae2\", \n\t\t\t\"name\": \"9\", \n\t\t\t\"image\": \"o\", \n\t\t\t\"iso6392\": \"r9\", \n\t\t\t\"iso6393\": \"81t\", \n\t\t\t\"ietf\": \"qu3zl\", \n\t\t\t\"sort\": 562007, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0de92606-2d4b-4feb-8387-0ca7a5b6b171\", \n\t\t\t\"name\": \"9\", \n\t\t\t\"image\": \"y\", \n\t\t\t\"iso6392\": \"qt\", \n\t\t\t\"iso6393\": \"e8s\", \n\t\t\t\"ietf\": \"9sv6m\", \n\t\t\t\"sort\": 794038, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7eec6903-196c-459c-8654-5cf2155998d2\", \n\t\t\t\"name\": \"9\", \n\t\t\t\"image\": \"5\", \n\t\t\t\"iso6392\": \"45\", \n\t\t\t\"iso6393\": \"tpp\", \n\t\t\t\"ietf\": \"dsr23\", \n\t\t\t\"sort\": 328947, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b1a29c9f-1d1b-40d7-b068-61624ab7b0f3\", \n\t\t\t\"name\": \"w\", \n\t\t\t\"image\": \"z\", \n\t\t\t\"iso6392\": \"65\", \n\t\t\t\"iso6393\": \"vjd\", \n\t\t\t\"ietf\": \"qvrmh\", \n\t\t\t\"sort\": 287225, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7adfa2a2-eb34-4794-8401-d73132ae10f2\", \n\t\t\t\"name\": \"t\", \n\t\t\t\"image\": \"f\", \n\t\t\t\"iso6392\": \"5b\", \n\t\t\t\"iso6393\": \"8mi\", \n\t\t\t\"ietf\": \"61ujo\", \n\t\t\t\"sort\": 234316, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5a1a5926-69db-47f5-906b-8724ccea890d\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"image\": \"4\", \n\t\t\t\"iso6392\": \"4p\", \n\t\t\t\"iso6393\": \"vw7\", \n\t\t\t\"ietf\": \"qsyxf\", \n\t\t\t\"sort\": 252919, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"732d331d-d130-470f-903e-a38f6b01814b\", \n\t\t\t\"name\": \"4\", \n\t\t\t\"image\": \"f\", \n\t\t\t\"iso6392\": \"xr\", \n\t\t\t\"iso6393\": \"lg2\", \n\t\t\t\"ietf\": \"af8ur\", \n\t\t\t\"sort\": 189672, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b3e197b3-e2a2-4479-9e9f-c8b19e8c22ff\", \n\t\t\t\"name\": \"w\", \n\t\t\t\"image\": \"y\", \n\t\t\t\"iso6392\": \"86\", \n\t\t\t\"iso6393\": \"7jd\", \n\t\t\t\"ietf\": \"43t2f\", \n\t\t\t\"sort\": 319202, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3c525f49-b370-4b37-b08f-e2ffee4d6259\", \n\t\t\t\"name\": \"2\", \n\t\t\t\"image\": \"k\", \n\t\t\t\"iso6392\": \"nj\", \n\t\t\t\"iso6393\": \"gg0\", \n\t\t\t\"ietf\": \"750da\", \n\t\t\t\"sort\": 964176, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"fb06547d-c849-4a07-9e9d-2b29331e9dcc\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"image\": \"e\", \n\t\t\t\"iso6392\": \"87\", \n\t\t\t\"iso6393\": \"1se\", \n\t\t\t\"ietf\": \"rfkqs\", \n\t\t\t\"sort\": 204996, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"917a45b7-a553-4b8d-a75c-051721ffcef7\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"image\": \"d\", \n\t\t\t\"iso6392\": \"dx\", \n\t\t\t\"iso6393\": \"pk4\", \n\t\t\t\"ietf\": \"3a3ks\", \n\t\t\t\"sort\": 701610, \n\t\t\t\"isActive\": true\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminPaginateLangs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tadminPaginateLangs (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminGetLangs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tadminGetLangs (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"c80cb940-c8dc-48c4-98c4-5757700aaa81\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindLang",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tadminFindLang (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"c80cb940-c8dc-48c4-98c4-5757700aaa81\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindLangById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tadminFindLangById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"c80cb940-c8dc-48c4-98c4-5757700aaa81\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminUpdateLang",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminUpdateLangInput!)\n{\n\tadminUpdateLang (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"c80cb940-c8dc-48c4-98c4-5757700aaa81\", \n\t\t\"name\": \"e\", \n\t\t\"image\": \"i\", \n\t\t\"iso6392\": \"8o\", \n\t\t\"iso6393\": \"m8y\", \n\t\t\"ietf\": \"quwif\", \n\t\t\"sort\": 963985, \n\t\t\"isActive\": false\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteLangById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tadminDeleteLangById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"c80cb940-c8dc-48c4-98c4-5757700aaa81\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteLangs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tadminDeleteLangs (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/lang",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"c80cb940-c8dc-48c4-98c4-5757700aaa81\", \n\t\"name\": \"d\", \n\t\"image\": \"d\", \n\t\"iso6392\": \"4r\", \n\t\"iso6393\": \"rpg\", \n\t\"ietf\": \"vevib\", \n\t\"sort\": 794650, \n\t\"isActive\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/lang",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"lang"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/langs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"5ad1ab83-e44b-4028-aec8-15d3cbf81611\", \n\t\t\"name\": \"7\", \n\t\t\"image\": \"g\", \n\t\t\"iso6392\": \"kg\", \n\t\t\"iso6393\": \"z10\", \n\t\t\"ietf\": \"c5y0t\", \n\t\t\"sort\": 546326, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"dbb258e0-fb38-48d5-8b77-f7c83436a6f1\", \n\t\t\"name\": \"z\", \n\t\t\"image\": \"w\", \n\t\t\"iso6392\": \"5z\", \n\t\t\"iso6393\": \"o3r\", \n\t\t\"ietf\": \"aa07e\", \n\t\t\"sort\": 185966, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"70360305-1699-446e-a086-71deaa2ca4f1\", \n\t\t\"name\": \"n\", \n\t\t\"image\": \"4\", \n\t\t\"iso6392\": \"72\", \n\t\t\"iso6393\": \"c5r\", \n\t\t\"ietf\": \"bo6pz\", \n\t\t\"sort\": 951180, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"b92f9219-da72-4225-9fa2-fc8f6ccd7713\", \n\t\t\"name\": \"f\", \n\t\t\"image\": \"x\", \n\t\t\"iso6392\": \"kb\", \n\t\t\"iso6393\": \"71j\", \n\t\t\"ietf\": \"9kk81\", \n\t\t\"sort\": 587197, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"db7114af-9326-4843-9aad-9e15c557e514\", \n\t\t\"name\": \"4\", \n\t\t\"image\": \"t\", \n\t\t\"iso6392\": \"xm\", \n\t\t\"iso6393\": \"0eo\", \n\t\t\"ietf\": \"tcld6\", \n\t\t\"sort\": 825133, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"1d217fdb-bf3b-4ff9-b9c7-4d3abab64b12\", \n\t\t\"name\": \"b\", \n\t\t\"image\": \"j\", \n\t\t\"iso6392\": \"4j\", \n\t\t\"iso6393\": \"2m7\", \n\t\t\"ietf\": \"yh36g\", \n\t\t\"sort\": 859372, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"09a68642-795e-42af-8dac-49be740d5638\", \n\t\t\"name\": \"1\", \n\t\t\"image\": \"5\", \n\t\t\"iso6392\": \"b2\", \n\t\t\"iso6393\": \"xhq\", \n\t\t\"ietf\": \"dbnjp\", \n\t\t\"sort\": 951601, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"dd13e300-3c5c-4296-9ce9-120cefd4f86d\", \n\t\t\"name\": \"e\", \n\t\t\"image\": \"m\", \n\t\t\"iso6392\": \"3t\", \n\t\t\"iso6393\": \"i33\", \n\t\t\"ietf\": \"fzq0v\", \n\t\t\"sort\": 328685, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"a66414fa-f9d0-4e22-903a-a12e10e7ba0b\", \n\t\t\"name\": \"1\", \n\t\t\"image\": \"6\", \n\t\t\"iso6392\": \"qt\", \n\t\t\"iso6393\": \"ysm\", \n\t\t\"ietf\": \"r9215\", \n\t\t\"sort\": 658194, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"dc2fc716-d84d-4262-ac8f-21620e37c069\", \n\t\t\"name\": \"x\", \n\t\t\"image\": \"f\", \n\t\t\"iso6392\": \"5v\", \n\t\t\"iso6393\": \"wp1\", \n\t\t\"ietf\": \"bicu7\", \n\t\t\"sort\": 638200, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"438e6e82-5d1f-45a1-a957-6af1aec00ea7\", \n\t\t\"name\": \"b\", \n\t\t\"image\": \"h\", \n\t\t\"iso6392\": \"8w\", \n\t\t\"iso6393\": \"ldu\", \n\t\t\"ietf\": \"x71tg\", \n\t\t\"sort\": 351396, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"884bac1b-9b77-475d-985e-a236924c2b05\", \n\t\t\"name\": \"c\", \n\t\t\"image\": \"q\", \n\t\t\"iso6392\": \"dh\", \n\t\t\"iso6393\": \"eyx\", \n\t\t\"ietf\": \"dkhea\", \n\t\t\"sort\": 260399, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"cfaec17f-d2aa-4d9a-a960-e0d63e1d13c7\", \n\t\t\"name\": \"2\", \n\t\t\"image\": \"g\", \n\t\t\"iso6392\": \"98\", \n\t\t\"iso6393\": \"mv9\", \n\t\t\"ietf\": \"g4w6r\", \n\t\t\"sort\": 848095, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"2ca7685a-ad92-49f0-a1ac-eb260a3889e9\", \n\t\t\"name\": \"m\", \n\t\t\"image\": \"c\", \n\t\t\"iso6392\": \"bx\", \n\t\t\"iso6393\": \"82w\", \n\t\t\"ietf\": \"bz1sw\", \n\t\t\"sort\": 303587, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"a7e8722d-9ad2-4e6a-8ceb-278a751357ac\", \n\t\t\"name\": \"w\", \n\t\t\"image\": \"b\", \n\t\t\"iso6392\": \"5f\", \n\t\t\"iso6393\": \"mi6\", \n\t\t\"ietf\": \"pd8xv\", \n\t\t\"sort\": 989813, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"3eca3dad-34a3-4a3e-ac05-243b18b225d2\", \n\t\t\"name\": \"9\", \n\t\t\"image\": \"c\", \n\t\t\"iso6392\": \"1d\", \n\t\t\"iso6393\": \"fqj\", \n\t\t\"ietf\": \"01isf\", \n\t\t\"sort\": 966429, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"c04ce184-2b82-40f2-96eb-97fd5eed7b9f\", \n\t\t\"name\": \"g\", \n\t\t\"image\": \"l\", \n\t\t\"iso6392\": \"jl\", \n\t\t\"iso6393\": \"7wi\", \n\t\t\"ietf\": \"vs03s\", \n\t\t\"sort\": 558790, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"a380f327-c58c-4d26-baa8-91b77d69e350\", \n\t\t\"name\": \"m\", \n\t\t\"image\": \"8\", \n\t\t\"iso6392\": \"56\", \n\t\t\"iso6393\": \"q5j\", \n\t\t\"ietf\": \"fwup6\", \n\t\t\"sort\": 240458, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"5a546d62-fde6-42e2-a4cd-c8192349cb7d\", \n\t\t\"name\": \"p\", \n\t\t\"image\": \"f\", \n\t\t\"iso6392\": \"vo\", \n\t\t\"iso6393\": \"pnz\", \n\t\t\"ietf\": \"xiocv\", \n\t\t\"sort\": 528373, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"e27f26ef-f351-4c39-bd68-ac9a7824b1df\", \n\t\t\"name\": \"i\", \n\t\t\"image\": \"1\", \n\t\t\"iso6392\": \"d6\", \n\t\t\"iso6393\": \"h7a\", \n\t\t\"ietf\": \"szy3v\", \n\t\t\"sort\": 207345, \n\t\t\"isActive\": false\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/langs",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"langs"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/langs/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/langs/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+                        "langs",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/langs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"c80cb940-c8dc-48c4-98c4-5757700aaa81\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/langs",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"langs"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/lang",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"c80cb940-c8dc-48c4-98c4-5757700aaa81\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/lang",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"lang"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/lang/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/lang/c80cb940-c8dc-48c4-98c4-5757700aaa81",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"lang",
+						"c80cb940-c8dc-48c4-98c4-5757700aaa81"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/lang",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"c80cb940-c8dc-48c4-98c4-5757700aaa81\", \n\t\"name\": \"5\", \n\t\"image\": \"7\", \n\t\"iso6392\": \"wx\", \n\t\"iso6393\": \"8gy\", \n\t\"ietf\": \"1znm4\", \n\t\"sort\": 877644, \n\t\"isActive\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/lang",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"lang"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/lang/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/lang/c80cb940-c8dc-48c4-98c4-5757700aaa81",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"lang",
+						"c80cb940-c8dc-48c4-98c4-5757700aaa81"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - admin/langs",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/langs",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"langs"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "46553d14-688e-4f0c-ac18-cccab9249897",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

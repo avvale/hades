@@ -1,0 +1,44 @@
+version: 1.0.0
+boundedContextName: admin
+moduleName: lang
+moduleNames: langs
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    nullable: false
+  - name: image
+    type: varchar
+    nullable: true
+  - name: iso_639_2
+    type: char
+    length: 2
+    nullable: false
+  - name: iso_639_3
+    type: char
+    length: 3
+    nullable: false
+  - name: ietf
+    type: char
+    length: 5
+    nullable: false
+  - name: sort
+    type: smallint.unsigned
+    maxLength: 6
+    nullable: true
+  - name: is_active
+    type: boolean
+    nullable: false
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

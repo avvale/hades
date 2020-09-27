@@ -6,35 +6,63 @@
 
 /* tslint:disable */
 /* eslint-disable */
-export enum Command {
-    COUNT = "COUNT",
-    LIMIT = "LIMIT",
-    OFFSET = "OFFSET",
-    ORDER_BY = "ORDER_BY",
-    WHERE = "WHERE"
+export interface AdminCreateLangInput {
+    id: string;
+    name: GraphQLString;
+    image?: GraphQLString;
+    iso6392: GraphQLString;
+    iso6393: GraphQLString;
+    ietf: GraphQLString;
+    sort?: GraphQLInt;
+    isActive: GraphQLBoolean;
 }
 
-export enum Operator {
-    ASC = "ASC",
-    CONTAINS = "CONTAINS",
-    DESC = "DESC",
-    EQUALS = "EQUALS",
-    GREATER = "GREATER",
-    GREATER_OR_EQ = "GREATER_OR_EQ",
-    IN = "IN",
-    IS_NOT_NULL = "IS_NOT_NULL",
-    IS_NULL = "IS_NULL",
-    LOWER = "LOWER",
-    LOWER_OR_EQ = "LOWER_OR_EQ",
-    NOT_CONTAINS = "NOT_CONTAINS",
-    NOT_EQUALS = "NOT_EQUALS"
+export interface AdminUpdateLangInput {
+    id: string;
+    name?: GraphQLString;
+    image?: GraphQLString;
+    iso6392?: GraphQLString;
+    iso6393?: GraphQLString;
+    ietf?: GraphQLString;
+    sort?: GraphQLInt;
+    isActive?: GraphQLBoolean;
 }
 
-export interface QueryStatementInput {
-    command: Command;
-    column?: string;
-    operator?: Operator;
-    value?: Any;
+export interface QueryStatement {
+    where?: JSON;
+    include?: string[];
+    order?: JSON;
+    limit?: number;
+    offset?: number;
+}
+
+export interface AdminLang {
+    id: string;
+    name: GraphQLString;
+    image?: GraphQLString;
+    iso6392: GraphQLString;
+    iso6393: GraphQLString;
+    ietf: GraphQLString;
+    sort?: GraphQLInt;
+    isActive: GraphQLBoolean;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface IQuery {
+    adminFindLang(query?: QueryStatement): AdminLang | Promise<AdminLang>;
+    adminFindLangById(id?: string): AdminLang | Promise<AdminLang>;
+    adminGetLangs(query?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
+    adminPaginateLangs(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+}
+
+export interface IMutation {
+    adminCreateLang(payload: AdminCreateLangInput): AdminLang | Promise<AdminLang>;
+    adminCreateLangs(payload: AdminCreateLangInput[]): boolean | Promise<boolean>;
+    adminUpdateLang(payload: AdminUpdateLangInput): AdminLang | Promise<AdminLang>;
+    adminDeleteLangById(id: string): AdminLang | Promise<AdminLang>;
+    adminDeleteLangs(query?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
 }
 
 export interface Pagination {
