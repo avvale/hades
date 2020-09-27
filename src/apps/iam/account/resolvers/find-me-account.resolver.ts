@@ -20,11 +20,10 @@ export class FindMeAccountResolver
     {
         // return await this.queryBus.ask(new FindAccountByIdQuery(id));
 
-        const token: JwtToken = context.req.headers.authorization.replace('Bearer ', '');
+        const jwtToken: JwtToken =  this.jwtService.decode(context.req.headers.authorization.replace('Bearer ', ''));
 
-
-        // this.jwtService.verify(context.req.headers.authorization)
-        this.jwtService.decode(token));
+        
+        
 
         return null;
     }
