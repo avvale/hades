@@ -1,3 +1,12 @@
+export interface JwtToken 
+{
+    jit: string;             // id from this token
+    iss: string;            // name to identify who belong this token
+    iat: number;            // timestamp when this token was issued
+    nbf: number;            // token accepted not before this timestamp
+    exp: number|null;       // timestamp when expired this token
+}
+
 export interface MapperOptions 
 {
     eagerLoading: boolean;
