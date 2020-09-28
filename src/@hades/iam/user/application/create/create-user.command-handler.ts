@@ -7,7 +7,6 @@ import {
     UserName,
     UserSurname,
     UserAvatar,
-    UserEmail,
     UserMobile,
     UserLangId,
     UserUsername,

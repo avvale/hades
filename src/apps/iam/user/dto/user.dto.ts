@@ -6,7 +6,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'e8a0bf76-15a6-4b08-b470-aec36c59e4d2'
+        example     : '5109fd03-621e-4c9b-bfcf-b240394770f9'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'accountId [input here api field description]',
-        example     : '22471b50-059c-4924-bf1f-17479e3aebb0'
+        example     : 'a8ac502f-deeb-4168-934f-3d5a038e830a'
     })
     accountId: string;
     
@@ -24,7 +24,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 't3idohdphd59r7qclqyscv2xqfrb118ef1c86z6xmg9ei8lfo6jnilgrfgtgdi2h37yfoy17t7wlm77lkpcgl1ea9o1dbhh04qmagojw279tdztcmc3lzx0x909et9gie83s4f496h58eff6q219iemkiju80718g6gexzhhfc4rvny2mhf5tg9jeq27abfzrhp8gr9souyiubrqc8w9cg07pc9yxk6uh6rzto95jcspo0rrvodb3peohbbucs2'
+        example     : 'bou92in8a36as64ncylli36y5tkmj4eejr4x9j95tv1yrxdi7py4kbs9rjro3mruqbq627wsau5l9quh0ldfzlhsr8iivpdtid3bi07fgdyosenmu2ec4nugxef191skimqi1j5xb6aryg6ggh5udgektd4x2yqaxgl67dx2zcu19izvfomk3kzk5q02gllukr24q9w4saekz6wzjkb46wl86b9o9b4v8wha5bfq8373sas9u6o8wv7q87go5mz'
     })
     name: string;
     
@@ -33,7 +33,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'surname [input here api field description]',
-        example     : 'ot0bqnxqsbvpdlzxpsf6cen05e2psemc2ery1sgf0ai0szdu6tepj9r4h536vk7vebf9qe167az6mpp6l6csw36mzaqxu8b4iikwk5dqgzayf9zzz2bbrilsn1252zessqmh679jfaxt856w0djd4srta0zxkryn0o4q3eukkb09x21yv7nxzhuc1ryiotrnyyfxthce7q7x96jlml3kiciqoyg7kflozjxu73sfe4ez4akvmnyccaov7wlaa9s'
+        example     : '7qsxdgqozgfidesmiml8h8ndynim1u2jw69yf4vqz636u6ajllziw8p4kymx3pu2wdky47g2a0vqm1rfzj3wgn9br68sqzt5ycnpnxlpxkseeklk0ctxlpccvqasl9jiuhif65z5egrep74davpbu6u2rd10mo9j658ivziayqu316hq3wzh3njxradtjc2xfinupmb4lb9eerhvqo6u230ebvvnvuaazryh75gyhlj3giqkbfe7lt0dt9eh1hu'
     })
     surname: string;
     
@@ -42,7 +42,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'avatar [input here api field description]',
-        example     : 'h2z0sgjg0bteukb7stxthuquuke2ov05suph0hbxx9t8ex3ezdjsylmscg5gimu49oie05u0hx1xy8uxsx1yymbda31wvx1r6gfgbu12x5bps46sowthpcvexf3u05kqrbpoc4g157b8g8735f227il6wc9gjdjzmiht1iv7o7lnxi8vy4ch3ft46djksgu9jj6j89nzpgfx222omld82a155r2ukx25wupj1yo6k5vrl9kv8pf1stb546bnsl8'
+        example     : 't440ynm79avltllujuscofww9799mfcqmnopxdteivhcbo5o2r0r96ien64aiqm96jyaxfun8vx28kwa28p9wbgz8viuky24q1tidb8i6bymtr2dw25jvkkkzkexfsg3ej8vaeg867a88nfh1mau7mijbg4crrosxjet4ir3rk9844jdumdpo1v0ebvu3xmgyv9sex05i530a586izmb8kjkxqcelgrf5d5rwn9mogkt5ky7kmcpvowi85e9om4'
     })
     avatar: string;
     
@@ -51,7 +51,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'mobile [input here api field description]',
-        example     : 'ky9undcfn5ar7a0gfw8lunp7exmqmcx0o4rv8kiy4coj8tw4iwro81wuhd19'
+        example     : 'ynyh1wxc3sq61g6653oj19omn2vy0a3msbxnm10izgiz9p6fjaw122u1cn4k'
     })
     mobile: string;
     
@@ -60,7 +60,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'langId [input here api field description]',
-        example     : 'bf7dba2a-e61a-49be-8f61-1629492d0de6'
+        example     : '7bb5e1e1-5d7a-4f51-97cd-6b2713dce924'
     })
     langId: string;
     
@@ -69,7 +69,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'username [input here api field description]',
-        example     : 'pi6jmnnvn5k5kjemu7lj9cftb2u7y8bf2oy16w3yxaei2ofnpxdhw60pklcmkxp9j7xvihkxh28j4kvowd00yycw0tqx4vvs69m2j678cyuxshwpti27uu9q'
+        example     : '91s6tjumxwdeqzefs48gry9eo0iukua3xv9qrtqphu6647htrdk1lgbxmyy5t5vlk78dag76kd8yrchif9euk7o5nuq1y4thtfs959sgof08k6tlt8ibxm6d'
     })
     username: string;
     
@@ -78,7 +78,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'password [input here api field description]',
-        example     : 'pmcdf75rm7xddforcs4noiqmeo1ypr6rxiljin3kpsspohfcqlrsvu5u3klgr17sg38agzoxc95qtwnp7n9nvb3orftkamszbqgh9ds7s60oll0pu37mh8g1vzwztzxbip8p3hxkyd1wx8eq1kym3wvsjhtp30wyoutrpwik66j3c4fzxdfh21i3x38undig55bdyevduazage30i1rh0chpwcy9avi1h9o55b4y0yvmg6k5k91pmeofffnru6f'
+        example     : 'hscg50lqbfjdh8mktzbl2gpvpb213ullqvfbk9o8meg9eiozk2y9as6y6wm6xhc3kzwhmffh8x4qfcfj12p7hr5ce7c5yojrcakvadrkzv6oidqjl94r3a5r7k5n6099mwqic0mzfccn2ousy53xv4p07iktc6vvkfk7kveqjt3igyz3v8dfozgdmred0tatyo24n1y0lasisex8660911xpt5bcjb9vaw81cz1sl319ys8c3ekirqkiufrqpee'
     })
     password: string;
     
@@ -87,7 +87,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'rememberToken [input here api field description]',
-        example     : 'tu8n69hox23csi8newrs2ebixg9s657nzj66vtvuqr8z03wqnnht2fuxzc0z2ngykk4hr5eaolwpw62yv7q2ou0wfaudurx7b1oi3f786v0xfmkh6n07dadoc1j9x2svru76jiiy5m2b7wp2hkjgoai1os0vrogk5ybjgdzmw1aw0z4mkryy714aftn6zgsxa6sl4z2slu42qbyn4j9g8abrzkkr8u3hiiqtv8cu7qh9ack1uzawcduwvvs9v8t'
+        example     : 'jxg3iu48u349fvjo9behaxtodwed5v24ih1mhhhjsga2k30phtiyeixdw9ctpxzxd7zaks7ktgyffkhc41mh4eizu0e84jp9j9olmgrfjd37nsyyl0pcigvwgtc19wq7u49s4vgmtk4xrmtvhnz12jx8ia12npwjltvov3vw3xb5iw058zcwp26rko1m9itjt3rlps5185r3yzmx7b2o0s2xltjrb56vm8efu0y688w9wybaf70abobeb3qikdx'
     })
     rememberToken: string;
     
@@ -105,7 +105,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-09-27 21:59:02'
+        example     : '2020-09-28 11:48:08'
     })
     createdAt: string;
     
@@ -114,7 +114,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-09-27 13:47:57'
+        example     : '2020-09-27 21:25:37'
     })
     updatedAt: string;
     
@@ -123,7 +123,7 @@ export class UserDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-09-27 23:24:31'
+        example     : '2020-09-28 11:28:37'
     })
     deletedAt: string;
     
