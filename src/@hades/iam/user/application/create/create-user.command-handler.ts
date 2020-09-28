@@ -32,7 +32,6 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
             new UserName(command.name),
             new UserSurname(command.surname),
             new UserAvatar(command.avatar),
-            new UserEmail(command.email),
             new UserMobile(command.mobile),
             new UserLangId(command.langId),
             new UserUsername(command.username),
