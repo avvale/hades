@@ -4,7 +4,7 @@ import { CreateAccountService } from './create-account.service';
 import { 
     AccountId,
     AccountType,
-    AccountName,
+    AccountEmail,
     AccountIsActive,
     AccountClientId,
     AccountApplicationCodes,
@@ -28,7 +28,7 @@ export class CreateAccountCommandHandler implements ICommandHandler<CreateAccoun
         await this.createAccountService.main(
             new AccountId(command.id),
             new AccountType(command.type),
-            new AccountName(command.name),
+            new AccountEmail(command.email),
             new AccountIsActive(command.isActive),
             new AccountClientId(command.clientId),
             new AccountApplicationCodes(command.applicationCodes),

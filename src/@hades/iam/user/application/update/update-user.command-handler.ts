@@ -4,6 +4,7 @@ import { UpdateUserService } from './update-user.service';
 import { 
     UserId,
     UserAccountId,
+    UserName,
     UserSurname,
     UserAvatar,
     UserEmail,
@@ -29,6 +30,7 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
         await this.updateUserService.main(
             new UserId(command.id),
             new UserAccountId(command.accountId, { undefinable: true }),
+            new UserName(command.name, { undefinable: true }),
             new UserSurname(command.surname),
             new UserAvatar(command.avatar),
             new UserEmail(command.email, { undefinable: true }),

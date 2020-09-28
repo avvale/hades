@@ -4,7 +4,7 @@ import { UpdateAccountService } from './update-account.service';
 import { 
     AccountId,
     AccountType,
-    AccountName,
+    AccountEmail,
     AccountIsActive,
     AccountClientId,
     AccountApplicationCodes,
@@ -28,7 +28,7 @@ export class UpdateAccountCommandHandler implements ICommandHandler<UpdateAccoun
         await this.updateAccountService.main(
             new AccountId(command.id),
             new AccountType(command.type, { undefinable: true }),
-            new AccountName(command.name, { undefinable: true }),
+            new AccountEmail(command.email, { undefinable: true }),
             new AccountIsActive(command.isActive, { undefinable: true }),
             new AccountClientId(command.clientId, { undefinable: true }),
             new AccountApplicationCodes(command.applicationCodes, { undefinable: true }),

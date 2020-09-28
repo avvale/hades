@@ -21,7 +21,7 @@ export class UpdateAccountResolver
         await this.commandBus.dispatch(new UpdateAccountCommand(
             payload.id,
             payload.type,
-            payload.name,
+            payload.email,
             payload.isActive,
             payload.clientId,
             payload.applicationCodes,

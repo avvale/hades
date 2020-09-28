@@ -3,7 +3,7 @@ export class UpdateAccountCommand
     constructor(
         public readonly id: string,
         public readonly type?: string,
-        public readonly name?: string,
+        public readonly email?: string,
         public readonly isActive?: boolean,
         public readonly clientId?: string,
         public readonly applicationCodes?: any,

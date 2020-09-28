@@ -8,6 +8,7 @@ export class UserResponse
     constructor(
         public readonly id: string,
         public readonly accountId: string,
+        public readonly name: string,
         public readonly surname: string,
         public readonly avatar: string,
         public readonly email: string,

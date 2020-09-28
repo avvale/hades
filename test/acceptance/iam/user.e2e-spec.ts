@@ -57,15 +57,16 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'h2d7h1zs5thk9kurj9c4kvl9l7vcwnlsazgb1zqftnqp5cbklc44cbc2q8vi8e5je3cljms0ws7pdn1pi3zk3mfobtgu25hhw4ms8f34ba4z3q6625i3qbw7901v1a7mrwsqz90k3k8trj3kpnud14aoje3bdlqf5ozkxrp5i2kgwr2rl3lalxdhn0xq0gfg3b1u73cy146gzl1yh9t1ezjfx7bgdjag9lbau51abq1dt2aqf7wuw82ruomhz6j',
-                avatar: 'rxexbbk666mbdah2plsxpn2tbeq1zq830incjx9kiexk9lkf5gdxzc6gmbus6sqgatnnqsg03ram29e6w317ybebkiev4dfxuy6n1cqv1s8g0ci76wf660jq5hxs24zr1g7kjfo10zmk7t2k6wbqqos5zrh503806wcmtepvgba0765tgnsjxbsuc1xq67pxqqemtm5ml4eo28q9kabmgetzungnk3wvqdbtd91z6funi8qu7cgxf4gg9bwq0hq',
-                email: '218wmdvf9o4izzot3j0rfkh17iesv9mpl6yt4rd636otdpiztxhh5duwr2il2mwp5cwbi8ht9tyhk7cucazorl3o3vefwgk1ih5afglz4woebjcnuzw0ep0j',
-                mobile: '7yc8dxuvy0lljil4klrqa2wlz5lx8pxsklqm0yj61k70rh2rwx9va2nyefaq',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'rawl78rwua1kv2px53teedro4wnvqgvm9p81hot27fo65goeo74hdhy8avjuqlv8g92vf5zhzz4ll6bedt7u19l5namqahukurlippo0n7xtu1dwii0c3y4z',
-                password: 'jhpgt9v92j9lnraggcjotadcgdekqpe6kb9tvtpg6r3owmbh7462t6fq39bim1dmgeb1gy9was8rd1zlvw1hy84chysr4tdms251yf97mltx2i3k52e2zqq8ozk3demz1px7sclsr06chbm45ikriylvxhcc7xo6v3solhps1fl78dq8no4b8gd43nt3zem0cdiojl5x7n6fgk3rywnpbpekm4pxj2thm48h8bi48p9sg41o1tyxlg4alp2nlth',
-                rememberToken: 'aw919735hcas0tl1k9v5wkfvtwfs06bnky07sore34m6mq7hvmw2ss0jhmen8znljkda1xmj33rjn34pejyhnst64zzi7swadyz7mwvtib35lxwp28x57er8gdvfq84msmhefddh1k68tzfug3x5tcbmm04nz5x97qi8wrc3koteyj3z0v7k2g1uxxllsptuo7o4p1aw2objru6iaykby99przkmopxo74m7rr05avmdhxqdvmip0pyx51p5fsa',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'ywak4110u75zi7eqx10jwotlies4htk10ci9mc5doz9abqeo4i986mmjfc5grb5vm7i93cb7m0uvrtfy92iv8nou0640wciv2790j2163w5l4uc6sgpxqj76q40q4iowfm2cfnu4j8onns7qm2zxzjax78p6f2mzyjwfz13qs6pyy7khipkn1dyfiwv2qvf4jkyybbn6ppv2f13aph5vochcwgc4rkhln34nnmura15elee8jw4swyteoe2gz34',
+                surname: '2masov0g8kcej7gpimz3m0axho3q0vcp76nbvy99z0eywmet4bhd2sm2yp2tpb37wu8w6ircua5jdgjj1yil9hnxrmig3i2dtb2kndcjg7qq6kq06biarkc7jjot8whf2gosm8qs4o2d2vsz5rgxeaky5gx0zrdccwvr3vbi8s20syk1d8p2o18cmeypqm51kf5sra7f0k5999n9q0zlkolrfiffahq122o02ntcll4zsvzbjrz2mid52u3fr41',
+                avatar: 'ga7mzqgrmeys4451be0pjbo8vvrmujsm4ige7584r34pono3u7665308uwylw921utg1iyyys2mhe4vanz5dav8403v6ne1lxha6wtq0q13u37979cxveicxhkjvw8zcddiuwplmqeelm2xvhski995031ooivq9gfexyvg7y0qllkuahghp0crtjugdtl0rme7a1a1fhccqssv79n5xx57gxvj4q7pqt31g0sajhl76uan2vhrznjx2t0yz1x9',
+                email: '1avrcgn7ac7mde2ol4ngyek4xvhljpum86nx9c7q4m8tg2hsmiuex9z1h0ekh4ygtjtfeys8vq931dplnxw12h254p4x1ewhitu936d7nv0cyryg3lvq9yw5',
+                mobile: '7p6azoylflixbazmslfeweex79q29gpalplzprk6k3s2ucxx7c2o5z1f8qxw',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'qz7wk702plrhd2g3ikl4k9i2kfo2349atp1qbpvbet005ombjvwfmrpavc704wg8p6qbau3r4iz02mumef8cp4zdtt91d1afvf6b473doxes2mxl4n4r1isz',
+                password: 'f1lrpihgdzj0xcnilqkthnqot8roowaehut54y62w6m1qufitotf38vwhj42ddtusbf2vtnjjxaukb6usceotf2n7jgjenmuur1yibu6djczm4utx3ujotyvvszucozcs997raitiiamifb98bl2s82mmg9phoc3fnn8ft916wf6kzpq7d9lujfm2ozueumgyl4cfc8hezeyo4jppkyhdmivpsh5xx9kc04cxdaci1k9qdsbal05phk7claer0d',
+                rememberToken: 'ivvnsop8m6ll8zxe177wu8cmehqep6ahdueeg6c1s4n3iilm6okr7jlq8tkain8g5pisoz37utw01hpgov5q18qvlqywk8igp3vk9fqf5mrmvjyc5dqbmpppd4h6tqilia4mbfp19t8hwv5gpikm6b9da7m8j752d7lj55dlhjdjbhs0fmawsv844v1cuz5epu0q69tehy1xacizzbrr1xt32bta0yte7c1kw5waz6jyz08mrqlnv2xugdfpxu1',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -81,15 +82,16 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'f19ym9tabdrh0ss741oizwnhvw1s24m2nebl8okiz517jgzusehy5ir1rekvga9ukdhem768otte4ukrb52g7nhfcs1yol1w5a1oxobdnzsm62gzt076e70d62fhqty4dvvz4hxe3q2mfer45sox1g4cui0j1umogdphvpjdyrep4zo9saeo0u7mkb346hfwk0zl0kubbsyiobszs2rp7u1qgofzgtub3b4x7q6v8tkombjpb7b5aheyrhptwm6',
-                avatar: 'xr66nkspsoey4uwn1xnr7i7bznevxfwvm37fv2wzk6egbdifxjgfag2w7go2o4iw1u5eacbhjpt3mxou3b5dqoi5xei2rt1jvsepzjmsickgb8zrpi74yh11xi8h5za1g1646payp04gdfjvvqr5ripcslrz0p038q5czvy36oukj4xucaozaf2juh5la6u4hhi3rmauer0gbnxr7crx8w2ovthynu56im7992xo1lk9l3gmc787z4xq07lh2yo',
-                email: 'jf2oj3wf7ey318nbngd78pv5ychm879k80leiy3tr29n5809xun6vbnv611zx5y0zgb7lyei4902xbdbdaz86s8kwnz32tqwxdbb7gq3e3ju05afu442v5nv',
-                mobile: 's2tqwsw1g6t8r64wx3lbkofwksimd02n1tuogxph4xctjl09586z61ex9oal',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: '5inf5y9or9mvort6d4udl1aw4mkq9yimiv8ltelb5pyffx08erad7214818embreovqg66v97kwpir2463eqoz9ivlnuift9dvkpl4m3oz6tplafqmodbw4b',
-                password: 'i0208e4q7rngswx8yw3qqhs2nfhn56i6scdd5ap08w37ke0uyuguot7t24bnc351cuscg6h29al3ttytq296ock77x7d667arso1w0pumyj2i4v44z5n8c7z1b7fjd4dhfy9234jfxzoivuinl7tfyf2yl43daj9gckxhsc1g5abzn7sy4e5qgki0lgxfq1pl1dehrumrfhpdjk5sjjvrujkb2bguh0mc1j4ho7j5cfvn3i4tiygtz5krnmjk0x',
-                rememberToken: 'kqjjgyfveo5u4i6e9mzh4et23kcorcm72dno832j4z701exoqn8il15gap1y7zjspllrj0r1jnjnbtgm1n6ewjd9kfym0vep7fle26cjwx6160xrvazuxwtii0854tfsfr9j2qu92m7zt4aln4low5z7t121ctrk1k29gff58tqismid5845g2t3twq1p3i3f1jyw59nvucx951ykys8299ltgboe5yi2a2k2iw11aswz8q0bwohumtnn1qj3u0',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'lyzpwdn48bi85tugkcqijtji8inuslmjv6900qqv4ka9dcbbp6yn6gl8wy83nh8qw04wzewbwlr331wj5tuvepmmjw8qr15wzgeghj1vm0i6p6j9nti9kvz97ca3hfw31ypyfrqt1esx7n6qn4ff72949t4zbts1ck1ixhi9c0zg7nkopeoz1gp1ugrdz947e9vg40w9va3hsgimvk0qrzg62du4bihpnfn6sczivwxg9k0itf26xqglihrfnff',
+                surname: 'wjx6a5umn6dwynhbs8tsolzts6t4abinc8r8lac2svtw825j17gk1axxe273pxkb7khzcv1cwqtrd4yg57q7rj9lf95mf7mnlrzfr18ncowfafv6mubdhafd7ij6y0v5a5ecc9563mzkj8sh9aabfgty3lhotv7wagsj80hxqxs8ui1qqwbkztcmvawvwygprp63vvfx0fir729kg4w8wnkq81pzocfigbs7py7p26b9skoyctibboxgo7y1sw6',
+                avatar: 'od2dm865152p5byeftwq4y0bzwsopwuxw5jbj9dlqze89gihyozniuqm97i88ssvbr9h7m4q3u08hj00nobox2ah6pf1cz08cawtmqnu4a19hz77pd5r75fi3mv29lucnpxxo7hsau52zqr3iqashx1qoio06m7ykrunntv481uauv8wzhvnd94pjce2h9iu31ypx3bu76xk6uqj9ry9nk6a1g1bvmp7i4kq5cgd23xy7bmzk1agl1dkjyrbr3z',
+                email: 'fy6ncjapgvdt0wdxi53f3zgwskzg3idk8z2ydctsjp6uvniw6ajzp9vmokdake2cn3ldy551ewp2rw5x4mgxutd2n3wgvfsopo4cnb0por6hble2p8cg3wkc',
+                mobile: 'brimkcbc12nectybdwcf72nczr6c3l7mdvmv836to1ft5brbls43t8ldil13',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'mh6jwlbviyto36ev4nf9t03gitstucpw3mm7ng5l3usn33fmxgvf5t8fevzvdcmzpshckeik80injmumvbtdlf6c2mkrn0mw90bybut9idmh295hh1ru5a7i',
+                password: 'r2j68iwsnm8pgf4ja0wbuhfkyzvic4x12ge4m4hdhspicgglgf24key56vzqq10i3fn2igt54ba7cdb0wrjpm9irtioux05hhz9v66aboop4vbz7r3vftlkpydi9k88c05jjhnsrv84yh8tgp0de00na6vg39qz2punkltz86bet0yw0lhfl554dqjub8lo63h434mjd79pag3ognbup9owa6bai8wteytupd9w5ohk29f5ftebzmry9nxri96p',
+                rememberToken: 'timz4dwclkts2ngx4xmapo4q7jf8q8gh5p7ryrwaqacrf0jddupg7gy09tco20lrtizqma49t1fvgdyfj13gt82xfjtllgqlkr5rfm2rjhvouhu0a2s14e2aq0qpri51xacv707vf47vzy9bnmlqytnen67q0llwq71t6d2u1tprjal9924zt5xopmpfivlg1pepqprrgg53j0o0s2amfmgyhpf214u3j05icgq6r5d5uwa2poqf82jllsob3ml',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -104,16 +106,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
                 accountId: null,
-                surname: 'tingzy2x8i58c6r6k9kwxqiozkuynv3cc10xn1bj9r3688brmta544cs67rnozebnp81wc3qdy15omaycl2tphwzyr8c4m5xzmlbeg64fk29ra7cghgmsegy1ghcfc1qnh75df62ru0ydn7v3eavwsc9ht5gw9qksypbaa48adxitow6ryn52m29aw0hz366e68my244nfb3b3gvgofzqycl13rlnd9r3j3kgjgoooa68r91j4mrui3s2z8ngi2',
-                avatar: '21dkdm7lf6u2buxj5d76waxfxfhsj1onsv45faryalu91lliwww9j8i0s5dynzjibbnar9yxz3gqa6y38jns3qzx10f0a8v72gbslieyg71vpjqkr3z2mibvz5ff2k0qb0m9osi6ku16bujjf1uasvfq7ghu73voe161wbu7ksngn4x32b4mxipi118rshinnpb0qlcfau4bnz0rf4yfdfjcfhix0f5u9y2qwv7cckux7fyomk7tzv3wifnez1x',
-                email: 'uvxpn839ysxw4yshz3n2zp67yr3yv1oh800xy5fwsszp8qjbkr0wv4qnpqvqluuhduwaxahttn01er0oux2ursabf42mbram71vc6il48crlx73vu20heus7',
-                mobile: 'm5bgc76c7ma9suz5oef6uh3qbb98pcuiwveh94g9av4yfuijn6u62jm0sdpn',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'pvb28mcmo8py1jkmg33h8saetie2un08gp8tg0jhgc1fuy7eyqfe98yfkzwe161bxt1h13ioia2ddq0zymdjri6iyct572nvmpcp2s5fbtyos5l4udhf0okp',
-                password: '8y4gu7l9n8cjvz196attpanxozdan5wumpa9abhuinklk1vyzxj1th6huuq4mvmgtqxzb8452tb07q0ah62wlotthy3ofr5mar35nblp2tiie3t0i372tj7myetecxx81nv4r9vddyx8ej8tvtud65azh9hcwnazkv0paj79i506lyb9iz5e3bimyegaso4scp1ifhqvnzmpltis11r3bv58d34tb8f25wair2v5a8ur2a295e27jfih69iutwg',
-                rememberToken: 'c8tq085zem5rgd9gser8t0dtlektnc8gb5kpz4y0hn5ugsska7lza0jyw76pmzmb6schz3bhqw95tnfw17cto1oeaa109ug1mvchs4huqltkm7ud6ugyeb78243a2yfxx8lp5c07ex67ivh88m1ydq9yjfa0kgozyp2u7eqhzplch4ec6o3wmd27tpjb0n1lvq00wz7pq8nvx2sw755zrpzfnrejllo9b9i0yu7xtjj2vtjjz00b2i5i778nzbo',
+                name: 'q5zgx7u6yopcriqotawssz2b8ghw2g3ez0lk9t1dn06sr5j3of88lch53uklj9wlwn2akeuorgm7m2fv8vl3mkqv6s0h40q98t0339x6naw2db5zu3cleruttwvfjdvkowqyj0nc1484yyilbxjonryv65s0mpc4uz4me09etiwagt4nz0c2oda9c3e8n7s0a1qwh2d8yesc5lgjdw29w37a6ylr2xsi1m8n5e4c9gh6tdn4mkmgb4vbnaoq1up',
+                surname: 'fcdvh9fu8rcky6w2ao6dchv1bjr5plgy3yfrxj6eozutogundgv20thoavsm22xqdnxv8t4ccbf12ig4etqe16p3602ui3kv5shsr4cixs8u0fo2x16fk2hymyiwupzla9e62ndj9eedf8qq3t2sklget81tr5unj5thk7p7zkpn0klhj95ed3ch1y3ic4aek0s60nuu707gniso37sexj5dharwtx1vr2svjewpu8dbgygokg0gsgjt16egunf',
+                avatar: 'm9auh2pgvzfdq2wdodhurjn0836s9yp0e4qeduke1w1yytyvvt8zqja421sg25ijlgu29oi0ork9blg5p5xk6rvlz2w624pvdw391n70pog20sxss3cgul9nbdtw1ikolz48uyvndxbc7yuf53hh3szth2po4utlx042b94g93d1q2xwdlftoa4v7wqt06o85n6wmx9pxl035j6d93o8ravqixe6ts302wckprbmj50kp2qlbai787on155mv28',
+                email: '3x6967s7hr5j1b8hknpdahr7xh4n67onry6222rw2d5jjbb1sf4j5ecerktkvzyr9olwhh7jsvq1ius9z6x2dqpqpq323p1t7l9bewb1hodmuub3m2b7fi0g',
+                mobile: 'kutopece8kdrii00yp6rli7y1eh6unzmp6qr5lwet8ehnaerrrw07piiox0n',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'tdmyyewsiq1zmc5wxm9r4rzxel4bxilrnej9xytlkpruq7epq8tn3ad69ah0g1wn6q8oeqfeecws1hknticom989opyka48b93os6bul8tdsh5h0dzwj592s',
+                password: '4l2hvsv8gk5yfh9b5phij17uftzz8cgh4g8896i5diw1in5bvqm9hjss6bifu477qwhzjg72tl3j0bjn1xsz5jwkudgmwx0nhn1t8xn4t96hn04iod1ce6sjtbqhdmt9zig4b92ds8x26xf3jozg6saiowbdi2vcx1ilp6t7156fzxwdi6afopsprfqt0gde2utrueftwo2dyaewzuxryhhmjwaixzxl824x3fn2yobq5s66c71qa6t2ycag7a1',
+                rememberToken: 'nh0qwpgnrmvpnko7zgxjuugua0gtbzmqmzp560iyfsg78hj9oqfni8ux8fxgxpas543stwhohgiv9276xv2oqojvioox70v362asruwpdw33w8a1ksqro5prutstrxsaacnz2hiefxx47muifthlklxepnj4hty4cg3tnk0aascqw9an5tlppo0fvfbl76cf6vepqi7r16192qi9s1ojolqm62sbjffhaa2nq9pvumveumlspsi69idjugc237c',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -128,21 +131,72 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
                 
-                surname: 'levsbqxwsqipiz2cwzjhpd0z7hhv77dev4b1wv8lyze2usg0d51x21gfhgnuubqd3uqumz9tm2eedysc03gd53w4owwolkh9hyc67z15e2m1dv74lsx5bs59wkvlm8fflgije8oul7z61457zs4ar7tjvob7pueo5bhsciidh8qcasjdh3s15ipwzfonv3hu13b9cyj6d06oi63rk7zsfg3k4ajh63f6bt5kxpioe8touu6q7ii418rjxvbddnm',
-                avatar: '5x8vjtp3lvi1b2dgfa33h6lex97ficx1y4blru4mn6el43mu071gv8fcqnxzlc70of2ce78anuokw1dd7ao0803cwjp8qvne33jboz1jruh2ei4b2rmo6yapjax972m1xsvczt2tyn93fbynoad3zdgfn4t4ut2dfgt65dq9k3tgnt9uuadp662y4u4uk006h1853e2s6497skzwd8gyinyfy6itp51l1va05g37qhjsdjej7a9sh7k22id8whu',
-                email: 'ufvqdze29v2mudqdmtlvg4pjxzr7tm5jsmirmbut8ssno25w2nu2jq8mdo6ejmqpfkjf1jnujs9nyhs2xxq6oasijrp25a5qgu4ffpntcbvbiid1s2iq8b8s',
-                mobile: '1e546r9cfib5mjlhvw0qta95cpm6i9ogyx6c2zreusjm0g0ea6uzxqunec0o',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'bimrevukypzmb6nnh485mp61jcpuu6w9udgrmmn5sc1r37fk6j3lvdmer2zyl5mbkw2mbiv7wb5j47kpudlqfrpw1qc4wxj061r5337b0by8hyf3o7kd6bt8',
-                password: 'ujclu7b39ykifur05f3su0rpuqw3hho745q6f4jl66jswpnhhue16x0ihmc61l3x8o5hil3qy635fi4gf32v01cjf7vzqv80o5mz7zkuhi71v74fymltwr4li55d0rreu8eynbbbh15gl076se77ri1d6znr2z9vy0un7m72uytu2ysvqry20nzxaf3g3dm7752233huertcsx39lt0uooqj1c97e536b7rje884ew77qb0poei9umioe8wng7r',
-                rememberToken: 'x79ehfl33a378c2okbsvbgso8wjzjjzo7zr4lv0fmreue7xxmwbfdvo21cjuqti1ovxcbxbu7exjzc5v2aiht5ctm99ae49y63ixj2nyemfq2kiil4iddco63wesl7owf1zyz92ajh5rwhuavushucs9uttozgknbq8sqo75bpb60413gglbd5gixx6yzj3tkiux5u4rxn7pcdojpfhae046b3fnefjhne82wu0prd46rzce8nmejdneuljyys4',
+                name: 'rclltbwy9twhhr3cenba7pkz2owrd1y0ryy3omawkudxotu2osswvufm435yqvtrmifg7fzb506kfw25b4zypy1s59fd6qeccswtnuj2ueo6k7vvv1op2104kcz4glu6k4vinyoid8zeusyosy59kkyefyykpniv4flmxauex30k5e8ivo3hfa9zgetpci2soykxkdxdi90q3h37g7qta7657pva2kkcqs6xufx6c24v64h23pg95kd0dcikinx',
+                surname: 'qomzz2v04q6qambsnsjoxxpa26gx6feykcuu3d5zz7i2voxz9tu99f5xcrjzytt2j9rchypztc1nt5hnqg2dnq0zx9itzn62o9kqit8ep7lrvjjn240txhith3s95nscp3zlpo0fh2eg3eup7xq1d40vb34dkchbldclw3m6eqaz9676bep8dbzhik2545lo7ekyyscrozs0sa4merttpg9q6lv4v7c7i9a4lavfg7zlgcduekq6h2af4wbgaec',
+                avatar: '4cf4h43962idvy6c1tas7fsoycdem4gn8062hlpzx7p5s1ssqpqd0iydeuptl2e9vi90zred1yqay0uoin6fcd18d8f4wpc86q9dnpso3dvt4obgohwhcrbhoiicxztkpzcn4f4eq94eedj90ib6hte4bn4y2eez590pz10crq99i1qwyjirxfreou6jj0ynrsndyawzzsy5er0ygivcfw3wb52yl9tcacve09ynbd2ksuw3iijit0epy70yviy',
+                email: '5bffvo8c2jsg62fjrq4entaz9qqtu7b5bvh1u681vicn0zc39evq8t1n25s7v5b0p22xu079b51zsrytvvvtd41ubgpx32mm3d6gpwfmqi4v2q1ofv810gk3',
+                mobile: '3j65tst4wevad2vh9qkx4fuyxp11zvbc1z8rk7tmzigb0v0delira99xxzyr',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: '6j6up1y4hvt2j4bo0m0h3650xrbrtrnour6loaqad7gsz8lafg0cir2cdp8iqpv05x81t5vxs0gftg4a0tquqh8ovns3d5r8bi0snkk0z31ug2maemlgjou3',
+                password: 'fcd1z180h56rt0jbb2dqwckwpc645leqda11h12be4jmcomfr5lo5ppdcs1h3hh5l5hmfg8rya9rmsvgo62chl3nxdqf87ebwl711ekidk9rqp7top89h0mbk0csnd1d69jz64obx7pke3ljk1oujkuermqr9fqkl6asxi31lfcyjjpbv8pe7m4mnf0o8n8cbfufometgfiiffoc4tnoz8os5ze0s7at522k1jckn0hc490wfvpo4af3stkp7bs',
+                rememberToken: 'p51vgrbmzkmexpxq89aort66vxy83tk1cbmg8tkqv1nd6ixzw1ob93u7ysiarxoofqjzr282op17po4whb7n933t0ip8lqq23o9t1dw828nlhsdubmyn1iym99r6izxxwez7s7qhozon8xrmjfne6dzlaimgcbvt1gxzwfab0dw5lzz9zx9o9kbg7n7hfezv76ns0smuqek50w6h6vio3ufqpxwovp5rgfdtxsd11xhrn2ykz8v3b1kby72noc3',
                 data: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for UserAccountId must be defined, can not be undefined');
+            });
+    });
+    
+    test(`/REST:POST iam/user - Got 400 Conflict, UserName property can not to be null`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user')
+            .set('Accept', 'application/json')
+            .send({
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: null,
+                surname: 'ne0dg987fkar47yxxqff2wx8sk5sqmfnxmf83tdbd8095h5xucdrnz9krlm50on1ahg7ntg5zmvdrs0m5yjgv0qc1dar5rgiapfddimayivup9tw88ktqe1tmnuw5z6aexeu0ql1tgqv1iqt58q1eoxxm82hn4q8vkt1er49hp2we1ayce4upyimbj2oznna7l2mxhzmwkxntk2i4665otidhqex0jrxvasf2rnq2pt0p3irs94bvqwvhagtf0m',
+                avatar: 'qcmt8pofi78f9hr4ys4cvoh6xfj5j19x5kcbzdyxanx8vacjihg06d1s55c31sfmvqx6kkdyvjq60pi35sc6n5afmtgc149ahv2xvzsuibhfcmsoj4upfhgoq37qg9w46bxm4r8jeak45bfla4s0wertfwljgg2bge8qfr825wua07f36iz1o1n8cu5ea1euq3sgy255w1b6wbnt6evd7n79maahoarbrdranohtrinmiie1j5ka1993uisvayf',
+                email: 'hgznia0l3fpknppjvaxzr01vznii6o4xaltaeztfru9bdzg48e0zdm7fsxatykm9vemwfyo7k45zb6xet8ef33ukrxjkfkooyotdzv7cnl0tpiyi4qk1whk4',
+                mobile: 'sd2xblqwid3hrfsb2lpx9ab7k1asymwnp6zjpp59nj5dmw65szhp81by8q8b',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'lm6rbke4lrzofofftmsg7n3n9wg1vxwr0x3zphwof8ng9j218ab62ssukwji42ebju3rt2b5hnrauho6ogbbn4v1sjru91mewswn8ijcx2hgbzb6ihioom5v',
+                password: '4flsdm6bdh3ek0b0xqq6vr6y23hd6yunjv6k7liqps9jrjya5e6a5fp951jc0hxn6f0kv7eeg5l8hva0prb8vyjgqkw0oplv69c3ht49dr4zotu3zbph8q5brgmc8ovbd3heqsrhzn8zhazl97d1v7gro5gxxcreo7sobueamiq6zcyepx34gfkxt5091f2hq2qrhwzaanv76b00hiiis1b4dwqh3rhcft162c7v35dm1yp6kd4vkdm786eogol',
+                rememberToken: '5y0ew4gs6ib71z5cjkzrgw2y22x3vtyniiy8oa9r7c2vj40dg6fjiomm1b3oio8h4hu7qzzwnk9z2d2f9n21837bixvnuevq3zww2z00ofrtkufkcu338y2n3735cqm45ousxymnet4f9c58ydie24x6zvu48a8cw3iy7bff3r8930h9s8h0w9yuen2lh5f4vtvovx4a88isnwctx5u3t9s28qt51nb3matwarsrkunehh4r1rxu178qmozfhye',
+                data: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for UserName must be defined, can not be null');
+            });
+    });
+
+    test(`/REST:POST iam/user - Got 400 Conflict, UserName property can not to be undefined`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user')
+            .set('Accept', 'application/json')
+            .send({
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                
+                surname: 'r34n7ra5iy35pbn8unii0pywcft0r7nxyv1puaal8yqsc5kryf0fp7vdsvqkhb504lvd6jisxzpkazb252zme73rdrtqz6kv7bs5ubewmcf7av6b0luxhg6qzpvbj1ieiycbepuwl2pq6x32ygem77tlrq4eh7wifwh72btsdi4nfztftrsnthoiusmienn4or2gl05yg7r24eyvuvf8rfovzcb78b01be204prbczbnnek9bl2t3h1rh9l36ly',
+                avatar: 'sxszr6svpma462v52xjubr9mnchwplxfg0j3dchdkv6y7erjv6cragb4spbrdm7o9uxj5jzkyvyyxoz36ge33q1mtakjxqfopfsaolz8yjrdsphe863niln55lpz9hukqduv7wo7vjmd36xim9v0fzn85lgzc38dr745e45wkptp4arrdhzf19n9v69ma96506tbvn306hlbzmn6bzbxc36cyr1ozopllj0dpa1agnmytvhz89a24a41e5xb8rq',
+                email: 'izg4368va31es52e41wsyygfdsshuj71bowuy6gk5i3wcd2xuu5s9jj4dvoie3vkcligzjf6x9crmaxeytvbhpnjywby5wz1cv70htcx4tcg9pe7fdxhvpav',
+                mobile: 'pyju936vw1tuwwoh9r7gs6jzzzxsf7xrur1cjtktc7yra2ps2nb2lg99ii2i',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'pb7hzfg9i2fsyn0l6h8fsra13av4spjldqzynr2r4i5fweea4uxum2f0ne70n22mhxwb4r86slbbucwio6ze4hn2ccgn1tzcxqihumhhqgahumaf08soy4v8',
+                password: '9vj1htepr8jkx3f0hpho4evd2i3ip5g2qqxr7x0y520e5eaxldofnhnackfdf1cx1akrc8cb8h9haehm57lk6hmsay3kdmdvxs52yjpti4xa7huajajcvycsp9plnqpxaj5cinbc718tu5nys33wp5163cebvjbub99expriz3m51tfsgy25l6trwt35j352vyv1n0sk7h1t9xaz843lk5lk8j4r0j5gbwqgn6a6wq4zg717s3vxq8v2d0g6jfv',
+                rememberToken: 'tu54ygz9wb2pr07x9yodql8prdci3m096i044fknskpzyf7cwmkf0k326i63amizg7gwtae8eir724bpyg1kw6rlstf2kb73zzdylmm2j812eeepky8dprgzeqr8a9c9su6bmw0frocakk20x3bv3os7kw3wp1jv6aoy39vapx6xcvdt5cbtuko5n3clk4sisyk8fabozatlgxl9t0qevkdye4yfb1u1pu0uk7l0837snusu8ouo5tdbveeiyrf',
+                data: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for UserName must be defined, can not be undefined');
             });
     });
     
@@ -152,16 +206,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: '6mgvcil3kwsm9f9wkwqb45oly54ybhk68jseixyw2vqzxd2g8r1pvfn8y49qc2lpe5pfp6lgbgp0pe540uiy3v8hf6cbgo5qsypgo4ohq4zgdrbfmecf5hkxbygg3b3iujjaxmk54b4noe7g3mcf5dxfxms2lllg0a6gbq4rmvnumipi4j378d56gzjebnc98rbpoptvxp1xnysjes444gdl7zlckc6cehvi9b881jaf8rqoq9i7h2914ho4z8t',
-                avatar: 'jyfdpvjs97flpqx23mqk5nf0n4m634hosjl3o1ojjlfmdba8hym1dldeha37f1adc74wpkax6uwx8gcf3ss8xvzj47bvrmy04snm29doboim4v6pk9jwxxblmadd215ebhzayju6eqywfvu4hkweytkavttdtgloyp5i6wla69jshmg9svowah6shor60rsw1cs5umxvt784b9xz5xycmk6cz09zmn4zf73u4wvknzwui2erm8cpia1ikffxphx',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'edko1yo26w1reb1lga406zfk8umudbkjieololas1gmj5dux5sp1ztuq8gb8kpsm9q29ni0w03kfkmgck0io9vc7f0po4zziiei47yy1z94ezi7o9pzblifq6gorvoiej0dkfvckn6wdg8fc6va6ij4e26uk3pygs8awjqpb7sq5uuhuqw5bvflrzb0kgr70i1ewcom6pq2udqmb5tzqf6hi2ujjrydkj76nozx20p69kwon9uzmuv6dbkybqct',
+                surname: 'nz8ff9n1nzr0np9zct8ohzvdbikrar2yoacm3wv3z572xdoldc4nnqkbb5aojp1eoao98k172atxp1en5vcsldyaotl5onqu586q1vhhgpjww5ip9u0hwfia8bw0sles9of0qd8ns5zblkf777zitub3u3v42zj9723fgdocc58ybz63o9fujil6khsnyydw9jxlstf6hgje3liylvrfjpi68pj10k3wu4fwj04azlbgb6cnid2u648iu2rl115',
+                avatar: 'ysprdb6wz4f5z8czp0y3o57clpzsrzzbmn08rwq1n37tk0ijrhouk9xf0k6qkhiz4j846wbs3eftl7ckcz2n1sbmya16etteyov5c1nlxkmvrrhbyjxyslrosp3rxkizeiuntfz6ttclssi39gomxvoa5tc8mtuyzghvcz6j8e1x6gt5skkqjkbod4wkukvfwt8fr7kcw3nepfn9fpphryi81fcxyvabhdk5q4zws01f2021hubnbfa9eha7qkn',
                 email: null,
-                mobile: 'j5ue5l9k8ki6le6wz49db36okc2d1lm1jfb6w1qn0727wcmg01mu9sljqf21',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 't0oulkowiifng7xvz4g4v7czv6h75ho8gnoko8iuvp6pqip5hs70uac8ldj4mkhmscb3qpmlmd88lnnimybwy783kto2onobf1myyyebivl6viyu1fl712f3',
-                password: 'uirgtbcn9qheo2nb9qpv0osa7xkbo0sbkbq2fbpt0fnxdny3yk2dy3p8acau85raov96rc2ltifsdvbwso689t310khpldqq2hzgyjqft3ppecds90rjt3v5rwusoleui1cz3zu0wuzyd7mxbrqrsxukyxhgbayz3wu6gy9hcnlzg4ik9rnknahzgbt4uqotaornquol1mndeagkphcojw3mfjwu88b1bapp2bf3pbz6a9nwx3i9g97mto26b6r',
-                rememberToken: 'kcyqgaewto5pupwdc6qxricga1fs1trksh3gujcazeypluqom5xfd8q86z8yhgsm8vbpq23i5071hc9370hhrqy2f3vhdcuzixuhql528spn3mv5s9lsnltrtaf0spqeg0wldtu238mmn7f2rntfwbl0hcuxh6u3s2tod2hlmvrttxbp5yufjew9oqgc2xmqb9hbbkicjaxp69srhxto6gph5151k6wwak3pbfcip5ldrsmmctzmp4szuz92wdh',
+                mobile: 'xq4c6kyn61wcatsq8md6q6o1qov4hvb08aj8oo3wlxwmwkv9ztng1br3sfuo',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: '8cupbzu1tv0uhwwx211k84dtr3mcyw60hbo3lhmlnzxm1ird3av4w6easdb57plr6blaq16s0rpojkppimeh18vmd3lxhu2w4rgc1tjzt0ufkj0g2t9bpa0o',
+                password: 'x3vqbbl6xzsqulrhp95ml28zsl2oxmhedznh8bfwiz7kvo9cyhjkz7eoteazdpeqqtp4azv015etvcwhl8lfwq9oguulhlw7i0s1hyoab503elrs7wtc529oip0p8ob3c6vx28m3n4oo70onvrs2qvapn3nhykr5icl8su8eh0g8xytgrjnn71xg375purigi0e2p50glrmw84imkp7s1uwknwh57xqq7gile0kfzk7ypaqwdj8o1d7s954po34',
+                rememberToken: 'trzw9iq9ap9fs9a8a7p54mlrm6bnfgyra3fr816zzy0nvrp5xiq5xhltn8pgo280htjcgn6uqusrgdvpt3m8qmovquvc8azemyurs4jed2icmdedx9g2ckbhnk9wfqeagkbzxdjh4dc59xwgwhq6xwjshpcau1ov21m7i4zr1ljqlvybupkxedwb4cl4huwna2u7vzq2uw0ajhx3oi3dml9sg4friu9m8lt4aw8kaka6hnf493c6xuoggceuwdj',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -176,16 +231,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'k41jsrotkapoti12o901f6u76g686fmflpoexw70y8c1ybs4mxnxo51dtt3vkejdanu5fhzeupsasberqy3zcnnvwoqatg2yddv12ryra3gmu95mtd8ecrqfoufpdf7irifv6r4xabl4fbqm6c29s9eua9onlbmz7ic6hzbdtqz8nnlln44cuoi5ql9dd5sysvejp996ok9zz9et0wpvtk6ejo1vy4zay7kjhc4ijadv08bnkzk11pddzn836mz',
-                avatar: 'rmsbarfkfglwtqbqt83yslw0nyvxd20cbf24vega20u14e5kuzid0x2k62atnexv2fnrt58dsxkoga84xb8mqm3pmgagdur1pdw5s5utu1o6pbhqynxeizkpmv4rcggjnlspmbqbersqi157unhvioqlf2o84jmuba5dkpxeyeq2sukrsjya28naocvh7a0hk1pd0j8hr9r16ugyc70yd3t5r2xjwjzp3mqegtxg41b5cum4d7z8ge7eybhe6vx',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'rrwbww6shbo06gogbb9yoskthfw95msd9cw58jpp4ul4qxfz3sab8c4jwznn6z7ly7wqrgzhkybnkwy000uh629a39wqonjt39hcptfuwttlaqqsz143oo2sz3pqzhin22thy9qsfqwk5qbgrmfd9qovybi0rwohy31snov511blvpqhvyjtu4yvptr4lb3siiquz98f9c9nvd6286japshfwkwjd708lcsu9hksqpcjaj2t0vhr151ays78am8',
+                surname: 'rqsx8fqngt7qz8hfdpxvqpiwy5ve2bmk39hjvmwswubiian2bdna57fccy3du2h9kyn9y8enrh2mp6wk2g3foogl6ihaf27d61qrq77w1n2f5qimtavc802y7npadoen3hzmrc43y9j954ga49mbut31g2k2waog0xmdrs62tdlysic3a5sry7qe15k6lnknbre6r4kahpu9e4zs828tlbul2eebx2bcvjcizifn8fqoeronnzf79paksm3apel',
+                avatar: '8zf3zqy1hr7n1h1fvnq5vysjod28jwvgex12r5vb4sfq1khzfuerz568ba44pd9wpsrcu4aaxzsptzwj7klipebsw1tsmc2s3r80dxmw3cstvz7kb062qoq7nawmprtsfr9ym8nlktfu841wsrkcle2tb5ml2zmla3aug5nivv3u8ttea0esgnfn2ukuk0v7yly6sy0tl0w6oa8gow8v9itqmpm0o34eqan2kl36e7bfuxl081a0236m1j2gsdk',
                 
-                mobile: '4h0qjwv9jr7s63mm5ossqmbd6ayqp0onpkfii78v3og908fjiyr1j37a2vje',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: '3plkzo9ho45bgledenmm9r1s1i4dntibnts0ew5gns2zwrmcsh9md1v003djf61mzjc9ktj6twkpdtwawnzal4dbb73zu6m5w9oo118cei7o3zbappndrk6n',
-                password: 'rpw36xtisus2ysx5gunfd4c2i2wdr5xop49ozayx4prqooabl8cthkvl09g8vhm9y3hmjo1kyo2e5rptxodkc8joaqwqtfv4hppdzkmwj93klherdjev3kdjhbd3u9rk0chpepswjdpw00n29w2ubyedwhd39ksto68ayz8nhe4ktaf7xh0h1no4x7hj2iy53tlgwow5pc05nsns3hf8afhr5hmf4svib1zmkajfpgw28xe6i5x8am1xoa3xza0',
-                rememberToken: 'zlzvdrsdaao41eorka1qcj0mf0jwe5tnwvywjw3kvibzyo44b7rwu92oahvfxbhwplz28civxfshps9nzv6bmw00np9x6bh04l2rlobf83ahr4ozkfkim1yjmbllfwm74ywbosmarmz5yuwtqyfdm127ep4czyx69nj17e5h8wsojrbo47n6mmgwfrjau5x5cfago9en7n1jpspdwnrb1b9yqhldonzgnirh776dnth6u888h2n5o3ubrqv6aof',
+                mobile: '7xlyos50eayap64eljxvn1jq1i1o1r2xvsq8me3h6g34i47k5ncezt69loo5',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'h5ow2qnoxl5uu062p4fwu7y2vh48jzpy6h3dslrd3qeleyb3lb9gjbnmdt2zj9kq4ydph7tp34m17albude78q0pc8spt59f0xkfqgyhawyq4059aazd1fkp',
+                password: '7uykrz0mm3gqbmi46mb3fr5rjwddf4okbsbhsobgvbfr9xezv7o2kqyto7jl3fdzt186n49t1agdf5tb0fjxqygmhtqjmod2hc4tqsr6m4d9yjh8zl5srw5ry4ia83cwz7u9xqrl1hxbta0b2ubc8luih1yvjgam18dnmjod6d3icc9wl7d07sib6uknbl42l1h3a4i3dk3k6sx14lzitsrp5qf178m008pq5036kstnrkuj9cqx83kbrlntola',
+                rememberToken: 'yi9is9hcmy38diwx7mfm8f0qbswc821302o7xr7t5datucx8yjogs9ed47dfsm2hqw0mcxvl7zpt0cx3v6jj7mvoxhl5a6c5n4nndpha60btq0wnekvk6w25s3y98in6um3x2h2l84ybyzybbmavutaqab4rtb7kqsmaxhahdesdgr5dfywumuor0a9yzez81dltw04q7vds7wgtak08vb29x9pyrbjlftw6x1fd4ges122h7lw2jtxd7tted09',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -200,16 +256,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: '9qs7m9peh7n9vffx2rpz3h01gwq7y9s2g33xxzknbrewrlpts6hfi9kqrvssk2u1qqckr14z1b9l0r5pljf9r8kkjoxm22adf1sda2cucknm90pl4p5kpjauovtk00boxbba0hanamrucbcxqd4vraiu5is82t2wf4nnqhdjc6257au5uag9ika297pnztsltm8p9cgyt6rewqjh6t3c3o6tppun2wjem6r52oii9zabq15lvqh31gfvl59e71s',
-                avatar: '00z55pwfrre2iygrgsvek4uynb02jpxuqqqjr9081nzqyukx1zyfw6ngua57f9dik1xx8ndz2o20fq69ug4gop0g0bdhdfp0t6uc3ujigzdwoyyyd8blbqq3j05il1g8isq9j0zlh2fjzv2r5rtgp0hac66w0z82pbq2kwtkkks4a3pkre1qqt3loxwhnls4f01tqzejmjuh092bepkkttosleep9icp03rxl41h7ilo14kr20v1l20fj4silqz',
-                email: 'u11av8ug1ut5xndclsmjrvun30bahq72qndz1s0475hvbhin8q7fc6g814sx3df5t9luvmyni02kzncp0zybcph5yamqo46rumgbjcukp03aknkzmchhtrhk',
-                mobile: '8zlmnnr4te33nd48prya2ir330f6dckqxe91f1tnqbpjw76t5zg10eabwvgk',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'bya1sgujs891hk5kw62zs4yfe3p1utrc1fagg38e2iaebw7jyddkq56dec779zzklzxsraw0nnutfl4jl7my0rbvi6vuzr6rl40kpv6xtzmlt4od2dcvtrv5ygjoc5cvvo385m0c9zp9tmmy26xuy3n92zfkds9hgze983vsap6vlxav5ziby421m50tp7xondt9tkgtqahnj1tae1gm8lnvapwt3exdlny7e8izlkm1rq44ao5hfwimiqklqhq',
+                surname: 'pm9u2zwa2c9jki76qpphhno18osyllxngxa6ibgcyr8zi0sxi5j4omb4ys4mlwiecxcy5vqk85p0thzhrk3u0uog0dlrbr27r50rflpebhw4d6fj8at46wg8jszz30r4ez4fnjljundmbfq54myno99d86f2i4prjb2sohs2n9q94jx9lhxjlrbfp50afgydzlgauzp6a9dqnn6y56904xq4q0ps8borl49f7zsmroyzlyz906njdm5kkhr0eew',
+                avatar: '2q6aqcorxfpq88r03xld5aa1e071ndb6t91x7acssm239ziiighqdeoa6czze1figfy6l4mnlehoike9boih7vwsnihzplz2myj0ko9yzc301vomz2mfd1fvd50ch38d4rw0aeh60ayeyxbf3udjqjxrtbzfvyy2lmxhv1lokk14hzdxp196c5aywvpk3swtztnmtg5yq68o8n6s5t8s65twalyfp0lvdn62aaauustfffleahw0juq9knr56ed',
+                email: 'r4glqgjk51pygex7zpvcfrqmz005vbbzlfvwo3tllo1a715bklemmk1eotz8hf851l5ji1p6h8vg03s6g1kooa5ow1kls1g5q9exobrixrtccl8fnb7v4z8k',
+                mobile: 'foqx2myi92gyaxve8tnk94tgac7o6yg9f4c0t8c99thb51r3h79w0mr3s4k9',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
                 username: null,
-                password: 'sezg03njc8hjbbdycws2pjzmokx2fzm9eqo1lueli6j1l7pjil0pa03l5jgu6se4y73e30j2w93wosyxr2ewp3mwtbnlb661neh1p7alytorfjtkm63mcjd57xdd8p5lrxu1kquk2qumnw9rnlw13mje2j4ysp4slu5d4exwv5pbruf4f0hf4sum1zz3v12b65d28bn8v337uem5xv27ie1yazyrhkr8j1qk47xcb5znve71ete0h14uko359qj',
-                rememberToken: '05i4fzgpbvuzolj90fi3meli6ab7gauyh9rr3djpm5sq0nafa2ae3xxtu0gvlsox7tuil4xciem614cut4jxs79f1w81v3igz9ltntwxu732ah0zfd5bm9r3s4hqjp9acdldjwiwdq46hghc92rvtcd0q9axs1ui0mbyie4d901ajxez1yh6zm0ahqwsfjbe126xfzchaslxtmq3p4vgwj7lu5i8gi24vwcnzog9kniqg6m97qwfjbqs41kb6yg',
+                password: 'ot2a9irqkembrytpriwcnnwdcaowda7pdhxo5pue5dru2p0i5qexi06euiqtkw0vwmmt9dt44czpnanvg8rpkx6kslek4c3q84n6ztgbk9o4i0zngd7ihjiuloghf8wspvl20zheg2ralv1oqzo5tfx1jgyxh22zqyzl061wd30pooez3ij43ds8ori4il8bkbe7avu1lvvw89zelnig0691xw15toae74a8pqjje6hb06z277lt72np8ouaugh',
+                rememberToken: '0l2p6t6xchisz4dfzx017nqhqgzjklfnr7gafe1lr1k1mg1maxxr713cbxaz8vsg18qh59t37umpnpz6ievmig7uo0pquylblnbh58t6dh4peuv6wxqc0v5ir27uecsyygtm5jxatvkfa1yhnqdz1j0gkdy9q0p4t2uirx0vyswzdaye9w3jvx2ojiqnx5ly01gsr48chuq926pxg6q2idgtgu1hpsqfukintekb9njloj9bi9r119bsh4grnmi',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -224,16 +281,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'o6mbvmllqhmowyx9xjmzndwea4g29a1psbe8zo894zl8nkhdw5s75fkionskjrt9acuq6eg8jku4hns78mwznwbwaw4gsb7zlxvkcg8n5zory7v8jl8ce42mjr54oc9xjvir0a4xbamvlaeorbg08ry8eloxfgqg9dw8gewdo45moklilbci4cs97tb12b9825kmumo8h8eessyroz9r4vhbzgkka60mjgb6hxvdinef0w4uyg44ws1jahg746w',
-                avatar: '9fc7jikocdr9ej0gyfaea1onfsv6sb3tqra0tudgy9s6blav8tusfu4spglgvwc6yxye2c92grjbmomepx74gr7kdlu9rxbhn1ayu1s86l5tdpsxfsb5n17fcapxxn1ogi0csx482ossdvfo2wp3wnxf4jw177pgqjpwl7as4lxknh23zv6evn14qpbfaqclipsxh15uw57z7gohcd5y542gct75rfuyc2voz6rru3fj4ws0th1pev6j15c69wm',
-                email: 'x5lrkxu7lv02h3lneowcr3gjhlxq2q2xdurpbqudmfst9mhz2wdzzcle0ay993023q6a8tzzgt6lfpi421181d5kvd3f06g9omsaaot33jqjk699jddjpbs9',
-                mobile: 'y72zundkkf076sbp48noq9x3cs057crafzrpknuweyhw0k5yf94kiawca9df',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: '5rkv9fmnjqyyk9138mfx92hhnymyedmcwo9t0svkve8cbuj42g9cjryec9uxc6dqj24ku46rhxsg6fehok5xp96dv8mzl0g9favc49yt8jcpsp8zedxplrblkw6dg3x6u83mlgzueu2vo718sly39oi54fjvoxq4h6thqt6tyxcb81fpwoyf5cwy4q2radqpq35v7vfah5ru2cf8jm4pv9x2j59wcs6dpouefj9u2dzfhbbmf01gzrq0hj37a09',
+                surname: 'rm7dywijlajsppjtl61pux0thiuug0df8rhtrs60u8mj2agv297aw955hvuw86jser8rfsf0ucmd99oglc799k0lzzs3agcxy5pc6lgael9vvw9n14315ycq8bhqfhxsrnuthr9dbu7pjxkxdi39esppkt63r2ub0hadocrmpy6ubxqj7qqab9xwqqkdp624qepiu3afb8mytjyhufmjevk1ndpn1hhbimbspfi5h5knc7d7p8qihg2n36abeqt',
+                avatar: 'htpzd1aq2fha9z7x8a77a4a9bibhxnzypy85x20lntfrxk3g4zcqxfhpjsro83c5luvrt9k7rib5pquxwa0qk5qj2w3lg2pkr2c2238mqgicr1gi9tsa94hd8ddt1ndw5yz9wny0ee4cxh37yxjprqzftpcxkomwzd1azhmd6qbr1ybb7h4elvm5u41eqartlq5khosmlr4dm294rddrjj20h316yo6kkcukawznaobv9nxy05afrizahx1co7v',
+                email: 'ol4q7z8el9b134kdq3xdktm5l46v5z0vtl6z9lsotbk2kk4nnf5x9yowg5n6320pxyv2yho9w30eo5p97aewf8nx18obm2ezp9gqjsjy2xkb2tp2qunxoyat',
+                mobile: 'e0ot8y5m3ix33m497v5ypjrq1ya52wgfi0pzj2qo1qroiwu1lircks2hqj02',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
                 
-                password: 'jfbczciv347lkhwddgyu17r6r10zb7ei86e6y0llectg546nksjmxky259xnrp6r5y6ajycbw6xph657fb0al2jsx4pzkdswbxjp1ys6nnd52r0drodcjd62zwb2k9b5ulz2zou2tvmh95a8d6dw1y1qprgww08htemylj6aalcbftldhe81zr47wqj49do3ck0yhjfpmasb1p9f1n5wsywdu1d7k1ezu2dwt888bf1lysvmy1d0wzwoe5qsx2i',
-                rememberToken: 'njwf4pdaqo1tr2lhn0wvjvs0xe66k4iyt99bb049pt8p8m6xwmvkmvr2ovi6sk5hxr3b12nzowvwy1ucsy27gcr0uwbx7n22n2pp5m2l8n9hiwbbimmsy3egj050xhjr1nkbq1j2o3eu1p5n9p2ttwl70s7oscyf5eg51rctygxucsfa71rennr2efi5g2xbu6djzcd1chua8z55i6ixadtccz7a1g7w2jal0gc047tgep5lyl55ybkzrw5rezb',
+                password: '7iu2t0wpu951hgwz237t3j2ple8ivhm5d0a6cfjibwfai1n9xv8yg0nfz2jen4b903fxuzffnn9pqodlctv7av34j098klu37qgmvjan4qbp0b0po1kk8qpik3avjx8r72d5q5b8fj3792mos4bjk77vc96t64iorb83x9vh3io1ge08f6li3fcy57ht2pyst4vz53r6h1plttvxcyhk19zato28a83wodmrhf3ozvh42n6dd7o9htoxq5zbfg6',
+                rememberToken: '2r5ca8bcsrgzkkncjwhz3lwnttkbqoj1vu6zt1x3eds5nl0l9gojxnzcjcqx2e4mkd6kp4gws9gsav0p7zw8cr0xuwqf9b468ynlrs2915ar1r6oml6t2ikgh34qkm2c9lgy6kt9rbj27wxmm2dgwk0kttci33jgf4s5o8wl30sa3t04sp261tuc572blq15vou51c32qyptjkkyi1th3u64zpv5ekzwntwfemk4j38c449azo1f0u1py7beayk',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -248,16 +306,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'o12uy82odyp4tcbgc9ancp8vsr36gkke261489m6zptcu7igm2wmmors8v9y5nxs0q1645g5e02vl2cjxmv8gvj8oxih2h9wlc31qj8bthpa7ygrjp3i3wolwp4p4cs67dylwvkny67w24ju390aprdwdc056vi5wsnl4bytx7zd6nllfzrtjv5uhnpdm49n0zwljvp39j37oozhxjlf12qcmrq1yqgyelcqgq9w6dnjd0a79juq1l3y32cezto',
-                avatar: 'xesiohquyml6yhpg12r7a4zklh6sksn3z0xrcr76fpyugu2f8k3dww18x5l2r048j0c05av5p2vsi5iakvvp25bj6k5ld0t4avvwsj8ij3nrrmacg8gi0j9rxwwqasgwj0lgf0o9opvn8nx91uzfnw73hf4xi9mgydgrojj1hzkaoqznytfehqoqyt321yj8a5rlpxejzcabvh9m2wuyrmt10p7pycwu8mc1bc61hxlpxjx90i5ccu486nua7eq',
-                email: 'ebilyjpqsud8y22pom9kx1axmora65iousrv0daojx11mg2uojaki5n9rzfqatjlibwji8wxm3x4ew8tkdj55i37z6jbbccscajkqnqfa726a1zalivl4egf',
-                mobile: 'pdaoq9uzwbw91l7b68vghxcwx9h6tl3ip8e3scx2if79h5f3c9ghmsn9hspf',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'xzwnrgtfsb00ngle4m2i8b7o6052tekxj987mrf41bomtfb3e5prntp6zzajqbn29rpvuiyy18e1zjy2ipwpqw6xhgsg4lqx5wqpmb3c695lnvnpm4h3yu90',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: '5ylppu6bxuu83qhrnbn94wi7m6p53bvlvyirkv4la40fg97z2tznnf10ocwh34hc8zjnfoq2oniqgtv2qu9m3v7pifveosc4e4z1w1gx1zdbnn7mbwkfhzmwhcxn65pq68jm1y0yak35iysmhfgjyypjqcncg7tv8gjxtfnw1zb8cgn9kqrpmbnsmsw8cxe0uvlons4tp8kytg84mj2njyipo37d9t9yk67yr6vzdyuhvf1nvit6fqjfmasmnlo',
+                surname: 'd49zksnr317y6acivh2zq7912sipacowp6fgvb495jm43okto535y4xj3daowkqrklhf609ti625q770r3laltucetd2cxebzdwbs8io4fpr3idude1r4ylbtl8t0ichvzpmx26ma0cjoyoz4dfycbdml558vmy4jkgf4w4jzgss7zq3mwh8hmhx38xc8op1joso54pceanle59m30a30w1a3hyb14oh81h7uk9c60c8v8gwivhcijm7lzpv31p',
+                avatar: 'smx2widh92fs44dnhodfl507kxks8wubog4csr1bglfsyqm4ufcpylec0aada2hjk72p45gd83j95dkt7xk7mdk7b73ep0d45ut0blzk3o1gid9wj27ogirfmi2vzn8g019hqgqkckp1kqkqus322samlxez7eubd8kaitstc1ef2ncyx5uf954x5a3il7ccdv1ygkix88qbkig5yivwwofk2zsawbm1r5nf3tjehpblp4leisqcpdz9kdpih46',
+                email: 'vslhizvdcqn0usxdxejis9kgyhbrfot6k1e28s0ovv5bgfpz21sp53lezeszorx1pqg3wzg389bt1qbmpfdd4qmc4dq846r5ap4jw2tcliq42c03hn0aa27k',
+                mobile: '3lwxfjqte4yj2o1kktkv4d5pp1wok229rc5i08udrwp0me2sq91rfx4appwv',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'ms9sx61onb8g4no3p4kfx5rag7qo7pdwpjlrfvde9w0q5kfiklzhbitbsobnp29y7jqxu3khrvip8znaw0lvs2rwpng228gtyx9mig02aybwvqjgvmoitgf4',
                 password: null,
-                rememberToken: 'hl6vr646w9asqg7c2dcci7i0nr728u3kgs1axc4l207fbob3y3ttfhdaxa6sekej57m19t06ucr2db04btlfm3uxktzc9mzui28bhut6zxybvxviiub9sq0kx2i89bf3z9ybswqhk4240ftlpt9q5meld76uzoujk0cvm4u7xna3wsn6e40p17luyj9zstf37coh5dvtybff55oyfpr5qm3cjql69brz6rgax9gjacg4obzaswidaue5akl8zbb',
+                rememberToken: '09jghhtd2nmc7fuajfqyenujm7h8wxa3xn75xrwfbyhpdj7yguzpq10o94o6nudlahz9p172ewfggcckq1zzoc4j9ifzheln3qwu6ndm2ydgwejk7w5twxuo7jzgq8myn4g1t60a4ote42t3wtquj935w427i3pewabrwok5zboh81p09v3r0nqtpsauhke2lxn9l0q7r8i7tl231qitbtx014xdvtpaq0jnu4hl8mu0bm6vmg0wbtw02u2t6og',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -272,16 +331,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'lit1sw9oufib2t8ijpnmwf2m3ydg0u3su4hb4f2k0vbqvunvsc55zyu7nt87a1drj6ywmndqebspqkbv3mljce6fvks1duo6oloch1idilw0ko4d855g6rxah531oaydrv0h5awzpo4pruqsjjy2w2e292rgwffqykciqdpuquuqivrk5ljpk6xn0mlctzzuenu0gvs68b876f2p47c9ocoxgbbfr80lwq5bfhx6t3qc77o2tsaot7l12zq25fg',
-                avatar: '9qvl9y9t4xqljt49f2jiwkaq271ctxis5ugo2owue76zopxglyp0e3f9o1n7ca6rczcubq9j0nc2z8u024av02ly4ph7vmcwgfpvx2vs1fa5h6lhux8acutbif9rnxgafymsscwqhv8a2n6ce6r7zwf2ijy75bsq6xp9u1ghmi6e5d26l0nj16lrtgj1n2j0rhteu2dl0yqif8975o870pirh24gxsjng9znkksbt02djrig0lbvbdexdukgirp',
-                email: '05xqwife73akcwbgn1f31tephh040ijpt4wmvzzhqgnhl3c43iw06s8ey5t5g9ti92cd2muxe8xz7jf8xll93zq9q2w4d7ios65nrrpanwcm8l3u63aaedic',
-                mobile: '79tgvas8kzcj0cldwazwho1tqbj3u0jfy9806r2uwmzq7q85t8fbj0hgb3c6',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'fsiorhqtg8afpj4eyyaw5ul5clvl14d9konbemcvolwj2mlzo2ki7wexrd3i1xwyz4u2po6rrdtxvngifqjec9yva9vtwnc0l7fmlrmtcvytjx6kcnydqb4j',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'q6n6xwu4z291zl0ygsjhn8dc00ukds1segnplnkb6t8u90l8ysva6bhy1rcnv635qq7q1zwoug0cg6ed3qqmg9qs6pifw3cnvad8vsg56pgvb9tmpgbo6rfrg71bvvtszv0tfplrqj1f50r53ri0hfk7oeierxdahyzjeucriahn7pml65ew1j4u6dvpi1xi00ew9yx3gbstf6tzzd7b6i7f0wiofhllvqtx29zy4kcknm6hl8ch22axelmlz91',
+                surname: '1o1o7v3melfz2vme45wg43wzxqgfj4xsp8dc0fjt08ha4203ayshuacgyyvmyfjxs4tasbxjia7upwrs477xwfywhvuz8khbm0ok411va0mg16pveog2ghxj50ic6p73min6kmleresmjbpcb701bos9u69nv35gq4w5dujetu9p8zq6wo87yr1f8ff5t790d0u9tvkz1gu6v3c8488cs3vncpbqntqgtl323nh9qa9044fdl0iuw95e5j29dlr',
+                avatar: '85qtljvveqw7xabknggps3xu99q9zdl9il9z6puknkbrbpf8dolqgjwu7ethksf2qdas1iqow8beencixb3i0oj8r1laa9ko914fi9cmu9rg5leqqfjzmsbuq7lzkqf8gm4lh2l5jmb0k6zbfd7wve83pwaua4oa42b57n9hpx5b3jzsmdt0kgwzjkgwjcb77kd67bniactznv0h8lgnoq7lta8km61xdy605ggdvas9xv7q13zwtid0pl66rze',
+                email: '8mkc9gnuww7pkx856ckqknuzfk5ra057c625a719o4btq6ls6ik5moni05t3pyikcidoqu02nlfa9ibynqht2j4r53agw6hs6hshwl8f00z8axf4ljjk33da',
+                mobile: 'psys5ayq9zwny6s3ffc1kn173y70v7mujg0q53jc5j8tk6ln0soutdt8kxwx',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: '160p87o17dvlj6zt4w4jiftwlovc7n6dj1e43nuz653wsip4jy0o06139yi9x2iee3joiqotryu65lpfphwfzm25251u31ux5r7eqhysfqxqsn4nuumblz7o',
                 
-                rememberToken: 'v4vel77nhh43611255uef2yuriak7379zgvvi589io5vvl3y6h16ggl19ubi0cvfiq0y26f5z9ajwflc5s3ee8talzxymc9ch2xu3122051txortq381axitq406gn1jnyyo5eib9wltnktza82y691hquhfp5u1ss36ljxrcqkm1paok53sr7fn30hjrxzrozz2lek5ghzhoqjhxkw1y1nagmeagmb95y873ife875lnpl9oforeq9l3ph7s3a',
+                rememberToken: '6n51y3fazxsyh4hkcozd1jw624smip2agravjcxcaepod9pw1j3z7jz7i1j0cxozh204jcv79st9x0qqbnj8q7lpzvc0bp4as7xg4hqlifjqifroullx4xjlcrqrxicdmu3zo3oaenkd2iq0jvqz0d4nf6zoru27z6krz8pnhrskt1ohkchm4scpeusvjk4dulxacab7lmbcqnojtj5bokdzsal1pt0d65wjxc2glyt87sgx7tb09vmxetbf0vw',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -298,16 +358,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: '2btojulvx3nbqz8oqh1g8684kop0f2jgdmtrp',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'lm0pazdh4e1uozzccqy34u4ocx3avk7fkkq33m7jhqs1mxz0a5s03y6bbfay4t481ieza6suc89d6dvve65y3d35mtubh938eqm0p3cbq43o4baerey4lbp9fs1v72fku31rai20n36firg9agxwfcfpjwwdevdo0eebpnoii62791o3w0q9oz69vcf4amh7kggitr8fynvk06vu7fci07ncsmz1fus6zb0wax5lp38gajyelfb5jythhgaky10',
-                avatar: 'czmoqqbfufg3ju3s0ert7eetboz3kuv90un4cduz9i9o6x3me841fdt4plpzg9b7js5pl7ju6rb685z6tk931dodrij3qqvihyrbsslkx2z7sjea29zrvnzbgcraak3lxrn36pvik7weo4xdt2ya28bbv15sas9haryitjig0alf1k79f46kh2538mpy1jq8q2k5afffk5pm6zvxb61m9lstai02gjqq82474yr79urfmlxmkcmjteyd0ox91wh',
-                email: 'nuzpm88kahstjz2arxapuy1g87f0rta9lcqpyjzxwufegp60cxm2whze2kka0slbq9m184d4mfpely5z5fzmh7i94ylmo87li8cjuovk0udrjmmlyh2u7je8',
-                mobile: '7odroer91cpk45q1ej59kw1rf2juggbyr7cwp7iqd8su1kjuzk5z8btw511d',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'lepcepb9u0sy5zvl5o70gn5j0ih5ctff91ahjp0prkptabiz1jo8xy41mkz7n8ct0j0i5v6blo8xbfnpt69jnbscn15c7060nz8vl4xxf6zqg38io0re2par',
-                password: '8bh14edf5pxwpqo45jra8047a5rq1wapz4qaxpmf23cbhd2hhc0pqkdttku71c86mbitmbu5eq4d7s3zgbp156yt18948a89elh12mh8tmq6g4qmzh327d78grg4ciq1o3lm5n82sbaxkh9lcpswpn145l0rgb726p10lfi4nexjzbcwjuvcldhbn4uuibnpc5tfz7y42ow2pxy153tbpn3rapwvacsxzjhwwa8o3qi73kw9ndymtn1sftmpj2t',
-                rememberToken: '8gy74rr0hsbpjoslf50amyrnos82wwkv5r3mqsgbjcezaosu4dneip5vmk9w7k9400z4gphi5kbltpnyqyijcrwq580vfqh6sqf4ltcyuap589umvsntoat4obfqicl1oqj3euonhjtq5b90jkyyhovs88vqrqa9z2zc97f9h7a6ncejqu1l1mdlhyr7cf1u6dvbgymzbyaeqq17036uujxioqohmdnhbedx9p6u8c9sk9n0q7txh2hwsr87wsf',
+                id: 'cx79fqx5895hko55xzxmb01hj9i9t0xpxgkil',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'dcz25pj60vylrj12psxhhsyvntj23asbks9u4kpcb2c55nqtlxi5zkdpu5is68osyjqfq2egk2qw2q5d47z6xu0ioultom8cldg6qoqw45w2spx29a2t8hgbxh9z5fbwkep19w5swhzv6675a4ueck1i7xefhhrp3ru2v72l257aj6midg9mj93qx4wwnj9g2c3me5b6u2x258ti8kse34n9spfmymdvakmokmwroxo47hxzu578k0glkgvyayr',
+                surname: 'pbtsjit770kjpg7tmhsli3ib0g1nh2d4wdqapml4ubz0a95bt2cogjv261o69qge0ozalrpi3ext6uspq3l2jsm91juv2gkrkohzqllg4dahgr0qobzs9piazhy6x3rmwrkwbqj0shmqfajcldt6dj6vi12uyvhekucizuulbb8hc750wcisyb74or23doos3o34wk5vzuo6bieau9fyn8l4ereo6iaklldr38cngr4ly4hghd570reybf0pj7k',
+                avatar: 'mkiu7mx6u8ji6ir5w81jt7v9hc9p72xmdicaxcbtjm91gqk56rx6yivqc9wpxmn56worosg5h2bx7pbt5b5qkvq18sg6z6wa2156px7cd6ftnvyrjbvwoo43yfpmqir99u3oaew96cqruphv1bpvr3tbfr6pv60otj0qsp09mr3yxswvqqfv4jscz5qn1vk7n0sah3ju8desq5wsrtaee0y91o9icr33c14h7fxiqsa7ziwpk9wqnjw6i7q80vg',
+                email: 'lfddp0iu5iu5249a3eyljb28wkvaphp027ewu0sldoiiihlue9sc5hzddtv9cqr8hbkdb282lpwlqx13va1127f2q81cm4dtg95x4w0oh9dt76ebwqcu0wy0',
+                mobile: 'yiomhc1saikdsck3vvm2wj08caesgyfrk2yq8ec0jcg9q3yud041gd4rhk1z',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 's2wcb02dhaio3rihnyrn3iojakhgmytgydme741siohpen2ac2i8t4ga3zqll0b6rowrfmr92fk9w2n3cydkisz30g2jyb20s712i8udw23dbnbxvpeuqpkm',
+                password: 'yi471y490rzbrpcn7bvrpowpoz6sfd0rcvik7a6qpcvn6owof3s5gy04rzvzah37r0h4frzviuzktekege91if28acrpzbl1oztzn0tjw7um7ezjqqb92t022mj8dn1ipa0j8bb07pod6xa5ldgpk4ulqp1qpzm6ffi8uga5lo61r2e7y5yr01ovmzcwwpj8xyrofka9rwg0zsqk0qeuue2tdk25bkehi6msvhrtohfgwdpwi6v4fw8n95dxdsd',
+                rememberToken: 'l07rzg6s26tv4yfpfmizw6qt3a6kxt6ta5drmf6puy7yv47kskqycmimtm10njo4ygq2honsdi55ibor1qw1ffv5dmo7tudb1h0x3s1tf5k0j2rvalwmtwegfyxjs799bpe178sv6t7ryninx4slguoi8uk5fht0c3js93a7mg04petruphanwaljrfe1ws2660jsy7rkgn8z2kpmt70w6rn2evdcjjqzt8d72ughedx3zctaob1vaiz6ai7b2l',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -322,16 +383,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: 'jhux8dnk26qslxhql3ofoe58hyf83j5u3y3ji',
-                surname: 'jlf7iyptpz1c669qa8c25n21k4uhq8cv7i6bqg3xk2fxq237mwayfz8n4xh2kvbbgl1r2qpt1lh8f46eotxa5hn7x5go8fnvt2i4f8qswjqi7mho2220x2c4follsdngzemc6armu2bws6unvaisj53yivd9j8u24tpv8u0ksxotnkqwrnybcqjkgn4x4rm8xhoienw35zyure6flswi49x0706yfzb2y2cyoa83b7avxbz8dtvo6kkejxq5i62',
-                avatar: 'kcby31na70mc1jp89kfpdmcjs6f91ws8fhmu4la13kxnqky0wq6ofcnoofirf2rc17hq13a1a6ok49fs3g953ykjcgjjsrae0rl7wpqgi8e3oyfusp9hz8738ssimvk7bz0086ffjsoscb77up2hbwmksej8pnz81mjx3a2i4bgul3qezp33dyta1iahx8oflwg1mcpbqrgcrfcm4tgablbkhpsg6fg07hvtdw46nl8j28a6u8b2h5mvg5wgpsc',
-                email: '1jm2g46rytpw9s607zgt10reiormkbpr7w2feohaoo6ajwovme1z47sanjlja4e48wj6ydgjpkmovm22j2bwvvdxegisckrit5j43ospqqqceov149md1c5c',
-                mobile: '5pgjstx1n8krgye7yx74un4mhqanfjmidmby1q96c0rl7pujmfzxslnz133v',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'ssgaxge0rrzwzpul500dqt8w00avvhvao7ltj3o1gt6vhruoje152nwkfxupfo8yqnltbynnfpiuer2fllwfs9fyzcbv5rs38efssct4o4fu2gr4lnbaoy1x',
-                password: 'ohkjdmqop55e4uzn4wzynnfozo4yigaw1evikutj8ygs236i3r8zu1udymzqa04r7ykc2snc5z9wb8ark8xsfe3utw1f1kfzk9f5ygpksam4lzqfnrt1elsfcg8d8mzcxwq9byofhuk5kxv66x5oifyphjpd17nv1draesag3rhgtxwngnp8aiqphwjxre5ycz7pd518o9wvon8iwq0b468mhqj6irzwrbqan1kvhvd9ornikplrv6elf5pgtac',
-                rememberToken: 'iatihk08u0ws1zadgyxijztyx2xqyy3icnd7b297mjahb3z61r1e63blfb7qs72eqwx1mekqe89p5os2swpiqmca50yuuli9c1hiw84tbjsesm1am2h2giglmxrwjfjpg8dwicv38h9tjpqabjnyk1j05n8ii6mn32sjxt5mdsxq0956hfdnsji0p033oeum7l6emop29ww1tf16krom1aq69waimoab6kz768xnx3b9wkbejj5kbsldenvblxd',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: 'g4iyjn4othdp8b90qog2254drglya4l9uyzlb',
+                name: 'ts9qdy0rnxfne96mdraurrrxr6z2aaehdu2woaxhxv8y101yk96eh4a2ijv8ocw9vbhvvbb8d2phzjg3di35fxdo2yokb42euaaosyrvzxvhpw7njpe882vam0syan1cf6om5oftvfl9a2oes2x4cobp943c2frrquvicme178pbb6bs3m2z86aae96o9jlri0rtfip5fqrw7p008e903iska9lt1659xlnyp74mbhjmkp16bgmygs4d9j360be',
+                surname: '89asecvhrz2cwvmmdx4327jkd9mkzyptm4xhfbsgx9j3j66wh74gnnjy3zsoc6os7jaltq88q08i71ehm1kedvpqtz1s9ekvb24tlaty2d6sjx5kvff0dftkabs2cf5diji59u6eyb834a5ph8mmifaend8j7a7wh5e69i2eep0dtm27ay6fmegb2n9mcpozvzk9h38725zt6l80pcwje3qxsggayeo7klm61jn2w61m2tmuatw6ypojqbwn1ay',
+                avatar: 'rzn06feoe1jd29mdka66vyyz3j2cobymy4usnj0081b8u402cw3pr28leqga9xkt4sk0x0gr31w8ncruc9bpvgki5sguwa7mldtl0suaixiyxf0ld9dlo8l78j2gbpsw7n0o3rcrgf2dy2yy0dl3wg4aq5fu664uy1a7z4aq99ks5m6nbl424sa9me925voy4fsv9hxlmwfvpcuck1waryx8znymiw0b71fhexyb1lmu13moe8rsxpavw0vwb25',
+                email: '2gpstuw9srbee5t39z7mu10qotnr7pbfe9d4s92biuplusku6ps3p39vr5rdfe4pal8v539il5rrou9vv7uqkavssvo3xmmy2r6vysj6yvn7hn4wqi2jh9e3',
+                mobile: 'pzizjkr3kl8ks2absdtnsy61k8v3qurs1o9r18zvnx3lk2dx9g849qfnhoug',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'ybpov57j6x1612j5aa36kfc4peogvzp65dpa30npvjhidle764i0w7iqaz6z2wije6c5iovx0haf93fk0qkrwzee29jhgldcuih0ge8kwf4ylimhqmqkk0cr',
+                password: 'cy7wl9v6g34egxmr1dtuwenqa0q95pbgfgxbwulk7qgp4jpqzlmwh8z81oqyf3j6byurdl6blpa44r474rhjxggmgwo0c9mxc6om3w1fnkhj7tmtz74utscok042v9vbwqjj8l20lsj2jdw2z7q6n1ihza37r2hbfkcbj3w3x6movff2nybcq9gjzcede1oudpgj63ozcozynrz46lu89g38c36atydiagj6qudruvyt5c11u7so5tjuuc5n7ke',
+                rememberToken: '8s5r8z8589e8bt68be8h91kiapy4h57cpbadoj7o07wtbqt28pbzxzqk9icrjy941fpv7achu8e5yp4wkal7m5dm5u9f7q24twhtp8m0hg80yei9dqlkpbzye3fs79nb9ttu66coihykzzt9iryqzr252tonvf7472bmib6t4fs45txcdq8isnsewk6il6ajyg1qn7259qfthpmn50mm5hjka9boszp8n42zn74lff33938ierl3qv8rofwc12w',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -346,16 +408,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: '7mincxvzdqjaf1yugmd5udxs397e85nu2tcwo3a36pv13noly5yg33hfyj1rjustrjo4oec1i6nn0hv424thyees0asiwvxl1azfsq3ey4olfcxjhm2uy3apy0qwpqh6c05vjblwxq1mku03bkqpte1qv8wdaegroq3wytnvsgp3tpkfpu5v9rb5vk1nmp6mhio6lyryvk37cjsxbx74xw41hikwzvaicbh9wql42u91b8y8q03zny5oozvnxyf',
-                avatar: 'dll67ynbh0h1c8mffgu49p1tuiw148mzl9w9uzdzfe7kags7ofkzbdxtkykk33w7igqsrwp4jbvw5ju72eb041x27x74mcotxj2gssq31j1i2k2d5krc14iafuynjaeuwgy50j2grrhcfe2zygdbl5fzxw6cemzp26b9cao12hyzi15s2tb3ndhhme177m519olznywjws5ydmm31adk4ozgw3nrasgx6k6ed0ntkceye4yvr04gyzbizrdt54d',
-                email: 'lsckx769gvba25rjrn1dk1w35t91x6qrffpl40iq8gq60nwj9wexmxs3qtfefmrcufs9hbbwiz4kn78lx8yojqfrsw94gcqu171pu1rkd60oyqjm74ryg1cs',
-                mobile: 'eewern9tx6f32aopgwpxogg9kqg9twiidkd2oecfsj072nf8g73fcvmps901',
-                langId: 'ndpaoksbprc4qmpk7gkmyengnqhacx9o87379',
-                username: 'lgma1acveepsqitf0ek3bi9eghp10cfhxk225xqum390i71yjruvs77a3xh7qx1g4xm394brysdi29d2f4ezshjui87fyo6fekd9ossqcf2f7ann1h8119dl',
-                password: '3wplzqldq3lccui3k0jvmhj48d2z8rxvzffkshfzuxytcta86pjiaje23axgpd3dlunofls2h5ocsim4ik8wyslmiwqgnu9clkg2el0429n31pw8qbyjmme17tg5z3ij9tx6mfkctnulhik20ywlky2t2goex33vkthgfqeqh4v08hu7y3df3cfv91qrrnv35isj1qldt4k8pptt8jsjulraolu4fzhyian9tuzpt3l3ne5k5wrgnqtid02qtxp',
-                rememberToken: 'dxozukdbljkq88m4rdvlmdx2ydfs2f4geus3o1o6z2yehq2cug02cxnex8ht623e3wy852c5fsltbgkg55jp1ig6yrp81aw0to8o9u8l7wivh43p5fpht1pnrshsbyjfnei889m27icvcxaqxzch72q46tbn9i5jjmohm7votlpw5bhi02dhmgin35zxb0eg1tuspft9ihjd3hq2k0tm5qcka9edserzmxheeeybbiok88s6gzpts5vbra9k0ow',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'okd6icaxhpfygqp3h2ttbwtgkvzqe39uyc4b3gk8ipk232jkrr51iyv4tkwqifaw3f4o4208l0sjpeiwsi7c41exgouxiuazexwnokzfhx70t5y0hn7412lpaav21pox74uifwixq3kun52s9dhzxwms3vmpwkrbqycfvx9gu1nymzd4dzs5j32zfqj1c5itw2zmc4ddbrr4ke7um20tj9gy0o5lr23lg6p7dg4feoyyedqlahje9h6ompjdqh8',
+                surname: 'c9hge8wv7r1e51u7iga4o9a2vy6bok5ip9ixscwopvmhno6jtevuiqq9v1f4gkzgr42txl209ezzg7a9z99tzgz9xfw7oxr8ipkvnib5nm25yji1u8aq93dmjv3jqeglzh7ttl835fexh56kp9e965etqdzrlqe9ybhhr4n2hve6ncm5g8kh55eloa3964mdk886lcq4x20dyv41gdtyyko9n7xe21m3gtleg7qp5teyu5h5ub43dsvhwngsdbf',
+                avatar: 'g8z8h3hgbehshw5c93isrefiluv7zfp9x6r08yjy6p0a3sohjhnuvgrome0w6q4k97r2cgasqtovzamjasgdz6zcoxxohmeiqqqa10yvmxxcjx59b2udnmsnny70bmzjuodymhew243mvcnfkuaeqfcq4o0443pmbj6uxqcvef650ldy6tmequiudi67i9np0lpjtyyhn64yirvujn1woe2owj4py070kc7q1oihx27wy2dxj1ogoctr61nmhe1',
+                email: '8creeiraofgeckx0zeb9h1z45f8z9bm00a6zxo4o5vchl1qos54n5nmgnrnj1qrmaj97ndlendx2uifbwz86el3luughitk8a5zsm6h79ie42kf4f8989we9',
+                mobile: 'iz65dy7dilifhjl5z3r946q6wfhgqoct4l25xbo0j48s03k7swnbm8q5n5ek',
+                langId: 'ozr5boafqnr3ro64xmr1e64748cf0lgs2harr',
+                username: 'f61qwcv8xsko16zsu01lqfn2ywatw1c81q4i0wjk26ve35mcsc4mr3rbxa66ez1ju9z3wtiaefmuajccm5sqt17wmvfnxw2e3quxqejtxg4szeavckn2mxw2',
+                password: 'lbxbr7ejnwldpq0oha27zq24k8027ulkbqa9dr4c31usp875wzag45ej3mf9jd4xbu2k1oq8h77xugcdi6hq8ybnfzp40g6shea2caf3v3kxnut50y1sj7lcivo51w0vwbicpg8bmfiznmwd04sn868wlmp8e19zmlcfp2mh7obofvolvqh0xw3e2cypuy17xe0as9l01wcse5nd37k49sk3iniapcmw4ujyngg47tdkor4wei8te0hgabsgzw9',
+                rememberToken: 'kdqniyxa1i5erh19bxh4moayn2s1776i55lt13bdgzaacq4plens1ubq9uvwa1eua5cab455b91ok6ziqufsv3j1g8g8deachkayo0ufs7s3imcrix5iblb37rftsccrsx3h9e0w4o8yopqlx9mkhgy6kbwx31wpnss6jl0tcmlgpcpgs2tpxganaqbs9shg87w98wa5zopovv6mooa9mq0peyo0glljx23i1hagdnbyd4gno8t5t50f26nr38l',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -366,22 +429,48 @@ describe('user', () =>
     
 
     
+    test(`/REST:POST iam/user - Got 400 Conflict, UserName is too large, has a maximum length of 255`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user')
+            .set('Accept', 'application/json')
+            .send({
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'kxp2atsu14zc98achagnr2jaqzdgqb7q9zl3seemhhyzhk10jj9mlf3se1bmpbxx3rmqi8y2h5wzfncg5xbwumlzg3x4hcad8aq0y2yej7ptd5qw2cfl71i86uwysk983j24yht6fv6twueeza0vmzyw4bxd442ja3qaomw4bxijg4n6x0i14y6snq4ym1ssycp0ihf6mtuuv95k158yepmrucvhxo8i12tdlilgoy49ytgpjswgtqf7pu8jawx9',
+                surname: 'mszmcemfull5pz57ttm1mij9jw6nx6li844roi4agwenwyspxh5whryihw3h5v730kz0mxuvfdwspy9t34m0v1bbx090uavv88k07mzkd1vio1cpw9lrh2kvxfsnw0rut50xbyy89j6wkm2uo98wmcqvoygwu9tu62c7sxtw2a47en3aiwq5trnhfb4gyq8vqeui4z0vaj4q2vzpwe1jlrwbafhk3hynph3lcaulodsvvwlwsrwl1r3q0fj2n7z',
+                avatar: 'xbzs6w20yg7otbxry24saa9pvm9d9pd0h5ogtfial4o4ezghoxkxr2fyagvwjl7tch60iyksiantl3dkjw37nvoiszag9otpnd5l2adxw3am6voin1k8splx0e97kdnww58d6hkx3dkht86g6q9q1r7uv89zbrer7mj0alpqlxg4pr2qo89r8f04sx51tghdwstukxx7w7go3atrljzh128m66urqxwfasdudhfihtcxqdfwcl01waboshk7asu',
+                email: 'tnd6y9ejuq98y32lqnjlqcnww8wk9p8fewe7le64qyurk0uoqp61mnpr0e55k29yq1eehat41lva7ubkr68ycr88bymzonc6bwrodnljlwjo2bgi5nkxchmw',
+                mobile: 'm0urrodxxma7pxr2qk8vxefa5n61hesxxehezmsz846oxotw56cm1p1g8bfc',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'itqwoja2n375vvwb9zz3pocaaf28inllgkie5bn9l519cfbwdk6smxfy5azoj02ozhmlog3007j7hqt83vullu43lekolxvj9osymgdfwlagxwntgm34nh2r',
+                password: 'nh4sg29r2ruhxdpydix7ycqj174wis4l6rudx4m17himht2a8ic6p7t8d1yf5ma0hjksmtwsnl7omxyix09441duf0595knwgnfddwp8kzlc963babjzrzqy87b4l1q8ngz3gtlj107g77yim39f9os96hh3n7hsqwa8di2fgyxqotqoqdefb3sxcqmc2wzgbyxib45zmyixlhuuwlfc48dwzva5k3hxgseyvsjxz73k2xktccun633gl5bmkqr',
+                rememberToken: 'qt7c1i6ody5w2wb98xku0q4awlogab7aeoldvgunpxw2fkesd4v4yu09h9cf65aimuumwjfgw22w50kuob7k7g2p8dshck61egqvrpzhj9tmydr80u48hua01he61vjtuzfxsmhz1mulsehqgjuqrcod7ecaond0c0vcbeswfb444adatnw11rtz4vjlj9rtqwcq1t2wu6pyh011qcwqeyz0dtv6blh2x0uy64dmnrojmgb8boqs9anyevw2ayh',
+                data: { "foo" : "bar" },
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for UserName is too large, has a maximum length of 255');
+            });
+    });
+    
     test(`/REST:POST iam/user - Got 400 Conflict, UserSurname is too large, has a maximum length of 255`, () => 
     {
         return request(app.getHttpServer())
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: '7n4hgyh02bbmp9lgtahem94p1jgjpowxixy9c7fa0yd8gicm0c2c4px1n4t1f630yz58mju4z7zja79wrrtnrn7zwqvj4pt9tcv1uphhtf5lwxrxrqwzbl750c0b1h4abchl2zsmaurhxakknzd7fjof42pwc7k43no017byvcanmh7er3z5ngll8ejq60wpcdhsvp33diq67nbx9nbhf3vpam43wdi15luhxvicx12b7v8dw0xmfq70g8z3thax',
-                avatar: 'ka3o5okm4di9lpnhhx9tb6gy6tds02ku82qk0u7si400jmm4pd03be8coiqygodwc6nhwxso9noe8ly6yuiuhpbzv2kirepqrk2tnglvl2jyfulqvil2jjfn8pprx8n05js28ecwrpxqd7aoe4051wkfbbkb21uvutx6pq85y0nmwirv6qkfc40wfdjz33oqgb6ynmwaskfn1m6sioi3u70ceq66tyeam977ymyfzovrb276jd4qjia3fvpnz4x',
-                email: '12mmk285805qxp89gj6cq3r3ikupvf60iag8tni27t31prkkhrvcjyjvxrqjjteus7wlqiv5cbkuwjazo9qifbbyki8z5mljfp82omvtyvn0mnq70w0o9tmp',
-                mobile: 'b1ps5e0vk59or06m2bxdgbey5y15i3szcx84tfhxqbl1qlm8tejc3naxxsil',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'pgvy3y3uezjao9p3v54v3sr2ef5d9xc3y2apz4mzmoy0y98kv0ymge49fmwqnvjlxe6ol3r6g3j9hqb0dqk9e7kfm4mlx7f2s3ov5edafll1qtrxg3ayeax9',
-                password: 'yw6qonuor32fmmuaibtyhnr83inywd590kn1rmksi9xzm1t2akl8p6xeh0aqhvmdu3yocy236a19uf2ly68le1xyt84wcris5ctg9sk2p3lrrkarhg7l5u5sdiecr49m7lwevopi0jddwez5j0ev0e4225lpfu1j3ivkxeke6xghpvgky4hnm3k4orjccen8g4vgh8vrjav1tyi74ruiarmfddxvnzwd1ojlay8ak9rm3wl1hwfvql8b5q5arz1',
-                rememberToken: '98a5h3nz0ztkoqu6bfdxw3bob2k2591p6as7oculwfqjrp5se2jmgybkbe1h8byrddgvlt16pbf899rt8sfnymc7lln3d14nj5xd7bss2p5l3lvkk2tv5uubtp4xt27if309rxs5qgaaw3kaam04vjmea0rknps0hqqyu7ljsdvc32sysy4qn13pr9bwh563y3z62qqmqazshd6nsuz6nuyzasoficd8gz1fdigchajn1rlsscydw39qvtcew9p',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: '8fjs7lp9yxxir8b6m11d5joo5m0dty800rv1ltmp9w88rnddcscupxu499rh3ga58suvkqmonc3k585ryze38r3g98krsvr0wjcuwhgc9qukq2u3i9bih7p9f111j8rkg0lyylsm5c6evd6nkyl190hbxqj8ngr4fgpdqthe39sq77hgotd3f5zgjt8ci571jjuymi4ahmb9p6duqf8skmfqcxmbtf4n6cdlpuxn87rkhywjv28w1x88bxdzf8s',
+                surname: 'joczi5c8lphah9eql9fm3xg90e79cck0aqc6dlyo0eubmroh9xnz943no194vcqvkzsdinsswbem7rvmqg4m7hq1cgusuxbf304ib5y61ojrxt50h9ko3az7kwoq0ojxatjezxweh0o21yx6469hpvs3k2axwwcgzyq4h646krpbzshkuw6ambvwlf5h3jhizvszl5rcgjhdkcrvywqubv09dpsk714rta9an7gqi7g92eh6we7w0my63ci6diyr',
+                avatar: 'r8svrwhv4hijq9vklp06hws66yitj73pkpyrm4yqb72z96bw6tc0ti6bm698zlpxdxz8rbbyizmclemu5nbaygc1kqx5253joihymixo4o1vhyrpr2l4vmmd2t4q6l0d3nxvfrhc2pu29bu9gs1qt5afj00xo7arysy8ple3eqwgxpmd1821dy9nwc0788m6ngsbqdoz3bp88zfa4i0kfruazy79ceimevhix9aps12hug92rib7f7mkz1jdgg3',
+                email: 'nk5bmu5t5201ccu75o3vo85013v1hmqtvbgi7n2ztky9a759piex5pz3bl1el3s13z0eczox4s7rlepfiglqejsqp0mv5b2qyergldwqk3ukjblzs7mznr8r',
+                mobile: 'yko83ejul3cnjxu5wyw0kglw59d7ep67becypcg1q85inythsvwj4yq5r0py',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'mjhjjvt0g7fhlmts20z2v12lf3akg6gknzt7kvthc5yyjxi3md189ctdx052ef3kxy3c9vgguzr7590myhfwsrpx3fj713rfhjg29n54b1zm8qe1gai73550',
+                password: 'ihzvlzmudpxo2f18eezndi1k4di1g3exoubvpmz8zvua04v0pb4n3r0eju1vn47q4nummbiafo4olwng0tyivpddr796n46izuz35ygb9hvc9o4zuryrtcuwwzjzbneasjtzenim33uw4ftt6858k3ag6jak15ueur1mg38cphzxrtsrkouw6x9ka3cklxfvyckp1gjwtt0r16vupsk1oon7tmg2hwndprjnzfzjrjdpr61d43lf61tck8boshj',
+                rememberToken: 'gudqe818481yyr7n9pjb1end3c0ved9g6fwjzljjht9h1lwsn34u1mc21byk40ssvxojleb1iz5buu88w6vr8lqmc4190fdwz1vg3a3mmtejfibmn9wuz6ccnswtrnc160tis3l86gs1r102jph6twbqhx6dvwmoskngintk02zef33ckxgpbzaxedgmc114ey723f51dp9xi8bex4eqp2kzz6ud7qcl7hcdho80a9ot5ribt001xx5n7mrrzkq',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -396,16 +485,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'gkeep7et4p0flok8spbzx3e8x812lz9w60clvmv1a1hcyov2msdctac60tj8fo2rxo5zm273z1bgytcdpcxmk58btr5lhypfgiymx99lb6lv5cai594ul1xlv7u5d3c18mgkflo8vfm3rxnurl85o3arscbsu7ky57az71b0ytsp0g32p589d333qiluv9cmrbwz4pjw4se26pd9x2m2u36gy4qexaw4r6y3ypk2hlqx0uoflgpdzxqnm5qvi6p',
-                avatar: 'f2wyzc3gt7w9x4d0r4m8tqinqhm923uxzpg05rq2ubjigjiv9kjkmrx475lcvk1l1ys2qbxs1i45sm0ogczwi8lxzi9qcv3pofctb0wkd9lxywi135o78eucfxerftemk1zktg7wgeuqdo9c8ji2kbdx2z2milusq7vr7rswm3c05viw2dkwhfx8k3efegmrhadx6g51tk1w1mas8d4istfdzck8wsmw1sxklv337dpht1z5019sqkow32kncz5q',
-                email: '9rq41adfvtz97ydh739b90rc3i9l36qvcdeez5piqxdpmhpmts17gq92ecgvb575sn2n3nzxtnix0br6r0vgkkqbn4aq52gc6qs1uezg4rcf5qcxs15puplx',
-                mobile: 'm4pellkdbs6jjz6xqc1u6ken19d8vnum7nquzy4spqzavbtyuuc2bfe9u8b2',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'ltd0fdj7fgezv4wnv8vekm9g0o8q5wmjap9wav7cophd6hh2fbxv9tycps9s4ir61c917zsk6gif7g7qhd0399xekqvetvbzyorfxgft6p97on90dr3ynepr',
-                password: 'cty0cqh7o8b96s6orc3mwfe8u1gujxl9f6toqrulbegwbtxv0xn0bgkhxr6i8qsa26swpfo93qtp0fjwnyoesqzy4dd2pspvu3nsbhvd30ldernp1f87uepkl4t0c6p4dtcraaf4qzqltypuuj7tcu1qoazbprzjvv3fu3mvsuj2benc5ol4xrrku2b51d5vlxk9t2cw7szopy678lvzmy0whu4obvrghpoqj4kopclxp69d08xzuv3as7i4ukg',
-                rememberToken: 'zec45za96gj8aqp0ljk7kh2lm1waakdyyik7pg4f4hui2r9sub2yijpx68lfu66hvubsbtu23leeop6aptwstpib60eurreqx0f0692y836rbxeayzx5wc5w2vj8qdra89bxcdxnl6tkpecztubgess9lgeiz36yuff8dcv2ss0c6m8nbdo8eojvcw2jaux292a5jvq7694hgohfj6t7iaiylv16lryimf474n26ilq2azz8mlya07zw5xidnu9',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'owkgzl9q50hlows7pgu70m37fco8k2e1ro2aao0aorjj32mer8qw4z7081r28orozhc983e0zwynroyd3dzsgcvrjl5luf9emfqt5c8qs51adf9cil6mdloet3lm7plw5qonh9jd2s7pn24lu9dma8mh4yguugra71kpoyctcibl156wgsfgrqpsd2ygpyye03ijh9824k6sh1mb8pm6uepmj119glgas1t639sqpap3ob94p59w92fyuiohw06',
+                surname: 'v6gcrcfhgv6y4w2lf4cf4x7qr7e4goixlv1nlhu4on4gwtbk5q54miadja8th5yieara7j6ajhov4bgq5h42jj4nyyl9tb0bx2j3ofufrdf07v9zv2zp5ov1hdf3d0sap0egwuc4mdvqsn0mvuu70cc8jjz7xf7ok4cgfka9e41zquq8sbj7eglh5gb1tqboao5vd89xx52iczj34rnqvktl8fb8t705nq2rp6j3ttr9oh9f9vruik09p7h45uh',
+                avatar: 'tmejt9h3ayuqg3kty5dfvy4kr3evh4r73jleqqj7jlvfu1dzt2fgzox0cdl9bnuetfdlgayj3hcjditgvpish6q1xfy75drhc2jzdex7zg3dkqiw0akpklj1cmvui9z2mpglbf8omha3udtqhhgj1gku0ms0umd4qvwxhxgpu2mrejcgqml4tsqwoo2vnpay1og81dv5mspqur9lvzgpt3wthf7l8w1od68ws0yi91e7v5ry8aitqapzwjrtoaoj',
+                email: 'wtzwra0hao7hw52ezxn2r1ja99jtsbnd1u0f0pvoblkl0q5yqvg408utuia8hfbblt7w3mizfhv2zois58hhqll18kwtjn4cevqm0l82gacqrm11chh6vqhr',
+                mobile: 'a98gbxkwx8imelnbwthitfjslwmulwsh7qio9etjfqvqtj7nxg3jjwmjhy2r',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: '712m6qsvhketh6asnjb811uzcyio32ehmgrggy5o5fzw7awdetp0nssyzzslqe99ydshv5mvxqof7mhfd30n7ymr18txtda6bczd55q1cw9pw43pnsz8qh37',
+                password: 'oke8mml9s6996aaqa9edjt739nmtw853b1nqx1dkxdmno4qf6op7vnn3rs9lcsye55r1l8vq0r6qkohndzwsvrrhlw0ialj39f5fws9bhpad0pq9y01bch4m6x7a44l4zh0ctc43cq8g2m8mfdfbfkqq9p6c59dqt1wf6tck4olb88xh5h7jxoncjvf3kn5jjhctjesqmah1k1xdpc3xjgpgwxeh7iahrxwkghlsosyz44xtu971s15x64f2h8n',
+                rememberToken: 'iwnyo8p6dn2zjrkj8gx23oo9545kiorotgc7oopl22rynuk19o2nur8qozlczo7nuz9dfvvx756ye9rwx7lzcr7mt50qw2xg7piz6brffcyy46vgpbjrtestod4isb6b8h6rajsuboz06em3tr9yxsv942ae0q7rc1rry76l5y1shgbuhf1r0aozgwvr7rixjcgq77gl0tp1zp92lgizj7n4oea0gazim1g6z42o939eb5z9fabqc7nnp3op3oc',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -420,16 +510,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: '8ky3nx1s3lu1savs2lulzumnmw0ekur5yj1khlihuahpzq5bu7edvvx3z8x655h3a98ue78z91cae3zw8akylrq2nvl6iut2204i4n8ujls1onnrgk4rtxtyohhks4q7do1aocewd2kyjx4us68gzmyk6f9ntkly9utz2t5n1kg3lum8jht145rkuenqrniqsdo9vxqkq89nzlts3m15iiep4y4fbrrezzqewm8eq9zznc7tvykp4l485tezlty',
-                avatar: 'd1s4w1iwk6le6iqsea5uzx1r40uals2we6ljuayzgx5pkon0xetv2erohl5yaawrmoqc48hoct9jw2f2bnn9th8d8h21vfpsoslhd16dks2wvjf03px2b8xedwj2eeafvwmntbtdb0duknqaxlnw1u3zr9i9yaesfwfav68zdop9j00vgsqng4rwu2vd89vzt24ra5km1i67s1f0kw0e89i8nafeozgll21oo3xlts7mw80hpax1pnk85nl1vyu',
-                email: 'lvi9m33pg0gkvss37rwjv3aveushma6i1ki3i7kig4ggzn8xllzo7rs0uvorqyjwp59qjkt5leuea7na2kqll34w8w2bjsmc4uj931mz77ac9rd7e99t3eprv',
-                mobile: 'ygppmaoemu03hxw285d2z10ikmyofdirocsdtk1dbx7abkseg819tzrf8uah',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'ugckeihe9b776qaw15m5d1v3a23hykuo3vk2a9wb9wldsuxqt8xukukmu0sq6c182wht3qarzrfa4gb6dmfbxw8y1bmywpudiyw5ua4tka2euppwk30tpgb1',
-                password: '0l8d4juyrpsneovuizlb5qlr62kc5xrddv2q0974stcih2hkopsnk3yartm4gmjwl7emckjuqe3l0nkbdx2hmqwxwluf8lmjx0v5a5jx505ftsjs7mkuz4conoqe7um0nc4x6utfx1pzli7avqq0opcxhes9w747ghgucqei3kwk32c1tbpaoao4qmrq61end626m81h6mx0z8b37a8e1zvpvuspt3oibdc7m3fkjfsfnmb5q7fyyua0yjwl9gp',
-                rememberToken: '296kdzo27lwmsgf9mh8gu9itfjz2f4y78w8sdu3thpnzz1jqcamkpkf1qvu8cytllo5ey15m1w5dp9orx72u4gcu83pxcxuvnwp9sc371kzgdtqg65xuxca9pzyvfteu1ybkq0f7bgcmk43a287c1dnu62jxzt2zi4hhs5j8g33cm9qzt8gva20fnxubouohn2yvxan6bralrgu165qxiyd4d36po61efu2fr5kgmo2a0je692e023ixdnjz8sm',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'qff875c14oabgbqy4tv8xedpzbk3ut7gejtck0jnrz85hmd3eqk7zadl77cy8562hv6fhm1fmv04uhrh0wafxdxre18aqvxdbl84u0e9yrztp1q5c19jhm6d0kkrjjagjsx5cvgc1wc7bsy41vfcbyejfk5yixen31cu8exn6holqf1rg14omsli5ds0fhm1zoxrmcrkqfdq91ra269sbnaxzyoqxvc4qob0j1i5xh4lsauxa5xwoau0g9n5qi7',
+                surname: '1gltu46n4j1n5s8zlp25b0y08vw11wp48hvowojo08eazc9822egbwxwd0ph3xbbovzir9m4a6nmlcg5qmm0p0mv3k9rcixzhltutdm0zx3qy3z5crmhjrbi51v5cptf72ak65qkzmpqlmfitl5y2wudxkze22lxqrtnnb37uyu1vousvadwe8vpa4rjva2hax8kxpdydj7a6p5lplo53dtk388msrj7e7l772xk67hi4mw2odz7ab45claruib',
+                avatar: '9hczs6xehtb3rj2q0draz5ik4rhnwrb4sub0mb7tc9t6kwhmgm2c7qfa5z423vxqgfdzq5qah7i5rolzhxm4cyl78q6soanqrurskk9t3qa5yl6lyo5uat1h2d4hqw53sfi3o0qztu5itmqn889yxzfocq78frjkvq0ujru6my7q3r0ifn75hj43x0g5ynup44phsrsvmz60jo658buq6g990v4kn6nfpnoyxsm6nigtgobf9ncw63b4v1z9kbg',
+                email: 'dlpcmnhdewbugnqyn3dlrvdrzebujugobjsula9hf1o3oeryqbwzpr2f4tdqi8jmacqzsbl0smdq8w17g1yxrvn24c75qeeeg7z7qs3iw1rg0ro98esqw9zxm',
+                mobile: 'y8v2p231p6c5iarust1l9awv6n1saz28b7jifhjsioplo19117zeb5e8ywya',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'igd60bsq3x9j448v9vurcijv34f7m0mngc9z3v8mefr966hzpumxziw3nlmz5bveicbqzh3sfpiick7m4kczfi7vfbs4nasvd81c3cjknjqhy06vasq567jk',
+                password: 'ttvhkb2ionhqsigu5r8fn6gs1u588fgjeihv550xkfodjmqzfs52wj81ft0f2biq99b95uko5t9ush7qt9c2wlc3bmzh9aafb72w99b6ieytnu3dki2ql1icncc7secptt7qkzlvmnc6iz9qgrrx312mn3nscyq36j1upvlaua4239wd4yspiahb14pus4s8gkjgdqpjglww9bi55kca1zn3vvg6m48o75h8vkr0o911k9o7rbcuqo5vvwp10um',
+                rememberToken: 'bti4olssczara74t3a8berus1oy427mphlvnun569mfod2jtt9obmc82zqa82jcttiu9z5amjji6vcajulmpu8qri215louc94haj1tiaywp19kjgenaw8m86s98kqeabvqn4tek0lag1yoif3cvhqiswgp0zttku8d8cxmkoixd1t2ypjvfh8htuhlqme2995aepusams4ymfv0qkixikpjw602qp7mv7kxaajy5yefmc64q19ppmw9swy8351',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -444,16 +535,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'unle6q20c905xygra4or7rhej24aijzprwpzxxmtca6mhdu7venk1o0s2g3faib9kmxvgqgmrx2mthlwphsa5dhh3ad2t9dvcfqc43y6vwzfjwf9z2ngk0pf4cnpzjeb92p0vc1lb7c866p7zvz84mf0lh5z9q18hyik77uif5ga3s5tq9jgtqyaf32fmcg8a3rsudqb10j2o57a8z63jvloylfqtibf81murtz2sq5gyweupq2w6opvo50fxrs',
-                avatar: 'd5enmotcl7pb3nd351r71030mfoky82ly1i5mtbbh1t9al8cenhzls9od13xitg8ovarl3yvx2auianeo4yxp5psiwywh2jr6v0vaho9k5fxr2flyvgbbp5m9ft7bcyodkpxmrb6imkm0uk3tkx5n4e9wn2jc5d9gr9e9z6iz8m5hgb03ksjvcbyeuc478rgqjdb9ddwbrp2nsj39hw27wtn0ydic0cpxprv314j04gt7cegy729vwklrqq09s3',
-                email: 'gd7ngv5nqne4t2rn6mwcs9s9mvq7i5nht2l3lobgnnn00rqxziiqev2t1mbfcxmpmmsi29b612fh7x6n4qpz3dndiuxaifzq4oqtnshee08ewyh970r9973m',
-                mobile: 'uy7halcdvi7e8c1mkq2e5cw39o5anv84lj17fylwjhouf1vrz01do09mf4l38',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: '3eftt7jszsx9uw4a8psy8rzblao2p1a9x7nripg3ga3zjuqylsewl3r0m5klicnqlkp7orccxl6tcuvhenb50gntelkccvocm197k4fozk4xsm5k53ajtle5',
-                password: '518wpf9lb2uzpegomg7zcgfzu5yqdd3sgay6wx61z4odw3ywisw2nl64wcq67tlu8w8s05k4tztjglptix5mve8ipazvg08y1678y7q4bdz9lel9rwl276bemweiawmqlhykn0cxz06yk90wzvbpz1yaio5sao8rjvkqrfzkzmd23xeiwtbpqq8x9edg84ijm1hrsfq3iofh19s3dz7lves4xc67u8aylitk93hiybz9d62fl9yzm5ez8bdcati',
-                rememberToken: 'ougfn48w78mn9s7xjf34ejazi3gfwdul59ffzh7m30bndaoxo7x82g8o22rdd4p4ixnmmw6dukel061ktj5l5gxf6v0nvw5hqe7terj7knj7cphraw2a0wfccq14hhfeu2czf5n5s7bni1xkvs9rky6c6xbtnb3dq533tnv84l74oprwhw745nzf8hi6xqymvoviik92o37lndl6diupr8nfzv8gcwnu3dwrv97z4bw5ke0bs2xt7ghdc9w4g7b',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'iyy1sw2h0wmm7ikd6vyb5nxgbfkm9vtdpp8wylbzdha078o7e0knpob40biwbq4gwkc98cg48dyp6003wdhnet1gt4r1t8qdi7szsjhb4z477td5q3gxjbj9cbn9xalrlntgwq83nvwgnvjsifiyrvf1am6fw709wrht88ppfq7p3sc5fymbmxuqtmnbwtenqrnfeqdyc7qzl8nhetg14zuczkhf0pdsuhkzhfrelz6xclgkajhx1k8p6aesgn2',
+                surname: 'rrunqb943na6cbrzn8c9r3bmme88o9cdy0qoe0px5h3ds0vddnzhg8h9jovh1kuswso4h7ygz8n87d2qtnkj3qwugy4sskkfvnyqhn0rfg8wcwi2wkz97pjoafwlqaehkqtfvvajrihx0cc6w44m9nsbky6yt0g2w3g79d7b0rl1v34ickii5sd7jcpvwxo61dusad650c0b04mk8na8eui0cquhao8sogeuxms51mmbzbt6zw06gjcq310v0ml',
+                avatar: 'py9lrnfsmsgtolk5hcopq00nu8vsx0fufpfes05k7qe1at0huy8rirqycgsgh6y2evy3aneo6zntkfb52yo70017ai5nn4hy5ul4vjlos6mlrf9ygs047yip0xim482l0urx07lleqc9gvkrnd3nd0qq5wi2g44d7t8dhxjej0f3i4iv9x4krrgmycazbs6zm1u9j7y4z3l4ikcmfu2sjwnu4cadeeiml848amsasrnuyp972w1diesqx180pgo',
+                email: '2uvda01x1luxii5ywxgfjzmh408v78dmumb05iro0ddtw6m44li1deogldzy2d1cdgpivxuh39f1x6pm3yaig6wrbcrbprgbyv5t8c0r7vpicgy93aynpiop',
+                mobile: '1osqvicywms65yw524o82w4seinlfy3re728l541qyzwgnesbj41wlz8a2tgy',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: '0xecz0cr666bgwe3541ewpq3itjnpfirok1wnhjsz0tcbic9g9qyhqu04czmbimoztj1wdv3s9zus9g58sf483ze962tj68tbdvbqpha0obafc44m9w3ajg6',
+                password: '3xxgs998pekkg8fkyjq05kp3enm2c0e2uplskxwuy70og4e9vrkndgta33ugm7jmwbsnt47l9atwfhzf8kd0upvb6pcpcoip0sfj3ws8xdlca416hvkz3wfnrvuu8mdq0m1vxzqypx6zwk5n2x101wo1qkm0z89ee453ge2205pkb91k5k8pjp8pd4wzkmxai7arf6btlcn20cu75pk94jrip3w83hphcesrhw6mi8sofz7ifnunyjkwotwmzvs',
+                rememberToken: 'cqmnb0wzxzt9v7fk9nval3f8av291fz4oh578fgqpwd2o090rm0r7luax0qhcdajdopqbnobrr8sb071tdzzatjemuv4gt08zrnb8qc9uu3it6iyrmre08wrklar0claxcx8ho4bpfogxw9das7vllx9cuz9fm4cc21aambqvh8cru9v4fxrsdtqmbutthsngz9efiw799sg988174a11gh7yysvs0noscq7f7jqo2ezks4nyvce49y2woxrnpj',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -468,16 +560,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'a3uk7ocsk3izzf3mrkfw9cig8w2gk25o2ts9lnk27vxq5f25m05de9yzodd63afrrntip06p92et1vqke8s36rs6fefysc5scnmtmmz3cqxfmuifp4cyspd7otxyvkpeopfcbnpjmj2cex858zdx1myzw5a4iftg24gzwu8wl8sweimp8okn8dub2zzgvn0uldg7st71az56cj5qf1t24a146r9pxyooxqcj3lpp8sgdcyu0bd2derxuazgwjqo',
-                avatar: 'qmv7unjigxuu4c56uv1giuhk3732xpmpnf07pzfhkcnf7ay4236k4tao94hdxd5njh4835poaqtidjsskwlkwiwuuksmubdlhzjys8p113cd9h9h25hah5njksm2zx9x806igxir0x224kt9jcrohju12xm0bgqf0hn84lsm24p1k87ais23q91dgp6b2yk66emthqnxmrrslb8mpbdiorcbaeh812yvkcuk1kxv1ur7lonvskyyv8oswewp142',
-                email: '167wl1n13zuv3i3vhos0ss3nw5lxryq7t5rr5jsbh3hldxwwt0tmiszqfahqs11y74cn5hvwmlc6bbcf2drygbr8cwoplxnhz14ajz9z5vwfnmm0n87apboa',
-                mobile: 'gsal5sbco212qozhx2ligwhaslvyyhx85fq42b54us87b97jxsqhzfe8dgmn',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'pcvioa559q95em3ufc10jxvd8hggy7d5u4mu6agoht7k1dozncxvsrukxzhzqg7hc72tb0ac2rn6k3l0rs268ea9g3mbgfgn0qufja1vslxx7f4bub8hiwnwm',
-                password: 'szrd742p5exwn5ch29npxik7est72djjr1p2i9722o2dvixu09p928euq77176xua7l5thqzedtqem5p3e5gy8b02h79ev3x1cfnrg8vuqczgb1dasaq5as668yq3z7zdf05wtwg85pcwad4blsyhs4uek6ru549q4v4kl1qzale0wqweoey5jmm4iy7rt8m2e7jq8offxzjuv5mfnshaq5f2j8shqs2p1cjp263g8rka4fslof1se0wir16rzy',
-                rememberToken: '3xei7uwxkppwem3gv530g2lprixr4y2ds8ix2wq9akmwfzd5hiyfceti4mq3rj9gf9nxnb5in3gtcdjgg04e5hwifscb53vxn47wg9hmtyu8q0r3nd9o3x4sh47huyfgmhft20utdgp4z074fsvfozvp2rlgl7wgxw3efym4mev4evrmrgu23wse5cp4i68vmevkwt3vpjidf7tm6y3g3qksquixng0u9v7xb2swuteplbg3c4jf4j50nr4ga8u',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'vmtidj2e9rlvtc4de3zg8yebdsbnvqws7xr2rcihmrnimunj2ncq5gaszpxxy528i8wrnt85o68sqrwd626gtg0liwq84keu2ahkb4bkyyjnnw958cz92fyo418tpuaidquhc643p6cifq44s8a62eoyeyn6otmldf4c8yy0sr2h0nx86pzev0l4cuq6g8h26m15x62vbhv3wkvg4x4i94suzn5vrvjjo9x89pb5c76hrd4bjp4blpjxgf6l10t',
+                surname: 'tklvdj05f05fnxxpjbd9lm4pjodfvctfuwf14o1wni8qyxbblmcwde1ffdf2zzliamtnpu2aneg4b9mbh1ry08a05t28nbqymdee06ay3f5846s5560zvbegqdjzcgi8cv88gs9h84kfzm67v7ubb21w2xmu0k52tlc8jqgkfsbbvknfwtok54qm16ttz9m6dh1rhrcr8vlc6ipq44a75zuwvjwnjn0nnd9w0pb2phgsqievirvk6ql4fw7zt2u',
+                avatar: '9xn2sj4gp7x19r42hjgtwzgxmbu149l5thr857fskpmqxgow9uiok2yqrkxw6p37zcas5xx6mbxyoqcaj4pt1s3c1mvupd26a34q9v92y8qskgque8ebs4qa8yy9jrn4zg75j0bmzmegtxexdhn9ctggvvf708fkowo336igl0s3v4ou092dxyout4b7tw3lnksulcf5b4wrq129vrwke31r8oghr98uexknx5nogmvtbocgekfsxqze0jt4mye',
+                email: 'zcdmwsusartl62xhjdd90l0r7k4we59ehjd3j4wl0ssyj4ce2zbkyo1db4ri1t6czhgr4urcdo08dhet7flylbvfok2jtkpu2nt6wesasxk67a054abon9gp',
+                mobile: 'cdkzgoeu5fm1ebfhrgl82bws1y8wjc7a5osq0303vph5ucoma8ga1y9wktzf',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'rvjfh6z5djxfdod5xqqg3vt3r7deozxbqfqs3ue519n1wz2mkomp5ny6tun6ai6udipq1mm5xhgtfzl4yn1b59tx2te83phwjxip16jus4t5oadfvi55zwsml',
+                password: '5yb0qiusag9zo8ivwe5plr61r6w58bsbtp9atfqmrvku6mkmctcps8jodx043hjnw85nzckq106ef7d2kd1am056toxwjkhk9lfuri2qumuh51vswfvfuaqhfmp4ze1pweq4z8q7tqt9ina6sr63nri9txgkvh6swrw9ymc42imxxt41xzykt1tdyjlt79w2bs0sa80e59uiqlu4zsftj17hw6xoowchb4v3hg6ps5qncxeqibw8kx30i1mcxi9',
+                rememberToken: '5fr8zn1hmtydjiiqniq28vtlgnnjug7rkfp0k7lg32c70tt0rsibithzti5f5it0uuf25nnbrp51yeqozoj94u1bzre1fg3l9728urvvyb4ricxvjmpod45juc1f7pjbzuwl2uvo9kag8tusncvv3o2n592801wdodti9q7vixq2afg5wt86g4nj9lq1u9qxngccq8nwfapkdor1uuik8l06x34ab17d0nrcbrshjkw5bij900n9obgmlwrttr2',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -492,16 +585,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: '2shhj6bkj492xu60rfg1yoffx99129ws1dq8k4w3qdqxjfp8islvcohzu10n7w1i26el6qg99ylrwlc6i3vymsdfrqemm4ptqv1d8xcgv9j3axol256et7pymbbo28z30wrvrme7rhm6bpjtxjqi8jgx2epdyeqwtj5ias87gfg5eux43s4jw3fhb4e9l70vt5pz0j7d425i5wa17rpgq89u9bs990lljgn84s5qk423inchfbzlbr2vpev6ey8',
-                avatar: '4eqzcmhox1qmr5ig30pss5osp6rsw1lcu0oe7lutosholjt8it4exye2h3febpz3hbvu3yrx1b7advy5u8hx9f4iit1pxp88a64rz44roxzees58us95l7gurhwwoqyszcvmkg4ixuh4jdcp4na1g4fvithmey2e6bzex0yn3pnczejocozth85txa7wgvydnd7bzziwbf9r0ikslvu3kuxaz6yaq8fc4x3yy0n5jxmlv7udmutx7efe864q39l',
-                email: 'q2v8aj5rhqqhq9dhpku1o0yi0efhu794lhonr7qe39krhlwv5dph2df1jn6ll27agt6ca58v70x3ns4yvm4gbfh0oue3rxtrgfbdg7rxckqwesqbyxafresx',
-                mobile: 'bf0n0u6ppus7nwn3qu3q94egf248s2ehoqkjtufwgovz09noczehmixt94vo',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'g3rr5c7thy7wvxs8y4m5k4mmyp5elk3hz6245odhx62wyosxduz1jfksxg67v8p6qnev067szl0bahklthykj1xlvz2a1i90dd8cnuaiy5cet6ynty9k00ha',
-                password: '4g5c73y0w8j2b3kqx8kjdetkjwdgc8fj5vk2kzcwg7bx1hnfa48wltzs0x9dnlreb0l3bcj17m8npyibmdt4jd05lfo3dasjf8prlu0nht40j3e9kg2y8f24dgwginkqtaatj3dszkqh5ixbnfyk67j5cxn9ojv2ejrwercf3zbmjgewpj8kumbdicg87bpto82i2uszl1sbgug2nm2beiu9of7cijt03iqtjc0qy3tenqzrpruqplo9ug91s8ns',
-                rememberToken: 'qjpwmoaya7h7xrp78uvv86ih2u8gyvqdqtvrhy58fo1glb6p0cvalzmqb3s3eus81apddq5tcj1i57iwk2a0vdwl0rxpn50yl2rwxub8zhsqmgo9sv8r5j1cffef9jncreiesgidax051et8em8z0t0zfdjm56exfcmod2newd9m8tplmpu2elmy7rtvbuqf1bx36hgerkrm9sx7s6widn9q26hjowqhhh9gq3pszyyvlc1iwzloazpiv3df27z',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'c5km381ic0un8tg7et9jqve3uosb88fl55j725l8xt0dhuvemedxmf6gbmhjalbwra0fzjrd4hmj2qnsp0bbvhrqsnszhywx15l0daorls7jra8dwbcmc0ikp6brq5ptfqwft6279xk34mqi00qah9d5ig7qpbj7jd26lfcxgu5jc5t36mwq4wya1z5ou7usguqeva2q5z1z5m3uf5jqxi02uz0c1vi2x94ub54zu55d5h5xnahwhkilelf3ywb',
+                surname: 'jd13yj9t47h2imjw3kdvu9r1hr4fw7i1ccr8xlwn3fvz8rbllsl79m2a07jagjrdk2xg4e7ttenezldnfj5wq6j87uueagl4mdbwo3a3y7pq7liknxbe3h9khbr5c2c8d7u8lcompe04jf2s5ysihg5i41h7z9spgru0omvd0heax6ptl7wwu0x3q70nwkak6p5subfi92xqhisz47tnoz9jdyhycq1ml5yxp462izni1fa2c8k3b95ftnadmgp',
+                avatar: 'qz5i28uj5ec273jscvsksly1kvrl9kba1a2syft2a86gxrpnfqjrlr2tiu9bdur8b3ffhk54cptlowm49zss23d2ic6y6chf4v9y5ub390vpe97ab8u139yx4tsupgh5im9tpqpsc5whs4caf2eb1n3b95b79khgnjmvb3166ckl888czpy94k3ck9mx7memi6j8nyuqnb2ndxcdp7x5e6cv08e643e0vgfio0y52n6s5ebj0stqeu0970wq4ee',
+                email: '63b7y1rjsvb0hsdwx0atjzfpjfuj56smr3emk09wyc20agwmvr90646mabbbvxxd7accunwegrbacmgbxdlseeoblg8lowqmj52wer6li5od0hb6i1jrijb3',
+                mobile: 'dhoj1n9ed7k4d3nm6nktyn8h2wiots5tmlm181uwf2iudyelqi87ezarollr',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'x9xng4f6zgaeij6eo3t1czzqmod1zd2998cxm9yne20l2jhlfom6jpfajtt0xsdco1j2q0pr6lf5tbdq091qmvuy6c4apzpoplqrglwc9t2c0bbygkf08zoc',
+                password: 'ci6ik0ic0u9jlkgpzs20i5a396119c56697ws4wrfdplz175ai2rcwv1b307au5q20qcqw1z2u481em31rkkdl02e3cm01zag9l61nuwel17ey03eyfkd0nrp74e2r9c410fjmo9pw3z7fa209lpt6ifuevyn1rscqf2e0as7f07zezrc492jv4k9urpd3ovpnj4izbvf2z9e297wljn385rp1h0u5wlg431rvbq3qjpmw6bqh1gjgqeq4n1urlw',
+                rememberToken: 'ah7g10b9ocormrx6ytuu8t0w9butojsbnchr1bxc1h0c1yn8iujac2icc9jsf52wrg2r8q1f98b9dfxn43drwe32c8uj7jidi2pxckuim15skh1zzklfa36t6uup5mtv701760m7vh533fccbva4umdopbfzzp7dp6dvg7pjp9a9wzeif6mjioivezsfaciwpufc2trh2sntg9xorg1cbv0jn6xccjv57jhuhmxiuko5n4ugsxnwcu02c35pa7r',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -516,16 +610,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: '7z3pyuk75wup12hw9ijgr4pu6mzscsm45suwwbv2gwa9m4cfzx8j3c89ju9eccqomji3w84uyez8tf8obbydws9mnm8hdw1aq3ncletjbqxugmzd237tpelyrkifiotom77rd4dqwkdqentwes9nl4rv37z2nwkg39jqntlma6pyc98w9sawfwf91o4wb1mt0zq3kdk3kk5ll4q9skombke1ierli351rky7sdigrsxhx2t75ol0u76x7p41wm1',
-                avatar: '60fejsek3mdqizq18egveqviqarjlr0cwi48fbm86tm33dzulyupg7hrjqg8jzb33ppx1onzxoua2l0nt9na6e46jp1ym9m9v0z7hcerw7estui1z63zo5lbmvdbyfifjgh1q5bsusj9kg2jv2iipg8z3jaxfoqg3dn3341brmh3oyjr2tcuarkqzmrlku6i6st0pihvieav0yoszu9c6rr9lwhhqfvcylgnemiw4ragr2whd1drt4ug3wp9g8h',
-                email: 's1c8hwilgteow3zdiclec3a8186k9qmydwp3b5bsaoo44z3cozfofu7sw0becuqvvw9ksjraydr2wwa7wliizkcdj2rw80oomi375s2di5yd75o4us7ufg0y',
-                mobile: 'b4urwy5g2l8w861wbe6qoriwvk315w8gh2boh2oeyrxqgc9ldlch1bn22m42',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'noyd4oherupv1q03y2s4e2ya1mfcppj6rab8558r222lny0hqn2b5yvqn7icyv50s8tlwf3vfgga9ut30fjvoxin5k727683vfuqlurz1kmono5rhb5fljrf',
-                password: 'xijvcznglo6wqgtz2lsjm2pabvhmojyo3c8xb0cqc64arimojky70vi626d88lmp6z147wpv6f0uc324z856s6r42u68patgnkopecem1x10tset5yozfix0agdnpic26pt9owzpv8bpt8vb9gsp5oo481dommu2zl132b2n589im3pes8qncxuv2t4l61ecjgp6ajehpd2wj5ju3gmg6pnqx7u3vhp6elxv2b7vbyisb6vnb62a75th1gk4ubp',
-                rememberToken: 'jyml7ez8ytps405rckoj99wgbkwoy1p703bdg7fsweznb8l2eg1bht7ua82wbsmzsau098kgf55m4iv8t5eg270uq9k1vgttpkx09ta49mb05a1netkzu79p0ccrcif9m9yxge26di0f9xhio4k2mew8in445dsw40qaejlfc8fi0ixhrwd9qn0q1la4n2a0heuisz1p8sfizlyfiaaol05qnvlendq92p92uy7be946g53m8fyn6dcdphu90pnb',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 've84x7qx7dlbxyhwujvqe8xu7t8fsd49rlip5zutv2c5ghp4nl5t4z75wpxgqplt3jcvadzj7f9bmvu7kwlngh45mmdwlo36bsv4xsy4ux9mbk4mx7od6jtum2scn2qzwozgz0yw5o45xubh6mhzhyxrwj0xkoa8nt0g5r6jm85jfnbjlt2tw7vy3czjut804560l91nkx68mlx0lwrutmhoee4wqjs3r6mcxocmie1b8lbvxfigkzujb9rebsk',
+                surname: '0rsiv5hfp53hlkpmiq8a1tu2mztdsvqwjtxz2gwbi51jb2gplkvmzd9cvtsj1dzu6x5x8em5jafwkotr76ddbivhy0ns38oepv9yomkv7uhdusahgd9fjmh4r5mo11jrvbwfmxkziz57a14kyazvz2cnhsunkjwr0dgyurvccmbtgy5juahu7n9dc8rxfeudwrtxns7drlwbe0r35teoc8koumw4d80igkqmk3l1b5zw6m70dcvqi19c5bkh12g',
+                avatar: 'lgig24ne70phh5w1v8tydymibl737b4ernysl00s0wo3wi6h3vwrhblwnj5yt2jaaidzjdqyh0e2u29p4urort9i224r4fh7gid3b2qvg0kxf97ewaaom406ehztontlbvwsm03oh4docn29nsh6otjkoq1pl9v8rqnmyt3j3xd6dk250utukowt8k8yvmiivjxm1l9f1ipcpedbc7vseodb555iinptzdooksvj57u7r6ol2kbnyuezmin77il',
+                email: 'yyhz5dstjhzeybo3o1yzl8i72fm5p4xa9x67zc2ql0sy3bn9xtc02rxpkg5ve0npw5puaz0d3zj0xzprwfgqg65il29rurpotyv1smkiq4mewkyo5sdwmp5d',
+                mobile: '54bfae7dmbc8udsf2v654waedqemzzxwonjixnph4rqxdoa8k2yeyarzh6hz',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'vloblozt3rpg065y4tw7mptz5c4c47h2gg2x46bopmwfv2hr7m24uk6kdtwj22ah7qn94oqor8by5e8kwzr7cjqmx99w96ro5gb40oflg7vugt5d4jj7rmb7',
+                password: 'rpomrg27tvm0d5nma3jkpaa7jlimdncazg8xjp6ha9oa73hz1jp5euoa62ewzt78huid1xucanbrokanx1bphbj1qxil44o4ywt7tu7u77tju74ebj4es0bawxecisgbmh4zpblb6dz0hjwj6tjco1r8y81kq3857jk76399lhidg601tgtjpa9me5qnymxzb8j555mnlu7bxnjfixlw0wlevyr15b02689pb0fnuxnv9u8zzpasellf9msurpf',
+                rememberToken: 'd7bhpag9pu4le9aeut4okvrd16uitk76futcz5j8aao34eh42afvq34qpv3fyw2y2c8qwkq863qxz6ogt9nkn2rnov1fyguhxoz38vy54gqwzo66ourvcxbvw6uw9u90zxbyc3h7ljqpsn3lkt92e0fjhu61y9d8jhya8kf19yzfup0nle1b274m9s3ejhdv0mmhycp0senrxot6q1etu8tk9pi31s6iku1m9yz3hsp59cfk10ds0g189zfnnj3f',
                 data: { "foo" : "bar" },
             })
             .expect(400)
@@ -553,16 +648,17 @@ describe('user', () =>
             .post('/iam/user')
             .set('Accept', 'application/json')
             .send({
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'aohno4q6qoy6pg5khby3s8dvdr52ikc64htv8ccrdous8yke3p3vl1o0gc1gebqcu6dfvtzlnna1n7jsk3q91x83769pd92d6xp9b5b21udoka0ogj08upzllc83h371x1uvnrmo90iisjosvlagcwscqje555b138tpd9lpojkllq8rzd1zlbufk6tskrrv64txezflz5mc1ur7rvuhz4ph32pfrlzqfsl6cl0p894rt2lwvfemfi8pmtz6qlz',
-                avatar: 'kdhat8egsv8wcihltovvlrlr690h2wni0d6b0seo1b5thkdqghngv192rg6a1nzlal8icsbuuokybiqb91hafr60l6logvo226vxxj7qzeufs54h53z8ygdyzakns3v38c7vgz9nummhroj7vrynv0vptm8n0n1oujd659jifcj95r1ckc0ulyxfvp6wl9xm0812l5r0u6vf312cif665hwtvpqeamh7v9fn6626a4ytog2o2xshlxuf20xmbt8',
-                email: 'kw0m9etqqmlmlvtjz65hwb64jhryr76s36euatlowhzplg9z6qzd97out26sn2u8a905l41xko8pdjlr4vu07u5bjxxwl450b1h3dr5mzznxsc4x5wmupict',
-                mobile: '6mjsusmk448ey3iukvbt38he1r19ptav7nmo3i20tnu0f3l8eq5h65h5znik',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'ykhuo1ebg75yf3v8ol5wqe3hw24hwpc75e68t738k7u9zg8e4qglvr9tkuyogwu8qffm67chdbbf1fkhpsw1n1e8892nh4x7a1mj476mwkcc8i3i3kvoyjex',
-                password: 'mln58jilha3acxv24j0geegnb8if5372drum4b7chsbml85wpmnet1midcbbuixgptkl77eui3htnvn8047ywx6psrtxsa8kr2uimoa636mxvn05t36x4wgra4pgj0cn303vopinvk8us9p6qxec6v66ijj6lkyvu4r47d4f7zxv944bohp9rhtcnur6vjyayyhrmn90udvijdbffpyj6he8186zrr11kk0xexztft54e7dqxy4pm8z0dxy2fag',
-                rememberToken: 'b88rg746z15rvlpkjpz08m6jcrt1cw4g06714osulazbfx5ayeu9d6won85h5lqkmwog6x0ccea0yfxjkur39ui78ii6h94jlqwigvk44d1ljf8xmodtrb301w8i31jcpirbmjdoh6i4f5itmd3955jahgedfcpzxwkp1rlcsf5p2kywrt7kfrsatnfzy1aa1orbdabfv41d9w1ey58tby9o9vfbrwe7d703t07me73445wiq415k84x5ut2yv4',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'ii5o9pb8r2795zwd8q6c1un1skll761rsqwucb566tzm0jwjnuqqknd375x8fbq3au2gk74havpthzuwnvq4l6iequuviked0t0zl4yrzemj0y0aqqajtc79vv2s6pyk04s053m9mgtcsthqt5mg8q9npnzf668zswfmbxxyn3m9brsdf0kejrh6wlrp0niopwwcvog3m1rajq0qkaxgaffooibzse25ux1twgxw50pgentyl9reiqhmhgjx2fr',
+                surname: 'yru6necrnoacpe0rwzp4sijdhppbaf4os8poqh708oi2haw7cckowixa4shyrvd7yb9fkesa90sdlrz2h9jm8j9wzf8zzumujsqavdgnb6njxsxc0qmgtvw6eymc1uhv3z5ghuksb7vtm47obi62np0k0ch887co47gk80fk6thdjmo9jpb5230ifwvbvqp6ynljwu8td1yxg06kqzesgdfg8xslfezlvzeuopepjd4ev9kevgantjqc5kf78sy',
+                avatar: 'y6tf6due4rxkb4qw670yk12rfdr1zhw6m5cle6x8mctg7duw67xa436xdxbtehqdpo5i3eva86jsfah6aiix9t4xyrim6fkix6tjzd274mbt8a9g2pm8y4t8ppguh943ecd3fuv4pcw1e5qdlt5wg6rve402bp605b00mwmzilvduxw2epfxbnbrae2n1084u26ia77s13ay43gzy0542r11xshibs9z43l9d7dxc7cjas2ry42xt679t6cgb3n',
+                email: '4oameu0vjcgn2d8uoq81a2dj4q7709pi5zxlwj28xxehxpqv25jsxn9n4bzcel692lt4qoblv8w1miajc6cmx006lx43j0klrf30vf6f5zd5f5pgsjnptnw9',
+                mobile: '1zfya20mruaaoqy5ay7aobndbgnrj4r23t2ephcaa3u7rsut8gsvi0rvsg48',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: 'd6nnykeokqy17p46jku3albip2tn961bpk8pzgat4mx5n23un1e67n5w10qaiyvmekbmqlq0jzr5pxg9w53cosku20lnupfek3q2kq3f47rh57bw4nr2qy1i',
+                password: 'g63ak80hwg21mpncdwtqnth0al2bwq3vxszkpbd9zbj9hrymm69q2db7fig8ka3g25w49a3zgz9qths8zw6oq454snfiibr8nnttrglaas7ufxng060anm00rksw8trocywj5b9yc4p8p23u4kbonfps7ot8osl2uw0wyo7berno7twd5o373xgb6tsys2jdakbhn3f4u01q4jmwiqzpixm6b7g3nwvtp2zqphy6ox91nbtlv440k0yhupsilf9',
+                rememberToken: 'j9xhpfl9ofeml1l1lv4ue8wkhmtiifk7m2ijez2avs7gqyuwgzo4snh5zwxu1rfudhnqldhrcj2k1cr4cdnn0t98zo3t9peziukml89s9whw1bcb43y9avmr76q064vshcfsx71muao73vaduoxdts18qmmvvafptmjbyudkkpi502hux4km0wtbpq619v6ywbfjf6kwib2tstnzrsiojejx87hyq3ce5cyvqhlyct47ncxitct9ubqf7kjxmow',
                 data: { "foo" : "bar" },
             })
             .expect(201);
@@ -598,7 +694,7 @@ describe('user', () =>
                 {
                     where: 
                     {
-                        id: '2b84154f-e264-4228-b8b8-cedf0cdf79f3'
+                        id: 'daa3ff3b-cb45-44bc-9493-7fd1d46d4802'
                     }
                 }
             })
@@ -615,18 +711,18 @@ describe('user', () =>
                 {
                     where: 
                     {
-                        id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b'
+                        id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'bbc14aea-623e-4df4-9efa-0de9d9231a5b'));
+            .expect(repository.collectionResponse.find(item => item.id === '4a5ae6bb-e625-4f61-bb4e-5425f68de35a'));
     });
 
     test(`/REST:GET iam/user/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/iam/user/7d86cb1b-269d-4ffa-8779-a2650c39fb95')
+            .get('/iam/user/d5160445-145d-4a21-afba-1b07df18147b')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -634,10 +730,10 @@ describe('user', () =>
     test(`/REST:GET iam/user/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/iam/user/bbc14aea-623e-4df4-9efa-0de9d9231a5b')
+            .get('/iam/user/4a5ae6bb-e625-4f61-bb4e-5425f68de35a')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'bbc14aea-623e-4df4-9efa-0de9d9231a5b'));
+            .expect(repository.collectionResponse.find(e => e.id === '4a5ae6bb-e625-4f61-bb4e-5425f68de35a'));
     });
 
     test(`/REST:GET iam/users`, () => 
@@ -656,16 +752,17 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'a0e8322d-08b9-4e6e-8370-2b8516489e13',
-                accountId: 'be5e6817-1bc4-40e6-a8b3-658756193aa6',
-                surname: 'awera06wju9gbwmyaf1m2zcgvu84b54hngmbdb71m5wvn52k3fon7mnzdqbiaaxjibdgh22fzwaqv8w2og44vrnq36s0jplroh8dfzy1a2dbcixu95pb2hosqqzma5qvnvz3zitl7jww4ja23njftfomzvau4pixz3q9tkzvsd43nw3npnklb39v80gba4lvjq61m2xkqx9eyg99p9pz4005xj5r8lm24pfpza0936t1p3isq35fhtp2uhdmcyv',
-                avatar: '99ax8djhr45ctyqnjlgd7f0ofx1mez5d3787jw1pgc9o4hqjzlq6cnmizeqkuzlmg4v6ppfsunhue13bjno5n5e5dxmexxzuclurcbs0qxc3k1h3rpk2v2juqu0y2wujqnzsdztr5nzfi9petpmmj8q3nx8z8yebatnnnipq258bjjleywmud0p7flpjg0vb60ndzcb72hxg437aqw42qodm5ruhfm5nnojmfme23jxcfi1qr4vm7x11acdij8p',
-                email: 'c2mko2hrmy9em50h3pagnjt1qa7j3nycudpravh211wkcqiyj12lef5wg6xnvbifkccat4clw44cvtf7iral7vdms8hs6w1d71x5ykiny06m914dt9voq88p',
-                mobile: 'mpz4rup7wfz07pc652lfs6or2md61r8h31gi49l58zerwhqjw9xw7piwrlli',
-                langId: '36995c02-b77e-473c-94db-de703f36012d',
-                username: 'cp7rf9mm80k6c22fkkpbveqmva3hpaix6tk3ff35kugqdeqe9f2bq1sca2tekkyyyjovmmrgqqf1mkqub4r3a3lbtohy4lvsgiupwrtehg516yr2wbgxx4f5',
-                password: 'n12a7l0moxjy41kqqyg8n08h4f6ya15k7dmuuhgqn1s6f1ls9ytwjfcwmxzom9bytwx50w5vzfczg6wo7b1nsmbevunvyxbkhjkph4f58r4rjvubicherq9gqdl070wt2p9h4pr3rsp4skpbxnswr0wa3kpu4albki1fkzc7t7ckmok8r8up9uterga0b7f1xmy9rcgiy3oxigl1ocnwuzwytcvezv6x4rmcz6uaovvx4tqf70zmem53cluxyjp',
-                rememberToken: 'h46f7ebubljiwyrdedynrz0mme0bfc6x7uzctrzlu52h23n3sl3s1ax8m5ghhsgviem02a496uri1gudn6h9ee7b8mw51ozhdl0znclz0mgh2o42kdtftygbe2qctlp63wmpq9lh51h7tjibuaestyxl21y5v4h0knin3r1w8w4geo2xk6btrl3bwu5c0tlsvkrt3vty5h6lrwh7ez5r331b7hnkkv4s98nyxwdq8e3qjw3hh5kzn8569io8gd2',
+                id: 'e3b53b7d-8328-4ade-8bbe-6af8352a36c8',
+                accountId: '97a4c7b2-feb3-475b-af32-3515eeadd46f',
+                name: '61jyosdw52xxix3xmwzelmymc2gn7vzmkbh3tobcptj2gzh9pkadx9b5qzq77kotl61unovxj1ynv79t6chr6lbeo1ak9jagljntzvu8oj4fw7uv3x4ikjyicuqlxr8p0i0dbirdz7ws2192s0dpv2k5kzhtd9lwnyd45wj57k950xfzocr44edg6wowxvq4uy9mb72ko7w3759hejgjwcw3nnj9eeiy1q1brzsgd2nusq8da6518dd65u7hlnt',
+                surname: '91a1k3wasmo78q06htck87b3jt2faysjozwqcjob537uz3bbomoexzjndd9tqwvoya9bvll3kzt4gu4xbysex6h8mqup8cvphbkgrm937vwrynix17gbgjpzjge0mmjn0lztwv03xj9mvuvdn1o57kie6l3r0ers0a47fa4x0pbcze8710vfx280xoqrfgxw632hu3gwilqw5tswcn2lzlun2s5jfjjtjba56a8xrrpdsa0fwy6vircvp9x6h1z',
+                avatar: '81ba1g3mbpvizs8jctu2qs9dwf1vsmsua28qm9lrubsp9ur72myr1dbsgb8jr5infn6opj9mr4dsc5neaiadoq1gfj9cfdluln0pgdn9vovujp0ka1o1i9bx98aqg6qfrrts4ty9z1t9t8yidclth5ux0zuk6ue3aw1yhw486lap4y0bz6wppxd6gkpike6ekgv4jo79hv0vjuz5pswile8j00n1abfgyrpkfhkujmiizbpwgr1s02aqu1h8mup',
+                email: '7ovegtjz1l511k8u5icrr56voqjgaplb2hlrbzxcexlf082npwt0vtxoe8v6jtnf4wqp3kak78dueoxmrjzbd3fokr2kaa9r7clj9bnorj0g2ai768os96zk',
+                mobile: 'xbnwxfwidl2f75jy0ko3ebqmr75e9kx9a9zmqter6ciyxdklugm3zoy2vafu',
+                langId: 'ed0911ac-f623-40a6-a496-db3f417e65f4',
+                username: '02wotxociasu8fy1skpdb6ekks0192rzzbb7y8unflexehg39hw0flf9tjbsavhp9tlknscc2ps8ioox7gjeivdwh0d4dwql64kqzhoie70ky1i5gy2ce66x',
+                password: 'ltragfq8io1ne6gyqbk5ysj24nurlf7pt8dm1eh9lonk6sai0nhkht4a4f1pwp9gwv8b1anmvcpfexwpp3kbrbxldbqn2mirm348vvwbs82h7gvc9dfmlw3u0te3narelm4akflqdk86i4ivd00t4gbeyd7eue19v7zq5fsa07jruv81qf0fz2d7m08tf3s00h0rugb76uynd1ak2ztd7vj6su47oinlauiwvpzs2m7e1g8y16v36onmd42wakl',
+                rememberToken: 'tw3rjrgmnwy3848q1at1y385e02z9kpyk7ooid0024ouo7c6rh0rhik47qxctlxps3s4kvpnq07kswglal6xrrstajcjstio8ubt5yi5tbeazf1em7zz8daghyzq4omacbeme16hkfw3crwbn63yne3dbpagea50dknso6p9kysxdfbyal7w3dkt6ysh0h50jnon77r1x2esu25bzwhm94siofgad03y5b6h0qxgc438ngmi5b97jgn9jy3zqd7',
                 data: { "foo" : "bar" },
             })
             .expect(404);
@@ -678,26 +775,27 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                surname: 'j2mjyvc4v1pi5lx3mnm2tzilj6ijjtnd53goqjlt0zemxuv8b9q19yoe6v8j7ypmaliadcef3nrd6vh04ku5550t06979avx8gatk9s2vnuv1buydfifd64k3o6iu9kr9vc6qflp9hg4cg2kdgsz1kzbz3zrldz1jc8uxazrir354ubhsh7l78y7czv6wwcr6wws2ji2k03p09k6knlymtvbq2kxq5t2oshwunrpf2z0wcx13dc1i5jgizm0zs8',
-                avatar: 't729gihwrpwilby1cdkxw985d2ty8riunj2aj1aiaoa0suanhhy8zbzism878o9kekdg8zhe626b84m69zwsvr3kvn52sx54atesf6b5jk3hgb3nktmg2mrwzismk0g1ga1ei1kc0oo9blufbnd3fqavdr82go9tgrx5h23og7fiwojxkmlyeg54qopo3pfpy4dm6px3fd2ypqkpgz2iojbi0125rrfjibwf6e5g8okq554w0dlwuqjk9xhmo1p',
-                email: 'v080npm3r6hgpng4bc9n0w15ihs6354jwxm0d426efn9kxwkgiehd4ory6y6llarsx5rpbqx6wlrk87bdklp16pv4ai028u3a3wsik5vx6jcyi8bxzahq1ua',
-                mobile: 'h5opcowkc331hugefovdoo5hhtcltcqw2fvx05ea8dizyckfvp7tv7un8skk',
-                langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                username: 'sa2m19ctqb034zu4ne2d96abkrivsiqvv0vr21zw228rp8y89tuq06tdzj8qj48cvu90ftj7dowze8poo10yto3wap03470l01obktzbpwuakn9ul59z2wkb',
-                password: '4ry0lp1rbnbtjl5k4n01m8l8gh6y2pdepcg73dquna6xkrr22gbxg0o1wqimig0bikiwwfwysux3re9wt4aelqzcdpz4u2kophli1v6mzf92khapr241q1rjfisfze68kmumdt2qk52dor5bwskl6k1lh85gbwme7ouq8xsjutj2u0bngag2xqmgzr0nlqkx7xbg8o3j1dsuhb5glv3fjjgiscjzcrdq7s12ohg0ykl93j7otddf49jlih0mq98',
-                rememberToken: 'xgskjtdvwu1vxcb5542dzg4q59y02iczutd1e2mk66wqzuf3hvibybataqcg80shjxur2fm3jcp1qomtcewjzgbslfwgyzy6iekpgd48wyxs8o1bavx5bgmc6avcxax5x64eqidgsf46x6wwy8p6msjqa62hrlri04bcoygb5bzcas3rsp6hrmgrc9occdhfpcugxncr3d60hzxct6dmhk2x6t1bymgo2fx187c3q9prh32spd2tfez4w3mstfe',
+                id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                name: 'jp15qpz177ysybot39ylztq814siuvrt4890lxkt1nqvdl68d1j63644qej4jppolqju4u69hwzcnn1rab9fhpvu88i8wwrjgvu87owjkj0tiucyv3inx4wush6n3whinni72czbx7lyjycsuzqreforp6jv7thaih4t3r0wn9sjykykz4kbsxdrww4vef40ntdduxhbnyvyvbjvhlpzbuqfhm6xlday04df3odsdctv0pq38jw1fwup6vf21dq',
+                surname: 'evegpn93jom6cvkq7pmv252wua9kkk58yullqhche2s897dxys38va7uhu0048ej7inxmnbzwulqo66zmq65rgy0u7qawvx2unziz1l8k3ts1g6dtz26n7e0evnf4v3udwmqqablnrhz7t2k5kqokfk9dqrvds2lwhhjmhj6qmeehomru5s72vsjq0oa1f5npdjw68pgmr8spqudwcnd67eht6ynap3wftuch2t9az2zgqk9gxwd7twyqz58yzl',
+                avatar: 'o6lojr6bt28pk4bf4nv5str9uvyt6xlyfjl14vgpd7f6pvmv5ck8714sc48w0qfmg61spog3ninxh07q0ktlotcw28n7wn0zd3i1bl6hrhg43p3nabg0dpy1iw923lzh1vsp9jsg6ay95c4qmv3mf4zmyuyud2yxzm4crq7ozb07exnx2r4bk1x89d47pg91nrg3vdoqmuc8r2o6qay17cc000h0da5vus3aniwr2mlieedvbooinu8ml3zz1b4',
+                email: 'ea5dmxymneytasjyc84mw932a0jd6qeso1gj40o66ni1a9owpwd24fff6nhdv02ba0vkm9wdiqhv7mt56c0as27y7e9u4pnw9renhcdkggz8kmigndft1ubj',
+                mobile: 'el85jg3jtse91std3elacquic0rv2qonti7kr3xg82atfrej9sj0qrznd5bl',
+                langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                username: '4e7ggvbsp1ecnr8z8dmvat29i755qkexi6cirofqcoy4elpbtyq3997y2159xphihre6qvmg7utxpf68www9mjiyms2kb5qejoppnxs88ss4x3x7r4ioy1ms',
+                password: '9w1lo8hbxmxxxzutbdgpm9dumgfr408q8ukaj8erd7nrh64vvd1sof0cpnagm7ll0rqrrgjff4al47eev3k161cmcpzop5p5dctb30ju4e447snt2ztbfx9gv2p46rjcfgcgj63hrhetp23xncu3krboqs7pxelcek5f2ni1x9iwvskjz0g2ucxybp3ayj8st44ul15f1iliw67n57c3g29tlki830hyk3etyen1ykh0y91yp7p43r85wwa3olt',
+                rememberToken: 'b4k6phdj3ixp949cm37jd5x6ras3a7eeh6vbiebz9u6amfy6di4abeenzwusvykawcf8jf223co1ly5jrm3tbxpxfznaww7zjd2t634m1lobncstc9nsn4i60dwxdef78nhh80ulxp1wn50d3r7mkzc1ubdryqsn7jtdp4aa8nz1rnnf57fhonv35h8za9uncmfmg2exwix9oad6oyubaccdb08n28rn8jyk1yak5lt6j4aco5y4dettuem5jzy',
                 data: { "foo" : "bar" },
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'bbc14aea-623e-4df4-9efa-0de9d9231a5b'));
+            .expect(repository.collectionResponse.find(e => e.id === '4a5ae6bb-e625-4f61-bb4e-5425f68de35a'));
     });
 
     test(`/REST:DELETE iam/user/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/iam/user/3685d271-6511-4c36-ab50-3f934c58cfd7')
+            .delete('/iam/user/54f1921f-3565-44d7-8573-9258b6906f1c')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -705,7 +803,7 @@ describe('user', () =>
     test(`/REST:DELETE iam/user/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/iam/user/bbc14aea-623e-4df4-9efa-0de9d9231a5b')
+            .delete('/iam/user/4a5ae6bb-e625-4f61-bb4e-5425f68de35a')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -723,6 +821,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -763,6 +862,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -779,23 +879,24 @@ describe('user', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'e7922d98-55ef-4097-aa0c-3280e5d379e2',
-                        accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                        surname: 'a6m17hcidw4oq0zrgdb24pu1eg6gbzaq4pm3ckw148l6b1464xd9za05a2atgrlw4xdw1iuir6335v01pkbc97kj85y41vsk3t5z9pb7bqg30cdzhobd8pzrza1so486ka1yf4smhqp1l4ze8vyxe9i028ei5kwknmrywfrtnmugk4g4d19bfta6mavo5teqne7zj8tauvt5gvfyxqlz3wzj55xvgic1ozx44en7hvxiolrdhr7xqad5t1iac31',
-                        avatar: 'zy742cee94k6n96rf5cn0l7jh0v9ljogx6ctjjzozpwai4g3e8vucxvqu22e6su3y3b758c9n44geoi63xt8267jl7l6hf7qpxv3bht1ssmpp66dqwj2y1z8gi8x7a4q6hsqg9akwbfhel0tmwea297zdvv6sflfubq3juh6qu4xceweualo7kitynq2jummwyjyjzpjiu2ppxx2qva56ma05eig2yunntf9wewwyraps23l2pn8ulw7hwzf191',
-                        email: 'siaawhxpfqscmd5da7q0v08x3j4otbm4sq0pu7p3htlf7x30n7oyyjyv3kg7sek6ykwbvbp47hk1p8myd8x9kpxr72yjwxdmxkok396781eun33gzsagv52a',
-                        mobile: 'hrhc7dzrk4rmjdzw1t7kfxk1t1chmuyk3nyvf1ubzzlrxb0r1indo3oylna3',
-                        langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                        username: 'nq8m9n064cs4mclyexv8sc2eqn9oek1kshq997evsn39w2cq5bvoupi7p4q2gz20iumnsuam16evxsz759k7l7k4a9mbth62bmjsg3y77v9t135nsifls137',
-                        password: 'lq6j355el9oqrljt766fgiqaobx1n91vpnapj3rclck79t6uxi2ys5c4gungenonip09kl05498v9va5almx1ne40c5kpbw5ea4cj69t2z0lzcs0lth366xnzadtr6tvzkqybszun3dmjmhnih5ffo2ikvdimjyzrs55qyx5e0clypxbnn5yr1xewtbztlliypx0ipaj6q6ln028ro2crp8aktta5dx9pbstoedznja9x0mrfdcbe2r6kueldpl',
-                        rememberToken: 'ey152trmtr6vy95hnalkfhed68qgaoqhjms0fywguc4kel3ar0hcbxe7xnpaxkj6mw9ydovzbo97cjrs6zrk1ly8wpv8432lec33qklex7sgco0t62utcdu0ng4jxgy68zs4gi73saz3624oyowjzc8om4abfaykgau6hi9royfn4c4q6df46j8q2qicljsejs2sohnzxtzqez04n2yrjzz1gyclsd5y4gn6l4keviuaetlcn8ij2otyzbu2l33',
+                        id: '7a41038d-8f10-431c-aadf-fc50e161389e',
+                        accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                        name: 'x1nabx5uup65vn6hmzhndjgte662zz99cnikktuoi7uoq7m3mpr8ongpe031i5jys66w477qneb7u4h0z3iiosd352c5d8b4zy5xx5u1qrqije0kpbeivaras8oe6oghc03uldhy9hc1qao59ashee63acgufebx6vahs4yutuhv77na1c62lzlyeakfj84xv95cbojxqfm6tei07oqifvht6ydojwa7lue6asyzpiqlgrpl5xbjb9binkkxb85',
+                        surname: 'gcvponirrq74grx6jh3aw824pt3tpfz5gn0ejeu7wnr4cy7akoyx1bfnzg9wlyrevdsew8zp980td1jh7bog1fjzsien8d0uvhiv3b9kpeqb0b1jcucfpr40mqd79v7vb69kg3dekmx1ugn8md4y6jqcvggbu6qh1rgs7scvgarrxnh5ibi1ybbgw5pacyb37k6yrl2mbit0f47rupaj2mue4fuwcsy8dgllffh6guhobyfa32uyn5k3kobrx51',
+                        avatar: 'yzrf1a66a1t1hvnd88yfivq1xk6uytbwgwp2yv0gt6fxiufkcr9tnbs1jh3rutlegh4ucakfvcbrivtw5dh1hk1bxhl3upccabsg5kt8mb41ynbx26ounpeqnbcs57xaaqf6n6iignxae26upticigv0kgaibn1p5mf930iv4vmpck454mtwbpnhqjzjyes1g6oosdq9n2bd1sxuxm141a9tr82va7ebe9cbpil4ezy0mfic9qkx0g9ivxb6q5a',
+                        email: '5nw2fw6n7xjqan0j9064fhw44pq9qvgo4qjipi18asqwtrxds8ihmz2xefdmjm2wn76l13vi99lxrljd8ns5el4ow7b09lmpxtphd3i0woijj5yw08rcij3l',
+                        mobile: 'u22vhq22wpc462cdosvf8bcoqk4q925fx2g3gtoxq0cd041vti3kgsqw753h',
+                        langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                        username: '9iw91p5yjbn4ra1az1bhxqyqjvyf79wugz8uuxa9d6oxze1dxxiylvrccsw8awiwx540jnkowjv9yhoofqg7kbz22mambm74ox2uy3knlyd3gy4lpi27i81d',
+                        password: '8uuagsok9lwnfos0oesmn30ftlj9ds0jsly8bf45gerf7ai485ehncyipmt3um5srdae3xim2yiy3qgi0eypsjqxwyna9pxc4860unwiznr1fvwzdrq5rhcmsxdey237z82ppabzz2dlt1d9m0m9m211n36cc6m8ag9y5tpw8whsas00813knikbgd91jrhzbyj2cvp8voqysoec7kjc51s03i6hxve1ku5cadgyaquyx3ogai72izs1iupb1p0',
+                        rememberToken: 'elt0cqget9ir0wk522sg19tg1xr8qsj5p9g4xv114qx8bxnmh1kwlskm53ivlspifxkk76ay5udr0a9i79gy8fdiytqmw98hiljemxjtoh4irvw5nk0ogpnkd6e3ufgk9ej94k42lgq5ajn8fe37tuo90ryx8sny193xk83ow0x9ap7zri2hgg12mnsaeuf85rlw72wc0sqs26xj0m26nf4bxvzo7en4mhs17v4gl4t667p3im1tqn5cijikaur',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreateUser).toHaveProperty('id', 'e7922d98-55ef-4097-aa0c-3280e5d379e2');
+                expect(res.body.data.iamCreateUser).toHaveProperty('id', '7a41038d-8f10-431c-aadf-fc50e161389e');
             });
     });
 
@@ -846,6 +947,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -866,7 +968,7 @@ describe('user', () =>
                     {
                         where: 
                         {
-                            id: '3ada7518-8fa6-417f-a16f-62ebe0302ca7'
+                            id: '4494c9ea-d393-41dd-afac-96c5e2c7fe53'
                         }
                     }
                 }
@@ -892,6 +994,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -912,14 +1015,14 @@ describe('user', () =>
                     {
                         where: 
                         {
-                            id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b'
+                            id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindUser.id).toStrictEqual('bbc14aea-623e-4df4-9efa-0de9d9231a5b');
+                expect(res.body.data.iamFindUser.id).toStrictEqual('4a5ae6bb-e625-4f61-bb4e-5425f68de35a');
             });
     });
 
@@ -936,6 +1039,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -951,7 +1055,7 @@ describe('user', () =>
                     }
                 `,
                 variables: {
-                    id: '7aafa75d-259f-48b9-96a1-beb7bdf95086'
+                    id: 'a4203e26-fe32-4275-b194-507350b71f92'
                 }
             })
             .expect(200)
@@ -975,6 +1079,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -990,12 +1095,12 @@ describe('user', () =>
                     }
                 `,
                 variables: {
-                    id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b'
+                    id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindUserById.id).toStrictEqual('bbc14aea-623e-4df4-9efa-0de9d9231a5b');
+                expect(res.body.data.iamFindUserById.id).toStrictEqual('4a5ae6bb-e625-4f61-bb4e-5425f68de35a');
             });
     });
 
@@ -1012,6 +1117,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -1050,6 +1156,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -1067,16 +1174,17 @@ describe('user', () =>
                 variables: {
                     payload: {
                         
-                        id: '44fa3cb4-4ab6-403f-a7a8-1dc3c4c34b47',
-                        accountId: 'd93854c7-7aab-4a61-9dd0-c8df1ee95e81',
-                        surname: '77r9ywhqbl7z3k8ugudfqmh3u7eyygp6nytssggkh1t0kdtva0c89sxuzwy40wkg5tbwaedv2do6mkr5rj01dhwrxtxmnwy4yr1nb5fd0v2ok9v8j7uk11o7rson3ipmvod7jtdyyg46ed751ls2gujnxexqm4gfoqdcftdy9hoph0i738vf1nd4fgg5f2gcy5df5r4h4j76pu0bleic0u12yum46bx989iyom1ugsgb0o5gvlkql8vrefla4km',
-                        avatar: 'fzez1c8skpadgtafprymbs3tsorxsphy7azso81vv64n5254xdkozpl0jw9oq7ge0841zkeme49to5135ypa74uq0hwbhvnkktztg3s5i0r4r8og51w39q8g7imbdogo5nxznxpuvtuasavmidcd2xtlvcr7rpz66eutmb18w5go7zygjjppfjtrvkx1m1p7nqjsdwabg2ofi53lr9xn8k4hljyodclvs5vb31sgsewhxq8f9p0sz6mmm1ra2d5',
-                        email: 'vmqdw233ipcem314xlyaawkc3f7yqubfmsrgs6ttupo6zfpg81swu7417gvsur8b9ton1b8hkfgpx05z9hcb1j4wc09rn9ykqklssaiq11ux8sjocmxfeic4',
-                        mobile: 'pi9w68bvx1pp4ohsaynetr2wiqg1p2b6uwltczsxeu8zlx1y5yvuz83e5zu5',
-                        langId: 'dbd4a670-ffa6-4532-9acb-05f2c35f7ae8',
-                        username: 'rgp5ntt0vf6x08qvyvrp0j2wlutpio7hw54rk9c144wa8w723gicvd8memsubp4cnp0xslmbekbom5nzwlzgv0re4txqkf41gyuwbvip72nelk0py66plgmc',
-                        password: 'jz997bc9z12catqxxl7ou9qp6pcqpdog3v3zjqgcb3o6wvvo2io6q27hvpnhc9izv5bnkqvnebx0w6my397qh4t9l3gmckx1f4i4utpe6ygu067accxtwdgq2kx7k35f5m6sef55y6zsuix1um1vt8yfvd7okvmgeqhvvxft89m674rxped82g5cp5y950omoiqbrd5wkkq8bcp1l8gpqhj1vw1ldcya4uf6bjz8zrb3yfxy2xp3k0n9grqxzba',
-                        rememberToken: 'y252z7x8sch0mxgxi1a5jsshu1mf0amy5rs8dn8989nnd14u08e3xtzyz32e6sigvcod5idhlhfep0zgmzajla5ick7qmjha3ck7pb8yleyibc269nyi1yqlarj7wr3yd1vgab7mi0m8yulf3ic6br5sc7m3r71uqrbah9icu6z8o4u3d0ab65ciicrda56rtkjka26mryrk69rt4qu3cm7f1igrjz4v4bktvtpupmqxag8x1a551sm8nfkmem3',
+                        id: '89ee9070-0491-4fff-984a-08661b849f85',
+                        accountId: '1eb46e2d-bec3-4c6b-95a8-fccbbd8c143a',
+                        name: 'f348dw4kv0zh2u3cs2wkaazw4obi2mk9qoql39cv53glqj0ewmium0c7glrwlnw8czhvhd0o7yb45rfhgpoadqxi1i9w7msoj31rd1z8y0i9vjtvt7o9j963i4b0ngc84e6oj9owmuav780b5o55z9s4467r82uee7oy1ye0s5u05a1rbdrjxhu3ttmeo8ogipyab8p79x3gsvmugph0uykbrrs5saerz2t8j70s5bflcdmxyg744iygif4h8uz',
+                        surname: '5md0zk94yiuyu7drf9uul47tacghw2heafo07iiqv8im4o4eybrhpytre2vxx78h34jcdab1d1thtfne4w3fzq0k275lntkfwzx8a63d5pjeyy5n1ca90i4rva7azaz5ww811lacjo6crwrmurfbg6hqhlqd6jzi4oia3zghcfl2x7dv2px9w7exdmychts9fpmpumqsymdkfiaan9anlrdqdmqvpg7l5ulwkvr6p27dv6z3r28fjbu8086nepg',
+                        avatar: '9r5d59ns8m18fj0c2g9bj9146pnmqp9ddmypj2n27sraifq95cg1u1f0tjjkc4fkmg9wvdawkw7zu9fqgj0pm39kzokb4jgwd41985dma822f8b758ecz6yl2eg2l71kt22dfvgjx91wa5f9nj7gbnxq25n8x9naia50s8ts78d2gyhb1rthiari9c1jmdcwbftywjt8gx0df484nm0vvgrc1chvj8il0xb8ezetn4lw5hf5szqve2zk5262ozl',
+                        email: '2hl61rdzdwm3swtqjk4tezw8nhjhcjwdk04fnj0vo5osggx7qev9s0qd9b9x3qop02chn3kby5iv1gtf2b4pnp8auai96bshk0gbipqj2lsi89yns7pt3fj2',
+                        mobile: 'urpveghf0tfq034yh3y0c42f7w5sp5xhgoq5qxnyetcg73p781rjmtnrqwwt',
+                        langId: '795aebf4-52e2-4f90-abb5-e30c95c8a553',
+                        username: '8fv3apxbtho8k8jy4y3zaw5pmcxt1zg0qjrmya3yj618jmxmqxf3oddf5zq2pd23ti2teqtstc2xf79b7enr0o5dg12ocm8sh3i8x67rsfiy5dvkwtc7x1pv',
+                        password: 'fkz7ljzs1nybudnnnplfwvawubirbnpfup7d4gip8f83vcsoamtp4zf720ds0rujsscd7x33grxxi66j86aoy3l3fbh5pgpxje8s284w93d4oimzv1xgmzy7bwkg4j3rx37asq0jtxpd6k4dvd81obofv172fc9kxeo1y2st8gzpq06c6e6936ohrq1cm2mdxg2k8r4aw81dlzpcew8630ybqvxkw2nn71snfdckme394ap3fbk2jhn988xbm08',
+                        rememberToken: 'p256vu8atwdiaka3mo61cdeijijmev66d8oqv1wurqbshuunjkwleja2y46sjknan05iw1pcmp826uawrcy3yi19cp96pdzc0jfezifj4q631bd8ceb6zaquwkib43cha0cr5xcte9j6armjcsm05tvigbzdiiwjkveymiappauuwnukzpemq0hw6hxqb8m020ay420aarqsxzsowe0xopdq9a7tuhcy2afrvjsq1sbighifx3nchlrpij880gk',
                         data: { "foo" : "bar" },
                     }
                 }
@@ -1102,6 +1210,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -1119,23 +1228,24 @@ describe('user', () =>
                 variables: {
                     payload: {
                         
-                        id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b',
-                        accountId: '55363e9f-d499-4070-b5e6-a28ea026fb79',
-                        surname: 'lj68hy2ad2kizm4tllc7amrcowb5lvwzpplxc4jp207tref6t0pu5cuoee755zucosfje2reesl7w2tykt3cynkeo3pz8l4yhl0pav4u2iv00d724e4fqkxghal5pusmlaxdznvg6nfiu7wqx3tt6dyzwesl8gb0grjcjl4neqqxgbgdg5zhrzomxvho1ln8e5ndfxknlfy83q301og67ahpaikzl7938i4ixal3rqael0w9qywewo2rv1fljb2',
-                        avatar: '2yakwmvjhkjsd9mmyjxi8x2n3lbrbx5ghw500qy9mj0znuf9owjza00y611tyq1mkoonk9rov14p3svgr1d6it69xo662gwjg90mtl9ucx993r80al8u0q79fp6u7vmxrif4a7aigm70ovj7owzou1r107ee3ru9n3rdw5yqnwysg3ocp90yz7gt8j188qd43rnbv1zkfkbsvulzi54r2prqg1ztmtgbhmq708ksaebs8j88b1eps8g20mov9ms',
-                        email: 'abh0matla89yoxyc2k06giu2307x1vfn8byvovmuw3yzkkcn4d4ynx0jvnp754rbtk5n6lekokmcb7x2vw11iv1rvv2lerzd7giy7zaoj4wguf618jlx6wyo',
-                        mobile: 'f4pnuje088z5s81p0ja7qs5lw201sgcc6q4306rlyfldguxemnnhw9tkfc41',
-                        langId: '86549ec5-24b4-47ad-b0da-ea55cb64b7fa',
-                        username: 'w7r5fd9rul8z6z2evon62a2us8wvgxhf1kghl58rmnv2lwjlw7fmho49pzlu7eyre3qsk2a2feku5khdddm1okj0xfvhkmye670mka7sfo12061um5htte3q',
-                        password: 'hxxhnod23l12gh1tiz5al556v1bn9zz4n9xqgtgzpcwfhnrp96rdj00nrwwzeku6s0rfqbklq7615kmfv768n0464ohl5yxe8925jprofjecba7ozsurfnfaprax3zsd8d0airw8shg8vzoo1a4adfjrzfqex4gn3taizm46xw07hfea8sun6amngtmmnce31auotu95jhd5yr3tvs2nc9jinjyzoco9gyg2eu1wk4ukoubxswmip4gte8n993u',
-                        rememberToken: 'x32g10cwx1r4ktw7reeg2lp42honc58dnvy4dbxlxof0w898ec6610s5xliile5az80oqxe7fjm92imhx1z6rt0zeesb0laekkk91xo7d3c0930h3uwh7uh96n2abdpewuvkdgf0z522j8k89kmchccpt6x1w3zsb4as7rsg52ojxghwu6y12t33oi730eym2aiigjc1hs74aboxeznlwq9i5qanme2jcitq6ygrejeub06qo1wq02gp2w6k9cj',
+                        id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a',
+                        accountId: '3e7cf0e2-fa25-4c24-8181-c99c2d2b4755',
+                        name: 'p6hw4p5q33fwdw9gekn0j1tm1c3sb4z8m2u3t5ynghlgtq3w8g8a95bk0azlbpb9bc13vdswi9rr4fwmgwj9nu5p66oc597cr0sbmj09oicf3629f01x259fs9coz14bqump2r2myx0bijax9awxefcjleqda5baln9drbalqroh2g5j6sbtvc7xfzmeec0ma8xomyamyy9qhvunhmv4mniwsygm3nj0xajuxnavxgp4ntyme6f65ixwd22uj5z',
+                        surname: 't3pozntam8qsagzwe1ywdbhkwxjaxqfos55ue25q4ulb5pxje9ggka4we3g9iaw2m46ayfipf9q8khmlhijyymk7mdbe85gomn6qn50dte1la8ov7c8k31xl6cnlkmrvuekij7gz577yiwsk8zvujgi1zz6ubnzul0em1ant7cwpu0ets4gowlk3czmr1lh5k99pbm835lu20mhgl7llm94f2nf4dpl11vjhy5f9tbrjlq1i452v7k8btif7zst',
+                        avatar: '7ooofwbiprktexcuhyn0s72q41z7zu1yx77ocbf8ko594u8q3djzfyvevwwui4w5ddywue7qcf6szo84jj9qr971eeju1hgfth6etn1o927lmtiqgo8k8xubwbixgibbamijjb5alxuwh4qog3a1yri0x7lq17jxw2w1bcx9u7hwjnziyykej6pwirzuzjc92rjs098g4xoxvz1w4oh7ysu3p7hxxdqgget0b3eorihs9rvwdmyyss5257kgor7',
+                        email: 'wke9omw9myb4ad2md0sp4occm2qdwn30tny0qtfwe54godu9j6dwbxw4wg0cqewg8yl1x00s7r1w69wmt8fwre0dsgqytldrwjvgnyno7hztke3v2lmzx0bm',
+                        mobile: '1fekrhdc5ufrbjq9z24inq7tokukdtyzlmyco42ni4son0qr0sfggjq7mq60',
+                        langId: 'ff15b4ae-9e05-4bc9-a0a2-5d54a4fa092b',
+                        username: '7473ccr45gn6wxptccfn8t0h43b3ga0b2cimsy96wpsv5pt3rx0ocafftimx5imnua3km1l430x4yaz8sidlmh7gk4qfrps06z5pt0pp78twmsvt3v854xvn',
+                        password: '4svjjfsf027877uvlhmnamyfa8kmza0m5x3shhk3egje1d5cpgxt8wd1y3fwg3nh8hewipe8rq1sgs53xbs3gv9p8uc08femk47ngksnbnqge9lvnsbja6vnjaqne9jjdmmc84vsedmo03seo9f8g6u97jb87ky6xszbu5kzq1w6gzpwwbeahw2orfrnwfj5i8e6enqebghiyo3fo6vo9pcnnnkrhqnnhrolxzbvpnzaywejua3ahjo6u25xve6',
+                        rememberToken: 'hxc9s4txgxbxfxanxg4jsvcgdzf4g7ih3tkq62opucoh74vnv4o88y8rjbu9oi36c4drz74mpn3582yz7xqsgf20me49q8nehyudbhk5aiy2088ctkpajfsd37j422j5wqt39zk9i9zcsrlybsbx56knc0hn0iy5zxwbqcioei83epxu5vf2cadqabfl0mwld1ib6wtts8hnrddqzmgxqhyouhhrbahal6h62fofo8ze2l6955inbod5ouop2i9',
                         data: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamUpdateUser.id).toStrictEqual('bbc14aea-623e-4df4-9efa-0de9d9231a5b');
+                expect(res.body.data.iamUpdateUser.id).toStrictEqual('4a5ae6bb-e625-4f61-bb4e-5425f68de35a');
             });
     });
 
@@ -1152,6 +1262,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -1167,7 +1278,7 @@ describe('user', () =>
                     }
                 `,
                 variables: {
-                    id: 'ab30ec49-3740-4875-b433-85bc7b52d937'
+                    id: 'be15d954-04ea-49fc-bc66-6626057d29d1'
                 }
             })
             .expect(200)
@@ -1191,6 +1302,7 @@ describe('user', () =>
                         {   
                             id
                             accountId
+                            name
                             surname
                             avatar
                             email
@@ -1206,12 +1318,12 @@ describe('user', () =>
                     }
                 `,
                 variables: {
-                    id: 'bbc14aea-623e-4df4-9efa-0de9d9231a5b'
+                    id: '4a5ae6bb-e625-4f61-bb4e-5425f68de35a'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamDeleteUserById.id).toStrictEqual('bbc14aea-623e-4df4-9efa-0de9d9231a5b');
+                expect(res.body.data.iamDeleteUserById.id).toStrictEqual('4a5ae6bb-e625-4f61-bb4e-5425f68de35a');
             });
     });
 

@@ -4,6 +4,7 @@ import { CreateUserService } from './create-user.service';
 import { 
     UserId,
     UserAccountId,
+    UserName,
     UserSurname,
     UserAvatar,
     UserEmail,
@@ -29,6 +30,7 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
         await this.createUserService.main(
             new UserId(command.id),
             new UserAccountId(command.accountId),
+            new UserName(command.name),
             new UserSurname(command.surname),
             new UserAvatar(command.avatar),
             new UserEmail(command.email),

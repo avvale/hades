@@ -41,6 +41,20 @@ export class IamUserModel extends Model<IamUserModel>
     
     
     @Column({
+        field: 'name',
+        
+        allowNull: false,
+        type: DataTypes.STRING(255),
+        
+        
+    })
+    name: string;
+        
+                     
+        
+    
+    
+    @Column({
         field: 'surname',
         
         allowNull: true,
@@ -128,7 +142,7 @@ export class IamUserModel extends Model<IamUserModel>
         field: 'password',
         
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(undefined),
         
         
     })

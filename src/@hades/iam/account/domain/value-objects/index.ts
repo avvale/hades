@@ -1,6 +1,6 @@
 export { AccountId } from './account-id';
 export { AccountType } from './account-type';
-export { AccountName } from './account-name';
+export { AccountEmail } from './account-email';
 export { AccountIsActive } from './account-is-active';
 export { AccountClientId } from './account-client-id';
 export { AccountApplicationCodes } from './account-application-codes';

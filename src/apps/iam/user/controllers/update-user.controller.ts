@@ -26,6 +26,7 @@ export class UpdateUserController
         await this.commandBus.dispatch(new UpdateUserCommand(
             payload.id,
             payload.accountId,
+            payload.name,
             payload.surname,
             payload.avatar,
             payload.email,

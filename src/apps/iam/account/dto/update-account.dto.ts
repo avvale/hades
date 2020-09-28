@@ -6,7 +6,7 @@ export class UpdateAccountDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '4d0ac56d-f3b0-438d-8300-893a83247ff8'
+        example     : 'e4621d72-9fde-4584-8339-fb219f70820d'
     })
     id: string;
     
@@ -24,17 +24,17 @@ export class UpdateAccountDto
     
     @ApiProperty({
         type        : String,
-        description : 'name [input here api field description]',
-        example     : 'q4c0t48stc6b54x2op8bvucdwu10am2jsy45awf9xgrslxr2qjzciosa3zjy9uduxzz07t0w4y9f7cooi14vxs42840v8k4mgtalkj0phxox2n38ll0f0193u1crhah4xfu0v1sz18l6x1zp0u3tf0fkewrtogxm5pwq0fjh0mhiidwjdh8ehjw4nnphmeds77pt5b123wjjnn8pohud8irjtmf3rkjr7amgo9a1bmfmfaq41wahpj8lo32jaxy'
+        description : 'email [input here api field description]',
+        example     : 'p7n6a1r2h18b30p4i32o9vrffvt37spk7f6c9vk0r1xio8lb331df63nqlahd3tkgb9yc8scj7r11t9mbibikfmcpagzd7urikhoysj9yjt9zsyy1lw4phtg'
     })
-    name: string;
+    email: string;
     
     
     
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : false
+        example     : true
     })
     isActive: boolean;
     
@@ -43,7 +43,7 @@ export class UpdateAccountDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : '7f54f196-12ab-47f6-aada-06243f1d4b22'
+        example     : '336bfcb5-292b-4769-b559-8dbc72eeb4ac'
     })
     clientId: string;
     

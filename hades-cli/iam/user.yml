@@ -16,6 +16,10 @@ aggregateProperties:
     relationshipAggregate: IamAccount
     relationshipModulePath: iam/account
     relationshipField: account
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
   - name: surname
     type: varchar
     maxLength: 255

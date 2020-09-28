@@ -11,12 +11,6 @@ export enum IamAccountType {
     SERVICE = "SERVICE"
 }
 
-export enum OAuthClientGrantType {
-    AUTHORIZATION_CODE = "AUTHORIZATION_CODE",
-    CLIENT_CREDENTIALS = "CLIENT_CREDENTIALS",
-    PASSWORD = "PASSWORD"
-}
-
 export interface QueryStatement {
     where?: JSON;
     include?: string[];
@@ -28,7 +22,7 @@ export interface QueryStatement {
 export interface IamCreateAccountInput {
     id: string;
     type: IamAccountType;
-    name: GraphQLString;
+    email: GraphQLString;
     isActive: GraphQLBoolean;
     clientId: string;
     applicationCodes: JSON;
@@ -41,7 +35,7 @@ export interface IamCreateAccountInput {
 export interface IamUpdateAccountInput {
     id: string;
     type?: IamAccountType;
-    name?: GraphQLString;
+    email?: GraphQLString;
     isActive?: GraphQLBoolean;
     clientId?: string;
     applicationCodes?: JSON;
@@ -120,6 +114,7 @@ export interface IamUpdateTenantInput {
 export interface IamCreateUserInput {
     id: string;
     accountId: string;
+    name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
     email: GraphQLString;
@@ -134,6 +129,7 @@ export interface IamCreateUserInput {
 export interface IamUpdateUserInput {
     id: string;
     accountId?: string;
+    name?: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
     email?: GraphQLString;
@@ -145,96 +141,6 @@ export interface IamUpdateUserInput {
     data?: JSON;
 }
 
-export interface OAuthCreateAccessTokenInput {
-    id: string;
-    clientId: string;
-    token: GraphQLString;
-    name?: GraphQLString;
-    isRevoked: GraphQLBoolean;
-    expiresAt?: GraphQLInt;
-}
-
-export interface OAuthUpdateAccessTokenInput {
-    id: string;
-    clientId?: string;
-    token?: GraphQLString;
-    name?: GraphQLString;
-    isRevoked?: GraphQLBoolean;
-    expiresAt?: GraphQLInt;
-}
-
-export interface OAuthCreateApplicationInput {
-    id: string;
-    name: GraphQLString;
-    code: GraphQLString;
-    secret: GraphQLString;
-    isMaster: GraphQLBoolean;
-    clientIds?: string[];
-}
-
-export interface OAuthUpdateApplicationInput {
-    id: string;
-    name?: GraphQLString;
-    code?: GraphQLString;
-    secret?: GraphQLString;
-    isMaster?: GraphQLBoolean;
-    clientIds?: string[];
-}
-
-export interface OAuthCreateClientInput {
-    id: string;
-    grantType: OAuthClientGrantType;
-    name: GraphQLString;
-    secret: GraphQLString;
-    authUrl?: GraphQLString;
-    redirect?: GraphQLString;
-    expiredAccessToken?: GraphQLInt;
-    expiredRefreshToken?: GraphQLInt;
-    isRevoked: GraphQLBoolean;
-    isMaster: GraphQLBoolean;
-    applicationIds?: string[];
-}
-
-export interface OAuthUpdateClientInput {
-    id: string;
-    grantType?: OAuthClientGrantType;
-    name?: GraphQLString;
-    secret?: GraphQLString;
-    authUrl?: GraphQLString;
-    redirect?: GraphQLString;
-    expiredAccessToken?: GraphQLInt;
-    expiredRefreshToken?: GraphQLInt;
-    isRevoked?: GraphQLBoolean;
-    isMaster?: GraphQLBoolean;
-    applicationIds?: string[];
-}
-
-export interface OAuthCreateCredentialInput {
-    grantType: OAuthClientGrantType;
-    username?: GraphQLString;
-    password?: GraphQLString;
-    accessTokenId?: string;
-    refreshToken?: GraphQLString;
-    clientSecret?: GraphQLString;
-    redirect?: GraphQLString;
-}
-
-export interface OAuthCreateRefreshTokenInput {
-    id: string;
-    accessTokenId: string;
-    token: GraphQLString;
-    isRevoked: GraphQLBoolean;
-    expiresAt?: GraphQLInt;
-}
-
-export interface OAuthUpdateRefreshTokenInput {
-    id: string;
-    accessTokenId?: string;
-    token?: GraphQLString;
-    isRevoked?: GraphQLBoolean;
-    expiresAt?: GraphQLInt;
-}
-
 export interface Pagination {
     total: number;
     count: number;
@@ -244,7 +150,7 @@ export interface Pagination {
 export interface IamAccount {
     id: string;
     type: IamAccountType;
-    name: GraphQLString;
+    email: GraphQLString;
     isActive: GraphQLBoolean;
     clientId: string;
     applicationCodes: JSON;
@@ -260,6 +166,7 @@ export interface IamAccount {
 
 export interface IQuery {
     iamFindAccount(query?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamFindMeAccount(): IamAccount | Promise<IamAccount>;
     iamFindAccountById(id?: string): IamAccount | Promise<IamAccount>;
     iamGetAccounts(query?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
     iamPaginateAccounts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
@@ -283,22 +190,6 @@ export interface IQuery {
     iamFindUserById(id?: string): IamUser | Promise<IamUser>;
     iamGetUsers(query?: QueryStatement): IamUser[] | Promise<IamUser[]>;
     iamPaginateUsers(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    oAuthFindAccessToken(query?: QueryStatement): OAuthAccessToken | Promise<OAuthAccessToken>;
-    oAuthFindAccessTokenById(id?: string): OAuthAccessToken | Promise<OAuthAccessToken>;
-    oAuthGetAccessTokens(query?: QueryStatement): OAuthAccessToken[] | Promise<OAuthAccessToken[]>;
-    oAuthPaginateAccessTokens(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    oAuthFindApplication(query?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
-    oAuthFindApplicationById(id?: string): OAuthApplication | Promise<OAuthApplication>;
-    oAuthGetApplications(query?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
-    oAuthPaginateApplications(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    oAuthFindClient(query?: QueryStatement): OAuthClient | Promise<OAuthClient>;
-    oAuthFindClientById(id?: string): OAuthClient | Promise<OAuthClient>;
-    oAuthGetClients(query?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
-    oAuthPaginateClients(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    oAuthFindRefreshToken(query?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthFindRefreshTokenById(id?: string): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthGetRefreshTokens(query?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
-    oAuthPaginateRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
@@ -332,27 +223,6 @@ export interface IMutation {
     iamUpdateUser(payload: IamUpdateUserInput): IamUser | Promise<IamUser>;
     iamDeleteUserById(id: string): IamUser | Promise<IamUser>;
     iamDeleteUsers(query?: QueryStatement): IamUser[] | Promise<IamUser[]>;
-    oAuthCreateAccessToken(payload: OAuthCreateAccessTokenInput): OAuthAccessToken | Promise<OAuthAccessToken>;
-    oAuthCreateAccessTokens(payload: OAuthCreateAccessTokenInput[]): boolean | Promise<boolean>;
-    oAuthUpdateAccessToken(payload: OAuthUpdateAccessTokenInput): OAuthAccessToken | Promise<OAuthAccessToken>;
-    oAuthDeleteAccessTokenById(id: string): OAuthAccessToken | Promise<OAuthAccessToken>;
-    oAuthDeleteAccessTokens(query?: QueryStatement): OAuthAccessToken[] | Promise<OAuthAccessToken[]>;
-    oAuthCreateApplication(payload: OAuthCreateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
-    oAuthCreateApplications(payload: OAuthCreateApplicationInput[]): boolean | Promise<boolean>;
-    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
-    oAuthDeleteApplicationById(id: string): OAuthApplication | Promise<OAuthApplication>;
-    oAuthDeleteApplications(query?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
-    oAuthCreateClient(payload: OAuthCreateClientInput): OAuthClient | Promise<OAuthClient>;
-    oAuthCreateClients(payload: OAuthCreateClientInput[]): boolean | Promise<boolean>;
-    oAuthUpdateClient(payload: OAuthUpdateClientInput): OAuthClient | Promise<OAuthClient>;
-    oAuthDeleteClientById(id: string): OAuthClient | Promise<OAuthClient>;
-    oAuthDeleteClients(query?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
-    oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
-    oAuthCreateRefreshToken(payload: OAuthCreateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthCreateRefreshTokens(payload: OAuthCreateRefreshTokenInput[]): boolean | Promise<boolean>;
-    oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthDeleteRefreshTokenById(id: string): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthDeleteRefreshTokens(query?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
 }
 
 export interface IamBoundedContext {
@@ -404,6 +274,7 @@ export interface IamTenant {
 export interface IamUser {
     id: string;
     accountId: string;
+    name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
     email: GraphQLString;
@@ -413,67 +284,6 @@ export interface IamUser {
     password: GraphQLString;
     rememberToken?: GraphQLString;
     data?: JSON;
-    createdAt?: GraphQLTimestamp;
-    updatedAt?: GraphQLTimestamp;
-    deletedAt?: GraphQLTimestamp;
-}
-
-export interface OAuthAccessToken {
-    id: string;
-    client: OAuthClient;
-    token: GraphQLString;
-    name?: GraphQLString;
-    isRevoked: GraphQLBoolean;
-    expiresAt?: GraphQLInt;
-    refreshToken?: OAuthRefreshToken;
-    createdAt?: GraphQLTimestamp;
-    updatedAt?: GraphQLTimestamp;
-    deletedAt?: GraphQLTimestamp;
-}
-
-export interface OAuthApplication {
-    id: string;
-    name: GraphQLString;
-    code: GraphQLString;
-    secret: GraphQLString;
-    isMaster: GraphQLBoolean;
-    clients?: OAuthClient[];
-    createdAt?: GraphQLTimestamp;
-    updatedAt?: GraphQLTimestamp;
-    deletedAt?: GraphQLTimestamp;
-}
-
-export interface OAuthClient {
-    id: string;
-    grantType: OAuthClientGrantType;
-    name: GraphQLString;
-    secret: GraphQLString;
-    authUrl?: GraphQLString;
-    redirect?: GraphQLString;
-    expiredAccessToken?: GraphQLInt;
-    expiredRefreshToken?: GraphQLInt;
-    isRevoked: GraphQLBoolean;
-    isMaster: GraphQLBoolean;
-    applications?: OAuthApplication[];
-    accessTokens?: OAuthAccessToken[];
-    createdAt?: GraphQLTimestamp;
-    updatedAt?: GraphQLTimestamp;
-    deletedAt?: GraphQLTimestamp;
-}
-
-export interface OAuthCredential {
-    tokenType: string;
-    accessToken: string;
-    refreshToken?: string;
-    expiresIn?: number;
-}
-
-export interface OAuthRefreshToken {
-    id: string;
-    accessTokenId: string;
-    token: GraphQLString;
-    isRevoked: GraphQLBoolean;
-    expiresAt?: GraphQLInt;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;

@@ -42,6 +42,7 @@ describe('UpdateUserCommandHandler', () =>
                 new UpdateUserCommand(
                     users[0].id,
                     users[0].accountId,
+                    users[0].name,
                     users[0].surname,
                     users[0].avatar,
                     users[0].email,

@@ -1,5 +1,6 @@
 export { UserId } from './user-id';
 export { UserAccountId } from './user-account-id';
+export { UserName } from './user-name';
 export { UserSurname } from './user-surname';
 export { UserAvatar } from './user-avatar';
 export { UserEmail } from './user-email';

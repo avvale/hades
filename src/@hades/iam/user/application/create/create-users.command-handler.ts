@@ -4,6 +4,7 @@ import { CreateUsersService } from './create-users.service';
 import { 
     UserId,
     UserAccountId,
+    UserName,
     UserSurname,
     UserAvatar,
     UserEmail,
@@ -32,6 +33,7 @@ export class CreateUsersCommandHandler implements ICommandHandler<CreateUsersCom
                     return {
                         id: new UserId(user.id),
                         accountId: new UserAccountId(user.accountId),
+                        name: new UserName(user.name),
                         surname: new UserSurname(user.surname),
                         avatar: new UserAvatar(user.avatar),
                         email: new UserEmail(user.email),

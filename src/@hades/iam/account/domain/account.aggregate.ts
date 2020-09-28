@@ -2,7 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     AccountId,
     AccountType,
-    AccountName,
+    AccountEmail,
     AccountIsActive,
     AccountClientId,
     AccountApplicationCodes,
@@ -29,7 +29,7 @@ export class IamAccount extends AggregateRoot
 {
     id: AccountId;
     type: AccountType;
-    name: AccountName;
+    email: AccountEmail;
     isActive: AccountIsActive;
     clientId: AccountClientId;
     applicationCodes: AccountApplicationCodes;
@@ -50,13 +50,13 @@ export class IamAccount extends AggregateRoot
     roles: IamRole[];
     tenants: IamTenant[];
     
-    constructor(id?: AccountId, type?: AccountType, name?: AccountName, isActive?: AccountIsActive, clientId?: AccountClientId, applicationCodes?: AccountApplicationCodes, permissions?: AccountPermissions, data?: AccountData, roleIds?: AccountRoleIds, tenantIds?: AccountTenantIds, createdAt?: AccountCreatedAt, updatedAt?: AccountUpdatedAt, deletedAt?: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], )
+    constructor(id?: AccountId, type?: AccountType, email?: AccountEmail, isActive?: AccountIsActive, clientId?: AccountClientId, applicationCodes?: AccountApplicationCodes, permissions?: AccountPermissions, data?: AccountData, roleIds?: AccountRoleIds, tenantIds?: AccountTenantIds, createdAt?: AccountCreatedAt, updatedAt?: AccountUpdatedAt, deletedAt?: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], )
     {
         super();
         
         this.id = id;
         this.type = type;
-        this.name = name;
+        this.email = email;
         this.isActive = isActive;
         this.clientId = clientId;
         this.applicationCodes = applicationCodes;
@@ -79,9 +79,9 @@ export class IamAccount extends AggregateRoot
         
     }
 
-    static register (id: AccountId, type: AccountType, name: AccountName, isActive: AccountIsActive, clientId: AccountClientId, applicationCodes: AccountApplicationCodes, permissions: AccountPermissions, data: AccountData, roleIds: AccountRoleIds, tenantIds: AccountTenantIds, createdAt: AccountCreatedAt, updatedAt: AccountUpdatedAt, deletedAt: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], ): IamAccount
+    static register (id: AccountId, type: AccountType, email: AccountEmail, isActive: AccountIsActive, clientId: AccountClientId, applicationCodes: AccountApplicationCodes, permissions: AccountPermissions, data: AccountData, roleIds: AccountRoleIds, tenantIds: AccountTenantIds, createdAt: AccountCreatedAt, updatedAt: AccountUpdatedAt, deletedAt: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], ): IamAccount
     {
-        return new IamAccount(id, type, name, isActive, clientId, applicationCodes, permissions, data, roleIds, tenantIds, createdAt, updatedAt, deletedAt, user, roles, tenants, );
+        return new IamAccount(id, type, email, isActive, clientId, applicationCodes, permissions, data, roleIds, tenantIds, createdAt, updatedAt, deletedAt, user, roles, tenants, );
     }
 
     created(account: IamAccount): void
@@ -90,7 +90,7 @@ export class IamAccount extends AggregateRoot
             new CreatedAccountEvent(
                 account.id.value,
                 account.type.value,
-                account.name.value,
+                account.email.value,
                 account.isActive.value,
                 account.clientId.value,
                 account.applicationCodes.value,
@@ -112,7 +112,7 @@ export class IamAccount extends AggregateRoot
             new UpdatedAccountEvent(
                 account.id.value,
                 account.type?.value,
-                account.name?.value,
+                account.email?.value,
                 account.isActive?.value,
                 account.clientId?.value,
                 account.applicationCodes?.value,
@@ -134,7 +134,7 @@ export class IamAccount extends AggregateRoot
             new DeletedAccountEvent(
                 account.id.value,
                 account.type.value,
-                account.name.value,
+                account.email.value,
                 account.isActive.value,
                 account.clientId.value,
                 account.applicationCodes.value,
@@ -155,7 +155,7 @@ export class IamAccount extends AggregateRoot
         return {
             id: this.id.value,
             type: this.type.value,
-            name: this.name.value,
+            email: this.email.value,
             isActive: this.isActive.value,
             clientId: this.clientId.value,
             applicationCodes: this.applicationCodes.value,

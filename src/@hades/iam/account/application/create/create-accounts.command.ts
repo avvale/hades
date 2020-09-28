@@ -4,7 +4,7 @@ export class CreateAccountsCommand
         public readonly accounts: {
             id: string,
             type: string,
-            name: string,
+            email: string,
             isActive: boolean,
             clientId: string,
             applicationCodes: any,

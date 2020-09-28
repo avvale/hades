@@ -5,6 +5,7 @@ import { IUserRepository } from '@hades/iam/user/domain/user.repository';
 import { 
     UserId,
     UserAccountId,
+    UserName,
     UserSurname,
     UserAvatar,
     UserEmail,
@@ -55,6 +56,7 @@ export class MockUserRepository extends MockRepository<IamUser> implements IUser
             this.collectionSource.push(IamUser.register(
                     new UserId(itemCollection.id),
                     new UserAccountId(itemCollection.accountId),
+                    new UserName(itemCollection.name),
                     new UserSurname(itemCollection.surname),
                     new UserAvatar(itemCollection.avatar),
                     new UserEmail(itemCollection.email),

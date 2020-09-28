@@ -4,7 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     AccountId,
     AccountType,
-    AccountName,
+    AccountEmail,
     AccountIsActive,
     AccountClientId,
     AccountApplicationCodes,
@@ -33,7 +33,7 @@ export class CreateAccountsService
         accounts: {
             id: AccountId,
             type: AccountType,
-            name: AccountName,
+            email: AccountEmail,
             isActive: AccountIsActive,
             clientId: AccountClientId,
             applicationCodes: AccountApplicationCodes,
@@ -49,7 +49,7 @@ export class CreateAccountsService
         const aggregateAccounts = accounts.map(account => IamAccount.register(
             account.id,
             account.type,
-            account.name,
+            account.email,
             account.isActive,
             account.clientId,
             account.applicationCodes,

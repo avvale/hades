@@ -26,6 +26,7 @@ export class CreateUserController
         await this.commandBus.dispatch(new CreateUserCommand(
             payload.id,
             payload.accountId,
+            payload.name,
             payload.surname,
             payload.avatar,
             payload.email,

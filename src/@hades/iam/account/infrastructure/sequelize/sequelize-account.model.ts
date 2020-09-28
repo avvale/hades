@@ -43,14 +43,14 @@ export class IamAccountModel extends Model<IamAccountModel>
     
     
     @Column({
-        field: 'name',
+        field: 'email',
         
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(120),
         
         
     })
-    name: string;
+    email: string;
         
                      
         

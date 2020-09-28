@@ -21,7 +21,7 @@ export class CreateAccountResolver
         await this.commandBus.dispatch(new CreateAccountCommand(
             payload.id,
             payload.type,
-            payload.name,
+            payload.email,
             payload.isActive,
             payload.clientId,
             payload.applicationCodes,

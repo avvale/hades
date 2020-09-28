@@ -26,7 +26,7 @@ export class UpdateAccountController
         await this.commandBus.dispatch(new UpdateAccountCommand(
             payload.id,
             payload.type,
-            payload.name,
+            payload.email,
             payload.isActive,
             payload.clientId,
             payload.applicationCodes,

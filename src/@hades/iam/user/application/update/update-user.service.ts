@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     UserId,
     UserAccountId,
+    UserName,
     UserSurname,
     UserAvatar,
     UserEmail,
@@ -32,6 +33,7 @@ export class UpdateUserService
     public async main(
         id: UserId,
         accountId?: UserAccountId,
+        name?: UserName,
         surname?: UserSurname,
         avatar?: UserAvatar,
         email?: UserEmail,
@@ -48,6 +50,7 @@ export class UpdateUserService
         const user = IamUser.register(
             id,
             accountId,
+            name,
             surname,
             avatar,
             email,

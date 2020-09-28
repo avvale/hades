@@ -7,6 +7,7 @@ import { UpdateUserService } from './update-user.service';
 import { 
     UserId,
     UserAccountId,
+    UserName,
     UserSurname,
     UserAvatar,
     UserEmail,
@@ -65,6 +66,7 @@ describe('UpdateUserService', () =>
             expect(await service.main(
                 new UserId(users[0].id),
                 new UserAccountId(users[0].accountId),
+                new UserName(users[0].name),
                 new UserSurname(users[0].surname),
                 new UserAvatar(users[0].avatar),
                 new UserEmail(users[0].email),

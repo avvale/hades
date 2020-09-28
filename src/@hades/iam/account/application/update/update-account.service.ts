@@ -4,7 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     AccountId,
     AccountType,
-    AccountName,
+    AccountEmail,
     AccountIsActive,
     AccountClientId,
     AccountApplicationCodes,
@@ -31,7 +31,7 @@ export class UpdateAccountService
     public async main(
         id: AccountId,
         type?: AccountType,
-        name?: AccountName,
+        email?: AccountEmail,
         isActive?: AccountIsActive,
         clientId?: AccountClientId,
         applicationCodes?: AccountApplicationCodes,
@@ -46,7 +46,7 @@ export class UpdateAccountService
         const account = IamAccount.register(
             id,
             type,
-            name,
+            email,
             isActive,
             clientId,
             applicationCodes,

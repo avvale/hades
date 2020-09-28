@@ -5,7 +5,7 @@ import { IAccountRepository } from '@hades/iam/account/domain/account.repository
 import { 
     AccountId,
     AccountType,
-    AccountName,
+    AccountEmail,
     AccountIsActive,
     AccountClientId,
     AccountApplicationCodes,
@@ -54,7 +54,7 @@ export class MockAccountRepository extends MockRepository<IamAccount> implements
             this.collectionSource.push(IamAccount.register(
                     new AccountId(itemCollection.id),
                     new AccountType(itemCollection.type),
-                    new AccountName(itemCollection.name),
+                    new AccountEmail(itemCollection.email),
                     new AccountIsActive(itemCollection.isActive),
                     new AccountClientId(itemCollection.clientId),
                     new AccountApplicationCodes(itemCollection.applicationCodes),

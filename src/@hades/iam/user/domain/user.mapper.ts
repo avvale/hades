@@ -5,6 +5,7 @@ import { UserResponse } from './user.response';
 import { 
     UserId,
     UserAccountId,
+    UserName,
     UserSurname,
     UserAvatar,
     UserEmail,
@@ -77,6 +78,7 @@ export class UserMapper implements IMapper
         return IamUser.register(
             new UserId(user.id),
             new UserAccountId(user.accountId),
+            new UserName(user.name),
             new UserSurname(user.surname),
             new UserAvatar(user.avatar),
             new UserEmail(user.email),
@@ -106,6 +108,7 @@ export class UserMapper implements IMapper
         return new UserResponse(
             user.id.value,
             user.accountId.value,
+            user.name.value,
             user.surname.value,
             user.avatar.value,
             user.email.value,

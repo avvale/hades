@@ -42,7 +42,7 @@ describe('CreateAccountCommandHandler', () =>
                 new CreateAccountCommand(
                     accounts[0].id,
                     accounts[0].type,
-                    accounts[0].name,
+                    accounts[0].email,
                     accounts[0].isActive,
                     accounts[0].clientId,
                     accounts[0].applicationCodes,

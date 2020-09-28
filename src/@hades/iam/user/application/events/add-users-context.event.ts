@@ -26,6 +26,7 @@ export class AddUsersContextEvent extends AggregateRoot
                     new CreatedUserEvent(
                         user.id.value,
                         user.accountId.value,
+                        user.name.value,
                         user.surname?.value,
                         user.avatar?.value,
                         user.email.value,
@@ -53,6 +54,7 @@ export class AddUsersContextEvent extends AggregateRoot
                     new DeletedUserEvent(
                         user.id.value,
                         user.accountId.value,
+                        user.name.value,
                         user.surname?.value,
                         user.avatar?.value,
                         user.email.value,

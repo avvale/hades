@@ -2,6 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { 
     UserId,
     UserAccountId,
+    UserName,
     UserSurname,
     UserAvatar,
     UserEmail,
@@ -28,6 +29,7 @@ export class IamUser extends AggregateRoot
 {
     id: UserId;
     accountId: UserAccountId;
+    name: UserName;
     surname: UserSurname;
     avatar: UserAvatar;
     email: UserEmail;
@@ -48,12 +50,13 @@ export class IamUser extends AggregateRoot
     
     
     
-    constructor(id?: UserId, accountId?: UserAccountId, surname?: UserSurname, avatar?: UserAvatar, email?: UserEmail, mobile?: UserMobile, langId?: UserLangId, username?: UserUsername, password?: UserPassword, rememberToken?: UserRememberToken, data?: UserData, createdAt?: UserCreatedAt, updatedAt?: UserUpdatedAt, deletedAt?: UserDeletedAt, account?: IamAccount, )
+    constructor(id?: UserId, accountId?: UserAccountId, name?: UserName, surname?: UserSurname, avatar?: UserAvatar, email?: UserEmail, mobile?: UserMobile, langId?: UserLangId, username?: UserUsername, password?: UserPassword, rememberToken?: UserRememberToken, data?: UserData, createdAt?: UserCreatedAt, updatedAt?: UserUpdatedAt, deletedAt?: UserDeletedAt, account?: IamAccount, )
     {
         super();
         
         this.id = id;
         this.accountId = accountId;
+        this.name = name;
         this.surname = surname;
         this.avatar = avatar;
         this.email = email;
@@ -76,9 +79,9 @@ export class IamUser extends AggregateRoot
         
     }
 
-    static register (id: UserId, accountId: UserAccountId, surname: UserSurname, avatar: UserAvatar, email: UserEmail, mobile: UserMobile, langId: UserLangId, username: UserUsername, password: UserPassword, rememberToken: UserRememberToken, data: UserData, createdAt: UserCreatedAt, updatedAt: UserUpdatedAt, deletedAt: UserDeletedAt, account?: IamAccount, ): IamUser
+    static register (id: UserId, accountId: UserAccountId, name: UserName, surname: UserSurname, avatar: UserAvatar, email: UserEmail, mobile: UserMobile, langId: UserLangId, username: UserUsername, password: UserPassword, rememberToken: UserRememberToken, data: UserData, createdAt: UserCreatedAt, updatedAt: UserUpdatedAt, deletedAt: UserDeletedAt, account?: IamAccount, ): IamUser
     {
-        return new IamUser(id, accountId, surname, avatar, email, mobile, langId, username, password, rememberToken, data, createdAt, updatedAt, deletedAt, account, );
+        return new IamUser(id, accountId, name, surname, avatar, email, mobile, langId, username, password, rememberToken, data, createdAt, updatedAt, deletedAt, account, );
     }
 
     created(user: IamUser): void
@@ -87,6 +90,7 @@ export class IamUser extends AggregateRoot
             new CreatedUserEvent(
                 user.id.value,
                 user.accountId.value,
+                user.name.value,
                 user.surname?.value,
                 user.avatar?.value,
                 user.email.value,
@@ -110,6 +114,7 @@ export class IamUser extends AggregateRoot
             new UpdatedUserEvent(
                 user.id.value,
                 user.accountId?.value,
+                user.name?.value,
                 user.surname?.value,
                 user.avatar?.value,
                 user.email?.value,
@@ -133,6 +138,7 @@ export class IamUser extends AggregateRoot
             new DeletedUserEvent(
                 user.id.value,
                 user.accountId.value,
+                user.name.value,
                 user.surname?.value,
                 user.avatar?.value,
                 user.email.value,
@@ -155,6 +161,7 @@ export class IamUser extends AggregateRoot
         return {
             id: this.id.value,
             accountId: this.accountId.value,
+            name: this.name.value,
             surname: this.surname?.value,
             avatar: this.avatar?.value,
             email: this.email.value,

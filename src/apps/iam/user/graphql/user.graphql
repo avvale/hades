@@ -4,6 +4,7 @@ type IamUser
 {
     id: ID!
     accountId: ID!
+    name: GraphQLString!
     surname: GraphQLString
     avatar: GraphQLString
     email: GraphQLString!
@@ -23,6 +24,7 @@ input IamCreateUserInput
 {
     id: ID!
     accountId: ID!
+    name: GraphQLString!
     surname: GraphQLString
     avatar: GraphQLString
     email: GraphQLString!
@@ -39,6 +41,7 @@ input IamUpdateUserInput
 {
     id: ID!
     accountId: ID
+    name: GraphQLString
     surname: GraphQLString
     avatar: GraphQLString
     email: GraphQLString

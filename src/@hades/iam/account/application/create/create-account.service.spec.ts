@@ -7,7 +7,7 @@ import { CreateAccountService } from './create-account.service';
 import { 
     AccountId,
     AccountType,
-    AccountName,
+    AccountEmail,
     AccountIsActive,
     AccountClientId,
     AccountApplicationCodes,
@@ -61,7 +61,7 @@ describe('CreateAccountService', () =>
             expect(await service.main(
                 new AccountId(accounts[0].id),
                 new AccountType(accounts[0].type),
-                new AccountName(accounts[0].name),
+                new AccountEmail(accounts[0].email),
                 new AccountIsActive(accounts[0].isActive),
                 new AccountClientId(accounts[0].clientId),
                 new AccountApplicationCodes(accounts[0].applicationCodes),

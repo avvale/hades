@@ -4,6 +4,7 @@ export class CreateUsersCommand
         public readonly users: {
             id: string,
             accountId: string,
+            name: string,
             surname?: string,
             avatar?: string,
             email: string,

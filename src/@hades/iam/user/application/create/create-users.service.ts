@@ -4,6 +4,7 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 import { 
     UserId,
     UserAccountId,
+    UserName,
     UserSurname,
     UserAvatar,
     UserEmail,
@@ -34,6 +35,7 @@ export class CreateUsersService
         users: {
             id: UserId,
             accountId: UserAccountId,
+            name: UserName,
             surname: UserSurname,
             avatar: UserAvatar,
             email: UserEmail,
@@ -51,6 +53,7 @@ export class CreateUsersService
         const aggregateUsers = users.map(user => IamUser.register(
             user.id,
             user.accountId,
+            user.name,
             user.surname,
             user.avatar,
             user.email,
