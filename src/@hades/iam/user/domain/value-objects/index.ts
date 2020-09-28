@@ -3,7 +3,6 @@ export { UserAccountId } from './user-account-id';
 export { UserName } from './user-name';
 export { UserSurname } from './user-surname';
 export { UserAvatar } from './user-avatar';
-export { UserEmail } from './user-email';
 export { UserMobile } from './user-mobile';
 export { UserLangId } from './user-lang-id';
 export { UserUsername } from './user-username';

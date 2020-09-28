@@ -28,10 +28,6 @@ aggregateProperties:
     type: varchar
     maxLength: 255
     nullable: true
-  - name: email
-    type: varchar
-    maxLength: 120
-    nullable: false
   - name: mobile
     type: varchar
     maxLength: 60

@@ -5,7 +5,6 @@ import {
     UserName,
     UserSurname,
     UserAvatar,
-    UserEmail,
     UserMobile,
     UserLangId,
     UserUsername,
@@ -32,7 +31,6 @@ export class IamUser extends AggregateRoot
     name: UserName;
     surname: UserSurname;
     avatar: UserAvatar;
-    email: UserEmail;
     mobile: UserMobile;
     langId: UserLangId;
     username: UserUsername;
@@ -50,7 +48,7 @@ export class IamUser extends AggregateRoot
     
     
     
-    constructor(id?: UserId, accountId?: UserAccountId, name?: UserName, surname?: UserSurname, avatar?: UserAvatar, email?: UserEmail, mobile?: UserMobile, langId?: UserLangId, username?: UserUsername, password?: UserPassword, rememberToken?: UserRememberToken, data?: UserData, createdAt?: UserCreatedAt, updatedAt?: UserUpdatedAt, deletedAt?: UserDeletedAt, account?: IamAccount, )
+    constructor(id?: UserId, accountId?: UserAccountId, name?: UserName, surname?: UserSurname, avatar?: UserAvatar, mobile?: UserMobile, langId?: UserLangId, username?: UserUsername, password?: UserPassword, rememberToken?: UserRememberToken, data?: UserData, createdAt?: UserCreatedAt, updatedAt?: UserUpdatedAt, deletedAt?: UserDeletedAt, account?: IamAccount, )
     {
         super();
         
@@ -59,7 +57,6 @@ export class IamUser extends AggregateRoot
         this.name = name;
         this.surname = surname;
         this.avatar = avatar;
-        this.email = email;
         this.mobile = mobile;
         this.langId = langId;
         this.username = username;
@@ -79,9 +76,9 @@ export class IamUser extends AggregateRoot
         
     }
 
-    static register (id: UserId, accountId: UserAccountId, name: UserName, surname: UserSurname, avatar: UserAvatar, email: UserEmail, mobile: UserMobile, langId: UserLangId, username: UserUsername, password: UserPassword, rememberToken: UserRememberToken, data: UserData, createdAt: UserCreatedAt, updatedAt: UserUpdatedAt, deletedAt: UserDeletedAt, account?: IamAccount, ): IamUser
+    static register (id: UserId, accountId: UserAccountId, name: UserName, surname: UserSurname, avatar: UserAvatar, mobile: UserMobile, langId: UserLangId, username: UserUsername, password: UserPassword, rememberToken: UserRememberToken, data: UserData, createdAt: UserCreatedAt, updatedAt: UserUpdatedAt, deletedAt: UserDeletedAt, account?: IamAccount, ): IamUser
     {
-        return new IamUser(id, accountId, name, surname, avatar, email, mobile, langId, username, password, rememberToken, data, createdAt, updatedAt, deletedAt, account, );
+        return new IamUser(id, accountId, name, surname, avatar, mobile, langId, username, password, rememberToken, data, createdAt, updatedAt, deletedAt, account, );
     }
 
     created(user: IamUser): void
@@ -93,7 +90,6 @@ export class IamUser extends AggregateRoot
                 user.name.value,
                 user.surname?.value,
                 user.avatar?.value,
-                user.email.value,
                 user.mobile?.value,
                 user.langId?.value,
                 user.username.value,
@@ -117,7 +113,6 @@ export class IamUser extends AggregateRoot
                 user.name?.value,
                 user.surname?.value,
                 user.avatar?.value,
-                user.email?.value,
                 user.mobile?.value,
                 user.langId?.value,
                 user.username?.value,
@@ -141,7 +136,6 @@ export class IamUser extends AggregateRoot
                 user.name.value,
                 user.surname?.value,
                 user.avatar?.value,
-                user.email.value,
                 user.mobile?.value,
                 user.langId?.value,
                 user.username.value,
@@ -164,7 +158,6 @@ export class IamUser extends AggregateRoot
             name: this.name.value,
             surname: this.surname?.value,
             avatar: this.avatar?.value,
-            email: this.email.value,
             mobile: this.mobile?.value,
             langId: this.langId?.value,
             username: this.username.value,

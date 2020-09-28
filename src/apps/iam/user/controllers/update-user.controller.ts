@@ -29,7 +29,6 @@ export class UpdateUserController
             payload.name,
             payload.surname,
             payload.avatar,
-            payload.email,
             payload.mobile,
             payload.langId,
             payload.username,

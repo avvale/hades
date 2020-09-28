@@ -117,7 +117,6 @@ export interface IamCreateUserInput {
     name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
-    email: GraphQLString;
     mobile?: GraphQLString;
     langId?: string;
     username: GraphQLString;
@@ -132,7 +131,6 @@ export interface IamUpdateUserInput {
     name?: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
-    email?: GraphQLString;
     mobile?: GraphQLString;
     langId?: string;
     username?: GraphQLString;
@@ -277,7 +275,6 @@ export interface IamUser {
     name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
-    email: GraphQLString;
     mobile?: GraphQLString;
     langId?: string;
     username: GraphQLString;

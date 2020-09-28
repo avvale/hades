@@ -45,7 +45,6 @@ describe('CreateUserCommandHandler', () =>
                     users[0].name,
                     users[0].surname,
                     users[0].avatar,
-                    users[0].email,
                     users[0].mobile,
                     users[0].langId,
                     users[0].username,

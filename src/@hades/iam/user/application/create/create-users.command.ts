@@ -7,7 +7,6 @@ export class CreateUsersCommand
             name: string,
             surname?: string,
             avatar?: string,
-            email: string,
             mobile?: string,
             langId?: string,
             username: string,

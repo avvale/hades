@@ -6,7 +6,6 @@ export class UpdateUserCommand
         public readonly name?: string,
         public readonly surname?: string,
         public readonly avatar?: string,
-        public readonly email?: string,
         public readonly mobile?: string,
         public readonly langId?: string,
         public readonly username?: string,

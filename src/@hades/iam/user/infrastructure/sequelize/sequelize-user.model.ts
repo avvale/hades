@@ -83,20 +83,6 @@ export class IamUserModel extends Model<IamUserModel>
     
     
     @Column({
-        field: 'email',
-        
-        allowNull: false,
-        type: DataTypes.STRING(120),
-        
-        
-    })
-    email: string;
-        
-                     
-        
-    
-    
-    @Column({
         field: 'mobile',
         
         allowNull: true,

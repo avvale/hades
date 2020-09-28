@@ -7,7 +7,6 @@ type IamUser
     name: GraphQLString!
     surname: GraphQLString
     avatar: GraphQLString
-    email: GraphQLString!
     mobile: GraphQLString
     langId: ID
     username: GraphQLString!
@@ -27,7 +26,6 @@ input IamCreateUserInput
     name: GraphQLString!
     surname: GraphQLString
     avatar: GraphQLString
-    email: GraphQLString!
     mobile: GraphQLString
     langId: ID
     username: GraphQLString!
@@ -44,7 +42,6 @@ input IamUpdateUserInput
     name: GraphQLString
     surname: GraphQLString
     avatar: GraphQLString
-    email: GraphQLString
     mobile: GraphQLString
     langId: ID
     username: GraphQLString
