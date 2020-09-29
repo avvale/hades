@@ -1,5 +1,5 @@
 import { IamBoundedContextHandlers, IamBoundedContextServices, IamBoundedContextModel, IBoundedContextRepository, SequelizeBoundedContextRepository, BoundedContextSagas } from './bounded-context';
-import { IamPermissionHandlers, IamPermissionServices, IamPermissionModel, IPermissionRepository, SequelizePermissionRepository, PermissionSagas, IamPermissionsRolesModel } from './permission';
+import { IamPermissionHandlers, IamPermissionServices, IamPermissionModel, IPermissionRepository, SequelizePermissionRepository, PermissionSagas, IamPermissionsRolesModel, SequelizePermissionRoleRepository, IPermissionRoleRepository } from './permission';
 import { IamRoleHandlers, IamRoleServices, IamRoleModel, IRoleRepository, SequelizeRoleRepository, RoleSagas, IamRolesAccountsModel } from './role';
 import { IamAccountHandlers, IamAccountServices, IamAccountModel, IAccountRepository, SequelizeAccountRepository, AccountSagas } from './account';
 import { IamTenantHandlers, IamTenantServices, IamTenantModel, ITenantRepository, SequelizeTenantRepository, TenantSagas, IamTenantsAccountsModel } from './tenant';
@@ -40,6 +40,10 @@ export const IamRepositories = [
     {
         provide: IPermissionRepository,
         useClass: SequelizePermissionRepository
+    },
+    {
+        provide: IPermissionRoleRepository,
+        useClass: SequelizePermissionRoleRepository
     },
     {
         provide: IRoleRepository,

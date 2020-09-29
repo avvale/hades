@@ -5,3 +5,5 @@ export { PermissionRoleIds } from './permission-role-ids';
 export { PermissionCreatedAt } from './permission-created-at';
 export { PermissionUpdatedAt } from './permission-updated-at';
 export { PermissionDeletedAt } from './permission-deleted-at';
+export { PermissionPermissionId } from './permission-permission-id';
+export { PermissionRoleId } from './permission-role-id';

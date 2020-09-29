@@ -4,6 +4,7 @@ import { CreatePermissionsCommandHandler } from './application/create/create-per
 import { UpdatePermissionCommandHandler } from './application/update/update-permission.command-handler';
 import { DeletePermissionByIdCommandHandler } from './application/delete/delete-permission-by-id.command-handler';
 import { DeletePermissionsCommandHandler } from './application/delete/delete-permissions.command-handler';
+import { CreatePermissionsRolesCommandHandler } from './application/create/create-permissions-roles.command-handler';
 
 // queries
 import { PaginatePermissionsQueryHandler } from './application/paginate/paginate-permissions.query-handler';
@@ -28,6 +29,7 @@ import { FindPermissionByIdService } from './application/find/find-permission-by
 import { UpdatePermissionService } from './application/update/update-permission.service';
 import { DeletePermissionByIdService } from './application/delete/delete-permission-by-id.service';
 import { DeletePermissionsService } from './application/delete/delete-permissions.service';
+import { CreatePermissionsRolesService } from './application/create/create-permissions-roles.service';
 
 // models
 export { IamPermissionModel } from './infrastructure/sequelize/sequelize-permission.model';
@@ -36,6 +38,8 @@ export { IamPermissionsRolesModel } from './infrastructure/sequelize/sequelize-p
 // repository
 export { IPermissionRepository } from './domain/permission.repository';
 export { SequelizePermissionRepository } from './infrastructure/sequelize/sequelize-permission.repository';
+export { IPermissionRoleRepository } from './domain/permission-role.repository';
+export { SequelizePermissionRoleRepository } from './infrastructure/sequelize/sequelize-permission-role.repository';
 
 // sagas
 export { PermissionSagas } from './application/sagas/permission.sagas';
@@ -47,6 +51,7 @@ export const IamPermissionHandlers = [
     UpdatePermissionCommandHandler,
     DeletePermissionByIdCommandHandler,
     DeletePermissionsCommandHandler,
+    CreatePermissionsRolesCommandHandler,
 
     // queries
     PaginatePermissionsQueryHandler,
@@ -60,6 +65,7 @@ export const IamPermissionHandlers = [
     UpdatedPermissionEventHandler,
     DeletedPermissionEventHandler,
     DeletedPermissionsEventHandler,
+    CreatePermissionsRolesCommandHandler,
 ];
 
 export const IamPermissionServices = [
@@ -72,4 +78,5 @@ export const IamPermissionServices = [
     UpdatePermissionService,
     DeletePermissionByIdService,
     DeletePermissionsService,
+    CreatePermissionsRolesService
 ];
