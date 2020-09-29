@@ -6,7 +6,7 @@ export const accounts = [
         isActive: true,
         clientId: '333910d9-394b-42d7-b3e0-0c7ae7a54478',
         applicationCodes: ['quasar'],
-        permissions: [],
+        permissions: {},
         data: null,
         roleIds: [],
         tenantIds: [],

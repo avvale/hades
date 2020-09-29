@@ -4,6 +4,7 @@ import { CreateRolesCommandHandler } from './application/create/create-roles.com
 import { UpdateRoleCommandHandler } from './application/update/update-role.command-handler';
 import { DeleteRoleByIdCommandHandler } from './application/delete/delete-role-by-id.command-handler';
 import { DeleteRolesCommandHandler } from './application/delete/delete-roles.command-handler';
+import { CreateRolesAccountsCommandHandler } from './application/create/create-roles-accounts.command-handler';
 
 // queries
 import { PaginateRolesQueryHandler } from './application/paginate/paginate-roles.query-handler';
@@ -28,6 +29,7 @@ import { FindRoleByIdService } from './application/find/find-role-by-id.service'
 import { UpdateRoleService } from './application/update/update-role.service';
 import { DeleteRoleByIdService } from './application/delete/delete-role-by-id.service';
 import { DeleteRolesService } from './application/delete/delete-roles.service';
+import { CreateRolesAccountsService } from './application/create/create-roles-accounts.service';
 
 // models
 export { IamRoleModel } from './infrastructure/sequelize/sequelize-role.model';
@@ -36,6 +38,8 @@ export { IamRolesAccountsModel } from './infrastructure/sequelize/sequelize-role
 // repository
 export { IRoleRepository } from './domain/role.repository';
 export { SequelizeRoleRepository } from './infrastructure/sequelize/sequelize-role.repository';
+export { IRoleAccountRepository } from './domain/role-account.repository';
+export { SequelizeRoleAccountRepository } from './infrastructure/sequelize/sequelize-role-account.repository';
 
 // sagas
 export { RoleSagas } from './application/sagas/role.sagas';
@@ -47,6 +51,7 @@ export const IamRoleHandlers = [
     UpdateRoleCommandHandler,
     DeleteRoleByIdCommandHandler,
     DeleteRolesCommandHandler,
+    CreateRolesAccountsCommandHandler,
 
     // queries
     PaginateRolesQueryHandler,
@@ -72,4 +77,5 @@ export const IamRoleServices = [
     UpdateRoleService,
     DeleteRoleByIdService,
     DeleteRolesService,
+    CreateRolesAccountsService,
 ];

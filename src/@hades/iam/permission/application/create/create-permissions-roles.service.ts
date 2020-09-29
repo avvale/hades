@@ -6,7 +6,7 @@ import {
     
 } from './../../domain/value-objects';
 import { IPermissionRoleRepository } from './../../domain/permission-role.repository';
-import { IamPermissionRole } from '../../domain/permission-role.aggregate';
+import { IamPermissionRole } from './../../domain/permission-role.aggregate';
 
 @Injectable()
 export class CreatePermissionsRolesService
@@ -25,12 +25,12 @@ export class CreatePermissionsRolesService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregatePermissions = permissionsRoles.map(permission => IamPermissionRole.register(
-            permission.permissionId,
-            permission.roleId
+        const aggregatePermissionsRoles = permissionsRoles.map(permissionRole => IamPermissionRole.register(
+            permissionRole.permissionId,
+            permissionRole.roleId
         ));
         
         // insert
-        await this.repository.insert(aggregatePermissions);
+        await this.repository.insert(aggregatePermissionsRoles);
     }
 }

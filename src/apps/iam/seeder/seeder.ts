@@ -6,6 +6,8 @@ import { CreateBoundedContextsCommand } from '@hades/iam/bounded-context/applica
 import { CreateRolesCommand } from '@hades/iam/role/application/create/create-roles.command';
 import { CreatePermissionsCommand } from '@hades/iam/permission/application/create/create-permissions.command';
 import { CreatePermissionsRolesCommand } from '@hades/iam/permission/application/create/create-permissions-roles.command';
+import { CreateRolesAccountsCommand } from '@hades/iam/role/application/create/create-roles-accounts.command';
+import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
 import { SeederModule } from './seeder.module';
 import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
@@ -22,11 +24,11 @@ export class Seeder
 
             commandBus.dispatch(new CreateBoundedContextsCommand(boundedContexts));
             commandBus.dispatch(new CreatePermissionsCommand(permissions));
+            commandBus.dispatch(new CreateRolesCommand(roles));
             commandBus.dispatch(new CreateAccountsCommand(accounts));
             commandBus.dispatch(new CreateUsersCommand(users));
-            commandBus.dispatch(new CreateRolesCommand(roles));
-            
-            // set all permissions to admin user
+
+            // set all permissions to administration role
             const permissionsRoles = permissions.map(permission => {
                 return {
                     permissionId: permission.id,
@@ -34,7 +36,27 @@ export class Seeder
                 }
             });
             commandBus.dispatch(new CreatePermissionsRolesCommand(permissionsRoles));
-            
+
+            // set all roles to administration account
+            const rolesAccounts = roles.map(role => {
+                return {
+                    roleId: role.id,
+                    accountId: '948a5308-a49d-42dc-9ea3-7490e120000b'
+                }
+            });
+            commandBus.dispatch(new CreateRolesAccountsCommand(rolesAccounts));
+
+            // set all permissions to accounts in default application and update account
+            commandBus.dispatch(new UpdateAccountCommand(
+                '948a5308-a49d-42dc-9ea3-7490e120000b',
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                { default: permissions.map(permission => permission.id) }
+            ));
         });
     }
 }

@@ -6,3 +6,5 @@ export { RoleAccountIds } from './role-account-ids';
 export { RoleCreatedAt } from './role-created-at';
 export { RoleUpdatedAt } from './role-updated-at';
 export { RoleDeletedAt } from './role-deleted-at';
+export { RoleRoleId } from './role-role-id';
+export { RoleAccountId } from './role-account-id';
