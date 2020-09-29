@@ -54,7 +54,6 @@ export class Seeder
                 undefined,
                 undefined,
                 undefined,
-                undefined,
                 { default: permissions.map(permission => permission.id) }
             ));
         });
