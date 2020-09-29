@@ -30,7 +30,7 @@ export class FindMeAccountResolver
             where: {
                 id: accessToken.accountId
             },
-            include: ['user']
+            include: ['user', 'tenants']
         }));
 
         return account;
