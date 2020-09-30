@@ -1,5 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { SeederModule } from './seeder.module';
+
+// commands
 import { CreateAccountsCommand } from '@hades/iam/account/application/create/create-accounts.command';
 import { CreateUsersCommand } from '@hades/iam/user/application/create/create-users.command';
 import { CreateBoundedContextsCommand } from '@hades/iam/bounded-context/application/create/create-bounded-contexts.command';
@@ -8,7 +11,8 @@ import { CreatePermissionsCommand } from '@hades/iam/permission/application/crea
 import { CreatePermissionsRolesCommand } from '@hades/iam/permission/application/create/create-permissions-roles.command';
 import { CreateRolesAccountsCommand } from '@hades/iam/role/application/create/create-roles-accounts.command';
 import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
-import { SeederModule } from './seeder.module';
+
+// sources
 import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
 import { boundedContexts } from '@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
