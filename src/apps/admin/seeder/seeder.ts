@@ -32,8 +32,8 @@ export class Seeder
 
     async commonActions(commandBus:ICommandBus, queryBus:IQueryBus)
     {
-        commandBus.dispatch(new CreateBoundedContextsCommand(boundedContexts));
-        commandBus.dispatch(new CreatePermissionsCommand(permissions));
+        await commandBus.dispatch(new CreateBoundedContextsCommand(boundedContexts));
+        await commandBus.dispatch(new CreatePermissionsCommand(permissions));
 
         // set all permissions to administration role
         const permissionsRoles = permissions.map(permission => {
@@ -42,11 +42,11 @@ export class Seeder
                 roleId: '99b06044-fff5-4267-9314-4bae9f909010'
             }
         });
-        commandBus.dispatch(new CreatePermissionsRolesCommand(permissionsRoles));
+        await commandBus.dispatch(new CreatePermissionsRolesCommand(permissionsRoles));
 
         // set all permissions to administration account
         const account = await queryBus.ask(new FindAccountByIdQuery('948a5308-a49d-42dc-9ea3-7490e120000b'));
-        commandBus.dispatch(new UpdateAccountCommand(
+        await commandBus.dispatch(new UpdateAccountCommand(
             '948a5308-a49d-42dc-9ea3-7490e120000b',
             undefined,
             undefined,
