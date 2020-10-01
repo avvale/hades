@@ -6,7 +6,7 @@ import { IamModule } from './apps/iam/iam.module';
 @Module({
         CoreModule,
         AdminModule,
-        CciModule
+        CciModule,
         IamModule
     ]
 })
