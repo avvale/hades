@@ -1,0 +1,111 @@
+
+
+type CciFlow
+{
+    id: ID!
+    hash: GraphQLString!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    system: CciSystem!
+    systemName: GraphQLString!
+    version: GraphQLString!
+    scenario: GraphQLString
+    party: GraphQLString
+    receiverParty: GraphQLString
+    component: GraphQLString!
+    receiverComponent: GraphQLString
+    interfaceName: GraphQLString!
+    interfaceNamespace: GraphQLString!
+    iflowName: GraphQLString
+    responsibleUserAccount: GraphQLString
+    lastChangeUserAccount: GraphQLString
+    lastChangedAt: GraphQLTimestamp
+    folderPath: GraphQLString
+    description: GraphQLString
+    application: GraphQLString
+    isCritical: GraphQLBoolean
+    isComplex: GraphQLBoolean
+    fieldGroupId: ID
+    data: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateFlowInput
+{
+    id: ID!
+    hash: GraphQLString!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    systemId: ID!
+    systemName: GraphQLString!
+    version: GraphQLString!
+    scenario: GraphQLString
+    party: GraphQLString
+    receiverParty: GraphQLString
+    component: GraphQLString!
+    receiverComponent: GraphQLString
+    interfaceName: GraphQLString!
+    interfaceNamespace: GraphQLString!
+    iflowName: GraphQLString
+    responsibleUserAccount: GraphQLString
+    lastChangeUserAccount: GraphQLString
+    lastChangedAt: GraphQLTimestamp
+    folderPath: GraphQLString
+    description: GraphQLString
+    application: GraphQLString
+    isCritical: GraphQLBoolean
+    isComplex: GraphQLBoolean
+    fieldGroupId: ID
+    data: JSON
+    
+}
+
+input CciUpdateFlowInput
+{
+    id: ID!
+    hash: GraphQLString
+    tenantId: ID
+    tenantCode: GraphQLString
+    systemId: ID
+    systemName: GraphQLString
+    version: GraphQLString
+    scenario: GraphQLString
+    party: GraphQLString
+    receiverParty: GraphQLString
+    component: GraphQLString
+    receiverComponent: GraphQLString
+    interfaceName: GraphQLString
+    interfaceNamespace: GraphQLString
+    iflowName: GraphQLString
+    responsibleUserAccount: GraphQLString
+    lastChangeUserAccount: GraphQLString
+    lastChangedAt: GraphQLTimestamp
+    folderPath: GraphQLString
+    description: GraphQLString
+    application: GraphQLString
+    isCritical: GraphQLBoolean
+    isComplex: GraphQLBoolean
+    fieldGroupId: ID
+    data: JSON
+    
+}
+
+type Query 
+{
+    cciFindFlow(query:QueryStatement): CciFlow
+    cciFindFlowById(id:ID): CciFlow
+    cciGetFlows(query:QueryStatement): [CciFlow]!
+    cciPaginateFlows(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateFlow(payload: CciCreateFlowInput!): CciFlow
+    cciCreateFlows(payload: [CciCreateFlowInput]!): Boolean!
+    cciUpdateFlow(payload: CciUpdateFlowInput!): CciFlow
+    cciDeleteFlowById(id: ID!): CciFlow
+    cciDeleteFlows(query:QueryStatement): [CciFlow]!
+}

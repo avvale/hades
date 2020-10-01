@@ -1,0 +1,71 @@
+
+enum CciExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+
+type CciExecution
+{
+    id: ID!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    system: CciSystem!
+    systemName: GraphQLString!
+    version: GraphQLString!
+    type: CciExecutionType!
+    executedAt: GraphQLTimestamp!
+    monitoringStartAt: GraphQLTimestamp!
+    monitoringEndAt: GraphQLTimestamp!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateExecutionInput
+{
+    id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    systemId: ID!
+    systemName: GraphQLString!
+    version: GraphQLString!
+    type: CciExecutionType!
+    executedAt: GraphQLTimestamp!
+    monitoringStartAt: GraphQLTimestamp!
+    monitoringEndAt: GraphQLTimestamp!
+    
+}
+
+input CciUpdateExecutionInput
+{
+    id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
+    systemId: ID
+    systemName: GraphQLString
+    version: GraphQLString
+    type: CciExecutionType
+    executedAt: GraphQLTimestamp
+    monitoringStartAt: GraphQLTimestamp
+    monitoringEndAt: GraphQLTimestamp
+    
+}
+
+type Query 
+{
+    cciFindExecution(query:QueryStatement): CciExecution
+    cciFindExecutionById(id:ID): CciExecution
+    cciGetExecutions(query:QueryStatement): [CciExecution]!
+    cciPaginateExecutions(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateExecution(payload: CciCreateExecutionInput!): CciExecution
+    cciCreateExecutions(payload: [CciCreateExecutionInput]!): Boolean!
+    cciUpdateExecution(payload: CciUpdateExecutionInput!): CciExecution
+    cciDeleteExecutionById(id: ID!): CciExecution
+    cciDeleteExecutions(query:QueryStatement): [CciExecution]!
+}

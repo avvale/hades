@@ -1,0 +1,98 @@
+
+enum CciJobDetailExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+enum CciJobDetailStatus {
+    CANCELLED
+    COMPLETED
+    ERROR
+        
+}
+
+type CciJobDetail
+{
+    id: ID!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    system: CciSystem!
+    systemName: GraphQLString!
+    execution: CciExecution!
+    executionType: CciJobDetailExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    status: CciJobDetailStatus!
+    name: GraphQLString
+    returnCode: GraphQLInt
+    node: GraphQLString
+    user: GraphQLString
+    startAt: GraphQLTimestamp!
+    endAt: GraphQLTimestamp!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateJobDetailInput
+{
+    id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: CciJobDetailExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    status: CciJobDetailStatus!
+    name: GraphQLString
+    returnCode: GraphQLInt
+    node: GraphQLString
+    user: GraphQLString
+    startAt: GraphQLTimestamp!
+    endAt: GraphQLTimestamp!
+    
+}
+
+input CciUpdateJobDetailInput
+{
+    id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
+    systemId: ID
+    systemName: GraphQLString
+    executionId: ID
+    executionType: CciJobDetailExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    status: CciJobDetailStatus
+    name: GraphQLString
+    returnCode: GraphQLInt
+    node: GraphQLString
+    user: GraphQLString
+    startAt: GraphQLTimestamp
+    endAt: GraphQLTimestamp
+    
+}
+
+type Query 
+{
+    cciFindJobDetail(query:QueryStatement): CciJobDetail
+    cciFindJobDetailById(id:ID): CciJobDetail
+    cciGetJobsDetail(query:QueryStatement): [CciJobDetail]!
+    cciPaginateJobsDetail(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateJobDetail(payload: CciCreateJobDetailInput!): CciJobDetail
+    cciCreateJobsDetail(payload: [CciCreateJobDetailInput]!): Boolean!
+    cciUpdateJobDetail(payload: CciUpdateJobDetailInput!): CciJobDetail
+    cciDeleteJobDetailById(id: ID!): CciJobDetail
+    cciDeleteJobsDetail(query:QueryStatement): [CciJobDetail]!
+}

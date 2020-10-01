@@ -1,0 +1,98 @@
+
+enum CciMessageOverviewExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+
+type CciMessageOverview
+{
+    id: ID!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    system: CciSystem!
+    systemName: GraphQLString!
+    execution: CciExecution!
+    executionType: CciMessageOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    numberMax: GraphQLInt
+    numberDays: GraphQLInt
+    success: GraphQLInt
+    cancelled: GraphQLInt
+    delivering: GraphQLInt
+    error: GraphQLInt
+    holding: GraphQLInt
+    toBeDelivered: GraphQLInt
+    waiting: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateMessageOverviewInput
+{
+    id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: CciMessageOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    numberMax: GraphQLInt
+    numberDays: GraphQLInt
+    success: GraphQLInt
+    cancelled: GraphQLInt
+    delivering: GraphQLInt
+    error: GraphQLInt
+    holding: GraphQLInt
+    toBeDelivered: GraphQLInt
+    waiting: GraphQLInt
+    
+}
+
+input CciUpdateMessageOverviewInput
+{
+    id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
+    systemId: ID
+    systemName: GraphQLString
+    executionId: ID
+    executionType: CciMessageOverviewExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    numberMax: GraphQLInt
+    numberDays: GraphQLInt
+    success: GraphQLInt
+    cancelled: GraphQLInt
+    delivering: GraphQLInt
+    error: GraphQLInt
+    holding: GraphQLInt
+    toBeDelivered: GraphQLInt
+    waiting: GraphQLInt
+    
+}
+
+type Query 
+{
+    cciFindMessageOverview(query:QueryStatement): CciMessageOverview
+    cciFindMessageOverviewById(id:ID): CciMessageOverview
+    cciGetMessagesOverview(query:QueryStatement): [CciMessageOverview]!
+    cciPaginateMessagesOverview(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateMessageOverview(payload: CciCreateMessageOverviewInput!): CciMessageOverview
+    cciCreateMessagesOverview(payload: [CciCreateMessageOverviewInput]!): Boolean!
+    cciUpdateMessageOverview(payload: CciUpdateMessageOverviewInput!): CciMessageOverview
+    cciDeleteMessageOverviewById(id: ID!): CciMessageOverview
+    cciDeleteMessagesOverview(query:QueryStatement): [CciMessageOverview]!
+}

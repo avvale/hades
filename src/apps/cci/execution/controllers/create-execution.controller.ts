@@ -1,0 +1,42 @@
+import { Controller, Post, Body } from '@nestjs/common';
+import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { CreateExecutionDto } from './../dto/create-execution.dto';
+import { ExecutionDto } from './../dto/execution.dto';
+
+// @hades
+import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
+import { FindExecutionByIdQuery } from '@hades/cci/execution/application/find/find-execution-by-id.query';
+import { CreateExecutionCommand } from '@hades/cci/execution/application/create/create-execution.command';
+
+@ApiTags('[cci] execution')
+@Controller('cci/execution')
+export class CreateExecutionController 
+{
+    constructor(
+        private readonly commandBus: ICommandBus,
+        private readonly queryBus: IQueryBus
+    ) {}
+
+    @Post()
+    @ApiOperation({ summary: 'Create execution' })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: ExecutionDto })
+    async main(@Body() payload: CreateExecutionDto)
+    {
+        await this.commandBus.dispatch(new CreateExecutionCommand(
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.systemId,
+            payload.systemName,
+            payload.version,
+            payload.type,
+            payload.executedAt,
+            payload.monitoringStartAt,
+            payload.monitoringEndAt,
+            
+        ));
+
+        return await this.queryBus.ask(new FindExecutionByIdQuery(payload.id));
+    }
+}

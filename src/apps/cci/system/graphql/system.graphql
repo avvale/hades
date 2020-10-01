@@ -1,0 +1,60 @@
+
+
+type CciSystem
+{
+    id: ID!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    version: GraphQLString!
+    name: GraphQLString!
+    environment: GraphQLString!
+    isActive: GraphQLBoolean!
+    cancelledAt: GraphQLTimestamp
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateSystemInput
+{
+    id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    version: GraphQLString!
+    name: GraphQLString!
+    environment: GraphQLString!
+    isActive: GraphQLBoolean!
+    cancelledAt: GraphQLTimestamp
+    
+}
+
+input CciUpdateSystemInput
+{
+    id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
+    version: GraphQLString
+    name: GraphQLString
+    environment: GraphQLString
+    isActive: GraphQLBoolean
+    cancelledAt: GraphQLTimestamp
+    
+}
+
+type Query 
+{
+    cciFindSystem(query:QueryStatement): CciSystem
+    cciFindSystemById(id:ID): CciSystem
+    cciGetSystems(query:QueryStatement): [CciSystem]!
+    cciPaginateSystems(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateSystem(payload: CciCreateSystemInput!): CciSystem
+    cciCreateSystems(payload: [CciCreateSystemInput]!): Boolean!
+    cciUpdateSystem(payload: CciUpdateSystemInput!): CciSystem
+    cciDeleteSystemById(id: ID!): CciSystem
+    cciDeleteSystems(query:QueryStatement): [CciSystem]!
+}

@@ -1,0 +1,48 @@
+
+
+type CciRole
+{
+    id: ID!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    name: GraphQLString!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateRoleInput
+{
+    id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    name: GraphQLString!
+    
+}
+
+input CciUpdateRoleInput
+{
+    id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
+    name: GraphQLString
+    
+}
+
+type Query 
+{
+    cciFindRole(query:QueryStatement): CciRole
+    cciFindRoleById(id:ID): CciRole
+    cciGetRoles(query:QueryStatement): [CciRole]!
+    cciPaginateRoles(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateRole(payload: CciCreateRoleInput!): CciRole
+    cciCreateRoles(payload: [CciCreateRoleInput]!): Boolean!
+    cciUpdateRole(payload: CciUpdateRoleInput!): CciRole
+    cciDeleteRoleById(id: ID!): CciRole
+    cciDeleteRoles(query:QueryStatement): [CciRole]!
+}

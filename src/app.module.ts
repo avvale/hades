@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
 import { CoreModule } from './apps/core/core.module';
-import { AdminModule } from './apps/admin/admin.module';
-
+import { CciModule } from './apps/cci/cci.module';
 @Module({
-    imports: [
         CoreModule,
-        AdminModule
+        AdminModule,
+        CciModule
     ]
 })
 export class AppModule {}
