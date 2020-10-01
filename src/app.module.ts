@@ -6,6 +6,7 @@ import { IamModule } from './apps/iam/iam.module';
 import { OAuthModule } from './apps/o-auth/o-auth.module';
 
 @Module({
+    imports: [
         CoreModule,
         AdminModule,
         CciModule,
