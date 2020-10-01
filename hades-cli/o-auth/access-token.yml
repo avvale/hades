@@ -1,0 +1,51 @@
+version: 1.0.0
+boundedContextName: o-auth
+moduleName: access-token
+moduleNames: access-tokens
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: client_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: OAuthClient
+    relationshipModulePath: o-auth/client
+    relationshipKey: id
+    relationshipField: client
+  - name: account_id
+    type: id
+    length: 36
+    nullable: true
+  - name: token
+    type: text
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: is_revoked
+    type: boolean
+    nullable: false
+  - name: expires_at
+    type: timestamp
+    nullable: true
+  - name: refresh_token
+    type: OAuthRefreshToken
+    nullable: true
+    relationship: one-to-one
+    relationshipAggregate: OAuthRefreshToken
+    relationshipModulePath: o-auth/refresh-token
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true
