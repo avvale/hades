@@ -1,4 +1,4 @@
-import { TenantResponse } from '@hades/admin/tenant/domain/tenant.response';
+import { TenantResponse } from '@hades/iam/tenant/domain/tenant.response';
 
 
 

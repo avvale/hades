@@ -13,7 +13,7 @@ import {
 import { CreatedDataLakeEvent } from './../application/events/created-data-lake.event';
 import { UpdatedDataLakeEvent } from './../application/events/updated-data-lake.event';
 import { DeletedDataLakeEvent } from './../application/events/deleted-data-lake.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
+import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
 
 
@@ -30,12 +30,12 @@ export class CciDataLake extends AggregateRoot
     deletedAt: DataLakeDeletedAt;
     
     // eager relationship
-    tenant: AdminTenant;
+    tenant: IamTenant;
     execution: CciExecution;
     
     
     
-    constructor(id?: DataLakeId, tenantId?: DataLakeTenantId, executionId?: DataLakeExecutionId, tenantCode?: DataLakeTenantCode, payload?: DataLakePayload, createdAt?: DataLakeCreatedAt, updatedAt?: DataLakeUpdatedAt, deletedAt?: DataLakeDeletedAt, tenant?: AdminTenant, execution?: CciExecution, )
+    constructor(id?: DataLakeId, tenantId?: DataLakeTenantId, executionId?: DataLakeExecutionId, tenantCode?: DataLakeTenantCode, payload?: DataLakePayload, createdAt?: DataLakeCreatedAt, updatedAt?: DataLakeUpdatedAt, deletedAt?: DataLakeDeletedAt, tenant?: IamTenant, execution?: CciExecution, )
     {
         super();
         
@@ -56,7 +56,7 @@ export class CciDataLake extends AggregateRoot
         
     }
 
-    static register (id: DataLakeId, tenantId: DataLakeTenantId, executionId: DataLakeExecutionId, tenantCode: DataLakeTenantCode, payload: DataLakePayload, createdAt: DataLakeCreatedAt, updatedAt: DataLakeUpdatedAt, deletedAt: DataLakeDeletedAt, tenant?: AdminTenant, execution?: CciExecution, ): CciDataLake
+    static register (id: DataLakeId, tenantId: DataLakeTenantId, executionId: DataLakeExecutionId, tenantCode: DataLakeTenantCode, payload: DataLakePayload, createdAt: DataLakeCreatedAt, updatedAt: DataLakeUpdatedAt, deletedAt: DataLakeDeletedAt, tenant?: IamTenant, execution?: CciExecution, ): CciDataLake
     {
         return new CciDataLake(id, tenantId, executionId, tenantCode, payload, createdAt, updatedAt, deletedAt, tenant, execution, );
     }

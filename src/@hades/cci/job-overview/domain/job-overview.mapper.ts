@@ -21,7 +21,7 @@ import {
     JobOverviewDeletedAt
     
 } from './value-objects';
-import { TenantMapper } from '@hades/admin/tenant/domain/tenant.mapper';
+import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 import { ExecutionMapper } from '@hades/cci/execution/domain/execution.mapper';
 

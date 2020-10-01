@@ -14,7 +14,7 @@ type CciChannel
 {
     id: ID!
     hash: GraphQLString!
-    tenant: AdminTenant!
+    tenant: IamTenant!
     tenantCode: GraphQLString!
     system: CciSystem!
     systemName: GraphQLString!

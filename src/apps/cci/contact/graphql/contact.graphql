@@ -3,7 +3,7 @@
 type CciContact
 {
     id: ID!
-    tenant: AdminTenant!
+    tenant: IamTenant!
     tenantCode: GraphQLString!
     system: CciSystem!
     systemName: GraphQLString!

@@ -3,7 +3,7 @@
 type CciRole
 {
     id: ID!
-    tenant: AdminTenant!
+    tenant: IamTenant!
     tenantCode: GraphQLString!
     name: GraphQLString!
     createdAt: GraphQLTimestamp
