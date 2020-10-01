@@ -1,0 +1,81 @@
+
+
+type CciContact
+{
+    id: ID!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    system: CciSystem!
+    systemName: GraphQLString!
+    role: CciRole
+    roleName: GraphQLString
+    name: GraphQLString!
+    surname: GraphQLString
+    email: GraphQLString!
+    mobile: GraphQLString
+    area: GraphQLString
+    hasConsentEmail: GraphQLBoolean!
+    hasConsentMobile: GraphQLBoolean!
+    isActive: GraphQLBoolean!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateContactInput
+{
+    id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    systemId: ID!
+    systemName: GraphQLString!
+    roleId: ID
+    roleName: GraphQLString
+    name: GraphQLString!
+    surname: GraphQLString
+    email: GraphQLString!
+    mobile: GraphQLString
+    area: GraphQLString
+    hasConsentEmail: GraphQLBoolean!
+    hasConsentMobile: GraphQLBoolean!
+    isActive: GraphQLBoolean!
+    
+}
+
+input CciUpdateContactInput
+{
+    id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
+    systemId: ID
+    systemName: GraphQLString
+    roleId: ID
+    roleName: GraphQLString
+    name: GraphQLString
+    surname: GraphQLString
+    email: GraphQLString
+    mobile: GraphQLString
+    area: GraphQLString
+    hasConsentEmail: GraphQLBoolean
+    hasConsentMobile: GraphQLBoolean
+    isActive: GraphQLBoolean
+    
+}
+
+type Query 
+{
+    cciFindContact(query:QueryStatement): CciContact
+    cciFindContactById(id:ID): CciContact
+    cciGetContacts(query:QueryStatement): [CciContact]!
+    cciPaginateContacts(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateContact(payload: CciCreateContactInput!): CciContact
+    cciCreateContacts(payload: [CciCreateContactInput]!): Boolean!
+    cciUpdateContact(payload: CciUpdateContactInput!): CciContact
+    cciDeleteContactById(id: ID!): CciContact
+    cciDeleteContacts(query:QueryStatement): [CciContact]!
+}

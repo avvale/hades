@@ -1,0 +1,99 @@
+
+
+type CciModule
+{
+    id: ID!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    system: CciSystem!
+    systemName: GraphQLString!
+    channelHash: GraphQLString!
+    channelParty: GraphQLString
+    channelComponent: GraphQLString!
+    channelName: GraphQLString!
+    flowHash: GraphQLString
+    flowParty: GraphQLString
+    flowReceiverParty: GraphQLString
+    flowComponent: GraphQLString
+    flowReceiverComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
+    version: GraphQLString!
+    parameterGroup: GraphQLString
+    name: GraphQLString
+    parameterName: GraphQLString
+    parameterValue: GraphQLString
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateModuleInput
+{
+    id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    systemId: ID!
+    systemName: GraphQLString!
+    channelHash: GraphQLString!
+    channelParty: GraphQLString
+    channelComponent: GraphQLString!
+    channelName: GraphQLString!
+    flowHash: GraphQLString
+    flowParty: GraphQLString
+    flowReceiverParty: GraphQLString
+    flowComponent: GraphQLString
+    flowReceiverComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
+    version: GraphQLString!
+    parameterGroup: GraphQLString
+    name: GraphQLString
+    parameterName: GraphQLString
+    parameterValue: GraphQLString
+    
+}
+
+input CciUpdateModuleInput
+{
+    id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
+    systemId: ID
+    systemName: GraphQLString
+    channelHash: GraphQLString
+    channelParty: GraphQLString
+    channelComponent: GraphQLString
+    channelName: GraphQLString
+    flowHash: GraphQLString
+    flowParty: GraphQLString
+    flowReceiverParty: GraphQLString
+    flowComponent: GraphQLString
+    flowReceiverComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
+    version: GraphQLString
+    parameterGroup: GraphQLString
+    name: GraphQLString
+    parameterName: GraphQLString
+    parameterValue: GraphQLString
+    
+}
+
+type Query 
+{
+    cciFindModule(query:QueryStatement): CciModule
+    cciFindModuleById(id:ID): CciModule
+    cciGetModules(query:QueryStatement): [CciModule]!
+    cciPaginateModules(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateModule(payload: CciCreateModuleInput!): CciModule
+    cciCreateModules(payload: [CciCreateModuleInput]!): Boolean!
+    cciUpdateModule(payload: CciUpdateModuleInput!): CciModule
+    cciDeleteModuleById(id: ID!): CciModule
+    cciDeleteModules(query:QueryStatement): [CciModule]!
+}

@@ -1,0 +1,51 @@
+
+
+type CciDataLake
+{
+    id: ID!
+    tenant: AdminTenant!
+    execution: CciExecution!
+    tenantCode: GraphQLString!
+    payload: JSON!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateDataLakeInput
+{
+    id: ID!
+    tenantId: ID!
+    executionId: ID!
+    tenantCode: GraphQLString!
+    payload: JSON!
+    
+}
+
+input CciUpdateDataLakeInput
+{
+    id: ID!
+    tenantId: ID
+    executionId: ID
+    tenantCode: GraphQLString
+    payload: JSON
+    
+}
+
+type Query 
+{
+    cciFindDataLake(query:QueryStatement): CciDataLake
+    cciFindDataLakeById(id:ID): CciDataLake
+    cciGetDataLakes(query:QueryStatement): [CciDataLake]!
+    cciPaginateDataLakes(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateDataLake(payload: CciCreateDataLakeInput!): CciDataLake
+    cciCreateDataLakes(payload: [CciCreateDataLakeInput]!): Boolean!
+    cciUpdateDataLake(payload: CciUpdateDataLakeInput!): CciDataLake
+    cciDeleteDataLakeById(id: ID!): CciDataLake
+    cciDeleteDataLakes(query:QueryStatement): [CciDataLake]!
+}

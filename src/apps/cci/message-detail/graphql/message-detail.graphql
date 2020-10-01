@@ -1,0 +1,173 @@
+
+enum CciMessageDetailExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+enum CciMessageDetailStatus {
+    SUCCESS
+    CANCELLED
+    DELIVERING
+    ERROR
+    HOLDING
+    TO_BE_DELIVERED
+    WAITING
+        
+}
+enum CciMessageDetailDirection {
+    INBOUND
+    OUTBOUND
+        
+}
+
+type CciMessageDetail
+{
+    id: ID!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    system: CciSystem!
+    systemName: GraphQLString!
+    scenario: GraphQLString
+    execution: CciExecution!
+    executionType: CciMessageDetailExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    flowHash: GraphQLString!
+    flowParty: GraphQLString
+    flowReceiverParty: GraphQLString
+    flowComponent: GraphQLString!
+    flowReceiverComponent: GraphQLString
+    flowInterfaceName: GraphQLString!
+    flowInterfaceNamespace: GraphQLString!
+    status: CciMessageDetailStatus!
+    refMessageId: GraphQLString
+    detail: GraphQLString
+    example: GraphQLString
+    startTimeAt: GraphQLTimestamp
+    direction: CciMessageDetailDirection!
+    errorCategory: GraphQLString
+    errorCode: GraphQLString
+    errorLabel: GraphQLInt
+    node: GraphQLInt
+    protocol: GraphQLString
+    qualityOfService: GraphQLString
+    receiverParty: GraphQLString
+    receiverComponent: GraphQLString
+    receiverInterface: GraphQLString
+    receiverInterfaceNamespace: GraphQLString
+    retries: GraphQLInt
+    size: GraphQLInt
+    timesFailed: GraphQLInt
+    numberMax: GraphQLInt
+    numberDays: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateMessageDetailInput
+{
+    id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    systemId: ID!
+    systemName: GraphQLString!
+    scenario: GraphQLString
+    executionId: ID!
+    executionType: CciMessageDetailExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    flowHash: GraphQLString!
+    flowParty: GraphQLString
+    flowReceiverParty: GraphQLString
+    flowComponent: GraphQLString!
+    flowReceiverComponent: GraphQLString
+    flowInterfaceName: GraphQLString!
+    flowInterfaceNamespace: GraphQLString!
+    status: CciMessageDetailStatus!
+    refMessageId: GraphQLString
+    detail: GraphQLString
+    example: GraphQLString
+    startTimeAt: GraphQLTimestamp
+    direction: CciMessageDetailDirection!
+    errorCategory: GraphQLString
+    errorCode: GraphQLString
+    errorLabel: GraphQLInt
+    node: GraphQLInt
+    protocol: GraphQLString
+    qualityOfService: GraphQLString
+    receiverParty: GraphQLString
+    receiverComponent: GraphQLString
+    receiverInterface: GraphQLString
+    receiverInterfaceNamespace: GraphQLString
+    retries: GraphQLInt
+    size: GraphQLInt
+    timesFailed: GraphQLInt
+    numberMax: GraphQLInt
+    numberDays: GraphQLInt
+    
+}
+
+input CciUpdateMessageDetailInput
+{
+    id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
+    systemId: ID
+    systemName: GraphQLString
+    scenario: GraphQLString
+    executionId: ID
+    executionType: CciMessageDetailExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    flowHash: GraphQLString
+    flowParty: GraphQLString
+    flowReceiverParty: GraphQLString
+    flowComponent: GraphQLString
+    flowReceiverComponent: GraphQLString
+    flowInterfaceName: GraphQLString
+    flowInterfaceNamespace: GraphQLString
+    status: CciMessageDetailStatus
+    refMessageId: GraphQLString
+    detail: GraphQLString
+    example: GraphQLString
+    startTimeAt: GraphQLTimestamp
+    direction: CciMessageDetailDirection
+    errorCategory: GraphQLString
+    errorCode: GraphQLString
+    errorLabel: GraphQLInt
+    node: GraphQLInt
+    protocol: GraphQLString
+    qualityOfService: GraphQLString
+    receiverParty: GraphQLString
+    receiverComponent: GraphQLString
+    receiverInterface: GraphQLString
+    receiverInterfaceNamespace: GraphQLString
+    retries: GraphQLInt
+    size: GraphQLInt
+    timesFailed: GraphQLInt
+    numberMax: GraphQLInt
+    numberDays: GraphQLInt
+    
+}
+
+type Query 
+{
+    cciFindMessageDetail(query:QueryStatement): CciMessageDetail
+    cciFindMessageDetailById(id:ID): CciMessageDetail
+    cciGetMessagesDetail(query:QueryStatement): [CciMessageDetail]!
+    cciPaginateMessagesDetail(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateMessageDetail(payload: CciCreateMessageDetailInput!): CciMessageDetail
+    cciCreateMessagesDetail(payload: [CciCreateMessageDetailInput]!): Boolean!
+    cciUpdateMessageDetail(payload: CciUpdateMessageDetailInput!): CciMessageDetail
+    cciDeleteMessageDetailById(id: ID!): CciMessageDetail
+    cciDeleteMessagesDetail(query:QueryStatement): [CciMessageDetail]!
+}

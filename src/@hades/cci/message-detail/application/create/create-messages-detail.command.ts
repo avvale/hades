@@ -1,0 +1,47 @@
+export class CreateMessagesDetailCommand
+{
+    constructor(
+        public readonly messagesDetail: {
+            id: string,
+            tenantId: string,
+            tenantCode: string,
+            systemId: string,
+            systemName: string,
+            scenario?: string,
+            executionId: string,
+            executionType: string,
+            executionExecutedAt: string,
+            executionMonitoringStartAt: string,
+            executionMonitoringEndAt: string,
+            flowHash: string,
+            flowParty?: string,
+            flowReceiverParty?: string,
+            flowComponent: string,
+            flowReceiverComponent?: string,
+            flowInterfaceName: string,
+            flowInterfaceNamespace: string,
+            status: string,
+            refMessageId?: string,
+            detail?: string,
+            example?: string,
+            startTimeAt?: string,
+            direction: string,
+            errorCategory?: string,
+            errorCode?: string,
+            errorLabel?: number,
+            node?: number,
+            protocol?: string,
+            qualityOfService?: string,
+            receiverParty?: string,
+            receiverComponent?: string,
+            receiverInterface?: string,
+            receiverInterfaceNamespace?: string,
+            retries?: number,
+            size?: number,
+            timesFailed?: number,
+            numberMax?: number,
+            numberDays?: number,
+            
+        } []
+    ) {}
+}

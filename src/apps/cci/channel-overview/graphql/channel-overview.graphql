@@ -1,0 +1,89 @@
+
+enum CciChannelOverviewExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+
+type CciChannelOverview
+{
+    id: ID!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    system: CciSystem!
+    systemName: GraphQLString!
+    execution: CciExecution!
+    executionType: CciChannelOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    error: GraphQLInt
+    inactive: GraphQLInt
+    successful: GraphQLInt
+    stopped: GraphQLInt
+    unknown: GraphQLInt
+    unregistered: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateChannelOverviewInput
+{
+    id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: CciChannelOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    error: GraphQLInt
+    inactive: GraphQLInt
+    successful: GraphQLInt
+    stopped: GraphQLInt
+    unknown: GraphQLInt
+    unregistered: GraphQLInt
+    
+}
+
+input CciUpdateChannelOverviewInput
+{
+    id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
+    systemId: ID
+    systemName: GraphQLString
+    executionId: ID
+    executionType: CciChannelOverviewExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    error: GraphQLInt
+    inactive: GraphQLInt
+    successful: GraphQLInt
+    stopped: GraphQLInt
+    unknown: GraphQLInt
+    unregistered: GraphQLInt
+    
+}
+
+type Query 
+{
+    cciFindChannelOverview(query:QueryStatement): CciChannelOverview
+    cciFindChannelOverviewById(id:ID): CciChannelOverview
+    cciGetChannelsOverview(query:QueryStatement): [CciChannelOverview]!
+    cciPaginateChannelsOverview(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateChannelOverview(payload: CciCreateChannelOverviewInput!): CciChannelOverview
+    cciCreateChannelsOverview(payload: [CciCreateChannelOverviewInput]!): Boolean!
+    cciUpdateChannelOverview(payload: CciUpdateChannelOverviewInput!): CciChannelOverview
+    cciDeleteChannelOverviewById(id: ID!): CciChannelOverview
+    cciDeleteChannelsOverview(query:QueryStatement): [CciChannelOverview]!
+}

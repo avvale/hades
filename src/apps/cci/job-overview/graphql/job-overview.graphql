@@ -1,0 +1,80 @@
+
+enum CciJobOverviewExecutionType {
+    SUMMARY
+    DETAIL
+        
+}
+
+type CciJobOverview
+{
+    id: ID!
+    tenant: AdminTenant!
+    tenantCode: GraphQLString!
+    system: CciSystem!
+    systemName: GraphQLString!
+    execution: CciExecution!
+    executionType: CciJobOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    cancelled: GraphQLInt
+    completed: GraphQLInt
+    error: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input CciCreateJobOverviewInput
+{
+    id: ID!
+    tenantId: ID!
+    tenantCode: GraphQLString!
+    systemId: ID!
+    systemName: GraphQLString!
+    executionId: ID!
+    executionType: CciJobOverviewExecutionType!
+    executionExecutedAt: GraphQLTimestamp!
+    executionMonitoringStartAt: GraphQLTimestamp!
+    executionMonitoringEndAt: GraphQLTimestamp!
+    cancelled: GraphQLInt
+    completed: GraphQLInt
+    error: GraphQLInt
+    
+}
+
+input CciUpdateJobOverviewInput
+{
+    id: ID!
+    tenantId: ID
+    tenantCode: GraphQLString
+    systemId: ID
+    systemName: GraphQLString
+    executionId: ID
+    executionType: CciJobOverviewExecutionType
+    executionExecutedAt: GraphQLTimestamp
+    executionMonitoringStartAt: GraphQLTimestamp
+    executionMonitoringEndAt: GraphQLTimestamp
+    cancelled: GraphQLInt
+    completed: GraphQLInt
+    error: GraphQLInt
+    
+}
+
+type Query 
+{
+    cciFindJobOverview(query:QueryStatement): CciJobOverview
+    cciFindJobOverviewById(id:ID): CciJobOverview
+    cciGetJobsOverview(query:QueryStatement): [CciJobOverview]!
+    cciPaginateJobsOverview(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    cciCreateJobOverview(payload: CciCreateJobOverviewInput!): CciJobOverview
+    cciCreateJobsOverview(payload: [CciCreateJobOverviewInput]!): Boolean!
+    cciUpdateJobOverview(payload: CciUpdateJobOverviewInput!): CciJobOverview
+    cciDeleteJobOverviewById(id: ID!): CciJobOverview
+    cciDeleteJobsOverview(query:QueryStatement): [CciJobOverview]!
+}
