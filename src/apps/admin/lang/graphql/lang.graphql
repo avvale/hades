@@ -1,0 +1,60 @@
+
+
+type AdminLang
+{
+    id: ID!
+    name: GraphQLString!
+    image: GraphQLString
+    iso6392: GraphQLString!
+    iso6393: GraphQLString!
+    ietf: GraphQLString!
+    sort: GraphQLInt
+    isActive: GraphQLBoolean!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+    
+}
+
+input AdminCreateLangInput
+{
+    id: ID!
+    name: GraphQLString!
+    image: GraphQLString
+    iso6392: GraphQLString!
+    iso6393: GraphQLString!
+    ietf: GraphQLString!
+    sort: GraphQLInt
+    isActive: GraphQLBoolean!
+    
+}
+
+input AdminUpdateLangInput
+{
+    id: ID!
+    name: GraphQLString
+    image: GraphQLString
+    iso6392: GraphQLString
+    iso6393: GraphQLString
+    ietf: GraphQLString
+    sort: GraphQLInt
+    isActive: GraphQLBoolean
+    
+}
+
+type Query 
+{
+    adminFindLang(query:QueryStatement): AdminLang
+    adminFindLangById(id:ID): AdminLang
+    adminGetLangs(query:QueryStatement): [AdminLang]!
+    adminPaginateLangs(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    adminCreateLang(payload: AdminCreateLangInput!): AdminLang
+    adminCreateLangs(payload: [AdminCreateLangInput]!): Boolean!
+    adminUpdateLang(payload: AdminUpdateLangInput!): AdminLang
+    adminDeleteLangById(id: ID!): AdminLang
+    adminDeleteLangs(query:QueryStatement): [AdminLang]!
+}

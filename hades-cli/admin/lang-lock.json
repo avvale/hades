@@ -1,0 +1,501 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/admin/lang/application/create/create-lang.command-handler.ts",
+            "integrity": "sha1:40fd7ed7fc0dfd1e921c84f4bc1873873460d267"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/create/create-lang.command.handler.spec.ts",
+            "integrity": "sha1:8943ac207159d25b3080450a852e4f3e4ecb6530"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/create/create-lang.command.ts",
+            "integrity": "sha1:6ee40469d40373377c4b77e8874c945b754db9cf"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/create/create-lang.service.spec.ts",
+            "integrity": "sha1:3ec803bc7326132c8521ca7a78a67993ebb29b15"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/create/create-lang.service.ts",
+            "integrity": "sha1:7693bde1cad0559ea7b64b1d0e821882fed10bd9"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/create/create-langs.command-handler.ts",
+            "integrity": "sha1:4def5166a994ce6fc2ef8ca33b924b0d222955ff"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/create/create-langs.command.handler.spec.ts",
+            "integrity": "sha1:8a5022193a8cf4c6a0f1379142c206f8103dbda8"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/create/create-langs.command.ts",
+            "integrity": "sha1:1281ff358fb4d4ce8bc049b27779e2707981a0f5"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/create/create-langs.service.spec.ts",
+            "integrity": "sha1:40abe78a7b080f4802ec701c3e65a4e24e08d050"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/create/create-langs.service.ts",
+            "integrity": "sha1:19c0407b66ec514cb0804e3acad5e6d747d4fe04"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/delete/delete-lang-by-id.command-handler.ts",
+            "integrity": "sha1:55712eb8ad44648d77e75431ee2e33ad6fc0f9d6"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/delete/delete-lang-by-id.command.handler.spec.ts",
+            "integrity": "sha1:651e1fd3827d9a69ceacb014d71ab11aa4ab1321"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/delete/delete-lang-by-id.command.ts",
+            "integrity": "sha1:2db8b1847b7399f5a7ad839fdb347821c3077c13"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/delete/delete-lang-by-id.service.spec.ts",
+            "integrity": "sha1:204fa9ab3a0efe05ecf9f95bc3139276aff6d0f9"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/delete/delete-lang-by-id.service.ts",
+            "integrity": "sha1:d5b1d5dca74dca436f45fe0955f05380bbef9244"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/delete/delete-langs.command-handler.ts",
+            "integrity": "sha1:4b5f2649d5d67438c1698a6e2e439c4425e30cb6"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/delete/delete-langs.command.handler.spec.ts",
+            "integrity": "sha1:03efa97a5bda721d746b9ef131f3c2d380409f0d"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/delete/delete-langs.command.ts",
+            "integrity": "sha1:c4f545a7ae4c843997359e9d3deb9ebcebc27539"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/delete/delete-langs.service.spec.ts",
+            "integrity": "sha1:f1120be5d5e58591acced9be1745e1f688f21a70"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/delete/delete-langs.service.ts",
+            "integrity": "sha1:7e377530ddf3e5224af1d7bbcc8aee3228dec6de"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/add-langs-context.event.ts",
+            "integrity": "sha1:50385c81cd907d6acef80d65edc9dad7c1919fa0"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/created-lang.event-handler.ts",
+            "integrity": "sha1:be70c82dab520687edea193100a0959087e53d7c"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/created-lang.event.ts",
+            "integrity": "sha1:7909b8b689311f09e04ce4a08fb862a0de952cb9"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/created-langs.event-handler.ts",
+            "integrity": "sha1:a736c5cc2a98fa6985d6c0de2f839a2f81abd902"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/created-langs.event.ts",
+            "integrity": "sha1:ce7defb8feb02bc7a8d63d5576d98287fe696f30"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/deleted-lang.event-handler.ts",
+            "integrity": "sha1:6a398f858fb39a2d963c3f7c1866d36ce412ef2f"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/deleted-lang.event.ts",
+            "integrity": "sha1:fc41e4fb99ab56a3b03afdb715b63935ff064851"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/deleted-langs.event-handler.ts",
+            "integrity": "sha1:41d0305dad951103514ca2ecabd0dbd29c14640b"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/deleted-langs.event.ts",
+            "integrity": "sha1:ec6bebe1de5b7357f9e363af3967ea9a5ef5cd14"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/updated-lang.event-handler.ts",
+            "integrity": "sha1:0cf099fea8577638ec17c6a107231970bb74a9ee"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/events/updated-lang.event.ts",
+            "integrity": "sha1:d76b579f07ec475b3dc4cc963378610500a5b72a"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/find/find-lang-by-id.query-handler.ts",
+            "integrity": "sha1:d94a8d208ee67fbc5a94baed7c234d28ae73a931"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/find/find-lang-by-id.query.handler.spec.ts",
+            "integrity": "sha1:0d3c7218a046248f56120936d4540b27d3192142"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/find/find-lang-by-id.query.ts",
+            "integrity": "sha1:8e19820da06369a421aab6452520aa1b62ec43f5"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/find/find-lang-by-id.service.spec.ts",
+            "integrity": "sha1:c57743da80c1547f1fbda9b0244d96f3bbd60bc5"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/find/find-lang-by-id.service.ts",
+            "integrity": "sha1:46ba459b8311f3a6332e9cbdb2bd106c1bea4e8f"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/find/find-lang.query-handler.ts",
+            "integrity": "sha1:5ddd50c4a6615dbcb25e86e6ec47a44d8f5a1412"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/find/find-lang.query.handler.spec.ts",
+            "integrity": "sha1:9554091cd933e5f97f78265fbdf9f522bfd59387"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/find/find-lang.query.ts",
+            "integrity": "sha1:dd35b63c2e4f0eeb6eda95afd28b3a0f57fb8f0a"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/find/find-lang.service.spec.ts",
+            "integrity": "sha1:645da5d766ee1996cd5c63aa3dd4266e288064c9"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/find/find-lang.service.ts",
+            "integrity": "sha1:bf4874a734662bee989d79b89ac9335d4a17f753"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/get/get-langs.query-handler.ts",
+            "integrity": "sha1:727fc820fec173cdcb1cce7ba84ea62c61ce6fc4"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/get/get-langs.query.handler.spec.ts",
+            "integrity": "sha1:5074e629577d92e62a631b543130849a0e9145a5"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/get/get-langs.query.ts",
+            "integrity": "sha1:b54aa8a5e1d7fddab34dd3f0431faa4d711d7342"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/get/get-langs.service.spec.ts",
+            "integrity": "sha1:98da4d5caecbabd279109199002198dbcaa9fc55"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/get/get-langs.service.ts",
+            "integrity": "sha1:68622f40ac605df1483979b8e021204232286c7a"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/paginate/paginate-langs.query-handler.ts",
+            "integrity": "sha1:49cba91d98e82574d9e1c6f9cc7e346016f11b96"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/paginate/paginate-langs.query.handler.spec.ts",
+            "integrity": "sha1:8342b58d47abedd8d9bfbd2c647e5fddc0dbf8e6"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/paginate/paginate-langs.query.ts",
+            "integrity": "sha1:92ba42d144e1b75d42fac68a20989accfed909f1"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/paginate/paginate-langs.service.spec.ts",
+            "integrity": "sha1:25a8442c0f3a5d6d4c281cca8f8b0a09bc947939"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/paginate/paginate-langs.service.ts",
+            "integrity": "sha1:9c17ae3ed388a581e2e0d021b97965b61da052bf"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/sagas/lang.sagas.ts",
+            "integrity": "sha1:4bbdd92617fd8f1b461d5f88e41789dcde5da8a2"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/update/update-lang.command-handler.ts",
+            "integrity": "sha1:71918795904b120f6357aec413c87e976754faee"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/update/update-lang.command.handler.spec.ts",
+            "integrity": "sha1:b52d637900297990121b04f23770b5a4cbc28325"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/update/update-lang.command.ts",
+            "integrity": "sha1:9cba3a7658cae8ad8fc4da2e36bcc2c630b78c89"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/update/update-lang.service.spec.ts",
+            "integrity": "sha1:f7c7be63c6f178bcdec6e70100fc6be2e237353e"
+        },
+        {
+            "path": "src/@hades/admin/lang/application/update/update-lang.service.ts",
+            "integrity": "sha1:f3bf3d8099f899c2b7a2b9992a532cffbface6db"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/lang.aggregate.ts",
+            "integrity": "sha1:30eb83e79f96ef9dc7e86946328505455187b13a"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/lang.mapper.ts",
+            "integrity": "sha1:d9da138eeffad76b3b09bd463e70bf1f51d6eab9"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/lang.repository.ts",
+            "integrity": "sha1:665ead13049dc61e4dc5d9ed74f44188f23ffc71"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/lang.response.ts",
+            "integrity": "sha1:93e4a23dd2e4b45a6b884789be728f6caa0fb6d8"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/index.ts",
+            "integrity": "sha1:1c423b64e3975f99612cb11e303fa5d94b77ff06"
+        },
+        {
+            "path": "src/@hades/admin/lang/index.ts",
+            "integrity": "sha1:d0e645ad49aa8c98c895549998a9a4fe91663c8d"
+        },
+        {
+            "path": "src/@hades/admin/lang/infrastructure/mock/mock-lang.repository.ts",
+            "integrity": "sha1:056b16579121423b812149831d08cfccf4e60a16"
+        },
+        {
+            "path": "src/@hades/admin/lang/infrastructure/seeds/lang.seed.ts",
+            "integrity": "sha1:a55da671e52b3f2e6ce2e386360a7be13e5faa91"
+        },
+        {
+            "path": "src/@hades/admin/lang/infrastructure/sequelize/sequelize-lang.model.ts",
+            "integrity": "sha1:3351ca903f9a42506f8d376c107bb0bce03cffd3"
+        },
+        {
+            "path": "src/@hades/admin/lang/infrastructure/sequelize/sequelize-lang.repository.ts",
+            "integrity": "sha1:2776c96802727e27f3f49705dbbd82348a9a5c6a"
+        },
+        {
+            "path": "src/@hades/admin/index.ts",
+            "integrity": "sha1:f56980d79db165f89a3ced83265478e3934668c3"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-id.ts",
+            "integrity": "sha1:d38e882c9b5185a32beb8da84add9c6ee61a4e23"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-name.ts",
+            "integrity": "sha1:e4ba247a4f4c0531b1e35fde457d5986977cdf87"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-image.ts",
+            "integrity": "sha1:a3edcfdc76e8963a07f557663c964e0d3c05a80d"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-iso-639-2.ts",
+            "integrity": "sha1:3499108efab2ee131c3b23c21e01eb59439c1dcc"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-iso-639-3.ts",
+            "integrity": "sha1:288e1c0cd8a58b721649833c1ac8ceac9be4a226"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-ietf.ts",
+            "integrity": "sha1:f6a0fc9b25815b0b883d7dd7ecf545c49dfcbaa7"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-sort.ts",
+            "integrity": "sha1:e3b11326d4a67d6ef22ccd6fceee17d52b07160d"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-is-active.ts",
+            "integrity": "sha1:6dabd67a57b5795e6c465527448e1891e334cfb6"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-created-at.ts",
+            "integrity": "sha1:1c68499913ce4153c0854a57733c1a38cb19838c"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-updated-at.ts",
+            "integrity": "sha1:507c6c9e0baff68da84ab54e4ba44dd3adb6acb8"
+        },
+        {
+            "path": "src/@hades/admin/lang/domain/value-objects/lang-deleted-at.ts",
+            "integrity": "sha1:5a2a17b3017eb9b3fa0e111f7dfcad37cb5c843b"
+        },
+        {
+            "path": "src/apps/admin/admin.module.ts",
+            "integrity": "sha1:9bdf182f9315320df062c504c86f409e77d823dd"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/create-lang.controller.spec.ts",
+            "integrity": "sha1:165fa7143f503579720d990a391f71154c03998e"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/create-lang.controller.ts",
+            "integrity": "sha1:ea32b9847c4bf0b83a1c0c75044feab50ef234d7"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/create-langs.controller.spec.ts",
+            "integrity": "sha1:7dfc95ff1befa83671fb96a876d887a78aeb5c7d"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/create-langs.controller.ts",
+            "integrity": "sha1:8579f9b86f9184a87e7b90b5090fe8d622845cfe"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/delete-lang-by-id.controller.spec.ts",
+            "integrity": "sha1:65035282662f82e569a0e6f0d697a5c524a8dd6a"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/delete-lang-by-id.controller.ts",
+            "integrity": "sha1:6e7b5b75af171443484c4e472b35069d117481c1"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/delete-langs.controller.spec.ts",
+            "integrity": "sha1:32e7ca19827389e330f76d72d57d6bee8ddf2451"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/delete-langs.controller.ts",
+            "integrity": "sha1:b50e75a0e5af72afdce8ae781e98bf8b99a5028a"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/find-lang-by-id.controller.spec.ts",
+            "integrity": "sha1:383b40161cab460eeb3628efb4dddf325309cf0e"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/find-lang-by-id.controller.ts",
+            "integrity": "sha1:323d4598ed20ba38a8e98b8ae9651d89e013fe53"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/find-lang.controller.spec.ts",
+            "integrity": "sha1:6dd7a6fc2dc82db095c813346f629af8b0b7405d"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/find-lang.controller.ts",
+            "integrity": "sha1:03340ea69b4dc1c83dad4f67383492c28d9a1c10"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/get-langs.controller.spec.ts",
+            "integrity": "sha1:b973082211cdb546f441a9f0a1a071e05efcbf75"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/get-langs.controller.ts",
+            "integrity": "sha1:a792e67886826e3ca6f78622cab853b15c8087ea"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/paginate-langs.controller.spec.ts",
+            "integrity": "sha1:37aeb6d0466ba1924d600f29b8800af0409388ed"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/paginate-langs.controller.ts",
+            "integrity": "sha1:fc5e1ff31ad4803d05f149b373720478fee638f8"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/update-lang.controller.spec.ts",
+            "integrity": "sha1:7d5bf33b85278255dbc44266e553015d2159a0f9"
+        },
+        {
+            "path": "src/apps/admin/lang/controllers/update-lang.controller.ts",
+            "integrity": "sha1:473ede35dd88e1e75eab4bba53259c6498bb248e"
+        },
+        {
+            "path": "src/apps/admin/lang/dto/lang.dto.ts",
+            "integrity": "sha1:01321762e874be72091fdc2c4d005cdabc7ed602"
+        },
+        {
+            "path": "src/apps/admin/lang/dto/create-lang.dto.ts",
+            "integrity": "sha1:c0a60d72cb43fbb622327b512cfa9a78a2d32501"
+        },
+        {
+            "path": "src/apps/admin/lang/dto/update-lang.dto.ts",
+            "integrity": "sha1:2224370b26c06c9112d0551d9cc34bf6e797eeda"
+        },
+        {
+            "path": "src/apps/admin/lang/graphql/lang.graphql",
+            "integrity": "sha1:14b2dbf0957fda01808afd845b957ba7e75b85d2"
+        },
+        {
+            "path": "src/apps/admin/lang/index.ts",
+            "integrity": "sha1:721e4a9369aca922f606f14aef5922701912c51b"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/create-lang.resolver.spec.ts",
+            "integrity": "sha1:c32efdb52e803650e449fadf81c5bfdd71870fa5"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/create-lang.resolver.ts",
+            "integrity": "sha1:ddb63a8db7617b9320956542d8b55de58660cca6"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/create-langs.resolver.spec.ts",
+            "integrity": "sha1:274694d2a67bedfd0e31ed4acfc936985a31d5da"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/create-langs.resolver.ts",
+            "integrity": "sha1:23aa78830a1e9001780adf165650780082928512"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/delete-lang-by-id.resolver.spec.ts",
+            "integrity": "sha1:c8b60f9a3ef9a941f986296986d661c4cf01c096"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/delete-lang-by-id.resolver.ts",
+            "integrity": "sha1:5144d7c953b19fdcca7bc4628df6090a2e13f6f0"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/delete-langs.resolver.spec.ts",
+            "integrity": "sha1:a1e81b726c86172bede098e9938636f2383ca8cd"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/delete-langs.resolver.ts",
+            "integrity": "sha1:c9a44ef98a8ff92ebb0e5eae39ac79433e41b92b"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/find-lang-by-id.resolver.spec.ts",
+            "integrity": "sha1:36d964b2a0728e7fa21e678d5160f48ca5507fbe"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/find-lang-by-id.resolver.ts",
+            "integrity": "sha1:5186110ca7babbe9352695c1222922013b8778b0"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/find-lang.resolver.spec.ts",
+            "integrity": "sha1:a65e67095b37d6ce116b7a8fbed8ba495cfc8c65"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/find-lang.resolver.ts",
+            "integrity": "sha1:b83caf89391018ebf05aafd4b202515226162ba0"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/get-langs.resolver.spec.ts",
+            "integrity": "sha1:bc591864c4a33d4b8a91eb2fc8344f6cbf8aef3f"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/get-langs.resolver.ts",
+            "integrity": "sha1:4b35568b228959d354331bfbac54eae343219cdb"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/paginate-langs.resolver.spec.ts",
+            "integrity": "sha1:d89559e56cbd11a4107fb791fe5a96692b7c1fd7"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/paginate-langs.resolver.ts",
+            "integrity": "sha1:bcd8ae3351333cce68cfcee4ebed8ec149ae17ef"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/update-lang.resolver.spec.ts",
+            "integrity": "sha1:4b53c828513e03c5d33c24f287ae6069134d3a5e"
+        },
+        {
+            "path": "src/apps/admin/lang/resolvers/update-lang.resolver.ts",
+            "integrity": "sha1:4926f3b2218b14487a12e1c6ec32b1c2b5016155"
+        },
+        {
+            "path": "src/apps/admin/lang/seeder/seeder.module.ts",
+            "integrity": "sha1:7d64321496ef2030c17accb1dca01bb98740ca96"
+        },
+        {
+            "path": "src/apps/admin/lang/seeder/seeder.ts",
+            "integrity": "sha1:407b73159380190028a6d73e6271abde62027b9d"
+        },
+        {
+            "path": "postman/admin.lang.postman.json",
+            "integrity": "sha1:84fe70c7f82883bdf6e2fd5af14dac332b202b06"
+        }
+    ]
+}
