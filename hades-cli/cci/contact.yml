@@ -1,0 +1,84 @@
+version: 1.0.0
+boundedContextName: cci
+moduleName: contact
+moduleNames: contacts
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminTenant
+    relationshipModulePath: admin/tenant
+    relationshipField: tenant
+  - name: tenant_code
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: system_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: CciSystem
+    relationshipModulePath: cci/system
+    relationshipField: system
+  - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: role_id
+    type: id
+    length: 36
+    nullable: true
+    relationship: many-to-one
+    relationshipAggregate: CciRole
+    relationshipModulePath: cci/role
+    relationshipField: role
+  - name: role_name
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: surname
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: email
+    type: varchar
+    maxLength: 120
+    nullable: false
+  - name: mobile
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: area
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: has_consent_email
+    type: boolean
+    nullable: false
+  - name: has_consent_mobile
+    type: boolean
+    nullable: false
+  - name: is_active
+    type: boolean
+    nullable: false
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

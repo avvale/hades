@@ -1,0 +1,180 @@
+version: 1.0.0
+boundedContextName: cci
+moduleName: channel
+moduleNames: channels
+aggregateProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+    index: unique
+  - name: hash
+    type: char
+    primaryKey: true
+    length: 40
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminTenant
+    relationshipModulePath: admin/tenant
+    relationshipField: tenant
+  - name: tenant_code
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: system_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: CciSystem
+    relationshipModulePath: cci/system
+    relationshipField: system
+  - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: party
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: component
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: flow_hash
+    type: char
+    length: 40
+    nullable: true
+    index: index
+  - name: flow_party
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: flow_receiver_party
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: flow_component
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: flow_receiver_component
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: flow_interface_name
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: flow_interface_namespace
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: version
+    type: varchar
+    maxLength: 20
+    nullable: true
+  - name: adapter_type
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: direction
+    type: enum
+    enumOptions:
+      - SENDER
+      - RECEIVER
+    nullable: true
+  - name: transport_protocol
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: message_protocol
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: adapter_engine_name
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: url
+    type: varchar
+    maxLength: 320
+    nullable: true
+  - name: username
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: remote_host
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: remote_port
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: directory
+    type: varchar
+    maxLength: 1024
+    nullable: true
+  - name: file_schema
+    type: varchar
+    maxLength: 1024
+    nullable: true
+  - name: proxy_host
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: proxy_port
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: destination
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: adapter_status
+    type: enum
+    enumOptions:
+      - ACTIVE
+      - INACTIVE
+    nullable: true
+  - name: software_component_name
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: responsible_user_account_name
+    type: varchar
+    maxLength: 20
+    nullable: true
+  - name: last_change_user_account
+    type: varchar
+    maxLength: 20
+    nullable: true
+  - name: last_changed_at
+    type: timestamp
+    nullable: true
+  - name: ri_interface_name
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: ri_interface_namespace
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

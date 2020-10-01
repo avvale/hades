@@ -1,0 +1,561 @@
+{
+    "version": "1.0.0",
+    "files": [
+        {
+            "path": "src/@hades/cci/flow/application/create/create-flow.command-handler.ts",
+            "integrity": "sha1:5437dbd699a3e87f4a8857dc328d7c6ca4449f0c"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/create/create-flow.command.handler.spec.ts",
+            "integrity": "sha1:134df45b69ccfd9619bf5b51eae585f89e8e7db6"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/create/create-flow.command.ts",
+            "integrity": "sha1:31ce147268b331a3924799d027bdb892186ede10"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/create/create-flow.service.spec.ts",
+            "integrity": "sha1:d92b2a0359682cca3320245f5e40e66d755685bd"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/create/create-flow.service.ts",
+            "integrity": "sha1:f0e03a52e4c05553074a684ca955a4378c365187"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/create/create-flows.command-handler.ts",
+            "integrity": "sha1:df677f5aa0ddde1f14318ce3377a723772b4b801"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/create/create-flows.command.handler.spec.ts",
+            "integrity": "sha1:84f48db6a76239f7f636b32b17a2d2923a4d212f"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/create/create-flows.command.ts",
+            "integrity": "sha1:8a4409bb4101091dd446909f623475fc1c5d01bd"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/create/create-flows.service.spec.ts",
+            "integrity": "sha1:6d18969033ee2e8ad2a2dfee32f86d55010801e5"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/create/create-flows.service.ts",
+            "integrity": "sha1:2e07e49e6f759f5c046bf6afae646448d6f8eb0a"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/delete/delete-flow-by-id.command-handler.ts",
+            "integrity": "sha1:56f24f2dff638a9e3a34202a15ce9311b040c7c5"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/delete/delete-flow-by-id.command.handler.spec.ts",
+            "integrity": "sha1:40fb27536ba984064d32f742f1e452a2784bf7d1"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/delete/delete-flow-by-id.command.ts",
+            "integrity": "sha1:436e787faafc51535d2869ecbb9b349ea59ed118"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/delete/delete-flow-by-id.service.spec.ts",
+            "integrity": "sha1:a76ae594cfef5584dd06f0bacabb95538fa314a5"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/delete/delete-flow-by-id.service.ts",
+            "integrity": "sha1:3d89f247779ea427be9374f8e4c3fcdfb72540c2"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/delete/delete-flows.command-handler.ts",
+            "integrity": "sha1:f4a7463e1cc9d4121c68a9f0c40066fe090573e0"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/delete/delete-flows.command.handler.spec.ts",
+            "integrity": "sha1:4ffa309f66bc59f36949c359f651a35b67089bf3"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/delete/delete-flows.command.ts",
+            "integrity": "sha1:80c352b996c0e45f414b1e9124c626ee18ccdd09"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/delete/delete-flows.service.spec.ts",
+            "integrity": "sha1:bcd20d3f555c21f665c252d1e968e9e376a21b6a"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/delete/delete-flows.service.ts",
+            "integrity": "sha1:1e46f7ead47c6ae537c4cd3923de149b272adf68"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/add-flows-context.event.ts",
+            "integrity": "sha1:8dbdbdc3269a49ad0446cf9738672b9fe54e22de"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/created-flow.event-handler.ts",
+            "integrity": "sha1:bf0e16c61855102091b74b4e475d77455d7d25cc"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/created-flow.event.ts",
+            "integrity": "sha1:28e77935aed814cfa9fcd0bf816665a96dd7355b"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/created-flows.event-handler.ts",
+            "integrity": "sha1:cd6dd1bddaf7f3b530438be606be3d795bfad53a"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/created-flows.event.ts",
+            "integrity": "sha1:42f0e5275bc8a306c97748b0f1d3bbce222f224d"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/deleted-flow.event-handler.ts",
+            "integrity": "sha1:8035d34e7ddca2de41e2a2cc967a06a98cebd7b7"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/deleted-flow.event.ts",
+            "integrity": "sha1:9844eeadac6c42a3ee1a22ccb768e6487b4c0a59"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/deleted-flows.event-handler.ts",
+            "integrity": "sha1:13e8dcc45fc866d08265af679378e497474458f0"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/deleted-flows.event.ts",
+            "integrity": "sha1:53fa2a63ccef51136da5d957506ed30edf2128b9"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/updated-flow.event-handler.ts",
+            "integrity": "sha1:dfded94448aa2870fe0d6742c41a8da565471221"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/events/updated-flow.event.ts",
+            "integrity": "sha1:68c57969f6e38fc2868884d2baadc06cf18ac1d7"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/find/find-flow-by-id.query-handler.ts",
+            "integrity": "sha1:c95351c3be5e4b6ce863b9b1b11d195e95dbadac"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/find/find-flow-by-id.query.handler.spec.ts",
+            "integrity": "sha1:b0e7b151bef34565f1fcb160c44097f3af28ba4a"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/find/find-flow-by-id.query.ts",
+            "integrity": "sha1:47a672cae22ade8c84e38ac17a816fe8a765cb85"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/find/find-flow-by-id.service.spec.ts",
+            "integrity": "sha1:d53ecd07ea86a72e6461a909f9a4663bac69f76a"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/find/find-flow-by-id.service.ts",
+            "integrity": "sha1:7abc9d0fa47fa3272631f7490a3735a9b163c64d"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/find/find-flow.query-handler.ts",
+            "integrity": "sha1:e9c87cf51a8332dd083175c32dbc231861a7871f"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/find/find-flow.query.handler.spec.ts",
+            "integrity": "sha1:015f2a353cc6c2bea5f0b4c521944bb481582aab"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/find/find-flow.query.ts",
+            "integrity": "sha1:a620afe6a79861b3f873608b9a91720bae034d3c"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/find/find-flow.service.spec.ts",
+            "integrity": "sha1:3bc6354842ef2772dcf957ad31d9b892e369f456"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/find/find-flow.service.ts",
+            "integrity": "sha1:90015f9e470553e1f0b220f3c8e3e78c64ece9a7"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/get/get-flows.query-handler.ts",
+            "integrity": "sha1:5236b5bafa3735c92df3dfac14604f1c75786094"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/get/get-flows.query.handler.spec.ts",
+            "integrity": "sha1:89fd0f5c19bc2ecdcd139fed60c57172a4ea050c"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/get/get-flows.query.ts",
+            "integrity": "sha1:2ecc125a9503508f1116d58edadeb31031365f0c"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/get/get-flows.service.spec.ts",
+            "integrity": "sha1:37297fbbd35938ac72f7aab4d132641315561591"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/get/get-flows.service.ts",
+            "integrity": "sha1:45d4a5d19883fb3e74200cada4a97abd82fe505b"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/paginate/paginate-flows.query-handler.ts",
+            "integrity": "sha1:8e60adedca38e112db1cc434c3964afdf45ef966"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/paginate/paginate-flows.query.handler.spec.ts",
+            "integrity": "sha1:dc3fab9201847cd814eade0f13bb65d725140a35"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/paginate/paginate-flows.query.ts",
+            "integrity": "sha1:52d1c7ee6237469644fe65e64f351f3704132540"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/paginate/paginate-flows.service.spec.ts",
+            "integrity": "sha1:9574fc2985d107eb68c2080a8393dd0ead206225"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/paginate/paginate-flows.service.ts",
+            "integrity": "sha1:31aeb5a2cd48077aaa82bb28f43c18309e70fdff"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/sagas/flow.sagas.ts",
+            "integrity": "sha1:343d930990ce4e7770e5b15d4f8523a2ccbc80ce"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/update/update-flow.command-handler.ts",
+            "integrity": "sha1:8043d344ea9b4ada77528793caa73d47d1267809"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/update/update-flow.command.handler.spec.ts",
+            "integrity": "sha1:fa3139d7b09e7c476225cbe0729f174611ae3ff4"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/update/update-flow.command.ts",
+            "integrity": "sha1:cd39b20a339f0c6575edae2757e7b159dfa04af4"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/update/update-flow.service.spec.ts",
+            "integrity": "sha1:20ef85b772e24363790ec94fd3698a0d03f874a2"
+        },
+        {
+            "path": "src/@hades/cci/flow/application/update/update-flow.service.ts",
+            "integrity": "sha1:1a56b50568dd4055747958819cffd4fa1389cb7a"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/flow.aggregate.ts",
+            "integrity": "sha1:766bb16029807d563540a5a2349c60e1c2267c0e"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/flow.mapper.ts",
+            "integrity": "sha1:479576142c466e88b785e714012274d2dc1e54d8"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/flow.repository.ts",
+            "integrity": "sha1:87b52d6e4ccda429598fed9ab79d3aee5cb3a65f"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/flow.response.ts",
+            "integrity": "sha1:6b2692fe2adc34fcb46e695498aad6610b17af0a"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/index.ts",
+            "integrity": "sha1:a85d8f048d58ceafde66662f6b891ce046e1e547"
+        },
+        {
+            "path": "src/@hades/cci/flow/index.ts",
+            "integrity": "sha1:f6176061574dd48ee4fbe81362c1c3f70fe892b0"
+        },
+        {
+            "path": "src/@hades/cci/flow/infrastructure/mock/mock-flow.repository.ts",
+            "integrity": "sha1:373b525ab78a69e05617c734919faa40dcb2acea"
+        },
+        {
+            "path": "src/@hades/cci/flow/infrastructure/seeds/flow.seed.ts",
+            "integrity": "sha1:20b13376af364691944bc8bb8644513a1fc28d53"
+        },
+        {
+            "path": "src/@hades/cci/flow/infrastructure/sequelize/sequelize-flow.model.ts",
+            "integrity": "sha1:7861d3c1e3a6493955802c9010dc4c12a4720f2e"
+        },
+        {
+            "path": "src/@hades/cci/flow/infrastructure/sequelize/sequelize-flow.repository.ts",
+            "integrity": "sha1:37f9a361d0ffe8bc000a38165a78866f921f5fe1"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-id.ts",
+            "integrity": "sha1:908cfcf7c5514e5e1cb9d8124dbea364a728c6d8"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-hash.ts",
+            "integrity": "sha1:c7bb4ac5163e2909027ce799a137106519c6a56f"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-tenant-id.ts",
+            "integrity": "sha1:75ae771bbe873c7451e2cf6eb18c52a27dc2ee8b"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-tenant-code.ts",
+            "integrity": "sha1:89bbb61f74ac4b4c777ccff8dfba7b009da32784"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-system-id.ts",
+            "integrity": "sha1:47605b58db72627a25de5b74d06b632054c9c73f"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-system-name.ts",
+            "integrity": "sha1:e2fbc0410a505143387d0c1324f7022fc238830e"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-version.ts",
+            "integrity": "sha1:8cc9d7ddfaecb49a707e4aa970733468474f03c4"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-scenario.ts",
+            "integrity": "sha1:ee31f1316e6a3311e2ad02a1b60966ec40e46cd8"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-party.ts",
+            "integrity": "sha1:8c8a45b2f4276a411cdd2e104d312bef1b1665cc"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-receiver-party.ts",
+            "integrity": "sha1:2a7d23b1a5202271c9fc17ce939a3fa02c993970"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-component.ts",
+            "integrity": "sha1:c49bfdd8c15e8aa59b0122924e534b1a4faa178e"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-receiver-component.ts",
+            "integrity": "sha1:6e0b9dd49fdf7306afc8b9259053efaf876e1922"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-interface-name.ts",
+            "integrity": "sha1:fbccf9e8d1be5e18af0c2a787cfd29a4d777c7f9"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-interface-namespace.ts",
+            "integrity": "sha1:3365d00fd582a3a0aa6c9d143ec123255b8d39e7"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-iflow-name.ts",
+            "integrity": "sha1:17f9920b30da3e82b8c40596cff25b7ee28585c4"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-responsible-user-account.ts",
+            "integrity": "sha1:5647d6531117bad442d0dfdd041f513248ebfa59"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-last-change-user-account.ts",
+            "integrity": "sha1:5db294646c6d49220e3c12301d1487a060b701aa"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-last-changed-at.ts",
+            "integrity": "sha1:5339adc0b92701d952e6053ed3fdf529c6d26895"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-folder-path.ts",
+            "integrity": "sha1:66731d48859b3cf7cac0ced791b0df7d10cf38a3"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-description.ts",
+            "integrity": "sha1:e0792fc993f8e30c77ebc0e858c7d644ff4fb052"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-application.ts",
+            "integrity": "sha1:47a6e169b9e99517f5cf3c1787d10efdfd8f366d"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-is-critical.ts",
+            "integrity": "sha1:68699682bd670695974168e09b8532cc4477f138"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-is-complex.ts",
+            "integrity": "sha1:f2f5fbaf6004216a2fd3a9c4a6b4d47a3447cc97"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-field-group-id.ts",
+            "integrity": "sha1:cf201dc4f20e199e534ed74de5c21dcb18be8b9f"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-data.ts",
+            "integrity": "sha1:8d66324de7640208cf01438ca122ac6507ecfe16"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-created-at.ts",
+            "integrity": "sha1:0c80100208d7c35a7e1b41f97df5ecd8db8054d5"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-updated-at.ts",
+            "integrity": "sha1:778cdc24b8282963f2f3a88c640ba74760e30f4c"
+        },
+        {
+            "path": "src/@hades/cci/flow/domain/value-objects/flow-deleted-at.ts",
+            "integrity": "sha1:0532ce62a8803fe6a26c40ff8d01ab44dded32d4"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/create-flow.controller.spec.ts",
+            "integrity": "sha1:74e524bf0d7e93e3a32734e0be00e7edea663a9f"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/create-flow.controller.ts",
+            "integrity": "sha1:170c27fe19a213dd95acdd6ba1231388e07343e1"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/create-flows.controller.spec.ts",
+            "integrity": "sha1:cb25d1b75deb0c4215192f9d45a990fc13f4a7de"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/create-flows.controller.ts",
+            "integrity": "sha1:874f1aacb8ca8a761086a9389499ff4045b74576"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/delete-flow-by-id.controller.spec.ts",
+            "integrity": "sha1:b29099c8fe9dea8cb44875dac246a28a29617d38"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/delete-flow-by-id.controller.ts",
+            "integrity": "sha1:65d53a0686fc88fa46c994a0c8c71b385662b9bd"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/delete-flows.controller.spec.ts",
+            "integrity": "sha1:30dd71fe5a95f90a79544e67a66500f17c9bc552"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/delete-flows.controller.ts",
+            "integrity": "sha1:0b28cdea4e5e0936d76a7b5598e6d6ec972cb7f7"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/find-flow-by-id.controller.spec.ts",
+            "integrity": "sha1:990dd28e3ac1e5b5eb77241716f93536c50fcfe1"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/find-flow-by-id.controller.ts",
+            "integrity": "sha1:15a4be6bd317de09954e4e4b21dfcecaf4156fde"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/find-flow.controller.spec.ts",
+            "integrity": "sha1:94d99bb3ae4029c1430c632e29bbf5107c0f8686"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/find-flow.controller.ts",
+            "integrity": "sha1:25f76b8ac800e91560330a6638a5585d7bde9d5f"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/get-flows.controller.spec.ts",
+            "integrity": "sha1:be7e945d4e72ab0cd646bc282609b73208f6b5aa"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/get-flows.controller.ts",
+            "integrity": "sha1:4628a090909b47f0bcd6cfb37dda9fb813796524"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/paginate-flows.controller.spec.ts",
+            "integrity": "sha1:4129c6a8a1e0dc79544b7e11ca94b5b42c0ea4c8"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/paginate-flows.controller.ts",
+            "integrity": "sha1:2ba7a27f70b9398bc8f6aafe2a6f176bcc1bebdf"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/update-flow.controller.spec.ts",
+            "integrity": "sha1:8ed2b20840ad9e8f37c2795ca83c0fcea707a4a4"
+        },
+        {
+            "path": "src/apps/cci/flow/controllers/update-flow.controller.ts",
+            "integrity": "sha1:147e6342fd9133b84f55476648e1554969dd4850"
+        },
+        {
+            "path": "src/apps/cci/flow/dto/flow.dto.ts",
+            "integrity": "sha1:26b91cdb9ab429b2b49976da20110fc133c22c34"
+        },
+        {
+            "path": "src/apps/cci/flow/dto/create-flow.dto.ts",
+            "integrity": "sha1:a3bd52b1875c581a693f2c2912df1724cf5a2a7f"
+        },
+        {
+            "path": "src/apps/cci/flow/dto/update-flow.dto.ts",
+            "integrity": "sha1:82e8ec1184618ae59eef227693cb7e4d48eb0b84"
+        },
+        {
+            "path": "src/apps/cci/flow/graphql/flow.graphql",
+            "integrity": "sha1:2307c23a8fd3d290081a735f711c45eafc5058d3"
+        },
+        {
+            "path": "src/apps/cci/flow/index.ts",
+            "integrity": "sha1:6776d949da0c91d7760ca0ed6ff8af8a6cad4d24"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/create-flow.resolver.spec.ts",
+            "integrity": "sha1:b83eeac775105ad66c4d96c75a2ff753aa56d593"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/create-flow.resolver.ts",
+            "integrity": "sha1:dfce837b47dbee3b8438d150f0132d174c96ce30"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/create-flows.resolver.spec.ts",
+            "integrity": "sha1:c1d7bd578f5a15574ddf84560bc6730bb61c7e75"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/create-flows.resolver.ts",
+            "integrity": "sha1:a40b5b895f16274c63ea6ac22eef36b5a31bc8ad"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/delete-flow-by-id.resolver.spec.ts",
+            "integrity": "sha1:f6e29521aa8970411256a1dd0006ead3e6f93188"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/delete-flow-by-id.resolver.ts",
+            "integrity": "sha1:8bfa5edcda3957067084c5848d5791567d15bba9"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/delete-flows.resolver.spec.ts",
+            "integrity": "sha1:5bad68c7ee7a589b9de6c53453e52ead4eeb352a"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/delete-flows.resolver.ts",
+            "integrity": "sha1:e15d920776d25d62d78cbb8469d5237323841387"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/find-flow-by-id.resolver.spec.ts",
+            "integrity": "sha1:7d520618053a068d92eaf9eb43899b2d17140c55"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/find-flow-by-id.resolver.ts",
+            "integrity": "sha1:c9c9b9afd3cf77218f7ef84390993526f527dd7d"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/find-flow.resolver.spec.ts",
+            "integrity": "sha1:402423877cacf3a4c85e46cdc1cbab934fdfcdbd"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/find-flow.resolver.ts",
+            "integrity": "sha1:a1eadc3b70ae36263dc1533bbd0ae7203176cce8"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/get-flows.resolver.spec.ts",
+            "integrity": "sha1:687e905b7cafbf08dfbc9d82078c0f1ca9b41e34"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/get-flows.resolver.ts",
+            "integrity": "sha1:ced2dd6df63a259eb87454bfd3ac7eec5ce01c9b"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/paginate-flows.resolver.spec.ts",
+            "integrity": "sha1:e8df80890a9f242b73b0cc54847992e962c1632f"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/paginate-flows.resolver.ts",
+            "integrity": "sha1:22bb633c55ed943e59692acd0c0f92cca9603148"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/update-flow.resolver.spec.ts",
+            "integrity": "sha1:2c67651586ae30f4fbd02c37a5717073cba46edf"
+        },
+        {
+            "path": "src/apps/cci/flow/resolvers/update-flow.resolver.ts",
+            "integrity": "sha1:ee95365168e051426737d3382296b43d13502b72"
+        },
+        {
+            "path": "src/apps/cci/flow/seeder/seeder.module.ts",
+            "integrity": "sha1:37ab1a4fddc2a5ee880a9f02619d884ff6e59a5d"
+        },
+        {
+            "path": "src/apps/cci/flow/seeder/seeder.ts",
+            "integrity": "sha1:7ba8feae6d6ada60ddaae831958cb4733c94a155"
+        },
+        {
+            "path": "postman/cci.flow.postman.json",
+            "integrity": "sha1:1ebb6a81c6061bf22b997ab844b6fcd75a2094a9"
+        }
+    ]
+}

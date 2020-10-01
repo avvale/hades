@@ -1,0 +1,102 @@
+version: 1.0.0
+boundedContextName: cci
+moduleName: message-overview
+moduleNames: messages-overview
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminTenant
+    relationshipModulePath: admin/tenant
+    relationshipField: tenant
+  - name: tenant_code
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: system_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: CciSystem
+    relationshipModulePath: cci/system
+    relationshipField: system
+  - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: execution_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: CciExecution
+    relationshipModulePath: cci/execution
+    relationshipField: execution
+  - name: execution_type
+    type: enum
+    enumOptions:
+      - SUMMARY
+      - DETAIL
+    nullable: false
+  - name: execution_executed_at
+    type: timestamp
+    nullable: false
+  - name: execution_monitoring_start_at
+    type: timestamp
+    nullable: false
+  - name: execution_monitoring_end_at
+    type: timestamp
+    nullable: false
+  - name: number_max
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: number_days
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: success
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: cancelled
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: delivering
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: error
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: holding
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: to_be_delivered
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: waiting
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

@@ -1,0 +1,122 @@
+version: 1.0.0
+boundedContextName: cci
+moduleName: flow
+moduleNames: flows
+aggregateProperties:
+  - name: id
+    type: id
+    length: 36
+    nullable: false
+    index: unique
+  - name: hash
+    type: char
+    primaryKey: true
+    length: 40
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminTenant
+    relationshipModulePath: admin/tenant
+    relationshipField: tenant
+  - name: tenant_code
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: system_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: CciSystem
+    relationshipModulePath: cci/system
+    relationshipField: system
+  - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: version
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: scenario
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: party
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: receiver_party
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: component
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: receiver_component
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: interface_name
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: interface_namespace
+    type: varchar
+    maxLength: 160
+    nullable: false
+  - name: iflow_name
+    type: varchar
+    maxLength: 160
+    nullable: true
+  - name: responsible_user_account
+    type: varchar
+    maxLength: 20
+    nullable: true
+  - name: last_change_user_account
+    type: varchar
+    maxLength: 20
+    nullable: true
+  - name: last_changed_at
+    type: timestamp
+    nullable: true
+  - name: folder_path
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: description
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: application
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: is_critical
+    type: boolean
+    nullable: true
+    defaultValue: false
+  - name: is_complex
+    type: boolean
+    nullable: true
+    defaultValue: false
+  - name: field_group_id
+    type: id
+    length: 36
+    nullable: true
+  - name: data
+    type: json
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true
