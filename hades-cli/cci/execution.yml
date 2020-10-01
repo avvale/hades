@@ -1,0 +1,62 @@
+version: 1.0.0
+boundedContextName: cci
+moduleName: execution
+moduleNames: executions
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: tenant_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminTenant
+    relationshipModulePath: admin/tenant
+    relationshipField: tenant
+  - name: tenant_code
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: system_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: CciSystem
+    relationshipModulePath: cci/system
+    relationshipField: system
+  - name: system_name
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: version
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: type
+    type: enum
+    enumOptions:
+      - SUMMARY
+      - DETAIL
+    nullable: false
+  - name: executed_at
+    type: timestamp
+    nullable: false
+  - name: monitoring_start_at
+    type: timestamp
+    nullable: false
+  - name: monitoring_end_at
+    type: timestamp
+    nullable: false
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

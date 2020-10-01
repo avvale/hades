@@ -1,6 +1,6 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
+import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 
 @Table({ modelName: 'cci_system', freezeTableName: true })
 export class CciSystemModel extends Model<CciSystemModel> 
@@ -20,7 +20,7 @@ export class CciSystemModel extends Model<CciSystemModel>
         
              
         
-    @ForeignKey(() => AdminTenantModel)
+    @ForeignKey(() => IamTenantModel)
     
     
     @Column({
@@ -39,8 +39,8 @@ export class CciSystemModel extends Model<CciSystemModel>
     tenantId: string;
         
     
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
+    @BelongsTo(() => IamTenantModel)
+    tenant: IamTenantModel;
              
         
     

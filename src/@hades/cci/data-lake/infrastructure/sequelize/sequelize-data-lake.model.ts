@@ -1,6 +1,6 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { AdminTenantModel } from '@hades/admin/tenant/infrastructure/sequelize/sequelize-tenant.model';
+import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciExecutionModel } from '@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model';
 
 @Table({ modelName: 'cci_data_lake', freezeTableName: true })
@@ -21,7 +21,7 @@ export class CciDataLakeModel extends Model<CciDataLakeModel>
         
              
         
-    @ForeignKey(() => AdminTenantModel)
+    @ForeignKey(() => IamTenantModel)
     
     
     @Column({
@@ -40,8 +40,8 @@ export class CciDataLakeModel extends Model<CciDataLakeModel>
     tenantId: string;
         
     
-    @BelongsTo(() => AdminTenantModel)
-    tenant: AdminTenantModel;
+    @BelongsTo(() => IamTenantModel)
+    tenant: IamTenantModel;
              
         
     @ForeignKey(() => CciExecutionModel)

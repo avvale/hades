@@ -25,7 +25,7 @@ import {
 import { CreatedJobDetailEvent } from './../application/events/created-job-detail.event';
 import { UpdatedJobDetailEvent } from './../application/events/updated-job-detail.event';
 import { DeletedJobDetailEvent } from './../application/events/deleted-job-detail.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
+import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
 
@@ -55,13 +55,13 @@ export class CciJobDetail extends AggregateRoot
     deletedAt: JobDetailDeletedAt;
     
     // eager relationship
-    tenant: AdminTenant;
+    tenant: IamTenant;
     system: CciSystem;
     execution: CciExecution;
     
     
     
-    constructor(id?: JobDetailId, tenantId?: JobDetailTenantId, tenantCode?: JobDetailTenantCode, systemId?: JobDetailSystemId, systemName?: JobDetailSystemName, executionId?: JobDetailExecutionId, executionType?: JobDetailExecutionType, executionExecutedAt?: JobDetailExecutionExecutedAt, executionMonitoringStartAt?: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: JobDetailExecutionMonitoringEndAt, status?: JobDetailStatus, name?: JobDetailName, returnCode?: JobDetailReturnCode, node?: JobDetailNode, user?: JobDetailUser, startAt?: JobDetailStartAt, endAt?: JobDetailEndAt, createdAt?: JobDetailCreatedAt, updatedAt?: JobDetailUpdatedAt, deletedAt?: JobDetailDeletedAt, tenant?: AdminTenant, system?: CciSystem, execution?: CciExecution, )
+    constructor(id?: JobDetailId, tenantId?: JobDetailTenantId, tenantCode?: JobDetailTenantCode, systemId?: JobDetailSystemId, systemName?: JobDetailSystemName, executionId?: JobDetailExecutionId, executionType?: JobDetailExecutionType, executionExecutedAt?: JobDetailExecutionExecutedAt, executionMonitoringStartAt?: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: JobDetailExecutionMonitoringEndAt, status?: JobDetailStatus, name?: JobDetailName, returnCode?: JobDetailReturnCode, node?: JobDetailNode, user?: JobDetailUser, startAt?: JobDetailStartAt, endAt?: JobDetailEndAt, createdAt?: JobDetailCreatedAt, updatedAt?: JobDetailUpdatedAt, deletedAt?: JobDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
     {
         super();
         
@@ -95,7 +95,7 @@ export class CciJobDetail extends AggregateRoot
         
     }
 
-    static register (id: JobDetailId, tenantId: JobDetailTenantId, tenantCode: JobDetailTenantCode, systemId: JobDetailSystemId, systemName: JobDetailSystemName, executionId: JobDetailExecutionId, executionType: JobDetailExecutionType, executionExecutedAt: JobDetailExecutionExecutedAt, executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt, status: JobDetailStatus, name: JobDetailName, returnCode: JobDetailReturnCode, node: JobDetailNode, user: JobDetailUser, startAt: JobDetailStartAt, endAt: JobDetailEndAt, createdAt: JobDetailCreatedAt, updatedAt: JobDetailUpdatedAt, deletedAt: JobDetailDeletedAt, tenant?: AdminTenant, system?: CciSystem, execution?: CciExecution, ): CciJobDetail
+    static register (id: JobDetailId, tenantId: JobDetailTenantId, tenantCode: JobDetailTenantCode, systemId: JobDetailSystemId, systemName: JobDetailSystemName, executionId: JobDetailExecutionId, executionType: JobDetailExecutionType, executionExecutedAt: JobDetailExecutionExecutedAt, executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt, status: JobDetailStatus, name: JobDetailName, returnCode: JobDetailReturnCode, node: JobDetailNode, user: JobDetailUser, startAt: JobDetailStartAt, endAt: JobDetailEndAt, createdAt: JobDetailCreatedAt, updatedAt: JobDetailUpdatedAt, deletedAt: JobDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciJobDetail
     {
         return new CciJobDetail(id, tenantId, tenantCode, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, status, name, returnCode, node, user, startAt, endAt, createdAt, updatedAt, deletedAt, tenant, system, execution, );
     }

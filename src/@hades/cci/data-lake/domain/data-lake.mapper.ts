@@ -13,7 +13,7 @@ import {
     DataLakeDeletedAt
     
 } from './value-objects';
-import { TenantMapper } from '@hades/admin/tenant/domain/tenant.mapper';
+import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { ExecutionMapper } from '@hades/cci/execution/domain/execution.mapper';
 
 

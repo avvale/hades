@@ -29,7 +29,7 @@ import {
 import { CreatedModuleEvent } from './../application/events/created-module.event';
 import { UpdatedModuleEvent } from './../application/events/updated-module.event';
 import { DeletedModuleEvent } from './../application/events/deleted-module.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
+import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 
 
@@ -62,12 +62,12 @@ export class CciModule extends AggregateRoot
     deletedAt: ModuleDeletedAt;
     
     // eager relationship
-    tenant: AdminTenant;
+    tenant: IamTenant;
     system: CciSystem;
     
     
     
-    constructor(id?: ModuleId, tenantId?: ModuleTenantId, tenantCode?: ModuleTenantCode, systemId?: ModuleSystemId, systemName?: ModuleSystemName, channelHash?: ModuleChannelHash, channelParty?: ModuleChannelParty, channelComponent?: ModuleChannelComponent, channelName?: ModuleChannelName, flowHash?: ModuleFlowHash, flowParty?: ModuleFlowParty, flowReceiverParty?: ModuleFlowReceiverParty, flowComponent?: ModuleFlowComponent, flowReceiverComponent?: ModuleFlowReceiverComponent, flowInterfaceName?: ModuleFlowInterfaceName, flowInterfaceNamespace?: ModuleFlowInterfaceNamespace, version?: ModuleVersion, parameterGroup?: ModuleParameterGroup, name?: ModuleName, parameterName?: ModuleParameterName, parameterValue?: ModuleParameterValue, createdAt?: ModuleCreatedAt, updatedAt?: ModuleUpdatedAt, deletedAt?: ModuleDeletedAt, tenant?: AdminTenant, system?: CciSystem, )
+    constructor(id?: ModuleId, tenantId?: ModuleTenantId, tenantCode?: ModuleTenantCode, systemId?: ModuleSystemId, systemName?: ModuleSystemName, channelHash?: ModuleChannelHash, channelParty?: ModuleChannelParty, channelComponent?: ModuleChannelComponent, channelName?: ModuleChannelName, flowHash?: ModuleFlowHash, flowParty?: ModuleFlowParty, flowReceiverParty?: ModuleFlowReceiverParty, flowComponent?: ModuleFlowComponent, flowReceiverComponent?: ModuleFlowReceiverComponent, flowInterfaceName?: ModuleFlowInterfaceName, flowInterfaceNamespace?: ModuleFlowInterfaceNamespace, version?: ModuleVersion, parameterGroup?: ModuleParameterGroup, name?: ModuleName, parameterName?: ModuleParameterName, parameterValue?: ModuleParameterValue, createdAt?: ModuleCreatedAt, updatedAt?: ModuleUpdatedAt, deletedAt?: ModuleDeletedAt, tenant?: IamTenant, system?: CciSystem, )
     {
         super();
         
@@ -104,7 +104,7 @@ export class CciModule extends AggregateRoot
         
     }
 
-    static register (id: ModuleId, tenantId: ModuleTenantId, tenantCode: ModuleTenantCode, systemId: ModuleSystemId, systemName: ModuleSystemName, channelHash: ModuleChannelHash, channelParty: ModuleChannelParty, channelComponent: ModuleChannelComponent, channelName: ModuleChannelName, flowHash: ModuleFlowHash, flowParty: ModuleFlowParty, flowReceiverParty: ModuleFlowReceiverParty, flowComponent: ModuleFlowComponent, flowReceiverComponent: ModuleFlowReceiverComponent, flowInterfaceName: ModuleFlowInterfaceName, flowInterfaceNamespace: ModuleFlowInterfaceNamespace, version: ModuleVersion, parameterGroup: ModuleParameterGroup, name: ModuleName, parameterName: ModuleParameterName, parameterValue: ModuleParameterValue, createdAt: ModuleCreatedAt, updatedAt: ModuleUpdatedAt, deletedAt: ModuleDeletedAt, tenant?: AdminTenant, system?: CciSystem, ): CciModule
+    static register (id: ModuleId, tenantId: ModuleTenantId, tenantCode: ModuleTenantCode, systemId: ModuleSystemId, systemName: ModuleSystemName, channelHash: ModuleChannelHash, channelParty: ModuleChannelParty, channelComponent: ModuleChannelComponent, channelName: ModuleChannelName, flowHash: ModuleFlowHash, flowParty: ModuleFlowParty, flowReceiverParty: ModuleFlowReceiverParty, flowComponent: ModuleFlowComponent, flowReceiverComponent: ModuleFlowReceiverComponent, flowInterfaceName: ModuleFlowInterfaceName, flowInterfaceNamespace: ModuleFlowInterfaceNamespace, version: ModuleVersion, parameterGroup: ModuleParameterGroup, name: ModuleName, parameterName: ModuleParameterName, parameterValue: ModuleParameterValue, createdAt: ModuleCreatedAt, updatedAt: ModuleUpdatedAt, deletedAt: ModuleDeletedAt, tenant?: IamTenant, system?: CciSystem, ): CciModule
     {
         return new CciModule(id, tenantId, tenantCode, systemId, systemName, channelHash, channelParty, channelComponent, channelName, flowHash, flowParty, flowReceiverParty, flowComponent, flowReceiverComponent, flowInterfaceName, flowInterfaceNamespace, version, parameterGroup, name, parameterName, parameterValue, createdAt, updatedAt, deletedAt, tenant, system, );
     }

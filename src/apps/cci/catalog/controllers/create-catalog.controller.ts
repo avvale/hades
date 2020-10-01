@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { FindTenantQuery } from '@hades/admin/tenant/application/find/find-tenant.query';
+import { FindTenantQuery } from '@hades/iam/tenant/application/find/find-tenant.query';
 import { FindSystemQuery } from '@hades/cci/system/application/find/find-system.query';
 import { CreateChannelsCommand } from '@hades/cci/channel/application/create/create-channels.command';
 import { CreateFlowsCommand } from '@hades/cci/flow/application/create/create-flows.command';

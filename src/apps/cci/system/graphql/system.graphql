@@ -3,7 +3,7 @@
 type CciSystem
 {
     id: ID!
-    tenant: AdminTenant!
+    tenant: IamTenant!
     tenantCode: GraphQLString!
     version: GraphQLString!
     name: GraphQLString!

@@ -8,7 +8,7 @@ enum CciMessageOverviewExecutionType {
 type CciMessageOverview
 {
     id: ID!
-    tenant: AdminTenant!
+    tenant: IamTenant!
     tenantCode: GraphQLString!
     system: CciSystem!
     systemName: GraphQLString!

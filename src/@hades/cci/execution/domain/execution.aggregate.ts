@@ -18,7 +18,7 @@ import {
 import { CreatedExecutionEvent } from './../application/events/created-execution.event';
 import { UpdatedExecutionEvent } from './../application/events/updated-execution.event';
 import { DeletedExecutionEvent } from './../application/events/deleted-execution.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
+import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 
 
@@ -40,12 +40,12 @@ export class CciExecution extends AggregateRoot
     deletedAt: ExecutionDeletedAt;
     
     // eager relationship
-    tenant: AdminTenant;
+    tenant: IamTenant;
     system: CciSystem;
     
     
     
-    constructor(id?: ExecutionId, tenantId?: ExecutionTenantId, tenantCode?: ExecutionTenantCode, systemId?: ExecutionSystemId, systemName?: ExecutionSystemName, version?: ExecutionVersion, type?: ExecutionType, executedAt?: ExecutionExecutedAt, monitoringStartAt?: ExecutionMonitoringStartAt, monitoringEndAt?: ExecutionMonitoringEndAt, createdAt?: ExecutionCreatedAt, updatedAt?: ExecutionUpdatedAt, deletedAt?: ExecutionDeletedAt, tenant?: AdminTenant, system?: CciSystem, )
+    constructor(id?: ExecutionId, tenantId?: ExecutionTenantId, tenantCode?: ExecutionTenantCode, systemId?: ExecutionSystemId, systemName?: ExecutionSystemName, version?: ExecutionVersion, type?: ExecutionType, executedAt?: ExecutionExecutedAt, monitoringStartAt?: ExecutionMonitoringStartAt, monitoringEndAt?: ExecutionMonitoringEndAt, createdAt?: ExecutionCreatedAt, updatedAt?: ExecutionUpdatedAt, deletedAt?: ExecutionDeletedAt, tenant?: IamTenant, system?: CciSystem, )
     {
         super();
         
@@ -71,7 +71,7 @@ export class CciExecution extends AggregateRoot
         
     }
 
-    static register (id: ExecutionId, tenantId: ExecutionTenantId, tenantCode: ExecutionTenantCode, systemId: ExecutionSystemId, systemName: ExecutionSystemName, version: ExecutionVersion, type: ExecutionType, executedAt: ExecutionExecutedAt, monitoringStartAt: ExecutionMonitoringStartAt, monitoringEndAt: ExecutionMonitoringEndAt, createdAt: ExecutionCreatedAt, updatedAt: ExecutionUpdatedAt, deletedAt: ExecutionDeletedAt, tenant?: AdminTenant, system?: CciSystem, ): CciExecution
+    static register (id: ExecutionId, tenantId: ExecutionTenantId, tenantCode: ExecutionTenantCode, systemId: ExecutionSystemId, systemName: ExecutionSystemName, version: ExecutionVersion, type: ExecutionType, executedAt: ExecutionExecutedAt, monitoringStartAt: ExecutionMonitoringStartAt, monitoringEndAt: ExecutionMonitoringEndAt, createdAt: ExecutionCreatedAt, updatedAt: ExecutionUpdatedAt, deletedAt: ExecutionDeletedAt, tenant?: IamTenant, system?: CciSystem, ): CciExecution
     {
         return new CciExecution(id, tenantId, tenantCode, systemId, systemName, version, type, executedAt, monitoringStartAt, monitoringEndAt, createdAt, updatedAt, deletedAt, tenant, system, );
     }

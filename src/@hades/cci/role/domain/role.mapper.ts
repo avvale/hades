@@ -12,7 +12,7 @@ import {
     RoleDeletedAt
     
 } from './value-objects';
-import { TenantMapper } from '@hades/admin/tenant/domain/tenant.mapper';
+import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 
 
 

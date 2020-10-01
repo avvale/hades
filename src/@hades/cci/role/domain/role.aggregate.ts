@@ -12,7 +12,7 @@ import {
 import { CreatedRoleEvent } from './../application/events/created-role.event';
 import { UpdatedRoleEvent } from './../application/events/updated-role.event';
 import { DeletedRoleEvent } from './../application/events/deleted-role.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
+import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 
 
 
@@ -27,11 +27,11 @@ export class CciRole extends AggregateRoot
     deletedAt: RoleDeletedAt;
     
     // eager relationship
-    tenant: AdminTenant;
+    tenant: IamTenant;
     
     
     
-    constructor(id?: RoleId, tenantId?: RoleTenantId, tenantCode?: RoleTenantCode, name?: RoleName, createdAt?: RoleCreatedAt, updatedAt?: RoleUpdatedAt, deletedAt?: RoleDeletedAt, tenant?: AdminTenant, )
+    constructor(id?: RoleId, tenantId?: RoleTenantId, tenantCode?: RoleTenantCode, name?: RoleName, createdAt?: RoleCreatedAt, updatedAt?: RoleUpdatedAt, deletedAt?: RoleDeletedAt, tenant?: IamTenant, )
     {
         super();
         
@@ -50,7 +50,7 @@ export class CciRole extends AggregateRoot
         
     }
 
-    static register (id: RoleId, tenantId: RoleTenantId, tenantCode: RoleTenantCode, name: RoleName, createdAt: RoleCreatedAt, updatedAt: RoleUpdatedAt, deletedAt: RoleDeletedAt, tenant?: AdminTenant, ): CciRole
+    static register (id: RoleId, tenantId: RoleTenantId, tenantCode: RoleTenantCode, name: RoleName, createdAt: RoleCreatedAt, updatedAt: RoleUpdatedAt, deletedAt: RoleDeletedAt, tenant?: IamTenant, ): CciRole
     {
         return new CciRole(id, tenantId, tenantCode, name, createdAt, updatedAt, deletedAt, tenant, );
     }

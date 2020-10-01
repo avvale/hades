@@ -24,7 +24,7 @@ import {
 import { CreatedChannelOverviewEvent } from './../application/events/created-channel-overview.event';
 import { UpdatedChannelOverviewEvent } from './../application/events/updated-channel-overview.event';
 import { DeletedChannelOverviewEvent } from './../application/events/deleted-channel-overview.event';
-import { AdminTenant } from '@hades/admin/tenant/domain/tenant.aggregate';
+import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
 
@@ -53,13 +53,13 @@ export class CciChannelOverview extends AggregateRoot
     deletedAt: ChannelOverviewDeletedAt;
     
     // eager relationship
-    tenant: AdminTenant;
+    tenant: IamTenant;
     system: CciSystem;
     execution: CciExecution;
     
     
     
-    constructor(id?: ChannelOverviewId, tenantId?: ChannelOverviewTenantId, tenantCode?: ChannelOverviewTenantCode, systemId?: ChannelOverviewSystemId, systemName?: ChannelOverviewSystemName, executionId?: ChannelOverviewExecutionId, executionType?: ChannelOverviewExecutionType, executionExecutedAt?: ChannelOverviewExecutionExecutedAt, executionMonitoringStartAt?: ChannelOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: ChannelOverviewExecutionMonitoringEndAt, error?: ChannelOverviewError, inactive?: ChannelOverviewInactive, successful?: ChannelOverviewSuccessful, stopped?: ChannelOverviewStopped, unknown?: ChannelOverviewUnknown, unregistered?: ChannelOverviewUnregistered, createdAt?: ChannelOverviewCreatedAt, updatedAt?: ChannelOverviewUpdatedAt, deletedAt?: ChannelOverviewDeletedAt, tenant?: AdminTenant, system?: CciSystem, execution?: CciExecution, )
+    constructor(id?: ChannelOverviewId, tenantId?: ChannelOverviewTenantId, tenantCode?: ChannelOverviewTenantCode, systemId?: ChannelOverviewSystemId, systemName?: ChannelOverviewSystemName, executionId?: ChannelOverviewExecutionId, executionType?: ChannelOverviewExecutionType, executionExecutedAt?: ChannelOverviewExecutionExecutedAt, executionMonitoringStartAt?: ChannelOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: ChannelOverviewExecutionMonitoringEndAt, error?: ChannelOverviewError, inactive?: ChannelOverviewInactive, successful?: ChannelOverviewSuccessful, stopped?: ChannelOverviewStopped, unknown?: ChannelOverviewUnknown, unregistered?: ChannelOverviewUnregistered, createdAt?: ChannelOverviewCreatedAt, updatedAt?: ChannelOverviewUpdatedAt, deletedAt?: ChannelOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
     {
         super();
         
@@ -92,7 +92,7 @@ export class CciChannelOverview extends AggregateRoot
         
     }
 
-    static register (id: ChannelOverviewId, tenantId: ChannelOverviewTenantId, tenantCode: ChannelOverviewTenantCode, systemId: ChannelOverviewSystemId, systemName: ChannelOverviewSystemName, executionId: ChannelOverviewExecutionId, executionType: ChannelOverviewExecutionType, executionExecutedAt: ChannelOverviewExecutionExecutedAt, executionMonitoringStartAt: ChannelOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: ChannelOverviewExecutionMonitoringEndAt, error: ChannelOverviewError, inactive: ChannelOverviewInactive, successful: ChannelOverviewSuccessful, stopped: ChannelOverviewStopped, unknown: ChannelOverviewUnknown, unregistered: ChannelOverviewUnregistered, createdAt: ChannelOverviewCreatedAt, updatedAt: ChannelOverviewUpdatedAt, deletedAt: ChannelOverviewDeletedAt, tenant?: AdminTenant, system?: CciSystem, execution?: CciExecution, ): CciChannelOverview
+    static register (id: ChannelOverviewId, tenantId: ChannelOverviewTenantId, tenantCode: ChannelOverviewTenantCode, systemId: ChannelOverviewSystemId, systemName: ChannelOverviewSystemName, executionId: ChannelOverviewExecutionId, executionType: ChannelOverviewExecutionType, executionExecutedAt: ChannelOverviewExecutionExecutedAt, executionMonitoringStartAt: ChannelOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: ChannelOverviewExecutionMonitoringEndAt, error: ChannelOverviewError, inactive: ChannelOverviewInactive, successful: ChannelOverviewSuccessful, stopped: ChannelOverviewStopped, unknown: ChannelOverviewUnknown, unregistered: ChannelOverviewUnregistered, createdAt: ChannelOverviewCreatedAt, updatedAt: ChannelOverviewUpdatedAt, deletedAt: ChannelOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciChannelOverview
     {
         return new CciChannelOverview(id, tenantId, tenantCode, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, error, inactive, successful, stopped, unknown, unregistered, createdAt, updatedAt, deletedAt, tenant, system, execution, );
     }
