@@ -36,6 +36,7 @@ input IamCreateAccountInput
     data: JSON
     roleIds: [ID]
     tenantIds: [ID]
+    user: IamCreateUserInput
     
 }
 
@@ -51,6 +52,7 @@ input IamUpdateAccountInput
     data: JSON
     roleIds: [ID]
     tenantIds: [ID]
+    user: IamUpdateUserInput
     
 }
 
