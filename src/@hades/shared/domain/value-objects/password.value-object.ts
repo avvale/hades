@@ -10,7 +10,7 @@ export abstract class PasswordValueObject extends StringValueObject
     
     set value(value: string)
     {
-        if (value && !this.data.haveToEncrypt)
+        if (value && this.data.haveToEncrypt)
         {
             super.value = Utils.hash(value);
         } 
