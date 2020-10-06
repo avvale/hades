@@ -17,7 +17,7 @@ import {
 } from './../../domain/value-objects';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { OAuthAccessToken } from './../../domain/access-token.aggregate';
-import { JwtToken } from '@hades/shared/domain/lib/hades.types';
+import { Jwt } from '@hades/shared/domain/lib/hades.types';
 declare const Buffer: any;
 
 @Injectable()
@@ -40,7 +40,7 @@ export class CreateAccessTokenService
     {
         // compose access token
         const momentExpiredAccessToken = expiredAccessToken.value ? Utils.now().add(expiredAccessToken.value, 'seconds') : null
-        const accessTokenPayload: JwtToken = {
+        const accessTokenPayload: Jwt = {
             jit: id.value,
             iss: 'Hades OAuth',
             iat: parseInt(Utils.now().format('X')),
