@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { IamUpdateAccountInput } from './../../../../graphql';
+import { IamAccountType, IamUpdateAccountInput } from './../../../../graphql';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -33,7 +33,7 @@ export class UpdateAccountResolver
             
         ));
 
-        if (payload.user)
+        if (payload.type === IamAccountType.USER)
         {
             await this.commandBus.dispatch(new UpdateUserCommand(
                 payload.user.id,

@@ -17,7 +17,7 @@ export class CreateAccountsResolver
     @Mutation('iamCreateAccounts')
     async main(@Args('payload') payload: IamCreateAccountInput[])
     {
-        await this.commandBus.dispatch(new CreateAccountsCommand(payload));
+        // await this.commandBus.dispatch(new CreateAccountsCommand(payload));
         return true;
     }
 }

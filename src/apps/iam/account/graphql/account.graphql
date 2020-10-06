@@ -30,9 +30,9 @@ input IamCreateAccountInput
     type: IamAccountType!
     email: GraphQLString!
     isActive: GraphQLBoolean!
-    clientId: ID!
-    applicationCodes: JSON!
-    permissions: JSON!
+    clientId: ID
+    applicationCodes: JSON
+    permissions: JSON
     data: JSON
     roleIds: [ID]
     tenantIds: [ID]

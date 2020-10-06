@@ -17,7 +17,7 @@ export class CreateUsersResolver
     @Mutation('iamCreateUsers')
     async main(@Args('payload') payload: IamCreateUserInput[])
     {
-        await this.commandBus.dispatch(new CreateUsersCommand(payload));
+        //await this.commandBus.dispatch(new CreateUsersCommand(payload));
         return true;
     }
 }
