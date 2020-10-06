@@ -31,5 +31,5 @@ export interface ValidationRules
 
 export interface DataValueObject
 {
-    isEncrypt?: boolean
+    haveToEncrypt?: boolean
 }
