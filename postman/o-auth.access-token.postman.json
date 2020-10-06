@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "6fcec0f6-b722-4042-9554-07db90719ce8",
+		"name"          : "@hades - o-auth/access-token",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - oAuthCreateAccessToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:OAuthCreateAccessTokenInput!)\n{\n\toAuthCreateAccessToken (payload:$payload)\n\t{\n\t\tid\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"aca2f62d-123c-4830-a6b8-828c4d95b661\", \n\t\t\"clientId\": \"b2cd938f-6b5a-401e-97cb-e78355e4b54c\", \n\t\t\"token\": \"Saepe molestiae vel ad magni commodi dolore aut. Beatae inventore veritatis iste perspiciatis. Minus non et totam est unde adipisci consectetur est inventore.\", \n\t\t\"name\": \"q73vdxnyunrfxru1fpc9dirkzi2dxfk6tg7em7qaf8n3dxixl36aaomawjjvay6i9t4xbbyzihf6stysztaren4l5slm7bsxvvyksfweokx7cct474601olzbux850zi93p3m4ygom38tfepa28bq4t6exwmf1j6tqbo0391kkqulfsr0io71txelh3u2z1tbiv69hek90jc6vdkyw7lo9beneq1stj21q051yj9ufmpzgf02jove95izqckcld\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-09-20 12:26:24\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthCreateAccessTokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[OAuthCreateAccessTokenInput]!)\n{\n\toAuthCreateAccessTokens (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"d37e8973-8dc6-4e79-ac8b-2c178796cbe1\", \n\t\t\t\"clientId\": \"99964fc3-f8c8-48fa-8adf-e3e9a69087a0\", \n\t\t\t\"token\": \"Cumque rem inventore excepturi. Ut minima accusantium aperiam necessitatibus rerum iste suscipit enim. Aspernatur error aut repudiandae. Qui quos quibusdam. Est atque dolore nesciunt maxime. Quasi error ea.\", \n\t\t\t\"name\": \"kyo4bd7g57dpse08wp0bh7ya20ldtk4kbb02utsglabgnawu9jcggq8jbam4283be1hrggjo6uzrmbb29g7g94wyulfvwd7lhsil4h7jobrebqq4ipq5k0j0yd75nutvb7mtkbidko1gafuaojqyeec1vc40e4wcwk40qhu18t3w6zl6gqg0w0kludonoeppftlg0w99q7gx6tpmvaqr6l1xkdn8lxww0ezey0xyzv7hmjki8wfgwn44ks8zkyh\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-20 14:41:08\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4c30dcf3-c93a-464e-8066-6c44dcf712cb\", \n\t\t\t\"clientId\": \"3ea76c1d-f393-44f2-bfbf-06c0cb3838ee\", \n\t\t\t\"token\": \"Saepe similique praesentium ipsam. Occaecati nemo et sunt quasi est nihil. Sunt aut molestias et dolorem earum ducimus. Explicabo sit et itaque quibusdam. Est occaecati consequuntur pariatur quia minus.\", \n\t\t\t\"name\": \"6p8ajymcrvylqiakma0osslqppg3gzom0s43fx85meg9u59webzzkz7njgo9sczvsxkmiguaioid2rqodtubuzymd41l9ykyvnjmrc6tvaedttuzklpcsndrr5748vwq4n7kl7xz66l4hkfuuailp9xlfg0ozpibmfoma5x82757w535ipz1w095dqff4z344o71upun5f9zvw2lo4hyp7krodovdcrn8t2eppl75n1atdfe1n3y46wyjua792a\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-21 04:37:41\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f2ef3b49-2085-4a6b-8be6-95202909af71\", \n\t\t\t\"clientId\": \"0bbf6281-de68-4630-bb4f-858ef2dda905\", \n\t\t\t\"token\": \"Aut qui maiores porro nulla voluptates. Consectetur minus eveniet tenetur voluptatem a. Illum excepturi dolorem.\", \n\t\t\t\"name\": \"4fdlorg02epg0as4zxn47w3x32pxask6j2d0vm25t749b0kz8r1jt94ligr5y3a15cxvucvhibngxg2p1kqguz7cpktuzagwud5d8dglpplhenskwhsvr5527h8sdpofh8hfc2yip4i4jnbtwleib2bj5mxb4w2889rbopt5grvlu5h8fpz180wi98mehgkc9c01agisq6o0z2334h1teu8aubdxcbvyc7reuh4ztbdw2v1rr4pmfrq94ogj1r3\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-09-20 15:58:01\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a1a87ad1-bcf1-49e2-b76c-468b30bda486\", \n\t\t\t\"clientId\": \"ab5b3a9c-ea31-41ea-8c53-4832e6da279a\", \n\t\t\t\"token\": \"Necessitatibus architecto consequuntur qui corporis in iure. Quia ab repudiandae placeat blanditiis facere delectus necessitatibus non. A sed fugiat. Dolores veritatis rerum dolorum.\", \n\t\t\t\"name\": \"kx0mxxxo158o2e8pl396f877j759adzp9c38479zu7tjiaawf11p926idjuf3to1f83be49hkfifdy1vdm057942jyuicfo36thyof50wt3aabt96kpegq5gj86s1a3sa6b7yqn3l3vwpxmg1m4wexsk3y40kevis5mu5iandrfm7pcuhqpzmx01s437pxqxoecinhf76n4fhmbw8zovlaozr5luzhnkdmbz093sasvxjzqwbxhjelrpl8ot81d\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-21 00:37:39\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5788f26b-2bd4-45aa-8f75-e7719ee8cb7b\", \n\t\t\t\"clientId\": \"b4ca500a-d52f-400b-a64b-c242791e19bf\", \n\t\t\t\"token\": \"Minus et fuga similique temporibus. Nostrum aspernatur assumenda cum. Perspiciatis expedita ipsum nemo. Est at similique sit.\", \n\t\t\t\"name\": \"ezfw9awzepqwpqd14hnq67kvljbilahccu71xji2mzkvylimrlwoh5jo26jgler01sbldddih718n7de28z40udjsk4rj0ylrpdh2adik9v3e69d3n8ahiltd4h5yk08wtnp9mbe3v6jc628dgsskaxxhkn6o6rpyw5d8b36usd3ft0ion3k94de2l5k7ja1y8umfq7thqdpe59857z9la0pl6xv05ee9imqdlj1lre21yy8fsmex1riywh3v42\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-20 11:43:27\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"665c6c15-8e88-48c4-9afa-7c05b644704f\", \n\t\t\t\"clientId\": \"8c77be07-0d62-422a-be19-f5e58e2c9c8b\", \n\t\t\t\"token\": \"Nulla eaque nulla. Et est ea rerum aut dolor nemo et dicta nostrum. Labore a illum. Aut aut impedit ad cum in sit. Voluptatem inventore sed deleniti vero facilis natus totam nobis. Et et omnis quia voluptas eos.\", \n\t\t\t\"name\": \"yh334bxf2kown2ymhkb50rq5me42q7zlog6dukr81pozxx7tmwory3c91cm6rlv3oaqwofm9yahmqvxv8t6i016jc96wyjty6fsjcpsqsy3w8jacpqns2hl0xurcblvsgvelh33hxq0pdxh61n3bcpgfp7p6dkceo3dxs7pbhjs0ty91lqmhtjitx90kevg95kmhtpk15g5ux09mud3lcamyk66y8o7zajys2hbc71039jw3e6fjy111ulde0ns\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-20 23:10:19\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"693d1102-3c4a-4fc1-9696-f825b90bbe90\", \n\t\t\t\"clientId\": \"7a7193e7-b43b-4b10-b6ac-5cb6c5c2ca8a\", \n\t\t\t\"token\": \"In qui autem. Exercitationem dolor ratione vero velit. Temporibus ea occaecati aut vel ut. Quam voluptatem ut nisi est error et. Voluptatibus reiciendis molestiae magni accusamus magni temporibus.\", \n\t\t\t\"name\": \"ih1m5v7jmwqcqge8lptpev9n5q6iywv6l8bvs2ryk4n8sv1ygvoqx6p0o68l46798fkob81275gpnhay21qa9hr07snjkcdbp4w195wwg3f8wgxdomrlqjvremu286sumbb2bcqywy7rjfsvdclqli7mtuwh4lklowx3wtcrxnci9mlocatoktzpcc18cd6r7847d9jim7bhddpshkvtzuib51v0bee7mfd94s8d399uua1ej19ows8rvo16m7o\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-09-21 05:30:51\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ac56dcab-21c7-4b13-aca3-64aad50583aa\", \n\t\t\t\"clientId\": \"f983a60d-d9c6-4cc9-a46d-640bb2424627\", \n\t\t\t\"token\": \"Dolore aut est cum. Aut nihil cumque omnis quaerat. Ut et in vero voluptatum eum quia rem molestias molestiae. Eius recusandae nisi facilis laudantium tenetur ipsam fugiat.\", \n\t\t\t\"name\": \"g8dxmo1t2linaciaz4khlaucwhtd08qk02e0zvjrc4t5g92tiyut1u1pb91dvdky204vyarfgui4s7syn1gd9t8xhuv12pqxwx93dk3jljxaefe5jwti1h2ymhd3ha07saw4z4g26enlymbtyvgj1nz69ei5nkno6wmaegpjr7bimnjkl0aa4kukwhnyhqj2cvqn2dekownkuyilj23tinm8wowsh1dxbrti0ey01ljhwjr0ywyps1xolv9an0x\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-09-20 12:17:28\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9e4d82ae-7a39-43f7-8bb7-d005254fd093\", \n\t\t\t\"clientId\": \"adef600c-0f08-471c-836e-e0d3ea9a3d1c\", \n\t\t\t\"token\": \"Quasi sunt repellendus quisquam architecto vero. Vero quo nam voluptatem eum. Eos provident ullam a sunt in explicabo. Quis sint minima voluptatem quo fugiat.\", \n\t\t\t\"name\": \"9swpxtse1j7uj6pv7csvy26ycpp8kxggz8y8uqxh5dxbblhrppdkcrj9d59pcaujt7bd3dygl26xmor8916do6bf0svgrhlafpl8ve665yv6a7ol4iaumse9x1xiqnjgsnhjqogin3bhfy1meun6tf9kg0lghqejxhtt9kcqlf66yqax230vp7yaz85ebukm5r4zes8tdy0hkwjl7qaxb31mp2s8dqgszs2kx3qm0thqowdr96ytc5ujajnyj3l\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-21 04:35:49\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"036ae126-56c9-4721-9290-37dc1aeb5c46\", \n\t\t\t\"clientId\": \"270e461d-2cac-46f4-9563-7fa18db0cd2d\", \n\t\t\t\"token\": \"Cum sint quae dolor enim. Facilis qui tenetur aut. Dignissimos id tenetur fugit enim beatae. Et at aut et.\", \n\t\t\t\"name\": \"a7cfuhht84epjovrc49z302jkb12yf10z59lq3j06sgfs283zse2yec0rvlc14irgzz4v07ey94182bk0pjjtdl68ekxkjiy8az86v6cocoznk5xk1shnnjkijibz57mf9g21nbgqmm5smoiwxley9081arnds2qc93mc5h3pucz4r5czy5ndhiv3aoumzkmkx3hyfntlg40ox98xqbqnw0zrm7y2r89f4u5yypk92i1a3wep1oygxyh4aa4gyl\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-20 13:17:16\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9d3eb8c9-5b9f-46bf-9a7b-655ea6699058\", \n\t\t\t\"clientId\": \"98166484-ea99-432e-9b2f-d3e00ba2c346\", \n\t\t\t\"token\": \"Aliquid ipsam sit. Laudantium saepe nihil dolore deserunt molestiae tempora sunt vero libero. Eligendi eos nisi non itaque error ducimus. Voluptas cum nemo omnis assumenda dolorum et ab aut.\", \n\t\t\t\"name\": \"olthdhuapxfs10jv6aam4n4idu749f9avixhmz6i2o6brifrlcoabkbra6wodkzowgmbwmp3giolf2e3qynswcpl72m4ctu9pth3i5pdfkutll9yvulyr3143bmv5xrbaq3r2t26rp7d8et53n7mxqo40gilk85rx6ijcs787honoegierwzynoqv9intinb8im2gqvw6wf40y884xg5zbejywzsp7toda2r2jmq9d3in9mtiorjecadaxy9z9d\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-21 02:31:18\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9d497d71-77f5-4ec7-88c3-36d4d8540e8e\", \n\t\t\t\"clientId\": \"fb7eb625-e2d7-4bb3-b78a-641d07b056c6\", \n\t\t\t\"token\": \"Autem molestias minima facere qui cumque. Quas nihil odio nisi possimus reprehenderit reiciendis sit fuga. Ut ab dolores deleniti et cum corrupti eum eaque.\", \n\t\t\t\"name\": \"egp0kt2uow7mih9cpvbrv9b8pqbzfxlswyt6ggdbm57vbmbnbrzmtz40ir5tyg6plg28gfrw0p1zy87uepm7hd2mx6es3hi00o69qvtsvneindmctea7uvu5lzkyazoyw3t4ei95t7s8ca83xic7j7gt2qz6o3bicyzd2v7dq39s5ixualtfoddbjtvxk1jsf7w37o8lbsd0ucjbixku2g1q5ymkyunp6v8hh4ep0saplkz01qelm0elc8mk4rr\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-20 17:52:44\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cb6a30b5-1a44-4dae-860a-54534423d0b3\", \n\t\t\t\"clientId\": \"eb52d4dd-b0aa-45aa-8605-8d4a08bfee62\", \n\t\t\t\"token\": \"Voluptas similique quas aspernatur tempore autem ex. Pariatur soluta ut similique explicabo. Repellendus itaque quasi at nihil aspernatur officia commodi. Expedita deleniti sed voluptas aliquam ullam. Quia qui saepe autem id quo.\", \n\t\t\t\"name\": \"qo81s6erwzwsn8alm5hg4twfyu4hklvqh648j8zn3irpx1ugbn99yo2y8452w4b8261rbpb1ador026xitwv4ku9shv2y6y71lhbj3i5rp4v961zamz721wj3jgv6f81x9gvcihwuzzunly0j9mul0hyc8fse8tpqlicphx9uuhshrybbwfg6ilm86xu3b6pobxl83nv839rw2lydimuuyo6h11uz5rmzcv18r4hgik23hs46uj471adui7qd2p\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-09-21 03:08:03\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a10abdd0-9686-48db-a764-697fe18950a9\", \n\t\t\t\"clientId\": \"98dcffc3-90b2-4ac2-9953-38a215c6ef7e\", \n\t\t\t\"token\": \"Corporis quaerat libero eos voluptatem et nesciunt quaerat. Et aut dolor consequatur fuga. Possimus mollitia enim libero quisquam quia doloribus. Quam aut saepe quod et hic consequatur atque consequatur.\", \n\t\t\t\"name\": \"3kb51qdvym6gpyc4153l0fhcqesbjg0hcw3oqa5p0pft4txrwki6l5ajp0na7liwbfe6rr7vhx4qzanrmo6ya1p8hzs381aqm3zmpjut2b76o06qzm9ay7zzko58rddk3jjljbh9ao5gezw6t8surnqj61baicv4uxnch0m194nof3q5mahicmw7dtg0c19epzw36rk2rd79udfrrv8y50113b5r9odl0gchlbh42mv0zksh75v6lx39mzlvcmo\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-09-21 09:55:02\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"bcd9a8cb-dbc5-4d7e-83aa-63fafea5bf5b\", \n\t\t\t\"clientId\": \"b18f40b7-7f71-49d6-8f7d-c144cd17d40a\", \n\t\t\t\"token\": \"Enim error qui. Dolore ut ullam dolores et doloremque ratione laboriosam. Libero libero vel dolores. Id rerum aspernatur aut. Et doloribus accusamus perferendis dolor eum.\", \n\t\t\t\"name\": \"yakx5xixwhzrm1yllspalgm81t1lemfx64vl66ckkjtf5hf3ccec1ic9dgdgnvescu3a5gb7u6q46wbp7ihqfdawhccbnxtpxj20huzmct544njnk1y0zus7gl5kol6yhmmnusg6gfchi0l6m9wmfq40xebni3da2dpq0m862qbzzrxpyezbrr7476rqxfqq9zc8tgmd01kpjo91mxib1o6keem87z1wr2b2bua8qls7of5ucqurra87tdcq3h9\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-20 23:48:19\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c8882ad3-410a-47cb-b283-89337d75ea6d\", \n\t\t\t\"clientId\": \"823ca221-85ac-4f4c-9a51-45020617130c\", \n\t\t\t\"token\": \"Dolore perspiciatis reiciendis at ea ut et nesciunt. Quis perspiciatis rerum consequuntur porro hic. Quia maxime perspiciatis dolor accusamus natus natus. Sed dolorem pariatur sint a porro maiores consequatur distinctio. Ut molestiae voluptas magni porro suscipit consequatur qui. Quas fugit distinctio sed.\", \n\t\t\t\"name\": \"1kiqs8pwla3ic8f765r2qpl7ykgte5c7wbai3qvc9tl72xp43hhcn7nsmzg49336xb3txiodcp9a25jdypf4bv3bi92ngujv33blcqbprvun6ltl1ywg61s35go8hm4i9la2k44jw8a345xclm1ybdsl8zvi84c3me41c8p6yjqoddr47an72zinuk0zdfratlme67y09cuhx2f0dldc79bk1hyqtlb8sh22brgp5zr7xl1gbrjq9bzfbith8w4\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-09-20 22:16:13\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b2176ff4-9e38-4b5c-8819-322e27f035bd\", \n\t\t\t\"clientId\": \"70def849-5b35-4904-ad02-4892d58a81d9\", \n\t\t\t\"token\": \"Architecto perspiciatis officiis porro et doloremque ullam. Et consequatur vel assumenda maiores culpa. Quia voluptate laboriosam deleniti eius dolores adipisci sint. Reprehenderit incidunt ipsum aliquid. Optio necessitatibus quia dolores occaecati. Non aut cupiditate nulla et sed voluptate repudiandae.\", \n\t\t\t\"name\": \"taijnm6rda7s7s0oj1lj4fp5nw8c7839eku9zvbhst1vkrfjqsdwyjm8o7q06ee17r7vjycyvfz77yv655pt4bdtucsz5tqihmawy6wza4qbhp9eo445a866n82fdrtb63ej576x771tczkhxamixbrmcvngcodw1479fzsdxxue8f3u65df9ne0c3a1nlm9cjepz93t2chge9oj9y2gkcmam5xcd4et06227gc2q8bghx93oeu0v09q2qr5hav\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-20 18:56:36\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a8c8a772-f5dc-49b8-8e5b-bb52a7f46db9\", \n\t\t\t\"clientId\": \"d4895f67-8d76-40c6-8a7a-6dbe97ec5ae4\", \n\t\t\t\"token\": \"Nostrum dolor quae. Reiciendis modi facilis enim voluptatem consectetur aut earum. Quos et cupiditate consequatur consequatur consequatur unde minus perferendis.\", \n\t\t\t\"name\": \"spfzsleds3lldy9dfbfo1svbg0ci0g4s40jrt1zzqxnj1jyl1qb2ov2rtesn9qgnulq87u5nsp37t1tbt9v4v23zrs3pku5lwb03xwny3pxqtxn97h7zrh4u8t7qzvy4b9vws5b4vxxwstjkpmwz31r1g6xlefduzzgsp1t7i9a27hye21yfr0qryeot10hbsf41h47fg8wcnt2x73pcr3qc5dru914udcdny18ioiyha5tmu1ueq1tdo2vk2cw\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-09-20 16:34:52\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"43c3a6f7-cdd6-4e4a-963d-2cb26cd44506\", \n\t\t\t\"clientId\": \"1a3a7ffd-daff-45d7-8963-10a8a9491536\", \n\t\t\t\"token\": \"Reiciendis repellendus et occaecati non aut qui iure. Autem ipsum voluptatem. Id porro voluptatum est. Ut exercitationem saepe ad optio temporibus quia. Iusto magni iure ratione ut velit magnam cupiditate et.\", \n\t\t\t\"name\": \"8rljrnb4w2t7xt70pm3n2gb2v431lfo6w0nmg17bppk7fvu6he1hzqyfua1oyyjk264n3g5lqmna7r4k57v323a1zggqmlzl5gyceb7omawcv5517ff8ifaug25azc3ajxa841cfqrbugat5g2e08lcyie5lnyk5q1rx0kxm4pt1ogl4ixp8oz84wirjn0zr4jm36u2wp55b4oyqvs9arstav5sb1bfm8kii64wpp2vzmpw02aqwt6jslvre89q\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-09-21 04:33:36\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"37348cac-e3a1-4eda-8571-f384808bcd59\", \n\t\t\t\"clientId\": \"69f1721d-c9a3-488b-9082-ebbd38bb2666\", \n\t\t\t\"token\": \"A fugiat et quisquam esse. Quia culpa aliquid nesciunt qui ipsam. Rem nulla hic voluptas eaque dolores recusandae unde totam. Ad sit sit non adipisci maxime sit perferendis illum.\", \n\t\t\t\"name\": \"jb2lhk7mjweqayjmr0en2g6y9obsdvlikx4rq0q9wr3za847m844tzn0s5h044fz7o1tbjsq1sy1tfa0030qb19yssuhddpefi5ktwuaowc8zxbwj25kr8kgvyuyq9njm0a8xps5809qhzr5dt5ylkjhkv5a14krx63cvvao3wdxrv32a8emsu5mfvqdqmsw6ihoaoppcz0cv46eo9bjzzlyxcm7d1r2jusllv9t1mbntq73p44r718qlv30syt\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-09-21 07:04:40\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthPaginateAccessTokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\toAuthPaginateAccessTokens (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthGetAccessTokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\toAuthGetAccessTokens (query: $query)\n\t{\n\t\tid\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"aca2f62d-123c-4830-a6b8-828c4d95b661\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthFindAccessToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\toAuthFindAccessToken (query: $query)\n\t{\n\t\tid\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"aca2f62d-123c-4830-a6b8-828c4d95b661\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthFindAccessTokenById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\toAuthFindAccessTokenById (id:$id)\n\t{\n\t\tid\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"aca2f62d-123c-4830-a6b8-828c4d95b661\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthUpdateAccessToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:OAuthUpdateAccessTokenInput!)\n{\n\toAuthUpdateAccessToken (payload:$payload)\n\t{\n\t\tid\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"aca2f62d-123c-4830-a6b8-828c4d95b661\", \n\t\t\"clientId\": \"b2cd938f-6b5a-401e-97cb-e78355e4b54c\", \n\t\t\"token\": \"Et sit consectetur et aspernatur mollitia. Nam dolore sunt. Nemo vel quisquam ipsam. In qui id nostrum animi explicabo necessitatibus. Ut quia qui voluptatibus possimus cupiditate temporibus molestiae qui cupiditate. Blanditiis et aut aut sint deleniti tenetur minima ipsam facere.\", \n\t\t\"name\": \"y1wyuea0f5ua2oohazyip2i02f4p2wi15he5oc9qixuclv7i1v3gsy56zbr3a2w3wrvn8q5hokdg6iaah70zfpai07a5cuzku2ey5y7sjlhm092pwbie2pll2302j8cnldd2c2clqd13b0vm6j9pn3hozo3spvym1oeba4pglglvb2bjdnka2nvaqf2z2slfuu35hjef87lbg75lv1ma08tnr2bgj2ep3k54xtu30h7x6iys6atqkbgo4lj34gk\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-09-20 21:18:13\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthDeleteAccessTokenById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\toAuthDeleteAccessTokenById (id:$id)\n\t{\n\t\tid\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"aca2f62d-123c-4830-a6b8-828c4d95b661\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthDeleteAccessTokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\toAuthDeleteAccessTokens (query: $query)\n\t{\n\t\tid\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"aca2f62d-123c-4830-a6b8-828c4d95b661\", \n\t\"clientId\": \"b2cd938f-6b5a-401e-97cb-e78355e4b54c\", \n\t\"token\": \"Fugiat laboriosam et eligendi enim voluptate. Explicabo error vero voluptas ab. Neque autem ipsa. Error aut corrupti voluptate.\", \n\t\"name\": \"0ew937s2a0ntfy3o5jz7wlf3xvfjs5o35v5x64qjzv053il1oiun71168f16jve8yl2agiqtkdxihf10pxv77x9fmbewhwx09dx60u4aui8e387sgso6rthnf20quv24g631pg26uhr9l230a6uxel596gth4qsww1bpu7v9ry5hpipls430iqctgt5rprfx1bjwv2u46tkh1a12yd81fjk0l7vhycxyq294ysauinutq4xcu7d43gxwjasuh35\", \n\t\"isRevoked\": true, \n\t\"expiresAt\": \"2020-09-20 15:37:38\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-token",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-token"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-tokens",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"b9f21f02-ed6e-4d9a-9a23-d6c25589b43e\", \n\t\t\"clientId\": \"d3a3b2ba-2f0a-4221-80b6-11bade4fd55d\", \n\t\t\"token\": \"Iusto voluptatem expedita molestias. In dolores sunt nostrum tenetur vel dolorem qui laudantium id. Enim est ea neque recusandae alias sit dolore vero voluptas.\", \n\t\t\"name\": \"zp73xk6y5gwvkb3w52eaa7a7g6dy2h0cbz9q3qqiwf1hht7d6wep2fmhmim0g8c7sf9xgfg74b25l9c67qsbqf5486rcsa583k8l1wtrbpedcanw9l58vlz2eepwu5qvxnn0wzmbtq4v2aw574gpkqsw7tfjmsg1zr7h1679hml45ckr6osjb5kd8zizj8oni0omnw6aa3uqh934dj707k53e7jby6y325g8uf5e5bur6vefrb6b8b3xh3qnlfo\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-20 17:38:47\"\n\t}, \n\t{\n\t\t\"id\": \"9425117e-c0ee-43c3-9db8-25e6396a0ef0\", \n\t\t\"clientId\": \"f61f30bb-645b-44c6-acfe-29255e81a8f5\", \n\t\t\"token\": \"Voluptatibus ut natus cupiditate voluptate. Quo minima sed. Et fugiat veritatis. Eos perspiciatis sunt esse nobis sit est amet quam. Velit possimus eius maiores harum impedit.\", \n\t\t\"name\": \"n3br0m9t5nmc2uh2ssl92vp6m73w5yy55mu2r1qihvmmcq5qp37npes1mda3ev7t7b7cexfkvauzhskqsirgjozz6w31yjj8an2uwgtw25zgh49x89yh2vpwnyyds0ysw83figgc49gpr5v3bfovrjhxxoo21w9ydnfo5pe39chfglgub7bvj6ifz4tapz6ard05c5pfywot4x9eweb59zuxoe9g3n4an61w4hkynrkwzuxy1zlf75fr3k8dri8\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-20 21:56:53\"\n\t}, \n\t{\n\t\t\"id\": \"e02452d9-795d-4e44-9715-993ee16de621\", \n\t\t\"clientId\": \"b051900f-239f-4a37-837a-d7e31b222ef7\", \n\t\t\"token\": \"Provident iusto veritatis impedit quidem ea et nostrum. Id itaque id et et illo et assumenda non. Minima consequuntur deserunt illo molestiae fugiat ut. Qui doloremque sed aut at qui voluptatum. Laborum repellat quia et.\", \n\t\t\"name\": \"qqakfj8oua0tle1aq97amj5nh3di2l3e4emwbpt4hcs75wl8kzymqhb5ghjyay36rjd9l9xj41qebgmt4fsdffhtarvcdgkag9ag0e0asqlwrftsfhdoh2owpkf82jxdpg20gnnzqf2ngwb1ihg2759w2z0ebqknz60jovqayslg7lzxo91ufjkwzf2iwgcpl9bawh6j1oqxs95uze112v58fqw43p7s0if7rudc992kuev9ef8pc3t5qwuw31e\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-21 02:19:45\"\n\t}, \n\t{\n\t\t\"id\": \"96159972-9b38-4bf6-9de7-d40c4b6d3996\", \n\t\t\"clientId\": \"a131af29-f9ba-4653-b551-7969fd8b68ee\", \n\t\t\"token\": \"Quia dolorum ducimus vel. Perspiciatis modi temporibus dolores esse. Vel dolorem maxime.\", \n\t\t\"name\": \"ok9evvww6fpj9ehhojlcdqz76zviimt2tc6a0xjxl7y7b1ymo41y7w8idz6ga8c2b09kz7vx96ntuw120psnfjd9xuymqoo0e50lxe7aivrki5fjt85vepawr2d721f1fhu72zam8rrgb423g5ukmbsg1chnuqv06sj8tu2px3sm66kuhxgxh78ya57aj5sxkvipehvemj2j52avi87fem4voccm31xdry4tdtcjg7v8yk58p8h9nfy166lfzo1\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-20 18:20:54\"\n\t}, \n\t{\n\t\t\"id\": \"f5cd2aa4-c0a8-4a4c-87c3-49a07e89eb29\", \n\t\t\"clientId\": \"9f810454-0f6c-43a1-be5d-5d8f2adec447\", \n\t\t\"token\": \"Voluptatem possimus ab quos et doloremque odio distinctio eos ab. Saepe reprehenderit labore vel et pariatur esse voluptate ducimus quidem. Dolores sed laborum et culpa illo voluptatem. Rerum et sequi nihil et delectus in voluptatem ratione. Magnam unde ducimus possimus iure qui nam quaerat facilis quaerat.\", \n\t\t\"name\": \"6v2qrfvph9ezyn9x60uqoosizx0qi2sluf9oohrnrwo6emqk99o7g2dkwalmcqavgwhb4juhd1thr3o6mwoj73prrjsjhy30cem3wqc70oessa6d4j45os23cs0pmp76xp9rxbd3wymp2ueb5v0dejg3kxwb44bwkw2xmyxcl2s0lo6p1nzl7ppn7harft284pjq6ssxae6v6yxnq3qrxmal0sef20zwpw30cfr3rq0dcjwicpbogburqmc1f0b\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-20 22:36:35\"\n\t}, \n\t{\n\t\t\"id\": \"5acc66d9-81d0-4bc8-8de5-da26ae71e882\", \n\t\t\"clientId\": \"6abff127-00a3-4f2e-bd15-72ed88ad08a6\", \n\t\t\"token\": \"Fuga consequuntur maxime iure minima rerum officia neque quam et. Qui vel velit ullam voluptatem eius et et. Praesentium esse necessitatibus consequatur.\", \n\t\t\"name\": \"hiyiqtiq5ne6yr3tl28w9tfs5boq08v75xmfh9zc9y1ekzdwqohujy4gca6uq98rqchh8jms9s4v5i4iwdxhudu3m6b5ldr90pe49onjln9yamre6b98twvooglxcrx0sqned5u864fez1vsdornf3fu2dnav8j6oxr6ts4afsv4msehr0z36bsivguer2gu6przt0o3u6ayk7hgjq7ada84tiorrgebc7pdbjfgkmr3t20h6bdth68qzr3zv8z\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-20 16:38:53\"\n\t}, \n\t{\n\t\t\"id\": \"dbab1199-e93b-4fbf-89c6-5898a87b7f94\", \n\t\t\"clientId\": \"d9e3dcf0-c872-444d-a233-2b4907de02a0\", \n\t\t\"token\": \"Nostrum nihil voluptatem. Sit assumenda libero sunt eos. Error dolorum libero non quaerat quisquam.\", \n\t\t\"name\": \"izq0utmh2n3taei0r04ru61as60gpk7ii68s4mugcio6w46avevg4hu37z7zymo18lnxq94gf0i2g10gc93fr3vjajvps1hbxhaiy1b346fbyrqe3x5d6re3ob4mv8pjkpw576xx6ju5ndhotbxaqxxlzk5a1epab41ycu0py4s6vh88iufnjwyzibjy9oeeeqdqce6yklz9vjz3swnzsrfc3kmopiph5u3mr95d8kdrtnusca2kx8hviyx8l66\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-21 10:19:01\"\n\t}, \n\t{\n\t\t\"id\": \"085225b9-7cc4-4187-8349-d4a0a8d9b74c\", \n\t\t\"clientId\": \"74b791f5-5b4c-4adb-bb2d-56a4ab966821\", \n\t\t\"token\": \"Aperiam quisquam corrupti eveniet culpa. Nobis et ad. Dolor optio fugit omnis. Atque modi recusandae amet temporibus inventore vel. Temporibus et et sit placeat sit et mollitia. Sint voluptatem magnam accusantium qui cumque veniam odio placeat.\", \n\t\t\"name\": \"rngnktjv6vtyksaqstrme7muuhil2t4k2wvauqejep7vt8fx5l9rk7iodjgp7siddfqpzh0re8antlvxs1yvgqlbup76tncfryepvfutumolxfg2z8lkk8eq2yj4qx96cqwhztxnhpmuqs1fx8sxtr7gnbjlhqyucfw8kmx8e3fb8sjzt6rbxxxz8lgx8jcxl0c3nwdbl67skrba81g5ucsun3b215bggqscfiykpxtck3t3j7a98w9l7hphd62\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-09-21 01:42:01\"\n\t}, \n\t{\n\t\t\"id\": \"2762e582-bb23-4524-a8f6-464e28680633\", \n\t\t\"clientId\": \"fd8119bd-4ea0-43b8-bd2c-e4fdfd35521f\", \n\t\t\"token\": \"Molestias quia provident at. Ducimus hic autem est reprehenderit repellat nulla dolor. Itaque corrupti esse.\", \n\t\t\"name\": \"rmeh6t3i98zu5tb8k6qt0ffgu9u9f30nn8ilr7haedibsub67v3hr8skxbc995fmemnbvbb8pyqd6vbepcmjqzwgqi3xob4l64jv9iz81b9kniq0ru2yb57re8epzn5r891hwh73glgwjw3fnc07i6zg5vyek3pkoyquto5vi4rdnjjzsmw47g8mt1aptsfzetqra8dcslsd5hkc3a4iow7uqomfalurfi67ti6g7gg0vqvu0yjnjn663jgjfi7\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-20 18:10:59\"\n\t}, \n\t{\n\t\t\"id\": \"e7724ad3-dd7a-4e18-889b-8a154ad99f64\", \n\t\t\"clientId\": \"444918cf-32e8-4bd4-8664-668c73a10193\", \n\t\t\"token\": \"Aperiam officiis quibusdam. Neque voluptas voluptates. At voluptatem doloremque ex ut amet occaecati.\", \n\t\t\"name\": \"cs06hwmqi5wi9psgfv4qskqro61i735qb3c5nq8bcbcg5bsegpik0rnwto4mxu77mvmw37upfpiqh8612739urrex9gl0xktyigz0auf4korwjcrlf71s4qidxcqvyoa6vum8yapgrsg6gkwg9806glpk8g31537ss4j6i4bepwqun0ihafq53ed7331rig9b8znvl4s7ovhsgfdlnsb00wrgvn90p818m7dn89tc11qty8i3w2gbxqhojh6rne\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-09-21 10:22:37\"\n\t}, \n\t{\n\t\t\"id\": \"7eb7c2e9-ad12-453d-8091-d925718cab9c\", \n\t\t\"clientId\": \"e0f54352-57b8-4303-a087-92055378119a\", \n\t\t\"token\": \"Maxime vel autem qui labore incidunt vero. Magni velit voluptas. Non perspiciatis qui unde saepe mollitia eum tempore et sequi. Dolorum et voluptate.\", \n\t\t\"name\": \"3i5npfbh7aa18bo3ldpu9yu5afc3l4ihwqma8yfxf41wfmf9647dbugu3p4yu2r4vnaz6tcxz8z0dm4hlcre61fdrklqr6b6wk8dq0qjbdl2nk23mmjesfgoohfnptb6cd2ekm6kcy89ce9t662dz7qcn50mty33ryz21o95qnm4v6kbr94vr2nqjcvwozt6rie307zy6nmvjrq6lbz8kf67vk32w6v91uq8b01o6xyqq1m5cmxwxbq3pdkio5u\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-21 02:50:53\"\n\t}, \n\t{\n\t\t\"id\": \"9df66240-3d21-49f8-b684-9399225ba9d9\", \n\t\t\"clientId\": \"752fcfa6-be5a-4bf1-8cca-726357026942\", \n\t\t\"token\": \"Quo dignissimos aut a veritatis. Dolores voluptatem nobis omnis qui similique eos sit. Maxime ea adipisci aut qui molestiae nisi et quae.\", \n\t\t\"name\": \"szfs8n24sm4xst30xzzoze9q0b5wpts0gkstz5yq0bq6z3e4ys0u2ikc4ua1eh3zs83dt6bnsewl9mdcjyzgijh5vi5ulkuu0ar8jl6yv80s8fbqnlukt8ls4vmkbdu9ztb4njpbumv2t56pufw43qp2o59dp1pgytecqfngcctbz2wp0bhqgc4l2t8doe8tvqpi05vwqsimjccayjt33qxplrndxgoef1cgm0bxtgq2ahbqztqlz7iffdf4mtp\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-21 01:32:30\"\n\t}, \n\t{\n\t\t\"id\": \"c4065a5e-18b1-4ffb-8e59-23cf53c7f8be\", \n\t\t\"clientId\": \"b300de99-5bea-4295-82b0-2d0f006b1cf3\", \n\t\t\"token\": \"Quidem nobis ut libero voluptas quo dicta. Maxime omnis esse. Assumenda eum odio nihil. Voluptas aut optio non praesentium consequatur sed fugiat dolorem asperiores. Rerum cupiditate esse blanditiis voluptatem in porro quos sed veniam. Sit dicta sint error dolores qui quia est sed dolor.\", \n\t\t\"name\": \"cfl9j8q0xre7rnxu3pl90vw92ux2rpzo33tnc9lxvghvnfmtu1gt0snwrere2f5hhpiz0qdz79criln5ir5dgeai5yqj0v7istn9uign559kq1000tn3ftl7wyi0rqnryr6wac45yrej5ar3ubx91neu4rzamlrnurpvnezwglzfsm86wungr92rifa3wn5o03w1208hyqbim06otgk82wydzxr8nizyf0bn39fj06hyaildv0aau2n0kji1led\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-09-20 21:17:12\"\n\t}, \n\t{\n\t\t\"id\": \"0974e4f2-15bb-4e63-8835-998fb4bc9222\", \n\t\t\"clientId\": \"c52639e0-5a55-488d-989e-f18062f0a616\", \n\t\t\"token\": \"Voluptatem vero eos unde. Est occaecati iste laborum et voluptas. Tenetur porro sunt. Labore blanditiis molestiae qui aperiam accusamus.\", \n\t\t\"name\": \"2vsjv9g7hh51i8xeorjgpmtdu45f9a7x1jgxnko7zz70i5d5ycw0yccb6z7gv4kdbomgduo18soyr7xzqiks4lqmfok4raqjvozj500i76wumbou3fl1kii3npumsowseonetw3v3y8v1bwr7ynca61ro9kako4780ip5f9emufapb7weuvjdhlo1vkmqyxsyy6tnmnhph08fzbxziir09ecth8dtc1i2z57io20wcyqfbrrh8brochz3kpel2k\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-20 14:40:48\"\n\t}, \n\t{\n\t\t\"id\": \"013766a7-e9e7-4443-ab6a-bfd1731d8912\", \n\t\t\"clientId\": \"fdfa5347-443b-487a-ada0-c1542ccafdc2\", \n\t\t\"token\": \"Dolore sed quas delectus soluta ea qui illum magnam. Distinctio excepturi est veniam non laborum. Vitae expedita dolore eveniet repellendus ipsam explicabo quae vel optio. Ea sint iusto aut. Provident et rerum eos consequuntur est esse.\", \n\t\t\"name\": \"kwpgpnpe1uuzjq27ec64nke5q5rnrpwvvbejxo8tbc642qmzmpft3pnz1si7sdpfa1d54ir7b0ot5zbur9p1capqf4ubg45uyvjjnguq7yszurrbg93ay6fpl4faxjx2wy8ai991bi8xgzaoqu8lfns33lrr15itm1w73q9ncmgvxuogpvsc0w8s7e1pzn2h1s4nzaoc4vudee9cora1e5nqtqa8l60gfxp8s9mpbfh34jwfnsd47mwgyhjidqp\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-21 07:12:30\"\n\t}, \n\t{\n\t\t\"id\": \"0c8251b3-5f90-4dd5-a6ae-c4a33d2c0fc2\", \n\t\t\"clientId\": \"de6442f5-d8db-4237-a19a-77cafc16f3e6\", \n\t\t\"token\": \"Et rerum voluptatem non. Aspernatur accusantium minus. Ut sed aliquid atque pariatur consequatur accusantium officiis. Autem enim incidunt.\", \n\t\t\"name\": \"jrwkw46lldqsmvvtnf9e2n0v4fkdx9ch0a5ht3k0vrs94gx2dkz35qa5rh7ct2qz8cxes45ztmiqbb65z9j0i4lqypxnc3v1orw5tuqcndxf83kb27vj3yk9qqqe88xwrswnwnh6bevvh1jt52ge6eqh29jyyn3obhw0dsjfw0walu86641pnbr2usuq7f91nczcee39sy0dtlftrhl0l1og9juecpmt2yru7dxpquxqxzllvw82z0z3qcjh1aw\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-09-21 01:46:38\"\n\t}, \n\t{\n\t\t\"id\": \"9b7d93e7-4970-404f-b8db-213f3b8fad6d\", \n\t\t\"clientId\": \"7f77da93-81a5-4222-801e-2f496a25ed61\", \n\t\t\"token\": \"Porro rem fuga sunt sapiente sit error quaerat. Possimus sunt mollitia occaecati laboriosam nam nihil vero quaerat. Alias dicta quo odit est magni aut. Quaerat eligendi repellat fugiat libero rerum qui.\", \n\t\t\"name\": \"s99jg2imgpvzsc9zrwk86mzql3zonyo5hbi2lwy54nfrgruah05kcdtbxljvnygnflmiugowx1g4e1cgf11zkfonkloq3cyzk1l4uha4nsr1gjg4m0ub9f2x9xlarllwp6mhwcg36rw4mv1tv94hlogfhcv04ui58k7o9laiwix96mcxjbxoz5jee08ei0pdwsppt1wbh260tqqfb8pchqb1hjiahtpbm21wfk52msrzhahfuc335ws4t35glwf\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-09-20 21:22:22\"\n\t}, \n\t{\n\t\t\"id\": \"daf664e6-d9cf-493d-a364-7b32a9eb8029\", \n\t\t\"clientId\": \"89fa4daa-4913-49f8-a294-e07fd0f44436\", \n\t\t\"token\": \"Temporibus sint saepe rerum vero vitae. Et nobis aut enim exercitationem repellendus in neque. Dolor eum aut deleniti assumenda qui aut veritatis.\", \n\t\t\"name\": \"j69byjsmfya1csx61d8n4t0co5kb7d2du2qfnbn2h8h7haas5lddwvc1qhyoftmbzqbus1bh01zf023stgsiwy1p0ohx3zjyjq9s23e2oowwvcjgo0ub74fl8r8iz2li5qtmqzt4pppr5lgobtt7th6vge5hm7i52n0tc4tgraihtxf7lfq8q4444u8uv0i5y33uwm5k4tjtp48009rs7cfqaw5mypqifr3d1m0vqkypehjvymjuvvyz2lyyfat\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-21 00:01:49\"\n\t}, \n\t{\n\t\t\"id\": \"c10ab009-0bdc-4801-bed4-e8b51437977b\", \n\t\t\"clientId\": \"ce98cd7f-bb08-47b6-ae8b-25a85f29be75\", \n\t\t\"token\": \"Nihil inventore aut quia adipisci excepturi ut mollitia. Sed blanditiis alias unde sit ea. Et omnis rem provident labore.\", \n\t\t\"name\": \"1x4ylgw2l9iewohzhw1n7sdlzlpo8ut1anxptb1sez7uberul5s3uoadm05k5jr39rz9nv275wqeuqsk19j5r2pdi1et6xtjgnyh4qia3ulik0md47md0oy3480fhxcqiugci0n7diboied0a4d7nj8l5yy2m1arkm5toqskzjj1wcmn3ussjji3ko91pos2l2r6vn5gbiznvfwqdws6b7qsjirc716x95drggxvxxq7crk8xr8xwcce477hvcl\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-09-20 18:26:01\"\n\t}, \n\t{\n\t\t\"id\": \"c653da2b-b005-487d-af98-af8af7ca3eef\", \n\t\t\"clientId\": \"1104c61d-230c-477e-ae60-f936542b4ccb\", \n\t\t\"token\": \"Enim sit culpa accusantium repellendus atque et aut. Quas culpa debitis voluptatibus minima magnam itaque non. Porro labore id provident voluptates neque qui qui. Et velit officia corporis molestias qui ratione sint fugiat.\", \n\t\t\"name\": \"339c7m0yznl2rw7saskux4hto9r27w1w68vyhmqvfs7hs4ox3mi39ap7k5grtf9424alcfb6rsvf0x4c2sfn787styayfyas79ko82ewnz7bs8zc2pjii3zf6w21d2hyaew84bmznml9j65v28a8i57nik6xtowpizi32az0b8iy5icrxa2pt5op9mybha0hfvfjrqrpj9u5i7o7jx54fprvqd8txyxxnsiq73ree5fixr4geix4jytswidr9al\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-09-20 15:28:26\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-tokens",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-tokens"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-tokens/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-tokens/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+                        "access-tokens",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-tokens",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"aca2f62d-123c-4830-a6b8-828c4d95b661\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-tokens",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-tokens"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-token",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"aca2f62d-123c-4830-a6b8-828c4d95b661\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-token",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-token"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-token/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-token/aca2f62d-123c-4830-a6b8-828c4d95b661",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-token",
+						"aca2f62d-123c-4830-a6b8-828c4d95b661"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-token",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"aca2f62d-123c-4830-a6b8-828c4d95b661\", \n\t\"clientId\": \"b2cd938f-6b5a-401e-97cb-e78355e4b54c\", \n\t\"token\": \"Corporis illum incidunt suscipit pariatur. Et quisquam ut ipsam est quos repellat odio. Iure reprehenderit quisquam eligendi. Dolorum omnis quis voluptas ex occaecati beatae dolores. Aut voluptatibus nihil id facilis recusandae ipsam nostrum atque nihil. Doloribus cumque beatae ea laborum aut.\", \n\t\"name\": \"36oc9byf6459t2fyd9fbateqy1ivtozobiypvifxq41tkmmd0g02fgveusbp3qh8aft9rq3ijb04mg48lo49vadsf3bb5ujlscu1jm7zr5tqsr3yksl8j3va8u3r1jhy7l25ww7flzuyc0hdh7i4qgap1dmxtyfvmt7ok1xem5r3v7c3svimx83sm9c4eadttq44l94hatcpfv3xxiu0lxdgbn3fzoctvjjtaaektz6uq8rzu1ifd2ki01tx28a\", \n\t\"isRevoked\": true, \n\t\"expiresAt\": \"2020-09-21 02:21:42\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-token",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-token"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-token/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-token/aca2f62d-123c-4830-a6b8-828c4d95b661",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-token",
+						"aca2f62d-123c-4830-a6b8-828c4d95b661"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - o-auth/access-tokens",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-tokens",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-tokens"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "7f80d8e0-53ce-41dd-89a3-eff943f302ed",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
