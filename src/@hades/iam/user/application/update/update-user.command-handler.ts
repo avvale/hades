@@ -35,7 +35,7 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
             new UserMobile(command.mobile),
             new UserLangId(command.langId),
             new UserUsername(command.username, { undefinable: true }),
-            new UserPassword(command.password, { undefinable: true }, { haveToEncrypt: true }),
+            new UserPassword(command.password === '' ? undefined : command.password, { undefinable: true }, { haveToEncrypt: true }),
             new UserRememberToken(command.rememberToken),
             new UserData(command.data),
             

@@ -12,7 +12,7 @@ import { FindClientQuery } from '@hades/o-auth/client/application/find/find-clie
 import { Jwt } from '@hades/shared/domain/lib/hades.types';
 import { JwtService } from '@nestjs/jwt';
 import { GetRolesQuery } from '@hades/iam/role/application/get/get-roles.query';
-import { Op } from 'sequelize';
+import { Utils as AccountsUtils } from '@hades/iam/account/domain/lib/utils';
 import { Utils } from '@hades/shared/domain/lib/utils';
 
 @Resolver()
@@ -48,22 +48,6 @@ export class CreateAccountResolver
                 include: ['permissions']
             }));
 
-        const accountPermissions = {};
-        const allPermissions = [];
-        for (const role of roles)
-        {   
-            const rolePermissions = [];
-            for (const permission of role.permissions)
-            {   
-                rolePermissions.push(permission.name);
-                if (allPermissions.indexOf(permission.name) === -1) allPermissions.push(permission.name);
-            }
-            accountPermissions[role.id] = rolePermissions;
-        }
-        accountPermissions['all'] = allPermissions;
-
-
-
         await this.commandBus.dispatch(new CreateAccountCommand(
             payload.id,
             payload.type,
@@ -71,7 +55,7 @@ export class CreateAccountResolver
             payload.isActive,
             accessToken.clientId,
             client.applications.map(application => application.code),
-            accountPermissions,
+            AccountsUtils.createPermissions(roles),
             payload.data,
             payload.roleIds,
             payload.tenantIds,
