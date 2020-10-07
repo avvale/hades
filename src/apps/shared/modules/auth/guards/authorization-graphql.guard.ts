@@ -16,6 +16,6 @@ export class AuthorizationGraphQLGuard implements CanActivate
 
         const ctx = GqlExecutionContext.create(context);
         
-        return  permissions.every(permisison => ctx.getContext().req.user.permissions.all.includes(permisison));
+        return  permissions.every(permisison => ctx.getContext().req.user.dPermissions.all.includes(permisison));
     }
 }
