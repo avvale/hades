@@ -25,10 +25,13 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
-  - name: application_codes
+  - name: d_application_codes
     type: json
     nullable: false
-  - name: permissions
+  - name: d_permissions
+    type: json
+    nullable: false
+  - name: d_tenants
     type: json
     nullable: false
   - name: data

@@ -58,11 +58,12 @@ describe('account', () =>
             .send({
                 id: null,
                 type: 'USER',
-                email: '8t4q9061afm15tk855mm0mp9tvklet81kgbatkjkqao7viizr0t6xs0pn6vl7rlaz0478f2styjqd99k41xopfgdfo193znsr8bv09s2ch65vof4w6lat958',
+                email: 'b6s9821n79jflaco9u8pz36qd2bh9udl83wmlem4kois5jec3nw3ut1vqdygv83lkvn2upg8hcnrzi4teuq74oqz8bwz3vkjpmtwijjcevresd3jllixbd95',
                 isActive: true,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -80,12 +81,13 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                type: 'SERVICE',
-                email: 'cmzikrzh0tibyc335ek7wjstd8m6ctgfezn9eisgen7pb0cfptkhliju9plw5udwxb8vj0o2jyy5a9hkv6ee8ig7nl9g07q1k161gl3l3ru47symjeqvc1km',
-                isActive: false,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                type: 'USER',
+                email: 'gkgalmk3zj38pi6yfgd6su4jgx2kpblwnie9fztc5vt53csycsb1a81ysupo9s75fdetyiwqojchjazfqruknua0kh343llh0ej3rgm0i53pkgj31arss5qk',
+                isActive: true,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -102,13 +104,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: null,
-                email: 'b3ekqpmjt7e9c4o9mkw50xn8hprsvwreva5yhoxkbe6eqzgu8ipesm5t03bgdlo0sqazp85qmpoq3jsiwhvl24a5749wjdanxppmh0mky876c5j1161oxk9z',
-                isActive: true,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                email: 'hicgcqxqbb9bh7vc5rfc82hz9o2r0oq3qeede1rz7y1t8diuicy1t962jd8uli8qv2xz3ilc2swb7mqr0wcslsgtbvvntu3zwkxqt3b2fkzqa4xsi2lsm6xy',
+                isActive: false,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -125,13 +128,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 
-                email: 'ksfec9ix9xv3tjs5jggspxsjuz9kayxoh9np4dhc9xy04smbtrdilxr0hhkdp5907o7qbtpydnjorcxyv3np4qxvqywrrsrnizh4dghozw20hsq9uwa3a2ec',
-                isActive: true,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                email: 'dl329ciwgzbjmmi5gfcoravkqjj8w28z8j5r84b7om1pdd80zs443drg8hwpv4b7pc1ff8w2l3hp9cu02t9lkcbqgrfhgxshzlzzgxy8z0qp8hs95g7he36q',
+                isActive: false,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -148,13 +152,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'SERVICE',
                 email: null,
-                isActive: false,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                isActive: true,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -171,13 +176,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
-                type: 'USER',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
+                type: 'SERVICE',
                 
                 isActive: false,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -194,13 +200,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
-                type: 'SERVICE',
-                email: 'lvb1ps96xlcchbtjz4z4gx5huwyufj3wj6nupjw24u74eew9gvga4sudkar71tegf3zzxa6glofubm3p0yirz1t2gi60ou3va14sxm4etx53nnk56a4yrocf',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
+                type: 'USER',
+                email: '7y3bo9ix1mizukuerw852bqunc5hxcddrnx72rm8g9n2jbp096egfozk7f302dibnink9itz4ddb2qjkvfjewhgszgtfftgrrxkng66u6az1mohra6bgzltu',
                 isActive: null,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -217,13 +224,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'USER',
-                email: '4i256u6qudddq08imhqeti2ikp2vh4lr82ns9pzvf7ceplmwhj06hbvy2lhnyvp47rf4y6re2zuq94ldu5fs4n6z3x45tmwxhccx9n0b6k01uciv9jo2eujj',
+                email: '9lkpuqu6ixrowf7mc51mw6x6bv5kpjsk6jkn82c2ekdvbtvvhsd3lf3mcc191xc9wg0dbphx8o06s23hu2ecegvev36ro3pombknijpfslr9qmu05x69axee',
                 
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -240,13 +248,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'USER',
-                email: 'bp41r6ummk725mi5uy3qvkpukcgpsagit3m6atvhacj2ukdm1zh7uudwagpxkk1w581blyc58g4cu890q32ky5qqlkboiemfs9x0aa59y2svaal353gystsj',
+                email: 'f6ykrcpc64jjneh6q5sfj6r5bh5abq2lp09hbmbonkpz29l906ium6objz3qtvx4s5a4lb037ci87o7z8w5eoinnod4wpk39bomtvha45l04vjsplcb28vk8',
                 isActive: true,
                 clientId: null,
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -263,13 +272,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
-                type: 'USER',
-                email: 'tmy5uh4850tktinowcv98la4eucnm6zfr686cca2jsxn6jphgbizo443kpsn27bh9eeqdddba833gxufxioxv37ezsrlq2npmgjiynhpgh8fcljbx0rgamyt',
-                isActive: true,
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
+                type: 'SERVICE',
+                email: 'w1rhocz31e2mcveh52ipta2b5hcoo0l1fbhs7zi6kii6ofzz2hjzsf9d5rfqahvrm9zvmm24tubs4k3fngb590szvjnt8cxhirae6sx9qcgyqm2q7rjo5cnt',
+                isActive: false,
                 
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -280,87 +290,139 @@ describe('account', () =>
             });
     });
     
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountApplicationCodes property can not to be null`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDApplicationCodes property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'USER',
-                email: '9au8mi7bbijxws2nfg1jja4rztfwarb0s59j9zu76u2a8dxt4u1enysbjncihk79u6g6t74fnm8nbtis29nabsd8s4hzgr7w025osnfxa8kbk3lzb1k85xdr',
-                isActive: true,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: null,
-                permissions: { "foo" : "bar" },
+                email: 'iphqz06vdu6x14e6n2v34oxnbe3ifjvnzv6fhvbs8332k7qhfsfw7m3ljpcnlap5mtv29bk18en6fhffviq4ut0szw5e9d22ha54eev03efrbpreos783ghz',
+                isActive: false,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: null,
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AccountApplicationCodes must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AccountDApplicationCodes must be defined, can not be null');
             });
     });
 
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountApplicationCodes property can not to be undefined`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDApplicationCodes property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'USER',
-                email: 'vohmvbr3q9hobxb3n907igsnf2ubo7r6g2cw4vmjyvyzjfxchjaytwslwgf6zv6klfgnnq62apvntkhoxda73cpen7pory5jr1eznr841lh44ni6s4ltkwjq',
-                isActive: false,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
+                email: 'hrgfkqm882u8tjy98bnu0f8zs7ghcfo49rcaozqlqi0b7xhut1ual2uhf0xudf3u4k1ilymp7eprb4abcuae609u2c1iswud85dzar44rkmu4tverk95mur7',
+                isActive: true,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
                 
-                permissions: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AccountApplicationCodes must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AccountDApplicationCodes must be defined, can not be undefined');
             });
     });
     
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountPermissions property can not to be null`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDPermissions property can not to be null`, () => 
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'USER',
-                email: 'kd21355fj54he388bs0o4o3yr5ks1snop0sleg77ra3m0opzilom3yg049y9oq4206yvobnydageedte65egcjc4tcee0yt4tlvsyfi22jtc9bgkibog9w65',
-                isActive: true,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: null,
+                email: '46qx2pxqi2o1v342fjp7dvayl31j92rufmst03j61wjcyagbgqgw5d7w061oh4d610m6aklimfn8p402deovbdl2j73skqavvvhfxh8vrpa2d0bg793iglo2',
+                isActive: false,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: null,
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AccountPermissions must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AccountDPermissions must be defined, can not be null');
             });
     });
 
-    test(`/REST:POST iam/account - Got 400 Conflict, AccountPermissions property can not to be undefined`, () => 
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDPermissions property can not to be undefined`, () => 
     {
         return request(app.getHttpServer())
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'USER',
-                email: 'ivezlz44xtwxcqrss3396hrcif214qjwwgz54ozhdxxxon17myuoidi7y26aejgw0293pbi47wioeserzv3c8dyy6pqydihhi3pd501tujya3kc2tr9kw22i',
+                email: 'utpluslbqgb1n5jzjor26ovcp7pgd65nkgwrlnwk81yylaugxgjp8fatr6jmbrfbuu5kmpbha45vmtnvarfmcp4041x4rhk0olsxn38xf70898n44pdtcu49',
+                isActive: false,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                
+                dTenants: { "foo" : "bar" },
+                data: { "foo" : "bar" },
+                roleIds: [],
+                tenantIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccountDPermissions must be defined, can not be undefined');
+            });
+    });
+    
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDTenants property can not to be null`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/iam/account')
+            .set('Accept', 'application/json')
+            .send({
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
+                type: 'SERVICE',
+                email: '9kykm5gicpa8w9am5xxhlxmstzgzixrioju0d65r28s6da7qsgm84na6nv0puwrq5ndamr5jtekk8c7pncj0l5r0z7rdmu97k4p6nsdcycv7uvdojlm9dryh',
                 isActive: true,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: null,
+                data: { "foo" : "bar" },
+                roleIds: [],
+                tenantIds: [],
+            })
+            .expect(400)
+            .then(res => {
+                expect(res.body.message).toContain('Value for AccountDTenants must be defined, can not be null');
+            });
+    });
+
+    test(`/REST:POST iam/account - Got 400 Conflict, AccountDTenants property can not to be undefined`, () => 
+    {
+        return request(app.getHttpServer())
+            .post('/iam/account')
+            .set('Accept', 'application/json')
+            .send({
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
+                type: 'SERVICE',
+                email: 's3o5d1g55qp0ct73deac2cmp2h4noj7oa8jiunhoa2xldipnp7zyp6x789by0moynit5s1otdx65dnrw8e2h520awkisfj21u3gtthugizpilcqx2ysvqmkx',
+                isActive: true,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
                 
                 data: { "foo" : "bar" },
                 roleIds: [],
@@ -368,7 +430,7 @@ describe('account', () =>
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for AccountPermissions must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AccountDTenants must be defined, can not be undefined');
             });
     });
     
@@ -380,13 +442,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'wbm6k4795aqygt9a0im1fx673ntmo0uykg7q3',
+                id: '35pj47hx1k887d5syh9s6ysrpgp70e7tpecb9',
                 type: 'USER',
-                email: '0cszbn9ft3ajhiyj8yemlc5tglyfsmnq8fxokaxysnkesopmce1zoqcp6aymr05f80x4j10t1fc7leuoyvyvfjy61u1y1r4cp398ho8r5vai4nqndrg0td2q',
-                isActive: false,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                email: '06pu0u07tcip4hwco1t6d5q85c4vc65uhwn3w6qwd83m28ulepvnexaqg8infctz17wb4kfobsyj872fp347cb6wmu8zudexuocamuduzpn3qcotl6gc4cwc',
+                isActive: true,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -403,13 +466,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'USER',
-                email: '1fltyuokzxh886rehqtv10n71gzl6p8wpaivewke7x2ezmcgrsnrgqaxpsidtg9iqr18bz8xnoxihw0x3j4ec3jo3sxuzvbfw46e51buhyv5sisi90lvjefe',
+                email: '2homm3zc3begqy05oi0yyiie0t96v53teqrqpsfy0ev80m55cy21u834dmj2quwtv92rz66nlgc1j1r5ex2h26wp4eabcst375pjh1g7wzxcaxvl9np72ecw',
                 isActive: true,
-                clientId: 'ch2lltgdxrw7o3o575e15q1ea6l9q9irfzbm8',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                clientId: 'zv8tsxw60zetjok4dcztbi740uxppgz7v8t4x',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -428,13 +492,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
-                type: 'SERVICE',
-                email: '3qidrdxz1j4whncysi1em4hgfbbepq9ad7m0r4rfyniuz9fjobbss8uqw3obn87ovdgk29zy2k7zuo89t488ji7i20fqq2lqsk4s2m9mk99z6ikaikjkjvwwg',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
+                type: 'USER',
+                email: '2k5kgc9bzv7vx8jhnl3fy745pdwvhig7rtodgqmp46hfe6b5uk0lfcrufm9ddgik8rxw43qyy9w4zcpxna2azwbekggyx3ptvjqnz90f0ap7vbj7i90bf741k',
                 isActive: false,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -459,13 +524,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'USER',
-                email: 'vpk82y8rft8z9jy2ffg944c5euncv2py0vg2qzlksjbnglpnfifnnwvt8tfml6n7cwp1mlcu170prjmacq5txkcrql85ubd16eb29zszuno2mrx5kvorl6e6',
+                email: 'jxx7catdufkjb282288n3b5nnwcxkssn2bj1lt13upjff17xkfn7hgyejzs7y3eftrkizc97iul0nudmqyd7jz40btuebqh0ceiyc0r5c9zwks3wwlon9qlh',
                 isActive: 'true',
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -484,13 +550,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'XXXX',
-                email: 'vadoowto7insasphvgitk7j0are9s2z98qiod7uew4zlcilwdplkpti6ni9ap8zblprnsnpp8wpuv1i21frol3pacjgkx8bmkltyxng79sgvq0n1yk9lxuoq',
+                email: 'twqr9qxlqaidk8z6pjgds3w27wz8iccl0hgv3vzltqojgmmgmzru8z1zq0z2evcmgb5z6piqtklx0cjh19z4x0sup128i77archakn0jg2m7mvtngl7fwtlk',
                 isActive: true,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -510,13 +577,14 @@ describe('account', () =>
             .post('/iam/account')
             .set('Accept', 'application/json')
             .send({
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'USER',
-                email: '0mt9wda2u4a0eiznq3u9k2z412unx22ps0i83vpdxr0aon6mvp0lisyx7rxwhjk36jpzmdtlhel0753tdf3evwmg2wcg7kurqlufr5or6zzo4m9fpo7ubmpr',
-                isActive: false,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                email: 'hzlj7pbnmyggvs9qy2h5y1xp6alg6byirsc0d00kf197s4na2ip1q5qjy3azp6jlw6xv2slet4jqmvv7m36e93mjzxay14vu049htp6tv8orolmqyidth3i7',
+                isActive: true,
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -554,7 +622,7 @@ describe('account', () =>
                 {
                     where: 
                     {
-                        id: '3ae39b2e-d125-46a3-881a-35b7ce1fdd88'
+                        id: 'e777ba13-f1c5-4d1d-a5aa-d2f965157243'
                     }
                 }
             })
@@ -571,18 +639,18 @@ describe('account', () =>
                 {
                     where: 
                     {
-                        id: 'e4621d72-9fde-4584-8339-fb219f70820d'
+                        id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'e4621d72-9fde-4584-8339-fb219f70820d'));
+            .expect(repository.collectionResponse.find(item => item.id === 'a1116da9-e76d-41ab-a195-c0a8fc527e15'));
     });
 
     test(`/REST:GET iam/account/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/iam/account/6f733f5b-657e-4c36-afd3-a341f79bffff')
+            .get('/iam/account/62390fd2-6d06-4340-9975-0372209b9b39')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -590,10 +658,10 @@ describe('account', () =>
     test(`/REST:GET iam/account/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/iam/account/e4621d72-9fde-4584-8339-fb219f70820d')
+            .get('/iam/account/a1116da9-e76d-41ab-a195-c0a8fc527e15')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e4621d72-9fde-4584-8339-fb219f70820d'));
+            .expect(repository.collectionResponse.find(e => e.id === 'a1116da9-e76d-41ab-a195-c0a8fc527e15'));
     });
 
     test(`/REST:GET iam/accounts`, () => 
@@ -612,13 +680,14 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '068c524d-0d90-45a0-a565-17773f2463e6',
-                type: 'SERVICE',
-                email: 'zylwmcgqqjxfkobjyv38c676tmldwn16r7o73g1wouer8sa1bkxbtviwx53kzpj8g1janu1ecjn4vser6o5ihaa2dnu8tzpx2lvoo3g3ss0yrcsjp359x7ao',
+                id: '793c3499-e58a-485c-9156-c5755a59f8bf',
+                type: 'USER',
+                email: '0xkfzw3hmnwckaxuscwnl33ane2d12wuzlowun9tsc6c4eohfnlevbodzq482ey3xzggortpgkr1p5awfy4t8pwj40dlkseavwdfuyadgi2mq9jf5d5qv7wm',
                 isActive: true,
-                clientId: 'c3758de0-e441-4877-a99c-6c634629becc',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                clientId: '5f1af78e-8fe1-427a-83b8-d60fdf9ee79d',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
@@ -633,25 +702,26 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                 type: 'SERVICE',
-                email: 'vgjc5ell0rsxy9jlm17r9gqy9cujkxecbwhyrrj1xtdpwjbh5g6ppituqnh5vbrohtpl1mgxllkjqgk3j1xqz4zvb8dnwukwtqykmz7f2wrp5iswnuqaj0gg',
+                email: '7cqr5mokltsyd0t5gmxzu4u15qy6v39d1okmg8lapb4iu3aiaxvr7xzn25lr78eu4vawzzn1at9rtr76psirhm205yu3b3yshdcqfeoaisedghybf0gb562s',
                 isActive: false,
-                clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                applicationCodes: { "foo" : "bar" },
-                permissions: { "foo" : "bar" },
+                clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                dApplicationCodes: { "foo" : "bar" },
+                dPermissions: { "foo" : "bar" },
+                dTenants: { "foo" : "bar" },
                 data: { "foo" : "bar" },
                 roleIds: [],
                 tenantIds: [],
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'e4621d72-9fde-4584-8339-fb219f70820d'));
+            .expect(repository.collectionResponse.find(e => e.id === 'a1116da9-e76d-41ab-a195-c0a8fc527e15'));
     });
 
     test(`/REST:DELETE iam/account/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/iam/account/39950fa1-198e-4298-8b1d-46bce54d4466')
+            .delete('/iam/account/7a21e78b-708c-47ab-b8a4-616c2b640c4d')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -659,7 +729,7 @@ describe('account', () =>
     test(`/REST:DELETE iam/account/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .delete('/iam/account/e4621d72-9fde-4584-8339-fb219f70820d')
+            .delete('/iam/account/a1116da9-e76d-41ab-a195-c0a8fc527e15')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -680,8 +750,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -717,8 +788,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -727,13 +799,14 @@ describe('account', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'ff14f650-6943-4df2-a9dc-2a4fbffefc60',
-                        type: 'USER',
-                        email: '2rvs9n3l85x3s32kjt7wl6xnec0cftwvgyi5p0vz4djmd41mjneppvadb0f1dxkti9ljkk388hku979la81i65xf5zgnmzsiqsou5r6987py61vsf6xc2ytz',
+                        id: '77da40b1-02d9-4c76-872c-114ef6c71ddb',
+                        type: 'SERVICE',
+                        email: 'k5i4avjrwmy91vngy2p02885v717lh8hr9wat6cti78gttix06qi7n49f5xluyljjdxgnw94hdg0wpni7tdsgxq3wtuj6gfczsggunizk8d3xszj8jr6fkec',
                         isActive: false,
-                        clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                        applicationCodes: { "foo" : "bar" },
-                        permissions: { "foo" : "bar" },
+                        clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                        dApplicationCodes: { "foo" : "bar" },
+                        dPermissions: { "foo" : "bar" },
+                        dTenants: { "foo" : "bar" },
                         data: { "foo" : "bar" },
                         roleIds: [],
                         tenantIds: [],
@@ -742,7 +815,7 @@ describe('account', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamCreateAccount).toHaveProperty('id', 'ff14f650-6943-4df2-a9dc-2a4fbffefc60');
+                expect(res.body.data.iamCreateAccount).toHaveProperty('id', '77da40b1-02d9-4c76-872c-114ef6c71ddb');
             });
     });
 
@@ -796,8 +869,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -810,7 +884,7 @@ describe('account', () =>
                     {
                         where: 
                         {
-                            id: '12a7e9a9-551b-445a-bf6b-502f666fd440'
+                            id: 'f6717ba0-c5cb-4a68-b121-595ecfb701e3'
                         }
                     }
                 }
@@ -839,8 +913,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -853,14 +928,14 @@ describe('account', () =>
                     {
                         where: 
                         {
-                            id: 'e4621d72-9fde-4584-8339-fb219f70820d'
+                            id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindAccount.id).toStrictEqual('e4621d72-9fde-4584-8339-fb219f70820d');
+                expect(res.body.data.iamFindAccount.id).toStrictEqual('a1116da9-e76d-41ab-a195-c0a8fc527e15');
             });
     });
 
@@ -880,8 +955,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -889,7 +965,7 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: '98e459fe-0822-435f-96df-9a55d8ad946f'
+                    id: '6b6a6b0f-398e-4f8c-8321-c709ea62a8fd'
                 }
             })
             .expect(200)
@@ -916,8 +992,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -925,12 +1002,12 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: 'e4621d72-9fde-4584-8339-fb219f70820d'
+                    id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamFindAccountById.id).toStrictEqual('e4621d72-9fde-4584-8339-fb219f70820d');
+                expect(res.body.data.iamFindAccountById.id).toStrictEqual('a1116da9-e76d-41ab-a195-c0a8fc527e15');
             });
     });
 
@@ -950,8 +1027,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -985,8 +1063,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -996,13 +1075,14 @@ describe('account', () =>
                 variables: {
                     payload: {
                         
-                        id: '6eb6a459-3353-4a8b-a0f5-1fd8a5d5b510',
-                        type: 'USER',
-                        email: 'gls4agekoqis08twfjgj0lnpd0dqckajyp6gw1stkh99iyi5yx8s2qruo1uv686hancfpalprnstowz1djf7dcptrduec3mzxcm10vsjc6oawhbdz6yvdtq7',
-                        isActive: true,
-                        clientId: '00cecd55-0fe2-41f4-91d3-d37f4ac5b5b9',
-                        applicationCodes: { "foo" : "bar" },
-                        permissions: { "foo" : "bar" },
+                        id: '9c92229d-1992-4123-8c66-7b1da0f1d944',
+                        type: 'SERVICE',
+                        email: 'u0r516d428jje1f8fx4wnsngnlcql9sw9jkd4t3sy2ttaut7533uaazuofescmkq2ahmed91dpj971jbjj5ov3dvtl026skvidn4rbhzp1huq9aadvioegv4',
+                        isActive: false,
+                        clientId: '68a4e7e7-10e2-4a21-a442-94c971e85550',
+                        dApplicationCodes: { "foo" : "bar" },
+                        dPermissions: { "foo" : "bar" },
+                        dTenants: { "foo" : "bar" },
                         data: { "foo" : "bar" },
                         roleIds: [],
                         tenantIds: [],
@@ -1033,8 +1113,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -1044,13 +1125,14 @@ describe('account', () =>
                 variables: {
                     payload: {
                         
-                        id: 'e4621d72-9fde-4584-8339-fb219f70820d',
+                        id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15',
                         type: 'SERVICE',
-                        email: 'c8lphjkxdsm2356uc6k4ijkjzn50sz74rmtk58xxw71o96l6ojbtof9f9qhbg37p4v07iaclwum5f7qcozkws7mcvba4vx0xs3o9178giaeo07rpwbfj67xi',
+                        email: 'awf5zgzv650rkxx9ze9cd9u2a6ba6kf10uy7l6fzpedifz075g2pvqfh99gq3jb42offz2x7s6kca9bvrifkssfle2bjh5fqk6cdshe91red2si3zs3qjn0a',
                         isActive: false,
-                        clientId: '336bfcb5-292b-4769-b559-8dbc72eeb4ac',
-                        applicationCodes: { "foo" : "bar" },
-                        permissions: { "foo" : "bar" },
+                        clientId: '58cad0be-cb7c-4784-b485-8c8ff6e56414',
+                        dApplicationCodes: { "foo" : "bar" },
+                        dPermissions: { "foo" : "bar" },
+                        dTenants: { "foo" : "bar" },
                         data: { "foo" : "bar" },
                         roleIds: [],
                         tenantIds: [],
@@ -1059,7 +1141,7 @@ describe('account', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamUpdateAccount.id).toStrictEqual('e4621d72-9fde-4584-8339-fb219f70820d');
+                expect(res.body.data.iamUpdateAccount.id).toStrictEqual('a1116da9-e76d-41ab-a195-c0a8fc527e15');
             });
     });
 
@@ -1079,8 +1161,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -1088,7 +1171,7 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: 'eb0981a1-5fe6-4fa7-8e55-1cb865ea9e1e'
+                    id: 'ff40c9e0-2d03-44dd-b552-7e4f4a9d25b7'
                 }
             })
             .expect(200)
@@ -1115,8 +1198,9 @@ describe('account', () =>
                             email
                             isActive
                             clientId
-                            applicationCodes
-                            permissions
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
                             data
                             createdAt
                             updatedAt
@@ -1124,12 +1208,12 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: 'e4621d72-9fde-4584-8339-fb219f70820d'
+                    id: 'a1116da9-e76d-41ab-a195-c0a8fc527e15'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.iamDeleteAccountById.id).toStrictEqual('e4621d72-9fde-4584-8339-fb219f70820d');
+                expect(res.body.data.iamDeleteAccountById.id).toStrictEqual('a1116da9-e76d-41ab-a195-c0a8fc527e15');
             });
     });
 

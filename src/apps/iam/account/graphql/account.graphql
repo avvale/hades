@@ -12,8 +12,9 @@ type IamAccount
     email: GraphQLString!
     isActive: GraphQLBoolean!
     clientId: ID!
-    applicationCodes: JSON!
-    permissions: JSON!
+    dApplicationCodes: JSON!
+    dPermissions: JSON!
+    dTenants: JSON!
     data: JSON
     roles: [IamRole]
     tenants: [IamTenant]
@@ -31,8 +32,9 @@ input IamCreateAccountInput
     email: GraphQLString!
     isActive: GraphQLBoolean!
     clientId: ID
-    applicationCodes: JSON
-    permissions: JSON
+    dApplicationCodes: JSON
+    dPermissions: JSON
+    dTenants: JSON
     data: JSON
     roleIds: [ID]
     tenantIds: [ID]
@@ -47,8 +49,9 @@ input IamUpdateAccountInput
     email: GraphQLString
     isActive: GraphQLBoolean
     clientId: ID
-    applicationCodes: JSON
-    permissions: JSON
+    dApplicationCodes: JSON
+    dPermissions: JSON
+    dTenants: JSON
     data: JSON
     roleIds: [ID]
     tenantIds: [ID]

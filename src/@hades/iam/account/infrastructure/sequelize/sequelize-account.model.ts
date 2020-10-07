@@ -85,28 +85,42 @@ export class IamAccountModel extends Model<IamAccountModel>
     
     
     @Column({
-        field: 'application_codes',
+        field: 'd_application_codes',
         
         allowNull: false,
         type: DataTypes.JSON,
         
         
     })
-    applicationCodes: any;
+    dApplicationCodes: any;
         
                      
         
     
     
     @Column({
-        field: 'permissions',
+        field: 'd_permissions',
         
         allowNull: false,
         type: DataTypes.JSON,
         
         
     })
-    permissions: any;
+    dPermissions: any;
+        
+                     
+        
+    
+    
+    @Column({
+        field: 'd_tenants',
+        
+        allowNull: false,
+        type: DataTypes.JSON,
+        
+        
+    })
+    dTenants: any;
         
                      
         
