@@ -65,7 +65,7 @@ describe('system', () =>
                 version: 'a',
                 name: '3',
                 environment: 'f',
-                technology: 'WSO_2',
+                technology: 'WSO2',
                 isActive: false,
                 cancelledAt: '2020-10-07 19:58:59',
             })
@@ -131,7 +131,7 @@ describe('system', () =>
                 version: '7',
                 name: 'u',
                 environment: '8',
-                technology: 'WSO_2',
+                technology: 'WSO2',
                 isActive: true,
                 cancelledAt: '2020-10-07 17:30:55',
             })
@@ -219,7 +219,7 @@ describe('system', () =>
                 
                 name: '0',
                 environment: '1',
-                technology: 'WSO_2',
+                technology: 'WSO2',
                 isActive: false,
                 cancelledAt: '2020-10-07 03:47:15',
             })
@@ -263,7 +263,7 @@ describe('system', () =>
                 version: 'y',
                 
                 environment: 'w',
-                technology: 'B_2_B',
+                technology: 'B2B',
                 isActive: true,
                 cancelledAt: '2020-10-07 20:00:03',
             })
@@ -373,7 +373,7 @@ describe('system', () =>
                 version: '7',
                 name: 'm',
                 environment: 'e',
-                technology: 'WSO_2',
+                technology: 'WSO2',
                 isActive: null,
                 cancelledAt: '2020-10-07 10:16:50',
             })
@@ -395,7 +395,7 @@ describe('system', () =>
                 version: 'r',
                 name: 'y',
                 environment: 'g',
-                technology: 'WSO_2',
+                technology: 'WSO2',
                 
                 cancelledAt: '2020-10-07 03:54:03',
             })
@@ -507,7 +507,7 @@ describe('system', () =>
     
 
     
-    test(`/REST:POST cci/system - Got 400 Conflict, SystemTechnology has to be a enum option of WSO_2, SAPPI, B_2_B, MULESOFT, SAPSCI`, () => 
+    test(`/REST:POST cci/system - Got 400 Conflict, SystemTechnology has to be a enum option of WSO2, SAPPI, B2B, MULESOFT, SAPSCI`, () => 
     {
         return request(app.getHttpServer())
             .post('/cci/system')
@@ -525,7 +525,7 @@ describe('system', () =>
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for SystemTechnology has to be any of this options: WSO_2, SAPPI, B_2_B, MULESOFT, SAPSCI');
+                expect(res.body.message).toContain('Value for SystemTechnology has to be any of this options: WSO2, SAPPI, B2B, MULESOFT, SAPSCI');
             });
     });
     
@@ -1048,7 +1048,7 @@ describe('system', () =>
                         version: '5',
                         name: 't',
                         environment: 'e',
-                        technology: 'WSO_2',
+                        technology: 'WSO2',
                         isActive: true,
                         cancelledAt: '2020-10-07 20:33:02',
                     }
@@ -1095,7 +1095,7 @@ describe('system', () =>
                         version: 'p',
                         name: '8',
                         environment: 'r',
-                        technology: 'WSO_2',
+                        technology: 'WSO2',
                         isActive: false,
                         cancelledAt: '2020-10-07 03:18:51',
                     }

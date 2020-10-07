@@ -104,7 +104,7 @@ export class CciSystemModel extends Model<CciSystemModel>
         field: 'technology',
         
         allowNull: false,
-        type: DataTypes.ENUM('WSO_2','SAPPI','B_2_B','MULESOFT','SAPSCI'),
+        type: DataTypes.ENUM('WSO2','SAPPI','B2B','MULESOFT','SAPSCI'),
         
         
     })
