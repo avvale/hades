@@ -77,26 +77,26 @@ export class UpdateRoleResolver
     private updatePermissions(roleId: string, newPermissions: PermissionResponse[], account: AccountResponse): AccountPermissions
     {
         // set new permissions from current role for each account
-        account.permissions[roleId] = newPermissions.map(permission => permission.name);
+        account.dPermissions[roleId] = newPermissions.map(permission => permission.name);
             
         // container for all permissions
         const allPermissions = [];
 
         // iterate each role from account
-        for (const index in account.permissions)
+        for (const index in account.dPermissions)
         {
             // avoid iterate all index, is the key that contain all permissions 
             if (index !== 'all')
             {
-                for (const permission of account.permissions[index])
+                for (const permission of account.dPermissions[index])
                 {
                     if (allPermissions.indexOf(permission) === -1) allPermissions.push(permission);
                 }
             }
         }
         // set all permissions
-        account.permissions['all'] = allPermissions;
+        account.dPermissions['all'] = allPermissions;
 
-        return account.permissions;
+        return account.dPermissions;
     }
 }
