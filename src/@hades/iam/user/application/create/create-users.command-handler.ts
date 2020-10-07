@@ -38,7 +38,7 @@ export class CreateUsersCommandHandler implements ICommandHandler<CreateUsersCom
                         mobile: new UserMobile(user.mobile),
                         langId: new UserLangId(user.langId),
                         username: new UserUsername(user.username),
-                        password: new UserPassword(user.password, {}, {haveToEncrypt: true}),
+                        password: new UserPassword(user.password, {}, { haveToEncrypt: true }),
                         rememberToken: new UserRememberToken(user.rememberToken),
                         data: new UserData(user.data),
                         

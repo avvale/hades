@@ -22,7 +22,7 @@ type IamUser
 input IamCreateUserInput
 {
     id: ID!
-    accountId: ID!
+    accountId: ID
     name: GraphQLString!
     surname: GraphQLString
     avatar: GraphQLString

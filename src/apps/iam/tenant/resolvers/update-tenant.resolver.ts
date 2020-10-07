@@ -1,5 +1,9 @@
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { IamUpdateTenantInput } from './../../../../graphql';
+import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
+import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -8,6 +12,8 @@ import { UpdateTenantCommand } from '@hades/iam/tenant/application/update/update
 import { FindTenantByIdQuery } from '@hades/iam/tenant/application/find/find-tenant-by-id.query';
 
 @Resolver()
+@Permissions('iam.tenant.update')
+@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
 export class UpdateTenantResolver
 {
     constructor(

@@ -9,8 +9,10 @@ export const permissions = [
 
     {id: '096ac555-09a8-4603-b082-5e1e1ad51db1',  name: 'iam.tenant.access',                        boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
     {id: '9b7cccff-689b-49dc-9b11-37f387accc12',  name: 'iam.tenant.list',                          boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
-    {id: '4bf07675-d824-4d87-8589-73f98adc1909',  name: 'iam.tenant.create',                        boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
     {id: '42ec287d-ea16-4a2f-9ad6-d2fe99304f18',  name: 'iam.tenant.get',                           boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
+    {id: '4bf07675-d824-4d87-8589-73f98adc1909',  name: 'iam.tenant.create',                        boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
+    {id: '0929febd-ad0f-4168-b342-0f2d055612a8',  name: 'iam.tenant.update',                        boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
+    {id: 'b909d1ef-b7aa-4354-b0e5-5cfed12a88d3',  name: 'iam.tenant.delete',                        boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
 
     {id: '1d7d1492-ed1c-477d-bce7-1f4106cc929e',  name: 'iam.permission.access',                    boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
     {id: 'e7a2e324-8b3d-46ca-94c8-dc527a8e6ffd',  name: 'iam.permission.list',                      boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},

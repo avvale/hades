@@ -1,5 +1,7 @@
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { IamCreateTenantInput } from './../../../../graphql';
+import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -8,6 +10,7 @@ import { CreateTenantCommand } from '@hades/iam/tenant/application/create/create
 import { FindTenantByIdQuery } from '@hades/iam/tenant/application/find/find-tenant-by-id.query';
 
 @Resolver()
+@UseGuards(AuthGraphQLJwtGuard)
 export class CreateTenantResolver
 {
     constructor(
