@@ -14,7 +14,7 @@ import {
 } from './../../domain/value-objects';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { OAuthRefreshToken } from './../../domain/refresh-token.aggregate';
-import { JwtToken } from '@hades/shared/domain/lib/hades.types';
+import { Jwt } from '@hades/shared/domain/lib/hades.types';
 
 @Injectable()
 export class CreateRefreshTokenService
@@ -33,8 +33,9 @@ export class CreateRefreshTokenService
     {
         // compose refresh token
         const momentExpiredRefreshToken = expiredRefreshToken.value ? Utils.now().add(expiredRefreshToken.value, 'seconds') : null
-        const refreshTokenDate: JwtToken = {
+        const refreshTokenDate: Jwt = {
             jit: id.value,
+            aci: accessTokenId.value,
             iss: 'Hades OAuth',
             iat: parseInt(Utils.now().format('X')),
             nbf: parseInt(Utils.now().format('X')),

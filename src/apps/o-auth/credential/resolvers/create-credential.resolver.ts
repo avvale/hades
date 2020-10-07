@@ -35,6 +35,7 @@ export class CreateCredentialResolver
         // if not exist application throw error
         if (!application) throw new UnauthorizedException();
 
+        // TODO, como determinar a que cliente se autentifica??
         // get client associated with this application
         const client = application.clients.find(client => client.id === user.account.clientId)
 
