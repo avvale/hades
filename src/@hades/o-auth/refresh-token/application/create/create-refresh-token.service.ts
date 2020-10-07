@@ -35,6 +35,7 @@ export class CreateRefreshTokenService
         const momentExpiredRefreshToken = expiredRefreshToken.value ? Utils.now().add(expiredRefreshToken.value, 'seconds') : null
         const refreshTokenDate: Jwt = {
             jit: id.value,
+            aci: accessTokenId.value,
             iss: 'Hades OAuth',
             iat: parseInt(Utils.now().format('X')),
             nbf: parseInt(Utils.now().format('X')),

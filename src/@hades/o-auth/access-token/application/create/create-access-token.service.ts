@@ -42,6 +42,7 @@ export class CreateAccessTokenService
         const momentExpiredAccessToken = expiredAccessToken.value ? Utils.now().add(expiredAccessToken.value, 'seconds') : null
         const accessTokenPayload: Jwt = {
             jit: id.value,
+            aci: accountId.value,
             iss: 'Hades OAuth',
             iat: parseInt(Utils.now().format('X')),
             nbf: parseInt(Utils.now().format('X')),
