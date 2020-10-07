@@ -61,7 +61,7 @@ export class SystemDto
         type        : String,
         description : 'technology [input here api field description]',
         example     : 'MULESOFT',
-        enum        : ['WSO_2','SAPPI','B_2_B','MULESOFT','SAPSCI']
+        enum        : ['WSO2','SAPPI','B2B','MULESOFT','SAPSCI']
     })
     technology: string;
     

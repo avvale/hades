@@ -60,8 +60,8 @@ export class UpdateSystemDto
     @ApiProperty({
         type        : String,
         description : 'technology [input here api field description]',
-        example     : 'WSO_2',
-        enum        : ['WSO_2','SAPPI','B_2_B','MULESOFT','SAPSCI']
+        example     : 'WSO2',
+        enum        : ['WSO2','SAPPI','B2B','MULESOFT','SAPSCI']
     })
     technology: string;
     
