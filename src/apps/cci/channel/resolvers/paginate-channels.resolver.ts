@@ -9,7 +9,9 @@ import * as _ from 'lodash';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginateChannelsQuery } from '@hades/cci/channel/application/paginate/paginate-channels.query';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
 import { Pagination } from './../../../../graphql';
+import { AccountResponse } from '@hades/iam/account/domain/account.response';
 
 @Resolver()
 @Permissions('iam.tenant.update')
@@ -21,21 +23,12 @@ export class PaginateChannelsResolver
     ) {}
 
     @Query('cciPaginateChannels')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement): Promise<Pagination>
+    async main(@CurrentAccount() account: AccountResponse, @Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement): Promise<Pagination>
     {
-        const constraint2 = _.merge(constraint, {
-            where: {
-                tenantId: 'a'
-            }
-        })
-        console.log(constraint2)
 
-        console.log(constraint)
-       /*  {
-            where: {
-                tenantId
-            }
-        } */
+        console.log(account);
+        
+
         return await this.queryBus.ask(new PaginateChannelsQuery(queryStatement, constraint));   
     }
 }
