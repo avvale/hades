@@ -1,6 +1,7 @@
-export interface JwtToken 
+export interface Jwt 
 {
-    jit: string;             // id from this token
+    jit: string;            // id from this token
+    aci: string;            // account id
     iss: string;            // name to identify who belong this token
     iat: number;            // timestamp when this token was issued
     nbf: number;            // token accepted not before this timestamp
