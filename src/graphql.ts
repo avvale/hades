@@ -81,6 +81,14 @@ export enum CciMessageOverviewExecutionType {
     DETAIL = "DETAIL"
 }
 
+export enum CciSystemTechnology {
+    WSO_2 = "WSO_2",
+    SAPPI = "SAPPI",
+    B_2_B = "B_2_B",
+    MULESOFT = "MULESOFT",
+    SAPSCI = "SAPSCI"
+}
+
 export enum IamAccountType {
     USER = "USER",
     SERVICE = "SERVICE"
@@ -677,6 +685,7 @@ export interface CciCreateSystemInput {
     version: GraphQLString;
     name: GraphQLString;
     environment: GraphQLString;
+    technology: CciSystemTechnology;
     isActive: GraphQLBoolean;
     cancelledAt?: GraphQLTimestamp;
 }
@@ -688,6 +697,7 @@ export interface CciUpdateSystemInput {
     version?: GraphQLString;
     name?: GraphQLString;
     environment?: GraphQLString;
+    technology?: CciSystemTechnology;
     isActive?: GraphQLBoolean;
     cancelledAt?: GraphQLTimestamp;
 }
@@ -706,8 +716,9 @@ export interface IamCreateAccountInput {
     email: GraphQLString;
     isActive: GraphQLBoolean;
     clientId?: string;
-    applicationCodes?: JSON;
-    permissions?: JSON;
+    dApplicationCodes?: JSON;
+    dPermissions?: JSON;
+    dTenants?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
@@ -720,8 +731,9 @@ export interface IamUpdateAccountInput {
     email?: GraphQLString;
     isActive?: GraphQLBoolean;
     clientId?: string;
-    applicationCodes?: JSON;
-    permissions?: JSON;
+    dApplicationCodes?: JSON;
+    dPermissions?: JSON;
+    dTenants?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
@@ -1485,6 +1497,7 @@ export interface CciSystem {
     version: GraphQLString;
     name: GraphQLString;
     environment: GraphQLString;
+    technology: CciSystemTechnology;
     isActive: GraphQLBoolean;
     cancelledAt?: GraphQLTimestamp;
     createdAt?: GraphQLTimestamp;
@@ -1504,8 +1517,9 @@ export interface IamAccount {
     email: GraphQLString;
     isActive: GraphQLBoolean;
     clientId: string;
-    applicationCodes: JSON;
-    permissions: JSON;
+    dApplicationCodes: JSON;
+    dPermissions: JSON;
+    dTenants: JSON;
     data?: JSON;
     roles?: IamRole[];
     tenants?: IamTenant[];
