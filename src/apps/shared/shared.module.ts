@@ -1,23 +1,23 @@
 import { Module } from '@nestjs/common';
-import { SharedProviders } from '@hades/shared/index';
 import { CqrsModule } from '@nestjs/cqrs';
+import { SharedProviders } from '@hades/shared/index';
 import { EnvironmentModule } from './modules/environment.module';
-import { JwtConfigModule } from './modules/jwt-config.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
     imports: [
+        AuthModule,
         CqrsModule,
-        EnvironmentModule,
-        JwtConfigModule
+        EnvironmentModule
     ],
     controllers: [],
     providers: [
         ...SharedProviders
     ],
     exports: [
+        AuthModule,
         CqrsModule,
         EnvironmentModule,
-        JwtConfigModule,
         ...SharedProviders
     ]
 })

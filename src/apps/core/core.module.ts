@@ -6,11 +6,10 @@ import { LoggerConfigModule } from './modules/logger/logger-config.module';
 
 @Module({
     imports: [
-        SharedModule,
         GraphQLConfigModule,
+        LoggerConfigModule,
         SequelizeConfigModule,
-        LoggerConfigModule
+        SharedModule
     ]
 })
-export class CoreModule 
-{}
+export class CoreModule {}
