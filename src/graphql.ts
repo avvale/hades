@@ -705,12 +705,13 @@ export interface IamCreateAccountInput {
     type: IamAccountType;
     email: GraphQLString;
     isActive: GraphQLBoolean;
-    clientId: string;
-    applicationCodes: JSON;
-    permissions: JSON;
+    clientId?: string;
+    applicationCodes?: JSON;
+    permissions?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
+    user?: IamCreateUserInput;
 }
 
 export interface IamUpdateAccountInput {
@@ -724,6 +725,7 @@ export interface IamUpdateAccountInput {
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
+    user?: IamUpdateUserInput;
 }
 
 export interface IamCreateBoundedContextInput {
@@ -794,7 +796,7 @@ export interface IamUpdateTenantInput {
 
 export interface IamCreateUserInput {
     id: string;
-    accountId: string;
+    accountId?: string;
     name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
@@ -1528,6 +1530,7 @@ export interface IamBoundedContext {
 export interface IamPermission {
     id: string;
     name: GraphQLString;
+    boundedContextId: string;
     boundedContext: IamBoundedContext;
     roles?: IamRole[];
     createdAt?: GraphQLTimestamp;
