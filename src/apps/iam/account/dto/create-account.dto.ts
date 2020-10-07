@@ -6,7 +6,7 @@ export class CreateAccountDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'e4621d72-9fde-4584-8339-fb219f70820d'
+        example     : 'a1116da9-e76d-41ab-a195-c0a8fc527e15'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateAccountDto
     @ApiProperty({
         type        : String,
         description : 'type [input here api field description]',
-        example     : 'SERVICE',
+        example     : 'USER',
         enum        : ['USER','SERVICE']
     })
     type: string;
@@ -25,7 +25,7 @@ export class CreateAccountDto
     @ApiProperty({
         type        : String,
         description : 'email [input here api field description]',
-        example     : 'xrktu51iyglj3928y65oppzw83951got8rhksen0yk01nw8pazromgq1jzwthc6r3bh6eu169cyc3jaexnp78382ybgrvso1f2no0txxkxj3u4bi148yurxn'
+        example     : 'hwhtuzpbwpj3i2mqayq3hdbxn1s00cln298xug9oy4yn15tzt0tn6i37st3203co89e5i0rpxwdomcajhhx2n6zrh5ye5l4bnzopewpamlxyr2au1p9r3qx6'
     })
     email: string;
     
@@ -43,7 +43,7 @@ export class CreateAccountDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : '336bfcb5-292b-4769-b559-8dbc72eeb4ac'
+        example     : '58cad0be-cb7c-4784-b485-8c8ff6e56414'
     })
     clientId: string;
     
@@ -51,19 +51,28 @@ export class CreateAccountDto
     
     @ApiProperty({
         type        : Object,
-        description : 'applicationCodes [input here api field description]',
+        description : 'dApplicationCodes [input here api field description]',
         example     : { "foo" : "bar" }
     })
-    applicationCodes: any;
+    dApplicationCodes: any;
     
     
     
     @ApiProperty({
         type        : Object,
-        description : 'permissions [input here api field description]',
+        description : 'dPermissions [input here api field description]',
         example     : { "foo" : "bar" }
     })
-    permissions: any;
+    dPermissions: any;
+    
+    
+    
+    @ApiProperty({
+        type        : Object,
+        description : 'dTenants [input here api field description]',
+        example     : { "foo" : "bar" }
+    })
+    dTenants: any;
     
     
     

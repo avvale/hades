@@ -1,5 +1,6 @@
 import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
 import { IamAccountType, IamCreateAccountInput } from './../../../../graphql';
+import { JwtService } from '@nestjs/jwt';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -10,7 +11,6 @@ import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-a
 import { FindAccessTokenByIdQuery } from '@hades/o-auth/access-token/application/find/find-access-token-by-id.query';
 import { FindClientQuery } from '@hades/o-auth/client/application/find/find-client.query';
 import { Jwt } from '@hades/shared/domain/lib/hades.types';
-import { JwtService } from '@nestjs/jwt';
 import { GetRolesQuery } from '@hades/iam/role/application/get/get-roles.query';
 import { Utils as AccountsUtils } from '@hades/iam/account/domain/lib/utils';
 import { Utils } from '@hades/shared/domain/lib/utils';
@@ -56,6 +56,7 @@ export class CreateAccountResolver
             accessToken.clientId,
             client.applications.map(application => application.code),
             AccountsUtils.createPermissions(roles),
+            payload.dTenants,
             payload.data,
             payload.roleIds,
             payload.tenantIds,

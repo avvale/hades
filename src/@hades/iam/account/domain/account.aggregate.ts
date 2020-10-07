@@ -5,8 +5,9 @@ import {
     AccountEmail,
     AccountIsActive,
     AccountClientId,
-    AccountApplicationCodes,
-    AccountPermissions,
+    AccountDApplicationCodes,
+    AccountDPermissions,
+    AccountDTenants,
     AccountData,
     AccountRoleIds,
     AccountTenantIds,
@@ -32,8 +33,9 @@ export class IamAccount extends AggregateRoot
     email: AccountEmail;
     isActive: AccountIsActive;
     clientId: AccountClientId;
-    applicationCodes: AccountApplicationCodes;
-    permissions: AccountPermissions;
+    dApplicationCodes: AccountDApplicationCodes;
+    dPermissions: AccountDPermissions;
+    dTenants: AccountDTenants;
     data: AccountData;
     roleIds: AccountRoleIds;
     tenantIds: AccountTenantIds;
@@ -50,7 +52,7 @@ export class IamAccount extends AggregateRoot
     roles: IamRole[];
     tenants: IamTenant[];
     
-    constructor(id?: AccountId, type?: AccountType, email?: AccountEmail, isActive?: AccountIsActive, clientId?: AccountClientId, applicationCodes?: AccountApplicationCodes, permissions?: AccountPermissions, data?: AccountData, roleIds?: AccountRoleIds, tenantIds?: AccountTenantIds, createdAt?: AccountCreatedAt, updatedAt?: AccountUpdatedAt, deletedAt?: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], )
+    constructor(id?: AccountId, type?: AccountType, email?: AccountEmail, isActive?: AccountIsActive, clientId?: AccountClientId, dApplicationCodes?: AccountDApplicationCodes, dPermissions?: AccountDPermissions, dTenants?: AccountDTenants, data?: AccountData, roleIds?: AccountRoleIds, tenantIds?: AccountTenantIds, createdAt?: AccountCreatedAt, updatedAt?: AccountUpdatedAt, deletedAt?: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], )
     {
         super();
         
@@ -59,8 +61,9 @@ export class IamAccount extends AggregateRoot
         this.email = email;
         this.isActive = isActive;
         this.clientId = clientId;
-        this.applicationCodes = applicationCodes;
-        this.permissions = permissions;
+        this.dApplicationCodes = dApplicationCodes;
+        this.dPermissions = dPermissions;
+        this.dTenants = dTenants;
         this.data = data;
         this.roleIds = roleIds;
         this.tenantIds = tenantIds;
@@ -79,9 +82,9 @@ export class IamAccount extends AggregateRoot
         
     }
 
-    static register (id: AccountId, type: AccountType, email: AccountEmail, isActive: AccountIsActive, clientId: AccountClientId, applicationCodes: AccountApplicationCodes, permissions: AccountPermissions, data: AccountData, roleIds: AccountRoleIds, tenantIds: AccountTenantIds, createdAt: AccountCreatedAt, updatedAt: AccountUpdatedAt, deletedAt: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], ): IamAccount
+    static register (id: AccountId, type: AccountType, email: AccountEmail, isActive: AccountIsActive, clientId: AccountClientId, dApplicationCodes: AccountDApplicationCodes, dPermissions: AccountDPermissions, dTenants: AccountDTenants, data: AccountData, roleIds: AccountRoleIds, tenantIds: AccountTenantIds, createdAt: AccountCreatedAt, updatedAt: AccountUpdatedAt, deletedAt: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], ): IamAccount
     {
-        return new IamAccount(id, type, email, isActive, clientId, applicationCodes, permissions, data, roleIds, tenantIds, createdAt, updatedAt, deletedAt, user, roles, tenants, );
+        return new IamAccount(id, type, email, isActive, clientId, dApplicationCodes, dPermissions, dTenants, data, roleIds, tenantIds, createdAt, updatedAt, deletedAt, user, roles, tenants, );
     }
 
     created(account: IamAccount): void
@@ -93,8 +96,9 @@ export class IamAccount extends AggregateRoot
                 account.email.value,
                 account.isActive.value,
                 account.clientId.value,
-                account.applicationCodes.value,
-                account.permissions.value,
+                account.dApplicationCodes.value,
+                account.dPermissions.value,
+                account.dTenants.value,
                 account.data?.value,
                 account.roleIds?.value,
                 account.tenantIds?.value,
@@ -115,8 +119,9 @@ export class IamAccount extends AggregateRoot
                 account.email?.value,
                 account.isActive?.value,
                 account.clientId?.value,
-                account.applicationCodes?.value,
-                account.permissions?.value,
+                account.dApplicationCodes?.value,
+                account.dPermissions?.value,
+                account.dTenants?.value,
                 account.data?.value,
                 account.roleIds?.value,
                 account.tenantIds?.value,
@@ -137,8 +142,9 @@ export class IamAccount extends AggregateRoot
                 account.email.value,
                 account.isActive.value,
                 account.clientId.value,
-                account.applicationCodes.value,
-                account.permissions.value,
+                account.dApplicationCodes.value,
+                account.dPermissions.value,
+                account.dTenants.value,
                 account.data?.value,
                 account.roleIds?.value,
                 account.tenantIds?.value,
@@ -158,8 +164,9 @@ export class IamAccount extends AggregateRoot
             email: this.email.value,
             isActive: this.isActive.value,
             clientId: this.clientId.value,
-            applicationCodes: this.applicationCodes.value,
-            permissions: this.permissions.value,
+            dApplicationCodes: this.dApplicationCodes.value,
+            dPermissions: this.dPermissions.value,
+            dTenants: this.dTenants.value,
             data: this.data?.value,
             roleIds: this.roleIds?.value,
             tenantIds: this.tenantIds?.value,
