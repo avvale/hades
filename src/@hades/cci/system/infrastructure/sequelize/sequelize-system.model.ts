@@ -96,6 +96,19 @@ export class CciSystemModel extends Model<CciSystemModel>
         
     })
     environment: string;
+
+
+
+
+    @Column({
+        field: 'technology',
+        
+        allowNull: false,
+        type: DataTypes.ENUM('WSO_2','SAPPI','B_2_B','MULESOFT','SAPSCI'),
+        
+        
+    })
+    technology: string;
         
              
         

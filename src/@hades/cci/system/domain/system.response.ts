@@ -11,6 +11,7 @@ export class SystemResponse
         public readonly version: string,
         public readonly name: string,
         public readonly environment: string,
+        public readonly technology: string,
         public readonly isActive: boolean,
         public readonly cancelledAt: string,
         public readonly createdAt: string,

@@ -25,6 +25,7 @@ export class CreateSystemResolver
             payload.version,
             payload.name,
             payload.environment,
+            payload.technology,
             payload.isActive,
             payload.cancelledAt,
             

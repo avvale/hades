@@ -30,6 +30,7 @@ export class UpdateSystemController
             payload.version,
             payload.name,
             payload.environment,
+            payload.technology,
             payload.isActive,
             payload.cancelledAt,
             

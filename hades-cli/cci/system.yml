@@ -29,6 +29,15 @@ aggregateProperties:
   - name: environment
     type: varchar
     nullable: false
+  - name: technology
+    type: enum
+    enumOptions:
+      - WSO_2
+      - SAPPI
+      - B_2_B
+      - MULESOFT
+      - SAPSCI
+    nullable: false
   - name: is_active
     type: boolean
     nullable: false

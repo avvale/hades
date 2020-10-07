@@ -11,6 +11,7 @@ import {
     SystemVersion,
     SystemName,
     SystemEnvironment,
+    SystemTechnology,
     SystemIsActive,
     SystemCancelledAt
     
@@ -63,6 +64,7 @@ describe('CreateSystemService', () =>
                 new SystemVersion(systems[0].version),
                 new SystemName(systems[0].name),
                 new SystemEnvironment(systems[0].environment),
+                new SystemTechnology(systems[0].technology),
                 new SystemIsActive(systems[0].isActive),
                 new SystemCancelledAt(systems[0].cancelledAt),
                 

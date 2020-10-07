@@ -1,15 +1,17 @@
+
 enum CciSystemTechnology {
     WSO_2
     SAPPI
     B_2_B
     MULESOFT
     SAPSCI
+        
 }
 
 type CciSystem
 {
     id: ID!
-    tenant: IamTenant!
+    tenant: AdminTenant!
     tenantCode: GraphQLString!
     version: GraphQLString!
     name: GraphQLString!
@@ -20,6 +22,7 @@ type CciSystem
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
+    
 }
 
 input CciCreateSystemInput
@@ -33,6 +36,7 @@ input CciCreateSystemInput
     technology: CciSystemTechnology!
     isActive: GraphQLBoolean!
     cancelledAt: GraphQLTimestamp
+    
 }
 
 input CciUpdateSystemInput
@@ -46,6 +50,7 @@ input CciUpdateSystemInput
     technology: CciSystemTechnology
     isActive: GraphQLBoolean
     cancelledAt: GraphQLTimestamp
+    
 }
 
 type Query 

@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "9fd2b950-4c31-46ea-8183-9004f224cc56",
+		"name"          : "@hades - cci/system",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - cciCreateSystem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciCreateSystemInput!)\n{\n\tcciCreateSystem (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf\", \n\t\t\"tenantId\": \"178616d5-3730-44e7-b381-c318a0f8741c\", \n\t\t\"tenantCode\": \"gr3o6lqh7luvpqazcexnzqx2u7bcpzybuu4xa6y3nz8sldk6ac\", \n\t\t\"version\": \"v\", \n\t\t\"name\": \"e\", \n\t\t\"environment\": \"l\", \n\t\t\"technology\": \"B_2_B\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 05:46:58\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciCreateSystems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[CciCreateSystemInput]!)\n{\n\tcciCreateSystems (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"234fa088-3ef7-493d-9777-c658ee3c494e\", \n\t\t\t\"tenantId\": \"cfd12546-5748-4fc1-9772-a6a9d187c70d\", \n\t\t\t\"tenantCode\": \"65a7ujbm240mmj7x3ddan0j2jyptcb7kvcx0mbj9naj4lwvcv2\", \n\t\t\t\"version\": \"f\", \n\t\t\t\"name\": \"l\", \n\t\t\t\"environment\": \"h\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 02:53:01\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cb6aaac1-3bf4-4974-b3d1-32d78e1c4c66\", \n\t\t\t\"tenantId\": \"4c893423-aa55-40c6-952a-693dba4ab373\", \n\t\t\t\"tenantCode\": \"it3r3hum3pkn9x8oo51ilbt14uk9zj0zgcj1105mggsmszf54c\", \n\t\t\t\"version\": \"k\", \n\t\t\t\"name\": \"8\", \n\t\t\t\"environment\": \"d\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 04:40:52\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"eee66867-c32b-432f-9ba2-aaba4bc18d7a\", \n\t\t\t\"tenantId\": \"7e539a61-3fb3-4c25-9a65-5ebebccf6aa2\", \n\t\t\t\"tenantCode\": \"5bs0can240kjsnmymfs0rcrx228pnlhcpb28xl2tdjsdba9g8o\", \n\t\t\t\"version\": \"6\", \n\t\t\t\"name\": \"5\", \n\t\t\t\"environment\": \"i\", \n\t\t\t\"technology\": \"MULESOFT\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 11:33:50\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8787dbd9-c930-4160-8331-54b2a0a24af2\", \n\t\t\t\"tenantId\": \"85a17f6b-63a3-43f7-901e-cbbe06f01f01\", \n\t\t\t\"tenantCode\": \"m30fisytnf7lexshehlpohdfxvfbyxi04n5wa7kh3jaqcgpot8\", \n\t\t\t\"version\": \"i\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"environment\": \"o\", \n\t\t\t\"technology\": \"WSO_2\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-06 22:11:18\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0a915521-dcd4-4df6-99a3-cb737d4e3345\", \n\t\t\t\"tenantId\": \"889ba60f-0516-40cb-ae10-3546c715e03e\", \n\t\t\t\"tenantCode\": \"kr7ifex08avs66d4jt0ju3znv1vffmth9hhqqx3amaurhrljpk\", \n\t\t\t\"version\": \"y\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"environment\": \"q\", \n\t\t\t\"technology\": \"B_2_B\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-06 23:28:02\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ca007d3d-c99b-415d-9ecc-6042f49d8302\", \n\t\t\t\"tenantId\": \"0d67aab3-76bf-4e6f-b113-f6e34cd90cb7\", \n\t\t\t\"tenantCode\": \"s68q50l8k7rgn19r6quwvi3gj1n0z3nqqgtw275kuliq83vc7v\", \n\t\t\t\"version\": \"c\", \n\t\t\t\"name\": \"9\", \n\t\t\t\"environment\": \"5\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 09:59:33\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2ec0085c-9738-4aec-b8b9-db47a9ca71c2\", \n\t\t\t\"tenantId\": \"2bb60c32-39a5-43ac-9712-2b63785024eb\", \n\t\t\t\"tenantCode\": \"ty6ao27mkhnfu4k0w3hy9uwo73205sxgl3ccabk745khd4c6sl\", \n\t\t\t\"version\": \"k\", \n\t\t\t\"name\": \"m\", \n\t\t\t\"environment\": \"6\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 18:37:42\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e90745dd-937c-47df-92ed-c34555bb12f3\", \n\t\t\t\"tenantId\": \"0ce76d2e-297f-4cc3-a49c-dda3d84e2482\", \n\t\t\t\"tenantCode\": \"fi2ghy5ijt2ndfegqmv2pa1vpl1ggkqynoq8hcelx6rude9b0o\", \n\t\t\t\"version\": \"b\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"environment\": \"8\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 07:37:15\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ad15541c-8d73-46e2-bc84-f62652d069e3\", \n\t\t\t\"tenantId\": \"3cdc2d7c-4a9d-4a47-a27e-5f8c2141c8c9\", \n\t\t\t\"tenantCode\": \"6awuhfmp27ongzgn0qxe10uhhfn8brriqu4ndg96ab1gc4xh4j\", \n\t\t\t\"version\": \"8\", \n\t\t\t\"name\": \"m\", \n\t\t\t\"environment\": \"v\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 12:40:00\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d775b0e4-32fe-4790-bae8-e71ec98ce89c\", \n\t\t\t\"tenantId\": \"1e37a88b-fc42-4db8-b35f-49e89a736748\", \n\t\t\t\"tenantCode\": \"7fu0939ciyvx0u7zo10t99umljsmlkxsyrwsanstckkq08pk6t\", \n\t\t\t\"version\": \"3\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"environment\": \"i\", \n\t\t\t\"technology\": \"B_2_B\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 21:13:28\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"628433c5-4e29-4e4a-87c1-ade9db19d8f8\", \n\t\t\t\"tenantId\": \"f4f6ff6a-4e5e-4697-a428-cade9875c81d\", \n\t\t\t\"tenantCode\": \"mqpi2fd91vato3choujojtd646lzsyjpo8gugs59cv6xcz7yab\", \n\t\t\t\"version\": \"k\", \n\t\t\t\"name\": \"e\", \n\t\t\t\"environment\": \"n\", \n\t\t\t\"technology\": \"WSO_2\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 01:54:17\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"636c680e-f4ff-45e4-9a69-2dcec0615317\", \n\t\t\t\"tenantId\": \"4b2ce03d-b894-40ae-a52a-c32e809e1026\", \n\t\t\t\"tenantCode\": \"ltpxaf2nhx8v49cnf62ms550bhiyffhhu5qnkc42qp2ldlb7y3\", \n\t\t\t\"version\": \"y\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"environment\": \"d\", \n\t\t\t\"technology\": \"MULESOFT\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 07:15:26\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f70ebfde-1c4b-4133-b636-db5b4325b345\", \n\t\t\t\"tenantId\": \"1294f04f-c76e-4127-bd47-aebc7c879f0e\", \n\t\t\t\"tenantCode\": \"hzlfefrfuw561apujdfxknq72dylxqamnayea96vdh2xacqp11\", \n\t\t\t\"version\": \"0\", \n\t\t\t\"name\": \"o\", \n\t\t\t\"environment\": \"x\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 20:47:23\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f60ee8ad-edf1-4142-ba13-d20e7b2394bd\", \n\t\t\t\"tenantId\": \"cc10c90d-292b-4c51-a4cd-9d520e3c7877\", \n\t\t\t\"tenantCode\": \"8apl4z2xy6zs6km32o1v67mjelumc24hgisiimg0frdyydrfo7\", \n\t\t\t\"version\": \"b\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"environment\": \"8\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 08:39:28\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e24941b0-7ef1-4230-b5f9-f17d459b12b9\", \n\t\t\t\"tenantId\": \"45045694-70f3-4e5c-b4b4-e10118a0945e\", \n\t\t\t\"tenantCode\": \"k19ciihzhopdkgsoflmhu4tyfqn68vo9kmfxsteepef6uymlxq\", \n\t\t\t\"version\": \"a\", \n\t\t\t\"name\": \"c\", \n\t\t\t\"environment\": \"0\", \n\t\t\t\"technology\": \"WSO_2\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-06 23:22:22\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3dc6bcb3-c7ff-46b7-a193-1136827abd14\", \n\t\t\t\"tenantId\": \"288a33fc-50a9-4fe1-93ba-ae861fc1ff46\", \n\t\t\t\"tenantCode\": \"hw8wu37qhbbg2byhnrhuc1yej92s00sg5vjt38o5e5zxrw3i6u\", \n\t\t\t\"version\": \"h\", \n\t\t\t\"name\": \"x\", \n\t\t\t\"environment\": \"f\", \n\t\t\t\"technology\": \"B_2_B\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 03:06:21\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9970d744-5d0e-4536-8301-9d6fc38c74ac\", \n\t\t\t\"tenantId\": \"31eacaad-7e32-460d-a0f4-9cc5a0f75614\", \n\t\t\t\"tenantCode\": \"6vr6mge7yt6t18utdxx2ep640ylklte5j0sdstyaq5ks56dego\", \n\t\t\t\"version\": \"i\", \n\t\t\t\"name\": \"6\", \n\t\t\t\"environment\": \"n\", \n\t\t\t\"technology\": \"B_2_B\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 13:23:17\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1fa1609d-2bc9-4f13-90f1-d337bf35c53d\", \n\t\t\t\"tenantId\": \"e8d58518-f4bd-450f-be1e-45ac78308bdd\", \n\t\t\t\"tenantCode\": \"de67lx3jt910gc5x6ngng1i48arqi680u3b29vhi4ifyvzfui7\", \n\t\t\t\"version\": \"b\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"environment\": \"v\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 06:03:51\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"63da8764-ae7d-4c62-88f4-46b4cb128749\", \n\t\t\t\"tenantId\": \"4bf6dc98-903c-4bff-ac33-e9fd069c9c6c\", \n\t\t\t\"tenantCode\": \"x9tvp4ajlgm60yrbkt387taipx2va4k58omdhurxh4wil24x89\", \n\t\t\t\"version\": \"n\", \n\t\t\t\"name\": \"1\", \n\t\t\t\"environment\": \"t\", \n\t\t\t\"technology\": \"WSO_2\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 08:32:06\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ede7c350-b58d-4396-a726-bffe98d89dbf\", \n\t\t\t\"tenantId\": \"e7b4c310-cae9-4e17-9f07-ea0cef7027dc\", \n\t\t\t\"tenantCode\": \"97xs6031awgzvyv8o9td5kwnkiy35z9cvyl1oc3ym8oidmd5w3\", \n\t\t\t\"version\": \"0\", \n\t\t\t\"name\": \"0\", \n\t\t\t\"environment\": \"4\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 15:51:40\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciPaginateSystems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tcciPaginateSystems (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciGetSystems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciGetSystems (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindSystem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciFindSystem (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindSystemById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tcciFindSystemById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciUpdateSystem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciUpdateSystemInput!)\n{\n\tcciUpdateSystem (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf\", \n\t\t\"tenantId\": \"178616d5-3730-44e7-b381-c318a0f8741c\", \n\t\t\"tenantCode\": \"5djr8rz7xw31f360rnn1s2fiiblhwi1e0hqlpaz2yp6th3bybp\", \n\t\t\"version\": \"5\", \n\t\t\"name\": \"4\", \n\t\t\"environment\": \"t\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 06:31:11\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteSystemById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tcciDeleteSystemById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteSystems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tcciDeleteSystems (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/system",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf\", \n\t\"tenantId\": \"178616d5-3730-44e7-b381-c318a0f8741c\", \n\t\"tenantCode\": \"v90rg5xd8o6ozvokbhod6bqk2b32lhq1it7iwt8uwjz686i0a8\", \n\t\"version\": \"j\", \n\t\"name\": \"4\", \n\t\"environment\": \"c\", \n\t\"technology\": \"B_2_B\", \n\t\"isActive\": true, \n\t\"cancelledAt\": \"2020-10-07 01:15:38\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cci/system",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cci",
+						"system"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/systems",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"69e54744-d107-422d-8001-82613c87234a\", \n\t\t\"tenantId\": \"c4762126-98e2-464f-8e6c-d2f66b2d7858\", \n\t\t\"tenantCode\": \"7jbsa2pnooqitphoczb1gfvsayhbrhcza491ndh18vnf1t2xe5\", \n\t\t\"version\": \"g\", \n\t\t\"name\": \"1\", \n\t\t\"environment\": \"e\", \n\t\t\"technology\": \"B_2_B\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 17:20:00\"\n\t}, \n\t{\n\t\t\"id\": \"4dfd85a9-05d5-4afc-9011-ed96105fa62c\", \n\t\t\"tenantId\": \"d06286f3-ed3a-437a-94fc-195d56066f47\", \n\t\t\"tenantCode\": \"1q8tjcxtcyodf88w3lss5c18xxk1jkw5et3q394u30k401tl9s\", \n\t\t\"version\": \"7\", \n\t\t\"name\": \"l\", \n\t\t\"environment\": \"5\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 21:40:12\"\n\t}, \n\t{\n\t\t\"id\": \"bb80b881-a555-4b31-b4c2-719e80df204b\", \n\t\t\"tenantId\": \"bb78b401-6f2a-4c35-9cc1-28426274d41a\", \n\t\t\"tenantCode\": \"o8vtms6lem0037x58qq9xawuk43fothh293543s85akpcs562v\", \n\t\t\"version\": \"4\", \n\t\t\"name\": \"h\", \n\t\t\"environment\": \"m\", \n\t\t\"technology\": \"WSO_2\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 17:56:44\"\n\t}, \n\t{\n\t\t\"id\": \"37e03aef-2742-4cfa-adfe-ea404e93e9d7\", \n\t\t\"tenantId\": \"14368eef-1176-4a74-b139-bfd4707880ce\", \n\t\t\"tenantCode\": \"54il45kqcx0t0sufsty8yp6w9dul9abnie8o8vapae8gliu077\", \n\t\t\"version\": \"n\", \n\t\t\"name\": \"9\", \n\t\t\"environment\": \"8\", \n\t\t\"technology\": \"MULESOFT\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 07:01:23\"\n\t}, \n\t{\n\t\t\"id\": \"0d8318fb-e273-45bf-98ff-a21853012792\", \n\t\t\"tenantId\": \"7ff1678e-2ca3-4961-97a7-c8dc57454f30\", \n\t\t\"tenantCode\": \"sna1wj4eu5nuqwmplhi29qmnkqf37b2m5y01nan4pis136mvlc\", \n\t\t\"version\": \"5\", \n\t\t\"name\": \"t\", \n\t\t\"environment\": \"h\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 18:44:01\"\n\t}, \n\t{\n\t\t\"id\": \"22ad0d0d-0edb-4cf1-ad5c-d73cbe2ac6b3\", \n\t\t\"tenantId\": \"857f24cd-9926-4bc1-aac5-832bb251b235\", \n\t\t\"tenantCode\": \"ss31ga0p8hj5xgj14rdt767msczhyi5oqs5g6mcje2vb5m39ic\", \n\t\t\"version\": \"b\", \n\t\t\"name\": \"w\", \n\t\t\"environment\": \"r\", \n\t\t\"technology\": \"B_2_B\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 00:44:04\"\n\t}, \n\t{\n\t\t\"id\": \"1cba2e5a-4bf9-4c7a-bc22-f9ef1c20172a\", \n\t\t\"tenantId\": \"b73a795f-d2ce-4c7a-bf5d-5ec1a6034e6f\", \n\t\t\"tenantCode\": \"w1j78vvmnlbq52ocswexi4j8ndcscc4p88bn10ec4zzjp61udz\", \n\t\t\"version\": \"l\", \n\t\t\"name\": \"n\", \n\t\t\"environment\": \"w\", \n\t\t\"technology\": \"MULESOFT\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 18:53:54\"\n\t}, \n\t{\n\t\t\"id\": \"930514fc-30ee-4562-abf6-2b98e0242773\", \n\t\t\"tenantId\": \"7f1808f3-5a14-4af5-868c-264669d11cff\", \n\t\t\"tenantCode\": \"56emtac80rg4a52xfcna4kgumun0n9p99dqplymme5eafeqovy\", \n\t\t\"version\": \"5\", \n\t\t\"name\": \"g\", \n\t\t\"environment\": \"a\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 08:55:19\"\n\t}, \n\t{\n\t\t\"id\": \"026a5091-3940-4a56-a2a4-8b5e4a8a28b8\", \n\t\t\"tenantId\": \"79c7fe66-b0f0-4f0c-b218-68b9777ee808\", \n\t\t\"tenantCode\": \"1b9h7t2xnqz0vp6s5li76lel3ge7b0avxgtschxg5yu8hrpvtm\", \n\t\t\"version\": \"g\", \n\t\t\"name\": \"k\", \n\t\t\"environment\": \"f\", \n\t\t\"technology\": \"B_2_B\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 16:02:47\"\n\t}, \n\t{\n\t\t\"id\": \"0b9bbd2a-3417-4426-8a98-838f73e46d39\", \n\t\t\"tenantId\": \"ee7d5fa2-20c6-4402-9ce7-bb2fa30a7b88\", \n\t\t\"tenantCode\": \"frfoqibk70orfo4athvzmmp00l8wb7qm8qmhmgdw06epac9aiu\", \n\t\t\"version\": \"h\", \n\t\t\"name\": \"x\", \n\t\t\"environment\": \"q\", \n\t\t\"technology\": \"WSO_2\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 08:33:00\"\n\t}, \n\t{\n\t\t\"id\": \"12b56119-5200-4da0-9dcf-a899557d4d65\", \n\t\t\"tenantId\": \"ad9726ab-31bc-4404-bfdd-7e4aaabdcbca\", \n\t\t\"tenantCode\": \"4n63nfj6qvf5sr5jolgpsg0t7l895obtpbof32k9z1vc3k1tce\", \n\t\t\"version\": \"u\", \n\t\t\"name\": \"l\", \n\t\t\"environment\": \"v\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 19:36:05\"\n\t}, \n\t{\n\t\t\"id\": \"e5083b4d-4b50-4e4e-8b28-b925f8b43f37\", \n\t\t\"tenantId\": \"d4d1024c-7138-4134-8163-9fe425715855\", \n\t\t\"tenantCode\": \"wmjkwaaicx4xd9re9yqihm2wt7izsa5mp8iptrup43pbmxa42t\", \n\t\t\"version\": \"h\", \n\t\t\"name\": \"s\", \n\t\t\"environment\": \"1\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 05:15:31\"\n\t}, \n\t{\n\t\t\"id\": \"374963bd-cd5a-4a2d-aa47-97f3cbbc767f\", \n\t\t\"tenantId\": \"3ef12c9f-8037-4b76-9acd-c53b33ab8dff\", \n\t\t\"tenantCode\": \"wd2ue5sio2bz6p45ymyqq6yi2vioxjtaalxts0gvffawos3qkw\", \n\t\t\"version\": \"b\", \n\t\t\"name\": \"w\", \n\t\t\"environment\": \"t\", \n\t\t\"technology\": \"B_2_B\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 16:18:24\"\n\t}, \n\t{\n\t\t\"id\": \"4dae9d89-0326-432e-9b11-ee1bd0e60be8\", \n\t\t\"tenantId\": \"ca30dbbd-4029-4373-a6ad-b328b2179666\", \n\t\t\"tenantCode\": \"cbq4adbx3guofv9nraro7rvhznyb1zeu5l2d5w86td0xv8os7t\", \n\t\t\"version\": \"d\", \n\t\t\"name\": \"q\", \n\t\t\"environment\": \"k\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 10:53:26\"\n\t}, \n\t{\n\t\t\"id\": \"d799edb3-6bf6-4108-be3f-77bffa476849\", \n\t\t\"tenantId\": \"c292feb9-264f-414d-894f-9d57d9b689de\", \n\t\t\"tenantCode\": \"p6nrq5riw0l1e2v9z9x5qahyzkx7dsv1dfbyyx22cbt0e1u4qp\", \n\t\t\"version\": \"w\", \n\t\t\"name\": \"t\", \n\t\t\"environment\": \"p\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 02:03:34\"\n\t}, \n\t{\n\t\t\"id\": \"38d6a727-edfb-4b27-9bb6-fcba56e6d46d\", \n\t\t\"tenantId\": \"31224f2e-9fd6-42d9-b0ba-7670bb3308ba\", \n\t\t\"tenantCode\": \"abgnahljexufsjwk9vxvh19grd4fqo8hwxfis9m4mz06cfhz8y\", \n\t\t\"version\": \"0\", \n\t\t\"name\": \"u\", \n\t\t\"environment\": \"5\", \n\t\t\"technology\": \"MULESOFT\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 07:30:32\"\n\t}, \n\t{\n\t\t\"id\": \"0f05ab17-6c06-40d6-9b90-cae463ca88aa\", \n\t\t\"tenantId\": \"cea86683-3844-45d9-86bd-2c66cd765895\", \n\t\t\"tenantCode\": \"ebucxcbem2grs2h142ez14bo8t2kut2metrly97e7fv26mh52k\", \n\t\t\"version\": \"e\", \n\t\t\"name\": \"l\", \n\t\t\"environment\": \"c\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 14:01:47\"\n\t}, \n\t{\n\t\t\"id\": \"7facd9e1-9cf2-44ba-9054-4e3cc96cbf16\", \n\t\t\"tenantId\": \"98967c80-696b-464d-8c81-c24da8abe69e\", \n\t\t\"tenantCode\": \"gku0m97r2k6d1m5vodbpivofpn7791q8z8715076oy5xy8wlha\", \n\t\t\"version\": \"6\", \n\t\t\"name\": \"b\", \n\t\t\"environment\": \"3\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-06 22:30:50\"\n\t}, \n\t{\n\t\t\"id\": \"40d36afa-5682-4ecd-82b2-e4ede1a18509\", \n\t\t\"tenantId\": \"74a630f9-498d-4ff0-b456-36846979a7b5\", \n\t\t\"tenantCode\": \"070ecot1jga56vhoqbnenoed9ui77zk8ehyz9f0pkue6m2px4o\", \n\t\t\"version\": \"i\", \n\t\t\"name\": \"4\", \n\t\t\"environment\": \"g\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 20:01:02\"\n\t}, \n\t{\n\t\t\"id\": \"4e2fbcdc-ff84-4084-a00a-dd1636ac07dc\", \n\t\t\"tenantId\": \"bb626514-7ad3-467c-ac68-d6281c826951\", \n\t\t\"tenantCode\": \"awsxgil35p7bpu1fbi339ijjz5y57nvzlif9gtk75r1pktcvfo\", \n\t\t\"version\": \"3\", \n\t\t\"name\": \"7\", \n\t\t\"environment\": \"2\", \n\t\t\"technology\": \"WSO_2\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 02:44:04\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cci/systems",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cci",
+						"systems"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/systems/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cci/systems/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cci",
+                        "systems",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/systems",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cci/systems",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cci",
+						"systems"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/system",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cci/system",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cci",
+						"system"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/system/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cci/system/ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cci",
+						"system",
+						"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/system",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf\", \n\t\"tenantId\": \"178616d5-3730-44e7-b381-c318a0f8741c\", \n\t\"tenantCode\": \"bfn5gzors8t909vr997f0bsw6wi1ldlooqeif4xpoqs0ygq0xi\", \n\t\"version\": \"u\", \n\t\"name\": \"x\", \n\t\"environment\": \"c\", \n\t\"technology\": \"SAPPI\", \n\t\"isActive\": false, \n\t\"cancelledAt\": \"2020-10-07 07:05:11\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cci/system",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cci",
+						"system"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/system/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cci/system/ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cci",
+						"system",
+						"ff8a25c9-6b2f-426d-8bfe-8078ef29dfcf"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - cci/systems",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cci/systems",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cci",
+						"systems"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "62a1696c-3955-4f21-a930-5dbcd8bee252",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
