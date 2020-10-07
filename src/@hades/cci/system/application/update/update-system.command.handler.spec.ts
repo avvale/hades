@@ -46,6 +46,7 @@ describe('UpdateSystemCommandHandler', () =>
                     systems[0].version,
                     systems[0].name,
                     systems[0].environment,
+                    systems[0].technology,
                     systems[0].isActive,
                     systems[0].cancelledAt,
                     

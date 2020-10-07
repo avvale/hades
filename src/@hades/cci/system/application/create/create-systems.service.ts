@@ -8,6 +8,7 @@ import {
     SystemVersion,
     SystemName,
     SystemEnvironment,
+    SystemTechnology,
     SystemIsActive,
     SystemCancelledAt,
     SystemCreatedAt,
@@ -35,6 +36,7 @@ export class CreateSystemsService
             version: SystemVersion,
             name: SystemName,
             environment: SystemEnvironment,
+            technology: SystemTechnology,
             isActive: SystemIsActive,
             cancelledAt: SystemCancelledAt,
             
@@ -49,6 +51,7 @@ export class CreateSystemsService
             system.version,
             system.name,
             system.environment,
+            system.technology,
             system.isActive,
             system.cancelledAt,
             new SystemCreatedAt(Utils.nowTimestamp()),

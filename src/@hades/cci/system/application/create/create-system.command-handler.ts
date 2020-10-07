@@ -8,6 +8,7 @@ import {
     SystemVersion,
     SystemName,
     SystemEnvironment,
+    SystemTechnology,
     SystemIsActive,
     SystemCancelledAt
     
@@ -30,6 +31,7 @@ export class CreateSystemCommandHandler implements ICommandHandler<CreateSystemC
             new SystemVersion(command.version),
             new SystemName(command.name),
             new SystemEnvironment(command.environment),
+            new SystemTechnology(command.technology),
             new SystemIsActive(command.isActive),
             new SystemCancelledAt(command.cancelledAt),
             

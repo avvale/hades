@@ -6,6 +6,7 @@ import {
     SystemVersion,
     SystemName,
     SystemEnvironment,
+    SystemTechnology,
     SystemIsActive,
     SystemCancelledAt,
     SystemCreatedAt,
@@ -28,6 +29,7 @@ export class CciSystem extends AggregateRoot
     version: SystemVersion;
     name: SystemName;
     environment: SystemEnvironment;
+    technology: SystemTechnology;
     isActive: SystemIsActive;
     cancelledAt: SystemCancelledAt;
     createdAt: SystemCreatedAt;
@@ -39,7 +41,7 @@ export class CciSystem extends AggregateRoot
     
     
     
-    constructor(id?: SystemId, tenantId?: SystemTenantId, tenantCode?: SystemTenantCode, version?: SystemVersion, name?: SystemName, environment?: SystemEnvironment, isActive?: SystemIsActive, cancelledAt?: SystemCancelledAt, createdAt?: SystemCreatedAt, updatedAt?: SystemUpdatedAt, deletedAt?: SystemDeletedAt, tenant?: IamTenant, )
+    constructor(id?: SystemId, tenantId?: SystemTenantId, tenantCode?: SystemTenantCode, version?: SystemVersion, name?: SystemName, environment?: SystemEnvironment, technology?: SystemTechnology, isActive?: SystemIsActive, cancelledAt?: SystemCancelledAt, createdAt?: SystemCreatedAt, updatedAt?: SystemUpdatedAt, deletedAt?: SystemDeletedAt, tenant?: IamTenant, )
     {
         super();
         
@@ -49,6 +51,7 @@ export class CciSystem extends AggregateRoot
         this.version = version;
         this.name = name;
         this.environment = environment;
+        this.technology = technology;
         this.isActive = isActive;
         this.cancelledAt = cancelledAt;
         this.createdAt = createdAt;
@@ -62,9 +65,9 @@ export class CciSystem extends AggregateRoot
         
     }
 
-    static register (id: SystemId, tenantId: SystemTenantId, tenantCode: SystemTenantCode, version: SystemVersion, name: SystemName, environment: SystemEnvironment, isActive: SystemIsActive, cancelledAt: SystemCancelledAt, createdAt: SystemCreatedAt, updatedAt: SystemUpdatedAt, deletedAt: SystemDeletedAt, tenant?: IamTenant, ): CciSystem
+    static register (id: SystemId, tenantId: SystemTenantId, tenantCode: SystemTenantCode, version: SystemVersion, name: SystemName, environment: SystemEnvironment, technology: SystemTechnology, isActive: SystemIsActive, cancelledAt: SystemCancelledAt, createdAt: SystemCreatedAt, updatedAt: SystemUpdatedAt, deletedAt: SystemDeletedAt, tenant?: IamTenant, ): CciSystem
     {
-        return new CciSystem(id, tenantId, tenantCode, version, name, environment, isActive, cancelledAt, createdAt, updatedAt, deletedAt, tenant, );
+        return new CciSystem(id, tenantId, tenantCode, version, name, environment, technology, isActive, cancelledAt, createdAt, updatedAt, deletedAt, tenant, );
     }
 
     created(system: CciSystem): void
@@ -77,6 +80,7 @@ export class CciSystem extends AggregateRoot
                 system.version.value,
                 system.name.value,
                 system.environment.value,
+                system.technology.value,
                 system.isActive.value,
                 system.cancelledAt?.value,
                 system.createdAt?.value,
@@ -97,6 +101,7 @@ export class CciSystem extends AggregateRoot
                 system.version?.value,
                 system.name?.value,
                 system.environment?.value,
+                system.technology?.value,
                 system.isActive?.value,
                 system.cancelledAt?.value,
                 system.createdAt?.value,
@@ -117,6 +122,7 @@ export class CciSystem extends AggregateRoot
                 system.version.value,
                 system.name.value,
                 system.environment.value,
+                system.technology.value,
                 system.isActive.value,
                 system.cancelledAt?.value,
                 system.createdAt?.value,
@@ -136,6 +142,7 @@ export class CciSystem extends AggregateRoot
             version: this.version.value,
             name: this.name.value,
             environment: this.environment.value,
+            technology: this.technology.value,
             isActive: this.isActive.value,
             cancelledAt: this.cancelledAt?.value,
             createdAt: this.createdAt?.value,

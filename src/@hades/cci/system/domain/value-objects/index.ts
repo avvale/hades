@@ -4,6 +4,7 @@ export { SystemTenantCode } from './system-tenant-code';
 export { SystemVersion } from './system-version';
 export { SystemName } from './system-name';
 export { SystemEnvironment } from './system-environment';
+export { SystemTechnology } from './system-technology';
 export { SystemIsActive } from './system-is-active';
 export { SystemCancelledAt } from './system-cancelled-at';
 export { SystemCreatedAt } from './system-created-at';

@@ -32,9 +32,9 @@ aggregateProperties:
   - name: technology
     type: enum
     enumOptions:
-      - WSO2
+      - WSO_2
       - SAPPI
-      - B2B
+      - B_2_B
       - MULESOFT
       - SAPSCI
     nullable: false

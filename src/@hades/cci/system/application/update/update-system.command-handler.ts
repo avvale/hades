@@ -8,6 +8,7 @@ import {
     SystemVersion,
     SystemName,
     SystemEnvironment,
+    SystemTechnology,
     SystemIsActive,
     SystemCancelledAt
     
@@ -30,6 +31,7 @@ export class UpdateSystemCommandHandler implements ICommandHandler<UpdateSystemC
             new SystemVersion(command.version, { undefinable: true }),
             new SystemName(command.name, { undefinable: true }),
             new SystemEnvironment(command.environment, { undefinable: true }),
+            new SystemTechnology(command.technology, { undefinable: true }),
             new SystemIsActive(command.isActive, { undefinable: true }),
             new SystemCancelledAt(command.cancelledAt),
             
