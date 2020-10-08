@@ -28,7 +28,6 @@ export class UpdateRoleResolver
 
         // get all accounts
         const accounts: AccountResponse[] = await this.queryBus.ask(new GetAccountsQuery({
-            attributes: ['id', 'type', 'email', 'isActive', 'clientId', 'applicationCodes', 'permissions'],
             include: {
                 model: IamRoleModel,
                 as: 'roles',

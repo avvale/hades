@@ -9,7 +9,6 @@ export class CreateAccountsCommand
             clientId: string,
             dApplicationCodes: any,
             dPermissions: any,
-            dTenants: any,
             data?: any,
             roleIds?: string[],
             tenantIds?: string[],

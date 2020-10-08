@@ -7,6 +7,7 @@ import { CreatePermissionsCommand } from '@hades/iam/permission/application/crea
 import { CreatePermissionsRolesCommand } from '@hades/iam/permission/application/create/create-permissions-roles.command';
 import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-account-by-id.query';
 import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
+import { AccountResponse } from '@hades/iam/account/domain/account.response';
 
 // commands
 import { CreateAccountsCommand } from '@hades/iam/account/application/create/create-accounts.command';
@@ -63,7 +64,7 @@ export class Seeder
         await commandBus.dispatch(new CreatePermissionsRolesCommand(permissionsRoles));
 
         // set all permissions to administration account
-        const account = await queryBus.ask(new FindAccountByIdQuery('948a5308-a49d-42dc-9ea3-7490e120000b'));
+        const account: AccountResponse = await queryBus.ask(new FindAccountByIdQuery('948a5308-a49d-42dc-9ea3-7490e120000b'));
         await commandBus.dispatch(new UpdateAccountCommand(
             '948a5308-a49d-42dc-9ea3-7490e120000b',
             undefined,
@@ -71,7 +72,7 @@ export class Seeder
             undefined,
             undefined,
             undefined,
-            account.permissions.concat(permissions)
+            account.dPermissions.concat(permissions)
         ));
     }
 }

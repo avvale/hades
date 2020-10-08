@@ -34,7 +34,7 @@ export class UpdateAccountCommandHandler implements ICommandHandler<UpdateAccoun
             new AccountClientId(command.clientId, { undefinable: true }),
             new AccountDApplicationCodes(command.dApplicationCodes, { undefinable: true }),
             new AccountDPermissions(command.dPermissions, { undefinable: true }),
-            new AccountDTenants(command.dTenants, { undefinable: true }),
+            new AccountDTenants(command.tenantIds, { undefinable: true }),
             new AccountData(command.data),
             new AccountRoleIds(command.roleIds),
             new AccountTenantIds(command.tenantIds),

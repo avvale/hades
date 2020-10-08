@@ -31,7 +31,6 @@ export class CreateAccountController
             payload.clientId,
             payload.dApplicationCodes,
             payload.dPermissions,
-            payload.dTenants,
             payload.data,
             payload.roleIds,
             payload.tenantIds,
