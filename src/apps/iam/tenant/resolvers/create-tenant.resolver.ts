@@ -1,7 +1,11 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { IamCreateTenantInput } from './../../../../graphql';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
 import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
+import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -10,7 +14,8 @@ import { CreateTenantCommand } from '@hades/iam/tenant/application/create/create
 import { FindTenantByIdQuery } from '@hades/iam/tenant/application/find/find-tenant-by-id.query';
 
 @Resolver()
-@UseGuards(AuthGraphQLJwtGuard)
+@Permissions('iam.tenant.create')
+@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
 export class CreateTenantResolver
 {
     constructor(

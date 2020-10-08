@@ -1,6 +1,12 @@
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
-import { IamAccountType, IamCreateAccountInput } from './../../../../graphql';
 import { JwtService } from '@nestjs/jwt';
+import { IamAccountType, IamCreateAccountInput } from './../../../../graphql';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
+import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -16,6 +22,8 @@ import { Utils as AccountsUtils } from '@hades/iam/account/domain/lib/utils';
 import { Utils } from '@hades/shared/domain/lib/utils';
 
 @Resolver()
+@Permissions('iam.account.create')
+@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
 export class CreateAccountResolver
 {
     constructor(
@@ -33,6 +41,7 @@ export class CreateAccountResolver
         // get access token from database
         const accessToken = await this.queryBus.ask(new FindAccessTokenByIdQuery(jwt.jit));
 
+        // TODO, como crear una cuenta asociada a otro client??? podría llegar a interesar??
         // get client to get applications related
         const client = await this.queryBus.ask(new FindClientQuery({
                 where: {
