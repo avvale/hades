@@ -82,9 +82,9 @@ export enum CciMessageOverviewExecutionType {
 }
 
 export enum CciSystemTechnology {
-    WSO_2 = "WSO_2",
+    WSO2 = "WSO2",
     SAPPI = "SAPPI",
-    B_2_B = "B_2_B",
+    B2B = "B2B",
     MULESOFT = "MULESOFT",
     SAPSCI = "SAPSCI"
 }
@@ -718,7 +718,6 @@ export interface IamCreateAccountInput {
     clientId?: string;
     dApplicationCodes?: JSON;
     dPermissions?: JSON;
-    dTenants?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
@@ -733,7 +732,6 @@ export interface IamUpdateAccountInput {
     clientId?: string;
     dApplicationCodes?: JSON;
     dPermissions?: JSON;
-    dTenants?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
