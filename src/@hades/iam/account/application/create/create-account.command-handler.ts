@@ -34,7 +34,7 @@ export class CreateAccountCommandHandler implements ICommandHandler<CreateAccoun
             new AccountClientId(command.clientId),
             new AccountDApplicationCodes(command.dApplicationCodes),
             new AccountDPermissions(command.dPermissions),
-            new AccountDTenants(command.dTenants),
+            new AccountDTenants(command.tenantIds),
             new AccountData(command.data),
             new AccountRoleIds(command.roleIds),
             new AccountTenantIds(command.tenantIds),

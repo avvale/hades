@@ -55,7 +55,6 @@ export class UpdateAccountResolver
             payload.clientId,
             payload.dApplicationCodes,
             Utils.createPermissions(roles),
-            payload.dTenants,
             payload.data,
             payload.roleIds,
             payload.tenantIds,

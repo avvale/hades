@@ -69,15 +69,6 @@ export class CreateAccountDto
     
     @ApiProperty({
         type        : Object,
-        description : 'dTenants [input here api field description]',
-        example     : { "foo" : "bar" }
-    })
-    dTenants: any;
-    
-    
-    
-    @ApiProperty({
-        type        : Object,
         description : 'data [input here api field description]',
         example     : { "foo" : "bar" }
     })

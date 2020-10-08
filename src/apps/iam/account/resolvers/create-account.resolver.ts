@@ -56,7 +56,6 @@ export class CreateAccountResolver
             accessToken.clientId,
             client.applications.map(application => application.code),
             AccountsUtils.createPermissions(roles),
-            payload.dTenants,
             payload.data,
             payload.roleIds,
             payload.tenantIds,

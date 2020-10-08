@@ -8,7 +8,6 @@ export class UpdateAccountCommand
         public readonly clientId?: string,
         public readonly dApplicationCodes?: any,
         public readonly dPermissions?: any,
-        public readonly dTenants?: any,
         public readonly data?: any,
         public readonly roleIds?: string[],
         public readonly tenantIds?: string[],
