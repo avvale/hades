@@ -12,8 +12,9 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { PaginateChannelsQuery } from '@hades/cci/channel/application/paginate/paginate-channels.query';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { Pagination } from './../../../../graphql';
 import { AccountResponse } from '@hades/iam/account/domain/account.response';
+import { Pagination } from './../../../../graphql';
+import { Tenant } from './../../../../apps/shared/decorators/tenant.decorator';
 
 @Resolver()
 @Permissions('iam.tenant.get')
@@ -25,8 +26,9 @@ export class PaginateChannelsResolver
     ) {}
 
     @Query('cciPaginateChannels')
-    async main(@CurrentAccount() account: AccountResponse, @Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement): Promise<Pagination>
+    @Tenant()
+    async main(@CurrentAccount() account: AccountResponse, @Args('query') query?: QueryStatement, @Args('constraint') constraint?: QueryStatement): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateChannelsQuery(queryStatement, constraint));   
+        return await this.queryBus.ask(new PaginateChannelsQuery(query, constraint));   
     }
 }
