@@ -12,6 +12,8 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { CreateTenantCommand } from '@hades/iam/tenant/application/create/create-tenant.command';
 import { FindTenantByIdQuery } from '@hades/iam/tenant/application/find/find-tenant-by-id.query';
+import { GetAccountsQuery } from '@hades/iam/account/application/get/get-accounts.query';
+import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
 
 @Resolver()
 @Permissions('iam.tenant.create')
@@ -26,6 +28,32 @@ export class CreateTenantResolver
     @Mutation('iamCreateTenant')
     async main(@Args('payload') payload: IamCreateTenantInput)
     {
+        const accounts = await this.queryBus.ask(new GetAccountsQuery({ 
+            where: {
+                id: payload.accountIds
+            }
+        }));
+
+        for (const account of accounts)
+        {
+            const currentTenants = account.dTenants;
+
+            // add new tenan and update account
+            currentTenants.push(payload.id);
+            await this.commandBus.dispatch(new UpdateAccountCommand(
+                account.id,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                currentTenants
+            ));
+        }
+        
         await this.commandBus.dispatch(new CreateTenantCommand(
             payload.id,
             payload.name,
