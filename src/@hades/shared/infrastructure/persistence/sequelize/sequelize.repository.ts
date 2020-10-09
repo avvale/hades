@@ -7,6 +7,7 @@ import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
 import { AggregateBase } from '@hades/shared/domain/lib/aggregate-base';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
+import * as _ from 'lodash';
 const cleanDeep = require('clean-deep');
 
 export abstract class SequelizeRepository<Aggregate extends AggregateBase, ModelClass>
@@ -16,7 +17,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     public readonly aggregateName: string;
     public readonly mapper: IMapper;
 
-    async paginate(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<Aggregate>>
+    async paginate(query?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<Aggregate>>
     {
         // get count total records from sql service library
         const total = await this.repository.count(
@@ -26,7 +27,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         // get records
         const { count, rows } = await this.repository.findAndCountAll(
             this.criteria.implements(
-                this.composeStatementPaginateHook(queryStatement)
+                this.composeStatementPaginateHook(_.merge(query, constraint))
             )
         );
 
