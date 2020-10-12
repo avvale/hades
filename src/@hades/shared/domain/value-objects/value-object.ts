@@ -16,20 +16,26 @@ export abstract class ValueObject<T> implements IValueObject<T>
     set value(value: T)
     {
         // validate nullable and undefinable values
-        if (this.validationRules.nullable === false && value === null)          throw new BadRequestException(`Value for ${this.validationRules.name} must be defined, can not be null`);
-        if (this.validationRules.undefinable === false && value === undefined)  throw new BadRequestException(`Value for ${this.validationRules.name} must be defined, can not be undefined`);
-        this._value = value;
+        if (this.validationRules.nullable === false && value === null && !this.validationRules.default)          throw new BadRequestException(`Value for ${this.validationRules.name} must be defined, can not be null`);
+        if (this.validationRules.undefinable === false && value === undefined && !this.validationRules.default)  throw new BadRequestException(`Value for ${this.validationRules.name} must be defined, can not be undefined`);
+        if (
+            ((this.validationRules.nullable === false && value === null) || 
+            (this.validationRules.undefinable === false && value === undefined))
+            && this.validationRules.default
+        )  this._value = this.validationRules.default; 
+        else 
+            this._value = value;
     }
     
-    constructor(value: T, validationRules: ValidationRules = {}, data = {}) 
+    constructor(value: T, validationRules: ValidationRules = {}, data: DataValueObject = {}) 
     {
+        // additional data for customize behavior value object
+        this.data = data;
+        
         // first get validationRules value to be used in value accessors methods
         this.validationRules = validationRules;
 
-        // second call to accessor value method
+        // second call to accessor value method, Attention!! this call has to be the last, is the bootstrapt for run velidations in nested classes
         this.value = value;
-
-        // additional data for customize behavior value object
-        this.data = data;
     }
 }
