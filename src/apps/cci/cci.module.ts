@@ -23,8 +23,8 @@ import { CciCatalogControllers } from './catalog';
     imports: [
         SharedModule,
         SequelizeModule.forFeature([
-                ...CciModels
-            ])
+            ...CciModels
+        ])
     ],
     controllers: [
         ...CciChannelDetailControllers,
