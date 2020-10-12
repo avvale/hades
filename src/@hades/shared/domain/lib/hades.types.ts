@@ -28,6 +28,7 @@ export interface ValidationRules
     maxLength?: number;
     enumOptions?: string[];
     unsigned?: boolean;
+    default?: any;
 }
 
 export interface DataValueObject
