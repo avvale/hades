@@ -10,8 +10,8 @@ export class FindChannelService
         private readonly repository: IChannelRepository
     ) {}
 
-    public async main(queryStatement?: QueryStatement): Promise<CciChannel>
+    public async main(query?: QueryStatement, constraint?: QueryStatement): Promise<CciChannel>
     {        
-        return await this.repository.find(queryStatement);
+        return await this.repository.find(query, constraint);
     }
 }

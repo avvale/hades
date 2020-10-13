@@ -17,7 +17,7 @@ import { Pagination } from './../../../../graphql';
 import { Tenant } from './../../../../apps/shared/decorators/tenant.decorator';
 
 @Resolver()
-@Permissions('iam.tenant.get')
+@Permissions('cci.channel.get')
 @UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
 export class PaginateChannelsResolver
 {

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { 
     ChannelId,
     ChannelHash,
@@ -96,6 +97,7 @@ export class UpdateChannelService
         riInterfaceName?: ChannelRiInterfaceName,
         riInterfaceNamespace?: ChannelRiInterfaceNamespace,
         
+        constraint?: QueryStatement,
     ): Promise<void>
     {        
         // create aggregate with factory pattern
@@ -144,7 +146,7 @@ export class UpdateChannelService
         );
         
         // update
-        await this.repository.update(channel);        
+        await this.repository.update(channel, constraint);        
             
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const channelRegister = this.publisher.mergeObjectContext(

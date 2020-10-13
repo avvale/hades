@@ -3,6 +3,7 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 export class GetChannelsQuery
 {
     constructor(
-        public queryStatement?: QueryStatement
+        public queryStatement?: QueryStatement,
+        public constraint?: QueryStatement,
     ) {}
 }

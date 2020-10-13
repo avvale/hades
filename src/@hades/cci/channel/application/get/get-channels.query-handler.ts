@@ -15,6 +15,6 @@ export class GetChannelsQueryHandler implements IQueryHandler<GetChannelsQuery>
 
     async execute(query: GetChannelsQuery): Promise<ChannelResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getChannelsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getChannelsService.main(query.queryStatement, query.constraint));
     }
 }

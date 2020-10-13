@@ -16,7 +16,10 @@ export class FindChannelByIdQueryHandler implements IQueryHandler<FindChannelByI
 
     async execute(query: FindChannelByIdQuery): Promise<ChannelResponse>
     {
-        const channel = await this.findChannelByIdService.main(new ChannelId(query.id));
+        const channel = await this.findChannelByIdService.main(
+            new ChannelId(query.id), 
+            query.constraint
+        );
 
         return this.mapper.mapAggregateToResponse(channel);
     }
