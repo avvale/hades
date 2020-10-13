@@ -12,12 +12,12 @@ export class DeleteChannelsService
         private readonly repository: IChannelRepository
     ) {}
 
-    public async main(queryStatement?: QueryStatement): Promise<void>
+    public async main(query?: QueryStatement, constraint?: QueryStatement): Promise<void>
     {   
         // get object to delete
-        const channels = await this.repository.get(queryStatement);
+        const channels = await this.repository.get(query);
 
-        await this.repository.delete(queryStatement);
+        await this.repository.delete(query, constraint);
 
         // create AddChannelsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

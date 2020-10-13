@@ -21,25 +21,25 @@ import { DeleteChannelByIdResolver } from './resolvers/delete-channel-by-id.reso
 import { DeleteChannelsResolver } from './resolvers/delete-channels.resolver';
 
 export const CciChannelControllers = [
-    CreateChannelController,
-    CreateChannelsController,
+    // CreateChannelController,
+    // CreateChannelsController,
     PaginateChannelsController,
     GetChannelsController,
     FindChannelByIdController,
     FindChannelController,
-    UpdateChannelController,
-    DeleteChannelByIdController,
-    DeleteChannelsController,
+    // UpdateChannelController,
+    // DeleteChannelByIdController,
+    // DeleteChannelsController,
 ];
 
 export const CciChannelResolvers = [
-    CreateChannelResolver,
-    CreateChannelsResolver,
+    // CreateChannelResolver,
+    // CreateChannelsResolver,
     PaginateChannelsResolver,
     GetChannelsResolver,
     FindChannelResolver,
     FindChannelByIdResolver,
-    UpdateChannelResolver,
-    DeleteChannelByIdResolver,
-    DeleteChannelsResolver,
+    // UpdateChannelResolver,
+    // DeleteChannelByIdResolver,
+    // DeleteChannelsResolver,
 ];

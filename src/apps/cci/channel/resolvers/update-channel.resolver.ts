@@ -1,13 +1,23 @@
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { CciUpdateChannelInput } from './../../../../graphql';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
+import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
+import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { UpdateChannelCommand } from '@hades/cci/channel/application/update/update-channel.command';
 import { FindChannelByIdQuery } from '@hades/cci/channel/application/find/find-channel-by-id.query';
+import { AccountResponse } from '@hades/iam/account/domain/account.response';
 
 @Resolver()
+@Permissions('cci.channel.update')
+@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
 export class UpdateChannelResolver
 {
     constructor(
@@ -16,7 +26,7 @@ export class UpdateChannelResolver
     ) {}
 
     @Mutation('cciUpdateChannel')
-    async main(@Args('payload') payload: CciUpdateChannelInput)
+    async main(@CurrentAccount() account: AccountResponse, @Args('payload') payload: CciUpdateChannelInput)
     {
         await this.commandBus.dispatch(new UpdateChannelCommand(
             payload.id,
