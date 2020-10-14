@@ -1,10 +1,10 @@
+import { BadRequestException } from '@nestjs/common';
 import { AccountResponse } from '@hades/iam/account/domain/account.response';
 import { Operator } from '@hades/shared/domain/persistence/sql-statement/operator';
 import * as _ from 'lodash';
 
-export const Tenant = (customProperties?: {
+export const TenantConstraint = (customProperties?: {
     targetProperty: string;
-    queryIndex: number; 
     constraintIndex: number;
 }) => 
 {
@@ -15,7 +15,6 @@ export const Tenant = (customProperties?: {
             {
                 const properties = Object.assign({}, {
                     targetProperty: 'tenantId', 
-                    queryIndex: 1, 
                     constraintIndex: 2
                 }, customProperties);
 
@@ -24,6 +23,8 @@ export const Tenant = (customProperties?: {
                 {
                     if (typeof arg === 'object' && arg.constructor.name === 'AccountResponse') account = <AccountResponse>arg;
                 }
+
+                if (!account) throw new BadRequestException(`To use @TenantConstraint() decorator need has @CurrentAccount() defined in properties of method`);
 
                 const orStatements = [];
                 for (const tenantId of account.dTenants)
