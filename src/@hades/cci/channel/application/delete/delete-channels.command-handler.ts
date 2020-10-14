@@ -12,6 +12,6 @@ export class DeleteChannelsCommandHandler implements ICommandHandler<DeleteChann
     async execute(command: DeleteChannelsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteChannelsService.main(command.queryStatement, command.constraint);
+        await this.deleteChannelsService.main(command.queryStatement);
     }
 }

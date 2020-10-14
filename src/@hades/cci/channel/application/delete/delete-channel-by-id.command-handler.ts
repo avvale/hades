@@ -16,8 +16,7 @@ export class DeleteChannelByIdCommandHandler implements ICommandHandler<DeleteCh
     {
         // call to use case and implements ValueObjects
         await this.deleteChannelByIdService.main(
-            new ChannelId(command.id),
-            command.constraint,
+            new ChannelId(command.id)
         );
     }
 }

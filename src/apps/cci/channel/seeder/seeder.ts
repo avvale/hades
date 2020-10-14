@@ -1,11 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
-import { SeederModule } from './seeder.module';
-
-// commands
 import { CreateChannelsCommand } from '@hades/cci/channel/application/create/create-channels.command';
-
-// resources
+import { SeederModule } from './seeder.module';
 import { channels } from '@hades/cci/channel/infrastructure/seeds/channel.seed';
 
 export class Seeder 

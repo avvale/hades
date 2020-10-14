@@ -1,13 +1,23 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { CciCreateChannelInput } from './../../../../graphql';
+
+// authorization
+import { UseGuards } from '@nestjs/common';
+import { AccountResponse } from '@hades/iam/account/domain/account.response';
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
+import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
+import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { CreateChannelCommand } from '@hades/cci/channel/application/create/create-channel.command';
 import { FindChannelByIdQuery } from '@hades/cci/channel/application/find/find-channel-by-id.query';
+import { CciCreateChannelInput } from './../../../../graphql';
 
 @Resolver()
+@Permissions('cci.channel.create')
+@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
 export class CreateChannelResolver
 {
     constructor(
@@ -16,7 +26,7 @@ export class CreateChannelResolver
     ) {}
 
     @Mutation('cciCreateChannel')
-    async main(@Args('payload') payload: CciCreateChannelInput)
+    async main(@CurrentAccount() account: AccountResponse, @Args('payload') payload: CciCreateChannelInput)
     {
         await this.commandBus.dispatch(new CreateChannelCommand(
             payload.id,
@@ -57,7 +67,6 @@ export class CreateChannelResolver
             payload.lastChangedAt,
             payload.riInterfaceName,
             payload.riInterfaceNamespace,
-            
         ));
         
         return await this.queryBus.ask(new FindChannelByIdQuery(payload.id));

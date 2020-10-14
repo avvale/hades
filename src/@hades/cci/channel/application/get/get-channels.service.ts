@@ -10,8 +10,8 @@ export class GetChannelsService
         private readonly repository: IChannelRepository
     ) {}
 
-    public async main(query?: QueryStatement, constraint?: QueryStatement): Promise<CciChannel[]>
+    public async main(queryStatement?: QueryStatement): Promise<CciChannel[]>
     {        
-        return await this.repository.get(query, constraint);
+        return await this.repository.get(queryStatement);
     }
 }
