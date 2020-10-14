@@ -14,7 +14,7 @@ import { PaginateChannelsQuery } from '@hades/cci/channel/application/paginate/p
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { AccountResponse } from '@hades/iam/account/domain/account.response';
 import { Pagination } from './../../../../graphql';
-import { Tenant } from './../../../../apps/shared/decorators/tenant.decorator';
+import { TenantConstraint } from './../../../../apps/shared/decorators/tenant-constraint.decorator';
 
 @Resolver()
 @Permissions('cci.channel.get')
@@ -26,7 +26,7 @@ export class PaginateChannelsResolver
     ) {}
 
     @Query('cciPaginateChannels')
-    @Tenant()
+    @TenantConstraint()
     async main(@CurrentAccount() account: AccountResponse, @Args('query') query?: QueryStatement, @Args('constraint') constraint?: QueryStatement): Promise<Pagination>
     {
         return await this.queryBus.ask(new PaginateChannelsQuery(query, constraint));   
