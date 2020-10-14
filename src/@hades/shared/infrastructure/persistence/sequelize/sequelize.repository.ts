@@ -39,13 +39,13 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementPaginateHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
+    composeStatementPaginateHook(query?: QueryStatement): QueryStatement { return query; }
 
-    async find(queryStatement?: QueryStatement): Promise<Aggregate> 
+    async find(query?: QueryStatement, constraint?: QueryStatement): Promise<Aggregate> 
     {
         const model = await this.repository.findOne(
             this.criteria.implements(
-                this.composeStatementFindHook(queryStatement)
+                this.composeStatementFindHook(_.merge(query, constraint))
             )
         );
 
@@ -56,14 +56,20 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementFindHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
+    composeStatementFindHook(query?: QueryStatement): QueryStatement { return query; }
 
-    async findById(id: UuidValueObject): Promise<Aggregate>
+    async findById(id: UuidValueObject, constraint?: QueryStatement): Promise<Aggregate>
     {
         // value is already mapped
         const model = await this.repository.findOne(
             this.criteria.implements(
-                this.composeStatementFindByIdHook({ where: { id: id.value }})
+                this.composeStatementFindByIdHook(
+                    _.merge({ 
+                        where: { 
+                            id: id.value 
+                        }
+                    }, constraint)
+                )
             )
         );
 
@@ -76,11 +82,11 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     // get multiple records
-    async get(queryStatement?: QueryStatement): Promise<Aggregate[]> 
+    async get(query?: QueryStatement, constraint?: QueryStatement): Promise<Aggregate[]> 
     {
         const models = await this.repository.findAll(
             this.criteria.implements(
-                this.composeStatementGetHook(queryStatement)
+                this.composeStatementGetHook(_.merge(query, constraint))
             )
         );
 
@@ -89,7 +95,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     }
 
     // hook to add findOptions
-    composeStatementGetHook(queryStatement?: QueryStatement): QueryStatement { return queryStatement; }
+    composeStatementGetHook(query?: QueryStatement): QueryStatement { return query; }
 
     // ******************
     // ** side effects **
@@ -133,15 +139,17 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     // hook called after insert aggregates
     async insertedAggregateHook(aggregates: Aggregate[]) {}
 
-    async update(aggregate: Aggregate): Promise<void> 
+    async update(aggregate: Aggregate, constraint?: QueryStatement): Promise<void> 
     { 
         // check that model exist
         const modelInDB = await this.repository.findOne(
-            {
-                where: {
-                    id: aggregate['id']['value']
-                }
-            }
+            this.criteria.implements(
+                _.merge({
+                    where: {
+                        id: aggregate['id']['value']
+                    }
+                }, constraint)
+            )
         );
 
         if (!aggregate) throw new NotFoundException(`${this.aggregateName} not found`);
@@ -162,15 +170,17 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     // hook called after update aggregate
     async updatedAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
 
-    async deleteById(id: UuidValueObject): Promise<void> 
+    async deleteById(id: UuidValueObject, constraint?: QueryStatement): Promise<void> 
     {
         // check that aggregate exist
         const model = await this.repository.findOne(
-            {
-                where: {
-                    id: id.value
-                }
-            }
+            _.merge(
+                {
+                    where: {
+                        id: id.value
+                    }
+                }, constraint
+            )
         );
 
         if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
@@ -178,13 +188,13 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         await model.destroy();
     }
 
-    async delete(queryStatement?: QueryStatement): Promise<void> 
+    async delete(query?: QueryStatement, constraint?: QueryStatement): Promise<void> 
     {
-        if (!queryStatement || !queryStatement.where) throw new BadRequestException(`To delete multiple records, you must define a where statement`);
+        if (!query || !query.where) throw new BadRequestException(`To delete multiple records, you must define a where statement`);
 
         // check that aggregate exist
         await this.repository.destroy(
-            this.criteria.implements(queryStatement)
+            this.criteria.implements(_.merge(query, constraint))
         );
     }
 }
