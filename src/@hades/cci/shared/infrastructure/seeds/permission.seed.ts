@@ -68,11 +68,21 @@ export const permissions = [
     {id: 'e433ed37-8500-48ac-bd66-b8962c283b99',  name: 'cci.messageOverview.update',           boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
     {id: '43284f8d-c8cd-41e0-a882-cb906fa7594a',  name: 'cci.messageOverview.delete',           boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
 
-    /* 
-    flows edit
-    resumen
-    hitory 
-    rules
-    tasks
-    */
+    {id: 'e62971af-7ba1-4182-afa3-e32ad3e0d26b',  name: 'cci.sumary.access',                    boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: '14380c06-f27e-4d2a-bec0-8f613903a091',  name: 'cci.sumary.get',                       boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+
+    {id: '9da3b558-ffb7-4216-b61c-bcb568018393',  name: 'cci.historic.access',                  boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: 'f67bd3db-902b-4fbb-8809-e0a8e9d75e19',  name: 'cci.historic.get',                     boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+
+    {id: 'c5cfd513-f260-42f0-b865-56312b28ba8e',  name: 'cci.rule.access',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: '8efb42c6-d1f5-4181-8589-e588788ad3e9',  name: 'cci.rule.get',                         boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: '5c47d29a-b22b-4acd-8f28-27fb46df13f7',  name: 'cci.rule.create',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: '5e3ed8d3-43b9-41e9-9076-1e374519e9cc',  name: 'cci.rule.update',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: 'caeb87ca-7acc-453a-8ff7-e06355be0e22',  name: 'cci.rule.delete',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+
+    {id: 'efaa311e-eebc-45ad-9133-55e3a1a9b580',  name: 'cci.task.access',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: '4dfdd24e-31c1-4a6b-b75b-73bad70880b0',  name: 'cci.task.get',                         boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: '493fe054-27e3-4c46-8b95-6067231b64c5',  name: 'cci.task.create',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: '6c3ffa20-a347-480c-a66d-b22395264652',  name: 'cci.task.update',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: 'f93b93f8-042a-455a-9d55-36e624b3cfd3',  name: 'cci.task.delete',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
 ];
