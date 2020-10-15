@@ -45,7 +45,11 @@ export class CreatePermissionsService
         ));
         
         // insert
-        await this.repository.insert(aggregatePermissions);
+        await this.repository.insert(aggregatePermissions, { updateOnDuplicate: [
+                'name',
+                'updatedAt'
+            ]
+        });
 
         // create AddPermissionsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
