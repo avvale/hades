@@ -108,7 +108,7 @@ export class CreateFlowsService
         ));
         
         // insert
-         await this.repository.insert(aggregateFlows, { updateOnDuplicate: [
+        await this.repository.insert(aggregateFlows, { updateOnDuplicate: [
                 'version', 
                 'scenario', 
                 'iflowName', 
