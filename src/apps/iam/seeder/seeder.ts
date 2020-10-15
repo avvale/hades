@@ -16,6 +16,7 @@ import { permissions } from '@hades/iam/shared/infrastructure/seeds/permission.s
 import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
+import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-account-by-id.query';
 
 export class Seeder 
 {
@@ -25,21 +26,30 @@ export class Seeder
             const commandBus = appContext.get(ICommandBus);
             const queryBus = appContext.get(IQueryBus);
 
-            await commandBus.dispatch(new CreateAccountsCommand(accounts));
-            await commandBus.dispatch(new CreateUsersCommand(users));
-            
-            await commandBus.dispatch(new CreateRolesCommand(roles));
-            
-            // set all roles to administration account
-            const rolesAccounts = roles.map(role => {
-                return {
-                    roleId: role.id,
-                    accountId: '948a5308-a49d-42dc-9ea3-7490e120000b'
-                }
-            });
-            await commandBus.dispatch(new CreateRolesAccountsCommand(rolesAccounts));
+            const administratorAccount = await queryBus.ask(new FindAccountByIdQuery(IamUtils.administratorAccountId));
 
-            await IamUtils.iamCommonSeed(commandBus, queryBus, boundedContexts, permissions);
+            if (administratorAccount) 
+            {
+                await IamUtils.iamCommonSeed(commandBus, queryBus, boundedContexts, permissions);
+            }
+            else
+            {
+                await commandBus.dispatch(new CreateAccountsCommand(accounts));
+                await commandBus.dispatch(new CreateUsersCommand(users));
+                
+                await commandBus.dispatch(new CreateRolesCommand(roles));
+                
+                // set all roles to administration account
+                const rolesAccounts = roles.map(role => {
+                    return {
+                        roleId: role.id,
+                        accountId: IamUtils.administratorRoleId
+                    }
+                });
+                await commandBus.dispatch(new CreateRolesAccountsCommand(rolesAccounts));
+    
+                await IamUtils.iamCommonSeed(commandBus, queryBus, boundedContexts, permissions);
+            }
         });
     }
 }
