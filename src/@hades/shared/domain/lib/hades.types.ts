@@ -1,3 +1,8 @@
+export interface DataValueObject
+{
+    haveToEncrypt?: boolean
+}
+
 export interface Jwt 
 {
     jit: string;            // id from this token
@@ -18,6 +23,23 @@ export interface ObjectLiteral
     [key: string]: any;
 }
 
+export interface SeederBoundedContext
+{
+    id: string,
+    name: string,
+    root: string,
+    sort: number,
+    isActive: boolean,
+}
+
+export interface SeederPermission
+{
+    id: string,
+    name: string,
+    boundedContextId: string,
+    roleIds?: string[],
+}
+
 export interface ValidationRules
 {
     name?: string,
@@ -29,9 +51,4 @@ export interface ValidationRules
     enumOptions?: string[];
     unsigned?: boolean;
     default?: any;
-}
-
-export interface DataValueObject
-{
-    haveToEncrypt?: boolean
 }
