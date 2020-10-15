@@ -31,6 +31,10 @@ export class CreatePermissionsRolesService
         ));
         
         // insert
-        await this.repository.insert(aggregatePermissionsRoles);
+        await this.repository.insert(aggregatePermissionsRoles, { updateOnDuplicate: [
+                'permissionId',
+                'roleId'
+            ]
+        });
     }
 }
