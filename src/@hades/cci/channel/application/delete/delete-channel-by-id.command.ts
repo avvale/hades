@@ -4,6 +4,6 @@ export class DeleteChannelByIdCommand
 {
     constructor(
         public readonly id: string,
-        public constraint?: QueryStatement,
+        public readonly constraint?: QueryStatement,
     ) {}
 }

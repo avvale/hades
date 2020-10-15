@@ -92,7 +92,6 @@ export class CreateChannelCommandHandler implements ICommandHandler<CreateChanne
             new ChannelLastChangedAt(command.lastChangedAt),
             new ChannelRiInterfaceName(command.riInterfaceName),
             new ChannelRiInterfaceNamespace(command.riInterfaceNamespace),
-            
         );
     }
 }

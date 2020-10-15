@@ -93,7 +93,6 @@ export class UpdateChannelCommandHandler implements ICommandHandler<UpdateChanne
             new ChannelRiInterfaceName(command.riInterfaceName),
             new ChannelRiInterfaceNamespace(command.riInterfaceNamespace),
             
-            command.constraint,
         )
     }
 }

@@ -1,11 +1,23 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Args, Query } from '@nestjs/graphql';
+
+// authorization
+import { UseGuards } from '@nestjs/common';
+import { AccountResponse } from '@hades/iam/account/domain/account.response';
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
+import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
+import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
+import { TenantConstraint } from './../../../shared/decorators/tenant-constraint.decorator';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindChannelByIdQuery } from '@hades/cci/channel/application/find/find-channel-by-id.query';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CciChannel } from './../../../../graphql';
 
 @Resolver()
+@Permissions('cci.channel.get')
+@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
 export class FindChannelByIdResolver
 {
     constructor(
@@ -13,8 +25,9 @@ export class FindChannelByIdResolver
     ) {}
 
     @Query('cciFindChannelById')
-    async main(@Args('id') id: string): Promise<CciChannel>
+    @TenantConstraint()
+    async main(@CurrentAccount() account: AccountResponse, @Args('id') id: string, @Args('constraint') constraint?: QueryStatement, ): Promise<CciChannel>
     {
-        return await this.queryBus.ask(new FindChannelByIdQuery(id));
+        return await this.queryBus.ask(new FindChannelByIdQuery(id, constraint));
     }
 }

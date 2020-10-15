@@ -11,8 +11,8 @@ export class PaginateChannelsService
         private readonly repository: IChannelRepository
     ) {}
 
-    public async main(query?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<CciChannel>>
+    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<CciChannel>>
     {        
-        return await this.repository.paginate(query, constraint);
+        return await this.repository.paginate(queryStatement, constraint);
     }
 }
