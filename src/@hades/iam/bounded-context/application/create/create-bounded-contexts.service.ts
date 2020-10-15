@@ -48,7 +48,14 @@ export class CreateBoundedContextsService
         ));
         
         // insert
-        await this.repository.insert(aggregateBoundedContexts);
+        await this.repository.insert(aggregateBoundedContexts, { updateOnDuplicate: [
+                'name',
+                'root',
+                'sort',
+                'isActive',
+                'updatedAt'
+            ] 
+        });
 
         // create AddBoundedContextsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
