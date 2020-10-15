@@ -12,7 +12,7 @@ import { AccountResponse } from '@hades/iam/account/domain/account.response';
 import { PermissionResponse } from '@hades/iam/permission/domain/permission.response';
 import { GetPermissionsQuery } from '@hades/iam/permission/application/get/get-permissions.query';
 import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
-import { AccountPermissions } from '@hades/iam/account/domain/lib/account.types';
+import { IamUtils } from '@hades/iam/shared/domain/lib/iam-utils';
 
 @Resolver()
 export class UpdateRoleResolver
@@ -48,7 +48,7 @@ export class UpdateRoleResolver
         for (const account of accounts)
         {
             // TODO gestionar el proceso de actualizacion en una cola
-            const accountPermissions = this.updatePermissions(payload.id, permissions, account);
+            const accountPermissions = IamUtils.updateAccountPermissions(payload.id, permissions, account);
 
             await this.commandBus.dispatch(new UpdateAccountCommand(
                 account.id,
@@ -71,31 +71,5 @@ export class UpdateRoleResolver
         ));
         
         return await this.queryBus.ask(new FindRoleByIdQuery(payload.id));
-    }
-
-    private updatePermissions(roleId: string, newPermissions: PermissionResponse[], account: AccountResponse): AccountPermissions
-    {
-        // set new permissions from current role for each account
-        account.dPermissions[roleId] = newPermissions.map(permission => permission.name);
-            
-        // container for all permissions
-        const allPermissions = [];
-
-        // iterate each role from account
-        for (const index in account.dPermissions)
-        {
-            // avoid iterate all index, is the key that contain all permissions 
-            if (index !== 'all')
-            {
-                for (const permission of account.dPermissions[index])
-                {
-                    if (allPermissions.indexOf(permission) === -1) allPermissions.push(permission);
-                }
-            }
-        }
-        // set all permissions
-        account.dPermissions['all'] = allPermissions;
-
-        return account.dPermissions;
     }
 }
