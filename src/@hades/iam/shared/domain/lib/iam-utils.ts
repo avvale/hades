@@ -21,7 +21,7 @@ export class IamUtils
         permissions: SeederPermission[]
     )
     {
-        const adminstratorAccount = await queryBus.ask(new FindAccountByIdQuery(IamUtils.administratorAccountId));
+        const administratorAccount = await queryBus.ask(new FindAccountByIdQuery(IamUtils.administratorAccountId));
         await commandBus.dispatch(new CreateBoundedContextsCommand(boundedContexts));
         await commandBus.dispatch(new CreatePermissionsCommand(permissions));
 
@@ -37,7 +37,7 @@ export class IamUtils
         const accountPermissions = IamUtils.updateAccountPermissions(
             IamUtils.administratorRoleId,
             permissions,
-            adminstratorAccount
+            administratorAccount
         );
 
         // set all permissions to administration account
