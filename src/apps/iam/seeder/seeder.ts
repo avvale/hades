@@ -2,12 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { SeederModule } from './seeder.module';
-import { CreateBoundedContextsCommand } from '@hades/iam/bounded-context/application/create/create-bounded-contexts.command';
-import { CreatePermissionsCommand } from '@hades/iam/permission/application/create/create-permissions.command';
-import { CreatePermissionsRolesCommand } from '@hades/iam/permission/application/create/create-permissions-roles.command';
-import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-account-by-id.query';
-import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
-import { AccountResponse } from '@hades/iam/account/domain/account.response';
+import { IamUtils } from '@hades/iam/shared/domain/lib/iam-utils';
 
 // commands
 import { CreateAccountsCommand } from '@hades/iam/account/application/create/create-accounts.command';
@@ -44,36 +39,8 @@ export class Seeder
             });
             await commandBus.dispatch(new CreateRolesAccountsCommand(rolesAccounts));
 
-            // call common action after create account admin and role admin
-            this.commonActions(commandBus, queryBus)
+            await IamUtils.iamCommonSeed(commandBus, queryBus, boundedContexts, permissions);
         });
-    }
-
-    async commonActions(commandBus:ICommandBus, queryBus:IQueryBus)
-    {
-        await commandBus.dispatch(new CreateBoundedContextsCommand(boundedContexts));
-        await commandBus.dispatch(new CreatePermissionsCommand(permissions));
-
-        // set all permissions to administration role
-        const permissionsRoles = permissions.map(permission => {
-            return {
-                permissionId: permission.id,
-                roleId: '99b06044-fff5-4267-9314-4bae9f909010'
-            }
-        });
-        await commandBus.dispatch(new CreatePermissionsRolesCommand(permissionsRoles));
-
-        // set all permissions to administration account
-        const account: AccountResponse = await queryBus.ask(new FindAccountByIdQuery('948a5308-a49d-42dc-9ea3-7490e120000b'));
-        await commandBus.dispatch(new UpdateAccountCommand(
-            '948a5308-a49d-42dc-9ea3-7490e120000b',
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            account.dPermissions.concat(permissions)
-        ));
     }
 }
 new Seeder().main();

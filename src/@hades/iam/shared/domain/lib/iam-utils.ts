@@ -61,7 +61,10 @@ export class IamUtils
         }
         else
         {
-            account.dPermissions[roleId] = account.dPermissions[roleId].concat(newPermissions);
+            for (const permission of newPermissions)
+            {
+                if (account.dPermissions[roleId].indexOf(permission.name) === -1)  account.dPermissions[roleId].push(permission.name);
+            }
         }
         
             
