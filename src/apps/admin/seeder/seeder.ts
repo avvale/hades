@@ -7,6 +7,7 @@ import { CreatePermissionsCommand } from '@hades/iam/permission/application/crea
 import { CreatePermissionsRolesCommand } from '@hades/iam/permission/application/create/create-permissions-roles.command';
 import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
 import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-account-by-id.query';
+import { IamUtils } from '@hades/iam/shared/domain/lib/iam-utils';
 
 // commands
 import { CreateLangsCommand } from '@hades/admin/lang/application/create/create-langs.command';
@@ -24,37 +25,10 @@ export class Seeder
             const commandBus    = appContext.get(ICommandBus);
             const queryBus      = appContext.get(IQueryBus);
 
-            await this.commonActions(commandBus, queryBus);
+            await IamUtils.iamCommonSeed(commandBus, queryBus, boundedContexts, permissions);
 
             await commandBus.dispatch(new CreateLangsCommand(langs));
         }); 
-    }
-
-    async commonActions(commandBus:ICommandBus, queryBus:IQueryBus)
-    {
-        await commandBus.dispatch(new CreateBoundedContextsCommand(boundedContexts));
-        await commandBus.dispatch(new CreatePermissionsCommand(permissions));
-
-        // set all permissions to administration role
-        const permissionsRoles = permissions.map(permission => {
-            return {
-                permissionId: permission.id,
-                roleId: '99b06044-fff5-4267-9314-4bae9f909010'
-            }
-        });
-        await commandBus.dispatch(new CreatePermissionsRolesCommand(permissionsRoles));
-
-        // set all permissions to administration account
-        const account = await queryBus.ask(new FindAccountByIdQuery('948a5308-a49d-42dc-9ea3-7490e120000b'));
-        await commandBus.dispatch(new UpdateAccountCommand(
-            '948a5308-a49d-42dc-9ea3-7490e120000b',
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            account.permissions.concat(permissions)
-        ));
     }
 }
 new Seeder().main();
