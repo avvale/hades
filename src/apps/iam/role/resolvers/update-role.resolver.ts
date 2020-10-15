@@ -48,7 +48,7 @@ export class UpdateRoleResolver
         for (const account of accounts)
         {
             // TODO gestionar el proceso de actualizacion en una cola
-            const accountPermissions = IamUtils.updateAccountPermissions(payload.id, permissions, account);
+            const accountPermissions = IamUtils.updateAccountPermissions(payload.id, permissions, account, true);
 
             await this.commandBus.dispatch(new UpdateAccountCommand(
                 account.id,

@@ -52,10 +52,18 @@ export class IamUtils
         ));
     }
 
-    static updateAccountPermissions(roleId: string, newPermissions: SeederPermission[], account: AccountResponse): AccountPermissions
+    static updateAccountPermissions(roleId: string, newPermissions: SeederPermission[], account: AccountResponse, overwriteRolePermissions: boolean = false): AccountPermissions
     {
-        // set new permissions from current role for each account
-        account.dPermissions[roleId] = newPermissions.map(permission => permission.name);
+        if (overwriteRolePermissions || !Array.isArray(account.dPermissions[roleId]))
+        {
+            // set new permissions from current role for each account
+            account.dPermissions[roleId] = newPermissions.map(permission => permission.name);
+        }
+        else
+        {
+            account.dPermissions[roleId] = account.dPermissions[roleId].concat(newPermissions);
+        }
+        
             
         // container for all permissions
         const allPermissions = [];
