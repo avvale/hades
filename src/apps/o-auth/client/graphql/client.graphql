@@ -60,9 +60,9 @@ input OAuthUpdateClientInput
 
 type Query 
 {
-    oAuthFindClient(query:QueryStatement): OAuthClient
-    oAuthFindClientById(id:ID): OAuthClient
-    oAuthGetClients(query:QueryStatement): [OAuthClient]!
+    oAuthFindClient(query:QueryStatement constraint:QueryStatement): OAuthClient
+    oAuthFindClientById(id:ID constraint:QueryStatement): OAuthClient
+    oAuthGetClients(query:QueryStatement constraint:QueryStatement): [OAuthClient]!
     oAuthPaginateClients(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -70,7 +70,7 @@ type Mutation
 {
     oAuthCreateClient(payload: OAuthCreateClientInput!): OAuthClient
     oAuthCreateClients(payload: [OAuthCreateClientInput]!): Boolean!
-    oAuthUpdateClient(payload: OAuthUpdateClientInput!): OAuthClient
-    oAuthDeleteClientById(id: ID!): OAuthClient
-    oAuthDeleteClients(query:QueryStatement): [OAuthClient]!
+    oAuthUpdateClient(payload: OAuthUpdateClientInput! constraint:QueryStatement): OAuthClient
+    oAuthDeleteClientById(id: ID! constraint:QueryStatement): OAuthClient
+    oAuthDeleteClients(query:QueryStatement constraint:QueryStatement): [OAuthClient]!
 }

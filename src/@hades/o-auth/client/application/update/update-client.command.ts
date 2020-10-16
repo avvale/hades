@@ -1,3 +1,5 @@
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+
 export class UpdateClientCommand 
 {
     constructor(
@@ -13,5 +15,6 @@ export class UpdateClientCommand
         public readonly isMaster?: boolean,
         public readonly applicationIds?: string[],
         
+        public readonly constraint?: QueryStatement,
     ) {}
 }

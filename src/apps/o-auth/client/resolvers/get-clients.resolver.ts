@@ -1,4 +1,10 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Args, Query } from '@nestjs/graphql';
+
+// authorization
+import { UseGuards } from '@nestjs/common';
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
@@ -7,6 +13,8 @@ import { GetClientsQuery } from '@hades/o-auth/client/application/get/get-client
 import { OAuthClient } from './../../../../graphql';
 
 @Resolver()
+@Permissions('oAuth.client.get')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class GetClientsResolver
 {
     constructor(
@@ -14,8 +22,8 @@ export class GetClientsResolver
     ) {}
 
     @Query('oAuthGetClients')
-    async main(@Args('query') queryStatement?: QueryStatement): Promise<OAuthClient[]>
+    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<OAuthClient[]>
     {
-        return await this.queryBus.ask(new GetClientsQuery(queryStatement));
+        return await this.queryBus.ask(new GetClientsQuery(queryStatement, constraint));
     }
 }
