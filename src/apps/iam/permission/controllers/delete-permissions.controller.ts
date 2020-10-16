@@ -1,6 +1,11 @@
-import { Controller, Delete, Body } from '@nestjs/common';
+import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { PermissionDto } from './../dto/permission.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -11,6 +16,8 @@ import { DeletePermissionsCommand } from '@hades/iam/permission/application/dele
 
 @ApiTags('[iam] permission')
 @Controller('iam/permissions')
+@Permissions('iam.permission.delete')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class DeletePermissionsController 
 {
     constructor(
@@ -23,11 +30,11 @@ export class DeletePermissionsController
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [PermissionDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement, )
     {
-        const permissions = await this.queryBus.ask(new GetPermissionsQuery(queryStatement));
+        const permissions = await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint));
 
-        await this.commandBus.dispatch(new DeletePermissionsCommand(queryStatement));
+        await this.commandBus.dispatch(new DeletePermissionsCommand(queryStatement, constraint));
 
         return permissions;
     }
