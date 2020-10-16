@@ -1028,9 +1028,9 @@ export interface IQuery {
     oAuthFindAccessTokenById(id?: string, constraint?: QueryStatement): OAuthAccessToken | Promise<OAuthAccessToken>;
     oAuthGetAccessTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthAccessToken[] | Promise<OAuthAccessToken[]>;
     oAuthPaginateAccessTokens(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    oAuthFindApplication(query?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
-    oAuthFindApplicationById(id?: string): OAuthApplication | Promise<OAuthApplication>;
-    oAuthGetApplications(query?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
+    oAuthFindApplication(query?: QueryStatement, constraint?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
+    oAuthFindApplicationById(id?: string, constraint?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
+    oAuthGetApplications(query?: QueryStatement, constraint?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
     oAuthPaginateApplications(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     oAuthFindClient(query?: QueryStatement): OAuthClient | Promise<OAuthClient>;
     oAuthFindClientById(id?: string): OAuthClient | Promise<OAuthClient>;
@@ -1155,9 +1155,9 @@ export interface IMutation {
     oAuthDeleteAccessTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthAccessToken[] | Promise<OAuthAccessToken[]>;
     oAuthCreateApplication(payload: OAuthCreateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
     oAuthCreateApplications(payload: OAuthCreateApplicationInput[]): boolean | Promise<boolean>;
-    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
-    oAuthDeleteApplicationById(id: string): OAuthApplication | Promise<OAuthApplication>;
-    oAuthDeleteApplications(query?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
+    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput, constraint?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
+    oAuthDeleteApplicationById(id: string, constraint?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
+    oAuthDeleteApplications(query?: QueryStatement, constraint?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
     oAuthCreateClient(payload: OAuthCreateClientInput): OAuthClient | Promise<OAuthClient>;
     oAuthCreateClients(payload: OAuthCreateClientInput[]): boolean | Promise<boolean>;
     oAuthUpdateClient(payload: OAuthUpdateClientInput): OAuthClient | Promise<OAuthClient>;
