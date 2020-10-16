@@ -1,7 +1,11 @@
 import { Controller, Get, Body, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { LangDto } from './../dto/lang.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
@@ -10,7 +14,8 @@ import { GetLangsQuery } from '@hades/admin/lang/application/get/get-langs.query
 
 @ApiTags('[admin] lang')
 @Controller('admin/langs')
-@UseGuards(AuthGuard('jwt'))
+@Permissions('admin.lang.get')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class GetLangsController 
 {
     constructor(
@@ -22,8 +27,8 @@ export class GetLangsController
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [LangDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement, )
     {
-        return await this.queryBus.ask(new GetLangsQuery(queryStatement));   
+        return await this.queryBus.ask(new GetLangsQuery(queryStatement, constraint));   
     }
 }

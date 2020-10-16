@@ -1,7 +1,11 @@
 import { Controller, Get, Body, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { LangDto } from './../dto/lang.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
@@ -11,7 +15,8 @@ import { Pagination } from '@hades/shared/domain/lib/pagination';
 
 @ApiTags('[admin] lang')
 @Controller('admin/langs/paginate')
-@UseGuards(AuthGuard('jwt'))
+@Permissions('admin.lang.get')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class PaginateLangsController 
 {
     constructor(
