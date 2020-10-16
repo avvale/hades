@@ -1490,6 +1490,7 @@ export interface CciRole {
 
 export interface CciSystem {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
     version: GraphQLString;
