@@ -2,6 +2,8 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: channel-overview
 moduleNames: channels-overview
+hasOAuth: true
+hasTenant: true
 aggregateProperties:
   - name: id
     type: id

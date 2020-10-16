@@ -2,6 +2,8 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: flow
 moduleNames: flows
+hasOAuth: true
+hasTenant: true
 aggregateProperties:
   - name: id
     type: id
