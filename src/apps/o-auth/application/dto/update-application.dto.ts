@@ -6,7 +6,7 @@ export class UpdateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '09ec177d-3de6-47fb-998b-2b9e097d2cc5'
+        example     : '5e094583-3e92-4ef7-9513-cfbc7bc989d8'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'xx7k010wdh1tjrqzzmbwme2ycou52r6w6mke8v1041tnrsimgrnbxmdrwiw8genqg171v4fdceebu50wtmnb7qaq4e0oowjkknaoh9n3ykxpf1mn95bfwy050l7vhet20a7nmgnapxmbnyt4wt08012oabez89sbsm34ifz2hng19mm19rt6xm5u2rl7syhtllgv5vnqesz8hoe8aho9gutc5tneace5coft4z39as2tf5ea13ouxr3zlxkx2ah'
+        example     : 'xjogrox2njb6iccjqpiqiz9hiuv2ycrgzim01k1gbaqs8pv3dbz7epzugmnye6n0xu1bg7df9su64zfwtyp9jhg9xmn2po5siousg8e0d4dpie1uc60cfee335g33aihn740i05eoo8g3nksk2za5byz4sns806kv0tg3f12zvyvaek119r6zvd70upbn2eol9gziqvbdhh4jgwqupflg61q24jpwrdn24a4djd1xs4fshfglypqno41dw6j0dk'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class UpdateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'cerftpm7x8qxct4u7h161jv5wle5w5ezqw905z8bwztcipk3jl'
+        example     : 'qjofpwvgdgf9w7zftgtmpnaay2g2byuj2n23um9q096iiqoi8q'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class UpdateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'secret [input here api field description]',
-        example     : '9cls73ucapm5h80g4taz8fv9wutbeyr9kaea9m3x9wav32fqpp1qy2hppvxm5q85uek0wn738icrg20awa4mo2t6wt'
+        example     : 'mpe4sqhdg1j9cfs7nf59jlpz5z3lrp58wq6vij5bepe3njzrwkf46zrwqpqzee3bab4mf8uct3dd72mzcvxmg1otmx'
     })
     secret: string;
     
@@ -42,7 +42,7 @@ export class UpdateApplicationDto
     @ApiProperty({
         type        : Boolean,
         description : 'isMaster [input here api field description]',
-        example     : true
+        example     : false
     })
     isMaster: boolean;
     

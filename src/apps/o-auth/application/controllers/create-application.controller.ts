@@ -1,7 +1,12 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateApplicationDto } from './../dto/create-application.dto';
 import { ApplicationDto } from './../dto/application.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -11,6 +16,8 @@ import { CreateApplicationCommand } from '@hades/o-auth/application/application/
 
 @ApiTags('[o-auth] application')
 @Controller('o-auth/application')
+@Permissions('oAuth.application.create')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CreateApplicationController 
 {
     constructor(
