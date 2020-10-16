@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
@@ -19,7 +19,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     id: string;
         
-             
+                     
         
     
     
@@ -33,7 +33,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     hash: string;
         
-             
+                     
         
     @ForeignKey(() => IamTenantModel)
     
@@ -53,7 +53,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     tenantId: string;
         
-    
+            
     @BelongsTo(() => IamTenantModel)
     tenant: IamTenantModel;
              
@@ -70,7 +70,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     tenantCode: string;
         
-             
+                     
         
     @ForeignKey(() => CciSystemModel)
     
@@ -90,7 +90,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     systemId: string;
         
-    
+            
     @BelongsTo(() => CciSystemModel)
     system: CciSystemModel;
              
@@ -107,7 +107,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     systemName: string;
         
-             
+                     
         
     
     
@@ -121,7 +121,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     party: string;
         
-             
+                     
         
     
     
@@ -135,7 +135,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     component: string;
         
-             
+                     
         
     
     
@@ -149,7 +149,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     name: string;
         
-             
+                     
         
     // @Index
     
@@ -163,7 +163,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     flowHash: string;
         
-             
+                     
         
     
     
@@ -177,7 +177,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     flowParty: string;
         
-             
+                     
         
     
     
@@ -191,7 +191,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     flowReceiverParty: string;
         
-             
+                     
         
     
     
@@ -205,7 +205,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     flowComponent: string;
         
-             
+                     
         
     
     
@@ -219,7 +219,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     flowReceiverComponent: string;
         
-             
+                     
         
     
     
@@ -233,7 +233,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     flowInterfaceName: string;
         
-             
+                     
         
     
     
@@ -247,7 +247,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     flowInterfaceNamespace: string;
         
-             
+                     
         
     
     
@@ -261,7 +261,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     version: string;
         
-             
+                     
         
     
     
@@ -275,7 +275,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     adapterType: string;
         
-             
+                     
         
     
     
@@ -289,7 +289,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     direction: string;
         
-             
+                     
         
     
     
@@ -303,7 +303,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     transportProtocol: string;
         
-             
+                     
         
     
     
@@ -317,7 +317,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     messageProtocol: string;
         
-             
+                     
         
     
     
@@ -331,7 +331,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     adapterEngineName: string;
         
-             
+                     
         
     
     
@@ -345,7 +345,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     url: string;
         
-             
+                     
         
     
     
@@ -359,7 +359,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     username: string;
         
-             
+                     
         
     
     
@@ -373,7 +373,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     remoteHost: string;
         
-             
+                     
         
     
     
@@ -387,7 +387,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     remotePort: number;
         
-             
+                     
         
     
     
@@ -401,7 +401,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     directory: string;
         
-             
+                     
         
     
     
@@ -415,7 +415,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     fileSchema: string;
         
-             
+                     
         
     
     
@@ -429,7 +429,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     proxyHost: string;
         
-             
+                     
         
     
     
@@ -443,7 +443,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     proxyPort: number;
         
-             
+                     
         
     
     
@@ -457,7 +457,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     destination: string;
         
-             
+                     
         
     
     
@@ -471,7 +471,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     adapterStatus: string;
         
-             
+                     
         
     
     
@@ -485,7 +485,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     softwareComponentName: string;
         
-             
+                     
         
     
     
@@ -499,7 +499,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     responsibleUserAccountName: string;
         
-             
+                     
         
     
     
@@ -513,7 +513,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     lastChangeUserAccount: string;
         
-             
+                     
         
     
     
@@ -527,7 +527,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     lastChangedAt: string;
         
-             
+                     
         
     
     
@@ -541,7 +541,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     riInterfaceName: string;
         
-             
+                     
         
     
     
@@ -555,7 +555,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     riInterfaceNamespace: string;
         
-             
+                     
         
     
     
@@ -569,7 +569,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     createdAt: string;
         
-             
+                     
         
     
     
@@ -583,7 +583,7 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     updatedAt: string;
         
-             
+                     
         
     
     
@@ -597,5 +597,5 @@ export class CciChannelModel extends Model<CciChannelModel>
     })
     deletedAt: string;
         
-            
+                    
 }

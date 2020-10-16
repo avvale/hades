@@ -46,6 +46,7 @@ import {
 import { CreatedChannelEvent } from './../application/events/created-channel.event';
 import { UpdatedChannelEvent } from './../application/events/updated-channel.event';
 import { DeletedChannelEvent } from './../application/events/deleted-channel.event';
+
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 
@@ -96,6 +97,8 @@ export class CciChannel extends AggregateRoot
     deletedAt: ChannelDeletedAt;
     
     // eager relationship
+    
+    
     tenant: IamTenant;
     system: CciSystem;
     
@@ -148,6 +151,8 @@ export class CciChannel extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
+        
+        
         this.tenant = tenant;
         this.system = system;
         
@@ -356,6 +361,8 @@ export class CciChannel extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             

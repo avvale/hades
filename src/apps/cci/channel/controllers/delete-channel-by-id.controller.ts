@@ -1,15 +1,28 @@
-import { Controller, Param, Delete } from '@nestjs/common';
+import { Controller, Param, Delete, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ChannelDto } from './../dto/channel.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
+
+// tenant
+import { AccountResponse } from '@hades/iam/account/domain/account.response';
+import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
+import { TenantConstraint } from './../../../shared/decorators/tenant-constraint.decorator';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { FindChannelByIdQuery } from '@hades/cci/channel/application/find/find-channel-by-id.query';
 import { DeleteChannelByIdCommand } from '@hades/cci/channel/application/delete/delete-channel-by-id.command';
 
 @ApiTags('[cci] channel')
 @Controller('cci/channel')
+@Permissions('cci.channel.delete')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class DeleteChannelByIdController 
 {
     constructor(
@@ -20,11 +33,12 @@ export class DeleteChannelByIdController
     @Delete(':id')
     @ApiOperation({ summary: 'Delete channel by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: ChannelDto })
-    async main(@Param('id') id: string)
+    @TenantConstraint()
+    async main(@CurrentAccount() account: AccountResponse, @Param('id') id: string, @Body('constraint') constraint?: QueryStatement, )
     {
-        const channel = await this.queryBus.ask(new FindChannelByIdQuery(id));
+        const channel = await this.queryBus.ask(new FindChannelByIdQuery(id, constraint));
 
-        await this.commandBus.dispatch(new DeleteChannelByIdCommand(id));
+        await this.commandBus.dispatch(new DeleteChannelByIdCommand(id, constraint));
 
         return channel;
     }
