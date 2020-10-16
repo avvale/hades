@@ -1,20 +1,29 @@
+import { JwtService } from '@nestjs/jwt';
 import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
-import { IamAccountType, IamUpdateAccountInput } from './../../../../graphql';
+
+// authorization
+import { UseGuards } from '@nestjs/common';
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
-import { UpdateUserCommand } from '@hades/iam/user/application/update/update-user.command';
 import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-account-by-id.query';
+import { UpdateUserCommand } from '@hades/iam/user/application/update/update-user.command';
 import { Jwt } from '@hades/shared/domain/lib/hades.types';
 import { FindAccessTokenByIdQuery } from '@hades/o-auth/access-token/application/find/find-access-token-by-id.query';
 import { FindClientQuery } from '@hades/o-auth/client/application/find/find-client.query';
-import { JwtService } from '@nestjs/jwt';
 import { GetRolesQuery } from '@hades/iam/role/application/get/get-roles.query';
 import { Utils } from '@hades/iam/account/domain/lib/utils';
+import { IamAccountType, IamUpdateAccountInput } from './../../../../graphql';
 
 @Resolver()
+@Permissions('iam.account.update')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class UpdateAccountResolver
 {
     constructor(

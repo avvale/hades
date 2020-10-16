@@ -8,7 +8,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'a1116da9-e76d-41ab-a195-c0a8fc527e15'
+        example     : 'a961f0df-8b14-4af1-9d95-bd672dca7d80'
     })
     id: string;
     
@@ -17,7 +17,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'type [input here api field description]',
-        example     : 'USER',
+        example     : 'SERVICE',
         enum        : ['USER','SERVICE']
     })
     type: string;
@@ -27,7 +27,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'email [input here api field description]',
-        example     : 'ugb0gv8wm9jc4z6y1ttdaq9rbdvvut50c8r7tjay09treds4fe5qzyoa0t5tnhxug3lqxfck5mp3fvf5iqavcv913dp31belctji8zfhf6nnmpxbznl386u9'
+        example     : '59tkfut6hosmtnduhp7y80shd04713bex27mvt9nemttj4ftg78nagy4wkwfx9ufb5zg4i4p40zg5xb340v2nbxjrc368ntl3qph2crf1qxg8jdcgll857t2'
     })
     email: string;
     
@@ -45,7 +45,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : '58cad0be-cb7c-4784-b485-8c8ff6e56414'
+        example     : '943f4e5c-22fe-494c-8987-7bd283d7717e'
     })
     clientId: string;
     
@@ -108,7 +108,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-10-07 00:40:20'
+        example     : '2020-10-15 21:19:31'
     })
     createdAt: string;
     
@@ -117,7 +117,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-10-07 21:12:11'
+        example     : '2020-10-16 00:16:34'
     })
     updatedAt: string;
     
@@ -126,7 +126,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-10-07 20:03:15'
+        example     : '2020-10-16 01:37:31'
     })
     deletedAt: string;
     

@@ -1,3 +1,5 @@
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+
 export class UpdateAccountCommand 
 {
     constructor(
@@ -11,6 +13,7 @@ export class UpdateAccountCommand
         public readonly data?: any,
         public readonly roleIds?: string[],
         public readonly tenantIds?: string[],
+        public readonly constraint?: QueryStatement,
         
     ) {}
 }
