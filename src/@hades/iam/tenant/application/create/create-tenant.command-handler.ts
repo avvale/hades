@@ -30,7 +30,6 @@ export class CreateTenantCommandHandler implements ICommandHandler<CreateTenantC
             new TenantIsActive(command.isActive),
             new TenantData(command.data),
             new TenantAccountIds(command.accountIds),
-            
         );
     }
 }

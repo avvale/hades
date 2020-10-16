@@ -7,7 +7,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '235f8cdb-d652-4a2f-a996-8a729d774e90'
+        example     : 'bf7b0cb5-9279-4dfe-a957-989935830dc8'
     })
     id: string;
     
@@ -16,7 +16,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'drxl11rsje28608t8wou40htqpfdfnpvefznwtictzoof3lae1ffh33ye25k6vdin2gpzfdtzh8i2zz7wxmfz8eapm5nv3e7y2px5jqn59tc1dddlwhp9xk88ooe9bc55dxftk4y8a0wf6haxfx09c59wvespl0tqgwz8sdv0sgv4x75g79k3tg1dswqc0r2of8dyhq6zrr0phck7ut7vfqt34r7t6myeodfxr1ek8xack42p1i9dnljex3kumr'
+        example     : 'c40aq3lw14ykrgc7rq04gfoc2crjreso54nb2045wfjt015pwxo27uvuhrcfxywe1tlohef8qjrkotlu200igoold36ljbcanzwlv1jx88iagr1hmuzmtcak9wfxqp8glxcvkzl9hptgt7ii7bp5qyhkmcppbsa5mt7wxltmditpahgh21xs58294ibtzdmvaseq8eg25twnqui5ngxm6ooqccai7d9l2y6a4r3nhp104px6ky7kaxor3euquek'
     })
     name: string;
     
@@ -25,7 +25,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'ua98t10lt4jvr8mmt97vk10iqjwsifnrtje3f7an3j4beda68h'
+        example     : 'cqr5broeqvcbnkz3btbw2769fuj715e24f873cnvfam0sthwdv'
     })
     code: string;
     
@@ -34,7 +34,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'logo [input here api field description]',
-        example     : 'e0xk9cy0qbiedvddxs20dzl7hsxatfr4rym670qur2l9itggkjl74ghvzk3fqrg8x0nzz3db9kqb9gz8tsb4lx3fhl2e9zkky6l3qdiv6gark2xyyz7njmtwy18k4ckyibebz596msovxoujlejxv45sejzsz60caxw632cdqctt4odnv3e9zh52u0jhozj46feflclz9d4dnce63pl463kddlwd5tliimulz5gs9fv6z02yawaud8yipiealt3'
+        example     : 'zc0itz1aexotl94nw6selur7ftpv8ul89vp8aw1go96l3du5hqkvxvhq6wtqcrciro5kngipip25xjk6w7pgde4lljgzgcjxfkh67bdw8ycyp65uuylwcadaw2mx7ljp8bwapbahzt7gkzkjsowv4vblcl8dtrb6bt8ochy1pdxnzz4ddxp6kuhgyx8cpp73j2b294znlr2ipfaimivpdbgnezq7zeeg65xrfpj9kx31qx9g4fi74lvqjemi6i7'
     })
     logo: string;
     
@@ -43,7 +43,7 @@ export class TenantDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : true
+        example     : false
     })
     isActive: boolean;
     
@@ -70,7 +70,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-09-24 15:00:40'
+        example     : '2020-10-16 00:40:23'
     })
     createdAt: string;
     
@@ -79,7 +79,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-09-23 19:16:02'
+        example     : '2020-10-15 21:28:01'
     })
     updatedAt: string;
     
@@ -88,7 +88,7 @@ export class TenantDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-09-24 04:22:43'
+        example     : '2020-10-16 12:55:33'
     })
     deletedAt: string;
     

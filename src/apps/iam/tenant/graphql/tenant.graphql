@@ -41,9 +41,9 @@ input IamUpdateTenantInput
 
 type Query 
 {
-    iamFindTenant(query:QueryStatement): IamTenant
-    iamFindTenantById(id:ID): IamTenant
-    iamGetTenants(query:QueryStatement): [IamTenant]!
+    iamFindTenant(query:QueryStatement constraint:QueryStatement): IamTenant
+    iamFindTenantById(id:ID constraint:QueryStatement): IamTenant
+    iamGetTenants(query:QueryStatement constraint:QueryStatement): [IamTenant]!
     iamPaginateTenants(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -51,7 +51,7 @@ type Mutation
 {
     iamCreateTenant(payload: IamCreateTenantInput!): IamTenant
     iamCreateTenants(payload: [IamCreateTenantInput]!): Boolean!
-    iamUpdateTenant(payload: IamUpdateTenantInput!): IamTenant
-    iamDeleteTenantById(id: ID!): IamTenant
-    iamDeleteTenants(query:QueryStatement): [IamTenant]!
+    iamUpdateTenant(payload: IamUpdateTenantInput! constraint:QueryStatement): IamTenant
+    iamDeleteTenantById(id: ID! constraint:QueryStatement): IamTenant
+    iamDeleteTenants(query:QueryStatement constraint:QueryStatement): [IamTenant]!
 }

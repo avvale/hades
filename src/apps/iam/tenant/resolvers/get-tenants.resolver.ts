@@ -1,20 +1,20 @@
-import { UseGuards } from '@nestjs/common';
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Args, Query } from '@nestjs/graphql';
 
 // authorization
+import { UseGuards } from '@nestjs/common';
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
-import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
-import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { GetTenantsQuery } from '@hades/iam/tenant/application/get/get-tenants.query';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { IamTenant } from './../../../../graphql';
 
 @Resolver()
 @Permissions('iam.tenant.get')
-@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class GetTenantsResolver
 {
     constructor(
@@ -22,8 +22,8 @@ export class GetTenantsResolver
     ) {}
 
     @Query('iamGetTenants')
-    async main(@Args('query') queryStatement?: QueryStatement): Promise<IamTenant[]>
+    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<IamTenant[]>
     {
-        return await this.queryBus.ask(new GetTenantsQuery(queryStatement));
+        return await this.queryBus.ask(new GetTenantsQuery(queryStatement, constraint));
     }
 }
