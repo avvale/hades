@@ -35,9 +35,9 @@ input OAuthUpdateRefreshTokenInput
 
 type Query 
 {
-    oAuthFindRefreshToken(query:QueryStatement): OAuthRefreshToken
-    oAuthFindRefreshTokenById(id:ID): OAuthRefreshToken
-    oAuthGetRefreshTokens(query:QueryStatement): [OAuthRefreshToken]!
+    oAuthFindRefreshToken(query:QueryStatement constraint:QueryStatement): OAuthRefreshToken
+    oAuthFindRefreshTokenById(id:ID constraint:QueryStatement): OAuthRefreshToken
+    oAuthGetRefreshTokens(query:QueryStatement constraint:QueryStatement): [OAuthRefreshToken]!
     oAuthPaginateRefreshTokens(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -45,7 +45,7 @@ type Mutation
 {
     oAuthCreateRefreshToken(payload: OAuthCreateRefreshTokenInput!): OAuthRefreshToken
     oAuthCreateRefreshTokens(payload: [OAuthCreateRefreshTokenInput]!): Boolean!
-    oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput!): OAuthRefreshToken
-    oAuthDeleteRefreshTokenById(id: ID!): OAuthRefreshToken
-    oAuthDeleteRefreshTokens(query:QueryStatement): [OAuthRefreshToken]!
+    oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput! constraint:QueryStatement): OAuthRefreshToken
+    oAuthDeleteRefreshTokenById(id: ID! constraint:QueryStatement): OAuthRefreshToken
+    oAuthDeleteRefreshTokens(query:QueryStatement constraint:QueryStatement): [OAuthRefreshToken]!
 }

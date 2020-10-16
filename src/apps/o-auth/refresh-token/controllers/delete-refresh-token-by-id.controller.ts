@@ -1,15 +1,23 @@
-import { Controller, Param, Delete } from '@nestjs/common';
+import { Controller, Param, Delete, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { RefreshTokenDto } from './../dto/refresh-token.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { FindRefreshTokenByIdQuery } from '@hades/o-auth/refresh-token/application/find/find-refresh-token-by-id.query';
 import { DeleteRefreshTokenByIdCommand } from '@hades/o-auth/refresh-token/application/delete/delete-refresh-token-by-id.command';
 
 @ApiTags('[o-auth] refresh-token')
 @Controller('o-auth/refresh-token')
+@Permissions('oAuth.refreshToken.delete')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class DeleteRefreshTokenByIdController 
 {
     constructor(
@@ -20,11 +28,11 @@ export class DeleteRefreshTokenByIdController
     @Delete(':id')
     @ApiOperation({ summary: 'Delete refresh-token by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: RefreshTokenDto })
-    async main(@Param('id') id: string)
+    async main(@Param('id') id: string, @Body('constraint') constraint?: QueryStatement, )
     {
-        const refreshToken = await this.queryBus.ask(new FindRefreshTokenByIdQuery(id));
+        const refreshToken = await this.queryBus.ask(new FindRefreshTokenByIdQuery(id, constraint));
 
-        await this.commandBus.dispatch(new DeleteRefreshTokenByIdCommand(id));
+        await this.commandBus.dispatch(new DeleteRefreshTokenByIdCommand(id, constraint));
 
         return refreshToken;
     }
