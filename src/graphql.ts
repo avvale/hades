@@ -145,9 +145,9 @@ export interface IQuery {
     oAuthFindClientById(id?: string, constraint?: QueryStatement): OAuthClient | Promise<OAuthClient>;
     oAuthGetClients(query?: QueryStatement, constraint?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
     oAuthPaginateClients(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    oAuthFindRefreshToken(query?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthFindRefreshTokenById(id?: string): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthGetRefreshTokens(query?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
+    oAuthFindRefreshToken(query?: QueryStatement, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
+    oAuthFindRefreshTokenById(id?: string, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
+    oAuthGetRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
     oAuthPaginateRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
 }
 
@@ -170,9 +170,9 @@ export interface IMutation {
     oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
     oAuthCreateRefreshToken(payload: OAuthCreateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthCreateRefreshTokens(payload: OAuthCreateRefreshTokenInput[]): boolean | Promise<boolean>;
-    oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthDeleteRefreshTokenById(id: string): OAuthRefreshToken | Promise<OAuthRefreshToken>;
-    oAuthDeleteRefreshTokens(query?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
+    oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
+    oAuthDeleteRefreshTokenById(id: string, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
+    oAuthDeleteRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
 }
 
 export interface OAuthApplication {
