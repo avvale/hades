@@ -6,7 +6,7 @@ export class UpdateUserDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '5109fd03-621e-4c9b-bfcf-b240394770f9'
+        example     : '78782da7-e8aa-4668-84b5-0232a2a9039c'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateUserDto
     @ApiProperty({
         type        : String,
         description : 'accountId [input here api field description]',
-        example     : 'a8ac502f-deeb-4168-934f-3d5a038e830a'
+        example     : 'a19e48fd-b959-46ae-ad76-ebf13d1701fa'
     })
     accountId: string;
     
@@ -24,7 +24,7 @@ export class UpdateUserDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'eddbk7u9hbluf3e2ya1ew3f1vb3snt521bsuefrhb0g6kxllme46xppdwi5iup504fjujphqer0ibb8vf78i6c8wplxp7eovk3a9d7awd8e2rt3dxh47q4imggtr3z2c7zlzujrag516l0bepqrb16ahynyl2kahf19aehz9eqgvfmvftwbr125cnwal495oegmr9ue54bgd9nri1x5v5evwp62nhisn9ihobkyd1ug00nzu2t7vf02379dihdm'
+        example     : '2rrmwpm95uundmdjqsb2hsvhuoovfcmolbtvmpvjhtems3l1bnnoi68cqh9q0dk6b9t8ko2vzmz2k9diroxqz9fgbtxing7mep0rhm7bxhbqmsx7saigf3dr5rv17q9h3g0ddlvwuqqt6xkg6rxs3stmhyvlc1z76nr4grjv7npan7piptdp87ez4j2shk0mpp0s8s8zg4k1ruoeqlrb0a8er2g35rl9nhetxdhvocv2pf5cc00v97nm335w755'
     })
     name: string;
     
@@ -33,7 +33,7 @@ export class UpdateUserDto
     @ApiProperty({
         type        : String,
         description : 'surname [input here api field description]',
-        example     : 'xz92tgtt2f2a2xd54no6b47ri4z1824y395jpi0tz4fqoo4j8xsr2r2jgr80ur9dm2owmizjsbwekiuvgliyxzykmtbij5uqo5r3fxlcjv5nhxf47ll2bnlig54ugbhcp6knn980xzlzwdqowzhd6nx18tqbmgty9hyybcrmktz6wk5o71t7l3mf2i7fy6ym8ulj1fpi9vdogvmwmev342s97gzwlwfrj6p2ocb0u9mderadwrpun3eszc75ra3'
+        example     : '4jhtgrcscnalfvn3aoiw5hbkbsqz1934g5vk7oytxmkwa4m3t7xx9ayofnap982zjo00zuvcphsz84rjxeq2bjil2ktfcswdx6i44cbdt4kubiualipe0u7brynh1flxzp41xtehjtp5zzt6t8to044qjv8ogppw3n0zz5hh0rzslk8mhzl8mcrjm3ox8nbrnkiywwg7387wctiz4neeywzsfdfsp6u55ypjfcwtbrh90jrifopebq8ccf9pdm6'
     })
     surname: string;
     
@@ -42,7 +42,7 @@ export class UpdateUserDto
     @ApiProperty({
         type        : String,
         description : 'avatar [input here api field description]',
-        example     : 'e8sgtog3zd5hb83f5mjucf5elj0hxzyvcdeaqt6ubjwg2mk7sthmfzy6llum6ihmbx21dsnfjf678jg7ne3q1bm6vctdnn0mu8ig4jo9n5m1i9ferltwnpop2h35bmdpj9ykw9khtbk35zs0bleghekirwb9sh0ikkyaz2ypt2xuhty432pwdjig3w08hgalhgbm4ihwm9atm1keepv8nr0mbmsoabxebyflyzudtq7m6y4uz87ezwht0zubbfx'
+        example     : 'xkjff2n3kjwpiz0hgm3q4g7n2on4vbnw2fqpvltpy4vtbfxbpgvfzh2uvihd977rr88ulo8op3f47ppwqmecext61eidmg3lnrnygyfoihpvbq9z8ryiistb88pl7643qk5044w6g0frd3x2pwnnp6aktyngq52c6rvsubo5rknc050fgntsfukruea2572h6d7es1q7wg7akdwptzyxv2yq3znl8zik8tm986nasg71dddfhhdfcwu0ypsudmp'
     })
     avatar: string;
     
@@ -51,7 +51,7 @@ export class UpdateUserDto
     @ApiProperty({
         type        : String,
         description : 'mobile [input here api field description]',
-        example     : 'ux4enck422703510np3dnysf5flg13wv5fby18c83ln27dz16dbqum9vml82'
+        example     : 'ul7y5dc40kzmrpi2ldaiwpxnhq38zosvuq4bjdgl5s8j8wvj8f560y3nhtfq'
     })
     mobile: string;
     
@@ -60,7 +60,7 @@ export class UpdateUserDto
     @ApiProperty({
         type        : String,
         description : 'langId [input here api field description]',
-        example     : '7bb5e1e1-5d7a-4f51-97cd-6b2713dce924'
+        example     : '4026894e-51dd-4542-9699-f2f32a5a6c8d'
     })
     langId: string;
     
@@ -69,7 +69,7 @@ export class UpdateUserDto
     @ApiProperty({
         type        : String,
         description : 'username [input here api field description]',
-        example     : '61753vemlva3fj84luzrly30lgv6c4rnyersx58r1cci31320ydi9puw7hcni1uc9aomk43w0znsv77qtd0nlylwox6k66bffiqopbsqoi00iprqge84zf0x'
+        example     : 'mg78oqy2f9x8fot8qyr4caxgk9vhyxakmswh4vie9kmqngdn517oysqlq6tpvvypfgw4ljw8imkvblbj2tptpgjtjvfw9fg8egfk8o6ag8a4azleze73qb8n'
     })
     username: string;
     
@@ -78,7 +78,7 @@ export class UpdateUserDto
     @ApiProperty({
         type        : String,
         description : 'password [input here api field description]',
-        example     : 'nm7cup7zd8wxx65g23ryye0drd0c8jbloodyps7mk499epy0fbzk8rhvk3da1kyo9pik0gh0h40dhuzracb7jirc3zvqzjslizwrh0i0ygd1x716g8k1v04yyam6n5gd0gtqfm6n6cnba5j9ops02nd5umgw4lh6gxedwek45iei9oa6jh4qm79vf02uygqmdwi09zfyapxgy0lllqyy2b2w95px03ttcqunz6ntxlhocm9v2scuzfzu10veapc'
+        example     : '2dk4ecxwcifnaop2xpxvvjz2qeqg42yecy093jlt6i4a726qs7jjnrfpvkh0reic5eq8enho9fq6iezeavkwy08d8rj80l3hpom8lg2uovo4w7ubnfhti4281bqv9pebx0wrlqvgzxh7m1106tk5mjlfh7lgz97plsdjr3d2wh7tzytfln8e4y0f7l37sapzjzfm2w7il8u6aoqw4hu3bszkmnbvv8rsrdo72hajjhzhc10uk7hkykqggxemxby'
     })
     password: string;
     
@@ -87,7 +87,7 @@ export class UpdateUserDto
     @ApiProperty({
         type        : String,
         description : 'rememberToken [input here api field description]',
-        example     : 'tpmtfdqhglcy238c5dn215rgfkyt9ros6iabp5uactxnrqx8s7ulp7fl2emuxbpc26wzeqqyrjda5unh6ianb5q4im2iz9obe1agd2ksnc93mne24t33jns3m3ek2l82djglfdc6vy778lc050fl1jjw4chw69skrspm0dwin6wxp2qbg33ripzxop07l1o2ulh2e22uqtbn3ilowvrqkqiog1abw5u6y78wq1yhracl4hweuii0qahu38gy193'
+        example     : 'yq0686tupjkh2oy8sj8p4r4z0m7g2h73bce0ct7r2kbzj61rr5n7lvlcmkgplazmww5rtj305qd1k5xnq5flivyvrqwkpke63drvpngjqxtyejahgjfece0iu6o6jn6tryjcy6u3dhaziepouck47z05v6yxu2uqvsa81zxa08rks8s4azq86x9n628crs5dp8ph73wdc4eu912d08rln0231bia8efido0jgbg3ahbgvca8ant7htkd85qt2ao'
     })
     rememberToken: string;
     
