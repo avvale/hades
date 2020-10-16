@@ -1,6 +1,11 @@
-import { Controller, Delete, Body } from '@nestjs/common';
+import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ApplicationDto } from './../dto/application.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -11,6 +16,8 @@ import { DeleteApplicationsCommand } from '@hades/o-auth/application/application
 
 @ApiTags('[o-auth] application')
 @Controller('o-auth/applications')
+@Permissions('oAuth.application.delete')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class DeleteApplicationsController 
 {
     constructor(
@@ -23,11 +30,11 @@ export class DeleteApplicationsController
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [ApplicationDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement, )
     {
-        const applications = await this.queryBus.ask(new GetApplicationsQuery(queryStatement));
+        const applications = await this.queryBus.ask(new GetApplicationsQuery(queryStatement, constraint));
 
-        await this.commandBus.dispatch(new DeleteApplicationsCommand(queryStatement));
+        await this.commandBus.dispatch(new DeleteApplicationsCommand(queryStatement, constraint));
 
         return applications;
     }

@@ -6,7 +6,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '09ec177d-3de6-47fb-998b-2b9e097d2cc5'
+        example     : '5e094583-3e92-4ef7-9513-cfbc7bc989d8'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'wli5rqeimmdkaiccckyv7j4f942lgjdlgcsv0972erh7ogqsejfafdavvifan8tvruz4pj8gdic5j8xa70r50lmoosho3yl0kljvdan5c53bqpz8ybb86opapgait794khl0519e9vuv2o7x1yd1b22pwxkirbkega78arxcadwz19rda0wxlvwovoh65dhnetfp9jpd55fqjq6nji881it2b8gxkwkeuae2b0s60uqnjqzb4dub6snnfykf10h'
+        example     : '122hk6mn9qaqk15r8sagdespkzjdblmmkvavv3lt489vaqz294j513ntkd28vi730wa3z4q4u5kloj6irajaqcu2r270ggsnth54v07lcl7n03t8xmmlgwhptveln8ni1gwmiq4vlzbk5xgqzjjorfbomtz49jk4fug9z7gtjy82dulsryhovl6u361zkbf1fcezgiih5larj1b76enecirnotf1pgqhjuifi2gt8cixo4e91dcejkwrut9xg1u'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'umaiznf2ujzp8mr1cluit6umak6q8i7dlcdirjgl3509v1ss1x'
+        example     : 'js72qrthpgojodc8eeierghrol5jal4bran2wpmcbds5565h7b'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : String,
         description : 'secret [input here api field description]',
-        example     : 'mirzo5a7m4o6zo0o393yby9nbvf6yume49c0ca5k7foy1yatmj4s7wjxnx95c6zxp5510ydnwaan8vu7bgz3ozmsx2'
+        example     : 'bctwxbiaopj06p2wd0tvwhy0oroqj76sltgry64eumd3lz8pi8kvp62md93wmfwo1szl43u1on67xw2bs7pcqesrh7'
     })
     secret: string;
     
@@ -42,7 +42,7 @@ export class CreateApplicationDto
     @ApiProperty({
         type        : Boolean,
         description : 'isMaster [input here api field description]',
-        example     : false
+        example     : true
     })
     isMaster: boolean;
     

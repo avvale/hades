@@ -1,6 +1,11 @@
-import { Controller, Get, Body } from '@nestjs/common';
+import { Controller, Get, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ApplicationDto } from './../dto/application.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
@@ -9,6 +14,8 @@ import { FindApplicationQuery } from '@hades/o-auth/application/application/find
 
 @ApiTags('[o-auth] application')
 @Controller('o-auth/application')
+@Permissions('oAuth.application.get')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class FindApplicationController 
 {
     constructor(
@@ -20,8 +27,8 @@ export class FindApplicationController
     @ApiOkResponse({ description: 'The record has been successfully created.', type: ApplicationDto })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement, )
     {
-        return await this.queryBus.ask(new FindApplicationQuery(queryStatement));   
+        return await this.queryBus.ask(new FindApplicationQuery(queryStatement, constraint));   
     }
 }

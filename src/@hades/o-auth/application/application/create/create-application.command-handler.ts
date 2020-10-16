@@ -28,7 +28,6 @@ export class CreateApplicationCommandHandler implements ICommandHandler<CreateAp
             new ApplicationSecret(command.secret),
             new ApplicationIsMaster(command.isMaster),
             new ApplicationClientIds(command.clientIds),
-            
         );
     }
 }

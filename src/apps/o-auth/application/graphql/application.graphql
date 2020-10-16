@@ -38,9 +38,9 @@ input OAuthUpdateApplicationInput
 
 type Query 
 {
-    oAuthFindApplication(query:QueryStatement): OAuthApplication
-    oAuthFindApplicationById(id:ID): OAuthApplication
-    oAuthGetApplications(query:QueryStatement): [OAuthApplication]!
+    oAuthFindApplication(query:QueryStatement constraint:QueryStatement): OAuthApplication
+    oAuthFindApplicationById(id:ID constraint:QueryStatement): OAuthApplication
+    oAuthGetApplications(query:QueryStatement constraint:QueryStatement): [OAuthApplication]!
     oAuthPaginateApplications(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -48,7 +48,7 @@ type Mutation
 {
     oAuthCreateApplication(payload: OAuthCreateApplicationInput!): OAuthApplication
     oAuthCreateApplications(payload: [OAuthCreateApplicationInput]!): Boolean!
-    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput!): OAuthApplication
-    oAuthDeleteApplicationById(id: ID!): OAuthApplication
-    oAuthDeleteApplications(query:QueryStatement): [OAuthApplication]!
+    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput! constraint:QueryStatement): OAuthApplication
+    oAuthDeleteApplicationById(id: ID! constraint:QueryStatement): OAuthApplication
+    oAuthDeleteApplications(query:QueryStatement constraint:QueryStatement): [OAuthApplication]!
 }
