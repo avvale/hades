@@ -1,7 +1,11 @@
 import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { LangDto } from './../dto/lang.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -12,7 +16,8 @@ import { DeleteLangsCommand } from '@hades/admin/lang/application/delete/delete-
 
 @ApiTags('[admin] lang')
 @Controller('admin/langs')
-@UseGuards(AuthGuard('jwt'))
+@Permissions('admin.lang.delete')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class DeleteLangsController 
 {
     constructor(
@@ -25,11 +30,11 @@ export class DeleteLangsController
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [LangDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement, )
     {
-        const langs = await this.queryBus.ask(new GetLangsQuery(queryStatement));
+        const langs = await this.queryBus.ask(new GetLangsQuery(queryStatement, constraint));
 
-        await this.commandBus.dispatch(new DeleteLangsCommand(queryStatement));
+        await this.commandBus.dispatch(new DeleteLangsCommand(queryStatement, constraint));
 
         return langs;
     }
