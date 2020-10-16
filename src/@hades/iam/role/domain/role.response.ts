@@ -1,5 +1,6 @@
 
 
+
 import { PermissionResponse } from '@hades/iam/permission/domain/permission.response';
 import { AccountResponse } from '@hades/iam/account/domain/account.response';
 
@@ -14,6 +15,8 @@ export class RoleResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
+        
+        
         
         
         

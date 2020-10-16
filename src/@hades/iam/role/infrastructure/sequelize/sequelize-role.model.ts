@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamPermissionModel } from '@hades/iam/permission/infrastructure/sequelize/sequelize-permission.model';
     
@@ -23,7 +23,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     })
     id: string;
         
-             
+                     
         
     
     
@@ -37,7 +37,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     })
     name: string;
         
-             
+                     
         
     
     
@@ -51,9 +51,9 @@ export class IamRoleModel extends Model<IamRoleModel>
     })
     isMaster: boolean;
         
-             
+                     
         
-            
+                    
     @BelongsToMany(() => IamPermissionModel, () => IamPermissionsRolesModel)
     permissionIds: IamPermissionModel[];
 
@@ -61,7 +61,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     permissions: IamPermissionModel[];
      
         
-            
+                    
     @BelongsToMany(() => IamAccountModel, () => IamRolesAccountsModel)
     accountIds: IamAccountModel[];
 
@@ -81,7 +81,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     })
     createdAt: string;
         
-             
+                     
         
     
     
@@ -95,7 +95,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     })
     updatedAt: string;
         
-             
+                     
         
     
     
@@ -109,5 +109,5 @@ export class IamRoleModel extends Model<IamRoleModel>
     })
     deletedAt: string;
         
-            
+                    
 }

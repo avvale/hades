@@ -26,7 +26,6 @@ export class CreateRoleCommandHandler implements ICommandHandler<CreateRoleComma
             new RoleIsMaster(command.isMaster),
             new RolePermissionIds(command.permissionIds),
             new RoleAccountIds(command.accountIds),
-            
         );
     }
 }

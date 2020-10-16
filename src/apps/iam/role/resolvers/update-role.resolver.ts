@@ -1,9 +1,15 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { IamUpdateRoleInput } from './../../../../graphql';
+
+// authorization
+import { UseGuards } from '@nestjs/common';
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { UpdateRoleCommand } from '@hades/iam/role/application/update/update-role.command';
 import { FindRoleByIdQuery } from '@hades/iam/role/application/find/find-role-by-id.query';
 import { GetAccountsQuery } from '@hades/iam/account/application/get/get-accounts.query';
@@ -13,8 +19,11 @@ import { PermissionResponse } from '@hades/iam/permission/domain/permission.resp
 import { GetPermissionsQuery } from '@hades/iam/permission/application/get/get-permissions.query';
 import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
 import { IamUtils } from '@hades/iam/shared/domain/lib/iam-utils';
+import { IamUpdateRoleInput } from './../../../../graphql';
 
 @Resolver()
+@Permissions('iam.role.update')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class UpdateRoleResolver
 {
     constructor(
@@ -23,9 +32,8 @@ export class UpdateRoleResolver
     ) {}
 
     @Mutation('iamUpdateRole')
-    async main(@Args('payload') payload: IamUpdateRoleInput)
+    async main(@Args('payload') payload: IamUpdateRoleInput, @Args('constraint') constraint?: QueryStatement, )
     {
-
         // get all accounts
         const accounts: AccountResponse[] = await this.queryBus.ask(new GetAccountsQuery({
             include: {
