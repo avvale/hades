@@ -15,6 +15,7 @@ import { UpdatedRoleEvent } from './../application/events/updated-role.event';
 import { DeletedRoleEvent } from './../application/events/deleted-role.event';
 
 
+
 import { IamPermission } from '@hades/iam/permission/domain/permission.aggregate';
 import { IamAccount } from '@hades/iam/account/domain/account.aggregate';
 
@@ -30,6 +31,8 @@ export class IamRole extends AggregateRoot
     deletedAt: RoleDeletedAt;
     
     // eager relationship
+    
+    
     
     
     permissions: IamPermission[];
@@ -49,6 +52,8 @@ export class IamRole extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
+        
+        
         
         
         this.permissions = permissions;
@@ -125,6 +130,8 @@ export class IamRole extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             
             
             permissions: this.permissions?.map(item => item.toDTO()),

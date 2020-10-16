@@ -15,6 +15,7 @@ import {
 } from './value-objects';
 
 
+
 import { PermissionMapper } from '@hades/iam/permission/domain/permission.mapper';
 import { AccountMapper } from '@hades/iam/account/domain/account.mapper';
 
@@ -80,6 +81,8 @@ export class RoleMapper implements IMapper
             
             
             
+            
+            
             this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapModelsToAggregates(role.permissions) : undefined,
             this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapModelsToAggregates(role.accounts) : undefined,
             
@@ -99,6 +102,8 @@ export class RoleMapper implements IMapper
             role.createdAt.value,
             role.updatedAt.value,
             role.deletedAt.value,
+            
+            
             
             
             

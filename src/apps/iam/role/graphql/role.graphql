@@ -35,9 +35,9 @@ input IamUpdateRoleInput
 
 type Query 
 {
-    iamFindRole(query:QueryStatement): IamRole
-    iamFindRoleById(id:ID): IamRole
-    iamGetRoles(query:QueryStatement): [IamRole]!
+    iamFindRole(query:QueryStatement constraint:QueryStatement): IamRole
+    iamFindRoleById(id:ID constraint:QueryStatement): IamRole
+    iamGetRoles(query:QueryStatement constraint:QueryStatement): [IamRole]!
     iamPaginateRoles(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -45,7 +45,7 @@ type Mutation
 {
     iamCreateRole(payload: IamCreateRoleInput!): IamRole
     iamCreateRoles(payload: [IamCreateRoleInput]!): Boolean!
-    iamUpdateRole(payload: IamUpdateRoleInput!): IamRole
-    iamDeleteRoleById(id: ID!): IamRole
-    iamDeleteRoles(query:QueryStatement): [IamRole]!
+    iamUpdateRole(payload: IamUpdateRoleInput! constraint:QueryStatement): IamRole
+    iamDeleteRoleById(id: ID! constraint:QueryStatement): IamRole
+    iamDeleteRoles(query:QueryStatement constraint:QueryStatement): [IamRole]!
 }

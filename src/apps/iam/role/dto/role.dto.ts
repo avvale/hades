@@ -8,7 +8,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '922e168c-712d-48b3-9f45-137677eba31e'
+        example     : '46db8d55-08d3-4b2d-8ee5-0b8f4ea91b16'
     })
     id: string;
     
@@ -17,7 +17,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'u88aakyshepu6xvqa1lh6iqntovzkq31lyi30xo3aknh57lnktaocnw7ife7eu8xlw9x9owo82jls81m68hli0pmph7ew5490jgowngiewoqn64igmp184oyj12inyhk9gwe6ftr3gno9z7ssp8ez6jwxdfnmrkv9svsvcojil5hb2u3sg273l00knn5g01ncakrd7k1n3fr2prpjzinh48j2285s04izc5vkyfzjg8pmfbtkz6hfmcp0mrve39'
+        example     : '24lln7h5knez4dfl4nn2h698khnjfh07vaivkfqgukxc9k4e908qwke361v2cnnzp7fhlx3hb4roobg862awg944qfs69jcu4uy8299aw9n3474k6ysevsogvdlswzzndzveze0fqozzvyq0g19x8gzaz1n28742s41jfybxzw0awx3spxqgztcdav4duwaquf4a3nkk5qiejy1zuiv9f4ywz6p8witfrwa71logsvhc85fp1ujzsv8ol4diapi'
     })
     name: string;
     
@@ -26,7 +26,7 @@ export class RoleDto
     @ApiProperty({
         type        : Boolean,
         description : 'isMaster [input here api field description]',
-        example     : false
+        example     : true
     })
     isMaster: boolean;
     
@@ -53,7 +53,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-09-23 10:51:21'
+        example     : '2020-10-16 00:50:09'
     })
     createdAt: string;
     
@@ -62,7 +62,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-09-22 21:02:10'
+        example     : '2020-10-16 02:04:50'
     })
     updatedAt: string;
     
@@ -71,7 +71,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-09-23 08:39:00'
+        example     : '2020-10-16 00:08:00'
     })
     deletedAt: string;
     

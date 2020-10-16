@@ -1,7 +1,12 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateRoleDto } from './../dto/create-role.dto';
 import { RoleDto } from './../dto/role.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -11,6 +16,8 @@ import { CreateRoleCommand } from '@hades/iam/role/application/create/create-rol
 
 @ApiTags('[iam] role')
 @Controller('iam/role')
+@Permissions('iam.role.create')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CreateRoleController 
 {
     constructor(
