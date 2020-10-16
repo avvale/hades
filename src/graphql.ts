@@ -1045,7 +1045,7 @@ export interface IQuery {
 export interface IMutation {
     adminCreateLang(payload: AdminCreateLangInput): AdminLang | Promise<AdminLang>;
     adminCreateLangs(payload: AdminCreateLangInput[]): boolean | Promise<boolean>;
-    adminUpdateLang(payload: AdminUpdateLangInput): AdminLang | Promise<AdminLang>;
+    adminUpdateLang(payload: AdminUpdateLangInput, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
     adminDeleteLangById(id: string): AdminLang | Promise<AdminLang>;
     adminDeleteLangs(query?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
     cciCreateChannelDetail(payload: CciCreateChannelDetailInput): CciChannelDetail | Promise<CciChannelDetail>;
@@ -1130,7 +1130,7 @@ export interface IMutation {
     iamDeleteBoundedContexts(query?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
     iamCreatePermission(payload: IamCreatePermissionInput): IamPermission | Promise<IamPermission>;
     iamCreatePermissions(payload: IamCreatePermissionInput[]): boolean | Promise<boolean>;
-    iamUpdatePermission(payload: IamUpdatePermissionInput): IamPermission | Promise<IamPermission>;
+    iamUpdatePermission(payload: IamUpdatePermissionInput, constraint?: QueryStatement): IamPermission | Promise<IamPermission>;
     iamDeletePermissionById(id: string): IamPermission | Promise<IamPermission>;
     iamDeletePermissions(query?: QueryStatement): IamPermission[] | Promise<IamPermission[]>;
     iamCreateRole(payload: IamCreateRoleInput): IamRole | Promise<IamRole>;
