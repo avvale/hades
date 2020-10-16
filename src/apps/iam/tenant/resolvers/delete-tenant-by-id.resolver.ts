@@ -11,6 +11,7 @@ import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindTenantByIdQuery } from '@hades/iam/tenant/application/find/find-tenant-by-id.query';
 import { DeleteTenantByIdCommand } from '@hades/iam/tenant/application/delete/delete-tenant-by-id.command';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { GetAccountsQuery } from '@hades/iam/account/application/get/get-accounts.query';
 import { Operator } from '@hades/shared/domain/persistence/sql-statement/operator';
 import { Utils } from '@hades/iam/account/domain/lib/utils';
