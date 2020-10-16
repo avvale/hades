@@ -32,7 +32,6 @@ export class CreateLangCommandHandler implements ICommandHandler<CreateLangComma
             new LangIetf(command.ietf),
             new LangSort(command.sort),
             new LangIsActive(command.isActive),
-            
         );
     }
 }

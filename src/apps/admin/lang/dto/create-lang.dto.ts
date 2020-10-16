@@ -6,7 +6,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'c80cb940-c8dc-48c4-98c4-5757700aaa81'
+        example     : 'a021c553-0491-4ca7-b111-2335be61f140'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'o'
+        example     : 'r'
     })
     name: string;
     
@@ -33,7 +33,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'iso6392 [input here api field description]',
-        example     : '1f'
+        example     : 'ly'
     })
     iso6392: string;
     
@@ -42,7 +42,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'iso6393 [input here api field description]',
-        example     : 'h5u'
+        example     : '2ve'
     })
     iso6393: string;
     
@@ -51,7 +51,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : String,
         description : 'ietf [input here api field description]',
-        example     : 'flfum'
+        example     : '9p88n'
     })
     ietf: string;
     
@@ -60,7 +60,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
-        example     : 640000
+        example     : 420733
     })
     sort: number;
     
@@ -69,7 +69,7 @@ export class CreateLangDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : false
+        example     : true
     })
     isActive: boolean;
     

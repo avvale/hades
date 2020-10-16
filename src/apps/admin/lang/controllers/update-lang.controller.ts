@@ -1,4 +1,5 @@
-import { Controller, Body, Put } from '@nestjs/common';
+import { Controller, Body, Put, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateLangDto } from './../dto/update-lang.dto';
 import { LangDto } from './../dto/lang.dto';
@@ -11,6 +12,7 @@ import { FindLangByIdQuery } from '@hades/admin/lang/application/find/find-lang-
 
 @ApiTags('[admin] lang')
 @Controller('admin/lang')
+@UseGuards(AuthGuard('jwt'))
 export class UpdateLangController 
 {
     constructor(

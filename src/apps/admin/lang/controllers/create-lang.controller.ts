@@ -1,4 +1,5 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateLangDto } from './../dto/create-lang.dto';
 import { LangDto } from './../dto/lang.dto';
@@ -11,6 +12,7 @@ import { CreateLangCommand } from '@hades/admin/lang/application/create/create-l
 
 @ApiTags('[admin] lang')
 @Controller('admin/lang')
+@UseGuards(AuthGuard('jwt'))
 export class CreateLangController 
 {
     constructor(

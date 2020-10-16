@@ -54,7 +54,7 @@ type Mutation
 {
     adminCreateLang(payload: AdminCreateLangInput!): AdminLang
     adminCreateLangs(payload: [AdminCreateLangInput]!): Boolean!
-    adminUpdateLang(payload: AdminUpdateLangInput!): AdminLang
+    adminUpdateLang(payload: AdminUpdateLangInput! constraint:QueryStatement): AdminLang
     adminDeleteLangById(id: ID!): AdminLang
     adminDeleteLangs(query:QueryStatement): [AdminLang]!
 }
