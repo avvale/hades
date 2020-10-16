@@ -951,9 +951,9 @@ export interface IQuery {
     cciFindChannelOverviewById(id?: string): CciChannelOverview | Promise<CciChannelOverview>;
     cciGetChannelsOverview(query?: QueryStatement): CciChannelOverview[] | Promise<CciChannelOverview[]>;
     cciPaginateChannelsOverview(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    cciFindChannel(query?: QueryStatement): CciChannel | Promise<CciChannel>;
-    cciFindChannelById(id?: string): CciChannel | Promise<CciChannel>;
-    cciGetChannels(query?: QueryStatement): CciChannel[] | Promise<CciChannel[]>;
+    cciFindChannel(query?: QueryStatement, constraint?: QueryStatement): CciChannel | Promise<CciChannel>;
+    cciFindChannelById(id?: string, constraint?: QueryStatement): CciChannel | Promise<CciChannel>;
+    cciGetChannels(query?: QueryStatement, constraint?: QueryStatement): CciChannel[] | Promise<CciChannel[]>;
     cciPaginateChannels(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindContact(query?: QueryStatement): CciContact | Promise<CciContact>;
     cciFindContactById(id?: string): CciContact | Promise<CciContact>;
@@ -1060,9 +1060,9 @@ export interface IMutation {
     cciDeleteChannelsOverview(query?: QueryStatement): CciChannelOverview[] | Promise<CciChannelOverview[]>;
     cciCreateChannel(payload: CciCreateChannelInput): CciChannel | Promise<CciChannel>;
     cciCreateChannels(payload: CciCreateChannelInput[]): boolean | Promise<boolean>;
-    cciUpdateChannel(payload: CciUpdateChannelInput): CciChannel | Promise<CciChannel>;
-    cciDeleteChannelById(id: string): CciChannel | Promise<CciChannel>;
-    cciDeleteChannels(query?: QueryStatement): CciChannel[] | Promise<CciChannel[]>;
+    cciUpdateChannel(payload: CciUpdateChannelInput, constraint?: QueryStatement): CciChannel | Promise<CciChannel>;
+    cciDeleteChannelById(id: string, constraint?: QueryStatement): CciChannel | Promise<CciChannel>;
+    cciDeleteChannels(query?: QueryStatement, constraint?: QueryStatement): CciChannel[] | Promise<CciChannel[]>;
     cciCreateContact(payload: CciCreateContactInput): CciContact | Promise<CciContact>;
     cciCreateContacts(payload: CciCreateContactInput[]): boolean | Promise<boolean>;
     cciUpdateContact(payload: CciUpdateContactInput): CciContact | Promise<CciContact>;
