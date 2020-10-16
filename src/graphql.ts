@@ -1125,7 +1125,7 @@ export interface IMutation {
     iamDeleteAccounts(query?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
     iamCreateBoundedContext(payload: IamCreateBoundedContextInput): IamBoundedContext | Promise<IamBoundedContext>;
     iamCreateBoundedContexts(payload: IamCreateBoundedContextInput[]): boolean | Promise<boolean>;
-    iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput): IamBoundedContext | Promise<IamBoundedContext>;
+    iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
     iamDeleteBoundedContextById(id: string): IamBoundedContext | Promise<IamBoundedContext>;
     iamDeleteBoundedContexts(query?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
     iamCreatePermission(payload: IamCreatePermissionInput): IamPermission | Promise<IamPermission>;
