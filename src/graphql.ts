@@ -1004,9 +1004,9 @@ export interface IQuery {
     iamFindAccountById(id?: string, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
     iamGetAccounts(query?: QueryStatement, constraint?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
     iamPaginateAccounts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    iamFindBoundedContext(query?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
-    iamFindBoundedContextById(id?: string): IamBoundedContext | Promise<IamBoundedContext>;
-    iamGetBoundedContexts(query?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
+    iamFindBoundedContext(query?: QueryStatement, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamFindBoundedContextById(id?: string, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamGetBoundedContexts(query?: QueryStatement, constraint?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
     iamPaginateBoundedContexts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     iamFindPermission(query?: QueryStatement): IamPermission | Promise<IamPermission>;
     iamFindPermissionById(id?: string): IamPermission | Promise<IamPermission>;
@@ -1126,8 +1126,8 @@ export interface IMutation {
     iamCreateBoundedContext(payload: IamCreateBoundedContextInput): IamBoundedContext | Promise<IamBoundedContext>;
     iamCreateBoundedContexts(payload: IamCreateBoundedContextInput[]): boolean | Promise<boolean>;
     iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
-    iamDeleteBoundedContextById(id: string): IamBoundedContext | Promise<IamBoundedContext>;
-    iamDeleteBoundedContexts(query?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
+    iamDeleteBoundedContextById(id: string, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamDeleteBoundedContexts(query?: QueryStatement, constraint?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
     iamCreatePermission(payload: IamCreatePermissionInput): IamPermission | Promise<IamPermission>;
     iamCreatePermissions(payload: IamCreatePermissionInput[]): boolean | Promise<boolean>;
     iamUpdatePermission(payload: IamUpdatePermissionInput, constraint?: QueryStatement): IamPermission | Promise<IamPermission>;
