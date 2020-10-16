@@ -43,6 +43,6 @@ export class UpdateLangController
             constraint,
         ));
 
-        return await this.queryBus.ask(new FindLangByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindLangByIdQuery(payload.id, constraint));
     }
 }
