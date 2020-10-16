@@ -1,16 +1,24 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 
+// authorization
+import { UseGuards } from '@nestjs/common';
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
+
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { Operator } from '@hades/shared/domain/persistence/sql-statement/operator';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { GetTenantsQuery } from '@hades/iam/tenant/application/get/get-tenants.query';
 import { DeleteTenantsCommand } from '@hades/iam/tenant/application/delete/delete-tenants.command';
 import { GetAccountsQuery } from '@hades/iam/account/application/get/get-accounts.query';
+import { Operator } from '@hades/shared/domain/persistence/sql-statement/operator';
 import { Utils } from '@hades/iam/account/domain/lib/utils';
 
 @Resolver()
+@Permissions('iam.tenant.delete')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class DeleteTenantsResolver
 {
     constructor(
@@ -19,7 +27,7 @@ export class DeleteTenantsResolver
     ) {}
 
     @Mutation('iamDeleteTenants')
-    async main(@Args('query') queryStatement?: QueryStatement)
+    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, )
     {
         const tenants = await this.queryBus.ask(new GetTenantsQuery(queryStatement));
 

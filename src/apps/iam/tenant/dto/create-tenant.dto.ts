@@ -6,7 +6,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '235f8cdb-d652-4a2f-a996-8a729d774e90'
+        example     : 'bf7b0cb5-9279-4dfe-a957-989935830dc8'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'm5pll36imbbwkwo984e5s83mmdr27gbktr3scxh3mzdnan8irod95igq8vojgg87cxv6jgkm42ye76o88qb4ep4jgb5gnc393gn8l8w43ct1d51n7xdpesvbwe8938a2ldkdq89876pqlmsnccndiv1s8tuajfxyzkfbnnpeswhpp2niy7m80x7s19bcsp56rlu5l0wm7kh2xvkbelktis1uwr0jh02205b8z48nco3at4586o2ftsiu8y0eocg'
+        example     : 'hkdnvf9e1o7cuaoyubu2h6u60vbcojrxv5phgvpk0b7nif8lu93727url3j7zjd7e97k4ppn093gwczv2xejm6addywh4spcu9fuk736andmsop17vlxzwb4dk626wmcrkw2mq89tzpbm596lhgae19ubttl22mqt4num5tpx6oycwjq4debiuo6eta8sqcu2mircu6gjyx9nfp1vdw9s87oaz1biqx39ixctqhjuyvyrxcpucvkmqsnbq8dc7b'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'wpqprmuudxl22ezkmo6kg8jbtd6ynrx2nrnb76jgu7aquct5ud'
+        example     : 'ugz62zxy267yy91jlbtmyxa1jozv7h0570d09d5rnihlls3gk9'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'logo [input here api field description]',
-        example     : 'l6gsdl302znm9uwwczyqrascolj0hllzd1sjjquqofuwdx4sptp57vnwbixjf1ksg6fsg7i66beg5gxwlfr8330eidw5mh6mcusbt3qxomou3fuum7mgvo2rp55qtwb8mt1oezgdz4et75yqlvrlnpkmyzg23k9o5cvxpenpwrrqbtfpg4rhnvuolr3haqy46y6sipntovhufimsb24b4vq50er2l91g8jnf7augjfy784e7f6y09kljn4qnypn'
+        example     : 'wp268jk2h20kyke1kn2zki5f8vuahv9ws2m8bng2selsew0923jk6b4wfmmowvfnja0bau5zxgkzg45vf9uh154r9dofxa8abob8nvyegv5s592cilzce8855jmglsglpeeqdwpmsyuo1lh0dfwhs26w7drxe5pggrp3k9cp7tlzd349kfzyuk4kxymduombv20mgy2w2e9r4ba74dgfrnnqkfw1w9u3i8pr6l7fq59k1tug127g5gpmarbgm75'
     })
     logo: string;
     

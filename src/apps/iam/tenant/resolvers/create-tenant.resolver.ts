@@ -4,8 +4,8 @@ import { IamCreateTenantInput } from './../../../../graphql';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
-import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
-import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -17,7 +17,7 @@ import { UpdateAccountCommand } from '@hades/iam/account/application/update/upda
 
 @Resolver()
 @Permissions('iam.tenant.create')
-@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CreateTenantResolver
 {
     constructor(
