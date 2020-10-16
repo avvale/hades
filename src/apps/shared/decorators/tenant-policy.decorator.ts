@@ -16,6 +16,7 @@ export const TenantPolicy = (customProperties?: {
                     payloadIndex: 1
                 }, customProperties);
 
+                // get account from arguments
                 let account: AccountResponse;
                 for (const arg of args)
                 {
@@ -28,13 +29,15 @@ export const TenantPolicy = (customProperties?: {
                 {
                     for (const item of args[properties.payloadIndex])
                     {
-                        test();
+                        if (!item[properties.targetProperty]) throw new BadRequestException(`TenantId not found in payload, maybe has to set payloadIndex or targetProperty arguments of TenantPolicy decorator`);
+                        if (account.dTenants.indexOf(item[properties.targetProperty]) === -1) throw new UnauthorizedException(`Not allowed create this item on the tenant ${args[properties.payloadIndex][properties.targetProperty]}, please contact the administrator`);
                     }
                 }
-
-                if (!args[properties.payloadIndex][properties.targetProperty]) throw new BadRequestException(`TenantId not found in payload, maybe has to set payloadIndex or targetProperty arguments of TenantPolicy decorator`);
-
-                if (account.dTenants.indexOf(args[properties.payloadIndex][properties.targetProperty]) === -1) throw new UnauthorizedException(`Not allowed create this item on the tenant ${args[properties.payloadIndex][properties.targetProperty]}, please contact the administrator`);
+                else
+                {
+                    if (!args[properties.payloadIndex][properties.targetProperty]) throw new BadRequestException(`TenantId not found in payload, maybe has to set payloadIndex or targetProperty arguments of TenantPolicy decorator`);
+                    if (account.dTenants.indexOf(args[properties.payloadIndex][properties.targetProperty]) === -1) throw new UnauthorizedException(`Not allowed create this item on the tenant ${args[properties.payloadIndex][properties.targetProperty]}, please contact the administrator`);
+                }
 
                 // default behavior, apply 'this' to use current class definition, with inject apply
                 const result = descriptor.value.apply(this, args);
@@ -42,9 +45,4 @@ export const TenantPolicy = (customProperties?: {
             }
         }
     }
-};
-
-const test = () =>
-{
-    console.log('hola')
 };
