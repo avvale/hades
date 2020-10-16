@@ -715,14 +715,13 @@ export interface IamCreateAccountInput {
     type: IamAccountType;
     email: GraphQLString;
     isActive: GraphQLBoolean;
-    clientId: string;
-    dApplicationCodes: JSON;
-    dPermissions: JSON;
+    clientId?: string;
+    dApplicationCodes?: JSON;
+    dPermissions?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
     user?: IamCreateUserInput;
-    dTenants: JSON;
 }
 
 export interface IamUpdateAccountInput {
@@ -737,7 +736,6 @@ export interface IamUpdateAccountInput {
     roleIds?: string[];
     tenantIds?: string[];
     user?: IamUpdateUserInput;
-    dTenants?: JSON;
 }
 
 export interface IamCreateBoundedContextInput {
@@ -1001,10 +999,10 @@ export interface IQuery {
     cciFindSystemById(id?: string): CciSystem | Promise<CciSystem>;
     cciGetSystems(query?: QueryStatement): CciSystem[] | Promise<CciSystem[]>;
     cciPaginateSystems(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    iamFindAccount(query?: QueryStatement): IamAccount | Promise<IamAccount>;
     iamFindMeAccount(): IamAccount | Promise<IamAccount>;
-    iamFindAccountById(id?: string): IamAccount | Promise<IamAccount>;
-    iamGetAccounts(query?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
+    iamFindAccount(query?: QueryStatement, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamFindAccountById(id?: string, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamGetAccounts(query?: QueryStatement, constraint?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
     iamPaginateAccounts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     iamFindBoundedContext(query?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
     iamFindBoundedContextById(id?: string): IamBoundedContext | Promise<IamBoundedContext>;
@@ -1123,8 +1121,8 @@ export interface IMutation {
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
     iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
-    iamDeleteAccountById(id: string): IamAccount | Promise<IamAccount>;
-    iamDeleteAccounts(query?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
+    iamDeleteAccountById(id: string, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamDeleteAccounts(query?: QueryStatement, constraint?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
     iamCreateBoundedContext(payload: IamCreateBoundedContextInput): IamBoundedContext | Promise<IamBoundedContext>;
     iamCreateBoundedContexts(payload: IamCreateBoundedContextInput[]): boolean | Promise<boolean>;
     iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
