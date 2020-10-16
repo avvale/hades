@@ -2,6 +2,8 @@ version: 1.0.0
 boundedContextName: iam
 moduleName: role
 moduleNames: roles
+hasOAuth: true
+hasTenant: false
 aggregateProperties:
   - name: id
     type: id
