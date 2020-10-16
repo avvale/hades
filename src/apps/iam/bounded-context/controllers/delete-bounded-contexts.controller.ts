@@ -1,7 +1,11 @@
 import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -12,7 +16,8 @@ import { DeleteBoundedContextsCommand } from '@hades/iam/bounded-context/applica
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts')
-@UseGuards(AuthGuard('jwt'))
+@Permissions('iam.boundedContext.delete')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class DeleteBoundedContextsController 
 {
     constructor(
@@ -25,11 +30,11 @@ export class DeleteBoundedContextsController
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [BoundedContextDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement, )
     {
-        const boundedContexts = await this.queryBus.ask(new GetBoundedContextsQuery(queryStatement));
+        const boundedContexts = await this.queryBus.ask(new GetBoundedContextsQuery(queryStatement, constraint));
 
-        await this.commandBus.dispatch(new DeleteBoundedContextsCommand(queryStatement));
+        await this.commandBus.dispatch(new DeleteBoundedContextsCommand(queryStatement, constraint));
 
         return boundedContexts;
     }

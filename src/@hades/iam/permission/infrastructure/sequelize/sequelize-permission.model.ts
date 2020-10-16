@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamBoundedContextModel } from '@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model';
 import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-role.model';
@@ -21,7 +21,7 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     })
     id: string;
         
-             
+                     
         
     
     
@@ -35,7 +35,7 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     })
     name: string;
         
-             
+                     
         
     @ForeignKey(() => IamBoundedContextModel)
     
@@ -55,12 +55,12 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     })
     boundedContextId: string;
         
-    
+            
     @BelongsTo(() => IamBoundedContextModel)
     boundedContext: IamBoundedContextModel;
              
         
-            
+                    
     @BelongsToMany(() => IamRoleModel, () => IamPermissionsRolesModel)
     roleIds: IamRoleModel[];
 
@@ -80,7 +80,7 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     })
     createdAt: string;
         
-             
+                     
         
     
     
@@ -94,7 +94,7 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     })
     updatedAt: string;
         
-             
+                     
         
     
     
@@ -108,5 +108,5 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     })
     deletedAt: string;
         
-            
+                    
 }

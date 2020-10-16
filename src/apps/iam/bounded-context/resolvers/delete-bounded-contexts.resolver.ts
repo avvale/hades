@@ -3,8 +3,8 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 // authorization
 import { UseGuards } from '@nestjs/common';
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
-import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
-import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -15,7 +15,7 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 
 @Resolver()
 @Permissions('iam.boundedContext.delete')
-@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class DeleteBoundedContextsResolver
 {
     constructor(

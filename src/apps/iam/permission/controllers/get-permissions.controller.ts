@@ -1,6 +1,11 @@
-import { Controller, Get, Body } from '@nestjs/common';
+import { Controller, Get, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { PermissionDto } from './../dto/permission.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
@@ -9,6 +14,8 @@ import { GetPermissionsQuery } from '@hades/iam/permission/application/get/get-p
 
 @ApiTags('[iam] permission')
 @Controller('iam/permissions')
+@Permissions('iam.permission.get')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class GetPermissionsController 
 {
     constructor(
@@ -20,8 +27,8 @@ export class GetPermissionsController
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [PermissionDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement, )
     {
-        return await this.queryBus.ask(new GetPermissionsQuery(queryStatement));   
+        return await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint));   
     }
 }

@@ -24,7 +24,6 @@ export class CreatePermissionCommandHandler implements ICommandHandler<CreatePer
             new PermissionName(command.name),
             new PermissionBoundedContextId(command.boundedContextId),
             new PermissionRoleIds(command.roleIds),
-            
         );
     }
 }

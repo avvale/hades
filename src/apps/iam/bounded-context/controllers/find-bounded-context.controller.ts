@@ -1,7 +1,11 @@
 import { Controller, Get, Body, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
@@ -10,7 +14,8 @@ import { FindBoundedContextQuery } from '@hades/iam/bounded-context/application/
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-context')
-@UseGuards(AuthGuard('jwt'))
+@Permissions('iam.boundedContext.get')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class FindBoundedContextController 
 {
     constructor(
@@ -22,8 +27,8 @@ export class FindBoundedContextController
     @ApiOkResponse({ description: 'The record has been successfully created.', type: BoundedContextDto })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement)
+    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement, )
     {
-        return await this.queryBus.ask(new FindBoundedContextQuery(queryStatement));   
+        return await this.queryBus.ask(new FindBoundedContextQuery(queryStatement, constraint));   
     }
 }
