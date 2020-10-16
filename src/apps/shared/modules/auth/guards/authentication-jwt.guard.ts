@@ -3,14 +3,20 @@ import { AuthGuard } from '@nestjs/passport';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()
-export class AuthGraphQLJwtGuard extends AuthGuard('jwt')
+export class AuthenticationJwtGuard extends AuthGuard('jwt')
 {
     // override the getRequest() method for return valid request
     // graphql wrap request in context object
     getRequest(context: ExecutionContext) 
     {
-        const ctx = GqlExecutionContext.create(context);
-        return ctx.getContext().req;
+        if (context['contextType'] === 'graphql')
+        {
+            return GqlExecutionContext.create(context).getContext().req;
+        }
+        else if (context['contextType'] === 'http')
+        {
+            return context.switchToHttp().getRequest();
+        }   
     }
 
     handleRequest(err, user, info) 
