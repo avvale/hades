@@ -1016,9 +1016,9 @@ export interface IQuery {
     iamFindRoleById(id?: string, constraint?: QueryStatement): IamRole | Promise<IamRole>;
     iamGetRoles(query?: QueryStatement, constraint?: QueryStatement): IamRole[] | Promise<IamRole[]>;
     iamPaginateRoles(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    iamFindTenant(query?: QueryStatement): IamTenant | Promise<IamTenant>;
-    iamFindTenantById(id?: string): IamTenant | Promise<IamTenant>;
-    iamGetTenants(query?: QueryStatement): IamTenant[] | Promise<IamTenant[]>;
+    iamFindTenant(query?: QueryStatement, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamFindTenantById(id?: string, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamGetTenants(query?: QueryStatement, constraint?: QueryStatement): IamTenant[] | Promise<IamTenant[]>;
     iamPaginateTenants(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     iamFindUser(query?: QueryStatement): IamUser | Promise<IamUser>;
     iamFindUserById(id?: string): IamUser | Promise<IamUser>;
@@ -1140,9 +1140,9 @@ export interface IMutation {
     iamDeleteRoles(query?: QueryStatement, constraint?: QueryStatement): IamRole[] | Promise<IamRole[]>;
     iamCreateTenant(payload: IamCreateTenantInput): IamTenant | Promise<IamTenant>;
     iamCreateTenants(payload: IamCreateTenantInput[]): boolean | Promise<boolean>;
-    iamUpdateTenant(payload: IamUpdateTenantInput): IamTenant | Promise<IamTenant>;
-    iamDeleteTenantById(id: string): IamTenant | Promise<IamTenant>;
-    iamDeleteTenants(query?: QueryStatement): IamTenant[] | Promise<IamTenant[]>;
+    iamUpdateTenant(payload: IamUpdateTenantInput, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamDeleteTenantById(id: string, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamDeleteTenants(query?: QueryStatement, constraint?: QueryStatement): IamTenant[] | Promise<IamTenant[]>;
     iamCreateUser(payload: IamCreateUserInput): IamUser | Promise<IamUser>;
     iamCreateUsers(payload: IamCreateUserInput[]): boolean | Promise<boolean>;
     iamUpdateUser(payload: IamUpdateUserInput): IamUser | Promise<IamUser>;
