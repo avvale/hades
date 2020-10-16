@@ -1,3 +1,5 @@
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+
 export class UpdateLangCommand 
 {
     constructor(
@@ -10,5 +12,6 @@ export class UpdateLangCommand
         public readonly sort?: number,
         public readonly isActive?: boolean,
         
+        public readonly constraint?: QueryStatement,
     ) {}
 }

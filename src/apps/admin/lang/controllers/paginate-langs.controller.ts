@@ -1,4 +1,5 @@
-import { Controller, Get, Body } from '@nestjs/common';
+import { Controller, Get, Body, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { LangDto } from './../dto/lang.dto';
 
@@ -10,6 +11,7 @@ import { Pagination } from '@hades/shared/domain/lib/pagination';
 
 @ApiTags('[admin] lang')
 @Controller('admin/langs/paginate')
+@UseGuards(AuthGuard('jwt'))
 export class PaginateLangsController 
 {
     constructor(

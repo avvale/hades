@@ -1,12 +1,20 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Args, Query } from '@nestjs/graphql';
+
+// authorization
+import { UseGuards } from '@nestjs/common';
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
+import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { FindLangQuery } from '@hades/admin/lang/application/find/find-lang.query';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { AdminLang } from './../../../../graphql';
 
 @Resolver()
+@Permissions('admin.lang.get')
+@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
 export class FindLangResolver
 {
     constructor(
@@ -14,8 +22,8 @@ export class FindLangResolver
     ) {}
 
     @Query('adminFindLang')
-    async main(@Args('query') queryStatement?: QueryStatement): Promise<AdminLang>
+    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<AdminLang>
     {
-        return await this.queryBus.ask(new FindLangQuery(queryStatement));
+        return await this.queryBus.ask(new FindLangQuery(queryStatement, constraint));
     }
 }

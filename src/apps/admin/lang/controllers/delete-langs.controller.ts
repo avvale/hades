@@ -1,4 +1,5 @@
-import { Controller, Delete, Body } from '@nestjs/common';
+import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { LangDto } from './../dto/lang.dto';
 
@@ -11,6 +12,7 @@ import { DeleteLangsCommand } from '@hades/admin/lang/application/delete/delete-
 
 @ApiTags('[admin] lang')
 @Controller('admin/langs')
+@UseGuards(AuthGuard('jwt'))
 export class DeleteLangsController 
 {
     constructor(
