@@ -6,7 +6,7 @@ export class CreateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '53271467-a2bf-4b82-a296-ab4602e7e26e'
+        example     : '37034281-2b7a-4a96-a163-8118c37090d7'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : '4cbf7124-b70e-45df-88d7-d9ed03f0d49d'
+        example     : '4768d54a-b685-431b-92bf-b8de85617701'
     })
     clientId: string;
     
@@ -24,7 +24,7 @@ export class CreateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'accountId [input here api field description]',
-        example     : '7fd135bc-bb81-425c-89fa-9ad9faa83cef'
+        example     : '0a306606-b98b-4deb-a49a-7c6be52562d6'
     })
     accountId: string;
     
@@ -33,7 +33,7 @@ export class CreateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'token [input here api field description]',
-        example     : 'Necessitatibus pariatur excepturi eligendi aut eum numquam quos qui. Delectus quo sint laudantium. Velit sit rerum quis harum fuga id.'
+        example     : 'Sit voluptatum doloremque sapiente ut assumenda laboriosam. Neque deserunt consequatur labore exercitationem rerum nemo. Vel qui aut est eum iste optio. Non laborum doloribus aut excepturi numquam.'
     })
     token: string;
     
@@ -42,7 +42,7 @@ export class CreateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '22xd84fzwmk0tks1rnvaewpjxxrpajsozuumz8wh7vyevvgw0tv1i8q5lhbc365gqt8khxeu95lcodupf79e97pj7ig65rxsz7js7j7pile4mwiwu1ay55rjrj6xweh5phrlb8df6j6lp46oky80mv4czh04lakbt0ismuz97zmr7xmovetvvvxavn8lngqpe92180w0bghwhpoq4vi5iltsl90uikoiyqsez9c3e3k2d3iugwysic4ulsouosv'
+        example     : '8w5knwfzkj4e986wd8g3nt2aeeqfz4o3gxilkfkij50hpm3xdggcmihaukjjhf4f1cfucr3iomukua8o8a1ka2w1y0p5edcq1hron2ogztcauz1eu4pz7htq8oxddt7xxkt90nsgc4frq20af5xbmcmdd5gawrev4d83rlsnx640s7h00dzz5ccbznvcymv5zz67f6wllkrjt3g0rqp5gd9iaeh6jb4bywqeiopm3qfz0hz2b0i2nncfjte1x18'
     })
     name: string;
     
@@ -60,7 +60,7 @@ export class CreateAccessTokenDto
     @ApiProperty({
         type        : String,
         description : 'expiresAt [input here api field description]',
-        example     : '2020-09-26 12:28:10'
+        example     : '2020-10-16 05:44:51'
     })
     expiresAt: string;
     
