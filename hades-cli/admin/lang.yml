@@ -2,6 +2,8 @@ version: 1.0.0
 boundedContextName: admin
 moduleName: lang
 moduleNames: langs
+hasOAuth: true
+hasTenant: false
 aggregateProperties:
   - name: id
     type: id
