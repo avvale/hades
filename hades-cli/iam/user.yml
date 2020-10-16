@@ -3,7 +3,7 @@ boundedContextName: iam
 moduleName: user
 moduleNames: users
 hasOAuth: true
-hasTenant: true
+hasTenant: false
 aggregateProperties:
   - name: id
     type: id

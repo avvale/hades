@@ -3,7 +3,7 @@ boundedContextName: iam
 moduleName: permission
 moduleNames: permissions
 hasOAuth: true
-hasTenant: true
+hasTenant: false
 aggregateProperties:
   - name: id
     type: id
