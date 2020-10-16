@@ -38,7 +38,6 @@ export class CreateClientCommandHandler implements ICommandHandler<CreateClientC
             new ClientIsRevoked(command.isRevoked),
             new ClientIsMaster(command.isMaster),
             new ClientApplicationIds(command.applicationIds),
-            
         );
     }
 }

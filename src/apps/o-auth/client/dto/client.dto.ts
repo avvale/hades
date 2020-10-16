@@ -7,7 +7,7 @@ export class ClientDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '414f3627-b916-4f8f-8286-bdacb61e6d11'
+        example     : '3539c36f-9b8b-4570-ab78-fa96ac8f5192'
     })
     id: string;
     
@@ -16,7 +16,7 @@ export class ClientDto
     @ApiProperty({
         type        : String,
         description : 'grantType [input here api field description]',
-        example     : 'CLIENT_CREDENTIALS',
+        example     : 'PASSWORD',
         enum        : ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD']
     })
     grantType: string;
@@ -26,7 +26,7 @@ export class ClientDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '7f0pln30lhy3az3eifvq3kndufn6b9xr639n6qoltvx1y1eupyf1jfgn2gazvpsa3kyeh78603m2qhdpaqvcuoad66lg2bwbqc13mlucet17ccqu22tnk7khmild242qs5dt08yysrj2h3gfy8pcueeychotmz5cw4wdrdk3x0iiwhp6rxlo1rs41q956f2a2dv761xqmrpkqnx8y8dfmpu78yerehoqfsfo6snfxvgybpdxrap43czng2iveto'
+        example     : '0d5kkvxsuaioh6v7uis961dmijwda38aj4x9mqx86q0hx0zpctvzqerstb9iot5v96tuq5yleznpg8w5u5stprooxunnnzw6zuekv9m3pxt0wto32ea31zzl6p64pbjtdqbus6n3r6kluilp38554g3hewmpvbapvoekufg12ut2xel649n7ih9aewr5pst5trd1o51nlebda6fkjm9hijx2zutafjv3i5zxbcz9rcoqjkrf99yfkzd6a3tqeqn'
     })
     name: string;
     
@@ -35,7 +35,7 @@ export class ClientDto
     @ApiProperty({
         type        : String,
         description : 'secret [input here api field description]',
-        example     : 'fc332ruochjttpzy48u2hus1vrn7zc10rckn6djrumi6syofl02gaqgft2j1qu3erkxcfvgn3l3o2j4aonnkmb3mlf'
+        example     : 'xsulpzpk2o12cl03phqbonqnoy09ngso1tg8pzis5yj6x7uweooaq9ncx9u66l41usgqude7z64fkq6fy433anef6p'
     })
     secret: string;
     
@@ -44,7 +44,7 @@ export class ClientDto
     @ApiProperty({
         type        : String,
         description : 'authUrl [input here api field description]',
-        example     : 'r1fv9jv90y7mmkrc4gfpye0i7rfud617i1u1m2an36nkcs9oop3nymu85obeviiwp8mwjptim52ogdl6ia32tn9y9ilz0op6jxk7wdbhisrxu2tmw6fa31kirlafbmg6b109plw4ku0ye0nnwiuqvgz6v7n856uzl9cg1lj65a60mvmx6d3lb2ecsqo9p40pk4hbdhr0hqppzd481c1lpvoac1hjli1yuqno0gpwc3b5tmbosqniwdy0w4elt2vg89z4ysuo3w1d20plolrxe7nqqk6ar0dih90fw5qktdk2ltu3qom7laqt1p65wgxq8f7hhgc8xkvaanejfktulumx11830s1rzlpr3ggpyjdlkmh55gozgfnwts2vvgo4nr2545sqb5r2j7j9jzu9x1rvn3pa6f76ju9womaxtj3yctyvz3ct8erxg8iptq5637txfa5rpvi6ur9lbtem0zu45ls2gy5fs3naanmq48s3b98im2c43t7lxfaxhwqbfp1vk45k6htda9r6dk38ngyb6j5eskmmihw4pi8wegfoul0zev6hi59f7awmlqwroexb634z1csvjs0p0nfxsfnbltu16jmigkbhz95eo97t0rw0f9gifz299aw9v0bqhbfxetokrj9hs31e5ihblsxh589typlmw8tfxkl4aw4z9guwbl67d16fnyz2hj6b5smjvhor9aeuwdy2isse7beabl3p0b9fhud4qij2b9k36lhekclch518l0brd47s3rikw291k1rihcyjwusvmfwhhzh7hzgs2v626bhm9wpmir5m2rjsmcqced9drvpg7v9eezoqhr9bjbz77ng1vhtj50giyrylm35l70m28d0hu3tpugdhn5ggro3rex9gotzy4cb7h1qet8g0j6i910zh9asfo4n0s0yxp6ke0by87zq7evenncyvq4c1n2vrtyepu7h1nx2trzzjvjkd0z783kjzvgpaj6mjk4k81rjvqqz6pdom90qv6lcmgzkh9aydjzgn7l3kje6lxvl1148zqhwbj4sulplorl3s3rwkde8wxdiavzb5cfob8fxe09rubtz9ddx4eqst2kxsl8an6upwt3l3z7nq2676qzadrppz66rzwpfkbmgarcvfzp94bdcmfkoud8n7doqjragb6ifuz76fucwqxj29g0g6n9f2g7b5434nzzxyymsxkpqh4gifbqdm80pmoaory7k4i9yy4jo2plexzdqt3xxxfruiga8q2c2pk88l5slya3qk9o7gac7odkvd4yxw34a4b8nrfn3fpdwwovbwle1bicob8ci6xaof5o2gyitio9x6j7gatpm3y1lpw5c877mk7vhpu8i7xkx0txsj6c69xzul9p61ruq5q7cjbc3nppz2iq2gjlt1fl8t9jchu4fwogxulowvzrvus8668lipcvxcnn3bjk2viv7hsslfm6cs39d4cxfm3pcyehkxbx52iofyf6bc3hkggztdnzgr9n2foif18lgrt9jazxrve2kl55nalrqdnfmmgxt6rcy9elips7v8ihhf8y076f8dl8xti0ybov7090ztue657gm34x2ljjp18m12ccd7haueuyw8j7lafn6h8oncmkaqf0p440sk3rw8uq85ogldzflls51akp2nn0j0pphewyk2d0b8t9lbbhkntqrl4eg2j1z8xz719cmgpx8iycq6v94oq1kgqaowucrqax613pkqnlh16brk9iv5l4kee4zoriry6sro2i4ay02gs1dwma5fkmra3m1iae8ji7j484gxtiuh5blk138z22et3zfo8yxk6l56vq7dbvfa5z4d94ivwlp10qwljiyi7jwamlgt9ash9dzpco4x2w19p780x3ng1a729zoe3d94emsnuu255duc2uh7a48k9jmlmnfar75zu3msxotgr5c34i67edhhf8h89sr1g2m9y3752z2w0stwa1jrtc1mq8g6mpa1amx1k3r6emtvinlqdnrswc8mj8z5fpujf86a3ycv'
+        example     : 'ftq8cg8cq173adif039fg3gyofifja7hbbqzm1a48tz727swjm1dcq5kagoom2yuc107ejctu1hpvxcthsp4vcsa26grm4l3iz4zfh0d5lolbofucphbynho0t24pn0rnw6k5c70nu5w25raoj02ci9o9s4h7b8q1aod0jzwwa3vzfvem9x1xe3k89z4adx8zoh2mobt8yftfhtwxeh2kfi830s2k51u63y0j9axo5c5insplkc7w2huen67kc7jqod3ipdaf0ohi985opooyuu696spa332fjfwysqlf1wwvvhiypepei1hvjokc24sy9neeipg4zxf9k9c4po8zbqn4tqcaid0ct9pojqpocm5gdy99ib90ywb1bko7j42e87boxzzjqjzflo9adxim4nw0cbyud3a77mqd6c86ldeea110dxb2h6jljacw841102wjs78knm1ijvpb901qu6lp3o39apike2tbi4lobf00l5nwidkhpp816cdxgccxh4olexeiokdwivgu00tjpjp0vdz30p8mjbufgv8x2z0pro94qr6xbwiwk39zr69ydcapqvecsigm7d7j8l5j1jaapsh12tcip1x89bxtp628f15lcaxyvqitnfzdfg4vcvyre01bd6boc79vsakjuw2rahj7i8zhx32c5rodelvr7vsybphki15be49schr1t1ggmv1bwm55osh1hgunnqbttocjn6q3vgdy346b6ze25tobbukjq50goafk27kstxch5ncklb8zstx5e09o1dx0av8n4v61ktdqvfzts4otc2h20s9fsvx41s6hblznvy8wyswfjezdxzr554ft3hlyhzyxoswexg79a32duvfca3uhyx3g3ss07j5p5lnr7hqj6jp9to7uu12stnmgkyh05leydqznmurvuas8k0mzxu851y90ttdt2ye7mxse89t179fhpcgoxrohf11jzp603wbsbbmuergbf5iyuqfwgzlbhmgc6tm6nwoggnyao7c2ufehy4fttbk2kckdrr0009kel9j5xc2kxaufw22ojb5a2opiaa503p0q2t7zmnhktwqknb84gjdccb4n2k4lkcmos8lbj29u6l9x8unzn99lr9pg436yzl4ic1mrctdm2q8utz1hroxok1kzqss1lt36vc2veavo9skxki11wrw0mnzbodl6q75tdjh1ymfhfpki59c4jlucsh4hn1ehwn9if5v2jmks1bxegcvhv4owag1nkj4i8hr767se22ca605jg7xosey0huwxkan4ya2tp4mfn7ln5185sg5eo8hx5trm0sl9l3lcbax7yrl3in5djqf85koqqwti4m2wnnknqwrbfq1g6jq9nsa6d60ylgpppc3xqp1ia9khoil0vzfu5yayr7q1xb1icghrdf6khzi6mgb7xzp3y7rdjhj7cv8zwdqvuqjrq4rs6adt6ycgtqydkfbgyzc6qhhvuzn2lk51sbglhkrpwad08x89lz3dhx2lqodnfumiq8kugao5e80p9piefc076k8cyjyqgkgv90adl3sd7xwws0eja6w79me971kiqkh0t4vxfmyosc2vy4jbdoqyv3rswipv0to6ww4x7b95eqznj4udk1nwfnufkvwspvfsbk1o7khn6mmzag32jaazj3farajjoozyqa3pqon5vafj9b316yjsuc001q996gek78l7n5u5yw5hi9lj7ntdyi2keboadnsrxrtd2qawjx4o6nvje97eqpa19vzkhkd1rzfilut581fgvs6i07kqtkv1j0duulkgtu0n8cs638u7lqfyxru0wly99e88i08evbzp998qsc7wwug9p6er3pav9zk43ssb8ttcg70lccvownggqv1cumqtba04jk0xgqt46n6t7von0fxi4rv6zvhx9tm212mhk0a0dqcawhppxtljjc1vcfvveuns4rnsavx4b0goj4g57xhic5tlhst1qctnkyg8c90szal6jnq6925it13j5qds9b8v0o8'
     })
     authUrl: string;
     
@@ -53,7 +53,7 @@ export class ClientDto
     @ApiProperty({
         type        : String,
         description : 'redirect [input here api field description]',
-        example     : 'p0yi82cmcvxi50s5z3to3xfj9yt43jlizuouwsqasgv6760si8bimrfmzielmo40nrmnhcdvbp246lnab5bzw7hbq08e5v18bw7882ozlst0ek4qqm4xk589ngyctesl24t5ad5oikyzcby6spvxhqagp7lf6nzcro5erl98l304c6zx836dmgnsuaoetq2hw6ui385kze1praulb3az9uca50fvi3jc2kqf7g0tnmmgijbp0ndxvlleyt8r10ufc600losvc3piayfzat4hczavyuqmeg3kie7lkfuvinos710ipsqfj8oecj554h7wvc2whuab4e7v9enz2u1eycdk07c0fwerlowpofqkfgoani51qyo4mj3x2hlgrjk6dk9l6jhoid9jdjyhorogzoix3k4wex80qdd6tifeah2zltn2q7xnmsdjcl836dmtoe20lpummfkf41m9u2ik5ns4uw3q8e9gjk2wp7qelzzjt9w9fol48k1zgebw6629r0b662isvuc1x4g8p8sv9vy0v4pxymx7jls102b30dk4mgppwkn9iy5qop9h8erpvlip72sahj7f97epv8w0x5akzxzb7jcuyli19hozwey5seyvq1ult909d7pdrqnnljvd0jetl5bq96sh62dab1cgz51p0git1ggelxrp229sixa2mnm5cf3xm9pyvhzuzj8b4zicj3hqm80mglrikcn9y7y9dsm69hg8cjz48woyrzcmfoqx5vzi4v5sx47ekryvlklacrh8vmkmjlytqkj6i4bn3umhfpm642y2z8m1fdjnc1ejy24z7lib1ngap3ouzn82frygszqxgqo0z6d4w7zlydwjg45v2b66ak4pbjolywl2kqwbs6f9rqr2k0w2unog3ks6gljosdw74yxryqs9f1ao21fxibp50bz72nbd7sd51o5vxtnro996g66h5xdtncw1alshv5twkouoduwjt2n9eyakzlgqrqnd3zgy2szxhlayb9yvfhkzpirwlq2fzad43b458cna8qu1x8ovrnfjuaqfxki8mo2grusoczbi2xub6y8y73bsetwbp9g77qof398dqkhdqxrzz7kp8vniuwhj5ze9pa3vkfcre5jyizmpikv8kb5lul1ay0dbaw7ylcue5nvixcaxvozgsgg4fdh2od0elqne1pbiqz23f284ojkurwpdfgj8b95r969p5ehks72x4hlzuqdnhf4re6dln4frmkm3zg8xrkt4bwybkpvs0x779eq532dmvynfm5of0rsjhme5ykwrym018u1e3imy7mlwqbz23aq9xcesiycol1iink7u6u410fszrzt5bbe4zuqvtqycq7q5m756ky8jt7uudzzcu8gwio82jrofolz4sx8y4817awbmzij2h7r836rwov8yo4uglmqzjrwf25zpds2szm9vn83c52h88st4wdlk809zmd145ezs3rlab00o1pspiblvganwiuvfsrvdcchs75n6ufzryw58dcleavchz5ee7lawkfrer2sk5buasez5mfcun22gvqjj8qg8efba8cbzh57t79qfa30p178g2x207d6z8zi1c97myc5kd83op4rmfrwg9b67qfgtm0idw5xv2s9a1hl0phlxfen8hmg8nix1jr3yo0t53z9xfnzvn4yj4py395h8q2ame82izijy44ex4z77cfu5w4zykv5y7ba6077qvwxrggqu0nggq8msipsmx08nczhj0vt1soxo6mahdp7jijd2yw4mvmioq3o6oahujbcbgcpdyzr621v4cb9lhbfj3n8ocpf8ybtwu6ap2jzei77o1o1g8ryx323yq5djhlojvgcc83ofhmbsp5rh0w6mhfz9pjmf91m0w48nv4snfw49biq3wtv9nzvo7imdf6tlkmnx4n4rfn1yl76mltag3h8ym1cz0u2cn0s0fdrg3t3xk2sqyc4g3deckc8iuzkzolquxr6h89rhbt7nzpdnju187ym3yr5ufp55xj0knv45'
+        example     : 'gy27lx5wvlyaozwkh7riwz3qo2xr1p7uikc4t13bt24slwsytajx6oi2043tqf2gdsz3t5bgx8gpj5y2d2xuwx266yot2yeal9mv4eht5ktjgai2ajygucw8txgddz9fkek9mthn1arttciyi7573kwg2kfk6gclexvcpfjduuo46yyj6l41r4zmy6zggj84109k6azbhbhartwqypq71h5aoyxuzcd10zxfnxxjxm04vjkl73vsqn6pa2zwv4qejvpzwxj44rfricox5t47cbaptlaydfkul2ow06cu86zmbh4z1ri3xn9glhrlkb0x8ggpsgsidl9n26q8l9mst1hipgkk7lybslekvwpv5u6cnojz3ereyx54p6ir74wps0ywa1q67t3ilct2dgxd65ue5un7tn7msorawqs3k4cm39u0iynclu9iiyqjxs3nkgku3m79bcejricyth41ajg5lhwor3tg1czv8a8m10webugr7pea0kutv5v5wrm56buihflp1h4e223pvtzothltkltn0s0x5uiuwr52f68r9mhek4ddr3oetve3prgacww0cklh7ry16ay1wugx98na4ohhv6qzb93uv27kptr0cnzgts5bdwuwe787nc9bx49l87r629owj6g9zlwjmodnxi4b82eta8v3erp8je9hlf9e8n81o2k57v3ud2jqibdx26wnsio630iddqmi1yvtotme3dkmma3y1zxl8sdrbillr0798k5yo906cgalzbm8scfhtbp5jz35ruzoezbvvsv1qu75dizhh8pdwe8wuspwqs3yq0fu00zvc1xn48u79s9vy5zslosetzs2tpri6zjyvajdg2yq53kepgdtan9lzstrgjmu1ljtnedh9o3gak9n8e0s6l3lk7klg67u15cup2bdft1q3ye5np4ecuvd4p149lfjv5b1guw7zrajiojvf5ujb8mazp10fehr61zx5z6v4q5jybdqdniwj4gep340p3egeg4v5idk3xdzrn0z0cnlst7ojgj8e1y2mgxlkgilre9tyc4pxgc2r22hk89ldausbvj4mh3u9d4roial9qfgkp9r2hieredm3g2vaxamb9loqov3ih7osb1ljyyxth2g5im0r171bsis6hov9p4nt9ta8zj985ybvqg5jq52gwzgkybxdxg4bniehuhn6wjnm46835076jemomon5lm1ie0148l295vsdcxtju56gkrbqmq0f6g6pd4ke1o8pm1mwcrjb2t04v7cnz27jaz9o15m4zqquflxg4kkg9oevrcdonk1fxxj3qpyw8r7w0z7o0ccbjsinzpqipdikmun95es4zflkr4xua4y5f6zesh3ko5k47h362kc1tnvh1nsnmewnxbgqsjiykjf7n6ytmgvf8mj17sdliqqv721g4y5yesjet4pyrquebffpzxkm08bf9f4ga1le70vyslvqiiszheje76mkazly7czfwpdaom3mdaemhp3lg9t5ue2lxiva3b98msirfle88672y2qvakbntr9h35e8dyitxgtot5lrf9hd4v9d6b413t1p7c7r6eynhnr6bvwhsrc39mxeea271oicl7b44933jl97p4zjfls05ww6mdyexvh2bthoew748744af1ps10fddqgfx9d330735frcpof2obv6vqwyzk5hexxxdzvh6d30vkintbmy0twf5ac2otfxicz0vji7nm3xkfep8xmhng6lqsb3ue2lgvcy2y34lbvji7yiov053lp1vjerznmv28jon4wd5xcv6txkqrffzyxm94swbo2nwkdvswhr5ugo2dmc4h4k3qe1yv5e0xxgtvq5tdfteqjq2mlpa7cqszh6gcrpak7rjt2kti2pclyfkasssxjf5fiywur41y9ucojqafvhu541ebzwx5o9akadbsww5d9be146ie7p4xgtp88wuig4sl780l7vekqphq6fkffvfgo7wla9bdxcwyuig4wsdmyqgfvawgxa8x5f7kdx4x'
     })
     redirect: string;
     
@@ -62,7 +62,7 @@ export class ClientDto
     @ApiProperty({
         type        : Number,
         description : 'expiredAccessToken [input here api field description]',
-        example     : 4949208721
+        example     : 2249448353
     })
     expiredAccessToken: number;
     
@@ -71,7 +71,7 @@ export class ClientDto
     @ApiProperty({
         type        : Number,
         description : 'expiredRefreshToken [input here api field description]',
-        example     : 7384847236
+        example     : 7119483528
     })
     expiredRefreshToken: number;
     
@@ -80,7 +80,7 @@ export class ClientDto
     @ApiProperty({
         type        : Boolean,
         description : 'isRevoked [input here api field description]',
-        example     : true
+        example     : false
     })
     isRevoked: boolean;
     
@@ -107,7 +107,7 @@ export class ClientDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-09-24 04:24:45'
+        example     : '2020-10-16 15:38:08'
     })
     createdAt: string;
     
@@ -116,7 +116,7 @@ export class ClientDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-09-23 16:10:39'
+        example     : '2020-10-16 15:55:52'
     })
     updatedAt: string;
     
@@ -125,7 +125,7 @@ export class ClientDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-09-24 01:49:43'
+        example     : '2020-10-16 21:39:08'
     })
     deletedAt: string;
     
