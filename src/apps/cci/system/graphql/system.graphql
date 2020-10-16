@@ -9,6 +9,7 @@ enum CciSystemTechnology {
 type CciSystem
 {
     id: ID!
+    tenantId: ID!
     tenant: IamTenant!
     tenantCode: GraphQLString!
     version: GraphQLString!
