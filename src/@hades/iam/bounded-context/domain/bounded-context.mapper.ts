@@ -14,6 +14,7 @@ import {
     
 } from './value-objects';
 
+
 import { PermissionMapper } from '@hades/iam/permission/domain/permission.mapper';
 
 
@@ -78,6 +79,8 @@ export class BoundedContextMapper implements IMapper
             new BoundedContextDeletedAt(boundedContext.deletedAt),
             
             
+            
+            
             this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapModelsToAggregates(boundedContext.permissions) : undefined,
             
             
@@ -97,6 +100,8 @@ export class BoundedContextMapper implements IMapper
             boundedContext.createdAt.value,
             boundedContext.updatedAt.value,
             boundedContext.deletedAt.value,
+            
+            
             
             
             this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapAggregatesToResponses(boundedContext.permissions) : undefined,

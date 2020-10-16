@@ -1,4 +1,5 @@
-import { Controller, Delete, Body } from '@nestjs/common';
+import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
 
@@ -11,6 +12,7 @@ import { DeleteBoundedContextsCommand } from '@hades/iam/bounded-context/applica
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts')
+@UseGuards(AuthGuard('jwt'))
 export class DeleteBoundedContextsController 
 {
     constructor(

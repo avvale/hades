@@ -46,7 +46,7 @@ type Mutation
 {
     iamCreateBoundedContext(payload: IamCreateBoundedContextInput!): IamBoundedContext
     iamCreateBoundedContexts(payload: [IamCreateBoundedContextInput]!): Boolean!
-    iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput!): IamBoundedContext
+    iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput! constraint:QueryStatement): IamBoundedContext
     iamDeleteBoundedContextById(id: ID!): IamBoundedContext
     iamDeleteBoundedContexts(query:QueryStatement): [IamBoundedContext]!
 }

@@ -1,4 +1,5 @@
 
+
 import { PermissionResponse } from '@hades/iam/permission/domain/permission.response';
 
 
@@ -13,6 +14,8 @@ export class BoundedContextResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
+        
+        
         
         
         public readonly permissions: PermissionResponse[],

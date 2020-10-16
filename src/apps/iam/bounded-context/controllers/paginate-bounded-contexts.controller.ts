@@ -1,4 +1,5 @@
-import { Controller, Get, Body } from '@nestjs/common';
+import { Controller, Get, Body, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
 
@@ -10,6 +11,7 @@ import { Pagination } from '@hades/shared/domain/lib/pagination';
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts/paginate')
+@UseGuards(AuthGuard('jwt'))
 export class PaginateBoundedContextsController 
 {
     constructor(

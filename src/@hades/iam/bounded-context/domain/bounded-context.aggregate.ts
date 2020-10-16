@@ -14,6 +14,7 @@ import { CreatedBoundedContextEvent } from './../application/events/created-boun
 import { UpdatedBoundedContextEvent } from './../application/events/updated-bounded-context.event';
 import { DeletedBoundedContextEvent } from './../application/events/deleted-bounded-context.event';
 
+
 import { IamPermission } from '@hades/iam/permission/domain/permission.aggregate';
 
 
@@ -29,6 +30,8 @@ export class IamBoundedContext extends AggregateRoot
     deletedAt: BoundedContextDeletedAt;
     
     // eager relationship
+    
+    
     
     permissions: IamPermission[];
     
@@ -47,6 +50,8 @@ export class IamBoundedContext extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
+        
+        
         
         this.permissions = permissions;
         
@@ -122,6 +127,8 @@ export class IamBoundedContext extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             
             permissions: this.permissions?.map(item => item.toDTO()),
             

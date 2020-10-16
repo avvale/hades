@@ -1,3 +1,5 @@
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+
 export class UpdateBoundedContextCommand 
 {
     constructor(
@@ -7,5 +9,6 @@ export class UpdateBoundedContextCommand
         public readonly sort?: number,
         public readonly isActive?: boolean,
         
+        public readonly constraint?: QueryStatement,
     ) {}
 }
