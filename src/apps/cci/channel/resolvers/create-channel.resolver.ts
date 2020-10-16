@@ -2,11 +2,14 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
-import { AccountResponse } from '@hades/iam/account/domain/account.response';
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
-import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
-import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
+
+// tenant
+import { AccountResponse } from '@hades/iam/account/domain/account.response';
 import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
+import { TenantPolicy } from './../../../shared/decorators/tenant-policy.decorator';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -17,7 +20,7 @@ import { CciCreateChannelInput } from './../../../../graphql';
 
 @Resolver()
 @Permissions('cci.channel.create')
-@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CreateChannelResolver
 {
     constructor(
@@ -26,6 +29,7 @@ export class CreateChannelResolver
     ) {}
 
     @Mutation('cciCreateChannel')
+    @TenantPolicy()
     async main(@CurrentAccount() account: AccountResponse, @Args('payload') payload: CciCreateChannelInput)
     {
         await this.commandBus.dispatch(new CreateChannelCommand(

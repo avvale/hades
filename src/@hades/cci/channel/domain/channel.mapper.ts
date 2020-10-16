@@ -46,6 +46,7 @@ import {
     ChannelDeletedAt
     
 } from './value-objects';
+
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 
@@ -144,6 +145,8 @@ export class ChannelMapper implements IMapper
             new ChannelUpdatedAt(channel.updatedAt),
             new ChannelDeletedAt(channel.deletedAt),
             
+            
+            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(channel.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(channel.system) : undefined,
             
@@ -198,6 +201,8 @@ export class ChannelMapper implements IMapper
             channel.createdAt.value,
             channel.updatedAt.value,
             channel.deletedAt.value,
+            
+            
             
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(channel.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(channel.system) : undefined,

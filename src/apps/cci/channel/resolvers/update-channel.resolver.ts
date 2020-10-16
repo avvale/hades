@@ -2,13 +2,14 @@ import { Resolver, Args, Mutation } from '@nestjs/graphql';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
-import { AccountResponse } from '@hades/iam/account/domain/account.response';
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
-import { AuthGraphQLJwtGuard } from './../../../shared/modules/auth/guards/auth-graphql-jwt.guard';
-import { AuthorizationGraphQLGuard } from './../../../shared/modules/auth/guards/authorization-graphql.guard';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
+
+// tenant
+import { AccountResponse } from '@hades/iam/account/domain/account.response';
 import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
 import { TenantConstraint } from './../../../shared/decorators/tenant-constraint.decorator';
-import { CciUpdateChannelInput } from './../../../../graphql';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -16,10 +17,11 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { UpdateChannelCommand } from '@hades/cci/channel/application/update/update-channel.command';
 import { FindChannelByIdQuery } from '@hades/cci/channel/application/find/find-channel-by-id.query';
+import { CciUpdateChannelInput } from './../../../../graphql';
 
 @Resolver()
 @Permissions('cci.channel.update')
-@UseGuards(AuthGraphQLJwtGuard, AuthorizationGraphQLGuard)
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class UpdateChannelResolver
 {
     constructor(
