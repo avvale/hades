@@ -6,7 +6,7 @@ export class CreateUserDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '5109fd03-621e-4c9b-bfcf-b240394770f9'
+        example     : '78782da7-e8aa-4668-84b5-0232a2a9039c'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateUserDto
     @ApiProperty({
         type        : String,
         description : 'accountId [input here api field description]',
-        example     : 'a8ac502f-deeb-4168-934f-3d5a038e830a'
+        example     : 'a19e48fd-b959-46ae-ad76-ebf13d1701fa'
     })
     accountId: string;
     
@@ -24,7 +24,7 @@ export class CreateUserDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'vccclt78r22qu0gfjh443gauhv7xh23svlfdj39ri3se2q5vema7f05hkjtctjrksi78xe6u145c6qecuf8wfvd72iu7y78jmrowvz570td256qv33pyt9rr6atkfynudjwkdk1uwehy58nwdilmlyu19x4qsel39ntawrc3cj5kq4ixme04rl4e5ik2ny8r6d3rsujx1zsbvdp61v3vfdtrqqunzpiyohta6c8i344l7j0tae24tdrphwnghml'
+        example     : 'vrran7fkddav9hoaipkb0v7mk42c6e1qsrv7bcraxsctu9o2i0zo7j63rbs0n3zuu5hppvnxbnois1r0q8qxdp64sj2x0rz44tnzv061td4vjolgomotohfxeahkhvh47t4g8rgl9iqg6dss529o8j0jo3bpc1bzq0rq3vexkgzfi4mfmfgbrqg37c4n97rfk9gcnyrb4z3kd9w5l41bx1v0yx7tvlv6dam4lv1pm6rpjgiuwcib6eglmvevi6y'
     })
     name: string;
     
@@ -33,7 +33,7 @@ export class CreateUserDto
     @ApiProperty({
         type        : String,
         description : 'surname [input here api field description]',
-        example     : 'dd1iep63ximw73i49ktdgno71rluj3mbhbk4l5ie2ivhhjn4jb7o55agf77863q76l934gdvk6uxq7n02vjkyzgjm4giv6qpwn08yf5isd7d4u2n54tii7zsb483ahne36rrkckadw5urv2iq05yqffqzqidi9i277rj6i0mgkbqpkkyxn7afpypvovtyywqtacakvqnt5n60rq8o2zgww0zol7rinrssc0jnfgqj5clwi0sjnxsow5o34bynjs'
+        example     : '7nb1w5y9xzm6h03dv4xrt1li3yovggibojt1b9uqlvgfk0zex0rhqnmx074oau8c1bozd8pp9kmfk7q5zn1aff3m7e7pdye17kpc8sznkk0j1jqs1z0n37fjgcztesg9yuga017qv2s2938ju1smqt5zyo63m9hu5yv248fdkhvzsgpphdpxejejto1lp6hmq8khr4jmj6onjwkepjytbb091p62mdvpxtynz27jvc0t0ciwoul7zbctegdk96q'
     })
     surname: string;
     
@@ -42,7 +42,7 @@ export class CreateUserDto
     @ApiProperty({
         type        : String,
         description : 'avatar [input here api field description]',
-        example     : 'apj1t3jl4xy2ryb61fpyxoiv1wfl1s7tfiy76h24vzpadhbpuly4t7oe80k39ji3xwidc4uyn0zvg7iify4fk9w9gf99bpmxn4gemfrlfi50mjtsztqat5khliskbks0y2qjcrwdacyokt47enzg2gwot0l74nur20khrazeq26s9q8egm1hs64x5mr35ws5d6ii5pgph1bju98y2deoalvtmbmwo3xkbn45v2efcnbafk6f1inxjydlii1zft0'
+        example     : 'hhmw4dl5h8g8m9p0y98zza7ruo1tg0ajytns90wudwo2awah6l1lpx992xvmdhbimmg8tva53bhcw3o4yhybuosx5rjy4355gfbt77d1z4gdsn1358df3vajdhwbsifvrpmdyqnpijqd3j0ktfuf4mfbc5er2i39ez9hjo2xmxs7ewv2s4ccrmxu1cmmufqlaufut0ankgz2qqjgmvgp95fugg834lj6fqcws7fj5ul8df216avi7oi6u9dp5qj'
     })
     avatar: string;
     
@@ -51,7 +51,7 @@ export class CreateUserDto
     @ApiProperty({
         type        : String,
         description : 'mobile [input here api field description]',
-        example     : '5l65gv20zkejw10b3abbg157bthq76vmt4fp3kew924wkmnsw9a3sjsj8nhj'
+        example     : 'wcxye408fp681vhbvkcsumxyufuvc1z3u74dsk5dcfd84cdduh9iuphpmjl4'
     })
     mobile: string;
     
@@ -60,7 +60,7 @@ export class CreateUserDto
     @ApiProperty({
         type        : String,
         description : 'langId [input here api field description]',
-        example     : '7bb5e1e1-5d7a-4f51-97cd-6b2713dce924'
+        example     : '4026894e-51dd-4542-9699-f2f32a5a6c8d'
     })
     langId: string;
     
@@ -69,7 +69,7 @@ export class CreateUserDto
     @ApiProperty({
         type        : String,
         description : 'username [input here api field description]',
-        example     : 'uvzpbv9fgh7ytojswp235e0jkqtgzt3piq48ftxrlg3nj48alt4kuicanbf3k5da5x82xzccsm1dvin2q3l0ypftacju8see8puk1y492edc8thdlht0juox'
+        example     : 'ql9pdg5kgohlwb1mvad0rwulkszx45e6i8rlt3lwr6zk6kt66okqohdrfgvug9hfnz7ztvgf8o6d8vqongg5735noplswrrlxruseabfd2ux6cqxhzx092ak'
     })
     username: string;
     
@@ -78,7 +78,7 @@ export class CreateUserDto
     @ApiProperty({
         type        : String,
         description : 'password [input here api field description]',
-        example     : '2nhjpgl7s44n3jkmd9msoan4x9ksodw0lbc4ggxt7o3ojlas874yy5hps4vy5es3kpxzylcsx7983gkaw2i2sqruxymwy6umvzekawvuvwog6kbsalv5imvi76ftonh5l6d9md00e19456rpifv3jymj65viqsb01kipl340wsbxey87mma5irg0z6crwaxbh0jlg2frap639vg4fvgjfy8o64egfe21oijwsgir4q8o6jany76hpvs6x45jlws'
+        example     : 'acjsswmgx2rdfzntg28la3c7jk4fu8ruq0k0j9p0ocvax55uopb2rrgoph0izofe02m8rro0ngllo9ot8p2g5rid4mlifa9pmq1vmov0eey1mu3mcwvg5ou0mooh6udmx3cve3pftf4w415qnrp84j0hzn6xo713p94hjoiup4lrwhbrig3d8ded9eekzviutrongv9wgpryt8dz53julvom7hxorev7z85sfkyls9lwokk4utmc1bvpj96gulz'
     })
     password: string;
     
@@ -87,7 +87,7 @@ export class CreateUserDto
     @ApiProperty({
         type        : String,
         description : 'rememberToken [input here api field description]',
-        example     : 'da6pbort9xe43oiyxdggljakre6gpx1dqspt3avmgczxlfecc8v61rmin3k83u5picsjci6ccsldyapwcln8i7i99nvml8vg5bbeo1ea604piklhesrogpilnxehsbj1mspd54ujb1vx8fbdo3cv048hefnmhhn123nuhvvp0ly3liiz50vij0zb1e68wuj34f95bp32rd76tte2pw23w9ac7z4qraik9hc658p750esjqz1ectaotoufvq6j4y'
+        example     : '9h8du8nkpbqezyspcbyvh2fuuoh5jcondelmam2vn8n2tybghgqf44aog01v484jtxyokndxysvl1xkie9lunby2yjj4amgd73oqsjjsc8lqi6xcv7j5nk9yz7p2d8dbigqvyc5bss03kisu8ltacio4uy5dbz1yuk44s7hdq1q6cndbd9ou3qfmf6chl9l7epjp0jde6y95wrp03vglj91mlmzk1n9z33r2ss54tdyibi9z4stt1xx5kg77qwv'
     })
     rememberToken: string;
     

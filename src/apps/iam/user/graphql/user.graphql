@@ -53,9 +53,9 @@ input IamUpdateUserInput
 
 type Query 
 {
-    iamFindUser(query:QueryStatement): IamUser
-    iamFindUserById(id:ID): IamUser
-    iamGetUsers(query:QueryStatement): [IamUser]!
+    iamFindUser(query:QueryStatement constraint:QueryStatement): IamUser
+    iamFindUserById(id:ID constraint:QueryStatement): IamUser
+    iamGetUsers(query:QueryStatement constraint:QueryStatement): [IamUser]!
     iamPaginateUsers(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -63,7 +63,7 @@ type Mutation
 {
     iamCreateUser(payload: IamCreateUserInput!): IamUser
     iamCreateUsers(payload: [IamCreateUserInput]!): Boolean!
-    iamUpdateUser(payload: IamUpdateUserInput!): IamUser
-    iamDeleteUserById(id: ID!): IamUser
-    iamDeleteUsers(query:QueryStatement): [IamUser]!
+    iamUpdateUser(payload: IamUpdateUserInput! constraint:QueryStatement): IamUser
+    iamDeleteUserById(id: ID! constraint:QueryStatement): IamUser
+    iamDeleteUsers(query:QueryStatement constraint:QueryStatement): [IamUser]!
 }
