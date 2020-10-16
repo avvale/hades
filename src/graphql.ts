@@ -715,13 +715,14 @@ export interface IamCreateAccountInput {
     type: IamAccountType;
     email: GraphQLString;
     isActive: GraphQLBoolean;
-    clientId?: string;
-    dApplicationCodes?: JSON;
-    dPermissions?: JSON;
+    clientId: string;
+    dApplicationCodes: JSON;
+    dPermissions: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
     user?: IamCreateUserInput;
+    dTenants: JSON;
 }
 
 export interface IamUpdateAccountInput {
@@ -736,6 +737,7 @@ export interface IamUpdateAccountInput {
     roleIds?: string[];
     tenantIds?: string[];
     user?: IamUpdateUserInput;
+    dTenants?: JSON;
 }
 
 export interface IamCreateBoundedContextInput {
@@ -939,9 +941,9 @@ export interface AdminLang {
 }
 
 export interface IQuery {
-    adminFindLang(query?: QueryStatement): AdminLang | Promise<AdminLang>;
-    adminFindLangById(id?: string): AdminLang | Promise<AdminLang>;
-    adminGetLangs(query?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
+    adminFindLang(query?: QueryStatement, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
+    adminFindLangById(id?: string, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
+    adminGetLangs(query?: QueryStatement, constraint?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
     adminPaginateLangs(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindChannelDetail(query?: QueryStatement): CciChannelDetail | Promise<CciChannelDetail>;
     cciFindChannelDetailById(id?: string): CciChannelDetail | Promise<CciChannelDetail>;
@@ -1046,8 +1048,8 @@ export interface IMutation {
     adminCreateLang(payload: AdminCreateLangInput): AdminLang | Promise<AdminLang>;
     adminCreateLangs(payload: AdminCreateLangInput[]): boolean | Promise<boolean>;
     adminUpdateLang(payload: AdminUpdateLangInput, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
-    adminDeleteLangById(id: string): AdminLang | Promise<AdminLang>;
-    adminDeleteLangs(query?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
+    adminDeleteLangById(id: string, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
+    adminDeleteLangs(query?: QueryStatement, constraint?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
     cciCreateChannelDetail(payload: CciCreateChannelDetailInput): CciChannelDetail | Promise<CciChannelDetail>;
     cciCreateChannelsDetail(payload: CciCreateChannelDetailInput[]): boolean | Promise<boolean>;
     cciUpdateChannelDetail(payload: CciUpdateChannelDetailInput): CciChannelDetail | Promise<CciChannelDetail>;
@@ -1120,7 +1122,7 @@ export interface IMutation {
     cciDeleteSystems(query?: QueryStatement): CciSystem[] | Promise<CciSystem[]>;
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
-    iamUpdateAccount(payload: IamUpdateAccountInput): IamAccount | Promise<IamAccount>;
+    iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
     iamDeleteAccountById(id: string): IamAccount | Promise<IamAccount>;
     iamDeleteAccounts(query?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
     iamCreateBoundedContext(payload: IamCreateBoundedContextInput): IamBoundedContext | Promise<IamBoundedContext>;
