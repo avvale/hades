@@ -1,7 +1,12 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateAccountDto } from './../dto/create-account.dto';
 import { AccountDto } from './../dto/account.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -11,6 +16,8 @@ import { CreateAccountCommand } from '@hades/iam/account/application/create/crea
 
 @ApiTags('[iam] account')
 @Controller('iam/account')
+@Permissions('iam.account.create')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CreateAccountController 
 {
     constructor(

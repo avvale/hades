@@ -59,10 +59,10 @@ input IamUpdateAccountInput
 
 type Query 
 {
-    iamFindAccount(query:QueryStatement): IamAccount
     iamFindMeAccount: IamAccount
-    iamFindAccountById(id:ID): IamAccount
-    iamGetAccounts(query:QueryStatement): [IamAccount]!
+    iamFindAccount(query:QueryStatement constraint:QueryStatement): IamAccount
+    iamFindAccountById(id:ID constraint:QueryStatement): IamAccount
+    iamGetAccounts(query:QueryStatement constraint:QueryStatement): [IamAccount]!
     iamPaginateAccounts(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -70,7 +70,7 @@ type Mutation
 {
     iamCreateAccount(payload: IamCreateAccountInput!): IamAccount
     iamCreateAccounts(payload: [IamCreateAccountInput]!): Boolean!
-    iamUpdateAccount(payload: IamUpdateAccountInput!): IamAccount
-    iamDeleteAccountById(id: ID!): IamAccount
-    iamDeleteAccounts(query:QueryStatement): [IamAccount]!
+    iamUpdateAccount(payload: IamUpdateAccountInput! constraint:QueryStatement): IamAccount
+    iamDeleteAccountById(id: ID! constraint:QueryStatement): IamAccount
+    iamDeleteAccounts(query:QueryStatement constraint:QueryStatement): [IamAccount]!
 }
