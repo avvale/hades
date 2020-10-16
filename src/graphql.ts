@@ -1032,9 +1032,9 @@ export interface IQuery {
     oAuthFindApplicationById(id?: string, constraint?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
     oAuthGetApplications(query?: QueryStatement, constraint?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
     oAuthPaginateApplications(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    oAuthFindClient(query?: QueryStatement): OAuthClient | Promise<OAuthClient>;
-    oAuthFindClientById(id?: string): OAuthClient | Promise<OAuthClient>;
-    oAuthGetClients(query?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
+    oAuthFindClient(query?: QueryStatement, constraint?: QueryStatement): OAuthClient | Promise<OAuthClient>;
+    oAuthFindClientById(id?: string, constraint?: QueryStatement): OAuthClient | Promise<OAuthClient>;
+    oAuthGetClients(query?: QueryStatement, constraint?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
     oAuthPaginateClients(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     oAuthFindRefreshToken(query?: QueryStatement, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthFindRefreshTokenById(id?: string, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
@@ -1160,9 +1160,9 @@ export interface IMutation {
     oAuthDeleteApplications(query?: QueryStatement, constraint?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
     oAuthCreateClient(payload: OAuthCreateClientInput): OAuthClient | Promise<OAuthClient>;
     oAuthCreateClients(payload: OAuthCreateClientInput[]): boolean | Promise<boolean>;
-    oAuthUpdateClient(payload: OAuthUpdateClientInput): OAuthClient | Promise<OAuthClient>;
-    oAuthDeleteClientById(id: string): OAuthClient | Promise<OAuthClient>;
-    oAuthDeleteClients(query?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
+    oAuthUpdateClient(payload: OAuthUpdateClientInput, constraint?: QueryStatement): OAuthClient | Promise<OAuthClient>;
+    oAuthDeleteClientById(id: string, constraint?: QueryStatement): OAuthClient | Promise<OAuthClient>;
+    oAuthDeleteClients(query?: QueryStatement, constraint?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
     oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
     oAuthCreateRefreshToken(payload: OAuthCreateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthCreateRefreshTokens(payload: OAuthCreateRefreshTokenInput[]): boolean | Promise<boolean>;
