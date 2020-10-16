@@ -3,24 +3,21 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { SharedProviders } from '@hades/shared';
-import { EnvironmentService } from '@hades/shared/domain/environment/environment.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { EnvironmentModule } from './../environment.module';
-
+import * as fs from 'fs';
 
 @Module({
     imports: [
         CqrsModule,
         EnvironmentModule,
         PassportModule,
-        JwtModule.registerAsync({
-            imports: [EnvironmentModule],
-            useFactory: async (environmentService: EnvironmentService) => ({
-                secret: environmentService.get('OAUTH_JWT_PUBLIC_KEY'),
-                // privateKey: environmentService.get('OAUTH_JWT_PRIVATE_KEY'),
-                // publicKey: environmentService.get('OAUTH_JWT_PUBLIC_KEY')
-            }),
-            inject: [EnvironmentService]
+        JwtModule.register({
+            privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+            publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+            signOptions: {
+                algorithm: 'RS256',
+            }
         }),
     ],
     providers: [

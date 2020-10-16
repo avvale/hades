@@ -2,6 +2,8 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: contact
 moduleNames: contacts
+hasOAuth: true
+hasTenant: true
 aggregateProperties:
   - name: id
     type: id
