@@ -1,4 +1,5 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateBoundedContextDto } from './../dto/create-bounded-context.dto';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
@@ -11,6 +12,7 @@ import { CreateBoundedContextCommand } from '@hades/iam/bounded-context/applicat
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-context')
+@UseGuards(AuthGuard('jwt'))
 export class CreateBoundedContextController 
 {
     constructor(

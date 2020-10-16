@@ -26,7 +26,6 @@ export class CreateBoundedContextCommandHandler implements ICommandHandler<Creat
             new BoundedContextRoot(command.root),
             new BoundedContextSort(command.sort),
             new BoundedContextIsActive(command.isActive),
-            
         );
     }
 }

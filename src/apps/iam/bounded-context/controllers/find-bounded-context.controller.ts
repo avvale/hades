@@ -1,4 +1,5 @@
-import { Controller, Get, Body } from '@nestjs/common';
+import { Controller, Get, Body, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
 
@@ -9,6 +10,7 @@ import { FindBoundedContextQuery } from '@hades/iam/bounded-context/application/
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-context')
+@UseGuards(AuthGuard('jwt'))
 export class FindBoundedContextController 
 {
     constructor(
