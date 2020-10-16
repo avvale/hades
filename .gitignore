@@ -1,5 +1,8 @@
 # hades-cli
 *.origin.ts
+*.origin.graphql
+oauth-private.key
+oauth-public.key
 
 # compiled output
 /dist
