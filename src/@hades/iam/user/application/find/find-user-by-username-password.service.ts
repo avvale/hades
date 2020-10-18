@@ -20,7 +20,8 @@ export class FindUserByUsernamePasswordService
             include: ['account']
         });
         
-        if (user && bcrypt.compareSync(password.value, user.password.value)) 
+        // check user active, and correct password
+        if (user && user.account.isActive && bcrypt.compareSync(password.value, user.password.value)) 
         {
             // set validation rule to undefinedable
             user.password.validationRules = Object.assign(user.password.validationRules, { 
