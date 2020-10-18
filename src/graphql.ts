@@ -902,9 +902,10 @@ export interface OAuthCreateCredentialInput {
     grantType: OAuthClientGrantType;
     username?: GraphQLString;
     password?: GraphQLString;
+    email?: GraphQLString;
+    clientSecret?: GraphQLString;
     accessTokenId?: string;
     refreshToken?: GraphQLString;
-    clientSecret?: GraphQLString;
     redirect?: GraphQLString;
 }
 
