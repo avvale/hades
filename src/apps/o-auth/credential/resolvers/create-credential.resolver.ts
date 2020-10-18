@@ -2,13 +2,15 @@ import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
 import { OAuthClientGrantType, OAuthCreateCredentialInput } from '../../../../graphql';
 
 // custom
+import { ClientCredentialsGrantService } from '../lib/client-credentials-grant.service';
 import { PasswordGrantService } from '../lib/password-grant.service';
 
 @Resolver()
 export class CreateCredentialResolver
 {
     constructor(
-        private readonly passwordGrantService: PasswordGrantService
+        private readonly clientClientGrantService: ClientCredentialsGrantService,
+        private readonly passwordGrantService: PasswordGrantService,
     ) {}
 
     @Mutation('oAuthCreateCredential')
@@ -21,7 +23,7 @@ export class CreateCredentialResolver
 
         if (payload.grantType === OAuthClientGrantType.CLIENT_CREDENTIALS)
         {
-
+            return this.clientClientGrantService.getCredential(payload, context);
         }
 
         if (payload.grantType === OAuthClientGrantType.PASSWORD)
