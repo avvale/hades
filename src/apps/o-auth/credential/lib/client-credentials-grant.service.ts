@@ -1,18 +1,18 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { OAuthCreateCredentialInput } from './../../../../graphql';
+import { IamAccountType, OAuthCreateCredentialInput } from './../../../../graphql';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { Utils } from "@hades/shared/domain/lib/utils";
-import { FindApplicationByAuthorizationHeaderQuery } from "@hades/o-auth/application/application/find/find-application-by-authorization-header.query";
-import { FindUserByUsernamePasswordQuery } from "@hades/iam/user/application/find/find-user-by-username-password.query";
 import { CreateAccessTokenCommand } from "@hades/o-auth/access-token/application/create/create-access-token.command";
 import { CreateRefreshTokenCommand } from "@hades/o-auth/refresh-token/application/create/create-refresh-token.command";
 import { FindAccessTokenQuery } from "@hades/o-auth/access-token/application/find/find-access-token.query";
+import { FindClientQuery } from "@hades/o-auth/client/application/find/find-client.query";
+import { FindAccountQuery } from "@hades/iam/account/application/find/find-account.query";
 
 @Injectable()
-export class PasswordGrantService
+export class ClientCredentialsGrantService
 {
     constructor(
         private readonly commandBus: ICommandBus,
@@ -21,21 +21,25 @@ export class PasswordGrantService
 
     async getCredential(payload: OAuthCreateCredentialInput, context)
     {
-        // get user with username and password
-        const user = await this.queryBus.ask(new FindUserByUsernamePasswordQuery(payload.username, payload.password));
+        // get account with email
+        const account = await this.queryBus.ask(new FindAccountQuery({
+            where: { 
+                email: payload.email,
+                type: IamAccountType.SERVICE,
+                isActive: true
+            }
+        }));
 
         // if not exist user throw error
-        if (!user) throw new UnauthorizedException();
+        if (!account) throw new UnauthorizedException();
 
-        // get application and clients with header authorization basic authentication
-        const application = await this.queryBus.ask(new FindApplicationByAuthorizationHeaderQuery(context.req.headers.authorization));
-
-        // if not exist application throw error
-        if (!application) throw new UnauthorizedException();
-
-        // TODO, como determinar a que cliente se autentifica??
-        // get client associated with this application
-        const client = application.clients.find(client => client.id === user.account.clientId);
+        // get client
+        const client = await this.queryBus.ask(new FindClientQuery({
+            where: { 
+                id: account.clientId,
+                secret: payload.clientSecret
+            }
+        }));
 
         // if not exist client throw error
         if (!client) throw new UnauthorizedException();
@@ -45,7 +49,7 @@ export class PasswordGrantService
         await this.commandBus.dispatch(new CreateAccessTokenCommand(
             accessTokenId,
             client.id,
-            user.account.id,
+            account.id,
             client.name,
             client.expiredAccessToken
         ));
