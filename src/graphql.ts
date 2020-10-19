@@ -1282,6 +1282,14 @@ export interface CciContact {
     deletedAt?: GraphQLTimestamp;
 }
 
+export interface CciDashboard {
+    tenants: IamTenant[];
+    systems: CciSystem[];
+    jobsOverview: CciJobOverview[];
+    channelsOverview: CciChannelOverview[];
+    messagesOverview: CciMessageOverview[];
+}
+
 export interface CciDataLake {
     id: string;
     tenant: IamTenant;
