@@ -23,11 +23,13 @@ import { CreateChannelOverviewService } from './application/create/create-channe
 import { CreateChannelsOverviewService } from './application/create/create-channels-overview.service';
 import { PaginateChannelsOverviewService } from './application/paginate/paginate-channels-overview.service';
 import { GetChannelsOverviewService } from './application/get/get-channels-overview.service';
+import { GetDashboardChannelsOverviewService } from './application/get/get-dashboard-channels-overview.service';
 import { FindChannelOverviewService } from './application/find/find-channel-overview.service';
 import { FindChannelOverviewByIdService } from './application/find/find-channel-overview-by-id.service';
 import { UpdateChannelOverviewService } from './application/update/update-channel-overview.service';
 import { DeleteChannelOverviewByIdService } from './application/delete/delete-channel-overview-by-id.service';
 import { DeleteChannelsOverviewService } from './application/delete/delete-channels-overview.service';
+import { GetDashboardChannelsOverviewQueryHandler } from './application/get/get-dashboard-channels-overview.query-handler';
 
 // models
 export { CciChannelOverviewModel } from './infrastructure/sequelize/sequelize-channel-overview.model';
@@ -51,6 +53,7 @@ export const CciChannelOverviewHandlers = [
     // queries
     PaginateChannelsOverviewQueryHandler,
     GetChannelsOverviewQueryHandler,
+    GetDashboardChannelsOverviewQueryHandler,
     FindChannelOverviewQueryHandler,
     FindChannelOverviewByIdQueryHandler,
 
@@ -67,6 +70,7 @@ export const CciChannelOverviewServices = [
     CreateChannelsOverviewService,
     PaginateChannelsOverviewService,
     GetChannelsOverviewService,
+    GetDashboardChannelsOverviewService,
     FindChannelOverviewService,
     FindChannelOverviewByIdService,
     UpdateChannelOverviewService,

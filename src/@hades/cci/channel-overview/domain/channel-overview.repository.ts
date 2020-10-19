@@ -27,6 +27,9 @@ export abstract class IChannelOverviewRepository implements IRepository<CciChann
     // get multiple records
     abstract async get(query: QueryStatement): Promise<CciChannelOverview[]>;
 
+    // get multiple records
+    abstract async getDashboardData(query: QueryStatement): Promise<CciChannelOverview[]>;
+
     // update record
     abstract async update(channelOverview: CciChannelOverview): Promise<void>;
   
