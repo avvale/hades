@@ -68,8 +68,8 @@ export const permissions = [
     {id: 'e433ed37-8500-48ac-bd66-b8962c283b99',  name: 'cci.messageOverview.update',           boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
     {id: '43284f8d-c8cd-41e0-a882-cb906fa7594a',  name: 'cci.messageOverview.delete',           boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
 
-    {id: 'e62971af-7ba1-4182-afa3-e32ad3e0d26b',  name: 'cci.sumary.access',                    boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
-    {id: '14380c06-f27e-4d2a-bec0-8f613903a091',  name: 'cci.sumary.get',                       boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: 'e62971af-7ba1-4182-afa3-e32ad3e0d26b',  name: 'cci.summary.access',                   boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: '14380c06-f27e-4d2a-bec0-8f613903a091',  name: 'cci.summary.get',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
 
     {id: '9da3b558-ffb7-4216-b61c-bcb568018393',  name: 'cci.historic.access',                  boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
     {id: 'f67bd3db-902b-4fbb-8809-e0a8e9d75e19',  name: 'cci.historic.get',                     boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
