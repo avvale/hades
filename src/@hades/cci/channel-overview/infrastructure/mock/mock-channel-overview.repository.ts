@@ -24,6 +24,7 @@ import {
     ChannelOverviewDeletedAt
     
 } from '@hades/cci/channel-overview/domain/value-objects';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CciChannelOverview } from './../../domain/channel-overview.aggregate';
 import { channelsOverview } from './../seeds/channel-overview.seed';
 
@@ -80,5 +81,10 @@ export class MockChannelOverviewRepository extends MockRepository<CciChannelOver
                      
                 ));
         }
+    }
+
+    async getDashboardData(query: QueryStatement): Promise<CciChannelOverview[]>
+    {
+        return;
     }
 }

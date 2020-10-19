@@ -1,0 +1,8 @@
+type CciDashboard
+{
+    tenants: [IamTenant]!
+    systems: [CciSystem]!
+    jobsOverview: [CciJobOverview]!
+    channelsOverview: [CciChannelOverview]!
+    messagesOverview: [CciMessageOverview]!    
+}
