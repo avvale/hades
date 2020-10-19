@@ -879,7 +879,7 @@ export interface OAuthCreateClientInput {
     redirect?: GraphQLString;
     expiredAccessToken?: GraphQLInt;
     expiredRefreshToken?: GraphQLInt;
-    isRevoked: GraphQLBoolean;
+    isActive: GraphQLBoolean;
     isMaster: GraphQLBoolean;
     applicationIds?: string[];
 }
@@ -893,7 +893,7 @@ export interface OAuthUpdateClientInput {
     redirect?: GraphQLString;
     expiredAccessToken?: GraphQLInt;
     expiredRefreshToken?: GraphQLInt;
-    isRevoked?: GraphQLBoolean;
+    isActive?: GraphQLBoolean;
     isMaster?: GraphQLBoolean;
     applicationIds?: string[];
 }
@@ -1628,7 +1628,7 @@ export interface OAuthClient {
     redirect?: GraphQLString;
     expiredAccessToken?: GraphQLInt;
     expiredRefreshToken?: GraphQLInt;
-    isRevoked: GraphQLBoolean;
+    isActive: GraphQLBoolean;
     isMaster: GraphQLBoolean;
     applications?: OAuthApplication[];
     accessTokens?: OAuthAccessToken[];
