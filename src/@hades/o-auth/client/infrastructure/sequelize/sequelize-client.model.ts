@@ -124,14 +124,14 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     
     
     @Column({
-        field: 'is_revoked',
+        field: 'is_active',
         
         allowNull: false,
         type: DataTypes.BOOLEAN,
         
         
     })
-    isRevoked: boolean;
+    isActive: boolean;
         
                      
         

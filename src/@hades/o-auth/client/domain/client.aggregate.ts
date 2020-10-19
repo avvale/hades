@@ -8,7 +8,7 @@ import {
     ClientRedirect,
     ClientExpiredAccessToken,
     ClientExpiredRefreshToken,
-    ClientIsRevoked,
+    ClientIsActive,
     ClientIsMaster,
     ClientApplicationIds,
     ClientCreatedAt,
@@ -35,7 +35,7 @@ export class OAuthClient extends AggregateRoot
     redirect: ClientRedirect;
     expiredAccessToken: ClientExpiredAccessToken;
     expiredRefreshToken: ClientExpiredRefreshToken;
-    isRevoked: ClientIsRevoked;
+    isActive: ClientIsActive;
     isMaster: ClientIsMaster;
     applicationIds: ClientApplicationIds;
     createdAt: ClientCreatedAt;
@@ -50,7 +50,7 @@ export class OAuthClient extends AggregateRoot
     
     applications: OAuthApplication[];
     
-    constructor(id?: ClientId, grantType?: ClientGrantType, name?: ClientName, secret?: ClientSecret, authUrl?: ClientAuthUrl, redirect?: ClientRedirect, expiredAccessToken?: ClientExpiredAccessToken, expiredRefreshToken?: ClientExpiredRefreshToken, isRevoked?: ClientIsRevoked, isMaster?: ClientIsMaster, applicationIds?: ClientApplicationIds, createdAt?: ClientCreatedAt, updatedAt?: ClientUpdatedAt, deletedAt?: ClientDeletedAt, accessTokens?: OAuthAccessToken[], applications?: OAuthApplication[], )
+    constructor(id?: ClientId, grantType?: ClientGrantType, name?: ClientName, secret?: ClientSecret, authUrl?: ClientAuthUrl, redirect?: ClientRedirect, expiredAccessToken?: ClientExpiredAccessToken, expiredRefreshToken?: ClientExpiredRefreshToken, isActive?: ClientIsActive, isMaster?: ClientIsMaster, applicationIds?: ClientApplicationIds, createdAt?: ClientCreatedAt, updatedAt?: ClientUpdatedAt, deletedAt?: ClientDeletedAt, accessTokens?: OAuthAccessToken[], applications?: OAuthApplication[], )
     {
         super();
         
@@ -62,7 +62,7 @@ export class OAuthClient extends AggregateRoot
         this.redirect = redirect;
         this.expiredAccessToken = expiredAccessToken;
         this.expiredRefreshToken = expiredRefreshToken;
-        this.isRevoked = isRevoked;
+        this.isActive = isActive;
         this.isMaster = isMaster;
         this.applicationIds = applicationIds;
         this.createdAt = createdAt;
@@ -79,9 +79,9 @@ export class OAuthClient extends AggregateRoot
         
     }
 
-    static register (id: ClientId, grantType: ClientGrantType, name: ClientName, secret: ClientSecret, authUrl: ClientAuthUrl, redirect: ClientRedirect, expiredAccessToken: ClientExpiredAccessToken, expiredRefreshToken: ClientExpiredRefreshToken, isRevoked: ClientIsRevoked, isMaster: ClientIsMaster, applicationIds: ClientApplicationIds, createdAt: ClientCreatedAt, updatedAt: ClientUpdatedAt, deletedAt: ClientDeletedAt, accessTokens?: OAuthAccessToken[], applications?: OAuthApplication[], ): OAuthClient
+    static register (id: ClientId, grantType: ClientGrantType, name: ClientName, secret: ClientSecret, authUrl: ClientAuthUrl, redirect: ClientRedirect, expiredAccessToken: ClientExpiredAccessToken, expiredRefreshToken: ClientExpiredRefreshToken, isActive: ClientIsActive, isMaster: ClientIsMaster, applicationIds: ClientApplicationIds, createdAt: ClientCreatedAt, updatedAt: ClientUpdatedAt, deletedAt: ClientDeletedAt, accessTokens?: OAuthAccessToken[], applications?: OAuthApplication[], ): OAuthClient
     {
-        return new OAuthClient(id, grantType, name, secret, authUrl, redirect, expiredAccessToken, expiredRefreshToken, isRevoked, isMaster, applicationIds, createdAt, updatedAt, deletedAt, accessTokens, applications, );
+        return new OAuthClient(id, grantType, name, secret, authUrl, redirect, expiredAccessToken, expiredRefreshToken, isActive, isMaster, applicationIds, createdAt, updatedAt, deletedAt, accessTokens, applications, );
     }
 
     created(client: OAuthClient): void
@@ -96,7 +96,7 @@ export class OAuthClient extends AggregateRoot
                 client.redirect?.value,
                 client.expiredAccessToken?.value,
                 client.expiredRefreshToken?.value,
-                client.isRevoked.value,
+                client.isActive.value,
                 client.isMaster.value,
                 client.applicationIds?.value,
                 client.createdAt?.value,
@@ -119,7 +119,7 @@ export class OAuthClient extends AggregateRoot
                 client.redirect?.value,
                 client.expiredAccessToken?.value,
                 client.expiredRefreshToken?.value,
-                client.isRevoked?.value,
+                client.isActive?.value,
                 client.isMaster?.value,
                 client.applicationIds?.value,
                 client.createdAt?.value,
@@ -142,7 +142,7 @@ export class OAuthClient extends AggregateRoot
                 client.redirect?.value,
                 client.expiredAccessToken?.value,
                 client.expiredRefreshToken?.value,
-                client.isRevoked.value,
+                client.isActive.value,
                 client.isMaster.value,
                 client.applicationIds?.value,
                 client.createdAt?.value,
@@ -164,7 +164,7 @@ export class OAuthClient extends AggregateRoot
             redirect: this.redirect?.value,
             expiredAccessToken: this.expiredAccessToken?.value,
             expiredRefreshToken: this.expiredRefreshToken?.value,
-            isRevoked: this.isRevoked.value,
+            isActive: this.isActive.value,
             isMaster: this.isMaster.value,
             applicationIds: this.applicationIds?.value,
             createdAt: this.createdAt?.value,

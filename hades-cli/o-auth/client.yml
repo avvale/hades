@@ -41,7 +41,7 @@ aggregateProperties:
     type: int.unsigned
     maxLength: 10
     nullable: true
-  - name: is_revoked
+  - name: is_active
     type: boolean
     nullable: false
   - name: is_master

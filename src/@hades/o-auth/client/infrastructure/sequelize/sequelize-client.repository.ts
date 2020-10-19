@@ -43,7 +43,7 @@ export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, 
          
     }
 
-    // hook called after insert aggregates
+    // hook called after insert aggregates, to add relations between bulk inserted
     async insertedAggregateHook(aggregates: OAuthClient[]) 
     {
         const intermediateDate: { clientId: string, applicationId: string }[] = [];

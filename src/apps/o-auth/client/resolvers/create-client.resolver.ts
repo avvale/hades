@@ -35,7 +35,7 @@ export class CreateClientResolver
             payload.redirect,
             payload.expiredAccessToken,
             payload.expiredRefreshToken,
-            payload.isRevoked,
+            payload.isActive,
             payload.isMaster,
             payload.applicationIds,
         ));

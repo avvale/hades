@@ -16,7 +16,7 @@ type OAuthClient
     redirect: GraphQLString
     expiredAccessToken: GraphQLInt
     expiredRefreshToken: GraphQLInt
-    isRevoked: GraphQLBoolean!
+    isActive: GraphQLBoolean!
     isMaster: GraphQLBoolean!
     applications: [OAuthApplication]
     accessTokens: [OAuthAccessToken]
@@ -36,7 +36,7 @@ input OAuthCreateClientInput
     redirect: GraphQLString
     expiredAccessToken: GraphQLInt
     expiredRefreshToken: GraphQLInt
-    isRevoked: GraphQLBoolean!
+    isActive: GraphQLBoolean!
     isMaster: GraphQLBoolean!
     applicationIds: [ID]
     
@@ -52,7 +52,7 @@ input OAuthUpdateClientInput
     redirect: GraphQLString
     expiredAccessToken: GraphQLInt
     expiredRefreshToken: GraphQLInt
-    isRevoked: GraphQLBoolean
+    isActive: GraphQLBoolean
     isMaster: GraphQLBoolean
     applicationIds: [ID]
     

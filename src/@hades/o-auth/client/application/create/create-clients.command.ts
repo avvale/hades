@@ -10,7 +10,7 @@ export class CreateClientsCommand
             redirect?: string,
             expiredAccessToken?: number,
             expiredRefreshToken?: number,
-            isRevoked: boolean,
+            isActive: boolean,
             isMaster: boolean,
             applicationIds?: string[],
             
