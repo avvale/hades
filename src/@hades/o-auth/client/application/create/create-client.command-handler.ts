@@ -10,7 +10,7 @@ import {
     ClientRedirect,
     ClientExpiredAccessToken,
     ClientExpiredRefreshToken,
-    ClientIsRevoked,
+    ClientIsActive,
     ClientIsMaster,
     ClientApplicationIds
     
@@ -35,7 +35,7 @@ export class CreateClientCommandHandler implements ICommandHandler<CreateClientC
             new ClientRedirect(command.redirect),
             new ClientExpiredAccessToken(command.expiredAccessToken),
             new ClientExpiredRefreshToken(command.expiredRefreshToken),
-            new ClientIsRevoked(command.isRevoked),
+            new ClientIsActive(command.isActive),
             new ClientIsMaster(command.isMaster),
             new ClientApplicationIds(command.applicationIds),
         );

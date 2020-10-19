@@ -6,7 +6,7 @@ export { ClientAuthUrl } from './client-auth-url';
 export { ClientRedirect } from './client-redirect';
 export { ClientExpiredAccessToken } from './client-expired-access-token';
 export { ClientExpiredRefreshToken } from './client-expired-refresh-token';
-export { ClientIsRevoked } from './client-is-revoked';
+export { ClientIsActive } from './client-is-active';
 export { ClientIsMaster } from './client-is-master';
 export { ClientApplicationIds } from './client-application-ids';
 export { ClientCreatedAt } from './client-created-at';

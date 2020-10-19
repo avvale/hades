@@ -40,7 +40,7 @@ export class UpdateClientController
             payload.redirect,
             payload.expiredAccessToken,
             payload.expiredRefreshToken,
-            payload.isRevoked,
+            payload.isActive,
             payload.isMaster,
             payload.applicationIds,
             constraint,

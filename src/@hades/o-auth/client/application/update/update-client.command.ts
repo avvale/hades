@@ -11,7 +11,7 @@ export class UpdateClientCommand
         public readonly redirect?: string,
         public readonly expiredAccessToken?: number,
         public readonly expiredRefreshToken?: number,
-        public readonly isRevoked?: boolean,
+        public readonly isActive?: boolean,
         public readonly isMaster?: boolean,
         public readonly applicationIds?: string[],
         

@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { IamAccountType, OAuthCreateCredentialInput } from './../../../../graphql';
+import { IamAccountType, OAuthClientGrantType, OAuthCreateCredentialInput } from './../../../../graphql';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -37,7 +37,8 @@ export class ClientCredentialsGrantService
         const client = await this.queryBus.ask(new FindClientQuery({
             where: { 
                 id: account.clientId,
-                secret: payload.clientSecret
+                secret: payload.clientSecret,
+                grantType: OAuthClientGrantType.CLIENT_CREDENTIALS
             }
         }));
 

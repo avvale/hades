@@ -13,7 +13,7 @@ import {
     ClientRedirect,
     ClientExpiredAccessToken,
     ClientExpiredRefreshToken,
-    ClientIsRevoked,
+    ClientIsActive,
     ClientIsMaster,
     ClientApplicationIds,
     ClientCreatedAt,
@@ -71,7 +71,7 @@ describe('UpdateClientService', () =>
                 new ClientRedirect(clients[0].redirect),
                 new ClientExpiredAccessToken(clients[0].expiredAccessToken),
                 new ClientExpiredRefreshToken(clients[0].expiredRefreshToken),
-                new ClientIsRevoked(clients[0].isRevoked),
+                new ClientIsActive(clients[0].isActive),
                 new ClientIsMaster(clients[0].isMaster),
                 new ClientApplicationIds(clients[0].applicationIds),
                 
