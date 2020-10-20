@@ -960,6 +960,7 @@ export interface IQuery {
     cciFindContactById(id?: string): CciContact | Promise<CciContact>;
     cciGetContacts(query?: QueryStatement): CciContact[] | Promise<CciContact[]>;
     cciPaginateContacts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    cciFindDashboard(): CciDashboard | Promise<CciDashboard>;
     cciFindDataLake(query?: QueryStatement): CciDataLake | Promise<CciDataLake>;
     cciFindDataLakeById(id?: string): CciDataLake | Promise<CciDataLake>;
     cciGetDataLakes(query?: QueryStatement): CciDataLake[] | Promise<CciDataLake[]>;
