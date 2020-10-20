@@ -27,9 +27,9 @@ import {
     MessageOverviewDeletedAt
     
 } from '@hades/cci/message-overview/domain/value-objects';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CciMessageOverview } from './../../domain/message-overview.aggregate';
 import { messagesOverview } from './../seeds/message-overview.seed';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 
 @Injectable()
 export class MockMessageOverviewRepository extends MockRepository<CciMessageOverview> implements IMessageOverviewRepository

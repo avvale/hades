@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { CciJobOverview } from './../../domain/job-overview.aggregate';
 import { JobOverviewMapper } from './../../domain/job-overview.mapper';
 import { CciJobOverviewModel } from './sequelize-job-overview.model';
+import { Sequelize } from 'sequelize-typescript';
+import * as _ from 'lodash';
 
 @Injectable()
 export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOverview, CciJobOverviewModel> implements IJobOverviewRepository
@@ -20,6 +22,21 @@ export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOv
         public readonly criteria: ICriteria
     ) {
         super();
+    }
+
+    async getDashboardData(query?: QueryStatement): Promise<CciJobOverview[]> 
+    {
+        const models = await this.repository.findAll(
+            this.criteria.implements(
+                _.merge(query, {
+                    attributes: ['id', 'tenantId', 'tenantCide', 'systemId', 'systemName', [Sequelize.fn('max', Sequelize.col('created_at')), 'max']],
+                    group: ['tenantId', 'systemId']
+                })
+            )
+        );
+
+        // map values to create value objects
+        return <CciJobOverview[]>this.mapper.mapModelsToAggregates(models);
     }
     
 }
