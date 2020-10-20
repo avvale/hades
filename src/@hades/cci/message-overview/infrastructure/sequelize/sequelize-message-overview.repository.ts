@@ -29,10 +29,19 @@ export class SequelizeMessageOverviewRepository extends SequelizeRepository<CciM
         const models = await this.repository.findAll(
             _.merge(this.criteria.implements(query), {
                 attributes: [
-                    [Sequelize.fn('max', Sequelize.col('created_at')), 'max'], 
-                    'id', 'tenantId', 'tenantCode', 'systemId', 'systemName', 'executionId', 'executionType', 'executionExecutedAt', 'executionMonitoringStartAt', 'executionMonitoringEndAt', 'numberMax', 'numberDays', 'success', 'cancelled', 'delivering', 'error', 'holding', 'toBeDelivered', 'waiting', 'createdAt'
+                    [Sequelize.fn('max', Sequelize.col('created_at')), 'max'],
+                    [Sequelize.fn('any_value', Sequelize.col('number_max')), 'numberMax'],
+                    [Sequelize.fn('any_value', Sequelize.col('number_days')), 'numberDays'],
+                    [Sequelize.fn('any_value', Sequelize.col('success')), 'success'],
+                    [Sequelize.fn('any_value', Sequelize.col('cancelled')), 'cancelled'],
+                    [Sequelize.fn('any_value', Sequelize.col('delivering')), 'delivering'],
+                    [Sequelize.fn('any_value', Sequelize.col('error')), 'error'],
+                    [Sequelize.fn('any_value', Sequelize.col('holding')), 'holding'],
+                    [Sequelize.fn('any_value', Sequelize.col('to_be_delivered')), 'toBeDelivered'],
+                    [Sequelize.fn('any_value', Sequelize.col('waiting')), 'waiting'],
+                    'tenantId', 'systemId'
                 ],
-                group: ['id', 'tenantId', 'tenantCode', 'systemId', 'systemName', 'executionId', 'executionType', 'executionExecutedAt', 'executionMonitoringStartAt', 'executionMonitoringEndAt', 'numberMax', 'numberDays', 'success', 'cancelled', 'delivering', 'error', 'holding', 'toBeDelivered', 'waiting', 'createdAt'],
+                group: ['tenantId', 'systemId'],
             })
         );
 
