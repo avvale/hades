@@ -30,9 +30,15 @@ export class SequelizeChannelOverviewRepository extends SequelizeRepository<CciC
             _.merge(this.criteria.implements(query), {
                 attributes: [
                     [Sequelize.fn('max', Sequelize.col('created_at')), 'max'], 
-                    'id', 'tenantId', 'tenantCode', 'systemId', 'systemName', 'executionId', 'executionType', 'executionExecutedAt', 'executionMonitoringStartAt', 'executionMonitoringEndAt', 'error', 'inactive', 'successful', 'stopped', 'unknown', 'unregistered', 'createdAt'
+                    [Sequelize.fn('any_value', Sequelize.col('error')), 'error'],
+                    [Sequelize.fn('any_value', Sequelize.col('inactive')), 'inactive'],
+                    [Sequelize.fn('any_value', Sequelize.col('successful')), 'successful'],
+                    [Sequelize.fn('any_value', Sequelize.col('stopped')), 'stopped'],
+                    [Sequelize.fn('any_value', Sequelize.col('unknown')), 'unknown'],
+                    [Sequelize.fn('any_value', Sequelize.col('unregistered')), 'unregistered'],
+                    'tenantId', 'systemId'
                 ],
-                group: ['id', 'tenantId', 'tenantCode', 'systemId', 'systemName', 'executionId', 'executionType', 'executionExecutedAt', 'executionMonitoringStartAt', 'executionMonitoringEndAt', 'error', 'inactive', 'successful', 'stopped', 'unknown', 'unregistered', 'createdAt'],
+                group: ['tenantId', 'systemId'],
             })
         );
 

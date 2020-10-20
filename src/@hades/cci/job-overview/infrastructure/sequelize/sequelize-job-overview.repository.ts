@@ -30,10 +30,13 @@ export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOv
         const models = await this.repository.findAll(
             _.merge(this.criteria.implements(query), {
                 attributes: [
-                    [Sequelize.fn('max', Sequelize.col('created_at')), 'max'], 
-                    'id', 'tenantId', 'tenantCode', 'systemId', 'systemName', 'executionId', 'executionType', 'executionExecutedAt', 'executionMonitoringStartAt', 'executionMonitoringEndAt', 'cancelled', 'completed', 'error', 'createdAt'
+                    [Sequelize.fn('max', Sequelize.col('created_at')), 'max'],
+                    [Sequelize.fn('any_value', Sequelize.col('cancelled')), 'cancelled'],
+                    [Sequelize.fn('any_value', Sequelize.col('completed')), 'completed'],
+                    [Sequelize.fn('any_value', Sequelize.col('error')), 'error'],
+                    'tenantId', 'systemId'
                 ],
-                group: ['id', 'tenantId', 'tenantCode', 'systemId', 'systemName', 'executionId', 'executionType', 'executionExecutedAt', 'executionMonitoringStartAt', 'executionMonitoringEndAt', 'cancelled', 'completed', 'error', 'createdAt'],
+                group: ['tenantId', 'systemId'],
             })
         );
 
