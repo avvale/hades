@@ -8,6 +8,7 @@ import { DeleteJobsOverviewCommandHandler } from './application/delete/delete-jo
 // queries
 import { PaginateJobsOverviewQueryHandler } from './application/paginate/paginate-jobs-overview.query-handler';
 import { GetJobsOverviewQueryHandler } from './application/get/get-jobs-overview.query-handler';
+import { GetDashboardJobsOverviewQueryHandler } from './application/get/get-dashboard-jobs-overview.query-handler';
 import { FindJobOverviewQueryHandler } from './application/find/find-job-overview.query-handler';
 import { FindJobOverviewByIdQueryHandler } from './application/find/find-job-overview-by-id.query-handler';
 
@@ -23,6 +24,7 @@ import { CreateJobOverviewService } from './application/create/create-job-overvi
 import { CreateJobsOverviewService } from './application/create/create-jobs-overview.service';
 import { PaginateJobsOverviewService } from './application/paginate/paginate-jobs-overview.service';
 import { GetJobsOverviewService } from './application/get/get-jobs-overview.service';
+import { GetDashboardJobsOverviewService } from './application/get/get-dashboard-jobs-overview.service';
 import { FindJobOverviewService } from './application/find/find-job-overview.service';
 import { FindJobOverviewByIdService } from './application/find/find-job-overview-by-id.service';
 import { UpdateJobOverviewService } from './application/update/update-job-overview.service';
@@ -31,7 +33,6 @@ import { DeleteJobsOverviewService } from './application/delete/delete-jobs-over
 
 // models
 export { CciJobOverviewModel } from './infrastructure/sequelize/sequelize-job-overview.model';
-
 
 // repository
 export { IJobOverviewRepository } from './domain/job-overview.repository';
@@ -51,6 +52,7 @@ export const CciJobOverviewHandlers = [
     // queries
     PaginateJobsOverviewQueryHandler,
     GetJobsOverviewQueryHandler,
+    GetDashboardJobsOverviewQueryHandler,
     FindJobOverviewQueryHandler,
     FindJobOverviewByIdQueryHandler,
 
@@ -67,6 +69,7 @@ export const CciJobOverviewServices = [
     CreateJobsOverviewService,
     PaginateJobsOverviewService,
     GetJobsOverviewService,
+    GetDashboardJobsOverviewService,
     FindJobOverviewService,
     FindJobOverviewByIdService,
     UpdateJobOverviewService,

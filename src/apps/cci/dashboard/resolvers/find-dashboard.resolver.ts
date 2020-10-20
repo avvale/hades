@@ -1,4 +1,4 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query } from '@nestjs/graphql';
 
 // tenant
 import { AccountResponse } from '@hades/iam/account/domain/account.response';
@@ -21,7 +21,7 @@ import { GetDashboardJobsOverviewQuery } from '@hades/cci/job-overview/applicati
 import { GetDashboardMessagesOverviewQuery } from '@hades/cci/message-overview/application/get/get-dashboard-messages-overview.query';
 
 @Resolver()
-@Permissions('cci.dashboard.access')
+@Permissions('cci.dashboard.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class FindDashboardResolver
 {
@@ -60,7 +60,7 @@ export class FindDashboardResolver
             }
         }));
 
-        const messsagesOverview = await this.queryBus.ask(new GetDashboardMessagesOverviewQuery({
+        const messagesOverview = await this.queryBus.ask(new GetDashboardMessagesOverviewQuery({
             where: { 
                 tenantId: account.dTenants,
                 systemId: systems.map(system => system.id)
@@ -72,7 +72,7 @@ export class FindDashboardResolver
             systems,
             jobsOverview,
             channelsOverview,
-            messsagesOverview
+            messagesOverview
         };
     }
 }

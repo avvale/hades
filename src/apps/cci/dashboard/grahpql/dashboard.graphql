@@ -4,5 +4,10 @@ type CciDashboard
     systems: [CciSystem]!
     jobsOverview: [CciJobOverview]!
     channelsOverview: [CciChannelOverview]!
-    messagesOverview: [CciMessageOverview]!    
+    messagesOverview: [CciMessageOverview]!
+}
+
+type Query 
+{
+    cciFindDashboard: CciDashboard!
 }
