@@ -32,9 +32,7 @@ export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOv
                 attributes: [
                     [Sequelize.fn('max', Sequelize.col('created_at')), 'max'],
                     [Sequelize.fn('any_value', Sequelize.col('id')), 'id'],
-                    [Sequelize.fn('any_value', Sequelize.col('tenant_id')), 'tenantId'],
                     [Sequelize.fn('any_value', Sequelize.col('tenant_code')), 'tenantCode'],
-                    [Sequelize.fn('any_value', Sequelize.col('system_id')), 'systemId'],
                     [Sequelize.fn('any_value', Sequelize.col('system_name')), 'systemName'],
                     [Sequelize.fn('any_value', Sequelize.col('execution_id')), 'executionId'],
                     [Sequelize.fn('any_value', Sequelize.col('execution_type')), 'executionType'],
