@@ -3,11 +3,11 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { Sequelize } from 'sequelize-typescript';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
 import { CciChannelOverview } from './../../domain/channel-overview.aggregate';
 import { ChannelOverviewMapper } from './../../domain/channel-overview.mapper';
 import { CciChannelOverviewModel } from './sequelize-channel-overview.model';
+import { Sequelize } from 'sequelize-typescript';
 import * as _ from 'lodash';
 
 @Injectable()

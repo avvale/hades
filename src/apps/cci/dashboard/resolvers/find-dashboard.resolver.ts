@@ -3,21 +3,26 @@ import { Resolver, Query, Args } from '@nestjs/graphql';
 // tenant
 import { AccountResponse } from '@hades/iam/account/domain/account.response';
 import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
-import { TenantConstraint } from './../../../shared/decorators/tenant-constraint.decorator';
+
+// authorization
+import { UseGuards } from '@nestjs/common';
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { FindMessageOverviewQuery } from '@hades/cci/message-overview/application/find/find-message-overview.query';
-import { CciDashboard } from './../../../../graphql';
 
 // custom
 import { GetTenantsQuery } from '@hades/iam/tenant/application/get/get-tenants.query';
 import { GetSystemsQuery } from '@hades/cci/system/application/get/get-systems.query';
-import { GetJobsOverviewQuery } from '@hades/cci/job-overview/application/get/get-jobs-overview.query';
 import { GetDashboardChannelsOverviewQuery } from '@hades/cci/channel-overview/application/get/get-dashboard-channels-overview.query';
+import { GetDashboardJobsOverviewQuery } from '@hades/cci/job-overview/application/get/get-dashboard-jobs-overview.query';
+import { GetDashboardMessagesOverviewQuery } from '@hades/cci/message-overview/application/get/get-dashboard-messages-overview.query';
 
 @Resolver()
+@Permissions('cci.dashboard.access')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class FindDashboardResolver
 {
     constructor(
@@ -25,7 +30,7 @@ export class FindDashboardResolver
     ) {}
 
     @Query('cciFindDashboard')
-    async main(@CurrentAccount() account: AccountResponse): Promise<CciDashboard>
+    async main(@CurrentAccount() account: AccountResponse)
     {
         // get tenanat fot this account
         const tenants = await this.queryBus.ask(new GetTenantsQuery({
@@ -41,13 +46,12 @@ export class FindDashboardResolver
             }
         }));
 
-        /* await this.queryBus.ask(new GetJobsOverviewQuery({
+        const jobsOverview = await this.queryBus.ask(new GetDashboardJobsOverviewQuery({
             where: { 
                 tenantId: account.dTenants,
                 systemId: systems.map(system => system.id)
-            },
-            order: ['createdAt', 'DESC']
-        })) */
+            }
+        }));
 
         const channelsOverview = await this.queryBus.ask(new GetDashboardChannelsOverviewQuery({
             where: { 
@@ -56,10 +60,19 @@ export class FindDashboardResolver
             }
         }));
 
-        // const jobsOverview = await this.queryBus.ask(new GetDashboardJobsOverview)
+        const messsagesOverview = await this.queryBus.ask(new GetDashboardMessagesOverviewQuery({
+            where: { 
+                tenantId: account.dTenants,
+                systemId: systems.map(system => system.id)
+            }
+        }));
 
-        // const messagesOverview = await this.queryBus.ask(new Get)
-
-       return null;
+        return {
+            tenants,
+            systems,
+            jobsOverview,
+            channelsOverview,
+            messsagesOverview
+        };
     }
 }

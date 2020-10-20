@@ -21,6 +21,7 @@ import {
     JobOverviewDeletedAt
     
 } from '@hades/cci/job-overview/domain/value-objects';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CciJobOverview } from './../../domain/job-overview.aggregate';
 import { jobsOverview } from './../seeds/job-overview.seed';
 
@@ -74,5 +75,10 @@ export class MockJobOverviewRepository extends MockRepository<CciJobOverview> im
                      
                 ));
         }
+    }
+
+    async getDashboardData(query: QueryStatement): Promise<CciJobOverview[]>
+    {
+        return;
     }
 }

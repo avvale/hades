@@ -27,6 +27,9 @@ export abstract class IJobOverviewRepository implements IRepository<CciJobOvervi
     // get multiple records
     abstract async get(query: QueryStatement): Promise<CciJobOverview[]>;
 
+    // get multiple records
+    abstract async getDashboardData(query: QueryStatement): Promise<CciJobOverview[]>;
+
     // update record
     abstract async update(jobOverview: CciJobOverview): Promise<void>;
   
