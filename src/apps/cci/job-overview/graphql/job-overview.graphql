@@ -8,8 +8,10 @@ enum CciJobOverviewExecutionType {
 type CciJobOverview
 {
     id: ID!
+    tenantId: ID!
     tenant: IamTenant!
     tenantCode: GraphQLString!
+    systemId: ID!
     system: CciSystem!
     systemName: GraphQLString!
     execution: CciExecution!
