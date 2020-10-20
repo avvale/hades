@@ -30,6 +30,7 @@ export class SequelizeMessageOverviewRepository extends SequelizeRepository<CciM
             _.merge(this.criteria.implements(query), {
                 attributes: [
                     [Sequelize.fn('max', Sequelize.col('created_at')), 'max'],
+                    [Sequelize.fn('any_value', Sequelize.col('id')), 'id'],
                     [Sequelize.fn('any_value', Sequelize.col('number_max')), 'numberMax'],
                     [Sequelize.fn('any_value', Sequelize.col('number_days')), 'numberDays'],
                     [Sequelize.fn('any_value', Sequelize.col('success')), 'success'],
