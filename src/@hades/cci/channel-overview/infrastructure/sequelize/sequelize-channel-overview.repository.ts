@@ -30,6 +30,7 @@ export class SequelizeChannelOverviewRepository extends SequelizeRepository<CciC
             _.merge(this.criteria.implements(query), {
                 attributes: [
                     [Sequelize.fn('max', Sequelize.col('created_at')), 'max'], 
+                    [Sequelize.fn('any_value', Sequelize.col('id')), 'id'],
                     [Sequelize.fn('any_value', Sequelize.col('error')), 'error'],
                     [Sequelize.fn('any_value', Sequelize.col('inactive')), 'inactive'],
                     [Sequelize.fn('any_value', Sequelize.col('successful')), 'successful'],

@@ -31,6 +31,7 @@ export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOv
             _.merge(this.criteria.implements(query), {
                 attributes: [
                     [Sequelize.fn('max', Sequelize.col('created_at')), 'max'],
+                    [Sequelize.fn('any_value', Sequelize.col('id')), 'id'],
                     [Sequelize.fn('any_value', Sequelize.col('cancelled')), 'cancelled'],
                     [Sequelize.fn('any_value', Sequelize.col('completed')), 'completed'],
                     [Sequelize.fn('any_value', Sequelize.col('error')), 'error'],
