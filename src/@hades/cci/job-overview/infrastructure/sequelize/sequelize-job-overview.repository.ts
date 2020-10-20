@@ -7,11 +7,12 @@ import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { CciJobOverview } from './../../domain/job-overview.aggregate';
 import { JobOverviewMapper } from './../../domain/job-overview.mapper';
 import { CciJobOverviewModel } from './sequelize-job-overview.model';
-import { Sequelize } from 'sequelize-typescript';
+
 import * as _ from 'lodash';
+import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()
-export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOverview, CciJobOverviewModel> implements IJobOverviewRepository
+export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOverview, CciJobOverviewModel> implements IJobOverviewRepository 
 {
     public readonly aggregateName: string = 'CciJobOverview';
     public readonly mapper: JobOverviewMapper = new JobOverviewMapper();
@@ -27,16 +28,16 @@ export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOv
     async getDashboardData(query?: QueryStatement): Promise<CciJobOverview[]> 
     {
         const models = await this.repository.findAll(
-            this.criteria.implements(
-                _.merge(query, {
-                    attributes: ['id', 'tenantId', 'tenantCide', 'systemId', 'systemName', [Sequelize.fn('max', Sequelize.col('created_at')), 'max']],
-                    group: ['tenantId', 'systemId']
-                })
-            )
+            _.merge(this.criteria.implements(query), {
+                attributes: [
+                    [Sequelize.fn('max', Sequelize.col('created_at')), 'max'], 
+                    'id', 'tenantId', 'tenantCode', 'systemId', 'systemName', 'executionId', 'executionType', 'executionExecutedAt', 'executionMonitoringStartAt', 'executionMonitoringEndAt', 'cancelled', 'completed', 'error', 'createdAt'
+                ],
+                group: ['id', 'tenantId', 'tenantCode', 'systemId', 'systemName', 'executionId', 'executionType', 'executionExecutedAt', 'executionMonitoringStartAt', 'executionMonitoringEndAt', 'cancelled', 'completed', 'error', 'createdAt'],
+            })
         );
 
         // map values to create value objects
         return <CciJobOverview[]>this.mapper.mapModelsToAggregates(models);
     }
-    
 }
