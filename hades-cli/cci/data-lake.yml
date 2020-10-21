@@ -15,8 +15,8 @@ aggregateProperties:
     length: 36
     nullable: false
     relationship: many-to-one
-    relationshipAggregate: AdminTenant
-    relationshipModulePath: admin/tenant
+    relationshipAggregate: IamTenant
+    relationshipModulePath: iam/tenant
     relationshipField: tenant
   - name: execution_id
     type: id
