@@ -88,4 +88,10 @@ export const permissions = [
     {id: '493fe054-27e3-4c46-8b95-6067231b64c5',  name: 'cci.task.create',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
     {id: '6c3ffa20-a347-480c-a66d-b22395264652',  name: 'cci.task.update',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
     {id: 'f93b93f8-042a-455a-9d55-36e624b3cfd3',  name: 'cci.task.delete',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+
+    {id: '590e7f6e-76f8-4248-82d1-86282459b081',  name: 'cci.system.access',                    boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: 'c1e8d2ca-11a0-4ed7-9dfc-8b51f6351425',  name: 'cci.system.get',                       boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: '0c884429-fbb8-4e40-9a93-00a9481b1aca',  name: 'cci.system.create',                    boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: '5d44fd21-6c1c-4554-8452-2b4131eecb36',  name: 'cci.system.update',                    boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+    {id: 'a6073251-27fe-460b-a61d-20858e91f332',  name: 'cci.system.delete',                    boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
 ];
