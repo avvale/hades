@@ -12,6 +12,7 @@ import {
 import { CreatedRoleEvent } from './../application/events/created-role.event';
 import { UpdatedRoleEvent } from './../application/events/updated-role.event';
 import { DeletedRoleEvent } from './../application/events/deleted-role.event';
+
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 
 
@@ -27,6 +28,8 @@ export class CciRole extends AggregateRoot
     deletedAt: RoleDeletedAt;
     
     // eager relationship
+    
+    
     tenant: IamTenant;
     
     
@@ -44,6 +47,8 @@ export class CciRole extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
+        
+        
         this.tenant = tenant;
         
         
@@ -115,6 +120,8 @@ export class CciRole extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             tenant: this.tenant?.toDTO(),
             
             

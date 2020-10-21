@@ -12,6 +12,7 @@ import {
     RoleDeletedAt
     
 } from './value-objects';
+
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 
 
@@ -75,6 +76,8 @@ export class RoleMapper implements IMapper
             new RoleUpdatedAt(role.updatedAt),
             new RoleDeletedAt(role.deletedAt),
             
+            
+            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(role.tenant) : undefined,
             
             
@@ -94,6 +97,8 @@ export class RoleMapper implements IMapper
             role.createdAt.value,
             role.updatedAt.value,
             role.deletedAt.value,
+            
+            
             
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(role.tenant) : undefined,
             

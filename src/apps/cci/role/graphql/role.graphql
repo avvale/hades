@@ -32,9 +32,9 @@ input CciUpdateRoleInput
 
 type Query 
 {
-    cciFindRole(query:QueryStatement): CciRole
-    cciFindRoleById(id:ID): CciRole
-    cciGetRoles(query:QueryStatement): [CciRole]!
+    cciFindRole(query:QueryStatement constraint:QueryStatement): CciRole
+    cciFindRoleById(id:ID constraint:QueryStatement): CciRole
+    cciGetRoles(query:QueryStatement constraint:QueryStatement): [CciRole]!
     cciPaginateRoles(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -42,7 +42,7 @@ type Mutation
 {
     cciCreateRole(payload: CciCreateRoleInput!): CciRole
     cciCreateRoles(payload: [CciCreateRoleInput]!): Boolean!
-    cciUpdateRole(payload: CciUpdateRoleInput!): CciRole
-    cciDeleteRoleById(id: ID!): CciRole
-    cciDeleteRoles(query:QueryStatement): [CciRole]!
+    cciUpdateRole(payload: CciUpdateRoleInput! constraint:QueryStatement): CciRole
+    cciDeleteRoleById(id: ID! constraint:QueryStatement): CciRole
+    cciDeleteRoles(query:QueryStatement constraint:QueryStatement): [CciRole]!
 }
