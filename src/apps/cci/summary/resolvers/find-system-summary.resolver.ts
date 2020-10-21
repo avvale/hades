@@ -20,6 +20,7 @@ import { FindExecutionQuery } from '@hades/cci/execution/application/find/find-e
 import { GetJobsDetailQuery } from '@hades/cci/job-detail/application/get/get-jobs-detail.query';
 import { GetChannelsDetailQuery } from '@hades/cci/channel-detail/application/get/get-channels-detail.query';
 import { GetMessagesDetailQuery } from '@hades/cci/message-detail/application/get/get-messages-detail.query';
+import { FindSystemQuery } from '@hades/cci/system/application/find/find-system.query';
 
 @Resolver()
 @Permissions('cci.summary.get')
@@ -34,19 +35,30 @@ export class FindSystemSummaryResolver
     @TenantConstraint()
     async main(@CurrentAccount() account: AccountResponse, @Args('systemId') systemId: string, @Args('constraint') constraint?: QueryStatement, )
     {
-        // get last execution for this system, tenad add by contraint with TenantConstraint() decorator
-        const execution = await this.queryBus.ask(new FindExecutionQuery({
+        const system = await this.queryBus.ask(new FindSystemQuery({
             where: { 
-                systemId: systemId,
+                id: systemId,
                 isActive: true,
                 // TODO, filtar por campo de cancelled_at para evitar coger datos de sistemas cancelados?
             }, 
             order: [
                 ['createdAt', 'DESC']
             ]
+        }, constraint);
+
+        if (!system) throw new NotFoundException(`System not found, maybe system is not active or cancelled`);
+
+        // get last execution for this system, tenad add by contraint with TenantConstraint() decorator
+        const execution = await this.queryBus.ask(new FindExecutionQuery({
+            where: { 
+                systemId: system.id
+            }, 
+            order: [
+                ['createdAt', 'DESC']
+            ]
         }, constraint));
 
-        if (!execution) throw new NotFoundException(`Execution not found, maybe system is not active or cancelled`);
+        if (!execution) throw new NotFoundException(`Execution for this system not found`);
         
         // get details for jobs
         const jobsDetail = await this.queryBus.ask(new GetJobsDetailQuery({

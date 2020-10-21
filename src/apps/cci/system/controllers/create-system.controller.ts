@@ -1,7 +1,17 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateSystemDto } from './../dto/create-system.dto';
 import { SystemDto } from './../dto/system.dto';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
+
+// tenant
+import { AccountResponse } from '@hades/iam/account/domain/account.response';
+import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
+import { TenantPolicy } from './../../../shared/decorators/tenant-policy.decorator';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -11,6 +21,8 @@ import { CreateSystemCommand } from '@hades/cci/system/application/create/create
 
 @ApiTags('[cci] system')
 @Controller('cci/system')
+@Permissions('cci.system.create')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CreateSystemController 
 {
     constructor(
@@ -21,7 +33,8 @@ export class CreateSystemController
     @Post()
     @ApiOperation({ summary: 'Create system' })
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: SystemDto })
-    async main(@Body() payload: CreateSystemDto)
+    @TenantPolicy()
+    async main(@CurrentAccount() account: AccountResponse, @Body() payload: CreateSystemDto)
     {
         await this.commandBus.dispatch(new CreateSystemCommand(
             payload.id,

@@ -34,7 +34,6 @@ export class CreateSystemCommandHandler implements ICommandHandler<CreateSystemC
             new SystemTechnology(command.technology),
             new SystemIsActive(command.isActive),
             new SystemCancelledAt(command.cancelledAt),
-            
         );
     }
 }
