@@ -17,6 +17,7 @@ import { CciModuleControllers, CciModuleResolvers } from './module';
 import { CciRoleControllers, CciRoleResolvers } from './role';
 import { CciSystemControllers, CciSystemResolvers } from './system';
 import { CciDashboardResolvers } from './dashboard';
+import { CciSummaryResolvers } from './summary';
 import { CciSnapshotControllers } from './snapshot';
 import { CciCatalogControllers } from './catalog';
 
@@ -44,7 +45,6 @@ import { CciCatalogControllers } from './catalog';
         ...CciSystemControllers,
         ...CciSnapshotControllers,
         ...CciCatalogControllers,
-        //...CciDashboardControllers,
     ],
     providers: [
         ...CciHandlers,
@@ -66,6 +66,7 @@ import { CciCatalogControllers } from './catalog';
         ...CciRoleResolvers,
         ...CciSystemResolvers,
         ...CciDashboardResolvers,
+        ...CciSummaryResolvers
     ]
 })
 export class CciModule {}
