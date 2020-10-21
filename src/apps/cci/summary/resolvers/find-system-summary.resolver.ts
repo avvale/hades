@@ -35,6 +35,7 @@ export class FindSystemSummaryResolver
     @TenantConstraint()
     async main(@CurrentAccount() account: AccountResponse, @Args('systemId') systemId: string, @Args('constraint') constraint?: QueryStatement, )
     {
+        // get system
         const system = await this.queryBus.ask(new FindSystemQuery({
             where: { 
                 id: systemId,
@@ -44,7 +45,7 @@ export class FindSystemSummaryResolver
             order: [
                 ['createdAt', 'DESC']
             ]
-        }, constraint);
+        }, constraint));
 
         if (!system) throw new NotFoundException(`System not found, maybe system is not active or cancelled`);
 
@@ -82,6 +83,7 @@ export class FindSystemSummaryResolver
         }));
 
         return {
+            system
             execution,
             jobsDetail,
             channelsDetail,

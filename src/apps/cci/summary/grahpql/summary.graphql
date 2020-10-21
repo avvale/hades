@@ -1,5 +1,6 @@
 type CciSummary
 {
+    system: CciSystem!
     execution: CciExecution!
     jobsDetail: [CciJobDetail]!
     channelsDetail: [CciChannelDetail]!
@@ -8,5 +9,5 @@ type CciSummary
 
 type Query 
 {
-    cciFindSystemSummary: CciSummary!
+    cciFindSystemSummary(systemId:ID!): CciSummary!
 }
