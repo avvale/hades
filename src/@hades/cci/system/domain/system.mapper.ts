@@ -17,6 +17,7 @@ import {
     SystemDeletedAt
     
 } from './value-objects';
+
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 
 
@@ -85,6 +86,8 @@ export class SystemMapper implements IMapper
             new SystemUpdatedAt(system.updatedAt),
             new SystemDeletedAt(system.deletedAt),
             
+            
+            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(system.tenant) : undefined,
             
             
@@ -109,6 +112,8 @@ export class SystemMapper implements IMapper
             system.createdAt.value,
             system.updatedAt.value,
             system.deletedAt.value,
+            
+            
             
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(system.tenant) : undefined,
             

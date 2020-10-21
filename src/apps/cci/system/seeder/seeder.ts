@@ -1,11 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
-import { SeederModule } from './seeder.module';
-
-// commands
 import { CreateSystemsCommand } from '@hades/cci/system/application/create/create-systems.command';
-
-// resources
+import { SeederModule } from './seeder.module';
 import { systems } from '@hades/cci/system/infrastructure/seeds/system.seed';
 
 export class Seeder 
