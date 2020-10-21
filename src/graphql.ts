@@ -965,9 +965,9 @@ export interface IQuery {
     cciFindDataLakeById(id?: string): CciDataLake | Promise<CciDataLake>;
     cciGetDataLakes(query?: QueryStatement): CciDataLake[] | Promise<CciDataLake[]>;
     cciPaginateDataLakes(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    cciFindExecution(query?: QueryStatement): CciExecution | Promise<CciExecution>;
-    cciFindExecutionById(id?: string): CciExecution | Promise<CciExecution>;
-    cciGetExecutions(query?: QueryStatement): CciExecution[] | Promise<CciExecution[]>;
+    cciFindExecution(query?: QueryStatement, constraint?: QueryStatement): CciExecution | Promise<CciExecution>;
+    cciFindExecutionById(id?: string, constraint?: QueryStatement): CciExecution | Promise<CciExecution>;
+    cciGetExecutions(query?: QueryStatement, constraint?: QueryStatement): CciExecution[] | Promise<CciExecution[]>;
     cciPaginateExecutions(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindFlow(query?: QueryStatement): CciFlow | Promise<CciFlow>;
     cciFindFlowById(id?: string): CciFlow | Promise<CciFlow>;
@@ -1077,9 +1077,9 @@ export interface IMutation {
     cciDeleteDataLakes(query?: QueryStatement): CciDataLake[] | Promise<CciDataLake[]>;
     cciCreateExecution(payload: CciCreateExecutionInput): CciExecution | Promise<CciExecution>;
     cciCreateExecutions(payload: CciCreateExecutionInput[]): boolean | Promise<boolean>;
-    cciUpdateExecution(payload: CciUpdateExecutionInput): CciExecution | Promise<CciExecution>;
-    cciDeleteExecutionById(id: string): CciExecution | Promise<CciExecution>;
-    cciDeleteExecutions(query?: QueryStatement): CciExecution[] | Promise<CciExecution[]>;
+    cciUpdateExecution(payload: CciUpdateExecutionInput, constraint?: QueryStatement): CciExecution | Promise<CciExecution>;
+    cciDeleteExecutionById(id: string, constraint?: QueryStatement): CciExecution | Promise<CciExecution>;
+    cciDeleteExecutions(query?: QueryStatement, constraint?: QueryStatement): CciExecution[] | Promise<CciExecution[]>;
     cciCreateFlow(payload: CciCreateFlowInput): CciFlow | Promise<CciFlow>;
     cciCreateFlows(payload: CciCreateFlowInput[]): boolean | Promise<boolean>;
     cciUpdateFlow(payload: CciUpdateFlowInput): CciFlow | Promise<CciFlow>;
@@ -1198,8 +1198,10 @@ export interface CciChannelDetail {
 
 export interface CciChannelOverview {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
+    systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
     execution: CciExecution;
@@ -1374,8 +1376,10 @@ export interface CciJobDetail {
 
 export interface CciJobOverview {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
+    systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
     execution: CciExecution;
@@ -1438,8 +1442,10 @@ export interface CciMessageDetail {
 
 export interface CciMessageOverview {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
+    systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
     execution: CciExecution;
