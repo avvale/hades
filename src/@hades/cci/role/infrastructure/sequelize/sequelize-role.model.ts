@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 
@@ -18,7 +18,7 @@ export class CciRoleModel extends Model<CciRoleModel>
     })
     id: string;
         
-             
+                     
         
     @ForeignKey(() => IamTenantModel)
     
@@ -38,7 +38,7 @@ export class CciRoleModel extends Model<CciRoleModel>
     })
     tenantId: string;
         
-    
+            
     @BelongsTo(() => IamTenantModel)
     tenant: IamTenantModel;
              
@@ -55,7 +55,7 @@ export class CciRoleModel extends Model<CciRoleModel>
     })
     tenantCode: string;
         
-             
+                     
         
     
     
@@ -69,7 +69,7 @@ export class CciRoleModel extends Model<CciRoleModel>
     })
     name: string;
         
-             
+                     
         
     
     
@@ -83,7 +83,7 @@ export class CciRoleModel extends Model<CciRoleModel>
     })
     createdAt: string;
         
-             
+                     
         
     
     
@@ -97,7 +97,7 @@ export class CciRoleModel extends Model<CciRoleModel>
     })
     updatedAt: string;
         
-             
+                     
         
     
     
@@ -111,5 +111,5 @@ export class CciRoleModel extends Model<CciRoleModel>
     })
     deletedAt: string;
         
-            
+                    
 }

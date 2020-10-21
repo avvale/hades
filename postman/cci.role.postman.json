@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "3f7dd23b-2811-4111-b9c4-2b1c703edb4e",
+		"name"          : "@hades - cci/role",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - cciCreateRole",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciCreateRoleInput!)\n{\n\tcciCreateRole (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"08244bd8-bd19-48d2-afc8-22c18d1d571a\", \n\t\t\"tenantId\": \"9a709050-aa31-4825-8316-e106c9d1f084\", \n\t\t\"tenantCode\": \"v0nk80tkk4knhwv7ad6dmas6iuv1u2a1u6rt3tgassfiwr4ni4\", \n\t\t\"name\": \"39bviqg0as3f63g7wu3xo0cfn7jddqn3443i9yxwyvjauo9g1zlm3nsmrl1smf403cke3dzrhf3ilpatxfcescf44v0tmxkdh0083vpbtj44h9h2kboud0xrzlp89bq3ulgm88hfpfao7eb3pbhf4pok12gjoaeplbknxfviajbgubdd21iicokwgh90k8066dtss77m9nap1zanrshsrfnldddz3a1eh2smzpmpim9g8nlzzw9diskpaq0mtj4\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciCreateRoles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[CciCreateRoleInput]!)\n{\n\tcciCreateRoles (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"46a5ac9c-6562-489e-a683-6cfdaed32387\", \n\t\t\t\"tenantId\": \"ae4868ae-e5e6-45f1-968f-c6729e416ced\", \n\t\t\t\"tenantCode\": \"oult2zgf5pargq3xiq0iy6sjfrjghp7g0qoq3782vbyitsqz3r\", \n\t\t\t\"name\": \"0icdmw629xfy6uny42k1rstxbrp0ocxgba0a0t36jw4y5px3fu4h5vta9qan1vwxxgoe2k9osf2571fz6v1cwbbnvxr6aa4asbzvcwvhdehss4t27as4ip7hdrbg873953smfsw8e2ryzqvuao8695xd4dqi7f0tdffp8rlimqq1cydybiq8dsww0dfnu8laeni0ce1oy0da3mytnxvegkmeb5win5virdggnwlz8h587rvmj4ipyd3d1g04qr5\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"088ce97c-bdc4-4aee-817e-55f53c54abea\", \n\t\t\t\"tenantId\": \"b77ea121-f578-442b-a436-02c37488fd1e\", \n\t\t\t\"tenantCode\": \"di2fz0y3qymu024a6wjl1tazmr7fhetq2tp841us6829djcu5i\", \n\t\t\t\"name\": \"fo4jj56d2kb2t1qjpjxy0sm4bxh2ud2uggnmscn5l48rv1qxj2krhve5fwn218p1ssojf7aj4jju11y6f3uwbbx9jpqy0b7ll2mittrev4pd3hao2t3kzc8i5bjq9nm12s6ek0o2irrnua8mv9bxa0shaf32kdeqtcac5uxo3ynsedfb64ipmhkcjr1opsvw0r146w3k7buebmiza5bp6zt9fsuiguvzd9hiiv5jgfsjlbiijsqdfin8x8e50g0\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"52d7bd77-94e7-4574-b53a-da1d7953b9a8\", \n\t\t\t\"tenantId\": \"a1c9260c-da4e-4e2d-94b1-2fbb218f0dbd\", \n\t\t\t\"tenantCode\": \"v438gyb85hxbmw3kan0n8wpgugpn9bsmuy3qjvm9tznr01jj8j\", \n\t\t\t\"name\": \"292q0dh791h8win68ry6z600vx8g4h960zyiuceor4j3qbfql4sedg229nclt48nvi9nbhjjwp5n90duxsjwgb5act6iinv1wlzp7a4enh0pw3tyr3ki7pujeyx518d7nypqw8d31w0qn0gy73goo2tb9m6oljrd0dxmjqb3lsiv8mfgz4xsheao1mv4i36nqb1q42dnsa1anyabe1kseeca7ls27pumd6lmq0682wlf3x0n675bn6s3m4l0b56\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b5ccdff2-37c4-421a-b66a-528289453b41\", \n\t\t\t\"tenantId\": \"324fd308-7a4e-4d0d-9cf8-ea3feb75a3f4\", \n\t\t\t\"tenantCode\": \"tv3onfhhowadrps7jra3sgi9ilu7ouoix48owbweaztqpzi8vl\", \n\t\t\t\"name\": \"f4ar9w4y0l8fzv7s69rhgaj1j459hi6dasv3safj187vltujixvzdtu9ovsduv66pdnf8r2yztlnayod8narbgp5945ey965dc69ve7mlnvpcrbbjylwybddfaa5jd2v6qi6yhy7odwjiathzto40pd2vvfzgeprs55tco03qbprloahu3kc6m45lwoxhcl4o2pkma9jpb6j2qw1h7frawn37b7ofdukhqcbvivqvykqw55ffqf0j5reed7w76g\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e3cc572f-ff61-44e2-9eee-66d232e13e97\", \n\t\t\t\"tenantId\": \"161813d6-a425-4d74-9f7f-963e32a79bdd\", \n\t\t\t\"tenantCode\": \"pr859z8qfymhn8vwukcmh7zye3jzsifr30zq5pp3pdag9w4f9v\", \n\t\t\t\"name\": \"nuksjf8hy10gh4vxgq0gog28lmtugvfgzpd0b0ih83oetiteqeys8yzmlyzn1csdr0gapprpiauxf7ou9p6gdhph12zglsn6guxmg7qo94sjbrzhds1dygqdgvkwb39vyeib85xegt61e6yf1evvaco7bige1hi4blxm4jy1sg3iwq57ul8ghxhffyd1h9wr16ohqrcl60qgxlleo5okfmc4946f2601egs5007w39vbcmtruyflfvhiqucwq3s\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e9b1b051-b893-4f2f-a6bb-5c52feb2ccfb\", \n\t\t\t\"tenantId\": \"f6e8ee5d-9b3a-4ae2-adbf-d267c2c41f07\", \n\t\t\t\"tenantCode\": \"a8x8n9rqvdr09l5k3vmrlxnga05bn8nq4xv9fqb4vymdwxyc0j\", \n\t\t\t\"name\": \"5vi4mzoaoljats4u4z5vpc7quv3shezykocw909boq11zg3jgx9qcdpcm8yne9krw2u5ekvyi3p36xl99epa5xrdhge02bocf7zldz1tv0epu7hfqth3c7ipmgkdprucry7kp6c2qjr25o07jyu4vmyetnyleh4gztm5q5ky7ydtrvtm9gbxd148n09w41dvsamyu2c10uewe0qqvvmbx5u8kpoj45cyj9td3h9iz9a1botxisjckbjaevym2ze\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a27e6df5-2f16-4b06-a903-173079d7579c\", \n\t\t\t\"tenantId\": \"a2c779b3-989a-4087-9ede-e9a391075f0c\", \n\t\t\t\"tenantCode\": \"ond0ehxk3c6t6nqzzb5givli33lpxhhc8vd0w5p3r3csnsc01a\", \n\t\t\t\"name\": \"f6xocnmjpbs69blurlduomzifugb62bs7jgw177uhi4rp2zgr4zukj720ud1lhr441kg9wwbhx0549hbf3xnmi7gqiaik01dlh9txkahdaztocjdye7w2nq74lhpvu9zrweb1hclvg3ilklzh0bdjgday2xqw1yg8gztkd0uol25wlwv6do4jnbeif2in35d8ocwtv9b78pv8i622cn3oq655106vvuqknp9pegtnzv61ca9iorauuycuxrlqgm\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"61224f5f-0b7a-43b7-92bb-358875162b93\", \n\t\t\t\"tenantId\": \"50d148a4-2583-4bf8-8d72-8b686750c634\", \n\t\t\t\"tenantCode\": \"xkitsxlntmkctx7mzt1ty7gv63ke9ydagz0baza8f6zf2dljw4\", \n\t\t\t\"name\": \"c5x0rfwzquhz97sn8q7zm5a0war7yqwfsb5aq3wom1x63q8t1re8tyxelt9bs2z74dv9hjr9z87quuern3ec6ylt8idsi6sk248vrgxbjd1hpgh9crrv8wr9g42n8jojyi54cuqbkhzwr186rm3iq0dtu0uvf4aon2q53cxidn1stecc4z9trdyg6jkxrhll26p45oe8dh2t6xks8hah6tntj0sz39kcdvlplvrtku76mx3sz7mid4xkeaairbt\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"23e7fc63-1d8c-42df-9bcf-dd2db0296e85\", \n\t\t\t\"tenantId\": \"9901cb00-0c2d-4223-bc55-41ccad522634\", \n\t\t\t\"tenantCode\": \"fao2m819up6gcppgbasi5jpxkr4bd9dbptzymubdkmyflkhfuj\", \n\t\t\t\"name\": \"1oelqch1qeakp1wx4mitpx3ajxufxkz0g05vlqx8d1phcln1vyj9mbd2ei8mi7plj642od0lox53igbbhxtvbmm32po4ef91da6qru2jwi57b6t4am65z26cwq9ot2m6th2e5iu7eh0huhrqc4yhilihxjlroq62dqraqr2qq3m3akzf2iq7ttipka0b9ezfwooil1ozumhf1jdlvkz4zyc5uze3x0o0je0ia5jqd46vp6h6rc8x3wtlhxplnhr\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7ded1d81-09bf-4ca4-8f8e-b64b53a83572\", \n\t\t\t\"tenantId\": \"19e01efd-75ec-4f5f-a29a-5e22ca6848af\", \n\t\t\t\"tenantCode\": \"uio16rgkwigmgnklx6ml549r4wb5ab8jwut6xrlvej5cw6v0cv\", \n\t\t\t\"name\": \"97vahwwdm9wrzsn62vb6ol25p594i4227utzd84oc2h5b41qwzl8wvj4k0mc3t18e1kipwmx5zyl4vuwidmgzy7tdcj5302wabo58vv4yqtov0jyi3aojdoy4shlguwagtw4i83umwaj60r5qkz97jhzk0or5ezas8gd0r7kr3fpuglw6x6ptvyw63ryczd4ahkxemfgns2wgbxym34tknvjoduvskevkuwxpc4olhvgbko3uq5i0vzrytcp7eg\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4b9c02f4-3937-443f-992a-eda7737d1e6c\", \n\t\t\t\"tenantId\": \"2e65a481-9a72-4fa6-82a6-c2efe6837e20\", \n\t\t\t\"tenantCode\": \"2sbpbq4haaxv7uwexvsnz8iky320f4dkpem7ha4quoxmdktfgc\", \n\t\t\t\"name\": \"zb0u3ft3yvu43vkm3ql5mg25wim15bgg1g2dhn0gr9p35xni718c6k10k6ij6738mqpom6d838y8t8qlsy18s89bixu4p8et4pve86en1xxjibpciackfetunxnfjniqahvh6wbjbtanilo617azg40yioy1nb19p0sput7wx534frdzdtvincmc8lol40kq19kfthcuskxfo556mpu2xzx6fbqe22rpxusmacf2v6mth1ox7asj0fa6nyvsqrg\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5a33f6eb-b8ae-42be-b2ac-6729db18de52\", \n\t\t\t\"tenantId\": \"a91fc61b-62dd-42ff-a1d3-34aace8163db\", \n\t\t\t\"tenantCode\": \"xbihwx2t0vi755m829wkbczwatps62k99wa0lxzle7ct13b74r\", \n\t\t\t\"name\": \"m8ldf0gzob9tupqmb1rl6s8jjihocidll2935gyi791gsapx0vju81uq4kq3ol4m19d8gkvg6fxyssk5ylbnibsp7xms53035l2g7ohqbwed5lwug3jb02bz6xeyteshfuc6uo6xgo7e7tr5i1lea4v8obuvosnmcwxpf3j8ixa1jfwjjucalxxfcsbywj4zc1dbeqeqkj0t637j5650rildhnuolyi8230bomyl3paeyp4v93abp8mg8zwly0i\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a42ba78a-0fb8-4d36-a0ae-0cd81f759d5b\", \n\t\t\t\"tenantId\": \"fef71411-46e2-4780-b8cf-e27b5966be44\", \n\t\t\t\"tenantCode\": \"w7o7hw30jatu05lv4bg4ppia00gh4cxs6evjbrk6s5ogd7sops\", \n\t\t\t\"name\": \"u8iio745mwhxakcvwg1qd1k2lof6zzs2vlyz8m4flhlx3m1oz33pgeazfoca6qypu2t6tp5ej9safh3bryjtt6lqkdzzclrjyqzzoueg50smfnk1ial459lug2ji0ke3adcvl672340jidoolkopg3hkdu2pvswnid343m9ly89gfasd3w3h58667od2hcbyhai4aj3ck5fa091wxiro168rl8rrufharxak7dgsw9u6rth1hnen86ka97yq31y\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"46d58930-0daf-48b6-8e93-4a9918bb0583\", \n\t\t\t\"tenantId\": \"c76be692-737c-4ff8-b10b-f979fc1bd586\", \n\t\t\t\"tenantCode\": \"zqge7bqk4ssdmuozltif5fakxyxfn2u0fhg0tvwiu2bdyjpl99\", \n\t\t\t\"name\": \"o9ando3y9h6ifajqwt297vx6x1y8rn3a0a8etlmnr0b3ivfnf3csjhv5skm6g48wdcz5avne8n0g8p6t3d1p67t30zujw98xwd5ynj50vwrfcbzqptfhjf8o4b5faiubxbvpaunxfpl1g6na1yblvve1qa1mnmzte51j8ws4op3u8772gxqpcl3s6pqv4k5uw93kylae4fdwe1tcqpzxglgozb1comi4bo5h7kioybcltc48g0pw89asuq0f30v\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dd39a53a-d909-457e-bfa8-10f60d3aaf23\", \n\t\t\t\"tenantId\": \"3e86605d-5a14-468d-84a9-b25ffa9c31d2\", \n\t\t\t\"tenantCode\": \"38d15ikq5j4m8j1x81gv4bely33qpmfauljfjogdnyxh62qti1\", \n\t\t\t\"name\": \"ks872wjbagbwjbfroqkiaw2d5r6nlje6xqjm9q8n8fg1lnbs5pcjssumj9d28rjk6tq3enhfjz84tilqnuisp0c6imsrjh7wxgx7b4hyootf2waci0xx47um8cove7cx2dhsy6imuuxd3a5xhrw5vxgqmb5ht5litpbd2is711ccvhek5o9gxlmwp4c3lxdb0p8h8att6ul5gy37cfdjgcxhd60svp315oecmm5hreomm7e27cykniv1ijdg47u\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6e90cd78-e8fc-42b5-bb61-aaa477a1d6f7\", \n\t\t\t\"tenantId\": \"3cb7a986-ebc3-4440-978c-abe36169efb2\", \n\t\t\t\"tenantCode\": \"4g9bk8glrruua1o2swehmobcdcb15ti2ith95d4olpcftquyz1\", \n\t\t\t\"name\": \"3id5yz5gtk8gm3tjq9w7idyuuqq2btdde1qlnpdvoyy5cfh531o947qiar045hbbtlccczp43hg99tgl4jsv2j6rw4kgrei6303dl2gct2q9xupvmmzc7rq59ejopbl32ygoj37szkh8213vcmkpjb80nq85iw5854d4hzf6yjgio49igz8fu72rn6tk3xdv1gxj8da2c6voxns3m0v158ullfwnm391a7qndaylxgsijrvzxzitekbr8pydbcp\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6536aa76-17dc-4872-bdd8-7133d9789f0e\", \n\t\t\t\"tenantId\": \"7cad1507-476c-4389-8bcb-1446798a2a5a\", \n\t\t\t\"tenantCode\": \"vvy3z7u7fzqslz21ufdxtf4c0hkpe9sqq1hjseo849vfh2y7wc\", \n\t\t\t\"name\": \"2ha1bl5p4epmzg8grnmmtda2m1b9zsax0zw65wglrfajut5h6cgq0zga7doaulxzkc2ni2ybmnie6d2500cl58djjlhkm413dtykmmhaj9s7s0e2d26sjnc0rg5uv4a6scdahvgibq639l7byqgbetgbkmb31gufgpv4q5cvco456no3wd5qkgleb1irq6iyb7rhsekvknuo4kcgac4n433uo6oa3yerdaaix1jtwspznxikyzmny7ouu5ecgi9\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6ff878bf-39e2-4de3-bd33-9fb9c3178552\", \n\t\t\t\"tenantId\": \"6ead0f68-8af9-46b0-b909-d19fec3c4e02\", \n\t\t\t\"tenantCode\": \"3l5xea9zbld3gb6vdeunvurvdhrqm2kju8frtpqoytilsbsm7q\", \n\t\t\t\"name\": \"3b4fepzaje544upv7galfus71k5kgx27r9vplxhu7k0u626edqno9ccknglkted8m2qhcvuwekth8jf67xfo8oj6ctx15mq9nc03r5bfcatlrj7padm9902w0bt40zjlef7qp8ct2gig9oknlpek3patzh32m7ll6acf416g2rqumc29zny9qh0jz0g8zgar35kmbc0vz1060pt2jccvgt1z2kg6bi323bt0zhp1tww7ukm34ltoi69bv7r434b\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e60d372b-6dc8-4fde-b0c6-8b7676009121\", \n\t\t\t\"tenantId\": \"3c25ffa1-fc6b-4d4e-b44f-2edf6ec0f1f2\", \n\t\t\t\"tenantCode\": \"drce2n67peupgkgbsip6axedkyv1pmtsqg0qhkxjmz1baxcdij\", \n\t\t\t\"name\": \"9pyew5ra49uyxl1u2mzf29shhcsbvighx9zvv3ilowiz67rlsvt3hf4m82tkknimxqw4pgf7e7ye4wv48a68qvwdnth1hxrd47qyto5wiledzjhxzi5aef2xg1hxs6oa51bt1jg2otjklaiy7yx5xzfb4dvduwr1wj6hwc8z5x27o93og8go9jhnwy0zbrl2s77x70o2f58yvvvqmbnoz0vyf9h137tajyktjsn7lh7te6mwi82kk6ls5woxrt8\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4e6ca005-b653-4051-a1aa-42ad52c7d84f\", \n\t\t\t\"tenantId\": \"9e38104d-52ee-44ad-91af-8799a86437bb\", \n\t\t\t\"tenantCode\": \"9qt1n6x8s5ixz9or9n9mcpcns7baww0tli4yw8ewhynsgicb9k\", \n\t\t\t\"name\": \"6vakvgvpfo9kf5e47i91tslylfti6ykppydyxdmsmsdmrzprn2yqq4emox01ocyomhafzsty7mct5np4bqvffpyjuxoygakn0ag2a0pan0bzbc4phrpjtxe0k940q5biqtcx42gzz2s5eyeumv0vscjvfuanllflb6xw15mf08xjyqqkvxomk4uuauzm6a2wa751u0jvks4i34is2uog3ejnvs885eyvs86d44z26xukjqomwfb6mnip25dhkz6\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciPaginateRoles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tcciPaginateRoles (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciGetRoles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciGetRoles (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"08244bd8-bd19-48d2-afc8-22c18d1d571a\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindRole",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciFindRole (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"08244bd8-bd19-48d2-afc8-22c18d1d571a\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindRoleById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tcciFindRoleById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"08244bd8-bd19-48d2-afc8-22c18d1d571a\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciUpdateRole",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciUpdateRoleInput!)\n{\n\tcciUpdateRole (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"08244bd8-bd19-48d2-afc8-22c18d1d571a\", \n\t\t\"tenantId\": \"9a709050-aa31-4825-8316-e106c9d1f084\", \n\t\t\"tenantCode\": \"rnxmnpcuw2wqufnr2d1y9ix2dkib115wbh4id3s99v2gvxzkeo\", \n\t\t\"name\": \"xfwnd4vw48x919uqrvc053koqblyadzzzlapnbcxtk3sxwwux4nmfpck6lb6sf6bf1rr8802fyxegipay7qjfjyglfo141hp6uhph07co8nu4mkipzbz48bqrbzlpko76litwzn4zppog243g3ezls6209gqggnom0tk6dmbepxegtbur7ih10xzx2vj64zjysj898ceicvbmwo3w0r1it4w4ggk8osprnh7xxufr6d47g0ko1s46qqqx5g34og\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteRoleById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tcciDeleteRoleById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"08244bd8-bd19-48d2-afc8-22c18d1d571a\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteRoles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tcciDeleteRoles (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/role",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"08244bd8-bd19-48d2-afc8-22c18d1d571a\", \n\t\"tenantId\": \"9a709050-aa31-4825-8316-e106c9d1f084\", \n\t\"tenantCode\": \"f2e6g2naxlrinvqn4et2j489v4vhkftwdmcumspfai0qq1vyfu\", \n\t\"name\": \"ea9itu9w50usqn8buuk7com3kezjexvg1d1266d7aedmd3c2evr9nqpbwplasii9j501uhnflu3jxnij24416eju58beab51svvhukoqeqkkjbun4hlrdfxr1lbwta8ow8du99x8efidg7qxcj96e3vkxo0y5kprya0urnkbahgmhyppq4jthwmm16u4ma44ax124561vmpjk5coqmtql40d4vk0hgalfahdk9bxcvbt0xukixtla8ylemwboow\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/role",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"role"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/roles",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"e56a622f-3cce-4584-8bb4-3d2798630089\", \n\t\t\"tenantId\": \"b907a5f4-49f1-4c4b-b8df-1458b52613cb\", \n\t\t\"tenantCode\": \"hyq6ns5i8krr47ao5wg8p6z8gfd2w6abw3zcs46pjbmwvijc6a\", \n\t\t\"name\": \"7ydf46ifa4tuedn87rctrk7djt16uxmd7eg33x51lbm0erpyvzha93cyr1875d4jugew39su3owkx4inunxgm4548l7pg2yypk002vclg233iegnrsfk75uyijuuu3xe7c5j00424h33t223hoc76tk6w8vqjrek5na4o86l6loa4yb5i16kxlkoj3cvacf7i8ucd15tfgo6ws8qmtwf9774fqv85ex5jux4fw0lncz3kreyomnjh4lmnp0xqyi\"\n\t}, \n\t{\n\t\t\"id\": \"e0837c8d-5094-4c01-b9aa-f80c04869a32\", \n\t\t\"tenantId\": \"be659cea-3074-4738-99b6-f0ae82fc8299\", \n\t\t\"tenantCode\": \"nugqci3oym1qewqp2tu70ipyr4cxx3zv8mzenfqtubz0iwdghv\", \n\t\t\"name\": \"nrneq5wtw83tvvpp612iltcpmi403b2hm071tbtx0ewe6aovjiqn6505dnqauk7zll9xetvezoath5duehgn5rm6hck14pd4wo1a4tmduwv0kvik04iagekpm434uxdx3inz6ejgqu27736wsa29bcmrwn4y1l8qvr40nxnvwotn083lx05ew879zztwszhv8f9qevwbhkrh9xn7pqg54jkmlrvg3sb3eggpdmr1f8bqnbk9ya60rmfpu7mgr3n\"\n\t}, \n\t{\n\t\t\"id\": \"871b4746-21ce-4657-bb61-a2895c7c24ea\", \n\t\t\"tenantId\": \"b21e2a5a-ed7d-431c-b81b-4a5348a30ee2\", \n\t\t\"tenantCode\": \"wz6ukl0l96kun9fzxlgowdb5edh1eanbnkwvvx7hce0az2umvu\", \n\t\t\"name\": \"tjc4z8stewsam4tilhi53ovjlsex2knaruii43kas83xyjww38bis403l0efrhtn7aagfl5yvxgv7e97soqdmdichovstmef7twmyapwieiimzwi74mrbf41rjbdg6jxjnas4nq1yakbkf60mul9b1ddjoz045cmv0pzma5o58lfr46rb1ppab99lgovf62wsomspb56j3tjfyfex41z5gcs19qo0b8nfklmxtnpndaielvanli42kvakce3slh\"\n\t}, \n\t{\n\t\t\"id\": \"8989b95a-1d85-4e9f-99dc-b412d9df82e6\", \n\t\t\"tenantId\": \"db1a5b04-6d8d-4d73-8122-b049c81993d2\", \n\t\t\"tenantCode\": \"m03fgnv2w1yv0tcdpyph09pch4rogmklwdm65qq4vmmgr0vaot\", \n\t\t\"name\": \"djrpfl9j6jgkam2k05wt4pmqp8f6x57izll8vyfnc4fn7scw3gyc2oko3d0syr6zck8unt5b8p7mygoxji4kesqxzygkx8r8fz2u9e18ymp87oduvz1sadx0sap8tqas51kubqnv15wp76pbh685cqe3sn6x0cnraxjytpouf2m6jn2m7u6pp0kraxgl5o5l58ct32orbcgf4um98uqof74lst466014ddhb6odeh5j8o59enoxy5o91yoianin\"\n\t}, \n\t{\n\t\t\"id\": \"8a8db7af-8b30-4f44-b007-fc341b4466f4\", \n\t\t\"tenantId\": \"4dcf564d-4acd-4aea-992b-16f52a09aceb\", \n\t\t\"tenantCode\": \"xw2nmxxa7yjv07itzop82mlhh0n4xi9nmiko7cym5zne8oluy1\", \n\t\t\"name\": \"q8sgzvbcplveiujessjcq10dbv5fa2299b1fgi1x7vxpru0qzolubfowqezkpkulkdjgnr0rsjkusvom3g90yzzc7wssvqp09pvn3gef1rl3frgxsexpaxy638x00mt60wcfoou4qwaf3cib09lwzwyyov1iugikctirc4a9tssd8qnehk27i6zm5i8inib127cects17lr2gljsrz1uoiuiesixpvlz70olhbmehccs0iwkj8nake4qis2e7kg\"\n\t}, \n\t{\n\t\t\"id\": \"a5b6b70f-3f3e-4a63-a7ed-c649a3cfc6ab\", \n\t\t\"tenantId\": \"1fa79261-a697-459e-aab4-c67ea7cf63b5\", \n\t\t\"tenantCode\": \"omrzj6ca48h4n8sd7jhxgxqivsenp9mjryp28w3dpoeivvcsdh\", \n\t\t\"name\": \"3ji8idajj5uuxjgem59xkatvgohrpad65xn9eeuxj7qotqcu99xr5rtx4dg4ml16lgy1xis0imwdpr36l3gm7iydihbju5g5hjg8nncqslws71pxr8drypvnwg3bbbqmrf99jeczbxh5gagnyw806gdv5l7yugmku5gqrefzu9mig0q4aq72v0ld6c7nvbs9pq7xf942gx05ygkjhz6rc0sireyoqiwb7n5me55uj3oygpj0r53zlg2ga89tyig\"\n\t}, \n\t{\n\t\t\"id\": \"b1cc635a-7dd9-4213-aba8-3a2578e4e445\", \n\t\t\"tenantId\": \"be9bc374-2997-4346-bf73-c87e346dddf9\", \n\t\t\"tenantCode\": \"38qy5iawj92lvnq3jns6ocma76a888u046nci95yu8b8u3fw7e\", \n\t\t\"name\": \"rqelg0q1dzmcrn2qzcn0k8olctrekfi697pkxjismmlkotseyqrs9mi25ddm5ve0mkxap5zfxx0pvepfbkbzc0wiklpkjqmoh0sn40spngvdoz8lkx6s8h8j60fp9ln5ud94xgf2k6t3khfvfjan20i4nfnbr1ra3xbaqrwnso3kjzfjsq27jqh1sexpwwxcbx61mlk88o3cpmrgeg5vs78tp2tqqtaqqlpsbg21hij6jhfvlszcyo440eq0vp6\"\n\t}, \n\t{\n\t\t\"id\": \"4e8a7b75-6055-4457-8a03-699b79c64150\", \n\t\t\"tenantId\": \"70983cbc-3825-4f6c-b246-73c6d3f8749b\", \n\t\t\"tenantCode\": \"r1eh87ru3rnu0lwctv3b48q4gaxue5t912paybehnm0xb7gdd2\", \n\t\t\"name\": \"d4pu9047kjh13tgqbd98b0cp538mq3tl11n4gazs6cvj1wcxvw6rlw4xia41x1limt17tflpqs2yegb5gdhjdt39hx9w2g4ebt79au64kmqgb2d9yxz84cw1s82yqxbibrwyomka6u94idsspzcwgh9lvqfa1qgvjogow8tv4qj6ffxbtgrxhpfbo6lh4u6by2j3998kxzvxts1kffqelazlqd3oahzihjgz1me31b5n4lmivet9hv8fck6l4xp\"\n\t}, \n\t{\n\t\t\"id\": \"faf69a0d-5df8-48e0-b836-1cdc9a9b300e\", \n\t\t\"tenantId\": \"6fff66d3-9c15-4d39-a233-cc31f030d526\", \n\t\t\"tenantCode\": \"yhflt1wxhzx4yh8sp43d2k5ibv3909gndzn6be345u1j6v1tux\", \n\t\t\"name\": \"xnm40q7wlcwnc0jkzt91x1cja3q7nuwcrfk4qhn8f2d072n0r5f64td9lc6aqpvb64y1qbuabbvz9kc10u0emuygk05h2tiihpd92rfq1mdwk1oopd5dh28h6zg7zl6uofr90842aaaom763i884g093orwvstbbieowefsjsfbyq40xwsfy52h3vnwtsgfogdipq6tco8d041c4hes8egom4namewdhnwbb8f1lhvpz0wcuw5a4rkjlvophm8s\"\n\t}, \n\t{\n\t\t\"id\": \"7f7ed04f-31f4-4811-90f8-415af9a3c0a1\", \n\t\t\"tenantId\": \"25043bac-7953-4e82-8d2d-f5a029ed8ed9\", \n\t\t\"tenantCode\": \"3237dydugiwfisbm4tpbl5wujliqan12wljkejt5ld49ysfuyy\", \n\t\t\"name\": \"hn9tj66u7zyvfbym1gp4sre3196mn94jotcch1o8m0a1nknr578ga7mcg0wqjpet1l22fyr3vq02l719ilbg8t8kcyxijidovx4dxwyynccdnpuedr03m04utgc1xeb5n4mfm2e5zupqu4344a67iyrzavigd00zm5j7oof16sorcacmurl6ptfn29bpb8hmvi3t397wa75lxsohgm43yd7zyvaqrqcx9cbnf6qdo2oz460f6ktw4pwukwr57ch\"\n\t}, \n\t{\n\t\t\"id\": \"211d0395-65ae-4518-96af-51cc24e8fbb0\", \n\t\t\"tenantId\": \"d11bc2f4-41b4-4f87-b1f9-4c04c83caebd\", \n\t\t\"tenantCode\": \"8sc8mmwwwlzvcu5r3tu9efzt0qz4tg2jejzjimu3hypfn3hhs5\", \n\t\t\"name\": \"9q6ximvh4hhu52qqklye7umb4epupxgtodvyaf3juivlz7zvcvplnazbxauja3qw520h02vj9onc3nx7h3zbyb46kodm8m2dqiqhpzen1c03qyuc9zebtwqfuqokyd18mxkp24ceco4s4hi9ljmq4pq0x216r9akxwlidac7sc4hxn1dsvr4z1s0ac52tf8rzsf7c3t6curbgip31el4orohk8u3snx5tgs1ikfw7rn3z6s7skhznfq4v044tll\"\n\t}, \n\t{\n\t\t\"id\": \"287860d2-cb25-483d-8718-c67869bdf4b8\", \n\t\t\"tenantId\": \"2210e162-4620-4283-a6af-f15b6b2276ae\", \n\t\t\"tenantCode\": \"9mxvw9nk26pi63abyf7zgfzavn2amslwwgtz7j66d2afbk0e3m\", \n\t\t\"name\": \"ft7t4qb5x8s8mkn2lztwf2lrvyjg0wokjqlp8uih5pqdegrbwwwdca74rfrblwj27t2g38fuds9au976ohtjj7yer6pf7pfcgl039foisdff1b6t07uodzdtfdkrzpeuadffvy4mu8sesuc60p9zno0bskr0ykx3u4lug6q8pblq2t11mcldqxhuhyq9v5nqi9xer706nvntxderb6yq03skl60ckfu0clma6fige8ki86m0gzcz3z9rolhijia\"\n\t}, \n\t{\n\t\t\"id\": \"3ed536d9-b0a8-4501-9d39-5a025f934cc1\", \n\t\t\"tenantId\": \"990c1a5c-fcc4-4fe2-9364-244d763823f1\", \n\t\t\"tenantCode\": \"4qa01n1qbi88oznnbgds68g3ik51c58sz2nu79q2ewdt9i32wa\", \n\t\t\"name\": \"mycuxa805lu82zrqthl8xq14rrzj2knhwidvdvvpzf9y8ak9lpq6uhg7b4f1ydjeabrymedf1x8dpt5x0q3nhzqh6d7de2xzrrovsfim4euq9h97mg3vtbrrls3x9umoxppx9ueub5of2ueqe9je0f5n3cg1unmeksfmm25487psumhplrcwl9w647uy1e4femll1n2q0izg85ankhqenwax6fcjiwny8lpnn0pwvr66n2c6dhdtf1kr6wudk7i\"\n\t}, \n\t{\n\t\t\"id\": \"589e2da9-7d9d-4db9-a979-d6a18eccd926\", \n\t\t\"tenantId\": \"99576c2b-85bf-4d17-8727-a322f6353e80\", \n\t\t\"tenantCode\": \"iu4i3cuk584w73pwck8s50wwlv2lf74tdezhp081unbvrm7m0w\", \n\t\t\"name\": \"wwbl8zf53eo26hvrcb03la310fqy6x1qfzcun6xrfvc8zppt8oorf53i76380g2mx0b44e2d1ze2w2hho5brj159gz8g5ygsd2xi0igkznpjp6er8zk8xiufa1s7nexexbjh46u8a1ck4uu4ayp01b7yae7atksoq2mgfqfiteowhnwbkm46j23enkp07wksg9johupwn2wk6p90t9hzyrynokle3snwaflra0zc71agtgsujbf3rrnl7iqqs9r\"\n\t}, \n\t{\n\t\t\"id\": \"1bbc34da-dec8-4643-abba-ab313602d960\", \n\t\t\"tenantId\": \"51cdcc96-fdaa-4b73-95aa-e8a07b1968d2\", \n\t\t\"tenantCode\": \"o1bb2q745mf87gin3vhxsewtc91qh7efirzy4frfg2x3so0i0f\", \n\t\t\"name\": \"wl6uhhs9k8btwtv2ngvx7z68zvq8ccft1fzoz9lx2f7zxf04wg3c73ghf8lab0t8lcd4jo3xj6jktl3s0pb22p27gpzdygka1zd6z7hhhbg0m53k32h9lm12ga4rckfpc1nkf01k4r0t4w1zq52rhcr40kxgzx0ian0ba1y5wyow8gvc9v4azep1p16obxx700iw1hl7my0unx2b6w8qzt3ecslmnuit2ezn9bkndmpywwzhvdbu6ahyyv2hagg\"\n\t}, \n\t{\n\t\t\"id\": \"d8654bb5-7cb4-4379-954b-c41a7b4f9304\", \n\t\t\"tenantId\": \"62614850-a82b-4ca9-a9d5-267f742169a0\", \n\t\t\"tenantCode\": \"hukfs1yhgbjfi486d82neprj2gnurjh5j1tu3bvh52ngwyrxcc\", \n\t\t\"name\": \"k4hn99iiczayhualpurlxyhsk5x89ynttrp05188nruk4j8nr75vqe0l39z0pk970ck69fver00lrs4r2ul367wclyyt6oc1qcnjvb0tspi598qbnufknxssa8vf0m8uylkohoe9qq5e9dtddyjo4qhimbvhrrwfe1q4ajbpyrkk4sjycdq2inrx119pn8pc3qnwd6737gjhwfowlxzpp1tmutejd5cm21c7cvjift95or07wbcend136n99v4i\"\n\t}, \n\t{\n\t\t\"id\": \"3a083d2b-a861-4bee-b54d-29440954da5a\", \n\t\t\"tenantId\": \"886c9b52-0d14-4877-b197-2ee932fd2b84\", \n\t\t\"tenantCode\": \"tybzlsfvkawqt6q3n53d3whe6g3ld02vz4mj0xyiad3rmphd41\", \n\t\t\"name\": \"excfxjiw2ykuko43tcuz9cecd6mw14ldlvivjqve9vjr3ontyg0av0tkws15fkrk2izeh7w6r6x1a0e6abdq3b6ov2s9925gn8kukfpfntwrbjjhbd7701pdusrafcdmpewv5vtf1mkll3yzu5kj09g8bp888cc8nv8nk1czz5gu63yqgsg9him3m3v2a3qjfxrswbwxdr9asjbm0xn2ygivpl7brf6m8rofihvtypvjn44og0lluuu3ggwqsuc\"\n\t}, \n\t{\n\t\t\"id\": \"6d83630b-d4e1-4827-b455-db3f7e2fd22d\", \n\t\t\"tenantId\": \"2e3b4e38-f019-419f-8526-fdd327f66ba9\", \n\t\t\"tenantCode\": \"oqyzakdpflo35j4fqpd0al0uxlasn9h0qapreudsq45zid9rty\", \n\t\t\"name\": \"to6o4tessk772s2fmptscmutc4479lq7qo92ek4s32el1fz0gw8c7s58ngngnwnub6d3c8w5a6esrlrv38xwrjksyfs6lic3b0xzc31y49wtnr9utkqrqnka2qwvzie3q2k5sxatjyb1rh2h7bjykkkxoertziidih880rz8vigusv6su9sf443b46lro7irg1wjiktmp284dtfpqwwv0tkk31uk8dl6tbz86obwcdnk6ukuetkzl1uyug1m9xp\"\n\t}, \n\t{\n\t\t\"id\": \"09a1768f-5bd3-48d0-b84e-3eb68ef92b0d\", \n\t\t\"tenantId\": \"19d37836-06c7-4386-82e6-1f8ad6fe3eb0\", \n\t\t\"tenantCode\": \"a5j7cgwu4u98y4liv5yoye737gam4ch1i9ft5cotqt78f7igh7\", \n\t\t\"name\": \"y6z42phvg8k31jv3penstf9so462df2cbfzmyx0ugx6rajgxqvwt6k2lk1gl9g0g696hkczwu6if3fr3nlkozb6jk4lri791oxenee9enjgpj7y5lsoggkx3ux0bbp8y3x91jrcjlo2egl0abffgmtqmvb6dni7empsugq1v89snszok33srcol52bvy3mjtumyd7d1tlrn70ianzxxq9pb0dopebmsdfjjacefnqgrppetjvpd4d953097sayl\"\n\t}, \n\t{\n\t\t\"id\": \"100456e8-2faa-4c2e-a4ab-7b7996896502\", \n\t\t\"tenantId\": \"fa2edace-6128-44c8-a111-acd8793b330f\", \n\t\t\"tenantCode\": \"rfkavin5zcne3wodh2lh0ynk6vermplee2ve39rr6hbcordm5r\", \n\t\t\"name\": \"a3611pazxr2470jykz2x97f96ebj58z8w2rxmyfleil5x2tkflidq3xn1ny4o7myxck65fnp9ydg0nzno26g4009xy2hlixthezzh4dqsoxc32lcrbz3k9lioq1va7rsdo87d7p5aszd9j3xg61xegcnwhrl7e7q4q052kaairw8m6el60y1ile4j6g63dihefv8ogqng8v7pkjlndufvuxtucz6dngm6gtzip6ddjngnumtvwr3yn05756f36u\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/roles",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"roles"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/roles/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/roles/paginate",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+                        "roles",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/roles",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"08244bd8-bd19-48d2-afc8-22c18d1d571a\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/roles",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"roles"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/role",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"08244bd8-bd19-48d2-afc8-22c18d1d571a\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/role",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"role"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/role/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/role/08244bd8-bd19-48d2-afc8-22c18d1d571a",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"role",
+						"08244bd8-bd19-48d2-afc8-22c18d1d571a"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/role",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"08244bd8-bd19-48d2-afc8-22c18d1d571a\", \n\t\"tenantId\": \"9a709050-aa31-4825-8316-e106c9d1f084\", \n\t\"tenantCode\": \"wi2w9e9yeem0zipvjmy6ia8dpz9m7e3md8pyqjjop9yu597o0o\", \n\t\"name\": \"4zwr6p4i0ee84peb7hgczrz7ogqcewft2mhr48u7hv0o17yjqo9pbuqajf6hce19hb9t0pfvpcs4tlk10ylz5ffzy1uh7sqsiuu2n30c5dgbjzcyoub6t5fmf0emtfz3bsmdwgwij1so415dxozd0rltv772wgr99ugj4xshzqsremz5ls8jtz1m67w3croxo7kv4zjh1prordy2dvmc5925slwpraietkf9s5ou8nk8k88gaf5zhnryiusbq8l\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/role",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"role"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/role/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/role/08244bd8-bd19-48d2-afc8-22c18d1d571a",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"role",
+						"08244bd8-bd19-48d2-afc8-22c18d1d571a"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - cci/roles",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/roles",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "1e15c7ee-8888-4adf-8150-ef08e3b9d8bc",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

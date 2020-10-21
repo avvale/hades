@@ -24,7 +24,6 @@ export class CreateRoleCommandHandler implements ICommandHandler<CreateRoleComma
             new RoleTenantId(command.tenantId),
             new RoleTenantCode(command.tenantCode),
             new RoleName(command.name),
-            
         );
     }
 }
