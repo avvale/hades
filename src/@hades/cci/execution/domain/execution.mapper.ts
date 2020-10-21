@@ -18,6 +18,7 @@ import {
     ExecutionDeletedAt
     
 } from './value-objects';
+
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 
@@ -88,6 +89,8 @@ export class ExecutionMapper implements IMapper
             new ExecutionUpdatedAt(execution.updatedAt),
             new ExecutionDeletedAt(execution.deletedAt),
             
+            
+            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(execution.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(execution.system) : undefined,
             
@@ -114,6 +117,8 @@ export class ExecutionMapper implements IMapper
             execution.createdAt.value,
             execution.updatedAt.value,
             execution.deletedAt.value,
+            
+            
             
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(execution.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(execution.system) : undefined,

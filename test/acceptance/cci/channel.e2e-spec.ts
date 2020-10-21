@@ -8,9 +8,11 @@ import { CciModule } from './../../../src/apps/cci/cci.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 import { IamModule } from './../../../src/apps/iam/iam.module';
+import { AdminModule } from './../../../src/apps/admin/admin.module';
 
 const importForeignModules = [
-    IamModule
+    IamModule,
+    AdminModule
 ];
 
 describe('channel', () => 

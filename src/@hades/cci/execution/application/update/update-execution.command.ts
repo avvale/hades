@@ -1,3 +1,5 @@
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+
 export class UpdateExecutionCommand 
 {
     constructor(
@@ -12,5 +14,6 @@ export class UpdateExecutionCommand
         public readonly monitoringStartAt?: string,
         public readonly monitoringEndAt?: string,
         
+        public readonly constraint?: QueryStatement,
     ) {}
 }

@@ -36,7 +36,6 @@ export class CreateExecutionCommandHandler implements ICommandHandler<CreateExec
             new ExecutionExecutedAt(command.executedAt),
             new ExecutionMonitoringStartAt(command.monitoringStartAt),
             new ExecutionMonitoringEndAt(command.monitoringEndAt),
-            
         );
     }
 }

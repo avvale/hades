@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
@@ -19,7 +19,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     id: string;
         
-             
+                     
         
     @ForeignKey(() => IamTenantModel)
     
@@ -39,7 +39,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     tenantId: string;
         
-    
+            
     @BelongsTo(() => IamTenantModel)
     tenant: IamTenantModel;
              
@@ -56,7 +56,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     tenantCode: string;
         
-             
+                     
         
     @ForeignKey(() => CciSystemModel)
     
@@ -76,7 +76,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     systemId: string;
         
-    
+            
     @BelongsTo(() => CciSystemModel)
     system: CciSystemModel;
              
@@ -93,7 +93,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     systemName: string;
         
-             
+                     
         
     
     
@@ -107,7 +107,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     version: string;
         
-             
+                     
         
     
     
@@ -121,7 +121,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     type: string;
         
-             
+                     
         
     
     
@@ -135,7 +135,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     executedAt: string;
         
-             
+                     
         
     
     
@@ -149,7 +149,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     monitoringStartAt: string;
         
-             
+                     
         
     
     
@@ -163,7 +163,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     monitoringEndAt: string;
         
-             
+                     
         
     
     
@@ -177,7 +177,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     createdAt: string;
         
-             
+                     
         
     
     
@@ -191,7 +191,7 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     updatedAt: string;
         
-             
+                     
         
     
     
@@ -205,5 +205,5 @@ export class CciExecutionModel extends Model<CciExecutionModel>
     })
     deletedAt: string;
         
-            
+                    
 }
