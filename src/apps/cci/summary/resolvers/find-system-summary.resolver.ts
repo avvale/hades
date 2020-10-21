@@ -83,7 +83,7 @@ export class FindSystemSummaryResolver
         }));
 
         return {
-            system
+            system,
             execution,
             jobsDetail,
             channelsDetail,
