@@ -82,13 +82,11 @@ export enum CciMessageOverviewExecutionType {
 }
 
 export enum CciSystemTechnology {
-    WSO_2 = "WSO_2",
-    SAPPI = "SAPPI",
-    B_2_B = "B_2_B",
-    MULESOFT = "MULESOFT",
-    SAPSCI = "SAPSCI",
     WSO2 = "WSO2",
-    B2B = "B2B"
+    SAPPI = "SAPPI",
+    B2B = "B2B",
+    MULESOFT = "MULESOFT",
+    SAPSCI = "SAPSCI"
 }
 
 export enum IamAccountType {
@@ -999,10 +997,10 @@ export interface IQuery {
     cciFindRoleById(id?: string): CciRole | Promise<CciRole>;
     cciGetRoles(query?: QueryStatement): CciRole[] | Promise<CciRole[]>;
     cciPaginateRoles(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    cciFindSystemSummary(): CciSummary | Promise<CciSummary>;
-    cciFindSystem(query?: QueryStatement, constraint?: QueryStatement): CciSystem | Promise<CciSystem>;
-    cciFindSystemById(id?: string, constraint?: QueryStatement): CciSystem | Promise<CciSystem>;
-    cciGetSystems(query?: QueryStatement, constraint?: QueryStatement): CciSystem[] | Promise<CciSystem[]>;
+    cciFindSystemSummary(systemId: string): CciSummary | Promise<CciSummary>;
+    cciFindSystem(query?: QueryStatement): CciSystem | Promise<CciSystem>;
+    cciFindSystemById(id?: string): CciSystem | Promise<CciSystem>;
+    cciGetSystems(query?: QueryStatement): CciSystem[] | Promise<CciSystem[]>;
     cciPaginateSystems(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     iamFindMeAccount(): IamAccount | Promise<IamAccount>;
     iamFindAccount(query?: QueryStatement, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
@@ -1120,9 +1118,9 @@ export interface IMutation {
     cciDeleteRoles(query?: QueryStatement): CciRole[] | Promise<CciRole[]>;
     cciCreateSystem(payload: CciCreateSystemInput): CciSystem | Promise<CciSystem>;
     cciCreateSystems(payload: CciCreateSystemInput[]): boolean | Promise<boolean>;
-    cciUpdateSystem(payload: CciUpdateSystemInput, constraint?: QueryStatement): CciSystem | Promise<CciSystem>;
-    cciDeleteSystemById(id: string, constraint?: QueryStatement): CciSystem | Promise<CciSystem>;
-    cciDeleteSystems(query?: QueryStatement, constraint?: QueryStatement): CciSystem[] | Promise<CciSystem[]>;
+    cciUpdateSystem(payload: CciUpdateSystemInput): CciSystem | Promise<CciSystem>;
+    cciDeleteSystemById(id: string): CciSystem | Promise<CciSystem>;
+    cciDeleteSystems(query?: QueryStatement): CciSystem[] | Promise<CciSystem[]>;
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
     iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
@@ -1508,6 +1506,7 @@ export interface CciRole {
 }
 
 export interface CciSummary {
+    system: CciSystem;
     execution: CciExecution;
     jobsDetail: CciJobDetail[];
     channelsDetail: CciChannelDetail[];
