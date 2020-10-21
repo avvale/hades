@@ -993,9 +993,9 @@ export interface IQuery {
     cciFindModuleById(id?: string): CciModule | Promise<CciModule>;
     cciGetModules(query?: QueryStatement): CciModule[] | Promise<CciModule[]>;
     cciPaginateModules(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    cciFindRole(query?: QueryStatement): CciRole | Promise<CciRole>;
-    cciFindRoleById(id?: string): CciRole | Promise<CciRole>;
-    cciGetRoles(query?: QueryStatement): CciRole[] | Promise<CciRole[]>;
+    cciFindRole(query?: QueryStatement, constraint?: QueryStatement): CciRole | Promise<CciRole>;
+    cciFindRoleById(id?: string, constraint?: QueryStatement): CciRole | Promise<CciRole>;
+    cciGetRoles(query?: QueryStatement, constraint?: QueryStatement): CciRole[] | Promise<CciRole[]>;
     cciPaginateRoles(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindSystemSummary(systemId: string): CciSummary | Promise<CciSummary>;
     cciFindSystem(query?: QueryStatement): CciSystem | Promise<CciSystem>;
@@ -1113,9 +1113,9 @@ export interface IMutation {
     cciDeleteModules(query?: QueryStatement): CciModule[] | Promise<CciModule[]>;
     cciCreateRole(payload: CciCreateRoleInput): CciRole | Promise<CciRole>;
     cciCreateRoles(payload: CciCreateRoleInput[]): boolean | Promise<boolean>;
-    cciUpdateRole(payload: CciUpdateRoleInput): CciRole | Promise<CciRole>;
-    cciDeleteRoleById(id: string): CciRole | Promise<CciRole>;
-    cciDeleteRoles(query?: QueryStatement): CciRole[] | Promise<CciRole[]>;
+    cciUpdateRole(payload: CciUpdateRoleInput, constraint?: QueryStatement): CciRole | Promise<CciRole>;
+    cciDeleteRoleById(id: string, constraint?: QueryStatement): CciRole | Promise<CciRole>;
+    cciDeleteRoles(query?: QueryStatement, constraint?: QueryStatement): CciRole[] | Promise<CciRole[]>;
     cciCreateSystem(payload: CciCreateSystemInput): CciSystem | Promise<CciSystem>;
     cciCreateSystems(payload: CciCreateSystemInput[]): boolean | Promise<boolean>;
     cciUpdateSystem(payload: CciUpdateSystemInput): CciSystem | Promise<CciSystem>;
