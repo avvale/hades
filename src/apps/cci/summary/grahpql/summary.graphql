@@ -1,0 +1,12 @@
+type CciSummary
+{
+    execution: CciExecution!
+    jobsDetail: [CciJobDetail]!
+    channelsDetail: [CciChannelDetail]!
+    messagesDetail: [CciMessageDetail]!
+}
+
+type Query 
+{
+    cciFindDashboard: CciDashboard!
+}
