@@ -981,9 +981,9 @@ export interface IQuery {
     cciFindJobOverviewById(id?: string): CciJobOverview | Promise<CciJobOverview>;
     cciGetJobsOverview(query?: QueryStatement): CciJobOverview[] | Promise<CciJobOverview[]>;
     cciPaginateJobsOverview(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    cciFindMessageDetail(query?: QueryStatement): CciMessageDetail | Promise<CciMessageDetail>;
-    cciFindMessageDetailById(id?: string): CciMessageDetail | Promise<CciMessageDetail>;
-    cciGetMessagesDetail(query?: QueryStatement): CciMessageDetail[] | Promise<CciMessageDetail[]>;
+    cciFindMessageDetail(query?: QueryStatement, constraint?: QueryStatement): CciMessageDetail | Promise<CciMessageDetail>;
+    cciFindMessageDetailById(id?: string, constraint?: QueryStatement): CciMessageDetail | Promise<CciMessageDetail>;
+    cciGetMessagesDetail(query?: QueryStatement, constraint?: QueryStatement): CciMessageDetail[] | Promise<CciMessageDetail[]>;
     cciPaginateMessagesDetail(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindMessageOverview(query?: QueryStatement, constraint?: QueryStatement): CciMessageOverview | Promise<CciMessageOverview>;
     cciFindMessageOverviewById(id?: string, constraint?: QueryStatement): CciMessageOverview | Promise<CciMessageOverview>;
@@ -1098,9 +1098,9 @@ export interface IMutation {
     cciDeleteJobsOverview(query?: QueryStatement): CciJobOverview[] | Promise<CciJobOverview[]>;
     cciCreateMessageDetail(payload: CciCreateMessageDetailInput): CciMessageDetail | Promise<CciMessageDetail>;
     cciCreateMessagesDetail(payload: CciCreateMessageDetailInput[]): boolean | Promise<boolean>;
-    cciUpdateMessageDetail(payload: CciUpdateMessageDetailInput): CciMessageDetail | Promise<CciMessageDetail>;
-    cciDeleteMessageDetailById(id: string): CciMessageDetail | Promise<CciMessageDetail>;
-    cciDeleteMessagesDetail(query?: QueryStatement): CciMessageDetail[] | Promise<CciMessageDetail[]>;
+    cciUpdateMessageDetail(payload: CciUpdateMessageDetailInput, constraint?: QueryStatement): CciMessageDetail | Promise<CciMessageDetail>;
+    cciDeleteMessageDetailById(id: string, constraint?: QueryStatement): CciMessageDetail | Promise<CciMessageDetail>;
+    cciDeleteMessagesDetail(query?: QueryStatement, constraint?: QueryStatement): CciMessageDetail[] | Promise<CciMessageDetail[]>;
     cciCreateMessageOverview(payload: CciCreateMessageOverviewInput): CciMessageOverview | Promise<CciMessageOverview>;
     cciCreateMessagesOverview(payload: CciCreateMessageOverviewInput[]): boolean | Promise<boolean>;
     cciUpdateMessageOverview(payload: CciUpdateMessageOverviewInput, constraint?: QueryStatement): CciMessageOverview | Promise<CciMessageOverview>;
