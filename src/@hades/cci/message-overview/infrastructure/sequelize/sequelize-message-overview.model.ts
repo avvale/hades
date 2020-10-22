@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
@@ -20,7 +20,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     id: string;
         
-             
+                     
         
     @ForeignKey(() => IamTenantModel)
     
@@ -40,7 +40,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     tenantId: string;
         
-    
+            
     @BelongsTo(() => IamTenantModel)
     tenant: IamTenantModel;
              
@@ -57,7 +57,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     tenantCode: string;
         
-             
+                     
         
     @ForeignKey(() => CciSystemModel)
     
@@ -77,7 +77,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     systemId: string;
         
-    
+            
     @BelongsTo(() => CciSystemModel)
     system: CciSystemModel;
              
@@ -94,7 +94,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     systemName: string;
         
-             
+                     
         
     @ForeignKey(() => CciExecutionModel)
     
@@ -114,7 +114,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     executionId: string;
         
-    
+            
     @BelongsTo(() => CciExecutionModel)
     execution: CciExecutionModel;
              
@@ -131,7 +131,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     executionType: string;
         
-             
+                     
         
     
     
@@ -145,7 +145,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     executionExecutedAt: string;
         
-             
+                     
         
     
     
@@ -159,7 +159,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     executionMonitoringStartAt: string;
         
-             
+                     
         
     
     
@@ -173,7 +173,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     executionMonitoringEndAt: string;
         
-             
+                     
         
     
     
@@ -187,7 +187,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     numberMax: number;
         
-             
+                     
         
     
     
@@ -201,7 +201,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     numberDays: number;
         
-             
+                     
         
     
     
@@ -215,7 +215,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     success: number;
         
-             
+                     
         
     
     
@@ -229,7 +229,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     cancelled: number;
         
-             
+                     
         
     
     
@@ -243,7 +243,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     delivering: number;
         
-             
+                     
         
     
     
@@ -257,7 +257,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     error: number;
         
-             
+                     
         
     
     
@@ -271,7 +271,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     holding: number;
         
-             
+                     
         
     
     
@@ -285,7 +285,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     toBeDelivered: number;
         
-             
+                     
         
     
     
@@ -299,7 +299,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     waiting: number;
         
-             
+                     
         
     
     
@@ -313,7 +313,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     createdAt: string;
         
-             
+                     
         
     
     
@@ -327,7 +327,7 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     updatedAt: string;
         
-             
+                     
         
     
     
@@ -341,5 +341,5 @@ export class CciMessageOverviewModel extends Model<CciMessageOverviewModel>
     })
     deletedAt: string;
         
-            
+                    
 }

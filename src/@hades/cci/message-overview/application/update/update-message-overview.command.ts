@@ -1,3 +1,5 @@
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+
 export class UpdateMessageOverviewCommand 
 {
     constructor(
@@ -21,5 +23,6 @@ export class UpdateMessageOverviewCommand
         public readonly toBeDelivered?: number,
         public readonly waiting?: number,
         
+        public readonly constraint?: QueryStatement,
     ) {}
 }

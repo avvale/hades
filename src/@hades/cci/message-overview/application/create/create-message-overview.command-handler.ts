@@ -54,7 +54,6 @@ export class CreateMessageOverviewCommandHandler implements ICommandHandler<Crea
             new MessageOverviewHolding(command.holding),
             new MessageOverviewToBeDelivered(command.toBeDelivered),
             new MessageOverviewWaiting(command.waiting),
-            
         );
     }
 }
