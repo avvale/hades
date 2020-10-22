@@ -25,15 +25,13 @@ export interface IamCreateAccountInput {
     email: GraphQLString;
     isActive: GraphQLBoolean;
     clientId: string;
-    applicationCodes?: JSON;
-    permissions?: JSON;
-    dTenants: JSON;
+    dApplicationCodes: JSON;
+    dPermissions: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
     user?: IamCreateUserInput;
-    dApplicationCodes: JSON;
-    dPermissions: JSON;
+    dTenants: JSON;
 }
 
 export interface IamUpdateAccountInput {
@@ -42,15 +40,13 @@ export interface IamUpdateAccountInput {
     email?: GraphQLString;
     isActive?: GraphQLBoolean;
     clientId?: string;
-    applicationCodes?: JSON;
-    permissions?: JSON;
-    dTenants?: JSON;
+    dApplicationCodes?: JSON;
+    dPermissions?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
     user?: IamUpdateUserInput;
-    dApplicationCodes?: JSON;
-    dPermissions?: JSON;
+    dTenants?: JSON;
 }
 
 export interface IamCreateBoundedContextInput {
@@ -159,8 +155,8 @@ export interface IamAccount {
     email: GraphQLString;
     isActive: GraphQLBoolean;
     clientId: string;
-    applicationCodes: JSON;
-    permissions: JSON;
+    dApplicationCodes: JSON;
+    dPermissions: JSON;
     dTenants: JSON;
     data?: JSON;
     roles?: IamRole[];
@@ -169,69 +165,67 @@ export interface IamAccount {
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
-    dApplicationCodes: JSON;
-    dPermissions: JSON;
 }
 
 export interface IQuery {
-    iamFindAccount(query?: QueryStatement): IamAccount | Promise<IamAccount>;
     iamFindMeAccount(): IamAccount | Promise<IamAccount>;
-    iamFindAccountById(id?: string): IamAccount | Promise<IamAccount>;
-    iamGetAccounts(query?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
+    iamFindAccount(query?: QueryStatement, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamFindAccountById(id?: string, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamGetAccounts(query?: QueryStatement, constraint?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
     iamPaginateAccounts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    iamFindBoundedContext(query?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
-    iamFindBoundedContextById(id?: string): IamBoundedContext | Promise<IamBoundedContext>;
-    iamGetBoundedContexts(query?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
+    iamFindBoundedContext(query?: QueryStatement, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamFindBoundedContextById(id?: string, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamGetBoundedContexts(query?: QueryStatement, constraint?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
     iamPaginateBoundedContexts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    iamFindPermission(query?: QueryStatement): IamPermission | Promise<IamPermission>;
-    iamFindPermissionById(id?: string): IamPermission | Promise<IamPermission>;
-    iamGetPermissions(query?: QueryStatement): IamPermission[] | Promise<IamPermission[]>;
+    iamFindPermission(query?: QueryStatement, constraint?: QueryStatement): IamPermission | Promise<IamPermission>;
+    iamFindPermissionById(id?: string, constraint?: QueryStatement): IamPermission | Promise<IamPermission>;
+    iamGetPermissions(query?: QueryStatement, constraint?: QueryStatement): IamPermission[] | Promise<IamPermission[]>;
     iamPaginatePermissions(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    iamFindRole(query?: QueryStatement): IamRole | Promise<IamRole>;
-    iamFindRoleById(id?: string): IamRole | Promise<IamRole>;
-    iamGetRoles(query?: QueryStatement): IamRole[] | Promise<IamRole[]>;
+    iamFindRole(query?: QueryStatement, constraint?: QueryStatement): IamRole | Promise<IamRole>;
+    iamFindRoleById(id?: string, constraint?: QueryStatement): IamRole | Promise<IamRole>;
+    iamGetRoles(query?: QueryStatement, constraint?: QueryStatement): IamRole[] | Promise<IamRole[]>;
     iamPaginateRoles(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    iamFindTenant(query?: QueryStatement): IamTenant | Promise<IamTenant>;
-    iamFindTenantById(id?: string): IamTenant | Promise<IamTenant>;
-    iamGetTenants(query?: QueryStatement): IamTenant[] | Promise<IamTenant[]>;
+    iamFindTenant(query?: QueryStatement, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamFindTenantById(id?: string, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamGetTenants(query?: QueryStatement, constraint?: QueryStatement): IamTenant[] | Promise<IamTenant[]>;
     iamPaginateTenants(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    iamFindUser(query?: QueryStatement): IamUser | Promise<IamUser>;
-    iamFindUserById(id?: string): IamUser | Promise<IamUser>;
-    iamGetUsers(query?: QueryStatement): IamUser[] | Promise<IamUser[]>;
+    iamFindUser(query?: QueryStatement, constraint?: QueryStatement): IamUser | Promise<IamUser>;
+    iamFindUserById(id?: string, constraint?: QueryStatement): IamUser | Promise<IamUser>;
+    iamGetUsers(query?: QueryStatement, constraint?: QueryStatement): IamUser[] | Promise<IamUser[]>;
     iamPaginateUsers(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
-    iamUpdateAccount(payload: IamUpdateAccountInput): IamAccount | Promise<IamAccount>;
-    iamDeleteAccountById(id: string): IamAccount | Promise<IamAccount>;
-    iamDeleteAccounts(query?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
+    iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamDeleteAccountById(id: string, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamDeleteAccounts(query?: QueryStatement, constraint?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
     iamCreateBoundedContext(payload: IamCreateBoundedContextInput): IamBoundedContext | Promise<IamBoundedContext>;
     iamCreateBoundedContexts(payload: IamCreateBoundedContextInput[]): boolean | Promise<boolean>;
-    iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput): IamBoundedContext | Promise<IamBoundedContext>;
-    iamDeleteBoundedContextById(id: string): IamBoundedContext | Promise<IamBoundedContext>;
-    iamDeleteBoundedContexts(query?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
+    iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamDeleteBoundedContextById(id: string, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamDeleteBoundedContexts(query?: QueryStatement, constraint?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
     iamCreatePermission(payload: IamCreatePermissionInput): IamPermission | Promise<IamPermission>;
     iamCreatePermissions(payload: IamCreatePermissionInput[]): boolean | Promise<boolean>;
-    iamUpdatePermission(payload: IamUpdatePermissionInput): IamPermission | Promise<IamPermission>;
-    iamDeletePermissionById(id: string): IamPermission | Promise<IamPermission>;
-    iamDeletePermissions(query?: QueryStatement): IamPermission[] | Promise<IamPermission[]>;
+    iamUpdatePermission(payload: IamUpdatePermissionInput, constraint?: QueryStatement): IamPermission | Promise<IamPermission>;
+    iamDeletePermissionById(id: string, constraint?: QueryStatement): IamPermission | Promise<IamPermission>;
+    iamDeletePermissions(query?: QueryStatement, constraint?: QueryStatement): IamPermission[] | Promise<IamPermission[]>;
     iamCreateRole(payload: IamCreateRoleInput): IamRole | Promise<IamRole>;
     iamCreateRoles(payload: IamCreateRoleInput[]): boolean | Promise<boolean>;
-    iamUpdateRole(payload: IamUpdateRoleInput): IamRole | Promise<IamRole>;
-    iamDeleteRoleById(id: string): IamRole | Promise<IamRole>;
-    iamDeleteRoles(query?: QueryStatement): IamRole[] | Promise<IamRole[]>;
+    iamUpdateRole(payload: IamUpdateRoleInput, constraint?: QueryStatement): IamRole | Promise<IamRole>;
+    iamDeleteRoleById(id: string, constraint?: QueryStatement): IamRole | Promise<IamRole>;
+    iamDeleteRoles(query?: QueryStatement, constraint?: QueryStatement): IamRole[] | Promise<IamRole[]>;
     iamCreateTenant(payload: IamCreateTenantInput): IamTenant | Promise<IamTenant>;
     iamCreateTenants(payload: IamCreateTenantInput[]): boolean | Promise<boolean>;
-    iamUpdateTenant(payload: IamUpdateTenantInput): IamTenant | Promise<IamTenant>;
-    iamDeleteTenantById(id: string): IamTenant | Promise<IamTenant>;
-    iamDeleteTenants(query?: QueryStatement): IamTenant[] | Promise<IamTenant[]>;
+    iamUpdateTenant(payload: IamUpdateTenantInput, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamDeleteTenantById(id: string, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamDeleteTenants(query?: QueryStatement, constraint?: QueryStatement): IamTenant[] | Promise<IamTenant[]>;
     iamCreateUser(payload: IamCreateUserInput): IamUser | Promise<IamUser>;
     iamCreateUsers(payload: IamCreateUserInput[]): boolean | Promise<boolean>;
-    iamUpdateUser(payload: IamUpdateUserInput): IamUser | Promise<IamUser>;
-    iamDeleteUserById(id: string): IamUser | Promise<IamUser>;
-    iamDeleteUsers(query?: QueryStatement): IamUser[] | Promise<IamUser[]>;
+    iamUpdateUser(payload: IamUpdateUserInput, constraint?: QueryStatement): IamUser | Promise<IamUser>;
+    iamDeleteUserById(id: string, constraint?: QueryStatement): IamUser | Promise<IamUser>;
+    iamDeleteUsers(query?: QueryStatement, constraint?: QueryStatement): IamUser[] | Promise<IamUser[]>;
 }
 
 export interface IamBoundedContext {
