@@ -47,6 +47,7 @@ import {
     MessageDetailDeletedAt
     
 } from './value-objects';
+
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 import { ExecutionMapper } from '@hades/cci/execution/domain/execution.mapper';
@@ -147,6 +148,8 @@ export class MessageDetailMapper implements IMapper
             new MessageDetailUpdatedAt(messageDetail.updatedAt),
             new MessageDetailDeletedAt(messageDetail.deletedAt),
             
+            
+            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(messageDetail.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(messageDetail.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapModelToAggregate(messageDetail.execution) : undefined,
@@ -203,6 +206,8 @@ export class MessageDetailMapper implements IMapper
             messageDetail.createdAt.value,
             messageDetail.updatedAt.value,
             messageDetail.deletedAt.value,
+            
+            
             
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(messageDetail.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(messageDetail.system) : undefined,

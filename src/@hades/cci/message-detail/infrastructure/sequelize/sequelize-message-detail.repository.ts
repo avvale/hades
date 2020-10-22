@@ -21,5 +21,4 @@ export class SequelizeMessageDetailRepository extends SequelizeRepository<CciMes
     ) {
         super();
     }
-    
 }

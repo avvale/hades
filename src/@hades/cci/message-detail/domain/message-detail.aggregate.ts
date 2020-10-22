@@ -47,6 +47,7 @@ import {
 import { CreatedMessageDetailEvent } from './../application/events/created-message-detail.event';
 import { UpdatedMessageDetailEvent } from './../application/events/updated-message-detail.event';
 import { DeletedMessageDetailEvent } from './../application/events/deleted-message-detail.event';
+
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
@@ -99,6 +100,8 @@ export class CciMessageDetail extends AggregateRoot
     deletedAt: MessageDetailDeletedAt;
     
     // eager relationship
+    
+    
     tenant: IamTenant;
     system: CciSystem;
     execution: CciExecution;
@@ -153,6 +156,8 @@ export class CciMessageDetail extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
+        
+        
         this.tenant = tenant;
         this.system = system;
         this.execution = execution;
@@ -366,6 +371,8 @@ export class CciMessageDetail extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             execution: this.execution?.toDTO(),

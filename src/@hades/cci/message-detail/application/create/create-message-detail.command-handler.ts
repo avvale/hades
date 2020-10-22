@@ -94,7 +94,6 @@ export class CreateMessageDetailCommandHandler implements ICommandHandler<Create
             new MessageDetailTimesFailed(command.timesFailed),
             new MessageDetailNumberMax(command.numberMax),
             new MessageDetailNumberDays(command.numberDays),
-            
         );
     }
 }
