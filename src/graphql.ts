@@ -806,7 +806,7 @@ export interface IamUpdateTenantInput {
 
 export interface IamCreateUserInput {
     id: string;
-    accountId: string;
+    accountId?: string;
     name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
@@ -1603,6 +1603,7 @@ export interface IamTenant {
 export interface IamUser {
     id: string;
     accountId: string;
+    account: IamAccount;
     name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
@@ -1615,7 +1616,6 @@ export interface IamUser {
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
-    account: IamAccount;
 }
 
 export interface OAuthAccessToken {
