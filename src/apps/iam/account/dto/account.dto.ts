@@ -8,7 +8,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '82a7ea0e-7002-4854-bcc8-2092ba5ccbba'
+        example     : 'cd64e54e-0d77-4206-8e18-2e0c98dab157'
     })
     id: string;
     
@@ -27,7 +27,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'email [input here api field description]',
-        example     : 'uyhqmd1h0xdwwpti0fmsy2any1030tmf6akfqeqla8bpydnfy7x0wdllt4ye3fbey68h3ay42zsgzo0kau1xmmj7vcmg0p0u1g4s07pi2gyd2ync8begna4a'
+        example     : 'uujveevle2zeot1sjhe33i5jn1xnq3fq6t1hymikbew0kqgsr1fethlqy7t6a9ps6ffq3w0lfsgghs5d7lov6cwugl99o3el6c27xn52hp1h0m4qq832qphv'
     })
     email: string;
     
@@ -45,7 +45,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : 'ed5d5ea4-3b4c-4606-9ef0-841b0c40a4be'
+        example     : '7db40fe5-6ee1-4c26-a460-3733d2fe1c61'
     })
     clientId: string;
     
@@ -108,7 +108,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-10-22 08:41:32'
+        example     : '2020-10-22 07:38:32'
     })
     createdAt: string;
     
@@ -117,7 +117,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-10-22 02:02:08'
+        example     : '2020-10-22 03:00:54'
     })
     updatedAt: string;
     
@@ -126,7 +126,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-10-22 11:46:23'
+        example     : '2020-10-22 17:14:50'
     })
     deletedAt: string;
     

@@ -4,6 +4,7 @@ type IamUser
 {
     id: ID!
     accountId: ID!
+    account: IamAccount!
     name: GraphQLString!
     surname: GraphQLString
     avatar: GraphQLString
@@ -16,7 +17,6 @@ type IamUser
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input IamCreateUserInput

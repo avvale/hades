@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/account/infrastructure/seeds/account.seed.ts",
-            "integrity": "sha1:e2bad52b2a82539cf1aa44f35430f4173ee5f9e0"
+            "integrity": "sha1:f85ee3d081d28e15cefcab56541697a6f82c8641"
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.model.ts",
@@ -399,19 +399,19 @@
         },
         {
             "path": "src/apps/iam/account/dto/account.dto.ts",
-            "integrity": "sha1:bf3ed0b52c25d2589ff12afce743756c5d97cbb3"
+            "integrity": "sha1:820dbe839ab6479265be76220636f8ef09f58237"
         },
         {
             "path": "src/apps/iam/account/dto/create-account.dto.ts",
-            "integrity": "sha1:1786b8cb75900bef99471a527d29bf257594c3a1"
+            "integrity": "sha1:5fcb509db189565ce24911b02f9129035c9cf3c6"
         },
         {
             "path": "src/apps/iam/account/dto/update-account.dto.ts",
-            "integrity": "sha1:b8e375af9010447941d2240a7f6a7cb1f059b9fd"
+            "integrity": "sha1:6d340d6ac2ce06f77aed7ae5079048b7c068353f"
         },
         {
             "path": "src/apps/iam/account/graphql/account.graphql",
-            "integrity": "sha1:186f03fbb149d837b8342b94b40d30b0bd60ad2f"
+            "integrity": "sha1:7808f50aedd59dc956b6f019981661d9cab2a5f6"
         },
         {
             "path": "src/apps/iam/account/index.ts",
@@ -499,7 +499,7 @@
         },
         {
             "path": "postman/iam.account.postman.json",
-            "integrity": "sha1:564e1d71e420b72fb6e10713d6452a64338ee6e1"
+            "integrity": "sha1:558006b495d31340e0d74d40224abf0af727cc25"
         }
     ]
 }
