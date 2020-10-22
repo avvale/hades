@@ -8,8 +8,8 @@ import { AuthorizationGuard } from './../../../shared/modules/auth/guards/author
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { GetAccountsQuery } from '@hades/iam/account/application/get/get-accounts.query';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { GetAccountsQuery } from '@hades/iam/account/application/get/get-accounts.query';
 import { IamAccount } from './../../../../graphql';
 
 @Resolver()
