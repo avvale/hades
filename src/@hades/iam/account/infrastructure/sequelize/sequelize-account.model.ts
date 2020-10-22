@@ -1,9 +1,9 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamUserModel } from '@hades/iam/user/infrastructure/sequelize/sequelize-user.model';
-import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-.model';
+import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-role.model';
 import { IamRolesAccountsModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
-import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-.model';
+import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { IamTenantsAccountsModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model';
 
 @Table({ modelName: 'iam_account', freezeTableName: true })
