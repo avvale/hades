@@ -1,3 +1,5 @@
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+
 export class UpdateModuleCommand 
 {
     constructor(
@@ -23,5 +25,6 @@ export class UpdateModuleCommand
         public readonly parameterName?: string,
         public readonly parameterValue?: string,
         
+        public readonly constraint?: QueryStatement,
     ) {}
 }
