@@ -259,15 +259,15 @@
         },
         {
             "path": "src/@hades/iam/user/infrastructure/seeds/user.seed.ts",
-            "integrity": "sha1:67a3880f065dbc1472801b060253923320ea7ea4"
+            "integrity": "sha1:09ef56379bf75e78e19241e24ae5e65a9217224e"
         },
         {
             "path": "src/@hades/iam/user/infrastructure/sequelize/sequelize-user.model.ts",
-            "integrity": "sha1:92fdd402b5c5fb1bca1fde6ccad7b6352cad8dd7"
+            "integrity": "sha1:d72a46df62f06aa27f6a61d6c288c799d0b7be5e"
         },
         {
             "path": "src/@hades/iam/user/infrastructure/sequelize/sequelize-user.repository.ts",
-            "integrity": "sha1:42850cfd048f0dad3e0eb29bab3a67220d03f3cd"
+            "integrity": "sha1:5c66c2c2ca7b8ced551737af11d7695cdd7cf349"
         },
         {
             "path": "src/@hades/iam/user/domain/value-objects/user-id.ts",
@@ -399,19 +399,19 @@
         },
         {
             "path": "src/apps/iam/user/dto/user.dto.ts",
-            "integrity": "sha1:b2cc83d92fb95571cff9811b6ad8f6d3adc3595c"
+            "integrity": "sha1:4f81da173415cab09fcac75cc5a1ca6a730aeaca"
         },
         {
             "path": "src/apps/iam/user/dto/create-user.dto.ts",
-            "integrity": "sha1:81c780b133eb86b23f81c33e1444315293d2899d"
+            "integrity": "sha1:1115b7d446f0cdfa0fe7a67464eba3eaafe0cdfd"
         },
         {
             "path": "src/apps/iam/user/dto/update-user.dto.ts",
-            "integrity": "sha1:05c20910900ec02df6335e60fc0b08d86dace367"
+            "integrity": "sha1:0f56910000906be0c24ef3354c2a45db20f5b729"
         },
         {
             "path": "src/apps/iam/user/graphql/user.graphql",
-            "integrity": "sha1:038540c3a2cd8538ba05226df15ef150b1aa196f"
+            "integrity": "sha1:9af791efccc426b8305f85cc2c241e1f6d09c35b"
         },
         {
             "path": "src/apps/iam/user/index.ts",
@@ -499,7 +499,7 @@
         },
         {
             "path": "postman/iam.user.postman.json",
-            "integrity": "sha1:430803381c6f0e992c7f60b0e7aab32bf6e70452"
+            "integrity": "sha1:637861d371be6147341ddd21acb88e387ac52a7d"
         }
     ]
 }

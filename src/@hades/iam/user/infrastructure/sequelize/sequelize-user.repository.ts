@@ -21,5 +21,4 @@ export class SequelizeUserRepository extends SequelizeRepository<IamUser, IamUse
     ) {
         super();
     }
-    
 }
