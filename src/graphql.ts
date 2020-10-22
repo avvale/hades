@@ -989,9 +989,9 @@ export interface IQuery {
     cciFindMessageOverviewById(id?: string): CciMessageOverview | Promise<CciMessageOverview>;
     cciGetMessagesOverview(query?: QueryStatement): CciMessageOverview[] | Promise<CciMessageOverview[]>;
     cciPaginateMessagesOverview(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    cciFindModule(query?: QueryStatement): CciModule | Promise<CciModule>;
-    cciFindModuleById(id?: string): CciModule | Promise<CciModule>;
-    cciGetModules(query?: QueryStatement): CciModule[] | Promise<CciModule[]>;
+    cciFindModule(query?: QueryStatement, constraint?: QueryStatement): CciModule | Promise<CciModule>;
+    cciFindModuleById(id?: string, constraint?: QueryStatement): CciModule | Promise<CciModule>;
+    cciGetModules(query?: QueryStatement, constraint?: QueryStatement): CciModule[] | Promise<CciModule[]>;
     cciPaginateModules(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindRole(query?: QueryStatement, constraint?: QueryStatement): CciRole | Promise<CciRole>;
     cciFindRoleById(id?: string, constraint?: QueryStatement): CciRole | Promise<CciRole>;
@@ -1108,9 +1108,9 @@ export interface IMutation {
     cciDeleteMessagesOverview(query?: QueryStatement): CciMessageOverview[] | Promise<CciMessageOverview[]>;
     cciCreateModule(payload: CciCreateModuleInput): CciModule | Promise<CciModule>;
     cciCreateModules(payload: CciCreateModuleInput[]): boolean | Promise<boolean>;
-    cciUpdateModule(payload: CciUpdateModuleInput): CciModule | Promise<CciModule>;
-    cciDeleteModuleById(id: string): CciModule | Promise<CciModule>;
-    cciDeleteModules(query?: QueryStatement): CciModule[] | Promise<CciModule[]>;
+    cciUpdateModule(payload: CciUpdateModuleInput, constraint?: QueryStatement): CciModule | Promise<CciModule>;
+    cciDeleteModuleById(id: string, constraint?: QueryStatement): CciModule | Promise<CciModule>;
+    cciDeleteModules(query?: QueryStatement, constraint?: QueryStatement): CciModule[] | Promise<CciModule[]>;
     cciCreateRole(payload: CciCreateRoleInput): CciRole | Promise<CciRole>;
     cciCreateRoles(payload: CciCreateRoleInput[]): boolean | Promise<boolean>;
     cciUpdateRole(payload: CciUpdateRoleInput, constraint?: QueryStatement): CciRole | Promise<CciRole>;
