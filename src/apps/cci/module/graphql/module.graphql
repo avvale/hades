@@ -83,9 +83,9 @@ input CciUpdateModuleInput
 
 type Query 
 {
-    cciFindModule(query:QueryStatement): CciModule
-    cciFindModuleById(id:ID): CciModule
-    cciGetModules(query:QueryStatement): [CciModule]!
+    cciFindModule(query:QueryStatement constraint:QueryStatement): CciModule
+    cciFindModuleById(id:ID constraint:QueryStatement): CciModule
+    cciGetModules(query:QueryStatement constraint:QueryStatement): [CciModule]!
     cciPaginateModules(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -93,7 +93,7 @@ type Mutation
 {
     cciCreateModule(payload: CciCreateModuleInput!): CciModule
     cciCreateModules(payload: [CciCreateModuleInput]!): Boolean!
-    cciUpdateModule(payload: CciUpdateModuleInput!): CciModule
-    cciDeleteModuleById(id: ID!): CciModule
-    cciDeleteModules(query:QueryStatement): [CciModule]!
+    cciUpdateModule(payload: CciUpdateModuleInput! constraint:QueryStatement): CciModule
+    cciDeleteModuleById(id: ID! constraint:QueryStatement): CciModule
+    cciDeleteModules(query:QueryStatement constraint:QueryStatement): [CciModule]!
 }

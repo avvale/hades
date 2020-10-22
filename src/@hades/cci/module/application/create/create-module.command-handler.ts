@@ -58,7 +58,6 @@ export class CreateModuleCommandHandler implements ICommandHandler<CreateModuleC
             new ModuleName(command.name),
             new ModuleParameterName(command.parameterName),
             new ModuleParameterValue(command.parameterValue),
-            
         );
     }
 }

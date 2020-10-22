@@ -29,6 +29,7 @@ import {
     ModuleDeletedAt
     
 } from './value-objects';
+
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 
@@ -110,6 +111,8 @@ export class ModuleMapper implements IMapper
             new ModuleUpdatedAt(module.updatedAt),
             new ModuleDeletedAt(module.deletedAt),
             
+            
+            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(module.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(module.system) : undefined,
             
@@ -147,6 +150,8 @@ export class ModuleMapper implements IMapper
             module.createdAt.value,
             module.updatedAt.value,
             module.deletedAt.value,
+            
+            
             
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(module.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(module.system) : undefined,

@@ -29,6 +29,7 @@ import {
 import { CreatedModuleEvent } from './../application/events/created-module.event';
 import { UpdatedModuleEvent } from './../application/events/updated-module.event';
 import { DeletedModuleEvent } from './../application/events/deleted-module.event';
+
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 
@@ -62,6 +63,8 @@ export class CciModule extends AggregateRoot
     deletedAt: ModuleDeletedAt;
     
     // eager relationship
+    
+    
     tenant: IamTenant;
     system: CciSystem;
     
@@ -97,6 +100,8 @@ export class CciModule extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
+        
+        
         this.tenant = tenant;
         this.system = system;
         
@@ -237,6 +242,8 @@ export class CciModule extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             

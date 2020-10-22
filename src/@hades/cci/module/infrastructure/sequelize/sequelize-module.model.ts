@@ -1,4 +1,4 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
@@ -19,7 +19,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     id: string;
         
-             
+                     
         
     @ForeignKey(() => IamTenantModel)
     
@@ -39,7 +39,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     tenantId: string;
         
-    
+            
     @BelongsTo(() => IamTenantModel)
     tenant: IamTenantModel;
              
@@ -56,7 +56,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     tenantCode: string;
         
-             
+                     
         
     @ForeignKey(() => CciSystemModel)
     
@@ -76,7 +76,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     systemId: string;
         
-    
+            
     @BelongsTo(() => CciSystemModel)
     system: CciSystemModel;
              
@@ -93,7 +93,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     systemName: string;
         
-             
+                     
         
     // @Index
     
@@ -107,7 +107,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     channelHash: string;
         
-             
+                     
         
     
     
@@ -121,7 +121,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     channelParty: string;
         
-             
+                     
         
     
     
@@ -135,7 +135,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     channelComponent: string;
         
-             
+                     
         
     
     
@@ -149,7 +149,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     channelName: string;
         
-             
+                     
         
     // @Index
     
@@ -163,7 +163,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     flowHash: string;
         
-             
+                     
         
     
     
@@ -177,7 +177,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     flowParty: string;
         
-             
+                     
         
     
     
@@ -191,7 +191,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     flowReceiverParty: string;
         
-             
+                     
         
     
     
@@ -205,7 +205,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     flowComponent: string;
         
-             
+                     
         
     
     
@@ -219,7 +219,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     flowReceiverComponent: string;
         
-             
+                     
         
     
     
@@ -233,7 +233,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     flowInterfaceName: string;
         
-             
+                     
         
     
     
@@ -247,7 +247,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     flowInterfaceNamespace: string;
         
-             
+                     
         
     
     
@@ -261,7 +261,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     version: string;
         
-             
+                     
         
     
     
@@ -275,7 +275,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     parameterGroup: string;
         
-             
+                     
         
     
     
@@ -289,7 +289,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     name: string;
         
-             
+                     
         
     
     
@@ -303,7 +303,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     parameterName: string;
         
-             
+                     
         
     
     
@@ -317,7 +317,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     parameterValue: string;
         
-             
+                     
         
     
     
@@ -331,7 +331,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     createdAt: string;
         
-             
+                     
         
     
     
@@ -345,7 +345,7 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     updatedAt: string;
         
-             
+                     
         
     
     
@@ -359,5 +359,5 @@ export class CciModuleModel extends Model<CciModuleModel>
     })
     deletedAt: string;
         
-            
+                    
 }
