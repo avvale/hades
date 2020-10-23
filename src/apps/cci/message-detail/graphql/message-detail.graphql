@@ -23,11 +23,14 @@ enum CciMessageDetailDirection {
 type CciMessageDetail
 {
     id: ID!
+    tenantId: ID!
     tenant: IamTenant!
     tenantCode: GraphQLString!
+    systemId: ID!
     system: CciSystem!
     systemName: GraphQLString!
     scenario: GraphQLString
+    executionId: ID!
     execution: CciExecution!
     executionType: CciMessageDetailExecutionType!
     executionExecutedAt: GraphQLTimestamp!
@@ -64,7 +67,6 @@ type CciMessageDetail
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input CciCreateMessageDetailInput
@@ -157,9 +159,9 @@ input CciUpdateMessageDetailInput
 
 type Query 
 {
-    cciFindMessageDetail(query:QueryStatement): CciMessageDetail
-    cciFindMessageDetailById(id:ID): CciMessageDetail
-    cciGetMessagesDetail(query:QueryStatement): [CciMessageDetail]!
+    cciFindMessageDetail(query:QueryStatement constraint:QueryStatement): CciMessageDetail
+    cciFindMessageDetailById(id:ID constraint:QueryStatement): CciMessageDetail
+    cciGetMessagesDetail(query:QueryStatement constraint:QueryStatement): [CciMessageDetail]!
     cciPaginateMessagesDetail(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -167,7 +169,7 @@ type Mutation
 {
     cciCreateMessageDetail(payload: CciCreateMessageDetailInput!): CciMessageDetail
     cciCreateMessagesDetail(payload: [CciCreateMessageDetailInput]!): Boolean!
-    cciUpdateMessageDetail(payload: CciUpdateMessageDetailInput!): CciMessageDetail
-    cciDeleteMessageDetailById(id: ID!): CciMessageDetail
-    cciDeleteMessagesDetail(query:QueryStatement): [CciMessageDetail]!
+    cciUpdateMessageDetail(payload: CciUpdateMessageDetailInput! constraint:QueryStatement): CciMessageDetail
+    cciDeleteMessageDetailById(id: ID! constraint:QueryStatement): CciMessageDetail
+    cciDeleteMessagesDetail(query:QueryStatement constraint:QueryStatement): [CciMessageDetail]!
 }

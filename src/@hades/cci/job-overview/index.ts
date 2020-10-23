@@ -34,6 +34,7 @@ import { DeleteJobsOverviewService } from './application/delete/delete-jobs-over
 // models
 export { CciJobOverviewModel } from './infrastructure/sequelize/sequelize-job-overview.model';
 
+
 // repository
 export { IJobOverviewRepository } from './domain/job-overview.repository';
 export { SequelizeJobOverviewRepository } from './infrastructure/sequelize/sequelize-job-overview.repository';

@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "b819a261-0fc9-455f-835c-6754e201bc91",
+		"name"          : "@hades - cci/job-overview",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - cciCreateJobOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciCreateJobOverviewInput!)\n{\n\tcciCreateJobOverview (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"d152978a-734b-441e-9b34-7498da944059\", \n\t\t\"tenantId\": \"9fd19b74-4d8c-42bc-b206-8bc2425ced54\", \n\t\t\"tenantCode\": \"c31fa9559vvomsp1hrcdh4bsjr6cmpm4mvnlmavg4k5hvdqfs2\", \n\t\t\"systemId\": \"4bf516c5-220a-43ad-afb3-1788a82ad277\", \n\t\t\"systemName\": \"w782k344dynpgnixd5j6\", \n\t\t\"executionId\": \"625708a8-4ab5-4cb0-a471-74ba70c3bceb\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-23 09:00:33\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-22 21:21:07\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-22 20:40:34\", \n\t\t\"cancelled\": 9581931857, \n\t\t\"completed\": 8755386031, \n\t\t\"error\": 9371685860\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciCreateJobsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[CciCreateJobOverviewInput]!)\n{\n\tcciCreateJobsOverview (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"3e574cd4-9b27-4747-9fba-638c9df0e0bf\", \n\t\t\t\"tenantId\": \"99cb98e5-b0ed-4dd5-b2a8-40eba2ed95d7\", \n\t\t\t\"tenantCode\": \"g2mo3bfgmsnu2d2ephhene649fmzl3pg7n6qea090j3dm4spm8\", \n\t\t\t\"systemId\": \"5d77166e-d2ef-4f39-9af1-2e62d8b3462c\", \n\t\t\t\"systemName\": \"2lcf6wj8xdgpwu5z9hzb\", \n\t\t\t\"executionId\": \"72dfac0b-1e2b-47b5-b801-1729b60b7324\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 01:45:54\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 12:19:32\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-22 13:56:32\", \n\t\t\t\"cancelled\": 8885951364, \n\t\t\t\"completed\": 8992250884, \n\t\t\t\"error\": 4999337200\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2058f4ce-3426-4adb-913b-5aa073f55101\", \n\t\t\t\"tenantId\": \"7eeb3bc8-7714-46b0-b0cf-b369e5631802\", \n\t\t\t\"tenantCode\": \"dexo8v393wqdwtxn4a5mueizirkt5walugc3zfo3t80c2u67ik\", \n\t\t\t\"systemId\": \"f87dd3e6-8a6e-4c5d-ade0-83c2955d286d\", \n\t\t\t\"systemName\": \"8y6ocpz41szmgg5bc6zz\", \n\t\t\t\"executionId\": \"24eb31c1-2c53-4545-8065-d9a1f42a9152\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 01:35:57\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 17:12:07\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-23 05:41:37\", \n\t\t\t\"cancelled\": 5764790122, \n\t\t\t\"completed\": 3467131490, \n\t\t\t\"error\": 9091655062\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ad63573d-f1d4-4d03-9a82-03544fc61231\", \n\t\t\t\"tenantId\": \"09443562-ba54-45de-98f8-6c300d7faec4\", \n\t\t\t\"tenantCode\": \"t9w5nu2j5qrw41ynubeo5u3a9s2aele12rf15hok7hqrws95rr\", \n\t\t\t\"systemId\": \"a2072db8-6b06-468e-a1c1-ddddf6af8cf3\", \n\t\t\t\"systemName\": \"qtz5eijxb56wq9u0o54a\", \n\t\t\t\"executionId\": \"e7a3301e-d915-45cc-9573-d6bb562acf29\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 00:32:56\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-23 10:16:02\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-23 01:14:08\", \n\t\t\t\"cancelled\": 5556127343, \n\t\t\t\"completed\": 5590120668, \n\t\t\t\"error\": 9458214111\n\t\t},\n\t\t{\n\t\t\t\"id\": \"be2e3712-e0b4-4281-8269-d0273cc3b13d\", \n\t\t\t\"tenantId\": \"8bf5cb27-487e-471d-8dae-14cc26cc0900\", \n\t\t\t\"tenantCode\": \"npx3v92q65tkrsxv3mt3ebu4wfamr1dg5xvh31q8pfw58hmmbt\", \n\t\t\t\"systemId\": \"01bbd0bb-82c2-4f1b-9b05-4601be740df3\", \n\t\t\t\"systemName\": \"4opzyk4zk3area69hhtn\", \n\t\t\t\"executionId\": \"86e7ec8b-c749-4d35-9949-97169b97575e\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 05:54:08\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 15:40:18\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-22 14:50:36\", \n\t\t\t\"cancelled\": 5848813730, \n\t\t\t\"completed\": 4118775972, \n\t\t\t\"error\": 6675267212\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dac8d514-0228-492e-9430-7af5810f4640\", \n\t\t\t\"tenantId\": \"3ed2e049-018d-45bc-a9e6-4527671fc1b0\", \n\t\t\t\"tenantCode\": \"0ec4r7grdud6l2i3p42e64znrd2pftcosfrfy4grj1yxmwf113\", \n\t\t\t\"systemId\": \"2377f328-1a5e-4fd3-85ec-9cd0e11a82f4\", \n\t\t\t\"systemName\": \"u1nbxztdipeaf8rggy6v\", \n\t\t\t\"executionId\": \"f9fdd962-eb2e-4466-b386-25874183bbe4\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-10-22 13:44:57\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-23 01:49:51\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-22 17:27:21\", \n\t\t\t\"cancelled\": 2468416835, \n\t\t\t\"completed\": 3291626201, \n\t\t\t\"error\": 8297585473\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dcce9ba4-aca4-4d46-b74a-e9695e282140\", \n\t\t\t\"tenantId\": \"67d2c3a2-ee93-4d2c-8eed-77a090e87fc3\", \n\t\t\t\"tenantCode\": \"h63kujm15n0xq4iemkl8u4tx7765g743xgjczjocxsl42vu0ct\", \n\t\t\t\"systemId\": \"2d1f1328-7162-49f4-96cd-cdef79588512\", \n\t\t\t\"systemName\": \"7f5evn2cyvelpjbq1uxh\", \n\t\t\t\"executionId\": \"7db3c8b3-cf72-40ec-b578-a777271e8a8e\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-10-22 18:08:43\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-23 08:13:15\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-23 04:56:43\", \n\t\t\t\"cancelled\": 3642786137, \n\t\t\t\"completed\": 5209563326, \n\t\t\t\"error\": 7071253665\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5fdfdd2e-fd51-4041-b19a-7be79a30b577\", \n\t\t\t\"tenantId\": \"2e31831a-6db0-48d2-8ca4-c35df70b622d\", \n\t\t\t\"tenantCode\": \"dqprrtifzq1rv5p0g4ijvbna2tk3nq2spgj687sjrvmdryo4a5\", \n\t\t\t\"systemId\": \"d2b74579-13a6-4505-9b0f-718483e95224\", \n\t\t\t\"systemName\": \"ml6ayvjnl67dh81dw7gr\", \n\t\t\t\"executionId\": \"6ffdc61b-eb3e-430e-9144-21dddc8cca2b\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 11:01:53\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-23 07:29:29\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-22 15:14:17\", \n\t\t\t\"cancelled\": 1400660618, \n\t\t\t\"completed\": 9294484228, \n\t\t\t\"error\": 5117729448\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6beed9a4-f9c1-4dad-9969-9821bd0860f6\", \n\t\t\t\"tenantId\": \"4b254f95-280f-4710-a1a3-55e124c74b60\", \n\t\t\t\"tenantCode\": \"gkcta4vd4g4wkn16dyryh1wy98hhhdh2syjyuccvostodzfky3\", \n\t\t\t\"systemId\": \"c980efe0-d59c-426a-9748-dd4ca042cfa0\", \n\t\t\t\"systemName\": \"25yhwez2xkpoq43jdkey\", \n\t\t\t\"executionId\": \"299e0aef-e3f5-4cde-878a-d25c9b5f2a02\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 06:21:02\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 21:31:01\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-23 09:26:58\", \n\t\t\t\"cancelled\": 7804706123, \n\t\t\t\"completed\": 4254646719, \n\t\t\t\"error\": 3233968581\n\t\t},\n\t\t{\n\t\t\t\"id\": \"31bb4cf7-025d-4e65-9931-a387d5fcf8d1\", \n\t\t\t\"tenantId\": \"f9decc99-8e60-4054-9df5-8b1c09c82c91\", \n\t\t\t\"tenantCode\": \"4vg24ez4otc286jotd9f12b10tzo6cj28luqxo9bg1q9bl8rz5\", \n\t\t\t\"systemId\": \"73de8f0d-1684-4023-8640-9b56448cf6d5\", \n\t\t\t\"systemName\": \"vm39fmwegzw348x5hus4\", \n\t\t\t\"executionId\": \"363055e4-7b10-49f7-b028-3d3bb5cce4cc\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 06:56:47\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-23 08:25:51\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-22 11:59:08\", \n\t\t\t\"cancelled\": 3043096183, \n\t\t\t\"completed\": 2146721996, \n\t\t\t\"error\": 9589923429\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cec84dd6-8200-41cd-a8d4-411c4081d31b\", \n\t\t\t\"tenantId\": \"8ddb359b-9164-4732-8fbe-d1ff33b071a2\", \n\t\t\t\"tenantCode\": \"xljwl6fpzhn92nylhrb5uhf7hutqau4kabrhqwsiltfpe15zuw\", \n\t\t\t\"systemId\": \"6365a62d-176f-484d-b73a-9c760fac12e2\", \n\t\t\t\"systemName\": \"sjcrd8lxluwxy695luux\", \n\t\t\t\"executionId\": \"16102107-f474-49b5-9a35-04420fbebbf4\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-10-22 22:01:31\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 13:24:46\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-22 20:09:39\", \n\t\t\t\"cancelled\": 8458476530, \n\t\t\t\"completed\": 7446165760, \n\t\t\t\"error\": 2986186885\n\t\t},\n\t\t{\n\t\t\t\"id\": \"54208c89-7782-43c7-84f7-9fae41107ef3\", \n\t\t\t\"tenantId\": \"102f39b8-f4d5-4291-a8e7-580bf4d62d17\", \n\t\t\t\"tenantCode\": \"gymx29dc9wkpikg15a0n7p3yc5a7yk0x823bgja3yqzn83b4rm\", \n\t\t\t\"systemId\": \"48d6bf9a-0e47-4334-b449-93d1b16d4f0d\", \n\t\t\t\"systemName\": \"7f9c5rd47ujx7qj6l91i\", \n\t\t\t\"executionId\": \"253804f6-2e9a-416d-8d90-4f999da70656\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-10-22 19:34:01\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 15:16:30\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-22 12:08:45\", \n\t\t\t\"cancelled\": 7474890328, \n\t\t\t\"completed\": 3009637322, \n\t\t\t\"error\": 7389043552\n\t\t},\n\t\t{\n\t\t\t\"id\": \"357b75b0-c0d7-417e-94a1-8ef937043122\", \n\t\t\t\"tenantId\": \"f56f8386-dc95-46b7-93e9-f6056b142520\", \n\t\t\t\"tenantCode\": \"o181lq95sb9fqidq4690pvannqnh57vn2ifqj1wrguyagv3rp4\", \n\t\t\t\"systemId\": \"3331f7c0-e15b-40e6-8348-a0cbd4f1057a\", \n\t\t\t\"systemName\": \"4cvmo2vqkkbu3tprt0d8\", \n\t\t\t\"executionId\": \"16817317-b041-4d45-8eba-010c1f6e92f0\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 08:55:56\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 12:16:49\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-23 10:41:28\", \n\t\t\t\"cancelled\": 3146731083, \n\t\t\t\"completed\": 5332532072, \n\t\t\t\"error\": 7418605502\n\t\t},\n\t\t{\n\t\t\t\"id\": \"398576ea-150e-4c85-af78-d7cdc53e5e6f\", \n\t\t\t\"tenantId\": \"1dbf64c5-2750-47f0-b377-a3c8615a396b\", \n\t\t\t\"tenantCode\": \"fxfbz8sfmsa0xridht9yfo437tmy037vgvxolgq9i4bf4ompny\", \n\t\t\t\"systemId\": \"ea125d41-9d32-43b3-be98-03afdfd31b62\", \n\t\t\t\"systemName\": \"9ajjj78okn1jr3k51wer\", \n\t\t\t\"executionId\": \"934e947e-c26c-4c80-9525-552fd2b8a96c\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 03:24:29\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-23 00:53:53\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-22 23:47:03\", \n\t\t\t\"cancelled\": 4425847459, \n\t\t\t\"completed\": 7255225474, \n\t\t\t\"error\": 9016434174\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6d9105be-ca71-4ecf-9eda-f74681b349f7\", \n\t\t\t\"tenantId\": \"83671e64-b80f-48b7-964d-92c934871f46\", \n\t\t\t\"tenantCode\": \"nabpaf89cqzuen86h26dmu8j1l4hnhx5wpesntgksvnpp7n9s0\", \n\t\t\t\"systemId\": \"2d2ce832-d195-42e0-bd99-81901927a8b3\", \n\t\t\t\"systemName\": \"vbkk2cowpun4a3n130vp\", \n\t\t\t\"executionId\": \"67f94bcf-2908-4c41-a0e7-fa35b75d8f00\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 02:45:11\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 19:49:30\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-22 18:06:15\", \n\t\t\t\"cancelled\": 3655036502, \n\t\t\t\"completed\": 9837724237, \n\t\t\t\"error\": 2884626828\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4f650de2-a602-4dcd-a97e-8450ed9998e9\", \n\t\t\t\"tenantId\": \"0236c9f3-eb70-4bd6-be63-ce2c63d40830\", \n\t\t\t\"tenantCode\": \"nadqayjj24mgjm7thxqgvv7g940u6xsm1gt618n8u2r3g0y6f2\", \n\t\t\t\"systemId\": \"56628ab7-c5ef-4f3b-b3aa-9d87db460aeb\", \n\t\t\t\"systemName\": \"ruppxt5cwavresx9od5y\", \n\t\t\t\"executionId\": \"716ea362-ffe5-4746-9adb-038570b038bd\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-10-22 18:59:08\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 21:07:26\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-23 07:11:01\", \n\t\t\t\"cancelled\": 6282089277, \n\t\t\t\"completed\": 5414356711, \n\t\t\t\"error\": 2604306216\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5c334641-ef74-4186-a569-9710a04b1e8d\", \n\t\t\t\"tenantId\": \"088710ec-824a-499e-807c-cac2f8585986\", \n\t\t\t\"tenantCode\": \"pe6c2hx2yp651kpw3b19s12b2zb6fjanrixhidikj8e8lxrorj\", \n\t\t\t\"systemId\": \"e8bd7bba-d685-4219-acd4-dfc8155b0bc9\", \n\t\t\t\"systemName\": \"mo4f4pmpqj41w6xbp1t6\", \n\t\t\t\"executionId\": \"a8605013-c1da-4832-bfaf-8247f8218930\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-10-22 15:08:00\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 21:55:25\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-22 22:28:59\", \n\t\t\t\"cancelled\": 9143073733, \n\t\t\t\"completed\": 5180418658, \n\t\t\t\"error\": 1673242519\n\t\t},\n\t\t{\n\t\t\t\"id\": \"85444846-ef17-469d-9893-b7bf91cc60c5\", \n\t\t\t\"tenantId\": \"7d6a17d9-548b-4416-9ebe-c6c0c8382977\", \n\t\t\t\"tenantCode\": \"fbqi12txkmkl7mm0fs2sk7bk5385axqj2z1p4tx7pphi54fuae\", \n\t\t\t\"systemId\": \"acab6c0b-eeb5-4979-b207-69ba4fe1aa43\", \n\t\t\t\"systemName\": \"hrz5bmmpv7m1qijaf0b7\", \n\t\t\t\"executionId\": \"11a5b50b-71fd-4f6e-bf10-5618d9f99862\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 09:07:22\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-22 17:26:04\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-23 07:26:19\", \n\t\t\t\"cancelled\": 4512789385, \n\t\t\t\"completed\": 1275959562, \n\t\t\t\"error\": 4853910605\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9282bf75-a371-4079-89e6-e9d52faababa\", \n\t\t\t\"tenantId\": \"d95ffb83-ddb9-473f-a90f-f7b5fb5eee3a\", \n\t\t\t\"tenantCode\": \"byv4xvc9woi03fv3u6xgk1zx79jxohtn3lkwrvuhmgj84e9sc8\", \n\t\t\t\"systemId\": \"b85c398a-207d-460c-8f72-5f50066be0b6\", \n\t\t\t\"systemName\": \"h92m4wjk53rh14z7wsxj\", \n\t\t\t\"executionId\": \"85149342-dc4e-4aab-9b25-48a91118e5b1\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 00:36:15\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-23 05:52:12\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-23 00:16:37\", \n\t\t\t\"cancelled\": 8524770675, \n\t\t\t\"completed\": 1810430841, \n\t\t\t\"error\": 1150839678\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5a23fcb4-a3af-42f1-9f46-9dc29283c779\", \n\t\t\t\"tenantId\": \"20351a9a-81c4-4bfa-b0c9-c4dacbd2fa84\", \n\t\t\t\"tenantCode\": \"oc7e61k9nb57yp8ahernl0h3ehmrjqplo8ux44614d45czx28u\", \n\t\t\t\"systemId\": \"71f7c1d9-748c-4d08-96c0-4dd402c3a759\", \n\t\t\t\"systemName\": \"06uwr20gbr122h2gf1yh\", \n\t\t\t\"executionId\": \"94a7c3e9-8f85-48fb-95ec-e55c39c0271b\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 02:54:39\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-23 06:26:54\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-23 09:41:04\", \n\t\t\t\"cancelled\": 8226582304, \n\t\t\t\"completed\": 1933274429, \n\t\t\t\"error\": 8007153102\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8142d89d-9017-4c71-ae9d-baf77277f13f\", \n\t\t\t\"tenantId\": \"4decfd7c-c602-4bf1-a314-7e4d042fe334\", \n\t\t\t\"tenantCode\": \"e34py2vrc0vmivjzryww2xhpsk5dejt0194mqo4hf0g2pxfmkk\", \n\t\t\t\"systemId\": \"d0ea5293-2472-4c94-8c51-f525ab6063ab\", \n\t\t\t\"systemName\": \"b5w8tuoaanm3eq4y6l2u\", \n\t\t\t\"executionId\": \"3dcc3157-edad-4526-a998-4769ceb58dcc\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-10-23 08:12:56\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-10-23 02:53:50\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-10-23 03:59:33\", \n\t\t\t\"cancelled\": 8952800600, \n\t\t\t\"completed\": 8540602278, \n\t\t\t\"error\": 9223857616\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciPaginateJobsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tcciPaginateJobsOverview (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciGetJobsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciGetJobsOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"d152978a-734b-441e-9b34-7498da944059\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindJobOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciFindJobOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"d152978a-734b-441e-9b34-7498da944059\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindJobOverviewById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tcciFindJobOverviewById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"d152978a-734b-441e-9b34-7498da944059\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciUpdateJobOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciUpdateJobOverviewInput!)\n{\n\tcciUpdateJobOverview (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"d152978a-734b-441e-9b34-7498da944059\", \n\t\t\"tenantId\": \"9fd19b74-4d8c-42bc-b206-8bc2425ced54\", \n\t\t\"tenantCode\": \"x8is0lu2xf06etlv0y21yrl9fwlf4cdqxbtemnubgtq17eykc2\", \n\t\t\"systemId\": \"4bf516c5-220a-43ad-afb3-1788a82ad277\", \n\t\t\"systemName\": \"uhxsvyt6pu0joudeeeh2\", \n\t\t\"executionId\": \"625708a8-4ab5-4cb0-a471-74ba70c3bceb\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-10-22 23:11:29\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-22 18:12:36\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-22 11:18:52\", \n\t\t\"cancelled\": 4774884721, \n\t\t\"completed\": 3575500463, \n\t\t\"error\": 2493003403\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteJobOverviewById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tcciDeleteJobOverviewById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"d152978a-734b-441e-9b34-7498da944059\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteJobsOverview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tcciDeleteJobsOverview (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tcancelled\n\t\tcompleted\n\t\terror\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/job-overview",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"d152978a-734b-441e-9b34-7498da944059\", \n\t\"tenantId\": \"9fd19b74-4d8c-42bc-b206-8bc2425ced54\", \n\t\"tenantCode\": \"0yfikzz5kbj04bfv9gnbo0g0hm4i4y510i0zw6yu7dn4mkjn6w\", \n\t\"systemId\": \"4bf516c5-220a-43ad-afb3-1788a82ad277\", \n\t\"systemName\": \"907l45shm9tug5o50fjt\", \n\t\"executionId\": \"625708a8-4ab5-4cb0-a471-74ba70c3bceb\", \n\t\"executionType\": \"DETAIL\", \n\t\"executionExecutedAt\": \"2020-10-23 07:37:47\", \n\t\"executionMonitoringStartAt\": \"2020-10-22 17:09:26\", \n\t\"executionMonitoringEndAt\": \"2020-10-22 16:10:26\", \n\t\"cancelled\": 8009360115, \n\t\"completed\": 5461068043, \n\t\"error\": 8817295390\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/job-overview",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"job-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/jobs-overview",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"f5e5e092-b2a9-4a08-8d49-5055a312b2df\", \n\t\t\"tenantId\": \"c80d56e0-4d94-475a-8583-3d55dc935dcd\", \n\t\t\"tenantCode\": \"ssr0yrwsjvpm34fbli2zgv867nwoe35m45cspryhk7mv97ywfz\", \n\t\t\"systemId\": \"79eb213d-3e8a-4d9f-8d21-739155c15fa4\", \n\t\t\"systemName\": \"p6ammzdskx1pfbuqik16\", \n\t\t\"executionId\": \"b6b7a597-abce-4cb0-b525-7b9e192efead\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-22 22:57:37\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 00:01:09\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-22 18:06:25\", \n\t\t\"cancelled\": 3635598359, \n\t\t\"completed\": 3771686131, \n\t\t\"error\": 9822811121\n\t}, \n\t{\n\t\t\"id\": \"1b149ea4-0c18-4bfc-9457-4cf97554c1a3\", \n\t\t\"tenantId\": \"4ecf5cc5-a894-4538-a394-a77fb60bd67c\", \n\t\t\"tenantCode\": \"ygq68mi5v0jmvlegdcki7lnrr9n2zclagvrnpnms9k9eu7m5jj\", \n\t\t\"systemId\": \"5d8abc11-de0c-4247-af27-682e31641da2\", \n\t\t\"systemName\": \"bigzs2cnsbn2neemalv7\", \n\t\t\"executionId\": \"0d48cfcc-0cb1-496e-9e4b-fd506fee5b96\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-23 04:46:33\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 03:59:57\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-22 19:17:07\", \n\t\t\"cancelled\": 9416765943, \n\t\t\"completed\": 1979992556, \n\t\t\"error\": 2932521681\n\t}, \n\t{\n\t\t\"id\": \"799fd760-e6e7-4111-9f75-5b7b49eb15ae\", \n\t\t\"tenantId\": \"bb6a133b-f584-4bfe-b602-a19bf008f5fe\", \n\t\t\"tenantCode\": \"wpz79bf4bagmeox7ubn9wmwlsi1c3xzvbw8gunzv70jgbfzx7o\", \n\t\t\"systemId\": \"b06a3c49-b605-488c-a7ad-9e6c3269513e\", \n\t\t\"systemName\": \"0hinctrh68jsifvnl7o8\", \n\t\t\"executionId\": \"ad9e04af-bbd2-4dd9-9085-9146034c365f\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-23 08:27:32\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 09:41:17\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 06:59:35\", \n\t\t\"cancelled\": 3819840225, \n\t\t\"completed\": 7591201493, \n\t\t\"error\": 9871310926\n\t}, \n\t{\n\t\t\"id\": \"c4719194-b9ae-454f-9ecc-794b275fc27e\", \n\t\t\"tenantId\": \"37519c49-036b-46f6-984d-44f891dcccbc\", \n\t\t\"tenantCode\": \"lzjjaf8qo9x1djb8ctsoytuvxs5cq990g5c8ta6wu753la0qmk\", \n\t\t\"systemId\": \"349bd350-a60b-4b34-91b8-834b03d80000\", \n\t\t\"systemName\": \"a55a0g0e7otkh7s8c77d\", \n\t\t\"executionId\": \"6ac2b663-a8fa-4a18-91fa-747f155bb930\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-23 01:57:47\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 10:03:49\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 09:03:15\", \n\t\t\"cancelled\": 1103085218, \n\t\t\"completed\": 5348809425, \n\t\t\"error\": 4771901564\n\t}, \n\t{\n\t\t\"id\": \"307a99c2-3b27-47f1-ac51-8479de55ccda\", \n\t\t\"tenantId\": \"e91fe676-c61f-4191-b054-c0aacddea339\", \n\t\t\"tenantCode\": \"7312g8xjrqmznabdwvggn96vzh5z2gc361ixhfvpbei0cixoyr\", \n\t\t\"systemId\": \"e7b31ef5-cf24-4138-8daa-091118853f04\", \n\t\t\"systemName\": \"8171s9m152ilgeuo9q75\", \n\t\t\"executionId\": \"77682ee5-8f2c-405f-b056-71c6dab6cd46\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-22 13:02:53\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 04:20:31\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 00:51:01\", \n\t\t\"cancelled\": 3841004216, \n\t\t\"completed\": 1971474445, \n\t\t\"error\": 4676233680\n\t}, \n\t{\n\t\t\"id\": \"e20bc574-8666-472f-8305-679be72fa3e4\", \n\t\t\"tenantId\": \"d8114116-c061-4ecd-a765-3131fa01a0a8\", \n\t\t\"tenantCode\": \"f7lb1lero3ya50fq3mcl7qr5c0tkab2ld7ihp0hhcilo7tud2r\", \n\t\t\"systemId\": \"74f456db-27b7-4732-95d5-150132e8296e\", \n\t\t\"systemName\": \"jqy1sthrt1ceibztcri9\", \n\t\t\"executionId\": \"7c639950-7459-4a5c-b724-dd14c48147f3\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-23 02:45:47\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 03:33:38\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 08:29:36\", \n\t\t\"cancelled\": 1148950727, \n\t\t\"completed\": 2456796134, \n\t\t\"error\": 6609037314\n\t}, \n\t{\n\t\t\"id\": \"d1460cfc-d80b-4d2e-acb0-3652c5a6f51e\", \n\t\t\"tenantId\": \"316e18af-1e56-4a8c-97c9-c2309cdafe53\", \n\t\t\"tenantCode\": \"bzgrlmcuge39goqn98fnkesz42fepdx1iqztxbpav00oaag0cs\", \n\t\t\"systemId\": \"f8da84d6-9a7d-4b14-a723-bf6724413c59\", \n\t\t\"systemName\": \"24v7cvwdu4309enf5539\", \n\t\t\"executionId\": \"bef4e674-5c2b-4c54-9f67-f07742c7b4d1\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-10-22 19:54:51\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-22 15:19:37\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 09:54:58\", \n\t\t\"cancelled\": 4175873407, \n\t\t\"completed\": 7898884730, \n\t\t\"error\": 5908206554\n\t}, \n\t{\n\t\t\"id\": \"9995c422-7729-4356-8990-dcbba60fcc1a\", \n\t\t\"tenantId\": \"62a1ddd5-549f-4569-ba40-954ebb4c355e\", \n\t\t\"tenantCode\": \"8yenx2czo7infflfxswbrulvu8fydoqou59g74u6ivceljkad4\", \n\t\t\"systemId\": \"0242b0a3-3a90-4317-adba-cbbcbe6b97ce\", \n\t\t\"systemName\": \"78h3tciil0pm57efqghg\", \n\t\t\"executionId\": \"d7bf319f-93f0-47f3-b56b-16b9b548cf20\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-23 08:17:58\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-22 22:49:05\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 01:18:13\", \n\t\t\"cancelled\": 9504247093, \n\t\t\"completed\": 4301404410, \n\t\t\"error\": 2323879938\n\t}, \n\t{\n\t\t\"id\": \"768fd52b-df22-457c-9c00-3e648dd015a7\", \n\t\t\"tenantId\": \"be935e5c-b52f-4c0d-8dd1-06835e456dd0\", \n\t\t\"tenantCode\": \"cntfgcdlz0jiv4fnlqk7ghkq4t71rp6bp7a6zu2a4g6unhl3u8\", \n\t\t\"systemId\": \"f7729408-86b6-43f6-a74a-85c258694677\", \n\t\t\"systemName\": \"z29okwff6elw3ygo21i4\", \n\t\t\"executionId\": \"9ed9dfa6-0077-42ba-8c8b-d8f71f5fa4eb\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-22 12:09:29\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 05:02:08\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-22 13:00:09\", \n\t\t\"cancelled\": 5110574545, \n\t\t\"completed\": 6364047355, \n\t\t\"error\": 5170370035\n\t}, \n\t{\n\t\t\"id\": \"4f37306b-cdae-450a-a07a-116b4bde5e6c\", \n\t\t\"tenantId\": \"7000ac46-638c-49df-88f5-af2bbe29708f\", \n\t\t\"tenantCode\": \"cycedxvi00mpzmyq9w8w6atzmtfw2ewi54lx3ubqd46z8sz4oi\", \n\t\t\"systemId\": \"f31db8c1-00b0-430e-b042-58acd2aa1193\", \n\t\t\"systemName\": \"rtd54k892gwjw7xpbyp9\", \n\t\t\"executionId\": \"371dad08-a62d-4f36-8b4a-c4f175104a45\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-22 20:31:03\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 01:56:43\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 04:01:59\", \n\t\t\"cancelled\": 4578826742, \n\t\t\"completed\": 5651751802, \n\t\t\"error\": 8421131822\n\t}, \n\t{\n\t\t\"id\": \"5cafa5f6-f2cb-4801-9869-b2a81394d527\", \n\t\t\"tenantId\": \"e68d21d7-a33d-4025-a039-d330775698e0\", \n\t\t\"tenantCode\": \"xzg794khc46gdmocf72vu2tnldjjsyhh285id5bnbeneq4mzsv\", \n\t\t\"systemId\": \"9fd8492f-4d5e-4582-b552-44367880dd36\", \n\t\t\"systemName\": \"9ix3j0qnuk94h9a97rov\", \n\t\t\"executionId\": \"54c59b00-7c65-4a5c-8ec6-4d61e2844dac\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-10-23 03:07:06\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-22 18:43:11\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 07:32:46\", \n\t\t\"cancelled\": 6948842096, \n\t\t\"completed\": 1384474647, \n\t\t\"error\": 5251351559\n\t}, \n\t{\n\t\t\"id\": \"aba70b0f-4f8b-4206-8bfc-f28cf6702a4b\", \n\t\t\"tenantId\": \"af597165-2778-44d0-b6cb-4503964e4674\", \n\t\t\"tenantCode\": \"87c8ymenoshamdqdmkghtek059at4yuipsa5hfpk4on8cadbmb\", \n\t\t\"systemId\": \"18bcd5f6-83a6-4d39-9730-4678a4fceda5\", \n\t\t\"systemName\": \"6oquciujvaintzrrf3j1\", \n\t\t\"executionId\": \"18c39d6d-d805-4109-907f-acd05fae6ec0\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-23 07:47:49\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-22 18:42:59\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 09:36:10\", \n\t\t\"cancelled\": 3512998906, \n\t\t\"completed\": 5536636874, \n\t\t\"error\": 7073829502\n\t}, \n\t{\n\t\t\"id\": \"e8f98d3b-244e-4573-9283-a3f21e6b1890\", \n\t\t\"tenantId\": \"81b2373e-280b-4eca-942d-9d8b23f96e71\", \n\t\t\"tenantCode\": \"f907av9fzi20jy75spapqdqj3tt14dp7q70ku7gd4dgbm65pcu\", \n\t\t\"systemId\": \"7acc73d4-b8c5-4b20-8ee9-a7c0589ee181\", \n\t\t\"systemName\": \"ynds6d5mpf52twe0mq7u\", \n\t\t\"executionId\": \"73bb575a-36de-4ea8-b1b3-d276895d9d79\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-22 14:26:32\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 09:55:48\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-22 16:50:20\", \n\t\t\"cancelled\": 7355357069, \n\t\t\"completed\": 5443114734, \n\t\t\"error\": 4447289458\n\t}, \n\t{\n\t\t\"id\": \"c68e7d19-dcf5-4f49-9ca1-dc870d524d9d\", \n\t\t\"tenantId\": \"cfdba210-a4a0-43fb-9065-2da208e2afd1\", \n\t\t\"tenantCode\": \"8nzmvmo11ndeuiz74qk59ewcr43dzmd8j5wwpf0bw5t7qr0u73\", \n\t\t\"systemId\": \"b81b31a5-a4b9-4a13-9983-96be528dd410\", \n\t\t\"systemName\": \"bzjtd9vp4bjo05p25j0l\", \n\t\t\"executionId\": \"0d7e224b-ec19-4a52-ae7d-f3b1dfc54c78\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-10-23 09:49:05\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-22 15:52:06\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-22 11:47:10\", \n\t\t\"cancelled\": 5583294641, \n\t\t\"completed\": 3183052722, \n\t\t\"error\": 6303581416\n\t}, \n\t{\n\t\t\"id\": \"5540e426-ecd7-41a0-a4f1-7b85110f433d\", \n\t\t\"tenantId\": \"35be9f33-a25e-4718-bbd1-c6ac311df5a8\", \n\t\t\"tenantCode\": \"pcnvqaqdnk0nxh3yzqqt7iiz1cczrxa5lhhyhcbbdhxlvlio5h\", \n\t\t\"systemId\": \"ec3998fe-efcc-47ff-8357-d7e0d716bbf4\", \n\t\t\"systemName\": \"fjqdcjhm52gevx2bk5r4\", \n\t\t\"executionId\": \"dbb8f9cb-99c0-42bb-b802-e8de2ff25199\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-23 08:58:18\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 00:06:37\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-22 22:47:13\", \n\t\t\"cancelled\": 3718219438, \n\t\t\"completed\": 2510649498, \n\t\t\"error\": 2378749045\n\t}, \n\t{\n\t\t\"id\": \"3bfb092c-0766-4572-8ab9-b4ae531bfb16\", \n\t\t\"tenantId\": \"9aa52d59-60e1-442e-9d83-3b1304885779\", \n\t\t\"tenantCode\": \"pz0pkbcqewtnhvaime7qrx005me6d0tjs9avsiuvmzs88syvm0\", \n\t\t\"systemId\": \"a9416df4-362a-4a66-a39e-11d09fcb9e45\", \n\t\t\"systemName\": \"zvfoxd9cx02o8zsx78xx\", \n\t\t\"executionId\": \"0237439b-4cbc-42b4-a1e6-28dcae122c11\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-10-23 00:29:49\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 03:52:42\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-22 16:26:28\", \n\t\t\"cancelled\": 2968530631, \n\t\t\"completed\": 8412790923, \n\t\t\"error\": 6747725304\n\t}, \n\t{\n\t\t\"id\": \"776c8a0a-cdca-47fe-99e6-27060b947f2b\", \n\t\t\"tenantId\": \"190df32a-0338-4326-9f53-44c46bd7710d\", \n\t\t\"tenantCode\": \"komkcgm17wl4yeoory4if0o2nrv2pzp9m1qfam49dthlooauls\", \n\t\t\"systemId\": \"b5194ba6-db40-4b95-b35f-cf66cdd9655b\", \n\t\t\"systemName\": \"0bsxrcsd9gsw0cau4xb3\", \n\t\t\"executionId\": \"c35a7900-2d29-49ae-bd93-acb4d8f55e0c\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-10-23 03:38:57\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 05:08:57\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 02:54:28\", \n\t\t\"cancelled\": 2700695781, \n\t\t\"completed\": 3702247216, \n\t\t\"error\": 5570903653\n\t}, \n\t{\n\t\t\"id\": \"4d65fce2-b039-4d39-8e19-a3181f3ddce6\", \n\t\t\"tenantId\": \"ad3ce946-7e07-4b84-be42-6c1141517f20\", \n\t\t\"tenantCode\": \"vlhtzc2k3do9p5j8dsvfl01ywc8ipwp7r5csscv2jmu8yoktjd\", \n\t\t\"systemId\": \"5e49a2c9-9a40-412a-8cd0-830d50ec694c\", \n\t\t\"systemName\": \"y2fd5mxk4alweb0x2hpo\", \n\t\t\"executionId\": \"5d68c6d0-0764-4f4b-acbc-4fbe1470b7cf\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-10-22 17:39:03\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 06:19:35\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 00:35:56\", \n\t\t\"cancelled\": 8321560209, \n\t\t\"completed\": 3677706401, \n\t\t\"error\": 8920447873\n\t}, \n\t{\n\t\t\"id\": \"31c87490-e1b1-4511-bfbc-13c6225ce657\", \n\t\t\"tenantId\": \"f6dcc9ac-29d8-4ab6-8dbc-3ab06461e5fd\", \n\t\t\"tenantCode\": \"5iusrqzcms7evscrurydxbx8fi119u2qlt7vd13unqdsyri7yp\", \n\t\t\"systemId\": \"d69c0c33-417a-490c-a102-bcd55ba8b0a6\", \n\t\t\"systemName\": \"cxlxy15s3xru199lwzyt\", \n\t\t\"executionId\": \"a3495caf-341e-4762-bdc1-ad00917e29fc\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-10-23 05:00:54\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 06:54:33\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-22 16:48:47\", \n\t\t\"cancelled\": 8879331660, \n\t\t\"completed\": 1609703088, \n\t\t\"error\": 7361051016\n\t}, \n\t{\n\t\t\"id\": \"6bad3b88-5adb-444e-afec-b2fe461be3d2\", \n\t\t\"tenantId\": \"dea69a0c-3b09-4f4c-a657-a643e21609a0\", \n\t\t\"tenantCode\": \"nrqlgnb9p4esxf03xkz15y1hbwf4bwue6jq7vwuy7mzi67m5a0\", \n\t\t\"systemId\": \"c84b1445-95fc-49d6-b467-f218f66d4c72\", \n\t\t\"systemName\": \"c8edouca6qlp1gsckrwj\", \n\t\t\"executionId\": \"6cc83392-8ca1-4119-a87f-a3c72883010c\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-10-22 15:35:24\", \n\t\t\"executionMonitoringStartAt\": \"2020-10-23 08:03:05\", \n\t\t\"executionMonitoringEndAt\": \"2020-10-23 02:30:10\", \n\t\t\"cancelled\": 2999049361, \n\t\t\"completed\": 8291401151, \n\t\t\"error\": 9882823990\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/jobs-overview",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"jobs-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/jobs-overview/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/jobs-overview/paginate",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+                        "jobs-overview",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/jobs-overview",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"d152978a-734b-441e-9b34-7498da944059\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/jobs-overview",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"jobs-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/job-overview",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"d152978a-734b-441e-9b34-7498da944059\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/job-overview",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"job-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/job-overview/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/job-overview/d152978a-734b-441e-9b34-7498da944059",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"job-overview",
+						"d152978a-734b-441e-9b34-7498da944059"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/job-overview",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"d152978a-734b-441e-9b34-7498da944059\", \n\t\"tenantId\": \"9fd19b74-4d8c-42bc-b206-8bc2425ced54\", \n\t\"tenantCode\": \"j3yz6oge6xpc96nmafp1y7sw0vlg1crn5eg4p6emid9ea2a1wz\", \n\t\"systemId\": \"4bf516c5-220a-43ad-afb3-1788a82ad277\", \n\t\"systemName\": \"3kzikl6lse6ooakske6p\", \n\t\"executionId\": \"625708a8-4ab5-4cb0-a471-74ba70c3bceb\", \n\t\"executionType\": \"DETAIL\", \n\t\"executionExecutedAt\": \"2020-10-22 13:13:50\", \n\t\"executionMonitoringStartAt\": \"2020-10-23 11:13:37\", \n\t\"executionMonitoringEndAt\": \"2020-10-22 20:22:00\", \n\t\"cancelled\": 3565479537, \n\t\"completed\": 8844992583, \n\t\"error\": 7004968422\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/job-overview",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"job-overview"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/job-overview/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/job-overview/d152978a-734b-441e-9b34-7498da944059",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"job-overview",
+						"d152978a-734b-441e-9b34-7498da944059"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - cci/jobs-overview",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/jobs-overview",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"jobs-overview"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "410eb7da-9ba5-402b-ac8a-3e99747c91dd",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

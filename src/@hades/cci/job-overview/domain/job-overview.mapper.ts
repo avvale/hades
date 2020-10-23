@@ -21,6 +21,7 @@ import {
     JobOverviewDeletedAt
     
 } from './value-objects';
+
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 import { ExecutionMapper } from '@hades/cci/execution/domain/execution.mapper';
@@ -95,6 +96,8 @@ export class JobOverviewMapper implements IMapper
             new JobOverviewUpdatedAt(jobOverview.updatedAt),
             new JobOverviewDeletedAt(jobOverview.deletedAt),
             
+            
+            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(jobOverview.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(jobOverview.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapModelToAggregate(jobOverview.execution) : undefined,
@@ -125,6 +128,8 @@ export class JobOverviewMapper implements IMapper
             jobOverview.createdAt.value,
             jobOverview.updatedAt.value,
             jobOverview.deletedAt.value,
+            
+            
             
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(jobOverview.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(jobOverview.system) : undefined,
