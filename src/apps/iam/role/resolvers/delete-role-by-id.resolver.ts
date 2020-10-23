@@ -24,7 +24,7 @@ export class DeleteRoleByIdResolver
     ) {}
 
     @Mutation('iamDeleteRoleById')
-    async main(@Args('id') id: string, @Args('constraint') constraint?: QueryStatement, )
+    async main(@Args('id') id: string, @Args('constraint') constraint?: QueryStatement)
     {
         const role = await this.queryBus.ask(new FindRoleByIdQuery(id, constraint));
 

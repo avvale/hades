@@ -24,6 +24,6 @@ export class PaginateRolesResolver
     @Query('iamPaginateRoles')
     async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateRolesQuery(queryStatement, constraint));   
+        return await this.queryBus.ask(new PaginateRolesQuery(queryStatement, constraint));
     }
 }

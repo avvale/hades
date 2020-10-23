@@ -29,7 +29,7 @@ export abstract class IRoleRepository implements IRepository<IamRole>
 
     // update record
     abstract async update(role: IamRole): Promise<void>;
-  
+
     // delete record
     abstract async deleteById(id: RoleId): Promise<void>;
 

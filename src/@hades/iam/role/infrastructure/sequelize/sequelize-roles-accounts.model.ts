@@ -5,7 +5,7 @@ import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/seq
 
 @Table({ modelName: 'iam_roles_accounts', freezeTableName: true, timestamps: false })
 export class IamRolesAccountsModel extends Model<IamRolesAccountsModel> 
-{   
+{
     @ForeignKey(() => IamRoleModel)
     @Column({
         field: 'role_id',

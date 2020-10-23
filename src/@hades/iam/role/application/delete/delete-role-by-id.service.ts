@@ -20,7 +20,7 @@ export class DeleteRoleByIdService
 
         // insert EventBus in object, to be able to apply and commit events
         const roleRegister = this.publisher.mergeObjectContext(role);
-        
+
         roleRegister.deleted(role); // apply event to model events
         roleRegister.commit(); // commit all events of model
     }

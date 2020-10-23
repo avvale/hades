@@ -12,7 +12,7 @@ export class FindRoleByIdQueryHandler implements IQueryHandler<FindRoleByIdQuery
 
     constructor(
         private readonly findRoleByIdService: FindRoleByIdService
-    ) { }
+    ) {}
 
     async execute(query: FindRoleByIdQuery): Promise<RoleResponse>
     {

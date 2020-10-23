@@ -11,7 +11,7 @@ export class GetRolesService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamRole[]>
-    {        
+    {
         return await this.repository.get(queryStatement);
     }
 }

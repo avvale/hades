@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class UpdateRoleDto 
+export class UpdateRoleDto
 {   
     
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '46db8d55-08d3-4b2d-8ee5-0b8f4ea91b16'
+        example     : '4d6b143d-885f-403b-a4d5-b14966719c9e'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateRoleDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'jdxay64s6lx5w25p5j7izmol141voanhd1vzang59rvjd9q18p0qcpr37jxqzww9b6z3oz6std88il8vr8zwiv7zvnpn54ccqsa0wgv4cpzhkeouvwmngnjwo0u9i2krcwjtilm5bd5drqigafhuglb488tuxu0v97m86qno1o25bvpt95jomtkiz62ztmwfodrzf3sp64riwv26i2aj19qwwdbleqykk653tp5iusejwza016shr90hkfwvq9x'
+        example     : 'ms8wp0nb631nizo07dw5sug43p40kmeugsy5fs41h31f3w50ssjvm9esl09wq986y6yr5dv62pjyev6g2cfaxa5y09a1i2ajmdwl4e0tbmmsrlbj4lpdwwwi0c7tfqz5hvs3wmuhgi2uug5cowso8m5j472fgwh6tuw63csdkw2pnjfxgn3wtps8h7r63z89lzv7ivcff8082mk3dc07qpzri1lqkslhmvaunea4rfhiyln8fj0thg15202vunp'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class UpdateRoleDto
     @ApiProperty({
         type        : Boolean,
         description : 'isMaster [input here api field description]',
-        example     : true
+        example     : false
     })
     isMaster: boolean;
     

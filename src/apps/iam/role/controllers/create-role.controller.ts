@@ -18,7 +18,7 @@ import { CreateRoleCommand } from '@hades/iam/role/application/create/create-rol
 @Controller('iam/role')
 @Permissions('iam.role.create')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class CreateRoleController 
+export class CreateRoleController
 {
     constructor(
         private readonly commandBus: ICommandBus,

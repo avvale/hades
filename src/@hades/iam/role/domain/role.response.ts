@@ -4,7 +4,7 @@
 import { PermissionResponse } from '@hades/iam/permission/domain/permission.response';
 import { AccountResponse } from '@hades/iam/account/domain/account.response';
 
-export class RoleResponse 
+export class RoleResponse
 {
     constructor(
         public readonly id: string,

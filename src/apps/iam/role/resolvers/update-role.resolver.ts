@@ -12,6 +12,9 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { UpdateRoleCommand } from '@hades/iam/role/application/update/update-role.command';
 import { FindRoleByIdQuery } from '@hades/iam/role/application/find/find-role-by-id.query';
+import { IamUpdateRoleInput } from './../../../../graphql';
+
+// custom
 import { GetAccountsQuery } from '@hades/iam/account/application/get/get-accounts.query';
 import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-role.model';
 import { AccountResponse } from '@hades/iam/account/domain/account.response';
@@ -19,7 +22,6 @@ import { PermissionResponse } from '@hades/iam/permission/domain/permission.resp
 import { GetPermissionsQuery } from '@hades/iam/permission/application/get/get-permissions.query';
 import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
 import { IamUtils } from '@hades/iam/shared/domain/lib/iam-utils';
-import { IamUpdateRoleInput } from './../../../../graphql';
 
 @Resolver()
 @Permissions('iam.role.update')
@@ -32,14 +34,14 @@ export class UpdateRoleResolver
     ) {}
 
     @Mutation('iamUpdateRole')
-    async main(@Args('payload') payload: IamUpdateRoleInput, @Args('constraint') constraint?: QueryStatement, )
+    async main(@Args('payload') payload: IamUpdateRoleInput, @Args('constraint') constraint?: QueryStatement)
     {
         // get all accounts
         const accounts: AccountResponse[] = await this.queryBus.ask(new GetAccountsQuery({
             include: {
                 model: IamRoleModel,
                 as: 'roles',
-                where: { 
+                where: {
                     id: payload.id
                 }
             }
@@ -47,7 +49,7 @@ export class UpdateRoleResolver
 
         // get permissions assigned to this role
         const permissions: PermissionResponse[] = await this.queryBus.ask(new GetPermissionsQuery({
-            where: { 
+            where: {
                 id: payload.permissionIds
             }
         }));
@@ -68,16 +70,16 @@ export class UpdateRoleResolver
                 accountPermissions
             ));
         }
-        
+
         await this.commandBus.dispatch(new UpdateRoleCommand(
             payload.id,
             payload.name,
             payload.isMaster,
             payload.permissionIds,
             payload.accountIds,
-            
+            constraint,
         ));
-        
-        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id));
+
+        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id, constraint));
     }
 }

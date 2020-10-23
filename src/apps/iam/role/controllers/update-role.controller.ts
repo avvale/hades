@@ -19,7 +19,7 @@ import { FindRoleByIdQuery } from '@hades/iam/role/application/find/find-role-by
 @Controller('iam/role')
 @Permissions('iam.role.update')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class UpdateRoleController 
+export class UpdateRoleController
 {
     constructor(
         private readonly commandBus: ICommandBus,
@@ -29,7 +29,7 @@ export class UpdateRoleController
     @Put()
     @ApiOperation({ summary: 'Update role' })
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: RoleDto})
-    async main(@Body() payload: UpdateRoleDto, @Body('constraint') constraint?: QueryStatement, )
+    async main(@Body() payload: UpdateRoleDto, @Body('constraint') constraint?: QueryStatement)
     {
         await this.commandBus.dispatch(new UpdateRoleCommand(
             payload.id,

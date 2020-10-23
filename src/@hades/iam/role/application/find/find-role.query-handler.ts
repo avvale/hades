@@ -11,7 +11,7 @@ export class FindRoleQueryHandler implements IQueryHandler<FindRoleQuery>
 
     constructor(
         private readonly findRoleService: FindRoleService
-    ) { }
+    ) {}
 
     async execute(query: FindRoleQuery): Promise<RoleResponse>
     {

@@ -16,7 +16,7 @@ import { FindRoleQuery } from '@hades/iam/role/application/find/find-role.query'
 @Controller('iam/role')
 @Permissions('iam.role.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class FindRoleController 
+export class FindRoleController
 {
     constructor(
         private readonly queryBus: IQueryBus
@@ -29,6 +29,6 @@ export class FindRoleController
     @ApiQuery({ name: 'query', type: QueryStatement })
     async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement, )
     {
-        return await this.queryBus.ask(new FindRoleQuery(queryStatement, constraint));   
+        return await this.queryBus.ask(new FindRoleQuery(queryStatement, constraint));
     }
 }

@@ -16,7 +16,7 @@ describe('FindRoleByIdQueryHandler', () =>
     let repository: MockRoleRepository;
     let mapper: RoleMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindRoleByIdQueryHandler', () =>
         mapper          = new RoleMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindRoleByIdQueryHandler should be defined', () => 
+        test('FindRoleByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

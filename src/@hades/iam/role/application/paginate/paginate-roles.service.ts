@@ -12,7 +12,7 @@ export class PaginateRolesService
     ) {}
 
     public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<IamRole>>
-    {        
+    {
         return await this.repository.paginate(queryStatement, constraint);
     }
 }

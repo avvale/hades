@@ -17,7 +17,7 @@ import { Pagination } from '@hades/shared/domain/lib/pagination';
 @Controller('iam/roles/paginate')
 @Permissions('iam.role.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class PaginateRolesController 
+export class PaginateRolesController
 {
     constructor(
         private readonly queryBus: IQueryBus
@@ -30,6 +30,6 @@ export class PaginateRolesController
     @ApiQuery({ name: 'constraint', type: QueryStatement })
     async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
     {
-        return await this.queryBus.ask(new PaginateRolesQuery(queryStatement, constraint));   
+        return await this.queryBus.ask(new PaginateRolesQuery(queryStatement, constraint));
     }
 }

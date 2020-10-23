@@ -2,7 +2,7 @@ import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { IamRole } from './role.aggregate';
 import { RoleResponse } from './role.response';
-import { 
+import {
     RoleId,
     RoleName,
     RoleIsMaster,
@@ -24,7 +24,7 @@ export class RoleMapper implements IMapper
     constructor(
         public options: MapperOptions = { eagerLoading: true }
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param role
@@ -43,13 +43,13 @@ export class RoleMapper implements IMapper
     mapModelsToAggregates(roles: ObjectLiteral[]): IamRole[]
     {
         if (!Array.isArray(roles)) return;
-        
+
         return roles.map(role  => this.makeAggregate(role));
     }
 
     /**
      * Map aggregate to response
-     * @param role 
+     * @param role
      */
     mapAggregateToResponse(role: IamRole): RoleResponse
     {
@@ -92,7 +92,7 @@ export class RoleMapper implements IMapper
     private makeResponse(role: IamRole): RoleResponse
     {
         if (!role) return;
-        
+
         return new RoleResponse(
             role.id.value,
             role.name.value,

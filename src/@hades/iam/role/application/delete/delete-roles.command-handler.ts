@@ -7,7 +7,7 @@ export class DeleteRolesCommandHandler implements ICommandHandler<DeleteRolesCom
 {
     constructor(
         private readonly deleteRolesService: DeleteRolesService
-    ) { }
+    ) {}
 
     async execute(command: DeleteRolesCommand): Promise<void>
     {

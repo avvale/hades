@@ -16,7 +16,7 @@ import { CreateRolesCommand } from '@hades/iam/role/application/create/create-ro
 @Controller('iam/roles')
 @Permissions('iam.role.create')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class CreateRolesController 
+export class CreateRolesController
 {
     constructor(
         private readonly commandBus: ICommandBus,
@@ -26,7 +26,7 @@ export class CreateRolesController
     @ApiOperation({ summary: 'Create roles in batch' })
     @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [RoleDto] })
     @ApiBody({ type: [CreateRoleDto] })
-    async main(@Body() payload: CreateRoleDto[], )
+    async main(@Body() payload: CreateRoleDto[])
     {
         await this.commandBus.dispatch(new CreateRolesCommand(payload));
     }
