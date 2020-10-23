@@ -8,22 +8,22 @@ import { AuthorizationGuard } from './../../../shared/modules/auth/guards/author
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { PaginateTenantsQuery } from '@hades/iam/tenant/application/paginate/paginate-tenants.query';
+import { PaginateRolesQuery } from '@hades/iam/role/application/paginate/paginate-roles.query';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { Pagination } from './../../../../graphql';
 
 @Resolver()
-@Permissions('iam.tenant.get')
+@Permissions('iam.role.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class PaginateTenantsResolver
+export class IamPaginateRolesResolver
 {
     constructor(
         private readonly queryBus: IQueryBus
     ) {}
 
-    @Query('iamPaginateTenants')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<Pagination>
+    @Query('iamPaginateRoles')
+    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateTenantsQuery(queryStatement, constraint));   
+        return await this.queryBus.ask(new PaginateRolesQuery(queryStatement, constraint));
     }
 }

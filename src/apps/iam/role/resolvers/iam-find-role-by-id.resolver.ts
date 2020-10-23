@@ -8,22 +8,22 @@ import { AuthorizationGuard } from './../../../shared/modules/auth/guards/author
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { PaginateTenantsQuery } from '@hades/iam/tenant/application/paginate/paginate-tenants.query';
+import { FindRoleByIdQuery } from '@hades/iam/role/application/find/find-role-by-id.query';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { Pagination } from './../../../../graphql';
+import { IamRole } from './../../../../graphql';
 
 @Resolver()
-@Permissions('iam.tenant.get')
+@Permissions('iam.role.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class PaginateTenantsResolver
+export class IamFindRoleByIdResolver
 {
     constructor(
         private readonly queryBus: IQueryBus
     ) {}
 
-    @Query('iamPaginateTenants')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<Pagination>
+    @Query('iamFindRoleById')
+    async main(@Args('id') id: string, @Args('constraint') constraint?: QueryStatement): Promise<IamRole>
     {
-        return await this.queryBus.ask(new PaginateTenantsQuery(queryStatement, constraint));   
+        return await this.queryBus.ask(new FindRoleByIdQuery(id, constraint));
     }
 }
