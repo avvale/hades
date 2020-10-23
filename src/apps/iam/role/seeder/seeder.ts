@@ -4,7 +4,7 @@ import { CreateRolesCommand } from '@hades/iam/role/application/create/create-ro
 import { SeederModule } from './seeder.module';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

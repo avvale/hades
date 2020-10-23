@@ -18,7 +18,7 @@ import { DeleteRoleByIdCommand } from '@hades/iam/role/application/delete/delete
 @Controller('iam/role')
 @Permissions('iam.role.delete')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class DeleteRoleByIdController 
+export class DeleteRoleByIdController
 {
     constructor(
         private readonly commandBus: ICommandBus,
@@ -28,7 +28,7 @@ export class DeleteRoleByIdController
     @Delete(':id')
     @ApiOperation({ summary: 'Delete role by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: RoleDto })
-    async main(@Param('id') id: string, @Body('constraint') constraint?: QueryStatement, )
+    async main(@Param('id') id: string, @Body('constraint') constraint?: QueryStatement)
     {
         const role = await this.queryBus.ask(new FindRoleByIdQuery(id, constraint));
 

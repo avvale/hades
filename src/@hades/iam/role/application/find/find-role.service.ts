@@ -11,7 +11,7 @@ export class FindRoleService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamRole>
-    {        
+    {
         return await this.repository.find(queryStatement);
     }
 }

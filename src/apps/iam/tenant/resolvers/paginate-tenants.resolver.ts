@@ -24,6 +24,7 @@ export class PaginateTenantsResolver
     @Query('iamPaginateTenants')
     async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<Pagination>
     {
+        console.log('queryStatement',queryStatement);
         return await this.queryBus.ask(new PaginateTenantsQuery(queryStatement, constraint));   
     }
 }

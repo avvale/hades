@@ -33,7 +33,7 @@ export class CreateRoleResolver
             payload.permissionIds,
             payload.accountIds,
         ));
-        
+
         return await this.queryBus.ask(new FindRoleByIdQuery(payload.id));
     }
 }

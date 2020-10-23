@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateRoleCommand } from './create-role.command';
 import { CreateRoleService } from './create-role.service';
-import { 
+import {
     RoleId,
     RoleName,
     RoleIsMaster,
@@ -15,7 +15,7 @@ export class CreateRoleCommandHandler implements ICommandHandler<CreateRoleComma
 {
     constructor(
         private readonly createRoleService: CreateRoleService
-    ) { }
+    ) {}
 
     async execute(command: CreateRoleCommand): Promise<void>
     {

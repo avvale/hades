@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     RoleId,
     RoleName,
     RoleIsMaster,
@@ -43,7 +43,7 @@ export class CreateRoleService
             new RoleUpdatedAt(Utils.nowTimestamp()),
             null
         );
-        
+
         // create
         await this.repository.create(role);
 
@@ -51,7 +51,7 @@ export class CreateRoleService
         const roleRegister = this.publisher.mergeObjectContext(
             role
         );
-        
+
         roleRegister.created(role); // apply event to model events
         roleRegister.commit(); // commit all events of model
     }

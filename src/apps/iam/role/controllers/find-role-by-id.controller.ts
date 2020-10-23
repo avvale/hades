@@ -16,7 +16,7 @@ import { FindRoleByIdQuery } from '@hades/iam/role/application/find/find-role-by
 @Controller('iam/role')
 @Permissions('iam.role.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class FindRoleByIdController 
+export class FindRoleByIdController
 {
     constructor(
         private readonly queryBus: IQueryBus
@@ -25,7 +25,7 @@ export class FindRoleByIdController
     @Get(':id')
     @ApiOperation({ summary: 'Find role by id' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: RoleDto })
-    async main(@Param('id') id: string, @Body('constraint') constraint?: QueryStatement, )
+    async main(@Param('id') id: string, @Body('constraint') constraint?: QueryStatement)
     {
         return await this.queryBus.ask(new FindRoleByIdQuery(id, constraint));
     }

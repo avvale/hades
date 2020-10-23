@@ -11,7 +11,7 @@ export class GetRolesQueryHandler implements IQueryHandler<GetRolesQuery>
 
     constructor(
         private readonly getRolesService: GetRolesService
-    ) { }
+    ) {}
 
     async execute(query: GetRolesQuery): Promise<RoleResponse[]>
     {

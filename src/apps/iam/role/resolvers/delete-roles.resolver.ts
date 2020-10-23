@@ -24,7 +24,7 @@ export class DeleteRolesResolver
     ) {}
 
     @Mutation('iamDeleteRoles')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, )
+    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement)
     {
         const roles = await this.queryBus.ask(new GetRolesQuery(queryStatement, constraint));
 

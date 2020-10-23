@@ -8,15 +8,15 @@ export class PaginateRolesQueryHandler implements IQueryHandler<PaginateRolesQue
 {
     constructor(
         private readonly paginateRolesService: PaginateRolesService
-    ) { }
+    ) {}
 
     async execute(query: PaginateRolesQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateRolesService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginateRolesService.main(query.queryStatement, query.constraint);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

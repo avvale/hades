@@ -21,27 +21,19 @@ export class SequelizeRoleRepository extends SequelizeRepository<IamRole, IamRol
     ) {
         super();
     }
-    
     // hook called after create aggregate
     async createdAggregateHook(aggregate: IamRole, model: IamRoleModel) 
     {
         // add many to many relation
-        
-        if (aggregate.permissionIds.length > 0) await model.$add('permissionIds', aggregate.permissionIds.value);
-        
-        if (aggregate.accountIds.length > 0) await model.$add('accountIds', aggregate.accountIds.value);
-        
+        if (aggregate.permissionIds.length > 0) await model.$add('permissions', aggregate.permissionIds.value);
+        if (aggregate.accountIds.length > 0) await model.$add('accounts', aggregate.accountIds.value);
     }
 
     // hook called after create aggregate
     async updatedAggregateHook(aggregate: IamRole, model: IamRoleModel) 
     {
         // set many to many relation
-        
-        if (aggregate.permissionIds.isArray()) await model.$set('permissionIds', aggregate.permissionIds.value);
-        
-        if (aggregate.accountIds.isArray()) await model.$set('accountIds', aggregate.accountIds.value);
-         
+        if (aggregate.permissionIds.isArray()) await model.$set('permissions', aggregate.permissionIds.value);
+        if (aggregate.accountIds.isArray()) await model.$set('accounts', aggregate.accountIds.value);
     }
-    
 }

@@ -16,7 +16,7 @@ import { GetRolesQuery } from '@hades/iam/role/application/get/get-roles.query';
 @Controller('iam/roles')
 @Permissions('iam.role.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class GetRolesController 
+export class GetRolesController
 {
     constructor(
         private readonly queryBus: IQueryBus
@@ -27,8 +27,8 @@ export class GetRolesController
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [RoleDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement, )
+    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
     {
-        return await this.queryBus.ask(new GetRolesQuery(queryStatement, constraint));   
+        return await this.queryBus.ask(new GetRolesQuery(queryStatement, constraint));
     }
 }

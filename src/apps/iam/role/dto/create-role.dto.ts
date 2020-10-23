@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateRoleDto 
+export class CreateRoleDto
 {   
     
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '46db8d55-08d3-4b2d-8ee5-0b8f4ea91b16'
+        example     : '4d6b143d-885f-403b-a4d5-b14966719c9e'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateRoleDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'kjlsrc4z0155qry0pfy3tof5ttdxixn32yw1my5baxrr3aksxhvdnkaes5u6w2puqcn1gfs4ebiaftpdn56jzmtf8im9fdmzn0jw5gyou9br6o290bvqkn23wje6dfvmtw4yrgxpkjts815jvxnpgyjt98vssyxh7jqmj7lhje7brbqv4dmvnv7od74i57akyvr3p4tk3tqxlgvq20c9fnhyduvqyg711hbuiubtnyt0piec7qakjytysf8blzq'
+        example     : 'j35pxt3hqqt8lb2r97aozym1ot04krj5truyqufxms1zxiyhkeoez5qda3kjxibrk2i04qyuf55yyo39a9j4dhlldf3b7m6vguwkgk9kecgffdbjgn85fwz57xuxbbugfjkkg09d34dazcf3g69gkc32z7nhq1rnhen2s98m7xu1y9gmfm80ekq9wv72s5n3g8un85qmy8ar7e0z3yy8mkkfwwubsox6fj3fqmagrdzypwyxv5nm8uz6jq85foi'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateRoleDto
     @ApiProperty({
         type        : Boolean,
         description : 'isMaster [input here api field description]',
-        example     : false
+        example     : true
     })
     isMaster: boolean;
     

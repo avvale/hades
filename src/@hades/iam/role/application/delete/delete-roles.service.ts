@@ -13,7 +13,7 @@ export class DeleteRolesService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<void>
-    {   
+    {
         // get object to delete
         const roles = await this.repository.get(queryStatement);
 

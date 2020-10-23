@@ -11,7 +11,7 @@ export class FindRoleByIdService
     ) {}
 
     public async main(id: RoleId): Promise<IamRole>
-    {        
+    {
         return await this.repository.findById(id);
     }
 }
