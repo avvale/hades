@@ -1,3 +1,4 @@
+
 import { TenantResponse } from '@hades/iam/tenant/domain/tenant.response';
 import { SystemResponse } from '@hades/cci/system/domain/system.response';
 import { ExecutionResponse } from '@hades/cci/execution/domain/execution.response';
@@ -23,6 +24,8 @@ export class JobOverviewResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
+        
+        
         
         public readonly tenant: TenantResponse,
         public readonly system: SystemResponse,

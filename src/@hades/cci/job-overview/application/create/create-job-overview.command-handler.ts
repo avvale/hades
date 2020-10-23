@@ -42,7 +42,6 @@ export class CreateJobOverviewCommandHandler implements ICommandHandler<CreateJo
             new JobOverviewCancelled(command.cancelled),
             new JobOverviewCompleted(command.completed),
             new JobOverviewError(command.error),
-            
         );
     }
 }

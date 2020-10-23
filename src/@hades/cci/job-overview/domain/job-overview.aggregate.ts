@@ -21,6 +21,7 @@ import {
 import { CreatedJobOverviewEvent } from './../application/events/created-job-overview.event';
 import { UpdatedJobOverviewEvent } from './../application/events/updated-job-overview.event';
 import { DeletedJobOverviewEvent } from './../application/events/deleted-job-overview.event';
+
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
@@ -47,6 +48,8 @@ export class CciJobOverview extends AggregateRoot
     deletedAt: JobOverviewDeletedAt;
     
     // eager relationship
+    
+    
     tenant: IamTenant;
     system: CciSystem;
     execution: CciExecution;
@@ -75,6 +78,8 @@ export class CciJobOverview extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
+        
+        
         this.tenant = tenant;
         this.system = system;
         this.execution = execution;
@@ -184,6 +189,8 @@ export class CciJobOverview extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             execution: this.execution?.toDTO(),
