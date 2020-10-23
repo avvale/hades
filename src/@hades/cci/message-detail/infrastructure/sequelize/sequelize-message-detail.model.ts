@@ -5,7 +5,7 @@ import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/seque
 import { CciExecutionModel } from '@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model';
 
 @Table({ modelName: 'cci_message_detail', freezeTableName: true })
-export class CciMessageDetailModel extends Model<CciMessageDetailModel> 
+export class CciMessageDetailModel extends Model<CciMessageDetailModel>
 {
     @Column({
         field: 'id',
@@ -20,7 +20,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
         field: 'tenant_id',
         allowNull: false,
         type: DataTypes.UUID,
-        references: {  
+        references: {
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -43,7 +43,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
         field: 'system_id',
         allowNull: false,
         type: DataTypes.UUID,
-        references: {  
+        references: {
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -73,7 +73,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
         field: 'execution_id',
         allowNull: false,
         type: DataTypes.UUID,
-        references: {  
+        references: {
             key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -112,7 +112,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
     })
     executionMonitoringEndAt: string;
 
-    @Index
+    // @Index :: https://github.com/RobinBuschmann/sequelize-typescript/issues/725
     @Column({
         field: 'flow_hash',
         allowNull: false,

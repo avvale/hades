@@ -259,11 +259,11 @@
         },
         {
             "path": "src/@hades/cci/message-detail/infrastructure/seeds/message-detail.seed.ts",
-            "integrity": "sha1:d11406fcf00f4829a7b0c40a5e1dd14b66d0be26"
+            "integrity": "sha1:b16a9a679ebf96115b7d3b9612f3dadc791a6387"
         },
         {
             "path": "src/@hades/cci/message-detail/infrastructure/sequelize/sequelize-message-detail.model.ts",
-            "integrity": "sha1:61193c266feadea8e5a50dd8718e0257c12bb808"
+            "integrity": "sha1:d604934d73a02836c2c43c5c53006958a612ea35"
         },
         {
             "path": "src/@hades/cci/message-detail/infrastructure/sequelize/sequelize-message-detail.repository.ts",
@@ -511,19 +511,19 @@
         },
         {
             "path": "src/apps/cci/message-detail/dto/message-detail.dto.ts",
-            "integrity": "sha1:0db15c0e963f696a29c6bd3892afd9ab6a851db1"
+            "integrity": "sha1:1fa07281d30cfb8427e1284905b2baa5e12dfde0"
         },
         {
             "path": "src/apps/cci/message-detail/dto/create-message-detail.dto.ts",
-            "integrity": "sha1:2c4a620c722bf8ebda55655d97ba5377c0e80007"
+            "integrity": "sha1:7dd07231e0cff227b66d9a8fa7d44b51ddbb9b84"
         },
         {
             "path": "src/apps/cci/message-detail/dto/update-message-detail.dto.ts",
-            "integrity": "sha1:e3b8d0cf5adab51156fce4b943ed8ccf5319ee54"
+            "integrity": "sha1:155a510c92b4de956d0999e117d4ac3d818b5b20"
         },
         {
             "path": "src/apps/cci/message-detail/graphql/message-detail.graphql",
-            "integrity": "sha1:3addfcc3b1357df43e0075ca4bdd5302afc7e51b"
+            "integrity": "sha1:ce363e98fffeb8df4558912190ff1088b254f240"
         },
         {
             "path": "src/apps/cci/message-detail/index.ts",
@@ -611,7 +611,7 @@
         },
         {
             "path": "postman/cci.message-detail.postman.json",
-            "integrity": "sha1:08899aba3bb0e8680897da39dead2b2c5af4436f"
+            "integrity": "sha1:215af069aa407af42aca70c1374b797000081dd6"
         }
     ]
 }
