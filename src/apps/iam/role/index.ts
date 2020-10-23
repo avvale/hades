@@ -1,45 +1,45 @@
 // controllers
-import { CreateRoleController } from './controllers/create-role.controller';
-import { CreateRolesController } from './controllers/create-roles.controller';
-import { PaginateRolesController } from './controllers/paginate-roles.controller';
-import { GetRolesController } from './controllers/get-roles.controller';
-import { FindRoleByIdController } from './controllers/find-role-by-id.controller';
-import { FindRoleController } from './controllers/find-role.controller';
-import { UpdateRoleController } from './controllers/update-role.controller';
-import { DeleteRoleByIdController } from './controllers/delete-role-by-id.controller';
-import { DeleteRolesController } from './controllers/delete-roles.controller';
+import { IamCreateRoleController } from './controllers/iam-create-role.controller';
+import { IamCreateRolesController } from './controllers/iam-create-roles.controller';
+import { IamPaginateRolesController } from './controllers/iam-paginate-roles.controller';
+import { IamGetRolesController } from './controllers/iam-get-roles.controller';
+import { IamFindRoleByIdController } from './controllers/iam-find-role-by-id.controller';
+import { IamFindRoleController } from './controllers/iam-find-role.controller';
+import { IamUpdateRoleController } from './controllers/iam-update-role.controller';
+import { IamDeleteRoleByIdController } from './controllers/iam-delete-role-by-id.controller';
+import { IamDeleteRolesController } from './controllers/iam-delete-roles.controller';
 
 // resolvers
-import { CreateRoleResolver } from './resolvers/create-role.resolver';
-import { CreateRolesResolver } from './resolvers/create-roles.resolver';
-import { PaginateRolesResolver } from './resolvers/paginate-roles.resolver';
-import { GetRolesResolver } from './resolvers/get-roles.resolver';
-import { FindRoleResolver } from './resolvers/find-role.resolver';
-import { FindRoleByIdResolver } from './resolvers/find-role-by-id.resolver';
-import { UpdateRoleResolver } from './resolvers/update-role.resolver';
-import { DeleteRoleByIdResolver } from './resolvers/delete-role-by-id.resolver';
-import { DeleteRolesResolver } from './resolvers/delete-roles.resolver';
+import { IamCreateRoleResolver } from './resolvers/iam-create-role.resolver';
+import { IamCreateRolesResolver } from './resolvers/iam-create-roles.resolver';
+import { IamPaginateRolesResolver } from './resolvers/iam-paginate-roles.resolver';
+import { IamGetRolesResolver } from './resolvers/iam-get-roles.resolver';
+import { IamFindRoleResolver } from './resolvers/iam-find-role.resolver';
+import { IamFindRoleByIdResolver } from './resolvers/iam-find-role-by-id.resolver';
+import { IamUpdateRoleResolver } from './resolvers/iam-update-role.resolver';
+import { IamDeleteRoleByIdResolver } from './resolvers/iam-delete-role-by-id.resolver';
+import { IamDeleteRolesResolver } from './resolvers/iam-delete-roles.resolver';
 
 export const IamRoleControllers = [
-    CreateRoleController,
-    CreateRolesController,
-    PaginateRolesController,
-    GetRolesController,
-    FindRoleByIdController,
-    FindRoleController,
-    UpdateRoleController,
-    DeleteRoleByIdController,
-    DeleteRolesController,
+    IamCreateRoleController,
+    IamCreateRolesController,
+    IamPaginateRolesController,
+    IamGetRolesController,
+    IamFindRoleByIdController,
+    IamFindRoleController,
+    IamUpdateRoleController,
+    IamDeleteRoleByIdController,
+    IamDeleteRolesController,
 ];
 
 export const IamRoleResolvers = [
-    CreateRoleResolver,
-    CreateRolesResolver,
-    PaginateRolesResolver,
-    GetRolesResolver,
-    FindRoleResolver,
-    FindRoleByIdResolver,
-    UpdateRoleResolver,
-    DeleteRoleByIdResolver,
-    DeleteRolesResolver,
+    IamCreateRoleResolver,
+    IamCreateRolesResolver,
+    IamPaginateRolesResolver,
+    IamGetRolesResolver,
+    IamFindRoleResolver,
+    IamFindRoleByIdResolver,
+    IamUpdateRoleResolver,
+    IamDeleteRoleByIdResolver,
+    IamDeleteRolesResolver,
 ];

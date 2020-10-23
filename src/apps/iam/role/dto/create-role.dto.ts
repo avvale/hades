@@ -6,7 +6,7 @@ export class CreateRoleDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '4d6b143d-885f-403b-a4d5-b14966719c9e'
+        example     : '6dff0dda-5a79-49fe-87b0-fd9378dbc58e'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateRoleDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'j35pxt3hqqt8lb2r97aozym1ot04krj5truyqufxms1zxiyhkeoez5qda3kjxibrk2i04qyuf55yyo39a9j4dhlldf3b7m6vguwkgk9kecgffdbjgn85fwz57xuxbbugfjkkg09d34dazcf3g69gkc32z7nhq1rnhen2s98m7xu1y9gmfm80ekq9wv72s5n3g8un85qmy8ar7e0z3yy8mkkfwwubsox6fj3fqmagrdzypwyxv5nm8uz6jq85foi'
+        example     : 'zx1edpu1eajigj0r9u8civhu87b0t806xjjk69ni6sp9uxpembg7oshhis4ea8il7sod7ppgntbjnqtk4tamrwfv88e1kk19o0ynbpa06ckhtjec0n73314mund4ornrvnpauznd94you0oaj72bfhg3h7xhd5a5fdnp4tiksrr3zdf196nwb68g791hfc5z8pgbqk7zgxvec3ofmk2lpbuy99fte4joeqk8irkworshoc2b6mzey8knjgmmpsn'
     })
     name: string;
     

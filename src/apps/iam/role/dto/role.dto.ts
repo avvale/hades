@@ -8,7 +8,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '4d6b143d-885f-403b-a4d5-b14966719c9e'
+        example     : '6dff0dda-5a79-49fe-87b0-fd9378dbc58e'
     })
     id: string;
     
@@ -17,7 +17,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'ef95id9yzk1dc1gk81yv008vcpq760byc2tfq4opq1n9o2rj5utn58zr4fncnl1nmt5w53zr0vhw0i155agw9n1lsq85nvtwdgimvgcp4750854znkgz3kji2v50lajcbbnk9ppako9i3s97hmq17xzc79xah5xk8dsvqbma3srvcrqvhgh7wc6q9nfgy8v6z2i2avxba3ldy3i128nwqke8s80rwvc0zizjvxn0x2yet8mc5d61c1enhzmj4fn'
+        example     : '36camwuxzcafo8expsh4fw03v7uirmjshwtq99529o622m5s3xu2ppsslnmz0n9wqezwf22bsdpjehdm42n7b2rixs5ztag43ygsejxnue6oboojaqcff1nv6wp4m76wb2d3cyiplwr47ncgsc3ubdnzovxvw5ebwwg9gy6newy6up3lj1q0fua249olfio4vf0p0d0fkz7stdj1rssivuanh43ahatiazqo2rnbrg3bzbpkfi0q01dsji0rnrm'
     })
     name: string;
     
@@ -53,7 +53,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-10-22 15:28:51'
+        example     : '2020-10-23 10:41:42'
     })
     createdAt: string;
     
@@ -62,7 +62,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-10-22 23:57:19'
+        example     : '2020-10-22 22:55:06'
     })
     updatedAt: string;
     
@@ -71,7 +71,7 @@ export class RoleDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-10-22 17:32:06'
+        example     : '2020-10-23 11:53:36'
     })
     deletedAt: string;
     
