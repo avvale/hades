@@ -977,9 +977,9 @@ export interface IQuery {
     cciFindJobDetailById(id?: string): CciJobDetail | Promise<CciJobDetail>;
     cciGetJobsDetail(query?: QueryStatement): CciJobDetail[] | Promise<CciJobDetail[]>;
     cciPaginateJobsDetail(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    cciFindJobOverview(query?: QueryStatement): CciJobOverview | Promise<CciJobOverview>;
-    cciFindJobOverviewById(id?: string): CciJobOverview | Promise<CciJobOverview>;
-    cciGetJobsOverview(query?: QueryStatement): CciJobOverview[] | Promise<CciJobOverview[]>;
+    cciFindJobOverview(query?: QueryStatement, constraint?: QueryStatement): CciJobOverview | Promise<CciJobOverview>;
+    cciFindJobOverviewById(id?: string, constraint?: QueryStatement): CciJobOverview | Promise<CciJobOverview>;
+    cciGetJobsOverview(query?: QueryStatement, constraint?: QueryStatement): CciJobOverview[] | Promise<CciJobOverview[]>;
     cciPaginateJobsOverview(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindMessageDetail(query?: QueryStatement, constraint?: QueryStatement): CciMessageDetail | Promise<CciMessageDetail>;
     cciFindMessageDetailById(id?: string, constraint?: QueryStatement): CciMessageDetail | Promise<CciMessageDetail>;
@@ -1093,9 +1093,9 @@ export interface IMutation {
     cciDeleteJobsDetail(query?: QueryStatement): CciJobDetail[] | Promise<CciJobDetail[]>;
     cciCreateJobOverview(payload: CciCreateJobOverviewInput): CciJobOverview | Promise<CciJobOverview>;
     cciCreateJobsOverview(payload: CciCreateJobOverviewInput[]): boolean | Promise<boolean>;
-    cciUpdateJobOverview(payload: CciUpdateJobOverviewInput): CciJobOverview | Promise<CciJobOverview>;
-    cciDeleteJobOverviewById(id: string): CciJobOverview | Promise<CciJobOverview>;
-    cciDeleteJobsOverview(query?: QueryStatement): CciJobOverview[] | Promise<CciJobOverview[]>;
+    cciUpdateJobOverview(payload: CciUpdateJobOverviewInput, constraint?: QueryStatement): CciJobOverview | Promise<CciJobOverview>;
+    cciDeleteJobOverviewById(id: string, constraint?: QueryStatement): CciJobOverview | Promise<CciJobOverview>;
+    cciDeleteJobsOverview(query?: QueryStatement, constraint?: QueryStatement): CciJobOverview[] | Promise<CciJobOverview[]>;
     cciCreateMessageDetail(payload: CciCreateMessageDetailInput): CciMessageDetail | Promise<CciMessageDetail>;
     cciCreateMessagesDetail(payload: CciCreateMessageDetailInput[]): boolean | Promise<boolean>;
     cciUpdateMessageDetail(payload: CciUpdateMessageDetailInput, constraint?: QueryStatement): CciMessageDetail | Promise<CciMessageDetail>;
@@ -1383,6 +1383,7 @@ export interface CciJobOverview {
     systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
+    executionId: string;
     execution: CciExecution;
     executionType: CciJobOverviewExecutionType;
     executionExecutedAt: GraphQLTimestamp;
@@ -1398,11 +1399,14 @@ export interface CciJobOverview {
 
 export interface CciMessageDetail {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
+    systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
     scenario?: GraphQLString;
+    executionId: string;
     execution: CciExecution;
     executionType: CciMessageDetailExecutionType;
     executionExecutedAt: GraphQLTimestamp;
@@ -1439,9 +1443,6 @@ export interface CciMessageDetail {
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
-    tenantId: string;
-    systemId: string;
-    executionId: string;
 }
 
 export interface CciMessageOverview {
