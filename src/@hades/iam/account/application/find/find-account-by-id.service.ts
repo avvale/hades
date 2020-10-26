@@ -11,7 +11,7 @@ export class FindAccountByIdService
     ) {}
 
     public async main(id: AccountId): Promise<IamAccount>
-    {        
+    {
         return await this.repository.findById(id);
     }
 }

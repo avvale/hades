@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
@@ -43,7 +43,7 @@ export class CreatePermissionsService
             new PermissionUpdatedAt(Utils.nowTimestamp()),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregatePermissions, { updateOnDuplicate: [
                 'name',
@@ -54,7 +54,7 @@ export class CreatePermissionsService
         // create AddPermissionsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const permissionsRegistered = this.publisher.mergeObjectContext(new AddPermissionsContextEvent(aggregatePermissions));
- 
+
         permissionsRegistered.created(); // apply event to model events
         permissionsRegistered.commit(); // commit all events of model
     }

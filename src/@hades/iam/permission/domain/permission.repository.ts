@@ -29,7 +29,7 @@ export abstract class IPermissionRepository implements IRepository<IamPermission
 
     // update record
     abstract async update(permission: IamPermission): Promise<void>;
-  
+
     // delete record
     abstract async deleteById(id: PermissionId): Promise<void>;
 

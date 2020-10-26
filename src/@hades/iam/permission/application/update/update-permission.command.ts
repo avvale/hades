@@ -1,6 +1,6 @@
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 
-export class UpdatePermissionCommand 
+export class UpdatePermissionCommand
 {
     constructor(
         public readonly id: string,

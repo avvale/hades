@@ -11,7 +11,7 @@ export class GetBoundedContextsService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamBoundedContext[]>
-    {        
+    {
         return await this.repository.get(queryStatement);
     }
 }

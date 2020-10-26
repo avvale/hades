@@ -2,7 +2,7 @@ import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { IamUser } from './user.aggregate';
 import { UserResponse } from './user.response';
-import { 
+import {
     UserId,
     UserAccountId,
     UserName,
@@ -29,7 +29,7 @@ export class UserMapper implements IMapper
     constructor(
         public options: MapperOptions = { eagerLoading: true }
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param user
@@ -48,13 +48,13 @@ export class UserMapper implements IMapper
     mapModelsToAggregates(users: ObjectLiteral[]): IamUser[]
     {
         if (!Array.isArray(users)) return;
-        
+
         return users.map(user  => this.makeAggregate(user));
     }
 
     /**
      * Map aggregate to response
-     * @param user 
+     * @param user
      */
     mapAggregateToResponse(user: IamUser): UserResponse
     {
@@ -102,7 +102,7 @@ export class UserMapper implements IMapper
     private makeResponse(user: IamUser): UserResponse
     {
         if (!user) return;
-        
+
         return new UserResponse(
             user.id.value,
             user.accountId.value,

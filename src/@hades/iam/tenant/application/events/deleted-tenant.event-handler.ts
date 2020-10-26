@@ -4,7 +4,7 @@ import { DeletedTenantEvent } from './deleted-tenant.event';
 @EventsHandler(DeletedTenantEvent)
 export class DeletedTenantEventHandler implements IEventHandler<DeletedTenantEvent>
 {
-    handle(event: DeletedTenantEvent) 
+    handle(event: DeletedTenantEvent)
     {
         // console.log('DeletedTenantEvent: ', event);
     }

@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginatePermissionsQuery } from './paginate-permissions.query';
 import { PaginatePermissionsService } from './paginate-permissions.service';
 
-describe('PaginatePermissionsQueryHandler', () => 
+describe('PaginatePermissionsQueryHandler', () =>
 {
     let queryHandler: PaginatePermissionsQueryHandler;
     let service: PaginatePermissionsService;
     let repository: MockPermissionRepository;
     let mapper: PermissionMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

@@ -11,7 +11,7 @@ export class FindPermissionQueryHandler implements IQueryHandler<FindPermissionQ
 
     constructor(
         private readonly findPermissionService: FindPermissionService
-    ) { }
+    ) {}
 
     async execute(query: FindPermissionQuery): Promise<PermissionResponse>
     {

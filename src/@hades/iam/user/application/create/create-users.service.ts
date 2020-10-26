@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     UserId,
     UserAccountId,
     UserName,
@@ -64,14 +64,14 @@ export class CreateUsersService
             new UserUpdatedAt(Utils.nowTimestamp()),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateUsers);
 
         // create AddUsersContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const usersRegistered = this.publisher.mergeObjectContext(new AddUsersContextEvent(aggregateUsers));
- 
+
         usersRegistered.created(); // apply event to model events
         usersRegistered.commit(); // commit all events of model
     }

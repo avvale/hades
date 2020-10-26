@@ -16,7 +16,7 @@ describe('FindAccountByIdQueryHandler', () =>
     let repository: MockAccountRepository;
     let mapper: AccountMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindAccountByIdQueryHandler', () =>
         mapper          = new AccountMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindAccountByIdQueryHandler should be defined', () => 
+        test('FindAccountByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

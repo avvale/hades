@@ -11,7 +11,7 @@ export class FindUserService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamUser>
-    {        
+    {
         return await this.repository.find(queryStatement);
     }
 }

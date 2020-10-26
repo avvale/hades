@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateTenantCommand } from './create-tenant.command';
 import { CreateTenantService } from './create-tenant.service';
-import { 
+import {
     TenantId,
     TenantName,
     TenantCode,
@@ -17,7 +17,7 @@ export class CreateTenantCommandHandler implements ICommandHandler<CreateTenantC
 {
     constructor(
         private readonly createTenantService: CreateTenantService
-    ) { }
+    ) {}
 
     async execute(command: CreateTenantCommand): Promise<void>
     {

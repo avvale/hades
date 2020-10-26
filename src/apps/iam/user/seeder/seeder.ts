@@ -4,7 +4,7 @@ import { CreateUsersCommand } from '@hades/iam/user/application/create/create-us
 import { SeederModule } from './seeder.module';
 import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

@@ -11,7 +11,7 @@ export class FindBoundedContextByIdService
     ) {}
 
     public async main(id: BoundedContextId): Promise<IamBoundedContext>
-    {        
+    {
         return await this.repository.findById(id);
     }
 }

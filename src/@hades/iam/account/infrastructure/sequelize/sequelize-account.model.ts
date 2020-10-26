@@ -7,7 +7,7 @@ import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/seque
 import { IamTenantsAccountsModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model';
 
 @Table({ modelName: 'iam_account', freezeTableName: true })
-export class IamAccountModel extends Model<IamAccountModel> 
+export class IamAccountModel extends Model<IamAccountModel>
 {
     @Column({
         field: 'id',

@@ -22,7 +22,7 @@ type IamUser
 input IamCreateUserInput
 {
     id: ID!
-    accountId: ID
+    accountId: ID!
     name: GraphQLString!
     surname: GraphQLString
     avatar: GraphQLString
@@ -51,7 +51,7 @@ input IamUpdateUserInput
     
 }
 
-type Query 
+type Query
 {
     iamFindUser(query:QueryStatement constraint:QueryStatement): IamUser
     iamFindUserById(id:ID constraint:QueryStatement): IamUser

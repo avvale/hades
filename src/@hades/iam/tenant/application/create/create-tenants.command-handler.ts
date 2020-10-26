@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateTenantsCommand } from './create-tenants.command';
 import { CreateTenantsService } from './create-tenants.service';
-import { 
+import {
     TenantId,
     TenantName,
     TenantCode,
@@ -17,14 +17,14 @@ export class CreateTenantsCommandHandler implements ICommandHandler<CreateTenant
 {
     constructor(
         private readonly createTenantsService: CreateTenantsService
-    ) { }
+    ) {}
 
     async execute(command: CreateTenantsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createTenantsService.main(
             command.tenants
-                .map(tenant => { 
+                .map(tenant => {
                     return {
                         id: new TenantId(tenant.id),
                         name: new TenantName(tenant.name),

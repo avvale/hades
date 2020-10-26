@@ -1,6 +1,6 @@
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 
-export class UpdateBoundedContextCommand 
+export class UpdateBoundedContextCommand
 {
     constructor(
         public readonly id: string,

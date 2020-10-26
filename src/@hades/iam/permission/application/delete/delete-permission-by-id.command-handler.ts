@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeletePermissionByIdCommand } from './delete-permission-by-id.command';
 import { DeletePermissionByIdService } from './delete-permission-by-id.service';
-import { 
+import {
     PermissionId
 } from './../../domain/value-objects';
 
@@ -10,7 +10,7 @@ export class DeletePermissionByIdCommandHandler implements ICommandHandler<Delet
 {
     constructor(
         private readonly deletePermissionByIdService: DeletePermissionByIdService
-    ) { }
+    ) {}
 
     async execute(command: DeletePermissionByIdCommand): Promise<void>
     {

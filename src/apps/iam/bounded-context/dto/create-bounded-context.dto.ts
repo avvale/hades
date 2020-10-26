@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateBoundedContextDto 
+export class CreateBoundedContextDto
 {   
     
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '7dc7a3cd-d918-45f4-a418-f2c48606d352'
+        example     : '100be2dd-fc5a-482d-9093-45dd8d9d58fb'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateBoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : '10vh4emxbdx9rpb137h2uaa5knzngd7iayvq0nfxyxyh62ron8oknxgwdc7537h35607sfz37lzhs6npf28psayrp1ctgj21yhn1cqk4ibtcy8rryvw8plw8ktqi4w7lq8uqq6trzjmpedi9zkdw766et5vqlwsfg1mibm43wnzv84r9vim8ved9ohichinxswfnmrka2hyhsu59c85t9f5d2l5qi0kecvrdnlt4s40iijma6v5snrkhlswwkib'
+        example     : 'etm1piitawv4g0qel0v1mwaicz7wu0vp2od5vu2qltu8sjcehpelpjz900mqosrrbe2b5bqx6l1zs3gsug5vkf0hrgrms5yj5tydttxksmmv2x9htbzy6r9qlu2p9eno9q745a6ctenypiwh1ukkb476xdeglwmsgi90f64ti5yzihnu90012b2eygz2u66aftiq0nqu0ognls7hfb0xt2e2y801g8yn5wu79gda2ugmux9urygjtcib0951dwp'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateBoundedContextDto
     @ApiProperty({
         type        : String,
         description : 'root [input here api field description]',
-        example     : '4vqkys4cu2ebwzpp51rn0slhhzkbqw'
+        example     : '5s04wdfj3m4oaelc63gp9lno70ki5w'
     })
     root: string;
     
@@ -33,7 +33,7 @@ export class CreateBoundedContextDto
     @ApiProperty({
         type        : Number,
         description : 'sort [input here api field description]',
-        example     : 738152
+        example     : 715983
     })
     sort: number;
     

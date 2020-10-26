@@ -29,7 +29,7 @@ export abstract class IAccountRepository implements IRepository<IamAccount>
 
     // update record
     abstract async update(account: IamAccount): Promise<void>;
-  
+
     // delete record
     abstract async deleteById(id: AccountId): Promise<void>;
 

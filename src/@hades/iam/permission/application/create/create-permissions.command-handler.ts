@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreatePermissionsCommand } from './create-permissions.command';
 import { CreatePermissionsService } from './create-permissions.service';
-import { 
+import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
@@ -14,14 +14,14 @@ export class CreatePermissionsCommandHandler implements ICommandHandler<CreatePe
 {
     constructor(
         private readonly createPermissionsService: CreatePermissionsService
-    ) { }
+    ) {}
 
     async execute(command: CreatePermissionsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createPermissionsService.main(
             command.permissions
-                .map(permission => { 
+                .map(permission => {
                     return {
                         id: new PermissionId(permission.id),
                         name: new PermissionName(permission.name),

@@ -11,7 +11,7 @@ export class GetUsersQueryHandler implements IQueryHandler<GetUsersQuery>
 
     constructor(
         private readonly getUsersService: GetUsersService
-    ) { }
+    ) {}
 
     async execute(query: GetUsersQuery): Promise<UserResponse[]>
     {

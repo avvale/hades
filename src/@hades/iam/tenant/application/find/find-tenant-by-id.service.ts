@@ -11,7 +11,7 @@ export class FindTenantByIdService
     ) {}
 
     public async main(id: TenantId): Promise<IamTenant>
-    {        
+    {
         return await this.repository.findById(id);
     }
 }

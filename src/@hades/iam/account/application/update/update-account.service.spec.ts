@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 import { UpdateAccountService } from './update-account.service';
-import { 
+import {
     AccountId,
     AccountType,
     AccountEmail,
@@ -18,19 +18,18 @@ import {
     AccountTenantIds,
     AccountCreatedAt,
     AccountUpdatedAt,
-    AccountDeletedAt
-    
+    AccountDeletedAt,
 } from './../../domain/value-objects';
 import { IAccountRepository } from './../../domain/account.repository';
 import { MockAccountRepository } from './../../infrastructure/mock/mock-account.repository';
 
-describe('UpdateAccountService', () => 
+describe('UpdateAccountService', () =>
 {
     let service: UpdateAccountService;
     let repository: IAccountRepository;
     let mockRepository: MockAccountRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -39,7 +38,7 @@ describe('UpdateAccountService', () =>
                 EventPublisher,
                 UpdateAccountService,
                 MockAccountRepository,
-                { 
+                {
                     provide: IAccountRepository,
                     useValue: {
                         update: (item) => {}
@@ -53,7 +52,7 @@ describe('UpdateAccountService', () =>
         mockRepository  = module.get(MockAccountRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateAccountService should be defined', () => 
         {

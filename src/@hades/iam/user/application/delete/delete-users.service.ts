@@ -13,7 +13,7 @@ export class DeleteUsersService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<void>
-    {   
+    {
         // get object to delete
         const users = await this.repository.get(queryStatement);
 

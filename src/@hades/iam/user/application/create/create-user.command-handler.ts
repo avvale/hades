@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateUserCommand } from './create-user.command';
 import { CreateUserService } from './create-user.service';
-import { 
+import {
     UserId,
     UserAccountId,
     UserName,
@@ -21,7 +21,7 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
 {
     constructor(
         private readonly createUserService: CreateUserService
-    ) { }
+    ) {}
 
     async execute(command: CreateUserCommand): Promise<void>
     {
@@ -38,7 +38,6 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
             new UserPassword(command.password, {}, {haveToEncrypt: true}),
             new UserRememberToken(command.rememberToken),
             new UserData(command.data),
-            
         );
     }
 }

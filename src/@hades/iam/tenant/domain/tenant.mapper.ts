@@ -2,7 +2,7 @@ import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { IamTenant } from './tenant.aggregate';
 import { TenantResponse } from './tenant.response';
-import { 
+import {
     TenantId,
     TenantName,
     TenantCode,
@@ -25,7 +25,7 @@ export class TenantMapper implements IMapper
     constructor(
         public options: MapperOptions = { eagerLoading: true }
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param tenant
@@ -44,13 +44,13 @@ export class TenantMapper implements IMapper
     mapModelsToAggregates(tenants: ObjectLiteral[]): IamTenant[]
     {
         if (!Array.isArray(tenants)) return;
-        
+
         return tenants.map(tenant  => this.makeAggregate(tenant));
     }
 
     /**
      * Map aggregate to response
-     * @param tenant 
+     * @param tenant
      */
     mapAggregateToResponse(tenant: IamTenant): TenantResponse
     {
@@ -94,7 +94,7 @@ export class TenantMapper implements IMapper
     private makeResponse(tenant: IamTenant): TenantResponse
     {
         if (!tenant) return;
-        
+
         return new TenantResponse(
             tenant.id.value,
             tenant.name.value,

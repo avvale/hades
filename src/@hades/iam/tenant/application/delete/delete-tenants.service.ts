@@ -13,7 +13,7 @@ export class DeleteTenantsService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<void>
-    {   
+    {
         // get object to delete
         const tenants = await this.repository.get(queryStatement);
 

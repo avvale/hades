@@ -12,7 +12,6 @@ type IamTenant
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input IamCreateTenantInput
@@ -39,7 +38,7 @@ input IamUpdateTenantInput
     
 }
 
-type Query 
+type Query
 {
     iamFindTenant(query:QueryStatement constraint:QueryStatement): IamTenant
     iamFindTenantById(id:ID constraint:QueryStatement): IamTenant

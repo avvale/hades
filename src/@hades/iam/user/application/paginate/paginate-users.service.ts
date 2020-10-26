@@ -12,7 +12,7 @@ export class PaginateUsersService
     ) {}
 
     public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<IamUser>>
-    {        
+    {
         return await this.repository.paginate(queryStatement, constraint);
     }
 }

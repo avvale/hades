@@ -16,7 +16,7 @@ describe('FindTenantByIdQueryHandler', () =>
     let repository: MockTenantRepository;
     let mapper: TenantMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindTenantByIdQueryHandler', () =>
         mapper          = new TenantMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindTenantByIdQueryHandler should be defined', () => 
+        test('FindTenantByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

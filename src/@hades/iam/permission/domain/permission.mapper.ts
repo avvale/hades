@@ -2,7 +2,7 @@ import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { IamPermission } from './permission.aggregate';
 import { PermissionResponse } from './permission.response';
-import { 
+import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
@@ -23,7 +23,7 @@ export class PermissionMapper implements IMapper
     constructor(
         public options: MapperOptions = { eagerLoading: true }
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param permission
@@ -42,13 +42,13 @@ export class PermissionMapper implements IMapper
     mapModelsToAggregates(permissions: ObjectLiteral[]): IamPermission[]
     {
         if (!Array.isArray(permissions)) return;
-        
+
         return permissions.map(permission  => this.makeAggregate(permission));
     }
 
     /**
      * Map aggregate to response
-     * @param permission 
+     * @param permission
      */
     mapAggregateToResponse(permission: IamPermission): PermissionResponse
     {
@@ -90,7 +90,7 @@ export class PermissionMapper implements IMapper
     private makeResponse(permission: IamPermission): PermissionResponse
     {
         if (!permission) return;
-        
+
         return new PermissionResponse(
             permission.id.value,
             permission.name.value,

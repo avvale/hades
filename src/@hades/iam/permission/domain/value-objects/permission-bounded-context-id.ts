@@ -5,9 +5,9 @@ export class PermissionBoundedContextId extends UuidValueObject
 {
     public readonly type: 'PermissionBoundedContextId';
 
-    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {}) 
+    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'PermissionBoundedContextId',
             nullable: false,
             undefinable: false,

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
@@ -29,7 +29,7 @@ export class UpdatePermissionService
         roleIds?: PermissionRoleIds,
         
     ): Promise<void>
-    {        
+    {
         // create aggregate with factory pattern
         const permission = IamPermission.register(
             id,
@@ -40,15 +40,15 @@ export class UpdatePermissionService
             new PermissionUpdatedAt(Utils.nowTimestamp()),
             null
         );
-        
+
         // update
-        await this.repository.update(permission);        
-            
+        await this.repository.update(permission);
+
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const permissionRegister = this.publisher.mergeObjectContext(
             permission
         );
-        
+
         permissionRegister.updated(permission); // apply event to model events
         permissionRegister.commit(); // commit all events of model
     }

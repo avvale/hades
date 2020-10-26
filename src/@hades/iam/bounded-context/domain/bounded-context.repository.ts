@@ -29,7 +29,7 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
 
     // update record
     abstract async update(boundedContext: IamBoundedContext): Promise<void>;
-  
+
     // delete record
     abstract async deleteById(id: BoundedContextId): Promise<void>;
 

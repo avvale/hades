@@ -6,12 +6,12 @@ import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 import { CreateAccountCommand } from './create-account.command';
 import { CreateAccountService } from './create-account.service';
 
-describe('CreateAccountCommandHandler', () => 
+describe('CreateAccountCommandHandler', () =>
 {
     let commandHandler: CreateAccountCommandHandler;
     let service: CreateAccountService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateAccountCommandHandler', () =>
         service         = module.get<CreateAccountService>(CreateAccountService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateAccountCommandHandler should be defined', () => 
+        test('CreateAccountCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateAccountService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateAccountService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateAccountCommand(
@@ -51,7 +51,6 @@ describe('CreateAccountCommandHandler', () =>
                     accounts[0].data,
                     accounts[0].roleIds,
                     accounts[0].tenantIds,
-                    
                 )
             )).toBe(undefined);
         });

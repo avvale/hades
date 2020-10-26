@@ -14,15 +14,15 @@ export class AddBoundedContextsContextEvent extends AggregateRoot
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedBoundedContextsEvent(
-                this.aggregateRoots.map(boundedContext => 
+                this.aggregateRoots.map(boundedContext =>
                     new CreatedBoundedContextEvent(
                         boundedContext.id.value,
                         boundedContext.name.value,
@@ -43,7 +43,7 @@ export class AddBoundedContextsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedBoundedContextsEvent(
-                this.aggregateRoots.map(boundedContext => 
+                this.aggregateRoots.map(boundedContext =>
                     new DeletedBoundedContextEvent(
                         boundedContext.id.value,
                         boundedContext.name.value,
@@ -53,10 +53,10 @@ export class AddBoundedContextsContextEvent extends AggregateRoot
                         boundedContext.createdAt?.value,
                         boundedContext.updatedAt?.value,
                         boundedContext.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

@@ -12,7 +12,7 @@ export class FindAccountByIdQueryHandler implements IQueryHandler<FindAccountByI
 
     constructor(
         private readonly findAccountByIdService: FindAccountByIdService
-    ) { }
+    ) {}
 
     async execute(query: FindAccountByIdQuery): Promise<AccountResponse>
     {

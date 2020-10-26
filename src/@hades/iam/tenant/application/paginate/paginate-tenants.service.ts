@@ -12,7 +12,7 @@ export class PaginateTenantsService
     ) {}
 
     public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<IamTenant>>
-    {        
+    {
         return await this.repository.paginate(queryStatement, constraint);
     }
 }

@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeleteUserByIdCommand } from './delete-user-by-id.command';
 import { DeleteUserByIdService } from './delete-user-by-id.service';
-import { 
+import {
     UserId
 } from './../../domain/value-objects';
 
@@ -10,7 +10,7 @@ export class DeleteUserByIdCommandHandler implements ICommandHandler<DeleteUserB
 {
     constructor(
         private readonly deleteUserByIdService: DeleteUserByIdService
-    ) { }
+    ) {}
 
     async execute(command: DeleteUserByIdCommand): Promise<void>
     {

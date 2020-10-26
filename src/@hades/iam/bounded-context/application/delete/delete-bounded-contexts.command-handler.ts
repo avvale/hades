@@ -7,7 +7,7 @@ export class DeleteBoundedContextsCommandHandler implements ICommandHandler<Dele
 {
     constructor(
         private readonly deleteBoundedContextsService: DeleteBoundedContextsService
-    ) { }
+    ) {}
 
     async execute(command: DeleteBoundedContextsCommand): Promise<void>
     {

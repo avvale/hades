@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     TenantId,
     TenantName,
     TenantCode,
@@ -35,7 +35,7 @@ export class UpdateTenantService
         accountIds?: TenantAccountIds,
         
     ): Promise<void>
-    {        
+    {
         // create aggregate with factory pattern
         const tenant = IamTenant.register(
             id,
@@ -49,15 +49,15 @@ export class UpdateTenantService
             new TenantUpdatedAt(Utils.nowTimestamp()),
             null
         );
-        
+
         // update
-        await this.repository.update(tenant);        
-            
+        await this.repository.update(tenant);
+
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const tenantRegister = this.publisher.mergeObjectContext(
             tenant
         );
-        
+
         tenantRegister.updated(tenant); // apply event to model events
         tenantRegister.commit(); // commit all events of model
     }

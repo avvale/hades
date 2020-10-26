@@ -29,7 +29,7 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
 
     // update record
     abstract async update(tenant: IamTenant): Promise<void>;
-  
+
     // delete record
     abstract async deleteById(id: TenantId): Promise<void>;
 

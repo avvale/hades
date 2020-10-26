@@ -12,7 +12,7 @@ export class PaginateBoundedContextsService
     ) {}
 
     public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<IamBoundedContext>>
-    {        
+    {
         return await this.repository.paginate(queryStatement, constraint);
     }
 }

@@ -12,7 +12,7 @@ export class FindBoundedContextByIdQueryHandler implements IQueryHandler<FindBou
 
     constructor(
         private readonly findBoundedContextByIdService: FindBoundedContextByIdService
-    ) { }
+    ) {}
 
     async execute(query: FindBoundedContextByIdQuery): Promise<BoundedContextResponse>
     {

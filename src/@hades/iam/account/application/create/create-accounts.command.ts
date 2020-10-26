@@ -1,3 +1,5 @@
+import { IamCreateUserInput } from "src/graphql";
+
 export class CreateAccountsCommand
 {
     constructor(
@@ -12,7 +14,7 @@ export class CreateAccountsCommand
             data?: any,
             roleIds?: string[],
             tenantIds?: string[],
-            
+            user: IamCreateUserInput;
         } []
     ) {}
 }

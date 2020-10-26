@@ -5,9 +5,9 @@ export class TenantId extends UuidValueObject
 {
     public readonly type: 'TenantId';
 
-    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {}) 
+    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'TenantId',
             nullable: false,
             undefinable: false,

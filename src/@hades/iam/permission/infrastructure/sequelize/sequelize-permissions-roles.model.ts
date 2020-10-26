@@ -5,7 +5,7 @@ import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize
 
 @Table({ modelName: 'iam_permissions_roles', freezeTableName: true, timestamps: false })
 export class IamPermissionsRolesModel extends Model<IamPermissionsRolesModel> 
-{   
+{
     @ForeignKey(() => IamPermissionModel)
     @Column({
         field: 'permission_id',

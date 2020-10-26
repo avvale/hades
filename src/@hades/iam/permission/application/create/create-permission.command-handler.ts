@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreatePermissionCommand } from './create-permission.command';
 import { CreatePermissionService } from './create-permission.service';
-import { 
+import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
@@ -14,7 +14,7 @@ export class CreatePermissionCommandHandler implements ICommandHandler<CreatePer
 {
     constructor(
         private readonly createPermissionService: CreatePermissionService
-    ) { }
+    ) {}
 
     async execute(command: CreatePermissionCommand): Promise<void>
     {

@@ -7,7 +7,7 @@ export class DeletePermissionsCommandHandler implements ICommandHandler<DeletePe
 {
     constructor(
         private readonly deletePermissionsService: DeletePermissionsService
-    ) { }
+    ) {}
 
     async execute(command: DeletePermissionsCommand): Promise<void>
     {

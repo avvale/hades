@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginateBoundedContextsQuery } from './paginate-bounded-contexts.query';
 import { PaginateBoundedContextsService } from './paginate-bounded-contexts.service';
 
-describe('PaginateBoundedContextsQueryHandler', () => 
+describe('PaginateBoundedContextsQueryHandler', () =>
 {
     let queryHandler: PaginateBoundedContextsQueryHandler;
     let service: PaginateBoundedContextsService;
     let repository: MockBoundedContextRepository;
     let mapper: BoundedContextMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

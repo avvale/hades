@@ -2,13 +2,13 @@ import { ApiProperty } from '@nestjs/swagger';
 import { RoleDto } from './../../../iam/role/dto/role.dto';    
 import { TenantDto } from './../../../iam/tenant/dto/tenant.dto';    
 
-export class AccountDto 
+export class AccountDto
 {   
     
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'cd64e54e-0d77-4206-8e18-2e0c98dab157'
+        example     : '2cfed5bc-4b22-4e23-8e07-b8678a877fd0'
     })
     id: string;
     
@@ -17,7 +17,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'type [input here api field description]',
-        example     : 'SERVICE',
+        example     : 'USER',
         enum        : ['USER','SERVICE']
     })
     type: string;
@@ -27,7 +27,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'email [input here api field description]',
-        example     : 'uujveevle2zeot1sjhe33i5jn1xnq3fq6t1hymikbew0kqgsr1fethlqy7t6a9ps6ffq3w0lfsgghs5d7lov6cwugl99o3el6c27xn52hp1h0m4qq832qphv'
+        example     : 'cekx7ejj1mstuld9mety0h3rcn0ujp0ecz4smqw0t6wslagbers5tml1r3xhl61dhm365nel76rndna5qd4o483tbuhrvt55bo4t2pb87wvtnycxow5chcpp'
     })
     email: string;
     
@@ -45,7 +45,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'clientId [input here api field description]',
-        example     : '7db40fe5-6ee1-4c26-a460-3733d2fe1c61'
+        example     : '20ff0e82-fb3e-4685-aed0-e1945a1884a7'
     })
     clientId: string;
     
@@ -108,7 +108,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
-        example     : '2020-10-22 07:38:32'
+        example     : '2020-10-25 04:14:54'
     })
     createdAt: string;
     
@@ -117,7 +117,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'updatedAt [input here api field description]',
-        example     : '2020-10-22 03:00:54'
+        example     : '2020-10-25 11:55:37'
     })
     updatedAt: string;
     
@@ -126,7 +126,7 @@ export class AccountDto
     @ApiProperty({
         type        : String,
         description : 'deletedAt [input here api field description]',
-        example     : '2020-10-22 17:14:50'
+        example     : '2020-10-25 12:14:08'
     })
     deletedAt: string;
     

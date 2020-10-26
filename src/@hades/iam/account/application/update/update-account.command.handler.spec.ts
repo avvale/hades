@@ -47,6 +47,7 @@ describe('UpdateAccountCommandHandler', () =>
                     accounts[0].clientId,
                     accounts[0].dApplicationCodes,
                     accounts[0].dPermissions,
+                    accounts[0].dTenants,
                     accounts[0].data,
                     accounts[0].roleIds,
                     accounts[0].tenantIds,

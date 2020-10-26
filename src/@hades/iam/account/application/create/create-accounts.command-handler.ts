@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateAccountsCommand } from './create-accounts.command';
 import { CreateAccountsService } from './create-accounts.service';
-import { 
+import {
     AccountId,
     AccountType,
     AccountEmail,
@@ -12,8 +12,10 @@ import {
     AccountDTenants,
     AccountData,
     AccountRoleIds,
-    AccountTenantIds
-    
+    AccountTenantIds,
+    AccountCreatedAt,
+    AccountUpdatedAt,
+    AccountDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateAccountsCommand)
@@ -21,14 +23,14 @@ export class CreateAccountsCommandHandler implements ICommandHandler<CreateAccou
 {
     constructor(
         private readonly createAccountsService: CreateAccountsService
-    ) { }
+    ) {}
 
     async execute(command: CreateAccountsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createAccountsService.main(
             command.accounts
-                .map(account => { 
+                .map(account => {
                     return {
                         id: new AccountId(account.id),
                         type: new AccountType(account.type),
@@ -41,7 +43,6 @@ export class CreateAccountsCommandHandler implements ICommandHandler<CreateAccou
                         data: new AccountData(account.data),
                         roleIds: new AccountRoleIds(account.roleIds),
                         tenantIds: new AccountTenantIds(account.tenantIds),
-                        
                     }
                 })
         );

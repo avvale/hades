@@ -11,7 +11,7 @@ export class GetPermissionsQueryHandler implements IQueryHandler<GetPermissionsQ
 
     constructor(
         private readonly getPermissionsService: GetPermissionsService
-    ) { }
+    ) {}
 
     async execute(query: GetPermissionsQuery): Promise<PermissionResponse[]>
     {

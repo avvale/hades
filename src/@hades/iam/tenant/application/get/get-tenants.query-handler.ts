@@ -11,7 +11,7 @@ export class GetTenantsQueryHandler implements IQueryHandler<GetTenantsQuery>
 
     constructor(
         private readonly getTenantsService: GetTenantsService
-    ) { }
+    ) {}
 
     async execute(query: GetTenantsQuery): Promise<TenantResponse[]>
     {

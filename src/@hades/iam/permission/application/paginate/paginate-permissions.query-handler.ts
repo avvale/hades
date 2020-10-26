@@ -8,15 +8,15 @@ export class PaginatePermissionsQueryHandler implements IQueryHandler<PaginatePe
 {
     constructor(
         private readonly paginatePermissionsService: PaginatePermissionsService
-    ) { }
+    ) {}
 
     async execute(query: PaginatePermissionsQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginatePermissionsService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginatePermissionsService.main(query.queryStatement, query.constraint);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

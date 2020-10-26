@@ -7,7 +7,7 @@ export class DeleteTenantsCommandHandler implements ICommandHandler<DeleteTenant
 {
     constructor(
         private readonly deleteTenantsService: DeleteTenantsService
-    ) { }
+    ) {}
 
     async execute(command: DeleteTenantsCommand): Promise<void>
     {

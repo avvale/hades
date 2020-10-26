@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: iam
 moduleName: user
 moduleNames: users
+aggregateName: IamUser
 hasOAuth: true
 hasTenant: false
 aggregateProperties:

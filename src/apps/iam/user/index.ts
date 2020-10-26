@@ -1,45 +1,45 @@
 // controllers
-import { CreateUserController } from './controllers/create-user.controller';
-import { CreateUsersController } from './controllers/create-users.controller';
-import { PaginateUsersController } from './controllers/paginate-users.controller';
-import { GetUsersController } from './controllers/get-users.controller';
-import { FindUserByIdController } from './controllers/find-user-by-id.controller';
-import { FindUserController } from './controllers/find-user.controller';
-import { UpdateUserController } from './controllers/update-user.controller';
-import { DeleteUserByIdController } from './controllers/delete-user-by-id.controller';
-import { DeleteUsersController } from './controllers/delete-users.controller';
+import { IamCreateUserController } from './controllers/iam-create-user.controller';
+import { IamCreateUsersController } from './controllers/iam-create-users.controller';
+import { IamPaginateUsersController } from './controllers/iam-paginate-users.controller';
+import { IamGetUsersController } from './controllers/iam-get-users.controller';
+import { IamFindUserByIdController } from './controllers/iam-find-user-by-id.controller';
+import { IamFindUserController } from './controllers/iam-find-user.controller';
+import { IamUpdateUserController } from './controllers/iam-update-user.controller';
+import { IamDeleteUserByIdController } from './controllers/iam-delete-user-by-id.controller';
+import { IamDeleteUsersController } from './controllers/iam-delete-users.controller';
 
 // resolvers
-import { CreateUserResolver } from './resolvers/create-user.resolver';
-import { CreateUsersResolver } from './resolvers/create-users.resolver';
-import { PaginateUsersResolver } from './resolvers/paginate-users.resolver';
-import { GetUsersResolver } from './resolvers/get-users.resolver';
-import { FindUserResolver } from './resolvers/find-user.resolver';
-import { FindUserByIdResolver } from './resolvers/find-user-by-id.resolver';
-import { UpdateUserResolver } from './resolvers/update-user.resolver';
-import { DeleteUserByIdResolver } from './resolvers/delete-user-by-id.resolver';
-import { DeleteUsersResolver } from './resolvers/delete-users.resolver';
+import { IamCreateUserResolver } from './resolvers/iam-create-user.resolver';
+import { IamCreateUsersResolver } from './resolvers/iam-create-users.resolver';
+import { IamPaginateUsersResolver } from './resolvers/iam-paginate-users.resolver';
+import { IamGetUsersResolver } from './resolvers/iam-get-users.resolver';
+import { IamFindUserResolver } from './resolvers/iam-find-user.resolver';
+import { IamFindUserByIdResolver } from './resolvers/iam-find-user-by-id.resolver';
+import { IamUpdateUserResolver } from './resolvers/iam-update-user.resolver';
+import { IamDeleteUserByIdResolver } from './resolvers/iam-delete-user-by-id.resolver';
+import { IamDeleteUsersResolver } from './resolvers/iam-delete-users.resolver';
 
 export const IamUserControllers = [
-    CreateUserController,
-    CreateUsersController,
-    PaginateUsersController,
-    GetUsersController,
-    FindUserByIdController,
-    FindUserController,
-    UpdateUserController,
-    DeleteUserByIdController,
-    DeleteUsersController,
+    IamCreateUserController,
+    IamCreateUsersController,
+    IamPaginateUsersController,
+    IamGetUsersController,
+    IamFindUserByIdController,
+    IamFindUserController,
+    IamUpdateUserController,
+    IamDeleteUserByIdController,
+    IamDeleteUsersController,
 ];
 
 export const IamUserResolvers = [
-    CreateUserResolver,
-    CreateUsersResolver,
-    PaginateUsersResolver,
-    GetUsersResolver,
-    FindUserResolver,
-    FindUserByIdResolver,
-    UpdateUserResolver,
-    DeleteUserByIdResolver,
-    DeleteUsersResolver,
+    IamCreateUserResolver,
+    IamCreateUsersResolver,
+    IamPaginateUsersResolver,
+    IamGetUsersResolver,
+    IamFindUserResolver,
+    IamFindUserByIdResolver,
+    IamUpdateUserResolver,
+    IamDeleteUserByIdResolver,
+    IamDeleteUsersResolver,
 ];

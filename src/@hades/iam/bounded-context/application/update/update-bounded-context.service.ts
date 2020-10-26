@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     BoundedContextId,
     BoundedContextName,
     BoundedContextRoot,
@@ -31,7 +31,7 @@ export class UpdateBoundedContextService
         isActive?: BoundedContextIsActive,
         
     ): Promise<void>
-    {        
+    {
         // create aggregate with factory pattern
         const boundedContext = IamBoundedContext.register(
             id,
@@ -43,15 +43,15 @@ export class UpdateBoundedContextService
             new BoundedContextUpdatedAt(Utils.nowTimestamp()),
             null
         );
-        
+
         // update
-        await this.repository.update(boundedContext);        
-            
+        await this.repository.update(boundedContext);
+
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const boundedContextRegister = this.publisher.mergeObjectContext(
             boundedContext
         );
-        
+
         boundedContextRegister.updated(boundedContext); // apply event to model events
         boundedContextRegister.commit(); // commit all events of model
     }

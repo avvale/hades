@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeleteBoundedContextByIdCommand } from './delete-bounded-context-by-id.command';
 import { DeleteBoundedContextByIdService } from './delete-bounded-context-by-id.service';
-import { 
+import {
     BoundedContextId
 } from './../../domain/value-objects';
 
@@ -10,7 +10,7 @@ export class DeleteBoundedContextByIdCommandHandler implements ICommandHandler<D
 {
     constructor(
         private readonly deleteBoundedContextByIdService: DeleteBoundedContextByIdService
-    ) { }
+    ) {}
 
     async execute(command: DeleteBoundedContextByIdCommand): Promise<void>
     {

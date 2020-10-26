@@ -16,7 +16,7 @@ describe('FindPermissionByIdQueryHandler', () =>
     let repository: MockPermissionRepository;
     let mapper: PermissionMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindPermissionByIdQueryHandler', () =>
         mapper          = new PermissionMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindPermissionByIdQueryHandler should be defined', () => 
+        test('FindPermissionByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

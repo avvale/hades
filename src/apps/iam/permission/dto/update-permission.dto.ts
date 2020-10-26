@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class UpdatePermissionDto 
+export class UpdatePermissionDto
 {   
     
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : '08832010-55a7-467b-866e-ab9df91d99be'
+        example     : '5dc42d11-c3c6-475d-b72d-1d8a8d733813'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdatePermissionDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'ytj68mrik4phiwvvdppoi7sfw6gir51klk0eee71wofpt5lmqfmfx5xs9zkkq81y0mtcjtab7fxu7496aujq7cjahwbukcyy6bfxo7ri4czs0otwmj1wvnzjokzg05ref92owla19dh8ri8mmrcwriv4vra00ccns0mezyh67bioh0511p06423z3dakpyfz8dgi456vexv3q3v3y1tm1vlbkyaa7905yhk14wuiugwn4xfuigfazbk11mz7fx2'
+        example     : 'c6ts4bxu714qz75dyelkh3w3wkv7eq7l0z58cuspwjld69gl8zetigc51udhot6e6i474s120rflqwumj1x84qzqevt1t953x0tg59muu0249gkn63vdux3xcap4mih5mghf3awpiewkvft7ai4q6jwsl5k4vixne2qp2ukr85a5z1v77nrcybxafqjte2ed3vdrakkyqpsk5ttfw5n2v4d8eapyryn8f48wkkhpwl3diwxkvybzq8anrmetn2i'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class UpdatePermissionDto
     @ApiProperty({
         type        : String,
         description : 'boundedContextId [input here api field description]',
-        example     : '51d1244c-95f3-45f8-b042-cee2360ece67'
+        example     : 'a849eac0-3664-43d8-8329-12c1973ffcc2'
     })
     boundedContextId: string;
     

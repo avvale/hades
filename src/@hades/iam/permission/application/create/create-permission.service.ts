@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
@@ -40,7 +40,7 @@ export class CreatePermissionService
             new PermissionUpdatedAt(Utils.nowTimestamp()),
             null
         );
-        
+
         // create
         await this.repository.create(permission);
 
@@ -48,7 +48,7 @@ export class CreatePermissionService
         const permissionRegister = this.publisher.mergeObjectContext(
             permission
         );
-        
+
         permissionRegister.created(permission); // apply event to model events
         permissionRegister.commit(); // commit all events of model
     }

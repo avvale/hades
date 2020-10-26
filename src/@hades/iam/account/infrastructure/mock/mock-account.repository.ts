@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
-import { 
+import {
     AccountId,
     AccountType,
     AccountEmail,
@@ -16,8 +16,7 @@ import {
     AccountTenantIds,
     AccountCreatedAt,
     AccountUpdatedAt,
-    AccountDeletedAt
-    
+    AccountDeletedAt,
 } from '@hades/iam/account/domain/value-objects';
 import { IamAccount } from './../../domain/account.aggregate';
 import { accounts } from './../seeds/account.seed';
@@ -29,14 +28,14 @@ export class MockAccountRepository extends MockRepository<IamAccount> implements
     public readonly aggregateName: string = 'IamAccount';
     public collectionSource: IamAccount[];
     public deletedAtInstance: AccountDeletedAt = new AccountDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -51,7 +50,7 @@ export class MockAccountRepository extends MockRepository<IamAccount> implements
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(IamAccount.register(
                     new AccountId(itemCollection.id),
                     new AccountType(itemCollection.type),
@@ -67,7 +66,7 @@ export class MockAccountRepository extends MockRepository<IamAccount> implements
                     new AccountCreatedAt(itemCollection.createdAt),
                     new AccountUpdatedAt(itemCollection.updatedAt),
                     new AccountDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

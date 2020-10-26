@@ -14,15 +14,15 @@ export class AddUsersContextEvent extends AggregateRoot
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedUsersEvent(
-                this.aggregateRoots.map(user => 
+                this.aggregateRoots.map(user =>
                     new CreatedUserEvent(
                         user.id.value,
                         user.accountId.value,
@@ -49,7 +49,7 @@ export class AddUsersContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedUsersEvent(
-                this.aggregateRoots.map(user => 
+                this.aggregateRoots.map(user =>
                     new DeletedUserEvent(
                         user.id.value,
                         user.accountId.value,
@@ -65,10 +65,10 @@ export class AddUsersContextEvent extends AggregateRoot
                         user.createdAt?.value,
                         user.updatedAt?.value,
                         user.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

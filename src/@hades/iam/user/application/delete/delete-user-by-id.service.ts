@@ -20,7 +20,7 @@ export class DeleteUserByIdService
 
         // insert EventBus in object, to be able to apply and commit events
         const userRegister = this.publisher.mergeObjectContext(user);
-        
+
         userRegister.deleted(user); // apply event to model events
         userRegister.commit(); // commit all events of model
     }

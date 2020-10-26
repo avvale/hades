@@ -3,7 +3,7 @@
 import { PermissionResponse } from '@hades/iam/permission/domain/permission.response';
 
 
-export class BoundedContextResponse 
+export class BoundedContextResponse
 {
     constructor(
         public readonly id: string,
