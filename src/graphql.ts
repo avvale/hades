@@ -715,13 +715,13 @@ export interface IamCreateAccountInput {
     type: IamAccountType;
     email: GraphQLString;
     isActive: GraphQLBoolean;
-    clientId?: string;
+    clientId: string;
     dApplicationCodes?: JSON;
     dPermissions?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
-    user?: IamCreateUserInput;
+    user: IamCreateUserInput;
 }
 
 export interface IamUpdateAccountInput {
@@ -806,7 +806,7 @@ export interface IamUpdateTenantInput {
 
 export interface IamCreateUserInput {
     id: string;
-    accountId?: string;
+    accountId: string;
     name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
