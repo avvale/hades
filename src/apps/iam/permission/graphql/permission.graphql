@@ -10,7 +10,6 @@ type IamPermission
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input IamCreatePermissionInput
@@ -31,7 +30,7 @@ input IamUpdatePermissionInput
     
 }
 
-type Query 
+type Query
 {
     iamFindPermission(query:QueryStatement constraint:QueryStatement): IamPermission
     iamFindPermissionById(id:ID constraint:QueryStatement): IamPermission

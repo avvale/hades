@@ -5,10 +5,10 @@ import { delay, map } from 'rxjs/operators';
 import { CreatedBoundedContextEvent } from './../events/created-bounded-context.event';
 
 @Injectable()
-export class BoundedContextSagas 
-{    
+export class BoundedContextSagas
+{
     /* @Saga()
-    dragonKilled = (events$: Observable<any>): Observable<ICommand> => 
+    dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {
         return events$
             .pipe(

@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class UpdateTenantDto 
+export class UpdateTenantDto
 {   
     
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'bf7b0cb5-9279-4dfe-a957-989935830dc8'
+        example     : '520e69b0-0a30-4be4-bef7-83ae1429b9f9'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class UpdateTenantDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'iziwe4htthpirmxh4dt4zexoigz18jetad56z2rmnsaxmkvkngglszibawiwf3ijbjyjoixlgrdyosnplid2adgtjmhqxti2ja7cor3divfw0evi7jijk5o8tirxfd8qne5ls9hxnv2h61ihlg9otmaz7isahwti8si6vor6idyk0vcf1kp8w2cwftxtvvoekue69uhy3ctdy6wgze0s780pl7ig9sbiwk5zj4y332uxpkg7z3vgu0encxshtv1'
+        example     : 'e40dxnlcoh2awzz1b683bfqw95p6zc318t3v09bca857gfqbdoqznhjzjljzyycuipden2o8h7ofpngdssvjr5auj1qbkv1exe1kfl84s6nuw5lxlnxr4ricrixzr3irwbmfwywwueu4y1nrm7cu1t2vmfhfvk3myro2vr2vqnykfirhqzaog3dhhggjinurhiiairfnpog45ek4lmfm3357ldslp85v58kjanhzucvzoef52628e2gzlol9j6x'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class UpdateTenantDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'oam492ltatr5wm9c13zlejbs2edtj95n4kbd5l1i5b394vews8'
+        example     : 'wlkf35h47myl6h6gwmknh1apms9vnwgsexb3zf0xy1ytqdgtog'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class UpdateTenantDto
     @ApiProperty({
         type        : String,
         description : 'logo [input here api field description]',
-        example     : 'c8irc797epvqi5qiimqjr7fi6jsemctqim510nlrhcagm807khov6hmdy5tkhae4rf0ti6q9y20tzacva7mu2bei7q0j8y1d1tcwrtagsqhzjkavlrle03c3cx70wgf8m2n0dzmmo21vahx39jxdib0r3pu8pc4ro9upfxuosa29bs5irnwavo6tx8zrqn64nmk62wwq64xpdpl8tr3tt9s22tcy4ck8ieljq9oy86kaeeuvvgwiv0g6jmt91ye'
+        example     : 'a16wp0leuky42fl8cqk4lf2pzgnnna45yf46xux44k3769wnqgdv5usdlddi3rv3npiiest1bz4l8z295tv9d6vki9lwkm1fqg9tx98dsfuic4tisqzswgv65hjm5nf9brbfwkcsmpi859jilwwmb5os3iill9qer6jpsicgagx8joi6ekfl9a06i3345k7rik94mlzs2bdub382tywwccaa9etxs12tyyqb55dgyg2g2k7e77oc7pclojewx0l'
     })
     logo: string;
     

@@ -11,7 +11,7 @@ export class GetTenantsService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamTenant[]>
-    {        
+    {
         return await this.repository.get(queryStatement);
     }
 }

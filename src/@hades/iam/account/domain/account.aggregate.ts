@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     AccountId,
     AccountType,
     AccountEmail,
@@ -13,8 +13,7 @@ import {
     AccountTenantIds,
     AccountCreatedAt,
     AccountUpdatedAt,
-    AccountDeletedAt
-    
+    AccountDeletedAt,
 } from './value-objects';
 import { CreatedAccountEvent } from './../application/events/created-account.event';
 import { UpdatedAccountEvent } from './../application/events/updated-account.event';
@@ -55,7 +54,7 @@ export class IamAccount extends AggregateRoot
     constructor(id?: AccountId, type?: AccountType, email?: AccountEmail, isActive?: AccountIsActive, clientId?: AccountClientId, dApplicationCodes?: AccountDApplicationCodes, dPermissions?: AccountDPermissions, dTenants?: AccountDTenants, data?: AccountData, roleIds?: AccountRoleIds, tenantIds?: AccountTenantIds, createdAt?: AccountCreatedAt, updatedAt?: AccountUpdatedAt, deletedAt?: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], )
     {
         super();
-        
+
         this.id = id;
         this.type = type;
         this.email = email;

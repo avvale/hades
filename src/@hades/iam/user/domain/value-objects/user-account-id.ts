@@ -5,9 +5,9 @@ export class UserAccountId extends UuidValueObject
 {
     public readonly type: 'UserAccountId';
 
-    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {}) 
+    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'UserAccountId',
             nullable: false,
             undefinable: false,

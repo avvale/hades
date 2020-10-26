@@ -11,7 +11,7 @@ export class FindAccountService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamAccount>
-    {        
+    {
         return await this.repository.find(queryStatement);
     }
 }

@@ -8,15 +8,15 @@ export class PaginateTenantsQueryHandler implements IQueryHandler<PaginateTenant
 {
     constructor(
         private readonly paginateTenantsService: PaginateTenantsService
-    ) { }
+    ) {}
 
     async execute(query: PaginateTenantsQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateTenantsService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginateTenantsService.main(query.queryStatement, query.constraint);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

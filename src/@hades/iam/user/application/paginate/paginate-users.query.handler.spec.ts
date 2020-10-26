@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginateUsersQuery } from './paginate-users.query';
 import { PaginateUsersService } from './paginate-users.service';
 
-describe('PaginateUsersQueryHandler', () => 
+describe('PaginateUsersQueryHandler', () =>
 {
     let queryHandler: PaginateUsersQueryHandler;
     let service: PaginateUsersService;
     let repository: MockUserRepository;
     let mapper: UserMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

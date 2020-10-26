@@ -12,7 +12,7 @@ export class FindTenantByIdQueryHandler implements IQueryHandler<FindTenantByIdQ
 
     constructor(
         private readonly findTenantByIdService: FindTenantByIdService
-    ) { }
+    ) {}
 
     async execute(query: FindTenantByIdQuery): Promise<TenantResponse>
     {

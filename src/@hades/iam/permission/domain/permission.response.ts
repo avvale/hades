@@ -4,7 +4,7 @@ import { BoundedContextResponse } from '@hades/iam/bounded-context/domain/bounde
 
 import { RoleResponse } from '@hades/iam/role/domain/role.response';
 
-export class PermissionResponse 
+export class PermissionResponse
 {
     constructor(
         public readonly id: string,

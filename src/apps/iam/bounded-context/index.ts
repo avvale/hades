@@ -1,45 +1,45 @@
 // controllers
-import { CreateBoundedContextController } from './controllers/create-bounded-context.controller';
-import { CreateBoundedContextsController } from './controllers/create-bounded-contexts.controller';
-import { PaginateBoundedContextsController } from './controllers/paginate-bounded-contexts.controller';
-import { GetBoundedContextsController } from './controllers/get-bounded-contexts.controller';
-import { FindBoundedContextByIdController } from './controllers/find-bounded-context-by-id.controller';
-import { FindBoundedContextController } from './controllers/find-bounded-context.controller';
-import { UpdateBoundedContextController } from './controllers/update-bounded-context.controller';
-import { DeleteBoundedContextByIdController } from './controllers/delete-bounded-context-by-id.controller';
-import { DeleteBoundedContextsController } from './controllers/delete-bounded-contexts.controller';
+import { IamCreateBoundedContextController } from './controllers/iam-create-bounded-context.controller';
+import { IamCreateBoundedContextsController } from './controllers/iam-create-bounded-contexts.controller';
+import { IamPaginateBoundedContextsController } from './controllers/iam-paginate-bounded-contexts.controller';
+import { IamGetBoundedContextsController } from './controllers/iam-get-bounded-contexts.controller';
+import { IamFindBoundedContextByIdController } from './controllers/iam-find-bounded-context-by-id.controller';
+import { IamFindBoundedContextController } from './controllers/iam-find-bounded-context.controller';
+import { IamUpdateBoundedContextController } from './controllers/iam-update-bounded-context.controller';
+import { IamDeleteBoundedContextByIdController } from './controllers/iam-delete-bounded-context-by-id.controller';
+import { IamDeleteBoundedContextsController } from './controllers/iam-delete-bounded-contexts.controller';
 
 // resolvers
-import { CreateBoundedContextResolver } from './resolvers/create-bounded-context.resolver';
-import { CreateBoundedContextsResolver } from './resolvers/create-bounded-contexts.resolver';
-import { PaginateBoundedContextsResolver } from './resolvers/paginate-bounded-contexts.resolver';
-import { GetBoundedContextsResolver } from './resolvers/get-bounded-contexts.resolver';
-import { FindBoundedContextResolver } from './resolvers/find-bounded-context.resolver';
-import { FindBoundedContextByIdResolver } from './resolvers/find-bounded-context-by-id.resolver';
-import { UpdateBoundedContextResolver } from './resolvers/update-bounded-context.resolver';
-import { DeleteBoundedContextByIdResolver } from './resolvers/delete-bounded-context-by-id.resolver';
-import { DeleteBoundedContextsResolver } from './resolvers/delete-bounded-contexts.resolver';
+import { IamCreateBoundedContextResolver } from './resolvers/iam-create-bounded-context.resolver';
+import { IamCreateBoundedContextsResolver } from './resolvers/iam-create-bounded-contexts.resolver';
+import { IamPaginateBoundedContextsResolver } from './resolvers/iam-paginate-bounded-contexts.resolver';
+import { IamGetBoundedContextsResolver } from './resolvers/iam-get-bounded-contexts.resolver';
+import { IamFindBoundedContextResolver } from './resolvers/iam-find-bounded-context.resolver';
+import { IamFindBoundedContextByIdResolver } from './resolvers/iam-find-bounded-context-by-id.resolver';
+import { IamUpdateBoundedContextResolver } from './resolvers/iam-update-bounded-context.resolver';
+import { IamDeleteBoundedContextByIdResolver } from './resolvers/iam-delete-bounded-context-by-id.resolver';
+import { IamDeleteBoundedContextsResolver } from './resolvers/iam-delete-bounded-contexts.resolver';
 
 export const IamBoundedContextControllers = [
-    CreateBoundedContextController,
-    CreateBoundedContextsController,
-    PaginateBoundedContextsController,
-    GetBoundedContextsController,
-    FindBoundedContextByIdController,
-    FindBoundedContextController,
-    UpdateBoundedContextController,
-    DeleteBoundedContextByIdController,
-    DeleteBoundedContextsController,
+    IamCreateBoundedContextController,
+    IamCreateBoundedContextsController,
+    IamPaginateBoundedContextsController,
+    IamGetBoundedContextsController,
+    IamFindBoundedContextByIdController,
+    IamFindBoundedContextController,
+    IamUpdateBoundedContextController,
+    IamDeleteBoundedContextByIdController,
+    IamDeleteBoundedContextsController,
 ];
 
 export const IamBoundedContextResolvers = [
-    CreateBoundedContextResolver,
-    CreateBoundedContextsResolver,
-    PaginateBoundedContextsResolver,
-    GetBoundedContextsResolver,
-    FindBoundedContextResolver,
-    FindBoundedContextByIdResolver,
-    UpdateBoundedContextResolver,
-    DeleteBoundedContextByIdResolver,
-    DeleteBoundedContextsResolver,
+    IamCreateBoundedContextResolver,
+    IamCreateBoundedContextsResolver,
+    IamPaginateBoundedContextsResolver,
+    IamGetBoundedContextsResolver,
+    IamFindBoundedContextResolver,
+    IamFindBoundedContextByIdResolver,
+    IamUpdateBoundedContextResolver,
+    IamDeleteBoundedContextByIdResolver,
+    IamDeleteBoundedContextsResolver,
 ];

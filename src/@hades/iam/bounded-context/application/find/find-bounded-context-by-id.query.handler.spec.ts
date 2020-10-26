@@ -16,7 +16,7 @@ describe('FindBoundedContextByIdQueryHandler', () =>
     let repository: MockBoundedContextRepository;
     let mapper: BoundedContextMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindBoundedContextByIdQueryHandler', () =>
         mapper          = new BoundedContextMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindBoundedContextByIdQueryHandler should be defined', () => 
+        test('FindBoundedContextByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

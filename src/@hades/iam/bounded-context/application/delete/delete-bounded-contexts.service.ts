@@ -13,7 +13,7 @@ export class DeleteBoundedContextsService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<void>
-    {   
+    {
         // get object to delete
         const boundedContexts = await this.repository.get(queryStatement);
 

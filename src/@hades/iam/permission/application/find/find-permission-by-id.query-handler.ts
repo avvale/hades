@@ -12,7 +12,7 @@ export class FindPermissionByIdQueryHandler implements IQueryHandler<FindPermiss
 
     constructor(
         private readonly findPermissionByIdService: FindPermissionByIdService
-    ) { }
+    ) {}
 
     async execute(query: FindPermissionByIdQuery): Promise<PermissionResponse>
     {

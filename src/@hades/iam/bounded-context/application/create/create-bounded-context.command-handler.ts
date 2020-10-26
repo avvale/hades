@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateBoundedContextCommand } from './create-bounded-context.command';
 import { CreateBoundedContextService } from './create-bounded-context.service';
-import { 
+import {
     BoundedContextId,
     BoundedContextName,
     BoundedContextRoot,
@@ -15,7 +15,7 @@ export class CreateBoundedContextCommandHandler implements ICommandHandler<Creat
 {
     constructor(
         private readonly createBoundedContextService: CreateBoundedContextService
-    ) { }
+    ) {}
 
     async execute(command: CreateBoundedContextCommand): Promise<void>
     {

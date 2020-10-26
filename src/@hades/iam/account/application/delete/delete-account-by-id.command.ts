@@ -1,6 +1,6 @@
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 
-export class DeleteAccountByIdCommand 
+export class DeleteAccountByIdCommand
 {
     constructor(
         public readonly id: string,

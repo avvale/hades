@@ -11,7 +11,7 @@ export class FindBoundedContextService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamBoundedContext>
-    {        
+    {
         return await this.repository.find(queryStatement);
     }
 }

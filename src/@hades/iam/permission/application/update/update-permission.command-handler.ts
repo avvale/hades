@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdatePermissionCommand } from './update-permission.command';
 import { UpdatePermissionService } from './update-permission.service';
-import { 
+import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
@@ -14,7 +14,7 @@ export class UpdatePermissionCommandHandler implements ICommandHandler<UpdatePer
 {
     constructor(
         private readonly updatePermissionService: UpdatePermissionService
-    ) { }
+    ) {}
 
     async execute(command: UpdatePermissionCommand): Promise<void>
     {

@@ -21,5 +21,4 @@ export class SequelizeBoundedContextRepository extends SequelizeRepository<IamBo
     ) {
         super();
     }
-    
 }

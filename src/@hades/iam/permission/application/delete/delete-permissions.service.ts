@@ -13,7 +13,7 @@ export class DeletePermissionsService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<void>
-    {   
+    {
         // get object to delete
         const permissions = await this.repository.get(queryStatement);
 

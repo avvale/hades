@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateAccountCommand } from './create-account.command';
 import { CreateAccountService } from './create-account.service';
-import { 
+import {
     AccountId,
     AccountType,
     AccountEmail,
@@ -12,8 +12,10 @@ import {
     AccountDTenants,
     AccountData,
     AccountRoleIds,
-    AccountTenantIds
-    
+    AccountTenantIds,
+    AccountCreatedAt,
+    AccountUpdatedAt,
+    AccountDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateAccountCommand)
@@ -21,7 +23,7 @@ export class CreateAccountCommandHandler implements ICommandHandler<CreateAccoun
 {
     constructor(
         private readonly createAccountService: CreateAccountService
-    ) { }
+    ) {}
 
     async execute(command: CreateAccountCommand): Promise<void>
     {
@@ -38,7 +40,6 @@ export class CreateAccountCommandHandler implements ICommandHandler<CreateAccoun
             new AccountData(command.data),
             new AccountRoleIds(command.roleIds),
             new AccountTenantIds(command.tenantIds),
-            
         );
     }
 }

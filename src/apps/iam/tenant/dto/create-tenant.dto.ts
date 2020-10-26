@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateTenantDto 
+export class CreateTenantDto
 {   
     
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'bf7b0cb5-9279-4dfe-a957-989935830dc8'
+        example     : '520e69b0-0a30-4be4-bef7-83ae1429b9f9'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
-        example     : 'hkdnvf9e1o7cuaoyubu2h6u60vbcojrxv5phgvpk0b7nif8lu93727url3j7zjd7e97k4ppn093gwczv2xejm6addywh4spcu9fuk736andmsop17vlxzwb4dk626wmcrkw2mq89tzpbm596lhgae19ubttl22mqt4num5tpx6oycwjq4debiuo6eta8sqcu2mircu6gjyx9nfp1vdw9s87oaz1biqx39ixctqhjuyvyrxcpucvkmqsnbq8dc7b'
+        example     : 'g07tc3fonp0v4lgihqo0s77l2gw8jtonq06ggwgxbvcpv5xi0yz0mh0fz09akprqp8ucg6x6qt2spnkhtpu4eq416oyzgf3jqiry8zg741nkhmyvuuq3vwp2bzr7oiggsdy7vgrm8n329b4lyvsf0as8i9l0xrxd299n2xjgkw0tw140mw20kwhninnqz51xjgu76sdqq9k823em6b5qe81xg97q37ru9awz8uwrhxc5vb1xqwurqk55bbcexni'
     })
     name: string;
     
@@ -24,7 +24,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'code [input here api field description]',
-        example     : 'ugz62zxy267yy91jlbtmyxa1jozv7h0570d09d5rnihlls3gk9'
+        example     : 'g3htf19l4mxwhjexbqdjqeyrkblgy3yyqsyixazw0z6xhwp96m'
     })
     code: string;
     
@@ -33,7 +33,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : String,
         description : 'logo [input here api field description]',
-        example     : 'wp268jk2h20kyke1kn2zki5f8vuahv9ws2m8bng2selsew0923jk6b4wfmmowvfnja0bau5zxgkzg45vf9uh154r9dofxa8abob8nvyegv5s592cilzce8855jmglsglpeeqdwpmsyuo1lh0dfwhs26w7drxe5pggrp3k9cp7tlzd349kfzyuk4kxymduombv20mgy2w2e9r4ba74dgfrnnqkfw1w9u3i8pr6l7fq59k1tug127g5gpmarbgm75'
+        example     : 'xetnsuh5vk009c9yqxa09zp1yoy8de5ffteyxjbckshh8z0az769do6nb80xnn7pzogw1lb0jvexudoqh4kg5x68lbxgt3bpdbn156auoj8rzfty8683m9d9sp2ziw9gnpu0ce5n2r7gng1xdz8typofyng9ww2rmadb1pgzdgnhobpbe4svljzjkrm0g49g73f8d22n1wdagzmn3dbn7egnje4iwotcqacojlp8hew02nbr20xqqcvit0e3shv'
     })
     logo: string;
     
@@ -42,7 +42,7 @@ export class CreateTenantDto
     @ApiProperty({
         type        : Boolean,
         description : 'isActive [input here api field description]',
-        example     : false
+        example     : true
     })
     isActive: boolean;
     

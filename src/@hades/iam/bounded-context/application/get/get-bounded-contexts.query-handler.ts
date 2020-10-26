@@ -11,7 +11,7 @@ export class GetBoundedContextsQueryHandler implements IQueryHandler<GetBoundedC
 
     constructor(
         private readonly getBoundedContextsService: GetBoundedContextsService
-    ) { }
+    ) {}
 
     async execute(query: GetBoundedContextsQuery): Promise<BoundedContextResponse[]>
     {

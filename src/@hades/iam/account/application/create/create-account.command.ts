@@ -1,5 +1,5 @@
-export class CreateAccountCommand 
-{   
+export class CreateAccountCommand
+{
     constructor(
         public readonly id: string,
         public readonly type: string,
@@ -11,6 +11,5 @@ export class CreateAccountCommand
         public readonly data: any,
         public readonly roleIds: string[],
         public readonly tenantIds: string[],
-        
     ) {}
 }

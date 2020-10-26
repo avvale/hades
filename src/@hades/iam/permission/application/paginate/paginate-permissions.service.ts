@@ -12,7 +12,7 @@ export class PaginatePermissionsService
     ) {}
 
     public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<IamPermission>>
-    {        
+    {
         return await this.repository.paginate(queryStatement, constraint);
     }
 }

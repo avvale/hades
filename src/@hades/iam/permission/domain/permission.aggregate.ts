@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,

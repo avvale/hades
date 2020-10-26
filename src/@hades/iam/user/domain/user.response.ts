@@ -3,7 +3,7 @@ import { AccountResponse } from '@hades/iam/account/domain/account.response';
 
 
 
-export class UserResponse 
+export class UserResponse
 {
     constructor(
         public readonly id: string,

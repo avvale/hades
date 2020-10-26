@@ -1,47 +1,47 @@
 // controllers
-import { CreateAccountController } from './controllers/create-account.controller';
-import { CreateAccountsController } from './controllers/create-accounts.controller';
-import { PaginateAccountsController } from './controllers/paginate-accounts.controller';
-import { GetAccountsController } from './controllers/get-accounts.controller';
-import { FindAccountByIdController } from './controllers/find-account-by-id.controller';
-import { FindAccountController } from './controllers/find-account.controller';
-import { UpdateAccountController } from './controllers/update-account.controller';
-import { DeleteAccountByIdController } from './controllers/delete-account-by-id.controller';
-import { DeleteAccountsController } from './controllers/delete-accounts.controller';
+import { IamCreateAccountController } from './controllers/iam-create-account.controller';
+import { IamCreateAccountsController } from './controllers/iam-create-accounts.controller';
+import { IamPaginateAccountsController } from './controllers/iam-paginate-accounts.controller';
+import { IamGetAccountsController } from './controllers/iam-get-accounts.controller';
+import { IamFindAccountByIdController } from './controllers/iam-find-account-by-id.controller';
+import { IamFindAccountController } from './controllers/iam-find-account.controller';
+import { IamUpdateAccountController } from './controllers/iam-update-account.controller';
+import { IamDeleteAccountByIdController } from './controllers/iam-delete-account-by-id.controller';
+import { IamDeleteAccountsController } from './controllers/iam-delete-accounts.controller';
 
 // resolvers
-import { CreateAccountResolver } from './resolvers/create-account.resolver';
-import { CreateAccountsResolver } from './resolvers/create-accounts.resolver';
-import { PaginateAccountsResolver } from './resolvers/paginate-accounts.resolver';
-import { GetAccountsResolver } from './resolvers/get-accounts.resolver';
-import { FindAccountResolver } from './resolvers/find-account.resolver';
-import { FindAccountByIdResolver } from './resolvers/find-account-by-id.resolver';
-import { FindMeAccountResolver } from './resolvers/find-me-account.resolver';
-import { UpdateAccountResolver } from './resolvers/update-account.resolver';
-import { DeleteAccountByIdResolver } from './resolvers/delete-account-by-id.resolver';
-import { DeleteAccountsResolver } from './resolvers/delete-accounts.resolver';
+import { IamCreateAccountResolver } from './resolvers/iam-create-account.resolver';
+import { IamCreateAccountsResolver } from './resolvers/iam-create-accounts.resolver';
+import { IamPaginateAccountsResolver } from './resolvers/iam-paginate-accounts.resolver';
+import { IamGetAccountsResolver } from './resolvers/iam-get-accounts.resolver';
+import { IamFindAccountResolver } from './resolvers/iam-find-account.resolver';
+import { IamFindAccountByIdResolver } from './resolvers/iam-find-account-by-id.resolver';
+import { IamFindMeAccountResolver } from './resolvers/iam-find-me-account.resolver';
+import { IamUpdateAccountResolver } from './resolvers/iam-update-account.resolver';
+import { IamDeleteAccountByIdResolver } from './resolvers/iam-delete-account-by-id.resolver';
+import { IamDeleteAccountsResolver } from './resolvers/iam-delete-accounts.resolver';
 
 export const IamAccountControllers = [
-    CreateAccountController,
-    CreateAccountsController,
-    PaginateAccountsController,
-    GetAccountsController,
-    FindAccountByIdController,
-    FindAccountController,
-    UpdateAccountController,
-    DeleteAccountByIdController,
-    DeleteAccountsController,
+    IamCreateAccountController,
+    IamCreateAccountsController,
+    IamPaginateAccountsController,
+    IamGetAccountsController,
+    IamFindAccountByIdController,
+    IamFindAccountController,
+    IamUpdateAccountController,
+    IamDeleteAccountByIdController,
+    IamDeleteAccountsController,
 ];
 
 export const IamAccountResolvers = [
-    CreateAccountResolver,
-    CreateAccountsResolver,
-    PaginateAccountsResolver,
-    GetAccountsResolver,
-    FindAccountResolver,
-    FindAccountByIdResolver,
-    FindMeAccountResolver,
-    UpdateAccountResolver,
-    DeleteAccountByIdResolver,
-    DeleteAccountsResolver,
+    IamCreateAccountResolver,
+    IamCreateAccountsResolver,
+    IamPaginateAccountsResolver,
+    IamGetAccountsResolver,
+    IamFindAccountResolver,
+    IamFindAccountByIdResolver,
+    IamFindMeAccountResolver,
+    IamUpdateAccountResolver,
+    IamDeleteAccountByIdResolver,
+    IamDeleteAccountsResolver,
 ];

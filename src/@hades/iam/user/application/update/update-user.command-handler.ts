@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateUserCommand } from './update-user.command';
 import { UpdateUserService } from './update-user.service';
-import { 
+import {
     UserId,
     UserAccountId,
     UserName,
@@ -21,7 +21,7 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
 {
     constructor(
         private readonly updateUserService: UpdateUserService
-    ) { }
+    ) {}
 
     async execute(command: UpdateUserCommand): Promise<void>
     {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     TenantId,
     TenantName,
     TenantCode,
@@ -49,7 +49,7 @@ export class CreateTenantService
             new TenantUpdatedAt(Utils.nowTimestamp()),
             null
         );
-        
+
         // create
         await this.repository.create(tenant);
 
@@ -57,7 +57,7 @@ export class CreateTenantService
         const tenantRegister = this.publisher.mergeObjectContext(
             tenant
         );
-        
+
         tenantRegister.created(tenant); // apply event to model events
         tenantRegister.commit(); // commit all events of model
     }

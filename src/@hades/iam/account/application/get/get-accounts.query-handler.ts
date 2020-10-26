@@ -11,7 +11,7 @@ export class GetAccountsQueryHandler implements IQueryHandler<GetAccountsQuery>
 
     constructor(
         private readonly getAccountsService: GetAccountsService
-    ) { }
+    ) {}
 
     async execute(query: GetAccountsQuery): Promise<AccountResponse[]>
     {

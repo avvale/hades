@@ -5,7 +5,7 @@ import { UserResponse } from '@hades/iam/user/domain/user.response';
 import { RoleResponse } from '@hades/iam/role/domain/role.response';
 import { TenantResponse } from '@hades/iam/tenant/domain/tenant.response';
 
-export class AccountResponse 
+export class AccountResponse
 {
     constructor(
         public readonly id: string,
@@ -22,7 +22,6 @@ export class AccountResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        
         
         public readonly user: UserResponse,
         

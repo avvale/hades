@@ -11,7 +11,7 @@ export class FindUserQueryHandler implements IQueryHandler<FindUserQuery>
 
     constructor(
         private readonly findUserService: FindUserService
-    ) { }
+    ) {}
 
     async execute(query: FindUserQuery): Promise<UserResponse>
     {

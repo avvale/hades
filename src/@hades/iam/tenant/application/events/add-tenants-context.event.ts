@@ -14,15 +14,15 @@ export class AddTenantsContextEvent extends AggregateRoot
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedTenantsEvent(
-                this.aggregateRoots.map(tenant => 
+                this.aggregateRoots.map(tenant =>
                     new CreatedTenantEvent(
                         tenant.id.value,
                         tenant.name.value,
@@ -45,7 +45,7 @@ export class AddTenantsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedTenantsEvent(
-                this.aggregateRoots.map(tenant => 
+                this.aggregateRoots.map(tenant =>
                     new DeletedTenantEvent(
                         tenant.id.value,
                         tenant.name.value,
@@ -57,10 +57,10 @@ export class AddTenantsContextEvent extends AggregateRoot
                         tenant.createdAt?.value,
                         tenant.updatedAt?.value,
                         tenant.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

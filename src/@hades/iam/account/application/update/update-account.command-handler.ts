@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateAccountCommand } from './update-account.command';
 import { UpdateAccountService } from './update-account.service';
-import { 
+import {
     AccountId,
     AccountType,
     AccountEmail,
@@ -12,8 +12,10 @@ import {
     AccountDTenants,
     AccountData,
     AccountRoleIds,
-    AccountTenantIds
-    
+    AccountTenantIds,
+    AccountCreatedAt,
+    AccountUpdatedAt,
+    AccountDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdateAccountCommand)
@@ -21,7 +23,7 @@ export class UpdateAccountCommandHandler implements ICommandHandler<UpdateAccoun
 {
     constructor(
         private readonly updateAccountService: UpdateAccountService
-    ) { }
+    ) {}
 
     async execute(command: UpdateAccountCommand): Promise<void>
     {

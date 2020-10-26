@@ -14,15 +14,15 @@ export class AddPermissionsContextEvent extends AggregateRoot
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedPermissionsEvent(
-                this.aggregateRoots.map(permission => 
+                this.aggregateRoots.map(permission =>
                     new CreatedPermissionEvent(
                         permission.id.value,
                         permission.name.value,
@@ -42,7 +42,7 @@ export class AddPermissionsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedPermissionsEvent(
-                this.aggregateRoots.map(permission => 
+                this.aggregateRoots.map(permission =>
                     new DeletedPermissionEvent(
                         permission.id.value,
                         permission.name.value,
@@ -51,10 +51,10 @@ export class AddPermissionsContextEvent extends AggregateRoot
                         permission.createdAt?.value,
                         permission.updatedAt?.value,
                         permission.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

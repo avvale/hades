@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateBoundedContextCommand } from './update-bounded-context.command';
 import { UpdateBoundedContextService } from './update-bounded-context.service';
-import { 
+import {
     BoundedContextId,
     BoundedContextName,
     BoundedContextRoot,
@@ -15,7 +15,7 @@ export class UpdateBoundedContextCommandHandler implements ICommandHandler<Updat
 {
     constructor(
         private readonly updateBoundedContextService: UpdateBoundedContextService
-    ) { }
+    ) {}
 
     async execute(command: UpdateBoundedContextCommand): Promise<void>
     {

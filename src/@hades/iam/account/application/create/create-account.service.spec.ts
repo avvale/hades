@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 import { CreateAccountService } from './create-account.service';
-import { 
+import {
     AccountId,
     AccountType,
     AccountEmail,
@@ -15,19 +15,22 @@ import {
     AccountDTenants,
     AccountData,
     AccountRoleIds,
-    AccountTenantIds
-    
+    AccountTenantIds,
+    AccountCreatedAt,
+    AccountUpdatedAt,
+    AccountDeletedAt,
 } from './../../domain/value-objects';
 import { IAccountRepository } from './../../domain/account.repository';
 import { MockAccountRepository } from './../../infrastructure/mock/mock-account.repository';
 
-describe('CreateAccountService', () => 
+describe('CreateAccountService', () =>
+
 {
     let service: CreateAccountService;
     let repository: IAccountRepository;
     let mockRepository: MockAccountRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -36,7 +39,7 @@ describe('CreateAccountService', () =>
                 EventPublisher,
                 CreateAccountService,
                 MockAccountRepository,
-                { 
+                {
                     provide: IAccountRepository,
                     useValue: {
                         create: (item) => {}
@@ -50,14 +53,14 @@ describe('CreateAccountService', () =>
         mockRepository  = module.get(MockAccountRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateAccountService should be defined', () => 
+        test('CreateAccountService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a account and emit event', async () => 
+        test('should create a account and emit event', async () =>
         {
             expect(await service.main(
                 new AccountId(accounts[0].id),

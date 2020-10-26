@@ -11,7 +11,7 @@ export class FindUserByIdService
     ) {}
 
     public async main(id: UserId): Promise<IamUser>
-    {        
+    {
         return await this.repository.findById(id);
     }
 }

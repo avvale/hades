@@ -4,7 +4,7 @@ import { CreateBoundedContextsCommand } from '@hades/iam/bounded-context/applica
 import { SeederModule } from './seeder.module';
 import { boundedContexts } from '@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

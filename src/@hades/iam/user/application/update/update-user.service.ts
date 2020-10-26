@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     UserId,
     UserAccountId,
     UserName,
@@ -43,7 +43,7 @@ export class UpdateUserService
         data?: UserData,
         
     ): Promise<void>
-    {        
+    {
         // create aggregate with factory pattern
         const user = IamUser.register(
             id,
@@ -61,15 +61,15 @@ export class UpdateUserService
             new UserUpdatedAt(Utils.nowTimestamp()),
             null
         );
-        
+
         // update
-        await this.repository.update(user);        
-            
+        await this.repository.update(user);
+
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const userRegister = this.publisher.mergeObjectContext(
             user
         );
-        
+
         userRegister.updated(user); // apply event to model events
         userRegister.commit(); // commit all events of model
     }

@@ -4,7 +4,7 @@ import { CreatePermissionsCommand } from '@hades/iam/permission/application/crea
 import { SeederModule } from './seeder.module';
 import { permissions } from '@hades/iam/permission/infrastructure/seeds/permission.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

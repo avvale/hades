@@ -11,7 +11,7 @@ export class FindPermissionService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamPermission>
-    {        
+    {
         return await this.repository.find(queryStatement);
     }
 }

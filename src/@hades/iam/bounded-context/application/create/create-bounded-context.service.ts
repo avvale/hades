@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     BoundedContextId,
     BoundedContextName,
     BoundedContextRoot,
@@ -43,7 +43,7 @@ export class CreateBoundedContextService
             new BoundedContextUpdatedAt(Utils.nowTimestamp()),
             null
         );
-        
+
         // create
         await this.repository.create(boundedContext);
 
@@ -51,7 +51,7 @@ export class CreateBoundedContextService
         const boundedContextRegister = this.publisher.mergeObjectContext(
             boundedContext
         );
-        
+
         boundedContextRegister.created(boundedContext); // apply event to model events
         boundedContextRegister.commit(); // commit all events of model
     }

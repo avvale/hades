@@ -11,7 +11,7 @@ export class GetAccountsService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamAccount[]>
-    {        
+    {
         return await this.repository.get(queryStatement);
     }
 }

@@ -8,15 +8,15 @@ export class PaginateAccountsQueryHandler implements IQueryHandler<PaginateAccou
 {
     constructor(
         private readonly paginateAccountsService: PaginateAccountsService
-    ) { }
+    ) {}
 
     async execute(query: PaginateAccountsQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateAccountsService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginateAccountsService.main(query.queryStatement, query.constraint);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

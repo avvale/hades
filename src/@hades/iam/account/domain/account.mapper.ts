@@ -2,7 +2,7 @@ import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { IamAccount } from './account.aggregate';
 import { AccountResponse } from './account.response';
-import { 
+import {
     AccountId,
     AccountType,
     AccountEmail,
@@ -16,8 +16,7 @@ import {
     AccountTenantIds,
     AccountCreatedAt,
     AccountUpdatedAt,
-    AccountDeletedAt
-    
+    AccountDeletedAt,
 } from './value-objects';
 import { UserMapper } from '@hades/iam/user/domain/user.mapper';
 
@@ -31,7 +30,7 @@ export class AccountMapper implements IMapper
     constructor(
         public options: MapperOptions = { eagerLoading: true }
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param account
@@ -45,18 +44,18 @@ export class AccountMapper implements IMapper
 
     /**
      * Map array of objects to array aggregates
-     * @param accounts 
+     * @param accounts
      */
     mapModelsToAggregates(accounts: ObjectLiteral[]): IamAccount[]
     {
         if (!Array.isArray(accounts)) return;
-        
+
         return accounts.map(account  => this.makeAggregate(account));
     }
 
     /**
      * Map aggregate to response
-     * @param account 
+     * @param account
      */
     mapAggregateToResponse(account: IamAccount): AccountResponse
     {
@@ -106,7 +105,7 @@ export class AccountMapper implements IMapper
     private makeResponse(account: IamAccount): AccountResponse
     {
         if (!account) return;
-        
+
         return new AccountResponse(
             account.id.value,
             account.type.value,

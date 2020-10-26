@@ -29,7 +29,7 @@ export abstract class IUserRepository implements IRepository<IamUser>
 
     // update record
     abstract async update(user: IamUser): Promise<void>;
-  
+
     // delete record
     abstract async deleteById(id: UserId): Promise<void>;
 

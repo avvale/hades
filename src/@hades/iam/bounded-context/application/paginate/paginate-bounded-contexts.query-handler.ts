@@ -8,15 +8,15 @@ export class PaginateBoundedContextsQueryHandler implements IQueryHandler<Pagina
 {
     constructor(
         private readonly paginateBoundedContextsService: PaginateBoundedContextsService
-    ) { }
+    ) {}
 
     async execute(query: PaginateBoundedContextsQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateBoundedContextsService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginateBoundedContextsService.main(query.queryStatement, query.constraint);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

@@ -11,7 +11,7 @@ export class FindPermissionByIdService
     ) {}
 
     public async main(id: PermissionId): Promise<IamPermission>
-    {        
+    {
         return await this.repository.findById(id);
     }
 }

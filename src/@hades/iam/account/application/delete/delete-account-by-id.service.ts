@@ -20,7 +20,7 @@ export class DeleteAccountByIdService
 
         // insert EventBus in object, to be able to apply and commit events
         const accountRegister = this.publisher.mergeObjectContext(account);
-        
+
         accountRegister.deleted(account); // apply event to model events
         accountRegister.commit(); // commit all events of model
     }

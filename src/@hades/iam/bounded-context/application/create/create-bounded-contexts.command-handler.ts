@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateBoundedContextsCommand } from './create-bounded-contexts.command';
 import { CreateBoundedContextsService } from './create-bounded-contexts.service';
-import { 
+import {
     BoundedContextId,
     BoundedContextName,
     BoundedContextRoot,
@@ -15,14 +15,14 @@ export class CreateBoundedContextsCommandHandler implements ICommandHandler<Crea
 {
     constructor(
         private readonly createBoundedContextsService: CreateBoundedContextsService
-    ) { }
+    ) {}
 
     async execute(command: CreateBoundedContextsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createBoundedContextsService.main(
             command.boundedContexts
-                .map(boundedContext => { 
+                .map(boundedContext => {
                     return {
                         id: new BoundedContextId(boundedContext.id),
                         name: new BoundedContextName(boundedContext.name),

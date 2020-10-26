@@ -11,7 +11,7 @@ export class GetUsersService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamUser[]>
-    {        
+    {
         return await this.repository.get(queryStatement);
     }
 }

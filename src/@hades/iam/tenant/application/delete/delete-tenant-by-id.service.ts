@@ -20,7 +20,7 @@ export class DeleteTenantByIdService
 
         // insert EventBus in object, to be able to apply and commit events
         const tenantRegister = this.publisher.mergeObjectContext(tenant);
-        
+
         tenantRegister.deleted(tenant); // apply event to model events
         tenantRegister.commit(); // commit all events of model
     }

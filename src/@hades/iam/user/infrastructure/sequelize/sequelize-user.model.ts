@@ -3,7 +3,7 @@ import { DataTypes } from 'sequelize';
 import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 
 @Table({ modelName: 'iam_user', freezeTableName: true })
-export class IamUserModel extends Model<IamUserModel> 
+export class IamUserModel extends Model<IamUserModel>
 {
     @Column({
         field: 'id',

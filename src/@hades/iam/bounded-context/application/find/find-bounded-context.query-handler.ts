@@ -11,7 +11,7 @@ export class FindBoundedContextQueryHandler implements IQueryHandler<FindBounded
 
     constructor(
         private readonly findBoundedContextService: FindBoundedContextService
-    ) { }
+    ) {}
 
     async execute(query: FindBoundedContextQuery): Promise<BoundedContextResponse>
     {

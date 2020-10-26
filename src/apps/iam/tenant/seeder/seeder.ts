@@ -4,7 +4,7 @@ import { CreateTenantsCommand } from '@hades/iam/tenant/application/create/creat
 import { SeederModule } from './seeder.module';
 import { tenants } from '@hades/iam/tenant/infrastructure/seeds/tenant.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

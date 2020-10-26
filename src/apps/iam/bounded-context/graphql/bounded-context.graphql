@@ -11,7 +11,6 @@ type IamBoundedContext
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input IamCreateBoundedContextInput
@@ -34,7 +33,7 @@ input IamUpdateBoundedContextInput
     
 }
 
-type Query 
+type Query
 {
     iamFindBoundedContext(query:QueryStatement constraint:QueryStatement): IamBoundedContext
     iamFindBoundedContextById(id:ID constraint:QueryStatement): IamBoundedContext
