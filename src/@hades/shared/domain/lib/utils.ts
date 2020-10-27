@@ -2,18 +2,19 @@ import { Moment } from 'moment';
 import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
 declare const Buffer: any;
 
 export class Utils
 {
     public static now(): Moment
-    {   
+    {
         if (process.env.TZ) return moment().tz(process.env.TZ);
         return moment();
     }
 
     public static nowTimestamp(): string
-    {   
+    {
         if (process.env.TZ) return moment().tz(process.env.TZ).format('YYYY-MM-DD H:mm:ss');
         return moment().format('YYYY-MM-DD H:mm:ss');
     }
@@ -21,11 +22,11 @@ export class Utils
     public static sha1(data: string): string
     {
         const generator = crypto.createHash('sha1');
-        generator.update(data);  
-        
+        generator.update(data);
+
         return generator.digest('hex');
     }
-   
+
     public static base64Encode(data: string): string
     {
         return Buffer.from(data).toString('base64');
@@ -36,7 +37,7 @@ export class Utils
         return Buffer.from(data, 'base64').toString('utf-8')
     }
 
-    // map deeply object keys 
+    // map deeply object keys
     public static deepMapKeys(obj, fn): Object
     {
         return Array.isArray(obj)
@@ -49,11 +50,16 @@ export class Utils
                         val !== null && typeof val === 'object' ? Utils.deepMapKeys(val, fn) : val;
                     return acc;
                 }, {})
-                : obj;   
+                : obj;
     }
 
     public static hash(password: string, saltRounds: number = 10): string
-    {   
+    {
         return bcrypt.hashSync(password, saltRounds);
+    }
+
+    public static uuid(): string
+    {
+        return uuidv4();
     }
 }
