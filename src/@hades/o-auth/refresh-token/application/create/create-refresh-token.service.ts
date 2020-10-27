@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { JwtService } from '@nestjs/jwt';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     RefreshTokenId,
     RefreshTokenAccessTokenId,
     RefreshTokenCreatedAt,
     RefreshTokenUpdatedAt,
-    RefreshTokenExpiredRefreshToken, 
-    RefreshTokenToken, 
-    RefreshTokenIsRevoked, 
+    RefreshTokenExpiredRefreshToken,
+    RefreshTokenToken,
+    RefreshTokenIsRevoked,
     RefreshTokenExpiresAt
 } from './../../domain/value-objects';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
@@ -62,7 +62,7 @@ export class CreateRefreshTokenService
         const refreshTokenRegister = this.publisher.mergeObjectContext(
             refreshToken
         );
-        
+
         refreshTokenRegister.created(refreshToken); // apply event to model events
         refreshTokenRegister.commit(); // commit all events of model
     }
