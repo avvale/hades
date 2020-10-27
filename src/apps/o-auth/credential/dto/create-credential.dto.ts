@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateCredentialDto 
-{    
+export class CreateCredentialDto
+{
     @ApiProperty({
         type        : String,
         description : 'grantType [input here api field description]',
@@ -9,42 +9,49 @@ export class CreateCredentialDto
         enum        : ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD']
     })
     grantType: string;
-    
+
     @ApiProperty({
         type        : String,
         description : 'username [input here api field description]',
         example     : 'john@gmail.com'
     })
     username: string;
-    
+
     @ApiProperty({
         type        : String,
         description : 'password [input here api field description]',
         example     : '123456'
     })
     password: string;
-    
+
     @ApiProperty({
         type        : String,
-        description : 'accessTokenId [input here api field description]',
-        example     : '077e099f-2640-4f12-b1d8-eef80ee8cff9'
+        description : 'email [input here api field description]',
+        example     : 'john@gmail.com'
     })
-    accessTokenId: string;
-    
-    @ApiProperty({
-        type        : String,
-        description : 'refreshToken [input here api field description]',
-        example     : 'Cum aliquid numquam nulla vel fuga ducimus alias et molestiae. Accusantium vel nesciunt sed. Numquam quam corrupti iusto ipsam nesciunt facere voluptatem. Officia velit eaque. Quas dolore qui voluptas doloremque doloremque blanditiis qui et. Non architecto eveniet cumque nihil odit et non explicabo.'
-    })
-    refreshToken: string;
-    
+    email: string;
+
     @ApiProperty({
         type        : String,
         description : 'clientSecret [input here api field description]',
         example     : 'ktjfde3ibcxglzz7glw6ehoibcn4olk8yitqaqtlvpaot7n0514wdzayzmss7cd15abiohcfwzjh4i3a7q48ss8vfk'
     })
     clientSecret: string;
-    
+
+    @ApiProperty({
+        type        : String,
+        description : 'accessTokenId [input here api field description]',
+        example     : '077e099f-2640-4f12-b1d8-eef80ee8cff9'
+    })
+    accessTokenId: string;
+
+    @ApiProperty({
+        type        : String,
+        description : 'refreshToken [input here api field description]',
+        example     : 'Cum aliquid numquam nulla vel fuga ducimus alias et molestiae. Accusantium vel nesciunt sed. Numquam quam corrupti iusto ipsam nesciunt facere voluptatem. Officia velit eaque. Quas dolore qui voluptas doloremque doloremque blanditiis qui et. Non architecto eveniet cumque nihil odit et non explicabo.'
+    })
+    refreshToken: string;
+
     @ApiProperty({
         type        : String,
         description : 'redirect [input here api field description]',

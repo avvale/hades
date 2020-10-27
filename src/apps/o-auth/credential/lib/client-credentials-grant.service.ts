@@ -1,15 +1,16 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { IamAccountType, OAuthClientGrantType, OAuthCreateCredentialInput } from './../../../../graphql';
+import { CreateCredentialDto } from './../dto/create-credential.dto';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { Utils } from "@hades/shared/domain/lib/utils";
-import { CreateAccessTokenCommand } from "@hades/o-auth/access-token/application/create/create-access-token.command";
-import { CreateRefreshTokenCommand } from "@hades/o-auth/refresh-token/application/create/create-refresh-token.command";
-import { FindAccessTokenQuery } from "@hades/o-auth/access-token/application/find/find-access-token.query";
-import { FindClientQuery } from "@hades/o-auth/client/application/find/find-client.query";
-import { FindAccountQuery } from "@hades/iam/account/application/find/find-account.query";
+import { Utils } from '@hades/shared/domain/lib/utils';
+import { CreateAccessTokenCommand } from '@hades/o-auth/access-token/application/create/create-access-token.command';
+import { CreateRefreshTokenCommand } from '@hades/o-auth/refresh-token/application/create/create-refresh-token.command';
+import { FindAccessTokenQuery } from '@hades/o-auth/access-token/application/find/find-access-token.query';
+import { FindClientQuery } from '@hades/o-auth/client/application/find/find-client.query';
+import { FindAccountQuery } from '@hades/iam/account/application/find/find-account.query';
 
 @Injectable()
 export class ClientCredentialsGrantService
@@ -19,11 +20,11 @@ export class ClientCredentialsGrantService
         private readonly queryBus: IQueryBus
     ) {}
 
-    async getCredential(payload: OAuthCreateCredentialInput, context)
+    async getCredential(payload: OAuthCreateCredentialInput | CreateCredentialDto)
     {
         // get account with email
         const account = await this.queryBus.ask(new FindAccountQuery({
-            where: { 
+            where: {
                 email: payload.email,
                 type: IamAccountType.SERVICE,
                 isActive: true
@@ -35,7 +36,7 @@ export class ClientCredentialsGrantService
 
         // get client
         const client = await this.queryBus.ask(new FindClientQuery({
-            where: { 
+            where: {
                 id: account.clientId,
                 secret: payload.clientSecret,
                 grantType: OAuthClientGrantType.CLIENT_CREDENTIALS
@@ -67,7 +68,7 @@ export class ClientCredentialsGrantService
             {
                 where: {
                     id: accessTokenId
-                }, 
+                },
                 include: ['refreshToken']
             }
         ));
