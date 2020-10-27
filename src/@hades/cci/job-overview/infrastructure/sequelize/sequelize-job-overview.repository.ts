@@ -25,7 +25,7 @@ export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOv
         super();
     }
 
-    async getDashboardData(query?: QueryStatement): Promise<CciJobOverview[]> 
+    async getDashboardData(query?: QueryStatement): Promise<CciJobOverview[]>
     {
         const models = await this.repository.findAll(
             _.merge(this.criteria.implements(query), {

@@ -32,7 +32,7 @@ export abstract class IJobOverviewRepository implements IRepository<CciJobOvervi
 
     // update record
     abstract async update(jobOverview: CciJobOverview): Promise<void>;
-  
+
     // delete record
     abstract async deleteById(id: JobOverviewId): Promise<void>;
 

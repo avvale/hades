@@ -11,7 +11,7 @@ export class GetDashboardJobsOverviewService
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<CciJobOverview[]>
-    {        
+    {
         return await this.repository.getDashboardData(queryStatement);
     }
 }

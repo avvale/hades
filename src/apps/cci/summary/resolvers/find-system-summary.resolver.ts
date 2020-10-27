@@ -37,11 +37,11 @@ export class FindSystemSummaryResolver
     {
         // get system
         const system = await this.queryBus.ask(new FindSystemQuery({
-            where: { 
+            where: {
                 id: systemId,
                 isActive: true,
                 // TODO, filtar por campo de cancelled_at para evitar coger datos de sistemas cancelados?
-            }, 
+            },
             order: [
                 ['createdAt', 'DESC']
             ]
@@ -51,33 +51,33 @@ export class FindSystemSummaryResolver
 
         // get last execution for this system, tenad add by contraint with TenantConstraint() decorator
         const execution = await this.queryBus.ask(new FindExecutionQuery({
-            where: { 
+            where: {
                 systemId: system.id
-            }, 
+            },
             order: [
                 ['createdAt', 'DESC']
             ]
         }, constraint));
 
         if (!execution) throw new NotFoundException(`Execution for this system not found`);
-        
+
         // get details for jobs
         const jobsDetail = await this.queryBus.ask(new GetJobsDetailQuery({
-            where: { 
+            where: {
                 executionId: execution.id
             }
         }));
 
         // get details for channels
         const channelsDetail = await this.queryBus.ask(new GetChannelsDetailQuery({
-            where: { 
+            where: {
                 executionId: execution.id
             }
         }));
 
         // get details for messages
         const messagesDetail = await this.queryBus.ask(new GetMessagesDetailQuery({
-            where: { 
+            where: {
                 executionId: execution.id
             }
         }));
