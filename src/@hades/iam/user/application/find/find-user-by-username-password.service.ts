@@ -19,15 +19,15 @@ export class FindUserByUsernamePasswordService
             },
             include: ['account']
         });
-        
+
         // check user active, and correct password
-        if (user && user.account.isActive && bcrypt.compareSync(password.value, user.password.value)) 
+        if (user && user.account.isActive && bcrypt.compareSync(password.value, user.password.value))
         {
             // set validation rule to undefinedable
-            user.password.validationRules = Object.assign(user.password.validationRules, { 
+            user.password.validationRules = Object.assign(user.password.validationRules, {
                 undefinable: true,
             })
-           
+
             // delete password from response
             user.password.value = undefined;
 

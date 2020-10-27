@@ -1,4 +1,5 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
+import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
 import { DataTypes } from 'sequelize';
 import { IamUserModel } from '@hades/iam/user/infrastructure/sequelize/sequelize-user.model';
 import { IamRoleModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-role.model';
@@ -24,6 +25,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     })
     type: string;
 
+    @Unique
     @Column({
         field: 'email',
         allowNull: false,
@@ -38,6 +40,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     })
     isActive: boolean;
 
+    @UnderscoredIndex
     @Column({
         field: 'client_id',
         allowNull: false,
