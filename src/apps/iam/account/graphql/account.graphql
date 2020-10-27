@@ -25,10 +25,10 @@ type IamAccount
 input IamCreateAccountInput
 {
     id: ID!
-    type: IamAccountType
-    email: GraphQLString
-    isActive: GraphQLBoolean
-    clientId: ID
+    type: IamAccountType!
+    email: GraphQLString!
+    isActive: GraphQLBoolean!
+    clientId: ID!
     dApplicationCodes: JSON
     dPermissions: JSON
     data: JSON
@@ -50,6 +50,7 @@ input IamUpdateAccountInput
     roleIds: [ID]
     tenantIds: [ID]
     user: IamUpdateUserInput
+    
 }
 
 type Query

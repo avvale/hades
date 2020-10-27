@@ -23,6 +23,7 @@ aggregateProperties:
     type: varchar
     maxLength: 120
     nullable: false
+    index: unique
     example: john@gmial.com
   - name: is_active
     type: boolean
@@ -32,6 +33,7 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
+    index: index
     example: ''
   - name: d_application_codes
     type: json
