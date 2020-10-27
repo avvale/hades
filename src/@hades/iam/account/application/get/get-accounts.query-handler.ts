@@ -10,7 +10,7 @@ export class GetAccountsQueryHandler implements IQueryHandler<GetAccountsQuery>
     private readonly mapper: AccountMapper = new AccountMapper();
 
     constructor(
-        private readonly getAccountsService: GetAccountsService
+        private readonly getAccountsService: GetAccountsService,
     ) {}
 
     async execute(query: GetAccountsQuery): Promise<AccountResponse[]>

@@ -20,7 +20,7 @@ export class IamDeleteAccountsResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamDeleteAccounts')

@@ -8,7 +8,7 @@ import { IamAccount } from './../../domain/account.aggregate';
 export class PaginateAccountsService
 {
     constructor(
-        private readonly repository: IAccountRepository
+        private readonly repository: IAccountRepository,
     ) {}
 
     public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<IamAccount>>

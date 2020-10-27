@@ -19,13 +19,14 @@ export class IamCreateAccountsResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamCreateAccounts')
     async main(@Args('payload') payload: IamCreateAccountInput[])
     {
-        await this.commandBus.dispatch(new CreateAccountsCommand(payload));
+        // TODO, bulk create accounts
+        // await this.commandBus.dispatch(new CreateAccountsCommand(payload));
         return true;
     }
 }

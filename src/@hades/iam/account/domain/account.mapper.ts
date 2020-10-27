@@ -28,7 +28,7 @@ import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 export class AccountMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
 
     /**

@@ -25,16 +25,16 @@ type IamAccount
 input IamCreateAccountInput
 {
     id: ID!
-    type: IamAccountType!
-    email: GraphQLString!
-    isActive: GraphQLBoolean!
-    clientId: ID!
+    type: IamAccountType
+    email: GraphQLString
+    isActive: GraphQLBoolean
+    clientId: ID
     dApplicationCodes: JSON
     dPermissions: JSON
     data: JSON
     roleIds: [ID]
     tenantIds: [ID]
-    user: IamCreateUserInput!
+    user: IamCreateUserInput
 }
 
 input IamUpdateAccountInput

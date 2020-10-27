@@ -9,7 +9,7 @@ import {
 export class DeleteAccountByIdCommandHandler implements ICommandHandler<DeleteAccountByIdCommand>
 {
     constructor(
-        private readonly deleteAccountByIdService: DeleteAccountByIdService
+        private readonly deleteAccountByIdService: DeleteAccountByIdService,
     ) {}
 
     async execute(command: DeleteAccountByIdCommand): Promise<void>

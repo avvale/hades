@@ -22,7 +22,7 @@ export class IamDeleteAccountsController
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Delete()

@@ -18,7 +18,7 @@ import { IamAccount } from './../../../../graphql';
 export class IamGetAccountsResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Query('iamGetAccounts')

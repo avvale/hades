@@ -22,7 +22,7 @@ import {
 export class UpdateAccountCommandHandler implements ICommandHandler<UpdateAccountCommand>
 {
     constructor(
-        private readonly updateAccountService: UpdateAccountService
+        private readonly updateAccountService: UpdateAccountService,
     ) {}
 
     async execute(command: UpdateAccountCommand): Promise<void>

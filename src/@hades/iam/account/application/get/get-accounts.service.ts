@@ -7,7 +7,7 @@ import { IamAccount } from './../../domain/account.aggregate';
 export class GetAccountsService
 {
     constructor(
-        private readonly repository: IAccountRepository
+        private readonly repository: IAccountRepository,
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<IamAccount[]>
