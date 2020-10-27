@@ -18,14 +18,12 @@ export class AuthorizationGuard implements CanActivate
         if (context['contextType'] === 'graphql')
         {
             const ctx = GqlExecutionContext.create(context);
-            return  permissions.every(permisison => ctx.getContext().req.user.dPermissions.all.includes(permisison));
+            return permissions.every(permisison => ctx.getContext().req.user.dPermissions.all.includes(permisison));
         }
         else if (context['contextType'] === 'http')
         {
             const ctx = context.switchToHttp();
-            return  permissions.every(permisison => ctx.getRequest().user.dPermissions.all.includes(permisison));
-        }   
-
-        
+            return permissions.every(permisison => ctx.getRequest().user.dPermissions.all.includes(permisison));
+        }
     }
 }
