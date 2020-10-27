@@ -19,7 +19,7 @@ import { GetAccountsQuery } from '@hades/iam/account/application/get/get-account
 export class IamGetAccountsController
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Get()

@@ -9,7 +9,7 @@ export class DeleteAccountsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IAccountRepository
+        private readonly repository: IAccountRepository,
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<void>

@@ -8,7 +8,7 @@ import { DeletedAccountsEvent } from './deleted-accounts.event';
 export class AddAccountsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: IamAccount[] = []
+        public readonly aggregateRoots: IamAccount[] = [],
     ) {
         super();
     }

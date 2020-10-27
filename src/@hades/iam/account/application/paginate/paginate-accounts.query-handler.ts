@@ -7,7 +7,7 @@ import { PaginateAccountsService } from './paginate-accounts.service';
 export class PaginateAccountsQueryHandler implements IQueryHandler<PaginateAccountsQuery>
 {
     constructor(
-        private readonly paginateAccountsService: PaginateAccountsService
+        private readonly paginateAccountsService: PaginateAccountsService,
     ) {}
 
     async execute(query: PaginateAccountsQuery): Promise<PaginationResponse>

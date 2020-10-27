@@ -7,7 +7,7 @@ import { AccountId } from './../../domain/value-objects';
 export class FindAccountByIdService
 {
     constructor(
-        private readonly repository: IAccountRepository
+        private readonly repository: IAccountRepository,
     ) {}
 
     public async main(id: AccountId): Promise<IamAccount>

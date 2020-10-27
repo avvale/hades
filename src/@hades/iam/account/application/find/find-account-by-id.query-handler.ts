@@ -11,7 +11,7 @@ export class FindAccountByIdQueryHandler implements IQueryHandler<FindAccountByI
     private readonly mapper: AccountMapper = new AccountMapper();
 
     constructor(
-        private readonly findAccountByIdService: FindAccountByIdService
+        private readonly findAccountByIdService: FindAccountByIdService,
     ) {}
 
     async execute(query: FindAccountByIdQuery): Promise<AccountResponse>

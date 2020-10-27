@@ -19,7 +19,7 @@ import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-a
 export class IamFindAccountByIdController
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Get(':id')

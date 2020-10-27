@@ -11,7 +11,7 @@ export class AccountClientId extends UuidValueObject
             name: 'AccountClientId',
             nullable:  false ,
             undefinable:  false ,
-            length: 36
+            length: 36,
         }, validationRules), data);
     }
 }

@@ -26,7 +26,7 @@ export class CreateAccountsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IAccountRepository
+        private readonly repository: IAccountRepository,
     ) {}
 
     public async main(

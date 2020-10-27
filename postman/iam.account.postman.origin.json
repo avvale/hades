@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "398373b6-030f-4925-b734-a4fd321fa6c6",
+		"name"          : "@hades - iam/account",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - iamCreateAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamCreateAccountInput!)\n{\n\tiamCreateAccount (payload:$payload)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tclientId\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"e1889f0a-1aba-4476-a0fd-5543f975ef0f\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"g0t1txbgpqf5t98l5ta6eyojcbrv1gl1hd5q9i2defyynsrq4qw716gh3ekdaolxnje6a5vwgoyd6zyoga4dx8ra1u1tfk9ek12n8qme23b4awp8kp07ij4k\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"72d065a5-259e-4f1c-bea6-9c5ea1b9f45f\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamCreateAccounts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[IamCreateAccountInput]!)\n{\n\tiamCreateAccounts (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"f180138e-edc1-426c-b333-b7e647a2040c\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"gpu48htnfwba2qr7zox49mno0aitsjurabj45ygpf6tke5uz85iff6k0u41a2jhnkl7qwn50qykk7vb2bymrs9qdvmxqnhlw8bv2ttvfumoi0jit6mg9kbi6\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"42e4574c-290c-4932-8ad6-a43a1ddd0ac2\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1d0ec1a2-15fd-40a0-9c64-c1dd21a2d729\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"f2bnr79oocwxhygj6eflz1zoeog727rhlqmz45f6zyms35toh0d7h7n5iffwuyrkrqnsawi2hlevnimmelmkouxda9mripa6l7vbg10aq2vfqy6vtce3beu6\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"773c2823-1547-4650-adae-9f33ee19f517\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9d76e088-ffc9-4b3b-a298-5679c7daafd0\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"v6uyyitl4mitf8ft4fmzcjzjgnv2ph21ir1mohpx48bmfunlw796om8cn3y5dfxlrmoozjdy2ewhdztoigm71ggrjh10sszk4ku8yenvq4wjbzb1jckulrxf\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"bf7674bc-d433-470f-b448-6167be576c5d\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9f46734a-6531-48bc-9533-8dd277df682e\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"9nj42g5nf0chipdr0javnzaro6fd39ncocs8gi1ux9p6we9gjngi8118rznksmhkbh4711qtfh6f92j3ho48aw4sf1uy289uyalrcxuran7benrkf1ccpwqq\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"c92c0993-4fe6-4c49-9045-43099011aca6\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1967dfd5-3b02-4583-bd5d-6cef192c1122\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"hiexnj7gznhld01z7ddviim4pkuxbk99uhvbenhh0oak7iup2pyatzm1p3orqs5dn8slwltkrwyuxoqqd9lqvtimesia49r3ssj6u81gj9bxkdjc7fj24v6p\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"8aaf3436-c9bb-4525-8f16-0f3a951b87e3\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"32dcc915-a15b-44b6-8339-a8ce9a9c4260\", \n\t\t\t\"type\": \"USER\", \n\t\t\t\"email\": \"m9bz6v12u9ix2cye19t1ctfjmwzhdx0yiakb80mzbm38vy8jcz94xbx6uanfrb2ja1mfkg6wrx6imo750mfmn5mh77klede5kowe11s43n45ve4mn3x6k0r3\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"47f5346a-8ba8-405b-b41b-4c078d6a59ca\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"66a9ad98-8490-490a-8458-4216eb66b16a\", \n\t\t\t\"type\": \"USER\", \n\t\t\t\"email\": \"du6a6pmx80dxwuispcm8nbzmt88g4uqe1ugijxhnd1jfzt324fznygiw0jt00jzr3sptz9up6z4sx2mu74150wqzitt4nqjzds6tjvsk3uv8y3dmbo5xwh7m\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"07705e15-8e52-46c5-a479-a50db6598be0\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"508b31a8-1509-4a41-9e39-95982dc3b035\", \n\t\t\t\"type\": \"USER\", \n\t\t\t\"email\": \"qde5pefde93nh5xbctcvipos44j9bfyp17lc3pymax9mvgq9l3z3di4s9ycmfzmzsy470nirwa4eytj6q2lfvlldfnlr4dxi3f1zhhc6g30qpe7v7jk6h0un\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"efbfb981-46ac-4e8d-8cc8-f500b8c93222\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"35f4e5e2-03b3-4304-ac60-17a3ee04962f\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"lsi9g4dm9dmkvo6jyjg6tuu48l02xm8hludndxfpepm6bwxh4seb6o03hslvju5jfyshlq3w0r3ybpggoulyd10vyic48c59fkb0q2su5sy1gmgqkghrl7vz\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"fbd3f969-9b60-44fc-9390-b4858f8e565a\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cdc1b7d1-843c-4bca-973c-8179825bec6c\", \n\t\t\t\"type\": \"USER\", \n\t\t\t\"email\": \"unxu58tita6okk723mqs1ucz8don3gkz1274st6kiktb405m4bvrxkgyq4p45r643amj9oudhqo7u3y18el6ib84ekycjuq8uhca8jw8h3qtblvkpuphfwlc\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"ff3f3ea6-f365-45c0-b9ab-5e2d7966f485\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f3dcbff4-afa4-4716-b504-eb24ea778529\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"x47ri438wcykxw46lj9hiwjr8g3iff1dpbpgn0uo5xz281ji3umqc5iri3fqz3fd6zcnjzg9qphkdh44gjx9vaudh9ecbvx36v3ot2jbpu12oa0skt26a8q0\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"a44f8229-cb0c-492d-84f0-88db99441cf2\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a50cd5e4-db6b-4b01-8788-e4acaf71af51\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"3ykapvc59rkdzwquroi1ge9cz6f8yjw5a0ivgq4yktmsqnpmgxtrwh7izj6jrgpbvkygdf1dn286sl9qmlpwif3b2p36ti8ea2daaripvva130adjvjrgrkw\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"d94a1dcb-4762-4794-9cb5-077c78e87b33\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"90fdaae9-7b82-4689-b0c7-9535985ee324\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"gjj2s3h6d7yy65u5qnoj08vbjflf9zi33a6plki8janahhmvylvsrnlg18031hojkb1z0ogsqzru4x0gzrpr7iqilebhgp5d084f3jicrlrebzag97n8ze70\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"6b276e1f-5351-4023-b616-7884066bd66d\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"32bc893f-5c80-4732-a48d-e73627694cab\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"jxl23c72llp94oue1hx0ljxu4vogk5pj9f9k65p45600jtwz8qn9akrqzg335f71om2g8epl7cra9lahch088ey1ys5e0iyxs1xc75f7krjs3y1uazn6ipm0\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"53aa6979-72aa-4404-86bd-6bf0520056f3\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"627e5d83-e4f9-475b-8bab-d46dd77bd7e2\", \n\t\t\t\"type\": \"USER\", \n\t\t\t\"email\": \"swktqicxqv7ndms2abufvw4grcl7w3ld7v45r05g5nu71pih44to7z47zgqvlxpxx6ay7tofvbosol7lwrx9fob6k8mgsa5xa61eofhcjo5qvzzmcvw9ardu\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"aacb342b-1ffd-4f9a-a302-f34a7a9e73cd\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9e81aaf7-e745-490b-80f9-4a6047d24e7b\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"i668nqo2yk5wx3sgyfecltqn5ctbz6k98xlsz3jwvhfqa83zodze1eg165dopdqtrnaia7uoq9nj7kns8psqr5jq13syvm34jgw3eo15xzf5yed23ve78c5r\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"2d8cde67-4620-4d1f-a563-abd2ca4c7da2\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8d67b58c-2837-40ea-9cfe-5f3865416711\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"re6hxreshnhj2i6cx8wa7nij78uwzb4u36semdchxad3e8dnt2or0addbqh2asa5b8mlc3783eqvbl2z4vlr8scune2kv9u3n0nwwbxvnj3knuigs0q8ir71\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"0893bc62-f98f-46b7-a13f-e04a62840482\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b9066f52-566b-46fb-a342-d3833781dab5\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"6d78sdu2u1656hqkvhorrezqoi05xk0vc3p5aqj2u7kq4z9mmgf68zm8eoooo3crmstzecnz5xh5etedha511k0qael13e5nhqpnhxmq8br60zj7gdogxqj9\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"0cd678ef-b7a3-43f6-b656-53fbd0015d8d\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1a169b4c-8bca-47b3-816e-2e4cac996ebc\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"kltufddmyaqkjby7ad24xvzin7wxo5a0da0mdgrywte19tn62rlmdobywfjiow0fgfl3ovlrxzbf06km7mm1cxwiekzt8u273dz8ejaixrrza0828l67qu0q\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"9295b6b2-d404-469f-943b-f85e12d8a2ef\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3aa36ff5-a3e8-4e3c-a682-d2deeef2c017\", \n\t\t\t\"type\": \"SERVICE\", \n\t\t\t\"email\": \"pyhgcqffckpsr0rd01d0pul7qd97zu8bpz4nrbdzrg1vuhjwzsjeua4vr0fgm9agvkmk8x7qhy7wk0ijy7av8dc36pwtdqwsy3rvhe32aa9kotudcc1qlcmf\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"bdc24a4f-5687-463d-8f9a-083eb180165b\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"roleIds\": [], \n\t\t\t\"tenantIds\": []\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamPaginateAccounts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateAccounts (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamGetAccounts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamGetAccounts (query: $query)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tclientId\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"e1889f0a-1aba-4476-a0fd-5543f975ef0f\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamFindAccount (query: $query)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tclientId\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"e1889f0a-1aba-4476-a0fd-5543f975ef0f\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindAccountById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tiamFindAccountById (id:$id)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tclientId\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"e1889f0a-1aba-4476-a0fd-5543f975ef0f\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamUpdateAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamUpdateAccountInput!)\n{\n\tiamUpdateAccount (payload:$payload)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tclientId\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"e1889f0a-1aba-4476-a0fd-5543f975ef0f\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"folxzlu6ta1ra0hl8ibbracx5o2dzxer4u5wmlwjaiypzv2f46soqk8pav5dx8onuf8aw4xfswy9k8k6kmxp1oxpxpvfm8w4ggg0919s96ec43j2n9lq62i9\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"72d065a5-259e-4f1c-bea6-9c5ea1b9f45f\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteAccountById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tiamDeleteAccountById (id:$id)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tclientId\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"e1889f0a-1aba-4476-a0fd-5543f975ef0f\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteAccounts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteAccounts (query: $query)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tclientId\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"e1889f0a-1aba-4476-a0fd-5543f975ef0f\", \n\t\"type\": \"USER\", \n\t\"email\": \"fdy56z5ngqmzj2y7bqdviz5gw3k7h50ldnwbfnc2ahj1u8ifzbxwsegvei4ztvjzvg9j4y40zzknw1ffh0bqkw8w2yvmfodwja2ihde2stodg2j4hoo1r8tq\", \n\t\"isActive\": false, \n\t\"clientId\": \"72d065a5-259e-4f1c-bea6-9c5ea1b9f45f\", \n\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\"data\": { \"foo\" : \"bar\" }, \n\t\"roleIds\": [], \n\t\"tenantIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/iam/account",
+					"host": [
+						""
+					],
+					"path": [
+						"iam",
+						"account"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/accounts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"b00e69c2-e72b-481c-bbea-1d36fe77829b\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"ymhb0hgtm3xdfsm4ibdwe469a2t0ghbca74ips0tpz5xdsi6uije2vmifr4pxusxh4e2sb76xhoyglznteu4wpibzfvijoowmw6057w8epw9lsdrw0regigd\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"7037edf3-46da-4350-bb7a-811b2e9b5499\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"e4da32a9-2d04-4780-b275-b3393090311e\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"ipdw8eesm8nk33kt669yze8eqi4la97hktmasnc9870yxfu87sy7vhhd12aw1wzspqq4w3qgy918c9qqqiazk3bmkhq14j9cuzt8pisre8eaj7hxz8kasjf8\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"0d9dd327-d63e-4e26-9694-00be5c8d1d96\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"fe8edc5d-943e-451b-9d59-426709f3ac42\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"979rm816tdiir5jd1f81k04laqdrbe486r68ab5y49nn938uum6vqva3b10oo1s7ryn7mrrulo8gylgjep0jlshz4ay0b1p8lqgeejlh2e2vjbbt97gt5nj8\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"b3401151-0b88-4b86-a868-fadb5e4b5445\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"459b5ab5-c736-4ed8-9fe0-c93dc46f5dcd\", \n\t\t\"type\": \"SERVICE\", \n\t\t\"email\": \"dfk45zomrdg7nblvlnx945jwsf73yzj1916wr3seq9vr6wakn0b2zy7nuizseoxjq49g4dhgmr0z1x0jpn5hvalymqv00nh5leczybw9lm6xr73eytewapmw\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"3d7dd4ce-f16d-4f52-9082-758c98a1167c\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"dd0a80c7-4fdb-4493-8c84-38a4d3462643\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"x4nr2nr63fmbaua16khxsvpeh12zptsgz2udp0n4wvwetujkwgr787h62n5x06pnbpq7cdznrtxzqk7hjykia1cck1rqur7nwogrbes5jmauk12tdtnquofg\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"b025991d-a4f6-47fe-927a-3da69aabcf30\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"c3eb4799-5d9b-43fb-b84c-1340ca3fa8cf\", \n\t\t\"type\": \"SERVICE\", \n\t\t\"email\": \"9qj008h1wg5vievvd3by13izxfhw1873gwq1eb2y4nnoz2k5n1oy1kdw035obmys2mqly69yvoczc18xnrq6ryv2e6d18sm2ibob8tu1aejmza4rrm2dn63l\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"1fc55a9e-f551-4b8b-a731-48d975909ff6\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"7682f2a8-247c-4038-b412-c8bcd5f6329f\", \n\t\t\"type\": \"SERVICE\", \n\t\t\"email\": \"8ujxrcmnkbrzzl3mf7kmyeo8p1j4h18w2if7my398qs44tgot6p24ik5lzns7udv8uk9nlq9vast5xmqztjupjspjtht5zku7437pn4cdabv0txxyac4569f\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"75e3283d-dda4-42d7-976c-bf34ccf5a240\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"c128edd7-e724-4b88-92cc-9401875d56f1\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"odwj33lj58pc32sb8xlr6pkj3d7hcut7hektegaohe0ogne5vmtfy27c73jdy5yf47m5g6uqh6gxcwk0i5401up6pmn0b07g2dv4th1z79y0dze9sk0m96xe\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"08d6a551-5351-49e6-9ed1-30c6480da78c\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"3c579743-c50e-4e22-a1b7-fbbd3c446a67\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"2tqlf01pgl7gg4vboi7zn5rybdhwzscjhojzyt2egcerhsmeb4tw2x1kz8rnd7xd4qjglfhvwj37fknxp5scds4d2tww6gsqgoatp5m5ozugpyefxbg7s0z2\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"316dcd8d-702a-426a-be34-535d786e08a6\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"40f80297-54a4-4891-ba26-571004b545e7\", \n\t\t\"type\": \"SERVICE\", \n\t\t\"email\": \"ab61092g5t383e81mbgmkugfroyrzn1gzemzh2mt0a4ybtxsfvpztbee3djeaj56wtxathwcdhtccsphj292t1r33s6zchg4bhuhajruim4yjjktbp93c7y3\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"9729ab9b-e699-4d42-965e-be2eedb59f67\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"6596b917-3f2c-4b72-9790-d587f2caeacd\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"crhig7mmwwbkuf7g8kb4sgdtx4oa9d54n50hapofo37fefrasmferc80gyyhvz8wj77ktkjdfk7mj4t5d5j5pbjis5jyi512mrsy3cpbj0udv60eosyv3dwc\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"971af30d-ff24-4628-95e2-f36b7faee789\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"aaa871d7-1627-48a1-9c67-e9b46e22e17b\", \n\t\t\"type\": \"SERVICE\", \n\t\t\"email\": \"q3d0i49vtv8lkgcnwu9sewlzoj5uf2b87h52vtgezqjor5mav6z2dnr6yzhcvun060uu4sdonwcfvtqvixec0vm5e5ozkcx0gztwb0hzakq818k45arokkkh\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"d140d6b3-7213-4cfd-8f3c-f4ad03d4e390\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"f85b18be-8928-479d-a087-2c9268975d44\", \n\t\t\"type\": \"SERVICE\", \n\t\t\"email\": \"kxbmmegm59r6clcdgjp1p8hi5w6hff0p5hvpp7fkl8jgxkclmymgz34ur3g3jv9fh4d0f60cn3mwy7jamzz5l508yukon9fnnj9kecftwza2yx1ea9nn0goq\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"879fea67-8f7c-467f-8d94-e3d00c8e4183\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"830a80ae-753f-40b6-90f2-f9cd58b21f47\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"iw0f12b5unh6v5829w94w54q3je31dluvx4t10fatb7vgpohese84i2kvk92otd6vigr7g0ewt7pzkkp4cbncoy7tj7yo91dgz6u3stec9ezzi4fgh240abx\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"8dbc139e-48e7-43a7-8439-a394ad28e727\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"1e09345e-c0f1-433a-8192-75a1dcfae798\", \n\t\t\"type\": \"SERVICE\", \n\t\t\"email\": \"84xfetqwnp9vf125z2xiykoqo81dnrff8686ja6cghg9mv68kwgr5fsgc39dpqjsbbjlfzi1yuk1ocjwrqmz09rdmbsukpkgg8yvd6y4tzl95kgx9c7hr979\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"97e5dc4b-3c6b-4ac1-b8a3-f0e4fe98deaa\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"c2c66793-e2a4-49fd-b9d6-2a3e140af272\", \n\t\t\"type\": \"SERVICE\", \n\t\t\"email\": \"p74fwkoia7lit52gafj7yjo2q840wf40npdvh7qgrsdk7i412wmuqywnqn7mw8tkl2gfo432uacfyobdmrbxvopgizn701sel9cah2eypcaqwx8r2t88fmn6\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"e0c6c9c4-3948-4971-8874-9c4da8b97308\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"22b3e1db-eb37-4d8e-ac9b-dc11b716bc0b\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"n30dvdavy7p6hbgi4dbh6uozik1yv23xae6rmm0u8wvmvr96m6rcb2v2pqtrfvb6dff5tt1o0wgqgt3zp6ws1bslewqzk9n8k5zk0z5e8aulh1aezpdtflyl\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"4187ed10-49ba-4014-b2d1-7b25ec718aa4\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"12231f55-a1c4-44c8-b10a-88433b3f60eb\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"6n5n88pjnrf08y6ah4ht1927uf0zslao4r0rax27rtwnswpi41c68cgyvf8i8ndq545227dcgstp8k5xtbb4hpvlhwbkg8e23onp885n8uj7k1w81unkslea\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"8c895310-9040-4a43-8a1a-d173d6cc7a0a\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"826d7048-0e96-4c98-b56c-a43b1756990f\", \n\t\t\"type\": \"USER\", \n\t\t\"email\": \"8yccsneozlcwoi8vxvnnr0hji9aarbk7n0gqx2frdawx6gb0d6p12p6sg87pas2zgf2wv22ghg3eejz806c8oum7m0w6av6iy9eclyofjonhrnyubx7o342c\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"b8ace7a8-d473-4f9c-b71e-5e3b817a9717\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"24d209dd-362f-4a7a-a68e-c5f26b215e0a\", \n\t\t\"type\": \"SERVICE\", \n\t\t\"email\": \"drojx9nyc3vf3l0hny9airbfj2f7vo5ffheu1c5b633uk9j8hjjqeblasjj3a4g022b2ua4fh5rm9zkptqri5hchx91nk1g089ewjdp33sde0s8suv9ax10i\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"1f112fb0-23d3-4f5e-a1fa-19741954894a\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/iam/accounts",
+					"host": [
+						""
+					],
+					"path": [
+						"iam",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/accounts/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/iam/accounts/paginate",
+					"host": [
+						""
+					],
+					"path": [
+						"iam",
+                        "accounts",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/accounts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"e1889f0a-1aba-4476-a0fd-5543f975ef0f\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/iam/accounts",
+					"host": [
+						""
+					],
+					"path": [
+						"iam",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/account",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"e1889f0a-1aba-4476-a0fd-5543f975ef0f\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/iam/account",
+					"host": [
+						""
+					],
+					"path": [
+						"iam",
+						"account"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/account/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/iam/account/e1889f0a-1aba-4476-a0fd-5543f975ef0f",
+					"host": [
+						""
+					],
+					"path": [
+						"iam",
+						"account",
+						"e1889f0a-1aba-4476-a0fd-5543f975ef0f"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/account",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"e1889f0a-1aba-4476-a0fd-5543f975ef0f\", \n\t\"type\": \"SERVICE\", \n\t\"email\": \"hjmzb7ofy412xkgtd2kn63bpwael30c31sp0fd0jafidn8srjmxnpu5espzkxiht9pemfm1lqkihr87y1f2pyyewodmd8amcxlac8t3j9tj1tub4k98ynh6k\", \n\t\"isActive\": false, \n\t\"clientId\": \"72d065a5-259e-4f1c-bea6-9c5ea1b9f45f\", \n\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\"data\": { \"foo\" : \"bar\" }, \n\t\"roleIds\": [], \n\t\"tenantIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/iam/account",
+					"host": [
+						""
+					],
+					"path": [
+						"iam",
+						"account"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/account/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/iam/account/e1889f0a-1aba-4476-a0fd-5543f975ef0f",
+					"host": [
+						""
+					],
+					"path": [
+						"iam",
+						"account",
+						"e1889f0a-1aba-4476-a0fd-5543f975ef0f"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - iam/accounts",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/iam/accounts",
+					"host": [
+						""
+					],
+					"path": [
+						"iam",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "ffdcc539-f20f-436b-b67f-60c043ca0de3",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

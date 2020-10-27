@@ -18,7 +18,7 @@ import { Pagination } from './../../../../graphql';
 export class IamPaginateAccountsResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Query('iamPaginateAccounts')

@@ -6,7 +6,7 @@ import { DeleteAccountsService } from './delete-accounts.service';
 export class DeleteAccountsCommandHandler implements ICommandHandler<DeleteAccountsCommand>
 {
     constructor(
-        private readonly deleteAccountsService: DeleteAccountsService
+        private readonly deleteAccountsService: DeleteAccountsService,
     ) {}
 
     async execute(command: DeleteAccountsCommand): Promise<void>

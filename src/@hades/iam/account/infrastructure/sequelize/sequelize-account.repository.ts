@@ -17,7 +17,7 @@ export class SequelizeAccountRepository extends SequelizeRepository<IamAccount, 
     constructor(
         @InjectModel(IamAccountModel)
         public readonly repository: typeof IamAccountModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }

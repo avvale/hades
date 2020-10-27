@@ -20,7 +20,7 @@ import { Pagination } from '@hades/shared/domain/lib/pagination';
 export class IamPaginateAccountsController
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Get()

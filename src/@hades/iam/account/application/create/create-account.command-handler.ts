@@ -22,7 +22,7 @@ import {
 export class CreateAccountCommandHandler implements ICommandHandler<CreateAccountCommand>
 {
     constructor(
-        private readonly createAccountService: CreateAccountService
+        private readonly createAccountService: CreateAccountService,
     ) {}
 
     async execute(command: CreateAccountCommand): Promise<void>

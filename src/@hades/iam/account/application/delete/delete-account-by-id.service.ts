@@ -8,7 +8,7 @@ export class DeleteAccountByIdService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IAccountRepository
+        private readonly repository: IAccountRepository,
     ) {}
 
     public async main(id: AccountId): Promise<void>
