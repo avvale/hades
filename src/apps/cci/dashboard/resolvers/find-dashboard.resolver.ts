@@ -51,30 +51,21 @@ export class FindDashboardResolver
             where: {
                 tenantId: account.dTenants,
                 systemId: systems.map(system => system.id)
-            },
-            order: [
-                ['createdAt', 'DESC']
-            ]
+            }
         }));
 
         const channelsOverview = await this.queryBus.ask(new GetDashboardChannelsOverviewQuery({
             where: {
                 tenantId: account.dTenants,
                 systemId: systems.map(system => system.id)
-            },
-            order: [
-                ['createdAt', 'DESC']
-            ]
+            }
         }));
 
         const messagesOverview = await this.queryBus.ask(new GetDashboardMessagesOverviewQuery({
             where: {
                 tenantId: account.dTenants,
                 systemId: systems.map(system => system.id)
-            },
-            order: [
-                ['createdAt', 'DESC']
-            ]
+            }
         }));
 
         return {
