@@ -23,13 +23,13 @@ export class SequelizeChannelOverviewRepository extends SequelizeRepository<CciC
     ) {
         super();
     }
-    
-    async getDashboardData(query?: QueryStatement): Promise<CciChannelOverview[]> 
+
+    async getDashboardData(query?: QueryStatement): Promise<CciChannelOverview[]>
     {
         const models = await this.repository.findAll(
             _.merge(this.criteria.implements(query), {
                 attributes: [
-                    [Sequelize.fn('max', Sequelize.col('created_at')), 'max'], 
+                    [Sequelize.fn('max', Sequelize.col('created_at')), 'createdAt'],
                     [Sequelize.fn('any_value', Sequelize.col('id')), 'id'],
                     [Sequelize.fn('any_value', Sequelize.col('tenant_code')), 'tenantCode'],
                     [Sequelize.fn('any_value', Sequelize.col('system_name')), 'systemName'],

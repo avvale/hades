@@ -23,17 +23,15 @@ export class SequelizeMessageOverviewRepository extends SequelizeRepository<CciM
     ) {
         super();
     }
-    
-    async getDashboardData(query?: QueryStatement): Promise<CciMessageOverview[]> 
+
+    async getDashboardData(query?: QueryStatement): Promise<CciMessageOverview[]>
     {
         const models = await this.repository.findAll(
             _.merge(this.criteria.implements(query), {
                 attributes: [
-                    [Sequelize.fn('max', Sequelize.col('created_at')), 'max'],
+                    [Sequelize.fn('max', Sequelize.col('created_at')), 'createdAt'],
                     [Sequelize.fn('any_value', Sequelize.col('id')), 'id'],
-                    
                     [Sequelize.fn('any_value', Sequelize.col('tenant_code')), 'tenantCode'],
-                    
                     [Sequelize.fn('any_value', Sequelize.col('system_name')), 'systemName'],
                     [Sequelize.fn('any_value', Sequelize.col('execution_id')), 'executionId'],
                     [Sequelize.fn('any_value', Sequelize.col('execution_type')), 'executionType'],
