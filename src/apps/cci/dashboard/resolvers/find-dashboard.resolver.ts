@@ -34,37 +34,47 @@ export class FindDashboardResolver
     {
         // get tenanat fot this account
         const tenants = await this.queryBus.ask(new GetTenantsQuery({
-            where: { 
+            where: {
                 id: account.dTenants
-            }
+            },
+            order: [['name', 'ASC']]
         }));
 
         // get systems for this tenants
         const systems = await this.queryBus.ask(new GetSystemsQuery({
-            where: { 
+            where: {
                 tenantId: account.dTenants
             }
         }));
 
         const jobsOverview = await this.queryBus.ask(new GetDashboardJobsOverviewQuery({
-            where: { 
+            where: {
                 tenantId: account.dTenants,
                 systemId: systems.map(system => system.id)
-            }
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ]
         }));
 
         const channelsOverview = await this.queryBus.ask(new GetDashboardChannelsOverviewQuery({
-            where: { 
+            where: {
                 tenantId: account.dTenants,
                 systemId: systems.map(system => system.id)
-            }
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ]
         }));
 
         const messagesOverview = await this.queryBus.ask(new GetDashboardMessagesOverviewQuery({
-            where: { 
+            where: {
                 tenantId: account.dTenants,
                 systemId: systems.map(system => system.id)
-            }
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ]
         }));
 
         return {
