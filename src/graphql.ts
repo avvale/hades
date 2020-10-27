@@ -712,16 +712,16 @@ export interface QueryStatement {
 
 export interface IamCreateAccountInput {
     id: string;
-    type: IamAccountType;
-    email: GraphQLString;
-    isActive: GraphQLBoolean;
-    clientId: string;
+    type?: IamAccountType;
+    email?: GraphQLString;
+    isActive?: GraphQLBoolean;
+    clientId?: string;
     dApplicationCodes?: JSON;
     dPermissions?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
-    user: IamCreateUserInput;
+    user?: IamCreateUserInput;
 }
 
 export interface IamUpdateAccountInput {
