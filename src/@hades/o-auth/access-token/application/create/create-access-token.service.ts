@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { JwtService } from '@nestjs/jwt';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     AccessTokenId,
     AccessTokenClientId,
     AccessTokenAccountId,
@@ -10,10 +10,10 @@ import {
     AccessTokenCreatedAt,
     AccessTokenUpdatedAt,
     AccessTokenExpiredAccessToken,
-    AccessTokenToken, 
-    AccessTokenIsRevoked, 
+    AccessTokenToken,
+    AccessTokenIsRevoked,
     AccessTokenExpiresAt
-    
+
 } from './../../domain/value-objects';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { OAuthAccessToken } from './../../domain/access-token.aggregate';
@@ -35,7 +35,7 @@ export class CreateAccessTokenService
         accountId: AccessTokenAccountId,
         name: AccessTokenName,
         expiredAccessToken: AccessTokenExpiredAccessToken
-        
+
     ): Promise<void>
     {
         // compose access token
@@ -48,7 +48,7 @@ export class CreateAccessTokenService
             nbf: parseInt(Utils.now().format('X')),
             exp: momentExpiredAccessToken ? parseInt(momentExpiredAccessToken.format('X')) : null
         };
-        
+
         const accessTokenValueObject = new AccessTokenToken(this.jwtService.sign(accessTokenPayload));
 
         // create aggregate with factory pattern
@@ -64,7 +64,7 @@ export class CreateAccessTokenService
             new AccessTokenUpdatedAt(Utils.nowTimestamp()),
             null
         );
-        
+
         // create
         await this.repository.create(accessToken);
 
@@ -72,7 +72,7 @@ export class CreateAccessTokenService
         const accessTokenRegister = this.publisher.mergeObjectContext(
             accessToken
         );
-        
+
         accessTokenRegister.created(accessToken); // apply event to model events
         accessTokenRegister.commit(); // commit all events of model
     }
