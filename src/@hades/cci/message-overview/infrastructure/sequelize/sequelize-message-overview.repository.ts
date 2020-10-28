@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { QueryTypes } from 'sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
+import { ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { CciMessageOverview } from './../../domain/message-overview.aggregate';
 import { MessageOverviewMapper } from './../../domain/message-overview.mapper';
 import { CciMessageOverviewModel } from './sequelize-message-overview.model';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { Sequelize } from 'sequelize-typescript';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -24,32 +24,61 @@ export class SequelizeMessageOverviewRepository extends SequelizeRepository<CciM
         super();
     }
 
-    async getDashboardData(query?: QueryStatement): Promise<CciMessageOverview[]>
+    async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciMessageOverview[]>
     {
-        const models = await this.repository.findAll(
-            _.merge(this.criteria.implements(query), {
-                attributes: [
-                    [Sequelize.fn('any_value', Sequelize.col('id')), 'id'],
-                    [Sequelize.fn('any_value', Sequelize.col('tenant_code')), 'tenantCode'],
-                    [Sequelize.fn('any_value', Sequelize.col('system_name')), 'systemName'],
-                    [Sequelize.fn('any_value', Sequelize.col('execution_id')), 'executionId'],
-                    [Sequelize.fn('any_value', Sequelize.col('execution_type')), 'executionType'],
-                    [Sequelize.fn('max', Sequelize.col('execution_executed_at')), 'executionExecutedAt'],
-                    [Sequelize.fn('any_value', Sequelize.col('execution_monitoring_start_at')), 'executionMonitoringStartAt'],
-                    [Sequelize.fn('any_value', Sequelize.col('execution_monitoring_end_at')), 'executionMonitoringEndAt'],
-                    [Sequelize.fn('any_value', Sequelize.col('number_max')), 'numberMax'],
-                    [Sequelize.fn('any_value', Sequelize.col('number_days')), 'numberDays'],
-                    [Sequelize.fn('any_value', Sequelize.col('success')), 'success'],
-                    [Sequelize.fn('any_value', Sequelize.col('cancelled')), 'cancelled'],
-                    [Sequelize.fn('any_value', Sequelize.col('delivering')), 'delivering'],
-                    [Sequelize.fn('any_value', Sequelize.col('error')), 'error'],
-                    [Sequelize.fn('any_value', Sequelize.col('holding')), 'holding'],
-                    [Sequelize.fn('any_value', Sequelize.col('to_be_delivered')), 'toBeDelivered'],
-                    [Sequelize.fn('any_value', Sequelize.col('waiting')), 'waiting'],
-                    'tenantId', 'systemId'
-                ],
-                group: ['tenantId', 'systemId'],
-            })
+        const queryRaw = `
+            SELECT
+                \`origin_message\`.\`id\`,
+                \`origin_message\`.\`tenant_id\`,
+                \`origin_message\`.\`tenant_code\`,
+                \`origin_message\`.\`system_id\`,
+                \`origin_message\`.\`system_name\`,
+                \`origin_message\`.\`execution_id\`,
+                \`origin_message\`.\`execution_type\`,
+                \`origin_message\`.\`execution_executed_at\`,
+                \`origin_message\`.\`execution_monitoring_start_at\`,
+                \`origin_message\`.\`execution_monitoring_end_at\`,
+                \`origin_message\`.\`number_max\`,
+                \`origin_message\`.\`number_days\`,
+                \`origin_message\`.\`success\`,
+                \`origin_message\`.\`cancelled\`,
+                \`origin_message\`.\`delivering\`,
+                \`origin_message\`.\`error\`,
+                \`origin_message\`.\`holding\`,
+                \`origin_message\`.\`to_be_delivered\`,
+                \`origin_message\`.\`waiting\`,
+                \`origin_message\`.\`created_at\`,
+                \`origin_message\`.\`updated_at\`,
+                \`origin_message\`.\`deleted_at\`
+            FROM
+                \`cci_message_overview\` AS \`origin_message\`
+            LEFT JOIN
+                \`cci_message_overview\` AS \`aux_message\`
+            ON
+                \`origin_message\`.\`tenant_id\` = \`aux_message\`.\`tenant_id\`
+            AND
+                \`origin_message\`.\`system_id\` = \`aux_message\`.\`system_id\`
+            AND
+                \`origin_message\`.\`execution_executed_at\` < \`aux_message\`.\`execution_executed_at\`
+            WHERE
+                \`aux_message\`.\`id\` IS NULL
+            AND
+                \`origin_message\`.\`tenant_id\` IN (:tenantIds)
+            AND
+                \`origin_message\`.\`system_id\` IN (:systemIds)
+        `;
+
+        const models = await this.repository.sequelize.query(
+            queryRaw,
+            {
+                replacements: {
+                    tenantIds,
+                    systemIds,
+                },
+                type: QueryTypes.SELECT,
+                model: CciMessageOverviewModel,
+                mapToModel: true
+            }
         );
 
         // map values to create value objects

@@ -10,8 +10,8 @@ export class GetDashboardMessagesOverviewService
         private readonly repository: IMessageOverviewRepository
     ) {}
 
-    public async main(queryStatement?: QueryStatement): Promise<CciMessageOverview[]>
-    {        
-        return await this.repository.getDashboardData(queryStatement);
+    public async main(tenantIds: string[], systemIds: string[]): Promise<CciMessageOverview[]>
+    {
+        return await this.repository.getDashboardData(tenantIds, systemIds);
     }
 }

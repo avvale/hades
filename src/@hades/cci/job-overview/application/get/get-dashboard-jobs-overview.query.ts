@@ -3,6 +3,7 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 export class GetDashboardJobsOverviewQuery
 {
     constructor(
-        public queryStatement?: QueryStatement
+        public tenantIds: string[],
+        public systemIds: string[],
     ) {}
 }

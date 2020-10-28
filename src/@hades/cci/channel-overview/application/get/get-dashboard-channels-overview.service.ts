@@ -10,8 +10,8 @@ export class GetDashboardChannelsOverviewService
         private readonly repository: IChannelOverviewRepository
     ) {}
 
-    public async main(queryStatement?: QueryStatement): Promise<CciChannelOverview[]>
-    {        
-        return await this.repository.getDashboardData(queryStatement);
+    public async main(tenantIds: string[], systemIds: string[]): Promise<CciChannelOverview[]>
+    {
+        return await this.repository.getDashboardData(tenantIds, systemIds);
     }
 }

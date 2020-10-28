@@ -28,11 +28,11 @@ export abstract class IMessageOverviewRepository implements IRepository<CciMessa
     abstract async get(query: QueryStatement): Promise<CciMessageOverview[]>;
 
     // get multiple records
-    abstract async getDashboardData(query: QueryStatement): Promise<CciMessageOverview[]>;
+    abstract async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciMessageOverview[]>;
 
     // update record
     abstract async update(messageOverview: CciMessageOverview): Promise<void>;
-  
+
     // delete record
     abstract async deleteById(id: MessageOverviewId): Promise<void>;
 

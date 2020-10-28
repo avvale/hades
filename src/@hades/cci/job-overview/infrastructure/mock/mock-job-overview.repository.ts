@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IJobOverviewRepository } from '@hades/cci/job-overview/domain/job-overview.repository';
-import { 
+import {
     JobOverviewId,
     JobOverviewTenantId,
     JobOverviewTenantCode,
@@ -19,7 +19,6 @@ import {
     JobOverviewCreatedAt,
     JobOverviewUpdatedAt,
     JobOverviewDeletedAt
-    
 } from '@hades/cci/job-overview/domain/value-objects';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CciJobOverview } from './../../domain/job-overview.aggregate';
@@ -32,14 +31,14 @@ export class MockJobOverviewRepository extends MockRepository<CciJobOverview> im
     public readonly aggregateName: string = 'CciJobOverview';
     public collectionSource: CciJobOverview[];
     public deletedAtInstance: JobOverviewDeletedAt = new JobOverviewDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -54,7 +53,7 @@ export class MockJobOverviewRepository extends MockRepository<CciJobOverview> im
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciJobOverview.register(
                     new JobOverviewId(itemCollection.id),
                     new JobOverviewTenantId(itemCollection.tenantId),
@@ -72,12 +71,11 @@ export class MockJobOverviewRepository extends MockRepository<CciJobOverview> im
                     new JobOverviewCreatedAt(itemCollection.createdAt),
                     new JobOverviewUpdatedAt(itemCollection.updatedAt),
                     new JobOverviewDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }
 
-    async getDashboardData(query: QueryStatement): Promise<CciJobOverview[]>
+    async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciJobOverview[]>
     {
         return;
     }

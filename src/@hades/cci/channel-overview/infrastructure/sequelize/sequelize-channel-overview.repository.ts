@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { QueryTypes } from 'sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
 import { CciChannelOverview } from './../../domain/channel-overview.aggregate';
 import { ChannelOverviewMapper } from './../../domain/channel-overview.mapper';
 import { CciChannelOverviewModel } from './sequelize-channel-overview.model';
-import { Sequelize } from 'sequelize-typescript';
 import * as _ from 'lodash';
+
 
 @Injectable()
 export class SequelizeChannelOverviewRepository extends SequelizeRepository<CciChannelOverview, CciChannelOverviewModel> implements IChannelOverviewRepository
@@ -24,29 +24,58 @@ export class SequelizeChannelOverviewRepository extends SequelizeRepository<CciC
         super();
     }
 
-    async getDashboardData(query?: QueryStatement): Promise<CciChannelOverview[]>
+    async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciChannelOverview[]>
     {
-        const models = await this.repository.findAll(
-            _.merge(this.criteria.implements(query), {
-                attributes: [
-                    [Sequelize.fn('any_value', Sequelize.col('id')), 'id'],
-                    [Sequelize.fn('any_value', Sequelize.col('tenant_code')), 'tenantCode'],
-                    [Sequelize.fn('any_value', Sequelize.col('system_name')), 'systemName'],
-                    [Sequelize.fn('any_value', Sequelize.col('execution_id')), 'executionId'],
-                    [Sequelize.fn('any_value', Sequelize.col('execution_type')), 'executionType'],
-                    [Sequelize.fn('max', Sequelize.col('execution_executed_at')), 'executionExecutedAt'],
-                    [Sequelize.fn('any_value', Sequelize.col('execution_monitoring_start_at')), 'executionMonitoringStartAt'],
-                    [Sequelize.fn('any_value', Sequelize.col('execution_monitoring_end_at')), 'executionMonitoringEndAt'],
-                    [Sequelize.fn('any_value', Sequelize.col('error')), 'error'],
-                    [Sequelize.fn('any_value', Sequelize.col('inactive')), 'inactive'],
-                    [Sequelize.fn('any_value', Sequelize.col('successful')), 'successful'],
-                    [Sequelize.fn('any_value', Sequelize.col('stopped')), 'stopped'],
-                    [Sequelize.fn('any_value', Sequelize.col('unknown')), 'unknown'],
-                    [Sequelize.fn('any_value', Sequelize.col('unregistered')), 'unregistered'],
-                    'tenantId', 'systemId'
-                ],
-                group: ['tenantId', 'systemId'],
-            })
+        const queryRaw = `
+            SELECT
+                \`origin_channel\`.\`id\`,
+                \`origin_channel\`.\`tenant_id\`,
+                \`origin_channel\`.\`tenant_code\`,
+                \`origin_channel\`.\`system_id\`,
+                \`origin_channel\`.\`system_name\`,
+                \`origin_channel\`.\`execution_id\`,
+                \`origin_channel\`.\`execution_type\`,
+                \`origin_channel\`.\`execution_executed_at\`,
+                \`origin_channel\`.\`execution_monitoring_start_at\`,
+                \`origin_channel\`.\`execution_monitoring_end_at\`,
+                \`origin_channel\`.\`error\`,
+                \`origin_channel\`.\`inactive\`,
+                \`origin_channel\`.\`successful\`,
+                \`origin_channel\`.\`stopped\`,
+                \`origin_channel\`.\`unknown\`,
+                \`origin_channel\`.\`unregistered\`,
+                \`origin_channel\`.\`created_at\`,
+                \`origin_channel\`.\`updated_at\`,
+                \`origin_channel\`.\`deleted_at\`
+            FROM
+                \`cci_channel_overview\` AS \`origin_channel\`
+            LEFT JOIN
+                \`cci_channel_overview\` AS \`aux_channel\`
+            ON
+                \`origin_channel\`.\`tenant_id\` = \`aux_channel\`.\`tenant_id\`
+            AND
+                \`origin_channel\`.\`system_id\` = \`aux_channel\`.\`system_id\`
+            AND
+                \`origin_channel\`.\`execution_executed_at\` < \`aux_channel\`.\`execution_executed_at\`
+            WHERE
+                \`aux_channel\`.\`id\` IS NULL
+            AND
+                \`origin_channel\`.\`tenant_id\` IN (:tenantIds)
+            AND
+                \`origin_channel\`.\`system_id\` IN (:systemIds)
+        `;
+
+        const models = await this.repository.sequelize.query(
+            queryRaw,
+            {
+                replacements: {
+                    tenantIds,
+                    systemIds,
+                },
+                type: QueryTypes.SELECT,
+                model: CciChannelOverviewModel,
+                mapToModel: true
+            }
         );
 
         // map values to create value objects

@@ -47,26 +47,11 @@ export class FindDashboardResolver
             }
         }));
 
-        const jobsOverview = await this.queryBus.ask(new GetDashboardJobsOverviewQuery({
-            where: {
-                tenantId: account.dTenants,
-                systemId: systems.map(system => system.id)
-            }
-        }));
+        const jobsOverview = await this.queryBus.ask(new GetDashboardJobsOverviewQuery(account.dTenants, systems.map(system => system.id)));
 
-        const channelsOverview = await this.queryBus.ask(new GetDashboardChannelsOverviewQuery({
-            where: {
-                tenantId: account.dTenants,
-                systemId: systems.map(system => system.id)
-            }
-        }));
+        const channelsOverview = await this.queryBus.ask(new GetDashboardChannelsOverviewQuery(account.dTenants, systems.map(system => system.id)));
 
-        const messagesOverview = await this.queryBus.ask(new GetDashboardMessagesOverviewQuery({
-            where: {
-                tenantId: account.dTenants,
-                systemId: systems.map(system => system.id)
-            }
-        }));
+        const messagesOverview = await this.queryBus.ask(new GetDashboardMessagesOverviewQuery(account.dTenants, systems.map(system => system.id)));
 
         return {
             tenants,

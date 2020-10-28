@@ -15,6 +15,6 @@ export class GetDashboardChannelsOverviewQueryHandler implements IQueryHandler<G
 
     async execute(query: GetDashboardChannelsOverviewQuery): Promise<ChannelOverviewResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getDashboardChannelsOverviewService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getDashboardChannelsOverviewService.main(query.tenantIds, query.systemIds));
     }
 }
