@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IMessageOverviewRepository } from '@hades/cci/message-overview/domain/message-overview.repository';
-import { 
+import {
     MessageOverviewId,
     MessageOverviewTenantId,
     MessageOverviewTenantCode,
@@ -25,9 +25,7 @@ import {
     MessageOverviewCreatedAt,
     MessageOverviewUpdatedAt,
     MessageOverviewDeletedAt
-    
 } from '@hades/cci/message-overview/domain/value-objects';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CciMessageOverview } from './../../domain/message-overview.aggregate';
 import { messagesOverview } from './../seeds/message-overview.seed';
 
@@ -38,14 +36,14 @@ export class MockMessageOverviewRepository extends MockRepository<CciMessageOver
     public readonly aggregateName: string = 'CciMessageOverview';
     public collectionSource: CciMessageOverview[];
     public deletedAtInstance: MessageOverviewDeletedAt = new MessageOverviewDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -60,7 +58,7 @@ export class MockMessageOverviewRepository extends MockRepository<CciMessageOver
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciMessageOverview.register(
                     new MessageOverviewId(itemCollection.id),
                     new MessageOverviewTenantId(itemCollection.tenantId),
@@ -84,12 +82,11 @@ export class MockMessageOverviewRepository extends MockRepository<CciMessageOver
                     new MessageOverviewCreatedAt(itemCollection.createdAt),
                     new MessageOverviewUpdatedAt(itemCollection.updatedAt),
                     new MessageOverviewDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }
 
-    async getDashboardData(query: QueryStatement): Promise<CciMessageOverview[]>
+    async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciMessageOverview[]>
     {
         return;
     }

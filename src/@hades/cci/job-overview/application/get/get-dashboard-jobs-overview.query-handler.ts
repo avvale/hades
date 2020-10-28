@@ -15,6 +15,6 @@ export class GetDashboardJobsOverviewQueryHandler implements IQueryHandler<GetDa
 
     async execute(query: GetDashboardJobsOverviewQuery): Promise<JobOverviewResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getDashboardJobsOverviewService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getDashboardJobsOverviewService.main(query.tenantIds, query.systemIds));
     }
 }

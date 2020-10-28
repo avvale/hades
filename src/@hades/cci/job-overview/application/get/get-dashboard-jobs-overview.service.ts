@@ -10,8 +10,8 @@ export class GetDashboardJobsOverviewService
         private readonly repository: IJobOverviewRepository
     ) {}
 
-    public async main(queryStatement?: QueryStatement): Promise<CciJobOverview[]>
+    public async main(tenantIds: string[], systemIds: string[]): Promise<CciJobOverview[]>
     {
-        return await this.repository.getDashboardData(queryStatement);
+        return await this.repository.getDashboardData(tenantIds, systemIds);
     }
 }

@@ -22,7 +22,7 @@ import {
     ChannelOverviewCreatedAt,
     ChannelOverviewUpdatedAt,
     ChannelOverviewDeletedAt
-    
+
 } from '@hades/cci/channel-overview/domain/value-objects';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CciChannelOverview } from './../../domain/channel-overview.aggregate';
@@ -35,14 +35,14 @@ export class MockChannelOverviewRepository extends MockRepository<CciChannelOver
     public readonly aggregateName: string = 'CciChannelOverview';
     public collectionSource: CciChannelOverview[];
     public deletedAtInstance: ChannelOverviewDeletedAt = new ChannelOverviewDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -57,7 +57,7 @@ export class MockChannelOverviewRepository extends MockRepository<CciChannelOver
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciChannelOverview.register(
                     new ChannelOverviewId(itemCollection.id),
                     new ChannelOverviewTenantId(itemCollection.tenantId),
@@ -78,12 +78,11 @@ export class MockChannelOverviewRepository extends MockRepository<CciChannelOver
                     new ChannelOverviewCreatedAt(itemCollection.createdAt),
                     new ChannelOverviewUpdatedAt(itemCollection.updatedAt),
                     new ChannelOverviewDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }
 
-    async getDashboardData(query: QueryStatement): Promise<CciChannelOverview[]>
+    async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciChannelOverview[]>
     {
         return;
     }

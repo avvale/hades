@@ -28,11 +28,11 @@ export abstract class IChannelOverviewRepository implements IRepository<CciChann
     abstract async get(query: QueryStatement): Promise<CciChannelOverview[]>;
 
     // get multiple records
-    abstract async getDashboardData(query: QueryStatement): Promise<CciChannelOverview[]>;
+    abstract async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciChannelOverview[]>;
 
     // update record
     abstract async update(channelOverview: CciChannelOverview): Promise<void>;
-  
+
     // delete record
     abstract async deleteById(id: ChannelOverviewId): Promise<void>;
 

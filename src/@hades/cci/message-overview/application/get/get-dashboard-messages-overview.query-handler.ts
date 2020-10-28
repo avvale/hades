@@ -15,6 +15,6 @@ export class GetDashboardMessagesOverviewQueryHandler implements IQueryHandler<G
 
     async execute(query: GetDashboardMessagesOverviewQuery): Promise<MessageOverviewResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getDashboardMessagesOverviewService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getDashboardMessagesOverviewService.main(query.tenantIds, query.systemIds));
     }
 }
