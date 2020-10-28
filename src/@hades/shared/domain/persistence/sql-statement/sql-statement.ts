@@ -1,9 +1,8 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { IndexHints } from './index-hints';
 
 export type Any = any;
 
-export interface IndexHint 
+export interface IndexHint
 {
     type: IndexHints;
     values: string[];
@@ -15,7 +14,7 @@ export class QueryStatement
      * Attribute has to be matched for rows to be selected for the given action.
      */
     where?: any;
-    
+
     /**
      * A list of the attributes that you want to select. To rename an attribute, you can pass an array, with
      * two elements - the first is the name of the attribute in the DB (or some kind of expression such as
@@ -88,36 +87,3 @@ export class QueryStatement
      */
     indexHints?: IndexHint[];
 }
-
-
-
-/* export class QueryStatementInput 
-{
-    @ApiProperty({
-        enum        : Command,
-        description : 'Query command',
-        example     : 'WHERE'
-    })
-    command: Command;
-
-    @ApiProperty({
-        type        : String,
-        description : 'Column name on which the query will be made',
-        example     : 'admin_user.name'
-    })
-    column?: string;
-
-    @ApiProperty({
-        enum        : Operator,
-        description : 'Operator to be used in the query',
-        example     : 'LIKE'
-    })
-    operator?: Operator;
-
-    @ApiProperty({
-        type        : String,
-        description : 'Value to be used to operate with the operator',
-        example     : '%John Doe%'
-    })
-    value?: Any;
-} */
