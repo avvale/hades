@@ -9,14 +9,12 @@ export class Utils
 {
     public static now(): Moment
     {
-        if (process.env.TZ) return moment().tz(process.env.TZ);
-        return moment();
+        return moment().utc();
     }
 
     public static nowTimestamp(): string
     {
-        if (process.env.TZ) return moment().tz(process.env.TZ).format('YYYY-MM-DD H:mm:ss');
-        return moment().format('YYYY-MM-DD H:mm:ss');
+        return moment().utc().format('YYYY-MM-DD H:mm:ss');
     }
 
     public static sha1(data: string): string
