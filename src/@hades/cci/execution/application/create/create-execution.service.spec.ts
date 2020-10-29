@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { executions } from '@hades/cci/execution/infrastructure/seeds/execution.seed';
 import { CreateExecutionService } from './create-execution.service';
-import { 
+import {
     ExecutionId,
     ExecutionTenantId,
     ExecutionTenantCode,
@@ -14,19 +14,22 @@ import {
     ExecutionType,
     ExecutionExecutedAt,
     ExecutionMonitoringStartAt,
-    ExecutionMonitoringEndAt
-    
+    ExecutionMonitoringEndAt,
+    ExecutionCreatedAt,
+    ExecutionUpdatedAt,
+    ExecutionDeletedAt,
 } from './../../domain/value-objects';
 import { IExecutionRepository } from './../../domain/execution.repository';
 import { MockExecutionRepository } from './../../infrastructure/mock/mock-execution.repository';
 
-describe('CreateExecutionService', () => 
+describe('CreateExecutionService', () =>
+
 {
     let service: CreateExecutionService;
     let repository: IExecutionRepository;
     let mockRepository: MockExecutionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -35,7 +38,7 @@ describe('CreateExecutionService', () =>
                 EventPublisher,
                 CreateExecutionService,
                 MockExecutionRepository,
-                { 
+                {
                     provide: IExecutionRepository,
                     useValue: {
                         create: (item) => {}
@@ -49,14 +52,14 @@ describe('CreateExecutionService', () =>
         mockRepository  = module.get(MockExecutionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateExecutionService should be defined', () => 
+        test('CreateExecutionService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a execution and emit event', async () => 
+        test('should create a execution and emit event', async () =>
         {
             expect(await service.main(
                 new ExecutionId(executions[0].id),

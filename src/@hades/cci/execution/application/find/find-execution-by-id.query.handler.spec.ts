@@ -16,7 +16,7 @@ describe('FindExecutionByIdQueryHandler', () =>
     let repository: MockExecutionRepository;
     let mapper: ExecutionMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindExecutionByIdQueryHandler', () =>
         mapper          = new ExecutionMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindExecutionByIdQueryHandler should be defined', () => 
+        test('FindExecutionByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

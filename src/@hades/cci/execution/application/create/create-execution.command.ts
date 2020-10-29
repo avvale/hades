@@ -1,5 +1,5 @@
-export class CreateExecutionCommand 
-{   
+export class CreateExecutionCommand
+{
     constructor(
         public readonly id: string,
         public readonly tenantId: string,
@@ -11,6 +11,5 @@ export class CreateExecutionCommand
         public readonly executedAt: string,
         public readonly monitoringStartAt: string,
         public readonly monitoringEndAt: string,
-        
     ) {}
 }

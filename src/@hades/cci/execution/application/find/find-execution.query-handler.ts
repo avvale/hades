@@ -10,8 +10,8 @@ export class FindExecutionQueryHandler implements IQueryHandler<FindExecutionQue
     private readonly mapper: ExecutionMapper = new ExecutionMapper();
 
     constructor(
-        private readonly findExecutionService: FindExecutionService
-    ) { }
+        private readonly findExecutionService: FindExecutionService,
+    ) {}
 
     async execute(query: FindExecutionQuery): Promise<ExecutionResponse>
     {

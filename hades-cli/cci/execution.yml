@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: execution
 moduleNames: executions
+aggregateName: CciExecution
 hasOAuth: true
 hasTenant: true
 aggregateProperties:

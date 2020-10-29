@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IExecutionRepository } from '@hades/cci/execution/domain/execution.repository';
-import { 
+import {
     ExecutionId,
     ExecutionTenantId,
     ExecutionTenantCode,
@@ -15,8 +15,7 @@ import {
     ExecutionMonitoringEndAt,
     ExecutionCreatedAt,
     ExecutionUpdatedAt,
-    ExecutionDeletedAt
-    
+    ExecutionDeletedAt,
 } from '@hades/cci/execution/domain/value-objects';
 import { CciExecution } from './../../domain/execution.aggregate';
 import { executions } from './../seeds/execution.seed';
@@ -28,14 +27,14 @@ export class MockExecutionRepository extends MockRepository<CciExecution> implem
     public readonly aggregateName: string = 'CciExecution';
     public collectionSource: CciExecution[];
     public deletedAtInstance: ExecutionDeletedAt = new ExecutionDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -50,7 +49,7 @@ export class MockExecutionRepository extends MockRepository<CciExecution> implem
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciExecution.register(
                     new ExecutionId(itemCollection.id),
                     new ExecutionTenantId(itemCollection.tenantId),
@@ -65,7 +64,7 @@ export class MockExecutionRepository extends MockRepository<CciExecution> implem
                     new ExecutionCreatedAt(itemCollection.createdAt),
                     new ExecutionUpdatedAt(itemCollection.updatedAt),
                     new ExecutionDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

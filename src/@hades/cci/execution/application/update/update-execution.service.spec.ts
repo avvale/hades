@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { executions } from '@hades/cci/execution/infrastructure/seeds/execution.seed';
 import { UpdateExecutionService } from './update-execution.service';
-import { 
+import {
     ExecutionId,
     ExecutionTenantId,
     ExecutionTenantCode,
@@ -17,19 +17,18 @@ import {
     ExecutionMonitoringEndAt,
     ExecutionCreatedAt,
     ExecutionUpdatedAt,
-    ExecutionDeletedAt
-    
+    ExecutionDeletedAt,
 } from './../../domain/value-objects';
 import { IExecutionRepository } from './../../domain/execution.repository';
 import { MockExecutionRepository } from './../../infrastructure/mock/mock-execution.repository';
 
-describe('UpdateExecutionService', () => 
+describe('UpdateExecutionService', () =>
 {
     let service: UpdateExecutionService;
     let repository: IExecutionRepository;
     let mockRepository: MockExecutionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,7 +37,7 @@ describe('UpdateExecutionService', () =>
                 EventPublisher,
                 UpdateExecutionService,
                 MockExecutionRepository,
-                { 
+                {
                     provide: IExecutionRepository,
                     useValue: {
                         update: (item) => {}
@@ -52,7 +51,7 @@ describe('UpdateExecutionService', () =>
         mockRepository  = module.get(MockExecutionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateExecutionService should be defined', () => 
         {

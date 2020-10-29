@@ -6,12 +6,12 @@ import { executions } from '@hades/cci/execution/infrastructure/seeds/execution.
 import { CreateExecutionCommand } from './create-execution.command';
 import { CreateExecutionService } from './create-execution.service';
 
-describe('CreateExecutionCommandHandler', () => 
+describe('CreateExecutionCommandHandler', () =>
 {
     let commandHandler: CreateExecutionCommandHandler;
     let service: CreateExecutionService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateExecutionCommandHandler', () =>
         service         = module.get<CreateExecutionService>(CreateExecutionService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateExecutionCommandHandler should be defined', () => 
+        test('CreateExecutionCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateExecutionService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateExecutionService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateExecutionCommand(
@@ -50,7 +50,6 @@ describe('CreateExecutionCommandHandler', () =>
                     executions[0].executedAt,
                     executions[0].monitoringStartAt,
                     executions[0].monitoringEndAt,
-                    
                 )
             )).toBe(undefined);
         });

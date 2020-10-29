@@ -7,11 +7,11 @@ import { CciExecution } from './../../domain/execution.aggregate';
 export class FindExecutionService
 {
     constructor(
-        private readonly repository: IExecutionRepository
+        private readonly repository: IExecutionRepository,
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<CciExecution>
-    {        
+    {
         return await this.repository.find(queryStatement);
     }
 }

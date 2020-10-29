@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateExecutionCommand } from './update-execution.command';
 import { UpdateExecutionService } from './update-execution.service';
-import { 
+import {
     ExecutionId,
     ExecutionTenantId,
     ExecutionTenantCode,
@@ -11,16 +11,18 @@ import {
     ExecutionType,
     ExecutionExecutedAt,
     ExecutionMonitoringStartAt,
-    ExecutionMonitoringEndAt
-    
+    ExecutionMonitoringEndAt,
+    ExecutionCreatedAt,
+    ExecutionUpdatedAt,
+    ExecutionDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdateExecutionCommand)
 export class UpdateExecutionCommandHandler implements ICommandHandler<UpdateExecutionCommand>
 {
     constructor(
-        private readonly updateExecutionService: UpdateExecutionService
-    ) { }
+        private readonly updateExecutionService: UpdateExecutionService,
+    ) {}
 
     async execute(command: UpdateExecutionCommand): Promise<void>
     {

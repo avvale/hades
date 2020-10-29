@@ -4,7 +4,7 @@ import { CreateExecutionsCommand } from '@hades/cci/execution/application/create
 import { SeederModule } from './seeder.module';
 import { executions } from '@hades/cci/execution/infrastructure/seeds/execution.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

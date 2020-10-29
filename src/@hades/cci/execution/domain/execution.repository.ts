@@ -29,7 +29,7 @@ export abstract class IExecutionRepository implements IRepository<CciExecution>
 
     // update record
     abstract async update(execution: CciExecution): Promise<void>;
-  
+
     // delete record
     abstract async deleteById(id: ExecutionId): Promise<void>;
 
