@@ -1,7 +1,11 @@
-import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -25,7 +29,9 @@ import { Utils } from '@hades/shared/domain/lib/utils';
 
 @ApiTags('[cci] snapshot')
 @Controller('cci/snapshot')
-export class CreateSnapshotController 
+@Permissions('cci.snapshot.create')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+export class CreateSnapshotController
 {
     constructor(
         private readonly commandBus: ICommandBus,
@@ -43,18 +49,18 @@ export class CreateSnapshotController
         if (!Array.isArray(payload.jobsDetail)) throw new BadRequestException(`The property jobsDetail does not exist or is not an array`);
 
         const tenant = await this.queryBus.ask(new FindTenantQuery({
-            where: { 
+            where: {
                 code: payload.tenant.code
             }
         }));
 
         const system = await this.queryBus.ask(new FindSystemQuery({
-            where: { 
+            where: {
                 name: payload.system.name
             }
         }));
 
-        const executionId = uuidv4();
+        const executionId = Utils.uuid();
         await this.commandBus.dispatch(new CreateExecutionCommand(
             executionId,
             tenant.id,
@@ -69,14 +75,14 @@ export class CreateSnapshotController
         ));
 
         await this.commandBus.dispatch(new CreateDataLakeCommand(
-            uuidv4(),
+            Utils.uuid(),
             tenant.id,
             executionId,
             tenant.code,
             payload
         ))
 
-        const messageOverviewId = uuidv4();
+        const messageOverviewId = Utils.uuid();
         await this.commandBus.dispatch(new CreateMessageOverviewCommand(
             messageOverviewId,
             tenant.id,
@@ -99,7 +105,7 @@ export class CreateSnapshotController
             payload.messageOverview.waiting
         ));
 
-        const channelOverviewId = uuidv4();
+        const channelOverviewId = Utils.uuid();
         await this.commandBus.dispatch(new CreateChannelOverviewCommand(
             channelOverviewId,
             tenant.id,
@@ -119,7 +125,7 @@ export class CreateSnapshotController
             payload.channelOverview.unregistered
         ));
 
-        const jobOverviewId = uuidv4();
+        const jobOverviewId = Utils.uuid();
         await this.commandBus.dispatch(new CreateJobOverviewCommand(
             jobOverviewId,
             tenant.id,
@@ -138,7 +144,7 @@ export class CreateSnapshotController
 
         const messagesDetail = payload.messagesDetail.map(message => {
             return {
-                id: uuidv4(),
+                id: Utils.uuid(),
                 tenantId: tenant.id,
                 tenantCode: tenant.code,
                 systemId: system.id,
@@ -150,13 +156,13 @@ export class CreateSnapshotController
                 executionMonitoringStartAt: payload.execution.monitoringStartAt,
                 executionMonitoringEndAt: payload.execution.monitoringEndAt,
                 flowHash: Utils.sha1(
-                    tenant.code + 
-                    system.name + 
+                    tenant.code +
+                    system.name +
                     (message.flowParty ? message.flowParty : '') +
                     (message.flowReceiverParty ? message.flowReceiverParty : '') +
                     message.flowComponent +
                     (message.flowReceiverComponent ? message.flowReceiverComponent : '') +
-                    message.flowInterfaceName + 
+                    message.flowInterfaceName +
                     message.flowInterfaceNamespace
                 ),
                 flowParty: message.flowParty,
@@ -201,7 +207,7 @@ export class CreateSnapshotController
 
         const channelsDetail = payload.channelsDetail.map(channel => {
             return {
-                id: uuidv4(),
+                id: Utils.uuid(),
                 tenantId: tenant.id,
                 tenantCode: tenant.code,
                 systemId: system.id,
@@ -213,10 +219,10 @@ export class CreateSnapshotController
                 executionMonitoringEndAt: payload.execution.monitoringEndAt,
                 status: channel.status,
                 channelHash: Utils.sha1(
-                    tenant.code + 
-                    system.name + 
-                    (channel.channelParty ? channel.channelParty : '') + 
-                    channel.channelComponent + 
+                    tenant.code +
+                    system.name +
+                    (channel.channelParty ? channel.channelParty : '') +
+                    channel.channelComponent +
                     channel.channelName
                 ),
                 channelSapId: channel.channelSapId,
@@ -227,7 +233,7 @@ export class CreateSnapshotController
             }
         });
         await this.commandBus.dispatch(new DeleteChannelsDetailCommand({
-            where: { 
+            where: {
                 tenantId: tenant.id,
                 systemId: system.id,
                 createdAt: {
@@ -240,7 +246,7 @@ export class CreateSnapshotController
 
         const jobsDetail = payload.jobsDetail.map(job => {
             return {
-                id: uuidv4(),
+                id: Utils.uuid(),
                 tenantId: tenant.id,
                 tenantCode: tenant.code,
                 systemId: system.id,
@@ -260,7 +266,7 @@ export class CreateSnapshotController
             }
         });
         await this.commandBus.dispatch(new DeleteJobsDetailCommand({
-            where: { 
+            where: {
                 tenantId: tenant.id,
                 systemId: system.id,
                 createdAt: {
@@ -275,5 +281,5 @@ export class CreateSnapshotController
             statusCode: 200,
             message: 'Snapshot successfully registered'
         };
-    } 
+    }
 }
