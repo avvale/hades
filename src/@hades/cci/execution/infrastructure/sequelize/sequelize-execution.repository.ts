@@ -17,9 +17,8 @@ export class SequelizeExecutionRepository extends SequelizeRepository<CciExecuti
     constructor(
         @InjectModel(CciExecutionModel)
         public readonly repository: typeof CciExecutionModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
-    
 }

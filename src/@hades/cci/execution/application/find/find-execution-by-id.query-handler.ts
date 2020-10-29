@@ -11,8 +11,8 @@ export class FindExecutionByIdQueryHandler implements IQueryHandler<FindExecutio
     private readonly mapper: ExecutionMapper = new ExecutionMapper();
 
     constructor(
-        private readonly findExecutionByIdService: FindExecutionByIdService
-    ) { }
+        private readonly findExecutionByIdService: FindExecutionByIdService,
+    ) {}
 
     async execute(query: FindExecutionByIdQuery): Promise<ExecutionResponse>
     {

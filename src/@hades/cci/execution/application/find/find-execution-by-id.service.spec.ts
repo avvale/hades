@@ -8,13 +8,13 @@ import { ExecutionId } from './../../domain/value-objects';
 import { IExecutionRepository } from './../../domain/execution.repository';
 import { MockExecutionRepository } from './../../infrastructure/mock/mock-execution.repository';
 
-describe('FindExecutionByIdService', () => 
+describe('FindExecutionByIdService', () =>
 {
     let service: FindExecutionByIdService;
     let repository: IExecutionRepository;
     let mockRepository: MockExecutionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindExecutionByIdService', () =>
                 EventPublisher,
                 FindExecutionByIdService,
                 MockExecutionRepository,
-                { 
+                {
                     provide: IExecutionRepository,
                     useValue: {
                         findById: (id) => {}

@@ -2,7 +2,7 @@ import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { CciExecution } from './execution.aggregate';
 import { ExecutionResponse } from './execution.response';
-import { 
+import {
     ExecutionId,
     ExecutionTenantId,
     ExecutionTenantCode,
@@ -15,8 +15,7 @@ import {
     ExecutionMonitoringEndAt,
     ExecutionCreatedAt,
     ExecutionUpdatedAt,
-    ExecutionDeletedAt
-    
+    ExecutionDeletedAt,
 } from './value-objects';
 
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
@@ -27,9 +26,9 @@ import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 export class ExecutionMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param execution
@@ -43,18 +42,18 @@ export class ExecutionMapper implements IMapper
 
     /**
      * Map array of objects to array aggregates
-     * @param executions 
+     * @param executions
      */
     mapModelsToAggregates(executions: ObjectLiteral[]): CciExecution[]
     {
         if (!Array.isArray(executions)) return;
-        
+
         return executions.map(execution  => this.makeAggregate(execution));
     }
 
     /**
      * Map aggregate to response
-     * @param execution 
+     * @param execution
      */
     mapAggregateToResponse(execution: CciExecution): ExecutionResponse
     {
@@ -102,7 +101,7 @@ export class ExecutionMapper implements IMapper
     private makeResponse(execution: CciExecution): ExecutionResponse
     {
         if (!execution) return;
-        
+
         return new ExecutionResponse(
             execution.id.value,
             execution.tenantId.value,

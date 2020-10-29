@@ -8,11 +8,11 @@ import { CciExecution } from './../../domain/execution.aggregate';
 export class PaginateExecutionsService
 {
     constructor(
-        private readonly repository: IExecutionRepository
+        private readonly repository: IExecutionRepository,
     ) {}
 
     public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<CciExecution>>
-    {        
+    {
         return await this.repository.paginate(queryStatement, constraint);
     }
 }

@@ -14,7 +14,7 @@ describe('DeleteExecutionByIdService', () =>
     let repository: IExecutionRepository;
     let mockRepository: MockExecutionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteExecutionByIdService', () =>
                 EventPublisher,
                 DeleteExecutionByIdService,
                 MockExecutionRepository,
-                { 
+                {
                     provide: IExecutionRepository,
                     useValue: {
                         deleteById: (id) => {},

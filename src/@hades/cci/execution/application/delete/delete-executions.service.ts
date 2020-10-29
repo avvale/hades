@@ -9,11 +9,11 @@ export class DeleteExecutionsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IExecutionRepository
+        private readonly repository: IExecutionRepository,
     ) {}
 
     public async main(queryStatement?: QueryStatement): Promise<void>
-    {   
+    {
         // get object to delete
         const executions = await this.repository.get(queryStatement);
 

@@ -41,7 +41,6 @@ describe('DeleteExecutionByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteExecutionByIdCommand(
                     executions[0].id,
-                
                 )
             )).toBe(undefined);
         });

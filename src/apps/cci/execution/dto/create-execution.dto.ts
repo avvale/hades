@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateExecutionDto 
+export class CreateExecutionDto
 {   
     
     @ApiProperty({
         type        : String,
         description : 'id [input here api field description]',
-        example     : 'ef60f9eb-1f8a-452a-a7b6-fd4f0171b0a2'
+        example     : 'a2ffaecf-87d8-40ad-bf7b-32883ca4beb5'
     })
     id: string;
     
@@ -15,7 +15,7 @@ export class CreateExecutionDto
     @ApiProperty({
         type        : String,
         description : 'tenantId [input here api field description]',
-        example     : 'c8169b42-1a99-4275-a9bd-109fe3ccf477'
+        example     : 'db3a20ac-7db5-40b2-bfbf-7741ecc03ba2'
     })
     tenantId: string;
     
@@ -24,7 +24,7 @@ export class CreateExecutionDto
     @ApiProperty({
         type        : String,
         description : 'tenantCode [input here api field description]',
-        example     : 'xmi62av289bkshhnweo2lpz83cjl9f9f0hx62em8kb4sxc5ha4'
+        example     : 'z4fvi9raolqofx7om38i2e3fdw2evov7taxajl0qf0nzabmel8'
     })
     tenantCode: string;
     
@@ -33,7 +33,7 @@ export class CreateExecutionDto
     @ApiProperty({
         type        : String,
         description : 'systemId [input here api field description]',
-        example     : '1346476e-937e-40a7-852a-6ebb17bf68d3'
+        example     : 'bbb0f68d-8c50-44a7-93f5-ddcf3909c7dd'
     })
     systemId: string;
     
@@ -42,7 +42,7 @@ export class CreateExecutionDto
     @ApiProperty({
         type        : String,
         description : 'systemName [input here api field description]',
-        example     : 'ukktarjwdcsrbjz9xxpz'
+        example     : '3470b5rv406dncmjadqb'
     })
     systemName: string;
     
@@ -51,7 +51,7 @@ export class CreateExecutionDto
     @ApiProperty({
         type        : String,
         description : 'version [input here api field description]',
-        example     : 'xwof9dwoi52f0cxajyjz'
+        example     : 'vrpdupww7asgl6fy1dmw'
     })
     version: string;
     
@@ -70,7 +70,7 @@ export class CreateExecutionDto
     @ApiProperty({
         type        : String,
         description : 'executedAt [input here api field description]',
-        example     : '2020-10-21 03:13:39'
+        example     : '2020-10-29 02:04:06'
     })
     executedAt: string;
     
@@ -79,7 +79,7 @@ export class CreateExecutionDto
     @ApiProperty({
         type        : String,
         description : 'monitoringStartAt [input here api field description]',
-        example     : '2020-10-20 17:01:05'
+        example     : '2020-10-29 04:06:47'
     })
     monitoringStartAt: string;
     
@@ -88,7 +88,7 @@ export class CreateExecutionDto
     @ApiProperty({
         type        : String,
         description : 'monitoringEndAt [input here api field description]',
-        example     : '2020-10-20 20:57:07'
+        example     : '2020-10-29 17:35:11'
     })
     monitoringEndAt: string;
     

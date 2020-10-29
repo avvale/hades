@@ -10,8 +10,8 @@ export class GetExecutionsQueryHandler implements IQueryHandler<GetExecutionsQue
     private readonly mapper: ExecutionMapper = new ExecutionMapper();
 
     constructor(
-        private readonly getExecutionsService: GetExecutionsService
-    ) { }
+        private readonly getExecutionsService: GetExecutionsService,
+    ) {}
 
     async execute(query: GetExecutionsQuery): Promise<ExecutionResponse[]>
     {

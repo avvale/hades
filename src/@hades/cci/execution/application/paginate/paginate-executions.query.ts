@@ -4,6 +4,6 @@ export class PaginateExecutionsQuery
 {
     constructor(
         public queryStatement?: QueryStatement,
-        public constraint?: QueryStatement
+        public constraint?: QueryStatement,
     ) {}
 }

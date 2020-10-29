@@ -12,7 +12,6 @@ export class CreateExecutionsCommand
             executedAt: string,
             monitoringStartAt: string,
             monitoringEndAt: string,
-            
         } []
     ) {}
 }

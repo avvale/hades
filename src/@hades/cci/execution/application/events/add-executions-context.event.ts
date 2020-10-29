@@ -8,21 +8,21 @@ import { DeletedExecutionsEvent } from './deleted-executions.event';
 export class AddExecutionsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciExecution[] = []
+        public readonly aggregateRoots: CciExecution[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedExecutionsEvent(
-                this.aggregateRoots.map(execution => 
+                this.aggregateRoots.map(execution =>
                     new CreatedExecutionEvent(
                         execution.id.value,
                         execution.tenantId.value,
@@ -48,7 +48,7 @@ export class AddExecutionsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedExecutionsEvent(
-                this.aggregateRoots.map(execution => 
+                this.aggregateRoots.map(execution =>
                     new DeletedExecutionEvent(
                         execution.id.value,
                         execution.tenantId.value,
@@ -63,10 +63,10 @@ export class AddExecutionsContextEvent extends AggregateRoot
                         execution.createdAt?.value,
                         execution.updatedAt?.value,
                         execution.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

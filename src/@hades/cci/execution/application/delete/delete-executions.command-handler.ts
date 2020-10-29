@@ -6,8 +6,8 @@ import { DeleteExecutionsService } from './delete-executions.service';
 export class DeleteExecutionsCommandHandler implements ICommandHandler<DeleteExecutionsCommand>
 {
     constructor(
-        private readonly deleteExecutionsService: DeleteExecutionsService
-    ) { }
+        private readonly deleteExecutionsService: DeleteExecutionsService,
+    ) {}
 
     async execute(command: DeleteExecutionsCommand): Promise<void>
     {

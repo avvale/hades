@@ -7,11 +7,11 @@ import { ExecutionId } from './../../domain/value-objects';
 export class FindExecutionByIdService
 {
     constructor(
-        private readonly repository: IExecutionRepository
+        private readonly repository: IExecutionRepository,
     ) {}
 
     public async main(id: ExecutionId): Promise<CciExecution>
-    {        
+    {
         return await this.repository.findById(id);
     }
 }

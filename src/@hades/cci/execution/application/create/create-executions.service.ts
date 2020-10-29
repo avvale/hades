@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ExecutionId,
     ExecutionTenantId,
     ExecutionTenantCode,
@@ -14,8 +14,7 @@ import {
     ExecutionMonitoringEndAt,
     ExecutionCreatedAt,
     ExecutionUpdatedAt,
-    ExecutionDeletedAt
-    
+    ExecutionDeletedAt,
 } from './../../domain/value-objects';
 import { IExecutionRepository } from './../../domain/execution.repository';
 import { CciExecution } from './../../domain/execution.aggregate';
@@ -26,7 +25,7 @@ export class CreateExecutionsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IExecutionRepository
+        private readonly repository: IExecutionRepository,
     ) {}
 
     public async main(
@@ -61,14 +60,14 @@ export class CreateExecutionsService
             new ExecutionUpdatedAt(Utils.nowTimestamp()),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateExecutions);
 
         // create AddExecutionsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const executionsRegistered = this.publisher.mergeObjectContext(new AddExecutionsContextEvent(aggregateExecutions));
- 
+
         executionsRegistered.created(); // apply event to model events
         executionsRegistered.commit(); // commit all events of model
     }

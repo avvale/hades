@@ -8,7 +8,7 @@ export class DeleteExecutionByIdService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IExecutionRepository
+        private readonly repository: IExecutionRepository,
     ) {}
 
     public async main(id: ExecutionId): Promise<void>
@@ -20,7 +20,7 @@ export class DeleteExecutionByIdService
 
         // insert EventBus in object, to be able to apply and commit events
         const executionRegister = this.publisher.mergeObjectContext(execution);
-        
+
         executionRegister.deleted(execution); // apply event to model events
         executionRegister.commit(); // commit all events of model
     }

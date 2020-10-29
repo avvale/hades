@@ -1,45 +1,45 @@
 // controllers
-import { CreateExecutionController } from './controllers/create-execution.controller';
-import { CreateExecutionsController } from './controllers/create-executions.controller';
-import { PaginateExecutionsController } from './controllers/paginate-executions.controller';
-import { GetExecutionsController } from './controllers/get-executions.controller';
-import { FindExecutionByIdController } from './controllers/find-execution-by-id.controller';
-import { FindExecutionController } from './controllers/find-execution.controller';
-import { UpdateExecutionController } from './controllers/update-execution.controller';
-import { DeleteExecutionByIdController } from './controllers/delete-execution-by-id.controller';
-import { DeleteExecutionsController } from './controllers/delete-executions.controller';
+import { CciCreateExecutionController } from './controllers/cci-create-execution.controller';
+import { CciCreateExecutionsController } from './controllers/cci-create-executions.controller';
+import { CciPaginateExecutionsController } from './controllers/cci-paginate-executions.controller';
+import { CciGetExecutionsController } from './controllers/cci-get-executions.controller';
+import { CciFindExecutionByIdController } from './controllers/cci-find-execution-by-id.controller';
+import { CciFindExecutionController } from './controllers/cci-find-execution.controller';
+import { CciUpdateExecutionController } from './controllers/cci-update-execution.controller';
+import { CciDeleteExecutionByIdController } from './controllers/cci-delete-execution-by-id.controller';
+import { CciDeleteExecutionsController } from './controllers/cci-delete-executions.controller';
 
 // resolvers
-import { CreateExecutionResolver } from './resolvers/create-execution.resolver';
-import { CreateExecutionsResolver } from './resolvers/create-executions.resolver';
-import { PaginateExecutionsResolver } from './resolvers/paginate-executions.resolver';
-import { GetExecutionsResolver } from './resolvers/get-executions.resolver';
-import { FindExecutionResolver } from './resolvers/find-execution.resolver';
-import { FindExecutionByIdResolver } from './resolvers/find-execution-by-id.resolver';
-import { UpdateExecutionResolver } from './resolvers/update-execution.resolver';
-import { DeleteExecutionByIdResolver } from './resolvers/delete-execution-by-id.resolver';
-import { DeleteExecutionsResolver } from './resolvers/delete-executions.resolver';
+import { CciCreateExecutionResolver } from './resolvers/cci-create-execution.resolver';
+import { CciCreateExecutionsResolver } from './resolvers/cci-create-executions.resolver';
+import { CciPaginateExecutionsResolver } from './resolvers/cci-paginate-executions.resolver';
+import { CciGetExecutionsResolver } from './resolvers/cci-get-executions.resolver';
+import { CciFindExecutionResolver } from './resolvers/cci-find-execution.resolver';
+import { CciFindExecutionByIdResolver } from './resolvers/cci-find-execution-by-id.resolver';
+import { CciUpdateExecutionResolver } from './resolvers/cci-update-execution.resolver';
+import { CciDeleteExecutionByIdResolver } from './resolvers/cci-delete-execution-by-id.resolver';
+import { CciDeleteExecutionsResolver } from './resolvers/cci-delete-executions.resolver';
 
 export const CciExecutionControllers = [
-    CreateExecutionController,
-    CreateExecutionsController,
-    PaginateExecutionsController,
-    GetExecutionsController,
-    FindExecutionByIdController,
-    FindExecutionController,
-    UpdateExecutionController,
-    DeleteExecutionByIdController,
-    DeleteExecutionsController,
+    CciCreateExecutionController,
+    CciCreateExecutionsController,
+    CciPaginateExecutionsController,
+    CciGetExecutionsController,
+    CciFindExecutionByIdController,
+    CciFindExecutionController,
+    CciUpdateExecutionController,
+    CciDeleteExecutionByIdController,
+    CciDeleteExecutionsController,
 ];
 
 export const CciExecutionResolvers = [
-    CreateExecutionResolver,
-    CreateExecutionsResolver,
-    PaginateExecutionsResolver,
-    GetExecutionsResolver,
-    FindExecutionResolver,
-    FindExecutionByIdResolver,
-    UpdateExecutionResolver,
-    DeleteExecutionByIdResolver,
-    DeleteExecutionsResolver,
+    CciCreateExecutionResolver,
+    CciCreateExecutionsResolver,
+    CciPaginateExecutionsResolver,
+    CciGetExecutionsResolver,
+    CciFindExecutionResolver,
+    CciFindExecutionByIdResolver,
+    CciUpdateExecutionResolver,
+    CciDeleteExecutionByIdResolver,
+    CciDeleteExecutionsResolver,
 ];

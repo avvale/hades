@@ -3,27 +3,27 @@
     "files": [
         {
             "path": "src/@hades/cci/execution/application/create/create-execution.command-handler.ts",
-            "integrity": "sha1:8f87e06703ac02aad28a8b7ca5cac075cbaaa260"
+            "integrity": "sha1:a30761632cacff8b7e41609e9258547c11fcc526"
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-execution.command.handler.spec.ts",
-            "integrity": "sha1:8aec135ee418bf73bb64db2bb9a3332557fa9761"
+            "integrity": "sha1:8881ff40ebfb143f904e25cab44c13b6d2adbb8a"
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-execution.command.ts",
-            "integrity": "sha1:9f320dd2dd08c1c59176865c1624e72e95d66bec"
+            "integrity": "sha1:9a65a64387d796eec942d86f9fbdc873ff2ab9e1"
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-execution.service.spec.ts",
-            "integrity": "sha1:dbed2dc217e38a2e9580b3c7ae010257f218ae6e"
+            "integrity": "sha1:a038f80666013659b64b1326fdeb35807c666c0d"
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-execution.service.ts",
-            "integrity": "sha1:72e3ff8e10d867d016e48e9abfba87b6b4aef9ed"
+            "integrity": "sha1:62bb60f31f667165f4ab1b775ea52b53526d510a"
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-executions.command-handler.ts",
-            "integrity": "sha1:30bf18839835aff456d33ffe8e718816425d8dc0"
+            "integrity": "sha1:7f045506537ee0fec24482301bac7ff7ca38ad81"
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-executions.command.handler.spec.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-executions.command.ts",
-            "integrity": "sha1:9d7c724e9abf5f13d6e1ff85648a3eb5dcaf11d4"
+            "integrity": "sha1:a4a276792f0394f63b13cdc4088ebeb09818ac5d"
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-executions.service.spec.ts",
@@ -39,31 +39,31 @@
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-executions.service.ts",
-            "integrity": "sha1:a2a79bee25d8fd6f7b4e537f31fb40d77aba9eee"
+            "integrity": "sha1:8a582495851fca1af67d4fd3e6b3feb7e4606eed"
         },
         {
             "path": "src/@hades/cci/execution/application/delete/delete-execution-by-id.command-handler.ts",
-            "integrity": "sha1:dc27907da01928ed502affd5466ef8204bf680b3"
+            "integrity": "sha1:59efeeb6b1d18add48f5dc2b884f50f77f8f3d42"
         },
         {
             "path": "src/@hades/cci/execution/application/delete/delete-execution-by-id.command.handler.spec.ts",
-            "integrity": "sha1:a00848415cc2f43f6c45ae289a411e28594aad4b"
+            "integrity": "sha1:b27e159f325ced516f535812d8d0ab6c68081070"
         },
         {
             "path": "src/@hades/cci/execution/application/delete/delete-execution-by-id.command.ts",
-            "integrity": "sha1:dce5e1de5018ff10a8d1113990cc66ed5bc42c40"
+            "integrity": "sha1:10d1539af8f645a6cf6a2dca5f44edbae6ca80f7"
         },
         {
             "path": "src/@hades/cci/execution/application/delete/delete-execution-by-id.service.spec.ts",
-            "integrity": "sha1:abf1530bbece7e08883b0b7f87a02e492b222ef9"
+            "integrity": "sha1:87240a4f661b1463a3f7137f5de9ceaea2997642"
         },
         {
             "path": "src/@hades/cci/execution/application/delete/delete-execution-by-id.service.ts",
-            "integrity": "sha1:f04b9e62d6503efd254091a315fb46977bf7aa35"
+            "integrity": "sha1:9f3f624496c0487b69e99769417133e9de082e13"
         },
         {
             "path": "src/@hades/cci/execution/application/delete/delete-executions.command-handler.ts",
-            "integrity": "sha1:65ead7a530989251825f871d6af4dd556d3eec84"
+            "integrity": "sha1:09d28f2a9b079ed87e6e2eee5d5d9aa481fe998e"
         },
         {
             "path": "src/@hades/cci/execution/application/delete/delete-executions.command.handler.spec.ts",
@@ -71,7 +71,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/delete/delete-executions.command.ts",
-            "integrity": "sha1:fe5d143b590d2c84c6af21ecc07b7246713cf8ed"
+            "integrity": "sha1:01ee199be61147d19e0e2489443d21fb0fb409f6"
         },
         {
             "path": "src/@hades/cci/execution/application/delete/delete-executions.service.spec.ts",
@@ -79,15 +79,15 @@
         },
         {
             "path": "src/@hades/cci/execution/application/delete/delete-executions.service.ts",
-            "integrity": "sha1:c7d2d984940a5a6126741804b5c3afb34ca22a48"
+            "integrity": "sha1:bb44510d48d8134323071d19a6194e237d1a9783"
         },
         {
             "path": "src/@hades/cci/execution/application/events/add-executions-context.event.ts",
-            "integrity": "sha1:4919116fa2cc91ef81a71287e3512ee3b632b15e"
+            "integrity": "sha1:3733bbea4e36b4af13749ca20d8c9b561ee04ff8"
         },
         {
             "path": "src/@hades/cci/execution/application/events/created-execution.event-handler.ts",
-            "integrity": "sha1:2857a88372ef7c8f1be304ad31dfb2b4e5ea4f10"
+            "integrity": "sha1:d41951bad67fc213bf8de85148c32ca3aa2fe407"
         },
         {
             "path": "src/@hades/cci/execution/application/events/created-execution.event.ts",
@@ -95,7 +95,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/events/created-executions.event-handler.ts",
-            "integrity": "sha1:5858667f8da607df214fb83fb78b72fad8ca0ff7"
+            "integrity": "sha1:a67e62be7ce863c251a4e39fbe0254d3fae4e346"
         },
         {
             "path": "src/@hades/cci/execution/application/events/created-executions.event.ts",
@@ -103,7 +103,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/events/deleted-execution.event-handler.ts",
-            "integrity": "sha1:2cfed8fd601a9b75b27b38002495f4d59e042de3"
+            "integrity": "sha1:de0f5e4b71750ef497579d0370828cb21c95fe09"
         },
         {
             "path": "src/@hades/cci/execution/application/events/deleted-execution.event.ts",
@@ -111,7 +111,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/events/deleted-executions.event-handler.ts",
-            "integrity": "sha1:5e1b9f12a3732d3b612e2fbc74befc195a9fc8dc"
+            "integrity": "sha1:439eb57077530ca9165a89fc822ef84269ae7b82"
         },
         {
             "path": "src/@hades/cci/execution/application/events/deleted-executions.event.ts",
@@ -119,7 +119,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/events/updated-execution.event-handler.ts",
-            "integrity": "sha1:a76f3ad623d6022ee8be371624a717167f7a4c41"
+            "integrity": "sha1:35843fba5ac9683efa1520042b794e0014b61510"
         },
         {
             "path": "src/@hades/cci/execution/application/events/updated-execution.event.ts",
@@ -127,11 +127,11 @@
         },
         {
             "path": "src/@hades/cci/execution/application/find/find-execution-by-id.query-handler.ts",
-            "integrity": "sha1:bac46d04fe6e3744f4cf9555c1edab0904850580"
+            "integrity": "sha1:9858779a53956e73e2e928b8bfe1a51cba87b991"
         },
         {
             "path": "src/@hades/cci/execution/application/find/find-execution-by-id.query.handler.spec.ts",
-            "integrity": "sha1:ee7ebe155a902ecc55e84b1585970411746d9d40"
+            "integrity": "sha1:25e12bb700a7dc28ad976d916c857593d7b47311"
         },
         {
             "path": "src/@hades/cci/execution/application/find/find-execution-by-id.query.ts",
@@ -139,15 +139,15 @@
         },
         {
             "path": "src/@hades/cci/execution/application/find/find-execution-by-id.service.spec.ts",
-            "integrity": "sha1:7a8318bdb725c5883cf65f50533fd7bd1463ff27"
+            "integrity": "sha1:0eef036c1a6c1f8023898211204ff36cee72f2a9"
         },
         {
             "path": "src/@hades/cci/execution/application/find/find-execution-by-id.service.ts",
-            "integrity": "sha1:146ac8a98cd220987a974e78e62474c16fb9700e"
+            "integrity": "sha1:ad205e4d2bd52bab430dfec12122adac745e5c50"
         },
         {
             "path": "src/@hades/cci/execution/application/find/find-execution.query-handler.ts",
-            "integrity": "sha1:ad11487efa0dcabb60e97412665ede7b65726245"
+            "integrity": "sha1:3be14929e40861a7ba4eed6b030a5c8ae28109cf"
         },
         {
             "path": "src/@hades/cci/execution/application/find/find-execution.query.handler.spec.ts",
@@ -163,11 +163,11 @@
         },
         {
             "path": "src/@hades/cci/execution/application/find/find-execution.service.ts",
-            "integrity": "sha1:d55f528ae8942df4d89f21a69f9707bd7900af2b"
+            "integrity": "sha1:e2af8f305c48cb556ad2d2f322ec1978a9a4be0d"
         },
         {
             "path": "src/@hades/cci/execution/application/get/get-executions.query-handler.ts",
-            "integrity": "sha1:ec2d5f4372f79c3ee0e49ab0ddd5c9ef28c711a3"
+            "integrity": "sha1:e79baea8f3e6a4ad28bc069347dc048389e7fa40"
         },
         {
             "path": "src/@hades/cci/execution/application/get/get-executions.query.handler.spec.ts",
@@ -183,19 +183,19 @@
         },
         {
             "path": "src/@hades/cci/execution/application/get/get-executions.service.ts",
-            "integrity": "sha1:1bd1a4b75e33865bb0e87f2d88fae5b5281211db"
+            "integrity": "sha1:3c7935d365527b16e3484906969dfaa3e1b43bae"
         },
         {
             "path": "src/@hades/cci/execution/application/paginate/paginate-executions.query-handler.ts",
-            "integrity": "sha1:ce3bb29c78195f2ab7aa5e8bf50b08707015ce3a"
+            "integrity": "sha1:4af660ec311a38eee920762f742936cce2dde4c9"
         },
         {
             "path": "src/@hades/cci/execution/application/paginate/paginate-executions.query.handler.spec.ts",
-            "integrity": "sha1:15e44516fca118901a09105025d5bb4d102049be"
+            "integrity": "sha1:32336277a397db698f3d533354e2d37732d74ff3"
         },
         {
             "path": "src/@hades/cci/execution/application/paginate/paginate-executions.query.ts",
-            "integrity": "sha1:60d025387e0c2401728fe813cd7096a5c5855f46"
+            "integrity": "sha1:b77d85389cf2a96e279385a4d5a88cef1af7d49e"
         },
         {
             "path": "src/@hades/cci/execution/application/paginate/paginate-executions.service.spec.ts",
@@ -203,15 +203,15 @@
         },
         {
             "path": "src/@hades/cci/execution/application/paginate/paginate-executions.service.ts",
-            "integrity": "sha1:49fb3db445003cb29f8d60d3f952e54ef1edd82a"
+            "integrity": "sha1:46814ba7d05066673981ec5f67fac8cf0baf1bd1"
         },
         {
             "path": "src/@hades/cci/execution/application/sagas/execution.sagas.ts",
-            "integrity": "sha1:3e9b3d9dc521c8488c4a38b3430e86b2c2b9b0ad"
+            "integrity": "sha1:a81c8c529d5fd95d4eda636dcff8ee6b4b2fbc24"
         },
         {
             "path": "src/@hades/cci/execution/application/update/update-execution.command-handler.ts",
-            "integrity": "sha1:708cdb9723b35084c01e4048e59f9bd94e631346"
+            "integrity": "sha1:54225c9a67672447a9d6422da81081bac1c1a255"
         },
         {
             "path": "src/@hades/cci/execution/application/update/update-execution.command.handler.spec.ts",
@@ -219,31 +219,31 @@
         },
         {
             "path": "src/@hades/cci/execution/application/update/update-execution.command.ts",
-            "integrity": "sha1:406c3cbdf9c7dbb8cbb488f51b440beece3702e8"
+            "integrity": "sha1:20d9920523f7f0e2d74a25f81026190706b1d640"
         },
         {
             "path": "src/@hades/cci/execution/application/update/update-execution.service.spec.ts",
-            "integrity": "sha1:427e324ef536eee288b12545ae69764fb57dc8d0"
+            "integrity": "sha1:31ccd8375ba47f6256ba69d065b50ac5682f7fd6"
         },
         {
             "path": "src/@hades/cci/execution/application/update/update-execution.service.ts",
-            "integrity": "sha1:13f83ab5b2fa3d5157712b9f73810a8774c59956"
+            "integrity": "sha1:8d33c57ff7a4afad3b0e49ea89170059ed2d3fa9"
         },
         {
             "path": "src/@hades/cci/execution/domain/execution.aggregate.ts",
-            "integrity": "sha1:a61d7b9432038899a9d14ef5731a45a820032e13"
+            "integrity": "sha1:1dc6549ab90cc4e1beefdaeb631689850769cdf6"
         },
         {
             "path": "src/@hades/cci/execution/domain/execution.mapper.ts",
-            "integrity": "sha1:5492529e066f74c5a12806c1836d4e64f5151d97"
+            "integrity": "sha1:f8523915c4844d144af3a34795833c8006a0a2ab"
         },
         {
             "path": "src/@hades/cci/execution/domain/execution.repository.ts",
-            "integrity": "sha1:b06eea04e39460dbd43e5ebce90bdeac7458179d"
+            "integrity": "sha1:46485a6c998afd21446177555fdeab2a015dff80"
         },
         {
             "path": "src/@hades/cci/execution/domain/execution.response.ts",
-            "integrity": "sha1:c6b6261f004b9b25d3343811bd00fb7103d9f862"
+            "integrity": "sha1:484f98f3f7e9dd1fcb9d861a0e10ab9928f9fa42"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/index.ts",
@@ -255,235 +255,235 @@
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/mock/mock-execution.repository.ts",
-            "integrity": "sha1:1c4841b02e93278f50e5ebee7a342ba97af66401"
+            "integrity": "sha1:02239c43e735080d15e177f7d5d40386ef20836f"
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/seeds/execution.seed.ts",
-            "integrity": "sha1:ae8f2709bdf9e8dbf7f7e4b85fa55c4d6c57abea"
+            "integrity": "sha1:872492a73b55dcc00de5b776902a60fe504ec4d6"
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model.ts",
-            "integrity": "sha1:5f80bcf2512d48f6e7f1cd870b3d5655a140ae7e"
+            "integrity": "sha1:d5214a524aafbaa198904ff28985d5d8fa968ec3"
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/sequelize/sequelize-execution.repository.ts",
-            "integrity": "sha1:40115522081168e906c882764aec2666a2ac75fd"
+            "integrity": "sha1:b867af8f78d02b72eceafb9801fe297d6d3a5cab"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-id.ts",
-            "integrity": "sha1:be56875971ffda521ac509bc15ff0185e50c537b"
+            "integrity": "sha1:a513d13fec7314c8fe0119ad90a284881145877d"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-tenant-id.ts",
-            "integrity": "sha1:f54b804e67593dda777249cae49237e357e7bbaf"
+            "integrity": "sha1:4fdb5a64f0f2c2ba2e35bc126ba7c0a8ef6681f6"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-tenant-code.ts",
-            "integrity": "sha1:f3ac6abc53ab7904637820babd01768ad709a27b"
+            "integrity": "sha1:efdbe45a5284a0cb7fdf14c51e3a4e899e282fc0"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-system-id.ts",
-            "integrity": "sha1:9a2ecc65699bc37a2c086b8a18fa3aaab7a981cb"
+            "integrity": "sha1:c9aee63817bf73a62290b28ebf9fa5f767ccf799"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-system-name.ts",
-            "integrity": "sha1:dd95a94791932094f67c359956f30d700313a45f"
+            "integrity": "sha1:80736a2b2a7a59a0e243391aba8bb898b0cd4ce5"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-version.ts",
-            "integrity": "sha1:83554da599d42d3e387c8dd8c98d7674ff029328"
+            "integrity": "sha1:ea465ab9951d10ae85a08eb79d0eb9247a2ffc3d"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-type.ts",
-            "integrity": "sha1:809aba80397c08ff1ce2eee2422e9404b8260573"
+            "integrity": "sha1:1e7b5f08f099c4765b6eaa066c4cdbc856ec5cb6"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-executed-at.ts",
-            "integrity": "sha1:033918808daea395a70e649c0e001bf22572aff8"
+            "integrity": "sha1:5bcba573a9b9343c24edf8984a474733f668b867"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-monitoring-start-at.ts",
-            "integrity": "sha1:cb426a12a323e8a035f0767f502b2f8eeebe3921"
+            "integrity": "sha1:8fe4d3a1f8ea1170946bc9e5f089e940141d8a66"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-monitoring-end-at.ts",
-            "integrity": "sha1:2ae4048424a5845123ef0b4ba1d344f90182b588"
+            "integrity": "sha1:1cd03eb4177a0255b73ef108b99308ea02d8d3bd"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-created-at.ts",
-            "integrity": "sha1:3dd3134703fa550b49179b69e106c27c61040678"
+            "integrity": "sha1:db7523781f0059e3d1bb6901032bf262740d9485"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-updated-at.ts",
-            "integrity": "sha1:c71df2a106a8194c4da11ca00fa44e467365f4c3"
+            "integrity": "sha1:36315e8267abe6839fc9ce37102895c6f2563802"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-deleted-at.ts",
-            "integrity": "sha1:4d3d094395258f3196e5d62a5c6a01a71e787d32"
+            "integrity": "sha1:b4ef8adf76538ebe91845b837e4c6952bca259d0"
         },
         {
-            "path": "src/apps/cci/execution/controllers/create-execution.controller.spec.ts",
-            "integrity": "sha1:ef0baa6c0560e909c82b41eb783f88a3191a8925"
+            "path": "src/apps/cci/execution/controllers/cci-create-execution.controller.spec.ts",
+            "integrity": "sha1:ec93a40630eb117dd35c4d128c97e05eebe0538c"
         },
         {
-            "path": "src/apps/cci/execution/controllers/create-execution.controller.ts",
-            "integrity": "sha1:d751028a1ce2a6aaa32b34669758b88df75ead1b"
+            "path": "src/apps/cci/execution/controllers/cci-create-execution.controller.ts",
+            "integrity": "sha1:305b5b658fae64608ac00bfdae16a05fc11a3f0d"
         },
         {
-            "path": "src/apps/cci/execution/controllers/create-executions.controller.spec.ts",
-            "integrity": "sha1:ea7fe18a00f00016a3c0467660c67c315193f519"
+            "path": "src/apps/cci/execution/controllers/cci-create-executions.controller.spec.ts",
+            "integrity": "sha1:2bed5044a05289852c36040f32409eb03a81e6eb"
         },
         {
-            "path": "src/apps/cci/execution/controllers/create-executions.controller.ts",
-            "integrity": "sha1:b5458f94ae23bcbbf98f31d0221f60f8455c699c"
+            "path": "src/apps/cci/execution/controllers/cci-create-executions.controller.ts",
+            "integrity": "sha1:233f90676f8f1679419370477240fa9aa3d1ce8c"
         },
         {
-            "path": "src/apps/cci/execution/controllers/delete-execution-by-id.controller.spec.ts",
-            "integrity": "sha1:9911fe59a5d93912e87a5e051a6fa67abe4cb497"
+            "path": "src/apps/cci/execution/controllers/cci-delete-execution-by-id.controller.spec.ts",
+            "integrity": "sha1:779a8d0621778c44833e5b55f1fa8baa1bf14d65"
         },
         {
-            "path": "src/apps/cci/execution/controllers/delete-execution-by-id.controller.ts",
-            "integrity": "sha1:0b639d4ed68c2b8c0fa3a647ae4a925a0d4e4d6e"
+            "path": "src/apps/cci/execution/controllers/cci-delete-execution-by-id.controller.ts",
+            "integrity": "sha1:30c9f6ae61d3e0b5044d33de11c96688898fbeab"
         },
         {
-            "path": "src/apps/cci/execution/controllers/delete-executions.controller.spec.ts",
-            "integrity": "sha1:6433fce921384263ecbc5d949a4638cebb3bc6e1"
+            "path": "src/apps/cci/execution/controllers/cci-delete-executions.controller.spec.ts",
+            "integrity": "sha1:274a3c92d520a21eb45d655e57c190b4ce64aff3"
         },
         {
-            "path": "src/apps/cci/execution/controllers/delete-executions.controller.ts",
-            "integrity": "sha1:a632969183701e43323a717cf4438c0211925e44"
+            "path": "src/apps/cci/execution/controllers/cci-delete-executions.controller.ts",
+            "integrity": "sha1:c8d28fba589b8febefa7e07a93a9e2cb1b416bcb"
         },
         {
-            "path": "src/apps/cci/execution/controllers/find-execution-by-id.controller.spec.ts",
-            "integrity": "sha1:dfbfdf9ef1b2a0b57391948c598a77b7dd79604e"
+            "path": "src/apps/cci/execution/controllers/cci-find-execution-by-id.controller.spec.ts",
+            "integrity": "sha1:b0752033a295a68b958244687be361046babce68"
         },
         {
-            "path": "src/apps/cci/execution/controllers/find-execution-by-id.controller.ts",
-            "integrity": "sha1:91010ffd69d2af9050c775a06bba094c0b0e1b7b"
+            "path": "src/apps/cci/execution/controllers/cci-find-execution-by-id.controller.ts",
+            "integrity": "sha1:368e965ab197b8006082f1361c8c51f4c93c4451"
         },
         {
-            "path": "src/apps/cci/execution/controllers/find-execution.controller.spec.ts",
-            "integrity": "sha1:7a72bdb6793afc3dead4f38d25ff7be506a100b1"
+            "path": "src/apps/cci/execution/controllers/cci-find-execution.controller.spec.ts",
+            "integrity": "sha1:fa3fcdce6ee03598dc53c659316c2e18aeb5e49b"
         },
         {
-            "path": "src/apps/cci/execution/controllers/find-execution.controller.ts",
-            "integrity": "sha1:f56b809723a30cdb78ba995b8eb1d68824fa0166"
+            "path": "src/apps/cci/execution/controllers/cci-find-execution.controller.ts",
+            "integrity": "sha1:b3923e39ac4acc2263fdecc267e8a1a0b03bbba8"
         },
         {
-            "path": "src/apps/cci/execution/controllers/get-executions.controller.spec.ts",
-            "integrity": "sha1:337c79fe590aabe319863a16b10a3b0a0ace8dde"
+            "path": "src/apps/cci/execution/controllers/cci-get-executions.controller.spec.ts",
+            "integrity": "sha1:f24c25d6504a136794230115c5e3a135c58dbb13"
         },
         {
-            "path": "src/apps/cci/execution/controllers/get-executions.controller.ts",
-            "integrity": "sha1:d6925503b2733e6dc8dee6fe4b604915f100f9b5"
+            "path": "src/apps/cci/execution/controllers/cci-get-executions.controller.ts",
+            "integrity": "sha1:6dcd34976acf942d423850093acfe1d9bb7952ea"
         },
         {
-            "path": "src/apps/cci/execution/controllers/paginate-executions.controller.spec.ts",
-            "integrity": "sha1:18f6293c650be24c9273b99f125814ba5bfdc4be"
+            "path": "src/apps/cci/execution/controllers/cci-paginate-executions.controller.spec.ts",
+            "integrity": "sha1:2186443c105142bb454159ebfb578602d7ebbaa6"
         },
         {
-            "path": "src/apps/cci/execution/controllers/paginate-executions.controller.ts",
-            "integrity": "sha1:90598da628f0fd109bb6488ba143b63568ac0261"
+            "path": "src/apps/cci/execution/controllers/cci-paginate-executions.controller.ts",
+            "integrity": "sha1:42fabd82633dca7f1bf26749695702cdbaca92e5"
         },
         {
-            "path": "src/apps/cci/execution/controllers/update-execution.controller.spec.ts",
-            "integrity": "sha1:ddba4bbccd6259f55f21ba5b9e994165a599fe94"
+            "path": "src/apps/cci/execution/controllers/cci-update-execution.controller.spec.ts",
+            "integrity": "sha1:3223bd3e6573d073d3f6a0fb0aefb4247d5b3cf8"
         },
         {
-            "path": "src/apps/cci/execution/controllers/update-execution.controller.ts",
-            "integrity": "sha1:5b4ebf4457c42b98b00e601be083a6a2c22fe124"
+            "path": "src/apps/cci/execution/controllers/cci-update-execution.controller.ts",
+            "integrity": "sha1:ed9fc447def1cffd660d5bcc50d2ffbc22f2e9de"
         },
         {
             "path": "src/apps/cci/execution/dto/execution.dto.ts",
-            "integrity": "sha1:1573bc99668946fbc20caf53544059a38cc8348e"
+            "integrity": "sha1:71ae69ce071591ddbd4fc33a16c92d2299ffcacf"
         },
         {
             "path": "src/apps/cci/execution/dto/create-execution.dto.ts",
-            "integrity": "sha1:e610d1e4bcdd3793ef887284674971449d9e6c41"
+            "integrity": "sha1:4897dd673329212197d81eaf64533b8a1fcaa458"
         },
         {
             "path": "src/apps/cci/execution/dto/update-execution.dto.ts",
-            "integrity": "sha1:180d7ff37f0f88559ab46a9871724d3b19b2abc7"
+            "integrity": "sha1:a204dd7b5efa21f66250cb36f7de6bb46291d595"
         },
         {
             "path": "src/apps/cci/execution/graphql/execution.graphql",
-            "integrity": "sha1:e3a74d550d96c5e37b21031f025ad7f5201dc7bc"
+            "integrity": "sha1:8fbc586294578779aaf95e28de8dbe2db55bc0b7"
         },
         {
             "path": "src/apps/cci/execution/index.ts",
-            "integrity": "sha1:080b2e2333b1e31b6dcc2d226d257416b5a76822"
+            "integrity": "sha1:3710757759c1aee9046315e7c882bc3c34c4135e"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/create-execution.resolver.spec.ts",
-            "integrity": "sha1:2eb028137adcaeeb4d6d2f907569e7312bd2118d"
+            "path": "src/apps/cci/execution/resolvers/cci-create-execution.resolver.spec.ts",
+            "integrity": "sha1:2022c23d479087d723d44763c9cf053c99997c56"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/create-execution.resolver.ts",
-            "integrity": "sha1:2f76dd2a77b91dede7d20ce480412ad96853c1ac"
+            "path": "src/apps/cci/execution/resolvers/cci-create-execution.resolver.ts",
+            "integrity": "sha1:c1b3d2f82e69449b69146ef4d9323b16b6bc147b"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/create-executions.resolver.spec.ts",
-            "integrity": "sha1:492d1e87eae0da6c950bf1b6e39e298798021ab3"
+            "path": "src/apps/cci/execution/resolvers/cci-create-executions.resolver.spec.ts",
+            "integrity": "sha1:5af20367dfd4cb8a5da1eb451157613c4c34032c"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/create-executions.resolver.ts",
-            "integrity": "sha1:2d8be4e50b0bd5fe52a4258b08101baefb6b8c4c"
+            "path": "src/apps/cci/execution/resolvers/cci-create-executions.resolver.ts",
+            "integrity": "sha1:0b2811304b2e0bbab39b220548e96cdff6a3b776"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/delete-execution-by-id.resolver.spec.ts",
-            "integrity": "sha1:db9460b8c223c5490880d65f9e7185c418bfed76"
+            "path": "src/apps/cci/execution/resolvers/cci-delete-execution-by-id.resolver.spec.ts",
+            "integrity": "sha1:157dec956d16692cdc8895cf92b7d00fcdf36fa9"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/delete-execution-by-id.resolver.ts",
-            "integrity": "sha1:d4d6550e431f360e0ab5705e5858d3c497977e32"
+            "path": "src/apps/cci/execution/resolvers/cci-delete-execution-by-id.resolver.ts",
+            "integrity": "sha1:67476446a5a20181f7697b1a0ec87e70b414c709"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/delete-executions.resolver.spec.ts",
-            "integrity": "sha1:7786f80873749f922ccdce31ca11626915e1e0da"
+            "path": "src/apps/cci/execution/resolvers/cci-delete-executions.resolver.spec.ts",
+            "integrity": "sha1:e663ab130ac1e05f42487331c3397d3432b100d1"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/delete-executions.resolver.ts",
-            "integrity": "sha1:9eda7a5d7809f1d8e9602ba2424b7d286774fb70"
+            "path": "src/apps/cci/execution/resolvers/cci-delete-executions.resolver.ts",
+            "integrity": "sha1:db470bfa0171850454e45f84d09363254cccdc77"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/find-execution-by-id.resolver.spec.ts",
-            "integrity": "sha1:992328a11fbf00844a123b3f12c0e9dd1dbcf753"
+            "path": "src/apps/cci/execution/resolvers/cci-find-execution-by-id.resolver.spec.ts",
+            "integrity": "sha1:797757bc65937eb7720e2e19bac8f32f4b30b5ea"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/find-execution-by-id.resolver.ts",
-            "integrity": "sha1:8717cdbca828598c8e224cb8d6a50d6a43595d12"
+            "path": "src/apps/cci/execution/resolvers/cci-find-execution-by-id.resolver.ts",
+            "integrity": "sha1:9081787fa2f0e87d8a4e30e38ad14af2f41a4f4b"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/find-execution.resolver.spec.ts",
-            "integrity": "sha1:bde1d1045337770b2f498f65bf43078fcaea441f"
+            "path": "src/apps/cci/execution/resolvers/cci-find-execution.resolver.spec.ts",
+            "integrity": "sha1:d041de5924ab8ef335b83c8a6ea2da42edee18f7"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/find-execution.resolver.ts",
-            "integrity": "sha1:e591c74fc0f681cfb32a47fb5b0f0539adf449eb"
+            "path": "src/apps/cci/execution/resolvers/cci-find-execution.resolver.ts",
+            "integrity": "sha1:e07f90051419303cc65ad3a8d99baed109a7dd51"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/get-executions.resolver.spec.ts",
-            "integrity": "sha1:e90402b61be933f64582e57195a4d483f6d285d0"
+            "path": "src/apps/cci/execution/resolvers/cci-get-executions.resolver.spec.ts",
+            "integrity": "sha1:cb2c81d079ba50a675073a768ca808ee892673f7"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/get-executions.resolver.ts",
-            "integrity": "sha1:ed3ee719ef44a2ba2b6bc232703db9869577b268"
+            "path": "src/apps/cci/execution/resolvers/cci-get-executions.resolver.ts",
+            "integrity": "sha1:8f2ac5eed3486b5d4589ff25f15ab43991b22f0e"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/paginate-executions.resolver.spec.ts",
-            "integrity": "sha1:f8b9b6211cd171865a15635a8bf7c7435b35ab4f"
+            "path": "src/apps/cci/execution/resolvers/cci-paginate-executions.resolver.spec.ts",
+            "integrity": "sha1:28fea703efa09c4e340af8890d796d1154c04a23"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/paginate-executions.resolver.ts",
-            "integrity": "sha1:3331fe27b0a1587236dde0554f82ff689a411f68"
+            "path": "src/apps/cci/execution/resolvers/cci-paginate-executions.resolver.ts",
+            "integrity": "sha1:d5aa51a89b6c2d0e0920328e993b0af001fb9fec"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/update-execution.resolver.spec.ts",
-            "integrity": "sha1:6caebdaf7cf1559fa97a9ab3aee1d53f2f8cb092"
+            "path": "src/apps/cci/execution/resolvers/cci-update-execution.resolver.spec.ts",
+            "integrity": "sha1:b38dda6b3e56966c400f758bfa4aab80b91afb64"
         },
         {
-            "path": "src/apps/cci/execution/resolvers/update-execution.resolver.ts",
-            "integrity": "sha1:8ef46dad9b6ff14e3ffc8ece1502b1b1522001f5"
+            "path": "src/apps/cci/execution/resolvers/cci-update-execution.resolver.ts",
+            "integrity": "sha1:510011c5078498519e37d26cac11067e91ad4093"
         },
         {
             "path": "src/apps/cci/execution/seeder/seeder.module.ts",
@@ -491,11 +491,11 @@
         },
         {
             "path": "src/apps/cci/execution/seeder/seeder.ts",
-            "integrity": "sha1:787ccf476acb87098e5610f2a214f4b73571de84"
+            "integrity": "sha1:9be8810d83af68c184bd9ae49b45bf65ced6db35"
         },
         {
             "path": "postman/cci.execution.postman.json",
-            "integrity": "sha1:00ab9a438d74c9f35d14e7d8331035eb2f14fdf0"
+            "integrity": "sha1:e41174e0fd96ecf6b8762a739da9167a7d254608"
         }
     ]
 }
