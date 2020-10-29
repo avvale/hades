@@ -1,7 +1,7 @@
-import { Moment } from 'moment';
 import * as moment from 'moment-timezone';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcrypt';
+import { Moment } from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 declare const Buffer: any;
 
@@ -9,12 +9,12 @@ export class Utils
 {
     public static now(): Moment
     {
-        return moment().utc();
+        return moment();
     }
 
     public static nowTimestamp(): string
     {
-        return moment().utc().format('YYYY-MM-DD H:mm:ss');
+        return moment().format('YYYY-MM-DD H:mm:ss');
     }
 
     public static sha1(data: string): string
