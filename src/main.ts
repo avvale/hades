@@ -4,6 +4,7 @@ import { urlencoded, json } from 'express';
 import { EnvironmentService } from '@hades/shared/domain/environment/environment.service';
 import { AppModule } from './app.module';
 import { LoggerService } from './apps/core/modules/logger/logger.service';
+import * as moment from 'moment-timezone';
 
 async function bootstrap()
 {
@@ -26,6 +27,9 @@ async function bootstrap()
 
     // set timezone
     if (environmentService.get<string>('APP_TIMEZONE')) process.env.TZ = environmentService.get<string>('APP_TIMEZONE');
+
+    // set data source timezone
+    moment.tz.setDefault(process.env.TZ);
 
     await app.listen(environmentService.get<number>('APP_PORT'));
 }
