@@ -1307,8 +1307,10 @@ export interface CciDataLake {
 
 export interface CciExecution {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
+    systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
     version: GraphQLString;
