@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { EnvironmentService } from '@hades/shared/domain/environment/environment.service';
 import { EnvironmentModule } from './environment.module';
- 
+
 @Module({
-    imports: [        
+    imports: [
         JwtModule.registerAsync({
             imports: [EnvironmentModule],
             useFactory: async (config: EnvironmentService) => ({
