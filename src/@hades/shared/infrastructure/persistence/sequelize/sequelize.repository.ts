@@ -31,9 +31,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
             )
         );
 
-        return { 
-            total, 
-            count, 
+        return {
+            total,
+            count,
             rows: <Aggregate[]>this.mapper.mapModelsToAggregates(rows) // map values to create value objects
         };
     }
@@ -41,7 +41,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     // hook to add findOptions
     composeStatementPaginateHook(query?: QueryStatement): QueryStatement { return query; }
 
-    async find(query?: QueryStatement, constraint?: QueryStatement): Promise<Aggregate> 
+    async find(query?: QueryStatement, constraint?: QueryStatement): Promise<Aggregate>
     {
         const model = await this.repository.findOne(
             this.criteria.implements(
@@ -64,9 +64,9 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         const model = await this.repository.findOne(
             this.criteria.implements(
                 this.composeStatementFindByIdHook(
-                    _.merge({ 
-                        where: { 
-                            id: id.value 
+                    _.merge({
+                        where: {
+                            id: id.value
                         }
                     }, constraint)
                 )
@@ -82,7 +82,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
 
     // get multiple records
-    async get(query?: QueryStatement, constraint?: QueryStatement): Promise<Aggregate[]> 
+    async get(query?: QueryStatement, constraint?: QueryStatement): Promise<Aggregate[]>
     {
         const models = await this.repository.findAll(
             this.criteria.implements(
@@ -111,16 +111,16 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
                 }
             }
         );
-        
+
         if (modelInDB) throw new ConflictException(`Error to create ${this.aggregateName}, the id ${aggregate['id']['value']} already exist in database`);
-        
+
         try
         {
             const model = await this.repository.create(aggregate.toDTO());
 
             this.createdAggregateHook(aggregate, model);
         }
-        catch (error) 
+        catch (error)
         {
             throw new ConflictException(error.message);
         }
@@ -139,8 +139,8 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     // hook called after insert aggregates
     async insertedAggregateHook(aggregates: Aggregate[]) {}
 
-    async update(aggregate: Aggregate, constraint?: QueryStatement): Promise<void> 
-    { 
+    async update(aggregate: Aggregate, constraint?: QueryStatement): Promise<void>
+    {
         // check that model exist
         const modelInDB = await this.repository.findOne(
             this.criteria.implements(
@@ -170,7 +170,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     // hook called after update aggregate
     async updatedAggregateHook(aggregate: Aggregate, model: Model<ModelClass>) {}
 
-    async deleteById(id: UuidValueObject, constraint?: QueryStatement): Promise<void> 
+    async deleteById(id: UuidValueObject, constraint?: QueryStatement): Promise<void>
     {
         // check that aggregate exist
         const model = await this.repository.findOne(
@@ -188,7 +188,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         await model.destroy();
     }
 
-    async delete(query?: QueryStatement, constraint?: QueryStatement): Promise<void> 
+    async delete(query?: QueryStatement, constraint?: QueryStatement): Promise<void>
     {
         if (!query || !query.where) throw new BadRequestException(`To delete multiple records, you must define a where statement`);
 
