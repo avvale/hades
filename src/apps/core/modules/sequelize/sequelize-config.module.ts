@@ -7,8 +7,8 @@ import { EnvironmentModule } from './../../../shared/modules/environment.module'
     imports: [
         SequelizeModule.forRootAsync({
             imports: [EnvironmentModule],
-            useFactory: (environmentService: EnvironmentService) => {
-
+            useFactory: (environmentService: EnvironmentService) =>
+            {
                 // set data source time zone for sequelize
                 process.env.TZ = environmentService.get<string>('APP_TIMEZONE');
 
