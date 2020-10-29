@@ -2,6 +2,8 @@ export const permissions = [
 
     {id: 'ae182255-c5f2-4ad3-bb5d-3c40daa0e7eb',  name: 'cci.access',                           boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
 
+    {id: '0f83689b-d994-4a1d-a48b-8ea70175ff2a',  name: 'cci.catalog.create',                   boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+
     {id: 'e8cd5827-05f0-466e-b550-e01557770734',  name: 'cci.channel.access',                   boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
     {id: 'fa87803f-9418-42db-b7ea-eba7ccaf1c0a',  name: 'cci.channel.get',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
     {id: '1ccbb982-ca10-45f6-8f3f-f1c5a008a936',  name: 'cci.channel.create',                   boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
@@ -91,6 +93,8 @@ export const permissions = [
     {id: '5c47d29a-b22b-4acd-8f28-27fb46df13f7',  name: 'cci.rule.create',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
     {id: '5e3ed8d3-43b9-41e9-9076-1e374519e9cc',  name: 'cci.rule.update',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
     {id: 'caeb87ca-7acc-453a-8ff7-e06355be0e22',  name: 'cci.rule.delete',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
+
+    {id: 'a911a839-3f77-458e-867d-2ead6eaa81de',  name: 'cci.snapshot.create',                  boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
 
     {id: 'e62971af-7ba1-4182-afa3-e32ad3e0d26b',  name: 'cci.summary.access',                   boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
     {id: '14380c06-f27e-4d2a-bec0-8f613903a091',  name: 'cci.summary.get',                      boundedContextId: 'd164e484-2736-40a4-9aa0-7c7c62ea8498'},
