@@ -19,6 +19,6 @@ export abstract class TimestampValueObject extends StringValueObject
 
         if (value !== null && value !== undefined && !((new Date(value)).getTime() > 0)) throw new BadRequestException(`Value for ${this.validationRules.name} has to be a timestamp value, value ${value} is a not valid timestamp, format YYYY-MM-DD HH:mm:ss expected`);
 
-        super.value = moment(value, 'YYYY-MM-DD HH:mm:ss').utc().format('YYYY-MM-DD HH:mm:ss');
+        super.value = moment(value, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
     }
 }
