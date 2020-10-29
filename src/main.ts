@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { InternalServerErrorException } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { urlencoded, json } from 'express';
 import { EnvironmentService } from '@hades/shared/domain/environment/environment.service';
@@ -25,10 +26,13 @@ async function bootstrap()
     app.use(urlencoded({ extended: true, limit: environmentService.get<string>('APP_LIMIT_REQUEST_SIZE') }));
     app.useLogger(loggerService);
 
-    // set timezone
-    if (environmentService.get<string>('APP_TIMEZONE')) process.env.TZ = environmentService.get<string>('APP_TIMEZONE');
+    // check that exist timezone in environment file
+    if (!environmentService.get<string>('APP_TIMEZONE')) throw new InternalServerErrorException(`APP_TIMEZONE variable is not defined in environment file`);
 
-    // set data source timezone
+    // set data source timezone for application
+    process.env.TZ = environmentService.get<string>('APP_TIMEZONE');
+
+    // set data source timezone for moment.js
     moment.tz.setDefault(process.env.TZ);
 
     await app.listen(environmentService.get<number>('APP_PORT'));
