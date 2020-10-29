@@ -1,4 +1,4 @@
-import { QueryStatementInput } from './sql-statement-input';
+import { QueryStatement } from './sql-statement/sql-statement';
 import { ValueObject } from './../value-objects/value-object';
 import { Pagination } from './../lib/pagination';
 
@@ -7,7 +7,7 @@ export interface IRepository<Aggregate>
     repository: any;
     
     // paginate records
-    paginate(queryStatements: QueryStatementInput[], constraints: QueryStatementInput[]): Promise<Pagination<Aggregate>>;
+    paginate(query: QueryStatement, constraint?: QueryStatement): Promise<Pagination<Aggregate>>;
 
     // create a single record
     create(item: Aggregate): Promise<void>;
@@ -16,20 +16,20 @@ export interface IRepository<Aggregate>
     insert(items: Aggregate[], options: object): Promise<void>;
 
     // find a single record
-    find(query: QueryStatementInput[]): Promise<Aggregate | null>;
+    find(query?: QueryStatement, constraint?: QueryStatement): Promise<Aggregate | null>;
 
     // find a single record by id
-    findById(id: ValueObject<String>): Promise<Aggregate | null>;
+    findById(id: ValueObject<String>, constraint?: QueryStatement): Promise<Aggregate | null>;
 
     // get multiple records
-    get(query: QueryStatementInput[]): Promise<Aggregate[]>;
+    get(query?: QueryStatement, constraint?: QueryStatement): Promise<Aggregate[]>;
 
     // update record
-    update(item: Aggregate): Promise<void>;
+    update(item: Aggregate, constraint?: QueryStatement): Promise<void>;
 
     // delete record
-    delete(query: QueryStatementInput[]): Promise<void>;
+    delete(query?: QueryStatement, constraint?: QueryStatement): Promise<void>;
   
     // delete record by id
-    deleteById(id: ValueObject<String>): Promise<void>;
+    deleteById(id: ValueObject<String>, constraint?: QueryStatement): Promise<void>;
 }
