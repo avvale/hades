@@ -8,7 +8,7 @@ export interface IRepository<Aggregate>
     repository: any;
 
     // paginate records
-    paginate(query: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Pagination<Aggregate>>;
+    paginate(queryStatement: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Pagination<Aggregate>>;
 
     // create a single record
     create(item: Aggregate): Promise<void>;
@@ -17,13 +17,13 @@ export interface IRepository<Aggregate>
     insert(items: Aggregate[], options: object): Promise<void>;
 
     // find a single record
-    find(query?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate | null>;
+    find(queryStatement?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate | null>;
 
     // find a single record by id
     findById(id: ValueObject<String>, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate | null>;
 
     // get multiple records
-    get(query?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate[]>;
+    get(queryStatement?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate[]>;
 
     // update record
     update(item: Aggregate, constraint?: QueryStatement): Promise<void>;
@@ -32,5 +32,5 @@ export interface IRepository<Aggregate>
     deleteById(id: ValueObject<String>, constraint?: QueryStatement): Promise<void>;
 
     // delete record
-    delete(query?: QueryStatement, constraint?: QueryStatement): Promise<void>;
+    delete(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<void>;
 }
