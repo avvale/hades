@@ -4,15 +4,15 @@ import { AccountResponse } from '@hades/iam/account/domain/account.response';
 export const TenantPolicy = (customProperties?: {
     targetProperty: string;
     payloadIndex: number;
-}) => 
+}) =>
 {
     return (target, propertyKey: string, descriptor: PropertyDescriptor) =>
-    { 
+    {
         return {
             value: function( ... args: any[])
             {
                 const properties = Object.assign({}, {
-                    targetProperty: 'tenantId', 
+                    targetProperty: 'tenantId',
                     payloadIndex: 1
                 }, customProperties);
 
