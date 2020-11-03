@@ -2,6 +2,7 @@ import { ConflictException, NotFoundException, BadRequestException } from '@nest
 import { FindOptions } from 'sequelize/types';
 import { Model } from 'sequelize-typescript';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { QueryMetadata } from '@hades/shared/domain/lib/hades.types';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
@@ -17,7 +18,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     public readonly aggregateName: string;
     public readonly mapper: IMapper;
 
-    async paginate(query?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<Aggregate>>
+    async paginate(query?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Pagination<Aggregate>>
     {
         // get count total records from sql service library
         const total = await this.repository.count(
@@ -27,38 +28,38 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         // get records
         const { count, rows } = await this.repository.findAndCountAll(
             this.criteria.implements(
-                this.composeStatementPaginateHook(_.merge(query, constraint))
+                this.composeStatementPaginateHook(_.merge(query, constraint), queryMetadata)
             )
         );
 
         return {
             total,
             count,
-            rows: <Aggregate[]>this.mapper.mapModelsToAggregates(rows) // map values to create value objects
+            rows: <Aggregate[]>this.mapper.mapModelsToAggregates(rows, queryMetadata) // map values to create value objects
         };
     }
 
     // hook to add findOptions
-    composeStatementPaginateHook(query?: QueryStatement): QueryStatement { return query; }
+    composeStatementPaginateHook(query?: QueryStatement, queryMetadata?: QueryMetadata): QueryStatement { return query; }
 
-    async find(query?: QueryStatement, constraint?: QueryStatement): Promise<Aggregate>
+    async find(query?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate>
     {
         const model = await this.repository.findOne(
             this.criteria.implements(
-                this.composeStatementFindHook(_.merge(query, constraint))
+                this.composeStatementFindHook(_.merge(query, constraint), queryMetadata)
             )
         );
 
         if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
 
         // map value to create value objects
-        return <Aggregate>this.mapper.mapModelToAggregate(model);
+        return <Aggregate>this.mapper.mapModelToAggregate(model, queryMetadata);
     }
 
     // hook to add findOptions
-    composeStatementFindHook(query?: QueryStatement): QueryStatement { return query; }
+    composeStatementFindHook(query?: QueryStatement, queryMetadata?: QueryMetadata): QueryStatement { return query; }
 
-    async findById(id: UuidValueObject, constraint?: QueryStatement): Promise<Aggregate>
+    async findById(id: UuidValueObject, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate>
     {
         // value is already mapped
         const model = await this.repository.findOne(
@@ -68,34 +69,35 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
                         where: {
                             id: id.value
                         }
-                    }, constraint)
+                    }, constraint),
+                    queryMetadata
                 )
             )
         );
 
         if (!model) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
 
-        return <Aggregate>this.mapper.mapModelToAggregate(model);
+        return <Aggregate>this.mapper.mapModelToAggregate(model, queryMetadata);
     }
 
     // hook to add findOptions
-    composeStatementFindByIdHook(findOptions: FindOptions): FindOptions { return findOptions; }
+    composeStatementFindByIdHook(findOptions: FindOptions, queryMetadata?: QueryMetadata): FindOptions { return findOptions; }
 
     // get multiple records
-    async get(query?: QueryStatement, constraint?: QueryStatement): Promise<Aggregate[]>
+    async get(query?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate[]>
     {
         const models = await this.repository.findAll(
             this.criteria.implements(
-                this.composeStatementGetHook(_.merge(query, constraint))
+                this.composeStatementGetHook(_.merge(query, constraint), queryMetadata)
             )
         );
 
         // map values to create value objects
-        return <Aggregate[]>this.mapper.mapModelsToAggregates(models);
+        return <Aggregate[]>this.mapper.mapModelsToAggregates(models, queryMetadata);
     }
 
     // hook to add findOptions
-    composeStatementGetHook(query?: QueryStatement): QueryStatement { return query; }
+    composeStatementGetHook(query?: QueryStatement, queryMetadata?: QueryMetadata): QueryStatement { return query; }
 
     // ******************
     // ** side effects **

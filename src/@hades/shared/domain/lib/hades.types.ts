@@ -1,9 +1,14 @@
+export interface CommandMetadata extends Metadata {}
+
 export interface DataValueObject
 {
-    haveToEncrypt?: boolean
+    haveToEncrypt?: boolean,
+    currentTimestamp?: boolean,
+    addTimezone?: string,
+    removeTimezone?: string,
 }
 
-export interface Jwt 
+export interface Jwt
 {
     jit: string;            // id from this token
     aci: string;            // account id
@@ -13,15 +18,22 @@ export interface Jwt
     exp: number|null;       // timestamp when expired this token
 }
 
-export interface MapperOptions 
+export interface MapperOptions
 {
     eagerLoading: boolean;
 }
 
-export interface ObjectLiteral 
+export interface Metadata
+{
+    timezone?: string,
+}
+
+export interface ObjectLiteral
 {
     [key: string]: any;
 }
+
+export interface QueryMetadata extends Metadata {}
 
 export interface SeederBoundedContext
 {
