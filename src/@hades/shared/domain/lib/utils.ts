@@ -44,8 +44,21 @@ export class Utils
                 ? Object.keys(obj).reduce((acc, current) => {
                     const key = fn(current);
                     const val = obj[current];
-                    acc[key] =
-                        val !== null && typeof val === 'object' ? Utils.deepMapKeys(val, fn) : val;
+                    acc[key] = val !== null && typeof val === 'object' ? Utils.deepMapKeys(val, fn) : val;
+                    return acc;
+                }, {})
+                : obj;
+    }
+
+    public static deepMapValues(obj, fn): Object
+    {
+        return Array.isArray(obj)
+            ? obj.map(val => Utils.deepMapValues(val, fn))
+            : typeof obj === 'object'
+                ? Object.keys(obj).reduce((acc, current) => {
+                    const key = current;
+                    const val = fn(current, obj[current]);
+                    acc[key] = val !== null && typeof val === 'object' ? Utils.deepMapValues(val, fn) : val;
                     return acc;
                 }, {})
                 : obj;
