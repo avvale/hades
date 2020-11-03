@@ -7,7 +7,7 @@ export class AuthenticationJwtGuard extends AuthGuard('jwt')
 {
     // override the getRequest() method for return valid request
     // graphql wrap request in context object
-    getRequest(context: ExecutionContext) 
+    getRequest(context: ExecutionContext)
     {
         if (context['contextType'] === 'graphql')
         {
@@ -16,10 +16,10 @@ export class AuthenticationJwtGuard extends AuthGuard('jwt')
         else if (context['contextType'] === 'http')
         {
             return context.switchToHttp().getRequest();
-        }   
+        }
     }
 
-    handleRequest(err, user, info) 
+    handleRequest(err, user, info)
     {
         // You can throw an exception based on either "info" or "err" arguments
         if (err || !user) throw err || new UnauthorizedException();
