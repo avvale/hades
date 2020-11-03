@@ -1,6 +1,10 @@
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 
-export interface CommandMetadata extends Metadata {}
+export interface CQMetadata
+{
+    timezone?: string,
+    timezoneColumns?: string[],
+}
 
 export interface DataValueObject
 {
@@ -13,7 +17,7 @@ export interface DataValueObject
 export interface HookResponse
 {
     queryStatement?: QueryStatement,
-    queryMetadata?: QueryMetadata
+    cQMetadata?: CQMetadata
 }
 
 export interface Jwt
@@ -31,19 +35,9 @@ export interface MapperOptions
     eagerLoading: boolean;
 }
 
-export interface Metadata
-{
-    timezone?: string,
-}
-
 export interface ObjectLiteral
 {
     [key: string]: any;
-}
-
-export interface QueryMetadata extends Metadata
-{
-    timezoneColumns?: string[],
 }
 
 export interface SeederBoundedContext

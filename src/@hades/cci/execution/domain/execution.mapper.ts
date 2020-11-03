@@ -1,5 +1,5 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral, QueryMetadata } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciExecution } from './execution.aggregate';
 import { ExecutionResponse } from './execution.response';
 import {
@@ -30,22 +30,22 @@ export class ExecutionMapper implements IMapper
      * Map object to aggregate
      * @param execution
      */
-    mapModelToAggregate(execution: ObjectLiteral, queryMetadata?: QueryMetadata): CciExecution
+    mapModelToAggregate(execution: ObjectLiteral, cQMetadata?: CQMetadata): CciExecution
     {
         if (!execution) return;
 
-        return this.makeAggregate(execution, queryMetadata);
+        return this.makeAggregate(execution, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
      * @param executions
      */
-    mapModelsToAggregates(executions: ObjectLiteral[], queryMetadata?: QueryMetadata): CciExecution[]
+    mapModelsToAggregates(executions: ObjectLiteral[], cQMetadata?: CQMetadata): CciExecution[]
     {
         if (!Array.isArray(executions)) return;
 
-        return executions.map(execution  => this.makeAggregate(execution, queryMetadata));
+        return executions.map(execution  => this.makeAggregate(execution, cQMetadata));
     }
 
     /**
@@ -68,7 +68,7 @@ export class ExecutionMapper implements IMapper
         return executions.map(execution => this.makeResponse(execution));
     }
 
-    private makeAggregate(execution: ObjectLiteral, queryMetadata?: QueryMetadata): CciExecution
+    private makeAggregate(execution: ObjectLiteral, cQMetadata?: CQMetadata): CciExecution
     {
         return CciExecution.register(
             new ExecutionId(execution.id),
@@ -78,12 +78,12 @@ export class ExecutionMapper implements IMapper
             new ExecutionSystemName(execution.systemName),
             new ExecutionVersion(execution.version),
             new ExecutionType(execution.type),
-            new ExecutionExecutedAt(execution.executedAt, {}, {addTimezone: queryMetadata.timezone}),
-            new ExecutionMonitoringStartAt(execution.monitoringStartAt, {}, {addTimezone: queryMetadata.timezone}),
-            new ExecutionMonitoringEndAt(execution.monitoringEndAt, {}, {addTimezone: queryMetadata.timezone}),
-            new ExecutionCreatedAt(execution.createdAt, {}, {addTimezone: queryMetadata.timezone}),
-            new ExecutionUpdatedAt(execution.updatedAt, {}, {addTimezone: queryMetadata.timezone}),
-            new ExecutionDeletedAt(execution.deletedAt, {}, {addTimezone: queryMetadata.timezone}),
+            new ExecutionExecutedAt(execution.executedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ExecutionMonitoringStartAt(execution.monitoringStartAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ExecutionMonitoringEndAt(execution.monitoringEndAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ExecutionCreatedAt(execution.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ExecutionUpdatedAt(execution.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ExecutionDeletedAt(execution.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(execution.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(execution.system) : undefined,
         );

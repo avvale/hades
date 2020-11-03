@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateExecutionsCommand
 {
     constructor(
-        public readonly executions: {
+        public readonly payload: {
             id: string,
             tenantId: string,
             tenantCode: string,
@@ -12,6 +14,7 @@ export class CreateExecutionsCommand
             executedAt: string,
             monitoringStartAt: string,
             monitoringEndAt: string,
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }
