@@ -1,7 +1,7 @@
 import { ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
 import { Model } from 'sequelize-typescript';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { QueryMetadata, HookResponse } from '@hades/shared/domain/lib/hades.types';
+import { CQMetadata, HookResponse } from '@hades/shared/domain/lib/hades.types';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IMapper } from '@hades/shared/domain/lib/mapper';
 import { UuidValueObject } from '@hades/shared/domain/value-objects/uuid.value-object';
@@ -18,56 +18,56 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     public readonly mapper: IMapper;
     public readonly timezoneColumns: string[];
 
-    async paginate(queryStatement?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Pagination<Aggregate>>
+    async paginate(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<Aggregate>>
     {
         // manage hook count paginate
-        const hookCountResponse = this.countStatementPaginateHook(constraint, Object.assign({}, {timezoneColumns: this.timezoneColumns}, queryMetadata));
+        const hookCountResponse = this.countStatementPaginateHook(constraint, Object.assign({}, {timezoneColumns: this.timezoneColumns}, cQMetadata));
 
         // get count total records from sql service library
         const total = await this.repository.count(
-            this.criteria.implements(hookCountResponse.queryStatement, hookCountResponse.queryMetadata)
+            this.criteria.implements(hookCountResponse.queryStatement, hookCountResponse.cQMetadata)
         );
 
         // manage hook compose paginate
-        const hookComposeResponse = this.composeStatementPaginateHook(_.merge(queryStatement, constraint), Object.assign({}, {timezoneColumns: this.timezoneColumns}, queryMetadata));
+        const hookComposeResponse = this.composeStatementPaginateHook(_.merge(queryStatement, constraint), Object.assign({}, {timezoneColumns: this.timezoneColumns}, cQMetadata));
 
         // get records
         const { count, rows } = await this.repository.findAndCountAll(
-            this.criteria.implements(hookComposeResponse.queryStatement, hookComposeResponse.queryMetadata)
+            this.criteria.implements(hookComposeResponse.queryStatement, hookComposeResponse.cQMetadata)
         );
 
         return {
             total,
             count,
-            rows: <Aggregate[]>this.mapper.mapModelsToAggregates(rows, queryMetadata) // map values to create value objects
+            rows: <Aggregate[]>this.mapper.mapModelsToAggregates(rows, cQMetadata) // map values to create value objects
         };
     }
 
     // hook to add findOptions
-    countStatementPaginateHook(queryStatement?: QueryStatement, queryMetadata?: QueryMetadata): HookResponse { return { queryStatement, queryMetadata }; }
+    countStatementPaginateHook(queryStatement?: QueryStatement, cQMetadata?: CQMetadata): HookResponse { return { queryStatement, cQMetadata }; }
 
     // hook to add findOptions
-    composeStatementPaginateHook(queryStatement?: QueryStatement, queryMetadata?: QueryMetadata): HookResponse { return { queryStatement, queryMetadata }; }
+    composeStatementPaginateHook(queryStatement?: QueryStatement, cQMetadata?: CQMetadata): HookResponse { return { queryStatement, cQMetadata }; }
 
-    async find(query?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate>
+    async find(query?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Aggregate>
     {
         // manage hook
-        const hookResponse = this.composeStatementFindHook(_.merge(query, constraint), Object.assign({}, {timezoneColumns: this.timezoneColumns}, queryMetadata));
+        const hookResponse = this.composeStatementFindHook(_.merge(query, constraint), Object.assign({}, {timezoneColumns: this.timezoneColumns}, cQMetadata));
 
         const model = await this.repository.findOne(
-            this.criteria.implements(hookResponse.queryStatement, hookResponse.queryMetadata)
+            this.criteria.implements(hookResponse.queryStatement, hookResponse.cQMetadata)
         );
 
         if (!model) throw new NotFoundException(`${this.aggregateName} not found`);
 
         // map value to create value objects
-        return <Aggregate>this.mapper.mapModelToAggregate(model, queryMetadata);
+        return <Aggregate>this.mapper.mapModelToAggregate(model, cQMetadata);
     }
 
     // hook to add findOptions
-    composeStatementFindHook(queryStatement?: QueryStatement, queryMetadata?: QueryMetadata): HookResponse { return { queryStatement, queryMetadata }; }
+    composeStatementFindHook(queryStatement?: QueryStatement, cQMetadata?: CQMetadata): HookResponse { return { queryStatement, cQMetadata }; }
 
-    async findById(id: UuidValueObject, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate>
+    async findById(id: UuidValueObject, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Aggregate>
     {
         // manage hook
         const hookResponse = this.composeStatementFindByIdHook(
@@ -76,38 +76,38 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
                     id: id.value
                 }
             }, constraint),
-            Object.assign({}, {timezoneColumns: this.timezoneColumns}, queryMetadata)
+            Object.assign({}, {timezoneColumns: this.timezoneColumns}, cQMetadata)
         );
 
         // value is already mapped
         const model = await this.repository.findOne(
-            this.criteria.implements(hookResponse.queryStatement, hookResponse.queryMetadata)
+            this.criteria.implements(hookResponse.queryStatement, hookResponse.cQMetadata)
         );
 
         if (!model) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
 
-        return <Aggregate>this.mapper.mapModelToAggregate(model, queryMetadata);
+        return <Aggregate>this.mapper.mapModelToAggregate(model, cQMetadata);
     }
 
     // hook to add findOptions
-    composeStatementFindByIdHook(queryStatement: QueryStatement, queryMetadata?: QueryMetadata): HookResponse { return { queryStatement, queryMetadata }; }
+    composeStatementFindByIdHook(queryStatement: QueryStatement, cQMetadata?: CQMetadata): HookResponse { return { queryStatement, cQMetadata }; }
 
     // get multiple records
-    async get(queryStatement?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Aggregate[]>
+    async get(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Aggregate[]>
     {
         // manage hook
-        const hookResponse = this.composeStatementGetHook(_.merge(queryStatement, constraint), Object.assign({}, {timezoneColumns: this.timezoneColumns}, queryMetadata));
+        const hookResponse = this.composeStatementGetHook(_.merge(queryStatement, constraint), Object.assign({}, {timezoneColumns: this.timezoneColumns}, cQMetadata));
 
         const models = await this.repository.findAll(
-            this.criteria.implements(hookResponse.queryStatement, hookResponse.queryMetadata)
+            this.criteria.implements(hookResponse.queryStatement, hookResponse.cQMetadata)
         );
 
         // map values to create value objects
-        return <Aggregate[]>this.mapper.mapModelsToAggregates(models, queryMetadata);
+        return <Aggregate[]>this.mapper.mapModelsToAggregates(models, cQMetadata);
     }
 
     // hook to add findOptions
-    composeStatementGetHook(queryStatement?: QueryStatement, queryMetadata?: QueryMetadata): HookResponse { return { queryStatement, queryMetadata }; }
+    composeStatementGetHook(queryStatement?: QueryStatement, cQMetadata?: CQMetadata): HookResponse { return { queryStatement, cQMetadata }; }
 
     // ******************
     // ** side effects **
@@ -151,7 +151,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     // hook called after insert aggregates
     async insertedAggregateHook(aggregates: Aggregate[]) {}
 
-    async update(aggregate: Aggregate, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<void>
+    async update(aggregate: Aggregate, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
     {
         // check that model exist
         const modelInDB = await this.repository.findOne(
@@ -161,7 +161,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
                         id: aggregate['id']['value']
                     }
                 }, constraint),
-                queryMetadata
+                cQMetadata
             )
         );
 
@@ -201,13 +201,13 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         await model.destroy();
     }
 
-    async delete(query?: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<void>
+    async delete(query?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
     {
         if (!query || !query.where) throw new BadRequestException(`To delete multiple records, you must define a where statement`);
 
         // check that aggregate exist
         await this.repository.destroy(
-            this.criteria.implements(_.merge(query, constraint), queryMetadata)
+            this.criteria.implements(_.merge(query, constraint), cQMetadata)
         );
     }
 }
