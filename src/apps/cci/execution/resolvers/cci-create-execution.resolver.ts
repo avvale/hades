@@ -20,8 +20,8 @@ import { FindExecutionByIdQuery } from '@hades/cci/execution/application/find/fi
 import { CciCreateExecutionInput } from './../../../../graphql';
 
 @Resolver()
-//@Permissions('cci.execution.create')
-//@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@Permissions('cci.execution.create')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CciCreateExecutionResolver
 {
     constructor(
@@ -30,7 +30,7 @@ export class CciCreateExecutionResolver
     ) {}
 
     @Mutation('cciCreateExecution')
-    // @TenantPolicy()
+    @TenantPolicy()
     async main(
         @CurrentAccount() account: AccountResponse,
         @Args('payload') payload: CciCreateExecutionInput,

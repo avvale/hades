@@ -13,6 +13,7 @@ export class SequelizeExecutionRepository extends SequelizeRepository<CciExecuti
 {
     public readonly aggregateName: string = 'CciExecution';
     public readonly mapper: ExecutionMapper = new ExecutionMapper();
+    public readonly timezoneColumns: string[] = ['executedAt','monitoringStartAt','monitoringEndAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciExecutionModel)

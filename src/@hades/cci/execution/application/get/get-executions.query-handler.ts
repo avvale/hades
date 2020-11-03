@@ -15,6 +15,6 @@ export class GetExecutionsQueryHandler implements IQueryHandler<GetExecutionsQue
 
     async execute(query: GetExecutionsQuery): Promise<ExecutionResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getExecutionsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getExecutionsService.main(query.queryStatement, query.constraint, query.queryMetadata));
     }
 }

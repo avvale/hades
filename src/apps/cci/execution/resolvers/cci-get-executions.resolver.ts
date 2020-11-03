@@ -1,4 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -28,8 +29,13 @@ export class CciGetExecutionsResolver
 
     @Query('cciGetExecutions')
     @TenantConstraint()
-    async main(@CurrentAccount() account: AccountResponse, @Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement): Promise<CciExecution[]>
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Args('query') queryStatement?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string
+    ): Promise<CciExecution[]>
     {
-        return await this.queryBus.ask(new GetExecutionsQuery(queryStatement, constraint));
+        return await this.queryBus.ask(new GetExecutionsQuery(queryStatement, constraint, { timezone }));
     }
 }
