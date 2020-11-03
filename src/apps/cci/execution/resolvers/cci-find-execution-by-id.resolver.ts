@@ -19,8 +19,8 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 import { CciExecution } from './../../../../graphql';
 
 @Resolver()
-//@Permissions('cci.execution.get')
-//@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@Permissions('cci.execution.get')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CciFindExecutionByIdResolver
 {
     constructor(
@@ -28,7 +28,7 @@ export class CciFindExecutionByIdResolver
     ) {}
 
     @Query('cciFindExecutionById')
-    //@TenantConstraint()
+    @TenantConstraint()
     async main(
         @CurrentAccount() account: AccountResponse,
         @Args('id') id: string,

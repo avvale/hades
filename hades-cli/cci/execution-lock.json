@@ -167,7 +167,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/get/get-executions.query-handler.ts",
-            "integrity": "sha1:e79baea8f3e6a4ad28bc069347dc048389e7fa40"
+            "integrity": "sha1:59dda022f4def2e65ec0a3e4c7ad240065198eaf"
         },
         {
             "path": "src/@hades/cci/execution/application/get/get-executions.query.handler.spec.ts",
@@ -175,7 +175,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/get/get-executions.query.ts",
-            "integrity": "sha1:d21d88107726ce424f7678385745168b101ecc6e"
+            "integrity": "sha1:0ec5ffb8bbbf2511b238964d56646b92e902e5b2"
         },
         {
             "path": "src/@hades/cci/execution/application/get/get-executions.service.spec.ts",
@@ -183,7 +183,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/get/get-executions.service.ts",
-            "integrity": "sha1:3c7935d365527b16e3484906969dfaa3e1b43bae"
+            "integrity": "sha1:26c0a1bfa673e376214f08a68b3fefe1996cb4ec"
         },
         {
             "path": "src/@hades/cci/execution/application/paginate/paginate-executions.query-handler.ts",
@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/seeds/execution.seed.ts",
-            "integrity": "sha1:204c2a42871d102d98df161ea7014db4e455b2ae"
+            "integrity": "sha1:d7af9470cf6c46d92e7a215572cea99ec10a7adb"
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model.ts",
@@ -267,7 +267,7 @@
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/sequelize/sequelize-execution.repository.ts",
-            "integrity": "sha1:b867af8f78d02b72eceafb9801fe297d6d3a5cab"
+            "integrity": "sha1:32bd77aa593e1c9e6655507a618c2d1b36d33feb"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-id.ts",
@@ -399,11 +399,11 @@
         },
         {
             "path": "src/apps/cci/execution/dto/create-execution.dto.ts",
-            "integrity": "sha1:a5ecc5b3904aaf81c25a212c426af512a13af3e9"
+            "integrity": "sha1:447cdf648bec13351f068bdc2ee0d9ac7c4b626f"
         },
         {
             "path": "src/apps/cci/execution/dto/update-execution.dto.ts",
-            "integrity": "sha1:710381c50f14935f635a24aa11427f2bb0c200b9"
+            "integrity": "sha1:cd5dc23fd35f7e8c119b48cc583b89c7a2faaa50"
         },
         {
             "path": "src/apps/cci/execution/graphql/execution.graphql",
@@ -451,7 +451,7 @@
         },
         {
             "path": "src/apps/cci/execution/resolvers/cci-find-execution-by-id.resolver.ts",
-            "integrity": "sha1:e00376c052f2386544ccacf281e61076ef06c583"
+            "integrity": "sha1:fd059633c8651ed9976b75f53a6addd2d1c45091"
         },
         {
             "path": "src/apps/cci/execution/resolvers/cci-find-execution.resolver.spec.ts",
@@ -467,7 +467,7 @@
         },
         {
             "path": "src/apps/cci/execution/resolvers/cci-get-executions.resolver.ts",
-            "integrity": "sha1:8f2ac5eed3486b5d4589ff25f15ab43991b22f0e"
+            "integrity": "sha1:2a19410a41d3b845717598356ad84e633d3cd5e5"
         },
         {
             "path": "src/apps/cci/execution/resolvers/cci-paginate-executions.resolver.spec.ts",
@@ -495,7 +495,7 @@
         },
         {
             "path": "postman/cci.execution.postman.json",
-            "integrity": "sha1:309b72da161d5415c0d27830d6c4d586af064648"
+            "integrity": "sha1:e4c90481b69150c3f67a668e08ae1d99410404bd"
         }
     ]
 }
