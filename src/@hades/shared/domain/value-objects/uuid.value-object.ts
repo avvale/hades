@@ -8,7 +8,7 @@ export abstract class UuidValueObject extends StringValueObject
     {
         return super.value;
     }
-    
+
     set value(value: string)
     {
         // null, undefined and length validation checked in StringValueObject

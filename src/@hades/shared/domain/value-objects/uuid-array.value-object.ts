@@ -11,8 +11,8 @@ export abstract class UuidArrayValueObject extends ValueObject<string[]>
     {
         return Array.isArray(super.value);
     }
-        
-    toString(): string 
+
+    toString(): string
     {
         return super.value.toString();
     }

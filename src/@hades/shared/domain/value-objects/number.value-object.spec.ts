@@ -17,7 +17,7 @@ describe('NumberValueObject', () =>
 {
     describe('main', () =>
     {
-        test('MockNumberValueObject should be defined with 10 value', () => 
+        test('MockNumberValueObject should be defined with 10 value', () =>
         {
             const mockNumberValueObject = new MockNumberValueObject(10, {
                 name: 'MockNumberValueObject'
@@ -25,7 +25,7 @@ describe('NumberValueObject', () =>
             expect(mockNumberValueObject.value).toBe(10);
         });
 
-        test('MockNumberValueObject should be defined with toString method, 10 value', () => 
+        test('MockNumberValueObject should be defined with toString method, 10 value', () =>
         {
             const mockNumberValueObject = new MockNumberValueObject(10, {
                 name: 'MockNumberValueObject'
@@ -33,9 +33,9 @@ describe('NumberValueObject', () =>
             expect(mockNumberValueObject.toString()).toBe('10');
         });
 
-        test('MockNumberValueObject should catch error: must be defined, BadRequestException: can not be null', () => 
+        test('MockNumberValueObject should catch error: must be defined, BadRequestException: can not be null', () =>
         {
-            expect(() => 
+            expect(() =>
                 new MockNumberValueObject(null, {
                     name: 'MockNumberValueObject',
                     nullable: false
@@ -45,7 +45,7 @@ describe('NumberValueObject', () =>
 
         test('MockNumberValueObject should catch error: must be defined, BadRequestException: can not be undefined', () => 
         {
-            expect(() => 
+            expect(() =>
                 new MockNumberValueObject(undefined, {
                     name: 'MockNumberValueObject',
                     undefinable: false
@@ -55,7 +55,7 @@ describe('NumberValueObject', () =>
 
         test('MockNumberValueObject should catch error: must be defined, BadRequestException: can not be empty value', () => 
         {
-            expect(() => 
+            expect(() =>
                 new MockNumberValueObject(<number><unknown>'', {
                     name: 'MockNumberValueObject',
                     nullable: false
@@ -65,7 +65,7 @@ describe('NumberValueObject', () =>
 
         test('MockNumberValueObject should catch error: must be defined, BadRequestException: has a maximum length', () => 
         {
-            expect(() => 
+            expect(() =>
                 new MockNumberValueObject(123456, {
                     name: 'MockNumberValueObject',
                     maxLength: 5
@@ -75,7 +75,7 @@ describe('NumberValueObject', () =>
 
         test('MockNumberValueObject should catch error: must be defined, BadRequestException: must have a positive sign', () => 
         {
-            expect(() => 
+            expect(() =>
                 new MockNumberValueObject(-1, {
                     name: 'MockNumberValueObject',
                     unsigned: true
