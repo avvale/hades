@@ -8,7 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
     imports: [
         AuthModule,
         CqrsModule,
-        EnvironmentModule
+        EnvironmentModule,
     ],
     controllers: [],
     providers: [

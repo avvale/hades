@@ -8,7 +8,7 @@ export abstract class StringValueObject extends ValueObject<string>
         if (this._value === '') return null;
         return super.value;
     }
-    
+
     set value(value: string)
     {
         if (this.validationRules.nullable === false && value === '')                                throw new BadRequestException(`Value for ${this.validationRules.name} must be defined, can not be null`);
@@ -18,7 +18,7 @@ export abstract class StringValueObject extends ValueObject<string>
 
         super.value = value
     }
-        
+
     toString(): string
     {
         return this.value;

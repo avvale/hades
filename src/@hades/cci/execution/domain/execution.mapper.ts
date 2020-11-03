@@ -1,5 +1,5 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, QueryMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciExecution } from './execution.aggregate';
 import { ExecutionResponse } from './execution.response';
 import {
@@ -17,11 +17,8 @@ import {
     ExecutionUpdatedAt,
     ExecutionDeletedAt,
 } from './value-objects';
-
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
-
-
 
 export class ExecutionMapper implements IMapper
 {
@@ -33,22 +30,22 @@ export class ExecutionMapper implements IMapper
      * Map object to aggregate
      * @param execution
      */
-    mapModelToAggregate(execution: ObjectLiteral): CciExecution
+    mapModelToAggregate(execution: ObjectLiteral, queryMetadata?: QueryMetadata): CciExecution
     {
         if (!execution) return;
 
-        return this.makeAggregate(execution);
+        return this.makeAggregate(execution, queryMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
      * @param executions
      */
-    mapModelsToAggregates(executions: ObjectLiteral[]): CciExecution[]
+    mapModelsToAggregates(executions: ObjectLiteral[], queryMetadata?: QueryMetadata): CciExecution[]
     {
         if (!Array.isArray(executions)) return;
 
-        return executions.map(execution  => this.makeAggregate(execution));
+        return executions.map(execution  => this.makeAggregate(execution, queryMetadata));
     }
 
     /**
@@ -71,7 +68,7 @@ export class ExecutionMapper implements IMapper
         return executions.map(execution => this.makeResponse(execution));
     }
 
-    private makeAggregate(execution: ObjectLiteral): CciExecution
+    private makeAggregate(execution: ObjectLiteral, queryMetadata?: QueryMetadata): CciExecution
     {
         return CciExecution.register(
             new ExecutionId(execution.id),
@@ -81,20 +78,14 @@ export class ExecutionMapper implements IMapper
             new ExecutionSystemName(execution.systemName),
             new ExecutionVersion(execution.version),
             new ExecutionType(execution.type),
-            new ExecutionExecutedAt(execution.executedAt),
-            new ExecutionMonitoringStartAt(execution.monitoringStartAt),
-            new ExecutionMonitoringEndAt(execution.monitoringEndAt),
-            new ExecutionCreatedAt(execution.createdAt),
-            new ExecutionUpdatedAt(execution.updatedAt),
-            new ExecutionDeletedAt(execution.deletedAt),
-            
-            
-            
+            new ExecutionExecutedAt(execution.executedAt, {}, {addTimezone: queryMetadata.timezone}),
+            new ExecutionMonitoringStartAt(execution.monitoringStartAt, {}, {addTimezone: queryMetadata.timezone}),
+            new ExecutionMonitoringEndAt(execution.monitoringEndAt, {}, {addTimezone: queryMetadata.timezone}),
+            new ExecutionCreatedAt(execution.createdAt, {}, {addTimezone: queryMetadata.timezone}),
+            new ExecutionUpdatedAt(execution.updatedAt, {}, {addTimezone: queryMetadata.timezone}),
+            new ExecutionDeletedAt(execution.deletedAt, {}, {addTimezone: queryMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(execution.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(execution.system) : undefined,
-            
-            
-            
         );
     }
 
@@ -116,14 +107,8 @@ export class ExecutionMapper implements IMapper
             execution.createdAt.value,
             execution.updatedAt.value,
             execution.deletedAt.value,
-            
-            
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(execution.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(execution.system) : undefined,
-            
-            
-            
         );
     }
 }

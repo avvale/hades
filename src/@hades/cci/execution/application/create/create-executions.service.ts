@@ -40,7 +40,6 @@ export class CreateExecutionsService
             executedAt: ExecutionExecutedAt,
             monitoringStartAt: ExecutionMonitoringStartAt,
             monitoringEndAt: ExecutionMonitoringEndAt,
-            
         } []
     ): Promise<void>
     {
