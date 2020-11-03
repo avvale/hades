@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     ExecutionId,
     ExecutionTenantId,
@@ -38,7 +37,6 @@ export class CreateExecutionService
         executedAt: ExecutionExecutedAt,
         monitoringStartAt: ExecutionMonitoringStartAt,
         monitoringEndAt: ExecutionMonitoringEndAt,
-        
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -53,8 +51,8 @@ export class CreateExecutionService
             executedAt,
             monitoringStartAt,
             monitoringEndAt,
-            new ExecutionCreatedAt(Utils.nowTimestamp()),
-            new ExecutionUpdatedAt(Utils.nowTimestamp()),
+            new ExecutionCreatedAt({currentTimestamp: true}),
+            new ExecutionUpdatedAt({currentTimestamp: true}),
             null
         );
 

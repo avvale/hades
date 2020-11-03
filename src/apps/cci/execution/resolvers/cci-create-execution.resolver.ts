@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -19,8 +20,8 @@ import { FindExecutionByIdQuery } from '@hades/cci/execution/application/find/fi
 import { CciCreateExecutionInput } from './../../../../graphql';
 
 @Resolver()
-@Permissions('cci.execution.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+//@Permissions('cci.execution.create')
+//@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CciCreateExecutionResolver
 {
     constructor(
@@ -29,21 +30,14 @@ export class CciCreateExecutionResolver
     ) {}
 
     @Mutation('cciCreateExecution')
-    @TenantPolicy()
-    async main(@CurrentAccount() account: AccountResponse, @Args('payload') payload: CciCreateExecutionInput)
+    // @TenantPolicy()
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Args('payload') payload: CciCreateExecutionInput,
+        @Timezone() timezone?: string
+    )
     {
-        await this.commandBus.dispatch(new CreateExecutionCommand(
-            payload.id,
-            payload.tenantId,
-            payload.tenantCode,
-            payload.systemId,
-            payload.systemName,
-            payload.version,
-            payload.type,
-            payload.executedAt,
-            payload.monitoringStartAt,
-            payload.monitoringEndAt,
-        ));
+        await this.commandBus.dispatch(new CreateExecutionCommand(payload, { timezone }));
 
         return await this.queryBus.ask(new FindExecutionByIdQuery(payload.id));
     }

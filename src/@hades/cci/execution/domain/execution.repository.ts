@@ -1,6 +1,7 @@
 
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { QueryMetadata } from '@hades/shared/domain/lib/hades.types';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { CciExecution } from './execution.aggregate';
 import { ExecutionId } from './value-objects';
@@ -10,7 +11,7 @@ export abstract class IExecutionRepository implements IRepository<CciExecution>
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint: QueryStatement): Promise<Pagination<CciExecution>>;
+    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<Pagination<CciExecution>>;
 
     // create a single record
     abstract async create(execution: CciExecution): Promise<void>;
@@ -19,20 +20,20 @@ export abstract class IExecutionRepository implements IRepository<CciExecution>
     abstract async insert(executions: CciExecution[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement): Promise<CciExecution | null>;
+    abstract async find(query: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<CciExecution | null>;
 
     // find a single record by id
-    abstract async findById(id: ExecutionId): Promise<CciExecution | null>;
+    abstract async findById(id: ExecutionId, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<CciExecution | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement): Promise<CciExecution[]>;
+    abstract async get(query: QueryStatement, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<CciExecution[]>;
 
     // update record
-    abstract async update(execution: CciExecution): Promise<void>;
+    abstract async update(execution: CciExecution, constraint?: QueryStatement): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: ExecutionId): Promise<void>;
+    abstract async deleteById(id: ExecutionId, constraint?: QueryStatement): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement): Promise<void>;
+    abstract async delete(query: QueryStatement, constraint?: QueryStatement): Promise<void>;
 }

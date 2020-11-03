@@ -2,6 +2,7 @@ import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateExecutionDto } from './../dto/create-execution.dto';
 import { ExecutionDto } from './../dto/execution.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -34,20 +35,15 @@ export class CciCreateExecutionController
     @ApiOperation({ summary: 'Create execution' })
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: ExecutionDto })
     @TenantPolicy()
-    async main(@CurrentAccount() account: AccountResponse, @Body() payload: CreateExecutionDto)
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Body() payload: CreateExecutionDto,
+        @Timezone() timezone
+    )
     {
         await this.commandBus.dispatch(new CreateExecutionCommand(
-            payload.id,
-            payload.tenantId,
-            payload.tenantCode,
-            payload.systemId,
-            payload.systemName,
-            payload.version,
-            payload.type,
-            payload.executedAt,
-            payload.monitoringStartAt,
-            payload.monitoringEndAt,
-            
+            payload,
+            { timezone }
         ));
 
         return await this.queryBus.ask(new FindExecutionByIdQuery(payload.id));

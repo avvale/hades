@@ -61,18 +61,18 @@ export class CreateSnapshotController
         }));
 
         const executionId = Utils.uuid();
-        await this.commandBus.dispatch(new CreateExecutionCommand(
-            executionId,
-            tenant.id,
-            tenant.code,
-            system.id,
-            system.name,
-            payload.execution.version,
-            payload.execution.type,
-            payload.execution.executedAt,
-            payload.execution.monitoringStartAt,
-            payload.execution.monitoringEndAt
-        ));
+        await this.commandBus.dispatch(new CreateExecutionCommand({
+            id: executionId,
+            tenantId: tenant.id,
+            tenantCode: tenant.code,
+            systemId: system.id,
+            systemName: system.name,
+            version: payload.execution.version,
+            type: payload.execution.type,
+            executedAt: payload.execution.executedAt,
+            monitoringStartAt: payload.execution.monitoringStartAt,
+            monitoringEndAt: payload.execution.monitoringEndAt,
+        }));
 
         await this.commandBus.dispatch(new CreateDataLakeCommand(
             Utils.uuid(),

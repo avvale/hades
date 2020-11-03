@@ -1,15 +1,20 @@
+import { CommandMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateExecutionCommand
 {
     constructor(
-        public readonly id: string,
-        public readonly tenantId: string,
-        public readonly tenantCode: string,
-        public readonly systemId: string,
-        public readonly systemName: string,
-        public readonly version: string,
-        public readonly type: string,
-        public readonly executedAt: string,
-        public readonly monitoringStartAt: string,
-        public readonly monitoringEndAt: string,
+        public readonly payload: {
+            id: string,
+            tenantId: string,
+            tenantCode: string,
+            systemId: string,
+            systemName: string,
+            version: string,
+            type: string,
+            executedAt: string,
+            monitoringStartAt: string,
+            monitoringEndAt: string,
+        },
+        public readonly commandMetadata?: CommandMetadata,
     ) {}
 }

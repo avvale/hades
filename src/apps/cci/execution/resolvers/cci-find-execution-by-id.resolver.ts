@@ -1,4 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -18,8 +19,8 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 import { CciExecution } from './../../../../graphql';
 
 @Resolver()
-@Permissions('cci.execution.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+//@Permissions('cci.execution.get')
+//@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CciFindExecutionByIdResolver
 {
     constructor(
@@ -27,9 +28,14 @@ export class CciFindExecutionByIdResolver
     ) {}
 
     @Query('cciFindExecutionById')
-    @TenantConstraint()
-    async main(@CurrentAccount() account: AccountResponse, @Args('id') id: string, @Args('constraint') constraint?: QueryStatement): Promise<CciExecution>
+    //@TenantConstraint()
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string
+    ): Promise<CciExecution>
     {
-        return await this.queryBus.ask(new FindExecutionByIdQuery(id, constraint));
+        return await this.queryBus.ask(new FindExecutionByIdQuery(id, constraint, { timezone }));
     }
 }

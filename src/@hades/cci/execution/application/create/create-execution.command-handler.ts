@@ -28,16 +28,16 @@ export class CreateExecutionCommandHandler implements ICommandHandler<CreateExec
     {
         // call to use case and implements ValueObjects
         await this.createExecutionService.main(
-            new ExecutionId(command.id),
-            new ExecutionTenantId(command.tenantId),
-            new ExecutionTenantCode(command.tenantCode),
-            new ExecutionSystemId(command.systemId),
-            new ExecutionSystemName(command.systemName),
-            new ExecutionVersion(command.version),
-            new ExecutionType(command.type),
-            new ExecutionExecutedAt(command.executedAt),
-            new ExecutionMonitoringStartAt(command.monitoringStartAt),
-            new ExecutionMonitoringEndAt(command.monitoringEndAt),
+            new ExecutionId(command.payload.id),
+            new ExecutionTenantId(command.payload.tenantId),
+            new ExecutionTenantCode(command.payload.tenantCode),
+            new ExecutionSystemId(command.payload.systemId),
+            new ExecutionSystemName(command.payload.systemName),
+            new ExecutionVersion(command.payload.version),
+            new ExecutionType(command.payload.type),
+            new ExecutionExecutedAt(command.payload.executedAt, {}, {removeTimezone: command.commandMetadata.timezone}),
+            new ExecutionMonitoringStartAt(command.payload.monitoringStartAt, {}, {removeTimezone: command.commandMetadata.timezone}),
+            new ExecutionMonitoringEndAt(command.payload.monitoringEndAt, {}, {removeTimezone: command.commandMetadata.timezone}),
         );
     }
 }
