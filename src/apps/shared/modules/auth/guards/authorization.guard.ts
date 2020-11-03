@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 export class AuthorizationGuard implements CanActivate
 {
     constructor(private reflector: Reflector) {}
-    
-    canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> 
+
+    canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean>
     {
         const permissions = this.reflector.get<string[]>('permissions', context.getClass());
 
@@ -18,12 +18,12 @@ export class AuthorizationGuard implements CanActivate
         if (context['contextType'] === 'graphql')
         {
             const ctx = GqlExecutionContext.create(context);
-            return permissions.every(permisison => ctx.getContext().req.user.dPermissions.all.includes(permisison));
+            return permissions.every(permission => ctx.getContext().req.user.dPermissions.all.includes(permission));
         }
         else if (context['contextType'] === 'http')
         {
             const ctx = context.switchToHttp();
-            return permissions.every(permisison => ctx.getRequest().user.dPermissions.all.includes(permisison));
+            return permissions.every(permission => ctx.getRequest().user.dPermissions.all.includes(permission));
         }
     }
 }

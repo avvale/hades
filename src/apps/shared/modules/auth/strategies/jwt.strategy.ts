@@ -11,7 +11,7 @@ export class JwtStrategy extends PassportStrategy(Strategy)
 {
     constructor(
         private readonly queryBus: IQueryBus
-    ) 
+    )
     {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -20,8 +20,8 @@ export class JwtStrategy extends PassportStrategy(Strategy)
             algorithms: ['RS256'],
         });
     }
-    
-    async validate(payload: Jwt) 
+
+    async validate(payload: Jwt)
     {
         const user = await this.queryBus.ask(new FindAccountQuery({
             where: {
@@ -29,7 +29,7 @@ export class JwtStrategy extends PassportStrategy(Strategy)
             },
             include: ['user']
         }));
-        
+
         return user;
     }
 }

@@ -7,7 +7,7 @@ export abstract class IntValueObject extends NumberValueObject
     {
         return super.value;
     }
-    
+
     set value(value: number)
     {
         if (value !== undefined && value !== null && !Number.isInteger(value)) throw new BadRequestException(`Value for ${this.validationRules.name} has to be a integer value`);
@@ -15,7 +15,7 @@ export abstract class IntValueObject extends NumberValueObject
         super.value = value;
     }
 
-    toString(): string 
+    toString(): string
     {
         return this.value.toString();
     }
