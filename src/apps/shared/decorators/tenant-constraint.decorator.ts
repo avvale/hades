@@ -6,15 +6,15 @@ import * as _ from 'lodash';
 export const TenantConstraint = (customProperties?: {
     targetProperty: string;
     constraintIndex: number;
-}) => 
+}) =>
 {
     return (target, propertyKey: string, descriptor: PropertyDescriptor) =>
-    { 
+    {
         return {
             value: function( ... args: any[])
             {
                 const properties = Object.assign({}, {
-                    targetProperty: 'tenantId', 
+                    targetProperty: 'tenantId',
                     constraintIndex: 2
                 }, customProperties);
 

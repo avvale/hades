@@ -7,7 +7,7 @@ export abstract class NumberValueObject extends ValueObject<number>
     {
         return super.value;
     }
-    
+
     set value(value: number)
     {
         if (value === <number><unknown>'') value = null;
@@ -17,7 +17,7 @@ export abstract class NumberValueObject extends ValueObject<number>
         super.value = value;
     }
 
-    toString(): string 
+    toString(): string
     {
         return this.value.toString();
     }
