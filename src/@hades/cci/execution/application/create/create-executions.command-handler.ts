@@ -28,7 +28,7 @@ export class CreateExecutionsCommandHandler implements ICommandHandler<CreateExe
     {
         // call to use case and implements ValueObjects
         await this.createExecutionsService.main(
-            command.executions
+            command.payload
                 .map(execution => {
                     return {
                         id: new ExecutionId(execution.id),
@@ -38,9 +38,9 @@ export class CreateExecutionsCommandHandler implements ICommandHandler<CreateExe
                         systemName: new ExecutionSystemName(execution.systemName),
                         version: new ExecutionVersion(execution.version),
                         type: new ExecutionType(execution.type),
-                        executedAt: new ExecutionExecutedAt(execution.executedAt),
-                        monitoringStartAt: new ExecutionMonitoringStartAt(execution.monitoringStartAt),
-                        monitoringEndAt: new ExecutionMonitoringEndAt(execution.monitoringEndAt),
+                        executedAt: new ExecutionExecutedAt(execution.executedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                        monitoringStartAt: new ExecutionMonitoringStartAt(execution.monitoringStartAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                        monitoringEndAt: new ExecutionMonitoringEndAt(execution.monitoringEndAt, {}, {removeTimezone: command.cQMetadata.timezone}),
                     }
                 })
         );

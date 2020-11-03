@@ -16,7 +16,9 @@ export class DeleteExecutionByIdCommandHandler implements ICommandHandler<Delete
     {
         // call to use case and implements ValueObjects
         await this.deleteExecutionByIdService.main(
-            new ExecutionId(command.id)
+            new ExecutionId(command.id),
+            command.constraint,
+            command.cQMetadata
         );
     }
 }

@@ -1,4 +1,4 @@
-import { CommandMetadata } from '@hades/shared/domain/lib/hades.types';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 
 export class CreateExecutionCommand
 {
@@ -15,6 +15,6 @@ export class CreateExecutionCommand
             monitoringStartAt: string,
             monitoringEndAt: string,
         },
-        public readonly commandMetadata?: CommandMetadata,
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

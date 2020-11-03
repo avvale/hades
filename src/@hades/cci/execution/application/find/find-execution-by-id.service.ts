@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { QueryMetadata } from '@hades/shared/domain/lib/hades.types';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IExecutionRepository } from './../../domain/execution.repository';
 import { CciExecution } from './../../domain/execution.aggregate';
 import { ExecutionId } from './../../domain/value-objects';
@@ -12,8 +12,8 @@ export class FindExecutionByIdService
         private readonly repository: IExecutionRepository,
     ) {}
 
-    public async main(id: ExecutionId, constraint?: QueryStatement, queryMetadata?: QueryMetadata): Promise<CciExecution>
+    public async main(id: ExecutionId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciExecution>
     {
-        return await this.repository.findById(id, constraint, queryMetadata);
+        return await this.repository.findById(id, constraint, cQMetadata);
     }
 }

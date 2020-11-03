@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     ExecutionId,
     ExecutionTenantId,
@@ -55,8 +54,8 @@ export class CreateExecutionsService
             execution.executedAt,
             execution.monitoringStartAt,
             execution.monitoringEndAt,
-            new ExecutionCreatedAt(Utils.nowTimestamp()),
-            new ExecutionUpdatedAt(Utils.nowTimestamp()),
+            new ExecutionCreatedAt({currentTimestamp: true}),
+            new ExecutionUpdatedAt({currentTimestamp: true}),
             null
         ));
 

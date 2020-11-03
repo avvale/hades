@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -29,9 +30,13 @@ export class CciCreateExecutionsResolver
 
     @Mutation('cciCreateExecutions')
     @TenantPolicy()
-    async main(@CurrentAccount() account: AccountResponse, @Args('payload') payload: CciCreateExecutionInput[])
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Args('payload') payload: CciCreateExecutionInput[],
+        @Timezone() timezone?: string
+    )
     {
-        await this.commandBus.dispatch(new CreateExecutionsCommand(payload));
+        await this.commandBus.dispatch(new CreateExecutionsCommand(payload, { timezone }));
         return true;
     }
 }

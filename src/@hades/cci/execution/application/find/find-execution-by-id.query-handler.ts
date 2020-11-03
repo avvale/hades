@@ -16,7 +16,11 @@ export class FindExecutionByIdQueryHandler implements IQueryHandler<FindExecutio
 
     async execute(query: FindExecutionByIdQuery): Promise<ExecutionResponse>
     {
-        const execution = await this.findExecutionByIdService.main(new ExecutionId(query.id), query.constraint, query.queryMetadata);
+        const execution = await this.findExecutionByIdService.main(
+            new ExecutionId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(execution);
     }

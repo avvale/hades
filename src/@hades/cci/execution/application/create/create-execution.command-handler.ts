@@ -35,9 +35,9 @@ export class CreateExecutionCommandHandler implements ICommandHandler<CreateExec
             new ExecutionSystemName(command.payload.systemName),
             new ExecutionVersion(command.payload.version),
             new ExecutionType(command.payload.type),
-            new ExecutionExecutedAt(command.payload.executedAt, {}, {removeTimezone: command.commandMetadata.timezone}),
-            new ExecutionMonitoringStartAt(command.payload.monitoringStartAt, {}, {removeTimezone: command.commandMetadata.timezone}),
-            new ExecutionMonitoringEndAt(command.payload.monitoringEndAt, {}, {removeTimezone: command.commandMetadata.timezone}),
+            new ExecutionExecutedAt(command.payload.executedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+            new ExecutionMonitoringStartAt(command.payload.monitoringStartAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+            new ExecutionMonitoringEndAt(command.payload.monitoringEndAt, {}, {removeTimezone: command.cQMetadata.timezone}),
         );
     }
 }
