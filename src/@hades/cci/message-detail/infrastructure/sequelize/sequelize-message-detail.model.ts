@@ -1,10 +1,11 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
+import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { CciSystemModel } from '@hades/cci/system/infrastructure/sequelize/sequelize-system.model';
 import { CciExecutionModel } from '@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model';
 
-@Table({ modelName: 'cci_message_detail', freezeTableName: true })
+@Table({ modelName: 'cci_message_detail', freezeTableName: true, timestamps: false })
 export class CciMessageDetailModel extends Model<CciMessageDetailModel>
 {
     @Column({
@@ -112,7 +113,7 @@ export class CciMessageDetailModel extends Model<CciMessageDetailModel>
     })
     executionMonitoringEndAt: string;
 
-    // @Index :: https://github.com/RobinBuschmann/sequelize-typescript/issues/725
+    @UnderscoredIndex
     @Column({
         field: 'flow_hash',
         allowNull: false,

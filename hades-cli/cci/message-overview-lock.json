@@ -3,27 +3,27 @@
     "files": [
         {
             "path": "src/@hades/cci/message-overview/application/create/create-message-overview.command-handler.ts",
-            "integrity": "sha1:82384b77283e61d9eacd695201ec6834ec2071ef"
+            "integrity": "sha1:390b966d245d1fb38f7e3c8894b4a5c9e13f9e07"
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-message-overview.command.handler.spec.ts",
-            "integrity": "sha1:ad9c807c8187ac3dd4b8cba09c6b74ffc8aa88eb"
+            "integrity": "sha1:6bf455ed0aa228e22e6b15e7b9c129144c009d3a"
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-message-overview.command.ts",
-            "integrity": "sha1:7f09f0c70b431f348eb105ae397eef3db5c9aefc"
+            "integrity": "sha1:ba3753cc064e7b9c39d0591170ab5a2b2d596559"
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-message-overview.service.spec.ts",
-            "integrity": "sha1:3b0487996ef8c1171c120315685dd045b5697297"
+            "integrity": "sha1:4dc7fa7ca5433bbd0820241db451d4d8c3360d41"
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-message-overview.service.ts",
-            "integrity": "sha1:dcccc5efbbaf473ea030846e5d758251959e92f3"
+            "integrity": "sha1:a6de68acf75567f9dfb0cbdfa4a902d8aedeeeac"
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-messages-overview.command-handler.ts",
-            "integrity": "sha1:71452d9ecc460c53742b8f5050186149579688a0"
+            "integrity": "sha1:03582335df516cf470b1b3bec029c62480fc3135"
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-messages-overview.command.handler.spec.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-messages-overview.command.ts",
-            "integrity": "sha1:1622bf4dba516895da79fd67e6a39bf39238e29e"
+            "integrity": "sha1:6e98e63a54931aa5c6a00d526d00bf4083d91ac0"
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-messages-overview.service.spec.ts",
@@ -39,31 +39,31 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-messages-overview.service.ts",
-            "integrity": "sha1:d7d47f6680b4125ec13a5d763f41a025cf26e344"
+            "integrity": "sha1:657ac4f59979a3034c76332dcf5f1dbf4028b09a"
         },
         {
             "path": "src/@hades/cci/message-overview/application/delete/delete-message-overview-by-id.command-handler.ts",
-            "integrity": "sha1:ef2f1f1a5709e2765bdfbaa36b358719d5b08fbc"
+            "integrity": "sha1:c6aa0d27c88e1b4bef3acba5c4cad247b530f993"
         },
         {
             "path": "src/@hades/cci/message-overview/application/delete/delete-message-overview-by-id.command.handler.spec.ts",
-            "integrity": "sha1:2ac5f37b35a314a47493dee60934168056e355dd"
+            "integrity": "sha1:055e2192424bcf7d8cc454b4e81e46937f7823ef"
         },
         {
             "path": "src/@hades/cci/message-overview/application/delete/delete-message-overview-by-id.command.ts",
-            "integrity": "sha1:cb10b8cf7e607146e060665851289963e4fda50e"
+            "integrity": "sha1:f279776eb7dcf5fcea49b3df88792f38752b010b"
         },
         {
             "path": "src/@hades/cci/message-overview/application/delete/delete-message-overview-by-id.service.spec.ts",
-            "integrity": "sha1:a17bbc482c179b606b881876583191f65cb4a938"
+            "integrity": "sha1:8b45066a3daed1e2867ff85e1ea5cf42bc711d8b"
         },
         {
             "path": "src/@hades/cci/message-overview/application/delete/delete-message-overview-by-id.service.ts",
-            "integrity": "sha1:e4a2be3293a887b74dddcc74c4ca63a129a2b0d3"
+            "integrity": "sha1:777cdc2e54322f5000174cd7d267d5f645c9625b"
         },
         {
             "path": "src/@hades/cci/message-overview/application/delete/delete-messages-overview.command-handler.ts",
-            "integrity": "sha1:13aca616045672f56e66a5edd26d3bba7d2b3340"
+            "integrity": "sha1:5176afafc875336c55c3c1e2661c40ba75f16a76"
         },
         {
             "path": "src/@hades/cci/message-overview/application/delete/delete-messages-overview.command.handler.spec.ts",
@@ -71,7 +71,7 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/delete/delete-messages-overview.command.ts",
-            "integrity": "sha1:aab35918865ef3d566ed4a7c38770b476da670dd"
+            "integrity": "sha1:33d794186c14ac58f2998bfe3ec1f45cbd9a4d34"
         },
         {
             "path": "src/@hades/cci/message-overview/application/delete/delete-messages-overview.service.spec.ts",
@@ -79,23 +79,23 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/delete/delete-messages-overview.service.ts",
-            "integrity": "sha1:6a527c97df9cafd6c2f5acdab54cf822abb53ba4"
+            "integrity": "sha1:a1326674d9a7a115abc5d2dab7d937dc51b8baa4"
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/add-messages-overview-context.event.ts",
-            "integrity": "sha1:5f0b3c487dbfaf86b727b4f668efba3f0a619ba2"
+            "integrity": "sha1:d08a1becaf235e266dc73e933c93ef69aa6090e9"
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/created-message-overview.event-handler.ts",
-            "integrity": "sha1:e3f48a5c6c922342201ca0d631724df39646e34f"
+            "integrity": "sha1:3f5f3f6dd7006629401af382b739024a4be7bcb9"
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/created-message-overview.event.ts",
-            "integrity": "sha1:fc1fd5566dda7938b393a20abe5d65ac7cf26d2e"
+            "integrity": "sha1:2e81267e81aacbbfebf5088996c60e53376f3aa9"
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/created-messages-overview.event-handler.ts",
-            "integrity": "sha1:ff5cb3f6b931857132ee4ee4ef6e5aef98d92bbe"
+            "integrity": "sha1:655477f6f669d67eed39a32d9141c416ea38bd59"
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/created-messages-overview.event.ts",
@@ -103,15 +103,15 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/deleted-message-overview.event-handler.ts",
-            "integrity": "sha1:1e06a1fd7249ea0494612c7d718cc1aab7084fc2"
+            "integrity": "sha1:eeb8b098387b0427974a0e33cf9658192bcdd49e"
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/deleted-message-overview.event.ts",
-            "integrity": "sha1:20d53ca6e2315f96cbd082b5429dd8e0e0ed07c6"
+            "integrity": "sha1:06eedb5b839809411061348d6012b89e5f83cfd7"
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/deleted-messages-overview.event-handler.ts",
-            "integrity": "sha1:33331ec85e321845659984c453709f3938966a0c"
+            "integrity": "sha1:13da16592cc3019223b2c53da3945e9970de1cd5"
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/deleted-messages-overview.event.ts",
@@ -119,35 +119,35 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/updated-message-overview.event-handler.ts",
-            "integrity": "sha1:a8e14f8b98f471ba2292581ba6d97800b2aeaa3a"
+            "integrity": "sha1:2996ff8b21e75c8222c018807e7341ce607dbe7a"
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/updated-message-overview.event.ts",
-            "integrity": "sha1:447d8428c588a7fc968f603302ee638ebb82c48c"
+            "integrity": "sha1:463558775f479ba64853c9721c694eca5bdb2226"
         },
         {
             "path": "src/@hades/cci/message-overview/application/find/find-message-overview-by-id.query-handler.ts",
-            "integrity": "sha1:c63217ccb9d56d4025511289b4d91205d07a17db"
+            "integrity": "sha1:af15932b261f8cebb3888e0a5488adbc873ef36c"
         },
         {
             "path": "src/@hades/cci/message-overview/application/find/find-message-overview-by-id.query.handler.spec.ts",
-            "integrity": "sha1:18ca47dcb852b24d236d06bde7730b4377740974"
+            "integrity": "sha1:77c2790dc19bdd0d5188409670de7497bc9ab78f"
         },
         {
             "path": "src/@hades/cci/message-overview/application/find/find-message-overview-by-id.query.ts",
-            "integrity": "sha1:a242d0d50f4f9d67697273ba4252c31e79c6a493"
+            "integrity": "sha1:374c575efb9c94eb0b52c5f193ca43536bc47150"
         },
         {
             "path": "src/@hades/cci/message-overview/application/find/find-message-overview-by-id.service.spec.ts",
-            "integrity": "sha1:10a9279b3185c440e21d1e1bf17c9836ab9c97dd"
+            "integrity": "sha1:1889c55ce1e21ad7e8056db0b020efd463b18a9f"
         },
         {
             "path": "src/@hades/cci/message-overview/application/find/find-message-overview-by-id.service.ts",
-            "integrity": "sha1:8068980c0054572c6ec1a9dcfec1902fca10235f"
+            "integrity": "sha1:90e092ba1fc4e27260e4902531641879a50c06b8"
         },
         {
             "path": "src/@hades/cci/message-overview/application/find/find-message-overview.query-handler.ts",
-            "integrity": "sha1:3fbdd36b9d15f470eb24200316a2b86807a60035"
+            "integrity": "sha1:69d18d0c273cc424c7e63bbfbe60ddfb6eee16b3"
         },
         {
             "path": "src/@hades/cci/message-overview/application/find/find-message-overview.query.handler.spec.ts",
@@ -155,7 +155,7 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/find/find-message-overview.query.ts",
-            "integrity": "sha1:4b84702a8af4da6cb411eced2e77143aaa1bc7de"
+            "integrity": "sha1:8328eea3dafc4e099fb299faa9a3ffa6e384b703"
         },
         {
             "path": "src/@hades/cci/message-overview/application/find/find-message-overview.service.spec.ts",
@@ -163,11 +163,11 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/find/find-message-overview.service.ts",
-            "integrity": "sha1:28db9bff62e5a07ae484bbb80ce7a1b910ecdfb3"
+            "integrity": "sha1:ad3bbff42bdd942a807bceed2f033d852779cfea"
         },
         {
             "path": "src/@hades/cci/message-overview/application/get/get-messages-overview.query-handler.ts",
-            "integrity": "sha1:e9e1b2e4b4179d8994576604444f3a061df86f0c"
+            "integrity": "sha1:c92f11c227755669b70bf80e4c9510cabd66c288"
         },
         {
             "path": "src/@hades/cci/message-overview/application/get/get-messages-overview.query.handler.spec.ts",
@@ -175,7 +175,7 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/get/get-messages-overview.query.ts",
-            "integrity": "sha1:9c8ce43aa9a15faac8718b039bbb7a848dca4d0a"
+            "integrity": "sha1:d81455192ef2de427d80fc1504d9d8840df92f1f"
         },
         {
             "path": "src/@hades/cci/message-overview/application/get/get-messages-overview.service.spec.ts",
@@ -183,19 +183,19 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/get/get-messages-overview.service.ts",
-            "integrity": "sha1:14b7d3ca840fbcadaa09a0a08f72e0db0f9257ea"
+            "integrity": "sha1:13046ae0a74afdc6a0ae0e2c921ec3883c382ea5"
         },
         {
             "path": "src/@hades/cci/message-overview/application/paginate/paginate-messages-overview.query-handler.ts",
-            "integrity": "sha1:6873c0a31b0c89c50c7d14bb9a95538e44a573b0"
+            "integrity": "sha1:c5f268d8f0e94b7377a1624babc2d3370c487804"
         },
         {
             "path": "src/@hades/cci/message-overview/application/paginate/paginate-messages-overview.query.handler.spec.ts",
-            "integrity": "sha1:ed612abeabe3faef7835fb6ceb4661197c57078a"
+            "integrity": "sha1:56f1bd5bcf95190eed3d3af2f3e1c4506de0cad0"
         },
         {
             "path": "src/@hades/cci/message-overview/application/paginate/paginate-messages-overview.query.ts",
-            "integrity": "sha1:51d9461b4af9126a4bdd741e9f56eef99654a964"
+            "integrity": "sha1:0bc95c59eedda6485b65a3ec68b75b80dcf620c4"
         },
         {
             "path": "src/@hades/cci/message-overview/application/paginate/paginate-messages-overview.service.spec.ts",
@@ -203,15 +203,15 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/paginate/paginate-messages-overview.service.ts",
-            "integrity": "sha1:0589cd9f0252a8d44176ea4713b0ddaea159cd57"
+            "integrity": "sha1:e15bb88450f8547461b638fffb6b94d078ff3ba3"
         },
         {
             "path": "src/@hades/cci/message-overview/application/sagas/message-overview.sagas.ts",
-            "integrity": "sha1:28ef8b1f6f2e88aeb5e07b28a7839ad5d111a904"
+            "integrity": "sha1:42ce04d936ec1fae9010293d911ab39cf72dae3d"
         },
         {
             "path": "src/@hades/cci/message-overview/application/update/update-message-overview.command-handler.ts",
-            "integrity": "sha1:373dd697475f9d999f78ff6f930a401ab94406f1"
+            "integrity": "sha1:a1d6c05fab2d07e69a77dbf16b144d1750965b44"
         },
         {
             "path": "src/@hades/cci/message-overview/application/update/update-message-overview.command.handler.spec.ts",
@@ -219,31 +219,31 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/update/update-message-overview.command.ts",
-            "integrity": "sha1:51e92271cb8d30dbb75499987ad38d64bf625109"
+            "integrity": "sha1:65e55de68e13ff7d410c6db39206f134647f0337"
         },
         {
             "path": "src/@hades/cci/message-overview/application/update/update-message-overview.service.spec.ts",
-            "integrity": "sha1:14d3d4d9aac4c7e622d64cb622484f082414340d"
+            "integrity": "sha1:c2343d92957147a359fe18676d7152002c73a6ee"
         },
         {
             "path": "src/@hades/cci/message-overview/application/update/update-message-overview.service.ts",
-            "integrity": "sha1:f4314b1d96049e71f505d00412ace5d7b7cca5cb"
+            "integrity": "sha1:25451a762a85cb83916f005943ce10e864ddd499"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/message-overview.aggregate.ts",
-            "integrity": "sha1:fe714ed94d6ac1c3ca81510b1d9667c9210f2192"
+            "integrity": "sha1:7b598e14dc4e3b7a6cd0ffa29d767bf9db42e97f"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/message-overview.mapper.ts",
-            "integrity": "sha1:4ee2214d5703adb1526f66797af4bb0181674621"
+            "integrity": "sha1:d77c9b5406021866c7d5c91f20c18bfe866f9830"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/message-overview.repository.ts",
-            "integrity": "sha1:aa81935a5425c525dd873f5ecf7abf19f572df07"
+            "integrity": "sha1:1c6343b454d2a73e4a241e1adfba0c677cc59ead"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/message-overview.response.ts",
-            "integrity": "sha1:c12e035dcd40d17b11c47e5180934ab431c4fce2"
+            "integrity": "sha1:104ca49fec8f4617f2b9fd742d36c078cddcec62"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/index.ts",
@@ -255,271 +255,271 @@
         },
         {
             "path": "src/@hades/cci/message-overview/infrastructure/mock/mock-message-overview.repository.ts",
-            "integrity": "sha1:62d9b4824d061f2e61a4dc1ad5f5a6676cd3f2c2"
+            "integrity": "sha1:d4bc90ad563b440d5d5fba0243b5094ed4936364"
         },
         {
             "path": "src/@hades/cci/message-overview/infrastructure/seeds/message-overview.seed.ts",
-            "integrity": "sha1:b56b3c6596e4f2623a0987acd532a15b4e0402fc"
+            "integrity": "sha1:b7cca511e80398d9b1821023435f8e4a45c44c64"
         },
         {
             "path": "src/@hades/cci/message-overview/infrastructure/sequelize/sequelize-message-overview.model.ts",
-            "integrity": "sha1:9532f54e3719ceba59eaa639d03a745b20acfba0"
+            "integrity": "sha1:ea1f9b12ef8dd86fb4ffa01e71378dada2b7f57a"
         },
         {
             "path": "src/@hades/cci/message-overview/infrastructure/sequelize/sequelize-message-overview.repository.ts",
-            "integrity": "sha1:0e25faf3c53b9a5676c1271ac33691e3604aa74f"
+            "integrity": "sha1:ee16238ba20a59d0b15a1b98511d978de9e57ecb"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-id.ts",
-            "integrity": "sha1:2c27a42c2bdccbb6fa6440d4ccd64f8cf06bccb7"
+            "integrity": "sha1:670c7001609983d3882a360f61225c5df2cac7d4"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-tenant-id.ts",
-            "integrity": "sha1:acdc138a1d3d87323f312f6cee22ab865bab3b92"
+            "integrity": "sha1:764a29ba1b95eed6dc4a5024ac096301895bff92"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-tenant-code.ts",
-            "integrity": "sha1:ea869a5199c333619005c26c7c5d1f87fdc1de14"
+            "integrity": "sha1:c87ea35cc1bfd011f4e85a636ff8c802690b6754"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-system-id.ts",
-            "integrity": "sha1:e0734d633be1fdc62e8c58d68afcf88f966997a9"
+            "integrity": "sha1:005ae084bb756c60dd5082ce13f87c48a07c4b5f"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-system-name.ts",
-            "integrity": "sha1:d40a75e8f39c6ab4182349b7bd32b3e5b1e3038a"
+            "integrity": "sha1:8051e45d8f03b8f578bba601e2871954bcee8f57"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-execution-id.ts",
-            "integrity": "sha1:3d520dbe784140eb02e099638efe29e7e56e371e"
+            "integrity": "sha1:5df0a9e892f0fb774bd2135e3b375fe73d6357be"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-execution-type.ts",
-            "integrity": "sha1:54e21f6899ca0347a31a6d5b89d1e004cba861a7"
+            "integrity": "sha1:58280a8333836c5c255a02a2d3fe5cede12edfd5"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-execution-executed-at.ts",
-            "integrity": "sha1:961f70e98a8ba31ddee1c0560c49ff3ed6ecd780"
+            "integrity": "sha1:f7992670304fa5f899338162823e7ee585eb6de3"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-execution-monitoring-start-at.ts",
-            "integrity": "sha1:d6bf18f6d50261c417f7d9d98d1097345eeeef61"
+            "integrity": "sha1:d78745474db100cba0d4a5d052eafb687d60f6e7"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-execution-monitoring-end-at.ts",
-            "integrity": "sha1:b41b9fb3584195f9d599c6a7db815cdd46b4544c"
+            "integrity": "sha1:d6d83d82965a2d28bb914405c1d45f381d4ed0d3"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-number-max.ts",
-            "integrity": "sha1:ead8e0d990645c0c40dd3af9698d99f6b0edc678"
+            "integrity": "sha1:c1e822a198cb047e685da2d9f564c5cbf3c3267a"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-number-days.ts",
-            "integrity": "sha1:a7553002d20928ecde7ffbaa196076b8b508f869"
+            "integrity": "sha1:0dbec04ae11d18978ce86003d1ee8ae5731dbddd"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-success.ts",
-            "integrity": "sha1:0803bfd2301c1b72ef418d7331ff4f35061b46e8"
+            "integrity": "sha1:ae90f227f47902db0a18ac9369e061eb90dc4439"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-cancelled.ts",
-            "integrity": "sha1:d8a2373faa60caaf9a4dad6c5dc54623d94fb484"
+            "integrity": "sha1:08473195fab9733614b600d936e460aefd694b94"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-delivering.ts",
-            "integrity": "sha1:be395a4c20a8e2d7c1afe11deb6dad06fb671af9"
+            "integrity": "sha1:3755d81c21db521ae60606b20f0570569a3a73c8"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-error.ts",
-            "integrity": "sha1:3836e54434f5a0951876daec7ec72b8398dbf83d"
+            "integrity": "sha1:c12cb7edb4889b3884200d065a5f429a030553f8"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-holding.ts",
-            "integrity": "sha1:7cb4c27932e55992b0c32c6c577b5b28dbf3d27c"
+            "integrity": "sha1:49a9f1d86e785ea4e0794a5ace92cb7a5009611c"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-to-be-delivered.ts",
-            "integrity": "sha1:af213767b107dbfe0eaed81fb8d5285cc40c715f"
+            "integrity": "sha1:a2006a325cea9b1b2f1f5008ecec9868754c135b"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-waiting.ts",
-            "integrity": "sha1:91facce034108d5d45ee6184c3180c998e06cf91"
+            "integrity": "sha1:16b54818ac3a96955147cc4126c5cd5e829f09b1"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-created-at.ts",
-            "integrity": "sha1:14d6d2b6b327624cf1cac02235c871317589761d"
+            "integrity": "sha1:5f8935d8c21fc1bf07fa8cc2d384b93d34ab827e"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-updated-at.ts",
-            "integrity": "sha1:f4fd0ada3ed47688fbf71712544c67088ad3abd2"
+            "integrity": "sha1:85b36454b26a6ffc621f86913376e5551350ffea"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/value-objects/message-overview-deleted-at.ts",
-            "integrity": "sha1:0e0f9988c406877198a817ee9d65c4359964bf96"
+            "integrity": "sha1:cb5b02381229f4108d03298e296913a66fd25e12"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/create-message-overview.controller.spec.ts",
-            "integrity": "sha1:dcd6d4fa7526b4e1db5f4ea73c036f824148be1e"
+            "path": "src/apps/cci/message-overview/controllers/cci-create-message-overview.controller.spec.ts",
+            "integrity": "sha1:1237017400e29f627b4cf4ebd9e943eace6909a2"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/create-message-overview.controller.ts",
-            "integrity": "sha1:14bce1b1bc4f7286e65d92b944f05d97dcb9a14a"
+            "path": "src/apps/cci/message-overview/controllers/cci-create-message-overview.controller.ts",
+            "integrity": "sha1:81e40fff3e66a670dca44174b55b19383562f873"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/create-messages-overview.controller.spec.ts",
-            "integrity": "sha1:200bcb89cc83ab3a1b15fd48fd9163a74ccccbd7"
+            "path": "src/apps/cci/message-overview/controllers/cci-create-messages-overview.controller.spec.ts",
+            "integrity": "sha1:d1f889712fa06ec0605ba011e8d2fafa5ef3bbec"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/create-messages-overview.controller.ts",
-            "integrity": "sha1:408ff12a98b9c7f71fc2c04b7cd7fd2329280e73"
+            "path": "src/apps/cci/message-overview/controllers/cci-create-messages-overview.controller.ts",
+            "integrity": "sha1:f67daf40b7138fae72d5f56efc0746a5c69ab84b"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/delete-message-overview-by-id.controller.spec.ts",
-            "integrity": "sha1:e53cfa5b12e14fea18e3cc229c5a371dfe2e328a"
+            "path": "src/apps/cci/message-overview/controllers/cci-delete-message-overview-by-id.controller.spec.ts",
+            "integrity": "sha1:dbb2e0ff5af861cb2d0776e702ed7d4c2adad0ee"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/delete-message-overview-by-id.controller.ts",
-            "integrity": "sha1:d870a34eb65318bad012d2c2af002b9c4b8e8594"
+            "path": "src/apps/cci/message-overview/controllers/cci-delete-message-overview-by-id.controller.ts",
+            "integrity": "sha1:47560eb15d54cd10e7c3f23cada133e1c01ffeed"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/delete-messages-overview.controller.spec.ts",
-            "integrity": "sha1:dda5dba6d8f0f642c6b5b218ce4746b47efd73a7"
+            "path": "src/apps/cci/message-overview/controllers/cci-delete-messages-overview.controller.spec.ts",
+            "integrity": "sha1:1a2987fc2b81d63c3b60c0dc2372b56492c7fd02"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/delete-messages-overview.controller.ts",
-            "integrity": "sha1:e48bbacdcd7120cdca3a6cd6e7377ac76720f0d1"
+            "path": "src/apps/cci/message-overview/controllers/cci-delete-messages-overview.controller.ts",
+            "integrity": "sha1:0dc5b1f68f1d84dae59ab29e083e9faa1bb224be"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/find-message-overview-by-id.controller.spec.ts",
-            "integrity": "sha1:eb7f7a9ec9127362d8ed17d38d1cd9951ff9d3bf"
+            "path": "src/apps/cci/message-overview/controllers/cci-find-message-overview-by-id.controller.spec.ts",
+            "integrity": "sha1:1cc231f32e321295141491259d142074e0ca44a5"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/find-message-overview-by-id.controller.ts",
-            "integrity": "sha1:5b38cb2353ad11d5f8add34a1a227225dc54b74a"
+            "path": "src/apps/cci/message-overview/controllers/cci-find-message-overview-by-id.controller.ts",
+            "integrity": "sha1:eddfe7ece3da83f1ce1d80dd53de827182b7689b"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/find-message-overview.controller.spec.ts",
-            "integrity": "sha1:6e8ebd39e8b767461927b2da900eff29de2f2215"
+            "path": "src/apps/cci/message-overview/controllers/cci-find-message-overview.controller.spec.ts",
+            "integrity": "sha1:4824168670163bfc7529184807e1f5e260726847"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/find-message-overview.controller.ts",
-            "integrity": "sha1:2df0083c995dd869c8cd2bab121adda174497b74"
+            "path": "src/apps/cci/message-overview/controllers/cci-find-message-overview.controller.ts",
+            "integrity": "sha1:8d8ce9f1125a819adbc86cf3ffc2c75f0f852983"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/get-messages-overview.controller.spec.ts",
-            "integrity": "sha1:85ae398312afdc548c9d87b9b4641591874d7356"
+            "path": "src/apps/cci/message-overview/controllers/cci-get-messages-overview.controller.spec.ts",
+            "integrity": "sha1:f827c06999d81bce889b7cda672d90ebdcd8e775"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/get-messages-overview.controller.ts",
-            "integrity": "sha1:a18ef3cc6667028acfed3d8e2c073349f2ecf54d"
+            "path": "src/apps/cci/message-overview/controllers/cci-get-messages-overview.controller.ts",
+            "integrity": "sha1:b290ab5a34aa2ebe3081e8f508e0375aa3c2983c"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/paginate-messages-overview.controller.spec.ts",
-            "integrity": "sha1:a28d6700e447c4ebd35cb76a6ee5d7ef51cc0763"
+            "path": "src/apps/cci/message-overview/controllers/cci-paginate-messages-overview.controller.spec.ts",
+            "integrity": "sha1:a8cf2d38d1387146e8f2ee7742313b9e4500e9eb"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/paginate-messages-overview.controller.ts",
-            "integrity": "sha1:5d63d76698f9f32eccf2f359690e69cb4dfc0eed"
+            "path": "src/apps/cci/message-overview/controllers/cci-paginate-messages-overview.controller.ts",
+            "integrity": "sha1:a415ff4903a5ff42721b1d7ffaf3a82f9205bed8"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/update-message-overview.controller.spec.ts",
-            "integrity": "sha1:fb4beead6b5aa82de1b006b7edd779a5ae1fb373"
+            "path": "src/apps/cci/message-overview/controllers/cci-update-message-overview.controller.spec.ts",
+            "integrity": "sha1:0ef09dd41a870841ef4274944d9122beab54a580"
         },
         {
-            "path": "src/apps/cci/message-overview/controllers/update-message-overview.controller.ts",
-            "integrity": "sha1:f9db42968f775fa6ed89d58ffef41b89ebdd3dab"
+            "path": "src/apps/cci/message-overview/controllers/cci-update-message-overview.controller.ts",
+            "integrity": "sha1:24aee135133ee75cd98a9d5699cad47e2c13af1e"
         },
         {
             "path": "src/apps/cci/message-overview/dto/message-overview.dto.ts",
-            "integrity": "sha1:f2f905e879ce59b210dbf71ef147cc5b062cdc15"
+            "integrity": "sha1:ed23d14627b7eabfcaa7ebdf9125386e7084257a"
         },
         {
             "path": "src/apps/cci/message-overview/dto/create-message-overview.dto.ts",
-            "integrity": "sha1:1591988ea768a5b08ddbce4a74df91675f1bf74c"
+            "integrity": "sha1:6cc7ae44afe0b900228df3547dae818b08339e4e"
         },
         {
             "path": "src/apps/cci/message-overview/dto/update-message-overview.dto.ts",
-            "integrity": "sha1:bc1fa3090f3c5aa6cba5bd7925d57ac33eaa7737"
+            "integrity": "sha1:529fcd3f66f7b19066c2c58f501415491bd022ef"
         },
         {
             "path": "src/apps/cci/message-overview/graphql/message-overview.graphql",
-            "integrity": "sha1:c341d94e82f2e1f558094cac27cc12a1fcdd1354"
+            "integrity": "sha1:3e64a956017f6b32b8d9b9e13152406d12eb1792"
         },
         {
             "path": "src/apps/cci/message-overview/index.ts",
-            "integrity": "sha1:a666d3199fe1927bccf4b320bfde347830b62c9d"
+            "integrity": "sha1:b11c5e6e8ee9d5faecc619a6de49538b30ae0099"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/create-message-overview.resolver.spec.ts",
-            "integrity": "sha1:cbfba9ea00c527767a1b655b36a754592441152c"
+            "path": "src/apps/cci/message-overview/resolvers/cci-create-message-overview.resolver.spec.ts",
+            "integrity": "sha1:0083d052bbf595f35b20b06a6e7de376b41e64d5"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/create-message-overview.resolver.ts",
-            "integrity": "sha1:2f6666483dcf4776651f84960be42a6f2d17c515"
+            "path": "src/apps/cci/message-overview/resolvers/cci-create-message-overview.resolver.ts",
+            "integrity": "sha1:06e09c26926a742c30cbf5b3f7210715de6306ca"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/create-messages-overview.resolver.spec.ts",
-            "integrity": "sha1:edf64b59b3180d650325cf66134394410f795f82"
+            "path": "src/apps/cci/message-overview/resolvers/cci-create-messages-overview.resolver.spec.ts",
+            "integrity": "sha1:9c7f9af7ec5ec8ea88889aca9419cab6460df9cf"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/create-messages-overview.resolver.ts",
-            "integrity": "sha1:6cd3ba158ed0277c50c321e44bcccadb30464ddf"
+            "path": "src/apps/cci/message-overview/resolvers/cci-create-messages-overview.resolver.ts",
+            "integrity": "sha1:c4f65bdcb5eb3b40f01e444f1d75c5685ebf82e4"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/delete-message-overview-by-id.resolver.spec.ts",
-            "integrity": "sha1:32c576998e7c5a20f58daaa54fb2166b26651453"
+            "path": "src/apps/cci/message-overview/resolvers/cci-delete-message-overview-by-id.resolver.spec.ts",
+            "integrity": "sha1:085b0b6e28edae05d0316b48bfa5a9e70b21654f"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/delete-message-overview-by-id.resolver.ts",
-            "integrity": "sha1:fb90789eaa7e72208c68c036ca2c91e22ace3198"
+            "path": "src/apps/cci/message-overview/resolvers/cci-delete-message-overview-by-id.resolver.ts",
+            "integrity": "sha1:94b274df5415351f3097f8e6eadb896af7f7c7c2"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/delete-messages-overview.resolver.spec.ts",
-            "integrity": "sha1:d3619e157ceee5d64a1a6b0d084dfbe4f1a12cfe"
+            "path": "src/apps/cci/message-overview/resolvers/cci-delete-messages-overview.resolver.spec.ts",
+            "integrity": "sha1:f2982c737772d977a4bbf1fdf7846d3b693ab326"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/delete-messages-overview.resolver.ts",
-            "integrity": "sha1:b66b88b14754082284a226b90e396495bfbee015"
+            "path": "src/apps/cci/message-overview/resolvers/cci-delete-messages-overview.resolver.ts",
+            "integrity": "sha1:64f5bf7187274d17b6c036c2dc8f68f488b99630"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/find-message-overview-by-id.resolver.spec.ts",
-            "integrity": "sha1:29c8e87499e1e32d83283a786275632372442e55"
+            "path": "src/apps/cci/message-overview/resolvers/cci-find-message-overview-by-id.resolver.spec.ts",
+            "integrity": "sha1:9d415feee59076c6c9163292cc89bbed1750def6"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/find-message-overview-by-id.resolver.ts",
-            "integrity": "sha1:e25709483fe199ac5f26c805b3cf6b8ba5f45894"
+            "path": "src/apps/cci/message-overview/resolvers/cci-find-message-overview-by-id.resolver.ts",
+            "integrity": "sha1:8f08f3d5af653fe6d7ab88d65454cd305ec64646"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/find-message-overview.resolver.spec.ts",
-            "integrity": "sha1:2bc151c4087674b713752cfd9b291e50696aed94"
+            "path": "src/apps/cci/message-overview/resolvers/cci-find-message-overview.resolver.spec.ts",
+            "integrity": "sha1:3ca87908935b2ef4115722633c9709952dd8a442"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/find-message-overview.resolver.ts",
-            "integrity": "sha1:71834438acfd175c3f6079df22ebdd9d03e6ce28"
+            "path": "src/apps/cci/message-overview/resolvers/cci-find-message-overview.resolver.ts",
+            "integrity": "sha1:829fe8deb845a381e2d63a4cd12fab93ae86919b"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/get-messages-overview.resolver.spec.ts",
-            "integrity": "sha1:e629deb028d418e7940c711f06fe3bc66e5df918"
+            "path": "src/apps/cci/message-overview/resolvers/cci-get-messages-overview.resolver.spec.ts",
+            "integrity": "sha1:f3e5f5023bae4f2e17a804b16872184d2a19ef4c"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/get-messages-overview.resolver.ts",
-            "integrity": "sha1:a9fab812c6c7af8feaf141727f1eccf4bd9337f5"
+            "path": "src/apps/cci/message-overview/resolvers/cci-get-messages-overview.resolver.ts",
+            "integrity": "sha1:1b527ca50edce0dc9f92a17162db7bd0d23c71d0"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/paginate-messages-overview.resolver.spec.ts",
-            "integrity": "sha1:e7fda35a7d044a0b8b77fd5e84b6c9c70523b552"
+            "path": "src/apps/cci/message-overview/resolvers/cci-paginate-messages-overview.resolver.spec.ts",
+            "integrity": "sha1:c3146ef40cf31e43ab300ddb4d229dabd8f9091d"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/paginate-messages-overview.resolver.ts",
-            "integrity": "sha1:e842b21a63d200ee9f354207f81a889491fe0211"
+            "path": "src/apps/cci/message-overview/resolvers/cci-paginate-messages-overview.resolver.ts",
+            "integrity": "sha1:3df449fd6e568a598aca4e27ba58919b4e1a18c3"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/update-message-overview.resolver.spec.ts",
-            "integrity": "sha1:be2e585fd3676cf5c76c4f056edfe3e3a1bdff4e"
+            "path": "src/apps/cci/message-overview/resolvers/cci-update-message-overview.resolver.spec.ts",
+            "integrity": "sha1:3dcabf629dfcd490fafbac7fa347b7bef8cfdd9c"
         },
         {
-            "path": "src/apps/cci/message-overview/resolvers/update-message-overview.resolver.ts",
-            "integrity": "sha1:304e7981b499d97fc9c611086315db23a2617be0"
+            "path": "src/apps/cci/message-overview/resolvers/cci-update-message-overview.resolver.ts",
+            "integrity": "sha1:07bd0e6a8ee5399c27d3916eb45c3159c3f7ff7c"
         },
         {
             "path": "src/apps/cci/message-overview/seeder/seeder.module.ts",
@@ -527,11 +527,11 @@
         },
         {
             "path": "src/apps/cci/message-overview/seeder/seeder.ts",
-            "integrity": "sha1:99d7f2bb18ea5182e1809d28b6ff839a25ca9ca9"
+            "integrity": "sha1:fc7c57d2d0c54b32eaff2835353fdb50673670bf"
         },
         {
             "path": "postman/cci.message-overview.postman.json",
-            "integrity": "sha1:c19250a360ea1b74a726487d645c9c0e6bfe60fd"
+            "integrity": "sha1:fc14594331237acee0f8a129859cc33aaa3eaeb9"
         }
     ]
 }

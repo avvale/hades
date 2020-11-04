@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciSystem } from './system.aggregate';
 import { SystemResponse } from './system.response';
-import { 
+import {
     SystemId,
     SystemTenantId,
     SystemTenantCode,
@@ -14,45 +14,41 @@ import {
     SystemCancelledAt,
     SystemCreatedAt,
     SystemUpdatedAt,
-    SystemDeletedAt
-    
+    SystemDeletedAt,
 } from './value-objects';
-
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
-
-
 
 export class SystemMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param system
      */
-    mapModelToAggregate(system: ObjectLiteral): CciSystem
+    mapModelToAggregate(system: ObjectLiteral, cQMetadata?: CQMetadata): CciSystem
     {
         if (!system) return;
 
-        return this.makeAggregate(system);
+        return this.makeAggregate(system, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param systems 
+     * @param systems
      */
-    mapModelsToAggregates(systems: ObjectLiteral[]): CciSystem[]
+    mapModelsToAggregates(systems: ObjectLiteral[], cQMetadata?: CQMetadata): CciSystem[]
     {
         if (!Array.isArray(systems)) return;
-        
-        return systems.map(system  => this.makeAggregate(system));
+
+        return systems.map(system  => this.makeAggregate(system, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param system 
+     * @param system
      */
     mapAggregateToResponse(system: CciSystem): SystemResponse
     {
@@ -70,7 +66,7 @@ export class SystemMapper implements IMapper
         return systems.map(system => this.makeResponse(system));
     }
 
-    private makeAggregate(system: ObjectLiteral): CciSystem
+    private makeAggregate(system: ObjectLiteral, cQMetadata?: CQMetadata): CciSystem
     {
         return CciSystem.register(
             new SystemId(system.id),
@@ -81,24 +77,18 @@ export class SystemMapper implements IMapper
             new SystemEnvironment(system.environment),
             new SystemTechnology(system.technology),
             new SystemIsActive(system.isActive),
-            new SystemCancelledAt(system.cancelledAt),
-            new SystemCreatedAt(system.createdAt),
-            new SystemUpdatedAt(system.updatedAt),
-            new SystemDeletedAt(system.deletedAt),
-            
-            
-            
+            new SystemCancelledAt(system.cancelledAt, {}, {addTimezone: cQMetadata.timezone}),
+            new SystemCreatedAt(system.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new SystemUpdatedAt(system.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new SystemDeletedAt(system.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(system.tenant) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(system: CciSystem): SystemResponse
     {
         if (!system) return;
-        
+
         return new SystemResponse(
             system.id.value,
             system.tenantId.value,
@@ -112,13 +102,7 @@ export class SystemMapper implements IMapper
             system.createdAt.value,
             system.updatedAt.value,
             system.deletedAt.value,
-            
-            
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(system.tenant) : undefined,
-            
-            
-            
         );
     }
 }

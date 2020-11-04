@@ -1,8 +1,6 @@
-
 enum CciMessageDetailExecutionType {
     SUMMARY
     DETAIL
-        
 }
 enum CciMessageDetailStatus {
     SUCCESS
@@ -12,12 +10,10 @@ enum CciMessageDetailStatus {
     HOLDING
     TO_BE_DELIVERED
     WAITING
-        
 }
 enum CciMessageDetailDirection {
     INBOUND
     OUTBOUND
-        
 }
 
 type CciMessageDetail
@@ -110,7 +106,6 @@ input CciCreateMessageDetailInput
     timesFailed: GraphQLInt
     numberMax: GraphQLInt
     numberDays: GraphQLInt
-    
 }
 
 input CciUpdateMessageDetailInput
@@ -154,10 +149,9 @@ input CciUpdateMessageDetailInput
     timesFailed: GraphQLInt
     numberMax: GraphQLInt
     numberDays: GraphQLInt
-    
 }
 
-type Query 
+type Query
 {
     cciFindMessageDetail(query:QueryStatement constraint:QueryStatement): CciMessageDetail
     cciFindMessageDetailById(id:ID constraint:QueryStatement): CciMessageDetail

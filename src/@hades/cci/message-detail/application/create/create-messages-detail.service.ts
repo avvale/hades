@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     MessageDetailId,
     MessageDetailTenantId,
     MessageDetailTenantCode,
@@ -43,8 +42,7 @@ import {
     MessageDetailNumberDays,
     MessageDetailCreatedAt,
     MessageDetailUpdatedAt,
-    MessageDetailDeletedAt
-    
+    MessageDetailDeletedAt,
 } from './../../domain/value-objects';
 import { IMessageDetailRepository } from './../../domain/message-detail.repository';
 import { CciMessageDetail } from './../../domain/message-detail.aggregate';
@@ -55,7 +53,7 @@ export class CreateMessagesDetailService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IMessageDetailRepository
+        private readonly repository: IMessageDetailRepository,
     ) {}
 
     public async main(
@@ -99,7 +97,6 @@ export class CreateMessagesDetailService
             timesFailed: MessageDetailTimesFailed,
             numberMax: MessageDetailNumberMax,
             numberDays: MessageDetailNumberDays,
-            
         } []
     ): Promise<void>
     {
@@ -144,18 +141,18 @@ export class CreateMessagesDetailService
             messageDetail.timesFailed,
             messageDetail.numberMax,
             messageDetail.numberDays,
-            new MessageDetailCreatedAt(Utils.nowTimestamp()),
-            new MessageDetailUpdatedAt(Utils.nowTimestamp()),
+            new MessageDetailCreatedAt({currentTimestamp: true}),
+            new MessageDetailUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateMessagesDetail);
 
         // create AddMessagesDetailContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const messagesDetailRegistered = this.publisher.mergeObjectContext(new AddMessagesDetailContextEvent(aggregateMessagesDetail));
- 
+
         messagesDetailRegistered.created(); // apply event to model events
         messagesDetailRegistered.commit(); // commit all events of model
     }

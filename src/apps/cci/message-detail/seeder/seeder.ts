@@ -4,7 +4,7 @@ import { CreateMessagesDetailCommand } from '@hades/cci/message-detail/applicati
 import { SeederModule } from './seeder.module';
 import { messagesDetail } from '@hades/cci/message-detail/infrastructure/seeds/message-detail.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

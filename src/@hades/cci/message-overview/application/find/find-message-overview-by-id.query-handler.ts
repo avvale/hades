@@ -11,12 +11,16 @@ export class FindMessageOverviewByIdQueryHandler implements IQueryHandler<FindMe
     private readonly mapper: MessageOverviewMapper = new MessageOverviewMapper();
 
     constructor(
-        private readonly findMessageOverviewByIdService: FindMessageOverviewByIdService
-    ) { }
+        private readonly findMessageOverviewByIdService: FindMessageOverviewByIdService,
+    ) {}
 
     async execute(query: FindMessageOverviewByIdQuery): Promise<MessageOverviewResponse>
     {
-        const messageOverview = await this.findMessageOverviewByIdService.main(new MessageOverviewId(query.id));
+        const messageOverview = await this.findMessageOverviewByIdService.main(
+            new MessageOverviewId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(messageOverview);
     }

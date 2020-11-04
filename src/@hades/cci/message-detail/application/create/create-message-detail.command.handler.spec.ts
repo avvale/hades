@@ -6,12 +6,12 @@ import { messagesDetail } from '@hades/cci/message-detail/infrastructure/seeds/m
 import { CreateMessageDetailCommand } from './create-message-detail.command';
 import { CreateMessageDetailService } from './create-message-detail.service';
 
-describe('CreateMessageDetailCommandHandler', () => 
+describe('CreateMessageDetailCommandHandler', () =>
 {
     let commandHandler: CreateMessageDetailCommandHandler;
     let service: CreateMessageDetailService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateMessageDetailCommandHandler', () =>
         service         = module.get<CreateMessageDetailService>(CreateMessageDetailService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateMessageDetailCommandHandler should be defined', () => 
+        test('CreateMessageDetailCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateMessageDetailService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateMessageDetailService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateMessageDetailCommand(
@@ -79,7 +79,6 @@ describe('CreateMessageDetailCommandHandler', () =>
                     messagesDetail[0].timesFailed,
                     messagesDetail[0].numberMax,
                     messagesDetail[0].numberDays,
-                    
                 )
             )).toBe(undefined);
         });

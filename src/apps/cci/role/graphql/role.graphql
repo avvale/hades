@@ -1,15 +1,14 @@
 
-
 type CciRole
 {
     id: ID!
+    tenantId: ID!
     tenant: IamTenant!
     tenantCode: GraphQLString!
     name: GraphQLString!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input CciCreateRoleInput
@@ -18,7 +17,6 @@ input CciCreateRoleInput
     tenantId: ID!
     tenantCode: GraphQLString!
     name: GraphQLString!
-    
 }
 
 input CciUpdateRoleInput
@@ -27,10 +25,9 @@ input CciUpdateRoleInput
     tenantId: ID
     tenantCode: GraphQLString
     name: GraphQLString
-    
 }
 
-type Query 
+type Query
 {
     cciFindRole(query:QueryStatement constraint:QueryStatement): CciRole
     cciFindRoleById(id:ID constraint:QueryStatement): CciRole

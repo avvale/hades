@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     MessageOverviewId,
     MessageOverviewTenantId,
     MessageOverviewTenantCode,
@@ -21,8 +21,7 @@ import {
     MessageOverviewWaiting,
     MessageOverviewCreatedAt,
     MessageOverviewUpdatedAt,
-    MessageOverviewDeletedAt
-    
+    MessageOverviewDeletedAt,
 } from './value-objects';
 import { CreatedMessageOverviewEvent } from './../application/events/created-message-overview.event';
 import { UpdatedMessageOverviewEvent } from './../application/events/updated-message-overview.event';
@@ -71,7 +70,7 @@ export class CciMessageOverview extends AggregateRoot
     constructor(id?: MessageOverviewId, tenantId?: MessageOverviewTenantId, tenantCode?: MessageOverviewTenantCode, systemId?: MessageOverviewSystemId, systemName?: MessageOverviewSystemName, executionId?: MessageOverviewExecutionId, executionType?: MessageOverviewExecutionType, executionExecutedAt?: MessageOverviewExecutionExecutedAt, executionMonitoringStartAt?: MessageOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: MessageOverviewExecutionMonitoringEndAt, numberMax?: MessageOverviewNumberMax, numberDays?: MessageOverviewNumberDays, success?: MessageOverviewSuccess, cancelled?: MessageOverviewCancelled, delivering?: MessageOverviewDelivering, error?: MessageOverviewError, holding?: MessageOverviewHolding, toBeDelivered?: MessageOverviewToBeDelivered, waiting?: MessageOverviewWaiting, createdAt?: MessageOverviewCreatedAt, updatedAt?: MessageOverviewUpdatedAt, deletedAt?: MessageOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;

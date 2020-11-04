@@ -10,11 +10,11 @@ export class GetMessagesDetailQueryHandler implements IQueryHandler<GetMessagesD
     private readonly mapper: MessageDetailMapper = new MessageDetailMapper();
 
     constructor(
-        private readonly getMessagesDetailService: GetMessagesDetailService
-    ) { }
+        private readonly getMessagesDetailService: GetMessagesDetailService,
+    ) {}
 
     async execute(query: GetMessagesDetailQuery): Promise<MessageDetailResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getMessagesDetailService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getMessagesDetailService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

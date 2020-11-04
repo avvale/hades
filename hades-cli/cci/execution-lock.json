@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/seeds/execution.seed.ts",
-            "integrity": "sha1:dabb8a5c098080d3b5d3950595032905e6ed17e9"
+            "integrity": "sha1:8841b16798441aa03e1b9ab5025a272c41b59eeb"
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model.ts",
@@ -495,7 +495,7 @@
         },
         {
             "path": "postman/cci.execution.postman.json",
-            "integrity": "sha1:b31035ef51a63a8d97e87e942e7e578ccc89e925"
+            "integrity": "sha1:fcd8cb35642d27b954ebcc893589643acda495a8"
         }
     ]
 }

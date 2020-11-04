@@ -8,13 +8,13 @@ import { JobOverviewId } from './../../domain/value-objects';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { MockJobOverviewRepository } from './../../infrastructure/mock/mock-job-overview.repository';
 
-describe('FindJobOverviewByIdService', () => 
+describe('FindJobOverviewByIdService', () =>
 {
     let service: FindJobOverviewByIdService;
     let repository: IJobOverviewRepository;
     let mockRepository: MockJobOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindJobOverviewByIdService', () =>
                 EventPublisher,
                 FindJobOverviewByIdService,
                 MockJobOverviewRepository,
-                { 
+                {
                     provide: IJobOverviewRepository,
                     useValue: {
                         findById: (id) => {}

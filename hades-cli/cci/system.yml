@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: system
 moduleNames: systems
+aggregateName: CciSystem
 hasOAuth: true
 hasTenant: true
 aggregateProperties:
@@ -10,6 +11,7 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
+    example: 12e6fe4f-d59e-4588-add9-cb553ba2b8d3
   - name: tenant_id
     type: id
     length: 36
@@ -40,9 +42,11 @@ aggregateProperties:
       - MULESOFT
       - SAPSCI
     nullable: false
+    example: SAPPI
   - name: is_active
     type: boolean
     nullable: false
+    example: false
   - name: cancelled_at
     type: timestamp
     nullable: true

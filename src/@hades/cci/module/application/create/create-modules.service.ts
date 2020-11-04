@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ModuleId,
     ModuleTenantId,
     ModuleTenantCode,
@@ -25,8 +24,7 @@ import {
     ModuleParameterValue,
     ModuleCreatedAt,
     ModuleUpdatedAt,
-    ModuleDeletedAt
-    
+    ModuleDeletedAt,
 } from './../../domain/value-objects';
 import { IModuleRepository } from './../../domain/module.repository';
 import { CciModule } from './../../domain/module.aggregate';
@@ -37,7 +35,7 @@ export class CreateModulesService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IModuleRepository
+        private readonly repository: IModuleRepository,
     ) {}
 
     public async main(
@@ -63,7 +61,6 @@ export class CreateModulesService
             name: ModuleName,
             parameterName: ModuleParameterName,
             parameterValue: ModuleParameterValue,
-            
         } []
     ): Promise<void>
     {
@@ -90,18 +87,18 @@ export class CreateModulesService
             module.name,
             module.parameterName,
             module.parameterValue,
-            new ModuleCreatedAt(Utils.nowTimestamp()),
-            new ModuleUpdatedAt(Utils.nowTimestamp()),
+            new ModuleCreatedAt({currentTimestamp: true}),
+            new ModuleUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateModules);
 
         // create AddModulesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const modulesRegistered = this.publisher.mergeObjectContext(new AddModulesContextEvent(aggregateModules));
- 
+
         modulesRegistered.created(); // apply event to model events
         modulesRegistered.commit(); // commit all events of model
     }

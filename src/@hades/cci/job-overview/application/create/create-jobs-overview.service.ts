@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     JobOverviewId,
     JobOverviewTenantId,
     JobOverviewTenantCode,
@@ -17,8 +16,7 @@ import {
     JobOverviewError,
     JobOverviewCreatedAt,
     JobOverviewUpdatedAt,
-    JobOverviewDeletedAt
-    
+    JobOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { CciJobOverview } from './../../domain/job-overview.aggregate';
@@ -29,7 +27,7 @@ export class CreateJobsOverviewService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IJobOverviewRepository
+        private readonly repository: IJobOverviewRepository,
     ) {}
 
     public async main(
@@ -47,7 +45,6 @@ export class CreateJobsOverviewService
             cancelled: JobOverviewCancelled,
             completed: JobOverviewCompleted,
             error: JobOverviewError,
-            
         } []
     ): Promise<void>
     {
@@ -66,18 +63,18 @@ export class CreateJobsOverviewService
             jobOverview.cancelled,
             jobOverview.completed,
             jobOverview.error,
-            new JobOverviewCreatedAt(Utils.nowTimestamp()),
-            new JobOverviewUpdatedAt(Utils.nowTimestamp()),
+            new JobOverviewCreatedAt({currentTimestamp: true}),
+            new JobOverviewUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateJobsOverview);
 
         // create AddJobsOverviewContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const jobsOverviewRegistered = this.publisher.mergeObjectContext(new AddJobsOverviewContextEvent(aggregateJobsOverview));
- 
+
         jobsOverviewRegistered.created(); // apply event to model events
         jobsOverviewRegistered.commit(); // commit all events of model
     }

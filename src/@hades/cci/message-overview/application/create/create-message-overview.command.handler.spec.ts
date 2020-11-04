@@ -6,12 +6,12 @@ import { messagesOverview } from '@hades/cci/message-overview/infrastructure/see
 import { CreateMessageOverviewCommand } from './create-message-overview.command';
 import { CreateMessageOverviewService } from './create-message-overview.service';
 
-describe('CreateMessageOverviewCommandHandler', () => 
+describe('CreateMessageOverviewCommandHandler', () =>
 {
     let commandHandler: CreateMessageOverviewCommandHandler;
     let service: CreateMessageOverviewService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateMessageOverviewCommandHandler', () =>
         service         = module.get<CreateMessageOverviewService>(CreateMessageOverviewService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateMessageOverviewCommandHandler should be defined', () => 
+        test('CreateMessageOverviewCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateMessageOverviewService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateMessageOverviewService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateMessageOverviewCommand(
@@ -59,7 +59,6 @@ describe('CreateMessageOverviewCommandHandler', () =>
                     messagesOverview[0].holding,
                     messagesOverview[0].toBeDelivered,
                     messagesOverview[0].waiting,
-                    
                 )
             )).toBe(undefined);
         });

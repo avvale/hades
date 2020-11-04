@@ -5,10 +5,10 @@ import { delay, map } from 'rxjs/operators';
 import { CreatedRoleEvent } from './../events/created-role.event';
 
 @Injectable()
-export class RoleSagas 
-{    
+export class RoleSagas
+{
     /* @Saga()
-    dragonKilled = (events$: Observable<any>): Observable<ICommand> => 
+    dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {
         return events$
             .pipe(

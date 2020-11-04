@@ -10,12 +10,16 @@ export class FindSystemQueryHandler implements IQueryHandler<FindSystemQuery>
     private readonly mapper: SystemMapper = new SystemMapper();
 
     constructor(
-        private readonly findSystemService: FindSystemService
-    ) { }
+        private readonly findSystemService: FindSystemService,
+    ) {}
 
     async execute(query: FindSystemQuery): Promise<SystemResponse>
     {
-        const system = await this.findSystemService.main(query.queryStatement);
+        const system = await this.findSystemService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(system);
     }

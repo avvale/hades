@@ -6,12 +6,16 @@ import { DeleteMessagesOverviewService } from './delete-messages-overview.servic
 export class DeleteMessagesOverviewCommandHandler implements ICommandHandler<DeleteMessagesOverviewCommand>
 {
     constructor(
-        private readonly deleteMessagesOverviewService: DeleteMessagesOverviewService
-    ) { }
+        private readonly deleteMessagesOverviewService: DeleteMessagesOverviewService,
+    ) {}
 
     async execute(command: DeleteMessagesOverviewCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteMessagesOverviewService.main(command.queryStatement);
+        await this.deleteMessagesOverviewService.main(
+            command.queryStatement,
+            command.constraint,
+            command.cQMetadata,
+        );
     }
 }

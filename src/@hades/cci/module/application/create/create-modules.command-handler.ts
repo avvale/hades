@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateModulesCommand } from './create-modules.command';
 import { CreateModulesService } from './create-modules.service';
-import { 
+import {
     ModuleId,
     ModuleTenantId,
     ModuleTenantCode,
@@ -22,23 +22,25 @@ import {
     ModuleParameterGroup,
     ModuleName,
     ModuleParameterName,
-    ModuleParameterValue
-    
+    ModuleParameterValue,
+    ModuleCreatedAt,
+    ModuleUpdatedAt,
+    ModuleDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateModulesCommand)
 export class CreateModulesCommandHandler implements ICommandHandler<CreateModulesCommand>
 {
     constructor(
-        private readonly createModulesService: CreateModulesService
-    ) { }
+        private readonly createModulesService: CreateModulesService,
+    ) {}
 
     async execute(command: CreateModulesCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createModulesService.main(
-            command.modules
-                .map(module => { 
+            command.payload
+                .map(module => {
                     return {
                         id: new ModuleId(module.id),
                         tenantId: new ModuleTenantId(module.tenantId),
@@ -61,7 +63,6 @@ export class CreateModulesCommandHandler implements ICommandHandler<CreateModule
                         name: new ModuleName(module.name),
                         parameterName: new ModuleParameterName(module.parameterName),
                         parameterValue: new ModuleParameterValue(module.parameterValue),
-                        
                     }
                 })
         );

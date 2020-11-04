@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: message-overview
 moduleNames: messages-overview
+aggregateName: CciMessageOverview
 hasOAuth: true
 hasTenant: true
 aggregateProperties:

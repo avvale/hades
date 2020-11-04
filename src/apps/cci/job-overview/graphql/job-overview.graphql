@@ -1,8 +1,6 @@
-
 enum CciJobOverviewExecutionType {
     SUMMARY
     DETAIL
-        
 }
 
 type CciJobOverview
@@ -43,7 +41,6 @@ input CciCreateJobOverviewInput
     cancelled: GraphQLInt
     completed: GraphQLInt
     error: GraphQLInt
-    
 }
 
 input CciUpdateJobOverviewInput
@@ -61,10 +58,9 @@ input CciUpdateJobOverviewInput
     cancelled: GraphQLInt
     completed: GraphQLInt
     error: GraphQLInt
-    
 }
 
-type Query 
+type Query
 {
     cciFindJobOverview(query:QueryStatement constraint:QueryStatement): CciJobOverview
     cciFindJobOverviewById(id:ID constraint:QueryStatement): CciJobOverview

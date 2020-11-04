@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     RoleId,
     RoleTenantId,
     RoleTenantCode,
     RoleName,
     RoleCreatedAt,
     RoleUpdatedAt,
-    RoleDeletedAt
-    
+    RoleDeletedAt,
 } from './../../domain/value-objects';
 import { IRoleRepository } from './../../domain/role.repository';
 import { CciRole } from './../../domain/role.aggregate';
@@ -19,28 +17,29 @@ export class CreateRoleService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IRoleRepository
+        private readonly repository: IRoleRepository,
     ) {}
 
     public async main(
-        id: RoleId,
-        tenantId: RoleTenantId,
-        tenantCode: RoleTenantCode,
-        name: RoleName,
-        
+        payload: {
+            id: RoleId,
+            tenantId: RoleTenantId,
+            tenantCode: RoleTenantCode,
+            name: RoleName,
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const role = CciRole.register(
-            id,
-            tenantId,
-            tenantCode,
-            name,
-            new RoleCreatedAt(Utils.nowTimestamp()),
-            new RoleUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.name,
+            new RoleCreatedAt({currentTimestamp: true}),
+            new RoleUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // create
         await this.repository.create(role);
 
@@ -48,7 +47,7 @@ export class CreateRoleService
         const roleRegister = this.publisher.mergeObjectContext(
             role
         );
-        
+
         roleRegister.created(role); // apply event to model events
         roleRegister.commit(); // commit all events of model
     }

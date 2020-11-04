@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ModuleId,
     ModuleTenantId,
     ModuleTenantCode,
@@ -25,8 +24,7 @@ import {
     ModuleParameterValue,
     ModuleCreatedAt,
     ModuleUpdatedAt,
-    ModuleDeletedAt
-    
+    ModuleDeletedAt,
 } from './../../domain/value-objects';
 import { IModuleRepository } from './../../domain/module.repository';
 import { CciModule } from './../../domain/module.aggregate';
@@ -36,62 +34,63 @@ export class CreateModuleService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IModuleRepository
+        private readonly repository: IModuleRepository,
     ) {}
 
     public async main(
-        id: ModuleId,
-        tenantId: ModuleTenantId,
-        tenantCode: ModuleTenantCode,
-        systemId: ModuleSystemId,
-        systemName: ModuleSystemName,
-        channelHash: ModuleChannelHash,
-        channelParty: ModuleChannelParty,
-        channelComponent: ModuleChannelComponent,
-        channelName: ModuleChannelName,
-        flowHash: ModuleFlowHash,
-        flowParty: ModuleFlowParty,
-        flowReceiverParty: ModuleFlowReceiverParty,
-        flowComponent: ModuleFlowComponent,
-        flowReceiverComponent: ModuleFlowReceiverComponent,
-        flowInterfaceName: ModuleFlowInterfaceName,
-        flowInterfaceNamespace: ModuleFlowInterfaceNamespace,
-        version: ModuleVersion,
-        parameterGroup: ModuleParameterGroup,
-        name: ModuleName,
-        parameterName: ModuleParameterName,
-        parameterValue: ModuleParameterValue,
-        
+        payload: {
+            id: ModuleId,
+            tenantId: ModuleTenantId,
+            tenantCode: ModuleTenantCode,
+            systemId: ModuleSystemId,
+            systemName: ModuleSystemName,
+            channelHash: ModuleChannelHash,
+            channelParty: ModuleChannelParty,
+            channelComponent: ModuleChannelComponent,
+            channelName: ModuleChannelName,
+            flowHash: ModuleFlowHash,
+            flowParty: ModuleFlowParty,
+            flowReceiverParty: ModuleFlowReceiverParty,
+            flowComponent: ModuleFlowComponent,
+            flowReceiverComponent: ModuleFlowReceiverComponent,
+            flowInterfaceName: ModuleFlowInterfaceName,
+            flowInterfaceNamespace: ModuleFlowInterfaceNamespace,
+            version: ModuleVersion,
+            parameterGroup: ModuleParameterGroup,
+            name: ModuleName,
+            parameterName: ModuleParameterName,
+            parameterValue: ModuleParameterValue,
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const module = CciModule.register(
-            id,
-            tenantId,
-            tenantCode,
-            systemId,
-            systemName,
-            channelHash,
-            channelParty,
-            channelComponent,
-            channelName,
-            flowHash,
-            flowParty,
-            flowReceiverParty,
-            flowComponent,
-            flowReceiverComponent,
-            flowInterfaceName,
-            flowInterfaceNamespace,
-            version,
-            parameterGroup,
-            name,
-            parameterName,
-            parameterValue,
-            new ModuleCreatedAt(Utils.nowTimestamp()),
-            new ModuleUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.systemId,
+            payload.systemName,
+            payload.channelHash,
+            payload.channelParty,
+            payload.channelComponent,
+            payload.channelName,
+            payload.flowHash,
+            payload.flowParty,
+            payload.flowReceiverParty,
+            payload.flowComponent,
+            payload.flowReceiverComponent,
+            payload.flowInterfaceName,
+            payload.flowInterfaceNamespace,
+            payload.version,
+            payload.parameterGroup,
+            payload.name,
+            payload.parameterName,
+            payload.parameterValue,
+            new ModuleCreatedAt({currentTimestamp: true}),
+            new ModuleUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // create
         await this.repository.create(module);
 
@@ -99,7 +98,7 @@ export class CreateModuleService
         const moduleRegister = this.publisher.mergeObjectContext(
             module
         );
-        
+
         moduleRegister.created(module); // apply event to model events
         moduleRegister.commit(); // commit all events of model
     }

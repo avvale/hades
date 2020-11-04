@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciModule } from './module.aggregate';
 import { ModuleResponse } from './module.response';
-import { 
+import {
     ModuleId,
     ModuleTenantId,
     ModuleTenantCode,
@@ -26,46 +26,42 @@ import {
     ModuleParameterValue,
     ModuleCreatedAt,
     ModuleUpdatedAt,
-    ModuleDeletedAt
-    
+    ModuleDeletedAt,
 } from './value-objects';
-
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
-
-
 
 export class ModuleMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param module
      */
-    mapModelToAggregate(module: ObjectLiteral): CciModule
+    mapModelToAggregate(module: ObjectLiteral, cQMetadata?: CQMetadata): CciModule
     {
         if (!module) return;
 
-        return this.makeAggregate(module);
+        return this.makeAggregate(module, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param modules 
+     * @param modules
      */
-    mapModelsToAggregates(modules: ObjectLiteral[]): CciModule[]
+    mapModelsToAggregates(modules: ObjectLiteral[], cQMetadata?: CQMetadata): CciModule[]
     {
         if (!Array.isArray(modules)) return;
-        
-        return modules.map(module  => this.makeAggregate(module));
+
+        return modules.map(module  => this.makeAggregate(module, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param module 
+     * @param module
      */
     mapAggregateToResponse(module: CciModule): ModuleResponse
     {
@@ -83,7 +79,7 @@ export class ModuleMapper implements IMapper
         return modules.map(module => this.makeResponse(module));
     }
 
-    private makeAggregate(module: ObjectLiteral): CciModule
+    private makeAggregate(module: ObjectLiteral, cQMetadata?: CQMetadata): CciModule
     {
         return CciModule.register(
             new ModuleId(module.id),
@@ -107,24 +103,18 @@ export class ModuleMapper implements IMapper
             new ModuleName(module.name),
             new ModuleParameterName(module.parameterName),
             new ModuleParameterValue(module.parameterValue),
-            new ModuleCreatedAt(module.createdAt),
-            new ModuleUpdatedAt(module.updatedAt),
-            new ModuleDeletedAt(module.deletedAt),
-            
-            
-            
+            new ModuleCreatedAt(module.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ModuleUpdatedAt(module.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ModuleDeletedAt(module.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(module.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(module.system) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(module: CciModule): ModuleResponse
     {
         if (!module) return;
-        
+
         return new ModuleResponse(
             module.id.value,
             module.tenantId.value,
@@ -150,14 +140,8 @@ export class ModuleMapper implements IMapper
             module.createdAt.value,
             module.updatedAt.value,
             module.deletedAt.value,
-            
-            
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(module.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(module.system) : undefined,
-            
-            
-            
         );
     }
 }

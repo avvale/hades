@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { QueryTypes } from 'sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
-import { ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { CciMessageOverview } from './../../domain/message-overview.aggregate';
 import { MessageOverviewMapper } from './../../domain/message-overview.mapper';
 import { CciMessageOverviewModel } from './sequelize-message-overview.model';
+
+// custom
+import { QueryTypes } from 'sequelize';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -15,16 +17,17 @@ export class SequelizeMessageOverviewRepository extends SequelizeRepository<CciM
 {
     public readonly aggregateName: string = 'CciMessageOverview';
     public readonly mapper: MessageOverviewMapper = new MessageOverviewMapper();
+    public readonly timezoneColumns: string[] = ['executionExecutedAt','executionMonitoringStartAt','executionMonitoringEndAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciMessageOverviewModel)
         public readonly repository: typeof CciMessageOverviewModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
 
-    async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciMessageOverview[]>
+    async getDashboardData(tenantIds: string[], systemIds: string[], cQMetadata?: CQMetadata): Promise<CciMessageOverview[]>
     {
         const queryRaw = `
             SELECT
@@ -82,6 +85,6 @@ export class SequelizeMessageOverviewRepository extends SequelizeRepository<CciM
         );
 
         // map values to create value objects
-        return <CciMessageOverview[]>this.mapper.mapModelsToAggregates(models);
+        return <CciMessageOverview[]>this.mapper.mapModelsToAggregates(models, cQMetadata);
     }
 }

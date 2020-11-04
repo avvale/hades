@@ -1,45 +1,45 @@
 // controllers
-import { CreateSystemController } from './controllers/create-system.controller';
-import { CreateSystemsController } from './controllers/create-systems.controller';
-import { PaginateSystemsController } from './controllers/paginate-systems.controller';
-import { GetSystemsController } from './controllers/get-systems.controller';
-import { FindSystemByIdController } from './controllers/find-system-by-id.controller';
-import { FindSystemController } from './controllers/find-system.controller';
-import { UpdateSystemController } from './controllers/update-system.controller';
-import { DeleteSystemByIdController } from './controllers/delete-system-by-id.controller';
-import { DeleteSystemsController } from './controllers/delete-systems.controller';
+import { CciCreateSystemController } from './controllers/cci-create-system.controller';
+import { CciCreateSystemsController } from './controllers/cci-create-systems.controller';
+import { CciPaginateSystemsController } from './controllers/cci-paginate-systems.controller';
+import { CciGetSystemsController } from './controllers/cci-get-systems.controller';
+import { CciFindSystemByIdController } from './controllers/cci-find-system-by-id.controller';
+import { CciFindSystemController } from './controllers/cci-find-system.controller';
+import { CciUpdateSystemController } from './controllers/cci-update-system.controller';
+import { CciDeleteSystemByIdController } from './controllers/cci-delete-system-by-id.controller';
+import { CciDeleteSystemsController } from './controllers/cci-delete-systems.controller';
 
 // resolvers
-import { CreateSystemResolver } from './resolvers/create-system.resolver';
-import { CreateSystemsResolver } from './resolvers/create-systems.resolver';
-import { PaginateSystemsResolver } from './resolvers/paginate-systems.resolver';
-import { GetSystemsResolver } from './resolvers/get-systems.resolver';
-import { FindSystemResolver } from './resolvers/find-system.resolver';
-import { FindSystemByIdResolver } from './resolvers/find-system-by-id.resolver';
-import { UpdateSystemResolver } from './resolvers/update-system.resolver';
-import { DeleteSystemByIdResolver } from './resolvers/delete-system-by-id.resolver';
-import { DeleteSystemsResolver } from './resolvers/delete-systems.resolver';
+import { CciCreateSystemResolver } from './resolvers/cci-create-system.resolver';
+import { CciCreateSystemsResolver } from './resolvers/cci-create-systems.resolver';
+import { CciPaginateSystemsResolver } from './resolvers/cci-paginate-systems.resolver';
+import { CciGetSystemsResolver } from './resolvers/cci-get-systems.resolver';
+import { CciFindSystemResolver } from './resolvers/cci-find-system.resolver';
+import { CciFindSystemByIdResolver } from './resolvers/cci-find-system-by-id.resolver';
+import { CciUpdateSystemResolver } from './resolvers/cci-update-system.resolver';
+import { CciDeleteSystemByIdResolver } from './resolvers/cci-delete-system-by-id.resolver';
+import { CciDeleteSystemsResolver } from './resolvers/cci-delete-systems.resolver';
 
 export const CciSystemControllers = [
-    CreateSystemController,
-    CreateSystemsController,
-    PaginateSystemsController,
-    GetSystemsController,
-    FindSystemByIdController,
-    FindSystemController,
-    UpdateSystemController,
-    DeleteSystemByIdController,
-    DeleteSystemsController,
+    CciCreateSystemController,
+    CciCreateSystemsController,
+    CciPaginateSystemsController,
+    CciGetSystemsController,
+    CciFindSystemByIdController,
+    CciFindSystemController,
+    CciUpdateSystemController,
+    CciDeleteSystemByIdController,
+    CciDeleteSystemsController,
 ];
 
 export const CciSystemResolvers = [
-    CreateSystemResolver,
-    CreateSystemsResolver,
-    PaginateSystemsResolver,
-    GetSystemsResolver,
-    FindSystemResolver,
-    FindSystemByIdResolver,
-    UpdateSystemResolver,
-    DeleteSystemByIdResolver,
-    DeleteSystemsResolver,
+    CciCreateSystemResolver,
+    CciCreateSystemsResolver,
+    CciPaginateSystemsResolver,
+    CciGetSystemsResolver,
+    CciFindSystemResolver,
+    CciFindSystemByIdResolver,
+    CciUpdateSystemResolver,
+    CciDeleteSystemByIdResolver,
+    CciDeleteSystemsResolver,
 ];

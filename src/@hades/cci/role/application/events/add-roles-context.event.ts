@@ -8,21 +8,21 @@ import { DeletedRolesEvent } from './deleted-roles.event';
 export class AddRolesContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciRole[] = []
+        public readonly aggregateRoots: CciRole[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedRolesEvent(
-                this.aggregateRoots.map(role => 
+                this.aggregateRoots.map(role =>
                     new CreatedRoleEvent(
                         role.id.value,
                         role.tenantId.value,
@@ -42,7 +42,7 @@ export class AddRolesContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedRolesEvent(
-                this.aggregateRoots.map(role => 
+                this.aggregateRoots.map(role =>
                     new DeletedRoleEvent(
                         role.id.value,
                         role.tenantId.value,
@@ -51,10 +51,10 @@ export class AddRolesContextEvent extends AggregateRoot
                         role.createdAt?.value,
                         role.updatedAt?.value,
                         role.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

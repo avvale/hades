@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IMessageDetailRepository } from '@hades/cci/message-detail/domain/message-detail.repository';
-import { 
+import {
     MessageDetailId,
     MessageDetailTenantId,
     MessageDetailTenantCode,
@@ -44,8 +44,7 @@ import {
     MessageDetailNumberDays,
     MessageDetailCreatedAt,
     MessageDetailUpdatedAt,
-    MessageDetailDeletedAt
-    
+    MessageDetailDeletedAt,
 } from '@hades/cci/message-detail/domain/value-objects';
 import { CciMessageDetail } from './../../domain/message-detail.aggregate';
 import { messagesDetail } from './../seeds/message-detail.seed';
@@ -57,14 +56,14 @@ export class MockMessageDetailRepository extends MockRepository<CciMessageDetail
     public readonly aggregateName: string = 'CciMessageDetail';
     public collectionSource: CciMessageDetail[];
     public deletedAtInstance: MessageDetailDeletedAt = new MessageDetailDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -79,7 +78,7 @@ export class MockMessageDetailRepository extends MockRepository<CciMessageDetail
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciMessageDetail.register(
                     new MessageDetailId(itemCollection.id),
                     new MessageDetailTenantId(itemCollection.tenantId),
@@ -123,7 +122,7 @@ export class MockMessageDetailRepository extends MockRepository<CciMessageDetail
                     new MessageDetailCreatedAt(itemCollection.createdAt),
                     new MessageDetailUpdatedAt(itemCollection.updatedAt),
                     new MessageDetailDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

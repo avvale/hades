@@ -10,11 +10,11 @@ export class GetSystemsQueryHandler implements IQueryHandler<GetSystemsQuery>
     private readonly mapper: SystemMapper = new SystemMapper();
 
     constructor(
-        private readonly getSystemsService: GetSystemsService
-    ) { }
+        private readonly getSystemsService: GetSystemsService,
+    ) {}
 
     async execute(query: GetSystemsQuery): Promise<SystemResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getSystemsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getSystemsService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

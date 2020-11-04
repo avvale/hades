@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: role
 moduleNames: roles
+aggregateName: CciRole
 hasOAuth: true
 hasTenant: true
 aggregateProperties:

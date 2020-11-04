@@ -10,11 +10,11 @@ export class GetModulesQueryHandler implements IQueryHandler<GetModulesQuery>
     private readonly mapper: ModuleMapper = new ModuleMapper();
 
     constructor(
-        private readonly getModulesService: GetModulesService
-    ) { }
+        private readonly getModulesService: GetModulesService,
+    ) {}
 
     async execute(query: GetModulesQuery): Promise<ModuleResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getModulesService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getModulesService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

@@ -4,7 +4,7 @@ import { DeletedModuleEvent } from './deleted-module.event';
 @EventsHandler(DeletedModuleEvent)
 export class DeletedModuleEventHandler implements IEventHandler<DeletedModuleEvent>
 {
-    handle(event: DeletedModuleEvent) 
+    handle(event: DeletedModuleEvent)
     {
         // console.log('DeletedModuleEvent: ', event);
     }

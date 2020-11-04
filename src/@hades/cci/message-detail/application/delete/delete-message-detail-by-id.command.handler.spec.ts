@@ -41,7 +41,6 @@ describe('DeleteMessageDetailByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteMessageDetailByIdCommand(
                     messagesDetail[0].id,
-                
                 )
             )).toBe(undefined);
         });

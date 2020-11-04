@@ -8,21 +8,21 @@ import { DeletedSystemsEvent } from './deleted-systems.event';
 export class AddSystemsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciSystem[] = []
+        public readonly aggregateRoots: CciSystem[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedSystemsEvent(
-                this.aggregateRoots.map(system => 
+                this.aggregateRoots.map(system =>
                     new CreatedSystemEvent(
                         system.id.value,
                         system.tenantId.value,
@@ -47,7 +47,7 @@ export class AddSystemsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedSystemsEvent(
-                this.aggregateRoots.map(system => 
+                this.aggregateRoots.map(system =>
                     new DeletedSystemEvent(
                         system.id.value,
                         system.tenantId.value,
@@ -61,10 +61,10 @@ export class AddSystemsContextEvent extends AggregateRoot
                         system.createdAt?.value,
                         system.updatedAt?.value,
                         system.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

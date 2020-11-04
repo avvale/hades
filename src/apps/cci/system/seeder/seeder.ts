@@ -4,7 +4,7 @@ import { CreateSystemsCommand } from '@hades/cci/system/application/create/creat
 import { SeederModule } from './seeder.module';
 import { systems } from '@hades/cci/system/infrastructure/seeds/system.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

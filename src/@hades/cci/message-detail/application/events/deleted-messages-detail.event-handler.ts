@@ -4,7 +4,7 @@ import { DeletedMessagesDetailEvent } from './deleted-messages-detail.event';
 @EventsHandler(DeletedMessagesDetailEvent)
 export class DeletedMessagesDetailEventHandler implements IEventHandler<DeletedMessagesDetailEvent>
 {
-    handle(event: DeletedMessagesDetailEvent) 
+    handle(event: DeletedMessagesDetailEvent)
     {
         // console.log('DeletedMessagesDetailEvent: ', event);
     }

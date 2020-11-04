@@ -49,11 +49,11 @@ input CciUpdateSystemInput
     cancelledAt: GraphQLTimestamp
 }
 
-type Query 
+type Query
 {
-    cciFindSystem(query:QueryStatement): CciSystem
-    cciFindSystemById(id:ID): CciSystem
-    cciGetSystems(query:QueryStatement): [CciSystem]!
+    cciFindSystem(query:QueryStatement constraint:QueryStatement): CciSystem
+    cciFindSystemById(id:ID constraint:QueryStatement): CciSystem
+    cciGetSystems(query:QueryStatement constraint:QueryStatement): [CciSystem]!
     cciPaginateSystems(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -61,7 +61,7 @@ type Mutation
 {
     cciCreateSystem(payload: CciCreateSystemInput!): CciSystem
     cciCreateSystems(payload: [CciCreateSystemInput]!): Boolean!
-    cciUpdateSystem(payload: CciUpdateSystemInput!): CciSystem
-    cciDeleteSystemById(id: ID!): CciSystem
-    cciDeleteSystems(query:QueryStatement): [CciSystem]!
+    cciUpdateSystem(payload: CciUpdateSystemInput! constraint:QueryStatement): CciSystem
+    cciDeleteSystemById(id: ID! constraint:QueryStatement): CciSystem
+    cciDeleteSystems(query:QueryStatement constraint:QueryStatement): [CciSystem]!
 }

@@ -4,7 +4,7 @@ import { DeletedJobOverviewEvent } from './deleted-job-overview.event';
 @EventsHandler(DeletedJobOverviewEvent)
 export class DeletedJobOverviewEventHandler implements IEventHandler<DeletedJobOverviewEvent>
 {
-    handle(event: DeletedJobOverviewEvent) 
+    handle(event: DeletedJobOverviewEvent)
     {
         // console.log('DeletedJobOverviewEvent: ', event);
     }

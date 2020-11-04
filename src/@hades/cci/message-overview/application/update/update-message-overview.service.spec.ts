@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { messagesOverview } from '@hades/cci/message-overview/infrastructure/seeds/message-overview.seed';
 import { UpdateMessageOverviewService } from './update-message-overview.service';
-import { 
+import {
     MessageOverviewId,
     MessageOverviewTenantId,
     MessageOverviewTenantCode,
@@ -26,19 +26,18 @@ import {
     MessageOverviewWaiting,
     MessageOverviewCreatedAt,
     MessageOverviewUpdatedAt,
-    MessageOverviewDeletedAt
-    
+    MessageOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { MockMessageOverviewRepository } from './../../infrastructure/mock/mock-message-overview.repository';
 
-describe('UpdateMessageOverviewService', () => 
+describe('UpdateMessageOverviewService', () =>
 {
     let service: UpdateMessageOverviewService;
     let repository: IMessageOverviewRepository;
     let mockRepository: MockMessageOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -47,7 +46,7 @@ describe('UpdateMessageOverviewService', () =>
                 EventPublisher,
                 UpdateMessageOverviewService,
                 MockMessageOverviewRepository,
-                { 
+                {
                     provide: IMessageOverviewRepository,
                     useValue: {
                         update: (item) => {}
@@ -61,7 +60,7 @@ describe('UpdateMessageOverviewService', () =>
         mockRepository  = module.get(MockMessageOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateMessageOverviewService should be defined', () => 
         {

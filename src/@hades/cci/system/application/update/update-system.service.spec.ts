@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { systems } from '@hades/cci/system/infrastructure/seeds/system.seed';
 import { UpdateSystemService } from './update-system.service';
-import { 
+import {
     SystemId,
     SystemTenantId,
     SystemTenantCode,
@@ -16,19 +16,18 @@ import {
     SystemCancelledAt,
     SystemCreatedAt,
     SystemUpdatedAt,
-    SystemDeletedAt
-    
+    SystemDeletedAt,
 } from './../../domain/value-objects';
 import { ISystemRepository } from './../../domain/system.repository';
 import { MockSystemRepository } from './../../infrastructure/mock/mock-system.repository';
 
-describe('UpdateSystemService', () => 
+describe('UpdateSystemService', () =>
 {
     let service: UpdateSystemService;
     let repository: ISystemRepository;
     let mockRepository: MockSystemRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -37,7 +36,7 @@ describe('UpdateSystemService', () =>
                 EventPublisher,
                 UpdateSystemService,
                 MockSystemRepository,
-                { 
+                {
                     provide: ISystemRepository,
                     useValue: {
                         update: (item) => {}
@@ -51,7 +50,7 @@ describe('UpdateSystemService', () =>
         mockRepository  = module.get(MockSystemRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateSystemService should be defined', () => 
         {

@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateMessagesOverviewCommand
 {
     constructor(
-        public readonly messagesOverview: {
+        public readonly payload: {
             id: string,
             tenantId: string,
             tenantCode: string,
@@ -21,7 +23,7 @@ export class CreateMessagesOverviewCommand
             holding?: number,
             toBeDelivered?: number,
             waiting?: number,
-            
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

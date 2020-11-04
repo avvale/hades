@@ -8,21 +8,21 @@ import { DeletedJobsOverviewEvent } from './deleted-jobs-overview.event';
 export class AddJobsOverviewContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciJobOverview[] = []
+        public readonly aggregateRoots: CciJobOverview[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedJobsOverviewEvent(
-                this.aggregateRoots.map(jobOverview => 
+                this.aggregateRoots.map(jobOverview =>
                     new CreatedJobOverviewEvent(
                         jobOverview.id.value,
                         jobOverview.tenantId.value,
@@ -51,7 +51,7 @@ export class AddJobsOverviewContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedJobsOverviewEvent(
-                this.aggregateRoots.map(jobOverview => 
+                this.aggregateRoots.map(jobOverview =>
                     new DeletedJobOverviewEvent(
                         jobOverview.id.value,
                         jobOverview.tenantId.value,
@@ -69,10 +69,10 @@ export class AddJobsOverviewContextEvent extends AggregateRoot
                         jobOverview.createdAt?.value,
                         jobOverview.updatedAt?.value,
                         jobOverview.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

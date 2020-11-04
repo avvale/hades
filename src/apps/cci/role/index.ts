@@ -1,45 +1,45 @@
 // controllers
-import { CreateRoleController } from './controllers/create-role.controller';
-import { CreateRolesController } from './controllers/create-roles.controller';
-import { PaginateRolesController } from './controllers/paginate-roles.controller';
-import { GetRolesController } from './controllers/get-roles.controller';
-import { FindRoleByIdController } from './controllers/find-role-by-id.controller';
-import { FindRoleController } from './controllers/find-role.controller';
-import { UpdateRoleController } from './controllers/update-role.controller';
-import { DeleteRoleByIdController } from './controllers/delete-role-by-id.controller';
-import { DeleteRolesController } from './controllers/delete-roles.controller';
+import { CciCreateRoleController } from './controllers/cci-create-role.controller';
+import { CciCreateRolesController } from './controllers/cci-create-roles.controller';
+import { CciPaginateRolesController } from './controllers/cci-paginate-roles.controller';
+import { CciGetRolesController } from './controllers/cci-get-roles.controller';
+import { CciFindRoleByIdController } from './controllers/cci-find-role-by-id.controller';
+import { CciFindRoleController } from './controllers/cci-find-role.controller';
+import { CciUpdateRoleController } from './controllers/cci-update-role.controller';
+import { CciDeleteRoleByIdController } from './controllers/cci-delete-role-by-id.controller';
+import { CciDeleteRolesController } from './controllers/cci-delete-roles.controller';
 
 // resolvers
-import { CreateRoleResolver } from './resolvers/create-role.resolver';
-import { CreateRolesResolver } from './resolvers/create-roles.resolver';
-import { PaginateRolesResolver } from './resolvers/paginate-roles.resolver';
-import { GetRolesResolver } from './resolvers/get-roles.resolver';
-import { FindRoleResolver } from './resolvers/find-role.resolver';
-import { FindRoleByIdResolver } from './resolvers/find-role-by-id.resolver';
-import { UpdateRoleResolver } from './resolvers/update-role.resolver';
-import { DeleteRoleByIdResolver } from './resolvers/delete-role-by-id.resolver';
-import { DeleteRolesResolver } from './resolvers/delete-roles.resolver';
+import { CciCreateRoleResolver } from './resolvers/cci-create-role.resolver';
+import { CciCreateRolesResolver } from './resolvers/cci-create-roles.resolver';
+import { CciPaginateRolesResolver } from './resolvers/cci-paginate-roles.resolver';
+import { CciGetRolesResolver } from './resolvers/cci-get-roles.resolver';
+import { CciFindRoleResolver } from './resolvers/cci-find-role.resolver';
+import { CciFindRoleByIdResolver } from './resolvers/cci-find-role-by-id.resolver';
+import { CciUpdateRoleResolver } from './resolvers/cci-update-role.resolver';
+import { CciDeleteRoleByIdResolver } from './resolvers/cci-delete-role-by-id.resolver';
+import { CciDeleteRolesResolver } from './resolvers/cci-delete-roles.resolver';
 
 export const CciRoleControllers = [
-    CreateRoleController,
-    CreateRolesController,
-    PaginateRolesController,
-    GetRolesController,
-    FindRoleByIdController,
-    FindRoleController,
-    UpdateRoleController,
-    DeleteRoleByIdController,
-    DeleteRolesController,
+    CciCreateRoleController,
+    CciCreateRolesController,
+    CciPaginateRolesController,
+    CciGetRolesController,
+    CciFindRoleByIdController,
+    CciFindRoleController,
+    CciUpdateRoleController,
+    CciDeleteRoleByIdController,
+    CciDeleteRolesController,
 ];
 
 export const CciRoleResolvers = [
-    CreateRoleResolver,
-    CreateRolesResolver,
-    PaginateRolesResolver,
-    GetRolesResolver,
-    FindRoleResolver,
-    FindRoleByIdResolver,
-    UpdateRoleResolver,
-    DeleteRoleByIdResolver,
-    DeleteRolesResolver,
+    CciCreateRoleResolver,
+    CciCreateRolesResolver,
+    CciPaginateRolesResolver,
+    CciGetRolesResolver,
+    CciFindRoleResolver,
+    CciFindRoleByIdResolver,
+    CciUpdateRoleResolver,
+    CciDeleteRoleByIdResolver,
+    CciDeleteRolesResolver,
 ];

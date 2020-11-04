@@ -11,12 +11,16 @@ export class FindModuleByIdQueryHandler implements IQueryHandler<FindModuleByIdQ
     private readonly mapper: ModuleMapper = new ModuleMapper();
 
     constructor(
-        private readonly findModuleByIdService: FindModuleByIdService
-    ) { }
+        private readonly findModuleByIdService: FindModuleByIdService,
+    ) {}
 
     async execute(query: FindModuleByIdQuery): Promise<ModuleResponse>
     {
-        const module = await this.findModuleByIdService.main(new ModuleId(query.id));
+        const module = await this.findModuleByIdService.main(
+            new ModuleId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(module);
     }

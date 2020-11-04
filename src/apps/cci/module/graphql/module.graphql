@@ -1,10 +1,11 @@
 
-
 type CciModule
 {
     id: ID!
+    tenantId: ID!
     tenant: IamTenant!
     tenantCode: GraphQLString!
+    systemId: ID!
     system: CciSystem!
     systemName: GraphQLString!
     channelHash: GraphQLString!
@@ -26,7 +27,6 @@ type CciModule
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input CciCreateModuleInput
@@ -52,7 +52,6 @@ input CciCreateModuleInput
     name: GraphQLString
     parameterName: GraphQLString
     parameterValue: GraphQLString
-    
 }
 
 input CciUpdateModuleInput
@@ -78,10 +77,9 @@ input CciUpdateModuleInput
     name: GraphQLString
     parameterName: GraphQLString
     parameterValue: GraphQLString
-    
 }
 
-type Query 
+type Query
 {
     cciFindModule(query:QueryStatement constraint:QueryStatement): CciModule
     cciFindModuleById(id:ID constraint:QueryStatement): CciModule

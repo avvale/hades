@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+import {
     MessageDetailId,
     MessageDetailTenantId,
     MessageDetailTenantCode,
@@ -43,8 +44,7 @@ import {
     MessageDetailNumberDays,
     MessageDetailCreatedAt,
     MessageDetailUpdatedAt,
-    MessageDetailDeletedAt
-    
+    MessageDetailDeletedAt,
 } from './../../domain/value-objects';
 import { IMessageDetailRepository } from './../../domain/message-detail.repository';
 import { CciMessageDetail } from './../../domain/message-detail.aggregate';
@@ -54,106 +54,109 @@ export class UpdateMessageDetailService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IMessageDetailRepository
+        private readonly repository: IMessageDetailRepository,
     ) {}
 
     public async main(
-        id: MessageDetailId,
-        tenantId?: MessageDetailTenantId,
-        tenantCode?: MessageDetailTenantCode,
-        systemId?: MessageDetailSystemId,
-        systemName?: MessageDetailSystemName,
-        scenario?: MessageDetailScenario,
-        executionId?: MessageDetailExecutionId,
-        executionType?: MessageDetailExecutionType,
-        executionExecutedAt?: MessageDetailExecutionExecutedAt,
-        executionMonitoringStartAt?: MessageDetailExecutionMonitoringStartAt,
-        executionMonitoringEndAt?: MessageDetailExecutionMonitoringEndAt,
-        flowHash?: MessageDetailFlowHash,
-        flowParty?: MessageDetailFlowParty,
-        flowReceiverParty?: MessageDetailFlowReceiverParty,
-        flowComponent?: MessageDetailFlowComponent,
-        flowReceiverComponent?: MessageDetailFlowReceiverComponent,
-        flowInterfaceName?: MessageDetailFlowInterfaceName,
-        flowInterfaceNamespace?: MessageDetailFlowInterfaceNamespace,
-        status?: MessageDetailStatus,
-        refMessageId?: MessageDetailRefMessageId,
-        detail?: MessageDetailDetail,
-        example?: MessageDetailExample,
-        startTimeAt?: MessageDetailStartTimeAt,
-        direction?: MessageDetailDirection,
-        errorCategory?: MessageDetailErrorCategory,
-        errorCode?: MessageDetailErrorCode,
-        errorLabel?: MessageDetailErrorLabel,
-        node?: MessageDetailNode,
-        protocol?: MessageDetailProtocol,
-        qualityOfService?: MessageDetailQualityOfService,
-        receiverParty?: MessageDetailReceiverParty,
-        receiverComponent?: MessageDetailReceiverComponent,
-        receiverInterface?: MessageDetailReceiverInterface,
-        receiverInterfaceNamespace?: MessageDetailReceiverInterfaceNamespace,
-        retries?: MessageDetailRetries,
-        size?: MessageDetailSize,
-        timesFailed?: MessageDetailTimesFailed,
-        numberMax?: MessageDetailNumberMax,
-        numberDays?: MessageDetailNumberDays,
-        
+        payload: {
+            id: MessageDetailId,
+            tenantId?: MessageDetailTenantId,
+            tenantCode?: MessageDetailTenantCode,
+            systemId?: MessageDetailSystemId,
+            systemName?: MessageDetailSystemName,
+            scenario?: MessageDetailScenario,
+            executionId?: MessageDetailExecutionId,
+            executionType?: MessageDetailExecutionType,
+            executionExecutedAt?: MessageDetailExecutionExecutedAt,
+            executionMonitoringStartAt?: MessageDetailExecutionMonitoringStartAt,
+            executionMonitoringEndAt?: MessageDetailExecutionMonitoringEndAt,
+            flowHash?: MessageDetailFlowHash,
+            flowParty?: MessageDetailFlowParty,
+            flowReceiverParty?: MessageDetailFlowReceiverParty,
+            flowComponent?: MessageDetailFlowComponent,
+            flowReceiverComponent?: MessageDetailFlowReceiverComponent,
+            flowInterfaceName?: MessageDetailFlowInterfaceName,
+            flowInterfaceNamespace?: MessageDetailFlowInterfaceNamespace,
+            status?: MessageDetailStatus,
+            refMessageId?: MessageDetailRefMessageId,
+            detail?: MessageDetailDetail,
+            example?: MessageDetailExample,
+            startTimeAt?: MessageDetailStartTimeAt,
+            direction?: MessageDetailDirection,
+            errorCategory?: MessageDetailErrorCategory,
+            errorCode?: MessageDetailErrorCode,
+            errorLabel?: MessageDetailErrorLabel,
+            node?: MessageDetailNode,
+            protocol?: MessageDetailProtocol,
+            qualityOfService?: MessageDetailQualityOfService,
+            receiverParty?: MessageDetailReceiverParty,
+            receiverComponent?: MessageDetailReceiverComponent,
+            receiverInterface?: MessageDetailReceiverInterface,
+            receiverInterfaceNamespace?: MessageDetailReceiverInterfaceNamespace,
+            retries?: MessageDetailRetries,
+            size?: MessageDetailSize,
+            timesFailed?: MessageDetailTimesFailed,
+            numberMax?: MessageDetailNumberMax,
+            numberDays?: MessageDetailNumberDays,
+        },
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
     ): Promise<void>
-    {        
+    {
         // create aggregate with factory pattern
         const messageDetail = CciMessageDetail.register(
-            id,
-            tenantId,
-            tenantCode,
-            systemId,
-            systemName,
-            scenario,
-            executionId,
-            executionType,
-            executionExecutedAt,
-            executionMonitoringStartAt,
-            executionMonitoringEndAt,
-            flowHash,
-            flowParty,
-            flowReceiverParty,
-            flowComponent,
-            flowReceiverComponent,
-            flowInterfaceName,
-            flowInterfaceNamespace,
-            status,
-            refMessageId,
-            detail,
-            example,
-            startTimeAt,
-            direction,
-            errorCategory,
-            errorCode,
-            errorLabel,
-            node,
-            protocol,
-            qualityOfService,
-            receiverParty,
-            receiverComponent,
-            receiverInterface,
-            receiverInterfaceNamespace,
-            retries,
-            size,
-            timesFailed,
-            numberMax,
-            numberDays,
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.systemId,
+            payload.systemName,
+            payload.scenario,
+            payload.executionId,
+            payload.executionType,
+            payload.executionExecutedAt,
+            payload.executionMonitoringStartAt,
+            payload.executionMonitoringEndAt,
+            payload.flowHash,
+            payload.flowParty,
+            payload.flowReceiverParty,
+            payload.flowComponent,
+            payload.flowReceiverComponent,
+            payload.flowInterfaceName,
+            payload.flowInterfaceNamespace,
+            payload.status,
+            payload.refMessageId,
+            payload.detail,
+            payload.example,
+            payload.startTimeAt,
+            payload.direction,
+            payload.errorCategory,
+            payload.errorCode,
+            payload.errorLabel,
+            payload.node,
+            payload.protocol,
+            payload.qualityOfService,
+            payload.receiverParty,
+            payload.receiverComponent,
+            payload.receiverInterface,
+            payload.receiverInterfaceNamespace,
+            payload.retries,
+            payload.size,
+            payload.timesFailed,
+            payload.numberMax,
+            payload.numberDays,
             null,
-            new MessageDetailUpdatedAt(Utils.nowTimestamp()),
+            new MessageDetailUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // update
-        await this.repository.update(messageDetail);        
-            
+        await this.repository.update(messageDetail, constraint, cQMetadata);
+
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const messageDetailRegister = this.publisher.mergeObjectContext(
             messageDetail
         );
-        
+
         messageDetailRegister.updated(messageDetail); // apply event to model events
         messageDetailRegister.commit(); // commit all events of model
     }

@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: message-detail
 moduleNames: messages-detail
+aggregateName: CciMessageDetail
 hasOAuth: true
 hasTenant: true
 aggregateProperties:

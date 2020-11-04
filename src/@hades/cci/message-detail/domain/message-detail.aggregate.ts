@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     MessageDetailId,
     MessageDetailTenantId,
     MessageDetailTenantCode,
@@ -41,8 +41,7 @@ import {
     MessageDetailNumberDays,
     MessageDetailCreatedAt,
     MessageDetailUpdatedAt,
-    MessageDetailDeletedAt
-    
+    MessageDetailDeletedAt,
 } from './value-objects';
 import { CreatedMessageDetailEvent } from './../application/events/created-message-detail.event';
 import { UpdatedMessageDetailEvent } from './../application/events/updated-message-detail.event';
@@ -111,7 +110,7 @@ export class CciMessageDetail extends AggregateRoot
     constructor(id?: MessageDetailId, tenantId?: MessageDetailTenantId, tenantCode?: MessageDetailTenantCode, systemId?: MessageDetailSystemId, systemName?: MessageDetailSystemName, scenario?: MessageDetailScenario, executionId?: MessageDetailExecutionId, executionType?: MessageDetailExecutionType, executionExecutedAt?: MessageDetailExecutionExecutedAt, executionMonitoringStartAt?: MessageDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: MessageDetailExecutionMonitoringEndAt, flowHash?: MessageDetailFlowHash, flowParty?: MessageDetailFlowParty, flowReceiverParty?: MessageDetailFlowReceiverParty, flowComponent?: MessageDetailFlowComponent, flowReceiverComponent?: MessageDetailFlowReceiverComponent, flowInterfaceName?: MessageDetailFlowInterfaceName, flowInterfaceNamespace?: MessageDetailFlowInterfaceNamespace, status?: MessageDetailStatus, refMessageId?: MessageDetailRefMessageId, detail?: MessageDetailDetail, example?: MessageDetailExample, startTimeAt?: MessageDetailStartTimeAt, direction?: MessageDetailDirection, errorCategory?: MessageDetailErrorCategory, errorCode?: MessageDetailErrorCode, errorLabel?: MessageDetailErrorLabel, node?: MessageDetailNode, protocol?: MessageDetailProtocol, qualityOfService?: MessageDetailQualityOfService, receiverParty?: MessageDetailReceiverParty, receiverComponent?: MessageDetailReceiverComponent, receiverInterface?: MessageDetailReceiverInterface, receiverInterfaceNamespace?: MessageDetailReceiverInterfaceNamespace, retries?: MessageDetailRetries, size?: MessageDetailSize, timesFailed?: MessageDetailTimesFailed, numberMax?: MessageDetailNumberMax, numberDays?: MessageDetailNumberDays, createdAt?: MessageDetailCreatedAt, updatedAt?: MessageDetailUpdatedAt, deletedAt?: MessageDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;

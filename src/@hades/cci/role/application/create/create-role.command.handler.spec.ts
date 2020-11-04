@@ -6,12 +6,12 @@ import { roles } from '@hades/cci/role/infrastructure/seeds/role.seed';
 import { CreateRoleCommand } from './create-role.command';
 import { CreateRoleService } from './create-role.service';
 
-describe('CreateRoleCommandHandler', () => 
+describe('CreateRoleCommandHandler', () =>
 {
     let commandHandler: CreateRoleCommandHandler;
     let service: CreateRoleService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateRoleCommandHandler', () =>
         service         = module.get<CreateRoleService>(CreateRoleService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateRoleCommandHandler should be defined', () => 
+        test('CreateRoleCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateRoleService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateRoleService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateRoleCommand(
@@ -44,7 +44,6 @@ describe('CreateRoleCommandHandler', () =>
                     roles[0].tenantId,
                     roles[0].tenantCode,
                     roles[0].name,
-                    
                 )
             )).toBe(undefined);
         });

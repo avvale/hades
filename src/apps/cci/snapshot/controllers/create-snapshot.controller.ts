@@ -1,5 +1,6 @@
 import { Controller, Post, Body, BadRequestException, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 import * as _ from 'lodash';
 
 // authorization
@@ -41,7 +42,7 @@ export class CreateSnapshotController
     @Post()
     @ApiOperation({ summary: 'Create snapshot' })
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CreateSnapshotDto })
-    async main(@Body() payload: CreateSnapshotDto)
+    async main(@Body() payload: CreateSnapshotDto, @Timezone() timezone?: string)
     {
         // guard clause
         if (!Array.isArray(payload.messagesDetail)) throw new BadRequestException(`The property messagesDetail does not exist or is not an array`);
@@ -84,25 +85,28 @@ export class CreateSnapshotController
 
         const messageOverviewId = Utils.uuid();
         await this.commandBus.dispatch(new CreateMessageOverviewCommand(
-            messageOverviewId,
-            tenant.id,
-            tenant.code,
-            system.id,
-            system.name,
-            executionId,
-            payload.execution.type,
-            payload.execution.executedAt,
-            payload.execution.monitoringStartAt,
-            payload.execution.monitoringEndAt,
-            payload.messageOverview.numberMax,
-            payload.messageOverview.numberDays,
-            payload.messageOverview.success,
-            payload.messageOverview.cancelled,
-            payload.messageOverview.delivering,
-            payload.messageOverview.error,
-            payload.messageOverview.holding,
-            payload.messageOverview.toBeDelivered,
-            payload.messageOverview.waiting
+            {
+                id: messageOverviewId,
+                tenantId: tenant.id,
+                tenantCode: tenant.code,
+                systemId: system.id,
+                systemName: system.name,
+                executionId: executionId,
+                executionType: payload.execution.type,
+                executionExecutedAt: payload.execution.executedAt,
+                executionMonitoringStartAt: payload.execution.monitoringStartAt,
+                executionMonitoringEndAt: payload.execution.monitoringEndAt,
+                numberMax: payload.messageOverview.numberMax,
+                numberDays: payload.messageOverview.numberDays,
+                success: payload.messageOverview.success,
+                cancelled: payload.messageOverview.cancelled,
+                delivering: payload.messageOverview.delivering,
+                error: payload.messageOverview.error,
+                holding: payload.messageOverview.holding,
+                toBeDelivered: payload.messageOverview.toBeDelivered,
+                waiting: payload.messageOverview.waiting
+            },
+            { timezone }
         ));
 
         const channelOverviewId = Utils.uuid();

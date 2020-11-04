@@ -14,7 +14,7 @@ describe('DeleteRoleByIdService', () =>
     let repository: IRoleRepository;
     let mockRepository: MockRoleRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteRoleByIdService', () =>
                 EventPublisher,
                 DeleteRoleByIdService,
                 MockRoleRepository,
-                { 
+                {
                     provide: IRoleRepository,
                     useValue: {
                         deleteById: (id) => {},

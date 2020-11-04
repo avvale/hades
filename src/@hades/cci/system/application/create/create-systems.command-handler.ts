@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateSystemsCommand } from './create-systems.command';
 import { CreateSystemsService } from './create-systems.service';
-import { 
+import {
     SystemId,
     SystemTenantId,
     SystemTenantCode,
@@ -10,23 +10,25 @@ import {
     SystemEnvironment,
     SystemTechnology,
     SystemIsActive,
-    SystemCancelledAt
-    
+    SystemCancelledAt,
+    SystemCreatedAt,
+    SystemUpdatedAt,
+    SystemDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateSystemsCommand)
 export class CreateSystemsCommandHandler implements ICommandHandler<CreateSystemsCommand>
 {
     constructor(
-        private readonly createSystemsService: CreateSystemsService
-    ) { }
+        private readonly createSystemsService: CreateSystemsService,
+    ) {}
 
     async execute(command: CreateSystemsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createSystemsService.main(
-            command.systems
-                .map(system => { 
+            command.payload
+                .map(system => {
                     return {
                         id: new SystemId(system.id),
                         tenantId: new SystemTenantId(system.tenantId),
@@ -36,8 +38,7 @@ export class CreateSystemsCommandHandler implements ICommandHandler<CreateSystem
                         environment: new SystemEnvironment(system.environment),
                         technology: new SystemTechnology(system.technology),
                         isActive: new SystemIsActive(system.isActive),
-                        cancelledAt: new SystemCancelledAt(system.cancelledAt),
-                        
+                        cancelledAt: new SystemCancelledAt(system.cancelledAt, {}, {removeTimezone: command.cQMetadata.timezone}),
                     }
                 })
         );

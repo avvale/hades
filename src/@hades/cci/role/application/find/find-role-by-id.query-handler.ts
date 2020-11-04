@@ -11,12 +11,16 @@ export class FindRoleByIdQueryHandler implements IQueryHandler<FindRoleByIdQuery
     private readonly mapper: RoleMapper = new RoleMapper();
 
     constructor(
-        private readonly findRoleByIdService: FindRoleByIdService
-    ) { }
+        private readonly findRoleByIdService: FindRoleByIdService,
+    ) {}
 
     async execute(query: FindRoleByIdQuery): Promise<RoleResponse>
     {
-        const role = await this.findRoleByIdService.main(new RoleId(query.id));
+        const role = await this.findRoleByIdService.main(
+            new RoleId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(role);
     }

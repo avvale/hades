@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { jobsOverview } from '@hades/cci/job-overview/infrastructure/seeds/job-overview.seed';
 import { CreateJobOverviewService } from './create-job-overview.service';
-import { 
+import {
     JobOverviewId,
     JobOverviewTenantId,
     JobOverviewTenantCode,
@@ -17,19 +17,22 @@ import {
     JobOverviewExecutionMonitoringEndAt,
     JobOverviewCancelled,
     JobOverviewCompleted,
-    JobOverviewError
-    
+    JobOverviewError,
+    JobOverviewCreatedAt,
+    JobOverviewUpdatedAt,
+    JobOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { MockJobOverviewRepository } from './../../infrastructure/mock/mock-job-overview.repository';
 
-describe('CreateJobOverviewService', () => 
+describe('CreateJobOverviewService', () =>
+
 {
     let service: CreateJobOverviewService;
     let repository: IJobOverviewRepository;
     let mockRepository: MockJobOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -38,7 +41,7 @@ describe('CreateJobOverviewService', () =>
                 EventPublisher,
                 CreateJobOverviewService,
                 MockJobOverviewRepository,
-                { 
+                {
                     provide: IJobOverviewRepository,
                     useValue: {
                         create: (item) => {}
@@ -52,14 +55,14 @@ describe('CreateJobOverviewService', () =>
         mockRepository  = module.get(MockJobOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateJobOverviewService should be defined', () => 
+        test('CreateJobOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a jobOverview and emit event', async () => 
+        test('should create a jobOverview and emit event', async () =>
         {
             expect(await service.main(
                 new JobOverviewId(jobsOverview[0].id),

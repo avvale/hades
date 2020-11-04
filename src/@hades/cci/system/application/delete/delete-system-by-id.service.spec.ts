@@ -14,7 +14,7 @@ describe('DeleteSystemByIdService', () =>
     let repository: ISystemRepository;
     let mockRepository: MockSystemRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteSystemByIdService', () =>
                 EventPublisher,
                 DeleteSystemByIdService,
                 MockSystemRepository,
-                { 
+                {
                     provide: ISystemRepository,
                     useValue: {
                         deleteById: (id) => {},

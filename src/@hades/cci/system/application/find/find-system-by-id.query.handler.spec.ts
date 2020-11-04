@@ -16,7 +16,7 @@ describe('FindSystemByIdQueryHandler', () =>
     let repository: MockSystemRepository;
     let mapper: SystemMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindSystemByIdQueryHandler', () =>
         mapper          = new SystemMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindSystemByIdQueryHandler should be defined', () => 
+        test('FindSystemByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

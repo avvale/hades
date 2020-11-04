@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateJobOverviewCommand } from './create-job-overview.command';
 import { CreateJobOverviewService } from './create-job-overview.service';
-import { 
+import {
     JobOverviewId,
     JobOverviewTenantId,
     JobOverviewTenantCode,
@@ -14,34 +14,38 @@ import {
     JobOverviewExecutionMonitoringEndAt,
     JobOverviewCancelled,
     JobOverviewCompleted,
-    JobOverviewError
-    
+    JobOverviewError,
+    JobOverviewCreatedAt,
+    JobOverviewUpdatedAt,
+    JobOverviewDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateJobOverviewCommand)
 export class CreateJobOverviewCommandHandler implements ICommandHandler<CreateJobOverviewCommand>
 {
     constructor(
-        private readonly createJobOverviewService: CreateJobOverviewService
-    ) { }
+        private readonly createJobOverviewService: CreateJobOverviewService,
+    ) {}
 
     async execute(command: CreateJobOverviewCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createJobOverviewService.main(
-            new JobOverviewId(command.id),
-            new JobOverviewTenantId(command.tenantId),
-            new JobOverviewTenantCode(command.tenantCode),
-            new JobOverviewSystemId(command.systemId),
-            new JobOverviewSystemName(command.systemName),
-            new JobOverviewExecutionId(command.executionId),
-            new JobOverviewExecutionType(command.executionType),
-            new JobOverviewExecutionExecutedAt(command.executionExecutedAt),
-            new JobOverviewExecutionMonitoringStartAt(command.executionMonitoringStartAt),
-            new JobOverviewExecutionMonitoringEndAt(command.executionMonitoringEndAt),
-            new JobOverviewCancelled(command.cancelled),
-            new JobOverviewCompleted(command.completed),
-            new JobOverviewError(command.error),
+            {
+                id: new JobOverviewId(command.payload.id),
+                tenantId: new JobOverviewTenantId(command.payload.tenantId),
+                tenantCode: new JobOverviewTenantCode(command.payload.tenantCode),
+                systemId: new JobOverviewSystemId(command.payload.systemId),
+                systemName: new JobOverviewSystemName(command.payload.systemName),
+                executionId: new JobOverviewExecutionId(command.payload.executionId),
+                executionType: new JobOverviewExecutionType(command.payload.executionType),
+                executionExecutedAt: new JobOverviewExecutionExecutedAt(command.payload.executionExecutedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                executionMonitoringStartAt: new JobOverviewExecutionMonitoringStartAt(command.payload.executionMonitoringStartAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                executionMonitoringEndAt: new JobOverviewExecutionMonitoringEndAt(command.payload.executionMonitoringEndAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                cancelled: new JobOverviewCancelled(command.payload.cancelled),
+                completed: new JobOverviewCompleted(command.payload.completed),
+                error: new JobOverviewError(command.payload.error),
+            }
         );
     }
 }

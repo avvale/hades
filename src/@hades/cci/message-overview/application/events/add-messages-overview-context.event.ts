@@ -8,21 +8,21 @@ import { DeletedMessagesOverviewEvent } from './deleted-messages-overview.event'
 export class AddMessagesOverviewContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciMessageOverview[] = []
+        public readonly aggregateRoots: CciMessageOverview[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedMessagesOverviewEvent(
-                this.aggregateRoots.map(messageOverview => 
+                this.aggregateRoots.map(messageOverview =>
                     new CreatedMessageOverviewEvent(
                         messageOverview.id.value,
                         messageOverview.tenantId.value,
@@ -57,7 +57,7 @@ export class AddMessagesOverviewContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedMessagesOverviewEvent(
-                this.aggregateRoots.map(messageOverview => 
+                this.aggregateRoots.map(messageOverview =>
                     new DeletedMessageOverviewEvent(
                         messageOverview.id.value,
                         messageOverview.tenantId.value,
@@ -81,10 +81,10 @@ export class AddMessagesOverviewContextEvent extends AggregateRoot
                         messageOverview.createdAt?.value,
                         messageOverview.updatedAt?.value,
                         messageOverview.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

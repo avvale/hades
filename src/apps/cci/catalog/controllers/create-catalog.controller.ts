@@ -1,5 +1,6 @@
 import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation, ApiBody } from '@nestjs/swagger';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
 
@@ -17,7 +18,7 @@ import { CreateCatalogDto } from './../dto/create-catalog.dto';
 
 @ApiTags('[cci] catalog')
 @Controller('cci/catalog')
-export class CreateCatalogController 
+export class CreateCatalogController
 {
     constructor(
         private readonly commandBus: ICommandBus,
@@ -28,13 +29,13 @@ export class CreateCatalogController
     @ApiOperation({ summary: 'Create or update catalog, flows, channels and modules' })
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CreateCatalogDto })
     @ApiBody({ type: CreateCatalogDto })
-    async main(@Body() payload: CreateCatalogDto)
+    async main(@Body() payload: CreateCatalogDto, @Timezone() timezone?: string)
     {
         if (!Array.isArray(payload.flows)) throw new BadRequestException(`The property flows does not exist or is not an array`);
-        
+
         // get tenant
         const tenant = await this.queryBus.ask(new FindTenantQuery({
-            where: { 
+            where: {
                 code: payload.tenant.code
             }
         }));
@@ -42,7 +43,7 @@ export class CreateCatalogController
 
         // get system
         const system = await this.queryBus.ask(new FindSystemQuery({
-            where: { 
+            where: {
                 name: payload.system.name
             }
         }));
@@ -53,17 +54,17 @@ export class CreateCatalogController
         const flowsCatalog = payload.flows.map(flow => {
 
             // register channels with related id and flow, to complete the rest of the data later
-            if (Array.isArray(flow.channels)) 
+            if (Array.isArray(flow.channels))
             {
                 for (const channel of flow.channels)
                 {
                     channelsWithFlows.push({
                         id: uuidv4(),
                         hash: Utils.sha1(
-                            tenant.code + 
-                            system.name + 
-                            (channel.party ? channel.party : '') + 
-                            channel.component + 
+                            tenant.code +
+                            system.name +
+                            (channel.party ? channel.party : '') +
+                            channel.component +
                             channel.name
                         ),
                         tenantId: tenant.id,
@@ -76,13 +77,13 @@ export class CreateCatalogController
                         riInterfaceName: channel.riInterfaceName,
                         riInterfaceNamespace: channel.riInterfaceNamespace,
                         flowHash: Utils.sha1(
-                            tenant.code + 
-                            system.name + 
+                            tenant.code +
+                            system.name +
                             (flow.party ? flow.party : '') +
                             (flow.receiverParty ? flow.receiverParty : '') +
                             flow.component +
                             (flow.receiverComponent ? flow.receiverComponent : '') +
-                            flow.interfaceName + 
+                            flow.interfaceName +
                             flow.interfaceNamespace
                         ),
                         flowParty: flow.party,
@@ -98,13 +99,13 @@ export class CreateCatalogController
             return {
                 id: uuidv4(),
                 hash: Utils.sha1(
-                    tenant.code + 
-                    system.name + 
+                    tenant.code +
+                    system.name +
                     (flow.party ? flow.party : '') +
                     (flow.receiverParty ? flow.receiverParty : '') +
                     flow.component +
                     (flow.receiverComponent ? flow.receiverComponent : '') +
-                    flow.interfaceName + 
+                    flow.interfaceName +
                     flow.interfaceNamespace
                 ),
                 tenantId: tenant.id,
@@ -133,12 +134,12 @@ export class CreateCatalogController
 
         // create channels
         const channelsCatalog = payload.channels.map(channel => {
-            
+
             const hash = Utils.sha1(
-                tenant.code + 
-                system.name + 
-                (channel.party ? channel.party : '') + 
-                channel.component + 
+                tenant.code +
+                system.name +
+                (channel.party ? channel.party : '') +
+                channel.component +
                 channel.name
             );
             const channelsWithFlow  = channelsWithFlows.find(channel => channel.hash === hash);
@@ -187,7 +188,7 @@ export class CreateCatalogController
 
         // delete all modules from tenant and system
         await this.commandBus.dispatch(new DeleteModulesCommand({
-            where: { 
+            where: {
                 tenantCode: tenant.code,
                 systemName: system.name
             }
@@ -196,10 +197,10 @@ export class CreateCatalogController
         const modulesCatalog = payload.modules.map(module => {
 
             const channelHash       = Utils.sha1(
-                tenant.code + 
-                system.name + 
-                (module.channelParty ? module.channelParty : '') + 
-                module.channelComponent + 
+                tenant.code +
+                system.name +
+                (module.channelParty ? module.channelParty : '') +
+                module.channelComponent +
                 module.channelName
             );
             const channelsWithFlow  = channelsWithFlows.find(channel => channel.hash === channelHash);
@@ -229,10 +230,10 @@ export class CreateCatalogController
             }
         });
         await this.commandBus.dispatch(new CreateModulesCommand(modulesCatalog));
-        
+
         return {
             statusCode: 200,
             message: 'Flows successfully registered'
         };
-    } 
+    }
 }

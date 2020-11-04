@@ -4,7 +4,7 @@ import { DeletedSystemEvent } from './deleted-system.event';
 @EventsHandler(DeletedSystemEvent)
 export class DeletedSystemEventHandler implements IEventHandler<DeletedSystemEvent>
 {
-    handle(event: DeletedSystemEvent) 
+    handle(event: DeletedSystemEvent)
     {
         // console.log('DeletedSystemEvent: ', event);
     }

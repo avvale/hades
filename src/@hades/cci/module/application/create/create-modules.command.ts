@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateModulesCommand
 {
     constructor(
-        public readonly modules: {
+        public readonly payload: {
             id: string,
             tenantId: string,
             tenantCode: string,
@@ -23,7 +25,7 @@ export class CreateModulesCommand
             name?: string,
             parameterName?: string,
             parameterValue?: string,
-            
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

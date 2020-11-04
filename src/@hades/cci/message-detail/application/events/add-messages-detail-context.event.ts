@@ -8,21 +8,21 @@ import { DeletedMessagesDetailEvent } from './deleted-messages-detail.event';
 export class AddMessagesDetailContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciMessageDetail[] = []
+        public readonly aggregateRoots: CciMessageDetail[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedMessagesDetailEvent(
-                this.aggregateRoots.map(messageDetail => 
+                this.aggregateRoots.map(messageDetail =>
                     new CreatedMessageDetailEvent(
                         messageDetail.id.value,
                         messageDetail.tenantId.value,
@@ -77,7 +77,7 @@ export class AddMessagesDetailContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedMessagesDetailEvent(
-                this.aggregateRoots.map(messageDetail => 
+                this.aggregateRoots.map(messageDetail =>
                     new DeletedMessageDetailEvent(
                         messageDetail.id.value,
                         messageDetail.tenantId.value,
@@ -121,10 +121,10 @@ export class AddMessagesDetailContextEvent extends AggregateRoot
                         messageDetail.createdAt?.value,
                         messageDetail.updatedAt?.value,
                         messageDetail.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

@@ -1,17 +1,17 @@
 import { StringValueObject } from '@hades/shared/domain/value-objects/string.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class RoleName extends StringValueObject 
+export class RoleName extends StringValueObject
 {
-    public readonly type: 'RoleName';   
+    public readonly type: 'RoleName';
 
-    constructor(value: string, validationRules: ValidationRules = {}) 
+    constructor(value: string, validationRules: ValidationRules = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'RoleName',
-            nullable: false,
-            undefinable: false,
-            maxLength: 255,            
+            nullable:  false ,
+            undefinable:  false ,
+            maxLength: 255,
         }, validationRules));
     }
 }

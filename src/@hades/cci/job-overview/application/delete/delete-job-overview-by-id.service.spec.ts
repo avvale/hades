@@ -14,7 +14,7 @@ describe('DeleteJobOverviewByIdService', () =>
     let repository: IJobOverviewRepository;
     let mockRepository: MockJobOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteJobOverviewByIdService', () =>
                 EventPublisher,
                 DeleteJobOverviewByIdService,
                 MockJobOverviewRepository,
-                { 
+                {
                     provide: IJobOverviewRepository,
                     useValue: {
                         deleteById: (id) => {},

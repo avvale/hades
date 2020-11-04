@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { IModuleRepository } from './../../domain/module.repository';
 import { CciModule } from './../../domain/module.aggregate';
@@ -8,11 +9,11 @@ import { CciModule } from './../../domain/module.aggregate';
 export class PaginateModulesService
 {
     constructor(
-        private readonly repository: IModuleRepository
+        private readonly repository: IModuleRepository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<CciModule>>
-    {        
-        return await this.repository.paginate(queryStatement, constraint);
+    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciModule>>
+    {
+        return await this.repository.paginate(queryStatement, constraint, cQMetadata);
     }
 }

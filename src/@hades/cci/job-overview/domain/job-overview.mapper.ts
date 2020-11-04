@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciJobOverview } from './job-overview.aggregate';
 import { JobOverviewResponse } from './job-overview.response';
-import { 
+import {
     JobOverviewId,
     JobOverviewTenantId,
     JobOverviewTenantCode,
@@ -18,47 +18,43 @@ import {
     JobOverviewError,
     JobOverviewCreatedAt,
     JobOverviewUpdatedAt,
-    JobOverviewDeletedAt
-    
+    JobOverviewDeletedAt,
 } from './value-objects';
-
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 import { ExecutionMapper } from '@hades/cci/execution/domain/execution.mapper';
 
-
-
 export class JobOverviewMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param jobOverview
      */
-    mapModelToAggregate(jobOverview: ObjectLiteral): CciJobOverview
+    mapModelToAggregate(jobOverview: ObjectLiteral, cQMetadata?: CQMetadata): CciJobOverview
     {
         if (!jobOverview) return;
 
-        return this.makeAggregate(jobOverview);
+        return this.makeAggregate(jobOverview, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param jobsOverview 
+     * @param jobsOverview
      */
-    mapModelsToAggregates(jobsOverview: ObjectLiteral[]): CciJobOverview[]
+    mapModelsToAggregates(jobsOverview: ObjectLiteral[], cQMetadata?: CQMetadata): CciJobOverview[]
     {
         if (!Array.isArray(jobsOverview)) return;
-        
-        return jobsOverview.map(jobOverview  => this.makeAggregate(jobOverview));
+
+        return jobsOverview.map(jobOverview  => this.makeAggregate(jobOverview, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param jobOverview 
+     * @param jobOverview
      */
     mapAggregateToResponse(jobOverview: CciJobOverview): JobOverviewResponse
     {
@@ -76,7 +72,7 @@ export class JobOverviewMapper implements IMapper
         return jobsOverview.map(jobOverview => this.makeResponse(jobOverview));
     }
 
-    private makeAggregate(jobOverview: ObjectLiteral): CciJobOverview
+    private makeAggregate(jobOverview: ObjectLiteral, cQMetadata?: CQMetadata): CciJobOverview
     {
         return CciJobOverview.register(
             new JobOverviewId(jobOverview.id),
@@ -86,31 +82,25 @@ export class JobOverviewMapper implements IMapper
             new JobOverviewSystemName(jobOverview.systemName),
             new JobOverviewExecutionId(jobOverview.executionId),
             new JobOverviewExecutionType(jobOverview.executionType),
-            new JobOverviewExecutionExecutedAt(jobOverview.executionExecutedAt),
-            new JobOverviewExecutionMonitoringStartAt(jobOverview.executionMonitoringStartAt),
-            new JobOverviewExecutionMonitoringEndAt(jobOverview.executionMonitoringEndAt),
+            new JobOverviewExecutionExecutedAt(jobOverview.executionExecutedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new JobOverviewExecutionMonitoringStartAt(jobOverview.executionMonitoringStartAt, {}, {addTimezone: cQMetadata.timezone}),
+            new JobOverviewExecutionMonitoringEndAt(jobOverview.executionMonitoringEndAt, {}, {addTimezone: cQMetadata.timezone}),
             new JobOverviewCancelled(jobOverview.cancelled),
             new JobOverviewCompleted(jobOverview.completed),
             new JobOverviewError(jobOverview.error),
-            new JobOverviewCreatedAt(jobOverview.createdAt),
-            new JobOverviewUpdatedAt(jobOverview.updatedAt),
-            new JobOverviewDeletedAt(jobOverview.deletedAt),
-            
-            
-            
+            new JobOverviewCreatedAt(jobOverview.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new JobOverviewUpdatedAt(jobOverview.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new JobOverviewDeletedAt(jobOverview.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(jobOverview.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(jobOverview.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapModelToAggregate(jobOverview.execution) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(jobOverview: CciJobOverview): JobOverviewResponse
     {
         if (!jobOverview) return;
-        
+
         return new JobOverviewResponse(
             jobOverview.id.value,
             jobOverview.tenantId.value,
@@ -128,15 +118,9 @@ export class JobOverviewMapper implements IMapper
             jobOverview.createdAt.value,
             jobOverview.updatedAt.value,
             jobOverview.deletedAt.value,
-            
-            
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(jobOverview.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(jobOverview.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapAggregateToResponse(jobOverview.execution) : undefined,
-            
-            
-            
         );
     }
 }

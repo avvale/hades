@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateJobOverviewCommand } from './update-job-overview.command';
 import { UpdateJobOverviewService } from './update-job-overview.service';
-import { 
+import {
     JobOverviewId,
     JobOverviewTenantId,
     JobOverviewTenantCode,
@@ -14,35 +14,40 @@ import {
     JobOverviewExecutionMonitoringEndAt,
     JobOverviewCancelled,
     JobOverviewCompleted,
-    JobOverviewError
-    
+    JobOverviewError,
+    JobOverviewCreatedAt,
+    JobOverviewUpdatedAt,
+    JobOverviewDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdateJobOverviewCommand)
 export class UpdateJobOverviewCommandHandler implements ICommandHandler<UpdateJobOverviewCommand>
 {
     constructor(
-        private readonly updateJobOverviewService: UpdateJobOverviewService
-    ) { }
+        private readonly updateJobOverviewService: UpdateJobOverviewService,
+    ) {}
 
     async execute(command: UpdateJobOverviewCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.updateJobOverviewService.main(
-            new JobOverviewId(command.id),
-            new JobOverviewTenantId(command.tenantId, { undefinable: true }),
-            new JobOverviewTenantCode(command.tenantCode, { undefinable: true }),
-            new JobOverviewSystemId(command.systemId, { undefinable: true }),
-            new JobOverviewSystemName(command.systemName, { undefinable: true }),
-            new JobOverviewExecutionId(command.executionId, { undefinable: true }),
-            new JobOverviewExecutionType(command.executionType, { undefinable: true }),
-            new JobOverviewExecutionExecutedAt(command.executionExecutedAt, { undefinable: true }),
-            new JobOverviewExecutionMonitoringStartAt(command.executionMonitoringStartAt, { undefinable: true }),
-            new JobOverviewExecutionMonitoringEndAt(command.executionMonitoringEndAt, { undefinable: true }),
-            new JobOverviewCancelled(command.cancelled),
-            new JobOverviewCompleted(command.completed),
-            new JobOverviewError(command.error),
-            
+            {
+                id: new JobOverviewId(command.payload.id),
+                tenantId: new JobOverviewTenantId(command.payload.tenantId, { undefinable: true }),
+                tenantCode: new JobOverviewTenantCode(command.payload.tenantCode, { undefinable: true }),
+                systemId: new JobOverviewSystemId(command.payload.systemId, { undefinable: true }),
+                systemName: new JobOverviewSystemName(command.payload.systemName, { undefinable: true }),
+                executionId: new JobOverviewExecutionId(command.payload.executionId, { undefinable: true }),
+                executionType: new JobOverviewExecutionType(command.payload.executionType, { undefinable: true }),
+                executionExecutedAt: new JobOverviewExecutionExecutedAt(command.payload.executionExecutedAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                executionMonitoringStartAt: new JobOverviewExecutionMonitoringStartAt(command.payload.executionMonitoringStartAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                executionMonitoringEndAt: new JobOverviewExecutionMonitoringEndAt(command.payload.executionMonitoringEndAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                cancelled: new JobOverviewCancelled(command.payload.cancelled),
+                completed: new JobOverviewCompleted(command.payload.completed),
+                error: new JobOverviewError(command.payload.error),
+            },
+            command.constraint,
+            command.cQMetadata,
         )
     }
 }

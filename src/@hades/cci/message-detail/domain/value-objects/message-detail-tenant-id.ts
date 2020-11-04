@@ -5,13 +5,13 @@ export class MessageDetailTenantId extends UuidValueObject
 {
     public readonly type: 'MessageDetailTenantId';
 
-    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {}) 
+    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'MessageDetailTenantId',
-            nullable: false,
-            undefinable: false,
-            length: 36
+            nullable:  false ,
+            undefinable:  false ,
+            length: 36,
         }, validationRules), data);
     }
 }

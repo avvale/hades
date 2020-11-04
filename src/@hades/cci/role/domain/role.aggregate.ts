@@ -1,13 +1,12 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     RoleId,
     RoleTenantId,
     RoleTenantCode,
     RoleName,
     RoleCreatedAt,
     RoleUpdatedAt,
-    RoleDeletedAt
-    
+    RoleDeletedAt,
 } from './value-objects';
 import { CreatedRoleEvent } from './../application/events/created-role.event';
 import { UpdatedRoleEvent } from './../application/events/updated-role.event';
@@ -37,7 +36,7 @@ export class CciRole extends AggregateRoot
     constructor(id?: RoleId, tenantId?: RoleTenantId, tenantCode?: RoleTenantCode, name?: RoleName, createdAt?: RoleCreatedAt, updatedAt?: RoleUpdatedAt, deletedAt?: RoleDeletedAt, tenant?: IamTenant, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;

@@ -24,7 +24,7 @@ import {
     MessageOverviewWaiting,
     MessageOverviewCreatedAt,
     MessageOverviewUpdatedAt,
-    MessageOverviewDeletedAt
+    MessageOverviewDeletedAt,
 } from '@hades/cci/message-overview/domain/value-objects';
 import { CciMessageOverview } from './../../domain/message-overview.aggregate';
 import { messagesOverview } from './../seeds/message-overview.seed';
@@ -82,6 +82,7 @@ export class MockMessageOverviewRepository extends MockRepository<CciMessageOver
                     new MessageOverviewCreatedAt(itemCollection.createdAt),
                     new MessageOverviewUpdatedAt(itemCollection.updatedAt),
                     new MessageOverviewDeletedAt(itemCollection.deletedAt),
+                    
                 ));
         }
     }
