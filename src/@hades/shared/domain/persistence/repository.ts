@@ -26,11 +26,11 @@ export interface IRepository<Aggregate>
     get(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Aggregate[]>;
 
     // update record
-    update(item: Aggregate, constraint?: QueryStatement): Promise<void>;
+    update(item: Aggregate, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record by id
-    deleteById(id: ValueObject<String>, constraint?: QueryStatement): Promise<void>;
+    deleteById(id: ValueObject<String>, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    delete(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<void>;
+    delete(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }
