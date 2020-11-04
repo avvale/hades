@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/seeds/tenant.seed.ts",
-            "integrity": "sha1:b4630b5278e4c713b9ac733efd5634050e8c78e7"
+            "integrity": "sha1:b47dc60c0153be2a7e91f000a53618b965945cb4"
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model.ts",
@@ -311,7 +311,7 @@
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/sequelize/sequelize-tenants-account-ids.model.ts",
-            "integrity": "sha1:54e77c6528fdec2e0ab7e47048a47262b07314ca"
+            "integrity": "sha1:8f5de1fe6d9f8489e101c162c7a506e72d013d09"
         },
         {
             "path": "src/apps/iam/tenant/controllers/iam-create-tenant.controller.spec.ts",
@@ -443,7 +443,7 @@
         },
         {
             "path": "src/apps/iam/tenant/resolvers/iam-find-tenant-by-id.resolver.ts",
-            "integrity": "sha1:49f03d2e3b46a80be5e6b4759bd9228f352f9429"
+            "integrity": "sha1:6c069738571d0e3417ec8ae7efd54e60dd436264"
         },
         {
             "path": "src/apps/iam/tenant/resolvers/iam-find-tenant.resolver.spec.ts",
@@ -487,7 +487,7 @@
         },
         {
             "path": "postman/iam.tenant.postman.json",
-            "integrity": "sha1:d96d25aa3453e1f307e97be10fe18da91a2cd1ac"
+            "integrity": "sha1:02f464e8926db968538a8edc64d27be7a6b05df8"
         }
     ]
 }

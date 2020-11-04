@@ -1,10 +1,10 @@
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
-import { Model } from '@hades//infrastructure/sequelize/sequelize-.model';
+import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 
-@Table({ modelName: '', freezeTableName: true, timestamps: false })
-export class IamTenantsModel extends Model<IamTenantsModel> 
+@Table({ modelName: 'iam_tenants_accounts', freezeTableName: true, timestamps: false })
+export class IamTenantsAccountsModel extends Model<IamTenantsAccountsModel>
 {
     @ForeignKey(() => IamTenantModel)
     @Column({
@@ -13,10 +13,10 @@ export class IamTenantsModel extends Model<IamTenantsModel>
     })
     tenantId: string;
 
-    @ForeignKey(() => Model)
+    @ForeignKey(() => IamAccountModel)
     @Column({
-        field: '_id',
+        field: 'account_id',
         type: DataTypes.UUID,
     })
-    Id: string;
+    accountId: string;
 }
