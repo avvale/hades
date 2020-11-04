@@ -3,27 +3,27 @@
     "files": [
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lake.command-handler.ts",
-            "integrity": "sha1:025c363680055b56165d7df1d4816eb2da6199e1"
+            "integrity": "sha1:e46a93172567f3b4dcad91a69c9c95b990935e6a"
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lake.command.handler.spec.ts",
-            "integrity": "sha1:c1dd0877bcec45872c65cdd228689de2799b1b98"
+            "integrity": "sha1:ea738ef261393f1515648418790ddb834d2c56ea"
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lake.command.ts",
-            "integrity": "sha1:bfae6be9233b659c6e8dc766e9b39e5979e4ca40"
+            "integrity": "sha1:03baffe72c9463cde23525e2cd6aea7df6ff3048"
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lake.service.spec.ts",
-            "integrity": "sha1:5bf0b1755eb3b6c64005cde5a5ca5b7411a2b246"
+            "integrity": "sha1:e6286d8c4022119ebc3c00bde7228c19e5b8962a"
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lake.service.ts",
-            "integrity": "sha1:f201fb02b0e3c580929af949d8fa46b045759c82"
+            "integrity": "sha1:2b81a40efbf5b0dd07708affe1a212f0605886be"
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lakes.command-handler.ts",
-            "integrity": "sha1:db8aeaadbf952ba53343c7106bdd929ed0af4aaf"
+            "integrity": "sha1:7d44b86ce167da2ede970ea49be030ba4a44ac78"
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lakes.command.handler.spec.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lakes.command.ts",
-            "integrity": "sha1:627400d72867edbba422a140bd7f705311c51c5f"
+            "integrity": "sha1:0e8a89c627f783e8add0d6b28f1de4dcc704ea8f"
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lakes.service.spec.ts",
@@ -39,31 +39,31 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lakes.service.ts",
-            "integrity": "sha1:c0d3409fa2c41f81d4db182ee9e98e41b1adced8"
+            "integrity": "sha1:dc82d183a7fdf5208a79f7f8384d9dd5277b94af"
         },
         {
             "path": "src/@hades/cci/data-lake/application/delete/delete-data-lake-by-id.command-handler.ts",
-            "integrity": "sha1:5e8ebd9b2c166279fe8adc1267083125780656dd"
+            "integrity": "sha1:6047ba5d032eed7d7102497b534cac643438bea5"
         },
         {
             "path": "src/@hades/cci/data-lake/application/delete/delete-data-lake-by-id.command.handler.spec.ts",
-            "integrity": "sha1:a88a20b6c502b7c52bb4c6600d27816bf3d2e920"
+            "integrity": "sha1:588cfc3c149d4ae310bc64f944abd1a90005e806"
         },
         {
             "path": "src/@hades/cci/data-lake/application/delete/delete-data-lake-by-id.command.ts",
-            "integrity": "sha1:32b7638c6f5b8f33a24aaa9b002315860f6f8e0e"
+            "integrity": "sha1:2bc3b22a98acac69a6645c64b36f9bbc8fbf01ac"
         },
         {
             "path": "src/@hades/cci/data-lake/application/delete/delete-data-lake-by-id.service.spec.ts",
-            "integrity": "sha1:e4cd76fe81969331ba882b3439f2b83008b3265f"
+            "integrity": "sha1:8c28c608a92cb3d99ff252771ccc03d1779f32df"
         },
         {
             "path": "src/@hades/cci/data-lake/application/delete/delete-data-lake-by-id.service.ts",
-            "integrity": "sha1:e0cde2b2af04092a5037da4d66572bdc71a7a1a7"
+            "integrity": "sha1:99234a23c3b863f6a49e3c6eac4570e49e2a5eb1"
         },
         {
             "path": "src/@hades/cci/data-lake/application/delete/delete-data-lakes.command-handler.ts",
-            "integrity": "sha1:62ede74fcc0c3946a27f2e3b779b69460e8c306e"
+            "integrity": "sha1:ba4a42a9a6b55492fa0674106bda74334b38f15b"
         },
         {
             "path": "src/@hades/cci/data-lake/application/delete/delete-data-lakes.command.handler.spec.ts",
@@ -71,7 +71,7 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/delete/delete-data-lakes.command.ts",
-            "integrity": "sha1:ac439884c6d237c1850b4f5ee41ea7f1bc0ff494"
+            "integrity": "sha1:aeaa5538a0ec511815f7c51db5864e465c66c77a"
         },
         {
             "path": "src/@hades/cci/data-lake/application/delete/delete-data-lakes.service.spec.ts",
@@ -79,23 +79,23 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/delete/delete-data-lakes.service.ts",
-            "integrity": "sha1:734174c3d21007fc29774501dc9020ddf2cea76d"
+            "integrity": "sha1:4464ec9a4e0ecabc59cc830990ab7380559fc57d"
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/add-data-lakes-context.event.ts",
-            "integrity": "sha1:5bf5d4fc383f7f41b88628e8a845d41521109232"
+            "integrity": "sha1:8453cf6560974427737340827e357891dc4eaa5f"
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/created-data-lake.event-handler.ts",
-            "integrity": "sha1:f37e24f9ab3914b6a656beb25b2ce3736f19ead1"
+            "integrity": "sha1:e83a0499f2103a753514483791599e0c88d9cfa5"
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/created-data-lake.event.ts",
-            "integrity": "sha1:98c2ac34916171f194c0b2c4ad4f55d6436f1efb"
+            "integrity": "sha1:bb9005f5ea3d5259114222c85275a584781d04f4"
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/created-data-lakes.event-handler.ts",
-            "integrity": "sha1:10f2d5ff120e6bce56f7d424a84db7670d3e97b2"
+            "integrity": "sha1:a66b1d54717838ee3cba66430440a0c2c8cb3c83"
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/created-data-lakes.event.ts",
@@ -103,15 +103,15 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/deleted-data-lake.event-handler.ts",
-            "integrity": "sha1:128b1265326c74472422e1740c1018f438b88c08"
+            "integrity": "sha1:4e3cc52f22f54c4a641b378b4d9a29cb068f30a4"
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/deleted-data-lake.event.ts",
-            "integrity": "sha1:6412c611709365bec28f7cda9ab401e7b5e7e219"
+            "integrity": "sha1:e25445e04b6291bf2fd7ca8cbc52fb4df00d477c"
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/deleted-data-lakes.event-handler.ts",
-            "integrity": "sha1:a192fb7a3b3cf484c9ff140376e6c6383a600411"
+            "integrity": "sha1:93be2330015a2e44f964f02b29c847394bb6bba1"
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/deleted-data-lakes.event.ts",
@@ -119,35 +119,35 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/updated-data-lake.event-handler.ts",
-            "integrity": "sha1:5a41eb230750ce97c8113a9223567331e143dabc"
+            "integrity": "sha1:358c5957f13e6f458b93a82fc53ef2a9dfeabcf3"
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/updated-data-lake.event.ts",
-            "integrity": "sha1:6c416e8ccdbf015f238bb8f9ad370c4c5762319b"
+            "integrity": "sha1:85b29d615f85c69cd82d493f8192b95101725c4b"
         },
         {
             "path": "src/@hades/cci/data-lake/application/find/find-data-lake-by-id.query-handler.ts",
-            "integrity": "sha1:96a89b3dad627956b958188bf23558cff5b9ae71"
+            "integrity": "sha1:314aefec45f5c96e000c48564843cfe7baae28f7"
         },
         {
             "path": "src/@hades/cci/data-lake/application/find/find-data-lake-by-id.query.handler.spec.ts",
-            "integrity": "sha1:d5c2efe4f2832ed282ea568909f8e43ad79b6eae"
+            "integrity": "sha1:6aa8f8b930ebaf310d6a6442e55abad706bf847c"
         },
         {
             "path": "src/@hades/cci/data-lake/application/find/find-data-lake-by-id.query.ts",
-            "integrity": "sha1:a8cad4fb06ae80149c3175cca949a238bd580c57"
+            "integrity": "sha1:2b0577c84ea0a8859d1be17f0a8aa59e6c169c75"
         },
         {
             "path": "src/@hades/cci/data-lake/application/find/find-data-lake-by-id.service.spec.ts",
-            "integrity": "sha1:fca2345a7298809bf82293d099df30d2b45ab8fb"
+            "integrity": "sha1:fab0ab059174a143f6381c9577773b6adf9d28a5"
         },
         {
             "path": "src/@hades/cci/data-lake/application/find/find-data-lake-by-id.service.ts",
-            "integrity": "sha1:f86a0b78e976045e3ff761a9be5e9bf6e3f0f04d"
+            "integrity": "sha1:22f4a53761b8d5a9dd657e945d05014a020f5877"
         },
         {
             "path": "src/@hades/cci/data-lake/application/find/find-data-lake.query-handler.ts",
-            "integrity": "sha1:3f7e9bab60060bc8d6f1f8239a8abcd4d7363cc9"
+            "integrity": "sha1:01c9e29adfbdf29ea315061daddf06bc7ca0a063"
         },
         {
             "path": "src/@hades/cci/data-lake/application/find/find-data-lake.query.handler.spec.ts",
@@ -155,7 +155,7 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/find/find-data-lake.query.ts",
-            "integrity": "sha1:8495beed5b34bebcd74537506fe35c54bbaaa826"
+            "integrity": "sha1:1da496dd6f9f92e3317b699a8e4538c997545531"
         },
         {
             "path": "src/@hades/cci/data-lake/application/find/find-data-lake.service.spec.ts",
@@ -163,11 +163,11 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/find/find-data-lake.service.ts",
-            "integrity": "sha1:c2ec8edfd63d86e88466565032f0702c8b17738b"
+            "integrity": "sha1:59a66a2ddb78d5987510b07d19bfd9244a5bfc11"
         },
         {
             "path": "src/@hades/cci/data-lake/application/get/get-data-lakes.query-handler.ts",
-            "integrity": "sha1:736447f8460e951a8646bdd219bd80a04b338e6f"
+            "integrity": "sha1:ec5ea12e97f5eb1adc609dc07b0d95baa531b9c6"
         },
         {
             "path": "src/@hades/cci/data-lake/application/get/get-data-lakes.query.handler.spec.ts",
@@ -175,7 +175,7 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/get/get-data-lakes.query.ts",
-            "integrity": "sha1:de182f4fb9786ce4550bb725acd4b74165d8dfde"
+            "integrity": "sha1:32ab2a9987dcf769e54d1e922a9dddc67fc318b4"
         },
         {
             "path": "src/@hades/cci/data-lake/application/get/get-data-lakes.service.spec.ts",
@@ -183,19 +183,19 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/get/get-data-lakes.service.ts",
-            "integrity": "sha1:f8208a40b278dbbf5fc576bc18ad48e85cdd415e"
+            "integrity": "sha1:4fd275044cdc20d64c95e2d2837ac74ce6aaa263"
         },
         {
             "path": "src/@hades/cci/data-lake/application/paginate/paginate-data-lakes.query-handler.ts",
-            "integrity": "sha1:abcd071ec1d63e8e715e23017e9a61c27942b843"
+            "integrity": "sha1:18f4666276f262afbcd5b1e5b5cebb54bcb5b259"
         },
         {
             "path": "src/@hades/cci/data-lake/application/paginate/paginate-data-lakes.query.handler.spec.ts",
-            "integrity": "sha1:78e9331e33741b7bf3bd67fac1a557fa16e51913"
+            "integrity": "sha1:8ec9be4928148bdc36097b0ee66c12f1d8f5922d"
         },
         {
             "path": "src/@hades/cci/data-lake/application/paginate/paginate-data-lakes.query.ts",
-            "integrity": "sha1:61e0129f302d1f90e8158eeaa1490bd2760ef85e"
+            "integrity": "sha1:26e2ab25ec7e65ac7812a0adb5bff5812735ad9a"
         },
         {
             "path": "src/@hades/cci/data-lake/application/paginate/paginate-data-lakes.service.spec.ts",
@@ -203,15 +203,15 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/paginate/paginate-data-lakes.service.ts",
-            "integrity": "sha1:4c5e31d14b4fde2d894593a43ef41bdc83820c27"
+            "integrity": "sha1:b8b7d47ba8f470bde4d220831a20bab8181ca8f2"
         },
         {
             "path": "src/@hades/cci/data-lake/application/sagas/data-lake.sagas.ts",
-            "integrity": "sha1:a3fbc38168a9ffc9c34e907d879ce7daec4257e5"
+            "integrity": "sha1:4f3234401c08f30d758c317eea86187092736426"
         },
         {
             "path": "src/@hades/cci/data-lake/application/update/update-data-lake.command-handler.ts",
-            "integrity": "sha1:5f8a9deabb9db32ec16ad05c578bc5668870b3a6"
+            "integrity": "sha1:20a00d9ed0b0d1083c67bcca6ce5972cf96ee718"
         },
         {
             "path": "src/@hades/cci/data-lake/application/update/update-data-lake.command.handler.spec.ts",
@@ -219,31 +219,31 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/update/update-data-lake.command.ts",
-            "integrity": "sha1:e8b810a79a70693101bbf0543afee68e4386c118"
+            "integrity": "sha1:b19fec063ff342cf3754896fddc4e07718b10d6a"
         },
         {
             "path": "src/@hades/cci/data-lake/application/update/update-data-lake.service.spec.ts",
-            "integrity": "sha1:40101127a6e334e6db9a25f66d80aef7bed6078c"
+            "integrity": "sha1:ac320bced439bba9d86159904cc8e5c26a6531d8"
         },
         {
             "path": "src/@hades/cci/data-lake/application/update/update-data-lake.service.ts",
-            "integrity": "sha1:f340d853f397c4f90d8155e88a59b08d8834784e"
+            "integrity": "sha1:525792034dad9027adf117a33a78ffadc79f01b5"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/data-lake.aggregate.ts",
-            "integrity": "sha1:8ce7d3d608cd4e0b69a98ad99f07f557813c6b9c"
+            "integrity": "sha1:e88e1dca27d5f5a8e2e25be44710e9dcaa9f71e4"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/data-lake.mapper.ts",
-            "integrity": "sha1:d267ffc204316bc2943e1f380c5792e106eb872a"
+            "integrity": "sha1:d9dcd3ca591d560fe84e907caef9545957839506"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/data-lake.repository.ts",
-            "integrity": "sha1:3a517acc42ea9548b1892993bb6f47d5bbb3c2cc"
+            "integrity": "sha1:873e026bc46a8a7ab9cf18cc760512bca2ae543f"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/data-lake.response.ts",
-            "integrity": "sha1:6b7ce950e8a04df04e68bccf060129904c4e1208"
+            "integrity": "sha1:3c0036fd270cd6e055172b6947704330f8c020bb"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/value-objects/index.ts",
@@ -255,215 +255,215 @@
         },
         {
             "path": "src/@hades/cci/data-lake/infrastructure/mock/mock-data-lake.repository.ts",
-            "integrity": "sha1:6a865aefaf4d4f92cbeb70df745bc1b1d329f573"
+            "integrity": "sha1:d199614cac34e5392d95b2a7236d6c9b73112c88"
         },
         {
             "path": "src/@hades/cci/data-lake/infrastructure/seeds/data-lake.seed.ts",
-            "integrity": "sha1:3c1e9a74d1504f3600fb11cd53c773a60644c871"
+            "integrity": "sha1:0eaa8fc88ab9cc0a452dd9e5236430da2cf04e41"
         },
         {
             "path": "src/@hades/cci/data-lake/infrastructure/sequelize/sequelize-data-lake.model.ts",
-            "integrity": "sha1:a59a253b9b8cc0ccf3e067ddbea6f9f908d2c764"
+            "integrity": "sha1:b478497d6105f62df48ebd44633f1cfd33cde6f3"
         },
         {
             "path": "src/@hades/cci/data-lake/infrastructure/sequelize/sequelize-data-lake.repository.ts",
-            "integrity": "sha1:1631013fc22b4722ed164dc7ce785bc143074ccc"
+            "integrity": "sha1:c4697f3be1733b8ea75f85fb7e6a81ae3112b234"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/value-objects/data-lake-id.ts",
-            "integrity": "sha1:f436d21079e0dc44414381a43f949a5066832c95"
+            "integrity": "sha1:ec2b005a998e2ae143bb5c58d0a6df07213c3e42"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/value-objects/data-lake-tenant-id.ts",
-            "integrity": "sha1:e7a753e539641445eb987d262eaaf807877c9523"
+            "integrity": "sha1:25cfb04634d63d48b7ae7f28a69696e405bd6d8b"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/value-objects/data-lake-execution-id.ts",
-            "integrity": "sha1:0af13e41f8761542e5348e034e8682bcb4bd8162"
+            "integrity": "sha1:e3e59f497de63f112c8b8114d15854830277f0f2"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/value-objects/data-lake-tenant-code.ts",
-            "integrity": "sha1:185a973538e83aaf237ca1177a9d6ad384d5ff4c"
+            "integrity": "sha1:813a6fad78bd46b1a9b297305d50989985283efc"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/value-objects/data-lake-payload.ts",
-            "integrity": "sha1:26449948b52d80760b00a3c046e7a8c8f4933a07"
+            "integrity": "sha1:3f8a4ed3488eea8b4a01da9dc69a5d4a5f99c769"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/value-objects/data-lake-created-at.ts",
-            "integrity": "sha1:26724466c4c7a2df7720ed4160a0961bc0db3461"
+            "integrity": "sha1:a87088a39ee0c88dd95835aee7a0b79ebe12a257"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/value-objects/data-lake-updated-at.ts",
-            "integrity": "sha1:5dcdc19b147f7c80234b963458a74f39c0d6d6bf"
+            "integrity": "sha1:904796a3cbb467d6977fe0fd152806bbb001d74c"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/value-objects/data-lake-deleted-at.ts",
-            "integrity": "sha1:8cdabaf2cab19b91d72951f26862f9f6eaa7c2b5"
+            "integrity": "sha1:d300adf0d223df0d9551e997653b022b45d27e89"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/create-data-lake.controller.spec.ts",
-            "integrity": "sha1:72cbc01c43d1b3ef4259c1e60b3152607094e5dc"
+            "path": "src/apps/cci/data-lake/controllers/cci-create-data-lake.controller.spec.ts",
+            "integrity": "sha1:d25d6f85c6b286771e715554cc9b6e272acfef85"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/create-data-lake.controller.ts",
-            "integrity": "sha1:775cb8c2955e78836b733ccb46e5b9b326ef017c"
+            "path": "src/apps/cci/data-lake/controllers/cci-create-data-lake.controller.ts",
+            "integrity": "sha1:2b68f69fa9ad9f9a6208e37d06bf170829bf51fa"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/create-data-lakes.controller.spec.ts",
-            "integrity": "sha1:7d9359c2f4c1a63d4e3091fa35c341b23a3a0e16"
+            "path": "src/apps/cci/data-lake/controllers/cci-create-data-lakes.controller.spec.ts",
+            "integrity": "sha1:c621016dee3e16be58f1981c549a9b7ebc0935b4"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/create-data-lakes.controller.ts",
-            "integrity": "sha1:58cd620323e0acb3b866b58c8d1ec3771007c305"
+            "path": "src/apps/cci/data-lake/controllers/cci-create-data-lakes.controller.ts",
+            "integrity": "sha1:9a6c1eb3a857abba89cf176e84c800afb64f5fb5"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/delete-data-lake-by-id.controller.spec.ts",
-            "integrity": "sha1:b4b5844a0d220fa24b7f2cb8e275627b0cd55d3e"
+            "path": "src/apps/cci/data-lake/controllers/cci-delete-data-lake-by-id.controller.spec.ts",
+            "integrity": "sha1:fa9dcc518ef8ac349d94a30db3e9c01ad95ec007"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/delete-data-lake-by-id.controller.ts",
-            "integrity": "sha1:e0928983a650dbd027960e1af0bbd96af3dfacbf"
+            "path": "src/apps/cci/data-lake/controllers/cci-delete-data-lake-by-id.controller.ts",
+            "integrity": "sha1:eda114a07b8a8f8c9a27d61e916e80f60c7e81fa"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/delete-data-lakes.controller.spec.ts",
-            "integrity": "sha1:ba1f56956469d310008c20238cfe02f32d2728ea"
+            "path": "src/apps/cci/data-lake/controllers/cci-delete-data-lakes.controller.spec.ts",
+            "integrity": "sha1:fccf32533bcddbecfc1203959c56fc3c248a56a0"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/delete-data-lakes.controller.ts",
-            "integrity": "sha1:e3d16ee75001344a51de738d6fb888c57f1a3144"
+            "path": "src/apps/cci/data-lake/controllers/cci-delete-data-lakes.controller.ts",
+            "integrity": "sha1:351b85386b0cfa390d13232d1863a5a0e7878722"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/find-data-lake-by-id.controller.spec.ts",
-            "integrity": "sha1:7c4ac8e246462cb4f62d82eb9b19f60368cc69b9"
+            "path": "src/apps/cci/data-lake/controllers/cci-find-data-lake-by-id.controller.spec.ts",
+            "integrity": "sha1:c8bf58cea34530bdf731f024066bacc8fa7b71d4"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/find-data-lake-by-id.controller.ts",
-            "integrity": "sha1:c96bce1ee3d68c1d3a88aa0de38d023e7173a2ec"
+            "path": "src/apps/cci/data-lake/controllers/cci-find-data-lake-by-id.controller.ts",
+            "integrity": "sha1:d034b877b1be3d9ed8bc5e851bf77f24fde2731d"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/find-data-lake.controller.spec.ts",
-            "integrity": "sha1:d1ec8974d346024c514087a261168438eec797ac"
+            "path": "src/apps/cci/data-lake/controllers/cci-find-data-lake.controller.spec.ts",
+            "integrity": "sha1:7300abcf0b9bce52bc1ac8e9a6bc2b345bfc93b2"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/find-data-lake.controller.ts",
-            "integrity": "sha1:3bae907a912814573b9b48fbd102a86cdf1f3690"
+            "path": "src/apps/cci/data-lake/controllers/cci-find-data-lake.controller.ts",
+            "integrity": "sha1:91cad22e12d3ab63b8dc237871b4f641ff197226"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/get-data-lakes.controller.spec.ts",
-            "integrity": "sha1:e691f1c036877326578ce29219dddbac8878f8b2"
+            "path": "src/apps/cci/data-lake/controllers/cci-get-data-lakes.controller.spec.ts",
+            "integrity": "sha1:c1bc632e11531c02131f33e0583e92a169c9ce70"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/get-data-lakes.controller.ts",
-            "integrity": "sha1:b57f262c82e5622574f7340e7581f1ad1f69daa1"
+            "path": "src/apps/cci/data-lake/controllers/cci-get-data-lakes.controller.ts",
+            "integrity": "sha1:5f6f2db23198a4b59bc1d510258e805eec67f174"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/paginate-data-lakes.controller.spec.ts",
-            "integrity": "sha1:5e636beaf87503c314d53708d1390f6b9ffbc823"
+            "path": "src/apps/cci/data-lake/controllers/cci-paginate-data-lakes.controller.spec.ts",
+            "integrity": "sha1:c1b6256cea8d6c0071b69217c87ddf99e38a93aa"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/paginate-data-lakes.controller.ts",
-            "integrity": "sha1:19ee0dec9247efbbad92296041f8f0b28b9f6878"
+            "path": "src/apps/cci/data-lake/controllers/cci-paginate-data-lakes.controller.ts",
+            "integrity": "sha1:d1936d54f8407b1188d68a0a27b5de4ec25aca39"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/update-data-lake.controller.spec.ts",
-            "integrity": "sha1:66304f843c5b0def490109bf2246b298c13ffcd7"
+            "path": "src/apps/cci/data-lake/controllers/cci-update-data-lake.controller.spec.ts",
+            "integrity": "sha1:38fdedc21190d948c38d35f6551fc3687ca0b6b5"
         },
         {
-            "path": "src/apps/cci/data-lake/controllers/update-data-lake.controller.ts",
-            "integrity": "sha1:fecfc8eb140d33dfddc047d43d7e1f939dcb6714"
+            "path": "src/apps/cci/data-lake/controllers/cci-update-data-lake.controller.ts",
+            "integrity": "sha1:3c9d2cba7ebcf54967bafb70000b5b378a736a9d"
         },
         {
             "path": "src/apps/cci/data-lake/dto/data-lake.dto.ts",
-            "integrity": "sha1:26f7846f3004965d8926a27a1117569313a59c43"
+            "integrity": "sha1:53a8e7bf247ab71e6653a20813aaf1697b5ee181"
         },
         {
             "path": "src/apps/cci/data-lake/dto/create-data-lake.dto.ts",
-            "integrity": "sha1:db48a0f59099a50e92bbc2dda39939084794490e"
+            "integrity": "sha1:02fd1ea604e074ce5dcb92bd5864c7ea0b5e20da"
         },
         {
             "path": "src/apps/cci/data-lake/dto/update-data-lake.dto.ts",
-            "integrity": "sha1:a2058e8a24e10e5bb8c043f65774ca66c21d6774"
+            "integrity": "sha1:3c13096c99893e9d4909ee8dd5874064edde419d"
         },
         {
             "path": "src/apps/cci/data-lake/graphql/data-lake.graphql",
-            "integrity": "sha1:53fd45a7a63227c00c3ddb9189089ef1c197d8ea"
+            "integrity": "sha1:927d84b3871e2912b310c6c42b7086ac372cddef"
         },
         {
             "path": "src/apps/cci/data-lake/index.ts",
-            "integrity": "sha1:1e1647a08391a5705fbf1ff4d998f80c19fc9550"
+            "integrity": "sha1:dee8a268c37ab19cdb8957dca2948a2f701f87e6"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/create-data-lake.resolver.spec.ts",
-            "integrity": "sha1:e1d46ecc288ce4fd6f7851b0bab95457099e174d"
+            "path": "src/apps/cci/data-lake/resolvers/cci-create-data-lake.resolver.spec.ts",
+            "integrity": "sha1:ea82707cb8a3ce48b170b742cc5cab4c4acd2429"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/create-data-lake.resolver.ts",
-            "integrity": "sha1:d23c779f6f37674f1cab526995dc6e1eff24ad0d"
+            "path": "src/apps/cci/data-lake/resolvers/cci-create-data-lake.resolver.ts",
+            "integrity": "sha1:1edd69faf700631c57023b00ef92a2ea65649f2e"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/create-data-lakes.resolver.spec.ts",
-            "integrity": "sha1:47c8a45ace264edd524e0c50ff845f530380f053"
+            "path": "src/apps/cci/data-lake/resolvers/cci-create-data-lakes.resolver.spec.ts",
+            "integrity": "sha1:fdb9057f91fd03042759a50de2870e937dbba850"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/create-data-lakes.resolver.ts",
-            "integrity": "sha1:7886173e2a87c2c48f79ed50e8f85095c91fd578"
+            "path": "src/apps/cci/data-lake/resolvers/cci-create-data-lakes.resolver.ts",
+            "integrity": "sha1:f21dac17bd41d363608c28615a774f8ec1bfa39b"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/delete-data-lake-by-id.resolver.spec.ts",
-            "integrity": "sha1:36b72f85c986301629168bb0aac8d1d5c2e730b8"
+            "path": "src/apps/cci/data-lake/resolvers/cci-delete-data-lake-by-id.resolver.spec.ts",
+            "integrity": "sha1:afffcc729338048ad8301099b1cebebfe0651d32"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/delete-data-lake-by-id.resolver.ts",
-            "integrity": "sha1:cf22fa39252b63708a7844358ad2ea41cdfc2bbd"
+            "path": "src/apps/cci/data-lake/resolvers/cci-delete-data-lake-by-id.resolver.ts",
+            "integrity": "sha1:e3127ddd2e3091c16e6aa8fd00d0a0b1e9cab3f2"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/delete-data-lakes.resolver.spec.ts",
-            "integrity": "sha1:f405d006fe2e8ff5a16b4f3bc5d617650cbe9f86"
+            "path": "src/apps/cci/data-lake/resolvers/cci-delete-data-lakes.resolver.spec.ts",
+            "integrity": "sha1:456290119693519466b52adad1391e455cf3b465"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/delete-data-lakes.resolver.ts",
-            "integrity": "sha1:a4dacc1a8d9a7ae27ae2b4a66ba3d43507191eb2"
+            "path": "src/apps/cci/data-lake/resolvers/cci-delete-data-lakes.resolver.ts",
+            "integrity": "sha1:edb909efd915d47ca0c984e4137860a09c8a2713"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/find-data-lake-by-id.resolver.spec.ts",
-            "integrity": "sha1:72efbf50519a093f9242e00a5c942468b448e2dc"
+            "path": "src/apps/cci/data-lake/resolvers/cci-find-data-lake-by-id.resolver.spec.ts",
+            "integrity": "sha1:973763a284859b56095efce023e3a3f186b2a3fa"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/find-data-lake-by-id.resolver.ts",
-            "integrity": "sha1:1c439e1768b963384edcec20cf8e344b783f06b3"
+            "path": "src/apps/cci/data-lake/resolvers/cci-find-data-lake-by-id.resolver.ts",
+            "integrity": "sha1:837a640f6ff8fc85e5713c26d7b75d26c82dff9a"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/find-data-lake.resolver.spec.ts",
-            "integrity": "sha1:b7606548f862c81dfd771621915df4e23cc1a5a7"
+            "path": "src/apps/cci/data-lake/resolvers/cci-find-data-lake.resolver.spec.ts",
+            "integrity": "sha1:1716f930891389e7cf6ec79a821a6a96aff11966"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/find-data-lake.resolver.ts",
-            "integrity": "sha1:5a3fd44c9df1a8bc9b61ded1c084dbef1a5cd9d9"
+            "path": "src/apps/cci/data-lake/resolvers/cci-find-data-lake.resolver.ts",
+            "integrity": "sha1:b59692ef1e33fff7969a74f8aae7b1fa56d25e1d"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/get-data-lakes.resolver.spec.ts",
-            "integrity": "sha1:228f4e2ae42d9cf7855d8e5c15a856bbdd131556"
+            "path": "src/apps/cci/data-lake/resolvers/cci-get-data-lakes.resolver.spec.ts",
+            "integrity": "sha1:3897afa653ecf195212f691a58fd3bdf113447ad"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/get-data-lakes.resolver.ts",
-            "integrity": "sha1:f554ee2ac08d7c7264a969b5759e60be82d66a36"
+            "path": "src/apps/cci/data-lake/resolvers/cci-get-data-lakes.resolver.ts",
+            "integrity": "sha1:653fcbaf5734854d8b2e885e2103ed4bece5856b"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/paginate-data-lakes.resolver.spec.ts",
-            "integrity": "sha1:ee9284924a32d02d63e8a22377fae5dc5d8f2a70"
+            "path": "src/apps/cci/data-lake/resolvers/cci-paginate-data-lakes.resolver.spec.ts",
+            "integrity": "sha1:74136f82b7e6f470ac1ede38d0982359935d63b0"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/paginate-data-lakes.resolver.ts",
-            "integrity": "sha1:96e2ec33de4485835bfcdf0ad94f187fdd203b3e"
+            "path": "src/apps/cci/data-lake/resolvers/cci-paginate-data-lakes.resolver.ts",
+            "integrity": "sha1:190971ec73245d439bc8608498fe678d1817b919"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/update-data-lake.resolver.spec.ts",
-            "integrity": "sha1:8fc4d19662662166eb6c170f5181d55eb1531de5"
+            "path": "src/apps/cci/data-lake/resolvers/cci-update-data-lake.resolver.spec.ts",
+            "integrity": "sha1:146e04284f4f5595fb460fe751a00c3ac077e995"
         },
         {
-            "path": "src/apps/cci/data-lake/resolvers/update-data-lake.resolver.ts",
-            "integrity": "sha1:533bc8d78b0222597ab59d9ee2ffc74ed5e464ca"
+            "path": "src/apps/cci/data-lake/resolvers/cci-update-data-lake.resolver.ts",
+            "integrity": "sha1:6e9907a8f54eea708077e4e7f24a8ddf80037380"
         },
         {
             "path": "src/apps/cci/data-lake/seeder/seeder.module.ts",
@@ -471,11 +471,11 @@
         },
         {
             "path": "src/apps/cci/data-lake/seeder/seeder.ts",
-            "integrity": "sha1:0b21702cdf0d8e97d109f87a5334d34e7a10b79c"
+            "integrity": "sha1:e825fc5eeb7ea0c6c6bcfaa9e8411827781f5918"
         },
         {
             "path": "postman/cci.data-lake.postman.json",
-            "integrity": "sha1:45f677825bed7c0cc3a9cd485ed6351e19871efa"
+            "integrity": "sha1:3fd98037dfd3b6ae5b4e659f3dc142524ead3648"
         }
     ]
 }

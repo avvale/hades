@@ -10,11 +10,11 @@ export class GetDataLakesQueryHandler implements IQueryHandler<GetDataLakesQuery
     private readonly mapper: DataLakeMapper = new DataLakeMapper();
 
     constructor(
-        private readonly getDataLakesService: GetDataLakesService
-    ) { }
+        private readonly getDataLakesService: GetDataLakesService,
+    ) {}
 
     async execute(query: GetDataLakesQuery): Promise<DataLakeResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getDataLakesService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getDataLakesService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

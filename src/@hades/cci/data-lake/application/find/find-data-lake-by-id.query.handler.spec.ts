@@ -16,7 +16,7 @@ describe('FindDataLakeByIdQueryHandler', () =>
     let repository: MockDataLakeRepository;
     let mapper: DataLakeMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindDataLakeByIdQueryHandler', () =>
         mapper          = new DataLakeMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindDataLakeByIdQueryHandler should be defined', () => 
+        test('FindDataLakeByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

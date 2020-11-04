@@ -6,12 +6,16 @@ import { DeleteDataLakesService } from './delete-data-lakes.service';
 export class DeleteDataLakesCommandHandler implements ICommandHandler<DeleteDataLakesCommand>
 {
     constructor(
-        private readonly deleteDataLakesService: DeleteDataLakesService
-    ) { }
+        private readonly deleteDataLakesService: DeleteDataLakesService,
+    ) {}
 
     async execute(command: DeleteDataLakesCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteDataLakesService.main(command.queryStatement);
+        await this.deleteDataLakesService.main(
+            command.queryStatement,
+            command.constraint,
+            command.cQMetadata,
+        );
     }
 }

@@ -1,9 +1,10 @@
+
 import { TenantResponse } from '@hades/iam/tenant/domain/tenant.response';
 import { ExecutionResponse } from '@hades/cci/execution/domain/execution.response';
 
 
 
-export class DataLakeResponse 
+export class DataLakeResponse
 {
     constructor(
         public readonly id: string,
@@ -14,6 +15,7 @@ export class DataLakeResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
+        
         
         public readonly tenant: TenantResponse,
         public readonly execution: ExecutionResponse,

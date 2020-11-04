@@ -8,21 +8,21 @@ import { DeletedDataLakesEvent } from './deleted-data-lakes.event';
 export class AddDataLakesContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciDataLake[] = []
+        public readonly aggregateRoots: CciDataLake[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedDataLakesEvent(
-                this.aggregateRoots.map(dataLake => 
+                this.aggregateRoots.map(dataLake =>
                     new CreatedDataLakeEvent(
                         dataLake.id.value,
                         dataLake.tenantId.value,
@@ -43,7 +43,7 @@ export class AddDataLakesContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedDataLakesEvent(
-                this.aggregateRoots.map(dataLake => 
+                this.aggregateRoots.map(dataLake =>
                     new DeletedDataLakeEvent(
                         dataLake.id.value,
                         dataLake.tenantId.value,
@@ -53,10 +53,10 @@ export class AddDataLakesContextEvent extends AggregateRoot
                         dataLake.createdAt?.value,
                         dataLake.updatedAt?.value,
                         dataLake.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

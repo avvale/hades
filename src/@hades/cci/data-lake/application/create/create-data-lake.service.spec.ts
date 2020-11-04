@@ -4,24 +4,27 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { dataLakes } from '@hades/cci/data-lake/infrastructure/seeds/data-lake.seed';
 import { CreateDataLakeService } from './create-data-lake.service';
-import { 
+import {
     DataLakeId,
     DataLakeTenantId,
     DataLakeExecutionId,
     DataLakeTenantCode,
-    DataLakePayload
-    
+    DataLakePayload,
+    DataLakeCreatedAt,
+    DataLakeUpdatedAt,
+    DataLakeDeletedAt,
 } from './../../domain/value-objects';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { MockDataLakeRepository } from './../../infrastructure/mock/mock-data-lake.repository';
 
-describe('CreateDataLakeService', () => 
+describe('CreateDataLakeService', () =>
+
 {
     let service: CreateDataLakeService;
     let repository: IDataLakeRepository;
     let mockRepository: MockDataLakeRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -30,7 +33,7 @@ describe('CreateDataLakeService', () =>
                 EventPublisher,
                 CreateDataLakeService,
                 MockDataLakeRepository,
-                { 
+                {
                     provide: IDataLakeRepository,
                     useValue: {
                         create: (item) => {}
@@ -44,14 +47,14 @@ describe('CreateDataLakeService', () =>
         mockRepository  = module.get(MockDataLakeRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateDataLakeService should be defined', () => 
+        test('CreateDataLakeService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a dataLake and emit event', async () => 
+        test('should create a dataLake and emit event', async () =>
         {
             expect(await service.main(
                 new DataLakeId(dataLakes[0].id),

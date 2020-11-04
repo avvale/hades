@@ -5,10 +5,10 @@ import { delay, map } from 'rxjs/operators';
 import { CreatedDataLakeEvent } from './../events/created-data-lake.event';
 
 @Injectable()
-export class DataLakeSagas 
-{    
+export class DataLakeSagas
+{
     /* @Saga()
-    dragonKilled = (events$: Observable<any>): Observable<ICommand> => 
+    dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {
         return events$
             .pipe(

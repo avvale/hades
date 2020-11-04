@@ -10,12 +10,16 @@ export class FindDataLakeQueryHandler implements IQueryHandler<FindDataLakeQuery
     private readonly mapper: DataLakeMapper = new DataLakeMapper();
 
     constructor(
-        private readonly findDataLakeService: FindDataLakeService
-    ) { }
+        private readonly findDataLakeService: FindDataLakeService,
+    ) {}
 
     async execute(query: FindDataLakeQuery): Promise<DataLakeResponse>
     {
-        const dataLake = await this.findDataLakeService.main(query.queryStatement);
+        const dataLake = await this.findDataLakeService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(dataLake);
     }

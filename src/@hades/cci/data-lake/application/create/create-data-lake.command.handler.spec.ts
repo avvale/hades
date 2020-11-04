@@ -6,12 +6,12 @@ import { dataLakes } from '@hades/cci/data-lake/infrastructure/seeds/data-lake.s
 import { CreateDataLakeCommand } from './create-data-lake.command';
 import { CreateDataLakeService } from './create-data-lake.service';
 
-describe('CreateDataLakeCommandHandler', () => 
+describe('CreateDataLakeCommandHandler', () =>
 {
     let commandHandler: CreateDataLakeCommandHandler;
     let service: CreateDataLakeService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateDataLakeCommandHandler', () =>
         service         = module.get<CreateDataLakeService>(CreateDataLakeService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateDataLakeCommandHandler should be defined', () => 
+        test('CreateDataLakeCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateDataLakeService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateDataLakeService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateDataLakeCommand(
@@ -45,7 +45,6 @@ describe('CreateDataLakeCommandHandler', () =>
                     dataLakes[0].executionId,
                     dataLakes[0].tenantCode,
                     dataLakes[0].payload,
-                    
                 )
             )).toBe(undefined);
         });

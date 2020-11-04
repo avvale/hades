@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     DataLakeId,
     DataLakeTenantId,
     DataLakeExecutionId,
@@ -9,8 +8,7 @@ import {
     DataLakePayload,
     DataLakeCreatedAt,
     DataLakeUpdatedAt,
-    DataLakeDeletedAt
-    
+    DataLakeDeletedAt,
 } from './../../domain/value-objects';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { CciDataLake } from './../../domain/data-lake.aggregate';
@@ -21,7 +19,7 @@ export class CreateDataLakesService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IDataLakeRepository
+        private readonly repository: IDataLakeRepository,
     ) {}
 
     public async main(
@@ -31,7 +29,6 @@ export class CreateDataLakesService
             executionId: DataLakeExecutionId,
             tenantCode: DataLakeTenantCode,
             payload: DataLakePayload,
-            
         } []
     ): Promise<void>
     {
@@ -42,18 +39,18 @@ export class CreateDataLakesService
             dataLake.executionId,
             dataLake.tenantCode,
             dataLake.payload,
-            new DataLakeCreatedAt(Utils.nowTimestamp()),
-            new DataLakeUpdatedAt(Utils.nowTimestamp()),
+            new DataLakeCreatedAt({currentTimestamp: true}),
+            new DataLakeUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateDataLakes);
 
         // create AddDataLakesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const dataLakesRegistered = this.publisher.mergeObjectContext(new AddDataLakesContextEvent(aggregateDataLakes));
- 
+
         dataLakesRegistered.created(); // apply event to model events
         dataLakesRegistered.commit(); // commit all events of model
     }

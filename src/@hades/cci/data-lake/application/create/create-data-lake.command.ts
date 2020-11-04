@@ -1,11 +1,15 @@
-export class CreateDataLakeCommand 
-{   
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class CreateDataLakeCommand
+{
     constructor(
-        public readonly id: string,
-        public readonly tenantId: string,
-        public readonly executionId: string,
-        public readonly tenantCode: string,
-        public readonly payload: any,
-        
+        public readonly payload: {
+            id: string,
+            tenantId: string,
+            executionId: string,
+            tenantCode: string,
+            payload: any,
+        },
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginateDataLakesQuery } from './paginate-data-lakes.query';
 import { PaginateDataLakesService } from './paginate-data-lakes.service';
 
-describe('PaginateDataLakesQueryHandler', () => 
+describe('PaginateDataLakesQueryHandler', () =>
 {
     let queryHandler: PaginateDataLakesQueryHandler;
     let service: PaginateDataLakesService;
     let repository: MockDataLakeRepository;
     let mapper: DataLakeMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

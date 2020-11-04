@@ -14,7 +14,7 @@ describe('DeleteDataLakeByIdService', () =>
     let repository: IDataLakeRepository;
     let mockRepository: MockDataLakeRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteDataLakeByIdService', () =>
                 EventPublisher,
                 DeleteDataLakeByIdService,
                 MockDataLakeRepository,
-                { 
+                {
                     provide: IDataLakeRepository,
                     useValue: {
                         deleteById: (id) => {},
