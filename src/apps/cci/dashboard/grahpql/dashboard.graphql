@@ -7,7 +7,7 @@ type CciDashboard
     messagesOverview: [CciMessageOverview]!
 }
 
-type Query 
+type Query
 {
     cciFindDashboard: CciDashboard!
 }

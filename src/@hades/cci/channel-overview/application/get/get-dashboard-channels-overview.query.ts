@@ -1,9 +1,10 @@
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 
 export class GetDashboardChannelsOverviewQuery
 {
     constructor(
-        public tenantIds: string[],
-        public systemIds: string[],
+        public readonly tenantIds: string[],
+        public readonly systemIds: string[],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }
