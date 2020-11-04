@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { messagesDetail } from '@hades/cci/message-detail/infrastructure/seeds/message-detail.seed';
 import { CreateMessageDetailService } from './create-message-detail.service';
-import { 
+import {
     MessageDetailId,
     MessageDetailTenantId,
     MessageDetailTenantCode,
@@ -43,19 +43,22 @@ import {
     MessageDetailSize,
     MessageDetailTimesFailed,
     MessageDetailNumberMax,
-    MessageDetailNumberDays
-    
+    MessageDetailNumberDays,
+    MessageDetailCreatedAt,
+    MessageDetailUpdatedAt,
+    MessageDetailDeletedAt,
 } from './../../domain/value-objects';
 import { IMessageDetailRepository } from './../../domain/message-detail.repository';
 import { MockMessageDetailRepository } from './../../infrastructure/mock/mock-message-detail.repository';
 
-describe('CreateMessageDetailService', () => 
+describe('CreateMessageDetailService', () =>
+
 {
     let service: CreateMessageDetailService;
     let repository: IMessageDetailRepository;
     let mockRepository: MockMessageDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -64,7 +67,7 @@ describe('CreateMessageDetailService', () =>
                 EventPublisher,
                 CreateMessageDetailService,
                 MockMessageDetailRepository,
-                { 
+                {
                     provide: IMessageDetailRepository,
                     useValue: {
                         create: (item) => {}
@@ -78,14 +81,14 @@ describe('CreateMessageDetailService', () =>
         mockRepository  = module.get(MockMessageDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateMessageDetailService should be defined', () => 
+        test('CreateMessageDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a messageDetail and emit event', async () => 
+        test('should create a messageDetail and emit event', async () =>
         {
             expect(await service.main(
                 new MessageDetailId(messagesDetail[0].id),

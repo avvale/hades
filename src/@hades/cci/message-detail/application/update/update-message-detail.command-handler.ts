@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateMessageDetailCommand } from './update-message-detail.command';
 import { UpdateMessageDetailService } from './update-message-detail.service';
-import { 
+import {
     MessageDetailId,
     MessageDetailTenantId,
     MessageDetailTenantCode,
@@ -40,61 +40,66 @@ import {
     MessageDetailSize,
     MessageDetailTimesFailed,
     MessageDetailNumberMax,
-    MessageDetailNumberDays
-    
+    MessageDetailNumberDays,
+    MessageDetailCreatedAt,
+    MessageDetailUpdatedAt,
+    MessageDetailDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdateMessageDetailCommand)
 export class UpdateMessageDetailCommandHandler implements ICommandHandler<UpdateMessageDetailCommand>
 {
     constructor(
-        private readonly updateMessageDetailService: UpdateMessageDetailService
-    ) { }
+        private readonly updateMessageDetailService: UpdateMessageDetailService,
+    ) {}
 
     async execute(command: UpdateMessageDetailCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.updateMessageDetailService.main(
-            new MessageDetailId(command.id),
-            new MessageDetailTenantId(command.tenantId, { undefinable: true }),
-            new MessageDetailTenantCode(command.tenantCode, { undefinable: true }),
-            new MessageDetailSystemId(command.systemId, { undefinable: true }),
-            new MessageDetailSystemName(command.systemName, { undefinable: true }),
-            new MessageDetailScenario(command.scenario),
-            new MessageDetailExecutionId(command.executionId, { undefinable: true }),
-            new MessageDetailExecutionType(command.executionType, { undefinable: true }),
-            new MessageDetailExecutionExecutedAt(command.executionExecutedAt, { undefinable: true }),
-            new MessageDetailExecutionMonitoringStartAt(command.executionMonitoringStartAt, { undefinable: true }),
-            new MessageDetailExecutionMonitoringEndAt(command.executionMonitoringEndAt, { undefinable: true }),
-            new MessageDetailFlowHash(command.flowHash, { undefinable: true }),
-            new MessageDetailFlowParty(command.flowParty),
-            new MessageDetailFlowReceiverParty(command.flowReceiverParty),
-            new MessageDetailFlowComponent(command.flowComponent, { undefinable: true }),
-            new MessageDetailFlowReceiverComponent(command.flowReceiverComponent),
-            new MessageDetailFlowInterfaceName(command.flowInterfaceName, { undefinable: true }),
-            new MessageDetailFlowInterfaceNamespace(command.flowInterfaceNamespace, { undefinable: true }),
-            new MessageDetailStatus(command.status, { undefinable: true }),
-            new MessageDetailRefMessageId(command.refMessageId),
-            new MessageDetailDetail(command.detail),
-            new MessageDetailExample(command.example),
-            new MessageDetailStartTimeAt(command.startTimeAt),
-            new MessageDetailDirection(command.direction, { undefinable: true }),
-            new MessageDetailErrorCategory(command.errorCategory),
-            new MessageDetailErrorCode(command.errorCode),
-            new MessageDetailErrorLabel(command.errorLabel),
-            new MessageDetailNode(command.node),
-            new MessageDetailProtocol(command.protocol),
-            new MessageDetailQualityOfService(command.qualityOfService),
-            new MessageDetailReceiverParty(command.receiverParty),
-            new MessageDetailReceiverComponent(command.receiverComponent),
-            new MessageDetailReceiverInterface(command.receiverInterface),
-            new MessageDetailReceiverInterfaceNamespace(command.receiverInterfaceNamespace),
-            new MessageDetailRetries(command.retries),
-            new MessageDetailSize(command.size),
-            new MessageDetailTimesFailed(command.timesFailed),
-            new MessageDetailNumberMax(command.numberMax),
-            new MessageDetailNumberDays(command.numberDays),
-            
+            {
+                id: new MessageDetailId(command.payload.id),
+                tenantId: new MessageDetailTenantId(command.payload.tenantId, { undefinable: true }),
+                tenantCode: new MessageDetailTenantCode(command.payload.tenantCode, { undefinable: true }),
+                systemId: new MessageDetailSystemId(command.payload.systemId, { undefinable: true }),
+                systemName: new MessageDetailSystemName(command.payload.systemName, { undefinable: true }),
+                scenario: new MessageDetailScenario(command.payload.scenario),
+                executionId: new MessageDetailExecutionId(command.payload.executionId, { undefinable: true }),
+                executionType: new MessageDetailExecutionType(command.payload.executionType, { undefinable: true }),
+                executionExecutedAt: new MessageDetailExecutionExecutedAt(command.payload.executionExecutedAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                executionMonitoringStartAt: new MessageDetailExecutionMonitoringStartAt(command.payload.executionMonitoringStartAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                executionMonitoringEndAt: new MessageDetailExecutionMonitoringEndAt(command.payload.executionMonitoringEndAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                flowHash: new MessageDetailFlowHash(command.payload.flowHash, { undefinable: true }),
+                flowParty: new MessageDetailFlowParty(command.payload.flowParty),
+                flowReceiverParty: new MessageDetailFlowReceiverParty(command.payload.flowReceiverParty),
+                flowComponent: new MessageDetailFlowComponent(command.payload.flowComponent, { undefinable: true }),
+                flowReceiverComponent: new MessageDetailFlowReceiverComponent(command.payload.flowReceiverComponent),
+                flowInterfaceName: new MessageDetailFlowInterfaceName(command.payload.flowInterfaceName, { undefinable: true }),
+                flowInterfaceNamespace: new MessageDetailFlowInterfaceNamespace(command.payload.flowInterfaceNamespace, { undefinable: true }),
+                status: new MessageDetailStatus(command.payload.status, { undefinable: true }),
+                refMessageId: new MessageDetailRefMessageId(command.payload.refMessageId),
+                detail: new MessageDetailDetail(command.payload.detail),
+                example: new MessageDetailExample(command.payload.example),
+                startTimeAt: new MessageDetailStartTimeAt(command.payload.startTimeAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                direction: new MessageDetailDirection(command.payload.direction, { undefinable: true }),
+                errorCategory: new MessageDetailErrorCategory(command.payload.errorCategory),
+                errorCode: new MessageDetailErrorCode(command.payload.errorCode),
+                errorLabel: new MessageDetailErrorLabel(command.payload.errorLabel),
+                node: new MessageDetailNode(command.payload.node),
+                protocol: new MessageDetailProtocol(command.payload.protocol),
+                qualityOfService: new MessageDetailQualityOfService(command.payload.qualityOfService),
+                receiverParty: new MessageDetailReceiverParty(command.payload.receiverParty),
+                receiverComponent: new MessageDetailReceiverComponent(command.payload.receiverComponent),
+                receiverInterface: new MessageDetailReceiverInterface(command.payload.receiverInterface),
+                receiverInterfaceNamespace: new MessageDetailReceiverInterfaceNamespace(command.payload.receiverInterfaceNamespace),
+                retries: new MessageDetailRetries(command.payload.retries),
+                size: new MessageDetailSize(command.payload.size),
+                timesFailed: new MessageDetailTimesFailed(command.payload.timesFailed),
+                numberMax: new MessageDetailNumberMax(command.payload.numberMax),
+                numberDays: new MessageDetailNumberDays(command.payload.numberDays),
+            },
+            command.constraint,
+            command.cQMetadata,
         )
     }
 }

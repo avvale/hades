@@ -1,16 +1,16 @@
 import { TimestampValueObject } from '@hades/shared/domain/value-objects/timestamp.value-object';
-import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
+import { DataValueObject, ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class MessageDetailDeletedAt extends TimestampValueObject 
+export class MessageDetailDeletedAt extends TimestampValueObject
 {
     public readonly type: 'MessageDetailDeletedAt';
 
-    constructor(value: string, validationRules: ValidationRules = {}) 
+    constructor(value: string | DataValueObject, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'MessageDetailDeletedAt',
-            nullable: true,
-            undefinable: true,
-        }, validationRules));
+            nullable:  true ,
+            undefinable:  true ,
+        }, validationRules), data);
     }
 }

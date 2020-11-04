@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateMessagesDetailCommand } from './create-messages-detail.command';
 import { CreateMessagesDetailService } from './create-messages-detail.service';
-import { 
+import {
     MessageDetailId,
     MessageDetailTenantId,
     MessageDetailTenantCode,
@@ -40,23 +40,25 @@ import {
     MessageDetailSize,
     MessageDetailTimesFailed,
     MessageDetailNumberMax,
-    MessageDetailNumberDays
-    
+    MessageDetailNumberDays,
+    MessageDetailCreatedAt,
+    MessageDetailUpdatedAt,
+    MessageDetailDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateMessagesDetailCommand)
 export class CreateMessagesDetailCommandHandler implements ICommandHandler<CreateMessagesDetailCommand>
 {
     constructor(
-        private readonly createMessagesDetailService: CreateMessagesDetailService
-    ) { }
+        private readonly createMessagesDetailService: CreateMessagesDetailService,
+    ) {}
 
     async execute(command: CreateMessagesDetailCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createMessagesDetailService.main(
-            command.messagesDetail
-                .map(messageDetail => { 
+            command.payload
+                .map(messageDetail => {
                     return {
                         id: new MessageDetailId(messageDetail.id),
                         tenantId: new MessageDetailTenantId(messageDetail.tenantId),
@@ -66,9 +68,9 @@ export class CreateMessagesDetailCommandHandler implements ICommandHandler<Creat
                         scenario: new MessageDetailScenario(messageDetail.scenario),
                         executionId: new MessageDetailExecutionId(messageDetail.executionId),
                         executionType: new MessageDetailExecutionType(messageDetail.executionType),
-                        executionExecutedAt: new MessageDetailExecutionExecutedAt(messageDetail.executionExecutedAt),
-                        executionMonitoringStartAt: new MessageDetailExecutionMonitoringStartAt(messageDetail.executionMonitoringStartAt),
-                        executionMonitoringEndAt: new MessageDetailExecutionMonitoringEndAt(messageDetail.executionMonitoringEndAt),
+                        executionExecutedAt: new MessageDetailExecutionExecutedAt(messageDetail.executionExecutedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                        executionMonitoringStartAt: new MessageDetailExecutionMonitoringStartAt(messageDetail.executionMonitoringStartAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                        executionMonitoringEndAt: new MessageDetailExecutionMonitoringEndAt(messageDetail.executionMonitoringEndAt, {}, {removeTimezone: command.cQMetadata.timezone}),
                         flowHash: new MessageDetailFlowHash(messageDetail.flowHash),
                         flowParty: new MessageDetailFlowParty(messageDetail.flowParty),
                         flowReceiverParty: new MessageDetailFlowReceiverParty(messageDetail.flowReceiverParty),
@@ -80,7 +82,7 @@ export class CreateMessagesDetailCommandHandler implements ICommandHandler<Creat
                         refMessageId: new MessageDetailRefMessageId(messageDetail.refMessageId),
                         detail: new MessageDetailDetail(messageDetail.detail),
                         example: new MessageDetailExample(messageDetail.example),
-                        startTimeAt: new MessageDetailStartTimeAt(messageDetail.startTimeAt),
+                        startTimeAt: new MessageDetailStartTimeAt(messageDetail.startTimeAt, {}, {removeTimezone: command.cQMetadata.timezone}),
                         direction: new MessageDetailDirection(messageDetail.direction),
                         errorCategory: new MessageDetailErrorCategory(messageDetail.errorCategory),
                         errorCode: new MessageDetailErrorCode(messageDetail.errorCode),
@@ -97,7 +99,6 @@ export class CreateMessagesDetailCommandHandler implements ICommandHandler<Creat
                         timesFailed: new MessageDetailTimesFailed(messageDetail.timesFailed),
                         numberMax: new MessageDetailNumberMax(messageDetail.numberMax),
                         numberDays: new MessageDetailNumberDays(messageDetail.numberDays),
-                        
                     }
                 })
         );

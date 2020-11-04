@@ -10,12 +10,16 @@ export class FindMessageDetailQueryHandler implements IQueryHandler<FindMessageD
     private readonly mapper: MessageDetailMapper = new MessageDetailMapper();
 
     constructor(
-        private readonly findMessageDetailService: FindMessageDetailService
-    ) { }
+        private readonly findMessageDetailService: FindMessageDetailService,
+    ) {}
 
     async execute(query: FindMessageDetailQuery): Promise<MessageDetailResponse>
     {
-        const messageDetail = await this.findMessageDetailService.main(query.queryStatement);
+        const messageDetail = await this.findMessageDetailService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(messageDetail);
     }

@@ -8,13 +8,13 @@ import { MessageDetailId } from './../../domain/value-objects';
 import { IMessageDetailRepository } from './../../domain/message-detail.repository';
 import { MockMessageDetailRepository } from './../../infrastructure/mock/mock-message-detail.repository';
 
-describe('FindMessageDetailByIdService', () => 
+describe('FindMessageDetailByIdService', () =>
 {
     let service: FindMessageDetailByIdService;
     let repository: IMessageDetailRepository;
     let mockRepository: MockMessageDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindMessageDetailByIdService', () =>
                 EventPublisher,
                 FindMessageDetailByIdService,
                 MockMessageDetailRepository,
-                { 
+                {
                     provide: IMessageDetailRepository,
                     useValue: {
                         findById: (id) => {}

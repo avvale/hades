@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciMessageDetail } from './message-detail.aggregate';
 import { MessageDetailResponse } from './message-detail.response';
-import { 
+import {
     MessageDetailId,
     MessageDetailTenantId,
     MessageDetailTenantCode,
@@ -44,47 +44,43 @@ import {
     MessageDetailNumberDays,
     MessageDetailCreatedAt,
     MessageDetailUpdatedAt,
-    MessageDetailDeletedAt
-    
+    MessageDetailDeletedAt,
 } from './value-objects';
-
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 import { ExecutionMapper } from '@hades/cci/execution/domain/execution.mapper';
 
-
-
 export class MessageDetailMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param messageDetail
      */
-    mapModelToAggregate(messageDetail: ObjectLiteral): CciMessageDetail
+    mapModelToAggregate(messageDetail: ObjectLiteral, cQMetadata?: CQMetadata): CciMessageDetail
     {
         if (!messageDetail) return;
 
-        return this.makeAggregate(messageDetail);
+        return this.makeAggregate(messageDetail, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param messagesDetail 
+     * @param messagesDetail
      */
-    mapModelsToAggregates(messagesDetail: ObjectLiteral[]): CciMessageDetail[]
+    mapModelsToAggregates(messagesDetail: ObjectLiteral[], cQMetadata?: CQMetadata): CciMessageDetail[]
     {
         if (!Array.isArray(messagesDetail)) return;
-        
-        return messagesDetail.map(messageDetail  => this.makeAggregate(messageDetail));
+
+        return messagesDetail.map(messageDetail  => this.makeAggregate(messageDetail, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param messageDetail 
+     * @param messageDetail
      */
     mapAggregateToResponse(messageDetail: CciMessageDetail): MessageDetailResponse
     {
@@ -102,7 +98,7 @@ export class MessageDetailMapper implements IMapper
         return messagesDetail.map(messageDetail => this.makeResponse(messageDetail));
     }
 
-    private makeAggregate(messageDetail: ObjectLiteral): CciMessageDetail
+    private makeAggregate(messageDetail: ObjectLiteral, cQMetadata?: CQMetadata): CciMessageDetail
     {
         return CciMessageDetail.register(
             new MessageDetailId(messageDetail.id),
@@ -113,9 +109,9 @@ export class MessageDetailMapper implements IMapper
             new MessageDetailScenario(messageDetail.scenario),
             new MessageDetailExecutionId(messageDetail.executionId),
             new MessageDetailExecutionType(messageDetail.executionType),
-            new MessageDetailExecutionExecutedAt(messageDetail.executionExecutedAt),
-            new MessageDetailExecutionMonitoringStartAt(messageDetail.executionMonitoringStartAt),
-            new MessageDetailExecutionMonitoringEndAt(messageDetail.executionMonitoringEndAt),
+            new MessageDetailExecutionExecutedAt(messageDetail.executionExecutedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new MessageDetailExecutionMonitoringStartAt(messageDetail.executionMonitoringStartAt, {}, {addTimezone: cQMetadata.timezone}),
+            new MessageDetailExecutionMonitoringEndAt(messageDetail.executionMonitoringEndAt, {}, {addTimezone: cQMetadata.timezone}),
             new MessageDetailFlowHash(messageDetail.flowHash),
             new MessageDetailFlowParty(messageDetail.flowParty),
             new MessageDetailFlowReceiverParty(messageDetail.flowReceiverParty),
@@ -127,7 +123,7 @@ export class MessageDetailMapper implements IMapper
             new MessageDetailRefMessageId(messageDetail.refMessageId),
             new MessageDetailDetail(messageDetail.detail),
             new MessageDetailExample(messageDetail.example),
-            new MessageDetailStartTimeAt(messageDetail.startTimeAt),
+            new MessageDetailStartTimeAt(messageDetail.startTimeAt, {}, {addTimezone: cQMetadata.timezone}),
             new MessageDetailDirection(messageDetail.direction),
             new MessageDetailErrorCategory(messageDetail.errorCategory),
             new MessageDetailErrorCode(messageDetail.errorCode),
@@ -144,25 +140,19 @@ export class MessageDetailMapper implements IMapper
             new MessageDetailTimesFailed(messageDetail.timesFailed),
             new MessageDetailNumberMax(messageDetail.numberMax),
             new MessageDetailNumberDays(messageDetail.numberDays),
-            new MessageDetailCreatedAt(messageDetail.createdAt),
-            new MessageDetailUpdatedAt(messageDetail.updatedAt),
-            new MessageDetailDeletedAt(messageDetail.deletedAt),
-            
-            
-            
+            new MessageDetailCreatedAt(messageDetail.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new MessageDetailUpdatedAt(messageDetail.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new MessageDetailDeletedAt(messageDetail.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(messageDetail.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(messageDetail.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapModelToAggregate(messageDetail.execution) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(messageDetail: CciMessageDetail): MessageDetailResponse
     {
         if (!messageDetail) return;
-        
+
         return new MessageDetailResponse(
             messageDetail.id.value,
             messageDetail.tenantId.value,
@@ -206,15 +196,9 @@ export class MessageDetailMapper implements IMapper
             messageDetail.createdAt.value,
             messageDetail.updatedAt.value,
             messageDetail.deletedAt.value,
-            
-            
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(messageDetail.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(messageDetail.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapAggregateToResponse(messageDetail.execution) : undefined,
-            
-            
-            
         );
     }
 }
