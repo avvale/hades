@@ -38,13 +38,10 @@ export class CciCreateExecutionController
     async main(
         @CurrentAccount() account: AccountResponse,
         @Body() payload: CreateExecutionDto,
-        @Timezone() timezone
+        @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateExecutionCommand(
-            payload,
-            { timezone }
-        ));
+        await this.commandBus.dispatch(new CreateExecutionCommand(payload, { timezone }));
 
         return await this.queryBus.ask(new FindExecutionByIdQuery(payload.id));
     }

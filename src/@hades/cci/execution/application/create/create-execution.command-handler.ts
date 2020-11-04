@@ -28,16 +28,18 @@ export class CreateExecutionCommandHandler implements ICommandHandler<CreateExec
     {
         // call to use case and implements ValueObjects
         await this.createExecutionService.main(
-            new ExecutionId(command.payload.id),
-            new ExecutionTenantId(command.payload.tenantId),
-            new ExecutionTenantCode(command.payload.tenantCode),
-            new ExecutionSystemId(command.payload.systemId),
-            new ExecutionSystemName(command.payload.systemName),
-            new ExecutionVersion(command.payload.version),
-            new ExecutionType(command.payload.type),
-            new ExecutionExecutedAt(command.payload.executedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
-            new ExecutionMonitoringStartAt(command.payload.monitoringStartAt, {}, {removeTimezone: command.cQMetadata.timezone}),
-            new ExecutionMonitoringEndAt(command.payload.monitoringEndAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+            {
+                id: new ExecutionId(command.payload.id),
+                tenantId: new ExecutionTenantId(command.payload.tenantId),
+                tenantCode: new ExecutionTenantCode(command.payload.tenantCode),
+                systemId: new ExecutionSystemId(command.payload.systemId),
+                systemName: new ExecutionSystemName(command.payload.systemName),
+                version: new ExecutionVersion(command.payload.version),
+                type: new ExecutionType(command.payload.type),
+                executedAt: new ExecutionExecutedAt(command.payload.executedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                monitoringStartAt: new ExecutionMonitoringStartAt(command.payload.monitoringStartAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                monitoringEndAt: new ExecutionMonitoringEndAt(command.payload.monitoringEndAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+            }
         );
     }
 }

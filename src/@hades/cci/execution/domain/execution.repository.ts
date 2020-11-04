@@ -29,11 +29,11 @@ export abstract class IExecutionRepository implements IRepository<CciExecution>
     abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciExecution[]>;
 
     // update record
-    abstract async update(execution: CciExecution, constraint?: QueryStatement): Promise<void>;
+    abstract async update(execution: CciExecution, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: ExecutionId, constraint?: QueryStatement): Promise<void>;
+    abstract async deleteById(id: ExecutionId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement, constraint?: QueryStatement): Promise<void>;
+    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }

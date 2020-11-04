@@ -28,17 +28,20 @@ export class UpdateExecutionCommandHandler implements ICommandHandler<UpdateExec
     {
         // call to use case and implements ValueObjects
         await this.updateExecutionService.main(
-            new ExecutionId(command.id),
-            new ExecutionTenantId(command.tenantId, { undefinable: true }),
-            new ExecutionTenantCode(command.tenantCode, { undefinable: true }),
-            new ExecutionSystemId(command.systemId, { undefinable: true }),
-            new ExecutionSystemName(command.systemName, { undefinable: true }),
-            new ExecutionVersion(command.version, { undefinable: true }),
-            new ExecutionType(command.type, { undefinable: true }),
-            new ExecutionExecutedAt(command.executedAt, { undefinable: true }),
-            new ExecutionMonitoringStartAt(command.monitoringStartAt, { undefinable: true }),
-            new ExecutionMonitoringEndAt(command.monitoringEndAt, { undefinable: true }),
-            
+            {
+                id: new ExecutionId(command.payload.id),
+                tenantId: new ExecutionTenantId(command.payload.tenantId, { undefinable: true }),
+                tenantCode: new ExecutionTenantCode(command.payload.tenantCode, { undefinable: true }),
+                systemId: new ExecutionSystemId(command.payload.systemId, { undefinable: true }),
+                systemName: new ExecutionSystemName(command.payload.systemName, { undefinable: true }),
+                version: new ExecutionVersion(command.payload.version, { undefinable: true }),
+                type: new ExecutionType(command.payload.type, { undefinable: true }),
+                executedAt: new ExecutionExecutedAt(command.payload.executedAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                monitoringStartAt: new ExecutionMonitoringStartAt(command.payload.monitoringStartAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                monitoringEndAt: new ExecutionMonitoringEndAt(command.payload.monitoringEndAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+            },
+            command.constraint,
+            command.cQMetadata,
         )
     }
 }

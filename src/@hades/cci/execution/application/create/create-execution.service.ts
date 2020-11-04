@@ -27,30 +27,32 @@ export class CreateExecutionService
     ) {}
 
     public async main(
-        id: ExecutionId,
-        tenantId: ExecutionTenantId,
-        tenantCode: ExecutionTenantCode,
-        systemId: ExecutionSystemId,
-        systemName: ExecutionSystemName,
-        version: ExecutionVersion,
-        type: ExecutionType,
-        executedAt: ExecutionExecutedAt,
-        monitoringStartAt: ExecutionMonitoringStartAt,
-        monitoringEndAt: ExecutionMonitoringEndAt,
+        payload: {
+            id: ExecutionId,
+            tenantId: ExecutionTenantId,
+            tenantCode: ExecutionTenantCode,
+            systemId: ExecutionSystemId,
+            systemName: ExecutionSystemName,
+            version: ExecutionVersion,
+            type: ExecutionType,
+            executedAt: ExecutionExecutedAt,
+            monitoringStartAt: ExecutionMonitoringStartAt,
+            monitoringEndAt: ExecutionMonitoringEndAt,
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const execution = CciExecution.register(
-            id,
-            tenantId,
-            tenantCode,
-            systemId,
-            systemName,
-            version,
-            type,
-            executedAt,
-            monitoringStartAt,
-            monitoringEndAt,
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.systemId,
+            payload.systemName,
+            payload.version,
+            payload.type,
+            payload.executedAt,
+            payload.monitoringStartAt,
+            payload.monitoringEndAt,
             new ExecutionCreatedAt({currentTimestamp: true}),
             new ExecutionUpdatedAt({currentTimestamp: true}),
             null

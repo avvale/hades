@@ -34,7 +34,7 @@ export class CciCreateExecutionResolver
     async main(
         @CurrentAccount() account: AccountResponse,
         @Args('payload') payload: CciCreateExecutionInput,
-        @Timezone() timezone?: string
+        @Timezone() timezone?: string,
     )
     {
         await this.commandBus.dispatch(new CreateExecutionCommand(payload, { timezone }));

@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -30,11 +31,16 @@ export class CciDeleteExecutionsResolver
 
     @Mutation('cciDeleteExecutions')
     @TenantConstraint()
-    async main(@CurrentAccount() account: AccountResponse, @Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement)
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Args('query') queryStatement?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const executions = await this.queryBus.ask(new GetExecutionsQuery(queryStatement, constraint));
+        const executions = await this.queryBus.ask(new GetExecutionsQuery(queryStatement, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteExecutionsCommand(queryStatement, constraint));
+        await this.commandBus.dispatch(new DeleteExecutionsCommand(queryStatement, constraint, { timezone }));
 
         return executions;
     }

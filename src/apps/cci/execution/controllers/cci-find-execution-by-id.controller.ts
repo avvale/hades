@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ExecutionDto } from './../dto/execution.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -31,8 +32,13 @@ export class CciFindExecutionByIdController
     @ApiOperation({ summary: 'Find execution by id' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: ExecutionDto })
     @TenantConstraint()
-    async main(@CurrentAccount() account: AccountResponse, @Param('id') id: string, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Param('id') id: string,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        return await this.queryBus.ask(new FindExecutionByIdQuery(id, constraint));
+        return await this.queryBus.ask(new FindExecutionByIdQuery(id, constraint, { timezone }));
     }
 }

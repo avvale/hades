@@ -15,7 +15,11 @@ export class FindExecutionQueryHandler implements IQueryHandler<FindExecutionQue
 
     async execute(query: FindExecutionQuery): Promise<ExecutionResponse>
     {
-        const execution = await this.findExecutionService.main(query.queryStatement);
+        const execution = await this.findExecutionService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(execution);
     }
