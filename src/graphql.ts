@@ -973,9 +973,9 @@ export interface IQuery {
     cciFindFlowById(id?: string): CciFlow | Promise<CciFlow>;
     cciGetFlows(query?: QueryStatement): CciFlow[] | Promise<CciFlow[]>;
     cciPaginateFlows(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    cciFindJobDetail(query?: QueryStatement): CciJobDetail | Promise<CciJobDetail>;
-    cciFindJobDetailById(id?: string): CciJobDetail | Promise<CciJobDetail>;
-    cciGetJobsDetail(query?: QueryStatement): CciJobDetail[] | Promise<CciJobDetail[]>;
+    cciFindJobDetail(query?: QueryStatement, constraint?: QueryStatement): CciJobDetail | Promise<CciJobDetail>;
+    cciFindJobDetailById(id?: string, constraint?: QueryStatement): CciJobDetail | Promise<CciJobDetail>;
+    cciGetJobsDetail(query?: QueryStatement, constraint?: QueryStatement): CciJobDetail[] | Promise<CciJobDetail[]>;
     cciPaginateJobsDetail(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindJobOverview(query?: QueryStatement, constraint?: QueryStatement): CciJobOverview | Promise<CciJobOverview>;
     cciFindJobOverviewById(id?: string, constraint?: QueryStatement): CciJobOverview | Promise<CciJobOverview>;
@@ -1088,9 +1088,9 @@ export interface IMutation {
     cciDeleteFlows(query?: QueryStatement): CciFlow[] | Promise<CciFlow[]>;
     cciCreateJobDetail(payload: CciCreateJobDetailInput): CciJobDetail | Promise<CciJobDetail>;
     cciCreateJobsDetail(payload: CciCreateJobDetailInput[]): boolean | Promise<boolean>;
-    cciUpdateJobDetail(payload: CciUpdateJobDetailInput): CciJobDetail | Promise<CciJobDetail>;
-    cciDeleteJobDetailById(id: string): CciJobDetail | Promise<CciJobDetail>;
-    cciDeleteJobsDetail(query?: QueryStatement): CciJobDetail[] | Promise<CciJobDetail[]>;
+    cciUpdateJobDetail(payload: CciUpdateJobDetailInput, constraint?: QueryStatement): CciJobDetail | Promise<CciJobDetail>;
+    cciDeleteJobDetailById(id: string, constraint?: QueryStatement): CciJobDetail | Promise<CciJobDetail>;
+    cciDeleteJobsDetail(query?: QueryStatement, constraint?: QueryStatement): CciJobDetail[] | Promise<CciJobDetail[]>;
     cciCreateJobOverview(payload: CciCreateJobOverviewInput): CciJobOverview | Promise<CciJobOverview>;
     cciCreateJobsOverview(payload: CciCreateJobOverviewInput[]): boolean | Promise<boolean>;
     cciUpdateJobOverview(payload: CciUpdateJobOverviewInput, constraint?: QueryStatement): CciJobOverview | Promise<CciJobOverview>;
@@ -1356,10 +1356,13 @@ export interface CciFlow {
 
 export interface CciJobDetail {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
+    systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
+    executionId: string;
     execution: CciExecution;
     executionType: CciJobDetailExecutionType;
     executionExecutedAt: GraphQLTimestamp;
