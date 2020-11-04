@@ -33,7 +33,7 @@ export class CciGetExecutionsResolver
         @CurrentAccount() account: AccountResponse,
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string
+        @Timezone() timezone?: string,
     ): Promise<CciExecution[]>
     {
         return await this.queryBus.ask(new GetExecutionsQuery(queryStatement, constraint, { timezone }));

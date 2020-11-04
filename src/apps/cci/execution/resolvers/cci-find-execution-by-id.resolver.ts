@@ -33,7 +33,7 @@ export class CciFindExecutionByIdResolver
         @CurrentAccount() account: AccountResponse,
         @Args('id') id: string,
         @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string
+        @Timezone() timezone?: string,
     ): Promise<CciExecution>
     {
         return await this.queryBus.ask(new FindExecutionByIdQuery(id, constraint, { timezone }));

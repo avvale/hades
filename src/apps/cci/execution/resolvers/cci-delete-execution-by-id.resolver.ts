@@ -35,7 +35,7 @@ export class CciDeleteExecutionByIdResolver
         @CurrentAccount() account: AccountResponse,
         @Args('id') id: string,
         @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string
+        @Timezone() timezone?: string,
     )
     {
         const execution = await this.queryBus.ask(new FindExecutionByIdQuery(id, constraint, { timezone }));

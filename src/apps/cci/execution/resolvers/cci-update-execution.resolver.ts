@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -31,22 +32,15 @@ export class CciUpdateExecutionResolver
 
     @Mutation('cciUpdateExecution')
     @TenantConstraint()
-    async main(@CurrentAccount() account: AccountResponse, @Args('payload') payload: CciUpdateExecutionInput, @Args('constraint') constraint?: QueryStatement)
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Args('payload') payload: CciUpdateExecutionInput,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new UpdateExecutionCommand(
-            payload.id,
-            payload.tenantId,
-            payload.tenantCode,
-            payload.systemId,
-            payload.systemName,
-            payload.version,
-            payload.type,
-            payload.executedAt,
-            payload.monitoringStartAt,
-            payload.monitoringEndAt,
-            constraint,
-        ));
+        await this.commandBus.dispatch(new UpdateExecutionCommand(payload, constraint, { timezone }));
 
-        return await this.queryBus.ask(new FindExecutionByIdQuery(payload.id, constraint));
+        return await this.queryBus.ask(new FindExecutionByIdQuery(payload.id, constraint, { timezone }));
     }
 }

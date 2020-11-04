@@ -18,7 +18,7 @@ export class DeleteExecutionByIdService
         // get object to delete
         const execution = await this.repository.findById(id, constraint, cQMetadata);
 
-        await this.repository.deleteById(id, constraint);
+        await this.repository.deleteById(id, constraint, cQMetadata);
 
         // insert EventBus in object, to be able to apply and commit events
         const executionRegister = this.publisher.mergeObjectContext(execution);

@@ -1,6 +1,7 @@
 import { Controller, Param, Delete, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ExecutionDto } from './../dto/execution.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -34,11 +35,16 @@ export class CciDeleteExecutionByIdController
     @ApiOperation({ summary: 'Delete execution by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: ExecutionDto })
     @TenantConstraint()
-    async main(@CurrentAccount() account: AccountResponse, @Param('id') id: string, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Param('id') id: string,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const execution = await this.queryBus.ask(new FindExecutionByIdQuery(id, constraint));
+        const execution = await this.queryBus.ask(new FindExecutionByIdQuery(id, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteExecutionByIdCommand(id, constraint));
+        await this.commandBus.dispatch(new DeleteExecutionByIdCommand(id, constraint, { timezone }));
 
         return execution;
     }

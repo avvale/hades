@@ -2,6 +2,7 @@ import { Controller, Put, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateExecutionDto } from './../dto/update-execution.dto';
 import { ExecutionDto } from './../dto/execution.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -35,22 +36,15 @@ export class CciUpdateExecutionController
     @ApiOperation({ summary: 'Update execution' })
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: ExecutionDto})
     @TenantConstraint()
-    async main(@CurrentAccount() account: AccountResponse, @Body() payload: UpdateExecutionDto, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Body() payload: UpdateExecutionDto,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new UpdateExecutionCommand(
-            payload.id,
-            payload.tenantId,
-            payload.tenantCode,
-            payload.systemId,
-            payload.systemName,
-            payload.version,
-            payload.type,
-            payload.executedAt,
-            payload.monitoringStartAt,
-            payload.monitoringEndAt,
-            constraint,
-        ));
+        await this.commandBus.dispatch(new UpdateExecutionCommand(payload, constraint, { timezone }));
 
-        return await this.queryBus.ask(new FindExecutionByIdQuery(payload.id, constraint));
+        return await this.queryBus.ask(new FindExecutionByIdQuery(payload.id, constraint, { timezone }));
     }
 }

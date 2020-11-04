@@ -12,6 +12,10 @@ export class DeleteExecutionsCommandHandler implements ICommandHandler<DeleteExe
     async execute(command: DeleteExecutionsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteExecutionsService.main(command.queryStatement);
+        await this.deleteExecutionsService.main(
+            command.queryStatement,
+            command.constraint,
+            command.cQMetadata,
+        );
     }
 }

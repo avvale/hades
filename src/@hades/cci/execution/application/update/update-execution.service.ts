@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import {
     ExecutionId,
     ExecutionTenantId,
@@ -28,38 +29,41 @@ export class UpdateExecutionService
     ) {}
 
     public async main(
-        id: ExecutionId,
-        tenantId?: ExecutionTenantId,
-        tenantCode?: ExecutionTenantCode,
-        systemId?: ExecutionSystemId,
-        systemName?: ExecutionSystemName,
-        version?: ExecutionVersion,
-        type?: ExecutionType,
-        executedAt?: ExecutionExecutedAt,
-        monitoringStartAt?: ExecutionMonitoringStartAt,
-        monitoringEndAt?: ExecutionMonitoringEndAt,
-        
+        payload: {
+            id: ExecutionId,
+            tenantId?: ExecutionTenantId,
+            tenantCode?: ExecutionTenantCode,
+            systemId?: ExecutionSystemId,
+            systemName?: ExecutionSystemName,
+            version?: ExecutionVersion,
+            type?: ExecutionType,
+            executedAt?: ExecutionExecutedAt,
+            monitoringStartAt?: ExecutionMonitoringStartAt,
+            monitoringEndAt?: ExecutionMonitoringEndAt,
+        },
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const execution = CciExecution.register(
-            id,
-            tenantId,
-            tenantCode,
-            systemId,
-            systemName,
-            version,
-            type,
-            executedAt,
-            monitoringStartAt,
-            monitoringEndAt,
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.systemId,
+            payload.systemName,
+            payload.version,
+            payload.type,
+            payload.executedAt,
+            payload.monitoringStartAt,
+            payload.monitoringEndAt,
             null,
-            new ExecutionUpdatedAt(Utils.nowTimestamp()),
+            new ExecutionUpdatedAt({currentTimestamp: true}),
             null
         );
 
         // update
-        await this.repository.update(execution);
+        await this.repository.update(execution, constraint, cQMetadata);
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const executionRegister = this.publisher.mergeObjectContext(

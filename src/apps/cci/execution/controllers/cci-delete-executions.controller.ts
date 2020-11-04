@@ -1,6 +1,7 @@
 import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ExecutionDto } from './../dto/execution.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -36,11 +37,16 @@ export class CciDeleteExecutionsController
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     @TenantConstraint()
-    async main(@CurrentAccount() account: AccountResponse, @Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Body('query') queryStatement?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const executions = await this.queryBus.ask(new GetExecutionsQuery(queryStatement, constraint));
+        const executions = await this.queryBus.ask(new GetExecutionsQuery(queryStatement, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteExecutionsCommand(queryStatement, constraint));
+        await this.commandBus.dispatch(new DeleteExecutionsCommand(queryStatement, constraint, { timezone }));
 
         return executions;
     }
