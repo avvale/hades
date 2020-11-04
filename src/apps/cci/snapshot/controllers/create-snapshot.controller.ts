@@ -131,19 +131,22 @@ export class CreateSnapshotController
 
         const jobOverviewId = Utils.uuid();
         await this.commandBus.dispatch(new CreateJobOverviewCommand(
-            jobOverviewId,
-            tenant.id,
-            tenant.code,
-            system.id,
-            system.name,
-            executionId,
-            payload.execution.type,
-            payload.execution.executedAt,
-            payload.execution.monitoringStartAt,
-            payload.execution.monitoringEndAt,
-            payload.jobOverview.cancelled,
-            payload.jobOverview.completed,
-            payload.jobOverview.error
+            {
+                id: jobOverviewId,
+                tenantId: tenant.id,
+                tenantCode: tenant.code,
+                systemId: system.id,
+                systemName: system.name,
+                executionId: executionId,
+                executionType: payload.execution.type,
+                executionExecutedAt: payload.execution.executedAt,
+                executionMonitoringStartAt: payload.execution.monitoringStartAt,
+                executionMonitoringEndAt: payload.execution.monitoringEndAt,
+                cancelled: payload.jobOverview.cancelled,
+                completed: payload.jobOverview.completed,
+                error: payload.jobOverview.error
+            },
+            { timezone }
         ));
 
         const messagesDetail = payload.messagesDetail.map(message => {
