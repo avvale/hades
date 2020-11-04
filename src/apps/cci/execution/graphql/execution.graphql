@@ -48,7 +48,6 @@ input CciUpdateExecutionInput
     executedAt: GraphQLTimestamp
     monitoringStartAt: GraphQLTimestamp
     monitoringEndAt: GraphQLTimestamp
-    
 }
 
 type Query
