@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateChannelDetailCommand } from './update-channel-detail.command';
 import { UpdateChannelDetailService } from './update-channel-detail.service';
-import { 
+import {
     ChannelDetailId,
     ChannelDetailTenantId,
     ChannelDetailTenantCode,
@@ -18,39 +18,44 @@ import {
     ChannelDetailChannelParty,
     ChannelDetailChannelComponent,
     ChannelDetailChannelName,
-    ChannelDetailDetail
-    
+    ChannelDetailDetail,
+    ChannelDetailCreatedAt,
+    ChannelDetailUpdatedAt,
+    ChannelDetailDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdateChannelDetailCommand)
 export class UpdateChannelDetailCommandHandler implements ICommandHandler<UpdateChannelDetailCommand>
 {
     constructor(
-        private readonly updateChannelDetailService: UpdateChannelDetailService
-    ) { }
+        private readonly updateChannelDetailService: UpdateChannelDetailService,
+    ) {}
 
     async execute(command: UpdateChannelDetailCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.updateChannelDetailService.main(
-            new ChannelDetailId(command.id),
-            new ChannelDetailTenantId(command.tenantId, { undefinable: true }),
-            new ChannelDetailTenantCode(command.tenantCode, { undefinable: true }),
-            new ChannelDetailSystemId(command.systemId, { undefinable: true }),
-            new ChannelDetailSystemName(command.systemName, { undefinable: true }),
-            new ChannelDetailExecutionId(command.executionId, { undefinable: true }),
-            new ChannelDetailExecutionType(command.executionType, { undefinable: true }),
-            new ChannelDetailExecutionExecutedAt(command.executionExecutedAt, { undefinable: true }),
-            new ChannelDetailExecutionMonitoringStartAt(command.executionMonitoringStartAt, { undefinable: true }),
-            new ChannelDetailExecutionMonitoringEndAt(command.executionMonitoringEndAt, { undefinable: true }),
-            new ChannelDetailStatus(command.status, { undefinable: true }),
-            new ChannelDetailChannelHash(command.channelHash, { undefinable: true }),
-            new ChannelDetailChannelSapId(command.channelSapId, { undefinable: true }),
-            new ChannelDetailChannelParty(command.channelParty),
-            new ChannelDetailChannelComponent(command.channelComponent, { undefinable: true }),
-            new ChannelDetailChannelName(command.channelName, { undefinable: true }),
-            new ChannelDetailDetail(command.detail),
-            
+            {
+                id: new ChannelDetailId(command.payload.id),
+                tenantId: new ChannelDetailTenantId(command.payload.tenantId, { undefinable: true }),
+                tenantCode: new ChannelDetailTenantCode(command.payload.tenantCode, { undefinable: true }),
+                systemId: new ChannelDetailSystemId(command.payload.systemId, { undefinable: true }),
+                systemName: new ChannelDetailSystemName(command.payload.systemName, { undefinable: true }),
+                executionId: new ChannelDetailExecutionId(command.payload.executionId, { undefinable: true }),
+                executionType: new ChannelDetailExecutionType(command.payload.executionType, { undefinable: true }),
+                executionExecutedAt: new ChannelDetailExecutionExecutedAt(command.payload.executionExecutedAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                executionMonitoringStartAt: new ChannelDetailExecutionMonitoringStartAt(command.payload.executionMonitoringStartAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                executionMonitoringEndAt: new ChannelDetailExecutionMonitoringEndAt(command.payload.executionMonitoringEndAt, { undefinable: true }, {removeTimezone: command.cQMetadata.timezone}),
+                status: new ChannelDetailStatus(command.payload.status, { undefinable: true }),
+                channelHash: new ChannelDetailChannelHash(command.payload.channelHash, { undefinable: true }),
+                channelSapId: new ChannelDetailChannelSapId(command.payload.channelSapId, { undefinable: true }),
+                channelParty: new ChannelDetailChannelParty(command.payload.channelParty),
+                channelComponent: new ChannelDetailChannelComponent(command.payload.channelComponent, { undefinable: true }),
+                channelName: new ChannelDetailChannelName(command.payload.channelName, { undefinable: true }),
+                detail: new ChannelDetailDetail(command.payload.detail),
+            },
+            command.constraint,
+            command.cQMetadata,
         )
     }
 }

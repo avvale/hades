@@ -41,7 +41,6 @@ describe('DeleteChannelDetailByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteChannelDetailByIdCommand(
                     channelsDetail[0].id,
-                
                 )
             )).toBe(undefined);
         });

@@ -7,16 +7,16 @@ import { PaginateChannelsDetailService } from './paginate-channels-detail.servic
 export class PaginateChannelsDetailQueryHandler implements IQueryHandler<PaginateChannelsDetailQuery>
 {
     constructor(
-        private readonly paginateChannelsDetailService: PaginateChannelsDetailService
-    ) { }
+        private readonly paginateChannelsDetailService: PaginateChannelsDetailService,
+    ) {}
 
     async execute(query: PaginateChannelsDetailQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateChannelsDetailService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginateChannelsDetailService.main(query.queryStatement, query.constraint, query.cQMetadata);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

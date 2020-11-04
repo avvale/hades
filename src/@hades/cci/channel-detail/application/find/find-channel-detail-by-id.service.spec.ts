@@ -8,13 +8,13 @@ import { ChannelDetailId } from './../../domain/value-objects';
 import { IChannelDetailRepository } from './../../domain/channel-detail.repository';
 import { MockChannelDetailRepository } from './../../infrastructure/mock/mock-channel-detail.repository';
 
-describe('FindChannelDetailByIdService', () => 
+describe('FindChannelDetailByIdService', () =>
 {
     let service: FindChannelDetailByIdService;
     let repository: IChannelDetailRepository;
     let mockRepository: MockChannelDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindChannelDetailByIdService', () =>
                 EventPublisher,
                 FindChannelDetailByIdService,
                 MockChannelDetailRepository,
-                { 
+                {
                     provide: IChannelDetailRepository,
                     useValue: {
                         findById: (id) => {}

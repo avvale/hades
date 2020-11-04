@@ -4,7 +4,7 @@ import { UpdatedChannelDetailEvent } from './updated-channel-detail.event';
 @EventsHandler(UpdatedChannelDetailEvent)
 export class UpdatedChannelDetailEventHandler implements IEventHandler<UpdatedChannelDetailEvent>
 {
-    handle(event: UpdatedChannelDetailEvent) 
+    handle(event: UpdatedChannelDetailEvent)
     {
         // console.log('UpdatedChannelDetailEvent: ', event);
     }

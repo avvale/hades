@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     ChannelDetailId,
     ChannelDetailTenantId,
     ChannelDetailTenantCode,
@@ -19,8 +19,7 @@ import {
     ChannelDetailDetail,
     ChannelDetailCreatedAt,
     ChannelDetailUpdatedAt,
-    ChannelDetailDeletedAt
-    
+    ChannelDetailDeletedAt,
 } from './value-objects';
 import { CreatedChannelDetailEvent } from './../application/events/created-channel-detail.event';
 import { UpdatedChannelDetailEvent } from './../application/events/updated-channel-detail.event';
@@ -28,8 +27,6 @@ import { DeletedChannelDetailEvent } from './../application/events/deleted-chann
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
-
-
 
 export class CciChannelDetail extends AggregateRoot
 {
@@ -53,18 +50,16 @@ export class CciChannelDetail extends AggregateRoot
     createdAt: ChannelDetailCreatedAt;
     updatedAt: ChannelDetailUpdatedAt;
     deletedAt: ChannelDetailDeletedAt;
-    
+
     // eager relationship
     tenant: IamTenant;
     system: CciSystem;
     execution: CciExecution;
-    
-    
-    
+
     constructor(id?: ChannelDetailId, tenantId?: ChannelDetailTenantId, tenantCode?: ChannelDetailTenantCode, systemId?: ChannelDetailSystemId, systemName?: ChannelDetailSystemName, executionId?: ChannelDetailExecutionId, executionType?: ChannelDetailExecutionType, executionExecutedAt?: ChannelDetailExecutionExecutedAt, executionMonitoringStartAt?: ChannelDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: ChannelDetailExecutionMonitoringEndAt, status?: ChannelDetailStatus, channelHash?: ChannelDetailChannelHash, channelSapId?: ChannelDetailChannelSapId, channelParty?: ChannelDetailChannelParty, channelComponent?: ChannelDetailChannelComponent, channelName?: ChannelDetailChannelName, detail?: ChannelDetailDetail, createdAt?: ChannelDetailCreatedAt, updatedAt?: ChannelDetailUpdatedAt, deletedAt?: ChannelDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;
@@ -85,14 +80,11 @@ export class CciChannelDetail extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
         this.tenant = tenant;
         this.system = system;
         this.execution = execution;
-        
-        
-        
     }
 
     static register (id: ChannelDetailId, tenantId: ChannelDetailTenantId, tenantCode: ChannelDetailTenantCode, systemId: ChannelDetailSystemId, systemName: ChannelDetailSystemName, executionId: ChannelDetailExecutionId, executionType: ChannelDetailExecutionType, executionExecutedAt: ChannelDetailExecutionExecutedAt, executionMonitoringStartAt: ChannelDetailExecutionMonitoringStartAt, executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt, status: ChannelDetailStatus, channelHash: ChannelDetailChannelHash, channelSapId: ChannelDetailChannelSapId, channelParty: ChannelDetailChannelParty, channelComponent: ChannelDetailChannelComponent, channelName: ChannelDetailChannelName, detail: ChannelDetailDetail, createdAt: ChannelDetailCreatedAt, updatedAt: ChannelDetailUpdatedAt, deletedAt: ChannelDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciChannelDetail
@@ -124,7 +116,6 @@ export class CciChannelDetail extends AggregateRoot
                 channelDetail.createdAt?.value,
                 channelDetail.updatedAt?.value,
                 channelDetail.deletedAt?.value,
-                
             )
         );
     }
@@ -153,7 +144,6 @@ export class CciChannelDetail extends AggregateRoot
                 channelDetail.createdAt?.value,
                 channelDetail.updatedAt?.value,
                 channelDetail.deletedAt?.value,
-                
             )
         );
     }
@@ -182,7 +172,6 @@ export class CciChannelDetail extends AggregateRoot
                 channelDetail.createdAt?.value,
                 channelDetail.updatedAt?.value,
                 channelDetail.deletedAt?.value,
-                
             )
         );
     }
@@ -210,14 +199,11 @@ export class CciChannelDetail extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             execution: this.execution?.toDTO(),
-            
-            
-            
         }
     }
 }

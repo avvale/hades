@@ -3,27 +3,27 @@
     "files": [
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channel-detail.command-handler.ts",
-            "integrity": "sha1:d97a0936fbbbeb502801033bfff1005dd2c3b5e1"
+            "integrity": "sha1:9b42ac56e4e936f64f55e51b9e11b10ec4596c11"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channel-detail.command.handler.spec.ts",
-            "integrity": "sha1:9be491bd58a5c462cd2cb92aa9a4974ab3f03dfc"
+            "integrity": "sha1:4dee4b3ca6472d2a9369df91c539da9c06e10f00"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channel-detail.command.ts",
-            "integrity": "sha1:ecf71de6fbbe98bbea6c40185e2cb58e8b76aef4"
+            "integrity": "sha1:06d27c5bf63d2bfb2fa1c28af251b47a698971a3"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channel-detail.service.spec.ts",
-            "integrity": "sha1:2ca1d99f804549f0f57c31085156055b560d24d8"
+            "integrity": "sha1:513cc7676e548174fd21bd6b89412d0026459c4e"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channel-detail.service.ts",
-            "integrity": "sha1:130d6ffd2548edcc7c8ae5d320d169ad7d56f081"
+            "integrity": "sha1:045eb690b4cdd7b485c00c1a541aa304bc9a8200"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channels-detail.command-handler.ts",
-            "integrity": "sha1:2feb32f58af3c8c0222fc486a8fc82a8c5e764a1"
+            "integrity": "sha1:ef2e811bad58fa1b9a9c3dd0b8aae9ba95584b4c"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channels-detail.command.handler.spec.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channels-detail.command.ts",
-            "integrity": "sha1:a22fe58afb4c7b846f7635632dd349020e9b5763"
+            "integrity": "sha1:6a78fb391f660f31a3df1e415e50e3fe14b4acc5"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channels-detail.service.spec.ts",
@@ -39,31 +39,31 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channels-detail.service.ts",
-            "integrity": "sha1:797f4fc7b2d3c85b91e097b1ec8902d42894f864"
+            "integrity": "sha1:39166f240dd1f2f67e7e0f3cc474e811f99cbe42"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/delete/delete-channel-detail-by-id.command-handler.ts",
-            "integrity": "sha1:54aa11c35a0591673511acc0395538768a968f99"
+            "integrity": "sha1:ae40de1494032243edc93012321037c60a853b2b"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/delete/delete-channel-detail-by-id.command.handler.spec.ts",
-            "integrity": "sha1:58ce773e486b4f50a841e6b60efc73c4e1f2b5e9"
+            "integrity": "sha1:cd4a1f0bf8db545a8c44f26e7025b79a41ae676f"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/delete/delete-channel-detail-by-id.command.ts",
-            "integrity": "sha1:56cd0e9701db02cb0e4520790ead0d8dac6256c3"
+            "integrity": "sha1:59aaea0deb7b3b8543c0763ea8e0cc79fa1f11cc"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/delete/delete-channel-detail-by-id.service.spec.ts",
-            "integrity": "sha1:5b0228d64bfeadbcc94bb3e69337e80efd4d463a"
+            "integrity": "sha1:34ed7089acd8761c65278f7acfb2adc43de948ac"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/delete/delete-channel-detail-by-id.service.ts",
-            "integrity": "sha1:937fe40c25a028bc43afe35b28a7982e6122362d"
+            "integrity": "sha1:3ce4eedbe4da6cdb6486cea96c5f1c2801add6a2"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/delete/delete-channels-detail.command-handler.ts",
-            "integrity": "sha1:90818853e8b2f25bfebd28eb35ec99d9664cfd75"
+            "integrity": "sha1:c0419abf54fb6a88a4acd12395a130abbc5bd128"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/delete/delete-channels-detail.command.handler.spec.ts",
@@ -71,7 +71,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/delete/delete-channels-detail.command.ts",
-            "integrity": "sha1:225653061da30aafcef5d101bb079d4377a5c3a3"
+            "integrity": "sha1:b85315b1b74eae918160b6eb80dfa72d7f2d2faf"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/delete/delete-channels-detail.service.spec.ts",
@@ -79,23 +79,23 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/delete/delete-channels-detail.service.ts",
-            "integrity": "sha1:8472d663ce9d072f980991cd98455f6c052f5ed5"
+            "integrity": "sha1:86a007855cb6f536b7dd703ad2f3a6eb9487233b"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/add-channels-detail-context.event.ts",
-            "integrity": "sha1:8346a2e23a64af05d78358ffa77078555f9b2474"
+            "integrity": "sha1:338dac890d3e1b7b2efc716bd544817845e5f961"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/created-channel-detail.event-handler.ts",
-            "integrity": "sha1:f30fa332bb03a6d468fe9bcedff05726582a7713"
+            "integrity": "sha1:c294388fbc980f2a8c746d081e28e0679460bf9f"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/created-channel-detail.event.ts",
-            "integrity": "sha1:55af53ce76496e68572ac1f7174e669950a4ba97"
+            "integrity": "sha1:b81abd1fb4f461d6eeebeb7de7f4c8cda7dc4593"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/created-channels-detail.event-handler.ts",
-            "integrity": "sha1:b4db6896f097c5dc8a5517ea0487d505a6da1e43"
+            "integrity": "sha1:6e2106ee6b1082fcaa9dbcc937ba6ff2f77e3016"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/created-channels-detail.event.ts",
@@ -103,15 +103,15 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/deleted-channel-detail.event-handler.ts",
-            "integrity": "sha1:a7ffa4ab425fb2ae8f26f6223945c912594b82a1"
+            "integrity": "sha1:5f23c1c6672c70ab3dd18fe9684d8a4008279b89"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/deleted-channel-detail.event.ts",
-            "integrity": "sha1:73c905d1586a11ca43744735e1dd2616013c8bdf"
+            "integrity": "sha1:59982f679bbe4d9e0fb3870887d79c1f98623344"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/deleted-channels-detail.event-handler.ts",
-            "integrity": "sha1:e4cb0cd4651992e34c1a61c5f88861d3d86c49c7"
+            "integrity": "sha1:e0caea6901e6b29627892ccc07fc471c1be70117"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/deleted-channels-detail.event.ts",
@@ -119,35 +119,35 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/updated-channel-detail.event-handler.ts",
-            "integrity": "sha1:f9db13c4ed4ce658e04a8111c830c8981e463bcf"
+            "integrity": "sha1:92534a25cba4ec266dcabd8335c97f3a0d064330"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/updated-channel-detail.event.ts",
-            "integrity": "sha1:b3b40428ad11b05944b9a15f09d4a47ad590cadd"
+            "integrity": "sha1:24ebafd1703b20088fd1c119bff65fbcaca0b24f"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/find/find-channel-detail-by-id.query-handler.ts",
-            "integrity": "sha1:438c52a3e8e902282cbbb16b4f3ee6506d5b8fb9"
+            "integrity": "sha1:addb07a2048b2ee1ce7952c38df08eabfe0dd704"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/find/find-channel-detail-by-id.query.handler.spec.ts",
-            "integrity": "sha1:e4d478c9e7b9ab6674819a665ebc2a6fea75b60c"
+            "integrity": "sha1:a945e876c70bd9e78f33463a845277906e29327e"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/find/find-channel-detail-by-id.query.ts",
-            "integrity": "sha1:18176eb380145b465bef3b17d3fed9c4284b00b9"
+            "integrity": "sha1:d8359dcdbc3b3ab2eb5f67ae991f97452199ef67"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/find/find-channel-detail-by-id.service.spec.ts",
-            "integrity": "sha1:bf9e3197579bdc15b33d31edc9b2e734567fd00c"
+            "integrity": "sha1:34b6ca9d76444067b31e24cdf8898e9f18fde2e5"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/find/find-channel-detail-by-id.service.ts",
-            "integrity": "sha1:32d6b7e004c67cc6e1992475bedec4ca8b8f7822"
+            "integrity": "sha1:7365958d4d5f301c663cb5536cf7dbcb7b4129d5"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/find/find-channel-detail.query-handler.ts",
-            "integrity": "sha1:38eeb7609e83068e514310b430e611086ffd52ed"
+            "integrity": "sha1:f25f07b047b7562313f359c814139eba7f6b7575"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/find/find-channel-detail.query.handler.spec.ts",
@@ -155,7 +155,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/find/find-channel-detail.query.ts",
-            "integrity": "sha1:c3d4ff387fc65989f9fad6f6eb0196762af09acd"
+            "integrity": "sha1:1b91d3f0a0e45f73a33a13b1e70698c436a2c9e3"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/find/find-channel-detail.service.spec.ts",
@@ -163,11 +163,11 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/find/find-channel-detail.service.ts",
-            "integrity": "sha1:1d786796a392a710829b44a34e0e1f4316eccf80"
+            "integrity": "sha1:bf69974e380f8f90a2a41cf5cfdadfa7adb0295f"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/get/get-channels-detail.query-handler.ts",
-            "integrity": "sha1:d9d317e6bbb30ad08c0ba6f5c744bfcdbc082699"
+            "integrity": "sha1:defff113054688d5efdcd5c2f8d269cf887078dc"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/get/get-channels-detail.query.handler.spec.ts",
@@ -175,7 +175,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/get/get-channels-detail.query.ts",
-            "integrity": "sha1:342a5f7a4ac8806ff364f44a1e83cb1df9d2456e"
+            "integrity": "sha1:cae6938d066f4f10701b0c820174b349cdf1b46f"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/get/get-channels-detail.service.spec.ts",
@@ -183,19 +183,19 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/get/get-channels-detail.service.ts",
-            "integrity": "sha1:3de36a4633b607a777fd7bbbde88d241e61c22df"
+            "integrity": "sha1:4b478ce4d66d2df4a5257ed6154c477bd9bbe40a"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/paginate/paginate-channels-detail.query-handler.ts",
-            "integrity": "sha1:4334c015049c170ca4f8410f412c5e11ab83b654"
+            "integrity": "sha1:78689f5d579f529968adfe4552d7b498cadb587a"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/paginate/paginate-channels-detail.query.handler.spec.ts",
-            "integrity": "sha1:be5099d2f4d08317ccdeadcc2afbe1ada03255f2"
+            "integrity": "sha1:70ec864d0abdfbd6087397b63e4d966ec43e9804"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/paginate/paginate-channels-detail.query.ts",
-            "integrity": "sha1:6d9287818bd4066c395c7b77afd0b37ddca54bb6"
+            "integrity": "sha1:1c43b8fa2545bb817cdb86ba77badd33b2a340d2"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/paginate/paginate-channels-detail.service.spec.ts",
@@ -203,15 +203,15 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/paginate/paginate-channels-detail.service.ts",
-            "integrity": "sha1:85bf72d405a1a8f7fc241d1c7f3b623908ec4180"
+            "integrity": "sha1:7621658f9e2d87d74eee344c22004ee88ee6bf97"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/sagas/channel-detail.sagas.ts",
-            "integrity": "sha1:a4105123347b466bf606e53400651eb83136f4d9"
+            "integrity": "sha1:d6ea34b57f15da87a599ae2c722067e43fde7e7b"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.command-handler.ts",
-            "integrity": "sha1:54cdfb1e5b5d9ca6eb0b9e971b142925ea9cdae9"
+            "integrity": "sha1:fcc9d5e6cc88e0a249fd70e1c08ffe8d0c042d64"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.command.handler.spec.ts",
@@ -219,31 +219,31 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.command.ts",
-            "integrity": "sha1:8699cb02b056c151cfa9f78db085d3009438d726"
+            "integrity": "sha1:36b29272326c253a70b7b4e83816dba69e6e94db"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.service.spec.ts",
-            "integrity": "sha1:99b81e4fecd5cb9e27bed88f32bb0ae0652a7dd9"
+            "integrity": "sha1:f13d014f745cb687604a51d18baee79b09fd500d"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.service.ts",
-            "integrity": "sha1:b80ddff20e0ab0cfb7ebcdf547394c1872267a1d"
+            "integrity": "sha1:0ef048e226a281df6a2c509fe26fe82eccbffb62"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/channel-detail.aggregate.ts",
-            "integrity": "sha1:2be2cee3fdd9b04736c20a8ed533bae55ec32201"
+            "integrity": "sha1:a9c020ea986cba899d41952e7fe1eddab0814fc1"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/channel-detail.mapper.ts",
-            "integrity": "sha1:7672785e321a2b2ad9977e89ff4b28cd2122c896"
+            "integrity": "sha1:23b9645ed01555ca7af9f57f395b86eac9476dc0"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/channel-detail.repository.ts",
-            "integrity": "sha1:738e8604f6fcdfc2ed9dd2cc1a3bbeb273a3eb18"
+            "integrity": "sha1:f2f2bdc3a06d2201cb9a2dee09eb39a7b9a4f7b8"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/channel-detail.response.ts",
-            "integrity": "sha1:7cc526b82f1a9dfbb668bd4cec7a0434d361aa4c"
+            "integrity": "sha1:e776c1b2ff9cd2c1cf031651fc79378042d6205e"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/index.ts",
@@ -255,263 +255,263 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/mock/mock-channel-detail.repository.ts",
-            "integrity": "sha1:599e3c1b53aebe10563bf32007b34cc5e40b4deb"
+            "integrity": "sha1:24f472aecc5a3109cfb80fc4ab200a893d3371a4"
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/seeds/channel-detail.seed.ts",
-            "integrity": "sha1:a0771581cc128392099717f71ef2793856b557f4"
+            "integrity": "sha1:b18069297d5aa066fe99ecd49d042fff6feba8d7"
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/sequelize/sequelize-channel-detail.model.ts",
-            "integrity": "sha1:26ed0c2e37599b421ab0a120181e4491bbc653b5"
+            "integrity": "sha1:9a317f0ae51ff64570fb20d04f9de3afad9043c4"
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/sequelize/sequelize-channel-detail.repository.ts",
-            "integrity": "sha1:0ebbbe32fafaff49180f386046e0ecd433f392d6"
+            "integrity": "sha1:b62b4d09937f06ffb5b6c00018c8acc8fff1278c"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-id.ts",
-            "integrity": "sha1:fe6cd29764bcf2383d5ff0ddaa09b61dfcc312a3"
+            "integrity": "sha1:3bda4e7883470f56c231bf269d2b2b081fcd2bae"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-tenant-id.ts",
-            "integrity": "sha1:d600b5c348d37709ff9481843b7a7c39ae1d65ad"
+            "integrity": "sha1:9c4babf5357a9daf500aab0aa9b86f0ea6432c75"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-tenant-code.ts",
-            "integrity": "sha1:03634238cbd6a63046aaa8dcb2ec2ece78ba722c"
+            "integrity": "sha1:cc1fd49e1aa8fd5b117447a4cc757b5bc0789d2f"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-system-id.ts",
-            "integrity": "sha1:23dec26a9578c304d910db802f8bb1ba9aaed9c3"
+            "integrity": "sha1:55011e48514be47603094e599968050059e949dd"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-system-name.ts",
-            "integrity": "sha1:e2341cbddc4bf79ac2a7deed3d7cd1e937fb32f5"
+            "integrity": "sha1:1d02e1976de33a0f75e5105c91621ab31aba27cc"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-execution-id.ts",
-            "integrity": "sha1:31dd8dcb696ceaa254b8d4e2b86af78dadfbd76e"
+            "integrity": "sha1:d8671c38a671b0ed652591c507e81663172499ff"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-execution-type.ts",
-            "integrity": "sha1:fe5110773005a2831656d28e48aa4079f07ade02"
+            "integrity": "sha1:60fa857f1a7ff1b2ce90fe66b3debbc143a7e32f"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-execution-executed-at.ts",
-            "integrity": "sha1:07b92a43f5672b99304ba1217fad523d1069f364"
+            "integrity": "sha1:aa14a953362568303ed7ad8b4eb034c61a5448e9"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-execution-monitoring-start-at.ts",
-            "integrity": "sha1:be51dce2986022212bab1ccb0107c676b94cd28f"
+            "integrity": "sha1:26f8ca05978a3c1517502b610e171d0677730a6e"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-execution-monitoring-end-at.ts",
-            "integrity": "sha1:f07b29ead78164d6dbe89f0628884730a58ed620"
+            "integrity": "sha1:58cc9f8f78a9bf291e24905e528f1833c78109dc"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-status.ts",
-            "integrity": "sha1:bf68b193e26e0fed74917ede77b612c80223e7b1"
+            "integrity": "sha1:e28804b8d99221ff97cac23286d0e7ddfd9f1b4a"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-channel-hash.ts",
-            "integrity": "sha1:250f9f650c5e6166a1865b50d3ff180eb85103c1"
+            "integrity": "sha1:23165026776bc45a9ff096058be6e09900d13968"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-channel-sap-id.ts",
-            "integrity": "sha1:94769927a5d5d5ed71d74d0c7e136abaa76c78a1"
+            "integrity": "sha1:2f102ab61279fae6d446e2f0b2bce96ae4fb5f44"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-channel-party.ts",
-            "integrity": "sha1:5eaddd02f58fe7092a4c39cc021bbb5d2c8224d5"
+            "integrity": "sha1:af6f54cc15c8b226cd776d491f522d2ca2ff510f"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-channel-component.ts",
-            "integrity": "sha1:81e33529e9caf8e13486d7b6bd757cdf940c770d"
+            "integrity": "sha1:e046fc21204aec47e8092af9a9bcf472af6d9687"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-channel-name.ts",
-            "integrity": "sha1:000411ea3bd2f80b6ec14b9f6b924dcbd3c7a4ba"
+            "integrity": "sha1:f8373153f6f7151f33770079fa38d80d44c5a1f8"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-detail.ts",
-            "integrity": "sha1:c68dfa92ce9ec85325723067557d567358020c99"
+            "integrity": "sha1:c57e625ff9f8a8a0d7ff1122ba3fe0118fd7328b"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-created-at.ts",
-            "integrity": "sha1:c3f7130981a31f7efc67f4ef3b2d4c6cf250c8c3"
+            "integrity": "sha1:e826636c5f2ace265742461afcf3b07244fb75aa"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-updated-at.ts",
-            "integrity": "sha1:8c630499042d2198cd067253c8bedc6351a3a7c4"
+            "integrity": "sha1:5612d9a728896890ee94e3dae34a6a4453d32c1c"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/value-objects/channel-detail-deleted-at.ts",
-            "integrity": "sha1:57eddbadddae5b1433a33a7ca483783762b6bebc"
+            "integrity": "sha1:5b7944e1a96f78ac470aef35c59bc717be3bebcd"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/create-channel-detail.controller.spec.ts",
-            "integrity": "sha1:1fc3a6834b1ac9ff2964a12f8fc397e86caf815c"
+            "path": "src/apps/cci/channel-detail/controllers/cci-create-channel-detail.controller.spec.ts",
+            "integrity": "sha1:6e658df5326774c19a83628dad7493482e965edf"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/create-channel-detail.controller.ts",
-            "integrity": "sha1:fbf5536610c958628f08c17b89a17c08b4db1b02"
+            "path": "src/apps/cci/channel-detail/controllers/cci-create-channel-detail.controller.ts",
+            "integrity": "sha1:9a00c09665f1b1b6f2c27138a1c12c0915496279"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/create-channels-detail.controller.spec.ts",
-            "integrity": "sha1:bf4deb879179ed301769a7728ef898b236ed445d"
+            "path": "src/apps/cci/channel-detail/controllers/cci-create-channels-detail.controller.spec.ts",
+            "integrity": "sha1:487459b126949e481adaa9725f8c6f4906b9eabf"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/create-channels-detail.controller.ts",
-            "integrity": "sha1:6351e84cf6e0737b603d90690acb931ce67d8f87"
+            "path": "src/apps/cci/channel-detail/controllers/cci-create-channels-detail.controller.ts",
+            "integrity": "sha1:fba1aa8b23c588ea3d05a40d08032e4a47ecb795"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/delete-channel-detail-by-id.controller.spec.ts",
-            "integrity": "sha1:3fdd23efcfe0d3fcb102dfb560f82dbcafdf3798"
+            "path": "src/apps/cci/channel-detail/controllers/cci-delete-channel-detail-by-id.controller.spec.ts",
+            "integrity": "sha1:a8ab575408064fbaf7b97876bb8c8779465b7e59"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/delete-channel-detail-by-id.controller.ts",
-            "integrity": "sha1:bb96ed292d07980bb49f88992fe87b63e4c5f480"
+            "path": "src/apps/cci/channel-detail/controllers/cci-delete-channel-detail-by-id.controller.ts",
+            "integrity": "sha1:48633c3da9936e9747a79a164a246544be52ba59"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/delete-channels-detail.controller.spec.ts",
-            "integrity": "sha1:635e59a79b18b5a23609b26987a96ecf520bf9a0"
+            "path": "src/apps/cci/channel-detail/controllers/cci-delete-channels-detail.controller.spec.ts",
+            "integrity": "sha1:02658466989c724ac1f922faa4ca2a8911493370"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/delete-channels-detail.controller.ts",
-            "integrity": "sha1:ae82ef9ecb26fe620cc188bbfe4e2c3d787abd67"
+            "path": "src/apps/cci/channel-detail/controllers/cci-delete-channels-detail.controller.ts",
+            "integrity": "sha1:5f56f06ee436869484213e307172d13db0baa8ad"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/find-channel-detail-by-id.controller.spec.ts",
-            "integrity": "sha1:e3f574145ee8d9be471f94edbd77f2637ccb8974"
+            "path": "src/apps/cci/channel-detail/controllers/cci-find-channel-detail-by-id.controller.spec.ts",
+            "integrity": "sha1:c367c8683be687dfe8385bb63b1d28563662e5e1"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/find-channel-detail-by-id.controller.ts",
-            "integrity": "sha1:299110fffd1de55c1cdf8b39df9b5be474e7b28f"
+            "path": "src/apps/cci/channel-detail/controllers/cci-find-channel-detail-by-id.controller.ts",
+            "integrity": "sha1:5d2b5eba20394214fd5e4fa787847c5872b5c34d"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/find-channel-detail.controller.spec.ts",
-            "integrity": "sha1:a7eb5f1733d347ea2505a74831e95c9857e86dc1"
+            "path": "src/apps/cci/channel-detail/controllers/cci-find-channel-detail.controller.spec.ts",
+            "integrity": "sha1:78d7318bf513bb209121348bbdd0b636c281691d"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/find-channel-detail.controller.ts",
-            "integrity": "sha1:24fcf0be2b61c2448eee8afa7dc1c6760ebbb9d2"
+            "path": "src/apps/cci/channel-detail/controllers/cci-find-channel-detail.controller.ts",
+            "integrity": "sha1:147beac4744d10f7df6526659694f060ef236f51"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/get-channels-detail.controller.spec.ts",
-            "integrity": "sha1:0848785f0ad1c2dd661fd5b82659b3edae98f29a"
+            "path": "src/apps/cci/channel-detail/controllers/cci-get-channels-detail.controller.spec.ts",
+            "integrity": "sha1:fae5931b324dfd91256668b729849fe136144838"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/get-channels-detail.controller.ts",
-            "integrity": "sha1:3bb19ee07319b32245c5906264fe504de7f7e474"
+            "path": "src/apps/cci/channel-detail/controllers/cci-get-channels-detail.controller.ts",
+            "integrity": "sha1:a77ab0ed63cf17cb1a00e0a249ad7ce568fd780e"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/paginate-channels-detail.controller.spec.ts",
-            "integrity": "sha1:83b779bc7308a0e4cf2a78e5acaa4d97719cbf40"
+            "path": "src/apps/cci/channel-detail/controllers/cci-paginate-channels-detail.controller.spec.ts",
+            "integrity": "sha1:a8e1fb87204afce22edc237c2d6ea213d2076626"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/paginate-channels-detail.controller.ts",
-            "integrity": "sha1:8071245f91ac5852b96c07bffd7224c3b294de5b"
+            "path": "src/apps/cci/channel-detail/controllers/cci-paginate-channels-detail.controller.ts",
+            "integrity": "sha1:fcce401c5cf1a62e42ce20b88157c712ee702082"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/update-channel-detail.controller.spec.ts",
-            "integrity": "sha1:7b624229b07c09e7f4bd162e01c87104eba918bf"
+            "path": "src/apps/cci/channel-detail/controllers/cci-update-channel-detail.controller.spec.ts",
+            "integrity": "sha1:5adbe9730e849e0bcff4d0a9547be24db5a1dd07"
         },
         {
-            "path": "src/apps/cci/channel-detail/controllers/update-channel-detail.controller.ts",
-            "integrity": "sha1:ac4242d3590b83d41beb4248fdb454317a9afd24"
+            "path": "src/apps/cci/channel-detail/controllers/cci-update-channel-detail.controller.ts",
+            "integrity": "sha1:36e97df0ef4c601cbc4cd127df9071736fef5a80"
         },
         {
             "path": "src/apps/cci/channel-detail/dto/channel-detail.dto.ts",
-            "integrity": "sha1:a3c030c0418b206b5d9df94a93380d373efe10e4"
+            "integrity": "sha1:29ce00afeea12101b65de924df424faa1a95a1e5"
         },
         {
             "path": "src/apps/cci/channel-detail/dto/create-channel-detail.dto.ts",
-            "integrity": "sha1:cff5cb8e9e3ed903689f748d06d4ec580fc7d2e1"
+            "integrity": "sha1:e8e0027e77dbdc8bf7edab2710bb9d1f08d30275"
         },
         {
             "path": "src/apps/cci/channel-detail/dto/update-channel-detail.dto.ts",
-            "integrity": "sha1:d8e47de425b68bfc0eaa6f9106187fb995566376"
+            "integrity": "sha1:5a915170e754fd2bd557d268bdff0ab454e84944"
         },
         {
             "path": "src/apps/cci/channel-detail/graphql/channel-detail.graphql",
-            "integrity": "sha1:4f2e6daf2834661e2a67793ed3ea2609a5ca660e"
+            "integrity": "sha1:58b6efdca327bcf6f742a976c8d7d4e9f945c012"
         },
         {
             "path": "src/apps/cci/channel-detail/index.ts",
-            "integrity": "sha1:6b2fc66ed131d90720518322ed2081bc876b86a2"
+            "integrity": "sha1:0f9a911a24dfe0f67d2abc4da6073a9a61b2f0c5"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/create-channel-detail.resolver.spec.ts",
-            "integrity": "sha1:690310fd0ed0e0bdd01325806543a326d97de76c"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-create-channel-detail.resolver.spec.ts",
+            "integrity": "sha1:08039533c025c0debf6e6259a2629bb525f33016"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/create-channel-detail.resolver.ts",
-            "integrity": "sha1:31802790c2236d5e83dcbda898494b93ba254c1b"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-create-channel-detail.resolver.ts",
+            "integrity": "sha1:47f9cb8109f2cc78f1af58bd34a7f45514c0ba93"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/create-channels-detail.resolver.spec.ts",
-            "integrity": "sha1:e3c271c9023248c192e7b294d3b74ddfe135daa7"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-create-channels-detail.resolver.spec.ts",
+            "integrity": "sha1:780d57f2a1eaff5323856d1b963a5aa9b8b71576"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/create-channels-detail.resolver.ts",
-            "integrity": "sha1:09c6d07929bc73b11a66afdb81b1c36ab0c078c9"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-create-channels-detail.resolver.ts",
+            "integrity": "sha1:9e3e826ba67480c3edb24063004ebe74b4ec9277"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/delete-channel-detail-by-id.resolver.spec.ts",
-            "integrity": "sha1:391f1e538c63943a7e7b395dbe723280e281028f"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-delete-channel-detail-by-id.resolver.spec.ts",
+            "integrity": "sha1:c93448da8c971d24c52949a79e8e118ec01c97e1"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/delete-channel-detail-by-id.resolver.ts",
-            "integrity": "sha1:09cbc7b0fd3cde2b08719b2605014e625be1538f"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-delete-channel-detail-by-id.resolver.ts",
+            "integrity": "sha1:4bbd2bbe05b6d4a65badef7fdf773386eaa65ec6"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/delete-channels-detail.resolver.spec.ts",
-            "integrity": "sha1:423cabbadb9a36bce2142f1f6cc22d46fa37d42f"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-delete-channels-detail.resolver.spec.ts",
+            "integrity": "sha1:cf0434bee33dca70cd5e4c600c0754b00bc24fa2"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/delete-channels-detail.resolver.ts",
-            "integrity": "sha1:60553179edc08d499dccb073caee0c45f2e0889f"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-delete-channels-detail.resolver.ts",
+            "integrity": "sha1:651c2111e536224af82c96c55327233e875e24eb"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/find-channel-detail-by-id.resolver.spec.ts",
-            "integrity": "sha1:f4000ffe901362c6c3a16f53b6f701071a70f373"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-find-channel-detail-by-id.resolver.spec.ts",
+            "integrity": "sha1:45064a19f09ac37a0bac8ac8899dcbb74ab6d5f5"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/find-channel-detail-by-id.resolver.ts",
-            "integrity": "sha1:9815edbc3b85dbbd93b9bc350d8834329839e58a"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-find-channel-detail-by-id.resolver.ts",
+            "integrity": "sha1:29958836b881c12c9e213eb1825fadb36d8b3487"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/find-channel-detail.resolver.spec.ts",
-            "integrity": "sha1:736c732090a9c977e71d128f89fc6945cf88938d"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-find-channel-detail.resolver.spec.ts",
+            "integrity": "sha1:80381dbcf0d8670ffdd4bef9bd5c8a77ba6715b7"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/find-channel-detail.resolver.ts",
-            "integrity": "sha1:19b69a6bb38648ec6d65a86dd0dfcd2a1b7d6398"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-find-channel-detail.resolver.ts",
+            "integrity": "sha1:08d61dedd7f1965949ee504c27ed924df21062e3"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/get-channels-detail.resolver.spec.ts",
-            "integrity": "sha1:c2ac927b5cb8c30abfd7aca1152d24393be348a1"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-get-channels-detail.resolver.spec.ts",
+            "integrity": "sha1:b056937dcee4462858b248562932d82ef461841f"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/get-channels-detail.resolver.ts",
-            "integrity": "sha1:25a3ca1cecd66d0d28151e5c5c37f62bf0d7bd49"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-get-channels-detail.resolver.ts",
+            "integrity": "sha1:57b3921134b4d04e533d96b27b409344d592c62b"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/paginate-channels-detail.resolver.spec.ts",
-            "integrity": "sha1:cbf17d8cc7189a665dddbafbc8902560a4527923"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-paginate-channels-detail.resolver.spec.ts",
+            "integrity": "sha1:11284baf6543d001f42712214e5f42b2cbc1368e"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/paginate-channels-detail.resolver.ts",
-            "integrity": "sha1:cc8ad0e5db5dd9e2050cc5b54c1edec221358450"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-paginate-channels-detail.resolver.ts",
+            "integrity": "sha1:7ab9e2e457fe0aa84ce2f1f90be3877a28020f91"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/update-channel-detail.resolver.spec.ts",
-            "integrity": "sha1:fc79aaeb98cf25b64b88113401c09c640bc76f0d"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-update-channel-detail.resolver.spec.ts",
+            "integrity": "sha1:688f83b3777093be8a65accdd2e2bf6ef9fe8282"
         },
         {
-            "path": "src/apps/cci/channel-detail/resolvers/update-channel-detail.resolver.ts",
-            "integrity": "sha1:0e430476f2171300a7b3c8c3dbc463bdfce0b2de"
+            "path": "src/apps/cci/channel-detail/resolvers/cci-update-channel-detail.resolver.ts",
+            "integrity": "sha1:bbbc57bb37ffed71a4da11d84e309074cbd6030a"
         },
         {
             "path": "src/apps/cci/channel-detail/seeder/seeder.module.ts",
@@ -519,11 +519,11 @@
         },
         {
             "path": "src/apps/cci/channel-detail/seeder/seeder.ts",
-            "integrity": "sha1:865705e0a03f354463e7ff15d79cea5b91b9df9d"
+            "integrity": "sha1:e027ffc79a35ee737241dbb15700b993c02deaf9"
         },
         {
             "path": "postman/cci.channel-detail.postman.json",
-            "integrity": "sha1:a2f57ff4df7ea3415095bbc8e280d5e3315244f8"
+            "integrity": "sha1:82cdd28f95a835171da5d76fd8c0762e0007c029"
         }
     ]
 }

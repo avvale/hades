@@ -6,12 +6,16 @@ import { DeleteChannelsDetailService } from './delete-channels-detail.service';
 export class DeleteChannelsDetailCommandHandler implements ICommandHandler<DeleteChannelsDetailCommand>
 {
     constructor(
-        private readonly deleteChannelsDetailService: DeleteChannelsDetailService
-    ) { }
+        private readonly deleteChannelsDetailService: DeleteChannelsDetailService,
+    ) {}
 
     async execute(command: DeleteChannelsDetailCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteChannelsDetailService.main(command.queryStatement);
+        await this.deleteChannelsDetailService.main(
+            command.queryStatement,
+            command.constraint,
+            command.cQMetadata,
+        );
     }
 }

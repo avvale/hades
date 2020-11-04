@@ -1,8 +1,6 @@
-
 enum CciChannelDetailExecutionType {
     SUMMARY
     DETAIL
-        
 }
 enum CciChannelDetailStatus {
     ERROR
@@ -11,16 +9,18 @@ enum CciChannelDetailStatus {
     STOPPED
     UNKNOWN
     UNREGISTERED
-        
 }
 
 type CciChannelDetail
 {
     id: ID!
+    tenantId: ID!
     tenant: IamTenant!
     tenantCode: GraphQLString!
+    systemId: ID!
     system: CciSystem!
     systemName: GraphQLString!
+    executionId: ID!
     execution: CciExecution!
     executionType: CciChannelDetailExecutionType!
     executionExecutedAt: GraphQLTimestamp!
@@ -36,7 +36,6 @@ type CciChannelDetail
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input CciCreateChannelDetailInput
@@ -58,7 +57,6 @@ input CciCreateChannelDetailInput
     channelComponent: GraphQLString!
     channelName: GraphQLString!
     detail: GraphQLString
-    
 }
 
 input CciUpdateChannelDetailInput
@@ -80,14 +78,13 @@ input CciUpdateChannelDetailInput
     channelComponent: GraphQLString
     channelName: GraphQLString
     detail: GraphQLString
-    
 }
 
-type Query 
+type Query
 {
-    cciFindChannelDetail(query:QueryStatement): CciChannelDetail
-    cciFindChannelDetailById(id:ID): CciChannelDetail
-    cciGetChannelsDetail(query:QueryStatement): [CciChannelDetail]!
+    cciFindChannelDetail(query:QueryStatement constraint:QueryStatement): CciChannelDetail
+    cciFindChannelDetailById(id:ID constraint:QueryStatement): CciChannelDetail
+    cciGetChannelsDetail(query:QueryStatement constraint:QueryStatement): [CciChannelDetail]!
     cciPaginateChannelsDetail(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -95,7 +92,7 @@ type Mutation
 {
     cciCreateChannelDetail(payload: CciCreateChannelDetailInput!): CciChannelDetail
     cciCreateChannelsDetail(payload: [CciCreateChannelDetailInput]!): Boolean!
-    cciUpdateChannelDetail(payload: CciUpdateChannelDetailInput!): CciChannelDetail
-    cciDeleteChannelDetailById(id: ID!): CciChannelDetail
-    cciDeleteChannelsDetail(query:QueryStatement): [CciChannelDetail]!
+    cciUpdateChannelDetail(payload: CciUpdateChannelDetailInput! constraint:QueryStatement): CciChannelDetail
+    cciDeleteChannelDetailById(id: ID! constraint:QueryStatement): CciChannelDetail
+    cciDeleteChannelsDetail(query:QueryStatement constraint:QueryStatement): [CciChannelDetail]!
 }

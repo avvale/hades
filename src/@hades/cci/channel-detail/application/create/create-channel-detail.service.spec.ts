@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { channelsDetail } from '@hades/cci/channel-detail/infrastructure/seeds/channel-detail.seed';
 import { CreateChannelDetailService } from './create-channel-detail.service';
-import { 
+import {
     ChannelDetailId,
     ChannelDetailTenantId,
     ChannelDetailTenantCode,
@@ -21,19 +21,22 @@ import {
     ChannelDetailChannelParty,
     ChannelDetailChannelComponent,
     ChannelDetailChannelName,
-    ChannelDetailDetail
-    
+    ChannelDetailDetail,
+    ChannelDetailCreatedAt,
+    ChannelDetailUpdatedAt,
+    ChannelDetailDeletedAt,
 } from './../../domain/value-objects';
 import { IChannelDetailRepository } from './../../domain/channel-detail.repository';
 import { MockChannelDetailRepository } from './../../infrastructure/mock/mock-channel-detail.repository';
 
-describe('CreateChannelDetailService', () => 
+describe('CreateChannelDetailService', () =>
+
 {
     let service: CreateChannelDetailService;
     let repository: IChannelDetailRepository;
     let mockRepository: MockChannelDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -42,7 +45,7 @@ describe('CreateChannelDetailService', () =>
                 EventPublisher,
                 CreateChannelDetailService,
                 MockChannelDetailRepository,
-                { 
+                {
                     provide: IChannelDetailRepository,
                     useValue: {
                         create: (item) => {}
@@ -56,14 +59,14 @@ describe('CreateChannelDetailService', () =>
         mockRepository  = module.get(MockChannelDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateChannelDetailService should be defined', () => 
+        test('CreateChannelDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a channelDetail and emit event', async () => 
+        test('should create a channelDetail and emit event', async () =>
         {
             expect(await service.main(
                 new ChannelDetailId(channelsDetail[0].id),

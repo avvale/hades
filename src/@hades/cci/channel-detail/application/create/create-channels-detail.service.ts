@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ChannelDetailId,
     ChannelDetailTenantId,
     ChannelDetailTenantCode,
@@ -21,8 +20,7 @@ import {
     ChannelDetailDetail,
     ChannelDetailCreatedAt,
     ChannelDetailUpdatedAt,
-    ChannelDetailDeletedAt
-    
+    ChannelDetailDeletedAt,
 } from './../../domain/value-objects';
 import { IChannelDetailRepository } from './../../domain/channel-detail.repository';
 import { CciChannelDetail } from './../../domain/channel-detail.aggregate';
@@ -33,7 +31,7 @@ export class CreateChannelsDetailService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IChannelDetailRepository
+        private readonly repository: IChannelDetailRepository,
     ) {}
 
     public async main(
@@ -55,7 +53,6 @@ export class CreateChannelsDetailService
             channelComponent: ChannelDetailChannelComponent,
             channelName: ChannelDetailChannelName,
             detail: ChannelDetailDetail,
-            
         } []
     ): Promise<void>
     {
@@ -78,18 +75,18 @@ export class CreateChannelsDetailService
             channelDetail.channelComponent,
             channelDetail.channelName,
             channelDetail.detail,
-            new ChannelDetailCreatedAt(Utils.nowTimestamp()),
-            new ChannelDetailUpdatedAt(Utils.nowTimestamp()),
+            new ChannelDetailCreatedAt({currentTimestamp: true}),
+            new ChannelDetailUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateChannelsDetail);
 
         // create AddChannelsDetailContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const channelsDetailRegistered = this.publisher.mergeObjectContext(new AddChannelsDetailContextEvent(aggregateChannelsDetail));
- 
+
         channelsDetailRegistered.created(); // apply event to model events
         channelsDetailRegistered.commit(); // commit all events of model
     }
