@@ -1228,8 +1228,10 @@ export interface CciChannelOverview {
 export interface CciChannel {
     id: string;
     hash: GraphQLString;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
+    systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
     party?: GraphQLString;
