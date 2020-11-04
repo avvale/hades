@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     TenantId,
     TenantName,
@@ -11,8 +10,7 @@ import {
     TenantAccountIds,
     TenantCreatedAt,
     TenantUpdatedAt,
-    TenantDeletedAt
-    
+    TenantDeletedAt,
 } from './../../domain/value-objects';
 import { ITenantRepository } from './../../domain/tenant.repository';
 import { IamTenant } from './../../domain/tenant.aggregate';
@@ -23,7 +21,7 @@ export class CreateTenantsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: ITenantRepository
+        private readonly repository: ITenantRepository,
     ) {}
 
     public async main(
@@ -35,7 +33,6 @@ export class CreateTenantsService
             isActive: TenantIsActive,
             data: TenantData,
             accountIds: TenantAccountIds,
-            
         } []
     ): Promise<void>
     {
@@ -48,8 +45,8 @@ export class CreateTenantsService
             tenant.isActive,
             tenant.data,
             tenant.accountIds,
-            new TenantCreatedAt(Utils.nowTimestamp()),
-            new TenantUpdatedAt(Utils.nowTimestamp()),
+            new TenantCreatedAt({currentTimestamp: true}),
+            new TenantUpdatedAt({currentTimestamp: true}),
             null
         ));
 

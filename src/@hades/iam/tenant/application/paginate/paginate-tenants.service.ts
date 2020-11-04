@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { ITenantRepository } from './../../domain/tenant.repository';
 import { IamTenant } from './../../domain/tenant.aggregate';
@@ -8,11 +9,11 @@ import { IamTenant } from './../../domain/tenant.aggregate';
 export class PaginateTenantsService
 {
     constructor(
-        private readonly repository: ITenantRepository
+        private readonly repository: ITenantRepository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement): Promise<Pagination<IamTenant>>
+    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<IamTenant>>
     {
-        return await this.repository.paginate(queryStatement, constraint);
+        return await this.repository.paginate(queryStatement, constraint, cQMetadata);
     }
 }

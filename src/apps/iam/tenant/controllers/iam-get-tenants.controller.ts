@@ -1,6 +1,7 @@
 import { Controller, Get, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { TenantDto } from './../dto/tenant.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -19,7 +20,7 @@ import { GetTenantsQuery } from '@hades/iam/tenant/application/get/get-tenants.q
 export class IamGetTenantsController
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Get()
@@ -27,8 +28,12 @@ export class IamGetTenantsController
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [TenantDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body('query') queryStatement?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        return await this.queryBus.ask(new GetTenantsQuery(queryStatement, constraint));
+        return await this.queryBus.ask(new GetTenantsQuery(queryStatement, constraint, { timezone }));
     }
 }

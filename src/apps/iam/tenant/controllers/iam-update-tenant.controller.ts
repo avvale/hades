@@ -2,6 +2,7 @@ import { Controller, Put, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateTenantDto } from './../dto/update-tenant.dto';
 import { TenantDto } from './../dto/tenant.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -23,25 +24,20 @@ export class IamUpdateTenantController
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Put()
     @ApiOperation({ summary: 'Update tenant' })
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: TenantDto})
-    async main(@Body() payload: UpdateTenantDto, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body() payload: UpdateTenantDto,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new UpdateTenantCommand(
-            payload.id,
-            payload.name,
-            payload.code,
-            payload.logo,
-            payload.isActive,
-            payload.data,
-            payload.accountIds,
-            constraint,
-        ));
+        await this.commandBus.dispatch(new UpdateTenantCommand(payload, constraint, { timezone }));
 
-        return await this.queryBus.ask(new FindTenantByIdQuery(payload.id, constraint));
+        return await this.queryBus.ask(new FindTenantByIdQuery(payload.id, constraint, { timezone }));
     }
 }

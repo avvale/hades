@@ -11,12 +11,16 @@ export class FindTenantByIdQueryHandler implements IQueryHandler<FindTenantByIdQ
     private readonly mapper: TenantMapper = new TenantMapper();
 
     constructor(
-        private readonly findTenantByIdService: FindTenantByIdService
+        private readonly findTenantByIdService: FindTenantByIdService,
     ) {}
 
     async execute(query: FindTenantByIdQuery): Promise<TenantResponse>
     {
-        const tenant = await this.findTenantByIdService.main(new TenantId(query.id));
+        const tenant = await this.findTenantByIdService.main(
+            new TenantId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(tenant);
     }

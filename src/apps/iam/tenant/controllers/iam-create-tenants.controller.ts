@@ -2,6 +2,7 @@ import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { TenantDto } from './../dto/tenant.dto';
 import { CreateTenantDto } from './../dto/create-tenant.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -26,8 +27,11 @@ export class IamCreateTenantsController
     @ApiOperation({ summary: 'Create tenants in batch' })
     @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [TenantDto] })
     @ApiBody({ type: [CreateTenantDto] })
-    async main(@Body() payload: CreateTenantDto[])
+    async main(
+        @Body() payload: CreateTenantDto[],
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new CreateTenantsCommand(payload));
+        await this.commandBus.dispatch(new CreateTenantsCommand(payload, { timezone }));
     }
 }

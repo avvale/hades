@@ -8,7 +8,7 @@ import { DeletedTenantsEvent } from './deleted-tenants.event';
 export class AddTenantsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: IamTenant[] = []
+        public readonly aggregateRoots: IamTenant[] = [],
     ) {
         super();
     }

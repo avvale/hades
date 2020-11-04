@@ -6,12 +6,12 @@ import { tenants } from '@hades/iam/tenant/infrastructure/seeds/tenant.seed';
 import { CreateTenantCommand } from './create-tenant.command';
 import { CreateTenantService } from './create-tenant.service';
 
-describe('CreateTenantCommandHandler', () => 
+describe('CreateTenantCommandHandler', () =>
 {
     let commandHandler: CreateTenantCommandHandler;
     let service: CreateTenantService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateTenantCommandHandler', () =>
         service         = module.get<CreateTenantService>(CreateTenantService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateTenantCommandHandler should be defined', () => 
+        test('CreateTenantCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateTenantService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateTenantService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateTenantCommand(
@@ -47,7 +47,6 @@ describe('CreateTenantCommandHandler', () =>
                     tenants[0].isActive,
                     tenants[0].data,
                     tenants[0].accountIds,
-                    
                 )
             )).toBe(undefined);
         });

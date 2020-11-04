@@ -9,14 +9,16 @@ import {
 export class DeleteTenantByIdCommandHandler implements ICommandHandler<DeleteTenantByIdCommand>
 {
     constructor(
-        private readonly deleteTenantByIdService: DeleteTenantByIdService
+        private readonly deleteTenantByIdService: DeleteTenantByIdService,
     ) {}
 
     async execute(command: DeleteTenantByIdCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.deleteTenantByIdService.main(
-            new TenantId(command.id)
+            new TenantId(command.id),
+            command.constraint,
+            command.cQMetadata
         );
     }
 }

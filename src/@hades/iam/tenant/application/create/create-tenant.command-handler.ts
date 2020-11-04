@@ -8,28 +8,32 @@ import {
     TenantLogo,
     TenantIsActive,
     TenantData,
-    TenantAccountIds
-    
+    TenantAccountIds,
+    TenantCreatedAt,
+    TenantUpdatedAt,
+    TenantDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateTenantCommand)
 export class CreateTenantCommandHandler implements ICommandHandler<CreateTenantCommand>
 {
     constructor(
-        private readonly createTenantService: CreateTenantService
+        private readonly createTenantService: CreateTenantService,
     ) {}
 
     async execute(command: CreateTenantCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createTenantService.main(
-            new TenantId(command.id),
-            new TenantName(command.name),
-            new TenantCode(command.code),
-            new TenantLogo(command.logo),
-            new TenantIsActive(command.isActive),
-            new TenantData(command.data),
-            new TenantAccountIds(command.accountIds),
+            {
+                id: new TenantId(command.payload.id),
+                name: new TenantName(command.payload.name),
+                code: new TenantCode(command.payload.code),
+                logo: new TenantLogo(command.payload.logo),
+                isActive: new TenantIsActive(command.payload.isActive),
+                data: new TenantData(command.payload.data),
+                accountIds: new TenantAccountIds(command.payload.accountIds),
+            }
         );
     }
 }

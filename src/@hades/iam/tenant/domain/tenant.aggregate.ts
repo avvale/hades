@@ -9,15 +9,11 @@ import {
     TenantAccountIds,
     TenantCreatedAt,
     TenantUpdatedAt,
-    TenantDeletedAt
-    
+    TenantDeletedAt,
 } from './value-objects';
 import { CreatedTenantEvent } from './../application/events/created-tenant.event';
 import { UpdatedTenantEvent } from './../application/events/updated-tenant.event';
 import { DeletedTenantEvent } from './../application/events/deleted-tenant.event';
-
-
-
 import { IamAccount } from '@hades/iam/account/domain/account.aggregate';
 
 export class IamTenant extends AggregateRoot
@@ -32,18 +28,14 @@ export class IamTenant extends AggregateRoot
     createdAt: TenantCreatedAt;
     updatedAt: TenantUpdatedAt;
     deletedAt: TenantDeletedAt;
-    
+
     // eager relationship
-    
-    
-    
-    
     accounts: IamAccount[];
-    
+
     constructor(id?: TenantId, name?: TenantName, code?: TenantCode, logo?: TenantLogo, isActive?: TenantIsActive, data?: TenantData, accountIds?: TenantAccountIds, createdAt?: TenantCreatedAt, updatedAt?: TenantUpdatedAt, deletedAt?: TenantDeletedAt, accounts?: IamAccount[], )
     {
         super();
-        
+
         this.id = id;
         this.name = name;
         this.code = code;
@@ -54,14 +46,9 @@ export class IamTenant extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
-        
-        
         this.accounts = accounts;
-        
     }
 
     static register (id: TenantId, name: TenantName, code: TenantCode, logo: TenantLogo, isActive: TenantIsActive, data: TenantData, accountIds: TenantAccountIds, createdAt: TenantCreatedAt, updatedAt: TenantUpdatedAt, deletedAt: TenantDeletedAt, accounts?: IamAccount[], ): IamTenant
@@ -83,7 +70,6 @@ export class IamTenant extends AggregateRoot
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
-                
             )
         );
     }
@@ -102,7 +88,6 @@ export class IamTenant extends AggregateRoot
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
-                
             )
         );
     }
@@ -121,7 +106,6 @@ export class IamTenant extends AggregateRoot
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
-                
             )
         );
     }
@@ -139,14 +123,9 @@ export class IamTenant extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
-            
-            
             accounts: this.accounts?.map(item => item.toDTO()),
-            
         }
     }
 }

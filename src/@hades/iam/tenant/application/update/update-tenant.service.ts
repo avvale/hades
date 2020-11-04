@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import {
     TenantId,
     TenantName,
@@ -11,8 +12,7 @@ import {
     TenantAccountIds,
     TenantCreatedAt,
     TenantUpdatedAt,
-    TenantDeletedAt
-    
+    TenantDeletedAt,
 } from './../../domain/value-objects';
 import { ITenantRepository } from './../../domain/tenant.repository';
 import { IamTenant } from './../../domain/tenant.aggregate';
@@ -22,36 +22,39 @@ export class UpdateTenantService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: ITenantRepository
+        private readonly repository: ITenantRepository,
     ) {}
 
     public async main(
-        id: TenantId,
-        name?: TenantName,
-        code?: TenantCode,
-        logo?: TenantLogo,
-        isActive?: TenantIsActive,
-        data?: TenantData,
-        accountIds?: TenantAccountIds,
-        
+        payload: {
+            id: TenantId,
+            name?: TenantName,
+            code?: TenantCode,
+            logo?: TenantLogo,
+            isActive?: TenantIsActive,
+            data?: TenantData,
+            accountIds?: TenantAccountIds,
+        },
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const tenant = IamTenant.register(
-            id,
-            name,
-            code,
-            logo,
-            isActive,
-            data,
-            accountIds,
+            payload.id,
+            payload.name,
+            payload.code,
+            payload.logo,
+            payload.isActive,
+            payload.data,
+            payload.accountIds,
             null,
-            new TenantUpdatedAt(Utils.nowTimestamp()),
+            new TenantUpdatedAt({currentTimestamp: true}),
             null
         );
 
         // update
-        await this.repository.update(tenant);
+        await this.repository.update(tenant, constraint, cQMetadata);
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const tenantRegister = this.publisher.mergeObjectContext(
