@@ -23,7 +23,7 @@ export class IamFindTenantByIdResolver
     ) {}
 
     @Query('iamFindTenantById')
-    async main(m
+    async main(
         @Args('id') id: string,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
