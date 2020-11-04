@@ -60,12 +60,12 @@ describe('UpdateChannelDetailService', () =>
 
     describe('main', () =>
     {
-        test('UpdateChannelDetailService should be defined', () => 
+        test('UpdateChannelDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a channelDetail and emit event', async () => 
+        test('should update a channelDetail and emit event', async () =>
         {
             expect(await service.main(
                 new ChannelDetailId(channelsDetail[0].id),
@@ -85,7 +85,6 @@ describe('UpdateChannelDetailService', () =>
                 new ChannelDetailChannelComponent(channelsDetail[0].channelComponent),
                 new ChannelDetailChannelName(channelsDetail[0].channelName),
                 new ChannelDetailDetail(channelsDetail[0].detail),
-                
             )).toBe(undefined);
         });
     });

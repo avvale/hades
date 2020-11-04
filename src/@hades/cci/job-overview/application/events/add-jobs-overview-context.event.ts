@@ -40,7 +40,6 @@ export class AddJobsOverviewContextEvent extends AggregateRoot
                         jobOverview.createdAt?.value,
                         jobOverview.updatedAt?.value,
                         jobOverview.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -69,7 +68,6 @@ export class AddJobsOverviewContextEvent extends AggregateRoot
                         jobOverview.createdAt?.value,
                         jobOverview.updatedAt?.value,
                         jobOverview.deletedAt?.value,
-                        
                     )
                 )
             )

@@ -48,7 +48,6 @@ export class AddModulesContextEvent extends AggregateRoot
                         module.createdAt?.value,
                         module.updatedAt?.value,
                         module.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -85,7 +84,6 @@ export class AddModulesContextEvent extends AggregateRoot
                         module.createdAt?.value,
                         module.updatedAt?.value,
                         module.deletedAt?.value,
-                        
                     )
                 )
             )

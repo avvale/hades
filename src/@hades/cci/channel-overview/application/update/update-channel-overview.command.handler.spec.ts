@@ -6,12 +6,12 @@ import { channelsOverview } from '@hades/cci/channel-overview/infrastructure/see
 import { UpdateChannelOverviewCommand } from './update-channel-overview.command';
 import { UpdateChannelOverviewService } from './update-channel-overview.service';
 
-describe('UpdateChannelOverviewCommandHandler', () => 
+describe('UpdateChannelOverviewCommandHandler', () =>
 {
     let commandHandler: UpdateChannelOverviewCommandHandler;
     let service: UpdateChannelOverviewService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateChannelOverviewCommandHandler', () =>
         service         = module.get<UpdateChannelOverviewService>(UpdateChannelOverviewService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateChannelOverviewCommandHandler should be defined', () => 
+        test('UpdateChannelOverviewCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an channelOverview created', async () => 
+        test('should return an channelOverview created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateChannelOverviewCommand(
@@ -56,7 +56,6 @@ describe('UpdateChannelOverviewCommandHandler', () =>
                     channelsOverview[0].stopped,
                     channelsOverview[0].unknown,
                     channelsOverview[0].unregistered,
-                    
                 )
             )).toBe(undefined);
         });

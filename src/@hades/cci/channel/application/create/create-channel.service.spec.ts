@@ -128,7 +128,6 @@ describe('CreateChannelService', () =>
                 new ChannelLastChangedAt(channels[0].lastChangedAt),
                 new ChannelRiInterfaceName(channels[0].riInterfaceName),
                 new ChannelRiInterfaceNamespace(channels[0].riInterfaceNamespace),
-                
             )).toBe(undefined);
         });
     });

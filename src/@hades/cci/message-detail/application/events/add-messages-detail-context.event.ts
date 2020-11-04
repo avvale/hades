@@ -66,7 +66,6 @@ export class AddMessagesDetailContextEvent extends AggregateRoot
                         messageDetail.createdAt?.value,
                         messageDetail.updatedAt?.value,
                         messageDetail.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -121,7 +120,6 @@ export class AddMessagesDetailContextEvent extends AggregateRoot
                         messageDetail.createdAt?.value,
                         messageDetail.updatedAt?.value,
                         messageDetail.deletedAt?.value,
-                        
                     )
                 )
             )

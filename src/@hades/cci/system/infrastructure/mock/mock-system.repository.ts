@@ -62,7 +62,6 @@ export class MockSystemRepository extends MockRepository<CciSystem> implements I
                     new SystemCreatedAt(itemCollection.createdAt),
                     new SystemUpdatedAt(itemCollection.updatedAt),
                     new SystemDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

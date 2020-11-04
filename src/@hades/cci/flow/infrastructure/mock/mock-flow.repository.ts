@@ -94,7 +94,6 @@ export class MockFlowRepository extends MockRepository<CciFlow> implements IFlow
                     new FlowCreatedAt(itemCollection.createdAt),
                     new FlowUpdatedAt(itemCollection.updatedAt),
                     new FlowDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

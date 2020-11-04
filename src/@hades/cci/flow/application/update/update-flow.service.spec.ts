@@ -68,12 +68,12 @@ describe('UpdateFlowService', () =>
 
     describe('main', () =>
     {
-        test('UpdateFlowService should be defined', () => 
+        test('UpdateFlowService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a flow and emit event', async () => 
+        test('should update a flow and emit event', async () =>
         {
             expect(await service.main(
                 new FlowId(flows[0].id),
@@ -101,7 +101,6 @@ describe('UpdateFlowService', () =>
                 new FlowIsComplex(flows[0].isComplex),
                 new FlowFieldGroupId(flows[0].fieldGroupId),
                 new FlowData(flows[0].data),
-                
             )).toBe(undefined);
         });
     });

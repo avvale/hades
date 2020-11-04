@@ -82,7 +82,6 @@ export class MockMessageOverviewRepository extends MockRepository<CciMessageOver
                     new MessageOverviewCreatedAt(itemCollection.createdAt),
                     new MessageOverviewUpdatedAt(itemCollection.updatedAt),
                     new MessageOverviewDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

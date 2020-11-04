@@ -32,7 +32,6 @@ export class AddDataLakesContextEvent extends AggregateRoot
                         dataLake.createdAt?.value,
                         dataLake.updatedAt?.value,
                         dataLake.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -53,7 +52,6 @@ export class AddDataLakesContextEvent extends AggregateRoot
                         dataLake.createdAt?.value,
                         dataLake.updatedAt?.value,
                         dataLake.deletedAt?.value,
-                        
                     )
                 )
             )

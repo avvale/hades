@@ -6,12 +6,12 @@ import { contacts } from '@hades/cci/contact/infrastructure/seeds/contact.seed';
 import { UpdateContactCommand } from './update-contact.command';
 import { UpdateContactService } from './update-contact.service';
 
-describe('UpdateContactCommandHandler', () => 
+describe('UpdateContactCommandHandler', () =>
 {
     let commandHandler: UpdateContactCommandHandler;
     let service: UpdateContactService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateContactCommandHandler', () =>
         service         = module.get<UpdateContactService>(UpdateContactService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateContactCommandHandler should be defined', () => 
+        test('UpdateContactCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an contact created', async () => 
+        test('should return an contact created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateContactCommand(
@@ -55,7 +55,6 @@ describe('UpdateContactCommandHandler', () =>
                     contacts[0].hasConsentEmail,
                     contacts[0].hasConsentMobile,
                     contacts[0].isActive,
-                    
                 )
             )).toBe(undefined);
         });

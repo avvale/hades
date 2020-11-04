@@ -54,7 +54,6 @@ export class MockDataLakeRepository extends MockRepository<CciDataLake> implemen
                     new DataLakeCreatedAt(itemCollection.createdAt),
                     new DataLakeUpdatedAt(itemCollection.updatedAt),
                     new DataLakeDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

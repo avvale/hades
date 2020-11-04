@@ -84,7 +84,6 @@ describe('CreateChannelOverviewService', () =>
                 new ChannelOverviewStopped(channelsOverview[0].stopped),
                 new ChannelOverviewUnknown(channelsOverview[0].unknown),
                 new ChannelOverviewUnregistered(channelsOverview[0].unregistered),
-                
             )).toBe(undefined);
         });
     });

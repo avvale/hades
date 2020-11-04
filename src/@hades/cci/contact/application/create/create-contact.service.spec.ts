@@ -82,7 +82,6 @@ describe('CreateContactService', () =>
                 new ContactHasConsentEmail(contacts[0].hasConsentEmail),
                 new ContactHasConsentMobile(contacts[0].hasConsentMobile),
                 new ContactIsActive(contacts[0].isActive),
-                
             )).toBe(undefined);
         });
     });

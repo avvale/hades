@@ -86,7 +86,6 @@ describe('CreateChannelDetailService', () =>
                 new ChannelDetailChannelComponent(channelsDetail[0].channelComponent),
                 new ChannelDetailChannelName(channelsDetail[0].channelName),
                 new ChannelDetailDetail(channelsDetail[0].detail),
-                
             )).toBe(undefined);
         });
     });

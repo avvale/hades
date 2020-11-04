@@ -74,7 +74,6 @@ export class MockContactRepository extends MockRepository<CciContact> implements
                     new ContactCreatedAt(itemCollection.createdAt),
                     new ContactUpdatedAt(itemCollection.updatedAt),
                     new ContactDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

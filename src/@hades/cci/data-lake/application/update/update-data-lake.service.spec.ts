@@ -48,12 +48,12 @@ describe('UpdateDataLakeService', () =>
 
     describe('main', () =>
     {
-        test('UpdateDataLakeService should be defined', () => 
+        test('UpdateDataLakeService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a dataLake and emit event', async () => 
+        test('should update a dataLake and emit event', async () =>
         {
             expect(await service.main(
                 new DataLakeId(dataLakes[0].id),
@@ -61,7 +61,6 @@ describe('UpdateDataLakeService', () =>
                 new DataLakeExecutionId(dataLakes[0].executionId),
                 new DataLakeTenantCode(dataLakes[0].tenantCode),
                 new DataLakePayload(dataLakes[0].payload),
-                
             )).toBe(undefined);
         });
     });

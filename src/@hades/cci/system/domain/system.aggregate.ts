@@ -36,7 +36,21 @@ export class CciSystem extends AggregateRoot
     // eager relationship
     tenant: IamTenant;
 
-    constructor(id?: SystemId, tenantId?: SystemTenantId, tenantCode?: SystemTenantCode, version?: SystemVersion, name?: SystemName, environment?: SystemEnvironment, technology?: SystemTechnology, isActive?: SystemIsActive, cancelledAt?: SystemCancelledAt, createdAt?: SystemCreatedAt, updatedAt?: SystemUpdatedAt, deletedAt?: SystemDeletedAt, tenant?: IamTenant, )
+    constructor(
+        id: SystemId,
+        tenantId: SystemTenantId,
+        tenantCode: SystemTenantCode,
+        version: SystemVersion,
+        name: SystemName,
+        environment: SystemEnvironment,
+        technology: SystemTechnology,
+        isActive: SystemIsActive,
+        cancelledAt: SystemCancelledAt,
+        createdAt: SystemCreatedAt,
+        updatedAt: SystemUpdatedAt,
+        deletedAt: SystemDeletedAt,
+        tenant?: IamTenant,
+    )
     {
         super();
 
@@ -57,9 +71,37 @@ export class CciSystem extends AggregateRoot
         this.tenant = tenant;
     }
 
-    static register (id: SystemId, tenantId: SystemTenantId, tenantCode: SystemTenantCode, version: SystemVersion, name: SystemName, environment: SystemEnvironment, technology: SystemTechnology, isActive: SystemIsActive, cancelledAt: SystemCancelledAt, createdAt: SystemCreatedAt, updatedAt: SystemUpdatedAt, deletedAt: SystemDeletedAt, tenant?: IamTenant, ): CciSystem
+    static register (
+        id: SystemId,
+        tenantId: SystemTenantId,
+        tenantCode: SystemTenantCode,
+        version: SystemVersion,
+        name: SystemName,
+        environment: SystemEnvironment,
+        technology: SystemTechnology,
+        isActive: SystemIsActive,
+        cancelledAt: SystemCancelledAt,
+        createdAt: SystemCreatedAt,
+        updatedAt: SystemUpdatedAt,
+        deletedAt: SystemDeletedAt,
+        tenant?: IamTenant,
+    ): CciSystem
     {
-        return new CciSystem(id, tenantId, tenantCode, version, name, environment, technology, isActive, cancelledAt, createdAt, updatedAt, deletedAt, tenant, );
+        return new CciSystem(
+            id,
+            tenantId,
+            tenantCode,
+            version,
+            name,
+            environment,
+            technology,
+            isActive,
+            cancelledAt,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            tenant,
+        );
     }
 
     created(system: CciSystem): void

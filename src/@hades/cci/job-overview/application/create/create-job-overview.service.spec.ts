@@ -78,7 +78,6 @@ describe('CreateJobOverviewService', () =>
                 new JobOverviewCancelled(jobsOverview[0].cancelled),
                 new JobOverviewCompleted(jobsOverview[0].completed),
                 new JobOverviewError(jobsOverview[0].error),
-                
             )).toBe(undefined);
         });
     });

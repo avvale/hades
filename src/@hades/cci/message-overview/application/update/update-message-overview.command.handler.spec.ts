@@ -6,12 +6,12 @@ import { messagesOverview } from '@hades/cci/message-overview/infrastructure/see
 import { UpdateMessageOverviewCommand } from './update-message-overview.command';
 import { UpdateMessageOverviewService } from './update-message-overview.service';
 
-describe('UpdateMessageOverviewCommandHandler', () => 
+describe('UpdateMessageOverviewCommandHandler', () =>
 {
     let commandHandler: UpdateMessageOverviewCommandHandler;
     let service: UpdateMessageOverviewService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateMessageOverviewCommandHandler', () =>
         service         = module.get<UpdateMessageOverviewService>(UpdateMessageOverviewService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateMessageOverviewCommandHandler should be defined', () => 
+        test('UpdateMessageOverviewCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an messageOverview created', async () => 
+        test('should return an messageOverview created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateMessageOverviewCommand(
@@ -59,7 +59,6 @@ describe('UpdateMessageOverviewCommandHandler', () =>
                     messagesOverview[0].holding,
                     messagesOverview[0].toBeDelivered,
                     messagesOverview[0].waiting,
-                    
                 )
             )).toBe(undefined);
         });

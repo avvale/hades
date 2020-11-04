@@ -122,7 +122,6 @@ export class MockMessageDetailRepository extends MockRepository<CciMessageDetail
                     new MessageDetailCreatedAt(itemCollection.createdAt),
                     new MessageDetailUpdatedAt(itemCollection.updatedAt),
                     new MessageDetailDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

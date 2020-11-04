@@ -26,7 +26,16 @@ export class CciRole extends AggregateRoot
     // eager relationship
     tenant: IamTenant;
 
-    constructor(id?: RoleId, tenantId?: RoleTenantId, tenantCode?: RoleTenantCode, name?: RoleName, createdAt?: RoleCreatedAt, updatedAt?: RoleUpdatedAt, deletedAt?: RoleDeletedAt, tenant?: IamTenant, )
+    constructor(
+        id: RoleId,
+        tenantId: RoleTenantId,
+        tenantCode: RoleTenantCode,
+        name: RoleName,
+        createdAt: RoleCreatedAt,
+        updatedAt: RoleUpdatedAt,
+        deletedAt: RoleDeletedAt,
+        tenant?: IamTenant,
+    )
     {
         super();
 
@@ -42,9 +51,27 @@ export class CciRole extends AggregateRoot
         this.tenant = tenant;
     }
 
-    static register (id: RoleId, tenantId: RoleTenantId, tenantCode: RoleTenantCode, name: RoleName, createdAt: RoleCreatedAt, updatedAt: RoleUpdatedAt, deletedAt: RoleDeletedAt, tenant?: IamTenant, ): CciRole
+    static register (
+        id: RoleId,
+        tenantId: RoleTenantId,
+        tenantCode: RoleTenantCode,
+        name: RoleName,
+        createdAt: RoleCreatedAt,
+        updatedAt: RoleUpdatedAt,
+        deletedAt: RoleDeletedAt,
+        tenant?: IamTenant,
+    ): CciRole
     {
-        return new CciRole(id, tenantId, tenantCode, name, createdAt, updatedAt, deletedAt, tenant, );
+        return new CciRole(
+            id,
+            tenantId,
+            tenantCode,
+            name,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            tenant,
+        );
     }
 
     created(role: CciRole): void

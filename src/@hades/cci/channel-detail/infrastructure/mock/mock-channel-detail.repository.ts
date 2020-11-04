@@ -78,7 +78,6 @@ export class MockChannelDetailRepository extends MockRepository<CciChannelDetail
                     new ChannelDetailCreatedAt(itemCollection.createdAt),
                     new ChannelDetailUpdatedAt(itemCollection.updatedAt),
                     new ChannelDetailDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

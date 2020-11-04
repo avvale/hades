@@ -52,12 +52,12 @@ describe('UpdateSystemService', () =>
 
     describe('main', () =>
     {
-        test('UpdateSystemService should be defined', () => 
+        test('UpdateSystemService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a system and emit event', async () => 
+        test('should update a system and emit event', async () =>
         {
             expect(await service.main(
                 new SystemId(systems[0].id),
@@ -69,7 +69,6 @@ describe('UpdateSystemService', () =>
                 new SystemTechnology(systems[0].technology),
                 new SystemIsActive(systems[0].isActive),
                 new SystemCancelledAt(systems[0].cancelledAt),
-                
             )).toBe(undefined);
         });
     });

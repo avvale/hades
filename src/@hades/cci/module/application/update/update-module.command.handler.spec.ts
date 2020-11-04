@@ -6,12 +6,12 @@ import { modules } from '@hades/cci/module/infrastructure/seeds/module.seed';
 import { UpdateModuleCommand } from './update-module.command';
 import { UpdateModuleService } from './update-module.service';
 
-describe('UpdateModuleCommandHandler', () => 
+describe('UpdateModuleCommandHandler', () =>
 {
     let commandHandler: UpdateModuleCommandHandler;
     let service: UpdateModuleService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateModuleCommandHandler', () =>
         service         = module.get<UpdateModuleService>(UpdateModuleService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateModuleCommandHandler should be defined', () => 
+        test('UpdateModuleCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an module created', async () => 
+        test('should return an module created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateModuleCommand(
@@ -61,7 +61,6 @@ describe('UpdateModuleCommandHandler', () =>
                     modules[0].name,
                     modules[0].parameterName,
                     modules[0].parameterValue,
-                    
                 )
             )).toBe(undefined);
         });

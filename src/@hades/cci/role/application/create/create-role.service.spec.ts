@@ -60,7 +60,6 @@ describe('CreateRoleService', () =>
                 new RoleTenantId(roles[0].tenantId),
                 new RoleTenantCode(roles[0].tenantCode),
                 new RoleName(roles[0].name),
-                
             )).toBe(undefined);
         });
     });

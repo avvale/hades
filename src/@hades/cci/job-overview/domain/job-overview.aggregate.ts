@@ -48,7 +48,27 @@ export class CciJobOverview extends AggregateRoot
     system: CciSystem;
     execution: CciExecution;
 
-    constructor(id?: JobOverviewId, tenantId?: JobOverviewTenantId, tenantCode?: JobOverviewTenantCode, systemId?: JobOverviewSystemId, systemName?: JobOverviewSystemName, executionId?: JobOverviewExecutionId, executionType?: JobOverviewExecutionType, executionExecutedAt?: JobOverviewExecutionExecutedAt, executionMonitoringStartAt?: JobOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: JobOverviewExecutionMonitoringEndAt, cancelled?: JobOverviewCancelled, completed?: JobOverviewCompleted, error?: JobOverviewError, createdAt?: JobOverviewCreatedAt, updatedAt?: JobOverviewUpdatedAt, deletedAt?: JobOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
+    constructor(
+        id: JobOverviewId,
+        tenantId: JobOverviewTenantId,
+        tenantCode: JobOverviewTenantCode,
+        systemId: JobOverviewSystemId,
+        systemName: JobOverviewSystemName,
+        executionId: JobOverviewExecutionId,
+        executionType: JobOverviewExecutionType,
+        executionExecutedAt: JobOverviewExecutionExecutedAt,
+        executionMonitoringStartAt: JobOverviewExecutionMonitoringStartAt,
+        executionMonitoringEndAt: JobOverviewExecutionMonitoringEndAt,
+        cancelled: JobOverviewCancelled,
+        completed: JobOverviewCompleted,
+        error: JobOverviewError,
+        createdAt: JobOverviewCreatedAt,
+        updatedAt: JobOverviewUpdatedAt,
+        deletedAt: JobOverviewDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+        execution?: CciExecution,
+    )
     {
         super();
 
@@ -75,9 +95,49 @@ export class CciJobOverview extends AggregateRoot
         this.execution = execution;
     }
 
-    static register (id: JobOverviewId, tenantId: JobOverviewTenantId, tenantCode: JobOverviewTenantCode, systemId: JobOverviewSystemId, systemName: JobOverviewSystemName, executionId: JobOverviewExecutionId, executionType: JobOverviewExecutionType, executionExecutedAt: JobOverviewExecutionExecutedAt, executionMonitoringStartAt: JobOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: JobOverviewExecutionMonitoringEndAt, cancelled: JobOverviewCancelled, completed: JobOverviewCompleted, error: JobOverviewError, createdAt: JobOverviewCreatedAt, updatedAt: JobOverviewUpdatedAt, deletedAt: JobOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciJobOverview
+    static register (
+        id: JobOverviewId,
+        tenantId: JobOverviewTenantId,
+        tenantCode: JobOverviewTenantCode,
+        systemId: JobOverviewSystemId,
+        systemName: JobOverviewSystemName,
+        executionId: JobOverviewExecutionId,
+        executionType: JobOverviewExecutionType,
+        executionExecutedAt: JobOverviewExecutionExecutedAt,
+        executionMonitoringStartAt: JobOverviewExecutionMonitoringStartAt,
+        executionMonitoringEndAt: JobOverviewExecutionMonitoringEndAt,
+        cancelled: JobOverviewCancelled,
+        completed: JobOverviewCompleted,
+        error: JobOverviewError,
+        createdAt: JobOverviewCreatedAt,
+        updatedAt: JobOverviewUpdatedAt,
+        deletedAt: JobOverviewDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+        execution?: CciExecution,
+    ): CciJobOverview
     {
-        return new CciJobOverview(id, tenantId, tenantCode, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, cancelled, completed, error, createdAt, updatedAt, deletedAt, tenant, system, execution, );
+        return new CciJobOverview(
+            id,
+            tenantId,
+            tenantCode,
+            systemId,
+            systemName,
+            executionId,
+            executionType,
+            executionExecutedAt,
+            executionMonitoringStartAt,
+            executionMonitoringEndAt,
+            cancelled,
+            completed,
+            error,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            tenant,
+            system,
+            execution,
+        );
     }
 
     created(jobOverview: CciJobOverview): void

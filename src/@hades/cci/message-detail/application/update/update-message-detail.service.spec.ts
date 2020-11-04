@@ -82,12 +82,12 @@ describe('UpdateMessageDetailService', () =>
 
     describe('main', () =>
     {
-        test('UpdateMessageDetailService should be defined', () => 
+        test('UpdateMessageDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a messageDetail and emit event', async () => 
+        test('should update a messageDetail and emit event', async () =>
         {
             expect(await service.main(
                 new MessageDetailId(messagesDetail[0].id),
@@ -129,7 +129,6 @@ describe('UpdateMessageDetailService', () =>
                 new MessageDetailTimesFailed(messagesDetail[0].timesFailed),
                 new MessageDetailNumberMax(messagesDetail[0].numberMax),
                 new MessageDetailNumberDays(messagesDetail[0].numberDays),
-                
             )).toBe(undefined);
         });
     });

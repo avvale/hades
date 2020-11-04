@@ -6,12 +6,12 @@ import { jobsOverview } from '@hades/cci/job-overview/infrastructure/seeds/job-o
 import { UpdateJobOverviewCommand } from './update-job-overview.command';
 import { UpdateJobOverviewService } from './update-job-overview.service';
 
-describe('UpdateJobOverviewCommandHandler', () => 
+describe('UpdateJobOverviewCommandHandler', () =>
 {
     let commandHandler: UpdateJobOverviewCommandHandler;
     let service: UpdateJobOverviewService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateJobOverviewCommandHandler', () =>
         service         = module.get<UpdateJobOverviewService>(UpdateJobOverviewService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateJobOverviewCommandHandler should be defined', () => 
+        test('UpdateJobOverviewCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an jobOverview created', async () => 
+        test('should return an jobOverview created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateJobOverviewCommand(
@@ -53,7 +53,6 @@ describe('UpdateJobOverviewCommandHandler', () =>
                     jobsOverview[0].cancelled,
                     jobsOverview[0].completed,
                     jobsOverview[0].error,
-                    
                 )
             )).toBe(undefined);
         });

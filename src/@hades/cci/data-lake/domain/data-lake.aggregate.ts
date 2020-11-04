@@ -30,7 +30,18 @@ export class CciDataLake extends AggregateRoot
     tenant: IamTenant;
     execution: CciExecution;
 
-    constructor(id?: DataLakeId, tenantId?: DataLakeTenantId, executionId?: DataLakeExecutionId, tenantCode?: DataLakeTenantCode, payload?: DataLakePayload, createdAt?: DataLakeCreatedAt, updatedAt?: DataLakeUpdatedAt, deletedAt?: DataLakeDeletedAt, tenant?: IamTenant, execution?: CciExecution, )
+    constructor(
+        id: DataLakeId,
+        tenantId: DataLakeTenantId,
+        executionId: DataLakeExecutionId,
+        tenantCode: DataLakeTenantCode,
+        payload: DataLakePayload,
+        createdAt: DataLakeCreatedAt,
+        updatedAt: DataLakeUpdatedAt,
+        deletedAt: DataLakeDeletedAt,
+        tenant?: IamTenant,
+        execution?: CciExecution,
+    )
     {
         super();
 
@@ -48,9 +59,31 @@ export class CciDataLake extends AggregateRoot
         this.execution = execution;
     }
 
-    static register (id: DataLakeId, tenantId: DataLakeTenantId, executionId: DataLakeExecutionId, tenantCode: DataLakeTenantCode, payload: DataLakePayload, createdAt: DataLakeCreatedAt, updatedAt: DataLakeUpdatedAt, deletedAt: DataLakeDeletedAt, tenant?: IamTenant, execution?: CciExecution, ): CciDataLake
+    static register (
+        id: DataLakeId,
+        tenantId: DataLakeTenantId,
+        executionId: DataLakeExecutionId,
+        tenantCode: DataLakeTenantCode,
+        payload: DataLakePayload,
+        createdAt: DataLakeCreatedAt,
+        updatedAt: DataLakeUpdatedAt,
+        deletedAt: DataLakeDeletedAt,
+        tenant?: IamTenant,
+        execution?: CciExecution,
+    ): CciDataLake
     {
-        return new CciDataLake(id, tenantId, executionId, tenantCode, payload, createdAt, updatedAt, deletedAt, tenant, execution, );
+        return new CciDataLake(
+            id,
+            tenantId,
+            executionId,
+            tenantCode,
+            payload,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            tenant,
+            execution,
+        );
     }
 
     created(dataLake: CciDataLake): void

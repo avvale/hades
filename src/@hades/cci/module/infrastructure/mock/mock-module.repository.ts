@@ -86,7 +86,6 @@ export class MockModuleRepository extends MockRepository<CciModule> implements I
                     new ModuleCreatedAt(itemCollection.createdAt),
                     new ModuleUpdatedAt(itemCollection.updatedAt),
                     new ModuleDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

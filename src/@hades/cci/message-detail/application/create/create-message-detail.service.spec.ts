@@ -130,7 +130,6 @@ describe('CreateMessageDetailService', () =>
                 new MessageDetailTimesFailed(messagesDetail[0].timesFailed),
                 new MessageDetailNumberMax(messagesDetail[0].numberMax),
                 new MessageDetailNumberDays(messagesDetail[0].numberDays),
-                
             )).toBe(undefined);
         });
     });

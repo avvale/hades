@@ -36,7 +36,6 @@ export class AddSystemsContextEvent extends AggregateRoot
                         system.createdAt?.value,
                         system.updatedAt?.value,
                         system.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -61,7 +60,6 @@ export class AddSystemsContextEvent extends AggregateRoot
                         system.createdAt?.value,
                         system.updatedAt?.value,
                         system.deletedAt?.value,
-                        
                     )
                 )
             )

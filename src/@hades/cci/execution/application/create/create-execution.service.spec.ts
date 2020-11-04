@@ -72,7 +72,6 @@ describe('CreateExecutionService', () =>
                 new ExecutionExecutedAt(executions[0].executedAt),
                 new ExecutionMonitoringStartAt(executions[0].monitoringStartAt),
                 new ExecutionMonitoringEndAt(executions[0].monitoringEndAt),
-                
             )).toBe(undefined);
         });
     });

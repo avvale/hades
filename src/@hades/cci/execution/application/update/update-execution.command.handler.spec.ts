@@ -6,12 +6,12 @@ import { executions } from '@hades/cci/execution/infrastructure/seeds/execution.
 import { UpdateExecutionCommand } from './update-execution.command';
 import { UpdateExecutionService } from './update-execution.service';
 
-describe('UpdateExecutionCommandHandler', () => 
+describe('UpdateExecutionCommandHandler', () =>
 {
     let commandHandler: UpdateExecutionCommandHandler;
     let service: UpdateExecutionService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateExecutionCommandHandler', () =>
         service         = module.get<UpdateExecutionService>(UpdateExecutionService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateExecutionCommandHandler should be defined', () => 
+        test('UpdateExecutionCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an execution created', async () => 
+        test('should return an execution created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateExecutionCommand(
@@ -50,7 +50,6 @@ describe('UpdateExecutionCommandHandler', () =>
                     executions[0].executedAt,
                     executions[0].monitoringStartAt,
                     executions[0].monitoringEndAt,
-                    
                 )
             )).toBe(undefined);
         });

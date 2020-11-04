@@ -58,12 +58,12 @@ describe('UpdateContactService', () =>
 
     describe('main', () =>
     {
-        test('UpdateContactService should be defined', () => 
+        test('UpdateContactService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a contact and emit event', async () => 
+        test('should update a contact and emit event', async () =>
         {
             expect(await service.main(
                 new ContactId(contacts[0].id),
@@ -81,7 +81,6 @@ describe('UpdateContactService', () =>
                 new ContactHasConsentEmail(contacts[0].hasConsentEmail),
                 new ContactHasConsentMobile(contacts[0].hasConsentMobile),
                 new ContactIsActive(contacts[0].isActive),
-                
             )).toBe(undefined);
         });
     });
