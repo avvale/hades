@@ -6,12 +6,12 @@ import { channelsOverview } from '@hades/cci/channel-overview/infrastructure/see
 import { CreateChannelOverviewCommand } from './create-channel-overview.command';
 import { CreateChannelOverviewService } from './create-channel-overview.service';
 
-describe('CreateChannelOverviewCommandHandler', () => 
+describe('CreateChannelOverviewCommandHandler', () =>
 {
     let commandHandler: CreateChannelOverviewCommandHandler;
     let service: CreateChannelOverviewService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateChannelOverviewCommandHandler', () =>
         service         = module.get<CreateChannelOverviewService>(CreateChannelOverviewService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateChannelOverviewCommandHandler should be defined', () => 
+        test('CreateChannelOverviewCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateChannelOverviewService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateChannelOverviewService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateChannelOverviewCommand(
@@ -56,7 +56,6 @@ describe('CreateChannelOverviewCommandHandler', () =>
                     channelsOverview[0].stopped,
                     channelsOverview[0].unknown,
                     channelsOverview[0].unregistered,
-                    
                 )
             )).toBe(undefined);
         });

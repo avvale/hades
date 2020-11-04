@@ -1,8 +1,6 @@
-
 enum CciChannelOverviewExecutionType {
     SUMMARY
     DETAIL
-        
 }
 
 type CciChannelOverview
@@ -14,6 +12,7 @@ type CciChannelOverview
     systemId: ID!
     system: CciSystem!
     systemName: GraphQLString!
+    executionId: ID!
     execution: CciExecution!
     executionType: CciChannelOverviewExecutionType!
     executionExecutedAt: GraphQLTimestamp!
@@ -28,7 +27,6 @@ type CciChannelOverview
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input CciCreateChannelOverviewInput
@@ -49,7 +47,6 @@ input CciCreateChannelOverviewInput
     stopped: GraphQLInt
     unknown: GraphQLInt
     unregistered: GraphQLInt
-    
 }
 
 input CciUpdateChannelOverviewInput
@@ -70,14 +67,13 @@ input CciUpdateChannelOverviewInput
     stopped: GraphQLInt
     unknown: GraphQLInt
     unregistered: GraphQLInt
-    
 }
 
-type Query 
+type Query
 {
-    cciFindChannelOverview(query:QueryStatement): CciChannelOverview
-    cciFindChannelOverviewById(id:ID): CciChannelOverview
-    cciGetChannelsOverview(query:QueryStatement): [CciChannelOverview]!
+    cciFindChannelOverview(query:QueryStatement constraint:QueryStatement): CciChannelOverview
+    cciFindChannelOverviewById(id:ID constraint:QueryStatement): CciChannelOverview
+    cciGetChannelsOverview(query:QueryStatement constraint:QueryStatement): [CciChannelOverview]!
     cciPaginateChannelsOverview(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -85,7 +81,7 @@ type Mutation
 {
     cciCreateChannelOverview(payload: CciCreateChannelOverviewInput!): CciChannelOverview
     cciCreateChannelsOverview(payload: [CciCreateChannelOverviewInput]!): Boolean!
-    cciUpdateChannelOverview(payload: CciUpdateChannelOverviewInput!): CciChannelOverview
-    cciDeleteChannelOverviewById(id: ID!): CciChannelOverview
-    cciDeleteChannelsOverview(query:QueryStatement): [CciChannelOverview]!
+    cciUpdateChannelOverview(payload: CciUpdateChannelOverviewInput! constraint:QueryStatement): CciChannelOverview
+    cciDeleteChannelOverviewById(id: ID! constraint:QueryStatement): CciChannelOverview
+    cciDeleteChannelsOverview(query:QueryStatement constraint:QueryStatement): [CciChannelOverview]!
 }

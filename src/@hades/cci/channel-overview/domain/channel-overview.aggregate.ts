@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     ChannelOverviewId,
     ChannelOverviewTenantId,
     ChannelOverviewTenantCode,
@@ -18,8 +18,7 @@ import {
     ChannelOverviewUnregistered,
     ChannelOverviewCreatedAt,
     ChannelOverviewUpdatedAt,
-    ChannelOverviewDeletedAt
-    
+    ChannelOverviewDeletedAt,
 } from './value-objects';
 import { CreatedChannelOverviewEvent } from './../application/events/created-channel-overview.event';
 import { UpdatedChannelOverviewEvent } from './../application/events/updated-channel-overview.event';
@@ -27,8 +26,6 @@ import { DeletedChannelOverviewEvent } from './../application/events/deleted-cha
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
-
-
 
 export class CciChannelOverview extends AggregateRoot
 {
@@ -51,18 +48,16 @@ export class CciChannelOverview extends AggregateRoot
     createdAt: ChannelOverviewCreatedAt;
     updatedAt: ChannelOverviewUpdatedAt;
     deletedAt: ChannelOverviewDeletedAt;
-    
+
     // eager relationship
     tenant: IamTenant;
     system: CciSystem;
     execution: CciExecution;
-    
-    
-    
+
     constructor(id?: ChannelOverviewId, tenantId?: ChannelOverviewTenantId, tenantCode?: ChannelOverviewTenantCode, systemId?: ChannelOverviewSystemId, systemName?: ChannelOverviewSystemName, executionId?: ChannelOverviewExecutionId, executionType?: ChannelOverviewExecutionType, executionExecutedAt?: ChannelOverviewExecutionExecutedAt, executionMonitoringStartAt?: ChannelOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: ChannelOverviewExecutionMonitoringEndAt, error?: ChannelOverviewError, inactive?: ChannelOverviewInactive, successful?: ChannelOverviewSuccessful, stopped?: ChannelOverviewStopped, unknown?: ChannelOverviewUnknown, unregistered?: ChannelOverviewUnregistered, createdAt?: ChannelOverviewCreatedAt, updatedAt?: ChannelOverviewUpdatedAt, deletedAt?: ChannelOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;
@@ -82,14 +77,11 @@ export class CciChannelOverview extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
         this.tenant = tenant;
         this.system = system;
         this.execution = execution;
-        
-        
-        
     }
 
     static register (id: ChannelOverviewId, tenantId: ChannelOverviewTenantId, tenantCode: ChannelOverviewTenantCode, systemId: ChannelOverviewSystemId, systemName: ChannelOverviewSystemName, executionId: ChannelOverviewExecutionId, executionType: ChannelOverviewExecutionType, executionExecutedAt: ChannelOverviewExecutionExecutedAt, executionMonitoringStartAt: ChannelOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: ChannelOverviewExecutionMonitoringEndAt, error: ChannelOverviewError, inactive: ChannelOverviewInactive, successful: ChannelOverviewSuccessful, stopped: ChannelOverviewStopped, unknown: ChannelOverviewUnknown, unregistered: ChannelOverviewUnregistered, createdAt: ChannelOverviewCreatedAt, updatedAt: ChannelOverviewUpdatedAt, deletedAt: ChannelOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciChannelOverview
@@ -176,7 +168,6 @@ export class CciChannelOverview extends AggregateRoot
                 channelOverview.createdAt?.value,
                 channelOverview.updatedAt?.value,
                 channelOverview.deletedAt?.value,
-                
             )
         );
     }
@@ -203,14 +194,11 @@ export class CciChannelOverview extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             execution: this.execution?.toDTO(),
-            
-            
-            
         }
     }
 }

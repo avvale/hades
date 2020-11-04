@@ -11,12 +11,16 @@ export class FindChannelOverviewByIdQueryHandler implements IQueryHandler<FindCh
     private readonly mapper: ChannelOverviewMapper = new ChannelOverviewMapper();
 
     constructor(
-        private readonly findChannelOverviewByIdService: FindChannelOverviewByIdService
-    ) { }
+        private readonly findChannelOverviewByIdService: FindChannelOverviewByIdService,
+    ) {}
 
     async execute(query: FindChannelOverviewByIdQuery): Promise<ChannelOverviewResponse>
     {
-        const channelOverview = await this.findChannelOverviewByIdService.main(new ChannelOverviewId(query.id));
+        const channelOverview = await this.findChannelOverviewByIdService.main(
+            new ChannelOverviewId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(channelOverview);
     }

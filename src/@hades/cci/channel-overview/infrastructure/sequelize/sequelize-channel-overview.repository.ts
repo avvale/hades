@@ -1,30 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { QueryTypes } from 'sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
 import { CciChannelOverview } from './../../domain/channel-overview.aggregate';
 import { ChannelOverviewMapper } from './../../domain/channel-overview.mapper';
 import { CciChannelOverviewModel } from './sequelize-channel-overview.model';
-import * as _ from 'lodash';
 
+// custom
+import { QueryTypes } from 'sequelize';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+import * as _ from 'lodash';
 
 @Injectable()
 export class SequelizeChannelOverviewRepository extends SequelizeRepository<CciChannelOverview, CciChannelOverviewModel> implements IChannelOverviewRepository
 {
     public readonly aggregateName: string = 'CciChannelOverview';
     public readonly mapper: ChannelOverviewMapper = new ChannelOverviewMapper();
+    public readonly timezoneColumns: string[] = ['executionExecutedAt','executionMonitoringStartAt','executionMonitoringEndAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciChannelOverviewModel)
         public readonly repository: typeof CciChannelOverviewModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
 
-    async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciChannelOverview[]>
+    async getDashboardData(tenantIds: string[], systemIds: string[], cQMetadata?: CQMetadata): Promise<CciChannelOverview[]>
     {
         const queryRaw = `
             SELECT
@@ -79,6 +82,6 @@ export class SequelizeChannelOverviewRepository extends SequelizeRepository<CciC
         );
 
         // map values to create value objects
-        return <CciChannelOverview[]>this.mapper.mapModelsToAggregates(models);
+        return <CciChannelOverview[]>this.mapper.mapModelsToAggregates(models, cQMetadata);
     }
 }

@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateChannelsOverviewCommand } from './create-channels-overview.command';
 import { CreateChannelsOverviewService } from './create-channels-overview.service';
-import { 
+import {
     ChannelOverviewId,
     ChannelOverviewTenantId,
     ChannelOverviewTenantCode,
@@ -17,23 +17,25 @@ import {
     ChannelOverviewSuccessful,
     ChannelOverviewStopped,
     ChannelOverviewUnknown,
-    ChannelOverviewUnregistered
-    
+    ChannelOverviewUnregistered,
+    ChannelOverviewCreatedAt,
+    ChannelOverviewUpdatedAt,
+    ChannelOverviewDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateChannelsOverviewCommand)
 export class CreateChannelsOverviewCommandHandler implements ICommandHandler<CreateChannelsOverviewCommand>
 {
     constructor(
-        private readonly createChannelsOverviewService: CreateChannelsOverviewService
-    ) { }
+        private readonly createChannelsOverviewService: CreateChannelsOverviewService,
+    ) {}
 
     async execute(command: CreateChannelsOverviewCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createChannelsOverviewService.main(
-            command.channelsOverview
-                .map(channelOverview => { 
+            command.payload
+                .map(channelOverview => {
                     return {
                         id: new ChannelOverviewId(channelOverview.id),
                         tenantId: new ChannelOverviewTenantId(channelOverview.tenantId),
@@ -42,16 +44,15 @@ export class CreateChannelsOverviewCommandHandler implements ICommandHandler<Cre
                         systemName: new ChannelOverviewSystemName(channelOverview.systemName),
                         executionId: new ChannelOverviewExecutionId(channelOverview.executionId),
                         executionType: new ChannelOverviewExecutionType(channelOverview.executionType),
-                        executionExecutedAt: new ChannelOverviewExecutionExecutedAt(channelOverview.executionExecutedAt),
-                        executionMonitoringStartAt: new ChannelOverviewExecutionMonitoringStartAt(channelOverview.executionMonitoringStartAt),
-                        executionMonitoringEndAt: new ChannelOverviewExecutionMonitoringEndAt(channelOverview.executionMonitoringEndAt),
+                        executionExecutedAt: new ChannelOverviewExecutionExecutedAt(channelOverview.executionExecutedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                        executionMonitoringStartAt: new ChannelOverviewExecutionMonitoringStartAt(channelOverview.executionMonitoringStartAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                        executionMonitoringEndAt: new ChannelOverviewExecutionMonitoringEndAt(channelOverview.executionMonitoringEndAt, {}, {removeTimezone: command.cQMetadata.timezone}),
                         error: new ChannelOverviewError(channelOverview.error),
                         inactive: new ChannelOverviewInactive(channelOverview.inactive),
                         successful: new ChannelOverviewSuccessful(channelOverview.successful),
                         stopped: new ChannelOverviewStopped(channelOverview.stopped),
                         unknown: new ChannelOverviewUnknown(channelOverview.unknown),
                         unregistered: new ChannelOverviewUnregistered(channelOverview.unregistered),
-                        
                     }
                 })
         );

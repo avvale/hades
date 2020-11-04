@@ -1,6 +1,7 @@
 
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { CciChannelOverview } from './channel-overview.aggregate';
 import { ChannelOverviewId } from './value-objects';
@@ -10,7 +11,7 @@ export abstract class IChannelOverviewRepository implements IRepository<CciChann
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint: QueryStatement): Promise<Pagination<CciChannelOverview>>;
+    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<CciChannelOverview>>;
 
     // create a single record
     abstract async create(channelOverview: CciChannelOverview): Promise<void>;
@@ -19,23 +20,23 @@ export abstract class IChannelOverviewRepository implements IRepository<CciChann
     abstract async insert(channelsOverview: CciChannelOverview[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement): Promise<CciChannelOverview | null>;
+    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciChannelOverview | null>;
 
     // find a single record by id
-    abstract async findById(id: ChannelOverviewId): Promise<CciChannelOverview | null>;
+    abstract async findById(id: ChannelOverviewId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciChannelOverview | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement): Promise<CciChannelOverview[]>;
+    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciChannelOverview[]>;
 
     // get multiple records
-    abstract async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciChannelOverview[]>;
+    abstract async getDashboardData(tenantIds: string[], systemIds: string[], cQMetadata?: CQMetadata): Promise<CciChannelOverview[]>;
 
     // update record
-    abstract async update(channelOverview: CciChannelOverview): Promise<void>;
+    abstract async update(channelOverview: CciChannelOverview, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: ChannelOverviewId): Promise<void>;
+    abstract async deleteById(id: ChannelOverviewId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement): Promise<void>;
+    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }

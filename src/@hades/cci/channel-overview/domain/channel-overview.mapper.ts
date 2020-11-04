@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciChannelOverview } from './channel-overview.aggregate';
 import { ChannelOverviewResponse } from './channel-overview.response';
-import { 
+import {
     ChannelOverviewId,
     ChannelOverviewTenantId,
     ChannelOverviewTenantCode,
@@ -21,46 +21,43 @@ import {
     ChannelOverviewUnregistered,
     ChannelOverviewCreatedAt,
     ChannelOverviewUpdatedAt,
-    ChannelOverviewDeletedAt
-    
+    ChannelOverviewDeletedAt,
 } from './value-objects';
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 import { ExecutionMapper } from '@hades/cci/execution/domain/execution.mapper';
 
-
-
 export class ChannelOverviewMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param channelOverview
      */
-    mapModelToAggregate(channelOverview: ObjectLiteral): CciChannelOverview
+    mapModelToAggregate(channelOverview: ObjectLiteral, cQMetadata?: CQMetadata): CciChannelOverview
     {
         if (!channelOverview) return;
 
-        return this.makeAggregate(channelOverview);
+        return this.makeAggregate(channelOverview, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param channelsOverview 
+     * @param channelsOverview
      */
-    mapModelsToAggregates(channelsOverview: ObjectLiteral[]): CciChannelOverview[]
+    mapModelsToAggregates(channelsOverview: ObjectLiteral[], cQMetadata?: CQMetadata): CciChannelOverview[]
     {
         if (!Array.isArray(channelsOverview)) return;
-        
-        return channelsOverview.map(channelOverview  => this.makeAggregate(channelOverview));
+
+        return channelsOverview.map(channelOverview  => this.makeAggregate(channelOverview, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param channelOverview 
+     * @param channelOverview
      */
     mapAggregateToResponse(channelOverview: CciChannelOverview): ChannelOverviewResponse
     {
@@ -78,7 +75,7 @@ export class ChannelOverviewMapper implements IMapper
         return channelsOverview.map(channelOverview => this.makeResponse(channelOverview));
     }
 
-    private makeAggregate(channelOverview: ObjectLiteral): CciChannelOverview
+    private makeAggregate(channelOverview: ObjectLiteral, cQMetadata?: CQMetadata): CciChannelOverview
     {
         return CciChannelOverview.register(
             new ChannelOverviewId(channelOverview.id),
@@ -88,32 +85,28 @@ export class ChannelOverviewMapper implements IMapper
             new ChannelOverviewSystemName(channelOverview.systemName),
             new ChannelOverviewExecutionId(channelOverview.executionId),
             new ChannelOverviewExecutionType(channelOverview.executionType),
-            new ChannelOverviewExecutionExecutedAt(channelOverview.executionExecutedAt),
-            new ChannelOverviewExecutionMonitoringStartAt(channelOverview.executionMonitoringStartAt),
-            new ChannelOverviewExecutionMonitoringEndAt(channelOverview.executionMonitoringEndAt),
+            new ChannelOverviewExecutionExecutedAt(channelOverview.executionExecutedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ChannelOverviewExecutionMonitoringStartAt(channelOverview.executionMonitoringStartAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ChannelOverviewExecutionMonitoringEndAt(channelOverview.executionMonitoringEndAt, {}, {addTimezone: cQMetadata.timezone}),
             new ChannelOverviewError(channelOverview.error),
             new ChannelOverviewInactive(channelOverview.inactive),
             new ChannelOverviewSuccessful(channelOverview.successful),
             new ChannelOverviewStopped(channelOverview.stopped),
             new ChannelOverviewUnknown(channelOverview.unknown),
             new ChannelOverviewUnregistered(channelOverview.unregistered),
-            new ChannelOverviewCreatedAt(channelOverview.createdAt),
-            new ChannelOverviewUpdatedAt(channelOverview.updatedAt),
-            new ChannelOverviewDeletedAt(channelOverview.deletedAt),
-            
+            new ChannelOverviewCreatedAt(channelOverview.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ChannelOverviewUpdatedAt(channelOverview.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ChannelOverviewDeletedAt(channelOverview.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(channelOverview.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(channelOverview.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapModelToAggregate(channelOverview.execution) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(channelOverview: CciChannelOverview): ChannelOverviewResponse
     {
         if (!channelOverview) return;
-        
+
         return new ChannelOverviewResponse(
             channelOverview.id.value,
             channelOverview.tenantId.value,
@@ -134,13 +127,9 @@ export class ChannelOverviewMapper implements IMapper
             channelOverview.createdAt.value,
             channelOverview.updatedAt.value,
             channelOverview.deletedAt.value,
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(channelOverview.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(channelOverview.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapAggregateToResponse(channelOverview.execution) : undefined,
-            
-            
-            
         );
     }
 }

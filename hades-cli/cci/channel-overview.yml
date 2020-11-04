@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: channel-overview
 moduleNames: channels-overview
+aggregateName: CciChannelOverview
 hasOAuth: true
 hasTenant: true
 aggregateProperties:

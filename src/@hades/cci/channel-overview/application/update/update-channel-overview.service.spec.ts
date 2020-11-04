@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { channelsOverview } from '@hades/cci/channel-overview/infrastructure/seeds/channel-overview.seed';
 import { UpdateChannelOverviewService } from './update-channel-overview.service';
-import { 
+import {
     ChannelOverviewId,
     ChannelOverviewTenantId,
     ChannelOverviewTenantCode,
@@ -23,19 +23,18 @@ import {
     ChannelOverviewUnregistered,
     ChannelOverviewCreatedAt,
     ChannelOverviewUpdatedAt,
-    ChannelOverviewDeletedAt
-    
+    ChannelOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
 import { MockChannelOverviewRepository } from './../../infrastructure/mock/mock-channel-overview.repository';
 
-describe('UpdateChannelOverviewService', () => 
+describe('UpdateChannelOverviewService', () =>
 {
     let service: UpdateChannelOverviewService;
     let repository: IChannelOverviewRepository;
     let mockRepository: MockChannelOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -44,7 +43,7 @@ describe('UpdateChannelOverviewService', () =>
                 EventPublisher,
                 UpdateChannelOverviewService,
                 MockChannelOverviewRepository,
-                { 
+                {
                     provide: IChannelOverviewRepository,
                     useValue: {
                         update: (item) => {}
@@ -58,7 +57,7 @@ describe('UpdateChannelOverviewService', () =>
         mockRepository  = module.get(MockChannelOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateChannelOverviewService should be defined', () => 
         {

@@ -1,16 +1,16 @@
 import { TimestampValueObject } from '@hades/shared/domain/value-objects/timestamp.value-object';
-import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
+import { DataValueObject, ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class ChannelOverviewExecutionMonitoringStartAt extends TimestampValueObject 
+export class ChannelOverviewExecutionMonitoringStartAt extends TimestampValueObject
 {
     public readonly type: 'ChannelOverviewExecutionMonitoringStartAt';
 
-    constructor(value: string, validationRules: ValidationRules = {}) 
+    constructor(value: string | DataValueObject, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'ChannelOverviewExecutionMonitoringStartAt',
-            nullable: false,
-            undefinable: false,
-        }, validationRules));
+            nullable:  false ,
+            undefinable:  false ,
+        }, validationRules), data);
     }
 }
