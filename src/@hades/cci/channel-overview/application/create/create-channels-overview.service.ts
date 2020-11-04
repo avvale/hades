@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ChannelOverviewId,
     ChannelOverviewTenantId,
     ChannelOverviewTenantCode,
@@ -20,8 +19,7 @@ import {
     ChannelOverviewUnregistered,
     ChannelOverviewCreatedAt,
     ChannelOverviewUpdatedAt,
-    ChannelOverviewDeletedAt
-    
+    ChannelOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
 import { CciChannelOverview } from './../../domain/channel-overview.aggregate';
@@ -32,7 +30,7 @@ export class CreateChannelsOverviewService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IChannelOverviewRepository
+        private readonly repository: IChannelOverviewRepository,
     ) {}
 
     public async main(
@@ -53,7 +51,6 @@ export class CreateChannelsOverviewService
             stopped: ChannelOverviewStopped,
             unknown: ChannelOverviewUnknown,
             unregistered: ChannelOverviewUnregistered,
-            
         } []
     ): Promise<void>
     {
@@ -75,18 +72,18 @@ export class CreateChannelsOverviewService
             channelOverview.stopped,
             channelOverview.unknown,
             channelOverview.unregistered,
-            new ChannelOverviewCreatedAt(Utils.nowTimestamp()),
-            new ChannelOverviewUpdatedAt(Utils.nowTimestamp()),
+            new ChannelOverviewCreatedAt({currentTimestamp: true}),
+            new ChannelOverviewUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateChannelsOverview);
 
         // create AddChannelsOverviewContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const channelsOverviewRegistered = this.publisher.mergeObjectContext(new AddChannelsOverviewContextEvent(aggregateChannelsOverview));
- 
+
         channelsOverviewRegistered.created(); // apply event to model events
         channelsOverviewRegistered.commit(); // commit all events of model
     }

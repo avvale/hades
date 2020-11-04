@@ -10,11 +10,11 @@ export class GetChannelsOverviewQueryHandler implements IQueryHandler<GetChannel
     private readonly mapper: ChannelOverviewMapper = new ChannelOverviewMapper();
 
     constructor(
-        private readonly getChannelsOverviewService: GetChannelsOverviewService
-    ) { }
+        private readonly getChannelsOverviewService: GetChannelsOverviewService,
+    ) {}
 
     async execute(query: GetChannelsOverviewQuery): Promise<ChannelOverviewResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getChannelsOverviewService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getChannelsOverviewService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

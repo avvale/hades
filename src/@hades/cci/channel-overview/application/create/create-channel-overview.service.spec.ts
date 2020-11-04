@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { channelsOverview } from '@hades/cci/channel-overview/infrastructure/seeds/channel-overview.seed';
 import { CreateChannelOverviewService } from './create-channel-overview.service';
-import { 
+import {
     ChannelOverviewId,
     ChannelOverviewTenantId,
     ChannelOverviewTenantCode,
@@ -20,19 +20,22 @@ import {
     ChannelOverviewSuccessful,
     ChannelOverviewStopped,
     ChannelOverviewUnknown,
-    ChannelOverviewUnregistered
-    
+    ChannelOverviewUnregistered,
+    ChannelOverviewCreatedAt,
+    ChannelOverviewUpdatedAt,
+    ChannelOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
 import { MockChannelOverviewRepository } from './../../infrastructure/mock/mock-channel-overview.repository';
 
-describe('CreateChannelOverviewService', () => 
+describe('CreateChannelOverviewService', () =>
+
 {
     let service: CreateChannelOverviewService;
     let repository: IChannelOverviewRepository;
     let mockRepository: MockChannelOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,7 +44,7 @@ describe('CreateChannelOverviewService', () =>
                 EventPublisher,
                 CreateChannelOverviewService,
                 MockChannelOverviewRepository,
-                { 
+                {
                     provide: IChannelOverviewRepository,
                     useValue: {
                         create: (item) => {}
@@ -55,14 +58,14 @@ describe('CreateChannelOverviewService', () =>
         mockRepository  = module.get(MockChannelOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateChannelOverviewService should be defined', () => 
+        test('CreateChannelOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a channelOverview and emit event', async () => 
+        test('should create a channelOverview and emit event', async () =>
         {
             expect(await service.main(
                 new ChannelOverviewId(channelsOverview[0].id),

@@ -114,22 +114,25 @@ export class CreateSnapshotController
 
         const channelOverviewId = Utils.uuid();
         await this.commandBus.dispatch(new CreateChannelOverviewCommand(
-            channelOverviewId,
-            tenant.id,
-            tenant.code,
-            system.id,
-            system.name,
-            executionId,
-            payload.execution.type,
-            payload.execution.executedAt,
-            payload.execution.monitoringStartAt,
-            payload.execution.monitoringEndAt,
-            payload.channelOverview.error,
-            payload.channelOverview.inactive,
-            payload.channelOverview.successful,
-            payload.channelOverview.stopped,
-            payload.channelOverview.unknown,
-            payload.channelOverview.unregistered
+            {
+                id: channelOverviewId,
+                tenantId: tenant.id,
+                tenantCode: tenant.code,
+                systemId: system.id,
+                systemName: system.name,
+                executionId: executionId,
+                executionType: payload.execution.type,
+                executionExecutedAt: payload.execution.executedAt,
+                executionMonitoringStartAt: payload.execution.monitoringStartAt,
+                executionMonitoringEndAt: payload.execution.monitoringEndAt,
+                error: payload.channelOverview.error,
+                inactive: payload.channelOverview.inactive,
+                successful: payload.channelOverview.successful,
+                stopped: payload.channelOverview.stopped,
+                unknown: payload.channelOverview.unknown,
+                unregistered: payload.channelOverview.unregistered
+            },
+            { timezone }
         ));
 
         const jobOverviewId = Utils.uuid();

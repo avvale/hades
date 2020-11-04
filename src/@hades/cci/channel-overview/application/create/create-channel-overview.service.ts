@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ChannelOverviewId,
     ChannelOverviewTenantId,
     ChannelOverviewTenantCode,
@@ -20,8 +19,7 @@ import {
     ChannelOverviewUnregistered,
     ChannelOverviewCreatedAt,
     ChannelOverviewUpdatedAt,
-    ChannelOverviewDeletedAt
-    
+    ChannelOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IChannelOverviewRepository } from './../../domain/channel-overview.repository';
 import { CciChannelOverview } from './../../domain/channel-overview.aggregate';
@@ -31,52 +29,53 @@ export class CreateChannelOverviewService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IChannelOverviewRepository
+        private readonly repository: IChannelOverviewRepository,
     ) {}
 
     public async main(
-        id: ChannelOverviewId,
-        tenantId: ChannelOverviewTenantId,
-        tenantCode: ChannelOverviewTenantCode,
-        systemId: ChannelOverviewSystemId,
-        systemName: ChannelOverviewSystemName,
-        executionId: ChannelOverviewExecutionId,
-        executionType: ChannelOverviewExecutionType,
-        executionExecutedAt: ChannelOverviewExecutionExecutedAt,
-        executionMonitoringStartAt: ChannelOverviewExecutionMonitoringStartAt,
-        executionMonitoringEndAt: ChannelOverviewExecutionMonitoringEndAt,
-        error: ChannelOverviewError,
-        inactive: ChannelOverviewInactive,
-        successful: ChannelOverviewSuccessful,
-        stopped: ChannelOverviewStopped,
-        unknown: ChannelOverviewUnknown,
-        unregistered: ChannelOverviewUnregistered,
-        
+        payload: {
+            id: ChannelOverviewId,
+            tenantId: ChannelOverviewTenantId,
+            tenantCode: ChannelOverviewTenantCode,
+            systemId: ChannelOverviewSystemId,
+            systemName: ChannelOverviewSystemName,
+            executionId: ChannelOverviewExecutionId,
+            executionType: ChannelOverviewExecutionType,
+            executionExecutedAt: ChannelOverviewExecutionExecutedAt,
+            executionMonitoringStartAt: ChannelOverviewExecutionMonitoringStartAt,
+            executionMonitoringEndAt: ChannelOverviewExecutionMonitoringEndAt,
+            error: ChannelOverviewError,
+            inactive: ChannelOverviewInactive,
+            successful: ChannelOverviewSuccessful,
+            stopped: ChannelOverviewStopped,
+            unknown: ChannelOverviewUnknown,
+            unregistered: ChannelOverviewUnregistered,
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const channelOverview = CciChannelOverview.register(
-            id,
-            tenantId,
-            tenantCode,
-            systemId,
-            systemName,
-            executionId,
-            executionType,
-            executionExecutedAt,
-            executionMonitoringStartAt,
-            executionMonitoringEndAt,
-            error,
-            inactive,
-            successful,
-            stopped,
-            unknown,
-            unregistered,
-            new ChannelOverviewCreatedAt(Utils.nowTimestamp()),
-            new ChannelOverviewUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.systemId,
+            payload.systemName,
+            payload.executionId,
+            payload.executionType,
+            payload.executionExecutedAt,
+            payload.executionMonitoringStartAt,
+            payload.executionMonitoringEndAt,
+            payload.error,
+            payload.inactive,
+            payload.successful,
+            payload.stopped,
+            payload.unknown,
+            payload.unregistered,
+            new ChannelOverviewCreatedAt({currentTimestamp: true}),
+            new ChannelOverviewUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // create
         await this.repository.create(channelOverview);
 
@@ -84,7 +83,7 @@ export class CreateChannelOverviewService
         const channelOverviewRegister = this.publisher.mergeObjectContext(
             channelOverview
         );
-        
+
         channelOverviewRegister.created(channelOverview); // apply event to model events
         channelOverviewRegister.commit(); // commit all events of model
     }

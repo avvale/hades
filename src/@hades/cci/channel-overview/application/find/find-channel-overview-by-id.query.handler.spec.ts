@@ -16,7 +16,7 @@ describe('FindChannelOverviewByIdQueryHandler', () =>
     let repository: MockChannelOverviewRepository;
     let mapper: ChannelOverviewMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindChannelOverviewByIdQueryHandler', () =>
         mapper          = new ChannelOverviewMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindChannelOverviewByIdQueryHandler should be defined', () => 
+        test('FindChannelOverviewByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

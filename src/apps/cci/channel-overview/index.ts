@@ -1,45 +1,45 @@
 // controllers
-import { CreateChannelOverviewController } from './controllers/create-channel-overview.controller';
-import { CreateChannelsOverviewController } from './controllers/create-channels-overview.controller';
-import { PaginateChannelsOverviewController } from './controllers/paginate-channels-overview.controller';
-import { GetChannelsOverviewController } from './controllers/get-channels-overview.controller';
-import { FindChannelOverviewByIdController } from './controllers/find-channel-overview-by-id.controller';
-import { FindChannelOverviewController } from './controllers/find-channel-overview.controller';
-import { UpdateChannelOverviewController } from './controllers/update-channel-overview.controller';
-import { DeleteChannelOverviewByIdController } from './controllers/delete-channel-overview-by-id.controller';
-import { DeleteChannelsOverviewController } from './controllers/delete-channels-overview.controller';
+import { CciCreateChannelOverviewController } from './controllers/cci-create-channel-overview.controller';
+import { CciCreateChannelsOverviewController } from './controllers/cci-create-channels-overview.controller';
+import { CciPaginateChannelsOverviewController } from './controllers/cci-paginate-channels-overview.controller';
+import { CciGetChannelsOverviewController } from './controllers/cci-get-channels-overview.controller';
+import { CciFindChannelOverviewByIdController } from './controllers/cci-find-channel-overview-by-id.controller';
+import { CciFindChannelOverviewController } from './controllers/cci-find-channel-overview.controller';
+import { CciUpdateChannelOverviewController } from './controllers/cci-update-channel-overview.controller';
+import { CciDeleteChannelOverviewByIdController } from './controllers/cci-delete-channel-overview-by-id.controller';
+import { CciDeleteChannelsOverviewController } from './controllers/cci-delete-channels-overview.controller';
 
 // resolvers
-import { CreateChannelOverviewResolver } from './resolvers/create-channel-overview.resolver';
-import { CreateChannelsOverviewResolver } from './resolvers/create-channels-overview.resolver';
-import { PaginateChannelsOverviewResolver } from './resolvers/paginate-channels-overview.resolver';
-import { GetChannelsOverviewResolver } from './resolvers/get-channels-overview.resolver';
-import { FindChannelOverviewResolver } from './resolvers/find-channel-overview.resolver';
-import { FindChannelOverviewByIdResolver } from './resolvers/find-channel-overview-by-id.resolver';
-import { UpdateChannelOverviewResolver } from './resolvers/update-channel-overview.resolver';
-import { DeleteChannelOverviewByIdResolver } from './resolvers/delete-channel-overview-by-id.resolver';
-import { DeleteChannelsOverviewResolver } from './resolvers/delete-channels-overview.resolver';
+import { CciCreateChannelOverviewResolver } from './resolvers/cci-create-channel-overview.resolver';
+import { CciCreateChannelsOverviewResolver } from './resolvers/cci-create-channels-overview.resolver';
+import { CciPaginateChannelsOverviewResolver } from './resolvers/cci-paginate-channels-overview.resolver';
+import { CciGetChannelsOverviewResolver } from './resolvers/cci-get-channels-overview.resolver';
+import { CciFindChannelOverviewResolver } from './resolvers/cci-find-channel-overview.resolver';
+import { CciFindChannelOverviewByIdResolver } from './resolvers/cci-find-channel-overview-by-id.resolver';
+import { CciUpdateChannelOverviewResolver } from './resolvers/cci-update-channel-overview.resolver';
+import { CciDeleteChannelOverviewByIdResolver } from './resolvers/cci-delete-channel-overview-by-id.resolver';
+import { CciDeleteChannelsOverviewResolver } from './resolvers/cci-delete-channels-overview.resolver';
 
 export const CciChannelOverviewControllers = [
-    CreateChannelOverviewController,
-    CreateChannelsOverviewController,
-    PaginateChannelsOverviewController,
-    GetChannelsOverviewController,
-    FindChannelOverviewByIdController,
-    FindChannelOverviewController,
-    UpdateChannelOverviewController,
-    DeleteChannelOverviewByIdController,
-    DeleteChannelsOverviewController,
+    CciCreateChannelOverviewController,
+    CciCreateChannelsOverviewController,
+    CciPaginateChannelsOverviewController,
+    CciGetChannelsOverviewController,
+    CciFindChannelOverviewByIdController,
+    CciFindChannelOverviewController,
+    CciUpdateChannelOverviewController,
+    CciDeleteChannelOverviewByIdController,
+    CciDeleteChannelsOverviewController,
 ];
 
 export const CciChannelOverviewResolvers = [
-    CreateChannelOverviewResolver,
-    CreateChannelsOverviewResolver,
-    PaginateChannelsOverviewResolver,
-    GetChannelsOverviewResolver,
-    FindChannelOverviewResolver,
-    FindChannelOverviewByIdResolver,
-    UpdateChannelOverviewResolver,
-    DeleteChannelOverviewByIdResolver,
-    DeleteChannelsOverviewResolver,
+    CciCreateChannelOverviewResolver,
+    CciCreateChannelsOverviewResolver,
+    CciPaginateChannelsOverviewResolver,
+    CciGetChannelsOverviewResolver,
+    CciFindChannelOverviewResolver,
+    CciFindChannelOverviewByIdResolver,
+    CciUpdateChannelOverviewResolver,
+    CciDeleteChannelOverviewByIdResolver,
+    CciDeleteChannelsOverviewResolver,
 ];

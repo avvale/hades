@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IChannelOverviewRepository } from '@hades/cci/channel-overview/domain/channel-overview.repository';
-import { 
+import {
     ChannelOverviewId,
     ChannelOverviewTenantId,
     ChannelOverviewTenantCode,
@@ -21,10 +21,8 @@ import {
     ChannelOverviewUnregistered,
     ChannelOverviewCreatedAt,
     ChannelOverviewUpdatedAt,
-    ChannelOverviewDeletedAt
-
+    ChannelOverviewDeletedAt,
 } from '@hades/cci/channel-overview/domain/value-objects';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { CciChannelOverview } from './../../domain/channel-overview.aggregate';
 import { channelsOverview } from './../seeds/channel-overview.seed';
 
@@ -78,6 +76,7 @@ export class MockChannelOverviewRepository extends MockRepository<CciChannelOver
                     new ChannelOverviewCreatedAt(itemCollection.createdAt),
                     new ChannelOverviewUpdatedAt(itemCollection.updatedAt),
                     new ChannelOverviewDeletedAt(itemCollection.deletedAt),
+                    
                 ));
         }
     }
