@@ -10,12 +10,16 @@ export class FindContactQueryHandler implements IQueryHandler<FindContactQuery>
     private readonly mapper: ContactMapper = new ContactMapper();
 
     constructor(
-        private readonly findContactService: FindContactService
-    ) { }
+        private readonly findContactService: FindContactService,
+    ) {}
 
     async execute(query: FindContactQuery): Promise<ContactResponse>
     {
-        const contact = await this.findContactService.main(query.queryStatement);
+        const contact = await this.findContactService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(contact);
     }

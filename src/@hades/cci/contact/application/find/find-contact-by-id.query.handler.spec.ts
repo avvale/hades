@@ -16,7 +16,7 @@ describe('FindContactByIdQueryHandler', () =>
     let repository: MockContactRepository;
     let mapper: ContactMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindContactByIdQueryHandler', () =>
         mapper          = new ContactMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindContactByIdQueryHandler should be defined', () => 
+        test('FindContactByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

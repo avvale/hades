@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { contacts } from '@hades/cci/contact/infrastructure/seeds/contact.seed';
 import { CreateContactService } from './create-contact.service';
-import { 
+import {
     ContactId,
     ContactTenantId,
     ContactTenantCode,
@@ -19,19 +19,22 @@ import {
     ContactArea,
     ContactHasConsentEmail,
     ContactHasConsentMobile,
-    ContactIsActive
-    
+    ContactIsActive,
+    ContactCreatedAt,
+    ContactUpdatedAt,
+    ContactDeletedAt,
 } from './../../domain/value-objects';
 import { IContactRepository } from './../../domain/contact.repository';
 import { MockContactRepository } from './../../infrastructure/mock/mock-contact.repository';
 
-describe('CreateContactService', () => 
+describe('CreateContactService', () =>
+
 {
     let service: CreateContactService;
     let repository: IContactRepository;
     let mockRepository: MockContactRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -40,7 +43,7 @@ describe('CreateContactService', () =>
                 EventPublisher,
                 CreateContactService,
                 MockContactRepository,
-                { 
+                {
                     provide: IContactRepository,
                     useValue: {
                         create: (item) => {}
@@ -54,14 +57,14 @@ describe('CreateContactService', () =>
         mockRepository  = module.get(MockContactRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateContactService should be defined', () => 
+        test('CreateContactService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a contact and emit event', async () => 
+        test('should create a contact and emit event', async () =>
         {
             expect(await service.main(
                 new ContactId(contacts[0].id),

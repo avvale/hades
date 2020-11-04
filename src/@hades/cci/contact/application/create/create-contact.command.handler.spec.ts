@@ -6,12 +6,12 @@ import { contacts } from '@hades/cci/contact/infrastructure/seeds/contact.seed';
 import { CreateContactCommand } from './create-contact.command';
 import { CreateContactService } from './create-contact.service';
 
-describe('CreateContactCommandHandler', () => 
+describe('CreateContactCommandHandler', () =>
 {
     let commandHandler: CreateContactCommandHandler;
     let service: CreateContactService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateContactCommandHandler', () =>
         service         = module.get<CreateContactService>(CreateContactService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateContactCommandHandler should be defined', () => 
+        test('CreateContactCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateContactService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateContactService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateContactCommand(
@@ -55,7 +55,6 @@ describe('CreateContactCommandHandler', () =>
                     contacts[0].hasConsentEmail,
                     contacts[0].hasConsentMobile,
                     contacts[0].isActive,
-                    
                 )
             )).toBe(undefined);
         });

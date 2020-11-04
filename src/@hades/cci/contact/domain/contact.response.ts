@@ -2,9 +2,7 @@ import { TenantResponse } from '@hades/iam/tenant/domain/tenant.response';
 import { SystemResponse } from '@hades/cci/system/domain/system.response';
 import { RoleResponse } from '@hades/cci/role/domain/role.response';
 
-
-
-export class ContactResponse 
+export class ContactResponse
 {
     constructor(
         public readonly id: string,
@@ -25,12 +23,8 @@ export class ContactResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        
         public readonly tenant: TenantResponse,
         public readonly system: SystemResponse,
         public readonly role: RoleResponse,
-        
-        
-        
     ) {}
 }

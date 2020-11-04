@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IContactRepository } from './../../domain/contact.repository';
@@ -13,13 +12,13 @@ export class SequelizeContactRepository extends SequelizeRepository<CciContact, 
 {
     public readonly aggregateName: string = 'CciContact';
     public readonly mapper: ContactMapper = new ContactMapper();
+    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciContactModel)
         public readonly repository: typeof CciContactModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
-    
 }

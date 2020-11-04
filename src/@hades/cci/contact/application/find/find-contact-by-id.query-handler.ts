@@ -11,12 +11,16 @@ export class FindContactByIdQueryHandler implements IQueryHandler<FindContactByI
     private readonly mapper: ContactMapper = new ContactMapper();
 
     constructor(
-        private readonly findContactByIdService: FindContactByIdService
-    ) { }
+        private readonly findContactByIdService: FindContactByIdService,
+    ) {}
 
     async execute(query: FindContactByIdQuery): Promise<ContactResponse>
     {
-        const contact = await this.findContactByIdService.main(new ContactId(query.id));
+        const contact = await this.findContactByIdService.main(
+            new ContactId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(contact);
     }

@@ -1,12 +1,14 @@
 
-
 type CciContact
 {
     id: ID!
+    tenantId: ID!
     tenant: IamTenant!
     tenantCode: GraphQLString!
+    systemId: ID!
     system: CciSystem!
     systemName: GraphQLString!
+    roleId: ID
     role: CciRole
     roleName: GraphQLString
     name: GraphQLString!
@@ -20,7 +22,6 @@ type CciContact
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input CciCreateContactInput
@@ -40,7 +41,6 @@ input CciCreateContactInput
     hasConsentEmail: GraphQLBoolean!
     hasConsentMobile: GraphQLBoolean!
     isActive: GraphQLBoolean!
-    
 }
 
 input CciUpdateContactInput
@@ -60,14 +60,13 @@ input CciUpdateContactInput
     hasConsentEmail: GraphQLBoolean
     hasConsentMobile: GraphQLBoolean
     isActive: GraphQLBoolean
-    
 }
 
-type Query 
+type Query
 {
-    cciFindContact(query:QueryStatement): CciContact
-    cciFindContactById(id:ID): CciContact
-    cciGetContacts(query:QueryStatement): [CciContact]!
+    cciFindContact(query:QueryStatement constraint:QueryStatement): CciContact
+    cciFindContactById(id:ID constraint:QueryStatement): CciContact
+    cciGetContacts(query:QueryStatement constraint:QueryStatement): [CciContact]!
     cciPaginateContacts(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -75,7 +74,7 @@ type Mutation
 {
     cciCreateContact(payload: CciCreateContactInput!): CciContact
     cciCreateContacts(payload: [CciCreateContactInput]!): Boolean!
-    cciUpdateContact(payload: CciUpdateContactInput!): CciContact
-    cciDeleteContactById(id: ID!): CciContact
-    cciDeleteContacts(query:QueryStatement): [CciContact]!
+    cciUpdateContact(payload: CciUpdateContactInput! constraint:QueryStatement): CciContact
+    cciDeleteContactById(id: ID! constraint:QueryStatement): CciContact
+    cciDeleteContacts(query:QueryStatement constraint:QueryStatement): [CciContact]!
 }

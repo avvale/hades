@@ -8,13 +8,13 @@ import { ContactId } from './../../domain/value-objects';
 import { IContactRepository } from './../../domain/contact.repository';
 import { MockContactRepository } from './../../infrastructure/mock/mock-contact.repository';
 
-describe('FindContactByIdService', () => 
+describe('FindContactByIdService', () =>
 {
     let service: FindContactByIdService;
     let repository: IContactRepository;
     let mockRepository: MockContactRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindContactByIdService', () =>
                 EventPublisher,
                 FindContactByIdService,
                 MockContactRepository,
-                { 
+                {
                     provide: IContactRepository,
                     useValue: {
                         findById: (id) => {}

@@ -10,11 +10,11 @@ export class GetContactsQueryHandler implements IQueryHandler<GetContactsQuery>
     private readonly mapper: ContactMapper = new ContactMapper();
 
     constructor(
-        private readonly getContactsService: GetContactsService
-    ) { }
+        private readonly getContactsService: GetContactsService,
+    ) {}
 
     async execute(query: GetContactsQuery): Promise<ContactResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getContactsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getContactsService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

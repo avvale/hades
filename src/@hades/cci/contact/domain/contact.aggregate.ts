@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     ContactId,
     ContactTenantId,
     ContactTenantCode,
@@ -17,8 +17,7 @@ import {
     ContactIsActive,
     ContactCreatedAt,
     ContactUpdatedAt,
-    ContactDeletedAt
-    
+    ContactDeletedAt,
 } from './value-objects';
 import { CreatedContactEvent } from './../application/events/created-contact.event';
 import { UpdatedContactEvent } from './../application/events/updated-contact.event';
@@ -26,8 +25,6 @@ import { DeletedContactEvent } from './../application/events/deleted-contact.eve
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 import { CciRole } from '@hades/cci/role/domain/role.aggregate';
-
-
 
 export class CciContact extends AggregateRoot
 {
@@ -49,18 +46,16 @@ export class CciContact extends AggregateRoot
     createdAt: ContactCreatedAt;
     updatedAt: ContactUpdatedAt;
     deletedAt: ContactDeletedAt;
-    
+
     // eager relationship
     tenant: IamTenant;
     system: CciSystem;
     role: CciRole;
-    
-    
-    
+
     constructor(id?: ContactId, tenantId?: ContactTenantId, tenantCode?: ContactTenantCode, systemId?: ContactSystemId, systemName?: ContactSystemName, roleId?: ContactRoleId, roleName?: ContactRoleName, name?: ContactName, surname?: ContactSurname, email?: ContactEmail, mobile?: ContactMobile, area?: ContactArea, hasConsentEmail?: ContactHasConsentEmail, hasConsentMobile?: ContactHasConsentMobile, isActive?: ContactIsActive, createdAt?: ContactCreatedAt, updatedAt?: ContactUpdatedAt, deletedAt?: ContactDeletedAt, tenant?: IamTenant, system?: CciSystem, role?: CciRole, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;
@@ -79,14 +74,11 @@ export class CciContact extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
         this.tenant = tenant;
         this.system = system;
         this.role = role;
-        
-        
-        
     }
 
     static register (id: ContactId, tenantId: ContactTenantId, tenantCode: ContactTenantCode, systemId: ContactSystemId, systemName: ContactSystemName, roleId: ContactRoleId, roleName: ContactRoleName, name: ContactName, surname: ContactSurname, email: ContactEmail, mobile: ContactMobile, area: ContactArea, hasConsentEmail: ContactHasConsentEmail, hasConsentMobile: ContactHasConsentMobile, isActive: ContactIsActive, createdAt: ContactCreatedAt, updatedAt: ContactUpdatedAt, deletedAt: ContactDeletedAt, tenant?: IamTenant, system?: CciSystem, role?: CciRole, ): CciContact
@@ -170,7 +162,6 @@ export class CciContact extends AggregateRoot
                 contact.createdAt?.value,
                 contact.updatedAt?.value,
                 contact.deletedAt?.value,
-                
             )
         );
     }
@@ -196,14 +187,11 @@ export class CciContact extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             role: this.role?.toDTO(),
-            
-            
-            
         }
     }
 }

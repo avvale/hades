@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IContactRepository } from './../../domain/contact.repository';
 import { CciContact } from './../../domain/contact.aggregate';
 
@@ -7,11 +8,11 @@ import { CciContact } from './../../domain/contact.aggregate';
 export class GetContactsService
 {
     constructor(
-        private readonly repository: IContactRepository
+        private readonly repository: IContactRepository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement): Promise<CciContact[]>
-    {        
-        return await this.repository.get(queryStatement);
+    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciContact[]>
+    {
+        return await this.repository.get(queryStatement, constraint, cQMetadata);
     }
 }
