@@ -11,12 +11,16 @@ export class FindFlowByIdQueryHandler implements IQueryHandler<FindFlowByIdQuery
     private readonly mapper: FlowMapper = new FlowMapper();
 
     constructor(
-        private readonly findFlowByIdService: FindFlowByIdService
-    ) { }
+        private readonly findFlowByIdService: FindFlowByIdService,
+    ) {}
 
     async execute(query: FindFlowByIdQuery): Promise<FlowResponse>
     {
-        const flow = await this.findFlowByIdService.main(new FlowId(query.id));
+        const flow = await this.findFlowByIdService.main(
+            new FlowId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(flow);
     }

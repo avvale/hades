@@ -6,12 +6,12 @@ import { flows } from '@hades/cci/flow/infrastructure/seeds/flow.seed';
 import { CreateFlowCommand } from './create-flow.command';
 import { CreateFlowService } from './create-flow.service';
 
-describe('CreateFlowCommandHandler', () => 
+describe('CreateFlowCommandHandler', () =>
 {
     let commandHandler: CreateFlowCommandHandler;
     let service: CreateFlowService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateFlowCommandHandler', () =>
         service         = module.get<CreateFlowService>(CreateFlowService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateFlowCommandHandler should be defined', () => 
+        test('CreateFlowCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateFlowService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateFlowService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateFlowCommand(
@@ -65,7 +65,6 @@ describe('CreateFlowCommandHandler', () =>
                     flows[0].isComplex,
                     flows[0].fieldGroupId,
                     flows[0].data,
-                    
                 )
             )).toBe(undefined);
         });

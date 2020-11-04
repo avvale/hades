@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciFlow } from './flow.aggregate';
 import { FlowResponse } from './flow.response';
-import { 
+import {
     FlowId,
     FlowHash,
     FlowTenantId,
@@ -30,45 +30,42 @@ import {
     FlowData,
     FlowCreatedAt,
     FlowUpdatedAt,
-    FlowDeletedAt
-    
+    FlowDeletedAt,
 } from './value-objects';
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 
-
-
 export class FlowMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param flow
      */
-    mapModelToAggregate(flow: ObjectLiteral): CciFlow
+    mapModelToAggregate(flow: ObjectLiteral, cQMetadata?: CQMetadata): CciFlow
     {
         if (!flow) return;
 
-        return this.makeAggregate(flow);
+        return this.makeAggregate(flow, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param flows 
+     * @param flows
      */
-    mapModelsToAggregates(flows: ObjectLiteral[]): CciFlow[]
+    mapModelsToAggregates(flows: ObjectLiteral[], cQMetadata?: CQMetadata): CciFlow[]
     {
         if (!Array.isArray(flows)) return;
-        
-        return flows.map(flow  => this.makeAggregate(flow));
+
+        return flows.map(flow  => this.makeAggregate(flow, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param flow 
+     * @param flow
      */
     mapAggregateToResponse(flow: CciFlow): FlowResponse
     {
@@ -86,7 +83,7 @@ export class FlowMapper implements IMapper
         return flows.map(flow => this.makeResponse(flow));
     }
 
-    private makeAggregate(flow: ObjectLiteral): CciFlow
+    private makeAggregate(flow: ObjectLiteral, cQMetadata?: CQMetadata): CciFlow
     {
         return CciFlow.register(
             new FlowId(flow.id),
@@ -106,7 +103,7 @@ export class FlowMapper implements IMapper
             new FlowIflowName(flow.iflowName),
             new FlowResponsibleUserAccount(flow.responsibleUserAccount),
             new FlowLastChangeUserAccount(flow.lastChangeUserAccount),
-            new FlowLastChangedAt(flow.lastChangedAt),
+            new FlowLastChangedAt(flow.lastChangedAt, {}, {addTimezone: cQMetadata.timezone}),
             new FlowFolderPath(flow.folderPath),
             new FlowDescription(flow.description),
             new FlowApplication(flow.application),
@@ -114,22 +111,18 @@ export class FlowMapper implements IMapper
             new FlowIsComplex(flow.isComplex),
             new FlowFieldGroupId(flow.fieldGroupId),
             new FlowData(flow.data),
-            new FlowCreatedAt(flow.createdAt),
-            new FlowUpdatedAt(flow.updatedAt),
-            new FlowDeletedAt(flow.deletedAt),
-            
+            new FlowCreatedAt(flow.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new FlowUpdatedAt(flow.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new FlowDeletedAt(flow.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(flow.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(flow.system) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(flow: CciFlow): FlowResponse
     {
         if (!flow) return;
-        
+
         return new FlowResponse(
             flow.id.value,
             flow.hash.value,
@@ -159,12 +152,8 @@ export class FlowMapper implements IMapper
             flow.createdAt.value,
             flow.updatedAt.value,
             flow.deletedAt.value,
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(flow.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(flow.system) : undefined,
-            
-            
-            
         );
     }
 }

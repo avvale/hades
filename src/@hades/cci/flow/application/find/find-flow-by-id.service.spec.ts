@@ -8,13 +8,13 @@ import { FlowId } from './../../domain/value-objects';
 import { IFlowRepository } from './../../domain/flow.repository';
 import { MockFlowRepository } from './../../infrastructure/mock/mock-flow.repository';
 
-describe('FindFlowByIdService', () => 
+describe('FindFlowByIdService', () =>
 {
     let service: FindFlowByIdService;
     let repository: IFlowRepository;
     let mockRepository: MockFlowRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindFlowByIdService', () =>
                 EventPublisher,
                 FindFlowByIdService,
                 MockFlowRepository,
-                { 
+                {
                     provide: IFlowRepository,
                     useValue: {
                         findById: (id) => {}

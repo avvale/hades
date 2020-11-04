@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IFlowRepository } from './../../domain/flow.repository';
@@ -13,13 +12,13 @@ export class SequelizeFlowRepository extends SequelizeRepository<CciFlow, CciFlo
 {
     public readonly aggregateName: string = 'CciFlow';
     public readonly mapper: FlowMapper = new FlowMapper();
+    public readonly timezoneColumns: string[] = ['lastChangedAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciFlowModel)
         public readonly repository: typeof CciFlowModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
-    
 }

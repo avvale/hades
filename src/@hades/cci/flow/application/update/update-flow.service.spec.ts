@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { flows } from '@hades/cci/flow/infrastructure/seeds/flow.seed';
 import { UpdateFlowService } from './update-flow.service';
-import { 
+import {
     FlowId,
     FlowHash,
     FlowTenantId,
@@ -32,19 +32,18 @@ import {
     FlowData,
     FlowCreatedAt,
     FlowUpdatedAt,
-    FlowDeletedAt
-    
+    FlowDeletedAt,
 } from './../../domain/value-objects';
 import { IFlowRepository } from './../../domain/flow.repository';
 import { MockFlowRepository } from './../../infrastructure/mock/mock-flow.repository';
 
-describe('UpdateFlowService', () => 
+describe('UpdateFlowService', () =>
 {
     let service: UpdateFlowService;
     let repository: IFlowRepository;
     let mockRepository: MockFlowRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -53,7 +52,7 @@ describe('UpdateFlowService', () =>
                 EventPublisher,
                 UpdateFlowService,
                 MockFlowRepository,
-                { 
+                {
                     provide: IFlowRepository,
                     useValue: {
                         update: (item) => {}
@@ -67,7 +66,7 @@ describe('UpdateFlowService', () =>
         mockRepository  = module.get(MockFlowRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateFlowService should be defined', () => 
         {

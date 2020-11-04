@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateFlowsCommand
 {
     constructor(
-        public readonly flows: {
+        public readonly payload: {
             id: string,
             hash: string,
             tenantId: string,
@@ -27,7 +29,7 @@ export class CreateFlowsCommand
             isComplex?: boolean,
             fieldGroupId?: string,
             data?: any,
-            
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

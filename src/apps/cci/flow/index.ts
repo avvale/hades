@@ -1,45 +1,45 @@
 // controllers
-import { CreateFlowController } from './controllers/create-flow.controller';
-import { CreateFlowsController } from './controllers/create-flows.controller';
-import { PaginateFlowsController } from './controllers/paginate-flows.controller';
-import { GetFlowsController } from './controllers/get-flows.controller';
-import { FindFlowByIdController } from './controllers/find-flow-by-id.controller';
-import { FindFlowController } from './controllers/find-flow.controller';
-import { UpdateFlowController } from './controllers/update-flow.controller';
-import { DeleteFlowByIdController } from './controllers/delete-flow-by-id.controller';
-import { DeleteFlowsController } from './controllers/delete-flows.controller';
+import { CciCreateFlowController } from './controllers/cci-create-flow.controller';
+import { CciCreateFlowsController } from './controllers/cci-create-flows.controller';
+import { CciPaginateFlowsController } from './controllers/cci-paginate-flows.controller';
+import { CciGetFlowsController } from './controllers/cci-get-flows.controller';
+import { CciFindFlowByIdController } from './controllers/cci-find-flow-by-id.controller';
+import { CciFindFlowController } from './controllers/cci-find-flow.controller';
+import { CciUpdateFlowController } from './controllers/cci-update-flow.controller';
+import { CciDeleteFlowByIdController } from './controllers/cci-delete-flow-by-id.controller';
+import { CciDeleteFlowsController } from './controllers/cci-delete-flows.controller';
 
 // resolvers
-import { CreateFlowResolver } from './resolvers/create-flow.resolver';
-import { CreateFlowsResolver } from './resolvers/create-flows.resolver';
-import { PaginateFlowsResolver } from './resolvers/paginate-flows.resolver';
-import { GetFlowsResolver } from './resolvers/get-flows.resolver';
-import { FindFlowResolver } from './resolvers/find-flow.resolver';
-import { FindFlowByIdResolver } from './resolvers/find-flow-by-id.resolver';
-import { UpdateFlowResolver } from './resolvers/update-flow.resolver';
-import { DeleteFlowByIdResolver } from './resolvers/delete-flow-by-id.resolver';
-import { DeleteFlowsResolver } from './resolvers/delete-flows.resolver';
+import { CciCreateFlowResolver } from './resolvers/cci-create-flow.resolver';
+import { CciCreateFlowsResolver } from './resolvers/cci-create-flows.resolver';
+import { CciPaginateFlowsResolver } from './resolvers/cci-paginate-flows.resolver';
+import { CciGetFlowsResolver } from './resolvers/cci-get-flows.resolver';
+import { CciFindFlowResolver } from './resolvers/cci-find-flow.resolver';
+import { CciFindFlowByIdResolver } from './resolvers/cci-find-flow-by-id.resolver';
+import { CciUpdateFlowResolver } from './resolvers/cci-update-flow.resolver';
+import { CciDeleteFlowByIdResolver } from './resolvers/cci-delete-flow-by-id.resolver';
+import { CciDeleteFlowsResolver } from './resolvers/cci-delete-flows.resolver';
 
 export const CciFlowControllers = [
-    CreateFlowController,
-    CreateFlowsController,
-    PaginateFlowsController,
-    GetFlowsController,
-    FindFlowByIdController,
-    FindFlowController,
-    UpdateFlowController,
-    DeleteFlowByIdController,
-    DeleteFlowsController,
+    CciCreateFlowController,
+    CciCreateFlowsController,
+    CciPaginateFlowsController,
+    CciGetFlowsController,
+    CciFindFlowByIdController,
+    CciFindFlowController,
+    CciUpdateFlowController,
+    CciDeleteFlowByIdController,
+    CciDeleteFlowsController,
 ];
 
 export const CciFlowResolvers = [
-    CreateFlowResolver,
-    CreateFlowsResolver,
-    PaginateFlowsResolver,
-    GetFlowsResolver,
-    FindFlowResolver,
-    FindFlowByIdResolver,
-    UpdateFlowResolver,
-    DeleteFlowByIdResolver,
-    DeleteFlowsResolver,
+    CciCreateFlowResolver,
+    CciCreateFlowsResolver,
+    CciPaginateFlowsResolver,
+    CciGetFlowsResolver,
+    CciFindFlowResolver,
+    CciFindFlowByIdResolver,
+    CciUpdateFlowResolver,
+    CciDeleteFlowByIdResolver,
+    CciDeleteFlowsResolver,
 ];
