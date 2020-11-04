@@ -944,9 +944,9 @@ export interface IQuery {
     adminFindLangById(id?: string, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
     adminGetLangs(query?: QueryStatement, constraint?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
     adminPaginateLangs(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    cciFindChannelDetail(query?: QueryStatement): CciChannelDetail | Promise<CciChannelDetail>;
-    cciFindChannelDetailById(id?: string): CciChannelDetail | Promise<CciChannelDetail>;
-    cciGetChannelsDetail(query?: QueryStatement): CciChannelDetail[] | Promise<CciChannelDetail[]>;
+    cciFindChannelDetail(query?: QueryStatement, constraint?: QueryStatement): CciChannelDetail | Promise<CciChannelDetail>;
+    cciFindChannelDetailById(id?: string, constraint?: QueryStatement): CciChannelDetail | Promise<CciChannelDetail>;
+    cciGetChannelsDetail(query?: QueryStatement, constraint?: QueryStatement): CciChannelDetail[] | Promise<CciChannelDetail[]>;
     cciPaginateChannelsDetail(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindChannelOverview(query?: QueryStatement, constraint?: QueryStatement): CciChannelOverview | Promise<CciChannelOverview>;
     cciFindChannelOverviewById(id?: string, constraint?: QueryStatement): CciChannelOverview | Promise<CciChannelOverview>;
@@ -1053,9 +1053,9 @@ export interface IMutation {
     adminDeleteLangs(query?: QueryStatement, constraint?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
     cciCreateChannelDetail(payload: CciCreateChannelDetailInput): CciChannelDetail | Promise<CciChannelDetail>;
     cciCreateChannelsDetail(payload: CciCreateChannelDetailInput[]): boolean | Promise<boolean>;
-    cciUpdateChannelDetail(payload: CciUpdateChannelDetailInput): CciChannelDetail | Promise<CciChannelDetail>;
-    cciDeleteChannelDetailById(id: string): CciChannelDetail | Promise<CciChannelDetail>;
-    cciDeleteChannelsDetail(query?: QueryStatement): CciChannelDetail[] | Promise<CciChannelDetail[]>;
+    cciUpdateChannelDetail(payload: CciUpdateChannelDetailInput, constraint?: QueryStatement): CciChannelDetail | Promise<CciChannelDetail>;
+    cciDeleteChannelDetailById(id: string, constraint?: QueryStatement): CciChannelDetail | Promise<CciChannelDetail>;
+    cciDeleteChannelsDetail(query?: QueryStatement, constraint?: QueryStatement): CciChannelDetail[] | Promise<CciChannelDetail[]>;
     cciCreateChannelOverview(payload: CciCreateChannelOverviewInput): CciChannelOverview | Promise<CciChannelOverview>;
     cciCreateChannelsOverview(payload: CciCreateChannelOverviewInput[]): boolean | Promise<boolean>;
     cciUpdateChannelOverview(payload: CciUpdateChannelOverviewInput, constraint?: QueryStatement): CciChannelOverview | Promise<CciChannelOverview>;
@@ -1176,10 +1176,13 @@ export interface IMutation {
 
 export interface CciChannelDetail {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
+    systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
+    executionId: string;
     execution: CciExecution;
     executionType: CciChannelDetailExecutionType;
     executionExecutedAt: GraphQLTimestamp;
