@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IFlowRepository } from '@hades/cci/flow/domain/flow.repository';
-import { 
+import {
     FlowId,
     FlowHash,
     FlowTenantId,
@@ -30,8 +30,7 @@ import {
     FlowData,
     FlowCreatedAt,
     FlowUpdatedAt,
-    FlowDeletedAt
-    
+    FlowDeletedAt,
 } from '@hades/cci/flow/domain/value-objects';
 import { CciFlow } from './../../domain/flow.aggregate';
 import { flows } from './../seeds/flow.seed';
@@ -43,14 +42,14 @@ export class MockFlowRepository extends MockRepository<CciFlow> implements IFlow
     public readonly aggregateName: string = 'CciFlow';
     public collectionSource: CciFlow[];
     public deletedAtInstance: FlowDeletedAt = new FlowDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -65,7 +64,7 @@ export class MockFlowRepository extends MockRepository<CciFlow> implements IFlow
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciFlow.register(
                     new FlowId(itemCollection.id),
                     new FlowHash(itemCollection.hash),
@@ -95,7 +94,7 @@ export class MockFlowRepository extends MockRepository<CciFlow> implements IFlow
                     new FlowCreatedAt(itemCollection.createdAt),
                     new FlowUpdatedAt(itemCollection.updatedAt),
                     new FlowDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

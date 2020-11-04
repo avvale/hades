@@ -8,21 +8,21 @@ import { DeletedFlowsEvent } from './deleted-flows.event';
 export class AddFlowsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciFlow[] = []
+        public readonly aggregateRoots: CciFlow[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedFlowsEvent(
-                this.aggregateRoots.map(flow => 
+                this.aggregateRoots.map(flow =>
                     new CreatedFlowEvent(
                         flow.id.value,
                         flow.hash.value,
@@ -63,7 +63,7 @@ export class AddFlowsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedFlowsEvent(
-                this.aggregateRoots.map(flow => 
+                this.aggregateRoots.map(flow =>
                     new DeletedFlowEvent(
                         flow.id.value,
                         flow.hash.value,
@@ -93,10 +93,10 @@ export class AddFlowsContextEvent extends AggregateRoot
                         flow.createdAt?.value,
                         flow.updatedAt?.value,
                         flow.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

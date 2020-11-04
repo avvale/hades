@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     FlowId,
     FlowHash,
     FlowTenantId,
@@ -29,8 +28,7 @@ import {
     FlowData,
     FlowCreatedAt,
     FlowUpdatedAt,
-    FlowDeletedAt
-    
+    FlowDeletedAt,
 } from './../../domain/value-objects';
 import { IFlowRepository } from './../../domain/flow.repository';
 import { CciFlow } from './../../domain/flow.aggregate';
@@ -41,7 +39,7 @@ export class CreateFlowsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IFlowRepository
+        private readonly repository: IFlowRepository,
     ) {}
 
     public async main(
@@ -71,7 +69,6 @@ export class CreateFlowsService
             isComplex: FlowIsComplex,
             fieldGroupId: FlowFieldGroupId,
             data: FlowData,
-            
         } []
     ): Promise<void>
     {
@@ -102,11 +99,11 @@ export class CreateFlowsService
             flow.isComplex,
             flow.fieldGroupId,
             flow.data,
-            new FlowCreatedAt(Utils.nowTimestamp()),
-            new FlowUpdatedAt(Utils.nowTimestamp()),
+            new FlowCreatedAt({currentTimestamp: true}),
+            new FlowUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateFlows, { updateOnDuplicate: [
                 'version', 
@@ -125,7 +122,7 @@ export class CreateFlowsService
         // create AddFlowsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const flowsRegistered = this.publisher.mergeObjectContext(new AddFlowsContextEvent(aggregateFlows));
- 
+
         flowsRegistered.created(); // apply event to model events
         flowsRegistered.commit(); // commit all events of model
     }

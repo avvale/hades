@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     FlowId,
     FlowHash,
     FlowTenantId,
@@ -27,16 +27,13 @@ import {
     FlowData,
     FlowCreatedAt,
     FlowUpdatedAt,
-    FlowDeletedAt
-    
+    FlowDeletedAt,
 } from './value-objects';
 import { CreatedFlowEvent } from './../application/events/created-flow.event';
 import { UpdatedFlowEvent } from './../application/events/updated-flow.event';
 import { DeletedFlowEvent } from './../application/events/deleted-flow.event';
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
-
-
 
 export class CciFlow extends AggregateRoot
 {
@@ -68,17 +65,15 @@ export class CciFlow extends AggregateRoot
     createdAt: FlowCreatedAt;
     updatedAt: FlowUpdatedAt;
     deletedAt: FlowDeletedAt;
-    
+
     // eager relationship
     tenant: IamTenant;
     system: CciSystem;
-    
-    
-    
+
     constructor(id?: FlowId, hash?: FlowHash, tenantId?: FlowTenantId, tenantCode?: FlowTenantCode, systemId?: FlowSystemId, systemName?: FlowSystemName, version?: FlowVersion, scenario?: FlowScenario, party?: FlowParty, receiverParty?: FlowReceiverParty, component?: FlowComponent, receiverComponent?: FlowReceiverComponent, interfaceName?: FlowInterfaceName, interfaceNamespace?: FlowInterfaceNamespace, iflowName?: FlowIflowName, responsibleUserAccount?: FlowResponsibleUserAccount, lastChangeUserAccount?: FlowLastChangeUserAccount, lastChangedAt?: FlowLastChangedAt, folderPath?: FlowFolderPath, description?: FlowDescription, application?: FlowApplication, isCritical?: FlowIsCritical, isComplex?: FlowIsComplex, fieldGroupId?: FlowFieldGroupId, data?: FlowData, createdAt?: FlowCreatedAt, updatedAt?: FlowUpdatedAt, deletedAt?: FlowDeletedAt, tenant?: IamTenant, system?: CciSystem, )
     {
         super();
-        
+
         this.id = id;
         this.hash = hash;
         this.tenantId = tenantId;
@@ -107,7 +102,7 @@ export class CciFlow extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
         this.tenant = tenant;
         this.system = system;
@@ -265,6 +260,8 @@ export class CciFlow extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             

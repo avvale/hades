@@ -1,17 +1,17 @@
 import { StringValueObject } from '@hades/shared/domain/value-objects/string.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class FlowTenantCode extends StringValueObject 
+export class FlowTenantCode extends StringValueObject
 {
-    public readonly type: 'FlowTenantCode';   
+    public readonly type: 'FlowTenantCode';
 
-    constructor(value: string, validationRules: ValidationRules = {}) 
+    constructor(value: string, validationRules: ValidationRules = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'FlowTenantCode',
-            nullable: false,
-            undefinable: false,
-            maxLength: 50,            
+            nullable:  false ,
+            undefinable:  false ,
+            maxLength: 50,
         }, validationRules));
     }
 }

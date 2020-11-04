@@ -7,16 +7,16 @@ import { PaginateFlowsService } from './paginate-flows.service';
 export class PaginateFlowsQueryHandler implements IQueryHandler<PaginateFlowsQuery>
 {
     constructor(
-        private readonly paginateFlowsService: PaginateFlowsService
-    ) { }
+        private readonly paginateFlowsService: PaginateFlowsService,
+    ) {}
 
     async execute(query: PaginateFlowsQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateFlowsService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginateFlowsService.main(query.queryStatement, query.constraint, query.cQMetadata);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

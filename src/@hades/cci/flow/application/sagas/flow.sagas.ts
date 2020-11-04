@@ -5,10 +5,10 @@ import { delay, map } from 'rxjs/operators';
 import { CreatedFlowEvent } from './../events/created-flow.event';
 
 @Injectable()
-export class FlowSagas 
-{    
+export class FlowSagas
+{
     /* @Saga()
-    dragonKilled = (events$: Observable<any>): Observable<ICommand> => 
+    dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {
         return events$
             .pipe(

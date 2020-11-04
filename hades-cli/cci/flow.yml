@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: flow
 moduleNames: flows
+aggregateName: CciFlow
 hasOAuth: true
 hasTenant: true
 aggregateProperties:

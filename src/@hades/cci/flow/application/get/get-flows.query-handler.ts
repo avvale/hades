@@ -10,11 +10,11 @@ export class GetFlowsQueryHandler implements IQueryHandler<GetFlowsQuery>
     private readonly mapper: FlowMapper = new FlowMapper();
 
     constructor(
-        private readonly getFlowsService: GetFlowsService
-    ) { }
+        private readonly getFlowsService: GetFlowsService,
+    ) {}
 
     async execute(query: GetFlowsQuery): Promise<FlowResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getFlowsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getFlowsService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

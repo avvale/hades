@@ -17,11 +17,8 @@ import {
 import { CreatedExecutionEvent } from './../application/events/created-execution.event';
 import { UpdatedExecutionEvent } from './../application/events/updated-execution.event';
 import { DeletedExecutionEvent } from './../application/events/deleted-execution.event';
-
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
-
-
 
 export class CciExecution extends AggregateRoot
 {
@@ -38,15 +35,11 @@ export class CciExecution extends AggregateRoot
     createdAt: ExecutionCreatedAt;
     updatedAt: ExecutionUpdatedAt;
     deletedAt: ExecutionDeletedAt;
-    
+
     // eager relationship
-    
-    
     tenant: IamTenant;
     system: CciSystem;
-    
-    
-    
+
     constructor(id?: ExecutionId, tenantId?: ExecutionTenantId, tenantCode?: ExecutionTenantCode, systemId?: ExecutionSystemId, systemName?: ExecutionSystemName, version?: ExecutionVersion, type?: ExecutionType, executedAt?: ExecutionExecutedAt, monitoringStartAt?: ExecutionMonitoringStartAt, monitoringEndAt?: ExecutionMonitoringEndAt, createdAt?: ExecutionCreatedAt, updatedAt?: ExecutionUpdatedAt, deletedAt?: ExecutionDeletedAt, tenant?: IamTenant, system?: CciSystem, )
     {
         super();
@@ -64,15 +57,10 @@ export class CciExecution extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
         this.tenant = tenant;
         this.system = system;
-        
-        
-        
     }
 
     static register (id: ExecutionId, tenantId: ExecutionTenantId, tenantCode: ExecutionTenantCode, systemId: ExecutionSystemId, systemName: ExecutionSystemName, version: ExecutionVersion, type: ExecutionType, executedAt: ExecutionExecutedAt, monitoringStartAt: ExecutionMonitoringStartAt, monitoringEndAt: ExecutionMonitoringEndAt, createdAt: ExecutionCreatedAt, updatedAt: ExecutionUpdatedAt, deletedAt: ExecutionDeletedAt, tenant?: IamTenant, system?: CciSystem, ): CciExecution

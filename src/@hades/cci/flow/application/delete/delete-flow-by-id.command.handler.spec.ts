@@ -41,7 +41,6 @@ describe('DeleteFlowByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteFlowByIdCommand(
                     flows[0].id,
-                
                 )
             )).toBe(undefined);
         });

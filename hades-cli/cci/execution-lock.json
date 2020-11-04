@@ -231,7 +231,7 @@
         },
         {
             "path": "src/@hades/cci/execution/domain/execution.aggregate.ts",
-            "integrity": "sha1:1dc6549ab90cc4e1beefdaeb631689850769cdf6"
+            "integrity": "sha1:92ba77beffc25487645dc96717e635d4c3741195"
         },
         {
             "path": "src/@hades/cci/execution/domain/execution.mapper.ts",
@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/seeds/execution.seed.ts",
-            "integrity": "sha1:8841b16798441aa03e1b9ab5025a272c41b59eeb"
+            "integrity": "sha1:eed33a33233d04a0ef721e9d036388b8ac5905ea"
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model.ts",
@@ -267,7 +267,7 @@
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/sequelize/sequelize-execution.repository.ts",
-            "integrity": "sha1:32bd77aa593e1c9e6655507a618c2d1b36d33feb"
+            "integrity": "sha1:4f3ec21b6139e42dc4ee91137fefa7f27d52b2fe"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-id.ts",
@@ -295,7 +295,7 @@
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-type.ts",
-            "integrity": "sha1:1e7b5f08f099c4765b6eaa066c4cdbc856ec5cb6"
+            "integrity": "sha1:58b16d6bb0ca98dd4bf17b4f638c8bc1b84ddf8a"
         },
         {
             "path": "src/@hades/cci/execution/domain/value-objects/execution-executed-at.ts",
@@ -399,15 +399,15 @@
         },
         {
             "path": "src/apps/cci/execution/dto/create-execution.dto.ts",
-            "integrity": "sha1:58863efa4001b89080ac4add702ab7f00cfa324a"
+            "integrity": "sha1:9054a9134199a5e67fd4174e0f15bf08c2c9cfc3"
         },
         {
             "path": "src/apps/cci/execution/dto/update-execution.dto.ts",
-            "integrity": "sha1:46fb1468ea80661c3e4f867f101a5cebcd37f6db"
+            "integrity": "sha1:a6a56ba872a57ed1ba2edbe87257a404a63d3cbb"
         },
         {
             "path": "src/apps/cci/execution/graphql/execution.graphql",
-            "integrity": "sha1:8fbc586294578779aaf95e28de8dbe2db55bc0b7"
+            "integrity": "sha1:5f1c3d6d7e074e1869c60766065e5cc1ef6395a2"
         },
         {
             "path": "src/apps/cci/execution/index.ts",
@@ -495,7 +495,7 @@
         },
         {
             "path": "postman/cci.execution.postman.json",
-            "integrity": "sha1:fcd8cb35642d27b954ebcc893589643acda495a8"
+            "integrity": "sha1:55b96352dd9e6f3386ab944e22bb9c0d07810b91"
         }
     ]
 }

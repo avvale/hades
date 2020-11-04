@@ -4,7 +4,7 @@ import { CreateFlowsCommand } from '@hades/cci/flow/application/create/create-fl
 import { SeederModule } from './seeder.module';
 import { flows } from '@hades/cci/flow/infrastructure/seeds/flow.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

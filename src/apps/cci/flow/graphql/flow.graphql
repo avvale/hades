@@ -1,11 +1,12 @@
 
-
 type CciFlow
 {
     id: ID!
     hash: GraphQLString!
+    tenantId: ID!
     tenant: IamTenant!
     tenantCode: GraphQLString!
+    systemId: ID!
     system: CciSystem!
     systemName: GraphQLString!
     version: GraphQLString!
@@ -30,7 +31,6 @@ type CciFlow
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input CciCreateFlowInput
@@ -60,7 +60,6 @@ input CciCreateFlowInput
     isComplex: GraphQLBoolean
     fieldGroupId: ID
     data: JSON
-    
 }
 
 input CciUpdateFlowInput
@@ -90,14 +89,13 @@ input CciUpdateFlowInput
     isComplex: GraphQLBoolean
     fieldGroupId: ID
     data: JSON
-    
 }
 
-type Query 
+type Query
 {
-    cciFindFlow(query:QueryStatement): CciFlow
-    cciFindFlowById(id:ID): CciFlow
-    cciGetFlows(query:QueryStatement): [CciFlow]!
+    cciFindFlow(query:QueryStatement constraint:QueryStatement): CciFlow
+    cciFindFlowById(id:ID constraint:QueryStatement): CciFlow
+    cciGetFlows(query:QueryStatement constraint:QueryStatement): [CciFlow]!
     cciPaginateFlows(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -105,7 +103,7 @@ type Mutation
 {
     cciCreateFlow(payload: CciCreateFlowInput!): CciFlow
     cciCreateFlows(payload: [CciCreateFlowInput]!): Boolean!
-    cciUpdateFlow(payload: CciUpdateFlowInput!): CciFlow
-    cciDeleteFlowById(id: ID!): CciFlow
-    cciDeleteFlows(query:QueryStatement): [CciFlow]!
+    cciUpdateFlow(payload: CciUpdateFlowInput! constraint:QueryStatement): CciFlow
+    cciDeleteFlowById(id: ID! constraint:QueryStatement): CciFlow
+    cciDeleteFlows(query:QueryStatement constraint:QueryStatement): [CciFlow]!
 }

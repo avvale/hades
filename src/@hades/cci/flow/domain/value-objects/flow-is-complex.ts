@@ -1,16 +1,16 @@
 import { BooleanValueObject } from '@hades/shared/domain/value-objects/boolean.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class FlowIsComplex extends BooleanValueObject 
+export class FlowIsComplex extends BooleanValueObject
 {
     public readonly type: 'FlowIsComplex';
 
-    constructor(value: boolean, validationRules: ValidationRules = {}) 
+    constructor(value: boolean, validationRules: ValidationRules = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'FlowIsComplex',
-            nullable: true,
-            undefinable: true,
+            nullable:  true ,
+            undefinable:  true ,
         }, validationRules));
     }
 }

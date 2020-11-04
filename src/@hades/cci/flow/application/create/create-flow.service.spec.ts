@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { flows } from '@hades/cci/flow/infrastructure/seeds/flow.seed';
 import { CreateFlowService } from './create-flow.service';
-import { 
+import {
     FlowId,
     FlowHash,
     FlowTenantId,
@@ -29,19 +29,22 @@ import {
     FlowIsCritical,
     FlowIsComplex,
     FlowFieldGroupId,
-    FlowData
-    
+    FlowData,
+    FlowCreatedAt,
+    FlowUpdatedAt,
+    FlowDeletedAt,
 } from './../../domain/value-objects';
 import { IFlowRepository } from './../../domain/flow.repository';
 import { MockFlowRepository } from './../../infrastructure/mock/mock-flow.repository';
 
-describe('CreateFlowService', () => 
+describe('CreateFlowService', () =>
+
 {
     let service: CreateFlowService;
     let repository: IFlowRepository;
     let mockRepository: MockFlowRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -50,7 +53,7 @@ describe('CreateFlowService', () =>
                 EventPublisher,
                 CreateFlowService,
                 MockFlowRepository,
-                { 
+                {
                     provide: IFlowRepository,
                     useValue: {
                         create: (item) => {}
@@ -64,14 +67,14 @@ describe('CreateFlowService', () =>
         mockRepository  = module.get(MockFlowRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateFlowService should be defined', () => 
+        test('CreateFlowService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a flow and emit event', async () => 
+        test('should create a flow and emit event', async () =>
         {
             expect(await service.main(
                 new FlowId(flows[0].id),

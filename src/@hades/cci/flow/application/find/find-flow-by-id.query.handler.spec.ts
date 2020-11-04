@@ -16,7 +16,7 @@ describe('FindFlowByIdQueryHandler', () =>
     let repository: MockFlowRepository;
     let mapper: FlowMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindFlowByIdQueryHandler', () =>
         mapper          = new FlowMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindFlowByIdQueryHandler should be defined', () => 
+        test('FindFlowByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateFlowCommand } from './update-flow.command';
 import { UpdateFlowService } from './update-flow.service';
-import { 
+import {
     FlowId,
     FlowHash,
     FlowTenantId,
@@ -26,47 +26,52 @@ import {
     FlowIsCritical,
     FlowIsComplex,
     FlowFieldGroupId,
-    FlowData
-    
+    FlowData,
+    FlowCreatedAt,
+    FlowUpdatedAt,
+    FlowDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdateFlowCommand)
 export class UpdateFlowCommandHandler implements ICommandHandler<UpdateFlowCommand>
 {
     constructor(
-        private readonly updateFlowService: UpdateFlowService
-    ) { }
+        private readonly updateFlowService: UpdateFlowService,
+    ) {}
 
     async execute(command: UpdateFlowCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.updateFlowService.main(
-            new FlowId(command.id),
-            new FlowHash(command.hash, { undefinable: true }),
-            new FlowTenantId(command.tenantId, { undefinable: true }),
-            new FlowTenantCode(command.tenantCode, { undefinable: true }),
-            new FlowSystemId(command.systemId, { undefinable: true }),
-            new FlowSystemName(command.systemName, { undefinable: true }),
-            new FlowVersion(command.version, { undefinable: true }),
-            new FlowScenario(command.scenario),
-            new FlowParty(command.party),
-            new FlowReceiverParty(command.receiverParty),
-            new FlowComponent(command.component, { undefinable: true }),
-            new FlowReceiverComponent(command.receiverComponent),
-            new FlowInterfaceName(command.interfaceName, { undefinable: true }),
-            new FlowInterfaceNamespace(command.interfaceNamespace, { undefinable: true }),
-            new FlowIflowName(command.iflowName),
-            new FlowResponsibleUserAccount(command.responsibleUserAccount),
-            new FlowLastChangeUserAccount(command.lastChangeUserAccount),
-            new FlowLastChangedAt(command.lastChangedAt),
-            new FlowFolderPath(command.folderPath),
-            new FlowDescription(command.description),
-            new FlowApplication(command.application),
-            new FlowIsCritical(command.isCritical),
-            new FlowIsComplex(command.isComplex),
-            new FlowFieldGroupId(command.fieldGroupId),
-            new FlowData(command.data),
-            
+            {
+                id: new FlowId(command.payload.id),
+                hash: new FlowHash(command.payload.hash, { undefinable: true }),
+                tenantId: new FlowTenantId(command.payload.tenantId, { undefinable: true }),
+                tenantCode: new FlowTenantCode(command.payload.tenantCode, { undefinable: true }),
+                systemId: new FlowSystemId(command.payload.systemId, { undefinable: true }),
+                systemName: new FlowSystemName(command.payload.systemName, { undefinable: true }),
+                version: new FlowVersion(command.payload.version, { undefinable: true }),
+                scenario: new FlowScenario(command.payload.scenario),
+                party: new FlowParty(command.payload.party),
+                receiverParty: new FlowReceiverParty(command.payload.receiverParty),
+                component: new FlowComponent(command.payload.component, { undefinable: true }),
+                receiverComponent: new FlowReceiverComponent(command.payload.receiverComponent),
+                interfaceName: new FlowInterfaceName(command.payload.interfaceName, { undefinable: true }),
+                interfaceNamespace: new FlowInterfaceNamespace(command.payload.interfaceNamespace, { undefinable: true }),
+                iflowName: new FlowIflowName(command.payload.iflowName),
+                responsibleUserAccount: new FlowResponsibleUserAccount(command.payload.responsibleUserAccount),
+                lastChangeUserAccount: new FlowLastChangeUserAccount(command.payload.lastChangeUserAccount),
+                lastChangedAt: new FlowLastChangedAt(command.payload.lastChangedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                folderPath: new FlowFolderPath(command.payload.folderPath),
+                description: new FlowDescription(command.payload.description),
+                application: new FlowApplication(command.payload.application),
+                isCritical: new FlowIsCritical(command.payload.isCritical),
+                isComplex: new FlowIsComplex(command.payload.isComplex),
+                fieldGroupId: new FlowFieldGroupId(command.payload.fieldGroupId),
+                data: new FlowData(command.payload.data),
+            },
+            command.constraint,
+            command.cQMetadata,
         )
     }
 }

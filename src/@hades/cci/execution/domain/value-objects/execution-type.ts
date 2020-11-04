@@ -9,8 +9,8 @@ export class ExecutionType extends EnumValueObject
     {
         super(value, Object.assign({
             name: 'ExecutionType',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             enumOptions:  ['SUMMARY','DETAIL'],
         }, validationRules));
     }

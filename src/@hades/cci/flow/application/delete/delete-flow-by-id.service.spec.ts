@@ -14,7 +14,7 @@ describe('DeleteFlowByIdService', () =>
     let repository: IFlowRepository;
     let mockRepository: MockFlowRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteFlowByIdService', () =>
                 EventPublisher,
                 DeleteFlowByIdService,
                 MockFlowRepository,
-                { 
+                {
                     provide: IFlowRepository,
                     useValue: {
                         deleteById: (id) => {},
