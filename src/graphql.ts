@@ -956,9 +956,9 @@ export interface IQuery {
     cciFindChannelById(id?: string, constraint?: QueryStatement): CciChannel | Promise<CciChannel>;
     cciGetChannels(query?: QueryStatement, constraint?: QueryStatement): CciChannel[] | Promise<CciChannel[]>;
     cciPaginateChannels(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    cciFindContact(query?: QueryStatement): CciContact | Promise<CciContact>;
-    cciFindContactById(id?: string): CciContact | Promise<CciContact>;
-    cciGetContacts(query?: QueryStatement): CciContact[] | Promise<CciContact[]>;
+    cciFindContact(query?: QueryStatement, constraint?: QueryStatement): CciContact | Promise<CciContact>;
+    cciFindContactById(id?: string, constraint?: QueryStatement): CciContact | Promise<CciContact>;
+    cciGetContacts(query?: QueryStatement, constraint?: QueryStatement): CciContact[] | Promise<CciContact[]>;
     cciPaginateContacts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindDashboard(): CciDashboard | Promise<CciDashboard>;
     cciFindDataLake(query?: QueryStatement, constraint?: QueryStatement): CciDataLake | Promise<CciDataLake>;
@@ -1068,9 +1068,9 @@ export interface IMutation {
     cciDeleteChannels(query?: QueryStatement, constraint?: QueryStatement): CciChannel[] | Promise<CciChannel[]>;
     cciCreateContact(payload: CciCreateContactInput): CciContact | Promise<CciContact>;
     cciCreateContacts(payload: CciCreateContactInput[]): boolean | Promise<boolean>;
-    cciUpdateContact(payload: CciUpdateContactInput): CciContact | Promise<CciContact>;
-    cciDeleteContactById(id: string): CciContact | Promise<CciContact>;
-    cciDeleteContacts(query?: QueryStatement): CciContact[] | Promise<CciContact[]>;
+    cciUpdateContact(payload: CciUpdateContactInput, constraint?: QueryStatement): CciContact | Promise<CciContact>;
+    cciDeleteContactById(id: string, constraint?: QueryStatement): CciContact | Promise<CciContact>;
+    cciDeleteContacts(query?: QueryStatement, constraint?: QueryStatement): CciContact[] | Promise<CciContact[]>;
     cciCreateDataLake(payload: CciCreateDataLakeInput): CciDataLake | Promise<CciDataLake>;
     cciCreateDataLakes(payload: CciCreateDataLakeInput[]): boolean | Promise<boolean>;
     cciUpdateDataLake(payload: CciUpdateDataLakeInput, constraint?: QueryStatement): CciDataLake | Promise<CciDataLake>;
@@ -1284,6 +1284,9 @@ export interface CciContact {
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
+    tenantId: string;
+    systemId: string;
+    roleId?: string;
 }
 
 export interface CciDashboard {
