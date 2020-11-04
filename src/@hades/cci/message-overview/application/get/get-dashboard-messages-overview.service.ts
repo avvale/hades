@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { CciMessageOverview } from './../../domain/message-overview.aggregate';
 
@@ -10,8 +10,8 @@ export class GetDashboardMessagesOverviewService
         private readonly repository: IMessageOverviewRepository
     ) {}
 
-    public async main(tenantIds: string[], systemIds: string[]): Promise<CciMessageOverview[]>
+    public async main(tenantIds: string[], systemIds: string[], cQMetadata?: CQMetadata): Promise<CciMessageOverview[]>
     {
-        return await this.repository.getDashboardData(tenantIds, systemIds);
+        return await this.repository.getDashboardData(tenantIds, systemIds, cQMetadata);
     }
 }

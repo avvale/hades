@@ -1,4 +1,5 @@
 import { Resolver, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // tenant
 import { AccountResponse } from '@hades/iam/account/domain/account.response';
@@ -30,7 +31,7 @@ export class FindDashboardResolver
     ) {}
 
     @Query('cciFindDashboard')
-    async main(@CurrentAccount() account: AccountResponse)
+    async main(@CurrentAccount() account: AccountResponse, @Timezone() timezone?: string)
     {
         // get tenanat fot this account
         const tenants = await this.queryBus.ask(new GetTenantsQuery({
@@ -41,17 +42,21 @@ export class FindDashboardResolver
         }));
 
         // get systems for this tenants
-        const systems = await this.queryBus.ask(new GetSystemsQuery({
-            where: {
-                tenantId: account.dTenants
-            }
-        }));
+        const systems = await this.queryBus.ask(new GetSystemsQuery(
+            {
+                where: {
+                    tenantId: account.dTenants
+                }
+            },
+            {},
+            { timezone }
+        ));
 
-        const jobsOverview = await this.queryBus.ask(new GetDashboardJobsOverviewQuery(account.dTenants, systems.map(system => system.id)));
+        const jobsOverview = await this.queryBus.ask(new GetDashboardJobsOverviewQuery(account.dTenants, systems.map(system => system.id), { timezone }));
 
-        const channelsOverview = await this.queryBus.ask(new GetDashboardChannelsOverviewQuery(account.dTenants, systems.map(system => system.id)));
+        const channelsOverview = await this.queryBus.ask(new GetDashboardChannelsOverviewQuery(account.dTenants, systems.map(system => system.id), { timezone }));
 
-        const messagesOverview = await this.queryBus.ask(new GetDashboardMessagesOverviewQuery(account.dTenants, systems.map(system => system.id)));
+        const messagesOverview = await this.queryBus.ask(new GetDashboardMessagesOverviewQuery(account.dTenants, systems.map(system => system.id), { timezone }));
 
         return {
             tenants,

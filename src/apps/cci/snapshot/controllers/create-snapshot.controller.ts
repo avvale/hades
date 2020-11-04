@@ -55,25 +55,32 @@ export class CreateSnapshotController
             }
         }));
 
-        const system = await this.queryBus.ask(new FindSystemQuery({
-            where: {
-                name: payload.system.name
-            }
-        }));
+        const system = await this.queryBus.ask(new FindSystemQuery(
+            {
+                where: {
+                    name: payload.system.name
+                }
+            },
+            {},
+            { timezone }
+        ));
 
         const executionId = Utils.uuid();
-        await this.commandBus.dispatch(new CreateExecutionCommand({
-            id: executionId,
-            tenantId: tenant.id,
-            tenantCode: tenant.code,
-            systemId: system.id,
-            systemName: system.name,
-            version: payload.execution.version,
-            type: payload.execution.type,
-            executedAt: payload.execution.executedAt,
-            monitoringStartAt: payload.execution.monitoringStartAt,
-            monitoringEndAt: payload.execution.monitoringEndAt,
-        }));
+        await this.commandBus.dispatch(new CreateExecutionCommand(
+            {
+                id: executionId,
+                tenantId: tenant.id,
+                tenantCode: tenant.code,
+                systemId: system.id,
+                systemName: system.name,
+                version: payload.execution.version,
+                type: payload.execution.type,
+                executedAt: payload.execution.executedAt,
+                monitoringStartAt: payload.execution.monitoringStartAt,
+                monitoringEndAt: payload.execution.monitoringEndAt,
+            },
+            { timezone }
+        ));
 
         await this.commandBus.dispatch(new CreateDataLakeCommand(
             {
@@ -84,7 +91,7 @@ export class CreateSnapshotController
                 payload: payload
             },
             { timezone }
-        ))
+        ));
 
         const messageOverviewId = Utils.uuid();
         await this.commandBus.dispatch(new CreateMessageOverviewCommand(
@@ -206,17 +213,21 @@ export class CreateSnapshotController
                 numberDays: payload.messageOverview.numberDays,
             }
         });
-        await this.commandBus.dispatch(new DeleteMessagesDetailCommand({
-            where: {
-                tenantId: tenant.id,
-                systemId: system.id,
-                createdAt: {
-                    [Operator.lt]: Utils.now().subtract(3, 'days').format('YYYY-MM-DD')
-                }
+        await this.commandBus.dispatch(new DeleteMessagesDetailCommand(
+            {
+                where: {
+                    tenantId: tenant.id,
+                    systemId: system.id,
+                    createdAt: {
+                        [Operator.lt]: Utils.now().subtract(3, 'days').format('YYYY-MM-DD')
+                    }
+                },
+                limit: 15000
             },
-            limit: 15000
-        }));
-        await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail))
+            {},
+            { timezone }
+        ));
+        await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail, { timezone }))
 
         const channelsDetail = payload.channelsDetail.map(channel => {
             return {
@@ -245,17 +256,21 @@ export class CreateSnapshotController
                 detail: Utils.base64Decode(channel.detail)
             }
         });
-        await this.commandBus.dispatch(new DeleteChannelsDetailCommand({
-            where: {
-                tenantId: tenant.id,
-                systemId: system.id,
-                createdAt: {
-                    [Operator.lt]: Utils.now().subtract(3, 'days').format('YYYY-MM-DD')
-                }
+        await this.commandBus.dispatch(new DeleteChannelsDetailCommand(
+            {
+                where: {
+                    tenantId: tenant.id,
+                    systemId: system.id,
+                    createdAt: {
+                        [Operator.lt]: Utils.now().subtract(3, 'days').format('YYYY-MM-DD')
+                    }
+                },
+                limit: 15000
             },
-            limit: 15000
-        }));
-        await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail));
+            {},
+            { timezone }
+        ));
+        await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail, { timezone }));
 
         const jobsDetail = payload.jobsDetail.map(job => {
             return {
@@ -278,17 +293,21 @@ export class CreateSnapshotController
                 endAt: job.endAt
             }
         });
-        await this.commandBus.dispatch(new DeleteJobsDetailCommand({
-            where: {
-                tenantId: tenant.id,
-                systemId: system.id,
-                createdAt: {
-                    [Operator.lt]: Utils.now().subtract(3, 'days').format('YYYY-MM-DD')
-                }
+        await this.commandBus.dispatch(new DeleteJobsDetailCommand(
+            {
+                where: {
+                    tenantId: tenant.id,
+                    systemId: system.id,
+                    createdAt: {
+                        [Operator.lt]: Utils.now().subtract(3, 'days').format('YYYY-MM-DD')
+                    }
+                },
+                limit: 15000
             },
-            limit: 15000
-        }));
-        await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail));
+            {},
+            { timezone }
+        ));
+        await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail, { timezone }));
 
         return {
             statusCode: 200,

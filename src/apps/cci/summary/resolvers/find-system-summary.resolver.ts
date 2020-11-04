@@ -1,4 +1,5 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { NotFoundException, UseGuards } from '@nestjs/common';
@@ -33,7 +34,12 @@ export class FindSystemSummaryResolver
 
     @Query('cciFindSystemSummary')
     @TenantConstraint()
-    async main(@CurrentAccount() account: AccountResponse, @Args('systemId') systemId: string, @Args('constraint') constraint?: QueryStatement, )
+    async main(
+        @CurrentAccount() account: AccountResponse,
+        @Args('systemId') systemId: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
         // get system
         const system = await this.queryBus.ask(new FindSystemQuery({
@@ -45,7 +51,7 @@ export class FindSystemSummaryResolver
             order: [
                 ['createdAt', 'DESC']
             ]
-        }, constraint));
+        }, constraint, { timezone }));
 
         if (!system) throw new NotFoundException(`System not found, maybe system is not active or cancelled`);
 
@@ -57,7 +63,7 @@ export class FindSystemSummaryResolver
             order: [
                 ['createdAt', 'DESC']
             ]
-        }, constraint));
+        }, constraint, { timezone }));
 
         if (!execution) throw new NotFoundException(`Execution for this system not found`);
 
@@ -66,21 +72,21 @@ export class FindSystemSummaryResolver
             where: {
                 executionId: execution.id
             }
-        }));
+        }, constraint, { timezone }));
 
         // get details for channels
         const channelsDetail = await this.queryBus.ask(new GetChannelsDetailQuery({
             where: {
                 executionId: execution.id
             }
-        }));
+        }, constraint, { timezone }));
 
         // get details for messages
         const messagesDetail = await this.queryBus.ask(new GetMessagesDetailQuery({
             where: {
                 executionId: execution.id
             }
-        }));
+        }, constraint, { timezone }));
 
         return {
             system,

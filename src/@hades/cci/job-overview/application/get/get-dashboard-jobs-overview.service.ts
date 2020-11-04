@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { CciJobOverview } from './../../domain/job-overview.aggregate';
 
@@ -10,8 +10,8 @@ export class GetDashboardJobsOverviewService
         private readonly repository: IJobOverviewRepository
     ) {}
 
-    public async main(tenantIds: string[], systemIds: string[]): Promise<CciJobOverview[]>
+    public async main(tenantIds: string[], systemIds: string[], cQMetadata?: CQMetadata): Promise<CciJobOverview[]>
     {
-        return await this.repository.getDashboardData(tenantIds, systemIds);
+        return await this.repository.getDashboardData(tenantIds, systemIds, cQMetadata);
     }
 }
