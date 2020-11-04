@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateJobsOverviewCommand
 {
     constructor(
-        public readonly jobsOverview: {
+        public readonly payload: {
             id: string,
             tenantId: string,
             tenantCode: string,
@@ -15,7 +17,7 @@ export class CreateJobsOverviewCommand
             cancelled?: number,
             completed?: number,
             error?: number,
-            
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

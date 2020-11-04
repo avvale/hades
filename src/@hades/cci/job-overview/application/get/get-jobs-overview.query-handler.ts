@@ -10,11 +10,11 @@ export class GetJobsOverviewQueryHandler implements IQueryHandler<GetJobsOvervie
     private readonly mapper: JobOverviewMapper = new JobOverviewMapper();
 
     constructor(
-        private readonly getJobsOverviewService: GetJobsOverviewService
-    ) { }
+        private readonly getJobsOverviewService: GetJobsOverviewService,
+    ) {}
 
     async execute(query: GetJobsOverviewQuery): Promise<JobOverviewResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getJobsOverviewService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getJobsOverviewService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

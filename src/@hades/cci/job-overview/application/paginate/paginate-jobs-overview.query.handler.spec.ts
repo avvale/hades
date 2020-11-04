@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginateJobsOverviewQuery } from './paginate-jobs-overview.query';
 import { PaginateJobsOverviewService } from './paginate-jobs-overview.service';
 
-describe('PaginateJobsOverviewQueryHandler', () => 
+describe('PaginateJobsOverviewQueryHandler', () =>
 {
     let queryHandler: PaginateJobsOverviewQueryHandler;
     let service: PaginateJobsOverviewService;
     let repository: MockJobOverviewRepository;
     let mapper: JobOverviewMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

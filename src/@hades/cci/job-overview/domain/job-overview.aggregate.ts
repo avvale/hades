@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     JobOverviewId,
     JobOverviewTenantId,
     JobOverviewTenantCode,
@@ -15,8 +15,7 @@ import {
     JobOverviewError,
     JobOverviewCreatedAt,
     JobOverviewUpdatedAt,
-    JobOverviewDeletedAt
-    
+    JobOverviewDeletedAt,
 } from './value-objects';
 import { CreatedJobOverviewEvent } from './../application/events/created-job-overview.event';
 import { UpdatedJobOverviewEvent } from './../application/events/updated-job-overview.event';
@@ -59,7 +58,7 @@ export class CciJobOverview extends AggregateRoot
     constructor(id?: JobOverviewId, tenantId?: JobOverviewTenantId, tenantCode?: JobOverviewTenantCode, systemId?: JobOverviewSystemId, systemName?: JobOverviewSystemName, executionId?: JobOverviewExecutionId, executionType?: JobOverviewExecutionType, executionExecutedAt?: JobOverviewExecutionExecutedAt, executionMonitoringStartAt?: JobOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: JobOverviewExecutionMonitoringEndAt, cancelled?: JobOverviewCancelled, completed?: JobOverviewCompleted, error?: JobOverviewError, createdAt?: JobOverviewCreatedAt, updatedAt?: JobOverviewUpdatedAt, deletedAt?: JobOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;

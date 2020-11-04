@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     JobOverviewId,
     JobOverviewTenantId,
     JobOverviewTenantCode,
@@ -17,8 +16,7 @@ import {
     JobOverviewError,
     JobOverviewCreatedAt,
     JobOverviewUpdatedAt,
-    JobOverviewDeletedAt
-    
+    JobOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { CciJobOverview } from './../../domain/job-overview.aggregate';
@@ -28,46 +26,47 @@ export class CreateJobOverviewService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IJobOverviewRepository
+        private readonly repository: IJobOverviewRepository,
     ) {}
 
     public async main(
-        id: JobOverviewId,
-        tenantId: JobOverviewTenantId,
-        tenantCode: JobOverviewTenantCode,
-        systemId: JobOverviewSystemId,
-        systemName: JobOverviewSystemName,
-        executionId: JobOverviewExecutionId,
-        executionType: JobOverviewExecutionType,
-        executionExecutedAt: JobOverviewExecutionExecutedAt,
-        executionMonitoringStartAt: JobOverviewExecutionMonitoringStartAt,
-        executionMonitoringEndAt: JobOverviewExecutionMonitoringEndAt,
-        cancelled: JobOverviewCancelled,
-        completed: JobOverviewCompleted,
-        error: JobOverviewError,
-        
+        payload: {
+            id: JobOverviewId,
+            tenantId: JobOverviewTenantId,
+            tenantCode: JobOverviewTenantCode,
+            systemId: JobOverviewSystemId,
+            systemName: JobOverviewSystemName,
+            executionId: JobOverviewExecutionId,
+            executionType: JobOverviewExecutionType,
+            executionExecutedAt: JobOverviewExecutionExecutedAt,
+            executionMonitoringStartAt: JobOverviewExecutionMonitoringStartAt,
+            executionMonitoringEndAt: JobOverviewExecutionMonitoringEndAt,
+            cancelled: JobOverviewCancelled,
+            completed: JobOverviewCompleted,
+            error: JobOverviewError,
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const jobOverview = CciJobOverview.register(
-            id,
-            tenantId,
-            tenantCode,
-            systemId,
-            systemName,
-            executionId,
-            executionType,
-            executionExecutedAt,
-            executionMonitoringStartAt,
-            executionMonitoringEndAt,
-            cancelled,
-            completed,
-            error,
-            new JobOverviewCreatedAt(Utils.nowTimestamp()),
-            new JobOverviewUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.systemId,
+            payload.systemName,
+            payload.executionId,
+            payload.executionType,
+            payload.executionExecutedAt,
+            payload.executionMonitoringStartAt,
+            payload.executionMonitoringEndAt,
+            payload.cancelled,
+            payload.completed,
+            payload.error,
+            new JobOverviewCreatedAt({currentTimestamp: true}),
+            new JobOverviewUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // create
         await this.repository.create(jobOverview);
 
@@ -75,7 +74,7 @@ export class CreateJobOverviewService
         const jobOverviewRegister = this.publisher.mergeObjectContext(
             jobOverview
         );
-        
+
         jobOverviewRegister.created(jobOverview); // apply event to model events
         jobOverviewRegister.commit(); // commit all events of model
     }

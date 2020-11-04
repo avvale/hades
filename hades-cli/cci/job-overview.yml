@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: job-overview
 moduleNames: jobs-overview
+aggregateName: CciJobOverview
 hasOAuth: true
 hasTenant: true
 aggregateProperties:

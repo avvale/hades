@@ -7,16 +7,16 @@ import { PaginateJobsOverviewService } from './paginate-jobs-overview.service';
 export class PaginateJobsOverviewQueryHandler implements IQueryHandler<PaginateJobsOverviewQuery>
 {
     constructor(
-        private readonly paginateJobsOverviewService: PaginateJobsOverviewService
-    ) { }
+        private readonly paginateJobsOverviewService: PaginateJobsOverviewService,
+    ) {}
 
     async execute(query: PaginateJobsOverviewQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateJobsOverviewService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginateJobsOverviewService.main(query.queryStatement, query.constraint, query.cQMetadata);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

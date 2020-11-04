@@ -6,12 +6,12 @@ import { jobsOverview } from '@hades/cci/job-overview/infrastructure/seeds/job-o
 import { CreateJobOverviewCommand } from './create-job-overview.command';
 import { CreateJobOverviewService } from './create-job-overview.service';
 
-describe('CreateJobOverviewCommandHandler', () => 
+describe('CreateJobOverviewCommandHandler', () =>
 {
     let commandHandler: CreateJobOverviewCommandHandler;
     let service: CreateJobOverviewService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateJobOverviewCommandHandler', () =>
         service         = module.get<CreateJobOverviewService>(CreateJobOverviewService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateJobOverviewCommandHandler should be defined', () => 
+        test('CreateJobOverviewCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateJobOverviewService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateJobOverviewService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateJobOverviewCommand(
@@ -53,7 +53,6 @@ describe('CreateJobOverviewCommandHandler', () =>
                     jobsOverview[0].cancelled,
                     jobsOverview[0].completed,
                     jobsOverview[0].error,
-                    
                 )
             )).toBe(undefined);
         });

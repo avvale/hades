@@ -5,13 +5,13 @@ export class JobOverviewSystemId extends UuidValueObject
 {
     public readonly type: 'JobOverviewSystemId';
 
-    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {}) 
+    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'JobOverviewSystemId',
-            nullable: false,
-            undefinable: false,
-            length: 36
+            nullable:  false ,
+            undefinable:  false ,
+            length: 36,
         }, validationRules), data);
     }
 }

@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { jobsOverview } from '@hades/cci/job-overview/infrastructure/seeds/job-overview.seed';
 import { UpdateJobOverviewService } from './update-job-overview.service';
-import { 
+import {
     JobOverviewId,
     JobOverviewTenantId,
     JobOverviewTenantCode,
@@ -20,19 +20,18 @@ import {
     JobOverviewError,
     JobOverviewCreatedAt,
     JobOverviewUpdatedAt,
-    JobOverviewDeletedAt
-    
+    JobOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { MockJobOverviewRepository } from './../../infrastructure/mock/mock-job-overview.repository';
 
-describe('UpdateJobOverviewService', () => 
+describe('UpdateJobOverviewService', () =>
 {
     let service: UpdateJobOverviewService;
     let repository: IJobOverviewRepository;
     let mockRepository: MockJobOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,7 +40,7 @@ describe('UpdateJobOverviewService', () =>
                 EventPublisher,
                 UpdateJobOverviewService,
                 MockJobOverviewRepository,
-                { 
+                {
                     provide: IJobOverviewRepository,
                     useValue: {
                         update: (item) => {}
@@ -55,7 +54,7 @@ describe('UpdateJobOverviewService', () =>
         mockRepository  = module.get(MockJobOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateJobOverviewService should be defined', () => 
         {

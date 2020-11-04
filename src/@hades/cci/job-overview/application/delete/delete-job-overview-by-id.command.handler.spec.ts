@@ -41,7 +41,6 @@ describe('DeleteJobOverviewByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteJobOverviewByIdCommand(
                     jobsOverview[0].id,
-                
                 )
             )).toBe(undefined);
         });

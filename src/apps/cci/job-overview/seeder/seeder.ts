@@ -4,7 +4,7 @@ import { CreateJobsOverviewCommand } from '@hades/cci/job-overview/application/c
 import { SeederModule } from './seeder.module';
 import { jobsOverview } from '@hades/cci/job-overview/infrastructure/seeds/job-overview.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

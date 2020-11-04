@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { QueryTypes } from 'sequelize';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IJobOverviewRepository } from './../../domain/job-overview.repository';
 import { CciJobOverview } from './../../domain/job-overview.aggregate';
 import { JobOverviewMapper } from './../../domain/job-overview.mapper';
 import { CciJobOverviewModel } from './sequelize-job-overview.model';
+
+// custom
+import { QueryTypes } from 'sequelize';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -14,11 +16,12 @@ export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOv
 {
     public readonly aggregateName: string = 'CciJobOverview';
     public readonly mapper: JobOverviewMapper = new JobOverviewMapper();
+    public readonly timezoneColumns: string[] = ['executionExecutedAt','executionMonitoringStartAt','executionMonitoringEndAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciJobOverviewModel)
         public readonly repository: typeof CciJobOverviewModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
