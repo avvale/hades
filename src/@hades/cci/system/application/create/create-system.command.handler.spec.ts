@@ -6,12 +6,12 @@ import { systems } from '@hades/cci/system/infrastructure/seeds/system.seed';
 import { CreateSystemCommand } from './create-system.command';
 import { CreateSystemService } from './create-system.service';
 
-describe('CreateSystemCommandHandler', () => 
+describe('CreateSystemCommandHandler', () =>
 {
     let commandHandler: CreateSystemCommandHandler;
     let service: CreateSystemService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateSystemCommandHandler', () =>
         service         = module.get<CreateSystemService>(CreateSystemService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateSystemCommandHandler should be defined', () => 
+        test('CreateSystemCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateSystemService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateSystemService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateSystemCommand(
@@ -49,7 +49,6 @@ describe('CreateSystemCommandHandler', () =>
                     systems[0].technology,
                     systems[0].isActive,
                     systems[0].cancelledAt,
-                    
                 )
             )).toBe(undefined);
         });

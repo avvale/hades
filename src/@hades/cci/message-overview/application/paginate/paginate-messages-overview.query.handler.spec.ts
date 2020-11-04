@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginateMessagesOverviewQuery } from './paginate-messages-overview.query';
 import { PaginateMessagesOverviewService } from './paginate-messages-overview.service';
 
-describe('PaginateMessagesOverviewQueryHandler', () => 
+describe('PaginateMessagesOverviewQueryHandler', () =>
 {
     let queryHandler: PaginateMessagesOverviewQueryHandler;
     let service: PaginateMessagesOverviewService;
     let repository: MockMessageOverviewRepository;
     let mapper: MessageOverviewMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

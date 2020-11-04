@@ -4,7 +4,7 @@ import { CreateModulesCommand } from '@hades/cci/module/application/create/creat
 import { SeederModule } from './seeder.module';
 import { modules } from '@hades/cci/module/infrastructure/seeds/module.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

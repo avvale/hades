@@ -4,23 +4,26 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { roles } from '@hades/cci/role/infrastructure/seeds/role.seed';
 import { CreateRoleService } from './create-role.service';
-import { 
+import {
     RoleId,
     RoleTenantId,
     RoleTenantCode,
-    RoleName
-    
+    RoleName,
+    RoleCreatedAt,
+    RoleUpdatedAt,
+    RoleDeletedAt,
 } from './../../domain/value-objects';
 import { IRoleRepository } from './../../domain/role.repository';
 import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
 
-describe('CreateRoleService', () => 
+describe('CreateRoleService', () =>
+
 {
     let service: CreateRoleService;
     let repository: IRoleRepository;
     let mockRepository: MockRoleRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,7 +32,7 @@ describe('CreateRoleService', () =>
                 EventPublisher,
                 CreateRoleService,
                 MockRoleRepository,
-                { 
+                {
                     provide: IRoleRepository,
                     useValue: {
                         create: (item) => {}
@@ -43,14 +46,14 @@ describe('CreateRoleService', () =>
         mockRepository  = module.get(MockRoleRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateRoleService should be defined', () => 
+        test('CreateRoleService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a role and emit event', async () => 
+        test('should create a role and emit event', async () =>
         {
             expect(await service.main(
                 new RoleId(roles[0].id),

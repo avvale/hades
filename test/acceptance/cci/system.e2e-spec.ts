@@ -13,12 +13,12 @@ const importForeignModules = [
     IamModule
 ];
 
-describe('system', () => 
+describe('system', () =>
 {
     let app: INestApplication;
     let repository: MockSystemRepository;
-    
-    beforeAll(async () => 
+
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
                 imports: [
@@ -60,14 +60,14 @@ describe('system', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: 'k2073imam18nkhzyb42r7dfdh7vrfr9i1umgco5rupw5e92a1l',
-                version: 'm',
-                name: 'y',
-                environment: 'z',
-                technology: 'B_2_B',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: 'bveelf1yxcggudmrk7t3c68e45kwx6vh5plg79o79fb8mzrgix',
+                version: '9',
+                name: '6',
+                environment: 'm',
+                technology: 'B2B',
                 isActive: false,
-                cancelledAt: '2020-10-21 00:25:52',
+                cancelledAt: '2020-11-04 03:28:36',
             })
             .expect(400)
             .then(res => {
@@ -82,14 +82,14 @@ describe('system', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '15jpprse2lef1vx14wl1b8mfpai5dlx9344mbqcvqogluwuj9a',
-                version: 'g',
-                name: '1',
-                environment: '3',
-                technology: 'SAPPI',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: 'lrmqct2zgxcin3z8klj8dazu6itcrg49srrbsmg8ztgx3hc3md',
+                version: 'e',
+                name: 'z',
+                environment: 'e',
+                technology: 'MULESOFT',
                 isActive: false,
-                cancelledAt: '2020-10-21 00:54:26',
+                cancelledAt: '2020-11-04 00:37:52',
             })
             .expect(400)
             .then(res => {
@@ -103,15 +103,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
                 tenantId: null,
-                tenantCode: 'dy62o8gyo74sjpze8jj83wfef0uaopntsnyanq5psjg3nom5h8',
-                version: 'f',
-                name: '4',
+                tenantCode: 'mtfs9jexlql03x8ltv41g3dr3f2xfzzkpk3b9djpgfu3r1937z',
+                version: 'o',
+                name: 'j',
                 environment: 'f',
-                technology: 'SAPPI',
-                isActive: true,
-                cancelledAt: '2020-10-20 21:19:31',
+                technology: 'WSO2',
+                isActive: false,
+                cancelledAt: '2020-11-04 03:53:25',
             })
             .expect(400)
             .then(res => {
@@ -125,15 +125,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
                 
-                tenantCode: '64a2ds4sr5b9kofb1japrbdz8sad38jqpfmb2x6glptiayk2yr',
-                version: '8',
-                name: 'm',
-                environment: 'y',
-                technology: 'WSO_2',
-                isActive: true,
-                cancelledAt: '2020-10-20 21:59:41',
+                tenantCode: 'u261i0a0ercla1gscbbr6jyaijrwz0lpm7z1rbr66151j3c1qj',
+                version: '7',
+                name: '9',
+                environment: 'p',
+                technology: 'SAPSCI',
+                isActive: false,
+                cancelledAt: '2020-11-03 16:38:41',
             })
             .expect(400)
             .then(res => {
@@ -147,15 +147,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
                 tenantCode: null,
-                version: '3',
-                name: '3',
-                environment: 'e',
-                technology: 'WSO_2',
-                isActive: false,
-                cancelledAt: '2020-10-20 14:42:23',
+                version: '5',
+                name: 'f',
+                environment: 'l',
+                technology: 'SAPPI',
+                isActive: true,
+                cancelledAt: '2020-11-03 23:05:20',
             })
             .expect(400)
             .then(res => {
@@ -169,15 +169,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
                 
-                version: 'z',
-                name: 'z',
-                environment: '0',
+                version: 'r',
+                name: 'u',
+                environment: 'q',
                 technology: 'MULESOFT',
                 isActive: false,
-                cancelledAt: '2020-10-21 04:57:57',
+                cancelledAt: '2020-11-03 21:03:34',
             })
             .expect(400)
             .then(res => {
@@ -191,15 +191,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '6tcd6f2hkwxujsp5mi075avnaj4arhf7rb82d2xcvg6xxopi3r',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: 'dnhj0ylfj26rxty8d3cxgok3y7mb6iuqqqebm8s8qs5ww4hqrq',
                 version: null,
-                name: '9',
-                environment: 'p',
-                technology: 'WSO_2',
-                isActive: true,
-                cancelledAt: '2020-10-20 23:09:16',
+                name: 'e',
+                environment: '0',
+                technology: 'MULESOFT',
+                isActive: false,
+                cancelledAt: '2020-11-04 13:35:38',
             })
             .expect(400)
             .then(res => {
@@ -213,15 +213,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: 'z43re4lqkh50g59e8l58kastwv8xpzxoezja4e7tvag1rikd09',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: 'ay1xnh89f3z873ec5je285oa6u02a9qvramxl55hv2bqclnaig',
                 
-                name: 'y',
-                environment: 'z',
+                name: '9',
+                environment: 'c',
                 technology: 'SAPSCI',
                 isActive: false,
-                cancelledAt: '2020-10-21 11:01:39',
+                cancelledAt: '2020-11-04 05:19:02',
             })
             .expect(400)
             .then(res => {
@@ -235,15 +235,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '91gt2qevnhj07iguu1cyfv0w0bvt85g6t2ljnlcgmga74mn4yu',
-                version: 'c',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: '5qnjnjo24mlz6qbnwqdmd3j6um81qkxd0d2av0ksmy8q69q6gc',
+                version: 'd',
                 name: null,
-                environment: '3',
+                environment: 'x',
                 technology: 'SAPSCI',
-                isActive: true,
-                cancelledAt: '2020-10-21 13:05:02',
+                isActive: false,
+                cancelledAt: '2020-11-03 22:03:22',
             })
             .expect(400)
             .then(res => {
@@ -257,15 +257,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: 'ziucyntkkk4fmxqvurxtpop9dyjv9odgw5p1bgrryrihph88nq',
-                version: 'q',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: 'a9edmip6gark6tsgk5ma5acvxh5ce2och9ceetw6hqdni6bzfj',
+                version: 'd',
                 
-                environment: 'f',
+                environment: '5',
                 technology: 'SAPSCI',
                 isActive: true,
-                cancelledAt: '2020-10-20 18:23:17',
+                cancelledAt: '2020-11-03 23:23:31',
             })
             .expect(400)
             .then(res => {
@@ -279,15 +279,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '6ana2qx7h2qfxl2knslji043tm5jilsnd9jo2o249weae06nxo',
-                version: 'j',
-                name: 'a',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: 'sxulcrzc93y1v54i37z81sfktplqfi12r1corok072hjbs113b',
+                version: 'i',
+                name: 'q',
                 environment: null,
-                technology: 'SAPPI',
-                isActive: false,
-                cancelledAt: '2020-10-21 01:50:36',
+                technology: 'WSO2',
+                isActive: true,
+                cancelledAt: '2020-11-03 19:42:38',
             })
             .expect(400)
             .then(res => {
@@ -301,15 +301,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: 'wtgpqis7t4tvdeuizmv7gj4mn80h7ch5oxyo390ovg69bdjmtv',
-                version: 'q',
-                name: 'x',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: '5po7nvcxt6av4is5khlrouv9v04u05acc2q0irxmd9lmqub1dq',
+                version: '8',
+                name: 'g',
                 
-                technology: 'SAPSCI',
-                isActive: true,
-                cancelledAt: '2020-10-21 13:09:20',
+                technology: 'WSO2',
+                isActive: false,
+                cancelledAt: '2020-11-03 17:24:02',
             })
             .expect(400)
             .then(res => {
@@ -323,15 +323,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: 'i7siuipxnmw9bajfx0554a1a104nwl75lvb4fzv5fdak16j0zp',
-                version: 'u',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: '3advtkvzz3495bh9xi7v0ww0e8hthq7pkhk7b9gb755jqoj6nb',
+                version: 'f',
                 name: 'g',
-                environment: '1',
+                environment: 'z',
                 technology: null,
                 isActive: false,
-                cancelledAt: '2020-10-20 15:25:11',
+                cancelledAt: '2020-11-04 08:44:33',
             })
             .expect(400)
             .then(res => {
@@ -345,15 +345,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '0ktkq3cb12ofbv26ocfpm1fv98n0zt7s9vo988m4j3drx2y2ha',
-                version: '5',
-                name: '2',
-                environment: 'e',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: 'tlcc4xn782w9ofu4f75jfpa2t01c6rrc4bjl3wqh2k3liap3ou',
+                version: 'q',
+                name: '7',
+                environment: '5',
                 
                 isActive: true,
-                cancelledAt: '2020-10-21 08:51:03',
+                cancelledAt: '2020-11-04 12:23:41',
             })
             .expect(400)
             .then(res => {
@@ -367,15 +367,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '96vqgtza7uc36wt1r41faguiopd1vwi02vvrblpfa82tsziji9',
-                version: '7',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: '3u7y9vjm4vl1446tlmzj1es2oii9jbdfvvev6s4gvknti5xd6k',
+                version: '1',
                 name: '5',
-                environment: 'k',
-                technology: 'MULESOFT',
+                environment: 't',
+                technology: 'SAPPI',
                 isActive: null,
-                cancelledAt: '2020-10-20 17:08:32',
+                cancelledAt: '2020-11-03 15:38:37',
             })
             .expect(400)
             .then(res => {
@@ -389,15 +389,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '2pk6b75gbn7tlunxyvsru11rql3iu067pf3tm7lnh9rma91ksz',
-                version: 'n',
-                name: 'q',
-                environment: 'a',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: 'ujpsc1ppxms4rea9vy5rpazw8j33kphosnwptqdpzgkqdwd0w1',
+                version: '2',
+                name: 'j',
+                environment: 'p',
                 technology: 'MULESOFT',
                 
-                cancelledAt: '2020-10-20 19:53:19',
+                cancelledAt: '2020-11-03 22:03:38',
             })
             .expect(400)
             .then(res => {
@@ -413,15 +413,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 't7txqz96yr9pc5gmt05ynkkwgc0hlzno6f4s9',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '8rv99ovzk0tyi6v21tbdnpob56vqrhxzho7wwzl0q0azs31ty1',
-                version: 'j',
-                name: '5',
-                environment: 'z',
-                technology: 'SAPPI',
+                id: 'gupjfb4dv2ojkcvnkboyuki8s7rffiknscfr6',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: '7t9cwkyyl1179z65c3f4il69q84o49h6j5j5wn9m31kuz9nv3e',
+                version: 'l',
+                name: 'b',
+                environment: 'n',
+                technology: 'MULESOFT',
                 isActive: true,
-                cancelledAt: '2020-10-20 19:39:38',
+                cancelledAt: '2020-11-04 03:48:29',
             })
             .expect(400)
             .then(res => {
@@ -435,15 +435,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: 'uv61xm9zwrojuemuvo5za4i734izkq7dopczp',
-                tenantCode: 'uwrr738p2qcqkapk9zx6cejdk8si9jxn8iq9nlvl266np74dzo',
-                version: 'g',
-                name: 'd',
-                environment: 'f',
-                technology: 'MULESOFT',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: 'ni3ad525mr2l4ybuvcba16cclebc2pfbc5se8',
+                tenantCode: 'aof2wxtsc0dmu9d793v6zui5a9ziz70whmq9mqb8wfb4k1swy1',
+                version: 'v',
+                name: 'w',
+                environment: 's',
+                technology: 'WSO2',
                 isActive: false,
-                cancelledAt: '2020-10-21 03:06:06',
+                cancelledAt: '2020-11-03 18:29:34',
             })
             .expect(400)
             .then(res => {
@@ -459,15 +459,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '8ltqr2qvyb7qqr1ow3h7x2nki95yefmx6sh40jtibdtpd4a8564',
-                version: 'm',
-                name: 's',
-                environment: 'g',
-                technology: 'SAPPI',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: 'ezop9x4yztgz2gw89ybmly1nkows81buv20auiw8ttzgj4w65k5',
+                version: '7',
+                name: 'x',
+                environment: 'p',
+                technology: 'B2B',
                 isActive: false,
-                cancelledAt: '2020-10-21 05:25:58',
+                cancelledAt: '2020-11-04 03:49:46',
             })
             .expect(400)
             .then(res => {
@@ -479,7 +479,7 @@ describe('system', () =>
     
 
     
-    
+
     
 
     
@@ -489,15 +489,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '0a1dckgtqvem7qbftyy6k7qmp0kssoz04sjowb4ah6kvvfyz8r',
-                version: '9',
-                name: 'r',
-                environment: 'e',
-                technology: 'SAPSCI',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: '2sui5taur9fwkr9xc8ri7ii7xsjn7zmnlv3yaclznmaegyx2zn',
+                version: 'j',
+                name: '0',
+                environment: '4',
+                technology: 'SAPPI',
                 isActive: 'true',
-                cancelledAt: '2020-10-21 01:17:11',
+                cancelledAt: '2020-11-03 19:28:42',
             })
             .expect(400)
             .then(res => {
@@ -507,25 +507,25 @@ describe('system', () =>
     
 
     
-    test(`/REST:POST cci/system - Got 400 Conflict, SystemTechnology has to be a enum option of WSO_2, SAPPI, B_2_B, MULESOFT, SAPSCI`, () => 
+    test(`/REST:POST cci/system - Got 400 Conflict, SystemTechnology has to be a enum option of WSO2, SAPPI, B2B, MULESOFT, SAPSCI`, () => 
     {
         return request(app.getHttpServer())
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: '6v2s079a43dx0k9il3oy7alig2jihychjt8grwg56uluiolc85',
-                version: 't',
-                name: 'b',
-                environment: 'j',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: '34sw5t99vnco0xr8gkjl3q6xcn1q2llg682phvt6v9yh32rvdb',
+                version: '4',
+                name: '7',
+                environment: 'k',
                 technology: 'XXXX',
                 isActive: false,
-                cancelledAt: '2020-10-21 05:35:34',
+                cancelledAt: '2020-11-03 16:31:25',
             })
             .expect(400)
             .then(res => {
-                expect(res.body.message).toContain('Value for SystemTechnology has to be any of this options: WSO_2, SAPPI, B_2_B, MULESOFT, SAPSCI');
+                expect(res.body.message).toContain('Value for SystemTechnology has to be any of this options: WSO2, SAPPI, B2B, MULESOFT, SAPSCI');
             });
     });
     
@@ -537,14 +537,14 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: 'htoput6len30uuofge6x5d5qnw5fuzr3wyff8ndv8veg4z785d',
-                version: 'd',
-                name: 'u',
-                environment: 'f',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: '8s87i7ynadgdhl7w55xig3odzb6x7r3n1h9px9j363iyd41eqv',
+                version: 'r',
+                name: 't',
+                environment: 'h',
                 technology: 'SAPSCI',
-                isActive: false,
+                isActive: true,
                 cancelledAt: 'XXXXXXXX',
             })
             .expect(400)
@@ -560,15 +560,15 @@ describe('system', () =>
             .post('/cci/system')
             .set('Accept', 'application/json')
             .send({
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: 'se3w584uzxuz5omcr8yczf2zeuzwfxoh8g7c6sz3stwx9deefe',
-                version: '3',
-                name: 'g',
-                environment: 'h',
-                technology: 'MULESOFT',
-                isActive: false,
-                cancelledAt: '2020-10-21 04:09:19',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: '6fhv3hr7qlqhcvw9t8m4g1om01nnf4ydcv3nw05ozz0fgvbc95',
+                version: 'r',
+                name: 'q',
+                environment: '5',
+                technology: 'WSO2',
+                isActive: true,
+                cancelledAt: '2020-11-04 04:21:02',
             })
             .expect(201);
     });
@@ -603,7 +603,7 @@ describe('system', () =>
                 {
                     where: 
                     {
-                        id: 'fae02651-b546-426f-b6d3-dd2770e74869'
+                        id: '5185a37a-db85-4107-bea7-4b54b84df4a9'
                     }
                 }
             })
@@ -620,18 +620,18 @@ describe('system', () =>
                 {
                     where: 
                     {
-                        id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8'
+                        id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8'));
+            .expect(repository.collectionResponse.find(item => item.id === 'c4e2af74-8596-4d41-963f-4e94e6c51a70'));
     });
 
     test(`/REST:GET cci/system/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/cci/system/98f996e2-68a5-4176-81bd-b1e6d8409244')
+            .get('/cci/system/3fce4473-0437-429a-8f66-a60ddd8a7733')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -639,10 +639,10 @@ describe('system', () =>
     test(`/REST:GET cci/system/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/cci/system/bf51ae93-0b0b-4a7e-bf77-d6929af768b8')
+            .get('/cci/system/c4e2af74-8596-4d41-963f-4e94e6c51a70')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8'));
+            .expect(repository.collectionResponse.find(e => e.id === 'c4e2af74-8596-4d41-963f-4e94e6c51a70'));
     });
 
     test(`/REST:GET cci/systems`, () => 
@@ -661,15 +661,15 @@ describe('system', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'c5baa1ed-ebf4-447b-a411-1228e494559e',
-                tenantId: '96d38343-c204-41f2-bd63-ce3397805061',
-                tenantCode: 'u3acdnomo2i28mtdo4mlsvmzmctlmu7e47m8fdliydj5gpdv7t',
-                version: '6',
-                name: '1',
-                environment: 'e',
-                technology: 'WSO_2',
+                id: '2adb1d9c-e4ed-4ccf-a556-2386e2a97e6a',
+                tenantId: '11e0567f-1ee0-4ad9-834c-caa706386511',
+                tenantCode: 'r5q0mrt68yw07bfboe2jzzuly94189wazd63touaaz2h6dy3ln',
+                version: 'p',
+                name: '4',
+                environment: 'k',
+                technology: 'WSO2',
                 isActive: false,
-                cancelledAt: '2020-10-21 02:52:03',
+                cancelledAt: '2020-11-04 10:49:47',
             })
             .expect(404);
     });
@@ -681,32 +681,32 @@ describe('system', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                tenantCode: 'qj2i5mpro0p9fc6g7rkxn5jyb634ovmpx4m1ye0my0kwqoswcv',
-                version: 'h',
-                name: 'k',
-                environment: 'q',
-                technology: 'MULESOFT',
+                id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                tenantCode: '0ltnuvczmrcx8jpqvcyelxr22mnl4wcdn7wgp2sdt93bu1o3p4',
+                version: 'i',
+                name: 'm',
+                environment: 'f',
+                technology: 'SAPPI',
                 isActive: true,
-                cancelledAt: '2020-10-20 19:59:13',
+                cancelledAt: '2020-11-04 03:03:21',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8'));
+            .expect(repository.collectionResponse.find(e => e.id === 'c4e2af74-8596-4d41-963f-4e94e6c51a70'));
     });
 
-    test(`/REST:DELETE cci/system/{id} - Got 404 Not Found`, () => 
+    test(`/REST:DELETE cci/system/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/system/e5dcd38a-03bd-4055-aafb-2ea718c33cab')
+            .delete('/cci/system/4a8e86ef-5eea-4321-93ee-73e04ad4a256')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test(`/REST:DELETE cci/system/{id}`, () => 
+    test(`/REST:DELETE cci/system/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/system/bf51ae93-0b0b-4a7e-bf77-d6929af768b8')
+            .delete('/cci/system/c4e2af74-8596-4d41-963f-4e94e6c51a70')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -774,21 +774,21 @@ describe('system', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'f2ef5b98-c6cd-43ef-b37b-b1514b028b0c',
-                        tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                        tenantCode: 'j4uee3lpvvxz1gotrify230kgn5c9j6pzg81junrc6567im5fa',
-                        version: 'h',
-                        name: 'z',
-                        environment: 'q',
-                        technology: 'B_2_B',
-                        isActive: true,
-                        cancelledAt: '2020-10-20 15:20:44',
+                        id: 'cc6048d5-2e03-4743-b448-bd7e2e02d10d',
+                        tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                        tenantCode: 'urk5uwqtian238lpdlft8qpk9yliawoo0gms6xbgpugnxity8j',
+                        version: 'k',
+                        name: '9',
+                        environment: '8',
+                        technology: 'SAPSCI',
+                        isActive: false,
+                        cancelledAt: '2020-11-03 20:41:48',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciCreateSystem).toHaveProperty('id', 'f2ef5b98-c6cd-43ef-b37b-b1514b028b0c');
+                expect(res.body.data.cciCreateSystem).toHaveProperty('id', 'cc6048d5-2e03-4743-b448-bd7e2e02d10d');
             });
     });
 
@@ -856,7 +856,7 @@ describe('system', () =>
                     {
                         where: 
                         {
-                            id: '95e6c907-6acd-48ab-8ddd-6b9fcc090fca'
+                            id: '50638a3c-89fb-4fd2-9e69-94e3d12efa69'
                         }
                     }
                 }
@@ -899,14 +899,14 @@ describe('system', () =>
                     {
                         where: 
                         {
-                            id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8'
+                            id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciFindSystem.id).toStrictEqual('bf51ae93-0b0b-4a7e-bf77-d6929af768b8');
+                expect(res.body.data.cciFindSystem.id).toStrictEqual('c4e2af74-8596-4d41-963f-4e94e6c51a70');
             });
     });
 
@@ -935,7 +935,7 @@ describe('system', () =>
                     }
                 `,
                 variables: {
-                    id: '61ecc3ca-0c2e-4f86-b31c-080195741325'
+                    id: '9bc3235a-eb7f-44a0-a672-c3d447c4b7ce'
                 }
             })
             .expect(200)
@@ -971,12 +971,12 @@ describe('system', () =>
                     }
                 `,
                 variables: {
-                    id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8'
+                    id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciFindSystemById.id).toStrictEqual('bf51ae93-0b0b-4a7e-bf77-d6929af768b8');
+                expect(res.body.data.cciFindSystemById.id).toStrictEqual('c4e2af74-8596-4d41-963f-4e94e6c51a70');
             });
     });
 
@@ -1042,15 +1042,15 @@ describe('system', () =>
                 variables: {
                     payload: {
                         
-                        id: 'ac37cfcd-476b-4a8c-a033-332f68ac8b16',
-                        tenantId: 'd5bc0009-932a-408f-8904-afeed3a3ee79',
-                        tenantCode: 'cait8tq44avvzut8p50k1ycdrunh887qbxajj1eamshbfngfma',
-                        version: 't',
-                        name: 'e',
-                        environment: 'x',
-                        technology: 'SAPPI',
+                        id: 'ea37d2af-0084-456c-83d3-c5d842ae409a',
+                        tenantId: '10ca0a68-7590-4356-99f7-58487790119c',
+                        tenantCode: 'ge7enw5uq3lrd9zymkpvdzuferqu5r9qtd1b7ka5pve5a08zyl',
+                        version: 'x',
+                        name: '0',
+                        environment: 'y',
+                        technology: 'SAPSCI',
                         isActive: true,
-                        cancelledAt: '2020-10-21 04:46:45',
+                        cancelledAt: '2020-11-03 22:05:20',
                     }
                 }
             })
@@ -1089,21 +1089,21 @@ describe('system', () =>
                 variables: {
                     payload: {
                         
-                        id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8',
-                        tenantId: '8e7f99e1-ed68-4e16-ae7e-6bea5cf3e85f',
-                        tenantCode: 'z5pj59a58ec5ywok2mio3lexpq1bukze2gcb6s07jenxfl279o',
-                        version: '1',
-                        name: 'j',
-                        environment: 'q',
-                        technology: 'B_2_B',
+                        id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70',
+                        tenantId: '9842d057-99bd-404f-919a-c981c57453f9',
+                        tenantCode: 'f0tjvnt2cbk3vymqspyfnubqsxsq1brkykcgmys270z50xlyow',
+                        version: 'r',
+                        name: '3',
+                        environment: 'd',
+                        technology: 'SAPSCI',
                         isActive: false,
-                        cancelledAt: '2020-10-21 04:11:26',
+                        cancelledAt: '2020-11-03 18:43:41',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciUpdateSystem.id).toStrictEqual('bf51ae93-0b0b-4a7e-bf77-d6929af768b8');
+                expect(res.body.data.cciUpdateSystem.id).toStrictEqual('c4e2af74-8596-4d41-963f-4e94e6c51a70');
             });
     });
 
@@ -1132,7 +1132,7 @@ describe('system', () =>
                     }
                 `,
                 variables: {
-                    id: '1be4503f-f46a-4f46-a4a0-1539fdab90aa'
+                    id: '092503d9-c634-409a-9705-9ca8fe855a09'
                 }
             })
             .expect(200)
@@ -1168,12 +1168,12 @@ describe('system', () =>
                     }
                 `,
                 variables: {
-                    id: 'bf51ae93-0b0b-4a7e-bf77-d6929af768b8'
+                    id: 'c4e2af74-8596-4d41-963f-4e94e6c51a70'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciDeleteSystemById.id).toStrictEqual('bf51ae93-0b0b-4a7e-bf77-d6929af768b8');
+                expect(res.body.data.cciDeleteSystemById.id).toStrictEqual('c4e2af74-8596-4d41-963f-4e94e6c51a70');
             });
     });
 

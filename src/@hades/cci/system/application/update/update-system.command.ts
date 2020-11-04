@@ -1,18 +1,21 @@
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 
-export class UpdateSystemCommand 
+export class UpdateSystemCommand
 {
     constructor(
-        public readonly id: string,
-        public readonly tenantId?: string,
-        public readonly tenantCode?: string,
-        public readonly version?: string,
-        public readonly name?: string,
-        public readonly environment?: string,
-        public readonly technology?: string,
-        public readonly isActive?: boolean,
-        public readonly cancelledAt?: string,
-        
+        public readonly payload: {
+            id: string,
+            tenantId?: string,
+            tenantCode?: string,
+            version?: string,
+            name?: string,
+            environment?: string,
+            technology?: string,
+            isActive?: boolean,
+            cancelledAt?: string,
+        },
         public readonly constraint?: QueryStatement,
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

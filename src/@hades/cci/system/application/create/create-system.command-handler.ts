@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateSystemCommand } from './create-system.command';
 import { CreateSystemService } from './create-system.service';
-import { 
+import {
     SystemId,
     SystemTenantId,
     SystemTenantCode,
@@ -10,30 +10,34 @@ import {
     SystemEnvironment,
     SystemTechnology,
     SystemIsActive,
-    SystemCancelledAt
-    
+    SystemCancelledAt,
+    SystemCreatedAt,
+    SystemUpdatedAt,
+    SystemDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateSystemCommand)
 export class CreateSystemCommandHandler implements ICommandHandler<CreateSystemCommand>
 {
     constructor(
-        private readonly createSystemService: CreateSystemService
-    ) { }
+        private readonly createSystemService: CreateSystemService,
+    ) {}
 
     async execute(command: CreateSystemCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createSystemService.main(
-            new SystemId(command.id),
-            new SystemTenantId(command.tenantId),
-            new SystemTenantCode(command.tenantCode),
-            new SystemVersion(command.version),
-            new SystemName(command.name),
-            new SystemEnvironment(command.environment),
-            new SystemTechnology(command.technology),
-            new SystemIsActive(command.isActive),
-            new SystemCancelledAt(command.cancelledAt),
+            {
+                id: new SystemId(command.payload.id),
+                tenantId: new SystemTenantId(command.payload.tenantId),
+                tenantCode: new SystemTenantCode(command.payload.tenantCode),
+                version: new SystemVersion(command.payload.version),
+                name: new SystemName(command.payload.name),
+                environment: new SystemEnvironment(command.payload.environment),
+                technology: new SystemTechnology(command.payload.technology),
+                isActive: new SystemIsActive(command.payload.isActive),
+                cancelledAt: new SystemCancelledAt(command.payload.cancelledAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+            }
         );
     }
 }

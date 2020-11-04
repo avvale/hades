@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdateModuleCommand } from './update-module.command';
 import { UpdateModuleService } from './update-module.service';
-import { 
+import {
     ModuleId,
     ModuleTenantId,
     ModuleTenantCode,
@@ -22,43 +22,48 @@ import {
     ModuleParameterGroup,
     ModuleName,
     ModuleParameterName,
-    ModuleParameterValue
-    
+    ModuleParameterValue,
+    ModuleCreatedAt,
+    ModuleUpdatedAt,
+    ModuleDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdateModuleCommand)
 export class UpdateModuleCommandHandler implements ICommandHandler<UpdateModuleCommand>
 {
     constructor(
-        private readonly updateModuleService: UpdateModuleService
-    ) { }
+        private readonly updateModuleService: UpdateModuleService,
+    ) {}
 
     async execute(command: UpdateModuleCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.updateModuleService.main(
-            new ModuleId(command.id),
-            new ModuleTenantId(command.tenantId, { undefinable: true }),
-            new ModuleTenantCode(command.tenantCode, { undefinable: true }),
-            new ModuleSystemId(command.systemId, { undefinable: true }),
-            new ModuleSystemName(command.systemName, { undefinable: true }),
-            new ModuleChannelHash(command.channelHash, { undefinable: true }),
-            new ModuleChannelParty(command.channelParty),
-            new ModuleChannelComponent(command.channelComponent, { undefinable: true }),
-            new ModuleChannelName(command.channelName, { undefinable: true }),
-            new ModuleFlowHash(command.flowHash),
-            new ModuleFlowParty(command.flowParty),
-            new ModuleFlowReceiverParty(command.flowReceiverParty),
-            new ModuleFlowComponent(command.flowComponent),
-            new ModuleFlowReceiverComponent(command.flowReceiverComponent),
-            new ModuleFlowInterfaceName(command.flowInterfaceName),
-            new ModuleFlowInterfaceNamespace(command.flowInterfaceNamespace),
-            new ModuleVersion(command.version, { undefinable: true }),
-            new ModuleParameterGroup(command.parameterGroup),
-            new ModuleName(command.name),
-            new ModuleParameterName(command.parameterName),
-            new ModuleParameterValue(command.parameterValue),
-            
+            {
+                id: new ModuleId(command.payload.id),
+                tenantId: new ModuleTenantId(command.payload.tenantId, { undefinable: true }),
+                tenantCode: new ModuleTenantCode(command.payload.tenantCode, { undefinable: true }),
+                systemId: new ModuleSystemId(command.payload.systemId, { undefinable: true }),
+                systemName: new ModuleSystemName(command.payload.systemName, { undefinable: true }),
+                channelHash: new ModuleChannelHash(command.payload.channelHash, { undefinable: true }),
+                channelParty: new ModuleChannelParty(command.payload.channelParty),
+                channelComponent: new ModuleChannelComponent(command.payload.channelComponent, { undefinable: true }),
+                channelName: new ModuleChannelName(command.payload.channelName, { undefinable: true }),
+                flowHash: new ModuleFlowHash(command.payload.flowHash),
+                flowParty: new ModuleFlowParty(command.payload.flowParty),
+                flowReceiverParty: new ModuleFlowReceiverParty(command.payload.flowReceiverParty),
+                flowComponent: new ModuleFlowComponent(command.payload.flowComponent),
+                flowReceiverComponent: new ModuleFlowReceiverComponent(command.payload.flowReceiverComponent),
+                flowInterfaceName: new ModuleFlowInterfaceName(command.payload.flowInterfaceName),
+                flowInterfaceNamespace: new ModuleFlowInterfaceNamespace(command.payload.flowInterfaceNamespace),
+                version: new ModuleVersion(command.payload.version, { undefinable: true }),
+                parameterGroup: new ModuleParameterGroup(command.payload.parameterGroup),
+                name: new ModuleName(command.payload.name),
+                parameterName: new ModuleParameterName(command.payload.parameterName),
+                parameterValue: new ModuleParameterValue(command.payload.parameterValue),
+            },
+            command.constraint,
+            command.cQMetadata,
         )
     }
 }

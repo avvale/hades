@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciMessageOverview } from './message-overview.aggregate';
 import { MessageOverviewResponse } from './message-overview.response';
-import { 
+import {
     MessageOverviewId,
     MessageOverviewTenantId,
     MessageOverviewTenantCode,
@@ -24,47 +24,43 @@ import {
     MessageOverviewWaiting,
     MessageOverviewCreatedAt,
     MessageOverviewUpdatedAt,
-    MessageOverviewDeletedAt
-    
+    MessageOverviewDeletedAt,
 } from './value-objects';
-
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 import { ExecutionMapper } from '@hades/cci/execution/domain/execution.mapper';
 
-
-
 export class MessageOverviewMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param messageOverview
      */
-    mapModelToAggregate(messageOverview: ObjectLiteral): CciMessageOverview
+    mapModelToAggregate(messageOverview: ObjectLiteral, cQMetadata?: CQMetadata): CciMessageOverview
     {
         if (!messageOverview) return;
 
-        return this.makeAggregate(messageOverview);
+        return this.makeAggregate(messageOverview, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param messagesOverview 
+     * @param messagesOverview
      */
-    mapModelsToAggregates(messagesOverview: ObjectLiteral[]): CciMessageOverview[]
+    mapModelsToAggregates(messagesOverview: ObjectLiteral[], cQMetadata?: CQMetadata): CciMessageOverview[]
     {
         if (!Array.isArray(messagesOverview)) return;
-        
-        return messagesOverview.map(messageOverview  => this.makeAggregate(messageOverview));
+
+        return messagesOverview.map(messageOverview  => this.makeAggregate(messageOverview, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param messageOverview 
+     * @param messageOverview
      */
     mapAggregateToResponse(messageOverview: CciMessageOverview): MessageOverviewResponse
     {
@@ -82,7 +78,7 @@ export class MessageOverviewMapper implements IMapper
         return messagesOverview.map(messageOverview => this.makeResponse(messageOverview));
     }
 
-    private makeAggregate(messageOverview: ObjectLiteral): CciMessageOverview
+    private makeAggregate(messageOverview: ObjectLiteral, cQMetadata?: CQMetadata): CciMessageOverview
     {
         return CciMessageOverview.register(
             new MessageOverviewId(messageOverview.id),
@@ -92,9 +88,9 @@ export class MessageOverviewMapper implements IMapper
             new MessageOverviewSystemName(messageOverview.systemName),
             new MessageOverviewExecutionId(messageOverview.executionId),
             new MessageOverviewExecutionType(messageOverview.executionType),
-            new MessageOverviewExecutionExecutedAt(messageOverview.executionExecutedAt),
-            new MessageOverviewExecutionMonitoringStartAt(messageOverview.executionMonitoringStartAt),
-            new MessageOverviewExecutionMonitoringEndAt(messageOverview.executionMonitoringEndAt),
+            new MessageOverviewExecutionExecutedAt(messageOverview.executionExecutedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new MessageOverviewExecutionMonitoringStartAt(messageOverview.executionMonitoringStartAt, {}, {addTimezone: cQMetadata.timezone}),
+            new MessageOverviewExecutionMonitoringEndAt(messageOverview.executionMonitoringEndAt, {}, {addTimezone: cQMetadata.timezone}),
             new MessageOverviewNumberMax(messageOverview.numberMax),
             new MessageOverviewNumberDays(messageOverview.numberDays),
             new MessageOverviewSuccess(messageOverview.success),
@@ -104,25 +100,19 @@ export class MessageOverviewMapper implements IMapper
             new MessageOverviewHolding(messageOverview.holding),
             new MessageOverviewToBeDelivered(messageOverview.toBeDelivered),
             new MessageOverviewWaiting(messageOverview.waiting),
-            new MessageOverviewCreatedAt(messageOverview.createdAt),
-            new MessageOverviewUpdatedAt(messageOverview.updatedAt),
-            new MessageOverviewDeletedAt(messageOverview.deletedAt),
-            
-            
-            
+            new MessageOverviewCreatedAt(messageOverview.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new MessageOverviewUpdatedAt(messageOverview.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new MessageOverviewDeletedAt(messageOverview.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(messageOverview.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(messageOverview.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapModelToAggregate(messageOverview.execution) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(messageOverview: CciMessageOverview): MessageOverviewResponse
     {
         if (!messageOverview) return;
-        
+
         return new MessageOverviewResponse(
             messageOverview.id.value,
             messageOverview.tenantId.value,
@@ -146,15 +136,9 @@ export class MessageOverviewMapper implements IMapper
             messageOverview.createdAt.value,
             messageOverview.updatedAt.value,
             messageOverview.deletedAt.value,
-            
-            
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(messageOverview.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(messageOverview.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapAggregateToResponse(messageOverview.execution) : undefined,
-            
-            
-            
         );
     }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     MessageOverviewId,
     MessageOverviewTenantId,
     MessageOverviewTenantCode,
@@ -23,8 +22,7 @@ import {
     MessageOverviewWaiting,
     MessageOverviewCreatedAt,
     MessageOverviewUpdatedAt,
-    MessageOverviewDeletedAt
-    
+    MessageOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { CciMessageOverview } from './../../domain/message-overview.aggregate';
@@ -35,7 +33,7 @@ export class CreateMessagesOverviewService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IMessageOverviewRepository
+        private readonly repository: IMessageOverviewRepository,
     ) {}
 
     public async main(
@@ -59,7 +57,6 @@ export class CreateMessagesOverviewService
             holding: MessageOverviewHolding,
             toBeDelivered: MessageOverviewToBeDelivered,
             waiting: MessageOverviewWaiting,
-            
         } []
     ): Promise<void>
     {
@@ -84,18 +81,18 @@ export class CreateMessagesOverviewService
             messageOverview.holding,
             messageOverview.toBeDelivered,
             messageOverview.waiting,
-            new MessageOverviewCreatedAt(Utils.nowTimestamp()),
-            new MessageOverviewUpdatedAt(Utils.nowTimestamp()),
+            new MessageOverviewCreatedAt({currentTimestamp: true}),
+            new MessageOverviewUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateMessagesOverview);
 
         // create AddMessagesOverviewContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const messagesOverviewRegistered = this.publisher.mergeObjectContext(new AddMessagesOverviewContextEvent(aggregateMessagesOverview));
- 
+
         messagesOverviewRegistered.created(); // apply event to model events
         messagesOverviewRegistered.commit(); // commit all events of model
     }

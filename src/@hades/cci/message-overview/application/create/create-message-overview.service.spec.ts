@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { messagesOverview } from '@hades/cci/message-overview/infrastructure/seeds/message-overview.seed';
 import { CreateMessageOverviewService } from './create-message-overview.service';
-import { 
+import {
     MessageOverviewId,
     MessageOverviewTenantId,
     MessageOverviewTenantCode,
@@ -23,19 +23,22 @@ import {
     MessageOverviewError,
     MessageOverviewHolding,
     MessageOverviewToBeDelivered,
-    MessageOverviewWaiting
-    
+    MessageOverviewWaiting,
+    MessageOverviewCreatedAt,
+    MessageOverviewUpdatedAt,
+    MessageOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { MockMessageOverviewRepository } from './../../infrastructure/mock/mock-message-overview.repository';
 
-describe('CreateMessageOverviewService', () => 
+describe('CreateMessageOverviewService', () =>
+
 {
     let service: CreateMessageOverviewService;
     let repository: IMessageOverviewRepository;
     let mockRepository: MockMessageOverviewRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -44,7 +47,7 @@ describe('CreateMessageOverviewService', () =>
                 EventPublisher,
                 CreateMessageOverviewService,
                 MockMessageOverviewRepository,
-                { 
+                {
                     provide: IMessageOverviewRepository,
                     useValue: {
                         create: (item) => {}
@@ -58,14 +61,14 @@ describe('CreateMessageOverviewService', () =>
         mockRepository  = module.get(MockMessageOverviewRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateMessageOverviewService should be defined', () => 
+        test('CreateMessageOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a messageOverview and emit event', async () => 
+        test('should create a messageOverview and emit event', async () =>
         {
             expect(await service.main(
                 new MessageOverviewId(messagesOverview[0].id),

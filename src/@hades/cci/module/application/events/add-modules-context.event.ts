@@ -8,21 +8,21 @@ import { DeletedModulesEvent } from './deleted-modules.event';
 export class AddModulesContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciModule[] = []
+        public readonly aggregateRoots: CciModule[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedModulesEvent(
-                this.aggregateRoots.map(module => 
+                this.aggregateRoots.map(module =>
                     new CreatedModuleEvent(
                         module.id.value,
                         module.tenantId.value,
@@ -59,7 +59,7 @@ export class AddModulesContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedModulesEvent(
-                this.aggregateRoots.map(module => 
+                this.aggregateRoots.map(module =>
                     new DeletedModuleEvent(
                         module.id.value,
                         module.tenantId.value,
@@ -85,10 +85,10 @@ export class AddModulesContextEvent extends AggregateRoot
                         module.createdAt?.value,
                         module.updatedAt?.value,
                         module.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

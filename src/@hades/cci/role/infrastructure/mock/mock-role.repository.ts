@@ -2,15 +2,14 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IRoleRepository } from '@hades/cci/role/domain/role.repository';
-import { 
+import {
     RoleId,
     RoleTenantId,
     RoleTenantCode,
     RoleName,
     RoleCreatedAt,
     RoleUpdatedAt,
-    RoleDeletedAt
-    
+    RoleDeletedAt,
 } from '@hades/cci/role/domain/value-objects';
 import { CciRole } from './../../domain/role.aggregate';
 import { roles } from './../seeds/role.seed';
@@ -22,14 +21,14 @@ export class MockRoleRepository extends MockRepository<CciRole> implements IRole
     public readonly aggregateName: string = 'CciRole';
     public collectionSource: CciRole[];
     public deletedAtInstance: RoleDeletedAt = new RoleDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -44,7 +43,7 @@ export class MockRoleRepository extends MockRepository<CciRole> implements IRole
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciRole.register(
                     new RoleId(itemCollection.id),
                     new RoleTenantId(itemCollection.tenantId),
@@ -53,7 +52,7 @@ export class MockRoleRepository extends MockRepository<CciRole> implements IRole
                     new RoleCreatedAt(itemCollection.createdAt),
                     new RoleUpdatedAt(itemCollection.updatedAt),
                     new RoleDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

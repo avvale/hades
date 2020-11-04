@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { systems } from '@hades/cci/system/infrastructure/seeds/system.seed';
 import { CreateSystemService } from './create-system.service';
-import { 
+import {
     SystemId,
     SystemTenantId,
     SystemTenantCode,
@@ -13,19 +13,22 @@ import {
     SystemEnvironment,
     SystemTechnology,
     SystemIsActive,
-    SystemCancelledAt
-    
+    SystemCancelledAt,
+    SystemCreatedAt,
+    SystemUpdatedAt,
+    SystemDeletedAt,
 } from './../../domain/value-objects';
 import { ISystemRepository } from './../../domain/system.repository';
 import { MockSystemRepository } from './../../infrastructure/mock/mock-system.repository';
 
-describe('CreateSystemService', () => 
+describe('CreateSystemService', () =>
+
 {
     let service: CreateSystemService;
     let repository: ISystemRepository;
     let mockRepository: MockSystemRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -34,7 +37,7 @@ describe('CreateSystemService', () =>
                 EventPublisher,
                 CreateSystemService,
                 MockSystemRepository,
-                { 
+                {
                     provide: ISystemRepository,
                     useValue: {
                         create: (item) => {}
@@ -48,14 +51,14 @@ describe('CreateSystemService', () =>
         mockRepository  = module.get(MockSystemRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateSystemService should be defined', () => 
+        test('CreateSystemService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a system and emit event', async () => 
+        test('should create a system and emit event', async () =>
         {
             expect(await service.main(
                 new SystemId(systems[0].id),

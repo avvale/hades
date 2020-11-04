@@ -1,25 +1,29 @@
-export class CreateMessageOverviewCommand 
-{   
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class CreateMessageOverviewCommand
+{
     constructor(
-        public readonly id: string,
-        public readonly tenantId: string,
-        public readonly tenantCode: string,
-        public readonly systemId: string,
-        public readonly systemName: string,
-        public readonly executionId: string,
-        public readonly executionType: string,
-        public readonly executionExecutedAt: string,
-        public readonly executionMonitoringStartAt: string,
-        public readonly executionMonitoringEndAt: string,
-        public readonly numberMax: number,
-        public readonly numberDays: number,
-        public readonly success: number,
-        public readonly cancelled: number,
-        public readonly delivering: number,
-        public readonly error: number,
-        public readonly holding: number,
-        public readonly toBeDelivered: number,
-        public readonly waiting: number,
-        
+        public readonly payload: {
+            id: string,
+            tenantId: string,
+            tenantCode: string,
+            systemId: string,
+            systemName: string,
+            executionId: string,
+            executionType: string,
+            executionExecutedAt: string,
+            executionMonitoringStartAt: string,
+            executionMonitoringEndAt: string,
+            numberMax?: number,
+            numberDays?: number,
+            success?: number,
+            cancelled?: number,
+            delivering?: number,
+            error?: number,
+            holding?: number,
+            toBeDelivered?: number,
+            waiting?: number,
+        },
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

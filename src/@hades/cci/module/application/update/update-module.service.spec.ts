@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { modules } from '@hades/cci/module/infrastructure/seeds/module.seed';
 import { UpdateModuleService } from './update-module.service';
-import { 
+import {
     ModuleId,
     ModuleTenantId,
     ModuleTenantCode,
@@ -28,19 +28,18 @@ import {
     ModuleParameterValue,
     ModuleCreatedAt,
     ModuleUpdatedAt,
-    ModuleDeletedAt
-    
+    ModuleDeletedAt,
 } from './../../domain/value-objects';
 import { IModuleRepository } from './../../domain/module.repository';
 import { MockModuleRepository } from './../../infrastructure/mock/mock-module.repository';
 
-describe('UpdateModuleService', () => 
+describe('UpdateModuleService', () =>
 {
     let service: UpdateModuleService;
     let repository: IModuleRepository;
     let mockRepository: MockModuleRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -49,7 +48,7 @@ describe('UpdateModuleService', () =>
                 EventPublisher,
                 UpdateModuleService,
                 MockModuleRepository,
-                { 
+                {
                     provide: IModuleRepository,
                     useValue: {
                         update: (item) => {}
@@ -63,7 +62,7 @@ describe('UpdateModuleService', () =>
         mockRepository  = module.get(MockModuleRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateModuleService should be defined', () => 
         {

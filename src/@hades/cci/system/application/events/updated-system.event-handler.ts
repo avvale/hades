@@ -4,7 +4,7 @@ import { UpdatedSystemEvent } from './updated-system.event';
 @EventsHandler(UpdatedSystemEvent)
 export class UpdatedSystemEventHandler implements IEventHandler<UpdatedSystemEvent>
 {
-    handle(event: UpdatedSystemEvent) 
+    handle(event: UpdatedSystemEvent)
     {
         // console.log('UpdatedSystemEvent: ', event);
     }

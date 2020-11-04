@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     SystemId,
     SystemTenantId,
     SystemTenantCode,
@@ -13,8 +12,7 @@ import {
     SystemCancelledAt,
     SystemCreatedAt,
     SystemUpdatedAt,
-    SystemDeletedAt
-    
+    SystemDeletedAt,
 } from './../../domain/value-objects';
 import { ISystemRepository } from './../../domain/system.repository';
 import { CciSystem } from './../../domain/system.aggregate';
@@ -24,38 +22,39 @@ export class CreateSystemService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: ISystemRepository
+        private readonly repository: ISystemRepository,
     ) {}
 
     public async main(
-        id: SystemId,
-        tenantId: SystemTenantId,
-        tenantCode: SystemTenantCode,
-        version: SystemVersion,
-        name: SystemName,
-        environment: SystemEnvironment,
-        technology: SystemTechnology,
-        isActive: SystemIsActive,
-        cancelledAt: SystemCancelledAt,
-        
+        payload: {
+            id: SystemId,
+            tenantId: SystemTenantId,
+            tenantCode: SystemTenantCode,
+            version: SystemVersion,
+            name: SystemName,
+            environment: SystemEnvironment,
+            technology: SystemTechnology,
+            isActive: SystemIsActive,
+            cancelledAt: SystemCancelledAt,
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const system = CciSystem.register(
-            id,
-            tenantId,
-            tenantCode,
-            version,
-            name,
-            environment,
-            technology,
-            isActive,
-            cancelledAt,
-            new SystemCreatedAt(Utils.nowTimestamp()),
-            new SystemUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.version,
+            payload.name,
+            payload.environment,
+            payload.technology,
+            payload.isActive,
+            payload.cancelledAt,
+            new SystemCreatedAt({currentTimestamp: true}),
+            new SystemUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // create
         await this.repository.create(system);
 
@@ -63,7 +62,7 @@ export class CreateSystemService
         const systemRegister = this.publisher.mergeObjectContext(
             system
         );
-        
+
         systemRegister.created(system); // apply event to model events
         systemRegister.commit(); // commit all events of model
     }

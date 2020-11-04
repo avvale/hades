@@ -3,27 +3,27 @@
     "files": [
         {
             "path": "src/@hades/cci/role/application/create/create-role.command-handler.ts",
-            "integrity": "sha1:7dee35e125583785eeae160e6e6bd449d0508aa2"
+            "integrity": "sha1:5f148bef280049b8167013dde73440871f6a1d76"
         },
         {
             "path": "src/@hades/cci/role/application/create/create-role.command.handler.spec.ts",
-            "integrity": "sha1:c6ef14387be0abbbb4cadb884a1d20ccdcc0fb0a"
+            "integrity": "sha1:3f0a760059d63c0a467d83c010386c905adcc13a"
         },
         {
             "path": "src/@hades/cci/role/application/create/create-role.command.ts",
-            "integrity": "sha1:dd011e747958f03893ed1813e1595a34f1d0a650"
+            "integrity": "sha1:a6f5d4a3a59d99fc7dec7f83b40eca5e725d76a1"
         },
         {
             "path": "src/@hades/cci/role/application/create/create-role.service.spec.ts",
-            "integrity": "sha1:281e711e2f615339f1176a9250ff89bd0edf487c"
+            "integrity": "sha1:f71de61b42d8cfc468b3d19508ca161a9668e838"
         },
         {
             "path": "src/@hades/cci/role/application/create/create-role.service.ts",
-            "integrity": "sha1:c60b4457259ab43f09876e0dee456b0f10d650a8"
+            "integrity": "sha1:72c3f743aae8451701c65aadefe68773e96bfed2"
         },
         {
             "path": "src/@hades/cci/role/application/create/create-roles.command-handler.ts",
-            "integrity": "sha1:6a720fb93a141006ad8a1738b44e96589cd4dda7"
+            "integrity": "sha1:8f07e62b53f71a3ac376298fb8b5ff3120ee3142"
         },
         {
             "path": "src/@hades/cci/role/application/create/create-roles.command.handler.spec.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/cci/role/application/create/create-roles.command.ts",
-            "integrity": "sha1:b69e675fac1a9742ed3a66bea946be6971e5afb7"
+            "integrity": "sha1:bd6ffcf86e44841ebe579c828f4f9afd0b5744ea"
         },
         {
             "path": "src/@hades/cci/role/application/create/create-roles.service.spec.ts",
@@ -39,31 +39,31 @@
         },
         {
             "path": "src/@hades/cci/role/application/create/create-roles.service.ts",
-            "integrity": "sha1:32f58d29a3c68e9d4eb0dceb9f5a6af1d8236948"
+            "integrity": "sha1:1d739cdfba5af3d082ca24cb7ba323232e4897b0"
         },
         {
             "path": "src/@hades/cci/role/application/delete/delete-role-by-id.command-handler.ts",
-            "integrity": "sha1:3a788c4bb7f4e28c5ef057e8104d27eba54381b3"
+            "integrity": "sha1:3c0563a01934adc55bc2eb2ee9abb8c357322d4b"
         },
         {
             "path": "src/@hades/cci/role/application/delete/delete-role-by-id.command.handler.spec.ts",
-            "integrity": "sha1:8063744124a7f67c99340b3e0681222f8e787529"
+            "integrity": "sha1:f61ef5dd942c7fa5ce89ff3ef2973fe87b211452"
         },
         {
             "path": "src/@hades/cci/role/application/delete/delete-role-by-id.command.ts",
-            "integrity": "sha1:28fb531fcb12939d27ba804bd6de5bcc2a6f1fd1"
+            "integrity": "sha1:5b7743d667d14ae9b86277e4a2315aacb93c3c83"
         },
         {
             "path": "src/@hades/cci/role/application/delete/delete-role-by-id.service.spec.ts",
-            "integrity": "sha1:73d9d4e1414edfd1421d526076da011bba640cae"
+            "integrity": "sha1:1af5c1f08ccd941d0b6accab7a97fe342d0d301e"
         },
         {
             "path": "src/@hades/cci/role/application/delete/delete-role-by-id.service.ts",
-            "integrity": "sha1:2d718c417c9109ffa0c20501ce7d31a497880c9b"
+            "integrity": "sha1:631f61e9e1dba051e77e6958c9e27998fb26b816"
         },
         {
             "path": "src/@hades/cci/role/application/delete/delete-roles.command-handler.ts",
-            "integrity": "sha1:959a92d8f4f3c0f8cdfea203d9b03ddf1eb5f099"
+            "integrity": "sha1:5424dd2ab118b5f6eeca45646640751f3cbef6e0"
         },
         {
             "path": "src/@hades/cci/role/application/delete/delete-roles.command.handler.spec.ts",
@@ -71,7 +71,7 @@
         },
         {
             "path": "src/@hades/cci/role/application/delete/delete-roles.command.ts",
-            "integrity": "sha1:05ab5ec548cc7e3504f0baad5bce2544c4254c92"
+            "integrity": "sha1:d04d2774def9ec102c08548392398d49118f2ea3"
         },
         {
             "path": "src/@hades/cci/role/application/delete/delete-roles.service.spec.ts",
@@ -79,23 +79,23 @@
         },
         {
             "path": "src/@hades/cci/role/application/delete/delete-roles.service.ts",
-            "integrity": "sha1:4969a806fb6f02c340e3445a42fe375395d48ec7"
+            "integrity": "sha1:0df7dee9314646e72d16e0ceab435eec8abaca1f"
         },
         {
             "path": "src/@hades/cci/role/application/events/add-roles-context.event.ts",
-            "integrity": "sha1:ad04fb014f82096345b968608877a465b16d6786"
+            "integrity": "sha1:d9df6ff160b24bab67c129f49aecbb2b28246425"
         },
         {
             "path": "src/@hades/cci/role/application/events/created-role.event-handler.ts",
-            "integrity": "sha1:fc66d028c00bad52f248ed98df3b8022549c00f4"
+            "integrity": "sha1:247de97173545cdab55e27647ee981d093f6475a"
         },
         {
             "path": "src/@hades/cci/role/application/events/created-role.event.ts",
-            "integrity": "sha1:df43b8ac59a109c1111817d33ec467006293395a"
+            "integrity": "sha1:605b553fcc73d9d04255ad007eea0eea0beb555e"
         },
         {
             "path": "src/@hades/cci/role/application/events/created-roles.event-handler.ts",
-            "integrity": "sha1:73347309e54269fb97d4548b2f029dedf95ccea0"
+            "integrity": "sha1:fe5cd5f87156fc6a9b71a23975090d324f2af994"
         },
         {
             "path": "src/@hades/cci/role/application/events/created-roles.event.ts",
@@ -103,15 +103,15 @@
         },
         {
             "path": "src/@hades/cci/role/application/events/deleted-role.event-handler.ts",
-            "integrity": "sha1:458b4291f4c1b982daf671f055952ad7476b0d0e"
+            "integrity": "sha1:b58324690f822b4b387837dd56ac02324b322f03"
         },
         {
             "path": "src/@hades/cci/role/application/events/deleted-role.event.ts",
-            "integrity": "sha1:4373a8944dbe6db57a382ac30688f9ff715959ae"
+            "integrity": "sha1:d61f74d277ab3aa299ad4dc624012cf5a26a9df1"
         },
         {
             "path": "src/@hades/cci/role/application/events/deleted-roles.event-handler.ts",
-            "integrity": "sha1:8adb06bfd56342d516cb4baa2ed854984c5cac7b"
+            "integrity": "sha1:ea3d0455ca0b348fa0c6e8694d5123c99968a7fb"
         },
         {
             "path": "src/@hades/cci/role/application/events/deleted-roles.event.ts",
@@ -119,35 +119,35 @@
         },
         {
             "path": "src/@hades/cci/role/application/events/updated-role.event-handler.ts",
-            "integrity": "sha1:9c8e4ec5430b2b5271e08f47a694aa515bef83f4"
+            "integrity": "sha1:0292878103535749d2159896aafd94201f68e04b"
         },
         {
             "path": "src/@hades/cci/role/application/events/updated-role.event.ts",
-            "integrity": "sha1:622cc49898b0c7dce9dff8a98ed01d5fd574bdcc"
+            "integrity": "sha1:bdaf32822ed544877538691d30532ebf48967772"
         },
         {
             "path": "src/@hades/cci/role/application/find/find-role-by-id.query-handler.ts",
-            "integrity": "sha1:5f8ab9a6760df1b00f9eef6f1ac429a54a00e893"
+            "integrity": "sha1:6da89f2daeb031ae9a32ed2939c49967e4e0e99a"
         },
         {
             "path": "src/@hades/cci/role/application/find/find-role-by-id.query.handler.spec.ts",
-            "integrity": "sha1:d31f27b78e777ce5636939b003bd376de155f9ab"
+            "integrity": "sha1:9df2af1343750e97eac55a2a2818636436be4857"
         },
         {
             "path": "src/@hades/cci/role/application/find/find-role-by-id.query.ts",
-            "integrity": "sha1:493a164f51da8f150e166ecdf1a1861712bfcca2"
+            "integrity": "sha1:a14683944bd12ab1b50d6eb996161e51dd867ccd"
         },
         {
             "path": "src/@hades/cci/role/application/find/find-role-by-id.service.spec.ts",
-            "integrity": "sha1:2ea455531649e6046ec440feb5fb8fc59b39cd6d"
+            "integrity": "sha1:af96147a2c683388f8ff49e98f8ee91522808b86"
         },
         {
             "path": "src/@hades/cci/role/application/find/find-role-by-id.service.ts",
-            "integrity": "sha1:5a65c3b7cc1558fc3272c24e0a0572d77a4af2ad"
+            "integrity": "sha1:bf323be92ab33787536a164f9d94b9d238eea9b7"
         },
         {
             "path": "src/@hades/cci/role/application/find/find-role.query-handler.ts",
-            "integrity": "sha1:0110bfe431cdd1becf5b1fdb201e9ffbde3dea95"
+            "integrity": "sha1:7b92e6507ad7d2cea858d70e15294f488fa4b85b"
         },
         {
             "path": "src/@hades/cci/role/application/find/find-role.query.handler.spec.ts",
@@ -155,7 +155,7 @@
         },
         {
             "path": "src/@hades/cci/role/application/find/find-role.query.ts",
-            "integrity": "sha1:8dad067a473713b8cd1e06b22029af27fa767e73"
+            "integrity": "sha1:6966fca8c502a32144445e8459351b93d1f21968"
         },
         {
             "path": "src/@hades/cci/role/application/find/find-role.service.spec.ts",
@@ -163,11 +163,11 @@
         },
         {
             "path": "src/@hades/cci/role/application/find/find-role.service.ts",
-            "integrity": "sha1:63d2f158fb2ec3310046d99d1226609fd2568aa7"
+            "integrity": "sha1:25be7be1501fee1cc9ffeba943fadd4fc2140855"
         },
         {
             "path": "src/@hades/cci/role/application/get/get-roles.query-handler.ts",
-            "integrity": "sha1:7746a2fa1134ab7048929e673642254bd60d71e8"
+            "integrity": "sha1:63cbf400385437355cc28382dd7443058161d4d2"
         },
         {
             "path": "src/@hades/cci/role/application/get/get-roles.query.handler.spec.ts",
@@ -175,7 +175,7 @@
         },
         {
             "path": "src/@hades/cci/role/application/get/get-roles.query.ts",
-            "integrity": "sha1:e933dd1eda54fb4305d827b01269200a52aa3d3f"
+            "integrity": "sha1:58f2490a860db86586997d1453bbd28cbfe051da"
         },
         {
             "path": "src/@hades/cci/role/application/get/get-roles.service.spec.ts",
@@ -183,19 +183,19 @@
         },
         {
             "path": "src/@hades/cci/role/application/get/get-roles.service.ts",
-            "integrity": "sha1:c1c28d2578a7b2338e66e8971d6b33e525823a9a"
+            "integrity": "sha1:d1bc69867eea33bbb6991917ca390244e5c703fd"
         },
         {
             "path": "src/@hades/cci/role/application/paginate/paginate-roles.query-handler.ts",
-            "integrity": "sha1:2a64eb8dfbbb0db8e12600ffd159dc24a2bde835"
+            "integrity": "sha1:ea5efa46365b9895a69a5ca144946f102e13d0a6"
         },
         {
             "path": "src/@hades/cci/role/application/paginate/paginate-roles.query.handler.spec.ts",
-            "integrity": "sha1:596e72334a01378b607304478dbaf75ba3b2bf5a"
+            "integrity": "sha1:e3648115f960a28c2a4db9f425a207c8fee75c62"
         },
         {
             "path": "src/@hades/cci/role/application/paginate/paginate-roles.query.ts",
-            "integrity": "sha1:17ae50ef32d65e934d7b134376a21d118d4dd8f9"
+            "integrity": "sha1:3152bf393d8a6dc05f5672493ce30e95176a44aa"
         },
         {
             "path": "src/@hades/cci/role/application/paginate/paginate-roles.service.spec.ts",
@@ -203,15 +203,15 @@
         },
         {
             "path": "src/@hades/cci/role/application/paginate/paginate-roles.service.ts",
-            "integrity": "sha1:5fbc1eacd97467a91874683a2afb3b6782274b2b"
+            "integrity": "sha1:d608b9ea1322bcb3fbba395e8e507044047bc44c"
         },
         {
             "path": "src/@hades/cci/role/application/sagas/role.sagas.ts",
-            "integrity": "sha1:bddb552115b94c8b2d307d8efbf80e2f368fb8e9"
+            "integrity": "sha1:d7301c625f3d0d586265226df4cbe450e2fce5d4"
         },
         {
             "path": "src/@hades/cci/role/application/update/update-role.command-handler.ts",
-            "integrity": "sha1:2a42073ae10f65a8c1e002c2e6e24381a28f6db1"
+            "integrity": "sha1:4c7929c980fcc230a0a524fe05f7237a8bbf830a"
         },
         {
             "path": "src/@hades/cci/role/application/update/update-role.command.handler.spec.ts",
@@ -219,31 +219,31 @@
         },
         {
             "path": "src/@hades/cci/role/application/update/update-role.command.ts",
-            "integrity": "sha1:c0f61951cff423cdf9b708e9b54cff3a3bb5c584"
+            "integrity": "sha1:187bd608a8ec778afecffe847e9ea7499e9b6957"
         },
         {
             "path": "src/@hades/cci/role/application/update/update-role.service.spec.ts",
-            "integrity": "sha1:a120606c4e1155b9eeb48bf4c291f3f050c95304"
+            "integrity": "sha1:bbe929260903d767df1c4f1007c120e08a922e4e"
         },
         {
             "path": "src/@hades/cci/role/application/update/update-role.service.ts",
-            "integrity": "sha1:aa5e0f1cd555f69c73796cb65362ecc71794cda1"
+            "integrity": "sha1:66abae26ab4a7e91087630f88d35e72543759d11"
         },
         {
             "path": "src/@hades/cci/role/domain/role.aggregate.ts",
-            "integrity": "sha1:0cc6f81e6e7c04e4477a068011d9f2ddb16f85bf"
+            "integrity": "sha1:25775f01f516d5b8db234d34606d2db50fb5f239"
         },
         {
             "path": "src/@hades/cci/role/domain/role.mapper.ts",
-            "integrity": "sha1:d5e76c14fa6e02f0ee828f29411a0430307f0943"
+            "integrity": "sha1:1804c182edb9825c75ba925f5254d2a508e89e9e"
         },
         {
             "path": "src/@hades/cci/role/domain/role.repository.ts",
-            "integrity": "sha1:dfe8e3257e7c08a2c902d54148b3be24e67cf47b"
+            "integrity": "sha1:f6b336b88ec8bc8056f744a9da9ac0cc6639fc1d"
         },
         {
             "path": "src/@hades/cci/role/domain/role.response.ts",
-            "integrity": "sha1:19c83e00b90a24f89c2af22232c02742e6a2258a"
+            "integrity": "sha1:0856a4f1279f2519218686ac00ec457d0113cf1f"
         },
         {
             "path": "src/@hades/cci/role/domain/value-objects/index.ts",
@@ -255,211 +255,211 @@
         },
         {
             "path": "src/@hades/cci/role/infrastructure/mock/mock-role.repository.ts",
-            "integrity": "sha1:c64aafd8ea2ef3bf741371164272c1d49d840b28"
+            "integrity": "sha1:5869c173cf1016d448a97c1900113cb5a4744cc0"
         },
         {
             "path": "src/@hades/cci/role/infrastructure/seeds/role.seed.ts",
-            "integrity": "sha1:2e16c25e3b7c4f5c31db6c3ff1bbb42f50ab0945"
+            "integrity": "sha1:d46c1518c17729d475ccf352d00d110c0dd1e0af"
         },
         {
             "path": "src/@hades/cci/role/infrastructure/sequelize/sequelize-role.model.ts",
-            "integrity": "sha1:174c7c1ee1a69720f0021e8b978e85d1213a720b"
+            "integrity": "sha1:9f5a325e00b0d9439b5468293085f1650c34bc0d"
         },
         {
             "path": "src/@hades/cci/role/infrastructure/sequelize/sequelize-role.repository.ts",
-            "integrity": "sha1:1f7321526b14e4602dbca284a3478bd772a6ddd5"
+            "integrity": "sha1:7d425082ae3969b0784565a315c15b73d2397944"
         },
         {
             "path": "src/@hades/cci/role/domain/value-objects/role-id.ts",
-            "integrity": "sha1:aba526ff15e10dafd8fea1ef8ec13198875404bb"
+            "integrity": "sha1:c6124b6807b92c50fb2784e8440f8e32963a2e51"
         },
         {
             "path": "src/@hades/cci/role/domain/value-objects/role-tenant-id.ts",
-            "integrity": "sha1:512a303baa0828fa5c887342a7863364c5f044cb"
+            "integrity": "sha1:6b576fd1611dd9a8f7e9aa65571e6bb388ec1b0f"
         },
         {
             "path": "src/@hades/cci/role/domain/value-objects/role-tenant-code.ts",
-            "integrity": "sha1:3659ba0429c7a314446c8b47cef7e060723346ac"
+            "integrity": "sha1:5fdb508d56d0b38b43ee9fb56c616abfc37dfd4b"
         },
         {
             "path": "src/@hades/cci/role/domain/value-objects/role-name.ts",
-            "integrity": "sha1:7f692b13ebaabe65fbdac933a43a085f1794090b"
+            "integrity": "sha1:bb3a3981b17cfa7b563717367a38d5ae26b706d1"
         },
         {
             "path": "src/@hades/cci/role/domain/value-objects/role-created-at.ts",
-            "integrity": "sha1:4d3c77011ef1d2da6ea07c7ab15e0db7deb6b4ca"
+            "integrity": "sha1:bf05d5fe756d2a8a2ea83f778902735acbdbe260"
         },
         {
             "path": "src/@hades/cci/role/domain/value-objects/role-updated-at.ts",
-            "integrity": "sha1:55f7c4dc40d5e5ad685bad5172e85e68ee1a4ab8"
+            "integrity": "sha1:8d962a03605345cc09b6d9d1f0da2e23a946b94a"
         },
         {
             "path": "src/@hades/cci/role/domain/value-objects/role-deleted-at.ts",
-            "integrity": "sha1:83863ca9efdb3f618319cc66136dc86586b5d218"
+            "integrity": "sha1:e94e434097d0f1f05a46cebe5bf3164d71748125"
         },
         {
-            "path": "src/apps/cci/role/controllers/create-role.controller.spec.ts",
-            "integrity": "sha1:2041f4301086b456b9d3b3ead0ec6357f702e3b5"
+            "path": "src/apps/cci/role/controllers/cci-create-role.controller.spec.ts",
+            "integrity": "sha1:ce97f381905991f543cf3e62c8ca8858e85df807"
         },
         {
-            "path": "src/apps/cci/role/controllers/create-role.controller.ts",
-            "integrity": "sha1:91274a9455686e757179063f00b2e745e37acc76"
+            "path": "src/apps/cci/role/controllers/cci-create-role.controller.ts",
+            "integrity": "sha1:a8949911d6aa6c644fa26dbd0dd07e5f0f2d2169"
         },
         {
-            "path": "src/apps/cci/role/controllers/create-roles.controller.spec.ts",
-            "integrity": "sha1:58daf54781d0ae3a67678b2445a0c264a83925d4"
+            "path": "src/apps/cci/role/controllers/cci-create-roles.controller.spec.ts",
+            "integrity": "sha1:38da48f01f126213173103f77862efb4fd3fba4b"
         },
         {
-            "path": "src/apps/cci/role/controllers/create-roles.controller.ts",
-            "integrity": "sha1:80442e7d87afe50e11a915842d8ae804ad89f5f8"
+            "path": "src/apps/cci/role/controllers/cci-create-roles.controller.ts",
+            "integrity": "sha1:a0326de84d28fa9976b9db6233d3aaa6b28ccac9"
         },
         {
-            "path": "src/apps/cci/role/controllers/delete-role-by-id.controller.spec.ts",
-            "integrity": "sha1:7ba437bbc79a194026dc79a7a3dfc8dfeee23d30"
+            "path": "src/apps/cci/role/controllers/cci-delete-role-by-id.controller.spec.ts",
+            "integrity": "sha1:d3510062e1b784629b9aa476d87633c84dee4bdf"
         },
         {
-            "path": "src/apps/cci/role/controllers/delete-role-by-id.controller.ts",
-            "integrity": "sha1:ed3b286cea9a3372aa38f435ad56ad4c2e78fcc3"
+            "path": "src/apps/cci/role/controllers/cci-delete-role-by-id.controller.ts",
+            "integrity": "sha1:8d4a16cca2b1645c72306510e45660bd2f28d2b9"
         },
         {
-            "path": "src/apps/cci/role/controllers/delete-roles.controller.spec.ts",
-            "integrity": "sha1:817626bb784f26bd05d85f7c1b0ddeb37b1d532d"
+            "path": "src/apps/cci/role/controllers/cci-delete-roles.controller.spec.ts",
+            "integrity": "sha1:df0773dfbaeec7629e087c43812d9edf9036e5a4"
         },
         {
-            "path": "src/apps/cci/role/controllers/delete-roles.controller.ts",
-            "integrity": "sha1:367d4de3364c1c31ace3571de98a61e7f5a1bb63"
+            "path": "src/apps/cci/role/controllers/cci-delete-roles.controller.ts",
+            "integrity": "sha1:69cb329ee2250ed9899982ae4c6821d417ad8eb4"
         },
         {
-            "path": "src/apps/cci/role/controllers/find-role-by-id.controller.spec.ts",
-            "integrity": "sha1:3942781afd10e2fffa2c71b8525951d50e679c3d"
+            "path": "src/apps/cci/role/controllers/cci-find-role-by-id.controller.spec.ts",
+            "integrity": "sha1:8b572f79e64bd3baa031f60d6efa799f76028da9"
         },
         {
-            "path": "src/apps/cci/role/controllers/find-role-by-id.controller.ts",
-            "integrity": "sha1:a070c9e269a8c98e2fd37a6346f26977fb134b60"
+            "path": "src/apps/cci/role/controllers/cci-find-role-by-id.controller.ts",
+            "integrity": "sha1:1e40ed115229a8c560861f7038c6a43ab8b641c6"
         },
         {
-            "path": "src/apps/cci/role/controllers/find-role.controller.spec.ts",
-            "integrity": "sha1:ec83650311949823165ae80b9c59c30b1ff05766"
+            "path": "src/apps/cci/role/controllers/cci-find-role.controller.spec.ts",
+            "integrity": "sha1:9068b98286ab80dd4ec038202176214a4352ab1e"
         },
         {
-            "path": "src/apps/cci/role/controllers/find-role.controller.ts",
-            "integrity": "sha1:3b7d7625056c516f22d0a8c54f129b47b6290f26"
+            "path": "src/apps/cci/role/controllers/cci-find-role.controller.ts",
+            "integrity": "sha1:6fd5a2885941d6444919649f48f56cd7115f8d14"
         },
         {
-            "path": "src/apps/cci/role/controllers/get-roles.controller.spec.ts",
-            "integrity": "sha1:b38db78d32c945107c8c2df380a46a9594193c6b"
+            "path": "src/apps/cci/role/controllers/cci-get-roles.controller.spec.ts",
+            "integrity": "sha1:7e26062bc933139a6f09423e9ec3f2575432c846"
         },
         {
-            "path": "src/apps/cci/role/controllers/get-roles.controller.ts",
-            "integrity": "sha1:ea50e3323c08d5b07db55ed14633965211e4d265"
+            "path": "src/apps/cci/role/controllers/cci-get-roles.controller.ts",
+            "integrity": "sha1:b6fa9c044d3606e1bd6a2c1109fa3209330057bb"
         },
         {
-            "path": "src/apps/cci/role/controllers/paginate-roles.controller.spec.ts",
-            "integrity": "sha1:bca5156ee775bcbae8682ba79f33fdc390882329"
+            "path": "src/apps/cci/role/controllers/cci-paginate-roles.controller.spec.ts",
+            "integrity": "sha1:8185065de22db1cae3c4d3dcafc285e50c781885"
         },
         {
-            "path": "src/apps/cci/role/controllers/paginate-roles.controller.ts",
-            "integrity": "sha1:b5fe50e8b8ed9721078bf7ae12ef86ba3184bb57"
+            "path": "src/apps/cci/role/controllers/cci-paginate-roles.controller.ts",
+            "integrity": "sha1:74675d46432af7ee48bf0f780ae78bac0e867a71"
         },
         {
-            "path": "src/apps/cci/role/controllers/update-role.controller.spec.ts",
-            "integrity": "sha1:0c9e5d69aae220fe2533cbe052b9ef6bd66a3fe2"
+            "path": "src/apps/cci/role/controllers/cci-update-role.controller.spec.ts",
+            "integrity": "sha1:11db62d6b3f20581b9c21166e1601afc787abfa9"
         },
         {
-            "path": "src/apps/cci/role/controllers/update-role.controller.ts",
-            "integrity": "sha1:106a70c22eacef2ca1ec53bb3282541dc1024c86"
+            "path": "src/apps/cci/role/controllers/cci-update-role.controller.ts",
+            "integrity": "sha1:96e3ae3b2f6043a2afca99711f7a958fbec0404c"
         },
         {
             "path": "src/apps/cci/role/dto/role.dto.ts",
-            "integrity": "sha1:718ca2ef541b1b701c30e6d86537115655d41592"
+            "integrity": "sha1:e51357d1675a156047a5cff19261d7ffc6485991"
         },
         {
             "path": "src/apps/cci/role/dto/create-role.dto.ts",
-            "integrity": "sha1:002998fa6c3514c02bd4a6e3a75fb958ecdbb139"
+            "integrity": "sha1:4c9a15fb41a4a4e863c8e0b0b9b2d63937cfed8f"
         },
         {
             "path": "src/apps/cci/role/dto/update-role.dto.ts",
-            "integrity": "sha1:0b2d5088fe71c8e657d0618e57eb26c27da3785b"
+            "integrity": "sha1:6e7eb4ce335cd0a25165488276584d481d243858"
         },
         {
             "path": "src/apps/cci/role/graphql/role.graphql",
-            "integrity": "sha1:53889064815d4ecb1227641fef5d04c9cf14c527"
+            "integrity": "sha1:0830e1b1af5fa8ae6c20af1c876e96bda5adbf2f"
         },
         {
             "path": "src/apps/cci/role/index.ts",
-            "integrity": "sha1:b18589133249efd1c70d210c4c75bb166777d4e5"
+            "integrity": "sha1:87dd698fef78a60f966bcdea3cc881452b0d9075"
         },
         {
-            "path": "src/apps/cci/role/resolvers/create-role.resolver.spec.ts",
-            "integrity": "sha1:0683f15afba5271839f0c46bd0dddd9809bf95ac"
+            "path": "src/apps/cci/role/resolvers/cci-create-role.resolver.spec.ts",
+            "integrity": "sha1:5ec4bbe852f27ceeac5b7f8c6eea50283b0e2d5a"
         },
         {
-            "path": "src/apps/cci/role/resolvers/create-role.resolver.ts",
-            "integrity": "sha1:5114363d92be0dd9ec4565f0e0fef3e716720caf"
+            "path": "src/apps/cci/role/resolvers/cci-create-role.resolver.ts",
+            "integrity": "sha1:5e8bef3aa5121931f9879f2acd5dc7db1933d12e"
         },
         {
-            "path": "src/apps/cci/role/resolvers/create-roles.resolver.spec.ts",
-            "integrity": "sha1:6b68174bd1a32502fb99ca3cf06b550c7399617c"
+            "path": "src/apps/cci/role/resolvers/cci-create-roles.resolver.spec.ts",
+            "integrity": "sha1:3a550f59598ae1095b13408e7deee3c716c27e9f"
         },
         {
-            "path": "src/apps/cci/role/resolvers/create-roles.resolver.ts",
-            "integrity": "sha1:ff9a93e148650002b5da8dacc9ad82befc5aa752"
+            "path": "src/apps/cci/role/resolvers/cci-create-roles.resolver.ts",
+            "integrity": "sha1:9513ab3f1d9ce3bfb43b4ec5f6d4f5012693ca51"
         },
         {
-            "path": "src/apps/cci/role/resolvers/delete-role-by-id.resolver.spec.ts",
-            "integrity": "sha1:fc1270bddc73986fbe5cef1a861fd6ab41eb5fad"
+            "path": "src/apps/cci/role/resolvers/cci-delete-role-by-id.resolver.spec.ts",
+            "integrity": "sha1:83abfef4ae02b20fe3cab482baee636a2b36fb7f"
         },
         {
-            "path": "src/apps/cci/role/resolvers/delete-role-by-id.resolver.ts",
-            "integrity": "sha1:e59cc50f4eb81f67a0c2b948b3c999b6cbf450e1"
+            "path": "src/apps/cci/role/resolvers/cci-delete-role-by-id.resolver.ts",
+            "integrity": "sha1:0138033d30d6d3539b9ff534be28e7ca49153710"
         },
         {
-            "path": "src/apps/cci/role/resolvers/delete-roles.resolver.spec.ts",
-            "integrity": "sha1:f40e0865ea7a6d5713b2de298823f059be2b1333"
+            "path": "src/apps/cci/role/resolvers/cci-delete-roles.resolver.spec.ts",
+            "integrity": "sha1:27fb3d6842262ba97fac245de3cd3a1c65ff0afa"
         },
         {
-            "path": "src/apps/cci/role/resolvers/delete-roles.resolver.ts",
-            "integrity": "sha1:1119bc639a1769bb126906743141118359fa13a5"
+            "path": "src/apps/cci/role/resolvers/cci-delete-roles.resolver.ts",
+            "integrity": "sha1:22d38ee89fbc19a32efc337b3149f2eb7df2bb83"
         },
         {
-            "path": "src/apps/cci/role/resolvers/find-role-by-id.resolver.spec.ts",
-            "integrity": "sha1:ea929de27f5647a74f33f4f9bb1dfdf85ba69856"
+            "path": "src/apps/cci/role/resolvers/cci-find-role-by-id.resolver.spec.ts",
+            "integrity": "sha1:2ba2dc75b10de510b28f6cfda5844ea6673794c3"
         },
         {
-            "path": "src/apps/cci/role/resolvers/find-role-by-id.resolver.ts",
-            "integrity": "sha1:59c56b5b446e2e327561dc13476edd3f60cd778c"
+            "path": "src/apps/cci/role/resolvers/cci-find-role-by-id.resolver.ts",
+            "integrity": "sha1:887d614b5f976dc5942426d9e1bf780fa850f5ee"
         },
         {
-            "path": "src/apps/cci/role/resolvers/find-role.resolver.spec.ts",
-            "integrity": "sha1:997d2c1e5ab63f745b2e88ed67256f01be29ff28"
+            "path": "src/apps/cci/role/resolvers/cci-find-role.resolver.spec.ts",
+            "integrity": "sha1:935c819ac72ff0f941194cf0d7ff59b13ff87d9c"
         },
         {
-            "path": "src/apps/cci/role/resolvers/find-role.resolver.ts",
-            "integrity": "sha1:0811082eb403f34326d353d91a3378796faaf4ec"
+            "path": "src/apps/cci/role/resolvers/cci-find-role.resolver.ts",
+            "integrity": "sha1:4e79bb8c3d4bc4fa464172e95610abc3c11aa3cf"
         },
         {
-            "path": "src/apps/cci/role/resolvers/get-roles.resolver.spec.ts",
-            "integrity": "sha1:38c7847428074fa0010dd0c1a532c3743a2c0d3c"
+            "path": "src/apps/cci/role/resolvers/cci-get-roles.resolver.spec.ts",
+            "integrity": "sha1:2639778f02a8ad06ef33bbf2cd36df7c88eec632"
         },
         {
-            "path": "src/apps/cci/role/resolvers/get-roles.resolver.ts",
-            "integrity": "sha1:ca5ce406c4b8e43e530bed256b66842aed5041a6"
+            "path": "src/apps/cci/role/resolvers/cci-get-roles.resolver.ts",
+            "integrity": "sha1:d2ee835e0d5c83ac46504e829a59c01232a1244e"
         },
         {
-            "path": "src/apps/cci/role/resolvers/paginate-roles.resolver.spec.ts",
-            "integrity": "sha1:1b5bf64917212c01643116afce28999c7267f455"
+            "path": "src/apps/cci/role/resolvers/cci-paginate-roles.resolver.spec.ts",
+            "integrity": "sha1:3e3d5458d79cdc377700bb9ffe1bf25635e89007"
         },
         {
-            "path": "src/apps/cci/role/resolvers/paginate-roles.resolver.ts",
-            "integrity": "sha1:cd430099958c777b75a9e3318ecbb90e2650b600"
+            "path": "src/apps/cci/role/resolvers/cci-paginate-roles.resolver.ts",
+            "integrity": "sha1:0aa4e273c0522e248f9fa7cc49033fdc3feacac6"
         },
         {
-            "path": "src/apps/cci/role/resolvers/update-role.resolver.spec.ts",
-            "integrity": "sha1:5e07d00a6df76500732e4594ebae3b161eccdb47"
+            "path": "src/apps/cci/role/resolvers/cci-update-role.resolver.spec.ts",
+            "integrity": "sha1:3d1fec62beb0330f36dbc9f4e3f62e230812404b"
         },
         {
-            "path": "src/apps/cci/role/resolvers/update-role.resolver.ts",
-            "integrity": "sha1:202c975d9b2ceaa8174bf38439e46d98bec9ed9b"
+            "path": "src/apps/cci/role/resolvers/cci-update-role.resolver.ts",
+            "integrity": "sha1:8c9a3402d22390f956f8bef1c173a6b2310ece59"
         },
         {
             "path": "src/apps/cci/role/seeder/seeder.module.ts",
@@ -467,11 +467,11 @@
         },
         {
             "path": "src/apps/cci/role/seeder/seeder.ts",
-            "integrity": "sha1:76ab3ed713ecaeec6f1a7bd62655bbf4d3a996dd"
+            "integrity": "sha1:add740ffc05475c0269ee88e1755243b1e6eee58"
         },
         {
             "path": "postman/cci.role.postman.json",
-            "integrity": "sha1:4ae9406b455f9f981c1aead049f3e2c5eb8475e5"
+            "integrity": "sha1:fcf3eb12d01064202c49b7e961186f40df6dcf21"
         }
     ]
 }

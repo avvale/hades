@@ -10,11 +10,11 @@ export class GetMessagesOverviewQueryHandler implements IQueryHandler<GetMessage
     private readonly mapper: MessageOverviewMapper = new MessageOverviewMapper();
 
     constructor(
-        private readonly getMessagesOverviewService: GetMessagesOverviewService
-    ) { }
+        private readonly getMessagesOverviewService: GetMessagesOverviewService,
+    ) {}
 
     async execute(query: GetMessagesOverviewQuery): Promise<MessageOverviewResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getMessagesOverviewService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getMessagesOverviewService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

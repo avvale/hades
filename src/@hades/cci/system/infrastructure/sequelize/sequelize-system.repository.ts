@@ -13,13 +13,13 @@ export class SequelizeSystemRepository extends SequelizeRepository<CciSystem, Cc
 {
     public readonly aggregateName: string = 'CciSystem';
     public readonly mapper: SystemMapper = new SystemMapper();
+    public readonly timezoneColumns: string[] = ['cancelledAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciSystemModel)
         public readonly repository: typeof CciSystemModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
-    
 }

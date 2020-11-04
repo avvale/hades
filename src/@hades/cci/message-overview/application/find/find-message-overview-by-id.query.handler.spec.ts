@@ -16,7 +16,7 @@ describe('FindMessageOverviewByIdQueryHandler', () =>
     let repository: MockMessageOverviewRepository;
     let mapper: MessageOverviewMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindMessageOverviewByIdQueryHandler', () =>
         mapper          = new MessageOverviewMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindMessageOverviewByIdQueryHandler should be defined', () => 
+        test('FindMessageOverviewByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

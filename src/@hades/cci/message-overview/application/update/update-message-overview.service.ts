@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+import {
     MessageOverviewId,
     MessageOverviewTenantId,
     MessageOverviewTenantCode,
@@ -23,8 +24,7 @@ import {
     MessageOverviewWaiting,
     MessageOverviewCreatedAt,
     MessageOverviewUpdatedAt,
-    MessageOverviewDeletedAt
-    
+    MessageOverviewDeletedAt,
 } from './../../domain/value-objects';
 import { IMessageOverviewRepository } from './../../domain/message-overview.repository';
 import { CciMessageOverview } from './../../domain/message-overview.aggregate';
@@ -34,66 +34,69 @@ export class UpdateMessageOverviewService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IMessageOverviewRepository
+        private readonly repository: IMessageOverviewRepository,
     ) {}
 
     public async main(
-        id: MessageOverviewId,
-        tenantId?: MessageOverviewTenantId,
-        tenantCode?: MessageOverviewTenantCode,
-        systemId?: MessageOverviewSystemId,
-        systemName?: MessageOverviewSystemName,
-        executionId?: MessageOverviewExecutionId,
-        executionType?: MessageOverviewExecutionType,
-        executionExecutedAt?: MessageOverviewExecutionExecutedAt,
-        executionMonitoringStartAt?: MessageOverviewExecutionMonitoringStartAt,
-        executionMonitoringEndAt?: MessageOverviewExecutionMonitoringEndAt,
-        numberMax?: MessageOverviewNumberMax,
-        numberDays?: MessageOverviewNumberDays,
-        success?: MessageOverviewSuccess,
-        cancelled?: MessageOverviewCancelled,
-        delivering?: MessageOverviewDelivering,
-        error?: MessageOverviewError,
-        holding?: MessageOverviewHolding,
-        toBeDelivered?: MessageOverviewToBeDelivered,
-        waiting?: MessageOverviewWaiting,
-        
+        payload: {
+            id: MessageOverviewId,
+            tenantId?: MessageOverviewTenantId,
+            tenantCode?: MessageOverviewTenantCode,
+            systemId?: MessageOverviewSystemId,
+            systemName?: MessageOverviewSystemName,
+            executionId?: MessageOverviewExecutionId,
+            executionType?: MessageOverviewExecutionType,
+            executionExecutedAt?: MessageOverviewExecutionExecutedAt,
+            executionMonitoringStartAt?: MessageOverviewExecutionMonitoringStartAt,
+            executionMonitoringEndAt?: MessageOverviewExecutionMonitoringEndAt,
+            numberMax?: MessageOverviewNumberMax,
+            numberDays?: MessageOverviewNumberDays,
+            success?: MessageOverviewSuccess,
+            cancelled?: MessageOverviewCancelled,
+            delivering?: MessageOverviewDelivering,
+            error?: MessageOverviewError,
+            holding?: MessageOverviewHolding,
+            toBeDelivered?: MessageOverviewToBeDelivered,
+            waiting?: MessageOverviewWaiting,
+        },
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
     ): Promise<void>
-    {        
+    {
         // create aggregate with factory pattern
         const messageOverview = CciMessageOverview.register(
-            id,
-            tenantId,
-            tenantCode,
-            systemId,
-            systemName,
-            executionId,
-            executionType,
-            executionExecutedAt,
-            executionMonitoringStartAt,
-            executionMonitoringEndAt,
-            numberMax,
-            numberDays,
-            success,
-            cancelled,
-            delivering,
-            error,
-            holding,
-            toBeDelivered,
-            waiting,
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.systemId,
+            payload.systemName,
+            payload.executionId,
+            payload.executionType,
+            payload.executionExecutedAt,
+            payload.executionMonitoringStartAt,
+            payload.executionMonitoringEndAt,
+            payload.numberMax,
+            payload.numberDays,
+            payload.success,
+            payload.cancelled,
+            payload.delivering,
+            payload.error,
+            payload.holding,
+            payload.toBeDelivered,
+            payload.waiting,
             null,
-            new MessageOverviewUpdatedAt(Utils.nowTimestamp()),
+            new MessageOverviewUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // update
-        await this.repository.update(messageOverview);        
-            
+        await this.repository.update(messageOverview, constraint, cQMetadata);
+
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const messageOverviewRegister = this.publisher.mergeObjectContext(
             messageOverview
         );
-        
+
         messageOverviewRegister.updated(messageOverview); // apply event to model events
         messageOverviewRegister.commit(); // commit all events of model
     }

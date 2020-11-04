@@ -41,7 +41,6 @@ describe('DeleteSystemByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteSystemByIdCommand(
                     systems[0].id,
-                
                 )
             )).toBe(undefined);
         });

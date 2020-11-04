@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     SystemId,
     SystemTenantId,
     SystemTenantCode,
@@ -11,8 +11,7 @@ import {
     SystemCancelledAt,
     SystemCreatedAt,
     SystemUpdatedAt,
-    SystemDeletedAt
-    
+    SystemDeletedAt,
 } from './value-objects';
 import { CreatedSystemEvent } from './../application/events/created-system.event';
 import { UpdatedSystemEvent } from './../application/events/updated-system.event';
@@ -47,7 +46,7 @@ export class CciSystem extends AggregateRoot
     constructor(id?: SystemId, tenantId?: SystemTenantId, tenantCode?: SystemTenantCode, version?: SystemVersion, name?: SystemName, environment?: SystemEnvironment, technology?: SystemTechnology, isActive?: SystemIsActive, cancelledAt?: SystemCancelledAt, createdAt?: SystemCreatedAt, updatedAt?: SystemUpdatedAt, deletedAt?: SystemDeletedAt, tenant?: IamTenant, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;

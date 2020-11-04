@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     ModuleId,
     ModuleTenantId,
     ModuleTenantCode,
@@ -23,8 +23,7 @@ import {
     ModuleParameterValue,
     ModuleCreatedAt,
     ModuleUpdatedAt,
-    ModuleDeletedAt
-    
+    ModuleDeletedAt,
 } from './value-objects';
 import { CreatedModuleEvent } from './../application/events/created-module.event';
 import { UpdatedModuleEvent } from './../application/events/updated-module.event';
@@ -73,7 +72,7 @@ export class CciModule extends AggregateRoot
     constructor(id?: ModuleId, tenantId?: ModuleTenantId, tenantCode?: ModuleTenantCode, systemId?: ModuleSystemId, systemName?: ModuleSystemName, channelHash?: ModuleChannelHash, channelParty?: ModuleChannelParty, channelComponent?: ModuleChannelComponent, channelName?: ModuleChannelName, flowHash?: ModuleFlowHash, flowParty?: ModuleFlowParty, flowReceiverParty?: ModuleFlowReceiverParty, flowComponent?: ModuleFlowComponent, flowReceiverComponent?: ModuleFlowReceiverComponent, flowInterfaceName?: ModuleFlowInterfaceName, flowInterfaceNamespace?: ModuleFlowInterfaceNamespace, version?: ModuleVersion, parameterGroup?: ModuleParameterGroup, name?: ModuleName, parameterName?: ModuleParameterName, parameterValue?: ModuleParameterValue, createdAt?: ModuleCreatedAt, updatedAt?: ModuleUpdatedAt, deletedAt?: ModuleDeletedAt, tenant?: IamTenant, system?: CciSystem, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;

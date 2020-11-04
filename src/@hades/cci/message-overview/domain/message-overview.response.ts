@@ -5,7 +5,7 @@ import { ExecutionResponse } from '@hades/cci/execution/domain/execution.respons
 
 
 
-export class MessageOverviewResponse 
+export class MessageOverviewResponse
 {
     constructor(
         public readonly id: string,
@@ -30,7 +30,6 @@ export class MessageOverviewResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        
         
         
         public readonly tenant: TenantResponse,

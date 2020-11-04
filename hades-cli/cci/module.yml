@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: module
 moduleNames: modules
+aggregateName: CciModule
 hasOAuth: true
 hasTenant: true
 aggregateProperties:

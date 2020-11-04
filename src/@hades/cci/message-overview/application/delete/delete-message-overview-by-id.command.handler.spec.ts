@@ -41,7 +41,6 @@ describe('DeleteMessageOverviewByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteMessageOverviewByIdCommand(
                     messagesOverview[0].id,
-                
                 )
             )).toBe(undefined);
         });

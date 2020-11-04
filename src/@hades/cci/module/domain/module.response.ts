@@ -4,7 +4,7 @@ import { SystemResponse } from '@hades/cci/system/domain/system.response';
 
 
 
-export class ModuleResponse 
+export class ModuleResponse
 {
     constructor(
         public readonly id: string,
@@ -31,7 +31,6 @@ export class ModuleResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        
         
         
         public readonly tenant: TenantResponse,

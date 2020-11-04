@@ -41,7 +41,6 @@ describe('DeleteModuleByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteModuleByIdCommand(
                     modules[0].id,
-                
                 )
             )).toBe(undefined);
         });

@@ -4,7 +4,7 @@ import { CreateMessagesOverviewCommand } from '@hades/cci/message-overview/appli
 import { SeederModule } from './seeder.module';
 import { messagesOverview } from '@hades/cci/message-overview/infrastructure/seeds/message-overview.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

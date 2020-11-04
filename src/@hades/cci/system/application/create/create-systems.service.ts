@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     SystemId,
     SystemTenantId,
     SystemTenantCode,
@@ -13,8 +12,7 @@ import {
     SystemCancelledAt,
     SystemCreatedAt,
     SystemUpdatedAt,
-    SystemDeletedAt
-    
+    SystemDeletedAt,
 } from './../../domain/value-objects';
 import { ISystemRepository } from './../../domain/system.repository';
 import { CciSystem } from './../../domain/system.aggregate';
@@ -25,7 +23,7 @@ export class CreateSystemsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: ISystemRepository
+        private readonly repository: ISystemRepository,
     ) {}
 
     public async main(
@@ -39,7 +37,6 @@ export class CreateSystemsService
             technology: SystemTechnology,
             isActive: SystemIsActive,
             cancelledAt: SystemCancelledAt,
-            
         } []
     ): Promise<void>
     {
@@ -54,18 +51,18 @@ export class CreateSystemsService
             system.technology,
             system.isActive,
             system.cancelledAt,
-            new SystemCreatedAt(Utils.nowTimestamp()),
-            new SystemUpdatedAt(Utils.nowTimestamp()),
+            new SystemCreatedAt({currentTimestamp: true}),
+            new SystemUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateSystems);
 
         // create AddSystemsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const systemsRegistered = this.publisher.mergeObjectContext(new AddSystemsContextEvent(aggregateSystems));
- 
+
         systemsRegistered.created(); // apply event to model events
         systemsRegistered.commit(); // commit all events of model
     }

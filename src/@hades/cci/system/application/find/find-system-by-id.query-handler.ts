@@ -11,12 +11,16 @@ export class FindSystemByIdQueryHandler implements IQueryHandler<FindSystemByIdQ
     private readonly mapper: SystemMapper = new SystemMapper();
 
     constructor(
-        private readonly findSystemByIdService: FindSystemByIdService
-    ) { }
+        private readonly findSystemByIdService: FindSystemByIdService,
+    ) {}
 
     async execute(query: FindSystemByIdQuery): Promise<SystemResponse>
     {
-        const system = await this.findSystemByIdService.main(new SystemId(query.id));
+        const system = await this.findSystemByIdService.main(
+            new SystemId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(system);
     }

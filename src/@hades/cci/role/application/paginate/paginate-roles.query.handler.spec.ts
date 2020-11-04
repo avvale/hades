@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginateRolesQuery } from './paginate-roles.query';
 import { PaginateRolesService } from './paginate-roles.service';
 
-describe('PaginateRolesQueryHandler', () => 
+describe('PaginateRolesQueryHandler', () =>
 {
     let queryHandler: PaginateRolesQueryHandler;
     let service: PaginateRolesService;
     let repository: MockRoleRepository;
     let mapper: RoleMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

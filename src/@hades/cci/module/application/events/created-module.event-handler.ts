@@ -4,7 +4,7 @@ import { CreatedModuleEvent } from './created-module.event';
 @EventsHandler(CreatedModuleEvent)
 export class CreatedModuleEventHandler implements IEventHandler<CreatedModuleEvent>
 {
-    handle(event: CreatedModuleEvent) 
+    handle(event: CreatedModuleEvent)
     {
         // console.log('CreatedModuleEvent: ', event);
     }

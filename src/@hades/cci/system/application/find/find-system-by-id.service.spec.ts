@@ -8,13 +8,13 @@ import { SystemId } from './../../domain/value-objects';
 import { ISystemRepository } from './../../domain/system.repository';
 import { MockSystemRepository } from './../../infrastructure/mock/mock-system.repository';
 
-describe('FindSystemByIdService', () => 
+describe('FindSystemByIdService', () =>
 {
     let service: FindSystemByIdService;
     let repository: ISystemRepository;
     let mockRepository: MockSystemRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindSystemByIdService', () =>
                 EventPublisher,
                 FindSystemByIdService,
                 MockSystemRepository,
-                { 
+                {
                     provide: ISystemRepository,
                     useValue: {
                         findById: (id) => {}

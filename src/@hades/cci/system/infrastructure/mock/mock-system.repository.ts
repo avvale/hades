@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { ISystemRepository } from '@hades/cci/system/domain/system.repository';
-import { 
+import {
     SystemId,
     SystemTenantId,
     SystemTenantCode,
@@ -14,8 +14,7 @@ import {
     SystemCancelledAt,
     SystemCreatedAt,
     SystemUpdatedAt,
-    SystemDeletedAt
-    
+    SystemDeletedAt,
 } from '@hades/cci/system/domain/value-objects';
 import { CciSystem } from './../../domain/system.aggregate';
 import { systems } from './../seeds/system.seed';
@@ -27,14 +26,14 @@ export class MockSystemRepository extends MockRepository<CciSystem> implements I
     public readonly aggregateName: string = 'CciSystem';
     public collectionSource: CciSystem[];
     public deletedAtInstance: SystemDeletedAt = new SystemDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -49,7 +48,7 @@ export class MockSystemRepository extends MockRepository<CciSystem> implements I
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciSystem.register(
                     new SystemId(itemCollection.id),
                     new SystemTenantId(itemCollection.tenantId),
@@ -63,7 +62,7 @@ export class MockSystemRepository extends MockRepository<CciSystem> implements I
                     new SystemCreatedAt(itemCollection.createdAt),
                     new SystemUpdatedAt(itemCollection.updatedAt),
                     new SystemDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

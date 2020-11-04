@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IModuleRepository } from '@hades/cci/module/domain/module.repository';
-import { 
+import {
     ModuleId,
     ModuleTenantId,
     ModuleTenantCode,
@@ -26,8 +26,7 @@ import {
     ModuleParameterValue,
     ModuleCreatedAt,
     ModuleUpdatedAt,
-    ModuleDeletedAt
-    
+    ModuleDeletedAt,
 } from '@hades/cci/module/domain/value-objects';
 import { CciModule } from './../../domain/module.aggregate';
 import { modules } from './../seeds/module.seed';
@@ -39,14 +38,14 @@ export class MockModuleRepository extends MockRepository<CciModule> implements I
     public readonly aggregateName: string = 'CciModule';
     public collectionSource: CciModule[];
     public deletedAtInstance: ModuleDeletedAt = new ModuleDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -61,7 +60,7 @@ export class MockModuleRepository extends MockRepository<CciModule> implements I
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciModule.register(
                     new ModuleId(itemCollection.id),
                     new ModuleTenantId(itemCollection.tenantId),
@@ -87,7 +86,7 @@ export class MockModuleRepository extends MockRepository<CciModule> implements I
                     new ModuleCreatedAt(itemCollection.createdAt),
                     new ModuleUpdatedAt(itemCollection.updatedAt),
                     new ModuleDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

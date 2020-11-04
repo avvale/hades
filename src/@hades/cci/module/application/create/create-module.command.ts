@@ -1,27 +1,31 @@
-export class CreateModuleCommand 
-{   
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class CreateModuleCommand
+{
     constructor(
-        public readonly id: string,
-        public readonly tenantId: string,
-        public readonly tenantCode: string,
-        public readonly systemId: string,
-        public readonly systemName: string,
-        public readonly channelHash: string,
-        public readonly channelParty: string,
-        public readonly channelComponent: string,
-        public readonly channelName: string,
-        public readonly flowHash: string,
-        public readonly flowParty: string,
-        public readonly flowReceiverParty: string,
-        public readonly flowComponent: string,
-        public readonly flowReceiverComponent: string,
-        public readonly flowInterfaceName: string,
-        public readonly flowInterfaceNamespace: string,
-        public readonly version: string,
-        public readonly parameterGroup: string,
-        public readonly name: string,
-        public readonly parameterName: string,
-        public readonly parameterValue: string,
-        
+        public readonly payload: {
+            id: string,
+            tenantId: string,
+            tenantCode: string,
+            systemId: string,
+            systemName: string,
+            channelHash: string,
+            channelParty?: string,
+            channelComponent: string,
+            channelName: string,
+            flowHash?: string,
+            flowParty?: string,
+            flowReceiverParty?: string,
+            flowComponent?: string,
+            flowReceiverComponent?: string,
+            flowInterfaceName?: string,
+            flowInterfaceNamespace?: string,
+            version: string,
+            parameterGroup?: string,
+            name?: string,
+            parameterName?: string,
+            parameterValue?: string,
+        },
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

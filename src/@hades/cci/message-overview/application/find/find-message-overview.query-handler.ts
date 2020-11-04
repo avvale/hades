@@ -10,12 +10,16 @@ export class FindMessageOverviewQueryHandler implements IQueryHandler<FindMessag
     private readonly mapper: MessageOverviewMapper = new MessageOverviewMapper();
 
     constructor(
-        private readonly findMessageOverviewService: FindMessageOverviewService
-    ) { }
+        private readonly findMessageOverviewService: FindMessageOverviewService,
+    ) {}
 
     async execute(query: FindMessageOverviewQuery): Promise<MessageOverviewResponse>
     {
-        const messageOverview = await this.findMessageOverviewService.main(query.queryStatement);
+        const messageOverview = await this.findMessageOverviewService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(messageOverview);
     }

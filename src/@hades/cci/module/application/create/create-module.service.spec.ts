@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { modules } from '@hades/cci/module/infrastructure/seeds/module.seed';
 import { CreateModuleService } from './create-module.service';
-import { 
+import {
     ModuleId,
     ModuleTenantId,
     ModuleTenantCode,
@@ -25,19 +25,22 @@ import {
     ModuleParameterGroup,
     ModuleName,
     ModuleParameterName,
-    ModuleParameterValue
-    
+    ModuleParameterValue,
+    ModuleCreatedAt,
+    ModuleUpdatedAt,
+    ModuleDeletedAt,
 } from './../../domain/value-objects';
 import { IModuleRepository } from './../../domain/module.repository';
 import { MockModuleRepository } from './../../infrastructure/mock/mock-module.repository';
 
-describe('CreateModuleService', () => 
+describe('CreateModuleService', () =>
+
 {
     let service: CreateModuleService;
     let repository: IModuleRepository;
     let mockRepository: MockModuleRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -46,7 +49,7 @@ describe('CreateModuleService', () =>
                 EventPublisher,
                 CreateModuleService,
                 MockModuleRepository,
-                { 
+                {
                     provide: IModuleRepository,
                     useValue: {
                         create: (item) => {}
@@ -60,14 +63,14 @@ describe('CreateModuleService', () =>
         mockRepository  = module.get(MockModuleRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateModuleService should be defined', () => 
+        test('CreateModuleService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a module and emit event', async () => 
+        test('should create a module and emit event', async () =>
         {
             expect(await service.main(
                 new ModuleId(modules[0].id),

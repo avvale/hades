@@ -1,45 +1,45 @@
 // controllers
-import { CreateModuleController } from './controllers/create-module.controller';
-import { CreateModulesController } from './controllers/create-modules.controller';
-import { PaginateModulesController } from './controllers/paginate-modules.controller';
-import { GetModulesController } from './controllers/get-modules.controller';
-import { FindModuleByIdController } from './controllers/find-module-by-id.controller';
-import { FindModuleController } from './controllers/find-module.controller';
-import { UpdateModuleController } from './controllers/update-module.controller';
-import { DeleteModuleByIdController } from './controllers/delete-module-by-id.controller';
-import { DeleteModulesController } from './controllers/delete-modules.controller';
+import { CciCreateModuleController } from './controllers/cci-create-module.controller';
+import { CciCreateModulesController } from './controllers/cci-create-modules.controller';
+import { CciPaginateModulesController } from './controllers/cci-paginate-modules.controller';
+import { CciGetModulesController } from './controllers/cci-get-modules.controller';
+import { CciFindModuleByIdController } from './controllers/cci-find-module-by-id.controller';
+import { CciFindModuleController } from './controllers/cci-find-module.controller';
+import { CciUpdateModuleController } from './controllers/cci-update-module.controller';
+import { CciDeleteModuleByIdController } from './controllers/cci-delete-module-by-id.controller';
+import { CciDeleteModulesController } from './controllers/cci-delete-modules.controller';
 
 // resolvers
-import { CreateModuleResolver } from './resolvers/create-module.resolver';
-import { CreateModulesResolver } from './resolvers/create-modules.resolver';
-import { PaginateModulesResolver } from './resolvers/paginate-modules.resolver';
-import { GetModulesResolver } from './resolvers/get-modules.resolver';
-import { FindModuleResolver } from './resolvers/find-module.resolver';
-import { FindModuleByIdResolver } from './resolvers/find-module-by-id.resolver';
-import { UpdateModuleResolver } from './resolvers/update-module.resolver';
-import { DeleteModuleByIdResolver } from './resolvers/delete-module-by-id.resolver';
-import { DeleteModulesResolver } from './resolvers/delete-modules.resolver';
+import { CciCreateModuleResolver } from './resolvers/cci-create-module.resolver';
+import { CciCreateModulesResolver } from './resolvers/cci-create-modules.resolver';
+import { CciPaginateModulesResolver } from './resolvers/cci-paginate-modules.resolver';
+import { CciGetModulesResolver } from './resolvers/cci-get-modules.resolver';
+import { CciFindModuleResolver } from './resolvers/cci-find-module.resolver';
+import { CciFindModuleByIdResolver } from './resolvers/cci-find-module-by-id.resolver';
+import { CciUpdateModuleResolver } from './resolvers/cci-update-module.resolver';
+import { CciDeleteModuleByIdResolver } from './resolvers/cci-delete-module-by-id.resolver';
+import { CciDeleteModulesResolver } from './resolvers/cci-delete-modules.resolver';
 
 export const CciModuleControllers = [
-    CreateModuleController,
-    CreateModulesController,
-    PaginateModulesController,
-    GetModulesController,
-    FindModuleByIdController,
-    FindModuleController,
-    UpdateModuleController,
-    DeleteModuleByIdController,
-    DeleteModulesController,
+    CciCreateModuleController,
+    CciCreateModulesController,
+    CciPaginateModulesController,
+    CciGetModulesController,
+    CciFindModuleByIdController,
+    CciFindModuleController,
+    CciUpdateModuleController,
+    CciDeleteModuleByIdController,
+    CciDeleteModulesController,
 ];
 
 export const CciModuleResolvers = [
-    CreateModuleResolver,
-    CreateModulesResolver,
-    PaginateModulesResolver,
-    GetModulesResolver,
-    FindModuleResolver,
-    FindModuleByIdResolver,
-    UpdateModuleResolver,
-    DeleteModuleByIdResolver,
-    DeleteModulesResolver,
+    CciCreateModuleResolver,
+    CciCreateModulesResolver,
+    CciPaginateModulesResolver,
+    CciGetModulesResolver,
+    CciFindModuleResolver,
+    CciFindModuleByIdResolver,
+    CciUpdateModuleResolver,
+    CciDeleteModuleByIdResolver,
+    CciDeleteModulesResolver,
 ];
