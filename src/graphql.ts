@@ -961,9 +961,9 @@ export interface IQuery {
     cciGetContacts(query?: QueryStatement): CciContact[] | Promise<CciContact[]>;
     cciPaginateContacts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindDashboard(): CciDashboard | Promise<CciDashboard>;
-    cciFindDataLake(query?: QueryStatement): CciDataLake | Promise<CciDataLake>;
-    cciFindDataLakeById(id?: string): CciDataLake | Promise<CciDataLake>;
-    cciGetDataLakes(query?: QueryStatement): CciDataLake[] | Promise<CciDataLake[]>;
+    cciFindDataLake(query?: QueryStatement, constraint?: QueryStatement): CciDataLake | Promise<CciDataLake>;
+    cciFindDataLakeById(id?: string, constraint?: QueryStatement): CciDataLake | Promise<CciDataLake>;
+    cciGetDataLakes(query?: QueryStatement, constraint?: QueryStatement): CciDataLake[] | Promise<CciDataLake[]>;
     cciPaginateDataLakes(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindExecution(query?: QueryStatement, constraint?: QueryStatement): CciExecution | Promise<CciExecution>;
     cciFindExecutionById(id?: string, constraint?: QueryStatement): CciExecution | Promise<CciExecution>;
@@ -1073,9 +1073,9 @@ export interface IMutation {
     cciDeleteContacts(query?: QueryStatement): CciContact[] | Promise<CciContact[]>;
     cciCreateDataLake(payload: CciCreateDataLakeInput): CciDataLake | Promise<CciDataLake>;
     cciCreateDataLakes(payload: CciCreateDataLakeInput[]): boolean | Promise<boolean>;
-    cciUpdateDataLake(payload: CciUpdateDataLakeInput): CciDataLake | Promise<CciDataLake>;
-    cciDeleteDataLakeById(id: string): CciDataLake | Promise<CciDataLake>;
-    cciDeleteDataLakes(query?: QueryStatement): CciDataLake[] | Promise<CciDataLake[]>;
+    cciUpdateDataLake(payload: CciUpdateDataLakeInput, constraint?: QueryStatement): CciDataLake | Promise<CciDataLake>;
+    cciDeleteDataLakeById(id: string, constraint?: QueryStatement): CciDataLake | Promise<CciDataLake>;
+    cciDeleteDataLakes(query?: QueryStatement, constraint?: QueryStatement): CciDataLake[] | Promise<CciDataLake[]>;
     cciCreateExecution(payload: CciCreateExecutionInput): CciExecution | Promise<CciExecution>;
     cciCreateExecutions(payload: CciCreateExecutionInput[]): boolean | Promise<boolean>;
     cciUpdateExecution(payload: CciUpdateExecutionInput, constraint?: QueryStatement): CciExecution | Promise<CciExecution>;
@@ -1296,7 +1296,9 @@ export interface CciDashboard {
 
 export interface CciDataLake {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
+    executionId: string;
     execution: CciExecution;
     tenantCode: GraphQLString;
     payload: JSON;
