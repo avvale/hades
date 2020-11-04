@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { dataLakes } from '@hades/cci/data-lake/infrastructure/seeds/data-lake.seed';
 import { UpdateDataLakeService } from './update-data-lake.service';
-import { 
+import {
     DataLakeId,
     DataLakeTenantId,
     DataLakeExecutionId,
@@ -12,19 +12,18 @@ import {
     DataLakePayload,
     DataLakeCreatedAt,
     DataLakeUpdatedAt,
-    DataLakeDeletedAt
-    
+    DataLakeDeletedAt,
 } from './../../domain/value-objects';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { MockDataLakeRepository } from './../../infrastructure/mock/mock-data-lake.repository';
 
-describe('UpdateDataLakeService', () => 
+describe('UpdateDataLakeService', () =>
 {
     let service: UpdateDataLakeService;
     let repository: IDataLakeRepository;
     let mockRepository: MockDataLakeRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,7 +32,7 @@ describe('UpdateDataLakeService', () =>
                 EventPublisher,
                 UpdateDataLakeService,
                 MockDataLakeRepository,
-                { 
+                {
                     provide: IDataLakeRepository,
                     useValue: {
                         update: (item) => {}
@@ -47,7 +46,7 @@ describe('UpdateDataLakeService', () =>
         mockRepository  = module.get(MockDataLakeRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateDataLakeService should be defined', () => 
         {

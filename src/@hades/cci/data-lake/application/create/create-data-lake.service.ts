@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     DataLakeId,
     DataLakeTenantId,
     DataLakeExecutionId,
@@ -9,8 +8,7 @@ import {
     DataLakePayload,
     DataLakeCreatedAt,
     DataLakeUpdatedAt,
-    DataLakeDeletedAt
-    
+    DataLakeDeletedAt,
 } from './../../domain/value-objects';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { CciDataLake } from './../../domain/data-lake.aggregate';
@@ -20,30 +18,31 @@ export class CreateDataLakeService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IDataLakeRepository
+        private readonly repository: IDataLakeRepository,
     ) {}
 
     public async main(
-        id: DataLakeId,
-        tenantId: DataLakeTenantId,
-        executionId: DataLakeExecutionId,
-        tenantCode: DataLakeTenantCode,
-        payload: DataLakePayload,
-        
+        payload: {
+            id: DataLakeId,
+            tenantId: DataLakeTenantId,
+            executionId: DataLakeExecutionId,
+            tenantCode: DataLakeTenantCode,
+            payload: DataLakePayload,
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const dataLake = CciDataLake.register(
-            id,
-            tenantId,
-            executionId,
-            tenantCode,
-            payload,
-            new DataLakeCreatedAt(Utils.nowTimestamp()),
-            new DataLakeUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.tenantId,
+            payload.executionId,
+            payload.tenantCode,
+            payload.payload,
+            new DataLakeCreatedAt({currentTimestamp: true}),
+            new DataLakeUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // create
         await this.repository.create(dataLake);
 
@@ -51,7 +50,7 @@ export class CreateDataLakeService
         const dataLakeRegister = this.publisher.mergeObjectContext(
             dataLake
         );
-        
+
         dataLakeRegister.created(dataLake); // apply event to model events
         dataLakeRegister.commit(); // commit all events of model
     }

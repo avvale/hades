@@ -76,11 +76,14 @@ export class CreateSnapshotController
         }));
 
         await this.commandBus.dispatch(new CreateDataLakeCommand(
-            Utils.uuid(),
-            tenant.id,
-            executionId,
-            tenant.code,
-            payload
+            {
+                id: Utils.uuid(),
+                tenantId: tenant.id,
+                executionId: executionId,
+                tenantCode: tenant.code,
+                payload: payload
+            },
+            { timezone }
         ))
 
         const messageOverviewId = Utils.uuid();

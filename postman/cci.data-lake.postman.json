@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "17b7430f-f5c4-4db6-8ec0-e7304a62b574",
+		"name"          : "@hades - cci/data-lake",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - cciCreateDataLake",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciCreateDataLakeInput!)\n{\n\tcciCreateDataLake (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"18bf6be6-7f85-48ce-9215-ce15011a7d41\", \n\t\t\"tenantId\": \"1e2f633b-610d-43a5-b5db-9fc5e6340409\", \n\t\t\"executionId\": \"5c35f8c8-1ee1-464f-89ba-42195e66dd38\", \n\t\t\"tenantCode\": \"12xaqr9xduk6juv275nla4o17vcjq9f1r3ihg0tkuhpexqx0w3\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciCreateDataLakes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[CciCreateDataLakeInput]!)\n{\n\tcciCreateDataLakes (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"46176ca2-30ea-483b-aef0-53d397e9f3b7\", \n\t\t\t\"tenantId\": \"31ffd250-af9e-4276-aa26-a73df9469477\", \n\t\t\t\"executionId\": \"0465f110-552c-45ed-856b-be0913f47f87\", \n\t\t\t\"tenantCode\": \"pkf4iehhj4fn1e32oj5a0u63l0nl7p0adrnybfk47a5xoircax\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d08b92ee-e426-4522-a89f-f556c319c979\", \n\t\t\t\"tenantId\": \"37d2d38e-bf88-4405-ac05-4d315376b47a\", \n\t\t\t\"executionId\": \"09b8296d-f43f-431d-9db4-acca2ded05f1\", \n\t\t\t\"tenantCode\": \"6uqemlr4lucvpsolgl1hilngecgme58pccfuvpffamk2gxdxhw\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"51aceae3-73f0-449f-853b-502ae78e931d\", \n\t\t\t\"tenantId\": \"c859b791-e4db-4608-98c4-11759269749e\", \n\t\t\t\"executionId\": \"666d432a-67bc-4787-9eff-976fef5907aa\", \n\t\t\t\"tenantCode\": \"2rko15wu5k60xl7zjcktpd4pjqogzxf20i6me3oe341iw3z28m\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"74d80178-8af4-43ce-b7b5-63bef20474c4\", \n\t\t\t\"tenantId\": \"5b7d0ebb-e359-4cf9-86ae-49fc79aae397\", \n\t\t\t\"executionId\": \"53f3a3d4-887d-4eb8-bb54-452b82e741d4\", \n\t\t\t\"tenantCode\": \"xrhgkguzsd756lh3ixjgk07f2eqif41w3faoj2emf6syme0y67\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"af0434bc-d99f-4f5a-a8fa-ca8aaa02bf96\", \n\t\t\t\"tenantId\": \"82230fcf-477c-469a-8b5a-e19c6cc2a47e\", \n\t\t\t\"executionId\": \"2b5a570a-0a22-47f4-8d0d-94acda7badd1\", \n\t\t\t\"tenantCode\": \"ul2yc8qb9xg5bnhrdorfuiqorxzdo553u511dtv81at6w6wbjr\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"96aecccc-7184-4b8b-8519-0a7c7ec7adb9\", \n\t\t\t\"tenantId\": \"a26b1379-2eac-4e03-92f3-caf260cc3fa2\", \n\t\t\t\"executionId\": \"fa110add-c1f3-4d32-8aee-ae685696edc0\", \n\t\t\t\"tenantCode\": \"s6dmholjv4q0idoc4fke4l0esotb5cn8xtby03eg8nydgahh7q\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d861bd7a-3356-4ac8-8861-373086614780\", \n\t\t\t\"tenantId\": \"52d02f1d-f64d-4e16-adab-f7fb1a76d6fb\", \n\t\t\t\"executionId\": \"23f3f1c8-33f0-47b9-9304-0075ca0e9c49\", \n\t\t\t\"tenantCode\": \"qw60fmipjv0f8jc6mx1lujzejkpao4nz40x7u1nn0e5pj9ts9c\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1cada03e-7a30-407d-be1e-0510d09f1945\", \n\t\t\t\"tenantId\": \"65b7bfd6-9976-46aa-9d32-909c32928820\", \n\t\t\t\"executionId\": \"bcce1336-1a68-4899-af3a-046771398fb8\", \n\t\t\t\"tenantCode\": \"38q8jacs0623lmprcb54cwaiwuecodz4vumgycvo4bo4l1gs7y\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dd8fc05c-e635-4c6d-83fc-2c843515fc6a\", \n\t\t\t\"tenantId\": \"448e028d-23e1-4fb6-8f31-57590a1fdcd3\", \n\t\t\t\"executionId\": \"8e9131e6-6959-49aa-9add-a740e7a57f91\", \n\t\t\t\"tenantCode\": \"gudj5481je4ok5q11e89hzpuoaq5sgs49nbww0bic5kqu8nb48\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"65c25177-04f1-47ae-a037-429af3cebe20\", \n\t\t\t\"tenantId\": \"603fd20d-bbcc-4d32-b5d0-3d6f54a1a134\", \n\t\t\t\"executionId\": \"9de66f40-b672-49ba-a9e5-81b948011933\", \n\t\t\t\"tenantCode\": \"e7rhql7goiyyh8t00a3pz0qdqhykkbwd3k8l98nj5zg7o2ywii\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"86fc16b0-81e9-4770-9d8d-04105010f24d\", \n\t\t\t\"tenantId\": \"a0f2da89-fe1e-4d19-a825-d76e3fd3c26f\", \n\t\t\t\"executionId\": \"15fc8163-3050-4c91-8bfc-bab6fec39e6d\", \n\t\t\t\"tenantCode\": \"da9qzwauvt3eujfdlrwc1bnt29f3436smwseoywx912ednvt80\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"550be0dd-9201-401b-88c9-4bb0badf30f5\", \n\t\t\t\"tenantId\": \"021072e2-7267-4d7c-a7f8-374533bc9907\", \n\t\t\t\"executionId\": \"372fbbde-139b-4ac3-a536-bbfddc55059f\", \n\t\t\t\"tenantCode\": \"hncbufpj09q5c4foic4hzqkjnlfzxhqqhui3grm6skcemennon\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"128dfabe-cd4d-4e75-9885-5f295967c110\", \n\t\t\t\"tenantId\": \"4f84ec3c-3200-4022-a01b-9538fe6870fd\", \n\t\t\t\"executionId\": \"176dcd8f-15bd-4795-aee5-787e4264994c\", \n\t\t\t\"tenantCode\": \"67ifm1kmlyr3ubq9ccpkx3uciv4gqt9sbjj24wyvlyqdknb4kp\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"93b6a34c-547a-4052-be3b-e4d84cb3cd89\", \n\t\t\t\"tenantId\": \"9f4f0690-a468-44e4-9da6-4c54f84cd671\", \n\t\t\t\"executionId\": \"f0d4ad51-b92b-4975-909c-8eb981b234b7\", \n\t\t\t\"tenantCode\": \"fy91d6rq6bqhc8szcgjln5s19483nrf80nua8o79fp29ongyoo\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1370424d-6a0a-4d94-b362-10fb4fdf564e\", \n\t\t\t\"tenantId\": \"0e3c3af0-bffc-40ad-80ad-a9256489b55c\", \n\t\t\t\"executionId\": \"02f71f3a-c7df-4147-9f07-3d72a8bf2710\", \n\t\t\t\"tenantCode\": \"79vt7009sp407pexfkrtk1rg2szjrepdayowcol9at8zxnrdk7\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"246dd6cb-cb77-40df-8c2e-dfe9da06fa1f\", \n\t\t\t\"tenantId\": \"d9e3d068-f31c-4058-980f-d90abd785cea\", \n\t\t\t\"executionId\": \"fb9ce6a2-4dae-49b5-980d-f601dd1ac1ff\", \n\t\t\t\"tenantCode\": \"zvz235pbtcrh9vw5j6m8l6ht94uidrbeg08eklti5zxzdqqwk7\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ed83befc-6aba-400f-8866-2d438ad68201\", \n\t\t\t\"tenantId\": \"a040c55e-5fa2-4292-9e71-275cc5cd7e41\", \n\t\t\t\"executionId\": \"6f017874-f606-41bc-a7be-14ef47dcdafd\", \n\t\t\t\"tenantCode\": \"85a4tvoudfauq0tr7t9sbolcdvpib85w854y87h8yrkgtpi5qi\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0a320b12-69a8-4ea2-ae60-76e825a037f8\", \n\t\t\t\"tenantId\": \"b72e14e5-c23a-48a3-8a68-ab2dcf505356\", \n\t\t\t\"executionId\": \"c427f051-d52a-4276-8816-5bf69605bdc1\", \n\t\t\t\"tenantCode\": \"1xqhx2j5jqklnbvdhspnwv0mus73vbl70vgrpio4h9u1whryjg\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5f6c0f18-4f7f-419a-97b8-a871ef404ff4\", \n\t\t\t\"tenantId\": \"0c5b16b9-8620-4780-a4cc-562733e249f6\", \n\t\t\t\"executionId\": \"168b819d-67cf-4d45-9774-a66ac2525e3c\", \n\t\t\t\"tenantCode\": \"bbw13q0zbscoc8yjlgtkihgzls7pxau3f3m9s1bvpa1r5aejfh\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5f7f585c-09c4-4918-89f1-071f119e0b8c\", \n\t\t\t\"tenantId\": \"c8f669aa-2682-4a57-b545-4a71a9568b2b\", \n\t\t\t\"executionId\": \"855c8f6f-f410-40cc-803f-851c56e00e36\", \n\t\t\t\"tenantCode\": \"i702q67ikb5qfuyexwf3opewmas3zyfqr3x11uh8ws70q28sce\", \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciPaginateDataLakes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tcciPaginateDataLakes (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciGetDataLakes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciGetDataLakes (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"18bf6be6-7f85-48ce-9215-ce15011a7d41\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindDataLake",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciFindDataLake (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"18bf6be6-7f85-48ce-9215-ce15011a7d41\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindDataLakeById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tcciFindDataLakeById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"18bf6be6-7f85-48ce-9215-ce15011a7d41\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciUpdateDataLake",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciUpdateDataLakeInput!)\n{\n\tcciUpdateDataLake (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"18bf6be6-7f85-48ce-9215-ce15011a7d41\", \n\t\t\"tenantId\": \"1e2f633b-610d-43a5-b5db-9fc5e6340409\", \n\t\t\"executionId\": \"5c35f8c8-1ee1-464f-89ba-42195e66dd38\", \n\t\t\"tenantCode\": \"ac7sehzwldum5s05e5p4m4rdh73rw5x1y6g0gtyqtzru8441sb\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteDataLakeById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tcciDeleteDataLakeById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"18bf6be6-7f85-48ce-9215-ce15011a7d41\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteDataLakes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tcciDeleteDataLakes (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/data-lake",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"18bf6be6-7f85-48ce-9215-ce15011a7d41\", \n\t\"tenantId\": \"1e2f633b-610d-43a5-b5db-9fc5e6340409\", \n\t\"executionId\": \"5c35f8c8-1ee1-464f-89ba-42195e66dd38\", \n\t\"tenantCode\": \"hymsy9npvnzr6h5bmkhgpf0hqydff2df8jc5w6fde13i7xvuyz\", \n\t\"payload\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/data-lake",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"data-lake"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/data-lakes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"ef13560a-608b-40fc-af47-4253110b44fc\", \n\t\t\"tenantId\": \"801de7c4-e8e7-4f34-89ce-45f2ff4498fd\", \n\t\t\"executionId\": \"494b45c0-616e-441a-8005-fa16c5146b34\", \n\t\t\"tenantCode\": \"adu2ds3ituqcoo4ve9hd2r4e7s7feyilghtaifk1lyfj75hq0w\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"c2ac9825-6f11-4108-a8fc-dd8341c3a640\", \n\t\t\"tenantId\": \"3e8a8aba-d669-4f87-8d3c-50d5650b47d9\", \n\t\t\"executionId\": \"756bc82d-20f3-48aa-bddd-c9bdec79e2a7\", \n\t\t\"tenantCode\": \"6br4h5egt0tsql4dmcqsrbzm79w69ppkn30rbu3o52r04l7536\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"2d3eec95-7c6f-4a4a-ae8c-6293fc6bf419\", \n\t\t\"tenantId\": \"efd7b55c-ee34-468f-9caa-5120b33fbabc\", \n\t\t\"executionId\": \"152304c8-4927-467c-9dd2-234747ba3f64\", \n\t\t\"tenantCode\": \"y7eo3k2hna044iams52f0hzrg6xnvg2r76o7mo68lia8f0v578\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"dcd8ea01-44f5-4093-ad82-34a43025abe4\", \n\t\t\"tenantId\": \"1b13cfba-2f22-4fd4-be9f-462c979795fd\", \n\t\t\"executionId\": \"0de5bc30-5f2c-496c-891b-8b69d76ca482\", \n\t\t\"tenantCode\": \"x8hatv019fvnj6kgqqb7zt9zk0kny585ah6ubofgl42mt2jf4n\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"833634cd-466a-4ae7-9baf-b839e8eaa6f4\", \n\t\t\"tenantId\": \"15691fa7-4c08-4a74-9816-d50cedc90219\", \n\t\t\"executionId\": \"92c827eb-742c-4f77-8df3-ae4e232da021\", \n\t\t\"tenantCode\": \"po2lbunqas7o4usi7ow63trmhppjpb7vcfgkos2d1vnwu0h41o\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6f0ee837-6bb7-437a-9e63-852964055253\", \n\t\t\"tenantId\": \"7485ddb2-65bb-46b1-8484-556458839411\", \n\t\t\"executionId\": \"f7eb7ec1-e45e-4750-8940-23b03e56f2ed\", \n\t\t\"tenantCode\": \"n28o6u6y6cn1ufta7alenr3pmpabjbp12xj0kr2u1b42m5s2fb\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"39515cb1-1d13-4493-b272-9a71b9d7f69b\", \n\t\t\"tenantId\": \"568faa67-6731-493b-b8fc-7e874de948a3\", \n\t\t\"executionId\": \"e1f08662-8a11-4140-82f9-70f0477a663a\", \n\t\t\"tenantCode\": \"45tocu974pdqhbqdynaz2iechprib9az0s70ds5ykok5n5gnen\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"739d8a75-fdb4-4745-9fe5-a75fa41080dd\", \n\t\t\"tenantId\": \"fef3ba63-6550-45ea-89cb-8199b74d6c88\", \n\t\t\"executionId\": \"d15dcd41-c5e4-4ef2-ab3a-8dec86cd85dc\", \n\t\t\"tenantCode\": \"a5fd0s0pb3q5ag0zek1x33bm6q0llm4xo33warh1rnqpqwia9g\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"97168725-3529-46d2-b77b-5d6cfaae06b7\", \n\t\t\"tenantId\": \"4f36fb79-b6cd-4c5f-bed9-4695b6e3358d\", \n\t\t\"executionId\": \"113a904d-5702-4d63-984d-f81688a86741\", \n\t\t\"tenantCode\": \"iproyh9h2gj37hy3loouvz6vka1fn0k2p0lcvpn0hg55zxu969\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"beed6452-02f3-4ce2-8a68-6cfe7e4f1dba\", \n\t\t\"tenantId\": \"c4251211-68f3-4ce8-825e-6728762751a5\", \n\t\t\"executionId\": \"c5bc2684-fe85-4f5f-a23b-f815ff2235c2\", \n\t\t\"tenantCode\": \"9u5p9bfrxscuzr6n861tepkprnoozzxs44g2cu990sx34tn1hc\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"b9c179dd-8ef6-43aa-a0dd-93f8336d0d9d\", \n\t\t\"tenantId\": \"29f89d3a-2fcf-45e4-86c2-f144eefc4401\", \n\t\t\"executionId\": \"10ffea84-f15f-4fdd-aa80-607b95373ab1\", \n\t\t\"tenantCode\": \"1vyirki6b3dkcrle70kvoy6nofh6jnhof9lq2s7vaox5nmnf1d\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"9f3715c7-68f3-4474-ba55-fed9188abb37\", \n\t\t\"tenantId\": \"1c539933-08c1-4918-a478-36322d6e467d\", \n\t\t\"executionId\": \"6ad26564-4c69-4f4e-8378-7ce530ff30fb\", \n\t\t\"tenantCode\": \"6fbwq6dx7z6lfam5hoc3gl1rjh2ekgzuveh8wzlm47lfguh2gi\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"80173a00-fe8a-45e3-939a-8bb9155f234b\", \n\t\t\"tenantId\": \"cb545a73-7060-4880-8fba-4f51ef983c46\", \n\t\t\"executionId\": \"e1b9e9c0-1457-411b-a137-e060369824c4\", \n\t\t\"tenantCode\": \"0m9tk6tq1yge19xrn0fqv3qm769idc5n57ji5o5fwkbrkqv9du\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"029a10eb-a9e4-445a-b27d-cac56f5fddfa\", \n\t\t\"tenantId\": \"9e329644-c841-4463-8238-2c7ed642a125\", \n\t\t\"executionId\": \"0c7b4d2f-aaf6-434e-9c94-b1bc8f79a19a\", \n\t\t\"tenantCode\": \"paalbovm2sj8vekk9h474xuuqi75lnx3bkljv0zcis32poq7yk\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"de6687d1-e919-4ab1-a7b7-6b3654d4e497\", \n\t\t\"tenantId\": \"67fc20cb-c8ac-428c-ac02-6db714f3d888\", \n\t\t\"executionId\": \"29e7ceae-bf6d-4eb7-9637-be9d054fd952\", \n\t\t\"tenantCode\": \"rpv2oq2ifsd7lpaia2yw0k89meq4h6herpv6d2zvh73vmbfdn0\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"3c841d10-3859-4d42-a777-5f8372690ed0\", \n\t\t\"tenantId\": \"6771e3ad-38ab-40b1-96c6-deb622bbebac\", \n\t\t\"executionId\": \"765c4e4c-3c30-4685-8260-b2a360ce5f94\", \n\t\t\"tenantCode\": \"5jekdaubzwzt2ua0k3di6ldhqnmnyqleb265989ykh094zo7oq\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5f850be8-5ce6-43a0-a284-9371c277a49d\", \n\t\t\"tenantId\": \"aa8ecf84-2b99-42f9-a867-38f8ac70e6b6\", \n\t\t\"executionId\": \"17cb9f91-26e1-458b-9af6-a0d80247fcd1\", \n\t\t\"tenantCode\": \"60ggd3rr8vqjxw4llddbjzaoabstxkq1bxniohbdo030hr01ef\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"17b78388-20be-42a1-8239-c17c75d3c3e5\", \n\t\t\"tenantId\": \"72d6815b-9b9c-43c0-b258-4dd1cf4e91ca\", \n\t\t\"executionId\": \"652c2ce8-39e5-484b-a255-468b154ba0c5\", \n\t\t\"tenantCode\": \"wij27pbwg0cb6p2g3ctf3jqn3l8cd36epxcfwjkq59xmtn1n8j\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"63336e9d-f7f0-4eaf-9965-31011996881e\", \n\t\t\"tenantId\": \"f8d175b0-8fb0-413f-b87d-ab352a61e273\", \n\t\t\"executionId\": \"3de3503c-8ef6-4ee4-a03b-40a1b4c67e21\", \n\t\t\"tenantCode\": \"mdcw9xvsl0vcvdt15eni0b9ndimq3h13tg000mu3zxl0qc182d\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"3b85b71e-e2b6-45e1-b571-ebc821045c1a\", \n\t\t\"tenantId\": \"76787779-5949-4975-a2bd-462cfd26d5d8\", \n\t\t\"executionId\": \"0fd03bc3-aa12-47af-9557-0f2a7260aaf6\", \n\t\t\"tenantCode\": \"wtfdtxrs4sv3g5gqyaubko3mdtlvyid771wn1pjuj2aajbv9p4\", \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/data-lakes",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"data-lakes"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/data-lakes/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/data-lakes/paginate",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+                        "data-lakes",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/data-lakes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"18bf6be6-7f85-48ce-9215-ce15011a7d41\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/data-lakes",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"data-lakes"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/data-lake",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"18bf6be6-7f85-48ce-9215-ce15011a7d41\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/data-lake",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"data-lake"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/data-lake/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/data-lake/18bf6be6-7f85-48ce-9215-ce15011a7d41",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"data-lake",
+						"18bf6be6-7f85-48ce-9215-ce15011a7d41"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/data-lake",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"18bf6be6-7f85-48ce-9215-ce15011a7d41\", \n\t\"tenantId\": \"1e2f633b-610d-43a5-b5db-9fc5e6340409\", \n\t\"executionId\": \"5c35f8c8-1ee1-464f-89ba-42195e66dd38\", \n\t\"tenantCode\": \"yjvooky54xhszcag43l7fc6kdwyhlshwtx5ydg44lwfmcahhus\", \n\t\"payload\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/data-lake",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"data-lake"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/data-lake/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/data-lake/18bf6be6-7f85-48ce-9215-ce15011a7d41",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"data-lake",
+						"18bf6be6-7f85-48ce-9215-ce15011a7d41"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - cci/data-lakes",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/data-lakes",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"data-lakes"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "50fd2b75-7f19-4f9f-81e9-eb875e7ed902",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

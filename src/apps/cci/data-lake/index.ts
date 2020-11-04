@@ -1,45 +1,45 @@
 // controllers
-import { CreateDataLakeController } from './controllers/create-data-lake.controller';
-import { CreateDataLakesController } from './controllers/create-data-lakes.controller';
-import { PaginateDataLakesController } from './controllers/paginate-data-lakes.controller';
-import { GetDataLakesController } from './controllers/get-data-lakes.controller';
-import { FindDataLakeByIdController } from './controllers/find-data-lake-by-id.controller';
-import { FindDataLakeController } from './controllers/find-data-lake.controller';
-import { UpdateDataLakeController } from './controllers/update-data-lake.controller';
-import { DeleteDataLakeByIdController } from './controllers/delete-data-lake-by-id.controller';
-import { DeleteDataLakesController } from './controllers/delete-data-lakes.controller';
+import { CciCreateDataLakeController } from './controllers/cci-create-data-lake.controller';
+import { CciCreateDataLakesController } from './controllers/cci-create-data-lakes.controller';
+import { CciPaginateDataLakesController } from './controllers/cci-paginate-data-lakes.controller';
+import { CciGetDataLakesController } from './controllers/cci-get-data-lakes.controller';
+import { CciFindDataLakeByIdController } from './controllers/cci-find-data-lake-by-id.controller';
+import { CciFindDataLakeController } from './controllers/cci-find-data-lake.controller';
+import { CciUpdateDataLakeController } from './controllers/cci-update-data-lake.controller';
+import { CciDeleteDataLakeByIdController } from './controllers/cci-delete-data-lake-by-id.controller';
+import { CciDeleteDataLakesController } from './controllers/cci-delete-data-lakes.controller';
 
 // resolvers
-import { CreateDataLakeResolver } from './resolvers/create-data-lake.resolver';
-import { CreateDataLakesResolver } from './resolvers/create-data-lakes.resolver';
-import { PaginateDataLakesResolver } from './resolvers/paginate-data-lakes.resolver';
-import { GetDataLakesResolver } from './resolvers/get-data-lakes.resolver';
-import { FindDataLakeResolver } from './resolvers/find-data-lake.resolver';
-import { FindDataLakeByIdResolver } from './resolvers/find-data-lake-by-id.resolver';
-import { UpdateDataLakeResolver } from './resolvers/update-data-lake.resolver';
-import { DeleteDataLakeByIdResolver } from './resolvers/delete-data-lake-by-id.resolver';
-import { DeleteDataLakesResolver } from './resolvers/delete-data-lakes.resolver';
+import { CciCreateDataLakeResolver } from './resolvers/cci-create-data-lake.resolver';
+import { CciCreateDataLakesResolver } from './resolvers/cci-create-data-lakes.resolver';
+import { CciPaginateDataLakesResolver } from './resolvers/cci-paginate-data-lakes.resolver';
+import { CciGetDataLakesResolver } from './resolvers/cci-get-data-lakes.resolver';
+import { CciFindDataLakeResolver } from './resolvers/cci-find-data-lake.resolver';
+import { CciFindDataLakeByIdResolver } from './resolvers/cci-find-data-lake-by-id.resolver';
+import { CciUpdateDataLakeResolver } from './resolvers/cci-update-data-lake.resolver';
+import { CciDeleteDataLakeByIdResolver } from './resolvers/cci-delete-data-lake-by-id.resolver';
+import { CciDeleteDataLakesResolver } from './resolvers/cci-delete-data-lakes.resolver';
 
 export const CciDataLakeControllers = [
-    CreateDataLakeController,
-    CreateDataLakesController,
-    PaginateDataLakesController,
-    GetDataLakesController,
-    FindDataLakeByIdController,
-    FindDataLakeController,
-    UpdateDataLakeController,
-    DeleteDataLakeByIdController,
-    DeleteDataLakesController,
+    CciCreateDataLakeController,
+    CciCreateDataLakesController,
+    CciPaginateDataLakesController,
+    CciGetDataLakesController,
+    CciFindDataLakeByIdController,
+    CciFindDataLakeController,
+    CciUpdateDataLakeController,
+    CciDeleteDataLakeByIdController,
+    CciDeleteDataLakesController,
 ];
 
 export const CciDataLakeResolvers = [
-    CreateDataLakeResolver,
-    CreateDataLakesResolver,
-    PaginateDataLakesResolver,
-    GetDataLakesResolver,
-    FindDataLakeResolver,
-    FindDataLakeByIdResolver,
-    UpdateDataLakeResolver,
-    DeleteDataLakeByIdResolver,
-    DeleteDataLakesResolver,
+    CciCreateDataLakeResolver,
+    CciCreateDataLakesResolver,
+    CciPaginateDataLakesResolver,
+    CciGetDataLakesResolver,
+    CciFindDataLakeResolver,
+    CciFindDataLakeByIdResolver,
+    CciUpdateDataLakeResolver,
+    CciDeleteDataLakeByIdResolver,
+    CciDeleteDataLakesResolver,
 ];

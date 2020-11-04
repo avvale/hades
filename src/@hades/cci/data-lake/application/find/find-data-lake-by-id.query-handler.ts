@@ -11,12 +11,16 @@ export class FindDataLakeByIdQueryHandler implements IQueryHandler<FindDataLakeB
     private readonly mapper: DataLakeMapper = new DataLakeMapper();
 
     constructor(
-        private readonly findDataLakeByIdService: FindDataLakeByIdService
-    ) { }
+        private readonly findDataLakeByIdService: FindDataLakeByIdService,
+    ) {}
 
     async execute(query: FindDataLakeByIdQuery): Promise<DataLakeResponse>
     {
-        const dataLake = await this.findDataLakeByIdService.main(new DataLakeId(query.id));
+        const dataLake = await this.findDataLakeByIdService.main(
+            new DataLakeId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(dataLake);
     }

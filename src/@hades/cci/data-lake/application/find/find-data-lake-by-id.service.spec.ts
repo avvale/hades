@@ -8,13 +8,13 @@ import { DataLakeId } from './../../domain/value-objects';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { MockDataLakeRepository } from './../../infrastructure/mock/mock-data-lake.repository';
 
-describe('FindDataLakeByIdService', () => 
+describe('FindDataLakeByIdService', () =>
 {
     let service: FindDataLakeByIdService;
     let repository: IDataLakeRepository;
     let mockRepository: MockDataLakeRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindDataLakeByIdService', () =>
                 EventPublisher,
                 FindDataLakeByIdService,
                 MockDataLakeRepository,
-                { 
+                {
                     provide: IDataLakeRepository,
                     useValue: {
                         findById: (id) => {}

@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IDataLakeRepository } from '@hades/cci/data-lake/domain/data-lake.repository';
-import { 
+import {
     DataLakeId,
     DataLakeTenantId,
     DataLakeExecutionId,
@@ -10,8 +10,7 @@ import {
     DataLakePayload,
     DataLakeCreatedAt,
     DataLakeUpdatedAt,
-    DataLakeDeletedAt
-    
+    DataLakeDeletedAt,
 } from '@hades/cci/data-lake/domain/value-objects';
 import { CciDataLake } from './../../domain/data-lake.aggregate';
 import { dataLakes } from './../seeds/data-lake.seed';
@@ -23,14 +22,14 @@ export class MockDataLakeRepository extends MockRepository<CciDataLake> implemen
     public readonly aggregateName: string = 'CciDataLake';
     public collectionSource: CciDataLake[];
     public deletedAtInstance: DataLakeDeletedAt = new DataLakeDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -45,7 +44,7 @@ export class MockDataLakeRepository extends MockRepository<CciDataLake> implemen
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciDataLake.register(
                     new DataLakeId(itemCollection.id),
                     new DataLakeTenantId(itemCollection.tenantId),
@@ -55,7 +54,7 @@ export class MockDataLakeRepository extends MockRepository<CciDataLake> implemen
                     new DataLakeCreatedAt(itemCollection.createdAt),
                     new DataLakeUpdatedAt(itemCollection.updatedAt),
                     new DataLakeDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

@@ -41,7 +41,6 @@ describe('DeleteDataLakeByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteDataLakeByIdCommand(
                     dataLakes[0].id,
-                
                 )
             )).toBe(undefined);
         });

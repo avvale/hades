@@ -4,7 +4,7 @@ import { CreateDataLakesCommand } from '@hades/cci/data-lake/application/create/
 import { SeederModule } from './seeder.module';
 import { dataLakes } from '@hades/cci/data-lake/infrastructure/seeds/data-lake.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

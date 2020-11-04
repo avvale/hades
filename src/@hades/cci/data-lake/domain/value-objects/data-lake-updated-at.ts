@@ -1,16 +1,16 @@
 import { TimestampValueObject } from '@hades/shared/domain/value-objects/timestamp.value-object';
-import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
+import { DataValueObject, ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class DataLakeUpdatedAt extends TimestampValueObject 
+export class DataLakeUpdatedAt extends TimestampValueObject
 {
     public readonly type: 'DataLakeUpdatedAt';
 
-    constructor(value: string, validationRules: ValidationRules = {}) 
+    constructor(value: string | DataValueObject, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'DataLakeUpdatedAt',
-            nullable: true,
-            undefinable: true,
-        }, validationRules));
+            nullable:  true ,
+            undefinable:  true ,
+        }, validationRules), data);
     }
 }

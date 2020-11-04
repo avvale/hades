@@ -1,16 +1,16 @@
 
-
 type CciDataLake
 {
     id: ID!
+    tenantId: ID!
     tenant: IamTenant!
+    executionId: ID!
     execution: CciExecution!
     tenantCode: GraphQLString!
     payload: JSON!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input CciCreateDataLakeInput
@@ -20,7 +20,6 @@ input CciCreateDataLakeInput
     executionId: ID!
     tenantCode: GraphQLString!
     payload: JSON!
-    
 }
 
 input CciUpdateDataLakeInput
@@ -30,14 +29,13 @@ input CciUpdateDataLakeInput
     executionId: ID
     tenantCode: GraphQLString
     payload: JSON
-    
 }
 
-type Query 
+type Query
 {
-    cciFindDataLake(query:QueryStatement): CciDataLake
-    cciFindDataLakeById(id:ID): CciDataLake
-    cciGetDataLakes(query:QueryStatement): [CciDataLake]!
+    cciFindDataLake(query:QueryStatement constraint:QueryStatement): CciDataLake
+    cciFindDataLakeById(id:ID constraint:QueryStatement): CciDataLake
+    cciGetDataLakes(query:QueryStatement constraint:QueryStatement): [CciDataLake]!
     cciPaginateDataLakes(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -45,7 +43,7 @@ type Mutation
 {
     cciCreateDataLake(payload: CciCreateDataLakeInput!): CciDataLake
     cciCreateDataLakes(payload: [CciCreateDataLakeInput]!): Boolean!
-    cciUpdateDataLake(payload: CciUpdateDataLakeInput!): CciDataLake
-    cciDeleteDataLakeById(id: ID!): CciDataLake
-    cciDeleteDataLakes(query:QueryStatement): [CciDataLake]!
+    cciUpdateDataLake(payload: CciUpdateDataLakeInput! constraint:QueryStatement): CciDataLake
+    cciDeleteDataLakeById(id: ID! constraint:QueryStatement): CciDataLake
+    cciDeleteDataLakes(query:QueryStatement constraint:QueryStatement): [CciDataLake]!
 }

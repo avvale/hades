@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     DataLakeId,
     DataLakeTenantId,
     DataLakeExecutionId,
@@ -7,16 +7,13 @@ import {
     DataLakePayload,
     DataLakeCreatedAt,
     DataLakeUpdatedAt,
-    DataLakeDeletedAt
-    
+    DataLakeDeletedAt,
 } from './value-objects';
 import { CreatedDataLakeEvent } from './../application/events/created-data-lake.event';
 import { UpdatedDataLakeEvent } from './../application/events/updated-data-lake.event';
 import { DeletedDataLakeEvent } from './../application/events/deleted-data-lake.event';
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
-
-
 
 export class CciDataLake extends AggregateRoot
 {
@@ -28,17 +25,15 @@ export class CciDataLake extends AggregateRoot
     createdAt: DataLakeCreatedAt;
     updatedAt: DataLakeUpdatedAt;
     deletedAt: DataLakeDeletedAt;
-    
+
     // eager relationship
     tenant: IamTenant;
     execution: CciExecution;
-    
-    
-    
+
     constructor(id?: DataLakeId, tenantId?: DataLakeTenantId, executionId?: DataLakeExecutionId, tenantCode?: DataLakeTenantCode, payload?: DataLakePayload, createdAt?: DataLakeCreatedAt, updatedAt?: DataLakeUpdatedAt, deletedAt?: DataLakeDeletedAt, tenant?: IamTenant, execution?: CciExecution, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.executionId = executionId;
@@ -47,13 +42,10 @@ export class CciDataLake extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
         this.tenant = tenant;
         this.execution = execution;
-        
-        
-        
     }
 
     static register (id: DataLakeId, tenantId: DataLakeTenantId, executionId: DataLakeExecutionId, tenantCode: DataLakeTenantCode, payload: DataLakePayload, createdAt: DataLakeCreatedAt, updatedAt: DataLakeUpdatedAt, deletedAt: DataLakeDeletedAt, tenant?: IamTenant, execution?: CciExecution, ): CciDataLake
@@ -123,13 +115,10 @@ export class CciDataLake extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
             tenant: this.tenant?.toDTO(),
             execution: this.execution?.toDTO(),
-            
-            
-            
         }
     }
 }

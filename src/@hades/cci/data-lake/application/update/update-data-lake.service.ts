@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+import {
     DataLakeId,
     DataLakeTenantId,
     DataLakeExecutionId,
@@ -9,8 +10,7 @@ import {
     DataLakePayload,
     DataLakeCreatedAt,
     DataLakeUpdatedAt,
-    DataLakeDeletedAt
-    
+    DataLakeDeletedAt,
 } from './../../domain/value-objects';
 import { IDataLakeRepository } from './../../domain/data-lake.repository';
 import { CciDataLake } from './../../domain/data-lake.aggregate';
@@ -20,38 +20,41 @@ export class UpdateDataLakeService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IDataLakeRepository
+        private readonly repository: IDataLakeRepository,
     ) {}
 
     public async main(
-        id: DataLakeId,
-        tenantId?: DataLakeTenantId,
-        executionId?: DataLakeExecutionId,
-        tenantCode?: DataLakeTenantCode,
-        payload?: DataLakePayload,
-        
+        payload: {
+            id: DataLakeId,
+            tenantId?: DataLakeTenantId,
+            executionId?: DataLakeExecutionId,
+            tenantCode?: DataLakeTenantCode,
+            payload?: DataLakePayload,
+        },
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
     ): Promise<void>
-    {        
+    {
         // create aggregate with factory pattern
         const dataLake = CciDataLake.register(
-            id,
-            tenantId,
-            executionId,
-            tenantCode,
-            payload,
+            payload.id,
+            payload.tenantId,
+            payload.executionId,
+            payload.tenantCode,
+            payload.payload,
             null,
-            new DataLakeUpdatedAt(Utils.nowTimestamp()),
+            new DataLakeUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // update
-        await this.repository.update(dataLake);        
-            
+        await this.repository.update(dataLake, constraint, cQMetadata);
+
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const dataLakeRegister = this.publisher.mergeObjectContext(
             dataLake
         );
-        
+
         dataLakeRegister.updated(dataLake); // apply event to model events
         dataLakeRegister.commit(); // commit all events of model
     }
