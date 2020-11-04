@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateChannelsDetailCommand
 {
     constructor(
-        public readonly channelsDetail: {
+        public readonly payload: {
             id: string,
             tenantId: string,
             tenantCode: string,
@@ -19,7 +21,7 @@ export class CreateChannelsDetailCommand
             channelComponent: string,
             channelName: string,
             detail?: string,
-            
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

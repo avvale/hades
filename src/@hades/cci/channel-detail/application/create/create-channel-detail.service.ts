@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ChannelDetailId,
     ChannelDetailTenantId,
     ChannelDetailTenantCode,
@@ -21,8 +20,7 @@ import {
     ChannelDetailDetail,
     ChannelDetailCreatedAt,
     ChannelDetailUpdatedAt,
-    ChannelDetailDeletedAt
-    
+    ChannelDetailDeletedAt,
 } from './../../domain/value-objects';
 import { IChannelDetailRepository } from './../../domain/channel-detail.repository';
 import { CciChannelDetail } from './../../domain/channel-detail.aggregate';
@@ -32,54 +30,55 @@ export class CreateChannelDetailService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IChannelDetailRepository
+        private readonly repository: IChannelDetailRepository,
     ) {}
 
     public async main(
-        id: ChannelDetailId,
-        tenantId: ChannelDetailTenantId,
-        tenantCode: ChannelDetailTenantCode,
-        systemId: ChannelDetailSystemId,
-        systemName: ChannelDetailSystemName,
-        executionId: ChannelDetailExecutionId,
-        executionType: ChannelDetailExecutionType,
-        executionExecutedAt: ChannelDetailExecutionExecutedAt,
-        executionMonitoringStartAt: ChannelDetailExecutionMonitoringStartAt,
-        executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt,
-        status: ChannelDetailStatus,
-        channelHash: ChannelDetailChannelHash,
-        channelSapId: ChannelDetailChannelSapId,
-        channelParty: ChannelDetailChannelParty,
-        channelComponent: ChannelDetailChannelComponent,
-        channelName: ChannelDetailChannelName,
-        detail: ChannelDetailDetail,
-        
+        payload: {
+            id: ChannelDetailId,
+            tenantId: ChannelDetailTenantId,
+            tenantCode: ChannelDetailTenantCode,
+            systemId: ChannelDetailSystemId,
+            systemName: ChannelDetailSystemName,
+            executionId: ChannelDetailExecutionId,
+            executionType: ChannelDetailExecutionType,
+            executionExecutedAt: ChannelDetailExecutionExecutedAt,
+            executionMonitoringStartAt: ChannelDetailExecutionMonitoringStartAt,
+            executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt,
+            status: ChannelDetailStatus,
+            channelHash: ChannelDetailChannelHash,
+            channelSapId: ChannelDetailChannelSapId,
+            channelParty: ChannelDetailChannelParty,
+            channelComponent: ChannelDetailChannelComponent,
+            channelName: ChannelDetailChannelName,
+            detail: ChannelDetailDetail,
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const channelDetail = CciChannelDetail.register(
-            id,
-            tenantId,
-            tenantCode,
-            systemId,
-            systemName,
-            executionId,
-            executionType,
-            executionExecutedAt,
-            executionMonitoringStartAt,
-            executionMonitoringEndAt,
-            status,
-            channelHash,
-            channelSapId,
-            channelParty,
-            channelComponent,
-            channelName,
-            detail,
-            new ChannelDetailCreatedAt(Utils.nowTimestamp()),
-            new ChannelDetailUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.tenantId,
+            payload.tenantCode,
+            payload.systemId,
+            payload.systemName,
+            payload.executionId,
+            payload.executionType,
+            payload.executionExecutedAt,
+            payload.executionMonitoringStartAt,
+            payload.executionMonitoringEndAt,
+            payload.status,
+            payload.channelHash,
+            payload.channelSapId,
+            payload.channelParty,
+            payload.channelComponent,
+            payload.channelName,
+            payload.detail,
+            new ChannelDetailCreatedAt({currentTimestamp: true}),
+            new ChannelDetailUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // create
         await this.repository.create(channelDetail);
 
@@ -87,7 +86,7 @@ export class CreateChannelDetailService
         const channelDetailRegister = this.publisher.mergeObjectContext(
             channelDetail
         );
-        
+
         channelDetailRegister.created(channelDetail); // apply event to model events
         channelDetailRegister.commit(); // commit all events of model
     }

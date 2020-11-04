@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: channel-detail
 moduleNames: channels-detail
+aggregateName: CciChannelDetail
 hasOAuth: true
 hasTenant: true
 aggregateProperties:

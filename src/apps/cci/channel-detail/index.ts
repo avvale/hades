@@ -1,45 +1,45 @@
 // controllers
-import { CreateChannelDetailController } from './controllers/create-channel-detail.controller';
-import { CreateChannelsDetailController } from './controllers/create-channels-detail.controller';
-import { PaginateChannelsDetailController } from './controllers/paginate-channels-detail.controller';
-import { GetChannelsDetailController } from './controllers/get-channels-detail.controller';
-import { FindChannelDetailByIdController } from './controllers/find-channel-detail-by-id.controller';
-import { FindChannelDetailController } from './controllers/find-channel-detail.controller';
-import { UpdateChannelDetailController } from './controllers/update-channel-detail.controller';
-import { DeleteChannelDetailByIdController } from './controllers/delete-channel-detail-by-id.controller';
-import { DeleteChannelsDetailController } from './controllers/delete-channels-detail.controller';
+import { CciCreateChannelDetailController } from './controllers/cci-create-channel-detail.controller';
+import { CciCreateChannelsDetailController } from './controllers/cci-create-channels-detail.controller';
+import { CciPaginateChannelsDetailController } from './controllers/cci-paginate-channels-detail.controller';
+import { CciGetChannelsDetailController } from './controllers/cci-get-channels-detail.controller';
+import { CciFindChannelDetailByIdController } from './controllers/cci-find-channel-detail-by-id.controller';
+import { CciFindChannelDetailController } from './controllers/cci-find-channel-detail.controller';
+import { CciUpdateChannelDetailController } from './controllers/cci-update-channel-detail.controller';
+import { CciDeleteChannelDetailByIdController } from './controllers/cci-delete-channel-detail-by-id.controller';
+import { CciDeleteChannelsDetailController } from './controllers/cci-delete-channels-detail.controller';
 
 // resolvers
-import { CreateChannelDetailResolver } from './resolvers/create-channel-detail.resolver';
-import { CreateChannelsDetailResolver } from './resolvers/create-channels-detail.resolver';
-import { PaginateChannelsDetailResolver } from './resolvers/paginate-channels-detail.resolver';
-import { GetChannelsDetailResolver } from './resolvers/get-channels-detail.resolver';
-import { FindChannelDetailResolver } from './resolvers/find-channel-detail.resolver';
-import { FindChannelDetailByIdResolver } from './resolvers/find-channel-detail-by-id.resolver';
-import { UpdateChannelDetailResolver } from './resolvers/update-channel-detail.resolver';
-import { DeleteChannelDetailByIdResolver } from './resolvers/delete-channel-detail-by-id.resolver';
-import { DeleteChannelsDetailResolver } from './resolvers/delete-channels-detail.resolver';
+import { CciCreateChannelDetailResolver } from './resolvers/cci-create-channel-detail.resolver';
+import { CciCreateChannelsDetailResolver } from './resolvers/cci-create-channels-detail.resolver';
+import { CciPaginateChannelsDetailResolver } from './resolvers/cci-paginate-channels-detail.resolver';
+import { CciGetChannelsDetailResolver } from './resolvers/cci-get-channels-detail.resolver';
+import { CciFindChannelDetailResolver } from './resolvers/cci-find-channel-detail.resolver';
+import { CciFindChannelDetailByIdResolver } from './resolvers/cci-find-channel-detail-by-id.resolver';
+import { CciUpdateChannelDetailResolver } from './resolvers/cci-update-channel-detail.resolver';
+import { CciDeleteChannelDetailByIdResolver } from './resolvers/cci-delete-channel-detail-by-id.resolver';
+import { CciDeleteChannelsDetailResolver } from './resolvers/cci-delete-channels-detail.resolver';
 
 export const CciChannelDetailControllers = [
-    // CreateChannelDetailController,
-    // CreateChannelsDetailController,
-    PaginateChannelsDetailController,
-    GetChannelsDetailController,
-    FindChannelDetailByIdController,
-    FindChannelDetailController,
-    // UpdateChannelDetailController,
-    // DeleteChannelDetailByIdController,
-    // DeleteChannelsDetailController,
+    CciCreateChannelDetailController,
+    CciCreateChannelsDetailController,
+    CciPaginateChannelsDetailController,
+    CciGetChannelsDetailController,
+    CciFindChannelDetailByIdController,
+    CciFindChannelDetailController,
+    CciUpdateChannelDetailController,
+    CciDeleteChannelDetailByIdController,
+    CciDeleteChannelsDetailController,
 ];
 
 export const CciChannelDetailResolvers = [
-    // CreateChannelDetailResolver,
-    // CreateChannelsDetailResolver,
-    PaginateChannelsDetailResolver,
-    GetChannelsDetailResolver,
-    FindChannelDetailResolver,
-    FindChannelDetailByIdResolver,
-    // UpdateChannelDetailResolver,
-    // DeleteChannelDetailByIdResolver,
-    // DeleteChannelsDetailResolver,
+    CciCreateChannelDetailResolver,
+    CciCreateChannelsDetailResolver,
+    CciPaginateChannelsDetailResolver,
+    CciGetChannelsDetailResolver,
+    CciFindChannelDetailResolver,
+    CciFindChannelDetailByIdResolver,
+    CciUpdateChannelDetailResolver,
+    CciDeleteChannelDetailByIdResolver,
+    CciDeleteChannelsDetailResolver,
 ];

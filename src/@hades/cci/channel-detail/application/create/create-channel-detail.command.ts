@@ -1,23 +1,27 @@
-export class CreateChannelDetailCommand 
-{   
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class CreateChannelDetailCommand
+{
     constructor(
-        public readonly id: string,
-        public readonly tenantId: string,
-        public readonly tenantCode: string,
-        public readonly systemId: string,
-        public readonly systemName: string,
-        public readonly executionId: string,
-        public readonly executionType: string,
-        public readonly executionExecutedAt: string,
-        public readonly executionMonitoringStartAt: string,
-        public readonly executionMonitoringEndAt: string,
-        public readonly status: string,
-        public readonly channelHash: string,
-        public readonly channelSapId: string,
-        public readonly channelParty: string,
-        public readonly channelComponent: string,
-        public readonly channelName: string,
-        public readonly detail: string,
-        
+        public readonly payload: {
+            id: string,
+            tenantId: string,
+            tenantCode: string,
+            systemId: string,
+            systemName: string,
+            executionId: string,
+            executionType: string,
+            executionExecutedAt: string,
+            executionMonitoringStartAt: string,
+            executionMonitoringEndAt: string,
+            status: string,
+            channelHash: string,
+            channelSapId: string,
+            channelParty?: string,
+            channelComponent: string,
+            channelName: string,
+            detail?: string,
+        },
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

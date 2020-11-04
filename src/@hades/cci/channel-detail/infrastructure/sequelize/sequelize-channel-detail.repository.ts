@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IChannelDetailRepository } from './../../domain/channel-detail.repository';
@@ -13,13 +12,13 @@ export class SequelizeChannelDetailRepository extends SequelizeRepository<CciCha
 {
     public readonly aggregateName: string = 'CciChannelDetail';
     public readonly mapper: ChannelDetailMapper = new ChannelDetailMapper();
+    public readonly timezoneColumns: string[] = ['executionExecutedAt','executionMonitoringStartAt','executionMonitoringEndAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciChannelDetailModel)
         public readonly repository: typeof CciChannelDetailModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
-    
 }

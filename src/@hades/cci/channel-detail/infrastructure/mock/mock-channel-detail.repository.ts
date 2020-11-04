@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IChannelDetailRepository } from '@hades/cci/channel-detail/domain/channel-detail.repository';
-import { 
+import {
     ChannelDetailId,
     ChannelDetailTenantId,
     ChannelDetailTenantCode,
@@ -22,8 +22,7 @@ import {
     ChannelDetailDetail,
     ChannelDetailCreatedAt,
     ChannelDetailUpdatedAt,
-    ChannelDetailDeletedAt
-    
+    ChannelDetailDeletedAt,
 } from '@hades/cci/channel-detail/domain/value-objects';
 import { CciChannelDetail } from './../../domain/channel-detail.aggregate';
 import { channelsDetail } from './../seeds/channel-detail.seed';
@@ -35,14 +34,14 @@ export class MockChannelDetailRepository extends MockRepository<CciChannelDetail
     public readonly aggregateName: string = 'CciChannelDetail';
     public collectionSource: CciChannelDetail[];
     public deletedAtInstance: ChannelDetailDeletedAt = new ChannelDetailDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -57,7 +56,7 @@ export class MockChannelDetailRepository extends MockRepository<CciChannelDetail
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciChannelDetail.register(
                     new ChannelDetailId(itemCollection.id),
                     new ChannelDetailTenantId(itemCollection.tenantId),
@@ -79,7 +78,7 @@ export class MockChannelDetailRepository extends MockRepository<CciChannelDetail
                     new ChannelDetailCreatedAt(itemCollection.createdAt),
                     new ChannelDetailUpdatedAt(itemCollection.updatedAt),
                     new ChannelDetailDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

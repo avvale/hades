@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciChannelDetail } from './channel-detail.aggregate';
 import { ChannelDetailResponse } from './channel-detail.response';
-import { 
+import {
     ChannelDetailId,
     ChannelDetailTenantId,
     ChannelDetailTenantCode,
@@ -22,46 +22,43 @@ import {
     ChannelDetailDetail,
     ChannelDetailCreatedAt,
     ChannelDetailUpdatedAt,
-    ChannelDetailDeletedAt
-    
+    ChannelDetailDeletedAt,
 } from './value-objects';
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 import { ExecutionMapper } from '@hades/cci/execution/domain/execution.mapper';
 
-
-
 export class ChannelDetailMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param channelDetail
      */
-    mapModelToAggregate(channelDetail: ObjectLiteral): CciChannelDetail
+    mapModelToAggregate(channelDetail: ObjectLiteral, cQMetadata?: CQMetadata): CciChannelDetail
     {
         if (!channelDetail) return;
 
-        return this.makeAggregate(channelDetail);
+        return this.makeAggregate(channelDetail, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param channelsDetail 
+     * @param channelsDetail
      */
-    mapModelsToAggregates(channelsDetail: ObjectLiteral[]): CciChannelDetail[]
+    mapModelsToAggregates(channelsDetail: ObjectLiteral[], cQMetadata?: CQMetadata): CciChannelDetail[]
     {
         if (!Array.isArray(channelsDetail)) return;
-        
-        return channelsDetail.map(channelDetail  => this.makeAggregate(channelDetail));
+
+        return channelsDetail.map(channelDetail  => this.makeAggregate(channelDetail, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param channelDetail 
+     * @param channelDetail
      */
     mapAggregateToResponse(channelDetail: CciChannelDetail): ChannelDetailResponse
     {
@@ -79,7 +76,7 @@ export class ChannelDetailMapper implements IMapper
         return channelsDetail.map(channelDetail => this.makeResponse(channelDetail));
     }
 
-    private makeAggregate(channelDetail: ObjectLiteral): CciChannelDetail
+    private makeAggregate(channelDetail: ObjectLiteral, cQMetadata?: CQMetadata): CciChannelDetail
     {
         return CciChannelDetail.register(
             new ChannelDetailId(channelDetail.id),
@@ -89,9 +86,9 @@ export class ChannelDetailMapper implements IMapper
             new ChannelDetailSystemName(channelDetail.systemName),
             new ChannelDetailExecutionId(channelDetail.executionId),
             new ChannelDetailExecutionType(channelDetail.executionType),
-            new ChannelDetailExecutionExecutedAt(channelDetail.executionExecutedAt),
-            new ChannelDetailExecutionMonitoringStartAt(channelDetail.executionMonitoringStartAt),
-            new ChannelDetailExecutionMonitoringEndAt(channelDetail.executionMonitoringEndAt),
+            new ChannelDetailExecutionExecutedAt(channelDetail.executionExecutedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ChannelDetailExecutionMonitoringStartAt(channelDetail.executionMonitoringStartAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ChannelDetailExecutionMonitoringEndAt(channelDetail.executionMonitoringEndAt, {}, {addTimezone: cQMetadata.timezone}),
             new ChannelDetailStatus(channelDetail.status),
             new ChannelDetailChannelHash(channelDetail.channelHash),
             new ChannelDetailChannelSapId(channelDetail.channelSapId),
@@ -99,23 +96,19 @@ export class ChannelDetailMapper implements IMapper
             new ChannelDetailChannelComponent(channelDetail.channelComponent),
             new ChannelDetailChannelName(channelDetail.channelName),
             new ChannelDetailDetail(channelDetail.detail),
-            new ChannelDetailCreatedAt(channelDetail.createdAt),
-            new ChannelDetailUpdatedAt(channelDetail.updatedAt),
-            new ChannelDetailDeletedAt(channelDetail.deletedAt),
-            
+            new ChannelDetailCreatedAt(channelDetail.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ChannelDetailUpdatedAt(channelDetail.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ChannelDetailDeletedAt(channelDetail.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(channelDetail.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(channelDetail.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapModelToAggregate(channelDetail.execution) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(channelDetail: CciChannelDetail): ChannelDetailResponse
     {
         if (!channelDetail) return;
-        
+
         return new ChannelDetailResponse(
             channelDetail.id.value,
             channelDetail.tenantId.value,
@@ -137,13 +130,9 @@ export class ChannelDetailMapper implements IMapper
             channelDetail.createdAt.value,
             channelDetail.updatedAt.value,
             channelDetail.deletedAt.value,
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(channelDetail.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(channelDetail.system) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapAggregateToResponse(channelDetail.execution) : undefined,
-            
-            
-            
         );
     }
 }

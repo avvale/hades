@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "9cfe74cf-c041-49e5-bbb0-b29629657369",
+		"name"          : "@hades - cci/channel-detail",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - cciCreateChannelDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciCreateChannelDetailInput!)\n{\n\tcciCreateChannelDetail (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tchannelHash\n\t\tchannelSapId\n\t\tchannelParty\n\t\tchannelComponent\n\t\tchannelName\n\t\tdetail\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"b962b77d-a02f-47e6-a100-12b9c34951b8\", \n\t\t\"tenantId\": \"46cc98d5-6415-4d95-a3d1-370a531c6c13\", \n\t\t\"tenantCode\": \"6tpypyx8j9r8x3p8ssq5fgft39wmv0zcodb2jmtcove88xqesz\", \n\t\t\"systemId\": \"1bde9487-292e-4474-b6fb-937288b90d62\", \n\t\t\"systemName\": \"vs63duamaw4avavq80ey\", \n\t\t\"executionId\": \"3b7d8c80-6634-40ac-9a18-95d052bf92d5\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 13:24:23\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 07:54:42\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 17:36:57\", \n\t\t\"status\": \"ERROR\", \n\t\t\"channelHash\": \"jqxxkueufdzsjdvi5p2y6ebj1pgbkrzpirgwz8vx\", \n\t\t\"channelSapId\": \"rtlc842ohazuyapp5u0ix8x65njfc0ayy1xrxvn89kmmwuvtiy\", \n\t\t\"channelParty\": \"h12g7g5gm727kp41915vkbqtb4ocm0bmljsjk76n611aaa7fn2zb3q62911cyuc9o992tvsot5wpdvp2lfxesti950dh1dhdconbgeha1nhx461nkcodrd50ueb8pwkvfy0xf1x5iesg3beq32z728cyiaedd57n\", \n\t\t\"channelComponent\": \"kw3pi10j6pm5036askta4nnj0uanltcjoo9uv3aosffpmsrzxamlwuvnkh6tses3fpqx6ex52jfo9xmln3oes89qkohigvdpxcq95amuvk226ynjueaai5m7ylq88zwus5fdfii133vadt1aoiz54nj7qaqr4ae9\", \n\t\t\"channelName\": \"3ct6tpw8w0nojkaj61ivxib5mwckomn3rmqncfk55zyc8ckszd2wx6va2lu7iuk9p6c6jl0et4nh2riy8age1sqh65b7nayzdukbmiuoqq52ryixwk4kzhloigjee0cfmohgfhsrrqun88h8bti5v9g2hz5ohvu7\", \n\t\t\"detail\": \"Aliquam rem debitis omnis eveniet eos ex eius minima. Perspiciatis tempore voluptatem. Voluptates excepturi voluptas repellendus nisi inventore. Omnis architecto fugit ducimus qui ipsam nam voluptatibus. Cupiditate magni corporis corporis nihil porro et voluptatem consequatur. Rerum et iusto doloribus qui.\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciCreateChannelsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[CciCreateChannelDetailInput]!)\n{\n\tcciCreateChannelsDetail (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"116c6234-17e7-47af-846e-486909098e0f\", \n\t\t\t\"tenantId\": \"6aa990cd-80da-4415-bd81-1cf6cf669c3f\", \n\t\t\t\"tenantCode\": \"by6tglj7tiz4rdnobwxmp1yjncclxua25ofk3vr7k7np7kuryw\", \n\t\t\t\"systemId\": \"37b95085-3e55-4de3-8173-ad4f9f6bd5db\", \n\t\t\t\"systemName\": \"3globrab9c8jxpj4q4oq\", \n\t\t\t\"executionId\": \"2209df72-21cc-4009-af55-e8e626570a57\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 02:23:02\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 00:30:08\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 14:27:50\", \n\t\t\t\"status\": \"INACTIVE\", \n\t\t\t\"channelHash\": \"v8xc2543uqqfbt4w7s2viwtjge5oei6q2atyq047\", \n\t\t\t\"channelSapId\": \"2q8salpovzniwqyyvt04fl9dts9ytdsh9mr1k8lbvgkptqym2m\", \n\t\t\t\"channelParty\": \"jubnlyp2cjusuc0gmghhonifnycfwq0kcp5cfllw9ntr7eoj4s9znejxs379zxc00b36n7758nxonqht5rmgq35dk38bi24ted1cawwemwbe14rc7i4dj7mp3g5kx04f6l0crrznp5fdk11o6s3oib0s3cg85m18\", \n\t\t\t\"channelComponent\": \"6lr9z4cjhgievutyzz6gpo1yveaurvwarerd4282cc9mupde04du7y9iadg4896gxhqglp0xb79rmgu42672ho74jh0q8d1vqcb4wxigsxy6u9nnlasie4xpost7d637l30mz4pvre7lokm9xuyfnxku4gm7m3g8\", \n\t\t\t\"channelName\": \"q00gq9tbt3l0jd60bbyn55vj551jbfhdzat3v4rybm5la4s1ksx03oazderalo3r96fv5el3ekl0solniw9xunhwh9fdajrejwoldwys1l22xclz0m135nx3mwjjq2eowzvik0725xm469lmzmbcoczzts371m42\", \n\t\t\t\"detail\": \"Cumque sint optio aspernatur nobis animi et temporibus. Cumque non quas laudantium quia neque repellendus qui. Qui optio ipsum. Alias voluptatem reiciendis adipisci quibusdam eos facilis aut.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8f79ac2f-ffdc-40c3-85fd-773895f74953\", \n\t\t\t\"tenantId\": \"ac5b4692-198f-45c4-b587-17ced4d802cc\", \n\t\t\t\"tenantCode\": \"dzqrh95oefgef5wiswba4iinyobgkctgwp3tk6w1qmvoblc3en\", \n\t\t\t\"systemId\": \"09fde93f-ddb5-45d4-bfe1-01f26cf5fed3\", \n\t\t\t\"systemName\": \"gjmvdvauz1ajprwoufyu\", \n\t\t\t\"executionId\": \"f3541997-a014-4e87-8482-1af2c6ca4f0f\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 06:05:52\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 01:22:38\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 15:14:04\", \n\t\t\t\"status\": \"INACTIVE\", \n\t\t\t\"channelHash\": \"txfcips5n87sh9rjfyyof6wgsewhxxzh49b4y4j3\", \n\t\t\t\"channelSapId\": \"dcq82dztfetllzcro4zs7cq6abwdd0os4tfrvb7iscaci437j4\", \n\t\t\t\"channelParty\": \"8wjzxh7ddgo6bghj4e48saexzsxzbbseu3h8ana81q2yp8niyd9sk1kqanek2i2nzekva9szh0fz1s7yjsup00pagveu3ijpe2t25rosvmk8o6u3wo1thqrpoxuwn982zf7iypxcuj9cxo7igha0p6g8ywukwzyu\", \n\t\t\t\"channelComponent\": \"trpusoxwdcwo977ykiqkkvx3o7t4ne6muh6p4kcr795o7u6e8dc9fhcx3wcutksi3swc9omn626d8itmpto6h8pewkwoywvrmqq5jeyq9qal3006itkpicfxbb2dlaqja48bqldyro9c5n9cd201ip240edp8g9s\", \n\t\t\t\"channelName\": \"5wzworc97cpgx0yysqxq05xpki738fw2o10pw68k2g3vfgzmfgz5nwzly8ti2njinio2aaywk5csqj5mvv3559l64ot1najbqhjgxtyfpuyj42bq9rfjsk4wo5pyn656vn08qectj499ze8vz22ord4u9pgwou9v\", \n\t\t\t\"detail\": \"Sint qui laborum repellat placeat sunt cum. Ab voluptatem labore quis numquam consequatur deserunt voluptatibus incidunt. Ut quia voluptatem qui sapiente excepturi rem amet. Ipsa harum natus unde.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"67106fcf-65d3-4343-bdfd-a477d222b6f3\", \n\t\t\t\"tenantId\": \"0074d01b-0c95-4c83-80c6-b50dc97cb21c\", \n\t\t\t\"tenantCode\": \"nebbdmobh1c9sfimvtyp6m6fy0uods0qy6irvsoja7qo6qi5g0\", \n\t\t\t\"systemId\": \"f8e26b90-cac0-4635-8beb-84ee99fd0c71\", \n\t\t\t\"systemName\": \"53sxervzrlzjlbrnk8rp\", \n\t\t\t\"executionId\": \"fe89f9c7-73a8-4a50-b8de-655863f1358a\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 09:17:23\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 12:21:13\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 16:41:44\", \n\t\t\t\"status\": \"UNKNOWN\", \n\t\t\t\"channelHash\": \"s1tqirk2ujl4dds57fv8zq85oqc9dd6273l3mkih\", \n\t\t\t\"channelSapId\": \"v1u6wknvwba3cnk2cw0e2c6v2hx1h1glovi1felbx1w8w8hbwq\", \n\t\t\t\"channelParty\": \"pr2ndbz17okjo39ktd80o6vik6mkkmvnsc8xaapmtg76nyfs27gk3rtevlplg1ree9symkbisfoyktmii6fec4ftr6md30xjzbi903ztvw3xj6mr0kl5ttfksrc16g6qibwp1p6jn8apqrpxnzp07c1tnw5pj3pf\", \n\t\t\t\"channelComponent\": \"c1f747230mkx5qm70dq998l6q2imd908ytlklyap4u2llj64fdr7ivj17iljft8emj9ivnvierxezjguq2mkw8ib02coyw4kmg6agg92ixm9lu51k3sa8auu63qr9c68nc6kpccazo93fn6rfp7y6814bf0q13nk\", \n\t\t\t\"channelName\": \"up8bixkxii8rca715u42jyrk53i5v6zvc8cg00pze6jmhvg52goc4jxz319vf76w90vfhbhhcgoy1ky3fax7i7ur7x5y2vpsqil59ldne1jyo4mzu9yivf0qb47xjq7u2ivy8oyvto100ormjg9ihz9dhc1m84aw\", \n\t\t\t\"detail\": \"Nam quis veniam accusantium velit et voluptate aliquam iusto. Quas cumque ratione. Sapiente quia cumque esse. Id fugit fuga culpa sit. Molestias error laboriosam ipsum cumque at nam.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8cdbd4dc-5187-470a-b581-31fdc611405d\", \n\t\t\t\"tenantId\": \"d2c7d100-358a-4850-9032-8ff99b131c0a\", \n\t\t\t\"tenantCode\": \"0mfe01fwca8pgalwjitopcpreq9o1aqjbca14qc6mtyk163zg2\", \n\t\t\t\"systemId\": \"fc1bc549-15a8-43c8-9db5-43a151d62933\", \n\t\t\t\"systemName\": \"yc992zfyt32lbpoztnzy\", \n\t\t\t\"executionId\": \"9cb3335a-ae0b-436a-81d3-79e99066eb5c\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 23:30:10\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 10:39:23\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 06:06:21\", \n\t\t\t\"status\": \"INACTIVE\", \n\t\t\t\"channelHash\": \"htlgwlp6pi02ekov0req1nq61gdwkfko9oyksz9z\", \n\t\t\t\"channelSapId\": \"8mrwi0aaned41fci15703u9478lb57xny6xlsiwfvhte10yr5y\", \n\t\t\t\"channelParty\": \"ac4e58pxer9rk69ndnlmy6cb7ah2t3vkvxocoe8attnwnris1luye24nadjrzqvmk5atw5oer4l53dzvkgwcya45me5usb8mmvznpnqwydfrm32pj51aaxa3q7ry43lu5xeyg6s0ng8yyso0be9kpurx92hcggcu\", \n\t\t\t\"channelComponent\": \"l3qlknq21haw0r2fkdp0unmba09bojt3gjs1ot0eq6zdvnp80tz68g0ejmygix1ooj22bvkis2xwrg9re60zpsge7lqtx5j4wwlmr6nn43giix5w1fzwfcdz8qst43i7udvqcriuvafif572rcdg63wobi2jr2qk\", \n\t\t\t\"channelName\": \"0uxhzjqzxali8wmwrsevorq3wrl099dhjcovc77stok5vd5w5fcmbc6iswrz3wivfxk4evr7m407t36jr1zu7hsnk9ldc1iiyxgjbbrncnm77jowxac699w92wm5d2t98jwezeq7uxu9a98dzwret4d006hxo06e\", \n\t\t\t\"detail\": \"Aperiam tempora vel voluptas quisquam. Nulla provident odit ratione placeat dolore. Libero quia at.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b66c2814-d539-4079-a50b-5a693d307e02\", \n\t\t\t\"tenantId\": \"34a3448f-f2c1-4b61-b785-a89c745c4b7a\", \n\t\t\t\"tenantCode\": \"p39ws34kjwoxzv0ss4itcsubiei4ib7w5019vinp7atggsr0gh\", \n\t\t\t\"systemId\": \"10d1d3ac-eac8-4ebf-ad8a-cc59a1d0c45b\", \n\t\t\t\"systemName\": \"7sqb1vs1u0l191e2zt7j\", \n\t\t\t\"executionId\": \"22cd8a99-aad4-431d-84d1-3bcb4bf27437\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 17:57:11\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 05:28:09\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 16:27:42\", \n\t\t\t\"status\": \"SUCCESSFUL\", \n\t\t\t\"channelHash\": \"zg94c0tevs59xcan8qrwir9ypkiyjhqer136z228\", \n\t\t\t\"channelSapId\": \"fjsknkw0qq3wd1kku0g0ltuz99sjwmzfktpu1c7dcxg2q216m9\", \n\t\t\t\"channelParty\": \"9fxua7xo27y7ddm2wi6x69jk26okvrkk88enseo2jn3ckjdzr6vy3hv529hxd91ydsvfz2bzbhh822fo4g3zedt4i9sf10phefegihx8p2ekq7wa23adidkj9ife3e6oflorrip39ylrqs68l639s34k6b2hr7um\", \n\t\t\t\"channelComponent\": \"yfqckzmugi291et2nnr1wtots506mvxn4tag8n4b0xgnf7tl8vy576e1jpzgbtbmwhg1ei3y79uu4ewt41aqf27xpqwiuenn0t4eqhwew9qhyprmulv4w82xkpobjwrzj5fmdgwsfgu3rk4t6ptjufgdo7dnw4ru\", \n\t\t\t\"channelName\": \"or2v2uqugq3go62ytjut5wj3atlze5uhg2a43cjegkum691ognphvwk54k7x4csdas2ndasqnjru2voiumjfioabgf2lu4p0n2bh09vl4xcaq2woane7rt4yt8cv9f2sox0jr7yvfvorfrwcgh8vh5ipbyqx5ltr\", \n\t\t\t\"detail\": \"Est dolorem dolores. Sit accusantium distinctio modi accusamus. Quasi voluptatem quod eius velit et tempore architecto aut. Sint natus magni esse voluptate pariatur. Et eius laborum.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"36fa3f33-5468-4e13-b884-955b9c639495\", \n\t\t\t\"tenantId\": \"07c92688-b4ee-4f19-8802-1e089e13f6bf\", \n\t\t\t\"tenantCode\": \"7i4k3btoqrd2qco7h3z03e5uwtdnjhqwfzk6lg4l1z2c7p37o8\", \n\t\t\t\"systemId\": \"3b5e2f1b-7568-49a5-a5da-846ef90f04bc\", \n\t\t\t\"systemName\": \"bo5mmhgmk5fwa9htgmis\", \n\t\t\t\"executionId\": \"3b871041-bd93-4ef3-98a5-1a934e545ab9\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 18:26:09\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 03:56:19\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 00:38:41\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"channelHash\": \"wm1mkc9vnvx5eb5hg28zde7xwq3czpun9w5iorqc\", \n\t\t\t\"channelSapId\": \"3hlb2eqpv8306ox1r2vhm3logahraqpaauo5okikqy3e12u0zt\", \n\t\t\t\"channelParty\": \"pvfnohogb28u2hosbn69avy4afw6oj35rbv394llb856hnm867ltoe04gwd89w8h5flbxphdn9a3odeuz7189clhnnk590ml614605rexv3jproj06y4m9ciph1oozsjz8u3rqab8348w3k3ztrrb2wl1epn0tmd\", \n\t\t\t\"channelComponent\": \"9meb612l6s4dsvndbw4wfv3dn9t43cgldtx25b0wsbbtkvy2q5eywjo94izcbkfi1d2hge2an2ed4pbibwnghvi1ybayb8ga9ruzqnp9hbjnzaif6meimcf5rq9qvwfn8hkbb84lcwmqx56ba55g3t9a7kc9wgz4\", \n\t\t\t\"channelName\": \"zcz0o5sat8ek28fw9vjbttq7orubf7rg72ggt47ny7kcy40q5jwt16ochq900il50u3nqh52dzuowutqimaihj839peja58efx2wim3oe6vy69r85j85us7g6nlqmttyr8ogk3b003fnso09feetz8g3gz3pt3h1\", \n\t\t\t\"detail\": \"Quasi provident repellat illum deserunt. Et quo id aut quia consequuntur. Consequuntur ea rerum aliquam. Minima et perferendis ipsum beatae aperiam eius dolorem. Eveniet exercitationem veritatis corporis et fugiat reprehenderit repellat.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f46fc75e-514c-4c48-a46c-4e82543adab0\", \n\t\t\t\"tenantId\": \"2cb54212-a2a4-433a-938a-4409fc52e7d0\", \n\t\t\t\"tenantCode\": \"hf81gpfu4r8z9ai8jbj94ci94cqt7ajoox54r7jfyn590nid4z\", \n\t\t\t\"systemId\": \"2a06dbe6-cf79-437d-9915-e8a4382276dc\", \n\t\t\t\"systemName\": \"h9bqjwvsjrq6cgei1d52\", \n\t\t\t\"executionId\": \"06911dbb-9582-4b5d-8fab-73f77fdbf6b7\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 20:25:35\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 18:02:26\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 18:22:42\", \n\t\t\t\"status\": \"UNREGISTERED\", \n\t\t\t\"channelHash\": \"i9ly6r7z45sysu12wcm362316ha9wlytv2ia4y6n\", \n\t\t\t\"channelSapId\": \"3ee82t2smgbvf2ez4lbbptxees76y2cbbg04xwzvj0rfksukf3\", \n\t\t\t\"channelParty\": \"nnftizuj1sk2ymokgkjw2fu7fdm0my7g09cvy4x2mc3x20ucaljp1rix0jciszcf80w3efcakh3y9jbowx9xkk0hmg3sioizbob8am7agludzwobseyc1hzrfjyx9ycn3di1lum16fnej4ynj8tgbtunsd9dxo82\", \n\t\t\t\"channelComponent\": \"rloiiju5mehdrotuea51lwurx5785y1qejaf64rm817zk9p8ckg21d7ddpbf8oega8i9xmudi2fv53matds0ix0d5cvhyr53vbjms6u7l94reqhmmlrj7sx7opuglw5q5uhu759x3ey0slnpy4eu28mrd0bp2m9r\", \n\t\t\t\"channelName\": \"5o3ewpgf1chc3qiasd42wwvubmek9sksi8rgbvus8kv2dr6a9pscnq8634yf4w6yqsoram8pconu5dehfqu18qzje9nj8t1l68r3r47wis0i6rebdadtjw9keyc2ehpvsf52q2pzqburbu3ldayuymvdrxl50x3g\", \n\t\t\t\"detail\": \"Exercitationem ut impedit fuga repellendus. Suscipit est voluptas. Rerum est hic aut.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"daf63d03-54a6-40d6-a004-38404ebd0d80\", \n\t\t\t\"tenantId\": \"3bdde0f6-44b5-40b2-9f70-84f655acc597\", \n\t\t\t\"tenantCode\": \"bifxkw5ecxdrnoo5dwon9gmqakxqgai7dy95xvizmebfkvqz0q\", \n\t\t\t\"systemId\": \"011a7d9e-6b22-4801-9727-b4d2200e41d0\", \n\t\t\t\"systemName\": \"m79ejhznax80d205v044\", \n\t\t\t\"executionId\": \"b2ec3e86-26fe-487b-a091-4fdedc0c7fdf\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 15:11:23\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 05:18:58\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 12:17:56\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"channelHash\": \"elinrvfkd6zganoab59dpszhur1ixnieem653em9\", \n\t\t\t\"channelSapId\": \"mad5vpkt1qy8wgetdb3yctsergbm3nuwrl1ekbiqkg7zqhtuud\", \n\t\t\t\"channelParty\": \"tx1w32siggonwhlkd7dabwdiroulx9fiaoimp3bfr24c6m9mrzctldsmv2n0ersdjjoaknpgmjb4b6jwqs0a9iq2gnaotj9jg1ija5ewz6gf7a6pft43phdh9czcy72z1xl54myvg4i3j7cq2ql1k5lc5nhajr57\", \n\t\t\t\"channelComponent\": \"q1cndzmegbsee0guiju01anjj6z899ccs01mgo8aedw5omgphu4zmwx8nb8oa7gmf44p7dm4dr67gl56a46qlfe27owylh4m5rg8f9fhrah7tinijvn9wfy0pt2szf69wakyb1ufq2wpp3djen19l9kpdm8iyanl\", \n\t\t\t\"channelName\": \"m0ytmcq38fhsv5wan70eihlvv78bsa0rykzab5ovodxjv6hipo0d9wmgix7n70w7ssfg7flckoffqwae3jgfac0h25g7j0top0egromvoiyavljim3rpgwi1f2shyx3h4529kjt2qsy1mrnzv1jky5wtdsjyrs75\", \n\t\t\t\"detail\": \"Eligendi illum est voluptas animi. Fuga sapiente repellat. Ut et alias voluptatem. Rerum qui ea. Est voluptatem quia omnis commodi eos est aut quae. Et omnis eos voluptatem qui aut quibusdam nisi.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2df5796a-e7bb-4b2e-9719-0e54bc516517\", \n\t\t\t\"tenantId\": \"9bd4480a-eb1d-4650-96f2-d721ee7e09a0\", \n\t\t\t\"tenantCode\": \"s1257e5y9kw140y48fdxcdn6d4cfmukg3obd3xp8oxy4jdifzx\", \n\t\t\t\"systemId\": \"8ccf103f-446a-434a-8eb0-8fc754ed4cd5\", \n\t\t\t\"systemName\": \"ihsruqygs18ragansrzm\", \n\t\t\t\"executionId\": \"4d1f3f7f-daf9-4f06-a381-918e07471168\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 17:41:57\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 04:30:11\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 19:26:59\", \n\t\t\t\"status\": \"STOPPED\", \n\t\t\t\"channelHash\": \"fezxmey8igo8sl3jlg1kv4lmrkzlpqgjeg3fuq6h\", \n\t\t\t\"channelSapId\": \"w9inhwf4tm3gzbaxqhy37m81tlbtkfgy2rawscm5zfib3rg5q6\", \n\t\t\t\"channelParty\": \"le4ss4nmkdomm2bmt551ly92bs5l5vfu1cs6fqt0yqfu3kr5sat5tdnq9vc6i5wecn7vknsp0qz88y9z6cdimod8zlycl8oak7n72mx2mgs18iiawejxrf2sxzshkkt356owkwswh6xs5wnqwohwk5w741le74p2\", \n\t\t\t\"channelComponent\": \"874myfdb27q39bvu65o8t1eyu7rj60bsdypqbk0eimuiwtfhgn3m6yfnqktxgkf48jdbtgfd4c645qfv03qj73po7rhjus9dk9dj52pp4ak9r239sgj4i63w0bxw5lmkqd08uav19482rzvddfeu2y4prs5ubsps\", \n\t\t\t\"channelName\": \"dw0p12bj8o79z9bv2mjkhiqo8r7kcoo5murxco5h3vaoq5ta28fh3hdk1bs6vibfqwbakduhmm7oumlm5ya97yssz253jk0isca9u9434x11s1e5f1cni7nn8tybvtocbgtgnslh6t0qn7jnxind0p9e3xysmlcc\", \n\t\t\t\"detail\": \"Nemo aut delectus totam sed eaque quia sit. Perferendis vero qui similique praesentium quasi est quos repellendus nihil. Mollitia et maiores cum atque non ratione rerum ad. Corrupti doloremque iusto. Dolor doloremque aut.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8e36a13f-c01b-46ea-b107-7144de1bce04\", \n\t\t\t\"tenantId\": \"4cded3c8-3317-4194-84f4-8906e583438e\", \n\t\t\t\"tenantCode\": \"6mw9218c6erna2ejcslviwnvpnrpbtj10g5ix3ngcz2l6y2pxz\", \n\t\t\t\"systemId\": \"05a809cc-7a85-49dc-8011-627e0a39e7c8\", \n\t\t\t\"systemName\": \"nyaz8g155ov4yhx2jqmm\", \n\t\t\t\"executionId\": \"c689be6c-0c8b-4f59-a719-92ac3b7fd8b9\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 04:53:47\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 21:09:56\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 12:07:14\", \n\t\t\t\"status\": \"UNREGISTERED\", \n\t\t\t\"channelHash\": \"ffw9zsmhnl2jd0rik1omfw8a1n4ajtxgqdtg9bqm\", \n\t\t\t\"channelSapId\": \"iyguqcfz3kv1ziiwo1x0w66h17tkx6mi09gx9bzf06klf5lxzh\", \n\t\t\t\"channelParty\": \"epue64xb8l7lgssldt246epdqwzvkf94250gdlii543zaawqlll4j7qqnpcqot9ztuyrntl3x7nq7so6o0cmvmwfkxoah3tburu0z9t6oegk7gjxqdpf2v00d3486a4gkvcyf01tcfxsicwf198d66fvb4p0zwtt\", \n\t\t\t\"channelComponent\": \"uigjhdjlyghr9o4qh1ijw5d9ucnsff680dtpp2pgpdlem10ejh4snhovhvor9gl3yo5wzel1g5glkjxain7r20p45tivtouuawhbtwov94njsdyuvixxbi6pzxpdacklzook9t6wypnkri8dg4qw1jh076sbxr5v\", \n\t\t\t\"channelName\": \"ofwnq9tpy6hmd6qdqrc3dith3nl2vjao8lhuerj0a41dbevuk3it96ux9bdx9xqwa45fh6id2wkkoji2nmat3e407maaxjvth7xfhg66iw77evt6r3kovkrwdq4kdsnygsirk2ms3l5w45y6lt68d8zac2lmipw7\", \n\t\t\t\"detail\": \"Fugit laborum ex quibusdam. Non perspiciatis officia recusandae sunt provident facere suscipit. Molestiae velit et excepturi aut quas. Omnis voluptatibus libero nesciunt praesentium aut officia.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c246342a-93cf-4cd0-8ab5-bbccafbf28cd\", \n\t\t\t\"tenantId\": \"14aca237-41c4-48c4-b134-5f2f8e2efe4b\", \n\t\t\t\"tenantCode\": \"jkbzfcsbuvjsik9rfoh6v1vayccx36w22rvg5xucz4k8hcdq44\", \n\t\t\t\"systemId\": \"c1b4da48-ef43-455f-a4b3-ad72c6dc4f25\", \n\t\t\t\"systemName\": \"8s4oasip6gb0hvkuu622\", \n\t\t\t\"executionId\": \"4fa8d335-f826-4a37-a304-8d12179a53d2\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 10:08:21\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 03:17:18\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 23:56:01\", \n\t\t\t\"status\": \"SUCCESSFUL\", \n\t\t\t\"channelHash\": \"gie03kyjbzzbqymsoqfa2ry5b3kbljdzsyfmq9l2\", \n\t\t\t\"channelSapId\": \"pqpw9zuf9c8ns63ash7pt552nrx1dbuiifibmegq3jozmce6mc\", \n\t\t\t\"channelParty\": \"l0rpxde75vu6zw5uvlyx8rqukewdzflx1728nazj5nx3urrf9zo2ehpftrmemy60i66q58nycnb5ilh5h2ryx0v6l0foxn5ep3hgzxxmgd03dt4tt81ew3xtjh91bl32iwpfxwfh71v0gh8n8kcynhplk3h8ksf6\", \n\t\t\t\"channelComponent\": \"yo3zlbzmnuzsz60ppt6l19julmoyjp1t6bzepznectjyyilam1582nb31o1k4gwq3s5pknpzlra37k79oaajkypoxl3o3z6zqqz2ld6blt8d3drsg7tj2k6braczg4pfgkrcd1kd92tqzg7kfqsdpnn202ozxwyz\", \n\t\t\t\"channelName\": \"njmk78etj2k7hqk8e2cnournwrod1ud95hvx50jeuo290nq7bkuvf06jxp9jgwtd9a1i4vdxto3cirbdr2nevrz1dk3nthegm9csrt9n3e1rtghrw6qzn6zn3g11mvhaeutxqmgeb7n8jifv8wha2jznu4ncpyeq\", \n\t\t\t\"detail\": \"Aut enim veritatis dolor fugiat amet odio ex sapiente dolores. Et voluptatem eum non qui nemo atque ut qui. Dolor voluptatem consequuntur. Ipsam officia laudantium. Nihil vero quidem dolorem et animi aspernatur neque.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"96affbcc-7529-4b5d-9921-01e9500e0e0b\", \n\t\t\t\"tenantId\": \"259668b4-1fb0-438f-b9ab-8a34fe0c6b95\", \n\t\t\t\"tenantCode\": \"lb3vydk82xnjafqa7ahahklzmjn3xbtrixfdgex19xg5xrijhf\", \n\t\t\t\"systemId\": \"5ef32c13-bf51-4444-8c28-f9bc2a95c162\", \n\t\t\t\"systemName\": \"fvoj9djkfkb4sz2n6ypw\", \n\t\t\t\"executionId\": \"cd0f0a11-f49a-4353-bd4a-04406648aa33\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 10:44:05\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 17:36:47\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 12:48:57\", \n\t\t\t\"status\": \"INACTIVE\", \n\t\t\t\"channelHash\": \"xm3ehdn6y50an5ti05605j7a6ic7pbtowvbw0o75\", \n\t\t\t\"channelSapId\": \"9mef7mi24cy8fg5b68nvy0nfkkv7uoaw74lj0dwqufrjopvlf4\", \n\t\t\t\"channelParty\": \"r1t6c66piq727a6fwbooa3qgvw8uqnwl9y2lpb8oz2qibhdr7s2bazumdhgtjiakyjdas2t2by7ci7fpa67gq3vbtjjd8q3obq4hpif6ofoe45b0dho4rrefsia1tm9m55n8bisii1cilhn9oh00knbb0ofg677f\", \n\t\t\t\"channelComponent\": \"wxuyu9p5zs08isgyn59biyuggb3rze5n02ah25vsns4jvlxxu24ws8l87zahojdvg5pqexbx0lih54cx8kootew9hdmsqjebbp33huo84vz7pwxs400pcm8f9tqd96oajylnm69tsb0ef5mfnq8hd35a2t93zpso\", \n\t\t\t\"channelName\": \"097mv6wfa4mfufuod90w3sb8teqinx07hhp9isbrzb0ua44rwd73on0r66k7kur5bazejl03uy1af040xxr1q243nj5zhy2rifk513dizdqdcfii915195pa8pv9xpj0v4lij9o5xc5rlh02xhi8jdmvp144mwlc\", \n\t\t\t\"detail\": \"Atque qui ullam totam assumenda labore in hic. Iure magni dicta culpa architecto nobis omnis. Occaecati totam sapiente numquam assumenda dolores harum. Ut iste enim qui dolorem.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"374868e3-dd7b-470d-8d6c-638174a13a10\", \n\t\t\t\"tenantId\": \"aa2dabbc-ebc2-4d27-85c5-3fc581b17d50\", \n\t\t\t\"tenantCode\": \"a0ln2fouai7aewjghphqgjwpd0fhxcw9t0193lcn6g3io24q36\", \n\t\t\t\"systemId\": \"503e27ac-6493-41db-8e68-c3b60dc5f3a4\", \n\t\t\t\"systemName\": \"yihthqddirswetlorao2\", \n\t\t\t\"executionId\": \"625617dd-782e-4816-a887-353cf31e5107\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 22:36:53\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 23:36:23\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 19:38:43\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"channelHash\": \"nidl2mi1hu90ed9ethy2gmvbavk29dgfzuxh8y1r\", \n\t\t\t\"channelSapId\": \"7d8q9cpkcqo523awvqaw8ovsv3e4zlfd8t5qrb9619df0rmnk8\", \n\t\t\t\"channelParty\": \"1c9mrh7b0jlvphft5ihjdvatwux434io5x121nzo83q5fgkufmn7tnrzr5cnwogoqlgul4i5eh0gq13na2im7hugsnyff68siwtf9y6vc4o4zeivv19uwmvg469sk67bdoy7wzae42dkd4qukatg0zwbjwbbjiwm\", \n\t\t\t\"channelComponent\": \"r8zas2omsfw0uoi2lt9b5xk1csi0jbbk2oiq12bhzaao7vrwtr2537lsz8yvyzxtt68o73qqkcxoqoqihkywjqv98grr7u2zot43qmytbx4we990ejzdr7bmuhimhv5rxy544lqf9gqwepc2f2cgeexurfqs6tl0\", \n\t\t\t\"channelName\": \"m8vumray9h0uqka5cc3l7y529i425qauxw7zkzf94sbaksuxkuwesharaak3vvyc1u3blkolx5aepkd05nzfhwezikheid6js6suz4fpmybo7o6hbm81pym1nmj5v7dse5tsjozs1c0wpfzwym4dbcb1td00cz1v\", \n\t\t\t\"detail\": \"Amet illum nulla esse dolorem error dolor. Aperiam unde maxime perferendis sit. Tenetur eveniet sint ipsam qui quia repudiandae est voluptatum. Fugit dolor numquam et voluptatem perferendis iste. Id asperiores aut.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"783a0250-be1e-4ccb-9e15-cfa0146bbe0a\", \n\t\t\t\"tenantId\": \"01215001-c18d-497f-8f80-5c9d67b77861\", \n\t\t\t\"tenantCode\": \"ber92nxzvhgth62v0bt8k8xer4nb18kif5cxmjfxq5baas5l6o\", \n\t\t\t\"systemId\": \"7381c52f-4dd1-4b12-aca1-aa3606b1ea1d\", \n\t\t\t\"systemName\": \"xhq41k4q7rhh0umhd6g2\", \n\t\t\t\"executionId\": \"b14685ec-43c2-4634-abeb-db33d9cc427f\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 02:37:19\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 05:12:40\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 20:32:57\", \n\t\t\t\"status\": \"UNKNOWN\", \n\t\t\t\"channelHash\": \"3tg4densrhex240ouitet4uen287bnh1sj3cu11z\", \n\t\t\t\"channelSapId\": \"bz55pqzukmi4n8mkdor32hk6bv9t6cscjxzr0gkf8gd9nd3xs2\", \n\t\t\t\"channelParty\": \"sx37dbrwm8sbx562igw7e8yc8ojc0eh4yituu4cjgp8tyat84j0l1pb26vbqb3szij2qork55u6q19i0ox45ntlh4emztv3457m5dweo2c1fx3nwt8zmq3xwhek5w1t3nzzhoimc1t84ez2gxxqwacjdtar2gxpc\", \n\t\t\t\"channelComponent\": \"j9ch6o8mk1jjjg1cao4231tw2sx13phddlfetf1fti66sgrno8ynw7ruxn9jia5ejwclqnfy5c9uhx4y2ib61hrmhhbdulupwsqv7u5o69a82chtnet1g7s4g7vgb229f1c0klmoixtryc2l7qpz3yp58f2iarpi\", \n\t\t\t\"channelName\": \"z11t9lpumnecj81i3tmxqvpbgxme24b2g85g50glsdmpw9fog7tpdx6vcx48gj560jyv5s382f6hnfobpdzo3wc3cyj4tckq3x6erc7g32qnroy0dgt75mh7i6wyath2yj75ntur5l5b03jamyhlfyizoj0bl2ga\", \n\t\t\t\"detail\": \"Libero id ea sint doloribus ea. Eaque consequatur rerum voluptatum. Quidem libero delectus esse. Ipsa ad architecto maiores voluptates. Soluta natus fuga rerum.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e2cb9a39-ef3c-4690-91b7-e26cd14053b9\", \n\t\t\t\"tenantId\": \"1cc6ef4a-fb7c-4b61-b383-ebd0e396ed85\", \n\t\t\t\"tenantCode\": \"pkbx6ehdf6q74yncpp75n7e1od78b1liep7og61lx2gi66ukkc\", \n\t\t\t\"systemId\": \"5b86ffc7-5dc2-4006-9068-682d6ceb7b6f\", \n\t\t\t\"systemName\": \"9hyr212d204v6flqzg8i\", \n\t\t\t\"executionId\": \"00cb600d-c395-4d16-ac3e-12a0ffd4a3b4\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 13:10:28\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 00:49:29\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 07:51:53\", \n\t\t\t\"status\": \"UNREGISTERED\", \n\t\t\t\"channelHash\": \"a4b9ciyfy970huhmttgvoexfqiwzxypwec01f7yp\", \n\t\t\t\"channelSapId\": \"74b59n9mpzckgtb8l3iv55tsoywul8r0by2pzcou3rrnt8qmhn\", \n\t\t\t\"channelParty\": \"t2dopxia53zh0cpyfy622us1cgn22y0vspotewdj3q22tes10zb2m4ikpaeimjtp9s6sg8wxg1a9vd0nr4i6esf6bh6s84jiilfh4dtvqydmedxiprf6sqcq5aor0v9pgkthw907ta1cb5c0j096yh4mvqtjgg26\", \n\t\t\t\"channelComponent\": \"nq3kptzvxhgh2dvckewjfxce2cozhe09d9csmqnkk753iqc5pfvagqw88nkx08cmct92xdz4julltvem4rhm02nrio1rx7qluzmch2j9yfflxa3ku3r25i4s9v1xgt427mefemkez6beut28eiywj8l880x370c2\", \n\t\t\t\"channelName\": \"nyszconwg4hfkdqdtgd5013jerop12cmf7fq20gzvs81ekr3i3umzkcag0snvs4vz6ju25zebne8gdduhbfvu6oh74vonz3j7qd3b6v5q10rglnl7eby16knud9qthwppcp55emjri61tl58mvoqb23q3kcv7416\", \n\t\t\t\"detail\": \"Dolorem et ut. Aut fuga sunt necessitatibus omnis ut aut. Iure eum consequuntur et. Ea illum iusto aperiam accusamus illum. Magni est velit dolorem cupiditate laboriosam quae.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3f5ef510-7f9a-41f2-8b0d-7231eece1132\", \n\t\t\t\"tenantId\": \"f80f3766-e92a-491f-9102-1f368a74e4ac\", \n\t\t\t\"tenantCode\": \"epc3mwmjrou01fsquq43vcy8rmkh5zlaj5xjl2oekdnyzerczq\", \n\t\t\t\"systemId\": \"fcae9fb2-efbd-4873-b702-dbd3ca19502e\", \n\t\t\t\"systemName\": \"e75euotti3ow84gh8q1o\", \n\t\t\t\"executionId\": \"f88aaa73-5bc1-4d79-aaa8-c84b2745a2b0\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 18:22:11\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 01:45:27\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 17:15:18\", \n\t\t\t\"status\": \"SUCCESSFUL\", \n\t\t\t\"channelHash\": \"7g4peba4uy26oqobydi0hbkra5tjpjl22grih35k\", \n\t\t\t\"channelSapId\": \"or42dl678qng12yhpqdyulno8vl0m2oqoas5zqbw6j04i7kbva\", \n\t\t\t\"channelParty\": \"8zx0krl0yp3j6knf8sx4hddyovrx6wiv6pi6h5lr32pc9r51h3ybzrb4oesqj5brpjm1rti9xskueh59ibf9zre0w80tevurgkucklw7jpeo19etsgg25i8hlp5s7kcbdxhieewm383noozzukq3gqk6ma2uw6q4\", \n\t\t\t\"channelComponent\": \"88lbot0ng8g632d86im2l2ibpto4i8r46smrn8rpwbxobr9ki76be1yydz9uvypldu2e6iy0m2bn51qxyjbxdvcpwy5hdtuqe0tzgg4zp49i597839f3l7pjknul8mmdit7efb0u6lwyg0ghwau2cbojl1g4dmyc\", \n\t\t\t\"channelName\": \"ig811ulcdvuzc5gq4brqprsmbczsubv9lv7ji48pzbca5kv3wfn63wb8ublmvkta9cgrg90qepu9nbdib3g3a847ube8c6qf51y9kmcyk5al02xlr0reumu03qyymi14e1kj5m8bpijg370zgxj4wgwdgry7x6ad\", \n\t\t\t\"detail\": \"Nemo officia dolorem rerum molestiae dolores quis. Voluptatem rerum eum est. Est mollitia minus recusandae modi minus. Ipsa et tempora nihil et et eius modi ex harum.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a1ca9684-1195-4015-a993-cfab51a3cb39\", \n\t\t\t\"tenantId\": \"e9db1c76-f09a-4974-8215-73776568bc43\", \n\t\t\t\"tenantCode\": \"tfxl1cy09rdi77qhfh9q24bixd1p48zkiu38cm3icvy625a7us\", \n\t\t\t\"systemId\": \"b93e00c3-e668-4832-99ac-1c439f429c36\", \n\t\t\t\"systemName\": \"8gvicsf69kol6xo7ebl8\", \n\t\t\t\"executionId\": \"199fabcf-5a2f-492e-b6c1-3049ebef45b9\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 23:30:20\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 10:13:49\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 05:29:18\", \n\t\t\t\"status\": \"UNKNOWN\", \n\t\t\t\"channelHash\": \"ohv99bzu0h6lu946rx78jgti5n63zlw3df38sv5i\", \n\t\t\t\"channelSapId\": \"b5wvgndrl480boy67968yj4t0n7jpte63ohmsujlpx9h1ia2e4\", \n\t\t\t\"channelParty\": \"6viov794j4qvp2cnyzoce69kzznfrse5i084raao2kovaj1k34qdcecgntiwv6stkp5ujfr7ita4pocrht0chfago5wlj6q34z5sv1w4nxllj5b04jb7vecz8h8vpafjq57vchc9tmaxv63tqduomjjfz1lsl7mk\", \n\t\t\t\"channelComponent\": \"ceupdjq9yrlbp8eldbswteq3q2ovds80saeds9tw1kopl1ndnc6scahdbyul3ohiaber6jb3xxah02ly78x6lz3rlik45g88ydsbkrdehjb96wrxbv999d8oeji3c32u5w3utzcqhka7trqhfbhz13yao6vrs5sm\", \n\t\t\t\"channelName\": \"k68j8pw318sjv4atamxs44gyykqrhxzdn4ym74y0ebw5uqm91vijfmgq3jan2xbyiei56i84ca0158amjdhnhmzwhgt11vc6q98i5xcysl33a3fyt1qn71sj2fxnxttcb3xl89ti0zcvwpd1xxyznrfjy9z2xmth\", \n\t\t\t\"detail\": \"Quas dignissimos ut facere eos et qui. Ut tempora atque nihil. Hic eligendi veritatis ullam nesciunt dicta. Voluptate autem quisquam velit qui iure.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"340ac235-1194-4b1b-842b-b35790bc52f0\", \n\t\t\t\"tenantId\": \"fb966f40-7c59-490f-9394-e3c0c47b27ba\", \n\t\t\t\"tenantCode\": \"bsr4n2bvx8mk9o3cw6i0dlzrjtgmh3468cgf87dguqy914esgt\", \n\t\t\t\"systemId\": \"620bc5cc-d86e-45bd-8d43-2a3c008fbf15\", \n\t\t\t\"systemName\": \"9qcwyn9his69kad55ao1\", \n\t\t\t\"executionId\": \"d350b419-51ad-40c9-b399-be9885e3cfca\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 14:46:18\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 05:45:49\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 11:21:40\", \n\t\t\t\"status\": \"UNREGISTERED\", \n\t\t\t\"channelHash\": \"h14nk4v6oh2djxo4ljcrm6h5sxybh53jj1knowhg\", \n\t\t\t\"channelSapId\": \"q0z3hkqacsecoiupmu4r58h8l3h9mvy2eet6mww5507bmgodq1\", \n\t\t\t\"channelParty\": \"irx92v60dzdwd0chj3qnqi68h4658pkr44xq4fz0khqqeks1mdmki31xsrbq315jy5lo0d09e4x9m6h7i77re4u8lenblrj0uupnd3smrxp2banjfeowrtt122z4a0w5lxq7u5apdzu9hl24bzg7efcf9omgn0ih\", \n\t\t\t\"channelComponent\": \"lb2qxqpwk9sschpyn0yui132s3yta0hzuuazr5vbrty3m7hvr6ld8nuzqynyzj4nuj3tr7ts8vnc7qfbbhf9aiah766akf81mqlw4qjwqz7aoutyp82gfh0xzpwl7e6qo5gncnarqipn4gcn1k6shzuikhic89xm\", \n\t\t\t\"channelName\": \"vheu6iaqdlfxoz1co7q48ry845qbyyu9i2dqb2oitxexxhx3ajecqrk645vpaz5vc869m9w3ijeqf64tyvfk16pvsigg5u3a5rl419iza6sjclpgmzd9ici3c133vc065gt67dgdcevqkrnl79x97bwzn59k58jm\", \n\t\t\t\"detail\": \"Ut dicta dignissimos. Velit ut porro quia molestias assumenda et dolorem. Eaque expedita accusamus ut consequatur cupiditate saepe possimus. Harum ratione eos quod voluptatem soluta minima temporibus.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7253931f-c368-4cb4-a8c2-1147117aa965\", \n\t\t\t\"tenantId\": \"e74a15ef-c38c-4712-8610-d978b03ce64c\", \n\t\t\t\"tenantCode\": \"srwv37fxym234tehmmi6j8oezx9pehthq43y1pjgt0ffzikx5j\", \n\t\t\t\"systemId\": \"37a73814-fab5-4e1e-afd8-db66ee991a0a\", \n\t\t\t\"systemName\": \"l2ysalpfshrnozblbgjz\", \n\t\t\t\"executionId\": \"5569f281-1f49-4d17-88c8-b18f1b7dde88\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 02:33:59\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 18:16:13\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 07:11:55\", \n\t\t\t\"status\": \"STOPPED\", \n\t\t\t\"channelHash\": \"inyri2iwgkddvk9pgn5wgmtn7zu9apdjumjl62hv\", \n\t\t\t\"channelSapId\": \"kwlj16129rm3sfwexoe3nwyhfbdq7p8g260857t4zepuycgytk\", \n\t\t\t\"channelParty\": \"isigtwrxi3pzh3f070u5khai5422l8ceqsgc4s32qamfn2mbw2uf1f7r60cn7q0p0lzbqugd5495xyzt9d9elob7sl6phbu40uoqp1utmy69qjrc462bq13wn2fbdwei1idhnulcwrypvggvtkn7xi8rdc3vdh3k\", \n\t\t\t\"channelComponent\": \"tzxo5q2necijcrkvopvbtxi7q4iem8dmz2o0mg5u8bp1jfp6h71icyz4mkpy66ynibd60yadheabmjnoygl7eiq9vwpz25c0wocexbvlxu590iqglksjzexrwdy7lkymu401q2m17mww9p0udb9v34a5wvxbp9zv\", \n\t\t\t\"channelName\": \"80sszauf49f5o77bsotxiksfcrg7b49h9grv02jw5y75j1b9upf83ipz8hslc5lfcvc2hz7a667gytxpeebghc69r1a1ij0hxxb9q96i040hqag1dpvt0yabchrp7qvaskzad8x2b8cxi820baoougr3i7n8eimu\", \n\t\t\t\"detail\": \"Aliquam dignissimos enim cupiditate. Totam ullam corrupti recusandae et sunt eos velit. Eius laudantium voluptates ex est soluta repellendus. Eum in eius culpa cum. Praesentium dolorem ullam dolor. Similique aspernatur ipsum id animi aperiam voluptas eligendi nihil voluptatem.\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1cc9c974-69bf-4122-ba7a-4bdfa618f2f2\", \n\t\t\t\"tenantId\": \"33c0ce6e-4fba-41c0-9c0b-fc8ce11fce24\", \n\t\t\t\"tenantCode\": \"wfl8oj9cob84jg4a6331lxpl7o7sjnin1dxuu7beek3nxak15z\", \n\t\t\t\"systemId\": \"ee760f8b-3dfe-4449-aeeb-e54301c83ebb\", \n\t\t\t\"systemName\": \"8a2lddj2pw5y7h6hexj8\", \n\t\t\t\"executionId\": \"17b1842a-d7b5-4dfb-a142-b6cb3a83d667\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 07:39:16\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 11:34:07\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 15:28:04\", \n\t\t\t\"status\": \"UNKNOWN\", \n\t\t\t\"channelHash\": \"gy4l1s0ux7bpf3jh3202bei9negqw2jznny271ms\", \n\t\t\t\"channelSapId\": \"x30qewlk72k6vtbvtzogwbmvze3sn7uzvej1vq06a6xlj4x3ce\", \n\t\t\t\"channelParty\": \"dbh3kpmw0eef67p8hib8lptrmjko534u5v0zum7qcr81y8io5hq0d59l07odmgww7q85aos6edkkuz28eyrit7zwc2hpjew0r84klowhonrq53jgxiksh495p1lqzfmcj6e4p0nf870h9ov3r84cqzrexxw3f0lz\", \n\t\t\t\"channelComponent\": \"bdfl11ispbsbpjoh8zw1dmkkg2ac42ia803cdjdasguu2zywbu11q1jsil7oiy5j0vw5kw7xglh26hp2rc5gytuy8hz3b55w7d64dcx4a612l6nzge2ipfyz6u3ttc6u16v99ws8yn5mvvnrg2y6u1wjvue9fj8z\", \n\t\t\t\"channelName\": \"6dtdiwcf7tl8pfrh8ckcz294uvagaqdpl5rx85xifgmfttaugymsxh487f4es5u3go313n57ns66cxqud7mf3wn7zqed6a2g5p6yfvdevniyorkxhuxdcv563qc3vyyaqd01psm11bek9qw67k0ca70rgexbjk2m\", \n\t\t\t\"detail\": \"Fuga voluptatem earum nihil. Et deserunt debitis. Voluptatem et facere delectus quia repellendus. Cumque fuga quaerat repellendus laborum fugit est non quae. Qui natus nobis quis nisi fuga itaque quia qui.\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciPaginateChannelsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tcciPaginateChannelsDetail (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciGetChannelsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciGetChannelsDetail (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tchannelHash\n\t\tchannelSapId\n\t\tchannelParty\n\t\tchannelComponent\n\t\tchannelName\n\t\tdetail\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"b962b77d-a02f-47e6-a100-12b9c34951b8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindChannelDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciFindChannelDetail (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tchannelHash\n\t\tchannelSapId\n\t\tchannelParty\n\t\tchannelComponent\n\t\tchannelName\n\t\tdetail\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"b962b77d-a02f-47e6-a100-12b9c34951b8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindChannelDetailById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tcciFindChannelDetailById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tchannelHash\n\t\tchannelSapId\n\t\tchannelParty\n\t\tchannelComponent\n\t\tchannelName\n\t\tdetail\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"b962b77d-a02f-47e6-a100-12b9c34951b8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciUpdateChannelDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciUpdateChannelDetailInput!)\n{\n\tcciUpdateChannelDetail (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tchannelHash\n\t\tchannelSapId\n\t\tchannelParty\n\t\tchannelComponent\n\t\tchannelName\n\t\tdetail\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"b962b77d-a02f-47e6-a100-12b9c34951b8\", \n\t\t\"tenantId\": \"46cc98d5-6415-4d95-a3d1-370a531c6c13\", \n\t\t\"tenantCode\": \"raty50tmm73ehabzvnvt9u8i1liimdcqechtwk4kj61j00b94h\", \n\t\t\"systemId\": \"1bde9487-292e-4474-b6fb-937288b90d62\", \n\t\t\"systemName\": \"jmge1nta5wdbxequ86xy\", \n\t\t\"executionId\": \"3b7d8c80-6634-40ac-9a18-95d052bf92d5\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 15:39:42\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 01:29:52\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 15:07:59\", \n\t\t\"status\": \"SUCCESSFUL\", \n\t\t\"channelHash\": \"dves6z6mmh97ofm6ze1hnxlxnx1d6541iomx7vh2\", \n\t\t\"channelSapId\": \"fhx3fxdzbhkpb4gaxypc6k0gp0a2sp66vr41iv3sq5baw3yltn\", \n\t\t\"channelParty\": \"w3ycjai8vv3c0w6cgpnqn45qwg8it57krhpkoraxyuccnenhoi86e5telmkrg3xzsnfu1hf2mbf9xsnngy7xxnrj1tlmlg4vnak6nouy0rxh8we5sgn4kt404japfw2v6z118rgiogslxaivia8w69mx5fghuqve\", \n\t\t\"channelComponent\": \"cu6neo0mhyenfo117nrutb3tm0h8524gluof7jfa3ii2un6uzc8xsd4hotqjyzexcwbem3qo8rprtg4zrma4ei3y193rsuf58zx0gs01vbymp0b62my0ha5n51upn5ozhgrlpq2kpkqwp61qs8fcgj3xd366t8g6\", \n\t\t\"channelName\": \"xs2wn1pntxvrrhfokdjw8bg9gxfm6o9v1ytfx75frp5cfiy5mn5tv4ox68iy8zcbh8wlu5ollqtwo9c2s05ek4nd0k9emlk7gadcra0tdapaaxmdxhmn7k6ylwrc91r3wreysalgrmkh0mr73p6j7c1k1162h1n7\", \n\t\t\"detail\": \"Ullam architecto deserunt et dolore molestias et sit enim. Eos ipsum nesciunt beatae est sit cum sapiente ipsum maiores. Vel voluptas ut. Temporibus veniam autem voluptas et magnam quo impedit qui nisi. Omnis sed tempore repudiandae similique asperiores assumenda voluptatem. Sunt sunt cumque id eum.\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteChannelDetailById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tcciDeleteChannelDetailById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tchannelHash\n\t\tchannelSapId\n\t\tchannelParty\n\t\tchannelComponent\n\t\tchannelName\n\t\tdetail\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"b962b77d-a02f-47e6-a100-12b9c34951b8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteChannelsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tcciDeleteChannelsDetail (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tchannelHash\n\t\tchannelSapId\n\t\tchannelParty\n\t\tchannelComponent\n\t\tchannelName\n\t\tdetail\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/channel-detail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"b962b77d-a02f-47e6-a100-12b9c34951b8\", \n\t\"tenantId\": \"46cc98d5-6415-4d95-a3d1-370a531c6c13\", \n\t\"tenantCode\": \"00k0v7bm1zkq8bzoks7taoe14egyus22pxqh959x96da4sv2ka\", \n\t\"systemId\": \"1bde9487-292e-4474-b6fb-937288b90d62\", \n\t\"systemName\": \"ginyyk1j7s21lvde4jri\", \n\t\"executionId\": \"3b7d8c80-6634-40ac-9a18-95d052bf92d5\", \n\t\"executionType\": \"SUMMARY\", \n\t\"executionExecutedAt\": \"2020-11-03 18:24:57\", \n\t\"executionMonitoringStartAt\": \"2020-11-04 10:19:13\", \n\t\"executionMonitoringEndAt\": \"2020-11-04 13:39:29\", \n\t\"status\": \"STOPPED\", \n\t\"channelHash\": \"7oc645rv48f7tndk1mzi1mh1tuwku0ojdf98i5l5\", \n\t\"channelSapId\": \"4bqq96sj6keqdpv4re1hkud4mojezhdisuyc5yllv6fq6qdu14\", \n\t\"channelParty\": \"gqy201gyfh59zkbv23rteerm5x06t7l0af33gpricuf037oblv46f9xfe4v2fj1bivovotxc32sdotk0t6pfz44rnk6efjw67fs9nob43li3bisiwzl2aqnn57yg8sl4fm3ck9krs4u1kd7wzh4cb4s3mhyotfk5\", \n\t\"channelComponent\": \"ofk11xx7q57mo126tvgqfikg1axrdcvmo3k0lehhb1ftabwg9qpj0qt5n648juwx0wk5mgntz41qf5yksbpo9gsmrpkgn4to2yl2qlupv29f7j6kkgixl5v4eb3hws8fli5dh13z1caxf6n1fc5nps2ern68nhyy\", \n\t\"channelName\": \"focjz5tmewl3e6gv8chpi9r6v9zh4xgc783q1k1uhehqsb55ckhji4apxg994qw4yxex2e5ykv0vq0jym1o6zmqhlxcgwump2r1t07vjxob1xaabzkgmhi4gjzcgkhlbxgc5cwi9l56b93q6a1789byhhihdop5t\", \n\t\"detail\": \"Totam nobis aut et cupiditate blanditiis blanditiis id aspernatur. Eius porro dicta magnam. Incidunt distinctio sed maxime. Eos officiis harum. Tenetur pariatur placeat et voluptates repudiandae blanditiis enim omnis aut. Rem sit dolorem explicabo eaque beatae quia.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/channel-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"channel-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/channels-detail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"d8ad584d-4414-4b60-bece-7e96e075ca0f\", \n\t\t\"tenantId\": \"aa999887-5dbf-4cf8-88a2-5f5d24a0e4c8\", \n\t\t\"tenantCode\": \"2wimzbpougovaf1rxih9tghg22835ihc2lfdvkms2f93f9717d\", \n\t\t\"systemId\": \"cfc5f1f4-f7e1-488f-b0f3-e4ecba3945d3\", \n\t\t\"systemName\": \"5h97bnrjhlixg9l5i7zg\", \n\t\t\"executionId\": \"ca9ada28-36d5-4cac-85eb-4feb59fbb123\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 11:26:25\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 20:19:56\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 12:42:33\", \n\t\t\"status\": \"INACTIVE\", \n\t\t\"channelHash\": \"7nz4mr4cl0i3axrrpbp9x1t72wqxzs01q8eydk2e\", \n\t\t\"channelSapId\": \"p3tqm51teqb3vjupygx0wyev8nh5o697hst9g2vemwshzu2qta\", \n\t\t\"channelParty\": \"vc15ihenao7k2j1jnwon1eexs7c7wrqan8mplnidggpxh4xzveed4r0q1pz5zzxecdl6ebho2lr88dwo432zldr72ivtgn11c5pc4k126mt2pmeuqwha0vt5ne2s2p76gnl4nxrx3uox4hh0k7ma4swgz5cc28wk\", \n\t\t\"channelComponent\": \"ajiadnczkiqxlkn2m8e44islpung4c1ytnaaxxmdpyosmf6vr42zi7g9ad3c3bvpre62tf629vkfm9thlhahw8100jl1vz9h55j6w9yioujzqzkez757fzvkzazk3fotxeepq5a91swsxjfl07ls5qg38sbn7wlu\", \n\t\t\"channelName\": \"eo8x1u58k7epuo0gmrzo5v8ftvktmtdpi4nyz9sloglscokhmpcqfq8svic06nj8c1bl304cbbgj734ntie0adr7wn1oa18k8q5uz9isbfagexdlly174mgz04oc0iiun72ap8r47xdaa69zypidkvzp1zlaanxi\", \n\t\t\"detail\": \"Ut aut sed totam at. Inventore adipisci rerum architecto et dolore est deleniti doloremque labore. Odio ipsa qui omnis. Ea aliquam est alias et vel suscipit.\"\n\t}, \n\t{\n\t\t\"id\": \"24983c9c-a488-4ed6-9c85-8dd9eae5f2aa\", \n\t\t\"tenantId\": \"27852ae0-3cb9-4a60-9eae-8f8fb08251bd\", \n\t\t\"tenantCode\": \"ylghy6gd25f32k0z6a2ifkum7vc0oe98qnqo5e1bvarbja5b03\", \n\t\t\"systemId\": \"5a02b41c-a2be-4aba-aed2-e3a8358b9b4f\", \n\t\t\"systemName\": \"2bngs5katn3mjsb2miv5\", \n\t\t\"executionId\": \"356bdfe7-3a35-489f-bb25-77e7394e2492\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-03 22:07:53\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 03:33:21\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 16:16:17\", \n\t\t\"status\": \"INACTIVE\", \n\t\t\"channelHash\": \"ajrlsurjuetahvyui1p0jgvwc2gznpzkm8rn1ygo\", \n\t\t\"channelSapId\": \"2fti36uwber7850pzx8twb2bp3zi8q789z2r27wiq2ole5z5ax\", \n\t\t\"channelParty\": \"x8nc205zcitjiwbtwonn3dcm0mwaqjpcevn8x40q4tbx090mzzj2zzqbodbzsej4evahg0cj47pnxmo8esy6kkvwvvt5th04naiokthexmf9b6b6lzfo7mv8srd0cxdqlhw1qrsm91rnv206bwruly24r346ois6\", \n\t\t\"channelComponent\": \"kk51r460v4lux6yftn7t8r0b6sejdz6rw3b0l8diz5z9vh6345mcaixua1gnotaqfrhvnwsy2259f19bmnk2h5223n8586v5o78blf1wykjtok0olqx694344zuul0fgvkijkrlzgvpubctxmlw8j17hswn8g18g\", \n\t\t\"channelName\": \"n5jrbpghv2ckgmuyx8kgmjeen8iaxbcrld1ntylagp89mranjr1r5x32cy6keb8zf7i7z5uh183k1ljw9ray2q1eyq38jfzwzet42bqrib61s5zim3chamxdiix04fnc4oxj9eof241p6n1bez8igxc220bpnvih\", \n\t\t\"detail\": \"Quis laborum quia velit saepe ut aut perferendis eum. Qui fugiat omnis porro ut magni consequuntur minus nobis. Excepturi soluta animi saepe natus non dolore. Voluptatum saepe rerum aut eaque facere nesciunt soluta.\"\n\t}, \n\t{\n\t\t\"id\": \"b02d2bfc-c685-4cea-b5cc-2490d22246c0\", \n\t\t\"tenantId\": \"c19edc25-89e1-497b-88f4-566d8c4366e0\", \n\t\t\"tenantCode\": \"fsr36xgbtx5s8h8h0jpgg7iyokn6583w2dfx7qrfj6suudg2i9\", \n\t\t\"systemId\": \"3dbe9afe-a200-4352-a314-08591e3e75b7\", \n\t\t\"systemName\": \"3tbwt6iy5p319c1o1ne0\", \n\t\t\"executionId\": \"efdda8a9-5c7b-442d-a3f6-8f26f498084f\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 15:26:44\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 20:05:59\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 07:00:43\", \n\t\t\"status\": \"ERROR\", \n\t\t\"channelHash\": \"7x98297nknlidzq8zezxvtmcgqv75f32iafplrp8\", \n\t\t\"channelSapId\": \"93ws2p2osvyricfzvmdpiapfdyhhltzlj8k97qg0k5b6fc1i9o\", \n\t\t\"channelParty\": \"d859f2tfksaffmbb29sw1i93loh9qnnxj3vcjobd5tlruvcf4lvtnx01yghboj6co2dl4uogbd6l64xe7fhoti0wfzq54k9jkwqxolboca8mg4jise465s1ihtfbs7ulut2pvcc7jt9kjqfyx76dlqviujv1qzn5\", \n\t\t\"channelComponent\": \"3426bqgqfnkt4lwa8yxrqrxfp4yuxtm22ml4u1urtfvkvvxyrugbo7uun288l4bgg6kaotagx55liocahuvqa9ouobxkkqbiimwv993ey17itxznv7gg5wm8e27cpmasxva94zwkp8mbj7wpfe0uelg1c63cch1y\", \n\t\t\"channelName\": \"2jn0xbr64hanri8287kgon8tzpaposwtfr9wbuumeq2e87pv63tayob1ywsw856x4s6kumae4n11yrzgasnfkjc704bfad0qxgq03jr9xfdg8gcwtp0pu2kzsvzw4mc7hiq7i0b31zc3vqx9d2fmpna26va4x5zi\", \n\t\t\"detail\": \"Ex repellat illum aliquam pariatur necessitatibus. Qui iste iste doloremque est. Libero culpa expedita assumenda dicta quia et adipisci. Aut optio aperiam iure voluptates. Deleniti porro dolore eum esse sed est beatae ut voluptatem.\"\n\t}, \n\t{\n\t\t\"id\": \"f680b417-f678-4afb-a279-5408702ed1e7\", \n\t\t\"tenantId\": \"bb067b8a-3a6d-4b3a-94ed-0cfca06490ae\", \n\t\t\"tenantCode\": \"np3qmt46ss6vp23aku8eqwvi8rbgugyi7386458tefwqraso57\", \n\t\t\"systemId\": \"fb1679ab-3294-42dd-a51a-eebcf70c1046\", \n\t\t\"systemName\": \"1kffxyp6cl7z8nfw6eia\", \n\t\t\"executionId\": \"a6fc067f-665e-4531-b8d1-4ce1192a0f29\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 11:29:53\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 19:28:55\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 17:34:57\", \n\t\t\"status\": \"ERROR\", \n\t\t\"channelHash\": \"h5gppbsgg4309qwwrpiik91u3ra9ozuvxizsecf2\", \n\t\t\"channelSapId\": \"pdgtt0f7afqgj7xut635m87ghgvlegua99nc0uf1kldel0yyyu\", \n\t\t\"channelParty\": \"3p4m4jxau3z9flw6tlpcx1l57v7fkf0e7hpgrh3l9p83meoytf0pj4b2mny83rzdm3acsknhik0qkjdeker73w5hv62iamq0rdyb65l8nq8pvke1wmo6fybs402w1gw7jxens9nfu3vg32t01hxljdg3mv53jawa\", \n\t\t\"channelComponent\": \"zrzfd2s9ldi47e4oue9oo1cfumvw3o36wkaqux8xgnkhzv3h1yh7xwuma0xcauny1cqxlu8k8w7lanewvutkje7w7jg3xryunfcukms8fe666hmc18dy7yyeqxsg5jxpqlq0sxqxg7fjou4c2wxwb32htigg3wbo\", \n\t\t\"channelName\": \"7mpq7r20lupx62z5vu5bmaojt4tdhawhafo48yct75h8ich4p28zrf3p8jbjce2y61xieheh4om82zx42hviyn9a04bulwwmnyywi89rm2xxavwiyuzfgxd8ol295p7fnpb3xrz2rxp1badbg6hmf72g7tgeoyhv\", \n\t\t\"detail\": \"Quos expedita id sapiente aspernatur quia voluptatibus nihil aut ab. Quis consequuntur sed eum dolor totam sed saepe ducimus. Praesentium deserunt et molestiae incidunt exercitationem omnis perspiciatis consequuntur. Maiores error repellat similique laborum repellat. Inventore numquam molestias incidunt est.\"\n\t}, \n\t{\n\t\t\"id\": \"9c1b15c3-445a-482d-b4fb-10dd2298b23e\", \n\t\t\"tenantId\": \"30ad7b11-0e57-484d-ae31-396d642e9717\", \n\t\t\"tenantCode\": \"03vkpb3yl7kj5bwpyno123vhbs5xx30jsegr44b7e393yrevu3\", \n\t\t\"systemId\": \"37b26afb-d226-482a-a197-59d309556935\", \n\t\t\"systemName\": \"8ynfxdncfvvtft7t06oh\", \n\t\t\"executionId\": \"ee3939b2-0cfd-4331-81b4-9e7e01478f5e\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 13:55:28\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 02:39:08\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 13:18:25\", \n\t\t\"status\": \"INACTIVE\", \n\t\t\"channelHash\": \"sucym89qf07s7syaa3nt7vzmeiezdpvzikgo6r4p\", \n\t\t\"channelSapId\": \"gwdowj08b9nsug9ni7245esw561hxlef64dtirtw4yyjs97brg\", \n\t\t\"channelParty\": \"omf77v27cx1qthyp0pnf4vtc54qgqsv2lqdo5wfnxhqw181zacktozgz2w70s0t654w6uofaha471rus7cdf43lsyg3bob4n91ypk0topjcx2hap3m7l285mvk7p7wl5in5qohcg7d1r7bfcn7f7c92ywyipmw0e\", \n\t\t\"channelComponent\": \"ppihuj50fyfeayggqfw9d2vu08t2e6y2z7pwh5zqh2s6mw5xdstaomfdekzij3oui40v72s2loligchg46e5496j4l368iq9k57j6c3urlsvkbct76ub5lzq8taiel8jyldlz4jutjs6ovck88xvt82zt1lh1q5o\", \n\t\t\"channelName\": \"0tyxtntaablyfy5isu99pyl3n45h0ddr914qep2wyj02ixcezh9nhhziwlj9dmm0rg3rqtclkkel22cep8zb6fwm9lgu3qj2yemyeaon294rr4vf1chke1aaeki17zibh4rlnarerlwxfnmufpwta4i32v38ntdu\", \n\t\t\"detail\": \"Architecto facilis et molestias eum sunt reiciendis. Consequatur voluptatem est. Provident voluptatibus hic velit. Commodi in repellat et iure possimus tenetur.\"\n\t}, \n\t{\n\t\t\"id\": \"dce53e0f-351b-41ff-8be9-bb2ee418b474\", \n\t\t\"tenantId\": \"f434eff7-df07-4a28-9645-b7b2340fecdf\", \n\t\t\"tenantCode\": \"bwmsdnrhwhjj0ebfjqw4l90nbxng2ol3fzb929bw65e5rw4sof\", \n\t\t\"systemId\": \"6ed5ee80-2514-4387-be74-9b9fcb459576\", \n\t\t\"systemName\": \"ghf3bd34knnjkt5u8527\", \n\t\t\"executionId\": \"0ee0c44d-f131-48c5-9dba-1bf9caf2b3dc\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-03 22:58:01\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 16:27:50\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 00:17:54\", \n\t\t\"status\": \"UNKNOWN\", \n\t\t\"channelHash\": \"wcvgfyvn4q0tby58obz411vandwva693o8bj8vt8\", \n\t\t\"channelSapId\": \"lpcqr1qxkbid6pazem7t3fyq3o65quegngvdvkspgdczshflgf\", \n\t\t\"channelParty\": \"83kbqllw510nb95p4id00tnwe8mux9hzqwzozvx6j0djbjw0yr7uwfxkn0ehwzoi8zz1bjefujqlyrpgu0vh4zht5myygvy0cm4uzppzidppsi909y3djf5jru3jnsml5tp51pqobcecuxgjq58iutzv5xc4f031\", \n\t\t\"channelComponent\": \"t1xyvs5zrefmtcdijff750pdpvkvfcco5l9wlsa0i8efylemhd432exfnltn4o7k56ffkkn02nqcjcqxjomjfvpzqnwws55hj87ia95dpadx4gr7weij55h4zpe5imc76dmgshstod9rzckg6q2ek3e77ppht134\", \n\t\t\"channelName\": \"l69hridmtmkgq87lwavfax0jwqkntgdavfde4p3eb4kefmuaw65q2neprfribdoidqvce0wdguxvyst1lyj1ru3ocrzqeayipc8roob1tp5ujeutyf5s3ajv9gbm7mkmam6r8gs83dstomy4b7v4rvqkcjfrwqj3\", \n\t\t\"detail\": \"Quibusdam quae sed voluptatum incidunt. Vel amet occaecati autem est dolore ad fugit quam est. Vero nostrum mollitia accusamus similique. Saepe voluptas ut sunt odit enim qui nihil magnam magnam. Ipsam eius est molestiae aliquam sit asperiores animi tempora. Non cupiditate occaecati quam deserunt eveniet et est.\"\n\t}, \n\t{\n\t\t\"id\": \"a9cb9182-a432-45af-b0c8-7a104a17db78\", \n\t\t\"tenantId\": \"bab2c32b-4e7a-4d87-a671-23c99309d98d\", \n\t\t\"tenantCode\": \"1d0hrhrxqk27aa7ygjf6snsb7ra7m1c2os2sjlj0kqoqdt3qxg\", \n\t\t\"systemId\": \"3fbb7801-2a41-49dc-a6af-c1ae8c597b97\", \n\t\t\"systemName\": \"n1eacvydohg8xlzkha6z\", \n\t\t\"executionId\": \"ae9fc27f-9750-4223-aa3f-9b0a5892e072\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-03 21:11:08\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 13:57:21\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-03 23:43:31\", \n\t\t\"status\": \"ERROR\", \n\t\t\"channelHash\": \"yehjkzsfelzo4up4tw8c5ohptepigtftv76r1f4j\", \n\t\t\"channelSapId\": \"ztwgfozusd6jm0ct7cvhtian0qzunm00f1cyhvo6omrl62dc6w\", \n\t\t\"channelParty\": \"xxht64ogusrpq3lal6syupimactvrrn5gi7ztf79pq406kq4rudjbhpyaloebx9msrp1z8gheptkl4dopba9n95eqojvke2hpxa67jiycczug1lkoei35qtwyy6prqocfsh0xbm4g5gx6nwbo1ewl46gv0ajogmf\", \n\t\t\"channelComponent\": \"87eglbdff5sac1bykbdc914j345yj01tsywmahfjztl2zswfvgilnibxo8ddldhq8k9yrda3m2ah94unge8vi16xibazk82a5e4aff0dq0jyd3h8mtc2vbyfktal299yt7uevz9d1f8cagp3qfyjeo54y8bgxk9o\", \n\t\t\"channelName\": \"v3pwud9qemx88mfp55xigkwrhdtupev98s6vdd6czk6znvpv2h3o8kyjthvfq5glcsy17w44dopxjh7vnhwrlwgh8a9ellph1gwxlrzu2sjk5ghejmkwml1c4ulprg0ptvsi2fnkfg0h15ggw5op5sa6q3950pti\", \n\t\t\"detail\": \"Ut ipsam tempora quibusdam asperiores optio omnis. Sint quia sit qui voluptas similique ipsam. Et dolorem minima aut. Pariatur nemo et et.\"\n\t}, \n\t{\n\t\t\"id\": \"52c7378e-c6fb-4193-8922-635f0170b800\", \n\t\t\"tenantId\": \"696cd105-c224-4e50-a090-1213479aa282\", \n\t\t\"tenantCode\": \"bzjzy8guhn8savcr5dtp0ubht4ejgbtqklr529bqbpfi19xh5v\", \n\t\t\"systemId\": \"226988a5-e20d-4fad-bc76-3c723a5e73de\", \n\t\t\"systemName\": \"t8p1mmai4uyrevzdw0tt\", \n\t\t\"executionId\": \"c02d5031-7593-4f48-aa3a-b70742a1eb8b\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-03 19:01:52\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 15:37:01\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-03 18:01:46\", \n\t\t\"status\": \"INACTIVE\", \n\t\t\"channelHash\": \"naaffc4shtvylq7xrs8l44d58j0pwfa6fne0j88d\", \n\t\t\"channelSapId\": \"9sjx7vnn02wzz649ie8qc0exb3va6hyxn93yw9ingp2pam0h51\", \n\t\t\"channelParty\": \"jzqz5grhw4q2scsdf3cx2tnrtsmaqdz885cekqp91k9abb4yyg10mukdwg2d1rjkpu6fqhlsw30n4jx27zo5u9dhr4pjnny4quqs0fq7yhg7joyh8rcqehfvwzvedjh822zpphpc330ve78bwzz1pkzlhykoiid5\", \n\t\t\"channelComponent\": \"c9ge81g5ppfycsq840v387lgi3d8cv7z0x5whww2sjbk71t1j8l7ih9tnuwx7bi4kb9q6toqrjngb0klwdpdu3psakrlpd73d8zm770teyolkduwx6jkncbcxqvyv6r89nq185jprsmeybmkdo2m73zsfwbz6oeb\", \n\t\t\"channelName\": \"1ultjx9exntl1d2aqnuun8vd3oyz8crz78k7kb95yckm5203cufomwdh8y2xhtb9x35bili1bmnac4m0krddq2u0u79xin9fb5rj6dv9c08x4aqowg74atwrruqi13qskja650omz1clg7p00qc4qe3v2k6cwldz\", \n\t\t\"detail\": \"Aut eius excepturi non. Vitae esse numquam nihil sed harum. Ut illum optio earum laboriosam omnis doloribus est omnis dolor.\"\n\t}, \n\t{\n\t\t\"id\": \"1f84fcc8-3a03-4f7f-b072-6f97af4d0e9a\", \n\t\t\"tenantId\": \"f2edf469-d4ba-45d1-b9b4-1ea0cf43c108\", \n\t\t\"tenantCode\": \"8bzomw33kllbaap1e5rqsu23z3eyab0gxd3cw4lqvhrifswm2l\", \n\t\t\"systemId\": \"469eadff-cf89-45b9-b0ee-e5092c8152f9\", \n\t\t\"systemName\": \"xbcb1bz6mm7b80cvbzz2\", \n\t\t\"executionId\": \"17cf5a8e-0f4c-4f3e-8769-50f827513c7b\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-03 18:00:46\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 16:04:46\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-03 22:37:42\", \n\t\t\"status\": \"ERROR\", \n\t\t\"channelHash\": \"biojjfe1clmhs8qmnqymzz6j3tpq2vc3gz7azk81\", \n\t\t\"channelSapId\": \"t9fa70thwbrrpkssib08530apji9kzroyzk219irc62bgfsiif\", \n\t\t\"channelParty\": \"pht9n5i8m83s1o5lse8ut458etgo5ogzu7ti8a1xslf2jymcjwq2u6k8pzfdy7b06t0z0hflchlc26dp999t0z9dbi30bsdgambmw3do91pu265eo9mu8qgx5b9p8yx15b8u5yska4ygsewmcrtm1wjxqr7yg4g8\", \n\t\t\"channelComponent\": \"6bj3eqlz8no2ietuv4mmmsp89k0xktck33zy6huoh0xr469o2cy99v57ytjigun4j1fu316ozas70fa628eng45c83cfuwbr9inty3obpwtqh1d9d61nesub2nw03vv29ayabxar24c0lxzop9z70hflajmy6upm\", \n\t\t\"channelName\": \"j0zrn9r38kbcupk89cjowlkn1szy8qwq0xep9wwlmq968c4myh9akz3d2waqomi2luvz57vr2ll75v8ey19hh0t8a88hw4cta3drgbyvoq8k83r78h3iu1se0ds6nhw96ubw1uzayuzbdg991a7qubfksbzbw4hx\", \n\t\t\"detail\": \"Architecto doloribus culpa totam quod voluptatem vel nihil ut qui. Est autem non architecto. Aut enim dolorum voluptate laboriosam incidunt in sequi expedita. Exercitationem eveniet labore nostrum consequuntur fuga non. Aut velit tenetur iste explicabo voluptatem eos odit et. Esse cupiditate sit modi corrupti placeat numquam quis aliquam.\"\n\t}, \n\t{\n\t\t\"id\": \"972e980d-41a8-484f-890f-88d71a9a2964\", \n\t\t\"tenantId\": \"80ed4f6f-37d5-4e1d-bd31-49e67a31858d\", \n\t\t\"tenantCode\": \"m69yzp2bfitpf63ew5hqtd0vgu23fzc8l7fq9zvg85h5eb1tze\", \n\t\t\"systemId\": \"c74314e9-9f4c-41e7-bd2f-5e84bb20f05e\", \n\t\t\"systemName\": \"ri01y9tyn6m6ejsn5src\", \n\t\t\"executionId\": \"42632cae-ce9e-4ca2-b885-b9b51c0719fa\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 00:39:26\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 19:03:30\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 13:06:03\", \n\t\t\"status\": \"UNREGISTERED\", \n\t\t\"channelHash\": \"mp8u9t1qfrswni5oln93svta5apd012n1e1rbqlt\", \n\t\t\"channelSapId\": \"ub52apjsol5tqy1v9jiocx95jajnu4wmhwnfuo4wtm48m8ujiv\", \n\t\t\"channelParty\": \"eshyv1uzhif4t9p9ea209nlfcj30ftygu8xa373vhmybxoze2upzhsa0jmjpk2fzhlkmqs2yk3hx45apz8emtc2dok84cqsy0ss9ogt7jajqbt6mry6b6mdrkwixzut3mebg2ee9thw75h8185r91ztmytnodhjp\", \n\t\t\"channelComponent\": \"gf9f7ct8pa1t99cqs861hexzinngcmx5p8j3pokij6zvnh6ij1sv6y4r3rx1josmz6pwxptgsv22pfj4tuy0wrzihwzdqnch048ocf6m5z8iaoveeseyr8srmdnuqqpdcr6kaitmrryn3z8t6capgqgwoh2g7pbs\", \n\t\t\"channelName\": \"3ws9t61dvzutec5yppjjhomxrgyr1rn7hq9ad3r83sfyukcr7np1j0rjdpaovz3t8a4b1o469r9vbj43j2qxhb60br1p5g2fdgv8quo1k9uuuxbzy1r8u8ejzgwmdji2utfg4c3lcamjq6j9ls71bcio44w0cxky\", \n\t\t\"detail\": \"Eaque sunt qui dolore ut odio sunt numquam. Corrupti ratione sequi velit est. Architecto impedit quod est cumque libero quia.\"\n\t}, \n\t{\n\t\t\"id\": \"072b7f7f-3605-4299-b451-b9faacd561c8\", \n\t\t\"tenantId\": \"8130eda1-28d0-4e37-9741-532cfd06718b\", \n\t\t\"tenantCode\": \"ltskm4rzp5x4gkq9otldz08wq3qawwpyowb6pg19pay0niw66e\", \n\t\t\"systemId\": \"10590606-07a3-4a2a-b12e-420b7bdc7dfc\", \n\t\t\"systemName\": \"3q0e0hmwqa8355nu2yhb\", \n\t\t\"executionId\": \"51132566-b6dd-49da-8f0c-1442f8fde77c\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 13:22:48\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 01:01:06\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 04:57:29\", \n\t\t\"status\": \"UNKNOWN\", \n\t\t\"channelHash\": \"67q4hkqm6ossiqxm437x9ijv8lpxtuai8zjahc5o\", \n\t\t\"channelSapId\": \"zc7hpnnb2dnyffeaqcmqbjyibcymrluqq7b7sqe1e64h70ks50\", \n\t\t\"channelParty\": \"irw8h2zjvuodjnei8pj7k3uf7acvx9ce3gw6xtqo5s6297jyzsb03yffrau5m1na24dgdqgsqjngiq3d5xbyrli637osd549arfa7u18cojy6vdvnhke3d4lk0itweojmbv2oq0pgzhr1bu8jqq7yz1g5xo34vte\", \n\t\t\"channelComponent\": \"2wvko62facedt6vg9z30k0fg60nakwptz74klo89cxaip5spfakctsfssnwnc7oraa7o4c1f5oyrsxvcxwj8shkzc2xpyihkhi6rmtkuqv4bun2swdsmpsp1rduii2ncidq6mc55dg3g6pwesgouwmhwkshysp7y\", \n\t\t\"channelName\": \"xlfacvm5g5qt0eps3m2fo21c9dzgvfrl6vhs0bw7czz94bzoypfnajluwsh2scdjakk20ovop2td4d8iln8v2ao4zakfsehlzhv1qc47apbvg06u7vvgyr4hw79uuy5e1tidgp2lq1mxtt4gjs2y8eqhtconm7ar\", \n\t\t\"detail\": \"Exercitationem earum deleniti illo omnis optio quia. Vero ipsam ut et porro. Accusamus quia quaerat qui incidunt aspernatur et sunt mollitia exercitationem. Enim est dolor laboriosam qui et vero rem. Doloribus praesentium fugiat enim est reprehenderit dicta nihil maiores facere.\"\n\t}, \n\t{\n\t\t\"id\": \"73972bb4-ca6b-4e59-aeed-2ac02207f7e2\", \n\t\t\"tenantId\": \"46318376-a01e-41b5-8583-e7c58f76e99e\", \n\t\t\"tenantCode\": \"or5982z8j6bzx1daydrpips0spfnr5anh5jwg33unfhwu1bdvx\", \n\t\t\"systemId\": \"7b5ac644-bd56-42ee-a616-a56b6b30fc70\", \n\t\t\"systemName\": \"d6dsviw9wt7fquphiv3c\", \n\t\t\"executionId\": \"2aa18e70-4aa6-4214-a4f3-1ecf0ab0def4\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 06:54:46\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 13:37:07\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-03 18:08:55\", \n\t\t\"status\": \"ERROR\", \n\t\t\"channelHash\": \"q7v3vbh4zgz7eaoovilvmqy2djdckfou9d61gg3x\", \n\t\t\"channelSapId\": \"y8jyl0ar4acwxd9ka0tvech65kpjdvqukc1g26d556pxnb1mtr\", \n\t\t\"channelParty\": \"2yui8ufgz1k8g72dw9cc6wmt8qcz6t81t7ul1rssoljgd6xquy3fjitvkzm0j8icb7tpolksbxjdso45b56mqfyk6bu7u0e9bbtct0duytthzv13tuoclyspdsf7gdfcklkwchoo3zzceny4x1t00t92rzqcljkc\", \n\t\t\"channelComponent\": \"n1ntsp7wx296e6oy47fbezxj9v3ccfk69yw6mn3zbzaqiy98sc6jfhume2s33m7znb3k29evlk1tipbsv9h4cxwpqafmo4xko4pcf92wcpc0g1g8w10y3n3u75kn8vuf2vknf527u5bl3fq45nfnvjw8znq1c0ms\", \n\t\t\"channelName\": \"eaadaocvw9gxargwhajz2t5lcpmst37uq52q6z27t4fo2fys2al1z2bop6rjmwcaz85oqqh779lhbycfm3ag2z33kllaiushi596x6akc8izknwyq7d6ehbq6s4486znlkywbjyt0nk1omac7g8w2nk5vlfcb6u7\", \n\t\t\"detail\": \"Rerum incidunt ut non est incidunt quaerat incidunt eaque non. Voluptatem voluptatem reiciendis et. Ratione impedit voluptas quia consequatur ea dolorem nisi. Consequuntur molestias a sint.\"\n\t}, \n\t{\n\t\t\"id\": \"de959407-2621-4e03-bb3c-62e6b10118a5\", \n\t\t\"tenantId\": \"33d86916-da61-4ebc-9b27-0d2745d61ce5\", \n\t\t\"tenantCode\": \"36011q511i8h7vvemlqyitog81bvu0cdp7dzim4y50f9hmk9g2\", \n\t\t\"systemId\": \"b49d8344-abf8-46cb-bfff-b4b60fee8dbd\", \n\t\t\"systemName\": \"1ewngt9igwajp5l2aa6i\", \n\t\t\"executionId\": \"54ccbe9a-6fe9-45a1-90de-c60c6f644daf\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 13:54:16\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 18:06:58\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 01:50:28\", \n\t\t\"status\": \"UNREGISTERED\", \n\t\t\"channelHash\": \"s57ias2t0cnk3ktelo683by8zmm420ry8361e6k1\", \n\t\t\"channelSapId\": \"97hqui9upl5fib1b4uxe4xxjhduwmyak4h4qlly0hbayfxrn17\", \n\t\t\"channelParty\": \"f57u7wztn9qtmlfyub6v79ot23nv4lbtzamrtlf5yhh2wqbw6m8r2reikog282371cmy9updsjkjhardrxk75yb6i2vnfeov05hbrl0lenv3idav6czub5p5el8o49jd5x5y36jrh7qiw3xwhxp58pxzgd7zx918\", \n\t\t\"channelComponent\": \"uvbdre8wq1xxxow23cr35vuxqb28zk3ao73e6yrqgdptk8j1lgn0crcp6oo8xptx7cidqlrfi653v1qxplqhhznmoyyy4ainsgkekgowhsqgjq4uod502bn15ko9on1rydqrbf25db7onorrg5rs4civa908u5bm\", \n\t\t\"channelName\": \"ujy4kep4ekloxk8295od0fgxey6i3zd698ngexuww85vrrm1532234rtpaobo10myxmr5d7353oncmmn9klmoma2lk1nbcg9ebw3butkble21ngq247w2mg9a8n81cbfq83ehkalugz26gqt9eqakx41ors9n22i\", \n\t\t\"detail\": \"Ex aperiam iste voluptatem. Optio distinctio laudantium nulla autem quia eius et. Inventore molestiae odio dignissimos. Deserunt ad sit repudiandae.\"\n\t}, \n\t{\n\t\t\"id\": \"7cae4d7d-bf10-43ce-b331-81d899a001ba\", \n\t\t\"tenantId\": \"53596eba-2b93-4060-b425-17c2ebf050e7\", \n\t\t\"tenantCode\": \"2zi0z7bfnhajnrexfzpxu63xh5xpve33xwuo97ylc2050bq5zj\", \n\t\t\"systemId\": \"1804fc6c-a1fa-496b-ad3f-df539e550e80\", \n\t\t\"systemName\": \"1hv1g3bt4kjbi0qhkyio\", \n\t\t\"executionId\": \"eb17537f-7bf4-4f86-963d-22a3f0aa910c\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 07:55:31\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 11:30:27\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 06:44:13\", \n\t\t\"status\": \"INACTIVE\", \n\t\t\"channelHash\": \"rslh5zi35w0yvievyf9j0vj7u599oaay091l9u9s\", \n\t\t\"channelSapId\": \"fxm70fpxzglplxcu28jswpau8s9931d88u6iv70kbq8cps6erq\", \n\t\t\"channelParty\": \"zjp3o3i3lbqajk36m3evnto919ruh5r4cmd1frpkrbowwsghwp66gi8e42frwrmeo95o5w5lhfte76o6h9tgq6o4r4e5fmxwn97wk21j6l4cej9hofsounfzq0r264828tl91r8xotjkwbrowq830w89fig2h702\", \n\t\t\"channelComponent\": \"26eubyz84pq3kb5eofnn5sewnw34fmzah3g0o24sq1aiobf9z2c6syznoij7t6cjw4r0ivxp73z8pc3x03h5efd6rohxy4hkgy0j9gftvfbseb98cg2a338bf6lt78jvtqvru5kctrxufkydetqq89mo7vx51mon\", \n\t\t\"channelName\": \"v8yqamb1i0hkorodrgkuvl2mi62hxubuh7y7syqovjgxt5ulvlrn4tgc2jbc4ldpl4t791i4ll7trcqc84q8xuixm61snjjrnk57d7t83q9zyklspefdx6btilfdpwv77oghj09pz771kn0ss3bk9w8rj8r4gma8\", \n\t\t\"detail\": \"Atque neque repellat sint et. Consequatur nemo ipsum et minus eveniet ut. Dolor incidunt dolorem.\"\n\t}, \n\t{\n\t\t\"id\": \"0d74f76b-4be9-4273-8cbf-fc8a82f15dd1\", \n\t\t\"tenantId\": \"443d80eb-a43e-4dcb-8081-52fcc9d824b0\", \n\t\t\"tenantCode\": \"d0zmaitqdk3txhyzbkjtuir0ssr2afovtfurmmvue2hciy0amw\", \n\t\t\"systemId\": \"5ef9946b-3049-42c3-b9f8-a2ed37fc37a2\", \n\t\t\"systemName\": \"o2q2bxiweq5g65z54cp0\", \n\t\t\"executionId\": \"928b3fe2-64ea-4366-bfb5-79c8adf81391\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 15:53:16\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 16:28:24\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 07:07:18\", \n\t\t\"status\": \"STOPPED\", \n\t\t\"channelHash\": \"iuikqaaph6w2k9px3is95xc0ornhpud9p8zxswq8\", \n\t\t\"channelSapId\": \"wmveghpkw8b284v86wj308k44dm08x4hdfb3kt2ts1c1limvpy\", \n\t\t\"channelParty\": \"7sk9t64lye4mmikskglqigs0a5fp8ksxnu5scuc7pnfv1nqkbmnytzp7lp89s5lzmvbgo3zgyhkrxmijludpj8v74oatjsw58bzxfmazhaei9zx3v8xhja3eq3vs218nnlceokv0q1yutablikq8dq15e746s7sw\", \n\t\t\"channelComponent\": \"e4e9rbz1z937zdnhd4o1n2ykbqfl4ab2aum6oc6c8d9y64gmr5sqrjfe3fn6eobhxpprvbg8v3dgixc90a5ydvt9juvzmqflzeevl5cmck1lj5jmo7b1u6ksamge1ppj3fiioao7g1mo4ybmjotladplk8fus1z6\", \n\t\t\"channelName\": \"736mgclrcbkg7x8jf5impheml5ctewpy9zqep8g4u3fsrtsnobyf48hgval38opbhn5upno980v3ri92c6phuodro5se2qxy3frnn4yw085v0bkkvoymw90unybcwde94unko3223xwcmo0rmt001t6qp82uhssj\", \n\t\t\"detail\": \"Alias veniam alias rem vitae id corporis et qui aliquam. Dolores quos perferendis id cumque voluptatem vero magni aut. Qui officiis animi aperiam non magnam. Ullam blanditiis sunt exercitationem quasi.\"\n\t}, \n\t{\n\t\t\"id\": \"7243a1b0-fdd7-4dec-8b12-aecbe7eecd2d\", \n\t\t\"tenantId\": \"cb645c87-78e5-4b20-8e10-da401ba3c801\", \n\t\t\"tenantCode\": \"zjpdwuuwx5v2qei4d6l9sphlu3cywco4l109sslqp64x2st9f7\", \n\t\t\"systemId\": \"af2801f0-4fa3-4c12-96d4-5ce4c8e85e16\", \n\t\t\"systemName\": \"mt654dhtgx8pq3wre1he\", \n\t\t\"executionId\": \"e17333b8-433a-43c9-bb3b-a547fc4b03ac\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-03 23:57:02\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 00:37:38\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 17:02:18\", \n\t\t\"status\": \"STOPPED\", \n\t\t\"channelHash\": \"tu14i9o5d7famfsuct95vxzasvbohr5y867r3nqp\", \n\t\t\"channelSapId\": \"uxn96vmiypa2qjq2g4y4fcp4e281st66ea3x6bijj67crcex0h\", \n\t\t\"channelParty\": \"du1o91ymonhzkfrppcl67tunrhguk4dwc5vub64k7rr5exc1nnxjos18z6n6mnva3i36x51orjheihgvkgu49pby0s1d78t0rbu87yqf0q9fsnjmmeh3mphcogmt8001qxgq6ehtwim7n5kw1nfwpck211jbkak4\", \n\t\t\"channelComponent\": \"y2t7mdcx0nftqn8zetgnhiyjxcnw1ww5tzb5ts5ptqrsw4lwq3f2dpacsk9qhng8jm2g54ygb8hwl04kxbwkkehf23lyra78imd9lg55h3maw4czgz0z7dxsfrgm0tfk6q75cd7vlt98m1jd0vn1culzxll5dpmb\", \n\t\t\"channelName\": \"s9ud2hfzgu995p0arl075epuiv19fegr9qhmdiubnajdk6boc2kby0d2wchm4me9rrmsu9mry1os1pds7k6r0evi7htlyjv46xpofqz136sx5wuace8g0xoq6mvriq1phhqru2h8orgg4k5dngs28d7peqg8l7ky\", \n\t\t\"detail\": \"Aperiam quia enim iure dicta quidem eos similique aut. Dignissimos non labore officia illum laboriosam sint quo adipisci quod. Dolorum sint eius veniam. Natus iusto voluptatum fuga. Deserunt consequuntur voluptatem quia itaque iusto. Corporis porro libero impedit et cumque consectetur.\"\n\t}, \n\t{\n\t\t\"id\": \"dbc28ff5-cd2a-485e-ae97-c91039fa6c0e\", \n\t\t\"tenantId\": \"9bb6e8ab-ce5c-449b-8a73-23c4283dde4e\", \n\t\t\"tenantCode\": \"15h7bjoo1s8e94c0mlsrvmls4dpth02snuiju0ae2zqrfizoiw\", \n\t\t\"systemId\": \"1e5111b8-7918-4450-ab5c-f24a6568f2ca\", \n\t\t\"systemName\": \"r1j3xqags7o4x45qnkot\", \n\t\t\"executionId\": \"fefdab6c-3e20-478a-831a-651d9dca7866\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 17:29:34\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 22:48:23\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 07:17:59\", \n\t\t\"status\": \"UNREGISTERED\", \n\t\t\"channelHash\": \"kxdfcfa698d18d5g4mg0j9a9e7b7esarbw4x95co\", \n\t\t\"channelSapId\": \"nidf4jj50l5hcqfb79qns9nwlwkq6glxaezp1i12zws5erby9m\", \n\t\t\"channelParty\": \"sgbcw5lga3gqpywjgce065a5gzt0xg26fzxlzpc1n6d5df1ajs4lrn93f48v7wba4xppjzrnwk31via4dvmsnv67vp0fdev401dd2nxkotxuerd8a9xxcnsmc50eohgmp6iz2b5werzl944jr01ec4emoe2k8rjf\", \n\t\t\"channelComponent\": \"tre378jv5arsp1reajifj42bq7u5dorys37qbywnsgq9pxlnm2cl1c6i60vawldd67u5uunnux0fmv7go42tsk33np4127wi4uadq8dm4yllaazk1llw2rnektksoi1kyyl3ktcpr7uc5ti66m0rnf1pwre4ha9p\", \n\t\t\"channelName\": \"edyiasedmyfa35gjpnui48vh7t06mg3cq9hfel86ms3s17om75i017i0c4cigpm5bqwhbwkdpisav9jzv5b4uswf0aky6iu8vuw6bamnyhayjz4nwzwbrh36yfgc97cm4nkaizo9xo3u5cdy74s9r31yte39enoa\", \n\t\t\"detail\": \"Est consequuntur architecto harum debitis aspernatur rerum mollitia. Et iure enim tempore ex. Est aut porro ut. Quia fugit vel amet. Fugit velit libero labore est laborum dolore.\"\n\t}, \n\t{\n\t\t\"id\": \"8c6118a0-8eb4-402e-ae26-5f7d3790bc03\", \n\t\t\"tenantId\": \"b849e34a-5cf2-48bd-a680-da4b5a1dea0a\", \n\t\t\"tenantCode\": \"xdyvfcdigaz27t66h42rzn85psdq8wqthkjuagu04e7uhg0o05\", \n\t\t\"systemId\": \"bf7da42c-5e37-49ad-a0bb-3e21eda8e202\", \n\t\t\"systemName\": \"djqqofbsqhs4yab5x2tt\", \n\t\t\"executionId\": \"df5b67e1-b887-43d9-b140-3421909b3d27\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-03 19:21:00\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 16:21:14\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 13:19:17\", \n\t\t\"status\": \"UNREGISTERED\", \n\t\t\"channelHash\": \"fnaavuziu9gvod1z58n8sdkkn7wp2n8ocby8jqaa\", \n\t\t\"channelSapId\": \"31zat9nwq9mxnovjyv3hvy51jkzga6p0j962jymqmpbun18fhy\", \n\t\t\"channelParty\": \"o2mk44x4ncy450nag3iipylshlz30yqcstg4vp21mjbuxau9cimejq4pz1slukva9ocv54hmvv53oio0sqhpar4krzf8cj95wmqdvyae3n7da6ydu53i3geq3q682m8gdxfhyt1evl6wbgrriqe7qrc4yr3on5a5\", \n\t\t\"channelComponent\": \"ub38slpdry0wa1oeo49d7rl9wkqdl99e68ihzdb1w6fl34c7k2q620wl3vrs8njpijq2xz30ylipdcty6ygv5rwdt92lfccu0emx2f0c10r62duv1p6nxngmjr9g9fdbpabgi9wvmh0ivlotbg8cpxctkov40s7g\", \n\t\t\"channelName\": \"zkz5p9lbqnd4xt8gs4kmlllhm012z51oat1b5fxz1ds3puhorru6k25ifltf3gzwq4va7rfmy7yjor4cd5pazpf9t0fb8my2sywagyp311v8b9g4tkhpvc2hfkcnxhedpm1aahbm934uyk3f9uj465cfjww9siqx\", \n\t\t\"detail\": \"Modi molestiae non veritatis. Sint atque laborum. Non illum dolores quisquam omnis. Id sapiente voluptas voluptate eum tenetur. Distinctio voluptatum soluta eligendi.\"\n\t}, \n\t{\n\t\t\"id\": \"2848c195-529a-40c5-ae00-80149246bbe9\", \n\t\t\"tenantId\": \"b8bab0cd-277a-4abf-8de0-f1a0f6ef71f6\", \n\t\t\"tenantCode\": \"ju17bhtejv6f5j79yy38bzqysn26ozxa54kjl37vm2dibds9op\", \n\t\t\"systemId\": \"5ea31657-698b-4cd2-a90e-74ddc660f1f2\", \n\t\t\"systemName\": \"n5rd7ombhpfd0m2um7a4\", \n\t\t\"executionId\": \"72dc978d-2e1b-4b8b-8008-1723d14c0868\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 03:50:51\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 21:06:17\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 14:18:37\", \n\t\t\"status\": \"ERROR\", \n\t\t\"channelHash\": \"1b0uco3k86bqpwe9m28c0p7s0ahccj4sm8a2n5in\", \n\t\t\"channelSapId\": \"p3x0hb7xsdx4wcajah5lc3cfsbhf23h7i5itih725nskmayks5\", \n\t\t\"channelParty\": \"mtlo276w3wl4bortpjvk6bwiliuf9nln1yxaqhjn8apgmf7n8eyodl7s8ey495j31n8z278getay3ll76p9j03wcdzljzt17gwlbtqvfi8ifqbgq4ln1grz11mosc7b4wthdlqnefms3bzqs7t1redlspw0aopra\", \n\t\t\"channelComponent\": \"8vcxea8dyhvm73urqd7znne3m4ptg657k4oaqofr41bu0400bnr5b9cubab1sb22oubkoqg0p7brhcak1rzl67n4l2j69f1rpeei4y0mrswyzz75tenbfi4xjd9n8aijaeomst2cyho4lncggfj3etkd2qwjbw0z\", \n\t\t\"channelName\": \"6q1kl6fffhr2mzbu2e1odhz3eei2curocwupa2ww17ns2hyugbc7z914wleden2bid7nak7rbaq385j0kotl9g80ze77xs9iizhni5wd46gaoxqaeeso4a9p64oh2zqrgw2dph48psxeygrxd63pwzwbntdyfi8u\", \n\t\t\"detail\": \"Et aut accusantium accusamus qui illum sed magni. Inventore aut provident et quia similique sed non qui. Neque optio sed sapiente quibusdam perspiciatis odit. Corrupti natus qui perferendis eos. Vitae ab et eos sit sunt. Omnis et qui quisquam sit voluptatibus necessitatibus.\"\n\t}, \n\t{\n\t\t\"id\": \"14c134ff-616d-477f-b632-35fa200836a7\", \n\t\t\"tenantId\": \"2cece09f-d9cd-4c70-885e-d08413c8a3f1\", \n\t\t\"tenantCode\": \"wcw0r4oxtlofq12gst7rgbwhdh88casdem1kp41kwvxrt14pe7\", \n\t\t\"systemId\": \"ce9fc009-cd2e-4b73-9506-3e52da739de3\", \n\t\t\"systemName\": \"gtn4byf8kygu7zvjguyi\", \n\t\t\"executionId\": \"670b260d-847c-4fc0-9cd6-999a24fae39f\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 13:58:35\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 22:09:10\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 13:32:09\", \n\t\t\"status\": \"SUCCESSFUL\", \n\t\t\"channelHash\": \"vqx33fxv98llzedzlpy0m4ndaw8nwqjphbv5fszv\", \n\t\t\"channelSapId\": \"ou344zx7mv9l159q8jocx97xdzkq6k5tl13wda8wvd2zbcmkrn\", \n\t\t\"channelParty\": \"4ompeh583mk0qk4qxhvjuh8xs14450ap7iuvadh8mkuv5bl98dqjma97eaghm9l5nsl9s8to1pt4ijuhijag8ib5sfylah278a4ovbdiaborn08rqyjhw0s2z0raqjtkauad235xtuzv3yd7qed9wijihkocdell\", \n\t\t\"channelComponent\": \"rk8e79mhj8l0cv209fbyq6ioyl9dit7ym6tg14pvxlwnpggs5fl75qdr4hx1xta6m4m1j1au14xx1xzr19ijqdjquwqk545k0fl1vjx7cvhaher9olzcv3fuabekh7cgj52m6tzhcidbvxt3yjg4vehp2huy655j\", \n\t\t\"channelName\": \"gmkfrawfowx92x9dudaxcruqn7zcmcmjtps6wx04ntr6vu881rkg5deiopeuh9d5g8fglm4ra7fdnlnnqe72vcwj6kb66w1rezh0y187p0tfkix4fbz7z6vwp4eeovx44rtjzn1auko79xq05v3kqlbps5g4994p\", \n\t\t\"detail\": \"Sed voluptatem accusantium ratione id. Sit eum tempora perspiciatis sequi laudantium inventore qui ducimus. Quo magnam quas porro voluptas autem sit.\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/channels-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"channels-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/channels-detail/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/channels-detail/paginate",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+                        "channels-detail",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/channels-detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"b962b77d-a02f-47e6-a100-12b9c34951b8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/channels-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"channels-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/channel-detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"b962b77d-a02f-47e6-a100-12b9c34951b8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/channel-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"channel-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/channel-detail/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/channel-detail/b962b77d-a02f-47e6-a100-12b9c34951b8",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"channel-detail",
+						"b962b77d-a02f-47e6-a100-12b9c34951b8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/channel-detail",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"b962b77d-a02f-47e6-a100-12b9c34951b8\", \n\t\"tenantId\": \"46cc98d5-6415-4d95-a3d1-370a531c6c13\", \n\t\"tenantCode\": \"a3p0nd8ssqbq66ol221io31g4f8h1nnl5ey35415c929qrdiva\", \n\t\"systemId\": \"1bde9487-292e-4474-b6fb-937288b90d62\", \n\t\"systemName\": \"h7ac5q23m1hmmll4ndzu\", \n\t\"executionId\": \"3b7d8c80-6634-40ac-9a18-95d052bf92d5\", \n\t\"executionType\": \"DETAIL\", \n\t\"executionExecutedAt\": \"2020-11-04 05:15:59\", \n\t\"executionMonitoringStartAt\": \"2020-11-04 07:55:38\", \n\t\"executionMonitoringEndAt\": \"2020-11-04 05:26:12\", \n\t\"status\": \"STOPPED\", \n\t\"channelHash\": \"g9hvjhq0vqwzkkmkm55llsm6o7qn2mlzisnd6tiw\", \n\t\"channelSapId\": \"lnn3kkwewwqtzhnp1fjmup5p2peiys78l96tenjmjt41ob7fb2\", \n\t\"channelParty\": \"hdjbs9uabciywsln8g2p3tuaphj8krva1r1zhp0g5jmwe8oqz9tn5rhnc3u6mjdowpkw6jyn2xjs467tsd0od98nv73mpn2o2ybgd62v7nl6ayjsfghtsnoadbwwun1hrlz3y735gn9a8qu6pwe5trav07uec3uw\", \n\t\"channelComponent\": \"ks6ccju2hkr3jprg9fyyojku0na8pebojogcutv61exhcdw4m2e4gc6yznr0db55l5ecrwu089mpmwlzcr9qge31ez0d02g997y1rk37x30ivpiflqvzq1y1a66cbxg344ub0r5in5s796onx83y9yghv63m0gvg\", \n\t\"channelName\": \"y2u54uiujob7e9hbb6045amglgi65z35agzxditiyykxhvifkvhnvvv3giz3qf5pm0xpe7luv271tpj8ch7f3jkrfwleczuwvrqvioyr7su0wgzzdi2wsd3fwtraevlif4lk0kjsbt3g7dkssq9k7qyc7nd3e07w\", \n\t\"detail\": \"Deleniti minima hic recusandae quidem. Adipisci minus velit omnis et eos cumque. Velit aliquam corrupti et sequi. Voluptatibus nostrum nihil quos eos ex.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/channel-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"channel-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/channel-detail/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/channel-detail/b962b77d-a02f-47e6-a100-12b9c34951b8",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"channel-detail",
+						"b962b77d-a02f-47e6-a100-12b9c34951b8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - cci/channels-detail",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/channels-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"channels-detail"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "2f5f940d-5492-47ce-b502-bdadfb007eab",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

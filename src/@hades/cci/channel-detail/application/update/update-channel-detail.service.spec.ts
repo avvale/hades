@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { channelsDetail } from '@hades/cci/channel-detail/infrastructure/seeds/channel-detail.seed';
 import { UpdateChannelDetailService } from './update-channel-detail.service';
-import { 
+import {
     ChannelDetailId,
     ChannelDetailTenantId,
     ChannelDetailTenantCode,
@@ -24,19 +24,18 @@ import {
     ChannelDetailDetail,
     ChannelDetailCreatedAt,
     ChannelDetailUpdatedAt,
-    ChannelDetailDeletedAt
-    
+    ChannelDetailDeletedAt,
 } from './../../domain/value-objects';
 import { IChannelDetailRepository } from './../../domain/channel-detail.repository';
 import { MockChannelDetailRepository } from './../../infrastructure/mock/mock-channel-detail.repository';
 
-describe('UpdateChannelDetailService', () => 
+describe('UpdateChannelDetailService', () =>
 {
     let service: UpdateChannelDetailService;
     let repository: IChannelDetailRepository;
     let mockRepository: MockChannelDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -45,7 +44,7 @@ describe('UpdateChannelDetailService', () =>
                 EventPublisher,
                 UpdateChannelDetailService,
                 MockChannelDetailRepository,
-                { 
+                {
                     provide: IChannelDetailRepository,
                     useValue: {
                         update: (item) => {}
@@ -59,7 +58,7 @@ describe('UpdateChannelDetailService', () =>
         mockRepository  = module.get(MockChannelDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateChannelDetailService should be defined', () => 
         {
