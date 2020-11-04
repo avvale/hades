@@ -1,21 +1,20 @@
-
 enum CciChannelDirection {
     SENDER
     RECEIVER
-        
 }
 enum CciChannelAdapterStatus {
     ACTIVE
     INACTIVE
-        
 }
 
 type CciChannel
 {
     id: ID!
     hash: GraphQLString!
+    tenantId: ID!
     tenant: IamTenant!
     tenantCode: GraphQLString!
+    systemId: ID!
     system: CciSystem!
     systemName: GraphQLString!
     party: GraphQLString
@@ -53,7 +52,6 @@ type CciChannel
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input CciCreateChannelInput
@@ -96,7 +94,6 @@ input CciCreateChannelInput
     lastChangedAt: GraphQLTimestamp
     riInterfaceName: GraphQLString
     riInterfaceNamespace: GraphQLString
-    
 }
 
 input CciUpdateChannelInput
@@ -139,10 +136,9 @@ input CciUpdateChannelInput
     lastChangedAt: GraphQLTimestamp
     riInterfaceName: GraphQLString
     riInterfaceNamespace: GraphQLString
-    
 }
 
-type Query 
+type Query
 {
     cciFindChannel(query:QueryStatement constraint:QueryStatement): CciChannel
     cciFindChannelById(id:ID constraint:QueryStatement): CciChannel

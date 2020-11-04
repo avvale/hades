@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginateChannelsQuery } from './paginate-channels.query';
 import { PaginateChannelsService } from './paginate-channels.service';
 
-describe('PaginateChannelsQueryHandler', () => 
+describe('PaginateChannelsQueryHandler', () =>
 {
     let queryHandler: PaginateChannelsQueryHandler;
     let service: PaginateChannelsService;
     let repository: MockChannelRepository;
     let mapper: ChannelMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

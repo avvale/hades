@@ -7,7 +7,7 @@ type CciSummary
     messagesDetail: [CciMessageDetail]!
 }
 
-type Query 
+type Query
 {
     cciFindSystemSummary(systemId:ID!): CciSummary!
 }

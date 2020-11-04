@@ -1,10 +1,7 @@
-
 import { TenantResponse } from '@hades/iam/tenant/domain/tenant.response';
 import { SystemResponse } from '@hades/cci/system/domain/system.response';
 
-
-
-export class ChannelResponse 
+export class ChannelResponse
 {
     constructor(
         public readonly id: string,
@@ -48,13 +45,7 @@ export class ChannelResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        
-        
-        
         public readonly tenant: TenantResponse,
         public readonly system: SystemResponse,
-        
-        
-        
     ) {}
 }

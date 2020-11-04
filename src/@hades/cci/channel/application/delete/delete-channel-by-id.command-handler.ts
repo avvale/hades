@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeleteChannelByIdCommand } from './delete-channel-by-id.command';
 import { DeleteChannelByIdService } from './delete-channel-by-id.service';
-import { 
+import {
     ChannelId
 } from './../../domain/value-objects';
 
@@ -9,14 +9,16 @@ import {
 export class DeleteChannelByIdCommandHandler implements ICommandHandler<DeleteChannelByIdCommand>
 {
     constructor(
-        private readonly deleteChannelByIdService: DeleteChannelByIdService
-    ) { }
+        private readonly deleteChannelByIdService: DeleteChannelByIdService,
+    ) {}
 
     async execute(command: DeleteChannelByIdCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.deleteChannelByIdService.main(
-            new ChannelId(command.id)
+            new ChannelId(command.id),
+            command.constraint,
+            command.cQMetadata
         );
     }
 }

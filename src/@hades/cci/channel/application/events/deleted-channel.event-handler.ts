@@ -4,7 +4,7 @@ import { DeletedChannelEvent } from './deleted-channel.event';
 @EventsHandler(DeletedChannelEvent)
 export class DeletedChannelEventHandler implements IEventHandler<DeletedChannelEvent>
 {
-    handle(event: DeletedChannelEvent) 
+    handle(event: DeletedChannelEvent)
     {
         // console.log('DeletedChannelEvent: ', event);
     }

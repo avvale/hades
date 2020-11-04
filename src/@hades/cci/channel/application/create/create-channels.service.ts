@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ChannelId,
     ChannelHash,
     ChannelTenantId,
@@ -42,8 +41,7 @@ import {
     ChannelRiInterfaceNamespace,
     ChannelCreatedAt,
     ChannelUpdatedAt,
-    ChannelDeletedAt
-    
+    ChannelDeletedAt,
 } from './../../domain/value-objects';
 import { IChannelRepository } from './../../domain/channel.repository';
 import { CciChannel } from './../../domain/channel.aggregate';
@@ -54,7 +52,7 @@ export class CreateChannelsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IChannelRepository
+        private readonly repository: IChannelRepository,
     ) {}
 
     public async main(
@@ -97,7 +95,6 @@ export class CreateChannelsService
             lastChangedAt: ChannelLastChangedAt,
             riInterfaceName: ChannelRiInterfaceName,
             riInterfaceNamespace: ChannelRiInterfaceNamespace,
-            
         } []
     ): Promise<void>
     {
@@ -141,11 +138,11 @@ export class CreateChannelsService
             channel.lastChangedAt,
             channel.riInterfaceName,
             channel.riInterfaceNamespace,
-            new ChannelCreatedAt(Utils.nowTimestamp()),
-            new ChannelUpdatedAt(Utils.nowTimestamp()),
+            new ChannelCreatedAt({currentTimestamp: true}),
+            new ChannelUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateChannels, { updateOnDuplicate: [
                 'flowHash',
@@ -153,16 +150,16 @@ export class CreateChannelsService
                 'flowComponent',
                 'flowInterfaceName',
                 'flowInterfaceNamespace',
-                'version', 
-                'adapterType', 
-                'direction', 
-                'transportProtocol', 
-                'messageProtocol', 
-                'adapterEngineName', 
-                'url', 
-                'username', 
-                'remoteHost', 
-                'remotePort', 
+                'version',
+                'adapterType',
+                'direction',
+                'transportProtocol',
+                'messageProtocol',
+                'adapterEngineName',
+                'url',
+                'username',
+                'remoteHost',
+                'remotePort',
                 'directory',
                 'fileSchema',
                 'proxyHost',
@@ -176,13 +173,13 @@ export class CreateChannelsService
                 'riInterfaceName',
                 'riInterfaceNamespace',
                 'updatedAt'
-            ] 
+            ]
         });
 
         // create AddChannelsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const channelsRegistered = this.publisher.mergeObjectContext(new AddChannelsContextEvent(aggregateChannels));
- 
+
         channelsRegistered.created(); // apply event to model events
         channelsRegistered.commit(); // commit all events of model
     }

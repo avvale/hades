@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateChannelsCommand } from './create-channels.command';
 import { CreateChannelsService } from './create-channels.service';
-import { 
+import {
     ChannelId,
     ChannelHash,
     ChannelTenantId,
@@ -39,23 +39,25 @@ import {
     ChannelLastChangeUserAccount,
     ChannelLastChangedAt,
     ChannelRiInterfaceName,
-    ChannelRiInterfaceNamespace
-    
+    ChannelRiInterfaceNamespace,
+    ChannelCreatedAt,
+    ChannelUpdatedAt,
+    ChannelDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateChannelsCommand)
 export class CreateChannelsCommandHandler implements ICommandHandler<CreateChannelsCommand>
 {
     constructor(
-        private readonly createChannelsService: CreateChannelsService
-    ) { }
+        private readonly createChannelsService: CreateChannelsService,
+    ) {}
 
     async execute(command: CreateChannelsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createChannelsService.main(
-            command.channels
-                .map(channel => { 
+            command.payload
+                .map(channel => {
                     return {
                         id: new ChannelId(channel.id),
                         hash: new ChannelHash(channel.hash),
@@ -92,10 +94,9 @@ export class CreateChannelsCommandHandler implements ICommandHandler<CreateChann
                         softwareComponentName: new ChannelSoftwareComponentName(channel.softwareComponentName),
                         responsibleUserAccountName: new ChannelResponsibleUserAccountName(channel.responsibleUserAccountName),
                         lastChangeUserAccount: new ChannelLastChangeUserAccount(channel.lastChangeUserAccount),
-                        lastChangedAt: new ChannelLastChangedAt(channel.lastChangedAt),
+                        lastChangedAt: new ChannelLastChangedAt(channel.lastChangedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
                         riInterfaceName: new ChannelRiInterfaceName(channel.riInterfaceName),
                         riInterfaceNamespace: new ChannelRiInterfaceNamespace(channel.riInterfaceNamespace),
-                        
                     }
                 })
         );

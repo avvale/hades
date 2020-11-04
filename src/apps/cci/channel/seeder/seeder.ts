@@ -4,7 +4,7 @@ import { CreateChannelsCommand } from '@hades/cci/channel/application/create/cre
 import { SeederModule } from './seeder.module';
 import { channels } from '@hades/cci/channel/infrastructure/seeds/channel.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

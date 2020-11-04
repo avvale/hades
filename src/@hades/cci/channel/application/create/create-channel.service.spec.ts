@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { channels } from '@hades/cci/channel/infrastructure/seeds/channel.seed';
 import { CreateChannelService } from './create-channel.service';
-import { 
+import {
     ChannelId,
     ChannelHash,
     ChannelTenantId,
@@ -42,19 +42,22 @@ import {
     ChannelLastChangeUserAccount,
     ChannelLastChangedAt,
     ChannelRiInterfaceName,
-    ChannelRiInterfaceNamespace
-    
+    ChannelRiInterfaceNamespace,
+    ChannelCreatedAt,
+    ChannelUpdatedAt,
+    ChannelDeletedAt,
 } from './../../domain/value-objects';
 import { IChannelRepository } from './../../domain/channel.repository';
 import { MockChannelRepository } from './../../infrastructure/mock/mock-channel.repository';
 
-describe('CreateChannelService', () => 
+describe('CreateChannelService', () =>
+
 {
     let service: CreateChannelService;
     let repository: IChannelRepository;
     let mockRepository: MockChannelRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -63,7 +66,7 @@ describe('CreateChannelService', () =>
                 EventPublisher,
                 CreateChannelService,
                 MockChannelRepository,
-                { 
+                {
                     provide: IChannelRepository,
                     useValue: {
                         create: (item) => {}
@@ -77,14 +80,14 @@ describe('CreateChannelService', () =>
         mockRepository  = module.get(MockChannelRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateChannelService should be defined', () => 
+        test('CreateChannelService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a channel and emit event', async () => 
+        test('should create a channel and emit event', async () =>
         {
             expect(await service.main(
                 new ChannelId(channels[0].id),

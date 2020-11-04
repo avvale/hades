@@ -10,12 +10,16 @@ export class FindChannelQueryHandler implements IQueryHandler<FindChannelQuery>
     private readonly mapper: ChannelMapper = new ChannelMapper();
 
     constructor(
-        private readonly findChannelService: FindChannelService
-    ) { }
+        private readonly findChannelService: FindChannelService,
+    ) {}
 
     async execute(query: FindChannelQuery): Promise<ChannelResponse>
     {
-        const channel = await this.findChannelService.main(query.queryStatement);
+        const channel = await this.findChannelService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(channel);
     }

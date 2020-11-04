@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     ChannelId,
     ChannelHash,
     ChannelTenantId,
@@ -40,17 +40,13 @@ import {
     ChannelRiInterfaceNamespace,
     ChannelCreatedAt,
     ChannelUpdatedAt,
-    ChannelDeletedAt
-    
+    ChannelDeletedAt,
 } from './value-objects';
 import { CreatedChannelEvent } from './../application/events/created-channel.event';
 import { UpdatedChannelEvent } from './../application/events/updated-channel.event';
 import { DeletedChannelEvent } from './../application/events/deleted-channel.event';
-
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
-
-
 
 export class CciChannel extends AggregateRoot
 {
@@ -95,19 +91,15 @@ export class CciChannel extends AggregateRoot
     createdAt: ChannelCreatedAt;
     updatedAt: ChannelUpdatedAt;
     deletedAt: ChannelDeletedAt;
-    
+
     // eager relationship
-    
-    
     tenant: IamTenant;
     system: CciSystem;
-    
-    
-    
+
     constructor(id?: ChannelId, hash?: ChannelHash, tenantId?: ChannelTenantId, tenantCode?: ChannelTenantCode, systemId?: ChannelSystemId, systemName?: ChannelSystemName, party?: ChannelParty, component?: ChannelComponent, name?: ChannelName, flowHash?: ChannelFlowHash, flowParty?: ChannelFlowParty, flowReceiverParty?: ChannelFlowReceiverParty, flowComponent?: ChannelFlowComponent, flowReceiverComponent?: ChannelFlowReceiverComponent, flowInterfaceName?: ChannelFlowInterfaceName, flowInterfaceNamespace?: ChannelFlowInterfaceNamespace, version?: ChannelVersion, adapterType?: ChannelAdapterType, direction?: ChannelDirection, transportProtocol?: ChannelTransportProtocol, messageProtocol?: ChannelMessageProtocol, adapterEngineName?: ChannelAdapterEngineName, url?: ChannelUrl, username?: ChannelUsername, remoteHost?: ChannelRemoteHost, remotePort?: ChannelRemotePort, directory?: ChannelDirectory, fileSchema?: ChannelFileSchema, proxyHost?: ChannelProxyHost, proxyPort?: ChannelProxyPort, destination?: ChannelDestination, adapterStatus?: ChannelAdapterStatus, softwareComponentName?: ChannelSoftwareComponentName, responsibleUserAccountName?: ChannelResponsibleUserAccountName, lastChangeUserAccount?: ChannelLastChangeUserAccount, lastChangedAt?: ChannelLastChangedAt, riInterfaceName?: ChannelRiInterfaceName, riInterfaceNamespace?: ChannelRiInterfaceNamespace, createdAt?: ChannelCreatedAt, updatedAt?: ChannelUpdatedAt, deletedAt?: ChannelDeletedAt, tenant?: IamTenant, system?: CciSystem, )
     {
         super();
-        
+
         this.id = id;
         this.hash = hash;
         this.tenantId = tenantId;
@@ -149,15 +141,10 @@ export class CciChannel extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
         this.tenant = tenant;
         this.system = system;
-        
-        
-        
     }
 
     static register (id: ChannelId, hash: ChannelHash, tenantId: ChannelTenantId, tenantCode: ChannelTenantCode, systemId: ChannelSystemId, systemName: ChannelSystemName, party: ChannelParty, component: ChannelComponent, name: ChannelName, flowHash: ChannelFlowHash, flowParty: ChannelFlowParty, flowReceiverParty: ChannelFlowReceiverParty, flowComponent: ChannelFlowComponent, flowReceiverComponent: ChannelFlowReceiverComponent, flowInterfaceName: ChannelFlowInterfaceName, flowInterfaceNamespace: ChannelFlowInterfaceNamespace, version: ChannelVersion, adapterType: ChannelAdapterType, direction: ChannelDirection, transportProtocol: ChannelTransportProtocol, messageProtocol: ChannelMessageProtocol, adapterEngineName: ChannelAdapterEngineName, url: ChannelUrl, username: ChannelUsername, remoteHost: ChannelRemoteHost, remotePort: ChannelRemotePort, directory: ChannelDirectory, fileSchema: ChannelFileSchema, proxyHost: ChannelProxyHost, proxyPort: ChannelProxyPort, destination: ChannelDestination, adapterStatus: ChannelAdapterStatus, softwareComponentName: ChannelSoftwareComponentName, responsibleUserAccountName: ChannelResponsibleUserAccountName, lastChangeUserAccount: ChannelLastChangeUserAccount, lastChangedAt: ChannelLastChangedAt, riInterfaceName: ChannelRiInterfaceName, riInterfaceNamespace: ChannelRiInterfaceNamespace, createdAt: ChannelCreatedAt, updatedAt: ChannelUpdatedAt, deletedAt: ChannelDeletedAt, tenant?: IamTenant, system?: CciSystem, ): CciChannel
@@ -210,7 +197,6 @@ export class CciChannel extends AggregateRoot
                 channel.createdAt?.value,
                 channel.updatedAt?.value,
                 channel.deletedAt?.value,
-                
             )
         );
     }
@@ -260,7 +246,6 @@ export class CciChannel extends AggregateRoot
                 channel.createdAt?.value,
                 channel.updatedAt?.value,
                 channel.deletedAt?.value,
-                
             )
         );
     }
@@ -310,7 +295,6 @@ export class CciChannel extends AggregateRoot
                 channel.createdAt?.value,
                 channel.updatedAt?.value,
                 channel.deletedAt?.value,
-                
             )
         );
     }
@@ -359,15 +343,10 @@ export class CciChannel extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
-            
-            
-            
         }
     }
 }
