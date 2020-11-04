@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeleteJobDetailByIdCommand } from './delete-job-detail-by-id.command';
 import { DeleteJobDetailByIdService } from './delete-job-detail-by-id.service';
-import { 
+import {
     JobDetailId
 } from './../../domain/value-objects';
 
@@ -9,14 +9,16 @@ import {
 export class DeleteJobDetailByIdCommandHandler implements ICommandHandler<DeleteJobDetailByIdCommand>
 {
     constructor(
-        private readonly deleteJobDetailByIdService: DeleteJobDetailByIdService
-    ) { }
+        private readonly deleteJobDetailByIdService: DeleteJobDetailByIdService,
+    ) {}
 
     async execute(command: DeleteJobDetailByIdCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.deleteJobDetailByIdService.main(
-            new JobDetailId(command.id)
+            new JobDetailId(command.id),
+            command.constraint,
+            command.cQMetadata
         );
     }
 }

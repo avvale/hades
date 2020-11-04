@@ -8,21 +8,21 @@ import { DeletedJobsDetailEvent } from './deleted-jobs-detail.event';
 export class AddJobsDetailContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciJobDetail[] = []
+        public readonly aggregateRoots: CciJobDetail[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedJobsDetailEvent(
-                this.aggregateRoots.map(jobDetail => 
+                this.aggregateRoots.map(jobDetail =>
                     new CreatedJobDetailEvent(
                         jobDetail.id.value,
                         jobDetail.tenantId.value,
@@ -55,7 +55,7 @@ export class AddJobsDetailContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedJobsDetailEvent(
-                this.aggregateRoots.map(jobDetail => 
+                this.aggregateRoots.map(jobDetail =>
                     new DeletedJobDetailEvent(
                         jobDetail.id.value,
                         jobDetail.tenantId.value,
@@ -77,10 +77,10 @@ export class AddJobsDetailContextEvent extends AggregateRoot
                         jobDetail.createdAt?.value,
                         jobDetail.updatedAt?.value,
                         jobDetail.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

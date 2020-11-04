@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateJobsDetailCommand } from './create-jobs-detail.command';
 import { CreateJobsDetailService } from './create-jobs-detail.service';
-import { 
+import {
     JobDetailId,
     JobDetailTenantId,
     JobDetailTenantCode,
@@ -18,23 +18,25 @@ import {
     JobDetailNode,
     JobDetailUser,
     JobDetailStartAt,
-    JobDetailEndAt
-    
+    JobDetailEndAt,
+    JobDetailCreatedAt,
+    JobDetailUpdatedAt,
+    JobDetailDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateJobsDetailCommand)
 export class CreateJobsDetailCommandHandler implements ICommandHandler<CreateJobsDetailCommand>
 {
     constructor(
-        private readonly createJobsDetailService: CreateJobsDetailService
-    ) { }
+        private readonly createJobsDetailService: CreateJobsDetailService,
+    ) {}
 
     async execute(command: CreateJobsDetailCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createJobsDetailService.main(
-            command.jobsDetail
-                .map(jobDetail => { 
+            command.payload
+                .map(jobDetail => {
                     return {
                         id: new JobDetailId(jobDetail.id),
                         tenantId: new JobDetailTenantId(jobDetail.tenantId),
@@ -43,17 +45,16 @@ export class CreateJobsDetailCommandHandler implements ICommandHandler<CreateJob
                         systemName: new JobDetailSystemName(jobDetail.systemName),
                         executionId: new JobDetailExecutionId(jobDetail.executionId),
                         executionType: new JobDetailExecutionType(jobDetail.executionType),
-                        executionExecutedAt: new JobDetailExecutionExecutedAt(jobDetail.executionExecutedAt),
-                        executionMonitoringStartAt: new JobDetailExecutionMonitoringStartAt(jobDetail.executionMonitoringStartAt),
-                        executionMonitoringEndAt: new JobDetailExecutionMonitoringEndAt(jobDetail.executionMonitoringEndAt),
+                        executionExecutedAt: new JobDetailExecutionExecutedAt(jobDetail.executionExecutedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                        executionMonitoringStartAt: new JobDetailExecutionMonitoringStartAt(jobDetail.executionMonitoringStartAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                        executionMonitoringEndAt: new JobDetailExecutionMonitoringEndAt(jobDetail.executionMonitoringEndAt, {}, {removeTimezone: command.cQMetadata.timezone}),
                         status: new JobDetailStatus(jobDetail.status),
                         name: new JobDetailName(jobDetail.name),
                         returnCode: new JobDetailReturnCode(jobDetail.returnCode),
                         node: new JobDetailNode(jobDetail.node),
                         user: new JobDetailUser(jobDetail.user),
-                        startAt: new JobDetailStartAt(jobDetail.startAt),
-                        endAt: new JobDetailEndAt(jobDetail.endAt),
-                        
+                        startAt: new JobDetailStartAt(jobDetail.startAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                        endAt: new JobDetailEndAt(jobDetail.endAt, {}, {removeTimezone: command.cQMetadata.timezone}),
                     }
                 })
         );

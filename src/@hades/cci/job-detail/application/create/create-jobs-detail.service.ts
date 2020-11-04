@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     JobDetailId,
     JobDetailTenantId,
     JobDetailTenantCode,
@@ -21,8 +20,7 @@ import {
     JobDetailEndAt,
     JobDetailCreatedAt,
     JobDetailUpdatedAt,
-    JobDetailDeletedAt
-    
+    JobDetailDeletedAt,
 } from './../../domain/value-objects';
 import { IJobDetailRepository } from './../../domain/job-detail.repository';
 import { CciJobDetail } from './../../domain/job-detail.aggregate';
@@ -33,7 +31,7 @@ export class CreateJobsDetailService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IJobDetailRepository
+        private readonly repository: IJobDetailRepository,
     ) {}
 
     public async main(
@@ -55,7 +53,6 @@ export class CreateJobsDetailService
             user: JobDetailUser,
             startAt: JobDetailStartAt,
             endAt: JobDetailEndAt,
-            
         } []
     ): Promise<void>
     {
@@ -78,18 +75,18 @@ export class CreateJobsDetailService
             jobDetail.user,
             jobDetail.startAt,
             jobDetail.endAt,
-            new JobDetailCreatedAt(Utils.nowTimestamp()),
-            new JobDetailUpdatedAt(Utils.nowTimestamp()),
+            new JobDetailCreatedAt({currentTimestamp: true}),
+            new JobDetailUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateJobsDetail);
 
         // create AddJobsDetailContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const jobsDetailRegistered = this.publisher.mergeObjectContext(new AddJobsDetailContextEvent(aggregateJobsDetail));
- 
+
         jobsDetailRegistered.created(); // apply event to model events
         jobsDetailRegistered.commit(); // commit all events of model
     }

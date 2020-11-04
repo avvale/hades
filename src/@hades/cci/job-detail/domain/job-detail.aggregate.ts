@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     JobDetailId,
     JobDetailTenantId,
     JobDetailTenantCode,
@@ -19,8 +19,7 @@ import {
     JobDetailEndAt,
     JobDetailCreatedAt,
     JobDetailUpdatedAt,
-    JobDetailDeletedAt
-    
+    JobDetailDeletedAt,
 } from './value-objects';
 import { CreatedJobDetailEvent } from './../application/events/created-job-detail.event';
 import { UpdatedJobDetailEvent } from './../application/events/updated-job-detail.event';
@@ -28,8 +27,6 @@ import { DeletedJobDetailEvent } from './../application/events/deleted-job-detai
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
-
-
 
 export class CciJobDetail extends AggregateRoot
 {
@@ -53,18 +50,16 @@ export class CciJobDetail extends AggregateRoot
     createdAt: JobDetailCreatedAt;
     updatedAt: JobDetailUpdatedAt;
     deletedAt: JobDetailDeletedAt;
-    
+
     // eager relationship
     tenant: IamTenant;
     system: CciSystem;
     execution: CciExecution;
-    
-    
-    
+
     constructor(id?: JobDetailId, tenantId?: JobDetailTenantId, tenantCode?: JobDetailTenantCode, systemId?: JobDetailSystemId, systemName?: JobDetailSystemName, executionId?: JobDetailExecutionId, executionType?: JobDetailExecutionType, executionExecutedAt?: JobDetailExecutionExecutedAt, executionMonitoringStartAt?: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: JobDetailExecutionMonitoringEndAt, status?: JobDetailStatus, name?: JobDetailName, returnCode?: JobDetailReturnCode, node?: JobDetailNode, user?: JobDetailUser, startAt?: JobDetailStartAt, endAt?: JobDetailEndAt, createdAt?: JobDetailCreatedAt, updatedAt?: JobDetailUpdatedAt, deletedAt?: JobDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
     {
         super();
-        
+
         this.id = id;
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;
@@ -87,6 +82,8 @@ export class CciJobDetail extends AggregateRoot
         this.deletedAt = deletedAt;
         
         // eager relationship
+        
+        
         this.tenant = tenant;
         this.system = system;
         this.execution = execution;
@@ -212,6 +209,8 @@ export class CciJobDetail extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             
             // eager relationship
+            
+            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             execution: this.execution?.toDTO(),

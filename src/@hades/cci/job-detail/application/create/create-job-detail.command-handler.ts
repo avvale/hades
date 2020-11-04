@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateJobDetailCommand } from './create-job-detail.command';
 import { CreateJobDetailService } from './create-job-detail.service';
-import { 
+import {
     JobDetailId,
     JobDetailTenantId,
     JobDetailTenantCode,
@@ -18,39 +18,42 @@ import {
     JobDetailNode,
     JobDetailUser,
     JobDetailStartAt,
-    JobDetailEndAt
-    
+    JobDetailEndAt,
+    JobDetailCreatedAt,
+    JobDetailUpdatedAt,
+    JobDetailDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateJobDetailCommand)
 export class CreateJobDetailCommandHandler implements ICommandHandler<CreateJobDetailCommand>
 {
     constructor(
-        private readonly createJobDetailService: CreateJobDetailService
-    ) { }
+        private readonly createJobDetailService: CreateJobDetailService,
+    ) {}
 
     async execute(command: CreateJobDetailCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createJobDetailService.main(
-            new JobDetailId(command.id),
-            new JobDetailTenantId(command.tenantId),
-            new JobDetailTenantCode(command.tenantCode),
-            new JobDetailSystemId(command.systemId),
-            new JobDetailSystemName(command.systemName),
-            new JobDetailExecutionId(command.executionId),
-            new JobDetailExecutionType(command.executionType),
-            new JobDetailExecutionExecutedAt(command.executionExecutedAt),
-            new JobDetailExecutionMonitoringStartAt(command.executionMonitoringStartAt),
-            new JobDetailExecutionMonitoringEndAt(command.executionMonitoringEndAt),
-            new JobDetailStatus(command.status),
-            new JobDetailName(command.name),
-            new JobDetailReturnCode(command.returnCode),
-            new JobDetailNode(command.node),
-            new JobDetailUser(command.user),
-            new JobDetailStartAt(command.startAt),
-            new JobDetailEndAt(command.endAt),
-            
+            {
+                id: new JobDetailId(command.payload.id),
+                tenantId: new JobDetailTenantId(command.payload.tenantId),
+                tenantCode: new JobDetailTenantCode(command.payload.tenantCode),
+                systemId: new JobDetailSystemId(command.payload.systemId),
+                systemName: new JobDetailSystemName(command.payload.systemName),
+                executionId: new JobDetailExecutionId(command.payload.executionId),
+                executionType: new JobDetailExecutionType(command.payload.executionType),
+                executionExecutedAt: new JobDetailExecutionExecutedAt(command.payload.executionExecutedAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                executionMonitoringStartAt: new JobDetailExecutionMonitoringStartAt(command.payload.executionMonitoringStartAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                executionMonitoringEndAt: new JobDetailExecutionMonitoringEndAt(command.payload.executionMonitoringEndAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                status: new JobDetailStatus(command.payload.status),
+                name: new JobDetailName(command.payload.name),
+                returnCode: new JobDetailReturnCode(command.payload.returnCode),
+                node: new JobDetailNode(command.payload.node),
+                user: new JobDetailUser(command.payload.user),
+                startAt: new JobDetailStartAt(command.payload.startAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+                endAt: new JobDetailEndAt(command.payload.endAt, {}, {removeTimezone: command.cQMetadata.timezone}),
+            }
         );
     }
 }

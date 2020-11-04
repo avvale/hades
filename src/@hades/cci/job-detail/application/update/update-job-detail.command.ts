@@ -1,23 +1,29 @@
-export class UpdateJobDetailCommand 
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class UpdateJobDetailCommand
 {
     constructor(
-        public readonly id: string,
-        public readonly tenantId?: string,
-        public readonly tenantCode?: string,
-        public readonly systemId?: string,
-        public readonly systemName?: string,
-        public readonly executionId?: string,
-        public readonly executionType?: string,
-        public readonly executionExecutedAt?: string,
-        public readonly executionMonitoringStartAt?: string,
-        public readonly executionMonitoringEndAt?: string,
-        public readonly status?: string,
-        public readonly name?: string,
-        public readonly returnCode?: number,
-        public readonly node?: string,
-        public readonly user?: string,
-        public readonly startAt?: string,
-        public readonly endAt?: string,
-        
+        public readonly payload: {
+            id: string,
+            tenantId?: string,
+            tenantCode?: string,
+            systemId?: string,
+            systemName?: string,
+            executionId?: string,
+            executionType?: string,
+            executionExecutedAt?: string,
+            executionMonitoringStartAt?: string,
+            executionMonitoringEndAt?: string,
+            status?: string,
+            name?: string,
+            returnCode?: number,
+            node?: string,
+            user?: string,
+            startAt?: string,
+            endAt?: string,
+        },
+        public readonly constraint?: QueryStatement,
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

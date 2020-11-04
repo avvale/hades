@@ -1,45 +1,45 @@
 // controllers
-import { CreateJobDetailController } from './controllers/create-job-detail.controller';
-import { CreateJobsDetailController } from './controllers/create-jobs-detail.controller';
-import { PaginateJobsDetailController } from './controllers/paginate-jobs-detail.controller';
-import { GetJobsDetailController } from './controllers/get-jobs-detail.controller';
-import { FindJobDetailByIdController } from './controllers/find-job-detail-by-id.controller';
-import { FindJobDetailController } from './controllers/find-job-detail.controller';
-import { UpdateJobDetailController } from './controllers/update-job-detail.controller';
-import { DeleteJobDetailByIdController } from './controllers/delete-job-detail-by-id.controller';
-import { DeleteJobsDetailController } from './controllers/delete-jobs-detail.controller';
+import { CciCreateJobDetailController } from './controllers/cci-create-job-detail.controller';
+import { CciCreateJobsDetailController } from './controllers/cci-create-jobs-detail.controller';
+import { CciPaginateJobsDetailController } from './controllers/cci-paginate-jobs-detail.controller';
+import { CciGetJobsDetailController } from './controllers/cci-get-jobs-detail.controller';
+import { CciFindJobDetailByIdController } from './controllers/cci-find-job-detail-by-id.controller';
+import { CciFindJobDetailController } from './controllers/cci-find-job-detail.controller';
+import { CciUpdateJobDetailController } from './controllers/cci-update-job-detail.controller';
+import { CciDeleteJobDetailByIdController } from './controllers/cci-delete-job-detail-by-id.controller';
+import { CciDeleteJobsDetailController } from './controllers/cci-delete-jobs-detail.controller';
 
 // resolvers
-import { CreateJobDetailResolver } from './resolvers/create-job-detail.resolver';
-import { CreateJobsDetailResolver } from './resolvers/create-jobs-detail.resolver';
-import { PaginateJobsDetailResolver } from './resolvers/paginate-jobs-detail.resolver';
-import { GetJobsDetailResolver } from './resolvers/get-jobs-detail.resolver';
-import { FindJobDetailResolver } from './resolvers/find-job-detail.resolver';
-import { FindJobDetailByIdResolver } from './resolvers/find-job-detail-by-id.resolver';
-import { UpdateJobDetailResolver } from './resolvers/update-job-detail.resolver';
-import { DeleteJobDetailByIdResolver } from './resolvers/delete-job-detail-by-id.resolver';
-import { DeleteJobsDetailResolver } from './resolvers/delete-jobs-detail.resolver';
+import { CciCreateJobDetailResolver } from './resolvers/cci-create-job-detail.resolver';
+import { CciCreateJobsDetailResolver } from './resolvers/cci-create-jobs-detail.resolver';
+import { CciPaginateJobsDetailResolver } from './resolvers/cci-paginate-jobs-detail.resolver';
+import { CciGetJobsDetailResolver } from './resolvers/cci-get-jobs-detail.resolver';
+import { CciFindJobDetailResolver } from './resolvers/cci-find-job-detail.resolver';
+import { CciFindJobDetailByIdResolver } from './resolvers/cci-find-job-detail-by-id.resolver';
+import { CciUpdateJobDetailResolver } from './resolvers/cci-update-job-detail.resolver';
+import { CciDeleteJobDetailByIdResolver } from './resolvers/cci-delete-job-detail-by-id.resolver';
+import { CciDeleteJobsDetailResolver } from './resolvers/cci-delete-jobs-detail.resolver';
 
 export const CciJobDetailControllers = [
-    CreateJobDetailController,
-    CreateJobsDetailController,
-    PaginateJobsDetailController,
-    GetJobsDetailController,
-    FindJobDetailByIdController,
-    FindJobDetailController,
-    UpdateJobDetailController,
-    DeleteJobDetailByIdController,
-    DeleteJobsDetailController,
+    CciCreateJobDetailController,
+    CciCreateJobsDetailController,
+    CciPaginateJobsDetailController,
+    CciGetJobsDetailController,
+    CciFindJobDetailByIdController,
+    CciFindJobDetailController,
+    CciUpdateJobDetailController,
+    CciDeleteJobDetailByIdController,
+    CciDeleteJobsDetailController,
 ];
 
 export const CciJobDetailResolvers = [
-    CreateJobDetailResolver,
-    CreateJobsDetailResolver,
-    PaginateJobsDetailResolver,
-    GetJobsDetailResolver,
-    FindJobDetailResolver,
-    FindJobDetailByIdResolver,
-    UpdateJobDetailResolver,
-    DeleteJobDetailByIdResolver,
-    DeleteJobsDetailResolver,
+    CciCreateJobDetailResolver,
+    CciCreateJobsDetailResolver,
+    CciPaginateJobsDetailResolver,
+    CciGetJobsDetailResolver,
+    CciFindJobDetailResolver,
+    CciFindJobDetailByIdResolver,
+    CciUpdateJobDetailResolver,
+    CciDeleteJobDetailByIdResolver,
+    CciDeleteJobsDetailResolver,
 ];

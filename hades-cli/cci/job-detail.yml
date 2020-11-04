@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: cci
 moduleName: job-detail
 moduleNames: jobs-detail
+aggregateName: CciJobDetail
 hasOAuth: true
 hasTenant: true
 aggregateProperties:

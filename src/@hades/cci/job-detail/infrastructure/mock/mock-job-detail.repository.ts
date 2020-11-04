@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IJobDetailRepository } from '@hades/cci/job-detail/domain/job-detail.repository';
-import { 
+import {
     JobDetailId,
     JobDetailTenantId,
     JobDetailTenantCode,
@@ -22,8 +22,7 @@ import {
     JobDetailEndAt,
     JobDetailCreatedAt,
     JobDetailUpdatedAt,
-    JobDetailDeletedAt
-    
+    JobDetailDeletedAt,
 } from '@hades/cci/job-detail/domain/value-objects';
 import { CciJobDetail } from './../../domain/job-detail.aggregate';
 import { jobsDetail } from './../seeds/job-detail.seed';
@@ -35,14 +34,14 @@ export class MockJobDetailRepository extends MockRepository<CciJobDetail> implem
     public readonly aggregateName: string = 'CciJobDetail';
     public collectionSource: CciJobDetail[];
     public deletedAtInstance: JobDetailDeletedAt = new JobDetailDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -57,7 +56,7 @@ export class MockJobDetailRepository extends MockRepository<CciJobDetail> implem
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciJobDetail.register(
                     new JobDetailId(itemCollection.id),
                     new JobDetailTenantId(itemCollection.tenantId),
@@ -79,7 +78,7 @@ export class MockJobDetailRepository extends MockRepository<CciJobDetail> implem
                     new JobDetailCreatedAt(itemCollection.createdAt),
                     new JobDetailUpdatedAt(itemCollection.updatedAt),
                     new JobDetailDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

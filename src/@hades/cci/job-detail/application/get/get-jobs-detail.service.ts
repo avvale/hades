@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IJobDetailRepository } from './../../domain/job-detail.repository';
 import { CciJobDetail } from './../../domain/job-detail.aggregate';
 
@@ -7,11 +8,11 @@ import { CciJobDetail } from './../../domain/job-detail.aggregate';
 export class GetJobsDetailService
 {
     constructor(
-        private readonly repository: IJobDetailRepository
+        private readonly repository: IJobDetailRepository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement): Promise<CciJobDetail[]>
-    {        
-        return await this.repository.get(queryStatement);
+    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<CciJobDetail[]>
+    {
+        return await this.repository.get(queryStatement, constraint, cQMetadata);
     }
 }
