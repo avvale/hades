@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateContactsCommand
 {
     constructor(
-        public readonly contacts: {
+        public readonly payload: {
             id: string,
             tenantId: string,
             tenantCode: string,
@@ -17,7 +19,7 @@ export class CreateContactsCommand
             hasConsentEmail: boolean,
             hasConsentMobile: boolean,
             isActive: boolean,
-            
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

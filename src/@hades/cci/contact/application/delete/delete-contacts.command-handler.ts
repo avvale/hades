@@ -6,12 +6,16 @@ import { DeleteContactsService } from './delete-contacts.service';
 export class DeleteContactsCommandHandler implements ICommandHandler<DeleteContactsCommand>
 {
     constructor(
-        private readonly deleteContactsService: DeleteContactsService
-    ) { }
+        private readonly deleteContactsService: DeleteContactsService,
+    ) {}
 
     async execute(command: DeleteContactsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteContactsService.main(command.queryStatement);
+        await this.deleteContactsService.main(
+            command.queryStatement,
+            command.constraint,
+            command.cQMetadata,
+        );
     }
 }

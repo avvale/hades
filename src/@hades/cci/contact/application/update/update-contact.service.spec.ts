@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { contacts } from '@hades/cci/contact/infrastructure/seeds/contact.seed';
 import { UpdateContactService } from './update-contact.service';
-import { 
+import {
     ContactId,
     ContactTenantId,
     ContactTenantCode,
@@ -22,19 +22,18 @@ import {
     ContactIsActive,
     ContactCreatedAt,
     ContactUpdatedAt,
-    ContactDeletedAt
-    
+    ContactDeletedAt,
 } from './../../domain/value-objects';
 import { IContactRepository } from './../../domain/contact.repository';
 import { MockContactRepository } from './../../infrastructure/mock/mock-contact.repository';
 
-describe('UpdateContactService', () => 
+describe('UpdateContactService', () =>
 {
     let service: UpdateContactService;
     let repository: IContactRepository;
     let mockRepository: MockContactRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -43,7 +42,7 @@ describe('UpdateContactService', () =>
                 EventPublisher,
                 UpdateContactService,
                 MockContactRepository,
-                { 
+                {
                     provide: IContactRepository,
                     useValue: {
                         update: (item) => {}
@@ -57,7 +56,7 @@ describe('UpdateContactService', () =>
         mockRepository  = module.get(MockContactRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateContactService should be defined', () => 
         {

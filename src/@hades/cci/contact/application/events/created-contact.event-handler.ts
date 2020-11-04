@@ -4,7 +4,7 @@ import { CreatedContactEvent } from './created-contact.event';
 @EventsHandler(CreatedContactEvent)
 export class CreatedContactEventHandler implements IEventHandler<CreatedContactEvent>
 {
-    handle(event: CreatedContactEvent) 
+    handle(event: CreatedContactEvent)
     {
         // console.log('CreatedContactEvent: ', event);
     }

@@ -1,45 +1,45 @@
 // controllers
-import { CreateContactController } from './controllers/create-contact.controller';
-import { CreateContactsController } from './controllers/create-contacts.controller';
-import { PaginateContactsController } from './controllers/paginate-contacts.controller';
-import { GetContactsController } from './controllers/get-contacts.controller';
-import { FindContactByIdController } from './controllers/find-contact-by-id.controller';
-import { FindContactController } from './controllers/find-contact.controller';
-import { UpdateContactController } from './controllers/update-contact.controller';
-import { DeleteContactByIdController } from './controllers/delete-contact-by-id.controller';
-import { DeleteContactsController } from './controllers/delete-contacts.controller';
+import { CciCreateContactController } from './controllers/cci-create-contact.controller';
+import { CciCreateContactsController } from './controllers/cci-create-contacts.controller';
+import { CciPaginateContactsController } from './controllers/cci-paginate-contacts.controller';
+import { CciGetContactsController } from './controllers/cci-get-contacts.controller';
+import { CciFindContactByIdController } from './controllers/cci-find-contact-by-id.controller';
+import { CciFindContactController } from './controllers/cci-find-contact.controller';
+import { CciUpdateContactController } from './controllers/cci-update-contact.controller';
+import { CciDeleteContactByIdController } from './controllers/cci-delete-contact-by-id.controller';
+import { CciDeleteContactsController } from './controllers/cci-delete-contacts.controller';
 
 // resolvers
-import { CreateContactResolver } from './resolvers/create-contact.resolver';
-import { CreateContactsResolver } from './resolvers/create-contacts.resolver';
-import { PaginateContactsResolver } from './resolvers/paginate-contacts.resolver';
-import { GetContactsResolver } from './resolvers/get-contacts.resolver';
-import { FindContactResolver } from './resolvers/find-contact.resolver';
-import { FindContactByIdResolver } from './resolvers/find-contact-by-id.resolver';
-import { UpdateContactResolver } from './resolvers/update-contact.resolver';
-import { DeleteContactByIdResolver } from './resolvers/delete-contact-by-id.resolver';
-import { DeleteContactsResolver } from './resolvers/delete-contacts.resolver';
+import { CciCreateContactResolver } from './resolvers/cci-create-contact.resolver';
+import { CciCreateContactsResolver } from './resolvers/cci-create-contacts.resolver';
+import { CciPaginateContactsResolver } from './resolvers/cci-paginate-contacts.resolver';
+import { CciGetContactsResolver } from './resolvers/cci-get-contacts.resolver';
+import { CciFindContactResolver } from './resolvers/cci-find-contact.resolver';
+import { CciFindContactByIdResolver } from './resolvers/cci-find-contact-by-id.resolver';
+import { CciUpdateContactResolver } from './resolvers/cci-update-contact.resolver';
+import { CciDeleteContactByIdResolver } from './resolvers/cci-delete-contact-by-id.resolver';
+import { CciDeleteContactsResolver } from './resolvers/cci-delete-contacts.resolver';
 
 export const CciContactControllers = [
-    CreateContactController,
-    CreateContactsController,
-    PaginateContactsController,
-    GetContactsController,
-    FindContactByIdController,
-    FindContactController,
-    UpdateContactController,
-    DeleteContactByIdController,
-    DeleteContactsController,
+    CciCreateContactController,
+    CciCreateContactsController,
+    CciPaginateContactsController,
+    CciGetContactsController,
+    CciFindContactByIdController,
+    CciFindContactController,
+    CciUpdateContactController,
+    CciDeleteContactByIdController,
+    CciDeleteContactsController,
 ];
 
 export const CciContactResolvers = [
-    CreateContactResolver,
-    CreateContactsResolver,
-    PaginateContactsResolver,
-    GetContactsResolver,
-    FindContactResolver,
-    FindContactByIdResolver,
-    UpdateContactResolver,
-    DeleteContactByIdResolver,
-    DeleteContactsResolver,
+    CciCreateContactResolver,
+    CciCreateContactsResolver,
+    CciPaginateContactsResolver,
+    CciGetContactsResolver,
+    CciFindContactResolver,
+    CciFindContactByIdResolver,
+    CciUpdateContactResolver,
+    CciDeleteContactByIdResolver,
+    CciDeleteContactsResolver,
 ];

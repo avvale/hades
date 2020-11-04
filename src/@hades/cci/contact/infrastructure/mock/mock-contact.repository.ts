@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IContactRepository } from '@hades/cci/contact/domain/contact.repository';
-import { 
+import {
     ContactId,
     ContactTenantId,
     ContactTenantCode,
@@ -20,8 +20,7 @@ import {
     ContactIsActive,
     ContactCreatedAt,
     ContactUpdatedAt,
-    ContactDeletedAt
-    
+    ContactDeletedAt,
 } from '@hades/cci/contact/domain/value-objects';
 import { CciContact } from './../../domain/contact.aggregate';
 import { contacts } from './../seeds/contact.seed';
@@ -33,14 +32,14 @@ export class MockContactRepository extends MockRepository<CciContact> implements
     public readonly aggregateName: string = 'CciContact';
     public collectionSource: CciContact[];
     public deletedAtInstance: ContactDeletedAt = new ContactDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -55,7 +54,7 @@ export class MockContactRepository extends MockRepository<CciContact> implements
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciContact.register(
                     new ContactId(itemCollection.id),
                     new ContactTenantId(itemCollection.tenantId),
@@ -75,7 +74,7 @@ export class MockContactRepository extends MockRepository<CciContact> implements
                     new ContactCreatedAt(itemCollection.createdAt),
                     new ContactUpdatedAt(itemCollection.updatedAt),
                     new ContactDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

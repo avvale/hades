@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciContact } from './contact.aggregate';
 import { ContactResponse } from './contact.response';
-import { 
+import {
     ContactId,
     ContactTenantId,
     ContactTenantCode,
@@ -20,46 +20,43 @@ import {
     ContactIsActive,
     ContactCreatedAt,
     ContactUpdatedAt,
-    ContactDeletedAt
-    
+    ContactDeletedAt,
 } from './value-objects';
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
 import { RoleMapper } from '@hades/cci/role/domain/role.mapper';
 
-
-
 export class ContactMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param contact
      */
-    mapModelToAggregate(contact: ObjectLiteral): CciContact
+    mapModelToAggregate(contact: ObjectLiteral, cQMetadata?: CQMetadata): CciContact
     {
         if (!contact) return;
 
-        return this.makeAggregate(contact);
+        return this.makeAggregate(contact, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param contacts 
+     * @param contacts
      */
-    mapModelsToAggregates(contacts: ObjectLiteral[]): CciContact[]
+    mapModelsToAggregates(contacts: ObjectLiteral[], cQMetadata?: CQMetadata): CciContact[]
     {
         if (!Array.isArray(contacts)) return;
-        
-        return contacts.map(contact  => this.makeAggregate(contact));
+
+        return contacts.map(contact  => this.makeAggregate(contact, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param contact 
+     * @param contact
      */
     mapAggregateToResponse(contact: CciContact): ContactResponse
     {
@@ -77,7 +74,7 @@ export class ContactMapper implements IMapper
         return contacts.map(contact => this.makeResponse(contact));
     }
 
-    private makeAggregate(contact: ObjectLiteral): CciContact
+    private makeAggregate(contact: ObjectLiteral, cQMetadata?: CQMetadata): CciContact
     {
         return CciContact.register(
             new ContactId(contact.id),
@@ -95,23 +92,19 @@ export class ContactMapper implements IMapper
             new ContactHasConsentEmail(contact.hasConsentEmail),
             new ContactHasConsentMobile(contact.hasConsentMobile),
             new ContactIsActive(contact.isActive),
-            new ContactCreatedAt(contact.createdAt),
-            new ContactUpdatedAt(contact.updatedAt),
-            new ContactDeletedAt(contact.deletedAt),
-            
+            new ContactCreatedAt(contact.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ContactUpdatedAt(contact.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ContactDeletedAt(contact.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(contact.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(contact.system) : undefined,
             this.options.eagerLoading ? new RoleMapper({ eagerLoading: false }).mapModelToAggregate(contact.role) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(contact: CciContact): ContactResponse
     {
         if (!contact) return;
-        
+
         return new ContactResponse(
             contact.id.value,
             contact.tenantId.value,
@@ -131,13 +124,9 @@ export class ContactMapper implements IMapper
             contact.createdAt.value,
             contact.updatedAt.value,
             contact.deletedAt.value,
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(contact.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(contact.system) : undefined,
             this.options.eagerLoading ? new RoleMapper({ eagerLoading: false }).mapAggregateToResponse(contact.role) : undefined,
-            
-            
-            
         );
     }
 }

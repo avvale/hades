@@ -41,7 +41,6 @@ describe('DeleteContactByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteContactByIdCommand(
                     contacts[0].id,
-                
                 )
             )).toBe(undefined);
         });

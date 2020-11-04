@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateContactCommand } from './create-contact.command';
 import { CreateContactService } from './create-contact.service';
-import { 
+import {
     ContactId,
     ContactTenantId,
     ContactTenantCode,
@@ -16,37 +16,40 @@ import {
     ContactArea,
     ContactHasConsentEmail,
     ContactHasConsentMobile,
-    ContactIsActive
-    
+    ContactIsActive,
+    ContactCreatedAt,
+    ContactUpdatedAt,
+    ContactDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateContactCommand)
 export class CreateContactCommandHandler implements ICommandHandler<CreateContactCommand>
 {
     constructor(
-        private readonly createContactService: CreateContactService
-    ) { }
+        private readonly createContactService: CreateContactService,
+    ) {}
 
     async execute(command: CreateContactCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createContactService.main(
-            new ContactId(command.id),
-            new ContactTenantId(command.tenantId),
-            new ContactTenantCode(command.tenantCode),
-            new ContactSystemId(command.systemId),
-            new ContactSystemName(command.systemName),
-            new ContactRoleId(command.roleId),
-            new ContactRoleName(command.roleName),
-            new ContactName(command.name),
-            new ContactSurname(command.surname),
-            new ContactEmail(command.email),
-            new ContactMobile(command.mobile),
-            new ContactArea(command.area),
-            new ContactHasConsentEmail(command.hasConsentEmail),
-            new ContactHasConsentMobile(command.hasConsentMobile),
-            new ContactIsActive(command.isActive),
-            
+            {
+                id: new ContactId(command.payload.id),
+                tenantId: new ContactTenantId(command.payload.tenantId),
+                tenantCode: new ContactTenantCode(command.payload.tenantCode),
+                systemId: new ContactSystemId(command.payload.systemId),
+                systemName: new ContactSystemName(command.payload.systemName),
+                roleId: new ContactRoleId(command.payload.roleId),
+                roleName: new ContactRoleName(command.payload.roleName),
+                name: new ContactName(command.payload.name),
+                surname: new ContactSurname(command.payload.surname),
+                email: new ContactEmail(command.payload.email),
+                mobile: new ContactMobile(command.payload.mobile),
+                area: new ContactArea(command.payload.area),
+                hasConsentEmail: new ContactHasConsentEmail(command.payload.hasConsentEmail),
+                hasConsentMobile: new ContactHasConsentMobile(command.payload.hasConsentMobile),
+                isActive: new ContactIsActive(command.payload.isActive),
+            }
         );
     }
 }

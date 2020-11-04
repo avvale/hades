@@ -8,21 +8,21 @@ import { DeletedContactsEvent } from './deleted-contacts.event';
 export class AddContactsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciContact[] = []
+        public readonly aggregateRoots: CciContact[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedContactsEvent(
-                this.aggregateRoots.map(contact => 
+                this.aggregateRoots.map(contact =>
                     new CreatedContactEvent(
                         contact.id.value,
                         contact.tenantId.value,
@@ -53,7 +53,7 @@ export class AddContactsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedContactsEvent(
-                this.aggregateRoots.map(contact => 
+                this.aggregateRoots.map(contact =>
                     new DeletedContactEvent(
                         contact.id.value,
                         contact.tenantId.value,
@@ -73,10 +73,10 @@ export class AddContactsContextEvent extends AggregateRoot
                         contact.createdAt?.value,
                         contact.updatedAt?.value,
                         contact.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

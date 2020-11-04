@@ -4,7 +4,7 @@ import { CreateContactsCommand } from '@hades/cci/contact/application/create/cre
 import { SeederModule } from './seeder.module';
 import { contacts } from '@hades/cci/contact/infrastructure/seeds/contact.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

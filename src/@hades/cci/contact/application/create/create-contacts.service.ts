@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ContactId,
     ContactTenantId,
     ContactTenantCode,
@@ -19,8 +18,7 @@ import {
     ContactIsActive,
     ContactCreatedAt,
     ContactUpdatedAt,
-    ContactDeletedAt
-    
+    ContactDeletedAt,
 } from './../../domain/value-objects';
 import { IContactRepository } from './../../domain/contact.repository';
 import { CciContact } from './../../domain/contact.aggregate';
@@ -31,7 +29,7 @@ export class CreateContactsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IContactRepository
+        private readonly repository: IContactRepository,
     ) {}
 
     public async main(
@@ -51,7 +49,6 @@ export class CreateContactsService
             hasConsentEmail: ContactHasConsentEmail,
             hasConsentMobile: ContactHasConsentMobile,
             isActive: ContactIsActive,
-            
         } []
     ): Promise<void>
     {
@@ -72,18 +69,18 @@ export class CreateContactsService
             contact.hasConsentEmail,
             contact.hasConsentMobile,
             contact.isActive,
-            new ContactCreatedAt(Utils.nowTimestamp()),
-            new ContactUpdatedAt(Utils.nowTimestamp()),
+            new ContactCreatedAt({currentTimestamp: true}),
+            new ContactUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateContacts);
 
         // create AddContactsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const contactsRegistered = this.publisher.mergeObjectContext(new AddContactsContextEvent(aggregateContacts));
- 
+
         contactsRegistered.created(); // apply event to model events
         contactsRegistered.commit(); // commit all events of model
     }
