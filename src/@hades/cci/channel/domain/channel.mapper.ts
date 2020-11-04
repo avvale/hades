@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { CciChannel } from './channel.aggregate';
 import { ChannelResponse } from './channel.response';
-import { 
+import {
     ChannelId,
     ChannelHash,
     ChannelTenantId,
@@ -43,46 +43,42 @@ import {
     ChannelRiInterfaceNamespace,
     ChannelCreatedAt,
     ChannelUpdatedAt,
-    ChannelDeletedAt
-    
+    ChannelDeletedAt,
 } from './value-objects';
-
 import { TenantMapper } from '@hades/iam/tenant/domain/tenant.mapper';
 import { SystemMapper } from '@hades/cci/system/domain/system.mapper';
-
-
 
 export class ChannelMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param channel
      */
-    mapModelToAggregate(channel: ObjectLiteral): CciChannel
+    mapModelToAggregate(channel: ObjectLiteral, cQMetadata?: CQMetadata): CciChannel
     {
         if (!channel) return;
 
-        return this.makeAggregate(channel);
+        return this.makeAggregate(channel, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param channels 
+     * @param channels
      */
-    mapModelsToAggregates(channels: ObjectLiteral[]): CciChannel[]
+    mapModelsToAggregates(channels: ObjectLiteral[], cQMetadata?: CQMetadata): CciChannel[]
     {
         if (!Array.isArray(channels)) return;
-        
-        return channels.map(channel  => this.makeAggregate(channel));
+
+        return channels.map(channel  => this.makeAggregate(channel, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param channel 
+     * @param channel
      */
     mapAggregateToResponse(channel: CciChannel): ChannelResponse
     {
@@ -100,7 +96,7 @@ export class ChannelMapper implements IMapper
         return channels.map(channel => this.makeResponse(channel));
     }
 
-    private makeAggregate(channel: ObjectLiteral): CciChannel
+    private makeAggregate(channel: ObjectLiteral, cQMetadata?: CQMetadata): CciChannel
     {
         return CciChannel.register(
             new ChannelId(channel.id),
@@ -138,27 +134,21 @@ export class ChannelMapper implements IMapper
             new ChannelSoftwareComponentName(channel.softwareComponentName),
             new ChannelResponsibleUserAccountName(channel.responsibleUserAccountName),
             new ChannelLastChangeUserAccount(channel.lastChangeUserAccount),
-            new ChannelLastChangedAt(channel.lastChangedAt),
+            new ChannelLastChangedAt(channel.lastChangedAt, {}, {addTimezone: cQMetadata.timezone}),
             new ChannelRiInterfaceName(channel.riInterfaceName),
             new ChannelRiInterfaceNamespace(channel.riInterfaceNamespace),
-            new ChannelCreatedAt(channel.createdAt),
-            new ChannelUpdatedAt(channel.updatedAt),
-            new ChannelDeletedAt(channel.deletedAt),
-            
-            
-            
+            new ChannelCreatedAt(channel.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ChannelUpdatedAt(channel.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ChannelDeletedAt(channel.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(channel.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(channel.system) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(channel: CciChannel): ChannelResponse
     {
         if (!channel) return;
-        
+
         return new ChannelResponse(
             channel.id.value,
             channel.hash.value,
@@ -201,14 +191,8 @@ export class ChannelMapper implements IMapper
             channel.createdAt.value,
             channel.updatedAt.value,
             channel.deletedAt.value,
-            
-            
-            
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregateToResponse(channel.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapAggregateToResponse(channel.system) : undefined,
-            
-            
-            
         );
     }
 }

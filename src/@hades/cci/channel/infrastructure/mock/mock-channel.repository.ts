@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IChannelRepository } from '@hades/cci/channel/domain/channel.repository';
-import { 
+import {
     ChannelId,
     ChannelHash,
     ChannelTenantId,
@@ -43,8 +43,7 @@ import {
     ChannelRiInterfaceNamespace,
     ChannelCreatedAt,
     ChannelUpdatedAt,
-    ChannelDeletedAt
-    
+    ChannelDeletedAt,
 } from '@hades/cci/channel/domain/value-objects';
 import { CciChannel } from './../../domain/channel.aggregate';
 import { channels } from './../seeds/channel.seed';
@@ -56,14 +55,14 @@ export class MockChannelRepository extends MockRepository<CciChannel> implements
     public readonly aggregateName: string = 'CciChannel';
     public collectionSource: CciChannel[];
     public deletedAtInstance: ChannelDeletedAt = new ChannelDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -78,7 +77,7 @@ export class MockChannelRepository extends MockRepository<CciChannel> implements
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(CciChannel.register(
                     new ChannelId(itemCollection.id),
                     new ChannelHash(itemCollection.hash),
@@ -121,7 +120,7 @@ export class MockChannelRepository extends MockRepository<CciChannel> implements
                     new ChannelCreatedAt(itemCollection.createdAt),
                     new ChannelUpdatedAt(itemCollection.updatedAt),
                     new ChannelDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

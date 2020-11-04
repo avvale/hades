@@ -5,10 +5,10 @@ import { delay, map } from 'rxjs/operators';
 import { CreatedChannelEvent } from './../events/created-channel.event';
 
 @Injectable()
-export class ChannelSagas 
-{    
+export class ChannelSagas
+{
     /* @Saga()
-    dragonKilled = (events$: Observable<any>): Observable<ICommand> => 
+    dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {
         return events$
             .pipe(

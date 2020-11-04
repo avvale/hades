@@ -8,21 +8,21 @@ import { DeletedChannelsEvent } from './deleted-channels.event';
 export class AddChannelsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: CciChannel[] = []
+        public readonly aggregateRoots: CciChannel[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedChannelsEvent(
-                this.aggregateRoots.map(channel => 
+                this.aggregateRoots.map(channel =>
                     new CreatedChannelEvent(
                         channel.id.value,
                         channel.hash.value,
@@ -76,7 +76,7 @@ export class AddChannelsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedChannelsEvent(
-                this.aggregateRoots.map(channel => 
+                this.aggregateRoots.map(channel =>
                     new DeletedChannelEvent(
                         channel.id.value,
                         channel.hash.value,
@@ -119,10 +119,10 @@ export class AddChannelsContextEvent extends AggregateRoot
                         channel.createdAt?.value,
                         channel.updatedAt?.value,
                         channel.deletedAt?.value,
-                           
+                        
                     )
                 )
             )
         );
-    }   
+    }
 }

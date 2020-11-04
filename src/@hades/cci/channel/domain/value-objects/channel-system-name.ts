@@ -1,17 +1,17 @@
 import { StringValueObject } from '@hades/shared/domain/value-objects/string.value-object';
 import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
 
-export class ChannelSystemName extends StringValueObject 
+export class ChannelSystemName extends StringValueObject
 {
-    public readonly type: 'ChannelSystemName';   
+    public readonly type: 'ChannelSystemName';
 
-    constructor(value: string, validationRules: ValidationRules = {}) 
+    constructor(value: string, validationRules: ValidationRules = {})
     {
-        super(value, Object.assign({ 
+        super(value, Object.assign({
             name: 'ChannelSystemName',
-            nullable: false,
-            undefinable: false,
-            maxLength: 20,            
+            nullable:  false ,
+            undefinable:  false ,
+            maxLength: 20,
         }, validationRules));
     }
 }

@@ -14,7 +14,7 @@ describe('DeleteChannelByIdService', () =>
     let repository: IChannelRepository;
     let mockRepository: MockChannelRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteChannelByIdService', () =>
                 EventPublisher,
                 DeleteChannelByIdService,
                 MockChannelRepository,
-                { 
+                {
                     provide: IChannelRepository,
                     useValue: {
                         deleteById: (id) => {},
