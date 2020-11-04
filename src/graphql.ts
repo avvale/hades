@@ -998,9 +998,9 @@ export interface IQuery {
     cciGetRoles(query?: QueryStatement, constraint?: QueryStatement): CciRole[] | Promise<CciRole[]>;
     cciPaginateRoles(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     cciFindSystemSummary(systemId: string): CciSummary | Promise<CciSummary>;
-    cciFindSystem(query?: QueryStatement): CciSystem | Promise<CciSystem>;
-    cciFindSystemById(id?: string): CciSystem | Promise<CciSystem>;
-    cciGetSystems(query?: QueryStatement): CciSystem[] | Promise<CciSystem[]>;
+    cciFindSystem(query?: QueryStatement, constraint?: QueryStatement): CciSystem | Promise<CciSystem>;
+    cciFindSystemById(id?: string, constraint?: QueryStatement): CciSystem | Promise<CciSystem>;
+    cciGetSystems(query?: QueryStatement, constraint?: QueryStatement): CciSystem[] | Promise<CciSystem[]>;
     cciPaginateSystems(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     iamFindMeAccount(): IamAccount | Promise<IamAccount>;
     iamFindAccount(query?: QueryStatement, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
@@ -1118,9 +1118,9 @@ export interface IMutation {
     cciDeleteRoles(query?: QueryStatement, constraint?: QueryStatement): CciRole[] | Promise<CciRole[]>;
     cciCreateSystem(payload: CciCreateSystemInput): CciSystem | Promise<CciSystem>;
     cciCreateSystems(payload: CciCreateSystemInput[]): boolean | Promise<boolean>;
-    cciUpdateSystem(payload: CciUpdateSystemInput): CciSystem | Promise<CciSystem>;
-    cciDeleteSystemById(id: string): CciSystem | Promise<CciSystem>;
-    cciDeleteSystems(query?: QueryStatement): CciSystem[] | Promise<CciSystem[]>;
+    cciUpdateSystem(payload: CciUpdateSystemInput, constraint?: QueryStatement): CciSystem | Promise<CciSystem>;
+    cciDeleteSystemById(id: string, constraint?: QueryStatement): CciSystem | Promise<CciSystem>;
+    cciDeleteSystems(query?: QueryStatement, constraint?: QueryStatement): CciSystem[] | Promise<CciSystem[]>;
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
     iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
@@ -1455,6 +1455,7 @@ export interface CciMessageOverview {
     systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
+    executionId: string;
     execution: CciExecution;
     executionType: CciMessageOverviewExecutionType;
     executionExecutedAt: GraphQLTimestamp;
@@ -1476,8 +1477,10 @@ export interface CciMessageOverview {
 
 export interface CciModule {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
+    systemId: string;
     system: CciSystem;
     systemName: GraphQLString;
     channelHash: GraphQLString;
@@ -1503,6 +1506,7 @@ export interface CciModule {
 
 export interface CciRole {
     id: string;
+    tenantId: string;
     tenant: IamTenant;
     tenantCode: GraphQLString;
     name: GraphQLString;
