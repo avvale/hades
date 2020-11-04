@@ -1,6 +1,7 @@
 import { Controller, Param, Delete, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { TenantDto } from './../dto/tenant.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -22,17 +23,21 @@ export class IamDeleteTenantByIdController
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete tenant by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: TenantDto })
-    async main(@Param('id') id: string, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Param('id') id: string,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const tenant = await this.queryBus.ask(new FindTenantByIdQuery(id, constraint));
+        const tenant = await this.queryBus.ask(new FindTenantByIdQuery(id, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteTenantByIdCommand(id, constraint));
+        await this.commandBus.dispatch(new DeleteTenantByIdCommand(id, constraint, { timezone }));
 
         return tenant;
     }

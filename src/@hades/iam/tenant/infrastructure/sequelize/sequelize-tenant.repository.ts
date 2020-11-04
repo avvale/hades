@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ITenantRepository } from './../../domain/tenant.repository';
@@ -13,23 +12,24 @@ export class SequelizeTenantRepository extends SequelizeRepository<IamTenant, Ia
 {
     public readonly aggregateName: string = 'IamTenant';
     public readonly mapper: TenantMapper = new TenantMapper();
+    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(IamTenantModel)
         public readonly repository: typeof IamTenantModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: IamTenant, model: IamTenantModel) 
+    async createdAggregateHook(aggregate: IamTenant, model: IamTenantModel)
     {
         // add many to many relation
         if (aggregate.accountIds.length > 0) await model.$add('accounts', aggregate.accountIds.value);
     }
 
     // hook called after create aggregate
-    async updatedAggregateHook(aggregate: IamTenant, model: IamTenantModel) 
+    async updatedAggregateHook(aggregate: IamTenant, model: IamTenantModel)
     {
         // set many to many relation
         if (aggregate.accountIds.isArray()) await model.$set('accounts', aggregate.accountIds.value);

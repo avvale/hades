@@ -10,11 +10,11 @@ export class GetTenantsQueryHandler implements IQueryHandler<GetTenantsQuery>
     private readonly mapper: TenantMapper = new TenantMapper();
 
     constructor(
-        private readonly getTenantsService: GetTenantsService
+        private readonly getTenantsService: GetTenantsService,
     ) {}
 
     async execute(query: GetTenantsQuery): Promise<TenantResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getTenantsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getTenantsService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

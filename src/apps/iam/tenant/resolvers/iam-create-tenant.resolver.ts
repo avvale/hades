@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -12,6 +13,8 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { CreateTenantCommand } from '@hades/iam/tenant/application/create/create-tenant.command';
 import { FindTenantByIdQuery } from '@hades/iam/tenant/application/find/find-tenant-by-id.query';
 import { IamCreateTenantInput } from './../../../../graphql';
+
+// custom
 import { GetAccountsQuery } from '@hades/iam/account/application/get/get-accounts.query';
 import { UpdateAccountCommand } from '@hades/iam/account/application/update/update-account.command';
 
@@ -22,13 +25,16 @@ export class IamCreateTenantResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamCreateTenant')
-    async main(@Args('payload') payload: IamCreateTenantInput)
+    async main(
+        @Args('payload') payload: IamCreateTenantInput,
+        @Timezone() timezone?: string,
+    )
     {
-        const accounts = await this.queryBus.ask(new GetAccountsQuery({ 
+        const accounts = await this.queryBus.ask(new GetAccountsQuery({
             where: {
                 id: payload.accountIds
             }
@@ -53,17 +59,20 @@ export class IamCreateTenantResolver
                 currentTenants
             ));
         }
-        
+
         await this.commandBus.dispatch(new CreateTenantCommand(
-            payload.id,
-            payload.name,
-            payload.code,
-            payload.logo,
-            payload.isActive,
-            payload.data,
-            payload.accountIds,
+            {
+                id: payload.id,
+                name: payload.name,
+                code: payload.code,
+                logo: payload.logo,
+                isActive: payload.isActive,
+                data: payload.data,
+                accountIds: payload.accountIds,
+            },
+            { timezone }
         ));
 
-        return await this.queryBus.ask(new FindTenantByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindTenantByIdQuery(payload.id, {}, { timezone }));
     }
 }

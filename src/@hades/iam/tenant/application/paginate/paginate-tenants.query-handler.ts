@@ -7,12 +7,12 @@ import { PaginateTenantsService } from './paginate-tenants.service';
 export class PaginateTenantsQueryHandler implements IQueryHandler<PaginateTenantsQuery>
 {
     constructor(
-        private readonly paginateTenantsService: PaginateTenantsService
+        private readonly paginateTenantsService: PaginateTenantsService,
     ) {}
 
     async execute(query: PaginateTenantsQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateTenantsService.main(query.queryStatement, query.constraint);
+        const { total, count, rows } = await this.paginateTenantsService.main(query.queryStatement, query.constraint, query.cQMetadata);
 
         return new PaginationResponse(
             total,

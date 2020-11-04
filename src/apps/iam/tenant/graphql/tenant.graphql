@@ -1,5 +1,4 @@
 
-
 type IamTenant
 {
     id: ID!
@@ -23,7 +22,6 @@ input IamCreateTenantInput
     isActive: GraphQLBoolean!
     data: JSON
     accountIds: [ID]
-    
 }
 
 input IamUpdateTenantInput
@@ -35,7 +33,6 @@ input IamUpdateTenantInput
     isActive: GraphQLBoolean
     data: JSON
     accountIds: [ID]
-    
 }
 
 type Query

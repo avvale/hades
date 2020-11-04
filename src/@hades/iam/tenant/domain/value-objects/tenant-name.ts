@@ -9,8 +9,9 @@ export class TenantName extends StringValueObject
     {
         super(value, Object.assign({
             name: 'TenantName',
-            nullable: false,
-            undefinable: false,
-            maxLength: 255,        }, validationRules));
+            nullable:  false ,
+            undefinable:  false ,
+            maxLength: 255,
+        }, validationRules));
     }
 }

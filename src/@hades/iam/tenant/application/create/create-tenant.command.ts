@@ -1,13 +1,17 @@
-export class CreateTenantCommand 
-{   
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class CreateTenantCommand
+{
     constructor(
-        public readonly id: string,
-        public readonly name: string,
-        public readonly code: string,
-        public readonly logo: string,
-        public readonly isActive: boolean,
-        public readonly data: any,
-        public readonly accountIds: string[],
-        
+        public readonly payload: {
+            id: string,
+            name: string,
+            code: string,
+            logo?: string,
+            isActive: boolean,
+            data?: any,
+            accountIds?: string[],
+        },
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

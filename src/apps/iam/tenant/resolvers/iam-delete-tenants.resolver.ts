@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -12,6 +13,8 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { DeleteTenantsCommand } from '@hades/iam/tenant/application/delete/delete-tenants.command';
 import { GetTenantsQuery } from '@hades/iam/tenant/application/get/get-tenants.query';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+
+// custom
 import { GetAccountsQuery } from '@hades/iam/account/application/get/get-accounts.query';
 import { Operator } from '@hades/shared/domain/persistence/sql-statement/operator';
 import { Utils } from '@hades/iam/account/domain/lib/utils';
@@ -23,13 +26,17 @@ export class IamDeleteTenantsResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamDeleteTenants')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement)
+    async main(
+        @Args('query') queryStatement?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const tenants = await this.queryBus.ask(new GetTenantsQuery(queryStatement, constraint));
+        const tenants = await this.queryBus.ask(new GetTenantsQuery(queryStatement, constraint, { timezone }));
 
         // create or statement for get all accounts where delete tenant
         const orStatements = [];
@@ -55,7 +62,7 @@ export class IamDeleteTenantsResolver
             await Utils.deleteTenantFromAccounts(this.commandBus, tenant.id, accountsToRemoveAnyTenant);
         }
 
-        await this.commandBus.dispatch(new DeleteTenantsCommand(queryStatement, constraint));
+        await this.commandBus.dispatch(new DeleteTenantsCommand(queryStatement, constraint, { timezone }));
 
         return tenants;
     }

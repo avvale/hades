@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { tenants } from '@hades/iam/tenant/infrastructure/seeds/tenant.seed';
 import { UpdateTenantService } from './update-tenant.service';
-import { 
+import {
     TenantId,
     TenantName,
     TenantCode,
@@ -14,19 +14,18 @@ import {
     TenantAccountIds,
     TenantCreatedAt,
     TenantUpdatedAt,
-    TenantDeletedAt
-    
+    TenantDeletedAt,
 } from './../../domain/value-objects';
 import { ITenantRepository } from './../../domain/tenant.repository';
 import { MockTenantRepository } from './../../infrastructure/mock/mock-tenant.repository';
 
-describe('UpdateTenantService', () => 
+describe('UpdateTenantService', () =>
 {
     let service: UpdateTenantService;
     let repository: ITenantRepository;
     let mockRepository: MockTenantRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -35,7 +34,7 @@ describe('UpdateTenantService', () =>
                 EventPublisher,
                 UpdateTenantService,
                 MockTenantRepository,
-                { 
+                {
                     provide: ITenantRepository,
                     useValue: {
                         update: (item) => {}
@@ -49,7 +48,7 @@ describe('UpdateTenantService', () =>
         mockRepository  = module.get(MockTenantRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
         test('UpdateTenantService should be defined', () => 
         {

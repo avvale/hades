@@ -8,13 +8,13 @@ import { TenantId } from './../../domain/value-objects';
 import { ITenantRepository } from './../../domain/tenant.repository';
 import { MockTenantRepository } from './../../infrastructure/mock/mock-tenant.repository';
 
-describe('FindTenantByIdService', () => 
+describe('FindTenantByIdService', () =>
 {
     let service: FindTenantByIdService;
     let repository: ITenantRepository;
     let mockRepository: MockTenantRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindTenantByIdService', () =>
                 EventPublisher,
                 FindTenantByIdService,
                 MockTenantRepository,
-                { 
+                {
                     provide: ITenantRepository,
                     useValue: {
                         findById: (id) => {}

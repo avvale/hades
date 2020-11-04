@@ -4,26 +4,29 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { tenants } from '@hades/iam/tenant/infrastructure/seeds/tenant.seed';
 import { CreateTenantService } from './create-tenant.service';
-import { 
+import {
     TenantId,
     TenantName,
     TenantCode,
     TenantLogo,
     TenantIsActive,
     TenantData,
-    TenantAccountIds
-    
+    TenantAccountIds,
+    TenantCreatedAt,
+    TenantUpdatedAt,
+    TenantDeletedAt,
 } from './../../domain/value-objects';
 import { ITenantRepository } from './../../domain/tenant.repository';
 import { MockTenantRepository } from './../../infrastructure/mock/mock-tenant.repository';
 
-describe('CreateTenantService', () => 
+describe('CreateTenantService', () =>
+
 {
     let service: CreateTenantService;
     let repository: ITenantRepository;
     let mockRepository: MockTenantRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -32,7 +35,7 @@ describe('CreateTenantService', () =>
                 EventPublisher,
                 CreateTenantService,
                 MockTenantRepository,
-                { 
+                {
                     provide: ITenantRepository,
                     useValue: {
                         create: (item) => {}
@@ -46,14 +49,14 @@ describe('CreateTenantService', () =>
         mockRepository  = module.get(MockTenantRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateTenantService should be defined', () => 
+        test('CreateTenantService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a tenant and emit event', async () => 
+        test('should create a tenant and emit event', async () =>
         {
             expect(await service.main(
                 new TenantId(tenants[0].id),

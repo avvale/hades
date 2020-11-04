@@ -1,5 +1,5 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IamTenant } from './tenant.aggregate';
 import { TenantResponse } from './tenant.response';
 import {
@@ -12,40 +12,36 @@ import {
     TenantAccountIds,
     TenantCreatedAt,
     TenantUpdatedAt,
-    TenantDeletedAt
-    
+    TenantDeletedAt,
 } from './value-objects';
-
-
-
 import { AccountMapper } from '@hades/iam/account/domain/account.mapper';
 
 export class TenantMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
 
     /**
      * Map object to aggregate
      * @param tenant
      */
-    mapModelToAggregate(tenant: ObjectLiteral): IamTenant
+    mapModelToAggregate(tenant: ObjectLiteral, cQMetadata?: CQMetadata): IamTenant
     {
         if (!tenant) return;
 
-        return this.makeAggregate(tenant);
+        return this.makeAggregate(tenant, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param tenants 
+     * @param tenants
      */
-    mapModelsToAggregates(tenants: ObjectLiteral[]): IamTenant[]
+    mapModelsToAggregates(tenants: ObjectLiteral[], cQMetadata?: CQMetadata): IamTenant[]
     {
         if (!Array.isArray(tenants)) return;
 
-        return tenants.map(tenant  => this.makeAggregate(tenant));
+        return tenants.map(tenant  => this.makeAggregate(tenant, cQMetadata));
     }
 
     /**
@@ -68,7 +64,7 @@ export class TenantMapper implements IMapper
         return tenants.map(tenant => this.makeResponse(tenant));
     }
 
-    private makeAggregate(tenant: ObjectLiteral): IamTenant
+    private makeAggregate(tenant: ObjectLiteral, cQMetadata?: CQMetadata): IamTenant
     {
         return IamTenant.register(
             new TenantId(tenant.id),
@@ -78,16 +74,10 @@ export class TenantMapper implements IMapper
             new TenantIsActive(tenant.isActive),
             new TenantData(tenant.data),
             new TenantAccountIds(tenant.accountIds),
-            new TenantCreatedAt(tenant.createdAt),
-            new TenantUpdatedAt(tenant.updatedAt),
-            new TenantDeletedAt(tenant.deletedAt),
-            
-            
-            
-            
-            
+            new TenantCreatedAt(tenant.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new TenantUpdatedAt(tenant.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new TenantDeletedAt(tenant.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapModelsToAggregates(tenant.accounts) : undefined,
-            
         );
     }
 
@@ -106,13 +96,7 @@ export class TenantMapper implements IMapper
             tenant.createdAt.value,
             tenant.updatedAt.value,
             tenant.deletedAt.value,
-            
-            
-            
-            
-            
             this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapAggregatesToResponses(tenant.accounts) : undefined,
-            
         );
     }
 }

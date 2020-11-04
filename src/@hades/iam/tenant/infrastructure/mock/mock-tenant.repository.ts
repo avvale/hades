@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { ITenantRepository } from '@hades/iam/tenant/domain/tenant.repository';
-import { 
+import {
     TenantId,
     TenantName,
     TenantCode,
@@ -12,8 +12,7 @@ import {
     TenantAccountIds,
     TenantCreatedAt,
     TenantUpdatedAt,
-    TenantDeletedAt
-    
+    TenantDeletedAt,
 } from '@hades/iam/tenant/domain/value-objects';
 import { IamTenant } from './../../domain/tenant.aggregate';
 import { tenants } from './../seeds/tenant.seed';
@@ -25,14 +24,14 @@ export class MockTenantRepository extends MockRepository<IamTenant> implements I
     public readonly aggregateName: string = 'IamTenant';
     public collectionSource: IamTenant[];
     public deletedAtInstance: TenantDeletedAt = new TenantDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -47,7 +46,7 @@ export class MockTenantRepository extends MockRepository<IamTenant> implements I
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(IamTenant.register(
                     new TenantId(itemCollection.id),
                     new TenantName(itemCollection.name),
@@ -59,7 +58,7 @@ export class MockTenantRepository extends MockRepository<IamTenant> implements I
                     new TenantCreatedAt(itemCollection.createdAt),
                     new TenantUpdatedAt(itemCollection.updatedAt),
                     new TenantDeletedAt(itemCollection.deletedAt),
-                     
+                    
                 ));
         }
     }

@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -12,6 +13,9 @@ import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { FindTenantByIdQuery } from '@hades/iam/tenant/application/find/find-tenant-by-id.query';
 import { DeleteTenantByIdCommand } from '@hades/iam/tenant/application/delete/delete-tenant-by-id.command';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+
+
+// custom
 import { GetAccountsQuery } from '@hades/iam/account/application/get/get-accounts.query';
 import { Operator } from '@hades/shared/domain/persistence/sql-statement/operator';
 import { Utils } from '@hades/iam/account/domain/lib/utils';
@@ -23,13 +27,17 @@ export class IamDeleteTenantByIdResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamDeleteTenantById')
-    async main(@Args('id') id: string, @Args('constraint') constraint?: QueryStatement)
+    async main(
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const tenant = await this.queryBus.ask(new FindTenantByIdQuery(id, constraint));
+        const tenant = await this.queryBus.ask(new FindTenantByIdQuery(id, constraint, { timezone }));
 
         const accountsToRemoveTenant = await this.queryBus.ask(new GetAccountsQuery({
             where: {
@@ -41,7 +49,7 @@ export class IamDeleteTenantByIdResolver
 
         await Utils.deleteTenantFromAccounts(this.commandBus, tenant.id, accountsToRemoveTenant);
 
-        await this.commandBus.dispatch(new DeleteTenantByIdCommand(id, constraint));
+        await this.commandBus.dispatch(new DeleteTenantByIdCommand(id, constraint, { timezone }));
 
         return tenant;
     }

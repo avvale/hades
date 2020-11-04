@@ -8,29 +8,34 @@ import {
     TenantLogo,
     TenantIsActive,
     TenantData,
-    TenantAccountIds
-    
+    TenantAccountIds,
+    TenantCreatedAt,
+    TenantUpdatedAt,
+    TenantDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdateTenantCommand)
 export class UpdateTenantCommandHandler implements ICommandHandler<UpdateTenantCommand>
 {
     constructor(
-        private readonly updateTenantService: UpdateTenantService
+        private readonly updateTenantService: UpdateTenantService,
     ) {}
 
     async execute(command: UpdateTenantCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.updateTenantService.main(
-            new TenantId(command.id),
-            new TenantName(command.name, { undefinable: true }),
-            new TenantCode(command.code, { undefinable: true }),
-            new TenantLogo(command.logo),
-            new TenantIsActive(command.isActive, { undefinable: true }),
-            new TenantData(command.data),
-            new TenantAccountIds(command.accountIds),
-            
+            {
+                id: new TenantId(command.payload.id),
+                name: new TenantName(command.payload.name, { undefinable: true }),
+                code: new TenantCode(command.payload.code, { undefinable: true }),
+                logo: new TenantLogo(command.payload.logo),
+                isActive: new TenantIsActive(command.payload.isActive, { undefinable: true }),
+                data: new TenantData(command.payload.data),
+                accountIds: new TenantAccountIds(command.payload.accountIds),
+            },
+            command.constraint,
+            command.cQMetadata,
         )
     }
 }
