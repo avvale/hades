@@ -33,24 +33,20 @@ export class FindDashboardResolver
     @Query('cciFindDashboard')
     async main(@CurrentAccount() account: AccountResponse, @Timezone() timezone?: string)
     {
-        // get tenanat fot this account
+        // get tenant fot this account
         const tenants = await this.queryBus.ask(new GetTenantsQuery({
             where: {
                 id: account.dTenants
             },
             order: [['name', 'ASC']]
-        }));
+        }, {}, { timezone }));
 
         // get systems for this tenants
-        const systems = await this.queryBus.ask(new GetSystemsQuery(
-            {
-                where: {
-                    tenantId: account.dTenants
-                }
-            },
-            {},
-            { timezone }
-        ));
+        const systems = await this.queryBus.ask(new GetSystemsQuery({
+            where: {
+                tenantId: account.dTenants
+            }
+        }, {}, { timezone }));
 
         const jobsOverview = await this.queryBus.ask(new GetDashboardJobsOverviewQuery(account.dTenants, systems.map(system => system.id), { timezone }));
 

@@ -34,19 +34,27 @@ export class CreateCatalogController
         if (!Array.isArray(payload.flows)) throw new BadRequestException(`The property flows does not exist or is not an array`);
 
         // get tenant
-        const tenant = await this.queryBus.ask(new FindTenantQuery({
-            where: {
-                code: payload.tenant.code
-            }
-        }));
+        const tenant = await this.queryBus.ask(new FindTenantQuery(
+            {
+                where: {
+                    code: payload.tenant.code
+                }
+            },
+            {},
+            { timezone }
+        ));
 
 
         // get system
-        const system = await this.queryBus.ask(new FindSystemQuery({
-            where: {
-                name: payload.system.name
-            }
-        }));
+        const system = await this.queryBus.ask(new FindSystemQuery(
+            {
+                where: {
+                    name: payload.system.name
+                }
+            },
+            {},
+            { timezone }
+        ));
 
 
         // create flows
@@ -129,7 +137,7 @@ export class CreateCatalogController
                 application: flow.application
             }
         });
-        await this.commandBus.dispatch(new CreateFlowsCommand(flowsCatalog));
+        await this.commandBus.dispatch(new CreateFlowsCommand(flowsCatalog, { timezone }));
 
 
         // create channels
@@ -183,16 +191,20 @@ export class CreateCatalogController
                 lastChangedAt: channel.lastChangedAt
             }
         });
-        await this.commandBus.dispatch(new CreateChannelsCommand(channelsCatalog));
+        await this.commandBus.dispatch(new CreateChannelsCommand(channelsCatalog, { timezone }));
 
 
         // delete all modules from tenant and system
-        await this.commandBus.dispatch(new DeleteModulesCommand({
-            where: {
-                tenantCode: tenant.code,
-                systemName: system.name
-            }
-        }));
+        await this.commandBus.dispatch(new DeleteModulesCommand(
+            {
+                where: {
+                    tenantCode: tenant.code,
+                    systemName: system.name
+                }
+            },
+            {},
+            { timezone }
+        ));
 
         const modulesCatalog = payload.modules.map(module => {
 
@@ -229,7 +241,7 @@ export class CreateCatalogController
                 parameterValue: module.parameterValue,
             }
         });
-        await this.commandBus.dispatch(new CreateModulesCommand(modulesCatalog));
+        await this.commandBus.dispatch(new CreateModulesCommand(modulesCatalog, { timezone }));
 
         return {
             statusCode: 200,
