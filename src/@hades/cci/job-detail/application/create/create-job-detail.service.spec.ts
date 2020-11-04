@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { jobsDetail } from '@hades/cci/job-detail/infrastructure/seeds/job-detail.seed';
 import { CreateJobDetailService } from './create-job-detail.service';
-import { 
+import {
     JobDetailId,
     JobDetailTenantId,
     JobDetailTenantCode,
@@ -21,19 +21,22 @@ import {
     JobDetailNode,
     JobDetailUser,
     JobDetailStartAt,
-    JobDetailEndAt
-    
+    JobDetailEndAt,
+    JobDetailCreatedAt,
+    JobDetailUpdatedAt,
+    JobDetailDeletedAt,
 } from './../../domain/value-objects';
 import { IJobDetailRepository } from './../../domain/job-detail.repository';
 import { MockJobDetailRepository } from './../../infrastructure/mock/mock-job-detail.repository';
 
-describe('CreateJobDetailService', () => 
+describe('CreateJobDetailService', () =>
+
 {
     let service: CreateJobDetailService;
     let repository: IJobDetailRepository;
     let mockRepository: MockJobDetailRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -42,7 +45,7 @@ describe('CreateJobDetailService', () =>
                 EventPublisher,
                 CreateJobDetailService,
                 MockJobDetailRepository,
-                { 
+                {
                     provide: IJobDetailRepository,
                     useValue: {
                         create: (item) => {}
@@ -56,14 +59,14 @@ describe('CreateJobDetailService', () =>
         mockRepository  = module.get(MockJobDetailRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateJobDetailService should be defined', () => 
+        test('CreateJobDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a jobDetail and emit event', async () => 
+        test('should create a jobDetail and emit event', async () =>
         {
             expect(await service.main(
                 new JobDetailId(jobsDetail[0].id),

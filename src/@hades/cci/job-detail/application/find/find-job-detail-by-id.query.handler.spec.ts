@@ -16,7 +16,7 @@ describe('FindJobDetailByIdQueryHandler', () =>
     let repository: MockJobDetailRepository;
     let mapper: JobDetailMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindJobDetailByIdQueryHandler', () =>
         mapper          = new JobDetailMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindJobDetailByIdQueryHandler should be defined', () => 
+        test('FindJobDetailByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

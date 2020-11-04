@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "03041f0d-62b2-40d7-8461-e02dcae95d7f",
+		"name"          : "@hades - cci/job-detail",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - cciCreateJobDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciCreateJobDetailInput!)\n{\n\tcciCreateJobDetail (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tname\n\t\treturnCode\n\t\tnode\n\t\tuser\n\t\tstartAt\n\t\tendAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"59bc6db6-c0c8-426f-92ba-e613bfe82c1e\", \n\t\t\"tenantId\": \"663c7366-2bf7-4aea-a315-a14e6e79133f\", \n\t\t\"tenantCode\": \"lnud00wkihay48q1bpboqlx0l6v9ltvpran93ad569jzid8kqg\", \n\t\t\"systemId\": \"9349fb9b-9d37-4e1c-95fa-3e769d83edd6\", \n\t\t\"systemName\": \"gi0fn1knwobsgc106k32\", \n\t\t\"executionId\": \"5c4e462a-7119-4fab-942a-b0777c7ce8ad\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-03 22:56:19\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 16:49:59\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-03 18:40:01\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"name\": \"pv4shnwuvio25baemya7zz4jfjk3v3yfhfoa42uefj70uulcsrvmua9jw2go1asahl7gyt4dcnspxpgske6nh5vftoq4j28b8pxci5sktlcz8x7xld7uuqb03io37p2eydkbb6m53xrphwxzxm1uv4sxsvs7zbodgamzsl9qd8r0j6fdx37x1xo16k60e9grdhcvsl40zk1mrl5aro0akdjii48gd9xt26rw9rn5mx09iiv64fgk79ll1j9vfb6\", \n\t\t\"returnCode\": 8175426688, \n\t\t\"node\": \"ek96vj90w76hyr9jsazyp4vdhz5992tlsnp4jpr2jsfhm8rsmmstfa1xgzziz7ylekeq1xe1663dvhwey7lh6f5gskeiuain6cl1b0m5klq8919h8yc5ff1igiqxofd7jk15qxknuxgkteovjzg3679a3admtm8s\", \n\t\t\"user\": \"02qri2bbj07yskyka7rnfz5h7qoj8hjb5ayi30odlhwedox0idox88ndivte1zf5t55i1chtwp57ieaegs0cop3kz3lqxm232vdy22pnnudqf8pow5iasda0hhx1s4mp3ch3e3bzx73kiavtbws1i4rcwahi4qnov7i25bvtie9d8dqh26prle5a2fe9bzxu3vwbzegupf43yrgj9csbjk1fa7mcdpre590shkyctzqhlwmf6ox0ranf9ppyy8y\", \n\t\t\"startAt\": \"2020-11-04 02:22:59\", \n\t\t\"endAt\": \"2020-11-03 18:11:45\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciCreateJobsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[CciCreateJobDetailInput]!)\n{\n\tcciCreateJobsDetail (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"f8ec6f3b-8f0a-45c1-9bf4-732380024dc3\", \n\t\t\t\"tenantId\": \"b9ebb148-2c4b-4e5c-ae00-6b59e077d145\", \n\t\t\t\"tenantCode\": \"2ppms7don2rg36h3et5zth2ktwj31oxdks55hr5m6kfxjed7xc\", \n\t\t\t\"systemId\": \"6beba743-62c9-44d3-9b1a-3230fd9827be\", \n\t\t\t\"systemName\": \"ea22jglji7i15b2pgo2s\", \n\t\t\t\"executionId\": \"53c00e61-1f31-4d18-9566-1a31a41f65cb\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 02:50:29\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 23:56:26\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 07:14:25\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"name\": \"l0wka34qnopw5bqoviqmiceunc2lx85pma6f5vi9p1htblwupupmkoih2xjl6qfx7hl9ul5f2xctv59ink0k28wcauqstydc6tqt4o0izgkewr13y98dzyexy2doppy0674nuwnxgz6p3yu04ehly3aty24m5xa6r4hc56k4f1uinwy6yets0u2x3pq49vu17at0a4n0dsa1k0bxei01lq8of7t0wcsvsg668vuydq6s47zzs77q8i3bgwkcdjd\", \n\t\t\t\"returnCode\": 1707428438, \n\t\t\t\"node\": \"5kp7lbjinawl535ghfbyvhi3b55z0r2euw304f442882t6wzx6np77ml89fvswh4xq2f8xxrvt7w4ga31f4zm3yb8q9i3vp72j40jwsr9icelifqjteogcjuq4wohb2ja2ee419cbqsqumppz42fyxzeogjm7fd0\", \n\t\t\t\"user\": \"l4pe9m5bqszqle8exv2xap04xzu7fwpg8jx23zedrsy5hgc6ea3ras524rc5up3lxlqlhdyqkyzwbxfnnqs735x3g1s738qkm49z5l1389e2qzyz67erpo7dffp1ioar94b6x7xmvasgxms8r56ayjbqw2nx4nwue4vefzky1emtlpn5nt43w3b4cg1i2mhwgntfuf7weji8prgsktn85r395czu77n31zff3sp92qdcphvgdlwajdef64l2g4i\", \n\t\t\t\"startAt\": \"2020-11-03 21:04:50\", \n\t\t\t\"endAt\": \"2020-11-03 17:01:14\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3b3c415f-0731-495a-91ab-716ac276128b\", \n\t\t\t\"tenantId\": \"6b18f745-075e-4740-bad8-1852f68428b9\", \n\t\t\t\"tenantCode\": \"2b7mvq1jao433tdq54h9exwyymx25erew1480dhnhtjxy9u3v7\", \n\t\t\t\"systemId\": \"27f3555d-79e0-42ab-b0f4-f03ce831a236\", \n\t\t\t\"systemName\": \"17g2vlut2fhaywk8bovh\", \n\t\t\t\"executionId\": \"a73588ff-1fc6-45d1-9374-2436a81689cc\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 22:18:40\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 20:53:08\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 01:26:51\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"name\": \"y5lb6pn0mf536a7uk3a8t8unqd07nhfllu8atkd0mv52pbinch6kq9tq8ojrdpqesg5xfzlisddbf575iafk3m6rio0qkk8dbi0bqw5smtsk86b708aiuaj2u1nh22d7oew7z10mlip28wfrmocwt6150ebtmudgijtglkicbl8zrx7xje6s5k6gr8w7l7n8fy77jb8qqyoie5f6qyl7y0h1i4md1wlevkcyinerg6dxgjl5wpavbfgq4so2v8e\", \n\t\t\t\"returnCode\": 3277519570, \n\t\t\t\"node\": \"4u05bn7tcrzqqlfe8zsshvspix9qgb1dl73q9rr4gxoxcn47tjmc5o07imt5is8mt26pkltdswijqz6n4cjc5jtoa6jh24xwy2e6pi9u14k2ii0hapzkynowa6hczayi1hczogs4iw4obcbm98othtfaoztono2a\", \n\t\t\t\"user\": \"xoxwm14xjpx67cg1ksixs1pfeddx1ejoxnkrr14hrvcktkm57yy7ucdd07e4u8gg2rvugvjknpk6515suuqgvfq3808xxbhwih1v4jw0bujm6cnccuujme4b9gxrtspgjsq5dwui3hhxw291dbfbxuhtgkm2js7yxooeyltzfy370xw4m5te3uhkzprv29if8iynn3ouftcd903fv8g7zxcse72tu4ualn7pok2kt81o3vxh9r1j7yjgnsbz0ax\", \n\t\t\t\"startAt\": \"2020-11-04 02:59:32\", \n\t\t\t\"endAt\": \"2020-11-03 22:31:56\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c3ed9e91-360a-43f2-a8c7-3d0d279c6752\", \n\t\t\t\"tenantId\": \"84a31039-ea88-433e-9c98-40d6344acd8e\", \n\t\t\t\"tenantCode\": \"mbwe3jnpu9rvi6b1mdh3xpg9mtu7a5dkkk1mfix79ghdufr5er\", \n\t\t\t\"systemId\": \"a1f37f6a-fdc6-491a-a60e-81f246a02de8\", \n\t\t\t\"systemName\": \"rfwod0wnjn0kx7j1uchy\", \n\t\t\t\"executionId\": \"01685998-07e2-4f2e-8b3f-ac8de957c84b\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 15:25:06\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 01:01:37\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 07:37:41\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"name\": \"et6cwxa7kkea2z0tuxvummmc2yqd5yjv5ejwv7970jmw72g87cx9s5vqpdadk7wybudjn313w2zyzui1mqv6zu5kp4n5r2djckmh4qr48vv1vrmka2q5vewdujmsfs9a95yyc0t7lok5m3xkgpbso81wa3oyly2bdc544bkvdimz17jhbl1utl2mmgq76mo3qj21iwcq76c7oaktjp2udo2tykz7iahq537cli7q8hjmyf81qvzrmn3sdrj1xqk\", \n\t\t\t\"returnCode\": 4967801163, \n\t\t\t\"node\": \"5d2b81pqui63n6962we5kbyj19jsvq5daeh87927ar12wd2qz0slfo8o9naqgla3tktpvj2gght5xko9szgcwrhlw3fdqrmuj0mt3qcbp08euzty7gxcn84eubybnl4xxqlgz101aq8l2vcr5k4q5lbn761lprat\", \n\t\t\t\"user\": \"znpg9h8mciuu57hh23jdrm6s6pvuuka6sjpokp9d5eokki7rf1epr9mw6s1rokrifytt5qvzmmzr6eftp90d3tlteoxl3947f1ovrx774a8kjr74awoiko8tzr29vofwjifav18jk9p6hoiix53pj33ly4nfrl8kz157qxy02x9cgun1fx7dgfofnkqaxuwqr4vj1qmyyix60gxc88vbilu18ljeo1ijoydh3n643v1zd0ssj90zmscgkzwdnzz\", \n\t\t\t\"startAt\": \"2020-11-03 16:49:45\", \n\t\t\t\"endAt\": \"2020-11-04 02:16:07\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b38eaddb-ef7d-4a0a-8707-092b20ac6914\", \n\t\t\t\"tenantId\": \"561172b1-7a7f-482e-a511-e82b8d59dbd8\", \n\t\t\t\"tenantCode\": \"p0448o6csx62m16ycw518vjdjl2s6rsr6rwzotf58hwn2w6qqd\", \n\t\t\t\"systemId\": \"07d56585-3bfa-486f-8a2c-5982fd846629\", \n\t\t\t\"systemName\": \"0f296wn5z6runw62j8gl\", \n\t\t\t\"executionId\": \"28462f36-4817-4de0-9ffa-453c31e2c9e8\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 11:21:23\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 15:17:24\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 18:45:27\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"name\": \"rgyuk4p6pnoi2317b5xtvo4s1oh1qq0myx017qtcm0h9cvkxa6ivs9kvlp5v9ayr1a9e260knqwq1sthqg44jfnk56emy4n8p1auuxf6r8w133487x9xwyttpil2pz2enkxg8a5fj6mt37nhpo5e8xma8w6iy96eeteuub42qaqwdixs57s00d8z3zhwwyy2j7tgc01j8xd83tnh76d34ih08za9naw3ic27ujzo86a1o4bcxjlx248csc0dak9\", \n\t\t\t\"returnCode\": 7383196808, \n\t\t\t\"node\": \"7qankiknfqu8p0odxdhsf69873kztvt23ww17ye02mfmzb5t3p9xr2lu9mln5e6isfyyw9prm2c9v2n8gx1854uhpczkd4u185ae9olghgx2rvyi4r91b2am1p2euttf8k124fseheuw780zpr7g97aq4zamg6vt\", \n\t\t\t\"user\": \"bu5sijethwrnwisus4dtek8fudj9z875n2fz8rjqygs3ue0w8pbmqo6g1mgspmqsnhgrg6udhbczwfyczjuz56i9w2m6h3yxmselayguvy99xhwxdm1zzyebrx7q7hsu3d0aqazwpb7w9jmig88d16zmaa7neoe7natforuab75naknfi3pa0f0x2smyytqd8mmpikff0wrqn2vd7lh4691qtt1pryevd49kwfndz8h1teokma5p0cv9chvufp9\", \n\t\t\t\"startAt\": \"2020-11-04 06:34:01\", \n\t\t\t\"endAt\": \"2020-11-04 07:51:41\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"36ed4bcb-cf7f-4fdc-b217-0be821b5e3e1\", \n\t\t\t\"tenantId\": \"f7b6fbe7-c4d9-4ba6-ba20-c59b39218e0e\", \n\t\t\t\"tenantCode\": \"yulx3lpr7zbc6971qtngwhckdbnsoz4ld6981enuk933pasxe4\", \n\t\t\t\"systemId\": \"5920cb27-538c-4b60-9b0c-7fa8ac78dea3\", \n\t\t\t\"systemName\": \"xsb4gwp5e6ihmoirj40x\", \n\t\t\t\"executionId\": \"2bd00e1a-2190-49bf-b0e5-3e973f8cda63\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 02:20:03\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 08:40:22\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 04:07:42\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"name\": \"djds0avbqp2w4q11hvw5cwrxq7jeaxw61hnjlc9x1lg76z78j0p8xlxvqm7320xf2fc447fgj2assjzuzaopkd4zmmtlnhbbbnd0dxlnasun4klxhzlltm7i5umucyqj1uk748y25v9jn1vpqgzqx9ar1u01ot6ejnscqw1wvj4jmgwvlauuvfyksbnp25z9ry85n72bp0dgbmpfy23bljglow6aeo3zj9jct61a6bl59kgoc70qsojghh8h4w9\", \n\t\t\t\"returnCode\": 3479550119, \n\t\t\t\"node\": \"vhturidvgu9of6foc71u1th3fta8kai5tnsrzvaivmgujc6i42x7qu9twcaa18na8jyx0b3m2s41nflzi3c3z97wnq2muazqxgjgzaper45hfinqcrnvo1tkpl4nb1yzp8oc9ghpny483hjbcyve70zb2fz78dt7\", \n\t\t\t\"user\": \"h4x0ozz5zotjaqif2kj0z97ef1dzxgxcgg42tuybevaqkjw4ll5sboh0okbd2mp7qkrnjaucmeh6yfyn0r2kwyuprv44duy34l35b0lu30udckam0hqoijkp7zthqsyrzml65y2d1ubtmi32a9pcb0hlby7kqnh4ehy8s6j0f4cghp5tdj8spuq9rrdmmf06mfn0s5847qzu3wujfxioizhslipgfus0kul1xpp990y2wp19boyv2bsy2un59y1\", \n\t\t\t\"startAt\": \"2020-11-04 03:19:41\", \n\t\t\t\"endAt\": \"2020-11-04 15:14:57\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6f7a619c-5229-4104-a083-2eef5439e2e5\", \n\t\t\t\"tenantId\": \"7785a48d-e4c2-47fa-93f1-42f182595055\", \n\t\t\t\"tenantCode\": \"e9n72qvf38h76turfgt72808unh2z8b8rez5tvedlufgtkt873\", \n\t\t\t\"systemId\": \"30f5da41-dd03-4c9b-8fb9-1858eb542b00\", \n\t\t\t\"systemName\": \"cg0i5snm4a9x34au23ee\", \n\t\t\t\"executionId\": \"7c580e9c-b21b-4f39-9c35-dffaa4b18ab7\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 15:37:49\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 03:41:03\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 22:43:13\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"name\": \"77364qzxiw73pbr08dlpvbpaf4komjktc0xqn111yv0ilfd77zgx1i7u70w1fqh8415w3da8qm13in6wxj9riwsdioigjz9fvxa47s4fndqyca65f2vsyus0qoxctt3osct2qygta52yhbgn8xj456k3puw497xswomhgfg5olbnlraei5lx76f9xr08818vsovacrvpskm50f8s06se7238na07e8k3hnbbsxwwlv1ao8l4ormw22ccwxvuxg0\", \n\t\t\t\"returnCode\": 3063527594, \n\t\t\t\"node\": \"ddnye03700lqguit72zlo5j8norz12innwmy66lk4l4iwjipfwasfjzbnvdfw0bo7b641g48edr1ota49hns7wr7cp9y8ewrpd46665u71qc0vlz8rhkcnaf5u9n9sfye4pilwhqyuk2py9yju7o2sauqajs4zvx\", \n\t\t\t\"user\": \"dbmnxhvvfequf5k3wxeyfp3297sbwss7n09xxzcndk0unzcj2zaybjezmqjalvd8muivzdb8przg5o43ncaq1apfkbdkx99wd0oeyxm0365h0zm6r4k37h6rc00ofwy4f54gcvpifxi77696zsawa47xgkcys8qmn36vqklhvq7t1qjth963sj9tfo891p4tygjtq8p6g4nlewjuwmfbarlq4l59rgk99tp4atuqlei5ufrx4r4q98gzbnsnvxo\", \n\t\t\t\"startAt\": \"2020-11-03 19:19:55\", \n\t\t\t\"endAt\": \"2020-11-04 15:23:42\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9fc85485-701a-4cc6-a7c8-8ea071e29f9f\", \n\t\t\t\"tenantId\": \"a727164b-8699-4da2-98f9-17ef306b420f\", \n\t\t\t\"tenantCode\": \"x10v6w3ul5ua4i1nxsv0oe8y7p9c7hzvo5ih5sweqt93xsd2iz\", \n\t\t\t\"systemId\": \"2eb77117-dde6-406a-b246-3e10f514b450\", \n\t\t\t\"systemName\": \"aor10wc5ey5x69ui5bno\", \n\t\t\t\"executionId\": \"5a63617d-a1be-47cc-afe1-61a4441415e2\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 23:43:13\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 09:11:35\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 00:57:28\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"name\": \"b5tyldm75qqwir4autyo6va8xblg2xpf61py1tlqjkbe7gm1zdgm5tmmu8g138b4a9ikpxrr784s3jbnjfjjut9jmlqpyhbo27gknf0ndk3iu7zja8fq4o3vk6km6ejzq9w6h4bemnf7n4oxxe31pklr4pbl6ujzrfougbz5lbqd63vnrf9fifjpv4d7xip59kx4unk5zbz9f1qkkm9bdro7i5nzscwy0ywoicbs9u5vrncvbblx9yf3sklzdx5\", \n\t\t\t\"returnCode\": 6269175692, \n\t\t\t\"node\": \"fw6xqvj7qd9jzmsmrxah7qnzhdo8bjc65s3w3pjsp5oi60fcy0e6luvjpynk7r4v89d9ohbg395c7hatnzhui89n9g3w2ojsu13dtk9w4r9yr2rr42wn0rrvvjqpwsf3d9fys6rbbmkzv0z46z1vv6qgh51arwdg\", \n\t\t\t\"user\": \"kxrnkkydh92y8141crsl19u65oy1d1qr49ls9oa5b7fpyx6vpbj012nz7wwppvxq1mbpm5uyxlq08iow9epqg13l1k8yr57rkd8eqaxkw4606muxrks0lj8k1s6ayeziabd43apmf5oj8ses553iok2zw53u4so3ngogw3bpaag6gralbqlib8agubdv2vzkcivph9tsz0e3wkrfrrujx871x74gvk5xd1qoik8accbubkqn8yhv73va3alicd0\", \n\t\t\t\"startAt\": \"2020-11-04 06:26:42\", \n\t\t\t\"endAt\": \"2020-11-04 05:18:50\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f410fd60-7c60-4b15-b5ae-fd401dc13ad2\", \n\t\t\t\"tenantId\": \"1365a337-3f0c-4e38-877b-eb0f0bd4c8ba\", \n\t\t\t\"tenantCode\": \"gue5blnfibsssix74k7nqx2wnjk3z7dgrgpf1two7k9fgw4bd1\", \n\t\t\t\"systemId\": \"12dbb7da-5971-45f3-9d6b-9b5b068d307b\", \n\t\t\t\"systemName\": \"yx9nsgqemq9zfx2welx2\", \n\t\t\t\"executionId\": \"044aee39-dc26-42c5-95ef-ae1502108169\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 14:34:47\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 07:14:01\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 20:50:46\", \n\t\t\t\"status\": \"COMPLETED\", \n\t\t\t\"name\": \"4u5057pv10o3l2g4butuj7uq19mnth4ai7gh009ikt4d71vdfn4jj7xunryndap21pdm3en1bzb302sy4le2i5j2r9wwqkemjwicpkyyu21a686mo9sj7nl0rn1hhayhmn18e573c3do7hcdun7io2erfgeevgd8ihop9uswa11p4eh30ggrmc11kwobo9vvz2cojrhiu6wklnkvnd2oum2ag4eyqy2ajihg2tl56tc4ufoaswrj043lxyfxk7h\", \n\t\t\t\"returnCode\": 8670389982, \n\t\t\t\"node\": \"ef5ntzyesn5h94a1utexna29w8960w1933j1kix2ln1265shnnu02wjkrhj89fa1aatr7mulng7kddfc1p0p7ljxgf906kzuoaszr1lfpqgsmcj0pweegnorti2jfc96d1v5qhx69nwn2nth3q5c3xhr6h5tx72d\", \n\t\t\t\"user\": \"fgzb2htkifgll3hl7hg6diip5x0mdidiqauh72xtdz587biqhu0r3snxonytj6j2nedsp9kjc72sfzz30hdxb87huxltckubs1hka40vkus1l639nk434cllymcllhjrwows6clli181i2u89fgsee5m989natqjxv67vdtjibrf1z3h9sdaljh80jlgo3j3ifs2euhxicfp2wmqvbkklsy047r7y6iizsm0om8zdpch57hqy8nynb968niquh4\", \n\t\t\t\"startAt\": \"2020-11-04 09:01:07\", \n\t\t\t\"endAt\": \"2020-11-03 23:06:32\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e35e4873-6d3b-4612-8076-180cb6cd4c05\", \n\t\t\t\"tenantId\": \"cc993da0-522a-4c8f-ac1d-9927761ffa2e\", \n\t\t\t\"tenantCode\": \"klszzl6n5o8j5q3rkynd401jpulnvoj04h85ixxd6du0k3tn4v\", \n\t\t\t\"systemId\": \"ef966736-0956-4a15-ac79-57961c6ea798\", \n\t\t\t\"systemName\": \"3vqo80dmmi208gmbecsk\", \n\t\t\t\"executionId\": \"6ebcfa2b-e7f2-43be-80b6-d18beaf537a9\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 13:54:19\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 09:10:46\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 18:08:05\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"name\": \"2wtm5ecbrie38zwfvxtusht7tvxptvge7ds5qobyo1j32tfjb9nnk09ha665jprnv32d14k6wu5pryhgapl86q22zlzm0zv8caau7ci7v6ykgtmwd1gwatcqrxcb0cco6sw6xtlduqig25mg149nk9kbssjy3xo3mtll0tucwd22ft1kvittj49a19gbmfrshcezpzbfy20prboqrx7k43lwvjpzcxrhmx5xk3msb1vp1de62oiwgumz2999bx7\", \n\t\t\t\"returnCode\": 8200329031, \n\t\t\t\"node\": \"brb86xmpmbbgbsiguqzrx54hvo2cy37b7i0ih9ar6xfpbu27d21r7yrsa7b505f0saskd2kml5vlfjhyvebb5y5hyio9e4e7enypdts0xp8jja6jcey01mq1614iv975crhwxxaeubdz7cut87p6cp3wnhz2yacr\", \n\t\t\t\"user\": \"2tvalvrltu835p159j32gy19zcm2bkthk9q5byz10ku620ctrgxd5xe1wuznscu1qed1kbtii9p34aedri96d1zv5hjzr6zk3pcj99anht68f9towx9jebkbgpktoanxb5oi8qf6f2kjws8uk2ckbba3tvh40cnsj7dzqjiahnjicjx7adv1qb5jl81a0rv4qpf9dsudodqdl9j3mpqqgia6o2df5n0172v7qzvxjoi902df9ay9kfas2v1nai4\", \n\t\t\t\"startAt\": \"2020-11-04 13:53:09\", \n\t\t\t\"endAt\": \"2020-11-04 10:26:20\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"56aee0ce-ab7d-401c-b2ca-7daee7a15189\", \n\t\t\t\"tenantId\": \"b17e090a-c069-45ba-a3df-fcceb4c5ac9a\", \n\t\t\t\"tenantCode\": \"otpjkviwsa2kf6lsp8p3bx01x72v5otasjnpcuwynyca6anmbj\", \n\t\t\t\"systemId\": \"dc73e22b-2490-40c5-ab77-a49d23fd86c9\", \n\t\t\t\"systemName\": \"hr9lrjpn41tqcbu962je\", \n\t\t\t\"executionId\": \"3f0e753d-37e8-4232-a8ea-62f1627d14cc\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 21:39:55\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 00:47:49\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 09:03:46\", \n\t\t\t\"status\": \"COMPLETED\", \n\t\t\t\"name\": \"34s9plxpg7ge21fmr5s6x4idfwxp3vilflqqkra9aa8wqmdtlahl9gfubxqjbb2g0xfslv2wr218ic2x97r9dppnrbakgi5j11bg1nrm4h5307ycw0gu7kc7u18tzrtfy5rwx01gw2ypyjl5rtm29flc95ry8z7hbwsxv3f31klk348fyog9f2cjuuvxhwcbd2rzndcd2qdrnm9d9m5wm5mz4l82jqpk8477zx1tc1vcep99jtzeyqs6fzfeml7\", \n\t\t\t\"returnCode\": 2169619653, \n\t\t\t\"node\": \"7dxjbcwavi8vogbieqnlkoqpeevzb9dmijploq4z6gd1mrfopl7nlp2htzvua1u34r1kk6roglw0tzx7fimp93ifva8kn1j8u63h2lmgq38ddtm9j76oypoh4xyh3cn8sscwyt5oa1ggrtyzn4mf113es3dq0bey\", \n\t\t\t\"user\": \"lz7ezwuoyrquqvykdxjcuwbe2qy42ch7rz8xy3447s4into9e251raz9a956q1cai7iukctam1339b3h3j45vi6aum1442x7qt0fjch79fwjz9ocv7m0b1glysn9pwr813ygf2i086gyhmrtk31hmdz23009czy9fsul3jjx383e6qamt8eebyowk83tolryxfnxb1a3k9ep7hznankmtjgk6xkfxqgp2fm54uzuvxe7jmkbec0atqxqu1ba1m0\", \n\t\t\t\"startAt\": \"2020-11-04 06:51:05\", \n\t\t\t\"endAt\": \"2020-11-03 22:12:44\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"81f4ebce-d1f3-40d7-9f50-b57f9f79b8ec\", \n\t\t\t\"tenantId\": \"62e3248a-a96e-49c4-a1a7-ba09a0ec283f\", \n\t\t\t\"tenantCode\": \"919xf1qm6mxw75a2ptpqaobv13159fgiy1ya290hqjv14956vi\", \n\t\t\t\"systemId\": \"e855ccf6-e781-40ff-b4d3-22da1be3cd68\", \n\t\t\t\"systemName\": \"65jgzax9cuvzqtaaqmz9\", \n\t\t\t\"executionId\": \"f333c0a8-4b9e-43d6-8333-16e18bd3095f\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 16:19:51\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 20:50:58\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 16:22:54\", \n\t\t\t\"status\": \"COMPLETED\", \n\t\t\t\"name\": \"vbrduztbxj797i56osyg6rmymac8tppfzxt39768omq9y6xu7kknsz7h9oqndy0lfrzskgwpcj10zsaov6jmzzrrcrm5wfphzieovd7so6pgub74g3njug3nhzecmemm2zxg9c0suekdpyd4rxttakd9nuaqnas4ww26hfgfkmab33emu3dcjn2ogt4scs9wo4b5yvtra1vw74lonp5fb19f2z5mx07bngxpm6olq3p32n464d5120ohqqkcuvu\", \n\t\t\t\"returnCode\": 9444984851, \n\t\t\t\"node\": \"q8r4bv049zmcos424gngfulrbbpjnq8oy9tc4ee7hmgde92hzriq8r57i6tarqtav6qt9kl7kjqb120knh7kgciw8soipluqv5exsdwzayjn2qttqajlfpp067trfxfyevt92wc27hvp7qo2n0taqurdumy1cywj\", \n\t\t\t\"user\": \"dp72h2pybq1d2m4ahevv16z0e7gved9sp0nuvmkaar8h8ifdu1ykbivrn29go2aqjb5ocxazrtj9v1rp5dy8cl1zovsc87ney9jim79scf1nesrbqaw2m5bsfm589dlnpbp0up4x5pu17az0hw6vrivm28kiwbazmyvt8qfzujdntkt4073p8c8xj1ce0390ffnm9c8bxj0ggxastogwdbapl7pwwp73rbr3iji8xpmmwvzslxli0yas65g20ui\", \n\t\t\t\"startAt\": \"2020-11-04 09:34:05\", \n\t\t\t\"endAt\": \"2020-11-04 11:29:08\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9bf97c64-b70d-4cb8-a43a-37fc1e888d80\", \n\t\t\t\"tenantId\": \"485e3783-eb78-420f-921f-689a521a6eae\", \n\t\t\t\"tenantCode\": \"b66c8w70z2qnkxukxua5lr2auqm0j4jzcejrx9jkuptgy9x8o9\", \n\t\t\t\"systemId\": \"15d430a0-1512-4538-a942-c7a8ae3826ac\", \n\t\t\t\"systemName\": \"cv0wkonpxkpd1v5j2r18\", \n\t\t\t\"executionId\": \"3017c8ae-f1fd-41e5-a795-73439017fff9\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 02:35:18\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 00:08:06\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 10:20:27\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"name\": \"j8x7a0qsgjsoviy2l17rgd49oc53xgvmtismx1guxa9axn7hrxw5khgbl8p0c9lsk6evfv7v9h2n8hkc03qkmkcrtibx3h1ouh9quxe3ijlmt8jvxpxof0vfqtdrb4pbmh2ozyl0sbjz35l64r0i8mpxgbmxcmcflxw97i062m6cdh0mi0j0rmeghdri6rwpgagigco991nzqn3shc9p7hz1vq7k5vsj49sf7sn908m7fyya2yjbgkljqhez5fc\", \n\t\t\t\"returnCode\": 1814514854, \n\t\t\t\"node\": \"6v6nvk9x4bowfxlr1ks8amlqf2f00pe1ieqpvbhmqmonabmzglireser1kw5hik6npj6eakx51x682xu985lp9gmm1gqye2zt3is6marlmplug315wbcfb0p2o5nh34mk2lji4cy7a6rrdejszlfr21maav9l3rx\", \n\t\t\t\"user\": \"dddmo4fo6kza7z2ftr5ydx7cpyb6jrfqbpeu9jgwtj12ls2qpnmmp7hvm02ivvwakqeqa6l70sbmxfkw98vy6z59o9b3kjuy89yufgg5tbwvt6ghl1qulzano7ga0bwh3o46iatcd06ovzj2qqkz9bnaa7ewtk8nb4b7f07v86d908aahxps7k4whu7i9pghml6roaqci62taiqqwq39xezotzw17ooyzhtk1inhyxtaelldkgzoff7g9vr9m3k\", \n\t\t\t\"startAt\": \"2020-11-04 05:49:13\", \n\t\t\t\"endAt\": \"2020-11-03 18:32:49\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c77c3b31-f530-4569-b7ba-314751198ded\", \n\t\t\t\"tenantId\": \"fc87364d-51d4-4637-95a1-6d34c03edf8b\", \n\t\t\t\"tenantCode\": \"e4a1n5obtqxlyeoprp2782vmv4ajat4eugkrepznyl2xup1dsh\", \n\t\t\t\"systemId\": \"0800ed91-07d9-49af-92f8-e071e62e8d18\", \n\t\t\t\"systemName\": \"y57ejlbg2sbyhfle2jrm\", \n\t\t\t\"executionId\": \"d4dca561-796f-43ef-af3a-c7597594ccc0\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 11:58:37\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 19:59:09\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 04:05:37\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"name\": \"fykisxfzjndh9egvl4nkh2x5mjrz52jgsiux43i9dacc9uwf4xbtg4aolbr97sh0iw0mf3jv2j08gwu736j5c1k867cwd3krnwo18s8883btud2n2f47dxbalthnko86fdd7p4tmssqmcjd6yi6nbcspgyzlsnq7kf2nz3cw3ogv0maq2zn7l4i9075orsrhdl55bf1pud7cpr1s84ugq9e3ivexgnk74kwh2kxi7jlvo0qdg3t1rfjhdo0qg28\", \n\t\t\t\"returnCode\": 7435301476, \n\t\t\t\"node\": \"drr2c57hikv6nfya5tzhl3xdfxwhiphbdm5bxlfg9n34f63u62ybjow4rw0s4dwf9gjow4woxtq1gw3l7ifsivsiwq3wukzr5rfhfh3bqw2ycr2ggqocjhsi3toidqxzj3bhtggy4mk1q567h45eyqnj9crlremj\", \n\t\t\t\"user\": \"mnfdl95i7hsrlf4kiygd4udedust5afg9n0woscvafyufc744l4pn8zxil4kp820blc0lc3c05gf7q39jhtlbueqm7dwf1uu8g85cflzyr69yit5ive72vh6ghtwi16fz0p7b5itd3jt7rl5t7vxjr8rziehlwygpzs2hejc8805idlklilykghff6cvemtxg1kblwbedjchoeu6pi9dbw2kx1uhoqiu80xdvcbvcc0lktiqbwm08zgjx0wmwia\", \n\t\t\t\"startAt\": \"2020-11-03 16:38:48\", \n\t\t\t\"endAt\": \"2020-11-04 06:51:50\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"19e1206c-a2c3-4873-9139-cc0168e97315\", \n\t\t\t\"tenantId\": \"122e472c-ac5f-4a80-9d65-fb4bc1119a1f\", \n\t\t\t\"tenantCode\": \"i3qng3vzbp0ks3mp15sigq1b50eb5hp298d5knv1mtjfxk77hc\", \n\t\t\t\"systemId\": \"71a341b5-73f8-4466-ad40-8b10817e9f76\", \n\t\t\t\"systemName\": \"k0aiqhr5ouy2lwngd2fp\", \n\t\t\t\"executionId\": \"006aecb4-b582-4e1e-9b48-4b7d3c68c09e\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 21:30:55\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 16:25:51\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 05:43:32\", \n\t\t\t\"status\": \"ERROR\", \n\t\t\t\"name\": \"aou5yf5knzura3or6c9jf9yebc5ot7gl4hf6uf1j64kxqlhml3ez1mp7fx2w2o3fn1u0e44k1ohml8gsp3d65sin1uuzk6xkrgyw0uzekzuo8smxgq0yvljqcoyjh56feqf8y6wuzbw4d788d6wmpi412kg2qv4zqcb2uvrbcjn5j7w5z86tssy1epli40m0qg1hqf33qoz1mygj55yc0g1wuqxm2zd2fc5t5x0jlykmnm3es0ns9pjduuf7xlc\", \n\t\t\t\"returnCode\": 2688870821, \n\t\t\t\"node\": \"34mz83m9vzzryazapi96wsmpq1369cz6zx64h6uigxbsw0izd2e3bq7d24dhi174cj0siq4ausvvy9wrx8i09ul89f5gaxllhkbtdjtnsyp4ee8f854y5uu41vzzx05yyovwxsxo89821ba7bilqutg7ld64lwip\", \n\t\t\t\"user\": \"5i91aa2lwoo57xtq0d5szolfhnv13pvjo1shvizpckq5pt7qpduzxtafgagxw9hnmjdat0tfvn293wj5vzobh0d7imctmv3nm3b21woadx7jinnxpkb6eklguz007jv6w2i9serncp9jqnrf09b5d4qb4kafwqqgd6jm93yc4dpzfitvjrjvy3ivfep3wsag62tz4rf5sbtu8dtey0q3263weja32sf3m6h0k6vd7ri55wueqzqexyzasax9q6t\", \n\t\t\t\"startAt\": \"2020-11-04 02:18:48\", \n\t\t\t\"endAt\": \"2020-11-04 10:07:01\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"14d6aa05-47c9-4bb6-833d-ef42c0e87927\", \n\t\t\t\"tenantId\": \"0715fbd7-f9e1-46c3-a97a-e0333b741e74\", \n\t\t\t\"tenantCode\": \"rknrbhr3korrfe0ov6nu960egofkjd5kis32pzbe5nsvk1j43n\", \n\t\t\t\"systemId\": \"8cf4f900-2604-412a-96d5-66c3257375e0\", \n\t\t\t\"systemName\": \"aa180vt515augggoxs4u\", \n\t\t\t\"executionId\": \"e18326ca-9480-486d-92f4-a541db3eea30\", \n\t\t\t\"executionType\": \"SUMMARY\", \n\t\t\t\"executionExecutedAt\": \"2020-11-03 16:37:28\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 07:46:14\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 04:15:39\", \n\t\t\t\"status\": \"COMPLETED\", \n\t\t\t\"name\": \"ps71xnpqtj0xfsajdn59jktu8inioaoatzmbexfeu2c3oe912gu3u0qz6cjrklwv9321mv68q8mhksei37pelz8je25oqxc383ertt63s8a0xsuozr5khdly72fkvaemo50lwygihkjqxoj7flxpgt2ewc7yus8eu2x159ivm61u7tldwqni3hbt2q3c66wscn6mhs6qi37ecpybv1tdvnhf1ttuvlho8a1ai31ixdg47fxnuagagurkzkvg19t\", \n\t\t\t\"returnCode\": 6750718813, \n\t\t\t\"node\": \"khphlgtd0krq491prnhylhjrp0w0n2qz27jpl4kembnrde2rgki4ysyfhacyp2aw6o6gcpkz4shwesown37fjbv861p7qmuyyvdapyivltcbvsfjf79dr5joex2gu8sfj7m0aj0371itdhyf4hojriq9arx9vhz6\", \n\t\t\t\"user\": \"y80ekra56vbgxe800kg3t1582sxyh92kyitr3xp66986wn4vbv5g366rag3npwys72bha5xbk8s6s1e4yya53kfrn1sj23rjs0nsuwfoc4a8p1ttwb930wkpeyt2zl6ezpm86l1or4pprop102y2ct0jx0nuebwhly1zwqzx6ztdchjuu3gd0ddat605hv7jn5o6eq2nl8fdnmo2r6j52m9y5iiy4z6s4yzyji8yoliywmjrc14tgqvoi4fgm7a\", \n\t\t\t\"startAt\": \"2020-11-03 23:07:02\", \n\t\t\t\"endAt\": \"2020-11-04 11:56:11\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c25ca62c-b945-43b6-a43b-ebd642b1c8ba\", \n\t\t\t\"tenantId\": \"e582ecac-49f3-47c0-9f5a-bd2daa6c162b\", \n\t\t\t\"tenantCode\": \"192lketttv6l6x3kkxxchcehsyh5bb4pe8i58ej8nvbrvu0g0r\", \n\t\t\t\"systemId\": \"a7a3b323-89c0-4cd2-9d5e-f20f863085a3\", \n\t\t\t\"systemName\": \"n72dn4eb0i1whlvbzp6o\", \n\t\t\t\"executionId\": \"4776af80-c8c4-4aa5-a980-13333c9c59d4\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 03:43:22\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 22:26:46\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 03:09:40\", \n\t\t\t\"status\": \"COMPLETED\", \n\t\t\t\"name\": \"1bkd6tnpegzefflreoa9hf1olya9uyj6fhbp3set9lp5ky752vxygf0nzjulst6vndxz214upqb1p07449mw6eufg6eb91ohqduc9aaxeutfx8jsf1s36swq2xus96ew0ruk7bicsrcxnw3vdmtb0ky002zkssmr4yfv7r3nmp039tou4pgozk43u85nu28t2fydsf20ajccrwar5vmd8p1mfgpkq5sm6qmf41jmku02go047uas6ge8ekk0o0n\", \n\t\t\t\"returnCode\": 6382279819, \n\t\t\t\"node\": \"ovjv9xga9wwfi17a23xp2if3j5qugvrooiwqu5wm7c3ybkfr8ftn0qapfuup1w1lg2iggdqf5xwunuvppd0mmokgycblmx5rtd5nd2lhg5t4xgbpnsfsvwmwsn3y4ioiqe30723qh3s5wz8qdecmgkbwlk67nbnx\", \n\t\t\t\"user\": \"5axt3pf2fzoumqbo4euafc5236tpbvc1fkx8b9ky5k6w6tkx6q3ky7d1b0ldz55nvyk14ecxpo3seqe2852le94ijz681ur7w2kvodue72qlgtrfs08c740h4u6cj3lsopq6zf9wrq6xg9k0mjldavronicq0c9ry32v2j2vcy7shmcph5t0gxh8e4r5vtcfbswm742yrcmoaje8iky8netdiavb2zzk3po5lmj72u1at0zmfb840a61xk63jov\", \n\t\t\t\"startAt\": \"2020-11-03 18:58:55\", \n\t\t\t\"endAt\": \"2020-11-04 13:12:46\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"feaa2c34-bf69-43dd-9b09-900967800e00\", \n\t\t\t\"tenantId\": \"d964088c-d30d-4a90-845d-95b5b83062ad\", \n\t\t\t\"tenantCode\": \"6zun5dxr6fgjb2aplee6w3x15ewcdgo0nezi6035bu9yqdclp4\", \n\t\t\t\"systemId\": \"9d1bda97-cebc-4685-be7e-1b90719a560e\", \n\t\t\t\"systemName\": \"wlbvulk9ir0au7ha9jvg\", \n\t\t\t\"executionId\": \"e33ce8a2-388a-40e8-8ed4-26e1d81e1d51\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 16:00:23\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 12:34:25\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 23:27:56\", \n\t\t\t\"status\": \"COMPLETED\", \n\t\t\t\"name\": \"kv0uaplsjj6nqvpeilrtcm8kbz9cf5dtz1vnvjcndgltxrliirfjsny8shfkpjp1vd5xw1138j2cp9o8g9qr15zncmlbp87frr4xxdtswtd2jyggqtwtnt9z0dpjgnomvq8br2dj0tqro1dx5eaap69o3j590jdzuuorbpe6nayt5588o03g1ud7jxrxn6kf6ydbudqsqmy2y84gium0i1ev69ulm3lajjbkhfqux1u49zi56zhh1lxv0dk7i87\", \n\t\t\t\"returnCode\": 7513431842, \n\t\t\t\"node\": \"jk3sk06jk9aq81g0g08luwr9zcwyi3otjlqy7n8jpy6z1lsx0c9xuucdy7tijir7uj4hu9a9mdlf3sns9lz5q6whv5ixc5u0boxel9blwugyy8i59bu5o4do767vkwkjnoxjz2a3l7u0r94ntbqzfu4k67eagxt4\", \n\t\t\t\"user\": \"krliuhigy0z08qei5pben7760du3y5ec2y7bnqyjjkymx19uepu3htcxbvffc9looezpjjdllg01ro01ktwd86isyfsbiprkedtq0huht0g6cucymbh0tnthc2qpmwce1tczybywnejd07s78j4hxh8ckwgaaq44k5crswr9e48jk6b40j3tyakbn33knh6rgciyfp2xn75yf5bssudo1f4h16ll6pe14glfyvqe79zk4ehqs20zreg5mjodfaq\", \n\t\t\t\"startAt\": \"2020-11-04 09:42:24\", \n\t\t\t\"endAt\": \"2020-11-04 12:16:29\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0497e08b-99d5-4088-b131-7989a23337ff\", \n\t\t\t\"tenantId\": \"4102b910-1540-4773-ac2d-edcfbafed8f5\", \n\t\t\t\"tenantCode\": \"7rxgc985asdx7v4oqyqnv94r199ortodbo1a5surn6ydvc4y3e\", \n\t\t\t\"systemId\": \"46357e61-d8cd-4be2-9fa9-9035d65a4602\", \n\t\t\t\"systemName\": \"akroa3txzjcbr34gpv2t\", \n\t\t\t\"executionId\": \"73cd3a52-6812-4bf6-bf49-3339d73c07fc\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 07:48:23\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 01:21:38\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 16:27:38\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"name\": \"bw07utwcb2zs2q80env9c8vfktjsvzkydrtsa1sj6nn858oyk9mwdii34aqlvz5x1ls8ehdre2vqxhtcgr72scib5vmme9006vz2foer9seedo0ycp36e6is6j71sod91mqnndyrssbfwu2syqcnm3c5n32nl6asi27x4p570c07woh4sppha4q3eylrj8mflz6fq4hoe6cpg0drsha0v8gbfsdftskl2xxz4mdyfnn1xrrgxl7c8njz17rgzjm\", \n\t\t\t\"returnCode\": 4271757534, \n\t\t\t\"node\": \"jissu63m30wr02jn5f137etrqi85s949i3013fardbgyu9udxctr95p3f5vtsrtu2nxxahgzucvc9ktq7mr326ywdrov1ar7lgilif8nk40yvzcgpzgfmhuv37lgryo1ppylkhxq1d6cro9uszgqexwnbte5n2w7\", \n\t\t\t\"user\": \"6q5amp1mam6ieeb4wdfh1h87xfmzmcaivnyyx4qqqs97yqsw1jh822pdnuiyw1abbn4tnd9hnlas9nno6w7hj2eq9ht9k6r8dvwk0ds6dmt4bgjfkk7073p02c8kuxl60vh2phmz6rnys44xq2zni9jxnviy5gw1q8fr94zbtu8kf39b4hsm1wjxovxa720f5e7nn35unfp5mvdfi8h0464na9ay0cpzz4nwbz01vse7gnyey2i8guwx7tcayxi\", \n\t\t\t\"startAt\": \"2020-11-04 02:23:16\", \n\t\t\t\"endAt\": \"2020-11-04 09:47:41\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c1b0d736-c264-42dc-b58a-20474c76e2ae\", \n\t\t\t\"tenantId\": \"fb12d427-b4f3-4f9f-ba06-3d765c2fcbf3\", \n\t\t\t\"tenantCode\": \"4th2wa2c0uat4j9266fc20uph0z6v7n7apdrjybgh7fr8l5uhp\", \n\t\t\t\"systemId\": \"3fe48eec-4db5-449d-ac0f-a2c3d6ee20a6\", \n\t\t\t\"systemName\": \"gf1da1129r2v4rp9ot2s\", \n\t\t\t\"executionId\": \"67ae045c-c007-42c0-81ca-fa0597c6088d\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 03:44:29\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-03 19:45:21\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-04 14:40:46\", \n\t\t\t\"status\": \"CANCELLED\", \n\t\t\t\"name\": \"tz5k8bnnfqqdxhd0y3u0xvvz3m62a7nv5xdmha6rxpebj3ksphqnaad7ut74sbdbxrj0bplaxbkglu375h8j1crhvdefz42ca2kxlj7oz0ukv8w28pgz2q5yp3opk9lkqe5np7gfs58c67cu2ccg1y1dv6rf7pjy9i7495u40xw91egt5yuq9oc8dhb80jc7j8b9xkxgzywo3nixsdv85taccmhdv6h2l6hpbvyoerhvsoah6txlucwothfr7th\", \n\t\t\t\"returnCode\": 3889766584, \n\t\t\t\"node\": \"1p8zc9wx5olvuuta7ik1z6yif13253m3scnl48zm663q64ypbkdddkg5h60cme92cat6p3lctqor2dczjtevoxrw90sk40x2vmkw2p4yay36t6mhm3durdq26v3nom845eru4rmoz5k0p1vug62bs3ud522o1x5t\", \n\t\t\t\"user\": \"xkrf1eaissq4ppkukoysyd81i3g0eosw02bh4vk820f53b4qyldp03yuhyozktrdjcyhi0gzz6k8k4jfqtmv9aa5b1riv5wf2xoj33hsxxtc82o6z0oxk45prvxdm6cajs2uetubdiufzpauc62llj2fbjhrvn13ab5g69rftfo3l5rg4m1onjhr497s9quiwetgsd0sukcf53oc9dr73iekgu80vdfn4z3hzrb7tey6kmdaeghc88i2dqubkwk\", \n\t\t\t\"startAt\": \"2020-11-04 13:57:20\", \n\t\t\t\"endAt\": \"2020-11-04 04:40:09\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b4adaa61-f536-4104-8848-68719dc1ed1c\", \n\t\t\t\"tenantId\": \"554254b8-e234-4c03-b5c9-0bb4c2c42994\", \n\t\t\t\"tenantCode\": \"ty4dckzalbnnov487esp8ypgmlxar9v3b596gmkzi2ckkh0g4r\", \n\t\t\t\"systemId\": \"ee62bb3f-6b8d-446a-904b-1c07ff1e7866\", \n\t\t\t\"systemName\": \"dzoj5erdv9sm4c8b2pva\", \n\t\t\t\"executionId\": \"5804b2c8-5cea-49dc-b8a0-f9bdd119e193\", \n\t\t\t\"executionType\": \"DETAIL\", \n\t\t\t\"executionExecutedAt\": \"2020-11-04 06:54:21\", \n\t\t\t\"executionMonitoringStartAt\": \"2020-11-04 14:13:09\", \n\t\t\t\"executionMonitoringEndAt\": \"2020-11-03 23:54:10\", \n\t\t\t\"status\": \"COMPLETED\", \n\t\t\t\"name\": \"jtp3fz02yrbrvw9oo4o3vb4s2ixf42zvyyha45cti2pq72uanr7rueizojydpz15kmvl6vhvvg7d1s6zoc9sdvanchy24zjja7zxwlyppxg0w5f0s8nrzyp76duqockfai0as75qzoa6cjme3ead7pm4oh5zgoh6hf72r7uuokctkztdf8loemjw9c484tl8gs6k22phn5w7vn5i6k5htntv08qth8rjmzg4i2egm02befuj58r86xas7fadnn1\", \n\t\t\t\"returnCode\": 1476010675, \n\t\t\t\"node\": \"umgsnokrhh1p1z9q1y6fh1jkxbx4m4mapk2i87ysp874gufa3tvfi5f32yu0e3z8ugvjvxhwbyqnvtjav5oyc325najp2ulxhbcr6kl7hlcvbcqt1jrvzj4u545un6kqjd5g8w4frlut0hvzc8wo9j357t899i5v\", \n\t\t\t\"user\": \"f2gmqxk6aqe50xlrt6cu0sn09itze2ued4rhaylwkr63tnkwxizjkm8ji6no2p17dcp3orahwwowqyf2v8qnh3szf0lp4l441ei71nx4fc496inr3g2bbuyedxs1f0ub6bnrohp4vwmxpygyikknls76scayzrj7npdjtl2giz5gnqkolbsy4k7zod0ebeby8g9876zbw2f8rkdoa5a15dnumzemyufypgvbo4l750yw74jup7vkh8htulxtxig\", \n\t\t\t\"startAt\": \"2020-11-04 12:47:01\", \n\t\t\t\"endAt\": \"2020-11-04 04:50:12\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciPaginateJobsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tcciPaginateJobsDetail (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciGetJobsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciGetJobsDetail (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tname\n\t\treturnCode\n\t\tnode\n\t\tuser\n\t\tstartAt\n\t\tendAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"59bc6db6-c0c8-426f-92ba-e613bfe82c1e\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindJobDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcciFindJobDetail (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tname\n\t\treturnCode\n\t\tnode\n\t\tuser\n\t\tstartAt\n\t\tendAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"59bc6db6-c0c8-426f-92ba-e613bfe82c1e\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciFindJobDetailById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tcciFindJobDetailById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tname\n\t\treturnCode\n\t\tnode\n\t\tuser\n\t\tstartAt\n\t\tendAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"59bc6db6-c0c8-426f-92ba-e613bfe82c1e\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciUpdateJobDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CciUpdateJobDetailInput!)\n{\n\tcciUpdateJobDetail (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tname\n\t\treturnCode\n\t\tnode\n\t\tuser\n\t\tstartAt\n\t\tendAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"59bc6db6-c0c8-426f-92ba-e613bfe82c1e\", \n\t\t\"tenantId\": \"663c7366-2bf7-4aea-a315-a14e6e79133f\", \n\t\t\"tenantCode\": \"jdy36b4yuk72q8fyuf0dmlfnwh99o53lg03bdx4is0mw2uh4cf\", \n\t\t\"systemId\": \"9349fb9b-9d37-4e1c-95fa-3e769d83edd6\", \n\t\t\"systemName\": \"zc14j1u3rsewfct48ljs\", \n\t\t\"executionId\": \"5c4e462a-7119-4fab-942a-b0777c7ce8ad\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 08:19:10\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 17:34:13\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 12:01:55\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"name\": \"uwgmj0qs6ipn2vshkquourzmrpjz5vi6s6pl3dzjtbls6vha5gsvq83t3ykreonhofjkcf1q325jrk7c4rmi8jbao1cxpsdmcqc017wqgu8cc5wjj2t4e7joc3k8xuf3w86efuk35s9f1q9s97jz6jub0dgm2dpgkrfynrsiyrfxpbs2s36281y5nbjhfzeqv9jp770l9lgw9i1ecusv0bj4y56e07fr2bvqft0nh4f917ekm2qlgsf6kl1t1jj\", \n\t\t\"returnCode\": 2917159278, \n\t\t\"node\": \"rs1j6dqh6kum8cmt2i84tbi1itrxhi1z6nlb12kylexjolqzr3x7qsiyy467vohormhygumpaazm37srai01afp9cil0w4lsmvq0uxhzvo14h1dmm1w6nc813q0sxcpxo5sq18e78aplyewbpmj5r5s2ko7vtth4\", \n\t\t\"user\": \"w9laddoqqdlak246ya7pg02xxoo9ulvohltaohfjvkqvdzho314gkriowy67nrfdrrfogt1dofbflyfe76sdmmw020q3d0rfoow4zy4q1mzkl9dk6icevv4agjjban1llndo43duymt3yr1arwf9hc3ovpe3tq1dxhzroejluxfg3miaom7mkhvh61fqy2hwp5t7fuaptbp6b7ysjqy4987srk6ybmpz2ikuoylnjav761n7lgtn8cylyun66o1\", \n\t\t\"startAt\": \"2020-11-04 09:22:57\", \n\t\t\"endAt\": \"2020-11-03 22:50:59\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteJobDetailById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tcciDeleteJobDetailById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tname\n\t\treturnCode\n\t\tnode\n\t\tuser\n\t\tstartAt\n\t\tendAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"59bc6db6-c0c8-426f-92ba-e613bfe82c1e\"\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - cciDeleteJobsDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tcciDeleteJobsDetail (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tsystemName\n\t\texecutionType\n\t\texecutionExecutedAt\n\t\texecutionMonitoringStartAt\n\t\texecutionMonitoringEndAt\n\t\tstatus\n\t\tname\n\t\treturnCode\n\t\tnode\n\t\tuser\n\t\tstartAt\n\t\tendAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "/graphql",
+					"host": [
+						""
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/job-detail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"59bc6db6-c0c8-426f-92ba-e613bfe82c1e\", \n\t\"tenantId\": \"663c7366-2bf7-4aea-a315-a14e6e79133f\", \n\t\"tenantCode\": \"3tjsu4t36w3pdpgqymuq5gsdvj2hwx7hgcojba5tpe4lxdwxqr\", \n\t\"systemId\": \"9349fb9b-9d37-4e1c-95fa-3e769d83edd6\", \n\t\"systemName\": \"2vkjcpudk8nxzukupq6f\", \n\t\"executionId\": \"5c4e462a-7119-4fab-942a-b0777c7ce8ad\", \n\t\"executionType\": \"SUMMARY\", \n\t\"executionExecutedAt\": \"2020-11-04 10:58:44\", \n\t\"executionMonitoringStartAt\": \"2020-11-04 06:09:50\", \n\t\"executionMonitoringEndAt\": \"2020-11-04 01:16:20\", \n\t\"status\": \"ERROR\", \n\t\"name\": \"srwh9w19rjy6c7nzssi622gkxm37pzxqqamdj43f2hnvk8c73ogatbz0o554skoodxb42743gm0jeororpey8g3ityck7uru78d8cbp3fqglhznoq5j70ec253a64ma4cdo8k3rgpv2s8tn20lkqitx0ua5hx7f3p8wosud08owtr384y3f82c3oxqdcizz1dmd83zkv5qoaihbtp5ioz3gca6x4e55j27o6wsp8l2nj867q6ul2ryzyjiqwszc\", \n\t\"returnCode\": 4624801524, \n\t\"node\": \"qehnog9h4k5pbanv9fc55l9nfyvlyy4s5rt3weshtzpb1ty5xg6yb1wzj624u20sm8oz3hniw2qakygo60hzov1dxtt1yzq1m79b84m7r75itghcadvccgeeqfilq7mun1arhqxgubhjm53ziimy3vkp2ab3k7x0\", \n\t\"user\": \"6vxtj0g3d045scnkwofdb4nhq3r6ui4o9fl8e2uama7l2qdh2v4rwt1g0mi6ll22wuphcc0mslicl5685ujupmbx9k765n6q84lbqiysskx189jbjr824h70v0bkbsg2xrjgy7ur1muwgdgqpmvsn1o14b9pt2sg67v1ixf5r2exwjvpv3k7u7jk4kpaztgylq3vusuugqa3qce3mlzxlog9u4zv3m1v0r317hic3gy9fj95cwij4xnmb1ksdsu\", \n\t\"startAt\": \"2020-11-04 06:39:58\", \n\t\"endAt\": \"2020-11-04 13:14:19\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/job-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"job-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/jobs-detail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"fdc54dbe-4715-4870-a398-baedea2f8e0d\", \n\t\t\"tenantId\": \"e8a3024c-6ce1-4163-b3fd-0155e87131bf\", \n\t\t\"tenantCode\": \"l4wb5ixrs209bt1v5dse9u5rrdku8xsucq4yt7ud1j2ufgz35e\", \n\t\t\"systemId\": \"492201bc-bfb2-4b49-9407-202f9de52cc3\", \n\t\t\"systemName\": \"2rruzrx4j4wbavcp1tis\", \n\t\t\"executionId\": \"7cf5a68f-990d-4931-8310-981af182ddfc\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 00:23:17\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 06:16:14\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 09:23:05\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"name\": \"efwbxxd9ffx7oritfgd15qa3h9efhph3292b7dlsgotu1jfqfsodoet0m5vfiq2pn0r64wrjdk5ir2phtujrbltthtfi60w9jngdkel7wxsrvrnao1iz99sxre19tbtdo454wqyte5lv9p3fpbz57amwrkoy8ono3sx5uhkfc612sb6t50rn1qgldk6xzcaxuwxjlb66bhvypauhyz5i899ockehxi80fav5bgicq4uw7nstk2wka35o35v6isf\", \n\t\t\"returnCode\": 7590963121, \n\t\t\"node\": \"2s3aw7srqgfh7ntnzxeehs2vgelzib7lt7bfy6avfbzinpu7wun9k4b9p8ajs7kb7j4lgkjqh2eyoj4q4lx3mk4ocrh5tj110av6hihku3ueyiyapgekrtky07n3y703pe9599s1ulhsjn8nqx0irnfxnxj35rqr\", \n\t\t\"user\": \"w7n0qqighwowh5r7pvnaxq6spkgd6xcx006n6o2y9pkaj0whhfv7st7rpu69neds6v09dzcd8mytuc3049mbwfwlnw7at5cgk3gjj90r0d0cdzvv9g4dz2amge630kmc3bubmdhpw05572mf5u1vr4zr6coz2v1ay8ljo7p1vqfd3ui6t8bjubmuaqv1swqf4hafybu0hczr11688cuj46wdj1v7gbkurxu1ty3qw8l1l01638e26f1e48y5gyi\", \n\t\t\"startAt\": \"2020-11-04 05:58:27\", \n\t\t\"endAt\": \"2020-11-04 06:27:01\"\n\t}, \n\t{\n\t\t\"id\": \"3b06f6e3-a44e-4805-9895-4832befd8979\", \n\t\t\"tenantId\": \"5f022e30-d052-44e1-acd4-083f03230abe\", \n\t\t\"tenantCode\": \"fnwbr9j55yli8lvk06qp93vqd1e150rkusuiu209fqksvt2ito\", \n\t\t\"systemId\": \"39c5a5fb-d62c-4810-a330-6364431a3c81\", \n\t\t\"systemName\": \"m1r6qjmtvliku74p4nru\", \n\t\t\"executionId\": \"6343637a-918c-480e-9829-17b7b7593b06\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-03 20:32:29\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 05:21:49\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 13:49:53\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"name\": \"iyhztlibyzwk01dth2j7otyluieh6ffmie7qhir3nb4au6qe7zf1mu4bm106kw67x14elkmqvn7iuhnjeeiawhv8b2i1l5yg7krr3i09w0189710ia3zoy1g7a9gx29nt3134gb9lvnnlnanau9bj5pyw7d4rn9xnyhw016dzv14e3cksdtlatp2o43o1ns2x4ntglsswj4805bkkbsr9hil5oz37yercra5ef4dlzx4rxmyt7be4bqbtip1uuf\", \n\t\t\"returnCode\": 9885595657, \n\t\t\"node\": \"p4h6nc92mgt22x8xok19rwy0fifwklf2xmwe58lktg78o6p0cokffhp8xz66a922eoc46kli4xqcvtvt23343jvtqwhpc9680sgixqk0bb0cai3j8r10x2hany7fdhj4svynnfudywvatibe87hrfsqhoyaudlpl\", \n\t\t\"user\": \"zyiizmxry506qofm16bo9z4qos1seq2zy0fupttrs9ugightn8hxoo8m0txjsxi48gvyfonzu7bz8vfheaw1037royg3wl0jy49hbyunh18nm44ca6ykn8nwl3saz4vuq602vqadx7cvou8n7t5mfho002u5fonh65bj8t51xds8ud6hvbaj0a4j7fu5z09qixu4ukmyvtjyfbbl90v4vnxpk31thdsd8v2en71du4ohbp05g6x6s00odu4w73c\", \n\t\t\"startAt\": \"2020-11-04 08:22:48\", \n\t\t\"endAt\": \"2020-11-04 00:13:14\"\n\t}, \n\t{\n\t\t\"id\": \"504276fb-0c13-45e7-b6f2-c79f364061b6\", \n\t\t\"tenantId\": \"6581d9e5-0bc9-44fc-ad7b-eefe0696269a\", \n\t\t\"tenantCode\": \"ko8o2gocjhr9xaj370usg1pttm1db7a9hxvvmcwhoe7zt4s4up\", \n\t\t\"systemId\": \"6e383489-037e-469f-a73f-435125d180e0\", \n\t\t\"systemName\": \"evsfg5dwxl9emyeb0xcy\", \n\t\t\"executionId\": \"61c76bfd-aa10-408a-b264-dcc68cbc821b\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-03 19:21:39\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 08:46:46\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 15:53:45\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"name\": \"khd9u9gt9ekstkdfka4hsqhxgo6b0az6bpk107b6uuzcvgzb1sxfy9jypbjhfx6y7h8k21ysaquovl8tkmveel3ngy1stab2wk199781o7sk79xkar6i7dmxrkt83d34v7cucz3u3qro32bqavis580wrflo8fk008beucjbyo80n9aunk99ca0nfm7vkpaihfaq7smezwbyceera3axnuvk0ohbirelb69ervio67y03m69olx7g426kdgwg9x\", \n\t\t\"returnCode\": 5433014539, \n\t\t\"node\": \"8uns0oboizll15q1vupjz5fv1otz64c5tn4hb0fnyqu7rqfqq8n015eau54crsv8lj5nyak3h4hhevtn3mu1g3pc5pm0jaaffvz8626odbnn2pv5xaqm6dhffzn80x5uphej1hyq1dqwxk9xi1a2754ob1icwmpa\", \n\t\t\"user\": \"hohhw79wdwqsazxlfx7lpb8h1xntmm7zohnbwz4lo2q5hjnngtswbrr0341ysgwokgl9m0m1fr021kf63z2q5dl80rwr4rxd3b88xg5ylzf5cfvkjhpdqvm0xhtlzzznfjhbyk5fagim8y3o8rwb932z32ijulgtidm9pz4hlcv8ailsfdiejqa62rw2pb7crlywz6b07mb7lkfxlp3my53l24cmrlpsdrnu3fouq7n85v6tum6vqocax8gbojh\", \n\t\t\"startAt\": \"2020-11-03 22:43:24\", \n\t\t\"endAt\": \"2020-11-04 13:34:52\"\n\t}, \n\t{\n\t\t\"id\": \"88308e8e-ac05-4a51-87c2-90c657f979bf\", \n\t\t\"tenantId\": \"004a0531-5384-4193-8178-a968d10b58cd\", \n\t\t\"tenantCode\": \"z8si813f1811fqwhco1obkgrmmrttr3sh4v4ieb5uut5guhi3q\", \n\t\t\"systemId\": \"28d2fbb2-1cf4-4d6f-b759-500d9a23dc5e\", \n\t\t\"systemName\": \"tohma9z43bd4a5j9xq1k\", \n\t\t\"executionId\": \"3b19005a-cbe0-43bd-9a2c-f2deafb195af\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-03 19:06:32\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 12:19:27\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 00:37:45\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"name\": \"cdmsexgu9o73sb4frze7p5ca8i0848gr8zqyb7wi6qovd2d26cge0tdhteyowv2tqshz2jwibgilzfw0qc462vs9goxu5r6isl5bw8uo462hankrqoo2f0qldzvozfk3ug9zpsl6urqjjm4qk5u9gg04rzg9d6h2g07vond0iw6d7j580qa3c7chn9qj4hjd5bsm1xy6sltarg155pf2y0xx8c6i406vgksf80e6755tga9x3sszjxkq73iw8lc\", \n\t\t\"returnCode\": 4128985484, \n\t\t\"node\": \"9uljfugevq435b5swc5qh0uvl80ofu7nw1ce3x985fwqxdgyipsscpoams276lz1qyc7zd5uqwvpkb3ck0z3daeaek5kio7o2wiur7104wwh5hx1zkerdr9vqn8xcjiwf69tbdts7cm8hym4a0vnlzaezozo5of5\", \n\t\t\"user\": \"b89df1ucbru8k8oz81dwtefef9s39esgbvgvbx6ryy1dnp7r4t1ax7dgtxzub6yo2kxflyhuzttn6idxlqa0xp53jcerv8a54l6oe0bmbjofvs9hec8482p557834ghb6dwqly0kmvpshd33zuqvdfbohxaq7qsfgq6o7k3hl6ijyk16fprp78cwjaouejzezktf8ktlkhysyiom54i1whrekk68zuirj9lnjnakzzuhmb128jfwrnrs5qzn5ur\", \n\t\t\"startAt\": \"2020-11-04 06:35:56\", \n\t\t\"endAt\": \"2020-11-03 20:41:54\"\n\t}, \n\t{\n\t\t\"id\": \"6aee1b2e-5fae-4023-89b6-d32edb6bf01f\", \n\t\t\"tenantId\": \"c72a269a-e2d6-43eb-8b76-6d43e3a8e497\", \n\t\t\"tenantCode\": \"utkeputwimab4dp0fhnvn2wbk0aok74emtajm87zlm87iztw55\", \n\t\t\"systemId\": \"a16172a5-eb8a-4851-bceb-e73b4a902517\", \n\t\t\"systemName\": \"7u51rpoxcdqch8zr3fny\", \n\t\t\"executionId\": \"0872c8a4-6580-41c3-9ee5-08b079bbaec7\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 06:44:28\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 07:15:56\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 08:25:56\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"name\": \"ntxniohxhzhsx2kz1n3asb9w9hwio0r0lzbp2v52jz2i807uxj5lrp7kogfgal0ajc7g2pzbgl0xj6udknbzu9eipkf8x4xo0mb230zfvwmqoret0r2513r8fe6ukwdhrmwo4f3soir5zqnj8t2rbvi1tont7dcc0wyj0d35z12g3ry8da451kk4rwareaeaenq93ckptfimcvbcv5szcecik3lefhwa52mchhcwycpxm7wbpjgpk9dvj1vft9f\", \n\t\t\"returnCode\": 3649635549, \n\t\t\"node\": \"csbpv515gjk16gkc67sbl7x0ev5cqsezke1qvo21o0vkh9yx5prem7a2jtgwnes27azcd0gah2su8wj6o47e0bxtfu5totrcoktet0dzsm72jwcih71uevkivbyk1k7mxw5e6z14l4bx6ls57jstmtd4mzfzlftj\", \n\t\t\"user\": \"ei4tlhsjvivgkpqc203ffpv7fhzifvva0b7nnnc90pn2zu3gaznuf9ax9c7yczleys2qinv4p903k3dlzhuto8owue7zxvfa65fvs4mjs2jv17h96p1x5zz234izxe94veldpyud2070o1bx4m94ullf0rdklmyv9xsbm4f733zxqrb72p9eyeq4a8h8o3xb1f2dqujclia5ykxhyodqatri6fhc12e97ak4d81oi73kyrvi1d03l7vz6wfd05c\", \n\t\t\"startAt\": \"2020-11-03 22:47:50\", \n\t\t\"endAt\": \"2020-11-03 19:28:04\"\n\t}, \n\t{\n\t\t\"id\": \"74ed6bb4-5047-4c2b-a7f5-6c937caf82ef\", \n\t\t\"tenantId\": \"7bb3e943-3e63-49c5-94b1-ce931be6a30d\", \n\t\t\"tenantCode\": \"2yayprnhqe5huakk1mxnczqm6lq3suo30kdseyu37ps4basqgx\", \n\t\t\"systemId\": \"22070ccb-716b-4a3b-bfd9-f23a9d5568ff\", \n\t\t\"systemName\": \"lgluvdw6j1bohhy8t230\", \n\t\t\"executionId\": \"852f9644-36e6-4d60-8668-034f290b048e\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-03 17:54:53\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 08:06:32\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 05:07:47\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"name\": \"wyzm70tt7borcyvt84gwk60krvg983agky2ck5dar2qgsmv48snrv3377hv1361k6c651wku8fihkwa9a8sbq9e8qrbztyncfxiz694xsik1lixxsn884n44xnxjiqoe0r1azm7sq9ipf19rmwpc82bti1lvwrpw1yzz5x7zv4s2ggekn6ik9i6csh2gabgjo9tl2u76p8y1iosc350eak9ph68fte6g3esns6oft1zyx8qxa6ywfp2eeull7p8\", \n\t\t\"returnCode\": 2070916398, \n\t\t\"node\": \"s8al2b934qp0sooyuj9v5sokg523oovouyckhvadfwhe4qgjuajq0fliedptvgklfxbbw2dl89qlyzbnhlyqqxrktcd8lqkmts5m82q7mqo1zin939gf3e9fopc4gd43gjcrzdi1uwatd0scot25alzffda9iksl\", \n\t\t\"user\": \"l269yej6v3gd7rlgdci2zj0al1cw2lq5f7gec6wxb9972ek7b6v0ouolln4bzybicmneoy8fz6fmr1u2iw0urs2y79deekcvckfn2s1fhqo3m126rkgypn56v49bdv0ybbpqid1mte93i99urzm4o8k5rj6y89o74wtrvysssj0b7mlsp4pl0p7ibrk21f5w8ur0nr1yb63of5lq0n0nwojw5v162xmjh4v2i4dd1jv8xx04fbm1gejsvmt067b\", \n\t\t\"startAt\": \"2020-11-04 14:10:03\", \n\t\t\"endAt\": \"2020-11-03 21:09:33\"\n\t}, \n\t{\n\t\t\"id\": \"8259e88b-3984-4c14-a772-16433a19922d\", \n\t\t\"tenantId\": \"de83bf40-a0da-4522-b884-fce3502cf30a\", \n\t\t\"tenantCode\": \"h24a6703okh8py1q6vbmwelbkozpepuyw2gqz5h7gxrorn1bdn\", \n\t\t\"systemId\": \"04e8764e-54a6-417f-b21c-9f236793d366\", \n\t\t\"systemName\": \"12b8voma6say95y1995f\", \n\t\t\"executionId\": \"48c1027f-c09c-4b95-8dc9-764e2069cdf3\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-03 17:57:17\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 02:52:39\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 02:20:33\", \n\t\t\"status\": \"ERROR\", \n\t\t\"name\": \"gfd8st88pkrggkqwbck7eh9xu201evcyuk6gvymapn3wwg9kpynrqhqrd8fg4xhsam29l601k65y6cwbe3w9zxhdqcmsb9g73mtb7j16xgd0y27wmo3dt2g2j32ulsrkhpyzrxg96w6lx7q9y14d7oxtdppw6ejoebo67sxnob633rrkziqkbx34o0rc5fkx4dlbhatq9tkbdiyo7q2icrtotox26qeeahg1511vlx33u7ziakpcbgjigmulcme\", \n\t\t\"returnCode\": 3063899331, \n\t\t\"node\": \"9lty2tczneg1qxx13hdr92ezo9mqvcg85i1662h6u0mxkhpgoak10w6qkz9yv6xedak2sc8q9z9tpv6l14rplrqkqai610rcal0gifuxr5tfa605oc4nr996pzq0wo5m060q2wixdptbnf149m4w5bye37697nvn\", \n\t\t\"user\": \"q94fl7wvrn67spzom7uaebs9gmamtxq0yn17az4n1n26ldc19nmbjucaygfb811llvafjsccjb4ivgh5od9zf62yemuyjq646udmic0mypy69mafv52yr3dtz45uqbxhktnycjrnbk3bwsl47tat7dlbiu0x2tnbh32agwxdmku6t6qfn35h36ttvj2rtqb4fw65p9oypzkxbn7g5t00w4zcumb8zgxh4wsjkl11wuxowhbahfraa9zjc5kz29x\", \n\t\t\"startAt\": \"2020-11-04 06:15:38\", \n\t\t\"endAt\": \"2020-11-04 10:06:36\"\n\t}, \n\t{\n\t\t\"id\": \"bd63b625-39aa-45b8-b8e0-5c50cda1cbb2\", \n\t\t\"tenantId\": \"96db45d9-a177-41b4-bde7-4b7faee6e82c\", \n\t\t\"tenantCode\": \"6hjbbiftuipia9q1zmydkimg53e7wk0jibptyu13ataibmlx1a\", \n\t\t\"systemId\": \"9ee92db3-fd58-44f3-8553-abae7c882da7\", \n\t\t\"systemName\": \"q51lihs05rli9ohdnfqq\", \n\t\t\"executionId\": \"877cd4d7-e122-40dd-af7b-af13099618a8\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 07:00:54\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 10:38:15\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 08:28:23\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"name\": \"svs84058zawcnr2assrrmektfp7fym3oay8x9fqvkor76m4gskbot7cphqo51vhatoj9drofrb9krlb2fwy0yr7xffokub9rfx5plqpf12ef3ruikad20521tiq50xukgl4a8nalho96x24mko84wih4ktv499q6ye1a9qe5d97ijh39r0gvyj7n1u6h0l7b07vp9kligj9f1lvdj2h9kaybgm7k1jemj3nf2bglofmdg6dyir0l6baugtnklrv\", \n\t\t\"returnCode\": 3745190067, \n\t\t\"node\": \"mwej4r8s5lycn2436w3s1uy5nlznnw7zkpdssiym6skt6m7ymgyf7yqpnfdo7hw8cryv68ze5oo53qpyunj5r2zhnxhunl4kqqeewoz62qa1vyxvduwiqiw74r6fdd25zknpduhc9smnj052xf62sbnx8ly9u649\", \n\t\t\"user\": \"ic5lc5e8i3qi2lk93oilorprrwpvwij4u3xn95qu4wenxigwiitnyg9w6ao1974ta2l0lp9249lx3jvskzpfiziu1su3478z27gyxpt7ypa7y0c06m2b9edeo0oa9qw5f9jd022fywvxzlchaw971lp2xpx0zc5luqjjukqxnw36zgjn3ozlfv3rbtalhej6pnc9ce9wuntjtamsuvg9i4ukv2gpwcewsu0ovsiy2gp0wgouxem6h3sxy1wfhfb\", \n\t\t\"startAt\": \"2020-11-04 02:31:39\", \n\t\t\"endAt\": \"2020-11-04 12:28:22\"\n\t}, \n\t{\n\t\t\"id\": \"9a294cc6-4d1f-4a54-b15a-edb96ea82bac\", \n\t\t\"tenantId\": \"540cf0e2-4a14-46f7-a13b-42d5bd395a99\", \n\t\t\"tenantCode\": \"8e173yfqsjp7i6rpc7sfxprj47nzph7iutfpy3l0kyqenlgjmq\", \n\t\t\"systemId\": \"9e2d2a57-3b7a-4a0f-9849-c4a88f110997\", \n\t\t\"systemName\": \"fu3vi79va8wmilk3y7du\", \n\t\t\"executionId\": \"f2e57c75-c402-4bc8-b57e-4941ffffe199\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 15:02:52\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 16:02:55\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 13:53:58\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"name\": \"7ur5dwedfbk1me76vjmblsuy9jkb3lmoqxrwdi4gxli3wgyzobke1ws2iki11dyor35ixowe7z47kiuicgaq0g9t4cv3agddqzj4da8w82dqnvdgo010d0snmqf31cbk0keb6k3b0um1nfb04fx7m59ck8g2io7imjfk4h1kzs7meu7jl5ae7bxf4sj56r9vml1j4yt4p9n3lo23jok4esbw1l7fusr6nlxrennrds5d9woaad4xmpywtmnmexp\", \n\t\t\"returnCode\": 8902875127, \n\t\t\"node\": \"z2h0x8bcldq8hre0sckhjtqlfv0ct655k08htqf7dp94ykwhrrz2smkp5416vid4ini1rm9gc6ny4524oqwew7v5duasx7v0lquh3s9xjtkdbgqk6rc19rcb031amisey7m2944dt9ypy57bgn9l2i3i0pe492sz\", \n\t\t\"user\": \"mpzveywowjgqa3dv1ptwrnmpfnp265a0tnk7g0dxqe58fwc24zm7pslsw0h7ixpt8sc6zlj3zk19mmg5198hgg2bgp8fju8ixb0xpb9l8ud9um1trd3i8ncpwfw2opsnckgcz9p81420s7yhopryi6b0bf7ey4tkyjtf565gkjc7d7tm5n36nc9jej37vfqajach4jdck2ickl6kxr9v4p3ozxhvdn2uunphd6t781yjd7exf6n5s5suqxia35r\", \n\t\t\"startAt\": \"2020-11-03 18:01:15\", \n\t\t\"endAt\": \"2020-11-04 08:04:49\"\n\t}, \n\t{\n\t\t\"id\": \"5f18a244-a4cf-49da-9792-1cd7c0daba00\", \n\t\t\"tenantId\": \"8d964c47-ab74-4978-b861-6aa9a2b863f4\", \n\t\t\"tenantCode\": \"xa8f48lgjwwb1ge6ydtw2uskjxnnr726moksua8e44siquen5i\", \n\t\t\"systemId\": \"56575207-03c8-48c9-85fd-fd16dd37b04e\", \n\t\t\"systemName\": \"9hupf3g6ftdyt96k9eqr\", \n\t\t\"executionId\": \"b7c43b15-a889-482e-8217-883e9699ff87\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 08:08:56\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 04:36:54\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 00:36:46\", \n\t\t\"status\": \"ERROR\", \n\t\t\"name\": \"efcp3isj2lgwb6ca0triporvp4zwt1vrtb40j41cxctar83uhgvuvemgel2htoj8u8tfplp7eyp56i5f372squhnlwrsrbjossjv6wa46j5cxqrb5jnek39lsg7c6m99abj5w6lq2aas1q9edpiawgyx0w6la0qnm6xe2ttuzj4xdahvmw2tuzgtazqi3af5eeq14ki6kc4inkxrj1pn60r4osrkpqfuuafxfgqywm6zgrtb1yfotca53o8i4sm\", \n\t\t\"returnCode\": 5447777804, \n\t\t\"node\": \"4ca2yjwj4fnci4ogwe4w7hbe5nw12wbqzhn4s8nla3ak8b4jvwoo129cneggudeem9uq5ulm0gtpxatv23ih2jyrd48ktj598eumcmi5hgwz1ryuxiu0m5t8crhud5tx3o5k5win82uuady1l351aheeek57u01p\", \n\t\t\"user\": \"zpv37bv6h224o7hku37ku8qlpp9lomp9d38w1mc1lef458dkq7zqgtykg1erw2wjlt4mj575u6lk9fsncmgfa371pabsnnkzi89xtwg7l1w6hmc0e7kmke29stuqg1r0rdsimdews6coqtxk79eb700xc44pfu29lgeyo29pxixo59b2c4ega7c3vfww26vns8i29eg0x4c9nz3m8rvg5efwju1dsaq4b02at1eba7q9kml42etkwvsws6yv28k\", \n\t\t\"startAt\": \"2020-11-04 03:04:00\", \n\t\t\"endAt\": \"2020-11-04 14:24:13\"\n\t}, \n\t{\n\t\t\"id\": \"06e869e5-2b5f-4999-98e7-73043df4147c\", \n\t\t\"tenantId\": \"e2c6a33f-1d57-4b5e-94ea-3cee048d5728\", \n\t\t\"tenantCode\": \"uyewc6bg2nn46o6flprwyed6ofqwnpm967mzcjuozsxdrvsxhz\", \n\t\t\"systemId\": \"e33fb7e2-32ac-4927-9b52-0964392c7b89\", \n\t\t\"systemName\": \"it7opcf1budxb8ynvlr7\", \n\t\t\"executionId\": \"673eb737-8d48-4721-a367-876cc820bb89\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 12:22:15\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 11:39:39\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-03 18:20:48\", \n\t\t\"status\": \"ERROR\", \n\t\t\"name\": \"mwcvt0wj0gctff3uvx93ki0kf89xb7b0udyt8tsbxno2ebfxtr83lngwtczxian9s38jb7o2mbqzozcn5gglvxcqfqnro6laeh1ue4k3kuhz2ptxktjmdh9jt7v4qfgktliu9t5lexjapgrry2ha3zh152zk3n4ai7g185ccscx20uorbykz8mvqeze21amesjx5ixm338e8n4gxtqdsuiy0s323cl9ccjm91z34pawg2fala12m7qja2amk27u\", \n\t\t\"returnCode\": 7498272321, \n\t\t\"node\": \"9jtkcm8yepguwrkty73g4qujk0z6qa58r8nokv9nvrktzhxn44pitqio2nfpckoyx72svc7obhr3f36653oi6daq7pcgsizcgs40g0kytwnjtxjdyf9gqbqnvco29lez8rmeft18cayt0udxsuc4ximrhr5js8kt\", \n\t\t\"user\": \"527og8xy3e7v0rl9uum6rwlmmm81j1x14nq83dp8er1r7gd86yd3jvbb8lh0c1luvvsi6uh9dnyutac5u0uw806du7l2uvst70azeoklwhx23gyparxpeoct7npn9wd4otbn9htu9sptra1rj4zagyg3pp5i2d0figh86qncxv9iw7br0jttaqtmc5xnp1wmv6y8qsstov5h49e3crt8fq8w8ndjotr69bh2yeuh6vz1ef0cyznvu1jeextg8u9\", \n\t\t\"startAt\": \"2020-11-04 01:07:06\", \n\t\t\"endAt\": \"2020-11-04 05:57:36\"\n\t}, \n\t{\n\t\t\"id\": \"fccab932-6d50-4db1-941e-56de121719e1\", \n\t\t\"tenantId\": \"512aab21-e311-4a5b-b291-52cdd6be7cb2\", \n\t\t\"tenantCode\": \"gpx3cnwue8fqrsazehtvawpcp04pgohug6h58obgbhutt89ssg\", \n\t\t\"systemId\": \"df117a46-5589-47bb-8043-fcd4a1de39b4\", \n\t\t\"systemName\": \"bo2hk71dww7n4jh2cee4\", \n\t\t\"executionId\": \"ed169595-6117-4b94-9da6-6b55f506d7ad\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 07:55:28\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 00:33:49\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-03 23:35:40\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"name\": \"nj4q5txrl3hv7tlr4apc4ndm6k7v0j0hzmkbe05z36kcdh7l1dah895caf4d20dvssicf8rkwoj0evnp49gqh5we7a1s0tzkcbjr5g5wxjbcpm03fgjou25qnn3q6ta1kjff2cad0n41wh4f156whrppbm7cvg2hpukwtaida8ju45mh8t93wqsgxb5oa8vfsl4pkv4202wnmun0it1chbqch3rtau5s63pmttqgvl1gxpzgl3hhfp3lgqilsms\", \n\t\t\"returnCode\": 4381516833, \n\t\t\"node\": \"uign74w6fuk6264ejcal2jl1fgo336bqr9dxykdaket4advf4ig8yej909tz66drt4vvnxk5ikzs4nxu5alogpag8o50pwaflqz6xl42wxd7ucmyhg1kl56oo6bzy9r5uxkg0lesncrn873c0rna3u0sdskqi02i\", \n\t\t\"user\": \"pzgnx0athoipi0cfw7mobwr9kq6h1e25zk8pcv7sbi9g7g3mxytqfrt2p9v5lcldmlx4vz09zgazkt0z5mwz5pccruhsgnva4ponvljuuowsqc10c87ayb7tun0qu7xf9a2wcq9lly9doigifi6aai68qqaamrdrbktndswf69par2u47r5c4mrc20kdlcoyc847xal4tf1nz9u39x0vgfb7o7upsgqxdglj23izwutbtk88l5pr8mrv6zx5pbo\", \n\t\t\"startAt\": \"2020-11-03 21:43:09\", \n\t\t\"endAt\": \"2020-11-03 20:35:25\"\n\t}, \n\t{\n\t\t\"id\": \"32018751-c483-4c34-93d5-7f46413c6c87\", \n\t\t\"tenantId\": \"33050148-0a5b-4e00-b0a8-b92218a5425d\", \n\t\t\"tenantCode\": \"nzo0uofg29c8ss5m0vc5wbowc6qhdtdgyf1ptnlaqqbl0s1u7o\", \n\t\t\"systemId\": \"127af47c-92d5-4f06-bb6d-a7ccc0054a88\", \n\t\t\"systemName\": \"vykeyadtw6f888o5v2tc\", \n\t\t\"executionId\": \"728c355d-5200-41f7-9554-c9280abbeff6\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 11:26:20\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 23:26:09\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-03 22:00:43\", \n\t\t\"status\": \"ERROR\", \n\t\t\"name\": \"6awbkq3jkakiy26aebkzwfk1cr8ybd3f84f44dprumy4ok56vyong11917rdwn4a7ieihb87gkhjy0uksmy8xcjq3re60batm1dxv1yy5d3o4vixw672p49fpc67he4c7hvagdlnwtt62qfoidn0mjnd3aegfkcks1uoqxh8n1umb1l2hyu79vjyri0pte0iba36e6rd0c1alssqvciw2msliwbnb2bq8gv3vahms0ee6rknvryfx4henaczxya\", \n\t\t\"returnCode\": 6867529009, \n\t\t\"node\": \"tmx6yljtbab6owrz6jj0vb617haj0erlxn0seavi8hf2tnpi7oyp8hamjc832ozn0uh4ydkqnqsbt21sbpdiy1h7v1gn6h723kzfhfimir3nbgq1ft1fb7ld7ypizwl76phuymx3amxrprkkq7mvvsevl6jwx26t\", \n\t\t\"user\": \"b85ft9ozgwxm0booquu5e6sl4g962rnorwvggm4g5dq88hsyu8gwqsqzi9gz5yvl0nlrjqyniiekltbt1ubvqwlsazk1sulf44yw1p7fkv117xeegdzmooo55zxfx6m9riwlfyee28kup3zgc0s14xiw0s937ugnuoewa7u5h8gkcygmcbmgm0tr9bujugd47vs24nce6ra68z8nkszddwvyz1sirom02y6isux4o5t6nvqjsenx1n6jp4qwy1y\", \n\t\t\"startAt\": \"2020-11-03 19:11:18\", \n\t\t\"endAt\": \"2020-11-04 02:31:55\"\n\t}, \n\t{\n\t\t\"id\": \"0b8ee4c4-050d-4fe9-b8f0-d5a1a4d64e82\", \n\t\t\"tenantId\": \"d5f1e4f5-2aed-454f-9d28-d6b7c7629a6d\", \n\t\t\"tenantCode\": \"h7bg46milx67gw8z2psqln0agjmacadu4oxf621m7gzv695n40\", \n\t\t\"systemId\": \"4578187d-178f-4501-be5d-a59a1dd5ad8f\", \n\t\t\"systemName\": \"8cpnx8qm5wvndv0orufc\", \n\t\t\"executionId\": \"88d01f6f-6d4b-4159-aa8c-f77229177ee5\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 07:52:30\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 12:16:11\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 09:14:49\", \n\t\t\"status\": \"CANCELLED\", \n\t\t\"name\": \"24vaiyppkdk7b7uh55xr1xdzchj8jstm3a7odys7b9eja8fquoirbvnp8ves83uzgmklsxkikvyh0g6cqo5wk2s0eyhdmabq2qokeyym3cp0zbm6vih0pgxd30l7p922q7dd8jt1st5ymhdfnw2mgq0co2njngwm2ny5jimr9qwaf0lnsnhtg6isan9jqhs5gxupnqckeq4wm5en4vp2erqq8bqovvhx0ugppgfaeh9aqn9a90l5k56r6bslbvj\", \n\t\t\"returnCode\": 8063697451, \n\t\t\"node\": \"prdt4lrege258hqy1j4tmuphcmhadatv3nlejqrbm8qj3fed8xuasn83bd5juavg44htgia7rmm9fzl1zpj6amu8hd1ll9cd62gl3908olz8atajq38u2vzfxlcac826jpytusngzm5zen6u2xdjj5cd3f63300d\", \n\t\t\"user\": \"zeb9zz36h9owfea4i3grjmfpoj0v6svjc5yz7m83mb9ic0seko43u7ksvhojami8ukdqzoshkyqbzzob656mfrsqjnmu3s81ltg9lpngboez4jie309qkczfktvlt830a4du54n44evswln1yfnmz2n2coisawvhia1r02n0g8jpbwerp7deskchvkgavjz4cfv76fkzfuzzll51wd2yyhggs8gbdbcpkjn9222g4uig1k0e122jwjnyu76efj7\", \n\t\t\"startAt\": \"2020-11-04 04:06:00\", \n\t\t\"endAt\": \"2020-11-03 18:30:55\"\n\t}, \n\t{\n\t\t\"id\": \"60582e71-ac93-4c82-80cd-ca6262783900\", \n\t\t\"tenantId\": \"04a73401-f621-44cc-9c69-6b256fc42e1d\", \n\t\t\"tenantCode\": \"dseudfj4bqzqppsitut22apwmzfsf8ucl2kxz19kbdb3adgdv6\", \n\t\t\"systemId\": \"df6d16ed-68ee-4f43-9e74-68e1cfae1f44\", \n\t\t\"systemName\": \"g7dyctasvby7xjnsrzj2\", \n\t\t\"executionId\": \"047f6dd1-d822-4a1e-9790-dbb730fd0e20\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 04:57:49\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 09:49:45\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-03 19:50:25\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"name\": \"2s7tau0vwjr2japdbrw7obmbaet1w86nftxbnezj12ay67tysu4s7spufiaw8e4g11t3l1mvaj0c8ebzb2plbrexhdev6pm7x1arsc329c3igsy2gchj8mnkvnb90rcwsgss455v99fvbuze15gnv46bow0ve8kfaiyo8bunjycxww3b1toiob38d5vto4fp78rylwcyn41jbxzhwid5rkm8yiye3uhrwdw2pwjwhoqgdntq1x3r7ocmumabxbi\", \n\t\t\"returnCode\": 7168552945, \n\t\t\"node\": \"wzg4wt3cbphhv9nbdi1hqex3kluv3cxck6pscjzlwlplt5ar8rmu6yfh0pzp09zk56p0tj1yugtr6tdvfkeka7h1sc30qsq6rt987nl8g9kgu1wwew967xpctxsegn41jce66gsp9li79gqjfjd3j4nkpibzmjv1\", \n\t\t\"user\": \"yc3lj2xffep8mxszuqo9iqyqh2j7c6uwf1tetsp4wec9rji42t6rj3yfuaz2i5ve3j3588kuxndsuve20huekz7mk2vsu3lko5tos9rkbb92mdm6hv2v8c4yyw2fbsf23o5ywguq1u5cy3bxkr18m3ic7zc0qoj6i6bhe4l68eo6gjdmux6kvb242ki507rbychdz5qnp6jnfra8ez1tgqllael4t42xj6w7wdlrdn52w36lnnbh0ki76pzy72n\", \n\t\t\"startAt\": \"2020-11-04 10:38:56\", \n\t\t\"endAt\": \"2020-11-03 22:14:00\"\n\t}, \n\t{\n\t\t\"id\": \"344f0928-6580-49fc-be5a-2921566670ba\", \n\t\t\"tenantId\": \"e6bdd361-3f49-4d6c-b977-b4cea18f1598\", \n\t\t\"tenantCode\": \"nah4gfhdalyj1lxn148wd086vxti95s8d7wca5z68gtlk5v3s8\", \n\t\t\"systemId\": \"1b17ec11-65f7-44df-b004-ec04bb32e769\", \n\t\t\"systemName\": \"fwpbelhqtzy16uxxk6te\", \n\t\t\"executionId\": \"afa7050f-0e43-433e-9f9d-8962a1dc3c00\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 11:19:37\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 02:42:44\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 04:14:34\", \n\t\t\"status\": \"ERROR\", \n\t\t\"name\": \"rs8grk8sy8mp73o3cqos8zydf2yanym1n9r1hmip4uacyhqj3vocuat3z2ye5vvwxo0lmlwuubsrwhufuyuoqkf5mhyju9ttq8qqotpq7b98ny9iyqgec4djlumnqfksclr4jlojrrap7d29hmmqula45luyn4c6sjfcqzwf5xck3senfn353dsjfasjmytlldnmakg07o80i73l1rwe7otc4jqf4m8bijm0vcqrlthe2hu67nksihm24tars0g\", \n\t\t\"returnCode\": 5812345924, \n\t\t\"node\": \"ki57nglu4ye1uq3ca513vd86p7wraflgtdzxg93kuxuhdv9md1ml2c8foygy6bahpn3e9nz1gwtfqy5069vjt6yxyvhizgw0irb3vkdnynmdav32jzc0e4tp4jgww5xdbj0wchkhj5xo4s8cjrfue7xt2v0wywtt\", \n\t\t\"user\": \"o7yrfk585hnayxxrhawma7o2c2c38o9r9qtxzkpd8tilwnowxk1mzvkamuzbiditht5xfz1rtddsn8b1nyxajxym8o98xzhzf4g9wyyanvnifkav7k6tuylm78ut3wyfexokot18jc78ofn755n961iz7jlxawszi43w1234p1mvaoefrld1ai0lybtmv55fk1wf96i2dh12bejg9o7tfz343rtpkhl2kptc3jrjnej3whoa9bru16pbimumtbq\", \n\t\t\"startAt\": \"2020-11-04 12:25:58\", \n\t\t\"endAt\": \"2020-11-04 14:33:36\"\n\t}, \n\t{\n\t\t\"id\": \"90ab9c2f-c110-481e-869a-22bdf6facf6e\", \n\t\t\"tenantId\": \"5cb6b6f2-6847-4e95-84d5-5696e72d842d\", \n\t\t\"tenantCode\": \"fbjlrm6p4tk2g51wi1lxbtv29gky56x9tjdtmhbfyhy6kr6f7y\", \n\t\t\"systemId\": \"c992e45d-3aef-42ff-86e5-6a6714a34968\", \n\t\t\"systemName\": \"lq4mc1hfm7lt0aav9pec\", \n\t\t\"executionId\": \"9b07a400-5bdd-4437-97f2-f9e940f32235\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-03 17:44:18\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 21:50:27\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 09:07:49\", \n\t\t\"status\": \"ERROR\", \n\t\t\"name\": \"n4qygh6u2ntu8cbczl3n61uljxfy5pzw2kwbefc24la1v041tnpxz7s6tw7mzuhcn4w8wdee068usl7o2j6dbgm8scvy7ri8p4560joup1l9it2stwe90r25rmk0ipjl3wrgfyr7qxt6rx2vair67wbzwlios10ce8jarzabm5rwnul8lf9oa70087k1kuojcjsi8i4cvuh5kvz7gpqlu3a7f07nw2703mkkw8q0dw0ggn7rzl09gdn5bfya62v\", \n\t\t\"returnCode\": 8566105911, \n\t\t\"node\": \"bk09hpbdi58j65wl89xfxqkebpxi2i1y9jj8uynr7dtjicjg2s9y5aum73h3l4d2vk1qmsi487dcf2j5ys792i7ngl3laxbwflcwnyo08y02tpg9lyz3twlsxlhtso8pdmexmj2jqxcnpkoa2m6mtbwt1x42xm6h\", \n\t\t\"user\": \"qpfzg84r70r69b85k2t7lqolws2qk2o0oz3hs3xk868qt0lyh9p7h5296q48mq32v6rnu7vybob78bti9uj9qyh7bgp7pua4bv74ch8odn9112s6i6joopf931ug7p5a3g9wisjz4tw1ft2t6zd9niii4g20sk2y39jepm7ni162z4c1i1tigszl4lanzmgxgyz83efqvxinyqy1ol50bpwu9rcavkvllgc7qnrioo4nxwwfl75sit2wbbgfhra\", \n\t\t\"startAt\": \"2020-11-04 11:26:43\", \n\t\t\"endAt\": \"2020-11-04 00:35:16\"\n\t}, \n\t{\n\t\t\"id\": \"81a6a90c-0d01-466c-b550-9a95e01afa21\", \n\t\t\"tenantId\": \"f0a116ca-5984-4061-b511-84e9013e49be\", \n\t\t\"tenantCode\": \"uba8mu40ein1idted0jm3hf6j7db7kxohlrnanjqr9rli25d78\", \n\t\t\"systemId\": \"90430426-6e7d-466c-a735-3ee4a504b78e\", \n\t\t\"systemName\": \"s5ly44ftousyexn4l4fa\", \n\t\t\"executionId\": \"153c4f94-342d-4ff1-be03-47867ff2872c\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 13:07:46\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 12:11:43\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 09:19:58\", \n\t\t\"status\": \"ERROR\", \n\t\t\"name\": \"5xp0cxply7cinibad3isb52421shw6ai00a04ecd4vcduaekzo0dbn32rzn1qywhf40v4eakjjcgwkp8t8oy323ah1dh1jhc86fy1ftzmq79eioy0ejrpighw7g3nj5xlsdxu4uxao29qgvq87see9hdzhgcs8e0k1qhel6z81ft5wi671i3palb8k90evjbq8zxdf3pxqfctiwu88z5ww5qg1ckjha008xw7xd6gtvbfubke2a4tlsezbegy6e\", \n\t\t\"returnCode\": 9098090906, \n\t\t\"node\": \"puj0an2t6obahtio54mpfml6sxlqbwm1ihdfwe3hfwj0ndhj6vmi74w091akj35qurkbso1r5hx2pl211daanz9i0efpykmoou9nzkjwphru1tt5k6iu37n2njxu1m1yd3ayo4jdix36nmrlj1k19xlraowxkk3k\", \n\t\t\"user\": \"25g5dnk9164iy39jhk21eoes5o5jkivv7vcr6n0b278qken6ke89476qj7e86x86rk1h4r6phmd8eh7oz5zr4r7gzwthdo6njtpi55iv1xoz2p5ugqivfsmj3uy0quqvco4fcbnm6wxeh67woq0dhj9b4cfn0ce8uz38u8d1598dfe8mkhzlhus1i38kdel29ghszajoyahm1pj872ylk0px0kdkvd2eda0ov8e8n7zcol08ruoq4a07oe762wi\", \n\t\t\"startAt\": \"2020-11-04 02:33:28\", \n\t\t\"endAt\": \"2020-11-04 11:51:00\"\n\t}, \n\t{\n\t\t\"id\": \"d950f097-fdd5-4fb0-a79e-14bc817074af\", \n\t\t\"tenantId\": \"95af40ad-017d-4921-af45-d38779d6a60a\", \n\t\t\"tenantCode\": \"qqiu3iv2e48a8zh9xq4bosul010k8d8hu5zp84z54vxlmgq78r\", \n\t\t\"systemId\": \"a69c2376-dd04-454e-8c34-f0ed5bb60a6d\", \n\t\t\"systemName\": \"abv2a82ihfjwkhplr3dg\", \n\t\t\"executionId\": \"17bd42e6-6cea-467b-86f1-627ed96d3b64\", \n\t\t\"executionType\": \"DETAIL\", \n\t\t\"executionExecutedAt\": \"2020-11-04 07:59:28\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-03 21:12:34\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-03 18:07:15\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"name\": \"iflee8nenn7uajedrkzomndeb0oes7oip444hxerj1om5lolmokh8iuisi9ibtbs8oobtxpzl2iebfdjb3i9op8tfpjostzrxk7ykphogwy7fu3s8iui367qywkag38danvasl8gu5e5v2c4dwurfkgg2gn2ut9p5qca80om7hs3549cwqivdh1kw8bipel0zht3icubdnwezljna708glyrx37kjhyet6kbs12gublvyixmnx4jvj5ntlh4lmz\", \n\t\t\"returnCode\": 5279698281, \n\t\t\"node\": \"56ew7n1hk1t8qwnc0edrua0ez2vtmw8zfjfbac6yv80nu2hix4nqixwm9mit246daauao4wc458ib1k2r0yyrw7sk9mf3kecrrqujnuaj0n6e3eitevxkyds9ibh53jijnv54inz83rwof6z146vnoxlvhpe0kmi\", \n\t\t\"user\": \"it2w74n24ldw5ap9pv8zdq70k9sxixwjamo75kjs0h1tptokspdlte72p6anwl6ohx4tnag9v2ug6btjldtooahd8c57jvtbvuewp67lmnw2hdn1jd8zut8ys2s8ifi93og9lp5u4a97yopqibs875dobpuiizwp8j2446wr67im3hez8ee0rye4hkejk3hq0bip1gxl36sqr4f09k9apbug6uh3oqv09ru1o6lofpln1tmjlyjh95ocwpxvs1a\", \n\t\t\"startAt\": \"2020-11-03 21:36:36\", \n\t\t\"endAt\": \"2020-11-04 07:47:55\"\n\t}, \n\t{\n\t\t\"id\": \"d6d307be-4d0d-4067-9c24-2683f08e6950\", \n\t\t\"tenantId\": \"d1cfd63b-d772-46c2-8ca2-f8c2c8088205\", \n\t\t\"tenantCode\": \"psvvq2i1ezu2p58zk4pvp2xmk129cn3b7tm1io42h3dp1hyob2\", \n\t\t\"systemId\": \"497d949c-3576-42a0-832e-29c819f7b005\", \n\t\t\"systemName\": \"jcb615splzxzl78oaop3\", \n\t\t\"executionId\": \"4b88aa90-2fcb-4dc5-a1cb-fb27b74b48b7\", \n\t\t\"executionType\": \"SUMMARY\", \n\t\t\"executionExecutedAt\": \"2020-11-04 01:54:50\", \n\t\t\"executionMonitoringStartAt\": \"2020-11-04 03:39:34\", \n\t\t\"executionMonitoringEndAt\": \"2020-11-04 02:16:16\", \n\t\t\"status\": \"COMPLETED\", \n\t\t\"name\": \"kngo7ydvz282xt4sxo8f42zz1xm2tlq9bwcekgw1v5kwhhneoj7y42lgpkqumzmmr88rbwfg9ebipfl1bbw7k596q3jno3jrtjptyja4527crubcmb89b48gjit1cjokaa4aqni6olpsoknomqshrhmdl0r873bfy2s8lz50vzyjfir3big5nd60cbfzm4uy0jf7yjv5qhlwaab39obd3mnfh149tnhmaewg6oa7gtaglw1kge2dlvcn861lkzy\", \n\t\t\"returnCode\": 5336662490, \n\t\t\"node\": \"9ct4v91j33e6pwgljlb41n9zy72cbz6u171tv2cmxi3g73ljncesiq7ijthggc1oyl4pcqalwh3iagw164f04s1gpobupoozlfhxmkxqn0q8abjie5pzmgvyy8n9ga7ggugb67qskogqdljik11gq03isqva283r\", \n\t\t\"user\": \"w6blqcjwvj6plvnnaumjnbqapctm0q87svf7zv8u59nys6owqz0lr7vhlzw8cxxv3mhcxcucdha391wmuihmxkocn1vhk950j6e2dlwq214ptotfcp44wmga2vgha7zy4049cowueoirrbtg75zjr96o3zpcg38f0cs3l89ohl8kt756lklcs7gx52qet7nrvuy5kqjwp9outbymqd136bbdc0e7bygjm2lt55pr93gvm0fhfzerfepipbfguit\", \n\t\t\"startAt\": \"2020-11-03 23:11:18\", \n\t\t\"endAt\": \"2020-11-03 17:57:34\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/jobs-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"jobs-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/jobs-detail/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/jobs-detail/paginate",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+                        "jobs-detail",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/jobs-detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"59bc6db6-c0c8-426f-92ba-e613bfe82c1e\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/jobs-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"jobs-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/job-detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"59bc6db6-c0c8-426f-92ba-e613bfe82c1e\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/job-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"job-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/job-detail/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/job-detail/59bc6db6-c0c8-426f-92ba-e613bfe82c1e",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"job-detail",
+						"59bc6db6-c0c8-426f-92ba-e613bfe82c1e"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/job-detail",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"59bc6db6-c0c8-426f-92ba-e613bfe82c1e\", \n\t\"tenantId\": \"663c7366-2bf7-4aea-a315-a14e6e79133f\", \n\t\"tenantCode\": \"9x573loa4ot7597vvhmleo466ihv3q67r0tkqihjmomgk9zgpf\", \n\t\"systemId\": \"9349fb9b-9d37-4e1c-95fa-3e769d83edd6\", \n\t\"systemName\": \"jby8y4sdnfzk3t8dgbgb\", \n\t\"executionId\": \"5c4e462a-7119-4fab-942a-b0777c7ce8ad\", \n\t\"executionType\": \"SUMMARY\", \n\t\"executionExecutedAt\": \"2020-11-03 22:28:08\", \n\t\"executionMonitoringStartAt\": \"2020-11-04 07:53:56\", \n\t\"executionMonitoringEndAt\": \"2020-11-04 01:37:27\", \n\t\"status\": \"CANCELLED\", \n\t\"name\": \"zmz2vhq1logao2verd8hkf6gr22m7izl5lr376520ju4h0ugtcbasgozks3iotcc9rcash39lbkynohyulvp1g9xzua6wm69ijxlga0gu1urn5f2u0mlfno4wscrmhrc9mlsy495mfi9hsowi2c1pjn2mj905xzo8w1cscfb40qwhgwo8jxtxd8xdagxweavafzjscaqh061t1lu8t8fpq3hpvb6owsb351yk9ktd4astfd5j7fqwedr10a1fke\", \n\t\"returnCode\": 1211127347, \n\t\"node\": \"enuigsc5uiy3scmyh614i9ip1x2yhp9disl8kbjx8sqc8b450byqxdwejdi66evtiak659zla5ewe3aru96mouacjqgp3b5mgkrxow6rgp2mv262fplkszw9mj611dv5j3y98e5zoyd0ym8hmffjpgjomsseeyro\", \n\t\"user\": \"ojq2w6vpf6d74ilkgtmlxq8wwjoic3ttpa4dfuxjhlfce6wz7laiosjthsgfkyb0l5z8nyigdmjxh3x5scykzovkcpmgwuz3itexjtpsf6741prtzf7e7ys4ifa4v4ulq1iubpe3fvcbiig5jsfclycsx7z69qnxcff1wgypg6yf7ahrdckni7gntu4c0i8jxc7ba100s4hl6yh0ac6x25mu4limkky2hjr81mh5h584hgh804e4zxek38tewhq\", \n\t\"startAt\": \"2020-11-03 20:08:41\", \n\t\"endAt\": \"2020-11-04 11:04:35\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/job-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"job-detail"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - cci/job-detail/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/job-detail/59bc6db6-c0c8-426f-92ba-e613bfe82c1e",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"job-detail",
+						"59bc6db6-c0c8-426f-92ba-e613bfe82c1e"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - cci/jobs-detail",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/cci/jobs-detail",
+					"host": [
+						""
+					],
+					"path": [
+						"cci",
+						"jobs-detail"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "a62ef79f-324f-4dd9-b4b3-12c6dd69220f",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

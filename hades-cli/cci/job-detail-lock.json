@@ -3,27 +3,27 @@
     "files": [
         {
             "path": "src/@hades/cci/job-detail/application/create/create-job-detail.command-handler.ts",
-            "integrity": "sha1:a9787701c4ab13868144cb774ce64d260f7d2bf8"
+            "integrity": "sha1:4dd325d2411f72bef071f9539b7f545112cf5d0d"
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-job-detail.command.handler.spec.ts",
-            "integrity": "sha1:0ea66ebee6d5e1612c926ea95a1313119f0adbfc"
+            "integrity": "sha1:e09de93b00162b471b1bfc8d4db2c701fef01655"
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-job-detail.command.ts",
-            "integrity": "sha1:9060f8f81c4c298db69dc9eb51448da08dd491d0"
+            "integrity": "sha1:d86aef405e046662b1f20d4d86b3de955648946d"
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-job-detail.service.spec.ts",
-            "integrity": "sha1:941b997efe7e45c43987ec4cb1e74fe0cc1c184d"
+            "integrity": "sha1:f6d78f5f05d9b2cc112dba0e2e66628faaa6fea1"
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-job-detail.service.ts",
-            "integrity": "sha1:8ec400a44dc4810cb57fa81251898b2ab3acf5cc"
+            "integrity": "sha1:469144772f0559ebf4c8ee03c5758b99a8d5cb82"
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-jobs-detail.command-handler.ts",
-            "integrity": "sha1:4a43bf8e71f0217e16b4e94de9d2ea8f5398a38d"
+            "integrity": "sha1:2bf4b6efbc6f2e6b98035c38f1ed8a04a8ae8d84"
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-jobs-detail.command.handler.spec.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-jobs-detail.command.ts",
-            "integrity": "sha1:972e397a87639d2e695e9b1656326f28d9dfde71"
+            "integrity": "sha1:d9ea1dcb4622e47ec925ea0fcfc6d781874748b7"
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-jobs-detail.service.spec.ts",
@@ -39,31 +39,31 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-jobs-detail.service.ts",
-            "integrity": "sha1:5c30239260e8993c1ea1bef6614e4f8065a25112"
+            "integrity": "sha1:e1b83d007f2fc286da1ae88f9dae7e57b68abfd9"
         },
         {
             "path": "src/@hades/cci/job-detail/application/delete/delete-job-detail-by-id.command-handler.ts",
-            "integrity": "sha1:4fa55d1d7c5d74dd02df253ec76a500e4f16d58d"
+            "integrity": "sha1:6ec71895552b458641663458da2f4db1d57ae3d7"
         },
         {
             "path": "src/@hades/cci/job-detail/application/delete/delete-job-detail-by-id.command.handler.spec.ts",
-            "integrity": "sha1:a2614694fdeb4dcbd360675f5808485f0ace6d9e"
+            "integrity": "sha1:9a03621b4e2f847d6ae5fa04b0c10450f957ac23"
         },
         {
             "path": "src/@hades/cci/job-detail/application/delete/delete-job-detail-by-id.command.ts",
-            "integrity": "sha1:d529f17d0571052f3eded6c9a78b80cf0100a02b"
+            "integrity": "sha1:2fd754c0d545d14adff298086fa4d6e3427ee318"
         },
         {
             "path": "src/@hades/cci/job-detail/application/delete/delete-job-detail-by-id.service.spec.ts",
-            "integrity": "sha1:a358991cac9c4892effc6ebf98addd893b056278"
+            "integrity": "sha1:9cd23e788ba59db86924daa5e0b5644804a8f92a"
         },
         {
             "path": "src/@hades/cci/job-detail/application/delete/delete-job-detail-by-id.service.ts",
-            "integrity": "sha1:b2f93593ef3d8a90f27f23ee500c0917e54d9419"
+            "integrity": "sha1:5d0126c182b8fa6bd44a539d993943b481d4d798"
         },
         {
             "path": "src/@hades/cci/job-detail/application/delete/delete-jobs-detail.command-handler.ts",
-            "integrity": "sha1:57106e3f26cca9e656abf9287d2822a505024fd1"
+            "integrity": "sha1:cbd093ed7c2a435cc61e62800ad90223661da7ff"
         },
         {
             "path": "src/@hades/cci/job-detail/application/delete/delete-jobs-detail.command.handler.spec.ts",
@@ -71,7 +71,7 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/delete/delete-jobs-detail.command.ts",
-            "integrity": "sha1:cedde6d7deab6c2fb0ddf224cd0d5baac72499c7"
+            "integrity": "sha1:39a21e9a2aca05ef19225683bfe7986abb3e2b9f"
         },
         {
             "path": "src/@hades/cci/job-detail/application/delete/delete-jobs-detail.service.spec.ts",
@@ -79,23 +79,23 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/delete/delete-jobs-detail.service.ts",
-            "integrity": "sha1:7cf2c0fe64cf80cbf13ec01e833dd4fc30aaa76f"
+            "integrity": "sha1:41cf601fa29565c10dab8b5c6026bbf64f9ab5e5"
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/add-jobs-detail-context.event.ts",
-            "integrity": "sha1:ce306a5f92bc0a9e6fa0c57293786eb86ca33645"
+            "integrity": "sha1:ecdee98754cbbadaf7cbe8fa2fec085411ec0c2f"
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/created-job-detail.event-handler.ts",
-            "integrity": "sha1:85bfeebb8586d1fc9b657837491bab744d07fde1"
+            "integrity": "sha1:9b7d86a3e56a512a8ea4af42e6e2466bd85fa5d0"
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/created-job-detail.event.ts",
-            "integrity": "sha1:c03c392176328bed843d24c438e6b55377529f38"
+            "integrity": "sha1:e216ce4d9d98cd2daf180a94e307a7f4d3830d73"
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/created-jobs-detail.event-handler.ts",
-            "integrity": "sha1:05c2b6fa9fab5e1fe5a043933c901b19361ce4a7"
+            "integrity": "sha1:34c56cc8654845271b994007c458c697f1c7fc06"
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/created-jobs-detail.event.ts",
@@ -103,15 +103,15 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/deleted-job-detail.event-handler.ts",
-            "integrity": "sha1:f5e99b2d149f5d38a1ae079577450a6e8fd9c796"
+            "integrity": "sha1:b4afbc2b294e83c144cd7132f237340542c8f884"
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/deleted-job-detail.event.ts",
-            "integrity": "sha1:9d243843b1fcaad17f50451e6768d5b17f37e823"
+            "integrity": "sha1:3b73322880921c016903dba2396423e62a6272f5"
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/deleted-jobs-detail.event-handler.ts",
-            "integrity": "sha1:b52f9e6b1c35f02d10f157a16eaf805c28fcb091"
+            "integrity": "sha1:2659122998d672588fedc2ab48d7d4693017c2b3"
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/deleted-jobs-detail.event.ts",
@@ -119,35 +119,35 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/updated-job-detail.event-handler.ts",
-            "integrity": "sha1:6723f2e51d02a9fa974aa746c83b01a4086428d5"
+            "integrity": "sha1:35e9a8e210211230157fa43f34a831e96804d171"
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/updated-job-detail.event.ts",
-            "integrity": "sha1:69f3359b298e10560f34e0e661fc08f84c27e59f"
+            "integrity": "sha1:30304344266acdc390ce71df289e613e96381894"
         },
         {
             "path": "src/@hades/cci/job-detail/application/find/find-job-detail-by-id.query-handler.ts",
-            "integrity": "sha1:29837cca3eceaa8c5fe6e37d13c10579571ad5c4"
+            "integrity": "sha1:e8116c158dbcf96d9f15ea85ea8d87a26404648a"
         },
         {
             "path": "src/@hades/cci/job-detail/application/find/find-job-detail-by-id.query.handler.spec.ts",
-            "integrity": "sha1:3e2951c8a3b95800f9bd8e76ea10bbed3ec13209"
+            "integrity": "sha1:0afe27c3359499fc663119ba94ecec99f92fbf3a"
         },
         {
             "path": "src/@hades/cci/job-detail/application/find/find-job-detail-by-id.query.ts",
-            "integrity": "sha1:adab4e10c7be65bbfac528914cf59cb832d2ea6c"
+            "integrity": "sha1:e2be2ddb7c9f217a18dc93c7526707f2700193f9"
         },
         {
             "path": "src/@hades/cci/job-detail/application/find/find-job-detail-by-id.service.spec.ts",
-            "integrity": "sha1:2a9590ed62077c6c611c6c88315314b94f13fe61"
+            "integrity": "sha1:bf93cb22d3c4f8d771b621b9dda094575e6e94b9"
         },
         {
             "path": "src/@hades/cci/job-detail/application/find/find-job-detail-by-id.service.ts",
-            "integrity": "sha1:572411b4042048b774515dcbda940cbf4ed492ca"
+            "integrity": "sha1:8ad4f3533d0004411964c04fd3162934dffa85f4"
         },
         {
             "path": "src/@hades/cci/job-detail/application/find/find-job-detail.query-handler.ts",
-            "integrity": "sha1:81bc052c577ec63c18808800c32f5466329bb04f"
+            "integrity": "sha1:41f9eb43fb296a20893b17ba3f44fee2501fd7ca"
         },
         {
             "path": "src/@hades/cci/job-detail/application/find/find-job-detail.query.handler.spec.ts",
@@ -155,7 +155,7 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/find/find-job-detail.query.ts",
-            "integrity": "sha1:346ca421f2b2ebe48dac2d92bd818b2262079f90"
+            "integrity": "sha1:79fddbfd91fccc8f806865364f47102b5fb9325b"
         },
         {
             "path": "src/@hades/cci/job-detail/application/find/find-job-detail.service.spec.ts",
@@ -163,11 +163,11 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/find/find-job-detail.service.ts",
-            "integrity": "sha1:4498908116be71da328f0131939fd4a392865d02"
+            "integrity": "sha1:d0f199003418fba1600611c8f03ac70e3cf94ab2"
         },
         {
             "path": "src/@hades/cci/job-detail/application/get/get-jobs-detail.query-handler.ts",
-            "integrity": "sha1:044f16450d2be19e7c36da6af79b09a74d0fabc0"
+            "integrity": "sha1:e0c253d0bebebd3ac006c77230a2f4c4159f6408"
         },
         {
             "path": "src/@hades/cci/job-detail/application/get/get-jobs-detail.query.handler.spec.ts",
@@ -175,7 +175,7 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/get/get-jobs-detail.query.ts",
-            "integrity": "sha1:33bcf03f75ef3b3558cfcc852f2079f5a896cf2d"
+            "integrity": "sha1:f5b7fa15d2bfa8398640f384c6bb2e2b3d599315"
         },
         {
             "path": "src/@hades/cci/job-detail/application/get/get-jobs-detail.service.spec.ts",
@@ -183,19 +183,19 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/get/get-jobs-detail.service.ts",
-            "integrity": "sha1:12733eead245f3c69407c4e59471491524b1de4a"
+            "integrity": "sha1:b103cf5a520e5e2b199530d4ab1558d5ea86dae4"
         },
         {
             "path": "src/@hades/cci/job-detail/application/paginate/paginate-jobs-detail.query-handler.ts",
-            "integrity": "sha1:4636fb1adf516f2eda4690e2d3fff73c7f0e975d"
+            "integrity": "sha1:9a5ee29dc9f61d4f99d11e5954642624c6fc6d09"
         },
         {
             "path": "src/@hades/cci/job-detail/application/paginate/paginate-jobs-detail.query.handler.spec.ts",
-            "integrity": "sha1:16fda0ba6c5b75c74e01fae9e5ce338642da05e4"
+            "integrity": "sha1:a4a3175d4058eab1c9d383b625620472905f2c02"
         },
         {
             "path": "src/@hades/cci/job-detail/application/paginate/paginate-jobs-detail.query.ts",
-            "integrity": "sha1:f9f36bd888e35c2d2fff8a93825c3586ddf31b17"
+            "integrity": "sha1:8043d4512c0d8c93a15ee0046681225b9ed5f8dc"
         },
         {
             "path": "src/@hades/cci/job-detail/application/paginate/paginate-jobs-detail.service.spec.ts",
@@ -203,15 +203,15 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/paginate/paginate-jobs-detail.service.ts",
-            "integrity": "sha1:99dec4f2208751a09f23116577cb55ffcb5bc9b3"
+            "integrity": "sha1:f6e68bb5942b63214ad36d5557569cbbf5f7dae5"
         },
         {
             "path": "src/@hades/cci/job-detail/application/sagas/job-detail.sagas.ts",
-            "integrity": "sha1:c3bf434d238063e7a8b07d04b853ed57e99c7fa2"
+            "integrity": "sha1:70994377c4c8efc294d85d680e7c52f8f3d8e679"
         },
         {
             "path": "src/@hades/cci/job-detail/application/update/update-job-detail.command-handler.ts",
-            "integrity": "sha1:29a08abf1965217860b0c085d9141ddd7e5944b8"
+            "integrity": "sha1:3addb6d6654375a4918a4446d0f4d4bbd36dd244"
         },
         {
             "path": "src/@hades/cci/job-detail/application/update/update-job-detail.command.handler.spec.ts",
@@ -219,31 +219,31 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/update/update-job-detail.command.ts",
-            "integrity": "sha1:b3de58ab4adc6398cb9ab2b006774752276ce159"
+            "integrity": "sha1:f908805667ce1b84dc6aa1530e5ac93c5a6d3d37"
         },
         {
             "path": "src/@hades/cci/job-detail/application/update/update-job-detail.service.spec.ts",
-            "integrity": "sha1:3f9b093c87fe8efca0943f4db3a7afee48187fa4"
+            "integrity": "sha1:a455dd55cb273057f762906d91d64f6aa151064f"
         },
         {
             "path": "src/@hades/cci/job-detail/application/update/update-job-detail.service.ts",
-            "integrity": "sha1:6138eb1b151d070846c78ac4385b6be69fea1d0f"
+            "integrity": "sha1:bffee686527e2a9e03ac130a1dde1471a2d64fb9"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/job-detail.aggregate.ts",
-            "integrity": "sha1:ca1958934d0eae0899342a38af78c842950d40f7"
+            "integrity": "sha1:8ae1816ae1a42ddbc8d54966d44e01ced31a36b5"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/job-detail.mapper.ts",
-            "integrity": "sha1:80f15170b80282818c6880ac393f36e464bdcad5"
+            "integrity": "sha1:98a9311c8c45b337fb2d986b2720d5d9922cc975"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/job-detail.repository.ts",
-            "integrity": "sha1:759dd5f91ec3abdcbfe22fdbaa7ee34580b9f3f7"
+            "integrity": "sha1:a6d0d5dfb7c9bfa239d65e73f4c44d2bc39bc624"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/job-detail.response.ts",
-            "integrity": "sha1:f568e906d866b79221e7a6b9b01075e53d3ae12b"
+            "integrity": "sha1:80fad5889cbf4707cfe5a8a2c9c3319c7d84a9ee"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/index.ts",
@@ -255,263 +255,263 @@
         },
         {
             "path": "src/@hades/cci/job-detail/infrastructure/mock/mock-job-detail.repository.ts",
-            "integrity": "sha1:95c9756758f445d10da9ecd4f4e17b6d4d6dda07"
+            "integrity": "sha1:88f902524e43236f1c3ee7d441db1f6b0894f9e8"
         },
         {
             "path": "src/@hades/cci/job-detail/infrastructure/seeds/job-detail.seed.ts",
-            "integrity": "sha1:2bfc323cbc25ec41372c421d428bb64af104f06e"
+            "integrity": "sha1:0606c55e2b4e07022e474f462162788ebae3dfa5"
         },
         {
             "path": "src/@hades/cci/job-detail/infrastructure/sequelize/sequelize-job-detail.model.ts",
-            "integrity": "sha1:db44a5eac32a2cf45725e69a5f445680c173de27"
+            "integrity": "sha1:fe33a98f9a815c9f84531807e86e8564caa990f9"
         },
         {
             "path": "src/@hades/cci/job-detail/infrastructure/sequelize/sequelize-job-detail.repository.ts",
-            "integrity": "sha1:a74f972cba528a6da62afbc1ab0fc3aff57291c6"
+            "integrity": "sha1:47783a413310670e534242730fd2750597cad636"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-id.ts",
-            "integrity": "sha1:cec73ce9a85db9bb05f2f0ac4968c8e4c1ff2203"
+            "integrity": "sha1:ccfd667d5054d4497d5ac6fda36fbeb9a62bdab9"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-tenant-id.ts",
-            "integrity": "sha1:48e8921bf375b61ca4959bbdda435413f97f3708"
+            "integrity": "sha1:803f4ac61a99360437ebc6eb32253e2a4b29cdb1"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-tenant-code.ts",
-            "integrity": "sha1:1dc14e69a48506f8c34370b9a42e82a4c7331d23"
+            "integrity": "sha1:a64c7ade0875c7a650c6ddb0229b0f93445ecd81"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-system-id.ts",
-            "integrity": "sha1:a601bf5cb7687dfc713b183d423706465a12abf4"
+            "integrity": "sha1:9e6721afe983400fb9a58f0acceb7abfc6f2a245"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-system-name.ts",
-            "integrity": "sha1:a381ca08eee3504e9ee6fe72231e309b4b33f2fd"
+            "integrity": "sha1:864874245102019692021d981aa2c8443f5702cf"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-execution-id.ts",
-            "integrity": "sha1:9237eda375381c60fecf458cf1f55d570840e7e0"
+            "integrity": "sha1:13f311fd0a60941bc7cbe4fe085ca3ba07ca7b39"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-execution-type.ts",
-            "integrity": "sha1:d5974ee58b15b07a9226e28cef2bfcb3ce06a8d0"
+            "integrity": "sha1:ec6008985d93d42323e51169f9e276aed32e6bad"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-execution-executed-at.ts",
-            "integrity": "sha1:d2a71d39679223b0e84a220522dd27928eee68ad"
+            "integrity": "sha1:8aed8fdddf79cd84656fbecfe738849aab873495"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-execution-monitoring-start-at.ts",
-            "integrity": "sha1:0bd684a14d4d844fcd3c31cb7ed26b06936bbc7b"
+            "integrity": "sha1:e54f13aa2a36d8c9f9e557ae664e769dd584be3c"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-execution-monitoring-end-at.ts",
-            "integrity": "sha1:75c2d1ede191f30595ac5eaed894a0d772794a09"
+            "integrity": "sha1:82764e48a0ad0116cc66ff6baa3a6a9223009311"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-status.ts",
-            "integrity": "sha1:30f41454c9ebb9e398b28b31f5eb94387f675ce9"
+            "integrity": "sha1:c179df79bfa62f9c201a61efcd9ba7a85173e95a"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-name.ts",
-            "integrity": "sha1:5ea0341fc61a18ac4c7e46b700b8ba529ac8ba8b"
+            "integrity": "sha1:821f39c27e39f96d36b8e662abf4bea9f60bd083"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-return-code.ts",
-            "integrity": "sha1:79ebfdb4dd6b4ce234959e83fb3e3f8704462344"
+            "integrity": "sha1:4adf11d8a40debe0a5bdffd25c4b1652c064cc3f"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-node.ts",
-            "integrity": "sha1:33cd5974070f8fe7789641c30a19948b49074adb"
+            "integrity": "sha1:8a20d53bc215e5d2378b651c2fed5c8b1fd7327d"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-user.ts",
-            "integrity": "sha1:42891d72a712920b2c35cefa43841ac0e3205dd4"
+            "integrity": "sha1:5781d12443c180ce6e7eae2db094765d6feb658a"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-start-at.ts",
-            "integrity": "sha1:4364a3db3c9125a2492d523f794d58e76336f87d"
+            "integrity": "sha1:6071408efac36507a1e8d81b3cd5b0f49b65f289"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-end-at.ts",
-            "integrity": "sha1:4161a880dbc686b325e16a36b6de80656e98932b"
+            "integrity": "sha1:d9b65b38e937e4bb3ee9d2bc252c2d030fad94a9"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-created-at.ts",
-            "integrity": "sha1:e8565eac0dc015a247424aec8c3827e9baadc10c"
+            "integrity": "sha1:b70752e289db1900b1cdea9c2acf0b957bc02906"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-updated-at.ts",
-            "integrity": "sha1:978dfbe5cdd912b58d924d2c8f4f4a583c74acb7"
+            "integrity": "sha1:d38eadf11ac62e196816089504f411834ae07779"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/value-objects/job-detail-deleted-at.ts",
-            "integrity": "sha1:876362ba62b3881fc44376ae26b1151757dd246a"
+            "integrity": "sha1:6fd1085125414aa31f78ec039c47e62139e7dfe0"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/create-job-detail.controller.spec.ts",
-            "integrity": "sha1:27f5b8c1f5c2831673c0145a7a1b0c961603085f"
+            "path": "src/apps/cci/job-detail/controllers/cci-create-job-detail.controller.spec.ts",
+            "integrity": "sha1:1b9b8c2af403d539fa7b5bc918f3dac553c66f1a"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/create-job-detail.controller.ts",
-            "integrity": "sha1:ad8782376bb9c43593e77cda54ffb9e3f0113b14"
+            "path": "src/apps/cci/job-detail/controllers/cci-create-job-detail.controller.ts",
+            "integrity": "sha1:d10f572dfa5dbfe42e976742dbbd5865c209b79c"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/create-jobs-detail.controller.spec.ts",
-            "integrity": "sha1:a408496bb98db05c230ade8514f0073fdc2d2ada"
+            "path": "src/apps/cci/job-detail/controllers/cci-create-jobs-detail.controller.spec.ts",
+            "integrity": "sha1:748fa622320c620632f31b7ec76d7305abbf361c"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/create-jobs-detail.controller.ts",
-            "integrity": "sha1:839b18313c95c167d10c10d3b28f355ea0f3c934"
+            "path": "src/apps/cci/job-detail/controllers/cci-create-jobs-detail.controller.ts",
+            "integrity": "sha1:29c724eba24455a2154ce22314b3c03f78966876"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/delete-job-detail-by-id.controller.spec.ts",
-            "integrity": "sha1:062ce01d8b6e6c44181d1293efbfd254d0ced0fe"
+            "path": "src/apps/cci/job-detail/controllers/cci-delete-job-detail-by-id.controller.spec.ts",
+            "integrity": "sha1:abd632010df4ac8ffb6cca162ccc1068d468e929"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/delete-job-detail-by-id.controller.ts",
-            "integrity": "sha1:db1281660741e299684f309685fab2cd87eaa3eb"
+            "path": "src/apps/cci/job-detail/controllers/cci-delete-job-detail-by-id.controller.ts",
+            "integrity": "sha1:69e2013284843f8499df266349df1a66ef1365ef"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/delete-jobs-detail.controller.spec.ts",
-            "integrity": "sha1:50737fb702f6c9cbf845d18ee4d5964fb9bfda19"
+            "path": "src/apps/cci/job-detail/controllers/cci-delete-jobs-detail.controller.spec.ts",
+            "integrity": "sha1:a20b23523e124f3426db9c3ef5b47c08a1183e04"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/delete-jobs-detail.controller.ts",
-            "integrity": "sha1:a3071dc24d4324faa8fc8d3c1d65dbfb95ccb5ca"
+            "path": "src/apps/cci/job-detail/controllers/cci-delete-jobs-detail.controller.ts",
+            "integrity": "sha1:1575c149704dc07192af150c0da2dada15debc4a"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/find-job-detail-by-id.controller.spec.ts",
-            "integrity": "sha1:37bcd8923d32c3c923ceeeb893410064f426fbe6"
+            "path": "src/apps/cci/job-detail/controllers/cci-find-job-detail-by-id.controller.spec.ts",
+            "integrity": "sha1:84b747fb5d3b2923cc71513f1244a152e2a898f8"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/find-job-detail-by-id.controller.ts",
-            "integrity": "sha1:db60e8021b2390797aae66e1e84a20c8e0459c02"
+            "path": "src/apps/cci/job-detail/controllers/cci-find-job-detail-by-id.controller.ts",
+            "integrity": "sha1:f51f80b6a216da11087465cb291f0b6cce616238"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/find-job-detail.controller.spec.ts",
-            "integrity": "sha1:fafa285a64f87f685a503b19ebbf4708b66128aa"
+            "path": "src/apps/cci/job-detail/controllers/cci-find-job-detail.controller.spec.ts",
+            "integrity": "sha1:5d4a703fe5fb8188413e42947c2f418cb75a18ce"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/find-job-detail.controller.ts",
-            "integrity": "sha1:5493f75340bc50afbf699d4e8f6d73ac24fc52d5"
+            "path": "src/apps/cci/job-detail/controllers/cci-find-job-detail.controller.ts",
+            "integrity": "sha1:fb9ad6de885d88f07c597af083a83649d61f4063"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/get-jobs-detail.controller.spec.ts",
-            "integrity": "sha1:80257170654a386158d51733e3b163389898211b"
+            "path": "src/apps/cci/job-detail/controllers/cci-get-jobs-detail.controller.spec.ts",
+            "integrity": "sha1:e9c798d5eb404c195efad961206ce1bd751d101f"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/get-jobs-detail.controller.ts",
-            "integrity": "sha1:eef9c4b9365c6e7fbb29cb0d1b27a94e619de452"
+            "path": "src/apps/cci/job-detail/controllers/cci-get-jobs-detail.controller.ts",
+            "integrity": "sha1:ea3f912a5de9257fb9eaf80dca88cf89249bf136"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/paginate-jobs-detail.controller.spec.ts",
-            "integrity": "sha1:d914e194b1288cadc6651ace19f838640b3a864c"
+            "path": "src/apps/cci/job-detail/controllers/cci-paginate-jobs-detail.controller.spec.ts",
+            "integrity": "sha1:e1a45b73920536ed02c8afe34c3d36ab422f77b2"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/paginate-jobs-detail.controller.ts",
-            "integrity": "sha1:a8001cb0bb144a863a5c3fc29b07c09ce45d1c88"
+            "path": "src/apps/cci/job-detail/controllers/cci-paginate-jobs-detail.controller.ts",
+            "integrity": "sha1:be214a33bcec07816ea0e03335718536e44a9bae"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/update-job-detail.controller.spec.ts",
-            "integrity": "sha1:2ec5954779e8772af8345583489131cfeecc8ba3"
+            "path": "src/apps/cci/job-detail/controllers/cci-update-job-detail.controller.spec.ts",
+            "integrity": "sha1:5e9db6d9ec1337ca64f9dc506f8ff6db648ed9dd"
         },
         {
-            "path": "src/apps/cci/job-detail/controllers/update-job-detail.controller.ts",
-            "integrity": "sha1:3f2fb3eab00836e787787169cdbeb3476a167a80"
+            "path": "src/apps/cci/job-detail/controllers/cci-update-job-detail.controller.ts",
+            "integrity": "sha1:37b86994ffe5f6dd73f43a757de578640cce5e71"
         },
         {
             "path": "src/apps/cci/job-detail/dto/job-detail.dto.ts",
-            "integrity": "sha1:7fad0c2f7d22e1f7faafa03bbd2e7817cdba4248"
+            "integrity": "sha1:6a5c75644b08309d479c091a007ee549f59d2c82"
         },
         {
             "path": "src/apps/cci/job-detail/dto/create-job-detail.dto.ts",
-            "integrity": "sha1:f1af9d3667eb99637760a469936881c1463234eb"
+            "integrity": "sha1:021410babe667021ee27f94a5b908224444a5637"
         },
         {
             "path": "src/apps/cci/job-detail/dto/update-job-detail.dto.ts",
-            "integrity": "sha1:fba0289c5a7255bddd24c354d111b4a3d19c3b76"
+            "integrity": "sha1:bf20d0be6b1453b686a8e96a7aaa6b2335f331d8"
         },
         {
             "path": "src/apps/cci/job-detail/graphql/job-detail.graphql",
-            "integrity": "sha1:32901056dca94c91849d1ddce24f700ffa1b4037"
+            "integrity": "sha1:715d4b79d6e59e3438af45113e9dc702bfd14228"
         },
         {
             "path": "src/apps/cci/job-detail/index.ts",
-            "integrity": "sha1:0489f0b377f0ac85bfea348a183edd7e8a321a4c"
+            "integrity": "sha1:7b198a1ff0e2bb4ed901346c5ea512e5bdf70ffc"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/create-job-detail.resolver.spec.ts",
-            "integrity": "sha1:7879462fdc6a4c7a669ac1ec58a2b1a6860c34be"
+            "path": "src/apps/cci/job-detail/resolvers/cci-create-job-detail.resolver.spec.ts",
+            "integrity": "sha1:983fd42b29387e2c13194386f7e8c9b0db9d9caa"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/create-job-detail.resolver.ts",
-            "integrity": "sha1:d76427944ed4706df5663258d47b3f361e12c3bd"
+            "path": "src/apps/cci/job-detail/resolvers/cci-create-job-detail.resolver.ts",
+            "integrity": "sha1:08e3c8667bf0c3ae9b5ebf4b9e4a864a2c63dd12"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/create-jobs-detail.resolver.spec.ts",
-            "integrity": "sha1:05b88a2542c0c88834e885e3d922452898bcf13f"
+            "path": "src/apps/cci/job-detail/resolvers/cci-create-jobs-detail.resolver.spec.ts",
+            "integrity": "sha1:7500f6f5acab55563e5544ab6e9209603424fcc4"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/create-jobs-detail.resolver.ts",
-            "integrity": "sha1:75e9bd227e6119e966538647274fbc93457d6a92"
+            "path": "src/apps/cci/job-detail/resolvers/cci-create-jobs-detail.resolver.ts",
+            "integrity": "sha1:acd9b60b3d8b7d488fded416c2528d1d3d9ddb1d"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/delete-job-detail-by-id.resolver.spec.ts",
-            "integrity": "sha1:f41c519063d0044b45023b40f3b59b3585ac56cd"
+            "path": "src/apps/cci/job-detail/resolvers/cci-delete-job-detail-by-id.resolver.spec.ts",
+            "integrity": "sha1:a8cee8d5d7d4ea9633c5d8a7dd0db866c2e3a820"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/delete-job-detail-by-id.resolver.ts",
-            "integrity": "sha1:60344ee992d41536dcb1793416126205f139786f"
+            "path": "src/apps/cci/job-detail/resolvers/cci-delete-job-detail-by-id.resolver.ts",
+            "integrity": "sha1:a4d9b8e3509355d2bfe73520ec30c9ed04b0eaee"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/delete-jobs-detail.resolver.spec.ts",
-            "integrity": "sha1:24fe62dfd51791e2a1dc4fa476088c37e3d05ef4"
+            "path": "src/apps/cci/job-detail/resolvers/cci-delete-jobs-detail.resolver.spec.ts",
+            "integrity": "sha1:c3e37804c755bceec9e3a4aa3bcec800474b533a"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/delete-jobs-detail.resolver.ts",
-            "integrity": "sha1:2024e90cf87d6d98a03f5298a987845470446209"
+            "path": "src/apps/cci/job-detail/resolvers/cci-delete-jobs-detail.resolver.ts",
+            "integrity": "sha1:765e4dd919e852a726129ea784b47576f0f72885"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/find-job-detail-by-id.resolver.spec.ts",
-            "integrity": "sha1:87cb1829e518f60e89e451cd4c0bb2d11e9ea702"
+            "path": "src/apps/cci/job-detail/resolvers/cci-find-job-detail-by-id.resolver.spec.ts",
+            "integrity": "sha1:7abb8cdbdc79775b028726cce3474f633d3b38a4"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/find-job-detail-by-id.resolver.ts",
-            "integrity": "sha1:5241135b6ce74c12daa37487e9eb6f67285f3c38"
+            "path": "src/apps/cci/job-detail/resolvers/cci-find-job-detail-by-id.resolver.ts",
+            "integrity": "sha1:64631f9f45256787260e5e9e27b23273a1893dd2"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/find-job-detail.resolver.spec.ts",
-            "integrity": "sha1:a0a76d56da7f8753922b14c3f624e4d5d471a4a7"
+            "path": "src/apps/cci/job-detail/resolvers/cci-find-job-detail.resolver.spec.ts",
+            "integrity": "sha1:3e3845f76632b0e5ebc90ee7e3074f1d73724d26"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/find-job-detail.resolver.ts",
-            "integrity": "sha1:ffe955f6dd9814226993b198aed3fa3844976061"
+            "path": "src/apps/cci/job-detail/resolvers/cci-find-job-detail.resolver.ts",
+            "integrity": "sha1:aa410b872cba99bf4b1f1da98b64d313cf229696"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/get-jobs-detail.resolver.spec.ts",
-            "integrity": "sha1:caf88f395caa996afb12c7169849c97fd15ea829"
+            "path": "src/apps/cci/job-detail/resolvers/cci-get-jobs-detail.resolver.spec.ts",
+            "integrity": "sha1:a318766e6bc4dce2ce44a218ed911d213bad8067"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/get-jobs-detail.resolver.ts",
-            "integrity": "sha1:94d6f6b5faec0242bfbb60245e5152b374e74ac7"
+            "path": "src/apps/cci/job-detail/resolvers/cci-get-jobs-detail.resolver.ts",
+            "integrity": "sha1:8c893113aa3ea3c2b8bb89c86168223fd0075784"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/paginate-jobs-detail.resolver.spec.ts",
-            "integrity": "sha1:d7cfba5e4ff6de346625db9ef5f147da939ff453"
+            "path": "src/apps/cci/job-detail/resolvers/cci-paginate-jobs-detail.resolver.spec.ts",
+            "integrity": "sha1:e5963c96af38967896dd59d3744e00483548cbf1"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/paginate-jobs-detail.resolver.ts",
-            "integrity": "sha1:26b41fb606ecc8b7a1f711c769091def5879c672"
+            "path": "src/apps/cci/job-detail/resolvers/cci-paginate-jobs-detail.resolver.ts",
+            "integrity": "sha1:641753959525b96e480d619b66debfcf3cc3441c"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/update-job-detail.resolver.spec.ts",
-            "integrity": "sha1:430d07f2ced7cd4762678113dc5801bea3cd878e"
+            "path": "src/apps/cci/job-detail/resolvers/cci-update-job-detail.resolver.spec.ts",
+            "integrity": "sha1:0c74c37957b39e9d5fe4cd8d3c5e295e259be3dc"
         },
         {
-            "path": "src/apps/cci/job-detail/resolvers/update-job-detail.resolver.ts",
-            "integrity": "sha1:35627bf066cc55a0d79568940abd4ac4081f7012"
+            "path": "src/apps/cci/job-detail/resolvers/cci-update-job-detail.resolver.ts",
+            "integrity": "sha1:d54cea11a7feddc41e9ed56e4f0e51f169ab56ad"
         },
         {
             "path": "src/apps/cci/job-detail/seeder/seeder.module.ts",
@@ -519,11 +519,11 @@
         },
         {
             "path": "src/apps/cci/job-detail/seeder/seeder.ts",
-            "integrity": "sha1:28126e677b32b73b649a5418ab90adb4577cb591"
+            "integrity": "sha1:8e81e9f83803fdbdf2e41f6bf8b7c306084a2f80"
         },
         {
             "path": "postman/cci.job-detail.postman.json",
-            "integrity": "sha1:84a30f912bf8ea17eb51bdc1f796272608c7f331"
+            "integrity": "sha1:e80ccd9276f61a9da1049f91f7cd918031efc57c"
         }
     ]
 }

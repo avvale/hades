@@ -1,23 +1,23 @@
-
 enum CciJobDetailExecutionType {
     SUMMARY
     DETAIL
-        
 }
 enum CciJobDetailStatus {
     CANCELLED
     COMPLETED
     ERROR
-        
 }
 
 type CciJobDetail
 {
     id: ID!
+    tenantId: ID!
     tenant: IamTenant!
     tenantCode: GraphQLString!
+    systemId: ID!
     system: CciSystem!
     systemName: GraphQLString!
+    executionId: ID!
     execution: CciExecution!
     executionType: CciJobDetailExecutionType!
     executionExecutedAt: GraphQLTimestamp!
@@ -33,7 +33,6 @@ type CciJobDetail
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input CciCreateJobDetailInput
@@ -55,7 +54,6 @@ input CciCreateJobDetailInput
     user: GraphQLString
     startAt: GraphQLTimestamp!
     endAt: GraphQLTimestamp!
-    
 }
 
 input CciUpdateJobDetailInput
@@ -77,14 +75,13 @@ input CciUpdateJobDetailInput
     user: GraphQLString
     startAt: GraphQLTimestamp
     endAt: GraphQLTimestamp
-    
 }
 
-type Query 
+type Query
 {
-    cciFindJobDetail(query:QueryStatement): CciJobDetail
-    cciFindJobDetailById(id:ID): CciJobDetail
-    cciGetJobsDetail(query:QueryStatement): [CciJobDetail]!
+    cciFindJobDetail(query:QueryStatement constraint:QueryStatement): CciJobDetail
+    cciFindJobDetailById(id:ID constraint:QueryStatement): CciJobDetail
+    cciGetJobsDetail(query:QueryStatement constraint:QueryStatement): [CciJobDetail]!
     cciPaginateJobsDetail(query:QueryStatement constraint:QueryStatement): Pagination!
 }
 
@@ -92,7 +89,7 @@ type Mutation
 {
     cciCreateJobDetail(payload: CciCreateJobDetailInput!): CciJobDetail
     cciCreateJobsDetail(payload: [CciCreateJobDetailInput]!): Boolean!
-    cciUpdateJobDetail(payload: CciUpdateJobDetailInput!): CciJobDetail
-    cciDeleteJobDetailById(id: ID!): CciJobDetail
-    cciDeleteJobsDetail(query:QueryStatement): [CciJobDetail]!
+    cciUpdateJobDetail(payload: CciUpdateJobDetailInput! constraint:QueryStatement): CciJobDetail
+    cciDeleteJobDetailById(id: ID! constraint:QueryStatement): CciJobDetail
+    cciDeleteJobsDetail(query:QueryStatement constraint:QueryStatement): [CciJobDetail]!
 }

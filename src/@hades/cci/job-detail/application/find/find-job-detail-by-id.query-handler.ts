@@ -11,12 +11,16 @@ export class FindJobDetailByIdQueryHandler implements IQueryHandler<FindJobDetai
     private readonly mapper: JobDetailMapper = new JobDetailMapper();
 
     constructor(
-        private readonly findJobDetailByIdService: FindJobDetailByIdService
-    ) { }
+        private readonly findJobDetailByIdService: FindJobDetailByIdService,
+    ) {}
 
     async execute(query: FindJobDetailByIdQuery): Promise<JobDetailResponse>
     {
-        const jobDetail = await this.findJobDetailByIdService.main(new JobDetailId(query.id));
+        const jobDetail = await this.findJobDetailByIdService.main(
+            new JobDetailId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(jobDetail);
     }

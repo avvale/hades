@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IJobDetailRepository } from './../../domain/job-detail.repository';
@@ -13,13 +12,13 @@ export class SequelizeJobDetailRepository extends SequelizeRepository<CciJobDeta
 {
     public readonly aggregateName: string = 'CciJobDetail';
     public readonly mapper: JobDetailMapper = new JobDetailMapper();
+    public readonly timezoneColumns: string[] = ['executionExecutedAt','executionMonitoringStartAt','executionMonitoringEndAt','startAt','endAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(CciJobDetailModel)
         public readonly repository: typeof CciJobDetailModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
-    
 }

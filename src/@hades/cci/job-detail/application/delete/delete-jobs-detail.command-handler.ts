@@ -6,12 +6,16 @@ import { DeleteJobsDetailService } from './delete-jobs-detail.service';
 export class DeleteJobsDetailCommandHandler implements ICommandHandler<DeleteJobsDetailCommand>
 {
     constructor(
-        private readonly deleteJobsDetailService: DeleteJobsDetailService
-    ) { }
+        private readonly deleteJobsDetailService: DeleteJobsDetailService,
+    ) {}
 
     async execute(command: DeleteJobsDetailCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteJobsDetailService.main(command.queryStatement);
+        await this.deleteJobsDetailService.main(
+            command.queryStatement,
+            command.constraint,
+            command.cQMetadata,
+        );
     }
 }
