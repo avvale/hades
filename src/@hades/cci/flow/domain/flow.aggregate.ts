@@ -106,9 +106,6 @@ export class CciFlow extends AggregateRoot
         // eager relationship
         this.tenant = tenant;
         this.system = system;
-        
-        
-        
     }
 
     static register (id: FlowId, hash: FlowHash, tenantId: FlowTenantId, tenantCode: FlowTenantCode, systemId: FlowSystemId, systemName: FlowSystemName, version: FlowVersion, scenario: FlowScenario, party: FlowParty, receiverParty: FlowReceiverParty, component: FlowComponent, receiverComponent: FlowReceiverComponent, interfaceName: FlowInterfaceName, interfaceNamespace: FlowInterfaceNamespace, iflowName: FlowIflowName, responsibleUserAccount: FlowResponsibleUserAccount, lastChangeUserAccount: FlowLastChangeUserAccount, lastChangedAt: FlowLastChangedAt, folderPath: FlowFolderPath, description: FlowDescription, application: FlowApplication, isCritical: FlowIsCritical, isComplex: FlowIsComplex, fieldGroupId: FlowFieldGroupId, data: FlowData, createdAt: FlowCreatedAt, updatedAt: FlowUpdatedAt, deletedAt: FlowDeletedAt, tenant?: IamTenant, system?: CciSystem, ): CciFlow
@@ -148,7 +145,6 @@ export class CciFlow extends AggregateRoot
                 flow.createdAt?.value,
                 flow.updatedAt?.value,
                 flow.deletedAt?.value,
-                
             )
         );
     }
@@ -185,7 +181,6 @@ export class CciFlow extends AggregateRoot
                 flow.createdAt?.value,
                 flow.updatedAt?.value,
                 flow.deletedAt?.value,
-                
             )
         );
     }
@@ -222,7 +217,6 @@ export class CciFlow extends AggregateRoot
                 flow.createdAt?.value,
                 flow.updatedAt?.value,
                 flow.deletedAt?.value,
-                
             )
         );
     }
@@ -258,15 +252,10 @@ export class CciFlow extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
-            
-            
-            
         }
     }
 }

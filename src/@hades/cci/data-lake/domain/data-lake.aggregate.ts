@@ -65,7 +65,6 @@ export class CciDataLake extends AggregateRoot
                 dataLake.createdAt?.value,
                 dataLake.updatedAt?.value,
                 dataLake.deletedAt?.value,
-                
             )
         );
     }
@@ -82,7 +81,6 @@ export class CciDataLake extends AggregateRoot
                 dataLake.createdAt?.value,
                 dataLake.updatedAt?.value,
                 dataLake.deletedAt?.value,
-                
             )
         );
     }
@@ -99,7 +97,6 @@ export class CciDataLake extends AggregateRoot
                 dataLake.createdAt?.value,
                 dataLake.updatedAt?.value,
                 dataLake.deletedAt?.value,
-                
             )
         );
     }

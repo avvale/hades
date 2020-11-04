@@ -16,10 +16,7 @@ import {
 import { CreatedSystemEvent } from './../application/events/created-system.event';
 import { UpdatedSystemEvent } from './../application/events/updated-system.event';
 import { DeletedSystemEvent } from './../application/events/deleted-system.event';
-
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
-
-
 
 export class CciSystem extends AggregateRoot
 {
@@ -35,14 +32,10 @@ export class CciSystem extends AggregateRoot
     createdAt: SystemCreatedAt;
     updatedAt: SystemUpdatedAt;
     deletedAt: SystemDeletedAt;
-    
+
     // eager relationship
-    
-    
     tenant: IamTenant;
-    
-    
-    
+
     constructor(id?: SystemId, tenantId?: SystemTenantId, tenantCode?: SystemTenantCode, version?: SystemVersion, name?: SystemName, environment?: SystemEnvironment, technology?: SystemTechnology, isActive?: SystemIsActive, cancelledAt?: SystemCancelledAt, createdAt?: SystemCreatedAt, updatedAt?: SystemUpdatedAt, deletedAt?: SystemDeletedAt, tenant?: IamTenant, )
     {
         super();
@@ -59,14 +52,9 @@ export class CciSystem extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
         this.tenant = tenant;
-        
-        
-        
     }
 
     static register (id: SystemId, tenantId: SystemTenantId, tenantCode: SystemTenantCode, version: SystemVersion, name: SystemName, environment: SystemEnvironment, technology: SystemTechnology, isActive: SystemIsActive, cancelledAt: SystemCancelledAt, createdAt: SystemCreatedAt, updatedAt: SystemUpdatedAt, deletedAt: SystemDeletedAt, tenant?: IamTenant, ): CciSystem
@@ -90,7 +78,6 @@ export class CciSystem extends AggregateRoot
                 system.createdAt?.value,
                 system.updatedAt?.value,
                 system.deletedAt?.value,
-                
             )
         );
     }
@@ -111,7 +98,6 @@ export class CciSystem extends AggregateRoot
                 system.createdAt?.value,
                 system.updatedAt?.value,
                 system.deletedAt?.value,
-                
             )
         );
     }
@@ -132,7 +118,6 @@ export class CciSystem extends AggregateRoot
                 system.createdAt?.value,
                 system.updatedAt?.value,
                 system.deletedAt?.value,
-                
             )
         );
     }
@@ -152,14 +137,9 @@ export class CciSystem extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
             tenant: this.tenant?.toDTO(),
-            
-            
-            
         }
     }
 }

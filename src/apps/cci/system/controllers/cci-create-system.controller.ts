@@ -43,6 +43,6 @@ export class CciCreateSystemController
     {
         await this.commandBus.dispatch(new CreateSystemCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindSystemByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindSystemByIdQuery(payload.id, {}, { timezone }));
     }
 }

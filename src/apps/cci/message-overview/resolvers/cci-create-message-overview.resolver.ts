@@ -39,6 +39,6 @@ export class CciCreateMessageOverviewResolver
     {
         await this.commandBus.dispatch(new CreateMessageOverviewCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindMessageOverviewByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindMessageOverviewByIdQuery(payload.id, {}, { timezone }));
     }
 }

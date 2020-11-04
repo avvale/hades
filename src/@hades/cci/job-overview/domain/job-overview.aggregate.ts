@@ -20,12 +20,9 @@ import {
 import { CreatedJobOverviewEvent } from './../application/events/created-job-overview.event';
 import { UpdatedJobOverviewEvent } from './../application/events/updated-job-overview.event';
 import { DeletedJobOverviewEvent } from './../application/events/deleted-job-overview.event';
-
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
-
-
 
 export class CciJobOverview extends AggregateRoot
 {
@@ -45,16 +42,12 @@ export class CciJobOverview extends AggregateRoot
     createdAt: JobOverviewCreatedAt;
     updatedAt: JobOverviewUpdatedAt;
     deletedAt: JobOverviewDeletedAt;
-    
+
     // eager relationship
-    
-    
     tenant: IamTenant;
     system: CciSystem;
     execution: CciExecution;
-    
-    
-    
+
     constructor(id?: JobOverviewId, tenantId?: JobOverviewTenantId, tenantCode?: JobOverviewTenantCode, systemId?: JobOverviewSystemId, systemName?: JobOverviewSystemName, executionId?: JobOverviewExecutionId, executionType?: JobOverviewExecutionType, executionExecutedAt?: JobOverviewExecutionExecutedAt, executionMonitoringStartAt?: JobOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: JobOverviewExecutionMonitoringEndAt, cancelled?: JobOverviewCancelled, completed?: JobOverviewCompleted, error?: JobOverviewError, createdAt?: JobOverviewCreatedAt, updatedAt?: JobOverviewUpdatedAt, deletedAt?: JobOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
     {
         super();
@@ -75,16 +68,11 @@ export class CciJobOverview extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
         this.tenant = tenant;
         this.system = system;
         this.execution = execution;
-        
-        
-        
     }
 
     static register (id: JobOverviewId, tenantId: JobOverviewTenantId, tenantCode: JobOverviewTenantCode, systemId: JobOverviewSystemId, systemName: JobOverviewSystemName, executionId: JobOverviewExecutionId, executionType: JobOverviewExecutionType, executionExecutedAt: JobOverviewExecutionExecutedAt, executionMonitoringStartAt: JobOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: JobOverviewExecutionMonitoringEndAt, cancelled: JobOverviewCancelled, completed: JobOverviewCompleted, error: JobOverviewError, createdAt: JobOverviewCreatedAt, updatedAt: JobOverviewUpdatedAt, deletedAt: JobOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciJobOverview
@@ -112,7 +100,6 @@ export class CciJobOverview extends AggregateRoot
                 jobOverview.createdAt?.value,
                 jobOverview.updatedAt?.value,
                 jobOverview.deletedAt?.value,
-                
             )
         );
     }
@@ -137,7 +124,6 @@ export class CciJobOverview extends AggregateRoot
                 jobOverview.createdAt?.value,
                 jobOverview.updatedAt?.value,
                 jobOverview.deletedAt?.value,
-                
             )
         );
     }
@@ -162,7 +148,6 @@ export class CciJobOverview extends AggregateRoot
                 jobOverview.createdAt?.value,
                 jobOverview.updatedAt?.value,
                 jobOverview.deletedAt?.value,
-                
             )
         );
     }
@@ -186,16 +171,11 @@ export class CciJobOverview extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             execution: this.execution?.toDTO(),
-            
-            
-            
         }
     }
 }

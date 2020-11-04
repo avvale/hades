@@ -39,6 +39,6 @@ export class CciCreateFlowResolver
     {
         await this.commandBus.dispatch(new CreateFlowCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindFlowByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindFlowByIdQuery(payload.id, {}, { timezone }));
     }
 }

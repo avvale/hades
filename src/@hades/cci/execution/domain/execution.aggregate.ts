@@ -85,7 +85,6 @@ export class CciExecution extends AggregateRoot
                 execution.createdAt?.value,
                 execution.updatedAt?.value,
                 execution.deletedAt?.value,
-                
             )
         );
     }
@@ -107,7 +106,6 @@ export class CciExecution extends AggregateRoot
                 execution.createdAt?.value,
                 execution.updatedAt?.value,
                 execution.deletedAt?.value,
-                
             )
         );
     }
@@ -129,7 +127,6 @@ export class CciExecution extends AggregateRoot
                 execution.createdAt?.value,
                 execution.updatedAt?.value,
                 execution.deletedAt?.value,
-                
             )
         );
     }
@@ -150,15 +147,10 @@ export class CciExecution extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
-            
-            
-            
         }
     }
 }

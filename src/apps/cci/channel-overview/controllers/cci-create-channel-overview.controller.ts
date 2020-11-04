@@ -43,6 +43,6 @@ export class CciCreateChannelOverviewController
     {
         await this.commandBus.dispatch(new CreateChannelOverviewCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindChannelOverviewByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindChannelOverviewByIdQuery(payload.id, {}, { timezone }));
     }
 }

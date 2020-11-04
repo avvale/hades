@@ -26,12 +26,9 @@ import {
 import { CreatedMessageOverviewEvent } from './../application/events/created-message-overview.event';
 import { UpdatedMessageOverviewEvent } from './../application/events/updated-message-overview.event';
 import { DeletedMessageOverviewEvent } from './../application/events/deleted-message-overview.event';
-
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 import { CciSystem } from '@hades/cci/system/domain/system.aggregate';
 import { CciExecution } from '@hades/cci/execution/domain/execution.aggregate';
-
-
 
 export class CciMessageOverview extends AggregateRoot
 {
@@ -57,16 +54,12 @@ export class CciMessageOverview extends AggregateRoot
     createdAt: MessageOverviewCreatedAt;
     updatedAt: MessageOverviewUpdatedAt;
     deletedAt: MessageOverviewDeletedAt;
-    
+
     // eager relationship
-    
-    
     tenant: IamTenant;
     system: CciSystem;
     execution: CciExecution;
-    
-    
-    
+
     constructor(id?: MessageOverviewId, tenantId?: MessageOverviewTenantId, tenantCode?: MessageOverviewTenantCode, systemId?: MessageOverviewSystemId, systemName?: MessageOverviewSystemName, executionId?: MessageOverviewExecutionId, executionType?: MessageOverviewExecutionType, executionExecutedAt?: MessageOverviewExecutionExecutedAt, executionMonitoringStartAt?: MessageOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: MessageOverviewExecutionMonitoringEndAt, numberMax?: MessageOverviewNumberMax, numberDays?: MessageOverviewNumberDays, success?: MessageOverviewSuccess, cancelled?: MessageOverviewCancelled, delivering?: MessageOverviewDelivering, error?: MessageOverviewError, holding?: MessageOverviewHolding, toBeDelivered?: MessageOverviewToBeDelivered, waiting?: MessageOverviewWaiting, createdAt?: MessageOverviewCreatedAt, updatedAt?: MessageOverviewUpdatedAt, deletedAt?: MessageOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
     {
         super();
@@ -93,16 +86,11 @@ export class CciMessageOverview extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
         this.tenant = tenant;
         this.system = system;
         this.execution = execution;
-        
-        
-        
     }
 
     static register (id: MessageOverviewId, tenantId: MessageOverviewTenantId, tenantCode: MessageOverviewTenantCode, systemId: MessageOverviewSystemId, systemName: MessageOverviewSystemName, executionId: MessageOverviewExecutionId, executionType: MessageOverviewExecutionType, executionExecutedAt: MessageOverviewExecutionExecutedAt, executionMonitoringStartAt: MessageOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: MessageOverviewExecutionMonitoringEndAt, numberMax: MessageOverviewNumberMax, numberDays: MessageOverviewNumberDays, success: MessageOverviewSuccess, cancelled: MessageOverviewCancelled, delivering: MessageOverviewDelivering, error: MessageOverviewError, holding: MessageOverviewHolding, toBeDelivered: MessageOverviewToBeDelivered, waiting: MessageOverviewWaiting, createdAt: MessageOverviewCreatedAt, updatedAt: MessageOverviewUpdatedAt, deletedAt: MessageOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciMessageOverview
@@ -136,7 +124,6 @@ export class CciMessageOverview extends AggregateRoot
                 messageOverview.createdAt?.value,
                 messageOverview.updatedAt?.value,
                 messageOverview.deletedAt?.value,
-                
             )
         );
     }
@@ -167,7 +154,6 @@ export class CciMessageOverview extends AggregateRoot
                 messageOverview.createdAt?.value,
                 messageOverview.updatedAt?.value,
                 messageOverview.deletedAt?.value,
-                
             )
         );
     }
@@ -198,7 +184,6 @@ export class CciMessageOverview extends AggregateRoot
                 messageOverview.createdAt?.value,
                 messageOverview.updatedAt?.value,
                 messageOverview.deletedAt?.value,
-                
             )
         );
     }
@@ -228,16 +213,11 @@ export class CciMessageOverview extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             execution: this.execution?.toDTO(),
-            
-            
-            
         }
     }
 }

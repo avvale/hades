@@ -43,6 +43,6 @@ export class CciCreateJobOverviewController
     {
         await this.commandBus.dispatch(new CreateJobOverviewCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindJobOverviewByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindJobOverviewByIdQuery(payload.id, {}, { timezone }));
     }
 }
