@@ -80,16 +80,11 @@ export class CciJobDetail extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
         this.tenant = tenant;
         this.system = system;
         this.execution = execution;
-        
-        
-        
     }
 
     static register (id: JobDetailId, tenantId: JobDetailTenantId, tenantCode: JobDetailTenantCode, systemId: JobDetailSystemId, systemName: JobDetailSystemName, executionId: JobDetailExecutionId, executionType: JobDetailExecutionType, executionExecutedAt: JobDetailExecutionExecutedAt, executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt, status: JobDetailStatus, name: JobDetailName, returnCode: JobDetailReturnCode, node: JobDetailNode, user: JobDetailUser, startAt: JobDetailStartAt, endAt: JobDetailEndAt, createdAt: JobDetailCreatedAt, updatedAt: JobDetailUpdatedAt, deletedAt: JobDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciJobDetail
@@ -121,7 +116,6 @@ export class CciJobDetail extends AggregateRoot
                 jobDetail.createdAt?.value,
                 jobDetail.updatedAt?.value,
                 jobDetail.deletedAt?.value,
-                
             )
         );
     }
@@ -150,7 +144,6 @@ export class CciJobDetail extends AggregateRoot
                 jobDetail.createdAt?.value,
                 jobDetail.updatedAt?.value,
                 jobDetail.deletedAt?.value,
-                
             )
         );
     }
@@ -179,7 +172,6 @@ export class CciJobDetail extends AggregateRoot
                 jobDetail.createdAt?.value,
                 jobDetail.updatedAt?.value,
                 jobDetail.deletedAt?.value,
-                
             )
         );
     }
@@ -207,16 +199,11 @@ export class CciJobDetail extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
             tenant: this.tenant?.toDTO(),
             system: this.system?.toDTO(),
             execution: this.execution?.toDTO(),
-            
-            
-            
         }
     }
 }

@@ -39,6 +39,6 @@ export class CciCreateModuleResolver
     {
         await this.commandBus.dispatch(new CreateModuleCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindModuleByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindModuleByIdQuery(payload.id, {}, { timezone }));
     }
 }

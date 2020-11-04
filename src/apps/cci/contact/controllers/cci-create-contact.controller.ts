@@ -43,6 +43,6 @@ export class CciCreateContactController
     {
         await this.commandBus.dispatch(new CreateContactCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindContactByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindContactByIdQuery(payload.id, {}, { timezone }));
     }
 }

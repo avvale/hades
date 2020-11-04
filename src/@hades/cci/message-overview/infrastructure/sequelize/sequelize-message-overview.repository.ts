@@ -7,7 +7,6 @@ import { CciMessageOverview } from './../../domain/message-overview.aggregate';
 import { MessageOverviewMapper } from './../../domain/message-overview.mapper';
 import { CciMessageOverviewModel } from './sequelize-message-overview.model';
 
-// custom
 import { QueryTypes } from 'sequelize';
 import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import * as _ from 'lodash';

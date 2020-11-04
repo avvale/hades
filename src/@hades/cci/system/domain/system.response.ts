@@ -1,7 +1,4 @@
-
 import { TenantResponse } from '@hades/iam/tenant/domain/tenant.response';
-
-
 
 export class SystemResponse
 {
@@ -18,11 +15,6 @@ export class SystemResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        
-        
         public readonly tenant: TenantResponse,
-        
-        
-        
     ) {}
 }

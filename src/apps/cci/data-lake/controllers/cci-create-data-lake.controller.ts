@@ -43,6 +43,6 @@ export class CciCreateDataLakeController
     {
         await this.commandBus.dispatch(new CreateDataLakeCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindDataLakeByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindDataLakeByIdQuery(payload.id, {}, { timezone }));
     }
 }

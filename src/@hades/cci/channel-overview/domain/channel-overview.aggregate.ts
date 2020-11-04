@@ -112,7 +112,6 @@ export class CciChannelOverview extends AggregateRoot
                 channelOverview.createdAt?.value,
                 channelOverview.updatedAt?.value,
                 channelOverview.deletedAt?.value,
-                
             )
         );
     }
@@ -140,7 +139,6 @@ export class CciChannelOverview extends AggregateRoot
                 channelOverview.createdAt?.value,
                 channelOverview.updatedAt?.value,
                 channelOverview.deletedAt?.value,
-                
             )
         );
     }

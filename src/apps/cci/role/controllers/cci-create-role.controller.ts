@@ -43,6 +43,6 @@ export class CciCreateRoleController
     {
         await this.commandBus.dispatch(new CreateRoleCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id, {}, { timezone }));
     }
 }

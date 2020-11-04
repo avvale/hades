@@ -108,7 +108,6 @@ export class CciContact extends AggregateRoot
                 contact.createdAt?.value,
                 contact.updatedAt?.value,
                 contact.deletedAt?.value,
-                
             )
         );
     }
@@ -135,7 +134,6 @@ export class CciContact extends AggregateRoot
                 contact.createdAt?.value,
                 contact.updatedAt?.value,
                 contact.deletedAt?.value,
-                
             )
         );
     }

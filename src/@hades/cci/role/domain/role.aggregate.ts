@@ -11,10 +11,7 @@ import {
 import { CreatedRoleEvent } from './../application/events/created-role.event';
 import { UpdatedRoleEvent } from './../application/events/updated-role.event';
 import { DeletedRoleEvent } from './../application/events/deleted-role.event';
-
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
-
-
 
 export class CciRole extends AggregateRoot
 {
@@ -25,14 +22,10 @@ export class CciRole extends AggregateRoot
     createdAt: RoleCreatedAt;
     updatedAt: RoleUpdatedAt;
     deletedAt: RoleDeletedAt;
-    
+
     // eager relationship
-    
-    
     tenant: IamTenant;
-    
-    
-    
+
     constructor(id?: RoleId, tenantId?: RoleTenantId, tenantCode?: RoleTenantCode, name?: RoleName, createdAt?: RoleCreatedAt, updatedAt?: RoleUpdatedAt, deletedAt?: RoleDeletedAt, tenant?: IamTenant, )
     {
         super();
@@ -44,14 +37,9 @@ export class CciRole extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
         this.tenant = tenant;
-        
-        
-        
     }
 
     static register (id: RoleId, tenantId: RoleTenantId, tenantCode: RoleTenantCode, name: RoleName, createdAt: RoleCreatedAt, updatedAt: RoleUpdatedAt, deletedAt: RoleDeletedAt, tenant?: IamTenant, ): CciRole
@@ -70,7 +58,6 @@ export class CciRole extends AggregateRoot
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
-                
             )
         );
     }
@@ -86,7 +73,6 @@ export class CciRole extends AggregateRoot
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
-                
             )
         );
     }
@@ -102,7 +88,6 @@ export class CciRole extends AggregateRoot
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
-                
             )
         );
     }
@@ -117,14 +102,9 @@ export class CciRole extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
             tenant: this.tenant?.toDTO(),
-            
-            
-            
         }
     }
 }

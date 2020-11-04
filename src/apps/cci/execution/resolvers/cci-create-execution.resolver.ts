@@ -39,6 +39,6 @@ export class CciCreateExecutionResolver
     {
         await this.commandBus.dispatch(new CreateExecutionCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindExecutionByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindExecutionByIdQuery(payload.id, {}, { timezone }));
     }
 }

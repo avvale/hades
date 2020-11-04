@@ -39,6 +39,6 @@ export class CciCreateJobDetailResolver
     {
         await this.commandBus.dispatch(new CreateJobDetailCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindJobDetailByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindJobDetailByIdQuery(payload.id, {}, { timezone }));
     }
 }
