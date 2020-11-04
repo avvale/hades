@@ -52,7 +52,6 @@ export class AddFlowsContextEvent extends AggregateRoot
                         flow.createdAt?.value,
                         flow.updatedAt?.value,
                         flow.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -93,7 +92,6 @@ export class AddFlowsContextEvent extends AggregateRoot
                         flow.createdAt?.value,
                         flow.updatedAt?.value,
                         flow.deletedAt?.value,
-                        
                     )
                 )
             )

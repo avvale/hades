@@ -64,12 +64,12 @@ describe('UpdateModuleService', () =>
 
     describe('main', () =>
     {
-        test('UpdateModuleService should be defined', () => 
+        test('UpdateModuleService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a module and emit event', async () => 
+        test('should update a module and emit event', async () =>
         {
             expect(await service.main(
                 new ModuleId(modules[0].id),
@@ -93,7 +93,6 @@ describe('UpdateModuleService', () =>
                 new ModuleName(modules[0].name),
                 new ModuleParameterName(modules[0].parameterName),
                 new ModuleParameterValue(modules[0].parameterValue),
-                
             )).toBe(undefined);
         });
     });

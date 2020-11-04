@@ -64,7 +64,6 @@ export class MockExecutionRepository extends MockRepository<CciExecution> implem
                     new ExecutionCreatedAt(itemCollection.createdAt),
                     new ExecutionUpdatedAt(itemCollection.updatedAt),
                     new ExecutionDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

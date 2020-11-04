@@ -60,7 +60,33 @@ export class CciMessageOverview extends AggregateRoot
     system: CciSystem;
     execution: CciExecution;
 
-    constructor(id?: MessageOverviewId, tenantId?: MessageOverviewTenantId, tenantCode?: MessageOverviewTenantCode, systemId?: MessageOverviewSystemId, systemName?: MessageOverviewSystemName, executionId?: MessageOverviewExecutionId, executionType?: MessageOverviewExecutionType, executionExecutedAt?: MessageOverviewExecutionExecutedAt, executionMonitoringStartAt?: MessageOverviewExecutionMonitoringStartAt, executionMonitoringEndAt?: MessageOverviewExecutionMonitoringEndAt, numberMax?: MessageOverviewNumberMax, numberDays?: MessageOverviewNumberDays, success?: MessageOverviewSuccess, cancelled?: MessageOverviewCancelled, delivering?: MessageOverviewDelivering, error?: MessageOverviewError, holding?: MessageOverviewHolding, toBeDelivered?: MessageOverviewToBeDelivered, waiting?: MessageOverviewWaiting, createdAt?: MessageOverviewCreatedAt, updatedAt?: MessageOverviewUpdatedAt, deletedAt?: MessageOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
+    constructor(
+        id: MessageOverviewId,
+        tenantId: MessageOverviewTenantId,
+        tenantCode: MessageOverviewTenantCode,
+        systemId: MessageOverviewSystemId,
+        systemName: MessageOverviewSystemName,
+        executionId: MessageOverviewExecutionId,
+        executionType: MessageOverviewExecutionType,
+        executionExecutedAt: MessageOverviewExecutionExecutedAt,
+        executionMonitoringStartAt: MessageOverviewExecutionMonitoringStartAt,
+        executionMonitoringEndAt: MessageOverviewExecutionMonitoringEndAt,
+        numberMax: MessageOverviewNumberMax,
+        numberDays: MessageOverviewNumberDays,
+        success: MessageOverviewSuccess,
+        cancelled: MessageOverviewCancelled,
+        delivering: MessageOverviewDelivering,
+        error: MessageOverviewError,
+        holding: MessageOverviewHolding,
+        toBeDelivered: MessageOverviewToBeDelivered,
+        waiting: MessageOverviewWaiting,
+        createdAt: MessageOverviewCreatedAt,
+        updatedAt: MessageOverviewUpdatedAt,
+        deletedAt: MessageOverviewDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+        execution?: CciExecution,
+    )
     {
         super();
 
@@ -93,9 +119,61 @@ export class CciMessageOverview extends AggregateRoot
         this.execution = execution;
     }
 
-    static register (id: MessageOverviewId, tenantId: MessageOverviewTenantId, tenantCode: MessageOverviewTenantCode, systemId: MessageOverviewSystemId, systemName: MessageOverviewSystemName, executionId: MessageOverviewExecutionId, executionType: MessageOverviewExecutionType, executionExecutedAt: MessageOverviewExecutionExecutedAt, executionMonitoringStartAt: MessageOverviewExecutionMonitoringStartAt, executionMonitoringEndAt: MessageOverviewExecutionMonitoringEndAt, numberMax: MessageOverviewNumberMax, numberDays: MessageOverviewNumberDays, success: MessageOverviewSuccess, cancelled: MessageOverviewCancelled, delivering: MessageOverviewDelivering, error: MessageOverviewError, holding: MessageOverviewHolding, toBeDelivered: MessageOverviewToBeDelivered, waiting: MessageOverviewWaiting, createdAt: MessageOverviewCreatedAt, updatedAt: MessageOverviewUpdatedAt, deletedAt: MessageOverviewDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciMessageOverview
+    static register (
+        id: MessageOverviewId,
+        tenantId: MessageOverviewTenantId,
+        tenantCode: MessageOverviewTenantCode,
+        systemId: MessageOverviewSystemId,
+        systemName: MessageOverviewSystemName,
+        executionId: MessageOverviewExecutionId,
+        executionType: MessageOverviewExecutionType,
+        executionExecutedAt: MessageOverviewExecutionExecutedAt,
+        executionMonitoringStartAt: MessageOverviewExecutionMonitoringStartAt,
+        executionMonitoringEndAt: MessageOverviewExecutionMonitoringEndAt,
+        numberMax: MessageOverviewNumberMax,
+        numberDays: MessageOverviewNumberDays,
+        success: MessageOverviewSuccess,
+        cancelled: MessageOverviewCancelled,
+        delivering: MessageOverviewDelivering,
+        error: MessageOverviewError,
+        holding: MessageOverviewHolding,
+        toBeDelivered: MessageOverviewToBeDelivered,
+        waiting: MessageOverviewWaiting,
+        createdAt: MessageOverviewCreatedAt,
+        updatedAt: MessageOverviewUpdatedAt,
+        deletedAt: MessageOverviewDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+        execution?: CciExecution,
+    ): CciMessageOverview
     {
-        return new CciMessageOverview(id, tenantId, tenantCode, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, numberMax, numberDays, success, cancelled, delivering, error, holding, toBeDelivered, waiting, createdAt, updatedAt, deletedAt, tenant, system, execution, );
+        return new CciMessageOverview(
+            id,
+            tenantId,
+            tenantCode,
+            systemId,
+            systemName,
+            executionId,
+            executionType,
+            executionExecutedAt,
+            executionMonitoringStartAt,
+            executionMonitoringEndAt,
+            numberMax,
+            numberDays,
+            success,
+            cancelled,
+            delivering,
+            error,
+            holding,
+            toBeDelivered,
+            waiting,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            tenant,
+            system,
+            execution,
+        );
     }
 
     created(messageOverview: CciMessageOverview): void

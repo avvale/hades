@@ -56,12 +56,12 @@ describe('UpdateJobOverviewService', () =>
 
     describe('main', () =>
     {
-        test('UpdateJobOverviewService should be defined', () => 
+        test('UpdateJobOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a jobOverview and emit event', async () => 
+        test('should update a jobOverview and emit event', async () =>
         {
             expect(await service.main(
                 new JobOverviewId(jobsOverview[0].id),
@@ -77,7 +77,6 @@ describe('UpdateJobOverviewService', () =>
                 new JobOverviewCancelled(jobsOverview[0].cancelled),
                 new JobOverviewCompleted(jobsOverview[0].completed),
                 new JobOverviewError(jobsOverview[0].error),
-                
             )).toBe(undefined);
         });
     });

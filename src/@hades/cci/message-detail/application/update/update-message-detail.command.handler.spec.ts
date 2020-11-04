@@ -6,12 +6,12 @@ import { messagesDetail } from '@hades/cci/message-detail/infrastructure/seeds/m
 import { UpdateMessageDetailCommand } from './update-message-detail.command';
 import { UpdateMessageDetailService } from './update-message-detail.service';
 
-describe('UpdateMessageDetailCommandHandler', () => 
+describe('UpdateMessageDetailCommandHandler', () =>
 {
     let commandHandler: UpdateMessageDetailCommandHandler;
     let service: UpdateMessageDetailService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateMessageDetailCommandHandler', () =>
         service         = module.get<UpdateMessageDetailService>(UpdateMessageDetailService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateMessageDetailCommandHandler should be defined', () => 
+        test('UpdateMessageDetailCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an messageDetail created', async () => 
+        test('should return an messageDetail created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateMessageDetailCommand(
@@ -79,7 +79,6 @@ describe('UpdateMessageDetailCommandHandler', () =>
                     messagesDetail[0].timesFailed,
                     messagesDetail[0].numberMax,
                     messagesDetail[0].numberDays,
-                    
                 )
             )).toBe(undefined);
         });

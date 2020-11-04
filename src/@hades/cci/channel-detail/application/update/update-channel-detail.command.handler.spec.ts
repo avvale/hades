@@ -6,12 +6,12 @@ import { channelsDetail } from '@hades/cci/channel-detail/infrastructure/seeds/c
 import { UpdateChannelDetailCommand } from './update-channel-detail.command';
 import { UpdateChannelDetailService } from './update-channel-detail.service';
 
-describe('UpdateChannelDetailCommandHandler', () => 
+describe('UpdateChannelDetailCommandHandler', () =>
 {
     let commandHandler: UpdateChannelDetailCommandHandler;
     let service: UpdateChannelDetailService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateChannelDetailCommandHandler', () =>
         service         = module.get<UpdateChannelDetailService>(UpdateChannelDetailService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateChannelDetailCommandHandler should be defined', () => 
+        test('UpdateChannelDetailCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an channelDetail created', async () => 
+        test('should return an channelDetail created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateChannelDetailCommand(
@@ -57,7 +57,6 @@ describe('UpdateChannelDetailCommandHandler', () =>
                     channelsDetail[0].channelComponent,
                     channelsDetail[0].channelName,
                     channelsDetail[0].detail,
-                    
                 )
             )).toBe(undefined);
         });

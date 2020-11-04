@@ -53,12 +53,12 @@ describe('UpdateExecutionService', () =>
 
     describe('main', () =>
     {
-        test('UpdateExecutionService should be defined', () => 
+        test('UpdateExecutionService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a execution and emit event', async () => 
+        test('should update a execution and emit event', async () =>
         {
             expect(await service.main(
                 new ExecutionId(executions[0].id),
@@ -71,7 +71,6 @@ describe('UpdateExecutionService', () =>
                 new ExecutionExecutedAt(executions[0].executedAt),
                 new ExecutionMonitoringStartAt(executions[0].monitoringStartAt),
                 new ExecutionMonitoringEndAt(executions[0].monitoringEndAt),
-                
             )).toBe(undefined);
         });
     });

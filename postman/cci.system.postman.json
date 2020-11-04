@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "e9c35fa6-cc86-45b4-b797-69af31e868c9",
+		"_postman_id"   : "7e50793b-bba8-4b7b-a31a-205eb3954b5a",
 		"name"          : "@hades - cci/system",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -14,13 +14,13 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:CciCreateSystemInput!)\n{\n\tcciCreateSystem (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"237d2072-de65-46be-ac8e-6c2e879b2c9d\", \n\t\t\"tenantId\": \"6fc49df0-1546-4676-a2e7-e3e7f1aa1164\", \n\t\t\"tenantCode\": \"lbju72ogjqkgc8e51u3nrnzfnzqptn3qcw5abwppmyhrm7d0yo\", \n\t\t\"version\": \"7\", \n\t\t\"name\": \"n\", \n\t\t\"environment\": \"c\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 00:28:33\"\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad\", \n\t\t\"tenantId\": \"4d3bc222-807f-45f9-8c2f-cc586bae75ca\", \n\t\t\"tenantCode\": \"0ksdycemu9t4oi0pjfz26gb9emblia6weczvl03aqcytvipq2z\", \n\t\t\"version\": \"l\", \n\t\t\"name\": \"x\", \n\t\t\"environment\": \"z\", \n\t\t\"technology\": \"WSO2\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-11-04 14:46:49\"\n\t}\n}"
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/graphql",
+					"raw": "/graphql",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"graphql"
@@ -38,13 +38,13 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[CciCreateSystemInput]!)\n{\n\tcciCreateSystems (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"24b51803-ab02-4f6d-b0a6-01d57850f775\", \n\t\t\t\"tenantId\": \"8dea36dc-003f-413a-9d43-a22eeea8f9e0\", \n\t\t\t\"tenantCode\": \"x57dr10r4zb8frty2oft9t9ezqebaa4ivmyclgq0bmriyb4dev\", \n\t\t\t\"version\": \"c\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"environment\": \"f\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 19:10:21\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"63ac830b-ea9a-4e36-bedd-a52b5a93244b\", \n\t\t\t\"tenantId\": \"ffd7604b-471e-48df-b7ba-be831bf46bbd\", \n\t\t\t\"tenantCode\": \"dx2mgr9iwr0bzuw45rgwnrvo9hj3kvtratsjr13osfbshqc2en\", \n\t\t\t\"version\": \"q\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"environment\": \"6\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-08 00:12:34\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0410abda-6393-49ad-8320-5dc88a538428\", \n\t\t\t\"tenantId\": \"52778989-c816-470c-8c1d-e7e650ef8333\", \n\t\t\t\"tenantCode\": \"uzw1rroxfmp7ge7a7hc3rg8copa5dpwyqvw6e0gf9hqrqmbnm3\", \n\t\t\t\"version\": \"r\", \n\t\t\t\"name\": \"h\", \n\t\t\t\"environment\": \"z\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 01:43:13\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"17b84c63-5c5a-44e7-b420-41ee3f5e22c4\", \n\t\t\t\"tenantId\": \"98427bcf-e00d-4f00-aa2c-58b6ab2b06ff\", \n\t\t\t\"tenantCode\": \"rjt5wqr0xyy08ic856onn01tacujb20913t9bs9q1k1x98jwdl\", \n\t\t\t\"version\": \"a\", \n\t\t\t\"name\": \"u\", \n\t\t\t\"environment\": \"p\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 13:18:14\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4ab7f5cf-2e81-4e16-bc1a-9ab25d083428\", \n\t\t\t\"tenantId\": \"12516245-8e58-49f3-b3f4-9ece0dd18979\", \n\t\t\t\"tenantCode\": \"3jtpvsqiijawm66uercf25aqi7ga2v82dspmd9jbnxv5ox60sh\", \n\t\t\t\"version\": \"9\", \n\t\t\t\"name\": \"4\", \n\t\t\t\"environment\": \"i\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 13:13:25\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"df603bb0-67a9-4fd2-95a8-58b71d2988a3\", \n\t\t\t\"tenantId\": \"e978b354-abbf-47c5-98ae-65967550f85f\", \n\t\t\t\"tenantCode\": \"wxdmuh7q9ecw2u8dgx0bu56wnx3uthg7h2llyxlw85dg1k34wq\", \n\t\t\t\"version\": \"z\", \n\t\t\t\"name\": \"i\", \n\t\t\t\"environment\": \"7\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 12:29:13\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5105d1b2-d3ab-42ce-99d6-c4af7f2b9b24\", \n\t\t\t\"tenantId\": \"e61e3277-c131-4e24-ad05-dd079731ca1e\", \n\t\t\t\"tenantCode\": \"dugdwbmhvvl98yk7wiip82gjox1s8epwqqs9m0c9i0uzbmmwtg\", \n\t\t\t\"version\": \"9\", \n\t\t\t\"name\": \"4\", \n\t\t\t\"environment\": \"k\", \n\t\t\t\"technology\": \"B2B\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 04:16:53\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d885efdf-6bab-41f3-9763-575051926690\", \n\t\t\t\"tenantId\": \"41c45916-9eaf-4460-976c-9ef6809861e4\", \n\t\t\t\"tenantCode\": \"ctgjw53wruvx7rg2ps90rn96ljlijerivm9ll4kfv8eyzcgw82\", \n\t\t\t\"version\": \"5\", \n\t\t\t\"name\": \"w\", \n\t\t\t\"environment\": \"6\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 20:41:00\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6e939bbe-535f-46cc-8e4a-003ef5ff5f1f\", \n\t\t\t\"tenantId\": \"7cafd0fe-0675-425a-ae4a-350f1dfaa5e0\", \n\t\t\t\"tenantCode\": \"a77witaxfuswlmq3xee7k5a8ng42kfwwqetua7nkzg7oh66agw\", \n\t\t\t\"version\": \"p\", \n\t\t\t\"name\": \"6\", \n\t\t\t\"environment\": \"9\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 09:47:38\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f19dd3ac-a384-425e-88d5-54961438df9a\", \n\t\t\t\"tenantId\": \"fae9daec-7e79-463a-b247-16d694bd7d9a\", \n\t\t\t\"tenantCode\": \"yatbkgz05h1v3lwkalcaj6cielwh8b9i6xrbuh1hh30h83dq74\", \n\t\t\t\"version\": \"4\", \n\t\t\t\"name\": \"y\", \n\t\t\t\"environment\": \"6\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 05:08:30\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"dfcf8540-b457-4fb6-bb0b-a9eb186321dd\", \n\t\t\t\"tenantId\": \"5f69ff47-0fae-4cec-ac7d-2d6747b5e228\", \n\t\t\t\"tenantCode\": \"f9nv2vkgp5mjj66735kwetvv68ks7s67al3guwll3fo9jh19xv\", \n\t\t\t\"version\": \"s\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"environment\": \"a\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 13:08:43\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f50d2b1a-ee43-4d7b-ba3b-6db260b98395\", \n\t\t\t\"tenantId\": \"d66b391a-e96b-4b5b-a329-b050a5401e2a\", \n\t\t\t\"tenantCode\": \"7nikklmlz3d2zx10090yi7r7nokjjxmdrnntabin8qh6xelsw3\", \n\t\t\t\"version\": \"f\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"environment\": \"m\", \n\t\t\t\"technology\": \"MULESOFT\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 11:50:16\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"96891383-2abf-4a02-810a-457c97f6522a\", \n\t\t\t\"tenantId\": \"4eb35fa8-e5b5-4882-aa95-4b8145f5c45e\", \n\t\t\t\"tenantCode\": \"flj1ifg6fnh4klbj25yyudt1xzqd7uou8olovgzqgra36yogb7\", \n\t\t\t\"version\": \"f\", \n\t\t\t\"name\": \"a\", \n\t\t\t\"environment\": \"i\", \n\t\t\t\"technology\": \"MULESOFT\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 21:43:55\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"cada9a29-d830-4ea8-be41-64f91247986d\", \n\t\t\t\"tenantId\": \"9005234a-85b8-4daa-9375-1b9ea3791650\", \n\t\t\t\"tenantCode\": \"g8m6zxpmqc7jhc1bcavr8sdf0ngiyyhs16ect44ybq7spudzi5\", \n\t\t\t\"version\": \"8\", \n\t\t\t\"name\": \"b\", \n\t\t\t\"environment\": \"2\", \n\t\t\t\"technology\": \"MULESOFT\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 06:34:06\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"883acbf3-f553-44d7-9d3f-1e0fb1b13db1\", \n\t\t\t\"tenantId\": \"cbc7a983-cfad-4c4b-b193-afb5ea2e25fb\", \n\t\t\t\"tenantCode\": \"6yyl9l9w5sgekxfnd36qzhxsl30omkebrbulswc46kkvqr2lxv\", \n\t\t\t\"version\": \"p\", \n\t\t\t\"name\": \"p\", \n\t\t\t\"environment\": \"o\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 22:41:02\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e2587a5e-521f-4790-b6fe-6f7635e9647a\", \n\t\t\t\"tenantId\": \"f3f58f84-b179-422e-8b16-f86699f21fab\", \n\t\t\t\"tenantCode\": \"0iyorzjo58pfc2dt3qe9lhaqap04n17whke3nvdi0nj86fq7mp\", \n\t\t\t\"version\": \"t\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"environment\": \"a\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 08:17:47\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5e0cb46c-27b0-49a9-93a2-0132a382ed99\", \n\t\t\t\"tenantId\": \"bf1fb5a8-7f31-41f2-a80b-7bffe4ecff7d\", \n\t\t\t\"tenantCode\": \"zu833f57vkojkfth4lthue9sh7ja8bnt97nknly4rgybak3s3p\", \n\t\t\t\"version\": \"d\", \n\t\t\t\"name\": \"b\", \n\t\t\t\"environment\": \"z\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-10-07 23:33:35\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"143e0711-3f02-4285-a525-62a288b16cdf\", \n\t\t\t\"tenantId\": \"3616aafa-d2f8-4e76-a917-1699fc1e20af\", \n\t\t\t\"tenantCode\": \"a4o9jxai0i0zecju4q6e0ei6gdaqv9qt0xr72xdt9s94pjm4h7\", \n\t\t\t\"version\": \"j\", \n\t\t\t\"name\": \"f\", \n\t\t\t\"environment\": \"b\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 15:54:32\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c871b09a-faf7-4c77-99ad-e759f9c075f6\", \n\t\t\t\"tenantId\": \"12da16b5-6be4-4be1-bd4a-fa913148083f\", \n\t\t\t\"tenantCode\": \"i927op9ic6kt3yq67tukc516t213fkk959ll2t525wkgkagz7c\", \n\t\t\t\"version\": \"i\", \n\t\t\t\"name\": \"v\", \n\t\t\t\"environment\": \"t\", \n\t\t\t\"technology\": \"B2B\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 01:11:35\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"498af719-daf3-4fb2-a1fe-28fa75a51e45\", \n\t\t\t\"tenantId\": \"f23f76c6-4451-441a-a8b2-fe173079374d\", \n\t\t\t\"tenantCode\": \"f8sjyv9b6q18zrqzk4frjqiuvif1grb97vy79gq1qpu6ui4jy1\", \n\t\t\t\"version\": \"4\", \n\t\t\t\"name\": \"9\", \n\t\t\t\"environment\": \"b\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-10-07 02:06:02\"\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"31462197-7293-4ef7-8de6-e05e6a41b41a\", \n\t\t\t\"tenantId\": \"2915ada3-afa7-4724-b3cf-e9b0f8d7568d\", \n\t\t\t\"tenantCode\": \"z5dy6rv44flyqck4049nv7g3e5fcrpi8onf5szi41zpbtt8hng\", \n\t\t\t\"version\": \"3\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"environment\": \"z\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-11-03 23:34:59\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"10156358-f604-403f-9aa4-a56e98f50183\", \n\t\t\t\"tenantId\": \"8ded8443-eb48-4de9-a267-1f47139adeee\", \n\t\t\t\"tenantCode\": \"kyunxceud5cvhh5ckt7zmhiltda02fiy44awi9dibnhna90n62\", \n\t\t\t\"version\": \"p\", \n\t\t\t\"name\": \"9\", \n\t\t\t\"environment\": \"s\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-11-04 19:42:34\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"84530e46-7647-41b8-9edd-fef8cd4ea0d8\", \n\t\t\t\"tenantId\": \"37e7df35-112f-4711-ad57-e37e39ab6f0f\", \n\t\t\t\"tenantCode\": \"jneugyfu7j09ye8hphp7wdvt3q8j6xxmtgpqv6obkrtpoe4gjh\", \n\t\t\t\"version\": \"r\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"environment\": \"l\", \n\t\t\t\"technology\": \"MULESOFT\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 08:09:50\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4cf4dcd8-78c5-46a2-908a-e2b28370f7d0\", \n\t\t\t\"tenantId\": \"e7926eab-13d6-44e4-a571-bcb84af7cee7\", \n\t\t\t\"tenantCode\": \"pccyxg1odm6gpbhvgxz26lm8m7nwvnhlm7b01171vzndyl38az\", \n\t\t\t\"version\": \"m\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"environment\": \"t\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-11-04 01:45:03\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b9e56f4e-3071-4871-97be-9113635af148\", \n\t\t\t\"tenantId\": \"42fad0e9-0e11-47aa-9ea8-3cf733ba8d85\", \n\t\t\t\"tenantCode\": \"dymmd745eik3qxv21hmtiiqvzsfu11xtkcik2xaq8mlbtxz9c7\", \n\t\t\t\"version\": \"j\", \n\t\t\t\"name\": \"1\", \n\t\t\t\"environment\": \"0\", \n\t\t\t\"technology\": \"MULESOFT\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 00:42:27\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3a5cce4e-7473-41de-82c4-c9e6b2c99b4a\", \n\t\t\t\"tenantId\": \"a24061be-a714-4b29-b31b-931367ad9b12\", \n\t\t\t\"tenantCode\": \"wwl3ogtmvqk432l486axhtr26feky1d6ojqn5jhy8gb5mf2yqv\", \n\t\t\t\"version\": \"f\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"environment\": \"t\", \n\t\t\t\"technology\": \"B2B\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-11-04 16:26:40\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1dbfc8ad-38d4-4c1d-8471-2c05e7cb5512\", \n\t\t\t\"tenantId\": \"de5dd2dd-91d6-4b4a-9c4f-6fe8c05dd0b7\", \n\t\t\t\"tenantCode\": \"xe033dz6bqaug6iiwqdq5n9nmmxuqzaxuzga8z7om4s3puzkw1\", \n\t\t\t\"version\": \"r\", \n\t\t\t\"name\": \"y\", \n\t\t\t\"environment\": \"m\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-11-04 13:15:09\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c23d3038-492d-480f-9daa-c18b6880173d\", \n\t\t\t\"tenantId\": \"57830d13-f113-4e3f-980f-a17042ba32eb\", \n\t\t\t\"tenantCode\": \"yasfheg0vwvilb29is1vxj0rj27h3hvo6omsrmkwpepo8t0cwz\", \n\t\t\t\"version\": \"0\", \n\t\t\t\"name\": \"5\", \n\t\t\t\"environment\": \"m\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 15:09:07\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d395231a-ce2f-404b-bf58-c8d5c16006b3\", \n\t\t\t\"tenantId\": \"bf6f5b42-4579-4f0d-a59c-c3daa7a1da38\", \n\t\t\t\"tenantCode\": \"ij44u03d18m8t4m7oak1le6pgum116yqmqf3fhocn7tcnqe29u\", \n\t\t\t\"version\": \"2\", \n\t\t\t\"name\": \"n\", \n\t\t\t\"environment\": \"f\", \n\t\t\t\"technology\": \"MULESOFT\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 20:52:52\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"de66849d-5860-4f08-97da-a662d895c74f\", \n\t\t\t\"tenantId\": \"46138033-f098-4065-8ad3-045dd70c2856\", \n\t\t\t\"tenantCode\": \"8awi8vp7vgcqy8kdiwrgl5rrjdhu1spt2d5zk4u25jmwaiic03\", \n\t\t\t\"version\": \"v\", \n\t\t\t\"name\": \"x\", \n\t\t\t\"environment\": \"b\", \n\t\t\t\"technology\": \"SAPSCI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 15:41:13\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"782989d0-9645-473c-987e-895dafef9fe5\", \n\t\t\t\"tenantId\": \"12de2e39-a6f6-4321-ae16-bf64d6293207\", \n\t\t\t\"tenantCode\": \"yr91hksqlquas5s9rlnl50qlj5jnndphqz458vqw4i4yy7rzwf\", \n\t\t\t\"version\": \"b\", \n\t\t\t\"name\": \"s\", \n\t\t\t\"environment\": \"7\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 02:04:20\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b6e711d7-1c2e-4e1a-ae4f-10a34916cb64\", \n\t\t\t\"tenantId\": \"96cea57b-7d44-4281-a203-fee6f74e414b\", \n\t\t\t\"tenantCode\": \"37ef54p8npdh746hxka3s7l9y2h92o4doi9w7x2jbkzbo3urzt\", \n\t\t\t\"version\": \"9\", \n\t\t\t\"name\": \"5\", \n\t\t\t\"environment\": \"0\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 17:39:28\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7378213e-5c3e-45d0-b492-53c0ed9b086d\", \n\t\t\t\"tenantId\": \"70f9458a-c7f0-4be3-8253-f56299b9abff\", \n\t\t\t\"tenantCode\": \"6dtpucpys54jruvw9b950x7qavzp35t5sp9rla2m39284tnd11\", \n\t\t\t\"version\": \"x\", \n\t\t\t\"name\": \"4\", \n\t\t\t\"environment\": \"5\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-11-04 02:29:22\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"320468ac-5903-4d1d-9842-f7710412557e\", \n\t\t\t\"tenantId\": \"488b3679-dc6c-4ac8-aaa0-ab765f782fd9\", \n\t\t\t\"tenantCode\": \"z5idcz037lfjk6o29tbes8luyzgbp6u1uzhqfs0jlnr5r5tmay\", \n\t\t\t\"version\": \"l\", \n\t\t\t\"name\": \"t\", \n\t\t\t\"environment\": \"u\", \n\t\t\t\"technology\": \"B2B\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 04:35:21\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ad99415c-8f0c-4dad-bce2-f762ce1271af\", \n\t\t\t\"tenantId\": \"327f327a-894f-40b2-a8d6-b3508a3382b8\", \n\t\t\t\"tenantCode\": \"glt0muevt9cabx6hbfky60dlnhclvj8eemajg7py94i9dicf9h\", \n\t\t\t\"version\": \"f\", \n\t\t\t\"name\": \"8\", \n\t\t\t\"environment\": \"o\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 06:15:55\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a78e2469-72cf-4791-b979-ea404fab8c3c\", \n\t\t\t\"tenantId\": \"83890a3d-17af-41dc-8c84-99ad5b48a6e8\", \n\t\t\t\"tenantCode\": \"nuqykm1u5l0wg1ztmvb9ctm5edskvqfm8m66jsl2d127cl3pi2\", \n\t\t\t\"version\": \"v\", \n\t\t\t\"name\": \"x\", \n\t\t\t\"environment\": \"6\", \n\t\t\t\"technology\": \"MULESOFT\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-11-04 06:39:27\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"88bd0f72-a56b-47d0-b2b9-849afd782284\", \n\t\t\t\"tenantId\": \"9c650d87-f9b9-4c95-9a0a-706ad014ca04\", \n\t\t\t\"tenantCode\": \"1xfgymvec05djqh0gb1o6olw7guwpau94e5eg08xeaqcjpp6m2\", \n\t\t\t\"version\": \"w\", \n\t\t\t\"name\": \"p\", \n\t\t\t\"environment\": \"c\", \n\t\t\t\"technology\": \"MULESOFT\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-11-04 17:51:07\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"4cedaa55-c7cf-46a5-854a-9edc43a255f6\", \n\t\t\t\"tenantId\": \"52746c7c-94a6-42a0-a18a-1b34208e0d8c\", \n\t\t\t\"tenantCode\": \"epa6kk46ca6brlk5k7qd74i31aw8ro2m17xlg9eoz145bpmq9r\", \n\t\t\t\"version\": \"w\", \n\t\t\t\"name\": \"s\", \n\t\t\t\"environment\": \"m\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": true, \n\t\t\t\"cancelledAt\": \"2020-11-04 08:31:04\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"007995d0-8034-4c4c-bed0-df67cb3535f2\", \n\t\t\t\"tenantId\": \"5d32baf4-a69d-40bd-8807-b95ff0ff36d4\", \n\t\t\t\"tenantCode\": \"ulw51ae6vb2392k5ot677judpust4x658r1wfvz5ly6ftc7j1y\", \n\t\t\t\"version\": \"w\", \n\t\t\t\"name\": \"j\", \n\t\t\t\"environment\": \"g\", \n\t\t\t\"technology\": \"WSO2\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 14:11:21\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"663ea789-38f1-42e0-8e5a-6ca0bcbf6b27\", \n\t\t\t\"tenantId\": \"5ae050ea-a408-4f53-8099-b7fc5b8f87be\", \n\t\t\t\"tenantCode\": \"3q3pr632ucwwnfyleqm4c1xblgm1a5rbek66lwxtta1g379kz5\", \n\t\t\t\"version\": \"9\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"environment\": \"q\", \n\t\t\t\"technology\": \"SAPPI\", \n\t\t\t\"isActive\": false, \n\t\t\t\"cancelledAt\": \"2020-11-04 06:08:40\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/graphql",
+					"raw": "/graphql",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"graphql"
@@ -66,9 +66,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/graphql",
+					"raw": "/graphql",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"graphql"
@@ -86,13 +86,13 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:QueryStatement)\n{\n\tcciGetSystems (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"237d2072-de65-46be-ac8e-6c2e879b2c9d\"\n\t\t}\n\t}\n}"
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad\"\n\t\t}\n\t}\n}"
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/graphql",
+					"raw": "/graphql",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"graphql"
@@ -110,13 +110,13 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($query:QueryStatement)\n{\n\tcciFindSystem (query: $query)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"237d2072-de65-46be-ac8e-6c2e879b2c9d\"\n\t\t}\n\t}\n}"
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad\"\n\t\t}\n\t}\n}"
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/graphql",
+					"raw": "/graphql",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"graphql"
@@ -134,13 +134,13 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query ($id:ID)\n{\n\tcciFindSystemById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"237d2072-de65-46be-ac8e-6c2e879b2c9d\"\n}"
+						"variables": "{\n\t\"id\": \"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad\"\n}"
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/graphql",
+					"raw": "/graphql",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"graphql"
@@ -158,13 +158,13 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:CciUpdateSystemInput!)\n{\n\tcciUpdateSystem (payload:$payload)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"237d2072-de65-46be-ac8e-6c2e879b2c9d\", \n\t\t\"tenantId\": \"6fc49df0-1546-4676-a2e7-e3e7f1aa1164\", \n\t\t\"tenantCode\": \"hb3xprbx4ivxrfqk9k1hce2wl5tjswis2xfnfxt9u5dkia7ylm\", \n\t\t\"version\": \"c\", \n\t\t\"name\": \"c\", \n\t\t\"environment\": \"4\", \n\t\t\"technology\": \"WSO2\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 16:58:15\"\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad\", \n\t\t\"tenantId\": \"4d3bc222-807f-45f9-8c2f-cc586bae75ca\", \n\t\t\"tenantCode\": \"g9itpwnjissmj22i5okglr6200dhx29ylnps0j58nq9j6f4b6b\", \n\t\t\"version\": \"u\", \n\t\t\"name\": \"1\", \n\t\t\"environment\": \"8\", \n\t\t\"technology\": \"WSO2\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 03:05:38\"\n\t}\n}"
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/graphql",
+					"raw": "/graphql",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"graphql"
@@ -182,13 +182,13 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($id:ID!)\n{\n\tcciDeleteSystemById (id:$id)\n\t{\n\t\tid\n\t\ttenantCode\n\t\tversion\n\t\tname\n\t\tenvironment\n\t\ttechnology\n\t\tisActive\n\t\tcancelledAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"237d2072-de65-46be-ac8e-6c2e879b2c9d\"\n}"
+						"variables": "{\n\t\"id\": \"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad\"\n}"
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/graphql",
+					"raw": "/graphql",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"graphql"
@@ -210,9 +210,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/graphql",
+					"raw": "/graphql",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"graphql"
@@ -235,7 +235,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"237d2072-de65-46be-ac8e-6c2e879b2c9d\", \n\t\"tenantId\": \"6fc49df0-1546-4676-a2e7-e3e7f1aa1164\", \n\t\"tenantCode\": \"ra7hb5e07cdo86nc7nxrpsolkup8ph21rm1fik7efnqrj2m7be\", \n\t\"version\": \"w\", \n\t\"name\": \"o\", \n\t\"environment\": \"a\", \n\t\"technology\": \"B2B\", \n\t\"isActive\": false, \n\t\"cancelledAt\": \"2020-10-07 05:48:08\"\n}",
+					"raw"   : "{\n\t\"id\": \"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad\", \n\t\"tenantId\": \"4d3bc222-807f-45f9-8c2f-cc586bae75ca\", \n\t\"tenantCode\": \"7pl5hqhbwjzagfwkeza0vm67ht37zg41wu6z5jr7jd5w824iib\", \n\t\"version\": \"n\", \n\t\"name\": \"h\", \n\t\"environment\": \"a\", \n\t\"technology\": \"B2B\", \n\t\"isActive\": true, \n\t\"cancelledAt\": \"2020-11-04 08:47:22\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -243,9 +243,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/cci/system",
+					"raw": "/cci/system",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"cci",
@@ -269,7 +269,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"45a549e3-3f42-4318-bb64-33cb732b432a\", \n\t\t\"tenantId\": \"cf03ab10-24e4-49b5-a7bd-e16753df00f9\", \n\t\t\"tenantCode\": \"8bs1kye5htmmb8fl4pvqoyjd80t022s2xnmta65shkpnkmc8ip\", \n\t\t\"version\": \"m\", \n\t\t\"name\": \"u\", \n\t\t\"environment\": \"4\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 13:00:34\"\n\t}, \n\t{\n\t\t\"id\": \"f9f0bf9a-9310-4791-b3d7-5c662b3aac3e\", \n\t\t\"tenantId\": \"5ecf78f9-428c-474f-bbf8-34e7bd150220\", \n\t\t\"tenantCode\": \"18hthfitgywjqmffyk20e81nwr8td4otqbd6zxvklq1mleron2\", \n\t\t\"version\": \"o\", \n\t\t\"name\": \"5\", \n\t\t\"environment\": \"2\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 22:26:04\"\n\t}, \n\t{\n\t\t\"id\": \"98d9f601-35d2-4b85-9654-e9928d2729ce\", \n\t\t\"tenantId\": \"83c7d9ac-40db-4790-af2a-84ea6bbc707a\", \n\t\t\"tenantCode\": \"vpctrs4q3w1b3589e69x0vkxju9e14s551tzhapwy8eba5z3bv\", \n\t\t\"version\": \"5\", \n\t\t\"name\": \"6\", \n\t\t\"environment\": \"l\", \n\t\t\"technology\": \"MULESOFT\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 20:12:57\"\n\t}, \n\t{\n\t\t\"id\": \"40d19558-a4ed-4485-994a-757d37b2c447\", \n\t\t\"tenantId\": \"11e3a205-fa22-4711-af4c-ad6f67a155f1\", \n\t\t\"tenantCode\": \"ed6b8dd2nzwa3v9y4hv7bcgyfrn8xgt6hs717ee7jsl8ngl42o\", \n\t\t\"version\": \"h\", \n\t\t\"name\": \"d\", \n\t\t\"environment\": \"f\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 20:00:35\"\n\t}, \n\t{\n\t\t\"id\": \"a4f9ede6-da2e-4e0d-b732-49050e3ddbdd\", \n\t\t\"tenantId\": \"23049d2e-aec3-4b73-9564-f7c56dd9c7c8\", \n\t\t\"tenantCode\": \"fit8tknfsgiv3s2r7ben4873uw5snl5s3ve7q0rsnl0cn07xpw\", \n\t\t\"version\": \"u\", \n\t\t\"name\": \"3\", \n\t\t\"environment\": \"o\", \n\t\t\"technology\": \"WSO2\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 08:01:25\"\n\t}, \n\t{\n\t\t\"id\": \"54ba389f-3e10-493c-ae70-a2ef56e79ea3\", \n\t\t\"tenantId\": \"bc895f33-ef35-469c-a0d8-1c25dced7ac9\", \n\t\t\"tenantCode\": \"0ws9if528723l3olt98ca3woj0bhr71ux1x5ee5gc2b8ws4l1s\", \n\t\t\"version\": \"x\", \n\t\t\"name\": \"f\", \n\t\t\"environment\": \"j\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 21:00:34\"\n\t}, \n\t{\n\t\t\"id\": \"66cc8d6b-4621-46e5-a316-c41f4ecff589\", \n\t\t\"tenantId\": \"602e53fe-8d6a-4990-9aea-7afc303c6abc\", \n\t\t\"tenantCode\": \"tod7u3z6ygvrs4soi7lefdb3b0n6pxmf5aify3hkproak8jws3\", \n\t\t\"version\": \"u\", \n\t\t\"name\": \"v\", \n\t\t\"environment\": \"0\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 17:00:35\"\n\t}, \n\t{\n\t\t\"id\": \"1a3e06e8-c6db-4865-96d7-3995e5d6ab9e\", \n\t\t\"tenantId\": \"0374e35d-d6b8-4915-931c-e085fcb4da77\", \n\t\t\"tenantCode\": \"7yovwo1dwz8ywov321htlq98vb54dhlknouuce8l8z3zdqa1h3\", \n\t\t\"version\": \"k\", \n\t\t\"name\": \"2\", \n\t\t\"environment\": \"6\", \n\t\t\"technology\": \"MULESOFT\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 17:12:26\"\n\t}, \n\t{\n\t\t\"id\": \"6b0fd9f0-4932-4bbe-af45-124e155942f7\", \n\t\t\"tenantId\": \"3425958c-571d-430f-b856-30baedc4db95\", \n\t\t\"tenantCode\": \"labgdomc2s81uttbg4t9t004qfngkkvep1es6b6rfcx3a8n17u\", \n\t\t\"version\": \"9\", \n\t\t\"name\": \"0\", \n\t\t\"environment\": \"i\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 08:12:49\"\n\t}, \n\t{\n\t\t\"id\": \"e3c04961-2cc1-46ad-b02b-eeadc224d29a\", \n\t\t\"tenantId\": \"17154f5a-4c6f-4c61-9ca1-c36f4d851bf9\", \n\t\t\"tenantCode\": \"pzclz6p2lcom60182hy6dmgjxu38yuso5269z4q7fzlf06mlez\", \n\t\t\"version\": \"o\", \n\t\t\"name\": \"y\", \n\t\t\"environment\": \"r\", \n\t\t\"technology\": \"WSO2\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 04:16:23\"\n\t}, \n\t{\n\t\t\"id\": \"767214d2-7ec8-4e9f-95b1-ad1dbbc33d13\", \n\t\t\"tenantId\": \"dce22a51-009d-4687-87d3-da22314e81cf\", \n\t\t\"tenantCode\": \"un442rxcgz62gln97isfylzx3m9xrtpn3lprq6sp72tn0npl3s\", \n\t\t\"version\": \"y\", \n\t\t\"name\": \"p\", \n\t\t\"environment\": \"e\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 11:46:49\"\n\t}, \n\t{\n\t\t\"id\": \"9daffcfe-f828-4cc5-8214-062675c94c51\", \n\t\t\"tenantId\": \"5b6607cf-fe6c-4cb6-8a2a-ccda455e8198\", \n\t\t\"tenantCode\": \"3tqgt2a24sivqbmh6js8mehcult1ko6g6g5sbhgphpzg3qgy82\", \n\t\t\"version\": \"u\", \n\t\t\"name\": \"t\", \n\t\t\"environment\": \"6\", \n\t\t\"technology\": \"B2B\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 18:30:51\"\n\t}, \n\t{\n\t\t\"id\": \"9e141c72-3304-4405-a4aa-c0d7d9f44e36\", \n\t\t\"tenantId\": \"2339ffb1-8dc5-478e-8dfd-2e533111f310\", \n\t\t\"tenantCode\": \"pwlrpont910ql10h09i252079beggvytcvjxi9iw096164z3m0\", \n\t\t\"version\": \"e\", \n\t\t\"name\": \"a\", \n\t\t\"environment\": \"m\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 07:28:31\"\n\t}, \n\t{\n\t\t\"id\": \"34369d24-515d-4d72-8740-afdcfc071bc0\", \n\t\t\"tenantId\": \"a9e78bc2-25c1-4793-92cd-acf225692c0f\", \n\t\t\"tenantCode\": \"d4r3ishxzl6qnghfw0rhpnd29e1xortkexilpx28oj41bl9jov\", \n\t\t\"version\": \"a\", \n\t\t\"name\": \"f\", \n\t\t\"environment\": \"m\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 08:01:50\"\n\t}, \n\t{\n\t\t\"id\": \"545c567c-7d06-4661-94c5-436fab1808ec\", \n\t\t\"tenantId\": \"3336cd43-93ab-4c8a-9b1f-c7d3489ead4e\", \n\t\t\"tenantCode\": \"sz983yugz9zttcdezgjnfzid5awolidkzd3soeml7x66q5h9mb\", \n\t\t\"version\": \"k\", \n\t\t\"name\": \"o\", \n\t\t\"environment\": \"q\", \n\t\t\"technology\": \"WSO2\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 10:16:14\"\n\t}, \n\t{\n\t\t\"id\": \"b9759c9c-ce64-49bc-817a-66a79c8e59ff\", \n\t\t\"tenantId\": \"5c72d616-ec0f-45c3-90b8-84da2b24d44b\", \n\t\t\"tenantCode\": \"edqafc57h6kuitsvw1c0yyonim2668cdcf00ve9fx6sozax0ty\", \n\t\t\"version\": \"p\", \n\t\t\"name\": \"f\", \n\t\t\"environment\": \"d\", \n\t\t\"technology\": \"WSO2\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 15:37:33\"\n\t}, \n\t{\n\t\t\"id\": \"61c1f966-ea92-4790-8658-b8e50eafe0c3\", \n\t\t\"tenantId\": \"1e7ecddf-4b64-4e1b-a233-d245cdf1ce7b\", \n\t\t\"tenantCode\": \"d9sexc5pv8bb9nhi40mcn1ulcaxtlz3uzh9ixr3x7u75w6sggk\", \n\t\t\"version\": \"f\", \n\t\t\"name\": \"2\", \n\t\t\"environment\": \"4\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 10:21:49\"\n\t}, \n\t{\n\t\t\"id\": \"c66af110-5a63-4661-b267-5ec3527db279\", \n\t\t\"tenantId\": \"000649a7-7745-4da4-b84c-d92741984435\", \n\t\t\"tenantCode\": \"2w46gpyhqfsqpk8dis8q3salo2qcb4xgt36js80h5id4vm1ls6\", \n\t\t\"version\": \"i\", \n\t\t\"name\": \"i\", \n\t\t\"environment\": \"m\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-10-07 04:52:54\"\n\t}, \n\t{\n\t\t\"id\": \"603c3ace-f5fa-42db-8e96-fe37cf6e8204\", \n\t\t\"tenantId\": \"a0737009-46ae-4b76-9d48-9e23ac799cef\", \n\t\t\"tenantCode\": \"oiuqfdaz1fi34o1e99kcpt30j36z7maby6igtdjq4hts27yans\", \n\t\t\"version\": \"z\", \n\t\t\"name\": \"w\", \n\t\t\"environment\": \"q\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 06:10:32\"\n\t}, \n\t{\n\t\t\"id\": \"d4523d5d-de4a-4a0f-9b5a-d01fddcf4d75\", \n\t\t\"tenantId\": \"d1e86c04-5abb-489d-86ae-8dc7a2b0f6a6\", \n\t\t\"tenantCode\": \"ds80e3m29u7rjhn8uvdepro613jv051z9gz9penaz8b16wqt0t\", \n\t\t\"version\": \"g\", \n\t\t\"name\": \"o\", \n\t\t\"environment\": \"v\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-10-07 12:50:32\"\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"68a8a3fa-37db-4455-b866-0b9c10ff644e\", \n\t\t\"tenantId\": \"e44deb08-a3cc-49ef-a611-3a6e7db5182a\", \n\t\t\"tenantCode\": \"n8c2m3ziotmppgg98sh0bpld0zg4eissywsnmzsrcj9ac54569\", \n\t\t\"version\": \"8\", \n\t\t\"name\": \"e\", \n\t\t\"environment\": \"q\", \n\t\t\"technology\": \"B2B\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-11-04 00:30:56\"\n\t}, \n\t{\n\t\t\"id\": \"cbc085bc-ddf7-4c1f-8d13-3d021820800e\", \n\t\t\"tenantId\": \"3d028a66-f685-40df-b357-dcb07685b286\", \n\t\t\"tenantCode\": \"5rynu48fu1q8khonjfnvm7s4zel6wwwrj6suuxsztahdlybw5b\", \n\t\t\"version\": \"t\", \n\t\t\"name\": \"1\", \n\t\t\"environment\": \"s\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-11-04 11:33:12\"\n\t}, \n\t{\n\t\t\"id\": \"53a67ecf-fb7a-4271-951e-fd9e77462ee0\", \n\t\t\"tenantId\": \"517cb7d4-c06a-4ee7-be1b-2e82ca322f69\", \n\t\t\"tenantCode\": \"yi7ajgrol7yod4oi8us53xa3tklglr075fat35o291m7gfnerd\", \n\t\t\"version\": \"l\", \n\t\t\"name\": \"4\", \n\t\t\"environment\": \"2\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 11:42:39\"\n\t}, \n\t{\n\t\t\"id\": \"20feba53-f967-4d49-ba69-4bb613af1fa8\", \n\t\t\"tenantId\": \"42701ce4-0fdb-43af-a9d1-12c4ecb0b1e3\", \n\t\t\"tenantCode\": \"ok6s0g7vi1z4blxtf5z2sh5dr6by2thyao1by7aoqrv1tdonhw\", \n\t\t\"version\": \"i\", \n\t\t\"name\": \"s\", \n\t\t\"environment\": \"u\", \n\t\t\"technology\": \"MULESOFT\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 03:09:45\"\n\t}, \n\t{\n\t\t\"id\": \"6ba6661e-ded3-4cf2-ac5e-e95454e064dd\", \n\t\t\"tenantId\": \"f6ef9011-b0a4-4e00-bc46-85f63676ee3f\", \n\t\t\"tenantCode\": \"ek385hvkhx4xz2t8ypnxjkqrwatpub3oxcyvqtn3ogjz2pukjm\", \n\t\t\"version\": \"e\", \n\t\t\"name\": \"1\", \n\t\t\"environment\": \"q\", \n\t\t\"technology\": \"B2B\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-03 23:03:32\"\n\t}, \n\t{\n\t\t\"id\": \"de6f9bec-edc3-447f-bcf1-2489d8c5d1a9\", \n\t\t\"tenantId\": \"6a5fd16a-c38a-4b4f-9438-42c1456999fc\", \n\t\t\"tenantCode\": \"ty7hvsq719c2k82k8ahilfjxa18yxi3t2zrf2z04xayjbdswir\", \n\t\t\"version\": \"j\", \n\t\t\"name\": \"w\", \n\t\t\"environment\": \"p\", \n\t\t\"technology\": \"MULESOFT\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 10:12:08\"\n\t}, \n\t{\n\t\t\"id\": \"a9c4e8b6-0d09-4007-a911-cc67fd53b18c\", \n\t\t\"tenantId\": \"50de8726-e22d-416b-8fef-a3adf7d45023\", \n\t\t\"tenantCode\": \"5jp6ly3u5lzuzrobxigk8tbtd9772fsxyyc8rbvtdo7g14isqk\", \n\t\t\"version\": \"6\", \n\t\t\"name\": \"r\", \n\t\t\"environment\": \"z\", \n\t\t\"technology\": \"B2B\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 04:56:45\"\n\t}, \n\t{\n\t\t\"id\": \"ba461b93-190b-423c-b845-2898c97d3590\", \n\t\t\"tenantId\": \"1b55ba0b-de04-45af-843b-00402e4d5f9e\", \n\t\t\"tenantCode\": \"36y93dfvlngbip2kvaln11q6vsh7lbkbt81q52yb9jd2xqtkqx\", \n\t\t\"version\": \"x\", \n\t\t\"name\": \"q\", \n\t\t\"environment\": \"z\", \n\t\t\"technology\": \"WSO2\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 13:44:07\"\n\t}, \n\t{\n\t\t\"id\": \"a3af2e2b-e373-4dc2-a52c-d93181f6d145\", \n\t\t\"tenantId\": \"5c157734-278f-4af8-b270-b0e7a4c3800e\", \n\t\t\"tenantCode\": \"2pd15jwrz91njlnhfzhi0sl6gdubx5vgilw9wx49hudaj1d4za\", \n\t\t\"version\": \"9\", \n\t\t\"name\": \"o\", \n\t\t\"environment\": \"r\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-11-04 13:12:05\"\n\t}, \n\t{\n\t\t\"id\": \"b6cb46d3-bc51-4e6d-9e71-9d49c4b2333d\", \n\t\t\"tenantId\": \"c4cdaccc-3f85-4eb2-bcb5-fab377362d73\", \n\t\t\"tenantCode\": \"p06jihfbfkjnd99fxddqalf6fgip1d2bjpe7k7mvzzpirorh16\", \n\t\t\"version\": \"9\", \n\t\t\"name\": \"l\", \n\t\t\"environment\": \"c\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-11-04 15:25:23\"\n\t}, \n\t{\n\t\t\"id\": \"43f73092-530e-4b5d-922b-e9142fbbdfb1\", \n\t\t\"tenantId\": \"9993a050-b623-4956-b9f2-04a704e6cf14\", \n\t\t\"tenantCode\": \"9o3ff8kgcmjj13utty0hwy3icz9nol21wlgp4t5vnajosrwabz\", \n\t\t\"version\": \"9\", \n\t\t\"name\": \"y\", \n\t\t\"environment\": \"y\", \n\t\t\"technology\": \"MULESOFT\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 19:26:40\"\n\t}, \n\t{\n\t\t\"id\": \"82235595-af41-4d1a-9f08-a6106863e60d\", \n\t\t\"tenantId\": \"492eed97-b589-4099-a272-f0d84622288e\", \n\t\t\"tenantCode\": \"62db8ogil515yeqg9oqc1wnxf9gw8dbc7wf0u6i1snr69ux5rl\", \n\t\t\"version\": \"k\", \n\t\t\"name\": \"j\", \n\t\t\"environment\": \"p\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 19:57:16\"\n\t}, \n\t{\n\t\t\"id\": \"6db5c903-0acc-487d-83c1-b73e0a0022ae\", \n\t\t\"tenantId\": \"7be7da98-28c9-453c-b955-bc00a011659c\", \n\t\t\"tenantCode\": \"jrh5o13r1x05xd0y9jd93dighavc4qx6xxbcc83z03qqiptzzk\", \n\t\t\"version\": \"c\", \n\t\t\"name\": \"v\", \n\t\t\"environment\": \"8\", \n\t\t\"technology\": \"SAPPI\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 18:42:51\"\n\t}, \n\t{\n\t\t\"id\": \"19ae781a-fe8f-4269-ae3e-1aa5fb18ed46\", \n\t\t\"tenantId\": \"19b8ca04-56e9-4feb-b301-c0eba81dc8fb\", \n\t\t\"tenantCode\": \"2sbxeszz9zkurfsj6nsj284jhqelpnmi4g3xmxk7aetagwsgdb\", \n\t\t\"version\": \"o\", \n\t\t\"name\": \"0\", \n\t\t\"environment\": \"p\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-11-04 12:19:02\"\n\t}, \n\t{\n\t\t\"id\": \"907b868d-3ede-49cb-8710-e36600a6b5f2\", \n\t\t\"tenantId\": \"982b51c3-fbdd-4684-8c7f-f64574af9d16\", \n\t\t\"tenantCode\": \"ymnty78xpmhji48ustzcb276fmpki8wgh4hzbwjtn082caf2a4\", \n\t\t\"version\": \"y\", \n\t\t\"name\": \"e\", \n\t\t\"environment\": \"k\", \n\t\t\"technology\": \"MULESOFT\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 08:37:34\"\n\t}, \n\t{\n\t\t\"id\": \"8352b298-9a52-4e3b-839c-70dd144e203e\", \n\t\t\"tenantId\": \"9731b075-836e-4b3d-a45b-dee30ead7503\", \n\t\t\"tenantCode\": \"f11kjfqp1z4nevs8809lenazbfbhsirzw9qoxwxk1q6spa9v7f\", \n\t\t\"version\": \"l\", \n\t\t\"name\": \"e\", \n\t\t\"environment\": \"i\", \n\t\t\"technology\": \"WSO2\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 16:13:28\"\n\t}, \n\t{\n\t\t\"id\": \"6024378d-65e3-4164-a6a0-2f83bb680256\", \n\t\t\"tenantId\": \"1d34b4be-ebbd-45fa-a84d-93f85cea015b\", \n\t\t\"tenantCode\": \"k08ov24ncit3dqejwht8qnij6meifeq56fhs6886sj570em2as\", \n\t\t\"version\": \"w\", \n\t\t\"name\": \"q\", \n\t\t\"environment\": \"u\", \n\t\t\"technology\": \"SAPSCI\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-11-04 06:43:49\"\n\t}, \n\t{\n\t\t\"id\": \"a84c5acc-4f58-4e95-9201-f9be9143d62e\", \n\t\t\"tenantId\": \"7d8035fe-ccef-43e7-91ed-20468fe05a30\", \n\t\t\"tenantCode\": \"cruwwoewrsp4dlk3skpgbwl0yfn48bqulfz1eku3wn7i5u0d7h\", \n\t\t\"version\": \"6\", \n\t\t\"name\": \"w\", \n\t\t\"environment\": \"k\", \n\t\t\"technology\": \"B2B\", \n\t\t\"isActive\": false, \n\t\t\"cancelledAt\": \"2020-11-04 04:09:38\"\n\t}, \n\t{\n\t\t\"id\": \"efc0fc75-c383-4d5f-8ae8-13123bad477c\", \n\t\t\"tenantId\": \"d0130108-6c21-4902-8a6b-3f108257a6f5\", \n\t\t\"tenantCode\": \"ldci8arzpcxf34b6lcmez9c7bx1bgjaa48llslw210vd9v7cba\", \n\t\t\"version\": \"7\", \n\t\t\"name\": \"b\", \n\t\t\"environment\": \"f\", \n\t\t\"technology\": \"WSO2\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-11-04 01:14:15\"\n\t}, \n\t{\n\t\t\"id\": \"e414a672-80a9-4670-b251-7b6c4cd8339d\", \n\t\t\"tenantId\": \"0d6b2459-c9a8-4c68-a054-ff31d625000f\", \n\t\t\"tenantCode\": \"s1xekrxcsfi9lo381u3i5z59bmtmdcywo56l66e96nhl1t5osf\", \n\t\t\"version\": \"7\", \n\t\t\"name\": \"8\", \n\t\t\"environment\": \"o\", \n\t\t\"technology\": \"MULESOFT\", \n\t\t\"isActive\": true, \n\t\t\"cancelledAt\": \"2020-11-04 12:52:54\"\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -277,9 +277,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/cci/systems",
+					"raw": "/cci/systems",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"cci",
@@ -314,9 +314,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/cci/systems/paginate",
+					"raw": "/cci/systems/paginate",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"cci",
@@ -344,7 +344,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"237d2072-de65-46be-ac8e-6c2e879b2c9d\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -352,9 +352,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/cci/systems",
+					"raw": "/cci/systems",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"cci",
@@ -381,7 +381,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"237d2072-de65-46be-ac8e-6c2e879b2c9d\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -389,9 +389,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/cci/system",
+					"raw": "/cci/system",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"cci",
@@ -426,14 +426,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/cci/system/237d2072-de65-46be-ac8e-6c2e879b2c9d",
+					"raw": "/cci/system/9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"cci",
 						"system",
-						"237d2072-de65-46be-ac8e-6c2e879b2c9d"
+						"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad"
 					]
 				}
 			},
@@ -453,7 +453,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"237d2072-de65-46be-ac8e-6c2e879b2c9d\", \n\t\"tenantId\": \"6fc49df0-1546-4676-a2e7-e3e7f1aa1164\", \n\t\"tenantCode\": \"6p3547ekwgn6ec7az37zc12obcsnqddtdyb8kjf8qglro6m57c\", \n\t\"version\": \"p\", \n\t\"name\": \"t\", \n\t\"environment\": \"1\", \n\t\"technology\": \"SAPSCI\", \n\t\"isActive\": false, \n\t\"cancelledAt\": \"2020-10-07 02:15:42\"\n}",
+					"raw"   : "{\n\t\"id\": \"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad\", \n\t\"tenantId\": \"4d3bc222-807f-45f9-8c2f-cc586bae75ca\", \n\t\"tenantCode\": \"egh5cy1rv278wsbow3cofbtpgdxrybhapeo0uxa5v5d87vegkj\", \n\t\"version\": \"f\", \n\t\"name\": \"j\", \n\t\"environment\": \"1\", \n\t\"technology\": \"B2B\", \n\t\"isActive\": false, \n\t\"cancelledAt\": \"2020-11-04 22:48:16\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -461,9 +461,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/cci/system",
+					"raw": "/cci/system",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"cci",
@@ -495,14 +495,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/cci/system/237d2072-de65-46be-ac8e-6c2e879b2c9d",
+					"raw": "/cci/system/9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"cci",
 						"system",
-						"237d2072-de65-46be-ac8e-6c2e879b2c9d"
+						"9d59d33e-42ab-4a2a-85cb-dc91b1e8cdad"
 					]
 				}
 			},
@@ -530,9 +530,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/cci/systems",
+					"raw": "/cci/systems",
 					"host": [
-						"{{URL}}"
+						""
 					],
 					"path": [
 						"cci",
@@ -545,7 +545,7 @@
     ],
     "variable": [
 		{
-			"id": "1e5ec6b6-1aaf-4cb5-8ba5-72af134e5c29",
+			"id": "1ee82536-2f1b-4d81-a6c7-4d395dac4765",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

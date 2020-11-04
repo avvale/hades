@@ -76,7 +76,6 @@ export class MockChannelOverviewRepository extends MockRepository<CciChannelOver
                     new ChannelOverviewCreatedAt(itemCollection.createdAt),
                     new ChannelOverviewUpdatedAt(itemCollection.updatedAt),
                     new ChannelOverviewDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

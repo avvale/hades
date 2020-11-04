@@ -120,7 +120,6 @@ export class MockChannelRepository extends MockRepository<CciChannel> implements
                     new ChannelCreatedAt(itemCollection.createdAt),
                     new ChannelUpdatedAt(itemCollection.updatedAt),
                     new ChannelDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

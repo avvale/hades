@@ -6,12 +6,12 @@ import { channels } from '@hades/cci/channel/infrastructure/seeds/channel.seed';
 import { UpdateChannelCommand } from './update-channel.command';
 import { UpdateChannelService } from './update-channel.service';
 
-describe('UpdateChannelCommandHandler', () => 
+describe('UpdateChannelCommandHandler', () =>
 {
     let commandHandler: UpdateChannelCommandHandler;
     let service: UpdateChannelService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateChannelCommandHandler', () =>
         service         = module.get<UpdateChannelService>(UpdateChannelService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateChannelCommandHandler should be defined', () => 
+        test('UpdateChannelCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an channel created', async () => 
+        test('should return an channel created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateChannelCommand(
@@ -78,7 +78,6 @@ describe('UpdateChannelCommandHandler', () =>
                     channels[0].lastChangedAt,
                     channels[0].riInterfaceName,
                     channels[0].riInterfaceNamespace,
-                    
                 )
             )).toBe(undefined);
         });

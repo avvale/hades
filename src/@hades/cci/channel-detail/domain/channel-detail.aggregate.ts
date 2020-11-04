@@ -56,7 +56,31 @@ export class CciChannelDetail extends AggregateRoot
     system: CciSystem;
     execution: CciExecution;
 
-    constructor(id?: ChannelDetailId, tenantId?: ChannelDetailTenantId, tenantCode?: ChannelDetailTenantCode, systemId?: ChannelDetailSystemId, systemName?: ChannelDetailSystemName, executionId?: ChannelDetailExecutionId, executionType?: ChannelDetailExecutionType, executionExecutedAt?: ChannelDetailExecutionExecutedAt, executionMonitoringStartAt?: ChannelDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: ChannelDetailExecutionMonitoringEndAt, status?: ChannelDetailStatus, channelHash?: ChannelDetailChannelHash, channelSapId?: ChannelDetailChannelSapId, channelParty?: ChannelDetailChannelParty, channelComponent?: ChannelDetailChannelComponent, channelName?: ChannelDetailChannelName, detail?: ChannelDetailDetail, createdAt?: ChannelDetailCreatedAt, updatedAt?: ChannelDetailUpdatedAt, deletedAt?: ChannelDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
+    constructor(
+        id: ChannelDetailId,
+        tenantId: ChannelDetailTenantId,
+        tenantCode: ChannelDetailTenantCode,
+        systemId: ChannelDetailSystemId,
+        systemName: ChannelDetailSystemName,
+        executionId: ChannelDetailExecutionId,
+        executionType: ChannelDetailExecutionType,
+        executionExecutedAt: ChannelDetailExecutionExecutedAt,
+        executionMonitoringStartAt: ChannelDetailExecutionMonitoringStartAt,
+        executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt,
+        status: ChannelDetailStatus,
+        channelHash: ChannelDetailChannelHash,
+        channelSapId: ChannelDetailChannelSapId,
+        channelParty: ChannelDetailChannelParty,
+        channelComponent: ChannelDetailChannelComponent,
+        channelName: ChannelDetailChannelName,
+        detail: ChannelDetailDetail,
+        createdAt: ChannelDetailCreatedAt,
+        updatedAt: ChannelDetailUpdatedAt,
+        deletedAt: ChannelDetailDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+        execution?: CciExecution,
+    )
     {
         super();
 
@@ -87,9 +111,57 @@ export class CciChannelDetail extends AggregateRoot
         this.execution = execution;
     }
 
-    static register (id: ChannelDetailId, tenantId: ChannelDetailTenantId, tenantCode: ChannelDetailTenantCode, systemId: ChannelDetailSystemId, systemName: ChannelDetailSystemName, executionId: ChannelDetailExecutionId, executionType: ChannelDetailExecutionType, executionExecutedAt: ChannelDetailExecutionExecutedAt, executionMonitoringStartAt: ChannelDetailExecutionMonitoringStartAt, executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt, status: ChannelDetailStatus, channelHash: ChannelDetailChannelHash, channelSapId: ChannelDetailChannelSapId, channelParty: ChannelDetailChannelParty, channelComponent: ChannelDetailChannelComponent, channelName: ChannelDetailChannelName, detail: ChannelDetailDetail, createdAt: ChannelDetailCreatedAt, updatedAt: ChannelDetailUpdatedAt, deletedAt: ChannelDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciChannelDetail
+    static register (
+        id: ChannelDetailId,
+        tenantId: ChannelDetailTenantId,
+        tenantCode: ChannelDetailTenantCode,
+        systemId: ChannelDetailSystemId,
+        systemName: ChannelDetailSystemName,
+        executionId: ChannelDetailExecutionId,
+        executionType: ChannelDetailExecutionType,
+        executionExecutedAt: ChannelDetailExecutionExecutedAt,
+        executionMonitoringStartAt: ChannelDetailExecutionMonitoringStartAt,
+        executionMonitoringEndAt: ChannelDetailExecutionMonitoringEndAt,
+        status: ChannelDetailStatus,
+        channelHash: ChannelDetailChannelHash,
+        channelSapId: ChannelDetailChannelSapId,
+        channelParty: ChannelDetailChannelParty,
+        channelComponent: ChannelDetailChannelComponent,
+        channelName: ChannelDetailChannelName,
+        detail: ChannelDetailDetail,
+        createdAt: ChannelDetailCreatedAt,
+        updatedAt: ChannelDetailUpdatedAt,
+        deletedAt: ChannelDetailDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+        execution?: CciExecution,
+    ): CciChannelDetail
     {
-        return new CciChannelDetail(id, tenantId, tenantCode, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, status, channelHash, channelSapId, channelParty, channelComponent, channelName, detail, createdAt, updatedAt, deletedAt, tenant, system, execution, );
+        return new CciChannelDetail(
+            id,
+            tenantId,
+            tenantCode,
+            systemId,
+            systemName,
+            executionId,
+            executionType,
+            executionExecutedAt,
+            executionMonitoringStartAt,
+            executionMonitoringEndAt,
+            status,
+            channelHash,
+            channelSapId,
+            channelParty,
+            channelComponent,
+            channelName,
+            detail,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            tenant,
+            system,
+            execution,
+        );
     }
 
     created(channelDetail: CciChannelDetail): void

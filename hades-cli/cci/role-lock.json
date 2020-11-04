@@ -15,7 +15,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channel-detail.service.spec.ts",
-            "integrity": "sha1:513cc7676e548174fd21bd6b89412d0026459c4e"
+            "integrity": "sha1:f984c14d4600def142706b4f3a322d06aea20350"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channel-detail.service.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/add-channels-detail-context.event.ts",
-            "integrity": "sha1:338dac890d3e1b7b2efc716bd544817845e5f961"
+            "integrity": "sha1:1d8040d89faf38ff6e480bc0ca949c2502ae7bf0"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/created-channel-detail.event-handler.ts",
@@ -215,7 +215,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.command.handler.spec.ts",
-            "integrity": "sha1:7b15697f3b1dd027d19394d26f8bc2df3db35018"
+            "integrity": "sha1:bdd370e7fa1d9ca6029bb688ea7dd1979ca0e718"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.command.ts",
@@ -223,7 +223,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.service.spec.ts",
-            "integrity": "sha1:f13d014f745cb687604a51d18baee79b09fd500d"
+            "integrity": "sha1:d8816e304a15a01d6eabff261bac9b8753f97599"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.service.ts",
@@ -231,7 +231,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/channel-detail.aggregate.ts",
-            "integrity": "sha1:a9c020ea986cba899d41952e7fe1eddab0814fc1"
+            "integrity": "sha1:acefe685c1bb765e761a5ed5a127a417702f385d"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/channel-detail.mapper.ts",
@@ -255,11 +255,11 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/mock/mock-channel-detail.repository.ts",
-            "integrity": "sha1:24f472aecc5a3109cfb80fc4ab200a893d3371a4"
+            "integrity": "sha1:a3d2a09c9617e2496ecd7fd7afe21d8b4f407cee"
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/seeds/channel-detail.seed.ts",
-            "integrity": "sha1:acc8780e407523d0f98cdb8ef3c3dbc79c21898d"
+            "integrity": "sha1:2e013af4c12fd55263e39903a3119baa32e28eb8"
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/sequelize/sequelize-channel-detail.model.ts",
@@ -523,7 +523,7 @@
         },
         {
             "path": "postman/cci.channel-detail.postman.json",
-            "integrity": "sha1:602a8968827ec1cd21180910a276f0d9004303fc"
+            "integrity": "sha1:2bfd81dc1b8fe6614192b8558802610b91f41619"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/create/create-channel-overview.command-handler.ts",
@@ -539,7 +539,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/application/create/create-channel-overview.service.spec.ts",
-            "integrity": "sha1:7e8604454f90959f0ef04f32beb26b1f66111a8a"
+            "integrity": "sha1:5593bf57696405ff93b6b91a343f07c6c172903c"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/create/create-channel-overview.service.ts",
@@ -607,7 +607,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/application/events/add-channels-overview-context.event.ts",
-            "integrity": "sha1:c7b20744310cfb0791da2e29e6a437a8907faf0c"
+            "integrity": "sha1:100673af8daa500cafae03f8d91701e85c91191a"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/events/created-channel-overview.event-handler.ts",
@@ -739,7 +739,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/application/update/update-channel-overview.command.handler.spec.ts",
-            "integrity": "sha1:7c86ad04155efaad2316d1531e98f64700fce6ba"
+            "integrity": "sha1:d5e76b03fd4f63fafc353d61315f947c6dcd577f"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/update/update-channel-overview.command.ts",
@@ -747,7 +747,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/application/update/update-channel-overview.service.spec.ts",
-            "integrity": "sha1:c45dfb3ebbe8b1f4cf1289872af0ec83b4cf9db5"
+            "integrity": "sha1:5f50d226c1dd15dea5d4e0b5b69002c743f6cdeb"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/update/update-channel-overview.service.ts",
@@ -755,7 +755,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/domain/channel-overview.aggregate.ts",
-            "integrity": "sha1:d1e2f3a1f658630f5609a2b11d3acce0cbbe183d"
+            "integrity": "sha1:aba7791e6076191baf328013219f9462d83bc53f"
         },
         {
             "path": "src/@hades/cci/channel-overview/domain/channel-overview.mapper.ts",
@@ -779,11 +779,11 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/infrastructure/mock/mock-channel-overview.repository.ts",
-            "integrity": "sha1:921df3937b272beb2fcc2a433c16280da70f5a38"
+            "integrity": "sha1:ab009b738204776196c2a76832ba7b97be10aa29"
         },
         {
             "path": "src/@hades/cci/channel-overview/infrastructure/seeds/channel-overview.seed.ts",
-            "integrity": "sha1:5c21f780b6ddf855cbcc3549bbaf222a6ed49e1d"
+            "integrity": "sha1:ba6051e11411282863c97361770f12e73556a4e4"
         },
         {
             "path": "src/@hades/cci/channel-overview/infrastructure/sequelize/sequelize-channel-overview.model.ts",
@@ -1043,7 +1043,7 @@
         },
         {
             "path": "postman/cci.channel-overview.postman.json",
-            "integrity": "sha1:5abfa911256c4273c1d184bb722c375d6eafea1c"
+            "integrity": "sha1:072fa83b280bed6e7f3c362dd1005b0817cd8cc3"
         },
         {
             "path": "src/@hades/cci/channel/application/create/create-channel.command-handler.ts",
@@ -1059,7 +1059,7 @@
         },
         {
             "path": "src/@hades/cci/channel/application/create/create-channel.service.spec.ts",
-            "integrity": "sha1:15287af9be97652d9dc09bb87d54d3f160faabe1"
+            "integrity": "sha1:769412d992cabfa2e5cb9ae39b969c6453d3bf15"
         },
         {
             "path": "src/@hades/cci/channel/application/create/create-channel.service.ts",
@@ -1127,7 +1127,7 @@
         },
         {
             "path": "src/@hades/cci/channel/application/events/add-channels-context.event.ts",
-            "integrity": "sha1:c43ee9485c82f8d7d930ad4ca1f787bab2ff2c97"
+            "integrity": "sha1:b6aeb455fc7aec44bf590a6531ed649d978ebaab"
         },
         {
             "path": "src/@hades/cci/channel/application/events/created-channel.event-handler.ts",
@@ -1259,7 +1259,7 @@
         },
         {
             "path": "src/@hades/cci/channel/application/update/update-channel.command.handler.spec.ts",
-            "integrity": "sha1:880cdf2f0fa7e492155152bb4f195134079f4064"
+            "integrity": "sha1:3ed291cb643050d15b8203f9b92273380db16e4b"
         },
         {
             "path": "src/@hades/cci/channel/application/update/update-channel.command.ts",
@@ -1267,7 +1267,7 @@
         },
         {
             "path": "src/@hades/cci/channel/application/update/update-channel.service.spec.ts",
-            "integrity": "sha1:6e09158c192e895be73be387d7661f5acfa7934d"
+            "integrity": "sha1:397effa9fc4841dcdb52dc12e750f89cc553081b"
         },
         {
             "path": "src/@hades/cci/channel/application/update/update-channel.service.ts",
@@ -1275,7 +1275,7 @@
         },
         {
             "path": "src/@hades/cci/channel/domain/channel.aggregate.ts",
-            "integrity": "sha1:e37fe25eb2ecfbc8ce569738c69bc92e9c99c640"
+            "integrity": "sha1:e6e3f88669d5c202a50173b80107bf84f6e72c78"
         },
         {
             "path": "src/@hades/cci/channel/domain/channel.mapper.ts",
@@ -1299,11 +1299,11 @@
         },
         {
             "path": "src/@hades/cci/channel/infrastructure/mock/mock-channel.repository.ts",
-            "integrity": "sha1:bb6ac00b4092ad4ff2e9e00bdf86db7095f262d9"
+            "integrity": "sha1:053d3d99f0cb4ed9f9252c47977677faaa47fd71"
         },
         {
             "path": "src/@hades/cci/channel/infrastructure/seeds/channel.seed.ts",
-            "integrity": "sha1:83dcf56a8d930125421019f53187c4bca8002fc7"
+            "integrity": "sha1:306bc8788edc3def74c6e076f648f0bbb1eae048"
         },
         {
             "path": "src/@hades/cci/channel/infrastructure/sequelize/sequelize-channel.model.ts",
@@ -1651,7 +1651,7 @@
         },
         {
             "path": "postman/cci.channel.postman.json",
-            "integrity": "sha1:bbe42f141b787425d69d225ca7449ca35f6cf251"
+            "integrity": "sha1:507ab17ebcd18c2b14d92b4a0bd2ba0ca4c73dc3"
         },
         {
             "path": "src/@hades/cci/contact/application/create/create-contact.command-handler.ts",
@@ -1667,7 +1667,7 @@
         },
         {
             "path": "src/@hades/cci/contact/application/create/create-contact.service.spec.ts",
-            "integrity": "sha1:4293e41e58fa3b763afe7bfd946453d839abd47c"
+            "integrity": "sha1:22d41a462affb57cfe59cc6756048a790e2e10a9"
         },
         {
             "path": "src/@hades/cci/contact/application/create/create-contact.service.ts",
@@ -1735,7 +1735,7 @@
         },
         {
             "path": "src/@hades/cci/contact/application/events/add-contacts-context.event.ts",
-            "integrity": "sha1:d24a7659a455311d70ff4e12341d4f58425c2efc"
+            "integrity": "sha1:dcd23c1555c3062c92605e320ee7b4bdbbfd6c4d"
         },
         {
             "path": "src/@hades/cci/contact/application/events/created-contact.event-handler.ts",
@@ -1867,7 +1867,7 @@
         },
         {
             "path": "src/@hades/cci/contact/application/update/update-contact.command.handler.spec.ts",
-            "integrity": "sha1:09eaedb2092051292aa1ebc0510c5f0e8b183d6a"
+            "integrity": "sha1:c6556c50a678a10151ee35cc47915492fd250b93"
         },
         {
             "path": "src/@hades/cci/contact/application/update/update-contact.command.ts",
@@ -1875,7 +1875,7 @@
         },
         {
             "path": "src/@hades/cci/contact/application/update/update-contact.service.spec.ts",
-            "integrity": "sha1:86796624f4f4f7f6a0ea89a957ae52d609f6a793"
+            "integrity": "sha1:3f0bc3c39e64456627bacbbe063ef8b8e293b72d"
         },
         {
             "path": "src/@hades/cci/contact/application/update/update-contact.service.ts",
@@ -1883,7 +1883,7 @@
         },
         {
             "path": "src/@hades/cci/contact/domain/contact.aggregate.ts",
-            "integrity": "sha1:ad24cccbd150155037fd069a1dcc673ca4de335b"
+            "integrity": "sha1:33752d82d3e358417bd31814f8a629ba975eb98e"
         },
         {
             "path": "src/@hades/cci/contact/domain/contact.mapper.ts",
@@ -1907,11 +1907,11 @@
         },
         {
             "path": "src/@hades/cci/contact/infrastructure/mock/mock-contact.repository.ts",
-            "integrity": "sha1:90a589b9b66850763d52c1242bdf3a9380672ede"
+            "integrity": "sha1:6c1d3e09d63e4edb99a4488ca45ae006cffd702e"
         },
         {
             "path": "src/@hades/cci/contact/infrastructure/seeds/contact.seed.ts",
-            "integrity": "sha1:a221ddb8ea88988fb96cf49967ea0188ee6db2b6"
+            "integrity": "sha1:3c269ac0c12bcedd39026b3aa7f79a6b84256e3d"
         },
         {
             "path": "src/@hades/cci/contact/infrastructure/sequelize/sequelize-contact.model.ts",
@@ -2167,7 +2167,7 @@
         },
         {
             "path": "postman/cci.contact.postman.json",
-            "integrity": "sha1:b8312c4be3eedbdbf152e89b4c31fe668695e264"
+            "integrity": "sha1:7e2d39379bf78047f137136d2ad732f283deed70"
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lake.command-handler.ts",
@@ -2183,7 +2183,7 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lake.service.spec.ts",
-            "integrity": "sha1:e6286d8c4022119ebc3c00bde7228c19e5b8962a"
+            "integrity": "sha1:296c708ef7f2f118b29638f1437a9a195b00c6a8"
         },
         {
             "path": "src/@hades/cci/data-lake/application/create/create-data-lake.service.ts",
@@ -2251,7 +2251,7 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/add-data-lakes-context.event.ts",
-            "integrity": "sha1:8453cf6560974427737340827e357891dc4eaa5f"
+            "integrity": "sha1:e4e83c295269548a69769829771442ae694041d3"
         },
         {
             "path": "src/@hades/cci/data-lake/application/events/created-data-lake.event-handler.ts",
@@ -2383,7 +2383,7 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/update/update-data-lake.command.handler.spec.ts",
-            "integrity": "sha1:48a446f1688b81cca26802269ca94384ed4f084d"
+            "integrity": "sha1:a64d49427af54262f8d4d6a4a551259c97cf67d6"
         },
         {
             "path": "src/@hades/cci/data-lake/application/update/update-data-lake.command.ts",
@@ -2391,7 +2391,7 @@
         },
         {
             "path": "src/@hades/cci/data-lake/application/update/update-data-lake.service.spec.ts",
-            "integrity": "sha1:ac320bced439bba9d86159904cc8e5c26a6531d8"
+            "integrity": "sha1:75d6df53b5f4a37d209c3b6701a899f12797fefe"
         },
         {
             "path": "src/@hades/cci/data-lake/application/update/update-data-lake.service.ts",
@@ -2399,7 +2399,7 @@
         },
         {
             "path": "src/@hades/cci/data-lake/domain/data-lake.aggregate.ts",
-            "integrity": "sha1:0e329db8e980a110b866e6da4a27b07ac04080c4"
+            "integrity": "sha1:031d46497e836d61dfa8508bbd3aa8c842fd950e"
         },
         {
             "path": "src/@hades/cci/data-lake/domain/data-lake.mapper.ts",
@@ -2423,11 +2423,11 @@
         },
         {
             "path": "src/@hades/cci/data-lake/infrastructure/mock/mock-data-lake.repository.ts",
-            "integrity": "sha1:d199614cac34e5392d95b2a7236d6c9b73112c88"
+            "integrity": "sha1:930c8eda1b93d0bf4c15d67b5a2203ef4d3acb46"
         },
         {
             "path": "src/@hades/cci/data-lake/infrastructure/seeds/data-lake.seed.ts",
-            "integrity": "sha1:893d738a67feaa69073d146d097282a39f7c6703"
+            "integrity": "sha1:d3c39117ea5b26f1dd6f202de88258edc30ea82d"
         },
         {
             "path": "src/@hades/cci/data-lake/infrastructure/sequelize/sequelize-data-lake.model.ts",
@@ -2643,7 +2643,7 @@
         },
         {
             "path": "postman/cci.data-lake.postman.json",
-            "integrity": "sha1:4a4577c6b7bb0e0be1c976d6bd0f4cfdbd5e7cc3"
+            "integrity": "sha1:31e3025d017dbeefc43518762a40ecf3df08eb11"
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-execution.command-handler.ts",
@@ -2659,7 +2659,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-execution.service.spec.ts",
-            "integrity": "sha1:a038f80666013659b64b1326fdeb35807c666c0d"
+            "integrity": "sha1:1ab9315ad62c5ae7a701bb0a65e0903df062f357"
         },
         {
             "path": "src/@hades/cci/execution/application/create/create-execution.service.ts",
@@ -2727,7 +2727,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/events/add-executions-context.event.ts",
-            "integrity": "sha1:3733bbea4e36b4af13749ca20d8c9b561ee04ff8"
+            "integrity": "sha1:780beae6488ccf552e06d4205a46b6bb54a99b45"
         },
         {
             "path": "src/@hades/cci/execution/application/events/created-execution.event-handler.ts",
@@ -2859,7 +2859,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/update/update-execution.command.handler.spec.ts",
-            "integrity": "sha1:84949c40fcf504b36bcd032dc28f411f39048ea8"
+            "integrity": "sha1:6f7c6d210c714147374b40e5e4b6618f680ea49a"
         },
         {
             "path": "src/@hades/cci/execution/application/update/update-execution.command.ts",
@@ -2867,7 +2867,7 @@
         },
         {
             "path": "src/@hades/cci/execution/application/update/update-execution.service.spec.ts",
-            "integrity": "sha1:31ccd8375ba47f6256ba69d065b50ac5682f7fd6"
+            "integrity": "sha1:f4cff31dd9e4bbe557205af5da2ead7bceefeb2f"
         },
         {
             "path": "src/@hades/cci/execution/application/update/update-execution.service.ts",
@@ -2875,7 +2875,7 @@
         },
         {
             "path": "src/@hades/cci/execution/domain/execution.aggregate.ts",
-            "integrity": "sha1:ebaf500d2e6faf4e60207c5a320d118c133949ec"
+            "integrity": "sha1:d94883a54ca20a86a418731b8afb1d1d568824b0"
         },
         {
             "path": "src/@hades/cci/execution/domain/execution.mapper.ts",
@@ -2899,11 +2899,11 @@
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/mock/mock-execution.repository.ts",
-            "integrity": "sha1:02239c43e735080d15e177f7d5d40386ef20836f"
+            "integrity": "sha1:183bdc657270dd3a4ae2b17a32315410c4d7deff"
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/seeds/execution.seed.ts",
-            "integrity": "sha1:26cf72a5b395bf41c6350e94214a8ca0bf9d9d4a"
+            "integrity": "sha1:bf04bc0178959ba93f16fb513058f3287d86b673"
         },
         {
             "path": "src/@hades/cci/execution/infrastructure/sequelize/sequelize-execution.model.ts",
@@ -3139,7 +3139,7 @@
         },
         {
             "path": "postman/cci.execution.postman.json",
-            "integrity": "sha1:672b43ea4e256f199526276b428e16d50fc57d54"
+            "integrity": "sha1:85265dc58f840c708da8219f794ff9dae683ef1b"
         },
         {
             "path": "src/@hades/cci/flow/application/create/create-flow.command-handler.ts",
@@ -3155,7 +3155,7 @@
         },
         {
             "path": "src/@hades/cci/flow/application/create/create-flow.service.spec.ts",
-            "integrity": "sha1:dc8168d15928be071cd1f75f5703dfab0b6dfb97"
+            "integrity": "sha1:ce5615304a4c1622d3a2efe4df8e42ed51f13cb2"
         },
         {
             "path": "src/@hades/cci/flow/application/create/create-flow.service.ts",
@@ -3223,7 +3223,7 @@
         },
         {
             "path": "src/@hades/cci/flow/application/events/add-flows-context.event.ts",
-            "integrity": "sha1:9e37c9d688dd7a68f94aac952cb006b94ec9c9e2"
+            "integrity": "sha1:d824f1694a9b070c1f0d984fbf187712b0313139"
         },
         {
             "path": "src/@hades/cci/flow/application/events/created-flow.event-handler.ts",
@@ -3355,7 +3355,7 @@
         },
         {
             "path": "src/@hades/cci/flow/application/update/update-flow.command.handler.spec.ts",
-            "integrity": "sha1:fa3139d7b09e7c476225cbe0729f174611ae3ff4"
+            "integrity": "sha1:2b166ae5020562f78bcb846206f42ab31d7d54b6"
         },
         {
             "path": "src/@hades/cci/flow/application/update/update-flow.command.ts",
@@ -3363,7 +3363,7 @@
         },
         {
             "path": "src/@hades/cci/flow/application/update/update-flow.service.spec.ts",
-            "integrity": "sha1:82f914310b33d1fe3af35fd20ca01abd9b6b15bd"
+            "integrity": "sha1:7420183d8bf729c6cd158ec3e66bbb269860a4ae"
         },
         {
             "path": "src/@hades/cci/flow/application/update/update-flow.service.ts",
@@ -3371,7 +3371,7 @@
         },
         {
             "path": "src/@hades/cci/flow/domain/flow.aggregate.ts",
-            "integrity": "sha1:ca9704f51fdb149467f3a136705c8f3488945470"
+            "integrity": "sha1:6fbea946a76c01cf1fbbf43199f148b3cf5f130a"
         },
         {
             "path": "src/@hades/cci/flow/domain/flow.mapper.ts",
@@ -3395,11 +3395,11 @@
         },
         {
             "path": "src/@hades/cci/flow/infrastructure/mock/mock-flow.repository.ts",
-            "integrity": "sha1:900057659f8247a3d19ce54d36078ee54176cf6d"
+            "integrity": "sha1:baf7b2d6c2615b4598a6c4a64f71c2218eaf64ef"
         },
         {
             "path": "src/@hades/cci/flow/infrastructure/seeds/flow.seed.ts",
-            "integrity": "sha1:b43ba6824b2188e2401e2aded5f8b5e9058613ee"
+            "integrity": "sha1:2d4d5604bb55999e71f75f2a019e3e4f480a4c07"
         },
         {
             "path": "src/@hades/cci/flow/infrastructure/sequelize/sequelize-flow.model.ts",
@@ -3695,7 +3695,7 @@
         },
         {
             "path": "postman/cci.flow.postman.json",
-            "integrity": "sha1:5fb6ec167b829dc4521fdc473378b90653b12701"
+            "integrity": "sha1:625e9f4d1a297f9dbd9ebd32d6bac7d6d0eeadc8"
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-job-detail.command-handler.ts",
@@ -3711,7 +3711,7 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-job-detail.service.spec.ts",
-            "integrity": "sha1:f6d78f5f05d9b2cc112dba0e2e66628faaa6fea1"
+            "integrity": "sha1:09ce70ae64c4ee1506e2aa7e0bfdb2aa63257119"
         },
         {
             "path": "src/@hades/cci/job-detail/application/create/create-job-detail.service.ts",
@@ -3779,7 +3779,7 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/add-jobs-detail-context.event.ts",
-            "integrity": "sha1:ecdee98754cbbadaf7cbe8fa2fec085411ec0c2f"
+            "integrity": "sha1:0179af132196da346086b8486eaa45ad0439b44b"
         },
         {
             "path": "src/@hades/cci/job-detail/application/events/created-job-detail.event-handler.ts",
@@ -3911,7 +3911,7 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/update/update-job-detail.command.handler.spec.ts",
-            "integrity": "sha1:2ce0ceff85722816f2c971eaeaa7163a72166908"
+            "integrity": "sha1:db7c8e16d758706ff65f5c4e302b5a066d8b9bd8"
         },
         {
             "path": "src/@hades/cci/job-detail/application/update/update-job-detail.command.ts",
@@ -3919,7 +3919,7 @@
         },
         {
             "path": "src/@hades/cci/job-detail/application/update/update-job-detail.service.spec.ts",
-            "integrity": "sha1:a455dd55cb273057f762906d91d64f6aa151064f"
+            "integrity": "sha1:227e88e14e4826fe94640476d8392df8d0b2d40d"
         },
         {
             "path": "src/@hades/cci/job-detail/application/update/update-job-detail.service.ts",
@@ -3927,7 +3927,7 @@
         },
         {
             "path": "src/@hades/cci/job-detail/domain/job-detail.aggregate.ts",
-            "integrity": "sha1:2e26aee57d9e713d020a24786e023ad5bc33bac4"
+            "integrity": "sha1:124a20be2d78b48874b37df2a3e5cddbe500c92b"
         },
         {
             "path": "src/@hades/cci/job-detail/domain/job-detail.mapper.ts",
@@ -3951,11 +3951,11 @@
         },
         {
             "path": "src/@hades/cci/job-detail/infrastructure/mock/mock-job-detail.repository.ts",
-            "integrity": "sha1:88f902524e43236f1c3ee7d441db1f6b0894f9e8"
+            "integrity": "sha1:edac751a3e5f955c393b6370a86d00c55db592d6"
         },
         {
             "path": "src/@hades/cci/job-detail/infrastructure/seeds/job-detail.seed.ts",
-            "integrity": "sha1:e800c24e86bd554637834906996a522cdd4ca6f1"
+            "integrity": "sha1:427229f8a140eee0fbcd3059828637aa10f3dafa"
         },
         {
             "path": "src/@hades/cci/job-detail/infrastructure/sequelize/sequelize-job-detail.model.ts",
@@ -4219,7 +4219,7 @@
         },
         {
             "path": "postman/cci.job-detail.postman.json",
-            "integrity": "sha1:bcda68585992e6b76bf3aea27efd31087c3f70b1"
+            "integrity": "sha1:8949ecfe1df7c370dc4cbc4f2adf1d7220b83406"
         },
         {
             "path": "src/@hades/cci/job-overview/application/create/create-job-overview.command-handler.ts",
@@ -4235,7 +4235,7 @@
         },
         {
             "path": "src/@hades/cci/job-overview/application/create/create-job-overview.service.spec.ts",
-            "integrity": "sha1:1140ea30e5ad5621277a3c0f078338e59e81d28f"
+            "integrity": "sha1:d813064dc07761bba7120aae98c87bf1b31265da"
         },
         {
             "path": "src/@hades/cci/job-overview/application/create/create-job-overview.service.ts",
@@ -4303,7 +4303,7 @@
         },
         {
             "path": "src/@hades/cci/job-overview/application/events/add-jobs-overview-context.event.ts",
-            "integrity": "sha1:c61fb8319ee24af64a6dfcff6773f83c9b68d458"
+            "integrity": "sha1:239a8574bac0558713ae617e0a7f9b51f4742fc5"
         },
         {
             "path": "src/@hades/cci/job-overview/application/events/created-job-overview.event-handler.ts",
@@ -4435,7 +4435,7 @@
         },
         {
             "path": "src/@hades/cci/job-overview/application/update/update-job-overview.command.handler.spec.ts",
-            "integrity": "sha1:d92a6f416538125d52393ccdc92ca6c721394da3"
+            "integrity": "sha1:432cf8637712fe296c1eedd3b1ca3d3f8ea98fe0"
         },
         {
             "path": "src/@hades/cci/job-overview/application/update/update-job-overview.command.ts",
@@ -4443,7 +4443,7 @@
         },
         {
             "path": "src/@hades/cci/job-overview/application/update/update-job-overview.service.spec.ts",
-            "integrity": "sha1:c5f16c5fee04073cc5cefadb978d8be3a7a27b42"
+            "integrity": "sha1:34ea6673893f15000e03a0ce89d61e248d0211cd"
         },
         {
             "path": "src/@hades/cci/job-overview/application/update/update-job-overview.service.ts",
@@ -4451,7 +4451,7 @@
         },
         {
             "path": "src/@hades/cci/job-overview/domain/job-overview.aggregate.ts",
-            "integrity": "sha1:c6665785b7578f002ff37a464b913671f57b9c75"
+            "integrity": "sha1:85a28aa1d6e0ed8ec99df81c27e136db2d542e08"
         },
         {
             "path": "src/@hades/cci/job-overview/domain/job-overview.mapper.ts",
@@ -4475,11 +4475,11 @@
         },
         {
             "path": "src/@hades/cci/job-overview/infrastructure/mock/mock-job-overview.repository.ts",
-            "integrity": "sha1:867944d4a66d13aa8d2f838a8ecf8046ba27e3fc"
+            "integrity": "sha1:e1983a315fe39d706d0592e4429fee5aeff7afea"
         },
         {
             "path": "src/@hades/cci/job-overview/infrastructure/seeds/job-overview.seed.ts",
-            "integrity": "sha1:a419cdc5edb5f2580f1790cd33652bcd202a2692"
+            "integrity": "sha1:6215851bd7a9dffefda6a172722a709aa65e699f"
         },
         {
             "path": "src/@hades/cci/job-overview/infrastructure/sequelize/sequelize-job-overview.model.ts",
@@ -4727,7 +4727,7 @@
         },
         {
             "path": "postman/cci.job-overview.postman.json",
-            "integrity": "sha1:65b1f418f7da2f4e7f5ba1da8d61f104bcb7c550"
+            "integrity": "sha1:871d7d3914efc9d901b5b7d43c5e0d2c8adc85e0"
         },
         {
             "path": "src/@hades/cci/message-detail/application/create/create-message-detail.command-handler.ts",
@@ -4743,7 +4743,7 @@
         },
         {
             "path": "src/@hades/cci/message-detail/application/create/create-message-detail.service.spec.ts",
-            "integrity": "sha1:5152c5563507d58db2ff96e6d026dd4c4c97479f"
+            "integrity": "sha1:5a23cd867d07d7ab5a015c3ff18fdc7083db4e67"
         },
         {
             "path": "src/@hades/cci/message-detail/application/create/create-message-detail.service.ts",
@@ -4811,7 +4811,7 @@
         },
         {
             "path": "src/@hades/cci/message-detail/application/events/add-messages-detail-context.event.ts",
-            "integrity": "sha1:93990ae719a823ccb8df229e987c55b0aafb0ef4"
+            "integrity": "sha1:03225bb1511fafdd3b1060a182b9279d5e5e0d11"
         },
         {
             "path": "src/@hades/cci/message-detail/application/events/created-message-detail.event-handler.ts",
@@ -4943,7 +4943,7 @@
         },
         {
             "path": "src/@hades/cci/message-detail/application/update/update-message-detail.command.handler.spec.ts",
-            "integrity": "sha1:71ea3e9a7a8b7c5ffdd0b60b86cb2841a49eb942"
+            "integrity": "sha1:aea18ac5a766aac26c69f17f5d8c890ac16b52ba"
         },
         {
             "path": "src/@hades/cci/message-detail/application/update/update-message-detail.command.ts",
@@ -4951,7 +4951,7 @@
         },
         {
             "path": "src/@hades/cci/message-detail/application/update/update-message-detail.service.spec.ts",
-            "integrity": "sha1:7a0c9e452afe7f139c2fd557a6778485a1c685f4"
+            "integrity": "sha1:c60ac2bddd95bd6018d6e2d30cee38c35e2ff175"
         },
         {
             "path": "src/@hades/cci/message-detail/application/update/update-message-detail.service.ts",
@@ -4959,7 +4959,7 @@
         },
         {
             "path": "src/@hades/cci/message-detail/domain/message-detail.aggregate.ts",
-            "integrity": "sha1:f9c426dc07bc33f0ccb4a5dc73632a896f5687a1"
+            "integrity": "sha1:1a444d6adfb7c101ae675c36162439291013c636"
         },
         {
             "path": "src/@hades/cci/message-detail/domain/message-detail.mapper.ts",
@@ -4983,11 +4983,11 @@
         },
         {
             "path": "src/@hades/cci/message-detail/infrastructure/mock/mock-message-detail.repository.ts",
-            "integrity": "sha1:c2e20236a1702a55d0b8f589e97369a958995834"
+            "integrity": "sha1:c04204bd92847ad9fa4493f494f08116dcdf3513"
         },
         {
             "path": "src/@hades/cci/message-detail/infrastructure/seeds/message-detail.seed.ts",
-            "integrity": "sha1:6e1e0a846d8fa8b98e823ba0169a256a33159a01"
+            "integrity": "sha1:ab4ff09fad20db5059ce1f8cb2b146d2afee9548"
         },
         {
             "path": "src/@hades/cci/message-detail/infrastructure/sequelize/sequelize-message-detail.model.ts",
@@ -5339,7 +5339,7 @@
         },
         {
             "path": "postman/cci.message-detail.postman.json",
-            "integrity": "sha1:9b386cff82190e8255b6de6f92972fdef80e9158"
+            "integrity": "sha1:c0f2656e444a099a12d0b51d7750a2ea4aaf4ee6"
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-message-overview.command-handler.ts",
@@ -5355,7 +5355,7 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-message-overview.service.spec.ts",
-            "integrity": "sha1:4dc7fa7ca5433bbd0820241db451d4d8c3360d41"
+            "integrity": "sha1:e9fe2067654a812006a6f6010c0331a7adbcf53a"
         },
         {
             "path": "src/@hades/cci/message-overview/application/create/create-message-overview.service.ts",
@@ -5423,7 +5423,7 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/add-messages-overview-context.event.ts",
-            "integrity": "sha1:d08a1becaf235e266dc73e933c93ef69aa6090e9"
+            "integrity": "sha1:d6816c37dd700178a29252e3f7cc66bbc2086d16"
         },
         {
             "path": "src/@hades/cci/message-overview/application/events/created-message-overview.event-handler.ts",
@@ -5555,7 +5555,7 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/update/update-message-overview.command.handler.spec.ts",
-            "integrity": "sha1:f159204b482bd0d3400a9a462b5abd5040228dcd"
+            "integrity": "sha1:223a3f66bf950b7ffac256cabf6ea3312a7c15c7"
         },
         {
             "path": "src/@hades/cci/message-overview/application/update/update-message-overview.command.ts",
@@ -5563,7 +5563,7 @@
         },
         {
             "path": "src/@hades/cci/message-overview/application/update/update-message-overview.service.spec.ts",
-            "integrity": "sha1:c2343d92957147a359fe18676d7152002c73a6ee"
+            "integrity": "sha1:d48db4bb6d613d6c5c63f83281a640f9b697928f"
         },
         {
             "path": "src/@hades/cci/message-overview/application/update/update-message-overview.service.ts",
@@ -5571,7 +5571,7 @@
         },
         {
             "path": "src/@hades/cci/message-overview/domain/message-overview.aggregate.ts",
-            "integrity": "sha1:aa75f0ca6f71bd428a121f2f138f8953a3551100"
+            "integrity": "sha1:185040293520580f87f3fa9da15a4a5499705ea4"
         },
         {
             "path": "src/@hades/cci/message-overview/domain/message-overview.mapper.ts",
@@ -5595,11 +5595,11 @@
         },
         {
             "path": "src/@hades/cci/message-overview/infrastructure/mock/mock-message-overview.repository.ts",
-            "integrity": "sha1:d4bc90ad563b440d5d5fba0243b5094ed4936364"
+            "integrity": "sha1:c69390b56e41d2e315d86e1673fce2b77eec11ed"
         },
         {
             "path": "src/@hades/cci/message-overview/infrastructure/seeds/message-overview.seed.ts",
-            "integrity": "sha1:1168488dd7722979aadd820dbf0ff0ac970c2a7d"
+            "integrity": "sha1:2955c41ab7933326762b2dc5ce83ae569a7c81ee"
         },
         {
             "path": "src/@hades/cci/message-overview/infrastructure/sequelize/sequelize-message-overview.model.ts",
@@ -5871,7 +5871,7 @@
         },
         {
             "path": "postman/cci.message-overview.postman.json",
-            "integrity": "sha1:bade4d4ec4ec44239dc9b994ec7447826ebd9e3b"
+            "integrity": "sha1:351c99f3d243e01f70ce7e05aca3e273ba4d747b"
         },
         {
             "path": "src/@hades/cci/module/application/create/create-module.command-handler.ts",
@@ -5887,7 +5887,7 @@
         },
         {
             "path": "src/@hades/cci/module/application/create/create-module.service.spec.ts",
-            "integrity": "sha1:099ef1d980ae37bfa4f7a25a5e2b88c2fa5009dc"
+            "integrity": "sha1:df3643163a64001225c0282bbf5a83694ee097f0"
         },
         {
             "path": "src/@hades/cci/module/application/create/create-module.service.ts",
@@ -5955,7 +5955,7 @@
         },
         {
             "path": "src/@hades/cci/module/application/events/add-modules-context.event.ts",
-            "integrity": "sha1:500e51a90b56d813c6001e5a6ffd12f656527b88"
+            "integrity": "sha1:9528dab4f9514bb2d99ef6f4c4fe09e073c030e0"
         },
         {
             "path": "src/@hades/cci/module/application/events/created-module.event-handler.ts",
@@ -6087,7 +6087,7 @@
         },
         {
             "path": "src/@hades/cci/module/application/update/update-module.command.handler.spec.ts",
-            "integrity": "sha1:09f4e8af9e9b1756bf57202ef4c0922d3494ed7e"
+            "integrity": "sha1:8165143ee2de8a220f1fc45c2dab39e99bdd879b"
         },
         {
             "path": "src/@hades/cci/module/application/update/update-module.command.ts",
@@ -6095,7 +6095,7 @@
         },
         {
             "path": "src/@hades/cci/module/application/update/update-module.service.spec.ts",
-            "integrity": "sha1:a25c1bed7a37f9fb031a9d990f84eb74b6a628e8"
+            "integrity": "sha1:6fe94690f7d42ea3c4c5244834625a3ec4c44e2a"
         },
         {
             "path": "src/@hades/cci/module/application/update/update-module.service.ts",
@@ -6103,7 +6103,7 @@
         },
         {
             "path": "src/@hades/cci/module/domain/module.aggregate.ts",
-            "integrity": "sha1:1ed2eb9a03c779084ec7d43bf517aceb2aaea332"
+            "integrity": "sha1:a73211f8680721a45908b61b9910ffc7ed6ac781"
         },
         {
             "path": "src/@hades/cci/module/domain/module.mapper.ts",
@@ -6127,11 +6127,11 @@
         },
         {
             "path": "src/@hades/cci/module/infrastructure/mock/mock-module.repository.ts",
-            "integrity": "sha1:2e6bb8247efbbc2289cc841f699ddca1caaa54ca"
+            "integrity": "sha1:95c3a7fa64c7589644fad012922957d6943e134d"
         },
         {
             "path": "src/@hades/cci/module/infrastructure/seeds/module.seed.ts",
-            "integrity": "sha1:927cd909884e2f5308008e951cff6f8dd61319e0"
+            "integrity": "sha1:248972721392776fcea8e533a9f9495f7d5aec2d"
         },
         {
             "path": "src/@hades/cci/module/infrastructure/sequelize/sequelize-module.model.ts",
@@ -6411,7 +6411,7 @@
         },
         {
             "path": "postman/cci.module.postman.json",
-            "integrity": "sha1:8abe6bf35c11fbe4e7e1640730c5a32219e0fb03"
+            "integrity": "sha1:156c0d0f626b76c450d0f495b3cdd14bafdb73c5"
         },
         {
             "path": "src/@hades/cci/role/application/create/create-role.command-handler.ts",
@@ -6427,7 +6427,7 @@
         },
         {
             "path": "src/@hades/cci/role/application/create/create-role.service.spec.ts",
-            "integrity": "sha1:f71de61b42d8cfc468b3d19508ca161a9668e838"
+            "integrity": "sha1:1eca3d1d19f9e50949323a970c601c5e68a8a594"
         },
         {
             "path": "src/@hades/cci/role/application/create/create-role.service.ts",
@@ -6495,7 +6495,7 @@
         },
         {
             "path": "src/@hades/cci/role/application/events/add-roles-context.event.ts",
-            "integrity": "sha1:d9df6ff160b24bab67c129f49aecbb2b28246425"
+            "integrity": "sha1:0937e57c31f09b1a345c01a9e46f5bdfe4f2662b"
         },
         {
             "path": "src/@hades/cci/role/application/events/created-role.event-handler.ts",
@@ -6627,7 +6627,7 @@
         },
         {
             "path": "src/@hades/cci/role/application/update/update-role.command.handler.spec.ts",
-            "integrity": "sha1:21337a10ccf13b6eb222a4a168a4ee64694e197a"
+            "integrity": "sha1:1528849680722ea70e3f7f23724497c2bc054036"
         },
         {
             "path": "src/@hades/cci/role/application/update/update-role.command.ts",
@@ -6635,7 +6635,7 @@
         },
         {
             "path": "src/@hades/cci/role/application/update/update-role.service.spec.ts",
-            "integrity": "sha1:bbe929260903d767df1c4f1007c120e08a922e4e"
+            "integrity": "sha1:2dd44df968d7694494e1b729bb2a5cdeeab5d269"
         },
         {
             "path": "src/@hades/cci/role/application/update/update-role.service.ts",
@@ -6643,7 +6643,7 @@
         },
         {
             "path": "src/@hades/cci/role/domain/role.aggregate.ts",
-            "integrity": "sha1:97febaf6c1fe0dbefcaf8c4b824ac7c45d14ee66"
+            "integrity": "sha1:9b81275489b0a990ed248c997d1fd24578f0312a"
         },
         {
             "path": "src/@hades/cci/role/domain/role.mapper.ts",
@@ -6667,11 +6667,11 @@
         },
         {
             "path": "src/@hades/cci/role/infrastructure/mock/mock-role.repository.ts",
-            "integrity": "sha1:5869c173cf1016d448a97c1900113cb5a4744cc0"
+            "integrity": "sha1:f2a3b97870d502124b3b6a5c3b7cca4aa24510fc"
         },
         {
             "path": "src/@hades/cci/role/infrastructure/seeds/role.seed.ts",
-            "integrity": "sha1:b43f28ed2540390efc328ffa28bdfc909c4aeb78"
+            "integrity": "sha1:e480d0bb204eb288411e6a50a46b2d7591deafe0"
         },
         {
             "path": "src/@hades/cci/role/infrastructure/sequelize/sequelize-role.model.ts",
@@ -6883,7 +6883,7 @@
         },
         {
             "path": "postman/cci.role.postman.json",
-            "integrity": "sha1:526fe9c727ac01710acfbad36cd5244d004a193f"
+            "integrity": "sha1:4442138d867cfe7c8dcd19fed061f90bf3e912b1"
         }
     ]
 }

@@ -78,7 +78,6 @@ export class MockJobDetailRepository extends MockRepository<CciJobDetail> implem
                     new JobDetailCreatedAt(itemCollection.createdAt),
                     new JobDetailUpdatedAt(itemCollection.updatedAt),
                     new JobDetailDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

@@ -56,7 +56,31 @@ export class CciJobDetail extends AggregateRoot
     system: CciSystem;
     execution: CciExecution;
 
-    constructor(id?: JobDetailId, tenantId?: JobDetailTenantId, tenantCode?: JobDetailTenantCode, systemId?: JobDetailSystemId, systemName?: JobDetailSystemName, executionId?: JobDetailExecutionId, executionType?: JobDetailExecutionType, executionExecutedAt?: JobDetailExecutionExecutedAt, executionMonitoringStartAt?: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt?: JobDetailExecutionMonitoringEndAt, status?: JobDetailStatus, name?: JobDetailName, returnCode?: JobDetailReturnCode, node?: JobDetailNode, user?: JobDetailUser, startAt?: JobDetailStartAt, endAt?: JobDetailEndAt, createdAt?: JobDetailCreatedAt, updatedAt?: JobDetailUpdatedAt, deletedAt?: JobDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, )
+    constructor(
+        id: JobDetailId,
+        tenantId: JobDetailTenantId,
+        tenantCode: JobDetailTenantCode,
+        systemId: JobDetailSystemId,
+        systemName: JobDetailSystemName,
+        executionId: JobDetailExecutionId,
+        executionType: JobDetailExecutionType,
+        executionExecutedAt: JobDetailExecutionExecutedAt,
+        executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt,
+        executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt,
+        status: JobDetailStatus,
+        name: JobDetailName,
+        returnCode: JobDetailReturnCode,
+        node: JobDetailNode,
+        user: JobDetailUser,
+        startAt: JobDetailStartAt,
+        endAt: JobDetailEndAt,
+        createdAt: JobDetailCreatedAt,
+        updatedAt: JobDetailUpdatedAt,
+        deletedAt: JobDetailDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+        execution?: CciExecution,
+    )
     {
         super();
 
@@ -87,9 +111,57 @@ export class CciJobDetail extends AggregateRoot
         this.execution = execution;
     }
 
-    static register (id: JobDetailId, tenantId: JobDetailTenantId, tenantCode: JobDetailTenantCode, systemId: JobDetailSystemId, systemName: JobDetailSystemName, executionId: JobDetailExecutionId, executionType: JobDetailExecutionType, executionExecutedAt: JobDetailExecutionExecutedAt, executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt, executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt, status: JobDetailStatus, name: JobDetailName, returnCode: JobDetailReturnCode, node: JobDetailNode, user: JobDetailUser, startAt: JobDetailStartAt, endAt: JobDetailEndAt, createdAt: JobDetailCreatedAt, updatedAt: JobDetailUpdatedAt, deletedAt: JobDetailDeletedAt, tenant?: IamTenant, system?: CciSystem, execution?: CciExecution, ): CciJobDetail
+    static register (
+        id: JobDetailId,
+        tenantId: JobDetailTenantId,
+        tenantCode: JobDetailTenantCode,
+        systemId: JobDetailSystemId,
+        systemName: JobDetailSystemName,
+        executionId: JobDetailExecutionId,
+        executionType: JobDetailExecutionType,
+        executionExecutedAt: JobDetailExecutionExecutedAt,
+        executionMonitoringStartAt: JobDetailExecutionMonitoringStartAt,
+        executionMonitoringEndAt: JobDetailExecutionMonitoringEndAt,
+        status: JobDetailStatus,
+        name: JobDetailName,
+        returnCode: JobDetailReturnCode,
+        node: JobDetailNode,
+        user: JobDetailUser,
+        startAt: JobDetailStartAt,
+        endAt: JobDetailEndAt,
+        createdAt: JobDetailCreatedAt,
+        updatedAt: JobDetailUpdatedAt,
+        deletedAt: JobDetailDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+        execution?: CciExecution,
+    ): CciJobDetail
     {
-        return new CciJobDetail(id, tenantId, tenantCode, systemId, systemName, executionId, executionType, executionExecutedAt, executionMonitoringStartAt, executionMonitoringEndAt, status, name, returnCode, node, user, startAt, endAt, createdAt, updatedAt, deletedAt, tenant, system, execution, );
+        return new CciJobDetail(
+            id,
+            tenantId,
+            tenantCode,
+            systemId,
+            systemName,
+            executionId,
+            executionType,
+            executionExecutedAt,
+            executionMonitoringStartAt,
+            executionMonitoringEndAt,
+            status,
+            name,
+            returnCode,
+            node,
+            user,
+            startAt,
+            endAt,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            tenant,
+            system,
+            execution,
+        );
     }
 
     created(jobDetail: CciJobDetail): void

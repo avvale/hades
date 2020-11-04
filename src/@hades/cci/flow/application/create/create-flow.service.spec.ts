@@ -102,7 +102,6 @@ describe('CreateFlowService', () =>
                 new FlowIsComplex(flows[0].isComplex),
                 new FlowFieldGroupId(flows[0].fieldGroupId),
                 new FlowData(flows[0].data),
-                
             )).toBe(undefined);
         });
     });

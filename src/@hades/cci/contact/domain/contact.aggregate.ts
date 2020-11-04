@@ -52,7 +52,29 @@ export class CciContact extends AggregateRoot
     system: CciSystem;
     role: CciRole;
 
-    constructor(id?: ContactId, tenantId?: ContactTenantId, tenantCode?: ContactTenantCode, systemId?: ContactSystemId, systemName?: ContactSystemName, roleId?: ContactRoleId, roleName?: ContactRoleName, name?: ContactName, surname?: ContactSurname, email?: ContactEmail, mobile?: ContactMobile, area?: ContactArea, hasConsentEmail?: ContactHasConsentEmail, hasConsentMobile?: ContactHasConsentMobile, isActive?: ContactIsActive, createdAt?: ContactCreatedAt, updatedAt?: ContactUpdatedAt, deletedAt?: ContactDeletedAt, tenant?: IamTenant, system?: CciSystem, role?: CciRole, )
+    constructor(
+        id: ContactId,
+        tenantId: ContactTenantId,
+        tenantCode: ContactTenantCode,
+        systemId: ContactSystemId,
+        systemName: ContactSystemName,
+        roleId: ContactRoleId,
+        roleName: ContactRoleName,
+        name: ContactName,
+        surname: ContactSurname,
+        email: ContactEmail,
+        mobile: ContactMobile,
+        area: ContactArea,
+        hasConsentEmail: ContactHasConsentEmail,
+        hasConsentMobile: ContactHasConsentMobile,
+        isActive: ContactIsActive,
+        createdAt: ContactCreatedAt,
+        updatedAt: ContactUpdatedAt,
+        deletedAt: ContactDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+        role?: CciRole,
+    )
     {
         super();
 
@@ -81,9 +103,53 @@ export class CciContact extends AggregateRoot
         this.role = role;
     }
 
-    static register (id: ContactId, tenantId: ContactTenantId, tenantCode: ContactTenantCode, systemId: ContactSystemId, systemName: ContactSystemName, roleId: ContactRoleId, roleName: ContactRoleName, name: ContactName, surname: ContactSurname, email: ContactEmail, mobile: ContactMobile, area: ContactArea, hasConsentEmail: ContactHasConsentEmail, hasConsentMobile: ContactHasConsentMobile, isActive: ContactIsActive, createdAt: ContactCreatedAt, updatedAt: ContactUpdatedAt, deletedAt: ContactDeletedAt, tenant?: IamTenant, system?: CciSystem, role?: CciRole, ): CciContact
+    static register (
+        id: ContactId,
+        tenantId: ContactTenantId,
+        tenantCode: ContactTenantCode,
+        systemId: ContactSystemId,
+        systemName: ContactSystemName,
+        roleId: ContactRoleId,
+        roleName: ContactRoleName,
+        name: ContactName,
+        surname: ContactSurname,
+        email: ContactEmail,
+        mobile: ContactMobile,
+        area: ContactArea,
+        hasConsentEmail: ContactHasConsentEmail,
+        hasConsentMobile: ContactHasConsentMobile,
+        isActive: ContactIsActive,
+        createdAt: ContactCreatedAt,
+        updatedAt: ContactUpdatedAt,
+        deletedAt: ContactDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+        role?: CciRole,
+    ): CciContact
     {
-        return new CciContact(id, tenantId, tenantCode, systemId, systemName, roleId, roleName, name, surname, email, mobile, area, hasConsentEmail, hasConsentMobile, isActive, createdAt, updatedAt, deletedAt, tenant, system, role, );
+        return new CciContact(
+            id,
+            tenantId,
+            tenantCode,
+            systemId,
+            systemName,
+            roleId,
+            roleName,
+            name,
+            surname,
+            email,
+            mobile,
+            area,
+            hasConsentEmail,
+            hasConsentMobile,
+            isActive,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            tenant,
+            system,
+            role,
+        );
     }
 
     created(contact: CciContact): void

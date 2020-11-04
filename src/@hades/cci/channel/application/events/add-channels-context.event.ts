@@ -65,7 +65,6 @@ export class AddChannelsContextEvent extends AggregateRoot
                         channel.createdAt?.value,
                         channel.updatedAt?.value,
                         channel.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -119,7 +118,6 @@ export class AddChannelsContextEvent extends AggregateRoot
                         channel.createdAt?.value,
                         channel.updatedAt?.value,
                         channel.deletedAt?.value,
-                        
                     )
                 )
             )

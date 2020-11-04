@@ -81,12 +81,12 @@ describe('UpdateChannelService', () =>
 
     describe('main', () =>
     {
-        test('UpdateChannelService should be defined', () => 
+        test('UpdateChannelService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a channel and emit event', async () => 
+        test('should update a channel and emit event', async () =>
         {
             expect(await service.main(
                 new ChannelId(channels[0].id),
@@ -127,7 +127,6 @@ describe('UpdateChannelService', () =>
                 new ChannelLastChangedAt(channels[0].lastChangedAt),
                 new ChannelRiInterfaceName(channels[0].riInterfaceName),
                 new ChannelRiInterfaceNamespace(channels[0].riInterfaceNamespace),
-                
             )).toBe(undefined);
         });
     });

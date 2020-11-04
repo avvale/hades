@@ -62,7 +62,6 @@ describe('CreateDataLakeService', () =>
                 new DataLakeExecutionId(dataLakes[0].executionId),
                 new DataLakeTenantCode(dataLakes[0].tenantCode),
                 new DataLakePayload(dataLakes[0].payload),
-                
             )).toBe(undefined);
         });
     });

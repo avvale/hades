@@ -47,19 +47,18 @@ describe('UpdateRoleService', () =>
 
     describe('main', () =>
     {
-        test('UpdateRoleService should be defined', () => 
+        test('UpdateRoleService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a role and emit event', async () => 
+        test('should update a role and emit event', async () =>
         {
             expect(await service.main(
                 new RoleId(roles[0].id),
                 new RoleTenantId(roles[0].tenantId),
                 new RoleTenantCode(roles[0].tenantCode),
                 new RoleName(roles[0].name),
-                
             )).toBe(undefined);
         });
     });

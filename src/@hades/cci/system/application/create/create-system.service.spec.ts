@@ -70,7 +70,6 @@ describe('CreateSystemService', () =>
                 new SystemTechnology(systems[0].technology),
                 new SystemIsActive(systems[0].isActive),
                 new SystemCancelledAt(systems[0].cancelledAt),
-                
             )).toBe(undefined);
         });
     });

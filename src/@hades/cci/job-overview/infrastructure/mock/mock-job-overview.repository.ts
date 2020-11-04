@@ -70,7 +70,6 @@ export class MockJobOverviewRepository extends MockRepository<CciJobOverview> im
                     new JobOverviewCreatedAt(itemCollection.createdAt),
                     new JobOverviewUpdatedAt(itemCollection.updatedAt),
                     new JobOverviewDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

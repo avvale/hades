@@ -46,7 +46,6 @@ export class AddMessagesOverviewContextEvent extends AggregateRoot
                         messageOverview.createdAt?.value,
                         messageOverview.updatedAt?.value,
                         messageOverview.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -81,7 +80,6 @@ export class AddMessagesOverviewContextEvent extends AggregateRoot
                         messageOverview.createdAt?.value,
                         messageOverview.updatedAt?.value,
                         messageOverview.deletedAt?.value,
-                        
                     )
                 )
             )

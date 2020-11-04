@@ -90,7 +90,6 @@ describe('CreateMessageOverviewService', () =>
                 new MessageOverviewHolding(messagesOverview[0].holding),
                 new MessageOverviewToBeDelivered(messagesOverview[0].toBeDelivered),
                 new MessageOverviewWaiting(messagesOverview[0].waiting),
-                
             )).toBe(undefined);
         });
     });

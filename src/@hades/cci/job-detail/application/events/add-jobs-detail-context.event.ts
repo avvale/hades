@@ -44,7 +44,6 @@ export class AddJobsDetailContextEvent extends AggregateRoot
                         jobDetail.createdAt?.value,
                         jobDetail.updatedAt?.value,
                         jobDetail.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -77,7 +76,6 @@ export class AddJobsDetailContextEvent extends AggregateRoot
                         jobDetail.createdAt?.value,
                         jobDetail.updatedAt?.value,
                         jobDetail.deletedAt?.value,
-                        
                     )
                 )
             )

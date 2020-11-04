@@ -40,7 +40,23 @@ export class CciExecution extends AggregateRoot
     tenant: IamTenant;
     system: CciSystem;
 
-    constructor(id?: ExecutionId, tenantId?: ExecutionTenantId, tenantCode?: ExecutionTenantCode, systemId?: ExecutionSystemId, systemName?: ExecutionSystemName, version?: ExecutionVersion, type?: ExecutionType, executedAt?: ExecutionExecutedAt, monitoringStartAt?: ExecutionMonitoringStartAt, monitoringEndAt?: ExecutionMonitoringEndAt, createdAt?: ExecutionCreatedAt, updatedAt?: ExecutionUpdatedAt, deletedAt?: ExecutionDeletedAt, tenant?: IamTenant, system?: CciSystem, )
+    constructor(
+        id: ExecutionId,
+        tenantId: ExecutionTenantId,
+        tenantCode: ExecutionTenantCode,
+        systemId: ExecutionSystemId,
+        systemName: ExecutionSystemName,
+        version: ExecutionVersion,
+        type: ExecutionType,
+        executedAt: ExecutionExecutedAt,
+        monitoringStartAt: ExecutionMonitoringStartAt,
+        monitoringEndAt: ExecutionMonitoringEndAt,
+        createdAt: ExecutionCreatedAt,
+        updatedAt: ExecutionUpdatedAt,
+        deletedAt: ExecutionDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+    )
     {
         super();
 
@@ -63,9 +79,41 @@ export class CciExecution extends AggregateRoot
         this.system = system;
     }
 
-    static register (id: ExecutionId, tenantId: ExecutionTenantId, tenantCode: ExecutionTenantCode, systemId: ExecutionSystemId, systemName: ExecutionSystemName, version: ExecutionVersion, type: ExecutionType, executedAt: ExecutionExecutedAt, monitoringStartAt: ExecutionMonitoringStartAt, monitoringEndAt: ExecutionMonitoringEndAt, createdAt: ExecutionCreatedAt, updatedAt: ExecutionUpdatedAt, deletedAt: ExecutionDeletedAt, tenant?: IamTenant, system?: CciSystem, ): CciExecution
+    static register (
+        id: ExecutionId,
+        tenantId: ExecutionTenantId,
+        tenantCode: ExecutionTenantCode,
+        systemId: ExecutionSystemId,
+        systemName: ExecutionSystemName,
+        version: ExecutionVersion,
+        type: ExecutionType,
+        executedAt: ExecutionExecutedAt,
+        monitoringStartAt: ExecutionMonitoringStartAt,
+        monitoringEndAt: ExecutionMonitoringEndAt,
+        createdAt: ExecutionCreatedAt,
+        updatedAt: ExecutionUpdatedAt,
+        deletedAt: ExecutionDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+    ): CciExecution
     {
-        return new CciExecution(id, tenantId, tenantCode, systemId, systemName, version, type, executedAt, monitoringStartAt, monitoringEndAt, createdAt, updatedAt, deletedAt, tenant, system, );
+        return new CciExecution(
+            id,
+            tenantId,
+            tenantCode,
+            systemId,
+            systemName,
+            version,
+            type,
+            executedAt,
+            monitoringStartAt,
+            monitoringEndAt,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            tenant,
+            system,
+        );
     }
 
     created(execution: CciExecution): void

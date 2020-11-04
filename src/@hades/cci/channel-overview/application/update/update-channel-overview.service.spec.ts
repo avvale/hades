@@ -59,12 +59,12 @@ describe('UpdateChannelOverviewService', () =>
 
     describe('main', () =>
     {
-        test('UpdateChannelOverviewService should be defined', () => 
+        test('UpdateChannelOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a channelOverview and emit event', async () => 
+        test('should update a channelOverview and emit event', async () =>
         {
             expect(await service.main(
                 new ChannelOverviewId(channelsOverview[0].id),
@@ -83,7 +83,6 @@ describe('UpdateChannelOverviewService', () =>
                 new ChannelOverviewStopped(channelsOverview[0].stopped),
                 new ChannelOverviewUnknown(channelsOverview[0].unknown),
                 new ChannelOverviewUnregistered(channelsOverview[0].unregistered),
-                
             )).toBe(undefined);
         });
     });

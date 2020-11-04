@@ -52,7 +52,6 @@ export class MockRoleRepository extends MockRepository<CciRole> implements IRole
                     new RoleCreatedAt(itemCollection.createdAt),
                     new RoleUpdatedAt(itemCollection.updatedAt),
                     new RoleDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

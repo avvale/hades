@@ -94,7 +94,6 @@ describe('CreateModuleService', () =>
                 new ModuleName(modules[0].name),
                 new ModuleParameterName(modules[0].parameterName),
                 new ModuleParameterValue(modules[0].parameterValue),
-                
             )).toBe(undefined);
         });
     });

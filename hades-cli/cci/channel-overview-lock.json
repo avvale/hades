@@ -15,7 +15,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channel-detail.service.spec.ts",
-            "integrity": "sha1:513cc7676e548174fd21bd6b89412d0026459c4e"
+            "integrity": "sha1:f984c14d4600def142706b4f3a322d06aea20350"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/create/create-channel-detail.service.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/add-channels-detail-context.event.ts",
-            "integrity": "sha1:338dac890d3e1b7b2efc716bd544817845e5f961"
+            "integrity": "sha1:1d8040d89faf38ff6e480bc0ca949c2502ae7bf0"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/events/created-channel-detail.event-handler.ts",
@@ -215,7 +215,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.command.handler.spec.ts",
-            "integrity": "sha1:7b15697f3b1dd027d19394d26f8bc2df3db35018"
+            "integrity": "sha1:bdd370e7fa1d9ca6029bb688ea7dd1979ca0e718"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.command.ts",
@@ -223,7 +223,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.service.spec.ts",
-            "integrity": "sha1:f13d014f745cb687604a51d18baee79b09fd500d"
+            "integrity": "sha1:d8816e304a15a01d6eabff261bac9b8753f97599"
         },
         {
             "path": "src/@hades/cci/channel-detail/application/update/update-channel-detail.service.ts",
@@ -231,7 +231,7 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/channel-detail.aggregate.ts",
-            "integrity": "sha1:a9c020ea986cba899d41952e7fe1eddab0814fc1"
+            "integrity": "sha1:acefe685c1bb765e761a5ed5a127a417702f385d"
         },
         {
             "path": "src/@hades/cci/channel-detail/domain/channel-detail.mapper.ts",
@@ -255,11 +255,11 @@
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/mock/mock-channel-detail.repository.ts",
-            "integrity": "sha1:24f472aecc5a3109cfb80fc4ab200a893d3371a4"
+            "integrity": "sha1:a3d2a09c9617e2496ecd7fd7afe21d8b4f407cee"
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/seeds/channel-detail.seed.ts",
-            "integrity": "sha1:acc8780e407523d0f98cdb8ef3c3dbc79c21898d"
+            "integrity": "sha1:2e013af4c12fd55263e39903a3119baa32e28eb8"
         },
         {
             "path": "src/@hades/cci/channel-detail/infrastructure/sequelize/sequelize-channel-detail.model.ts",
@@ -523,7 +523,7 @@
         },
         {
             "path": "postman/cci.channel-detail.postman.json",
-            "integrity": "sha1:602a8968827ec1cd21180910a276f0d9004303fc"
+            "integrity": "sha1:2bfd81dc1b8fe6614192b8558802610b91f41619"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/create/create-channel-overview.command-handler.ts",
@@ -539,7 +539,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/application/create/create-channel-overview.service.spec.ts",
-            "integrity": "sha1:7e8604454f90959f0ef04f32beb26b1f66111a8a"
+            "integrity": "sha1:5593bf57696405ff93b6b91a343f07c6c172903c"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/create/create-channel-overview.service.ts",
@@ -607,7 +607,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/application/events/add-channels-overview-context.event.ts",
-            "integrity": "sha1:c7b20744310cfb0791da2e29e6a437a8907faf0c"
+            "integrity": "sha1:100673af8daa500cafae03f8d91701e85c91191a"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/events/created-channel-overview.event-handler.ts",
@@ -739,7 +739,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/application/update/update-channel-overview.command.handler.spec.ts",
-            "integrity": "sha1:7c86ad04155efaad2316d1531e98f64700fce6ba"
+            "integrity": "sha1:d5e76b03fd4f63fafc353d61315f947c6dcd577f"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/update/update-channel-overview.command.ts",
@@ -747,7 +747,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/application/update/update-channel-overview.service.spec.ts",
-            "integrity": "sha1:c45dfb3ebbe8b1f4cf1289872af0ec83b4cf9db5"
+            "integrity": "sha1:5f50d226c1dd15dea5d4e0b5b69002c743f6cdeb"
         },
         {
             "path": "src/@hades/cci/channel-overview/application/update/update-channel-overview.service.ts",
@@ -755,7 +755,7 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/domain/channel-overview.aggregate.ts",
-            "integrity": "sha1:d1e2f3a1f658630f5609a2b11d3acce0cbbe183d"
+            "integrity": "sha1:aba7791e6076191baf328013219f9462d83bc53f"
         },
         {
             "path": "src/@hades/cci/channel-overview/domain/channel-overview.mapper.ts",
@@ -779,11 +779,11 @@
         },
         {
             "path": "src/@hades/cci/channel-overview/infrastructure/mock/mock-channel-overview.repository.ts",
-            "integrity": "sha1:921df3937b272beb2fcc2a433c16280da70f5a38"
+            "integrity": "sha1:ab009b738204776196c2a76832ba7b97be10aa29"
         },
         {
             "path": "src/@hades/cci/channel-overview/infrastructure/seeds/channel-overview.seed.ts",
-            "integrity": "sha1:5c21f780b6ddf855cbcc3549bbaf222a6ed49e1d"
+            "integrity": "sha1:ba6051e11411282863c97361770f12e73556a4e4"
         },
         {
             "path": "src/@hades/cci/channel-overview/infrastructure/sequelize/sequelize-channel-overview.model.ts",
@@ -1043,7 +1043,7 @@
         },
         {
             "path": "postman/cci.channel-overview.postman.json",
-            "integrity": "sha1:5abfa911256c4273c1d184bb722c375d6eafea1c"
+            "integrity": "sha1:072fa83b280bed6e7f3c362dd1005b0817cd8cc3"
         }
     ]
 }

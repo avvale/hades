@@ -86,7 +86,6 @@ describe('CreateJobDetailService', () =>
                 new JobDetailUser(jobsDetail[0].user),
                 new JobDetailStartAt(jobsDetail[0].startAt),
                 new JobDetailEndAt(jobsDetail[0].endAt),
-                
             )).toBe(undefined);
         });
     });

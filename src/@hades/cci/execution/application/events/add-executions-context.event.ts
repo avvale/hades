@@ -37,7 +37,6 @@ export class AddExecutionsContextEvent extends AggregateRoot
                         execution.createdAt?.value,
                         execution.updatedAt?.value,
                         execution.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -63,7 +62,6 @@ export class AddExecutionsContextEvent extends AggregateRoot
                         execution.createdAt?.value,
                         execution.updatedAt?.value,
                         execution.deletedAt?.value,
-                        
                     )
                 )
             )

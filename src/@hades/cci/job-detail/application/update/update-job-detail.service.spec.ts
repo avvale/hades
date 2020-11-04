@@ -60,12 +60,12 @@ describe('UpdateJobDetailService', () =>
 
     describe('main', () =>
     {
-        test('UpdateJobDetailService should be defined', () => 
+        test('UpdateJobDetailService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a jobDetail and emit event', async () => 
+        test('should update a jobDetail and emit event', async () =>
         {
             expect(await service.main(
                 new JobDetailId(jobsDetail[0].id),
@@ -85,7 +85,6 @@ describe('UpdateJobDetailService', () =>
                 new JobDetailUser(jobsDetail[0].user),
                 new JobDetailStartAt(jobsDetail[0].startAt),
                 new JobDetailEndAt(jobsDetail[0].endAt),
-                
             )).toBe(undefined);
         });
     });

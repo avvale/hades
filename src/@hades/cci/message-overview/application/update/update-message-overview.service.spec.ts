@@ -62,12 +62,12 @@ describe('UpdateMessageOverviewService', () =>
 
     describe('main', () =>
     {
-        test('UpdateMessageOverviewService should be defined', () => 
+        test('UpdateMessageOverviewService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a messageOverview and emit event', async () => 
+        test('should update a messageOverview and emit event', async () =>
         {
             expect(await service.main(
                 new MessageOverviewId(messagesOverview[0].id),
@@ -89,7 +89,6 @@ describe('UpdateMessageOverviewService', () =>
                 new MessageOverviewHolding(messagesOverview[0].holding),
                 new MessageOverviewToBeDelivered(messagesOverview[0].toBeDelivered),
                 new MessageOverviewWaiting(messagesOverview[0].waiting),
-                
             )).toBe(undefined);
         });
     });

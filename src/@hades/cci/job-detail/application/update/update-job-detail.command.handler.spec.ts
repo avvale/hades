@@ -6,12 +6,12 @@ import { jobsDetail } from '@hades/cci/job-detail/infrastructure/seeds/job-detai
 import { UpdateJobDetailCommand } from './update-job-detail.command';
 import { UpdateJobDetailService } from './update-job-detail.service';
 
-describe('UpdateJobDetailCommandHandler', () => 
+describe('UpdateJobDetailCommandHandler', () =>
 {
     let commandHandler: UpdateJobDetailCommandHandler;
     let service: UpdateJobDetailService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateJobDetailCommandHandler', () =>
         service         = module.get<UpdateJobDetailService>(UpdateJobDetailService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateJobDetailCommandHandler should be defined', () => 
+        test('UpdateJobDetailCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an jobDetail created', async () => 
+        test('should return an jobDetail created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateJobDetailCommand(
@@ -57,7 +57,6 @@ describe('UpdateJobDetailCommandHandler', () =>
                     jobsDetail[0].user,
                     jobsDetail[0].startAt,
                     jobsDetail[0].endAt,
-                    
                 )
             )).toBe(undefined);
         });

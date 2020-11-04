@@ -6,12 +6,12 @@ import { systems } from '@hades/cci/system/infrastructure/seeds/system.seed';
 import { UpdateSystemCommand } from './update-system.command';
 import { UpdateSystemService } from './update-system.service';
 
-describe('UpdateSystemCommandHandler', () => 
+describe('UpdateSystemCommandHandler', () =>
 {
     let commandHandler: UpdateSystemCommandHandler;
     let service: UpdateSystemService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateSystemCommandHandler', () =>
         service         = module.get<UpdateSystemService>(UpdateSystemService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateSystemCommandHandler should be defined', () => 
+        test('UpdateSystemCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an system created', async () => 
+        test('should return an system created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateSystemCommand(
@@ -49,7 +49,6 @@ describe('UpdateSystemCommandHandler', () =>
                     systems[0].technology,
                     systems[0].isActive,
                     systems[0].cancelledAt,
-                    
                 )
             )).toBe(undefined);
         });

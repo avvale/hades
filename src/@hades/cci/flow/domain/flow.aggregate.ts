@@ -70,7 +70,38 @@ export class CciFlow extends AggregateRoot
     tenant: IamTenant;
     system: CciSystem;
 
-    constructor(id?: FlowId, hash?: FlowHash, tenantId?: FlowTenantId, tenantCode?: FlowTenantCode, systemId?: FlowSystemId, systemName?: FlowSystemName, version?: FlowVersion, scenario?: FlowScenario, party?: FlowParty, receiverParty?: FlowReceiverParty, component?: FlowComponent, receiverComponent?: FlowReceiverComponent, interfaceName?: FlowInterfaceName, interfaceNamespace?: FlowInterfaceNamespace, iflowName?: FlowIflowName, responsibleUserAccount?: FlowResponsibleUserAccount, lastChangeUserAccount?: FlowLastChangeUserAccount, lastChangedAt?: FlowLastChangedAt, folderPath?: FlowFolderPath, description?: FlowDescription, application?: FlowApplication, isCritical?: FlowIsCritical, isComplex?: FlowIsComplex, fieldGroupId?: FlowFieldGroupId, data?: FlowData, createdAt?: FlowCreatedAt, updatedAt?: FlowUpdatedAt, deletedAt?: FlowDeletedAt, tenant?: IamTenant, system?: CciSystem, )
+    constructor(
+        id: FlowId,
+        hash: FlowHash,
+        tenantId: FlowTenantId,
+        tenantCode: FlowTenantCode,
+        systemId: FlowSystemId,
+        systemName: FlowSystemName,
+        version: FlowVersion,
+        scenario: FlowScenario,
+        party: FlowParty,
+        receiverParty: FlowReceiverParty,
+        component: FlowComponent,
+        receiverComponent: FlowReceiverComponent,
+        interfaceName: FlowInterfaceName,
+        interfaceNamespace: FlowInterfaceNamespace,
+        iflowName: FlowIflowName,
+        responsibleUserAccount: FlowResponsibleUserAccount,
+        lastChangeUserAccount: FlowLastChangeUserAccount,
+        lastChangedAt: FlowLastChangedAt,
+        folderPath: FlowFolderPath,
+        description: FlowDescription,
+        application: FlowApplication,
+        isCritical: FlowIsCritical,
+        isComplex: FlowIsComplex,
+        fieldGroupId: FlowFieldGroupId,
+        data: FlowData,
+        createdAt: FlowCreatedAt,
+        updatedAt: FlowUpdatedAt,
+        deletedAt: FlowDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+    )
     {
         super();
 
@@ -108,9 +139,71 @@ export class CciFlow extends AggregateRoot
         this.system = system;
     }
 
-    static register (id: FlowId, hash: FlowHash, tenantId: FlowTenantId, tenantCode: FlowTenantCode, systemId: FlowSystemId, systemName: FlowSystemName, version: FlowVersion, scenario: FlowScenario, party: FlowParty, receiverParty: FlowReceiverParty, component: FlowComponent, receiverComponent: FlowReceiverComponent, interfaceName: FlowInterfaceName, interfaceNamespace: FlowInterfaceNamespace, iflowName: FlowIflowName, responsibleUserAccount: FlowResponsibleUserAccount, lastChangeUserAccount: FlowLastChangeUserAccount, lastChangedAt: FlowLastChangedAt, folderPath: FlowFolderPath, description: FlowDescription, application: FlowApplication, isCritical: FlowIsCritical, isComplex: FlowIsComplex, fieldGroupId: FlowFieldGroupId, data: FlowData, createdAt: FlowCreatedAt, updatedAt: FlowUpdatedAt, deletedAt: FlowDeletedAt, tenant?: IamTenant, system?: CciSystem, ): CciFlow
+    static register (
+        id: FlowId,
+        hash: FlowHash,
+        tenantId: FlowTenantId,
+        tenantCode: FlowTenantCode,
+        systemId: FlowSystemId,
+        systemName: FlowSystemName,
+        version: FlowVersion,
+        scenario: FlowScenario,
+        party: FlowParty,
+        receiverParty: FlowReceiverParty,
+        component: FlowComponent,
+        receiverComponent: FlowReceiverComponent,
+        interfaceName: FlowInterfaceName,
+        interfaceNamespace: FlowInterfaceNamespace,
+        iflowName: FlowIflowName,
+        responsibleUserAccount: FlowResponsibleUserAccount,
+        lastChangeUserAccount: FlowLastChangeUserAccount,
+        lastChangedAt: FlowLastChangedAt,
+        folderPath: FlowFolderPath,
+        description: FlowDescription,
+        application: FlowApplication,
+        isCritical: FlowIsCritical,
+        isComplex: FlowIsComplex,
+        fieldGroupId: FlowFieldGroupId,
+        data: FlowData,
+        createdAt: FlowCreatedAt,
+        updatedAt: FlowUpdatedAt,
+        deletedAt: FlowDeletedAt,
+        tenant?: IamTenant,
+        system?: CciSystem,
+    ): CciFlow
     {
-        return new CciFlow(id, hash, tenantId, tenantCode, systemId, systemName, version, scenario, party, receiverParty, component, receiverComponent, interfaceName, interfaceNamespace, iflowName, responsibleUserAccount, lastChangeUserAccount, lastChangedAt, folderPath, description, application, isCritical, isComplex, fieldGroupId, data, createdAt, updatedAt, deletedAt, tenant, system, );
+        return new CciFlow(
+            id,
+            hash,
+            tenantId,
+            tenantCode,
+            systemId,
+            systemName,
+            version,
+            scenario,
+            party,
+            receiverParty,
+            component,
+            receiverComponent,
+            interfaceName,
+            interfaceNamespace,
+            iflowName,
+            responsibleUserAccount,
+            lastChangeUserAccount,
+            lastChangedAt,
+            folderPath,
+            description,
+            application,
+            isCritical,
+            isComplex,
+            fieldGroupId,
+            data,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            tenant,
+            system,
+        );
     }
 
     created(flow: CciFlow): void
