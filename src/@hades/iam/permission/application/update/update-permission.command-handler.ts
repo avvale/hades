@@ -5,26 +5,31 @@ import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
-    PermissionRoleIds
-    
+    PermissionRoleIds,
+    PermissionCreatedAt,
+    PermissionUpdatedAt,
+    PermissionDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdatePermissionCommand)
 export class UpdatePermissionCommandHandler implements ICommandHandler<UpdatePermissionCommand>
 {
     constructor(
-        private readonly updatePermissionService: UpdatePermissionService
+        private readonly updatePermissionService: UpdatePermissionService,
     ) {}
 
     async execute(command: UpdatePermissionCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.updatePermissionService.main(
-            new PermissionId(command.id),
-            new PermissionName(command.name, { undefinable: true }),
-            new PermissionBoundedContextId(command.boundedContextId, { undefinable: true }),
-            new PermissionRoleIds(command.roleIds),
-            
+            {
+                id: new PermissionId(command.payload.id),
+                name: new PermissionName(command.payload.name, { undefinable: true }),
+                boundedContextId: new PermissionBoundedContextId(command.payload.boundedContextId, { undefinable: true }),
+                roleIds: new PermissionRoleIds(command.payload.roleIds),
+            },
+            command.constraint,
+            command.cQMetadata,
         )
     }
 }

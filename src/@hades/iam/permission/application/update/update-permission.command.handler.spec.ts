@@ -6,12 +6,12 @@ import { permissions } from '@hades/iam/permission/infrastructure/seeds/permissi
 import { UpdatePermissionCommand } from './update-permission.command';
 import { UpdatePermissionService } from './update-permission.service';
 
-describe('UpdatePermissionCommandHandler', () => 
+describe('UpdatePermissionCommandHandler', () =>
 {
     let commandHandler: UpdatePermissionCommandHandler;
     let service: UpdatePermissionService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdatePermissionCommandHandler', () =>
         service         = module.get<UpdatePermissionService>(UpdatePermissionService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdatePermissionCommandHandler should be defined', () => 
+        test('UpdatePermissionCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an permission created', async () => 
+        test('should return an permission created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdatePermissionCommand(
@@ -44,7 +44,6 @@ describe('UpdatePermissionCommandHandler', () =>
                     permissions[0].name,
                     permissions[0].boundedContextId,
                     permissions[0].roleIds,
-                    
                 )
             )).toBe(undefined);
         });

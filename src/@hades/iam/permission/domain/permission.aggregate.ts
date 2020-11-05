@@ -6,16 +6,12 @@ import {
     PermissionRoleIds,
     PermissionCreatedAt,
     PermissionUpdatedAt,
-    PermissionDeletedAt
-    
+    PermissionDeletedAt,
 } from './value-objects';
 import { CreatedPermissionEvent } from './../application/events/created-permission.event';
 import { UpdatedPermissionEvent } from './../application/events/updated-permission.event';
 import { DeletedPermissionEvent } from './../application/events/deleted-permission.event';
-
 import { IamBoundedContext } from '@hades/iam/bounded-context/domain/bounded-context.aggregate';
-
-
 import { IamRole } from '@hades/iam/role/domain/role.aggregate';
 
 export class IamPermission extends AggregateRoot
@@ -27,19 +23,25 @@ export class IamPermission extends AggregateRoot
     createdAt: PermissionCreatedAt;
     updatedAt: PermissionUpdatedAt;
     deletedAt: PermissionDeletedAt;
-    
+
     // eager relationship
-    
-    
     boundedContext: IamBoundedContext;
-    
-    
     roles: IamRole[];
-    
-    constructor(id?: PermissionId, name?: PermissionName, boundedContextId?: PermissionBoundedContextId, roleIds?: PermissionRoleIds, createdAt?: PermissionCreatedAt, updatedAt?: PermissionUpdatedAt, deletedAt?: PermissionDeletedAt, boundedContext?: IamBoundedContext, roles?: IamRole[], )
+
+    constructor(
+        id: PermissionId,
+        name: PermissionName,
+        boundedContextId: PermissionBoundedContextId,
+        roleIds: PermissionRoleIds,
+        createdAt: PermissionCreatedAt,
+        updatedAt: PermissionUpdatedAt,
+        deletedAt: PermissionDeletedAt,
+        boundedContext?: IamBoundedContext,
+        roles?: IamRole[],
+    )
     {
         super();
-        
+
         this.id = id;
         this.name = name;
         this.boundedContextId = boundedContextId;
@@ -47,20 +49,35 @@ export class IamPermission extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
         this.boundedContext = boundedContext;
-        
-        
         this.roles = roles;
-        
     }
 
-    static register (id: PermissionId, name: PermissionName, boundedContextId: PermissionBoundedContextId, roleIds: PermissionRoleIds, createdAt: PermissionCreatedAt, updatedAt: PermissionUpdatedAt, deletedAt: PermissionDeletedAt, boundedContext?: IamBoundedContext, roles?: IamRole[], ): IamPermission
+    static register (
+        id: PermissionId,
+        name: PermissionName,
+        boundedContextId: PermissionBoundedContextId,
+        roleIds: PermissionRoleIds,
+        createdAt: PermissionCreatedAt,
+        updatedAt: PermissionUpdatedAt,
+        deletedAt: PermissionDeletedAt,
+        boundedContext?: IamBoundedContext,
+        roles?: IamRole[],
+    ): IamPermission
     {
-        return new IamPermission(id, name, boundedContextId, roleIds, createdAt, updatedAt, deletedAt, boundedContext, roles, );
+        return new IamPermission(
+            id,
+            name,
+            boundedContextId,
+            roleIds,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            boundedContext,
+            roles,
+        );
     }
 
     created(permission: IamPermission): void
@@ -74,7 +91,6 @@ export class IamPermission extends AggregateRoot
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
-                
             )
         );
     }
@@ -90,7 +106,6 @@ export class IamPermission extends AggregateRoot
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
-                
             )
         );
     }
@@ -106,7 +121,6 @@ export class IamPermission extends AggregateRoot
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
-                
             )
         );
     }
@@ -121,15 +135,10 @@ export class IamPermission extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
             boundedContext: this.boundedContext?.toDTO(),
-            
-            
             roles: this.roles?.map(item => item.toDTO()),
-            
         }
     }
 }

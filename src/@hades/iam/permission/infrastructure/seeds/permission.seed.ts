@@ -1,3 +1,4 @@
+// ignored file
 export const permissions = [
 
     {id: 'c3f07181-ef34-4905-94fc-8c8af191153c',  name: 'iam.access',                               boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
@@ -25,7 +26,7 @@ export const permissions = [
     {id: 'ed590725-2eec-4942-b352-ba8ca3f5f9a6',  name: 'iam.boundedContext.list',                  boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
     {id: '848a5574-1e35-4e29-8438-18404e31a951',  name: 'iam.boundedContext.create',                boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
     {id: 'a905711d-4c69-486a-8e54-63e088ba55e7',  name: 'iam.boundedContext.get',                   boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
-        
+
     {id: '270914b4-2eba-4d45-b5c2-1677f8f717a4',  name: 'iam.account.access',                       boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
     {id: '9a41c703-0ec1-4fea-9642-b744e4bf95a7',  name: 'iam.account.list',                         boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},
     {id: '89048ea7-af7a-4466-8ef4-5bf74e1a481e',  name: 'iam.account.create',                       boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba'},

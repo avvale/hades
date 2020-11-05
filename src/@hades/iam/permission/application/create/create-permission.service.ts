@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     PermissionId,
     PermissionName,
@@ -8,8 +7,7 @@ import {
     PermissionRoleIds,
     PermissionCreatedAt,
     PermissionUpdatedAt,
-    PermissionDeletedAt
-    
+    PermissionDeletedAt,
 } from './../../domain/value-objects';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { IamPermission } from './../../domain/permission.aggregate';
@@ -19,25 +17,26 @@ export class CreatePermissionService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IPermissionRepository
+        private readonly repository: IPermissionRepository,
     ) {}
 
     public async main(
-        id: PermissionId,
-        name: PermissionName,
-        boundedContextId: PermissionBoundedContextId,
-        roleIds: PermissionRoleIds,
-        
+        payload: {
+            id: PermissionId,
+            name: PermissionName,
+            boundedContextId: PermissionBoundedContextId,
+            roleIds: PermissionRoleIds,
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const permission = IamPermission.register(
-            id,
-            name,
-            boundedContextId,
-            roleIds,
-            new PermissionCreatedAt(Utils.nowTimestamp()),
-            new PermissionUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.name,
+            payload.boundedContextId,
+            payload.roleIds,
+            new PermissionCreatedAt({currentTimestamp: true}),
+            new PermissionUpdatedAt({currentTimestamp: true}),
             null
         );
 

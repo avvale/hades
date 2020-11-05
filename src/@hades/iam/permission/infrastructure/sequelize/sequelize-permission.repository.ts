@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IPermissionRepository } from './../../domain/permission.repository';
@@ -13,23 +12,25 @@ export class SequelizePermissionRepository extends SequelizeRepository<IamPermis
 {
     public readonly aggregateName: string = 'IamPermission';
     public readonly mapper: PermissionMapper = new PermissionMapper();
+    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(IamPermissionModel)
         public readonly repository: typeof IamPermissionModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
+
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: IamPermission, model: IamPermissionModel) 
+    async createdAggregateHook(aggregate: IamPermission, model: IamPermissionModel)
     {
         // add many to many relation
         if (aggregate.roleIds.length > 0) await model.$add('roles', aggregate.roleIds.value);
     }
 
     // hook called after create aggregate
-    async updatedAggregateHook(aggregate: IamPermission, model: IamPermissionModel) 
+    async updatedAggregateHook(aggregate: IamPermission, model: IamPermissionModel)
     {
         // set many to many relation
         if (aggregate.roleIds.isArray()) await model.$set('roles', aggregate.roleIds.value);

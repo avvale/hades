@@ -1,6 +1,7 @@
 
 import { IRepository } from '@hades/shared/domain/persistence/repository';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { Pagination } from '@hades/shared/domain/lib/pagination';
 import { IamPermission } from './permission.aggregate';
 import { PermissionId } from './value-objects';
@@ -10,7 +11,7 @@ export abstract class IPermissionRepository implements IRepository<IamPermission
     abstract readonly repository: any;
 
     // paginate records
-    abstract async paginate(queryStatement: QueryStatement, constraint: QueryStatement): Promise<Pagination<IamPermission>>;
+    abstract async paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<IamPermission>>;
 
     // create a single record
     abstract async create(permission: IamPermission): Promise<void>;
@@ -19,20 +20,20 @@ export abstract class IPermissionRepository implements IRepository<IamPermission
     abstract async insert(permissions: IamPermission[], options?: object): Promise<void>;
 
     // find a single record
-    abstract async find(query: QueryStatement): Promise<IamPermission | null>;
+    abstract async find(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamPermission | null>;
 
     // find a single record by id
-    abstract async findById(id: PermissionId): Promise<IamPermission | null>;
+    abstract async findById(id: PermissionId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamPermission | null>;
 
     // get multiple records
-    abstract async get(query: QueryStatement): Promise<IamPermission[]>;
+    abstract async get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamPermission[]>;
 
     // update record
-    abstract async update(permission: IamPermission): Promise<void>;
+    abstract async update(permission: IamPermission, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete record
-    abstract async deleteById(id: PermissionId): Promise<void>;
+    abstract async deleteById(id: PermissionId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 
     // delete records
-    abstract async delete(query: QueryStatement): Promise<void>;
+    abstract async delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
 }

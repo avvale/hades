@@ -14,7 +14,7 @@ describe('DeletePermissionByIdService', () =>
     let repository: IPermissionRepository;
     let mockRepository: MockPermissionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeletePermissionByIdService', () =>
                 EventPublisher,
                 DeletePermissionByIdService,
                 MockPermissionRepository,
-                { 
+                {
                     provide: IPermissionRepository,
                     useValue: {
                         deleteById: (id) => {},

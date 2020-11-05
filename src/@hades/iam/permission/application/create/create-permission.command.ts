@@ -1,10 +1,14 @@
-export class CreatePermissionCommand 
-{   
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class CreatePermissionCommand
+{
     constructor(
-        public readonly id: string,
-        public readonly name: string,
-        public readonly boundedContextId: string,
-        public readonly roleIds: string[],
-        
+        public readonly payload: {
+            id: string,
+            name: string,
+            boundedContextId: string,
+            roleIds?: string[],
+        },
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

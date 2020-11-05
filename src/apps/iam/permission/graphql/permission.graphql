@@ -1,5 +1,4 @@
 
-
 type IamPermission
 {
     id: ID!
@@ -18,7 +17,6 @@ input IamCreatePermissionInput
     name: GraphQLString!
     boundedContextId: ID!
     roleIds: [ID]
-    
 }
 
 input IamUpdatePermissionInput
@@ -27,7 +25,6 @@ input IamUpdatePermissionInput
     name: GraphQLString
     boundedContextId: ID
     roleIds: [ID]
-    
 }
 
 type Query

@@ -1,4 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -18,12 +19,16 @@ import { IamPermission } from './../../../../graphql';
 export class IamGetPermissionsResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Query('iamGetPermissions')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement): Promise<IamPermission[]>
+    async main(
+        @Args('query') queryStatement?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    ): Promise<IamPermission[]>
     {
-        return await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint));
+        return await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint, { timezone }));
     }
 }

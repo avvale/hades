@@ -10,12 +10,16 @@ export class FindPermissionQueryHandler implements IQueryHandler<FindPermissionQ
     private readonly mapper: PermissionMapper = new PermissionMapper();
 
     constructor(
-        private readonly findPermissionService: FindPermissionService
+        private readonly findPermissionService: FindPermissionService,
     ) {}
 
     async execute(query: FindPermissionQuery): Promise<PermissionResponse>
     {
-        const permission = await this.findPermissionService.main(query.queryStatement);
+        const permission = await this.findPermissionService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(permission);
     }

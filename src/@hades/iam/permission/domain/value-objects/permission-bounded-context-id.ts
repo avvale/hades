@@ -11,7 +11,7 @@ export class PermissionBoundedContextId extends UuidValueObject
             name: 'PermissionBoundedContextId',
             nullable: false,
             undefinable: false,
-            length: 36
+            length: 36,
         }, validationRules), data);
     }
 }

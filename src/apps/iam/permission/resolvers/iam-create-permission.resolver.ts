@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -20,19 +21,17 @@ export class IamCreatePermissionResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamCreatePermission')
-    async main(@Args('payload') payload: IamCreatePermissionInput)
+    async main(
+        @Args('payload') payload: IamCreatePermissionInput,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new CreatePermissionCommand(
-            payload.id,
-            payload.name,
-            payload.boundedContextId,
-            payload.roleIds,
-        ));
+        await this.commandBus.dispatch(new CreatePermissionCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindPermissionByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindPermissionByIdQuery(payload.id, {}, { timezone }));
     }
 }
