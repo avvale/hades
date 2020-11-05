@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: o-auth
 moduleName: refresh-token
 moduleNames: refresh-tokens
+aggregateName: OAuthRefreshToken
 hasOAuth: true
 hasTenant: false
 aggregateProperties:
