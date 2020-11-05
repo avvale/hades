@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     LangId,
     LangName,
     LangImage,
@@ -10,15 +10,11 @@ import {
     LangIsActive,
     LangCreatedAt,
     LangUpdatedAt,
-    LangDeletedAt
-    
+    LangDeletedAt,
 } from './value-objects';
 import { CreatedLangEvent } from './../application/events/created-lang.event';
 import { UpdatedLangEvent } from './../application/events/updated-lang.event';
 import { DeletedLangEvent } from './../application/events/deleted-lang.event';
-
-
-
 
 export class AdminLang extends AggregateRoot
 {
@@ -33,17 +29,25 @@ export class AdminLang extends AggregateRoot
     createdAt: LangCreatedAt;
     updatedAt: LangUpdatedAt;
     deletedAt: LangDeletedAt;
-    
+
     // eager relationship
-    
-    
-    
-    
-    
-    constructor(id?: LangId, name?: LangName, image?: LangImage, iso6392?: LangIso6392, iso6393?: LangIso6393, ietf?: LangIetf, sort?: LangSort, isActive?: LangIsActive, createdAt?: LangCreatedAt, updatedAt?: LangUpdatedAt, deletedAt?: LangDeletedAt, )
+
+    constructor(
+        id: LangId,
+        name: LangName,
+        image: LangImage,
+        iso6392: LangIso6392,
+        iso6393: LangIso6393,
+        ietf: LangIetf,
+        sort: LangSort,
+        isActive: LangIsActive,
+        createdAt: LangCreatedAt,
+        updatedAt: LangUpdatedAt,
+        deletedAt: LangDeletedAt,
+    )
     {
         super();
-        
+
         this.id = id;
         this.name = name;
         this.image = image;
@@ -55,18 +59,37 @@ export class AdminLang extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
-        
-        
-        
     }
 
-    static register (id: LangId, name: LangName, image: LangImage, iso6392: LangIso6392, iso6393: LangIso6393, ietf: LangIetf, sort: LangSort, isActive: LangIsActive, createdAt: LangCreatedAt, updatedAt: LangUpdatedAt, deletedAt: LangDeletedAt, ): AdminLang
+    static register (
+        id: LangId,
+        name: LangName,
+        image: LangImage,
+        iso6392: LangIso6392,
+        iso6393: LangIso6393,
+        ietf: LangIetf,
+        sort: LangSort,
+        isActive: LangIsActive,
+        createdAt: LangCreatedAt,
+        updatedAt: LangUpdatedAt,
+        deletedAt: LangDeletedAt,
+    ): AdminLang
     {
-        return new AdminLang(id, name, image, iso6392, iso6393, ietf, sort, isActive, createdAt, updatedAt, deletedAt, );
+        return new AdminLang(
+            id,
+            name,
+            image,
+            iso6392,
+            iso6393,
+            ietf,
+            sort,
+            isActive,
+            createdAt,
+            updatedAt,
+            deletedAt,
+        );
     }
 
     created(lang: AdminLang): void
@@ -84,7 +107,6 @@ export class AdminLang extends AggregateRoot
                 lang.createdAt?.value,
                 lang.updatedAt?.value,
                 lang.deletedAt?.value,
-                
             )
         );
     }
@@ -104,7 +126,6 @@ export class AdminLang extends AggregateRoot
                 lang.createdAt?.value,
                 lang.updatedAt?.value,
                 lang.deletedAt?.value,
-                
             )
         );
     }
@@ -124,7 +145,6 @@ export class AdminLang extends AggregateRoot
                 lang.createdAt?.value,
                 lang.updatedAt?.value,
                 lang.deletedAt?.value,
-                
             )
         );
     }
@@ -143,13 +163,8 @@ export class AdminLang extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
-            
-            
-            
         }
     }
 }

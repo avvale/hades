@@ -2,6 +2,9 @@ version: 1.0.0
 boundedContextName: admin
 moduleName: resource
 moduleNames: resources
+aggregateName: AdminResource
+hasOAuth: true
+hasTenant: false
 aggregateProperties:
   - name: id
     type: id

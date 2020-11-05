@@ -14,7 +14,7 @@ describe('DeleteLangByIdService', () =>
     let repository: ILangRepository;
     let mockRepository: MockLangRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteLangByIdService', () =>
                 EventPublisher,
                 DeleteLangByIdService,
                 MockLangRepository,
-                { 
+                {
                     provide: ILangRepository,
                     useValue: {
                         deleteById: (id) => {},

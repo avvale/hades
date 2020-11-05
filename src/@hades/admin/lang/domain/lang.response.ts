@@ -1,8 +1,5 @@
 
-
-
-
-export class LangResponse 
+export class LangResponse
 {
     constructor(
         public readonly id: string,
@@ -16,11 +13,5 @@ export class LangResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        
-        
-        
-        
-        
-        
     ) {}
 }

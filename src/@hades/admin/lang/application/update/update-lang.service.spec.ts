@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { UpdateLangService } from './update-lang.service';
-import { 
+import {
     LangId,
     LangName,
     LangImage,
@@ -15,19 +15,18 @@ import {
     LangIsActive,
     LangCreatedAt,
     LangUpdatedAt,
-    LangDeletedAt
-    
+    LangDeletedAt,
 } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
 import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
 
-describe('UpdateLangService', () => 
+describe('UpdateLangService', () =>
 {
     let service: UpdateLangService;
     let repository: ILangRepository;
     let mockRepository: MockLangRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -36,7 +35,7 @@ describe('UpdateLangService', () =>
                 EventPublisher,
                 UpdateLangService,
                 MockLangRepository,
-                { 
+                {
                     provide: ILangRepository,
                     useValue: {
                         update: (item) => {}
@@ -50,14 +49,14 @@ describe('UpdateLangService', () =>
         mockRepository  = module.get(MockLangRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateLangService should be defined', () => 
+        test('UpdateLangService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a lang and emit event', async () => 
+        test('should update a lang and emit event', async () =>
         {
             expect(await service.main(
                 new LangId(langs[0].id),
@@ -68,7 +67,6 @@ describe('UpdateLangService', () =>
                 new LangIetf(langs[0].ietf),
                 new LangSort(langs[0].sort),
                 new LangIsActive(langs[0].isActive),
-                
             )).toBe(undefined);
         });
     });

@@ -4,7 +4,7 @@ import { CreateLangsCommand } from '@hades/admin/lang/application/create/create-
 import { SeederModule } from './seeder.module';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

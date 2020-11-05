@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateLangsCommand
 {
     constructor(
-        public readonly langs: {
+        public readonly payload: {
             id: string,
             name: string,
             image?: string,
@@ -10,7 +12,7 @@ export class CreateLangsCommand
             ietf: string,
             sort?: number,
             isActive: boolean,
-            
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

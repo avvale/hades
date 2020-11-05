@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { ILangRepository } from './../../domain/lang.repository';
@@ -13,13 +12,13 @@ export class SequelizeLangRepository extends SequelizeRepository<AdminLang, Admi
 {
     public readonly aggregateName: string = 'AdminLang';
     public readonly mapper: LangMapper = new LangMapper();
+    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(AdminLangModel)
         public readonly repository: typeof AdminLangModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
-    
 }

@@ -8,13 +8,13 @@ import { LangId } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
 import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
 
-describe('FindLangByIdService', () => 
+describe('FindLangByIdService', () =>
 {
     let service: FindLangByIdService;
     let repository: ILangRepository;
     let mockRepository: MockLangRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindLangByIdService', () =>
                 EventPublisher,
                 FindLangByIdService,
                 MockLangRepository,
-                { 
+                {
                     provide: ILangRepository,
                     useValue: {
                         findById: (id) => {}

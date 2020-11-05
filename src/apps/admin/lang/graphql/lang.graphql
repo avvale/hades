@@ -1,5 +1,4 @@
 
-
 type AdminLang
 {
     id: ID!
@@ -13,7 +12,6 @@ type AdminLang
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input AdminCreateLangInput
@@ -26,7 +24,6 @@ input AdminCreateLangInput
     ietf: GraphQLString!
     sort: GraphQLInt
     isActive: GraphQLBoolean!
-    
 }
 
 input AdminUpdateLangInput
@@ -39,10 +36,9 @@ input AdminUpdateLangInput
     ietf: GraphQLString
     sort: GraphQLInt
     isActive: GraphQLBoolean
-    
 }
 
-type Query 
+type Query
 {
     adminFindLang(query:QueryStatement constraint:QueryStatement): AdminLang
     adminFindLangById(id:ID constraint:QueryStatement): AdminLang

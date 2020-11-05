@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { ILangRepository } from '@hades/admin/lang/domain/lang.repository';
-import { 
+import {
     LangId,
     LangName,
     LangImage,
@@ -13,8 +13,7 @@ import {
     LangIsActive,
     LangCreatedAt,
     LangUpdatedAt,
-    LangDeletedAt
-    
+    LangDeletedAt,
 } from '@hades/admin/lang/domain/value-objects';
 import { AdminLang } from './../../domain/lang.aggregate';
 import { langs } from './../seeds/lang.seed';
@@ -26,14 +25,14 @@ export class MockLangRepository extends MockRepository<AdminLang> implements ILa
     public readonly aggregateName: string = 'AdminLang';
     public collectionSource: AdminLang[];
     public deletedAtInstance: LangDeletedAt = new LangDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -48,7 +47,7 @@ export class MockLangRepository extends MockRepository<AdminLang> implements ILa
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(AdminLang.register(
                     new LangId(itemCollection.id),
                     new LangName(itemCollection.name),
@@ -61,7 +60,6 @@ export class MockLangRepository extends MockRepository<AdminLang> implements ILa
                     new LangCreatedAt(itemCollection.createdAt),
                     new LangUpdatedAt(itemCollection.updatedAt),
                     new LangDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }

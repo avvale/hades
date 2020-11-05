@@ -11,12 +11,16 @@ export class FindLangByIdQueryHandler implements IQueryHandler<FindLangByIdQuery
     private readonly mapper: LangMapper = new LangMapper();
 
     constructor(
-        private readonly findLangByIdService: FindLangByIdService
-    ) { }
+        private readonly findLangByIdService: FindLangByIdService,
+    ) {}
 
     async execute(query: FindLangByIdQuery): Promise<LangResponse>
     {
-        const lang = await this.findLangByIdService.main(new LangId(query.id));
+        const lang = await this.findLangByIdService.main(
+            new LangId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(lang);
     }

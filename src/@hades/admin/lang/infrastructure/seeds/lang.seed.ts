@@ -1,3 +1,4 @@
+// ignored file
 export const langs = [
     { id: '94c893c1-3eb7-4f22-a878-b405c6d42e09', name: 'Deutsch',   image: 'de', iso6392: 'de', iso6393: 'deu', ietf: 'de-DE', sort: 0, isActive: false },
     { id: '7c4754e7-3363-48ca-af99-632522226b51', name: 'English',   image: 'gb', iso6392: 'en', iso6393: 'eng', ietf: 'en-US', sort: 0, isActive: false },

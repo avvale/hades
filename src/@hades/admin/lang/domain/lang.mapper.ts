@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { AdminLang } from './lang.aggregate';
 import { LangResponse } from './lang.response';
-import { 
+import {
     LangId,
     LangName,
     LangImage,
@@ -13,44 +13,40 @@ import {
     LangIsActive,
     LangCreatedAt,
     LangUpdatedAt,
-    LangDeletedAt
-    
+    LangDeletedAt,
 } from './value-objects';
-
-
-
 
 export class LangMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param lang
      */
-    mapModelToAggregate(lang: ObjectLiteral): AdminLang
+    mapModelToAggregate(lang: ObjectLiteral, cQMetadata?: CQMetadata): AdminLang
     {
         if (!lang) return;
 
-        return this.makeAggregate(lang);
+        return this.makeAggregate(lang, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param langs 
+     * @param langs
      */
-    mapModelsToAggregates(langs: ObjectLiteral[]): AdminLang[]
+    mapModelsToAggregates(langs: ObjectLiteral[], cQMetadata?: CQMetadata): AdminLang[]
     {
         if (!Array.isArray(langs)) return;
-        
-        return langs.map(lang  => this.makeAggregate(lang));
+
+        return langs.map(lang  => this.makeAggregate(lang, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param lang 
+     * @param lang
      */
     mapAggregateToResponse(lang: AdminLang): LangResponse
     {
@@ -68,7 +64,7 @@ export class LangMapper implements IMapper
         return langs.map(lang => this.makeResponse(lang));
     }
 
-    private makeAggregate(lang: ObjectLiteral): AdminLang
+    private makeAggregate(lang: ObjectLiteral, cQMetadata?: CQMetadata): AdminLang
     {
         return AdminLang.register(
             new LangId(lang.id),
@@ -79,22 +75,16 @@ export class LangMapper implements IMapper
             new LangIetf(lang.ietf),
             new LangSort(lang.sort),
             new LangIsActive(lang.isActive),
-            new LangCreatedAt(lang.createdAt),
-            new LangUpdatedAt(lang.updatedAt),
-            new LangDeletedAt(lang.deletedAt),
-            
-            
-            
-            
-            
-            
+            new LangCreatedAt(lang.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new LangUpdatedAt(lang.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new LangDeletedAt(lang.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
         );
     }
 
     private makeResponse(lang: AdminLang): LangResponse
     {
         if (!lang) return;
-        
+
         return new LangResponse(
             lang.id.value,
             lang.name.value,
@@ -107,12 +97,6 @@ export class LangMapper implements IMapper
             lang.createdAt.value,
             lang.updatedAt.value,
             lang.deletedAt.value,
-            
-            
-            
-            
-            
-            
         );
     }
 }

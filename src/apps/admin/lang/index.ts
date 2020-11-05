@@ -1,45 +1,45 @@
 // controllers
-import { CreateLangController } from './controllers/create-lang.controller';
-import { CreateLangsController } from './controllers/create-langs.controller';
-import { PaginateLangsController } from './controllers/paginate-langs.controller';
-import { GetLangsController } from './controllers/get-langs.controller';
-import { FindLangByIdController } from './controllers/find-lang-by-id.controller';
-import { FindLangController } from './controllers/find-lang.controller';
-import { UpdateLangController } from './controllers/update-lang.controller';
-import { DeleteLangByIdController } from './controllers/delete-lang-by-id.controller';
-import { DeleteLangsController } from './controllers/delete-langs.controller';
+import { AdminCreateLangController } from './controllers/admin-create-lang.controller';
+import { AdminCreateLangsController } from './controllers/admin-create-langs.controller';
+import { AdminPaginateLangsController } from './controllers/admin-paginate-langs.controller';
+import { AdminGetLangsController } from './controllers/admin-get-langs.controller';
+import { AdminFindLangByIdController } from './controllers/admin-find-lang-by-id.controller';
+import { AdminFindLangController } from './controllers/admin-find-lang.controller';
+import { AdminUpdateLangController } from './controllers/admin-update-lang.controller';
+import { AdminDeleteLangByIdController } from './controllers/admin-delete-lang-by-id.controller';
+import { AdminDeleteLangsController } from './controllers/admin-delete-langs.controller';
 
 // resolvers
-import { CreateLangResolver } from './resolvers/create-lang.resolver';
-import { CreateLangsResolver } from './resolvers/create-langs.resolver';
-import { PaginateLangsResolver } from './resolvers/paginate-langs.resolver';
-import { GetLangsResolver } from './resolvers/get-langs.resolver';
-import { FindLangResolver } from './resolvers/find-lang.resolver';
-import { FindLangByIdResolver } from './resolvers/find-lang-by-id.resolver';
-import { UpdateLangResolver } from './resolvers/update-lang.resolver';
-import { DeleteLangByIdResolver } from './resolvers/delete-lang-by-id.resolver';
-import { DeleteLangsResolver } from './resolvers/delete-langs.resolver';
+import { AdminCreateLangResolver } from './resolvers/admin-create-lang.resolver';
+import { AdminCreateLangsResolver } from './resolvers/admin-create-langs.resolver';
+import { AdminPaginateLangsResolver } from './resolvers/admin-paginate-langs.resolver';
+import { AdminGetLangsResolver } from './resolvers/admin-get-langs.resolver';
+import { AdminFindLangResolver } from './resolvers/admin-find-lang.resolver';
+import { AdminFindLangByIdResolver } from './resolvers/admin-find-lang-by-id.resolver';
+import { AdminUpdateLangResolver } from './resolvers/admin-update-lang.resolver';
+import { AdminDeleteLangByIdResolver } from './resolvers/admin-delete-lang-by-id.resolver';
+import { AdminDeleteLangsResolver } from './resolvers/admin-delete-langs.resolver';
 
 export const AdminLangControllers = [
-    CreateLangController,
-    CreateLangsController,
-    PaginateLangsController,
-    GetLangsController,
-    FindLangByIdController,
-    FindLangController,
-    UpdateLangController,
-    DeleteLangByIdController,
-    DeleteLangsController,
+    AdminCreateLangController,
+    AdminCreateLangsController,
+    AdminPaginateLangsController,
+    AdminGetLangsController,
+    AdminFindLangByIdController,
+    AdminFindLangController,
+    AdminUpdateLangController,
+    AdminDeleteLangByIdController,
+    AdminDeleteLangsController,
 ];
 
 export const AdminLangResolvers = [
-    CreateLangResolver,
-    CreateLangsResolver,
-    PaginateLangsResolver,
-    GetLangsResolver,
-    FindLangResolver,
-    FindLangByIdResolver,
-    UpdateLangResolver,
-    DeleteLangByIdResolver,
-    DeleteLangsResolver,
+    AdminCreateLangResolver,
+    AdminCreateLangsResolver,
+    AdminPaginateLangsResolver,
+    AdminGetLangsResolver,
+    AdminFindLangResolver,
+    AdminFindLangByIdResolver,
+    AdminUpdateLangResolver,
+    AdminDeleteLangByIdResolver,
+    AdminDeleteLangsResolver,
 ];

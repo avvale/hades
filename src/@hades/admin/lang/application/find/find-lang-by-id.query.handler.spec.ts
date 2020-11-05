@@ -16,7 +16,7 @@ describe('FindLangByIdQueryHandler', () =>
     let repository: MockLangRepository;
     let mapper: LangMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindLangByIdQueryHandler', () =>
         mapper          = new LangMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindLangByIdQueryHandler should be defined', () => 
+        test('FindLangByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

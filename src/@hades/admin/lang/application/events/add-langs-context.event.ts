@@ -8,21 +8,21 @@ import { DeletedLangsEvent } from './deleted-langs.event';
 export class AddLangsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: AdminLang[] = []
+        public readonly aggregateRoots: AdminLang[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedLangsEvent(
-                this.aggregateRoots.map(lang => 
+                this.aggregateRoots.map(lang =>
                     new CreatedLangEvent(
                         lang.id.value,
                         lang.name.value,
@@ -35,7 +35,6 @@ export class AddLangsContextEvent extends AggregateRoot
                         lang.createdAt?.value,
                         lang.updatedAt?.value,
                         lang.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -46,7 +45,7 @@ export class AddLangsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedLangsEvent(
-                this.aggregateRoots.map(lang => 
+                this.aggregateRoots.map(lang =>
                     new DeletedLangEvent(
                         lang.id.value,
                         lang.name.value,
@@ -59,10 +58,9 @@ export class AddLangsContextEvent extends AggregateRoot
                         lang.createdAt?.value,
                         lang.updatedAt?.value,
                         lang.deletedAt?.value,
-                           
                     )
                 )
             )
         );
-    }   
+    }
 }
