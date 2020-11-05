@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ClientId,
     ClientGrantType,
     ClientName,
@@ -15,8 +14,7 @@ import {
     ClientApplicationIds,
     ClientCreatedAt,
     ClientUpdatedAt,
-    ClientDeletedAt
-    
+    ClientDeletedAt,
 } from './../../domain/value-objects';
 import { IClientRepository } from './../../domain/client.repository';
 import { OAuthClient } from './../../domain/client.aggregate';
@@ -26,42 +24,43 @@ export class CreateClientService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IClientRepository
+        private readonly repository: IClientRepository,
     ) {}
 
     public async main(
-        id: ClientId,
-        grantType: ClientGrantType,
-        name: ClientName,
-        secret: ClientSecret,
-        authUrl: ClientAuthUrl,
-        redirect: ClientRedirect,
-        expiredAccessToken: ClientExpiredAccessToken,
-        expiredRefreshToken: ClientExpiredRefreshToken,
-        isActive: ClientIsActive,
-        isMaster: ClientIsMaster,
-        applicationIds: ClientApplicationIds,
-        
+        payload: {
+            id: ClientId,
+            grantType: ClientGrantType,
+            name: ClientName,
+            secret: ClientSecret,
+            authUrl: ClientAuthUrl,
+            redirect: ClientRedirect,
+            expiredAccessToken: ClientExpiredAccessToken,
+            expiredRefreshToken: ClientExpiredRefreshToken,
+            isActive: ClientIsActive,
+            isMaster: ClientIsMaster,
+            applicationIds: ClientApplicationIds,
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const client = OAuthClient.register(
-            id,
-            grantType,
-            name,
-            secret,
-            authUrl,
-            redirect,
-            expiredAccessToken,
-            expiredRefreshToken,
-            isActive,
-            isMaster,
-            applicationIds,
-            new ClientCreatedAt(Utils.nowTimestamp()),
-            new ClientUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.grantType,
+            payload.name,
+            payload.secret,
+            payload.authUrl,
+            payload.redirect,
+            payload.expiredAccessToken,
+            payload.expiredRefreshToken,
+            payload.isActive,
+            payload.isMaster,
+            payload.applicationIds,
+            new ClientCreatedAt({currentTimestamp: true}),
+            new ClientUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // create
         await this.repository.create(client);
 
@@ -69,7 +68,7 @@ export class CreateClientService
         const clientRegister = this.publisher.mergeObjectContext(
             client
         );
-        
+
         clientRegister.created(client); // apply event to model events
         clientRegister.commit(); // commit all events of model
     }

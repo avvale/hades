@@ -32,7 +32,6 @@ import { DeleteClientsService } from './application/delete/delete-clients.servic
 // models
 export { OAuthClientModel } from './infrastructure/sequelize/sequelize-client.model';
 
-
 // repository
 export { IClientRepository } from './domain/client.repository';
 export { SequelizeClientRepository } from './infrastructure/sequelize/sequelize-client.repository';

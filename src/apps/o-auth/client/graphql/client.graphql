@@ -1,9 +1,7 @@
-
 enum OAuthClientGrantType {
     AUTHORIZATION_CODE
     CLIENT_CREDENTIALS
     PASSWORD
-        
 }
 
 type OAuthClient
@@ -23,7 +21,6 @@ type OAuthClient
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input OAuthCreateClientInput
@@ -39,7 +36,6 @@ input OAuthCreateClientInput
     isActive: GraphQLBoolean!
     isMaster: GraphQLBoolean!
     applicationIds: [ID]
-    
 }
 
 input OAuthUpdateClientInput
@@ -55,10 +51,9 @@ input OAuthUpdateClientInput
     isActive: GraphQLBoolean
     isMaster: GraphQLBoolean
     applicationIds: [ID]
-    
 }
 
-type Query 
+type Query
 {
     oAuthFindClient(query:QueryStatement constraint:QueryStatement): OAuthClient
     oAuthFindClientById(id:ID constraint:QueryStatement): OAuthClient

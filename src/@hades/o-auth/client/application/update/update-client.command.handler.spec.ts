@@ -6,12 +6,12 @@ import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 import { UpdateClientCommand } from './update-client.command';
 import { UpdateClientService } from './update-client.service';
 
-describe('UpdateClientCommandHandler', () => 
+describe('UpdateClientCommandHandler', () =>
 {
     let commandHandler: UpdateClientCommandHandler;
     let service: UpdateClientService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateClientCommandHandler', () =>
         service         = module.get<UpdateClientService>(UpdateClientService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateClientCommandHandler should be defined', () => 
+        test('UpdateClientCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an client created', async () => 
+        test('should return an client created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateClientCommand(
@@ -51,7 +51,6 @@ describe('UpdateClientCommandHandler', () =>
                     clients[0].isActive,
                     clients[0].isMaster,
                     clients[0].applicationIds,
-                    
                 )
             )).toBe(undefined);
         });

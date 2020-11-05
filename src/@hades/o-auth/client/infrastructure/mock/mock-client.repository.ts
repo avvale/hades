@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IClientRepository } from '@hades/o-auth/client/domain/client.repository';
-import { 
+import {
     ClientId,
     ClientGrantType,
     ClientName,
@@ -16,8 +16,7 @@ import {
     ClientApplicationIds,
     ClientCreatedAt,
     ClientUpdatedAt,
-    ClientDeletedAt
-    
+    ClientDeletedAt,
 } from '@hades/o-auth/client/domain/value-objects';
 import { OAuthClient } from './../../domain/client.aggregate';
 import { clients } from './../seeds/client.seed';
@@ -29,14 +28,14 @@ export class MockClientRepository extends MockRepository<OAuthClient> implements
     public readonly aggregateName: string = 'OAuthClient';
     public collectionSource: OAuthClient[];
     public deletedAtInstance: ClientDeletedAt = new ClientDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -51,7 +50,7 @@ export class MockClientRepository extends MockRepository<OAuthClient> implements
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(OAuthClient.register(
                     new ClientId(itemCollection.id),
                     new ClientGrantType(itemCollection.grantType),
@@ -67,7 +66,6 @@ export class MockClientRepository extends MockRepository<OAuthClient> implements
                     new ClientCreatedAt(itemCollection.createdAt),
                     new ClientUpdatedAt(itemCollection.updatedAt),
                     new ClientDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }

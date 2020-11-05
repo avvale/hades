@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 import { UpdateClientService } from './update-client.service';
-import { 
+import {
     ClientId,
     ClientGrantType,
     ClientName,
@@ -18,19 +18,18 @@ import {
     ClientApplicationIds,
     ClientCreatedAt,
     ClientUpdatedAt,
-    ClientDeletedAt
-    
+    ClientDeletedAt,
 } from './../../domain/value-objects';
 import { IClientRepository } from './../../domain/client.repository';
 import { MockClientRepository } from './../../infrastructure/mock/mock-client.repository';
 
-describe('UpdateClientService', () => 
+describe('UpdateClientService', () =>
 {
     let service: UpdateClientService;
     let repository: IClientRepository;
     let mockRepository: MockClientRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -39,7 +38,7 @@ describe('UpdateClientService', () =>
                 EventPublisher,
                 UpdateClientService,
                 MockClientRepository,
-                { 
+                {
                     provide: IClientRepository,
                     useValue: {
                         update: (item) => {}
@@ -53,14 +52,14 @@ describe('UpdateClientService', () =>
         mockRepository  = module.get(MockClientRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateClientService should be defined', () => 
+        test('UpdateClientService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a client and emit event', async () => 
+        test('should update a client and emit event', async () =>
         {
             expect(await service.main(
                 new ClientId(clients[0].id),
@@ -74,7 +73,6 @@ describe('UpdateClientService', () =>
                 new ClientIsActive(clients[0].isActive),
                 new ClientIsMaster(clients[0].isMaster),
                 new ClientApplicationIds(clients[0].applicationIds),
-                
             )).toBe(undefined);
         });
     });

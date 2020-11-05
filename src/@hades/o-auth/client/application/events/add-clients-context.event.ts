@@ -8,21 +8,21 @@ import { DeletedClientsEvent } from './deleted-clients.event';
 export class AddClientsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: OAuthClient[] = []
+        public readonly aggregateRoots: OAuthClient[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedClientsEvent(
-                this.aggregateRoots.map(client => 
+                this.aggregateRoots.map(client =>
                     new CreatedClientEvent(
                         client.id.value,
                         client.grantType.value,
@@ -38,7 +38,6 @@ export class AddClientsContextEvent extends AggregateRoot
                         client.createdAt?.value,
                         client.updatedAt?.value,
                         client.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -49,7 +48,7 @@ export class AddClientsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedClientsEvent(
-                this.aggregateRoots.map(client => 
+                this.aggregateRoots.map(client =>
                     new DeletedClientEvent(
                         client.id.value,
                         client.grantType.value,
@@ -65,10 +64,9 @@ export class AddClientsContextEvent extends AggregateRoot
                         client.createdAt?.value,
                         client.updatedAt?.value,
                         client.deletedAt?.value,
-                           
                     )
                 )
             )
         );
-    }   
+    }
 }

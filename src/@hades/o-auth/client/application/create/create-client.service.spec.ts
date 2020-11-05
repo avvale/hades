@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 import { CreateClientService } from './create-client.service';
-import { 
+import {
     ClientId,
     ClientGrantType,
     ClientName,
@@ -15,19 +15,22 @@ import {
     ClientExpiredRefreshToken,
     ClientIsActive,
     ClientIsMaster,
-    ClientApplicationIds
-    
+    ClientApplicationIds,
+    ClientCreatedAt,
+    ClientUpdatedAt,
+    ClientDeletedAt,
 } from './../../domain/value-objects';
 import { IClientRepository } from './../../domain/client.repository';
 import { MockClientRepository } from './../../infrastructure/mock/mock-client.repository';
 
-describe('CreateClientService', () => 
+describe('CreateClientService', () =>
+
 {
     let service: CreateClientService;
     let repository: IClientRepository;
     let mockRepository: MockClientRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -36,7 +39,7 @@ describe('CreateClientService', () =>
                 EventPublisher,
                 CreateClientService,
                 MockClientRepository,
-                { 
+                {
                     provide: IClientRepository,
                     useValue: {
                         create: (item) => {}
@@ -50,14 +53,14 @@ describe('CreateClientService', () =>
         mockRepository  = module.get(MockClientRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateClientService should be defined', () => 
+        test('CreateClientService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a client and emit event', async () => 
+        test('should create a client and emit event', async () =>
         {
             expect(await service.main(
                 new ClientId(clients[0].id),
@@ -71,7 +74,6 @@ describe('CreateClientService', () =>
                 new ClientIsActive(clients[0].isActive),
                 new ClientIsMaster(clients[0].isMaster),
                 new ClientApplicationIds(clients[0].applicationIds),
-                
             )).toBe(undefined);
         });
     });

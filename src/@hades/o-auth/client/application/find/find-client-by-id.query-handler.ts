@@ -11,12 +11,16 @@ export class FindClientByIdQueryHandler implements IQueryHandler<FindClientByIdQ
     private readonly mapper: ClientMapper = new ClientMapper();
 
     constructor(
-        private readonly findClientByIdService: FindClientByIdService
-    ) { }
+        private readonly findClientByIdService: FindClientByIdService,
+    ) {}
 
     async execute(query: FindClientByIdQuery): Promise<ClientResponse>
     {
-        const client = await this.findClientByIdService.main(new ClientId(query.id));
+        const client = await this.findClientByIdService.main(
+            new ClientId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(client);
     }

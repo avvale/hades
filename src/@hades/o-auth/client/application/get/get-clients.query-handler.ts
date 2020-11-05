@@ -10,11 +10,11 @@ export class GetClientsQueryHandler implements IQueryHandler<GetClientsQuery>
     private readonly mapper: ClientMapper = new ClientMapper();
 
     constructor(
-        private readonly getClientsService: GetClientsService
-    ) { }
+        private readonly getClientsService: GetClientsService,
+    ) {}
 
     async execute(query: GetClientsQuery): Promise<ClientResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getClientsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getClientsService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

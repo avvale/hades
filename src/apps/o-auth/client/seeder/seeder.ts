@@ -4,7 +4,7 @@ import { CreateClientsCommand } from '@hades/o-auth/client/application/create/cr
 import { SeederModule } from './seeder.module';
 import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

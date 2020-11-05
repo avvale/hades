@@ -16,7 +16,7 @@ describe('FindClientByIdQueryHandler', () =>
     let repository: MockClientRepository;
     let mapper: ClientMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindClientByIdQueryHandler', () =>
         mapper          = new ClientMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindClientByIdQueryHandler should be defined', () => 
+        test('FindClientByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ClientId,
     ClientGrantType,
     ClientName,
@@ -15,8 +14,7 @@ import {
     ClientApplicationIds,
     ClientCreatedAt,
     ClientUpdatedAt,
-    ClientDeletedAt
-    
+    ClientDeletedAt,
 } from './../../domain/value-objects';
 import { IClientRepository } from './../../domain/client.repository';
 import { OAuthClient } from './../../domain/client.aggregate';
@@ -27,7 +25,7 @@ export class CreateClientsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IClientRepository
+        private readonly repository: IClientRepository,
     ) {}
 
     public async main(
@@ -43,7 +41,6 @@ export class CreateClientsService
             isActive: ClientIsActive,
             isMaster: ClientIsMaster,
             applicationIds: ClientApplicationIds,
-            
         } []
     ): Promise<void>
     {
@@ -60,18 +57,18 @@ export class CreateClientsService
             client.isActive,
             client.isMaster,
             client.applicationIds,
-            new ClientCreatedAt(Utils.nowTimestamp()),
-            new ClientUpdatedAt(Utils.nowTimestamp()),
+            new ClientCreatedAt({currentTimestamp: true}),
+            new ClientUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateClients);
 
         // create AddClientsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const clientsRegistered = this.publisher.mergeObjectContext(new AddClientsContextEvent(aggregateClients));
- 
+
         clientsRegistered.created(); // apply event to model events
         clientsRegistered.commit(); // commit all events of model
     }
