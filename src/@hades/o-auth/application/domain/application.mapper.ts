@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { OAuthApplication } from './application.aggregate';
 import { ApplicationResponse } from './application.response';
-import { 
+import {
     ApplicationId,
     ApplicationName,
     ApplicationCode,
@@ -11,45 +11,41 @@ import {
     ApplicationClientIds,
     ApplicationCreatedAt,
     ApplicationUpdatedAt,
-    ApplicationDeletedAt
-    
+    ApplicationDeletedAt,
 } from './value-objects';
-
-
-
 import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
 
 export class ApplicationMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param application
      */
-    mapModelToAggregate(application: ObjectLiteral): OAuthApplication
+    mapModelToAggregate(application: ObjectLiteral, cQMetadata?: CQMetadata): OAuthApplication
     {
         if (!application) return;
 
-        return this.makeAggregate(application);
+        return this.makeAggregate(application, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param applications 
+     * @param applications
      */
-    mapModelsToAggregates(applications: ObjectLiteral[]): OAuthApplication[]
+    mapModelsToAggregates(applications: ObjectLiteral[], cQMetadata?: CQMetadata): OAuthApplication[]
     {
         if (!Array.isArray(applications)) return;
-        
-        return applications.map(application  => this.makeAggregate(application));
+
+        return applications.map(application  => this.makeAggregate(application, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param application 
+     * @param application
      */
     mapAggregateToResponse(application: OAuthApplication): ApplicationResponse
     {
@@ -67,7 +63,7 @@ export class ApplicationMapper implements IMapper
         return applications.map(application => this.makeResponse(application));
     }
 
-    private makeAggregate(application: ObjectLiteral): OAuthApplication
+    private makeAggregate(application: ObjectLiteral, cQMetadata?: CQMetadata): OAuthApplication
     {
         return OAuthApplication.register(
             new ApplicationId(application.id),
@@ -76,23 +72,17 @@ export class ApplicationMapper implements IMapper
             new ApplicationSecret(application.secret),
             new ApplicationIsMaster(application.isMaster),
             new ApplicationClientIds(application.clientIds),
-            new ApplicationCreatedAt(application.createdAt),
-            new ApplicationUpdatedAt(application.updatedAt),
-            new ApplicationDeletedAt(application.deletedAt),
-            
-            
-            
-            
-            
+            new ApplicationCreatedAt(application.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ApplicationUpdatedAt(application.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ApplicationDeletedAt(application.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapModelsToAggregates(application.clients) : undefined,
-            
         );
     }
 
     private makeResponse(application: OAuthApplication): ApplicationResponse
     {
         if (!application) return;
-        
+
         return new ApplicationResponse(
             application.id.value,
             application.name.value,
@@ -103,13 +93,7 @@ export class ApplicationMapper implements IMapper
             application.createdAt.value,
             application.updatedAt.value,
             application.deletedAt.value,
-            
-            
-            
-            
-            
             this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapAggregatesToResponses(application.clients) : undefined,
-            
         );
     }
 }

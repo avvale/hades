@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 import { UpdateApplicationService } from './update-application.service';
-import { 
+import {
     ApplicationId,
     ApplicationName,
     ApplicationCode,
@@ -13,19 +13,18 @@ import {
     ApplicationClientIds,
     ApplicationCreatedAt,
     ApplicationUpdatedAt,
-    ApplicationDeletedAt
-    
+    ApplicationDeletedAt,
 } from './../../domain/value-objects';
 import { IApplicationRepository } from './../../domain/application.repository';
 import { MockApplicationRepository } from './../../infrastructure/mock/mock-application.repository';
 
-describe('UpdateApplicationService', () => 
+describe('UpdateApplicationService', () =>
 {
     let service: UpdateApplicationService;
     let repository: IApplicationRepository;
     let mockRepository: MockApplicationRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -34,7 +33,7 @@ describe('UpdateApplicationService', () =>
                 EventPublisher,
                 UpdateApplicationService,
                 MockApplicationRepository,
-                { 
+                {
                     provide: IApplicationRepository,
                     useValue: {
                         update: (item) => {}
@@ -48,14 +47,14 @@ describe('UpdateApplicationService', () =>
         mockRepository  = module.get(MockApplicationRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateApplicationService should be defined', () => 
+        test('UpdateApplicationService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a application and emit event', async () => 
+        test('should update a application and emit event', async () =>
         {
             expect(await service.main(
                 new ApplicationId(applications[0].id),
@@ -64,7 +63,6 @@ describe('UpdateApplicationService', () =>
                 new ApplicationSecret(applications[0].secret),
                 new ApplicationIsMaster(applications[0].isMaster),
                 new ApplicationClientIds(applications[0].clientIds),
-                
             )).toBe(undefined);
         });
     });

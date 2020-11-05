@@ -10,12 +10,16 @@ export class FindApplicationQueryHandler implements IQueryHandler<FindApplicatio
     private readonly mapper: ApplicationMapper = new ApplicationMapper();
 
     constructor(
-        private readonly findApplicationService: FindApplicationService
-    ) { }
+        private readonly findApplicationService: FindApplicationService,
+    ) {}
 
     async execute(query: FindApplicationQuery): Promise<ApplicationResponse>
     {
-        const application = await this.findApplicationService.main(query.queryStatement);
+        const application = await this.findApplicationService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(application);
     }

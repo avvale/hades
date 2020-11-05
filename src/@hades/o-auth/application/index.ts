@@ -11,7 +11,7 @@ import { GetApplicationsQueryHandler } from './application/get/get-applications.
 import { FindApplicationQueryHandler } from './application/find/find-application.query-handler';
 import { FindApplicationByIdQueryHandler } from './application/find/find-application-by-id.query-handler';
 import { FindApplicationByAuthorizationHeaderQueryHandler } from './application/find/find-application-by-authorization-header.query-handler';
-         
+
 // events
 import { CreatedApplicationEventHandler } from './application/events/created-application.event-handler';
 import { CreatedApplicationsEventHandler } from './application/events/created-applications.event-handler';

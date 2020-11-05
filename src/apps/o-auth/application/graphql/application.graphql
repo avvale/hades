@@ -1,5 +1,4 @@
 
-
 type OAuthApplication
 {
     id: ID!
@@ -11,7 +10,6 @@ type OAuthApplication
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
-    
 }
 
 input OAuthCreateApplicationInput
@@ -22,7 +20,6 @@ input OAuthCreateApplicationInput
     secret: GraphQLString!
     isMaster: GraphQLBoolean!
     clientIds: [ID]
-    
 }
 
 input OAuthUpdateApplicationInput
@@ -33,10 +30,9 @@ input OAuthUpdateApplicationInput
     secret: GraphQLString
     isMaster: GraphQLBoolean
     clientIds: [ID]
-    
 }
 
-type Query 
+type Query
 {
     oAuthFindApplication(query:QueryStatement constraint:QueryStatement): OAuthApplication
     oAuthFindApplicationById(id:ID constraint:QueryStatement): OAuthApplication

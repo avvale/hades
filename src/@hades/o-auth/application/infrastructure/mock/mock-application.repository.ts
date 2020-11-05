@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IApplicationRepository } from '@hades/o-auth/application/domain/application.repository';
-import { 
+import {
     ApplicationId,
     ApplicationName,
     ApplicationCode,
@@ -11,8 +11,7 @@ import {
     ApplicationClientIds,
     ApplicationCreatedAt,
     ApplicationUpdatedAt,
-    ApplicationDeletedAt
-    
+    ApplicationDeletedAt,
 } from '@hades/o-auth/application/domain/value-objects';
 import { OAuthApplication } from './../../domain/application.aggregate';
 import { applications } from './../seeds/application.seed';
@@ -24,14 +23,14 @@ export class MockApplicationRepository extends MockRepository<OAuthApplication> 
     public readonly aggregateName: string = 'OAuthApplication';
     public collectionSource: OAuthApplication[];
     public deletedAtInstance: ApplicationDeletedAt = new ApplicationDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -46,7 +45,7 @@ export class MockApplicationRepository extends MockRepository<OAuthApplication> 
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(OAuthApplication.register(
                     new ApplicationId(itemCollection.id),
                     new ApplicationName(itemCollection.name),
@@ -57,7 +56,6 @@ export class MockApplicationRepository extends MockRepository<OAuthApplication> 
                     new ApplicationCreatedAt(itemCollection.createdAt),
                     new ApplicationUpdatedAt(itemCollection.updatedAt),
                     new ApplicationDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }

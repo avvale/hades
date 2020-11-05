@@ -4,25 +4,28 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 import { CreateApplicationService } from './create-application.service';
-import { 
+import {
     ApplicationId,
     ApplicationName,
     ApplicationCode,
     ApplicationSecret,
     ApplicationIsMaster,
-    ApplicationClientIds
-    
+    ApplicationClientIds,
+    ApplicationCreatedAt,
+    ApplicationUpdatedAt,
+    ApplicationDeletedAt,
 } from './../../domain/value-objects';
 import { IApplicationRepository } from './../../domain/application.repository';
 import { MockApplicationRepository } from './../../infrastructure/mock/mock-application.repository';
 
-describe('CreateApplicationService', () => 
+describe('CreateApplicationService', () =>
+
 {
     let service: CreateApplicationService;
     let repository: IApplicationRepository;
     let mockRepository: MockApplicationRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -31,7 +34,7 @@ describe('CreateApplicationService', () =>
                 EventPublisher,
                 CreateApplicationService,
                 MockApplicationRepository,
-                { 
+                {
                     provide: IApplicationRepository,
                     useValue: {
                         create: (item) => {}
@@ -45,14 +48,14 @@ describe('CreateApplicationService', () =>
         mockRepository  = module.get(MockApplicationRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateApplicationService should be defined', () => 
+        test('CreateApplicationService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a application and emit event', async () => 
+        test('should create a application and emit event', async () =>
         {
             expect(await service.main(
                 new ApplicationId(applications[0].id),
@@ -61,7 +64,6 @@ describe('CreateApplicationService', () =>
                 new ApplicationSecret(applications[0].secret),
                 new ApplicationIsMaster(applications[0].isMaster),
                 new ApplicationClientIds(applications[0].clientIds),
-                
             )).toBe(undefined);
         });
     });

@@ -8,21 +8,21 @@ import { DeletedApplicationsEvent } from './deleted-applications.event';
 export class AddApplicationsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: OAuthApplication[] = []
+        public readonly aggregateRoots: OAuthApplication[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedApplicationsEvent(
-                this.aggregateRoots.map(application => 
+                this.aggregateRoots.map(application =>
                     new CreatedApplicationEvent(
                         application.id.value,
                         application.name.value,
@@ -33,7 +33,6 @@ export class AddApplicationsContextEvent extends AggregateRoot
                         application.createdAt?.value,
                         application.updatedAt?.value,
                         application.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -44,7 +43,7 @@ export class AddApplicationsContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedApplicationsEvent(
-                this.aggregateRoots.map(application => 
+                this.aggregateRoots.map(application =>
                     new DeletedApplicationEvent(
                         application.id.value,
                         application.name.value,
@@ -55,10 +54,9 @@ export class AddApplicationsContextEvent extends AggregateRoot
                         application.createdAt?.value,
                         application.updatedAt?.value,
                         application.deletedAt?.value,
-                           
                     )
                 )
             )
         );
-    }   
+    }
 }

@@ -1,9 +1,6 @@
-
-
-
 import { ClientResponse } from '@hades/o-auth/client/domain/client.response';
 
-export class ApplicationResponse 
+export class ApplicationResponse
 {
     constructor(
         public readonly id: string,
@@ -15,12 +12,6 @@ export class ApplicationResponse
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        
-        
-        
-        
-        
         public readonly clients: ClientResponse[],
-        
     ) {}
 }

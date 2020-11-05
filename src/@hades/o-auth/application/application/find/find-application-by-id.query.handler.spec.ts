@@ -16,7 +16,7 @@ describe('FindApplicationByIdQueryHandler', () =>
     let repository: MockApplicationRepository;
     let mapper: ApplicationMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindApplicationByIdQueryHandler', () =>
         mapper          = new ApplicationMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindApplicationByIdQueryHandler should be defined', () => 
+        test('FindApplicationByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
