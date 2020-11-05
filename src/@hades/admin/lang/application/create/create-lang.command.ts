@@ -1,14 +1,18 @@
-export class CreateLangCommand 
-{   
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class CreateLangCommand
+{
     constructor(
-        public readonly id: string,
-        public readonly name: string,
-        public readonly image: string,
-        public readonly iso6392: string,
-        public readonly iso6393: string,
-        public readonly ietf: string,
-        public readonly sort: number,
-        public readonly isActive: boolean,
-        
+        public readonly payload: {
+            id: string,
+            name: string,
+            image?: string,
+            iso6392: string,
+            iso6393: string,
+            ietf: string,
+            sort?: number,
+            isActive: boolean,
+        },
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

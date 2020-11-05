@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     LangId,
     LangName,
     LangImage,
@@ -12,8 +11,7 @@ import {
     LangIsActive,
     LangCreatedAt,
     LangUpdatedAt,
-    LangDeletedAt
-    
+    LangDeletedAt,
 } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
 import { AdminLang } from './../../domain/lang.aggregate';
@@ -24,7 +22,7 @@ export class CreateLangsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: ILangRepository
+        private readonly repository: ILangRepository,
     ) {}
 
     public async main(
@@ -37,7 +35,6 @@ export class CreateLangsService
             ietf: LangIetf,
             sort: LangSort,
             isActive: LangIsActive,
-            
         } []
     ): Promise<void>
     {
@@ -51,18 +48,18 @@ export class CreateLangsService
             lang.ietf,
             lang.sort,
             lang.isActive,
-            new LangCreatedAt(Utils.nowTimestamp()),
-            new LangUpdatedAt(Utils.nowTimestamp()),
+            new LangCreatedAt({currentTimestamp: true}),
+            new LangUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateLangs);
 
         // create AddLangsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const langsRegistered = this.publisher.mergeObjectContext(new AddLangsContextEvent(aggregateLangs));
- 
+
         langsRegistered.created(); // apply event to model events
         langsRegistered.commit(); // commit all events of model
     }

@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateLangsCommand } from './create-langs.command';
 import { CreateLangsService } from './create-langs.service';
-import { 
+import {
     LangId,
     LangName,
     LangImage,
@@ -9,23 +9,25 @@ import {
     LangIso6393,
     LangIetf,
     LangSort,
-    LangIsActive
-    
+    LangIsActive,
+    LangCreatedAt,
+    LangUpdatedAt,
+    LangDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateLangsCommand)
 export class CreateLangsCommandHandler implements ICommandHandler<CreateLangsCommand>
 {
     constructor(
-        private readonly createLangsService: CreateLangsService
-    ) { }
+        private readonly createLangsService: CreateLangsService,
+    ) {}
 
     async execute(command: CreateLangsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createLangsService.main(
-            command.langs
-                .map(lang => { 
+            command.payload
+                .map(lang => {
                     return {
                         id: new LangId(lang.id),
                         name: new LangName(lang.name),
@@ -35,7 +37,6 @@ export class CreateLangsCommandHandler implements ICommandHandler<CreateLangsCom
                         ietf: new LangIetf(lang.ietf),
                         sort: new LangSort(lang.sort),
                         isActive: new LangIsActive(lang.isActive),
-                        
                     }
                 })
         );

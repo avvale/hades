@@ -6,12 +6,12 @@ import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { UpdateLangCommand } from './update-lang.command';
 import { UpdateLangService } from './update-lang.service';
 
-describe('UpdateLangCommandHandler', () => 
+describe('UpdateLangCommandHandler', () =>
 {
     let commandHandler: UpdateLangCommandHandler;
     let service: UpdateLangService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateLangCommandHandler', () =>
         service         = module.get<UpdateLangService>(UpdateLangService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateLangCommandHandler should be defined', () => 
+        test('UpdateLangCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an lang created', async () => 
+        test('should return an lang created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateLangCommand(
@@ -48,7 +48,6 @@ describe('UpdateLangCommandHandler', () =>
                     langs[0].ietf,
                     langs[0].sort,
                     langs[0].isActive,
-                    
                 )
             )).toBe(undefined);
         });

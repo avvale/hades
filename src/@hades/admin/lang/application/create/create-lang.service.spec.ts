@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { CreateLangService } from './create-lang.service';
-import { 
+import {
     LangId,
     LangName,
     LangImage,
@@ -12,19 +12,22 @@ import {
     LangIso6393,
     LangIetf,
     LangSort,
-    LangIsActive
-    
+    LangIsActive,
+    LangCreatedAt,
+    LangUpdatedAt,
+    LangDeletedAt,
 } from './../../domain/value-objects';
 import { ILangRepository } from './../../domain/lang.repository';
 import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
 
-describe('CreateLangService', () => 
+describe('CreateLangService', () =>
+
 {
     let service: CreateLangService;
     let repository: ILangRepository;
     let mockRepository: MockLangRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,7 +36,7 @@ describe('CreateLangService', () =>
                 EventPublisher,
                 CreateLangService,
                 MockLangRepository,
-                { 
+                {
                     provide: ILangRepository,
                     useValue: {
                         create: (item) => {}
@@ -47,14 +50,14 @@ describe('CreateLangService', () =>
         mockRepository  = module.get(MockLangRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateLangService should be defined', () => 
+        test('CreateLangService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should create a lang and emit event', async () => 
+        test('should create a lang and emit event', async () =>
         {
             expect(await service.main(
                 new LangId(langs[0].id),
@@ -65,7 +68,6 @@ describe('CreateLangService', () =>
                 new LangIetf(langs[0].ietf),
                 new LangSort(langs[0].sort),
                 new LangIsActive(langs[0].isActive),
-                
             )).toBe(undefined);
         });
     });

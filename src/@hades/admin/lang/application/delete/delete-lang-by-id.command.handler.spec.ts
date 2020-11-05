@@ -41,7 +41,6 @@ describe('DeleteLangByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteLangByIdCommand(
                     langs[0].id,
-                
                 )
             )).toBe(undefined);
         });

@@ -32,7 +32,6 @@ import { DeleteLangsService } from './application/delete/delete-langs.service';
 // models
 export { AdminLangModel } from './infrastructure/sequelize/sequelize-lang.model';
 
-
 // repository
 export { ILangRepository } from './domain/lang.repository';
 export { SequelizeLangRepository } from './infrastructure/sequelize/sequelize-lang.repository';

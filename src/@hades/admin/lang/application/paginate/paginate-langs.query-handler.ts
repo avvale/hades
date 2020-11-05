@@ -7,16 +7,16 @@ import { PaginateLangsService } from './paginate-langs.service';
 export class PaginateLangsQueryHandler implements IQueryHandler<PaginateLangsQuery>
 {
     constructor(
-        private readonly paginateLangsService: PaginateLangsService
-    ) { }
+        private readonly paginateLangsService: PaginateLangsService,
+    ) {}
 
     async execute(query: PaginateLangsQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateLangsService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginateLangsService.main(query.queryStatement, query.constraint, query.cQMetadata);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

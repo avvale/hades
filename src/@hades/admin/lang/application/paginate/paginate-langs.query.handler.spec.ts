@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginateLangsQuery } from './paginate-langs.query';
 import { PaginateLangsService } from './paginate-langs.service';
 
-describe('PaginateLangsQueryHandler', () => 
+describe('PaginateLangsQueryHandler', () =>
 {
     let queryHandler: PaginateLangsQueryHandler;
     let service: PaginateLangsService;
     let repository: MockLangRepository;
     let mapper: LangMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
