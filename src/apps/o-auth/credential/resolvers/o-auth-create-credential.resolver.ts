@@ -6,7 +6,7 @@ import { ClientCredentialsGrantService } from './../lib/client-credentials-grant
 import { PasswordGrantService } from './../lib/password-grant.service';
 
 @Resolver()
-export class CreateCredentialResolver
+export class OAuthCreateCredentialResolver
 {
     constructor(
         private readonly clientClientGrantService: ClientCredentialsGrantService,

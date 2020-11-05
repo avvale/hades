@@ -60,9 +60,11 @@ export class ClientCredentialsGrantService
 
         // create a JWT refresh tToken
         await this.commandBus.dispatch(new CreateRefreshTokenCommand(
-            Utils.uuid(),
-            accessTokenId,
-            client.expiredRefreshToken
+            {
+                id: Utils.uuid(),
+                accessTokenId: accessTokenId,
+                expiredRefreshToken: client.expiredRefreshToken,
+            }
         ));
 
         // find token created with refreshtoken associated

@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { AccessTokenDto } from './../../../o-auth/access-token/dto/access-token.dto';
 
 export class RefreshTokenDto
 {
@@ -9,11 +10,11 @@ export class RefreshTokenDto
     id: string;
 
     @ApiProperty({
-        type        : [AccessTokenDto],
+        type        : AccessTokenDto,
         description : 'accessTokenId [input here api field description]',
         example     : '',
     })
-    accessTokenId: AccessTokenDto[];
+    accessTokenId: AccessTokenDto;
 
     @ApiProperty({
         type        : String,
