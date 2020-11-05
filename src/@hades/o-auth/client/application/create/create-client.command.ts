@@ -1,17 +1,21 @@
-export class CreateClientCommand 
-{   
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class CreateClientCommand
+{
     constructor(
-        public readonly id: string,
-        public readonly grantType: string,
-        public readonly name: string,
-        public readonly secret: string,
-        public readonly authUrl: string,
-        public readonly redirect: string,
-        public readonly expiredAccessToken: number,
-        public readonly expiredRefreshToken: number,
-        public readonly isActive: boolean,
-        public readonly isMaster: boolean,
-        public readonly applicationIds: string[],
-        
+        public readonly payload: {
+            id: string,
+            grantType: string,
+            name: string,
+            secret: string,
+            authUrl?: string,
+            redirect?: string,
+            expiredAccessToken?: number,
+            expiredRefreshToken?: number,
+            isActive: boolean,
+            isMaster: boolean,
+            applicationIds?: string[],
+        },
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

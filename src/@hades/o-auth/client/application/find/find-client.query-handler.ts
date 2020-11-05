@@ -10,12 +10,16 @@ export class FindClientQueryHandler implements IQueryHandler<FindClientQuery>
     private readonly mapper: ClientMapper = new ClientMapper();
 
     constructor(
-        private readonly findClientService: FindClientService
-    ) { }
+        private readonly findClientService: FindClientService,
+    ) {}
 
     async execute(query: FindClientQuery): Promise<ClientResponse>
     {
-        const client = await this.findClientService.main(query.queryStatement);
+        const client = await this.findClientService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(client);
     }

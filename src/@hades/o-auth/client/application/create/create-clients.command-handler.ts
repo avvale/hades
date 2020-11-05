@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateClientsCommand } from './create-clients.command';
 import { CreateClientsService } from './create-clients.service';
-import { 
+import {
     ClientId,
     ClientGrantType,
     ClientName,
@@ -12,23 +12,25 @@ import {
     ClientExpiredRefreshToken,
     ClientIsActive,
     ClientIsMaster,
-    ClientApplicationIds
-    
+    ClientApplicationIds,
+    ClientCreatedAt,
+    ClientUpdatedAt,
+    ClientDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateClientsCommand)
 export class CreateClientsCommandHandler implements ICommandHandler<CreateClientsCommand>
 {
     constructor(
-        private readonly createClientsService: CreateClientsService
-    ) { }
+        private readonly createClientsService: CreateClientsService,
+    ) {}
 
     async execute(command: CreateClientsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createClientsService.main(
-            command.clients
-                .map(client => { 
+            command.payload
+                .map(client => {
                     return {
                         id: new ClientId(client.id),
                         grantType: new ClientGrantType(client.grantType),
@@ -41,7 +43,6 @@ export class CreateClientsCommandHandler implements ICommandHandler<CreateClient
                         isActive: new ClientIsActive(client.isActive),
                         isMaster: new ClientIsMaster(client.isMaster),
                         applicationIds: new ClientApplicationIds(client.applicationIds),
-                        
                     }
                 })
         );

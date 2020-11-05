@@ -8,13 +8,13 @@ import { ClientId } from './../../domain/value-objects';
 import { IClientRepository } from './../../domain/client.repository';
 import { MockClientRepository } from './../../infrastructure/mock/mock-client.repository';
 
-describe('FindClientByIdService', () => 
+describe('FindClientByIdService', () =>
 {
     let service: FindClientByIdService;
     let repository: IClientRepository;
     let mockRepository: MockClientRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindClientByIdService', () =>
                 EventPublisher,
                 FindClientByIdService,
                 MockClientRepository,
-                { 
+                {
                     provide: IClientRepository,
                     useValue: {
                         findById: (id) => {}

@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+import {
     ClientId,
     ClientGrantType,
     ClientName,
@@ -15,8 +16,7 @@ import {
     ClientApplicationIds,
     ClientCreatedAt,
     ClientUpdatedAt,
-    ClientDeletedAt
-    
+    ClientDeletedAt,
 } from './../../domain/value-objects';
 import { IClientRepository } from './../../domain/client.repository';
 import { OAuthClient } from './../../domain/client.aggregate';
@@ -26,50 +26,53 @@ export class UpdateClientService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IClientRepository
+        private readonly repository: IClientRepository,
     ) {}
 
     public async main(
-        id: ClientId,
-        grantType?: ClientGrantType,
-        name?: ClientName,
-        secret?: ClientSecret,
-        authUrl?: ClientAuthUrl,
-        redirect?: ClientRedirect,
-        expiredAccessToken?: ClientExpiredAccessToken,
-        expiredRefreshToken?: ClientExpiredRefreshToken,
-        isActive?: ClientIsActive,
-        isMaster?: ClientIsMaster,
-        applicationIds?: ClientApplicationIds,
-        
+        payload: {
+            id: ClientId,
+            grantType?: ClientGrantType,
+            name?: ClientName,
+            secret?: ClientSecret,
+            authUrl?: ClientAuthUrl,
+            redirect?: ClientRedirect,
+            expiredAccessToken?: ClientExpiredAccessToken,
+            expiredRefreshToken?: ClientExpiredRefreshToken,
+            isActive?: ClientIsActive,
+            isMaster?: ClientIsMaster,
+            applicationIds?: ClientApplicationIds,
+        },
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
     ): Promise<void>
-    {        
+    {
         // create aggregate with factory pattern
         const client = OAuthClient.register(
-            id,
-            grantType,
-            name,
-            secret,
-            authUrl,
-            redirect,
-            expiredAccessToken,
-            expiredRefreshToken,
-            isActive,
-            isMaster,
-            applicationIds,
+            payload.id,
+            payload.grantType,
+            payload.name,
+            payload.secret,
+            payload.authUrl,
+            payload.redirect,
+            payload.expiredAccessToken,
+            payload.expiredRefreshToken,
+            payload.isActive,
+            payload.isMaster,
+            payload.applicationIds,
             null,
-            new ClientUpdatedAt(Utils.nowTimestamp()),
+            new ClientUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // update
-        await this.repository.update(client);        
-            
+        await this.repository.update(client, constraint, cQMetadata);
+
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const clientRegister = this.publisher.mergeObjectContext(
             client
         );
-        
+
         clientRegister.updated(client); // apply event to model events
         clientRegister.commit(); // commit all events of model
     }

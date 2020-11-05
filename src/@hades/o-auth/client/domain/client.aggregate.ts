@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { 
+import {
     ClientId,
     ClientGrantType,
     ClientName,
@@ -13,16 +13,12 @@ import {
     ClientApplicationIds,
     ClientCreatedAt,
     ClientUpdatedAt,
-    ClientDeletedAt
-    
+    ClientDeletedAt,
 } from './value-objects';
 import { CreatedClientEvent } from './../application/events/created-client.event';
 import { UpdatedClientEvent } from './../application/events/updated-client.event';
 import { DeletedClientEvent } from './../application/events/deleted-client.event';
-
-
 import { OAuthAccessToken } from '@hades/o-auth/access-token/domain/access-token.aggregate';
-
 import { OAuthApplication } from '@hades/o-auth/application/domain/application.aggregate';
 
 export class OAuthClient extends AggregateRoot
@@ -41,19 +37,32 @@ export class OAuthClient extends AggregateRoot
     createdAt: ClientCreatedAt;
     updatedAt: ClientUpdatedAt;
     deletedAt: ClientDeletedAt;
-    
+
     // eager relationship
-    
-    
-    
     accessTokens: OAuthAccessToken[];
-    
     applications: OAuthApplication[];
-    
-    constructor(id?: ClientId, grantType?: ClientGrantType, name?: ClientName, secret?: ClientSecret, authUrl?: ClientAuthUrl, redirect?: ClientRedirect, expiredAccessToken?: ClientExpiredAccessToken, expiredRefreshToken?: ClientExpiredRefreshToken, isActive?: ClientIsActive, isMaster?: ClientIsMaster, applicationIds?: ClientApplicationIds, createdAt?: ClientCreatedAt, updatedAt?: ClientUpdatedAt, deletedAt?: ClientDeletedAt, accessTokens?: OAuthAccessToken[], applications?: OAuthApplication[], )
+
+    constructor(
+        id: ClientId,
+        grantType: ClientGrantType,
+        name: ClientName,
+        secret: ClientSecret,
+        authUrl: ClientAuthUrl,
+        redirect: ClientRedirect,
+        expiredAccessToken: ClientExpiredAccessToken,
+        expiredRefreshToken: ClientExpiredRefreshToken,
+        isActive: ClientIsActive,
+        isMaster: ClientIsMaster,
+        applicationIds: ClientApplicationIds,
+        createdAt: ClientCreatedAt,
+        updatedAt: ClientUpdatedAt,
+        deletedAt: ClientDeletedAt,
+        accessTokens?: OAuthAccessToken[],
+        applications?: OAuthApplication[],
+    )
     {
         super();
-        
+
         this.id = id;
         this.grantType = grantType;
         this.name = name;
@@ -68,20 +77,49 @@ export class OAuthClient extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
-        
         this.accessTokens = accessTokens;
-        
         this.applications = applications;
-        
     }
 
-    static register (id: ClientId, grantType: ClientGrantType, name: ClientName, secret: ClientSecret, authUrl: ClientAuthUrl, redirect: ClientRedirect, expiredAccessToken: ClientExpiredAccessToken, expiredRefreshToken: ClientExpiredRefreshToken, isActive: ClientIsActive, isMaster: ClientIsMaster, applicationIds: ClientApplicationIds, createdAt: ClientCreatedAt, updatedAt: ClientUpdatedAt, deletedAt: ClientDeletedAt, accessTokens?: OAuthAccessToken[], applications?: OAuthApplication[], ): OAuthClient
+    static register (
+        id: ClientId,
+        grantType: ClientGrantType,
+        name: ClientName,
+        secret: ClientSecret,
+        authUrl: ClientAuthUrl,
+        redirect: ClientRedirect,
+        expiredAccessToken: ClientExpiredAccessToken,
+        expiredRefreshToken: ClientExpiredRefreshToken,
+        isActive: ClientIsActive,
+        isMaster: ClientIsMaster,
+        applicationIds: ClientApplicationIds,
+        createdAt: ClientCreatedAt,
+        updatedAt: ClientUpdatedAt,
+        deletedAt: ClientDeletedAt,
+        accessTokens?: OAuthAccessToken[],
+        applications?: OAuthApplication[],
+    ): OAuthClient
     {
-        return new OAuthClient(id, grantType, name, secret, authUrl, redirect, expiredAccessToken, expiredRefreshToken, isActive, isMaster, applicationIds, createdAt, updatedAt, deletedAt, accessTokens, applications, );
+        return new OAuthClient(
+            id,
+            grantType,
+            name,
+            secret,
+            authUrl,
+            redirect,
+            expiredAccessToken,
+            expiredRefreshToken,
+            isActive,
+            isMaster,
+            applicationIds,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            accessTokens,
+            applications,
+        );
     }
 
     created(client: OAuthClient): void
@@ -102,7 +140,6 @@ export class OAuthClient extends AggregateRoot
                 client.createdAt?.value,
                 client.updatedAt?.value,
                 client.deletedAt?.value,
-                
             )
         );
     }
@@ -125,7 +162,6 @@ export class OAuthClient extends AggregateRoot
                 client.createdAt?.value,
                 client.updatedAt?.value,
                 client.deletedAt?.value,
-                
             )
         );
     }
@@ -148,7 +184,6 @@ export class OAuthClient extends AggregateRoot
                 client.createdAt?.value,
                 client.updatedAt?.value,
                 client.deletedAt?.value,
-                
             )
         );
     }
@@ -170,15 +205,10 @@ export class OAuthClient extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
-            
             accessTokens: this.accessTokens?.map(item => item.toDTO()),
-            
             applications: this.applications?.map(item => item.toDTO()),
-            
         }
     }
 }

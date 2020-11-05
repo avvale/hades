@@ -1,45 +1,45 @@
 // controllers
-import { CreateClientController } from './controllers/create-client.controller';
-import { CreateClientsController } from './controllers/create-clients.controller';
-import { PaginateClientsController } from './controllers/paginate-clients.controller';
-import { GetClientsController } from './controllers/get-clients.controller';
-import { FindClientByIdController } from './controllers/find-client-by-id.controller';
-import { FindClientController } from './controllers/find-client.controller';
-import { UpdateClientController } from './controllers/update-client.controller';
-import { DeleteClientByIdController } from './controllers/delete-client-by-id.controller';
-import { DeleteClientsController } from './controllers/delete-clients.controller';
+import { OAuthCreateClientController } from './controllers/o-auth-create-client.controller';
+import { OAuthCreateClientsController } from './controllers/o-auth-create-clients.controller';
+import { OAuthPaginateClientsController } from './controllers/o-auth-paginate-clients.controller';
+import { OAuthGetClientsController } from './controllers/o-auth-get-clients.controller';
+import { OAuthFindClientByIdController } from './controllers/o-auth-find-client-by-id.controller';
+import { OAuthFindClientController } from './controllers/o-auth-find-client.controller';
+import { OAuthUpdateClientController } from './controllers/o-auth-update-client.controller';
+import { OAuthDeleteClientByIdController } from './controllers/o-auth-delete-client-by-id.controller';
+import { OAuthDeleteClientsController } from './controllers/o-auth-delete-clients.controller';
 
 // resolvers
-import { CreateClientResolver } from './resolvers/create-client.resolver';
-import { CreateClientsResolver } from './resolvers/create-clients.resolver';
-import { PaginateClientsResolver } from './resolvers/paginate-clients.resolver';
-import { GetClientsResolver } from './resolvers/get-clients.resolver';
-import { FindClientResolver } from './resolvers/find-client.resolver';
-import { FindClientByIdResolver } from './resolvers/find-client-by-id.resolver';
-import { UpdateClientResolver } from './resolvers/update-client.resolver';
-import { DeleteClientByIdResolver } from './resolvers/delete-client-by-id.resolver';
-import { DeleteClientsResolver } from './resolvers/delete-clients.resolver';
+import { OAuthCreateClientResolver } from './resolvers/o-auth-create-client.resolver';
+import { OAuthCreateClientsResolver } from './resolvers/o-auth-create-clients.resolver';
+import { OAuthPaginateClientsResolver } from './resolvers/o-auth-paginate-clients.resolver';
+import { OAuthGetClientsResolver } from './resolvers/o-auth-get-clients.resolver';
+import { OAuthFindClientResolver } from './resolvers/o-auth-find-client.resolver';
+import { OAuthFindClientByIdResolver } from './resolvers/o-auth-find-client-by-id.resolver';
+import { OAuthUpdateClientResolver } from './resolvers/o-auth-update-client.resolver';
+import { OAuthDeleteClientByIdResolver } from './resolvers/o-auth-delete-client-by-id.resolver';
+import { OAuthDeleteClientsResolver } from './resolvers/o-auth-delete-clients.resolver';
 
 export const OAuthClientControllers = [
-    CreateClientController,
-    CreateClientsController,
-    PaginateClientsController,
-    GetClientsController,
-    FindClientByIdController,
-    FindClientController,
-    UpdateClientController,
-    DeleteClientByIdController,
-    DeleteClientsController,
+    OAuthCreateClientController,
+    OAuthCreateClientsController,
+    OAuthPaginateClientsController,
+    OAuthGetClientsController,
+    OAuthFindClientByIdController,
+    OAuthFindClientController,
+    OAuthUpdateClientController,
+    OAuthDeleteClientByIdController,
+    OAuthDeleteClientsController,
 ];
 
 export const OAuthClientResolvers = [
-    CreateClientResolver,
-    CreateClientsResolver,
-    PaginateClientsResolver,
-    GetClientsResolver,
-    FindClientResolver,
-    FindClientByIdResolver,
-    UpdateClientResolver,
-    DeleteClientByIdResolver,
-    DeleteClientsResolver,
+    OAuthCreateClientResolver,
+    OAuthCreateClientsResolver,
+    OAuthPaginateClientsResolver,
+    OAuthGetClientsResolver,
+    OAuthFindClientResolver,
+    OAuthFindClientByIdResolver,
+    OAuthUpdateClientResolver,
+    OAuthDeleteClientByIdResolver,
+    OAuthDeleteClientsResolver,
 ];
