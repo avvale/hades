@@ -1,30 +1,32 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateAccessTokensCommand } from './create-access-tokens.command';
 import { CreateAccessTokensService } from './create-access-tokens.service';
-import { 
+import {
     AccessTokenId,
     AccessTokenClientId,
     AccessTokenAccountId,
     AccessTokenToken,
     AccessTokenName,
     AccessTokenIsRevoked,
-    AccessTokenExpiresAt
-    
+    AccessTokenExpiresAt,
+    AccessTokenCreatedAt,
+    AccessTokenUpdatedAt,
+    AccessTokenDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateAccessTokensCommand)
 export class CreateAccessTokensCommandHandler implements ICommandHandler<CreateAccessTokensCommand>
 {
     constructor(
-        private readonly createAccessTokensService: CreateAccessTokensService
-    ) { }
+        private readonly createAccessTokensService: CreateAccessTokensService,
+    ) {}
 
     async execute(command: CreateAccessTokensCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createAccessTokensService.main(
-            command.accessTokens
-                .map(accessToken => { 
+            command.payload
+                .map(accessToken => {
                     return {
                         id: new AccessTokenId(accessToken.id),
                         clientId: new AccessTokenClientId(accessToken.clientId),
@@ -32,8 +34,7 @@ export class CreateAccessTokensCommandHandler implements ICommandHandler<CreateA
                         token: new AccessTokenToken(accessToken.token),
                         name: new AccessTokenName(accessToken.name),
                         isRevoked: new AccessTokenIsRevoked(accessToken.isRevoked),
-                        expiresAt: new AccessTokenExpiresAt(accessToken.expiresAt),
-                        
+                        expiresAt: new AccessTokenExpiresAt(accessToken.expiresAt, {}, {removeTimezone: command.cQMetadata.timezone}),
                     }
                 })
         );

@@ -14,7 +14,7 @@ describe('DeleteAccessTokenByIdService', () =>
     let repository: IAccessTokenRepository;
     let mockRepository: MockAccessTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteAccessTokenByIdService', () =>
                 EventPublisher,
                 DeleteAccessTokenByIdService,
                 MockAccessTokenRepository,
-                { 
+                {
                     provide: IAccessTokenRepository,
                     useValue: {
                         deleteById: (id) => {},

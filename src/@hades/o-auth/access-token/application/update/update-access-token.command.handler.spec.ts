@@ -6,12 +6,12 @@ import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/ac
 import { UpdateAccessTokenCommand } from './update-access-token.command';
 import { UpdateAccessTokenService } from './update-access-token.service';
 
-describe('UpdateAccessTokenCommandHandler', () => 
+describe('UpdateAccessTokenCommandHandler', () =>
 {
     let commandHandler: UpdateAccessTokenCommandHandler;
     let service: UpdateAccessTokenService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateAccessTokenCommandHandler', () =>
         service         = module.get<UpdateAccessTokenService>(UpdateAccessTokenService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateAccessTokenCommandHandler should be defined', () => 
+        test('UpdateAccessTokenCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an accessToken created', async () => 
+        test('should return an accessToken created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateAccessTokenCommand(
@@ -47,7 +47,6 @@ describe('UpdateAccessTokenCommandHandler', () =>
                     accessTokens[0].name,
                     accessTokens[0].isRevoked,
                     accessTokens[0].expiresAt,
-                    
                 )
             )).toBe(undefined);
         });

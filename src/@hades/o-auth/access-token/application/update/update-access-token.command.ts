@@ -1,16 +1,19 @@
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 
-export class UpdateAccessTokenCommand 
+export class UpdateAccessTokenCommand
 {
     constructor(
-        public readonly id: string,
-        public readonly clientId?: string,
-        public readonly accountId?: string,
-        public readonly token?: string,
-        public readonly name?: string,
-        public readonly isRevoked?: boolean,
-        public readonly expiresAt?: string,
-        
+        public readonly payload: {
+            id: string,
+            clientId?: string,
+            accountId?: string,
+            token?: string,
+            name?: string,
+            isRevoked?: boolean,
+            expiresAt?: string,
+        },
         public readonly constraint?: QueryStatement,
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

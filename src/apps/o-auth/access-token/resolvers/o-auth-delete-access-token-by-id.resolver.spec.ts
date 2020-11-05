@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { DeleteAccessTokenByIdResolver } from './delete-access-token-by-id.resolver';
+import { OAuthDeleteAccessTokenByIdResolver } from './o-auth-delete-access-token-by-id.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
-describe('DeleteAccessTokenByIdResolver', () => 
+describe('OAuthDeleteAccessTokenByIdResolver', () => 
 {
-    let resolver: DeleteAccessTokenByIdResolver;
+    let resolver: OAuthDeleteAccessTokenByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -16,7 +16,7 @@ describe('DeleteAccessTokenByIdResolver', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                DeleteAccessTokenByIdResolver,
+                OAuthDeleteAccessTokenByIdResolver,
                 {
                     provide: IQueryBus,
                     useValue: {
@@ -32,19 +32,19 @@ describe('DeleteAccessTokenByIdResolver', () =>
             ]
         }).compile();
 
-        resolver    = module.get<DeleteAccessTokenByIdResolver>(DeleteAccessTokenByIdResolver);
+        resolver    = module.get<OAuthDeleteAccessTokenByIdResolver>(OAuthDeleteAccessTokenByIdResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('DeleteAccessTokenByIdResolver should be defined', () => 
+    test('OAuthDeleteAccessTokenByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        test('DeleteAccessTokenByIdResolver should be defined', () => 
+        test('OAuthDeleteAccessTokenByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });

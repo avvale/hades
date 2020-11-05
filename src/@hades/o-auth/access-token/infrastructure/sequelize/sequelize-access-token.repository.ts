@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
@@ -13,13 +12,13 @@ export class SequelizeAccessTokenRepository extends SequelizeRepository<OAuthAcc
 {
     public readonly aggregateName: string = 'OAuthAccessToken';
     public readonly mapper: AccessTokenMapper = new AccessTokenMapper();
+    public readonly timezoneColumns: string[] = ['expiresAt','createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(OAuthAccessTokenModel)
         public readonly repository: typeof OAuthAccessTokenModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }
-    
 }

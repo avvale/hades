@@ -32,7 +32,6 @@ import { DeleteAccessTokensService } from './application/delete/delete-access-to
 // models
 export { OAuthAccessTokenModel } from './infrastructure/sequelize/sequelize-access-token.model';
 
-
 // repository
 export { IAccessTokenRepository } from './domain/access-token.repository';
 export { SequelizeAccessTokenRepository } from './infrastructure/sequelize/sequelize-access-token.repository';

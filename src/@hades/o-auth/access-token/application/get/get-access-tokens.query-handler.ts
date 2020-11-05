@@ -10,11 +10,11 @@ export class GetAccessTokensQueryHandler implements IQueryHandler<GetAccessToken
     private readonly mapper: AccessTokenMapper = new AccessTokenMapper();
 
     constructor(
-        private readonly getAccessTokensService: GetAccessTokensService
-    ) { }
+        private readonly getAccessTokensService: GetAccessTokensService,
+    ) {}
 
     async execute(query: GetAccessTokensQuery): Promise<AccessTokenResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getAccessTokensService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getAccessTokensService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

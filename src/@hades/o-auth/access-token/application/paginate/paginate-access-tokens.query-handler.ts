@@ -7,16 +7,16 @@ import { PaginateAccessTokensService } from './paginate-access-tokens.service';
 export class PaginateAccessTokensQueryHandler implements IQueryHandler<PaginateAccessTokensQuery>
 {
     constructor(
-        private readonly paginateAccessTokensService: PaginateAccessTokensService
-    ) { }
+        private readonly paginateAccessTokensService: PaginateAccessTokensService,
+    ) {}
 
     async execute(query: PaginateAccessTokensQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateAccessTokensService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginateAccessTokensService.main(query.queryStatement, query.constraint, query.cQMetadata);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

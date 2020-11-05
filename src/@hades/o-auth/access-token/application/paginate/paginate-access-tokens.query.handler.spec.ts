@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginateAccessTokensQuery } from './paginate-access-tokens.query';
 import { PaginateAccessTokensService } from './paginate-access-tokens.service';
 
-describe('PaginateAccessTokensQueryHandler', () => 
+describe('PaginateAccessTokensQueryHandler', () =>
 {
     let queryHandler: PaginateAccessTokensQueryHandler;
     let service: PaginateAccessTokensService;
     let repository: MockAccessTokenRepository;
     let mapper: AccessTokenMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

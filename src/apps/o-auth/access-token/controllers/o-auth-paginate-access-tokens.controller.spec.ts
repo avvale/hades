@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { PaginateAccessTokensController } from './paginate-access-tokens.controller';
+import { OAuthPaginateAccessTokensController } from './o-auth-paginate-access-tokens.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
-describe('PaginateAccessTokensController', () => 
+describe('OAuthPaginateAccessTokensController', () => 
 {
-    let controller: PaginateAccessTokensController;
+    let controller: OAuthPaginateAccessTokensController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -16,7 +16,7 @@ describe('PaginateAccessTokensController', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                PaginateAccessTokensController
+                OAuthPaginateAccessTokensController
             ],
             providers: [
                 {
@@ -34,14 +34,14 @@ describe('PaginateAccessTokensController', () =>
             ]
         }).compile();
 
-        controller  = module.get<PaginateAccessTokensController>(PaginateAccessTokensController);
+        controller  = module.get<OAuthPaginateAccessTokensController>(OAuthPaginateAccessTokensController);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () => 
     {
-        test('PaginateAccessTokensController should be defined', () => 
+        test('OAuthPaginateAccessTokensController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });

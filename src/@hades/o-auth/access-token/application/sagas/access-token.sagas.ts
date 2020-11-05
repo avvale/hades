@@ -5,10 +5,10 @@ import { delay, map } from 'rxjs/operators';
 import { CreatedAccessTokenEvent } from './../events/created-access-token.event';
 
 @Injectable()
-export class AccessTokenSagas 
-{    
+export class AccessTokenSagas
+{
     /* @Saga()
-    dragonKilled = (events$: Observable<any>): Observable<ICommand> => 
+    dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {
         return events$
             .pipe(

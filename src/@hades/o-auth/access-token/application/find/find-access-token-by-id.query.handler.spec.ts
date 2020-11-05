@@ -16,7 +16,7 @@ describe('FindAccessTokenByIdQueryHandler', () =>
     let repository: MockAccessTokenRepository;
     let mapper: AccessTokenMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindAccessTokenByIdQueryHandler', () =>
         mapper          = new AccessTokenMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindAccessTokenByIdQueryHandler should be defined', () => 
+        test('FindAccessTokenByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

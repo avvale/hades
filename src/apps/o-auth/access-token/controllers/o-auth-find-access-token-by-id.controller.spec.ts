@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { FindAccessTokenByIdController } from './find-access-token-by-id.controller';
+import { OAuthFindAccessTokenByIdController } from './o-auth-find-access-token-by-id.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
-describe('FindAccessTokenByIdController', () => 
+describe('OAuthFindAccessTokenByIdController', () => 
 {
-    let controller: FindAccessTokenByIdController;
+    let controller: OAuthFindAccessTokenByIdController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -16,7 +16,7 @@ describe('FindAccessTokenByIdController', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                FindAccessTokenByIdController
+                OAuthFindAccessTokenByIdController
             ],
             providers: [
                 {
@@ -34,14 +34,14 @@ describe('FindAccessTokenByIdController', () =>
             ]
         }).compile();
 
-        controller  = module.get<FindAccessTokenByIdController>(FindAccessTokenByIdController);
+        controller  = module.get<OAuthFindAccessTokenByIdController>(OAuthFindAccessTokenByIdController);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () => 
     {
-        test('FindAccessTokenByIdController should be defined', () => 
+        test('OAuthFindAccessTokenByIdController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });

@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -16,19 +17,23 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 @Resolver()
 @Permissions('oAuth.accessToken.delete')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class DeleteAccessTokenByIdResolver
+export class OAuthDeleteAccessTokenByIdResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('oAuthDeleteAccessTokenById')
-    async main(@Args('id') id: string, @Args('constraint') constraint?: QueryStatement, )
+    async main(
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const accessToken = await this.queryBus.ask(new FindAccessTokenByIdQuery(id, constraint));
+        const accessToken = await this.queryBus.ask(new FindAccessTokenByIdQuery(id, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteAccessTokenByIdCommand(id, constraint));
+        await this.commandBus.dispatch(new DeleteAccessTokenByIdCommand(id, constraint, { timezone }));
 
         return accessToken;
     }

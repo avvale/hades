@@ -49,11 +49,13 @@ export class ClientCredentialsGrantService
         // create a JWT access tToken
         const accessTokenId = Utils.uuid();
         await this.commandBus.dispatch(new CreateAccessTokenCommand(
-            accessTokenId,
-            client.id,
-            account.id,
-            client.name,
-            client.expiredAccessToken
+            {
+                id: accessTokenId,
+                clientId: client.id,
+                accountId: account.id,
+                name: client.name,
+                expiredAccessToken: client.expiredAccessToken,
+            }
         ));
 
         // create a JWT refresh tToken

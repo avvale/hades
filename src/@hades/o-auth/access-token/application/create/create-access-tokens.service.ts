@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     AccessTokenId,
     AccessTokenClientId,
     AccessTokenAccountId,
@@ -11,8 +10,7 @@ import {
     AccessTokenExpiresAt,
     AccessTokenCreatedAt,
     AccessTokenUpdatedAt,
-    AccessTokenDeletedAt
-    
+    AccessTokenDeletedAt,
 } from './../../domain/value-objects';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { OAuthAccessToken } from './../../domain/access-token.aggregate';
@@ -23,7 +21,7 @@ export class CreateAccessTokensService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IAccessTokenRepository
+        private readonly repository: IAccessTokenRepository,
     ) {}
 
     public async main(
@@ -35,7 +33,6 @@ export class CreateAccessTokensService
             name: AccessTokenName,
             isRevoked: AccessTokenIsRevoked,
             expiresAt: AccessTokenExpiresAt,
-            
         } []
     ): Promise<void>
     {
@@ -48,18 +45,18 @@ export class CreateAccessTokensService
             accessToken.name,
             accessToken.isRevoked,
             accessToken.expiresAt,
-            new AccessTokenCreatedAt(Utils.nowTimestamp()),
-            new AccessTokenUpdatedAt(Utils.nowTimestamp()),
+            new AccessTokenCreatedAt({currentTimestamp: true}),
+            new AccessTokenUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateAccessTokens);
 
         // create AddAccessTokensContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const accessTokensRegistered = this.publisher.mergeObjectContext(new AddAccessTokensContextEvent(aggregateAccessTokens));
- 
+
         accessTokensRegistered.created(); // apply event to model events
         accessTokensRegistered.commit(); // commit all events of model
     }
