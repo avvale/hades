@@ -55,12 +55,14 @@ export class PasswordGrantService
 
         // create a JWT refresh tToken
         await this.commandBus.dispatch(new CreateRefreshTokenCommand(
-            Utils.uuid(),
-            accessTokenId,
-            client.expiredRefreshToken
+            {
+                id: Utils.uuid(),
+                accessTokenId: accessTokenId,
+                expiredRefreshToken: client.expiredRefreshToken,
+            }
         ));
 
-        // find token created with refreshtoken associated
+        // find token created with refreshToken associated
         const accessToken = await this.queryBus.ask(new FindAccessTokenQuery(
             {
                 where: {

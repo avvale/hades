@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed.ts",
-            "integrity": "sha1:6cdb8c3f7bfcb28414131fca6380bb766c6d2d80"
+            "integrity": "sha1:4c0126b0e74439109387f529ad8416f5d659eaae"
         },
         {
             "path": "src/@hades/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.model.ts",
@@ -375,7 +375,7 @@
         },
         {
             "path": "src/apps/o-auth/refresh-token/dto/refresh-token.dto.ts",
-            "integrity": "sha1:3e7aa20dcd16196c35520cc3348b76682c2f510f"
+            "integrity": "sha1:28fa766312c3c307a6e40e5d02d1c727972d122e"
         },
         {
             "path": "src/apps/o-auth/refresh-token/dto/create-refresh-token.dto.ts",
@@ -475,7 +475,7 @@
         },
         {
             "path": "postman/o-auth.refresh-token.postman.json",
-            "integrity": "sha1:1f26f7c61c608c3d6c5f95c2d435677ed2c4fb02"
+            "integrity": "sha1:284757dd6f0fa0726856ccd2f0df42b58d8a4e14"
         }
     ]
 }

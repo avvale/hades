@@ -1,19 +1,19 @@
 // controllers
-import { CreateCredentialController } from './controllers/create-credential.controller';
+import { OAuthCreateCredentialController } from './controllers/o-auth-create-credential.controller';
 
 // resolvers
-import { CreateCredentialResolver } from './resolvers/create-credential.resolver';
+import { OAuthCreateCredentialResolver } from './resolvers/o-auth-create-credential.resolver';
 
 // services
 import { ClientCredentialsGrantService } from './lib/client-credentials-grant.service';
 import { PasswordGrantService } from './lib/password-grant.service';
 
 export const OAuthCredentialControllers = [
-    CreateCredentialController
+    OAuthCreateCredentialController
 ];
 
 export const OAuthCredentialResolvers = [
-    CreateCredentialResolver
+    OAuthCreateCredentialResolver
 ];
 
 export const OAuthCredentialServices = [

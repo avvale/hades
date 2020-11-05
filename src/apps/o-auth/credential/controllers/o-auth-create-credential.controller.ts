@@ -2,7 +2,7 @@ import { Controller, Post, Body, Headers } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { CredentialDto } from './../dto/credential.dto';
 import { CreateCredentialDto } from './../dto/create-credential.dto';
-import { OAuthClientGrantType, OAuthCreateCredentialInput } from './../../../../graphql';
+import { OAuthClientGrantType } from './../../../../graphql';
 
 // custom
 import { ClientCredentialsGrantService } from './../lib/client-credentials-grant.service';
@@ -10,7 +10,7 @@ import { PasswordGrantService } from './../lib/password-grant.service';
 
 @ApiTags('[o-auth] credential')
 @Controller('o-auth/credential')
-export class CreateCredentialController
+export class OAuthCreateCredentialController
 {
     constructor(
         private readonly clientClientGrantService: ClientCredentialsGrantService,
@@ -21,7 +21,10 @@ export class CreateCredentialController
     @ApiOperation({ summary: 'Create credential' })
     @ApiCreatedResponse({ description: 'The credential obtained after login.' , type: CredentialDto })
     @ApiBody({ type: CreateCredentialDto })
-    async main(@Body() payload: CreateCredentialDto, @Headers('Authorization') authorization: string)
+    async main(
+        @Body() payload: CreateCredentialDto,
+        @Headers('Authorization') authorization: string
+    )
     {
         if (payload.grantType === OAuthClientGrantType.AUTHORIZATION_CODE)
         {

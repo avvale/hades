@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { RefreshTokenDto } from './../../../o-auth/refresh-token/dto/refresh-token.dto';
 
 export class AccessTokenDto
 {
@@ -43,6 +44,13 @@ export class AccessTokenDto
         description : 'expiresAt [input here api field description]',
     })
     expiresAt: string;
+
+    @ApiProperty({
+        type        : RefreshTokenDto,
+        description : 'refreshToken [input here api field description]',
+        example     : '',
+    })
+    refreshToken: RefreshTokenDto;
 
     @ApiProperty({
         type        : String,

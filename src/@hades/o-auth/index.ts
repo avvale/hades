@@ -2,21 +2,18 @@ import { OAuthAccessTokenHandlers, OAuthAccessTokenServices, OAuthAccessTokenMod
 import { OAuthApplicationHandlers, OAuthApplicationServices, OAuthApplicationModel, IApplicationRepository, SequelizeApplicationRepository, ApplicationSagas, OAuthApplicationsClientsModel } from './application';
 import { OAuthClientHandlers, OAuthClientServices, OAuthClientModel, IClientRepository, SequelizeClientRepository, ClientSagas } from './client';
 import { OAuthRefreshTokenHandlers, OAuthRefreshTokenServices, OAuthRefreshTokenModel, IRefreshTokenRepository, SequelizeRefreshTokenRepository, RefreshTokenSagas } from './refresh-token';
-import { OAuthCredentialHandlers, OAuthCredentialServices, CredentialSagas } from './credential';
 
 export const OAuthHandlers = [
     ...OAuthAccessTokenHandlers,
     ...OAuthApplicationHandlers,
     ...OAuthClientHandlers,
     ...OAuthRefreshTokenHandlers,
-    ...OAuthCredentialHandlers
 ];
 export const OAuthServices = [
     ...OAuthAccessTokenServices,
     ...OAuthApplicationServices,
     ...OAuthClientServices,
     ...OAuthRefreshTokenServices,
-    ...OAuthCredentialServices
 ];
 export const OAuthModels = [
     OAuthAccessTokenModel,
@@ -48,5 +45,4 @@ export const OAuthSagas = [
     ApplicationSagas,
     ClientSagas,
     RefreshTokenSagas,
-    CredentialSagas
 ];
