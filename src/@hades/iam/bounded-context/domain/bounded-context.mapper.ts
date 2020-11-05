@@ -1,5 +1,5 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IamBoundedContext } from './bounded-context.aggregate';
 import { BoundedContextResponse } from './bounded-context.response';
 import {
@@ -10,40 +10,36 @@ import {
     BoundedContextIsActive,
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
-    BoundedContextDeletedAt
-    
+    BoundedContextDeletedAt,
 } from './value-objects';
-
-
 import { PermissionMapper } from '@hades/iam/permission/domain/permission.mapper';
-
 
 export class BoundedContextMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
 
     /**
      * Map object to aggregate
      * @param boundedContext
      */
-    mapModelToAggregate(boundedContext: ObjectLiteral): IamBoundedContext
+    mapModelToAggregate(boundedContext: ObjectLiteral, cQMetadata?: CQMetadata): IamBoundedContext
     {
         if (!boundedContext) return;
 
-        return this.makeAggregate(boundedContext);
+        return this.makeAggregate(boundedContext, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param boundedContexts 
+     * @param boundedContexts
      */
-    mapModelsToAggregates(boundedContexts: ObjectLiteral[]): IamBoundedContext[]
+    mapModelsToAggregates(boundedContexts: ObjectLiteral[], cQMetadata?: CQMetadata): IamBoundedContext[]
     {
         if (!Array.isArray(boundedContexts)) return;
 
-        return boundedContexts.map(boundedContext  => this.makeAggregate(boundedContext));
+        return boundedContexts.map(boundedContext  => this.makeAggregate(boundedContext, cQMetadata));
     }
 
     /**
@@ -66,7 +62,7 @@ export class BoundedContextMapper implements IMapper
         return boundedContexts.map(boundedContext => this.makeResponse(boundedContext));
     }
 
-    private makeAggregate(boundedContext: ObjectLiteral): IamBoundedContext
+    private makeAggregate(boundedContext: ObjectLiteral, cQMetadata?: CQMetadata): IamBoundedContext
     {
         return IamBoundedContext.register(
             new BoundedContextId(boundedContext.id),
@@ -74,16 +70,10 @@ export class BoundedContextMapper implements IMapper
             new BoundedContextRoot(boundedContext.root),
             new BoundedContextSort(boundedContext.sort),
             new BoundedContextIsActive(boundedContext.isActive),
-            new BoundedContextCreatedAt(boundedContext.createdAt),
-            new BoundedContextUpdatedAt(boundedContext.updatedAt),
-            new BoundedContextDeletedAt(boundedContext.deletedAt),
-            
-            
-            
-            
+            new BoundedContextCreatedAt(boundedContext.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new BoundedContextUpdatedAt(boundedContext.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new BoundedContextDeletedAt(boundedContext.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapModelsToAggregates(boundedContext.permissions) : undefined,
-            
-            
         );
     }
 
@@ -100,13 +90,7 @@ export class BoundedContextMapper implements IMapper
             boundedContext.createdAt.value,
             boundedContext.updatedAt.value,
             boundedContext.deletedAt.value,
-            
-            
-            
-            
             this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapAggregatesToResponses(boundedContext.permissions) : undefined,
-            
-            
         );
     }
 }

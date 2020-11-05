@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -20,20 +21,17 @@ export class IamCreateBoundedContextResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamCreateBoundedContext')
-    async main(@Args('payload') payload: IamCreateBoundedContextInput)
+    async main(
+        @Args('payload') payload: IamCreateBoundedContextInput,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new CreateBoundedContextCommand(
-            payload.id,
-            payload.name,
-            payload.root,
-            payload.sort,
-            payload.isActive,
-        ));
+        await this.commandBus.dispatch(new CreateBoundedContextCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindBoundedContextByIdQuery(payload.id, {}, { timezone }));
     }
 }

@@ -10,11 +10,11 @@ export class GetBoundedContextsQueryHandler implements IQueryHandler<GetBoundedC
     private readonly mapper: BoundedContextMapper = new BoundedContextMapper();
 
     constructor(
-        private readonly getBoundedContextsService: GetBoundedContextsService
+        private readonly getBoundedContextsService: GetBoundedContextsService,
     ) {}
 
     async execute(query: GetBoundedContextsQuery): Promise<BoundedContextResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getBoundedContextsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getBoundedContextsService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

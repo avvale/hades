@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import {
     BoundedContextId,
     BoundedContextName,
@@ -9,8 +10,7 @@ import {
     BoundedContextIsActive,
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
-    BoundedContextDeletedAt
-    
+    BoundedContextDeletedAt,
 } from './../../domain/value-objects';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
@@ -20,32 +20,35 @@ export class UpdateBoundedContextService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IBoundedContextRepository
+        private readonly repository: IBoundedContextRepository,
     ) {}
 
     public async main(
-        id: BoundedContextId,
-        name?: BoundedContextName,
-        root?: BoundedContextRoot,
-        sort?: BoundedContextSort,
-        isActive?: BoundedContextIsActive,
-        
+        payload: {
+            id: BoundedContextId,
+            name?: BoundedContextName,
+            root?: BoundedContextRoot,
+            sort?: BoundedContextSort,
+            isActive?: BoundedContextIsActive,
+        },
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const boundedContext = IamBoundedContext.register(
-            id,
-            name,
-            root,
-            sort,
-            isActive,
+            payload.id,
+            payload.name,
+            payload.root,
+            payload.sort,
+            payload.isActive,
             null,
-            new BoundedContextUpdatedAt(Utils.nowTimestamp()),
+            new BoundedContextUpdatedAt({currentTimestamp: true}),
             null
         );
 
         // update
-        await this.repository.update(boundedContext);
+        await this.repository.update(boundedContext, constraint, cQMetadata);
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const boundedContextRegister = this.publisher.mergeObjectContext(

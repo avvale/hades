@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     BoundedContextId,
     BoundedContextName,
@@ -9,8 +8,7 @@ import {
     BoundedContextIsActive,
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
-    BoundedContextDeletedAt
-    
+    BoundedContextDeletedAt,
 } from './../../domain/value-objects';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
@@ -20,27 +18,28 @@ export class CreateBoundedContextService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IBoundedContextRepository
+        private readonly repository: IBoundedContextRepository,
     ) {}
 
     public async main(
-        id: BoundedContextId,
-        name: BoundedContextName,
-        root: BoundedContextRoot,
-        sort: BoundedContextSort,
-        isActive: BoundedContextIsActive,
-        
+        payload: {
+            id: BoundedContextId,
+            name: BoundedContextName,
+            root: BoundedContextRoot,
+            sort: BoundedContextSort,
+            isActive: BoundedContextIsActive,
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const boundedContext = IamBoundedContext.register(
-            id,
-            name,
-            root,
-            sort,
-            isActive,
-            new BoundedContextCreatedAt(Utils.nowTimestamp()),
-            new BoundedContextUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.name,
+            payload.root,
+            payload.sort,
+            payload.isActive,
+            new BoundedContextCreatedAt({currentTimestamp: true}),
+            new BoundedContextUpdatedAt({currentTimestamp: true}),
             null
         );
 

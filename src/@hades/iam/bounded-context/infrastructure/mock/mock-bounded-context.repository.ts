@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IBoundedContextRepository } from '@hades/iam/bounded-context/domain/bounded-context.repository';
-import { 
+import {
     BoundedContextId,
     BoundedContextName,
     BoundedContextRoot,
@@ -10,8 +10,7 @@ import {
     BoundedContextIsActive,
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
-    BoundedContextDeletedAt
-    
+    BoundedContextDeletedAt,
 } from '@hades/iam/bounded-context/domain/value-objects';
 import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
 import { boundedContexts } from './../seeds/bounded-context.seed';
@@ -23,14 +22,14 @@ export class MockBoundedContextRepository extends MockRepository<IamBoundedConte
     public readonly aggregateName: string = 'IamBoundedContext';
     public collectionSource: IamBoundedContext[];
     public deletedAtInstance: BoundedContextDeletedAt = new BoundedContextDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -45,7 +44,7 @@ export class MockBoundedContextRepository extends MockRepository<IamBoundedConte
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(IamBoundedContext.register(
                     new BoundedContextId(itemCollection.id),
                     new BoundedContextName(itemCollection.name),
@@ -55,7 +54,6 @@ export class MockBoundedContextRepository extends MockRepository<IamBoundedConte
                     new BoundedContextCreatedAt(itemCollection.createdAt),
                     new BoundedContextUpdatedAt(itemCollection.updatedAt),
                     new BoundedContextDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }

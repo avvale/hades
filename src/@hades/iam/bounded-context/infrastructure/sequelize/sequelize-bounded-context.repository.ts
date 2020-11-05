@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
@@ -13,11 +12,12 @@ export class SequelizeBoundedContextRepository extends SequelizeRepository<IamBo
 {
     public readonly aggregateName: string = 'IamBoundedContext';
     public readonly mapper: BoundedContextMapper = new BoundedContextMapper();
+    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(IamBoundedContextModel)
         public readonly repository: typeof IamBoundedContextModel,
-        public readonly criteria: ICriteria
+        public readonly criteria: ICriteria,
     ) {
         super();
     }

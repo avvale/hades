@@ -9,14 +9,16 @@ import {
 export class DeleteBoundedContextByIdCommandHandler implements ICommandHandler<DeleteBoundedContextByIdCommand>
 {
     constructor(
-        private readonly deleteBoundedContextByIdService: DeleteBoundedContextByIdService
+        private readonly deleteBoundedContextByIdService: DeleteBoundedContextByIdService,
     ) {}
 
     async execute(command: DeleteBoundedContextByIdCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.deleteBoundedContextByIdService.main(
-            new BoundedContextId(command.id)
+            new BoundedContextId(command.id),
+            command.constraint,
+            command.cQMetadata
         );
     }
 }

@@ -41,7 +41,6 @@ describe('DeleteBoundedContextByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteBoundedContextByIdCommand(
                     boundedContexts[0].id,
-                
                 )
             )).toBe(undefined);
         });

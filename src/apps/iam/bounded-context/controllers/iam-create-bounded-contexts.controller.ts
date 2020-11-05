@@ -2,6 +2,7 @@ import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
 import { CreateBoundedContextDto } from './../dto/create-bounded-context.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -26,8 +27,11 @@ export class IamCreateBoundedContextsController
     @ApiOperation({ summary: 'Create bounded-contexts in batch' })
     @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [BoundedContextDto] })
     @ApiBody({ type: [CreateBoundedContextDto] })
-    async main(@Body() payload: CreateBoundedContextDto[])
+    async main(
+        @Body() payload: CreateBoundedContextDto[],
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new CreateBoundedContextsCommand(payload));
+        await this.commandBus.dispatch(new CreateBoundedContextsCommand(payload, { timezone }));
     }
 }

@@ -6,27 +6,32 @@ import {
     BoundedContextName,
     BoundedContextRoot,
     BoundedContextSort,
-    BoundedContextIsActive
-    
+    BoundedContextIsActive,
+    BoundedContextCreatedAt,
+    BoundedContextUpdatedAt,
+    BoundedContextDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(UpdateBoundedContextCommand)
 export class UpdateBoundedContextCommandHandler implements ICommandHandler<UpdateBoundedContextCommand>
 {
     constructor(
-        private readonly updateBoundedContextService: UpdateBoundedContextService
+        private readonly updateBoundedContextService: UpdateBoundedContextService,
     ) {}
 
     async execute(command: UpdateBoundedContextCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.updateBoundedContextService.main(
-            new BoundedContextId(command.id),
-            new BoundedContextName(command.name, { undefinable: true }),
-            new BoundedContextRoot(command.root, { undefinable: true }),
-            new BoundedContextSort(command.sort, { undefinable: true }),
-            new BoundedContextIsActive(command.isActive, { undefinable: true }),
-            
+            {
+                id: new BoundedContextId(command.payload.id),
+                name: new BoundedContextName(command.payload.name, { undefinable: true }),
+                root: new BoundedContextRoot(command.payload.root, { undefinable: true }),
+                sort: new BoundedContextSort(command.payload.sort, { undefinable: true }),
+                isActive: new BoundedContextIsActive(command.payload.isActive, { undefinable: true }),
+            },
+            command.constraint,
+            command.cQMetadata,
         )
     }
 }

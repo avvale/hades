@@ -1,5 +1,4 @@
 
-
 type IamBoundedContext
 {
     id: ID!
@@ -20,7 +19,6 @@ input IamCreateBoundedContextInput
     root: GraphQLString!
     sort: GraphQLInt!
     isActive: GraphQLBoolean!
-    
 }
 
 input IamUpdateBoundedContextInput
@@ -30,7 +28,6 @@ input IamUpdateBoundedContextInput
     root: GraphQLString
     sort: GraphQLInt
     isActive: GraphQLBoolean
-    
 }
 
 type Query

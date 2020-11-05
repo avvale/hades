@@ -7,16 +7,12 @@ import {
     BoundedContextIsActive,
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
-    BoundedContextDeletedAt
-    
+    BoundedContextDeletedAt,
 } from './value-objects';
 import { CreatedBoundedContextEvent } from './../application/events/created-bounded-context.event';
 import { UpdatedBoundedContextEvent } from './../application/events/updated-bounded-context.event';
 import { DeletedBoundedContextEvent } from './../application/events/deleted-bounded-context.event';
-
-
 import { IamPermission } from '@hades/iam/permission/domain/permission.aggregate';
-
 
 export class IamBoundedContext extends AggregateRoot
 {
@@ -28,18 +24,24 @@ export class IamBoundedContext extends AggregateRoot
     createdAt: BoundedContextCreatedAt;
     updatedAt: BoundedContextUpdatedAt;
     deletedAt: BoundedContextDeletedAt;
-    
+
     // eager relationship
-    
-    
-    
     permissions: IamPermission[];
-    
-    
-    constructor(id?: BoundedContextId, name?: BoundedContextName, root?: BoundedContextRoot, sort?: BoundedContextSort, isActive?: BoundedContextIsActive, createdAt?: BoundedContextCreatedAt, updatedAt?: BoundedContextUpdatedAt, deletedAt?: BoundedContextDeletedAt, permissions?: IamPermission[], )
+
+    constructor(
+        id: BoundedContextId,
+        name: BoundedContextName,
+        root: BoundedContextRoot,
+        sort: BoundedContextSort,
+        isActive: BoundedContextIsActive,
+        createdAt: BoundedContextCreatedAt,
+        updatedAt: BoundedContextUpdatedAt,
+        deletedAt: BoundedContextDeletedAt,
+        permissions?: IamPermission[],
+    )
     {
         super();
-        
+
         this.id = id;
         this.name = name;
         this.root = root;
@@ -48,19 +50,34 @@ export class IamBoundedContext extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
-        
         this.permissions = permissions;
-        
-        
     }
 
-    static register (id: BoundedContextId, name: BoundedContextName, root: BoundedContextRoot, sort: BoundedContextSort, isActive: BoundedContextIsActive, createdAt: BoundedContextCreatedAt, updatedAt: BoundedContextUpdatedAt, deletedAt: BoundedContextDeletedAt, permissions?: IamPermission[], ): IamBoundedContext
+    static register (
+        id: BoundedContextId,
+        name: BoundedContextName,
+        root: BoundedContextRoot,
+        sort: BoundedContextSort,
+        isActive: BoundedContextIsActive,
+        createdAt: BoundedContextCreatedAt,
+        updatedAt: BoundedContextUpdatedAt,
+        deletedAt: BoundedContextDeletedAt,
+        permissions?: IamPermission[],
+    ): IamBoundedContext
     {
-        return new IamBoundedContext(id, name, root, sort, isActive, createdAt, updatedAt, deletedAt, permissions, );
+        return new IamBoundedContext(
+            id,
+            name,
+            root,
+            sort,
+            isActive,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            permissions,
+        );
     }
 
     created(boundedContext: IamBoundedContext): void
@@ -75,7 +92,6 @@ export class IamBoundedContext extends AggregateRoot
                 boundedContext.createdAt?.value,
                 boundedContext.updatedAt?.value,
                 boundedContext.deletedAt?.value,
-                
             )
         );
     }
@@ -92,7 +108,6 @@ export class IamBoundedContext extends AggregateRoot
                 boundedContext.createdAt?.value,
                 boundedContext.updatedAt?.value,
                 boundedContext.deletedAt?.value,
-                
             )
         );
     }
@@ -109,7 +124,6 @@ export class IamBoundedContext extends AggregateRoot
                 boundedContext.createdAt?.value,
                 boundedContext.updatedAt?.value,
                 boundedContext.deletedAt?.value,
-                
             )
         );
     }
@@ -125,14 +139,9 @@ export class IamBoundedContext extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
-            
             permissions: this.permissions?.map(item => item.toDTO()),
-            
-            
         }
     }
 }

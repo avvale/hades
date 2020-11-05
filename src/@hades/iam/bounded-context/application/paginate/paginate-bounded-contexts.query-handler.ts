@@ -7,12 +7,12 @@ import { PaginateBoundedContextsService } from './paginate-bounded-contexts.serv
 export class PaginateBoundedContextsQueryHandler implements IQueryHandler<PaginateBoundedContextsQuery>
 {
     constructor(
-        private readonly paginateBoundedContextsService: PaginateBoundedContextsService
+        private readonly paginateBoundedContextsService: PaginateBoundedContextsService,
     ) {}
 
     async execute(query: PaginateBoundedContextsQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateBoundedContextsService.main(query.queryStatement, query.constraint);
+        const { total, count, rows } = await this.paginateBoundedContextsService.main(query.queryStatement, query.constraint, query.cQMetadata);
 
         return new PaginationResponse(
             total,

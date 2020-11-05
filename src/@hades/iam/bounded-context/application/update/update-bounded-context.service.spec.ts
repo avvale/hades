@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { boundedContexts } from '@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 import { UpdateBoundedContextService } from './update-bounded-context.service';
-import { 
+import {
     BoundedContextId,
     BoundedContextName,
     BoundedContextRoot,
@@ -12,19 +12,18 @@ import {
     BoundedContextIsActive,
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
-    BoundedContextDeletedAt
-    
+    BoundedContextDeletedAt,
 } from './../../domain/value-objects';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
 
-describe('UpdateBoundedContextService', () => 
+describe('UpdateBoundedContextService', () =>
 {
     let service: UpdateBoundedContextService;
     let repository: IBoundedContextRepository;
     let mockRepository: MockBoundedContextRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,7 +32,7 @@ describe('UpdateBoundedContextService', () =>
                 EventPublisher,
                 UpdateBoundedContextService,
                 MockBoundedContextRepository,
-                { 
+                {
                     provide: IBoundedContextRepository,
                     useValue: {
                         update: (item) => {}
@@ -47,14 +46,14 @@ describe('UpdateBoundedContextService', () =>
         mockRepository  = module.get(MockBoundedContextRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateBoundedContextService should be defined', () => 
+        test('UpdateBoundedContextService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a boundedContext and emit event', async () => 
+        test('should update a boundedContext and emit event', async () =>
         {
             expect(await service.main(
                 new BoundedContextId(boundedContexts[0].id),
@@ -62,7 +61,6 @@ describe('UpdateBoundedContextService', () =>
                 new BoundedContextRoot(boundedContexts[0].root),
                 new BoundedContextSort(boundedContexts[0].sort),
                 new BoundedContextIsActive(boundedContexts[0].isActive),
-                
             )).toBe(undefined);
         });
     });

@@ -6,12 +6,16 @@ import { DeleteBoundedContextsService } from './delete-bounded-contexts.service'
 export class DeleteBoundedContextsCommandHandler implements ICommandHandler<DeleteBoundedContextsCommand>
 {
     constructor(
-        private readonly deleteBoundedContextsService: DeleteBoundedContextsService
+        private readonly deleteBoundedContextsService: DeleteBoundedContextsService,
     ) {}
 
     async execute(command: DeleteBoundedContextsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteBoundedContextsService.main(command.queryStatement);
+        await this.deleteBoundedContextsService.main(
+            command.queryStatement,
+            command.constraint,
+            command.cQMetadata,
+        );
     }
 }

@@ -8,7 +8,7 @@ import { DeletedBoundedContextsEvent } from './deleted-bounded-contexts.event';
 export class AddBoundedContextsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: IamBoundedContext[] = []
+        public readonly aggregateRoots: IamBoundedContext[] = [],
     ) {
         super();
     }
@@ -32,7 +32,6 @@ export class AddBoundedContextsContextEvent extends AggregateRoot
                         boundedContext.createdAt?.value,
                         boundedContext.updatedAt?.value,
                         boundedContext.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -53,7 +52,6 @@ export class AddBoundedContextsContextEvent extends AggregateRoot
                         boundedContext.createdAt?.value,
                         boundedContext.updatedAt?.value,
                         boundedContext.deletedAt?.value,
-                        
                     )
                 )
             )

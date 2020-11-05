@@ -1,4 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -18,12 +19,16 @@ import { IamBoundedContext } from './../../../../graphql';
 export class IamFindBoundedContextByIdResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Query('iamFindBoundedContextById')
-    async main(@Args('id') id: string, @Args('constraint') constraint?: QueryStatement): Promise<IamBoundedContext>
+    async main(
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    ): Promise<IamBoundedContext>
     {
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint));
+        return await this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint, { timezone }));
     }
 }
