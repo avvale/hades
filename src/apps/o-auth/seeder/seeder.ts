@@ -14,7 +14,7 @@ import { permissions } from '@hades/o-auth/shared/infrastructure/seeds/permissio
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 import { clients } from '@hades/o-auth/client/infrastructure/seeds/client.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {
