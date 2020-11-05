@@ -6,12 +6,12 @@ import { applications } from '@hades/o-auth/application/infrastructure/seeds/app
 import { UpdateApplicationCommand } from './update-application.command';
 import { UpdateApplicationService } from './update-application.service';
 
-describe('UpdateApplicationCommandHandler', () => 
+describe('UpdateApplicationCommandHandler', () =>
 {
     let commandHandler: UpdateApplicationCommandHandler;
     let service: UpdateApplicationService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateApplicationCommandHandler', () =>
         service         = module.get<UpdateApplicationService>(UpdateApplicationService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateApplicationCommandHandler should be defined', () => 
+        test('UpdateApplicationCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an application created', async () => 
+        test('should return an application created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateApplicationCommand(
@@ -46,7 +46,6 @@ describe('UpdateApplicationCommandHandler', () =>
                     applications[0].secret,
                     applications[0].isMaster,
                     applications[0].clientIds,
-                    
                 )
             )).toBe(undefined);
         });

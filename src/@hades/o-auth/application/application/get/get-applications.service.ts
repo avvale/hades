@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IApplicationRepository } from './../../domain/application.repository';
 import { OAuthApplication } from './../../domain/application.aggregate';
 
@@ -7,11 +8,11 @@ import { OAuthApplication } from './../../domain/application.aggregate';
 export class GetApplicationsService
 {
     constructor(
-        private readonly repository: IApplicationRepository
+        private readonly repository: IApplicationRepository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement): Promise<OAuthApplication[]>
-    {        
-        return await this.repository.get(queryStatement);
+    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthApplication[]>
+    {
+        return await this.repository.get(queryStatement, constraint, cQMetadata);
     }
 }

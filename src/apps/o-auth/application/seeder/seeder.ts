@@ -4,7 +4,7 @@ import { CreateApplicationsCommand } from '@hades/o-auth/application/application
 import { SeederModule } from './seeder.module';
 import { applications } from '@hades/o-auth/application/infrastructure/seeds/application.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

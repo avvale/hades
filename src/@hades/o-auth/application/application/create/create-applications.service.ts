@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ApplicationId,
     ApplicationName,
     ApplicationCode,
@@ -10,8 +9,7 @@ import {
     ApplicationClientIds,
     ApplicationCreatedAt,
     ApplicationUpdatedAt,
-    ApplicationDeletedAt
-    
+    ApplicationDeletedAt,
 } from './../../domain/value-objects';
 import { IApplicationRepository } from './../../domain/application.repository';
 import { OAuthApplication } from './../../domain/application.aggregate';
@@ -22,7 +20,7 @@ export class CreateApplicationsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IApplicationRepository
+        private readonly repository: IApplicationRepository,
     ) {}
 
     public async main(
@@ -33,7 +31,6 @@ export class CreateApplicationsService
             secret: ApplicationSecret,
             isMaster: ApplicationIsMaster,
             clientIds: ApplicationClientIds,
-            
         } []
     ): Promise<void>
     {
@@ -45,18 +42,18 @@ export class CreateApplicationsService
             application.secret,
             application.isMaster,
             application.clientIds,
-            new ApplicationCreatedAt(Utils.nowTimestamp()),
-            new ApplicationUpdatedAt(Utils.nowTimestamp()),
+            new ApplicationCreatedAt({currentTimestamp: true}),
+            new ApplicationUpdatedAt({currentTimestamp: true}),
             null
         ));
-        
+
         // insert
         await this.repository.insert(aggregateApplications);
 
         // create AddApplicationsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const applicationsRegistered = this.publisher.mergeObjectContext(new AddApplicationsContextEvent(aggregateApplications));
- 
+
         applicationsRegistered.created(); // apply event to model events
         applicationsRegistered.commit(); // commit all events of model
     }

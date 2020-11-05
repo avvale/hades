@@ -11,12 +11,16 @@ export class FindApplicationByIdQueryHandler implements IQueryHandler<FindApplic
     private readonly mapper: ApplicationMapper = new ApplicationMapper();
 
     constructor(
-        private readonly findApplicationByIdService: FindApplicationByIdService
-    ) { }
+        private readonly findApplicationByIdService: FindApplicationByIdService,
+    ) {}
 
     async execute(query: FindApplicationByIdQuery): Promise<ApplicationResponse>
     {
-        const application = await this.findApplicationByIdService.main(new ApplicationId(query.id));
+        const application = await this.findApplicationByIdService.main(
+            new ApplicationId(query.id),
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(application);
     }

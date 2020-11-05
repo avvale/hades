@@ -1,45 +1,45 @@
 // controllers
-import { CreateApplicationController } from './controllers/create-application.controller';
-import { CreateApplicationsController } from './controllers/create-applications.controller';
-import { PaginateApplicationsController } from './controllers/paginate-applications.controller';
-import { GetApplicationsController } from './controllers/get-applications.controller';
-import { FindApplicationByIdController } from './controllers/find-application-by-id.controller';
-import { FindApplicationController } from './controllers/find-application.controller';
-import { UpdateApplicationController } from './controllers/update-application.controller';
-import { DeleteApplicationByIdController } from './controllers/delete-application-by-id.controller';
-import { DeleteApplicationsController } from './controllers/delete-applications.controller';
+import { OAuthCreateApplicationController } from './controllers/o-auth-create-application.controller';
+import { OAuthCreateApplicationsController } from './controllers/o-auth-create-applications.controller';
+import { OAuthPaginateApplicationsController } from './controllers/o-auth-paginate-applications.controller';
+import { OAuthGetApplicationsController } from './controllers/o-auth-get-applications.controller';
+import { OAuthFindApplicationByIdController } from './controllers/o-auth-find-application-by-id.controller';
+import { OAuthFindApplicationController } from './controllers/o-auth-find-application.controller';
+import { OAuthUpdateApplicationController } from './controllers/o-auth-update-application.controller';
+import { OAuthDeleteApplicationByIdController } from './controllers/o-auth-delete-application-by-id.controller';
+import { OAuthDeleteApplicationsController } from './controllers/o-auth-delete-applications.controller';
 
 // resolvers
-import { CreateApplicationResolver } from './resolvers/create-application.resolver';
-import { CreateApplicationsResolver } from './resolvers/create-applications.resolver';
-import { PaginateApplicationsResolver } from './resolvers/paginate-applications.resolver';
-import { GetApplicationsResolver } from './resolvers/get-applications.resolver';
-import { FindApplicationResolver } from './resolvers/find-application.resolver';
-import { FindApplicationByIdResolver } from './resolvers/find-application-by-id.resolver';
-import { UpdateApplicationResolver } from './resolvers/update-application.resolver';
-import { DeleteApplicationByIdResolver } from './resolvers/delete-application-by-id.resolver';
-import { DeleteApplicationsResolver } from './resolvers/delete-applications.resolver';
+import { OAuthCreateApplicationResolver } from './resolvers/o-auth-create-application.resolver';
+import { OAuthCreateApplicationsResolver } from './resolvers/o-auth-create-applications.resolver';
+import { OAuthPaginateApplicationsResolver } from './resolvers/o-auth-paginate-applications.resolver';
+import { OAuthGetApplicationsResolver } from './resolvers/o-auth-get-applications.resolver';
+import { OAuthFindApplicationResolver } from './resolvers/o-auth-find-application.resolver';
+import { OAuthFindApplicationByIdResolver } from './resolvers/o-auth-find-application-by-id.resolver';
+import { OAuthUpdateApplicationResolver } from './resolvers/o-auth-update-application.resolver';
+import { OAuthDeleteApplicationByIdResolver } from './resolvers/o-auth-delete-application-by-id.resolver';
+import { OAuthDeleteApplicationsResolver } from './resolvers/o-auth-delete-applications.resolver';
 
 export const OAuthApplicationControllers = [
-    CreateApplicationController,
-    CreateApplicationsController,
-    PaginateApplicationsController,
-    GetApplicationsController,
-    FindApplicationByIdController,
-    FindApplicationController,
-    UpdateApplicationController,
-    DeleteApplicationByIdController,
-    DeleteApplicationsController,
+    OAuthCreateApplicationController,
+    OAuthCreateApplicationsController,
+    OAuthPaginateApplicationsController,
+    OAuthGetApplicationsController,
+    OAuthFindApplicationByIdController,
+    OAuthFindApplicationController,
+    OAuthUpdateApplicationController,
+    OAuthDeleteApplicationByIdController,
+    OAuthDeleteApplicationsController,
 ];
 
 export const OAuthApplicationResolvers = [
-    CreateApplicationResolver,
-    CreateApplicationsResolver,
-    PaginateApplicationsResolver,
-    GetApplicationsResolver,
-    FindApplicationResolver,
-    FindApplicationByIdResolver,
-    UpdateApplicationResolver,
-    DeleteApplicationByIdResolver,
-    DeleteApplicationsResolver,
+    OAuthCreateApplicationResolver,
+    OAuthCreateApplicationsResolver,
+    OAuthPaginateApplicationsResolver,
+    OAuthGetApplicationsResolver,
+    OAuthFindApplicationResolver,
+    OAuthFindApplicationByIdResolver,
+    OAuthUpdateApplicationResolver,
+    OAuthDeleteApplicationByIdResolver,
+    OAuthDeleteApplicationsResolver,
 ];

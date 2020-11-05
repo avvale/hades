@@ -10,11 +10,11 @@ export class GetApplicationsQueryHandler implements IQueryHandler<GetApplication
     private readonly mapper: ApplicationMapper = new ApplicationMapper();
 
     constructor(
-        private readonly getApplicationsService: GetApplicationsService
-    ) { }
+        private readonly getApplicationsService: GetApplicationsService,
+    ) {}
 
     async execute(query: GetApplicationsQuery): Promise<ApplicationResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getApplicationsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getApplicationsService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

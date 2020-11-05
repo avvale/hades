@@ -41,7 +41,6 @@ describe('DeleteApplicationByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteApplicationByIdCommand(
                     applications[0].id,
-                
                 )
             )).toBe(undefined);
         });

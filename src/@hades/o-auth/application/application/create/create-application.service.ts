@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { 
+import {
     ApplicationId,
     ApplicationName,
     ApplicationCode,
@@ -10,8 +9,7 @@ import {
     ApplicationClientIds,
     ApplicationCreatedAt,
     ApplicationUpdatedAt,
-    ApplicationDeletedAt
-    
+    ApplicationDeletedAt,
 } from './../../domain/value-objects';
 import { IApplicationRepository } from './../../domain/application.repository';
 import { OAuthApplication } from './../../domain/application.aggregate';
@@ -21,32 +19,33 @@ export class CreateApplicationService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IApplicationRepository
+        private readonly repository: IApplicationRepository,
     ) {}
 
     public async main(
-        id: ApplicationId,
-        name: ApplicationName,
-        code: ApplicationCode,
-        secret: ApplicationSecret,
-        isMaster: ApplicationIsMaster,
-        clientIds: ApplicationClientIds,
-        
+        payload: {
+            id: ApplicationId,
+            name: ApplicationName,
+            code: ApplicationCode,
+            secret: ApplicationSecret,
+            isMaster: ApplicationIsMaster,
+            clientIds: ApplicationClientIds,
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const application = OAuthApplication.register(
-            id,
-            name,
-            code,
-            secret,
-            isMaster,
-            clientIds,
-            new ApplicationCreatedAt(Utils.nowTimestamp()),
-            new ApplicationUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.name,
+            payload.code,
+            payload.secret,
+            payload.isMaster,
+            payload.clientIds,
+            new ApplicationCreatedAt({currentTimestamp: true}),
+            new ApplicationUpdatedAt({currentTimestamp: true}),
             null
         );
-        
+
         // create
         await this.repository.create(application);
 
@@ -54,7 +53,7 @@ export class CreateApplicationService
         const applicationRegister = this.publisher.mergeObjectContext(
             application
         );
-        
+
         applicationRegister.created(application); // apply event to model events
         applicationRegister.commit(); // commit all events of model
     }

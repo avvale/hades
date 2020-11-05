@@ -10,6 +10,5 @@ export class CreatedApplicationEvent
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,
-        
     ) {}
 }
