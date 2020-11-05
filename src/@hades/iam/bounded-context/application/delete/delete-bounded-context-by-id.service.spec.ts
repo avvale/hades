@@ -14,7 +14,7 @@ describe('DeleteBoundedContextByIdService', () =>
     let repository: IBoundedContextRepository;
     let mockRepository: MockBoundedContextRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteBoundedContextByIdService', () =>
                 EventPublisher,
                 DeleteBoundedContextByIdService,
                 MockBoundedContextRepository,
-                { 
+                {
                     provide: IBoundedContextRepository,
                     useValue: {
                         deleteById: (id) => {},

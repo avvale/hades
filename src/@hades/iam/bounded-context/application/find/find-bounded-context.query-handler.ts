@@ -10,12 +10,16 @@ export class FindBoundedContextQueryHandler implements IQueryHandler<FindBounded
     private readonly mapper: BoundedContextMapper = new BoundedContextMapper();
 
     constructor(
-        private readonly findBoundedContextService: FindBoundedContextService
+        private readonly findBoundedContextService: FindBoundedContextService,
     ) {}
 
     async execute(query: FindBoundedContextQuery): Promise<BoundedContextResponse>
     {
-        const boundedContext = await this.findBoundedContextService.main(query.queryStatement);
+        const boundedContext = await this.findBoundedContextService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(boundedContext);
     }

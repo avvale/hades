@@ -1,8 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
+import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
 import { DataTypes } from 'sequelize';
 import { IamPermissionModel } from '@hades/iam/permission/infrastructure/sequelize/sequelize-permission.model';
 
-@Table({ modelName: 'iam_bounded_context', freezeTableName: true })
+@Table({ modelName: 'iam_bounded_context', freezeTableName: true, timestamps: false })
 export class IamBoundedContextModel extends Model<IamBoundedContextModel>
 {
     @Column({

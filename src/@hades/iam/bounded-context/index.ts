@@ -32,7 +32,6 @@ import { DeleteBoundedContextsService } from './application/delete/delete-bounde
 // models
 export { IamBoundedContextModel } from './infrastructure/sequelize/sequelize-bounded-context.model';
 
-
 // repository
 export { IBoundedContextRepository } from './domain/bounded-context.repository';
 export { SequelizeBoundedContextRepository } from './infrastructure/sequelize/sequelize-bounded-context.repository';

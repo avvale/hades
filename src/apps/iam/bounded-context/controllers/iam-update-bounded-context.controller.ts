@@ -2,6 +2,7 @@ import { Controller, Put, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateBoundedContextDto } from './../dto/update-bounded-context.dto';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -23,23 +24,20 @@ export class IamUpdateBoundedContextController
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Put()
     @ApiOperation({ summary: 'Update bounded-context' })
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: BoundedContextDto})
-    async main(@Body() payload: UpdateBoundedContextDto, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body() payload: UpdateBoundedContextDto,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new UpdateBoundedContextCommand(
-            payload.id,
-            payload.name,
-            payload.root,
-            payload.sort,
-            payload.isActive,
-            constraint,
-        ));
+        await this.commandBus.dispatch(new UpdateBoundedContextCommand(payload, constraint, { timezone }));
 
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(payload.id, constraint));
+        return await this.queryBus.ask(new FindBoundedContextByIdQuery(payload.id, constraint, { timezone }));
     }
 }

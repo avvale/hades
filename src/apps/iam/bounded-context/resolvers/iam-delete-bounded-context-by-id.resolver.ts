@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -20,15 +21,19 @@ export class IamDeleteBoundedContextByIdResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamDeleteBoundedContextById')
-    async main(@Args('id') id: string, @Args('constraint') constraint?: QueryStatement)
+    async main(
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const boundedContext = await this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint));
+        const boundedContext = await this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteBoundedContextByIdCommand(id, constraint));
+        await this.commandBus.dispatch(new DeleteBoundedContextByIdCommand(id, constraint, { timezone }));
 
         return boundedContext;
     }

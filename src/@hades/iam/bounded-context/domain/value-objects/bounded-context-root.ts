@@ -11,6 +11,7 @@ export class BoundedContextRoot extends StringValueObject
             name: 'BoundedContextRoot',
             nullable: false,
             undefinable: false,
-            maxLength: 30,        }, validationRules));
+            maxLength: 30,
+        }, validationRules));
     }
 }

@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { BoundedContextDto } from './../dto/bounded-context.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -19,14 +20,18 @@ import { FindBoundedContextByIdQuery } from '@hades/iam/bounded-context/applicat
 export class IamFindBoundedContextByIdController
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Get(':id')
     @ApiOperation({ summary: 'Find bounded-context by id' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: BoundedContextDto })
-    async main(@Param('id') id: string, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Param('id') id: string,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint));
+        return await this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint, { timezone }));
     }
 }

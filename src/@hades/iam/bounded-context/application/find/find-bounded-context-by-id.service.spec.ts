@@ -8,13 +8,13 @@ import { BoundedContextId } from './../../domain/value-objects';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
 
-describe('FindBoundedContextByIdService', () => 
+describe('FindBoundedContextByIdService', () =>
 {
     let service: FindBoundedContextByIdService;
     let repository: IBoundedContextRepository;
     let mockRepository: MockBoundedContextRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindBoundedContextByIdService', () =>
                 EventPublisher,
                 FindBoundedContextByIdService,
                 MockBoundedContextRepository,
-                { 
+                {
                     provide: IBoundedContextRepository,
                     useValue: {
                         findById: (id) => {}

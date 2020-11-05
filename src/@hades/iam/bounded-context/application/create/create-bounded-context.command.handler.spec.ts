@@ -6,12 +6,12 @@ import { boundedContexts } from '@hades/iam/bounded-context/infrastructure/seeds
 import { CreateBoundedContextCommand } from './create-bounded-context.command';
 import { CreateBoundedContextService } from './create-bounded-context.service';
 
-describe('CreateBoundedContextCommandHandler', () => 
+describe('CreateBoundedContextCommandHandler', () =>
 {
     let commandHandler: CreateBoundedContextCommandHandler;
     let service: CreateBoundedContextService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('CreateBoundedContextCommandHandler', () =>
         service         = module.get<CreateBoundedContextService>(CreateBoundedContextService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('CreateBoundedContextCommandHandler should be defined', () => 
+        test('CreateBoundedContextCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateBoundedContextService', async () => 
+        test('should create the values objects and pass them as parameters to the CreateBoundedContextService', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateBoundedContextCommand(
@@ -45,7 +45,6 @@ describe('CreateBoundedContextCommandHandler', () =>
                     boundedContexts[0].root,
                     boundedContexts[0].sort,
                     boundedContexts[0].isActive,
-                    
                 )
             )).toBe(undefined);
         });

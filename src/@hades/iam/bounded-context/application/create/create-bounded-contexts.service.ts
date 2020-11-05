@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     BoundedContextId,
     BoundedContextName,
@@ -9,8 +8,7 @@ import {
     BoundedContextIsActive,
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
-    BoundedContextDeletedAt
-    
+    BoundedContextDeletedAt,
 } from './../../domain/value-objects';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
@@ -21,7 +19,7 @@ export class CreateBoundedContextsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IBoundedContextRepository
+        private readonly repository: IBoundedContextRepository,
     ) {}
 
     public async main(
@@ -31,7 +29,6 @@ export class CreateBoundedContextsService
             root: BoundedContextRoot,
             sort: BoundedContextSort,
             isActive: BoundedContextIsActive,
-            
         } []
     ): Promise<void>
     {
@@ -42,8 +39,8 @@ export class CreateBoundedContextsService
             boundedContext.root,
             boundedContext.sort,
             boundedContext.isActive,
-            new BoundedContextCreatedAt(Utils.nowTimestamp()),
-            new BoundedContextUpdatedAt(Utils.nowTimestamp()),
+            new BoundedContextCreatedAt({currentTimestamp: true}),
+            new BoundedContextUpdatedAt({currentTimestamp: true}),
             null
         ));
 
@@ -54,7 +51,7 @@ export class CreateBoundedContextsService
                 'sort',
                 'isActive',
                 'updatedAt'
-            ] 
+            ]
         });
 
         // create AddBoundedContextsContextEvent to have object wrapper to add event publisher functionality

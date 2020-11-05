@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
 import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
 import { BoundedContextId } from './../../domain/value-objects';
@@ -7,11 +9,11 @@ import { BoundedContextId } from './../../domain/value-objects';
 export class FindBoundedContextByIdService
 {
     constructor(
-        private readonly repository: IBoundedContextRepository
+        private readonly repository: IBoundedContextRepository,
     ) {}
 
-    public async main(id: BoundedContextId): Promise<IamBoundedContext>
+    public async main(id: BoundedContextId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamBoundedContext>
     {
-        return await this.repository.findById(id);
+        return await this.repository.findById(id, constraint, cQMetadata);
     }
 }
