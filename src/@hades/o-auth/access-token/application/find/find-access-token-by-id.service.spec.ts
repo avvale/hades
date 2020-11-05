@@ -8,13 +8,13 @@ import { AccessTokenId } from './../../domain/value-objects';
 import { IAccessTokenRepository } from './../../domain/access-token.repository';
 import { MockAccessTokenRepository } from './../../infrastructure/mock/mock-access-token.repository';
 
-describe('FindAccessTokenByIdService', () => 
+describe('FindAccessTokenByIdService', () =>
 {
     let service: FindAccessTokenByIdService;
     let repository: IAccessTokenRepository;
     let mockRepository: MockAccessTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindAccessTokenByIdService', () =>
                 EventPublisher,
                 FindAccessTokenByIdService,
                 MockAccessTokenRepository,
-                { 
+                {
                     provide: IAccessTokenRepository,
                     useValue: {
                         findById: (id) => {}

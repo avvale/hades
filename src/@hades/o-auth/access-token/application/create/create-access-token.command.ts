@@ -1,11 +1,15 @@
-export class CreateAccessTokenCommand 
-{   
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class CreateAccessTokenCommand
+{
     constructor(
-        public readonly id: string,
-        public readonly clientId: string,
-        public readonly accountId: string,
-        public readonly name: string,
-        public readonly expiredAccessToken: number
-        
+        public readonly payload: {
+            id: string,
+            clientId: string,
+            accountId: string,
+            name: string,
+            expiredAccessToken: number,
+        },
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

@@ -41,7 +41,6 @@ describe('DeleteAccessTokenByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteAccessTokenByIdCommand(
                     accessTokens[0].id,
-                
                 )
             )).toBe(undefined);
         });

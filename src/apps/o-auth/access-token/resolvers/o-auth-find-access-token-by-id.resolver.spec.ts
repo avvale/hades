@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { DeleteAccessTokensResolver } from './delete-access-tokens.resolver';
+import { OAuthFindAccessTokenByIdResolver } from './o-auth-find-access-token-by-id.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
-describe('DeleteAccessTokensResolver', () => 
+describe('OAuthFindAccessTokenByIdResolver', () => 
 {
-    let resolver: DeleteAccessTokensResolver;
+    let resolver: OAuthFindAccessTokenByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -16,7 +16,7 @@ describe('DeleteAccessTokensResolver', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                DeleteAccessTokensResolver,
+                OAuthFindAccessTokenByIdResolver,
                 {
                     provide: IQueryBus,
                     useValue: {
@@ -32,27 +32,27 @@ describe('DeleteAccessTokensResolver', () =>
             ]
         }).compile();
 
-        resolver    = module.get<DeleteAccessTokensResolver>(DeleteAccessTokensResolver);
+        resolver    = module.get<OAuthFindAccessTokenByIdResolver>(OAuthFindAccessTokenByIdResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('DeleteAccessTokensResolver should be defined', () => 
+    test('OAuthFindAccessTokenByIdResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        test('DeleteAccessTokensResolver should be defined', () => 
+        test('OAuthFindAccessTokenByIdResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an accessTokens deleted', async () => 
+        test('should return an accessToken by id', async () => 
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens)));
-            expect(await resolver.main()).toBe(accessTokens);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens[0])));
+            expect(await resolver.main(accessTokens[0].id)).toBe(accessTokens[0]);
         });
     });
 });

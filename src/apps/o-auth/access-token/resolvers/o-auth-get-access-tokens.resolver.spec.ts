@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { GetAccessTokensResolver } from './get-access-tokens.resolver'; 
+import { OAuthGetAccessTokensResolver } from './o-auth-get-access-tokens.resolver'; 
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
-describe('GetAccessTokensResolver', () => 
+describe('OAuthGetAccessTokensResolver', () => 
 {
-    let resolver:   GetAccessTokensResolver;
+    let resolver:   OAuthGetAccessTokensResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -16,7 +16,7 @@ describe('GetAccessTokensResolver', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                GetAccessTokensResolver,
+                OAuthGetAccessTokensResolver,
                 {
                     provide: IQueryBus,
                     useValue: {
@@ -32,19 +32,19 @@ describe('GetAccessTokensResolver', () =>
             ]
         }).compile();
 
-        resolver    = module.get<GetAccessTokensResolver>(GetAccessTokensResolver);
+        resolver    = module.get<OAuthGetAccessTokensResolver>(OAuthGetAccessTokensResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('GetAccessTokensResolver should be defined', () => 
+    test('OAuthGetAccessTokensResolver should be defined', () => 
     {
         expect(resolver).   toBeDefined();
     });
 
     describe('main', () => 
     {
-        test('GetAccessTokensResolver should be defined', () => 
+        test('OAuthGetAccessTokensResolver should be defined', () => 
         {
             expect(resolver).   toBeDefined();
         });

@@ -6,12 +6,16 @@ import { DeleteAccessTokensService } from './delete-access-tokens.service';
 export class DeleteAccessTokensCommandHandler implements ICommandHandler<DeleteAccessTokensCommand>
 {
     constructor(
-        private readonly deleteAccessTokensService: DeleteAccessTokensService
-    ) { }
+        private readonly deleteAccessTokensService: DeleteAccessTokensService,
+    ) {}
 
     async execute(command: DeleteAccessTokensCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteAccessTokensService.main(command.queryStatement);
+        await this.deleteAccessTokensService.main(
+            command.queryStatement,
+            command.constraint,
+            command.cQMetadata,
+        );
     }
 }

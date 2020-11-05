@@ -1,4 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -8,22 +9,26 @@ import { AuthorizationGuard } from './../../../shared/modules/auth/guards/author
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { PaginateAccessTokensQuery } from '@hades/o-auth/access-token/application/paginate/paginate-access-tokens.query';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { Pagination } from './../../../../graphql';
+import { GetAccessTokensQuery } from '@hades/o-auth/access-token/application/get/get-access-tokens.query';
+import { OAuthAccessToken } from './../../../../graphql';
 
 @Resolver()
 @Permissions('oAuth.accessToken.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class PaginateAccessTokensResolver
+export class OAuthGetAccessTokensResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
-    @Query('oAuthPaginateAccessTokens')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<Pagination>
+    @Query('oAuthGetAccessTokens')
+    async main(
+        @Args('query') queryStatement?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    ): Promise<OAuthAccessToken[]>
     {
-        return await this.queryBus.ask(new PaginateAccessTokensQuery(queryStatement, constraint));   
+        return await this.queryBus.ask(new GetAccessTokensQuery(queryStatement, constraint, { timezone }));
     }
 }

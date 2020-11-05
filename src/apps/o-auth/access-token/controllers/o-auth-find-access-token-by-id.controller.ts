@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { AccessTokenDto } from './../dto/access-token.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -16,17 +17,21 @@ import { FindAccessTokenByIdQuery } from '@hades/o-auth/access-token/application
 @Controller('o-auth/access-token')
 @Permissions('oAuth.accessToken.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class FindAccessTokenByIdController 
+export class OAuthFindAccessTokenByIdController
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Get(':id')
     @ApiOperation({ summary: 'Find access-token by id' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: AccessTokenDto })
-    async main(@Param('id') id: string, @Body('constraint') constraint?: QueryStatement, )
+    async main(
+        @Param('id') id: string,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        return await this.queryBus.ask(new FindAccessTokenByIdQuery(id, constraint));
+        return await this.queryBus.ask(new FindAccessTokenByIdQuery(id, constraint, { timezone }));
     }
 }

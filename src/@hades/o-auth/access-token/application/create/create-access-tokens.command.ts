@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateAccessTokensCommand
 {
     constructor(
-        public readonly accessTokens: {
+        public readonly payload: {
             id: string,
             clientId: string,
             accountId?: string,
@@ -9,7 +11,7 @@ export class CreateAccessTokensCommand
             name?: string,
             isRevoked: boolean,
             expiresAt?: string,
-            
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

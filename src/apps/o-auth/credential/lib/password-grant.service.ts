@@ -44,11 +44,13 @@ export class PasswordGrantService
         // create a JWT access tToken
         const accessTokenId = Utils.uuid();
         await this.commandBus.dispatch(new CreateAccessTokenCommand(
-            accessTokenId,
-            client.id,
-            user.account.id,
-            client.name,
-            client.expiredAccessToken
+            {
+                id: accessTokenId,
+                clientId: client.id,
+                accountId: user.account.id,
+                name: client.name,
+                expiredAccessToken: client.expiredAccessToken,
+            }
         ));
 
         // create a JWT refresh tToken

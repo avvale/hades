@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IAccessTokenRepository } from '@hades/o-auth/access-token/domain/access-token.repository';
-import { 
+import {
     AccessTokenId,
     AccessTokenClientId,
     AccessTokenAccountId,
@@ -12,8 +12,7 @@ import {
     AccessTokenExpiresAt,
     AccessTokenCreatedAt,
     AccessTokenUpdatedAt,
-    AccessTokenDeletedAt
-    
+    AccessTokenDeletedAt,
 } from '@hades/o-auth/access-token/domain/value-objects';
 import { OAuthAccessToken } from './../../domain/access-token.aggregate';
 import { accessTokens } from './../seeds/access-token.seed';
@@ -25,14 +24,14 @@ export class MockAccessTokenRepository extends MockRepository<OAuthAccessToken> 
     public readonly aggregateName: string = 'OAuthAccessToken';
     public collectionSource: OAuthAccessToken[];
     public deletedAtInstance: AccessTokenDeletedAt = new AccessTokenDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -47,7 +46,7 @@ export class MockAccessTokenRepository extends MockRepository<OAuthAccessToken> 
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(OAuthAccessToken.register(
                     new AccessTokenId(itemCollection.id),
                     new AccessTokenClientId(itemCollection.clientId),
@@ -59,7 +58,6 @@ export class MockAccessTokenRepository extends MockRepository<OAuthAccessToken> 
                     new AccessTokenCreatedAt(itemCollection.createdAt),
                     new AccessTokenUpdatedAt(itemCollection.updatedAt),
                     new AccessTokenDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }

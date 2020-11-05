@@ -1,22 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { GetAccessTokensController } from './get-access-tokens.controller';
+import { OAuthDeleteAccessTokensController } from './o-auth-delete-access-tokens.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
-describe('GetAccessTokensController', () => 
+describe('OAuthDeleteAccessTokensController', () => 
 {
-    let controller: GetAccessTokensController;
+    let controller: OAuthDeleteAccessTokensController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                GetAccessTokensController
+                OAuthDeleteAccessTokensController
             ],
             providers: [
                 {
@@ -34,19 +34,19 @@ describe('GetAccessTokensController', () =>
             ]
         }).compile();
 
-        controller  = module.get<GetAccessTokensController>(GetAccessTokensController);
+        controller  = module.get<OAuthDeleteAccessTokensController>(OAuthDeleteAccessTokensController);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () => 
     {
-        test('GetAccessTokensController should be defined', () => 
+        test('OAuthDeleteAccessTokensController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a accessTokens', async () => 
+        test('should return an accessTokens deleted', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens)));
             expect(await controller.main()).toBe(accessTokens);

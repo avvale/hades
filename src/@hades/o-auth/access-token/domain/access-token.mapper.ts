@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { OAuthAccessToken } from './access-token.aggregate';
 import { AccessTokenResponse } from './access-token.response';
-import { 
+import {
     AccessTokenId,
     AccessTokenClientId,
     AccessTokenAccountId,
@@ -12,46 +12,42 @@ import {
     AccessTokenExpiresAt,
     AccessTokenCreatedAt,
     AccessTokenUpdatedAt,
-    AccessTokenDeletedAt
-    
+    AccessTokenDeletedAt,
 } from './value-objects';
 import { RefreshTokenMapper } from '@hades/o-auth/refresh-token/domain/refresh-token.mapper';
-
 import { ClientMapper } from '@hades/o-auth/client/domain/client.mapper';
-
-
 
 export class AccessTokenMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param accessToken
      */
-    mapModelToAggregate(accessToken: ObjectLiteral): OAuthAccessToken
+    mapModelToAggregate(accessToken: ObjectLiteral, cQMetadata?: CQMetadata): OAuthAccessToken
     {
         if (!accessToken) return;
 
-        return this.makeAggregate(accessToken);
+        return this.makeAggregate(accessToken, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param accessTokens 
+     * @param accessTokens
      */
-    mapModelsToAggregates(accessTokens: ObjectLiteral[]): OAuthAccessToken[]
+    mapModelsToAggregates(accessTokens: ObjectLiteral[], cQMetadata?: CQMetadata): OAuthAccessToken[]
     {
         if (!Array.isArray(accessTokens)) return;
-        
-        return accessTokens.map(accessToken  => this.makeAggregate(accessToken));
+
+        return accessTokens.map(accessToken  => this.makeAggregate(accessToken, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param accessToken 
+     * @param accessToken
      */
     mapAggregateToResponse(accessToken: OAuthAccessToken): AccessTokenResponse
     {
@@ -69,7 +65,7 @@ export class AccessTokenMapper implements IMapper
         return accessTokens.map(accessToken => this.makeResponse(accessToken));
     }
 
-    private makeAggregate(accessToken: ObjectLiteral): OAuthAccessToken
+    private makeAggregate(accessToken: ObjectLiteral, cQMetadata?: CQMetadata): OAuthAccessToken
     {
         return OAuthAccessToken.register(
             new AccessTokenId(accessToken.id),
@@ -78,25 +74,19 @@ export class AccessTokenMapper implements IMapper
             new AccessTokenToken(accessToken.token),
             new AccessTokenName(accessToken.name),
             new AccessTokenIsRevoked(accessToken.isRevoked),
-            new AccessTokenExpiresAt(accessToken.expiresAt),
-            new AccessTokenCreatedAt(accessToken.createdAt),
-            new AccessTokenUpdatedAt(accessToken.updatedAt),
-            new AccessTokenDeletedAt(accessToken.deletedAt),
-            
-            
+            new AccessTokenExpiresAt(accessToken.expiresAt, {}, {addTimezone: cQMetadata.timezone}),
+            new AccessTokenCreatedAt(accessToken.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new AccessTokenUpdatedAt(accessToken.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new AccessTokenDeletedAt(accessToken.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new RefreshTokenMapper({ eagerLoading: false }).mapModelToAggregate(accessToken.refreshToken) : undefined,
-            
             this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapModelToAggregate(accessToken.client) : undefined,
-            
-            
-            
         );
     }
 
     private makeResponse(accessToken: OAuthAccessToken): AccessTokenResponse
     {
         if (!accessToken) return;
-        
+
         return new AccessTokenResponse(
             accessToken.id.value,
             accessToken.clientId.value,
@@ -108,14 +98,8 @@ export class AccessTokenMapper implements IMapper
             accessToken.createdAt.value,
             accessToken.updatedAt.value,
             accessToken.deletedAt.value,
-            
-            
             this.options.eagerLoading ? new RefreshTokenMapper({ eagerLoading: false }).mapAggregateToResponse(accessToken.refreshToken) : undefined,
-            
             this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapAggregateToResponse(accessToken.client) : undefined,
-            
-            
-            
         );
     }
 }

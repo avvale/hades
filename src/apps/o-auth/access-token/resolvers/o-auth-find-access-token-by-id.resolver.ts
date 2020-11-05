@@ -1,4 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -8,22 +9,26 @@ import { AuthorizationGuard } from './../../../shared/modules/auth/guards/author
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { FindAccessTokenQuery } from '@hades/o-auth/access-token/application/find/find-access-token.query';
+import { FindAccessTokenByIdQuery } from '@hades/o-auth/access-token/application/find/find-access-token-by-id.query';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
 import { OAuthAccessToken } from './../../../../graphql';
 
 @Resolver()
 @Permissions('oAuth.accessToken.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class FindAccessTokenResolver
+export class OAuthFindAccessTokenByIdResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
-    @Query('oAuthFindAccessToken')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<OAuthAccessToken>
+    @Query('oAuthFindAccessTokenById')
+    async main(
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    ): Promise<OAuthAccessToken>
     {
-        return await this.queryBus.ask(new FindAccessTokenQuery(queryStatement, constraint));
+        return await this.queryBus.ask(new FindAccessTokenByIdQuery(id, constraint, { timezone }));
     }
 }

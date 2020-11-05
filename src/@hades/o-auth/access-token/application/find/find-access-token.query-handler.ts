@@ -10,12 +10,16 @@ export class FindAccessTokenQueryHandler implements IQueryHandler<FindAccessToke
     private readonly mapper: AccessTokenMapper = new AccessTokenMapper();
 
     constructor(
-        private readonly findAccessTokenService: FindAccessTokenService
-    ) { }
+        private readonly findAccessTokenService: FindAccessTokenService,
+    ) {}
 
     async execute(query: FindAccessTokenQuery): Promise<AccessTokenResponse>
     {
-        const accessToken = await this.findAccessTokenService.main(query.queryStatement);
+        const accessToken = await this.findAccessTokenService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(accessToken);
     }

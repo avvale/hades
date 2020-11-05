@@ -8,21 +8,21 @@ import { DeletedAccessTokensEvent } from './deleted-access-tokens.event';
 export class AddAccessTokensContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: OAuthAccessToken[] = []
+        public readonly aggregateRoots: OAuthAccessToken[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedAccessTokensEvent(
-                this.aggregateRoots.map(accessToken => 
+                this.aggregateRoots.map(accessToken =>
                     new CreatedAccessTokenEvent(
                         accessToken.id.value,
                         accessToken.clientId.value,
@@ -34,7 +34,6 @@ export class AddAccessTokensContextEvent extends AggregateRoot
                         accessToken.createdAt?.value,
                         accessToken.updatedAt?.value,
                         accessToken.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -45,7 +44,7 @@ export class AddAccessTokensContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedAccessTokensEvent(
-                this.aggregateRoots.map(accessToken => 
+                this.aggregateRoots.map(accessToken =>
                     new DeletedAccessTokenEvent(
                         accessToken.id.value,
                         accessToken.clientId.value,
@@ -57,10 +56,9 @@ export class AddAccessTokensContextEvent extends AggregateRoot
                         accessToken.createdAt?.value,
                         accessToken.updatedAt?.value,
                         accessToken.deletedAt?.value,
-                           
                     )
                 )
             )
         );
-    }   
+    }
 }

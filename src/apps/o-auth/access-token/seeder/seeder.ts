@@ -4,7 +4,7 @@ import { CreateAccessTokensCommand } from '@hades/o-auth/access-token/applicatio
 import { SeederModule } from './seeder.module';
 import { accessTokens } from '@hades/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

@@ -1,6 +1,7 @@
 import { Controller, Get, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { AccessTokenDto } from './../dto/access-token.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -17,10 +18,10 @@ import { Pagination } from '@hades/shared/domain/lib/pagination';
 @Controller('o-auth/access-tokens/paginate')
 @Permissions('oAuth.accessToken.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class PaginateAccessTokensController 
+export class OAuthPaginateAccessTokensController
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Get()
@@ -28,8 +29,12 @@ export class PaginateAccessTokensController
     @ApiOkResponse({ description: 'The records has been paginated successfully.', type: Pagination })
     @ApiQuery({ name: 'queryStatement', type: QueryStatement })
     @ApiQuery({ name: 'constraint', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body('query') queryStatement?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        return await this.queryBus.ask(new PaginateAccessTokensQuery(queryStatement, constraint));   
+        return await this.queryBus.ask(new PaginateAccessTokensQuery(queryStatement, constraint, { timezone }));
     }
 }
