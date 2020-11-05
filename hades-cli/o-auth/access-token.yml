@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: o-auth
 moduleName: access-token
 moduleNames: access-tokens
+aggregateName: OAuthAccessToken
 hasOAuth: true
 hasTenant: false
 aggregateProperties:

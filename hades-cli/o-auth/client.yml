@@ -2,6 +2,7 @@ version: 1.0.0
 boundedContextName: o-auth
 moduleName: client
 moduleNames: clients
+aggregateName: OAuthClient
 hasOAuth: true
 hasTenant: false
 aggregateProperties:
