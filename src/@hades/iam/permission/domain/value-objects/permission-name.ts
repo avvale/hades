@@ -11,6 +11,7 @@ export class PermissionName extends StringValueObject
             name: 'PermissionName',
             nullable: false,
             undefinable: false,
-            maxLength: 255,        }, validationRules));
+            maxLength: 255,
+        }, validationRules));
     }
 }

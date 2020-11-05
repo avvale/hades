@@ -2,6 +2,7 @@ import { Controller, Put, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdatePermissionDto } from './../dto/update-permission.dto';
 import { PermissionDto } from './../dto/permission.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -23,22 +24,20 @@ export class IamUpdatePermissionController
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Put()
     @ApiOperation({ summary: 'Update permission' })
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: PermissionDto})
-    async main(@Body() payload: UpdatePermissionDto, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body() payload: UpdatePermissionDto,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new UpdatePermissionCommand(
-            payload.id,
-            payload.name,
-            payload.boundedContextId,
-            payload.roleIds,
-            constraint,
-        ));
+        await this.commandBus.dispatch(new UpdatePermissionCommand(payload, constraint, { timezone }));
 
-        return await this.queryBus.ask(new FindPermissionByIdQuery(payload.id, constraint));
+        return await this.queryBus.ask(new FindPermissionByIdQuery(payload.id, constraint, { timezone }));
     }
 }

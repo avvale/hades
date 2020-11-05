@@ -8,13 +8,13 @@ import { PermissionId } from './../../domain/value-objects';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
 
-describe('FindPermissionByIdService', () => 
+describe('FindPermissionByIdService', () =>
 {
     let service: FindPermissionByIdService;
     let repository: IPermissionRepository;
     let mockRepository: MockPermissionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindPermissionByIdService', () =>
                 EventPublisher,
                 FindPermissionByIdService,
                 MockPermissionRepository,
-                { 
+                {
                     provide: IPermissionRepository,
                     useValue: {
                         findById: (id) => {}

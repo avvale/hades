@@ -2,15 +2,14 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IPermissionRepository } from '@hades/iam/permission/domain/permission.repository';
-import { 
+import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
     PermissionRoleIds,
     PermissionCreatedAt,
     PermissionUpdatedAt,
-    PermissionDeletedAt
-    
+    PermissionDeletedAt,
 } from '@hades/iam/permission/domain/value-objects';
 import { IamPermission } from './../../domain/permission.aggregate';
 import { permissions } from './../seeds/permission.seed';
@@ -22,14 +21,14 @@ export class MockPermissionRepository extends MockRepository<IamPermission> impl
     public readonly aggregateName: string = 'IamPermission';
     public collectionSource: IamPermission[];
     public deletedAtInstance: PermissionDeletedAt = new PermissionDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -44,7 +43,7 @@ export class MockPermissionRepository extends MockRepository<IamPermission> impl
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(IamPermission.register(
                     new PermissionId(itemCollection.id),
                     new PermissionName(itemCollection.name),
@@ -53,7 +52,6 @@ export class MockPermissionRepository extends MockRepository<IamPermission> impl
                     new PermissionCreatedAt(itemCollection.createdAt),
                     new PermissionUpdatedAt(itemCollection.updatedAt),
                     new PermissionDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }

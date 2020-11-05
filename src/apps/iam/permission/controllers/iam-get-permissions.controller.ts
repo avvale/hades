@@ -1,6 +1,7 @@
 import { Controller, Get, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { PermissionDto } from './../dto/permission.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -19,7 +20,7 @@ import { GetPermissionsQuery } from '@hades/iam/permission/application/get/get-p
 export class IamGetPermissionsController
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Get()
@@ -27,8 +28,12 @@ export class IamGetPermissionsController
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [PermissionDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body('query') queryStatement?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        return await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint));
+        return await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint, { timezone }));
     }
 }

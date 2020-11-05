@@ -1,5 +1,5 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IamPermission } from './permission.aggregate';
 import { PermissionResponse } from './permission.response';
 import {
@@ -9,41 +9,37 @@ import {
     PermissionRoleIds,
     PermissionCreatedAt,
     PermissionUpdatedAt,
-    PermissionDeletedAt
-    
+    PermissionDeletedAt,
 } from './value-objects';
-
 import { BoundedContextMapper } from '@hades/iam/bounded-context/domain/bounded-context.mapper';
-
-
 import { RoleMapper } from '@hades/iam/role/domain/role.mapper';
 
 export class PermissionMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
 
     /**
      * Map object to aggregate
      * @param permission
      */
-    mapModelToAggregate(permission: ObjectLiteral): IamPermission
+    mapModelToAggregate(permission: ObjectLiteral, cQMetadata?: CQMetadata): IamPermission
     {
         if (!permission) return;
 
-        return this.makeAggregate(permission);
+        return this.makeAggregate(permission, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param permissions 
+     * @param permissions
      */
-    mapModelsToAggregates(permissions: ObjectLiteral[]): IamPermission[]
+    mapModelsToAggregates(permissions: ObjectLiteral[], cQMetadata?: CQMetadata): IamPermission[]
     {
         if (!Array.isArray(permissions)) return;
 
-        return permissions.map(permission  => this.makeAggregate(permission));
+        return permissions.map(permission  => this.makeAggregate(permission, cQMetadata));
     }
 
     /**
@@ -66,24 +62,18 @@ export class PermissionMapper implements IMapper
         return permissions.map(permission => this.makeResponse(permission));
     }
 
-    private makeAggregate(permission: ObjectLiteral): IamPermission
+    private makeAggregate(permission: ObjectLiteral, cQMetadata?: CQMetadata): IamPermission
     {
         return IamPermission.register(
             new PermissionId(permission.id),
             new PermissionName(permission.name),
             new PermissionBoundedContextId(permission.boundedContextId),
             new PermissionRoleIds(permission.roleIds),
-            new PermissionCreatedAt(permission.createdAt),
-            new PermissionUpdatedAt(permission.updatedAt),
-            new PermissionDeletedAt(permission.deletedAt),
-            
-            
-            
+            new PermissionCreatedAt(permission.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new PermissionUpdatedAt(permission.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new PermissionDeletedAt(permission.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new BoundedContextMapper({ eagerLoading: false }).mapModelToAggregate(permission.boundedContext) : undefined,
-            
-            
             this.options.eagerLoading ? new RoleMapper({ eagerLoading: false }).mapModelsToAggregates(permission.roles) : undefined,
-            
         );
     }
 
@@ -99,14 +89,8 @@ export class PermissionMapper implements IMapper
             permission.createdAt.value,
             permission.updatedAt.value,
             permission.deletedAt.value,
-            
-            
-            
             this.options.eagerLoading ? new BoundedContextMapper({ eagerLoading: false }).mapAggregateToResponse(permission.boundedContext) : undefined,
-            
-            
             this.options.eagerLoading ? new RoleMapper({ eagerLoading: false }).mapAggregatesToResponses(permission.roles) : undefined,
-            
         );
     }
 }

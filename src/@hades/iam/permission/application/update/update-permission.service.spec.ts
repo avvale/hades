@@ -4,26 +4,25 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { permissions } from '@hades/iam/permission/infrastructure/seeds/permission.seed';
 import { UpdatePermissionService } from './update-permission.service';
-import { 
+import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
     PermissionRoleIds,
     PermissionCreatedAt,
     PermissionUpdatedAt,
-    PermissionDeletedAt
-    
+    PermissionDeletedAt,
 } from './../../domain/value-objects';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
 
-describe('UpdatePermissionService', () => 
+describe('UpdatePermissionService', () =>
 {
     let service: UpdatePermissionService;
     let repository: IPermissionRepository;
     let mockRepository: MockPermissionRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -32,7 +31,7 @@ describe('UpdatePermissionService', () =>
                 EventPublisher,
                 UpdatePermissionService,
                 MockPermissionRepository,
-                { 
+                {
                     provide: IPermissionRepository,
                     useValue: {
                         update: (item) => {}
@@ -46,21 +45,20 @@ describe('UpdatePermissionService', () =>
         mockRepository  = module.get(MockPermissionRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdatePermissionService should be defined', () => 
+        test('UpdatePermissionService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a permission and emit event', async () => 
+        test('should update a permission and emit event', async () =>
         {
             expect(await service.main(
                 new PermissionId(permissions[0].id),
                 new PermissionName(permissions[0].name),
                 new PermissionBoundedContextId(permissions[0].boundedContextId),
                 new PermissionRoleIds(permissions[0].roleIds),
-                
             )).toBe(undefined);
         });
     });

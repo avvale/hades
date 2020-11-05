@@ -41,7 +41,6 @@ describe('DeletePermissionByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeletePermissionByIdCommand(
                     permissions[0].id,
-                
                 )
             )).toBe(undefined);
         });

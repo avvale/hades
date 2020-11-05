@@ -10,11 +10,11 @@ export class GetPermissionsQueryHandler implements IQueryHandler<GetPermissionsQ
     private readonly mapper: PermissionMapper = new PermissionMapper();
 
     constructor(
-        private readonly getPermissionsService: GetPermissionsService
+        private readonly getPermissionsService: GetPermissionsService,
     ) {}
 
     async execute(query: GetPermissionsQuery): Promise<PermissionResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getPermissionsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getPermissionsService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

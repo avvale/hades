@@ -8,7 +8,7 @@ import { DeletedPermissionsEvent } from './deleted-permissions.event';
 export class AddPermissionsContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: IamPermission[] = []
+        public readonly aggregateRoots: IamPermission[] = [],
     ) {
         super();
     }
@@ -31,7 +31,6 @@ export class AddPermissionsContextEvent extends AggregateRoot
                         permission.createdAt?.value,
                         permission.updatedAt?.value,
                         permission.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -51,7 +50,6 @@ export class AddPermissionsContextEvent extends AggregateRoot
                         permission.createdAt?.value,
                         permission.updatedAt?.value,
                         permission.deletedAt?.value,
-                        
                     )
                 )
             )

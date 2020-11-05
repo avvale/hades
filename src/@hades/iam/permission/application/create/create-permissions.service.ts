@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     PermissionId,
     PermissionName,
@@ -8,8 +7,7 @@ import {
     PermissionRoleIds,
     PermissionCreatedAt,
     PermissionUpdatedAt,
-    PermissionDeletedAt
-    
+    PermissionDeletedAt,
 } from './../../domain/value-objects';
 import { IPermissionRepository } from './../../domain/permission.repository';
 import { IamPermission } from './../../domain/permission.aggregate';
@@ -20,7 +18,7 @@ export class CreatePermissionsService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IPermissionRepository
+        private readonly repository: IPermissionRepository,
     ) {}
 
     public async main(
@@ -29,7 +27,6 @@ export class CreatePermissionsService
             name: PermissionName,
             boundedContextId: PermissionBoundedContextId,
             roleIds: PermissionRoleIds,
-            
         } []
     ): Promise<void>
     {
@@ -39,8 +36,8 @@ export class CreatePermissionsService
             permission.name,
             permission.boundedContextId,
             permission.roleIds,
-            new PermissionCreatedAt(Utils.nowTimestamp()),
-            new PermissionUpdatedAt(Utils.nowTimestamp()),
+            new PermissionCreatedAt({currentTimestamp: true}),
+            new PermissionUpdatedAt({currentTimestamp: true}),
             null
         ));
 

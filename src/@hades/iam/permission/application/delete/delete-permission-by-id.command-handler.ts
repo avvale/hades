@@ -9,14 +9,16 @@ import {
 export class DeletePermissionByIdCommandHandler implements ICommandHandler<DeletePermissionByIdCommand>
 {
     constructor(
-        private readonly deletePermissionByIdService: DeletePermissionByIdService
+        private readonly deletePermissionByIdService: DeletePermissionByIdService,
     ) {}
 
     async execute(command: DeletePermissionByIdCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.deletePermissionByIdService.main(
-            new PermissionId(command.id)
+            new PermissionId(command.id),
+            command.constraint,
+            command.cQMetadata
         );
     }
 }

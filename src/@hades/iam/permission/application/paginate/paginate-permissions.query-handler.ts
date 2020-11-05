@@ -7,12 +7,12 @@ import { PaginatePermissionsService } from './paginate-permissions.service';
 export class PaginatePermissionsQueryHandler implements IQueryHandler<PaginatePermissionsQuery>
 {
     constructor(
-        private readonly paginatePermissionsService: PaginatePermissionsService
+        private readonly paginatePermissionsService: PaginatePermissionsService,
     ) {}
 
     async execute(query: PaginatePermissionsQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginatePermissionsService.main(query.queryStatement, query.constraint);
+        const { total, count, rows } = await this.paginatePermissionsService.main(query.queryStatement, query.constraint, query.cQMetadata);
 
         return new PaginationResponse(
             total,

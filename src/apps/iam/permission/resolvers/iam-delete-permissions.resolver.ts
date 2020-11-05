@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -20,15 +21,19 @@ export class IamDeletePermissionsResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamDeletePermissions')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement)
+    async main(
+        @Args('query') queryStatement?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const permissions = await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint));
+        const permissions = await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeletePermissionsCommand(queryStatement, constraint));
+        await this.commandBus.dispatch(new DeletePermissionsCommand(queryStatement, constraint, { timezone }));
 
         return permissions;
     }
