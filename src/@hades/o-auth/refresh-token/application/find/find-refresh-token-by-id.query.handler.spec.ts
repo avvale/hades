@@ -16,7 +16,7 @@ describe('FindRefreshTokenByIdQueryHandler', () =>
     let repository: MockRefreshTokenRepository;
     let mapper: RefreshTokenMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -41,9 +41,9 @@ describe('FindRefreshTokenByIdQueryHandler', () =>
         mapper          = new RefreshTokenMapper();
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('FindRefreshTokenByIdQueryHandler should be defined', () => 
+        test('FindRefreshTokenByIdQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });

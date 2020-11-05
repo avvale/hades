@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { JwtService } from '@nestjs/jwt';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     RefreshTokenId,
     RefreshTokenAccessTokenId,
@@ -10,10 +8,14 @@ import {
     RefreshTokenExpiredRefreshToken,
     RefreshTokenToken,
     RefreshTokenIsRevoked,
-    RefreshTokenExpiresAt
+    RefreshTokenExpiresAt,
 } from './../../domain/value-objects';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { OAuthRefreshToken } from './../../domain/refresh-token.aggregate';
+
+// custom
+import { JwtService } from '@nestjs/jwt';
+import { Utils } from '@hades/shared/domain/lib/utils';
 import { Jwt } from '@hades/shared/domain/lib/hades.types';
 
 @Injectable()
@@ -22,20 +24,22 @@ export class CreateRefreshTokenService
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IRefreshTokenRepository,
-        private readonly jwtService: JwtService
+        private readonly jwtService: JwtService,
     ) {}
 
     public async main(
-        id: RefreshTokenId,
-        accessTokenId: RefreshTokenAccessTokenId,
-        expiredRefreshToken: RefreshTokenExpiredRefreshToken,
+        payload: {
+            id: RefreshTokenId,
+            accessTokenId: RefreshTokenAccessTokenId,
+            expiredRefreshToken: RefreshTokenExpiredRefreshToken,
+        }
     ): Promise<void>
     {
         // compose refresh token
-        const momentExpiredRefreshToken = expiredRefreshToken.value ? Utils.now().add(expiredRefreshToken.value, 'seconds') : null
+        const momentExpiredRefreshToken = payload.expiredRefreshToken.value ? Utils.now().add(payload.expiredRefreshToken.value, 'seconds') : null
         const refreshTokenDate: Jwt = {
-            jit: id.value,
-            aci: accessTokenId.value,
+            jit: payload.id.value,
+            aci: payload.accessTokenId.value,
             iss: 'Hades OAuth',
             iat: parseInt(Utils.now().format('X')),
             nbf: parseInt(Utils.now().format('X')),
@@ -45,13 +49,13 @@ export class CreateRefreshTokenService
 
         // create aggregate with factory pattern
         const refreshToken = OAuthRefreshToken.register(
-            id,
-            accessTokenId,
+            payload.id,
+            payload.accessTokenId,
             refreshTokenValue,
             new RefreshTokenIsRevoked(false),
             new RefreshTokenExpiresAt(momentExpiredRefreshToken ? momentExpiredRefreshToken.format('YYYY-MM-DD H:mm:ss') : null),
-            new RefreshTokenCreatedAt(Utils.nowTimestamp()),
-            new RefreshTokenUpdatedAt(Utils.nowTimestamp()),
+            new RefreshTokenCreatedAt({currentTimestamp: true}),
+            new RefreshTokenUpdatedAt({currentTimestamp: true}),
             null
         );
 

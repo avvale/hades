@@ -4,7 +4,7 @@ import { CreateRefreshTokensCommand } from '@hades/o-auth/refresh-token/applicat
 import { SeederModule } from './seeder.module';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {

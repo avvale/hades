@@ -1,13 +1,12 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateRefreshTokenCommand } from './create-refresh-token.command';
 import { CreateRefreshTokenService } from './create-refresh-token.service';
-import { 
+import {
     RefreshTokenId,
     RefreshTokenAccessTokenId,
     RefreshTokenToken,
     RefreshTokenIsRevoked,
-    RefreshTokenExpiresAt
-    
+    RefreshTokenExpiresAt,
 } from './../../domain/value-objects';
 import { RefreshTokenExpiredRefreshToken } from '../../domain/value-objects/refresh-token-expired-refresh-token';
 
@@ -15,16 +14,18 @@ import { RefreshTokenExpiredRefreshToken } from '../../domain/value-objects/refr
 export class CreateRefreshTokenCommandHandler implements ICommandHandler<CreateRefreshTokenCommand>
 {
     constructor(
-        private readonly createRefreshTokenService: CreateRefreshTokenService
-    ) { }
+        private readonly createRefreshTokenService: CreateRefreshTokenService,
+    ) {}
 
     async execute(command: CreateRefreshTokenCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createRefreshTokenService.main(
-            new RefreshTokenId(command.id),
-            new RefreshTokenAccessTokenId(command.accessTokenId),
-            new RefreshTokenExpiredRefreshToken(command.expiredRefreshToken)
+            {
+                id: new RefreshTokenId(command.payload.id),
+                accessTokenId: new RefreshTokenAccessTokenId(command.payload.accessTokenId),
+                expiredRefreshToken: new RefreshTokenExpiredRefreshToken(command.payload.expiredRefreshToken),
+            }
         );
     }
 }

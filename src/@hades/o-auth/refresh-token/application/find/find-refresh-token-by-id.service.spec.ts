@@ -8,13 +8,13 @@ import { RefreshTokenId } from './../../domain/value-objects';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { MockRefreshTokenRepository } from './../../infrastructure/mock/mock-refresh-token.repository';
 
-describe('FindRefreshTokenByIdService', () => 
+describe('FindRefreshTokenByIdService', () =>
 {
     let service: FindRefreshTokenByIdService;
     let repository: IRefreshTokenRepository;
     let mockRepository: MockRefreshTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindRefreshTokenByIdService', () =>
                 EventPublisher,
                 FindRefreshTokenByIdService,
                 MockRefreshTokenRepository,
-                { 
+                {
                     provide: IRefreshTokenRepository,
                     useValue: {
                         findById: (id) => {}

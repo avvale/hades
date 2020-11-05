@@ -10,11 +10,11 @@ export class GetRefreshTokensQueryHandler implements IQueryHandler<GetRefreshTok
     private readonly mapper: RefreshTokenMapper = new RefreshTokenMapper();
 
     constructor(
-        private readonly getRefreshTokensService: GetRefreshTokensService
-    ) { }
+        private readonly getRefreshTokensService: GetRefreshTokensService,
+    ) {}
 
     async execute(query: GetRefreshTokensQuery): Promise<RefreshTokenResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getRefreshTokensService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getRefreshTokensService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

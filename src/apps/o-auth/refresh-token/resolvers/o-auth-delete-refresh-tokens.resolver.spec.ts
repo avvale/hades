@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { DeleteRefreshTokensResolver } from './delete-refresh-tokens.resolver';
+import { OAuthDeleteRefreshTokensResolver } from './o-auth-delete-refresh-tokens.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
-describe('DeleteRefreshTokensResolver', () => 
+describe('OAuthDeleteRefreshTokensResolver', () => 
 {
-    let resolver: DeleteRefreshTokensResolver;
+    let resolver: OAuthDeleteRefreshTokensResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -16,7 +16,7 @@ describe('DeleteRefreshTokensResolver', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                DeleteRefreshTokensResolver,
+                OAuthDeleteRefreshTokensResolver,
                 {
                     provide: IQueryBus,
                     useValue: {
@@ -32,19 +32,19 @@ describe('DeleteRefreshTokensResolver', () =>
             ]
         }).compile();
 
-        resolver    = module.get<DeleteRefreshTokensResolver>(DeleteRefreshTokensResolver);
+        resolver    = module.get<OAuthDeleteRefreshTokensResolver>(OAuthDeleteRefreshTokensResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('DeleteRefreshTokensResolver should be defined', () => 
+    test('OAuthDeleteRefreshTokensResolver should be defined', () => 
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () => 
     {
-        test('DeleteRefreshTokensResolver should be defined', () => 
+        test('OAuthDeleteRefreshTokensResolver should be defined', () => 
         {
             expect(resolver).toBeDefined();
         });

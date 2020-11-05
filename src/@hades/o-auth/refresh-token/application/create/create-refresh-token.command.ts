@@ -1,8 +1,13 @@
-export class CreateRefreshTokenCommand 
-{   
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
+export class CreateRefreshTokenCommand
+{
     constructor(
-        public readonly id: string,
-        public readonly accessTokenId: string,
-        public readonly expiredRefreshToken: number
+        public readonly payload: {
+            id: string,
+            accessTokenId: string,
+            expiredRefreshToken: number,
+        },
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

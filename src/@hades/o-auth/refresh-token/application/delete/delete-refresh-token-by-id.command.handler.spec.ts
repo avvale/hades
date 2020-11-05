@@ -41,7 +41,6 @@ describe('DeleteRefreshTokenByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteRefreshTokenByIdCommand(
                     refreshTokens[0].id,
-                
                 )
             )).toBe(undefined);
         });

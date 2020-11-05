@@ -1,24 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { DeleteRefreshTokensController } from './delete-refresh-tokens.controller';
+import { OAuthDeleteRefreshTokenByIdResolver } from './o-auth-delete-refresh-token-by-id.resolver';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
-describe('DeleteRefreshTokensController', () => 
+describe('OAuthDeleteRefreshTokenByIdResolver', () => 
 {
-    let controller: DeleteRefreshTokensController;
+    let resolver: OAuthDeleteRefreshTokenByIdResolver;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
     beforeAll(async () => 
     {
         const module: TestingModule = await Test.createTestingModule({
-            controllers: [
-                DeleteRefreshTokensController
-            ],
             providers: [
+                OAuthDeleteRefreshTokenByIdResolver,
                 {
                     provide: IQueryBus,
                     useValue: {
@@ -34,22 +32,27 @@ describe('DeleteRefreshTokensController', () =>
             ]
         }).compile();
 
-        controller  = module.get<DeleteRefreshTokensController>(DeleteRefreshTokensController);
+        resolver    = module.get<OAuthDeleteRefreshTokenByIdResolver>(OAuthDeleteRefreshTokenByIdResolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
+    test('OAuthDeleteRefreshTokenByIdResolver should be defined', () => 
+    {
+        expect(resolver).toBeDefined();
+    });
+
     describe('main', () => 
     {
-        test('DeleteRefreshTokensController should be defined', () => 
+        test('OAuthDeleteRefreshTokenByIdResolver should be defined', () => 
         {
-            expect(controller).toBeDefined();
+            expect(resolver).toBeDefined();
         });
 
-        test('should return an refreshTokens deleted', async () => 
+        test('should return an refreshToken deleted', async () => 
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
-            expect(await controller.main()).toBe(refreshTokens);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens[0])));
+            expect(await resolver.main(refreshTokens[0].id)).toBe(refreshTokens[0]);
         });
     });
 });

@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IRefreshTokenRepository } from '@hades/o-auth/refresh-token/domain/refresh-token.repository';
-import { 
+import {
     RefreshTokenId,
     RefreshTokenAccessTokenId,
     RefreshTokenToken,
@@ -10,8 +10,7 @@ import {
     RefreshTokenExpiresAt,
     RefreshTokenCreatedAt,
     RefreshTokenUpdatedAt,
-    RefreshTokenDeletedAt
-    
+    RefreshTokenDeletedAt,
 } from '@hades/o-auth/refresh-token/domain/value-objects';
 import { OAuthRefreshToken } from './../../domain/refresh-token.aggregate';
 import { refreshTokens } from './../seeds/refresh-token.seed';
@@ -23,14 +22,14 @@ export class MockRefreshTokenRepository extends MockRepository<OAuthRefreshToken
     public readonly aggregateName: string = 'OAuthRefreshToken';
     public collectionSource: OAuthRefreshToken[];
     public deletedAtInstance: RefreshTokenDeletedAt = new RefreshTokenDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -45,7 +44,7 @@ export class MockRefreshTokenRepository extends MockRepository<OAuthRefreshToken
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(OAuthRefreshToken.register(
                     new RefreshTokenId(itemCollection.id),
                     new RefreshTokenAccessTokenId(itemCollection.accessTokenId),
@@ -55,7 +54,6 @@ export class MockRefreshTokenRepository extends MockRepository<OAuthRefreshToken
                     new RefreshTokenCreatedAt(itemCollection.createdAt),
                     new RefreshTokenUpdatedAt(itemCollection.updatedAt),
                     new RefreshTokenDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }

@@ -1,4 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -8,22 +9,26 @@ import { AuthorizationGuard } from './../../../shared/modules/auth/guards/author
 
 // @hades
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
-import { PaginateRefreshTokensQuery } from '@hades/o-auth/refresh-token/application/paginate/paginate-refresh-tokens.query';
+import { FindRefreshTokenByIdQuery } from '@hades/o-auth/refresh-token/application/find/find-refresh-token-by-id.query';
 import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { Pagination } from './../../../../graphql';
+import { OAuthRefreshToken } from './../../../../graphql';
 
 @Resolver()
 @Permissions('oAuth.refreshToken.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class PaginateRefreshTokensResolver
+export class OAuthFindRefreshTokenByIdResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
-    @Query('oAuthPaginateRefreshTokens')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<Pagination>
+    @Query('oAuthFindRefreshTokenById')
+    async main(
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    ): Promise<OAuthRefreshToken>
     {
-        return await this.queryBus.ask(new PaginateRefreshTokensQuery(queryStatement, constraint));   
+        return await this.queryBus.ask(new FindRefreshTokenByIdQuery(id, constraint, { timezone }));
     }
 }

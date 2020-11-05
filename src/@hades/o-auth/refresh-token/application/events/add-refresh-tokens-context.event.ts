@@ -8,21 +8,21 @@ import { DeletedRefreshTokensEvent } from './deleted-refresh-tokens.event';
 export class AddRefreshTokensContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: OAuthRefreshToken[] = []
+        public readonly aggregateRoots: OAuthRefreshToken[] = [],
     ) {
         super();
     }
 
     *[Symbol.iterator]()
-    { 
-        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot; 
+    {
+        for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
     created()
     {
         this.apply(
             new CreatedRefreshTokensEvent(
-                this.aggregateRoots.map(refreshToken => 
+                this.aggregateRoots.map(refreshToken =>
                     new CreatedRefreshTokenEvent(
                         refreshToken.id.value,
                         refreshToken.accessTokenId.value,
@@ -32,7 +32,6 @@ export class AddRefreshTokensContextEvent extends AggregateRoot
                         refreshToken.createdAt?.value,
                         refreshToken.updatedAt?.value,
                         refreshToken.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -43,7 +42,7 @@ export class AddRefreshTokensContextEvent extends AggregateRoot
     {
         this.apply(
             new DeletedRefreshTokensEvent(
-                this.aggregateRoots.map(refreshToken => 
+                this.aggregateRoots.map(refreshToken =>
                     new DeletedRefreshTokenEvent(
                         refreshToken.id.value,
                         refreshToken.accessTokenId.value,
@@ -53,10 +52,9 @@ export class AddRefreshTokensContextEvent extends AggregateRoot
                         refreshToken.createdAt?.value,
                         refreshToken.updatedAt?.value,
                         refreshToken.deletedAt?.value,
-                           
                     )
                 )
             )
         );
-    }   
+    }
 }

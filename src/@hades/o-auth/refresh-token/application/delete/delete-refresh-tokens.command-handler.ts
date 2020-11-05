@@ -6,12 +6,16 @@ import { DeleteRefreshTokensService } from './delete-refresh-tokens.service';
 export class DeleteRefreshTokensCommandHandler implements ICommandHandler<DeleteRefreshTokensCommand>
 {
     constructor(
-        private readonly deleteRefreshTokensService: DeleteRefreshTokensService
-    ) { }
+        private readonly deleteRefreshTokensService: DeleteRefreshTokensService,
+    ) {}
 
     async execute(command: DeleteRefreshTokensCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteRefreshTokensService.main(command.queryStatement);
+        await this.deleteRefreshTokensService.main(
+            command.queryStatement,
+            command.constraint,
+            command.cQMetadata,
+        );
     }
 }

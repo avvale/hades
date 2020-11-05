@@ -14,7 +14,7 @@ describe('DeleteRefreshTokenByIdService', () =>
     let repository: IRefreshTokenRepository;
     let mockRepository: MockRefreshTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('DeleteRefreshTokenByIdService', () =>
                 EventPublisher,
                 DeleteRefreshTokenByIdService,
                 MockRefreshTokenRepository,
-                { 
+                {
                     provide: IRefreshTokenRepository,
                     useValue: {
                         deleteById: (id) => {},
