@@ -32,7 +32,6 @@ import { DeleteRefreshTokensService } from './application/delete/delete-refresh-
 // models
 export { OAuthRefreshTokenModel } from './infrastructure/sequelize/sequelize-refresh-token.model';
 
-
 // repository
 export { IRefreshTokenRepository } from './domain/refresh-token.repository';
 export { SequelizeRefreshTokenRepository } from './infrastructure/sequelize/sequelize-refresh-token.repository';

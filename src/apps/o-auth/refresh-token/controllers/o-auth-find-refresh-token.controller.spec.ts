@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { FindRefreshTokenByIdController } from './find-refresh-token-by-id.controller';
+import { OAuthFindRefreshTokenController } from './o-auth-find-refresh-token.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
-describe('FindRefreshTokenByIdController', () => 
+describe('OAuthFindRefreshTokenController', () => 
 {
-    let controller: FindRefreshTokenByIdController;
+    let controller: OAuthFindRefreshTokenController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -16,7 +16,7 @@ describe('FindRefreshTokenByIdController', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                FindRefreshTokenByIdController
+                OAuthFindRefreshTokenController
             ],
             providers: [
                 {
@@ -34,22 +34,22 @@ describe('FindRefreshTokenByIdController', () =>
             ]
         }).compile();
 
-        controller  = module.get<FindRefreshTokenByIdController>(FindRefreshTokenByIdController);
+        controller  = module.get<OAuthFindRefreshTokenController>(OAuthFindRefreshTokenController);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () => 
     {
-        test('FindRefreshTokenByIdController should be defined', () => 
+        test('OAuthFindRefreshTokenController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return an refreshToken by id', async () => 
+        test('should return a refreshToken', async () => 
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens[0])));
-            expect(await controller.main(refreshTokens[0].id)).toBe(refreshTokens[0]);
+            expect(await controller.main()).toBe(refreshTokens[0]);
         });
     });
 });

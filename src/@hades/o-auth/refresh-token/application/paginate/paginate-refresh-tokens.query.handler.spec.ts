@@ -9,14 +9,14 @@ import { PaginationResponse } from '@hades/shared/domain/lib/pagination.response
 import { PaginateRefreshTokensQuery } from './paginate-refresh-tokens.query';
 import { PaginateRefreshTokensService } from './paginate-refresh-tokens.service';
 
-describe('PaginateRefreshTokensQueryHandler', () => 
+describe('PaginateRefreshTokensQueryHandler', () =>
 {
     let queryHandler: PaginateRefreshTokensQueryHandler;
     let service: PaginateRefreshTokensService;
     let repository: MockRefreshTokenRepository;
     let mapper: RefreshTokenMapper;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [

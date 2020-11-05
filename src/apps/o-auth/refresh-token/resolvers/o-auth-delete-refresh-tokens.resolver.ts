@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -16,19 +17,23 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 @Resolver()
 @Permissions('oAuth.refreshToken.delete')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class DeleteRefreshTokensResolver
+export class OAuthDeleteRefreshTokensResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('oAuthDeleteRefreshTokens')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, )
+    async main(
+        @Args('query') queryStatement?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const refreshTokens = await this.queryBus.ask(new GetRefreshTokensQuery(queryStatement, constraint));
+        const refreshTokens = await this.queryBus.ask(new GetRefreshTokensQuery(queryStatement, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteRefreshTokensCommand(queryStatement, constraint));
+        await this.commandBus.dispatch(new DeleteRefreshTokensCommand(queryStatement, constraint, { timezone }));
 
         return refreshTokens;
     }

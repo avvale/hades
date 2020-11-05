@@ -1,8 +1,8 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { OAuthRefreshToken } from './refresh-token.aggregate';
 import { RefreshTokenResponse } from './refresh-token.response';
-import { 
+import {
     RefreshTokenId,
     RefreshTokenAccessTokenId,
     RefreshTokenToken,
@@ -10,45 +10,41 @@ import {
     RefreshTokenExpiresAt,
     RefreshTokenCreatedAt,
     RefreshTokenUpdatedAt,
-    RefreshTokenDeletedAt
-    
+    RefreshTokenDeletedAt,
 } from './value-objects';
 import { AccessTokenMapper } from '@hades/o-auth/access-token/domain/access-token.mapper';
-
-
-
 
 export class RefreshTokenMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
-    
+
     /**
      * Map object to aggregate
      * @param refreshToken
      */
-    mapModelToAggregate(refreshToken: ObjectLiteral): OAuthRefreshToken
+    mapModelToAggregate(refreshToken: ObjectLiteral, cQMetadata?: CQMetadata): OAuthRefreshToken
     {
         if (!refreshToken) return;
 
-        return this.makeAggregate(refreshToken);
+        return this.makeAggregate(refreshToken, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param refreshTokens 
+     * @param refreshTokens
      */
-    mapModelsToAggregates(refreshTokens: ObjectLiteral[]): OAuthRefreshToken[]
+    mapModelsToAggregates(refreshTokens: ObjectLiteral[], cQMetadata?: CQMetadata): OAuthRefreshToken[]
     {
         if (!Array.isArray(refreshTokens)) return;
-        
-        return refreshTokens.map(refreshToken  => this.makeAggregate(refreshToken));
+
+        return refreshTokens.map(refreshToken  => this.makeAggregate(refreshToken, cQMetadata));
     }
 
     /**
      * Map aggregate to response
-     * @param refreshToken 
+     * @param refreshToken
      */
     mapAggregateToResponse(refreshToken: OAuthRefreshToken): RefreshTokenResponse
     {
@@ -66,31 +62,25 @@ export class RefreshTokenMapper implements IMapper
         return refreshTokens.map(refreshToken => this.makeResponse(refreshToken));
     }
 
-    private makeAggregate(refreshToken: ObjectLiteral): OAuthRefreshToken
+    private makeAggregate(refreshToken: ObjectLiteral, cQMetadata?: CQMetadata): OAuthRefreshToken
     {
         return OAuthRefreshToken.register(
             new RefreshTokenId(refreshToken.id),
             new RefreshTokenAccessTokenId(refreshToken.accessTokenId),
             new RefreshTokenToken(refreshToken.token),
             new RefreshTokenIsRevoked(refreshToken.isRevoked),
-            new RefreshTokenExpiresAt(refreshToken.expiresAt),
-            new RefreshTokenCreatedAt(refreshToken.createdAt),
-            new RefreshTokenUpdatedAt(refreshToken.updatedAt),
-            new RefreshTokenDeletedAt(refreshToken.deletedAt),
-            
+            new RefreshTokenExpiresAt(refreshToken.expiresAt, {}, {addTimezone: cQMetadata.timezone}),
+            new RefreshTokenCreatedAt(refreshToken.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new RefreshTokenUpdatedAt(refreshToken.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new RefreshTokenDeletedAt(refreshToken.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapModelToAggregate(refreshToken.accessToken) : undefined,
-            
-            
-            
-            
-            
         );
     }
 
     private makeResponse(refreshToken: OAuthRefreshToken): RefreshTokenResponse
     {
         if (!refreshToken) return;
-        
+
         return new RefreshTokenResponse(
             refreshToken.id.value,
             refreshToken.accessTokenId.value,
@@ -100,13 +90,7 @@ export class RefreshTokenMapper implements IMapper
             refreshToken.createdAt.value,
             refreshToken.updatedAt.value,
             refreshToken.deletedAt.value,
-            
             this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapAggregateToResponse(refreshToken.accessToken) : undefined,
-            
-            
-            
-            
-            
         );
     }
 }

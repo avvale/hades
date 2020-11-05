@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { FindRefreshTokenController } from './find-refresh-token.controller';
+import { OAuthPaginateRefreshTokensController } from './o-auth-paginate-refresh-tokens.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
-describe('FindRefreshTokenController', () => 
+describe('OAuthPaginateRefreshTokensController', () => 
 {
-    let controller: FindRefreshTokenController;
+    let controller: OAuthPaginateRefreshTokensController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -16,7 +16,7 @@ describe('FindRefreshTokenController', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                FindRefreshTokenController
+                OAuthPaginateRefreshTokensController
             ],
             providers: [
                 {
@@ -34,22 +34,22 @@ describe('FindRefreshTokenController', () =>
             ]
         }).compile();
 
-        controller  = module.get<FindRefreshTokenController>(FindRefreshTokenController);
+        controller  = module.get<OAuthPaginateRefreshTokensController>(OAuthPaginateRefreshTokensController);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () => 
     {
-        test('FindRefreshTokenController should be defined', () => 
+        test('OAuthPaginateRefreshTokensController should be defined', () => 
         {
             expect(controller).toBeDefined();
         });
 
-        test('should return a refreshToken', async () => 
+        test('should return a refreshTokens', async () => 
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens[0])));
-            expect(await controller.main()).toBe(refreshTokens[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
+            expect(await controller.main()).toBe(refreshTokens);
         });
     });
 });

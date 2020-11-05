@@ -10,12 +10,16 @@ export class FindRefreshTokenQueryHandler implements IQueryHandler<FindRefreshTo
     private readonly mapper: RefreshTokenMapper = new RefreshTokenMapper();
 
     constructor(
-        private readonly findRefreshTokenService: FindRefreshTokenService
-    ) { }
+        private readonly findRefreshTokenService: FindRefreshTokenService,
+    ) {}
 
     async execute(query: FindRefreshTokenQuery): Promise<RefreshTokenResponse>
     {
-        const refreshToken = await this.findRefreshTokenService.main(query.queryStatement);
+        const refreshToken = await this.findRefreshTokenService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(refreshToken);
     }

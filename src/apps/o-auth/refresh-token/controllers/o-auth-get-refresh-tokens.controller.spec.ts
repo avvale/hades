@@ -1,22 +1,24 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { FindRefreshTokenByIdResolver } from './find-refresh-token-by-id.resolver';
+import { OAuthGetRefreshTokensController } from './o-auth-get-refresh-tokens.controller';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
 import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
-describe('FindRefreshTokenByIdResolver', () => 
+describe('OAuthGetRefreshTokensController', () => 
 {
-    let resolver: FindRefreshTokenByIdResolver;
+    let controller: OAuthGetRefreshTokensController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
+            controllers: [
+                OAuthGetRefreshTokensController
+            ],
             providers: [
-                FindRefreshTokenByIdResolver,
                 {
                     provide: IQueryBus,
                     useValue: {
@@ -32,27 +34,22 @@ describe('FindRefreshTokenByIdResolver', () =>
             ]
         }).compile();
 
-        resolver    = module.get<FindRefreshTokenByIdResolver>(FindRefreshTokenByIdResolver);
+        controller  = module.get<OAuthGetRefreshTokensController>(OAuthGetRefreshTokensController);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('FindRefreshTokenByIdResolver should be defined', () => 
-    {
-        expect(resolver).toBeDefined();
-    });
-
     describe('main', () => 
     {
-        test('FindRefreshTokenByIdResolver should be defined', () => 
+        test('OAuthGetRefreshTokensController should be defined', () => 
         {
-            expect(resolver).toBeDefined();
+            expect(controller).toBeDefined();
         });
 
-        test('should return an refreshToken by id', async () => 
+        test('should return a refreshTokens', async () => 
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens[0])));
-            expect(await resolver.main(refreshTokens[0].id)).toBe(refreshTokens[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
+            expect(await controller.main()).toBe(refreshTokens);
         });
     });
 });

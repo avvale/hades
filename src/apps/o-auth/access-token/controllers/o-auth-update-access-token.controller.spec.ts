@@ -1,1 +1,1 @@
-// skipped file
+// ignored file

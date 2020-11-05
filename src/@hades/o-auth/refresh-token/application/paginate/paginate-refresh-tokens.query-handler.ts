@@ -7,16 +7,16 @@ import { PaginateRefreshTokensService } from './paginate-refresh-tokens.service'
 export class PaginateRefreshTokensQueryHandler implements IQueryHandler<PaginateRefreshTokensQuery>
 {
     constructor(
-        private readonly paginateRefreshTokensService: PaginateRefreshTokensService
-    ) { }
+        private readonly paginateRefreshTokensService: PaginateRefreshTokensService,
+    ) {}
 
     async execute(query: PaginateRefreshTokensQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateRefreshTokensService.main(query.queryStatement, query.constraint)
+        const { total, count, rows } = await this.paginateRefreshTokensService.main(query.queryStatement, query.constraint, query.cQMetadata);
 
         return new PaginationResponse(
-            total, 
-            count, 
+            total,
+            count,
             rows.map(item => item.toDTO())
         );
     }

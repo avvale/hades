@@ -5,10 +5,10 @@ import { delay, map } from 'rxjs/operators';
 import { CreatedRefreshTokenEvent } from './../events/created-refresh-token.event';
 
 @Injectable()
-export class RefreshTokenSagas 
-{    
+export class RefreshTokenSagas
+{
     /* @Saga()
-    dragonKilled = (events$: Observable<any>): Observable<ICommand> => 
+    dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {
         return events$
             .pipe(

@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { refreshTokens } from '@hades/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 import { UpdateRefreshTokenService } from './update-refresh-token.service';
-import { 
+import {
     RefreshTokenId,
     RefreshTokenAccessTokenId,
     RefreshTokenToken,
@@ -12,19 +12,18 @@ import {
     RefreshTokenExpiresAt,
     RefreshTokenCreatedAt,
     RefreshTokenUpdatedAt,
-    RefreshTokenDeletedAt
-    
+    RefreshTokenDeletedAt,
 } from './../../domain/value-objects';
 import { IRefreshTokenRepository } from './../../domain/refresh-token.repository';
 import { MockRefreshTokenRepository } from './../../infrastructure/mock/mock-refresh-token.repository';
 
-describe('UpdateRefreshTokenService', () => 
+describe('UpdateRefreshTokenService', () =>
 {
     let service: UpdateRefreshTokenService;
     let repository: IRefreshTokenRepository;
     let mockRepository: MockRefreshTokenRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,7 +32,7 @@ describe('UpdateRefreshTokenService', () =>
                 EventPublisher,
                 UpdateRefreshTokenService,
                 MockRefreshTokenRepository,
-                { 
+                {
                     provide: IRefreshTokenRepository,
                     useValue: {
                         update: (item) => {}
@@ -47,14 +46,14 @@ describe('UpdateRefreshTokenService', () =>
         mockRepository  = module.get(MockRefreshTokenRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateRefreshTokenService should be defined', () => 
+        test('UpdateRefreshTokenService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a refreshToken and emit event', async () => 
+        test('should update a refreshToken and emit event', async () =>
         {
             expect(await service.main(
                 new RefreshTokenId(refreshTokens[0].id),
@@ -62,7 +61,6 @@ describe('UpdateRefreshTokenService', () =>
                 new RefreshTokenToken(refreshTokens[0].token),
                 new RefreshTokenIsRevoked(refreshTokens[0].isRevoked),
                 new RefreshTokenExpiresAt(refreshTokens[0].expiresAt),
-                
             )).toBe(undefined);
         });
     });

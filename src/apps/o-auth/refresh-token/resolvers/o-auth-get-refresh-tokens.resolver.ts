@@ -1,4 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -15,15 +16,19 @@ import { OAuthRefreshToken } from './../../../../graphql';
 @Resolver()
 @Permissions('oAuth.refreshToken.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
-export class GetRefreshTokensResolver
+export class OAuthGetRefreshTokensResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Query('oAuthGetRefreshTokens')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement, ): Promise<OAuthRefreshToken[]>
+    async main(
+        @Args('query') queryStatement?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    ): Promise<OAuthRefreshToken[]>
     {
-        return await this.queryBus.ask(new GetRefreshTokensQuery(queryStatement, constraint));
+        return await this.queryBus.ask(new GetRefreshTokensQuery(queryStatement, constraint, { timezone }));
     }
 }
