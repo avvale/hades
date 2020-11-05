@@ -46,13 +46,6 @@ export class AccessTokenDto
     expiresAt: string;
 
     @ApiProperty({
-        type        : RefreshTokenDto,
-        description : 'refreshToken [input here api field description]',
-        example     : '',
-    })
-    refreshToken: RefreshTokenDto;
-
-    @ApiProperty({
         type        : String,
         description : 'createdAt [input here api field description]',
     })
