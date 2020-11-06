@@ -1,5 +1,5 @@
 import { Controller, Post, Body, BadRequestException, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiOperation, ApiBody } from '@nestjs/swagger';
 import { Timezone } from './../../../shared/decorators/timezone.decorator';
 import * as _ from 'lodash';
 
@@ -42,6 +42,7 @@ export class CreateSnapshotController
     @Post()
     @ApiOperation({ summary: 'Create snapshot' })
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CreateSnapshotDto })
+    @ApiBody({ type: CreateSnapshotDto })
     async main(@Body() payload: CreateSnapshotDto, @Timezone() timezone?: string)
     {
         // guard clause
