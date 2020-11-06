@@ -24,7 +24,7 @@ input OAuthCreateAccessTokenInput
     name: GraphQLString
     isRevoked: GraphQLBoolean!
     expiresAt: GraphQLTimestamp
-    refreshToken: OAuthCreateRefreshTokenInput
+    refreshToken: 
 }
 
 input OAuthUpdateAccessTokenInput
@@ -36,7 +36,7 @@ input OAuthUpdateAccessTokenInput
     name: GraphQLString
     isRevoked: GraphQLBoolean
     expiresAt: GraphQLTimestamp
-    refreshToken: OAuthCreateRefreshTokenInput
+    refreshToken: 
 }
 
 type Query

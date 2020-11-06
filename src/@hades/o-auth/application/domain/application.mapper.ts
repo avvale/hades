@@ -72,9 +72,9 @@ export class ApplicationMapper implements IMapper
             new ApplicationSecret(application.secret),
             new ApplicationIsMaster(application.isMaster),
             new ApplicationClientIds(application.clientIds),
-            new ApplicationCreatedAt(application.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new ApplicationUpdatedAt(application.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new ApplicationDeletedAt(application.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ApplicationCreatedAt(application.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new ApplicationUpdatedAt(application.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new ApplicationDeletedAt(application.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new ClientMapper({ eagerLoading: false }).mapModelsToAggregates(application.clients) : undefined,
         );
     }

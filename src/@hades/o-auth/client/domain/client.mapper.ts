@@ -83,9 +83,9 @@ export class ClientMapper implements IMapper
             new ClientIsActive(client.isActive),
             new ClientIsMaster(client.isMaster),
             new ClientApplicationIds(client.applicationIds),
-            new ClientCreatedAt(client.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new ClientUpdatedAt(client.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new ClientDeletedAt(client.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ClientCreatedAt(client.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new ClientUpdatedAt(client.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new ClientDeletedAt(client.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapModelsToAggregates(client.accessTokens) : undefined,
             this.options.eagerLoading ? new ApplicationMapper({ eagerLoading: false }).mapModelsToAggregates(client.applications) : undefined,
         );
