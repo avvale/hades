@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/account/infrastructure/seeds/account.seed.ts",
-            "integrity": "sha1:e6bb258693739439914656cda67c75331e52130c"
+            "integrity": "sha1:6a8de475c2f6a44e080b65215999e0e850bc3e11"
         },
         {
             "path": "src/@hades/iam/account/infrastructure/sequelize/sequelize-account.model.ts",
@@ -411,7 +411,7 @@
         },
         {
             "path": "src/apps/iam/account/graphql/account.graphql",
-            "integrity": "sha1:c9f0188db880bc0f864b68d4e505a467b32ef187"
+            "integrity": "sha1:2aef8016aba14b489870d9c7fb5ad8192765644c"
         },
         {
             "path": "src/apps/iam/account/index.ts",
@@ -499,7 +499,7 @@
         },
         {
             "path": "postman/iam.account.postman.json",
-            "integrity": "sha1:532f138535723bf6a607ac17f5fb56fc6448db08"
+            "integrity": "sha1:9cd52284a635840d6b90ed557928ae41de2ac95b"
         },
         {
             "path": "src/@hades/iam/bounded-context/application/create/create-bounded-context.command-handler.ts",
@@ -759,7 +759,7 @@
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/seeds/bounded-context.seed.ts",
-            "integrity": "sha1:dc2dfc91764fa3b40cd8f084026f596bdee50172"
+            "integrity": "sha1:404bd39472295caf45d7a3b36be6ba44ce160f82"
         },
         {
             "path": "src/@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model.ts",
@@ -975,7 +975,7 @@
         },
         {
             "path": "postman/iam.bounded-context.postman.json",
-            "integrity": "sha1:ab943c8f4344d2e1ea8ca3061f2ee8bbdbd83a3e"
+            "integrity": "sha1:495c9fc428fcdf356168b2f21819757438b54950"
         },
         {
             "path": "src/@hades/iam/permission/application/create/create-permission.command-handler.ts",
@@ -1235,7 +1235,7 @@
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/seeds/permission.seed.ts",
-            "integrity": "sha1:31985c2a375f72dfc7eb1af537362e75c3cf95c4"
+            "integrity": "sha1:2e3df3881c6d9006d1c8a9f9db2b9dbf0e115a07"
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/sequelize/sequelize-permission.model.ts",
@@ -1451,7 +1451,7 @@
         },
         {
             "path": "postman/iam.permission.postman.json",
-            "integrity": "sha1:60e6e2a31bf0fca1417c95b093de5f1f575e0cb9"
+            "integrity": "sha1:2d48a1baf7259abf559c35e207c5d8040c0fa653"
         },
         {
             "path": "src/@hades/iam/role/application/create/create-role.command-handler.ts",
@@ -1711,7 +1711,7 @@
         },
         {
             "path": "src/@hades/iam/role/infrastructure/seeds/role.seed.ts",
-            "integrity": "sha1:b0d737d0a62460d633ba4a60840e5085aab97d23"
+            "integrity": "sha1:0bffd7b97dae90342eb67fc5c5905ef63d288c2f"
         },
         {
             "path": "src/@hades/iam/role/infrastructure/sequelize/sequelize-role.model.ts",
@@ -1931,7 +1931,7 @@
         },
         {
             "path": "postman/iam.role.postman.json",
-            "integrity": "sha1:f96c5d2789c674b4c3bc4ff4c44a72631bef5ec7"
+            "integrity": "sha1:457153b46f0a49bfe772771a404b085654064444"
         },
         {
             "path": "src/@hades/iam/tenant/application/create/create-tenant.command-handler.ts",
@@ -2191,7 +2191,7 @@
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/seeds/tenant.seed.ts",
-            "integrity": "sha1:7c15e59230f685de10af3022341551974e4ea980"
+            "integrity": "sha1:ee4d125a9bfaee2fe4c018417581fd3c639292d0"
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model.ts",
@@ -2419,7 +2419,7 @@
         },
         {
             "path": "postman/iam.tenant.postman.json",
-            "integrity": "sha1:fc858e67773c453d296538a411d323c2ca6258a0"
+            "integrity": "sha1:6fedb5504ed1c813d171d40fa1d7df3361e4188c"
         }
     ]
 }
