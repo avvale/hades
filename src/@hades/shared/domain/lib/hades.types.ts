@@ -3,7 +3,6 @@ import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/s
 export interface CQMetadata
 {
     timezone?: string,
-    timezoneColumns?: string[],
 }
 
 export interface DataValueObject

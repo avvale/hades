@@ -16,12 +16,11 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     public readonly criteria: ICriteria;
     public readonly aggregateName: string;
     public readonly mapper: IMapper;
-    public readonly timezoneColumns: string[];
 
     async paginate(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<Aggregate>>
     {
         // manage hook count paginate, merge timezone columns with cQMetadata to overwrite timezone columns, if are defined un cQMetadata
-        const hookCountResponse = this.countStatementPaginateHook(constraint, Object.assign({}, {timezoneColumns: this.timezoneColumns}, cQMetadata));
+        const hookCountResponse = this.countStatementPaginateHook(constraint, cQMetadata);
 
         // get count total records from sql service library
         const total = await this.repository.count(
@@ -30,7 +29,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
         );
 
         // manage hook compose paginate, merge timezone columns with cQMetadata to overwrite timezone columns, if are defined un cQMetadata
-        const hookComposeResponse = this.composeStatementPaginateHook(_.merge(queryStatement, constraint), Object.assign({}, {timezoneColumns: this.timezoneColumns}, cQMetadata));
+        const hookComposeResponse = this.composeStatementPaginateHook(_.merge(queryStatement, constraint), cQMetadata);
 
         // get records
         const { count, rows } = await this.repository.findAndCountAll(
@@ -54,7 +53,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     async find(query?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Aggregate>
     {
         // manage hook, merge timezone columns with cQMetadata to overwrite timezone columns, if are defined un cQMetadata
-        const hookResponse = this.composeStatementFindHook(_.merge(query, constraint), Object.assign({}, {timezoneColumns: this.timezoneColumns}, cQMetadata));
+        const hookResponse = this.composeStatementFindHook(_.merge(query, constraint), cQMetadata);
 
         const model = await this.repository.findOne(
             // pass queryStatement and cQMetadata to criteria, where will use cQMetadata for manage dates or other data
@@ -78,8 +77,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
                 where: {
                     id: id.value
                 }
-            }, constraint),
-            Object.assign({}, {timezoneColumns: this.timezoneColumns}, cQMetadata)
+            }, constraint), cQMetadata
         );
 
         // value is already mapped
@@ -100,7 +98,7 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
     async get(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Aggregate[]>
     {
         // manage hook, merge timezone columns with cQMetadata to overwrite timezone columns, if are defined un cQMetadata
-        const hookResponse = this.composeStatementGetHook(_.merge(queryStatement, constraint), Object.assign({}, {timezoneColumns: this.timezoneColumns}, cQMetadata));
+        const hookResponse = this.composeStatementGetHook(_.merge(queryStatement, constraint), cQMetadata);
 
         const models = await this.repository.findAll(
             // pass queryStatement and cQMetadata to criteria, where will use cQMetadata for manage dates or other data
