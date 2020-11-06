@@ -8,7 +8,7 @@ import { SeederModule } from './seeder.module';
 import { boundedContexts } from '@hades/cci/shared/infrastructure/seeds/bounded-context.seed';
 import { permissions } from '@hades/cci/shared/infrastructure/seeds/permission.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {
@@ -17,7 +17,7 @@ export class Seeder
             const queryBus      = appContext.get(IQueryBus);
 
             await IamUtils.iamCommonSeed(commandBus, queryBus, boundedContexts, permissions);
-        }); 
+        });
     }
 }
 new Seeder().main();
