@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/seeds/access-token.seed.ts",
-            "integrity": "sha1:3c8f34525eccf25bcd869d515e354b48311392ac"
+            "integrity": "sha1:d857deae32123518c2fc0e6b4ba198bbcbb9a695"
         },
         {
             "path": "src/@hades/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model.ts",
@@ -395,7 +395,7 @@
         },
         {
             "path": "src/apps/o-auth/access-token/graphql/access-token.graphql",
-            "integrity": "sha1:83212a685c71c0c80545c30f1985feb824876770"
+            "integrity": "sha1:b878ca6b7ae07f2ef5905d5566869f8717a0c510"
         },
         {
             "path": "src/apps/o-auth/access-token/index.ts",
@@ -483,7 +483,7 @@
         },
         {
             "path": "postman/o-auth.access-token.postman.json",
-            "integrity": "sha1:cec759f5259cf396f28ccfd4015c5b6e9d2b9971"
+            "integrity": "sha1:e88536c68c5eaac7734033b645f7da471d7bf7ac"
         },
         {
             "path": "src/@hades/o-auth/application/application/create/create-application.command-handler.ts",
@@ -743,7 +743,7 @@
         },
         {
             "path": "src/@hades/o-auth/application/infrastructure/seeds/application.seed.ts",
-            "integrity": "sha1:32cb9c562a4f3e63c6f1f9a71dcf41fe772b4811"
+            "integrity": "sha1:a8cd9887cae45d6108a66774684edbf04a22cbe1"
         },
         {
             "path": "src/@hades/o-auth/application/infrastructure/sequelize/sequelize-application.model.ts",
@@ -967,7 +967,7 @@
         },
         {
             "path": "postman/o-auth.application.postman.json",
-            "integrity": "sha1:a63417f869047811addfa949b123e0fc15b99d6d"
+            "integrity": "sha1:6c228099637a3028af1089312b908273e4c2891e"
         }
     ]
 }
