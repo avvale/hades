@@ -10,11 +10,11 @@ export class SequelizeCriteria implements ICriteria
     implements(queryStatement?: QueryStatement, cQMetadata?: CQMetadata): QueryStatement
     {
         // add timezone to query statement
-        if (cQMetadata.timezone)
+        if (cQMetadata?.timezone)
         {
             queryStatement = Utils.deepMapValues(queryStatement, (key, value) =>
             {
-                if (cQMetadata.timezoneColumns.indexOf(key) !== -1)
+                if (Array.isArray(cQMetadata.timezoneColumns) && cQMetadata.timezoneColumns.indexOf(key) !== -1)
                 {
                     if (Array.isArray(value))
                     {
