@@ -9,8 +9,8 @@ export class FlowComponent extends StringValueObject
     {
         super(value, Object.assign({
             name: 'FlowComponent',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 160,
         }, validationRules));
     }

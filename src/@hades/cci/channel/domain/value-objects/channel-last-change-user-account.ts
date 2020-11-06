@@ -9,8 +9,8 @@ export class ChannelLastChangeUserAccount extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ChannelLastChangeUserAccount',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 20,
         }, validationRules));
     }

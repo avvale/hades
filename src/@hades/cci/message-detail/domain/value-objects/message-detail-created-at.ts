@@ -9,8 +9,8 @@ export class MessageDetailCreatedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailCreatedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

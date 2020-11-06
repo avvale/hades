@@ -9,8 +9,8 @@ export class ContactDeletedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'ContactDeletedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

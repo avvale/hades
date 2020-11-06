@@ -9,8 +9,8 @@ export class RoleCreatedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'RoleCreatedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

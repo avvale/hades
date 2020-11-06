@@ -9,8 +9,8 @@ export class FlowTenantCode extends StringValueObject
     {
         super(value, Object.assign({
             name: 'FlowTenantCode',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 50,
         }, validationRules));
     }

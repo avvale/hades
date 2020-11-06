@@ -9,8 +9,8 @@ export class ChannelMessageProtocol extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ChannelMessageProtocol',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 60,
         }, validationRules));
     }

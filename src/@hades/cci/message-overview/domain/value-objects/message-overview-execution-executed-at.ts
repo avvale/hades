@@ -9,8 +9,8 @@ export class MessageOverviewExecutionExecutedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'MessageOverviewExecutionExecutedAt',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
         }, validationRules), data);
     }
 }

@@ -60,7 +60,7 @@ export class CreateModuleService
             name: ModuleName,
             parameterName: ModuleParameterName,
             parameterValue: ModuleParameterValue,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

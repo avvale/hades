@@ -9,8 +9,8 @@ export class ChannelRemoteHost extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ChannelRemoteHost',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 160,
         }, validationRules));
     }

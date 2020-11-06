@@ -9,8 +9,8 @@ export class DataLakeCreatedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'DataLakeCreatedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

@@ -77,10 +77,10 @@ export class SystemMapper implements IMapper
             new SystemEnvironment(system.environment),
             new SystemTechnology(system.technology),
             new SystemIsActive(system.isActive),
-            new SystemCancelledAt(system.cancelledAt, {}, {addTimezone: cQMetadata.timezone}),
-            new SystemCreatedAt(system.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new SystemUpdatedAt(system.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new SystemDeletedAt(system.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new SystemCancelledAt(system.cancelledAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new SystemCreatedAt(system.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new SystemUpdatedAt(system.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new SystemDeletedAt(system.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(system.tenant) : undefined,
         );
     }

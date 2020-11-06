@@ -9,8 +9,8 @@ export class RoleId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'RoleId',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 36,
         }, validationRules), data);
     }

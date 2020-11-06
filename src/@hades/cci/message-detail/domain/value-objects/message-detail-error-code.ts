@@ -9,8 +9,8 @@ export class MessageDetailErrorCode extends StringValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailErrorCode',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 50,
         }, validationRules));
     }

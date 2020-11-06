@@ -9,8 +9,8 @@ export class ModuleName extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ModuleName',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 320,
         }, validationRules));
     }

@@ -9,8 +9,8 @@ export class FlowReceiverComponent extends StringValueObject
     {
         super(value, Object.assign({
             name: 'FlowReceiverComponent',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 160,
         }, validationRules));
     }

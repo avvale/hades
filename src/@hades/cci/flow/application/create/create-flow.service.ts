@@ -68,7 +68,7 @@ export class CreateFlowService
             isComplex: FlowIsComplex,
             fieldGroupId: FlowFieldGroupId,
             data: FlowData,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

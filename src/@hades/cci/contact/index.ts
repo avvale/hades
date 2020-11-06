@@ -32,7 +32,6 @@ import { DeleteContactsService } from './application/delete/delete-contacts.serv
 // models
 export { CciContactModel } from './infrastructure/sequelize/sequelize-contact.model';
 
-
 // repository
 export { IContactRepository } from './domain/contact.repository';
 export { SequelizeContactRepository } from './infrastructure/sequelize/sequelize-contact.repository';

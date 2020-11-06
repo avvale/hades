@@ -9,8 +9,8 @@ export class RoleName extends StringValueObject
     {
         super(value, Object.assign({
             name: 'RoleName',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 255,
         }, validationRules));
     }

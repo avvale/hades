@@ -9,8 +9,8 @@ export class MessageDetailDetail extends StringValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailDetail',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules));
     }
 }

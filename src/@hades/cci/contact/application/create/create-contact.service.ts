@@ -48,7 +48,7 @@ export class CreateContactService
             hasConsentEmail: ContactHasConsentEmail,
             hasConsentMobile: ContactHasConsentMobile,
             isActive: ContactIsActive,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

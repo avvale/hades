@@ -9,8 +9,8 @@ export class FlowFieldGroupId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'FlowFieldGroupId',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             length: 36,
         }, validationRules), data);
     }

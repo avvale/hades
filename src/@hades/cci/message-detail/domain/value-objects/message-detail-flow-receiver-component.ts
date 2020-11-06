@@ -9,8 +9,8 @@ export class MessageDetailFlowReceiverComponent extends StringValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailFlowReceiverComponent',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 160,
         }, validationRules));
     }

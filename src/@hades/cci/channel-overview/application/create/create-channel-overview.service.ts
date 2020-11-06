@@ -50,7 +50,7 @@ export class CreateChannelOverviewService
             stopped: ChannelOverviewStopped,
             unknown: ChannelOverviewUnknown,
             unregistered: ChannelOverviewUnregistered,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

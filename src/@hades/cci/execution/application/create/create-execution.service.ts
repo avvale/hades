@@ -38,7 +38,7 @@ export class CreateExecutionService
             executedAt: ExecutionExecutedAt,
             monitoringStartAt: ExecutionMonitoringStartAt,
             monitoringEndAt: ExecutionMonitoringEndAt,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

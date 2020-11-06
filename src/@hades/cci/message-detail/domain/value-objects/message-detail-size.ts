@@ -9,8 +9,8 @@ export class MessageDetailSize extends IntValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailSize',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 10,
             unsigned: true,
         }, validationRules));

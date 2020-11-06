@@ -9,8 +9,8 @@ export class ChannelRemotePort extends IntValueObject
     {
         super(value, Object.assign({
             name: 'ChannelRemotePort',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 10,
             unsigned: true,
         }, validationRules));

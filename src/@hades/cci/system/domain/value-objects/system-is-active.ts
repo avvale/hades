@@ -9,8 +9,8 @@ export class SystemIsActive extends BooleanValueObject
     {
         super(value, Object.assign({
             name: 'SystemIsActive',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
         }, validationRules));
     }
 }

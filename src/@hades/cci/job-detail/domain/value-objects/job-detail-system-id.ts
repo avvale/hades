@@ -9,8 +9,8 @@ export class JobDetailSystemId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'JobDetailSystemId',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 36,
         }, validationRules), data);
     }

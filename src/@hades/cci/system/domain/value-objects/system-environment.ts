@@ -9,8 +9,8 @@ export class SystemEnvironment extends StringValueObject
     {
         super(value, Object.assign({
             name: 'SystemEnvironment',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             
         }, validationRules));
     }

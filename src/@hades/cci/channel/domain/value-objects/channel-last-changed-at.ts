@@ -9,8 +9,8 @@ export class ChannelLastChangedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'ChannelLastChangedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

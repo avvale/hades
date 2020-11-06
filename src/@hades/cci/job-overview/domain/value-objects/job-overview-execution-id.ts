@@ -9,8 +9,8 @@ export class JobOverviewExecutionId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'JobOverviewExecutionId',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 36,
         }, validationRules), data);
     }

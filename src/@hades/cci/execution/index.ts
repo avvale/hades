@@ -32,7 +32,6 @@ import { DeleteExecutionsService } from './application/delete/delete-executions.
 // models
 export { CciExecutionModel } from './infrastructure/sequelize/sequelize-execution.model';
 
-
 // repository
 export { IExecutionRepository } from './domain/execution.repository';
 export { SequelizeExecutionRepository } from './infrastructure/sequelize/sequelize-execution.repository';

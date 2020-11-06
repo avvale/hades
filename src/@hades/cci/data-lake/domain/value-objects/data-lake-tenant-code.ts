@@ -9,8 +9,8 @@ export class DataLakeTenantCode extends StringValueObject
     {
         super(value, Object.assign({
             name: 'DataLakeTenantCode',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 50,
         }, validationRules));
     }

@@ -9,8 +9,8 @@ export class ModuleTenantId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'ModuleTenantId',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 36,
         }, validationRules), data);
     }

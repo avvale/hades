@@ -9,8 +9,8 @@ export class ModuleCreatedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'ModuleCreatedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

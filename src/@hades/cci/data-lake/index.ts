@@ -32,7 +32,6 @@ import { DeleteDataLakesService } from './application/delete/delete-data-lakes.s
 // models
 export { CciDataLakeModel } from './infrastructure/sequelize/sequelize-data-lake.model';
 
-
 // repository
 export { IDataLakeRepository } from './domain/data-lake.repository';
 export { SequelizeDataLakeRepository } from './infrastructure/sequelize/sequelize-data-lake.repository';

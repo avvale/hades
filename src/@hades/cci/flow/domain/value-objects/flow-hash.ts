@@ -9,8 +9,8 @@ export class FlowHash extends StringValueObject
     {
         super(value, Object.assign({
             name: 'FlowHash',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 40,
 
         }, validationRules));

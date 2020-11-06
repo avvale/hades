@@ -9,8 +9,8 @@ export class JobOverviewTenantCode extends StringValueObject
     {
         super(value, Object.assign({
             name: 'JobOverviewTenantCode',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 50,
         }, validationRules));
     }

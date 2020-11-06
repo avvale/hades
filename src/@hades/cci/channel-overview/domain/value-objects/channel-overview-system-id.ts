@@ -9,8 +9,8 @@ export class ChannelOverviewSystemId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'ChannelOverviewSystemId',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 36,
         }, validationRules), data);
     }

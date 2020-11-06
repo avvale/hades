@@ -9,8 +9,8 @@ export class ChannelResponsibleUserAccountName extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ChannelResponsibleUserAccountName',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 20,
         }, validationRules));
     }

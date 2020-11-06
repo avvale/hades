@@ -9,8 +9,8 @@ export class ContactArea extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ContactArea',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 255,
         }, validationRules));
     }

@@ -9,8 +9,8 @@ export class MessageOverviewSystemId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'MessageOverviewSystemId',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 36,
         }, validationRules), data);
     }

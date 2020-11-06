@@ -9,8 +9,8 @@ export class MessageOverviewNumberDays extends IntValueObject
     {
         super(value, Object.assign({
             name: 'MessageOverviewNumberDays',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 10,
             unsigned: true,
         }, validationRules));

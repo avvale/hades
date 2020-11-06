@@ -9,8 +9,8 @@ export class FlowLastChangeUserAccount extends StringValueObject
     {
         super(value, Object.assign({
             name: 'FlowLastChangeUserAccount',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 20,
         }, validationRules));
     }

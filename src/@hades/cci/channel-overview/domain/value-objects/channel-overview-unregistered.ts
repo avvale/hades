@@ -9,8 +9,8 @@ export class ChannelOverviewUnregistered extends IntValueObject
     {
         super(value, Object.assign({
             name: 'ChannelOverviewUnregistered',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 10,
             unsigned: true,
         }, validationRules));

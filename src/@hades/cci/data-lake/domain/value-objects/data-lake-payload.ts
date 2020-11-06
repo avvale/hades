@@ -9,8 +9,8 @@ export class DataLakePayload extends JsonValueObject
     {
         super(value, Object.assign({
             name: 'DataLakePayload',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
         }, validationRules));
     }
 }

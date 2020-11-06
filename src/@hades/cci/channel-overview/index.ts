@@ -34,7 +34,6 @@ import { GetDashboardChannelsOverviewQueryHandler } from './application/get/get-
 // models
 export { CciChannelOverviewModel } from './infrastructure/sequelize/sequelize-channel-overview.model';
 
-
 // repository
 export { IChannelOverviewRepository } from './domain/channel-overview.repository';
 export { SequelizeChannelOverviewRepository } from './infrastructure/sequelize/sequelize-channel-overview.repository';

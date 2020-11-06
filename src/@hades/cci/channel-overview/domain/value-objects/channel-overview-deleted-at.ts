@@ -9,8 +9,8 @@ export class ChannelOverviewDeletedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'ChannelOverviewDeletedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

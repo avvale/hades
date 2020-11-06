@@ -68,9 +68,9 @@ export class RoleMapper implements IMapper
             new RoleTenantId(role.tenantId),
             new RoleTenantCode(role.tenantCode),
             new RoleName(role.name),
-            new RoleCreatedAt(role.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new RoleUpdatedAt(role.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new RoleDeletedAt(role.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new RoleCreatedAt(role.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new RoleUpdatedAt(role.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new RoleDeletedAt(role.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(role.tenant) : undefined,
         );
     }

@@ -9,8 +9,8 @@ export class JobOverviewExecutionMonitoringStartAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'JobOverviewExecutionMonitoringStartAt',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
         }, validationRules), data);
     }
 }

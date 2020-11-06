@@ -9,8 +9,8 @@ export class JobDetailDeletedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'JobDetailDeletedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

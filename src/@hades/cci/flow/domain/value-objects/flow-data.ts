@@ -9,8 +9,8 @@ export class FlowData extends JsonValueObject
     {
         super(value, Object.assign({
             name: 'FlowData',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules));
     }
 }

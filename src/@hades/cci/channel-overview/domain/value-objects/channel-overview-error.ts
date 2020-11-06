@@ -9,8 +9,8 @@ export class ChannelOverviewError extends IntValueObject
     {
         super(value, Object.assign({
             name: 'ChannelOverviewError',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 10,
             unsigned: true,
         }, validationRules));

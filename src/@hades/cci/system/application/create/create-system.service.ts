@@ -36,7 +36,7 @@ export class CreateSystemService
             technology: SystemTechnology,
             isActive: SystemIsActive,
             cancelledAt: SystemCancelledAt,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern
