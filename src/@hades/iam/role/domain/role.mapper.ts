@@ -71,9 +71,9 @@ export class RoleMapper implements IMapper
             new RoleIsMaster(role.isMaster),
             new RolePermissionIds(role.permissionIds),
             new RoleAccountIds(role.accountIds),
-            new RoleCreatedAt(role.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new RoleUpdatedAt(role.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new RoleDeletedAt(role.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new RoleCreatedAt(role.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new RoleUpdatedAt(role.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new RoleDeletedAt(role.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapModelsToAggregates(role.permissions) : undefined,
             this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapModelsToAggregates(role.accounts) : undefined,
         );

@@ -70,9 +70,9 @@ export class BoundedContextMapper implements IMapper
             new BoundedContextRoot(boundedContext.root),
             new BoundedContextSort(boundedContext.sort),
             new BoundedContextIsActive(boundedContext.isActive),
-            new BoundedContextCreatedAt(boundedContext.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new BoundedContextUpdatedAt(boundedContext.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new BoundedContextDeletedAt(boundedContext.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new BoundedContextCreatedAt(boundedContext.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new BoundedContextUpdatedAt(boundedContext.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new BoundedContextDeletedAt(boundedContext.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapModelsToAggregates(boundedContext.permissions) : undefined,
         );
     }

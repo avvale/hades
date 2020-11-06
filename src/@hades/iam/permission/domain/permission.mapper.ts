@@ -69,9 +69,9 @@ export class PermissionMapper implements IMapper
             new PermissionName(permission.name),
             new PermissionBoundedContextId(permission.boundedContextId),
             new PermissionRoleIds(permission.roleIds),
-            new PermissionCreatedAt(permission.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new PermissionUpdatedAt(permission.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new PermissionDeletedAt(permission.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new PermissionCreatedAt(permission.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new PermissionUpdatedAt(permission.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new PermissionDeletedAt(permission.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new BoundedContextMapper({ eagerLoading: false }).mapModelToAggregate(permission.boundedContext) : undefined,
             this.options.eagerLoading ? new RoleMapper({ eagerLoading: false }).mapModelsToAggregates(permission.roles) : undefined,
         );
