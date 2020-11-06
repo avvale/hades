@@ -9,6 +9,7 @@ import { CciJobOverviewModel } from './sequelize-job-overview.model';
 
 // custom
 import { QueryTypes } from 'sequelize';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -26,7 +27,7 @@ export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOv
         super();
     }
 
-    async getDashboardData(tenantIds: string[], systemIds: string[]): Promise<CciJobOverview[]>
+    async getDashboardData(tenantIds: string[], systemIds: string[], cQMetadata?: CQMetadata): Promise<CciJobOverview[]>
     {
         const queryRaw = `
             SELECT
@@ -78,6 +79,6 @@ export class SequelizeJobOverviewRepository extends SequelizeRepository<CciJobOv
         );
 
         // map values to create value objects
-        return <CciJobOverview[]>this.mapper.mapModelsToAggregates(models);
+        return <CciJobOverview[]>this.mapper.mapModelsToAggregates(models, cQMetadata);
     }
 }
