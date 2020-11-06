@@ -11,6 +11,7 @@ export class UserRememberToken extends StringValueObject
             name: 'UserRememberToken',
             nullable: true,
             undefinable: true,
-            maxLength: 255,        }, validationRules));
+            maxLength: 255,
+        }, validationRules));
     }
 }

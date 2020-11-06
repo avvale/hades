@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     UserId,
     UserAccountId,
@@ -15,8 +14,7 @@ import {
     UserData,
     UserCreatedAt,
     UserUpdatedAt,
-    UserDeletedAt
-    
+    UserDeletedAt,
 } from './../../domain/value-objects';
 import { IUserRepository } from './../../domain/user.repository';
 import { IamUser } from './../../domain/user.aggregate';
@@ -27,7 +25,7 @@ export class CreateUsersService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IUserRepository
+        private readonly repository: IUserRepository,
     ) {}
 
     public async main(
@@ -43,7 +41,6 @@ export class CreateUsersService
             password: UserPassword,
             rememberToken: UserRememberToken,
             data: UserData,
-            
         } []
     ): Promise<void>
     {
@@ -60,8 +57,8 @@ export class CreateUsersService
             user.password,
             user.rememberToken,
             user.data,
-            new UserCreatedAt(Utils.nowTimestamp()),
-            new UserUpdatedAt(Utils.nowTimestamp()),
+            new UserCreatedAt({currentTimestamp: true}),
+            new UserUpdatedAt({currentTimestamp: true}),
             null
         ));
 

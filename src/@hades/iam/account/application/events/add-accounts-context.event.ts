@@ -38,7 +38,6 @@ export class AddAccountsContextEvent extends AggregateRoot
                         account.createdAt?.value,
                         account.updatedAt?.value,
                         account.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -65,7 +64,6 @@ export class AddAccountsContextEvent extends AggregateRoot
                         account.createdAt?.value,
                         account.updatedAt?.value,
                         account.deletedAt?.value,
-                        
                     )
                 )
             )

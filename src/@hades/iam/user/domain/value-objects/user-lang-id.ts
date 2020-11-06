@@ -11,7 +11,7 @@ export class UserLangId extends UuidValueObject
             name: 'UserLangId',
             nullable: true,
             undefinable: true,
-            length: 36
+            length: 36,
         }, validationRules), data);
     }
 }

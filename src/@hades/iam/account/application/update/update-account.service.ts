@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import {
     AccountId,
     AccountType,
@@ -29,40 +30,43 @@ export class UpdateAccountService
     ) {}
 
     public async main(
-        id: AccountId,
-        type?: AccountType,
-        email?: AccountEmail,
-        isActive?: AccountIsActive,
-        clientId?: AccountClientId,
-        dApplicationCodes?: AccountDApplicationCodes,
-        dPermissions?: AccountDPermissions,
-        dTenants?: AccountDTenants,
-        data?: AccountData,
-        roleIds?: AccountRoleIds,
-        tenantIds?: AccountTenantIds,
-        
+        payload: {
+            id: AccountId,
+            type?: AccountType,
+            email?: AccountEmail,
+            isActive?: AccountIsActive,
+            clientId?: AccountClientId,
+            dApplicationCodes?: AccountDApplicationCodes,
+            dPermissions?: AccountDPermissions,
+            dTenants?: AccountDTenants,
+            data?: AccountData,
+            roleIds?: AccountRoleIds,
+            tenantIds?: AccountTenantIds,
+        },
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const account = IamAccount.register(
-            id,
-            type,
-            email,
-            isActive,
-            clientId,
-            dApplicationCodes,
-            dPermissions,
-            dTenants,
-            data,
-            roleIds,
-            tenantIds,
+            payload.id,
+            payload.type,
+            payload.email,
+            payload.isActive,
+            payload.clientId,
+            payload.dApplicationCodes,
+            payload.dPermissions,
+            payload.dTenants,
+            payload.data,
+            payload.roleIds,
+            payload.tenantIds,
             null,
-            new AccountUpdatedAt(Utils.nowTimestamp()),
+            new AccountUpdatedAt({currentTimestamp: true}),
             null
         );
 
         // update
-        await this.repository.update(account);
+        await this.repository.update(account, constraint, cQMetadata);
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const accountRegister = this.publisher.mergeObjectContext(

@@ -2,6 +2,7 @@ import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { RoleDto } from './../dto/role.dto';
 import { CreateRoleDto } from './../dto/create-role.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -26,8 +27,11 @@ export class IamCreateRolesController
     @ApiOperation({ summary: 'Create roles in batch' })
     @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [RoleDto] })
     @ApiBody({ type: [CreateRoleDto] })
-    async main(@Body() payload: CreateRoleDto[])
+    async main(
+        @Body() payload: CreateRoleDto[],
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new CreateRolesCommand(payload));
+        await this.commandBus.dispatch(new CreateRolesCommand(payload, { timezone }));
     }
 }

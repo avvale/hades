@@ -13,16 +13,12 @@ import {
     UserData,
     UserCreatedAt,
     UserUpdatedAt,
-    UserDeletedAt
-    
+    UserDeletedAt,
 } from './value-objects';
 import { CreatedUserEvent } from './../application/events/created-user.event';
 import { UpdatedUserEvent } from './../application/events/updated-user.event';
 import { DeletedUserEvent } from './../application/events/deleted-user.event';
 import { IamAccount } from '@hades/iam/account/domain/account.aggregate';
-
-
-
 
 export class IamUser extends AggregateRoot
 {
@@ -40,18 +36,30 @@ export class IamUser extends AggregateRoot
     createdAt: UserCreatedAt;
     updatedAt: UserUpdatedAt;
     deletedAt: UserDeletedAt;
-    
+
     // eager relationship
     account: IamAccount;
-    
-    
-    
-    
-    
-    constructor(id?: UserId, accountId?: UserAccountId, name?: UserName, surname?: UserSurname, avatar?: UserAvatar, mobile?: UserMobile, langId?: UserLangId, username?: UserUsername, password?: UserPassword, rememberToken?: UserRememberToken, data?: UserData, createdAt?: UserCreatedAt, updatedAt?: UserUpdatedAt, deletedAt?: UserDeletedAt, account?: IamAccount, )
+
+    constructor(
+        id: UserId,
+        accountId: UserAccountId,
+        name: UserName,
+        surname: UserSurname,
+        avatar: UserAvatar,
+        mobile: UserMobile,
+        langId: UserLangId,
+        username: UserUsername,
+        password: UserPassword,
+        rememberToken: UserRememberToken,
+        data: UserData,
+        createdAt: UserCreatedAt,
+        updatedAt: UserUpdatedAt,
+        deletedAt: UserDeletedAt,
+        account?: IamAccount,
+    )
     {
         super();
-        
+
         this.id = id;
         this.accountId = accountId;
         this.name = name;
@@ -66,19 +74,46 @@ export class IamUser extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
         this.account = account;
-        
-        
-        
-        
-        
     }
 
-    static register (id: UserId, accountId: UserAccountId, name: UserName, surname: UserSurname, avatar: UserAvatar, mobile: UserMobile, langId: UserLangId, username: UserUsername, password: UserPassword, rememberToken: UserRememberToken, data: UserData, createdAt: UserCreatedAt, updatedAt: UserUpdatedAt, deletedAt: UserDeletedAt, account?: IamAccount, ): IamUser
+    static register (
+        id: UserId,
+        accountId: UserAccountId,
+        name: UserName,
+        surname: UserSurname,
+        avatar: UserAvatar,
+        mobile: UserMobile,
+        langId: UserLangId,
+        username: UserUsername,
+        password: UserPassword,
+        rememberToken: UserRememberToken,
+        data: UserData,
+        createdAt: UserCreatedAt,
+        updatedAt: UserUpdatedAt,
+        deletedAt: UserDeletedAt,
+        account?: IamAccount,
+    ): IamUser
     {
-        return new IamUser(id, accountId, name, surname, avatar, mobile, langId, username, password, rememberToken, data, createdAt, updatedAt, deletedAt, account, );
+        return new IamUser(
+            id,
+            accountId,
+            name,
+            surname,
+            avatar,
+            mobile,
+            langId,
+            username,
+            password,
+            rememberToken,
+            data,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            account,
+        );
     }
 
     created(user: IamUser): void
@@ -99,7 +134,6 @@ export class IamUser extends AggregateRoot
                 user.createdAt?.value,
                 user.updatedAt?.value,
                 user.deletedAt?.value,
-                
             )
         );
     }
@@ -122,7 +156,6 @@ export class IamUser extends AggregateRoot
                 user.createdAt?.value,
                 user.updatedAt?.value,
                 user.deletedAt?.value,
-                
             )
         );
     }
@@ -145,7 +178,6 @@ export class IamUser extends AggregateRoot
                 user.createdAt?.value,
                 user.updatedAt?.value,
                 user.deletedAt?.value,
-                
             )
         );
     }
@@ -167,14 +199,9 @@ export class IamUser extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
             account: this.account?.toDTO(),
-            
-            
-            
-            
-            
         }
     }
 }

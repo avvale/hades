@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     UserId,
     UserAccountId,
@@ -15,8 +14,7 @@ import {
     UserData,
     UserCreatedAt,
     UserUpdatedAt,
-    UserDeletedAt
-    
+    UserDeletedAt,
 } from './../../domain/value-objects';
 import { IUserRepository } from './../../domain/user.repository';
 import { IamUser } from './../../domain/user.aggregate';
@@ -26,39 +24,40 @@ export class CreateUserService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IUserRepository
+        private readonly repository: IUserRepository,
     ) {}
 
     public async main(
-        id: UserId,
-        accountId: UserAccountId,
-        name: UserName,
-        surname: UserSurname,
-        avatar: UserAvatar,
-        mobile: UserMobile,
-        langId: UserLangId,
-        username: UserUsername,
-        password: UserPassword,
-        rememberToken: UserRememberToken,
-        data: UserData,
-        
+        payload: {
+            id: UserId,
+            accountId: UserAccountId,
+            name: UserName,
+            surname: UserSurname,
+            avatar: UserAvatar,
+            mobile: UserMobile,
+            langId: UserLangId,
+            username: UserUsername,
+            password: UserPassword,
+            rememberToken: UserRememberToken,
+            data: UserData,
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const user = IamUser.register(
-            id,
-            accountId,
-            name,
-            surname,
-            avatar,
-            mobile,
-            langId,
-            username,
-            password,
-            rememberToken,
-            data,
-            new UserCreatedAt(Utils.nowTimestamp()),
-            new UserUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.accountId,
+            payload.name,
+            payload.surname,
+            payload.avatar,
+            payload.mobile,
+            payload.langId,
+            payload.username,
+            payload.password,
+            payload.rememberToken,
+            payload.data,
+            new UserCreatedAt({currentTimestamp: true}),
+            new UserUpdatedAt({currentTimestamp: true}),
             null
         );
 

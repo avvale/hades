@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IRoleRepository } from '@hades/iam/role/domain/role.repository';
-import { 
+import {
     RoleId,
     RoleName,
     RoleIsMaster,
@@ -10,8 +10,7 @@ import {
     RoleAccountIds,
     RoleCreatedAt,
     RoleUpdatedAt,
-    RoleDeletedAt
-    
+    RoleDeletedAt,
 } from '@hades/iam/role/domain/value-objects';
 import { IamRole } from './../../domain/role.aggregate';
 import { roles } from './../seeds/role.seed';
@@ -23,14 +22,14 @@ export class MockRoleRepository extends MockRepository<IamRole> implements IRole
     public readonly aggregateName: string = 'IamRole';
     public collectionSource: IamRole[];
     public deletedAtInstance: RoleDeletedAt = new RoleDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -45,7 +44,7 @@ export class MockRoleRepository extends MockRepository<IamRole> implements IRole
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(IamRole.register(
                     new RoleId(itemCollection.id),
                     new RoleName(itemCollection.name),
@@ -55,7 +54,6 @@ export class MockRoleRepository extends MockRepository<IamRole> implements IRole
                     new RoleCreatedAt(itemCollection.createdAt),
                     new RoleUpdatedAt(itemCollection.updatedAt),
                     new RoleDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }

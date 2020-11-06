@@ -38,7 +38,7 @@ export class IamCreateTenantResolver
             where: {
                 id: payload.accountIds
             }
-        }));
+        }, undefined, { timezone }));
 
         for (const account of accounts)
         {
@@ -46,32 +46,21 @@ export class IamCreateTenantResolver
 
             // add new tenan and update account
             currentTenants.push(payload.id);
-            await this.commandBus.dispatch(new UpdateAccountCommand(
-                account.id,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                currentTenants
-            ));
+            await this.commandBus.dispatch(new UpdateAccountCommand({
+                id: account.id,
+                type: undefined,
+                email: undefined,
+                isActive: undefined,
+                clientId: undefined,
+                dApplicationCodes: undefined,
+                dPermissions: undefined,
+                data: undefined,
+                roleIds: undefined,
+                tenantIds: currentTenants
+            }, undefined, { timezone }));
         }
 
-        await this.commandBus.dispatch(new CreateTenantCommand(
-            {
-                id: payload.id,
-                name: payload.name,
-                code: payload.code,
-                logo: payload.logo,
-                isActive: payload.isActive,
-                data: payload.data,
-                accountIds: payload.accountIds,
-            },
-            { timezone }
-        ));
+        await this.commandBus.dispatch(new CreateTenantCommand(payload, { timezone }));
 
         return await this.queryBus.ask(new FindTenantByIdQuery(payload.id, {}, { timezone }));
     }

@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -24,11 +25,15 @@ export class IamDeleteAccountByIdResolver
     ) {}
 
     @Mutation('iamDeleteAccountById')
-    async main(@Args('id') id: string, @Args('constraint') constraint?: QueryStatement)
+    async main(
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const account = await this.queryBus.ask(new FindAccountByIdQuery(id, constraint));
+        const account = await this.queryBus.ask(new FindAccountByIdQuery(id, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteAccountByIdCommand(id, constraint));
+        await this.commandBus.dispatch(new DeleteAccountByIdCommand(id, constraint, { timezone }));
 
         return account;
     }

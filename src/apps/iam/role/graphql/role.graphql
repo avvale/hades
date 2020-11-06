@@ -1,5 +1,4 @@
 
-
 type IamRole
 {
     id: ID!
@@ -19,7 +18,6 @@ input IamCreateRoleInput
     isMaster: GraphQLBoolean!
     permissionIds: [ID]
     accountIds: [ID]
-    
 }
 
 input IamUpdateRoleInput
@@ -29,7 +27,6 @@ input IamUpdateRoleInput
     isMaster: GraphQLBoolean
     permissionIds: [ID]
     accountIds: [ID]
-    
 }
 
 type Query

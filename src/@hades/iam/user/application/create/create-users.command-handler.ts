@@ -12,22 +12,24 @@ import {
     UserUsername,
     UserPassword,
     UserRememberToken,
-    UserData
-    
+    UserData,
+    UserCreatedAt,
+    UserUpdatedAt,
+    UserDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateUsersCommand)
 export class CreateUsersCommandHandler implements ICommandHandler<CreateUsersCommand>
 {
     constructor(
-        private readonly createUsersService: CreateUsersService
+        private readonly createUsersService: CreateUsersService,
     ) {}
 
     async execute(command: CreateUsersCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createUsersService.main(
-            command.users
+            command.payload
                 .map(user => {
                     return {
                         id: new UserId(user.id),
@@ -41,7 +43,6 @@ export class CreateUsersCommandHandler implements ICommandHandler<CreateUsersCom
                         password: new UserPassword(user.password, {}, { haveToEncrypt: true }),
                         rememberToken: new UserRememberToken(user.rememberToken),
                         data: new UserData(user.data),
-                        
                     }
                 })
         );

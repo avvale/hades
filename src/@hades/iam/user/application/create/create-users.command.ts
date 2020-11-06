@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateUsersCommand
 {
     constructor(
-        public readonly users: {
+        public readonly payload: {
             id: string,
             accountId: string,
             name: string,
@@ -13,7 +15,7 @@ export class CreateUsersCommand
             password: string,
             rememberToken?: string,
             data?: any,
-            
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

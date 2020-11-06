@@ -29,17 +29,19 @@ export class CreateAccountCommandHandler implements ICommandHandler<CreateAccoun
     {
         // call to use case and implements ValueObjects
         await this.createAccountService.main(
-            new AccountId(command.id),
-            new AccountType(command.type),
-            new AccountEmail(command.email),
-            new AccountIsActive(command.isActive),
-            new AccountClientId(command.clientId),
-            new AccountDApplicationCodes(command.dApplicationCodes),
-            new AccountDPermissions(command.dPermissions, {default: {}}),
-            new AccountDTenants(command.tenantIds, {default: []}),
-            new AccountData(command.data),
-            new AccountRoleIds(command.roleIds),
-            new AccountTenantIds(command.tenantIds),
+            {
+                id: new AccountId(command.payload.id),
+                type: new AccountType(command.payload.type),
+                email: new AccountEmail(command.payload.email),
+                isActive: new AccountIsActive(command.payload.isActive),
+                clientId: new AccountClientId(command.payload.clientId),
+                dApplicationCodes: new AccountDApplicationCodes(command.payload.dApplicationCodes),
+                dPermissions: new AccountDPermissions(command.payload.dPermissions, {default: {}}),
+                dTenants: new AccountDTenants(command.payload.tenantIds, {default: []}),
+                data: new AccountData(command.payload.data),
+                roleIds: new AccountRoleIds(command.payload.roleIds),
+                tenantIds: new AccountTenantIds(command.payload.tenantIds),
+            }
         );
     }
 }

@@ -1,8 +1,9 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
+import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
 import { DataTypes } from 'sequelize';
 import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 
-@Table({ modelName: 'iam_user', freezeTableName: true })
+@Table({ modelName: 'iam_user', freezeTableName: true, timestamps: false })
 export class IamUserModel extends Model<IamUserModel>
 {
     @Column({
@@ -59,6 +60,7 @@ export class IamUserModel extends Model<IamUserModel>
     })
     langId: string;
 
+    @Unique
     @Column({
         field: 'username',
         allowNull: false,

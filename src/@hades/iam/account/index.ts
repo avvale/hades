@@ -32,7 +32,6 @@ import { DeleteAccountsService } from './application/delete/delete-accounts.serv
 // models
 export { IamAccountModel } from './infrastructure/sequelize/sequelize-account.model';
 
-
 // repository
 export { IAccountRepository } from './domain/account.repository';
 export { SequelizeAccountRepository } from './infrastructure/sequelize/sequelize-account.repository';

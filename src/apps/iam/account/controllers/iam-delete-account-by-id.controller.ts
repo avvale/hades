@@ -1,6 +1,7 @@
 import { Controller, Param, Delete, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { AccountDto } from './../dto/account.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -28,11 +29,15 @@ export class IamDeleteAccountByIdController
     @Delete(':id')
     @ApiOperation({ summary: 'Delete account by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: AccountDto })
-    async main(@Param('id') id: string, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Param('id') id: string,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const account = await this.queryBus.ask(new FindAccountByIdQuery(id, constraint));
+        const account = await this.queryBus.ask(new FindAccountByIdQuery(id, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteAccountByIdCommand(id, constraint));
+        await this.commandBus.dispatch(new DeleteAccountByIdCommand(id, constraint, { timezone }));
 
         return account;
     }

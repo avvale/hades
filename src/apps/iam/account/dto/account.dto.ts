@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { RoleDto } from './../../../iam/role/dto/role.dto';
 import { TenantDto } from './../../../iam/tenant/dto/tenant.dto';
+import { UserDto } from './../../../iam/user/dto/user.dto';
 
 export class AccountDto
 {
@@ -66,14 +67,12 @@ export class AccountDto
     @ApiProperty({
         type        : [RoleDto],
         description : 'roleIds [input here api field description]',
-        example     : '',
     })
     roles: RoleDto[];
 
     @ApiProperty({
         type        : [TenantDto],
         description : 'tenantIds [input here api field description]',
-        example     : '',
     })
     tenants: TenantDto[];
 

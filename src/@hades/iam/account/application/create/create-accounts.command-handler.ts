@@ -29,7 +29,7 @@ export class CreateAccountsCommandHandler implements ICommandHandler<CreateAccou
     {
         // call to use case and implements ValueObjects
         await this.createAccountsService.main(
-            command.accounts
+            command.payload
                 .map(account => {
                     return {
                         id: new AccountId(account.id),

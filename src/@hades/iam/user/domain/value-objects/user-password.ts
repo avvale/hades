@@ -11,7 +11,7 @@ export class UserPassword extends PasswordValueObject
             name: 'UserPassword',
             nullable: false,
             undefinable: false,
-            maxLength: 255
+            maxLength: 255,
         }, validationRules), data);
     }
 }

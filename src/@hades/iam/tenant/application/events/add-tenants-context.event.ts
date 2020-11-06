@@ -34,7 +34,6 @@ export class AddTenantsContextEvent extends AggregateRoot
                         tenant.createdAt?.value,
                         tenant.updatedAt?.value,
                         tenant.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -57,7 +56,6 @@ export class AddTenantsContextEvent extends AggregateRoot
                         tenant.createdAt?.value,
                         tenant.updatedAt?.value,
                         tenant.deletedAt?.value,
-                        
                     )
                 )
             )

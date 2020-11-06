@@ -7,7 +7,7 @@ import { IamRolesAccountsModel } from '@hades/iam/role/infrastructure/sequelize/
 import { IamTenantModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { IamTenantsAccountsModel } from '@hades/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model';
 
-@Table({ modelName: 'iam_account', freezeTableName: true })
+@Table({ modelName: 'iam_account', freezeTableName: true, timestamps: false })
 export class IamAccountModel extends Model<IamAccountModel>
 {
     @Column({

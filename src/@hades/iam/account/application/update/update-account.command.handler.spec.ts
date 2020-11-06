@@ -6,12 +6,12 @@ import { accounts } from '@hades/iam/account/infrastructure/seeds/account.seed';
 import { UpdateAccountCommand } from './update-account.command';
 import { UpdateAccountService } from './update-account.service';
 
-describe('UpdateAccountCommandHandler', () => 
+describe('UpdateAccountCommandHandler', () =>
 {
     let commandHandler: UpdateAccountCommandHandler;
     let service: UpdateAccountService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateAccountCommandHandler', () =>
         service         = module.get<UpdateAccountService>(UpdateAccountService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateAccountCommandHandler should be defined', () => 
+        test('UpdateAccountCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an account created', async () => 
+        test('should return an account created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateAccountCommand(
@@ -51,7 +51,6 @@ describe('UpdateAccountCommandHandler', () =>
                     accounts[0].data,
                     accounts[0].roleIds,
                     accounts[0].tenantIds,
-                    
                 )
             )).toBe(undefined);
         });

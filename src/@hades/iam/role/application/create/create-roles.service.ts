@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     RoleId,
     RoleName,
@@ -9,8 +8,7 @@ import {
     RoleAccountIds,
     RoleCreatedAt,
     RoleUpdatedAt,
-    RoleDeletedAt
-    
+    RoleDeletedAt,
 } from './../../domain/value-objects';
 import { IRoleRepository } from './../../domain/role.repository';
 import { IamRole } from './../../domain/role.aggregate';
@@ -21,7 +19,7 @@ export class CreateRolesService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IRoleRepository
+        private readonly repository: IRoleRepository,
     ) {}
 
     public async main(
@@ -31,7 +29,6 @@ export class CreateRolesService
             isMaster: RoleIsMaster,
             permissionIds: RolePermissionIds,
             accountIds: RoleAccountIds,
-            
         } []
     ): Promise<void>
     {
@@ -42,8 +39,8 @@ export class CreateRolesService
             role.isMaster,
             role.permissionIds,
             role.accountIds,
-            new RoleCreatedAt(Utils.nowTimestamp()),
-            new RoleUpdatedAt(Utils.nowTimestamp()),
+            new RoleCreatedAt({currentTimestamp: true}),
+            new RoleUpdatedAt({currentTimestamp: true}),
             null
         ));
 

@@ -16,7 +16,9 @@ export class DeleteAccountByIdCommandHandler implements ICommandHandler<DeleteAc
     {
         // call to use case and implements ValueObjects
         await this.deleteAccountByIdService.main(
-            new AccountId(command.id)
+            new AccountId(command.id),
+            command.constraint,
+            command.cQMetadata
         );
     }
 }

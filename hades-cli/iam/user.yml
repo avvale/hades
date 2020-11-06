@@ -41,9 +41,9 @@ aggregateProperties:
     nullable: true
   - name: username
     type: varchar
-    index: unique
     maxLength: 120
     nullable: false
+    index: unique
   - name: password
     type: password
     maxLength: 255

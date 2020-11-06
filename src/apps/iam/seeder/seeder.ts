@@ -18,7 +18,7 @@ import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 import { FindAccountByIdQuery } from '@hades/iam/account/application/find/find-account-by-id.query';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {
@@ -28,7 +28,7 @@ export class Seeder
 
             const administratorAccount = await queryBus.ask(new FindAccountByIdQuery(IamUtils.administratorAccountId));
 
-            if (administratorAccount) 
+            if (administratorAccount)
             {
                 await IamUtils.iamCommonSeed(commandBus, queryBus, boundedContexts, permissions);
             }
@@ -36,9 +36,9 @@ export class Seeder
             {
                 await commandBus.dispatch(new CreateAccountsCommand(accounts));
                 await commandBus.dispatch(new CreateUsersCommand(users));
-                
+
                 await commandBus.dispatch(new CreateRolesCommand(roles));
-                
+
                 // set all roles to administration account
                 const rolesAccounts = roles.map(role => {
                     return {
@@ -47,7 +47,7 @@ export class Seeder
                     }
                 });
                 await commandBus.dispatch(new CreateRolesAccountsCommand(rolesAccounts));
-    
+
                 await IamUtils.iamCommonSeed(commandBus, queryBus, boundedContexts, permissions);
             }
         });

@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
 import { Utils } from '@hades/shared/domain/lib/utils';
 import { IUserRepository } from '@hades/iam/user/domain/user.repository';
-import { 
+import {
     UserId,
     UserAccountId,
     UserName,
@@ -16,8 +16,7 @@ import {
     UserData,
     UserCreatedAt,
     UserUpdatedAt,
-    UserDeletedAt
-    
+    UserDeletedAt,
 } from '@hades/iam/user/domain/value-objects';
 import { IamUser } from './../../domain/user.aggregate';
 import { users } from './../seeds/user.seed';
@@ -29,14 +28,14 @@ export class MockUserRepository extends MockRepository<IamUser> implements IUser
     public readonly aggregateName: string = 'IamUser';
     public collectionSource: IamUser[];
     public deletedAtInstance: UserDeletedAt = new UserDeletedAt(null);
-    
-    constructor() 
+
+    constructor()
     {
         super();
         this.createSourceMockData();
     }
 
-    public reset() 
+    public reset()
     {
         this.createSourceMockData();
     }
@@ -51,7 +50,7 @@ export class MockUserRepository extends MockRepository<IamUser> implements IUser
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
-            
+
             this.collectionSource.push(IamUser.register(
                     new UserId(itemCollection.id),
                     new UserAccountId(itemCollection.accountId),
@@ -67,7 +66,6 @@ export class MockUserRepository extends MockRepository<IamUser> implements IUser
                     new UserCreatedAt(itemCollection.createdAt),
                     new UserUpdatedAt(itemCollection.updatedAt),
                     new UserDeletedAt(itemCollection.deletedAt),
-                     
                 ));
         }
     }

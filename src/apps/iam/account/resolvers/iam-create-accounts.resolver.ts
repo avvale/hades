@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -23,10 +24,13 @@ export class IamCreateAccountsResolver
     ) {}
 
     @Mutation('iamCreateAccounts')
-    async main(@Args('payload') payload: IamCreateAccountInput[])
+    async main(
+        @Args('payload') payload: IamCreateAccountInput[],
+        @Timezone() timezone?: string,
+    )
     {
         // TODO, bulk create accounts
-        // await this.commandBus.dispatch(new CreateAccountsCommand(payload));
+        // await this.commandBus.dispatch(new CreateAccountsCommand(payload, { timezone }));
         return true;
     }
 }

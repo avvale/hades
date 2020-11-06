@@ -9,8 +9,8 @@ export class AccountRoleIds extends UuidArrayValueObject
     {
         super(value, Object.assign({
             name: 'AccountRoleIds',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules));
     }
 }

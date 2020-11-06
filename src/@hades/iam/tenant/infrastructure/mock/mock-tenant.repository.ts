@@ -58,7 +58,6 @@ export class MockTenantRepository extends MockRepository<IamTenant> implements I
                     new TenantCreatedAt(itemCollection.createdAt),
                     new TenantUpdatedAt(itemCollection.updatedAt),
                     new TenantDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

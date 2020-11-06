@@ -7,12 +7,12 @@ import { PaginateUsersService } from './paginate-users.service';
 export class PaginateUsersQueryHandler implements IQueryHandler<PaginateUsersQuery>
 {
     constructor(
-        private readonly paginateUsersService: PaginateUsersService
+        private readonly paginateUsersService: PaginateUsersService,
     ) {}
 
     async execute(query: PaginateUsersQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateUsersService.main(query.queryStatement, query.constraint);
+        const { total, count, rows } = await this.paginateUsersService.main(query.queryStatement, query.constraint, query.cQMetadata);
 
         return new PaginationResponse(
             total,

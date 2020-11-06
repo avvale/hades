@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 import { UpdateRoleService } from './update-role.service';
-import { 
+import {
     RoleId,
     RoleName,
     RoleIsMaster,
@@ -12,19 +12,18 @@ import {
     RoleAccountIds,
     RoleCreatedAt,
     RoleUpdatedAt,
-    RoleDeletedAt
-    
+    RoleDeletedAt,
 } from './../../domain/value-objects';
 import { IRoleRepository } from './../../domain/role.repository';
 import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
 
-describe('UpdateRoleService', () => 
+describe('UpdateRoleService', () =>
 {
     let service: UpdateRoleService;
     let repository: IRoleRepository;
     let mockRepository: MockRoleRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -33,7 +32,7 @@ describe('UpdateRoleService', () =>
                 EventPublisher,
                 UpdateRoleService,
                 MockRoleRepository,
-                { 
+                {
                     provide: IRoleRepository,
                     useValue: {
                         update: (item) => {}
@@ -47,14 +46,14 @@ describe('UpdateRoleService', () =>
         mockRepository  = module.get(MockRoleRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateRoleService should be defined', () => 
+        test('UpdateRoleService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a role and emit event', async () => 
+        test('should update a role and emit event', async () =>
         {
             expect(await service.main(
                 new RoleId(roles[0].id),
@@ -62,7 +61,6 @@ describe('UpdateRoleService', () =>
                 new RoleIsMaster(roles[0].isMaster),
                 new RolePermissionIds(roles[0].permissionIds),
                 new RoleAccountIds(roles[0].accountIds),
-                
             )).toBe(undefined);
         });
     });

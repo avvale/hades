@@ -54,12 +54,12 @@ export class IamDeleteTenantsResolver
             where: {
                 [Operator.or]: orStatements
             }
-        }));
+        }, constraint, { timezone }));
 
         // delete tenant, only update account if tenantId exist in dTenants column
         for ( const tenant of tenants)
         {
-            await Utils.deleteTenantFromAccounts(this.commandBus, tenant.id, accountsToRemoveAnyTenant);
+            await Utils.deleteTenantFromAccounts(this.commandBus, tenant.id, accountsToRemoveAnyTenant, constraint, { timezone });
         }
 
         await this.commandBus.dispatch(new DeleteTenantsCommand(queryStatement, constraint, { timezone }));

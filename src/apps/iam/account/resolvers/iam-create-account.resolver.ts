@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -31,11 +32,15 @@ export class IamCreateAccountResolver
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-        private readonly jwtService: JwtService
+        private readonly jwtService: JwtService,
     ) {}
 
     @Mutation('iamCreateAccount')
-    async main(@Args('payload') payload: IamCreateAccountInput, @Context() context)
+    async main(
+        @Args('payload') payload: IamCreateAccountInput,
+        @Context() context,
+        @Timezone() timezone?: string,
+    )
     {
         // get token from Headers
         const jwt = <Jwt>this.jwtService.decode(context.req.headers.authorization.replace('Bearer ', ''));
@@ -60,35 +65,39 @@ export class IamCreateAccountResolver
             }));
 
         await this.commandBus.dispatch(new CreateAccountCommand(
-            payload.id,
-            payload.type,
-            payload.email,
-            payload.isActive,
-            accessToken.clientId,
-            client.applications.map(application => application.code),
-            AccountsUtils.createPermissions(roles),
-            payload.data,
-            payload.roleIds,
-            payload.tenantIds,
+            {
+                id: payload.id,
+                type: payload.type,
+                email: payload.email,
+                isActive: payload.isActive,
+                clientId: accessToken.clientId,
+                dApplicationCodes: client.applications.map(application => application.code),
+                dPermissions: AccountsUtils.createPermissions(roles),
+                data: payload.data,
+                roleIds: payload.roleIds,
+                tenantIds: payload.tenantIds,
+            }
         ));
 
         if (payload.type === IamAccountType.USER)
         {
             await this.commandBus.dispatch(new CreateUserCommand(
-                Utils.uuid(),
-                payload.id,
-                payload.user.name,
-                payload.user.surname,
-                payload.user.avatar,
-                payload.user.mobile,
-                payload.user.langId,
-                payload.user.username,
-                payload.user.password,
-                payload.user.rememberToken,
-                payload.user.data,
+                {
+                    id: Utils.uuid(),
+                    accountId: payload.id,
+                    name: payload.user.name,
+                    surname: payload.user.surname,
+                    avatar: payload.user.avatar,
+                    mobile: payload.user.mobile,
+                    langId: payload.user.langId,
+                    username: payload.user.username,
+                    password: payload.user.password,
+                    rememberToken: payload.user.rememberToken,
+                    data: payload.user.data,
+                }, { timezone }
             ));
         }
 
-        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, {}, { timezone }));
     }
 }

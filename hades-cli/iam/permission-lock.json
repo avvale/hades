@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/seeds/permission.seed.ts",
-            "integrity": "sha1:75caf35e1d3710f0858243c012f9bc76f3d2a37f"
+            "integrity": "sha1:36beb141cf7bbd22327d31cb2665eb4fb121043c"
         },
         {
             "path": "src/@hades/iam/permission/infrastructure/sequelize/sequelize-permission.model.ts",
@@ -475,7 +475,7 @@
         },
         {
             "path": "postman/iam.permission.postman.json",
-            "integrity": "sha1:bf0b2756c72c003a1c8872467773f1eb6ac529a4"
+            "integrity": "sha1:e2bef89e470ad5256ba3b0450c11b9ec4e228731"
         }
     ]
 }

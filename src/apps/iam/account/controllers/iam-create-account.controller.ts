@@ -2,6 +2,7 @@ import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateAccountDto } from './../dto/create-account.dto';
 import { AccountDto } from './../dto/account.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -28,22 +29,13 @@ export class IamCreateAccountController
     @Post()
     @ApiOperation({ summary: 'Create account' })
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: AccountDto })
-    async main(@Body() payload: CreateAccountDto)
+    async main(
+        @Body() payload: CreateAccountDto,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new CreateAccountCommand(
-            payload.id,
-            payload.type,
-            payload.email,
-            payload.isActive,
-            payload.clientId,
-            payload.dApplicationCodes,
-            payload.dPermissions,
-            payload.data,
-            payload.roleIds,
-            payload.tenantIds,
-            
-        ));
+        await this.commandBus.dispatch(new CreateAccountCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, {}, { timezone }));
     }
 }

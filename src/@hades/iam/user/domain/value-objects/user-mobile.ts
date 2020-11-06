@@ -11,6 +11,7 @@ export class UserMobile extends StringValueObject
             name: 'UserMobile',
             nullable: true,
             undefinable: true,
-            maxLength: 60,        }, validationRules));
+            maxLength: 60,
+        }, validationRules));
     }
 }

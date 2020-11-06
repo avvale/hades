@@ -9,8 +9,8 @@ export class AccountEmail extends StringValueObject
     {
         super(value, Object.assign({
             name: 'AccountEmail',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 120,
         }, validationRules));
     }

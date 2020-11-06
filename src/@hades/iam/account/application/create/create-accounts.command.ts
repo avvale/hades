@@ -1,7 +1,9 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateAccountsCommand
 {
     constructor(
-        public readonly accounts: {
+        public readonly payload: {
             id: string,
             type: string,
             email: string,
@@ -12,6 +14,7 @@ export class CreateAccountsCommand
             data?: any,
             roleIds?: string[],
             tenantIds?: string[],
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

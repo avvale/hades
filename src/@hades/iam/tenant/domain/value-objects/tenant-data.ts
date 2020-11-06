@@ -9,8 +9,8 @@ export class TenantData extends JsonValueObject
     {
         super(value, Object.assign({
             name: 'TenantData',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules));
     }
 }

@@ -15,7 +15,11 @@ export class FindAccountQueryHandler implements IQueryHandler<FindAccountQuery>
 
     async execute(query: FindAccountQuery): Promise<AccountResponse>
     {
-        const account = await this.findAccountService.main(query.queryStatement);
+        const account = await this.findAccountService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(account);
     }

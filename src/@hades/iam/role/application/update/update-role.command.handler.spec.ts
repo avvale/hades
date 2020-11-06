@@ -6,12 +6,12 @@ import { roles } from '@hades/iam/role/infrastructure/seeds/role.seed';
 import { UpdateRoleCommand } from './update-role.command';
 import { UpdateRoleService } from './update-role.service';
 
-describe('UpdateRoleCommandHandler', () => 
+describe('UpdateRoleCommandHandler', () =>
 {
     let commandHandler: UpdateRoleCommandHandler;
     let service: UpdateRoleService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateRoleCommandHandler', () =>
         service         = module.get<UpdateRoleService>(UpdateRoleService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateRoleCommandHandler should be defined', () => 
+        test('UpdateRoleCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an role created', async () => 
+        test('should return an role created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateRoleCommand(
@@ -45,7 +45,6 @@ describe('UpdateRoleCommandHandler', () =>
                     roles[0].isMaster,
                     roles[0].permissionIds,
                     roles[0].accountIds,
-                    
                 )
             )).toBe(undefined);
         });

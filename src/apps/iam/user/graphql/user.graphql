@@ -1,5 +1,4 @@
 
-
 type IamUser
 {
     id: ID!
@@ -32,7 +31,6 @@ input IamCreateUserInput
     password: GraphQLString!
     rememberToken: GraphQLString
     data: JSON
-    
 }
 
 input IamUpdateUserInput
@@ -48,7 +46,6 @@ input IamUpdateUserInput
     password: GraphQLString
     rememberToken: GraphQLString
     data: JSON
-    
 }
 
 type Query

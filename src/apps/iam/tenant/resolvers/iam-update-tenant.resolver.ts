@@ -42,30 +42,30 @@ export class IamUpdateTenantResolver
             where: {
                 id: payload.accountIds
             }
-        }));
+        }, constraint, { timezone }));
 
         // add tenant to accounts
         for (const account of accountsToAdd)
         {
             const currentTenants = account.dTenants;
 
-            // check if accoun has this tenant
+            // check if account has this tenant
             if (currentTenants.indexOf(payload.id) === -1)
             {
-                // add tenan and update account
+                // add tenant and update account
                 currentTenants.push(payload.id);
-                await this.commandBus.dispatch(new UpdateAccountCommand(
-                    account.id,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    currentTenants
-                ));
+                await this.commandBus.dispatch(new UpdateAccountCommand({
+                    id: account.id,
+                    type: undefined,
+                    email: undefined,
+                    isActive: undefined,
+                    clientId: undefined,
+                    dApplicationCodes: undefined,
+                    dPermissions: undefined,
+                    data: undefined,
+                    roleIds: undefined,
+                    tenantIds: currentTenants
+                }, constraint, { timezone }));
             }
         }
 
@@ -79,24 +79,20 @@ export class IamUpdateTenantResolver
                     [Operator.notIn]: accountsToAdd.map(account => account.id)
                 }
             }
-        }));
+        }, constraint, { timezone }));
 
-        await Utils.deleteTenantFromAccounts(this.commandBus, payload.id, accountsToRemoveTenant);
+        await Utils.deleteTenantFromAccounts(this.commandBus, payload.id, accountsToRemoveTenant, constraint, { timezone });
 
         // update tenant
-        await this.commandBus.dispatch(new UpdateTenantCommand(
-            {
-                id: payload.id,
-                name: payload.name,
-                code: payload.code,
-                logo: payload.logo,
-                isActive: payload.isActive,
-                data: payload.data,
-                accountIds: payload.accountIds,
-            },
-            constraint,
-            { timezone }
-        ));
+        await this.commandBus.dispatch(new UpdateTenantCommand({
+            id: payload.id,
+            name: payload.name,
+            code: payload.code,
+            logo: payload.logo,
+            isActive: payload.isActive,
+            data: payload.data,
+            accountIds: payload.accountIds,
+        }, constraint, { timezone }));
 
         return await this.queryBus.ask(new FindTenantByIdQuery(payload.id, constraint, { timezone }));
     }

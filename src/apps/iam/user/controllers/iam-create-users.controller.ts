@@ -2,6 +2,7 @@ import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { UserDto } from './../dto/user.dto';
 import { CreateUserDto } from './../dto/create-user.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -26,8 +27,11 @@ export class IamCreateUsersController
     @ApiOperation({ summary: 'Create users in batch' })
     @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [UserDto] })
     @ApiBody({ type: [CreateUserDto] })
-    async main(@Body() payload: CreateUserDto[])
+    async main(
+        @Body() payload: CreateUserDto[],
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new CreateUsersCommand(payload));
+        await this.commandBus.dispatch(new CreateUsersCommand(payload, { timezone }));
     }
 }

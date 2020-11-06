@@ -32,7 +32,19 @@ export class IamTenant extends AggregateRoot
     // eager relationship
     accounts: IamAccount[];
 
-    constructor(id?: TenantId, name?: TenantName, code?: TenantCode, logo?: TenantLogo, isActive?: TenantIsActive, data?: TenantData, accountIds?: TenantAccountIds, createdAt?: TenantCreatedAt, updatedAt?: TenantUpdatedAt, deletedAt?: TenantDeletedAt, accounts?: IamAccount[], )
+    constructor(
+        id: TenantId,
+        name: TenantName,
+        code: TenantCode,
+        logo: TenantLogo,
+        isActive: TenantIsActive,
+        data: TenantData,
+        accountIds: TenantAccountIds,
+        createdAt: TenantCreatedAt,
+        updatedAt: TenantUpdatedAt,
+        deletedAt: TenantDeletedAt,
+        accounts?: IamAccount[],
+    )
     {
         super();
 
@@ -51,9 +63,33 @@ export class IamTenant extends AggregateRoot
         this.accounts = accounts;
     }
 
-    static register (id: TenantId, name: TenantName, code: TenantCode, logo: TenantLogo, isActive: TenantIsActive, data: TenantData, accountIds: TenantAccountIds, createdAt: TenantCreatedAt, updatedAt: TenantUpdatedAt, deletedAt: TenantDeletedAt, accounts?: IamAccount[], ): IamTenant
+    static register (
+        id: TenantId,
+        name: TenantName,
+        code: TenantCode,
+        logo: TenantLogo,
+        isActive: TenantIsActive,
+        data: TenantData,
+        accountIds: TenantAccountIds,
+        createdAt: TenantCreatedAt,
+        updatedAt: TenantUpdatedAt,
+        deletedAt: TenantDeletedAt,
+        accounts?: IamAccount[],
+    ): IamTenant
     {
-        return new IamTenant(id, name, code, logo, isActive, data, accountIds, createdAt, updatedAt, deletedAt, accounts, );
+        return new IamTenant(
+            id,
+            name,
+            code,
+            logo,
+            isActive,
+            data,
+            accountIds,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            accounts,
+        );
     }
 
     created(tenant: IamTenant): void

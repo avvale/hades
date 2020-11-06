@@ -66,7 +66,6 @@ export class MockAccountRepository extends MockRepository<IamAccount> implements
                     new AccountCreatedAt(itemCollection.createdAt),
                     new AccountUpdatedAt(itemCollection.updatedAt),
                     new AccountDeletedAt(itemCollection.deletedAt),
-                    
                 ));
         }
     }

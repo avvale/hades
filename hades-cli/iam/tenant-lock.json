@@ -15,11 +15,11 @@
         },
         {
             "path": "src/@hades/iam/tenant/application/create/create-tenant.service.spec.ts",
-            "integrity": "sha1:f0a066a5bcb8c60278958e1be1ab344ea5974b5f"
+            "integrity": "sha1:310a654b335e04d9cf3922678b44a91743226635"
         },
         {
             "path": "src/@hades/iam/tenant/application/create/create-tenant.service.ts",
-            "integrity": "sha1:e7d2d2c871989f6176d8983612c7439242db25f5"
+            "integrity": "sha1:50d69801634012ad8814449fee34007226ef42f0"
         },
         {
             "path": "src/@hades/iam/tenant/application/create/create-tenants.command-handler.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/@hades/iam/tenant/application/events/add-tenants-context.event.ts",
-            "integrity": "sha1:5b9afe4d0f1481fcc37de1e38488baf8abcd2d01"
+            "integrity": "sha1:5a5da3b944affee65d240b3d2d1d2ab82b1bc50c"
         },
         {
             "path": "src/@hades/iam/tenant/application/events/created-tenant.event-handler.ts",
@@ -215,7 +215,7 @@
         },
         {
             "path": "src/@hades/iam/tenant/application/update/update-tenant.command.handler.spec.ts",
-            "integrity": "sha1:e93c25eaa5dbff2161bab670e0dcfbea9e3bfec4"
+            "integrity": "sha1:6dc4fadd3da7b644172b9667a3f83de04bbb4daa"
         },
         {
             "path": "src/@hades/iam/tenant/application/update/update-tenant.command.ts",
@@ -223,7 +223,7 @@
         },
         {
             "path": "src/@hades/iam/tenant/application/update/update-tenant.service.spec.ts",
-            "integrity": "sha1:da8936e7f8de8c5710fcbbc49bf17a33b7ad3be3"
+            "integrity": "sha1:a3f013fedfc222689de28ea2e93c2731cb099b1d"
         },
         {
             "path": "src/@hades/iam/tenant/application/update/update-tenant.service.ts",
@@ -231,7 +231,7 @@
         },
         {
             "path": "src/@hades/iam/tenant/domain/tenant.aggregate.ts",
-            "integrity": "sha1:d49e856ddf18fbb306dfbcd005444764c918b59d"
+            "integrity": "sha1:2e69ee3b75afb0ae84d0347259db4093a64fdc11"
         },
         {
             "path": "src/@hades/iam/tenant/domain/tenant.mapper.ts",
@@ -255,11 +255,11 @@
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/mock/mock-tenant.repository.ts",
-            "integrity": "sha1:cdb0f08b78ad46a76972c0fa6d32d7d128059e43"
+            "integrity": "sha1:f8c5fe1d43adcedbd1711ae26552b966e55ca2a4"
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/seeds/tenant.seed.ts",
-            "integrity": "sha1:b47dc60c0153be2a7e91f000a53618b965945cb4"
+            "integrity": "sha1:5273f57669aaf88d5a11105a21592269b9574f7a"
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.model.ts",
@@ -267,47 +267,47 @@
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/sequelize/sequelize-tenant.repository.ts",
-            "integrity": "sha1:8c90af4f6325519909aa88b9d336c15059c79915"
+            "integrity": "sha1:1999b56dca0160bb1c29c3be20313aff5d36d954"
         },
         {
             "path": "src/@hades/iam/tenant/domain/value-objects/tenant-id.ts",
-            "integrity": "sha1:e4d0fcc6da6a3c71fb77aeab465e1fa21efaf4bb"
+            "integrity": "sha1:b8bb6bfca0fee35584dd3b38bcf1d89d017cb6c6"
         },
         {
             "path": "src/@hades/iam/tenant/domain/value-objects/tenant-name.ts",
-            "integrity": "sha1:a13ce1ba7653743d31c4d209df78d3523a303543"
+            "integrity": "sha1:578fd617ac2a57862fe0ffe42064cc10535bc5ad"
         },
         {
             "path": "src/@hades/iam/tenant/domain/value-objects/tenant-code.ts",
-            "integrity": "sha1:98eac82ca3afa82282eae17eedc4f4cfcd961859"
+            "integrity": "sha1:cd1dcc1882430b11117e0cb2197c89dbe536502b"
         },
         {
             "path": "src/@hades/iam/tenant/domain/value-objects/tenant-logo.ts",
-            "integrity": "sha1:4ac50d44244299cd2a5baa32b282bdb151437a65"
+            "integrity": "sha1:0abe6ac871d9967dcb59e9fb80f37e3fc63185d0"
         },
         {
             "path": "src/@hades/iam/tenant/domain/value-objects/tenant-is-active.ts",
-            "integrity": "sha1:f42a4bd988b8a3c69a8530d6e9d0f5f4b4340f4c"
+            "integrity": "sha1:641558c6f645164811eded6d02b3ec770b72b176"
         },
         {
             "path": "src/@hades/iam/tenant/domain/value-objects/tenant-data.ts",
-            "integrity": "sha1:3eb057777d558da6b77f68ffae3e7553777291ee"
+            "integrity": "sha1:70e7f10b2defc7f49d60b5f5e8bfc6cfdb903227"
         },
         {
             "path": "src/@hades/iam/tenant/domain/value-objects/tenant-account-ids.ts",
-            "integrity": "sha1:118aa53a5558ba79151c500fcb854e8668df0394"
+            "integrity": "sha1:c2be788b80efd2a86d2828616b174550cd668149"
         },
         {
             "path": "src/@hades/iam/tenant/domain/value-objects/tenant-created-at.ts",
-            "integrity": "sha1:dee55ef0eaecaee35c3835dd0c38536c47ebb15e"
+            "integrity": "sha1:60434b7a6f8c10de4614b7bc7df222c7bf106c6f"
         },
         {
             "path": "src/@hades/iam/tenant/domain/value-objects/tenant-updated-at.ts",
-            "integrity": "sha1:42f1c18311f827da9d3bea631f18fead505e0bbf"
+            "integrity": "sha1:7366242b895f80db28fcc33160ccb7cbffd8f60b"
         },
         {
             "path": "src/@hades/iam/tenant/domain/value-objects/tenant-deleted-at.ts",
-            "integrity": "sha1:28e2b2be083a5de9a40f2613ebe450c9b7f2e216"
+            "integrity": "sha1:fb25fda4e6fd2fc7fd3671ed5e35670e20f93849"
         },
         {
             "path": "src/@hades/iam/tenant/infrastructure/sequelize/sequelize-tenants-account-ids.model.ts",
@@ -487,7 +487,7 @@
         },
         {
             "path": "postman/iam.tenant.postman.json",
-            "integrity": "sha1:02f464e8926db968538a8edc64d27be7a6b05df8"
+            "integrity": "sha1:c02e0d0e70a57cd2284568ffdecf7a9be808fc70"
         }
     ]
 }

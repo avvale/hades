@@ -8,13 +8,13 @@ import { RoleId } from './../../domain/value-objects';
 import { IRoleRepository } from './../../domain/role.repository';
 import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
 
-describe('FindRoleByIdService', () => 
+describe('FindRoleByIdService', () =>
 {
     let service: FindRoleByIdService;
     let repository: IRoleRepository;
     let mockRepository: MockRoleRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindRoleByIdService', () =>
                 EventPublisher,
                 FindRoleByIdService,
                 MockRoleRepository,
-                { 
+                {
                     provide: IRoleRepository,
                     useValue: {
                         findById: (id) => {}

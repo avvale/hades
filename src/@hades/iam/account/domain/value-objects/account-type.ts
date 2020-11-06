@@ -9,8 +9,8 @@ export class AccountType extends EnumValueObject
     {
         super(value, Object.assign({
             name: 'AccountType',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             enumOptions:  ['USER','SERVICE'],
         }, validationRules));
     }

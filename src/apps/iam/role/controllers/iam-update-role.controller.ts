@@ -2,6 +2,7 @@ import { Controller, Put, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateRoleDto } from './../dto/update-role.dto';
 import { RoleDto } from './../dto/role.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -23,23 +24,20 @@ export class IamUpdateRoleController
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Put()
     @ApiOperation({ summary: 'Update role' })
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: RoleDto})
-    async main(@Body() payload: UpdateRoleDto, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body() payload: UpdateRoleDto,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new UpdateRoleCommand(
-            payload.id,
-            payload.name,
-            payload.isMaster,
-            payload.permissionIds,
-            payload.accountIds,
-            constraint,
-        ));
+        await this.commandBus.dispatch(new UpdateRoleCommand(payload, constraint, { timezone }));
 
-        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id, constraint));
+        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id, constraint, { timezone }));
     }
 }

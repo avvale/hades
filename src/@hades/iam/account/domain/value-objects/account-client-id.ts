@@ -9,8 +9,8 @@ export class AccountClientId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'AccountClientId',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 36,
         }, validationRules), data);
     }

@@ -54,12 +54,12 @@ describe('UpdateAccountService', () =>
 
     describe('main', () =>
     {
-        test('UpdateAccountService should be defined', () => 
+        test('UpdateAccountService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a account and emit event', async () => 
+        test('should update a account and emit event', async () =>
         {
             expect(await service.main(
                 new AccountId(accounts[0].id),
@@ -73,7 +73,6 @@ describe('UpdateAccountService', () =>
                 new AccountData(accounts[0].data),
                 new AccountRoleIds(accounts[0].roleIds),
                 new AccountTenantIds(accounts[0].tenantIds),
-                
             )).toBe(undefined);
         });
     });

@@ -19,9 +19,6 @@ import { CreatedAccountEvent } from './../application/events/created-account.eve
 import { UpdatedAccountEvent } from './../application/events/updated-account.event';
 import { DeletedAccountEvent } from './../application/events/deleted-account.event';
 import { IamUser } from '@hades/iam/user/domain/user.aggregate';
-
-
-
 import { IamRole } from '@hades/iam/role/domain/role.aggregate';
 import { IamTenant } from '@hades/iam/tenant/domain/tenant.aggregate';
 
@@ -41,17 +38,31 @@ export class IamAccount extends AggregateRoot
     createdAt: AccountCreatedAt;
     updatedAt: AccountUpdatedAt;
     deletedAt: AccountDeletedAt;
-    
+
     // eager relationship
-    
     user: IamUser;
-    
-    
-    
     roles: IamRole[];
     tenants: IamTenant[];
-    
-    constructor(id?: AccountId, type?: AccountType, email?: AccountEmail, isActive?: AccountIsActive, clientId?: AccountClientId, dApplicationCodes?: AccountDApplicationCodes, dPermissions?: AccountDPermissions, dTenants?: AccountDTenants, data?: AccountData, roleIds?: AccountRoleIds, tenantIds?: AccountTenantIds, createdAt?: AccountCreatedAt, updatedAt?: AccountUpdatedAt, deletedAt?: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], )
+
+    constructor(
+        id: AccountId,
+        type: AccountType,
+        email: AccountEmail,
+        isActive: AccountIsActive,
+        clientId: AccountClientId,
+        dApplicationCodes: AccountDApplicationCodes,
+        dPermissions: AccountDPermissions,
+        dTenants: AccountDTenants,
+        data: AccountData,
+        roleIds: AccountRoleIds,
+        tenantIds: AccountTenantIds,
+        createdAt: AccountCreatedAt,
+        updatedAt: AccountUpdatedAt,
+        deletedAt: AccountDeletedAt,
+        user?: IamUser,
+        roles?: IamRole[],
+        tenants?: IamTenant[],
+    )
     {
         super();
 
@@ -69,21 +80,52 @@ export class IamAccount extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
         this.user = user;
-        
-        
-        
         this.roles = roles;
         this.tenants = tenants;
-        
     }
 
-    static register (id: AccountId, type: AccountType, email: AccountEmail, isActive: AccountIsActive, clientId: AccountClientId, dApplicationCodes: AccountDApplicationCodes, dPermissions: AccountDPermissions, dTenants: AccountDTenants, data: AccountData, roleIds: AccountRoleIds, tenantIds: AccountTenantIds, createdAt: AccountCreatedAt, updatedAt: AccountUpdatedAt, deletedAt: AccountDeletedAt, user?: IamUser, roles?: IamRole[], tenants?: IamTenant[], ): IamAccount
+    static register (
+        id: AccountId,
+        type: AccountType,
+        email: AccountEmail,
+        isActive: AccountIsActive,
+        clientId: AccountClientId,
+        dApplicationCodes: AccountDApplicationCodes,
+        dPermissions: AccountDPermissions,
+        dTenants: AccountDTenants,
+        data: AccountData,
+        roleIds: AccountRoleIds,
+        tenantIds: AccountTenantIds,
+        createdAt: AccountCreatedAt,
+        updatedAt: AccountUpdatedAt,
+        deletedAt: AccountDeletedAt,
+        user?: IamUser,
+        roles?: IamRole[],
+        tenants?: IamTenant[],
+    ): IamAccount
     {
-        return new IamAccount(id, type, email, isActive, clientId, dApplicationCodes, dPermissions, dTenants, data, roleIds, tenantIds, createdAt, updatedAt, deletedAt, user, roles, tenants, );
+        return new IamAccount(
+            id,
+            type,
+            email,
+            isActive,
+            clientId,
+            dApplicationCodes,
+            dPermissions,
+            dTenants,
+            data,
+            roleIds,
+            tenantIds,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            user,
+            roles,
+            tenants,
+        );
     }
 
     created(account: IamAccount): void
@@ -104,7 +146,6 @@ export class IamAccount extends AggregateRoot
                 account.createdAt?.value,
                 account.updatedAt?.value,
                 account.deletedAt?.value,
-                
             )
         );
     }
@@ -127,7 +168,6 @@ export class IamAccount extends AggregateRoot
                 account.createdAt?.value,
                 account.updatedAt?.value,
                 account.deletedAt?.value,
-                
             )
         );
     }
@@ -150,7 +190,6 @@ export class IamAccount extends AggregateRoot
                 account.createdAt?.value,
                 account.updatedAt?.value,
                 account.deletedAt?.value,
-                
             )
         );
     }
@@ -172,16 +211,11 @@ export class IamAccount extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
             user: this.user?.toDTO(),
-            
-            
-            
             roles: this.roles?.map(item => item.toDTO()),
             tenants: this.tenants?.map(item => item.toDTO()),
-            
         }
     }
 }

@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -31,11 +32,16 @@ export class IamUpdateAccountResolver
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-        private readonly jwtService: JwtService
+        private readonly jwtService: JwtService,
     ) {}
 
     @Mutation('iamUpdateAccount')
-    async main(@Args('payload') payload: IamUpdateAccountInput, @Context() context, @Args('constraint') constraint?: QueryStatement)
+    async main(
+        @Args('payload') payload: IamUpdateAccountInput,
+        @Context() context,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
         // get token from Headers
         const jwt = <Jwt>this.jwtService.decode(context.req.headers.authorization.replace('Bearer ', ''));
@@ -59,35 +65,39 @@ export class IamUpdateAccountResolver
             }));
 
         await this.commandBus.dispatch(new UpdateAccountCommand(
-            payload.id,
-            payload.type,
-            payload.email,
-            payload.isActive,
-            payload.clientId,
-            payload.dApplicationCodes,
-            Utils.createPermissions(roles),
-            payload.data,
-            payload.roleIds,
-            payload.tenantIds,
+            {
+                id: payload.id,
+                type: payload.type,
+                email: payload.email,
+                isActive: payload.isActive,
+                clientId: payload.clientId,
+                dApplicationCodes: payload.dApplicationCodes,
+                dPermissions: Utils.createPermissions(roles),
+                data: payload.data,
+                roleIds: payload.roleIds,
+                tenantIds: payload.tenantIds,
+            }
         ));
 
         if (payload.type === IamAccountType.USER)
         {
             await this.commandBus.dispatch(new UpdateUserCommand(
-                payload.user.id,
-                payload.id,
-                payload.user.name,
-                payload.user.surname,
-                payload.user.avatar,
-                payload.user.mobile,
-                payload.user.langId,
-                payload.user.username,
-                payload.user.password,
-                payload.user.rememberToken,
-                payload.user.data,
+                {
+                    id: payload.user.id,
+                    accountId: payload.id,
+                    name: payload.user.name,
+                    surname: payload.user.surname,
+                    avatar: payload.user.avatar,
+                    mobile: payload.user.mobile,
+                    langId: payload.user.langId,
+                    username: payload.user.username,
+                    password: payload.user.password,
+                    rememberToken: payload.user.rememberToken,
+                    data: payload.user.data,
+                }, {}, { timezone }
             ));
         }
 
-        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, constraint));
+        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, constraint, { timezone }));
     }
 }
