@@ -851,7 +851,7 @@ export interface OAuthUpdateAccessTokenInput {
     name?: GraphQLString;
     isRevoked?: GraphQLBoolean;
     expiresAt?: GraphQLTimestamp;
-    refreshToken?: OAuthCreateRefreshTokenInput;
+    refreshToken?: OAuthUpdateRefreshTokenInput;
 }
 
 export interface OAuthCreateApplicationInput {
@@ -913,7 +913,7 @@ export interface OAuthCreateCredentialInput {
 
 export interface OAuthCreateRefreshTokenInput {
     id: string;
-    accessTokenId: OAuthCreateAccessTokenInput;
+    accessTokenId: string;
     token: GraphQLString;
     isRevoked: GraphQLBoolean;
     expiresAt?: GraphQLTimestamp;
@@ -921,7 +921,7 @@ export interface OAuthCreateRefreshTokenInput {
 
 export interface OAuthUpdateRefreshTokenInput {
     id: string;
-    accessTokenId?: OAuthCreateAccessTokenInput;
+    accessTokenId?: string;
     token?: GraphQLString;
     isRevoked?: GraphQLBoolean;
     expiresAt?: GraphQLTimestamp;
