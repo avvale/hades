@@ -9,8 +9,8 @@ export class ChannelOverviewSystemName extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ChannelOverviewSystemName',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 20,
         }, validationRules));
     }

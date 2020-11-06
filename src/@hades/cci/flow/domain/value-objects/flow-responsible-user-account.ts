@@ -9,8 +9,8 @@ export class FlowResponsibleUserAccount extends StringValueObject
     {
         super(value, Object.assign({
             name: 'FlowResponsibleUserAccount',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 20,
         }, validationRules));
     }

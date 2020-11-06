@@ -9,8 +9,8 @@ export class ChannelComponent extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ChannelComponent',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 160,
         }, validationRules));
     }

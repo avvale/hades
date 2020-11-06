@@ -9,8 +9,8 @@ export class ExecutionMonitoringEndAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'ExecutionMonitoringEndAt',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
         }, validationRules), data);
     }
 }

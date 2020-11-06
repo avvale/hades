@@ -9,8 +9,8 @@ export class ChannelOverviewExecutionExecutedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'ChannelOverviewExecutionExecutedAt',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
         }, validationRules), data);
     }
 }

@@ -9,8 +9,8 @@ export class ModuleChannelHash extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ModuleChannelHash',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 40,
 
         }, validationRules));

@@ -9,8 +9,8 @@ export class ContactHasConsentEmail extends BooleanValueObject
     {
         super(value, Object.assign({
             name: 'ContactHasConsentEmail',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
         }, validationRules));
     }
 }

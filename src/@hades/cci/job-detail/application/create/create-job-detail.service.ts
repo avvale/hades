@@ -52,7 +52,7 @@ export class CreateJobDetailService
             user: JobDetailUser,
             startAt: JobDetailStartAt,
             endAt: JobDetailEndAt,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

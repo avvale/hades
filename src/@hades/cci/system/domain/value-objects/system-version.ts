@@ -9,8 +9,8 @@ export class SystemVersion extends StringValueObject
     {
         super(value, Object.assign({
             name: 'SystemVersion',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             
         }, validationRules));
     }

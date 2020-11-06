@@ -9,8 +9,8 @@ export class ContactMobile extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ContactMobile',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 60,
         }, validationRules));
     }

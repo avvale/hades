@@ -9,8 +9,8 @@ export class MessageDetailFlowInterfaceNamespace extends StringValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailFlowInterfaceNamespace',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 160,
         }, validationRules));
     }

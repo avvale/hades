@@ -9,8 +9,8 @@ export class MessageDetailTenantCode extends StringValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailTenantCode',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 50,
         }, validationRules));
     }

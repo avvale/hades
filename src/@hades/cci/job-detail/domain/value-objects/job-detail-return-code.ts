@@ -9,8 +9,8 @@ export class JobDetailReturnCode extends IntValueObject
     {
         super(value, Object.assign({
             name: 'JobDetailReturnCode',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 10,
             unsigned: false,
         }, validationRules));

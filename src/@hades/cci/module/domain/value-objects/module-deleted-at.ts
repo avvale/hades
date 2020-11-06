@@ -9,8 +9,8 @@ export class ModuleDeletedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'ModuleDeletedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

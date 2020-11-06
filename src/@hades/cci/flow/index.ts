@@ -32,7 +32,6 @@ import { DeleteFlowsService } from './application/delete/delete-flows.service';
 // models
 export { CciFlowModel } from './infrastructure/sequelize/sequelize-flow.model';
 
-
 // repository
 export { IFlowRepository } from './domain/flow.repository';
 export { SequelizeFlowRepository } from './infrastructure/sequelize/sequelize-flow.repository';

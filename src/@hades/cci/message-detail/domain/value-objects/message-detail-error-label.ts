@@ -9,8 +9,8 @@ export class MessageDetailErrorLabel extends SmallintValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailErrorLabel',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 6,
             unsigned: true,
         }, validationRules));

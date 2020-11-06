@@ -52,7 +52,7 @@ export class CreateChannelDetailService
             channelComponent: ChannelDetailChannelComponent,
             channelName: ChannelDetailChannelName,
             detail: ChannelDetailDetail,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

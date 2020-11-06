@@ -32,7 +32,6 @@ import { DeleteChannelsService } from './application/delete/delete-channels.serv
 // models
 export { CciChannelModel } from './infrastructure/sequelize/sequelize-channel.model';
 
-
 // repository
 export { IChannelRepository } from './domain/channel.repository';
 export { SequelizeChannelRepository } from './infrastructure/sequelize/sequelize-channel.repository';

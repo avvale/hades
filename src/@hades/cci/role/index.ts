@@ -32,7 +32,6 @@ import { DeleteRolesService } from './application/delete/delete-roles.service';
 // models
 export { CciRoleModel } from './infrastructure/sequelize/sequelize-role.model';
 
-
 // repository
 export { IRoleRepository } from './domain/role.repository';
 export { SequelizeRoleRepository } from './infrastructure/sequelize/sequelize-role.repository';

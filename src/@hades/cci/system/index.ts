@@ -32,7 +32,6 @@ import { DeleteSystemsService } from './application/delete/delete-systems.servic
 // models
 export { CciSystemModel } from './infrastructure/sequelize/sequelize-system.model';
 
-
 // repository
 export { ISystemRepository } from './domain/system.repository';
 export { SequelizeSystemRepository } from './infrastructure/sequelize/sequelize-system.repository';

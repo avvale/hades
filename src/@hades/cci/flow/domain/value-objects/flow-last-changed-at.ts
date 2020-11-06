@@ -9,8 +9,8 @@ export class FlowLastChangedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'FlowLastChangedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

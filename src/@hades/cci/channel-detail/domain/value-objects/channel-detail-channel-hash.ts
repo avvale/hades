@@ -9,8 +9,8 @@ export class ChannelDetailChannelHash extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ChannelDetailChannelHash',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 40,
 
         }, validationRules));

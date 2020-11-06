@@ -9,8 +9,8 @@ export class MessageDetailProtocol extends StringValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailProtocol',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 20,
         }, validationRules));
     }

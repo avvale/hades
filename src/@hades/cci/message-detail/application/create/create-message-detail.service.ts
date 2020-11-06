@@ -96,7 +96,7 @@ export class CreateMessageDetailService
             timesFailed: MessageDetailTimesFailed,
             numberMax: MessageDetailNumberMax,
             numberDays: MessageDetailNumberDays,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

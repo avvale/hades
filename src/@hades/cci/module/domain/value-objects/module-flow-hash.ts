@@ -9,8 +9,8 @@ export class ModuleFlowHash extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ModuleFlowHash',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             length: 40,
 
         }, validationRules));

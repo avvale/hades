@@ -9,8 +9,8 @@ export class ChannelDirectory extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ChannelDirectory',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 1024,
         }, validationRules));
     }

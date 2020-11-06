@@ -9,8 +9,8 @@ export class ChannelFileSchema extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ChannelFileSchema',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 1024,
         }, validationRules));
     }

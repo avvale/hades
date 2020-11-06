@@ -56,7 +56,7 @@ export class CreateMessageOverviewService
             holding: MessageOverviewHolding,
             toBeDelivered: MessageOverviewToBeDelivered,
             waiting: MessageOverviewWaiting,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

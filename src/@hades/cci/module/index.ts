@@ -32,7 +32,6 @@ import { DeleteModulesService } from './application/delete/delete-modules.servic
 // models
 export { CciModuleModel } from './infrastructure/sequelize/sequelize-module.model';
 
-
 // repository
 export { IModuleRepository } from './domain/module.repository';
 export { SequelizeModuleRepository } from './infrastructure/sequelize/sequelize-module.repository';

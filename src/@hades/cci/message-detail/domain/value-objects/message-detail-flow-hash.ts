@@ -9,8 +9,8 @@ export class MessageDetailFlowHash extends StringValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailFlowHash',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 40,
 
         }, validationRules));

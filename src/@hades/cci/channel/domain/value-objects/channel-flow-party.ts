@@ -9,8 +9,8 @@ export class ChannelFlowParty extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ChannelFlowParty',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 160,
         }, validationRules));
     }

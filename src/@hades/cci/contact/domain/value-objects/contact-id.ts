@@ -9,8 +9,8 @@ export class ContactId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'ContactId',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 36,
         }, validationRules), data);
     }

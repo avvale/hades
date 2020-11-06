@@ -60,15 +60,15 @@ describe('execution', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'iam96ua0ykpzxo7xp9sfio9vsq96t1iqyfsewqb9j3o5u64x57',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'njvmykov9k2ndq6lbmqj',
-                version: 'l5o95r5pvh1px3zm250f',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 's9xh5edrxml0zytqccg19mof2kh870d85u6hz9a6x3h2m3hb9b',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'vv8svgqxxxmfqm7jwtdk',
+                version: 'm0no9yidim0kcmc6bkxd',
                 type: 'SUMMARY',
-                executedAt: '2020-11-04 08:34:14',
-                monitoringStartAt: '2020-11-04 03:43:43',
-                monitoringEndAt: '2020-11-04 08:34:56',
+                executedAt: '2020-11-06 02:33:49',
+                monitoringStartAt: '2020-11-05 14:53:01',
+                monitoringEndAt: '2020-11-05 19:34:56',
             })
             .expect(400)
             .then(res => {
@@ -83,15 +83,15 @@ describe('execution', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'xmez7a6o0llbxvocpaehmbo8cf73qiy8zvkg1gn3wb0d85ftcm',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'yx9oj579111cr2z77720',
-                version: 'x7b2rfv94mb4rda7knqh',
-                type: 'SUMMARY',
-                executedAt: '2020-11-04 15:26:29',
-                monitoringStartAt: '2020-11-04 11:17:16',
-                monitoringEndAt: '2020-11-04 05:04:43',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: '5f8mlq59y6w1hrqto42xrgucc5emms3q5u23hypnuocp610qz1',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '7qd6zytr7g2ngi01k3h5',
+                version: 'fgv6ndo7fwb3h6l7o2ct',
+                type: 'DETAIL',
+                executedAt: '2020-11-05 12:55:43',
+                monitoringStartAt: '2020-11-06 00:40:47',
+                monitoringEndAt: '2020-11-06 04:57:03',
             })
             .expect(400)
             .then(res => {
@@ -105,16 +105,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
                 tenantId: null,
-                tenantCode: 'hv68jle61oefl7hdu7leyd229r8hfipauo5b0exq28yyg507ae',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'p2xe6d077qzcsstbda4g',
-                version: 'x6cvfuqi5d4pbv4zny72',
-                type: 'DETAIL',
-                executedAt: '2020-11-04 12:07:31',
-                monitoringStartAt: '2020-11-04 00:25:14',
-                monitoringEndAt: '2020-11-04 12:01:11',
+                tenantCode: 'md3frxa7od6m6o11q0ancjkl4ejrwp3u3isslokfwqpo13zhxb',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '2og94i0xhvfiqrzp6tia',
+                version: 'eep7lwt2b2zw7w1j0vyg',
+                type: 'SUMMARY',
+                executedAt: '2020-11-05 18:48:27',
+                monitoringStartAt: '2020-11-05 21:47:37',
+                monitoringEndAt: '2020-11-05 20:13:22',
             })
             .expect(400)
             .then(res => {
@@ -128,16 +128,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
                 
-                tenantCode: 'x73o6b9k71pdeeglb0yamj9njw1lpz8rih6b0capqqvq16lmmd',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'uheyzlcogtn33rbludyt',
-                version: 'phizrxohw0hoqv7mar4c',
-                type: 'DETAIL',
-                executedAt: '2020-11-04 05:01:51',
-                monitoringStartAt: '2020-11-04 05:03:19',
-                monitoringEndAt: '2020-11-04 22:29:34',
+                tenantCode: '7tnkhjdj6sufmmeus4xuailtge4yq5dyvl3jb0rdw0atfc9k0w',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '7dpgcj962fsk1uydavsf',
+                version: '07ugqegtk083je70kfdh',
+                type: 'SUMMARY',
+                executedAt: '2020-11-05 21:45:10',
+                monitoringStartAt: '2020-11-05 19:53:37',
+                monitoringEndAt: '2020-11-05 14:13:28',
             })
             .expect(400)
             .then(res => {
@@ -151,16 +151,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
                 tenantCode: null,
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '1ykxxdy8pw8sisz7yoov',
-                version: '0y45ql425b3k4em4t333',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'o1i573po46ijgndma21l',
+                version: 'k91h72r35d3gcjtyqjy6',
                 type: 'SUMMARY',
-                executedAt: '2020-11-04 18:50:29',
-                monitoringStartAt: '2020-11-04 17:15:36',
-                monitoringEndAt: '2020-11-04 14:52:51',
+                executedAt: '2020-11-06 03:12:15',
+                monitoringStartAt: '2020-11-05 17:31:48',
+                monitoringEndAt: '2020-11-06 08:33:58',
             })
             .expect(400)
             .then(res => {
@@ -174,16 +174,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
                 
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'zmt4hvwnokeofcfdh89s',
-                version: 'hl20sdmcofzvj6j5gual',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'pvem7x165jtd5a15uhia',
+                version: 'l011youzzolzjxeqqjx8',
                 type: 'SUMMARY',
-                executedAt: '2020-11-04 02:40:07',
-                monitoringStartAt: '2020-11-03 23:11:29',
-                monitoringEndAt: '2020-11-04 10:12:38',
+                executedAt: '2020-11-05 18:18:53',
+                monitoringStartAt: '2020-11-05 15:00:49',
+                monitoringEndAt: '2020-11-06 11:28:56',
             })
             .expect(400)
             .then(res => {
@@ -197,16 +197,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'r285cyu4fv04lm1tbkl9penyvlhpl3rwtko57gjphft7kh4vmv',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: '5pmeu5vgnst5bja45kmv4ihlem3drjebtdkrc97l91v89xxq7w',
                 systemId: null,
-                systemName: 'xfwwo7q1t18jln44dhtt',
-                version: 'be66g8041eitvdai64ug',
-                type: 'SUMMARY',
-                executedAt: '2020-11-04 06:34:23',
-                monitoringStartAt: '2020-11-04 22:20:25',
-                monitoringEndAt: '2020-11-04 03:37:49',
+                systemName: 'cqkpor4jv9p27vmzjtwc',
+                version: 'yzvvind8lrrofzcnprid',
+                type: 'DETAIL',
+                executedAt: '2020-11-05 12:33:53',
+                monitoringStartAt: '2020-11-05 18:47:06',
+                monitoringEndAt: '2020-11-05 16:30:00',
             })
             .expect(400)
             .then(res => {
@@ -220,16 +220,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '1b0xl8nbetwhb1k5voom0da6nkillae4diih5fgul9nriw6g9s',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'aff4womr8uhtvo2yw5j17fp6b4zzifj6dj8wvgyh1dwveadtmp',
                 
-                systemName: 'iqyxnm6q8z3irjf7v7tw',
-                version: 'ibc1v0b8bs589khpceq2',
+                systemName: '3qyhl5wmbu3jbr3dwv6z',
+                version: '84ic4kdr6x5xt8sn7ex3',
                 type: 'DETAIL',
-                executedAt: '2020-11-04 09:45:33',
-                monitoringStartAt: '2020-11-04 22:47:20',
-                monitoringEndAt: '2020-11-04 02:49:02',
+                executedAt: '2020-11-05 22:36:35',
+                monitoringStartAt: '2020-11-06 07:36:07',
+                monitoringEndAt: '2020-11-06 00:42:23',
             })
             .expect(400)
             .then(res => {
@@ -243,16 +243,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'vg3tly0v4t78abagupasqe1i17fr87jhvmg9nrvq11tjdy7g2n',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: '6xqe3ldymaaqg1aihl2cn4pftfjo288wv1s4v0ym3j3lsrz87n',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
                 systemName: null,
-                version: 'qbt2sx4j3n8tigqglrec',
-                type: 'SUMMARY',
-                executedAt: '2020-11-04 05:40:55',
-                monitoringStartAt: '2020-11-04 22:33:22',
-                monitoringEndAt: '2020-11-04 11:37:31',
+                version: 'biydb22q6nbgfb4abrrs',
+                type: 'DETAIL',
+                executedAt: '2020-11-05 16:13:22',
+                monitoringStartAt: '2020-11-06 11:25:44',
+                monitoringEndAt: '2020-11-05 12:23:50',
             })
             .expect(400)
             .then(res => {
@@ -266,16 +266,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'w49yb59bpe53kitv95y3t5vtwp67p53p5wq07gsuv2yc4i4x2p',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'wm2kamzz7nomd56v246npc0r6wdkycfd8giqirxfve3psrb9ar',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
                 
-                version: 'h4nkpc81ogxq63knnieg',
+                version: 'q6okkkt0h75tv5x45ita',
                 type: 'DETAIL',
-                executedAt: '2020-11-04 20:03:12',
-                monitoringStartAt: '2020-11-04 04:03:12',
-                monitoringEndAt: '2020-11-04 20:51:50',
+                executedAt: '2020-11-06 02:02:28',
+                monitoringStartAt: '2020-11-05 22:35:15',
+                monitoringEndAt: '2020-11-06 10:28:13',
             })
             .expect(400)
             .then(res => {
@@ -289,16 +289,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '3xmz15jtwxe32orbphrvf5fg9jisybmjufwvcqu3pitocy5gbw',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'kc7bg0rypqklchiff5j5',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'zwgtx5vi1avdtt45096yg0tpu5outzzgozdqx9p89voqjxptbg',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'w1ss4ck6pu9mnaky40f7',
                 version: null,
                 type: 'SUMMARY',
-                executedAt: '2020-11-04 00:53:23',
-                monitoringStartAt: '2020-11-04 09:45:04',
-                monitoringEndAt: '2020-11-04 06:14:05',
+                executedAt: '2020-11-06 02:13:00',
+                monitoringStartAt: '2020-11-05 15:56:43',
+                monitoringEndAt: '2020-11-06 06:05:21',
             })
             .expect(400)
             .then(res => {
@@ -312,16 +312,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '91932ug5id5ozqoo9dxwau1ds91n6f8es2w7jlc6pjqczyec4m',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '4uc4manwgr0ac161dbak',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'snmprfltds878pklzzeudc0h4xj36q56i4kyd338m733byqeso',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'wpjxay6kt9ob73h1xezm',
                 
                 type: 'SUMMARY',
-                executedAt: '2020-11-04 04:22:08',
-                monitoringStartAt: '2020-11-04 12:45:42',
-                monitoringEndAt: '2020-11-04 02:59:27',
+                executedAt: '2020-11-05 14:08:13',
+                monitoringStartAt: '2020-11-06 11:09:01',
+                monitoringEndAt: '2020-11-06 07:22:56',
             })
             .expect(400)
             .then(res => {
@@ -335,16 +335,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '6zvlbptr7ewdn8rtzi4cr4f7bwjjn9xrovy66aay49vt0iqlzk',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '4tavhy3xnfdgsabpiiar',
-                version: 'lrtie5rip6d99le1kzcp',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'hzie70k8vre1n4crc41fhyx6og3cwo9jlsqqp6m482f6kr5zt1',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '57sbow8hm0gdkaxbikz9',
+                version: '8ibfvjczl9joqjva3rkq',
                 type: null,
-                executedAt: '2020-11-04 17:43:38',
-                monitoringStartAt: '2020-11-04 09:12:01',
-                monitoringEndAt: '2020-11-04 19:11:18',
+                executedAt: '2020-11-05 23:22:01',
+                monitoringStartAt: '2020-11-06 10:02:59',
+                monitoringEndAt: '2020-11-05 15:53:53',
             })
             .expect(400)
             .then(res => {
@@ -358,16 +358,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'i2is9vbxxb4u1cur5kb9ux2ajqs32xndup3wtlnf2waa1pjmso',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'jf2dqj909yt5mp650vhw',
-                version: '1moka7ql6v3gzcj98apc',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: '2ti1fczvl411z29t4w9pf6ski1942h6mehsexb6pnwgnz8dnvc',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'cj16jq5ws3szhjpibcou',
+                version: '10cwdl0fk0gimsu46z6e',
                 
-                executedAt: '2020-11-04 05:56:29',
-                monitoringStartAt: '2020-11-04 13:23:33',
-                monitoringEndAt: '2020-11-04 06:21:35',
+                executedAt: '2020-11-05 20:23:36',
+                monitoringStartAt: '2020-11-06 05:09:56',
+                monitoringEndAt: '2020-11-06 11:17:11',
             })
             .expect(400)
             .then(res => {
@@ -381,16 +381,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '5ndhk2xu46iyooni4sfqwcfbknru8tz49kpnlfbqfej2aed8m8',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '9gq39rzj11b60f7itmtu',
-                version: 'kknduinb9u0jjfs2v9ze',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 't3ed6pnfqezabhd5n8t8jro8niaepzbyimz7m3zngdhjx3phki',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'w18rhe1btfezy0wtyzs6',
+                version: 'zepubs7nghz4mlcgeibr',
                 type: 'SUMMARY',
                 executedAt: null,
-                monitoringStartAt: '2020-11-04 15:37:58',
-                monitoringEndAt: '2020-11-04 16:48:13',
+                monitoringStartAt: '2020-11-05 22:10:00',
+                monitoringEndAt: '2020-11-06 07:04:25',
             })
             .expect(400)
             .then(res => {
@@ -404,16 +404,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '9lfigut8gyigw7z2xra5daf1tuw2059icmsnoyvqa2yfmdcp0k',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'emb4bfb2n2bgxs8zr7dl',
-                version: 'gmeolgt92ket7jgoe10i',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'wbm1z712ythbzec2fcwia61jmlgzjdjwvhqwfckf0rr48rtrhd',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '7x2b4zkfeim9gjeopaax',
+                version: 'exfgtihjjt2dwqdd3st9',
                 type: 'DETAIL',
                 
-                monitoringStartAt: '2020-11-04 04:51:58',
-                monitoringEndAt: '2020-11-04 22:47:37',
+                monitoringStartAt: '2020-11-06 09:16:09',
+                monitoringEndAt: '2020-11-05 17:45:40',
             })
             .expect(400)
             .then(res => {
@@ -427,16 +427,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'x8kbixmgf10sri5bp47zu93pg1c4riv65sxr4tf076pljdx488',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '0thty2uvwedvheohza01',
-                version: '96r9vp3zh4ael7wd8wwv',
-                type: 'DETAIL',
-                executedAt: '2020-11-04 20:38:41',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'upu1l4gfyl82h4p3zwax4b3bk4lvw4hged6gn8jbavisjvuco8',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '1r4f13k1n9f5r3hay2mv',
+                version: 't2ladl3yu1j51w2ce5ji',
+                type: 'SUMMARY',
+                executedAt: '2020-11-05 17:35:28',
                 monitoringStartAt: null,
-                monitoringEndAt: '2020-11-04 06:07:43',
+                monitoringEndAt: '2020-11-05 17:10:08',
             })
             .expect(400)
             .then(res => {
@@ -450,16 +450,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'b76u0js9c72hx9lhx2p4fd36cj9j9yg86wjyjeiifz0rk1yw5l',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'wwljna4l3b4hii5nocai',
-                version: 'm3d81ihrhn97lx8sa1ug',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'xiw982dyof6lbf9wwi1xn41omp4e6wnq919b18mp4w7goaoyo2',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '1g34gyvbhwwr0jbnffvp',
+                version: 'hroqgnnq461mu30hmi0s',
                 type: 'SUMMARY',
-                executedAt: '2020-11-04 15:31:37',
+                executedAt: '2020-11-05 23:02:55',
                 
-                monitoringEndAt: '2020-11-04 04:15:06',
+                monitoringEndAt: '2020-11-05 15:00:48',
             })
             .expect(400)
             .then(res => {
@@ -473,15 +473,15 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'ft5qp6awx3fzlke8bmoafwy26fb8403yj45z8knkuts3n2g8mz',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '8r355sh2nfzumfvjkrsz',
-                version: 'f9kp7wficzv5g84vc5hq',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'ierykmzazmeoktzdo6n2uf71az7mw9hiqzuv554aj1trfaimhy',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'nlmhnjrd2udjd90vsh5g',
+                version: '6ozn7r3mznv4xd0dwztb',
                 type: 'SUMMARY',
-                executedAt: '2020-11-04 07:51:05',
-                monitoringStartAt: '2020-11-04 18:02:23',
+                executedAt: '2020-11-06 02:16:14',
+                monitoringStartAt: '2020-11-06 01:43:38',
                 monitoringEndAt: null,
             })
             .expect(400)
@@ -496,15 +496,15 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'vcdcjsg149lijph9cmqmicrwaf9ivztpr0b1onzjzedm56p3b3',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '7q7kjn3c8ejs3ja8onrv',
-                version: 'cbj3dcqhdvlcfuwxaia4',
-                type: 'DETAIL',
-                executedAt: '2020-11-04 03:14:32',
-                monitoringStartAt: '2020-11-04 02:39:35',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: '1v5q3juqptqn3bnsn2c4iyl3lpq10t6rhqlfv4kgq8wx3nxplh',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'hvip4wvqk61bz3b6jzhh',
+                version: 'i2di9oslfuz08kflfaaj',
+                type: 'SUMMARY',
+                executedAt: '2020-11-06 11:56:25',
+                monitoringStartAt: '2020-11-06 12:05:29',
                 
             })
             .expect(400)
@@ -521,16 +521,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'ushwklcdpkah86jz2yhyfz5hna9mcwvlg6ui5',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'c1qw9r9inv9ea6sqqjdfkqa481crqj8hs46qlbletzdiotfyap',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'j60fu3187p92pznlx21g',
-                version: 'age6jiu5y0b4elj4st9m',
-                type: 'DETAIL',
-                executedAt: '2020-11-04 19:58:15',
-                monitoringStartAt: '2020-11-04 07:22:18',
-                monitoringEndAt: '2020-11-04 16:32:13',
+                id: 'qqo1zbvbyl7samhs1b0dnive2463j3mug6g6g',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'hzaziseppzput6jmuzwge84qy0o25vpnuak6nxr294syxl4ul7',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'nng0rrqkl0le9pu5oigc',
+                version: 'q62jfx4mfwxxcfgovysx',
+                type: 'SUMMARY',
+                executedAt: '2020-11-06 08:15:11',
+                monitoringStartAt: '2020-11-06 05:04:44',
+                monitoringEndAt: '2020-11-06 08:01:17',
             })
             .expect(400)
             .then(res => {
@@ -544,16 +544,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '5dd9eaf6xbfjkmbz0t6ch7w7himexr6b7j0am',
-                tenantCode: '3z1lk8ltjyfmh9wk143suh9td5urxqijuxneic9789oejztvpf',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '95umbnctehru2q7c0tp1',
-                version: 'h09hfoigie2oafi0e22e',
-                type: 'DETAIL',
-                executedAt: '2020-11-04 00:24:02',
-                monitoringStartAt: '2020-11-04 19:21:38',
-                monitoringEndAt: '2020-11-04 04:25:13',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: '6goung70jhcpddxq4qjd8ipmgd9yhabs4c5q2',
+                tenantCode: 'nmb1o2n22cvi7nwa7b09f8xi9hmy4f9diablhvdr5zm1p0id08',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '072cws41bdbi07ixuqsw',
+                version: 'mshc7ci4tdaeaxlb3c8i',
+                type: 'SUMMARY',
+                executedAt: '2020-11-05 15:07:51',
+                monitoringStartAt: '2020-11-06 01:56:44',
+                monitoringEndAt: '2020-11-06 10:55:28',
             })
             .expect(400)
             .then(res => {
@@ -567,16 +567,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'uqyzyeiaelrc1kh4dz64gbkird8gonvkm4ee2xb0el5m7k9b84',
-                systemId: 'pww7294fqxfptjjix45wuo1cqydqubjuszbnn',
-                systemName: 'ta4ryctlomtdnoch42si',
-                version: '2jpadlmri493zgdfttpy',
-                type: 'SUMMARY',
-                executedAt: '2020-11-04 00:33:18',
-                monitoringStartAt: '2020-11-04 05:33:42',
-                monitoringEndAt: '2020-11-04 04:50:41',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'ric92pf3jucrbi0ei1kclg5rptwbppxyxl82c5gw8dpgnvxcfk',
+                systemId: '9kyqe5xj8kkgj7vcmnp7lyvudu94drk28ctl9',
+                systemName: 'ueo0egenicp7r5ovos8f',
+                version: '1dei3h178nm5wbc69ugy',
+                type: 'DETAIL',
+                executedAt: '2020-11-06 04:42:07',
+                monitoringStartAt: '2020-11-05 16:46:30',
+                monitoringEndAt: '2020-11-05 21:53:29',
             })
             .expect(400)
             .then(res => {
@@ -592,16 +592,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '2xghqm7c3tpdc76z5gd4xvwng9zl07qtwpa6fc21w36y72eyj9s',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'y4fxejt3cmgnae9nv0w7',
-                version: 'kbcn471qqznopua2zyix',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'kda4v1b16dwuy02pnsve56vbbgzeqzj5k5ccchde0le5cq77b6b',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'g8kn329okzuyfra011mk',
+                version: 'zp3guy2xvel7oe4vbrfl',
                 type: 'SUMMARY',
-                executedAt: '2020-11-04 18:23:28',
-                monitoringStartAt: '2020-11-04 05:30:00',
-                monitoringEndAt: '2020-11-04 04:21:30',
+                executedAt: '2020-11-05 12:11:15',
+                monitoringStartAt: '2020-11-06 04:02:46',
+                monitoringEndAt: '2020-11-06 09:11:36',
             })
             .expect(400)
             .then(res => {
@@ -615,16 +615,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'kftzm87lvtg8xb5go1x0imxfhtqsamjnbhcixpft2rkx5nnilx',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'eki5jjro1ymnm0pk45oxh',
-                version: 'r0kmies7uqjlyv1qpehq',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 't3cb5v75lvk1zq6p9dk2a0r2c6d5xvkdiv11431wtb1qqv87n7',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'ign5oib7o09jxrtnxj8ep',
+                version: 'th7vs3oiakask1guckih',
                 type: 'DETAIL',
-                executedAt: '2020-11-04 13:05:22',
-                monitoringStartAt: '2020-11-04 10:25:56',
-                monitoringEndAt: '2020-11-04 22:01:51',
+                executedAt: '2020-11-06 01:49:02',
+                monitoringStartAt: '2020-11-05 23:14:55',
+                monitoringEndAt: '2020-11-05 19:14:13',
             })
             .expect(400)
             .then(res => {
@@ -638,16 +638,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'c6mnss5fc9jaj8iaxnz0a9uizi8vhfij2aag9ctmcybr3kdz4e',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '6kn1v9l49vkg4ezf19mu',
-                version: '71x35h44ia0rl3z962qwn',
-                type: 'SUMMARY',
-                executedAt: '2020-11-04 17:42:52',
-                monitoringStartAt: '2020-11-04 22:25:16',
-                monitoringEndAt: '2020-11-04 08:18:24',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'ljswlqof936dulvj3fulsje6h6br2et6vbqpfntcw7qsxnjdse',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'u0d1m3rv977tqorjh49m',
+                version: 'wn5yxayuo2iljsifue2ax',
+                type: 'DETAIL',
+                executedAt: '2020-11-05 13:58:51',
+                monitoringStartAt: '2020-11-05 23:13:11',
+                monitoringEndAt: '2020-11-06 00:12:13',
             })
             .expect(400)
             .then(res => {
@@ -671,16 +671,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: 'xzgw3x0ml7veurmbbvqps7vq5wa762knr3xx1vz492pw2aovrp',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'vnuq6kxradmu5wac6kvn',
-                version: '43z0te2vzo35pzsnzwx4',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: '80jxym8aiapf9340foziz49p2no7l2vspk5qy2uzut8yeihjm0',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'p6ju97h53eanopcj2gaq',
+                version: 'bgffwthj5gcpf2bk9vtm',
                 type: 'XXXX',
-                executedAt: '2020-11-04 11:06:30',
-                monitoringStartAt: '2020-11-04 12:39:04',
-                monitoringEndAt: '2020-11-04 00:25:58',
+                executedAt: '2020-11-06 01:44:25',
+                monitoringStartAt: '2020-11-06 00:51:57',
+                monitoringEndAt: '2020-11-06 06:34:35',
             })
             .expect(400)
             .then(res => {
@@ -696,16 +696,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '10rmyrnyh44nft8vslgkyif2vx4yxa4y4v8okr8o0xjdonf8yw',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'f2ounwko0z3bgzvzwwly',
-                version: 'i9n64b6v3104epq07u03',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'znez0kxgheek10h37lwsme0eb3oyp28k7075oy1hkl2gawmk4z',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '6q33ifxh40g1lkfhkidy',
+                version: 'r54986e2do73vp5tu4m7',
                 type: 'DETAIL',
                 executedAt: 'XXXXXXXX',
-                monitoringStartAt: '2020-11-04 19:25:54',
-                monitoringEndAt: '2020-11-04 06:29:13',
+                monitoringStartAt: '2020-11-05 16:25:32',
+                monitoringEndAt: '2020-11-06 00:34:12',
             })
             .expect(400)
             .then(res => {
@@ -719,16 +719,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '9ecwnov492jb9jqeb7ga8vt0np2x6q070a1luhesvafchndtj7',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '90h97qxr6ayr0cc8zszr',
-                version: 'u5vz3gqqd0s0ec7v77e7',
-                type: 'SUMMARY',
-                executedAt: '2020-11-04 09:22:11',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: '2m08jk62fzatgi2fhr3pxx767upzswlosgghy6vbzbbcql8pbv',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '86pgh99gi32zal60zvga',
+                version: '7bmdmb8maoflyvp8eztm',
+                type: 'DETAIL',
+                executedAt: '2020-11-06 09:43:34',
                 monitoringStartAt: 'XXXXXXXX',
-                monitoringEndAt: '2020-11-04 15:22:09',
+                monitoringEndAt: '2020-11-06 11:52:21',
             })
             .expect(400)
             .then(res => {
@@ -742,15 +742,15 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '1j0tvvsp32auhvspzf5flmzfqgmwjzdqtnxcrsr51a1rkv2e3j',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '0o7qjtk3vbmxxhjkarlc',
-                version: 'iztr78o9wa08vjtybob4',
-                type: 'DETAIL',
-                executedAt: '2020-11-03 23:52:00',
-                monitoringStartAt: '2020-11-04 19:27:48',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: '0c8q4oxnuudnxip7g3h2ui50mn0d4husf3d31o6mtrr3p4qohx',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'gqe2t6uwsjk7u069zisc',
+                version: 'rlbvww9ps03m7z8l0g5w',
+                type: 'SUMMARY',
+                executedAt: '2020-11-05 12:36:29',
+                monitoringStartAt: '2020-11-05 16:57:43',
                 monitoringEndAt: 'XXXXXXXX',
             })
             .expect(400)
@@ -766,16 +766,16 @@ describe('execution', () =>
             .post('/cci/execution')
             .set('Accept', 'application/json')
             .send({
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '65n2g11w20faftsikav24ddy0vwyl657w695epol758smcrv1x',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: '831yi9v2k33jqgid2hp6',
-                version: 'vprbmqv855o3h3pqc3gk',
-                type: 'DETAIL',
-                executedAt: '2020-11-04 16:47:48',
-                monitoringStartAt: '2020-11-04 17:54:16',
-                monitoringEndAt: '2020-11-04 21:46:53',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'yqergdiptfapv1n9xpmexyvnvdrtc7i1w8ftvp8eycxid7lq8o',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: '3uyyuuhc5poc1i4l5fjy',
+                version: '34zvejoqrqtihh3vpdjr',
+                type: 'SUMMARY',
+                executedAt: '2020-11-05 22:17:22',
+                monitoringStartAt: '2020-11-05 15:34:23',
+                monitoringEndAt: '2020-11-06 11:37:15',
             })
             .expect(201);
     });
@@ -810,7 +810,7 @@ describe('execution', () =>
                 {
                     where: 
                     {
-                        id: 'ae9cba92-b5bc-44b0-b869-6fd1103dd81b'
+                        id: '041f133b-b31f-4868-9d5e-356a076041ee'
                     }
                 }
             })
@@ -827,18 +827,18 @@ describe('execution', () =>
                 {
                     where: 
                     {
-                        id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc'
+                        id: '645eb39f-4f69-4f6c-a209-afb545aa6a57'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc'));
+            .expect(repository.collectionResponse.find(item => item.id === '645eb39f-4f69-4f6c-a209-afb545aa6a57'));
     });
 
     test(`/REST:GET cci/execution/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/cci/execution/4271994f-5691-4b36-bbf4-0cb2a20447dd')
+            .get('/cci/execution/6cc68cb7-5cca-46d2-8745-5bb5aa6dd1a2')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -846,10 +846,10 @@ describe('execution', () =>
     test(`/REST:GET cci/execution/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/cci/execution/fd68d466-1d0f-4ebf-ae64-f6c0a34738fc')
+            .get('/cci/execution/645eb39f-4f69-4f6c-a209-afb545aa6a57')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc'));
+            .expect(repository.collectionResponse.find(e => e.id === '645eb39f-4f69-4f6c-a209-afb545aa6a57'));
     });
 
     test(`/REST:GET cci/executions`, () => 
@@ -868,16 +868,16 @@ describe('execution', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'f5e8e150-b652-45f6-bad4-17cd786402d9',
-                tenantId: '27fdb5a8-77ac-44d3-926d-999a3d965751',
-                tenantCode: 'fpav76ohh0fl6cvvgnymw7gdk9uva1633h9izub7jtrn9s682s',
-                systemId: '3205b92a-eb5b-4710-9667-9b3156a359c0',
-                systemName: 'd58erb2l457a3v5r6dzc',
-                version: '3hc18d8rn2ownasp9yii',
-                type: 'DETAIL',
-                executedAt: '2020-11-04 20:48:25',
-                monitoringStartAt: '2020-11-03 23:32:09',
-                monitoringEndAt: '2020-11-04 16:11:50',
+                id: '7df50c57-d959-4b32-84b6-77f38f7e6c6a',
+                tenantId: 'f37a69f9-8c34-4fc2-9754-08d32b990d35',
+                tenantCode: 'qz1sojp27s5oj69841pr8d6t10i0s6txlteneh5775eylhwpyh',
+                systemId: 'a7614dbc-d070-49ae-a5ec-c1e32af54b72',
+                systemName: 'f3ckqehh9w4ssswus5q3',
+                version: '3rl9g71w3sbdo1mzrem5',
+                type: 'SUMMARY',
+                executedAt: '2020-11-05 20:40:54',
+                monitoringStartAt: '2020-11-06 02:17:48',
+                monitoringEndAt: '2020-11-05 23:33:01',
             })
             .expect(404);
     });
@@ -889,25 +889,25 @@ describe('execution', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                tenantCode: '1n9wbdojf3jpd8jyquv1ibvo6l7uxt984a6r64hfvk2n20ynst',
-                systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                systemName: 'nfp05ku0tk16f2mwc2e8',
-                version: '8chj2lswx658p926pfa2',
+                id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                tenantCode: 'ev5zajhfh7c40zo1mfdxl9knim3ssjhsq7k6c5w2zayl45zd73',
+                systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                systemName: 'st07x2dgb70br7ylqdea',
+                version: '20lho5g54dkdf0nrv15q',
                 type: 'SUMMARY',
-                executedAt: '2020-11-04 05:42:34',
-                monitoringStartAt: '2020-11-04 03:59:36',
-                monitoringEndAt: '2020-11-04 22:01:36',
+                executedAt: '2020-11-05 18:49:48',
+                monitoringStartAt: '2020-11-05 15:03:35',
+                monitoringEndAt: '2020-11-06 00:53:59',
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc'));
+            .expect(repository.collectionResponse.find(e => e.id === '645eb39f-4f69-4f6c-a209-afb545aa6a57'));
     });
 
     test(`/REST:DELETE cci/execution/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/execution/63ab3290-b270-4574-a324-c13b95923315')
+            .delete('/cci/execution/7c95c000-4dcd-4ad2-9975-673cac2ccbf5')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -915,7 +915,7 @@ describe('execution', () =>
     test(`/REST:DELETE cci/execution/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/execution/fd68d466-1d0f-4ebf-ae64-f6c0a34738fc')
+            .delete('/cci/execution/645eb39f-4f69-4f6c-a209-afb545aa6a57')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -983,22 +983,22 @@ describe('execution', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '261f84ae-4e5c-48a1-87d0-12908c9d94db',
-                        tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                        tenantCode: '8rp53zecbpjy1eh6q458jtxi45448lakdbaslg6scujddgbag4',
-                        systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                        systemName: 'rkof0u6ficacx9ffkkxx',
-                        version: '5s32z1ce5hsx2h9yf57w',
-                        type: 'SUMMARY',
-                        executedAt: '2020-11-04 02:59:13',
-                        monitoringStartAt: '2020-11-04 02:10:59',
-                        monitoringEndAt: '2020-11-04 17:01:47',
+                        id: '960e2eb8-112b-44a1-a675-5ef02b6df7ce',
+                        tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                        tenantCode: 'xhc116acrl87l8afliguaj44s6ozrw2kb28h5puwr0ujig22ph',
+                        systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                        systemName: 'l1wjzj9wvwxdmdysen1z',
+                        version: 'y5m9c4d3wq2exm84jdjf',
+                        type: 'DETAIL',
+                        executedAt: '2020-11-06 10:43:46',
+                        monitoringStartAt: '2020-11-06 08:58:57',
+                        monitoringEndAt: '2020-11-06 05:53:41',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciCreateExecution).toHaveProperty('id', '261f84ae-4e5c-48a1-87d0-12908c9d94db');
+                expect(res.body.data.cciCreateExecution).toHaveProperty('id', '960e2eb8-112b-44a1-a675-5ef02b6df7ce');
             });
     });
 
@@ -1066,7 +1066,7 @@ describe('execution', () =>
                     {
                         where: 
                         {
-                            id: 'c2522843-93f3-4128-8c12-262dd19609ca'
+                            id: 'dca27de4-aa0b-47aa-88c5-f68e85909ac1'
                         }
                     }
                 }
@@ -1109,14 +1109,14 @@ describe('execution', () =>
                     {
                         where: 
                         {
-                            id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc'
+                            id: '645eb39f-4f69-4f6c-a209-afb545aa6a57'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciFindExecution.id).toStrictEqual('fd68d466-1d0f-4ebf-ae64-f6c0a34738fc');
+                expect(res.body.data.cciFindExecution.id).toStrictEqual('645eb39f-4f69-4f6c-a209-afb545aa6a57');
             });
     });
 
@@ -1145,7 +1145,7 @@ describe('execution', () =>
                     }
                 `,
                 variables: {
-                    id: '971598c7-6d90-4839-837b-f17d1a71a69d'
+                    id: '097578cb-9c7a-49c6-af83-18ec0d873eb3'
                 }
             })
             .expect(200)
@@ -1181,12 +1181,12 @@ describe('execution', () =>
                     }
                 `,
                 variables: {
-                    id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc'
+                    id: '645eb39f-4f69-4f6c-a209-afb545aa6a57'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciFindExecutionById.id).toStrictEqual('fd68d466-1d0f-4ebf-ae64-f6c0a34738fc');
+                expect(res.body.data.cciFindExecutionById.id).toStrictEqual('645eb39f-4f69-4f6c-a209-afb545aa6a57');
             });
     });
 
@@ -1252,16 +1252,16 @@ describe('execution', () =>
                 variables: {
                     payload: {
                         
-                        id: '1a43f839-4451-43c4-8422-37ba97f1ad21',
-                        tenantId: '31bfc92b-5bd4-4f6a-8f8e-375cc79e7971',
-                        tenantCode: 'lt6zkf5bf3f2rs5vs4dwteub0ixkuvcqujevynxx9j0ikfbdqt',
-                        systemId: '69ec500a-283d-4ab2-b2bc-66521de6ae4a',
-                        systemName: 'bwmtb0yo32nhbjl8wgie',
-                        version: '664j9j1qd27g6bo92o5i',
+                        id: '69312926-e0ed-4ae0-b012-9035ae1b14e0',
+                        tenantId: '63c2a330-a55b-4efc-8380-81eac1a601e7',
+                        tenantCode: 'h8trddkduhwb0r75a6m9r6nr0k79oiohxaqqa2x8ri5o8zymfz',
+                        systemId: 'addb3497-7a98-4c9e-a13a-d4ee4dcc0af8',
+                        systemName: '0o51oi4sw945o9q0vw0y',
+                        version: '4845wfc27lqy1empd7qq',
                         type: 'DETAIL',
-                        executedAt: '2020-11-04 08:12:59',
-                        monitoringStartAt: '2020-11-04 13:42:19',
-                        monitoringEndAt: '2020-11-04 05:45:18',
+                        executedAt: '2020-11-05 16:09:43',
+                        monitoringStartAt: '2020-11-06 00:12:27',
+                        monitoringEndAt: '2020-11-05 21:42:35',
                     }
                 }
             })
@@ -1300,22 +1300,22 @@ describe('execution', () =>
                 variables: {
                     payload: {
                         
-                        id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc',
-                        tenantId: '252846d4-267c-4ea0-b36a-ccee1cfe854c',
-                        tenantCode: '1gee52cjf6ht78r4qtei5lzz5xoaq1oaemjpy44aaxoy78yl3o',
-                        systemId: 'f937fb60-968f-46fc-8758-b0916c3da310',
-                        systemName: 'u4g20bpayiozqgaci6lp',
-                        version: 'ra3jn142bv7j9k8po1wf',
+                        id: '645eb39f-4f69-4f6c-a209-afb545aa6a57',
+                        tenantId: 'e030202d-9031-40c4-8704-5c0f288dbea7',
+                        tenantCode: 'efsa64uaxl4xpnw9zmuaxu8jee7uhp7qugaknwirk2i9bo2e82',
+                        systemId: '7cee2245-fefd-4973-a6ec-b8b1f4f740e8',
+                        systemName: 'xdhu7ggfs1g3ad4tnsqy',
+                        version: '4zwhkxd6ovgct8lou5dd',
                         type: 'DETAIL',
-                        executedAt: '2020-11-04 05:18:30',
-                        monitoringStartAt: '2020-11-04 19:57:17',
-                        monitoringEndAt: '2020-11-04 22:30:32',
+                        executedAt: '2020-11-06 10:34:53',
+                        monitoringStartAt: '2020-11-05 16:54:15',
+                        monitoringEndAt: '2020-11-06 11:52:04',
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciUpdateExecution.id).toStrictEqual('fd68d466-1d0f-4ebf-ae64-f6c0a34738fc');
+                expect(res.body.data.cciUpdateExecution.id).toStrictEqual('645eb39f-4f69-4f6c-a209-afb545aa6a57');
             });
     });
 
@@ -1344,7 +1344,7 @@ describe('execution', () =>
                     }
                 `,
                 variables: {
-                    id: '871cddfa-2778-471e-be2d-b63372cdfafb'
+                    id: 'e48da8c6-2aa6-4903-810b-38e43f59edd6'
                 }
             })
             .expect(200)
@@ -1380,12 +1380,12 @@ describe('execution', () =>
                     }
                 `,
                 variables: {
-                    id: 'fd68d466-1d0f-4ebf-ae64-f6c0a34738fc'
+                    id: '645eb39f-4f69-4f6c-a209-afb545aa6a57'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciDeleteExecutionById.id).toStrictEqual('fd68d466-1d0f-4ebf-ae64-f6c0a34738fc');
+                expect(res.body.data.cciDeleteExecutionById.id).toStrictEqual('645eb39f-4f69-4f6c-a209-afb545aa6a57');
             });
     });
 

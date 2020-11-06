@@ -94,7 +94,7 @@ export class CreateChannelService
             lastChangedAt: ChannelLastChangedAt,
             riInterfaceName: ChannelRiInterfaceName,
             riInterfaceNamespace: ChannelRiInterfaceNamespace,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

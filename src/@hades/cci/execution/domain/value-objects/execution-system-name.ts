@@ -9,8 +9,8 @@ export class ExecutionSystemName extends StringValueObject
     {
         super(value, Object.assign({
             name: 'ExecutionSystemName',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             maxLength: 20,
         }, validationRules));
     }

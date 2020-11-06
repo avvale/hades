@@ -9,8 +9,8 @@ export class ChannelProxyPort extends IntValueObject
     {
         super(value, Object.assign({
             name: 'ChannelProxyPort',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 10,
             unsigned: true,
         }, validationRules));

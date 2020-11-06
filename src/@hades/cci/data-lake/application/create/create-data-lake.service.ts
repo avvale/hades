@@ -28,7 +28,7 @@ export class CreateDataLakeService
             executionId: DataLakeExecutionId,
             tenantCode: DataLakeTenantCode,
             payload: DataLakePayload,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

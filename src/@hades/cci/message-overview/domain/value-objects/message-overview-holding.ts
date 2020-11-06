@@ -9,8 +9,8 @@ export class MessageOverviewHolding extends IntValueObject
     {
         super(value, Object.assign({
             name: 'MessageOverviewHolding',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 10,
             unsigned: true,
         }, validationRules));

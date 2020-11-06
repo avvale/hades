@@ -9,8 +9,8 @@ export class FlowId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'FlowId',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 36,
         }, validationRules), data);
     }

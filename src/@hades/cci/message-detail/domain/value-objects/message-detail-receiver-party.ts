@@ -9,8 +9,8 @@ export class MessageDetailReceiverParty extends StringValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailReceiverParty',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 160,
         }, validationRules));
     }

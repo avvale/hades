@@ -26,7 +26,7 @@ export class CreateRoleService
             tenantId: RoleTenantId,
             tenantCode: RoleTenantCode,
             name: RoleName,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

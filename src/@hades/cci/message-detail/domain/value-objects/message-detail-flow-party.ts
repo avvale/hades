@@ -9,8 +9,8 @@ export class MessageDetailFlowParty extends StringValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailFlowParty',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
             maxLength: 160,
         }, validationRules));
     }

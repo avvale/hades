@@ -32,7 +32,6 @@ import { DeleteJobsDetailService } from './application/delete/delete-jobs-detail
 // models
 export { CciJobDetailModel } from './infrastructure/sequelize/sequelize-job-detail.model';
 
-
 // repository
 export { IJobDetailRepository } from './domain/job-detail.repository';
 export { SequelizeJobDetailRepository } from './infrastructure/sequelize/sequelize-job-detail.repository';

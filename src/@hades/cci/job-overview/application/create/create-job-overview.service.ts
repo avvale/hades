@@ -44,7 +44,7 @@ export class CreateJobOverviewService
             cancelled: JobOverviewCancelled,
             completed: JobOverviewCompleted,
             error: JobOverviewError,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

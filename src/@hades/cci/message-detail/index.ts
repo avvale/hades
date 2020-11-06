@@ -32,7 +32,6 @@ import { DeleteMessagesDetailService } from './application/delete/delete-message
 // models
 export { CciMessageDetailModel } from './infrastructure/sequelize/sequelize-message-detail.model';
 
-
 // repository
 export { IMessageDetailRepository } from './domain/message-detail.repository';
 export { SequelizeMessageDetailRepository } from './infrastructure/sequelize/sequelize-message-detail.repository';

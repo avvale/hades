@@ -60,21 +60,21 @@ describe('channel-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'pyyz6c98cgrth65bbl8q48b0r061vh3xbzyt28jt9q93zho6co',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'nd830lb7juigyvwdpd6m',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 03:14:46',
-                executionMonitoringStartAt: '2020-11-04 16:00:58',
-                executionMonitoringEndAt: '2020-11-04 15:00:43',
-                error: 7136191322,
-                inactive: 1906192792,
-                successful: 9442393307,
-                stopped: 3894931507,
-                unknown: 1191843017,
-                unregistered: 7178396551,
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: '7ehec17fwin1rf0iu5l7g9ap15pguiugdba4xbr0jir9zro8nm',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'u03khp35ee95apvstosp',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-05 20:07:54',
+                executionMonitoringStartAt: '2020-11-06 09:57:35',
+                executionMonitoringEndAt: '2020-11-05 15:59:33',
+                error: 7568361453,
+                inactive: 8350423701,
+                successful: 4604317773,
+                stopped: 5336010598,
+                unknown: 4753613613,
+                unregistered: 3606824305,
             })
             .expect(400)
             .then(res => {
@@ -89,21 +89,21 @@ describe('channel-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'qtwnc5rmudfa5quobf5oal4gq9mzel43t8evk1t2xrfkxqk4c2',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: '23mklcpozxwrj4xve88s',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 15:34:44',
-                executionMonitoringStartAt: '2020-11-04 18:06:23',
-                executionMonitoringEndAt: '2020-11-04 08:18:41',
-                error: 1275924003,
-                inactive: 4602409398,
-                successful: 6552221997,
-                stopped: 6884845288,
-                unknown: 7222915399,
-                unregistered: 3886610795,
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'fq7e70aahorqx3d4wrf12ggnhvjwpimdg5nj64a5jgwevgnr37',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '62o8lzeziu6x7x1108rh',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-06 11:21:10',
+                executionMonitoringStartAt: '2020-11-05 23:29:18',
+                executionMonitoringEndAt: '2020-11-06 08:25:27',
+                error: 6135654140,
+                inactive: 9893474327,
+                successful: 7534233279,
+                stopped: 2192385023,
+                unknown: 4193513971,
+                unregistered: 6888199656,
             })
             .expect(400)
             .then(res => {
@@ -117,22 +117,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
                 tenantId: null,
-                tenantCode: 'w5n9un1hzwwuzfuq50h9d6vbh9lr6qartcfvun7071vsyu5pel',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'qc4nj91rfcl4ewu0mdvc',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 04:06:26',
-                executionMonitoringStartAt: '2020-11-04 12:49:20',
-                executionMonitoringEndAt: '2020-11-04 19:20:23',
-                error: 9743397963,
-                inactive: 1765941946,
-                successful: 1591135253,
-                stopped: 6833694774,
-                unknown: 6691621867,
-                unregistered: 6625540347,
+                tenantCode: 'smw6dbhpz1ay98tha0gty2qs1o9ildqkjabeixrp32p55fqy38',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'jskt57oy21jsr4wwyopx',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-06 00:03:50',
+                executionMonitoringStartAt: '2020-11-05 22:54:39',
+                executionMonitoringEndAt: '2020-11-06 07:09:18',
+                error: 7511518901,
+                inactive: 1550846427,
+                successful: 7114006515,
+                stopped: 2021438565,
+                unknown: 7341527480,
+                unregistered: 8979586083,
             })
             .expect(400)
             .then(res => {
@@ -146,22 +146,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
                 
-                tenantCode: '2ummhitz018inuurulu4szlfcsaij5e1040r21r7x0dqqnhd06',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'j19m06asvvqvuy11eguy',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 02:00:38',
-                executionMonitoringStartAt: '2020-11-04 10:31:11',
-                executionMonitoringEndAt: '2020-11-04 15:47:06',
-                error: 8632692239,
-                inactive: 3826268282,
-                successful: 4186599308,
-                stopped: 2937614104,
-                unknown: 3110108122,
-                unregistered: 8298911679,
+                tenantCode: 'kweo30mqgosgr1qoz2fylu0u5xwzv1xirrvnsuz3plo3n24tun',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 's62lsqz3727llo8rsmql',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-05 22:47:43',
+                executionMonitoringStartAt: '2020-11-05 23:54:20',
+                executionMonitoringEndAt: '2020-11-05 13:45:38',
+                error: 2109653992,
+                inactive: 1293829086,
+                successful: 7535583868,
+                stopped: 1060405157,
+                unknown: 8415717214,
+                unregistered: 4151783929,
             })
             .expect(400)
             .then(res => {
@@ -175,22 +175,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
                 tenantCode: null,
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'tx5962qke74hdxaw2uxa',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '9xskwwcyf56zmqmj2dnk',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 17:33:08',
-                executionMonitoringStartAt: '2020-11-04 05:15:45',
-                executionMonitoringEndAt: '2020-11-04 17:05:51',
-                error: 5087302992,
-                inactive: 2878180351,
-                successful: 9864584642,
-                stopped: 6292374296,
-                unknown: 4456965126,
-                unregistered: 2897699092,
+                executionExecutedAt: '2020-11-05 12:45:41',
+                executionMonitoringStartAt: '2020-11-06 11:07:42',
+                executionMonitoringEndAt: '2020-11-06 06:54:19',
+                error: 8404203716,
+                inactive: 8575697325,
+                successful: 6381882014,
+                stopped: 6502401401,
+                unknown: 3149885176,
+                unregistered: 7025880858,
             })
             .expect(400)
             .then(res => {
@@ -204,22 +204,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
                 
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'r147ewvflc3d5vzfgg7p',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '8nl5jqtx857482dtrpfd',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-03 23:09:07',
-                executionMonitoringStartAt: '2020-11-04 12:41:43',
-                executionMonitoringEndAt: '2020-11-04 21:50:57',
-                error: 2019810409,
-                inactive: 9772609296,
-                successful: 6714504535,
-                stopped: 9174260176,
-                unknown: 7405048592,
-                unregistered: 8274672874,
+                executionExecutedAt: '2020-11-06 07:06:45',
+                executionMonitoringStartAt: '2020-11-05 13:18:48',
+                executionMonitoringEndAt: '2020-11-06 07:37:42',
+                error: 7958994137,
+                inactive: 4812103223,
+                successful: 4291367599,
+                stopped: 7189519711,
+                unknown: 4455504424,
+                unregistered: 8484108833,
             })
             .expect(400)
             .then(res => {
@@ -233,22 +233,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'a0amro1cc91oyltvv69x8oxrrpma31mgcy0b63av5qg17t48ot',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'np587e8t7g254tkegbr9vajd78almk6qjgsum4z7rd6g19bxpv',
                 systemId: null,
-                systemName: 'ueteglxygcztd38bzqgs',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 17:15:23',
-                executionMonitoringStartAt: '2020-11-04 05:12:07',
-                executionMonitoringEndAt: '2020-11-04 15:57:21',
-                error: 2921706047,
-                inactive: 5055632080,
-                successful: 9697904620,
-                stopped: 1450001217,
-                unknown: 4252394780,
-                unregistered: 7394190916,
+                systemName: '0bh1k8d28f67mrnz5fms',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-06 06:36:09',
+                executionMonitoringStartAt: '2020-11-06 11:32:33',
+                executionMonitoringEndAt: '2020-11-05 14:28:54',
+                error: 6839348552,
+                inactive: 3561228687,
+                successful: 6127850945,
+                stopped: 6881346755,
+                unknown: 7254141659,
+                unregistered: 4967585158,
             })
             .expect(400)
             .then(res => {
@@ -262,22 +262,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'c20scx5k8bhly1vejpuddqp9ul9xad4l3w77f1rxvf4xu9puba',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'or3lfku85y8xpqmem3zcpg1x2t9v1564u0romytrpdldhxrqeg',
                 
-                systemName: 'qbu2m3936w1zd2327pe8',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                systemName: 'yl815et2ymcvfmebehtp',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 21:34:52',
-                executionMonitoringStartAt: '2020-11-04 13:49:25',
-                executionMonitoringEndAt: '2020-11-03 23:34:56',
-                error: 9954955175,
-                inactive: 6463717579,
-                successful: 9259277467,
-                stopped: 4134643129,
-                unknown: 7818048121,
-                unregistered: 1985465606,
+                executionExecutedAt: '2020-11-05 22:28:24',
+                executionMonitoringStartAt: '2020-11-05 21:39:04',
+                executionMonitoringEndAt: '2020-11-05 20:00:49',
+                error: 5979599669,
+                inactive: 9948339350,
+                successful: 3655240177,
+                stopped: 4494909589,
+                unknown: 8856765234,
+                unregistered: 2040044388,
             })
             .expect(400)
             .then(res => {
@@ -291,22 +291,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'w53usa180xozz4zo2pattl4qpr6a0xfu7esw1wg83kls4xa4vx',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: '0hfr5umahx4bouh2unoi3903q7djuv8xmk15xm1uorvfn2gv9l',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
                 systemName: null,
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 05:31:01',
-                executionMonitoringStartAt: '2020-11-04 01:36:02',
-                executionMonitoringEndAt: '2020-11-04 16:16:11',
-                error: 1309375739,
-                inactive: 3756100487,
-                successful: 8999357477,
-                stopped: 2960354259,
-                unknown: 5504974242,
-                unregistered: 2092882864,
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-06 05:45:25',
+                executionMonitoringStartAt: '2020-11-06 04:55:24',
+                executionMonitoringEndAt: '2020-11-06 07:17:31',
+                error: 9181387875,
+                inactive: 1081846158,
+                successful: 6621477867,
+                stopped: 4985905209,
+                unknown: 1358232503,
+                unregistered: 9342466745,
             })
             .expect(400)
             .then(res => {
@@ -320,22 +320,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'n0zhsc2n6j2eemrjkfecjkz78u7z2rp0wm2i6b6lp2lc0kqugm',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'ffa4qomperaxc54ikm433h0mb7wz1n66c9irgzq2p936t85vck',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
                 
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 16:21:52',
-                executionMonitoringStartAt: '2020-11-04 04:59:31',
-                executionMonitoringEndAt: '2020-11-04 14:46:46',
-                error: 2026720565,
-                inactive: 4274552576,
-                successful: 3905521232,
-                stopped: 6567555204,
-                unknown: 4703099229,
-                unregistered: 8511507179,
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-06 08:05:41',
+                executionMonitoringStartAt: '2020-11-06 05:12:48',
+                executionMonitoringEndAt: '2020-11-06 09:14:19',
+                error: 6405317130,
+                inactive: 9834908392,
+                successful: 4643804571,
+                stopped: 6463347585,
+                unknown: 5662699011,
+                unregistered: 8885791061,
             })
             .expect(400)
             .then(res => {
@@ -349,22 +349,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'cxzb7g66i0zu7rkfn5n0e5j1xdpwf52zczs0chf52yuwu1qq9m',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'opif622tlxq55v3jh6p7',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: '3cf97xyxkm3yjt1i9mh3ih80x7peoxcxqgxyrxwcvf8lefwdup',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'rdpg8m57eta4npym88jz',
                 executionId: null,
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 17:19:10',
-                executionMonitoringStartAt: '2020-11-04 17:03:50',
-                executionMonitoringEndAt: '2020-11-04 02:26:20',
-                error: 4333307471,
-                inactive: 4440882286,
-                successful: 4847957479,
-                stopped: 6998982171,
-                unknown: 5012451338,
-                unregistered: 2011164653,
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-05 18:47:53',
+                executionMonitoringStartAt: '2020-11-05 22:39:35',
+                executionMonitoringEndAt: '2020-11-06 03:32:15',
+                error: 4806614727,
+                inactive: 3932852445,
+                successful: 6870628763,
+                stopped: 1541839459,
+                unknown: 8106876910,
+                unregistered: 2383298748,
             })
             .expect(400)
             .then(res => {
@@ -378,22 +378,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '5cmdgkaq9ptweh3izgswc042btkibkqlpl0oi2wowiwgkplgpr',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'ftkbika9r3bmrcq9dwr5',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'rc9hxzxdkxvu2a4d10jwe2i5jqx1g90ig0e53a8n99tu6hzs6q',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '6qt3c2ib1lvgng134ap4',
                 
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 03:34:52',
-                executionMonitoringStartAt: '2020-11-04 13:41:48',
-                executionMonitoringEndAt: '2020-11-04 11:54:03',
-                error: 3894092966,
-                inactive: 7074532755,
-                successful: 3693239004,
-                stopped: 2678816950,
-                unknown: 4976881342,
-                unregistered: 4332859278,
+                executionExecutedAt: '2020-11-05 22:27:08',
+                executionMonitoringStartAt: '2020-11-05 17:57:56',
+                executionMonitoringEndAt: '2020-11-06 07:10:57',
+                error: 9209166789,
+                inactive: 9026234535,
+                successful: 2485842036,
+                stopped: 3870933128,
+                unknown: 6413763040,
+                unregistered: 1888798040,
             })
             .expect(400)
             .then(res => {
@@ -407,22 +407,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '8x7l43t5smx079f8nln2om5pznqpzwiohfx3u1uie695cqcmfo',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'zcrj8gj3wnjjoc3fx9vy',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'znjvqvlyfm6xbgs33g74mt5yux55llju4as8mukmcr73z24wp7',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '9w01lh6ttm8effa0siik',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: null,
-                executionExecutedAt: '2020-11-04 09:34:55',
-                executionMonitoringStartAt: '2020-11-04 14:03:51',
-                executionMonitoringEndAt: '2020-11-04 22:47:56',
-                error: 1229553276,
-                inactive: 9283121385,
-                successful: 8060722271,
-                stopped: 7871405229,
-                unknown: 6264087981,
-                unregistered: 9588252629,
+                executionExecutedAt: '2020-11-06 07:57:09',
+                executionMonitoringStartAt: '2020-11-06 10:45:24',
+                executionMonitoringEndAt: '2020-11-06 01:35:07',
+                error: 7402636995,
+                inactive: 5404425190,
+                successful: 3041831550,
+                stopped: 8485243462,
+                unknown: 4014418552,
+                unregistered: 2764481223,
             })
             .expect(400)
             .then(res => {
@@ -436,22 +436,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '1bj7ec4n47nu3dlickaiy5f9ouqukbsohpx4xpjtrd8igqp7uh',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'nfxr4g3hjg5w60slwfe9',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: '1pt0lrkjnzxz6t2pumq6gdaabgjdsi935g4bp3peqmesclu94m',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'x6oi6grq4qmhkj71o5gu',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 
-                executionExecutedAt: '2020-11-04 01:48:25',
-                executionMonitoringStartAt: '2020-11-04 09:40:17',
-                executionMonitoringEndAt: '2020-11-04 22:53:53',
-                error: 7685688003,
-                inactive: 8706843269,
-                successful: 5396490436,
-                stopped: 6789478432,
-                unknown: 2219824651,
-                unregistered: 2988865220,
+                executionExecutedAt: '2020-11-05 15:02:17',
+                executionMonitoringStartAt: '2020-11-06 06:45:40',
+                executionMonitoringEndAt: '2020-11-06 10:49:11',
+                error: 7292261541,
+                inactive: 1798452411,
+                successful: 8491100190,
+                stopped: 1071308947,
+                unknown: 4157722356,
+                unregistered: 9195373449,
             })
             .expect(400)
             .then(res => {
@@ -465,22 +465,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '7kia6pxxv388b3cq3pc99a4zzz4ze8pu9829fauirzzegp88s4',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'qh322hem6xau626c01nj',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: '1qb5yxn7gzkncu3t82vfksjoyk2fgwinne5y5wy8hkbbf1lyrl',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'cw2ge3o2ymrwpa9u0muq',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'DETAIL',
                 executionExecutedAt: null,
-                executionMonitoringStartAt: '2020-11-04 11:52:13',
-                executionMonitoringEndAt: '2020-11-04 12:19:22',
-                error: 8763412819,
-                inactive: 9774669167,
-                successful: 3189233058,
-                stopped: 6345020695,
-                unknown: 5561090159,
-                unregistered: 9007088041,
+                executionMonitoringStartAt: '2020-11-05 15:45:30',
+                executionMonitoringEndAt: '2020-11-06 02:42:43',
+                error: 6507220478,
+                inactive: 5915569650,
+                successful: 5911184371,
+                stopped: 2755748479,
+                unknown: 5736330764,
+                unregistered: 3625364413,
             })
             .expect(400)
             .then(res => {
@@ -494,22 +494,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '4d0k8bac0zqce2th9bvhod0rs2mxbc1lnuy7imbzcdbxbdputs',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'ty14otgf0o5unmtjtae8',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'rp9wl40nl0mktf78w9qcfs879w5tso4s7hfefuiwha9csrhce7',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'fezqw9jqt4xx14f3d5bt',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
                 
-                executionMonitoringStartAt: '2020-11-04 01:33:40',
-                executionMonitoringEndAt: '2020-11-04 09:11:38',
-                error: 2939290416,
-                inactive: 6451429854,
-                successful: 5341294594,
-                stopped: 1168557410,
-                unknown: 1698656894,
-                unregistered: 6948573909,
+                executionMonitoringStartAt: '2020-11-05 12:57:32',
+                executionMonitoringEndAt: '2020-11-06 05:26:12',
+                error: 2589095437,
+                inactive: 3431685785,
+                successful: 8839609555,
+                stopped: 7948407688,
+                unknown: 3406351726,
+                unregistered: 7237257327,
             })
             .expect(400)
             .then(res => {
@@ -523,22 +523,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'qaxcukxb60gyyotfofch9l3dfzzjjno5dkkcly8zq0krvlur29',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: '13ga2ge0a62xpden0ysd',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 18:48:13',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: '21uby3d6l8snwu8n6eg42xvv8ubevj43f4ouujpjh0d0tayi07',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'etcx2i8qrasnvf7jrnrl',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-06 02:21:59',
                 executionMonitoringStartAt: null,
-                executionMonitoringEndAt: '2020-11-04 08:38:15',
-                error: 2597780806,
-                inactive: 1375303628,
-                successful: 5038913607,
-                stopped: 9512864216,
-                unknown: 1473730204,
-                unregistered: 6535600487,
+                executionMonitoringEndAt: '2020-11-06 10:41:41',
+                error: 8843338407,
+                inactive: 2533331282,
+                successful: 4635153436,
+                stopped: 7646448434,
+                unknown: 2114723677,
+                unregistered: 3296199752,
             })
             .expect(400)
             .then(res => {
@@ -552,22 +552,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'zjpgyqylf5jn3vqmrv7j3gjuv6hlipsa25vz7k8j0glxzy9mbh',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'sk9tfiauobq6gaorphzv',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'wkpxaeqk8kjgnq8bwzotmjl7ja4wzoetiolu8nyu2ozjsdhoze',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '6iamys8aajznly4q5k8g',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 15:14:41',
+                executionExecutedAt: '2020-11-05 14:59:32',
                 
-                executionMonitoringEndAt: '2020-11-04 22:15:07',
-                error: 9011585744,
-                inactive: 9538588725,
-                successful: 6021212889,
-                stopped: 3346547984,
-                unknown: 1040635254,
-                unregistered: 3166863851,
+                executionMonitoringEndAt: '2020-11-05 19:17:16',
+                error: 3298134117,
+                inactive: 9057286811,
+                successful: 4640785204,
+                stopped: 3013187480,
+                unknown: 9064623307,
+                unregistered: 1016870945,
             })
             .expect(400)
             .then(res => {
@@ -581,22 +581,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'z2jzvjd6vwe2t6d4biic3gaz1hof1cuyn8doewu51cr7qt1xd0',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'clravwy9dlg2pyl2fl90',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 12:27:25',
-                executionMonitoringStartAt: '2020-11-04 03:24:24',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'qnqhjwsdblwq8z3cr2wk1ri74rz67yps8fzimcdg7evfyrcrr1',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '04yvfxlklp7153s6c2s8',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-05 19:11:37',
+                executionMonitoringStartAt: '2020-11-06 05:49:08',
                 executionMonitoringEndAt: null,
-                error: 3642453038,
-                inactive: 5957240491,
-                successful: 9829060929,
-                stopped: 4870445948,
-                unknown: 5965281825,
-                unregistered: 4718607650,
+                error: 3864683138,
+                inactive: 9854609479,
+                successful: 9520600572,
+                stopped: 2558010617,
+                unknown: 5212331649,
+                unregistered: 8375811441,
             })
             .expect(400)
             .then(res => {
@@ -610,22 +610,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '9skbeqi8x8sz8l1zmoporwsfp4cb605fsmin7npd298lrtbof0',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: '9lv9rnxj6h20efyvamwb',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'c35ox5d7uwr9jtsgg7gdofdqdknlo89y4528iki3ju9t0825co',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'qv92pc7t2bemnc4s332u',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 18:21:50',
-                executionMonitoringStartAt: '2020-11-04 16:14:34',
+                executionExecutedAt: '2020-11-06 01:34:46',
+                executionMonitoringStartAt: '2020-11-05 16:09:19',
                 
-                error: 1904389499,
-                inactive: 3160671885,
-                successful: 5499823356,
-                stopped: 2442329380,
-                unknown: 4230725104,
-                unregistered: 1602636993,
+                error: 6675013494,
+                inactive: 5469416194,
+                successful: 4283398820,
+                stopped: 4548417983,
+                unknown: 4780014978,
+                unregistered: 8633685771,
             })
             .expect(400)
             .then(res => {
@@ -641,22 +641,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: 'qx6ja7w5c6oaibdmvtyktzyfepwpazs20pmn1',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'ihijskevunx8t985tipyw3vng8ahnlab6n2upujmryr2e6lfnz',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 't5rcjtne60bbgmh12t2h',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-03 23:39:46',
-                executionMonitoringStartAt: '2020-11-04 14:08:48',
-                executionMonitoringEndAt: '2020-11-04 03:00:46',
-                error: 8786374376,
-                inactive: 2729297510,
-                successful: 4808950841,
-                stopped: 6571508986,
-                unknown: 5004418448,
-                unregistered: 9336080323,
+                id: 'diu9ebjc2634kstolx38yiqmst4zp7hqw701q',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'xeurjwy8cii1569qt69tqcx6d37mlpfp6vkfji3bk7a9ctlle3',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '1xo155c1shk146buofwl',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-06 03:15:16',
+                executionMonitoringStartAt: '2020-11-05 13:56:48',
+                executionMonitoringEndAt: '2020-11-05 13:52:23',
+                error: 8794377381,
+                inactive: 8122911405,
+                successful: 2046230004,
+                stopped: 8328196317,
+                unknown: 7927525795,
+                unregistered: 1358538520,
             })
             .expect(400)
             .then(res => {
@@ -670,22 +670,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'mkmlik0e6dwrcdymvcy0fbzo3do8tkxupurbm',
-                tenantCode: 'avf0hewu80de4qujtia8z76ofy2q6gj53984prvvrarh7xohps',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'mrqhcbc2su3hisixpgrl',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: 'u2nbsiohjwofb0egmt8jpfb9olyqq2zmxf1xv',
+                tenantCode: 'hh3wym0j5tewiurhvz84u60df3dg53i3hkrmveud5okonvu84h',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'lzu1tnbpul0aiyxivg6g',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 15:30:59',
-                executionMonitoringStartAt: '2020-11-03 23:07:33',
-                executionMonitoringEndAt: '2020-11-04 18:40:24',
-                error: 1031663891,
-                inactive: 7324888920,
-                successful: 8047171037,
-                stopped: 7106369439,
-                unknown: 3238830587,
-                unregistered: 2325914318,
+                executionExecutedAt: '2020-11-05 19:20:14',
+                executionMonitoringStartAt: '2020-11-06 10:08:24',
+                executionMonitoringEndAt: '2020-11-06 07:36:14',
+                error: 6064268086,
+                inactive: 6992129968,
+                successful: 6471543990,
+                stopped: 4258665543,
+                unknown: 4219846666,
+                unregistered: 5117210628,
             })
             .expect(400)
             .then(res => {
@@ -699,22 +699,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'ysb44o7a4hnkotqe5pfdykhsr1etg5m438smcu7pag9g3go0ek',
-                systemId: 'yrvzr0ql2ah3c7d3v45btzwe3snarlc6cx355',
-                systemName: 'eyfigwipyd0hb86i8poi',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'v96nz04zb95ipgoflqvgs48b54aepaxq00hdk90wiiy4ppsy75',
+                systemId: '9ot9yzo4nned8n2fgculglx0ztavk0s4l3ovn',
+                systemName: 'buj5hlo271d0mdillxi8',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 11:28:25',
-                executionMonitoringStartAt: '2020-11-04 01:38:51',
-                executionMonitoringEndAt: '2020-11-04 00:18:23',
-                error: 8077983991,
-                inactive: 2150518205,
-                successful: 7497099143,
-                stopped: 6679693703,
-                unknown: 3069658071,
-                unregistered: 4677590676,
+                executionExecutedAt: '2020-11-06 04:59:42',
+                executionMonitoringStartAt: '2020-11-05 20:14:00',
+                executionMonitoringEndAt: '2020-11-06 07:53:51',
+                error: 8420112896,
+                inactive: 5548683354,
+                successful: 1320719625,
+                stopped: 4865500816,
+                unknown: 5631231800,
+                unregistered: 3224734466,
             })
             .expect(400)
             .then(res => {
@@ -728,22 +728,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'aklzvfqybnvxu06uuhyjak287nj9wejkd69ojv6yy3fs15a2zv',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'gjvnogt2tg4p5spa9xbg',
-                executionId: 'ae5jbj88becxufl6owqdohf8bav0m6oxpyynj',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 08:48:37',
-                executionMonitoringStartAt: '2020-11-04 11:00:51',
-                executionMonitoringEndAt: '2020-11-04 13:57:02',
-                error: 5326061885,
-                inactive: 3304501217,
-                successful: 2667365285,
-                stopped: 1116842848,
-                unknown: 1705985543,
-                unregistered: 2492971438,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'ielqa1qt6ptvrgyylomrnpcjq96ltn2doqxru9rpq8a9tbehuw',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '8r449alncqq0b54y298a',
+                executionId: '05jj9rvwon7l30qbt24x4jksii73iyc8h1yvi',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-05 20:47:36',
+                executionMonitoringStartAt: '2020-11-05 23:13:50',
+                executionMonitoringEndAt: '2020-11-06 09:52:32',
+                error: 9629980151,
+                inactive: 3472632199,
+                successful: 5139572022,
+                stopped: 2717973126,
+                unknown: 8267762412,
+                unregistered: 1657674351,
             })
             .expect(400)
             .then(res => {
@@ -759,22 +759,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '12scjjc6hb3oo9euev3kthpizev9pnlgecqlk8hetfa1ds1p10q',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'eg59d5rw3rgkn6mj0qfh',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 01:41:05',
-                executionMonitoringStartAt: '2020-11-04 17:45:04',
-                executionMonitoringEndAt: '2020-11-04 04:29:37',
-                error: 1660181833,
-                inactive: 1108140939,
-                successful: 6558163172,
-                stopped: 6988244288,
-                unknown: 3117770349,
-                unregistered: 9361433213,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: '4kiqmq2o5pet9ssqfwxhqkopvkdm27iy6xnszyha3ynv8wxxiuz',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'dnm2fl3wgn8paz25efqf',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-05 21:46:24',
+                executionMonitoringStartAt: '2020-11-05 16:06:30',
+                executionMonitoringEndAt: '2020-11-06 04:06:50',
+                error: 5338893965,
+                inactive: 8741566437,
+                successful: 5927450958,
+                stopped: 6465930837,
+                unknown: 7722063889,
+                unregistered: 5186616262,
             })
             .expect(400)
             .then(res => {
@@ -788,22 +788,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'tq31ivf0emkwfp4folxzoqwnh3hp4qvmzpy31d44y5qxxbuko8',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'pxagu279m2m85mnrgbpmk',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 21:16:10',
-                executionMonitoringStartAt: '2020-11-04 19:44:42',
-                executionMonitoringEndAt: '2020-11-04 15:33:38',
-                error: 5390242840,
-                inactive: 1496134808,
-                successful: 8262554839,
-                stopped: 5989868250,
-                unknown: 1520828453,
-                unregistered: 5978946031,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: '3yla8omuq3v3o6ancehg3bpfqsqbobzzqf1w3uwfemgdx70qtc',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'pt29a04nb34sblu58z0kj',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-06 08:06:49',
+                executionMonitoringStartAt: '2020-11-05 17:19:12',
+                executionMonitoringEndAt: '2020-11-06 00:06:39',
+                error: 1800494228,
+                inactive: 9998527290,
+                successful: 8225834761,
+                stopped: 7885955750,
+                unknown: 2956193213,
+                unregistered: 5371721242,
             })
             .expect(400)
             .then(res => {
@@ -817,22 +817,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'ju55irgrzkeh0chuedm5jx3x771251to3kmonginvyo226el9j',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'uehfmcxu92slyfddnjd3',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 18:04:56',
-                executionMonitoringStartAt: '2020-11-04 05:37:29',
-                executionMonitoringEndAt: '2020-11-04 12:27:32',
-                error: 75115515713,
-                inactive: 2272426526,
-                successful: 4603813867,
-                stopped: 3993681172,
-                unknown: 9002662219,
-                unregistered: 1509144127,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'z17ng5uixbic36tmp6758kduygdawu7wvbk5jkw85rowazf5wy',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'oczmcahncpc722c9rwzs',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-05 12:40:59',
+                executionMonitoringStartAt: '2020-11-06 08:31:00',
+                executionMonitoringEndAt: '2020-11-06 00:13:32',
+                error: 40045760737,
+                inactive: 9646398035,
+                successful: 7496097904,
+                stopped: 5105603937,
+                unknown: 9149764602,
+                unregistered: 4718191840,
             })
             .expect(400)
             .then(res => {
@@ -846,22 +846,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'upsateas4773oly3s5nyy2laps8hlt2dckzm5n2sye2dbn4ahe',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: '4oxwdorqyttvgw5j9mwi',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 09:29:17',
-                executionMonitoringStartAt: '2020-11-04 07:56:18',
-                executionMonitoringEndAt: '2020-11-04 17:22:25',
-                error: 4825433160,
-                inactive: 38968671946,
-                successful: 1181383024,
-                stopped: 6394272952,
-                unknown: 5246286515,
-                unregistered: 3968858527,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: '4xkfr55ucxwk4jbtf578g405miumxxhnnl4chxrkmldxmp49wq',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'hw7p9r63i5kl351rty14',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-06 06:38:05',
+                executionMonitoringStartAt: '2020-11-05 13:03:20',
+                executionMonitoringEndAt: '2020-11-05 12:11:43',
+                error: 9598533072,
+                inactive: 77294396926,
+                successful: 5822295051,
+                stopped: 3149760532,
+                unknown: 6864842136,
+                unregistered: 2256445107,
             })
             .expect(400)
             .then(res => {
@@ -875,22 +875,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'fgtugcl8aokl719twmm9atyczczuz2k97vd9rrx2545i8598nx',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'ajh8101sz4q1cficr36x',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'wdjfyaddd2vbcq3xsc84fe74w4td75whw3zmu79p0bt7f6g7th',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'jdpbks0ng0rlhs81ap4o',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 16:37:06',
-                executionMonitoringStartAt: '2020-11-04 18:50:53',
-                executionMonitoringEndAt: '2020-11-04 21:11:05',
-                error: 3279625470,
-                inactive: 3870092733,
-                successful: 98968958033,
-                stopped: 7234023577,
-                unknown: 5762069838,
-                unregistered: 4711302204,
+                executionExecutedAt: '2020-11-05 19:06:09',
+                executionMonitoringStartAt: '2020-11-06 01:52:14',
+                executionMonitoringEndAt: '2020-11-06 00:58:41',
+                error: 9738673832,
+                inactive: 2272447093,
+                successful: 29647201622,
+                stopped: 8683425674,
+                unknown: 5890158844,
+                unregistered: 9833424807,
             })
             .expect(400)
             .then(res => {
@@ -904,22 +904,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '7bp511to0cc5dygas63k3o6oyj5omfaljyanx4g6gy1msunnkd',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: '7tmbvj5p6tsk4rycfja1',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 01:06:20',
-                executionMonitoringStartAt: '2020-11-04 16:28:36',
-                executionMonitoringEndAt: '2020-11-04 08:02:06',
-                error: 6798803968,
-                inactive: 8617066021,
-                successful: 6137002036,
-                stopped: 49467967835,
-                unknown: 4941328661,
-                unregistered: 2293645654,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'pzks4gca2zsprvnquzilta23wlsfsyjk1hf1freugws8rmba4z',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'ybzbwb07f7bx2e9woqey',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-05 20:36:27',
+                executionMonitoringStartAt: '2020-11-05 23:29:17',
+                executionMonitoringEndAt: '2020-11-06 00:54:00',
+                error: 6904959143,
+                inactive: 9219598650,
+                successful: 7689536506,
+                stopped: 86293853534,
+                unknown: 1178341562,
+                unregistered: 1902613514,
             })
             .expect(400)
             .then(res => {
@@ -933,22 +933,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '2f9o0yr4o7tv4cxwo2h2x7d1mcjlw70rbt9kpz2kgtxgbabaup',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'bink5u3q6zft122rzot9',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'efjwanq4a4mwxuqbg5f7czy0hw7acpp63tacihgmnruz0orrz7',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '95zkjfx111vruafd6lni',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 14:25:42',
-                executionMonitoringStartAt: '2020-11-04 01:56:09',
-                executionMonitoringEndAt: '2020-11-04 05:26:06',
-                error: 5156190447,
-                inactive: 7259076515,
-                successful: 7937680607,
-                stopped: 9619019578,
-                unknown: 69858210590,
-                unregistered: 6697780121,
+                executionExecutedAt: '2020-11-06 04:05:52',
+                executionMonitoringStartAt: '2020-11-06 08:30:08',
+                executionMonitoringEndAt: '2020-11-05 13:44:48',
+                error: 1857158506,
+                inactive: 1600613186,
+                successful: 4338185438,
+                stopped: 7182760939,
+                unknown: 39854055437,
+                unregistered: 2574164699,
             })
             .expect(400)
             .then(res => {
@@ -962,22 +962,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '2f5t7tj5g0dhv32tx16d999c9ey670r5j6iuu9tht52ax8wbc8',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'c72m5qzzfy84yhigg5kc',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 00:15:44',
-                executionMonitoringStartAt: '2020-11-04 12:43:07',
-                executionMonitoringEndAt: '2020-11-04 01:28:54',
-                error: 3073977605,
-                inactive: 2611520375,
-                successful: 7172564088,
-                stopped: 2037487699,
-                unknown: 7760725023,
-                unregistered: 83297756292,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'j2b4mt5gw42e45ce836sxeawq4m59v2iecs9n0wf1dpbb2l2kf',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'bmesas7h2f8bdxmlwyhn',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-05 23:51:13',
+                executionMonitoringStartAt: '2020-11-05 20:53:21',
+                executionMonitoringEndAt: '2020-11-06 11:20:31',
+                error: 4614748978,
+                inactive: 5386099551,
+                successful: 5327673841,
+                stopped: 5739021842,
+                unknown: 8076572042,
+                unregistered: 63623450468,
             })
             .expect(400)
             .then(res => {
@@ -997,22 +997,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'hro4j55gt1tkm08q19cu2udzxd3nyhowamcc2btjn34s493x0q',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'tohr38437ux2uh0bd1ai',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 04:18:56',
-                executionMonitoringStartAt: '2020-11-04 09:12:36',
-                executionMonitoringEndAt: '2020-11-04 11:01:11',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'sbnqnwsq91et6n56mqfkuboll8occ5zih7rqrxrwjprn7ciftr',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'kja57nnm0rio94szgwem',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-06 09:26:11',
+                executionMonitoringStartAt: '2020-11-05 21:14:37',
+                executionMonitoringEndAt: '2020-11-06 11:10:10',
                 error: -9,
-                inactive: 6035739318,
-                successful: 1750353928,
-                stopped: 6097074791,
-                unknown: 4743716768,
-                unregistered: 4743340861,
+                inactive: 3859890283,
+                successful: 5080427352,
+                stopped: 9387075324,
+                unknown: 2224168477,
+                unregistered: 2467059860,
             })
             .expect(400)
             .then(res => {
@@ -1026,22 +1026,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'wn5dj0i4ez2uje4d9oxos6wg67zxzf6kdpfhudawzoc19007sw',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'jrdtq668bn4o0e2a0sg3',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'oe2ii0wbizd9e0m3l2s4bu2dbpzjrs5qj0zo3vct9ogl48t70p',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'mft9r5giqmrhkrwlihbh',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 04:39:36',
-                executionMonitoringStartAt: '2020-11-04 09:19:15',
-                executionMonitoringEndAt: '2020-11-04 10:47:36',
-                error: 4720528707,
+                executionExecutedAt: '2020-11-05 17:14:44',
+                executionMonitoringStartAt: '2020-11-05 18:58:09',
+                executionMonitoringEndAt: '2020-11-05 23:51:03',
+                error: 7516575396,
                 inactive: -9,
-                successful: 8108602292,
-                stopped: 8847054050,
-                unknown: 5310226669,
-                unregistered: 3027853665,
+                successful: 5385827920,
+                stopped: 9192672439,
+                unknown: 3026539452,
+                unregistered: 5813002360,
             })
             .expect(400)
             .then(res => {
@@ -1055,22 +1055,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'gv9bzla4llo4whwu2um812twzqlyxp5jjz6rn7q077d3qo3sss',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'g0dopurzoj86r9ymekex',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 12:14:10',
-                executionMonitoringStartAt: '2020-11-04 00:51:49',
-                executionMonitoringEndAt: '2020-11-04 07:28:15',
-                error: 9997348388,
-                inactive: 8779316428,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'g1x210n1s2m82ao3g9uuxnxjsigk0v69kj87v4y0vt34fmcsfd',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'fmlhft03jwfe812t1f46',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-06 03:09:36',
+                executionMonitoringStartAt: '2020-11-05 14:13:25',
+                executionMonitoringEndAt: '2020-11-06 08:48:52',
+                error: 5447557851,
+                inactive: 1875098249,
                 successful: -9,
-                stopped: 6435549912,
-                unknown: 5026473388,
-                unregistered: 8834933391,
+                stopped: 5574254159,
+                unknown: 2396823364,
+                unregistered: 9728611266,
             })
             .expect(400)
             .then(res => {
@@ -1084,22 +1084,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'fhwk7bu5pwf1h6dhy4bn5pwwhxb2owb924ddo4hht6nlcn20v3',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: '8tr9cz3mdf1dq3mfh5se',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'rsm2zlwd1h63sw5e9c6t48v8830mwqaepr5pm2gqhl99bdj6su',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'n6h7drfpv8ckqacod2pw',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 07:07:41',
-                executionMonitoringStartAt: '2020-11-04 04:34:39',
-                executionMonitoringEndAt: '2020-11-04 12:18:46',
-                error: 3813010442,
-                inactive: 8740559491,
-                successful: 2670160741,
+                executionExecutedAt: '2020-11-06 11:23:18',
+                executionMonitoringStartAt: '2020-11-06 01:29:56',
+                executionMonitoringEndAt: '2020-11-06 03:53:29',
+                error: 5149654609,
+                inactive: 3196832663,
+                successful: 9278797594,
                 stopped: -9,
-                unknown: 6227217033,
-                unregistered: 4979631913,
+                unknown: 8334311747,
+                unregistered: 1876182345,
             })
             .expect(400)
             .then(res => {
@@ -1113,22 +1113,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'fg69v0jhlrioxdutfme7q8yhlkchtshcaz1zs8kp95qvirek6s',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: '6e1fphf2m9vxur56x1v0',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 11:43:27',
-                executionMonitoringStartAt: '2020-11-04 01:52:23',
-                executionMonitoringEndAt: '2020-11-04 16:10:22',
-                error: 6194972758,
-                inactive: 3077726673,
-                successful: 3477109001,
-                stopped: 5332322266,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'u3077jz1pd4qco2khjds60pwzf9i0lppymkiveodhfsp9eb8uu',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'c2et1cpn0yujr7yock4l',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-05 22:57:02',
+                executionMonitoringStartAt: '2020-11-05 20:53:35',
+                executionMonitoringEndAt: '2020-11-06 09:26:06',
+                error: 9823110499,
+                inactive: 5384335124,
+                successful: 5086347523,
+                stopped: 7960986645,
                 unknown: -9,
-                unregistered: 3552457111,
+                unregistered: 4537727301,
             })
             .expect(400)
             .then(res => {
@@ -1142,21 +1142,21 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'b02rhk3f9l0969nzp3qaozev5lu5imd7xo3arghx1xffeyabyr',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: '9fuhe0j9laq0ff7dm4wd',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 05:08:05',
-                executionMonitoringStartAt: '2020-11-04 22:40:37',
-                executionMonitoringEndAt: '2020-11-04 06:10:58',
-                error: 2777016866,
-                inactive: 6625473531,
-                successful: 9539067076,
-                stopped: 3613555296,
-                unknown: 3531178113,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'rqs2i3l767kl253gmo0b14inqqbyg45whb4pcqu17f8xjypqdw',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'phkl7x7indq4gl6rpcne',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-05 19:25:35',
+                executionMonitoringStartAt: '2020-11-06 07:56:10',
+                executionMonitoringEndAt: '2020-11-06 01:55:16',
+                error: 6021769279,
+                inactive: 5393501852,
+                successful: 7559548444,
+                stopped: 4232512061,
+                unknown: 8415479876,
                 unregistered: -9,
             })
             .expect(400)
@@ -1175,22 +1175,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '2csjya948pm4u4fnfoasaha8puln51136baflxzj6e78xo5em3',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'i03umzy30miylceaa3rs',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'xyjehqzp3vev5rjvc8hyjjar5hh8p0pvcndxsc272n9r7qcmv9',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'h95ncxa7u6ea9lizal8j',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'XXXX',
-                executionExecutedAt: '2020-11-04 18:00:14',
-                executionMonitoringStartAt: '2020-11-03 23:59:13',
-                executionMonitoringEndAt: '2020-11-04 02:39:47',
-                error: 5124298125,
-                inactive: 5027069956,
-                successful: 6200184847,
-                stopped: 8192365123,
-                unknown: 4932647551,
-                unregistered: 5941678486,
+                executionExecutedAt: '2020-11-06 04:33:28',
+                executionMonitoringStartAt: '2020-11-05 23:54:04',
+                executionMonitoringEndAt: '2020-11-06 01:38:41',
+                error: 9701170258,
+                inactive: 1202121750,
+                successful: 8607235252,
+                stopped: 9590809876,
+                unknown: 8794944583,
+                unregistered: 4162312023,
             })
             .expect(400)
             .then(res => {
@@ -1206,22 +1206,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: 'wp0kyo3go37ozx4fv8pwax0l8vjez8rkv7jeuedqoeivqo65ia',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'sc79i34elikc9m6t78lw',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'in3dir1da43ezpzleq3gl5eurlnz3midppxzgenfdq81z4ia18',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'v7n8f90a46bclv495scr',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
                 executionExecutedAt: 'XXXXXXXX',
-                executionMonitoringStartAt: '2020-11-04 14:56:40',
-                executionMonitoringEndAt: '2020-11-04 17:12:39',
-                error: 9542542020,
-                inactive: 1070805950,
-                successful: 5390387287,
-                stopped: 3796292154,
-                unknown: 6710573804,
-                unregistered: 3559985734,
+                executionMonitoringStartAt: '2020-11-05 15:39:39',
+                executionMonitoringEndAt: '2020-11-05 12:27:03',
+                error: 8153404995,
+                inactive: 8815385603,
+                successful: 7767825783,
+                stopped: 4527294195,
+                unknown: 2720844770,
+                unregistered: 5058701682,
             })
             .expect(400)
             .then(res => {
@@ -1235,22 +1235,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '2119tf1qgrx3avul5i1gtxt2d5g9yhy67ocbh35erbc5iaxxni',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'ign5nqkf61jsh9d85owd',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'yxcub81xu5w5iq7l4q3o57grp26yctrapi7my6yd7u5o3v8hbv',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'xmppky0w3da914e5ephd',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 04:50:03',
+                executionExecutedAt: '2020-11-05 14:17:06',
                 executionMonitoringStartAt: 'XXXXXXXX',
-                executionMonitoringEndAt: '2020-11-04 05:20:10',
-                error: 3657062012,
-                inactive: 7760358945,
-                successful: 6038741011,
-                stopped: 3055176631,
-                unknown: 2910806253,
-                unregistered: 1111577812,
+                executionMonitoringEndAt: '2020-11-06 02:56:43',
+                error: 9334826296,
+                inactive: 1180312805,
+                successful: 6548390167,
+                stopped: 1920385551,
+                unknown: 4715680167,
+                unregistered: 9040426410,
             })
             .expect(400)
             .then(res => {
@@ -1264,22 +1264,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '2dgm5kg6gwr71tpvw882yq7p65gvux4xyezhyk8gr511y28jsa',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'qov4oj10j1lsyuglz4em',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 07:24:25',
-                executionMonitoringStartAt: '2020-11-04 06:08:28',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'd37x8lz0n5n65iytlloenkanlnurugmopgbzgtsytnrsnpilbb',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'ebk5w8dhsg8ruhdt1lyq',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'DETAIL',
+                executionExecutedAt: '2020-11-05 23:53:27',
+                executionMonitoringStartAt: '2020-11-05 17:06:30',
                 executionMonitoringEndAt: 'XXXXXXXX',
-                error: 9453293226,
-                inactive: 7969164974,
-                successful: 4795256411,
-                stopped: 3920225019,
-                unknown: 2232238052,
-                unregistered: 6261820044,
+                error: 5978693690,
+                inactive: 5954928018,
+                successful: 9568249051,
+                stopped: 3177857440,
+                unknown: 4567633750,
+                unregistered: 1076110781,
             })
             .expect(400)
             .then(res => {
@@ -1294,22 +1294,22 @@ describe('channel-overview', () =>
             .post('/cci/channel-overview')
             .set('Accept', 'application/json')
             .send({
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '0gg9ak8hd62mmbopakn50vbafd49bo5iywy10dvzsqpeq4pj07',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: 'hm6pq9s3h5nbxdcg08bc',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 18:33:14',
-                executionMonitoringStartAt: '2020-11-04 08:06:28',
-                executionMonitoringEndAt: '2020-11-04 03:41:02',
-                error: 9662487224,
-                inactive: 8829276101,
-                successful: 1967755175,
-                stopped: 9635127509,
-                unknown: 8976088220,
-                unregistered: 4246045070,
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: 'ahnaqp61bkbnnpudydagt0x0nnyfp0m5xu3qmhv2i0opoyf8nq',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: 'xo93j7a33t8il208ezcs',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                executionType: 'SUMMARY',
+                executionExecutedAt: '2020-11-05 15:26:06',
+                executionMonitoringStartAt: '2020-11-06 05:16:53',
+                executionMonitoringEndAt: '2020-11-06 01:27:50',
+                error: 2907403119,
+                inactive: 9580526277,
+                successful: 8004569553,
+                stopped: 7899505221,
+                unknown: 9054870974,
+                unregistered: 4868840073,
             })
             .expect(201);
     });
@@ -1344,7 +1344,7 @@ describe('channel-overview', () =>
                 {
                     where: 
                     {
-                        id: '821e5025-3942-484d-804b-3eab1125736b'
+                        id: '95a84fbc-3f9d-4d31-98c2-f60cbd21a61d'
                     }
                 }
             })
@@ -1361,18 +1361,18 @@ describe('channel-overview', () =>
                 {
                     where: 
                     {
-                        id: '428dbc36-ad1f-42b2-8752-f4d6204459a2'
+                        id: '82847bca-9c80-490c-918d-e9e4dc51ba60'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === '428dbc36-ad1f-42b2-8752-f4d6204459a2'));
+            .expect(repository.collectionResponse.find(item => item.id === '82847bca-9c80-490c-918d-e9e4dc51ba60'));
     });
 
     test(`/REST:GET cci/channel-overview/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/cci/channel-overview/418908b5-3185-4456-b39c-55c573fe0ecc')
+            .get('/cci/channel-overview/7b06351f-fc80-48c5-af16-fcaf486e3112')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -1380,10 +1380,10 @@ describe('channel-overview', () =>
     test(`/REST:GET cci/channel-overview/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/cci/channel-overview/428dbc36-ad1f-42b2-8752-f4d6204459a2')
+            .get('/cci/channel-overview/82847bca-9c80-490c-918d-e9e4dc51ba60')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '428dbc36-ad1f-42b2-8752-f4d6204459a2'));
+            .expect(repository.collectionResponse.find(e => e.id === '82847bca-9c80-490c-918d-e9e4dc51ba60'));
     });
 
     test(`/REST:GET cci/channels-overview`, () => 
@@ -1402,22 +1402,22 @@ describe('channel-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'a433e65a-5c3a-43fc-bc58-f5adf4ff5708',
-                tenantId: 'c2280325-bca3-4fc9-898c-d6b4ff94545e',
-                tenantCode: 'vn89xmhi66y40qcje45fjjif03i8w91xs0zk58w17yyq34c06e',
-                systemId: '50892d94-364a-40d5-928e-3925a90cb494',
-                systemName: 'uok9rcgb13paxzgtqn3i',
-                executionId: '2840987f-1c04-4cad-aa99-295b7f16c4a7',
+                id: 'b4756a0f-a2e0-48ed-84e2-95ec561c9a79',
+                tenantId: '522b2481-cade-4478-a0f3-948766a2f488',
+                tenantCode: 'hfxvdavk9v2p9fn6l0njr2qoalmrpope5nw1k52io45crc6no1',
+                systemId: 'f2727b6c-4082-4716-b46c-14749654aa88',
+                systemName: '6qq3tfl6cipowhig0a0j',
+                executionId: '7d3747e8-f3ce-4d16-af08-44eef25b10d3',
                 executionType: 'DETAIL',
-                executionExecutedAt: '2020-11-04 10:42:03',
-                executionMonitoringStartAt: '2020-11-04 14:58:00',
-                executionMonitoringEndAt: '2020-11-04 17:03:15',
-                error: 8504901373,
-                inactive: 3460982417,
-                successful: 2955847119,
-                stopped: 1483651086,
-                unknown: 7726926050,
-                unregistered: 2640415012,
+                executionExecutedAt: '2020-11-06 10:50:57',
+                executionMonitoringStartAt: '2020-11-06 02:35:45',
+                executionMonitoringEndAt: '2020-11-06 04:19:43',
+                error: 8694266808,
+                inactive: 7928109614,
+                successful: 7488182768,
+                stopped: 6493816249,
+                unknown: 4648176831,
+                unregistered: 4737735048,
             })
             .expect(404);
     });
@@ -1429,31 +1429,31 @@ describe('channel-overview', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                tenantCode: '3laj7fn3yr3ss8anwrkm28b6b4834waanog2bolk68x9ivpzl3',
-                systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                systemName: '99nqa1omudtf00x4s3ne',
-                executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
+                id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                tenantCode: '22lcz710x5p92pdt8xyq7cp0hg3hhzyx6dzu1zbvnty8g6yd97',
+                systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                systemName: '5inaj6h374vwfasveety',
+                executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
                 executionType: 'SUMMARY',
-                executionExecutedAt: '2020-11-04 22:49:28',
-                executionMonitoringStartAt: '2020-11-04 21:13:16',
-                executionMonitoringEndAt: '2020-11-04 18:18:02',
-                error: 5468225137,
-                inactive: 2217597904,
-                successful: 7331804896,
-                stopped: 4562209555,
-                unknown: 3436199570,
-                unregistered: 2917258118,
+                executionExecutedAt: '2020-11-06 01:36:08',
+                executionMonitoringStartAt: '2020-11-05 23:27:35',
+                executionMonitoringEndAt: '2020-11-06 10:55:20',
+                error: 7524072129,
+                inactive: 4514418845,
+                successful: 4207331365,
+                stopped: 9412714073,
+                unknown: 6258290671,
+                unregistered: 2450066918,
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === '428dbc36-ad1f-42b2-8752-f4d6204459a2'));
+            .expect(repository.collectionResponse.find(e => e.id === '82847bca-9c80-490c-918d-e9e4dc51ba60'));
     });
 
     test(`/REST:DELETE cci/channel-overview/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/channel-overview/3a27c1a7-1c37-4366-a056-1747e5330ad0')
+            .delete('/cci/channel-overview/fde2b975-94ac-4b73-8f16-4b583035c86f')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -1461,7 +1461,7 @@ describe('channel-overview', () =>
     test(`/REST:DELETE cci/channel-overview/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/cci/channel-overview/428dbc36-ad1f-42b2-8752-f4d6204459a2')
+            .delete('/cci/channel-overview/82847bca-9c80-490c-918d-e9e4dc51ba60')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -1539,28 +1539,28 @@ describe('channel-overview', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'cced5080-7576-426f-aa27-698da5d781c2',
-                        tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                        tenantCode: 'g9rjytq4f9n5mlcu7tvsmrnx35k4e4mjulcm8nx6w5f3hyufwe',
-                        systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                        systemName: '2qm7p3k0cdzk5e3bytgi',
-                        executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                        executionType: 'SUMMARY',
-                        executionExecutedAt: '2020-11-04 09:25:10',
-                        executionMonitoringStartAt: '2020-11-04 00:57:58',
-                        executionMonitoringEndAt: '2020-11-04 13:03:13',
-                        error: 7065382280,
-                        inactive: 5678848458,
-                        successful: 4628608556,
-                        stopped: 1913373691,
-                        unknown: 6110459974,
-                        unregistered: 9765041113,
+                        id: '769be8cd-3ccb-4b8f-887c-01b07a4bca9d',
+                        tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                        tenantCode: 'ihgej3e8kokns6t21i3oc9q2mipl78e1ndh6lc3e937gusnaz0',
+                        systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                        systemName: 'b3p18hc9wru5b0lb1w9v',
+                        executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                        executionType: 'DETAIL',
+                        executionExecutedAt: '2020-11-05 15:24:46',
+                        executionMonitoringStartAt: '2020-11-06 08:34:48',
+                        executionMonitoringEndAt: '2020-11-06 03:29:25',
+                        error: 9814361136,
+                        inactive: 7240839490,
+                        successful: 6040396202,
+                        stopped: 5912827059,
+                        unknown: 3454536949,
+                        unregistered: 9096623588,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciCreateChannelOverview).toHaveProperty('id', 'cced5080-7576-426f-aa27-698da5d781c2');
+                expect(res.body.data.cciCreateChannelOverview).toHaveProperty('id', '769be8cd-3ccb-4b8f-887c-01b07a4bca9d');
             });
     });
 
@@ -1633,7 +1633,7 @@ describe('channel-overview', () =>
                     {
                         where: 
                         {
-                            id: '5ca9ff07-1336-4479-b557-cb0294576294'
+                            id: 'd97acbf5-1144-4148-a42d-9136920d893e'
                         }
                     }
                 }
@@ -1681,14 +1681,14 @@ describe('channel-overview', () =>
                     {
                         where: 
                         {
-                            id: '428dbc36-ad1f-42b2-8752-f4d6204459a2'
+                            id: '82847bca-9c80-490c-918d-e9e4dc51ba60'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciFindChannelOverview.id).toStrictEqual('428dbc36-ad1f-42b2-8752-f4d6204459a2');
+                expect(res.body.data.cciFindChannelOverview.id).toStrictEqual('82847bca-9c80-490c-918d-e9e4dc51ba60');
             });
     });
 
@@ -1722,7 +1722,7 @@ describe('channel-overview', () =>
                     }
                 `,
                 variables: {
-                    id: '911e996b-0668-463b-abeb-9304728d781b'
+                    id: 'aa7c6829-ccdf-4203-9605-60c6e7bb0f72'
                 }
             })
             .expect(200)
@@ -1763,12 +1763,12 @@ describe('channel-overview', () =>
                     }
                 `,
                 variables: {
-                    id: '428dbc36-ad1f-42b2-8752-f4d6204459a2'
+                    id: '82847bca-9c80-490c-918d-e9e4dc51ba60'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciFindChannelOverviewById.id).toStrictEqual('428dbc36-ad1f-42b2-8752-f4d6204459a2');
+                expect(res.body.data.cciFindChannelOverviewById.id).toStrictEqual('82847bca-9c80-490c-918d-e9e4dc51ba60');
             });
     });
 
@@ -1844,22 +1844,22 @@ describe('channel-overview', () =>
                 variables: {
                     payload: {
                         
-                        id: '717f368c-0b93-4cd5-9b63-ddfddf10f960',
-                        tenantId: '0371ccc5-8b19-4057-b4fb-d137944795f4',
-                        tenantCode: 'u6ha9n8om575c0lwxsfp3327qbtv9wbyp11alnhbsgeevewbb9',
-                        systemId: '879fb349-eac1-4f75-9238-60e38bad9c78',
-                        systemName: 'rst5e2z1lwqsd6885dn6',
-                        executionId: '4729c12f-692a-465d-a54b-e6ed583eca60',
+                        id: '6217d1e6-a15a-4286-8778-98bb55884243',
+                        tenantId: '398bec71-9359-4e89-8fb8-bbf2bf51a1e9',
+                        tenantCode: 'c8sllhqxcrur7khuq0cdcn0zjhy0i9bnyb5tzzxj2aca2sqd48',
+                        systemId: 'bb3b9426-22e4-4f55-ac7b-fdb93b63303a',
+                        systemName: 'j7imdxeuv23c8fucwof9',
+                        executionId: '33ffad59-a277-4a49-8804-704fbd285e9e',
                         executionType: 'DETAIL',
-                        executionExecutedAt: '2020-11-04 15:08:22',
-                        executionMonitoringStartAt: '2020-11-04 22:56:57',
-                        executionMonitoringEndAt: '2020-11-04 16:26:43',
-                        error: 9484147412,
-                        inactive: 6849902883,
-                        successful: 4632573807,
-                        stopped: 2801892939,
-                        unknown: 8905270022,
-                        unregistered: 9114533290,
+                        executionExecutedAt: '2020-11-06 01:29:39',
+                        executionMonitoringStartAt: '2020-11-06 00:20:15',
+                        executionMonitoringEndAt: '2020-11-06 08:06:46',
+                        error: 5179026419,
+                        inactive: 2183049489,
+                        successful: 1619173227,
+                        stopped: 6313520058,
+                        unknown: 6448458194,
+                        unregistered: 5927964159,
                     }
                 }
             })
@@ -1903,28 +1903,28 @@ describe('channel-overview', () =>
                 variables: {
                     payload: {
                         
-                        id: '428dbc36-ad1f-42b2-8752-f4d6204459a2',
-                        tenantId: 'fe7de818-1ae7-414c-acdf-8bb4eb4e2c5e',
-                        tenantCode: 'mn7yjzudzld6yd4e11cmaa6aohchnumm5uzw0xvz37kvqptbo8',
-                        systemId: 'c8b2ef22-51bd-48d1-8bdc-a1f729dc3a0c',
-                        systemName: 'bcvuvkc457pd5p0ki63y',
-                        executionId: 'a881f2ca-075c-4b26-942a-8b39c17fb558',
-                        executionType: 'DETAIL',
-                        executionExecutedAt: '2020-11-04 19:45:43',
-                        executionMonitoringStartAt: '2020-11-04 02:25:30',
-                        executionMonitoringEndAt: '2020-11-04 18:27:44',
-                        error: 2618703913,
-                        inactive: 7991633176,
-                        successful: 4409756635,
-                        stopped: 2786628632,
-                        unknown: 6777178843,
-                        unregistered: 1369629440,
+                        id: '82847bca-9c80-490c-918d-e9e4dc51ba60',
+                        tenantId: '4a099db8-dd80-46ba-a503-b5f789d84363',
+                        tenantCode: 'm8rz3jjriyfs84i21be2uduj4exgi68n8xtaudeei0jzc7ecoy',
+                        systemId: 'abf94730-83a6-4649-9b18-474b30e50025',
+                        systemName: 'p6batns72b0y6ra7mfkv',
+                        executionId: 'bee1331c-7e69-42d1-921b-47b56204b375',
+                        executionType: 'SUMMARY',
+                        executionExecutedAt: '2020-11-05 21:29:44',
+                        executionMonitoringStartAt: '2020-11-06 01:53:45',
+                        executionMonitoringEndAt: '2020-11-05 18:49:29',
+                        error: 5927663823,
+                        inactive: 7258176268,
+                        successful: 9355925254,
+                        stopped: 6351755621,
+                        unknown: 2549540418,
+                        unregistered: 1351669512,
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciUpdateChannelOverview.id).toStrictEqual('428dbc36-ad1f-42b2-8752-f4d6204459a2');
+                expect(res.body.data.cciUpdateChannelOverview.id).toStrictEqual('82847bca-9c80-490c-918d-e9e4dc51ba60');
             });
     });
 
@@ -1958,7 +1958,7 @@ describe('channel-overview', () =>
                     }
                 `,
                 variables: {
-                    id: '0e4e4c57-e4ae-47b1-9955-25a4786491b7'
+                    id: 'f00c8409-3192-4751-af70-e38fa6be0120'
                 }
             })
             .expect(200)
@@ -1999,12 +1999,12 @@ describe('channel-overview', () =>
                     }
                 `,
                 variables: {
-                    id: '428dbc36-ad1f-42b2-8752-f4d6204459a2'
+                    id: '82847bca-9c80-490c-918d-e9e4dc51ba60'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.cciDeleteChannelOverviewById.id).toStrictEqual('428dbc36-ad1f-42b2-8752-f4d6204459a2');
+                expect(res.body.data.cciDeleteChannelOverviewById.id).toStrictEqual('82847bca-9c80-490c-918d-e9e4dc51ba60');
             });
     });
 

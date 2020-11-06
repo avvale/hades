@@ -71,9 +71,9 @@ export class DataLakeMapper implements IMapper
             new DataLakeExecutionId(dataLake.executionId),
             new DataLakeTenantCode(dataLake.tenantCode),
             new DataLakePayload(dataLake.payload),
-            new DataLakeCreatedAt(dataLake.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new DataLakeUpdatedAt(dataLake.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new DataLakeDeletedAt(dataLake.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new DataLakeCreatedAt(dataLake.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new DataLakeUpdatedAt(dataLake.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new DataLakeDeletedAt(dataLake.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(dataLake.tenant) : undefined,
             this.options.eagerLoading ? new ExecutionMapper({ eagerLoading: false }).mapModelToAggregate(dataLake.execution) : undefined,
         );

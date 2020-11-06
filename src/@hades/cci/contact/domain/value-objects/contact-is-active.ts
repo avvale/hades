@@ -9,8 +9,8 @@ export class ContactIsActive extends BooleanValueObject
     {
         super(value, Object.assign({
             name: 'ContactIsActive',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
         }, validationRules));
     }
 }

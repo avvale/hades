@@ -9,8 +9,8 @@ export class MessageDetailExecutionId extends UuidValueObject
     {
         super(value, Object.assign({
             name: 'MessageDetailExecutionId',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
             length: 36,
         }, validationRules), data);
     }

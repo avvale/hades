@@ -103,9 +103,9 @@ export class ModuleMapper implements IMapper
             new ModuleName(module.name),
             new ModuleParameterName(module.parameterName),
             new ModuleParameterValue(module.parameterValue),
-            new ModuleCreatedAt(module.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new ModuleUpdatedAt(module.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new ModuleDeletedAt(module.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new ModuleCreatedAt(module.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new ModuleUpdatedAt(module.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new ModuleDeletedAt(module.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelToAggregate(module.tenant) : undefined,
             this.options.eagerLoading ? new SystemMapper({ eagerLoading: false }).mapModelToAggregate(module.system) : undefined,
         );
