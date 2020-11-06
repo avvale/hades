@@ -12,7 +12,7 @@ import { boundedContexts } from '@hades/admin/shared/infrastructure/seeds/bounde
 import { permissions } from '@hades/admin/shared/infrastructure/seeds/permission.seed';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 
-export class Seeder 
+export class Seeder
 {
     main()
     {
@@ -23,7 +23,7 @@ export class Seeder
             await IamUtils.iamCommonSeed(commandBus, queryBus, boundedContexts, permissions);
 
             await commandBus.dispatch(new CreateLangsCommand(langs));
-        }); 
+        });
     }
 }
 new Seeder().main();
