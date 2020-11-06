@@ -50,18 +50,26 @@ export class Utils
                 : obj;
     }
 
-    public static deepMapValues(obj, fn): Object
+    public static deepMapValues(obj, fn: Function): Object
     {
-        return Array.isArray(obj)
-            ? obj.map(val => Utils.deepMapValues(val, fn))
-            : typeof obj === 'object'
-                ? Object.keys(obj).reduce((acc, current) => {
-                    const key = current;
-                    const val = fn(current, obj[current]);
-                    acc[key] = val !== null && typeof val === 'object' ? Utils.deepMapValues(val, fn) : val;
-                    return acc;
-                }, {})
-                : obj;
+        if (Array.isArray(obj)) {
+            return obj.map(function(val, key) {
+                return (typeof val === 'object') ? Utils.deepMapValues(val, fn) : fn(val, key);
+            });
+        } else if (typeof obj === 'object') {
+            const res = {};
+            for (var key in obj) {
+                var val = obj[key];
+                if (typeof val === 'object') {
+                    res[key] = Utils.deepMapValues(val, fn);
+                } else {
+                    res[key] = fn(val, key);
+                }
+            }
+            return res;
+        } else {
+            return obj;
+        }
     }
 
     public static hash(password: string, saltRounds: number = 10): string
