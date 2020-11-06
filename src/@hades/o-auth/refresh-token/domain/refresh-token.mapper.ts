@@ -69,10 +69,10 @@ export class RefreshTokenMapper implements IMapper
             new RefreshTokenAccessTokenId(refreshToken.accessTokenId),
             new RefreshTokenToken(refreshToken.token),
             new RefreshTokenIsRevoked(refreshToken.isRevoked),
-            new RefreshTokenExpiresAt(refreshToken.expiresAt, {}, {addTimezone: cQMetadata.timezone}),
-            new RefreshTokenCreatedAt(refreshToken.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new RefreshTokenUpdatedAt(refreshToken.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new RefreshTokenDeletedAt(refreshToken.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new RefreshTokenExpiresAt(refreshToken.expiresAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new RefreshTokenCreatedAt(refreshToken.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new RefreshTokenUpdatedAt(refreshToken.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new RefreshTokenDeletedAt(refreshToken.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new AccessTokenMapper({ eagerLoading: false }).mapModelToAggregate(refreshToken.accessToken) : undefined,
         );
     }

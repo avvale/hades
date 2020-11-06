@@ -21,7 +21,7 @@ export class SequelizeApplicationRepository extends SequelizeRepository<OAuthApp
     ) {
         super();
     }
-    
+
     // hook called after create aggregate
     async createdAggregateHook(aggregate: OAuthApplication, model: OAuthApplicationModel)
     {

@@ -15,7 +15,7 @@ type OAuthRefreshToken
 input OAuthCreateRefreshTokenInput
 {
     id: ID!
-    accessTokenId: OAuthCreateAccessTokenInput!
+    accessTokenId: ID!
     token: GraphQLString!
     isRevoked: GraphQLBoolean!
     expiresAt: GraphQLTimestamp
@@ -24,7 +24,7 @@ input OAuthCreateRefreshTokenInput
 input OAuthUpdateRefreshTokenInput
 {
     id: ID!
-    accessTokenId: OAuthCreateAccessTokenInput
+    accessTokenId: ID
     token: GraphQLString
     isRevoked: GraphQLBoolean
     expiresAt: GraphQLTimestamp
