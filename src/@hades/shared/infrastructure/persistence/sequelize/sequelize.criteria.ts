@@ -12,20 +12,9 @@ export class SequelizeCriteria implements ICriteria
         // add timezone to query statement
         if (cQMetadata?.timezone)
         {
-            queryStatement = Utils.deepMapValues(queryStatement, (key, value) =>
+            queryStatement = Utils.deepMapValues(queryStatement, (value, key) =>
             {
-                if (Array.isArray(cQMetadata.timezoneColumns) && cQMetadata.timezoneColumns.indexOf(key) !== -1)
-                {
-                    if (Array.isArray(value))
-                    {
-                        value = value.map(item => moment.tz(item, cQMetadata.timezone).tz(process.env.TZ).format('YYYY-MM-DD HH:mm:ss'));
-                    }
-                    else
-                    {
-                        value = moment.tz(value, cQMetadata.timezone).tz(process.env.TZ).format('YYYY-MM-DD HH:mm:ss');
-                    }
-                }
-                return value;
+                return moment(value, 'YYYY-MM-DD HH:mm:ss').isValid() ? moment.tz(value, cQMetadata.timezone).tz(process.env.TZ).format('YYYY-MM-DD HH:mm:ss') : value;
             });
         }
 
