@@ -1,8 +1,13 @@
-import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation, ApiBody } from '@nestjs/swagger';
 import { Timezone } from './../../../shared/decorators/timezone.decorator';
 import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
+
+// authorization
+import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from './../../../shared/modules/auth/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from './../../../shared/modules/auth/guards/authorization.guard';
 
 // @hades
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
@@ -18,6 +23,8 @@ import { CreateCatalogDto } from './../dto/create-catalog.dto';
 
 @ApiTags('[cci] catalog')
 @Controller('cci/catalog')
+@Permissions('cci.catalog.create')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class CreateCatalogController
 {
     constructor(
