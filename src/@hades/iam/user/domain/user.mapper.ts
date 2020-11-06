@@ -82,9 +82,9 @@ export class UserMapper implements IMapper
             new UserPassword(user.password),
             new UserRememberToken(user.rememberToken),
             new UserData(user.data),
-            new UserCreatedAt(user.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new UserUpdatedAt(user.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new UserDeletedAt(user.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new UserCreatedAt(user.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new UserUpdatedAt(user.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new UserDeletedAt(user.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapModelToAggregate(user.account) : undefined,
         );
     }

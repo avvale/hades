@@ -74,9 +74,9 @@ export class TenantMapper implements IMapper
             new TenantIsActive(tenant.isActive),
             new TenantData(tenant.data),
             new TenantAccountIds(tenant.accountIds),
-            new TenantCreatedAt(tenant.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new TenantUpdatedAt(tenant.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new TenantDeletedAt(tenant.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new TenantCreatedAt(tenant.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new TenantUpdatedAt(tenant.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new TenantDeletedAt(tenant.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapModelsToAggregates(tenant.accounts) : undefined,
         );
     }
