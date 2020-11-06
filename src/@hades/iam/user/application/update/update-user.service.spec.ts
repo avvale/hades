@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
 import { UpdateUserService } from './update-user.service';
-import { 
+import {
     UserId,
     UserAccountId,
     UserName,
@@ -18,19 +18,18 @@ import {
     UserData,
     UserCreatedAt,
     UserUpdatedAt,
-    UserDeletedAt
-    
+    UserDeletedAt,
 } from './../../domain/value-objects';
 import { IUserRepository } from './../../domain/user.repository';
 import { MockUserRepository } from './../../infrastructure/mock/mock-user.repository';
 
-describe('UpdateUserService', () => 
+describe('UpdateUserService', () =>
 {
     let service: UpdateUserService;
     let repository: IUserRepository;
     let mockRepository: MockUserRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -39,7 +38,7 @@ describe('UpdateUserService', () =>
                 EventPublisher,
                 UpdateUserService,
                 MockUserRepository,
-                { 
+                {
                     provide: IUserRepository,
                     useValue: {
                         update: (item) => {}
@@ -53,14 +52,14 @@ describe('UpdateUserService', () =>
         mockRepository  = module.get(MockUserRepository);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateUserService should be defined', () => 
+        test('UpdateUserService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a user and emit event', async () => 
+        test('should update a user and emit event', async () =>
         {
             expect(await service.main(
                 new UserId(users[0].id),
@@ -74,7 +73,6 @@ describe('UpdateUserService', () =>
                 new UserPassword(users[0].password),
                 new UserRememberToken(users[0].rememberToken),
                 new UserData(users[0].data),
-                
             )).toBe(undefined);
         });
     });

@@ -8,7 +8,7 @@ import { DeletedRolesEvent } from './deleted-roles.event';
 export class AddRolesContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: IamRole[] = []
+        public readonly aggregateRoots: IamRole[] = [],
     ) {
         super();
     }
@@ -32,7 +32,6 @@ export class AddRolesContextEvent extends AggregateRoot
                         role.createdAt?.value,
                         role.updatedAt?.value,
                         role.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -53,7 +52,6 @@ export class AddRolesContextEvent extends AggregateRoot
                         role.createdAt?.value,
                         role.updatedAt?.value,
                         role.deletedAt?.value,
-                        
                     )
                 )
             )

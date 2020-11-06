@@ -1,4 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -22,8 +23,12 @@ export class IamGetAccountsResolver
     ) {}
 
     @Query('iamGetAccounts')
-    async main(@Args('query') queryStatement?: QueryStatement, @Args('constraint') constraint?: QueryStatement): Promise<IamAccount[]>
+    async main(
+        @Args('query') queryStatement?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    ): Promise<IamAccount[]>
     {
-        return await this.queryBus.ask(new GetAccountsQuery(queryStatement, constraint));
+        return await this.queryBus.ask(new GetAccountsQuery(queryStatement, constraint, { timezone }));
     }
 }

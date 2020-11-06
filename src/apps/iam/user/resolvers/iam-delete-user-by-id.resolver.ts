@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -20,15 +21,19 @@ export class IamDeleteUserByIdResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamDeleteUserById')
-    async main(@Args('id') id: string, @Args('constraint') constraint?: QueryStatement)
+    async main(
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const user = await this.queryBus.ask(new FindUserByIdQuery(id, constraint));
+        const user = await this.queryBus.ask(new FindUserByIdQuery(id, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteUserByIdCommand(id, constraint));
+        await this.commandBus.dispatch(new DeleteUserByIdCommand(id, constraint, { timezone }));
 
         return user;
     }

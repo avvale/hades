@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UserDto } from './../dto/user.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -19,14 +20,18 @@ import { FindUserByIdQuery } from '@hades/iam/user/application/find/find-user-by
 export class IamFindUserByIdController
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Get(':id')
     @ApiOperation({ summary: 'Find user by id' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: UserDto })
-    async main(@Param('id') id: string, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Param('id') id: string,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        return await this.queryBus.ask(new FindUserByIdQuery(id, constraint));
+        return await this.queryBus.ask(new FindUserByIdQuery(id, constraint, { timezone }));
     }
 }

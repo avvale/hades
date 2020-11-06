@@ -45,9 +45,9 @@ export class IamDeleteTenantByIdResolver
                     [Operator.substring]: tenant.id
                 }
             }
-        }));
+        }, undefined, { timezone }));
 
-        await Utils.deleteTenantFromAccounts(this.commandBus, tenant.id, accountsToRemoveTenant);
+        await Utils.deleteTenantFromAccounts(this.commandBus, tenant.id, accountsToRemoveTenant, constraint, { timezone });
 
         await this.commandBus.dispatch(new DeleteTenantByIdCommand(id, constraint, { timezone }));
 

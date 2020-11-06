@@ -11,7 +11,7 @@ export class UserAccountId extends UuidValueObject
             name: 'UserAccountId',
             nullable: false,
             undefinable: false,
-            length: 36
+            length: 36,
         }, validationRules), data);
     }
 }

@@ -9,8 +9,8 @@ export class AccountDTenants extends JsonValueObject
     {
         super(value, Object.assign({
             name: 'AccountDTenants',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
         }, validationRules));
     }
 }

@@ -1,5 +1,5 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IamRole } from './role.aggregate';
 import { RoleResponse } from './role.response';
 import {
@@ -10,41 +10,37 @@ import {
     RoleAccountIds,
     RoleCreatedAt,
     RoleUpdatedAt,
-    RoleDeletedAt
-    
+    RoleDeletedAt,
 } from './value-objects';
-
-
-
 import { PermissionMapper } from '@hades/iam/permission/domain/permission.mapper';
 import { AccountMapper } from '@hades/iam/account/domain/account.mapper';
 
 export class RoleMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
 
     /**
      * Map object to aggregate
      * @param role
      */
-    mapModelToAggregate(role: ObjectLiteral): IamRole
+    mapModelToAggregate(role: ObjectLiteral, cQMetadata?: CQMetadata): IamRole
     {
         if (!role) return;
 
-        return this.makeAggregate(role);
+        return this.makeAggregate(role, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param roles 
+     * @param roles
      */
-    mapModelsToAggregates(roles: ObjectLiteral[]): IamRole[]
+    mapModelsToAggregates(roles: ObjectLiteral[], cQMetadata?: CQMetadata): IamRole[]
     {
         if (!Array.isArray(roles)) return;
 
-        return roles.map(role  => this.makeAggregate(role));
+        return roles.map(role  => this.makeAggregate(role, cQMetadata));
     }
 
     /**
@@ -67,7 +63,7 @@ export class RoleMapper implements IMapper
         return roles.map(role => this.makeResponse(role));
     }
 
-    private makeAggregate(role: ObjectLiteral): IamRole
+    private makeAggregate(role: ObjectLiteral, cQMetadata?: CQMetadata): IamRole
     {
         return IamRole.register(
             new RoleId(role.id),
@@ -75,17 +71,11 @@ export class RoleMapper implements IMapper
             new RoleIsMaster(role.isMaster),
             new RolePermissionIds(role.permissionIds),
             new RoleAccountIds(role.accountIds),
-            new RoleCreatedAt(role.createdAt),
-            new RoleUpdatedAt(role.updatedAt),
-            new RoleDeletedAt(role.deletedAt),
-            
-            
-            
-            
-            
+            new RoleCreatedAt(role.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new RoleUpdatedAt(role.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new RoleDeletedAt(role.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapModelsToAggregates(role.permissions) : undefined,
             this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapModelsToAggregates(role.accounts) : undefined,
-            
         );
     }
 
@@ -102,14 +92,8 @@ export class RoleMapper implements IMapper
             role.createdAt.value,
             role.updatedAt.value,
             role.deletedAt.value,
-            
-            
-            
-            
-            
             this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapAggregatesToResponses(role.permissions) : undefined,
             this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapAggregatesToResponses(role.accounts) : undefined,
-            
         );
     }
 }

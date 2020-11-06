@@ -50,12 +50,12 @@ describe('UpdateTenantService', () =>
 
     describe('main', () =>
     {
-        test('UpdateTenantService should be defined', () => 
+        test('UpdateTenantService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a tenant and emit event', async () => 
+        test('should update a tenant and emit event', async () =>
         {
             expect(await service.main(
                 new TenantId(tenants[0].id),
@@ -65,7 +65,6 @@ describe('UpdateTenantService', () =>
                 new TenantIsActive(tenants[0].isActive),
                 new TenantData(tenants[0].data),
                 new TenantAccountIds(tenants[0].accountIds),
-                
             )).toBe(undefined);
         });
     });

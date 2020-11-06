@@ -15,7 +15,7 @@ export class IamUtils
     static administratorRoleId: string = '99b06044-fff5-4267-9314-4bae9f909010';
 
     static async iamCommonSeed(
-        commandBus: ICommandBus, 
+        commandBus: ICommandBus,
         queryBus: IQueryBus,
         boundedContexts: SeederBoundedContext[],
         permissions: SeederPermission[]
@@ -41,15 +41,15 @@ export class IamUtils
         );
 
         // set all permissions to administration account
-        await commandBus.dispatch(new UpdateAccountCommand(
-            IamUtils.administratorAccountId,
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            accountPermissions
-        ));
+        await commandBus.dispatch(new UpdateAccountCommand({
+            id: IamUtils.administratorAccountId,
+            type: undefined,
+            email: undefined,
+            isActive: undefined,
+            clientId: undefined,
+            dApplicationCodes: undefined,
+            dPermissions: accountPermissions
+        }));
     }
 
     static updateAccountPermissions(roleId: string, newPermissions: SeederPermission[], account: AccountResponse, overwriteRolePermissions: boolean = false): AccountPermissions
@@ -66,15 +66,14 @@ export class IamUtils
                 if (account.dPermissions[roleId].indexOf(permission.name) === -1)  account.dPermissions[roleId].push(permission.name);
             }
         }
-        
-            
+
         // container for all permissions
         const allPermissions = [];
 
         // iterate each role from account
         for (const index in account.dPermissions)
         {
-            // avoid iterate all index, is the key that contain all permissions 
+            // avoid iterate all index, is the key that contain all permissions
             if (index !== 'all')
             {
                 for (const permission of account.dPermissions[index])

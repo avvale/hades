@@ -32,7 +32,7 @@ export class CreateTenantService
             isActive: TenantIsActive,
             data: TenantData,
             accountIds: TenantAccountIds,
-        },
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern

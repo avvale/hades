@@ -9,8 +9,8 @@ export class AccountDApplicationCodes extends JsonValueObject
     {
         super(value, Object.assign({
             name: 'AccountDApplicationCodes',
-            nullable:  false ,
-            undefinable:  false ,
+            nullable: false,
+            undefinable: false,
         }, validationRules));
     }
 }

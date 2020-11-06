@@ -74,7 +74,6 @@ describe('CreateAccountService', () =>
                 new AccountData(accounts[0].data),
                 new AccountRoleIds(accounts[0].roleIds),
                 new AccountTenantIds(accounts[0].tenantIds),
-                
             )).toBe(undefined);
         });
     });

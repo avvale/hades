@@ -15,6 +15,6 @@ export class GetAccountsQueryHandler implements IQueryHandler<GetAccountsQuery>
 
     async execute(query: GetAccountsQuery): Promise<AccountResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getAccountsService.main(query.queryStatement));
+        return this.mapper.mapAggregatesToResponses(await this.getAccountsService.main(query.queryStatement, query.constraint, query.cQMetadata));
     }
 }

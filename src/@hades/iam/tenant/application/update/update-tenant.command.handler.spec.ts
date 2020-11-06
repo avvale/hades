@@ -6,12 +6,12 @@ import { tenants } from '@hades/iam/tenant/infrastructure/seeds/tenant.seed';
 import { UpdateTenantCommand } from './update-tenant.command';
 import { UpdateTenantService } from './update-tenant.service';
 
-describe('UpdateTenantCommandHandler', () => 
+describe('UpdateTenantCommandHandler', () =>
 {
     let commandHandler: UpdateTenantCommandHandler;
     let service: UpdateTenantService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateTenantCommandHandler', () =>
         service         = module.get<UpdateTenantService>(UpdateTenantService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateTenantCommandHandler should be defined', () => 
+        test('UpdateTenantCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an tenant created', async () => 
+        test('should return an tenant created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateTenantCommand(
@@ -47,7 +47,6 @@ describe('UpdateTenantCommandHandler', () =>
                     tenants[0].isActive,
                     tenants[0].data,
                     tenants[0].accountIds,
-                    
                 )
             )).toBe(undefined);
         });

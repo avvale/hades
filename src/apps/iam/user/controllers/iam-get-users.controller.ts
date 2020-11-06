@@ -1,6 +1,7 @@
 import { Controller, Get, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { UserDto } from './../dto/user.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -19,7 +20,7 @@ import { GetUsersQuery } from '@hades/iam/user/application/get/get-users.query';
 export class IamGetUsersController
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Get()
@@ -27,8 +28,12 @@ export class IamGetUsersController
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [UserDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body('query') queryStatement?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        return await this.queryBus.ask(new GetUsersQuery(queryStatement, constraint));
+        return await this.queryBus.ask(new GetUsersQuery(queryStatement, constraint, { timezone }));
     }
 }

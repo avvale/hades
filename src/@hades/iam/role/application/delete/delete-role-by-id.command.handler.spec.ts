@@ -41,7 +41,6 @@ describe('DeleteRoleByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteRoleByIdCommand(
                     roles[0].id,
-                
                 )
             )).toBe(undefined);
         });

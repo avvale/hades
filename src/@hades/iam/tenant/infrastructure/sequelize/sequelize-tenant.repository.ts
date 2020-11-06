@@ -21,6 +21,7 @@ export class SequelizeTenantRepository extends SequelizeRepository<IamTenant, Ia
     ) {
         super();
     }
+
     // hook called after create aggregate
     async createdAggregateHook(aggregate: IamTenant, model: IamTenantModel)
     {

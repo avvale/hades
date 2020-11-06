@@ -2,6 +2,7 @@ import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto } from './../dto/create-user.dto';
 import { UserDto } from './../dto/user.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -22,29 +23,19 @@ export class IamCreateUserController
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create user' })
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: UserDto })
-    async main(@Body() payload: CreateUserDto)
+    async main(
+        @Body() payload: CreateUserDto,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new CreateUserCommand(
-            payload.id,
-            payload.accountId,
-            payload.name,
-            payload.surname,
-            payload.avatar,
-            payload.mobile,
-            payload.langId,
-            payload.username,
-            payload.password,
-            payload.rememberToken,
-            payload.data,
-            
-        ));
+        await this.commandBus.dispatch(new CreateUserCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindUserByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindUserByIdQuery(payload.id, {}, { timezone }));
     }
 }

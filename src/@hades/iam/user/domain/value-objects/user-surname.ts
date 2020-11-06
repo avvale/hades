@@ -11,6 +11,7 @@ export class UserSurname extends StringValueObject
             name: 'UserSurname',
             nullable: true,
             undefinable: true,
-            maxLength: 255,        }, validationRules));
+            maxLength: 255,
+        }, validationRules));
     }
 }

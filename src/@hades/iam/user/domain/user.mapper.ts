@@ -1,5 +1,5 @@
 import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral } from '@hades/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { IamUser } from './user.aggregate';
 import { UserResponse } from './user.response';
 import {
@@ -16,40 +16,36 @@ import {
     UserData,
     UserCreatedAt,
     UserUpdatedAt,
-    UserDeletedAt
-    
+    UserDeletedAt,
 } from './value-objects';
 import { AccountMapper } from '@hades/iam/account/domain/account.mapper';
-
-
-
 
 export class UserMapper implements IMapper
 {
     constructor(
-        public options: MapperOptions = { eagerLoading: true }
+        public options: MapperOptions = { eagerLoading: true },
     ) {}
 
     /**
      * Map object to aggregate
      * @param user
      */
-    mapModelToAggregate(user: ObjectLiteral): IamUser
+    mapModelToAggregate(user: ObjectLiteral, cQMetadata?: CQMetadata): IamUser
     {
         if (!user) return;
 
-        return this.makeAggregate(user);
+        return this.makeAggregate(user, cQMetadata);
     }
 
     /**
      * Map array of objects to array aggregates
-     * @param users 
+     * @param users
      */
-    mapModelsToAggregates(users: ObjectLiteral[]): IamUser[]
+    mapModelsToAggregates(users: ObjectLiteral[], cQMetadata?: CQMetadata): IamUser[]
     {
         if (!Array.isArray(users)) return;
 
-        return users.map(user  => this.makeAggregate(user));
+        return users.map(user  => this.makeAggregate(user, cQMetadata));
     }
 
     /**
@@ -72,7 +68,7 @@ export class UserMapper implements IMapper
         return users.map(user => this.makeResponse(user));
     }
 
-    private makeAggregate(user: ObjectLiteral): IamUser
+    private makeAggregate(user: ObjectLiteral, cQMetadata?: CQMetadata): IamUser
     {
         return IamUser.register(
             new UserId(user.id),
@@ -86,16 +82,10 @@ export class UserMapper implements IMapper
             new UserPassword(user.password),
             new UserRememberToken(user.rememberToken),
             new UserData(user.data),
-            new UserCreatedAt(user.createdAt),
-            new UserUpdatedAt(user.updatedAt),
-            new UserDeletedAt(user.deletedAt),
-            
+            new UserCreatedAt(user.createdAt, {}, {addTimezone: cQMetadata.timezone}),
+            new UserUpdatedAt(user.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new UserDeletedAt(user.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
             this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapModelToAggregate(user.account) : undefined,
-            
-            
-            
-            
-            
         );
     }
 
@@ -118,13 +108,7 @@ export class UserMapper implements IMapper
             user.createdAt.value,
             user.updatedAt.value,
             user.deletedAt.value,
-            
             this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapAggregateToResponse(user.account) : undefined,
-            
-            
-            
-            
-            
         );
     }
 }

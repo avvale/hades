@@ -1,11 +1,12 @@
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Index, Unique } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
+import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
 import { DataTypes } from 'sequelize';
 import { IamPermissionModel } from '@hades/iam/permission/infrastructure/sequelize/sequelize-permission.model';
 import { IamPermissionsRolesModel } from '@hades/iam/permission/infrastructure/sequelize/sequelize-permissions-roles.model';
 import { IamAccountModel } from '@hades/iam/account/infrastructure/sequelize/sequelize-account.model';
 import { IamRolesAccountsModel } from '@hades/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
 
-@Table({ modelName: 'iam_role', freezeTableName: true })
+@Table({ modelName: 'iam_role', freezeTableName: true, timestamps: false })
 export class IamRoleModel extends Model<IamRoleModel>
 {
     @Column({

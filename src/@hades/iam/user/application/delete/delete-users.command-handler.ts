@@ -6,12 +6,16 @@ import { DeleteUsersService } from './delete-users.service';
 export class DeleteUsersCommandHandler implements ICommandHandler<DeleteUsersCommand>
 {
     constructor(
-        private readonly deleteUsersService: DeleteUsersService
+        private readonly deleteUsersService: DeleteUsersService,
     ) {}
 
     async execute(command: DeleteUsersCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.deleteUsersService.main(command.queryStatement);
+        await this.deleteUsersService.main(
+            command.queryStatement,
+            command.constraint,
+            command.cQMetadata,
+        );
     }
 }

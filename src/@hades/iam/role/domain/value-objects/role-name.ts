@@ -11,6 +11,7 @@ export class RoleName extends StringValueObject
             name: 'RoleName',
             nullable: false,
             undefinable: false,
-            maxLength: 255,        }, validationRules));
+            maxLength: 255,
+        }, validationRules));
     }
 }

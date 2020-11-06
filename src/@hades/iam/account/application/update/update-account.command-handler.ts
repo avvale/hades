@@ -29,18 +29,21 @@ export class UpdateAccountCommandHandler implements ICommandHandler<UpdateAccoun
     {
         // call to use case and implements ValueObjects
         await this.updateAccountService.main(
-            new AccountId(command.id),
-            new AccountType(command.type, { undefinable: true }),
-            new AccountEmail(command.email, { undefinable: true }),
-            new AccountIsActive(command.isActive, { undefinable: true }),
-            new AccountClientId(command.clientId, { undefinable: true }),
-            new AccountDApplicationCodes(command.dApplicationCodes, { undefinable: true }),
-            new AccountDPermissions(command.dPermissions, { undefinable: true }),
-            new AccountDTenants(command.tenantIds, { undefinable: true }),
-            new AccountData(command.data),
-            new AccountRoleIds(command.roleIds),
-            new AccountTenantIds(command.tenantIds),
-            
+            {
+                id: new AccountId(command.payload.id),
+                type: new AccountType(command.payload.type, { undefinable: true }),
+                email: new AccountEmail(command.payload.email, { undefinable: true }),
+                isActive: new AccountIsActive(command.payload.isActive, { undefinable: true }),
+                clientId: new AccountClientId(command.payload.clientId, { undefinable: true }),
+                dApplicationCodes: new AccountDApplicationCodes(command.payload.dApplicationCodes, { undefinable: true }),
+                dPermissions: new AccountDPermissions(command.payload.dPermissions, { undefinable: true }),
+                dTenants: new AccountDTenants(command.payload.tenantIds, { undefinable: true }),
+                data: new AccountData(command.payload.data),
+                roleIds: new AccountRoleIds(command.payload.roleIds),
+                tenantIds: new AccountTenantIds(command.payload.tenantIds),
+            },
+            command.constraint,
+            command.cQMetadata,
         )
     }
 }

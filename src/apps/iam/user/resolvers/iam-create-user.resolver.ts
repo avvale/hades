@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -20,26 +21,17 @@ export class IamCreateUserResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamCreateUser')
-    async main(@Args('payload') payload: IamCreateUserInput)
+    async main(
+        @Args('payload') payload: IamCreateUserInput,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new CreateUserCommand(
-            payload.id,
-            payload.accountId,
-            payload.name,
-            payload.surname,
-            payload.avatar,
-            payload.mobile,
-            payload.langId,
-            payload.username,
-            payload.password,
-            payload.rememberToken,
-            payload.data,
-        ));
+        await this.commandBus.dispatch(new CreateUserCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindUserByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindUserByIdQuery(payload.id, {}, { timezone }));
     }
 }

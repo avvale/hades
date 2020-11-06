@@ -6,26 +6,30 @@ import {
     RoleName,
     RoleIsMaster,
     RolePermissionIds,
-    RoleAccountIds
-    
+    RoleAccountIds,
+    RoleCreatedAt,
+    RoleUpdatedAt,
+    RoleDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateRoleCommand)
 export class CreateRoleCommandHandler implements ICommandHandler<CreateRoleCommand>
 {
     constructor(
-        private readonly createRoleService: CreateRoleService
+        private readonly createRoleService: CreateRoleService,
     ) {}
 
     async execute(command: CreateRoleCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createRoleService.main(
-            new RoleId(command.id),
-            new RoleName(command.name),
-            new RoleIsMaster(command.isMaster),
-            new RolePermissionIds(command.permissionIds),
-            new RoleAccountIds(command.accountIds),
+            {
+                id: new RoleId(command.payload.id),
+                name: new RoleName(command.payload.name),
+                isMaster: new RoleIsMaster(command.payload.isMaster),
+                permissionIds: new RolePermissionIds(command.payload.permissionIds),
+                accountIds: new RoleAccountIds(command.payload.accountIds),
+            }
         );
     }
 }

@@ -66,7 +66,6 @@ describe('CreateTenantService', () =>
                 new TenantIsActive(tenants[0].isActive),
                 new TenantData(tenants[0].data),
                 new TenantAccountIds(tenants[0].accountIds),
-                
             )).toBe(undefined);
         });
     });

@@ -1,4 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -18,12 +19,16 @@ import { IamRole } from './../../../../graphql';
 export class IamFindRoleByIdResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Query('iamFindRoleById')
-    async main(@Args('id') id: string, @Args('constraint') constraint?: QueryStatement): Promise<IamRole>
+    async main(
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    ): Promise<IamRole>
     {
-        return await this.queryBus.ask(new FindRoleByIdQuery(id, constraint));
+        return await this.queryBus.ask(new FindRoleByIdQuery(id, constraint, { timezone }));
     }
 }

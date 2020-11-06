@@ -2,6 +2,7 @@ import { Controller, Put, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateUserDto } from './../dto/update-user.dto';
 import { UserDto } from './../dto/user.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -23,29 +24,20 @@ export class IamUpdateUserController
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Put()
     @ApiOperation({ summary: 'Update user' })
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: UserDto})
-    async main(@Body() payload: UpdateUserDto, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body() payload: UpdateUserDto,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new UpdateUserCommand(
-            payload.id,
-            payload.accountId,
-            payload.name,
-            payload.surname,
-            payload.avatar,
-            payload.mobile,
-            payload.langId,
-            payload.username,
-            payload.password,
-            payload.rememberToken,
-            payload.data,
-            constraint,
-        ));
+        await this.commandBus.dispatch(new UpdateUserCommand(payload, constraint, { timezone }));
 
-        return await this.queryBus.ask(new FindUserByIdQuery(payload.id, constraint));
+        return await this.queryBus.ask(new FindUserByIdQuery(payload.id, constraint, { timezone }));
     }
 }

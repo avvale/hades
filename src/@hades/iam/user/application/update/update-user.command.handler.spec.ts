@@ -6,12 +6,12 @@ import { users } from '@hades/iam/user/infrastructure/seeds/user.seed';
 import { UpdateUserCommand } from './update-user.command';
 import { UpdateUserService } from './update-user.service';
 
-describe('UpdateUserCommandHandler', () => 
+describe('UpdateUserCommandHandler', () =>
 {
     let commandHandler: UpdateUserCommandHandler;
     let service: UpdateUserService;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -29,14 +29,14 @@ describe('UpdateUserCommandHandler', () =>
         service         = module.get<UpdateUserService>(UpdateUserService);
     });
 
-    describe('main', () => 
+    describe('main', () =>
     {
-        test('UpdateUserCommandHandler should be defined', () => 
+        test('UpdateUserCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an user created', async () => 
+        test('should return an user created', async () =>
         {
             expect(await commandHandler.execute(
                 new UpdateUserCommand(
@@ -51,7 +51,6 @@ describe('UpdateUserCommandHandler', () =>
                     users[0].password,
                     users[0].rememberToken,
                     users[0].data,
-                    
                 )
             )).toBe(undefined);
         });

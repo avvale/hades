@@ -8,7 +8,7 @@ import { DeletedUsersEvent } from './deleted-users.event';
 export class AddUsersContextEvent extends AggregateRoot
 {
     constructor(
-        public readonly aggregateRoots: IamUser[] = []
+        public readonly aggregateRoots: IamUser[] = [],
     ) {
         super();
     }
@@ -38,7 +38,6 @@ export class AddUsersContextEvent extends AggregateRoot
                         user.createdAt?.value,
                         user.updatedAt?.value,
                         user.deletedAt?.value,
-                        
                     )
                 )
             )
@@ -65,7 +64,6 @@ export class AddUsersContextEvent extends AggregateRoot
                         user.createdAt?.value,
                         user.updatedAt?.value,
                         user.deletedAt?.value,
-                        
                     )
                 )
             )

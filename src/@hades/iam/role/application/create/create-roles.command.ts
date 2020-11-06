@@ -1,13 +1,15 @@
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+
 export class CreateRolesCommand
 {
     constructor(
-        public readonly roles: {
+        public readonly payload: {
             id: string,
             name: string,
             isMaster: boolean,
             permissionIds?: string[],
             accountIds?: string[],
-            
-        } []
+        } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

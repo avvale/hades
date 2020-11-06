@@ -50,7 +50,6 @@ input IamUpdateAccountInput
     roleIds: [ID]
     tenantIds: [ID]
     user: IamUpdateUserInput
-    
 }
 
 type Query

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     AccountId,
     AccountType,
@@ -42,7 +41,6 @@ export class CreateAccountsService
             data: AccountData,
             roleIds: AccountRoleIds,
             tenantIds: AccountTenantIds,
-            
         } []
     ): Promise<void>
     {
@@ -59,8 +57,8 @@ export class CreateAccountsService
             account.data,
             account.roleIds,
             account.tenantIds,
-            new AccountCreatedAt(Utils.nowTimestamp()),
-            new AccountUpdatedAt(Utils.nowTimestamp()),
+            new AccountCreatedAt({currentTimestamp: true}),
+            new AccountUpdatedAt({currentTimestamp: true}),
             null
         ));
 

@@ -1,6 +1,7 @@
 import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { RoleDto } from './../dto/role.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -22,7 +23,7 @@ export class IamDeleteRolesController
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Delete()
@@ -30,11 +31,15 @@ export class IamDeleteRolesController
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [RoleDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body('query') queryStatement?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const roles = await this.queryBus.ask(new GetRolesQuery(queryStatement, constraint));
+        const roles = await this.queryBus.ask(new GetRolesQuery(queryStatement, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteRolesCommand(queryStatement, constraint));
+        await this.commandBus.dispatch(new DeleteRolesCommand(queryStatement, constraint, { timezone }));
 
         return roles;
     }

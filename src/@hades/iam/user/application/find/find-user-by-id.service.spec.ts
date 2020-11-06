@@ -8,13 +8,13 @@ import { UserId } from './../../domain/value-objects';
 import { IUserRepository } from './../../domain/user.repository';
 import { MockUserRepository } from './../../infrastructure/mock/mock-user.repository';
 
-describe('FindUserByIdService', () => 
+describe('FindUserByIdService', () =>
 {
     let service: FindUserByIdService;
     let repository: IUserRepository;
     let mockRepository: MockUserRepository;
 
-    beforeAll(async () => 
+    beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -23,7 +23,7 @@ describe('FindUserByIdService', () =>
                 EventPublisher,
                 FindUserByIdService,
                 MockUserRepository,
-                { 
+                {
                     provide: IUserRepository,
                     useValue: {
                         findById: (id) => {}

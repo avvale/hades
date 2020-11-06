@@ -12,32 +12,36 @@ import {
     UserUsername,
     UserPassword,
     UserRememberToken,
-    UserData
-    
+    UserData,
+    UserCreatedAt,
+    UserUpdatedAt,
+    UserDeletedAt,
 } from './../../domain/value-objects';
 
 @CommandHandler(CreateUserCommand)
 export class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand>
 {
     constructor(
-        private readonly createUserService: CreateUserService
+        private readonly createUserService: CreateUserService,
     ) {}
 
     async execute(command: CreateUserCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.createUserService.main(
-            new UserId(command.id),
-            new UserAccountId(command.accountId),
-            new UserName(command.name),
-            new UserSurname(command.surname),
-            new UserAvatar(command.avatar),
-            new UserMobile(command.mobile),
-            new UserLangId(command.langId),
-            new UserUsername(command.username),
-            new UserPassword(command.password, {}, {haveToEncrypt: true}),
-            new UserRememberToken(command.rememberToken),
-            new UserData(command.data),
+            {
+                id: new UserId(command.payload.id),
+                accountId: new UserAccountId(command.payload.accountId),
+                name: new UserName(command.payload.name),
+                surname: new UserSurname(command.payload.surname),
+                avatar: new UserAvatar(command.payload.avatar),
+                mobile: new UserMobile(command.payload.mobile),
+                langId: new UserLangId(command.payload.langId),
+                username: new UserUsername(command.payload.username),
+                password: new UserPassword(command.payload.password, {}, {haveToEncrypt: true}),
+                rememberToken: new UserRememberToken(command.payload.rememberToken),
+                data: new UserData(command.payload.data),
+            }
         );
     }
 }

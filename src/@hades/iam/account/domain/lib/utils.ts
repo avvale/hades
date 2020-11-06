@@ -1,6 +1,8 @@
 
 import { RoleResponse } from '@hades/iam/role/domain/role.response';
 import { ICommandBus } from '@hades/shared/domain/bus/command-bus';
+import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import { UpdateAccountCommand } from '../../application/update/update-account.command';
 import { AccountResponse } from '../account.response';
 import { AccountPermissions } from './account.types';
@@ -30,7 +32,7 @@ export class Utils
         return accountPermissions;
     }
 
-    public static async deleteTenantFromAccounts(commandBus: ICommandBus, tenantId: string,  accounts: AccountResponse[])
+    public static async deleteTenantFromAccounts(commandBus: ICommandBus, tenantId: string,  accounts: AccountResponse[], constraint?: QueryStatement, cQMetadata?: CQMetadata)
     {
         for (const account of accounts)
         {
@@ -39,19 +41,19 @@ export class Utils
             {
                 const currentTenants = account.dTenants;
 
-                // delete tenan and update account
-                await commandBus.dispatch(new UpdateAccountCommand(
-                    account.id,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    currentTenants.filter(tenantId => tenantId !== tenantId)
-                ));
+                // delete tenant and update account
+                await commandBus.dispatch(new UpdateAccountCommand({
+                    id: account.id,
+                    type: undefined,
+                    email: undefined,
+                    isActive: undefined,
+                    clientId: undefined,
+                    dApplicationCodes: undefined,
+                    dPermissions: undefined,
+                    data: undefined,
+                    roleIds: undefined,
+                    tenantIds: currentTenants.filter(tenantId => tenantId !== tenantId)
+                }, constraint, cQMetadata));
             }
         }
     }

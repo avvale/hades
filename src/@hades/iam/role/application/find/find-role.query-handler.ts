@@ -10,12 +10,16 @@ export class FindRoleQueryHandler implements IQueryHandler<FindRoleQuery>
     private readonly mapper: RoleMapper = new RoleMapper();
 
     constructor(
-        private readonly findRoleService: FindRoleService
+        private readonly findRoleService: FindRoleService,
     ) {}
 
     async execute(query: FindRoleQuery): Promise<RoleResponse>
     {
-        const role = await this.findRoleService.main(query.queryStatement);
+        const role = await this.findRoleService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return this.mapper.mapAggregateToResponse(role);
     }

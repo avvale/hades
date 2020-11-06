@@ -34,7 +34,6 @@ import { DeleteUsersService } from './application/delete/delete-users.service';
 // models
 export { IamUserModel } from './infrastructure/sequelize/sequelize-user.model';
 
-
 // repository
 export { IUserRepository } from './domain/user.repository';
 export { SequelizeUserRepository } from './infrastructure/sequelize/sequelize-user.repository';

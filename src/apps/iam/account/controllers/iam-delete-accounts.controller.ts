@@ -1,6 +1,7 @@
 import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { AccountDto } from './../dto/account.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -30,11 +31,15 @@ export class IamDeleteAccountsController
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [AccountDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body('query') queryStatement?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        const accounts = await this.queryBus.ask(new GetAccountsQuery(queryStatement, constraint));
+        const accounts = await this.queryBus.ask(new GetAccountsQuery(queryStatement, constraint, { timezone }));
 
-        await this.commandBus.dispatch(new DeleteAccountsCommand(queryStatement, constraint));
+        await this.commandBus.dispatch(new DeleteAccountsCommand(queryStatement, constraint, { timezone }));
 
         return accounts;
     }

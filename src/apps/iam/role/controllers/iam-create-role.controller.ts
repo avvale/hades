@@ -2,6 +2,7 @@ import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { CreateRoleDto } from './../dto/create-role.dto';
 import { RoleDto } from './../dto/role.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -22,23 +23,19 @@ export class IamCreateRoleController
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create role' })
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: RoleDto })
-    async main(@Body() payload: CreateRoleDto)
+    async main(
+        @Body() payload: CreateRoleDto,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new CreateRoleCommand(
-            payload.id,
-            payload.name,
-            payload.isMaster,
-            payload.permissionIds,
-            payload.accountIds,
-            
-        ));
+        await this.commandBus.dispatch(new CreateRoleCommand(payload, { timezone }));
 
-        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id));
+        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id, {}, { timezone }));
     }
 }

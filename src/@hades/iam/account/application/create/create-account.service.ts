@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     AccountId,
     AccountType,
@@ -29,35 +28,36 @@ export class CreateAccountService
     ) {}
 
     public async main(
-        id: AccountId,
-        type: AccountType,
-        email: AccountEmail,
-        isActive: AccountIsActive,
-        clientId: AccountClientId,
-        dApplicationCodes: AccountDApplicationCodes,
-        dPermissions: AccountDPermissions,
-        dTenants: AccountDTenants,
-        data: AccountData,
-        roleIds: AccountRoleIds,
-        tenantIds: AccountTenantIds,
-        
+        payload: {
+            id: AccountId,
+            type: AccountType,
+            email: AccountEmail,
+            isActive: AccountIsActive,
+            clientId: AccountClientId,
+            dApplicationCodes: AccountDApplicationCodes,
+            dPermissions: AccountDPermissions,
+            dTenants: AccountDTenants,
+            data: AccountData,
+            roleIds: AccountRoleIds,
+            tenantIds: AccountTenantIds,
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const account = IamAccount.register(
-            id,
-            type,
-            email,
-            isActive,
-            clientId,
-            dApplicationCodes,
-            dPermissions,
-            dTenants,
-            data,
-            roleIds,
-            tenantIds,
-            new AccountCreatedAt(Utils.nowTimestamp()),
-            new AccountUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.type,
+            payload.email,
+            payload.isActive,
+            payload.clientId,
+            payload.dApplicationCodes,
+            payload.dPermissions,
+            payload.dTenants,
+            payload.data,
+            payload.roleIds,
+            payload.tenantIds,
+            new AccountCreatedAt({currentTimestamp: true}),
+            new AccountUpdatedAt({currentTimestamp: true}),
             null
         );
 

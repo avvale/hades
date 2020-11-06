@@ -9,8 +9,8 @@ export class TenantCreatedAt extends TimestampValueObject
     {
         super(value, Object.assign({
             name: 'TenantCreatedAt',
-            nullable:  true ,
-            undefinable:  true ,
+            nullable: true,
+            undefinable: true,
         }, validationRules), data);
     }
 }

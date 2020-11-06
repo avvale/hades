@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Utils } from '@hades/shared/domain/lib/utils';
 import {
     RoleId,
     RoleName,
@@ -9,8 +8,7 @@ import {
     RoleAccountIds,
     RoleCreatedAt,
     RoleUpdatedAt,
-    RoleDeletedAt
-    
+    RoleDeletedAt,
 } from './../../domain/value-objects';
 import { IRoleRepository } from './../../domain/role.repository';
 import { IamRole } from './../../domain/role.aggregate';
@@ -20,27 +18,28 @@ export class CreateRoleService
 {
     constructor(
         private readonly publisher: EventPublisher,
-        private readonly repository: IRoleRepository
+        private readonly repository: IRoleRepository,
     ) {}
 
     public async main(
-        id: RoleId,
-        name: RoleName,
-        isMaster: RoleIsMaster,
-        permissionIds: RolePermissionIds,
-        accountIds: RoleAccountIds,
-        
+        payload: {
+            id: RoleId,
+            name: RoleName,
+            isMaster: RoleIsMaster,
+            permissionIds: RolePermissionIds,
+            accountIds: RoleAccountIds,
+        }
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const role = IamRole.register(
-            id,
-            name,
-            isMaster,
-            permissionIds,
-            accountIds,
-            new RoleCreatedAt(Utils.nowTimestamp()),
-            new RoleUpdatedAt(Utils.nowTimestamp()),
+            payload.id,
+            payload.name,
+            payload.isMaster,
+            payload.permissionIds,
+            payload.accountIds,
+            new RoleCreatedAt({currentTimestamp: true}),
+            new RoleUpdatedAt({currentTimestamp: true}),
             null
         );
 

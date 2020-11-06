@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindOptions } from 'sequelize/types';
 import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
 import { ICriteria } from '@hades/shared/domain/persistence/criteria';
 import { IAccountRepository } from './../../domain/account.repository';
@@ -13,6 +12,7 @@ export class SequelizeAccountRepository extends SequelizeRepository<IamAccount, 
 {
     public readonly aggregateName: string = 'IamAccount';
     public readonly mapper: AccountMapper = new AccountMapper();
+    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(IamAccountModel)
@@ -21,6 +21,7 @@ export class SequelizeAccountRepository extends SequelizeRepository<IamAccount, 
     ) {
         super();
     }
+
     // hook called after create aggregate
     async createdAggregateHook(aggregate: IamAccount, model: IamAccountModel)
     {

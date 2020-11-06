@@ -11,6 +11,7 @@ export class UserAvatar extends StringValueObject
             name: 'UserAvatar',
             nullable: true,
             undefinable: true,
-            maxLength: 255,        }, validationRules));
+            maxLength: 255,
+        }, validationRules));
     }
 }

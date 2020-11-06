@@ -7,15 +7,11 @@ import {
     RoleAccountIds,
     RoleCreatedAt,
     RoleUpdatedAt,
-    RoleDeletedAt
-    
+    RoleDeletedAt,
 } from './value-objects';
 import { CreatedRoleEvent } from './../application/events/created-role.event';
 import { UpdatedRoleEvent } from './../application/events/updated-role.event';
 import { DeletedRoleEvent } from './../application/events/deleted-role.event';
-
-
-
 import { IamPermission } from '@hades/iam/permission/domain/permission.aggregate';
 import { IamAccount } from '@hades/iam/account/domain/account.aggregate';
 
@@ -29,19 +25,26 @@ export class IamRole extends AggregateRoot
     createdAt: RoleCreatedAt;
     updatedAt: RoleUpdatedAt;
     deletedAt: RoleDeletedAt;
-    
+
     // eager relationship
-    
-    
-    
-    
     permissions: IamPermission[];
     accounts: IamAccount[];
-    
-    constructor(id?: RoleId, name?: RoleName, isMaster?: RoleIsMaster, permissionIds?: RolePermissionIds, accountIds?: RoleAccountIds, createdAt?: RoleCreatedAt, updatedAt?: RoleUpdatedAt, deletedAt?: RoleDeletedAt, permissions?: IamPermission[], accounts?: IamAccount[], )
+
+    constructor(
+        id: RoleId,
+        name: RoleName,
+        isMaster: RoleIsMaster,
+        permissionIds: RolePermissionIds,
+        accountIds: RoleAccountIds,
+        createdAt: RoleCreatedAt,
+        updatedAt: RoleUpdatedAt,
+        deletedAt: RoleDeletedAt,
+        permissions?: IamPermission[],
+        accounts?: IamAccount[],
+    )
     {
         super();
-        
+
         this.id = id;
         this.name = name;
         this.isMaster = isMaster;
@@ -50,20 +53,37 @@ export class IamRole extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        
+
         // eager relationship
-        
-        
-        
-        
         this.permissions = permissions;
         this.accounts = accounts;
-        
     }
 
-    static register (id: RoleId, name: RoleName, isMaster: RoleIsMaster, permissionIds: RolePermissionIds, accountIds: RoleAccountIds, createdAt: RoleCreatedAt, updatedAt: RoleUpdatedAt, deletedAt: RoleDeletedAt, permissions?: IamPermission[], accounts?: IamAccount[], ): IamRole
+    static register (
+        id: RoleId,
+        name: RoleName,
+        isMaster: RoleIsMaster,
+        permissionIds: RolePermissionIds,
+        accountIds: RoleAccountIds,
+        createdAt: RoleCreatedAt,
+        updatedAt: RoleUpdatedAt,
+        deletedAt: RoleDeletedAt,
+        permissions?: IamPermission[],
+        accounts?: IamAccount[],
+    ): IamRole
     {
-        return new IamRole(id, name, isMaster, permissionIds, accountIds, createdAt, updatedAt, deletedAt, permissions, accounts, );
+        return new IamRole(
+            id,
+            name,
+            isMaster,
+            permissionIds,
+            accountIds,
+            createdAt,
+            updatedAt,
+            deletedAt,
+            permissions,
+            accounts,
+        );
     }
 
     created(role: IamRole): void
@@ -78,7 +98,6 @@ export class IamRole extends AggregateRoot
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
-                
             )
         );
     }
@@ -95,7 +114,6 @@ export class IamRole extends AggregateRoot
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
-                
             )
         );
     }
@@ -112,7 +130,6 @@ export class IamRole extends AggregateRoot
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
-                
             )
         );
     }
@@ -128,15 +145,10 @@ export class IamRole extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            
+
             // eager relationship
-            
-            
-            
-            
             permissions: this.permissions?.map(item => item.toDTO()),
             accounts: this.accounts?.map(item => item.toDTO()),
-            
         }
     }
 }

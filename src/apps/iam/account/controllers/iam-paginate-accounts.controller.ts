@@ -1,6 +1,7 @@
 import { Controller, Get, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { AccountDto } from './../dto/account.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -28,8 +29,12 @@ export class IamPaginateAccountsController
     @ApiOkResponse({ description: 'The records has been paginated successfully.', type: Pagination })
     @ApiQuery({ name: 'queryStatement', type: QueryStatement })
     @ApiQuery({ name: 'constraint', type: QueryStatement })
-    async main(@Body('query') queryStatement?: QueryStatement, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body('query') queryStatement?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        return await this.queryBus.ask(new PaginateAccountsQuery(queryStatement, constraint));
+        return await this.queryBus.ask(new PaginateAccountsQuery(queryStatement, constraint, { timezone }));
     }
 }

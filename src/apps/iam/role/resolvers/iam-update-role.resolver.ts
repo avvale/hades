@@ -1,4 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { UseGuards } from '@nestjs/common';
@@ -30,11 +31,15 @@ export class IamUpdateRoleResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus
+        private readonly queryBus: IQueryBus,
     ) {}
 
     @Mutation('iamUpdateRole')
-    async main(@Args('payload') payload: IamUpdateRoleInput, @Args('constraint') constraint?: QueryStatement)
+    async main(
+        @Args('payload') payload: IamUpdateRoleInput,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
         // get all accounts
         const accounts: AccountResponse[] = await this.queryBus.ask(new GetAccountsQuery({
@@ -45,14 +50,14 @@ export class IamUpdateRoleResolver
                     id: payload.id
                 }
             }
-        }));
+        }, constraint, { timezone }));
 
         // get permissions assigned to this role
         const permissions: PermissionResponse[] = await this.queryBus.ask(new GetPermissionsQuery({
             where: {
                 id: payload.permissionIds
             }
-        }));
+        }, constraint, { timezone }));
 
         // iterate each account
         for (const account of accounts)
@@ -60,26 +65,19 @@ export class IamUpdateRoleResolver
             // TODO gestionar el proceso de actualizacion en una cola
             const accountPermissions = IamUtils.updateAccountPermissions(payload.id, permissions, account, true);
 
-            await this.commandBus.dispatch(new UpdateAccountCommand(
-                account.id,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                accountPermissions
-            ));
+            await this.commandBus.dispatch(new UpdateAccountCommand({
+                id: account.id,
+                type: undefined,
+                email: undefined,
+                isActive: undefined,
+                clientId: undefined,
+                dApplicationCodes: undefined,
+                dPermissions: accountPermissions,
+            }, constraint, { timezone }));
         }
 
-        await this.commandBus.dispatch(new UpdateRoleCommand(
-            payload.id,
-            payload.name,
-            payload.isMaster,
-            payload.permissionIds,
-            payload.accountIds,
-            constraint,
-        ));
+        await this.commandBus.dispatch(new UpdateRoleCommand(payload, constraint, { timezone }));
 
-        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id, constraint));
+        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id, constraint, { timezone }));
     }
 }

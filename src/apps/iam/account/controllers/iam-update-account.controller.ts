@@ -2,6 +2,7 @@ import { Controller, Put, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { UpdateAccountDto } from './../dto/update-account.dto';
 import { AccountDto } from './../dto/account.dto';
+import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 // authorization
 import { Permissions } from './../../../shared/modules/auth/decorators/permissions.decorator';
@@ -29,22 +30,14 @@ export class IamUpdateAccountController
     @Put()
     @ApiOperation({ summary: 'Update account' })
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: AccountDto})
-    async main(@Body() payload: UpdateAccountDto, @Body('constraint') constraint?: QueryStatement)
+    async main(
+        @Body() payload: UpdateAccountDto,
+        @Body('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    )
     {
-        await this.commandBus.dispatch(new UpdateAccountCommand(
-            payload.id,
-            payload.type,
-            payload.email,
-            payload.isActive,
-            payload.clientId,
-            payload.dApplicationCodes,
-            payload.dPermissions,
-            payload.data,
-            payload.roleIds,
-            payload.tenantIds,
-            constraint,
-        ));
+        await this.commandBus.dispatch(new UpdateAccountCommand(payload, constraint, { timezone }));
 
-        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, constraint));
+        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, constraint, { timezone }));
     }
 }
