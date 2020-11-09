@@ -7,7 +7,7 @@ import { NfcModule } from './apps/nfc/nfc.module';
     imports: [
         CoreModule,
         AdminModule,
-        NfcModule
+        NfcModule,
     ]
 })
 export class AppModule {}
