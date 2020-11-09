@@ -1,15 +1,17 @@
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { InternalServerErrorException } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { urlencoded, json } from 'express';
 import { AppModule } from './app.module';
 import { EnvironmentService } from '@hades/shared/domain/services/environment.service';
 import { LoggerService } from './apps/core/modules/logger/logger.service';
+import { join } from 'path';
 import * as moment from 'moment-timezone';
 
 async function bootstrap()
 {
-    const app                   = await NestFactory.create(AppModule, {logger: false});
+    const app                   = await NestFactory.create<NestExpressApplication>(AppModule, {logger: false});
     const environmentService    = app.get(EnvironmentService);
     const loggerService         = app.get(LoggerService);
 
@@ -25,6 +27,13 @@ async function bootstrap()
     app.use(json({ limit: environmentService.get<string>('APP_LIMIT_REQUEST_SIZE') }));
     app.use(urlencoded({ extended: true, limit: environmentService.get<string>('APP_LIMIT_REQUEST_SIZE') }));
     app.useLogger(loggerService);
+
+    if (environmentService.get<boolean>('APP_MVC'))
+    {
+        app.useStaticAssets(join(__dirname, '..', 'public'));
+        app.setBaseViewsDir(join(__dirname, '..', 'views'));
+        app.setViewEngine('hbs');
+    }
 
     // check that exist timezone in environment file
     if (!environmentService.get<string>('APP_TIMEZONE')) throw new InternalServerErrorException(`APP_TIMEZONE variable is not defined in environment file`);
