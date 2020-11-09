@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "a8af8867-ad22-4d57-bcd0-22fa11b81969",
+		"name"          : "@hades - iam/permission",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - iamCreatePermission",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamCreatePermissionInput!)\n{\n\tiamCreatePermission (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"325a065d-ed9a-47dd-8359-3a23daad9ca7\", \n\t\t\"name\": \"u98uaju7vi4twl2n1mt1df3fuvt1e2ojbd3i8ragqldwq7vf71gyer1a7edugk30urzgkxd83n3l1g6ud0ypbovgm74fz2mf7vk3pv3pqzgnynd0rpvq591kg9872vghaem3y98pqfq8y45ub0qv6cq1ca1f6hszisoz3g9kjzwy1lvmq2q8cz15ihneqmnud84xmifn47j8wxjwdrx26aex7r2es2msirnd2uczgcwuiqpqsjhst3j5337b9ab\", \n\t\t\"boundedContextId\": \"cd09d6e0-8ce4-4ff1-81a0-af944dfc574c\", \n\t\t\"roleIds\": []\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamCreatePermissions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[IamCreatePermissionInput]!)\n{\n\tiamCreatePermissions (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"eb590e46-7a17-4d9f-b635-17db9b94b6c4\", \n\t\t\t\"name\": \"lqjztdosxwrwf49kn8nxit67q3fp1xqg49nohwyvi9ebd7oahd3rorfu7qnr1xp7e3wk5gavzp2mbfqn8eeq38wd7mb828n793ks7ouj1j5m1n0qbm8d77jo4spat8y37mribm7679arydtipmnowrvn2u1g5d3qdtuhwks8juhb5g3gjx2ck3jzcvp88gjnqx4z6wl8wnqrattlnjbn0rzdq1xzapna7wbj4ebsgl04cjcykioomtuiaoe5cel\", \n\t\t\t\"boundedContextId\": \"c573ef34-606b-4dcb-83b2-4e61a465e8bc\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"807adcec-531c-4816-84aa-ff7c778a0092\", \n\t\t\t\"name\": \"vjqeks905cr2tymuecgnt6c3jzazwxyp4mcf6jx0o5whf6ns8ma1qpg7t2bzs5fqi0b0x88zd1ipozmkg7rzmuh8763m7exqw75pyprwyomdh9sanjtd4co4zg90ytdkprwas5wl2jcz9h6a8ok5ivyoj6bkyne0yl02z8vxskqthtmig8v1f1f0rc1bvt3yhxjfv6wchaf3kb8lvigf0d507ejp50q5z743g9hhexec5pu3issa50q299ttvoz\", \n\t\t\t\"boundedContextId\": \"d602bc06-caf8-48bf-99e5-763249a93c12\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0838dc5b-7448-4a5b-9b42-d286b135bdc8\", \n\t\t\t\"name\": \"31ze22wnglyyq478agrs7jymept5cam5wy2elztz01kcl9pcs10jtpeyw1d2mur834bn7r6kxb12noqerg3bx2nqhk5m7vtqlx3s9rqhmmeevzmeslop7u4nsm9r6yeu1xx67zdi16lcwb5w8mg0036uggnvpj84x3l9mola0dkcuvkdjjlh24vr9a7xaq7hsjigvh82u6uohhb59rgafm9vg1wihcfqsviguqqdltzidno2yvktcf05aczencl\", \n\t\t\t\"boundedContextId\": \"74621b56-ee91-4c2f-852f-2e091223fb8b\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"be4b15db-e7fe-4779-9c0e-3e9dd3940723\", \n\t\t\t\"name\": \"s73bx7jnqxpgaxi2mooqdg9sdc5dvz9w2jw3snyzu5tn90tqbz0fpkognp28mcw6b9jtojpgx60g2rhjt5wlnvd99ntyubewtneiicc6ajodf5a5kp4htf9xaodiuvj61eis5nnm1iwykx0aakelmpcc30j7fpl1392z8p863v3ezwppjuknocztxsavbmkprsge1itu0ebwhk9vvlhzd09xt3lnrw81x4hkibntg98ifwucv6h43srvmvuy3ta\", \n\t\t\t\"boundedContextId\": \"6ad4285d-99f2-4f64-bb47-8aff17cd101e\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"006fbc18-24d4-458a-8624-e6be0d2601b4\", \n\t\t\t\"name\": \"g0riz8tmyxjjclmhg17ivwfachr57nynw938tan9zu04xee59ofnwx4hve55w3zgaena6qhulmhtjujles7bkk5arcxchrf4nfdqu4hpu4vwzr63axm0wsnwdllwl3js8eo6kb92s4azknm8g71niayud1l8aa6ihgl7iyz96c69ph0p55c69utwh8xnkw19mbq3fqthcc234lfxilmqpqfezcqomer6666vjqk39ler74zdqmxzja9aofllinx\", \n\t\t\t\"boundedContextId\": \"2359d76a-d259-4d29-8d81-b34195e13afd\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8206e101-3e6e-45c3-ae27-a0ddb07febc8\", \n\t\t\t\"name\": \"p7pp6lkcwdw5w7mk3a1ugyfvxm9h4xpzkdom17xbmojf8iu898dm8wshcw27gal0rrm1kss0gc4gvtlbtjcyyg1iyua7gd5kynlzwjh40i3t420zj9mrshc6yb0l2mucoqfvc0fn4cind8qy11xiiypxw3hnkg0fxjlbfqp1aizgtvytbfmeveyefhy9lul47xk6bu4rjpom7cid8gj5nn419p5z9rjinthor4kjyhyaytfr1fesdj9gaak4100\", \n\t\t\t\"boundedContextId\": \"72232311-eaba-4d94-ae1d-b203207bb8c3\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"007cb048-8f44-4047-96e6-5d425b3c1ea2\", \n\t\t\t\"name\": \"rrv99ldx3csct1apyfnovfyv1lxvzbxcfrboy2e57jjh8jgcflmh1zdew7j52b9m48h5oqqs31v2pev3h4w28pjg6rp9udxxxtv4dnorbba921c9yjf5snqtfujtnmro1d9g0r64x3jmqvr51ivp41cr9b61pizetytaqtj1iur86ci9k0plvrfd36x2qsmnlt4b1q75meq3v2vclui10g8cl5q4hdh17e94u7hjvegd5slbis5z5ultow6d6su\", \n\t\t\t\"boundedContextId\": \"dd133e00-a93c-433d-9dfd-d34d404e61b7\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"357a307b-f862-4f9f-8500-932e4fde1b1b\", \n\t\t\t\"name\": \"xvxtq9avqj2ufe51h8qprqo47oy72h5rn7cu4633n0tgvrmb1anyr1o90epzqf946grwmgn0orzv1pr5mxrhns658oxcl71qprprw9iddw8oplqd15587d70zapdcuzuxkv57cootuispjmumxz8g891dah3rpa0h9ybfu49ia200vzjolisqefjkm19my3ccn174p10z2k3xn5tvmyp6cn6ghzuu3p2gxk2asocqvc2ull3kl96llu81x86aw8\", \n\t\t\t\"boundedContextId\": \"f4c3095d-e553-40ff-b4bb-454e3e897c30\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8f066dbc-c7db-49b3-af27-181dbb6cd94f\", \n\t\t\t\"name\": \"nwlc6nqag0axr2o88wqa32x7fndvnb66mabwp1273p3zuzej8hayx0la9p93g7xy5e3e9fzc7jiuu09gcedgw769tpkm14hmm6kfsv71mfcl6mmxgtp1u0ic0ce1jwx9jvuiayc7yelpaioejkx9kdlvh6ggw2morpznxk0msor87tncyny65t3yys1wa2xq7ph1tgtl2536wv4q688998kvhafd35id1h21a8k0hxmrq76gqt3nn1v8wu87vrw\", \n\t\t\t\"boundedContextId\": \"1611a721-3e74-4e45-8cf8-202c26957898\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"95a7c8fe-79c6-48b7-83f9-e9f53a9f81a9\", \n\t\t\t\"name\": \"7oe0vvnjikqay2dck2hgdahnp2tv6apd9hgfexxj16thgw2254sbr90rowb6ynrxa0dfzltscraizu7zok869lwidqmv58j5dk75n3dsj68tm8of3gjpgslh2703ztzgn812vjwcteohba9lsz9rpuo3vgxdkf8uwdrjirttazjjy5hdpwaz02vob2vgz5llpwj5s1ezqnjdmk3nqxg7x0qrcbkm2t9ykqnxvbhm4sp6ta97kv0xkor0cqyvmju\", \n\t\t\t\"boundedContextId\": \"a70eac2f-ddf8-4960-b619-f4bca71819c1\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2fddf4bd-cc48-48f1-8b55-9197efa2110a\", \n\t\t\t\"name\": \"p5e2hgzr4kgca3a6o4l3wxq3x7lblp748tca3hl0kx4yrbs1qzjz6oubqycjjit7f3txsnpnixu4tqqavtbzkvi18wun43s5mmt391a74y0y9jygqqoshflxs9m8repc1i38urax7qzjqtitfbc9q9usnmbeyxg3ni10bh75luw39403ig21j2yxw1eb2281zpoqpek8gmw66hskzvqip8wgssjh5ytyjtjgecez6azdb5t8ld8mpzq469nldxf\", \n\t\t\t\"boundedContextId\": \"337149c7-c303-47a5-bea2-0f4e7ffe986b\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"02e1e626-06fc-46d9-8d66-fc6ddb70b9f4\", \n\t\t\t\"name\": \"6u2g0zm793di3axuy2y1b70fch4pfqdi42kdl0kwcdw7yxu73mfotm86vwl3uh4rlxdzhkopj6h4oeesmb9mlse1mi6187wxltk9oz2vf2jzv9o6x2lz45bcxrcfocehl1gowogvw6wvkvug438c89hrgx5e7ag82j1ykdru1vvxdhmqx28hjw7gsnkobvv6zl1ancodv15w45wzjvhq7030w2jcok3wtgh32a9lc5gvkfu2hctt2iynnh5j7he\", \n\t\t\t\"boundedContextId\": \"a870aa1e-65d9-4495-bc5b-1506515c3af2\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d08c41d0-d6e3-4c7b-9ad2-e9875600b42c\", \n\t\t\t\"name\": \"tbo2dzvsx42gwnvfl978uzmmxr59fxy9atp6z0x4y9g6ut10apjp3r0qggvwjqlhc1gdc5kmd8onl9atsfo9a8k0l4suwfqzrr82vhl046wbrb931ustiwbx4b6g2rfldw65lz2mtk47kiuvaojwnw3e3siph65wnonv2e8ytzy9fvk22c9xz0xyyimvutcgc14qrmzdah1eosh17cn3k62d1uvd098mhbx02ielnsplrr3nxu28lh3hfdonm5v\", \n\t\t\t\"boundedContextId\": \"35a68378-6d6c-4ea4-8fc7-25fa915e7567\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"00b69b1b-28ff-4731-a93b-b82a169199f3\", \n\t\t\t\"name\": \"5lp5j3nubicwugy8jbms85iq4o5l4sjso6ea4zonizfxo9z39g3em2ntv7h4ta6ic0tn1mo6w2tnx38ohmhuub5pndx60iyjr373j4kcordr702g9wmx75ng2bmhga4tqzor8npz4gs13e03vv6tfkki816htdrn3gv0rgx5zjq7g9qmyrwggk51kkkf1hglkp24mry397rsa4ryfsm9e5ut7l6gq6p3fg4l5rvy2y7k59d0oy99hsbxl23n43a\", \n\t\t\t\"boundedContextId\": \"cc730549-4d45-4aec-8421-4ffb9f207583\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"683ca546-3377-4c0f-b32e-ef1629eeab25\", \n\t\t\t\"name\": \"41nkhncqw1xwieagu3n4175icai41nrwblm3pk01jdyrdfi2bjja1sk714hzudcs0rza45b5kic64aewcgkd8k0pfht50ef2cgpqoc9j2gerzt6ofzbdwlhv330k6ygzugm6ngjix83evn93fozx5d90kequxmzc56xjruj93nfsgf4rb885jjt1khd8f14qfkdorj3sdmc6n3xmohyq0980t4kvvt07p34hgowb8rrolzyngdcwchq4g8h9u5k\", \n\t\t\t\"boundedContextId\": \"ab8cab53-2169-46d1-9e30-dd848947a2f5\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"31e4ff12-80f0-48af-a9ed-4f12c7c6d8bb\", \n\t\t\t\"name\": \"bf0d36rkkyky2md27qqb99o1k1u9fmvo1yz80lmaeh5ceg6t20u8v5b8g0v1wrg0xgqtd1leyxdlclc9za5zapjp0fa2vebqc0c413zcseosom96u7r4x6yh94hfeg3ud59mdilo0thmds9asrhs0anj5su5y12x3a3xbw4epheutvqqkjbqorci5vs3b2vi4kkfotc8wlrmj8s9nwgstq85f0xwyqvo81hhjqifjpfzf3ew5gcsm6ydv3yg9jf\", \n\t\t\t\"boundedContextId\": \"d37a3ef4-392e-4cf2-9e8d-8091a174771a\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b817fe9d-81d7-4969-b019-8fe97cde4a38\", \n\t\t\t\"name\": \"yydlq6cln2k9dwr60n0j9n7mpv1i32y1u4dr1s9gi6dul9tzrzljkq6fjy46jgclgdf8e2vvu8xraw0n7oy4dc4jpqlb2g3kcdttvhyfhcyxg0jkofsj1ulwyhlp1032q54u6acq8kysx4u3xior2yuhxrbo1s7cjbef5tm0idq0rx8hjanp996j4xv3gjkmd56hqfq725fxggm7rpuy3notqk6h9guqyp9480dtv80b0q6gvoak9c8u8twb7qq\", \n\t\t\t\"boundedContextId\": \"755b6593-85f9-4e9b-8831-c9d1247f0c20\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6b98f806-7bbb-4d9e-ab82-4794c959b95a\", \n\t\t\t\"name\": \"snp6jpb2xmwsuut2cozsuzp0b5nv38qohbe1l9q6hbsxgt4n6s77ukz8u7f9eig0a3ze7j3c6azfjl9ccvs718xd81bntcypaugf0i3b42bq1r9ke0tze89mzq834tigcyakv8eyiucroh4f14mh8q10pfe8ae9vtiokqgsltwl38ws0ctks09v3xh89uaxjiqjex1ejylej0pu9bcjlsjdnoxw3wvhgt8q4do9xs428gmui50cln4wwejmq724\", \n\t\t\t\"boundedContextId\": \"952f528d-22de-4869-a8a5-6e6d4860229b\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"5f7d858e-7b80-450a-9e51-b71e45a27876\", \n\t\t\t\"name\": \"54kxn4o4dtdwgr1zuboe73lbxx4hdujmbzf6p0swoc6wv2fbhxjefc0yrwui00kr7qb4k0i6nv0w31izu901nmehhh4c68on816tmgv30e67u2guy39bmjcwz3zxsgk0uilcohbs7mum4m1ql0siwrmltm7vhmqtlkgu8zhaxhdpptwly56e334p5fk5w0gph24il00p4zr1v6ybmxc7pb8jwuvzniwbnh711d0yyyoliaprj5c8oduef19e05x\", \n\t\t\t\"boundedContextId\": \"92e6f090-12cb-416a-9b96-310e10b70a6e\", \n\t\t\t\"roleIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"639d0893-4d8d-4299-aeb7-6e1b11234b4d\", \n\t\t\t\"name\": \"05y73m0a57godc42lrwvyhez3oljonlfxlx0twqvaw8u4mww7gz25z7wjrjkgvcz3lwq6zvrs8s0dhwnllo16khlo7e9m8lsiz7sg56xxjo7g4jb2dpwlvsd9kcvbast6y2kaoxn1wghdry4gynnloze07pp03aodr636atx9f5o1hxz77mc6vstjdqnwrbcip9v7u0mdwheosy0t9xh29knf0qq0882ky3mlj2p95mftjzn64vo9e3s8l89m43\", \n\t\t\t\"boundedContextId\": \"a4546be9-532b-4a94-b07e-462d8f6e70c2\", \n\t\t\t\"roleIds\": []\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamPaginatePermissions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginatePermissions (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamGetPermissions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamGetPermissions (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"325a065d-ed9a-47dd-8359-3a23daad9ca7\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindPermission",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamFindPermission (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"325a065d-ed9a-47dd-8359-3a23daad9ca7\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindPermissionById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tiamFindPermissionById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"325a065d-ed9a-47dd-8359-3a23daad9ca7\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamUpdatePermission",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamUpdatePermissionInput!)\n{\n\tiamUpdatePermission (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"325a065d-ed9a-47dd-8359-3a23daad9ca7\", \n\t\t\"name\": \"d2t3nhlznscbqifoplmhi9t17ap25jbv4dligcped93ia4wutx7uf2ohhf5a4tlyi1ho9uanngbfjhq55d226vkqptz5nflaqo22kvixbz4vo1z1yqe7xce1fdnjcjmacw0r2zg1inbi7494uruf433sr0okx0n913fmr1s15l4eu14rb5jz0aeiryomq2zemzf8uxuagz2rug3owoj6fpxphpvwoi0holq3sa8ijlbcpevhjlc6fph7cr6xe99\", \n\t\t\"boundedContextId\": \"cd09d6e0-8ce4-4ff1-81a0-af944dfc574c\", \n\t\t\"roleIds\": []\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeletePermissionById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tiamDeletePermissionById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"325a065d-ed9a-47dd-8359-3a23daad9ca7\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeletePermissions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeletePermissions (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/permission",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"325a065d-ed9a-47dd-8359-3a23daad9ca7\", \n\t\"name\": \"5b6l9cppfo75tvowzhjco3eqbutjcxke1s7q4ejia245aptsm3dj28hptsneb79kqg3dxpptol50zxua9zjwbx5gqyg4fwuou7hkskbmfwxy4bu1h3gjf5a2ucwcrgni204psthrylqzvaoc9rzwgenrm1pmz7ztle15apgjeu98ubisixgvn5e0fll2l5vxwhyyh46po3x3egec1vkua09kpmgzo37d6zslho1apqmf8zewyg015auli2wvass\", \n\t\"boundedContextId\": \"cd09d6e0-8ce4-4ff1-81a0-af944dfc574c\", \n\t\"roleIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/permission",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"permission"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/permissions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"943a93b7-c5a5-45cf-85b7-40c81f08979e\", \n\t\t\"name\": \"cjmbnq2kgchii6n0of8t9w3lolvi5drwwh7gvnkvp62gj9u5sibv4mqitqk6y2hr4y93h6d2hsb2c85g0rzfdksrpzif8l8090oe0gr3e8m854qs802xts628z3dys1ilrhsk52whsz9vzewcu0c4uksytpfaevs0f1mkifrqsqjwarnnuch3zopgsrz6od8z686pzsql3zpiboz6iqsfvj9izzskinanwdf5zgti39p32xeqspmewd54ggibys\", \n\t\t\"boundedContextId\": \"1aea024f-60b7-47de-aa9c-db61dc33d278\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"e5d37d20-408d-418b-97c2-b72fa41750d9\", \n\t\t\"name\": \"c2l2qytvvzvsizked9mx3axygx03i1s2foaa9zwx5rauacmvlerjv4es904dspottroa4k9btxqpit1gjwu2dl3o8pl0gbzqi0kou51q1wcnbod5q4b3en6vxiywrzvw86trihb2wxb3xoqasyzuovpt4msgvmm33pun0laok78le88psnabgmgs84dz50r5m0dbh37h08bp8ww5xs5oxxiecvvhcy3uq041vv7sx81yohywqb7o62c9yov42q9\", \n\t\t\"boundedContextId\": \"168dccfa-4d97-4ea5-9130-6ba11e15d2fc\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"32592602-5ea7-4667-bbe9-8eaa319bbfb6\", \n\t\t\"name\": \"ye11l988mijhs5ragydbijz6fw4flyvduzmy0rre2g1a8lyjaycu7o3cnww1eufq79f95itkigwa685siqe7p1dynumgo7fjjzlcrkxc5cxwabcprs00f88vsygl60m67ppl0wz8imwz3qqk9epb6xiatbuhmk3lm23ncn5y54tiac4exqkyu98241mcwyv27u0whsb7kuokoczslhwxvgz2y65gxtfix3evdcu6wnutn92l2c74im6etu6npdj\", \n\t\t\"boundedContextId\": \"8b70416c-a725-491a-baa0-644b684be6e8\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"837e1eeb-74ac-4c94-9018-a71494f9fd29\", \n\t\t\"name\": \"up86v2uew3ds4xjnd3sggk4h42ux3a7q7z6z1yxx32wzzmglsrz60vxm2ztq41rikcr13m5g30vowso5fs2d7o9kwu01br00ai6yq0c3kk6ob0xic8tz1dmgaif6kjbpys8a4g60921y471gcb8t3frr4qobkfdn02qx88rws03lt09xclgqvjaztp30g06h4z2xo3rbezpd05mt3k6nvyi1845ljxtva2er9qb220us0d8uyeqorlnukk5mm0g\", \n\t\t\"boundedContextId\": \"bf92461f-b558-49b5-82f4-780b79a3d78c\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"b174a7f3-ee97-419e-a678-9bfa3c646923\", \n\t\t\"name\": \"39dx35dr29hjxzlctg4kzsm7mp75jdg6ioo0zz9weghzqfvlnm1avor7f6xmoubq553xr93039l5qa7lm16kc8ys2qhen5ygxavupkdro4nses8bco0w121x1r4ocyh1fiv71k2gwqx0e73o6q7y7n3c68a7v1pr74z3zad1g4po1j58f1eutgr5f7dt6i0vmapewl53mnpb1jv8rx55wn06pknkh6swl2z81vdqi3peizrpadv32zvz3xpq26d\", \n\t\t\"boundedContextId\": \"bc11bc5f-fa11-4efa-8c20-7b742b237574\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"e8ee5e2b-9c4f-4682-b870-2586d950f620\", \n\t\t\"name\": \"a3ovfc6yw4oxgbblwz3pysic6jy40vb9l9y38ejlo85tzdnob38u594ot20l4432rrcwaok3lewtxs5ht0gqw92ee870y265ktoizspd8qbzw6bn9v8hhpwizh4l8vqj7d8azzegw96l1s70hn63d8v9adis1e65g64jaaeebqwm4fjmp9llkhhqbikpial5q3vhmpa440dqey55633omoep1dgela0edk8b2h5xonfnhjdi2c3cixcmjbyzotj\", \n\t\t\"boundedContextId\": \"f10f1d1a-eac8-4a44-b49d-9f9fe9f99511\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"0817a3ac-4cb3-4ec2-be0b-20d99a22197d\", \n\t\t\"name\": \"xubxffyapngeu93wkzb26w9tnkyzwumy1u6ftnjq1n566dhr2w0iufibp0d2y23vo7ofnr7rbtnmxfwcrhzun9x6zj2l6lti30a23ihvskoufslihq2cef1s8ojse51ai7v5kqaonl70385fyl93l49yanp1zr6jyil2mec82sixnlz9s63irt8jfgr3msexbqfvk5zx5w6vpqay9xiy1akffq4va36fugv61iy4cwmnlsx3mldfjl0zp07dbhx\", \n\t\t\"boundedContextId\": \"d2db56e6-4457-40f6-bea0-1c0e13a3fc8c\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"8cab0a3b-6b05-45cb-800d-37df3cdf3846\", \n\t\t\"name\": \"75v1kx3ju9rnztub7h98fkvt07x81vkjp6c14mtd59htrj7e7510wi8n42z8omjse96a2crd7kvmzw8y14wx4ggtinq1vt0py2iq0bwltkzwoufajljpkiomm7c1z3ms3l3veim0j7l5m7d9p0kuz1axjanlnqtrhe5i3jw1789b6nfszookqj56fexw1ysgqut6hg877osu6578v4nen6mx96rtdm028huxotbez4aevjjv2gwfemjaefh95dr\", \n\t\t\"boundedContextId\": \"03f7d4d2-fdc1-4799-8acf-4990e693c743\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"71dfa446-f6fd-4035-baf5-4f91869126cc\", \n\t\t\"name\": \"fr4x6d2lz97syvvhx2qn4w3zr863l51bkbrwszl3uqi4ui9vm0rpq5s3r4dnim3sq6v4k6nxwey71o2jcv8mbl9qc5qn1m9pqyhepbp6d4gowmfket69dak2zsr5kwu0trf8le9bttorh0kfu06brq17blcs5sm8kxlr0akmkq907dlzzunuianx56enzf0ei0t64c4ngibwj2f1l8mrmf01bky7m7t0rwl7221ykjnfcp6e5x3ohtlr5t51yd0\", \n\t\t\"boundedContextId\": \"aa063530-37cd-4a39-9413-66c2a56231c8\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"00a431ea-f4e0-423e-8d51-775631c52660\", \n\t\t\"name\": \"ph1kvn6puv8bxujnjliyol3l6spkdf5dgu9fv4ookdkyd2xlps7nz986077g63585u9ifsw0a70ghh2i0lbd6izkz2s1cyqnedes0g7cdbsyvaq03ltve5yk8rcrcq2ioetx1bujp3ejw32bbmxaobtxwz1dm3hny7y8cdfy5szf6gkvzds57pbxhpngsgrv9m3cfchmlifv9mnxkvvd1phpsp2irqto7ifjfobfinxxpcvx6fspdi8kvhlsrii\", \n\t\t\"boundedContextId\": \"d0369960-6115-457c-905e-f36799d82c47\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"c84197ec-3140-405b-b578-b416256a33ba\", \n\t\t\"name\": \"0xk001h3o4qxjw88j17hxbisn10lqqbk1rd42zedb5zy0065s88kowv8hptfzvo3br5omo94xqentzz0m08y5io5jytcxhexoxf3z2u7rthi4eoxjpcgce4u0h5plzkaztjvvpysjw5k6nqyvmf30b9zi563c3ewefdblc1ghqdt3hak2y8yksid3e926p3ni3m5sy055pv8skurvh17wrp53ildtdqsdp0l68mqowdh68b0uzwygribr7o1lis\", \n\t\t\"boundedContextId\": \"c328c128-70b5-41c7-b432-eaf0e381f3dd\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"0a3ce13f-0efb-4b24-8223-38fde30787a9\", \n\t\t\"name\": \"akcllvl87kuifjmdlck08jgx8dds1bafti81g42hfdemaj29ow5m5uqmzki4877kvvyvhu66kgxpvh0rxy84k3tmrjura5b1j2ucfklahradb7wa7sxtbpw487eicon5cw8j6h1xfyy5bkggr3vy4q6cpg1vvktuqd86os3p22gfawcuqcjin6w5xrorzpbrj35j3imwre01iif7jwxnk5ypvtvyv3eajxfjhk5hoir88yugg9h2cs6l27uyb1g\", \n\t\t\"boundedContextId\": \"2ebaa313-d1a4-4b9f-94be-3e10a4638c35\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"b2cba9bf-a8ce-4a5a-8f7f-b677950e6987\", \n\t\t\"name\": \"gehq9pzyfna4uyy1olg3oszh599wdppkpkjjakm95jg33ednumdu6am22w4j51dadi5gf1v0z2ii0r9m7feam03be3fl0qmvi53ogjei3iv55watj9t67lc57fqmixv75928sgoko1x6x0jkna52u0kf8qonlypzdqwmjii6yldaopx7lj2mmhu9mtgw0nky769ez8srukqptgtb3r03vup5s34q6krwmz6h1wzen9etgs4rhymg7hzf9mjoosi\", \n\t\t\"boundedContextId\": \"2d707223-1740-4997-bd9c-8f95c073171a\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"65853db5-0a4f-486d-9c5c-cd529875c750\", \n\t\t\"name\": \"d4tczf93z8b8rda9ekmxvx6l2lcq2c69vsvnqiuebuaiuu47qwgv9fqfpwnwse1d4tms95cis6gu7jzt8ewfl08d8h1ssg25a7weqruntap4olww3vrbv6my0g3nygae2sdxz0slkzs0l17oyts0d2w9mu4g7qsoeqmzxn7o1552a7xme1axd7lekgt8f4cbisd8sbi0znqo5jmba14z52i57d0tzmobhoup7fnlfztxxuqkwladmjl64nohyw8\", \n\t\t\"boundedContextId\": \"f820447e-a523-42f6-8076-5a11edcf67f8\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"89179398-8186-4bae-b520-024d4b35345a\", \n\t\t\"name\": \"ajbxzbtsqf8p2k2p411j5se96809t9v13eo4ouacpotser8t8qpcxjva5vel2wsy2cvb9y6na97ucqat76wmhfu2x50z5zg08huyl2ohmz1sqefozs1tmacj0a4umr8h2kzkhdoz95fzz0kziscr14ymvyzaxk3oxmkac8zu1d6xnpungifir78dl45gfeup8sh5c8ki83hz6zwr0ck2v9uut7q3xa40jwgnivxcq2kl8b6j7mlwwtwtghl851h\", \n\t\t\"boundedContextId\": \"094fcd41-b809-4d81-9944-ab4440b9a060\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"cdc771d2-543a-4514-92ac-82fc368530e6\", \n\t\t\"name\": \"6974jru5y4d7197roaojbkpd04di9vjj2o44oqg9gakclby4668vq6on7jqztks05993w5f46xyfmc2pivqmmd9s6umohnr5iut8b7fbz96e7aiwoxcdlcw77v9s03vb8zd8oq9q2redu1o6xzj3dll1t854bcktqvssnkwf3pbmgp261l5z38w7sh7eswfhxzmz7j4u0kotxzqvkfs47dcwuk99m915k7qkv5gwl5ikmxf7bvq81eqzfokcees\", \n\t\t\"boundedContextId\": \"b75168fb-bb0b-4a88-9ca7-792ed3db4bed\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"8587fb12-af14-48af-aec2-4a3c400e01d9\", \n\t\t\"name\": \"febs33x85kgcdcw03izifktm4ebpm84vv69ekbofsk5cwa3verjxa713rytgot2jmcjbzfg5x8kgjmwiop0qonhdfm9ic1h1b91lmbjgyvc9doy88w29nzrxh71a4zhr6zyl1r7kzztpvzhe66d7mizcwo1y6q63qypnzws17p7it7gd63w53h4rdlm5ufg865rrrzhh36l67prfh0zcn2y5752ttuut0t0i9n1mz2bsab65frgkni1zo34hjgn\", \n\t\t\"boundedContextId\": \"0fd44765-10a0-4f19-97cc-c3f0d7a284f1\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"7204ebef-f278-4051-8d1a-c8dcd0d69774\", \n\t\t\"name\": \"bcafkaee5boyl2zgx7bi50drgcvldj272xpgncxv8sb5rxbxspebky1udcqvxww6blw8hai2cftkqk2gj1x9b7acig7joz7h6662ufat3mtyyfd99jzqdx8ngxvby8sycwlrpjzyczv28ong4bl97v9yzw3l49n2o26z9zmpgxhw0gqytsvo70kgbl9riaqmzjwv17lbabq4kavmwk01d0fgfdwdb4u38z90g2veaew6ittc9ck7o1wygqiuq9m\", \n\t\t\"boundedContextId\": \"a3f60dd9-2b14-4e04-8a9e-e1e2f8bc6f63\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"6e7c7ca3-8694-4bda-ae95-5310a7214afd\", \n\t\t\"name\": \"q1xa9ileihle7ar6gbbusm7zlfgwn8r0s2ddq5x2bcye1frqwkye4rc1tku1ksf5azinkysbin8rllk2rjnhhvnqqnr9l6nfnzxoq1hrdgp4xvsl39okdz0tau9o8wqrqbody7kreu74r813alikxz7do5mq7un8oixaphgjy6ghx4m3v9sapd8413rnqf5k0p3gss2zt9v1u8urt5s2z0kdn4fx4los7nw6elq9rqqffk2648fnfzq7rb2k4la\", \n\t\t\"boundedContextId\": \"8e05652e-535a-4261-8296-fabfd9e1544b\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"1da91d16-57af-43c0-91ad-64745821b346\", \n\t\t\"name\": \"l3jwzgkztqacv70wpb1445ujc8p41nh5jbwqklhi3e9ocbaxcz944gsk1nr6neyl7037ok30dg82o9wi76c4nyeyxyz0h5cnv7ucuicpf9z0kfxtk9rdv1s71eol0pmcttnoa9vf8olqg1hfwcylz6jxl80ex2gy408z3n10nk0dc4xfxonax3pbyb26w9dl859s34vfgwmzav4bi4n6la4d9egpflga39bw4mkb38gyj3x3k52da8tk5qzwk6n\", \n\t\t\"boundedContextId\": \"c4a878d5-0ffe-4021-8834-757fca24d6ab\", \n\t\t\"roleIds\": []\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/permissions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/permissions/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/permissions/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+                        "permissions",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/permissions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"325a065d-ed9a-47dd-8359-3a23daad9ca7\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/permissions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/permission",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"325a065d-ed9a-47dd-8359-3a23daad9ca7\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/permission",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"permission"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/permission/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/permission/325a065d-ed9a-47dd-8359-3a23daad9ca7",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"permission",
+						"325a065d-ed9a-47dd-8359-3a23daad9ca7"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/permission",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"325a065d-ed9a-47dd-8359-3a23daad9ca7\", \n\t\"name\": \"u3c7p90i53vqp9xcxw464wafxy0e2vijqi8pcwpiygzziubxd61oucmted5klr79tvdsdm5235ii6ihpjgfbakzy63ngddy1vpnt07f96w1lortbfdju7f0p4fsb52r05vyqf940m3m6n17966m622cvm9mq44x2xthcvdyy7yde1cabe0b5m804yrzoh6gyhj9xllcu0coaac9expz4ifddv0jthsrawft6hvzs2vham528xxgsx5yh72rdn0d\", \n\t\"boundedContextId\": \"cd09d6e0-8ce4-4ff1-81a0-af944dfc574c\", \n\t\"roleIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/permission",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"permission"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/permission/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/permission/325a065d-ed9a-47dd-8359-3a23daad9ca7",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"permission",
+						"325a065d-ed9a-47dd-8359-3a23daad9ca7"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - iam/permissions",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/permissions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "e9051247-acd6-4abd-b4e6-6e2f2bcf7493",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

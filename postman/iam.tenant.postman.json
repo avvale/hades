@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "3f01de31-c4e9-4b59-92e5-55105dfa8941",
+		"name"          : "@hades - iam/tenant",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - iamCreateTenant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamCreateTenantInput!)\n{\n\tiamCreateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"9be4665b-126c-4a21-928a-0da80c8fd57a\", \n\t\t\"name\": \"imx091zlvy808431nebqfbrn6s8xjsejlc7yrlr90y6epwu6roirj391zz2t4zkv9tycr36choh2w2fbi9gfrybzarrpgk8jc91a9nb83jnqviyok2wiv9xh2jkfpyh21evy67z6pr4vo7tbryamgt3bf760httkspi67puow6v3dufpxmeut1cipav69698e6wk8kgwlevupeysgadli13kj2o3ijxysvujlpixemuz8hujnzmpkwow4aaeeya\", \n\t\t\"code\": \"e912b6uiloipfayrb7pi1qm8h5f9ul5f5mujeynu5u9ylw43jo\", \n\t\t\"logo\": \"mtoml4b1ozkslfd0mxaqqlh3imi9j8fzjwnc0e68ffrmocpu956jxwqz0pyn7hzk2ujb6h5ncbgrnasnou2qz7bxikdb9q3gdoof5c6fuis4pji9tj3i4mgxxtvl033ljt6al7x3gpganilv00kwhtz6xqs6ji7xzfsvkfk0x4gkdwgvzq705shbb7d71zbs29jb6y4stzvmbxa0xdejkrmi8m73vikaeu47air4qv5jf8h90sxvu7zf4nxmyhg\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamCreateTenants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[IamCreateTenantInput]!)\n{\n\tiamCreateTenants (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"24552ec1-b3be-4c48-b420-3fa1c065608c\", \n\t\t\t\"name\": \"bpyx00mfo5zh3p2wdp8tk06k1q4v9kffhh16numn2whba9s8ynctyj2tasfngot9sy2ux9ezylpi736inbqw466e6bzefa8frwoxqazj5d40ti2bfsrcynnnyx92x5rvq8zqk95kugfxl8e8d2n7uzxj9lj3u5fipdrclchw4fckxjqkj0qjgbfsi36w2wg1tbpwcfft2nuuij2zrqf00hduocqpinafquamh6im3k6qcgqz5hu7amr09dh2s81\", \n\t\t\t\"code\": \"gckgvcv36mhug8plv7z2s5axm1ay9jky9m9h1vprysg2zusuy0\", \n\t\t\t\"logo\": \"43wzh0qw8vj2s9kikvjssgybbb3z5gzxh875bre5spyppak2cjtisiyslcnlhhqekr3yxgg2tkro43rqelmi69panc7ruh6stl5ltq11cfkxrbc0wuagff9bdg73znxlqmolo94rlu0w0n7eur5r0pid2nlzmivwd6hxefk3mtajv3xd8njb0bbvslvlszqk1fp43dwl6rzkxy33aldhdx8i3vkbizakz2gpob1drsfgmyfytu02fepa03pu5h8\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b43be3dd-641f-4eb1-84cc-ebca3b38d177\", \n\t\t\t\"name\": \"zil0oim2ad3ypqp95fzo6p46dyjwkrtz11px02e5tyan2y5ph5g5yj3sesqtbmf1u6etuykubj95aw73zt7cf8y3i8k7dmjkyyj11kvo51x1eprjtwh6tikluaorcuvx4sgifvtiw7c6jsrcdvctm7x775oie37ivznao3lc4490ola7jo599rwtaf43f5ecceiflspvxsciosto6npwyp91bs6sh4m05wyi9h2mw1qfajgbkqghqyv12ectntb\", \n\t\t\t\"code\": \"g4xuir0lma3cdxk80uvuwpqhjk0hk2ayyfhze3k3rd7v9vdtva\", \n\t\t\t\"logo\": \"y3ssk0236s6rhg3ic2v6mdg59jo7g8w6fxgor656cru70evhsdeanqg0g6679jj9l8bhfys3ba15dpcunbajhqr46zn9pan2nnl18v6q9zvm14m5tncgia2axkbfg42qs1gkk9x4zoa0cg2tawp29rxfcg9vvbwgpvaiycf6iq8gs4b0kut2ru4cbfcwidli3ue3b9lrvud2pj1s9jatky1l74pmkg1rxfzmlixiacdo9tpylib8yqssp6tn3mq\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"212e6f0c-7786-42b6-9d21-471b2802b45c\", \n\t\t\t\"name\": \"h5mpbwrxwla4fu66sfxr9b24q3exx4ok6vwn1h719fhofdhf1l8q9q0pneocf4pzl3dvdo9ynpd09nxigdl99x2epd1taq5vp4qudhjdob13b2zm0er40umrd41ger95o7rwp07rlo63lzvevb5q1tqs8il08y1c2a8r6qzeo1fy232ngha3whk6htilp1cdubuxqm0n303q0p2hgh6eyimpc7x0im9xg07q9gitkwdisle8jgilyjdb405v8lg\", \n\t\t\t\"code\": \"2opvq8vir9cebtau23pur1n7193dw5wsd5rd3xohltfva6yf42\", \n\t\t\t\"logo\": \"x9wmsv8x5ikuphr8s81pljtb4wkvczgryxmueq8khjwsr4oazswmu580yj66vtzb39nhee3h9xfnm5n617kug09tgo1ed284xnvhzi9xeo8sjt9nz0sftzdx5dgxfbq4podo9odrvho6uf2uxttl7thrsnei4g2ckah6ta1i2me15pe2ndrok6r4uzuer00i0xiaxj35om64ixkilcul16v5cnycrwqyufcyr5856g4wzhwzf8zrir6mpag7hf1\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a56e8a5e-520f-4589-b217-ce7308d26683\", \n\t\t\t\"name\": \"98tliebj6x4syg0k5kbbgk8y2z4nghkt17qvwfgydjo1x9vvgawktux4zc61pfno5mf5y9ha4r5gvyha2r6vtdjb5k2gc35i0863hbonxv1dug563ipk05c968k78plbrvhoaiq9tg2trfanqi5gnvpt96o2yslo90zolg2bheqbrz1jnmgw311zwi61eao8usizkm3p1f9to0xnnp5l7f8t9z8f4zt0hpr04kmtk6tjmxy1a887sboumpybgyh\", \n\t\t\t\"code\": \"cl2wgaik7fbuy10bsj5levhkb7fh7ck9s8g3jcoqygaupptely\", \n\t\t\t\"logo\": \"5sxd492npwuef0uw5q2kjscr9bq58wmtr9vdlr3hso59ljinel1gtr3tsaqrnvdt2coaxxzynizude2s42vst9mwbmo2nxaexf4ucnaonv7lhf1gjeuxvnte5ch376cdw09mn2hw5797hzk9aol01r94ea5xrg6thitk0e0qwqi4i4agdyykwxh2cxdet12u16xv2o4lpjikdjpvvd81oo61jcrkn2jah7irn3clonw1z29ooq7ohx13dmxi9fg\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6428a223-7aec-411d-92ad-4277fc659da9\", \n\t\t\t\"name\": \"d2da6x601jc1uysalhm0vyzykwjv34d32hmt007l06vox2egukvkmos8duvyqvrww1uqotnmzqc9g8r6l9h6e9fej1y0ncgbzyovnh1o90wvxh8nm1io8eocyxhvzfh2clw9cp5p0dhz60d4g50qac5erz92ebdecv7k044cjqk3gmkye56jfnvqn248suq3cl6zadkyweh45n5kpn8mmz137636upppjwghpjuvzdsoqihjicb1ytqg235u7ud\", \n\t\t\t\"code\": \"rt455chyjs32frjkxvmfgtilq8v2n2tzqm3wto11xu7okxyx6u\", \n\t\t\t\"logo\": \"u92mwoiu89408kutma542xq3ockp8n84t0zdy3evknjhpe0nraqnqpmzwuj8zelnquklierzxdn6zu7u0vhfeb8tf3st3t60fq5w53zig7i4dgqzirfblzfnzeystg5iuyukqu6j0pptqewv6kgpwi1xetjrilhlce6xwd60grckw5in1thd1tj0rodbxeayewsdarxlxy1kht917j8ogb9i4vvwby77gcjacza1d5g42mctentvbm2e4nwdyn4\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"caa0fdcf-cc77-4a6a-9d1a-1843196ebd61\", \n\t\t\t\"name\": \"7s5fassgyosqvq1rne59h2k06r92n7o8dxzzbefk7knivyl9bg1gxxy0b1727ert68c7r0ktsjisa4y8wmgxenh383n7yczo9tg0d1vu2l0moo6gtv05gvwl2byirkavxqmjxazi1pq0mg13tx9lqd9wya52y4dvmjkiuwo33n2n9s1hh3gl7gh8glulpyastlv0uepez6piivrtg4zl2x6zpsn2pgpzst2xxfmf8jdipzffovmmqwnypvmc350\", \n\t\t\t\"code\": \"n6jn4vnopd28g7tc06sc5qub69ykw19ysjidkcvi3t86qw52r9\", \n\t\t\t\"logo\": \"p0990ys272rsuzf2yy6ed63eli5r3plwyvavghovsrpgbe3w4cammhsm9q9el4xkix4grqpewa4slm4dzxq4ejs2ur08i67pyn8bd0cogxzbptu9un0jrjjiiddgqkio8tw9n2d2kcku4u33dqsxa4c9xn4ekk6elq8c77n4xiyqqru2xrjzqpya7cf7v2j02hx2ahv1ilersrihfy2z5xmkdtomn824lug3tuaobm6k2l7w9pkuzlwy7zft9gw\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f6b335df-e5b9-4b48-ae23-a90d5b14f8cf\", \n\t\t\t\"name\": \"37imm4pt55938swu6szx0lo1h9nyd0y9lr5pkigpc8i4gzv3nwv8tz5zbozefiswe3ehws8077pshppz71dplqjpta1jddueb2sqx9rvgpzd3yc3shzp1nilrwa69wo39kd9c777nywaqkgk1q98wlsaeds3w7ossr1j093qn0fhp60v53ry6xfn0axxl9z5ko0zashiq5l8kw45ut3syye3frx1u928iomqckvfpdx1gt51ckvut8xwoefm92x\", \n\t\t\t\"code\": \"egn2aivtag7jfyfs5m5oyb6ttcd7fn9tic5rdtlihupxbob24f\", \n\t\t\t\"logo\": \"7o6l0nxe2d67hrbqpsst28kbopisx52w1seqnhf66q1e45m4ysqtuxxwlysm75q21pmpz9fh30n5lr9q6k733roh8943flgjl9tia8ahd74za5ree192h2scnvyqm87pzs3py8z1tuftclft042tvdpompqelxzwoa3ogv9fdyfsfc2wmds3egc49qjrjo1oe3ry99ythisqbe0tqj8qzxo1ab0ep8a4s77u4tu0rls1p30pk6hltuexl37kw3v\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"fa3dd64c-e12c-4006-bce9-17d67056e707\", \n\t\t\t\"name\": \"atc80snu59d9udiy9jm5vb50wn3bfb3wh5s577442qpmaoajxo9g276f16wtn55twe2snjv78e974h44jacgzsoj9q26ueh0u8cqglknm430l1xqsyz548i8b7npo7epaxr21v2ffs84b8xly23htsacqxyz68gdvltcwi9fe3011quvlx0m14x79ehokswg7wgy0brtflwhi5g40kjl060depj0co7jpgg8px3p3vdcjaxcc3es87uzkrnaqap\", \n\t\t\t\"code\": \"t383x5780zpz9l9fqxlhg3x2du05pagwn41yj106lg6vrlf8d7\", \n\t\t\t\"logo\": \"s5tw8vz06inwu1s7f9i79let1ljifme6x13k89rs5ysej4vsz4owmd1p063r2k733pdivtyyhv8nfuvaxptxxwf875g5bunj2pgz8hrbgbegge4lj1fgk6vtqi0q5ufp1k3t2fvdrzz0jw1h93bbhjp1i11np7zpf2k5t80lsilzhsdhwlz9ssq3ry4cq8fwl8nzsqz8es0bqn9rtcmy0p3rqohrswk85buu003r82h0wdyq6ialrnsvs6skp2i\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a3ed2192-165c-445a-8a80-53ca8f78d755\", \n\t\t\t\"name\": \"wwnkwhviov5df8fjx55m9nsd22zt7z8n8yshenymwdc6kai778iteakb2z11u2vtnmt5zwhys9yx3fvv7kp7j5qyjr3kxaav66ci9jvyp6zt9k81s5i3ptny3f4t06afetmechb7bdivy25efjyqo0t9h7sm6mjbblyejhcllfpazlcwwau2arem9yzwjamavhjcbyhhxidzhxi83ayepnqx7rdn90ln679rprp0czoy9t430iiaiwlzthvjbt9\", \n\t\t\t\"code\": \"zpqs0w5ryk37c1ht3hqstvw4j80zgpufw1pvwzrwbke2la4ufj\", \n\t\t\t\"logo\": \"pbsgmf41oenj37t8lka69z181f37z2zbm5gj79oe1qxmx8ny4mn1qeho0gsdi6an862kq3ea719msbiu4jos3buluepzezi6npzad5motb4jligm96h659cpuhwu1ubm94xrdv610epdfar3q0alfrmx055202fp6wgk83g60xyb829tk5monvqs07eyk0d8h83dilvs7koom1xs46p084auv57nq45l8g5mm29xg91nh8v35mql6xcr9b9fopj\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"59a4b832-8ebf-4da4-8125-c23829114b82\", \n\t\t\t\"name\": \"zf0fgfqq63wfxb5e5z57um7u74jv71hss6fkf0yo20x1f7r1cpc4sil5f8tjwz6hgw37efdoaa03igwb3hwjqnvxjoaoeuzv5evp32hs1v5r0aiz6aiuuzm1fvv7g7vklrw87l4bgl9tqbp8rloumflkagrzl9frv0dz4qh36kak5wb6yqxmuq8txoa07omxpc7948gyiedhvukyd0x4yxbh1v6yka8cc8httl9pq58ss5lj24q1yknljbhtl1m\", \n\t\t\t\"code\": \"r3xswz0ot47wa7pc90g79u72nwff4ri8ghgcnhjg0b4ti126kq\", \n\t\t\t\"logo\": \"k4z36s1kiu4x6swh2y4dtawew5hy6itv6nvtnnleqjvnfdad9gj7td7pe5r3yl35e06ex88mg9cxzos1rw7k2xisoirdc50y1vjhpevm3a2ndj62gpcuboxzr4ibm3zsfcduwaqgz2xs1ecasxnmo9epjyzzwcrk5g90mco4mz8tzznggl1uvf4vj5tmhhuezukic1bw4ga4m2dg8gywmro60d5h927lat6bvelb77m34qclo92536bg2s4phio\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"7f4b1259-dbdb-4185-b421-0a480e3b1ff8\", \n\t\t\t\"name\": \"yrd3lk73rggfar9yzu68p952eldqx4o5h10v2475c5z5e0dqy5aep8ow7d9ombxax62hpqyxu9xrjobm4ld6qgdchm7mrjvzvtji2va40jmmex68uzx1pl7q5x6yf0c36wyfap5r97qs5e465zn13gfqt9qa09pyc50smm19be5vr0qqfvaoat3vb0gnybt1g88o3wg86gsw2r19k98yyqmrlpc6b4mh8ov79pdlimbir3l6sz1iuvpt3h16zy8\", \n\t\t\t\"code\": \"x73ww0ci4ah3gr6uynytztot7vyv9gihawmv067fafd7ys17qd\", \n\t\t\t\"logo\": \"floi9vgtzr52b0lc3heacrt2mra3jxdozbyymjds0gco43fw3fs3gec6hlvs9qh44k5tfodq1vu2gt7aglprdjnubr7hema527si9ohi8o3jse42h8x8i4at6sco9f4rcipolxfopoj0obd81r3t4jvbnjb6weelnz7wbdw95hb9nq4xh5wpypbhzimdmehvkzt1xjbm583wk10fos92tlhx3nohsgn9nk6ic9psvopgmevfuesbat7yltpp44r\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b064530d-511b-48c5-b9c0-948c39f7a4df\", \n\t\t\t\"name\": \"0ji8ovbvou5er7om0jm90yex08d7ummyj0xzbaitwzl4mb1bhodufu0wgv8muts5sca3y6zqvv1ywui1cmx233pz0dxqkdlov301vk3ha2e4ptdnhypbdd5hhf7v6mnhv10738dxn1a95ybhgfqikyxd4vyc7o286trrrvctpful33tsz143q2b7f073brvfyjf8xhgv486gl88d9b7etb2ru1i5rernzp5fpbvv7uqf9iaemqfc5q1yut4h9ew\", \n\t\t\t\"code\": \"wjhhu6c3g11be3au3t7bafh1hgfscbtqt979gqi354t5mg7mwd\", \n\t\t\t\"logo\": \"tx8y1vxn5a0od0kmj6vnd6skamegjl1vduf1me3go6txza9n8ue44mjlmfgwr0k3nwzdzd6uis1xasjse42k1vckduhs9ncd9zioc2y4wb5ltue021tz2fdtus3xf1om6gexk76yvwf5ccko6z6wmjkxdr8htdyn7dqek9ypr3fm0y37jbsxqqb30dokfkcbpaxib7r3hhwla9mm74z2tly4608nkrw86votrebl615fnqutwq09jdsdvr2hrxj\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9426cae6-e358-4773-9faa-498fabc802e7\", \n\t\t\t\"name\": \"q92wjq7rjrzm4a6hm8yttuk3v8beyq3kltbgyp4w0yb8d1yyvfleslstx3qnlz9sdclk1d3r49pin4yvrqkp0xjzlqgd5oss3vljd2to6ackqhkq8loi45qrp938vnngg8alhr4ohuwa25nygvnucpsr92uh6lc2j1t302nlh38tignaox9no8llb9uwdjr33h1qaemtb2cor6vb9fi1qcfx5r5t75o042b7n8prcrerhinmeurl8e00sgmloe3\", \n\t\t\t\"code\": \"37nkmvdv4075vhb07k3uoxtk6l7jh4lb2fxakgm5yv04iughs0\", \n\t\t\t\"logo\": \"ddmjoimj3y5l9zp0jt0igbewjibvnhc2m2e0240bz55387s4dkby0cy9v24w7x5ej36usm8j1xykbso89iikm556c4u8593fj9g0sv0rd8l7vc8hf03a15uyxeo6y1sspv8jky9b5o7x3l2leyn6d13brzdtygnhloykptiqm7uk9ulogdaglfae6cvzq3ea3hrvr0mc96zy3c2giz8tuxdzx9lu0w485972a6jn3qd6jmboe2m66uox6e1tfiz\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3b2be99d-f450-450a-95bf-134106a6e485\", \n\t\t\t\"name\": \"nbfdzxqhicjtpdpzoc79h6qqa94hcm3lpia6zooanfns5mkvs2mrigzlmdba1ht826swbxv9lpb1l15mgnfi3kw8b4rs1aqbuyj2y8w7n7a00eymznqgfc9m65cwjklb3eh7sox31rsaf9wwrn4s3p1p8yxqthona6yex1iclczc8k1555tz6p58hlhmxp0d0ea489eotraib75vdmvv2klh7d8vlrpd1akbij0jafjz4r0yo6xqhih7qkbkb2g\", \n\t\t\t\"code\": \"hhr8m277j8xegmvrxf1ztu1aarait90r83fr0f57481m5hdqqw\", \n\t\t\t\"logo\": \"8fflju4z6br65yzbpwyl3r2god2t6md3eg3af2pt3btbyn9jmv66n2n15fzfdsm9d694ammvto69u94ps09u9qfby5irqw4gjlhke9qsbe0ye5yqvkx72qb28jf3e1emcwvnhi84gxnmrbn88zffhtrj7mcjgdkjxfcmqvbu4wqh362j2vvh5yisgfm5es3a8wnmy23nvbplmhqf3plbezgzxkcqzqtw40z4x2o8j84qjmu1anavcedjadl7rui\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f23ee07a-c4e0-4c40-a721-1ac818ed227f\", \n\t\t\t\"name\": \"xyfzw7eh6jpqvhtj4c1jj6xrfm8el9ertnm6q1cip9mvwec5hmdmp6icdi6nrz2b9u23fznuowoo2cweuk4pjs2ccvrrz6j96yeik6hdeugw91wjbgi78je3gvsysjmf2gill9t1p1gdsbh6yt5t3k19r852zk0l8h56b7mamfe7zyu73w0dei5pehcrigaz3bq5u5jvz02xuey0r7irra163pemmsspmt8e74wgwzieunw5b593bzp7btm9qh5\", \n\t\t\t\"code\": \"ubh08uagg079c6c5lcefk0vlef1jsap4y7dhcqix8jcarhbq2e\", \n\t\t\t\"logo\": \"33by4m14s8lrdxab0zm6wru5hh6habf61rosfhl4dtlye5mgkkp2v8vr7qxyngq9pq2s48lr6h0d1whq8ziwqsaeo7ez03s4pzu93dg9tfy5nbk31842sehamdn3rkcylr6bdz6o1wfsbxnuqf64p0m019jm2yuu0t33it45a9tqkmln2dk2lakz0n6f5bw8wfgcltrqmzmxgraep8y4csyxgf7ev3tu5v78ps4vidxhyfgjsz0zdli33xqdh23\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"fa5d468b-dcc6-4cc6-b2f7-191abb6bcce2\", \n\t\t\t\"name\": \"gg2gqd0mukgf3jv3oq7bog9xspv4hl3b6r4tha7dmpatpdxiskx7n4w35lw4uimtqyauwfb8yvlmlddo3g2oll4l8rvyp0yerygz38uakvphr50bdeobg36bxh665y1m7kxfq3akricc9fc1997wf94ikuprwsmyz0u402qrsveb2polr0owiea9fhz61sk1ikhsmt502ilnq32fr5jcfz43jb41mmbkm9394vugugty9clmyr415rv7oascpt6\", \n\t\t\t\"code\": \"6p2r041lhh6x31wgvgp4ur5hcdd153n29ewfqihklk011mcpw4\", \n\t\t\t\"logo\": \"x7hs3juk089uh6zpo6q1o7d7okmgttohx4c0z6h8tgkpc6z9rqtwn89zz7mze72ri9dmy83vvnprtx8elfjudiq32tjoxckfq6uzdwp0va6zphz4j2l4jvehdochznrrqdcifz3gshclhjpc4j3g0ezrwtc4khq7fhd1dt2veh8piplisjgyvfz2yybvzcbgqnvcgbwsy65kjj3v6zcbeocv219hdmvxulyiyhkwuhcr01prxcq5qp4psp6p67x\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"398b7fe0-da4b-4a35-8fc4-b5850da6495f\", \n\t\t\t\"name\": \"p31wuprd6e7gvc7ks4p7mrr0j3ofimvcz02ywmv9vw17hjxzvs80hkthzzefr3710whlegbq49eueahg1x30kpy1q9z0t4vwzeshsa45z76rpdhr1masc5l96a22rtzwh8e94smwab3xle8rs81dm4xaw1u0v3md0jpitzr0dhe534ujfr43zupusftwojl8d8td9z52on716xjumchb2pb72zq2lfxjpnedcfhk6b5bv1uekvvehlw84pypq9t\", \n\t\t\t\"code\": \"ms4ggsbem20oku1hwu30esk42fu5jk64ubtr45elghlgq17p1t\", \n\t\t\t\"logo\": \"qjfhftlg1jm30oyatwakttn4hdmzru0g4w0wgt6wbzy4epdunn6hj8s7d47oned34fbi6lnk0pnnwno27iwqdrik3rlrxavq1sxlnj7y9nertpvku0s6ra1lrzyodbtq371h010mw9vo7g1bksan6vgt66yg4mumgnanz6eo3uiqh27tjk52q8v9siobnwkddqs0h5i2qs0397t6ln8szx9wpe3xqj89thmmtstzmvmv4kp1rwrbu6w9pfpx9dt\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"13967f08-15d1-4609-8e1c-15073646f698\", \n\t\t\t\"name\": \"46imt3guiilksnzk58bdc3li9s46m4rqwpbliwedifot6s3gc7n2n5kgnjb7rdvr6b45az7qd9w62fgu2xpdi61q9e6j4qjnbdn6oz5bi4umep1xuweiqyws86hxvkegwkyqbsm0crqb8xca1wpgh8ipbzrc5rvae2tcbp9kdsf1sour1whgs8j3l6366d9zp3miqj9qdplpiun20qbscj64ka25jlw6zuktkhbzc9mvssdpc638rtslq7g308h\", \n\t\t\t\"code\": \"75f48mm477it1n8y9fy3rwbuyv1wj30aksadfb3gyb5evm49n2\", \n\t\t\t\"logo\": \"m06yggrlmvgpkxo2p01octfm3a5iuos12z593bbjl9tf1zb4aqaz7nl5j6qc4t8x8dd7yoh6yhluk9isgy5cehb8bpmstwet2yarp70odm7fi6v228m9k43qk9d8d1hxjzk75g9446csdne622z9irc4mzpw1jc6ivniwxg627gb8ywpmfuu6s40wzzrcnvqic7pcz44l5tk3w9ub1g7pzj1k0q4ybomy41kra28th9hb8afuo6qfl963xj81ix\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8b50299f-012b-474e-9e71-6f5f64a04e09\", \n\t\t\t\"name\": \"ntmx9ybqjg1mianelwr2e8r5fbl53505luh5jg928y6gyv14lx7p0qauccdpo32sliu80xfuepgkpcxvzc2lqkefje7lrhv8gi7wtxi0bu8a43p6zid7bnvwp5vi5qqsn89pnbr0py0wqk5o855n1earmw3uo4ye4ql4164v1tbhoibi6lq3c7535z989bkri943u1t6c4ape58ljrwfpxvk1p4g28ed0qpyairzx0pphw666566bnbd8knm8ck\", \n\t\t\t\"code\": \"bivga60n7n715zd8grjk1c4vijq3wz1qir0wl7778zus4tg9cu\", \n\t\t\t\"logo\": \"iwtzsi5bbl4t16kx9epy01al57odnx4cip6m3id47nj4t1tfwxmhajzd3o51kmobi3j8o9hut8f8h2e93lqwbiwy30hmjgcjhmycrkia3bj27wnv8v5q5x4n1d5sm439ulwufehmfyqvsifbnn68m7ixmvx0azxerooruofriniskzagr5y6zvzejbf1feo0yfh85t6yhwrkh040ytprq2d67vf3580xushu69iglb9cq5u2j5oxecvhz1ux61l\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9e87e317-dffb-46c0-8429-ffc101b5ca7a\", \n\t\t\t\"name\": \"8mnpolr887b9xxw6s0vzh82x3m4jsm806m6s8u970deh9o0qqo9q47o3fh873r7oolzf2itkmxg90fu9laui9t9mr4pehbw9b4fsijybd982jmm7p4uw9274z6jngbce0yaob5z6pzwib4n8qdweqti3evn0boim12he5mnsj70skyq7dchh3tl3k12tib3znvi3hv6r36ywpjbsmp2fegjfv2efgt6yo1d4k08a0renzhcj65oyy1i3tknmp0z\", \n\t\t\t\"code\": \"38j3lkheuerbizqzqg8pbfr0u8cdsbf4aenp9s1d6odufh7mk2\", \n\t\t\t\"logo\": \"woukeu3ik98vvkebehwppzhk602exry420k8qq118cc85gp9cgf6cdecdufqrpuzvibx06ajbr0vwr0fgjszbxip3ben3igmoo0cilwu7je5mrf99yb6455ls3prv94kwobwpwo6p7dq62aaxwjdplouqzs4fvj77hatb9i85nvv1t4dla5t3ze9lthyj0jhynciu3or01ebe3zasyt2fx0dxteton66xux3m1s83yozi4i9sxci79eeuqr169x\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\t\"accountIds\": []\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamPaginateTenants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateTenants (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamGetTenants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamGetTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"9be4665b-126c-4a21-928a-0da80c8fd57a\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindTenant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamFindTenant (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"9be4665b-126c-4a21-928a-0da80c8fd57a\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindTenantById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tiamFindTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"9be4665b-126c-4a21-928a-0da80c8fd57a\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamUpdateTenant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamUpdateTenantInput!)\n{\n\tiamUpdateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"9be4665b-126c-4a21-928a-0da80c8fd57a\", \n\t\t\"name\": \"c3pna9rk7h1rroqpjlnzazehn4e8f7txnak0ogck4z86c4m59ga1ojdoyt4huysyplidxlc9ajnln8xtn91ryyljakttfu78hb24m5qzqjea6rs3pa725cd1gtfm1qqf4k2v08fowutei9qbecp6spu0i27xqwuoc21ve8ra0w6qq983sxsa5416ppyrnscldbyasc0kgdsyrrsturiar7mx9i0bj3p2vl7f9ifsfojfunxtvv67qhzvku0paqu\", \n\t\t\"code\": \"mub0gl5v5qvmzgl44u9ldklnds5b752hxt37n83u96st914omb\", \n\t\t\"logo\": \"zuxjk69soiolcc1y7w1vfduke563ztad47pzel65r93jejt235u3za0we7x16d2vse5hdont218e7863hg0og8iabdwu9kkvcr5r7bqutsx6f6vvd843no1v2eg181oufsm7ux4rx9fwhbq9npb4sjc2zdyu6byaza0yecxbndcgzz36ugofflk6jmtzgvr4sxk8nzcaok5upwdgkdpbbjlol2vo60rssy30lgsot5jbrrqxnzut53wibohe5ka\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteTenantById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tiamDeleteTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"9be4665b-126c-4a21-928a-0da80c8fd57a\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteTenants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"9be4665b-126c-4a21-928a-0da80c8fd57a\", \n\t\"name\": \"5sxb0rolwxsldbbw859ww3ix7blw615490frzrjkd5n046gohiu1vfm7k96nbddehazw4mcsl610y2wjq6byydnvpgq9ypi6kmyn8f6oe5g4y2gzplv31oubv8we4srm5d6agm19brqkf69ygnamwauk5eek2exn34pnc4oyt2obkj3e2mqpbn9e8n130cq5nr55tjjhlti6docyxgmzmxj3dm5vql6jcy4czuy9ezyjw9bqyh5d7ndyxlhfsz8\", \n\t\"code\": \"furbmfxbt3sejw3lxesfrpwdbrt6hhmwrrv98zh2mc8p7t6sa5\", \n\t\"logo\": \"n9vzm7uhshzf4lqmyda1jly4arfydn7n1bizba85secousuu75ktx6m9unr008l7g2ey107j96p1t2uk5qkwr0zhdjj1ww1xfybtfzhprcqtz4ws3nzl7tvxd9h2h1szrx5n0jicg0u9py9ajkhnhagyniwxdux59luyprmj9mm5rwowmeh9tubq2d9nghamcri6sfub9e7721243j4719qa21qzejay79vzaegardoq9vsid77iwrlks5e1pdx\", \n\t\"isActive\": false, \n\t\"data\": { \"foo\" : \"bar\" }, \n\t\"accountIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenants",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"1a33973b-ce5f-4879-89ab-8b4165759a83\", \n\t\t\"name\": \"s9r2myihhb38ipisfcvn6fv25z4qqczb1e0i4rajl8t8gfuwdz0qpjgkafvirecp9a5ase3fu1j4zq3lop3jtogm4u7dlvy8fw8irmz3sg3xwhsu8p1iwlkbyp5iqfojhxubyod0kguv0s5t0vi2qaranpcax0uwct3x08ig816g8sn3b71xfl3vmeaxiwcapm9sdywmx99qpizyv1qmfgs44qa1fwdu5w567akpnjujjkw5ti5j0msddseltwn\", \n\t\t\"code\": \"jgomfri8pt0kdzt2fu4r7eihrdzpzv2lmny0yg85twxfp4i8r5\", \n\t\t\"logo\": \"n1zakdz00fv6a1pizsu0e07rizuqy9gj0l3cs5gx23t7jajc0oijxxggwao3fxgont2e8pmtirrwif1gabw4e9yp1k4q3gafldjpo554o8zxsc71iylgx5u45l2dn3blei2l4ande1n6dtk9yano5d7cfgo3247lq8b1j17vnrfc6ferjri7l5qaw83n0ae8fk60dunpbjc9dkaxomz293oxo6wifkwudhz873ksemind0q5arah5nnlq6t84cm\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"4e19fc79-2c0c-49db-8cf7-e4a51f93ff6d\", \n\t\t\"name\": \"zaw4jiyswl5dh5j0wn58nd875byu0dugsgf8rorjync5jw97nmu819dyftgqt9yi7ayei53nfcwxrru4vjjpfjdn5bz471e6bplslkau6r2i1zvtbsajumv02cjsdvgbb82862andx8zx1ggwimc449iyll6tgsl2iveecy86xc8ppgik9jgiq4j149x4y9cjcz155k9kbvdeniw9idjoj06qrs5zlq05r9b6ujm7ap0maaux9y7skl0bte7n25\", \n\t\t\"code\": \"zql83c7iw0a212i8knvzskplz1de7ic2kbwppsunw5wo0912ju\", \n\t\t\"logo\": \"1mtd05z6bkhncfcv36x9iuqisajr2brxr384x577kvncog8a0cuo11so48nzxoytaci3mxgn9iuss6n6avhmlc5ipre27mhcfcwmn4w6bk98m2xfqovb8bv74ekwyaaio2bnmc6rmf4cwac456qwb58j4qerxay5gix0ddr9tpwn4hzf96wcucg24u5jibcigqauxt55i95g7vdsey79uez2aab7h7au52a043x1h4v87qluqwnx9te0rh35awj\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"ec9c5a24-9cdd-464a-88fd-6af0e53089e2\", \n\t\t\"name\": \"l18bqpffip1rp2k7vqzb5o41z6sn9124wp0e1r1v38ykn9cpl5sgb6qhef1sakcw0xr6rqwu59ejumpdqgqtrwa28u0xuxx43xl6vfcfyuuds5zljbrv040vnqgu15ljsn5sejszzlijd0ga6kaqxkvp9q94dck1ifczui630vlyl6p7l8s8k5e3qk6xsen9nus3113jg4we6vbj54hvfrj5kjm7pv9hbj1euc39o03a10y36u0ehzo9xzj15hs\", \n\t\t\"code\": \"2ceo4tdzdxhzsiukhlfddhx6qu73winnotccsy3i67bxlylpm9\", \n\t\t\"logo\": \"oq14ez6b5dhm27r613v64kq9o7xuuhuyq8x6sn0qggwopnnkz3ayb0ydzovcudac7q04tt0h1pwhsuqms18idqdei2rm8ggdgqxzd3be7bxku58f8ntug3hcslbc60mwdjtti4r9bq77iwzu3lb51mqw7gy5lu9rjmu5k4r8zfojvdmfehnhywwtozccsskqyw92q3enzve6556s77ns8g2mywo65so4fxlbvr0psy5rceko292wkyv37mqfmbx\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"8f692a2a-0451-45f8-bcd3-ff09698de43e\", \n\t\t\"name\": \"ck7ibkmx8ypjx6c8if7g611xoaq681ff40161xoh916btzefe5iju5e1xw737i2x8ntoqh8jwdy0y69556kc9fitu1ry4o6s8bjize3pfc9hxbl4cl1boy0g5c8g2l6j63m3q9sw2cgon4ftafqwb47d7y6ssxeyftkx1r7dzaowr2cjsji76vdf8hllrtev7y3z4669ce2o1c2s0f0uwjjb2kr4n3cdyrmet2r7t6xhwyj4rd6wbs7ezehb6zv\", \n\t\t\"code\": \"i2kyojfupyq0v13twzepeiv8sff12pgwaatqa5lqh0kpdcmyo0\", \n\t\t\"logo\": \"h9k80jtjk3pruxhrhs6l4o6ipwasoal9rsuqsdblv6t0xnbsrb5ftr1gx23z5vsb3kjfadqf27gjqtl4bvunqbwv3y0nw7v0noghglzwyacmucycathxq23fm5hxosph2whkq7jy393pwf6u0r1uc8azpbves66q5w1sqv1zhamktrufduuayamwuf8v9pnlxfjbehu3l0rut4wb8cpbnz86fz85e3ptvu03jnr0ggu5k3fbuatx5nnsu3wuu3p\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"fbd0d27a-af32-453b-97f1-414b4f3c4146\", \n\t\t\"name\": \"r8k7skoizemf11kc0mjclu6jzput54xg47yheysf5a0s18dno2e1bob4ikgcydll1nnka34ak4y3d2i3vtxpa6nruqny0jp46glhr3qqobtpi8816jpxsvcrth6ca25iops8ps3vywnfc2zw4k1h6h84l3nfmkh8j7eqzcf2nkpnodurxhmp0gf7amnyzmm91qg4fcyu6ih2th4dpuundoldmate8w82uz4u7rc05x8bd9jqwrxgsb4jjfk564m\", \n\t\t\"code\": \"jda7wgzpn9q819zqnam0cfqi4lmazn4kts5h7h18tu6qhehlhg\", \n\t\t\"logo\": \"5x0hvms3y9v64s95e0dop6y5jr5dsaev5d1pmn9nc28qs6m43nt770mfwy0fg35kxbonbtolv2mrzfberk04ybkx5ksbu9108gzqsrrhnn4xuml36u436yfyefhcbbrbvj4652rp0m5mcokhlu588tn42ys6bw2oo4pf7evulzd1cwgexfwhdn0aus1fy0n6vfvtyzll8nbtlelicbwv8v8wjnpu85b9wmm1swiq99voyf7xp19yv9lqxhgost6\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"027df8d4-7d86-48ad-b7af-d547d696f625\", \n\t\t\"name\": \"8rg7zow6t6pk85jkefgjc78la931qexbxm84ch0nui8dnkngiz9r7zxfh6yfz9gglhq4jy7v7w85ihk6nzxmph8b9meiqmy2s1y9q2vc1x7ot028gtkfzzavot7uuhz6b9q43wavl49awv04lop1ycu2fvdvwgpu0oy29th4rqzy0dmgwsvo6pc0uj41dn8w0bg8wm1jim3dcptw1qxrzv87vvy6qjp0y6ufjd88bxg83u3xborktlcynxq8ssu\", \n\t\t\"code\": \"9wmkvn7l45mktmwo069mpgnnoy0n5dllaecsjs9z9b8ykcg1od\", \n\t\t\"logo\": \"4ff8dpzxts9gb7w123w6i0y9ehgp6dnxnhxo1ain8geqnjjuurhyh3nphbsxg1wa9eofk53ot42oakravwxfd3nwpidpw6z5t4jc4iu1053038zsinjfaxqlrkptd3vu74mh4rsj7xt8yh4a12lee973q7jvlpvvu9x4sl4j3gtqr3dj33dxcqge3v9rjyl537dou8beprbczab1rupm1u7rhl8osh7v12tj22ilt2zsfwnhkpepdv86slshcqr\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"b99777e4-9ba2-430c-89f6-40921d14cfdd\", \n\t\t\"name\": \"vke2es3uqzuzrnluwvoqa9pjs68yo4q8a4m7ps7rtkg6okkpv7u6uqd0rtx3y13uqo8qbn9608fexod862p1ojfzvsesruqj1yke7kxrdt60usamjopw04ui2d0cquswcjczao0qrb7iivf60vz9yxxy3s6cn8oie2gdg50gir89jo59344pvek7wy5imowywq2wcs4gcw82k4aw7cxd5l5fp345yfmyjciz2dsoojnnt1r4545np2deovvvhyk\", \n\t\t\"code\": \"awdxj0m5s8lfvul8zeuxy48pcvproy21m1dnu2rz8x9f4jxqdw\", \n\t\t\"logo\": \"v3x6n0ixc72cgzjldiirht41416ca5uu0q6nl0jk7z80dq9qdhqkkrobmqrrsi1dfat37dbakuq1rbqpwlt6v5vga954rpin2ixumy5elth29421ncdzjarxhd1iufd5t7kkny15w44wy6zk1jgv1t48nfgt6t9jh9pfmh49dnw12w914mofqxzojsbyjhwtqmsjiap0u55j4pxhurpm4jnp2buzl0li5r65z9epljfas8hwuycf3ducfdi1eee\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"f58de4e9-9c2c-4011-896d-e043476324f8\", \n\t\t\"name\": \"gtrevg3tdgafmpp8eiih9vnlp222kcncyk85th9x81cvqb6vss4l0aeeicrn9g2hhzvncxpjohepv9ktdf7grt170jvj2ucpelbbkenihe5wid72zijgkps29p7c0i3kydir9nj7pf8tkguq3yw94hid6fgds5lm0b6tb1qeb4lpx4bvom8wx6ynmrkvab4pc93msk3siat2ug019hcmmhjzxfogcm12z88buyyvvnd7fkagwtkbidf4dwznt69\", \n\t\t\"code\": \"r0tgnoisexh9emrk61r27n75j0djaeaxr0s80tjmkl14imqeck\", \n\t\t\"logo\": \"nt66fafv012p2ix7n80jmmpxu0atmotaci46pbbhynan48wrxv1she0k0cfkjw3l1oflz2fjrer0itfbw02xqcbgomj8ea3fbz283107zvqbb6xr8m8x9blaxfqph8pmen95zi0jjtllxnk8ncp2tmh0wihar5lvpnmqvjx0n9y4ptrnbx14j5ihl7ssxsyspkm9931oiwiuhc697idqvkh7vbprxkgdafkke4lqkcoklo2f1k3eq6yjou0oi7t\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"ac301fa8-cadc-4a6e-acd9-a9f27a5d7247\", \n\t\t\"name\": \"hcdpt2ioj20us9ll87mm3lt5a7ca4gfx433iylvahyleyp2o127a6tb34v2xy55dqq6ffbm8qrjeee5ssa6upxb80g68jiztm90haexkgu6goeajnz1owgrlj4a8ft1lyp3uyhzpeyibov4zdi8c2u4ia9we65okf33g2tvbc6x9en6ba98o2r7sfxqgl2i6m5kww6nvfzxbdcqf1w5bw78dnp3vent6vmtkd8pnypoxzuzs6vkp5z9d6fw5esn\", \n\t\t\"code\": \"wgegc003y90jevq36008mhrwltqwx7saam5o65ipftpu5h7r9d\", \n\t\t\"logo\": \"yqy6655w45ugk31e2b7ai35ygok8clfwagdzggk6jvaiin55crmfy8pk0g26l5ppi1zizdaaf3xvvlp1mv0dvh2kjz9anufipspev7mkr70kggk6gtgtovegsi3ytpz71d14yhiyi4okkq3hg58uqik3duur09t074lix3qo5qmsjtfjpx2jpe2gwi33ukj3l97d9u4ydby9d5utdpptrjtehsh1nc764t66c5dl3fz3mzrz51nlmu8nasxmabb\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"7337d2b6-917c-4010-9946-ab749fdb6c28\", \n\t\t\"name\": \"aen19xvn3yuh1mubprtd996lmica8p9uec5u267ybsrgf0lmn4yru1jklgkx8741bwg01vwacpgtvchdn6o8ayyyo39padt064t8oc1cw4n4o18olqd00kl61xq5w6zhvdxheit88uhs9eaprpzur8bs30b7mrnp6hrmi5echza4489reut2l3nu0f7ez1f2cg2fp1ll06tdznmjfm9gwud5mdpcsj8yst5dr4y8r81gz45olllrqq73b8iftcf\", \n\t\t\"code\": \"2bgatt4gj26f8wi802m1n7qe6pqaprq9m982v0qu0hf0k2iyo0\", \n\t\t\"logo\": \"jk6tx1lnor2igdl1b1jjf1rkccfzm97ha83023wanmytnkfdb37jw04fzm3sjmh64lkopcrl256oay16odi9jfae7f6t22ss833y6pq2zksgnecxidyvy55d7yvavtyzlbmyw9yl1y4uaf19r55w7y0f9g3z2mb0isyretssnv5pu68pvjne6x0xidrkhns12o33ruxzgitzvb9wdqf0p17l09fqbckmqa3sr2ea9v0uizwlt1fe25tmjw5mnbu\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"49c38bd3-d4ce-45b1-9686-59017d3d3801\", \n\t\t\"name\": \"hjgup1lcg1nvkwg6msvxhi8y0xlsg52fboqhd8hpbxhinkev6mnl09zkh9awlgivnwavokm00exfk6scosk59jspyrlc72t20dxwm26y43s2ufgcetcsawlqbmx1xdiotby6oj1659ybo7cxy2bbie6x9mer5c4ze1qh9s5psaoflt8cjmw523zk1vvf6vlzg978zlus8v3afq3y7hnefjdvkkprul0ux3djdbag5n8t4aw9dpwocmoezv2wt8b\", \n\t\t\"code\": \"qr6u9ujqv0gidkngzgjcselo20hfxue1k45zypqczt1t83q9er\", \n\t\t\"logo\": \"6dg8cps4dyi6twm2ot5ac3xizepuhzuk23a1z80t2zpxafv3npwvgkoikzprxxy75alygodbwfzgyj9guqt4uafytczx69s285vi2oxnj2ijpgt80l48x1ix2z0gxxr00gn996q4mguxwmxe7wvt5xx1ojq3gsltb0lh75tovfc2x10zzb6pazoau7o4x4gy1ufb4v9unqxc85rs04jkxnmp9lwxs50xl39gzbkt3ntyr8khz90xy1qkrfgdv3j\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"b82bfab6-6df1-4fb8-a445-7b368bc0f340\", \n\t\t\"name\": \"r2da4ao0a1r9t6bwwr3dxg4hainhdlvxdwsfuwth63scse8wec1to7hgcyfoctvvwnoj8nvoqw6hckh11zp0hnok1lsigwq48bdggvl5kufl14xnevc0pkgffiwanmmxfnkv65t0ll2y33s5tf8vvend92narh0no4qz2qa1wufsymvwo8yn7j4vogp2jacdbi31ck7b1wythtbdgco4wrpvmql92lohu8do09ptfb4mtbku40c6h8lw7f4rult\", \n\t\t\"code\": \"2zoj2o8db7kkwnf0e19zj8fdqi3nba2m70cqv913ui67fie0f0\", \n\t\t\"logo\": \"q1qdi73z6fykevoqvdg93j92c8rn2bqd6gtfdpyyewol0ne6a8fioswercc2aizcruapk24tx21vviu3ub5d83lpd73rs9mppe9jiez8wab902r2xzwv9ky51589y5ujxw6ix3rh5y1ezrk1pvur6xjzdvy2bnofg5i7lm0bkq3l4egydsrfd1dfd1zema0291qi4lgs01ogwo5b47507qn7zfx3lzaxjuxavk606mb06v5mr1qp0tkl6kaao7z\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"7ca9a236-1617-438c-81b3-d701ceb75a0d\", \n\t\t\"name\": \"iutlcr2zo1gdy9gwppc1849kwylm9p5fcw49iy34fg9dsv8yanoyl3wsy19fhu3dlwof6phcg8vshm0j630yk1eqsp6n0xfxwee5s6vjol7bf7x2wfeyemh6m5syggts2f07l5t388qps2sviqglrj5wo4e4c57uwnvs63h45el5i0bkgiz2hfi1v9dkrjt3gwy91fyhuuti0j2dsppuyg6cxjfnqg4clajjom47edoh5213gfq1n2ostspb1mf\", \n\t\t\"code\": \"6i4s4qwrux0s899y5llquwppa96z8knaqnhhauwt4mmar4v2ot\", \n\t\t\"logo\": \"e2l6kcy0c06uj943ycxphnvs7rab3w7itq8m15b7v7ymo9nyvts686an2t1oyfmgict8jmhfewi5hcwpap5fmb0p3xsnpzpeihm7yijbvo4cw2p1as5up4c81qbruse48leuj30kdv4vpwl12vo1sfs0txoqdvs0182v89gn6zfb9w4lbtdfwy8hephg0sbj0vv5rh7dwnxytd8gd1p4dslwe5is4tz33w0hk5ysw64n5v958os40ks36qnwxyg\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"e126c78c-fefb-4af6-8b59-a40ba321642d\", \n\t\t\"name\": \"jej1yofgkpyntu42hp9dz3ujlhi66a0cjk54t9airoabg03c4sc25knw585e6v0o8axgjgdu34dv6c891985u74kv8jqvdhdcufkml4fgyqbxt62flpbvsh2sc5pvvfybi6ft0jlx2ry3k4o9cu9q3f1ar5yuuepjw1axrkvk5iwuhjjaz0a1hgd6hnqq8dz3qy1vwk8rm5w4hzra0ezfno0msi413bsabxhgw7v43ijn8pb7ghq6r6lfjvgjnl\", \n\t\t\"code\": \"ug8i7m83xkzg24pirb1vquxefv01iq40vg06lgbxwk8gw0k38u\", \n\t\t\"logo\": \"ei2f6whncy44uhtlyvgo4uz7zpvlham83mghs8wamf6jb6pamprsvgmzlo51i5qiav739kssedktvz5kxbji7xe66gfplgeie50e66tk3mx1ydokurk56sfgw2ftsbln6t4r9nuas9q24j3yq5fq1a4eb6v2rx2kctppe8iye8uwz25nxhj01ul1bya5lvyd01vx9ltpp8rydllmtqawpo7i4m5c8pvmej57vyyyze2srq3f1kxdupk99eky6xa\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"1b9103fb-5b7d-4be8-a602-c6499251d88e\", \n\t\t\"name\": \"nh9v6copek4zx2f3w62qeescsf6ipxt5fulxbodq3ul9d75jooh50nnvdvuft1hb0aihtwd1gd1l4aqo3278qyuv53kjyxirqut12h4x29phwejpm8hozg745l1o0mfxiw9p7lm6hvailyex6nbdwxlktnu3ra25gevraq63ue1szyribhzy7ujlek8koen6d4g7sf9g2zxrozo4346x3ml95gugirtva9pqwp8ki4p09wwtrktq529s23w41in\", \n\t\t\"code\": \"vm2op0v4bt3qszcfwvb4f12j66szyvmf2pk9f8npejhudy4c4k\", \n\t\t\"logo\": \"j74whho5ti0lsvfg6zohzov8nefrsiayqwobs99ynviekn7qwovuvz86kr9rbyrj32qwhbeg0elsgsb5x9t27owwgieyjxg1sxrg9sqo2n3fq8aau0ix16ct6as3j3mpl07bahgdfz87xnw83filyg2oj30t5695pxi084g3ne3gah87usrgoe1u8tt8geezgp1yh9k07jhi8v3bhq9r1oa99ar9p58vk18yts7jhsvgtjssguoncn0thsdoyyt\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"88ddd753-99cb-4e7e-aba5-0a6d12f118b3\", \n\t\t\"name\": \"hk0zskx1enm0kczdakpms2ik4bfxosu77i4v8wc6z1um8fwhwepzebh43ud4kd5rclutuds3d6by5x1kxyrpehanypqs5zaaa8m53c22cup2oavaicawrol8p9nc0j974843jm5fmefw4fuadslmlypcez06ah0ltscuvn61ofdeamf3nuj9lpmalj8tj4tgkh52l9i8k7ajlfca0436vcfij83x6wa2hw7q2071148ks0wny2xaibn6vr00s1e\", \n\t\t\"code\": \"kia5uy89qnwyhui7luz7dxjk6cymhld2bvlyiyi0gw0ahv637m\", \n\t\t\"logo\": \"hsccensy5p3ht99uzpmllg1wzix6njtazjw9qqxk8yypferl96i4566jvvwb0s4i04ka5jztxdtiwdfrt6ww1gsk0rl9ug0gksvqstguva2irvnq3sx130v0bwd3pemsia701uriv22uqzzin6ycyl63ymj05saa6ebkfbb1rcnj5v1zvkjobvb7anqrs9hmg7hbb5g325agng4uoafr5zf5zbzcpw62nw5tdv86a8n1dxvuyker8gibrnbonhm\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"ef2bc706-79ae-4684-b38e-6accb22e9598\", \n\t\t\"name\": \"kp8bn7u3l0jy655qxgniszrobf18fiu8mn0xzgjk82vhje7y88xm5aqtoeha527vjwjtn8m303z6h7u9ytj0j0xtclbml7hxal7p2ncm3wo6z7r1jig1tvs3d666l4n1d0vvpeh205tu4quuj2f4wrxlq50j1lg3fddjk7bi23nbkywdrsnkiel7l5f5itp8kgcevketw8mhjxoj3uuw02r1brlirycyvgg8irl9g0x9d3olasp3h2o0qnfwphe\", \n\t\t\"code\": \"imcds1dawpb7kbz80h7793d03olf5hvfm85vq5g6ptltm9aqji\", \n\t\t\"logo\": \"3x3c5dtlihwrqep1cig91jb6jvnxbksi15cm9akjt6s356nkmgozfpjak4wmxuzfym7qu4dnkz2ujorwyvmowtc09bu4pkd7xezasw8gnhsliuch6ugh54pbjckbpzs7lokicfu03mep5xyica4ytsy7546zjbjni9ubppcvswvinhvmcjyludjp07hgp6m3q24vwpaews5e3i5mwfe9yguxfishhvbt85tblj3473ids52v2b2dicp155wz6qy\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"5bacd13d-21f9-494f-a716-cad79ef63fe0\", \n\t\t\"name\": \"plxm0tj75tsouo4cxlfw90cgxhs5ihvadhuq4ry61kt6v9gd14moq0kgq4aa71mxp741dkk91pumqumpwsnqzfbp1mnj9r9bkrd9jyb41oo9wufiy248907ndu6splb3zkiw8x9htla1y55a2rzpm3x9j1l47isszzceyenb9n948pfftqopyjx787mtg7klelkapsq39xvpl6z8w7qm2qsac6ryirm8ekn31a1uze8xidr2rxu51ssh57b5dyh\", \n\t\t\"code\": \"qy20o1xj47aq8qnn7ex5tu6w05d2bbfbngh0w1wgtk3mhdxlwy\", \n\t\t\"logo\": \"p1sansp7heawp0k9e1g36nxopqt6g4yfvtu42v5kivo7cj7mixzae8hwtz9fgonbi8ey2thgq51oaq95crah4q0b95bgqduczwn7iucsou4d4wxtxd6vb458jcxat5zfsi5nmbmkyizmesw4r351c0zupqaydqqecg3e17vbc5egags2ru5qpv45f4yoay0kcl2qayqjvvjfitjlalvimotc8tjj1gehczoq3utkwffo40zb9w97dagupi6l6hh\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"e9e28f06-afb7-4d87-8649-bf3b60d9abb9\", \n\t\t\"name\": \"y9g39vea0pr8zfbytdjlbrqxm9nmson4b8tugxpnxpzqvh1e7mnk42z4c5ced1fsa91tqvsy6kbzi6obnnzu1s8vrvip5ng4q1xqi1bfkyjziz0cdane2yx41xa8mscmgpleqga8ikr3v0flrliuer6x4keu4xejvmqdx5guh7m1fb6fe4sd0l1qrwz2o1nmqd7qttp8aw1cl1vqj73k4ewgw1c77j36hoh6a5i4vp2xyceys7ns9txuk1xcmcc\", \n\t\t\"code\": \"na8unyzswb6bjto4gh231srwm0jmx1axo4gpoty4k4v0swyuqz\", \n\t\t\"logo\": \"88ojd1n7vtt0ms7iym1ssm3atago3arq464wakahm1rakw72f567b54lxt6s2tbivq05lzu4ca86hymp4rw6p2n0qz5vzzsj4wnopv3mgwntfplzhugccr3swwtc38y5dqjcugec2btgfkao5zxv1b08qlhk9ylvgv1dy9fqhhcpzx83r34jaaedu3awemji6dbotwkmratl5qpz3ucts7qs0vme7l3pjkn5a61yunwl6pn5tg084l6xje9ss4d\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"aa56f00b-c126-48a5-80a4-8accf46fa97e\", \n\t\t\"name\": \"jjlfvjrmf8iddq7c5i9bcbid99sgwf3y0byfi8d8p2jyc22p2wimz972fhf94jtgfqxnw9iyvaqmxlp53f7wgzamvf5dt3kybhwcg71obixbebs7nxcix82fohn625mvptfw4nlkkc47mn5rh3zpzatndyocjyv2fhgrs7rw2b8xo2sk46f7q0zvfnslthe6hs0uqfyf2qm90r5g2rwky9t2nd3sfrdgcgzi0569wjhqg68xx35zk0s7232kp9c\", \n\t\t\"code\": \"xh2wro10mxva14xzuze07opcnaxt9ppck7shsejsa6dbiur0qy\", \n\t\t\"logo\": \"2fr3pevw8u0urpd3ffa6zboz0xvl0zdvi0009v7jlg5xzz0qvo3ek4tcl4q6edn8a9f25r86uwa5lvwc1y8vlv14h324fn9tyejgo3fhnr02o4a6cbzzy9hv9cykqyhkt0efwvvu6g3zdqqawhrgdhdmz1mfmemcygm8ei7ut457my9ae23vwrvj66fmkjmscn1ivbkewuzly2l0tg11d2bi220sa6qcyn7hblr2an95ec1akdmmy1wguujwmsc\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenants"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenants/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+                        "tenants",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenants",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"9be4665b-126c-4a21-928a-0da80c8fd57a\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenants"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"9be4665b-126c-4a21-928a-0da80c8fd57a\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant/9be4665b-126c-4a21-928a-0da80c8fd57a",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant",
+						"9be4665b-126c-4a21-928a-0da80c8fd57a"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"9be4665b-126c-4a21-928a-0da80c8fd57a\", \n\t\"name\": \"7sxr9a2jx3dypjcn72qmgjwrdq8yi6hxaf1ixk4tva1wndd5xwzabzy4ty9takzfih7zqi7eo3uq9ate81bjtdzp9uqezvzqecipj5x5vim4hqbrh6pz9batax1mcrdokxtncr2vtcc81cgrw86m5t52nev1s1mx87dyoxkkf94a82grv87ca7sxmjzwv9obx34952i99gbqlaiscjdho11pn7vxyax9r2ppagpj0qx38lwn4sk1i3chxye7615\", \n\t\"code\": \"pvs86p3sc7lqqp4xkn3sb6n8d40qlx6ik3xkytnidca5dq62f9\", \n\t\"logo\": \"vpyvu8bsaofi93xcmfqceai258sx1c439n9j6zxmt3qkltrjw9gto6gbgw9gr702fny05i8are3upqqycy83wb1ewykt832ubr4m0r1di0ydb20lhg8fbsea887shh2603sckmwobfxj1bxfrublkmqqr6q0d67vk4pnt8ekpd3dshp8myhnn53zrpxkoml6d0fqr68y17fnwzz7thp97awhu92nsavescfuggb0tjx9y14uhil75dchbu370nb\", \n\t\"isActive\": false, \n\t\"data\": { \"foo\" : \"bar\" }, \n\t\"accountIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant/9be4665b-126c-4a21-928a-0da80c8fd57a",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant",
+						"9be4665b-126c-4a21-928a-0da80c8fd57a"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - iam/tenants",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenants"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "44e356cf-0139-4476-a881-d08df4267b72",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
