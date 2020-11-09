@@ -1,16 +1,11 @@
 import { Controller, Get, Render } from '@nestjs/common';
-import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 
-@Controller('iam/account')
+@Controller()
 export class IndexController
 {
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
-
     @Get()
-    @Render('index')
-    async main()
+    @Render('index.hbs')
+    root()
     {
         return { message: 'Hello world!' };
     }
