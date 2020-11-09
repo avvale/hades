@@ -5,7 +5,7 @@ import { OAuthModule } from './apps/o-auth/o-auth.module';
 @Module({
     imports: [
         CoreModule,
-        OAuthModule
+        OAuthModule,
     ]
 })
 export class AppModule {}
