@@ -5,7 +5,6 @@ import { SsrControllers } from './ssr';
 @Module({
     imports: [
         SharedModule,
-        
     ],
     controllers: [
         ...SsrControllers,
