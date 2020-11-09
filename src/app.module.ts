@@ -5,7 +5,7 @@ import { CciModule } from './apps/cci/cci.module';
 @Module({
     imports: [
         CoreModule,
-        CciModule
+        CciModule,
     ]
 })
 export class AppModule {}
