@@ -1,5 +1,5 @@
 import { Controller, Get, Render } from '@nestjs/common';
-import { IQueryBus } from '@nestjs/cqrs';
+import { IQueryBus } from '@hades/shared/domain/bus/query-bus';
 
 @Controller('iam/account')
 export class IndexController
