@@ -5,7 +5,7 @@ import { IamModule } from './apps/iam/iam.module';
 @Module({
     imports: [
         CoreModule,
-        IamModule
+        IamModule,
     ]
 })
 export class AppModule {}
