@@ -3,7 +3,8 @@ import { SharedModule } from './../shared/shared.module';
 
 @Module({
     imports: [
-        SharedModule
+        SharedModule,
+        
     ]
 })
 export class OrigenModule {}
