@@ -1,0 +1,45 @@
+version: 1.0.0
+boundedContextName: o-auth
+moduleName: application
+moduleNames: applications
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: code
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: secret
+    type: varchar
+    maxLength: 90
+    nullable: false
+  - name: is_master
+    type: boolean
+    nullable: false
+  - name: clients
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: client
+    relationshipAggregate: OAuthClient
+    relationshipModulePath: o-auth/client
+    intermediateTable: o_auth_applications_clients
+    intermediateModel: OAuthApplicationsClientsModel
+    intermediateModelModuleSection: o-auth/application
+    intermediateModelFile: applications-clients
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true
