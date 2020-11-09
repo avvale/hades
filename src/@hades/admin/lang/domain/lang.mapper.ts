@@ -75,9 +75,9 @@ export class LangMapper implements IMapper
             new LangIetf(lang.ietf),
             new LangSort(lang.sort),
             new LangIsActive(lang.isActive),
-            new LangCreatedAt(lang.createdAt, {}, {addTimezone: cQMetadata.timezone}),
-            new LangUpdatedAt(lang.updatedAt, {}, {addTimezone: cQMetadata.timezone}),
-            new LangDeletedAt(lang.deletedAt, {}, {addTimezone: cQMetadata.timezone}),
+            new LangCreatedAt(lang.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new LangUpdatedAt(lang.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            new LangDeletedAt(lang.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
         );
     }
 
