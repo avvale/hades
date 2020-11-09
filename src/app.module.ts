@@ -5,7 +5,7 @@ import { AdminModule } from './apps/admin/admin.module';
 @Module({
     imports: [
         CoreModule,
-        AdminModule
+        AdminModule,
     ]
 })
 export class AppModule {}
