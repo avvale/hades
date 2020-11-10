@@ -31,7 +31,7 @@ async function bootstrap()
     if (environmentService.get<boolean>('APP_SSR'))
     {
         app.useStaticAssets(join(__dirname, '.', 'public'));
-        app.setBaseViewsDir(join(__dirname, './resources', 'views'));
+        app.setBaseViewsDir(join(__dirname, 'resources', 'views'));
         app.setViewEngine('hbs');
     }
 
