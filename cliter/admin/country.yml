@@ -1,0 +1,101 @@
+version: 1.0.0
+boundedContextName: admin
+moduleName: country
+moduleNames: countries
+aggregateName: AdminCountry
+hasOAuth: true
+hasTenant: true
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: common_id
+    type: id
+    length: 36
+    nullable: false
+  - name: lang_id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: AdminLang
+    relationshipModulePath: admin/lang
+    relationshipKey: id
+    relationshipField: lang
+  - name: iso_3166_alpha_2
+    type: char
+    length: 2
+    nullable: false
+  - name: iso_3166_alpha_3
+    type: char
+    length: 3
+    nullable: false
+  - name: iso_3166_numeric
+    type: char
+    length: 3
+    nullable: false
+  - name: custom_code
+    type: varchar
+    maxLength: 10
+    nullable: true
+  - name: prefix
+    type: varchar
+    maxLength: 5
+    nullable: true
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: slug
+    type: varchar
+    maxLength: 1024
+    nullable: false
+  - name: image
+    type: varchar
+    maxLength: 1024
+    nullable: true
+  - name: sort
+    type: smallint.unsigned
+    maxLength: 6
+    nullable: false
+  - name: administrative_area_level_1
+    type: varchar
+    maxLength: 50
+    nullable: true
+  - name: administrative_area_level_2
+    type: varchar
+    maxLength: 50
+    nullable: true
+  - name: administrative_area_level_3
+    type: varchar
+    maxLength: 50
+    nullable: true
+  - name: administrative_areas
+    type: json
+    nullable: true
+  - name: latitude
+    type: decimal
+    length: '17,4'
+    nullable: true
+  - name: longitude
+    type: decimal
+    length: '17,4'
+    nullable: true
+  - name: zoom
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: data_lang
+    type: json
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true
