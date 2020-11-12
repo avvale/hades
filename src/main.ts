@@ -28,10 +28,10 @@ async function bootstrap()
     app.use(urlencoded({ extended: true, limit: environmentService.get<string>('APP_LIMIT_REQUEST_SIZE') }));
     app.useLogger(loggerService);
 
-    if (environmentService.get<boolean>('APP_MVC'))
+    if (environmentService.get<boolean>('APP_SSR'))
     {
-        app.useStaticAssets(join(__dirname, '..', 'public'));
-        app.setBaseViewsDir(join(__dirname, '..', 'views'));
+        app.useStaticAssets(join(__dirname, '.', 'public'));
+        app.setBaseViewsDir(join(__dirname, 'resources', 'views'));
         app.setViewEngine('hbs');
     }
 
