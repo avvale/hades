@@ -77,15 +77,21 @@ aggregateProperties:
     nullable: true
   - name: latitude
     type: decimal
-    length: '17,4'
+    decimals:
+      - 17
+      - 4
+    maxLength: 17
     nullable: true
   - name: longitude
     type: decimal
-    length: '17,4'
+    decimals:
+      - 17
+      - 4
+    maxLength: 17
     nullable: true
   - name: zoom
     type: int.unsigned
-    maxLength: 10
+    maxLength: 2
     nullable: true
   - name: data_lang
     type: json

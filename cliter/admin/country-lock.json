@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@hades/admin/country/infrastructure/seeds/country.seed.ts",
-            "integrity": "sha1:42baa3d05e09ee16accb6b939475136b2f0fcca8"
+            "integrity": "sha1:6c2ffbace460d773c18750641d8d3ce7a8b75757"
         },
         {
             "path": "src/@hades/admin/country/infrastructure/sequelize/sequelize-country.model.ts",
@@ -332,6 +332,34 @@
         {
             "path": "src/@hades/admin/country/domain/value-objects/country-administrative-areas.ts",
             "integrity": "sha1:cb289541ce3003d24378fb58938e3b8ff4e898f6"
+        },
+        {
+            "path": "src/@hades/admin/country/domain/value-objects/country-latitude.ts",
+            "integrity": "sha1:9a7020f46e14e3ed54c64d7b2818c0fe30c0c283"
+        },
+        {
+            "path": "src/@hades/admin/country/domain/value-objects/country-longitude.ts",
+            "integrity": "sha1:85c45ebdd872c06573153c34ec4fb5872dcc2bb5"
+        },
+        {
+            "path": "src/@hades/admin/country/domain/value-objects/country-zoom.ts",
+            "integrity": "sha1:a4e196f8b663646d439cc1d5486f9fcb821506ec"
+        },
+        {
+            "path": "src/@hades/admin/country/domain/value-objects/country-data-lang.ts",
+            "integrity": "sha1:b77296aa119959d663de45e934887d404eca829c"
+        },
+        {
+            "path": "src/@hades/admin/country/domain/value-objects/country-created-at.ts",
+            "integrity": "sha1:5fe87ada4501ec71f678e45270ad204f2c265aab"
+        },
+        {
+            "path": "src/@hades/admin/country/domain/value-objects/country-updated-at.ts",
+            "integrity": "sha1:946daa2013c1ae37d157a4c916c8cf48c587c377"
+        },
+        {
+            "path": "src/@hades/admin/country/domain/value-objects/country-deleted-at.ts",
+            "integrity": "sha1:540775366022f6ae41810d80b11fff61fe41aa61"
         },
         {
             "path": "src/apps/admin/country/controllers/admin-create-country.controller.spec.ts",
@@ -507,7 +535,7 @@
         },
         {
             "path": "postman/admin.country.postman.json",
-            "integrity": "sha1:1ba0ca35b8412ec9c40ab94ad4d056d4695e70bc"
+            "integrity": "sha1:0a7475f828c0a403c6fa1a42e9a4ec248738c1a2"
         }
     ]
 }
