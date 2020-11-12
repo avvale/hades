@@ -12,7 +12,6 @@ export class SequelizeLangRepository extends SequelizeRepository<AdminLang, Admi
 {
     public readonly aggregateName: string = 'AdminLang';
     public readonly mapper: LangMapper = new LangMapper();
-    public readonly timezoneColumns: string[] = ['createdAt','updatedAt','deletedAt'];
 
     constructor(
         @InjectModel(AdminLangModel)

@@ -3,6 +3,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from './../shared/shared.module';
 import { AdminModels, AdminHandlers, AdminServices, AdminRepositories, AdminSagas } from '@hades/admin';
 import { AdminLangControllers, AdminLangResolvers } from './lang';
+import { AdminCountryControllers, AdminCountryResolvers } from './country';
+import { AdminResourceControllers, AdminResourceResolvers } from './resource';
 
 @Module({
     imports: [
@@ -12,14 +14,18 @@ import { AdminLangControllers, AdminLangResolvers } from './lang';
             ])
     ],
     controllers: [
-        ...AdminLangControllers
+        ...AdminLangControllers,
+        ...AdminCountryControllers,
+        ...AdminResourceControllers
     ],
     providers: [
         ...AdminHandlers,
         ...AdminServices,
         ...AdminRepositories,
         ...AdminSagas,
-        ...AdminLangResolvers
+        ...AdminLangResolvers,
+        ...AdminCountryResolvers,
+        ...AdminResourceResolvers
     ]
 })
 export class AdminModule {}
