@@ -7,8 +7,11 @@ import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/gr
 import { AdminModule } from './../../../src/apps/admin/admin.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+import { IamModule } from './../../../src/apps/iam/iam.module';
 
-const importForeignModules = [];
+const importForeignModules = [
+    IamModule
+];
 
 describe('country', () =>
 {

@@ -4,6 +4,7 @@ import { SharedModule } from './../shared/shared.module';
 import { AdminModels, AdminHandlers, AdminServices, AdminRepositories, AdminSagas } from '@hades/admin';
 import { AdminLangControllers, AdminLangResolvers } from './lang';
 import { AdminCountryControllers, AdminCountryResolvers } from './country';
+import { AdminResourceControllers, AdminResourceResolvers } from './resource';
 
 @Module({
     imports: [
@@ -14,7 +15,8 @@ import { AdminCountryControllers, AdminCountryResolvers } from './country';
     ],
     controllers: [
         ...AdminLangControllers,
-        ...AdminCountryControllers
+        ...AdminCountryControllers,
+        ...AdminResourceControllers
     ],
     providers: [
         ...AdminHandlers,
@@ -22,7 +24,8 @@ import { AdminCountryControllers, AdminCountryResolvers } from './country';
         ...AdminRepositories,
         ...AdminSagas,
         ...AdminLangResolvers,
-        ...AdminCountryResolvers
+        ...AdminCountryResolvers,
+        ...AdminResourceResolvers
     ]
 })
 export class AdminModule {}

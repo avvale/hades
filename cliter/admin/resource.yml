@@ -4,7 +4,7 @@ moduleName: resource
 moduleNames: resources
 aggregateName: AdminResource
 hasOAuth: true
-hasTenant: false
+hasTenant: true
 aggregateProperties:
   - name: id
     type: id
@@ -16,8 +16,9 @@ aggregateProperties:
     length: 36
     nullable: false
     relationship: many-to-one
-    relationshipAggregate: AdminBoundedContext
-    relationshipModulePath: admin/bounded-context
+    relationshipAggregate: IamBoundedContext
+    relationshipModulePath: iam/bounded-context
+    relationshipKey: id
     relationshipField: boundedContext
   - name: name
     type: varchar
