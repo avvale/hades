@@ -23,7 +23,7 @@ export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel
     name: string;
 
 
-    @BelongsToMany(() => AdminResourceModel, () => AdminAttachmentFamiliesResourcesModel)
+    @BelongsToMany(() => AdminResourceModel, { through: () => AdminAttachmentFamiliesResourcesModel, uniqueKey: 'uq01_admin_attachment_families_resources' })
     resources: AdminResourceModel[];
 
     @Column({
