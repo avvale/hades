@@ -4,7 +4,7 @@ type AdminResource
     id: ID!
     boundedContextId: ID!
     boundedContext: IamBoundedContext!
-    attachmentFamilies: [IamAttachmentFamily]
+    attachmentFamilies: [AdminAttachmentFamily]
     name: GraphQLString!
     hasCustomFields: GraphQLBoolean!
     hasAttachments: GraphQLBoolean!

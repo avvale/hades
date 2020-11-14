@@ -14,7 +14,7 @@ import {
     ResourceDeletedAt,
 } from './value-objects';
 import { BoundedContextMapper } from '@hades/iam/bounded-context/domain/bounded-context.mapper';
-import { AttachmentFamilyMapper } from '@hades/iam/attachment-family/domain/attachment-family.mapper';
+import { AttachmentFamilyMapper } from '@hades/admin/attachment-family/domain/attachment-family.mapper';
 
 export class ResourceMapper implements IMapper
 {
