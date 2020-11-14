@@ -6,6 +6,14 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum AdminAttachmentFamilyFit {
+    CROP = "CROP",
+    WIDTH = "WIDTH",
+    HEIGHT = "HEIGHT",
+    WIDTH_FREE = "WIDTH_FREE",
+    HEIGHT_FREE = "HEIGHT_FREE"
+}
+
 export enum CciChannelDetailExecutionType {
     SUMMARY = "SUMMARY",
     DETAIL = "DETAIL"
@@ -100,6 +108,30 @@ export enum OAuthClientGrantType {
     PASSWORD = "PASSWORD"
 }
 
+export interface AdminCreateAttachmentFamilyInput {
+    id: string;
+    name: GraphQLString;
+    resourceIds?: string[];
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    fit: AdminAttachmentFamilyFit;
+    sizes?: JSON;
+    quality?: GraphQLInt;
+    format?: GraphQLString;
+}
+
+export interface AdminUpdateAttachmentFamilyInput {
+    id: string;
+    name?: GraphQLString;
+    resourceIds?: string[];
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    fit?: AdminAttachmentFamilyFit;
+    sizes?: JSON;
+    quality?: GraphQLInt;
+    format?: GraphQLString;
+}
+
 export interface AdminCreateCountryInput {
     id: string;
     commonId: string;
@@ -171,6 +203,7 @@ export interface AdminUpdateLangInput {
 export interface AdminCreateResourceInput {
     id: string;
     boundedContextId: string;
+    attachmentFamilyIds?: string[];
     name: GraphQLString;
     hasCustomFields: GraphQLBoolean;
     hasAttachments: GraphQLBoolean;
@@ -179,6 +212,7 @@ export interface AdminCreateResourceInput {
 export interface AdminUpdateResourceInput {
     id: string;
     boundedContextId?: string;
+    attachmentFamilyIds?: string[];
     name?: GraphQLString;
     hasCustomFields?: GraphQLBoolean;
     hasAttachments?: GraphQLBoolean;
@@ -989,34 +1023,26 @@ export interface OAuthUpdateRefreshTokenInput {
     expiresAt?: GraphQLTimestamp;
 }
 
-export interface AdminCountry {
+export interface AdminAttachmentFamily {
     id: string;
-    commonId: string;
-    langId: string;
-    lang: AdminLang;
-    iso3166Alpha2: GraphQLString;
-    iso3166Alpha3: GraphQLString;
-    iso3166Numeric: GraphQLString;
-    customCode?: GraphQLString;
-    prefix?: GraphQLString;
     name: GraphQLString;
-    slug: GraphQLString;
-    image?: GraphQLString;
-    sort: GraphQLInt;
-    administrativeAreaLevel1?: GraphQLString;
-    administrativeAreaLevel2?: GraphQLString;
-    administrativeAreaLevel3?: GraphQLString;
-    administrativeAreas?: JSON;
-    latitude?: GraphQLFloat;
-    longitude?: GraphQLFloat;
-    zoom?: GraphQLInt;
-    dataLang?: JSON;
+    resources?: AdminResource[];
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    fit: AdminAttachmentFamilyFit;
+    sizes?: JSON;
+    quality?: GraphQLInt;
+    format?: GraphQLString;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
 }
 
 export interface IQuery {
+    adminFindAttachmentFamily(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
+    adminFindAttachmentFamilyById(id?: string, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
+    adminGetAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily[] | Promise<AdminAttachmentFamily[]>;
+    adminPaginateAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     adminFindCountry(query?: QueryStatement, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
     adminFindCountryById(id?: string, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
     adminGetCountries(query?: QueryStatement, constraint?: QueryStatement): AdminCountry[] | Promise<AdminCountry[]>;
@@ -1131,6 +1157,11 @@ export interface IQuery {
 }
 
 export interface IMutation {
+    adminCreateAttachmentFamily(payload: AdminCreateAttachmentFamilyInput): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
+    adminCreateAttachmentFamilies(payload: AdminCreateAttachmentFamilyInput[]): boolean | Promise<boolean>;
+    adminUpdateAttachmentFamily(payload: AdminUpdateAttachmentFamilyInput, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
+    adminDeleteAttachmentFamilyById(id: string, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
+    adminDeleteAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily[] | Promise<AdminAttachmentFamily[]>;
     adminCreateCountry(payload: AdminCreateCountryInput): AdminCountry | Promise<AdminCountry>;
     adminCreateCountries(payload: AdminCreateCountryInput[]): boolean | Promise<boolean>;
     adminUpdateCountry(payload: AdminUpdateCountryInput, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
@@ -1269,6 +1300,33 @@ export interface IMutation {
     oAuthDeleteRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
 }
 
+export interface AdminCountry {
+    id: string;
+    commonId: string;
+    langId: string;
+    lang: AdminLang;
+    iso3166Alpha2: GraphQLString;
+    iso3166Alpha3: GraphQLString;
+    iso3166Numeric: GraphQLString;
+    customCode?: GraphQLString;
+    prefix?: GraphQLString;
+    name: GraphQLString;
+    slug: GraphQLString;
+    image?: GraphQLString;
+    sort: GraphQLInt;
+    administrativeAreaLevel1?: GraphQLString;
+    administrativeAreaLevel2?: GraphQLString;
+    administrativeAreaLevel3?: GraphQLString;
+    administrativeAreas?: JSON;
+    latitude?: GraphQLFloat;
+    longitude?: GraphQLFloat;
+    zoom?: GraphQLInt;
+    dataLang?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
 export interface AdminLang {
     id: string;
     name: GraphQLString;
@@ -1287,6 +1345,7 @@ export interface AdminResource {
     id: string;
     boundedContextId: string;
     boundedContext: IamBoundedContext;
+    attachmentFamilies?: AdminAttachmentFamily[];
     name: GraphQLString;
     hasCustomFields: GraphQLBoolean;
     hasAttachments: GraphQLBoolean;
