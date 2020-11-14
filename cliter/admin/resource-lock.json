@@ -231,11 +231,11 @@
         },
         {
             "path": "src/@hades/admin/resource/domain/resource.aggregate.ts",
-            "integrity": "sha1:8a0fc418168c3dd556d7a3750470d99da6e12148"
+            "integrity": "sha1:156c300a0a3c769c7ec8b871a6f503fb0dd5fc14"
         },
         {
             "path": "src/@hades/admin/resource/domain/resource.mapper.ts",
-            "integrity": "sha1:75c101d3641786434abd8fd260badfc67f5509e5"
+            "integrity": "sha1:3fe467c1d243d06d4128ae6d3df58b9bec72c295"
         },
         {
             "path": "src/@hades/admin/resource/domain/resource.repository.ts",
@@ -243,7 +243,7 @@
         },
         {
             "path": "src/@hades/admin/resource/domain/resource.response.ts",
-            "integrity": "sha1:7f6c6c8ec95d8971c20ec7d5e79d1cc432226cba"
+            "integrity": "sha1:d809f9dc09850cbbd0b59f42e9c25b5b291a809f"
         },
         {
             "path": "src/@hades/admin/resource/domain/value-objects/index.ts",
@@ -259,11 +259,11 @@
         },
         {
             "path": "src/@hades/admin/resource/infrastructure/seeds/resource.seed.ts",
-            "integrity": "sha1:a9776ed37b4fcfcbe266df7d3b363557725b3b7a"
+            "integrity": "sha1:640e5142d55b4ae2d0d398f24ff37ee6ecd4250b"
         },
         {
             "path": "src/@hades/admin/resource/infrastructure/sequelize/sequelize-resource.model.ts",
-            "integrity": "sha1:12a7dce20b9dcddc4d6927de078ff3deaa57c4da"
+            "integrity": "sha1:c0416823d6a45f82b236f0e2c02457b278c9c42d"
         },
         {
             "path": "src/@hades/admin/resource/infrastructure/sequelize/sequelize-resource.repository.ts",
@@ -379,7 +379,7 @@
         },
         {
             "path": "src/apps/admin/resource/dto/resource.dto.ts",
-            "integrity": "sha1:1a0e3970c07ab311adf69ffa20ae74bf5a6476a8"
+            "integrity": "sha1:863142ca968fb8994c50bc11e70b33ae1ef9d3d6"
         },
         {
             "path": "src/apps/admin/resource/dto/create-resource.dto.ts",
@@ -391,7 +391,7 @@
         },
         {
             "path": "src/apps/admin/resource/graphql/resource.graphql",
-            "integrity": "sha1:92d3388aecec3b7447587a76edb37d9898aeb7b9"
+            "integrity": "sha1:f5832e4ff44dd56fabe2e8e24dd0b62e98123016"
         },
         {
             "path": "src/apps/admin/resource/index.ts",
@@ -479,7 +479,7 @@
         },
         {
             "path": "postman/admin.resource.postman.json",
-            "integrity": "sha1:5a59172e35dfe935c555aaf7c26a404369833d38"
+            "integrity": "sha1:288d8eacc16409dcea6494e3a2b6f240273ea9e7"
         }
     ]
 }

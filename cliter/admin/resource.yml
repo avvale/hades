@@ -25,8 +25,8 @@ aggregateProperties:
     nullable: true
     relationship: many-to-many
     relationshipSingularName: attachment_family
-    relationshipAggregate: IamAttachmentFamily
-    relationshipModulePath: iam/attachment-family
+    relationshipAggregate: AdminAttachmentFamily
+    relationshipModulePath: admin/attachment-family
     intermediateModel: AdminAttachmentFamiliesResourcesModel
     intermediateModelModuleSection: admin/attachment-family
     intermediateModelFile: attachment-families-resources

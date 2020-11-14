@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { AttachmentFamilyDto } from './../../../iam/attachment-family/dto/attachment-family.dto';
+import { AttachmentFamilyDto } from './../../../admin/attachment-family/dto/attachment-family.dto';
 
 export class ResourceDto
 {

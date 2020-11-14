@@ -14,7 +14,7 @@ import { CreatedResourceEvent } from './../application/events/created-resource.e
 import { UpdatedResourceEvent } from './../application/events/updated-resource.event';
 import { DeletedResourceEvent } from './../application/events/deleted-resource.event';
 import { IamBoundedContext } from '@hades/iam/bounded-context/domain/bounded-context.aggregate';
-import { IamAttachmentFamily } from '@hades/iam/attachment-family/domain/attachment-family.aggregate';
+import { AdminAttachmentFamily } from '@hades/admin/attachment-family/domain/attachment-family.aggregate';
 
 export class AdminResource extends AggregateRoot
 {
@@ -30,7 +30,7 @@ export class AdminResource extends AggregateRoot
 
     // eager relationship
     boundedContext: IamBoundedContext;
-    attachmentFamilies: IamAttachmentFamily[];
+    attachmentFamilies: AdminAttachmentFamily[];
 
     constructor(
         id: ResourceId,
@@ -43,7 +43,7 @@ export class AdminResource extends AggregateRoot
         updatedAt: ResourceUpdatedAt,
         deletedAt: ResourceDeletedAt,
         boundedContext?: IamBoundedContext,
-        attachmentFamilies?: IamAttachmentFamily[],
+        attachmentFamilies?: AdminAttachmentFamily[],
     )
     {
         super();
@@ -74,7 +74,7 @@ export class AdminResource extends AggregateRoot
         updatedAt: ResourceUpdatedAt,
         deletedAt: ResourceDeletedAt,
         boundedContext?: IamBoundedContext,
-        attachmentFamilies?: IamAttachmentFamily[],
+        attachmentFamilies?: AdminAttachmentFamily[],
     ): AdminResource
     {
         return new AdminResource(

@@ -1,5 +1,5 @@
 import { BoundedContextResponse } from '@hades/iam/bounded-context/domain/bounded-context.response';
-import { AttachmentFamilyResponse } from '@hades/iam/attachment-family/domain/attachment-family.response';
+import { AttachmentFamilyResponse } from '@hades/admin/attachment-family/domain/attachment-family.response';
 
 export class ResourceResponse
 {
