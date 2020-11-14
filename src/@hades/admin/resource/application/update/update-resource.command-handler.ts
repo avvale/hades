@@ -4,6 +4,7 @@ import { UpdateResourceService } from './update-resource.service';
 import {
     ResourceId,
     ResourceBoundedContextId,
+    ResourceAttachmentFamilyIds,
     ResourceName,
     ResourceHasCustomFields,
     ResourceHasAttachments,
@@ -26,6 +27,7 @@ export class UpdateResourceCommandHandler implements ICommandHandler<UpdateResou
             {
                 id: new ResourceId(command.payload.id),
                 boundedContextId: new ResourceBoundedContextId(command.payload.boundedContextId, { undefinable: true }),
+                attachmentFamilyIds: new ResourceAttachmentFamilyIds(command.payload.attachmentFamilyIds),
                 name: new ResourceName(command.payload.name, { undefinable: true }),
                 hasCustomFields: new ResourceHasCustomFields(command.payload.hasCustomFields, { undefinable: true }),
                 hasAttachments: new ResourceHasAttachments(command.payload.hasAttachments, { undefinable: true }),

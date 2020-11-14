@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { AttachmentFamilyDto } from './../../../iam/attachment-family/dto/attachment-family.dto';
 
 export class ResourceDto
 {
@@ -13,6 +14,12 @@ export class ResourceDto
         description : 'boundedContextId [input here api field description]',
     })
     boundedContextId: string;
+
+    @ApiProperty({
+        type        : [AttachmentFamilyDto],
+        description : 'attachmentFamilyIds [input here api field description]',
+    })
+    attachmentFamilies: AttachmentFamilyDto[];
 
     @ApiProperty({
         type        : String,

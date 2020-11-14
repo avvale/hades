@@ -1,0 +1,65 @@
+version: 1.0.0
+boundedContextName: admin
+moduleName: attachment-family
+moduleNames: attachment-families
+aggregateName: AdminAttachmentFamily
+hasOAuth: true
+hasTenant: true
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: resources
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: resource
+    relationshipAggregate: AdminResource
+    relationshipModulePath: admin/resource
+    intermediateTable: admin_attachment_families_resources
+    intermediateModel: AdminAttachmentFamiliesResourcesModel
+    intermediateModelModuleSection: admin/attachment-family
+    intermediateModelFile: attachment-families-resources
+  - name: width
+    type: smallint.unsigned
+    maxLength: 6
+    nullable: true
+  - name: height
+    type: smallint.unsigned
+    maxLength: 6
+    nullable: true
+  - name: fit
+    type: enum
+    enumOptions:
+      - CROP
+      - WIDTH
+      - HEIGHT
+      - WIDTH_FREE
+      - HEIGHT_FREE
+    nullable: false
+  - name: sizes
+    type: json
+    nullable: true
+  - name: quality
+    type: int.unsigned
+    maxLength: 2
+    nullable: true
+  - name: format
+    type: varchar
+    maxLength: 10
+    nullable: true
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true

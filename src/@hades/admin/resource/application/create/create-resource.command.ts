@@ -6,6 +6,7 @@ export class CreateResourceCommand
         public readonly payload: {
             id: string,
             boundedContextId: string,
+            attachmentFamilyIds?: string[],
             name: string,
             hasCustomFields: boolean,
             hasAttachments: boolean,

@@ -5,6 +5,7 @@ import { AdminModels, AdminHandlers, AdminServices, AdminRepositories, AdminSaga
 import { AdminLangControllers, AdminLangResolvers } from './lang';
 import { AdminCountryControllers, AdminCountryResolvers } from './country';
 import { AdminResourceControllers, AdminResourceResolvers } from './resource';
+import { AdminAttachmentFamilyControllers, AdminAttachmentFamilyResolvers } from './attachment-family';
 
 @Module({
     imports: [
@@ -16,7 +17,8 @@ import { AdminResourceControllers, AdminResourceResolvers } from './resource';
     controllers: [
         ...AdminLangControllers,
         ...AdminCountryControllers,
-        ...AdminResourceControllers
+        ...AdminResourceControllers,
+        ...AdminAttachmentFamilyControllers
     ],
     providers: [
         ...AdminHandlers,
@@ -25,7 +27,8 @@ import { AdminResourceControllers, AdminResourceResolvers } from './resource';
         ...AdminSagas,
         ...AdminLangResolvers,
         ...AdminCountryResolvers,
-        ...AdminResourceResolvers
+        ...AdminResourceResolvers,
+        ...AdminAttachmentFamilyResolvers
     ]
 })
 export class AdminModule {}

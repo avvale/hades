@@ -15,6 +15,12 @@ export class UpdateResourceDto
     boundedContextId: string;
 
     @ApiProperty({
+        type        : [String],
+        description : 'attachmentFamilyIds [input here api field description]',
+    })
+    attachmentFamilyIds: string[];
+
+    @ApiProperty({
         type        : String,
         description : 'name [input here api field description]',
     })

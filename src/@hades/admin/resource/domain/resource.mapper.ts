@@ -5,6 +5,7 @@ import { ResourceResponse } from './resource.response';
 import {
     ResourceId,
     ResourceBoundedContextId,
+    ResourceAttachmentFamilyIds,
     ResourceName,
     ResourceHasCustomFields,
     ResourceHasAttachments,
@@ -13,6 +14,7 @@ import {
     ResourceDeletedAt,
 } from './value-objects';
 import { BoundedContextMapper } from '@hades/iam/bounded-context/domain/bounded-context.mapper';
+import { AttachmentFamilyMapper } from '@hades/iam/attachment-family/domain/attachment-family.mapper';
 
 export class ResourceMapper implements IMapper
 {
@@ -67,6 +69,7 @@ export class ResourceMapper implements IMapper
         return AdminResource.register(
             new ResourceId(resource.id),
             new ResourceBoundedContextId(resource.boundedContextId),
+            new ResourceAttachmentFamilyIds(resource.attachmentFamilyIds),
             new ResourceName(resource.name),
             new ResourceHasCustomFields(resource.hasCustomFields),
             new ResourceHasAttachments(resource.hasAttachments),
@@ -74,6 +77,7 @@ export class ResourceMapper implements IMapper
             new ResourceUpdatedAt(resource.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
             new ResourceDeletedAt(resource.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
             this.options.eagerLoading ? new BoundedContextMapper({ eagerLoading: false }).mapModelToAggregate(resource.boundedContext) : undefined,
+            this.options.eagerLoading ? new AttachmentFamilyMapper({ eagerLoading: false }).mapModelsToAggregates(resource.attachmentFamilies) : undefined,
         );
     }
 
@@ -84,6 +88,7 @@ export class ResourceMapper implements IMapper
         return new ResourceResponse(
             resource.id.value,
             resource.boundedContextId.value,
+            resource.attachmentFamilyIds.value,
             resource.name.value,
             resource.hasCustomFields.value,
             resource.hasAttachments.value,
@@ -91,6 +96,7 @@ export class ResourceMapper implements IMapper
             resource.updatedAt.value,
             resource.deletedAt.value,
             this.options.eagerLoading ? new BoundedContextMapper({ eagerLoading: false }).mapAggregateToResponse(resource.boundedContext) : undefined,
+            this.options.eagerLoading ? new AttachmentFamilyMapper({ eagerLoading: false }).mapAggregatesToResponses(resource.attachmentFamilies) : undefined,
         );
     }
 }

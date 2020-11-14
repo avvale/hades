@@ -1,0 +1,66 @@
+enum AdminAttachmentFamilyFit {
+    CROP
+    WIDTH
+    HEIGHT
+    WIDTH_FREE
+    HEIGHT_FREE
+}
+
+type AdminAttachmentFamily
+{
+    id: ID!
+    name: GraphQLString!
+    resources: [AdminResource]
+    width: GraphQLInt
+    height: GraphQLInt
+    fit: AdminAttachmentFamilyFit!
+    sizes: JSON
+    quality: GraphQLInt
+    format: GraphQLString
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input AdminCreateAttachmentFamilyInput
+{
+    id: ID!
+    name: GraphQLString!
+    resourceIds: [ID]
+    width: GraphQLInt
+    height: GraphQLInt
+    fit: AdminAttachmentFamilyFit!
+    sizes: JSON
+    quality: GraphQLInt
+    format: GraphQLString
+}
+
+input AdminUpdateAttachmentFamilyInput
+{
+    id: ID!
+    name: GraphQLString
+    resourceIds: [ID]
+    width: GraphQLInt
+    height: GraphQLInt
+    fit: AdminAttachmentFamilyFit
+    sizes: JSON
+    quality: GraphQLInt
+    format: GraphQLString
+}
+
+type Query
+{
+    adminFindAttachmentFamily(query:QueryStatement constraint:QueryStatement): AdminAttachmentFamily
+    adminFindAttachmentFamilyById(id:ID constraint:QueryStatement): AdminAttachmentFamily
+    adminGetAttachmentFamilies(query:QueryStatement constraint:QueryStatement): [AdminAttachmentFamily]!
+    adminPaginateAttachmentFamilies(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    adminCreateAttachmentFamily(payload: AdminCreateAttachmentFamilyInput!): AdminAttachmentFamily
+    adminCreateAttachmentFamilies(payload: [AdminCreateAttachmentFamilyInput]!): Boolean!
+    adminUpdateAttachmentFamily(payload: AdminUpdateAttachmentFamilyInput! constraint:QueryStatement): AdminAttachmentFamily
+    adminDeleteAttachmentFamilyById(id: ID! constraint:QueryStatement): AdminAttachmentFamily
+    adminDeleteAttachmentFamilies(query:QueryStatement constraint:QueryStatement): [AdminAttachmentFamily]!
+}

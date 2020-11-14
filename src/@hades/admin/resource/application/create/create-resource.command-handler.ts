@@ -4,6 +4,7 @@ import { CreateResourceService } from './create-resource.service';
 import {
     ResourceId,
     ResourceBoundedContextId,
+    ResourceAttachmentFamilyIds,
     ResourceName,
     ResourceHasCustomFields,
     ResourceHasAttachments,
@@ -26,6 +27,7 @@ export class CreateResourceCommandHandler implements ICommandHandler<CreateResou
             {
                 id: new ResourceId(command.payload.id),
                 boundedContextId: new ResourceBoundedContextId(command.payload.boundedContextId),
+                attachmentFamilyIds: new ResourceAttachmentFamilyIds(command.payload.attachmentFamilyIds),
                 name: new ResourceName(command.payload.name),
                 hasCustomFields: new ResourceHasCustomFields(command.payload.hasCustomFields),
                 hasAttachments: new ResourceHasAttachments(command.payload.hasAttachments),

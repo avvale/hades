@@ -2,6 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import {
     ResourceId,
     ResourceBoundedContextId,
+    ResourceAttachmentFamilyIds,
     ResourceName,
     ResourceHasCustomFields,
     ResourceHasAttachments,
@@ -13,11 +14,13 @@ import { CreatedResourceEvent } from './../application/events/created-resource.e
 import { UpdatedResourceEvent } from './../application/events/updated-resource.event';
 import { DeletedResourceEvent } from './../application/events/deleted-resource.event';
 import { IamBoundedContext } from '@hades/iam/bounded-context/domain/bounded-context.aggregate';
+import { IamAttachmentFamily } from '@hades/iam/attachment-family/domain/attachment-family.aggregate';
 
 export class AdminResource extends AggregateRoot
 {
     id: ResourceId;
     boundedContextId: ResourceBoundedContextId;
+    attachmentFamilyIds: ResourceAttachmentFamilyIds;
     name: ResourceName;
     hasCustomFields: ResourceHasCustomFields;
     hasAttachments: ResourceHasAttachments;
@@ -27,10 +30,12 @@ export class AdminResource extends AggregateRoot
 
     // eager relationship
     boundedContext: IamBoundedContext;
+    attachmentFamilies: IamAttachmentFamily[];
 
     constructor(
         id: ResourceId,
         boundedContextId: ResourceBoundedContextId,
+        attachmentFamilyIds: ResourceAttachmentFamilyIds,
         name: ResourceName,
         hasCustomFields: ResourceHasCustomFields,
         hasAttachments: ResourceHasAttachments,
@@ -38,12 +43,14 @@ export class AdminResource extends AggregateRoot
         updatedAt: ResourceUpdatedAt,
         deletedAt: ResourceDeletedAt,
         boundedContext?: IamBoundedContext,
+        attachmentFamilies?: IamAttachmentFamily[],
     )
     {
         super();
 
         this.id = id;
         this.boundedContextId = boundedContextId;
+        this.attachmentFamilyIds = attachmentFamilyIds;
         this.name = name;
         this.hasCustomFields = hasCustomFields;
         this.hasAttachments = hasAttachments;
@@ -53,11 +60,13 @@ export class AdminResource extends AggregateRoot
 
         // eager relationship
         this.boundedContext = boundedContext;
+        this.attachmentFamilies = attachmentFamilies;
     }
 
     static register (
         id: ResourceId,
         boundedContextId: ResourceBoundedContextId,
+        attachmentFamilyIds: ResourceAttachmentFamilyIds,
         name: ResourceName,
         hasCustomFields: ResourceHasCustomFields,
         hasAttachments: ResourceHasAttachments,
@@ -65,11 +74,13 @@ export class AdminResource extends AggregateRoot
         updatedAt: ResourceUpdatedAt,
         deletedAt: ResourceDeletedAt,
         boundedContext?: IamBoundedContext,
+        attachmentFamilies?: IamAttachmentFamily[],
     ): AdminResource
     {
         return new AdminResource(
             id,
             boundedContextId,
+            attachmentFamilyIds,
             name,
             hasCustomFields,
             hasAttachments,
@@ -77,6 +88,7 @@ export class AdminResource extends AggregateRoot
             updatedAt,
             deletedAt,
             boundedContext,
+            attachmentFamilies,
         );
     }
 
@@ -86,6 +98,7 @@ export class AdminResource extends AggregateRoot
             new CreatedResourceEvent(
                 resource.id.value,
                 resource.boundedContextId.value,
+                resource.attachmentFamilyIds?.value,
                 resource.name.value,
                 resource.hasCustomFields.value,
                 resource.hasAttachments.value,
@@ -102,6 +115,7 @@ export class AdminResource extends AggregateRoot
             new UpdatedResourceEvent(
                 resource.id.value,
                 resource.boundedContextId?.value,
+                resource.attachmentFamilyIds?.value,
                 resource.name?.value,
                 resource.hasCustomFields?.value,
                 resource.hasAttachments?.value,
@@ -118,6 +132,7 @@ export class AdminResource extends AggregateRoot
             new DeletedResourceEvent(
                 resource.id.value,
                 resource.boundedContextId.value,
+                resource.attachmentFamilyIds?.value,
                 resource.name.value,
                 resource.hasCustomFields.value,
                 resource.hasAttachments.value,
@@ -133,6 +148,7 @@ export class AdminResource extends AggregateRoot
         return {
             id: this.id.value,
             boundedContextId: this.boundedContextId.value,
+            attachmentFamilyIds: this.attachmentFamilyIds?.value,
             name: this.name.value,
             hasCustomFields: this.hasCustomFields.value,
             hasAttachments: this.hasAttachments.value,
@@ -142,6 +158,7 @@ export class AdminResource extends AggregateRoot
 
             // eager relationship
             boundedContext: this.boundedContext?.toDTO(),
+            attachmentFamilies: this.attachmentFamilies?.map(item => item.toDTO()),
         }
     }
 }

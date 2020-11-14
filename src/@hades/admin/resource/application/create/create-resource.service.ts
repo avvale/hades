@@ -3,6 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import {
     ResourceId,
     ResourceBoundedContextId,
+    ResourceAttachmentFamilyIds,
     ResourceName,
     ResourceHasCustomFields,
     ResourceHasAttachments,
@@ -25,6 +26,7 @@ export class CreateResourceService
         payload: {
             id: ResourceId,
             boundedContextId: ResourceBoundedContextId,
+            attachmentFamilyIds: ResourceAttachmentFamilyIds,
             name: ResourceName,
             hasCustomFields: ResourceHasCustomFields,
             hasAttachments: ResourceHasAttachments,
@@ -35,6 +37,7 @@ export class CreateResourceService
         const resource = AdminResource.register(
             payload.id,
             payload.boundedContextId,
+            payload.attachmentFamilyIds,
             payload.name,
             payload.hasCustomFields,
             payload.hasAttachments,

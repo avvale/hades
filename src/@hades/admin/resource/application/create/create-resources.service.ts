@@ -3,6 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import {
     ResourceId,
     ResourceBoundedContextId,
+    ResourceAttachmentFamilyIds,
     ResourceName,
     ResourceHasCustomFields,
     ResourceHasAttachments,
@@ -26,6 +27,7 @@ export class CreateResourcesService
         resources: {
             id: ResourceId,
             boundedContextId: ResourceBoundedContextId,
+            attachmentFamilyIds: ResourceAttachmentFamilyIds,
             name: ResourceName,
             hasCustomFields: ResourceHasCustomFields,
             hasAttachments: ResourceHasAttachments,
@@ -36,6 +38,7 @@ export class CreateResourcesService
         const aggregateResources = resources.map(resource => AdminResource.register(
             resource.id,
             resource.boundedContextId,
+            resource.attachmentFamilyIds,
             resource.name,
             resource.hasCustomFields,
             resource.hasAttachments,
