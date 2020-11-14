@@ -31,6 +31,7 @@ import { DeleteAttachmentFamiliesService } from './application/delete/delete-att
 
 // models
 export { AdminAttachmentFamilyModel } from './infrastructure/sequelize/sequelize-attachment-family.model';
+export { AdminAttachmentFamiliesResourcesModel } from './infrastructure/sequelize/sequelize-attachment-families-resources.model';
 
 // repository
 export { IAttachmentFamilyRepository } from './domain/attachment-family.repository';

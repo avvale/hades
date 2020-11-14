@@ -7,6 +7,7 @@ import { CreateAttachmentFamilyService } from './create-attachment-family.servic
 import {
     AttachmentFamilyId,
     AttachmentFamilyName,
+    AttachmentFamilyResourceIds,
     AttachmentFamilyWidth,
     AttachmentFamilyHeight,
     AttachmentFamilyFit,
@@ -62,6 +63,7 @@ describe('CreateAttachmentFamilyService', () =>
             expect(await service.main(
                 new AttachmentFamilyId(attachmentFamilies[0].id),
                 new AttachmentFamilyName(attachmentFamilies[0].name),
+                new AttachmentFamilyResourceIds(attachmentFamilies[0].resourceIds),
                 new AttachmentFamilyWidth(attachmentFamilies[0].width),
                 new AttachmentFamilyHeight(attachmentFamilies[0].height),
                 new AttachmentFamilyFit(attachmentFamilies[0].fit),

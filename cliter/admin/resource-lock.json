@@ -3,27 +3,27 @@
     "files": [
         {
             "path": "src/@hades/admin/resource/application/create/create-resource.command-handler.ts",
-            "integrity": "sha1:bd563237315096e71b91182b2ea160dda5047eca"
+            "integrity": "sha1:3de9139beb9f726a8aaeab07994d1fd01b0038aa"
         },
         {
             "path": "src/@hades/admin/resource/application/create/create-resource.command.handler.spec.ts",
-            "integrity": "sha1:66dae9fdf5a946972366b248bcab993222fe3644"
+            "integrity": "sha1:b63fe6ccd1e6a882d28d342162a1fe725bc2c411"
         },
         {
             "path": "src/@hades/admin/resource/application/create/create-resource.command.ts",
-            "integrity": "sha1:d9d9b73d139a25ecf41aaa2aaf92067e0d76785f"
+            "integrity": "sha1:39c5bde512e57e0c5081f21f3f2210ed6066b371"
         },
         {
             "path": "src/@hades/admin/resource/application/create/create-resource.service.spec.ts",
-            "integrity": "sha1:e4f6a24583ec96a8669b42c225e79851c4765164"
+            "integrity": "sha1:fb4c7f5d069d3f797bf8c695838661dbda7da216"
         },
         {
             "path": "src/@hades/admin/resource/application/create/create-resource.service.ts",
-            "integrity": "sha1:246b144d49e9df0d952c3238796a11dc2524d89e"
+            "integrity": "sha1:2c8176cb1e90ab3fa3c6d36076516da2a488b6c5"
         },
         {
             "path": "src/@hades/admin/resource/application/create/create-resources.command-handler.ts",
-            "integrity": "sha1:d2f07e6142d221a5d58e50537e930247462b3c26"
+            "integrity": "sha1:3b78c00be439d794ed8c4a4cfc85de1141db3cf1"
         },
         {
             "path": "src/@hades/admin/resource/application/create/create-resources.command.handler.spec.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/@hades/admin/resource/application/create/create-resources.command.ts",
-            "integrity": "sha1:0d803a0c9f99191b7119ec7d12de55ce7e688807"
+            "integrity": "sha1:f9fd892846ce200996200da91243fb7ec968a844"
         },
         {
             "path": "src/@hades/admin/resource/application/create/create-resources.service.spec.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/@hades/admin/resource/application/create/create-resources.service.ts",
-            "integrity": "sha1:59982ff067560ad9f38d0c32cddf826419b5bbd0"
+            "integrity": "sha1:4cceb1837ef92a2172a7b511b023c9ce2aae97a7"
         },
         {
             "path": "src/@hades/admin/resource/application/delete/delete-resource-by-id.command-handler.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/@hades/admin/resource/application/events/add-resources-context.event.ts",
-            "integrity": "sha1:2b1079838ebcd65efa6f4ba7e9e6312a159d8db5"
+            "integrity": "sha1:f19939220d27821683639cddcee02c28ebe2b4d5"
         },
         {
             "path": "src/@hades/admin/resource/application/events/created-resource.event-handler.ts",
@@ -91,7 +91,7 @@
         },
         {
             "path": "src/@hades/admin/resource/application/events/created-resource.event.ts",
-            "integrity": "sha1:1805283f9a642723b26c246209fafb06b8d996d5"
+            "integrity": "sha1:7107efd8f1ac6f8a84e9713e77815ea2220c193c"
         },
         {
             "path": "src/@hades/admin/resource/application/events/created-resources.event-handler.ts",
@@ -107,7 +107,7 @@
         },
         {
             "path": "src/@hades/admin/resource/application/events/deleted-resource.event.ts",
-            "integrity": "sha1:666d4d461c08d6514955da64559740d77400a7bd"
+            "integrity": "sha1:ef5153d0cc6e74257f90caf5cf4f0e311bfbdc8f"
         },
         {
             "path": "src/@hades/admin/resource/application/events/deleted-resources.event-handler.ts",
@@ -123,7 +123,7 @@
         },
         {
             "path": "src/@hades/admin/resource/application/events/updated-resource.event.ts",
-            "integrity": "sha1:63728ca914f27a2ef5efc45b8d40d63e6b57cc7b"
+            "integrity": "sha1:3c213625ea0a48034c3ec5fbfa20ebe50a7f1aa2"
         },
         {
             "path": "src/@hades/admin/resource/application/find/find-resource-by-id.query-handler.ts",
@@ -211,31 +211,31 @@
         },
         {
             "path": "src/@hades/admin/resource/application/update/update-resource.command-handler.ts",
-            "integrity": "sha1:b222e54bf7211dd6f33ea397114b8f667137ce5a"
+            "integrity": "sha1:286a6f04dd025920cdcc28795d65bd6190992a76"
         },
         {
             "path": "src/@hades/admin/resource/application/update/update-resource.command.handler.spec.ts",
-            "integrity": "sha1:bdec77a0129b5a9d387761335db72ce673816911"
+            "integrity": "sha1:5faaa7e38abf88e956e024bffc1821158dc7bcf8"
         },
         {
             "path": "src/@hades/admin/resource/application/update/update-resource.command.ts",
-            "integrity": "sha1:4fc5265988579cb15063c016d236a54bbe776ce3"
+            "integrity": "sha1:7c955b1378c3ce2171f8d492cae073f8f04f5fad"
         },
         {
             "path": "src/@hades/admin/resource/application/update/update-resource.service.spec.ts",
-            "integrity": "sha1:0ddf4b350ab9a70a33f1a9579a1eb1376c9651ab"
+            "integrity": "sha1:93684cfe76e1ca9bf9433ea82ee83cec28188ead"
         },
         {
             "path": "src/@hades/admin/resource/application/update/update-resource.service.ts",
-            "integrity": "sha1:44bc63e51adeb897923f8725c09fe4a46ff59308"
+            "integrity": "sha1:2d7443ef694b7a3b0d7d0e573e341724ac332de6"
         },
         {
             "path": "src/@hades/admin/resource/domain/resource.aggregate.ts",
-            "integrity": "sha1:36eaaea4105e8e6ec36d07306fa3b15665ad90b4"
+            "integrity": "sha1:8a0fc418168c3dd556d7a3750470d99da6e12148"
         },
         {
             "path": "src/@hades/admin/resource/domain/resource.mapper.ts",
-            "integrity": "sha1:aeb644da4d7508944f5b13dd2de3b0f0c4adfbfc"
+            "integrity": "sha1:75c101d3641786434abd8fd260badfc67f5509e5"
         },
         {
             "path": "src/@hades/admin/resource/domain/resource.repository.ts",
@@ -243,11 +243,11 @@
         },
         {
             "path": "src/@hades/admin/resource/domain/resource.response.ts",
-            "integrity": "sha1:9c23216b18d6861970a33f3300f336a8d79efb73"
+            "integrity": "sha1:7f6c6c8ec95d8971c20ec7d5e79d1cc432226cba"
         },
         {
             "path": "src/@hades/admin/resource/domain/value-objects/index.ts",
-            "integrity": "sha1:06ff6ad31d0fd21615e81aa59cbabe20bcfeb79c"
+            "integrity": "sha1:8e38b32c563465e6f110c9b0a4de1b7e6e177481"
         },
         {
             "path": "src/@hades/admin/resource/index.ts",
@@ -255,19 +255,19 @@
         },
         {
             "path": "src/@hades/admin/resource/infrastructure/mock/mock-resource.repository.ts",
-            "integrity": "sha1:66c62380ba6b1f4388bf0d16460edfb1af2629a0"
+            "integrity": "sha1:62537a64d15c1d4b163b62fb1b81b49a976513a3"
         },
         {
             "path": "src/@hades/admin/resource/infrastructure/seeds/resource.seed.ts",
-            "integrity": "sha1:f2c859f1d88be68a64ad2fa4428f30703128a7a6"
+            "integrity": "sha1:a9776ed37b4fcfcbe266df7d3b363557725b3b7a"
         },
         {
             "path": "src/@hades/admin/resource/infrastructure/sequelize/sequelize-resource.model.ts",
-            "integrity": "sha1:c1c6d3089eceea408d5f2f436ae3c282b2a17153"
+            "integrity": "sha1:12a7dce20b9dcddc4d6927de078ff3deaa57c4da"
         },
         {
             "path": "src/@hades/admin/resource/infrastructure/sequelize/sequelize-resource.repository.ts",
-            "integrity": "sha1:8ebe9e3685d3cbec841f717904d4e7b73eb63973"
+            "integrity": "sha1:b8d197981801686ef6c91e6f702d7dd6ade5b297"
         },
         {
             "path": "src/@hades/admin/resource/domain/value-objects/resource-id.ts",
@@ -276,6 +276,10 @@
         {
             "path": "src/@hades/admin/resource/domain/value-objects/resource-bounded-context-id.ts",
             "integrity": "sha1:7f4c95cb6173eb15ed55e9d93908fe051813825a"
+        },
+        {
+            "path": "src/@hades/admin/resource/domain/value-objects/resource-attachment-family-ids.ts",
+            "integrity": "sha1:c2f68bcdf8f6abe5f72bcab7c53768b78307b226"
         },
         {
             "path": "src/@hades/admin/resource/domain/value-objects/resource-name.ts",
@@ -375,19 +379,19 @@
         },
         {
             "path": "src/apps/admin/resource/dto/resource.dto.ts",
-            "integrity": "sha1:1dbc30930e2b87386bb7c5b66efd1577312fcac2"
+            "integrity": "sha1:1a0e3970c07ab311adf69ffa20ae74bf5a6476a8"
         },
         {
             "path": "src/apps/admin/resource/dto/create-resource.dto.ts",
-            "integrity": "sha1:296e9da5311f66638b701fe92456f45dc44a31a7"
+            "integrity": "sha1:d0a3a6c2dfe09f53ee5bf9465e2e06926f5dd108"
         },
         {
             "path": "src/apps/admin/resource/dto/update-resource.dto.ts",
-            "integrity": "sha1:79aeed759508f6a0d9be18aa8aa4eccdc5850730"
+            "integrity": "sha1:4db78e9e71a716612d19a459f4f56daf713243c5"
         },
         {
             "path": "src/apps/admin/resource/graphql/resource.graphql",
-            "integrity": "sha1:e84cd10d10770477582b40afe28a3a954a86cc7e"
+            "integrity": "sha1:92d3388aecec3b7447587a76edb37d9898aeb7b9"
         },
         {
             "path": "src/apps/admin/resource/index.ts",
@@ -475,7 +479,7 @@
         },
         {
             "path": "postman/admin.resource.postman.json",
-            "integrity": "sha1:efeafd72c7a9620532fcfdea6b87aa0b1248ab0b"
+            "integrity": "sha1:5a59172e35dfe935c555aaf7c26a404369833d38"
         }
     ]
 }

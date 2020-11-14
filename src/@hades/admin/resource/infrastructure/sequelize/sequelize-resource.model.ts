@@ -2,6 +2,8 @@ import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, Ha
 import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
 import { DataTypes } from 'sequelize';
 import { IamBoundedContextModel } from '@hades/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model';
+import { IamAttachmentFamilyModel } from '@hades/iam/attachment-family/infrastructure/sequelize/sequelize-attachment-family.model';
+import { AdminAttachmentFamiliesResourcesModel } from '@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-families-resources.model';
 
 @Table({ modelName: 'admin_resource', freezeTableName: true, timestamps: false })
 export class AdminResourceModel extends Model<AdminResourceModel>
@@ -29,6 +31,10 @@ export class AdminResourceModel extends Model<AdminResourceModel>
 
     @BelongsTo(() => IamBoundedContextModel)
     boundedContext: IamBoundedContextModel;
+
+
+    @BelongsToMany(() => IamAttachmentFamilyModel, () => AdminAttachmentFamiliesResourcesModel)
+    attachment_families: IamAttachmentFamilyModel[];
 
     @Column({
         field: 'name',

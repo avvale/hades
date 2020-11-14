@@ -26,6 +26,7 @@ export class AddAttachmentFamiliesContextEvent extends AggregateRoot
                     new CreatedAttachmentFamilyEvent(
                         attachmentFamily.id.value,
                         attachmentFamily.name.value,
+                        attachmentFamily.resourceIds?.value,
                         attachmentFamily.width?.value,
                         attachmentFamily.height?.value,
                         attachmentFamily.fit.value,
@@ -49,6 +50,7 @@ export class AddAttachmentFamiliesContextEvent extends AggregateRoot
                     new DeletedAttachmentFamilyEvent(
                         attachmentFamily.id.value,
                         attachmentFamily.name.value,
+                        attachmentFamily.resourceIds?.value,
                         attachmentFamily.width?.value,
                         attachmentFamily.height?.value,
                         attachmentFamily.fit.value,

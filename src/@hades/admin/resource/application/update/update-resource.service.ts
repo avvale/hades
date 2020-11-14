@@ -5,6 +5,7 @@ import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import {
     ResourceId,
     ResourceBoundedContextId,
+    ResourceAttachmentFamilyIds,
     ResourceName,
     ResourceHasCustomFields,
     ResourceHasAttachments,
@@ -27,6 +28,7 @@ export class UpdateResourceService
         payload: {
             id: ResourceId,
             boundedContextId?: ResourceBoundedContextId,
+            attachmentFamilyIds?: ResourceAttachmentFamilyIds,
             name?: ResourceName,
             hasCustomFields?: ResourceHasCustomFields,
             hasAttachments?: ResourceHasAttachments,
@@ -39,6 +41,7 @@ export class UpdateResourceService
         const resource = AdminResource.register(
             payload.id,
             payload.boundedContextId,
+            payload.attachmentFamilyIds,
             payload.name,
             payload.hasCustomFields,
             payload.hasAttachments,

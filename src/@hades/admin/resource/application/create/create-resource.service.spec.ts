@@ -7,6 +7,7 @@ import { CreateResourceService } from './create-resource.service';
 import {
     ResourceId,
     ResourceBoundedContextId,
+    ResourceAttachmentFamilyIds,
     ResourceName,
     ResourceHasCustomFields,
     ResourceHasAttachments,
@@ -59,6 +60,7 @@ describe('CreateResourceService', () =>
             expect(await service.main(
                 new ResourceId(resources[0].id),
                 new ResourceBoundedContextId(resources[0].boundedContextId),
+                new ResourceAttachmentFamilyIds(resources[0].attachmentFamilyIds),
                 new ResourceName(resources[0].name),
                 new ResourceHasCustomFields(resources[0].hasCustomFields),
                 new ResourceHasAttachments(resources[0].hasAttachments),

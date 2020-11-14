@@ -5,6 +5,7 @@ import { IAttachmentFamilyRepository } from '@hades/admin/attachment-family/doma
 import {
     AttachmentFamilyId,
     AttachmentFamilyName,
+    AttachmentFamilyResourceIds,
     AttachmentFamilyWidth,
     AttachmentFamilyHeight,
     AttachmentFamilyFit,
@@ -51,6 +52,7 @@ export class MockAttachmentFamilyRepository extends MockRepository<AdminAttachme
             this.collectionSource.push(AdminAttachmentFamily.register(
                     new AttachmentFamilyId(itemCollection.id),
                     new AttachmentFamilyName(itemCollection.name),
+                    new AttachmentFamilyResourceIds(itemCollection.resourceIds),
                     new AttachmentFamilyWidth(itemCollection.width),
                     new AttachmentFamilyHeight(itemCollection.height),
                     new AttachmentFamilyFit(itemCollection.fit),

@@ -2,6 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import {
     AttachmentFamilyId,
     AttachmentFamilyName,
+    AttachmentFamilyResourceIds,
     AttachmentFamilyWidth,
     AttachmentFamilyHeight,
     AttachmentFamilyFit,
@@ -15,11 +16,13 @@ import {
 import { CreatedAttachmentFamilyEvent } from './../application/events/created-attachment-family.event';
 import { UpdatedAttachmentFamilyEvent } from './../application/events/updated-attachment-family.event';
 import { DeletedAttachmentFamilyEvent } from './../application/events/deleted-attachment-family.event';
+import { AdminResource } from '@hades/admin/resource/domain/resource.aggregate';
 
 export class AdminAttachmentFamily extends AggregateRoot
 {
     id: AttachmentFamilyId;
     name: AttachmentFamilyName;
+    resourceIds: AttachmentFamilyResourceIds;
     width: AttachmentFamilyWidth;
     height: AttachmentFamilyHeight;
     fit: AttachmentFamilyFit;
@@ -31,10 +34,12 @@ export class AdminAttachmentFamily extends AggregateRoot
     deletedAt: AttachmentFamilyDeletedAt;
 
     // eager relationship
+    resources: AdminResource[];
 
     constructor(
         id: AttachmentFamilyId,
         name: AttachmentFamilyName,
+        resourceIds: AttachmentFamilyResourceIds,
         width: AttachmentFamilyWidth,
         height: AttachmentFamilyHeight,
         fit: AttachmentFamilyFit,
@@ -44,12 +49,14 @@ export class AdminAttachmentFamily extends AggregateRoot
         createdAt: AttachmentFamilyCreatedAt,
         updatedAt: AttachmentFamilyUpdatedAt,
         deletedAt: AttachmentFamilyDeletedAt,
+        resources?: AdminResource[],
     )
     {
         super();
 
         this.id = id;
         this.name = name;
+        this.resourceIds = resourceIds;
         this.width = width;
         this.height = height;
         this.fit = fit;
@@ -61,11 +68,13 @@ export class AdminAttachmentFamily extends AggregateRoot
         this.deletedAt = deletedAt;
 
         // eager relationship
+        this.resources = resources;
     }
 
     static register (
         id: AttachmentFamilyId,
         name: AttachmentFamilyName,
+        resourceIds: AttachmentFamilyResourceIds,
         width: AttachmentFamilyWidth,
         height: AttachmentFamilyHeight,
         fit: AttachmentFamilyFit,
@@ -75,11 +84,13 @@ export class AdminAttachmentFamily extends AggregateRoot
         createdAt: AttachmentFamilyCreatedAt,
         updatedAt: AttachmentFamilyUpdatedAt,
         deletedAt: AttachmentFamilyDeletedAt,
+        resources?: AdminResource[],
     ): AdminAttachmentFamily
     {
         return new AdminAttachmentFamily(
             id,
             name,
+            resourceIds,
             width,
             height,
             fit,
@@ -89,6 +100,7 @@ export class AdminAttachmentFamily extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
+            resources,
         );
     }
 
@@ -98,6 +110,7 @@ export class AdminAttachmentFamily extends AggregateRoot
             new CreatedAttachmentFamilyEvent(
                 attachmentFamily.id.value,
                 attachmentFamily.name.value,
+                attachmentFamily.resourceIds?.value,
                 attachmentFamily.width?.value,
                 attachmentFamily.height?.value,
                 attachmentFamily.fit.value,
@@ -117,6 +130,7 @@ export class AdminAttachmentFamily extends AggregateRoot
             new UpdatedAttachmentFamilyEvent(
                 attachmentFamily.id.value,
                 attachmentFamily.name?.value,
+                attachmentFamily.resourceIds?.value,
                 attachmentFamily.width?.value,
                 attachmentFamily.height?.value,
                 attachmentFamily.fit?.value,
@@ -136,6 +150,7 @@ export class AdminAttachmentFamily extends AggregateRoot
             new DeletedAttachmentFamilyEvent(
                 attachmentFamily.id.value,
                 attachmentFamily.name.value,
+                attachmentFamily.resourceIds?.value,
                 attachmentFamily.width?.value,
                 attachmentFamily.height?.value,
                 attachmentFamily.fit.value,
@@ -154,6 +169,7 @@ export class AdminAttachmentFamily extends AggregateRoot
         return {
             id: this.id.value,
             name: this.name.value,
+            resourceIds: this.resourceIds?.value,
             width: this.width?.value,
             height: this.height?.value,
             fit: this.fit.value,
@@ -165,6 +181,7 @@ export class AdminAttachmentFamily extends AggregateRoot
             deletedAt: this.deletedAt?.value,
 
             // eager relationship
+            resources: this.resources?.map(item => item.toDTO()),
         }
     }
 }

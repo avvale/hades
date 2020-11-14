@@ -26,6 +26,7 @@ export class AddResourcesContextEvent extends AggregateRoot
                     new CreatedResourceEvent(
                         resource.id.value,
                         resource.boundedContextId.value,
+                        resource.attachmentFamilyIds?.value,
                         resource.name.value,
                         resource.hasCustomFields.value,
                         resource.hasAttachments.value,
@@ -46,6 +47,7 @@ export class AddResourcesContextEvent extends AggregateRoot
                     new DeletedResourceEvent(
                         resource.id.value,
                         resource.boundedContextId.value,
+                        resource.attachmentFamilyIds?.value,
                         resource.name.value,
                         resource.hasCustomFields.value,
                         resource.hasAttachments.value,

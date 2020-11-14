@@ -7,6 +7,7 @@ export class UpdateAttachmentFamilyCommand
         public readonly payload: {
             id: string,
             name?: string,
+            resourceIds?: string[],
             width?: number,
             height?: number,
             fit?: string,

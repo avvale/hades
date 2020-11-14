@@ -6,6 +6,7 @@ export class CreateAttachmentFamilyCommand
         public readonly payload: {
             id: string,
             name: string,
+            resourceIds?: string[],
             width?: number,
             height?: number,
             fit: string,

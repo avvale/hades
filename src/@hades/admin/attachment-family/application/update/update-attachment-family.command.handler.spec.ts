@@ -42,6 +42,7 @@ describe('UpdateAttachmentFamilyCommandHandler', () =>
                 new UpdateAttachmentFamilyCommand(
                     attachmentFamilies[0].id,
                     attachmentFamilies[0].name,
+                    attachmentFamilies[0].resourceIds,
                     attachmentFamilies[0].width,
                     attachmentFamilies[0].height,
                     attachmentFamilies[0].fit,

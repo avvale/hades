@@ -15,6 +15,17 @@ aggregateProperties:
     type: varchar
     maxLength: 255
     nullable: false
+  - name: resources
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: resource
+    relationshipAggregate: AdminResource
+    relationshipModulePath: admin/resource
+    intermediateTable: admin_attachment_families_resources
+    intermediateModel: AdminAttachmentFamiliesResourcesModel
+    intermediateModelModuleSection: admin/attachment-family
+    intermediateModelFile: attachment-families-resources
   - name: width
     type: smallint.unsigned
     maxLength: 6

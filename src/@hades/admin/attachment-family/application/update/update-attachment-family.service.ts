@@ -5,6 +5,7 @@ import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
 import {
     AttachmentFamilyId,
     AttachmentFamilyName,
+    AttachmentFamilyResourceIds,
     AttachmentFamilyWidth,
     AttachmentFamilyHeight,
     AttachmentFamilyFit,
@@ -30,6 +31,7 @@ export class UpdateAttachmentFamilyService
         payload: {
             id: AttachmentFamilyId,
             name?: AttachmentFamilyName,
+            resourceIds?: AttachmentFamilyResourceIds,
             width?: AttachmentFamilyWidth,
             height?: AttachmentFamilyHeight,
             fit?: AttachmentFamilyFit,
@@ -45,6 +47,7 @@ export class UpdateAttachmentFamilyService
         const attachmentFamily = AdminAttachmentFamily.register(
             payload.id,
             payload.name,
+            payload.resourceIds,
             payload.width,
             payload.height,
             payload.fit,

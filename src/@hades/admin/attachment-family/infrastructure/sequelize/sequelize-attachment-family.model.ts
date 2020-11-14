@@ -1,6 +1,8 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique } from 'sequelize-typescript';
 import { UnderscoredIndex} from '@hades/shared/infrastructure/persistence/sequelize/decorators/undescored-index.decorator';
 import { DataTypes } from 'sequelize';
+import { AdminResourceModel } from '@hades/admin/resource/infrastructure/sequelize/sequelize-resource.model';
+import { AdminAttachmentFamiliesResourcesModel } from '@hades/admin/attachment-family/infrastructure/sequelize/sequelize-attachment-families-resources.model';
 
 @Table({ modelName: 'admin_attachment_family', freezeTableName: true, timestamps: false })
 export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel>
@@ -19,6 +21,10 @@ export class AdminAttachmentFamilyModel extends Model<AdminAttachmentFamilyModel
         type: DataTypes.STRING(255),
     })
     name: string;
+
+
+    @BelongsToMany(() => AdminResourceModel, () => AdminAttachmentFamiliesResourcesModel)
+    resources: AdminResourceModel[];
 
     @Column({
         field: 'width',

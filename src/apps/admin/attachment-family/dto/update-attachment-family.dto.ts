@@ -15,6 +15,12 @@ export class UpdateAttachmentFamilyDto
     name: string;
 
     @ApiProperty({
+        type        : [String],
+        description : 'resourceIds [input here api field description]',
+    })
+    resourceIds: string[];
+
+    @ApiProperty({
         type        : Number,
         description : 'width [input here api field description]',
     })

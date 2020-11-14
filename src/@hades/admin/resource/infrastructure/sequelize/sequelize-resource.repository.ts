@@ -20,4 +20,18 @@ export class SequelizeResourceRepository extends SequelizeRepository<AdminResour
     ) {
         super();
     }
+
+    // hook called after create aggregate
+    async createdAggregateHook(aggregate: AdminResource, model: AdminResourceModel)
+    {
+        // add many to many relation
+        if (aggregate.attachmentFamilyIds.length > 0) await model.$add('attachmentFamilies', aggregate.attachmentFamilyIds.value);
+    }
+
+    // hook called after create aggregate
+    async updatedAggregateHook(aggregate: AdminResource, model: AdminResourceModel)
+    {
+        // set many to many relation
+        if (aggregate.attachmentFamilyIds.isArray()) await model.$set('attachmentFamilies', aggregate.attachmentFamilyIds.value);
+    }
 }

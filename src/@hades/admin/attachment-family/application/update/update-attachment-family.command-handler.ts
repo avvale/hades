@@ -4,6 +4,7 @@ import { UpdateAttachmentFamilyService } from './update-attachment-family.servic
 import {
     AttachmentFamilyId,
     AttachmentFamilyName,
+    AttachmentFamilyResourceIds,
     AttachmentFamilyWidth,
     AttachmentFamilyHeight,
     AttachmentFamilyFit,
@@ -29,6 +30,7 @@ export class UpdateAttachmentFamilyCommandHandler implements ICommandHandler<Upd
             {
                 id: new AttachmentFamilyId(command.payload.id),
                 name: new AttachmentFamilyName(command.payload.name, { undefinable: true }),
+                resourceIds: new AttachmentFamilyResourceIds(command.payload.resourceIds),
                 width: new AttachmentFamilyWidth(command.payload.width),
                 height: new AttachmentFamilyHeight(command.payload.height),
                 fit: new AttachmentFamilyFit(command.payload.fit, { undefinable: true }),

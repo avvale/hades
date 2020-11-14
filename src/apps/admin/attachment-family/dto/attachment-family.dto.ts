@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ResourceDto } from './../../../admin/resource/dto/resource.dto';
 
 export class AttachmentFamilyDto
 {
@@ -13,6 +14,12 @@ export class AttachmentFamilyDto
         description : 'name [input here api field description]',
     })
     name: string;
+
+    @ApiProperty({
+        type        : [ResourceDto],
+        description : 'resourceIds [input here api field description]',
+    })
+    resources: ResourceDto[];
 
     @ApiProperty({
         type        : Number,

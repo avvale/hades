@@ -3,6 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import {
     AttachmentFamilyId,
     AttachmentFamilyName,
+    AttachmentFamilyResourceIds,
     AttachmentFamilyWidth,
     AttachmentFamilyHeight,
     AttachmentFamilyFit,
@@ -28,6 +29,7 @@ export class CreateAttachmentFamilyService
         payload: {
             id: AttachmentFamilyId,
             name: AttachmentFamilyName,
+            resourceIds: AttachmentFamilyResourceIds,
             width: AttachmentFamilyWidth,
             height: AttachmentFamilyHeight,
             fit: AttachmentFamilyFit,
@@ -41,6 +43,7 @@ export class CreateAttachmentFamilyService
         const attachmentFamily = AdminAttachmentFamily.register(
             payload.id,
             payload.name,
+            payload.resourceIds,
             payload.width,
             payload.height,
             payload.fit,

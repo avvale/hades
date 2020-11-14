@@ -4,6 +4,7 @@ import { CreateAttachmentFamiliesService } from './create-attachment-families.se
 import {
     AttachmentFamilyId,
     AttachmentFamilyName,
+    AttachmentFamilyResourceIds,
     AttachmentFamilyWidth,
     AttachmentFamilyHeight,
     AttachmentFamilyFit,
@@ -31,6 +32,7 @@ export class CreateAttachmentFamiliesCommandHandler implements ICommandHandler<C
                     return {
                         id: new AttachmentFamilyId(attachmentFamily.id),
                         name: new AttachmentFamilyName(attachmentFamily.name),
+                        resourceIds: new AttachmentFamilyResourceIds(attachmentFamily.resourceIds),
                         width: new AttachmentFamilyWidth(attachmentFamily.width),
                         height: new AttachmentFamilyHeight(attachmentFamily.height),
                         fit: new AttachmentFamilyFit(attachmentFamily.fit),

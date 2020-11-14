@@ -1,5 +1,6 @@
 export { AttachmentFamilyId } from './attachment-family-id';
 export { AttachmentFamilyName } from './attachment-family-name';
+export { AttachmentFamilyResourceIds } from './attachment-family-resource-ids';
 export { AttachmentFamilyWidth } from './attachment-family-width';
 export { AttachmentFamilyHeight } from './attachment-family-height';
 export { AttachmentFamilyFit } from './attachment-family-fit';

@@ -5,6 +5,7 @@ import { IResourceRepository } from '@hades/admin/resource/domain/resource.repos
 import {
     ResourceId,
     ResourceBoundedContextId,
+    ResourceAttachmentFamilyIds,
     ResourceName,
     ResourceHasCustomFields,
     ResourceHasAttachments,
@@ -48,6 +49,7 @@ export class MockResourceRepository extends MockRepository<AdminResource> implem
             this.collectionSource.push(AdminResource.register(
                     new ResourceId(itemCollection.id),
                     new ResourceBoundedContextId(itemCollection.boundedContextId),
+                    new ResourceAttachmentFamilyIds(itemCollection.attachmentFamilyIds),
                     new ResourceName(itemCollection.name),
                     new ResourceHasCustomFields(itemCollection.hasCustomFields),
                     new ResourceHasAttachments(itemCollection.hasAttachments),

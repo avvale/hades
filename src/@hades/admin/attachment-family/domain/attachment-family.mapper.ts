@@ -5,6 +5,7 @@ import { AttachmentFamilyResponse } from './attachment-family.response';
 import {
     AttachmentFamilyId,
     AttachmentFamilyName,
+    AttachmentFamilyResourceIds,
     AttachmentFamilyWidth,
     AttachmentFamilyHeight,
     AttachmentFamilyFit,
@@ -15,6 +16,7 @@ import {
     AttachmentFamilyUpdatedAt,
     AttachmentFamilyDeletedAt,
 } from './value-objects';
+import { ResourceMapper } from '@hades/admin/resource/domain/resource.mapper';
 
 export class AttachmentFamilyMapper implements IMapper
 {
@@ -69,6 +71,7 @@ export class AttachmentFamilyMapper implements IMapper
         return AdminAttachmentFamily.register(
             new AttachmentFamilyId(attachmentFamily.id),
             new AttachmentFamilyName(attachmentFamily.name),
+            new AttachmentFamilyResourceIds(attachmentFamily.resourceIds),
             new AttachmentFamilyWidth(attachmentFamily.width),
             new AttachmentFamilyHeight(attachmentFamily.height),
             new AttachmentFamilyFit(attachmentFamily.fit),
@@ -78,6 +81,7 @@ export class AttachmentFamilyMapper implements IMapper
             new AttachmentFamilyCreatedAt(attachmentFamily.createdAt, {}, {addTimezone: cQMetadata?.timezone}),
             new AttachmentFamilyUpdatedAt(attachmentFamily.updatedAt, {}, {addTimezone: cQMetadata?.timezone}),
             new AttachmentFamilyDeletedAt(attachmentFamily.deletedAt, {}, {addTimezone: cQMetadata?.timezone}),
+            this.options.eagerLoading ? new ResourceMapper({ eagerLoading: false }).mapModelsToAggregates(attachmentFamily.resources) : undefined,
         );
     }
 
@@ -88,6 +92,7 @@ export class AttachmentFamilyMapper implements IMapper
         return new AttachmentFamilyResponse(
             attachmentFamily.id.value,
             attachmentFamily.name.value,
+            attachmentFamily.resourceIds.value,
             attachmentFamily.width.value,
             attachmentFamily.height.value,
             attachmentFamily.fit.value,
@@ -97,6 +102,7 @@ export class AttachmentFamilyMapper implements IMapper
             attachmentFamily.createdAt.value,
             attachmentFamily.updatedAt.value,
             attachmentFamily.deletedAt.value,
+            this.options.eagerLoading ? new ResourceMapper({ eagerLoading: false }).mapAggregatesToResponses(attachmentFamily.resources) : undefined,
         );
     }
 }
