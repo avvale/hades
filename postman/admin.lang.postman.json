@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "d2e192c2-bf94-4cde-bf99-b33e12140e40",
+		"name"          : "@hades - admin/lang",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - adminCreateLang",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminCreateLangInput!)\n{\n\tadminCreateLang (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"160c3b3e-8483-4680-bd37-d92512751212\", \n\t\t\"name\": \"y\", \n\t\t\"image\": \"y\", \n\t\t\"iso6392\": \"te\", \n\t\t\"iso6393\": \"z36\", \n\t\t\"ietf\": \"ltydi\", \n\t\t\"sort\": 524353, \n\t\t\"isActive\": true\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminCreateLangs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[AdminCreateLangInput]!)\n{\n\tadminCreateLangs (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"9f6ddf0f-2b30-43c3-b9c6-df45770829d0\", \n\t\t\t\"name\": \"l\", \n\t\t\t\"image\": \"g\", \n\t\t\t\"iso6392\": \"mf\", \n\t\t\t\"iso6393\": \"7ek\", \n\t\t\t\"ietf\": \"3xlho\", \n\t\t\t\"sort\": 755484, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"9e6e6fc2-e4f6-40e8-bec7-1ee7f6317d93\", \n\t\t\t\"name\": \"7\", \n\t\t\t\"image\": \"b\", \n\t\t\t\"iso6392\": \"mw\", \n\t\t\t\"iso6393\": \"wgz\", \n\t\t\t\"ietf\": \"dnf20\", \n\t\t\t\"sort\": 296232, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a3160ba6-0994-42bd-a392-9ea9e28e53fc\", \n\t\t\t\"name\": \"q\", \n\t\t\t\"image\": \"k\", \n\t\t\t\"iso6392\": \"eh\", \n\t\t\t\"iso6393\": \"icb\", \n\t\t\t\"ietf\": \"0k68r\", \n\t\t\t\"sort\": 873045, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"59400e25-3176-4edf-97dd-7d0729976912\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"image\": \"v\", \n\t\t\t\"iso6392\": \"c7\", \n\t\t\t\"iso6393\": \"1fi\", \n\t\t\t\"ietf\": \"ayd4d\", \n\t\t\t\"sort\": 955088, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f2dea1e1-6c11-428d-9aae-6165596fe033\", \n\t\t\t\"name\": \"h\", \n\t\t\t\"image\": \"3\", \n\t\t\t\"iso6392\": \"c5\", \n\t\t\t\"iso6393\": \"js5\", \n\t\t\t\"ietf\": \"5qgnb\", \n\t\t\t\"sort\": 496146, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2ff4a3ce-09f5-46a5-9e24-ae3932979f70\", \n\t\t\t\"name\": \"d\", \n\t\t\t\"image\": \"t\", \n\t\t\t\"iso6392\": \"jx\", \n\t\t\t\"iso6393\": \"k9j\", \n\t\t\t\"ietf\": \"660n2\", \n\t\t\t\"sort\": 175997, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"eb13d163-d95d-4dd2-870e-29518940705f\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"image\": \"k\", \n\t\t\t\"iso6392\": \"jx\", \n\t\t\t\"iso6393\": \"roc\", \n\t\t\t\"ietf\": \"ih26v\", \n\t\t\t\"sort\": 204426, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8ce7df28-7277-4306-a612-22f5e4c3161b\", \n\t\t\t\"name\": \"l\", \n\t\t\t\"image\": \"4\", \n\t\t\t\"iso6392\": \"4a\", \n\t\t\t\"iso6393\": \"8pj\", \n\t\t\t\"ietf\": \"55xw3\", \n\t\t\t\"sort\": 506782, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d71d8835-3188-4d93-baa1-bf6abfbaeb20\", \n\t\t\t\"name\": \"3\", \n\t\t\t\"image\": \"b\", \n\t\t\t\"iso6392\": \"qv\", \n\t\t\t\"iso6393\": \"132\", \n\t\t\t\"ietf\": \"gw4xv\", \n\t\t\t\"sort\": 668738, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e040a9ee-152d-4fec-829a-3f91d61f7b28\", \n\t\t\t\"name\": \"k\", \n\t\t\t\"image\": \"f\", \n\t\t\t\"iso6392\": \"24\", \n\t\t\t\"iso6393\": \"trb\", \n\t\t\t\"ietf\": \"gs9bd\", \n\t\t\t\"sort\": 970110, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"49edf759-4f69-4241-948c-0862c9035fc9\", \n\t\t\t\"name\": \"l\", \n\t\t\t\"image\": \"3\", \n\t\t\t\"iso6392\": \"zr\", \n\t\t\t\"iso6393\": \"5w9\", \n\t\t\t\"ietf\": \"hqlg5\", \n\t\t\t\"sort\": 728488, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e043fe47-d41f-4b8e-a376-4db76df75863\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"image\": \"n\", \n\t\t\t\"iso6392\": \"2p\", \n\t\t\t\"iso6393\": \"mtx\", \n\t\t\t\"ietf\": \"2vqro\", \n\t\t\t\"sort\": 417992, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"202ac5b8-7744-4a2b-84b0-c72095014c5b\", \n\t\t\t\"name\": \"p\", \n\t\t\t\"image\": \"8\", \n\t\t\t\"iso6392\": \"pm\", \n\t\t\t\"iso6393\": \"fpf\", \n\t\t\t\"ietf\": \"r7lgx\", \n\t\t\t\"sort\": 331336, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ae7c2b87-c1aa-4304-bf50-b64961fa3201\", \n\t\t\t\"name\": \"2\", \n\t\t\t\"image\": \"p\", \n\t\t\t\"iso6392\": \"mh\", \n\t\t\t\"iso6393\": \"i7d\", \n\t\t\t\"ietf\": \"5mktt\", \n\t\t\t\"sort\": 788672, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a4620c9e-12fd-489d-96d7-0f42b989c1bd\", \n\t\t\t\"name\": \"j\", \n\t\t\t\"image\": \"e\", \n\t\t\t\"iso6392\": \"1k\", \n\t\t\t\"iso6393\": \"kq2\", \n\t\t\t\"ietf\": \"14o6m\", \n\t\t\t\"sort\": 612995, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a2f9cc3f-e6ec-43c1-843d-f60f8928e9f2\", \n\t\t\t\"name\": \"e\", \n\t\t\t\"image\": \"x\", \n\t\t\t\"iso6392\": \"9a\", \n\t\t\t\"iso6393\": \"b2t\", \n\t\t\t\"ietf\": \"s1gwb\", \n\t\t\t\"sort\": 951721, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e0a2b67f-77e5-4dcd-b40f-a1e89ccb1961\", \n\t\t\t\"name\": \"z\", \n\t\t\t\"image\": \"b\", \n\t\t\t\"iso6392\": \"po\", \n\t\t\t\"iso6393\": \"0p3\", \n\t\t\t\"ietf\": \"ew6jr\", \n\t\t\t\"sort\": 313878, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"1150d492-8947-4d3a-8c63-8bb16781b99c\", \n\t\t\t\"name\": \"f\", \n\t\t\t\"image\": \"i\", \n\t\t\t\"iso6392\": \"kw\", \n\t\t\t\"iso6393\": \"l1f\", \n\t\t\t\"ietf\": \"9do7u\", \n\t\t\t\"sort\": 169007, \n\t\t\t\"isActive\": true\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b9e09742-5142-4e71-8c10-b62c6afbd4a1\", \n\t\t\t\"name\": \"g\", \n\t\t\t\"image\": \"m\", \n\t\t\t\"iso6392\": \"e8\", \n\t\t\t\"iso6393\": \"ysv\", \n\t\t\t\"ietf\": \"yahv0\", \n\t\t\t\"sort\": 277149, \n\t\t\t\"isActive\": false\n\t\t},\n\t\t{\n\t\t\t\"id\": \"51e60219-a07f-4c35-af5f-89b47a8a0850\", \n\t\t\t\"name\": \"t\", \n\t\t\t\"image\": \"t\", \n\t\t\t\"iso6392\": \"9o\", \n\t\t\t\"iso6393\": \"s99\", \n\t\t\t\"ietf\": \"l7vdg\", \n\t\t\t\"sort\": 982676, \n\t\t\t\"isActive\": true\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminPaginateLangs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tadminPaginateLangs (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminGetLangs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tadminGetLangs (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"160c3b3e-8483-4680-bd37-d92512751212\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindLang",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tadminFindLang (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"160c3b3e-8483-4680-bd37-d92512751212\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindLangById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tadminFindLangById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"160c3b3e-8483-4680-bd37-d92512751212\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminUpdateLang",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminUpdateLangInput!)\n{\n\tadminUpdateLang (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"160c3b3e-8483-4680-bd37-d92512751212\", \n\t\t\"name\": \"6\", \n\t\t\"image\": \"b\", \n\t\t\"iso6392\": \"3z\", \n\t\t\"iso6393\": \"h0d\", \n\t\t\"ietf\": \"gviaa\", \n\t\t\"sort\": 574619, \n\t\t\"isActive\": false\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteLangById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tadminDeleteLangById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"160c3b3e-8483-4680-bd37-d92512751212\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteLangs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tadminDeleteLangs (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/lang",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"160c3b3e-8483-4680-bd37-d92512751212\", \n\t\"name\": \"a\", \n\t\"image\": \"d\", \n\t\"iso6392\": \"an\", \n\t\"iso6393\": \"gaj\", \n\t\"ietf\": \"frmkc\", \n\t\"sort\": 112897, \n\t\"isActive\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/lang",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"lang"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/langs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"59f335e4-8529-4f33-bbaa-10fe00881280\", \n\t\t\"name\": \"8\", \n\t\t\"image\": \"f\", \n\t\t\"iso6392\": \"ai\", \n\t\t\"iso6393\": \"ia2\", \n\t\t\"ietf\": \"6qlwo\", \n\t\t\"sort\": 857258, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"9472ea02-c227-4bb7-b6cc-f7a98b48f659\", \n\t\t\"name\": \"z\", \n\t\t\"image\": \"v\", \n\t\t\"iso6392\": \"x4\", \n\t\t\"iso6393\": \"f3q\", \n\t\t\"ietf\": \"cx7fm\", \n\t\t\"sort\": 328341, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"32d1c725-9131-41d9-8f03-12f5b10d521d\", \n\t\t\"name\": \"v\", \n\t\t\"image\": \"f\", \n\t\t\"iso6392\": \"ij\", \n\t\t\"iso6393\": \"kwi\", \n\t\t\"ietf\": \"38awd\", \n\t\t\"sort\": 112370, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"9bb59d00-a81e-48b3-b2d7-5f15c7b8872e\", \n\t\t\"name\": \"x\", \n\t\t\"image\": \"z\", \n\t\t\"iso6392\": \"tm\", \n\t\t\"iso6393\": \"4o9\", \n\t\t\"ietf\": \"nr9wi\", \n\t\t\"sort\": 264449, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"8d6514bd-f76e-4c63-b9fc-8c7b999017e8\", \n\t\t\"name\": \"3\", \n\t\t\"image\": \"5\", \n\t\t\"iso6392\": \"em\", \n\t\t\"iso6393\": \"7m5\", \n\t\t\"ietf\": \"y04w5\", \n\t\t\"sort\": 648775, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"39efb23c-97cf-4eb6-b81a-6fd991031a60\", \n\t\t\"name\": \"t\", \n\t\t\"image\": \"m\", \n\t\t\"iso6392\": \"lh\", \n\t\t\"iso6393\": \"1i3\", \n\t\t\"ietf\": \"gwlqk\", \n\t\t\"sort\": 812561, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"5ed7b68a-a746-4e0f-82ef-84ca1bc1b83f\", \n\t\t\"name\": \"1\", \n\t\t\"image\": \"k\", \n\t\t\"iso6392\": \"85\", \n\t\t\"iso6393\": \"ug4\", \n\t\t\"ietf\": \"5t3wa\", \n\t\t\"sort\": 649792, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"13ae4167-ec47-43ec-badc-5ae5ca19aed6\", \n\t\t\"name\": \"9\", \n\t\t\"image\": \"r\", \n\t\t\"iso6392\": \"gi\", \n\t\t\"iso6393\": \"cp0\", \n\t\t\"ietf\": \"0tk7q\", \n\t\t\"sort\": 639868, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"d1bd5fbb-5af7-499b-aa92-5b76d0ad8c93\", \n\t\t\"name\": \"s\", \n\t\t\"image\": \"4\", \n\t\t\"iso6392\": \"j4\", \n\t\t\"iso6393\": \"4f5\", \n\t\t\"ietf\": \"kqn8j\", \n\t\t\"sort\": 298859, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"ca0c6487-d6c7-4ce6-a2b1-920b9e0f3f40\", \n\t\t\"name\": \"8\", \n\t\t\"image\": \"i\", \n\t\t\"iso6392\": \"g5\", \n\t\t\"iso6393\": \"9il\", \n\t\t\"ietf\": \"w6bqr\", \n\t\t\"sort\": 884133, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"600ca756-7366-4867-8dff-0e0bae8eb15c\", \n\t\t\"name\": \"m\", \n\t\t\"image\": \"h\", \n\t\t\"iso6392\": \"dm\", \n\t\t\"iso6393\": \"ov4\", \n\t\t\"ietf\": \"er9ww\", \n\t\t\"sort\": 131874, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"99040581-3fba-4cf4-a749-33a11c00a49b\", \n\t\t\"name\": \"o\", \n\t\t\"image\": \"o\", \n\t\t\"iso6392\": \"mn\", \n\t\t\"iso6393\": \"fqz\", \n\t\t\"ietf\": \"b7shx\", \n\t\t\"sort\": 409324, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"3026e524-950f-4415-8c69-c8c487190ef6\", \n\t\t\"name\": \"l\", \n\t\t\"image\": \"2\", \n\t\t\"iso6392\": \"nt\", \n\t\t\"iso6393\": \"pv0\", \n\t\t\"ietf\": \"g00ur\", \n\t\t\"sort\": 226866, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"ee973641-1765-4f67-b881-9be25d7efd5c\", \n\t\t\"name\": \"2\", \n\t\t\"image\": \"e\", \n\t\t\"iso6392\": \"zh\", \n\t\t\"iso6393\": \"h0s\", \n\t\t\"ietf\": \"cp0no\", \n\t\t\"sort\": 810947, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"25c44069-0f43-4878-8726-43c2e08a0404\", \n\t\t\"name\": \"b\", \n\t\t\"image\": \"m\", \n\t\t\"iso6392\": \"q2\", \n\t\t\"iso6393\": \"0ss\", \n\t\t\"ietf\": \"xh045\", \n\t\t\"sort\": 621698, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"49e12c49-dd39-4051-92c1-7585edf90631\", \n\t\t\"name\": \"2\", \n\t\t\"image\": \"7\", \n\t\t\"iso6392\": \"rh\", \n\t\t\"iso6393\": \"gjt\", \n\t\t\"ietf\": \"q9e1z\", \n\t\t\"sort\": 719807, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"ea4c9c31-a0c6-46a4-beef-9e1611a9208d\", \n\t\t\"name\": \"t\", \n\t\t\"image\": \"x\", \n\t\t\"iso6392\": \"yv\", \n\t\t\"iso6393\": \"jha\", \n\t\t\"ietf\": \"e2tcs\", \n\t\t\"sort\": 412946, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"8fce8c69-2a61-455a-8b57-bcd0b781ec44\", \n\t\t\"name\": \"w\", \n\t\t\"image\": \"3\", \n\t\t\"iso6392\": \"m6\", \n\t\t\"iso6393\": \"ud8\", \n\t\t\"ietf\": \"6gfw7\", \n\t\t\"sort\": 437698, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"f7a1f58f-6280-477a-94b8-811da67fd077\", \n\t\t\"name\": \"4\", \n\t\t\"image\": \"t\", \n\t\t\"iso6392\": \"lg\", \n\t\t\"iso6393\": \"joo\", \n\t\t\"ietf\": \"jvvbj\", \n\t\t\"sort\": 414855, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"c08ba498-690b-43d7-81cf-8f35e0f9f72f\", \n\t\t\"name\": \"v\", \n\t\t\"image\": \"3\", \n\t\t\"iso6392\": \"fr\", \n\t\t\"iso6393\": \"bdb\", \n\t\t\"ietf\": \"0np94\", \n\t\t\"sort\": 230430, \n\t\t\"isActive\": false\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/langs",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"langs"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/langs/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/langs/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+                        "langs",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/langs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"160c3b3e-8483-4680-bd37-d92512751212\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/langs",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"langs"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/lang",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"160c3b3e-8483-4680-bd37-d92512751212\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/lang",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"lang"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/lang/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/lang/160c3b3e-8483-4680-bd37-d92512751212",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"lang",
+						"160c3b3e-8483-4680-bd37-d92512751212"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/lang",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"160c3b3e-8483-4680-bd37-d92512751212\", \n\t\"name\": \"q\", \n\t\"image\": \"u\", \n\t\"iso6392\": \"da\", \n\t\"iso6393\": \"yl4\", \n\t\"ietf\": \"02bvy\", \n\t\"sort\": 892655, \n\t\"isActive\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/lang",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"lang"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/lang/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/lang/160c3b3e-8483-4680-bd37-d92512751212",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"lang",
+						"160c3b3e-8483-4680-bd37-d92512751212"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - admin/langs",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/langs",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"langs"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "3df610ad-9dc3-4835-8d30-73429c94a4dd",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
