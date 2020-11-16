@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "a07a74dd-5e5a-4b21-ba77-4b8b0a193491",
+		"name"          : "@hades - o-auth/refresh-token",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - oAuthCreateRefreshToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:OAuthCreateRefreshTokenInput!)\n{\n\toAuthCreateRefreshToken (payload:$payload)\n\t{\n\t\tid\n\t\taccessTokenId\n\t\ttoken\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"e9b72952-e244-4112-ae1a-a6bbd0b21b53\", \n\t\t\"accessTokenId\": \"7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3\", \n\t\t\"token\": \"Fugiat similique et excepturi et voluptas et. Incidunt quia ratione adipisci nobis. Nulla molestiae dolor pariatur aut est minima. Neque consequuntur architecto. Nam quia et ipsam aut provident quod. Voluptas quisquam sit aut ipsa.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-06 11:14:39\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthCreateRefreshTokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[OAuthCreateRefreshTokenInput]!)\n{\n\toAuthCreateRefreshTokens (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"02083fde-063f-43df-8a10-c06f780eada0\", \n\t\t\t\"accessTokenId\": \"6f7e44ca-2bae-47d1-92fb-e22300461869\", \n\t\t\t\"token\": \"Voluptatibus est pariatur quas accusamus ab vel. Enim atque quidem ut quas ipsa. Sint ipsa cupiditate nesciunt omnis accusantium doloremque saepe sit inventore. Et maxime doloribus deserunt tenetur sunt et. Qui aspernatur debitis doloremque dolorem architecto corrupti cupiditate facilis. Non illum similique quam aperiam in eveniet.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-05 12:56:39\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d98b8bbd-7f80-4e09-b584-1e24e71747a2\", \n\t\t\t\"accessTokenId\": \"75edbda9-7105-411c-ac8b-52f28c0ca4d1\", \n\t\t\t\"token\": \"Cupiditate rem blanditiis temporibus dolores numquam voluptatem quia deserunt. Sunt voluptas nobis reprehenderit amet perferendis velit sed expedita et. Sed non magnam occaecati perferendis maiores. Ad molestias quod vero cupiditate et doloribus sed. In maxime ea neque. Vel qui est vel officia perferendis accusantium molestiae sed.\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-11-06 01:56:54\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a2eae763-4647-48b8-8720-f8f0e2477b31\", \n\t\t\t\"accessTokenId\": \"137b2d04-3a7c-4d39-bc0e-a529b0562276\", \n\t\t\t\"token\": \"Harum est repellendus in ut reiciendis eum sit recusandae. Explicabo similique consequatur vitae praesentium voluptatem sunt sapiente. Consectetur nemo et et rem dolorum corporis et non harum. Corrupti numquam eaque nulla rem rerum odio soluta maiores. Officiis similique facilis dolor voluptas. Eveniet blanditiis odit eligendi praesentium id cupiditate non asperiores quia.\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-11-05 14:26:26\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f0ad2fb2-2860-49f2-b708-38179d761b6c\", \n\t\t\t\"accessTokenId\": \"8de59854-a744-4a2f-b814-d634fa9a3d1c\", \n\t\t\t\"token\": \"Magnam qui sed odit illum. Libero optio deserunt laborum ut culpa. Et quo necessitatibus qui ipsum deleniti quisquam velit. Rem maxime at. Asperiores doloribus in deleniti iure quod quasi tenetur.\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-11-06 04:51:11\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"772c0a20-a424-4984-b345-058e9dfbc8da\", \n\t\t\t\"accessTokenId\": \"f70baac3-f094-44eb-91a1-c13a71f4a6a4\", \n\t\t\t\"token\": \"Nam est dicta quis laudantium vero maiores in. Itaque architecto officia ad modi minima et. Aut qui eaque.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-05 18:43:03\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"21f980da-0cf7-4759-aa57-494962068a95\", \n\t\t\t\"accessTokenId\": \"002e7c9f-43fa-47e5-aa9d-f2cd73c9fd6e\", \n\t\t\t\"token\": \"Est minus ex autem eos. Aspernatur dolor est qui. Delectus dolorem ipsum sit assumenda velit quas voluptatem tenetur qui. Ducimus deleniti itaque. Aut excepturi a soluta voluptatum rem quia facilis tempora. Ea delectus non laborum dolorum voluptas aut in sapiente.\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-11-05 15:41:58\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"23c4a2a9-9a32-43d3-be06-c1d7572e3565\", \n\t\t\t\"accessTokenId\": \"e8903639-88e8-45d4-93e7-578e306d17e2\", \n\t\t\t\"token\": \"Laboriosam et quibusdam laudantium libero eum. Nihil sed ipsam similique magni optio et at. Totam cumque magni. Veritatis rerum error excepturi sunt ut dolorum fugiat. Consequatur non iusto unde veritatis et dignissimos optio dolorum.\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-11-06 08:01:18\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e30d209c-c69c-44cd-bee4-fcb5d59f0256\", \n\t\t\t\"accessTokenId\": \"de385a47-900a-4908-b0f8-c1329b3641a0\", \n\t\t\t\"token\": \"Deleniti quod amet accusamus autem error fugiat. Odio consequatur et sit rerum vitae qui. Soluta nobis perspiciatis omnis accusantium maiores magni. Libero perferendis mollitia molestiae placeat consequuntur nihil. Nesciunt debitis vel vitae voluptas mollitia.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-06 00:19:22\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3bf4908e-39f3-4f35-99ac-f5bf94bae828\", \n\t\t\t\"accessTokenId\": \"684ec7b2-e10d-4bbb-9041-cd93bc29f348\", \n\t\t\t\"token\": \"Quisquam fugit numquam et. Expedita est vel ipsa quaerat eius nihil qui. Quam quos dolorum ipsum. Ut facilis cupiditate eligendi quia deleniti blanditiis provident.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-05 15:38:29\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"485a781e-be56-41ed-94f6-23046b643bed\", \n\t\t\t\"accessTokenId\": \"9c13b3e4-3141-40f2-9dad-7661e533f7f3\", \n\t\t\t\"token\": \"Ducimus explicabo sit aut. Distinctio voluptatibus saepe. Est consectetur dolores animi aliquid ut laboriosam odit. Consequatur alias ipsam sit ex exercitationem. Sit enim quidem qui ex et aspernatur. Nam laborum perspiciatis temporibus minus.\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-11-06 09:24:26\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"83e73f28-5ace-4a86-8fb4-c9e7c7b79ccf\", \n\t\t\t\"accessTokenId\": \"8fa6841f-0811-4902-9c54-4cafc3423670\", \n\t\t\t\"token\": \"Autem et fuga et quasi ut ratione et. Nemo dolor possimus. Aut molestias et rerum provident minus quo. Sint similique voluptatem saepe ut reprehenderit velit. Libero ipsam saepe assumenda ad.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-05 22:45:47\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a31b450a-2a61-40fd-b502-dd4799b10a09\", \n\t\t\t\"accessTokenId\": \"22e907c7-7a93-4a2d-8781-96ffaca7285f\", \n\t\t\t\"token\": \"Ut similique dolor rem nihil cupiditate ipsa sunt assumenda. Aliquid eius deserunt porro suscipit expedita dolore ab. Fuga quos dolorum quis voluptatem velit dolores. Non minus eius. Quis corrupti id provident iure.\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-11-06 03:31:54\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6eb4acc3-6576-4785-b856-249138195eb4\", \n\t\t\t\"accessTokenId\": \"42f96973-9ae0-4f2b-b850-43d5e63dde5f\", \n\t\t\t\"token\": \"Ducimus at possimus eveniet qui vitae esse soluta. Sunt sint quibusdam inventore delectus facilis. In quos exercitationem aperiam labore nostrum.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-05 14:06:03\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"606b0cd7-7a5d-4628-9c39-67219b270de5\", \n\t\t\t\"accessTokenId\": \"af69a5a1-4ab8-4551-be34-d6fcf2f8a8f6\", \n\t\t\t\"token\": \"Quia omnis laboriosam. Eos asperiores est rerum sed qui. Sunt sit magni numquam quaerat minima ipsum. Doloribus labore repudiandae tempora. Et fuga qui cumque sequi et.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-05 19:49:15\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f727351e-4843-4aa6-8c91-41687e40033d\", \n\t\t\t\"accessTokenId\": \"14820a4a-967e-4074-af9d-13b0b8b505be\", \n\t\t\t\"token\": \"Aliquid cumque amet quo nostrum officiis aliquid eos. Cum ut in fugiat quia. Aliquam aut eaque. Sint qui nostrum unde tempore quia. Earum perspiciatis quo suscipit molestiae necessitatibus.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-05 23:59:34\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2969275a-033c-4eac-b7b3-e872490bea12\", \n\t\t\t\"accessTokenId\": \"c1a640e0-028e-49ae-80de-ddf225bfd37f\", \n\t\t\t\"token\": \"Quia esse quisquam quasi aspernatur veniam in quos quia id. Ut ut fugiat qui libero aut. Minus corrupti commodi asperiores. Voluptatum ut distinctio. Molestias tempore porro ullam.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-05 14:30:15\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a5b066ed-fc76-41a9-bb5b-9aeb8055e91c\", \n\t\t\t\"accessTokenId\": \"1ae6eefe-e55d-48a9-ac53-7f8c599d64f2\", \n\t\t\t\"token\": \"Tempora similique quis sequi omnis voluptas. Quod a dolor vitae sunt eum quam impedit enim dicta. Praesentium architecto eos. Aliquid libero dolor et et et et velit. Maxime laboriosam saepe illum vel aspernatur eum. Impedit adipisci dignissimos.\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-11-05 12:53:40\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b9f8ad2a-c52c-48db-851d-bcaa6092b9de\", \n\t\t\t\"accessTokenId\": \"7bcfabad-6dc8-48e2-b2ef-044557fa59e9\", \n\t\t\t\"token\": \"Quos enim facere accusantium occaecati sit nam modi. Eius distinctio similique aliquam quis aut dolorum odit nam magnam. Quod voluptas consequuntur sit libero qui iure impedit. Incidunt aperiam iure. Pariatur aut blanditiis unde ut aperiam. Nisi officiis quia ut possimus quaerat quos rem.\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2020-11-05 22:06:52\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d1e3f323-e2a8-43ad-8794-1dc05f8dbde7\", \n\t\t\t\"accessTokenId\": \"22025c89-38b3-41a5-a745-03237150c745\", \n\t\t\t\"token\": \"Modi nam deleniti aspernatur asperiores quibusdam. Ratione placeat rerum sit aut facilis sunt. Optio in odio quas et ut repudiandae aliquid.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-05 13:43:28\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"57826c9d-29ac-4196-9fd6-ea9f8ac8d865\", \n\t\t\t\"accessTokenId\": \"6f1bf15c-3d4c-4f19-acb4-49fa9e2dd5ce\", \n\t\t\t\"token\": \"Qui illum reiciendis ut magni a. Repellat quia assumenda temporibus eos dolorem sed tempore molestias. Inventore repellendus commodi. Tempora ad quia quam consequatur qui et minima.\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2020-11-05 17:58:22\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthPaginateRefreshTokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\toAuthPaginateRefreshTokens (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthGetRefreshTokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\toAuthGetRefreshTokens (query: $query)\n\t{\n\t\tid\n\t\taccessTokenId\n\t\ttoken\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"e9b72952-e244-4112-ae1a-a6bbd0b21b53\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthFindRefreshToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\toAuthFindRefreshToken (query: $query)\n\t{\n\t\tid\n\t\taccessTokenId\n\t\ttoken\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"e9b72952-e244-4112-ae1a-a6bbd0b21b53\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthFindRefreshTokenById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\toAuthFindRefreshTokenById (id:$id)\n\t{\n\t\tid\n\t\taccessTokenId\n\t\ttoken\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"e9b72952-e244-4112-ae1a-a6bbd0b21b53\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthUpdateRefreshToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:OAuthUpdateRefreshTokenInput!)\n{\n\toAuthUpdateRefreshToken (payload:$payload)\n\t{\n\t\tid\n\t\taccessTokenId\n\t\ttoken\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"e9b72952-e244-4112-ae1a-a6bbd0b21b53\", \n\t\t\"accessTokenId\": \"7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3\", \n\t\t\"token\": \"Excepturi eaque quaerat. Asperiores ut eum amet explicabo aut qui. Quae voluptatem ab eligendi temporibus temporibus id et esse et. Illum non debitis aspernatur aut.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-05 17:52:53\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthDeleteRefreshTokenById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\toAuthDeleteRefreshTokenById (id:$id)\n\t{\n\t\tid\n\t\taccessTokenId\n\t\ttoken\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"e9b72952-e244-4112-ae1a-a6bbd0b21b53\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthDeleteRefreshTokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\toAuthDeleteRefreshTokens (query: $query)\n\t{\n\t\tid\n\t\taccessTokenId\n\t\ttoken\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/refresh-token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"e9b72952-e244-4112-ae1a-a6bbd0b21b53\", \n\t\"accessTokenId\": \"7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3\", \n\t\"token\": \"Et tempora libero tenetur qui repudiandae accusamus tenetur earum aut. At et quis. Provident nulla nam aut nisi tempora sapiente repellendus recusandae. Sit reprehenderit veniam numquam. Nulla dolores est nisi iste maiores et ea molestiae eos.\", \n\t\"isRevoked\": false, \n\t\"expiresAt\": \"2020-11-06 01:09:10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/refresh-token",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"refresh-token"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/refresh-tokens",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"64e40fb2-879a-4d17-b4c1-292cb78cd907\", \n\t\t\"accessTokenId\": \"5160cefd-addc-44da-ad3c-a620ec210db0\", \n\t\t\"token\": \"Et cupiditate magni nemo maiores autem repellendus et. Qui mollitia reiciendis in voluptatem nam officiis. Repellat cupiditate eum omnis temporibus.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-06 07:15:45\"\n\t}, \n\t{\n\t\t\"id\": \"fc429613-71b0-47c7-a616-02b46e30ed64\", \n\t\t\"accessTokenId\": \"b11d19fd-be73-421e-beb1-09d0d79fa133\", \n\t\t\"token\": \"Optio a non est consequatur voluptatibus et error odio at. Alias dolores alias exercitationem. Non et possimus sapiente eaque qui illum molestias.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-06 08:28:27\"\n\t}, \n\t{\n\t\t\"id\": \"873ad63b-1558-4ce6-9a50-bccadfb6ae10\", \n\t\t\"accessTokenId\": \"0456981a-6d8a-4714-a9d7-d642fea7efab\", \n\t\t\"token\": \"Distinctio necessitatibus quaerat nisi quas itaque iste aliquid molestias. Voluptatem molestiae velit laboriosam et voluptatibus deserunt. Dolores atque ad quibusdam corrupti nihil dignissimos. Molestias totam ea enim odit quos architecto voluptatem. Similique aut quis et repellat.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-06 10:45:14\"\n\t}, \n\t{\n\t\t\"id\": \"79bda101-45a3-458e-89a3-2dec859e554b\", \n\t\t\"accessTokenId\": \"bc3d2a91-ad57-44f3-aa69-372e3a64acd5\", \n\t\t\"token\": \"Quis quas voluptatem quia et corrupti exercitationem alias. Ut nesciunt ad quia dignissimos quis libero ducimus. Aut et mollitia corporis quo. Dolorem quos est blanditiis.\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-11-05 21:56:07\"\n\t}, \n\t{\n\t\t\"id\": \"b91d88f9-4c1a-4358-9420-9be192daff44\", \n\t\t\"accessTokenId\": \"fcb350fc-6a5d-425f-a73b-b3c7df53146b\", \n\t\t\"token\": \"Porro sint possimus amet rem labore. Molestias suscipit dolores est ex assumenda non. Minus culpa pariatur doloremque eum. Rerum sed omnis accusamus atque.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-06 00:54:15\"\n\t}, \n\t{\n\t\t\"id\": \"f12c2f5d-d89d-49f3-b7b7-e5df5486a6c7\", \n\t\t\"accessTokenId\": \"dc911b74-648a-4e6a-a60f-78afbc3686a4\", \n\t\t\"token\": \"Ratione dolores odio adipisci necessitatibus laboriosam. Voluptatum voluptatem fugiat laborum mollitia ipsa id eveniet dolores tempora. Accusamus minima laborum dolorem eum est et sapiente. Deserunt ut consectetur nostrum nisi omnis. Tenetur laudantium laborum.\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-11-06 02:05:46\"\n\t}, \n\t{\n\t\t\"id\": \"7ea4b7b2-9fc5-4b44-bbc2-3bd41b01c895\", \n\t\t\"accessTokenId\": \"3f7b3abd-75b9-403f-8e58-657e766f690c\", \n\t\t\"token\": \"In aliquid corrupti sit tempore accusamus illum. Nesciunt dolor id iure debitis mollitia. Enim sunt tempore omnis pariatur delectus vel quis nulla vel.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-06 03:53:26\"\n\t}, \n\t{\n\t\t\"id\": \"d311ea87-5826-4e5b-9e12-fd56708e1cb1\", \n\t\t\"accessTokenId\": \"359f6574-86a4-4ac4-a7b1-344c9687ffb9\", \n\t\t\"token\": \"Sint mollitia et. Rem aperiam dolor quibusdam laborum et quia. Voluptatem fugit libero mollitia. Et voluptatem nihil reiciendis quia sit laudantium.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-05 16:35:04\"\n\t}, \n\t{\n\t\t\"id\": \"5a862722-88a1-408a-8e83-bf9eeb2b85d4\", \n\t\t\"accessTokenId\": \"2c96050a-b43a-4645-aaba-ada0d70e3cb7\", \n\t\t\"token\": \"Cum saepe nemo pariatur odit. Delectus quia enim provident. Possimus voluptate facere quae ut fugiat qui nam. Dolorem laborum dolore.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-05 12:57:22\"\n\t}, \n\t{\n\t\t\"id\": \"6f91eafc-7ce5-4887-91ca-6657b5105335\", \n\t\t\"accessTokenId\": \"e37e3053-3851-4ba6-a589-cac55fb302b4\", \n\t\t\"token\": \"Dolorem accusantium fugiat aut placeat officiis officia. Sit occaecati doloribus. Possimus illo voluptatibus sed non quibusdam aut velit fuga. Aspernatur rerum doloribus sit laudantium velit tenetur. Voluptatem nesciunt voluptatem voluptatibus dolore corporis ut id.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-05 21:37:33\"\n\t}, \n\t{\n\t\t\"id\": \"fc4a1bbd-4ed8-415c-a8e5-420c8f1005ef\", \n\t\t\"accessTokenId\": \"16b8831b-f062-46b0-86c1-268ff12eb701\", \n\t\t\"token\": \"Incidunt qui dolor est omnis blanditiis quae voluptates cupiditate. Aut iure optio saepe. Minima deleniti nobis odit. Dolor dolorum nam. Sint sed modi necessitatibus.\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-11-06 00:26:35\"\n\t}, \n\t{\n\t\t\"id\": \"fb9538b4-6c07-4897-9b99-3176fad545b9\", \n\t\t\"accessTokenId\": \"510a250e-1aa2-4d0c-8e15-c25aaaa0fe3d\", \n\t\t\"token\": \"Ut repudiandae itaque impedit sequi ut velit. Debitis omnis molestiae et et neque quia vitae. Et non nemo qui omnis velit sit ut non. Sed laboriosam perspiciatis cum rem. Placeat debitis fugiat nam fuga.\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-11-05 14:22:13\"\n\t}, \n\t{\n\t\t\"id\": \"a1cb1b7c-e22a-43c6-9f74-15fa366f6a97\", \n\t\t\"accessTokenId\": \"b0bf9671-831d-44ac-9e61-dba788cf5a9a\", \n\t\t\"token\": \"Dignissimos voluptas aut voluptatem ipsum. Impedit quo qui iusto quo optio non dolor ea. Atque facere itaque facilis et facere tempore. Ea qui quia dolores eum alias ut aut ex consectetur.\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-11-06 09:43:29\"\n\t}, \n\t{\n\t\t\"id\": \"fd129f08-aca1-42e4-b3d6-befe33e40ea8\", \n\t\t\"accessTokenId\": \"a642091e-397a-4c7a-a443-06c48f73e26a\", \n\t\t\"token\": \"Aut error nemo enim minus ut quis. Et aperiam enim molestias necessitatibus. Quod saepe consequatur enim sed ducimus voluptatibus architecto. Sunt vero voluptates sint voluptas ad ex laboriosam. Est ut dignissimos quasi rerum.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-06 02:53:49\"\n\t}, \n\t{\n\t\t\"id\": \"247e89c3-c37c-45ab-ac86-a9c64064b6ea\", \n\t\t\"accessTokenId\": \"73d6d3be-4f73-441f-b7c0-01e7108e836f\", \n\t\t\"token\": \"Quia et possimus et aut incidunt corporis rerum. Voluptatum sed facere nulla accusamus molestiae nostrum. Ullam et enim. Sed nostrum tempore error. In corrupti qui qui adipisci culpa. Voluptatem ut est quia non quo tenetur et ut.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-05 14:56:17\"\n\t}, \n\t{\n\t\t\"id\": \"0309c5de-0f21-410e-9002-b4e2be5bb427\", \n\t\t\"accessTokenId\": \"3fff7f06-13af-4ecb-b38d-ce95a8a5b914\", \n\t\t\"token\": \"Odio ipsam sed voluptatem aliquid in nisi ipsum aut omnis. Quia ipsa fugit earum sit sit. Ut facere et eveniet molestiae voluptatibus quo. Animi necessitatibus ex quidem sed reprehenderit. Assumenda et consequatur quaerat aliquam.\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-11-06 03:16:56\"\n\t}, \n\t{\n\t\t\"id\": \"cd25a54f-bb22-41d9-ab6c-910e893a075e\", \n\t\t\"accessTokenId\": \"a7d1c836-9dbd-48af-9edf-bc12efe2e789\", \n\t\t\"token\": \"Pariatur officia voluptatem neque porro ex voluptatem sit commodi et. Dicta et amet dolor minima. Commodi ducimus sunt. Perspiciatis quibusdam repudiandae. Officia pariatur aut.\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-11-06 11:34:40\"\n\t}, \n\t{\n\t\t\"id\": \"195da3bf-72f8-4944-a688-c501ace3e7ce\", \n\t\t\"accessTokenId\": \"399c9866-b778-42c6-89a7-87fd695c763a\", \n\t\t\"token\": \"Neque nihil rerum vitae impedit hic. Illum minima quia asperiores. Optio autem accusantium quos rem aperiam. Nostrum quo eos id iure. Ratione dolorum qui sint nihil laboriosam.\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-11-05 21:09:47\"\n\t}, \n\t{\n\t\t\"id\": \"617b6e4f-207a-4277-85e8-70bd3d61c273\", \n\t\t\"accessTokenId\": \"d7e9114b-2ba9-4440-a071-47a844bbc7ae\", \n\t\t\"token\": \"Mollitia et repellendus. Illum omnis earum maiores earum ex id molestiae aperiam. Molestiae amet suscipit. Iure qui commodi autem consectetur vitae. Porro asperiores veniam pariatur quia temporibus et amet ut necessitatibus.\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2020-11-06 07:16:51\"\n\t}, \n\t{\n\t\t\"id\": \"f9ba2a04-f39a-45c8-8982-b83ca0ec0b14\", \n\t\t\"accessTokenId\": \"0670766b-6fda-48f4-904b-0891aa01e6a1\", \n\t\t\"token\": \"Sunt excepturi omnis voluptatem. Quidem nam non cumque odio corporis corrupti ullam. Ut quas nemo ex earum sed. Cupiditate consequuntur molestias deleniti rem autem voluptas at nobis. Id vel voluptatibus eos et aperiam nesciunt rerum ratione nam. Et eos eaque et suscipit rerum quam labore voluptates.\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2020-11-06 10:13:56\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/refresh-tokens",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"refresh-tokens"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/refresh-tokens/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/refresh-tokens/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+                        "refresh-tokens",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/refresh-tokens",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"e9b72952-e244-4112-ae1a-a6bbd0b21b53\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/refresh-tokens",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"refresh-tokens"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/refresh-token",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"e9b72952-e244-4112-ae1a-a6bbd0b21b53\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/refresh-token",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"refresh-token"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/refresh-token/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/refresh-token/e9b72952-e244-4112-ae1a-a6bbd0b21b53",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"refresh-token",
+						"e9b72952-e244-4112-ae1a-a6bbd0b21b53"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/refresh-token",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"e9b72952-e244-4112-ae1a-a6bbd0b21b53\", \n\t\"accessTokenId\": \"7d9c4c45-f264-4d67-bdb6-9acc20b9b2f3\", \n\t\"token\": \"Et et laborum aut dolorem autem nulla. Ipsa qui iste omnis et voluptatem. Veritatis ea voluptatibus. Temporibus qui quis magnam. Exercitationem cumque voluptas ea et reprehenderit. Deleniti totam voluptate at ut sunt.\", \n\t\"isRevoked\": true, \n\t\"expiresAt\": \"2020-11-06 02:46:05\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/refresh-token",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"refresh-token"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/refresh-token/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/refresh-token/e9b72952-e244-4112-ae1a-a6bbd0b21b53",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"refresh-token",
+						"e9b72952-e244-4112-ae1a-a6bbd0b21b53"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - o-auth/refresh-tokens",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/refresh-tokens",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"refresh-tokens"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "020ab248-134d-474b-a4f6-3a50c0d40b7e",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
