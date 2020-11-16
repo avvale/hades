@@ -6,9 +6,133 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum AdminAttachmentFamilyFit {
+    CROP = "CROP",
+    WIDTH = "WIDTH",
+    HEIGHT = "HEIGHT",
+    WIDTH_FREE = "WIDTH_FREE",
+    HEIGHT_FREE = "HEIGHT_FREE"
+}
+
 export enum IamAccountType {
     USER = "USER",
     SERVICE = "SERVICE"
+}
+
+export enum OAuthClientGrantType {
+    AUTHORIZATION_CODE = "AUTHORIZATION_CODE",
+    CLIENT_CREDENTIALS = "CLIENT_CREDENTIALS",
+    PASSWORD = "PASSWORD"
+}
+
+export interface AdminCreateAttachmentFamilyInput {
+    id: string;
+    name: GraphQLString;
+    resourceIds?: string[];
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    fit: AdminAttachmentFamilyFit;
+    sizes?: JSON;
+    quality?: GraphQLInt;
+    format?: GraphQLString;
+}
+
+export interface AdminUpdateAttachmentFamilyInput {
+    id: string;
+    name?: GraphQLString;
+    resourceIds?: string[];
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    fit?: AdminAttachmentFamilyFit;
+    sizes?: JSON;
+    quality?: GraphQLInt;
+    format?: GraphQLString;
+}
+
+export interface AdminCreateCountryInput {
+    id: string;
+    commonId: string;
+    langId: string;
+    iso3166Alpha2: GraphQLString;
+    iso3166Alpha3: GraphQLString;
+    iso3166Numeric: GraphQLString;
+    customCode?: GraphQLString;
+    prefix?: GraphQLString;
+    name: GraphQLString;
+    slug: GraphQLString;
+    image?: GraphQLString;
+    sort: GraphQLInt;
+    administrativeAreaLevel1?: GraphQLString;
+    administrativeAreaLevel2?: GraphQLString;
+    administrativeAreaLevel3?: GraphQLString;
+    administrativeAreas?: JSON;
+    latitude?: GraphQLFloat;
+    longitude?: GraphQLFloat;
+    zoom?: GraphQLInt;
+    dataLang?: JSON;
+}
+
+export interface AdminUpdateCountryInput {
+    id: string;
+    commonId?: string;
+    langId?: string;
+    iso3166Alpha2?: GraphQLString;
+    iso3166Alpha3?: GraphQLString;
+    iso3166Numeric?: GraphQLString;
+    customCode?: GraphQLString;
+    prefix?: GraphQLString;
+    name?: GraphQLString;
+    slug?: GraphQLString;
+    image?: GraphQLString;
+    sort?: GraphQLInt;
+    administrativeAreaLevel1?: GraphQLString;
+    administrativeAreaLevel2?: GraphQLString;
+    administrativeAreaLevel3?: GraphQLString;
+    administrativeAreas?: JSON;
+    latitude?: GraphQLFloat;
+    longitude?: GraphQLFloat;
+    zoom?: GraphQLInt;
+    dataLang?: JSON;
+}
+
+export interface AdminCreateLangInput {
+    id: string;
+    name: GraphQLString;
+    image?: GraphQLString;
+    iso6392: GraphQLString;
+    iso6393: GraphQLString;
+    ietf: GraphQLString;
+    sort?: GraphQLInt;
+    isActive: GraphQLBoolean;
+}
+
+export interface AdminUpdateLangInput {
+    id: string;
+    name?: GraphQLString;
+    image?: GraphQLString;
+    iso6392?: GraphQLString;
+    iso6393?: GraphQLString;
+    ietf?: GraphQLString;
+    sort?: GraphQLInt;
+    isActive?: GraphQLBoolean;
+}
+
+export interface AdminCreateResourceInput {
+    id: string;
+    boundedContextId: string;
+    attachmentFamilyIds?: string[];
+    name: GraphQLString;
+    hasCustomFields: GraphQLBoolean;
+    hasAttachments: GraphQLBoolean;
+}
+
+export interface AdminUpdateResourceInput {
+    id: string;
+    boundedContextId?: string;
+    attachmentFamilyIds?: string[];
+    name?: GraphQLString;
+    hasCustomFields?: GraphQLBoolean;
+    hasAttachments?: GraphQLBoolean;
 }
 
 export interface QueryStatement {
@@ -25,13 +149,12 @@ export interface IamCreateAccountInput {
     email: GraphQLString;
     isActive: GraphQLBoolean;
     clientId: string;
-    dApplicationCodes: JSON;
-    dPermissions: JSON;
+    dApplicationCodes?: JSON;
+    dPermissions?: JSON;
     data?: JSON;
     roleIds?: string[];
     tenantIds?: string[];
     user?: IamCreateUserInput;
-    dTenants: JSON;
 }
 
 export interface IamUpdateAccountInput {
@@ -46,7 +169,6 @@ export interface IamUpdateAccountInput {
     roleIds?: string[];
     tenantIds?: string[];
     user?: IamUpdateUserInput;
-    dTenants?: JSON;
 }
 
 export interface IamCreateBoundedContextInput {
@@ -117,7 +239,7 @@ export interface IamUpdateTenantInput {
 
 export interface IamCreateUserInput {
     id: string;
-    accountId?: string;
+    accountId: string;
     name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
@@ -143,31 +265,133 @@ export interface IamUpdateUserInput {
     data?: JSON;
 }
 
-export interface Pagination {
-    total: number;
-    count: number;
-    rows: JSON[];
+export interface OAuthCreateAccessTokenInput {
+    id: string;
+    clientId: string;
+    accountId?: string;
+    token: GraphQLString;
+    name?: GraphQLString;
+    isRevoked: GraphQLBoolean;
+    expiresAt?: GraphQLTimestamp;
+    refreshToken?: OAuthCreateRefreshTokenInput;
 }
 
-export interface IamAccount {
+export interface OAuthUpdateAccessTokenInput {
     id: string;
-    type: IamAccountType;
-    email: GraphQLString;
+    clientId?: string;
+    accountId?: string;
+    token?: GraphQLString;
+    name?: GraphQLString;
+    isRevoked?: GraphQLBoolean;
+    expiresAt?: GraphQLTimestamp;
+    refreshToken?: OAuthUpdateRefreshTokenInput;
+}
+
+export interface OAuthCreateApplicationInput {
+    id: string;
+    name: GraphQLString;
+    code: GraphQLString;
+    secret: GraphQLString;
+    isMaster: GraphQLBoolean;
+    clientIds?: string[];
+}
+
+export interface OAuthUpdateApplicationInput {
+    id: string;
+    name?: GraphQLString;
+    code?: GraphQLString;
+    secret?: GraphQLString;
+    isMaster?: GraphQLBoolean;
+    clientIds?: string[];
+}
+
+export interface OAuthCreateClientInput {
+    id: string;
+    grantType: OAuthClientGrantType;
+    name: GraphQLString;
+    secret: GraphQLString;
+    authUrl?: GraphQLString;
+    redirect?: GraphQLString;
+    expiredAccessToken?: GraphQLInt;
+    expiredRefreshToken?: GraphQLInt;
     isActive: GraphQLBoolean;
-    clientId: string;
-    dApplicationCodes: JSON;
-    dPermissions: JSON;
-    dTenants: JSON;
-    data?: JSON;
-    roles?: IamRole[];
-    tenants?: IamTenant[];
-    user?: IamUser;
+    isMaster: GraphQLBoolean;
+    applicationIds?: string[];
+}
+
+export interface OAuthUpdateClientInput {
+    id: string;
+    grantType?: OAuthClientGrantType;
+    name?: GraphQLString;
+    secret?: GraphQLString;
+    authUrl?: GraphQLString;
+    redirect?: GraphQLString;
+    expiredAccessToken?: GraphQLInt;
+    expiredRefreshToken?: GraphQLInt;
+    isActive?: GraphQLBoolean;
+    isMaster?: GraphQLBoolean;
+    applicationIds?: string[];
+}
+
+export interface OAuthCreateCredentialInput {
+    grantType: OAuthClientGrantType;
+    username?: GraphQLString;
+    password?: GraphQLString;
+    email?: GraphQLString;
+    clientSecret?: GraphQLString;
+    accessTokenId?: string;
+    refreshToken?: GraphQLString;
+    redirect?: GraphQLString;
+}
+
+export interface OAuthCreateRefreshTokenInput {
+    id: string;
+    accessTokenId: string;
+    token: GraphQLString;
+    isRevoked: GraphQLBoolean;
+    expiresAt?: GraphQLTimestamp;
+}
+
+export interface OAuthUpdateRefreshTokenInput {
+    id: string;
+    accessTokenId?: string;
+    token?: GraphQLString;
+    isRevoked?: GraphQLBoolean;
+    expiresAt?: GraphQLTimestamp;
+}
+
+export interface AdminAttachmentFamily {
+    id: string;
+    name: GraphQLString;
+    resources?: AdminResource[];
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    fit: AdminAttachmentFamilyFit;
+    sizes?: JSON;
+    quality?: GraphQLInt;
+    format?: GraphQLString;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
 }
 
 export interface IQuery {
+    adminFindAttachmentFamily(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
+    adminFindAttachmentFamilyById(id?: string, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
+    adminGetAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily[] | Promise<AdminAttachmentFamily[]>;
+    adminPaginateAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    adminFindCountry(query?: QueryStatement, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
+    adminFindCountryById(id?: string, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
+    adminGetCountries(query?: QueryStatement, constraint?: QueryStatement): AdminCountry[] | Promise<AdminCountry[]>;
+    adminPaginateCountries(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    adminFindLang(query?: QueryStatement, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
+    adminFindLangById(id?: string, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
+    adminGetLangs(query?: QueryStatement, constraint?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
+    adminPaginateLangs(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    adminFindResource(query?: QueryStatement, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
+    adminFindResourceById(id?: string, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
+    adminGetResources(query?: QueryStatement, constraint?: QueryStatement): AdminResource[] | Promise<AdminResource[]>;
+    adminPaginateResources(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     iamFindMeAccount(): IamAccount | Promise<IamAccount>;
     iamFindAccount(query?: QueryStatement, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
     iamFindAccountById(id?: string, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
@@ -193,9 +417,45 @@ export interface IQuery {
     iamFindUserById(id?: string, constraint?: QueryStatement): IamUser | Promise<IamUser>;
     iamGetUsers(query?: QueryStatement, constraint?: QueryStatement): IamUser[] | Promise<IamUser[]>;
     iamPaginateUsers(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    oAuthFindAccessToken(query?: QueryStatement, constraint?: QueryStatement): OAuthAccessToken | Promise<OAuthAccessToken>;
+    oAuthFindAccessTokenById(id?: string, constraint?: QueryStatement): OAuthAccessToken | Promise<OAuthAccessToken>;
+    oAuthGetAccessTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthAccessToken[] | Promise<OAuthAccessToken[]>;
+    oAuthPaginateAccessTokens(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    oAuthFindApplication(query?: QueryStatement, constraint?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
+    oAuthFindApplicationById(id?: string, constraint?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
+    oAuthGetApplications(query?: QueryStatement, constraint?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
+    oAuthPaginateApplications(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    oAuthFindClient(query?: QueryStatement, constraint?: QueryStatement): OAuthClient | Promise<OAuthClient>;
+    oAuthFindClientById(id?: string, constraint?: QueryStatement): OAuthClient | Promise<OAuthClient>;
+    oAuthGetClients(query?: QueryStatement, constraint?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
+    oAuthPaginateClients(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    oAuthFindRefreshToken(query?: QueryStatement, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
+    oAuthFindRefreshTokenById(id?: string, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
+    oAuthGetRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
+    oAuthPaginateRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
 }
 
 export interface IMutation {
+    adminCreateAttachmentFamily(payload: AdminCreateAttachmentFamilyInput): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
+    adminCreateAttachmentFamilies(payload: AdminCreateAttachmentFamilyInput[]): boolean | Promise<boolean>;
+    adminUpdateAttachmentFamily(payload: AdminUpdateAttachmentFamilyInput, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
+    adminDeleteAttachmentFamilyById(id: string, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
+    adminDeleteAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily[] | Promise<AdminAttachmentFamily[]>;
+    adminCreateCountry(payload: AdminCreateCountryInput): AdminCountry | Promise<AdminCountry>;
+    adminCreateCountries(payload: AdminCreateCountryInput[]): boolean | Promise<boolean>;
+    adminUpdateCountry(payload: AdminUpdateCountryInput, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
+    adminDeleteCountryById(id: string, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
+    adminDeleteCountries(query?: QueryStatement, constraint?: QueryStatement): AdminCountry[] | Promise<AdminCountry[]>;
+    adminCreateLang(payload: AdminCreateLangInput): AdminLang | Promise<AdminLang>;
+    adminCreateLangs(payload: AdminCreateLangInput[]): boolean | Promise<boolean>;
+    adminUpdateLang(payload: AdminUpdateLangInput, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
+    adminDeleteLangById(id: string, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
+    adminDeleteLangs(query?: QueryStatement, constraint?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
+    adminCreateResource(payload: AdminCreateResourceInput): AdminResource | Promise<AdminResource>;
+    adminCreateResources(payload: AdminCreateResourceInput[]): boolean | Promise<boolean>;
+    adminUpdateResource(payload: AdminUpdateResourceInput, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
+    adminDeleteResourceById(id: string, constraint?: QueryStatement): AdminResource | Promise<AdminResource>;
+    adminDeleteResources(query?: QueryStatement, constraint?: QueryStatement): AdminResource[] | Promise<AdminResource[]>;
     iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
     iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
     iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
@@ -226,6 +486,105 @@ export interface IMutation {
     iamUpdateUser(payload: IamUpdateUserInput, constraint?: QueryStatement): IamUser | Promise<IamUser>;
     iamDeleteUserById(id: string, constraint?: QueryStatement): IamUser | Promise<IamUser>;
     iamDeleteUsers(query?: QueryStatement, constraint?: QueryStatement): IamUser[] | Promise<IamUser[]>;
+    oAuthCreateAccessToken(payload: OAuthCreateAccessTokenInput): OAuthAccessToken | Promise<OAuthAccessToken>;
+    oAuthCreateAccessTokens(payload: OAuthCreateAccessTokenInput[]): boolean | Promise<boolean>;
+    oAuthUpdateAccessToken(payload: OAuthUpdateAccessTokenInput, constraint?: QueryStatement): OAuthAccessToken | Promise<OAuthAccessToken>;
+    oAuthDeleteAccessTokenById(id: string, constraint?: QueryStatement): OAuthAccessToken | Promise<OAuthAccessToken>;
+    oAuthDeleteAccessTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthAccessToken[] | Promise<OAuthAccessToken[]>;
+    oAuthCreateApplication(payload: OAuthCreateApplicationInput): OAuthApplication | Promise<OAuthApplication>;
+    oAuthCreateApplications(payload: OAuthCreateApplicationInput[]): boolean | Promise<boolean>;
+    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput, constraint?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
+    oAuthDeleteApplicationById(id: string, constraint?: QueryStatement): OAuthApplication | Promise<OAuthApplication>;
+    oAuthDeleteApplications(query?: QueryStatement, constraint?: QueryStatement): OAuthApplication[] | Promise<OAuthApplication[]>;
+    oAuthCreateClient(payload: OAuthCreateClientInput): OAuthClient | Promise<OAuthClient>;
+    oAuthCreateClients(payload: OAuthCreateClientInput[]): boolean | Promise<boolean>;
+    oAuthUpdateClient(payload: OAuthUpdateClientInput, constraint?: QueryStatement): OAuthClient | Promise<OAuthClient>;
+    oAuthDeleteClientById(id: string, constraint?: QueryStatement): OAuthClient | Promise<OAuthClient>;
+    oAuthDeleteClients(query?: QueryStatement, constraint?: QueryStatement): OAuthClient[] | Promise<OAuthClient[]>;
+    oAuthCreateCredential(payload: OAuthCreateCredentialInput): OAuthCredential | Promise<OAuthCredential>;
+    oAuthCreateRefreshToken(payload: OAuthCreateRefreshTokenInput): OAuthRefreshToken | Promise<OAuthRefreshToken>;
+    oAuthCreateRefreshTokens(payload: OAuthCreateRefreshTokenInput[]): boolean | Promise<boolean>;
+    oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
+    oAuthDeleteRefreshTokenById(id: string, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
+    oAuthDeleteRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
+}
+
+export interface AdminCountry {
+    id: string;
+    commonId: string;
+    langId: string;
+    lang: AdminLang;
+    iso3166Alpha2: GraphQLString;
+    iso3166Alpha3: GraphQLString;
+    iso3166Numeric: GraphQLString;
+    customCode?: GraphQLString;
+    prefix?: GraphQLString;
+    name: GraphQLString;
+    slug: GraphQLString;
+    image?: GraphQLString;
+    sort: GraphQLInt;
+    administrativeAreaLevel1?: GraphQLString;
+    administrativeAreaLevel2?: GraphQLString;
+    administrativeAreaLevel3?: GraphQLString;
+    administrativeAreas?: JSON;
+    latitude?: GraphQLFloat;
+    longitude?: GraphQLFloat;
+    zoom?: GraphQLInt;
+    dataLang?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface AdminLang {
+    id: string;
+    name: GraphQLString;
+    image?: GraphQLString;
+    iso6392: GraphQLString;
+    iso6393: GraphQLString;
+    ietf: GraphQLString;
+    sort?: GraphQLInt;
+    isActive: GraphQLBoolean;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface AdminResource {
+    id: string;
+    boundedContextId: string;
+    boundedContext: IamBoundedContext;
+    attachmentFamilies?: AdminAttachmentFamily[];
+    name: GraphQLString;
+    hasCustomFields: GraphQLBoolean;
+    hasAttachments: GraphQLBoolean;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface Pagination {
+    total: number;
+    count: number;
+    rows: JSON[];
+}
+
+export interface IamAccount {
+    id: string;
+    type: IamAccountType;
+    email: GraphQLString;
+    isActive: GraphQLBoolean;
+    clientId: string;
+    dApplicationCodes: JSON;
+    dPermissions: JSON;
+    dTenants: JSON;
+    data?: JSON;
+    roles?: IamRole[];
+    tenants?: IamTenant[];
+    user?: IamUser;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
 }
 
 export interface IamBoundedContext {
@@ -278,6 +637,7 @@ export interface IamTenant {
 export interface IamUser {
     id: string;
     accountId: string;
+    account: IamAccount;
     name: GraphQLString;
     surname?: GraphQLString;
     avatar?: GraphQLString;
@@ -287,6 +647,68 @@ export interface IamUser {
     password: GraphQLString;
     rememberToken?: GraphQLString;
     data?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface OAuthAccessToken {
+    id: string;
+    clientId: string;
+    client: OAuthClient;
+    accountId?: string;
+    token: GraphQLString;
+    name?: GraphQLString;
+    isRevoked: GraphQLBoolean;
+    expiresAt?: GraphQLTimestamp;
+    refreshToken?: OAuthRefreshToken;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface OAuthApplication {
+    id: string;
+    name: GraphQLString;
+    code: GraphQLString;
+    secret: GraphQLString;
+    isMaster: GraphQLBoolean;
+    clients?: OAuthClient[];
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface OAuthClient {
+    id: string;
+    grantType: OAuthClientGrantType;
+    name: GraphQLString;
+    secret: GraphQLString;
+    authUrl?: GraphQLString;
+    redirect?: GraphQLString;
+    expiredAccessToken?: GraphQLInt;
+    expiredRefreshToken?: GraphQLInt;
+    isActive: GraphQLBoolean;
+    isMaster: GraphQLBoolean;
+    applications?: OAuthApplication[];
+    accessTokens?: OAuthAccessToken[];
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface OAuthCredential {
+    accessToken: GraphQLString;
+    refreshToken: GraphQLString;
+}
+
+export interface OAuthRefreshToken {
+    id: string;
+    accessTokenId: string;
+    accessToken: OAuthAccessToken;
+    token: GraphQLString;
+    isRevoked: GraphQLBoolean;
+    expiresAt?: GraphQLTimestamp;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
