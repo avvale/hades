@@ -6,72 +6,9 @@
 
 /* tslint:disable */
 /* eslint-disable */
-export interface AdminCreateCountryInput {
-    id: string;
-    commonId: string;
-    langId: string;
-    iso3166Alpha2: GraphQLString;
-    iso3166Alpha3: GraphQLString;
-    iso3166Numeric: GraphQLString;
-    customCode?: GraphQLString;
-    prefix?: GraphQLString;
-    name: GraphQLString;
-    slug: GraphQLString;
-    image?: GraphQLString;
-    sort: GraphQLInt;
-    administrativeAreaLevel1?: GraphQLString;
-    administrativeAreaLevel2?: GraphQLString;
-    administrativeAreaLevel3?: GraphQLString;
-    administrativeAreas?: JSON;
-    latitude?: GraphQLFloat;
-    longitude?: GraphQLFloat;
-    zoom?: GraphQLInt;
-    dataLang?: JSON;
-}
-
-export interface AdminUpdateCountryInput {
-    id: string;
-    commonId?: string;
-    langId?: string;
-    iso3166Alpha2?: GraphQLString;
-    iso3166Alpha3?: GraphQLString;
-    iso3166Numeric?: GraphQLString;
-    customCode?: GraphQLString;
-    prefix?: GraphQLString;
-    name?: GraphQLString;
-    slug?: GraphQLString;
-    image?: GraphQLString;
-    sort?: GraphQLInt;
-    administrativeAreaLevel1?: GraphQLString;
-    administrativeAreaLevel2?: GraphQLString;
-    administrativeAreaLevel3?: GraphQLString;
-    administrativeAreas?: JSON;
-    latitude?: GraphQLFloat;
-    longitude?: GraphQLFloat;
-    zoom?: GraphQLInt;
-    dataLang?: JSON;
-}
-
-export interface AdminCreateLangInput {
-    id: string;
-    name: GraphQLString;
-    image?: GraphQLString;
-    iso6392: GraphQLString;
-    iso6393: GraphQLString;
-    ietf: GraphQLString;
-    sort?: GraphQLInt;
-    isActive: GraphQLBoolean;
-}
-
-export interface AdminUpdateLangInput {
-    id: string;
-    name?: GraphQLString;
-    image?: GraphQLString;
-    iso6392?: GraphQLString;
-    iso6393?: GraphQLString;
-    ietf?: GraphQLString;
-    sort?: GraphQLInt;
-    isActive?: GraphQLBoolean;
+export enum IamAccountType {
+    USER = "USER",
+    SERVICE = "SERVICE"
 }
 
 export interface QueryStatement {
@@ -82,75 +19,277 @@ export interface QueryStatement {
     offset?: number;
 }
 
-export interface AdminCountry {
+export interface IamCreateAccountInput {
     id: string;
-    commonId: string;
-    langId: string;
-    lang: AdminLang;
-    iso3166Alpha2: GraphQLString;
-    iso3166Alpha3: GraphQLString;
-    iso3166Numeric: GraphQLString;
-    customCode?: GraphQLString;
-    prefix?: GraphQLString;
-    name: GraphQLString;
-    slug: GraphQLString;
-    image?: GraphQLString;
-    sort: GraphQLInt;
-    administrativeAreaLevel1?: GraphQLString;
-    administrativeAreaLevel2?: GraphQLString;
-    administrativeAreaLevel3?: GraphQLString;
-    administrativeAreas?: JSON;
-    latitude?: GraphQLFloat;
-    longitude?: GraphQLFloat;
-    zoom?: GraphQLInt;
-    dataLang?: JSON;
-    createdAt?: GraphQLTimestamp;
-    updatedAt?: GraphQLTimestamp;
-    deletedAt?: GraphQLTimestamp;
-}
-
-export interface IQuery {
-    adminFindCountry(query?: QueryStatement, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
-    adminFindCountryById(id?: string, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
-    adminGetCountries(query?: QueryStatement, constraint?: QueryStatement): AdminCountry[] | Promise<AdminCountry[]>;
-    adminPaginateCountries(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-    adminFindLang(query?: QueryStatement, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
-    adminFindLangById(id?: string, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
-    adminGetLangs(query?: QueryStatement, constraint?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
-    adminPaginateLangs(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
-}
-
-export interface IMutation {
-    adminCreateCountry(payload: AdminCreateCountryInput): AdminCountry | Promise<AdminCountry>;
-    adminCreateCountries(payload: AdminCreateCountryInput[]): boolean | Promise<boolean>;
-    adminUpdateCountry(payload: AdminUpdateCountryInput, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
-    adminDeleteCountryById(id: string, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
-    adminDeleteCountries(query?: QueryStatement, constraint?: QueryStatement): AdminCountry[] | Promise<AdminCountry[]>;
-    adminCreateLang(payload: AdminCreateLangInput): AdminLang | Promise<AdminLang>;
-    adminCreateLangs(payload: AdminCreateLangInput[]): boolean | Promise<boolean>;
-    adminUpdateLang(payload: AdminUpdateLangInput, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
-    adminDeleteLangById(id: string, constraint?: QueryStatement): AdminLang | Promise<AdminLang>;
-    adminDeleteLangs(query?: QueryStatement, constraint?: QueryStatement): AdminLang[] | Promise<AdminLang[]>;
-}
-
-export interface AdminLang {
-    id: string;
-    name: GraphQLString;
-    image?: GraphQLString;
-    iso6392: GraphQLString;
-    iso6393: GraphQLString;
-    ietf: GraphQLString;
-    sort?: GraphQLInt;
+    type: IamAccountType;
+    email: GraphQLString;
     isActive: GraphQLBoolean;
-    createdAt?: GraphQLTimestamp;
-    updatedAt?: GraphQLTimestamp;
-    deletedAt?: GraphQLTimestamp;
+    clientId: string;
+    dApplicationCodes: JSON;
+    dPermissions: JSON;
+    data?: JSON;
+    roleIds?: string[];
+    tenantIds?: string[];
+    user?: IamCreateUserInput;
+    dTenants: JSON;
+}
+
+export interface IamUpdateAccountInput {
+    id: string;
+    type?: IamAccountType;
+    email?: GraphQLString;
+    isActive?: GraphQLBoolean;
+    clientId?: string;
+    dApplicationCodes?: JSON;
+    dPermissions?: JSON;
+    data?: JSON;
+    roleIds?: string[];
+    tenantIds?: string[];
+    user?: IamUpdateUserInput;
+    dTenants?: JSON;
+}
+
+export interface IamCreateBoundedContextInput {
+    id: string;
+    name: GraphQLString;
+    root: GraphQLString;
+    sort: GraphQLInt;
+    isActive: GraphQLBoolean;
+}
+
+export interface IamUpdateBoundedContextInput {
+    id: string;
+    name?: GraphQLString;
+    root?: GraphQLString;
+    sort?: GraphQLInt;
+    isActive?: GraphQLBoolean;
+}
+
+export interface IamCreatePermissionInput {
+    id: string;
+    name: GraphQLString;
+    boundedContextId: string;
+    roleIds?: string[];
+}
+
+export interface IamUpdatePermissionInput {
+    id: string;
+    name?: GraphQLString;
+    boundedContextId?: string;
+    roleIds?: string[];
+}
+
+export interface IamCreateRoleInput {
+    id: string;
+    name: GraphQLString;
+    isMaster: GraphQLBoolean;
+    permissionIds?: string[];
+    accountIds?: string[];
+}
+
+export interface IamUpdateRoleInput {
+    id: string;
+    name?: GraphQLString;
+    isMaster?: GraphQLBoolean;
+    permissionIds?: string[];
+    accountIds?: string[];
+}
+
+export interface IamCreateTenantInput {
+    id: string;
+    name: GraphQLString;
+    code: GraphQLString;
+    logo?: GraphQLString;
+    isActive: GraphQLBoolean;
+    data?: JSON;
+    accountIds?: string[];
+}
+
+export interface IamUpdateTenantInput {
+    id: string;
+    name?: GraphQLString;
+    code?: GraphQLString;
+    logo?: GraphQLString;
+    isActive?: GraphQLBoolean;
+    data?: JSON;
+    accountIds?: string[];
+}
+
+export interface IamCreateUserInput {
+    id: string;
+    accountId?: string;
+    name: GraphQLString;
+    surname?: GraphQLString;
+    avatar?: GraphQLString;
+    mobile?: GraphQLString;
+    langId?: string;
+    username: GraphQLString;
+    password: GraphQLString;
+    rememberToken?: GraphQLString;
+    data?: JSON;
+}
+
+export interface IamUpdateUserInput {
+    id: string;
+    accountId?: string;
+    name?: GraphQLString;
+    surname?: GraphQLString;
+    avatar?: GraphQLString;
+    mobile?: GraphQLString;
+    langId?: string;
+    username?: GraphQLString;
+    password?: GraphQLString;
+    rememberToken?: GraphQLString;
+    data?: JSON;
 }
 
 export interface Pagination {
     total: number;
     count: number;
     rows: JSON[];
+}
+
+export interface IamAccount {
+    id: string;
+    type: IamAccountType;
+    email: GraphQLString;
+    isActive: GraphQLBoolean;
+    clientId: string;
+    dApplicationCodes: JSON;
+    dPermissions: JSON;
+    dTenants: JSON;
+    data?: JSON;
+    roles?: IamRole[];
+    tenants?: IamTenant[];
+    user?: IamUser;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface IQuery {
+    iamFindMeAccount(): IamAccount | Promise<IamAccount>;
+    iamFindAccount(query?: QueryStatement, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamFindAccountById(id?: string, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamGetAccounts(query?: QueryStatement, constraint?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
+    iamPaginateAccounts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    iamFindBoundedContext(query?: QueryStatement, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamFindBoundedContextById(id?: string, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamGetBoundedContexts(query?: QueryStatement, constraint?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
+    iamPaginateBoundedContexts(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    iamFindPermission(query?: QueryStatement, constraint?: QueryStatement): IamPermission | Promise<IamPermission>;
+    iamFindPermissionById(id?: string, constraint?: QueryStatement): IamPermission | Promise<IamPermission>;
+    iamGetPermissions(query?: QueryStatement, constraint?: QueryStatement): IamPermission[] | Promise<IamPermission[]>;
+    iamPaginatePermissions(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    iamFindRole(query?: QueryStatement, constraint?: QueryStatement): IamRole | Promise<IamRole>;
+    iamFindRoleById(id?: string, constraint?: QueryStatement): IamRole | Promise<IamRole>;
+    iamGetRoles(query?: QueryStatement, constraint?: QueryStatement): IamRole[] | Promise<IamRole[]>;
+    iamPaginateRoles(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    iamFindTenant(query?: QueryStatement, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamFindTenantById(id?: string, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamGetTenants(query?: QueryStatement, constraint?: QueryStatement): IamTenant[] | Promise<IamTenant[]>;
+    iamPaginateTenants(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    iamFindUser(query?: QueryStatement, constraint?: QueryStatement): IamUser | Promise<IamUser>;
+    iamFindUserById(id?: string, constraint?: QueryStatement): IamUser | Promise<IamUser>;
+    iamGetUsers(query?: QueryStatement, constraint?: QueryStatement): IamUser[] | Promise<IamUser[]>;
+    iamPaginateUsers(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+}
+
+export interface IMutation {
+    iamCreateAccount(payload: IamCreateAccountInput): IamAccount | Promise<IamAccount>;
+    iamCreateAccounts(payload: IamCreateAccountInput[]): boolean | Promise<boolean>;
+    iamUpdateAccount(payload: IamUpdateAccountInput, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamDeleteAccountById(id: string, constraint?: QueryStatement): IamAccount | Promise<IamAccount>;
+    iamDeleteAccounts(query?: QueryStatement, constraint?: QueryStatement): IamAccount[] | Promise<IamAccount[]>;
+    iamCreateBoundedContext(payload: IamCreateBoundedContextInput): IamBoundedContext | Promise<IamBoundedContext>;
+    iamCreateBoundedContexts(payload: IamCreateBoundedContextInput[]): boolean | Promise<boolean>;
+    iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamDeleteBoundedContextById(id: string, constraint?: QueryStatement): IamBoundedContext | Promise<IamBoundedContext>;
+    iamDeleteBoundedContexts(query?: QueryStatement, constraint?: QueryStatement): IamBoundedContext[] | Promise<IamBoundedContext[]>;
+    iamCreatePermission(payload: IamCreatePermissionInput): IamPermission | Promise<IamPermission>;
+    iamCreatePermissions(payload: IamCreatePermissionInput[]): boolean | Promise<boolean>;
+    iamUpdatePermission(payload: IamUpdatePermissionInput, constraint?: QueryStatement): IamPermission | Promise<IamPermission>;
+    iamDeletePermissionById(id: string, constraint?: QueryStatement): IamPermission | Promise<IamPermission>;
+    iamDeletePermissions(query?: QueryStatement, constraint?: QueryStatement): IamPermission[] | Promise<IamPermission[]>;
+    iamCreateRole(payload: IamCreateRoleInput): IamRole | Promise<IamRole>;
+    iamCreateRoles(payload: IamCreateRoleInput[]): boolean | Promise<boolean>;
+    iamUpdateRole(payload: IamUpdateRoleInput, constraint?: QueryStatement): IamRole | Promise<IamRole>;
+    iamDeleteRoleById(id: string, constraint?: QueryStatement): IamRole | Promise<IamRole>;
+    iamDeleteRoles(query?: QueryStatement, constraint?: QueryStatement): IamRole[] | Promise<IamRole[]>;
+    iamCreateTenant(payload: IamCreateTenantInput): IamTenant | Promise<IamTenant>;
+    iamCreateTenants(payload: IamCreateTenantInput[]): boolean | Promise<boolean>;
+    iamUpdateTenant(payload: IamUpdateTenantInput, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamDeleteTenantById(id: string, constraint?: QueryStatement): IamTenant | Promise<IamTenant>;
+    iamDeleteTenants(query?: QueryStatement, constraint?: QueryStatement): IamTenant[] | Promise<IamTenant[]>;
+    iamCreateUser(payload: IamCreateUserInput): IamUser | Promise<IamUser>;
+    iamCreateUsers(payload: IamCreateUserInput[]): boolean | Promise<boolean>;
+    iamUpdateUser(payload: IamUpdateUserInput, constraint?: QueryStatement): IamUser | Promise<IamUser>;
+    iamDeleteUserById(id: string, constraint?: QueryStatement): IamUser | Promise<IamUser>;
+    iamDeleteUsers(query?: QueryStatement, constraint?: QueryStatement): IamUser[] | Promise<IamUser[]>;
+}
+
+export interface IamBoundedContext {
+    id: string;
+    name: GraphQLString;
+    root: GraphQLString;
+    sort: GraphQLInt;
+    isActive: GraphQLBoolean;
+    permissions?: IamPermission[];
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface IamPermission {
+    id: string;
+    name: GraphQLString;
+    boundedContextId: string;
+    boundedContext: IamBoundedContext;
+    roles?: IamRole[];
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface IamRole {
+    id: string;
+    name: GraphQLString;
+    isMaster: GraphQLBoolean;
+    permissions?: IamPermission[];
+    accounts?: IamAccount[];
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface IamTenant {
+    id: string;
+    name: GraphQLString;
+    code: GraphQLString;
+    logo?: GraphQLString;
+    isActive: GraphQLBoolean;
+    data?: JSON;
+    accounts?: IamAccount[];
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
+}
+
+export interface IamUser {
+    id: string;
+    accountId: string;
+    name: GraphQLString;
+    surname?: GraphQLString;
+    avatar?: GraphQLString;
+    mobile?: GraphQLString;
+    langId?: string;
+    username: GraphQLString;
+    password: GraphQLString;
+    rememberToken?: GraphQLString;
+    data?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
 }
 
 export type JSON = any;

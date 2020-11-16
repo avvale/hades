@@ -1,0 +1,51 @@
+version: 1.0.0
+boundedContextName: iam
+moduleName: tenant
+moduleNames: tenants
+aggregateName: IamTenant
+hasOAuth: true
+hasTenant: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: code
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: logo
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: is_active
+    type: boolean
+    nullable: false
+  - name: data
+    type: json
+    nullable: true
+  - name: accounts
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: account
+    relationshipAggregate: IamAccount
+    relationshipModulePath: iam/account
+    intermediateTable: iam_tenants_accounts
+    intermediateModel: IamTenantsAccountsModel
+    intermediateModelModuleSection: iam/tenant
+    intermediateModelFile: tenants-accounts
+  - name: created_at
+    type: timestamp
+    nullable: true
+  - name: updated_at
+    type: timestamp
+    nullable: true
+  - name: deleted_at
+    type: timestamp
+    nullable: true
