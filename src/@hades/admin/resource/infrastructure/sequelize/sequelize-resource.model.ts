@@ -34,7 +34,7 @@ export class AdminResourceModel extends Model<AdminResourceModel>
 
 
     @BelongsToMany(() => AdminAttachmentFamilyModel, () => AdminAttachmentFamiliesResourcesModel)
-    attachment_families: AdminAttachmentFamilyModel[];
+    attachmentFamilies: AdminAttachmentFamilyModel[];
 
     @Column({
         field: 'name',
