@@ -132,6 +132,56 @@ export interface AdminUpdateAttachmentFamilyInput {
     format?: GraphQLString;
 }
 
+export interface AdminCreateAttachmentInput {
+    id: string;
+    commonId: string;
+    langId: string;
+    attachableModel: GraphQLString;
+    attachableId: string;
+    familyId?: string;
+    sort?: GraphQLInt;
+    alt?: GraphQLString;
+    title?: GraphQLString;
+    description?: GraphQLString;
+    excerpt?: GraphQLString;
+    pathname: GraphQLString;
+    filename: GraphQLString;
+    url: GraphQLString;
+    mime: GraphQLString;
+    extension?: GraphQLString;
+    size: GraphQLInt;
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    libraryId?: string;
+    libraryFilename?: GraphQLString;
+    data?: JSON;
+}
+
+export interface AdminUpdateAttachmentInput {
+    id: string;
+    commonId?: string;
+    langId?: string;
+    attachableModel?: GraphQLString;
+    attachableId?: string;
+    familyId?: string;
+    sort?: GraphQLInt;
+    alt?: GraphQLString;
+    title?: GraphQLString;
+    description?: GraphQLString;
+    excerpt?: GraphQLString;
+    pathname?: GraphQLString;
+    filename?: GraphQLString;
+    url?: GraphQLString;
+    mime?: GraphQLString;
+    extension?: GraphQLString;
+    size?: GraphQLInt;
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    libraryId?: string;
+    libraryFilename?: GraphQLString;
+    data?: JSON;
+}
+
 export interface AdminCreateCountryInput {
     id: string;
     commonId: string;
@@ -1043,6 +1093,10 @@ export interface IQuery {
     adminFindAttachmentFamilyById(id?: string, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
     adminGetAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily[] | Promise<AdminAttachmentFamily[]>;
     adminPaginateAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    adminFindAttachment(query?: QueryStatement, constraint?: QueryStatement): AdminAttachment | Promise<AdminAttachment>;
+    adminFindAttachmentById(id?: string, constraint?: QueryStatement): AdminAttachment | Promise<AdminAttachment>;
+    adminGetAttachments(query?: QueryStatement, constraint?: QueryStatement): AdminAttachment[] | Promise<AdminAttachment[]>;
+    adminPaginateAttachments(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     adminFindCountry(query?: QueryStatement, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
     adminFindCountryById(id?: string, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
     adminGetCountries(query?: QueryStatement, constraint?: QueryStatement): AdminCountry[] | Promise<AdminCountry[]>;
@@ -1162,6 +1216,11 @@ export interface IMutation {
     adminUpdateAttachmentFamily(payload: AdminUpdateAttachmentFamilyInput, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
     adminDeleteAttachmentFamilyById(id: string, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
     adminDeleteAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily[] | Promise<AdminAttachmentFamily[]>;
+    adminCreateAttachment(payload: AdminCreateAttachmentInput): AdminAttachment | Promise<AdminAttachment>;
+    adminCreateAttachments(payload: AdminCreateAttachmentInput[]): boolean | Promise<boolean>;
+    adminUpdateAttachment(payload: AdminUpdateAttachmentInput, constraint?: QueryStatement): AdminAttachment | Promise<AdminAttachment>;
+    adminDeleteAttachmentById(id: string, constraint?: QueryStatement): AdminAttachment | Promise<AdminAttachment>;
+    adminDeleteAttachments(query?: QueryStatement, constraint?: QueryStatement): AdminAttachment[] | Promise<AdminAttachment[]>;
     adminCreateCountry(payload: AdminCreateCountryInput): AdminCountry | Promise<AdminCountry>;
     adminCreateCountries(payload: AdminCreateCountryInput[]): boolean | Promise<boolean>;
     adminUpdateCountry(payload: AdminUpdateCountryInput, constraint?: QueryStatement): AdminCountry | Promise<AdminCountry>;
@@ -1298,6 +1357,35 @@ export interface IMutation {
     oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthDeleteRefreshTokenById(id: string, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthDeleteRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
+}
+
+export interface AdminAttachment {
+    id: string;
+    commonId: string;
+    langId: string;
+    attachableModel: GraphQLString;
+    attachableId: string;
+    familyId?: string;
+    family?: AdminAttachmentFamily;
+    sort?: GraphQLInt;
+    alt?: GraphQLString;
+    title?: GraphQLString;
+    description?: GraphQLString;
+    excerpt?: GraphQLString;
+    pathname: GraphQLString;
+    filename: GraphQLString;
+    url: GraphQLString;
+    mime: GraphQLString;
+    extension?: GraphQLString;
+    size: GraphQLInt;
+    width?: GraphQLInt;
+    height?: GraphQLInt;
+    libraryId?: string;
+    libraryFilename?: GraphQLString;
+    data?: JSON;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
 }
 
 export interface AdminCountry {
