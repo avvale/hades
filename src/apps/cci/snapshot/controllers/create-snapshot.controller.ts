@@ -24,6 +24,10 @@ import { CreateChannelsDetailCommand } from '@hades/cci/channel-detail/applicati
 import { CreateJobsDetailCommand } from '@hades/cci/job-detail/application/create/create-jobs-detail.command';
 import { DeleteJobsDetailCommand } from '@hades/cci/job-detail/application/delete/delete-jobs-detail.command';
 import { DeleteChannelsDetailCommand } from '@hades/cci/channel-detail/application/delete/delete-channels-detail.command';
+import { DeleteDataLakesCommand } from '@hades/cci/data-lake/application/delete/delete-data-lakes.command';
+import { DeleteMessagesOverviewCommand } from '@hades/cci/message-overview/application/delete/delete-messages-overview.command';
+import { DeleteJobsOverviewCommand } from '@hades/cci/job-overview/application/delete/delete-jobs-overview.command';
+import { DeleteChannelsOverviewCommand } from '@hades/cci/channel-overview/application/delete/delete-channels-overview.command';
 import { Operator } from '@hades/shared/domain/persistence/sql-statement/operator';
 import { CreateDataLakeCommand } from '@hades/cci/data-lake/application/create/create-data-lake.command';
 import { Utils } from '@hades/shared/domain/lib/utils';
@@ -205,16 +209,6 @@ export class CreateSnapshotController
                 numberDays: payload.messageOverview.numberDays,
             }
         });
-        await this.commandBus.dispatch(new DeleteMessagesDetailCommand({
-            where: {
-                tenantId: tenant.id,
-                systemId: system.id,
-                createdAt: {
-                    [Operator.lt]: Utils.now().subtract(3, 'days').format('YYYY-MM-DD')
-                }
-            },
-            limit: 15000
-        }, {}, { timezone }));
         await this.commandBus.dispatch(new CreateMessagesDetailCommand(messagesDetail, { timezone }))
 
         const channelsDetail = payload.channelsDetail.map(channel => {
@@ -244,16 +238,6 @@ export class CreateSnapshotController
                 detail: Utils.base64Decode(channel.detail)
             }
         });
-        await this.commandBus.dispatch(new DeleteChannelsDetailCommand({
-            where: {
-                tenantId: tenant.id,
-                systemId: system.id,
-                createdAt: {
-                    [Operator.lt]: Utils.now().subtract(3, 'days').format('YYYY-MM-DD')
-                }
-            },
-            limit: 15000
-        }, {}, { timezone }));
         await this.commandBus.dispatch(new CreateChannelsDetailCommand(channelsDetail, { timezone }));
 
         const jobsDetail = payload.jobsDetail.map(job => {
@@ -277,17 +261,96 @@ export class CreateSnapshotController
                 endAt: job.endAt
             }
         });
+        await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail, { timezone }));
+
+        /**
+         * Delete data
+         */
+        const detailsPersistenceDays = 3;
+        const overviewsPersistenceDays = 7;
+
+        // delete dataLake
+        await this.commandBus.dispatch(new DeleteDataLakesCommand({
+            where: {
+                tenantId: tenant.id,
+                createdAt: {
+                    [Operator.lt]: Utils.now().subtract(detailsPersistenceDays, 'days').format('YYYY-MM-DD')
+                }
+            },
+            limit: 15000
+        }, {}, { timezone }));
+
+        // delete messagesDetail
+        await this.commandBus.dispatch(new DeleteMessagesDetailCommand({
+            where: {
+                tenantId: tenant.id,
+                systemId: system.id,
+                createdAt: {
+                    [Operator.lt]: Utils.now().subtract(detailsPersistenceDays, 'days').format('YYYY-MM-DD')
+                }
+            },
+            limit: 15000
+        }, {}, { timezone }));
+
+        // delete messagesOverview
+        await this.commandBus.dispatch(new DeleteMessagesOverviewCommand({
+            where: {
+                tenantId: tenant.id,
+                systemId: system.id,
+                createdAt: {
+                    [Operator.lt]: Utils.now().subtract(overviewsPersistenceDays, 'days').format('YYYY-MM-DD')
+                }
+            },
+            limit: 15000
+        }, {}, { timezone }));
+
+        // delete jobsDetail
         await this.commandBus.dispatch(new DeleteJobsDetailCommand({
             where: {
                 tenantId: tenant.id,
                 systemId: system.id,
                 createdAt: {
-                    [Operator.lt]: Utils.now().subtract(3, 'days').format('YYYY-MM-DD')
+                    [Operator.lt]: Utils.now().subtract(detailsPersistenceDays, 'days').format('YYYY-MM-DD')
                 }
             },
             limit: 15000
         }, {}, { timezone }));
-        await this.commandBus.dispatch(new CreateJobsDetailCommand(jobsDetail, { timezone }));
+
+        // delete jobsOverview
+        await this.commandBus.dispatch(new DeleteJobsOverviewCommand({
+            where: {
+                tenantId: tenant.id,
+                systemId: system.id,
+                createdAt: {
+                    [Operator.lt]: Utils.now().subtract(overviewsPersistenceDays, 'days').format('YYYY-MM-DD')
+                }
+            },
+            limit: 15000
+        }, {}, { timezone }));
+
+        // delete channelsDetail
+        await this.commandBus.dispatch(new DeleteChannelsDetailCommand({
+            where: {
+                tenantId: tenant.id,
+                systemId: system.id,
+                createdAt: {
+                    [Operator.lt]: Utils.now().subtract(detailsPersistenceDays, 'days').format('YYYY-MM-DD')
+                }
+            },
+            limit: 15000
+        }, {}, { timezone }));
+
+        // delete channelsOverview
+        await this.commandBus.dispatch(new DeleteChannelsOverviewCommand({
+            where: {
+                tenantId: tenant.id,
+                systemId: system.id,
+                createdAt: {
+                    [Operator.lt]: Utils.now().subtract(overviewsPersistenceDays, 'days').format('YYYY-MM-DD')
+                }
+            },
+            limit: 15000
+        }, {}, { timezone }));
 
         return {
             statusCode: 200,
