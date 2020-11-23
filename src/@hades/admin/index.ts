@@ -2,25 +2,33 @@ import { AdminLangHandlers, AdminLangServices, AdminLangModel, ILangRepository, 
 import { AdminCountryHandlers, AdminCountryServices, AdminCountryModel, ICountryRepository, SequelizeCountryRepository, CountrySagas } from './country';
 import { AdminResourceHandlers, AdminResourceServices, AdminResourceModel, IResourceRepository, SequelizeResourceRepository, ResourceSagas } from './resource';
 import { AdminAttachmentFamilyHandlers, AdminAttachmentFamilyServices, AdminAttachmentFamilyModel, IAttachmentFamilyRepository, SequelizeAttachmentFamilyRepository, AttachmentFamilySagas, AdminAttachmentFamiliesResourcesModel } from './attachment-family';
+import { AdminAttachmentHandlers, AdminAttachmentServices, AdminAttachmentModel, IAttachmentRepository, SequelizeAttachmentRepository, AttachmentSagas } from './attachment';
+import { AdminAdministrativeAreaLevel1Handlers, AdminAdministrativeAreaLevel1Services, AdminAdministrativeAreaLevel1Model, IAdministrativeAreaLevel1Repository, SequelizeAdministrativeAreaLevel1Repository, AdministrativeAreaLevel1Sagas } from './administrative-area-level-1';
 
 export const AdminHandlers = [
     ...AdminLangHandlers,
     ...AdminCountryHandlers,
     ...AdminResourceHandlers,
-    ...AdminAttachmentFamilyHandlers
+    ...AdminAttachmentFamilyHandlers,
+    ...AdminAttachmentHandlers,
+    ...AdminAdministrativeAreaLevel1Handlers
 ];
 export const AdminServices = [
     ...AdminLangServices,
     ...AdminCountryServices,
     ...AdminResourceServices,
-    ...AdminAttachmentFamilyServices
+    ...AdminAttachmentFamilyServices,
+    ...AdminAttachmentServices,
+    ...AdminAdministrativeAreaLevel1Services
 ];
 export const AdminModels = [
     AdminLangModel,
     AdminCountryModel,
     AdminResourceModel,
     AdminAttachmentFamilyModel,
-    AdminAttachmentFamiliesResourcesModel
+    AdminAttachmentFamiliesResourcesModel,
+    AdminAttachmentModel,
+    AdminAdministrativeAreaLevel1Model
 ];
 export const AdminRepositories = [
     {
@@ -38,11 +46,21 @@ export const AdminRepositories = [
     {
         provide: IAttachmentFamilyRepository,
         useClass: SequelizeAttachmentFamilyRepository
+    },
+    {
+        provide: IAttachmentRepository,
+        useClass: SequelizeAttachmentRepository
+    },
+    {
+        provide: IAdministrativeAreaLevel1Repository,
+        useClass: SequelizeAdministrativeAreaLevel1Repository
     }
 ];
 export const AdminSagas = [
     LangSagas,
     CountrySagas,
     ResourceSagas,
-    AttachmentFamilySagas
+    AttachmentFamilySagas,
+    AttachmentSagas,
+    AdministrativeAreaLevel1Sagas
 ];

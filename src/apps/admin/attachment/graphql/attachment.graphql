@@ -1,0 +1,99 @@
+
+type AdminAttachment
+{
+    id: ID!
+    commonId: ID!
+    langId: ID!
+    attachableModel: GraphQLString!
+    attachableId: ID!
+    familyId: ID
+    family: AdminAttachmentFamily
+    sort: GraphQLInt
+    alt: GraphQLString
+    title: GraphQLString
+    description: GraphQLString
+    excerpt: GraphQLString
+    pathname: GraphQLString!
+    filename: GraphQLString!
+    url: GraphQLString!
+    mime: GraphQLString!
+    extension: GraphQLString
+    size: GraphQLInt!
+    width: GraphQLInt
+    height: GraphQLInt
+    libraryId: ID
+    libraryFilename: GraphQLString
+    data: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input AdminCreateAttachmentInput
+{
+    id: ID!
+    commonId: ID!
+    langId: ID!
+    attachableModel: GraphQLString!
+    attachableId: ID!
+    familyId: ID
+    sort: GraphQLInt
+    alt: GraphQLString
+    title: GraphQLString
+    description: GraphQLString
+    excerpt: GraphQLString
+    pathname: GraphQLString!
+    filename: GraphQLString!
+    url: GraphQLString!
+    mime: GraphQLString!
+    extension: GraphQLString
+    size: GraphQLInt!
+    width: GraphQLInt
+    height: GraphQLInt
+    libraryId: ID
+    libraryFilename: GraphQLString
+    data: JSON
+}
+
+input AdminUpdateAttachmentInput
+{
+    id: ID!
+    commonId: ID
+    langId: ID
+    attachableModel: GraphQLString
+    attachableId: ID
+    familyId: ID
+    sort: GraphQLInt
+    alt: GraphQLString
+    title: GraphQLString
+    description: GraphQLString
+    excerpt: GraphQLString
+    pathname: GraphQLString
+    filename: GraphQLString
+    url: GraphQLString
+    mime: GraphQLString
+    extension: GraphQLString
+    size: GraphQLInt
+    width: GraphQLInt
+    height: GraphQLInt
+    libraryId: ID
+    libraryFilename: GraphQLString
+    data: JSON
+}
+
+type Query
+{
+    adminFindAttachment(query:QueryStatement constraint:QueryStatement): AdminAttachment
+    adminFindAttachmentById(id:ID constraint:QueryStatement): AdminAttachment
+    adminGetAttachments(query:QueryStatement constraint:QueryStatement): [AdminAttachment]!
+    adminPaginateAttachments(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    adminCreateAttachment(payload: AdminCreateAttachmentInput!): AdminAttachment
+    adminCreateAttachments(payload: [AdminCreateAttachmentInput]!): Boolean!
+    adminUpdateAttachment(payload: AdminUpdateAttachmentInput! constraint:QueryStatement): AdminAttachment
+    adminDeleteAttachmentById(id: ID! constraint:QueryStatement): AdminAttachment
+    adminDeleteAttachments(query:QueryStatement constraint:QueryStatement): [AdminAttachment]!
+}
