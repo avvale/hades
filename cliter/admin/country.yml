@@ -59,7 +59,7 @@ aggregateProperties:
   - name: sort
     type: smallint.unsigned
     maxLength: 6
-    nullable: false
+    nullable: true
   - name: administrative_area_level_1
     type: varchar
     maxLength: 50

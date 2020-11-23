@@ -95,7 +95,7 @@ export class AdminCountryModel extends Model<AdminCountryModel>
 
     @Column({
         field: 'sort',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.SMALLINT.UNSIGNED,
     })
     sort: number;

@@ -9,8 +9,8 @@ export class CountrySort extends SmallintValueObject
     {
         super(value, Object.assign({
             name: 'CountrySort',
-            nullable: false,
-            undefinable: false,
+            nullable: true,
+            undefinable: true,
             maxLength: 6,
             unsigned: true,
         }, validationRules));

@@ -15,7 +15,7 @@ export class CreateCountryCommand
             name: string,
             slug: string,
             image?: string,
-            sort: number,
+            sort?: number,
             administrativeAreaLevel1?: string,
             administrativeAreaLevel2?: string,
             administrativeAreaLevel3?: string,

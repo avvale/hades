@@ -13,7 +13,7 @@ type AdminCountry
     name: GraphQLString!
     slug: GraphQLString!
     image: GraphQLString
-    sort: GraphQLInt!
+    sort: GraphQLInt
     administrativeAreaLevel1: GraphQLString
     administrativeAreaLevel2: GraphQLString
     administrativeAreaLevel3: GraphQLString
@@ -40,7 +40,7 @@ input AdminCreateCountryInput
     name: GraphQLString!
     slug: GraphQLString!
     image: GraphQLString
-    sort: GraphQLInt!
+    sort: GraphQLInt
     administrativeAreaLevel1: GraphQLString
     administrativeAreaLevel2: GraphQLString
     administrativeAreaLevel3: GraphQLString
