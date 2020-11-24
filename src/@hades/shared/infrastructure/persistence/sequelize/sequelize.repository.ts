@@ -80,21 +80,13 @@ export abstract class SequelizeRepository<Aggregate extends AggregateBase, Model
             }, constraint), cQMetadata
         );
 
-        let model = null;
+        // value is already mapped
+        const model = await this.repository.findOne(
+            // pass queryStatement and cQMetadata to criteria, where will use cQMetadata for manage dates or other data
+            this.criteria.implements(hookResponse.queryStatement, hookResponse.cQMetadata)
+        );
 
-        try
-        {
-            // value is already mapped
-            model = await this.repository.findOne(
-                // pass queryStatement and cQMetadata to criteria, where will use cQMetadata for manage dates or other data
-                this.criteria.implements(hookResponse.queryStatement, hookResponse.cQMetadata)
-            );
-        }
-        catch (err)
-        {
-            console.log(err)
-            if (!model) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
-        }
+        if (!model) throw new NotFoundException(`${this.aggregateName} with id: ${id.value}, not found`);
 
         return <Aggregate>this.mapper.mapModelToAggregate(model, cQMetadata);
     }
