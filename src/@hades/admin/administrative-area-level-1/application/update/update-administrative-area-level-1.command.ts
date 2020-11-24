@@ -6,7 +6,7 @@ export class UpdateAdministrativeAreaLevel1Command
     constructor(
         public readonly payload: {
             id: string,
-            countryId?: string,
+            countryCommonId?: string,
             code?: string,
             customCode?: string,
             name?: string,

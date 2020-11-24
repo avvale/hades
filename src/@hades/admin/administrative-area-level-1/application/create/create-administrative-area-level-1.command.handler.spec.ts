@@ -41,7 +41,7 @@ describe('CreateAdministrativeAreaLevel1CommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateAdministrativeAreaLevel1Command(
                     administrativeAreasLevel1[0].id,
-                    administrativeAreasLevel1[0].countryId,
+                    administrativeAreasLevel1[0].countryCommonId,
                     administrativeAreasLevel1[0].code,
                     administrativeAreasLevel1[0].customCode,
                     administrativeAreasLevel1[0].name,

@@ -16,16 +16,16 @@ export class AdminAdministrativeAreaLevel1Model extends Model<AdminAdministrativ
 
     @ForeignKey(() => AdminCountryModel)
     @Column({
-        field: 'country_id',
+        field: 'country_common_id',
         allowNull: false,
         type: DataTypes.UUID,
         references: {
-            key: 'id'
+            key: 'common_id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
     })
-    countryId: string;
+    countryCommonId: string;
 
     @BelongsTo(() => AdminCountryModel)
     country: AdminCountryModel;

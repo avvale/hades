@@ -25,7 +25,7 @@ export class AddAdministrativeAreasLevel1ContextEvent extends AggregateRoot
                 this.aggregateRoots.map(administrativeAreaLevel1 =>
                     new CreatedAdministrativeAreaLevel1Event(
                         administrativeAreaLevel1.id.value,
-                        administrativeAreaLevel1.countryId.value,
+                        administrativeAreaLevel1.countryCommonId.value,
                         administrativeAreaLevel1.code.value,
                         administrativeAreaLevel1.customCode?.value,
                         administrativeAreaLevel1.name.value,
@@ -46,7 +46,7 @@ export class AddAdministrativeAreasLevel1ContextEvent extends AggregateRoot
                 this.aggregateRoots.map(administrativeAreaLevel1 =>
                     new DeletedAdministrativeAreaLevel1Event(
                         administrativeAreaLevel1.id.value,
-                        administrativeAreaLevel1.countryId.value,
+                        administrativeAreaLevel1.countryCommonId.value,
                         administrativeAreaLevel1.code.value,
                         administrativeAreaLevel1.customCode?.value,
                         administrativeAreaLevel1.name.value,
