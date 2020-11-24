@@ -25,7 +25,17 @@ export class Seeder
         NestFactory.createApplicationContext(SeederModule).then(async appContext => {
             const commandBus            = appContext.get(ICommandBus);
             const queryBus              = appContext.get(IQueryBus);
-            const administratorAccount  = await queryBus.ask(new FindAccountByIdQuery(IamUtils.administratorAccountId));
+            let administratorAccount  = null;
+
+            try
+            {
+                administratorAccount  = await queryBus.ask(new FindAccountByIdQuery(IamUtils.administratorAccountId));
+            }
+            catch (error)
+            {
+                // avoid error 404
+                if (error.response.statusCode === 404) {}
+            }
 
             if (administratorAccount)
             {
