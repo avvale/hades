@@ -30,6 +30,7 @@ export class AdminAdministrativeAreaLevel1Model extends Model<AdminAdministrativ
     @BelongsTo(() => AdminCountryModel)
     country: AdminCountryModel;
 
+    @Unique
     @Column({
         field: 'code',
         allowNull: false,
@@ -37,6 +38,7 @@ export class AdminAdministrativeAreaLevel1Model extends Model<AdminAdministrativ
     })
     code: string;
 
+    @Unique
     @Column({
         field: 'custom_code',
         allowNull: true,

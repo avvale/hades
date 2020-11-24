@@ -24,10 +24,12 @@ aggregateProperties:
     type: varchar
     maxLength: 8
     nullable: false
+    index: unique
   - name: custom_code
     type: varchar
     maxLength: 10
     nullable: true
+    index: unique
   - name: name
     type: varchar
     maxLength: 255
