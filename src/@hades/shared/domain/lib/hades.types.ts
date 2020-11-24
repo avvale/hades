@@ -65,6 +65,7 @@ export interface ValidationRules
     minLength?: number;
     maxLength?: number;
     enumOptions?: string[];
+    decimalOptions?: number[];
     unsigned?: boolean;
     default?: any;
 }
