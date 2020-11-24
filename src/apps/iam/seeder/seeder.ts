@@ -23,10 +23,9 @@ export class Seeder
     main()
     {
         NestFactory.createApplicationContext(SeederModule).then(async appContext => {
-            const commandBus = appContext.get(ICommandBus);
-            const queryBus = appContext.get(IQueryBus);
-
-            const administratorAccount = await queryBus.ask(new FindAccountByIdQuery(IamUtils.administratorAccountId));
+            const commandBus            = appContext.get(ICommandBus);
+            const queryBus              = appContext.get(IQueryBus);
+            const administratorAccount  = await queryBus.ask(new FindAccountByIdQuery(IamUtils.administratorAccountId));
 
             if (administratorAccount)
             {
@@ -43,7 +42,7 @@ export class Seeder
                 const rolesAccounts = roles.map(role => {
                     return {
                         roleId: role.id,
-                        accountId: IamUtils.administratorRoleId
+                        accountId: IamUtils.administratorAccountId
                     }
                 });
                 await commandBus.dispatch(new CreateRolesAccountsCommand(rolesAccounts));
