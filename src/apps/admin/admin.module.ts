@@ -7,6 +7,7 @@ import { AdminCountryControllers, AdminCountryResolvers } from './country';
 import { AdminResourceControllers, AdminResourceResolvers } from './resource';
 import { AdminAttachmentFamilyControllers, AdminAttachmentFamilyResolvers } from './attachment-family';
 import { AdminAttachmentControllers, AdminAttachmentResolvers } from './attachment';
+import { AdminAdministrativeAreaLevel1Controllers, AdminAdministrativeAreaLevel1Resolvers } from './administrative-area-level-1';
 
 @Module({
     imports: [
@@ -20,7 +21,8 @@ import { AdminAttachmentControllers, AdminAttachmentResolvers } from './attachme
         ...AdminCountryControllers,
         ...AdminResourceControllers,
         ...AdminAttachmentFamilyControllers,
-        ...AdminAttachmentControllers
+        ...AdminAttachmentControllers,
+        ...AdminAdministrativeAreaLevel1Controllers
     ],
     providers: [
         ...AdminHandlers,
@@ -31,7 +33,8 @@ import { AdminAttachmentControllers, AdminAttachmentResolvers } from './attachme
         ...AdminCountryResolvers,
         ...AdminResourceResolvers,
         ...AdminAttachmentFamilyResolvers,
-        ...AdminAttachmentResolvers
+        ...AdminAttachmentResolvers,
+        ...AdminAdministrativeAreaLevel1Resolvers
     ]
 })
 export class AdminModule {}

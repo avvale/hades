@@ -50,7 +50,7 @@ export class UpdateCountryCommandHandler implements ICommandHandler<UpdateCountr
                 name: new CountryName(command.payload.name, { undefinable: true }),
                 slug: new CountrySlug(command.payload.slug, { undefinable: true }),
                 image: new CountryImage(command.payload.image),
-                sort: new CountrySort(command.payload.sort, { undefinable: true }),
+                sort: new CountrySort(command.payload.sort),
                 administrativeAreaLevel1: new CountryAdministrativeAreaLevel1(command.payload.administrativeAreaLevel1),
                 administrativeAreaLevel2: new CountryAdministrativeAreaLevel2(command.payload.administrativeAreaLevel2),
                 administrativeAreaLevel3: new CountryAdministrativeAreaLevel3(command.payload.administrativeAreaLevel3),

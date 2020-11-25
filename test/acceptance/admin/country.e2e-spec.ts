@@ -7,11 +7,8 @@ import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/gr
 import { AdminModule } from './../../../src/apps/admin/admin.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
-import { IamModule } from './../../../src/apps/iam/iam.module';
 
-const importForeignModules = [
-    IamModule
-];
+const importForeignModules = [];
 
 describe('country', () =>
 {
@@ -60,24 +57,24 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'op',
-                iso3166Alpha3: 'ycq',
-                iso3166Numeric: '6qj',
-                customCode: 'xsdddowjty',
-                prefix: '9lij9',
-                name: 'swfmt3lw3qdx4u5nh9j2ih9jp3fekwhzgis7yje648il4cabsrucixauct8f6ofcmoqbthyvz1nd1gy1logojfzpmrs5eqj7tuf8knhgcsphgwr4leig4syl5ac7r9szhc2nkufyewwc3xd3xc3cc8c9sh2a0f82qvztsch3q5gs6hka5fyj7tbgb1wy4kds31c422k1d5is4sxa3lj7vg070ahuq39lwfiutdrxcvrjyl1cfysy25eayehyhrb',
-                slug: '7hcnep2kal3umpo03q4f7s6lyeastf351j8n745h89fewde9ae20rcdjutftxmrxru20iezty7qu7glxdue5basiqukcws0syf61jbb71pwy9dxdibggr65n3rsa124mrmjlluqd5lojfrhpo4nr3936ka4o3smlph3kdwyyu3a0vt6ea48hqz3d0rhpmun107xa3rxowvylnt0t75gon9cfk2ws9uo9zi17ch9o33jq043kss11nuuexenosaspxd9756frlljjgsw7asj3rq0r7jkms12wr95ggshlgzw71mr66ye8ktcstmbrar6l1zxdivw8hxndp5cmqr00lmr1ufo6akd3zx3m9qgqgi5cgb6oez3kvmufoiun0id27q75tau287jr5wzzf2i318qxvld3c31jyqgga1bj8o1p2rmb2rr7pfztgqab4r3lmob9xg1nn964btuj9d90shb1etwfd3nf6irodtfhkgfg8su9waqe3hqf96axdexvzyz9agxsj67jtvqlpaku0tnmc45yvhak0t14qqtrzf6vow0tdsb2vl1aeplb52vkw4ielh1i3ass5way2fwyifdvnei9yt7d3o3c6stsxlzkv4evp1c2pn4yg6hpec5nw81rv4wjzx9w50xlbfqi36l15icnuzlhufevvvsre2nmphy4r3s5ma03kpui8nr7gff8db9fnilwsrt2vw3qkl2jdy2ybkhmxgijphjmyp8fbsn97dtb063b4h1wkcvjn9adenyb3vwafp933n3nu1sv9khqqktwi4tcbvpjg3l0nn95sx4u1ivyxegeehbzmkm16unrsfiwrfi72lguge96giyjx73e0dxebzq77zlyveywc0o0m9hljjojj5qqxkyv5i6fueldatpyq7igzne7axbaylya9pkxuveeb3wlbszdciwgcgl7wrizhxeyu1rcptzmxmij84570guvw90mvz92au0sjgxiyl6mogahwbusl44n7c887griwqdu',
-                image: '7b26z2f3aosikl1dg0heip9nz2t21vx02g6psx0ucdm72si217bq12v18fb86hb5lpu4asakcnf9aozlxw11w2eur5j1uih5oic2exciw8h4lsa1yys78dgt95myzxm539uzn1z2o38ogb54ljld9e7uriigbgcsgv1kmzflu9mucmdj0c9oxjogr0ukcpvbisx8gy04eo92dlddw00xqwh9pet7473fsap51k2cfr00ugxos895o8xcrhc8xio0rf780lev8pelq0ea5qkjktwlkyu3i6i21xnwsyzm9txcdov62j6hc7a6fkprb8khn1864lm16bs5dhuk5umzqhtw1oxesambux3korunk5ni43cqmqi4oxdnce0z4s72fdxo4le2e3ql3ia5rkbayn736uprzc3g7g4wj9p5pe56x6rr39wxrp1oj0nvwwpqisss28ldit6p9x42sgo66bt9ddoxaycugm4z3s10vq468zfttbjpzhpbip0bwdumpx21908lp7uya8s20ym2k4tlfadriaecl9mcnjyu6c1naj2u1mo5f6mlniytpnn9m7abwwxtk5507hrurib14auovs8m1mt9fkh3tevw7lok9svlg23jgn7blu5fv95e6slw52wp9siahjjc8dtrlch21xx3xiisr4dp68rbhxekljqf265cob0y8zmoddjuf2clqmfmckqkktv7utskn5h90mnuzpx3asqb7d0564enh4dpe30eu7htsc3tfplehvm6u92jtpmdi0fapdwnrt2qch239b7rkk3rbqxvuqta8egbw3rixbjrozt2s0741q2kfo94kj8kcvpogtnw10ribekjdme2394syf13zx02jor4t4fli7snj1eohxtv0r9yh0c41bloyjq33wc1yjfyhxgqxsaj6abymvt4ws4r5eoqfo3bg47cc3dzmfqcoldltxzwcs1k2eucamgzppsdpkhoij7xmklpnyic2w0x72fidi75ou0f502nk873',
-                sort: 521895,
-                administrativeAreaLevel1: 'y4opcyqqgipafx847vec3038jrbiq3t7qkk1zz5chdxwrphh9e',
-                administrativeAreaLevel2: 'oac5rrgydln39dt3wvcrogzwn8mzf1d1zeexbbwderqxagr7mw',
-                administrativeAreaLevel3: 'jpq4xh4btk9iln1ev49p7nnev65x9enbig95o392iemqr3zbf7',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'yc',
+                iso3166Alpha3: '4ug',
+                iso3166Numeric: '1fh',
+                customCode: '3mzdn778q2',
+                prefix: 'yc7c5',
+                name: 'w7bi6tdqmp1n4b2glh01h4kv74tcqwrjs7edww59tp8lghdogh6k0kp83we0o7e9rf5cuexpe7c2oeftk8rwcz4n2e7pgoyjj80eho8m940w39x6enftntrj59wut1m6ls1s26o9prfh5enm5tbee3zs7ftlwdu0vzlqdh8te91zgy6363k8699nl2pgff9xxs1sc3it3xcx0x7lzgepeobg9zetfm4y9wyvqr6eup0v261vc6aebrjbvwkpysl',
+                slug: 'i0chsz1g7d71gq6g42zvtkxzew8fh7uf815u5tu3e7it4tytxy3wdtm6a583gsvge7uwwadlw0vpfev625d8r9xl5sjnzxiiul630vlk1q823k27iwb87d00kyy5earaebs2cs25ggn5dgyv4cm32krltvt3vdfw4q1nnvbrm9jr77ldkp30xjzgq63v1s1scat6erp9exrxay9daayzdzn9ts33sdv82qylvijixkgd126fsl8c0fnk4o1rxgzypfshhh0vs77tmam32jsia9mdsslkstnomy31045kpjo3gf50nz11i702sy643x2h0zih1fdpyuf1hix4v1bum2ycms8g6swk8qa8yco3ol9c1mjqwy4ko6gj6y6whx9wfsjai4zc5p3rxsqkmmfoh9ifnistp27p4zge9w9pmsvq370p07ed1hqapvmpudpbiy3g9o3ariotscgiavyctiejxy5ysc5we9dm2yd9hkwgsi5xichixvbmfad6jjbah1d8lfxb57ka24omokpmp8bf0cc9zghrc7ls7p18wvwfsn2td7xawrgu5j1hcy12i9bf0u2hhqdidkn07dp9kxw0yh99wsn28gzqjj8kr3id9obtbihp2297y8vk7wt0cjr4szjj84bzlxbb6pyayah6osvg9xoyunvdcpkgpb31yro45x0m2ji9uvvlky8kpobfqahmzfqirucodwatac42pnm9ym4uv0m0oc5l5hbir4mqak7u6slglcv5hpje87i906nsfb5p1vpl8a5l5hc9xtpywcqgntwaivbfnsw84glwrduuyrab6qj501pdq3psyjhw36rvkjdn7mvjv66crkk5ytt2w3oubmhiow3uyfn7pg2vbrawi4uaagt0na4yvqassvdq1wvdf4x6t4xichnwbxqkqqmzstzf4e2dxzz8l5i23z6bb70vepu6s5x79amymn49rpppfr8gkiz1tnntukocr33wcks4u52u7dqpjwfzme8xauk39rvu',
+                image: 'r9othubkxrg6nrfn33e4aoudqee57mz95yafyw53og6fblybhpisnf4di2r0ns26tbws7nuah3qgezk9bmld9ytq4x9yte28er1q60aw81y3l4gsos4gooqznyvvkzwykzw7fu4681a7em06tkgj6fe4ssyuep4kee7s13mivzs1wmo57duoyeqdvw86kne5h0rc4fw421exfvm9rh04ap11gdwu3n0l24w6q3v4ilwlf2wofcd9jcfm37gzs1qe8xkwmx5o336hi8t6mn2a9qopq1pj4b1ew6pp25odbs72s79h48kznd8jhzcpd3xs5xb50rx1zazmy1gux2tmffbyj69a64a2dm58iv77gsl121wwjsazdx7j1pujukz37kpdxjbgi7yslgjucc84py2oos8qsdcbrqra005vlq9qsfphst8rua0nhon6vdeb3v6991m6wb4bhe7fwep4a2ftcyc9zl3lhfvvqy8nowuuolhzgkmal8tg3981fvftodai60cft2obw2nddxcdi7cmdbrcfqgsxx8f3wnssasgmh8islvu6dhon1j02v1tc6ddeyrc4uhw7m13wvuywngbakyhuasi6rcgbednsto54uivozx9grrv32yabti6dz4wuxsaxtsg4j52atn26ucaq1h7n7wrel6shnrefpjw321bp0yv92jswcwokpmoo4orbqnkjp3wn7hnuh32exhznr2tq2j7v887mibe7szgh6cqqumfcsgu5d7pvfdcrath1byoctquqmyu5ml6j4uc4sdzb3oq13g5cbud0dn19sp4iyfmdrxed8uddwfgc2icthqv1vlzx9zjx2ppo1wguh89r9k48r9s6y0wsyd9xziqoc3x2ib5w5y3dv6e2vqpqt3m97o2k7lvulrczqbcghy6t3okwjp8fybejukuu0pyeu1d4x9087pfbc23pxceygpppv4ltsa88h7530nnsl7g6r3egt5y7sw89hp72v3y5t3bd7cbhcksjqd2',
+                sort: 844953,
+                administrativeAreaLevel1: 'ejm0dg9a3ecumn21qh52ic4807m92imux3m7i62ku2m57m3r4d',
+                administrativeAreaLevel2: '5kutfv3ciypefzj1pop8rzvmk5azdlhijohtfn4wm7tojmn0n5',
+                administrativeAreaLevel3: 'wy0x4f4b6vgj6hldexbt01rwmtj9bohdrumdd58wa6a6afit2u',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 377.62,
-                longitude: 364.80,
-                zoom: 75,
+                latitude: 705.11,
+                longitude: 369.47,
+                zoom: 25,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -93,24 +90,24 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'la',
-                iso3166Alpha3: 'nzn',
-                iso3166Numeric: 'kcm',
-                customCode: '3n8qa4ecun',
-                prefix: '5a0kb',
-                name: 'ogwyxp3c9pm40s50o3tz6t1fvbd5cl8j2cwmtfd0lba76l24kz5rp4vart0yixx16zuqu8m2azqlzh3m7indx8elaq5tac1ex89nvpgs67uj5wa170z030bgimybso0kjopwb5j3bpw47z0qabhmauryf1eb0y5l1o8o0vc63aynacxafmua09x8zlxr7eta8gmif3n3zv9qmev10m71camwbsenf6r0pu2y778xdyp9dj5r3995ff2dq6os4vb',
-                slug: 'gcz4a18inofu7neoce4tlttkqdyaosc0449ldf1o6v9hbbbtvlnnzo4vs7hlq84o9fw9t693mrn761elsecgwgm17eud1pji4nbje8wtmu9yldtflkz4j9lb6zb3fl7zaf2wacatffgigd1j2egc07hynubslom1ucdtfn6c7qjajci762p5kj2r1pzexqo196nvo8wkhbg6icg6no6q1i1oofy8d80n6agliinwehqvz3m4tpl5t1ipv359sx4gf5tm6sv0d46rpfwnhkiwt4ue6lo01b4ls74pmyl1l998djiymleqlwpeomvnjgyiwac0koy8ts2j8qfi9kkn9dzihgz6dl6u9z06kq08pru8lw64cxx27654uyi5alzjvcavwnqrgpt4n0jqye4y66m5vh4il4u0wawwvumv6utyjt55muscsf32bzrhod2nrvy42lxdm2dgkdwjk6pja2vvexjb0445mbjkv189e0y4o2gp53189xjb10r642jvyxj87kf612zpj54qzqvq6auzoy4yw76k9huqu5w164szjdkl301pwg5ijr8a4orctbob2fnvbyjtadup402tvpbq8phinslxrodmrohx690w067rg3m0o3x6pkmvhwffl2e5latxct0i6akmf7ir81s5jb1tyejjcu51e5wtu5codgn5qya0ox78x5f37mgdqa8dwmerfkf7fnd1jyd1m2kn324sgl37cblv1s7v08nctuhw6kgzuz38re4axwjtpx5wmw89r0a8cfyt86zhlb2wf85rqr6jr09xkb6ppqger2wuqcz8ogdovsp2z6bki2277qz6fxgiqgbwc6lnqtwr9n8nfbig9rviihqrf56h2sjayv3f1wenozj7lf5z1twfx0bcvf6mqladvscyolsaqsnhjl4qovk3ua9gvv4jh95xypqctdekb4t1xoxbfda275gux1pnozvcrb43nhb0m59dciz7cyzvbnn24lfv1cjdag5pdgsdn30kocqe',
-                image: '0zgj0he323uti2v1b9o2bilsk0l3u8i0ra8fdukewgn2b67j39igtljazzjtzv2imxg3nuzvd1qva3qlvczo2tvynm4azw8439fshcoi2nii6mk5k6uqlpe260a3quz9d4ou9qnb9fbf8253vhhq4n1w7jw7ot4rsk1f6ds0ianwe1k8h4b1w3bo96ree3264z6jn6ub88li6gyrg9f4ffkx4z3hw1j594c1kzimxdjwih3iit4m46f3fv5qju1nk2052l97sva5k89wc9mzq5ckoaoozua8rseh47o6ulzdtzdspn6fqlqusutdbfhhle5uwgp6si9jqlnbtcub09f1zmvqlqfoczsol18hth9wcgirnyp9n4x7gil7dvps39p86tm0jg2etsny1v64iu1cumcmidg8knjjmm8rtnrah6eyrvw3zq9p49vuxq4581yeeydgd1x6bbvuu8zw6eh8fcto37br2alkyign4erzwg7l9pwxlrh4zaejo2vuxjjbn3xuhcaqh9eiku5yop24ttjowtaxzsx3370irr4ev4dwzwa957wh0f35vxhgsm674kjilem5887gizu80c1fcxm211t29afnim4adbu7o66sxp6h69bpgll7a5nshu8yrcrlmaym3r8vufdqlyxzwg5jmcl473wt1646vyqievpezhq5tvvzr0xgkaix4gf7ig2sgalnscee8e5ha3mjyr9qs2z9rv22zn5xgq8fu0n8hu46xphr271126xpdnicivrnr7zcq9qj5w2iz25sspqfe6uve0gp0v9haghztchz8oxc9ntqj4zf8nr710ymtv6t1p8dyirg3ejf5anpjanhvecyqth0w5jx91zjh6pcex5iqv6r5ao8zasefl81u27fvmh31cmlydvjoin69bsefk5alf3kg58vyo4u5xg2z2duqzcqf7t2sv5du27ivvvqa6lmqq1e58f9ofgt6b4i3jyuiv7vyhpzuti1r1k37r0en5if8tdd9bwc',
-                sort: 227805,
-                administrativeAreaLevel1: 'rfk6gtijljuukq1dev1nuna1vf9r5duxtfej9hpb3rpsix0sp5',
-                administrativeAreaLevel2: 'md1lrledgbty60glkpejtqi68rispwdhhoeu42kfizvb9gw141',
-                administrativeAreaLevel3: 'zlq8d8cmmqhjrs0mzpntadd4qslst0a1utrhlh15p497qiss80',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'z6',
+                iso3166Alpha3: 'w4v',
+                iso3166Numeric: 'teb',
+                customCode: 'yffmkw1zra',
+                prefix: '1zi7r',
+                name: 'h1g5z32mwhm2xqsdx5j7pbkfe7kwpzj3bqk85zni0thniceh4f7blyo3br6bj5htxfj5jo8mbearfv0rntre4xdvuv4uuqn154u7sx8a447drxvpt73dbqsb015xj5tqg6b4kiyinzh20rvwcgt5ufs16qlh74mpfp8h5xmuoym2tx02g7ozydjltinmm7b7uo527y4v7h03d3f2p3lkfgndyzpp6nbygc9zpn6fl37j184paa5jnjj04rpvexg',
+                slug: 'gtrlub3wcsuqqy6doe16orkjfnwnlnmzma0xigfa78j17o98j41si8eogiqqzmmubzvsfdc8apjkxj7u04qtsrabrw2amfgu2p8yfw5p4qwxd2otmqi8r759icxc4848igduzp5h151jza9m5vo648hmceza9vx6wz50n6euj11fu82d1cwczsfrfetndq6qsfx98w3rbt12k5zqdo6awx5z9fva3h5fhqfbmuou3vcnj4ly5q6y3bo9rkxf43ds2tm7m6v3p9hs9zbkcgvpgrrx8j0snkz8gizkgz3mczkf9xyl79urimr69epacqewcsek27q9awyzy69bk96ybnsklla7ohyyplnnhcbvuakgod6uzgps5ulx3mhtt271c1outlzrq7sk9tidde981tdaosm07ejpk4d5z7vyfhvf9x51nyye4k6facly9f9j70fpcj0noe22zoetbsc8ntmclzqklfogexu00bzgr2zdywvvqdqx5z0272j5eum3knkyitx8s8tozhos5c4vsmw02tekgzf5unj9bf8nt9jqp003xcimevpftu01uclimfzgedrdtugcot5eeczvzl0rt96vmt0g8c59qt1p02gq27j3em8m4lasvdhtfy8lweln2lvz5m34m5esaiwbmjiogwf2x6wyxojy76z8nvg0ys6tih3n0vohuwpc0hunwjp93po5l1sauf9fcyuc03w1lyb1bkbgmpnfgqga2cw4lphdyfg0jqbctlw2306tenqt8gctyh3ii79cab9d7c9uuek5n2k0d7jvpaavabqd8ag0078hg4un8x6w6182diheux6vhe5hluzqwi6b1p1xnxa166qbt210deglwok72ypc029c16x8mem9ota5y387uzo19vt91r2wsmp9q1jx40u6hho4t6uggh18n58g45kljimi1tio6rrpj7h0nff3xs87l7nd5sz3kdz8up82qoooydiknn3de4r064qgk6j4u3a82qkduhahbcwi',
+                image: 'q2mch8nwjjnzywuz5hhydlp0nj52cjzs68f3cj5fjs31tpsi9x0h2xcscer2zh54qjc556gwpp7utstjdk7ahdm6nboec13grz7nafu1jpus7b26k2hky7c2zxjez01qtobwrqwzhn9uqk8wx8pavber6o1i1ltcvgo309jvia5ly6kfxzuludy9v7wb4clv4a7frft04hx71hsqdtekro9pltpco7mhia0xgnwrkif9voefminf8i9rcru69f1m8kex9ld9h234izzulv9gaikrms0tc094olf33ozbpqa3fw7w3655myw9avd8tyj4788fovkb7rfp4fwexvb6fv9h098ans2ae3rxp8a78iodzhcleo68k0pghg5a328pyb7swanl5n4qd6sttnyk5fs2v8fu7clzhnnyqxxo93tryqmnnj2q0qv0lbi5idgdczxwmxpfj7r83jtihjg8hcp45k710x7j1qvlt22bcqadqsv1wobow7kgyjyvkt8rhzva5bdxzlo23nsli4n4c46thhl4r8f6stgb4kjnrpb135rf0hz1md1lti51os7cte36xmar7mm3ofi5grdf4z3ur2uv0gqo5oeyzlpusrpk11c2ywg37lbf9texf7n1vhbmtmjxe89kn0xp87t0dj4q3x52nl9sez9o9flyh2yqmp0kerxzzlz8jzkqg8a07p70orki4jp8ipm4uyr0k68zhbpddb6l9uh6l2ky72bqqv7puge0fvfr458kqy2jkjtgrokh6e5br4dc4m0vq31prr5p2mybipnx0dug06bxybcqe28mpohik6lzn8wi5ubipz52cq2lq6bqs3uaxaxyeke2gjcjyq6xbh73ouc33uw9rcidg3x1lu1daclt9be9p7bs6cpj93rzselb969ugzdiue9lvs7ncsqpoq7q1rirlqzolhkuwt100njuivvzp2kmpp28s22kovgzxjo8bozemywo7iw2yomfkrtnj8wbq8sipraxgcsso3y8',
+                sort: 342519,
+                administrativeAreaLevel1: 'nlpak7ub8u0ooi2odkkwz82211yi6vn3c26t07bdhl5mubilb5',
+                administrativeAreaLevel2: 'g1iireb0nnbzjswbghfegvljk9hv0mwj2p9d4uompydd3tc5vr',
+                administrativeAreaLevel3: 'lgk40rp8srmjeb10ue07udiqqgc069khn1y73zj4ls8vqjg1ac',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 571.65,
-                longitude: 10.57,
-                zoom: 13,
+                latitude: 263.53,
+                longitude: 57.68,
+                zoom: 52,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -125,25 +122,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
                 commonId: null,
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'xt',
-                iso3166Alpha3: 'yi3',
-                iso3166Numeric: '0w3',
-                customCode: 'iinkjo9cu0',
-                prefix: 'ejpf2',
-                name: 'qi11j7h2r8lnsxcbeollphpv0lypexci9emn3912h6sillwn8n0h8kcniiyyux35r0npmyp5ju3p1rs38dylrvjy52snd234xkisv3nr5im7syu66j53rs1tm09hlk8ys6m8kqj5wwdu1yzftat5hf7czo2zhbn2jayagv4riaihpeeirb8155sgt55jeseqzutgwyp45h6nkvfhxb600s96gf1xxqzxu4q34857smo881kybpimjgsji6nu6fr',
-                slug: '11tsvhx0r233ojecpxafd9yd8fx0xmt5etlrafty2do43roc5osvghigj5bd1gh0dcv8ic73m4fchz82cy1u4kv9tw4iwy8yc2w3urhruhm95yciwth2joh5lpal4yg6sbfmeqb5j7ve56qzva91aqqf88x1ct2257dpqcc4n5e66icecyxomxh5tyzy9rfelsyt5yes4ataw2txkgm1licv83foobeppxymudiopcc9wt8tpi8rongct9yhmyn1kdv5vq8tje0s4j5yw6s5fqw1bwar6anctbz7x943qzbf03quxzqk0w2065kz3qw57gg7mkctz6tk89o373wbt1kumu1axhqw736raubw8wbx4u8szcgw0x3ivon9305oagr5ykwrdcqaip5hg8td68qvyugkvpua6w4i15gm4rsc8mr01x0iv7f7hdez9um68vmvdq6bczd3z3kioi0txg4soonbfheahtp5hnz0jvpqm866j9vtzef6knxp6j50mu5gukc0toftolcf864zdjpnfhln5hsn4ud8qzfphda0hr3uctqve81yek21ff0eokiue5cd304niqn32jbplvo4da0vcfqqjfj39xykhlnzpflhrqpadtoxe2dwztz6fkwm8o92qexx1bsufm5jsu9pvqbqex4yfhaiqpujrnutpyjljio6h7k8v9b7u5mlm5wuc0hjo1n3t7ze4srk1fvkkj43da2ylv3o8nkp9cpfw3enmoixvz4x7t76qlclvhgp91l802wix21jqtaq3t9ixyg2q4bbcibxqgn4x87oaay7vxzupoo8vro0wdm2f12wdarl26ngk97czxoce5r3b5vwwoohzclkmhadgikct2kvu9i5hx66ktmhzwrscdj3eeo4gxdllsfx16qta28mvcm0qqm9dag3hqbuk10l8yqp3savvz311yvgpe3t15iegu8kjvw9hdl6uamc4k34b75t9zepq7fkrsnzxk0806wlwcp954w3ci2ozk42',
-                image: '5ldki880m4l7461ay2yemeb6v54degldtoiv39liho5lhcebj1vdojy4eknko23qcq14il9sewd5wz6jt8rv9vxtcnquz65yg00mzao0rkpjt57jl08zb3y7nvvapaennw46mmml4i3rdjxu740j3v3007gg8e27iynzugjiz2omwe5331z2a0dhfvpvu2qhh1nm6pzxshqig7yl86raylhbu0qesxdfhmgbjqt5vml6nxy9g2fm5e0kyghan6bnrymcmtgnckxbs0p8pv1mop5ucnuh527b332atti8trb1qsn3o3slhg2bjp6qvttzcojtybmel9vvgym3dfe1ecspfocjimla0wojudjohwsq12rmf2xq5g43u2r5lxq5ieg574tgp19mg6ijeg53xlj5icn876qsku0e0o4rh69tgdna68q70j4do9qqaecpv7djlb22xmthuyauqc64jpe115p86h9qzoftvvr7pa85q0h80r27n68wb6lv8amtlockhxr23p8jsm5i4sndshxedgqj9s42461jr1dkksduunk1c4th0fjx5nshg6ngysy4fgcileeo4emyyubvek2u6i8g5lt9hdztqqjneixywzbp6lmvb3dzh72gq3rb6n2470ysfrs1hx07acq4qa05j7zhgt99ep8z3era5f9264vz6ky8o63se7u5cabgq2ppoe7f0v8qkcyhna9vw9ehbjj93ybek8dtctuddpmpm77rx8y2uce2oswc1o73t53pa2j0ygk5vnjg9scwjao9mg7tfawrwdd9hj1ih50gvpothiz648mlr6hxz9t1v9nud8k1bu3z498bm9lecgkvxx9xgmiiv3legjjt47goo4yl8ywwqhtelclwna8bh17o3vd6fy63px02jrjts4qaodciikhc6hd8cwp69ejoxo9w16q4620adh8jcb7f4ph8ok1nvc86xbi7c2eprfabal1nc1xy6b4dy8qazglrepn55v9tpy03jaxo0y5b',
-                sort: 805340,
-                administrativeAreaLevel1: 'kfi5i1yrrjk6xp986retre9omln69orp05h42m9vlqgr8z178m',
-                administrativeAreaLevel2: '7rm1ngzg6jip9fyx7w8t3xbxu3a3p0imsqy3xi2nh7bf5vvtrt',
-                administrativeAreaLevel3: 'qsdjjvq6iyu3bxac1rn0a5ostzv9buijyaao5jua2uxedrq3oz',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'nb',
+                iso3166Alpha3: 'usx',
+                iso3166Numeric: 'nip',
+                customCode: 'lkhtp4rw9c',
+                prefix: 'afzgq',
+                name: 'kb6v6bn0ntdz7a523p7yztwwttudsc0u0r0hqilh7fkj6pfidjlg0er0zequjysfaxb4v3w5w7jdccrdk84375uk6zkfbbtvlq4ujlxw6f1cjwdinuc8jzhh1kjq01etxfx87ffnwfpvx7q0mrbzu56ubc2w22tl2jf3li5zacktijsqboeojacgx7qn7vliot8drtykxppoz36gb7q2cgln2g18ju0vj64otevqhd7fzai7ya0dtiu952bt00n',
+                slug: 'nzmb1j6f93d04auobt4tbfs7axmjx8fioz9xwsns646knsexusn9iynscmzuj8w2lqe6yswk9zcsnpfpyh6jmvr8tko5d0oxk9ux16btif5ikvtneibs8qepcssblqmesd2c0lpbbnx2r1ophlii49w71slhlpx24us9drw6dt8rklnmm63t2r04bu0b6z9s6yrrzdz4b46kxb1hc4034rsubo7z8jh8heel118oih7w9y90yv69pod2lhjtuloqrywmhwkgm16w4cxjx8s4a0w4ztlrqf5eja64kqc2y453ygwq8hdx958afw9o0nkyucsbo8fldrlnzqqnmnshlovn65gf6hjlwr2j652m5h37athh5qmhz6m4b7anyzcg3oao3iyhfi4yw343uva91stnsfillhz1x5djcxapey8qk7tneu0cce8gjyjxh4j9bjmbor4a90enyowcx0s4qb0wjwrs5hbocc4nibqr4sldxnioh975r2hvqj25omqmoeraetzg9gjc4o1rzjupcno9z7qhu8tuqujvlgrjq3ac3se4n71j3u62q0maqt2nvgwy63gtzg4hph29xh872fjxu9ldn0iinx7c3gsd856rx3kvkq1nxakel6wr622o4fngmh216ncm0i9603k6iglzon99hxed6g4wwzjfwt93t3vhzi19w4w7h0z48xpxk22e64s1pn00v7woiakqlhv4bnr6ny099fdkf3xcrsrx3pxnlrujtdof85bqijmie22bp8e5tfpjfomstip7scz0tnp9jdziel9e6n4hytryqoqnep2kvaec30db7k6hvv5peu10u5gedpjj5imnxb5vd71rtcj97xkph037144787ryuovyljlfdnanv4itm3aumff3yrqeanm5rkf7gd8tkau6zcfm5ksf07lid969gynzpw0fo4b1ebwr9dai55j1ffyreqsas6dhpy4n2j9yto8v0l8xgmmbfsd5z8hc775sjpjoo2y6ffmo0o0o',
+                image: 'k05iufqomifauxxn4ov5sk1o9zsrfcer61fut53r9ne94gcfwx6puvg4qhe77xq52xr36z7nnw4k8xbybh893k17hgtw2md5hn0tnl4cyq0n5zjrkiv8t8fbbdi5dhjc4zsm669lj0sdoozkujcl8d62zx7fzdbx98fadk4zvfgophudb7uhaqv5i7g7o2nm7q8oe3o2qf13wkldpencs2i64wk28d1ypug7s70bltr76a01trew59aabz1efnm227uo9rkx9euf0syhm8tfpjmzsmvc8217lyrxwdk47p33b8oov7baq3ec7uwz052yk3l9fpm8z0j85ryv2foilrqaz6yk022zb2ev42awlspgyb71lr7niseirrmil1829r3udd659ygpdepjp0umzd71ij64377j0zbg6qxgobf77u5th6y9564kjj4ndb015y4qyn64qzae9698lflbk1qqcme8adng4nb90hvpm6f316ebuup6ze2eyvvjxeq7bfl6889l7e7osx9ctv9cjlociyp1lq1citedhyy0xgq2nnr4g3fustkr7ubrwal5lfrajrxiozv4pgzmvqra5zzdr737wblwax0lm1wbdga83p2hyvqhlfv8r9dzuq76mfzo226uqe62x8xtaon1b62pxg2r0412bs8qhr4yc298bynvj7mpjirogjvsmlyo0vg1cf22aa560k4c88nkbx5ub58ofhlb8rmk7212y5sq17ec2xbaqrjn1uebkaq7gcm2pmon6z2gj9r2xbpu1pcpq9n7wynz5z7whb0xxe3gdetsj3mmbhnyw46oe9uhmifeos320bvhuoo0kwyrpcqmf2xyq0nbzfagxa1sbcrbgg6x9y2sdmqolf8h4i1wfojctaffoioqb6or3e93qf0d7i7wro0udiytv1gxulgzr2qmcj0lu6aaq1su21nrmzdm1usftte0ojbppf0y57ncheyrhrmxjdz7nckvac2l007o55ggud9lfo7snmot',
+                sort: 847114,
+                administrativeAreaLevel1: '2uf65gwp1rq8rtwmtgsqlst620sc0t4eof6z4n6xx2q0aruc35',
+                administrativeAreaLevel2: '7s4gzzcld1p0pam2mz3gu3c3rapp6ebu5b6ky2rt853qckrvl8',
+                administrativeAreaLevel3: 'mfk1xmo9hidcnz6uqkq5dv6ocojhbrch2zzym2dtdj0l0o8zc7',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 271.39,
-                longitude: 75.81,
-                zoom: 76,
+                latitude: 866.43,
+                longitude: 536.15,
+                zoom: 93,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -158,25 +155,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
                 
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'k1',
-                iso3166Alpha3: 'qj6',
-                iso3166Numeric: '4zv',
-                customCode: 'uvd5jyf7wy',
-                prefix: 'i7zek',
-                name: 'iv0bo373qbaee7tgyusqpzjzkkc14g3pwx53lp2kez3qqlny9ufo6gujqsmqngth95anucqt8frmp8zwuj2a390thrl4nia7n66l734ix9om4aexh76t5z486l38n7ysmno59pyy0ya1kfk2vnm8kvyhvhslipcegxpg81vp4max6v3ofl2hx7tdp7pyt3sh12a2cxkwqlbewj6j5px6ohh1y318t0kvb6acsurdp0w47k5fldsaiyjqjr6qzrv',
-                slug: 'w7iyicu359lxk92x4y5lxexbv0sxj5r0z5ns6xbx45l19i1q64y8oeyruwi5ckzmtgrt1956oqz3b3iy36wkh1f1x9hw8wnkq0akycbkcd0g4nh3v1xbtf7yol7tujtgvg05anillqju23bvef8w3upzpgl27b79hpg0ma1rpacif8pmdqo2oyrtthzz2wia0b6pqejlbxsn05cxax0xpcqsq34ovjbkzj75en2br2qa8b0bip4uddndvifo7ttcs34wp6d1orcuq5szrbt5whhlip72462tyje5beo4dt0oqrcufbz8fwq237gao6jcqzqc5cougubjgenv73u8k2je1466ai9vvmu2cg288v58fuy7n7226xewgrikchuyywskr602h7kzcrmvxb6bmqy67abn1igszybzv8sqe6g0rbti9zvx4ndysze7aktx96w0kdh2rty0fk4f9dhqql7vgjtkx7i1w5ex4hiny12mq2a3gwhlax3tls46zt2oh70rhbtl9lziifq9kopircnp15l9xd1tnd9qslpb7xodbekk79udcocsxdyeg9ogwlt8c1nm3e2tb27si54m7buo2ha2d50tm5o9gw8acm8iflezd1pss7the7issg9nozayw2bln6fumi8avxvgx92g8f2q3vl7uzrjo1ttasoju3h8jfs8bm8mkh75dywktrwro4pwdybmkn8voskakvkadk62wpc8kbol41qjxp92wt90psmoko74a0ko6czhaacmxy8dbg95hyb5m8fsndd81hzoqet4xan5hke7ko1akh2g7v8o27qbwtye57of22fsmsatqzbguhirm60vorl1k6l1dfmfmsi8yv698aqsz35a81vadqu31ejtpe4ksswevjoltk9cdeww18jhikrrybzhvwtw7hpsugapqdxc7xkm6xn1k93dmxuohocm6vfjs5wejxy5x1loajerhws798u9uv01nm3a40fj9nto39uononc1cvey6bdh01k',
-                image: 'g8wievy0uht1k5p5wms7v8shzq0uc7wlett3yqy8if34j3dlev6usgekstsidng7f7dhdr3l2nnkq4p9179xlhas6xqv9j3wpvlkn9fos2cbk4rkzsmkmkt8w51xn8h689uveephfqv5cnqzjxsyxu52rm18veke2abv34o5agvcnn5iprd4cblom2k34m8wbkltlewaebc4dgyvitg8ahijeilp3ythnjuly9ln2hmhxsttbkikguot4z5m39fk30qy6cez2t8dfnf496pvagg5cn1bnb6o56esuewc6crwcee9yihxo01br668gpgssjeu1trfrdut0pmuhi6j9vxr6iutlnzeo2lz4ipwkx4mai55v11ruhr6jvbxudida3t7ix6zm5l3ij940zwxd3jehefqmcog6s0hcd6ott4noj3ftkk4n2dxrxn53feu5jdzm72a90tpnwfmswubn4b3jt8b3xy4ymtlro6cfbrbaxd7nw9gb6n995et2f9rp9c636ai157j5lkrqm9oqfp6za3h3h1yt896uujmk5rymbes1bfkbtmt4u4ue4hqpivr0q9gx1labxmyu5kshv5k039qzntrw671yawn8t9hhu57u72nksnj5p85ycamidtuowd0un9qbnwxhej81n5dbguo5jhfqtgrcurtwp6oh0z110dhc98547pfmd8f0nmo71unb91qk1xkomwgfowi3ejg5b3iyj8hodiuca1v8ph0y76q75m4jnz677m9hvfbxfn18mtsdghbi6ep2uuu0ipzqsoh2h8dc98su9ckcaypwk0f0lho48tni1wd86agcz1xbci0cx3pmm0hfrbsrrmbykkrqxltvocv1qnkm5vllrs31cczl76njueqh3ceqslpxw94cfre8nl7fk2hd4tp0eoxbork68zwg3jndyykpgopbqciynskn6v5ganboe833jjo6n7i7fseriwt9pks74mdqzwmgb4qebgq7y4gt5b77snlsxpvzaxb',
-                sort: 240165,
-                administrativeAreaLevel1: 'dcfve3ogw2fwc0eoeta6y1j5c5mdhkbd7h4k0hjoa0kmwgdvei',
-                administrativeAreaLevel2: 'r70soz73qqk735iqe0foim9313cjgkc8qyhxmj77y8t4ov69d0',
-                administrativeAreaLevel3: 'gtqn2zhz7vlpko88bey8nugatipnkka41m18029nj3iz2j8wl7',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'oq',
+                iso3166Alpha3: 'sbi',
+                iso3166Numeric: 'p08',
+                customCode: 'kqktkk1ei8',
+                prefix: 'se4de',
+                name: '6fxdrdpkgybsskn3imt9mrsenng09gsphv7g54oobweszi7ows6btjwlc8judb964nmvxiwfvocsa9d6ue3fspdybro26ggop57nx7q50py38b19o70mac9ofnzsbllf8vhn57jjattpylxld1gwtayk8sgv7ulmoavswgc76hh2dv3h2uf9br1ofngy4boyd2x4lo5g5vxvu6qmj6shzmlceuk86mmdc6py8p51z6yz8siongrq5dyh6bbm3ap',
+                slug: 'qcza3na2rs1uf2fxich9j8m7k8j7gmq89k9n8sa6g03j1g5ejjquvqhbasilcukg770bqq7ks4tj1zb8li2zpmi4hlo2g8jnt5cfnfzqdkvm0o273u1uhf2f5ms5yqq1lwyks6kq4isudfh5g0xtzta5zo39flfpkkf971sopmkd481stl068pue9bdo8gzrllr4uhbr1rv6egbqrxzfltoqhc8eyqpy65zzh67i7he927971dixunsis3r2uhpjuo2aqm0db9kh7hvibhvdlrne6lmykn1x0x7oe3w394gzvrwaur6bzmdpo12s0geg9f65koyazz4frgh52om3ydsbpvw3x7iagr3zhmeh4qtf6g3546nac44jsnzz7gpvud8nlv9ub3siphzfcfmlgvkstx6lwoqkr81sowkuna6vpgv7mqvxhc5zkcdeolh4bbsa78sxxoq72uncmu6m556as7658yb7xlx2zfsdd9adyooll7tl3wzr1ekrnvgwet9tbhwla6xm12n2vozxioli7apeeue8t0qee472rvwank6lanhgrwohhcm69eh8vlbt2tzga3ttcuwhc0jwfsg8n143sqtz8ameyer0le7vfl9r3daof8o7x95u9r15op1xok74o3hc0zlbmp0tfes8r0s52zi0gy744b66d5vow4b6kbak5s0kcut7ji99fmjapj7mf29381khezlka27j7fldo7toyzztlggsdkk8m34s81ij0l014fqmf3zswhyyv4uur06uopdr5ng3cmhuvvnhoicyceghukst6td89952t3b9hhp8s8c02i2h3xgbi7l6rul3tueox23um5nth4g8p3nhfuryguplttpdurc6vu7l3l563drbblmh6dqm4h57d58ra0ofzipavr8irtvfgmzf2j4vyi7w92u0q8n65258i7vu4replpzaeggw038df3r9fwzuk3gvyl3zb3liwea77c0gsoow298uy0ibjxssyuukq61r98bb',
+                image: 'g8xzbcjhoa84snl8lkkupw0g3njhh1nfyxmd5g74y7qikvm9hyzans6whjwb8q2ag5bklhykeuzw9jaoyv7ewjy4r5hxgvzcas9xvwlmbykay5hacz9zmaugiugs2xi962oyhq0zmb7c1165uiqb6dd266kof6j5s9lrww1rhyjm5q6nm6h09f9yz1m2nk1505blgp9ecrqf9v7yfwdf1o2281qmcgh0kijxw321r30wxg9wj6lz7qdlcjus4ct68gq1q0qpjopzer7i7d35t89wxwn2mgh3h4o203chb4qb0pi502unsgpd61ao3c583fgk9ko7chr7s21cmdtryq079z2b7f8pwqi79nve7u10tynudzvvlnlirqo27997lopm3vxwa1hdnrtbr26v66mfyw0pka3ml2s55wmckteflb5953y514bpgjto9aer6956k5trtswgxgt62wl8eq30dmhupycp9ylgk7k52j50vz90xpe7ti20r0y5rxgcz39plx93xrrrz6kmrxrg5q17u00vx7eu8hft9i2vxbmsstqkteojhu1j5wg9mvmbybx8c4tt103x4mq1dsr6gvw781v2jg1unn3bpzglmjh4xce909t67htljv8uxf2uapzhw03o1kfr146v8y2ugutx2e4rmyk387w9675pjox85uuuawofjj97wr3p6nudglv5dzwc824fji1jtosxhnscvx3x4zu4ipygzbhbowxhxzms1anenunx1fxgcwcz3o0nx0i6z3xj9k8jj9yimygkf0jq91rhcha1hj357gi3yw8qkdv0jr40y29m711effdi7388chm3ovfzdc5tjj48p51d9ogg30svbaf13dtya5umqq9txzkp51vilxk0tgm6hm1vx8euq226qtabtt7ca7zvw74ozsn61jhzzjpo9xrqw2yub7trhpo0u0sfczljgstgfidcgaccdk8psf46zjx53v4cn9o3eixupyo8i3l5ecjk6yjtxgccvsr9',
+                sort: 675493,
+                administrativeAreaLevel1: 'qeyfa8rg8whhprnn85p44tmqzdf5f9r6jvgbc2weqvfq2g9et9',
+                administrativeAreaLevel2: 'lu2cs1gqc76xk4j2ljji300c4thrtqqnkm6hh3bo0hj6is96cx',
+                administrativeAreaLevel3: 'lr42omud541h523yfxxuz0o9nu8bqqe7x6aszj2v3lf9iyoej5',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 470.30,
-                longitude: 774.23,
-                zoom: 91,
+                latitude: 803.18,
+                longitude: 643.21,
+                zoom: 76,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -191,25 +188,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
                 langId: null,
-                iso3166Alpha2: 'tk',
-                iso3166Alpha3: 'p58',
-                iso3166Numeric: 'ffk',
-                customCode: 'hfsmu5amcu',
-                prefix: 'cim0c',
-                name: 'bvt3gbhhpjcdn1pcnbcl082jbbxe53ef8gegpfym44582s9vubti0xnlkvxxyvs1phbpgach7ntfdx7crys7xzzem00wdjca52bg086sm1rvtaek59li53puflpmkr20fzt0mxero9vgy3z4g4cgg7bvvhlpyn2mec1etpkae65uix4vzgnyvlmaw0v1xupsvnv05gi26t8g7wzh34hiyvtx1w61kyguyv0b39jd9jg2lc4sz0t57x3cz6gz54t',
-                slug: 'g80zj4bbcqupg926b7820fp37pupbj0aynb3y2b53mnki52smurr38taao9b02gk8yxg198ui2aml4105zfwq8ki5ef2bphzzu6dj68dq8zumhdlw5wlca33zxms4joyhjdnfvc4vfnq9fbehvodg25gs7lpkixtw5hntz63ye2tro6tleit5c446frx0i1geb47thbww2gaoxjaxrf6okyadohgjx3e00knnjh99lfh4hvowgk37nx597r1knwicco6t7enbh7k5yc49ikler34zv05ajkd3k6acdwggpvbies0rzb3h4tfnivreem4ubsmmhszll4fzn9t3gzl3g6nbrirm9k8dyfohf28rl1rhvfgwmo1bc0m4686ex9lk6fzhonbmz6tp2yjxt8p48cutyr99adgj43n4nk1hwr5i3a80hibz73o26f7brw8lbwh01hpsq5d1cgwddsrlif049ne7xt4wdaz0mfdrwnlc4s98vtx6u1a5r6rplogrukjb71rlhg03b0fkezbre3q4gxqvw6v4wv27qmj9d8pog2ga9rnmilz16aljv8zja5k7kl3cfpcotajsup4d15wv3bu6elrv1647y93xss38c6g7wdfbmdtyfyc58hfz0sh2negxpow0g96e2ulmue6znmeywe9e2byhsyltij51p69htef6ghluofyo0xgpjt567ap3w7drdu1le3n3dangbqvxrjve09uz4d6zinx0wttt8nyavyl84mo2xqnulub04rihvk0fsmdnn1cid19950ypo2cff0b4m52cojy9aaqqa4971jogtv2hnecin9vgx3zekkqjr6etrhx3bsh8iki8hql615wy2atue4ypo1ii66gxkzpj5sq16hd8mv3opfliffpi2s35a0cp02z5ezi5ezuwcg53zp8aeeg9mshanmbgf4skl8emphscb5qvsln3vn5dk3kcox69ktudz1bx5xxcb2zpaypryz3cshiv0jcpyivgtn4sadg',
-                image: 'osspvqp2j729of7haomu5xjjtqcm7sspjrmuu1jgm77kg8d2qa1yymrp8j5dgjd9owvrjl0h052lyy2zcz7srdhg0lytzxl9w31o2ke5paxtrt8ab2evan7wyawzzysoncmbqmwqp8oloxfn4ysm3in20oahoi5ldie0jpl1urwql6nqe9m7da0sk0xhgi2om48aiaibt1x9iprrjhyo0ymvlzl72ccvks1rftppji2vrs0dt8hnf52amwtgbtks30f1dtu0rp372lfpl5g3k4qtkbhurh32mheqcgmj69otrjh8d3g2o5bu597h9zn94oqwlvaf6veprtpz2l6imuxaqzof0r0c5w3y74632p03oncmkg6ej5fjxjtfamlywgcmzmi3hni0tzvd9wnn1vq74ghc9hvwj63gv0f52gx54kehjp0klv2pg4pqkylrf3eokx093e0d4ag2al0s29ygsq50ihogziqf938bs1ai90kicelrb68p3niswahq1y3gqnctxy27qkv2rwjjclw824glka2ti355aqdprz17bpmgxp52d72yi07ds82iw69lkimxmwlhxb4cybb9kvhvmvir8gds5xjxeitmt3c54o7f40ii3bfhtvjnbnv6kzykjvy1h3t2p5uhzk4t8wzqjx7hchmxk7avj07gmbocwoqnx0q5nxkhxdp71axjkawztug8agbdm273k86b2rcu0u3h745doeaagezkc76ae6w9p9wwz1ys53s7bkg29zcuzgz4sg5rhswgz8g1k2xloznxzb1zm4tr0bjt4ly4j3fv93xwegfieb1tx1prbbmg9rtbkw12ux7j5hnsdjt8oj31bxzerj9vft2xlmjqqmoe9bavh65n6ryvambuyhmzz9k8z3vpdbswgoqszieae35tiawcd3uy6aylur5t3p70vpk2wwe65fgpdv1d69e14o2s9pa48e40wsnvqgulahpy3z9e5lvvq3zhzidkwnus01b2cgs4qelerunz',
-                sort: 905446,
-                administrativeAreaLevel1: 'd5okiwxfn2gnu42kqzt0m6aitqz4ymr6q6eolaca9kyp73zzua',
-                administrativeAreaLevel2: 'xcl57ueq7kztmy0tcw35gvsyj4osq6njwib1l6ur3fqz05znyl',
-                administrativeAreaLevel3: 'tetsgkian75f1fz40ypn6s62u70v96tenmm0gilidotemt8ryx',
+                iso3166Alpha2: 'ci',
+                iso3166Alpha3: 'kbb',
+                iso3166Numeric: 'pbh',
+                customCode: 'j5kcjngn5h',
+                prefix: 'noqj8',
+                name: '5d7rhv9l7o9tcij0hcwatik9h6rqgfcpdsv68xyogb2advwm76vb3y16uipvi89a01ve18ssydvvcslmllih0ut00v4lquw0nragykdqopz9fepxxa9enozlpxiwj3ux62k6wfzu3p4y1ml13blzy2174jp9l0hsh32de8n7ruciq50y27sgp3ekevnq3ve8krcgdtgeuelfwpkhgv7ey1sltoks2xsrhhhghtal5rgqtise4dnn4xyxwcgdb9a',
+                slug: 'm703duhqyb0hdmgsrzbdhebikry68qqc7b8xbl8psxyecdcmag1eufwv00tckpyb0hh5ismcqjq1hycp055jl5cv9eibgm54kt3xfu5n2ytgq7k368toj6ql433oge99by0f1hvwvb2wmnz6jwa6ypbe49aynmkhkle1188goholkx4a2bi5nonrozwumnemoevvircpua5u3ueelj0nv9wa0btzmjbkci9yawfsx9w8i6na15xfv2ukdij6wbjbkanhlhvfgpa6ksmlw2zgn4huilaniq0i4kneajlu9g8fbcjto87rgonmeae8cri2n8bdiqboczj1ozobydb9qkheolbwleyvnsn5e0edsmbpuy0163cjhippo46hvondobeity2wui9stafuz77chbvdfh3hq67esla6qyjg11jv1l642hvopvor9xfxydu760c6ylvngoapd8ueg5z4kleoq29m4bkfwujnnl74933g96h7alb4bhh6mx79uvzx5ral9u2t0quh595v5qecr28ixnv5g40oye9ofyvtsd2ifcqvgeixsqebp0t258oeayi3bbr1cjqod23kvmu6ao67s6l9frcxc1i0uuqgmz42l4ka7bsy8y9w9y8g0vzb75pwlmrg1akbj96run57gzrcjc7d9ny08hgb8te8dhujj76uo8tyz34osdaq7yugi4sogs4bgkelnantf1esth72y4erw9swhu5m4rb8ygahe5vxyqc07ylr9n4wsunigs3e7iemcku7tqy1aed4dtx7oyemij72b7x8x23t2qji4bp03vspfml6nqbwvkyegttjhusk7dgqymenx4op3ezegupvhzng301saxp03cmk0kpncbcbdzyqy97lq2vvfghkm8329l24deqj2cb8eocejufx4t3cgsv09uxpwn0mom642jric2yvn0t4qilg71cosy63a84a28g6yi8o3v0q6f68fkl4bwb5gtdda12bm8o0hg2u8c5x3ksbjzdw',
+                image: '70rnaqak13kkyjubxnluuqgpep60f7iqfb8na7umvgezd6tyxo02lbwnbaptqetcdvs2ehlwwhdzobldsv717lv4o4h7h5t3uqfh29z423476xjmf1fch8v9ndpqfhr7ai5bdbxtcfpjt7eof6ex94075qg25rko0uay9evae9v5ll7w8ezb7rcojl62ich8028qzrp7itvpcwqvz6cnjvle7sdgh54jm3jtcx38t02h2m70ft9tdfe09x2gxxvjlhmmsthdnr0xa7vzdm7wxcech6ib4swl4rbomggkdfuzqjopesyrpj7kpptoqnpfyrxwiitxq0k1alohnexerl9xd5v3m9j3d3meyp59b2cn2kd7f8juguiyj04xjsyjxbmqptps0x7hc757ez6dy50dr8r5xpypqjjfe3gfz2tsx6ap63x8tt2cqnigdx0hwrjo5uji9j27zaptj4u0go1y8u5541bv2zaxd7qotfzqt4f92uz308dj1c17mov3fa1pj7ogmnjdrtopbzpso3norn9r9reoqp162jt4g08c9ewbhwca5jah8e5978v4azis6yobdzt7cv41f25qt0n1q787jy1blss56sxnlp2p05o7e31wawwacx82p9pc4guhc5xk0hgvjuersrjhjssfn9ubo48guro7c5xr8hjljcbuxy24qsm3dua81a09xy2kekkmekkda14dtl7cnu6cvezeq7nyr3dum9qt6yvfh2ju95n9e5vj0w8gz3m5jda6hi7r7630d6ep4ltq932jnw2gdf24sl701y4dckxroi004ulx854bo6tevgd87k3zn88sn10qcue0gus39b5h09n0xscq13qry9qsmquwl6hgpjwseyol2iqj959latg89u61h1hymvcnc41lfl53sg2tn0uoqphwptvprjtib4ltrg3matho0rid7600cx2emdphnm48fxtihglz3uitodesx2r5gm4f8ys1xm1dbduvxzztvyicghqm7q3p',
+                sort: 662067,
+                administrativeAreaLevel1: 'zswxyextcz3p2qg8qlmi40ykx7ao08vtjd7qk2urxv7x6ypfh9',
+                administrativeAreaLevel2: 'bvasrrntflztyl0itjsv4t25jltvgwawnotk8mnz9xrrd2o268',
+                administrativeAreaLevel3: 'sftp2mk8u87qwv4t5bl1psautlyu6i7pcc7f0u550ckdaq7zlq',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 334.69,
-                longitude: 277.50,
-                zoom: 89,
+                latitude: 516.63,
+                longitude: 168.89,
+                zoom: 49,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -224,25 +221,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
                 
-                iso3166Alpha2: 'fb',
-                iso3166Alpha3: 'ts5',
-                iso3166Numeric: 'm4z',
-                customCode: 'n2hgmz6ual',
-                prefix: 'iztzc',
-                name: 'k3onrbu4xpvqntdlhq59v0nvanj35sybw263467ttse94zvjxsdjcs8kemq8z5xca1wvxeklvicj0ysoee1v0s3lihro2yxfnh68jw6gj8xlpzgem0y34ek5xauqsziloc4k02zg0znkj6rbulrnqfy4lk5bd9exhns1wlhqvobzwd4vjr8vsgsmqh9trnrle4y5fxolvix893cznfpe72qfjknncpayfr7k1honzw0g7h3mzttzwmxsjkaod44',
-                slug: 'zbrljnzbajz8q3ea7z2t2vok5zufg1h52fybl2vzf9cs5sxe75cn3ix95a7t6o4g91kjwtd70ivp2lldhsgm5jo8hwulfyq4f4y7l3cmaz9277jvucguyq61f6a9wa6lmb7sn7bwrtxb1ya5xnu0j6vdxreu1zetoifxamsl6smwhjgnv2k2eney10yjt5ojy3ounvxp0bhlocamoso0lt806mrc84bzvchdhy0ea5ke9uxul9vwi7mc3lkkk1u3pty7di2wbvsnk5170mprinptkviucx62ft5c9kgtnxdhsdoqx7o807b9eryg0rmj1afbapv0oqpphsmy1pruk9kvu4mkreybephpoly6f3794733d0n4so2bpia2ow8m7rd9sa3wcce59n3elsqt92v4vxi04iwsjgoka61ilsh2de0b5vzmuyhp8e7jozrwjphqi01yfb72qg3x9be9an1ddgy48w1y1alye33uhjkzqn6qi6lrnyacecvskx0zb76tt510uesi0fbg7cnkokqybfhy5x0d6yr2khzcdqyfcktl6tjvobr6uh2rr3oa7sy2wcq2hw3ai2udppo03afvltnkwiaipj9vgzgljvkd5jren2vcopsng7amu229m20jzumpjw1xileczswm3c9c1sey15lnrmny7rvzmw5mta0qjx3siuqcqmgi2uhflbsgyisg3jaxvrusv2e83hfzi4qupacnpauf1kvtgpjwv75uhr1wiiu944946jmcnaqwz5lwvuxa708qe7gaqlkuhe52skqydn3h7ojg6xylmkdu8yoh8brsdbe602h8155964h80afqw7w6lsk74n0813s079hdff6q67lh1qosnj161vfbvymaqkje48czlm1nb2neibdm2akhew7x61vempdi8geu9o8hzpvci8ympmz5j8kkozfndqw86litrj1or9reursr5sunpojzjfdj9ega5t9jz082t8f4zarx13qh4529n56nieaiwioc',
-                image: '8zkn2hbh87whfch5q222dokj1fobq5yv3yvzsur35varr821n729crwcz2aw3avgrlbabbxqe97u33jy28vxpz5p3y9svc95ajcgms00hslw604jt5wvylpe6qcvpuca85nhsli68lgk8dtv1k5ktx63j4xa3z411dcbkzaejf7gc5kq9jgnv40rxw7w0j4d5srzqbybh08lw6iedbs8u4pnlnz08eqt65ayl3ygypl54g7hiufuhpigh4ew25y0vpq5vs9fzctzxo5x3wbekr2l95ll7dyk36289b70u2fw2disuhdzhikjytw180hyb81hm6vt0kmxv5by3btm7nz0xmnu2npopl8ds4vk7tfld80y8um9o3d1jwaswlfvtx52fviuz7gq73merjhphfq3idls0lr7m140shiglmt1mpg9tcrs1z0o2qx1ibmjjz2x9fp0x0srycs0pwlbalskp6o0vbenc0a624h8sujzxnsidsvyxeuanetsr370iglgp71ep1cymqxt4sfbilsn6u6557b6w6qk6cpr8uqr9cbrqf5cm05rukiymatarxcurbjmufl69q80tlmbur9c4kef52gbatn0kx4th5fecdl2mvc8pmtvk1lvw757c7s3d26eddw2kkczraiobjq7b2uaoil8ahnqfp3whvx81stw25taxn4iggovpjqsybttg6mi765ihqp0zda6y3ijmgx96sgvg89m8bqx369ilfocbve4bh2irqlkadt24qo0relxrxan2crpuoieg2z4m2y243vegs4o1yh1j9y4vehdhpa5g3fxb3avftht8ujgmaljrjct7f2x4nsrnzgyvpux7v9daoozzxj0wmnuj7p7vzgzoy0u9hh6e4m88t9f92ed0tq2eatvqzoj8hsfefm60vtxmcyogaefjid1ar1bz742ts4hxvcmfi4mmcqd4lk5vfk0ri3hfltkc67deh0sijkma0npedbq0gjk3tu2so5f8nz25jzjwjdj',
-                sort: 453395,
-                administrativeAreaLevel1: 'h26r0gxbnh0hus3z1wjfm89ouy5ncrh8hyyw2tzwwtrymcrdh5',
-                administrativeAreaLevel2: 'jpxffil7iwpforvx12t0148gigvybxnna06cwef23rto5nomf6',
-                administrativeAreaLevel3: '099dvagy4zhostny4vqfmyj0cxmwz5laq7hsifawjvj4jcak3e',
+                iso3166Alpha2: 'aj',
+                iso3166Alpha3: 'fdb',
+                iso3166Numeric: 'ikn',
+                customCode: 'pv7zjg27sp',
+                prefix: 'lkucc',
+                name: '606snw7r92tj0xtidbwakjpdwefe7icgou8bm4ppargwh794ms0i53vua934k9bsza6uzp9ttiua012o9ederqjlbi2r1fsi2bd9we2pg12m1q8149n41xu1zlrnrdujuz1tvfgyhg7cti8czjeqnw0rec9ujb0qmw7an0ni8o3jsj9jyw2kq9zlishn7lnqlwwma64zhdbesitjd6llzngasmjnc8mjfvh4blwwmdxqawuwrc937pkh5bojm53',
+                slug: 'pmtz2vfpjevke928us91oxnkwycwmi8liqeco2lzkme8gycseqyx7194i167wuge30l2253ah845lfrqutux4qd5io9kqrrys23i4e527dr9546y8em7ts5foo5pkn4hwlimsjfweaq2232k66pmv244dbvjg3gx0ou0jovm7rxrrfterboafj816l0tziq8b0s7ze77qytvde4cte12yt0v7uvv88p6x7p4ba8c1xeiokaci0ihshsgtrg9jrbzlpespx2dion6la6omy68xtcmwcptclu4v3jkspwecdtikca85kvn1wi60zta75xd1ea55avqz099ilnapetpmk8g9dilavarpdy7qkljqkkqxk04u8rbu5q8dzqkhrfkuxn3pnkidincxmrx9ovecd3uv71yjvdcu82vkcel4k2ttxs64ah7zakr3ghqst5z0b7asizljoqbblhd8c2d0ir6m43pfcx4wm1nowdvv8oyg453jm4jy37ztk2n3ez8embgj8hadv068wrgwzswrppamsr1d26wmqnb581eapwv4m643p6c9r1f2dt60otnmryceodbzler4fekz0djt92echp79sfohjd2vnjyqb4aam16hwb6qokxj898drp3rhbd7l37mfdjbjkssm8jwxym4o0m2qouhyp9pvretkp0e7v0xt0ojb0snslrdg2upmf15jqf9ir5geh4f0dl49a5ltaoz10nile5rd5j6yz70m9jvldxedkcfnmdrhoqn7e33e2h7db97rse3nxlexyg3zn2qlow6bx2a62wakg9qbu0jk4mnjsdiherctzf7rskmcy85u4nsmasebe498bnx7v6mllv9k7reaxkqez4myn46gl7m08i639j7cjx5le04mwut9a7agqptr4y0lc6jbbrneg3iwbsbvlkhzty2oox3w62b6qby9ikpwkfarr03sxslbg9b9eyja0yl4gfvfyt6fgkvaz6pl8hgbxmn0qv8hnqzi0yt3x9fx6g',
+                image: 'yp3y9dolrldsp3pco34t9r96r0qu66tdia0tot82kxmx7vlt52yrselpvfybcnfif2e82h05fhw1ntzqlz6xukkc1yovl8h8nzcn1xjzbebutn3ejyt8aqst2mztt1kp1swiknfw9og0uyr38hkm3j0qhs3vdjzvumbk3zzstvnx7qfe5xu1bbwbppalimwdh7bjjn3nahopnhxajcbqeya01npyp6sgwkitnfz73vkyldjybq47b0lwocih536m29xn4vcnnr9u8smycyq1mw871kyng3dgqqn0ead4ld5myj0uy04lspin58lq19pfvra47bkopj64vtuwm86b74kgdnqhckhm43zfn37i6tdp9chud5twajwmgulp1jv6byxf1b4qbb47ygq03wlzzpdf32btfbrzeaa2nqe5cyzr2f1kl7jxewpu5ydyx4c7t3wu76b04e0hoo3h2axx5pc5bbpyoa8ziq91taexdhh000edgb03943t67ur3uoc759pn0ey6l8ye1rtvss7sa49ia5z3ymhjaiw8eg776xz3m3xspydabpqi5mmfe0urzlzui8ruhzpvsd1txq1h24jvicettne66shgdugwn436b2aanlevfiyo2r1ghiry660yqpo02391zti74tw6pw31xgamjroqr6doz6m8yfm2itj3kv6trvqf8ph7mx8cozlmbg7stfwxke7pdce334ue0p8dq7j3vwf7apukk0gjln8p2ylkyyluf714jt6bkztv8nggp5h6fbgsfi37v2rxahy14b2w5ulvw3bffio5vypfe8mblsdcqjj1ioa7mgkhraueoe03mrr4exw1hu9reh16tpovb0a5ilxex5xojpjic56r96yfvnd29ergwmkw3jtfsv7klbqwpzyxyqkmsd8umuu702uums0m5uc8gpchd1bu14ex6r0u7fwrp9422npbnz84i1699jgv3aj4wir5oyg9e43upfac390tdu31u878abynehnjwo1',
+                sort: 108207,
+                administrativeAreaLevel1: '0kej2rfajf3joloi4qibag39f0ohon8sj7okhh34610er2soro',
+                administrativeAreaLevel2: 'c4wcmto061dsd0r9boey0syigflbprupswywnwa9hktmhao0dg',
+                administrativeAreaLevel3: 'how7xdcf9at8bk0oqn8uo6x9vdhjovlju4b1sutkjlad4s0q1u',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 502.29,
-                longitude: 425.81,
-                zoom: 73,
+                latitude: 360.75,
+                longitude: 779.76,
+                zoom: 20,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -257,25 +254,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
                 iso3166Alpha2: null,
-                iso3166Alpha3: 'ul0',
-                iso3166Numeric: 'mpy',
-                customCode: 'o6bw6kilzy',
-                prefix: 'epfv2',
-                name: 'pqm6s6s191l0zyahp42a7dx2hxw1n9kwd626r8crb148etbrd0qu7aet385t74whla7ghexqstt6dl9ng5bt5gsko6bo4x7l520fqr672lxgnu2701dhm3g8m6bpl77zzk58v54uysx8vxsxwqjj7xwpkv2tewyugft6ldta0wx6mqhmv4a4nskewbdtw2vj8kybi5n7z0ei4thshnvh3w31t7wxcolrg07umbng04piib2towszng4ml3ol6ur',
-                slug: '6gtqzmokjobjzr9ncg0dgioiphcyt1bt6421zaqe9egk33pmwc7vyjtgkhe9shblvlr77u8y1hbw78jfe9dcq6shn9tx76gtuc1txlk65nw8t2oz8d0euhhesy4b3v81qrib00nqfhndx5c9t1t2z7t5saheezhmbx5n9ns3tvk0rt3lp3cbq816i2bmfpl6p56sk7ir0374jcaquw4eqjo5yzjqvqoap7urun24d5wufqmw9agvca4tnmsf1aud575z7pn70rhl7nh53n0t694u8be9mejogyo75akegm6t1djewbjudhww7q5nwme4rrwmt38ugbh9kef2hi3yrm1x0cnxgn8x3crsc60d4gy2a7pr9kh3xai32r6xmvgr4n7adi2loje2lzhkumosloh1vhwlwur8m4f6kwlsbmg2z33a9nhy88j5ikhktpqk8zwd7nv4ss81gbuqsj6x282axbr7g5wm99h0q0i9h4ode1uht968pj7m0sy0x8ww9bwt30fvexoviqme2jljgu0tnjx1ozng2gvff3q0vs7u6rbxtviu965kxyvqi52wqq2yo7bqrsj3avodojeoq7zerqzojjah2nwsh3e7jdp5opa77cz7bb5xox4h0d0x09kw37kz86gienrr2xctlbxiysr4flsc59sjd80ax0yn056xytuo8b80nlsoummzhyha4lkbou31zyhhwy4g24qf9284ksziuln55raijyl3qaayq8ziqyjzvzq76kxk9c4ie5rmsasohbgantmzchjvmfygq84cjzx565lw75d8jnzfj29i2523vv4rluvea6npy6xqyz5pw4kl5ue21hh9j19nh1ga0yfnaq2iiydnqlxpqhenpmrctmn6xkgmj4zzbyeggr4ocux07wv344j0ixq0mtwy6798i53m9ky3n19x5hxiijwurtz78acowqlx7ow0s89krxwufqbibcs6a3gvbipltfym1082bqbbcpdwi0h9uwc43nt3s6b8',
-                image: 'iudq8vs3b2djelsek3puwm9jtjk49kvd8m8hozm2gzzmyelniqzvmkok879gg0zk8q2kevydhu5yedeo0oyre4ryjp11fxuf3yeydnuquqxual0o2kup5wba1u2sze2r0b44hwglmvbq5yxy912thqrbh4umks5bxqj726csfpvhgxqlvh0b07mcvoo6dk4wmnyfvptddoszsnkets2017hhleln8b2tq9hqop5c294ymhuccsma3f8zsi31491s9obv6hi419641op9iv8h6k2aqxxte0zlh2ng1mrjoynbmruskx2ibgrcjoyijbf06vht5yt8vnt0ot4ey0tb1gd8qaqg2s0ou5r7zz5ot0vl6cyawfh83x3mgot0itliuk9eod32dpc2qnn7ooeh0qwr6s7jzd6yd2g6bvzyquvhscvtes06xnoygj7kaw6cfsylyhdm9yipf09wkcioyifjo8vq30weg1ncz8je0a5ibajx1tbo3759h2yy2ilnoc8dpae5vdz2xvts5qaryyytfcqq858rsq6u322y2qhiurlpp08ht9ox22bdljqb0ly0uo7zct5vr9bk7k5ng9uojz422uh7sm8gzxc1xypcydskli415mq8zc6gzt5uara5q0xbanb5q1rr8c5iok22csrvkhztwxg13npj02w0qdjv7zxnmjxz59zquhwjxzlmt38uxgr1j4228kgnia1vy8dgy8nquzxfghat9a21rhjak87lh9ls4m9dsexdnxt8fyq2v61aao7tv3ksgbtguzurnlp8f5e6cx3436gwc8higm8ss28uevnkdgo1lp4tdu7ka7k6cc03kzpi3k0mxn4tbvtozmzfipnpoutohn0pib52bs4zofpz9u6iakoxt17t8k82934fqurlxfqmw0e4wojpgwvupu7vo29s1oa125iqv61da3c2x85whdxrr6b5nfwrg5n5lzdxi0fekepjen7vs5o6chsorjqz885ebwiu0po1vcxdjqqb',
-                sort: 766060,
-                administrativeAreaLevel1: 'pq6m3ynlrrw5t0rze1bsq3ldgii6h3fahje3joeak5m9ljpt1r',
-                administrativeAreaLevel2: 'm0g13b41clk2qjt7o2cdsf1bhpg1bpf29m7gqtcknw2zz6o3d8',
-                administrativeAreaLevel3: 'fgxtlmt6yfh17y8ry0gia27tnad7eep7iqoxljfk4w92fajwjv',
+                iso3166Alpha3: 'mj9',
+                iso3166Numeric: '3t3',
+                customCode: '6okqxy8417',
+                prefix: 'swhmk',
+                name: 'w7499o2hwwgm0n2pcw6z5qrbrc2bnw4kn508pf3rl7je6vzgxh2bsjjud6x38eismyp4ijzomomfl8d9ikavrvo1ggeq14khkpgrnh2zsejg56ps8hcliq1ikkm5rkdeslnx3b48zr7d8wi5u1280skuxgpoh4eczgdophp8au1zg94dvo7lch1knjug6ghny94hdyi8wq52xc1yst8qm5dqojtgz83kdtavio0cgczki4l2lrq106crbze2o4q',
+                slug: 'h8rq633docpepg5ek71uolmu6t9kyih0xbb52rp2p3xpt7elxmzhb4epvkz7imm7yon5siuvxbuqvafnvjzmddi0uoii409d6jsutypkqktmcnngkyaw3h7y0ryl0364mvh0f8hpcmncq4yzd7yuelph1fe2z5sm8ii7w3qttqqxhjmjr4vwri0yq37hf7o6wc605dbppailrxmqvz1pm7l6j7ktdturd7li3fyfpo1utzvcfpkc761a7u7fl4kscjd2my4mvet69bla94tkrm13ifhaey6rjyqq9e9s0qhuuaq2j7fy3705j99bcmoa1tfogpfn19ifhrtkcjc5mzo54zkhxr8ma6rsnp6a2m33llmx39itme48q0jssiyhw1286ohftjbhplst1xdv150ckn7803g4qzi12vukv62c4q7lmaalvhv137fkn8wgagtc5rfqs91la3aju5440ggoo5425bi9skhoq1h0yjesj5cl0x4mrxwx7ekqcarjwikpn9y2g134gah5rn38z2q0ky43pz1txrx7ybx9md7u9mv1upqbjfbbnnde4qglep53mt3s6rb5nu4sftsuls5m2c8amf5rq8xtot46mgvlbcqceoekpffmz7yhw3ibr6vvm5lpap1udteqc3y5zknyt2yit7qtfw0498znujgytj0lcgcpe3zeme7gzifad3whbltuclrmxo7hvmidowj4qoby1ps2agcqm3sjl9chcsxdvv12wxxgka6p8f6qx85ny1medi9bj8cwiyw8166799b40ctrho0bka26oi812rfna0bu59o6knhupeks56vg9275fk97fx4dbkvl86dz3ikpl1r65lfgur0kpdocaxmy1idiy5yob5xeegdz5fxs70cmee9umd7q89qef1k5l5ul84j7bo15s6uqnb3xp9vq970oskdbhm45pv2ohgyv6a6xg59y3hnfrk034vnjpw692rsco2uuf8dtqdqflhgvf4jlzg43rojytj0e',
+                image: 'yrsyzkf8654q8arubbubh495js72k0nqn3e0irtlcuzo8p4ovmggigv1bcu0qsadyxiqfqhl5i0l68w8vkh67pmjxfq6e5a84wnjhc1hwdoymcxulalcek9eq5vwrp74gjrguc7g36cyg0zaf6exiyj14vavdzw1sl5ofxvhwqb16brvj1u6sxuet748785lvpyr53jfjnvw5j8z9x3y6ubf7zqiugou4l1pflj29umv0wpwc6slhs7txd2ptf47m8889y2cw5lyw6rkxebo0a9sxulrddvrnh8y313wd1p7jq5pr1hv8i4mjsjycl5j99c7p2sq3dikkzjx1al293wzpfbym9byjte0ucuc5a1ufgr140qnxlij7rvbqgwzr3hxfa42het3rnt3o0t1ulyry26971bs6ayzhiehzwu5ucxu3ntrawxlzcdd5mtz6htnvrglbdfe34r0vj56zya25q70bkwbtan8s5x1u8tdgesmzd7hpr8c2m5aeuafhhc5r17btd6c1maevznktui99qrddoresb8yja00ff0k3e1iuhvlzbk24ou0vnhm2wtgnzc6sjmpbsvj5b00l7aohtgk770xvkg9jhuowuihil61wqs3pif8flm6tttvm2tiufmrhpta2se4gkb1p4b0g16wsjd6ohbcpcyrcodhmqhjbo5uynfuv09bm6p4j232iau2q4keopj4s3un1zuyx32c7s589oxdi89dnf9qu88ze7edaeu2a2pg51cjpczqlkcit7o5vn4mitjtt08buqfyjdloq4xe6ytoofchxnaquo08mgmjfne9dendmkbjjgd3i3li82bcf37pyr35lnk0rpv6lzx2tc29dr4gak5wx0ummf6wp4anmol1y4bf041vvp20890gcbtci9n5aq6qg7eipwg58kk1mjz7bdfgcrgprom94h5nkt20i83bbvrd0ex8wxe9vmr3qor1sxhcch2uxth9717mw2fpdhnxvtgea96ff4lwm7h1',
+                sort: 627233,
+                administrativeAreaLevel1: '41bsnmf8jf41zpyta61lr2xltij1v1wsn6xch02ve674y1j1mm',
+                administrativeAreaLevel2: 'kvvh86nkbtz1t4w0onkenhfo6x3wmczrsdljubd685yvo3bgio',
+                administrativeAreaLevel3: 'djd569timcl3f42bct5ytabvencxqveha7sxsz44ifsbm5b3bq',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 774.32,
-                longitude: 619.57,
-                zoom: 31,
+                latitude: 268.47,
+                longitude: 183.46,
+                zoom: 19,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -290,25 +287,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
                 
-                iso3166Alpha3: 'aze',
-                iso3166Numeric: 'kqs',
-                customCode: 'ss2divqt5y',
-                prefix: 'y80n0',
-                name: '8flhsyt5gl2lahyktn1pwa4n49llfbz8bbpyyf9r8eu9pagxofgzr28uhuqt3wr4tkb2j5588rx417j7tzy5xjo2fwlh73cvopg7p5daagyrg7u5pkuapmt5w40qnylhmgyjri8d4neocr0b2pgn7xelaijnd5yk4ch15n6ksw0jbwzwvlgikut9wdp9cof97n8ss5jzzicn1vnwf30czfe34qccrxssk65kasyv10bvltg2lz06jlgh0w4si83',
-                slug: 'lddhxst01pw46dzojmsrfki33pfv3jm75xq9iqzkxzgk8b7bvax2022rvpoasthlrbmafcobr4gwqsj8chz7s81x1d82o1besgvjfonlj22ifv9yzbm8ydq7zbos8w8vdb82uor4lrt2xh2tji5p98zyefpgt3sgt7hc8zqpwpcw5spw9wai99o4b5l6jx3p7df275scoe6pyk4sk2zy3ih2z50nqcaonpv4m3njhfwe57553lo5d02srzj8vrv6w3wrfjpc7qmplac9zwsvg29c8kkhs0go8tfkz89wzp4k6x334138dvastirlp44ph5b0fipto1ljjd7n3p23xnvuwukk5sze3w9z54g5dvu71cx0ohbtewa42dmd2y61kvka22ku9sc16jz8k2mbdxw14afaxu2ul3wp2f9o47uuzopl94a8x7v4zmgb86nev9abmny15tqk3sb2s8jmv4v3v6fsj4r5vwuz9mj8dgt8l17hn6rp29sb7fnaijinjc2vdhm4hsdvhbtc6zoj1oatk1dqqxt6qjts7s3l06ciup31z5j95lwbqlr3xdyjctexa175gbjqc18zjwr2c2li6yegm4so0vma5fwo3jij5bxm6f9dfh117teiqf6ztwz7hjhnhaknldtb5z4gvik21fdmvo8w09rkzaejo3xblouehgg6an0eah0wbj81jjlti7r3ka41vr2xqer1k3ud66hhz5f8xuccuxamg82upysildgcujr8n515us5tltscpme03zmnspgobfm5ud2vhj7aocv3lh7udlo41ztvg0q24cqdjsr7udu6nmj1twvs81i147fxdtfyooi4nogggy7q47r9kola9237f5ayjt6fm5yyk1hviytmenhbwwzomxx98u3pxgq50wojfajq0fiqqm325q47b99jw4k4rhlm84kqf5u3bp0y0419v2erlb6uhvwl6007tvrjeqoy3ykpbebzrqu9qvcpwhemmbam7exrqk855kxehe9z',
-                image: 'k2k5hjsw8b2n9yeyz4op1n58r1hrvqyinrnl7ygc48qu1116m9iyht5c9omffzzuecm3a1qatx0be2lzbmfgvxd94qv41k0htxskqnp1c2et1pxvs9ki9q4n2vuufz1rs01z3us7h59o18hrjdif6suqrfvrilng7rhodkzryetz0gxbt3b8tz5yokow57olt87wvbeoe1sgoyk9d82u8rccw5xi3zj4ybu9qidg9o2v542jmki6bqxjwj3yae4sc1ysqggl5fc65du265j3loa87yryzeu28wu69uirdtd2fukh32ni3de5b3nj5rdgogihwqx8k2mmpyrssisa041106rhl03em2s9ba6sc9l2frla9cv7qxx6whdvebmvz854kan72p027ysfft24n13ht440lt7uiqgzwzqvw9e3reb8zvvbdoghft5maovrplia9l6p8t50kya83dcsymik9c6hf4umaufirbzyel1o5qvvoyd95iakk6b80ipares8ahxrsajrznwz626flikbg8h1wkhvetp41vetclfa437jqx9v2ymjhdhxjl1smrv2i9os3zxfh0by5iz5ubojvh2o3v0mg3du2k4k0exnztf09l7t93arlleoaykf8y250f0oekcunjzqa09g26c2cr2q5tz2qn11o2jpy28ckgdlwkr3oh1d7522qu15spes4jxhr9kic7x50lclyju45x5q603kjjo0vr6f4tw9a6uvm3tocv9oynpkrwt8p1j4p216nqpwgc0rz0h1nx72jakevbxqwph8d68s8ei0ddc0vcid5kgt9ikxsimjbb4axaauvv05yoimoaqcm8727x8xbcu0h0lfzytk829tw55ga3en5bbze8h46f8ax8a15v7i94qxgcfuwekhq95z6l5xiz802oa5zrn7kcbt7z0u0omhh9th2sd4mzm7hlr8k5ayj68321y01dudqwtqhyul5kbm3hvxl715wioekbfgnivrso2nivsbfrtw',
-                sort: 825650,
-                administrativeAreaLevel1: '7dapshl22on11lfgx8afpcfbrf8pz34tdyjz4s780p8t3xb4u4',
-                administrativeAreaLevel2: 'xbr90buhiei8j9o2dr7bwd2usk13mh4mx3xn7tnuq23g8n97dx',
-                administrativeAreaLevel3: 'aj7jk68k72dgfzswq12ewrus7gmd8wiw7oz2bt0rpvegj9tjwl',
+                iso3166Alpha3: 'sim',
+                iso3166Numeric: 'wpm',
+                customCode: '8eiwt52dcy',
+                prefix: 'c5o6z',
+                name: '0mzr6eqxlro4dab2w5go1tnd95pcinlw12s9ogadszkn6fpba59au4niiimzc0m2woihtp00htum0smjyrqumnylesayzhkqhbm37z7jh4xzzky1ns9445bpg2f2r2culyrppf8ri4cwq8cyodb6of9u4ogyrtrhzml30tvrms0ubz0jsviij525lvl2uv061uxo2xo592hnwp2ctikzmqand8e1yd8ukhni3zmbns08prxv3i6xffakedvnzv5',
+                slug: '16p0pdei6vqeuvhf5aev9cabbsu9dkzromt799u5v65xn66n3f7i0agqhjox4o0b8ogxez31flgwtuw5383i4qorg2kh42f4bwg7u5dg5s518xs4cjbwqedcbpcqpgz6e9p4cmnfc0x6u2xl4picm0u3dv8w74ffv6df64ca5ggcqmocd3sitakla44055gmctz1cj1iac2acnd2cmurz2m75iamiawa3rky4675dzbvon8v1bhtyrtxelqaf2mxc584y91xdof49n20pi3omi8nco8ujpbxlj3m2fwvfhga41y4np6h6e8gogrt5lqe3e2o687ob5qb0i5vua5588hj6bx2ystow8sbhggswlbzv12fytnim4k0c2t06onun5kexz4lhatg8nqd6w5z9vi7kqjfreabrh1q0iaytn9gkug8lkvybv88gurh3pai4ia2e4gohm841l3h5omb363phz44crduudu5sp8x0qf9kqffz47ioxy8yon8246xmkelust570cbmrkdx42q1ikr5rl6onxjiras8dcz6ykbfprzr07ha8vdeltvrtb06ksra4oqg3xbnk9lc8hrrbx2i8o7f0l5v1cmob6mm6zymegcbcnuawo585mdzhjw0qg2i8p8fhvxlervni1i4yyjnqdone51hn9la72osxie9na345ftp8m6ezh1mslyfzaxg5lwrq688qll8mhvl1tqbfa189n980o5jgeupbwlfkwallik05e2sjz9y2mn7jfd47hru43chlxu97sm9qx4poj6zig2340l0pc3dz6q8rt18ziavoaqdt5031vp707mu8vy6es3mi6aoa901iqtc73c9fthgc8sa09pi3s7ch2swza3frlgyajr4zf54l9ztl0w7dk5hf0oknr3ou6ejrpmirsdkddj00l1l8hwa7oemqmjz8isjhzx2afnkx73duobw69dzryete8sm7stkd6mf5qhzjvx0qmf25c8j1hw6ib4sohhpydyimms',
+                image: 'uudbmzirveekzvt87vrhbso7ohlvjavpoio1rrjpbyn0zgty4pvxmgy4wto3e4ctrbdkue2oc994ic9ve7vergleafq0j4dv670l26eyq793uu8qbzs8pa9h4qgzuq3l8wfrc9lohrd5hbwvvb48yxrnb1kanl8iq9zt8nprohvixk1w7va7978d95rmkq1d9zkzwlu7aeolvyj2hdth0cn47fl5defqtgr0fzlkqo9562x2eggehpg98b0l7ticz7ygi091kobzlajdly14xb0ozpp2gdrky4t3q02j0um8lvedh9112kmwg3yuv9pic4mcxbzpdy2b5325raln7bd4la4r3m59i4jwaz7qt6x7q3k3o4ozkkq1qen81m1vwfe5qlu1vrplpp664r3umf5c6atnxraapva47tvlrqn12g851oe20fo631sb8igbrsv248vyj9p73rda2npe7foy2vbdk2cxa8cf0up83rm7vgoc62eplta63lqw5orecix2gwqpijrjgifv7gl46vr2cno9e22g2701dmulknc9w3645k3d8occ3uvkwhzf8zpc1rg2xib3cqv3b3e08ia0gf9xzd5tdifosnytvl00x4nccrjuqlfjmvnrbfvy5xhxpmm971ev7ba9kear4f2tj6ig9bemlsgtrfircc6mlwbe4uwgvvzj5374ml5793mw68buf6uw73hpy5j7syvfr2vy5g29prhqvvbwgfvrgxp7psvlgqee0nd5d0kgzcnsrai0fh7xt1t6hqrvn15s42t709pqnii2ewup59tahahf36vkav5i2ei27sdfdm4ibe7nb2elsmywcuadebyl98p61cjb0wnjrgb4dgzh3y1zzr4pvbetcuwwi80zrca1cvo1uyn2uam7ash28bwxdbrrthib6clhexrcrkvl6z94uga6zetlzsmvswbv11s6tgopqxcu8bgygen71ynxazxuq8yja11sc0hbbavrjso7wjij6gvttvk1b1ou',
+                sort: 394075,
+                administrativeAreaLevel1: '3ofwfnmfbxo3wmujkk1xdfyt1f8xhfl2ophh864a4o9rekwgga',
+                administrativeAreaLevel2: 'x6kbsacoh56cjvczl3hukbvkk299bwql015n4wqk0yddvs7bh5',
+                administrativeAreaLevel3: 'glbrkq4l95osv4negb7iewpeqrdlsnhw0m9j6n872rehcroz82',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 746.82,
-                longitude: 562.08,
-                zoom: 24,
+                latitude: 351.27,
+                longitude: 9.53,
+                zoom: 47,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -323,25 +320,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: '3g',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: '0v',
                 iso3166Alpha3: null,
-                iso3166Numeric: 'jb9',
-                customCode: '3ztrouie2i',
-                prefix: '4wepc',
-                name: 'xuj7fo1inbu0ck5i7nppg0ttndqlnxe7qkc9h17bwksd5j44zhxzp7of6cjxvpysof6swd986l66nd11yj1hzvqu1qjx0aker9ctd1j09mqxo1ypzppqahpc73hr7k13dipn3818jgj994s8lukw0tpp8hsae70jctxda14u210x3jsm5p2z5gjgaw4fm112rlfvlzg04nxqqnwyz5b0www033ixvrmzap4c0c71xyxv5t8q6bkb8wagxkqkbtn',
-                slug: 'l7ton48xxwcj9q5ho3g9299bichptv5sv80w1r8a6o3m0eoaf1q855yt5lqou9ztkso4eb3om4rqhvdjy4fr6dnxb7chvxg54xwfyxo2ehx8247fqph6l0tbwm62t1echvl8tpjzc99a8979d1t1wun6ybv6gqhcqy4cpjze6m0euaiah2npyrdxahbhch64qjsjf8h67xw2yai9cddcoy8ujws6s1hxjliebycovr14kyq4uibrj4izrcb88zw7ouuc9b0y9gxkcspmmiyzcjmds7tluv9lcthqacwodn6phnhlusliph4tj79lwa4znvvyir8r21ms12t8m8gqhc8hok2kna0jll890te4ss2jp25p0lnkq8btc1808ikmr2yueyk9iay1ybr2pag5gs81ilgpvcycm2i18esvu0gtxcda7p1mx3i6f2co584czapp44ftznkm37kgczvnijlpwvmivr2zxcaq22uaf4wf2jyyc2g1ggqaiptdcuer0sqjrltflbapgppubjyfvb7znpa3v4yhwxat758hjm535ambo5ruktoextc5px6t2mu7ddxy2vxnxax3u6jydq25rflyyojn0n8nwq7ny8bt33iiqta2jtoqeqskj09mt2v691ljceauau3ktmadp6qgtspeahvxu79k9u5tfhn9f8xlibgcm89simwzijp3z5xxcazk5gllunxf5nsareju77khqd7uwkohzyp99qmo6ag8aiuzz13c545ymvpx0z018t0mbs4uj4lq4slc5yjf49jhjqp45yo098ylqfb5d7df0mzx42xe7y0apnxb5cahddwvfiv1aiq6f9c5byq5dpig7kvxduzki7mqx6mlubqq0z8iw94sryfsqu69km8lwu54kfne0a2azbjyavt9blwwz9eykb16c563188tschwqw3njv9ny5iezfb6aybeb577s0hoyzi9p4lll8enpf4bhqasgrmch98c6pbv3v5kxp8fkcczwki9vtxk',
-                image: 'fpu677jkhx10bg6tjt4wouy67hx6zx5lm227yseeaske17j8yhuufxxlirz4b1rusuthyibmpfrqhfaacjca7g3kgwprql1ror9wzm01d2e3fwp3rth18s8b6s1ug4gl3egk42efh8bhcnx2diog7l86vcuthchmzguv8g8uf0a6ea4jq1jqqq32om5cka7crn9mpes6821my0jyf26q4entvq2ivi08hsbcxs62lyf0unzzyydnlpvatb14j2y1vioawkjxyna3i1njfuuguuaywms1glm1vagc2nlbwd50duw6udxyini80laydfg0p5v480zb7f9vl5mtjnckpn3ocynio07u3lrsfkrg16rg3llbon3pcx5ypk7fujnas9s5ylb0e4zsx5uop95cqgbtpedoph41v2wkkxs3v9gy9hrar91eu9yh92gbuzbumv55ogdg1q83dczucsa4g7jlb47jiuojytpk5hf0fo45e3zkjm4jf65sqwrvzpewh3cz50dpr2dw3p7xv0zfh23advlpb4a9886vp6qacgljxxbxw1mxa4g5dkkce7rle4mc0qdk4sft4qp3k7raavjk2rfb6rfdb8mmzbvbi8u5py4j1ijvokjvl5sg65zo0s15gkdp980ibyzw2xdd5vr7gl5zy9jffpv4e3ole672jsfb83hc9qcabxgmxolqsfpztilj3w8of1h8peikv2j0l6fqo62zvmh4li0vdx29scyopo2ze8fp5fz0w6c0fkko7vj2qrl7fq5unr38iuuobxmqdwzr5t6xbcm3aersx2tqt6dv481c6j6xetdwpx7esrlempu4bqu0kjmsxssnaw666eb26qe3h4se4bel7pnv8n0zpixdib2dqo0wp6u1rso309nx2fjskjw4fhizlpgapy14m5ebytbe7w2djo8v1mqa18qzrxs6zmdmrmxt1d8yxik967sq4xke12m7g66ilkcr8u2q3zzszko686714vp6yafv0t6m2xvl',
-                sort: 482670,
-                administrativeAreaLevel1: 'p5mrwsbpwk3c5urx2mw7x11x7xesr2wa77b7on7i91maazy98x',
-                administrativeAreaLevel2: 'o4euq4stltd2rtnrjl66798f1n8vegy170cvfmpbee8tauw2xf',
-                administrativeAreaLevel3: 'm3l2hr5pxjogd73a7l9k0cxuy9yq054dq5xcpfufq2v5zxbtdc',
+                iso3166Numeric: '2z6',
+                customCode: '0c6l54olq3',
+                prefix: 'gndxv',
+                name: 'd6hvo6j4u263mq4hhp9v5p30rrro2l42daap6ltwsx2yx5wppjk031105jqry81k5ubd7p5ku380mp65f1nuiwug1edaw5fm1cnzpa5vg0c4k5qegy2t6xi10m1nfqyp7ke7trotqkanj70esa7171i64caq0y7ihcyio8v80pebp3fl43umdim1ys18qpd31twn1dvkd2k0hngcbk15xp8iex3dhfc28lvjpvmc4u1v5dw061sc9anfwozkg6j',
+                slug: 'tecdvuh6agr6dvncxkii01jt1ojcoeiri4b6d3bw8lsk0fwyjxepm9wr5o3zcuc3c9883att5xtbz20xu4ue0mu5898zq51a07e9im7gm92vnbe63wvcig2cmx58q9611g12zg6jieo97q2jr7669rodq8ysw6f6cj5n88gp8jzl8jfilaq3kn2qtnlbp4kpkko4edgw4x7i2be38q50ngwebfhlu6rgkunjvxchq2kt6tirxiwdfnwbmk4lvo86c6d35osqm0o9jvc4ymoldaxe9q1qz1zjqzs0gxvbigovwfv5q9dm6iv60gdg487a8bsmcw0thn2hm0g5aiw3xlrp3gvi0cncibm4h0qyprm07n9icnucbayiiz0gybknteee6lweb7l8pko5tzeoe1mgz9cavoyvp6ec5whqsz81qpstwajb9t4c5rl6ief1cqix5q9uhnav7hyk9ypaixs18ltr4g8bxzh0iwjfwf91p4pr6kw8uzb3c9ldqe0y46f02eipv1s20fmgexufzzt4ku06tnn0gwwildpu4zwwi1fdar68xvct327vim1uknlze0vu17w9wpioifp2mlfl1b19v9sag9t2zd41tlsxg974yyn4ravu3h8snlxk5wlxgd1cwqfu3i1g3n3l2ox5pi82qx5z2k57bmg6uqchi78dqxafakq8uymjqm0zgikjtgqiij61okk0v0geifxjmocsy49dr6bqxvl0n4r6ht37074cjswowkchqdkrxdeuhljlg2kibcb3styhro4an1tglf6k7ssyfue05qr0nn56ksodmpfkgrrmu7he24cj9qooym98fqfofuf0hry6pftayswlreiqv83yfrh7iyz139e09vjks4jzxwoi9t1w10d6srrbbtgum1hn53mx9gqeo6wnz7u5yosu4pschuwi2e4otg3amf0rzl88g26jrccp02qpp32bvbe8w7smdza2ubu62u5ns8gjzpxun8va4d8nv18hu258ig6o',
+                image: 'f8g45dowk3baqdfl7qilvs1qbn52smpurw28ieugibxd1jsmlfd3d47zupssrglzcsfwjixrxcs4pp5ro1n8h7nlicrlaul23qqf5pojhiaf5gmq94k2048svadi10eb4sntyogbdstncc1uwq3oc4ja1vr9e8px288yh8c3q4wrixahapfwojx8ffqxjnaaeeahrt7qhr49146ojuo71yjw5gh5dhe278y5i4cc0705miwp2ttqifwvko02jfe250gkcw1rp8aeivp1hw2atqiucx6etojecbbeeyxgexquaon8vk0nla8pb38glaug1f03x2zhv0tmpb9m816havd9vgc70ej3pqmqx09jrqaxxacw1poplxtpxvln4985x4k03zs2t4we2ahg13mptwussln9bvnx5i6j3m9sx1ykdfvayqqfn1hct4ykbswx2cn4pdugoysmkna4mjqcasvhsf1mjniaiug63x9k254rqjdh8ulu01jp36uezpc65ac5ftbjh6fn3poi6udyth7zcgs0q7oz11uesj8yu5kq38gl94tuk9cpdk562oz6dp17ttww8fw42imv0erp1c9odsmwy053kw7svquwrzf34dkt9o9q7iysy2n52m8pjdf05vps6ayidp9v8acb2t5808ebpos469pjfxhye7r4c81lyr96znzhpm324o1jzffl1zvrh7dpdhzc0gs32baqp7x2o9mfuroeofz0vp2s2g10vi3wxpuhtwhrrxfnrerfz8xjpyatdl4fj6jjhws8xf48zv0qd635bji3yb3tb3dcgng3vr58pzdftxx09tihj8vkbztdt64pennmxgte2fhx5j7pjlb1ncafbl96chnvkdp4k68l9omp4aujik06sh3fptdxiqb2r7vn3fk2g7zrwmmi129s14j3kxrdnnt0zv8wo9pzz2h3yti58u3gbp0e0tc3gkg9765m8r0d5d816w6is63deoyp4st3f5mkt23skmwo0z8equps',
+                sort: 809748,
+                administrativeAreaLevel1: 'figi92u6r5h19aspkbmrly70rv23okrpu51yiw5sy3y3rn8v58',
+                administrativeAreaLevel2: 'kdqdj5zx1kxitahfvuswhm25xp4hyy9oycpifyopohw7zfygek',
+                administrativeAreaLevel3: '3ldiakajgn5i4yubod899hz465liu552fje8gu1rqyot9lcc10',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 401.25,
-                longitude: 716.03,
-                zoom: 56,
+                latitude: 482.11,
+                longitude: 420.45,
+                zoom: 99,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -356,25 +353,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'u8',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'ru',
                 
-                iso3166Numeric: 'x8v',
-                customCode: 'eg5tg9lh8i',
-                prefix: 'lg7gk',
-                name: 'wkrwwnz5nndowjyxtwc4qa22chmmo4b2yeorultwwbdkn8tvq8ybke4u234e1naf9osuahqqq3pq8x30wr4dgc2e4tx9ydzp1q5gqf43igb6lof9iuaqbifda4rrqma2k5ip2szvx25ckrglstamdvrorifuvod5pbcfew2eiepb8n6uay36xghnn3uv8qb18g29e2smb6hw1xzk345tzrlzjmzot1wpd7jp445va527j0bdsaoph39dk5ncwyc',
-                slug: 'ca284x1rcz8e2xp872a6thpo533datt21tmwwj86io2f3l8928drl1970zwn8hx8xvnrzi4rr0k9fzrph28gndn2v17casq07o2ft7f2muo8d9hf0wzn2mihiebo06xlp5no4nsbrdzdz3imz5380rovt4077nvsuzv5hbhayfg5p98oik2935o6x6a5eevs2qk74roejopp4oiavik50iz2bo0fm3l6hphzbzlhqjv4znu09euq1x7vi3sj8fpsagyv5ii5qczlqz8sv8ml28ge64t785d2ja59j6fvq77j05vw0fgub3mvpdeql2r95xqjvqc7nwqnj2guqrhdo9lnvpw47ngn6cxqxoopyxsl3lanj3xbjplvrr5ke2ofievpbvw0tfa553sw2xjga46xxmk0a8x6w2dyjkp6tka551m2u8nyne8f56z68crz8snlqp34vhhxjj4c5eb2zrlg4230fw79ay62canbjtw37akub6gbjfvyzsmnwf6142pi7ofhxjho1hwqgvp6twelnymupuz2yqbdx62qfvccie1lzcqquvj63pfh90yijp0hug4do89pvu8yqftbvjzzqfex05zbsepou5gug3qo1u7wp63vw4p4py492weqwokzyv7gsodm55u5v90fhieyszofhslnxwulz6a0f5jzglv2844wdp6fu4s1hzcgfjj6jywe2vva2iqvhn3kf04fscphf3ykh06g9ourkp35l5lowf44pqds21a4h8c3clth0nb1v7ehi1d9v68lyy4sow99xqdn4i09ceug1yzglbb0qvy3z90ue83ze6bkamx3x0lp5i7t91ktx9qz7vi1pu32vu22ml1iaezhkp3jh50u43hcejn5aklpasesvzhv0qnvc389ppbk3kunodvyemnasd11gowjpsoh7eqfbm01w1oa0nayqsm51or3vsdca25bsnw442ep8g82wev642pmoa3ylj37dhm5xkeb91vvpmqphz6zilqq6q7q',
-                image: '6ncvoet37erjpchrx47bibblzk1bbllkfgmj84613qx5apts5lyenhl4vonu4iozzqmgq9zom0v73uv7aye5h3v38xh9w4syppvm9l5j2k6yqi9r2judqiy6rt6emxbkj1nuqr2wnpa7ymfxzbuv4hd8sehca0hlgv1dpv9dx4ehzdj8bvbn8yo2g889axjhhcrh4m7y9glarra8t73ulh6hd6pus31vy3p4wzzksjcd9o80zlqkxr8fite5j61unikkijp8kg200hzb8nfib6kswamzrp12dvwaaghmnw7rurgp7wkpq699xq9ekwhugmlk34691kxrhkk01e2ibqwqhryae3grsipzu0jmgkbf6b2jwtpzttu7mkqn696hz9e2voxsrrn7efwx6lcrnlzxvsqdq3y76ujngcafdsf7o7mub1bpzs45jden7jkql8kump1256gh951rbgbral9ffr38ezlpz5bp8fxvsizx7ji0wbrqb1bxugh7shna1mf1k93tb3ssjg59mp1bklup6myetp2tey9sy8iokpm6dpvqlb5o3c3ywrppmzc8ifzd1zyyjxxy6jtc0wuctmjqjr3t1n59ywizjqm5vs35jib8yuoiq2178e2pzijy7k6wlw3kh9bb07x4bprvrtsivsa7td802707nd8ixlukc4lmtsfofjx9laavckvku589tdkogopzov9fm22qxw2kkm3qlstqzw6520nnbktxiw69kfaf1yy4xypx4fce0psi3nax8hvxt2fvtgsx9af7ynys035yosu8fx46v9f9mawu4wemil49keqwr7c2bnlmfcbqeq3zxnzfotubmw54yk7w6biherfzkgajqsuoah6pt3lsk5kfa4k1o97u6v3ri3cpy4ydc1zxhf8iwv1rzye17zrzp63anvqq44tgizndf6wv0v6ryp42yqs2yn24hk7bwdrcqc8habw73q5nmkwlei2yw1fwh9ykqz9u3bbac40xvdff6lgqnduv',
-                sort: 816889,
-                administrativeAreaLevel1: '2bw1vq1yu6i700acmrxdo3d0y61ez8vvydu05xjzt4a68j7p99',
-                administrativeAreaLevel2: 'b1rweq602zk41q2llj3qqgna331spmhn4vtobuanxwysv7qlce',
-                administrativeAreaLevel3: '495ue8f0qqw84h4b1sd2a0df2i0weygmj1134e4uy0at5sj2ur',
+                iso3166Numeric: 'phs',
+                customCode: '2jsumq7tjs',
+                prefix: 'gpjqx',
+                name: 'z8jeyrvmaxm0xkvxj6s9777oh0y6k9x5gabisee5q2pw41zygw6udok7bceeq36pk7pncypbmedkra6zihknctxrg0ber1rthu6cq3i23ptxzqepbhxc0qa1qnl2kmq5zxh9e7s4fd6914hft8fdmjrwe4x7byn48xh4l1lqp5ukn829u3m8ajjgs79c57lsnzpcyjery1nooup757xikzjwxzvdyrsxhx3fycx6d6xxy8pru9n59ud98pj0xou',
+                slug: '2wjxamqcpe2w54l9guy5feecy63es5kzonpb2ktjw5j3l93d7n3sc1wwsisng30bdxtbq1wz57ik8lwf6bgtltzbqp5y4r8fvqszsxhyisb8ejnz9qb2y09g4em2817a0s7h6kavoa30i935os857eothlu8rz2lgmku8lcav6b8xctzxcu7dpxhc3ls4dl0c0z208wbgbfifwvck0tzm8mx00fttn35xwkzq0bq77gcx7ron89ilugq7dtvt53seuq47rq6zqt8p4hx5p9yy5kcq9yqqlymh0md3lnumfkr6wkacvurdo0rsemdi51a0reaw2cflbo2a97ftksl52oyx94q3zcecnoix0sk0uabcij6277o3jthztrtx6swb2ryp78qhtnkbnlt6nl0npyvhba8jv8j1twnsnrh9rw32egab2qpa3x6b5vyyoz6mlr0bafugipq5wkjqnvzhq0pfqq025lhierse95thxvpbbifyhbbxrd9n59wzy25rw0z4qfbwq9q4oukxi6eysxfd8gf5sxpmfcu8pug3rbazkyddp8ya37y4z0qhabti27ynklioapafl2fwawqy2szocq2m7qcxgob0klwndcrxe8v46z5h6adlhtzwncbnrlzns9i4nmfrh15prs0ev44v6g21cgo8k6zs9vpyh3p57ofdhrrvujp3wpyxq0uuxan470xp45ytr7c4j6yc77lun0opin7893uhmkyid0m4mda8ucnp5xr59eholx2gum7y1jdx1onuv6zzbw4qm2xigqqm86yiwqic13n43pj4huwmwoqksxuocigwyyvjuxibf8vbfgr6i97vkiux7c7p9ygtyhaq3xemzutaaopczzus6uv9a9paz4nbed6cr0nuqwljcuynv41upran6j8w8qygiz8co6e683190dam85guaudqpj4hba77zsjoc5qttad6nykw7bwm047qq18w3xzdmvmnpy1or9yuoxx9ebsak6v3qu8wvaq89di',
+                image: 'qmx8lxrxhwuwzf630ik8lwdxikrubc37c77lxdjgn1d4a85vk1tjpg44hywy4g8qvrx5hikpulwt5xajnuq5addgedn2oxykjup59ji6zww4ysckuqma36m1kkh75txm6igqy89aij3f23ymt3l70t5dey9nqskr8x8yfnnlb5ay0n5mdb6rgdit2lmp27yhs2dnxl314j99qhag6j4l3j8jwit708hy1ni6ye33wwr5didz49sgj9r5qi4rpxljywrjjww74halq81mj5jol7asazih0y7fdj03pwln1d265o5bfxfzonm3ktc1o0z5zo2izcqx571bmacru2r4q1myj60508gwd9at1etcj1z3nstc5w51wtvivg6k2j3inlc2bqgfll7wcebgus8drv8yz6kgl9ilzdbswjn8v8zx2r54irtyzcf73isdt5xjqmlo93boirgd42snp36v1hvheakxzdaamcc0ejbuxv216pkwcvouav4wiu4zt8tbsc84kajk6umwa1vqt3xse9n3p4rtnxcg32i0unvmkckz2kf0lo2qrq682thcf26jkya2zj4zzewcyl4d57n9xyn2o18r1z8jaxw3h90i1bvvjbw7jfhvyzt0vef5dnpzr6u8x2l3k2axalplm2ltp5shrqc3djvp63xaieqhbzsxkwadbaapj9jpz9f4b3sr5v5vnfn8w0r0idmb9zweqnr0l24laerfthtvgzd96epjtpyuuzczku8bygt5bkugpfcvpd87a9udblb35xcdfqpzrrfp69ygmboh7cyn4wje3sltgkgrqunh6rvcz15s6p4995pdzuc3iqvf6j6j7wj0xjoj6j47yi7widxqu3pn6otajw3mxxjw5s9vujf1pwxfucx1tgd15mnm0iujql2dpbdgeuk44t3k7p0tszr100vdfyuk79ut5gsihcpiafkzxx7b3tj3fmzem3lw680ze3azmnw2ntzbreip77q2mr5td6w1yncrkcf1m4n5',
+                sort: 616038,
+                administrativeAreaLevel1: '9ropkonch3mjdvx16e0p3ox1capxnve6mnmjeszuiwzkefqifk',
+                administrativeAreaLevel2: 'ne66aof46mgb75o0myt6287vtpr0tcnpemh651gz5wn29rqmnh',
+                administrativeAreaLevel3: 'eb696wubrw6te33cyz5g0ie8pov66kusieak9usv2i33bxgsdv',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 105.36,
-                longitude: 340.79,
-                zoom: 53,
+                latitude: 2.02,
+                longitude: 557.88,
+                zoom: 20,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -389,25 +386,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: '65',
-                iso3166Alpha3: 'wik',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'h2',
+                iso3166Alpha3: '0mz',
                 iso3166Numeric: null,
-                customCode: '778q2he4a8',
-                prefix: 'tg6kj',
-                name: '5gc8m2atpixguvzlbedg23xu1solfziudy7n6nuz82o4ocqnedq17ji50c5dbmoqhcurq2jqs0c1z4g7ck43083o5hwujlw8gqqlxo4zcx7kcf12cb3m4lommeytn04gjl16rneeh347jmgh0cgqcjj7qd5il2uoc25b45fp4on6slud4i0n7757yvp0zx6c7vks0t0n52u34vuyd5295yf46it92z4o0hzciwb9urb4bdbn4qmscyhzjqveala',
-                slug: 'wq2eh9nr4osaa3oo6lzatoro3pz2k8io606kc4omqq3w7ig0d8z1d5uds3dhpn6xt0kd91up017qydnvztyhuu5tmb7qerinv9kdklqtbufll2n2q3k2w1an1gwxd2vhd0ay5tdm4uf9mrh4wm73h2wkoslt40yg6bq7p7oj7nvjhcxat4jrgwpm12vit37icm76x237b9wilywx3qc9a2hert5v622rwmzjv0ba6sconoodeqg9stmfbb7lj1gmwse3bmj8dluuyzu3rf9odpiatb5cmd9i3lerrwduhkoncs0sshfrvvjljn831dhl0dcb8el4vsboct7oc6axtpdxszu2hmf1h7jl1m85z78hkeuttjjw1b23vbhbffum9r07pnmetdo1vta2tued6shd8him2rlvb456rsdmsrz82olnjfsacvrmve0ip0gxhao8s2gkfh2zzp2h77w0vokfbi5y7521d200uux43hntvqu8lj3itxdzu4lz8t2dmdezqxtew9byvo4cmlxaor1ea40ioeseo02x9s25y70gu3d6vv88h2amb279fdwtmamwh4jafsmjw9cz5peo3g5u2do2o30xgz8w6ubq7jjtkg12gy5i4f9loe0vbc6wyi2vgjph9fi1cuv78q4srg4v7uly6oqzkbkpox7ipbhe6wisjl7shjbyvc3rkec7rjrf44k29quyvzj3cs7fd09wg4fvc0i9p5ckh8mcb6q59l3fqrxq717uihey214h4b3g5kngm1ulq62mk10ly4j33ib3nnjisbywlcsovhn3f29e52dag9rkhsp9cxguq8tgqrohok0vau6w02kjhljpq805i9o2h2ufe6qyx70ipjgnslcd9ujuw0ozo4r9auhk8ba42j9mlnbt5dje7l9z2h6l6l8av7hstif41p94d25uswy11wnqfcb80t2qvls1rgkip1phs66fbhtyjhnctmxeacajj8cwma3o1tap9mvf562ezlgjxyrb1gm6',
-                image: 'oir1lc9mazb4f9z9h0lphtscilcsb11b81ir921qakc2d2wro2bzjwvspfbx94dw6ujrko8wmyrbtciyx838ujb3dndsu97n8xhj6hlzuptqyegnovzourec2v9ibhg1yk9u71zzovjp3e7myn3qrlu56v8nxq434dncyh0rxtr360kv90bi789blhvhn14wyr4kf1encwvoxmdiiimd2fjiz8ypl5apfo0aeodn67zn81xjad7b5z4r2lmmf3odx07dx262oez8c8g06xd5xhezw5hbc097301lqh2zxe0jw8cizsf82vhxeczlwb87whwt1tjln4ycjqskf0qymltcgz27icerto9snyb7umabifcj8skhspsawy512fsq4q9wgezim14a12qtfwjj774mbq4ssd51xnfpsendxvrsu3b9nipcdjj40uhsjpgpsgujqwutsnb4ros9pdeix87i6j0zq0i8aipkgngqwzkffqns6452u7z2piwf5tdn9ri2ge0itorml7q9g3skju87mguijr94wiai2q6ufbz9mugrpyuu7ny03vxntwsby8oflqxaio9bxovnycdwcne3nomd4wevsh3j4whs8wv108j4frqoe3ox6575s84wqvn5ix0ypj0swtakmr08lp2sdj9azsvbrscmvdakn7uvub7cr686d82g2pw66xyb50bs6g1enpzp3wuo621fwd1earerm04zot8qyo149r76zbvdbmhxop3a4sfiw35ajlftzl39npeudrfuxu7up0dueifs5xtbcak3e1v79n9ur06cganidm4itbea8txucem0scxycowoxbafiyoukugffg9zztqryfts8m1vb07bgzqmrx9cmo3n35sa26osslavpwmi9k83r2a3q9rlkk7rvcb0pn8t3vb8ct5b8b496vbrrf17azj3eyuprwx4puilj4m50r45if5fhihvi6wpcckxry2dn7t6cd5hx85vet076kyyaqavtpxk7hg7',
-                sort: 744341,
-                administrativeAreaLevel1: '00czpev588ncs200ml4ahhjj89els36fagv06lwk42qctrmkv6',
-                administrativeAreaLevel2: 'uw52wf5tv8ycks8kk5p2not3bmbn45d91lg27h8bzdvtcoclo5',
-                administrativeAreaLevel3: 'hvr1lxmgnw8t98ozckkps1032x2hxjg6vtnx638v8hc67c381n',
+                customCode: 'xp9sgvr7a6',
+                prefix: '0z1vs',
+                name: 'p4kqiq4jx2312ximkdp5ado3uhg85jzdyjd99di1gb8vv0pwmremwcqw2xa2vmrm0vmlx1utcb3qqptd5tc88tawq3yy1q20lpwh2h0ixpfg274nfnvsp2b360aka0t1jdty51g4wkdza17ttzj0q8kx9isopqpd9ql1e9ve8efeyu5h5ytfg049t9ifgm4ualus54q562o1najk7vitolv9sk9xie6z81dewgbj2pbovpl5ukkoovvmbazjout',
+                slug: '1ed00mgj2c499ksahkyrnnrcgp84m1x38svg0nobgpkyrmzek2ki49eskq9vuxjyo1y7g77qcn6llwpo2dzzdwu98le9wxgroo9qcxalla9pshhk8v1revecx4dgp9011xenurf83blyu08hkpv55s299nk2ulmu8hdvmseu8lx3ed88sh99isqipi6julflhr2adeesfbwl5zontfj64n6n38j9g6cyousklg05i1o83e162yysbgzt62n4x8lrduor414y9fo2k9fbdwod98gxqsr01egx5fxp0ydns142mqpmzim9m2hyt1b6jt9ku98hfwz61wz1e4kmpfre7o6elk06u7xd9cajddzeanjqqotw65mrej7ufvqb93zs2hug3b15u87dn2ancxt0ypp9af2b0qfxba1izj7uoky453tzmhuglt8ov0ij4l2ycivjwi7a2xnobzp1bklwgssir0y6zlh7fejklznhgxwb30lr7jnmepaichkvdme5y9zhqewmufa8x52mldz4oxrs24z57vf2z7hwucsrzppt1k6x9rb1i3bkur26n3nzuihx3k81mrtf0647j94czujo6oaqstv6bx7t0nzi18t3czvqttsh5erfmtex57q4vyoa5xcbb9a00ft6xue68ka7m5krz091s7rryvyi0fi6mw44rx5bdwkssoeze1qm4ajum9qtxwt9pmiesclfxinfl3xhh3sy8jdbqnnotek4vj7z76j7v0k6ar7xaev8pxb9gx3ol2m4tjvlgufsp6j3gn8t9q9ntb7gsy74kvkorbpdyh76uvqq8f6nk8kx6lyysrm6d00dfajfv6eb9659k8lnlpzk0b2og9xncjdp85sja7np6m5ze4f2qltc7yhs11f3p0gj8x8flfzbci44j85vjuvcxgnni0x0fy6t9qif1hasjv40m0frubx6jxwx8zanx2xsf0vmxxryqeo17cj4lsqf30gl2nf2dsioaxbrnozhl8uqkgazuhrp',
+                image: 'pkw8505irmkotsvya47ijl80tckc1jp9gfvgmi4akt3b7e5ad3mw9vrgk0mri2u3n9vyxzzev0bk6m2yi0dsav3pa46pwpv676p5vooysw5ao92k861n1igcxztxtqoqxllwjxvrt83c73d9zcf8yr8joqgix4vbefwhadtxufb7l0yla0jomj6d17o7xy513jf2tugr840holbksor58xdfnchff7t8pksdl5zcq5tayz97kk1mshtvn1ntufauzu597bk4ccmme3tmsanmx5pyqbrnt855ggyftztdn4b77091ncl2qgmvkd3puzsf8qq13vvxe8walk36g26kp0shub0j7ime3vmwo77yytl46edyxyfvparxxwgrvlia6tnda9ad2f9ehd6syjcm80bowxu43amd0nhn0i4s6r7haag641j6aiphm54ao0j5a9xpmb7u50eo6kgo5xb0m1iegx16wnf296qsf0613myguen2cfx9hcehuurir7f9n7cw3wcbyiu193khzuhrbo0b0v4uyiwj1llciae4u2zu1bjlgdp1dt3s7zogoa068p6odqllnerow8fjc7v6ueouyzsyylq8r3bt88qe84y6mn22owu6az41puzlvxo9v9igtf1azjhtumrsyj6g13q4ka2atfledn052jkl79s1r5ez26aftxekxezqdmyzqe18s9memt1iz3sl7zcigeej1xoa01h3umz90sdk6s73vrpy5z9yx3qd98m7v6dr25jxeteln34a8jy0j385r1mwiy970k921ujnczvh6ef3hhi4g490jmuo84rsrsx6wr1vvvpeymap5pf58gl879zc9wmm07jtisxdxftyd4tbic6uuq5lsjm05rg4bu0flvjptph5m30qt6x9jfhazmb2uejvc3o4gvgzhaatwwqnxdketqhuj5jrn1tzx6r28rg87hq1ma6poey3khihzlolgrgbhjqs6lnqazuon81xncm69nxcizee157jf7ui',
+                sort: 198393,
+                administrativeAreaLevel1: '0y6ckvpgsvs2ik086miw5hlp4r6t9mxdo61e8vvtg9gs2w86cb',
+                administrativeAreaLevel2: 'hjtabayhrrpqgwl6lp2e5g1t4ukvqjkfqr9u7exsa58pefe5p5',
+                administrativeAreaLevel3: 'pzewhuferb3g9ayjavs1po2yzrwe6r5k348j8q7vnxyr1e19eh',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 782.52,
-                longitude: 597.90,
-                zoom: 83,
+                latitude: 267.25,
+                longitude: 743.63,
+                zoom: 73,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -422,25 +419,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'm9',
-                iso3166Alpha3: 'ude',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: '58',
+                iso3166Alpha3: 'm0h',
                 
-                customCode: 'rycccl8pay',
-                prefix: '345y0',
-                name: '1xfdxue8v2z3t7493d5fx49tgoptt2nypr9qmib8ebvoki29jm0ggj24fai4b5r92md1iba0d10dvfy7dzx3j5s5vhm8mfkb4526s8dib791t16ushqkxtfm1sbuznmk63qxt2d7f5fb1bscpj4870w4ac2syjcn7lxwwndc3cn76ikogcxw7fnoym5iny85vu06a4rduo9qy1nz5t8l52lx131k20s9x0brn9vfwt54d986iwrxelukpc1u3wk',
-                slug: 'hz7ii04slrv8wl1xjij1e0pcfif8kubaehsfbgnw47g92znh7dmeptwm6jjaubqow3wdudz2ox652zwnj3n0vu212nbmrhnaru59apebxempacmrh2tq9vd29qdc6bap2drke69vo53boqsv02etttdt1g3wv9wet4tnxzu2qmbe8xehk1qtiu3op5pdfez53lfjcmc9docx39avp2d50wdfvmaw0gzrqiftdz58i2tw5pdl3q7118293snw7olq1syjg0dsfo8iivxbqpro8saceorstylo55fzcgwzplcj75x5727tfds7skg78578f37x1a5q49828a7nk1rd8i1llnn46jgt5bu9qwi44xmwejfs7rvs2mbemtuwhqenrruh9fdvq8lruwn4lbmawdtx52193oxyk962dmq4l9i2ojowvqmu1w0ti5kmorrqg9qczfoq4wzbv7do8lm56bgmk162qhysgf6bbjv60yy6fx7icah6tes2uauw730wbb6f3ma1pwv35egdtnt9v25j48sj8pliyra7gczdjujj00h9rcqm1rerd4f1xtkewf82rxnn7t5k34m6e1kbfwmr1pmag9a76qrrlyu6jzcdonprsoet8t6sb8bya56r4guqkcdvdbsf8xu7ckao2cqdauewboq8dth4pwvpsy4yng0pbabu2cpv0iaicvgi7spqkmyexto9zqx9ulou1ppwkjszuz1tf3o70pcvfg9cnkkbkspezzotlrm8ffax9zwxrchp24x684wl9mmer9rxqefwsgyvscwiichkp5hu86qxwpgeka2kpjlsvg57dpmsmcwclldpoyhril4yxuo4axz2d0rh6e75xc1lcbfnnccy15ytn75nrsabpw2qaal4pc16v8xkc4zz0x1n89n1w50epy7xr15d9tgxfamxf9uphxu8jemppspiilr8twza1npiina5w9wjib8tlnyatjw5c6emfu37wlx2belhz2vkfsfuhr3n44lycfyc',
-                image: '3957zke2s1bd8gl0556rvqicm2u911kvqdub00vrdaf5cp8lkfzk2ftfpvrma1kj8a4cpaulj7czqov42zt6dqj57ji74trrpmneelsgqvnnetlkcnec2tdaf96ldz3tuemwfk46xy1g76xcnh3so714cibfhk5y7z8r02htco2rqx9kmmxenaqjybumljg66s4incrbkt1n13retusnybgktvz95fuw2rwvofof2d62ceg409iqqn8431q7nsbp3hg64zq0vap5e77f69tp8ag33kq4993hw73cij1p99b5pnwsj4gq09rbz5qc13v1wl0a3u6gbp3rupk8ga27l620tjtul75rq9sjm8e9bv1i2seli9ijel2aqsod62eforvhffuy61pdwgnmrzl5d26hvleiwywr6c0ux1k86np3sw2c88xyfnpm9w0x73xjmhgk0q70v2qkr4vuao2w93sbuszvzrtexexs65s18xg02bk4h4icoljd80xtt58ky5v3g4lk98jkkixuw6y95rxl06iulfot82tf5cw6k32qjfb8oi7htj17hpdrrw4qcqthldbmkegjzqom5g98wa7akyk8vvr0vs4ox1qwptnvlgjwgv98t5i5oohwg45civxhs99z2afkp6bmd0cctuptqf8nq7t3sner67t7xr0sc98v6q01svswe01xdoe68kiumbdvxrc939kq67fm3xs1puo7iah1l480vdfttuwqj95sufmxgt5cby2tsf386h9mj7wt44645vgpgxgon2bsb92nbf98se4wpi0qy8qg88wh9knwloy2y07kvr658djro12s5cczd2ozdkeoiwiupims1ljiejbop7xk59n9x5di6ykt4jzozg8369boathlddvs99y45i5ng9pt4i3tjrsz30rr584qfgrcupi9pxfhulszgfbiyabm50kfmetm5tmj2jpcjiz0cifkjpkc03kyqwadxs52tcwch8c34jahxv06kgl8cxpddo96',
-                sort: 869368,
-                administrativeAreaLevel1: 'gc3i12ue6ckscxxqpjdlb211jztosm6ithw1z8ry4hp8hso5n0',
-                administrativeAreaLevel2: 'lnfbv3nfzzeple5t02qfy11sz3xhz53nlq5i51qo0gf81rj3bt',
-                administrativeAreaLevel3: 'bkicwqwz5qg528h9s7edg2i5zoj2kk71dat0r4dzpp5jom7nn8',
+                customCode: '6qnlxav3wl',
+                prefix: 'yuwy2',
+                name: '92z7qwm56md2hqjcoxfw0kxc34i2otaec6hpxhx0dzf9327wahb20ky588idrjdma5t5aqdjz67ijze2tgehfdandulbqvisv40dhmjda9p3tyh6s05z2eorlxwjc79fjhibgddihi7nzmxaxes0hw9eh1kpwntdkwri4dva1fh1kwoe6dhks5n3zm4a7f2d7khaa2xbxs28hyngw4ob0wlg1595h690yr6y6mxh9g29njypwrifvw8kqmgjc7f',
+                slug: 'mtxzky7pt1l2h1f9wvxjmnef03nid0buvk2k0tn1m7ua7adane8so2k735slpxrlo00fp90huyoxc8pakam16mz5pasdr5tgj15yuq9xihilhnpzov4gup85xyqi8n85jibtd8hxypywvt46lhffq0watq9eymdcgk7e1zduiozrlcwndapdr8ga1r8v70oxz3120pgxnsfg3ed9spweaamyll7ncfr3bqol64apil68mh8rcqk4wuc7psnefeww61pacmh704n1op2ir96gaun7nmrcfjaby02e91rh29shav0214yv4g990285a57g7di1nkji8ixv6ifeszva8lk02vr93nm6ia75sw7zp05dnpjv8ohc1j7odh2h0iegex8zm2ja0in72tgdn403pqdyjn8ubpoxb124kej90dz34wa6sfj5s62dblhy69dr8xi876d70majtcfhhp07ie1f88jsrhrar4ojvl2s2ghzv7hldiork099r6t2n9nmc2nogoao9k0m53a523g9elvb117skolbtabrz1mit0b44qz3b1j8uabfc6jvp99broaccriblljqeztg61pczaj2wlyioxym7yxfokc3rm15mn21eavgx2kkrd1kgyk4pftsqfmrbnnulw8fkv3xsbumiof5q2aup15jshg12gotgd10qj1j10m5zdmpdw0tfvcw3mw26ys9w0tsoowtcwcqp3nl0wa7ii125ak4iifdv3fozk8dzz82xcip0r9nojh972hyxbuqt7w9l88st6wmkqd6fqud7ntxz2geimtn016oyal6k8ip4odj8iads00so2x6tvh9dfca6gg8mygw3tn45yri8tt2mv66l2y8h4pl4gjpydu3tjrt6o32pgjgldzl5gjt276u6grmot98x4ktn2dvey43g235dufwhvykvnb2jojhg9jp8fwrxypqnlmx6zdqn60n5y6e4354hko90fupbqx3hxl0o8ssololyzeb1mez5zwys58f',
+                image: 'dw9x8is5ae0qy7q80pxf6220wry75dm6t6mtm9n7zet9h7fp45rauvnct62mxguo8a0mih5sw9zlipfq2tg1p29u7zu97avwqqd445fg0dsvnmmrobjd7lkbokkoo3hnb4vvlgyj4iwrt7qe8l3grevoum4ghntf1o48p88h7t5jpd66k6firoxszo1w8ak4lhvyn43j44g16gn9nr2pvmpxoufnrlzlo20qcjhipmq87we4iutnej67l3yls24m9vfpfocrbxjzq3rfqxxkp3eq59qdxhztt52xah6qzahgf1ixxoj5xe2d4iijrajsnqj8913ys982c9b2sq9egf0avmg5zzjk9csypxa0pbi11zvrps1lkf1q1g2frsklcmkb2b83kuy5r871hqlqbr9rizc8g49nix6zg5gq22ihjs7ok6t4t71wk7qsn1s3xq6jkcew5ykqcn9t3nqzlm7krmfint3lbzts1cp7a3vthywt2ugd4fl82ddrg3yz4mkfvg3xv7nur11vvyudp5qflp55lbwcxgeob4eeyj1hljnfeck643bxzrvg3albv83gnhd9zo9w0b2ql3xu1chkxh6v46qb3bm3xq3p5bu7wf2jokuhojcf1eqwazvmjr9xlemu04vl10qw6a4iqayrl6608qe6st777skh5dpsswab3v8rzhxi5f6vswk2munsp5mo2r5ydp90ftjolfrrol18np0nq39o7i51eek43lk96mj6ur0dq4410ujagqje4bdqkc16zhppe9d1he0chl9z6nrnq70xhycabv225dnfo8kugv0lmyvcshobpxdd4xgbkfbyylg9oe6c2rtc4g5qm62rgzyzbc0tigc4tb234qhfyb047ha3t9gq0s4ijh3rg8ee131hyuwn6yh9z5hzz369knm938ywd0bf44v8t26mki14bqp7hfel0x2jqsr83f41c7z4pzet37lmixxo8fs66qzeagmdseegigf0p6xt18yxu9188796',
+                sort: 271487,
+                administrativeAreaLevel1: '7jw52gaktcxi9x2njaw1iiyid5bgpc2p1rzg9sf7bjgj4byoga',
+                administrativeAreaLevel2: 'uwlwlw59elqbbeslj8u1036s4yfno9d307h4ikzf5tew9ofu19',
+                administrativeAreaLevel3: 'xx09ez3125dcqz2as7a3cojd4tqawnkcws9teg5zj0eyabgl4q',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 649.17,
-                longitude: 914.93,
-                zoom: 60,
+                latitude: 552.42,
+                longitude: 869.07,
+                zoom: 53,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -455,25 +452,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'ie',
-                iso3166Alpha3: '3hg',
-                iso3166Numeric: 'urt',
-                customCode: 'ph2lwm6fb1',
-                prefix: 'x37z0',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'q9',
+                iso3166Alpha3: '4fe',
+                iso3166Numeric: 'afj',
+                customCode: '03f5xbspau',
+                prefix: 'sotor',
                 name: null,
-                slug: 'u1azqfb12na2n3bhnkv7vujcpwqz9n4dnyqmkwf85uuuepauxenewazph9p8qann66wvdubscfnzeljfr75cfeluxdb9b4vyk0k7ycqa9nm9k77zbkn6gvsljyx56j0p0yuzz8nensgbeovmcnfssqczvwo3f8y1rlbad6rjxu6sshqnrg3ycq5o8698hwwpy0cty30frngnlarxzs699omowloikk7i4bnamaaw9tpv31kjuepirzvixu3w5zlzfhyr2tout9ebzz3vrrdfdxuo3qh6c8twbcd9h50q8087j2se8mqdo8lcz9sy6b4kuodq0m9mc1wds0uyegu95tvg01iqafj701qozrvwof8z1f4pfuwlu2xrijuhj6jo3h85j4songpmvmfpg2km381bhdpnfr22zln96adraqc5e8hbwjnys9h8h4is134xohsae7f1tkl5oui0agywe39cw6qi19f73pjwye0jzuo8hnfwc4fyqgzesy4qi3mw02seijbsdtn4l6v0rnvn9eawq2pjlm0ea3oq8cfln99940sql7agf761boe50i5zs24mf84nhn5gmbl0g9m13lzpmtsh9qdqwiwhbo7icve1jgz8fwdogfmysy6kovwd5e8ws643xbnq0h7s0raxo5ail2iod1c83vvv6kr0dye821i0dyopdw5mgs9wzfwgbtutyvlsxqdnxmf40se323eupahof9v0eu4nygze1dffs005koc6gv3wv0uujcob2x4jbvy01hzprae0fs8uwy2jopsqv39twmp2uigb0r34tr9une2apy8smpccyi3k8aoew25vqlp1g9qig54aaii8rysot5delnqt4myryuz61laq6ihgxr9q3yr18q1h6ddy3w0byhitjm6itzh46kf2jnybf94lrksudu3kowyhdpk1rkzjaq2plwqggsmc9gnsldwfca16pb09rgbyvviv0khmufvs5wbjkk0exd2l3ixsu19v3o6u2qjkaeru',
-                image: 'xnzhzeyb3zvk58m76laac9gq4y8100mv59jimxg0ibhiibpiy45occfue5qa8yalwp1dg08xg8rs3uj7rvr218wzm7fu3rohsoor9gipm0n6lwed1d4cfoz79dqe3arncwtzni5rqv2ygmcz3jr9a9meahxcwzqq9wlxvav9b91sys5rt44wkluvasocwbtcoszb8nv1tb3gddzitxyg6u7lyk60w1pbwea5a3fh5stp3qunok69v38pjm5lhnmwa2mccb19nwk2kfnnh4f3mqp7j8jmrqsqsxwnhksgd8rvroyx8cx5t1kkd6r78o9nr129kma6l9gn5pjd19c0vdnot75vsfzl6tl6alz0wldqfzm36ez96tsda4660vv6tbcs44q6h48yuk6wiy9zuc653npmp0p84l74osjtwxcbcqeq2nbvslufp4hne0x9snnqgcnxl4dq0pi388x9qu23j6pvthlbryc8aj601w19ayju661qjgkhssa8z2vg0bmkb8qfq5jzz481rat8abr62dbyezcdiieqt3svx7b75adc2bodkv8ifof8xfsl0cnh5kpjqmyphmh52xnyq3sttlan3hzjsld6jm7f6gy1fyf4v2htqha44ebzh5nk09m463g733nuamskaoa0mguc1oxp7x8h6vppccnw94u439vnymek3obn5mxw6xgd8t3cevpjenq57gap6y1z8qk1l04lye9njy0qy3dk42qesxw8z2ctwrnfggaa4i8dtymhlr2n9iea4z7rmgsf2hha6u9aljp80tmem9u7dpkascmjmouz8tyx2hb9n82knwupgwig8knzq9tr37tw6gt7tcgd00rg14tj355mb4mwwnxpva5667zf3viqc9e2k4ylxnvq09p16vcjpgr577saqluwsnn5t4q0pzp3zw3l1y2wdz1fzg4vds0vped003s1lb97rixkb0eazgf7pqrkk7xyaujhy7myq70mklrf7g9awumeyh7qqnk3uws6',
-                sort: 983654,
-                administrativeAreaLevel1: 'w8rpa3pwltols4n7g23h1k60plvc7bj40uojwr9jolz4kjl80g',
-                administrativeAreaLevel2: 'f3iorj4xrud7pjj9qhrhrmdp3eghuv3zqnnzamprv23n9mh051',
-                administrativeAreaLevel3: 'stkigwftoxxtzf54b4tj4q3jvm6dvamnt7ui5v9d4rbq8wnv1z',
+                slug: 'ldex8kmywuqq8va32341ite1xopytp56slthkxn41rtgtb9hulopp9ays24url3jcop59j4hk82zangxzs3i3hh33gvj3wrn6mnr5fhaw3xby0hy5ajfz5cgc2xwnfnp9ckry2c0xa9p1ufqengefnje9sx4p7v5ylbyvinw1fq8g0wjqu2o01e6wtm2fttt9ey72z6qwfkedouprtq2okwaahdihpxsxqfzjuplaljbvxcv9g5jwr1nu7075ohjc5dd0w75lvhq4jcjrxe2i5iuc1ruq049r9kinm2l4o9slzpmd66vy59kc1aqm74yh68joxp048klgbn9indt36v5pej3auhwf66h3fdub6yp6j8708cosi93sh7lwyfahdmbjl323q1z3376ffehayeqyap87jcqsmh6uaqxsr0sdbyxcbpw6k1klxhcvgljiqsmz307bn1is8yenkzht6vrih4tlhsznpo88x1381epo0d1l9v606q5ynbx33kcf05przpdp3z0wgzjykqpeqxa1gxyhsu1fw66weerzf88bxsqhmsbjf8lhxklj4nun9l4kgf7sjnnr5eobhoix1v1vqdh3aujalkb17zln8osyi4zrxgkus9xetso60b0r92s2iwucbvq45690ihalai100klaiqay6c8cjl599beus6sx3kcylirifiskx0ozt1strjbat938t1buz3bm0xdzwja5lc6pm2lee1tsd4rfy17th7ht7qvf1iga1rl6zsz65kcyb13wx9gp60v98mzfus57djs984zm1wvvar5as8hlahrsgei1mn7rfvd29pgdfrxjgwgiedjh9wsr6quq87t7puggy8h4zekm1ev0lm3gu0caobed9cnzw6r7e1rhtrjhz8clvs1fsiitrwbsnwkt7jxe7tieoo4b9j0spwcklw9rg84b8ldzkblxkmzvgifecfk6dzzlvn4plw87orgl7pkjt6hsypu3hgr5vtijb399g6rkdk9ha1g',
+                image: '36ac1m735ccenfhwyxemhzz5ulncjeew83h8ajudu61v7qdr6t4rzbrsnp67ncruic9xrv9w7qgqri6rzpwiyj6cxgh5kmztuvf3fy8osba3yu8a3tpns8jbmbzwqtr9aqw6nqggzqagui1ra284otch05q7aijhqj2wfgpxwp4dd783zw734covavi1dotl69dpcv1doop1fif63959o3aj1dwd4q9g9xj2hnyiot42xk5ybij0l8ap1giapavko0cs0hqwbqiw3yrtof4d41lqmi3g1xyeflytwsl9nld7jz604egxtk03w09u2831miw79meeendaz9zh5jzs3ohfi6iwqa6ddm5xdoej13vhwr4yl0fzfrd0ge177wsurpx3z8uvn71w2wqelhglf8b9r6zmrcp95jhlym5g0ete3uubyhtlxtx1og4q9jw4y01o8u2vjfzkmlneq23w4ag260uwdmrul66e270x4hmtnvpnz8fp3qr4vq7qi3zcml63hp75htklmhditvbuv4o5r1ln4jbe4bpcjb2giv2q7zi2xik7rzmepz6tq73yk2k1f5eu0dk692u7fecdht632jtvv51m4apnsa3k36aa64h62ldjurddvdzitlmzvunq5c2ypr4c32kt9ao11hpm5wbetn09mw8fn5i2azofydpefnm651hl4uyzo0xogdo14hhtdxdck1g8owgr1sr83a6amtsiycc52rqm8jqml9awzhz17kqppgs6wgv9973t0xglh83ufb5z5svzz4pqd2uw3ugnackr5cefvr08gy8xktorf2uaul63mrxwukf3bkwxzgijbdzzox5v1wuwcm60bb2anstcueksqp8wxoll00m7u2g26kanoyum6rdv98nxm3jtdxfyr0upvx5qa8z81tjj1wj5l8qi6o8cri1s5t190t5v42mgy89og3ss2vd6rq2q8gqswdpus4bfg9medan1hzujq4qhz6bsfrd6jk2klz1qjo9k4aiw',
+                sort: 584888,
+                administrativeAreaLevel1: 'jbq6w7uhntzcs71vmz5od5tfq3akspaf47yrg2l3lkwcey8sbq',
+                administrativeAreaLevel2: '5rj2tgvs0mp3j3qj300o1zmp3jswplyt6hmgetqgv0ow3litq3',
+                administrativeAreaLevel3: 'uqhdwdzd57t9u7xt4g5qtifv5wlyy5rrolgh9aweqvac9jl56z',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 436.29,
-                longitude: 27.17,
-                zoom: 20,
+                latitude: 150.56,
+                longitude: 844.33,
+                zoom: 95,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -488,25 +485,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'y8',
-                iso3166Alpha3: '85u',
-                iso3166Numeric: 'nlf',
-                customCode: '9w6oqx9mlb',
-                prefix: '9ioie',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'tn',
+                iso3166Alpha3: 'tm6',
+                iso3166Numeric: '8ex',
+                customCode: 'uz7icyqhkr',
+                prefix: '2my0m',
                 
-                slug: 'i5gl9p8jrk99p1ys2oqwtewcq0gm1gwrfz53sq12tr4ssdfn7694zuom2yxk4y9f1sc86nv9564n2cyhqhgk76120by83fd1o1buxxlrv38pu2rvko14u6j2zdy28x8l5lokakvlduj1ml4zm462tmfn4ru7zzclbsk21dx0b1cht3b2dblrk7712cwu22pstwkpk117j5dzcsd0r64eer4zqixpj38rmz3e1xshdov31pods31obp4lqa9z8cacfbke7eotrexh20av444draqqxoyxpphdtu7pcj4wr7hv9qgu5sslckr20cctg211oqh8nq6napxlubaey4wbc0y82zu5itw8raen75nhaz4cpneqnsgw2v3bzshxndvnux2wznbu0gzzz9fqpu81vfhm6bbipryrncqpajmyp6ihjcwinxwdmkvtv9whn6ama2d7qbsxtz3kfpzzjln5f53nshxl45e59f7dy2vd8rpjvtqxs4fjf28rz3913t6kk8pzmnpa3ai1sf8z9mwnubvtd26y44ylois6npblk5g3fqg1tk7ynvwek2g7o14ib6l2odogyh6y88cnnzwhywv1g7iej8y9yteezcgeppwdt1jo2msjboknszd3c8rtfxtvo8qihxywqhbrtyv37unkmb6s0q6j2yszlnv6hr1fta870pn8ipyxn7h27ij32hv2u1pg3t7mfa0ajzljnw92ykivdxnhuluh2ybx55vqabkl8zw52fdlqdikjpncsr4d2axd32fs7dc3xk6b8v3ad13flfs8gxz4is80ifgz6bbv5aznqc4v8nwecei496ng2pmptjf6kvj4dr11krkeh90ht8f6kebw9b3mmi9drrgzrhjjfcvz1oy9vk7b5l4qm6ciwhw9e3ipf0z00cqv5l4hvb114tkw86ojpecjqamwu6s337hlo99sgwh7igldwy4ba9nuvrk0fjabst03rmqs22bvp1h3g0u6536s9vo8piewar8do0bep1v9',
-                image: 'm18muo9zs6o0efx38czzd9kfyewtg66waxf6orkt90hlu8dfemeoh4ii17wdir6sbcufox4vnsm0kwmu2boc4q3y91shpc5c511mjsp9x4wtjhn906r7ii4dk2u42dutfxl7d7e28m4o2y8v5wpdrpw662llfy7ca4vsyztf8091iw65p3vhl2nglgrm3w82cw88czdobzyovw06tuasx42buau9vyivoeg8m1yamezq90xtz6hrx2agni6vv1cx7luu5sserhvb73868k7d0eoiy6ag89htwmxhnernyz9xcuaf3w8h1ssxqdr3hmkankx5gxrbrpbmgiojyg2vd3wtpwizojzma7kxxpi4rzzz3udlm4lv8qpm2puyb2csoujkei1trhc9pc9zgzmrqz1uuczmcu0va31v6xdkcdal5h2xozky5lys8p4h2hy0oyabfs6og6hjjj83obybrw9o2yff86znzp7fuwco5v4p6kjrolqqzx64ewi731k42r0iqjaq5ev22nqkrcqdauebdpype2z30dlssqvvif0hzy9eur5kptgrjrcxjx4ntjgr4qsfkgvuyjgqzinsu253bpu2v9i5pm3i0sx7betu8hpebg7g1hvo6npinuhruektsg0e5155mfn52347suicp5vd2nfax2o9vuqqsdmqecupqspqu2ckyrcpcjat1l6whdajhz0ypmcybc3xu7wz5h57ict7zk1llfj66bo95i4cd9mmqh70xb8cllv1besg5w2niuijfo9akh0y44fp29p5vbicz8z404puub6ravh5wq50svgejrk42f07cskg8v0j3r1485ewbauw5vhpxsiidq3uz5mp2g902xi5eo6a0mqp678qpgxo68qly84d6j4cx3y1k05vyhj66c2mrwmk21f7td4h0dzwjsosbe42bp67dhrso87o9dia5n8y83bfzjplqj3mfdp64585puf8y5jujypsdjpxpa1hp9ch328jtia2xun7pv4r',
-                sort: 432211,
-                administrativeAreaLevel1: 'sfa7if6pvg5j4vlqds0ewbuc87qrh53g2qxofs9lsig33atv6x',
-                administrativeAreaLevel2: 'uw8tsu5kyw4wbfppiikrh09mo9f0cffuu5eplftzxmbp7vtxyz',
-                administrativeAreaLevel3: 'd7zjqtxjvfh53xcxgh1skz1ggq1b6gw0l6dum7dgu8tssdwmzw',
+                slug: 'fsoito5stgu86pccq53fh0txga1ms3ay4drr59r5aoh1u8yzuo294c1z2y72fe60xkcz3l9i8eumtquaylbmo2vnlco1r2s10iru6n2mluj0j33xoo2c4mnokyqup9xqawj3mqj3vk9p9thzcv6fwovzbrh04xhjd6wvcyq8c827njxgogc225z84bvflvs3v6862m5hxsank1ltk68kq9fq456n1ic7c6adg4x1fm3ndyita48jngsliqaye66w12zyit58sxzl9eqp6kaahykok9tvvl8akz48dc9b14nokmggtmj6jnxtwhej3s159stpgdephkoub7tbmlykztormr8zyktemc58kgx61wb042j0iktyphvflxhx3ackp6mryilldovs5i1n753btsea6urr8njqhdckd221h8hdaj6xccdpdwkb4z9asj02bbi4vrqsgsozbawo4qlw2cr14ukcl0od66bfx39hhyzzkypwj8nc9kjbgp0q33m1805gyjepy030twbcqlwdbq7mmzg02x5vtl5t6wtxo0zzhfknt272900ilg8zsx3jlzfib2mmsh9roqkfxgpkjjl1n2hwbhuwxdmg3yabhhvqdemq3kblz87zlxljb8a250mzbchmb1c2gnfztyrfrjl9nztyuhm32ks08r4zsjmd2imjqeuyr57n4w2098pmlgzdbb2rfn1n9zg6edkstmusg4p7l6c9nxhkf3hfzi7pf05hiv73l79zmo2g4mrhenvnl223eg5ynt8gcfq9vqym98f7aju62clunf98fm66wdhbw5yx1m5v4ivjfti95qgf7q537aba369g0w5jl9nyhjusnx28atkzvl5ehf24en0j7yc6wxr4p5t9vx0j88i4obhvref4nl07oljzmnr6yscizhp8j73cbwh00esfpnu16nbtdldbswxlawbpw0aasyr766ugkgn0cal70grh090zyki6bntbs4d5nvaouqbnsc7xxexqtg08jle1',
+                image: '8ghfzd33kb0gkyv0xk5qfb9gif7gb1a4eam4tst3y58lrvb0jhoite2edjswc15jfef8kf0d0742diwh1lmgq6i024l32k2h5823yv1llhi64mjdvw6ahw46g8ko20f8ieh7kobqvkdut3om00lb265bjqaqnt2264yxi5ia9y2bxsjyr1rrioofyc3plmfmjj3o5q5ij9nz9cae7ywmawutl5pydr4r2n8yzkctbvkj3vrtvbg7ccgev71ere5nvcwm4negvk5vbvvd4ljmwol95sxo54nnxu94y0b3wvax35d33wphne3vkw86g4mu3af95eoubz5fkh7dlef5t9vge4oqhily1chfi14emzsbljiqtjn43qw7ju173sgecv0phafuhgrmc0n61obc5ekbg144ikichnr41zzfouzaiz8wd1a1b3st0ld3id94q8ijsm7tgt4ao5nxktruff5hxwsi74gy9w72hzp9v7cqzpbxcs1odrtdb8f6oiai6yn9lr0m3p7qzb5ap4og6w0va2va9aw7zu1eo9yd25fv1yrv21mt6fwq8l5njn79h6d9q90t0g502fq4x4wvd6j9xz42rd6xraunzyj734xwfzcl4f3inqrzweyn2fzpu9yi7bs8ieux7oyfs5prsyalhdbgffskxemkgfscc79qxnoub9gql9r9ks0j0jpjwexm9g3diu53a8yqpxrpoy74m1ka8k11xxege3ix69t7c3ls30tkjgpx9ulp7ma0wbp8p7snngc5b6fc3xilv462bnsrdfhwbvfz6f2q2cugurb4o94nc6gsgiutvnmdi1dmvml8dylrery70ink1rnqrotjxl4yujxnkh6geymu2ctqb3xk4wc6jwkrh1av2ycmfglp9zgz1dma4x6e9qvdnjbdmm4m6bzd192eza53uft9f3p11f2hv7chz6tasnhgfmxfl8fzmzdo33cqmpjoxj0ydqxg9eoggep25thme1i2g1qxcjo8m64rq4p7',
+                sort: 691117,
+                administrativeAreaLevel1: '5j7qy4155m0uvrjlockqo0v02ebc9ewj63u1zlqwb72wbqh6qc',
+                administrativeAreaLevel2: 'roeuplifml7xuuqt6y5w0cjmzi19fowulr45p3eu29m5c1w4zy',
+                administrativeAreaLevel3: 'jlz0sk9dsjvulqisxm1fzo64sbbda3mmwu8rqh6lqmxaj9mz0w',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 880.23,
-                longitude: 790.23,
-                zoom: 58,
+                latitude: 363.80,
+                longitude: 8.54,
+                zoom: 64,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -521,25 +518,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: '7o',
-                iso3166Alpha3: 'xiz',
-                iso3166Numeric: 'pfv',
-                customCode: 'k8jnqpehjw',
-                prefix: 'xkl7y',
-                name: 'ne9tuo4ch4egih2rxsy0djdm62sf9s70e74yoe9hhaz7fyvpnzkaol9xdtl7y8aaj9inn3xugzgvy6vvhh955rzgu1uwkkl17n4abpdr20dlehfxh8rxf6yuz78sycy60awd8pqryjkrregflrbfnmi4pgj1k9095kd03d0gb1a3mzkttchfsohldr68twcn6oz0phlrrl88raenkty7tybgb7z0fiq50dj1dq1uzgvrufe2ikqnr9a1am5m74q',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'vz',
+                iso3166Alpha3: '0r8',
+                iso3166Numeric: 'nw4',
+                customCode: '95x23eop25',
+                prefix: 'xj6xm',
+                name: '9e2hceo9jp571cnsaz18k833zcx10tmxj8cio3jcsyij6342541vnyafa25louqrnem8o72l2jnr7tm5ynov0v5smk8zn8ezknmwaedq9abqlo29fecfxn7lo8ylz27il0rk1mgrdbxjw19mbtald4k3ee1qvbg7t63wcksjhzihnit8hcfvlcr2zia1qn67ipsm8ys69fo67nyhyjw7qmefgn9owz824um5b45ex4d10wyfy0j2c7h0mewjq3j',
                 slug: null,
-                image: 'x5ak9xdqpmk2j8vscab491d1gcvdbdn2oahymhnp1cqpb4eg1tk5tw3mkyssqaeo433p24xrvlhpelsvgyzh2zyzrpq7ysf7v1p5xznbgml16ewqrq5cf8k2wke6k45lf1xc1vsbxygic9jgyzqpaqbo3wwg1uszky6xsz7k2n5nkwchiqkppzxgypz9ivn9mfuct4gv2itom2cklc4sri09b901fahfqowm8ckltxwv4wl5u6obkyt6czzd07li9pngkljn55yyu07okjh79cr0lfue34tciuvb605sch1ubnpp0luvpng4pf78f5le91lbnecxs63962sa17ge77kzdzl52qasuk2twgmsstwmi7dbxt2cgcsqb7oq8q11aj7r5ao5r2m5c8rs03xexruq9cymnvpko8wezg3aeagqdctnuzzx2l64yauf2tit4ga9ulq8i987ym6igp9w2vcwgpk1xn8w77cex2zezo2bqbkgxrcb6eh21iagi3wra2ewtyxpml0r4oxgdnct8195r6mfxnkhcsijzf4kl0xo5s0mtlgvct1gesgbikkektxh2tberet7wtiu5kriz56ckhhdsbkatzc9l7pab5uxp8pxwdoedx4d62014v4ruretle6v6ox6lee5hq22xvft1ked1kznm8nlz4unm2to2981awnkgf9c20j1rcdxmdz84lklivy0p9vne5hlgnifwbunsql9mftokptbnescgotk53xpd78zv3x7rrsaj51rlzn9ewz9yohhc7lkgdhvlfjzwyz2psw4zqgcpzzmje0iuqw2ux6lgb5nz8z06d3s8zgmkpuyy6vtwcrfv257t1r95w20ohknwbn69rkphhfimm4q5xb0zuesxgz8n8dl7u1mk5cd84jwt6nbsj7kuccwo0e0mw22443pbbfjrosaunvonv4m1ykpy83joipq6hbe9bglaehyym0wc7itlweijeivinz30rlbax61yym6ehb9li7ed65o2bjg',
-                sort: 244264,
-                administrativeAreaLevel1: '01nxmv972tedt7l6opl6kcrzr8fdm934rkzdxuoeti1pie1lvo',
-                administrativeAreaLevel2: 'wj657uyqfwyp1bjlpq36d5indrlqks1x3967m32rnx2v0gx8jv',
-                administrativeAreaLevel3: 'yo4tfzfw1v2q8i3y4d5dcrr98h9lhhwldqkoqwv2reh6w7i1hh',
+                image: 'vdnldig6dmkgul3y2f0ryps3x5kcf2bg5nji1an84jtots8q1fk5m96srpgobs156zh8oucaa5dja4g2toobxevs05fxueawn2jjrsvuh4zizulnc4nf69kmbikhhiqmnfp9aash03s9krrno0k6hjupk7j93cmwmkj7c99c8y254znlz8dgaqlpqpta2w7yxgzav2pz6bt2h7leywpo7blzw5dc4iq0m2zfh3qxmv9117c59yxb92o2ot5r6qbm82c6pv5xny13jou44bvf6bb452bkn0yy8jw6yauxnsgh19abgjwdg8urfglz7h5r5emj0midrxdm4rfppskfmjhbh5f5p48cr732kaxdofdm8wq3tchxf9rfm4uwowbvuc0jlsr94yqo5mswovw9bm5e82ueu9leiqzecbrnofu1j9me9ns45cjw823742l1if0p7jxjz553dok8e4aszzbt3clhmumlcgzqge0no82bzeahnifpamlrl1kf6h5kpvff55fo3g51x0inbio99o1cslt9ntqp2godxiku3xbpzch2oipnivhwnv7bmxsyjar14qafhguivhz0jew53fj61kq7wgo9yowlb1ai871vtyoy6qzmkki38b7vqjg7wjvreuemt6zek28w8re1mn9p3ruouq7t57elvspj7nqatkwnyra47glua46p4xv9jzqxdtn44o8otmw11tcge0duzdf59hayxinzg4ppeqscr460ioh4ygjut2nyt24v8441h4ssaxz6nopppuq89kmxph5zl0m37dudqfx8u7xxvhh82t4x7etelis4sldmemeiim1feo5ei6jfcf3a68ae3od2o959wpvkc32k3l7cy4re1c4fsg6kylj3nqnyaywrdecmybmfh9mkz0icblfufw6rk7ttnt86drqwnfcefc5gqssxy5bjq8dj3eb4utuipoyvovkb13zt8ij6hc2xw9a9gmre8ohgknx2kn7c7t0lnuyyp1ghnn40bynu',
+                sort: 109621,
+                administrativeAreaLevel1: 'dxl388b5zwj3yn38a83syf8e0heyscdsm1ecci7aar1lrf8af2',
+                administrativeAreaLevel2: 'rpo67ny99p0uig1afv6hbd0fdf6iqi73gqht0ulouit4r8ntjq',
+                administrativeAreaLevel3: 'vgqyxfchepxyr71wmn5o8s5wuu8jf2z2h3nw9q8o3qgd1353py',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 531.25,
-                longitude: 641.57,
-                zoom: 34,
+                latitude: 280.00,
+                longitude: 298.41,
+                zoom: 79,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -554,96 +551,30 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'vo',
-                iso3166Alpha3: '4ka',
-                iso3166Numeric: 'q2f',
-                customCode: '3v3hdukyyi',
-                prefix: 'rss4s',
-                name: '30qjphbey7xgfki36xbsitp0fzekz50aydnduxzkrssbx62ez6jodl35go1dc9dbzmw0e5d6fuyn13actm5kfw681nnfw7zp1d8ii48byrqw90trtcs2wwrc9935hddxfp32aq8dwitjh91v8oqn9v2fhpaozeayri944fuqjuc970a23hkdhdh72svtph7a4d2sunq2gg6ll48ugpgh3nlrip9bamdqit8z8co7qrlwufb2wkphe7oxqpom80d',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: '5x',
+                iso3166Alpha3: '7h9',
+                iso3166Numeric: 'shv',
+                customCode: 'spbhzce6i6',
+                prefix: 're6gt',
+                name: '3j015ha6yrn9slqbbkr92vvipftbwbnmey36sveurag5mz7bd7020xncvn6hnbpki7u87bxbmthrc4e8rskbwrmyjz82bj4cq9936vhcbc3dzkn68ab0hgmj5qj54vhmxv8d9w6fj8gkad8sxbqg9skdpsywp38n12p2zo2upzgd8i13hit6uq3lw62fcu73mcxop7u5o62y74iy6tcjijo7vyjy8ebuie3obnynm6oetigytwrl59pfpsb2mjw',
                 
-                image: 'ek9iyvfuk21l0lk3b98gvob6dj16lfmeccfo8jkmsfnz234am2ryrx3py0xrjaecfkfithlg5qq1l4813jhcig6f0um4acz58ytl7zx1npbr94cyt05f1ui0ychajxvv55p2j2ruqcgv5meju5mryagv0qkaaxp3fqseb48lrfre8wv01pcw8ves4mza0p6ytalaj35toi15mae5krzn59jd1emyg911dt9fs3vyjh01liplvhj07q3hh9ichr0r0qjmyy2mwf0slgqpmhzsa3w8pbaw5bzofwgux9pomp9v9d0geu466dru45l66aghfuv695030s0w33an1k5zjrblbbyw1zadb1xi5l8v1uyikte8esbuiutdy7brf1y3vdmw293zfa05bzikopvcpiqrraqu3qatg0e6rnkcbdco7ypalf7cgx6i832dhletzrny2hzw4p630dj59wfv2trh5sbl348dk87zg9et0sl6jm5hpavpa1v0b80u2uccy8t9zd70cr6qwm62lntw3pqhlu7i3vxu78ls9z5d3wammq94tqjf52kx75t4joplie8cs8gs9ku9at2fc53gaq533qktau815ijjwpesj3erue25xvwybc13pi91wtpnnaw5ztnkuqrfvvxh1oa0z7b3eqn8ydi97djha0tnf3mlgpubs9nc47qc50bvpqx6cqgwzdysmld7xkseqiosy2n275t86opmyg6no45u6q8aipjp0688461ghxqn1wf92fskvgevvdl7j9r9cgfof5r3iseypzcg6uxkjqezo15w3qrvpcdt1sz13ydi8q6tyzgc2i56lfypxljyl3tgcthuxnx2xnaijahfyup27nru86m2rgrkonvwkgwxep8eoo2n1ynltrgnpimume30tcj21gtsyo92w2j8eo6rpiwd4lzpqs4tzsmly27nuqqal4hwvsxqkjn6n2h1j3qygj43nrzkzxinhs3mspfbk7xxrqiyv5hu17dx7noy6es1',
-                sort: 281658,
-                administrativeAreaLevel1: 'h9lcntukaf2d2m0kbdczabzyl449daaivqdofv640zcuoxjjgh',
-                administrativeAreaLevel2: '8e4ajyxtg38tobbn2hiqm6d5ryhlzc5yptszloxf4iuphkgf2v',
-                administrativeAreaLevel3: '0jo4fqk48mp5aukqpekiv0iad5hg0b2bzk8y05q8olis87wqpw',
+                image: '7105dqiv017kfprzc56tr1m2muov0ybnjh3dqv8pq80jtofxdxxop7mrvzz761ch8btnluq1llbkcmzsw581incfyiad7w7qv7kg8ftrxtg57bzx25t6t1zcxy2nj3zatc7gtrjtbnctcxkqq1gdjfrbizbdw2kmgfcgnmtfrcdz6md9r2kceuelk6279wtmtvcvair6tluflkqr06hl7ubd0b38j55yakccuvrn07bzy2y26757n9tmkdfh9eft5r71h0rcqytubhi8q35zjr5uuyyrza0c27lxfanux88k52apclp2umxuzew1t1h8ijpfylkrascv4ut5lfd0x39lmdmror2qtjk2x0luqh3owlil93lf3v524db170vjmoe4o1kw17peuyb7rly404dx9c2vwmt6vngvnlrn5d79th4cbfk7bb932esgfhpcfhv2jhmvp6uvj6rpdygbkzi459k7ewr30ds84vl28ugj5qvabk75lxiozegh7l0absapyh81clm00vo7mtduugxxssijeb27gs36lmkyfv0cxy2i6g95quexms5b0g1fng050p7ju8u7yn6zo5locden6b0mb30vchs69u482af4ueksglxlq6xs9yavyujfsjlknhhix9b87xpa7zjuq1g2jqbxq14lidg0jaxx0cp5k5yqqabteq2wertovdwp8gcmcl9jcaylwfz13k49su6yiegximoil5xv5nv1cjcrnq3y60rnmheh7b6z7601mm4l9g80hs2lgwqfm05au46np3nw4x87g9gat74zqas2eykvd2k3rye4hvmfj1blej4rkrvt0qiwu77wjp8alf9k793ohvug7nhc2kwhgxprmi7qyh3ll5mud33qoggc6wstpoguj9ue9v6f60nrj8iuwkl12pi8yhuw1ah71fqt8uwksl2q0up3q36xu2bpw7t1pncozieq37bpr2nx8rqgr66iemt9lok64t2npchf33ap4x53ftt326vsf7db',
+                sort: 416621,
+                administrativeAreaLevel1: 'lynrb7pstv2xyhhcpk3b3eki21nrthq89rsgssq0xcde9kolc3',
+                administrativeAreaLevel2: 'l7jexb0vly22t40wdnidb1apg63do2dkffsheigkf3ssgoac8e',
+                administrativeAreaLevel3: 'hoqybmf9nifdb2vnkhdt8x0uvnxpros4ndn54cfom1lk3smyw5',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 498.83,
-                longitude: 258.09,
-                zoom: 66,
+                latitude: 336.71,
+                longitude: 421.93,
+                zoom: 70,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
             .then(res => {
                 expect(res.body.message).toContain('Value for CountrySlug must be defined, can not be undefined');
-            });
-    });
-    
-    test(`/REST:POST admin/country - Got 400 Conflict, CountrySort property can not to be null`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/country')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'l1',
-                iso3166Alpha3: '43k',
-                iso3166Numeric: 'vdr',
-                customCode: 'pjnsc15mib',
-                prefix: 'jcnly',
-                name: 'rqticdqva0a8xkeya4t55mu4eg56nowb5ughfnojrrh705eluvkuwhaoqryzy8kllzctdrpfx0glwxeoygl0oy8k9uutzpeju0ear6658ibnkox8azte7rzoy69jhjacje41s3fikc4yk5b370oyzdqzi3mqi66i0qp6ntv0jqq3tyiz1akggs3jer09rcn6lgxy0k7byhj9vu6yd9a66glh69guwvh6x4tfexcslj601unja26p33bv25yl6up',
-                slug: 'rlultcgwbxzh3u18vrwgs7mcluyqht2ap2n4nslnjlifxg6jysocnu3wox05py24opna7t6d6okg4i8j7utwxo3025acertgswzvue2uibd599gkcdkq79wtlej7gtxpe94uvx4g1cwgoo4no49t5x57df9bh3n9nscb3w02l93axc0gm34uegq795x56rvrpgozc4gvubwg09vh1vg7xkrakkvqno94vxqiocpsdyp61cx99yrxyv4bkh4c964dnhwjgm92t8yhz214orii9j41doiwz2o03cxgdx8nkf13breiv98ufzo6kfwibambj10b1un7byr4ezqchfbfn2059gjxoft1clfi55swfa9vn3dsio9o240esumltod20efuremzdyrk401fnhqfxyesjpa7r6t3i45nqkfgal921ic2g05btr8dyug96rxdoi83dny2uzl6nqtqsej55fode0b1folvi3ajlrgl0xxssa5pqae0twx8tdkdz8z8a6jexsv4wnak4nie52oexeajr9b0knro24u24sa5heb0e44pgi9vc4feuopub7d96tbz4efycdgquv3e7vlojc1vqlowcsxn61hxw7b3ee7zy5bdgxvfohtq7gltz48u3g01n6w3ci2uo0uj6u69h9i47thah4kkcwmg6m9bc5rpwxca8axsdp2kc51w6uwglgfvrfqfzpanuqfc5men0fq3l3ea47dqadrlw9sjv0pjcz50nfvzbj1ro7at0uxvm9vwny5cq52v3x5q5y1h0xgg2r45ukgzajam2opl98zdb5xumk1wnvbb7k5z0e6wx5hxs6tdwk3vgnxmgu8ry0aco026494ukjmh4zcjxmbgti2r40dkjnlu9r29835tgvjpm2fwj7qbj586jfd0125f219pl5alg90i2mj7mw9fkxrb3pwqs1t8a1cq67em0rrbmna4w3c83u3a3a4cuhsli2uhgpdu0abak5cxipnkdjv2z7tj6cnqvmocj42k',
-                image: 'h90zyw6yqzxlh9qj1jwgy809wnacfealtzpjf39m0p2tagvm6bxybrgo6tj39wcbvcayg3c5t6pt3jmb1rerdj1ew38h0lrs5irg22e4rapymul8o8em5dsfpgze17xtgluwl831prf2a19off9r8m5fxg9u9n8auj6kax02q2i8r5v59mf3gksix6wfp9331tv9cgd7votudn5axsavpgjqmogscyd9r7plq2gx72szha87chx0v78uvqs3tfxibo3rf15400j79qcwltcsi8nh38ckrwz3s7w6kygccsnbuw1jy4nqs1e3terpn3dbhpcnklkqe2pr2ywu3x0unm28rmzrpnvendgk1wfj5hlvxynkzw94qilih04ktupb5iup0llu302f8kegf32vznvdcgwna1apyv7mol7lhdnmz0kousdoy2sz8l8n24dqmg9ulfjrvllroy2wgomxxvgnld800svvwepgji3vee7mdbbnqhifo3srzw87eblgeug53nfmo8ck6l3zldahvr9zqya69q8h3p7cdc17oh45pd6dqgkbeg8ikubonjtl1dkei8xbevfmi0i75v6d6kxgfse0pv01lggqea6e1ykym6i61wows0q4k3ae5db3ozs73q64w4lvc496iltlhz3ffbhoiqj7i4ujxw08fdyac3c6ms6okwvbqvvlgpxe1ncthtealmc95cvbddgd285us5kwapja9a0mdasibs80psbjr7a08ghtzo44zdcp4v2hqf6pzvui76rtgrq46x653d5kqy2rw8qee2b33tbrgdlmp53tx61rcgykbf4ut2270x9lzw0uz4tki2957gcgs2nq09znoa6bu6voykicjyed6sc7hc6h56g4n8kn8w0mv4vsyqe08o5pnpf616vrr5f05a64ne3rl2u7wqi9wzkx8stbedogvlzyokdh2msa537ml57uye2ghhwuetedn69b03u77a3fbn6p148snse5rml1pf5f1a8rurdc',
-                sort: null,
-                administrativeAreaLevel1: 'q5waj4vukcyshcautxraov70y0qihp1qwdtbdntufc3oaaiv2y',
-                administrativeAreaLevel2: 'ilgyodyzp93hstb59h3u2fflolckuhod6ths0s0n2wv18zzhk7',
-                administrativeAreaLevel3: 'csqov2jvvpkxnzc7l9j2qsjo0vj0z7rrhtmqdu4r3vu26laidi',
-                administrativeAreas: { "foo" : "bar" },
-                latitude: 871.10,
-                longitude: 795.01,
-                zoom: 71,
-                dataLang: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for CountrySort must be defined, can not be null');
-            });
-    });
-
-    test(`/REST:POST admin/country - Got 400 Conflict, CountrySort property can not to be undefined`, () => 
-    {
-        return request(app.getHttpServer())
-            .post('/admin/country')
-            .set('Accept', 'application/json')
-            .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: '56',
-                iso3166Alpha3: 'snw',
-                iso3166Numeric: '90n',
-                customCode: 'twi3vxnn0w',
-                prefix: 'tmzw2',
-                name: 't773w2hqlejof8lpj278g5ibu8y1imkfbh2fzut5jjqyvxpgpnqnsvzqw40f4q2l8qn46rvo250nsr8adoyt2eqmixahbq5fpozrw0cfmfrri1gdbr161gpo3q2z7zjlqto2678nkywptgbwy57lzpgrgyembn0mlfrt6h7ody8vjju0k11ssdiwk0ekewyn094gts2nrt2s17tun7kuxgc1tr9on292v4kkaecebowvopshsadggt5bwfpszm4',
-                slug: '90yan99emmbscba1pub0rrx47yk9azc3juoegtfnudfhmapoidva3rkf88oe6sgkhtjht59cip30hmdg3mc8tpfu9iqv6pd52wk7iktbbzvzciiv0oujhxwdh3awjs25j4fpa7v8uq6fg3iwujwd54jt5inxg0n2rdedt59ge9upd17jtkja14j42serj9zxv84cdassx8qkt1l3lpwyc7ltid6gfmyyyfpkewg5cl4nva6pzsyty7pq5g915nbuhjw5a5rbgix88ypwt3ufyjy29h38j6oivjlp2jlhyrjbem7ku0rv6rju6rgqcgzni91qs7aq50shfknbwybrpwr4twzvwc2l7hoowdgug54x6q98mguzp17myl11q34uqvgdabuvpv9c5cfnz1lugpmavbvbayuz3prcyk3xbjs8l01mhrlx2xloopizo1z0b1uw1t8moa5ezvazbe31d3n70cnqn5f3getzy1p99bhmvys5epzdiqc0kvnr1qs992ljr6qp4vtu34luomso2mx9o3b251ctqdpxo4o5f3tg6l0de8rik9e60vnt1kpcbvvjkk1xg05d00j9r80k10uomlebmfgl8r6jfd538gh12dvioze0214cozzoner4ihd5kuw346m5pe9bem2rri9pnww5qcbtuer639cnk4c5y7ugq1mqrth9cvojce7wt5w22d4qzuvuy3npfz6tvx6prn6pqmz9svh5ipbw01903kkhcmkv74avp6jy5wu0egwr5ih740ezl3iy74k4cf7veko08558a4r2vxdc1dibzgin3zcr7xgnseghyleu8lvbehojqzuhvoq50gklgv12fqyic7eq3s014u0dl2beee972g35sc7q5jk4dtob98n4z0acyr08m2f1th4qlokshozo6j5qfx8inybesbhhlcr2oxtmeikww46jdxb2jp8wzsszu3pqdx561gqzudnuwsp1w891sn9ou2sqw3h3jyqp9hd5rkhku1yfs6g8',
-                image: 'lx59xdkudenu31o7p87px5kghlr3xi1r7ooc0w2nqzqwqrv79uybat6prjjrdl96g6c4xmoy2khjn96ias174ew7caox32j65xritlvcmc2sckyvarggx5ke6k1z2tyuctkt8caco2km9ybq1ga6abyri8bca8zsh8hkwpidfl6ef8wqmbbemucprcle2ajjo8uanq3136zox3t3p55sgbsc0s9wdpg0wjhur57s6nrtzszou0kmc6da1ysi7pmrjl6636d8bnz43mzlksey9bgn7ofn9g1scxgbwv4o9byjpwv7q0b3vxlwj9xeqaw74q59453wv5n7txnb14xhverip0ix4i77s3w5a1cd4ozozjibysp99qxuv3rl4qpxp9ojtc82mmqkw9gf6y989qm0dv5dgs4eq7ts9iskbbpi831m0ljhqfq7zmfgq3iyv9pc9iicqazxtj8cw2c9swuv89vae23svb2u6o7klpvh8mseh6jov1i7bb97q2xu7gms7qpo9zvl1prwp7jwit7v18suzsdalpazjgs6vy1p0tdxonie2sdqsuc9xl85p0fhtd78fotr18jo5086xu6e2beb6aalphkot6pomi4ky1zk8agswkd7he1gq1hkfwlgfc6m6rrnfpdw0ay6ofqp6d13l4pw91mibfqg8zhki6q5oj62ote0qljmve3hcpgmi2og2zeu9lae9zw4pjfml3nb3yljl2lwksrehd58wtxmdh10mm3419g652ptfihqnr6xmlsngmj1ihon9c83iu7c5abeu53m9gkcpznm9ffl0qqz4uhe64dfs46vbuo3tcb2otzoa6ncgkzwp8n1zhwn9eo426o5lkuvvgy5pcx2s1vu0r347doathb3hdjig6rgoxubafcc3rutm72ak7h1bi7h1in9nqx5xcvlrw0w6o6l16n8emqboeprmwz8xopuy57n27n5x0iiqqzubf6ajrcf1vcncacuuxm9czog84zgvf5m4i8nrx4s',
-                
-                administrativeAreaLevel1: 'frzsm7kgqlnt6er6q4orsmzc4ms1pfss2sjipvba9toj7nyz0t',
-                administrativeAreaLevel2: 'b5p3l3eaabzpdujodlz5axbqvnot72sdzaf618e4d64ahfp3n9',
-                administrativeAreaLevel3: '253gy20ya9oa5jst8s2qzcwf2839d946e2s6rnxfmi8ptvn25u',
-                administrativeAreas: { "foo" : "bar" },
-                latitude: 335.44,
-                longitude: 493.34,
-                zoom: 80,
-                dataLang: { "foo" : "bar" },
-            })
-            .expect(400)
-            .then(res => {
-                expect(res.body.message).toContain('Value for CountrySort must be defined, can not be undefined');
             });
     });
     
@@ -655,25 +586,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'e53rsnc1pg072eu4c228yfulopaags1ptjihw',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'bk',
-                iso3166Alpha3: 'ekz',
-                iso3166Numeric: '15y',
-                customCode: 'vkmkpmem42',
-                prefix: 'ur1fz',
-                name: '75hy5i6h8uiql75fphv42r0lsxcufaakk5b2qv33bxu9202yy88bir72ew1e54kwg3dpgzg0m37o3fn4ruddhk841q63kj4wjvfpry0dshtzu5j0m6qakr0tdt3nld7g2l50xtdtoxut4nlwvjgibk0faiuj3kapfbopt6hhzmscfs6e8w3hschqhu5in208hmzhb416p8kdxwx230hx9jfqm32scnpea92n5obt3c6szkgokfoswschbs17y6g',
-                slug: '7sry6q6phsiz3uv80eyjhfvgodw0pkn19cn0ub4c6vqfatm6e4mup2hzcqkg57xdp5e3nvrmnahvgp0bcsupiiycb7xhfj6gewsxuau131qus7z2ejnnuwecash7a9hyxt8sggasp9d8dxuljglyovq045gx1vgz5y15h0oig9vrvzynqmazesdm5f8pqzy2fqzqlu6fprrhqoajliy2th3j9vn935xfu4sgk8yot522jcsserj7gsc67cndulrd2wed51t4rfpbm0wq2gsznijheqwpddhp70ftwpd2wdd78un0o0dirkcnc214r4yzdbnu4xktwdokfjr9kelwoqoshqh02jzakjo875qz8lj19abhhbq5upo1yjbsfhdwkegypts83x0yxj9up652b7soxqd0gewietctjf0q0g67goxcr3wk0zffrvg0ar0xhclzqpg54mo01slp27vwzww12iigr2hdyiuhfqcr15u5twt60fhv39wjtc25qh20as7ry6frvteq3ja0ng7m20d7vtvvbqgdzzawo3lhbut6b0d9fapfp6zrvl9zh40xzvekpxlybsmlxb6hi64jsu58qf62k9d5qzw3o8jct6t517ub611kyxbmq8m2lgarxn4gkf5zz9ni4d6ximrz9afa0cbudkfc3ycol4jwdxz7asvax55jokm615ymptma9mrssjqvi97sk2g39zvmq48i9b8puyb38lariqrmxk3ekytq7w91uja036t8iduqsy26l8kntz6tht7hy9c7c38gvp7rlayldqagqpjyt5j9yujv5x0iyke4g83dwf2d3op65pitcpii3p0fkzw2r2637inzethxln8ujuzjil22amts4pn4re7y9sexshy4i5tfpq2p91ptnyoackwnp5mt1bl7m06wqg3p1z91dz5z51jvr5qv9vx23djgjafse8womrgon9pl6ku6e8ei1w3x8zmc234ic3vxysqruoxypsliqu5dxnq1zsdssf70',
-                image: 'rem65fa1dg2q5e1duu4f32uc6zgvsyxyi8e36casti3uiu2kl3tdyd9im6rqxohgnpjbxpo2ex0zcs5zux5r2eakb3kvgdktz3qsxuq9rg3z5l9ulxz3cz9fz99hggxl0tneq34v4xk07ah14kf0onlajnn0sndw2e7thrrkqrkmkx6hozzl34t209ospb7za7ris1owaumsy48d9bq54hybw3xdnnh9uhehtmf8r6am0g3jskyoug692642lo0imdys815at4zxn0w9cocznohegs3d4g2n9z7m0t26mupg22vibof8sufallsy880id8cwmkri198h59f65wmawlqpyytjapjfbx4u4oavmlyenmk3v5e2py57qye9qmxvc82ggzrib8xfabo3vw2rj8l201riuz93mh6i60wsglrbtqvprskgqqc2tr4gpy8w3erjbj57q3mf4b2h9w8mpfn8167laiesp0i4cohc51r0619wwieealm12o4hw7qmwezfhhh027hnb7oo62iqjk80avqawgz8hprzss28m3kdikr50zj9qbr2p7x1n2q2npa2q4scinmgwzyxo7nz7r5hkavlj14ax1wqobhwj39xklmfv16311sykl3ibi1468n1zogtt7l5z1f5aj3hkbdu13direl97ngg5kzmf8pd9xcxog64pafh7ylehnlc8x958mg03vlf8umodcrulb48z61hug16rnrxmjyyoyyfp6h8q934eptrl2q34d8p8he2fr1ahbaaq7ktajzilxw365bj29624qpfbdpzpj1y0j4t6r5fyylx5jcbzno0qh5cnxob6izporxnpxxizfxo70u1xl3xzndpdhbreufqiofrcatw5zi7f4wcagnp1lu0nkmk0vm6782gjgyfqhz32fqnly3z7awatq32jvjjfvhocuj1et3havws3ggxx0ictk73lwtt6b2dr9fp1hcrodfy5k1tzqxkahwjg81sq2xafitt6tgq698wd5hi',
-                sort: 248193,
-                administrativeAreaLevel1: '48ocwdtavv5xdd61xvhgtrhdtby0w4eww0c0f4t05b4yf15cp0',
-                administrativeAreaLevel2: 'la9u0val44jml97j9msl6glrbsnfggwlyt4ompu70rxrzki45q',
-                administrativeAreaLevel3: 'uxb21rnz48buwkg9tzsstdo62ozs3tqf13hj5n4tkpxqps84yv',
+                id: '089f4je47t1rh2ietad9bl0ftkk04ps0eodv0',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'r8',
+                iso3166Alpha3: '49l',
+                iso3166Numeric: '12q',
+                customCode: '7pk2xg40ed',
+                prefix: 'gr132',
+                name: 'lezakj4etps0xiej61980v380gdsvfr7qfg7kg9klfxj9em6pdjkp4ysddttsz4x8tjv1g695s9e9wxwu2xavy1mb4fbynkhqwiys8djvlfsmv2qs8cjp9aj44jasm7i98uu6slc2y4o7oq9wzworit0enk7ea505lzi6tb11qabh3ipfwn1djdzkuasx6iwaclmyfwz1tp1qkz36geqsrftb8nno0r64n74pgaec12zx0dloqff7hxdz3e5cqh',
+                slug: 'mx9wmnvnmzije0zdweph4hjrv0do393tqeiqcvfi6eieg9m98qz6wqwj2mj8dp6sep1x7ctex42uk1uzjl8f249d2zb32qydbzmpbk6l1kkvafct14mtuta8ct9hprtbvtyde5veqbb82jkbuctwi9opwc7zjha5oxfoknolv3dqpjt86sv06br96qtnefi1s0d9d4koiyev4usjmvg3mh0tshqcenyjp7yodiznitvn5pmwagmmofg1bzw9ysms1vjeiartq4ucwhrwpvjdmn1dfq2oo6x2ggn1gxzyztrtd849iyt5j85nph1h6151d1be6bfwjbg76h91mzk6sxzrb8vnue1cb4uj4q3crlvd4d303rman0g7795h7bqtmedf6so6q36xiwd6txvo4vodf7vovmq6ldmfwgr2wg6os2897r84tuq8rpdo1yf2wkiglkzyssifvtkxpuravfko7kjf2ue3re43pj3nirckre10nqt6if2shs34mn8wbz9lxc6zzejnmo40xznf4woitink5rh7t4woo8tav4ntt3xvmvmeugg626riq646wm13yze15kxi1pbrwh6azka5kzxzevufagw5jc2trbng1dwwc3z53eou6t28phnh7h57eca2rgufspx8xfge1e6g46s2oyw9wcrs1qvchmw8c7wq13bsdlyqa7fxult21po2afz4m3fzibealcg7yupczepkiuvspysynltxrlkg1avi7pnslzvuwm7i17kjh9uh8cs5w8lp47lfcp1uxmgprobok97q1nz9l4m1jqlp9tqpfn6bj5ijw80fmpwbmdiso4pry8v0ex1agwnl753ygdjzxmpzqmiurlwdgcuos9clernkobfa1aycutzfrplcfhs417pa8br323g29p7930noy0a3uojj20m5j8koytfv75rrkzsgra2fvy7jtuz930j2v5ckiiuygkhpm052bsp1v3fi0f21zuanz20073b2iobz4pf6wmvqao8v',
+                image: 'a93hddvc2wqbdih9yj9y2hkuu70aamtp18w43f078rvncrdl6ktb2k4z2hfxngr147k2yvwbn7lx5a6kd8wzuzmmgmigfvgkzs4jpkyhgdznwr1ever47bugm8rydk8qoqxehyibz5ajxlucv7fatijzy4b2bjl2orisev5udh4x1hyc6ar3kf9sivlmd83htay7uoliwb10uyrx1j2l84qclol43ah3raa1y975zblxfd3lyk0fpz4rf4yv2qfbddsdojrba1l8cuo59g67swxlf2gg8luy5pmxdekkb1pfam0e2pblwgryxc3wkd0zc2xvs5q9591ki0kc10rkac0zfxgtpr6b4cuc1jpylu4bmn7sej7n3s4n8yxl49b83eox36izp06vkxdpvx50geimciwa9k90jiwqfc3mbamlakw1tfxpniv2hlmwhse9y4xa6piapuhdww0v2zttyymy5nc897zpia1gzkz31wezmtod56ejofvwnm2qo9s5o1pld4ecwionyvm8ddh06o48nmb8w9861zjnuzlsjxjqdgbkz7mc26hpgcb2zjltbz6d6mvcwue8tohs2of6pjqqs5nporqvuus55e1u9eu5vbdvpu83hdr5p620vf28ug4flpsiyx8xk2kqka2jwc1fgg2c03utqmewwwtao865wxvkpfonhldi6ewuvvns00a8na1qvuhcj1z7k6yhw3uahccbmk09z8p4hfaug8xnogjnmtw7by1mxjwvc4qcfjemqzwein8w2gcj7m8js903olzvvf281pks6ev6hofil9g4xjfa74dvpwjtl2ysjbvstszwouau4b2zq2j92wv0wxg5r2xmwazebgddzz5ornk6pk0stwotedpx5k94c5vzvxg1zh5ucc2t8up3xmtprb70myg68reslziji90ee1d557itv0owjx2gm8dr9udrutolnine0x2ah1turptgyhlrl0ulf2mwnunm3s36apxd2jmtckzr2x60sunt',
+                sort: 265376,
+                administrativeAreaLevel1: 'jrkw5r77angdkrrhzoa9uv9gh5lc1o5mqviktxjhowf53ik0pb',
+                administrativeAreaLevel2: 's34hcjptvdyaza1sv2gezdrwkwhb253a51fd9l01c0joww4y4r',
+                administrativeAreaLevel3: 'cd5pcjc2tkbaofesmbi9l85fv1tkfdf2tciz1nrvruk8dqtnzs',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 720.53,
-                longitude: 176.30,
-                zoom: 80,
+                latitude: 819.58,
+                longitude: 294.83,
+                zoom: 31,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -688,25 +619,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: 'aidupfc4txocy9676m5ov4av4orocp48nzf23',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: '6t',
-                iso3166Alpha3: 'ky0',
-                iso3166Numeric: 'ja4',
-                customCode: 'jqq8z75lmn',
-                prefix: 'a9o1a',
-                name: 'hq2hnjl7c209ugudmn5cujd5oq0a4i0xr3o88q5m2eavyo9glt6gg2kncvw4efkfasih63v16am3nuvk2mf58mjmg87t29100bkvj5d4nmmb1l1byvuqsbabfr9npqyzqa5r967ya59xd021ucjfdiqt8c2ske9t8lp8w527cl21i3x625pfdy7qgx0hbx0jp4jv6qz6sojavocr7sl0x90gn6dkhtxvbdvi3fpx9s25hrs39afw5h3yv8mwpjv',
-                slug: 'w7cuxeng5ec5fwc9sseo7qdesdjepmyyr4w6m3b1ali5c6u5uxgl2z5spqjpqlqcmsgapj01oihitobpjelul221dm8yz9s1772mvx4vxr2ne4cjgwwvt8oij7l4gbipuagh9ovp5debyvskeebkdd31jsyey3mpolf2y5139nx0culmb7ghnmbudketcxymu9uo90p913kma6cchpb5ea1vvokfj8xw6vouw1qghybpyx76cewst6jpad8kuosvux4h72stt5u9u6ujk0dw0ymor96c3y18l76ydjk0zaxhx4h6yugmt9kwvgg7gjw1o17y3kbh7hx308gliv218y58ngx8zq9dhiud3le1g8be2jloiec2y0vvbjb8yqpmtbvtu7il2oyzvt0sfmakj5grxt9vpl0wy1joj8n9hi4frznhg2r4wom1jaf9zrhsuruhf3fjkw90z9r3lf0dlmh5gbx884ziysqknvphkshstturl8gxpjsdaaoabwlw8p7d1ltuda73551atcdj94ap5jhenf1s0g1i9tfy4ham8u0m4np3mo5fc1mqsmdymbftarf5xhzv4ugasz5o8udighops18orbid7llqluln1ocou24mgmqisfqsehadyf8krhritxw58icwa9lziop5kq1vmb89z971ue8iib7qmt8piy37g9frnxi3ldycf9j7lfkc2vgzh5zzzjgd9ertxwhxw9j06kgw8f5pvdco1ji92a6g838t1begr1r9hqy9yvk8ejh46ea0ekvlbrkf2ea9r2h26w7jwwj2srkr4hedydoq6agp1s0pqul3483a73jvyvqgnbai1gd67cvf8m7yt8m4vo6kpqn368up66qg3ht5991gd2l9xzopzz1yptxgawqcxodlcs86l2bxua21q7ybngseflxn8xsrcho2wc2i0xwuck5qo6yeinngz2vb9fwekpxdn792ytoknbqyuax4kcuefh533hbsrsq73d30e43zxy05buyr',
-                image: 'zuy68u20u9xdz6xrksu534qcaqfyuhgzagnn9o12nobm9tm3jh1v1xkrw2qt13tiqskuw9s29l5gl7km9omdegc8qz8p6lftguawtjowwtqhtso1usbdf16b98psa7t0adi05rnziindf1lct0br3q8qspj4aa1nzoj9l6sdqzsnua54cqm8iquqs6f1d7ycimdsunzest2d51wjkcsbdyy4equ2rwdfln2rok4i6mekpfct0s9kv1f0nxix55gp1dl5k7ydabq8hcr96wlffqcv2oaw39uzxzl9zqbbbvian9x1j1xei4upajnlq6oo7733bqmr28f1e5f9sgtwu9mqhorvr3hbp1w4jjmlo5g98qtt62fs55zooi2x98tyfol83tm3i7sjkicxsmseuy7kt475nfvy7f04bm7njan7s2vlvea1saxagnefnnyfgtnvj5krv8jnd9ozplhmd37i7zogp6i5x1dz6aehnj4qmgdmkd8dunzpvtfzbbipu6153cyuf44erbqtc2pa2sy8jp6izpy1lmgwibr19xsew7jdckts4q0recc3o8j1assac6ujo9wcupgx2tso34d82dvj77wbm3gpr468ei14tvy9rquop5nkp3nmqil5iy9wpnvcpkjjeqkdkfrbuj4ta85jlszunyswldj1oqzn0488sht4n1stkyjk8ho2tig26znxd3ab4hvwoypf3z3whd8yqcaxfprux7dlef7hby181zgcuk8ml31hy57ccaiaqbzhyqodkfd8hy3g37tpzw8csl36mspp03b5nbd38jw2ybzlb3wcvjbxwhs7xctas3b166q36pqpklwh0ifa5y58xg144hebjodp3svtp5l4kx0ojlcqrcvxrv504wzmlak7fhc584ty6dcobor0xsawynqhdz0jjbb18vwbtyxtqkbvkrax8a1uvxdc94now5tk8mymp0wikqcpbprhftl06lpnrop2bfz1v28x7srhrlbj8rnw31ffn638',
-                sort: 130342,
-                administrativeAreaLevel1: 'l0pr4n2gogmnvfjslvkzif6hpv1flcojrzg473fvhrsatu034t',
-                administrativeAreaLevel2: 'ly10o6fa9bg9nwbihvlqaxrcb61bz9n6bntp6wjhccrjdd6ehk',
-                administrativeAreaLevel3: 'vs4xzyemq648co7ue4f1c9egvznr6dctt7zu7rb1grhpx6nv8b',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: 'wdn2tnhudcbgbycg7weyshlv0zagj4rcx3jbr',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'bm',
+                iso3166Alpha3: 'cc7',
+                iso3166Numeric: 'f0m',
+                customCode: 'rc3blaq93f',
+                prefix: '4nv7h',
+                name: 'gt5q7ignhoo47bi7c0uaax78carte7xff5759044qigefhxlq45v3hlaad7o8na9sihda35mrtynbtf5t533aibigkunapirn4fej042ovo7nw255rvkxbw9wcoyr4zwvaqhy9gl2zoaah25g7m5he3un4xbfjgji12ae6moj0zqgl0kdjctj0li3dgb9wvml3eo6zxubjqn3dkzt6of9nwttskcgox63ipckjg81ea7a5w42c7xfdibyxvbazf',
+                slug: 'ppzzj472whohrqcd7wm9w3wfq4ccux9kz0x9jnnl62oxua36xz77ertap0avd9vx7ptymlqpx2w1rc3qf133bbl89og5kqie1h0izgc8jojj027cmnxppdx7hj5zadnmr393uv88txrmx54hmc2wb1kaluey8prlpv6cix2xg9nwecb5e8h5j1aursqmajjlq8tc0r5nhsm6ieby5wnlvw4a4xgxv8egoczg3d37zvlouge0n9tcui22j08bkka36xqmtxebdxflgr892j6reet15zwvg99f79m686pcx47af9962038r3ohjoaf1a6rud8uavz4rrfxg6c50qwow9idnzwtqncbxwsm326gpd2tvd20sbxtpnmstn82n00akwqbjz1xrffsjuq2nf67187j76o2ulsnue70blxydg6e939nl507f23rhh6lbx1umwwlv91whs2dtw8h0cobj1xilyimio62491x93aioacmr46bdxv9zgh8m3w4u70s2mgp8gvmv4b9m1dqqeuvzgcc0dh96it779v8trgmezvlznanfv8y6clb7nhz8e25bv1no5n5gv2evldx0ug6d8jj0zhvouvy4bqcjzyk161szuj3cwrmsuswk4f0yxwpxl4iz7lxn25lk3squa4acv8rp0ze0qforymw8voc35zfxl6yeqk3crn7dod9nih72rrfcbuu68s8zdgnaag9ndfq91k4zetuidyitnr2hwfrpla8eejnjjwb0ooziln0kjqfi6xra6k3o2szq3b14b4pljmz80xa1rg8knqn615w3b32bfh2k1k60qaagbn0nnxj48ernchpnzp4280xnwzz5nkvaxh48wkn4iavhhb4616pztsyr16cpkn2pudlyou7lu66fd01ed9iy0ln9kvuh1d05de610gwiosc3phtf3s89zo3lhjfkm8vlj66e40poa26i9o5jvfmg784f3z36v46gj0yqfdi8ayxiee81ur8uwpnz4cm1tjj84wz',
+                image: '8hr0td1y910giftzugfpuqlf7zildbrqoe7zi0rq1qyt0fbg9i88l1790b796tpq5crasfvllmtrc25xdjo5hppky56czth7rdvyzdm9u4skns341yruxesonagz471mkc3gh66u8630u9kj80mca5nblefyo2scasfqkohw4gs4chmgdcxbybx8hy80bed8kctal0ltzblwu6utgx1vmwjs6zt8zc0gn3s084ofrvc7mv341lxa339cj8axtifbj91e7tdm3s1tesskrmq98gxzd3jgfptq3w0u0nkr7wzkrf3s9dc73lzb9vur3bjdub4uty1mvccx1brm8jae9ebis39u5snuu05xwgzm637qoy2er56wn2o17jp6skvu4ltugcni9wia21fkreejx5sq3e1yvj4w670plbwm0r5nisoostbt5u1ou5oguc03261tz15rmisk36koie31ew9fxkss5xq1kdrb412u5qg3sp8pyuqeeq7vk1dnn6skus80scpt428qtvu4sveybix1f8bljjvjs124reyqy1kpq6p8qsskw9p7z2x5jo3uxugkctugrmo4y216tzerhmu1bkk6etm270fxwitt7wjtucmem2uh11opyvdt1dgwhd5eamceq4ja6n2fyvzwfbig9v2hev8i9rzhxuvgg0ut4r97y1nwgiekmzyutz0aetfy9pqvvdo2z6c5k7z7k2m87wv4apmwr4zz04fafrf684bw0wsn7so41805qt3aw501x26vzii9d36wsnqz1eb9sgsxmwpasjal5fah1nflanzdoykaru2wrci8zj0t10nf93kyrnlgwr9ds8kv5h7ciyeopffiy34ylvvwxkhu5lu7u1191yteweejnq8wpc6g94nl07umzgylvhsdb58dgtf3j5kxcxwnq2adgjqca7d7ran2plaaeth5u0x5famf5qtn9m4us5036hkvb9twi32qytyuuih1cbmduqgm01fs3qr62q4mab5bmcua',
+                sort: 393832,
+                administrativeAreaLevel1: '6kkjvh6pt29ot6hui89vxkwz81iqdweukis0cbionrlxdaori8',
+                administrativeAreaLevel2: '8j4tia7rdivhc0l50zpvmmj6u8b3h55nhr9cniyj3sn6t70jit',
+                administrativeAreaLevel3: 'hr1orh1xz2z9plf0sk90jw73brg0y0pbnghxkn990oghoa6uqc',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 114.76,
-                longitude: 919.85,
-                zoom: 86,
+                latitude: 698.90,
+                longitude: 71.26,
+                zoom: 30,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -721,25 +652,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: 'bf8ahd0krcbzji8may2d810cvnnazsx4jr3r0',
-                iso3166Alpha2: '9u',
-                iso3166Alpha3: 'p3o',
-                iso3166Numeric: '8tn',
-                customCode: 'tipsinn70f',
-                prefix: 'kzhzu',
-                name: 'vg93hsanrl0kjpwdx1nak9jc22a6ktlp8mpm8c4tpzv7hdg6fy3skqly89840p88sfxjhwsrhrbrzs4e44smjgzfm56p45xldbpuk82sxwvzsl33jdakefbv064bwo4vxquaprkur3hthb16bmxc3fer13vmw9k173ewxlj9kvw1kgfng4493d4lci17zkkllfxomopfo7y87d9fg2i60u5l7qgses4tqqh4a352bfhe25610zw8j2rb76fnngd',
-                slug: '6n70iarf5ahgc1mdjngyyrd1g9dzyxv0gsgrm1khkjnhm12c7vpq6ey6n1bp927sayh04sheoh0vcznxeut5xeschpep3b5n34c5xwxef19grvv7mttjvw6tan6obm74884izmylf78r6ctvnch86898g4fdxyzgvadtkf8z9sxgo7y3m4evndsji3kvzt9rxpjg82tm7sfcivy2wy31ljs3h1milzz6bfo49pm75tlyl6csmpm502m872kaztluqagg2wpu54o92g2p9ou1mp2kycli25clbmn8tz6yyppech115e6f8uswhj4va4ko1rwe3s3q1a9aq1aefvwxp0lwjp3nvhrgk80ffru24rtzm61qkq5dbpzfe0jtje3t9shk81g5u8hkwl8ckbu8p66djnuhyctr0oplu0r5xvc2zvn05mlip6afs6w9s6b9qx1gjzmzwdu3yfrgbzl9zf45j2hnacy8d62vnut0wu026lwkthqcjqxqkuxmm7gg6fb8se0j7pngalqhk8nlqmn81tmtheg5rbatj86gv9k01qrjmvn4f7vev80iqy7thoxvstsa7fefr3w00jymu4nil3i9tpr2g2lv1376544rq6ybchihwnl5xd83vgvoj2eg05x9xg4an9lgoivxiuucgy9vnok52usvfmibgy72c0qm40qehtgc0njf5nlbg69lf3i7wd8ki75rae3fnszow64fte2kw45vycywku4z85cc8t5pszvxr531101822hgzb93b5xpbg6302drksygild2u64yqj8vqrk1n7b4cxnvmrqx6w4fyignq4220mw6fxv7icpdo4h71rz79cfsnc9hgdua4wesypo0arfyspc7bpzxnp86w243jg5azl5xb90n691rh1mgo1ps6ujobdrl3zfcc345x952fet0y65d1o3o7mowx1ppkyulenzkre6d1981wgm59fu4418ajquaa1mebsonekhe8exb0lqp916fblc1dxw5ykba',
-                image: 'hm2rirxvxczuhgbasbtbjdv6ylm8hbpiemvprubwd8qwzw9eax09gbo61qy7blfgea77kjn91j1yxkl45aqn024covkd88qznejxjy223a2plvoiut2hfqclfriv7c3zk27q0fkmbd62wh1cat1303b1h1kfwgsfat2wbo47er3dxqwp4lgnbjwlwt2mjpr3ggei86qx9lxqr3ocn2mn03vsdjlw7abzal2fhk0ch5acomzqgu9jnzx9xl8hnb2iwomusqdfh1cla86dfldagqnrrjeh0nhcddu7t1a09xn8da2divzau27h0mgekhzk6qpgjhljubpoiqpi21kyi91xaw9i45k049q5hzssruaxya3qtp1xylixjg3su69buef8mih7u42jbptr39qyf2fkf2r5ncyl3y35fu1ajikztsnqy08yfurrh95ures51e8dzrtrq6bkhwg02fprfvph24ei8b9905g2jgvoocaw648twy1w71reqrdfn0liczzlgoeaqpvkm60i0x1y3pg7zc9391bgvfdf7jex1vf7lyw3vk8uh7gcmqrrp2l4leopritkwxrdkpfyqsyjkx349o96u3gyrfujy2dzzcou12l8xi6f34h0gendmxt0yvxnlpnc0lp5483rac47s5dy3g5fdey6u5p3pkvacle2gzrq5nfv9fjkroqfveeoemhrreyoxu3krs4ad8n7bo5ikskea7j3br0xzec0ehv543g2g2cbicvr5uoksliywgqnv55epnvnh28q4qtzapw50tfr0ev7ev32bdmgpk913hf4si5zl0t2hmdh8oks3pn966yanno7mcy47fhd8aez97nk5gw447dqt2k2dtqvy8t8ph09hr7oksfbodubwwmj6jdrq5doqvtx3f9qvo8szhrz2lu43kzinx6y6lsn43fxb2ghqi530zpz898mysmygff4qs1960xw010dq8rd3lim4sbif2bece8q444kydj5xwv04v5mxas0o2s0',
-                sort: 596115,
-                administrativeAreaLevel1: 'thb0zpbgqs9x5976e3e1m1karqx40whd4jpz7jkde6me6mw2bf',
-                administrativeAreaLevel2: 'igbmq7oa4ho3u6p616n8oimbasqm693jdwf4hulo8fme9r8pt7',
-                administrativeAreaLevel3: '41wq0onakuah6jt91ow1khhkmuw4gr06m2tobkytm18fq0gz3r',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '9f72kap5gkeqkt1yp3mf3y3sectfmgjc147kk',
+                iso3166Alpha2: 'sj',
+                iso3166Alpha3: '7nh',
+                iso3166Numeric: 'rdi',
+                customCode: 'w138afu566',
+                prefix: '7frsf',
+                name: 'ben813zqtbwh950y1cnz46zen14rudh0sbeymtwrsjppz2asaela07w8whk76t6y8ga8vjv9vneaegbiqb6c55rqac94dwwqvhzmyzggugu5soujvim0k1kl11iavknsqtkk32zgxhp3y0r00yhitwcr77e1277y8f36r2ljh5mekrqpq8oma4s5ga6xinw57nnqbad8ergcxh6s5yb4ii08oki250yjshgzj4c33ny5iiko2f96q1rlt8pfryi',
+                slug: 'o8zc9vgtp1swsnzkqx95x1060cm8153iclqhjml8h5w7wolvk657l2zfojt6a4gsbr1o9656z4j0z41vwnfco50ubaiu915dpfyybosb4oww1locxuc3cvdycrr5gh5wawm1uqwnhrqritcikntfz24rwwvlc27a5prn5ejvfpc85fjy8w635tfl111trxrfdjnkc56rb767yox4su8t3k7d7cz4x9erbk032vmrrhjr6694jfc4z85n7uytcwoxp1uwk5iu3alvhhc9fszd4jx32bsj1yrzoalih40fxh5nou0q4we2n8aw2p7nkepg8lv99tuidtim1072o5vyzkklwrqg9umvixday1dgtscxmq0nzxemgdq313nxyy81w31qa2eb9ccd9ctwe7skw38ecma0xxu70qt80yvduekn2ncga8w2k5c54qihn4q2g1j3xdwh2fwv82yasz1wgvim8rvcz6qsjwat4bvj0z99zp5vu3thzfywnhokm52u6cpxd6985jnzb0i7g48dkp1ubrgmsvgp8eem7tjxdvsj27rmx7ne28c36lggocvzocbqgr9l6k6h89coph60ae3j54j5i9xkp1pglexfjjw7quopdq13ye3giohjardg9t1s0n44t0ehoxiv5lc2339rn6r61ajul73yymocsdsqpcyy6qo2l743xsn3ltcf0zs960il1lyhte4qbysat0ikx9itq8gsoz70sqhgt86aablwao8gbeg0pmzevps261trzu7yiqmpl6fev6b0itzw5se4y2jwmm2t1v6uqhx973u2fxzn55ozxzsewm3fx2qdqhavn2z8qs97lzf2dhorrhzczwqodn1ccyy5nbr6alnjfzjuzwj8z3on86izi8jyl28ptm6t02g6e5fei3a1ryctw1z9qnrh97iftnwwec7ex0oex4iw07z8ufj8h0ge0eodc1b823ldozgifu87iq7dy930nd94phkxzca84ag5ezkhibyty62ou7u8',
+                image: 'oorbgwhkc961wxxrw9en8g96c0zasddcs7uwu1m1go2tdimp8pxg0vlcs6r9xu3l2an9vacmgsc85ho57aq3ut2xteq2yc6ti88ig1vah4jk6fi4es7xdfjgrgyx7dr0r7mfi7fp83lfxxlrtwm0cwt8ax48dobdnwtrv847m6jswyp4fxrck7xep9bqnqhnvpfzs9gezg10vqwajd5mu4ztkpml4tu19guh6jsqtw7b9otstrshyl3aed8h2djerv7ibjwpm3fqnsvfcdojestspv4qsk0wjij4ugtmim95pa1pikyzl3jep1xuebkc8t1406375ea2k1wu8gwwiqsp9ufkhoveyjv6uhf8ym4l1nhw5m0hxp707kfv93683mutm5lrt94bru6fvxrqqvxxoupp7hiw7zsyvyb4l4u1kz3ew50zt9nmcn8okgcacb52fchekxnmkjydc8r662cz01vgx5d32ssw7x8yg2mc366hahlrd1f09mlip5ayfan251ejk6r0g6p4tg7jnbuyt2sjrmoa9wv92go1328sl3l53sxyw1rwmkjl39qau8vd37fqi720uh2l26rhfcuw2ug69jtid1kdj54pz70vgupm1tngy0ytxertdcv4r9z0jdv8jrchet98vhuisemtog3piu6c6ai3hkbop67pgnsjpf8g9730hnq3xjrkxbry6bbqlasgwqglwsjes107a7ekpzxko4fwlh6f2fpvgl2ntlsz4dae40sf7t6ii4kd1ezk4g924ol12goks4bx1mafjrs3k4yg5w3n89mtcy9748ibxlhh7eif4a0pz7qfc3gkzzde4ybh4cjucsgy90h7zhgsxnmtqkvke89nx8pett8p4bw7oksql39j2vcmocxu0xdtxm1zbyr32lhbj2wqn58a12tdwabs4eyls9xx45da4e3poq210m1ucf56a4dghwj0uj4u4v84pnes6upfhdfdjowztrzr02dbyizbu722saqvkffav1kj',
+                sort: 260760,
+                administrativeAreaLevel1: 'a20ghpm2o4eci44wcbuznb7jdyudku8lz6sd576pc4kl2nmtru',
+                administrativeAreaLevel2: '6iizba00i119nl3gj0kw1fm15vv87ua8qxbhc9onrkj0fz7mx1',
+                administrativeAreaLevel3: '0rlheojisj894pq7hnqd6iu1mkyui1f9onkb99spvftqttpmah',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 951.06,
-                longitude: 480.63,
-                zoom: 60,
+                latitude: 229.99,
+                longitude: 580.69,
+                zoom: 20,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -754,25 +685,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'r1k',
-                iso3166Alpha3: 'oyr',
-                iso3166Numeric: 'dp9',
-                customCode: 'a13gs0scuw',
-                prefix: 'dlz6z',
-                name: 'eifywvjksewponw0yaobm9dspb2eeqla3m78l78kbhwwbh3xgjm3pzdhwvqez1mvup9gp66li72h0hk0bch50nq4hy2yh5fsivygzvhbuini2jr37mt4289pf9pr3jxmdyy4jwdplhgpyt68ngl95pu82cdpki6ha0v00wiq4xo45jmsirb9p9ewotf3s3glhhrwasrbp1hf54izjjlu0ub2r2iosgt5vaq1qmj8kb1syeiacukziqiwa05r12w',
-                slug: 'co84nhb0p92hdjb0miazo18ikh2io3snps2j70th6jglcpot54ie2wm4jyn2ya5uy6fvuzo1nzkgpxd8dljo5i1bmvayjnkjo4uk0ljwzw4k7tk2n52de5vhm54tzdtza4httiu09znb62gkrhc9zzrbwhdkiplaur1lszoibhsf8ggstk5ptouo3b8u6vihnvb3dx3fo7vr1tln880tppk6e5miq2r56t64m2wob93uokl8kvu31m0ca9co6o5xnsjqo56xl4jnf468zrf2zx90xwkjlutirmx24j09iy1ipoijtyqtqczefe258mrl5cp6f9ezuvx7xvca87k7hyt1wd2uffa2yu2nxqm50ww85nb5amahaqrz2quob3yg7cy99zfh560ffmn5b0ez3aidt9b2j5zfzhgmub75qwiz96uyx9p5yf2xfq5rkxjia7h3j0a78b27uveco2fli42drn8ifskxnrfwkjqqr03ixoa0b5og8lt6chakdold6pkil50mvtmnpietj8nic7k7fqmft2788xsix4fpp6cf6ghjjyr6ylq5lwb8wb74d3qeazypinpona2zw80irq3qg2yex6tpkzomidkn9fljg9tlnuuw2x4qyhc9kh9s081p9f6w5sylpnstl2z2tpulut4stoefryer2l23s0o9m096cl2gqv87zl94e5tkzduonxxnqf0jrzngcuwfofy6rkf061i24zjwoidvwedye9wdbaedoaq926cpo8v5k6wy9h0ch26qysl4nxi8hma5amtk58salzrw4y8nof0ezygas7ttamq6qjuzgflhqp2d5xwfipbrdgroyfuubsktvel1vvmlatkojj0i4bfnvc2wv7oai59k1757itsyxg730n9fgrqycsp3fa53kxmiggi4u044lsainic5qaky03tjewsdlcoasjp9245dtovpdtofyo8ewrylmhbbij5nh04mgw2boamj5bld5rdcv660fdlod404mjx4c487',
-                image: 'tl1zj3an6151d7qzca3mu1c3df2xcop5okyril0exdv1fvznau98jil6g3x1naiopyaxu6tbjy5iwo0nk6kxwdyn4yqnyz1p7nsm3alt88yycxy7vu91ra5vjfqvk1j3jmoasurj7hyzelwxl4zqrypexa78pg4rt49zwgiwk514lw432ojowsf6xx8rbq0w8kgoo8qw4udq6a53wlm36ooc72lzh0x2pomc96bvmainsziaokq9uxf22em7z9atcelm9795rh5q4jnc6tq3iu3swoaiob25u3qxgfjsxs8i6l1cazuevo26qjwkli2jxzrll2o23m4p2iyp2qkgb5fjh0n2ocdt7w8h377j0rx8cmiverek9pnfykriwoaojkjszcd4k83nj9lhpup8y1z6nrdtouqfvah6q77lo0axoj3ds8zvasp7wyzcj6iw3sp4gatcmaqat6d0b2c6zh428iquhxs3fnz0ay1d060oba2p4z4fxweswe91rdku3666tqud02cuzcj1zk539m685sky76yjan4h5ocect9eadspu6kfb01rd1s40xd78o9up8aspyosnhbr45l12emt72xlrj4l8ddilxuhlmil2e1ypdicc0ublt8p81wfglnorg3tw8ove9ocmfigrx6lbkegs1kojj1pp848mrc7051fnckvnbwnxc8i9jvcdy6py8uxu7cli2l0hranm15vfqcoeuuo0bfhtk5nhhogfy4zgqxhegnyqfail7dp24hhl58wqdp6ywx197o8rxwkpeop874r3lco704ndkfum8gggtz885vjk9mq51aucn34gmuh2v15ibhcajbs17by57owk04tklul1en93k78h7zguke7t5vshbdksrbna2bi6qwf6lj571u19ka7cktgsy6z4o00i1hw2aztc2yt6djxa31ayonxpxjnvramyzl700uc62zkd4q4p7zxj1x6l9fv8cm5n7sr66uqbh8ozcpmeshg8s1gsqstdm93',
-                sort: 685565,
-                administrativeAreaLevel1: 'kgu1w1ovxx5eyykcmtzctl6lmic1zq9bzmkladiz2kxjtk4re7',
-                administrativeAreaLevel2: 'p4q4nebcqmexsfvsd80f97mg1xitt3liwjb5hmmrxpcnl7zirv',
-                administrativeAreaLevel3: 's45fmcj7527v3621tudt2i69icg718dgsmjbrjhx008710hm40',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'q7j',
+                iso3166Alpha3: 'a2w',
+                iso3166Numeric: 'aqn',
+                customCode: 'yebcch5tm9',
+                prefix: 'k6ffn',
+                name: 'lyzemei5zqxh891uwt7q25qk3jdxd2nxo1sa46dqgp7q8g299z0f55qgvy559v75n8yogju3zxlfgffnagcvor7brq7ui8i5hzyim2lfmzuf5tr7z33nl51yezvpljtfm0napsqmcbusj8ldbix5cr11bjj2e83jvaaeudn8q2qagks3mnavb70r1hte36dz0houaevtawxgmazrve5ljumbrsswatkhblw2rnxwkqgpx0q3x4k23zhot6gtni2',
+                slug: 'czoh46ud6x46pfpmkknp5hy2wx699e14sxc9c6kvgfn3q3aei7p7e73armqgt3sz3xuc8np91jywamas68da67iwdeub6l4phg3k28o5jaz92q2r8u000q6b9zdf9z4rqx5r5pj3ynuhh98yp1aeg543qinj4v8fot5r72udv3yld7609sit15il25gctdis84qrwqymaerzk71gziarbio55er8j15pn7cmtn2w753uvze52j6z85j40emtgqkvmb1iqyboa56i4jdumrsghxq75f54frypk4opjpj2x7u9tccx91ow0wlgx883w4xlxkm008918wanajklt30x1wbmza39apvoab4kk2vczrw1v7qfjgx76wcvbfrkgcox7bkd33f99cnhfo468h8yslx7ei0h31vg6yayu3kjo9jxvsg7k72475x6z26d023l3w2y0ovn30p36ztclb51x6lb13rnstsidfz0y4pks3rmxatufwxhllb3wkk9wpezhf40rf39gstf5x3acjkm9u1m7thx45v8it5jpoy4uke8ua3webnlkjabi5q6xna7tssyuda4ox6g8nlvxj3xuvanyde0ph3l5iaavslcp02cc7zj5o6cho5gelyzeetddwbs9w9bgbj4ra07lb6u0gxs0490ro1gfd4t8rhqa2v9z8vltrq64nkoh2j4ard72nd7esye2wc9ce77jc9g172f9s8fa10go2219nfvdcja855bk317qwjmxpgflreuzlqupqnd4ncj4o0saplxyldxjnfzoql75arzq6t0dnlu60bcxx7cj00pcoa0n3l4mu1p8drii9a19sc9vcslzztw7490dewcbjbvmt23du3cptp244t9tysvpw1341ngdg7u9h28cbiinennfarsbt3vlqwj7qlgv16y9ckwkesruoa4fpkw5l0tazd1grujxp7qyjg7bv4ys9c3sxa1s9t8uqeve2eieluy5kgedi2kiyeouafc7uhzszkt6zyp',
+                image: 'w2ac707kqybp0g7aukrj0n63486kt6aupmzxl5rxoai4lp0fvcccmkmi4uuqmbf3f8lnvgcrvg8c277rxu1g455bcno7z5s8thqlw2fs7r8b9ehosvw4x2uhrjc5vndhfv5ez81x1r0tfgwv2q4nowvd296capk85ic6sy96k3tjrxc1g4z190tp7jrcdczcrczyevn62i9a0beyrbeb622nxyjsnf48lqa0edapje1sw4znv0i4g6gmyrrapcqm4aatut8f71hzj8guumx053vy1n6x2axr2hz6ob7840618bdvk4jq6h18i58a46nxy1bad0ucxskgmw7dn0xy02fwcwub9lvr853g1qkr9oz4kbsmze3zp7zb7j6cy14mypg91k103f562jqgl8rk62n82swqbfmszkl9h3elu39wfrccyct33u53yrvgasfxqbsz1o8dd2lp9n8fh4gf4cn7jbxef2cuikw29dzdn9e1jk30ucmjawgmtwj97gksu15u6s6o4hs74qum8h3odwg1s7o44zhhq9gfg7berr3uyop432r7lkp1n9xzze2fvq1a1vkwmfntfladl3o953wtbf3we2fqgm9angd7wyhhvplf3dlw3w5v3h5ehu2qe9t80jihnndj74otzbsnodf0ff67ldn5vjcml3gf99lic5cw6inzqwm2ud4kds03gplrlf7xddibev6mgqddjt2uu4frt8tuhdr29100dy92epvz5pk5mvfv0hoeojl3aiiwzmmp52r1m5lnea1jkyiufu5x7xgvcs2w29yxvyl42hlgd5xy7w3y6brwcat2muhaymsbh5wrx2l09b2secfyul9vlngl4q24ayfnayfiystivs76398wpjrfolbu93cwu73muzy4zr470vbza79swookwnxxruz5cl14ibyrzqpj1qbhgu8qvb2106knoxs2ejampghb7fqch6t81p0uzlj6efqvkecmf402mokkzi3dl9oywrk6lu8fd0yn',
+                sort: 118953,
+                administrativeAreaLevel1: 'hcyfklp23729z3rtgqo7veujtsv0yz8vffstzy6uoag3r9yfde',
+                administrativeAreaLevel2: 'qjm01r0vgnp2uylqr9zt4zfjmw4k5zhwo34st3348yjwqqz260',
+                administrativeAreaLevel3: '9aryiluzri554tmiawdc6184dpb46wmj8ixvjje75eqd4p8wv9',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 105.44,
-                longitude: 815.82,
-                zoom: 26,
+                latitude: 898.00,
+                longitude: 230.53,
+                zoom: 73,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -787,25 +718,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'wd',
-                iso3166Alpha3: 'hvi3',
-                iso3166Numeric: 'wrt',
-                customCode: 'nqxb167yfv',
-                prefix: 'qjr89',
-                name: '9foyxp62gzkhblx61vd9w90ymxuk3rc3fywfdq669nevbbj0kr8fv9bclubl6rdn5s7bql5p0l9rf5csmnw2equrkaxp511bqd7f78079bicv474tzkzd5z0amm8th7bmwop88v7tx6uulc5x4ggt02dkolhud2xkrawlc7k1955elqy7ogjbuspdasxjzpnhx6cd0s67bz8gx9oztd0s8kh71obgkf76i88xfm3qfldp0i04za3n360iqo405s',
-                slug: '5ilbaxsbrn1gjvt3u3d845qxoomwz0vxsva4ejwy22g9s1cyy9l9q1we9hnv68nq48o46cja8t2jrgjz1u5nqk3yq1a4uuko8mvg88ttmhwvim6vqz7e1j2l3jn1dxdsob2h7etj9gbwpxkrjw1yak7y865dzetjkb7zfkgvyo3l1von9lxi4s2mu0ht9e67fz9vqjcf5i59k3qpv520tgan4ifes5wu26p9qk10a1qc02pbsdf86c2ah8323erhpepfb6ldmzh9hjdb5ta9xb9qwig8c5u4zcx7roj33tkdnlstij7nguj50jyvh1k0iyipc9i9whjikr0erzgjttolrk3yzwez9r00jsfelxiwcqv9wtlenaxf9h5d3f0jt4bn9m3chvlz9snjq6enr1w0zh490ynlo2qkls8n745yyylf0ulyrxzvlsepfbgjr6sqytbyjhzuaao3n9s7p8ek48ksbu0yev7g754jyqook9dfsnuelc8hmediy1y49trr4qjxaotdmg2mf5l1742wlfvr4ewktvhgwyfmbmxp92205rq4y86ldugkx9tepa6op3r8datxo71su24b2aspwvkmkjwuxgyhnq3699fojaxa1bmnja6b3a672ws76gex1fhci6zr437htejxd71zno05bgs5kj76pia8dwkpoz6s0hir6ul8sqlpc9buoroyjg5429pnih78pxwg9fcsaa2mvay2kmtmtifcismxubwa6kjo1bsluet8uenpt2uwsey12il661t59sgqc4b2cvjjw094lv43qjambbo2q3aal4sk2mxx76kees81pdkwjr7m6dwm5pnbii2fc0anmcv2ndeisje4i4w1z1awjszcus90sz79kk6euv3hzucxdpj71v2wfwdygwx6w9wnza0h60drf2njzwv55q4ajcol8a55jfvisl7wdntjow756mtlaap81n00f6dvnlqtjfy11aeoyn4ws8fulk03r5xefqrgd8vy2khsxlwt',
-                image: 'iu6f1gg4qthlq9qrz1adw95nrejvnjli0vuz8eq3ec4rjylrfg2ebaqcof9stawgho872djsm4u62epo5pru9mwlt08qf9t7pkm9i42zc5a2w8riu1s0dds0sz8dg9an94zfywoseecuoijjbhtey14sw7wl51vkcofao1ylo054efm3l6kl73cgia1v7mgzzc8qulhatkn98oy7bix50zft54b7tpgqpbingv1ne0k1lu7er2hn4n244oewc87ngy0nuf1c5e03ngowumdk8yvjcnel506r4456u8afwihlcwngmbih3wtkrbbisj61tufrx905u9x8j87kfdwntmfve65pnrvg1f5oeyp14lnfuhgrgyazk3jivaeqzupm6h85gsez6f64utl5ve54ofz9p70u3dz3rpyu49f42vi50dsk0ee7ne8mijulacptucjgkugmsze00ndg8rknvzk2yhy6smn6d8swhm9w8mg9bi3pqbwk5anj0v3mnuwf58rttq8i44jek8hdwgsbkhtl030rikibmxzmsy84ldx5y0ftbo6zymmrtnt0wzz0sr4dafw0uwsy1qvfasio2ljs92l24ng7v05iow0j593cvkd9a0p6dgqpu2ro1ybo050twgnilpdgs1ilz0gwha4493r0tn6nbwlgpfnf8p5lg99wnscdz1146s35zfab4oml6s13ncv2vy7jodmbgmj9sa45olc28w7bqwq83xahj5j2d1ah4zep5tp3fa6tuw9vqs4l5m9occ316e905l9bq1k4qndp4v79p3pvuxhy0k944m88d7oez664m2a91hs91zi4gmmw1jpd43a62i48tk0zb9qou4r851txg1hr6cvanf2s87wtanhwbjtn9m7cyvb7ovl09mrmezh5p2uf65od026qt8b5e4k95azat97b8nio1h9bof4f363cw4vz6kj9dq7150whgf5k17rs05ugd8w4eesbf9cpygx453ny4d901kiqvc2881dp',
-                sort: 455806,
-                administrativeAreaLevel1: 'ki8l829gekw5s9k8jlzbqwkzq3p9rirfjjdrnj7c7anpvvce1t',
-                administrativeAreaLevel2: '0xnst4w6v8omd35dsclpdt829j6vj3xj7kct7fqs9ip04tyo0f',
-                administrativeAreaLevel3: 'u1yreyw84kudezidtqj9ebb9aasrv520mbcewz1ybj0y5lhie5',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'r3',
+                iso3166Alpha3: 'y8vi',
+                iso3166Numeric: 'ijp',
+                customCode: 'g6x8bv5ymb',
+                prefix: '79cnu',
+                name: 'v4ptw8l64x4avqd0d8028rdacx36tv368s7ussixhjhxsy6p13bltgkp2n1jd0yl1igqpm2mk1h7vkthe1u2ei5f5u0fdgt3hwp4es74sladmucf63gynufw3rbhf91sdks2fulp5vtooyjwelvuvvrircxwkd97yzpj6at3u5mlqu8xupq598kpu9qiyw23hoxju5wld16f9zhyevds5mu59wko25upmcwf9tj7baikttc6nr2zacokvj5detk',
+                slug: 'hxna4q5wpiapnpm02hlctt4w7kmr97664s9nvlm2xbeatx25j2a0n9334frnlddwy0smbrmzknty1g6gjtu7p49f9r9sagpn2nv7baknljedma1nrjmb32e2rux4ik9ptq987x4thdm1pgvsfb3ca9fla2395la4rifmq9pn438sg1s9c6ot5yt8jw2g2vd76ln9wi36yzp78tgui8nky697jj06zd3n7useizy54ua6a6mrndu2qzyjl40kgitt3p5op2zpeics0sh4o94p6dwvayu2txkdrdg1sgvmswcv73nb42mdgzebow0htak07ac70kipqkqdap7qndtiepscyw6cml9ltfv0bwt2hn1ivqz4jsfxisrw9tzex4neuscth8t9exn0lwalegwyjuurjy2swvqp6a7oueua9lr1yqrg91wv113f5nw5pq7q1olt94z5ta85y0k0gpl4lmpoktyut4j8tj89em5zzbjr033ee8z1qf4fspc9tfbsdj2zajh4sszxywue5jrjkd3xn5kkj7lt84nagupidu5yj11k5tb18mc4nqaa12xjl0tji5v34zhsr3p0j5bx07ybwk89l7ylik9ks3l04n9qhyedrg5p5rrq7q9ce8fgkbq2qxg734l8zidejmuybn5ncrsd2f20f7digeuf3vb0o890ezyw6rqfia774dt5o3bs11r09u263npplri5zcyfz71s81r19f6dui01z6g5t1mfdk4wi1611crj3f6uoo32zg0rcsnwz54uo9ujsurmf2dqu6h0sbuoh5io9a2y1tl681po6u5wlg3ueun5ymimavwg58c7kvm8t2hw8scly4pq6vvajdffe2voovhlmmpef1vbjeel7rhjeh6m9so8bl8b24vwkk2e3mri8je3hjmqr07thj4hx86xdu2idf7oxkcytddymal1jpg7f5s2drewe1igqgfg8zs73ao2hwxwpcpwtsvxljjt6lqpnk5rc4g8npapwiluau0a',
+                image: 'yww95cl0rzn7xa29ukngw1hj5v2r5g4n2foenmfru3vm2qot3bz8rsmk1jj3ip7ekr90zypm4c0o5xyjmxmleq7vv7srhduy66yck115owtyd99hhhwtev3u0ziy5k4a07204o3177x88kk83tgwnxrjynn7i5bq8tsi5ec7710duolwvg0mbpvq0z7zijnjlsr83u6l7cte4avwcrjbm4sdlooy82k0biw1nccam9hnizv686erloollxv9sa38k1uubtsrw1b4s0xk2utvlivnn9otrnjc0s0kwyxytl8pxo9nxczziu1gxos32kwz32zcivl0kqs0hfytwbzojrjiuhjtite5b5b00rl22udiorjidsb4ownj5hsq33j3m0gwj1wf1rdf2n51enixbhjlff8uhoizi13jd52rimcc0kt3ydxv5mw1w2zfahfbcq54vuvo8mmv57utachu4evw48b2vbo425fyvj687hg0g6278bgeqw6wu7ebbzqpmbr4gfcv5fe9xm9zo29bxj1myq2smyb3mztjre4i8n78goftka3yfs8as3yf94v46wqu1gd7z3kobaim2wc9o26vstnx6o2ybkxhtkwenzd0rhlgvy5t7hiwzdzk7603j24nu8wjz55bymk6olrfj2zhdzyt2p1ffj8v6ls7tcdmyktmhrlhqgoohi63xyll78iehnd5jw30h37vk2hq8t4h02qudwm2v998u414pyzwbq0my9b0reuproylotb9axklxtf64lmf3y5ym425zslgqjgnfr8nvuf3de2qnkz1gcocmxd06vmteowq6qtz0agh2dbj155idvemqd9n3y8fwkatgbkfansvrpx2ka55ix3vamgyeelpdhj8cf178134t04wmxjhkusdmv2smkbroeqm2yip7kvmesmm7ujrenwig6uq569yadnups29olmo3ffwf33x4ollvmkq6u60mtr1xo4o0q047tbzsp8z8ui4cpxs72qmuyi5ze88',
+                sort: 939606,
+                administrativeAreaLevel1: '0ocagr56gz2yglve9ylck70ph4k2z7pxd5ze2wkl26td3haush',
+                administrativeAreaLevel2: 'dofq42hkv31fmwel0f05w8m4fxnpgbhs2e1gpk5td909rmeduz',
+                administrativeAreaLevel3: '0lukyev8kftnnqxr63jfm7jlt3odgxg7uj44vogfk10x8wes3r',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 764.19,
-                longitude: 41.59,
-                zoom: 62,
+                latitude: 273.14,
+                longitude: 859.55,
+                zoom: 80,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -820,25 +751,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'b2',
-                iso3166Alpha3: '6to',
-                iso3166Numeric: 'f0m1',
-                customCode: 'vung6ub05t',
-                prefix: '5lgrp',
-                name: 'y8ldr3rb6hchuvthxtyox0oygyq4jagaf7gzg6kgg7r92ws6bxj8vw2qzsi0rs4p2bv0yz6450ks8je3imyd7fyni5preet1q41zkxlmo5256lmnoto0ly1kw36j2immmpqujydxzezanga48y1jvwepvzspwnlghj1mw0ee9js77mc429jn2tl02ti18jczg1a3q4uw6fzeevj04786ss67t6t770tc8papebvhyupegkxk6adu4891oji59fl',
-                slug: 'ja420cpmxrhtgbm4pbdtjgugm4aa4huqvu1xdetzvso4l8897zdz1xmn6xm5w667qmii24e485nnsj7694nasdjj0bpgsqqldfoj726hwavejiu8f4yw7l4zboy4sfnjf4m6b8pa5s1g2ve2qaaqw0kqxx2h0bw1i2k651at8wvh3f6ol2kl5tfbfa90tfnpaocxhjdzckciwpnd83whwwn9v79111rvkf6y9cgu3klp7ny5u8gcbltgmk1ow42pkkfw2iec1nlhby5f7mqmu9p4uvvpzb3yhz85q64izmtsawukt8yxgj9ncitcmct1941n5m0mfnwjwxmdaisnmmbsj0bhmxer4h1cbehcxu6ho78pj3m7e0nxyjx0s9g620xy1hikhvbmx52iaaiflpx9o4hpwozn18ijwdz9g1kr8k9zk3rgacdt0i3vcdp5tq8pcm8464j4y4pp6pcihpvjpbgbkf5zs9bjm3ae4akkw98qxhayyyo7qvwjggqit6mnxmuu6t3okaot7nr015oelr3t3j2b9sbii5vfvnozv2i1x4qqqacu2mmbjrpmt31b5vng5bbt57qa28vnrip6hg3xmo7c6m7o4r4u2mxp5a9rsac101wrvdr666vokfyphzj8tsln52gjuj2m91cgk383dkf9qzi3hlnp01g74qfj8zfu2bt9clnll2s11khufdklho67zbfbppmoz4o9lek2ckmmanj8vxsjpzqg1yll89dg9v8klr7bdu29kgtqujz5bia74u8h31xm8h55zm6osbbul856gz1t4y21ox57pda2afspi2qn8a4asyz0ywc743t8vodlyvm2s8e2c96r1m62539gfdk1k66hzch14ognib5x42t61ij0pohfir05vqm42wai3yatlp8pews3nmd53yscvya5udvm98wm8pzo06fhw17k76v6akb9s9zs21ig7irhoxutw3tkoepygu8f5cvn0ab8kolrpaneo3qdhtubmcx7ig18',
-                image: '8zyljw5ijpwo13ljg8dmxtp79sromtw2cu0v1n21nb1hgoeirl1dshsvzsvjg7hh1svjwmk9g0yjwhivmgboic623hfieaz4e40bvlaitaya9n8i84bf9o3o0e5m1dxo65seo17v6zsxc9i7mohhnb9jktskw1t2mhep5waievbrqa48p3kh8fckgba7k69u4k1n5cjdns6nhwm9qkzra03zo14rz5biy5qsnd9bmy0lz6x0ipauvfc3kjia5rudneokgy722q07ljnvut72a5nzdv8dqjyfsae9padppnj0dscasbszcfvtbld5qxd9o48rchix20qkmvxgb6chf23yxx6p9uc2iiqarl7v16v3qd9s4nr6ww3tklykxg2nt4s78or1xypyoght1t38f68y4mlpcmei97z14ts2ouy01ersow5ofn1sz7mrpog8jip87qmff61se56c3r8fea3sjh40y4trf7alvez1100eo4bouiahufbdt674r21mdccvo95s6usqpzv598wmsaeaz7cn7fewjj2g7pvgvkr6gm4t82h7k3ct4ljhd6ibbtwnszfqfshlvj3u1f345sdv1u2q7l3m1zjxf42xmozsnhk9o8zv13et03g76aiwtb9q9llk3ice5owra5xjlv20ivskwzji39zyya2mc3advvkxqs1o4ol4673j3md0hy2qe07jq8gfkn0qucniqd1qbso9mmfx328swur5xlxkeuvsm8bgszssad9pkv6sa2k44on6zp25b0j8raucijoz83u6z7niuugavxd8jnril790q8yjwf8kjj3m4i7v9i2cyx13vhb371dyh3emx1dene88ws28cyejk0us2uhkr44icb2uafjq2vq873k9g9u5c1y07hlufu8vs01c4gwmb5b9xllr0or8ummnj09qtuy6v4njnlbyblufgsz9pwgp5jghll04c5nri4x5euft8r677tlbxag0yuaie80m5cf6gvqj1ij68u9v8w5p',
-                sort: 161848,
-                administrativeAreaLevel1: 'fn6vbclqn7lio0tr2irc70yl2ejfdgu29p642fgxwka8fi0ra1',
-                administrativeAreaLevel2: 'mzk9vcb1s6zgnmkduwgf1xehc9lwxsnreaoh38f3qsjl79s3u7',
-                administrativeAreaLevel3: 'uub1eky3vdvrkidvtmeb3vz0g694un5ov05ge3qtiwshlu8c46',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'fg',
+                iso3166Alpha3: 'it3',
+                iso3166Numeric: 'xz0l',
+                customCode: '5nwvfczv66',
+                prefix: '5fmxl',
+                name: '53mhxmy1min1d87i6d2d91dxyju90lv6osebzs7du9gej4f8tyccwp7syh4w091m63stmpnqg5sa4l3biqww0ac028tavql2pbs3ehya6fnazj7q8jla8wji186t6as9cnwjswepn6bgmn2z2ciww0jsw2919su0h2gx8n51dxyz3u5n9oo90ov9ut2w80q4qtswxvv0qjisdxbzmodewyq9qpb0at5iqwal5roipu9mmkiuncfd6k452t1maj8',
+                slug: 'c465ktmyl7tuv3rxwdcefcagktxm4hqfcfe85m9fq5ysnd0t3qxq39uxgc0x3dxetwc09bptwoychtwqb3seojeb13lqn6qn332lc1absoogbg4r9c7j3eeez23bhsz7v3hic98d8qfue1tpwluu9xcwgdfzi3q9r916x2j8e1rxpvj8l7sge1q2ilj78mu14d9qy01je4p5s7oppkbrh9rpwzw5ly02tz610d8zqnl19d742li8j1rg41b30qqi10rmys99ux1gdnkv0t34jk74c6aj3q54gn5zvaqnkj179fzktjd2zi35w2r32qk5wajn8nd3gf4gt0074fjj3f69aen1ttn7g3wpj76vaxzifsnrekhjcnjk6i5rw36sle2j59kmvy787tctnfgcecwqhvoktjr645p3pdhh0fov5mrvp6t7avdkpkca2cn36clfkqnjhce3yvqypzjtgnmkf995qhu7p3xtebxxdh7ke819er7xc9i2xpzi24i9fu8drngr6fj4wjea6w2yuxkytd1g6qo04oruebs35c1237l54753pir3sffcc33db32wo83dn1zd8irkx62pjg3u4s1gwnz1br43ul4aikjt56vkgsm02t05prakgp3lcu0gbzyvfrd3rz1607eml4nutrf4mf5ojgo9e0kkcxfj6t838biz7mwsv2o4qta31khvgrmw1zskbbncx3c2pvk8p25fain5hsuh4y3c1gis7h085qjs5r3n804sfiqttgrxofobq9d00eee86hac09w7qygo0g0h83g8hy2xe8o1f9xz550m56i1atzxben44ie6i26eaoa9qq4j9zhkq82y7i23nnm5y4pf6meqel0a6tm8kp3q8c8hncy0wbsax25sztol15klb0xnniouvtkbofvmxvaec0eomhdgepubx2b84xy4i4uqvt5ax6qdfjgh59z3axvgz451gfqze55h7gfdi4ps11guwf8o7nvlc6s38ktc791aponzg11',
+                image: '7n0ot2daa11gbkhr66i9x3kgm31ioifibm8aj38zpyp0s5up48fd1dx7redstvv8wr4sss7cbp6bamozly6hjk7jojemr89dxbm1ah2hbch275wcaet9oefl9nrlagl4jxv9ucxtisxgjwy5k4invb9aovwyz97le4jsta2cg3lm97ev2zpzobrvojhqti3g43qoouw54sdkosuqhtu99tuc49bbgkq12ma6jntvctc4bs4sv1w8mvjw9azs96r4l2ucdqjw4m81o3wd9ce3odjztiy01j9qzxaz15nsx4zh1yupf9of8twhm9a8ly0bdv0ki7t0uk93xbgy2z6xe5icjtswj81rpzai1i5ymd485cfp5v2oc38vh9tcyikxuvro93mpnjtdoajr962igpls7fb9kjxfnum9qgdyfc9o8c4n3mg29lyi96bvxgkn95vrspkwdxfgnon2c3onwp3qrqa2025pqpytsgzurquwzrif17tgvlcjlthlayrfejv0emvwkthyvhk1bzfu299pwb3l3ffubwatuv7ekr7jv6p2g28p6gskjuj7spf1q2byy70p12twy2p5ywlisa54ea8t8025a2n5kad7q738bszqgee3x9355wbs3a6utrkut4nfjmqimslcfqx8orgk8618j1y3t3weevs5jwaswlsoqy86hwpreu42ddo7y6tb4b7scax6xgsaezp3fnngjb2pqbky7mwwip8uw7p49n6s9tcbqpsjwzutztlasubukkn0vso3dqzsidj7uyhb6zmr5wrxurjb7zr4uiz59j24mgfujdgel7c1fu2eulovj3xl6p2eyikw6bpe3v2b7n2j1y5vfz1lqpfscd28727oh7d1d0mz10cv7ruzwsi0hoxc26v4ps9fs23s2z3vceetgswg4wd5xt77cxnkh93ktumk7w6xk3g9ea2to390zz4ek5ljt5lgxx0q63zepnw9l2muwtgxbrcl8q0n9f4j1s7jyeqsrq9kr88i',
+                sort: 542590,
+                administrativeAreaLevel1: 'dcgugmlrhyjzoxr0h722qiruca7outsvgkj27sezwlxwh4wv7j',
+                administrativeAreaLevel2: 'yrt01c4vfkd7mph7uc1jib4k3ag88t0yc3hfs3ajl0vqdgp7yq',
+                administrativeAreaLevel3: 'jf1bcirtnw2dq38t66tc03ou45npdjac4tlztldsxvzmtvgbdv',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 496.93,
-                longitude: 159.16,
-                zoom: 84,
+                latitude: 91.32,
+                longitude: 461.91,
+                zoom: 99,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -855,25 +786,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: '9g',
-                iso3166Alpha3: 'ia0',
-                iso3166Numeric: 'wz9',
-                customCode: 'jlrcrg5wn0b',
-                prefix: 'zz361',
-                name: 'zfb50htcesqryn5pfaq8bsp772a7khff6kmpv0xbfgl74ol8c4ugz32hye02jlgmaisf0rwjwxstr7mbrciq68ort682cqxobo2r6ftshv3uovuqfkorrs9pwvtswr7w6uhds51bmuphouhlw67anbj1p09o75klfcluxscs9tq5itjkodmcm9z3q3m91zmfw7ojojjgap53szpi247vpiko37zry3qjb9vnun4ijqg3ljuefi9gnlthht8s37p',
-                slug: '0ba1hrbt8vc1zmy1o3l3y0a7ap1wu847nuygzz5rkbcllcbnf3nk4no7knu6k68yuvx8mg2e0sokp6sy9i73d9r0nxeleeppwfh0fttuz43i9pcmk8abmh159sx4rch7edq0uuz258r7wl4i46gg9h05zh1qqh5ydy4lj5qv9jhiwyrdeofn4ia5gavwf9n8q1ju4upf7tu0ruk8bwohv1486k4pvn9q5jce5m53k3y8zf58ge5zou926aqkch4pa1gd2uetp5w94y4qreeb825adra147iz96w6wzps06poa7d13xxmjerwsq70vb337wbi2l3n0lrzd4esibkxjjie4mowql8axzn8qw8guvml58mxjxponso27sb7p9ig51mbx9h89ycw0zu07c5tq4bf9o5s0g1qo6gcvf6go4c15rwwazpz8c4d358wirqi32imlx1j98do9ph0g3gkto8vaeiw360ixttpb3zgesa8qh4dulj15cyqxea56gtpx404bqvhr29wtvuuanozhzddjxlncwnxne29cnm21wu6h0na0pquc0sopixh2x7osp9srqm6jk1fnnvdslmgcd0184edwcmzvb9cgzm38xdrfbxsj6rd58szchsp9uyo7l6fvz1chlnz8vk19vq9b14gyq0ga9u4at4i9bjq2udqnagqqp6q6bubsyie8lkh5qw90btc4prs6whmc2yc86psj2sxs0sjy83wir5b5lzz39m4rkn5ovzpkxdguvqv6lw6z5szs3ceinoet014zm2s9y9kpmmglayc2muisg84bo1v1542hkumikkc0ddpsb5x3ozgrtbryqjgvicq0phev013psnjpmyrcv6wmvcfxcakj545jukritw9v0o8r4xm0mt4qgqwc4mm2mgi56srbuuhs0x9qol2g8orte3mj08dodcjlx5p1irteocvdiiqtkiuokujsl0uzflwbqdip6nxvkk2fht14xde91jq5m001hettalosagptuio',
-                image: 'bmc2jlrk0uety7dvntreat6g0xc5z4v7p9xlabplxrzx4l2lcvtrdv5cjqfc9htxjse3l5osn5sh5h7qqa8swlx496pbiyjia4azsrj88wbq7ka0pdanq729lxbfw2au1531wjibldvg4kbiuovs5npj3571ssnppuvrqsi442vphjrr47yvisvekwyrybh0wfsej4om26hjinp5kyxmwdz26diwai0hur4f2fzvqgpa4t71uowix8x0rrqmgvgb5q4y0yoxgfk6psaq4bhknq0tgzcns2kmish63omcx5sik9slvwmyasqwi58hks74zmmy526n6f3i0de1n83trqsg9scyrigrtel4kjrc2bli10pddgva4xgc9jeug01g1rduyxog18550k7388uhs6typaxthektzi291qqbtesn4uj7d3cnlvs9onb5ma5gobw1czyoihkw12l8j5hogc1qwxwv4occqwc28oklrbom5pbcnnqjell0e9md3q08gc7geu4tod5f1gaaqb8jwyj3abzskwlfo98c9u6aiv3ydnpkrya8wfqxr5hb6zsi8yd4ubczg4iz2sxhhn38uuad765xfi3iib9f2i7h9jyfv2fkh4ooyqyhkq09mh962rzis0atq033wk9545z60r6hyjytc37anhljqpw31mowvw2nirjl4urbplz7vmmmnkw9s3dzy8qsec5duc18t2gj4gfbdmdyanx51gvtloflrloqsaqzxdk7x5zdh8m1a9mx9j6z7m8a6k3wqm5xor1xvjxbmqbx5cz1i8ohovessmn51pe0vjr4q0oe715t8owvrpf842y5izucikhzp95fw2zsyluxi9xijbta16shp0js5n2rzppca3tpw795o1tv6vdv8uzkp2u8mo3xpiljma2693zum7ihg6wdjn39yxq8g026j5l3i4emdxb9u19pf1bts2g3a9feb4flrwxhoeqcz9ccbbyln63e8pglbbqk71vfu34mll594cvy',
-                sort: 720869,
-                administrativeAreaLevel1: 'uwzpdmyq8nqpdecdepkwnox0fwkfgpx1kafpm6ysbkg9j96fys',
-                administrativeAreaLevel2: 'qmhp75ft44t8shavjq7ak7noqvy7tcj8n914s12cfv4cfnlbls',
-                administrativeAreaLevel3: 'rjr43esk1qblxjs64zbdozyv3l3712kwprutazwqkz2v3y97y4',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: '3e',
+                iso3166Alpha3: 'qrs',
+                iso3166Numeric: 'jlp',
+                customCode: 'ixr5s5u17li',
+                prefix: 'uz0gj',
+                name: 'johb9dcg5yvimlnq5z315lwkpot30vg20sj0mqs1x4nnt801x385w17qhzmcll5d0u00kmd7peps83lbaddpad3brf5oly4l87g7sm7xdmc7uxk35p2oie6fpsh0g31ldhwj6gsulthvysaltit2zh85f6lprxyq76wwtl98wh83bau5xofrb0cvp82fkklpoon8gijrl69tprlkeodprz9cjgdbh411khy74zhdr053coxbdditlr0yrs8zxga',
+                slug: 'wuj4zzc6q7ticqxk0ulmx4vbn8ht37qirbuqzupo6pd49jddg0ccft6sg11bzk778kjj2dhv616tiv0d74l1neajhxatz63iduqqe12uve0trdpz1z0orjht1lnx49xcf97h3fs4byydt0i2yrpe5yprcvzir3eqtcohsov2o7zm2tpkwdw412tuaqws2s4phsbkj11o5bymx82td31pm1pjmxyr3z9dw0ufr134ak5zso4b1if8uahzi922ss2cchzsm5ryni9bhqvrnqwlbjdkfrnel0xx77oqnv9k5vvalvijnfif0iglmfxc3f1987d588bb2lb4gdopsa4t98p4ulbydd27h5elwia9dsg3tqzcdjm54fyntkeeysy9topsrymzjmun6qm2d3a65j2ameuyw2ijsrp2qo6sdrz43cb5z1oh76r12frpcsjz3h633tyzzupuyvmtwiehfv105m6uxugnav3a7s3k16iv6g9v918gjffivwizqrlxyzr9k07uoxndf85vw6ofa71cbcxd3acx5mp8jgr63c51vjpau9y60aq84r2a0sf1sfecvxfeoowixqe08q5ynfcljouf0t8u06rjsxu1poim8lsi5fdj22kdvbhbyehkwo2zahegtey8h2w3slwsq8kghn7qo74wqb655a3di6tzugsub09gu753w0vmaq5y3t591rfp0ri7gblhmqxhh541mwk31gjy8z1we1bezf7grn5v3ysgs158epym8k78cnx2s53uy9mo7236pp9hgffiqzgzokueun7t1tn9zcwiovio7c432aqnuse0bcz4zkgeukzzuzdu87kfdi8bn1b4j3uvci9psf7k2uskf1ggbc0pei3daxjpzd3fdsib0uvqa4l7n21gy3pa1961irgc2tovqjbi3p1cahglwfg1iqojadyguiooetnt9iaby7x6l1x1t469om96ij2iu8y2yqrzy0ede4bfgb9f0fz8r1ndl1moe88lqxfsemn3',
+                image: 'xv20xvr1g6um2xaybfsh4h3af1nv695wqlfnbk6301g22g9eq99h0fz608r1utlgjrdu4sm55tyqvy7hc4mwcvuj5q3odhghtw94if5ksibbcej93smo0xjrm6kne5wdk305zvbtbzdkkf2a1w98kru41hsu1gmt3vfybsv2pu219i9vmm3a6w58joble7n4q7ye59x0qyxyipzl89n539ucbcgo2eo0ew8hf75fy1qljm6rzh9tr1bthtejrll8ttwxqc9oqoywn357ry0r48tcvmsejx2ycgbnxavedbn8mi8rdf1i2tfg6cfl9q5dw2jrzgbsejuqlb8rhuwqd4zcyjoqj8a9g7ovvuf2r5o5d5rbgimu5qkcek3fppc94fzpoysawz3l7tzwek7q58yvocg2akcy7c4lnr396jcp9wakcc03ky23soi2dfson6m1c9ohk3jraeeyqibihlk5iyx6y3q9brf6wn5mtail8vn1gmu3qpjo1ad43gh1cxg0wghhndk1pw0au8jy2j88twacpuvvkcwfc5lcvef7pwvnqcuzzbwoescsyni1zchlue4mq88yprqszkbglfc5kv4ptxlbfjjkfnfw012087ruo2eftglzt9v99ql3e6uanoer91ncjnrcfyvsoo713bkg23pt1os0f2woqu8lsyfn6uwh4gt1jmpwn8uvuwlfgsp3xdxrej9dvpxjrf3jpyzn42zv2uy4sdu02o0qrleug46aejxlzjdvpftfbjbcdi0yy826o2v9emhwufvq78qe4yo46l3l1ejlx9vq4k96mdp0gu8h9sw3tg8k94x8fe331m3rral3gsboex96fv0osbj7ip73pqg2gzt1nthv454vv1m9zfbjzteht452wg29lpo265ifsnropdeugaod0mqm3pwnvtri6lrfzsgoenma2ynarutq958krny50g8qhxkq2ze9kn3v6m30y1qmsrh98qc9mxa9n31gtbmtfzfd0nry5rd0ljch',
+                sort: 478536,
+                administrativeAreaLevel1: '2q1ypjz2yldx9bwq5dtbpjv9d7ja7db200xoz70v4x1ygkkrfj',
+                administrativeAreaLevel2: 'xw622ekv2uqy5zydgn0bl3u1rmfdwejvax6fazzpx4jp8hgbtj',
+                administrativeAreaLevel3: 'ota82f1ign0l266vq40lxtvyvikc4f8w1fzj3g36nu0ka2gwm3',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 130.82,
-                longitude: 733.45,
-                zoom: 16,
+                latitude: 606.63,
+                longitude: 133.11,
+                zoom: 81,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -888,25 +819,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'vn',
-                iso3166Alpha3: 'wzr',
-                iso3166Numeric: '8um',
-                customCode: 'zmegl787o0',
-                prefix: '1htli0',
-                name: 'utqk64xqs6hzm5ei03e4syb8777zwnhv9fora4ctplm00vwrq1fln3ot86xuloun4yxxair1i4dzav5uzxu4uwq5txncuh6w449mfpab3aqi5wjfmfw8x6jifrkmbkwurgr20pg0tqpp3575z2gdk0bx82y4bqokpt7idy9x59lx9kc5ny8jfnh5spty9i5gjt66tl74833l7coirn1fhke4wrtdrwepxwqbtby91dh88pdwxymrrd12exv4tbr',
-                slug: 'caaxnvv39pnczp5m5nbu322unln61jybr1cwa5k83nnajlufikz6erjzejqp1l4pzsz15swltnq2st52gnonozyaje54xgdjal15jy8bbm8ry4wyh4knodr1prcnybm8xkhl237hvr5t9oppe9vjj50y3znxxcig54d360srkkcmzqw4ii7q9q6oe76eho77ub0eai41kzxi9yn8dijahwenzdfkon1x9tv96rmu82mxlkpi4s9u1fiharzzkv0tshs9i4ik8expu8x6q7petxikwcaotyc602ejcybv4zobvdnwb8jn0v4m83usgkyv11w8lx69c3yzv4h5njs1j6v2jadndj0moguvohrusy07xuqn6uw0gfpudpwy2fwxsmndh36w0x0gu2qta2gljz3sd953hoxeuju5z2qs35z257h5c2lxfopp956f49bd3jxh4td3vmkkct5c81hkzm766owfyr0g910kkm9x8b4jjesgto0zfjcez01oyecj35x2a23snfdqyvhngpbw2k4aak2ac3cyo57rf0k1s1odm6gur2zuksn8gjgqjuoip4fye30vvdarxdgq9rj5ufzg3fe2t4lpxixi1475xwo05zwl7xmuy9fju5n351oxg1at2g04cof7ps345qb9zhrai41u4435i0nlmsv8iirva2w44a3oelxzkqemwv9pju2a3voqfh7ie41zq4y2lxkyvmf85m8tn8j8r7sdrhk7m1o6cltwvicyh1zw9l4d1eid7sdsskv99ewwmjlua902rqmbjyjtap78jjbpktkoaaf7i9q21zg7353rwt45yhmmwyzw7gt5zuh4l2g5dmuye25ppdbfrqshdv5aveluu71fq9d7ri8wda2vo65dn0mz9cizx5aohajm074cinezox5y5l3xk1q5zbk0vgiysrz4oysru1co6cb6j9xbm0xbmmkqzxbtm4n9x3cygoy5vwnlfim505vtg6zvms3y3lxkvhcntur1h0ggztcg',
-                image: 'f4kdv7g0fumsx11iv1npcey058oe7p2tkrqjruidp000srxzsgs37rucgufx29neo519z54r0sg2whum6bv3c1839p1itv2w6b2gn15b6xilqp6eep5cnb16w0p3mcnrtzt4voqit71fs61fsaynm68xw09z6uu4218ma9vnr5bwiwpsntceeq3wmjgxsyim46b3lbe6paho0ym59pk2lh17s31q4a8q1y52aohxaxr6vmodznst9a5lez4ig858f2z8oopdq5pifcbv4qz59dqqzld43nngejw47dgcpf75ljjfxg296iz9d5tjkvtosibtze7r0y0vnmwaqq76jbma5byazfl4cru2mny0j9w5v0udpo1t2rj3xz748iowmah8hqfscy7bdhzxmv5wm8uhhunk0ey6qhffj77whjbzgikhnoi1k9s0rv8bl98lwr3hm826mnin83zrp6p4xde38zy56ytl0u18fjte1c85eux7zbeo72e8v7hvxwczqh50spd2gcnwz04q3krl96zk05q6wmesajv3t7omsu1gwep49gfnxr50rr9t09fv58gkome768nypuju82a4m40ocenvyl7mdbe41oxs4ew1s5q9bbhjxagevhkhbxbb4i3gsoolnm6h8zmvby085kkx8et1zpcwvhmndnpjcupmk7rhf0bxlose8qff5n1b07kisnolokzhpzrvhjx3llkdy61tqzmzf23barm9hkyyh2w3866fkun3kpitlhrc401efck70a5lkn43w1yt9ejinh25x7fknmy9ea2p5v084yl749ubb5ddpf3qq0hd4xzod2nwde7zs7y29pped6mwv2qi9urqr61ub654r4qn83dzb5qz4uvoht8lotbzmg2p2qe08mx1ap6d6nn5u9aiqgma3kyfvcgucii17wt7l12nqym9d48hfdeieg017xbvjbv27ekgcthm2a99xae6o7sji5rsdj24g37al8agvx7t6m85r3dw4n2b7tqq',
-                sort: 274254,
-                administrativeAreaLevel1: 'c3u7f9s2dbrxa18d4mdtpx2n1hcvfkbxvtev8minb5n9f4is42',
-                administrativeAreaLevel2: 'co3bmv1ne2tvd83oob5b8cwlpal9iy66mf56cfa04p7u41pjn6',
-                administrativeAreaLevel3: 'tdqoym0b2xzta7yr79msh2c2hra6myn1adidca2x8vfpyusxr5',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'o5',
+                iso3166Alpha3: '3xz',
+                iso3166Numeric: '9td',
+                customCode: '3ilhx8ekwg',
+                prefix: '9qmi1l',
+                name: '2t1bvr8quj752hu3xbzcj1o11b4i1u67kzjvsiyfva3v2q31eh15pxx0xjsucozmop59yq3knqvc0sekl3j799e85wv4s9hwkun50opa3asip1f3w1f687rr2m97rb1c2p9powicepmlwi6wt2zmv4z9aa92qwrtvqcoaez8dyuggzcbhll6i3mfem054spnmd7af0e2h03z37dir5zxbd1g6s4vqiz480lkf8wgppspnb6fcxm73iijsodutms',
+                slug: 'swlo1r5d26tu85k4vtqlyf09274wmdr6rw0ipo6dpf5xgohdooze2g0ivppzt146ld07rt1m87c0jyce9wdp6989g2dq1sbbxx0vgsptkgkc6v4u8t0sxmkq39ub4ssj4cqiejahdg95uv77bmqnn2k9sg75oxycxrxigme0824ufyi3zklyoixxmxxtsy816rm8nojbzwvt43ze8u2xowsg0wkk0yzk9qzly8jortclmw8e02wod6pxdcoc1tq850lfk1609n3gv85nlytl7z01wla3sjum90t79fu8cw21w1i6ghp668tuish4045xcoo3022a2ym855ck7mi63vf9v9rcjpvk3n4jg7hvdoihkrk3ta6353ec9n6ivugocabizpysojsk8n6vmx6n7upbp8bad16tt06f7v3awsfelwt09kr231wjnrbbf0eohbbf0s90y3x0fs52imsmljcrq7gh4l7p6y0ei7q06ky09jdcdhjq1sny3ue7s3wvvvr3lkcmarvhjhc7bt47cn2vlrhbdtqge1dhmg6a7ttibglc8ya2ktat7roz4rgbvr2nsa0f3iwikwdnml86hupixwoqyw86x5g0agq8v7fhpitsypomy0avjqh4zpmkpvoma8e2y0ryqmky8tpnb7974qq06scxxav9k51glsdh7h3nxgyktp0ksj8f842yyeyugcai5da8vv66kvgz7ln0l0mrp3u1lnkd9myde5p08963hpvtucd9bu6nvta4qqx7jts3kkm9r390i4apyk3qqunpboq1yt6tt9hyoa7bd0xrs32ie17a43q514puexdvfvhnknluo3dzfz7edme2okca01w3z6yysosvcq199frwc1fb06hk8rskjhnuse11khqnq8jt66sy8pbga79ssvo6z0d3q1bpguxti6szvvggbidnhx3ztr1ow6q05houfbo2fyma1qb0s9h173tb4jomdiuiegybmaftbfltozq2kk87kqs46zlk6zry',
+                image: '4iumsg33fpwbbrx22n57yn55svt4xk3j5t5nfynhjlosst98k9xsqownki6o5n5xjptc17k7r8yhjeb60oe4emj26m12jk6wdkjrxqx098djj64ro6kegj4hyj3huc05mw4a0gwaov92nfasc1ud3gna0b6vtwkm5b3zhklh21ajw6ysisj2kh9qct958lm5gcmchroqyjn775mwrd91hwzdt54qhqcmpkoybg1illwk0yknf0yevd8mn2q1q86lqfpaq26nyf2peizrnixsz8kinsyfbmjjajs3o9n0z6vc5ausgz8jz53qmeq6bx0x366eh4rcfq202ktxqpprvqi54h860wf3qqbkjb68s9a307dxr1qt8kkviz3gyttdx0qz3v1je5atgbi1cz5ev130s2y7odfd9wc94ul5ilgda9mwu81ra09rr385sr2li04oue6vcssiz54l60f2stv9du1vip48j9h0yp1as3yhdkjt14k5bbsaygx4fzv7typmz5roc6oxu4dv3fxef87ip10uw7d78gj6ozf48e270floeybrxcy393mx42s17bnfe5ty0b6oyehhn2kbqk9plmoscoh1zlnlwutv09l89gi5n89eq40v7wa5r6f8krgnclvv5gqjcuunhzvpx9btx9ucajn79x5gkn0cmd1hq6lmpaoebp8matlqknl55npey888l36zkhdsvm1jgnywhcohneslmt6izh6ed3jdq2p12di1ubc2ijhyz6cay6ma9qjs5xar8ob40bzgn21la17cmqzmctdjflrl47t8rkjhwdojep0o7ak64ccj7ndf5hg7x3v9kbbne9ntdffq085hi53121vv5008bf57l2v2vqbnivvsc7o51q85b3h58znixwfw7tlb3t23bq3xm6onnzyn4zn4byvac66vth1b6fb0zgmgsq3r0y2yalajwhidr701ej69bl733964yqwdwlnkvmugqah4vq2fpubipizh5yhta09mo54i',
+                sort: 883515,
+                administrativeAreaLevel1: '8gtm1crsf1ii24ypqtb80onon4inrcn97mfp22eb61n44d5gmz',
+                administrativeAreaLevel2: 'sgzogb8vmurountwec5e8dkhib03zuzd8l8jnjl7cfzwxmry9e',
+                administrativeAreaLevel3: 'uhgtsil49m2nos8w4pmntwmsjqvj9njqa12s6567sy9dfl5sbn',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 236.32,
-                longitude: 5.01,
-                zoom: 73,
+                latitude: 470.89,
+                longitude: 340.91,
+                zoom: 39,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -921,25 +852,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: '34',
-                iso3166Alpha3: 'way',
-                iso3166Numeric: 'n8u',
-                customCode: 'drwwpgy6y4',
-                prefix: 'xsrel',
-                name: '3cyt7kmudec6n6jtptwp0zmbx1la2mg7gcczfnsr4h9zv2nejqnmj29kok1pvhzb9ylz3o3kilf99rrnr00sc8l9sa88qvhvaf66jfbvfrmhoht0lvm2mi3djfxeg1ax6vzv8q01rvmj8s8zn6el3yn5ak1b7v0934eovusbdki88h32rdz4zdz2gvoo5k929k9y9xck9kif8qqv78wjqcji2zlmijbtwqbktim0lxvfmm4j9us8i4c2opyr1ccg',
-                slug: 'epsioh8bfpwwb1r96kpt8fs14dx2huxx0veja00kparffzkwovta5y1udo87kiv35cg6sxpzfo80243nmidctoi3mstr2krnjn0n505t5cok5y9e7h782ab4p57ypxvrh3njlm5d4tnzd93035leyxzk8o5rd8x4lgbbciyysl75fqwjemzgkmplc9qav37ags2kkxjnls6z40yoybjsze5cpm2dg1lc4s94yqacgnz1xmcxqy9uiyf1u2tjwqiux62wb8u2dmwdgyn1n80fb28ugv3u6ugfgjdh9czu450j2ckdtfdbk7qd86td9io25upa3wixokne5j1kej1oxh90d97scyohfw2c90fdy1ls4ruxbgfvojd52d6yrl8vvk5800ljzdbc6cv6gubz4mvq6kx94z4g6lqhtnvmqn8g17qqluyebincrvcpx36xncyliooiwh375s0zb3z9f0880wj5sm8ycvwk718vlvckvfhecug3o097skiyxv6zyb1q8ohiyyzyr8fekdv40meok9w2p7boaxhk7x5zcix9af9n6yuu3oancoe4z0yaynbbv3ewpekvyf707ospn82j0896w9awhbrprz1hq7bmubrumf86914515p2wpqjappk4p96i4dmkaw53fx55d92f0loukx4zk8gxb0rli83r13j8w5r6bst289jhpi5vb3menb1krvand3ru4jb5odwpus9glc42w79rdi1lxwsh9h169knbtdksf21zww89cdpbtjy6uc7dp4cq9raj9dj2qkdaqxpmjou8huxviquve0wqp5lh789oc9u6fntwqv3k6xvqailsqmj9q8wz98zts69doozm75ir5nfkrsidiej2pucjvh01aua3avvnbc9t4cgxw9n8cbgt5jfref7h5ajoor00vgfzffsoc6wp0djji14uj4eopysnalkswf20qudzfwv82cukysk27tfy06b8s1nqw0499oohk1yj7ghvz3y3l4ptwd87foa',
-                image: 'xcqmnpmkuzpjbt22ld0z1jtj0krdyysbf4vy2rkq3j6uzapkxwr62sckhe76ohg72o5ohbl68qb6gbfyie5bt6ui6fec4zyuqabdfwxh7i65x6c139z79spjuf73uvoscz20g04036hkgmtw7d7gyrxqcwwzk2crhozkn1iki5m1a94amkfinbr53kmap1b6p1fft6nlg8cdwadd5pv4eaqcuo1fqlgxngu07lzlwtp2fruqscfj6y2ad33w04syov6gpyara3n53f6ag70l5y5bpchrou1fpc16fkinlui2jldr4hkrejn61gu2q5vxdfuvt4h2q6emicby0ny4tgnept6s6iiirl7gdj7gx8v217hxpbuebhb788gl5qp29bqe0xneayudl4vn16smnrk8ce12a5nul82w4lxf3j4wo3nm4j0kbax0v75mh69hacq0odzgn3nlbyx2ityyas9uci7xn052f4xed85428nahbl19aw8a0xssas8yxj789g7bg6wcx7htzakovl4lihf42131z5t1kak7aj9ex8p3dpqtz5d2wnemcdwoylyxvg5dl5wc8zz60wobgb83k5jejv8yf4q0if8z1vb0kp4uzqibeh4hclr0kqs6kscewk7rap4nr79jv0dvtojok21jk5l1m7taysv70prngtykyml6nlvbe3dfpedlsfvtvie0i4agyhp7y2w7bjzjdtj0j8lxdim442xrep5rjh2t3lsers8c3iml7t0fmkhcofgx3uftzf5xi7kmzbx8x0ejw4fael5arllp1k8a0lyhia6jwnu4863dlj10xnbhhycyiuyraainikvpps09j6cn99n4jtftm5pf1q1g4mbvfayn1p0wmnkarkiebmuwytro8urdsuhk44kw2f9rhvuw337ktwi1e5plzgcztocqjahsurdh9tpwl8yibjz7h2ow01pkjkkaja7eobc0wilp75oz8ztwgjjpfn4u62aw07dbiuf5x9saxratgpe',
-                sort: 599359,
-                administrativeAreaLevel1: 'qj54u2mp62jkc64f3u484zxizj4lt738ua9kr6g6aamo5stuv9',
-                administrativeAreaLevel2: '1tx6t2f5mx41ta5baqb81ia7l8ab4lxficr13ebr2bxc3bzy5f',
-                administrativeAreaLevel3: 'qdbot24u2mumatulp8kttoxgfh5q993en54ijofyvgo42dd8c2',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: '1k',
+                iso3166Alpha3: 'eea',
+                iso3166Numeric: 'gtj',
+                customCode: 'yr0telz7zt',
+                prefix: 'tx48t',
+                name: 'aktoz8xflswyggq53bnnupcw1q3r5lcti3r93cy2z2o3ugosnpkjh6eai9i0cf2hrkx7ka3lelo1an13xv03dpvemexlg7d2f25nzwi8qwtcrywfznk51ezy0282l4sdi7ace4vim1fnlhnvykobgc9g4881bpzkmt1cb72qg5l6u40ymp8xr272ppe45hplr2o8n57wej01fbpzizm1tw0mqsznikpeja9q96xy05izto9u33vgxujzcrhcdjiu',
+                slug: '2d3b0jqt66auxt9gfq0ue6us44txp1ed1wwa6xak8weqziv28t5vva2jzyrd6luljxzrcs1z3gzwmfdesj608tb2e5lwfhk3vh7ko8ze4dzaxx55hndwsesfnxxohsjykozexhzf4eby3ihms5g6vb6epn7aspc97kg3yy5sa3n501iao6qfrzzpfat15jmky3w3pmqkjaitsnbix62hdfsi05fakghzajbufm614keig2pxlnqc5u802r0ejg38pdzu0j5d9s4of7i7oi708mpq13ecbykic5snwkq3hf24g522ap3njicyd5chpas6altej4k5l0yosrzsbwzftvifgmmh4h94zkhsoldcu8yduh9hxas3e12wdmfirwq2u43nc7xle2j9yei4dooc2o5agmf2qisocor7i1zqpjrfhxcth9a330k8go5rssa8sr9ll2s15glkna3avwn0qcakcmyk0xpmxypcwpek24qkbpy972ly8t79b3i58khqrz9k09aihfl9obrh2rmzgvf865xqntzkflod8sjilt90o6cpempsewy3desedfgidy8qpbjq7drjh9nkfae1hf9gzsinh6d0ojukp3xdufypnxujvtta6d7z6l2whokq7maq6l5fa5og5g6nu3lgw3bi1et7vhfeem4ai8kc04520uw38li90h1494p6majwlz4u80l0kv3p1q2i13psp3hqofvrfsnqv9yvxkkd3rf4fv9jgkq5ppyyx4x2e4mi1vsseawd66j3g9pn45mehhn5l96rybsej3ab0u8abna1b2z2msajjwlu6y9i0gx5dbk6zglg3gpo2dh80585idevernuwzwf1lejid73ak97vye22q04b0nmtsry6hzjasa3gglsko5g2aumsbviy8jz15dwkw265rwyvdqpa0rm2p7nxz70g9sm0bqguz7wg5khylj7lzvjeyffirsalth40y8mlgt0qj8ytzd2598sq0fh71dryaycgt9vq2fn',
+                image: 'cljwdd6vy7c3h7eqpdoaigzp9gkrftdqkr80e3z9l0b7edol0i0klys6gm8svobars37f3ldxtw721fl4xt4uo1hxvvs9pow7msqihuwk9tsdf6pbqar6cqedhi55dp3prun6t6bwy8o88mn5qsn140pck5he19pt2sr13k6s3047ct4xhzejvg33c20i2xduvv0lg4a716gs450lld46ncu8e6tznhn6umq8i0063u4pglb8psdbzbqdi0s3nngh0tvz2jayew1b0jobj31634n8jnfq7bjutnpd86pog3139vz00ely6tl66dumc08xasbjoyanp8a5noss3yt1srz9yj0lkqf3d5ornf113wbw64qtc5xesy5rx2abevqwsk1cafopbe933miy4gvt124jumwrq34pr0piqh2xr0vagvmr6zh0q2zcgd127zk0b28lfjvb6wtou3uvlesowen10rhp9fj6ghcurecdq8icqxqh6n6rhvyxh5ipu68amzp00h31fwgxkc79hj53ff40hyoc69i9t2g3qav8k78u0o9o54bifi42zuir85r7y8ch8cvpiyw4vgw9ar60ai7jux3od92o13xge23iygi5teahxjx61nml1de117bhnlkrup2ieakihtx1qa9plh1qby62jbznqltu8dmkk93syws88ft7i5fccz29ut79hk6exmo2jw5cj8jmm2n078rhoo51j34of45npl8f0jpc42r4m8y4kkt33mzrpicnbm2zacz21vh258qs0rdh6o8zwy9c9j171mekoyxjj3p6n5o3abvfj5hbj3bujsu8vn3uh37wy10vlsvozby5v0gal9m177jdh7zrc3rqoh9hnbf7441svptyjh3ahi8iu5a4rve3u7beu8qr52vq9126s41r7cq55chkl8bjztsdid3aslnza6dkc2cqgti8vucaw09en9fhf6vm4cf331xkwv3it0c9w591ic4x2bz6vg7dz3409pinvbn6r5z',
+                sort: 577280,
+                administrativeAreaLevel1: '7yxt9qsabazz0cv2r3q70w0a2cdbffqxrbgv4mk9o8lz97s3r6',
+                administrativeAreaLevel2: 'ggvxsnbj5n485rtdkary58qucsbqmpcugqy2owayalsrtpxtf1',
+                administrativeAreaLevel3: '2s65gxch9z13qya6dk8mlutb7njdup31ieaylcu61xu2flc2mo',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 217.51,
-                longitude: 869.92,
-                zoom: 14,
+                latitude: 357.01,
+                longitude: 378.21,
+                zoom: 84,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -954,25 +885,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: '9s',
-                iso3166Alpha3: 'xes',
-                iso3166Numeric: 'xxf',
-                customCode: 'r544v8l5ob',
-                prefix: '3q9ps',
-                name: 'fyer194avnrmrl99c3e39cbvduwiy1ra1d6dwtg9mt495feyug0srly22krqbv73rbr2bj3452zmp70snowumcb8y7kawefplafpmtt6ulo1g4xm0yy3ao4xghb8f4jd64d85yrwoy6i020tafvapwo7pqe5346c59q2bgyukfn0v22v87cilyufkor31ag1646vg07yiivze9pyfg4wn8cvk20xz67tcyascaph091ad4nzhjh3gwfivtpdu1w',
-                slug: '749yk49e9nn2l9bg7q2khmm2we8k2xvh856r78oak8ve95findk3h7s73eif4isqu9iqnijm73igqin42wy3db67j8hnq9q4lplyvp5gu6ejxuwg15of2pjuxbwu1ugjpo6bv7llbrzinoli8obkhhb3yfi4rrrr0gnkx7w8q03m4izvgc6xr37lka5u2gxepd9mjc2wa7w9gpjp2xhzvpeaet5h9cch3o6lk25xgrngckq4hn7vzw7wwfrd1fndaqn6vhcony6kfu0mfeki8ejp8hy3vdnbjcc3fedljzf54jq92i79oxoue0qseuxgxp9fsapxxut9d8ah0x5zgc6fgobjhecfgjz6foa5kkezf0iri5jnzb7z5ntorwggtoz17a1iksdfvkskswgnspr7w74tmkevsn2iy5z1jzd3iwr7ecjh45o0ot45zln4431jylbdmjo0jmazlrdmhqup82h151nqx9572yjmvc0irzfksj8rb85dka1g9f4bk4ss2ra61whu0n5dn5x1alxdfjew71m205urfhc2mwbx4pyodt48naiey30p8arvjfqy5ozszwm766xj1p7xtk9bx6rux02akcjxicawv3tdjhprn0tt6zlnsxjoqyua0nilb9q5523uwzcbmas5obo1ydtkrt4kyqw0vdr9dv4pmwtas5ye23h5zzoj1c9s7m80x98ih2da5r223g584btpq7mdjrug5t1i3w1yzj6h9t5qgjundmzzqpj36ndaozyd02jbuv3e1rrf4acad7emwzojj2ca0py6m46li85ed6uwo3gjgtrg6026iwbtovhsjq3m5asu9h38ky1ysr8drqjb1aw4h37qajwthe4r3zqysqr6n9z49omjjn5jchcvh47lvwzp0z7gil9sia5ivwmmegnm4z0bced7cb1yooyz7cdynee8k7pc546kuz1kcsatzxamqtu2vvx6538l9hvx5mkrkzjabqrf1x8qeykrbvric1knojjlhi8vm',
-                image: 'jrez661is3zlozrgsokzmm81lm5wa32b4ba8uz1u3fvmvkksyd0gcv7p4u7muodi5v33p6z8t6wv0ny1267mvwouu9fd2ew7z990mgvhombfv70wt2patpzfzdsge2q5m52jnz5g9xbqp4kbc5c3scc7r4x9sfzi6xerzwm4ii4lbp4o6e3rpxb2j8msp2h8jsvq98vu98ni8t59jqa9vekwmvivsbg6929lwryupmgbo66k5x1kw3v95qq2rozycsji3jp33u7pr8vk94luq2vookwbdodsnj86ivtlpbjo0v0orivstgn48fs3z9bque40jg7rni0e1ygabdc2gdoz6bdc0ul8kqvkcmhvdohsln6olnk5w767evq45hhnnwmdvhkk352qb4dubbeddfwn5a9aiap4s5uvjrd1efzwwzg1b4xn8o48u1ujly36gfpwd64s0alnphg2svyjd2z98xe0ze3po3511stowgmwudo0ikd4qpgqb9n3hin5fmzpm7d35hpipaxsqb6nqwdw4cx3lx4hp1nezu06s5ye13o4jfn6oolqddqambg60vz3bno9avhztnickpfsodmpcm85tooy26nwyt9xepgfhwqg0j9yd8h12dpf4eihu3hp0t6jisxzidoz9owuy0tvet7a28fegff4diiynqwyo2mzhpf0epib3w52g0c5fh58emrpmv6pufcevw431q0o4bk6yeerewrsf39imqqkzz4fwf4b1qqxpt1u3axc1nyq2kcaqr62rmx5q1usnlu898cz2cdcgssoydrq3zkxfc04a0cnutsvgtgs484v7ajqbdh8msz0djc0cm8ryvqg73oo3xkgtyxxtdi6fasvfslyu5fkqf514j3a7ogor9jg7vz9i7f0h2oh6e7klly5xps96ws7q3m0cl56uufonbb1zbz56l6vxkpwa2pci5cdltxisvcpjn24c827rtj15q6dw6x9qsckgy9a3pl4npbf8v485jsw2tmpt2o7',
-                sort: 303292,
-                administrativeAreaLevel1: 'hbtgf8n2pw1p79dkzoltzkhm9v8dz8p2u6xk5pxll99yvrnbdt',
-                administrativeAreaLevel2: '74v89zjyw8nsmjkmnm726gowe3l7rxtk9yc33h56fcepzv0fg2',
-                administrativeAreaLevel3: 'yvjxtw87bg9scllnp5clgwv6p92pkhon8iu4dpmjh3somtj4d4',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'ex',
+                iso3166Alpha3: 'pqd',
+                iso3166Numeric: 'gzg',
+                customCode: '0ci9f46u54',
+                prefix: 'kj26z',
+                name: 'brs7wvtmhx1p2xfo0w1kphydyby5yghvkv4qgc914sioo22el0t15xijy0q36r5okdhtmmr0j56psqh1n73u866gnnvldvko8l185d58zrjudzhpyg0a7okycvca71pw80gv3lepb0r8ks6nlctc72ibfdvqf3gbfji6obq6deap8k1svlk4zx2fpv0r6d25sszrpf3p0skw3l4d3dp3elhc9chjw7uleakv7ijd73cgje1rmvlywt4r47w6chj',
+                slug: 'r3zjh96dzhvqpkkfugw9d5au4henpkjijphzbqi73tw09esaq5m81kvdy2xxstzqrytwtwnv9h0f2yqvaldd5zx7isysbe5ybzbu86ryi3ednvc3pr2m99pdm72xrfa8wubkyqof6deb1bm36d4bt5v1wfnsllpg7smmp7l5yuik9pj2rktsvjrc75pz81140jrj8z1mhmh08ocatiqnjbe0pyew9ahbcd3ey7t4j08f8a0sjjiurcctsr24bkq3zaepm4fq9pxg5zpsn3vhy93eqetoquvgxuaf20hqt88g21tidy5024zlv11d5v289138kv7drfqnomtpulwx52qny661jruk3ibjh17mzilytrtp736ak4bmnxr72vhfs1tybvvjc2o8h6nmai48b1zwy9392hwone4irjgfddt9ir0zyuce67ayk14yp6upaj6s64lr1b0foxk9nliii2zkt53nrp9cx4mida2n6isupdcban2zacfyahrek0c8ebv5dwo8bb2iyq6xn2ypouc1es25iqdcfmk5f0jhqul25z5er8kjei6ayo7fqovcyqt07n3zqezhphdbq73gaakk94seb3ya7eu1zjexsxp46ylf006lcbvpj82bt935sn8gn9ntfglu32h6pdxas7u8og2nwmj719puk5ftcsc4gz2u0d0w4kwv5bbujyp1skflud9875usmvd0qjpx6yryevtenlrj5d2s5avsgp0f4pwgsmbyc2ibkmy7zfcpfbq9qah0i5keu7kbv1taev6nn6ylyjpi56g7txzw9lnteujm36h3g54r2eyl4m8uspau4rcojeysw280j9in6r9j9vqvtv9nvoxyjrpj4ahate55xgp93xnoyssqr0pkpscefdzfdbab549i8m03n4evhjkhkddjsegr15nn96qjzbziein44vjdkjff8dls6pj0f3qj6x23avio6mvxyw4mloqf08huas5tuc0dlrgca37fwfse5oo56ykau1p0e',
+                image: 'g3a7qf7wye7qmc5pdi4w395dqi2o3rqlzlhxhmmjpzdv7h5o4pwwjpmkolzikcdxeey5yct0pmujtr1pvqnsc3air3f1t3hq5b5vsno8dv169xpfmvvlo0lstvhpxrxiu6zz9z1ncctl2bijd0uhy73q4ml3whajlerslcbu9wk3kmjyqlpzerybw198oz0alnpyo74kawflf5496pla88ja5mnynv47a5wszlibpydqdwzf5miy4xtk304u176h4hapdzme17diu04lkejz4x5jq3iy0ca7hcmre4nvmzse7pa2iiu7ybdx5uz5x0r1qqmm4jybx1l4cmiskp6npcmq8d0iz22pxjusfrwo2s2g9lm5r1gav4awn26l7ahh4c7e6uf773t2q7fx0yc1enz5mbb4rifzhlxlow2ibgzd3xdgg8408mcli9gjx0j24wcr8k4xxr291hbx8s1wyy4oprcmdbsykhwokohd718tjglfv3fa9ke5gw4q7hvng94i91pz7a9wdi97w35ty7gs841pr16zf89oshpp6ktk2f4mb2z88wfve6vgbctt4avp03zg7u9afhfpriakewzscl47pyn2grq0dv14zfrira71fz5qwgrgarxuaqruzxi71i0cwsjc5uh9q9p3yxbasu9njqfxbsgu4t5xtbh8jyw5lvqacdlln30rrvh3zde0qzgmauo030zrmknl45uog8h5bob4qbrr3b52bbz0bs1jbdyxbjn6d2cvhcoyws5pdok9o45r10qytuebwegpwj6lrdxwzhql6u3mdbf0p1428jo8hf0yne00fw615o5cvn5rw4fmu936xasufo2z6z84xz753jcnfvfys5562hpre6hbxds5nbz21jun73ncw96gwxduisqzxliwbinj138r4pue9roy1uhz9qiqsh4j75dis6eii7mtaelheo4izqtuozzqppbbh56azerw4p9kuvusavpxk9fo5yb5opigwsb3bbz60oq2tckh',
+                sort: 599301,
+                administrativeAreaLevel1: 'z1eei1ut2k7fn4qmhheaub03s6g7eqnkxpsntmsoe4lxaj4p0q',
+                administrativeAreaLevel2: '7nm2ymv6wv3r5mtcvdmvaemdbye5fg2dcr400dqon8yzab0388',
+                administrativeAreaLevel3: 'gae0qz83axszpck1pob34w7leb6ivqojs4kb2o3763y4xf6e09',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 974.08,
-                longitude: 489.51,
-                zoom: 78,
+                latitude: 53.56,
+                longitude: 358.90,
+                zoom: 65,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -987,25 +918,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'mv',
-                iso3166Alpha3: 'pwk',
-                iso3166Numeric: 'phl',
-                customCode: 'mz5pj9zj42',
-                prefix: '9o4xp',
-                name: 'ew9eor7mnokq184y3y460gms9cahr2qxxs10lc0famlwhffurmpx55hr9j7s6z5ki1p3teltwyaiqwqfjv4r79z8p6h2haw9joqjpq2m7ect3or8aqudgtzj8rfp49j0kyj5z4c3wqiurt7364nv1qv4a75v52907knycxlkpjmfr7htu54ltsq74tfizgfa7ol9gbcgidvbrwc0ud8w0vzh8e3mzczcrssepav38wesjgytym9nh9kv9rg6k2a',
-                slug: 'i02r57vkzm3uvs3kdg1zwm1tz1m3b277pujsw3jkd2fvxixi11c7xko0pi4e4fsqih86jf5e7yk5yvp1c3ahnjuqef6r7hrg8wuv7ccw51wyyo1sdn9ezltj0fkyul6pw1k2qviqjgnwiaz0fg7lk82ek1mo2v1e92hc2ytjtuze377krisgzjmnr69dadjqpowl1mfi5h7igb4kovk9jrtw5gi93rzbfl648vdbhpsu2o7lq3lqu468b4ketl8xaps3ehixm7bkreab8pqe44sm4zuq8w7d26fl5n7so8dsv9dbuahzf4z9webjk8xpwhg7scamc71yxyenfpli3n7u8epispibtey6cxemeo1uthul1jiusrnw0qo2xbiy1wyst7tqcj1yydt2qafhfcnzch613kdxhwbgnddps9fc1c2eyyemmcpx5xyh23gqtkbhmxehgn08xkwwfmyg03cxrydkahvpy2qvfk5t7y56qngvtdny8c3vl3vwe1afgk3uvnr0z9pr0lap4epphcmx7gswu66biyl1w319369yyv6vipnmghiuyr2iavndqfev0ooa8lg6wg75a998sya5u9141c3ha3x4nmku0jjinuvmjs4lf8dkm4vwzgmtl07ij1dgk7k9desy3ess07b674egdsuqh59d4gqiunga8s0dmqqswc1gtibf15u1y6klujcdkoj1uqy6f0ie2ln1nfsy6gsegnrueog9fz5ttqkk1cektjm7urjx8as9mfh8vw999rvwdu40bqkx64isd4278umaru2t8pjhds5sbf4b2kpxii7ivtzo1opb54weo89q5d9epia1n71kjvknqrza1clfkxo0ydo3r2bjkuzj6jwden67ntoh05841jtsdw2jgevzautxt1pgpgk2q8o4tb9jiqop5o71824s32c6e60zfjn7e1zj7ouwn5sm3proq911h1l8juv9fka7puege3si6zu9kfpl6jzcf4uwrpoj8sf2949rb4sn',
-                image: 'u1oa40n8515rfggrejidmxmjng02padm3zuh12y2ecqtpyrg1flp7sarq1iuun4o864m4el7o2airz5iumkvvu3l31i3893696uu4mx8qtltkw2jk65whphpjp9aabpd2d32iij7pinyzs97vh2jfnsr71qpvivsc10m56s386274sl9s7gjpapj7m37btbheqatrzzla8iqx8dof7iqxo7dz8lf3f113ab3kqr6shv82uvmj537clocq79tvn5xm5pswjkujft9v2l4oo26il5mo03tocackyffp4qjbaq3yhv45n0igp3cojuswji8u3o1axn9pkd6anavxnw3xutxp0e94bkkfaueyo5lhkt506zcjvwo01lqgzx9w8hguavyan63wpkzx00f6gq402wbmij6uqwjb1cd9ro3xju4ev4f8vfvp46frqrj5jjnvsahycf36ok6ses3we8x8jp1facrfzjccrq7zsehkrgvzrfd7vky44q7jhsy1x6s62er5ajssp05nmhq7pnrq9vp2eqyheod2w47w7jh1lwmdeskyw21jmy59bv51k3fpvdr69ectxnczakljo3jdopdytlieqja0tcyzmwa8gwp4tsswh45lkpsvmrdrq0m9z5xjjdif6dqb3b0zuugo4bupum4f8a9e395a8rzcfalkg2c21loj1csrg6vzvualj75rc4qodby7e2gs8u5e5bbihntghlchdt9qb4nu1izhq2w597bite6qsbxhmlir4987oppwwtnowxol4bhyezuu2t41z8pra3rilkzc3qh4w9ezs3sqpj1qjr5a9i8a7tpv8ldhve1hrk9mjjkr1y0g9opn8oklvbghb6if9tfkvmnku0teucjksszoe6jggdavdy70fsjj0qq1lahv9lhhgubo61gy6kuqjvnj016hhq4va39vwln2pzw5rkb2osw4d0vtkrfvbgdode5vv8bndmtm2fcztlppi4jeu8zx4c8vd9inn486gc3a1unk',
-                sort: 372074,
-                administrativeAreaLevel1: 'xlkccu2cx43o3f3o1lhqj0fm2vb3juzmkmko9tr2sho9323whk',
-                administrativeAreaLevel2: '7hq4c3cvn96t8lvu73zexfldb6vvenflsis21jgg86gow54s40',
-                administrativeAreaLevel3: '99c6elecbt8rob7shi3rywh24gi4im7uug8ouvebwu7x46hqh8',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: '30',
+                iso3166Alpha3: 'g49',
+                iso3166Numeric: '0v0',
+                customCode: 'y9rtflt8jm',
+                prefix: 'wk8jr',
+                name: 'hnvdshus6eyezpqq9dhw4e593nmneznxofm3tpg85uc2jw8xbe23b5ehfr6tgu4oha47apajoezrtdl4xsyp3vli6ewxg5254kumk60qqt5i51hwdbycryf4bvie9g3yr7g45lox9rhbises2ql4uix39znredn84z8al0x8zuseojd0r99x1x9f8i7xkti2htw2ifs6aqtbbaa2r85f8c9tqut8i9nonw5uq1trk669fycy6kdemg6u77u81hw',
+                slug: 'hfmqb6974i64wqxg12cp8gwv9uqdbx9sq1y3id9v9qj525brntdofy3z54gvaiub55b8lwxexnuehkc331pj3mbktkqv15iz5lihwyi4rnnu9a4k84924zum8zyjfjqx3jfdfrvcziea3iqqxjadugsr03ft1yqgi1d1rydcd2xqqv8m032be4hs9kpeoc674q78yhpa8o8ali5drc6ckw1ujst02i3uv8j3ubkmt2hb0or1uwq4lhrqb9k5pwmphdoionej5rnjnsfvgy08cx0tnnwkbcdjgqeowx5amv12z9bx5zsmpe1v7nnka4gv2anxvbkt5ys69zvb44e4hydbmx6v1fu37vbsfvedhmt39vijgt5d3tdvjij09l3bz76ldajzv3kdei3ebt6gd9uhjjb5m2qw0vqhzz34e43n8ep2s0sbg8ufllu62a5vgf21u9jdices0xojo1sckvmm92aptsde1oj0dv6kv5jmrddgbpy3zcgifouyjb0zfvv7aw42fmna6jdc4gwr089cnv4o38czb3h6rre1p1xdzylj1yul4zwf26ik8a7nq9zaiduppz2g38xjh42hkldzrxfvdw4r237kyplun0mw4i4331ayzvhyupx89wkyve3r74743n3kdtkvw1qz3vv7rsjdecqx2a5d2wz4a54moz1s2l49suqtczc2dfzhvov5qruvuw41vsvt6d8x6vv68t04gka9ga4vx5shsl4ap38gj9fhlp3hs8b9t1mj6a5im3v6j1tvn71asecgh4919kk3tyvt7yas3hkrlp6b4on6f5p0rkppkophzo4msyxi9wn2xbjt0jgthlyp3gflqxqlgzdqtmijv7h12mgr59c9u8m6o0lm672jaxpjmcaapfctuj6jyil9uweff8lcq0htyj79ki9wbkwqtpr3hoy83advbzioz2t5nzqpkee2qimlk5myei2x4e0mzaz7ibshh12qec72ifktt1oeh4l773kage3av8v331q1',
+                image: '7kqjos550ktcy1hzvuc9y9mdwoi4q9oae0jdnaws8y6gyv5jgdgdy5z6yg6u8qxcf6mkhjlgsvqwb2tdnuo4ft5nd24y6mcrawq07dg2votp1ciqcadhe936h2k1j1k04iam4ck1fprabg4qn1pwd0ro9jbwbv1kbagxwjpqz98t8ivw57od3toizo7lpigngkti5nd9vh3frjgcyzonl11ow0v1lz14zxx28f3031njsvqoet8h9q9bhfkubd52682guubef8jtdg9149159a2205bq26ikt2huqpvkubqfvfcc4qmaa63pl35zutucyqk7zbdvnr0zhsr2td6q3vq2c88y7fmc6bjanzzd3t0f38h9ia6ks8xrm2pkg0fufze6lux9lttf48dk7id24bug0e7bipvetri5kdfhhkgmn9vawampjg7aco13yb1h9n03m8gmgg3r7oaxwsc4kl8uk0msui8p195vnkfx7ps6w27072bpwdar63n3q7fu7dp1g6145t883y3vq1apvyi23av8yzr2fkstf9fwfkexczkksmhzo2phlut0xygmqm8rf7bj4gnl3xvu2vmlsop1jc6ag45ozg28wl6q8xib7xqdt1kzbc1k0hab7bu0xsyajhf87eguan94rzf43lxu67a2m0iqvl2jx0znpefypaj26s42rtrwfhdjw8wqgrl4n0a8vuhguubu3oveuotv1yazot0i8f76ranpsveo80sm0iyeq8bi6pxgviqdlonskz1obdonesx96lc4dkvzrmbaony6zvdb7vf3h5xkn9mmnugvngtgmjrfshogo585rsmbwdl9udutckllimw77l9bldc1li2w1m9gsp47gero7rzqdso14kwa0qa2uitg6fb9o69d0owf82vcpf0bbywjkolgs967u5e9aubhwi2u8zmawzvbh2agt2vb8fu56r1poxoghirl5jjcm2qyq3bzzzn1eblm2gzse0mfbwgvn1kp39g4kgxzn9jir',
+                sort: 867768,
+                administrativeAreaLevel1: 'xy5uy0lsq7y5i7xenppjsy4wj9we7p9wsx9dqvgpdnjgut6wy3',
+                administrativeAreaLevel2: '10x2p2xl8rljvh6unsgab8raf3ix237oku68jk33m7298cf34q',
+                administrativeAreaLevel3: 'usc5te6ywowbaj8ap4omu9no1deddcnle29tthqm5jhly7acf1',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 763.28,
-                longitude: 474.41,
-                zoom: 70,
+                latitude: 216.95,
+                longitude: 502.24,
+                zoom: 15,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -1020,25 +951,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'ir',
-                iso3166Alpha3: 'kwd',
-                iso3166Numeric: 'hv2',
-                customCode: '8knwzsbggx',
-                prefix: 'bzx4t',
-                name: 'rhg2a3p3nhvk91n7zehfruocmr96sq8odbk8sktrj6mqbmpqouu65lximebk54vuz87nj2gm6b5melbc4tasa7zb86c2gi0tb86bq1kwuh71wqth4okuwuhmycqzo9b23dinlxaemz5zt2n2eb12jfdl06ohmovcckwwtpy01fb673x6haqo9f7ck2wy26dopn7qowj38unfarnlmzt72nxwe3936fkod8c35ameg4m4fyzyktktgld7xc3fqz6',
-                slug: '1r9kvh5i2ca62wlsuvf9i0zkgp3sp6xv3204469c8c32maw1tcomwj2hrl8wqkd305bnh80s7r6bs6rwgcgmpalnc83thccd0t3mcwyme22lueu2p7zoa5j1tfyw8x8mlm1i6n2mar88i3onaz2vpi4wsuhp0kg059gf5yk39rrvjokfe87up3ajp05ih7vk8ey7a253nvnnnwulv4q74poc7vk71sefihtxskykhwko4a46m4nhvxypzqpzqh9h3obud35z7bcodjn1h4kvx2axjy403ztnzxjn9glhjm3oby2sbmcticj6mck2tik7d6jk6y24uzsjnnvcupxb5zy7eo1fp1ex7v2943fx8dlo8e3cid4jm2pmhpxnbyvvtwc3tylg9o0jnguedb209rj0vmdyu9dw8jvko71wkmryjc95trtmndft5eytxvo47101miun9t1osmvwcfca7bu12ldef754501asfimh2jiwrc0jyj27y4yxm903gavhgwzyiqve6b5da1lb0y3i7unuc2vy06pz5olpdfoynvc3lti2djn8yo5mt70qerebj4kw9iyhg0y86ppi8lo26sdb1xw96nu0bl122lprrxxc53xx3y62c93nqmt2ztpnannnu8y8ydwccbzlmscqoymv0d1zoinlqarvif7nxsud07awx7kqikdn7l4jnzsd8ugz0ko3tzw4tzsf25qf0foj4hqnxlr6tk3mk6wixjmsnhbe1psh6nojsyjazq3ieu18ezpgrbeuhc3grymdqgc4qyxlj2pvt9qpcycdn4o6g2fw1pptj7ymizf9a3dvq9lz6b56fmoj932ilpue11yekccep3n5nayqr7t1u2lhe9crkie8osehv6n77tbf6uhgqh3apbvuro0ls789p9c99djs2bql5ywhlwdd2741oy5qq6w0budm34pw9q5rjo9otvncxibfr3zn5eux6ng2zmmzmc49ab6seq19k4z6a5tel9s6cm70fjwja5z',
-                image: '5wuklli1av8g0yafnbxznbmuytow4jfpx7mdwedtb3qv8lo2qswhux85vskgiefge70459hrswodg9b6299y8ulp84r860d6omsyslnsdnhtfrajtlfjaadg53kr59ug2fo9ie1ucazwden2q5rf8o380xmux1739mikqbjr1577s3qc9axrmyhbxzpg3r4wa5n4pu4kwfcroz52su89esu09g1nldz1kcm8e8lgxlj3syl2ithjacjoodtq08bi125xc5zjjz1s8v42wlk1lv7koql4etv4xq5p95gwo4zoje72zhh03jun5hw5bz1085fe4buxd9p0ffvn5xqg063i5owxe5hv8ai9694swbw82g6umv02wthwmiiilex0c31e8r3y8xpezigpsm5e47wp8c6axbmfln8pf7ec4ofnfrnl1lx8rewq2uzo9vrlml97s5z4t9ucv0kipi665am7dcvm04v74hqedaudlxc40er5jhlaof6qhlcx2vtx86byoksiee7stj95teuiplhtplw7ge8rd37gzsgz99ya97r32qw563k3859hblqtx7z8pj580icjmng8tqbvxa1uy6umbah51jf0t5fnmzg499v76odncjo1x5lkrxxtp2uw8zz8mj1uk7kca06lrjj5umk73y0oo5arwsy6j0y6gaym2sn48vnyv3l47ia6f08ng2cogp4yidoy5a2n85u15rhdff3rzxxydafl12qdxz1aabcn548lfe33ht383v1g3j3iwxd4uikye3hvy4750g19gpald2k5zon0jmxkyro0avp9ljmry9xkvoz5z5zdib62isvgd5qcfzg6f6feejevhnbk2qcuvgruus2mxethkib3zeq497hkj7s5nc0jkpwvmxmbhshwv0glch3y8z6nlz19yjmps08cdrkedt00et7pncrte0eq6kgeyvqkz46u0ewnsws7ke1t9vz86ad68n2b186m06ppsvgt6q3iytoctceymr6aveih',
-                sort: 4153165,
-                administrativeAreaLevel1: 'pn396j5mqfcht97qaytda5p63tjt0fuwdg6dq4es34fujwud59',
-                administrativeAreaLevel2: 'z9j48wf9wzhnh56cv6x4shv3e1gwvk0kxd59ryb91eyprptz7h',
-                administrativeAreaLevel3: 'dtzeijzqb7xb0gwhnbe328zuidjf7pk47kl25joztbrreavr32',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'lf',
+                iso3166Alpha3: 'j8d',
+                iso3166Numeric: 'uip',
+                customCode: '2ztqxpznhf',
+                prefix: 's8c0q',
+                name: 's1939rjh3gyhws52ylnsw81vwxx0f7f8w93a16hh22lp1maoe2aklc7y95z0lwehjyl2vesfr3a43hazmcbg5h4yse838fy2gns0vbra0p8mgobmrpyh24bljnpqxwc1zdrs2kswsswqcxtvbcrg8nbawtb5sci7kvluduzfx4y82ovqw62d5cooju3inuf2qwo4j8t1k8kwkay2aow3d58mv66d1tfus5lsrfhbfuy00hd43o9t8lczcm3vs17',
+                slug: '8k9g043eupeolfmrp110b0zhbbrzh7g2905pd4715jgojcig2wu3waeytlpn53p946p5gi1xskuwcuvykba6wch2ytfgbvuluooa0sel5zcspprwdr9wpz9i69kezuvy63uitsqiyhj7xsfmocv13h4r5w7lcoofyzeg6xf7r3z3irr5cmd2lh27hwesqwve1zvyqdioo40kqihfhptf6qmpdyrtqpsk9rht2do8cpcr42fvu93r6j7p14e0g356fi85xtw8a1p2a8uahcxr9penuo7z1fgf3a9m9g7jeeqkk8lhmtrgsf03rkrg11k1vzp2p9mgszi07m30z4akkxs0vkr7ote7w2n4red1q8eit8xubwr5k8rmtrw8yo62n08knj3w477n2q7dv472eyilx9jyu7ips56tg51awxfifu7n0znv8kt1dimxfrtdeact8n3atjkms1d86s25ht8hxipwk1qunj65r5p79woyhltyzf8myzq04orbfumiuh1pjd4uynnj0bmqe91k0xm1wyqxu169pmvijwea78s5hjxplc3saluwbx935ghnzlzo37877i5tb75d536em2ki3carsdifa7na7xppkzzmah9jykx8qp6ehsyvk3xmxl50mf41d32marm7ujr4bad8a5fsm8ewvfpkb5nq1joyt4x4aifnnydufov50wolb1pdd6mhnirgn9gmdx4xm2iif7x62xko4p2ij7aa1k5sls7zwfabatjv4uenicmivzwugm9t05u6syqibug234a4nh9q9h8hc7qr8tklcjo77z806hfqoly3p1tyx92rrc4o8t9r8id391igh5yo7d0o9xo21p1e1zz9d1u3czy2r883hmhavt4asvpaoc2zftk3s9wcw1ma38l5fjkxtjps5q0m8zw7zvuy6nle4jqeqq44alv0gl2cuoyv4becl3b8pcpfbywtiehxg5pegqzbeh0ay71v2mymlicfs8be5a8mzcbp7h6c03dg43jo',
+                image: '658vzy1e75wm6r0c042z15hpxwv4q8sghoawtwowa26kzhu01rc7xaf9y1vrdr94a288hlvq5kx557glsqmnpxlpnugoediq948sfqrhx5o84rssjl6b1bw8m6ie41dstkskoedsi9t6x8tusfg5gbezowrzgcsiw8w8wjv7hckg52qca6kq0ay7z0ycy8uvyc2j81znokkwdlfag24hp5wjzllf2q9jxoyytbw9az54d9t5j5s80lpx5nodeahrrkvt7x86wcd9p7bitu54lzryva4xgv3h6cyf9xqiiwxn2fx40ssktw0z8178v2fghjgu0rsqhm3bfklwt1xoq71pgp1d0ygx5pos8dxmbq3zrp1pczjwd17dcvukaqg0fmau6jbr197g89wymr8136eu20e57go3s7opzmqsonh9ccz1ko3n4q5atidcysi61d55c8slkmncha4pkly28uhz7kj014ewlho33pcimtf6pxj2pqspmzivplywv9b7uzrf2votavfyff6buy9qg92e7tnsauwph2611nsvli6iyr3n0fr1rnjs8yhrc7cxk1nor3frlcycnrewmbt9avjz4hjbm92zti516waxlbj93tjvczcviwjre2if122wgalyjyytyzibrbep9i2gb14zcky9i06ibvp2g6y8ag9zvhqjbrmcnbncx1calcp7ijpfmnehw5attwfwsgmfg902nfwwf8z5ewd3py3ikflbih2tqzelgy6xifgqqm2w826ktwhzx9mv77zgxsrxuqxt6htky29sgwn6rjq477yea8xry4shxhpd0sm3oo4i5hnw8mmvbcl9q905niufqu6nthg28m71yabiy477k6nym04go66v7q8k9c0fks2d1lhvburwsqb2376jc42jz5h1cvbnnp7vbri4gjet0r3uiravdtmkhnr6qn2unqga4pjez7wxy4ai8l9c4evu7u5875cuxcu2tp0kyvhq2w6vwoproygdebn2tshtem74',
+                sort: 3678276,
+                administrativeAreaLevel1: '1ulzfmk6rldviu0q189rh2orvhetep2g2pajj09x4w7bs3e6no',
+                administrativeAreaLevel2: 'j4rwck8vh3l23o80h16jvy5jxy1duwoqlflej9lpy4xrsexjup',
+                administrativeAreaLevel3: 'tmq66quyo3f8wc6qdkm76vepkmopi8v20aw5io03jeixwuh02l',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 160.14,
-                longitude: 583.64,
-                zoom: 43,
+                latitude: 404.83,
+                longitude: 497.42,
+                zoom: 23,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -1053,25 +984,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'q8',
-                iso3166Alpha3: 'og4',
-                iso3166Numeric: 'xyd',
-                customCode: 'oekh9ccv8j',
-                prefix: 'g5nfm',
-                name: '6q5glkdx8qat13262i3czk624i6878bqe65b9idwvxgpmche99hz0sd4r7r8rwra92eqmwwwjutr0z7bc7vhu7xuhvs6jybhbp2j9w1a6oee6y88ue21yvffc6s8uwvoi5t1wbyvzue197x0mr5x6mfh0kmuuignfbcrnhazgh7w7s3sazeq5cqhlaiz7e13xi2dhp2qeo50okelzafv0c86288z51z7afeppb0fp19xca6icgg7kgpsyybh4xm',
-                slug: '6rwtysr9hcqe9j4vhsu5rdzkmbdipl2xhb67dfp40cyultitvo1dru0nsedt4ok783h42l04rx2a68mgy345ttuvwt4o8si8zsm63p5nuwxiz46jn1fwhz1ub2axpszpo39zu1vft6xpw387tw1ye52sw99ash296390btiu1l1sidab8b8u0jg6xeipb8i834uebj80pzheefcyhwcy4qlipynjx9dpzcrblpr24xcln5cn6r6pkl7yibtmwqkzaev8wfiyf4hdcy77vh5lrtlndu7q6vrvdyb7m3cu2rer05uqxe7ox5ssmzy2i8pzcaocvgmj9ml1as9bagb0n0r6tk44ekiy606fe0hfpitgq2m5igwabdxylt3sdhh91ggwf515w7khbw5plsbqbviwv2tgr5lraeadqxjd730qcuvjskfddhggl4b0191cc1xwyxv3cxkv24exukfxsczkxp87824xee5hpl50xfbpuqiq9ipldufbvv53u31iomomjcjg7l1wk6xwoexr4kh5jn8vhpk063ycnkyh9a5tx4ljkm2lzu183hjf0h6zm6fbsi3na8jz40b4qkv7th540i4qynww5kbhklnxvvxrogke81yoqkrzi5gqqsgsgoqnizixloe5jf4kzy25wj31mdvsesuy5myf5h4st0ddz93madfxb4yyzc1x2wbydilji5wwg6nfgx8nqkn03b53z8m1sarzah6c13bf2ykn7bp50r60giq67rd97a3ov803a5elnnmo1wirgxd8370r4ocg2wbhllok2zh2eu2nbhgx23w8ptzr084bhhu1xc1ce7elh4g2zl6mhvca4v4qngy24m40bxpstpu7od0g47p6c1mlwaonu3a1otp4j50bvqbclq4nc6h40o5e29h20dz3tyzxu6byea8jkclx9m97dwyu2hb89cb195kvy3w137fqgzfnmb1gnmh7o0trx5lz3r45aia212drtinfj2v22q3e2wlaz2z8d5gs',
-                image: 'jd7d51b5vbai2466mqbavpfwgvj9gc57nsznmx2pg2omj1t1s1zuhp9lbl7u930mf5gbju1bxh8uz8xemsd0kjd213x3tmiezoud4fjribgroxg37owy83rzdhvb4zvxa2dmg1dhi9wyxvklrs3qeyp8q5y2vyu5nryg4lt9zvl9fxkn99p3ys19cxxi1gv2kp71og19sgvq64upoww1kam2sqv2niu0z55ny41hln2hlrchj3l3zht6qsjoz90u69armyo94gvobrfziqsfhrii8yp1hf6dikrwibgr4vi9qrpujwte5yg7no9st3qmarom9tirzhca3jrkp7ts7gzqmo8uuiyzmfwm4luke61zb46fvzhpnnyjbr65naypzq5cjft9ykhyf6otwmxqhn4u2hnsr6qzyhch2nvgajnh9wkpxrbyuzy0ste7x3it7y1ciwf67xo2a0vpiu7ff8bvthxau3nmdu1imriz9xzjuuzbzb8eoq0oee72jjwxw5pzd4dgek0mnnvl03tr549nnfu1aizu1bgetqcqwef67muox3getsdd4kqr1eoqq5djo2g8p7requbuke53iozsh3dnzf9f59ddpeh3silcogzhl3jsfnfzaq9q6twbxbs97qrwwdwwjsavf308ok6mhht4r7zm93earkfiecrxdm4yvqncrd1tenqarx6rvah9hh1uv45ecjzlbq934l8s038mewxjbzv55j2yf83uy0fxaa9hf6q997xjv1e9s739eh42f4p4kx9jpuykdl925fe9rbn0aicik39jq70jyzxx8zqo7asr0prnofrnv9o9207ig1l4hwzhecm65xhgchzfj55jn897al0cxh13tih1a5adtskk5pw51ghb7i93qy5ik5icnkwcaxf6wwlss16c8r2ehencx98aolc3jvcn2yfbl8shot0itgunrqdzlbtajgy29wfykpflj5bkceeawd93c138j0zurbkqmzknmt1l29zbkdjjvao4',
-                sort: 766006,
-                administrativeAreaLevel1: '01l4b4iutmzvr9zvnapz7uh857povxpg2tj4a00oun455toivvh',
-                administrativeAreaLevel2: '07jf7rlbm0dtfun10avg5rzwldmoq6om5gyf1jqmut5o5bflwa',
-                administrativeAreaLevel3: '5uenirafr353fjcd0yv9x203zo32st72m06lrawfoldhn3zx18',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'bz',
+                iso3166Alpha3: 'ysg',
+                iso3166Numeric: '17l',
+                customCode: 'r03c993y7r',
+                prefix: 'lt1fw',
+                name: 'rqr9h4kjiyujuv0hicgqxv8mlja25428fivnsmvgk67576a3s1cclwg4hotvshe4jumwgnuot3ipq590pua6pt3xzhffttuyhut7b7dso4e1cdblebcfzadj2td2u4j3o0w7y9oqxyg69h3pgx9rcj4b6j563ybmljs8apypx34bci8k36rk53nyqfyaekoehqwlt8tqon33nf9d9r5mca17y9lbv2d9afm5fum6pzbymldyemz3idr832ijgfd',
+                slug: 'j2qrk6mn5ggvp1j6xw97jiqgr5q20o57gv4z8i79nqmgtxtkz0mgkii8rjpx9ehqs2txhplez5imo1n7pho687qgbertx2vrfrx2yrimp1aznq24nzqbsiol15grnjxvu2qw71bfasur01mdfz2cgxn7ksjlu7eaiv6x7crzn47ecnfl4bi8iccgqtd94ljjzvhx1uoob7a36vf9o6cyr7zod3sbs794cdnqeybei8dj45rarwpq6flq7lngowip5qm30x7vxg6cuyfu0m2bdtjaslw7uqexi83l3caa9s94ys8bwdeqspiyhkfpf0obrhi1gnrvrn77xiui30izes171foujpnejby8etnay6gyhvmm9ejicfb8tt0ra3zskabkxt2s2xw829ruosicfh3kgtftegeq3ij0d9n65j6fkch7iy58kre7g5ax1cbn80uuftozvsx3ls0fpyugar84n9hb9i22pmitgrkg1cgh2zq6ej625whhwydpgdikjt4r0srqwexerlqc2hohfaclj1i2gfurgx30btfusrjqkaihpamxex0t50sdb96nafd18ojf5ks27yrd3ixzn392bt84oi8rqbimgahn8rljslw5an2gkti25s9kkmj4jk0sv95hgwy8wqu6rb2ilzxek4qxlq7s0l8jslncrqlcgjxzb4h8wl5etsamlwpeyeaxdyzplqqspmy5f7ql9idh9qnq10hbz6zqgw3eud6n88meo3y1o6zirosa0ca2w4na53sv7wpbeg65okr3h7z5ymn695xo1z8mt837zcpq61356hi3ejmgvkahw5zrd5ped313fsi9umid07mjal72shlcxz5srbuctww64u9flntsd2skdrxyjh8i2mvh30mrnsxuh62j27haqd1z8q49kt5v0j6upx2d5993m4n55swzdgwhzu1yhxs9fq6ew3j9hbvw3gjcjbp4j3y7lc4j6xt30chyxznj2xgsb9rl5n0fato95e6yuami1ugc',
+                image: 'w2ve5vw30cd72uim2pw3nq1oo6n1wmh0kqhbet4a6mbgm3fgnt1a2uz0fd4l0wsx1dka3e3wvo4egiq6xdf5zlo5pjiqc37balfpygkpcusq9x71j0sebtlexv37dwamcfsqamrflghznzutwnc1u2uohmxu10x1yog2mbs44p68tl77nii8pdf9ncpmb3mkn4is2hlephkkgiho95fhrzabvsf5wsouyz0veiktzwtoj2p3k18vopjx9x3ayjv7losoaix57yif68c6h12hex9zn7tm5hu8bb58694fp3p1uzjkcdnb8ber4yteg73yzr3llbjwnop0zoblidioiyxaroqru2exv73lzn30w68j6jgzx4e0eyndtixkrumzujq66rzaudjnhfrgyn7zkt382yn6eshzo656y7q34jyrvjgb6fwqqahl0t8ed321zqih2otvmzjek70o191habtj52vbsnsev0fnrkm4felyb1tub7nsaor4zv80rgkcvqu8gve7h5xd037nhydve7v9k2vsy1ageg3suyb6abgpe0zo5wuk8u35tjx68c7riyndicwqfzad45hhlvw3a8xcknlten8vlk6zd68nhvwku3ndc7s5mu3gh96l6qiehieeipnjb47uuzpi5bbua2xlxev599jqnjyf48ifuwai87v3skvcm1v4lt0p7yl9c97uc9mnu8bddbt86dtw8t68x2l4unjphv361nj3qdf1o299i7gord2lag53w1n0mhzzm78hclw7on31qbkbl4e4zz6vxoliubt8dmwjgwohvy66jlkn77unmshr4zgwvjd0d9o753do3leyf28hawjk04x0lfuqpkhc7khjho8bafdm9fi4uxohh3dp7q66e67v6le4x5o1w2e1zxh9jf9b1ue37kwgm8dywgha0b5qe04bkx17jkihjp2kzp48w7p6hqqh0sdvpwmzj0thf80ffpj0nlo5wx4pjgto2leiasels2x4zyrxzvawre3x',
+                sort: 175601,
+                administrativeAreaLevel1: '1a0xer6503fsf74ohfnlc8gca8u2gyncl04wm6iibg6gzf7o2cl',
+                administrativeAreaLevel2: 'wmbsn5xthkkfnyboot6md3fide3d3vdi1dkcshc5gyzl3izh8a',
+                administrativeAreaLevel3: 'ff9pok3l6hs5q6lm924zbcx418jw7asn6ona378dze28k0q023',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 271.28,
-                longitude: 582.06,
-                zoom: 38,
+                latitude: 673.32,
+                longitude: 684.15,
+                zoom: 92,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -1086,25 +1017,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: '0o',
-                iso3166Alpha3: 's5s',
-                iso3166Numeric: 'qpv',
-                customCode: 'yfa7hsa0oa',
-                prefix: 'utzy7',
-                name: 'cr3v5bu66ki9e0zs8lxeirf8z28pjlvps3yrhbyf6miyc6rdq1j35vv1nboe5nwt6smw2o0xub4c4qvct5s167110pjslg39tfi2z6k8gdh211ft5wh2r5yf4sox1w99n8vfhvikmf1kd7xh3u2m7u7qm9r5mn2ufrlhv8j35uvdf4wvaxdh36bwrrfcvdhivyz7cul3w04b6jdno5i84jp01n7pvl1jizmzg3paga19x3qmdw6k9157qgbr68j',
-                slug: 'ic3wkqxbnkc4q9t1dnbxaw8vyycvv4tqo0ez19rnvgk86chd2b8xire5f3ab10gv10lhbjfxadwesx5ck0ne9evgifu68tl0p6wd3xqc4wiz3yz086uugtqdmvyjui8e26ofkkhmnwm9kqbcfv5jkh67rfeg2vkk3o7qp156kgxdp8ysmx1m7mksaxpvpumag8ioefsuuv5hv4t40qa3psotk1dozfkrv7dfnkosc068r472nyvcieqqqqigi3jcf1gj5d0ix4mmvsbe0jgvedwl19f9qdms6cwqpks25xt5wt5uv35ll9knefangnt70bat2vvkrkj2ad86yl5dd9uu4fgz1hwn74ah7in97bdzv8q8axtzqew0ymiptbec3ymv8ag0uaees42gna9r6nlofsgy7ra0wbv2tqqhg5n3ywtaebtelqzhp92joo8z6t2rj5szlp4bg55uw56cnepiwdo5c5zzkwi7uugg81smqcwim43zhqho3vqkh0moo9psaeg13rk7h6438g5ckg8kcms0quqpci9ipb4gbcrof3u2cwt2elbv2g2yjzozjqptfm3didrw8p0aa1wdwzmkfga8lmpil1its55ovp1exdfcqvch0gowhwrcm6nfd82m4wm5zsdxmxtlwaf9c06o1ghhpd6n3n5sif0ikjsaojfko4fi0qmlzlz39zejjxghl61r0x3z86a48zj73t1ea0dj6fqfq3dg3ads907dizjc0obh0ntstwsh5ougdiyh2jbsqox8jssqi4c5zc73waalgkc1htyhpug5tkfcdoe4rgge8x1bn5u08rf78pa6o0xu4cz6axj5xe0ithjrmqiot2lsb6djobubpk98jk8wvyohcu2ueejiuhv7vk2blrxzylw3e4u1as93t1w0s14zm7rlf7aztgretvf44sm554niy97x0qfx4a8rpedufs20xz3td3wnsry8pkhwqy1txgm2rcm7jnfv8e9j759hdtteboi2mqqv38x0',
-                image: 't9x3yubqpbnt7knuiwcaqnxuw2jyfgl3l1qi9xzdwnbgyenmn8ys2jn52anvlnqi7vu74ncz7j5818hhk798x5mefoqqh3xc7ejkbh09phwzazlg6uwh4x2ah0994sxyx7xifpbwqh5yphnowg5nja9402p2hxhfc10zfezxmf5kvrpqiri68ybgsi3j1lcbn6otazlq197seur3v2pkmtbv7frksjnnt9acwfnt2j72llz8rzk58pa6onncr61iu5ycd5elof10ew7o4uz1bk82n9ddhifyabtugiusit6d66p2mi8vv05gup6m81pojdilxg7xcwefi5d96d9ki0aery2qbzkyr5v2o751oy4byjpmjuvabex40oj00rbch7to6udf9d9cpl4kx960gz4barbfksiehcnykuwwrvqq81migjtb2e16o8upgieu7yrssei1krn673b63dipui9xszy9x60z5w24s5m08wotxmrkkfj9eyy9kztkbx02bmulbbt5j15jt8m6agvkter3kijndvpjb3dyhkp2ekmunanfl71admjevt5h52613f7b0k0gf76xi3bt2skw38xfj3h7s1x1yrv9w33osc04okkaim14333ph0aovphfemql91rrwtqsphc7qdt0vtx49120ao3p08oekho4fi23db982zlj2e87zgi1yst683mwgfoz23qlc5fa87t6zjsw6k6dzv3prgajr6elzaglm1b25ry2t4tkg8peyqlmf2eynxwhv5q3hwzw6lnniuhh6q13nkfbyarxrym5i7xz1nvwpog57uw6uxk1v5q3ovto39smr23fjc59ngb2viarq6hvh6uicgn3x95wlv6cv9cveqxm1bw58gkklkmuzyrceexzvhtwrt0zrz5whq79a75wr8jysk8255s358nd69e8dylxe0fgcs2h38657l84n8ngzil3h4mk4cj3dfrdrvs5aiznw83tmv4ximt2m98z7q628am0ocf6kfar',
-                sort: 445056,
-                administrativeAreaLevel1: 'fuu8d7tv66mbm5h9g5nndkp3jboaes2ijf5qay1r7qm3tyie0f',
-                administrativeAreaLevel2: 'xy9uok5srkyzyad0xkdzggem99mk90t4gzx07mn9iu3407hgod3',
-                administrativeAreaLevel3: 'e36fbnuu1qouhknd5916q1jfwh3s1pd8vj1jnsyvai33doujhj',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'jj',
+                iso3166Alpha3: '3zr',
+                iso3166Numeric: 'a06',
+                customCode: '8onu2vkme8',
+                prefix: '74vwl',
+                name: 'c4lsiuw3gjxg2ubcckea9uzx3qlpl5yiqezjaegvaza0mmmnt8cn71ggf2congto8r8949pkcngx7sy7bh87vlujrth4wq7h9f5itmijfjzrlncm7v34jfcv6yjvwof9x1onc2hlybjvyrvcmn5l6yg0co8njzfyqur9an2chezoqxb4wdtqg5jka4cu4g40962yiry9rrishd96ug0cbvfz87l8046adh6qdkj5q1zv1rmxet0saoz5qq6sflt',
+                slug: 'xovh7ywz7ordru5c22p90ikg5asad3cluytz32wd214gi7r9auxfw5a8te7aeai1f32zeao11gpqupp6ygr5ee0d94zmr6vzvsnsospc6wl4kgifrjro7369fz34pqo63nmsco92m2rob5f7u1c6nw7nj9qoie95k9meq312oz1yivywsw9hb0zn8iggds98xvy2wwrn9sowrs9w9ewlx4cef03rn03wlfv6a4ndq2bsvmz11tc10jo0l063w02e7kgzr3d76lplxjoufcl2ufxcgj08195958eidubc3o7hjtakuqqdstrj18flvxvx98gougigjiz387hq3kwcevwx3eczjncad6mgvmrmydk6l6nqm9t32bwc1j7shgnqbxjyg41zh9usm1i7w4dqc8c2tki58fw006uhhh62c0f1901ohqgc91eny7dgxha02c6r69x170rr0h43umhy4ie011a1ig5pmlqnzqoqsz7pbm5i6831uxt2fndlq0q0g94zze1vb4s4kt6lgrqpy4ufsy3fhfslxv83lqr74udi42n225v3lt2yww70hu5rv2ql3i0glqncpzpw7w119aft8qkihhsonf2nigy3i7yduxc1xmiag0gv9ot8stir18yo3ebknhkssbkt0a2shdzlvyztlw5i7hgaethhi9zefi5q44vrva0z0xc0ngy0su6o15ft5mu6br8htde0j5qwobcai96azna8fsau3md0gpbtlqij6rom1tp113nee5w16ti58uavzia7ybj7wt1jgh7djd3mnvpb59cpl54z99irn1oudstdjkcrc0578oq7eubwvyt9y22g1koskdggq217ga5vnch5lwvh8rd3on7p32hot87w1k8s1pofsx6patpbovo2urypu9nfaror66u52c5h2yla3ia5c3jazws3egho69dcv09tpdvv1fj4c7ojjtasdpxqeq6u6c1855rtf619dy3n7c1mza1s89auuxbhqbbtyzxkeakv',
+                image: '0kdn8h1iqx5twb40an0bnsgxuuho059yyzm0zl8e41ant4oath8a5qzy190wtf1dgodh22umu7erzintyrxy6qavlitmpviyi37krb9spkhx1gd19nc17npigyvztgpjbwqplynp5coy58wxdpmpwlwlwzjmz2lexovtzafy6hz0uor7c56vydf4jb5dae239tvrycnh0tdlkq53ti2aqc7ch56lse9pq0u5chzwc4z2cly4oywz1we23scxt2fldlad2t8lbxk3w8lcshz9hlp0qet1u5qh6t4vexvzxnfx9fbt27scuwyik1byyy02fdj8ob4glrkxnx7bamgzchmoo1ae0vcsoo15ypqm8vpw7z6lhzw70h67w08nu6ibudeb4acraw69klozohpva7gnxr734wj7cs0hg1404z8rm73lccu2jhwycsmg6qro4iuiz9bbkncv17fu9fs7ktkdxu66qadzr29221569xolehpgnkj4zkf66qgz095vdqu572ykucuh3u1vzi33b1z0k2wwdc0i5gx09edhb4m5qn5rby45wppuqk3dctkwnymtjdx61djuqku63rmh7ji5k6cvo9cqlsv9nh25ndkxtex64ckymeik4h0jfxvm37tov2juzjjx2rip03q7hym78nxaqqiqhq7cnu53e3c6zo5bvf9th1pg1eucz1xd5bnptw8uctxo9odvxoxv359wqv7qj2411h9a05en1faxu76rosgswmn7u00opjcte1d7bcl6i2rjk8a702pp93cn4wsq2hk34jd0zo0236nzdgu3kct51zrmznb0pdwxbnjgj978jw1wzj5j2a10a3sfkrgjwjq0q3stjxyvtxsq1bru42yszn5e7xv0w2wg18kdcen4stw1x09jjx6lanm4g1cwh3jxhmdlpbjfepnuqoqql1dhkdijalod20xow5nvkn6mfz8b2pcve6cny2hxf0n5zul8yvua4x3m5ly8qw3iom6a7s2rxs3t7usf',
+                sort: 747552,
+                administrativeAreaLevel1: 'cf83qfwga1zotreu7yehz8xl6tevnnly7ce0gxitlux5c890xo',
+                administrativeAreaLevel2: 'a36g8dvoa8jjd047xl6vwf35um81icxjwt7pcy3yl6gng9yhlei',
+                administrativeAreaLevel3: 'n3oaght4y4uhyn20pzy6n7f1b7chd1ajd31uawmaaiuy9tvbt9',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 636.52,
-                longitude: 971.98,
-                zoom: 76,
+                latitude: 814.96,
+                longitude: 438.41,
+                zoom: 36,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -1119,25 +1050,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'pn',
-                iso3166Alpha3: 'ys4',
-                iso3166Numeric: '0m7',
-                customCode: 'kovg8fp1nv',
-                prefix: 'gnuor',
-                name: 'emkvbc7yamsgvnrmwgl7o2ewxm2f2towp2zcn305j99bq5cs5vog0tdd5p2ryq7y6soo6l48uf3qq17b7b6acrlgk6cb8xq1u5soe50qx11xbsxta0txnez2fafss8xplge0wvee81n8qmg4qz3sz360c0v06n81ieshw04bufblozb2slif60f0nh90scs5wyh5prtnsffaw5n4nslaoh6sdgdrw5wxnmmkv07lh68c5wcjdcthh3if2s3t9sv',
-                slug: 'in6e751wpgk5ojrsn7mu6a9g32rsqepggcocdl9bjddfvomu3pv7bsl46y1fjvbf3eybgwstjuzcagjvvzlchf5te751in7nxe471da95x3cyakvn0nsa31f86hcduvnl6id6rayl2ueoss7vnr6f4ekgdmtgbhybyofwucuze8ttwocmn3tqs3vofwytrktzbi3bp76umd8lnebw4bhn1pjff6kecz7qrot92feea3h652ag77wzwhqfotgffcwsbuley3ymewsqgzajsm79ymzj1mzcx055oj3kpdkbjieyuhpcvj2qbwhnvae96rcxcmjyk58ipxexr7k6jt3p46tjj0y6d7gbk3dtbdh8fokdc2m5ut83eae9s5vqbnt1mx6bihrw9aeboe6tzyb2i0b1jp55drrax15s6qccufmc5gti5yp17pxgvhymxpxzb59ag4jxem03slq308e6wkkb5iw2nxfmyjgzuwy6pj0od2rzager758nyn1zz5r3aax4wn2owgs859al2xd08m11u7vqm2bzc1nafo4rtwasx15ilf3mdnl32kuh9433230wapptdu58kdfrscscaprmd13qlhvfwrrap24j7f8f3m757jze3j95tp1vr4lypvnvb49n7yv1i241xc0a64eli3lqyiu9o2u3g18ktrbafagklu6zoje2at17vk52sinoy06kper7dbbnotezpex4qn8xgominvuyyql3dxljceklwil1qwq4v9jw3o9yk0nvzlwy93cc10tiyrrsfie998o81el2bkqhh863gzrq6b86j8xtvomz5757yhvg2qg0ykyvle1rggtqirqdvlt3orj3r61jxkmubjwworcqnalz7blfdnq2u5waxewulr7lli1e95cntkm6jouumulxo3z4y0rj9t48joxow6tflhvlfvp1thskt9p4tlj9hbd0ohm4fdwbc62vqo45qqgns8qd9fdffalsbihjnfk3uoz0904tvw7uyc7eg7g',
-                image: 'bvwcyrlrul3bk2lyscpgfcojh2i3kpitozx1e7lwddqd4tu0d2akudrxrsclde91buovvsg77mi9gcg54lsxsmpmsxb5hawfprjewx816fouquwhh4qk6ydzloy7laal1d882vcq1fdfrypqf44n25uekb92pvrfv0vm4g7bl28c1pwdoizkqs8r0o9fi42vx6z62hmlc5v6mewx5cov9pfjh6hmnoveqrfk77ycauhd05f47b2yf2k2qw2stc7a8ju83t0i2okc1qa1m21ww2g8e6bpde9ve29kp23n4g2r06rym6zd3r7rrrov0u4knvacp52dhavgmvuyrh65b4wdx7v1fsdewj4erb82f4w1wcou719xcrpxyj2se7b43eg8amgbomv76ghfw4or20kgxcggs72tjqz8fn8ze6yl66f86m9tn58zxjeb2rowypz8r63rxdo9rrjj8i2alyvrwmvxlb5szed03osyc0cz1yf6p1u5d0z2j6fjuhdnlh8frj8mi7gw553guf7vdy684idgp5s16d5ech20pz1okrbr1vkz52mwrickegctofukarbrxbexaalxvvk4p3atpkbke26l0dg7uh1nzjofzhy6ppdqtfukphvyrf9b3nxba487ztwsyfo8bqmc3uflwu2tor78hj5gv3mrq36aes7jafuvllcd0f190ppdutd9kjneqpp6vljgrwuuwj9cve5oslh2zbw62cddkajyug6jgd9zirbelsftue1xqzgrmicksn8nr6pm8ki1hudheuhwd2jlttt4s44l4nw1v4yj93aso53yfskj5nai805142en3trqionsiszpg3hx0gg8tn3ulg0f1fos4d3gwr62gzg70jic7hwhxq3oxw2wbehjbgieyuf80a3lkqq1sqhypqtn1qxnccczotnh1hg9tf7p1dj5sm86tq4dvbaas0r23yhx4xcjk4ocwo4lcflcuzwdx7ydnze6m0qirbcp6y7oxxntxzsizrwi',
-                sort: 681426,
-                administrativeAreaLevel1: '9snm66hxyhoowtnur68a2mw2dw955i8pwcjm345samw6aeglje',
-                administrativeAreaLevel2: 'sc1uoa1gvlnl8inxu4196vl35n6hg0r8jiok5yjtg6try7barm',
-                administrativeAreaLevel3: '25b2y22fzy5jj54iezeh1dxkxvbs35aqbc8c6zm3ficu8kb8zoz',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'cc',
+                iso3166Alpha3: 'cq6',
+                iso3166Numeric: 'a1k',
+                customCode: 'k9dv90p1f1',
+                prefix: 'vhs8t',
+                name: 'i6m1q0sbxvqmpfzw4fom04qr7hh8yhwc8wz70r56nhsoh2ppkwvarnmtfillo5l72huebrn9dcvm8zi4v76qpf7k7d41ifaqjr1np15lalnc615ae84bxkoaf93f7oeoqllcfg750xnfwfo76lmwlhpadc9k9uy5jl1c7efal3xpcanaf2mjp0z07h751negc02nlt02946fmy3f4m155ly4ublfnxzbasdbhhr5e5bg9ht082e52kpirdnfnsi',
+                slug: 'f1lf6xc4a74f31k91lypda8zcsry3fpywi0d4wlxaamjcodfahae9024x9bdm6yycmmy2dl0k37mtqz63yzda70siae1139wbyos4u1r3xnm4tttocogwnvqg4y3ju96dxpgptd9si03affs9tqtz9nob5h433r2jbkvsibk94xa681eimj0j11d0zfz78xq9fgriuhu3p1z6h7nblnkw5offy76trq6wp5gjwgncn1jcoeehndupveoe1z3ztq00hkppyk1ayfltojol86aq83x8egsr87sfgroq49vz8zvzgceio2x7rdqo8ecqm9g68h0ft8mbut5rgrdoft5c40nv760uekkedmf8r6vf7u1eg3f0lz3407pdm0muyfrvx9xbu2s7gics2cjnc3fywil9zaam0c0u069xnf04fsrz7m1njov31695hoa16r6e0ajic0kxg06sxkrqrdi3e2aykd8dcuxrua2yavip4utncaa7hhmusib4ay7xgl2qnkoxwlj1jueug5ds30qbh4dfu10b7ms715m5blgvknjf3zl3i53lu8hcmgoeovmsnvqgkla59ymdfn0vjjogsvs94r4xlxl8xi4x6gmt3an6epkfd4z7jztghh8bl98rzeljpv472pqyk4aor6drst5qfsw1af43hlmsezx4a8rayhw2qx52umbbyf0wdsrtf0ukkur1pzjo2jtogbcguiw7vxxvk3yjyy9slq1k0qxgj24zyttw38enf7cm5c5ne3ckt7cbtqbo0l8prfz4g88oxx2w8lcbxphqeprrhfe9qudd3ckoaps7ctg2kydrcpin3ysf37gvjwewc5d17mhi78ey52qfn36wldetu7yvkrzdybgpd4akqxrjv5xitatb2dum7vhfx2sitgvt23f2fdp2n534ipuu9c429gowbyp3ng81u1eoawzgslqodr3l2gem0hrr7z9g7u9s0t42553axorfyjmssbgfmxqzk4b30k5pcozgb0tfjq6',
+                image: 'c0vq0zs5yfm6kzqni0c6cczml1d5efxu15rmfy74kjbzftc7kv6byo6fhv1kr84zfy4bg6u7xj0otnailwbqt1d62yk11suywngkrx28678cwbn6n9rhfjrpslw5gvsctptr9o1f3coqb87afydrmfna3qi14z3hc2wgc6fvbsmzrsubrvo2rmoijk4wjrgeb6uhrplt1es9vzne2i8bq5swvpsje8f804lbjq0ybuujry0buozvgig44oa8jpa7luvj2ogiz862rr69v34nng3jgbi612w0wd8mghb82og2sem6id9oj93pvk54bcjkkz5emtkvqmcykca14jq1ncg8tfokpmra5nuwwlp2jwfhykxwt3bnsowrmykk0hmlla1wvile86bd0zdjcch0t846mbyomdijxy2zqlpasp6tse3lm9fr42nvoih0k5393u80ak2dafb519r0b4679nbi9m6imlz2rzq5i92uiy5aqibm4qpz6dxq2fetn3ne2m9sb4bjvh0z10f40i6aead0rgpifrqyq8uhkzo897s45mxf84wpv84a0cubqfxhzqgbjnlrb5vfo33vgpq9jt8prixql1lascrjquiqa2vp66tdjpcwvh8liavtylrdm5n07buvnf2r81df5kr9zybamk0imme4ux2wbhc3lseeb04n05gfe73n6yi8exumcgffgrrfp2v11u1qggzb2acf9ay1knmqajrnxz22nf767lxfrvjinf4gat2sienn5ugk4u2j9ylgho2rswh9jb0cn4y9daqzx856vcgwyskspq2zaylktc32x76d3mr9yqac21xemzzg8ydsrooskc0oq4fh41gftgsun8xdrq6t1vl0xc39g5ga4hy1f7ay6macymo90gujtc8cqlw66qt6bertascp8avktdley46azeo2dz9bke76q5ayyi9sonpnrqzjstk99vvgcy4dztg8oiqdmfsahlfev60u7tm3nc45zrembu19rg2cvnip',
+                sort: 805872,
+                administrativeAreaLevel1: 'y5cmjnz8bb76337wb2c1zf87mi50kcq2wy0ipfnkmlwlwmwmt7',
+                administrativeAreaLevel2: 'a3cg6qehl31lwin95mj57n0zetw5req7eeqyfpz45qff1uk51p',
+                administrativeAreaLevel3: 'hb7knznj5jjdtxt5vzhn7k856gv8u4w01nki0oyg3zyhltczo2k',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 540.96,
-                longitude: 821.88,
-                zoom: 99,
+                latitude: 222.22,
+                longitude: 785.26,
+                zoom: 12,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -1152,25 +1083,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'l9',
-                iso3166Alpha3: 'td3',
-                iso3166Numeric: 'ymk',
-                customCode: '0rq653tl3d',
-                prefix: 'nmvsp',
-                name: 'w56ylfiw4bpm376oovcjfjd3w0tub6xpmj8z8v320ls63o04wlcejx97oq2o73a7hvqqmdno5rzkoel7uum51wf29mkg8l7ixdvzbmuzhlbwmtrax2ryu1v1o0tqhfcxfxcbx7jpbrlhh0qhq38na3bgd16u8v0mgv2lmwzbcyc55q0epc9swkp80eyhw98mn7vv5aktidw26luvw4xfrxxkbaziwssouu90x9fe511jz9elpne4alm2tqs58g1',
-                slug: '6igsbpuefgk6fqux1fafpobaupqc7hhcwg13wusd59bgxa5mfvjys6ucydgfqlh4ech8d4urfxqp3830tc0l0t07e551mkzwsgpsejo1d4n3meqxbt3o389weqx5poq8vq8j191zo7zbpaxfjk5ip4gbr1syfl110no7w6qy44e90n0861vawg9z2smzm6o0p977icb9swbp2yo4lvt0f993wmury8ey1ro2435p7jbgua7rtcnj8j227icbes3a7t68dw3ovz8le6gdft2cn13e2231r3uk2zc1hvq2q3y7y5xyuxbene59v4lyhpocrc7dy6klu3kiuvsw56kk7za7jimcjywmjphs58i1o55pttwdw96q1ar2g5ut7r1b3wnx4vdftubc3osauov5ajujdc91duyi5xi9l8gr5afqe943yt1l85zjtccuphk1rdfb59a7njjfgmfjhhskusgy5izbxgpb0gsl2ope1zpurimjn6roqt5uw6prr5b42kndmalognh3p8dbglwz1tcusjogx3nbi1b92evctsy4yvn9vmmnmywmlchx1m40lrxenmjkllnkfj4bsqgeg6y4o4xhu5wmctbqtlrheyza9h1nkk8h1vi6vf5hfy86656kjrhr1rjk2k87ohetr6oijvufr71u7r2zbt1gfqxda0emfnbpnxqp2tscl8gahc9y55qc4l8rk5en4kpahd6l8d8afydit8oudajolzuoam6c34kj430yqh3ueqdh6bi1mekc28omu5ccx55iyp3gglookrmp4isce6xeieeez2qep7h84rptghm7x2xx3a3odymajbqoosq99pfyhpz89csnfis56rlba89ckbvw3ej1jaga6h6x8f3orw51a8oqxjp285ov4z2yo5lhidlcod3pjfx3ht88s0oikarpd9z3owyi6a5pr6tqteabe9m6ms01gr1cl4dsfv6ixkf3rzwduf5bbmb0p1lxunhbbohy14w35iset82p668v',
-                image: '9unxcy00ycnvtq4dz8wddy7jzg0mg189y4n9i5ia34hzycjri9frofm6z80yobpw3cbv3i4cgueuodl0f2dcmuetmgzw6e4as0iatj5hhs5ggpfd4u6k2tsknekqhrh723sdel6kp6fu2tz3z8zi6u0l9kuo6f5to79reul9h6yijkbxqzowlna7ptnw2xhc63zfuaklt112k60rtlssc17sr9nkbj0n9vaofn3vwfgyok7rmsamj5u17xwyww8x73yzeqxv3jsd0fl53vmgjer8nht9fjsfajjyin0e9n0fww4y9pc1f8dwd255yegq4ld2fqxwck0shcu4qcmd7mkn4rfttmctn9evcpuhnjvyf5rfdnwgo9quaf6ytsmgpt7oaevdiu0kt2suzcbb33i3i7ca8r2b5aaou3hvspj1apqrqk3donsctd7h0vdhw63hx0sec16hzlz4lyyqj9dbbzj0ja0huox9p3kqewcbwu8kzkei1bp6120k6tkzi9pb66sb4vcaprv6ymsh81ttke12ggjxgc0oc5embsby6t2qqv1z8909uf66q0cwcjdqarogpjlismtkokgrkdx9yk6cbx6g0ouojqj8b87ggwt2uepigo25i9zwge2ulb5ou3tv92wy2cm3ljvkh75dz3rrkcnqjdx3fd5g5trop9o6zwehn28eo6g19xcz2o319gmpv8n7eb99b548shmeflt79gx5w3uc90n746f2xsqw5jh42g3fyawlt865xe8caau4r924kw0rwjemdao3bw33sp1elzmycbl93rewg0o7fpuc9tjlbgy1eyialn6l82p9wtlflu8qw5h973hg1ijznwuvvt91uj7f79irkjcqb4d16owjcyt7pj72u34za6c9udxwjp01sgn0yfe8vl9lqa8rrhfyl75uh4im6v4ctmtjjnfqjmqk946axxaumcjec6430but476ee1atbqd4svyy4bsbalm5prlfwekndczcath3qjvbk21z',
-                sort: 876038,
-                administrativeAreaLevel1: 'jz23xngxezzzgywqfd3tbmvc75dpdbb0bb7pvp4kk2purcs0rg',
-                administrativeAreaLevel2: 'uqjtg6n2c190lfbmwy88cn2820zhxqx3r3vl96yufzr1euui1e',
-                administrativeAreaLevel3: 'v743s3iyu40wdh2mf2o5znzkhodj6y8ikpfe66m6y2rmqjfshn',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'ux',
+                iso3166Alpha3: 'afe',
+                iso3166Numeric: '1sq',
+                customCode: 'icncmmspnk',
+                prefix: 'vfj5j',
+                name: '0nsl9k166ilitde4ieirwp5g1mv9cpi25p3q6itees54yqmeuef5jggoiiz7xyyhib2jh4wogiebvnqsuvl8idu6xlqtom5y2hoglw6abiyo1p5806vewii2ezz7q9pvqinhitqdbugon4z2t4tuooqy6qigygueskwmv4aryxj1iw9p4nlwxa8qgbkqvwpsoxtuw7v5f3of6qrc1m76q39suqy1l5ow3n3tcxcbqkfhdybxi85sz03qczn2cfi',
+                slug: 'dq88j3kdefwwucdov1700v6z1mi7qq8slbk0no7814w30kc76hb7qxro74u4ff1o3iit9uici7zbj5e97vbol58rrw5lqnlgfy41j35iv3g83alwu4dfi1wu0bvwravqs11v0ukigz6sixyki2fhmir7l8xqupvh79vmliw7kw3i4xt42mq12scl0jrfjdhaa2rpem2iygd9tsjg6rhanw9pxz89gfi7jusui2395oekxoqygrg8ifrnsb1ds0zt2a90o0c36ivqy5ugqn3snrfgld1kzzic5xrofnq2xtz7c3dnikdz6ze4x533ck8vwy9vw7hi93yosoy7qfj2aeew3qkcmkeo3bkg856odq3cvw4cnswpezvxjgiwcz121lf1d6fegqvp3c1d8tht0w5aywnblznaqot1x52lg6bacg446sr6q6bmvp6bslxbz3ydfpsb152nly28vvikg4z763kw75rk2fssriecggz1ge9usctz4t4fc8973qvq191kqqi2kzndd7b8fzs7hzs3q1uomcitbydhpjrudgc2d625ft6ouo6biza99xa1netudjgwsmt0x62xmg2j77ixnaevxqg032yldf7bum5kk2trxaxg7zx5c3tpg457qmfnsby5m1e17degon28th7itgm70tyh0joxavusch9x07lcunsbegg3tvpjk3q7fb8t4kv2f3yfr2ly1vwumhnjv9ezmblk96uf93bska4s2dle1e3te9e4s7suqb113mbqzg6ybl4lw6kixrspjm6enhyc2d0q7t1a8ix484apt0atpipbz194mtd1vdjhy9qhxblk3mkhox779sehdxbkwmiiint9wp68l0zck3su6i6tc8m0me5nwdcoka463sje3lol5s6a9kv2pwuf2ia6g7xzw1vbpschlk3a03fbfa1whof140zqcpqbkvsvhqxfnxv5tlh9wj8cnozhwg6ucfcnr1ev1u1pnanq0q1y7tpkf9ou4cjgr86jcjg6',
+                image: '1ydkhbzcpoywjyuat66nx0i9ghpq1u4cw75bcjiil8i84ecbyag71md9p708sbmine1nlkq46amkppwphu3qxli6gzx09ob7iqiscud4xovb16cmxp0zp3gbppmf4jmwfjg3roa6xfbl0l9l2t0cgg5g05h7nofxlgy12fwd1wi65nxvsqo2fuykvvkt9o3setp5tqsid061jxd6w1tdxjdbcav0nvfm5w28chifkz6andlladn12hktxbipfhi7u2bl405xgithf1me1ciaz74yilldhmkyrckl66letiz4arkt5wibluusq955dt01ejjcvyo4slrhtgkpyvhlkroymj8r3df6owgeh6rkfure4qhsb28949chz9kfq6gy6b08wtro60yzi9qox197dptv6memgb3oftkzvlxhbkk76ui4uwisrr6js7e9ryuu053mljqhoas664rov8e2e7ok2ub0xhzpbqwh0lsnpo93j2hcxv2pgxcd68t2n3p8qkpkwlkeppbi2gki6xwkku0g8x62omzjd6xawxe27lqa49qtysq9dqfm5bqqr0bu9j3be9j4qmp3zar9pu3e4bp3whgaizh7pi3lh340s82tv9soupd34zk98dndrnmnsjjkwbii5ownsqzbamrant4l7jq9utcggu16o914ob74hw1b953mwtxzupor1ecrvsvyniiyk41yidd97ljjq8soxarrj50k9gxw4rvkalzrv9qvtpy8pvhtksctgy1s2ha4b76auqmrb18g0zjx1a5zayp4budm8mw3nqgj6us5ononw2rym8wv19tvmzpk7sokgb98zu0cngbmucp6mqgshvauuk5xtpy4qcsbb7aw2fgbiwzwkghm0sgrdtbijeuviop3wqehx7jsmrt05c0x95cozxgqpni4asm7rxk3xkzotbvjv3n5wdwkjlcogmqkporv4f4v1i7ot621d0ks1jlk931zxsvd8zfydjlekw2d6yxzi8pi2w047mgv',
+                sort: 521706,
+                administrativeAreaLevel1: 'afhl10iv5ayzix4d8bvp9gwcltcztiwusyyy58v67ve1e5au5e',
+                administrativeAreaLevel2: '4wn91rbkcwto17cxbq6hkgdiqjdqv6nwciynpv030in51jmbqk',
+                administrativeAreaLevel3: 'hxv6lna42gfw3iiwzf2lzx3qlz7jxp3krqrsdzkf1huftbxkpg',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 614.72,
-                longitude: 336.11,
-                zoom: 77,
+                latitude: 882.96,
+                longitude: 963.51,
+                zoom: 16,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -1185,25 +1116,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'q3',
-                iso3166Alpha3: 'o5s',
-                iso3166Numeric: 'zw6',
-                customCode: 'gwspcyrh7q',
-                prefix: '1i4x2',
-                name: 'b691j4ff1j1gnfcba9uo4gvkktdstd6jygasrnncq0bydom6scgi6vbipetiquc5wy7mecusyt7wqcvo4em23uuydnum55bf7r885iy7r540xbcvj61wt4j2bzkk8g3wvnnk8heuxwbh0gw3jp0uxqxmlujdalveqzrs8sbeufj4izrbd55cbsjsz8tr11sgzl22pdn1ni7j24ojeccikuuytqdsl5kr774e7bcjulabzw78j91k8hr921fsds6',
-                slug: '38b76eq3vnmyxlpagnxxz4jox5g5hr39zci4hz8iuvcgywefaixtke8fbrjsrqm3onomvha4r1913nctf8ihv0chtc372gs65p4mo560ovjpnya05k9jatxw0desff7sc9mv0knkhxuq0no07wgk60z9ngnt5aid69zlnnqd837thyn2p3n1opykecuyndff8rtuvrydioq93jk75ddoogttmhk1zgmbqnd8kyda9i0lkp2nxigp0xidz260p9xe9tya981dfni6gao5ysckrh1znoc6uav2a7208eqege6w4tsw8kwzm8dncmkyrhzko8k5aqelpc6hgld5wum86cd488lt7nrml5zlk59gsp5q89mc67i1g5k3f4ulzs8l2aj0g4n8d1inpkx2yf9dpdmglyvjlsm9r1m4vdf3in7rd1i0xcgwhwvhb5zph9sbyn1u68a0rckc2g0ujgg453evlvemvbpz024lyccfi06q5k25h16gi2w2z5m5q3p89slw8ie87u47bbc25ptxp1j3b7ynh70rx5yzbj44k4odbiczbrw088x0ey3ilh99w44m21wx8bscqrekz2a6ilk0vutuewab1ihwl1kqlw0uxfgqydqi7qjhgcw2jvunk8r1ud507tipmmc9oyfw4es83cagtg1crbn8bej9k4i5ngcxvhszpx6zy5w0907xcd8yo58ormbimlaz2znujahkops2oend8x8wrr7p42by1u4xvbmijdtajkdv3v47evrqp7f60rvm3rjukcpukn0xf84ah75pls05v763vngpzz1v459mw704yvocc8ztnvg69xbt60nhqd2l0kg6magodl3ewshwoa3o1lagxmwasxkalhkgqrkktr8oz61d6gmzwdlzv55ydbsl8936yl00ydz35o39eyttb0k2n7ma2lyqa6gwpe130b7bvqtb1i9mxdwdnpjk723ssrp76q54296fv3zwg9fynsi8vjyigwygkntwg4mulf97etg6',
-                image: 'tq6zwnh4a0kfa596v2ov7a7d66wfknr8y8wiil61bq0k6ca9xoehffz72g36s5q4p2i9kqhrx8j0gpuwqczpzotk6ho8ccvm6reucvdtec3u1p0rs0kjr4fjos454xucgu88xvkaa8z0yxl8fplp7mb1fjbm3iym98pdfaq82mhxdjwmdolnqfj67i2qk5wsgwcvpst3kce9eetm3un34pnyamyd1g5zf0c2n0bi37mhg4131nfp71gquwmtcsfpgsaojrtmsu15f1dxw1d1wgzmhtkwwcjqtqknyr8c26jyfqqytdi6mv3p9wpfxa8debi8c2jkk5ja0rnlogqbenjta168u9wcedxe8xgpo5hzx2apmd3rd8r5c5f9l1d3dumdhuh7qctp6pm1cyuax5nexky933bsqbrcztgjly1zlne12mxabzlneqkul2njwl263e43m4af6oc56kzp9ztg13ldppjp6ow0ptb9xwqjvlj07uo9sik4x5r14ub7pnbg87lbfou3k2z0e2713pwiqquj0ounnxewkcsghcmzz4483vcarfipnr94dcywessrzq3rciffg5d0ki1no6ca08mbra0ru2l4vny98j5sr4yt8itsg04sbt4hxzt2k5yjxon2hoxxi1atjn516qsfm3nd5bhmjtzuphrc39571wkfc5daiid59k2umnh3ek0tyxxjduykp6up4et5khbtjid5xgsctgeq418zeskzpj4z7lb8usur5szooydu4f8s948bgc89i12a3mchacq59lx54h2gwga31a1p4ha45q3lb219al98sxrz4w7gxl9co9w6epyapkts5cbblsib7gi37epph05li1ap2ybpwzwnwclh5v15yeq4e2j3egnhd3yx549kb7u06i2xook1s0z43eoc3hbawud0d9y9cvvdes00l89cve19rqh5ytsps8456fodwxu4j5cz2924we5lq8s9ypvg8y4ebgl2ceyl6nbajqf33ki770gw',
-                sort: 478349,
-                administrativeAreaLevel1: 'jqgnmqte1yc9wx8xxnf7j50f2hpr9mq7fdfbgt2j9tu9z1w2xd',
-                administrativeAreaLevel2: '0hq5zgrbhmnwivzup00joxrnzgm4roplt29idw1w1nvf7o8npo',
-                administrativeAreaLevel3: 'c1r4zs5zcfr8ucm1yql8noqen6nqupssfjd3nw1nquvxt46ogi',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'k9',
+                iso3166Alpha3: '2fb',
+                iso3166Numeric: 'iy4',
+                customCode: 'min2svyqhg',
+                prefix: 'olelq',
+                name: 'c06r3toonblrljqpne0cxsr1mu8tv69umm72vadp6gw8v00cbjpp03n9efujb1x0yroc3gspbdfotihla71kui52aqevtv3d7idkz846xz2uoawa1jwa9i3v4qfcql4c2wblw3fw1bqe3gd5kfz7km02ravp5y67m71xr22jz6v3urxs7avqmhbioeep3mbjrjv9t76rdmymbsz7e7t1bntdd5uadgdhat0cm4zn46zbiaosgr19tu561v3go0w',
+                slug: '5y21m38zrm78ebl6t7okxrsu3h2ekfbimmhzw1pi5qxpp39a4jmuzb500p4wfhdvu5bmpf5tgshjj6lrmnosb4b4n8bzpvv5h08hgbqopan4xs31hgyfzgtdh643byx3zkt36ttrb1temttceh7inh4up6k503yew1pgfcs5psms61153anlr9jg7t0r9nrnxhvr48hru8dyre2l5wuwec753tujg7v5nn8bhpfi7efazdug51je4jdhpa87jzc4ukfl0vg4nk51r28rxpbhuwfshwcfmr0w496tahq30er2jkiiplrpzb5cur4a5k8zh5elz3djlxfzxdg73dj6cm6mldts65ujvsgfjhu2q69rp1kwguio9jup1pxu8oe5l4j6rf9pw9t42232pgoak8er04m9uy5rqxgr08303co1pig7fbt4es7mk4fig5zmj4pbwnycpugov2563wm5tmsdiyjxv6evjay8w1ow33v3btvjm1ord317dqtjo768o2apnr73bxyuivr7vpapzb3rtj7t2h44axfkpk95t7y5cmcu0bfo5m092g9wginz9koubb7dvdux3kzyn3wjrhxn6t78xp9kqc8hxasfd7qok0k7cvt7hywhymtfnvw3py47hgoolm08a3g08d63427axdhrn36uj8171774cy2xmt1z71hmnlvypl1ke28n2bahb3ti8k89u3focakecb889pr525vuokzo1fp14y5j2t0n7ctkb97sk1ndmxhon9snrwwije5u1vb8ohb7go5fiey2sgso3niymdrwxhpj7z6gxa40dnhawm4lhd5fd50au56pn02r4g33ff5wf7dyd5g829cwpdgs79wm3wr6bnx40uox7rzkymurq02v5fmw3a0fmdlt9k3fv411693c7cgnla04xkw7djs4ijhhb08jwpegrtwmb1m7inm9ml1opd5v5jo626sdcdetwg8vg1cehatsnv0jcssmceifneewxu9c5131untyrs8o',
+                image: '34ffvpn95fij66ti5emfkqmvpdxmbk91bdlj1utbwo61ppp7768o0tw9fxiiu23draj1jxzhqg61gxnoiknkhz5k9nrdwjtf8wsrlbmaqfgahu0q8u6hhfdv1tux3er1kxsd1pp0gtw7jw44gxjxbaz92uhphfshpdtbzxuryvc70qz2gyj6e1daj7txn2274kkqzc9qb6npsbwhlbefozpppuicqcx1lt3r28mgaydame5vefsz0th8opk1cy4enrc4jboj8jj3wy5ltemxgtrp57ygbmc5t853yf0ge5n7o9z9hp0rlt2umxr5hcbwc5um8aytk4vkft74lkx0k9bkq7u8a676slkdnl3ayteiz1jhn3lu31ku01fp649b8qkegcfowwqgemytljbzqpq57c4qa4mk2u0572xqy1hemfgrw7sssqv854icpdk43x2bplap5dh5ym8e8m0a9nkssx08m854uisqicybnmp8cvth00o2rkn8jwzwpuaxa8ma3ks0bu0o81mxnf03f4jllzeuj8uu73hpd9mfl1ir8nucsl14psnmxb0jhyabtiepmabuhb4bc692fvk0b5uts2qmzu8a1ljl7pj49nvhyaup2j9zcg5k3h21y2qzgd21y4io2g6loqp8ud71p5ey956sja27owdvq4a9vfrcjzomojaqd0ihqjwftgpiwnvogj1j38jd28cpsfgxwlxz8sylys97r793hcsqxla0kgyxv0aszs8wykogwzslhmx4j6zzao0znhl0uz24z9onq8zxor1e0jbf2gzfyz6iep8g0voeuifk6ozh22sjw7kx72sk1zlk3rh4lfk76v74xd4lt6x9e41c0lj8710cjsvi9bl4y0eo4nz39hcpcdbqe81pm67811joc1krqh2v2xcxupes25i9pu1m7ocv1lkakzhvzksfbedr93jqbexndiminr6ivxo9z9upjphvduzc0ki2rbc9gzfu7xo8gj5kukvhupoi35a9n946',
+                sort: 899989,
+                administrativeAreaLevel1: '1lpzuh1z3eg1hffna313t21yd25lfhmiiy1pa3zip3826zoxkq',
+                administrativeAreaLevel2: 'ng237rtvbe0339r36eftxaihtpvzb12b7kfvszx23na65co7yw',
+                administrativeAreaLevel3: 'l85zykgtg4t1zbst6gt5uf8irgnlagy5plng4nngfbeb17cpw8',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 34.20,
-                longitude: 894.33,
-                zoom: 22,
+                latitude: 108.46,
+                longitude: 146.12,
+                zoom: 69,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -1218,25 +1149,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'br',
-                iso3166Alpha3: '2wo',
-                iso3166Numeric: 'i3n',
-                customCode: 'aohxgeewuv',
-                prefix: 'lijv4',
-                name: 'kmfj0p4g7qjn87zpo2pd3n7sl2uk7idwxv330iu3a9rvj4cx6kw5twid4a2lc8lccvpvrxcp5hr2obrus3a2optfh196kzvbhfb8w0h68fu04f7m08fa3onx4ihyc3n2796p043pcwpy1v77al977u8a01u9h71n665yzyjwo80eis2mqe2gypzaml2pdesj0etr5ge77y7ctp07r5n444af8o8381i8ghju728asdbjsciaj2791waw5nra8ic',
-                slug: 'o99kbf8hv36it7ealycf946q9ly6qwpn56txomm2pbkuh85wkqexmyu6dlu3epjz8b6z6cfzc792fnseu6kdalzta6dzymwmovvxezvsjwvnv79p143klczxtsu5lepgsl8xp6f7a5gc9jcqcbte19l632r095quc6cra8rmui3o7b3xnaqdjwrlw6wv5eep08axwiy56y61l0em26sehpf36pafiz227bb3w34r6je1vvg9l0b63vzgeoqodks3isipm7iefuv3xi3guaiz6w14xbwml8mumk3492kb5xou17torrglpytxnu90q9d4js946t3i8uw04mtygpylctf53ff8dt2jrso0yfdx1hrbnj8z425u3wsomz412bzyzdvuypaje54f2eua7kp82yqtb2mr7kwn49k9tm4nh6eyxmdla8km209xbrkaxfg529y2rx7a281x6z3nagbb26hjua9rspkokarllbflc7px3csdtegm0noijl8u6soeoba14otmysqwa8qhx0gpjcj9hpflfdzz0mywq82gx8d5df63km0n7a6mdrf0a7mbol7mxoqj54dzglbtf6y4g3eyo8l3o4q9glio91tqds1916f1645418qvr8t3l6ihlce8c635pxtud663nz0n2ic7ci7nwthvhpjhfblexvk1907vn4hxvpykbee0b7xkdinzi2hxofg8wnxs75uw4rddio7wxuxcd33lgn4x39e4rotj32r8j2wdyyzl6c0vbz1tu7ai95148zk2yizelkhoyqkq36hzj09uspk6qssdclxrlgyyn6bd7oggml8cj8tkwrnx1fd77vbaa3ku66g3oubqfsayuwmtimc2m9xq5kt0yhwph0abk4jvndnrtkghe0kqgz3zojcw2oxa8bcizs6f6dueeelffo1rmz82bfd5239etg5aj7pdw4o7n3f10tkbn2rl3zmkifhtf998g7ze8rb8yyv7lv1t4kexhmthhjvrkss97gxcfsi5',
-                image: 'ws04vb337o0ludnlfcn4yl4mt8u1ix09ajg933z0lx3rugemlgb3p8k6feqxr2l99eiqar00qg8ikcbpozwyvwexm7x4hu6w93v2sdouah6wr937n3te63063k9j956gx2hedx1t2m99oydhnrcnntjfyfveq4jlxemfz2r5dw6q8cp52074ghrdivhebji7halpdf3pmbuw11zwlyp973bd7wyze39wep60gsv6j15q6f12mnrlklzm1oa4ul1kizt6qietw4ccb9l3zfp1cr6fyml9iydi26tzdc1zqdpuq48fcnm7q45ty2a2tj97mxh28wude349b4zdhi4nixuyh4cebeuuj1gr5ujp9w289j4wz19fucnwvknsg0rj95o69aqpc9qljdtekge82lis7xwcjx1fwrb9cju168jas78bxjpot50cob8a7comox8zlhs2ewdjba43c0jfima62onbtxkk6yh0ud1qhqlit66lk7r9da7ov50lnlm869oxb9nwkcepu247uawgcmakcflqtaq5vb682vao6fiazm1jsfeiq6gato13gubuwg7d32pnidn4n7f3ym829fxodck74lr4lzx7mvsgpe2ps7tqyljsf2vmhocgm8vyz4g5iplxexx3dcfq5vkevzso8ugqfu3w1zngzd8pjp7mv37ceiuyvcpvnmwbtj4xzzu7hnn5p17cc9ryh3kew19ga7dcgrvp3u8a1mf1yvxaqjd4r6in35prbw2u8brwyx6uvkvumg2f6y6977n8beessb8s81en1eiwjuc6arcozombw8jny1wv8lxpt0cff9n2ws8ez5stlh0d36kejh8e7l730yo0awuwz5vkku915tt4udu593xed24t93vsoav489nbcubs49bcaad1s7oj1xj36xk36jsod22z071ot48fc6hw06a9wplxvpuommex2ngyntt0ji5af0ixo34wmik45afupcvbguc2o2rbmnzd37dtx2xv7l5mf9v9',
-                sort: 154889,
-                administrativeAreaLevel1: '0p2j92gwwk0vlv2r7fpbl0u5b90kel1k010ogl7blxe0om5ztr',
-                administrativeAreaLevel2: 'pef66tbzyfea2t9593c4ihce4xh0ds48on8m6zf3b8rbke14g8',
-                administrativeAreaLevel3: 'tmj3l0igoq39hq37vvzy123vj13sgx4xv077mfovxfs4qkwg03',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: '8i',
+                iso3166Alpha3: 'nsc',
+                iso3166Numeric: 'hjf',
+                customCode: 'tn7ugioa6w',
+                prefix: 'gqk88',
+                name: 'puaz4k90mbtbxyjsl9ps5dwhthrsku4n2oyjukaitjzz74z58ah2pklyv624s5mdrwv1wjnoy0msppj6e250uywi1kdtouvi4dxoyvr6kxnhg3z0b3gzai7rabv5fozhkq5esgbo3nh4ci2a1aacgfjiu99tbx5omggi94pbv6jtqakmnb7ac6jgjh48zwwt2prhe0qpgvevlyc2ittny8vpiaqmnvr8ymc4pvrsrow5epuee9thjo5d378lu8u',
+                slug: 'nqltzgkz14grn78n2n95kttvv3v5e3iu5umcaxwoxiegtfh5xyyktc0a0klxfjhcmmltfcd6zlqecnk6l0v94pf8aodxa3qj9n09yqancquwg491qcze7ejsap2sylhbudmllo5jjaz5ttkyu076to3xmxb90cnczcmeo41irw5dgdc7k1m2x13u4gql8wyydnjlk7204tm5ycr8496emr30801c5qbzhuiokx1slpx4ptxktaj0wpcqtd3uu5yrsa5rigtfavdw4pb1azsnprtxehu7hff7z4z2l4903389c7woj96iq8tw1qg41469c27xmu3o8vscqzoiaejfgsu8do1on3wrgzcgutc687yoiaytds6qpva7g9eascx23wev0ketv3wi64kuads8ptf60dmiu6uzqksomv6n3awo21m2bhwqme61t0k31av9l4t5ik1ldu8e54r3w7zytnw59dmh3piv8w78s0ivvwbt8do1zq4xm09esopwz9ikkp67jq7dili33bfoh0cwaqytm9ccgoxdjcg9p89jow8ckydjveuv32u0v7xn18nra18z8obr9vg14i8te7z9qeq1h7k8skse11leqa7i7qpxzm46csc0m27hrqlepdfsdlqy3wrt6f7w66ne3iqvn4aiohimtiwcsghfgrp2lj22canzhpacc9ha0tcjiqey88kior7yp0qik8mcmqqv7unz5f3k2zasek98ybgt5jw7ikn9pxjm1srbsvrjm753iuzyn3egc4e1tkdgk8ocwhwpg3mzdwmppqfvrdrpv8jxpwre3kktrs3x92sho4tuinvtkgzhc8vpplfn869nf96y6c8nd79kj0fg8zcbp6ve8rya0zxhjlpfyv5tehcl5ocuui0bne062qtbyrvrhzvk8dbdfs9ixqi1l226163i7rq9txwfqqdniye00ep9wwxb8jirwhb16b4l1uryfal5kje4p8p10bkkmaccrgdngfai3cl5p2g942rdhbkb',
+                image: 'e56w6376xs9txc9pks47jmvm4jei9y9x89ijwbsv6hjbpyqd0i01xyinq0pbwwq5un8txjls7tb8sqgu3xepnytp9hna9dqo7dnxn4ii8dkpwaey8n3ebgjgkjxy3iagm12p15u5n75ftdrnlkyitld8pm9apdbqer7caz46zj33fo3n0fdw3hwcoytf1t39m01o2rpfsg8tm9vfnldsrxewzvkax66cjlwbayt76snebrg7n2lc3q2f5uvenn5k36jm2s6a933mmodef1ajqk89sfcbmnefuzwecnj7j5m91l5v10fbu4eycid8i05xjlzevdr2yilu8wsjynw4wldn9rysfdsfvuz5mf9dwnnprb0iiicvpal5smarfiqexhhftba6eqr4gz2uq5jyophipj1cpaxq4zxe4figtoz2j0nin7ewo67zujjdxe8x5v7vo4czo6nz4vle8t56k85y49lx0sfn3btzw40zn7534ycr3ga5va5tk3tzi01jco6ri6zi1txc73m4352rqn3g9bizo2zgqx9h0m0jenzv380ja5exkvyf5cbjty532cvvbb8pi6jkxroc3tlyevbng94wcwg6bdqng3vvw9itnpgpbpk4ln2h9y27wayy5vw938v44q572hf8hjh3oo45mk84ltd99a4kcsr01ulbqe5jc7b6lptdtierqcu1ikcqswf8hfxjoyaqkho8yfxundsmo2k8k5b6q4jm6otxepac9e8e21equi7jwkn3wen52olqg1e9wybaiwpbkzfh0hbcmuzr2hd8kfy5oio9rbnk3vqvcapw447do5opln0y0041nkaufqt6l5hog5n6uxio4vmiarla33cze5lgvgqo80ygolvsb4zwqxx6rb78z8vgp7ucrkfgdxteimhzlwbtqfyczweo0fgvceszzniybmxkuiheksch318vk77975h4ehpox09mdlly0uvo9cnjjc248ejub17waatthlhcsv9tcbcjxbrsrxr8',
+                sort: 862811,
+                administrativeAreaLevel1: 'ja18u14naaiizk6iegzioa170cc1tg2by68vavd7b15uiq9wob',
+                administrativeAreaLevel2: 'ofa794bipyyov1v2hx4kq92a3xue7cgu177ck9wlw1z3shms9u',
+                administrativeAreaLevel3: '144wtcm96ekz1413okauftrmvjjk1ymp8yvghzpqlf3is6mtyd',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 682.78,
-                longitude: 610.19,
-                zoom: 910,
+                latitude: 767.04,
+                longitude: 816.87,
+                zoom: 799,
                 dataLang: { "foo" : "bar" },
             })
             .expect(400)
@@ -1257,24 +1188,24 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'ra',
-                iso3166Alpha3: 'r9m',
-                iso3166Numeric: 'd0l',
-                customCode: 'vtuwduxeyh',
-                prefix: 'g6ccp',
-                name: 'i1b0wgg28xoyc318b60pjyz7w53etlnli6fr0mlxpdgw1fqx9fyzomu238m479mrugffyofvceqd7y54v25gdauosc1yflyoyfnt2afrtinyhymvbnh657eq8qohp5z8rfxfw46arhnq4eyal86g8piagaia9qfz0gixv1gmzyd98oaj15xadkh8kb15l2m1dlj5gu59yhzqpv83svne3mi32p75wwj4wzvkxxet4f51o2t9104e3umuk1sksen',
-                slug: 'yf4n2qco9mj1ra0esw03o24a0m8vstplugr193l1ipjbmvjcvb6ohxhgwgba8jagxvl46iv2rxo44uzkmp9o5m55bes7v34bqsl2rw224v8lgrgu18v25svwp5gylwj73vfom2y4a4l6sbw993hj16iccwdq0htz6xwomhbnin9gflfk1m76buvkn8bfye7sdh5a89mwwzr1ur2x131kvijmne4htp03gqocu7lsgdxfyhe1j66v7z773le3rf741lesaef9j3w0vwyc3nuqzplviigl09378lms6odpgzpzjx7di7lor809gw8mxd6l5hxzkup7h8sm1gs2iw2pvf1jmn26c9klkqz71laske39oum72zfyie4p87e02x4sbr9i9kkvdg10azbvhtcfudhay184trr8xae7ndmc1f069szb3ks4nrczig8vu9ahb5xr026tiq4hfmhe16uuq00e0eiawue32k3zahpz9eq2ojtyl1hve7l3c7uzwrc250re4of4kvava2iibxjwfblyz2e2tz5pk7by9dtaimqpyzbemc88611pmipsanes0awhla69sb58dcoin4rtlkssfdpd2wjjgn8b0fxhsqcfiu6kb0zo27g0a92z8y6ew2kiyfxduu1h1dcfbxaihrgc4tncxbb7yr4sq80x4pkzd8npnfadwxnntvpa9gw9vrdn8geoobrh83fqjk9e5ty7sh7kr39ptsogopw35gjxdi5xwa84ji9o974lb1k9pnypsv0f9296tkdejspas87hxvtahnwduid8u5du0gp8ak3mruw8xpgma228isif3ko9g8pz17pdywb6h1syuzwtbv7j4i99byszam2v3ffh6jdr8zvqgs8zrocry17bwzon92u5yvj09vhzifkizd9z7882vwhg1jvl2vmj30tcypuuofyvpni1jlpqwqnfat771ma72fjuqa8kofyc3j7b4i97004kyrn6ff169st2hva3misb8n2hvvmqey05',
-                image: 'u17laq2ihoq5bliydpg45senajaizgjd2lom6bj6h2s7cqg2ri841ubo4404z9dmq40tto9xdc3g1do34dnyma3zgiqrx6i3z69jx4iau2zu28gp047trt7z20mltkbd187ow49yi8wlysfepd6n76wnjbi6pgjcpxxcamod8fngvmhs080q5qqisw7qr0fw6l11pslyzpkkt68prcym6tg33woa2gec3od3tochdxvn4xfhq8hyaagr97uyitgnymobyuzbw97711wh5bvospj2cbiht8rnn5uu5mnys1nhv254kwszpdm8xia6il8bcd0hcpiybtgwmgb4mqljpu9yq96t3mxuj1tia21n6zae9b628mg8ifzohrglugz7rzxi1ym6v5gzxuakk57gz1l8r68253trp5iklcfansrppisf89rkstw7t0adxp7t8ictytbf8f5f8alz7pp78u276y3eblyfzj1ov1jymqwn0o83irxvn3gxq1xuazeblbjtt2r2dypd9vt76o5h3cwnex95u1jn0eq9ncwiu63tlvlvwckt5beq009ca4kf45uenrejpwb21xc0pje01flt7lab6fqvthg72ia9j54h7fyvx7ywze4vc0mgd9mer4e6nt2scasef12tvolg61rnjbscf04ufw4hnjrxslplrsa8gslgktnbodakqhguvbxz3bhfchmgnq8mgydudadxzuqs62caq2cowg0hnscu8833ma5gkl8z1levj3ca0fn605jorbyw0df4hs9880dhokl0zsvoc2ipu1zr7v3a8ocrh7yg2emru29e7yj30c0xgipmri8wp0vawd5xz1fpcggx5lhwcym3bylt4qrffluyzic8ntdqkpszgn4ecdp87fvl4x5suojuoy2gsqm70pozphp6rrnljqzyt6sgtrhiiur0169gchadawxsu3joi09aop5dginjde3g50wm9i1qjxcuxzlge613qy80nrb19pgkos8d6wjqw21n',
-                sort: 752000,
-                administrativeAreaLevel1: 'advnfz4el2kc2ffroygq39xsns3osiijs6tlaikjv5gyn2o9eq',
-                administrativeAreaLevel2: 'l83j29drpv79zyd3dt43v0a9addbp8pp721oqbt42kkcrayjbu',
-                administrativeAreaLevel3: '1ubb565gyk2evholxnhedqwoo29nkycz9b7oe175srdlo902on',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: '59',
+                iso3166Alpha3: 'gyq',
+                iso3166Numeric: 'e1b',
+                customCode: 'mxmzm6upp4',
+                prefix: 'w2g5y',
+                name: 'mhf5hp2p2mvldcd50pua8r9e2ip7m42v3uovzxl9a486vwf140dufkz4aogbtoxqrjnvpo45w7nzk2mn42bbqnorgsxdznr14c5ha8x0m3bikgm8anhuorvfku1oqehmzcmcq89go9cmvykyh5oe907mmlq6l9j9o28g24v1xnschx8x19w5uweueyy3ppxow1uhm4lcq7x7gryls5gdv0u2i80jq0xvuzqr5auc0euc8sl7u7clprgulvx9nqk',
+                slug: 'd1cgwe06kmnvu4m8wchafnv9gdwbkrioxh9tqipogygw3k1ugnaydhaji5mdet9uukoknzxvy6xuzcws0yfllhyz0h448axyba7wkyqxpno5o3x6jpdqevzmyqoos8vq9wlzppogfaeaae6kbsck0ks4kque6h2meks73jv72kc3lwdkmgzl0vdq0496cjbiakqe2h12pmi0ipm85vf36qp87tzdmr61supxja83ggluvswgmnkui4ovr6yi3jrvl0i4x508mi3q4x5ev4qzsg9khgoqhzslb9q9g2nzsrrbgzecotgizn6ssls1lkwesxl4n0f9fzlga96dlhvz5yzc4ehwujg494ohwr7lmp2wxhyjrw9429k51oujxdu26o2vv2cpbt2duzhkgcaaya420su56dyycits3jpwfrvo3yp1ik2alr8g73brxvyfqneo6kn0re3zq2ah4tusl8d4zmsi8kezb1orr7jiu3vvw5mxssdkmo5g7s4q2la1zwmn3mnymrfgn9tj5yendjninhm70ttc6z9yc69kn4kkq77f8petvoby63oaxzuz66zrmjkbhc2zqhlgkpaf1g5e6mbfivgdgz0nh5tee1a4vh9zzhejmr06p0egexysda7jjoowvdb6ye0lccgbo4bqzyogozq4e0ks4j09w33obhy367k6gjg93hj2v7n0ug5radp6k8oeql2r0hxp7q09kyxetq6x44rkcvehgb17bservkqd1b44v7my9hcos1f3nh44fe7nfrw2wfor0ycombe0556kpsahijgjrban487rpqdjwunfp127e6xkuu5i015v89urehdynzth89lhq05beq9f0xy9st2qe7u6hn7ynwx1xxmaofyi1nl9rphc1cmqwk9rxzpcrgsmrtku3oau2dstodjbve4v7ahqum7yiucpkmw9u47jru9wqnkrzha5jptjmynszkmbavpc6mdgfxacckzc972cd4kqiqx2yrya1f7letyudgf7',
+                image: '3rct1tq53mohasonr0c8brn7xp408hbva6wqg5w1a7lo69wsu1wz0j12impsh7wtuies4t4l4x4md6zies810b9e0xu7z39m2guwel5tzepei8n6nn190h9k1sobhtv2tt6tuls4g6k8fyboolh22y0d0zxdmpxtr9ito7epkij1awaoz99102swqdy0juw9xy2exqcnifxbcqhhj8oqwdyip6skez3brm5rupyfs88mzc37llrjb3uhl0vks0zfkn38xv6lsn153enm9l5d8juzqbez6227nwcl2q7qzc2w0t0pha4fhdqgb0apj25wrwpep5p09t2wmolcrb1uqxa65i38tipz7ojcfmrdtqqomcxvvyftgorr3dzt3wlzah48j7x70b24v2oajebim3hbmth178npmv1c9gpdzp25pa2znxmis57czs62b14z8qgxsm6pegplwvtw6xd8db4j31o9kwiq7c61rgnjdgm3optcnd8acacfooxhkjmzolpbtnw7y6k1guttpk6j71upy9oe8sloznqfjiz7m8115w1x62w557zjgkj6f5f75zbajmno2td80l698spz0ufmclnab2qhznypfx2gposw49azq4vstkmqs4jwzp7aa7x5pb77ejub5h6141r9bdvuecl31towvz8rh001k5qtfeq03am6exa3d8lmozby1arege195dppufzgr7xhl3spr15nsa3fwoyd5wk536d0ui84fcjjgpnesf5731c6o6mgeiohmx0ro6bymt16ogp24njy4pn6p62efirzn808rhs50pubt1fw9jotlpy0rkzzzxy9bvv3qy2e8zzbi3e0475jum1i0qgahgwbljzp2p028kcvrbtz1t7slb06j124gvsa11simngirxkal1sd439maju9syp8vnz8z35u3wuglv48n2cwrl9545okz2f7ak60tf1yr9o2l2krx61e8awxgem2eb7wfgasgiyqfhd4gl36c35o4rjz8yjz',
+                sort: 410404,
+                administrativeAreaLevel1: 'r8zvo4fsf6zj4kqk8urtsibz6lywma6s23pf4lnrtrq6axkf2a',
+                administrativeAreaLevel2: 'xv73ychg2wz66i3tmi39g17oxqpxpgq4tug5y30utklozabdz3',
+                administrativeAreaLevel3: 'zq9k91ylxsl9v5bzca78zh46hk50zvb2n45y5mfnotw919gyv3',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 62.90,
-                longitude: 758.58,
+                latitude: 230.77,
+                longitude: 968.65,
                 zoom: -9,
                 dataLang: { "foo" : "bar" },
             })
@@ -1297,25 +1228,25 @@ describe('country', () =>
             .post('/admin/country')
             .set('Accept', 'application/json')
             .send({
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'x6',
-                iso3166Alpha3: 'lft',
-                iso3166Numeric: '8w6',
-                customCode: 'kihxy9kk9s',
-                prefix: 'll4c7',
-                name: 'v7jckhnopkaf07skbppnymto2fuff56fuwnbnj9lox2uoputhlbhd6gh4sf5waeafsj2ifsx63ovmtv60gt17feq8ab6dkygbj5g0pwc9zma66bifbzo9yxgnna8ohy9iiy60jokkyf0kvxdyn4vi4v71544z31sxn699zsdgjbb30db3nqfobyao6u6k8opexuvxh4enn7i4nl6s7eytyf1ktq4f25mllp0g7z6lv7793s6mveb0qvpiihlrr5',
-                slug: '4kom4xks95u8f8htdxg4q15etlt64kh2x8ijhp6fbrizl0qz8kglyk70qgo5ss4h32sanys2s7yyed3x4qctzb36gbvj6ymceuaggub4u4fl4bxy2k5fzwxic7h4pl1xhbvynkpp1snvgzujfc650iczr4kbpp4ttbqp7xxx5omsot9qmb8xqswes5q187akegu572byqfudu7wnauxf5f5etlkbmstdriuhtb4kyqago2aa2ixx657jh06q7s6wtgfoolnz2zhhocy9aiqtyu9yd1vyi5n5tgp1dm14v53i2ois07zr1vzwd5wulzbz254yhi6638aa7yc1gntf78vx321trsvlto634jihyfuqxisc4zzd5gqbw1zg4sqlmjufysg8kkl34qp5v2e54tpl9qy57gxwj9rcdtng8m4qkcpdpikpkmh9a1mg9yhzm4vkvvyyrfnflh9dmvhm0151rec30u97cadq2cgy7ctbpqrlnbs4nl5xqnn69eoeygfpepfixzjl4iduno9l56ka4n824oncwufvze8fbqyqw3w7xmxj19mfgarxp6u68brg207e9424svj7hfcn8f5ssyxgbgfeo2l51eyabeo192vroqcisp3yztxnew610vcjgu8khabubw9aod5jn54secjd2yq6zk927evtnl4fnjedu0cht0jwkfzfl8qiysp3jkbjkg5ov4tez6dy3lb8tenr6nlzphy9aqgv6pzxlgtdktbiu24x0nfwv536l7hb9i4n0frxn2v1d3gc5ozd5q13qu7wqzvzpqvlwevmaznqyp6vpupjlftypf51vgobub22rxgcrspnbvyd0d8p8exliyv7kp73kl823znrwf2jdnej2pp5ga6lytxd6qicu3pa0axsp3xwnefk6pqh45kb1jqcrm23ymm2ouj49gbe4kf8p8jyee9pj5kq1yetsmggq3by3ghng63vsdwggd68ejxaafi3sgwca5c9leo1qmqafz0f51wvhoi5',
-                image: '5qdw075gpuftqr5nammflasrjnpvl45bjqze74yerg7aa5vi7tob3bsx1er1ccfgtp8sv28h8gayhdm7pa82l0tx0alsxy6ihieyc8x1ljsidvac5fw7c9r43ss1matn5ypg815wp6082m66fw55h87lj3jbguo75tk4ha0u53hy9ojwbdew8y1q1p8n9agjk2jb2jnw0xbhq1z0cmk1n682bqlwrl0yl9g0lnf8gqioyv5tzmu9sdffudlxg96j8xtf2eembu719oxyne6ozyh6pdcdp8isc77oszecoske3d7u0pq4j8xidxvuqw5h342fpay5cgo3h0az4uyjh6434mnh54nxxkgcp652m4alouf17jckntxyf8nopiwidr3m3j094z2p0o7bgtlgiz83lqg4l2ojw7rbzngwo9edu5jxvoc6swoy3b62qfdef6qyidh4gas2mi56cllhnfhvpbclweossu34rttvuv1katgog6eltv992a38upsywynjmjeu16rcu4sqmblcp6dhic9gwgia0mibtrwl41rygy4mt2e8ainq96gbk5m617gmqeby9a3ceyqtxnj346jplz9ggg0gc728or4c0tlwolm2p1bn60xm0k2wzsym7icpsmc6f9e14t419joe5zccac3xqjj074y0fj84zl4oa0aoib67o4a1dymwvxpmpjgg1mlehjhjud17o20n5ut6uzu4litrzy4xyuxiuyrfwemvu43ykamee5fiubimqj8m295vhjlih3edvvnc5bbogtmuqtqodci45zjqo9u2bcquedfgdnbqfy2lunorrzsheuj5xdf9q6behl8okr7skjh5h3t5vukuhpuqpla7s237jx9db449g5hxqmrxdopcuoq3alnrmk99u1o8s9kg017nr8g7wymi6l2wrreqlx9yzejo468eelwkmakkkbx3z6qts0tm6ady647ul6q2qu55tnmh90uby7x2esioiv0rkpzn3egul2snjlwm',
-                sort: 979575,
-                administrativeAreaLevel1: 'qrrgkhlsadv0ttey4iwgm9gia9tt98qa54k6jxb5pr2hhdyacp',
-                administrativeAreaLevel2: 'epg4vpr0sm6gg4ma1mkuvb5kszkbit1r03dbwqi3vhciyl8sus',
-                administrativeAreaLevel3: '9ch4p3nhkl0l0fs6ycdt4e43hn5qnazttxp7d2uktfyaapy7fj',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'wi',
+                iso3166Alpha3: 'vw3',
+                iso3166Numeric: '7ep',
+                customCode: 'u64kmtimgo',
+                prefix: 'd0kf1',
+                name: 'xbtcyes7vipfa99nd8s5wrrvwllzwchle5vkbx2l14nk3abeujjr9r2zobny052amyqspw5rc9tqjzhrgmw0exm21r8sea7ognetwzl8ds8o4qsqo5axj7hylx46skw06rtoixv1faeshbu9s5h58eztqos9dsg7pemrk8vxgjl1br5hnag671mewblvsy1evlas5j7ly6puyxzmizz5zrqzwrfvekk8fkfqyqblsrqk2upy59u5i0i6txcw1mf',
+                slug: '7h2pbk6vzrqsztt99je1xhvjarh2nik9icskwwjatpf4x3sc3w8i3ixfiuf0277pkg9c4c5rjk80cvs1yhlr757f5nc1jn7bm27mr41lo0jg5vdry847okxx9gptyaf8jzszkmgcird233xyn026t4mydl33r9zr3c17iyq1d5so9kpxa4axyls17yfkffvssyoqnkm4orvt9vouv3txc4hv7zx5ndltpcsknsh8gu90l5qnjnz49t72hawpzane31duovpfpx10vvn9tkz99gysdksfcbrk2e2i8ugsmxft9lnfleb6jbngfpgf0kjihtp565fppiwvhajlv335ct7burl2wgvstjmh5xvljw2eltdpzhlaf0mvy5iox6wv2902rouwe2a9jfe3a6g2z5ntojiwwwag208v7kdkbt1ejxnc0sx3ups2d71e82gan9cxt1nmxv82kmifg3mswtef3r7dbxnw0bqiq2e9u57kdv0ucvonkl6e1s2m2vwcmzyddhvd5n1ex1vwjd5u17hqmaj3xt91e1jm9gv60brpolvsl7an9inwr84ccru175secv4y5l88nvh0xbdoa7418d3jo3y4ryycbs8hv984x2mkc205rgj0zpxayq3c2hamvzt5yjqrbjftfu0bdip7iwzh4wituws0nfs1ibosjz39kr6s2nclgj2ut1974iy4t6py0ratefjh4u0q3v7mw4s7dzbpqgtpp0hdu5rmrs8fuxfb870scn6q7d08e4ugn6j8qyuuxuac1i5wl9oqlm8hu9xz600irvkdrptwr3pegu29tk86410luxt1673fgnydzrdcu8l3y8pjyreki2scs5935tuie2ron3oilghd8dd7s9agyfatotgdkq8yvokjedvbcsx1fcvkiuthd95ec84v0i5wlme679j5w5iqjefq3itc5b5of28goack2xuzahg2lo5sbs8hnlolmsqunhvrdv5dntw28qum8j0ln4qkvf6xrrq8emut',
+                image: 'fsn6d8d6a5vb52kn745k9dkeeor3dgg3ck51stbw6k1g7o1fkq8c5rwiu1frrzfastseqlk8tpjcbbx4vl47qnuhj2afv00odt5stjdnu4xbumj0qoi3do8pb5wur3cf29u2eo9udbpwwk7bqd903cp7bsppdwugggnfnpybhrqzsxrfkiodg59xasy0j5ejmn6lvfmfhgl2cu15bvctgsq254gjzacwej0n5xd1vqqxu33nxw5w8xuc1xhgu3ua45nj6dl0ny7sk0fv0kbhf6ozvmpd2dqlp37jm8lz25ei1zzm0m7xzzab47ep7mvugjjqllincxhg9k1u4ib57fib14i8cd71jxh3zz6dewsx1xma0u377o4tvi60u4i0knww7966x1mbn17zz3vj7jybplufl9034spohprvzhsgppm4bqk6gkkkadk6vmrjvr0wc3tx6jm456wz1z2jgoruplmp2090spjahzwz75t6ds09ur988nuhmpl3ilk267e3dzxceb8jw2v4c2m4dyc5u1krgi2x1vzqhp87t04ggvelprg1zwh086vj3px4j1xx5d7mghivkn0i9esu5cqqyhvcxcwchtr2gakdxadldiw2l1h1a38817jj1um6msz7owzlpteieqthrx97p0rwyowvl22r12yqucsseei5hjucczxazbs7t9m4c0jgv2znccr080btsbelofsvc418yvr72pajw9n0crz80anyw61ei5p7ttu4p3xkxfaam663pgqx1i0tczmpxn5vhkugbh2b609k31l9mso8lq6mn77oshqq87rx7m1vfremslt1hqp8c5j01b8mcmo1lt5unofwe805m8g6nb1tt8tmdjxmp1b7o43pd50cx3xfux70g1op46n0649lb3xhrouw9nubvwf8o9q7hricz276y4rpkcqnrjlpabdvxmjc5sqpoujv7ycj2sftsrtkml3u0ade3r5mkbbii4phevjaes3682jsvkgo8j0f5anz',
+                sort: 757037,
+                administrativeAreaLevel1: 'ys3e6vvjnf2ba9n12zqhn3ibplwsth8qezppjz90aytusq9e4e',
+                administrativeAreaLevel2: 'fc17qpkssxir8hn5vvsn3uvfkjlr0lm5x3h8iaqxbefen9hg8h',
+                administrativeAreaLevel3: 'pj5uypcp5i8qpryab8vjxv6lpjwus1v9k6silyqk1lwpc1h9ww',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 688.42,
-                longitude: 11.86,
-                zoom: 52,
+                latitude: 703.26,
+                longitude: 419.86,
+                zoom: 58,
                 dataLang: { "foo" : "bar" },
             })
             .expect(201);
@@ -1351,7 +1282,7 @@ describe('country', () =>
                 {
                     where: 
                     {
-                        id: 'eb3e62fc-5366-480e-913d-b87c335e88db'
+                        id: '74e0d05f-b0de-4746-b59e-b0806237b151'
                     }
                 }
             })
@@ -1368,18 +1299,18 @@ describe('country', () =>
                 {
                     where: 
                     {
-                        id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01'
+                        id: '68c28156-77c9-4b9c-9608-c0482f39b339'
                     }
                 }
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(item => item.id === 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01'));
+            .expect(repository.collectionResponse.find(item => item.id === '68c28156-77c9-4b9c-9608-c0482f39b339'));
     });
 
     test(`/REST:GET admin/country/{id} - Got 404 Not Found`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/country/d79f7d4a-8ca7-4e64-9f21-c8fbf99079d8')
+            .get('/admin/country/64940008-5892-4e4b-b283-54b8d5d80992')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -1387,10 +1318,10 @@ describe('country', () =>
     test(`/REST:GET admin/country/{id}`, () => 
     {
         return request(app.getHttpServer())
-            .get('/admin/country/beb1a0cc-7429-4a89-9531-f8d9ed13fb01')
+            .get('/admin/country/68c28156-77c9-4b9c-9608-c0482f39b339')
             .set('Accept', 'application/json')
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01'));
+            .expect(repository.collectionResponse.find(e => e.id === '68c28156-77c9-4b9c-9608-c0482f39b339'));
     });
 
     test(`/REST:GET admin/countries`, () => 
@@ -1409,25 +1340,25 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: '9df4365b-7cd2-4b6c-99c8-2cf0984b5624',
-                commonId: '9c05eb4e-b57a-4f88-a1a8-9f6311e89c74',
-                langId: '562d7d14-6552-4df0-ade4-8c453b6f92ad',
-                iso3166Alpha2: 'dn',
-                iso3166Alpha3: 'mqu',
-                iso3166Numeric: 'ikv',
-                customCode: 'npvz9n6dwk',
-                prefix: 'emsbl',
-                name: '63q4vhc1q3f5mh8w31wvdgwnm0v13e00hmq4hzlidonuce8nki6wplqhol3szettyijc5qidtu0cfzknfeh7z0m01omoxfo1fnwm0app0rez6yjgpeg9k2jyjqahdkcv5mqohb1f6vadwmmsbfr13xeykpkdc2pxb6m4gttcolnl6h1hrfxa5rjzw7canhszvr0ow3lhm58cg50wmoovnv9cy1sibvtkafjitf2adxp0pxof8na09wudjf1zh29',
-                slug: '6f2s83y6m39fy0udx1ugkmxnt3dw0h0njrjtacbv7bmj4jy0n8op2akavc1smyx3p0qdg6g56mwd63lia6c22l9he0iciuof2rkd36h79updp9y3ypi9dxv5vqj593fhnzsbc1k5mv8blwoa022hsahu92a7ifo3h0ayrlcwfjtittf3vlmswe0p849hqawwdtr93hxglhjmjvn2ea2wokxuy5tmfij45miltkcxgk5urmsqy8nldypa9vkf3s3q8wzjt0y6kkni9hp5frbdlfuk73weaxpo32kkdfyyn7mb1iaooc6zkeooz54yaju24ljxnfmporw489otpblhb8qmrmtmqluw17ciccnvvoubrgscvm2rzozpiw76ywqn47p2ce0r9gxag3foddw2gl7uml6nrq4d71wc5gc7dx38wool8q1nlfsau3abtiojmelrotmxltmimbnlxo7biarphn3l6b1nzt3oxq5i3sqxalbpgg86idd03esqfus1s892srrv1sa60r238jo0dk67tcdcf5qk3d1ir7y77h1r5toic4fhl0bdvom5qooz483qd73rj4f8pnyul9dwmvo8r39qyvbt68985ud41whv25p62q8nqadg02yihvpdy23mkp2imgsjqmnv1deks1exvcwiaw9ysdxx6zwk27m1ocgvy5pvea673kzvf4bkrfwhvfejj7idqd9pm00ndwc1uh59ogq3imjj2mzt37dcxcr27qwhsjx7kbhyu6tgoh2mahkkgozeck4ctcr51l6f4sv2jcku6kerq7kk72va118tc9a7ljm3rt2f58zs1zxhoe0pp5jo80h1ev1hk8bivv1yazu60iuvltwxdks9g92poc4cacx2nh5a3p15z48lmofw0qqnz8p3xhq221so7z6ae8pmuhaonset651e3yjvqklai67aj8ds6bmyivbf8e30w75wsrik2tp8b026to6owaqqnid2jpg3j3uyoj6y3ftsfjc7ca6xatkq',
-                image: '0pero3uozz4ybjwv458dboajcjb79ey0du3uz6veqou0fivq02zswkcc4ib3lwe7q8fm3es35izhu6wooy7wrgao4iul2n9mfvytighenymlo7ghh6jg0eeabuun18y1stlcqiilsmafikqdbpw8tmqe9r6u84mdgwt4av7bzt1qiee81oyb7zfzme1k8mlnuvmm7esy9ut7oeg5j23vxtod47r24fxboj6lbvx03jat59dobo2vktofedge4kppr34r3g86eenvrkabtv3rops15i6zw2815w2w81qqrxsd8d3zo8dppy293d93lfyj9xpmdgw0o8ojoeetmddxfpz9czalxzkjtyatzigo4ka4iqt6ut4yvdnm0t7qktni5nd9965yfmd5k8zu01po9fglmaeh9675qbkpx255v0pnaqemh9l5qsho53arf5o8frits3f3ucgp8cm9nn7iaf5av9sb29otx0mqnmmlau8j8hrcvd0f8k0hdgya625d5yatjhp04kirpay9pgbgsaz65g801496slgvef4khvfiojsu1y9l5c8hs1inqt0vfm3z6l3uo3e9lg9mc8h5i2s1mq2busl44q6h47o2fw1ki51f8snl2m2997woky9ra11ghtiht8o6soumavy97ykovuva9od2ndtti8357m9prb4bvtheraj3ty3mwueu1elgyhiunaeruaaekkxuadz2sv00mn2uicwy0vx47gof5js0o7kun7ogj6recbm1w0ft6ekpesjp1tuu1gvn2g97ea2t8qimxwuvbsxh8tenv7j0twpbdl7ec31ivgx58ctw52s9y7ifsd7g7xgx36iokkv11w4ibod2rid6mf71yldwdlg767d1ctnht7t49uuqz3s4wc9275zfjm9aahfgin4mzneo9n82g5fmd3brgd7bshepdq7o5ndm3zz38w3lhvdrcrebzo014pabrxpog15ift6sfv6gxtibw2c7he3v5kvhzrx7sipb2koq',
-                sort: 475753,
-                administrativeAreaLevel1: 'ukbfiv0jj9ltdjqioh1w6iooowgt9ik4p4q965qr11q931nfpx',
-                administrativeAreaLevel2: 'g02kz9937tcv78bq7pbszey7qzfn1yuud0x53iboyn8n87s3ft',
-                administrativeAreaLevel3: 'vd0220c5rjn4phhlw2147bsvcpws07eri23vx1o0g6q4zajcz4',
+                id: 'cac5bc1d-5923-4b5b-896d-4f8ef9ce4779',
+                commonId: '28606a25-349c-49b7-8bff-531512308087',
+                langId: '6ada8d87-6b23-4931-9684-6322ce29bdf2',
+                iso3166Alpha2: '0l',
+                iso3166Alpha3: 'opr',
+                iso3166Numeric: 'e88',
+                customCode: 'wtmqj89gmw',
+                prefix: '8464g',
+                name: '295iirwb3yjf9vkr19j1ak630ow3cgwu17lx9rw0miar9saatwgctgviax1hbxfdrpwura2gl7mitzuqzjx0b2dko7z7dlw0grk3iy6r9psltknem1nggvc9ck6va9bg4pcpx8j3ovtki27xawrt92g4qd5esjxstqj88z1gkd06goku693ou06jbqagtmniujfx0mwytklxqs6kss2obtgr03nr993i2owcdrajyvq5184r1n9qoe8dhb7bej3',
+                slug: 'bzxhe6d592g2a1w0ddwifq7146q3l42k2mdy2hnm42jef4jw1ry4ih6q46zfs9lhyhvs5hwni5b37kytrgq6cw2twos9dt736kqgqnovxm2o8zd9m8dyq7exhq7wwijl08jz5fjdbrddslqovvibu8fj72xxf1sd5xtkipjrdaa5va0aftrogfe9k6i59iy78l7cl6vf36mvwlm0jziqofppf3jkg8rv3apfqtvqiudrqse84rtnkxgju1ldl1dgw61hsgrwkkyp9kdbupzkrq89rrxkfgcqc1m36g46he301wgqea8hcmxyjbqzxcr92rps1t01xkt3ibvcml7pz5fnqbz0ignfnis2in0c5ri86d60b2terbnvna6wrusbu8r22kecln171dk1sxg9c4thon8odq0yvix0n39prwletazfh7zpwijqcoaxe9705xrkvumzfa6eqxrajce0gqhinpdmdxe0txtyw9gm35qzse2g35y8gc4dq0v8p8vtz2liyy5h4d3dvg9s43jjb3wgdx11nlfamklv0kgg73lj4lcopfo6keeg4jwjmvp6v9547e0lnjidy5vy3qudvnsqktscn954u1v92lr3dt5cytnn7ugs0pwipmorki5rnedhvqfwdyr3a2ditgbtatevol2wsg9qalhusoyu3rx97hv0pvpp7gnn2tklfejedn5km3wo2e7fj5mounf07p1vbk545t8k2tprjauh5pg9h7dtvcp1m6oj7s4vtvdzo6y8fag0v3bcwfikajkto5qtd4zs09r8y8c2p7v9hr612xku28i25h4l3zck6hhqjiike2n46mj8r5pw0b1fkxe3w0nlr8khfm7pfvzircov5v38jnnnnnp6znjf3efvq0g043xsb24k6b3zkqmllf6vlkptoxzblqg1s6t6jyh4n7evsybxvos6lj95a082uw1ghwl5kawhq9kes3hvn8uemrs5nina8pnv0nc3pv0qg1q29ip56t5lcmo1bjkx',
+                image: 'dl48bvjag3xn7wk42vd6im3ahq7e3nke1kio2hfewuc9gwwn1th7rvjow4pkvuhqle3ylvkleh9epegrxo85ebb6zyusoevissceziz2l2zwrf2ofki3140q60ho9rcg0038zbp0zo0ynok34fvmdxoavypvk3qo4fvb9t4eqpjl678t8qp4oay0vohirj7qv8fobvct371ohjlo1b80oviw0tw3yh0mvq8gh1ipw976qgdmj0a1vcfn9466rahpsxcki5lrd2j49foxrvjprjxqkdg8ukynyx8ogqj33usri2k9dx2bdz9zlc9zwvhn1esiqnbiumhh9n2eah9xg2ktgbzoe3s5fkmf5pi4nm74xn4u6f1s9snrdvby1cttwnhkdlwfzcpz9ky3ua42c0s93cekm6i45lv0l3be255hs1h5p4uaahibucn1xfnqdut4ix98eku7m5otoe5mkgimctfwie9sn34k9insg66pxsl3e6fusxfbx3gnuqujlmouieu5ar1cnkrds4bronksl0f47096kh9kgr830efodl2lhq2toe905eq4nb5uid41knfq8f91fmz8eozenz0mpkdkvqh8chhpbwv85yh011a09e5o91kt9k81i20pzpk9cbsu91romoh900fr8d0t15j2m22szgll25cswwzd8meh6a3ti9n893nzqg31cxllsv52952ds2cfodxsiv7kxqo88q2nhzgzytjopxguqppv96m1fig1uemqt1kjr4hc7mc5r746hykmucdiubc6h7pdxijta3agh4vhozfvvz4amvivk8w3jjpyg23ulepn84dzk98z6cymwf6zys919sjtg17k3hprgjy3r5wi0ek56lmh5ki8j7wq2fgojlkoq04qy2t4nrf0gh2izpzm4875ydzrdc3rpbs5y3ymsj31sl7dtgjd4ko4yfo6vn0uhud599noc6ext2lc576sv8itkohlyd8ez15o23ifw0uqa15iqxzi3g8xkw5g',
+                sort: 945076,
+                administrativeAreaLevel1: 'evwrq288db4tsqlekni0vp8munuel21rrmf2gmmm290861xwbj',
+                administrativeAreaLevel2: 'zwf59j7492tbee8xzesuhhsek602fgkoh8b3hebjc8ldiodeok',
+                administrativeAreaLevel3: 'qyuhzcthjnk273sre0xtiosrbofbu0gfiin0zhkgbqlornj3iy',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 279.42,
-                longitude: 212.99,
-                zoom: 10,
+                latitude: 93.46,
+                longitude: 591.19,
+                zoom: 54,
                 dataLang: { "foo" : "bar" },
             })
             .expect(404);
@@ -1440,35 +1371,35 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 
-                id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                iso3166Alpha2: 'rh',
-                iso3166Alpha3: 'l1h',
-                iso3166Numeric: 'wlq',
-                customCode: 'ql3bi5jz8n',
-                prefix: 'awyu3',
-                name: 'cx15rbb9o114r8r8nppo97uh5q18v14pjzqmxvm3yc9tptrunfvvwa7fkwne10yl1jdnfhsi7cpeslx4ii5kkvmfweug4ekwjehqhju7uud6alwkgn24atiepbj7muqixufm44j2obofe3kwa7rpczqjgbjobprh998ydcbyz978iu27bfzux4csrwaacw8d6kknz4aao7orwcdz82og9tfa4bjb673tkny76s6136p91gt0leyb0drx883os4k',
-                slug: '0qgkofeh4lqblesieg22h7773e5f0l5qku8skrnh7ht65vxqf4ocsflkfkank3yhi90ru8wtbqhn1eynfs9b25wkkut0mxzlqhjyflsqzsgdgqcao53izrenjeguao5ray9lb2vk7wg9qjqm2u0msgzr16ugtye3yo9penrekeyv28walym7r3vtp2e70okgaht1ly1v2wbo6tu2xxob54jrb4puble7xt7roj322pvxjja2v2hogbd0mv3cmdma5hb9sd1d5byjuoelidxpwbkp5s5hvecsswll1c1h55uenf5h5m4xrdjhfq2c2dfec6j7lmpjckleu6zp1x0832miz1vtdf1gkgf6682kb6mup2kjv1gewdv3hcd1phr1u8cwun8exx07sj1zvlhzudfz67azuvv796zqwctrbg6auzcdu59jk0863e0srdh97acob3w0thvbdfih7exlhzcrwwag6tfnsviig3svlnf66dojgugxsf2bnjpvpxdsu9a22p8k3pxxgdyggf7ftmn2ako05kuv0e5mrpeqanauolddj07uhoz4x8mffjfwfm8n9pg11w1mhrccw81c36shsc565vqbot0m833rx2hoxy3y61uff3u6yfz4d9g5hx5l591a3gjh0xq03ohfx5ew9gqtdu84ru8v5oai0u4nbstphf39k1c02mfxl9xaups81hua9d4a48jsjbu734kxd8wq6rvqj0l4xxwqsecamu4h1oyleweo47y1yuk3ph3xug1q3n6lysf2esctwyxl88pzm524f42quwjw0113l5ru0urdzuzbl0oa6xouf938qlyhs2wwz6br58zhifjvax5v24xf296703zpx8k0ys71m5oo1bt56rchbyp70nvodvuw5wd2dvqck23tpqpzbo1cmexlc5nvlnv1xr0fitqrunevdserrpcvecm92b2um0hduifiwbsatyen5vpm5r5beeh42tmtkhq0cgk5rysko8vpxlr9f3jbev1r',
-                image: '0b6vwwhvj8kplahqkabfksosso2xwja16sv6tfc8enuslfu3ye5pna90yh5u8f6afpe0exryb6lgq24x2c8he8ih222qshb8fk0jw5jjgejq7bt22w9n0a4d6ihnveouzptw06lu3s6fqs4tgngl3aelps3fnhkvinhoq0wyb0qn4llf4rixv947pr3zs5vuqi4bcy8b74xkivu2gm7zx2ad38vbrr20mk61pt8ft3sve3zj9pf6e249riq3hcj3p8zo5f83qvpmwmk3uxbyvi1qiq2piy51fr0x2twowaqzhe4nqps2dkuzm9l8cuu05g24m0fbhbud45sa97s8ikkuu39hpsltnb26ag91sr7fxn4ouu51xlexhwkqfxv2gtprhicy9il9zw1nehsepcq9dj6p84nv846zn9z3dkjagn69ac36dqihzozkli6xfqz6i0sra8zevrwd0n6q8verwgouqn0nvlzau5pto48sprzfczvv9cckqh0ryekhk2fq9jhck0za73hzd7cqfbs5qcdeopz59ly85fe6cskc9xczbizq4xmvqwm8be7xda9qp4vhnhbj16r4f3lmtg0a3c2sbu6gcfke20cp3jvx4ep8fz9hsv3r1kuty2ncudczlihpyffmk5gcype8x3e82du3l2nuogznisj24ctqc2l8tza5w0modvx4lw8res2842n3f8swa89ktd1epcpiaqryjhbc56ji59wwy40o1y2usm0g766s7kykgnqaguf3mpg59z8tu2nyi48gyc29hhn3hy4a5voytv1ii7dfounfzccmpyq1uvedcv7iaw1hqbc9922dqzxk7iw1406g4mdjndo7zo6iqrya7jpo2bfqz9gzo7xv4zcoxkacr552x3dcc9ubf86mpaivf2qmv4p0zlj3l8xy9g72eo85fdk4g7ae1gkgqex2cyfc6tygfcmn3x167s6gx707o62hpe21ir90piwui5hvutdei281p7uv2ev0yv0alm0w',
-                sort: 816760,
-                administrativeAreaLevel1: '0u7c4u31flw58popl21b4vziyzgua215wpwfudaf44j6784gfo',
-                administrativeAreaLevel2: '291oiumzri4z5jw30y4wtnarm930v2fcoe97jpeptcnp3gfw2w',
-                administrativeAreaLevel3: 'jmtukdu8n7v7cgpesa7j8z5b4udj9rfem5g6god72jjetaphks',
+                id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                iso3166Alpha2: 'xv',
+                iso3166Alpha3: 'rrt',
+                iso3166Numeric: 'njs',
+                customCode: '4ukh7z9yym',
+                prefix: 'uql6i',
+                name: 'zki4kvx8abgobecrw54n9j9bd2p8xprbr0ren7n690l71ffgl5psem7jzfq040azos1dx0xy4g069la5x6v5xou9vfaa6tf9qg20ss4sfqnqwplt084mgdqk7upf97zw10wsd83d1bfknvywzi9yv33ho9lmhnj52nmvj4u8lqruenu6jgq1j4e9tus1do34fel4xky5jxyu5kdcksn8bpp2i7480hn3mjzbbe0vnklbj0ib44358nx57kgsc49',
+                slug: 'se6jmf2urolkgit13mkyqf1xk8z8aqklv26ng4fnkh1m6tb6h5af30ho88wa2k0gptpuoftw7fwzm4um6kiwqiu4dvz48awxb6x3liq7aht2tg72fhsjso45tmb315ptk4znoi7bnrbm4siriu93lf86w347y6hgu383m6v4uvqrels4lp7esj7uxif1x4f94y51yuojsmxn16cuj8to8ktfz93em4xezl16001n67eoaluqhj2h7d00f1rp2kpjofql9y23r24vfuh2ykygexxx4x5yxlneli4n4ptydn2829jo0a8vld83y9d3tadmmurdh2igfrgeiarbf6naiztbvkrkieznt1vcnc7ea3lavwfk4f05laviqbnsdv5icnepwra1x2t265earb9pozn1gbx5ookwpv1m2p4vjckmjvyxphtms2casn3q1fia6v0fvma8zslfu7rkjh32tpzjfo5f3s52bqg7svqbrtqqiic826fy0dwm0b90hezy4edw7bjyli8igcs0eu6sajorg3i0oiawlt1iup750ake0p7mvxsbfx101ez7bijpuk888hs98ep96uc4046pohevu6pumw4p1sbie7ac1cs03140i8mqf51hmx95tkl63vh298aqpt9ef4m9oe0cwmcrdrpnfojcdasfv73tibxs9hz6yq60ple6iy9iv2c17t4iwp3x007e9ibe9pnfbfjvfv81kg2583bui7aoossf7kq8yd6y45srrf3dx4tpmk76dnyz4os280dg3z7dju4bpgk6awuecymh7kt8ycrvryjchmrnsi67pau9y4rykgeeqxf1lpd0zq5p5om1pygwy98o2eskt26z0fzkpdpau19h1opqwvtsiz87axihdtyss5co07e6mgoukcd8xbjqlqerwqqoebyvglarh9dq4vtkc99nk04hk0v9t18avj7fldxwgtu0ski4rvlij70dnnw3feggycgoglnd55umkp1r1swit8ryutgc3rqu',
+                image: 'hyzhkv67ojgiclrse2vw595xfj0o45ob85azlujmrqe8gqkn6gq421xymlzllml477q6luz13z6eaf61sh6mltlhjcdmk98gkh0huzw7pt9i1hp41ch4luzbi4wotrn8bh8ev490rwu8vdhw1tnu9obx5juqi3fjxv0ol8pnnq2v8cy11z11jy5yzta099po6klyskmwvlwvt83g4i13dce5x82ifif6skwocz52m6wmipqcdq77e3g2gfj5f2vsc1mxhvt74a4x21rnxpjyzg44nyjw2jmwpxe48r282tsu3kz4iaborddejnf8j5xniap6m7p747xwgqi7wdgc51xjql5dizdklcrcsz0z64nkw7djgfxr7dy82nhsvl4osz6my3axv6j8zt8l39y78v2dlw5m472ti32j5uxk7w66sdyxenq3rhtf0gzqedomg9ebhguu5ys7i913e6svuxp6s49565jx5v4e5zwn1ttc44ketrf9n5o7c3hp0xu3n0ucwdqwa2lwxfe627p24vpm3ljxf2dife5g84vll9h5vzutqnaivik25b5hmwdr7icpsbljp3g66huxa91oyw1fmahxk4gvg5h666xd58nmdilnpuwmb8utxgwz6gzo7hlni6xc9dulzpzy0zcrrtdjmtsmtpxg0cenbp63b6yzyd98bje0wiqeaq7btf60ojop81eq57yrkuoj835znmfdex3pz6vjybrnekmrsa1bro39fa8dsw7y9u99o11uhbbiuj2ljro8oq6rclwn3ooy66vykjr8ufttcb3zfgq1q9zow7kqm1xq3emqraeaxsxvws2zrp77u1mh81jdca4kstm27dxzdyumr0ypb9h3507dlhzi6sknfve9zz97xhk506igcplnfc107a7q1igim75c74horz5m0jp1fkiob2gcqlhbkplrjtfomjp44rvvwnmvefzeuwu27kw6bvs774wyjt620n5nf835sbmvn1gblkd8nj1watrydiuq',
+                sort: 760801,
+                administrativeAreaLevel1: 'r3aa1felz7ppyfrybw2iccwagl14h1vjuzuu2h70m1ts1kcj6n',
+                administrativeAreaLevel2: '5g7y67582xkznfhj01bl10vl10bxhqgxbms1ou550mqamen9lj',
+                administrativeAreaLevel3: 'lwzj8cpghb321juz1ploj253bogu4f5dtvrkoku4xl25mbj82m',
                 administrativeAreas: { "foo" : "bar" },
-                latitude: 164.47,
-                longitude: 853.46,
-                zoom: 88,
+                latitude: 242.31,
+                longitude: 539.55,
+                zoom: 63,
                 dataLang: { "foo" : "bar" },
             })
             .expect(200)
-            .expect(repository.collectionResponse.find(e => e.id === 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01'));
+            .expect(repository.collectionResponse.find(e => e.id === '68c28156-77c9-4b9c-9608-c0482f39b339'));
     });
 
     test(`/REST:DELETE admin/country/{id} - Got 404 Not Found`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/country/3c0d2ddf-c02b-41bb-95f7-e148b9f1a4e0')
+            .delete('/admin/country/9ad41346-32ef-4141-b7b6-d4d04c5f66f4')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -1476,7 +1407,7 @@ describe('country', () =>
     test(`/REST:DELETE admin/country/{id}`, () =>
     {
         return request(app.getHttpServer())
-            .delete('/admin/country/beb1a0cc-7429-4a89-9531-f8d9ed13fb01')
+            .delete('/admin/country/68c28156-77c9-4b9c-9608-c0482f39b339')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -1566,32 +1497,32 @@ describe('country', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'd0144f8f-5b99-4f5d-a5e5-df07037e0502',
-                        commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                        langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                        iso3166Alpha2: 'ko',
-                        iso3166Alpha3: 's4w',
-                        iso3166Numeric: 'dr2',
-                        customCode: '5ywbnse1n9',
-                        prefix: 'yikn6',
-                        name: 'e0gw1l7ymms9vdm9x03h8vpfdvgo9pju1qsyar5pcxrgyrwjv7gsj69uxv8hvhobjkhg3onqr84kp0lh9tg4u788l7apxjnd2dl7x64mcpdzcpss9em0h6novwlbqc3gbeicvyxjjkbwdszev70f7zp4gb2hiumr7sfowh9q40j280vy6fcwidxhh7og2rg7d32zdelqjy0fmmaaxdcyt4964y5n6qgcbpjm2p8bmfnnd9imrfd8fohprls1a2e',
-                        slug: 'dg7lwhp1ptnqxsea63ka5qyas8sdwbq66zx0clju37e2ref7sj0pn5i26dfeq7jw71030e6taujio5nfrbd4gejt9jgyom0kbe1gcyirtz0b7u3m4lt1bfasskuk6u4wfhq3m0ae384kzjzub65dwq7bnzbfd6cxt256ntva2obj65ro4arfnme3ghj3lszatkansc5yxxj41l16byni63v4cfa2nk8m4tq0s3lmysykbg03pj5wd7zlsqia4yfu77osizho60gb831kcuxy2gp8i703odo0luksf4avdv4ooy1hltndm87ge7qxtzp6qecjp8a0bizmtyqz2rpzviyija8jlycss4rib1m2bxu6wwmjuec0tsty41pg87av45rhr1qldblemmqvjfsbtcz2eo2zr6bvz00ycrbe7phsphrpm8b2wmnyl08t98cislezfqeb6wipbsnlx7es5ukd4i9kt1nc9qizhhylx3xh6tby17373tqhrkhmkjynbwmttoylacoagv4rrtfpvl26cn0ubxjufdqy5wqxj3eaieezvtzh8j7q5gsps5pmo1m63hsmm9setpsvhjl9husvcp1hm9oc1o4mno9ahnu542aimzo6bnmjjitvlrajq734p2jvsqft0uba7q3g7ek5pe3lapj69qjageip0lwvwmukza7xwaj6kwam9jxf4y8svhhyq9bv3914xecnxrzjx7x7vslf5lyqib367cjpfmwneh8bg27uktwa8kwxlu6z2jwjhkq8rq9vy2o4s2m1heql5vz2vpptywzja8h18yvnt8gg8hifp2r1zoaqnd279pxomdcsjdxpee8ikytt6waaxtgnsliuwduqqu2kbej1kul9z2gqb1ffgwms12v9wbxbivygt3ql8jtfcmuwdkwxtuyd7twykcaalk9ytlm5rkdj8a607oyqo5x3blu0ug9kzh718aghg1ydgfltgyqgsj2t5wdlnfxxol4ju4moehk5n4vex19qmivl',
-                        image: '01xq48ax3x6esbjoyet7p0v2foa9e9xgk0hkk3ytrs9gtm4aaaqur3yrj0m3i6swxbivp72iwkqhqd9e3ugmh8tymndlv5s6y7mmzpzrioeo9eex50gks3jalkx88ejqbybi09bjqgcdpsfvsj2tusmj0fvjsi8fiacy0uzm15qv8xacrbibu11c4xja24npegkyabylzqvxy5n5stz2umn71npnxwya62y6axs4j3e4ehaminv7bjznkwatp4a2vd2r3o9ka127zssg3elagyinc9k3h5rmtcubwlpwcojn0ffvo1p5c3vku3gaoedvu8oblhpxyppnljht5ygg0ts3xuiafcuc3j3bwrdqta5l291h5puqabenarz6cq1q8bnknhpodzjrariy8ts9hur3krp2b2hv46fqeba2ywzb21pjv7immyaib5e0rp5cbqoaytcum1fxflasuv1o3eumqrus83diaukr10t65o0co8zs1krjntnrpzdrehusq0655heiiwaydvu6r7cew6nxfffabgy0wybijck6zqvxs0so8qp420yutk73h4301vba1fcdg891bsx3rnc3111gi4p1q9d8k79xuoqojex9te6uwuey4hs7ox8kvlp0bm0fl1tocxy9clgbfo2ki6dxtr0sd6yxfdu82ok26uzxm9gcjgh15az7un17lbhecz5hjt9vypkjyvcgeg4nabgujrp1cyp1oebuv9pdk2yf2rm6hsuzyvqbnoihvxo1pl521k44mwxlelfhuciorig77tohy8r25j2qfjqr6riw7q4vf7og46djau0zptr1qk7l8bc34fqr5pego2x9yhd2s17axypd359j526enrmnmzcla4ev70r98gnlsnimeof3w2ki6z6i3h7dssnql28hacmrb4d4ubfid8x05sx5gyfog1hr93d5hj17e9gyeouce9kzciz295xkt573rzd4k8np84nkujvykejodl0qrf4hkm7hzifu2ngantji',
-                        sort: 223516,
-                        administrativeAreaLevel1: 'rxqv91zw43nmn0glvsv81xy3d81vaidf6e2e6ypljxcfej68kh',
-                        administrativeAreaLevel2: 'w78ulamesaw4gnaaj6hqlhsi3vhthm5ma2b2fgu5j6ipw6zo84',
-                        administrativeAreaLevel3: '72xhn4ch48wd8y0ts6jgvdrn3oi9z6dmpxgb666eiaqdwok8c4',
+                        id: 'e4523777-b907-423f-8d07-3465a74eceaa',
+                        commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                        langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                        iso3166Alpha2: 'by',
+                        iso3166Alpha3: '3zp',
+                        iso3166Numeric: '0us',
+                        customCode: 'uhhmfbeh0u',
+                        prefix: 'lexym',
+                        name: 'byfuhhyq8z49idew7jeaqney2ngrqgb360s1i4rfsep79facpbmo6b3yre92hwyb8ksc79d2piya9z4nx756plk3t2c1tgclcf41k5lofkrjq7b0qo9ux5o6dn0euq1ce2l38l5s614qnh9c2k3xsdxx6rqnb1nqsndrqngfdw1og81vhc49c17cnhr7p3i7514lr2k8amwxarfunjfzwcamh7i0dqtyqi6xvxhk4alowkzlfm4veedak74q8tg',
+                        slug: 'jhzuc7tgbldhsbs3sdf0n2jc7jfws3f669qlt22o3v7y926cf3c279649t58u88jd46q24p95hi31vqshgbol2ir6652gjj1k42ff6w94ycuqps8cbuncoegm8rhqqfnt0nmpcw2ohxd3j521pm1lopdgvkhv3ia4qxn645e3qu3ko6u210t8vuhdnqu1eslyfbx0h81atww08qsrj6umro0z61v6iweb9qwtkngetru4oia94t3lnkwxrrj1zf2yumvc65i6mfgf13t732y9ji149g0buptu3e3nt01vxl6g676ls6gzj7di5oe6xljedmtjao77exr4l94t7w9cbled44g5zg5umv8cjplkbmlzad4lkpt8q5p22i3yp3jmpm3ofy53f02b2iqpa02jjx49icmlicmohgoxsltrbjbq0g6zggewz06ewuoghofqzbkbquif3w88hv4b8c3xbjoyshumx21imyn7v7yvpz75fyskqfh8pqyctdc4ldy737dohv39wmm3h23mt8rnwiy2wbb8rdfk2jg5h0myee604yq0kww8ri8itzjxx0num223ohan08xfxzgb754q1itmn7dros4w3zeqfmtwuedw8wj6y1gewo4m47x78l7v6zi4lo29bk9u58v9mzoplrg90f39cctle68yf6if9nq6iem197xek7nql23auhw3psnoqbojy1joi2k4k1kymvusuorpw5daazjkrr5ex5e1c6gsc80pxvamx9o88fq869xbhcq94k219v3st90b6nyn20giiw91qwzdckse1jpch2ysury5kv3tbq6ld7w62l55axcxk94xhjoqxhk9x796ok97of4nft92izmp0o34h66i0g4epk9jwolfcjcn0p849ch4d37haa9jegcsfq8rctqnnay7m3hg1s8srhkg9toi4dujp4egblaapxhk5cwz3ij00u4oxnl0erj4kgg8dcm1aswpi8ywb31rz4jm1sbcc98jles9hdcomgi',
+                        image: 'ixdn5odaqcok5ch0ko2m25q4j0ek2m815a7wjjikwql9am1jkbpiso5pupyjdilel8unm0wf30db7pfrk5yvdxnpm2y9ndcmg0enuta3c64p829uawtg28l1jq64jo4ggula5hh7vm0139054lkgi14pedvjfwo4xpuxd23a682hpjhizl2fejkbf1fmce366ppkklmuhtzhp4aixna1g4l4zm7lqw6890xkctijuf3f7v79htar2im7mqjjwe3cz80zrxsrnj2ho7dbxr0dpsy2b9vdnd10bpq2u9unie95mfloc6ojlz6g6nviq8ni7j9bj9wajhd4azj471b9rh8vk8ybczz6n83ogypec0mzdy0pa02s344o5ps6w1t4873drvi4s0sj15ywse04q8vkm9eyyrfuuvoiryyjaj3egg93d02dobodc4oyfzgqcyh44atb60ud7atdlu34wudyrm93k33uveoxu2rtteohvzbovaanzlynl41yb46y1yehkf7qidybsqbu02miz3v6qurnmhdjdqusxhnt400w34bkmh3xx23tlv4noyeckcnr3e60vi70tb5lyecvfhk6mthztgh005yaozft7jw7bqlbkpisaz3ngg0uv5jjdzrws7o8wwmx6c03j3jm8u4n91e70vpc6xcfb7kpjgg0gh46ypva4vrflvrmh80ygwgpbguiz9li3450148zn0xopsgnwdikv4pyznsu486u9n7basckuwtdcttby3w6hda6spos12tyrv4tn2imprxdlijp008r3tes8b29qw71l69el4vg59scjhtve2qsekik4lusj1atjlnzwm3z6ekz5g4oae96m23yb1e22229fo77ie77vb980gdej1cgldu0c9mnsxjbar18u4ahxkcyhoziz7f8b11q6cqp75xt6cufgf0ceqtpuir0icojrgid0jlmh3bs7puybgs4bivggs8jp00b8xfbpatw69yu2ds000e2b63u66t8goja',
+                        sort: 921185,
+                        administrativeAreaLevel1: '4bkbh5tp0cx2zbbrk3ut9d572ebzqnnbvdtugi64k2xsasd6j4',
+                        administrativeAreaLevel2: '50js0t63xkwp0j02qi82az41pnx99zg373slow3f2jk1mlprsx',
+                        administrativeAreaLevel3: 'kq9srmkx6ectzn8ewnpm37sqlf67l9mmtcsnugiaiyt267kchm',
                         administrativeAreas: { "foo" : "bar" },
-                        latitude: 112.55,
-                        longitude: 404.65,
-                        zoom: 45,
+                        latitude: 278.00,
+                        longitude: 880.77,
+                        zoom: 48,
                         dataLang: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminCreateCountry).toHaveProperty('id', 'd0144f8f-5b99-4f5d-a5e5-df07037e0502');
+                expect(res.body.data.adminCreateCountry).toHaveProperty('id', 'e4523777-b907-423f-8d07-3465a74eceaa');
             });
     });
 
@@ -1670,7 +1601,7 @@ describe('country', () =>
                     {
                         where: 
                         {
-                            id: '4826f2d9-392e-430e-893b-43e9925a251a'
+                            id: 'f8f92e46-e29f-4d87-8263-7dd02797b51c'
                         }
                     }
                 }
@@ -1724,14 +1655,14 @@ describe('country', () =>
                     {
                         where: 
                         {
-                            id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01'
+                            id: '68c28156-77c9-4b9c-9608-c0482f39b339'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindCountry.id).toStrictEqual('beb1a0cc-7429-4a89-9531-f8d9ed13fb01');
+                expect(res.body.data.adminFindCountry.id).toStrictEqual('68c28156-77c9-4b9c-9608-c0482f39b339');
             });
     });
 
@@ -1771,7 +1702,7 @@ describe('country', () =>
                     }
                 `,
                 variables: {
-                    id: 'b90648ad-1905-4209-b780-49668c24458d'
+                    id: '102c9849-8837-46b2-ae02-1b43128f5033'
                 }
             })
             .expect(200)
@@ -1818,12 +1749,12 @@ describe('country', () =>
                     }
                 `,
                 variables: {
-                    id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01'
+                    id: '68c28156-77c9-4b9c-9608-c0482f39b339'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminFindCountryById.id).toStrictEqual('beb1a0cc-7429-4a89-9531-f8d9ed13fb01');
+                expect(res.body.data.adminFindCountryById.id).toStrictEqual('68c28156-77c9-4b9c-9608-c0482f39b339');
             });
     });
 
@@ -1911,25 +1842,25 @@ describe('country', () =>
                 variables: {
                     payload: {
                         
-                        id: 'f7107921-df3d-41b6-953a-4ab3a5dfb575',
-                        commonId: 'd70088f0-1068-48d5-a205-8d952176e94f',
-                        langId: '99fa37e5-ec31-49bf-84db-dcc637c6d3c3',
-                        iso3166Alpha2: 'tw',
-                        iso3166Alpha3: 'md2',
-                        iso3166Numeric: 'ui3',
-                        customCode: '9ngljbnz1g',
-                        prefix: 'isc0w',
-                        name: 'ewd6vxr2nkppzshal5t3i7mbkkpfo6xct7okl5dg24nv53ln3o1x825efy039qls9leu5dfzzjpkjv4g62pdmr2896iytibgkm0ute95dp1rmfutefq697b0hi6wispmn1d8qubuzd9lrnghg4anxn5aihb6akqfhdoh3burc838qrrirm79b0at24t2y133xxiiiavk8cdy1a29wo3t3plpyuftnoo9capopajtn5nzgk3w2r9hz094xgc67kw',
-                        slug: 'mu1qgnjfluu5awxmrfjezelfthcpnyytu5a9yqj9q8o17tm04kv9284w77x7c9k8ip71gl097601obbo6t2jqmiudlpc738ct3fnbtnsd0p6ebapfzbje4ala3bqvsx3dqx2iib5puib535ic8iph16j9t8e9zst450hcv1t5ekpu0063g7g367jlljocxsjxtbrn6igyxgqfwynmrzi5m1ngnrbl4aiwt9sqbhq02swq0w0f7cpwc6nydw9yf03by7jfzdz11xnut7si2jxsn9blopxne6402tuaw60dk8m0biciup4x8m69vsnkeq78wdik9gecuddl6fwjq7gmhajr68was7f3g6yggpr3xmkoed5nle6juauxndjx8p2klju8hhjqa6loaom4o42ptg4y45ddch87vwc8ewjs22ykaslp42hz81qzo83ru3cy3kq4ssr45lngrle75ow4l0679c0p847bsbwf92jb0kh1486bba4p61w96cs7rh4t24gp97hz91p4cpo0tbo38uase3429xvwure3bn1ydyan5rd9x17etbq8tap1i1m9wjdo0qxcpqghzz5s71eixzm9tsx2ixax7v50qd46yr7ffq4l0uiw34rj5x35pojczscdrrjyw3pipg0ii7aeychuoaxov7mlat0mykae922daxnvno4fhjewgjk192hsyxzw6eprkirf7mr3z8g4uxubf5205aayhe9o3gywf8630ip2vt4qzar3yrf5nng1g6tiqoh4mo9tfp7255q3m0r3v8ega04t54907ugkdcc52e6qzyhgvieaqa0gmkqar2q00k1v5fnoeevketo5cln3vnci3w60xhzsfl3ffprm3om9u3p6nuedbs552tim6zycmzf5t82gt5i26v4h5dvyomo41rwvurluhysgopyjgp8ktiq4u9cl7c2n853qj82ymk2yao7n0hs0cxptbgtsttld7wdru9fe14eqlgk0wgsufnunqma43i0r1ix',
-                        image: 'h5asyrpjkovv175yddk3punbc8qik6qrg9825m0l7wq46akctfla0tlb44sg05e1raykvkr827k6ksg38qn7x2i1ni64j90fcwazp0bvxx8nbhknvj68w9d17ca85emwwvu9qvz5zbtm8efq56opxcxornal01lqmx02dpv3zhp63jj6tbo8fv3p5j688xkq0teqg9591kddrefvqra1yetqphh9a62hvgow3axwcd8di5sigs30fna65i1y2edu24m4lzd0b17th5dr5ybjirjej2czshvrrl96bcmh1iz82zknhpk0i7jdg5znmgyrytfk4onf9kjocbztw8ufu8zh363v95qb4qdview8p2vt8z36p2h0qt97xbzha6c4v164mi5eakcvhw9hd7lu3w2yb6oln6jktnejpusr5lzqbm6t6cqdveafjiv5jwqyf4n8zvz546bhmicy8g8lkwuadqhv4atmambijx2znepp65hbtjjfjk65b98b16f013i11flrn57y51imkgowh24cuxboxx3t4svympagzw1ozf0axoowzrlckc4nxb8r3ykqz43vrqfz6picmmcej74y697xky3gqrk19c3wjhiezgttf06ol8pcvopiedot2m73md8jvdw9y5gammlayi3hn41hxa0qnve4ewdefl04boh4c00hp64ds140qpt4d9htiaob2kbuqd6ha756j8pj5w0yl49x0t5uro6c9t0x1nsd9tpqwitrnkcqgx62r5ad6dnr0i2koogriol51yosojbmtfcgm6znh4vud0l3ri7rykmlzkfh8hats6tfyzorx08iuvvq1udxmqgh2uz1xx27imb76d86qku9l3if8ojgotafkg7kelzyn4raotxhdpg7nt7xjklqhc5hm2fw21n9gqgzrktykm4g03djv04fhq90g4xcofd99x5emld48t3776w6wbs13ibhdtapkk46kd2yvg3gu4xd9pyydz0pxe14ik7c4qqn7hhp',
-                        sort: 468287,
-                        administrativeAreaLevel1: 'zyj7xq914a75it8ysdaeymdtafha69v9vz6a6422zvr38oqyj9',
-                        administrativeAreaLevel2: 'ukov45xagofwj8pgapj54ead60whigptra2wufrd46bkrufazl',
-                        administrativeAreaLevel3: 'et1j8abyzoqjnfaf4j3y438ne9ihh7upmovpkhbfa5vneaobhu',
+                        id: '85c5b0a2-031e-4e10-8828-10db2f31d264',
+                        commonId: '313663ec-c4e3-4ab3-8755-833fcc73c29b',
+                        langId: 'f7fd2af8-a2c1-4913-94df-bad89eaaa797',
+                        iso3166Alpha2: '05',
+                        iso3166Alpha3: '3yu',
+                        iso3166Numeric: 'xx9',
+                        customCode: '1b9qjfx2pz',
+                        prefix: 'qol3l',
+                        name: 'qqohgyo9q7rdc5zz393ap8a0pfn10d55ewtkt2cca8j9bjhjap1nkcpqcq3ojxsu24quh619363w6jknalyk8jn3cdazksf9f7u4btnwkdl2hy4ttp08eaiadx7zpmtmf8h6l2d9zjabiupfg2imsw7kj2jvffwjioi9u0k6h3hq12g288ng97x5r3amyk1evicfurunhnaqfcoh6pofncqgan22hw0kiz0wdhxte203ia6xq2vmjji6ci5caiz',
+                        slug: '2w2szcxye095w04mb3p04z5xz08ih2ejzkbigxekuqw04agqlefzpy8avm4y7c29wmqt66y77iqjm1dcnx359bnrhlwkkba0eblq7rs5g1yo0umdnm0unmlfljm7eoj89x4a9uu0mfu6cqs0ca8j7nkj24b16nha7runxy55t77rg9xdl3nm0sz19zoudum94bvc5bgb54006kwikyhckfajbn3dlis4wx56d32lavba6lv9mpjbe4ty7o37g414ri6s9lwksxl31hmfc5zrtul4o68bsdaj9qhsfdwzty5fyukcg4rbqrcyp6dtu3pe7z77z7e9g4iolmhnwgitnk7wjdxllk7l1899ecuktvqoijce9een8nuf1qu07xlcwi1bznxlm9ea9mt0kvqz06bqy9uon34p54y578copbxcnvjzmozpxcyrm5kczptk0zprgteexwomxawsombpl07rl0axfigyywumstrtpyog2sgo76i5mn85wag8prtvw5hhifgsj3dd8681mvstug4lcqtilww73l6hsoslw5n247wg0gp9pwo4cdbu4h46ijzftfrkowllyka5ji1mk01ogetohhlt9muhkwmdc5org1ej9xrou6tbrh2kucxwn1h9m1kq8978xx7wkzxbzmqwz54wy10ni6mu7et136mzopoq54cndizacihzh7ku6dnbgjr2aql02uwy4pvs3bvpiathuao9lhexhdwjkvpk1uhmjlwju30pdbj9vml3ygxbctj4ptpft2tz8cnzvzw9qawgvge1aqfrvcrql2brjc7fup1k5hfrvvkbvpkhvhcje2pogc8i8f2hn6h9v1mvrtqy9mpnmxb4khohsey5htxmiiw4o9yq01n79tc4dw9o17eisclau6exmf6dmml0mm46zd59lqywk3vljdqccb6qluencggc2bdf44uoh2yubw5r6dst12lpva62vmda9h3npqllgey6x1n0wj6xqywp9y236f9nkvf9bruy',
+                        image: 'mcckauv1nqwuzuvhbi3hddfg6xwke9tr3wwzsou5q50coc6wdmye6228co92dnbu1mrvgvu0n3u5b7sm7t6qehyagasipoc1pe1rgd3ghlgu7gmh1dnzh9beyvwvt1lsfn8wogd29p47qggbmk9e53jovn65ez2xx0xqwcf2aqh3frjt4n2aba9b6f9lx9ev0zhqt20mt4jdilc9f6mzru8gazkyi9jtims718oc7wk88jpwl72alckoo7apf6f5f5ctlwwq0lsb48tlqnwvldxxh7yck2ygjr35zknur13rs2wua36ss0izkvdssnobzxl5w1c6j7031t9cdihzwurxqmw47hquyqn09w6jjwie4fsh45k4a0zltvldbbp0o5cgqp4vyv4gu7qc23uszh0ogze47xlpfxqalfez8epflezzbvfu84pm9eavq1cmgyx9y93dwxkl9doumtwjcmbxaphww3sqxx56l29d3p8jl3ut1f4ze370bkud0ujywpc9is7tnnun0p0hx36bajaes9dk91t6imdewc9lepbnjmgr2df4y7stsjkd2q2tadcoske6ekuacs7cyuyqguu5xuvcgyw2mpt46enn12yale6xnrs64sqwjoae1qn0yg6qle8448h6mdlnc1l4wg7xzevnhk63g3490xotseui4rfyea3x4ivc4fz1h76thgtj3r736x5l4eccfqzszfnc7j249cnizd9jf6qfsg79vaidrbrn3m6t8hh1spzn7ehwfc63wy7fvxpz26di9yfah0vprhly00jkkunk2pcwedm5fvb8xwm0h6jerb3hbpezrz1p2czhrg3qlhl538if8ygc751x17f4icvx4o7znick1bs3isipgoa9izaz8yh7bjykro0t9honh0ltglxlrm6a4j6qlkvj620614nl6077j3grw6e19t5q7c9dvsa27l045smcyh6i35f37kw65qx0fatg27igstkwke3c6s4r2qdxrh5193c558ma',
+                        sort: 420503,
+                        administrativeAreaLevel1: 'w9hhg3cawy9pypklisst0pgqyjd1bdd7c4bxyn10lby2wni17e',
+                        administrativeAreaLevel2: 'kwlrpl88b9qd02sxlj05ycvjwr2km4rv7sap4y64e6csledsoj',
+                        administrativeAreaLevel3: '20uwd1m7jfvxcl6akio5hht9ujpeufan416v71ahk63p4nnixu',
                         administrativeAreas: { "foo" : "bar" },
-                        latitude: 760.58,
-                        longitude: 150.11,
-                        zoom: 70,
+                        latitude: 153.35,
+                        longitude: 149.45,
+                        zoom: 75,
                         dataLang: { "foo" : "bar" },
                     }
                 }
@@ -1980,32 +1911,32 @@ describe('country', () =>
                 variables: {
                     payload: {
                         
-                        id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01',
-                        commonId: '589ff135-f87b-4301-ba7f-8fb6212c7203',
-                        langId: '4f4492e9-8ce0-4543-a351-beea15c4cefb',
-                        iso3166Alpha2: 'b2',
-                        iso3166Alpha3: 'th9',
-                        iso3166Numeric: '6xs',
-                        customCode: '8ghpnfy842',
-                        prefix: 'gycg8',
-                        name: 'h6yujsqnrkpyti4zjt3lk5ewq6x7mg2lbg2lwsdb7fcxdbtdt80d9sxqacqbjozh0sfn0staiqwcd889xmrof5wcs0npr73cc69czjdvwid798pdv2g5jkzcvphuhglxh9lsulsw45mf3pu9tzf0mjpbcv7btimyo9nkq0pqamp5pqp8gi0s8rebvoyie9usxogg98nikwdv53cbl7qhxsx0p6s6j5j5y2alu86akvqqvb1j3pgwxbymt7vfa6z',
-                        slug: '1dk4y0zzo8tqsh34y5ljkuwmjyfa4suxxf63qkjjwy3j9zkd0gxo58s6kcmppzcmrwzb2zzpb7ti3sxy13iwyairiilth185k7bwk3twr7ty224jj1dlvl9o1kwocllscoloyisaoh7eqxfpa7oa32fryk49f7tpidnn5ewu0w9xn7mw1b8r7ce5yv2zy0p7gccel1ski2pq2a91ngjuamjj7jowddq9vcytho8e0p7flke9rvpa5o28tjrmqna2m3ibyab4dgnb3iji15l1uk565ezlwiv24jzzfxsr128hd62r5oq1yzlpz3qqaegjb384yi7wn3d74xu6j4mau1waszgtjq011oqjaupwmenf20sbn2nvaaec4id212g798417ypwaqabnnf516weyr44zi4ms2pnwrail5vuvxxyaruuh6abpntqlez427bmvrdi43k9lnf0tz0880b4kfkisvrzom5o2pihgfdbwzhtjnqkpgfuyowi2nuxd1eoqg8cgxcaz82tmwix14pd8q3m0pzt6dpmsw60xd3g2p1kp1qhsku7wnqzw7snm1jfwgd7ehl1jzc27ln1bvxvv5b8m4w9nnmpaufwzepwz8likfj9ugtqss4bttgrbmoo2p5tp8kpg27dl73aimqox7g5z1fj35zir1vt7hpspi0zsjgmbayc085tualhp3uzrhyjoaf79964871vfxplxq64b6l6jk5rjhrl0hbdvyv10ohny2zylakn8616ywyfyp2wruc4ians8pxltuq1gklw04mh2h1xto4agi441uey0tfz2dg6kfyeojgyqui3l9qvarp8di9n9402qgnrsaek1zf4mc06ekw4omfyzbh1ce2o5maljpbnvs848jlpwe8nkndlngnveevjg4yksk8w12gk6j0ih3j6oestu88f01ysfvq0634dfxj00g6n5hknbiojhpaaanl9ldfi6c70t3fa732ddzgu947v7h71n73bb0782soeo4aqt0wm',
-                        image: 'q028vgsq7vpa8sbwx7gjoj1nuhnak5r0ovm1t56ito96eov6b4bd4idrxsmyje6h8zfl7keb7uw88zcmxokfo87vudzej0fevyt88p7a2l2bw7dqwmdt2fatmn2jiwly34eayen2kx9vmej3b4u4wfvrv7iks3dy4rdlsqh9gwb53bpi9l32peclpdpay9vc3u7t2dow0a2hry4i7v8ez69yoo77eep0b5w644qk6c28a6rn2iz25o812kej7u8wnbc0vs70r1a4qssythcfjx63mu7rxs0klevjc617pcs7scz293udn9m2mltp6ilo9eox68cpc8uy4ebbfs8spkb7y1l2iv8q7of9ysr8xann1s86w04yq80qseqxpm2gg524xhsigevjdz0ca801aim6piphqs38lnzfqcjeww9j3iz4xv5mbirj3rrgf6p6l5zdm05ypq5twx3jvadxlpx3mhopaf6oxv5g0tq2rgv6jq6oif9fwopuup74z8wozap7c15d5hxdtcgbjd6fxade7ms2etsq7zwh5h2d8kcvdjg9l4ydpldlib719utcw27oxoaiwn5s3y7qzgom94x6582ng6bdsm34vfy4nr930lnz492s29fmi96ulbtrcipuc0f79xygljnk5qa4njqb7h1yo1wt64plynbjsm49pldd6246euxf9168raaryddwq46a1tpmotbzu5jt8t5g63bdk27cfjsj78l8fel3fpw3dew7yf1r9eyhwepwnftykum43kyp9cw9hjkmru05uv6bmdx0srdf71ex9trx7dj7w9xzufq52bjyr6uukfqwwddf1pbs5r2plfpgn0u5osu9kvj758yy9a5zijpm48t6xj6v3hf3eckb585fa7remruzkvf9ehodwwg5yl578id2lmgjs9mhvl1x8t9584oie0pa69hb7d0borg2nie143djk1t2bq9i0mlma9fkkqbc0xtai7fkok54ytb9kdnbfbq2n72uk0pfu5i4',
-                        sort: 958584,
-                        administrativeAreaLevel1: 'rggl6vv499vnfquj6x8t51amlsdjm3dkfoo61hz8j94wmgvhtr',
-                        administrativeAreaLevel2: 'wt1mxcgoo2191169i0mmixx7qbiburfzoq4ok6eqsldz5l0u83',
-                        administrativeAreaLevel3: '1zo2vefz2k3hwrn0su99v15xqh68nwhdmpkxhhcpauc5k1u9li',
+                        id: '68c28156-77c9-4b9c-9608-c0482f39b339',
+                        commonId: '4398873c-7f67-4743-a4dd-5f615298b7b2',
+                        langId: '1950e2d4-fea2-4339-99e2-1642f239c56b',
+                        iso3166Alpha2: 'ds',
+                        iso3166Alpha3: '0ui',
+                        iso3166Numeric: '6pa',
+                        customCode: 's647646s6n',
+                        prefix: '3f1zg',
+                        name: '3qhtrazp1wp6g1587isw582xnczb6t0kgf0fy5lgj8b1mx66op4opac4w4hceg6ljnm5acy25rl1ugqpwkk4ypdd2w1vw5t4dv6fkfrv2bz9pcucy7lzftkzvy5queftiu9utmkan7e7avid7bw8ed1gympvznio3ldf5dhs97tuxbn17esde3tr6cdk1cvuuua9qvlwwg52gkwcyw7u1q6ark9fverd38z70y3chya4icovgunma5sakc3nht4',
+                        slug: 'niiq01e5g9m7jns0m5qwigu13f6l54q7st0abr673s5lmjw9t78p1jtjhzhkxwq53gj54n3hnmy8rzt5h6s6udpzy2k3pc0cmj47uvjtdacykfstn74r0n43ib6llg1il98bmmne3uwwa9mbua13hzwbx4ypxymno4f5bgo1ckiroxe0tbdu2zd6vwv2nnkb7jb32g5xhs9kjnz0hrwq74bwm8ygixwda14iabs2vblqzlr9l9vah512tqwej4x3xipxtq412cw3dyo6z0noybk1ynbqxmc4aqgvaziz3zq85n75cu8ycbrfqzrygtvlzfp8nvdq3dvi8mnz8dsaf17vjq85t015p1kquii7xf4x0wjbm4uxrrmff7yfr1n2u0us17p60zm9gcki29j9jwv99l63qbyhp1vyyduv8agx4nmp427nay5loutnu4pgm7wr25nc66tp4einojhov5yjt8xcom303c2i3zfit2z9jdp8bf6sg945t6s2btqup7ob2mluh3o1n6ajmor9rhw9ax00aqvpj4rf1ah7cljhyd5742gw832q5u2bvdofife7ktl4lesp51z27jag7edbu55qvnabv3ic9rrqctu72ngau2lef5aro4s1wf23er4a5bhyqmv63o9ye2w4o0tzohir1bo4olz1ecxgnk04e6x1ts8pph3zvbxn82gbpmqnbvr6kr4gxu8gs7wjjd282mp8soqv8dm9f9jcvbdmpjjhie8l1syrv61875pdljiwqdarbe4mehrdrmlkny3tpl0z4plpc0amvjyhb31xwtzqkv21nkdn8xv5f0enly5qgrzsfa45jp7aa1yi9ac3bkll1r9nkfnwoa3yrxjgl2gldz2q99veyerfqn3s8m5hz7ozoomq18hbg3v0w98sf4ewd4hwma9wphf4n3zaf3mcy0b3u700lhtz68gh8nr0mhmmhzg5xe6og3zwwfk113wkxfjj1de9o4swoa18qfybcw5zcr0te30dd4ph',
+                        image: 'pd4e6398rdsddzkgy0jcw6opyhjdrngjla43fn6yb1kpn47x7l2dzemz7zx0mx2n6bt14kq20jn4fukg1y3qjqi6giu0epb4ipwezn4djkb4e9025kjjgt6l59mudzihrpnanqlcnogd4tripeo98mo2ej8blck7nrib91ay7euktwd409utdzmzzqa94zd5q5x2z071ts5i2f731mgmhh9fohff6uvbeg13n8dj0rm93e7l1fcj1ctuw14sphdtvuk1tb4oa5dittzwz8y0t93ql4x6cn5a9dno2puh0r7urtorcmq2jniqhns4ebvj52myc6d5hzqg5f0egj72ins8fa83rvzhrit3kinyda7axtchdi0ugk113ngn6o7soy86e0o62fjhcdk1rtd7n283k913jv6q7d1xz162flvhitd2cyzs7zf152bb702z0v361aa5v7hclxe9c0pzuetqg5cknvuhsbc95rwd3u3b28hljlni551izll2dswaqcy2ysozzm9wxcmeqdjdo1mbsnih28q2f6biwef726g8tiama9exke1fxf88dxppkf629roncwtpwjiq97vj38go9hfcpff2vr2l4mroqzav2h85vqhzx4kcoow55sp3mdoqclzo60ikrgthv1v5ui6jtaa6lfhx3w0359ofsr6cxtluagmqs4n1u8rdwtt1gfvzpgijmoyj84meu11ge17fqs9uydctkpq3qtizbhz1r876p0r7gvxsrjh294k1d5ght33y30273aboi9rm0rwwo5ose1q845mmjiev82pxicsiwcjpzibd8n8veowmyjwa0pggri023yp83qzy1fjdbani5m4wumiyujvyd2bte8zexaizzwn99t5ei8pi4z9x75e59b0enof8yhiy39jn9micp73x5tq4qicr03d9i8g0ghk74irzi2uahq8yyzjsbuydkr93zi62ldojnb7jq0dlywfyuhh3ei3ql9lmxaznmsc0b81zdijerarl',
+                        sort: 986988,
+                        administrativeAreaLevel1: 'os6dx70r97lr2qaf11xnlyglzvyka7ig11rxj0e38p17vts6ri',
+                        administrativeAreaLevel2: 'yxiy9ma50y63yj4fw2mujx4j2ff0nwb5uob0cdwg3zltw2o9g7',
+                        administrativeAreaLevel3: 'jjva2hmq6pl8wzpibs66oenlexkteyd5ujcqdtnlf7yxpnzuo2',
                         administrativeAreas: { "foo" : "bar" },
-                        latitude: 95.48,
-                        longitude: 324.48,
-                        zoom: 17,
+                        latitude: 361.54,
+                        longitude: 861.56,
+                        zoom: 12,
                         dataLang: { "foo" : "bar" },
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminUpdateCountry.id).toStrictEqual('beb1a0cc-7429-4a89-9531-f8d9ed13fb01');
+                expect(res.body.data.adminUpdateCountry.id).toStrictEqual('68c28156-77c9-4b9c-9608-c0482f39b339');
             });
     });
 
@@ -2045,7 +1976,7 @@ describe('country', () =>
                     }
                 `,
                 variables: {
-                    id: '3417735c-5464-4c07-b8a5-f2f45cb5f9e6'
+                    id: '2f90d14d-5f99-40de-8f28-9b559a41915e'
                 }
             })
             .expect(200)
@@ -2092,12 +2023,12 @@ describe('country', () =>
                     }
                 `,
                 variables: {
-                    id: 'beb1a0cc-7429-4a89-9531-f8d9ed13fb01'
+                    id: '68c28156-77c9-4b9c-9608-c0482f39b339'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.adminDeleteCountryById.id).toStrictEqual('beb1a0cc-7429-4a89-9531-f8d9ed13fb01');
+                expect(res.body.data.adminDeleteCountryById.id).toStrictEqual('68c28156-77c9-4b9c-9608-c0482f39b339');
             });
     });
 

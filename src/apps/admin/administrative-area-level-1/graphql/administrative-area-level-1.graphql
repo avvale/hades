@@ -1,0 +1,51 @@
+
+type AdminAdministrativeAreaLevel1
+{
+    id: ID!
+    countryCommonId: ID!
+    country: AdminCountry!
+    code: GraphQLString!
+    customCode: GraphQLString
+    name: GraphQLString!
+    slug: GraphQLString!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input AdminCreateAdministrativeAreaLevel1Input
+{
+    id: ID!
+    countryCommonId: ID!
+    code: GraphQLString!
+    customCode: GraphQLString
+    name: GraphQLString!
+    slug: GraphQLString!
+}
+
+input AdminUpdateAdministrativeAreaLevel1Input
+{
+    id: ID!
+    countryCommonId: ID
+    code: GraphQLString
+    customCode: GraphQLString
+    name: GraphQLString
+    slug: GraphQLString
+}
+
+type Query
+{
+    adminFindAdministrativeAreaLevel1(query:QueryStatement constraint:QueryStatement): AdminAdministrativeAreaLevel1
+    adminFindAdministrativeAreaLevel1ById(id:ID constraint:QueryStatement): AdminAdministrativeAreaLevel1
+    adminGetAdministrativeAreasLevel1(query:QueryStatement constraint:QueryStatement): [AdminAdministrativeAreaLevel1]!
+    adminPaginateAdministrativeAreasLevel1(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    adminCreateAdministrativeAreaLevel1(payload: AdminCreateAdministrativeAreaLevel1Input!): AdminAdministrativeAreaLevel1
+    adminCreateAdministrativeAreasLevel1(payload: [AdminCreateAdministrativeAreaLevel1Input]!): Boolean!
+    adminUpdateAdministrativeAreaLevel1(payload: AdminUpdateAdministrativeAreaLevel1Input! constraint:QueryStatement): AdminAdministrativeAreaLevel1
+    adminDeleteAdministrativeAreaLevel1ById(id: ID! constraint:QueryStatement): AdminAdministrativeAreaLevel1
+    adminDeleteAdministrativeAreasLevel1(query:QueryStatement constraint:QueryStatement): [AdminAdministrativeAreaLevel1]!
+}
