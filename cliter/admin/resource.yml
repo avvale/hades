@@ -4,7 +4,7 @@ moduleName: resource
 moduleNames: resources
 aggregateName: AdminResource
 hasOAuth: true
-hasTenant: false
+hasTenant: true
 aggregateProperties:
   - name: id
     type: id
@@ -16,9 +16,20 @@ aggregateProperties:
     length: 36
     nullable: false
     relationship: many-to-one
-    relationshipAggregate: AdminBoundedContext
-    relationshipModulePath: admin/bounded-context
+    relationshipAggregate: IamBoundedContext
+    relationshipModulePath: iam/bounded-context
+    relationshipKey: id
     relationshipField: boundedContext
+  - name: attachment_families
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: attachment_family
+    relationshipAggregate: AdminAttachmentFamily
+    relationshipModulePath: admin/attachment-family
+    intermediateModel: AdminAttachmentFamiliesResourcesModel
+    intermediateModelModuleSection: admin/attachment-family
+    intermediateModelFile: attachment-families-resources
   - name: name
     type: varchar
     maxLength: 255

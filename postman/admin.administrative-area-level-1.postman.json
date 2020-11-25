@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "9d44e5db-83d8-4dc1-8414-3ec07b7e9daa",
+		"name"          : "@hades - admin/administrative-area-level-1",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - adminCreateAdministrativeAreaLevel1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminCreateAdministrativeAreaLevel1Input!)\n{\n\tadminCreateAdministrativeAreaLevel1 (payload:$payload)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"209d41b3-3d03-47b4-80d0-9e26a8f6a585\", \n\t\t\"countryCommonId\": \"184ce2e2-7cfd-4924-a192-71855f45ba03\", \n\t\t\"code\": \"q96pgqei\", \n\t\t\"customCode\": \"o8w0tnuq12\", \n\t\t\"name\": \"qeypoow87pdokexhsxewry517w3euqhxxzhurgz3lhnhgldjlczwt56rz054kgxeh72dm6hjbqo5irc2d1c1kr1vypd2ff5hdrp53ii56dbflb616h8ahx8k27ww1j8q7ungvzc12pi7a1l9wcjn6gjq0es6tz68nbuekwntzo5p5ohnad5g1rt9x988lcgemrjky66hpvnamvyjjzv6hh6wggbhsw8ahhhm4xmou039mflauobikscnakq9mea\", \n\t\t\"slug\": \"pvmy8t7adj7gnqu19p02tnbtmfvoe6fvbijce16o6xjc8e4g62vybu5uxkzfue8zeck2mamf56dhl605bc0qgl8gr3hpt1oyfe0x61bzx6hjpx7l1pv7zef2la6w5m9uwdy0tccejh85he0ecdxwgzmglqbaoad0o616khwv0jnlm0f6jx8ooc18iorstxn2icnwr1g6k39v48a697d1bn3cbfestjf9zztta79y77752iq3mb5ukv6ytaxj2s0\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminCreateAdministrativeAreasLevel1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[AdminCreateAdministrativeAreaLevel1Input]!)\n{\n\tadminCreateAdministrativeAreasLevel1 (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"4cc57aee-a4f8-45bc-891b-55acc66f76a7\", \n\t\t\t\"countryCommonId\": \"d1413828-31eb-48a5-b870-216d447b23ce\", \n\t\t\t\"code\": \"3z0pdwrl\", \n\t\t\t\"customCode\": \"ya9aohwjw4\", \n\t\t\t\"name\": \"d9jhaq27xg8k6qlhohu3b4tz2pofe78qnn89envd1g97jrj13fck9cd1e7xwved4e4c8de77kj1edak82p9plaso5zvws43a0uf3ct68jdy5sjpor35nqg9f0gs1mc7r73fyh9372kt8427izqxhs7w2xdtqikegd6k0e9h1fnvh0qezlomedcr2c2dpmkwqiepapq72jy3ehqqd30q62qrd3nwt61deojp6y0r6gdwk2flnea134ghx0mbf634\", \n\t\t\t\"slug\": \"tkspdgrakpj6hi1077oicarkxd0nqjlgaiuqtcwfwrqwvowx40i230f4ujdzb5maoqcn2m49tvxkvj24hlb9sh1ybv4h9asovyimf7y6ta6wfigf1micpj24ro6awe8m7lqlwsqq8iaq8af4l0r6izu2qzv3abjuvxubxy25h3lt2bk4wd3j1udgnjfnqlhr0tomjoc6w1rn30uah6xqghz5755y1p3fq6vy2en61pp9eibyqdr3tqfn3o9v4f3\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d4afe51c-92bb-498a-af00-701038e39568\", \n\t\t\t\"countryCommonId\": \"2f316ba3-94f1-44e5-a693-b7f34ca2d56e\", \n\t\t\t\"code\": \"57qt19uc\", \n\t\t\t\"customCode\": \"3zhvp881zz\", \n\t\t\t\"name\": \"dooi348r3j5xuqwgpu10gysaemfaxdqp1srioeylfedp889k2p00wahd4ap0lh7rholi683he0g6chc9eyg4drlgydh66y3f7qzqprjug4ufssyzubuyuostp53nfxe5b3qn6vvc61iok7dk2n2ufzzrtmvuz224va1j7qovkqe9by1rpw98g7wonjj9v0z0kulpa4jxpbgd7lbcnlfyfvz4175lba4h23ndoieqww42f6yxdptrwpy30mikece\", \n\t\t\t\"slug\": \"ckkv42s69ox73jp44z4yr0ha4rhgm7xxhoh2wc5cmyvv42y1jky8fr98r5eliohuxvrsmmowmu5i07jcdvtyztlw1290ybqo8gbalbdvfoku9ldt84mu754axy7lz9oezwp2iuox3dx5qaarifsiv2kanl64okeb2r6xebmkjzvcx7gtxg86orln234fz20on4s9nnx3b3bmiefwih9rxtlxxcisnby424ifngwli45b8h6tq542c4o9lfv4qpr\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2d0e71c3-530a-4d2b-b201-31b3f3cba4bd\", \n\t\t\t\"countryCommonId\": \"4b7b6fb2-d9ae-4c55-8b04-c62f287a2845\", \n\t\t\t\"code\": \"460wfucz\", \n\t\t\t\"customCode\": \"0de9fbbsgg\", \n\t\t\t\"name\": \"4amqoorvehm749mrafk13dx5u0alrwadpbm0laob2fxa78wxc2cmja51nt3lhppogkwuiwergkyqidzbf27gubum38p78dkk055h37cejhnbdzod4293axx989qwfiqipooo16rznybhuy5fc5wcfafaajvyjfqdox2kd6h6u5ct8wqeh16h0mo8bfxfiri5pv4idk0ad3i9iji81jgvd7mmvvjf1z2zhps8cxzivaeo8xy5y8ck8h0s6zx9rnv\", \n\t\t\t\"slug\": \"ni8f9dggwt548iawdw1c0k8pvn6qvbjin2kgoowy54j66k3yyx7lfssoeojz8rit2rcbo351iz81ftwvrf68h9ho15oxlecqhlmybz9yu2u1jdcj6e7us8i4igmgkhxbhwhz3k7notwqeurxxweu4cyssed19k0lmlnkipprdr9pxzb0872zp6v5yvpb969gkedzm4v6xg2jc799o79q6l8uvfdo1du1ppccv9n4p5zm6pcqy5duzw1aqjpcafu\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"e246911a-a5f7-40ba-9993-1dc0b458a17c\", \n\t\t\t\"countryCommonId\": \"2dd35658-469b-4122-8989-ee05751ec009\", \n\t\t\t\"code\": \"stjbhho8\", \n\t\t\t\"customCode\": \"faxeglqnr5\", \n\t\t\t\"name\": \"xabuk7f6agunaixnqf6mmmxty3j16hyd760jycurfs815lj5w5xke2q8ufilfv5metruaab5axomyesd66kmnqo3a9ctl8gqi9367iro2nwynxliibxp2gl7dpfjs94v0xppifm9n26l6kjpwnzxfyxp5u8rccj7v2uurlw5qvu90b4y7yf8o4zi9r2yoh33f6an859iw3bxh3nsjlx2caj5ghb4423kq86p53dls6j0dqkesynfzswbvjukqlc\", \n\t\t\t\"slug\": \"s2xkd39migrmkvgsarnwwl4a5cqfjnlyarxz8u9r8kmwrkd2z559wiliz3pbhwloqrpfzfy5ggxgts44qogg0r948n012t5qkk9h84g4jdsipci9grg0ffh2v50rcu6bg0cvtk5jf1qtp64a7z8vkvds77c6kij3o0t19gywrbmmwx8es2882ujouwc2taj37k5rhlmfok3wv9w46khpfgdkx9nriy9nr4b6ahp3oc3ton5s3ozrlf1frgl5ilw\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"fb3fc541-e02e-4aa7-9174-452457d2ba51\", \n\t\t\t\"countryCommonId\": \"676d669d-70b0-4069-96c5-6539ddde781f\", \n\t\t\t\"code\": \"e32c35jo\", \n\t\t\t\"customCode\": \"lkxncw6iwy\", \n\t\t\t\"name\": \"eh2gigc4h1sz314mcvvza37l3kqua44e0a7o1j3n2c9jernewjn0gep5dz7drx727q1za9dkveulfllyd8g7s7dmrptm585t53dxlw7heev5irn89amm16pw2ofkmyztrsi4kyffclu0clni4r2eokspaelstw1zrqr7cw7uw2bcv2zlgd1zq4wnx0ub26p7pc54rhb7phjjroploui87td2hma0s2slp7ri31eir6sp1m2ta8nfr2g5vnz22or\", \n\t\t\t\"slug\": \"8lofgupe67ukvi0vrk4d8yknytx12knyaxt21ybx468zcj401eikaac9muum4pofkszn32noxsodakmgid7cu0aw8d9f9nyqmyorowx7injw8nrw3uti0vrhf47b3fm5diwybnq63jkr4pbhfbi7zb0z3h85hts3rubwlnwjeuv7ir33sgjquzthi0vyyjs7uicjfohmyy0wjc5bmqum3jhns00in4nojpeto4ldmtmclahaxrujovwv62r7fbj\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a9cca106-b01b-48a1-81da-ecbb51a4345f\", \n\t\t\t\"countryCommonId\": \"1d068e4a-bb33-4eeb-aad2-34e4cec32df9\", \n\t\t\t\"code\": \"ftytr4ez\", \n\t\t\t\"customCode\": \"rkdd68fj5p\", \n\t\t\t\"name\": \"hx9h7fm3hhv1r67f793g759zebivmcekqzxq6xpvmtiut1xhl858vz9yoe08sthaxp3euoljqhc7qizv3oews4aa9lk7yq0ot3cdssgdvujev2c74g0nzgfsy48pcqvikljf8tve298g4bg9rxrmtj1dqlcc5eti5bwqqo1t62t8vwfq36143x56kms6ryjopqds5wuoce4rkukygu8gwik40vlnxr8319dj4g5bzhyp3083kdrteh71h43zz9b\", \n\t\t\t\"slug\": \"jzfzcfz18s0avboxj67l3cwh43fshbb00w1x50s7uu2yktc7im9l139fnfmcobd1bcx66n488pyo4waq58ptcxs41dcxuza14jqrym3zeg272ev7f6v0dcdlyho81wjjwlawjr9o12i2liiejbfnc89kzyvtb0e9x7pbmb5scwvxc1qq0kp2cc9zujg5pac8k0axwci5x1mg0kaz8drsghikr9cwuoz8rfym49gxxh0vlhpjxsrzj97dx1sikxo\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d90b306f-e8fe-4cf9-a8db-7c5462b3a700\", \n\t\t\t\"countryCommonId\": \"be57fa0a-d8c6-4b45-940d-0cec3c2995f1\", \n\t\t\t\"code\": \"rqtdicsy\", \n\t\t\t\"customCode\": \"4gq61vxcl3\", \n\t\t\t\"name\": \"s1nl20xb6cuo0vuvzpg188mmtrxy9j2qwlikdz0nhp46b6695kwcgl8sr0kewkykfyr4k4rkir38qwvzoe1x9a6x39qr5jozlprrvs809vcu0csw16fid3ynhegwv9zqgjst6rk0vu5l85oglu2kz0obm7xeoq0fqmhxze9kis3qbhmd6l8fyr7ykt49g6gimxyj48b9pykwkoat2it75vgbhor6mh6gekpnfc9b3hxi2yp4p4pqh69tsh41e3i\", \n\t\t\t\"slug\": \"u9ujjgtsa1pnthb1z54bm3b9uqpkdz6uf4bbi5g9c7jb3erp8ahxqe0a0nk23gi54ztmt6t2yyh5qnmwjimd28uplik6ntungn6zeae0pjl397tvbxxwi7g9p0zmyd85k6wzybaad8q93gl932lqctbyfk9sh5njzl3frimq0vv9xlmrnjxkm3le8d7p1pgdodcuvwz3qtgnn4p5u5hmwbwt6urb43fy33qei5ql4wjmm2gm0k9mac6mep640vk\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a211ae43-2c6c-42e2-bc91-1027014dc180\", \n\t\t\t\"countryCommonId\": \"524d59f7-34c4-4484-8fa8-787304dbc11c\", \n\t\t\t\"code\": \"j1bceim2\", \n\t\t\t\"customCode\": \"7f1quji5rv\", \n\t\t\t\"name\": \"i5yedyg30ecqrz4jivd8pdh7efm3p2euh5ajxomxpx6pjat36aeaa030f0rbnc56hs7oft4npaztflwd5wxb9y6bnt97mmebb5wjr901lr7tmn24jg3n6b88b4jekrdyf34mpbkk1spdkygukjz41iyeg9231hrf6u0fpcjtcmkrtmoye1go041sq6nwgho77pocknssnmrma84sqbicru16ulrgjjyl5vokikdb5gyfflzvpreatdd7u4mfjeq\", \n\t\t\t\"slug\": \"cuzhndxsyils7qx38sp0ksx3h5w5sdz1gzdhz9qsc6um7cmqqt4nad0o9vsra4nxpyq6s16fvack7wgnika9ejrsifvq7h0mnbvp3pne5rqg92ueisdbylmxllbmlg87d1lx0basd6c0wrcrcvc4a83070qos97qhk0qkn4cfnt70pc89080t7a0r089wh6jzemdwdj4uo5hyxt3qvdbyq2ksph96vd0j8ze4kq6xu5vybf7g192n9qupat414p\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"00c0bfa6-6877-441c-82b5-0c132200472c\", \n\t\t\t\"countryCommonId\": \"6e873b0c-5850-4c86-80a1-5448ec313b61\", \n\t\t\t\"code\": \"382nm99f\", \n\t\t\t\"customCode\": \"efizko306f\", \n\t\t\t\"name\": \"wvrlieikz1lts43h0ifsm9ebus8jg1cn7szanql3rc3wssxkoav8p9oqqri0cd48euf4741izgszekofl5sjzmzbshreus154ty592ye744rjysdgdva6hjp58b6jycsimh1qs949zorctm80emr5mgszxres7gat9alp0p3uv5dl3bjjkgooifkf62kk5xg3n982mr7g9qkq09y2in69olvk6n5xk50fcx3n39x5g0qbskkx24fn9sof8a1prb\", \n\t\t\t\"slug\": \"xt3hzmy10w45gy906uhnnsjle6ctdoaa98u4riambpiifsg0zr5kz3g1ed371pdxy5k38y115rn1zj2jleimkdwu9m9c5aayva26focm0z109dwtw4csdkn8zbsn4csgg1x1slq0fud0k17y0hlk1h2gamc4c1819hzzc8itqbhsaipjjtbz5n833hyuinygglc1nhllludimhuxfaw2w7f7ct5pdasw262vi3zz1ezqi3qo5xqyk3buem7h6sy\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b0354394-8d9b-4fe7-b189-afa1f6eec55d\", \n\t\t\t\"countryCommonId\": \"7c9ac962-a171-478d-a2b2-63bfca8a00db\", \n\t\t\t\"code\": \"12o56xgb\", \n\t\t\t\"customCode\": \"9dvho52ff3\", \n\t\t\t\"name\": \"a0ikzdb99v6qq3zfgwl12gyqya9x6wsstds1lxfxxxxiyksnwt39tayha0i52eqhgdlh7675l8ijlvv4uo4eio6u4344j1po8i34x1xrba4smkzn1mzbejhgvaenl4kzvo02qv219l2xr4pearlsefj6hddb4bq084mhnkriwwqriq0kjozk87z9ym7twchty6q8q7m6sqwcg8peg3m7fv8hcdcr79hxu83xal5bpd0x83uywox8hu0k1d1ecx6\", \n\t\t\t\"slug\": \"83kace2ollhc2aoqc690oisvqh2b63869uda8ny6spxykme2mkqg5y9ojc5z8y1ab4dv6e3zgbl8c28ck23h45h2vwk8z9akagpr0mlfdypkw4om78i3xvz9af3x3n9rd5vvjg1xk557rtrr0rxj8bau92wx7zuew88zxqmz3vluhf0867pom26h4bbv83l0mjab4g3j8f9015g849qntkhzukj4ndivw4z6yrx7r6et1qfbiyzxdrqmred7mv4\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"10545c35-8103-40d1-998d-1f2e052d77f5\", \n\t\t\t\"countryCommonId\": \"0fa300c5-f7bd-43ee-b04b-9930a8e8ada7\", \n\t\t\t\"code\": \"y1ooe460\", \n\t\t\t\"customCode\": \"2j456k5yxm\", \n\t\t\t\"name\": \"opua4onzhlhr8kfncz5nu54xq4hhox7bu2fh63tzrttecjkobeabcx6aktuuvj43jfylyknju4azaif6jtxavxvla4goa0g88ulerp85z0tzir0vf7d29km4ghhr4kdi9nrufv9u3b45stcb7suqtmjev2xva3up9kfy8g15isr9ufy70b2g8yjgfmojaoj68bnga43d137rsxe0yqy1qcs5iagtu1kainbzqamd04pvw94mmk7u82jcijpdk5d\", \n\t\t\t\"slug\": \"dza453syvklgk9rx7omrg1kzkv9hjdxp3x3tgw2tuiagooc5r2mhvujnggs8mcoyaqiavcg81lgj513zpix4y4x1jf561jtz4b199rm0cqh7qocoraeax1cjp43iqdpwp1yu62bnoarqa4s1hedprpupeonhka2fqlfhyftu67ckckdeka3c07282uwovxnwrq5gteb7a0qfj4n0lt4kac5oaq1x5wcaydt5kxtpqt1zuo8abeei8fskzss8tgl\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2a8cc32b-47e2-49a5-8e71-b79485ff022b\", \n\t\t\t\"countryCommonId\": \"1f54cf11-b998-4556-8992-545d000c524a\", \n\t\t\t\"code\": \"pqvnlmpr\", \n\t\t\t\"customCode\": \"b9ly69c5n1\", \n\t\t\t\"name\": \"lm5wcbrcituplk1rhmqfn6fxlvenyoqw62jmsb1djb1mmi9qzbfr0cfvxfyr4ju62qls4ndyx3nfaepbo4bd9qnk8w3ydsndglxk3rgdl68cm6dh10gefjy0kz7q9s639i55l2b9f5hz61qpcq6i0j869h1x5lcwjb5922vytfl7nwp8iu38od5bm9yhj9jx9bgz86ad08wrnem5h1gafqsmdjatqt8icfyxjjgmcoezoyc1wqocm0gzro77uo1\", \n\t\t\t\"slug\": \"bxqc0smsm8h3kjs0pntyxrlhkwfuls5gp176g2xwct9mlppgj3swwb6p77ge6eiceqgs5349zdxrf1i5gopblcbuz5ar1d1obmkjm3qff3lfa6pchfs68y7j00uimf2asmsd0am7wsucxdksuptfb9p96gnef9o67gkrfvlidyczisjd256f8hzvvpju8aw8yz3pkgvue5d097n3k4hghvvzcyftfs395hxcnr7mav6asxbnuagtnkd3muubh9d\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"abbddbc3-d843-4de7-9d77-c23aa8ef4737\", \n\t\t\t\"countryCommonId\": \"94313430-e6e6-415b-8ba6-1625693a4e46\", \n\t\t\t\"code\": \"4a7o4qmu\", \n\t\t\t\"customCode\": \"p8h94hgwj8\", \n\t\t\t\"name\": \"blslfl4j11rlcd9zfmxhuja7v7aswligw6b71ckgcidwz4c39cuit43nvdp1g025ovcvp6dfw3zhanrav3iapbtlnoyrudklqbki64ug6014ufuthz4qnp7iticu0ww2bwn4r2vnh2asqgncwjvlbmhgp0dxg7gmn5tqonii4kdshi23veynf04ox3lsvtzkpdqoehxglwvpdlobxtcgd9nwv3m37hasknn53qcn512gtn7qztydqpd9mhxbvqb\", \n\t\t\t\"slug\": \"tl1n4kjkqtheic384zx4udhhj2tgdj0onhm8vdoogbx9cumn31jjtpexme8fff520hsu6efqsgugv9016usbxluu0j4yez2rtl1qfwxtpdkmwryyx14pcdugi1erm178uazfxpgt1qrj07mbwgnum54k4aylbja80tq2ko8d0cglh35zpiheq62sgfkr4j3ujyk14p07qa3idnbalrn1on9ncs2zyy64brho5xxe8pg66al1b8aknbgfxoh2p5m\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"388b1ecb-1a8e-4cc3-81f0-8c066c49421c\", \n\t\t\t\"countryCommonId\": \"b01f1b32-380d-437f-93c4-4438e4a6c318\", \n\t\t\t\"code\": \"jmimkzpv\", \n\t\t\t\"customCode\": \"gaxnc4oth3\", \n\t\t\t\"name\": \"j6fejpx3c5bgl0fodnusmgrwmskple0tkyppcngz29osh4v4gt3bc0m2zyvqvegnmi9aelxtp42u9uqpog2rnl8fj7vsqcbf1vzcwoobxwvzmwzujy4rv15nin3plrovute5pgf5dlqgsn9irp33x4allzzemctoz462xfvw13gb2tvi97rjr31q2wrc12v7nix0xuqn8dz4b4z52pepbhsoasrq6c3xku99sebobciiwo3giczqx5lawvpjk2a\", \n\t\t\t\"slug\": \"3x5z75m1y7thg3k4ascntnd2nhl8avag6x8zpoz7ts0ddocu0mw83u81dbf35yk1xcqae3ez6nn1m05l79ophlvulhebksowbpye2319i7bnz6a5k3zgeut9u0i7zl60haqfkqd0e8o88xb3a3ex14ngavkdwvawkjf2mwnficg9m01wa4rx6pav63ku463bqpa00vqqzo8qmkymx2qy7lgin9virdqwgwq06qyv4jb61lbzocmvropchkrasox\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c70f1c65-b76e-4114-85fc-ed9616c11d98\", \n\t\t\t\"countryCommonId\": \"b3481650-0e78-4579-af9a-eb8397315f8d\", \n\t\t\t\"code\": \"k9d42xsx\", \n\t\t\t\"customCode\": \"la49xwkzf9\", \n\t\t\t\"name\": \"pn8pd39e91z0g6m8nbe7jpx05n1dt5huq4non7nd3hwr3h2113it0x5264r1ewj4oil3vwssj80adbdn3d06ezm8s0adp2ncine6kzmojurwu1i5lv4hdynx4b3i4pflfdaxe92mi6fjhgayztpnx1tbew8g5ciy0tcpbcvm1gn41v958jhabg6yjjkedpw8pw39cowxeemh6p6qnqkgcf4v8321dj0phdax56g1lz45lgo2qge15laglfumjki\", \n\t\t\t\"slug\": \"e9gpjwtdfrg6ddb28srs0z14cv5r7iu2e2lgt6oksq7lu3i1nqr9nn79cwng0ezwsp8bymq2znzjp94mtrukaoj7owhjjl7gu4y280bd29gnovmazfb6s97whi0xe8wjtqknt1a6yniyjxv0ezr1ojpwqsd4lbqsub7ctkyhm42v9unc6owbmiwt2jlg5va5djmaiyr2zgzwhtk98ucyc273osqsa29xldwc3x1of96yq5snoq3ldidpw6k2rq2\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2e883bf5-fb86-4a72-beee-c9ddc228324e\", \n\t\t\t\"countryCommonId\": \"403a504b-3f42-44c2-bf69-aa81b5ab3e84\", \n\t\t\t\"code\": \"tfzrmjqb\", \n\t\t\t\"customCode\": \"2my4lq2z8b\", \n\t\t\t\"name\": \"zjfze8kxenjk8xai6qe6ddv46bt8eio4dp5os9a6g1o5730vjtlgjobcx0idtrff0syn28kf4inme0cutunuuaxk5b0e7ntbq86fcwsagfr48njf4u6r21c9kh15ukzwcp3hi3zovzojn44crjah3tc5c0btylrm8jaox4w34bicmfjlqjcv0rkyqwbjydkjdujqz261tyv49umlfzyxxteucrdjv6torvlx2r2y2e336p58qodff2jge5zr2w8\", \n\t\t\t\"slug\": \"dhtjl14ccj2k9ddsxph7goyujqco3p541mu2zrkzo5pxvg5h5zaxnk1yui2k8uh3ze8f3394cq6go37wlky7m6cpc0n77mu1d40z1w29adxo37vgdi8qb7t35a822adr6xgimyjlk1rb67wifjfgehqckz7xaxzml34jgkzxv6ad2b2h3dkdlwvlpecn85nnrc4l71cwicsx1slc9or60wuvetgg65kvteogj65psz6iq7tj2waickt04ot0l7y\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"fb5e6ba3-b43b-460d-b0cb-b488b3271fdb\", \n\t\t\t\"countryCommonId\": \"0e7d9a21-ff05-4ec5-b936-123322861039\", \n\t\t\t\"code\": \"8naddzv7\", \n\t\t\t\"customCode\": \"eys2bx3b3x\", \n\t\t\t\"name\": \"56z299he9zzlp8q2cpg7w608a611qxwwkdjx8uouuw0xp9b6zkjndwomud43k1gob614viqzv826h6h5nrhu1lydtfydsdzms6uqlvyvwlrupc0avbxflgo3sie14iua71i363qcz3841b7a3fl6a5r9cis2jgbttya5l2zqp70nl1hyeqjsdyssb8lph76e9k391vq6ua06gfmbqmlsa8h6mh6ysk952n2vici92kus13yvnrsyc06h40w81t8\", \n\t\t\t\"slug\": \"njrhdjbsf1kwfkdx4rm6appc6z7bqcug6lwlex57b3okv3yidvoiaril88x0e6mvpsu3qlu4jvk99ski1mve0oc0kmi8zsya7ojt1smxvkisqrz6mrmovdwbiak3frop3s21hrniekgyegn762czgwa8riezumm81w29t0b3o16wazoo9sc6s4qomsym837rkzbgu8zjbxfeoddlnz0ryyejnj76mgzkm68v4addtwe1fzrx5auaulioqsxq6ru\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"57ee64cf-fb24-40cc-9bc9-e0a1d21ce83b\", \n\t\t\t\"countryCommonId\": \"28a05a23-92cd-4813-a233-2ca5f36560ea\", \n\t\t\t\"code\": \"3m9o57b7\", \n\t\t\t\"customCode\": \"wpd641dnmx\", \n\t\t\t\"name\": \"phtytxgpq2fnwkovbhni1bp5ucrys8tvt80rk4t7ikr81wbx0gk1x7b9aiioxytot4ap8pbczg2ludxnhexjrr527yns5aoyz5njrwz7ssuinuyhbezr63j14936lrnus7xzyefaagkwj77z1evncn9qgizaoiv0igvnsg9ofui4l316f00gjiwfmo7olpvvdbt35g45nc4wkx4unzpt2h31yb26v9prjqtz2e2xos52d8ytzimzkm09cm2a7nu\", \n\t\t\t\"slug\": \"cqiooss3u9xorr0iik81uxsohcyfny68g8fvmym8zd3xnc4dvdp294p1atmmwhzz0vhv1agg8n8aciz6b6yyo4hxcqdepillbeo9fooqu9s0lw2gpkh00u9asjo02vpela3bzwlbx1l4a5s4zovs28i9gpwwxpdp09ilnzt5e49ygpd9feqbzuk4biq3dmrf471foili42ljbryhwgf107lp2j21xqr5hhf7zgyhrn3yfnxr9zvax8f5zmysv4a\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"f2422168-ea82-444e-b779-618e6155ce7b\", \n\t\t\t\"countryCommonId\": \"fb443237-3aa0-4576-a8c8-58685f8dcb81\", \n\t\t\t\"code\": \"7bt36otk\", \n\t\t\t\"customCode\": \"4ctfzw7fiv\", \n\t\t\t\"name\": \"h5cv2hd3am4uw5e48tpbcd22b17eo3vpxkkgvte2hgnedq8i6yx17m7v12x4b2dxxctvfl7nmq6ietzahgz0sjjk7hrd42kvqr5c03pji3lo2vb7gvz4wxcvjgul2et2r929g3wdxctqw3j8p5cc2n744dg3bf8ultne33zm9kxmnpcljc61pwep7z19mbgw1qm53izp04auna9l35y64i31p2hweetwudl71osauz7d1o5a9v10i376hyejoku\", \n\t\t\t\"slug\": \"pmx7ppq32ilxglkaktua7n2fi53eupfxwz3sc59oz5txfozh8qg6g2vil9l8c6cc2kl5kyc5ogb5s5gqb490g4fdkvxent7qyib1sl0bytvzq2m80z79tz1ukfhjyzp5z89voonpq5o2l92ycrzkqqsvpy8l5f1bkv39zmhxw23e5wtsfsw46wwg8dz9jqh9fc38v2633479txk2z5886lhrr82lsfzfgjaupqyl2l3qbnrwqvmf7v820amaaf1\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"0de8bedf-e316-4fb7-9601-8ad039a79ee1\", \n\t\t\t\"countryCommonId\": \"27267a1f-5bf4-4723-b8ac-4a97636e2c37\", \n\t\t\t\"code\": \"if909dpd\", \n\t\t\t\"customCode\": \"s3an0rs0qx\", \n\t\t\t\"name\": \"zbyneowkfx7t5y1lr9rmizk9py4y5cmdovywj4cetnk3z07nuejmkg4id8228hqg4tntnr7tfv3yi2ocpw6yz4iwgsmplg0nv60gk74kyxzjeka166pq3kje36kf8yns3ljn8q4zkxybstpyxdzmiww85al851e28uu3j07p259rphcpqcmkv3333vjmc1ngh5misrxrx1wvpnw9vefhxbb338cp8aonql0624m3bx49a05w2v4wln0ceomm626\", \n\t\t\t\"slug\": \"nodjp002qr945mzirn9f732fnzxld1zdm3ub8607st69scxt9o4jzg5jcs4imibjds7w3aytv63ligvctbqfutfaskk8xupssdsux5ufpcsbe1oho1233duzet05xrj171tbi7aohk92w5valpy9bq7ywk7qgcgs2oz5y9c5uqujviu05b7wc8oizhtmgdkgvpknoynh1emryvrlon0t3ocmsokume80ina2gekc4r5q8pbfpo5nh4ddm4kum3y\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminPaginateAdministrativeAreasLevel1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tadminPaginateAdministrativeAreasLevel1 (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminGetAdministrativeAreasLevel1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tadminGetAdministrativeAreasLevel1 (query: $query)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"209d41b3-3d03-47b4-80d0-9e26a8f6a585\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindAdministrativeAreaLevel1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tadminFindAdministrativeAreaLevel1 (query: $query)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"209d41b3-3d03-47b4-80d0-9e26a8f6a585\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindAdministrativeAreaLevel1ById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tadminFindAdministrativeAreaLevel1ById (id:$id)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"209d41b3-3d03-47b4-80d0-9e26a8f6a585\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminUpdateAdministrativeAreaLevel1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminUpdateAdministrativeAreaLevel1Input!)\n{\n\tadminUpdateAdministrativeAreaLevel1 (payload:$payload)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"209d41b3-3d03-47b4-80d0-9e26a8f6a585\", \n\t\t\"countryCommonId\": \"184ce2e2-7cfd-4924-a192-71855f45ba03\", \n\t\t\"code\": \"h991eb33\", \n\t\t\"customCode\": \"n5bk2ci1bb\", \n\t\t\"name\": \"fegk403r3azuzmjifil9phtvwt36hf6ijyhquifpr2i4gxt67a74qxhlsupqrtieurivxw7k5jao6alc0r6enxr1ol3wnelvdp2kot5di7s1wreqe29jrk1vb2upg4sarwkhzyk76xf4kedbngvf9avydxucc1sesaoxmb2wwxxnn1fvsjsnidgyvn8038x2znkk1833wm1stz7t1a90zfrjkl78zl27h06uonl4upqnavkqhnzyrzwjovffvsc\", \n\t\t\"slug\": \"ls83v24x2g0iax108ohgx9jc05i86n3aweohnadaqywfu5aismru8s1cpmijdk9unxtcqlqjqpk2sk9gykb2bwo1kt4f8gy0txf4wyqhnco2kf6bluygcn1sgbgymwf0v1r9kk8lhk3i82nh3ks8e6z38sm7q4an513fhpnvch6arp7ind27o4fud78b7wt79820cbcp0u6vap6bm3adg44c3bssir402ixawm1a2ydb2hlymmsliewe7ogqd3m\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteAdministrativeAreaLevel1ById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tadminDeleteAdministrativeAreaLevel1ById (id:$id)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"209d41b3-3d03-47b4-80d0-9e26a8f6a585\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteAdministrativeAreasLevel1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tadminDeleteAdministrativeAreasLevel1 (query: $query)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-area-level-1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"209d41b3-3d03-47b4-80d0-9e26a8f6a585\", \n\t\"countryCommonId\": \"184ce2e2-7cfd-4924-a192-71855f45ba03\", \n\t\"code\": \"gyuzma6f\", \n\t\"customCode\": \"zweba4zg26\", \n\t\"name\": \"5e03fa1bzx2tc41mgbm5xakpbc4rheyofwrrxgq4106kng6x1lw148hsx6hew4fkcr84lg8ckqrvfn64l6wi4oh9fn0a5ikn8jhpyi8eq6a2rm940anliajidnszgtrhgv84eup3no49m6iqgkoaj5hb2ub2zaflq8f5aj722zz6ot2aes7on3mvs84n31n28l60w18ihba1g2zy6n3yrzrhvvhu3ewxx83vftod4dggywhpjv0fqo7op24my61\", \n\t\"slug\": \"hsj9tmkyd9m77izebvgoki8hhj7em3cvsrk1e1tvmlrj1h10f59s98d6988a781qvtbbrwyfqutal6sm8r5plnc5v8s4acn7wylc0prvtcxsvq5fvah5ucom9win6pf7iy5ucta2qs3lacoiyx52uzd4dnushfx3icfutetlbt7sfziq0203sq4k307i9stivs383rvas5zshehr4e2xhh1v2n8nzaq7ebg5omxw5szu6mp6xipgse229rpu6yw\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-area-level-1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-area-level-1"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-areas-level-1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"c1827403-dc24-4630-abf8-9b01903663fd\", \n\t\t\"countryCommonId\": \"73752e83-765c-44f0-95de-3bd8265ea69f\", \n\t\t\"code\": \"da5ah7vb\", \n\t\t\"customCode\": \"q7dzjq9g26\", \n\t\t\"name\": \"nqkh3seupohsmq4zoopkwjmg6t4d5jwf9ibor62n5d3ahdxfkn4ywr5ontnux6m3xsbn4wxm96ymsd6uz81wcm875pj91mm2wezquat8fi4wyd190int83h2crsn3w7mo8zgkerunayfnk4w54k8n76yufup9t4gzzhuhb33rmo29qku1hygw7vzy9iigt3v2a7g17vq6abnb5bg3exujuw0uow3g5mt1smcxo0dfkkbyrokxcyne9jfcwhpw3d\", \n\t\t\"slug\": \"8g9rmh6iu1r1je3sx02w0dl117bldqccua4zt8xpk38e142ct5n7xqarmeycsajm9mct82oir03cjpbnxvx6kam2i36rhau9nrueogxe1jdcxuk01f60hq32un2bnqkybasddssz6ynpt9b9ok73umxkey3latzf11sabrxsfkmt45kavs2ajh8ykowm8elzbbyc4z99mnldb1l8c9hvj7yai4kdhn1jmrimku7wptb0g78wfq2q4n13cb9jbpu\"\n\t}, \n\t{\n\t\t\"id\": \"f4dc6c52-5ab7-483d-86a0-173967ccbdf3\", \n\t\t\"countryCommonId\": \"4a3020b7-fc23-48d2-ab54-8f948cc23b55\", \n\t\t\"code\": \"y4njq9l2\", \n\t\t\"customCode\": \"chg6umsrso\", \n\t\t\"name\": \"1rnnqbljh2s34fq4c2i1vtokg2f8ub1n6bynbbllw8nujfo36yym48zvkrdhbmloa9j5esd3tol2hn1pjngseeaxtgelzkhe7xvwr64o5892l6hiajn5t3qus30rx79jqkfo9mkev8wskc9qwer5iubk0geo7d5fralkzfeja4xhqrw5m7h9xdqzk5b4miubwq9f7xu338n65i7q0fp9hbfdogjadnzwhn5xmarttyck9k4l0wybvgb1epxdip3\", \n\t\t\"slug\": \"fiybqqvp0wan89ny09sphk6lpuygjn36o3a4bsoodrfr1rs8x40chf47bi8b6tgpc5z70s73pfzltoij6forb92vz5nl7oms6cxcorh8zvj65cvriih9lmhgxqwov91nwxk1ou9frfpy6g9qx9eicm6jweloh61jco0hqg5nnen3divcevpcwipu56bygxvvsgb1ztlyyit3tnb1lgysnxiryhdem7fhyfxp9i7vlm5bxfhhrxtrt7y4gttjvuk\"\n\t}, \n\t{\n\t\t\"id\": \"1c90085a-ffc1-453b-b41a-cb3603d7b000\", \n\t\t\"countryCommonId\": \"36ff5d29-2b21-47ec-a8c0-68498fed290a\", \n\t\t\"code\": \"sxljqfby\", \n\t\t\"customCode\": \"jh51x5ndgx\", \n\t\t\"name\": \"o5ybz4q71811x517jcczmsqmuhe79pzbcgoer3e6po1eoc9fhvo3t64x1ujs9mdxik6619oeh3trnwz60qspg6kbgdyc4442n40w0h1pya1dgaiqcthgtsbvf068im85fknimhlfpf2yonk1595swh4rmoywkapqow9xtwf47bjsp2mvc00g9cpfyqjxxgl331jq1sqdfddgh7709xyvgcjvt5xer4jneq23ocm0yus38zz9vkjgar9zz0jvxox\", \n\t\t\"slug\": \"9kq9yjfd9fs62cft3gnn2a3bqnlig3us9a1u8exeo489mhm3aqq5g4a4fdvodg9wqhbyubb1kczwtejvr4fmewhgsof5r1ulc0gpo2bkxw332r7j7ks2p1t96ckb3tgiie5gf89wyzy9linutulmg06dv6z6cf3nqrqkznwqs42s71za0ts98ulpz2dfm09wlv55haw3pfwphsieb40pjkty9contdalq4jafry43k9nveudpmrjwrpk1h139b4\"\n\t}, \n\t{\n\t\t\"id\": \"3c070487-b0a3-4253-bfdf-7c320fb5c6f8\", \n\t\t\"countryCommonId\": \"e4ca0e10-1dae-4890-a35e-8e733e11d889\", \n\t\t\"code\": \"xtjp9hmm\", \n\t\t\"customCode\": \"1tdexf8o3y\", \n\t\t\"name\": \"oacry4wwwchazx12xjq6cuvgi873lid2ldrvjroj49iroflans2c7tx8j9k2qawqfkb1qzcpebiwez7rhub0adxagbu32gyohnypyj21t4rs6mi2c1i3zf5kqj23ubdz9squkl32mu1wsm2c069ezxbqw86nokqrpefdjxsdy7rygq7aq1lpd3muw12qt3wd0678yg6wki15ywj4eg9i20yvkjxsi3wplvxbq5yc5fwbz9hf6jbplv7fqwsnv6r\", \n\t\t\"slug\": \"3ipuzsjk2lqxt8nvchwhf84vayvz22kumx1h4mu2ia275gf4hoprvg3rfq81co1y01bbtkxahw16c2c5yejd9jyaou36hmw18012gavf76k2xwv9foeva991ymlhog3e9gw9usns7m4z4q13g1xr658cozagi5ig22loxma30hrljnsrddj9tvgioe4ds7x8u8eskgbhcimd4iofbbbaxq54shx7qxlgtk603llbm8579gejgdxmugn4ntrrubj\"\n\t}, \n\t{\n\t\t\"id\": \"41b396d9-af07-456f-88a1-4e5bc52485cf\", \n\t\t\"countryCommonId\": \"00de6f57-7cc9-4432-a5a2-242146c976f4\", \n\t\t\"code\": \"ve1fygff\", \n\t\t\"customCode\": \"mm73p0njud\", \n\t\t\"name\": \"eepcgjv95nklzq988o08s68znln2kxdia7lo371biepfnj99e1i65sphzgjjuoakak1olvuwl0iwriiifxtey84irr6u56fsb170uzsumo952mx7awys4eeg44acuu8crrn03qarzqbhezf6t20bf8i6srr4yivuxdp8unwy693b7zyq0nfh0g6l128myh6izvrhvp1oos7b50edja25rs0qvmwxp1m6mfunblzn1rqabvol010zrqufujlgk3p\", \n\t\t\"slug\": \"eanri8h755zjrwzdrbuqoqmlljyc4n2kd9va01732xwxutzqm1wotjhouzf9yfi35vuqy4bljuavdcd7jzibzjsel2f2yjxxgebte3w8okhn4fq5u8d9uv078mhxdnpl07cnmt70pspi1wpcj4m48s90qo2zlxer503evgpjls75x5kfh17k01dc2atha71bihkbz2q5hvhjf1bvz4nq0ofiitkdn43g6760ha7tz44gk4sqe5moh32lc39evgo\"\n\t}, \n\t{\n\t\t\"id\": \"cfec0f91-32db-4dbc-867a-801546d5aaf7\", \n\t\t\"countryCommonId\": \"f1e7a431-5720-4c4b-b210-e7c13da04617\", \n\t\t\"code\": \"8d1dwafm\", \n\t\t\"customCode\": \"axb4eu6brt\", \n\t\t\"name\": \"uo0nvaiyt6kd42uc7vcliw37ujk816rpdy56qbyco094bpu31njl02nk0wqjttug81yrf995d5j7nyls8zcxo4g2uchv1swir4he7b19g9vh3jnnakyq1x8le6k3ug3kz36pvw2gdyb16mrgaonh73hx5zkarmwgntshw0emvthow4touikztsytb6bgamddtrmxpf3dczgexet8ugb7dtskwe1grx289pth06otoz2esjuq4eu1x1djr5y3cyr\", \n\t\t\"slug\": \"1fp5myd5eshra7jykiu0krk41savn2ibarig1byetl54n2m7sonrhq54qv9ljh031wwgxmpgjyjpjxff4x3kmpsospowducvihqy8g3jit59eur3oizbgtztrgdw0zeskr4bu3ecksy4rsemlgxhte8h7g8m5poho1bbgv5453l4xe2qz4h44f0lhlbnoyn8uyufjs9ke2gl1z2zvnbitce22byfvdweksxq10jyh4y94omu2vc53sowleilbcq\"\n\t}, \n\t{\n\t\t\"id\": \"19758111-41a7-4475-88f1-dd67fdb62b0b\", \n\t\t\"countryCommonId\": \"f7fe572d-921a-46b8-8297-4359a422f573\", \n\t\t\"code\": \"47d2uffs\", \n\t\t\"customCode\": \"l7dzm8s8ww\", \n\t\t\"name\": \"2yg2v1e0ke1bt88t2w0ceg8ki0sxx6remv3tdkaxoc60zjq5i18no8d4ypafissjpwwp12sckuz4nne1foyte7phgddfr8izj0aswy8zqdgyh9c36z0i1nv4su5sgq7mtjt8s9wxu1ehxfvh9l14zqr5rzvxk7te8246s2cymnwph42o6vvce45k5jbh1no01c9u1103ak7b823ookofhic3hpknac56mb3gi85jvijn3g3iitqh7fetorzxjvz\", \n\t\t\"slug\": \"ur4rij565x4lnm4jquavfqko8d4lzmrnvyyvrvuga226p6yyw2bvmpuk6pfhneps58he6373qrd7t3bribjwjrhgnnvx7id7fj64ycjd8c47se0ot0ynxwqi9crt9l3k3gwvabjk0gaqtf9mwkzet2zkwp5y6m3afcupfpyy8y9fhshzauneciy8i03lmn216u8wqf8wlr7pca1m9hkfe3fd4ppmp23q82xn006sfx3almqefumxjogjht04ogp\"\n\t}, \n\t{\n\t\t\"id\": \"1f504b17-bb02-4f54-9133-2186b4c769da\", \n\t\t\"countryCommonId\": \"90ff057a-7a68-41bb-9e15-e3c58f027835\", \n\t\t\"code\": \"aazzotz6\", \n\t\t\"customCode\": \"fxw7vqebzr\", \n\t\t\"name\": \"upqlgpnhedda4nhh9d1h13j0ggpga63um5te2d2mzo8z342a5pv4gg32pmgoavb6ovwi9carw3d48owoyojo0jjohytg7b6rt73n69notfhlmuh3jub6ys0pwz94whi5nhub070hnku6g04i1iw3lcsaqvrcvk7himcr1adoei8h38sutxqdh0jkl5nonp6zbodgh7ovfx8om7d9zdc97o709ssfvjffbct6jsxrn08sqg1r9dpfsf6n2fqydus\", \n\t\t\"slug\": \"d0hsfxbh1ewon6c4f97f439zx636eqa7240xrb4wzty7tnyyefq5cjzeqiobexspjb7gimfu3mspiwgnkoveq2d2fq4og50f7lrwpi5qvy34nzuzveq9c3n9r2mr596ptossgg0xzcqaic6g6r2ephxqbu59ko5hjrcvtjj60a4qnkukgb0th69cohfbz1ywail41rbm0idmyl9buontquxgaar2231i5z61d84ixah8nq67a202k9s0rrekpwa\"\n\t}, \n\t{\n\t\t\"id\": \"fef3fd97-ef8c-4da3-904b-8cd3834f76a8\", \n\t\t\"countryCommonId\": \"f0bea3f6-e7bd-4d4c-887b-f06c82ce07df\", \n\t\t\"code\": \"p74ha6qz\", \n\t\t\"customCode\": \"nn78z3uh9l\", \n\t\t\"name\": \"bctvw8i0e1lh8aqgf9ybpx6qlpk4xfet5y10shl03fi5wxvs98rkacs8tq0zaom8xidyptqlr266nmf5mfvhywxujnr0xpfcpwgqpa7l5p9nd0a3ypew3gdbjot1wvprxh07lavepr9sbut2paopo3433jbh4u3wzveefb4vg5t6zj0lb6a8zw6a5q9tab221wxlzcnekyx1oafnthtl2jwigglwhb5y4dn8rsx0vnmxtoffcws4qlffgt8dgcl\", \n\t\t\"slug\": \"zqreoyd7jfh93sfqtv0w97vf0t8mevuz7393tw357mozpsc0bpv88yas9mwfj6khp0wfxhcdhxnmvob0yjznlngcv1295c8h8zqgf1p4l33tess5dz11n8srt1f6d4w6319dpsapvg04n2r6yxwpl2ygyh5m1s03kmggvdaw54opknwmtut1lbgmau89ezshmy907acctivmoms6wc62nm7l5zj0p6gsbigkl9m3bg3qy9xyaoondnv5rwoj94m\"\n\t}, \n\t{\n\t\t\"id\": \"cf32a1c9-0208-493a-ab37-8229087cf876\", \n\t\t\"countryCommonId\": \"f1538744-4b35-4da9-93fa-345af25b4205\", \n\t\t\"code\": \"kpc0mbdf\", \n\t\t\"customCode\": \"woqpvbfroh\", \n\t\t\"name\": \"bq23gi1umdl7agtr0btxf34tzvoit825o85a36t5rjo38o2t9ba4ualfefqnakui2itkbsbqm6wz87twjpm3t41at25ijoml706sekscur1iyrnoibqgwh7vngpfu5kc8ow7tgaywh5iafeoj03esjlle5dx1xhtkd1lmtaa3u1iqym6vc584qpclf5h99r27cy0r71eha2ruglw7aiiv9vrdnesdeg8enp4coz8i4vhkk21egyboktoykcpiwl\", \n\t\t\"slug\": \"zs78gkl3ysvt18h8mw5q8bzdepwd041of9gm6y9dt71cibtcvyg59wspabb1yp5172cqjyzisyhpp1xxl8sv0u76zz1ckg5pvrmmxw3zwb727cpg61maiqjava277zs9m30rqggmu6amo03gxf9et5h1999m3bgaio640f64cmsuzzlal9oo7uyokoww1h1qb62r6lwcsil4kap3q6quot1mhbgtbv9d9irmkyqbiyrq831e65xr35qj2ei515v\"\n\t}, \n\t{\n\t\t\"id\": \"b49f027c-e442-4153-941d-40576e34af70\", \n\t\t\"countryCommonId\": \"54cca229-a64c-4e62-8343-d3f42485c955\", \n\t\t\"code\": \"ptzyz08r\", \n\t\t\"customCode\": \"wgu4qgmv7s\", \n\t\t\"name\": \"jb1clyg4rjmzh5q3v4o4ka282frq959gfir7guotlcw8t60kwode87t1kx62q32evcgebtkkztesxfoag4hm2onvaum8wsrpnjwsvh0bs2q9uxg6sx3huym4j8igtc5xqp5dz8vwsb9606r4ih5k0tuuvh10vorxb68vuqgawcwi6s1xsb4if5zpenrthdtfveak1jzbvcp39x6xb2vnh5pcgdzch65ipzvek4pgjs1tgk6spm48v6daby8liwl\", \n\t\t\"slug\": \"nsjfa2zwabhkg1ykf6uytecu56z4r7b6eqm7guleqi2d2zbmmf0w9tntxc89y5yj6nuevfakbqjyplcqepb6uqph3pdxsxktfw4g6i4a7r9cgqfvd9s0jewmeb778b0xlr9wxh6vlj16q03ky2dn7j8dfgcmra20jav9ei9f4i2ammgdanazibmsv2tpvuplihvbng07q198x0lwq2666g7w2e63plg2cr1qpgl3e0auhvihneupdfn50kh9sj0\"\n\t}, \n\t{\n\t\t\"id\": \"0f8dfee8-8aac-4d68-9185-ab9278e564ff\", \n\t\t\"countryCommonId\": \"ab133ca8-1bbf-4f6c-85ed-8cf134d9fa08\", \n\t\t\"code\": \"gzcz195o\", \n\t\t\"customCode\": \"lxmrwiw6tr\", \n\t\t\"name\": \"7ekim61kqtl9fdb6kuluf3mb2h5yfgh2iws03vsxru8oy2w4zpwrdn4sv4ivv216rfhql0qh6yf1qx4wh45c5rq4qhn5v231mcq11l6kvrr50itmwc929wndmymg7s7yfcxaz14il1w0incv6jdvzxc2esnmnn29l5s8a0hbcytc8u5wbiyechzckjiap9aomolexhb0rtzpe500jxp79e282j47haohxwx8ekxcnia52jw1q6pz35drlr4h3yh\", \n\t\t\"slug\": \"hazxxgm12d5c4l9nnrys9yoxwpk5pjr63ur3a5tjljsb187a05oe4h4va4xy6mpgme1an6a09gifmo2jsr8s7tmrd112azrqvmzte10mq9kr5ybaevpi54pfxxt7xi7rmztfss3guzhn2tjnkgsjx1kyv2w7xu9rakfrnskhh5hl59y6g1wmqssa43dgt2tvkhrus5khhaxwxvmwqn95z09z4u2c0ww222pdfvfz3g6mmlyse98wo1mysdhl4ao\"\n\t}, \n\t{\n\t\t\"id\": \"43f9d7ac-61b1-4032-bfe0-09272661ed5f\", \n\t\t\"countryCommonId\": \"0a85e845-c1df-47f7-9089-1dcd9a807f1e\", \n\t\t\"code\": \"0ptpgexb\", \n\t\t\"customCode\": \"3akqfn1lyj\", \n\t\t\"name\": \"aj68d96dlpwuch871usvtfsm6bw5pe3n1zrlzmjj3bkd6vhy74oux3g7ojq1wpc5j119ios4pac6av4dfcazqwlmddh3gcasjwtzalh1o2v8damlpprslqy2tncd7visfv3g0le7gm3hfntunid38txbi0u3s8o4ojhcjvlyw5fo5eelmmmx5jzkvfkx4xhgmu67eowho8a4dnlt20mcnx4e37gcrz8m2z6wuosfpo9mda0e8dmk6iyr0240hf6\", \n\t\t\"slug\": \"yxj6gf9v9ngk7yfc7n8xlt87ci1epv3gzr4wz5vujmkpm0o4ync1y39rg703n1ow981qvzbyuzrfwgver2m1ni4130s39tokjxig3rtv7onje4jurl21emdct9jr7f2pr8bg2kp1wh1q8bunqlxy026mkblnhne2l6sev6av46becoxa2m42muxgt7ik0hpq95ig67kvxbozphfy90q1nnnde3dyr6vd2prlrtmlmmd6f6we0mzascjw1169yug\"\n\t}, \n\t{\n\t\t\"id\": \"fd9e93f6-83f2-4186-8a39-adef52f76546\", \n\t\t\"countryCommonId\": \"b257eeed-7d4d-465d-a8a7-6120e9734613\", \n\t\t\"code\": \"ja7hd51p\", \n\t\t\"customCode\": \"uaik6q13gk\", \n\t\t\"name\": \"z88r404pga0d5avl5agymdgvvt84amp247p5j118xosq9901y240oqjgfebp5sjs5exswh0rian5msm4e04devx8dj80agacq2olm8319wd4a1im0md3x578l4jvyvvwyfsk8ve4n9mgmviwdra32jq9qcr3pkvnen94p1p301e48lfjkbmchicm3xcubz8tshcc3kn4wo5rb8z6vl19ncbnoy035ojygeibjbxze1rvs7j3zk4mwtedf64y2ov\", \n\t\t\"slug\": \"k9t1nwomsfdzktt2tfo00aicja56vbjq1lra866a3mpp5834xwmoqta3ng2fgwssabf8v8c2urbfuc5e8ll45rqaieb8q6vkry94m7pj691yb9n8dfpvm8jojerjlid1xum9eu7ow1gm26ldctxgt07ahiqv4u9lx9sg82nac88hdkye6dwcoj8jarfuqf34yc0wpp2qrwus3k5z5ti37cngzxo9my0p2tckvvlbau2texblridtejd6cstx16p\"\n\t}, \n\t{\n\t\t\"id\": \"e89bb4cc-4be1-4db9-8880-f350218f21e2\", \n\t\t\"countryCommonId\": \"7f4e436c-f3cd-40e9-9f72-b3cb668cdf75\", \n\t\t\"code\": \"cchwn6k3\", \n\t\t\"customCode\": \"67a99mkg3v\", \n\t\t\"name\": \"5dwi1m8iuhtpc276yujcafq6wjkktoh2bvu94epq2db2wncq2wu2vxq22b8d85rii1oymmle339fcd75ghtcpx2bsxhcw4r3nn1y0k4aq0bsyzzxh2w5w1mdzg0tx8xpi3cgmyqajd4t8nkk68pde7ra42szhl3595vudhq4ob0e46vf92wvamj2ilsf2p74h6nb9jwapoyl0t5wzwnwwtosov1e7vy3islkav5ikc8fhpyjjnpwmvgazu5sj8s\", \n\t\t\"slug\": \"5k85o9wzisvbb4k2m36fs9s7l8ut6y9x6dc0pi8j2hu8nqtlmmjxfmx62p8vxr4y13i2kudqey910end08ddn7jqtf7d2w0x8mrtkaqpqngc4lf9qlrakz89abuazxk8vyv9r391dl16mw5mu7xqz8bgcubjtiisymtsi7c7vf12q7baz2hkfkjsw5kanwr8kwjs1gajngtqjnh3bgfdwg48e7u3k54y5rblrxsg1cf4oyckfvhu78ajjft3zfs\"\n\t}, \n\t{\n\t\t\"id\": \"11000e40-565b-490b-8543-14705ed55ce3\", \n\t\t\"countryCommonId\": \"592227fb-f0ad-4542-9d15-04822a0a7848\", \n\t\t\"code\": \"1kgxruje\", \n\t\t\"customCode\": \"93e4c5z100\", \n\t\t\"name\": \"lx0a3ctzu7721j5se6mndtceixa3pbloudd9qgbh1scp0l396yx9zd5yoc0ahv5f6cxlq41f13y3ycusgpn9b9b35ebsg4vrr24n55yewp971ly3d774lg63hlpj45oyb3wycw6y0v2igzqxujnxowk63nh5c92b25r0wvfuhvqf4hlkjbjc9f5bgenw25bynmks0leqo4r00p8jzpzv3xemsy7q4y96o9lrmpejguekkxrcnem1jlrebdd5h4t\", \n\t\t\"slug\": \"55qy1vp7n58jbywenkceny5tcemsej357zpjdw89pu087avb72kwawists38cahz3nj7p7y36e8t8el3drwhkh4w99uuqko7wspqxvkjoqy6e9clba5dzwjuna9esgwe1q6o620iv3n13cp1w73qowdpb7lw4soqd88qn9hvewwsu7gld4z38zm6hj8q082fy5mwaffzr2udmatwbjlqzin36lin4jraejxhq31t8e66okfar4rp9ydwnj5y9rp\"\n\t}, \n\t{\n\t\t\"id\": \"f3a6fbed-7624-40b0-b1f0-a8c1deeec493\", \n\t\t\"countryCommonId\": \"24eb4acb-35e8-4741-9c7e-826b678853d2\", \n\t\t\"code\": \"zasbii9z\", \n\t\t\"customCode\": \"gschsuak2c\", \n\t\t\"name\": \"0t3gv7llu5xciu99lkwgrr1tna2tr0x2nsc11y3ulist0jv2sv39nvlm9z3heeuv5dxdgtx9ev6v25811yp6r1te852nc6tz5bl1zs41bsjbo6rc49ky6tjm7fz0wiqacwfi7i8h6ljqlxdxcus1qbzu2xxh2vhow9kiyfrl33yy3hs5y9az47e3s536d8wqbt1arjvlqmh1dnw1lg8iwcb735qv5e59ttaf569jq1a902wm9o2o9adx0syio6d\", \n\t\t\"slug\": \"94nsncu776g5unkwow7vbnbyfnb34rusvkw51ymywc5m12wurwlbczmon86xfyiui5umw5catetue9mbm62ctjlbhpcn6anv3zd73px21k3pnp4n1n5fh5hyyuvzge5g99o6s2qeot6ta6ope5kyx94w4umqsz5xmp1rwr2k4y4el4aj6jvl7xdswmz9r5fcdqdmjvsf2p6q3wi9uzmntppntc39tkgd20sf1csd9lxar1mb37akqpv2ohy1pp3\"\n\t}, \n\t{\n\t\t\"id\": \"990b3b6b-5c45-4728-a2f8-18c50f7cf909\", \n\t\t\"countryCommonId\": \"88c2e802-c456-4dd0-89f7-97f516704e6d\", \n\t\t\"code\": \"pq8qcijs\", \n\t\t\"customCode\": \"xyus8fngaf\", \n\t\t\"name\": \"avuqgwici67e8o4xcxfe4i7it51jsqf6448jdccsy21be9f38po28zwe2rwr35r5rs3hkdtg5iytxqn1t0w0ach5l8l5b0aef0uwql5h3m8m782ufdn5mqaix9fn4xexhkhp6ixhppucc7gp54fyrtvm625jy97kx46wors9s2oxvdjpn1005yjejklf62acvxhe4h00l4moqssz8lex8uc1vyi2504bzcie884v855grwsmhrb6uwvpkrwjrp7\", \n\t\t\"slug\": \"tswifun662sm26imisma29c5txvkg6kbi7l1f0brx74r6np6dhc9x5eov35i4rhu1qmxzuyp259wzjupuy53yjp73pt2f2k4dv7tm1mcqxxex19mf03eu500o4ujkm4qz15fym1ezfyx6c6xgm5k8zsi0f6ue3r4arwnviebh6cu81ghsx7v78uilbylr2n8e8zccur2h6pox6wjbbro90089c2cfnr34ek8m3hzn5sofame4rqylp2dosko33a\"\n\t}, \n\t{\n\t\t\"id\": \"53926779-2692-4bc6-8954-ffc73c3f0142\", \n\t\t\"countryCommonId\": \"1337948f-7010-485e-80d1-6c834f31aa83\", \n\t\t\"code\": \"nat26vwp\", \n\t\t\"customCode\": \"4jmnik20q0\", \n\t\t\"name\": \"xmxk4b4xyjmdtl7hzn4ofvjdzfb96iyqgk7piss1bshjzetpvvenqo0h0ekdv4kk38e37po3unzrremk1w0b3y0rc7cdr75kv5cr5564jrsfig8juwxfl0st8dr4kkfys2auipl42cjyfzvfklho7qjl4461cfndx0upp3pewaeo5l69q2j72pbkedytkf7mnkakscsyf86o2oi64pjk19s6tzspua7b4k6opob47uhmluxjrfvfl1vxuuyo2ny\", \n\t\t\"slug\": \"1ov921k9amo0wv9yjb1k26lk9codynbjf2a27ksdvotqfikdwxhbzmrrajjg1h7r2ozae2hlab4goriixicxupa9c46jnxe6rh5z9ixh6fbg2cy1yhaklovu6rdu6l2egb55qs9t7a6etf5y1sijppuu9ekd84t93h194l63zy6ag0lb7j27g7rr12hyvy2dnf0l3u9x1b4b0hqqkz301yn4lkgxcjq7ui0sfxwxgiw8e6ma8s2qu69n9v83lhz\"\n\t}, \n\t{\n\t\t\"id\": \"e48da9b9-f6f7-4e01-81a5-59e4cae39ff8\", \n\t\t\"countryCommonId\": \"7cba23df-4b29-4b43-b13d-8cad6d783c07\", \n\t\t\"code\": \"phonm6cc\", \n\t\t\"customCode\": \"dmo15flsh2\", \n\t\t\"name\": \"vkgd6vd2gni81ll6qf0v9qacighp70bgny6uvzl8cmc66czwf3li4v0qhw1kocm1bwynxt3e3jst5krngj3ydibuyjkb46hp0p8ea035gyshtkjwi5wwhrz17rf8v8ir1j7bl8ew5b7dmqgg10vi1sgo6fwy4kcqby9jnva3r68zpic7ioo9wvoct0igs8afwtyw7ynmf8trdhfhut4qnl85049n5vmn4so79c251qyq8nflskt2qcauno93qkq\", \n\t\t\"slug\": \"rsiht3uy4lmzbd8782rnuqrqmtv43p5vfvxmjk4o8jjeuwan4le3mn3hegt7249vmf9wdyj5ofauzdfkeo0lny1t5xgnctyjr6p6odnmoz3p2ei3y7gm9vwb00jz2pdthcvcbuhywnklhwyciie26b4j4lczvzngslj4rzqvzep1zereuu28lfrzzba2ypng3hhaxwoco7dpsxnlc0cchuixxeu7d2vnhph5wl787e06jgb4bkigp2byht3bhl1\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-areas-level-1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-areas-level-1"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-areas-level-1/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-areas-level-1/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+                        "administrative-areas-level-1",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-areas-level-1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"209d41b3-3d03-47b4-80d0-9e26a8f6a585\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-areas-level-1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-areas-level-1"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-area-level-1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"209d41b3-3d03-47b4-80d0-9e26a8f6a585\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-area-level-1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-area-level-1"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-area-level-1/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-area-level-1/209d41b3-3d03-47b4-80d0-9e26a8f6a585",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-area-level-1",
+						"209d41b3-3d03-47b4-80d0-9e26a8f6a585"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-area-level-1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"209d41b3-3d03-47b4-80d0-9e26a8f6a585\", \n\t\"countryCommonId\": \"184ce2e2-7cfd-4924-a192-71855f45ba03\", \n\t\"code\": \"fj9f2aj6\", \n\t\"customCode\": \"dmfdyw040g\", \n\t\"name\": \"8yfti59jtcknktq1f9va1aapv1j4x2qewznv1db4r2zkuuw35sheukxruolljavnb2zoa3ath45svqg7cre6v75d4coesdigpp85u0czj62m01k853x1ld2yy1oikoj13wzdoa4mf8i7eiktxdpbgntzva6e6zr6xdk7dl3znt57eoqu5e9nvh7728d6eoj1gstmhzgyntoj2qofanjg11re2fhyz778mygkk66zgzldnxpvknobcy0xjsqxh2t\", \n\t\"slug\": \"6tfeww0gteqsjm9nz1q3xl9q3csb2iqe3s83zjdbxqk72meyf2g36l1lv6xjsh0tl2wk1dkm8m7meco0sk5pbk2kpwaq83oja5bhfj8myua7u2dd32vbtagx1t2d2pjf9j8mcn01p5civyu3ei5j2tt5hskc6fgog86oqgloynu5r181hzk5kmex40dw1abbt2kf093tw3ep25wqxycwkhn24203ep58f81bkr5wy24lqcns7blnyymx4qmqe78\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-area-level-1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-area-level-1"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-area-level-1/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-area-level-1/209d41b3-3d03-47b4-80d0-9e26a8f6a585",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-area-level-1",
+						"209d41b3-3d03-47b4-80d0-9e26a8f6a585"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - admin/administrative-areas-level-1",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-areas-level-1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-areas-level-1"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "11e3d67c-9d9c-44ec-a213-1a8768cf061b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
