@@ -35,7 +35,6 @@ export class Seeder
                 commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel104));
                 commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel105));
             })();
-            
         });
     }
 }
