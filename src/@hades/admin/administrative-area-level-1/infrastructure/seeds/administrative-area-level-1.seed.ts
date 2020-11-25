@@ -1,4 +1,4 @@
-export const administrativeAreasLevel101 = [
+export const administrativeAreasLevel1 = [
     {id: 'd0730a9d-bd14-492b-ba77-e9b78651c8ab', code: 'AB',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Abyan',                                            slug: 'abyan'},
     {id: '453f680f-08b7-4024-8d8e-a019880be043', code: 'AD',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Adén',                                             slug: 'aden'},
     {id: 'e5534606-57a4-46da-97ff-bee23a283ceb', code: 'AM',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: '\'Amran',                                          slug: 'amran'},
@@ -747,7 +747,7 @@ export const administrativeAreasLevel101 = [
     {id: '7663ad59-2db9-4b6a-a76f-b708971727b2', code: 'CU-99',       countryCommonId: '0e705b77-4bf5-42af-b32c-513a8edc19e1',   name: 'Isla de la Juventud',                              slug: 'isla-de-la-juventud'},
 ];
 
-export const administrativeAreasLevel102 = [
+export const administrativeAreasLevel101 = [
     // Cabo Verde
     {id: 'bda133f2-70cb-4535-806c-c3a532123ada', code: 'CV-BR',       countryCommonId: '90202f26-f388-49ca-8296-7f650a149c57',   name: 'Brava',                                            slug: 'brava'},
     {id: '150634a5-0eb1-458a-93e3-54f7db6593d5', code: 'CV-BV',       countryCommonId: '90202f26-f388-49ca-8296-7f650a149c57',   name: 'Boa Vista',                                        slug: 'boa-vista'},
@@ -1472,7 +1472,7 @@ export const administrativeAreasLevel102 = [
     {id: '6949f36f-c943-4fa4-92e8-e7b58745949b', code: 'IT-88',       countryCommonId: 'ba59346d-60c8-4d69-bbdb-7318e7f471b9',   name: 'Sardegna',                                         slug: 'sardegna'},
 ];
 
-export const administrativeAreasLevel103 = [
+export const administrativeAreasLevel102 = [
     // Jamaica
     {id: '032dce13-73e2-40ed-8968-3797bd578c31', code: 'JM-01',       countryCommonId: 'ddfb3f21-d9cf-4786-9b76-374bc0d03432',   name: 'Kingston',                                         slug: 'kingston'},
     {id: '61bac9d3-0ce4-458f-a2b1-46b31a737baf', code: 'JM-02',       countryCommonId: 'ddfb3f21-d9cf-4786-9b76-374bc0d03432',   name: 'Saint Andrew',                                     slug: 'saint-andrew'},
@@ -2543,7 +2543,7 @@ export const administrativeAreasLevel103 = [
     {id: 'ffbf5411-a754-40b4-8db2-8261ffa0c5c8', code: 'PH-41',       countryCommonId: '18ee8378-4682-4b11-a6a9-e518de927e1c',   name: 'Mimaropa',                                         slug: 'mimaropa'},
 ];
 
-export const administrativeAreasLevel104 = [
+export const administrativeAreasLevel103 = [
     {id: 'dc38d658-25d5-4bf0-a0d9-633654dd28ec', code: 'PK-BA',       countryCommonId: '7606859f-8e0e-4ad6-8fda-ec2fed6608e8',   name: 'Balochistan',                                      slug: 'balochistan'},
     {id: '30dbe699-9a5a-4b22-b6dc-05cb772d013c', code: 'PK-GB',       countryCommonId: '7606859f-8e0e-4ad6-8fda-ec2fed6608e8',   name: 'Zona Gilgit-Baltistan',                            slug: 'zona-gilgit-baltistan'},
     {id: 'cd0bcb07-ec16-4511-b254-4c58ce747b56', code: 'PK-IS',       countryCommonId: '7606859f-8e0e-4ad6-8fda-ec2fed6608e8',   name: 'Territorio Federal Islamabad',                     slug: 'territorio-federal-islamabad'},
@@ -3135,7 +3135,7 @@ export const administrativeAreasLevel104 = [
     {id: '957ef24a-3750-47df-98f7-790fd27c4bfc', code: 'TN-83',       countryCommonId: '140025d1-c0c3-42ed-896f-1e9f3012e974',   name: 'Tataouine',                                        slug: 'tataouine'},
 ];
 
-export const administrativeAreasLevel105 = [
+export const administrativeAreasLevel104 = [
     {id: '8b0201a0-cb23-437c-995b-7ab4ce07070e', code: 'TO-01',       countryCommonId: 'd1f8e22a-f762-4b99-a61f-1a06aa92b219',   name: '\'Eua',                                            slug: 'eua'},
     {id: '3ecd2a97-7213-437a-bb5d-5a05575a4560', code: 'TO-02',       countryCommonId: 'd1f8e22a-f762-4b99-a61f-1a06aa92b219',   name: 'Ha\'apai',                                         slug: 'haapai'},
     {id: '62f5a03f-8c15-48bd-88af-0aab461a35d1', code: 'TO-03',       countryCommonId: 'd1f8e22a-f762-4b99-a61f-1a06aa92b219',   name: 'Niuas',                                            slug: 'niuas'},

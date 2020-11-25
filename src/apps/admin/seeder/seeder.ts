@@ -14,7 +14,7 @@ import { boundedContexts } from '@hades/admin/shared/infrastructure/seeds/bounde
 import { permissions } from '@hades/admin/shared/infrastructure/seeds/permission.seed';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { countries } from '@hades/admin/country/infrastructure/seeds/country.seed';
-import { administrativeAreasLevel101, administrativeAreasLevel102, administrativeAreasLevel103, administrativeAreasLevel104, administrativeAreasLevel105 } from '@hades/admin/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
+import { administrativeAreasLevel1, administrativeAreasLevel101, administrativeAreasLevel102, administrativeAreasLevel103, administrativeAreasLevel104 } from '@hades/admin/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 
 export class Seeder
 {
@@ -28,11 +28,13 @@ export class Seeder
 
             await commandBus.dispatch(new CreateLangsCommand(langs));
             await commandBus.dispatch(new CreateCountriesCommand(countries));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel101));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel102));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel103));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel104));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel105));
+            await (() => {
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel1);
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel101));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel102));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel103));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel104));
+            })();
         });
     }
 }
