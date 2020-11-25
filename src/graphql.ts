@@ -27,7 +27,7 @@ export enum OAuthClientGrantType {
 
 export interface AdminCreateAdministrativeAreaLevel1Input {
     id: string;
-    countryId: string;
+    countryCommonId: string;
     code: GraphQLString;
     customCode?: GraphQLString;
     name: GraphQLString;
@@ -36,7 +36,7 @@ export interface AdminCreateAdministrativeAreaLevel1Input {
 
 export interface AdminUpdateAdministrativeAreaLevel1Input {
     id: string;
-    countryId?: string;
+    countryCommonId?: string;
     code?: GraphQLString;
     customCode?: GraphQLString;
     name?: GraphQLString;
@@ -129,7 +129,7 @@ export interface AdminCreateCountryInput {
     name: GraphQLString;
     slug: GraphQLString;
     image?: GraphQLString;
-    sort: GraphQLInt;
+    sort?: GraphQLInt;
     administrativeAreaLevel1?: GraphQLString;
     administrativeAreaLevel2?: GraphQLString;
     administrativeAreaLevel3?: GraphQLString;
@@ -430,7 +430,7 @@ export interface OAuthUpdateRefreshTokenInput {
 
 export interface AdminAdministrativeAreaLevel1 {
     id: string;
-    countryId: string;
+    countryCommonId: string;
     country: AdminCountry;
     code: GraphQLString;
     customCode?: GraphQLString;
@@ -650,7 +650,7 @@ export interface AdminCountry {
     name: GraphQLString;
     slug: GraphQLString;
     image?: GraphQLString;
-    sort: GraphQLInt;
+    sort?: GraphQLInt;
     administrativeAreaLevel1?: GraphQLString;
     administrativeAreaLevel2?: GraphQLString;
     administrativeAreaLevel3?: GraphQLString;
