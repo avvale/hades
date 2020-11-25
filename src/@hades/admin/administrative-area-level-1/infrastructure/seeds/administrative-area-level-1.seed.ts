@@ -1,4 +1,4 @@
-export const administrativeAreasLevel1 = [
+export const administrativeAreasLevel101 = [
     {id: 'd0730a9d-bd14-492b-ba77-e9b78651c8ab', code: 'AB',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Abyan',                                            slug: 'abyan'},
     {id: '453f680f-08b7-4024-8d8e-a019880be043', code: 'AD',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: 'Adén',                                             slug: 'aden'},
     {id: 'e5534606-57a4-46da-97ff-bee23a283ceb', code: 'AM',          countryCommonId: 'dd0b0fa2-8b42-49f8-a92c-3d63045d9e08',   name: '\'Amran',                                          slug: 'amran'},
@@ -166,7 +166,7 @@ export const administrativeAreasLevel1 = [
     {id: 'cef0e782-38dc-490d-a729-f42ccdf286da', code: 'AT-7',        countryCommonId: '47a93289-640d-4b31-9e13-20d6243b4b9f',   name: 'Tirol',                                            slug: 'tirol'},
     {id: '61147781-5d27-4f94-a7d9-4ada8844d8aa', code: 'AT-8',        countryCommonId: '47a93289-640d-4b31-9e13-20d6243b4b9f',   name: 'Vorarlberg',                                       slug: 'vorarlberg'},
     {id: 'e3dd1fec-dbde-431d-a23e-ea924d1be751', code: 'AT-9',        countryCommonId: '47a93289-640d-4b31-9e13-20d6243b4b9f',   name: 'Viena',                                            slug: 'viena'},
-    
+
     // Australia
     {id: '0a0bb1d2-1e1e-4c19-8e1e-83a738b39dda', code: 'AU-ACT',      countryCommonId: '8052c4c7-7818-4581-8fce-9d8d238ddd0e',   name: 'Territorio de la capital australiana',             slug: 'territorio-de-la-capital-australiana'},
     {id: '6c986374-2653-4688-83fa-e7a361e6f79d', code: 'AU-JBT',      countryCommonId: '8052c4c7-7818-4581-8fce-9d8d238ddd0e',   name: 'Territorio de la Bahía de Jervis',                 slug: 'territorio-de-la-bahia-de-jervis'},
@@ -177,7 +177,7 @@ export const administrativeAreasLevel1 = [
     {id: '28d90d94-6edc-40a2-b30f-337826fadaf5', code: 'AU-TAS',      countryCommonId: '8052c4c7-7818-4581-8fce-9d8d238ddd0e',   name: 'Tasmania',                                         slug: 'tasmania'},
     {id: 'd7dd133b-0fb5-41f3-9c97-8990ce3f295e', code: 'AU-VIC',      countryCommonId: '8052c4c7-7818-4581-8fce-9d8d238ddd0e',   name: 'Victoria',                                         slug: 'victoria'},
     {id: 'be4eaffc-1b40-422b-9b21-a8691151e214', code: 'AU-WA',       countryCommonId: '8052c4c7-7818-4581-8fce-9d8d238ddd0e',   name: 'Australia Occidental',                             slug: 'australia-occidental'},
-    
+
     // Azerbaiyán
     {id: 'cdb67012-a6c3-4c83-9405-45d9c1fd8f98', code: 'AZ-ABS',      countryCommonId: 'b382c0fd-40fa-40d4-8841-5f0282c6ca60',   name: 'Abşeron',                                          slug: 'abseron'},
     {id: 'd380d470-f430-452c-9a45-bbd470716b04', code: 'AZ-AGA',      countryCommonId: 'b382c0fd-40fa-40d4-8841-5f0282c6ca60',   name: 'Ağstafa',                                          slug: 'agstafa'},
@@ -257,17 +257,17 @@ export const administrativeAreasLevel1 = [
     {id: '19357a24-b562-49b5-84d1-55d9ad7815a7', code: 'AZ-ZAN',      countryCommonId: 'b382c0fd-40fa-40d4-8841-5f0282c6ca60',   name: 'Zəngilan',                                         slug: 'zengilan'},
     {id: '00c9ac59-24ff-432c-b864-ae7d2b9f4b5e', code: 'AZ-ZAQ',      countryCommonId: 'b382c0fd-40fa-40d4-8841-5f0282c6ca60',   name: 'Zaqatala',                                         slug: 'zaqatala'},
     {id: '34d21ee5-2424-4f85-8c4b-6057b29a7091', code: 'AZ-ZAR',      countryCommonId: 'b382c0fd-40fa-40d4-8841-5f0282c6ca60',   name: 'Zərdab',                                           slug: 'zerdab'},
-    
+
     // Serbia
     {id: 'cc3ae25d-ca69-4c2f-9ae2-0b7c88a378e8', code: 'BA-00',       countryCommonId: 'd93a3633-ca77-43da-8895-053e178c498c',   name: 'Serbia Central',                                   slug: 'serbia-central'},
     {id: '52e1c3a4-b7e4-4fc6-aeeb-f2e289eba902', code: 'BA-BO',       countryCommonId: 'd93a3633-ca77-43da-8895-053e178c498c',   name: 'Voivodina',                                        slug: 'voivodina'},
     {id: '288dc353-152f-4dce-afe1-eb686ab3474d', code: 'BA-KM',       countryCommonId: 'd93a3633-ca77-43da-8895-053e178c498c',   name: 'Kosovo',                                           slug: 'kosovo'},
-    
+
     // Bosnia-Herzegovina
     {id: '5a2e39fe-b780-46b9-8dca-7e800eadf3db', code: 'BA-BIH',      countryCommonId: '327c0c50-4f1d-450d-96ec-fa15a4acbb76',   name: 'Federacija Bosne i Hercegovine',                   slug: 'federacija-bosne-i-hercegovine'},
     {id: '4199534d-3a94-426e-b1c1-8d42c6f057f4', code: 'BA-BRC',      countryCommonId: '327c0c50-4f1d-450d-96ec-fa15a4acbb76',   name: 'Brčko distrikt',                                   slug: 'brcko-distrikt'},
     {id: '74fbae6c-edb8-406f-a97d-cba1ed25ce3e', code: 'BA-SRP',      countryCommonId: '327c0c50-4f1d-450d-96ec-fa15a4acbb76',   name: 'Republika Srpska',                                 slug: 'republika-srpska'},
-    
+
     // Barbados
     {id: '1c66ac0b-3928-48bd-a008-b07f9901495b', code: 'BB-A',        countryCommonId: '0e61ccf7-3d6a-499b-a5ef-af775f8e2e63',   name: 'Saint Andrew',                                     slug: 'saint-andrew'},
     {id: '0f40b1c7-8f40-4baa-8398-c3c9a73a1818', code: 'BB-C',        countryCommonId: '0e61ccf7-3d6a-499b-a5ef-af775f8e2e63',   name: 'Christ Church',                                    slug: 'christ-church'},
@@ -280,7 +280,7 @@ export const administrativeAreasLevel1 = [
     {id: '12125486-d05e-49f7-ba7e-0c0029ae68b8', code: 'BB-P',        countryCommonId: '0e61ccf7-3d6a-499b-a5ef-af775f8e2e63',   name: 'Saint Philip',                                     slug: 'saint-philip'},
     {id: 'ae80e242-35ed-43e7-a862-cb5cfef038d6', code: 'BB-S',        countryCommonId: '0e61ccf7-3d6a-499b-a5ef-af775f8e2e63',   name: 'Saint James',                                      slug: 'saint-james'},
     {id: '37a02c45-95f4-4863-b677-fae52441a8c6', code: 'BB-T',        countryCommonId: '0e61ccf7-3d6a-499b-a5ef-af775f8e2e63',   name: 'Saint Thomas',                                     slug: 'saint-thomas'},
-    
+
     // Bangladesch
     {id: 'ba30dda3-e2e7-4404-8535-b52e4eae7c74', code: 'BD-A',        countryCommonId: 'ab9f3eb5-effa-42d4-a955-62dc5579ebed',   name: 'Barisal',                                          slug: 'barisal'},
     {id: '8452c8b7-494b-4e51-93c4-f2506fb6758e', code: 'BD-B',        countryCommonId: 'ab9f3eb5-effa-42d4-a955-62dc5579ebed',   name: 'Chittagong',                                       slug: 'chittagong'},
@@ -289,12 +289,12 @@ export const administrativeAreasLevel1 = [
     {id: '34d90218-d8c4-4ff2-88e6-535de75f236a', code: 'BD-E',        countryCommonId: 'ab9f3eb5-effa-42d4-a955-62dc5579ebed',   name: 'Rajshahi',                                         slug: 'rajshahi'},
     {id: 'efdac14c-b381-4c0e-9bec-deabd29b3347', code: 'BD-F',        countryCommonId: 'ab9f3eb5-effa-42d4-a955-62dc5579ebed',   name: 'Rangpur',                                          slug: 'rangpur'},
     {id: 'ebc65c3a-ca62-4b77-9642-f5e47099d2ba', code: 'BD-G',        countryCommonId: 'ab9f3eb5-effa-42d4-a955-62dc5579ebed',   name: 'Sylhet',                                           slug: 'sylhet'},
-    
+
     // Bélgica
     {id: '2a84bca4-ee03-4eab-b3b4-c0bd0a0ad9a1', code: 'BE-BRU',      countryCommonId: '06aeda7d-1a1d-4ee7-a7be-c3b62d0f0f2b',   name: 'Bruxelles-Capitale',                               slug: 'bruxelles-capitale'},
     {id: 'fa44a724-fa12-4557-8f91-c797a008cdda', code: 'BE-VLG',      countryCommonId: '06aeda7d-1a1d-4ee7-a7be-c3b62d0f0f2b',   name: 'Vlaams Gewest',                                    slug: 'vlaams-gewest'},
     {id: '4a2859d7-e0aa-48ee-8ece-873f7a5d50ea', code: 'BE-WAL',      countryCommonId: '06aeda7d-1a1d-4ee7-a7be-c3b62d0f0f2b',   name: 'Wallonne',                                         slug: 'wallonne'},
-    
+
     // Burkina Faso
     {id: '59913eee-c5bd-4a00-8109-7837ce199c74', code: 'BF-01',       countryCommonId: '7ed165b5-9593-4ec9-a465-fc326542566d',   name: 'Boucle du Mouhoun',                                slug: 'boucle-du-mouhoun'},
     {id: '5813beb0-4220-4fb9-8548-6db219bf8030', code: 'BF-02',       countryCommonId: '7ed165b5-9593-4ec9-a465-fc326542566d',   name: 'Cascades',                                         slug: 'cascades'},
@@ -309,7 +309,7 @@ export const administrativeAreasLevel1 = [
     {id: '20ddea5d-bc97-4e11-a39a-66680f9def76', code: 'BF-11',       countryCommonId: '7ed165b5-9593-4ec9-a465-fc326542566d',   name: 'Plateau Central',                                  slug: 'plateau-central'},
     {id: 'f9f80168-f992-4e16-9c7c-f480f557249f', code: 'BF-12',       countryCommonId: '7ed165b5-9593-4ec9-a465-fc326542566d',   name: 'Sahel',                                            slug: 'sahel'},
     {id: '8f617249-98a7-406e-94fb-e4547d5a8a4a', code: 'BF-13',       countryCommonId: '7ed165b5-9593-4ec9-a465-fc326542566d',   name: 'Sud-Ouest',                                        slug: 'sud-ouest'},
-    
+
     // Bulgaria
     {id: '2e3feea1-0ef4-4f42-83d5-99d9ce109faf', code: 'BG-01',       countryCommonId: '2d6cd6da-e52e-4bc7-861d-eb7edf1849f7',   name: 'Blagoewgrad',                                      slug: 'blagoewgrad'},
     {id: 'bc87fe34-97c6-48e1-88cd-ba43225f04f2', code: 'BG-02',       countryCommonId: '2d6cd6da-e52e-4bc7-861d-eb7edf1849f7',   name: 'Burgas',                                           slug: 'burgas'},
@@ -339,14 +339,14 @@ export const administrativeAreasLevel1 = [
     {id: '9422b0f6-bc77-41a2-bba0-4cb23c121062', code: 'BG-26',       countryCommonId: '2d6cd6da-e52e-4bc7-861d-eb7edf1849f7',   name: 'Khaskovo',                                         slug: 'khaskovo'},
     {id: '2e508087-2ad1-43bf-adcf-766b722017a8', code: 'BG-27',       countryCommonId: '2d6cd6da-e52e-4bc7-861d-eb7edf1849f7',   name: 'Schumen',                                          slug: 'schumen'},
     {id: 'a3c67dda-08e4-4e1b-a583-b18d26487a27', code: 'BG-28',       countryCommonId: '2d6cd6da-e52e-4bc7-861d-eb7edf1849f7',   name: 'Jambol',                                           slug: 'jambol'},
-    
+
     // Bahréin
     {id: '5004f4aa-f372-4846-9d35-26c7f26212b0', code: 'BH-02',       countryCommonId: '1fd498d3-7b5e-49a2-9ea4-f7889eac800c',   name: 'Muharraq',                                         slug: 'muharraq'},
     {id: 'ec501bf6-a2f9-429f-8f3f-9bcbdea69e38', code: 'BH-03',       countryCommonId: '1fd498d3-7b5e-49a2-9ea4-f7889eac800c',   name: 'Al Manama',                                        slug: 'al-manama'},
     {id: 'a98a9793-9605-4b12-bd75-207b12417e41', code: 'BH-05',       countryCommonId: '1fd498d3-7b5e-49a2-9ea4-f7889eac800c',   name: 'Northern',                                         slug: 'northern'},
     {id: '32bc906d-8c81-4d0b-ae67-91cdb7a86d8d', code: 'BH-09',       countryCommonId: '1fd498d3-7b5e-49a2-9ea4-f7889eac800c',   name: 'Southern',                                         slug: 'southern'},
     {id: 'cb4ed8cd-f944-45c5-b384-bb04fabd6379', code: 'BH-12',       countryCommonId: '1fd498d3-7b5e-49a2-9ea4-f7889eac800c',   name: 'Middle',                                           slug: 'middle'},
-    
+
     // Burundi
     {id: '3b8f2c7d-9178-4f87-8a00-4e8a29da880c', code: 'BI-BB',       countryCommonId: 'd6ba7013-970a-4e55-b6cf-8cacc191a826',   name: 'Bubanza',                                          slug: 'bubanza'},
     {id: '06480114-0dcc-40a6-97d3-c779e27009d8', code: 'BI-BL',       countryCommonId: 'd6ba7013-970a-4e55-b6cf-8cacc191a826',   name: 'Bujumbura Rural',                                  slug: 'bujumbura-rural'},
@@ -365,7 +365,7 @@ export const administrativeAreasLevel1 = [
     {id: 'fe72346c-a2ef-44c1-a2f8-c482a3e671ed', code: 'BI-NG',       countryCommonId: 'd6ba7013-970a-4e55-b6cf-8cacc191a826',   name: 'Ngozi',                                            slug: 'ngozi'},
     {id: '7e17aea0-9633-4021-8c88-cd2f534b323c', code: 'BI-RT',       countryCommonId: 'd6ba7013-970a-4e55-b6cf-8cacc191a826',   name: 'Rutana',                                           slug: 'rutana'},
     {id: '6abd3ced-479a-437a-ab5f-95955bd699ec', code: 'BI-RY',       countryCommonId: 'd6ba7013-970a-4e55-b6cf-8cacc191a826',   name: 'Ruyigi',                                           slug: 'ruyigi'},
-    
+
     // Benín
     {id: 'c5b569c3-3182-40a9-a8a4-64e4656dd52e', code: 'BJ-AK',       countryCommonId: '00e3ad00-1975-439b-9405-4ac260bb507a',   name: 'Atakora',                                          slug: 'atakora'},
     {id: 'f4e6ed33-dae4-4607-a45a-6457871d98ea', code: 'BJ-AL',       countryCommonId: '00e3ad00-1975-439b-9405-4ac260bb507a',   name: 'Alibori',                                          slug: 'alibori'},
@@ -379,13 +379,13 @@ export const administrativeAreasLevel1 = [
     {id: '192aba1e-aad3-4602-ae9a-fc4a4b63ac5a', code: 'BJ-OU',       countryCommonId: '00e3ad00-1975-439b-9405-4ac260bb507a',   name: 'Ouémé',                                            slug: 'oueme'},
     {id: 'febb5652-4acc-4ccd-b264-36959ac365d9', code: 'BJ-PL',       countryCommonId: '00e3ad00-1975-439b-9405-4ac260bb507a',   name: 'Plateau',                                          slug: 'plateau'},
     {id: '9b4ab563-1b36-4b6d-a05e-3cb657007cb4', code: 'BJ-ZO',       countryCommonId: '00e3ad00-1975-439b-9405-4ac260bb507a',   name: 'Zou',                                              slug: 'zou'},
-    
+
     // Brunéi
     {id: '8c468c53-fc08-4782-a9a3-e379cd3edd79', code: 'BN-BE',       countryCommonId: '94d0185f-93e2-434d-b360-4185dac59769',   name: 'Belait',                                           slug: 'belait'},
     {id: '9d7daad3-e862-4563-a9bb-dccc4ce89011', code: 'BN-BM',       countryCommonId: '94d0185f-93e2-434d-b360-4185dac59769',   name: 'Brunei und Muara',                                 slug: 'brunei-und-muara'},
     {id: '298d1e8e-eca2-4f2d-8227-c34dff46c9de', code: 'BN-TE',       countryCommonId: '94d0185f-93e2-434d-b360-4185dac59769',   name: 'Temburong',                                        slug: 'temburong'},
     {id: '176b73f0-cc95-4c8b-81ff-8c8a52ea4e04', code: 'BN-TU',       countryCommonId: '94d0185f-93e2-434d-b360-4185dac59769',   name: 'Tutong',                                           slug: 'tutong'},
-    
+
     // Bolivia
     {id: 'e794209b-3bcd-4b64-b3f3-d96419b1bdd7', code: 'BO-B',        countryCommonId: '8c4b2462-9044-492b-94dd-99d976a6e6b4',   name: 'Beni',                                             slug: 'beni'},
     {id: 'd8471045-6f27-40d1-b875-e6e62ce4484d', code: 'BO-C',        countryCommonId: '8c4b2462-9044-492b-94dd-99d976a6e6b4',   name: 'Cochabamba',                                       slug: 'cochabamba'},
@@ -396,7 +396,7 @@ export const administrativeAreasLevel1 = [
     {id: '71f2d503-62f6-454e-899e-1a1a04638f3c', code: 'BO-P',        countryCommonId: '8c4b2462-9044-492b-94dd-99d976a6e6b4',   name: 'Potosí',                                           slug: 'potosi'},
     {id: '03ccff56-3659-423d-8e18-7af62123e05c', code: 'BO-S',        countryCommonId: '8c4b2462-9044-492b-94dd-99d976a6e6b4',   name: 'Santa Cruz',                                       slug: 'santa-cruz'},
     {id: '927f0af3-6337-4fa7-b724-ac909abd167e', code: 'BO-T',        countryCommonId: '8c4b2462-9044-492b-94dd-99d976a6e6b4',   name: 'Tarija',                                           slug: 'tarija'},
-    
+
     // Brasil
     {id: '4e0d0613-4202-48bc-afcf-186b338f3995', code: 'BR-AC',       countryCommonId: '9b3881ef-ddee-4b1b-9e38-981aa00dca7c',   name: 'Acre',                                             slug: 'acre'},
     {id: '0158cfd2-b4e3-4349-ba33-3f1b87e586c2', code: 'BR-AL',       countryCommonId: '9b3881ef-ddee-4b1b-9e38-981aa00dca7c',   name: 'Alagoas',                                          slug: 'alagoas'},
@@ -425,7 +425,7 @@ export const administrativeAreasLevel1 = [
     {id: '0cb6bb88-94c1-4c6c-829d-62a82312c1e9', code: 'BR-SE',       countryCommonId: '9b3881ef-ddee-4b1b-9e38-981aa00dca7c',   name: 'Sergipe',                                          slug: 'sergipe'},
     {id: 'eeb32d01-5540-4598-9a3b-af79091de4b5', code: 'BR-SP',       countryCommonId: '9b3881ef-ddee-4b1b-9e38-981aa00dca7c',   name: 'São Paulo',                                        slug: 'sao-paulo'},
     {id: 'ea0ca449-65db-47b5-b459-54cae974b761', code: 'BR-TO',       countryCommonId: '9b3881ef-ddee-4b1b-9e38-981aa00dca7c',   name: 'Tocantins',                                        slug: 'tocantins'},
-    
+
     // Bahamas
     {id: '4946d2e2-b6cf-4ec6-a014-b60ca6e4578f', code: 'BS-AK',       countryCommonId: 'a0091003-811f-4c2d-8f0a-d24e82819653',   name: 'Acklins',                                          slug: 'acklins'},
     {id: '1c0f8a17-2a18-4199-a544-86b8a9037e5e', code: 'BS-BI',       countryCommonId: 'a0091003-811f-4c2d-8f0a-d24e82819653',   name: 'Bimini',                                           slug: 'bimini'},
@@ -458,7 +458,7 @@ export const administrativeAreasLevel1 = [
     {id: '6f9a84f5-96c7-4e8b-8d83-25a70ac6eb2c', code: 'BS-SS',       countryCommonId: 'a0091003-811f-4c2d-8f0a-d24e82819653',   name: 'San Salvador',                                     slug: 'san-salvador'},
     {id: 'a7573ae7-ec77-46a2-8594-dffedd1582b6', code: 'BS-SW',       countryCommonId: 'a0091003-811f-4c2d-8f0a-d24e82819653',   name: 'Spanish Wells',                                    slug: 'spanish-wells'},
     {id: '7f1fb258-242b-481d-b373-69e1b862f542', code: 'BS-WG',       countryCommonId: 'a0091003-811f-4c2d-8f0a-d24e82819653',   name: 'West Grand Bahama',                                slug: 'west-grand-bahama'},
-    
+
     // Bután
     {id: '847dda2e-c834-4fe2-bfc9-dc42ee612e76', code: 'BT-11',       countryCommonId: 'b840f560-f218-456d-9a46-bc7c8f7eb7de',   name: 'Paro',                                             slug: 'paro'},
     {id: '0369ce67-60c7-486f-85c4-a1f2c5545d97', code: 'BT-12',       countryCommonId: 'b840f560-f218-456d-9a46-bc7c8f7eb7de',   name: 'Chukha',                                           slug: 'chukha'},
@@ -480,7 +480,7 @@ export const administrativeAreasLevel1 = [
     {id: 'a2889adc-444f-4217-8669-e9ac9a63faa3', code: 'BT-45',       countryCommonId: 'b840f560-f218-456d-9a46-bc7c8f7eb7de',   name: 'Samdrup Jongkhar',                                 slug: 'samdrup-jongkhar'},
     {id: 'ad446682-d2a7-4eef-b6d5-a7ec16567954', code: 'BT-GA',       countryCommonId: 'b840f560-f218-456d-9a46-bc7c8f7eb7de',   name: 'Gasa',                                             slug: 'gasa'},
     {id: 'f2850324-11e3-4a9f-95e0-1e50c636db84', code: 'BT-TY',       countryCommonId: 'b840f560-f218-456d-9a46-bc7c8f7eb7de',   name: 'Trashiyangtse',                                    slug: 'trashiyangtse'},
-    
+
     // Botsuana
     {id: 'd54d201e-566a-4981-b6d4-fbd16fb5d18a', code: 'BW-CE',       countryCommonId: '3c4eb18f-63c6-47f4-a984-fc92da53f4a1',   name: 'Central',                                          slug: 'central'},
     {id: '04ce0653-b117-40af-bd5e-1445c8bff401', code: 'BW-GH',       countryCommonId: '3c4eb18f-63c6-47f4-a984-fc92da53f4a1',   name: 'Ghanzi',                                           slug: 'ghanzi'},
@@ -491,7 +491,7 @@ export const administrativeAreasLevel1 = [
     {id: '4f03128a-9e43-4e5b-9a33-ff3eaaabe35c', code: 'BW-NW',       countryCommonId: '3c4eb18f-63c6-47f4-a984-fc92da53f4a1',   name: 'Nord-Ouest',                                       slug: 'nord-ouest'},
     {id: '0d9123b0-61f5-49a9-b3d0-1c9b697329ed', code: 'BW-SE',       countryCommonId: '3c4eb18f-63c6-47f4-a984-fc92da53f4a1',   name: 'Sud-Est',                                          slug: 'sud-est'},
     {id: '41549b9e-0871-4397-aaf0-e8fb2cedb648', code: 'BW-SO',       countryCommonId: '3c4eb18f-63c6-47f4-a984-fc92da53f4a1',   name: 'Sud',                                              slug: 'sud'},
-    
+
     // Bielorrusia
     {id: 'b0281079-7beb-499f-9307-678d6356d4ed', code: 'BY-BR',       countryCommonId: '38c5e6fe-0b0e-4c67-9407-db2dbb477dc5',   name: 'Brest',                                            slug: 'brest'},
     {id: 'e692b714-fbb7-44ef-a293-39a3710f2095', code: 'BY-HM',       countryCommonId: '38c5e6fe-0b0e-4c67-9407-db2dbb477dc5',   name: 'Ciudad de Minsk',                                  slug: 'ciudad-de-minsk'},
@@ -500,7 +500,7 @@ export const administrativeAreasLevel1 = [
     {id: '7978296f-443f-452b-b08a-f510329b76b5', code: 'BY-MA',       countryCommonId: '38c5e6fe-0b0e-4c67-9407-db2dbb477dc5',   name: 'Mohilyow',                                         slug: 'mohilyow'},
     {id: '2d3aa683-3659-4d81-84a4-c49be9e34153', code: 'BY-MI',       countryCommonId: '38c5e6fe-0b0e-4c67-9407-db2dbb477dc5',   name: 'Minsk',                                            slug: 'minsk'},
     {id: '194b69ce-665e-42d5-ab0e-98d56e580c72', code: 'BY-VI',       countryCommonId: '38c5e6fe-0b0e-4c67-9407-db2dbb477dc5',   name: 'Vitsebsk',                                         slug: 'vitsebsk'},
-    
+
     // Belice
     {id: '02b63619-be5b-4b00-b5a8-ef1a11d0cc60', code: 'BZ-BZ',       countryCommonId: '84a5d99e-683a-47fc-bcbf-3ea032ee23a1',   name: 'Belize',                                           slug: 'belize'},
     {id: 'a19b4587-d698-4c9b-977c-1487c47e5a70', code: 'BZ-CY',       countryCommonId: '84a5d99e-683a-47fc-bcbf-3ea032ee23a1',   name: 'Cayo',                                             slug: 'cayo'},
@@ -508,7 +508,7 @@ export const administrativeAreasLevel1 = [
     {id: '31fadd71-0355-4a32-acaf-26fcca48b7be', code: 'BZ-OW',       countryCommonId: '84a5d99e-683a-47fc-bcbf-3ea032ee23a1',   name: 'Orange Walk',                                      slug: 'orange-walk'},
     {id: '9265bed4-b7e0-48e5-a5a8-27e2ddaddfcb', code: 'BZ-SC',       countryCommonId: '84a5d99e-683a-47fc-bcbf-3ea032ee23a1',   name: 'Stann Creek',                                      slug: 'stann-creek'},
     {id: 'e37c1329-a350-4298-b114-023c24b9a96f', code: 'BZ-TOL',      countryCommonId: '84a5d99e-683a-47fc-bcbf-3ea032ee23a1',   name: 'Toledo',                                           slug: 'toledo'},
-    
+
     // Canadá
     {id: '1f8853e4-a935-4647-9b1a-3af54be5cbb7', code: 'CA-AB',       countryCommonId: 'fab3b96e-18b4-4b5a-99dc-2f8050e6851d',   name: 'Alberta',                                          slug: 'alberta'},
     {id: 'aff4b202-aeef-49f7-9488-266768955f0d', code: 'CA-BC',       countryCommonId: 'fab3b96e-18b4-4b5a-99dc-2f8050e6851d',   name: 'British Columbia',                                 slug: 'british-columbia'},
@@ -523,7 +523,7 @@ export const administrativeAreasLevel1 = [
     {id: '851287a5-f1fe-4cc1-b7a5-3cddb6a580ea', code: 'CA-QC',       countryCommonId: 'fab3b96e-18b4-4b5a-99dc-2f8050e6851d',   name: 'Quebec',                                           slug: 'quebec'},
     {id: '2085d1cf-b4e5-4456-9b63-986df724e36e', code: 'CA-SK',       countryCommonId: 'fab3b96e-18b4-4b5a-99dc-2f8050e6851d',   name: 'Saskatchewan',                                     slug: 'saskatchewan'},
     {id: '889d9cf2-bba3-4de4-9d6f-1efd4b0d7e79', code: 'CA-YT',       countryCommonId: 'fab3b96e-18b4-4b5a-99dc-2f8050e6851d',   name: 'Yukon Territory',                                  slug: 'yukon-territory'},
-    
+
     // República Democrática del Congo
     {id: '70ec6118-6efa-45e2-9131-85d2105fa4f2', code: 'CD-BC',       countryCommonId: 'dca2d4b8-221f-4e52-b4ce-0104bb4552ba',   name: 'Bas-Congo',                                        slug: 'bas-congo'},
     {id: '24b4a162-e6c5-4fdd-900c-35c189be3554', code: 'CD-BN',       countryCommonId: 'dca2d4b8-221f-4e52-b4ce-0104bb4552ba',   name: 'Bandundu',                                         slug: 'bandundu'},
@@ -536,7 +536,7 @@ export const administrativeAreasLevel1 = [
     {id: '0716754b-c854-4d36-be6b-f7c76d9f259a', code: 'CD-NK',       countryCommonId: 'dca2d4b8-221f-4e52-b4ce-0104bb4552ba',   name: 'Nord-Kivu',                                        slug: 'nord-kivu'},
     {id: '1a454eec-fd05-4717-819e-4c51879a0296', code: 'CD-OR',       countryCommonId: 'dca2d4b8-221f-4e52-b4ce-0104bb4552ba',   name: 'Orientale',                                        slug: 'orientale'},
     {id: '89d82871-dddf-4246-b54d-439a4b27319e', code: 'CD-SK',       countryCommonId: 'dca2d4b8-221f-4e52-b4ce-0104bb4552ba',   name: 'Sud-Kivu',                                         slug: 'sud-kivu'},
-    
+
     // República Centroafricana
     {id: '525fba64-7f6b-4bae-a4de-339850dff8a9', code: 'CF-AC',       countryCommonId: 'c3793101-1127-4d9d-b669-8273b9275ece',   name: 'Ouham',                                            slug: 'ouham'},
     {id: '25cfb079-2640-49c4-9a6c-a92f305f29da', code: 'CF-BB',       countryCommonId: 'c3793101-1127-4d9d-b669-8273b9275ece',   name: 'Bamingui-Bangoran',                                slug: 'bamingui-bangoran'},
@@ -555,7 +555,7 @@ export const administrativeAreasLevel1 = [
     {id: 'a59b83ab-4430-4998-a02a-98441ad4cb05', code: 'CF-SE',       countryCommonId: 'c3793101-1127-4d9d-b669-8273b9275ece',   name: 'Sangha-Mbaéré',                                    slug: 'sangha-mbaere'},
     {id: '63c992e5-2950-45c6-954b-1cb4e559d8bf', code: 'CF-UK',       countryCommonId: 'c3793101-1127-4d9d-b669-8273b9275ece',   name: 'Ouaka',                                            slug: 'ouaka'},
     {id: '59650f66-80d1-4799-bc60-3370905b52b0', code: 'CF-VK',       countryCommonId: 'c3793101-1127-4d9d-b669-8273b9275ece',   name: 'Vakaga',                                           slug: 'vakaga'},
-    
+
     // Congo
     {id: '55b0d6af-95d1-46b8-9b90-036fb593fcdd', code: 'CG-11',       countryCommonId: '11ce7ff2-74df-4a59-a5cf-d45f97ec72d4',   name: 'Bouenza',                                          slug: 'bouenza'},
     {id: 'ba15435c-308b-4784-aa90-0702d0648179', code: 'CG-12',       countryCommonId: '11ce7ff2-74df-4a59-a5cf-d45f97ec72d4',   name: 'Pool',                                             slug: 'pool'},
@@ -569,7 +569,7 @@ export const administrativeAreasLevel1 = [
     {id: '34f13093-7cb8-4eb9-8a5e-b3aa0c73ae02', code: 'CG-8',        countryCommonId: '11ce7ff2-74df-4a59-a5cf-d45f97ec72d4',   name: 'Cuvette',                                          slug: 'cuvette'},
     {id: 'ed598e9b-05a3-45cd-b392-c353449de1d8', code: 'CG-9',        countryCommonId: '11ce7ff2-74df-4a59-a5cf-d45f97ec72d4',   name: 'Niari',                                            slug: 'niari'},
     {id: '7fdb534e-a0cf-4866-8c5b-bee4a50f72c9', code: 'CG-BZV',      countryCommonId: '11ce7ff2-74df-4a59-a5cf-d45f97ec72d4',   name: 'Brazzaville',                                      slug: 'brazzaville'},
-    
+
     // Suiza
     {id: 'fbe9d1e4-6c08-4877-ab24-e1a913b5e249', code: 'CH-AG',       countryCommonId: 'c42eec69-235c-483d-83e0-05994c966991',   name: 'Argovia',                                          slug: 'argovia'},
     {id: '301d220c-665d-40e4-8496-db6198ecba01', code: 'CH-AI',       countryCommonId: 'c42eec69-235c-483d-83e0-05994c966991',   name: 'Appezell Rodas Interiores',                        slug: 'appezell-rodas-interiores'},
@@ -597,7 +597,7 @@ export const administrativeAreasLevel1 = [
     {id: '3c9c098a-47fa-48aa-a1a5-cd7e47b8c8c2', code: 'CH-VS',       countryCommonId: 'c42eec69-235c-483d-83e0-05994c966991',   name: 'Valais',                                           slug: 'valais'},
     {id: '81fd0fce-6ceb-4977-921c-7546ee4d1d9e', code: 'CH-ZG',       countryCommonId: 'c42eec69-235c-483d-83e0-05994c966991',   name: 'Zug',                                              slug: 'zug'},
     {id: 'ea043f90-863a-43c1-b532-9fdd44d0fd6c', code: 'CH-ZH',       countryCommonId: 'c42eec69-235c-483d-83e0-05994c966991',   name: 'Zúrich',                                           slug: 'zurich'},
-    
+
     // Costa de Marfil
     {id: 'b8a69a92-5950-4d14-b307-3626f153e3d9', code: 'CI-01',       countryCommonId: '1f7bd956-17bf-4c8d-a1b3-9c7b5f681213',   name: 'Lagunes',                                          slug: 'lagunes'},
     {id: '2b9ea916-4025-4ba1-9940-9dde22e722a0', code: 'CI-02',       countryCommonId: '1f7bd956-17bf-4c8d-a1b3-9c7b5f681213',   name: 'Haut-Sassandra',                                   slug: 'haut-sassandra'},
@@ -618,7 +618,7 @@ export const administrativeAreasLevel1 = [
     {id: '9b5a2a0d-e2e8-448d-926d-04a27acce72a', code: 'CI-17',       countryCommonId: '1f7bd956-17bf-4c8d-a1b3-9c7b5f681213',   name: 'Bafing',                                           slug: 'bafing'},
     {id: 'bd10197a-8190-4b83-903f-eb24d8c7076a', code: 'CI-18',       countryCommonId: '1f7bd956-17bf-4c8d-a1b3-9c7b5f681213',   name: 'Fromager',                                         slug: 'fromager'},
     {id: '7ea2975b-0adf-4d7f-b579-24129f86ac3a', code: 'CI-19',       countryCommonId: '1f7bd956-17bf-4c8d-a1b3-9c7b5f681213',   name: 'Moyen-Cavally',                                    slug: 'moyen-cavally'},
-    
+
     // Chile
     {id: '42c9c1f0-85f0-44d9-a005-ef52c674b4f7', code: 'CL-AI',       countryCommonId: 'bd303e78-8be4-47ff-bc54-5a1e0d771dee',   name: 'Aisén del General Carlos Ibáñez del Campo',        slug: 'aisen-del-general-carlos-ibanez-del-campo'},
     {id: '1be499c3-8557-4bad-a870-d9c4fbaecc3d', code: 'CL-AN',       countryCommonId: 'bd303e78-8be4-47ff-bc54-5a1e0d771dee',   name: 'Antofagasta',                                      slug: 'antofagasta'},
@@ -635,7 +635,7 @@ export const administrativeAreasLevel1 = [
     {id: 'cf45c06f-05fc-4501-a2b0-0d3cf33440d6', code: 'CL-RM',       countryCommonId: 'bd303e78-8be4-47ff-bc54-5a1e0d771dee',   name: 'Metropolitana de Santiago',                        slug: 'metropolitana-de-santiago'},
     {id: 'f014dc80-2ea7-42a2-84ae-10ac0715dbfe', code: 'CL-TA',       countryCommonId: 'bd303e78-8be4-47ff-bc54-5a1e0d771dee',   name: 'Tarapacá',                                         slug: 'tarapaca'},
     {id: 'e6cc8335-e3bb-4b12-85b3-b20e464044c6', code: 'CL-VS',       countryCommonId: 'bd303e78-8be4-47ff-bc54-5a1e0d771dee',   name: 'Valparaíso',                                       slug: 'valparaiso'},
-    
+
     // Camerún
     {id: '4cde99db-4371-4664-9a70-97469a9fbaec', code: 'CM-AD',       countryCommonId: '8ddc9ea7-058f-4b66-9fe3-b1b6a17b99a5',   name: 'Adamaoua',                                         slug: 'adamaoua'},
     {id: '62dd1131-ad9a-4e31-8ac0-c03b4da12504', code: 'CM-CE',       countryCommonId: '8ddc9ea7-058f-4b66-9fe3-b1b6a17b99a5',   name: 'Centre',                                           slug: 'centre'},
@@ -647,7 +647,7 @@ export const administrativeAreasLevel1 = [
     {id: '6ccbd4eb-9f13-45ac-8264-ebe1cb45ca76', code: 'CM-OU',       countryCommonId: '8ddc9ea7-058f-4b66-9fe3-b1b6a17b99a5',   name: 'West',                                             slug: 'west'},
     {id: '339b4f73-7e64-4160-a00c-657312a2b4fc', code: 'CM-SU',       countryCommonId: '8ddc9ea7-058f-4b66-9fe3-b1b6a17b99a5',   name: 'South',                                            slug: 'south'},
     {id: '885eee01-bb97-43fc-9315-9f27fe3d2d43', code: 'CM-SW',       countryCommonId: '8ddc9ea7-058f-4b66-9fe3-b1b6a17b99a5',   name: 'South-West',                                       slug: 'south-west'},
-    
+
     // China
     {id: '87f0e094-2a67-4306-bf1c-6a50abb1a489', code: 'CN-11',       countryCommonId: 'a263e628-d116-43d5-b2f2-44284af08e0a',   name: 'Municipio de Beijing',                             slug: 'municipio-de-beijing'},
     {id: '4fc29ee3-3bf3-453a-af13-095275664451', code: 'CN-12',       countryCommonId: 'a263e628-d116-43d5-b2f2-44284af08e0a',   name: 'Municipio de Tianjin',                             slug: 'municipio-de-tianjin'},
@@ -683,7 +683,7 @@ export const administrativeAreasLevel1 = [
     {id: '54de3cad-7155-4b43-b383-de80dd5cd7b0', code: 'CN-71',       countryCommonId: 'a263e628-d116-43d5-b2f2-44284af08e0a',   name: 'Taïwan',                                           slug: 'taiwan'},
     {id: '10e3956e-1e2a-4a84-8102-119c9b94ce89', code: 'CN-91',       countryCommonId: 'a263e628-d116-43d5-b2f2-44284af08e0a',   name: 'Región de Hong Kong',                              slug: 'region-de-hong-kong'},
     {id: 'db209a7f-d030-477d-93d3-d16d10d358d5', code: 'CN-92',       countryCommonId: 'a263e628-d116-43d5-b2f2-44284af08e0a',   name: 'Región de Macao',                                  slug: 'region-de-macao'},
-    
+
     // Colombia
     {id: '7feb3d04-69d3-44bc-a632-d1028835a65f', code: 'CO-AMA',      countryCommonId: '90ec9749-1e18-427b-96ed-9b1138bf6732',   name: 'Amazonas',                                         slug: 'amazonas'},
     {id: '63a547b2-2d3b-4d92-8861-8d1875e2ed6f', code: 'CO-ANT',      countryCommonId: '90ec9749-1e18-427b-96ed-9b1138bf6732',   name: 'Antioquia',                                        slug: 'antioquia'},
@@ -718,7 +718,7 @@ export const administrativeAreasLevel1 = [
     {id: '09d7b491-c827-4216-9a2e-1585677ae124', code: 'CO-VAC',      countryCommonId: '90ec9749-1e18-427b-96ed-9b1138bf6732',   name: 'Valle del Cauca',                                  slug: 'valle-del-cauca'},
     {id: 'da3f79fe-dff3-46fa-9dab-2f3a7c8f8d41', code: 'CO-VAU',      countryCommonId: '90ec9749-1e18-427b-96ed-9b1138bf6732',   name: 'Vaupés',                                           slug: 'vaupes'},
     {id: 'b58b0932-9fe0-4854-98d2-5c334a47fec2', code: 'CO-VID',      countryCommonId: '90ec9749-1e18-427b-96ed-9b1138bf6732',   name: 'Vichada',                                          slug: 'vichada'},
-    
+
     // Costa Rica
     {id: 'a2dddbcf-0f5f-4414-9a57-697789654f54', code: 'CR-A',        countryCommonId: '15899692-73bd-4ac9-88cf-efb02328117d',   name: 'Alajuela',                                         slug: 'alajuela'},
     {id: '3cc8cd97-80ba-4e06-ab6c-6968d8b1b848', code: 'CR-C',        countryCommonId: '15899692-73bd-4ac9-88cf-efb02328117d',   name: 'Cartago',                                          slug: 'cartago'},
@@ -727,7 +727,7 @@ export const administrativeAreasLevel1 = [
     {id: 'eae4f39e-e785-4d37-98e0-95962d22ba06', code: 'CR-L',        countryCommonId: '15899692-73bd-4ac9-88cf-efb02328117d',   name: 'Limón',                                            slug: 'limon'},
     {id: 'adb97f5e-a3a9-4ffc-973b-1956aaf7eec7', code: 'CR-P',        countryCommonId: '15899692-73bd-4ac9-88cf-efb02328117d',   name: 'Puntarenas',                                       slug: 'puntarenas'},
     {id: '7c7693fc-fa91-45cb-bdc5-928f7a2649c3', code: 'CR-SJ',       countryCommonId: '15899692-73bd-4ac9-88cf-efb02328117d',   name: 'San José',                                         slug: 'san-jose'},
-    
+
     // Cuba
     {id: '295c96a0-afa0-4d87-ad2b-ec21865b812a', code: 'CU-01',       countryCommonId: '0e705b77-4bf5-42af-b32c-513a8edc19e1',   name: 'Pinar del Río',                                    slug: 'pinar-del-rio'},
     {id: '1e721231-873b-4851-a2f7-96affa23bc75', code: 'CU-03',       countryCommonId: '0e705b77-4bf5-42af-b32c-513a8edc19e1',   name: 'La Habana',                                        slug: 'la-habana'},
@@ -745,7 +745,9 @@ export const administrativeAreasLevel1 = [
     {id: '970e7651-59e8-42b4-a2b5-ad297a5f01fa', code: 'CU-15',       countryCommonId: '0e705b77-4bf5-42af-b32c-513a8edc19e1',   name: 'Artemisa',                                         slug: 'artemisa'},
     {id: 'd567a28a-088f-4539-b298-33994a5a95b8', code: 'CU-16',       countryCommonId: '0e705b77-4bf5-42af-b32c-513a8edc19e1',   name: 'Mayabeque',                                        slug: 'mayabeque'},
     {id: '7663ad59-2db9-4b6a-a76f-b708971727b2', code: 'CU-99',       countryCommonId: '0e705b77-4bf5-42af-b32c-513a8edc19e1',   name: 'Isla de la Juventud',                              slug: 'isla-de-la-juventud'},
-    
+];
+
+export const administrativeAreasLevel102 = [
     // Cabo Verde
     {id: 'bda133f2-70cb-4535-806c-c3a532123ada', code: 'CV-BR',       countryCommonId: '90202f26-f388-49ca-8296-7f650a149c57',   name: 'Brava',                                            slug: 'brava'},
     {id: '150634a5-0eb1-458a-93e3-54f7db6593d5', code: 'CV-BV',       countryCommonId: '90202f26-f388-49ca-8296-7f650a149c57',   name: 'Boa Vista',                                        slug: 'boa-vista'},
@@ -769,7 +771,7 @@ export const administrativeAreasLevel1 = [
     {id: 'bd6cb7c2-ab4c-47ba-ba6f-7d614f5651b2', code: 'CV-SV',       countryCommonId: '90202f26-f388-49ca-8296-7f650a149c57',   name: 'São Vicente',                                      slug: 'sao-vicente'},
     {id: '8db8f3e1-9f55-4a50-9cbf-d8507ff5cf92', code: 'CV-TA',       countryCommonId: '90202f26-f388-49ca-8296-7f650a149c57',   name: 'Tarrafal',                                         slug: 'tarrafal'},
     {id: '3428ee8f-c304-4e66-909f-d6bdee82262a', code: 'CV-TS',       countryCommonId: '90202f26-f388-49ca-8296-7f650a149c57',   name: 'Tarrafal de São Nicolau',                          slug: 'tarrafal-de-sao-nicolau'},
-    
+
     // Chipre
     {id: '1d421a7d-b2a6-4c44-af58-6d31f4b2482d', code: 'CY-01',       countryCommonId: 'e5c28655-436d-4acf-8e5e-85e7d7b9bb8e',   name: 'Lefkosia',                                         slug: 'lefkosia'},
     {id: 'd662ab65-e50d-469c-b942-9f6fc022f6b9', code: 'CY-02',       countryCommonId: 'e5c28655-436d-4acf-8e5e-85e7d7b9bb8e',   name: 'Lemesos',                                          slug: 'lemesos'},
@@ -777,7 +779,7 @@ export const administrativeAreasLevel1 = [
     {id: '5473dd08-2c75-4ea1-8d6c-ae036d673f19', code: 'CY-04',       countryCommonId: 'e5c28655-436d-4acf-8e5e-85e7d7b9bb8e',   name: 'Ammochostos',                                      slug: 'ammochostos'},
     {id: '683800f7-5560-428c-a099-f95916bb120a', code: 'CY-05',       countryCommonId: 'e5c28655-436d-4acf-8e5e-85e7d7b9bb8e',   name: 'Pafos',                                            slug: 'pafos'},
     {id: 'cc6616e3-216f-45d7-985b-136b74c7bae9', code: 'CY-06',       countryCommonId: 'e5c28655-436d-4acf-8e5e-85e7d7b9bb8e',   name: 'Keryneia',                                         slug: 'keryneia'},
-    
+
     // República Checa
     {id: 'c9396359-543f-4409-b18e-beaf53ed7f0d', code: 'CZ-JC',       countryCommonId: 'e44253de-c4d5-40a0-a08c-bc234156e253',   name: 'Jihočeský',                                        slug: 'jihocesky'},
     {id: '8113e0fc-9938-4533-bce3-a9c745afeb25', code: 'CZ-JM',       countryCommonId: 'e44253de-c4d5-40a0-a08c-bc234156e253',   name: 'Jihomoravský',                                     slug: 'jihomoravsky'},
@@ -793,7 +795,7 @@ export const administrativeAreasLevel1 = [
     {id: '6447b644-e485-49b8-b7be-0642ae562fe9', code: 'CZ-US',       countryCommonId: 'e44253de-c4d5-40a0-a08c-bc234156e253',   name: 'Ústecký',                                          slug: 'ustecky'},
     {id: '85e7153a-8f56-4a28-970c-8f8e921b1cc7', code: 'CZ-VY',       countryCommonId: 'e44253de-c4d5-40a0-a08c-bc234156e253',   name: 'Vysočina',                                         slug: 'vysocina'},
     {id: 'd24096bd-34de-48b2-99b1-8995d501f1d1', code: 'CZ-ZL',       countryCommonId: 'e44253de-c4d5-40a0-a08c-bc234156e253',   name: 'Zlínský',                                          slug: 'zlinsky'},
-    
+
     {id: '410699c3-bc7e-4933-823d-b76dc57558c8', code: 'DE-BB',       countryCommonId: '51a647df-9738-4dbb-829d-f926d8805ef8',   name: 'Brandeburg',                                       slug: 'brandeburg'},
     {id: 'dcb7ef6b-108c-494e-8d1b-e57d93dec1b9', code: 'DE-BE',       countryCommonId: '51a647df-9738-4dbb-829d-f926d8805ef8',   name: 'Berlín',                                           slug: 'berlin'},
     {id: 'edb982f6-79c8-4af6-a813-08c801c040c9', code: 'DE-BW',       countryCommonId: '51a647df-9738-4dbb-829d-f926d8805ef8',   name: 'Baden-Württemberg',                                slug: 'baden-wurttemberg'},
@@ -810,7 +812,7 @@ export const administrativeAreasLevel1 = [
     {id: '82ce5de9-a1d1-4fcc-b627-b3aeabad0240', code: 'DE-SN',       countryCommonId: '51a647df-9738-4dbb-829d-f926d8805ef8',   name: 'Sachsen',                                          slug: 'sachsen'},
     {id: '8768c98a-8c56-4e90-9f1d-fa3aa258a00a', code: 'DE-ST',       countryCommonId: '51a647df-9738-4dbb-829d-f926d8805ef8',   name: 'Sachsen-Anhalt',                                   slug: 'sachsen-anhalt'},
     {id: '918df218-0b9c-4787-88cf-328455c284ab', code: 'DE-TH',       countryCommonId: '51a647df-9738-4dbb-829d-f926d8805ef8',   name: 'Thüringen',                                        slug: 'thuringen'},
-    
+
     // Yibuti
     {id: '0c570308-d2f2-4c0e-80e2-bb51ae142e64', code: 'DJ-AR',       countryCommonId: 'bfda6340-44cf-432e-a7df-ef83064a19da',   name: 'Arta',                                             slug: 'arta'},
     {id: '4bf6fbf9-7f22-412f-acc6-f618f20d21cb', code: 'DJ-AS',       countryCommonId: 'bfda6340-44cf-432e-a7df-ef83064a19da',   name: 'Ali Sabieh',                                       slug: 'ali-sabieh'},
@@ -818,14 +820,14 @@ export const administrativeAreasLevel1 = [
     {id: '038b65bb-c9ce-425c-baed-c281ceeac472', code: 'DJ-DJ',       countryCommonId: 'bfda6340-44cf-432e-a7df-ef83064a19da',   name: 'Ciudad de Djibouti',                               slug: 'ciudad-de-djibouti'},
     {id: 'e5494b02-7ca5-4c13-ba66-f87ad0f798d4', code: 'DJ-OB',       countryCommonId: 'bfda6340-44cf-432e-a7df-ef83064a19da',   name: 'Obock',                                            slug: 'obock'},
     {id: '57d6524f-5944-43e1-86e2-cd0081191b87', code: 'DJ-TA',       countryCommonId: 'bfda6340-44cf-432e-a7df-ef83064a19da',   name: 'Tadjourah',                                        slug: 'tadjourah'},
-    
+
     // Dinamarca
     {id: '2eb9fa49-b444-4ac1-8f13-e9613f67c8e0', code: 'DK-81',       countryCommonId: '25c52504-1f15-490a-95b9-f3f24e6ca8bc',   name: 'Nordjylland',                                      slug: 'nordjylland'},
     {id: '8cbe39bb-daba-4a8a-8d58-d6dc3962f8cc', code: 'DK-82',       countryCommonId: '25c52504-1f15-490a-95b9-f3f24e6ca8bc',   name: 'Midtjylland',                                      slug: 'midtjylland'},
     {id: '7af2befc-3712-4cd5-9853-aee1bc428c3d', code: 'DK-83',       countryCommonId: '25c52504-1f15-490a-95b9-f3f24e6ca8bc',   name: 'Syddanmark',                                       slug: 'syddanmark'},
     {id: 'eff6675a-71b3-48a5-a9d9-557a7f61a738', code: 'DK-84',       countryCommonId: '25c52504-1f15-490a-95b9-f3f24e6ca8bc',   name: 'Hovedstaden',                                      slug: 'hovedstaden'},
     {id: 'b11fcec1-900d-40f8-8ff7-3a36c15945a0', code: 'DK-85',       countryCommonId: '25c52504-1f15-490a-95b9-f3f24e6ca8bc',   name: 'Zélande-du-Nord',                                  slug: 'zelande-du-nord'},
-    
+
     // Dominica
     {id: '1265535f-da43-4bf8-b6ae-128b11aa3449', code: 'DM-02',       countryCommonId: 'a3c277d7-ecbd-4e9c-b775-e966af6fc89e',   name: 'Saint Andrew',                                     slug: 'saint-andrew'},
     {id: 'd6e1120c-20d5-43a1-81d8-1fdf464f89c0', code: 'DM-03',       countryCommonId: 'a3c277d7-ecbd-4e9c-b775-e966af6fc89e',   name: 'Saint David',                                      slug: 'saint-david'},
@@ -837,7 +839,7 @@ export const administrativeAreasLevel1 = [
     {id: 'f5483926-925e-4a7c-8b6c-59509d60b0dd', code: 'DM-09',       countryCommonId: 'a3c277d7-ecbd-4e9c-b775-e966af6fc89e',   name: 'Saint Patrick',                                    slug: 'saint-patrick'},
     {id: 'f6ab9501-1223-4bcd-a8cc-992a42856a1f', code: 'DM-10',       countryCommonId: 'a3c277d7-ecbd-4e9c-b775-e966af6fc89e',   name: 'Saint Paul',                                       slug: 'saint-paul'},
     {id: '603e0b36-22aa-4521-8dc4-0f102f7a807c', code: 'DM-11',       countryCommonId: 'a3c277d7-ecbd-4e9c-b775-e966af6fc89e',   name: 'Saint Peter',                                      slug: 'saint-peter'},
-    
+
     // República Dominicana
     {id: '83f15c7d-dcf1-4024-a059-3160e7606113', code: 'DO-01',       countryCommonId: 'f8b5a94e-cb54-473f-9d1e-69160b4a7a6d',   name: 'Distrito Nacional',                                slug: 'distrito-nacional'},
     {id: '459cffe1-9e2d-46b0-9972-85138fa7b9cb', code: 'DO-02',       countryCommonId: 'f8b5a94e-cb54-473f-9d1e-69160b4a7a6d',   name: 'Azua',                                             slug: 'azua'},
@@ -871,7 +873,7 @@ export const administrativeAreasLevel1 = [
     {id: '7eb9733b-19fc-41f2-8180-619c479707ef', code: 'DO-30',       countryCommonId: 'f8b5a94e-cb54-473f-9d1e-69160b4a7a6d',   name: 'Hato Mayor',                                       slug: 'hato-mayor'},
     {id: '1e902a7f-06ce-4f34-adaf-2e9fde1f403a', code: 'DO-31',       countryCommonId: 'f8b5a94e-cb54-473f-9d1e-69160b4a7a6d',   name: 'San José de Ocoa',                                 slug: 'san-jose-de-ocoa'},
     {id: 'bce247eb-1538-4339-bd24-bbe2f12e2d5a', code: 'DO-32',       countryCommonId: 'f8b5a94e-cb54-473f-9d1e-69160b4a7a6d',   name: 'Santo Domingo',                                    slug: 'santo-domingo'},
-    
+
     // Argelia
     {id: 'c7acd09d-2c60-4090-b34d-c4458dfb570b', code: 'DZ-01',       countryCommonId: '9f8b2277-b0fe-4781-9855-b63992770135',   name: 'Adrar',                                            slug: 'adrar'},
     {id: 'ab27642a-5f08-4baf-a907-a5cffe854cb3', code: 'DZ-02',       countryCommonId: '9f8b2277-b0fe-4781-9855-b63992770135',   name: 'Chlef',                                            slug: 'chlef'},
@@ -921,7 +923,7 @@ export const administrativeAreasLevel1 = [
     {id: '4411de19-7109-44e8-ab81-490128685aad', code: 'DZ-46',       countryCommonId: '9f8b2277-b0fe-4781-9855-b63992770135',   name: 'Aïn Témouchent',                                   slug: 'ain-temouchent'},
     {id: '76c81d8b-0913-424a-a3c9-883d17b3f026', code: 'DZ-47',       countryCommonId: '9f8b2277-b0fe-4781-9855-b63992770135',   name: 'Ghardaïa',                                         slug: 'ghardaia'},
     {id: 'a1dccfaa-58e4-428f-a5a0-3b516910327d', code: 'DZ-48',       countryCommonId: '9f8b2277-b0fe-4781-9855-b63992770135',   name: 'Relizane',                                         slug: 'relizane'},
-    
+
     // Ecuador
     {id: '1850d889-330f-4a32-8d72-2b4bfcc4621a', code: 'EC-A',        countryCommonId: 'dda39aee-e3df-479d-bf06-2edf8f781888',   name: 'Azuay',                                            slug: 'azuay'},
     {id: '2cbefd6f-284c-47a9-b9fb-4fbd1c09252c', code: 'EC-B',        countryCommonId: 'dda39aee-e3df-479d-bf06-2edf8f781888',   name: 'Bolívar',                                          slug: 'bolivar'},
@@ -947,7 +949,7 @@ export const administrativeAreasLevel1 = [
     {id: '98390444-fc2e-4a73-9500-2b2999d7449b', code: 'EC-X',        countryCommonId: 'dda39aee-e3df-479d-bf06-2edf8f781888',   name: 'Cotopaxi',                                         slug: 'cotopaxi'},
     {id: '60190023-a459-4272-bfdc-bdd08e5cb8a3', code: 'EC-Y',        countryCommonId: 'dda39aee-e3df-479d-bf06-2edf8f781888',   name: 'Pastaza',                                          slug: 'pastaza'},
     {id: '3dccd8d8-a82a-44ca-b4d9-56a1e0be1a44', code: 'EC-Z',        countryCommonId: 'dda39aee-e3df-479d-bf06-2edf8f781888',   name: 'Zamora Chinchipe',                                 slug: 'zamora-chinchipe'},
-    
+
     // Estonia
     {id: 'b1a55419-3760-4133-a816-fe8c9e001f45', code: 'EE-37',       countryCommonId: '07a3f0cc-7fd0-460a-b0d0-02921ae10e8b',   name: 'Harju',                                            slug: 'harju'},
     {id: 'f2277227-bfe2-4eff-87b5-3e1d8b319e71', code: 'EE-39',       countryCommonId: '07a3f0cc-7fd0-460a-b0d0-02921ae10e8b',   name: 'Hiiu',                                             slug: 'hiiu'},
@@ -964,7 +966,7 @@ export const administrativeAreasLevel1 = [
     {id: '1770f66a-308e-4548-ae5c-8d755093d0da', code: 'EE-82',       countryCommonId: '07a3f0cc-7fd0-460a-b0d0-02921ae10e8b',   name: 'Valga',                                            slug: 'valga'},
     {id: '2c6e361f-dbc4-4bf9-b3f4-825bd90e233b', code: 'EE-84',       countryCommonId: '07a3f0cc-7fd0-460a-b0d0-02921ae10e8b',   name: 'Viljandi',                                         slug: 'viljandi'},
     {id: 'e285f646-2da0-4d82-b553-aa3c24d742a0', code: 'EE-86',       countryCommonId: '07a3f0cc-7fd0-460a-b0d0-02921ae10e8b',   name: 'Võru',                                             slug: 'voru'},
-    
+
     // Egipto
     {id: '3bd6da63-fce3-4028-9c89-37b9e16e40fa', code: 'EG-ALX',      countryCommonId: '3eabc2e0-9e27-4aaf-86ae-d432b3f931dd',   name: 'Iskandarīyah',                                     slug: 'iskandariyah'},
     {id: 'fa38af68-cbd1-484f-bdd7-8be561969d05', code: 'EG-ASN',      countryCommonId: '3eabc2e0-9e27-4aaf-86ae-d432b3f931dd',   name: 'Aswān',                                            slug: 'aswan'},
@@ -995,7 +997,7 @@ export const administrativeAreasLevel1 = [
     {id: '41db0bf9-2995-440f-81a6-1adf0c63a480', code: 'EG-SU',       countryCommonId: '3eabc2e0-9e27-4aaf-86ae-d432b3f931dd',   name: 'As Sādis min Uktūbar',                             slug: 'as-sadis-min-uktubar'},
     {id: '95e3745e-bb9d-42d7-a297-8eee9eccb8b8', code: 'EG-SUZ',      countryCommonId: '3eabc2e0-9e27-4aaf-86ae-d432b3f931dd',   name: 'Suways',                                           slug: 'suways'},
     {id: '33ef9d61-3c11-452d-af00-940469b0118e', code: 'EG-WAD',      countryCommonId: '3eabc2e0-9e27-4aaf-86ae-d432b3f931dd',   name: 'Wādī al Jadīd',                                    slug: 'wadi-al-jadid'},
-    
+
     // Eritrea
     {id: 'd8347d2f-ccff-4661-b20f-7dc9828ac97c', code: 'ER-AN',       countryCommonId: '8aa3736b-7c02-41a8-a6ba-f4ea1844366b',   name: 'Anseba',                                           slug: 'anseba'},
     {id: '3863293c-e75d-45ac-a3ab-1cad09d49bbc', code: 'ER-DK',       countryCommonId: '8aa3736b-7c02-41a8-a6ba-f4ea1844366b',   name: 'Debub-Keih-Bahri',                                 slug: 'debub-keih-bahri'},
@@ -1003,7 +1005,7 @@ export const administrativeAreasLevel1 = [
     {id: 'eefd70b6-afee-4ade-b6aa-b687d8792f57', code: 'ER-GB',       countryCommonId: '8aa3736b-7c02-41a8-a6ba-f4ea1844366b',   name: 'Gash-Barka',                                       slug: 'gash-barka'},
     {id: 'c1e6b74f-9824-455d-b582-b3b903f19cb2', code: 'ER-MA',       countryCommonId: '8aa3736b-7c02-41a8-a6ba-f4ea1844366b',   name: 'Maekel',                                           slug: 'maekel'},
     {id: 'acd8f673-0dcf-4f0a-af62-e420ea332145', code: 'ER-SK',       countryCommonId: '8aa3736b-7c02-41a8-a6ba-f4ea1844366b',   name: 'Semien-Keih-Bahri',                                slug: 'semien-keih-bahri'},
-    
+
     // España
     {id: 'e283bb19-c617-4ce6-a98e-6c95540ad969', code: 'ES-AN',       countryCommonId: '1524b7ca-163c-4402-a80c-2853e37dd1bf',   name: 'Andalucía',                                        slug: 'andalucia'},
     {id: '7a73ad51-cfac-4ece-b007-b997a6ff056f', code: 'ES-AR',       countryCommonId: '1524b7ca-163c-4402-a80c-2853e37dd1bf',   name: 'Aragón',                                           slug: 'aragon'},
@@ -1024,7 +1026,7 @@ export const administrativeAreasLevel1 = [
     {id: '27a7a5ab-a350-4c0d-a178-e0ae767dd539', code: 'ES-PV',       countryCommonId: '1524b7ca-163c-4402-a80c-2853e37dd1bf',   name: 'País Vasco',                                       slug: 'pais-vasco'},
     {id: '16493eba-4bc0-49d7-a86c-bde3ff794694', code: 'ES-RI',       countryCommonId: '1524b7ca-163c-4402-a80c-2853e37dd1bf',   name: 'La Rioja',                                         slug: 'la-rioja'},
     {id: '0b99f10f-eb89-4252-9103-f50593657451', code: 'ES-VC',       countryCommonId: '1524b7ca-163c-4402-a80c-2853e37dd1bf',   name: 'Comunidad Valenciana',                             slug: 'comunidad-valenciana'},
-    
+
     // Etiopía
     {id: 'bd7c08ef-acbf-4d24-9ff1-b5d8ea989722', code: 'ET-AA',       countryCommonId: '1941ed69-80de-4bf8-a22c-5bf085989aeb',   name: 'Ciudad de Ādīs Ābeba',                             slug: 'ciudad-de-adis-abeba'},
     {id: '6cf54df8-d027-4127-b078-09a997886a33', code: 'ET-AF',       countryCommonId: '1941ed69-80de-4bf8-a22c-5bf085989aeb',   name: 'Āfar',                                             slug: 'afar'},
@@ -1037,7 +1039,7 @@ export const administrativeAreasLevel1 = [
     {id: 'b03f44b2-dced-46e7-98af-f3a1291d5936', code: 'ET-SN',       countryCommonId: '1941ed69-80de-4bf8-a22c-5bf085989aeb',   name: 'YeDebub Bihēroch Bihēreseboch na Hizboch',         slug: 'yedebub-biheroch-bihereseboch-na-hizboch'},
     {id: '39571538-066b-4a09-a146-776cedfc61e5', code: 'ET-SO',       countryCommonId: '1941ed69-80de-4bf8-a22c-5bf085989aeb',   name: 'Sumalē',                                           slug: 'sumale'},
     {id: 'd9232897-5753-4398-a506-ee40217f13a8', code: 'ET-TI',       countryCommonId: '1941ed69-80de-4bf8-a22c-5bf085989aeb',   name: 'Tigray',                                           slug: 'tigray'},
-    
+
     // Finlandia
     {id: '2d451dfa-2e49-4a8f-b862-5100ec5de18e', code: 'FI-01',       countryCommonId: '81c83547-5c01-4730-9aaf-26e8bd584100',   name: 'Ahvenanmaan maakunta',                             slug: 'ahvenanmaan-maakunta'},
     {id: '63dc9360-47f6-437a-bc10-fb0b2f6de9ef', code: 'FI-02',       countryCommonId: '81c83547-5c01-4730-9aaf-26e8bd584100',   name: 'Etelä-Karjala',                                    slug: 'etela-karjala'},
@@ -1058,20 +1060,20 @@ export const administrativeAreasLevel1 = [
     {id: '3a1eed34-f12a-4776-baaa-612e90cbfaa7', code: 'FI-17',       countryCommonId: '81c83547-5c01-4730-9aaf-26e8bd584100',   name: 'Satakunta',                                        slug: 'satakunta'},
     {id: 'bc1a68af-7821-470b-bfff-e90c396fbf42', code: 'FI-18',       countryCommonId: '81c83547-5c01-4730-9aaf-26e8bd584100',   name: 'Uusimaa',                                          slug: 'uusimaa'},
     {id: '949285eb-aad9-46f4-86a6-9c95699244ff', code: 'FI-19',       countryCommonId: '81c83547-5c01-4730-9aaf-26e8bd584100',   name: 'Varsinais-Suomi',                                  slug: 'varsinais-suomi'},
-    
+
     // Fiyi
     {id: 'ec947aa3-398c-409b-82ba-a1a24f363839', code: 'FJ-C',        countryCommonId: '92fdc1ed-5b0a-4850-bbb7-d42d43344f08',   name: 'Central',                                          slug: 'central'},
     {id: '76d723a7-a9df-43d9-acc8-c72bb282f9a7', code: 'FJ-E',        countryCommonId: '92fdc1ed-5b0a-4850-bbb7-d42d43344f08',   name: 'Eastern',                                          slug: 'eastern'},
     {id: '312ade76-4eca-4235-b08d-5c61d4ec3083', code: 'FJ-N',        countryCommonId: '92fdc1ed-5b0a-4850-bbb7-d42d43344f08',   name: 'Northern',                                         slug: 'northern'},
     {id: 'e89038c8-fe91-463f-b1bf-6eeffb646f46', code: 'FJ-R',        countryCommonId: '92fdc1ed-5b0a-4850-bbb7-d42d43344f08',   name: 'Dependencia de Rotuma',                            slug: 'dependencia-de-rotuma'},
     {id: 'fd0f79f2-f802-4a0d-a44f-13563875b052', code: 'FJ-W',        countryCommonId: '92fdc1ed-5b0a-4850-bbb7-d42d43344f08',   name: 'Western',                                          slug: 'western'},
-    
+
     // Micronesia
     {id: '1039c3a0-39a1-4150-8f2b-ddf2e821b631', code: 'FM-KSA',      countryCommonId: 'c3928ff3-032f-4faf-bf0f-ee16fa569b0f',   name: 'Kosrae',                                           slug: 'kosrae'},
     {id: '2ba8238d-55b1-46e3-995e-9d1dab019356', code: 'FM-PNI',      countryCommonId: 'c3928ff3-032f-4faf-bf0f-ee16fa569b0f',   name: 'Pohnpei',                                          slug: 'pohnpei'},
     {id: '82e006b0-f493-49a9-b676-631cb3833bb3', code: 'FM-TRK',      countryCommonId: 'c3928ff3-032f-4faf-bf0f-ee16fa569b0f',   name: 'Chuuk',                                            slug: 'chuuk'},
     {id: 'd077c704-8883-4db3-baac-0af186c0e3ab', code: 'FM-YAP',      countryCommonId: 'c3928ff3-032f-4faf-bf0f-ee16fa569b0f',   name: 'Yap',                                              slug: 'yap'},
-    
+
     // Francia
     {id: '92a74799-bcf2-4984-bdb4-c3fd53b22730', code: 'FR-A',        countryCommonId: 'e888de1c-2394-482d-8ebf-d3fcdebf60cc',   name: 'Alsace',                                           slug: 'alsace'},
     {id: '59386276-5ce5-4926-955f-f97fc00e3d4c', code: 'FR-B',        countryCommonId: 'e888de1c-2394-482d-8ebf-d3fcdebf60cc',   name: 'Aquitaine',                                        slug: 'aquitaine'},
@@ -1099,7 +1101,7 @@ export const administrativeAreasLevel1 = [
     {id: '58bbb1b8-35ea-4eb6-b112-51b4626754d4', code: 'FR-T',        countryCommonId: 'e888de1c-2394-482d-8ebf-d3fcdebf60cc',   name: 'Poitou-Charentes',                                 slug: 'poitou-charentes'},
     {id: '39710a9a-ecae-4d78-ab2d-882133dcb7ad', code: 'FR-U',        countryCommonId: 'e888de1c-2394-482d-8ebf-d3fcdebf60cc',   name: 'Provence-Alpes-Côte d´Azul',                       slug: 'provence-alpes-cote-dazul'},
     {id: '44b26288-c02a-42c7-85e2-c76cc4e269b2', code: 'FR-V',        countryCommonId: 'e888de1c-2394-482d-8ebf-d3fcdebf60cc',   name: 'Rhône-Alpes',                                      slug: 'rhone-alpes'},
-    
+
     // Gabón
     {id: 'fec4dab1-3830-46b6-91a0-e322e15978fd', code: 'GA-1',        countryCommonId: '68aed895-7d86-4216-b117-6f0f20d15768',   name: 'Estuaire',                                         slug: 'estuaire'},
     {id: 'ed243458-9898-4e56-9a50-bba89c8e62af', code: 'GA-2',        countryCommonId: '68aed895-7d86-4216-b117-6f0f20d15768',   name: 'Haut-Ogooué',                                      slug: 'haut-ogooue'},
@@ -1110,13 +1112,13 @@ export const administrativeAreasLevel1 = [
     {id: 'ada895a0-4ba2-4834-bf69-3c30ae726c3a', code: 'GA-7',        countryCommonId: '68aed895-7d86-4216-b117-6f0f20d15768',   name: 'Ogooué-Lolo',                                      slug: 'ogooue-lolo'},
     {id: '08b66e65-88a7-46ba-a493-cdb2e5c7018d', code: 'GA-8',        countryCommonId: '68aed895-7d86-4216-b117-6f0f20d15768',   name: 'Ogooué-Maritime',                                  slug: 'ogooue-maritime'},
     {id: '977865b3-c9a9-43a2-9fd9-2d233dad712c', code: 'GA-9',        countryCommonId: '68aed895-7d86-4216-b117-6f0f20d15768',   name: 'Woleu-Ntem',                                       slug: 'woleu-ntem'},
-    
+
     // Reino Unido
     {id: '25c782a4-e1b8-429f-ad06-0388aa327e71', code: 'GB-ENG',      countryCommonId: '9c41582a-1652-4c19-91cd-f1e8cfbbf70c',   name: 'England',                                          slug: 'england'},
     {id: '19235c6c-d7a2-4e52-9bef-81aa225d47d1', code: 'GB-NIR',      countryCommonId: '9c41582a-1652-4c19-91cd-f1e8cfbbf70c',   name: 'Provincia de Northern Ireland',                    slug: 'provincia-de-northern-ireland'},
     {id: '2e28e168-4110-4c11-8648-68ab666b9fb4', code: 'GB-SCT',      countryCommonId: '9c41582a-1652-4c19-91cd-f1e8cfbbf70c',   name: 'Scotland',                                         slug: 'scotland'},
     {id: 'df171ba3-14c9-496b-8552-ff1ea5c1bfd8', code: 'GB-WLS',      countryCommonId: '9c41582a-1652-4c19-91cd-f1e8cfbbf70c',   name: 'Wales',                                            slug: 'wales'},
-    
+
     // Granada
     {id: '0f67dcca-514b-4671-9f81-49a0ec1c8aaf', code: 'GD-01',       countryCommonId: '37859089-7611-4002-8e89-06a41a928a80',   name: 'Saint Andrew',                                     slug: 'saint-andrew'},
     {id: '5a12607c-fcd0-4d4a-a2db-3f9490e35d47', code: 'GD-02',       countryCommonId: '37859089-7611-4002-8e89-06a41a928a80',   name: 'Saint David',                                      slug: 'saint-david'},
@@ -1125,7 +1127,7 @@ export const administrativeAreasLevel1 = [
     {id: 'd83d3d95-da85-4f8c-b4f8-701bea411eac', code: 'GD-05',       countryCommonId: '37859089-7611-4002-8e89-06a41a928a80',   name: 'Saint Mark',                                       slug: 'saint-mark'},
     {id: 'ee8e2dfa-41a9-40fd-89a0-283d91235830', code: 'GD-06',       countryCommonId: '37859089-7611-4002-8e89-06a41a928a80',   name: 'Saint Patrick',                                    slug: 'saint-patrick'},
     {id: '67321c97-2ec6-4af3-8940-d01318d89758', code: 'GD-10',       countryCommonId: '37859089-7611-4002-8e89-06a41a928a80',   name: 'Southern Grenadine Islands',                       slug: 'southern-grenadine-islands'},
-    
+
     // Georgia
     {id: '842e9287-a265-45ec-ba69-520c3205bdc1', code: 'GE-AB',       countryCommonId: 'ea9a2686-30a1-479c-8d03-9737b21eda17',   name: 'Abjasia',                                          slug: 'abjasia'},
     {id: 'ec09882d-eb10-43ea-94d4-6ff1b549e6bb', code: 'GE-AJ',       countryCommonId: 'ea9a2686-30a1-479c-8d03-9737b21eda17',   name: 'Adjaria',                                          slug: 'adjaria'},
@@ -1139,7 +1141,7 @@ export const administrativeAreasLevel1 = [
     {id: '33c1e552-0dff-443c-9b27-ca1ac8e9e822', code: 'GE-SK',       countryCommonId: 'ea9a2686-30a1-479c-8d03-9737b21eda17',   name: 'Shida Kartli',                                     slug: 'shida-kartli'},
     {id: '1460b5a5-e181-44b0-b379-79f2d5efa62d', code: 'GE-SZ',       countryCommonId: 'ea9a2686-30a1-479c-8d03-9737b21eda17',   name: 'Samegrelo-Zemo Svaneti',                           slug: 'samegrelo-zemo-svaneti'},
     {id: 'c45acd71-4d92-426e-a67a-21b53148c5d4', code: 'GE-TB',       countryCommonId: 'ea9a2686-30a1-479c-8d03-9737b21eda17',   name: 'Tiflis',                                           slug: 'tiflis'},
-    
+
     // Ghana
     {id: 'a0f661c0-e487-4ae7-b31b-96e60e4e21a6', code: 'GH-AA',       countryCommonId: '7d969958-17ab-4587-b744-d6524d73a1f5',   name: 'Greater Accra',                                    slug: 'greater-accra'},
     {id: '6fe77979-c459-4c90-980e-7faf750d6a43', code: 'GH-AH',       countryCommonId: '7d969958-17ab-4587-b744-d6524d73a1f5',   name: 'Ashanti',                                          slug: 'ashanti'},
@@ -1151,13 +1153,13 @@ export const administrativeAreasLevel1 = [
     {id: '8d4ced62-07d0-42a3-9398-82b074b40662', code: 'GH-UE',       countryCommonId: '7d969958-17ab-4587-b744-d6524d73a1f5',   name: 'Upper East',                                       slug: 'upper-east'},
     {id: 'ce7b1b64-136e-440a-8ef1-c7e839898b8b', code: 'GH-UW',       countryCommonId: '7d969958-17ab-4587-b744-d6524d73a1f5',   name: 'Upper West',                                       slug: 'upper-west'},
     {id: '2e5e92b8-7f34-4577-97d9-9e8650a0a428', code: 'GH-WP',       countryCommonId: '7d969958-17ab-4587-b744-d6524d73a1f5',   name: 'Western',                                          slug: 'western'},
-    
+
     // Groenlandia
     {id: 'fedf5fe2-f5cf-412f-b3ef-019bf18f3ba2', code: 'GL-KU',       countryCommonId: '6dfb509b-5dda-4ecf-a6e7-a7cce4a6fa89',   name: 'Kommune Kujalleq',                                 slug: 'kommune-kujalleq'},
     {id: '8a220189-fbc6-4b7c-9fbd-588cb354b90c', code: 'GL-QA',       countryCommonId: '6dfb509b-5dda-4ecf-a6e7-a7cce4a6fa89',   name: 'Qaasuitsup Kommunia',                              slug: 'qaasuitsup-kommunia'},
     {id: '2caa9b9f-efd1-4af7-8b07-c43163cff4e6', code: 'GL-QE',       countryCommonId: '6dfb509b-5dda-4ecf-a6e7-a7cce4a6fa89',   name: 'Qeqqata Kommunia',                                 slug: 'qeqqata-kommunia'},
     {id: '89452cc6-4aab-4aab-af9d-014a62d53dbc', code: 'GL-SM',       countryCommonId: '6dfb509b-5dda-4ecf-a6e7-a7cce4a6fa89',   name: 'Kommuneqarfik Sermersooq',                         slug: 'kommuneqarfik-sermersooq'},
-    
+
     // Gambia
     {id: '63bd8a8d-26b5-4826-b998-ed6bb842b0ec', code: 'GM-B',        countryCommonId: '4c79aa46-bc48-4a01-9216-d181e6a8661c',   name: 'Banjul',                                           slug: 'banjul'},
     {id: '9a4640b2-c8dd-4063-a601-38a353e5a968', code: 'GM-L',        countryCommonId: '4c79aa46-bc48-4a01-9216-d181e6a8661c',   name: 'Lower River',                                      slug: 'lower-river'},
@@ -1165,7 +1167,7 @@ export const administrativeAreasLevel1 = [
     {id: 'a86bde84-ace6-4180-96a7-43c72d537f3d', code: 'GM-N',        countryCommonId: '4c79aa46-bc48-4a01-9216-d181e6a8661c',   name: 'North Bank',                                       slug: 'north-bank'},
     {id: '9d663afc-4281-46a5-922f-8585632b559a', code: 'GM-U',        countryCommonId: '4c79aa46-bc48-4a01-9216-d181e6a8661c',   name: 'Upper River',                                      slug: 'upper-river'},
     {id: '53c6661b-f31f-43f3-9911-7899dac60acb', code: 'GM-W',        countryCommonId: '4c79aa46-bc48-4a01-9216-d181e6a8661c',   name: 'Western',                                          slug: 'western'},
-    
+
     // Guinea
     {id: '5a8daaae-6905-4acb-a8ba-d408d67c02fd', code: 'GN-B',        countryCommonId: '7064289d-43c2-40d3-aee6-6ca1b8d4acf9',   name: 'Boké',                                             slug: 'boke'},
     {id: '35a3aee4-5381-44dd-93e5-7d935c59e43f', code: 'GN-C',        countryCommonId: '7064289d-43c2-40d3-aee6-6ca1b8d4acf9',   name: 'Conakry',                                          slug: 'conakry'},
@@ -1175,11 +1177,11 @@ export const administrativeAreasLevel1 = [
     {id: '2611abb4-2eec-40ef-8bba-602887216da8', code: 'GN-L',        countryCommonId: '7064289d-43c2-40d3-aee6-6ca1b8d4acf9',   name: 'Labé',                                             slug: 'labe'},
     {id: '1add52b0-9def-479e-943c-5ed3fdf7b671', code: 'GN-M',        countryCommonId: '7064289d-43c2-40d3-aee6-6ca1b8d4acf9',   name: 'Mamou',                                            slug: 'mamou'},
     {id: 'f51ff27b-48d9-4b57-b170-e16c4e85ec9a', code: 'GN-N',        countryCommonId: '7064289d-43c2-40d3-aee6-6ca1b8d4acf9',   name: 'Nzérékoré',                                        slug: 'nzerekore'},
-    
+
     // Guinea Ecuatorial
     {id: '33f4e79a-98ea-4e98-be10-c000699e7849', code: 'GQ-C',        countryCommonId: '631d7e9b-6fa0-431c-8044-220728359087',   name: 'Continental',                                      slug: 'continental'},
     {id: '37fd0027-0027-4ad1-bad6-de256e263125', code: 'GQ-I',        countryCommonId: '631d7e9b-6fa0-431c-8044-220728359087',   name: 'Insular',                                          slug: 'insular'},
-    
+
     // Grecia
     {id: '6e2065ad-15c5-4d03-af4c-b0305d5b4746', code: 'GR-A',        countryCommonId: '4ec0c29b-68d2-49d4-853a-252b96c19290',   name: 'East Macedonia and Thrace',                        slug: 'east-macedonia-and-thrace'},
     {id: '62c1d7ba-0a50-4445-80a7-5fe65aa1749d', code: 'GR-B',        countryCommonId: '4ec0c29b-68d2-49d4-853a-252b96c19290',   name: 'Central Macedonia',                                slug: 'central-macedonia'},
@@ -1194,7 +1196,7 @@ export const administrativeAreasLevel1 = [
     {id: 'c69514f6-374e-4465-a126-6aa0e39a8876', code: 'GR-K',        countryCommonId: '4ec0c29b-68d2-49d4-853a-252b96c19290',   name: 'North Aegean',                                     slug: 'north-aegean'},
     {id: '6bc9187f-dccb-4a45-aa03-e15c898e9b50', code: 'GR-L',        countryCommonId: '4ec0c29b-68d2-49d4-853a-252b96c19290',   name: 'South Eegean',                                     slug: 'south-eegean'},
     {id: '5c644eed-3678-49fb-afa6-390a7fad04ec', code: 'GR-M',        countryCommonId: '4ec0c29b-68d2-49d4-853a-252b96c19290',   name: 'Crete',                                            slug: 'crete'},
-    
+
     // Guatemala
     {id: '69b54389-f808-4d43-a6a1-0fec263724cc', code: 'GT-AV',       countryCommonId: '8e0ef729-dee5-4efe-8e30-cceb66d2081b',   name: 'Alta Verapaz',                                     slug: 'alta-verapaz'},
     {id: 'edff977c-3a5a-4004-8de0-2d434693b08e', code: 'GT-BV',       countryCommonId: '8e0ef729-dee5-4efe-8e30-cceb66d2081b',   name: 'Baja Verapaz',                                     slug: 'baja-verapaz'},
@@ -1218,7 +1220,7 @@ export const administrativeAreasLevel1 = [
     {id: 'c9614192-3814-4dc9-ad06-8deb658e4545', code: 'GT-SU',       countryCommonId: '8e0ef729-dee5-4efe-8e30-cceb66d2081b',   name: 'Suchitepéquez',                                    slug: 'suchitepequez'},
     {id: '5649e024-a7fe-4334-813d-b4f172abab1a', code: 'GT-TO',       countryCommonId: '8e0ef729-dee5-4efe-8e30-cceb66d2081b',   name: 'Totonicapán',                                      slug: 'totonicapan'},
     {id: '71bfe033-e137-40e0-bbe5-39fb6c69c140', code: 'GT-ZA',       countryCommonId: '8e0ef729-dee5-4efe-8e30-cceb66d2081b',   name: 'Zacapa',                                           slug: 'zacapa'},
-    
+
     // Guinea Bissau
     {id: 'f365b63d-2876-421a-a41d-5b8eb592e0c5', code: 'GW-BA',       countryCommonId: '41495e09-ae87-4322-bdf7-0a45c81d3988',   name: 'Bafatá',                                           slug: 'bafata'},
     {id: 'f08a62b6-e76a-48c5-a40b-0990fe57fa0d', code: 'GW-BL',       countryCommonId: '41495e09-ae87-4322-bdf7-0a45c81d3988',   name: 'Bolama',                                           slug: 'bolama'},
@@ -1229,7 +1231,7 @@ export const administrativeAreasLevel1 = [
     {id: '52258015-af72-4b5c-b6eb-b3db8ff27df0', code: 'GW-OI',       countryCommonId: '41495e09-ae87-4322-bdf7-0a45c81d3988',   name: 'Oio',                                              slug: 'oio'},
     {id: 'bde101ca-1130-432b-b17d-efd19fdecc8b', code: 'GW-QU',       countryCommonId: '41495e09-ae87-4322-bdf7-0a45c81d3988',   name: 'Quinara',                                          slug: 'quinara'},
     {id: '86b70063-eb7a-4ba2-b50f-febb9e999996', code: 'GW-TO',       countryCommonId: '41495e09-ae87-4322-bdf7-0a45c81d3988',   name: 'Tombali',                                          slug: 'tombali'},
-    
+
     // Guyana
     {id: '4ce9b828-eb8c-4efb-b945-de1eba4485e6', code: 'GY-BA',       countryCommonId: '31633d00-3614-4ed5-9163-45a7810b0283',   name: 'Barima-Waini',                                     slug: 'barima-waini'},
     {id: '22105c80-b64b-46ad-ba41-fcd1b5c92f69', code: 'GY-CU',       countryCommonId: '31633d00-3614-4ed5-9163-45a7810b0283',   name: 'Cuyuni-Mazaruni',                                  slug: 'cuyuni-mazaruni'},
@@ -1241,7 +1243,7 @@ export const administrativeAreasLevel1 = [
     {id: '591ed6c9-29cb-4f86-8946-f1da0ad5246f', code: 'GY-PT',       countryCommonId: '31633d00-3614-4ed5-9163-45a7810b0283',   name: 'Potaro-Siparuni',                                  slug: 'potaro-siparuni'},
     {id: '0176624e-b556-4fdc-9f20-002ece1fe81b', code: 'GY-UD',       countryCommonId: '31633d00-3614-4ed5-9163-45a7810b0283',   name: 'Upper Demerara-Berbice',                           slug: 'upper-demerara-berbice'},
     {id: '7b1dd210-98ee-4542-bec6-014802253bee', code: 'GY-UT',       countryCommonId: '31633d00-3614-4ed5-9163-45a7810b0283',   name: 'Upper Takutu-Upper Essequibo',                     slug: 'upper-takutu-upper-essequibo'},
-    
+
     // Honduras
     {id: 'd418f80c-dfc8-435a-86e9-9885ecba5783', code: 'HN-AT',       countryCommonId: '537180db-1115-4332-b813-f53f6f21baf9',   name: 'Atlántida',                                        slug: 'atlantida'},
     {id: '901b4243-4c07-4e52-8993-9c0b95a31d58', code: 'HN-CH',       countryCommonId: '537180db-1115-4332-b813-f53f6f21baf9',   name: 'Choluteca',                                        slug: 'choluteca'},
@@ -1262,7 +1264,7 @@ export const administrativeAreasLevel1 = [
     {id: 'e46feb87-fa00-4011-9ca9-411fa563d19b', code: 'HN-SB',       countryCommonId: '537180db-1115-4332-b813-f53f6f21baf9',   name: 'Santa Bárbara',                                    slug: 'santa-barbara'},
     {id: 'a032bc2e-7944-4729-8a05-0d62c01751b5', code: 'HN-VL',       countryCommonId: '537180db-1115-4332-b813-f53f6f21baf9',   name: 'Valle',                                            slug: 'valle'},
     {id: '6b98e828-4a5f-4848-b418-35a67a7af1df', code: 'HN-YO',       countryCommonId: '537180db-1115-4332-b813-f53f6f21baf9',   name: 'Yoro',                                             slug: 'yoro'},
-    
+
     // Croacia
     {id: '891dcb93-d701-4ec4-9a23-eb6bb808c706', code: 'HR-01',       countryCommonId: '55728cef-9455-470d-811b-a16bfa62db26',   name: 'Zagreb',                                           slug: 'zagreb'},
     {id: 'a10a43c7-a43f-470e-86c5-739a8ccd9f4d', code: 'HR-02',       countryCommonId: '55728cef-9455-470d-811b-a16bfa62db26',   name: 'Krapina-Zagorje',                                  slug: 'krapina-zagorje'},
@@ -1285,7 +1287,7 @@ export const administrativeAreasLevel1 = [
     {id: 'c17eab3c-b0d2-4856-bfcc-c05a5cc17ac1', code: 'HR-19',       countryCommonId: '55728cef-9455-470d-811b-a16bfa62db26',   name: 'Dubrovnik-Neretva',                                slug: 'dubrovnik-neretva'},
     {id: '7dc79762-5b87-43a2-96f7-f5e62fbb1446', code: 'HR-20',       countryCommonId: '55728cef-9455-470d-811b-a16bfa62db26',   name: 'Međimurje',                                        slug: 'medimurje'},
     {id: 'c587942c-8892-4f2b-a896-ef1d56298b7f', code: 'HR-21',       countryCommonId: '55728cef-9455-470d-811b-a16bfa62db26',   name: 'Grad Zagreb',                                      slug: 'grad-zagreb'},
-    
+
     // Haití
     {id: '5fa7d167-fc2e-48f3-b967-1d47a7cff9ff', code: 'HT-AR',       countryCommonId: '538ee378-04a2-46a5-b0d7-a09e894a93e7',   name: 'Artibonite',                                       slug: 'artibonite'},
     {id: '589ee599-2a78-454d-97d1-056d72ed67fe', code: 'HT-CE',       countryCommonId: '538ee378-04a2-46a5-b0d7-a09e894a93e7',   name: 'Centre',                                           slug: 'centre'},
@@ -1297,7 +1299,7 @@ export const administrativeAreasLevel1 = [
     {id: '74e2b514-63dc-4f74-8fd1-e4bda6faabd6', code: 'HT-OU',       countryCommonId: '538ee378-04a2-46a5-b0d7-a09e894a93e7',   name: 'Ouest',                                            slug: 'ouest'},
     {id: '52ac793c-1975-4a0b-9822-2a061806e801', code: 'HT-SD',       countryCommonId: '538ee378-04a2-46a5-b0d7-a09e894a93e7',   name: 'Sud',                                              slug: 'sud'},
     {id: '631bce04-12df-4009-b563-c85371710930', code: 'HT-SE',       countryCommonId: '538ee378-04a2-46a5-b0d7-a09e894a93e7',   name: 'Sud-Est',                                          slug: 'sud-est'},
-    
+
     // Indonesia
     {id: '6b33c564-1439-49bf-9e95-49e21fb7b950', code: 'ID-AC',       countryCommonId: '91c0a6b8-7e0e-4f8c-acad-c0bc842483a8',   name: 'Aceh',                                             slug: 'aceh'},
     {id: '3ca1613f-b095-49ca-8a2f-631a83bd7a7c', code: 'ID-BA',       countryCommonId: '91c0a6b8-7e0e-4f8c-acad-c0bc842483a8',   name: 'Bali',                                             slug: 'bali'},
@@ -1332,13 +1334,13 @@ export const administrativeAreasLevel1 = [
     {id: '15782868-e238-4dcc-a297-5d72161937d7', code: 'ID-ST',       countryCommonId: '91c0a6b8-7e0e-4f8c-acad-c0bc842483a8',   name: 'Sulawesi Tengah',                                  slug: 'sulawesi-tengah'},
     {id: '10e3fa39-c206-47b6-80f5-74ef5d58dcb9', code: 'ID-SU',       countryCommonId: '91c0a6b8-7e0e-4f8c-acad-c0bc842483a8',   name: 'Sumatera Utara',                                   slug: 'sumatera-utara'},
     {id: '8cd7c102-49a8-427e-9b46-d9e5d51fcd93', code: 'ID-YO',       countryCommonId: '91c0a6b8-7e0e-4f8c-acad-c0bc842483a8',   name: 'Yogyakarta',                                       slug: 'yogyakarta'},
-    
+
     // Irlanda
     {id: '270d6867-e1d5-41be-be51-ebff9ac77cb0', code: 'IE-C',        countryCommonId: 'b50009dd-4f51-446f-bde1-be920182db72',   name: 'Connacht',                                         slug: 'connacht'},
     {id: '4f51f13b-6548-4e8c-b292-f055da87e7a1', code: 'IE-L',        countryCommonId: 'b50009dd-4f51-446f-bde1-be920182db72',   name: 'Leinster',                                         slug: 'leinster'},
     {id: '78e1a296-a2cb-4690-96cf-f426c32383bd', code: 'IE-M',        countryCommonId: 'b50009dd-4f51-446f-bde1-be920182db72',   name: 'Munster',                                          slug: 'munster'},
     {id: '508fb3df-2da6-402d-8092-b46caa8bbb1a', code: 'IE-U',        countryCommonId: 'b50009dd-4f51-446f-bde1-be920182db72',   name: 'Ulster',                                           slug: 'ulster'},
-    
+
     // Israel
     {id: '64fa6f82-e85a-4a0b-802b-dca2e95ed97f', code: 'IL-D',        countryCommonId: '220de9b4-d2f6-4767-a6c1-08da93633d2a',   name: 'Southern District',                                slug: 'southern-district'},
     {id: '2b42fc77-1059-4f79-8105-d901b99ce37d', code: 'IL-HA',       countryCommonId: '220de9b4-d2f6-4767-a6c1-08da93633d2a',   name: 'Haifa',                                            slug: 'haifa'},
@@ -1346,7 +1348,7 @@ export const administrativeAreasLevel1 = [
     {id: '682ec5bd-8056-458d-92d4-a0f82e035539', code: 'IL-M',        countryCommonId: '220de9b4-d2f6-4767-a6c1-08da93633d2a',   name: 'Central District',                                 slug: 'central-district'},
     {id: '81ee0923-2c43-498a-9820-c45354a6770b', code: 'IL-TA',       countryCommonId: '220de9b4-d2f6-4767-a6c1-08da93633d2a',   name: 'Tel Aviv',                                         slug: 'tel-aviv'},
     {id: 'd55889a7-c514-47f8-a940-051d25aacc2c', code: 'IL-Z',        countryCommonId: '220de9b4-d2f6-4767-a6c1-08da93633d2a',   name: 'Northern District',                                slug: 'northern-district'},
-    
+
     // India
     {id: 'add361fe-8840-4361-82f9-bb263b760a21', code: 'IN-AN',       countryCommonId: '2f0d3781-1b23-48a6-bfeb-63befa39d2a9',   name: 'Îles Andaman et Nicobar',                          slug: 'iles-andaman-et-nicobar'},
     {id: '653a6af6-3fcf-445d-ab8a-c6a5ae51e714', code: 'IN-AP',       countryCommonId: '2f0d3781-1b23-48a6-bfeb-63befa39d2a9',   name: 'Andhra Pradesh',                                   slug: 'andhra-pradesh'},
@@ -1383,7 +1385,7 @@ export const administrativeAreasLevel1 = [
     {id: '0b32d144-8bbc-4ecd-815e-f01369d91fe9', code: 'IN-UP',       countryCommonId: '2f0d3781-1b23-48a6-bfeb-63befa39d2a9',   name: 'Uttar Pradesh',                                    slug: 'uttar-pradesh'},
     {id: '7305406a-c335-4a15-8a43-8f0322bb6a25', code: 'IN-UT',       countryCommonId: '2f0d3781-1b23-48a6-bfeb-63befa39d2a9',   name: 'Uttarakhand',                                      slug: 'uttarakhand'},
     {id: 'b4e94e95-d4e9-4a5d-85a0-2d15d2b31133', code: 'IN-WB',       countryCommonId: '2f0d3781-1b23-48a6-bfeb-63befa39d2a9',   name: 'Bengale-Occidental',                               slug: 'bengale-occidental'},
-    
+
     // Iraq
     {id: '64370ef5-1c0b-4a91-802d-5128d596c167', code: 'IQ-AN',       countryCommonId: '3f92d1c1-a748-425c-a602-e7d8d475b624',   name: 'Al Anbār',                                         slug: 'al-anbar'},
     {id: '7d657b02-0f0f-43cc-8868-e49a1ab3988b', code: 'IQ-AR',       countryCommonId: '3f92d1c1-a748-425c-a602-e7d8d475b624',   name: 'Arbīl',                                            slug: 'arbil'},
@@ -1403,7 +1405,7 @@ export const administrativeAreasLevel1 = [
     {id: 'b25fb489-674b-4f53-a72c-b53e5d227e2d', code: 'IQ-SU',       countryCommonId: '3f92d1c1-a748-425c-a602-e7d8d475b624',   name: 'As Sulaymānīyah',                                  slug: 'as-sulaymaniyah'},
     {id: '33eea4b6-1fe2-4399-9559-e0655d207925', code: 'IQ-TS',       countryCommonId: '3f92d1c1-a748-425c-a602-e7d8d475b624',   name: 'At Ta\'mīm',                                       slug: 'at-tamim'},
     {id: 'a253267b-3d1f-4b81-939e-8837409c206a', code: 'IQ-WA',       countryCommonId: '3f92d1c1-a748-425c-a602-e7d8d475b624',   name: 'Wāsiţ',                                            slug: 'wasit'},
-    
+
     // Irán
     {id: '0ffde885-5878-4b4c-a7f0-3b5a3948273a', code: 'IR-01',       countryCommonId: '3b804cd5-e6d8-402c-88c6-579847884e8b',   name: 'Azerbaijan e Sharghi',                             slug: 'azerbaijan-e-sharghi'},
     {id: '40f23851-ea0a-4b0f-b558-7043ebec3e99', code: 'IR-02',       countryCommonId: '3b804cd5-e6d8-402c-88c6-579847884e8b',   name: 'Azerbaijan e Gharbi',                              slug: 'azerbaijan-e-gharbi'},
@@ -1435,7 +1437,7 @@ export const administrativeAreasLevel1 = [
     {id: '64055cc4-4a87-4414-8179-118c98ce169b', code: 'IR-29',       countryCommonId: '3b804cd5-e6d8-402c-88c6-579847884e8b',   name: 'Khorasan e Jonubi',                                slug: 'khorasan-e-jonubi'},
     {id: 'c4379ceb-3053-40ed-be76-3069571df7fc', code: 'IR-30',       countryCommonId: '3b804cd5-e6d8-402c-88c6-579847884e8b',   name: 'Khorasan e Razavi',                                slug: 'khorasan-e-razavi'},
     {id: 'ff44ef37-0905-4be7-90dd-6128f384db7e', code: 'IR-31',       countryCommonId: '3b804cd5-e6d8-402c-88c6-579847884e8b',   name: 'Khorasan e Shomali',                               slug: 'khorasan-e-shomali'},
-    
+
     // Islandia
     {id: '7d9e1f99-f927-4f37-855e-535f46d3227f', code: 'IS-0',        countryCommonId: '94b5639f-989e-4165-9140-3dd32b117460',   name: 'Reykjavík',                                        slug: 'reykjavik'},
     {id: '5ab10dfe-0bd3-473a-8ce6-e8d75979f00f', code: 'IS-1',        countryCommonId: '94b5639f-989e-4165-9140-3dd32b117460',   name: 'Höfuðborgarsvæði utan Reykjavíkur',                slug: 'hofudborgarsvaedi-utan-reykjavikur'},
@@ -1468,7 +1470,9 @@ export const administrativeAreasLevel1 = [
     {id: '6408dbde-e212-4f10-8330-e21f8209caef', code: 'IT-78',       countryCommonId: 'ba59346d-60c8-4d69-bbdb-7318e7f471b9',   name: 'Calabria',                                         slug: 'calabria'},
     {id: '2413a47e-f1fd-4111-a9bf-712754632913', code: 'IT-82',       countryCommonId: 'ba59346d-60c8-4d69-bbdb-7318e7f471b9',   name: 'Sicilia',                                          slug: 'sicilia'},
     {id: '6949f36f-c943-4fa4-92e8-e7b58745949b', code: 'IT-88',       countryCommonId: 'ba59346d-60c8-4d69-bbdb-7318e7f471b9',   name: 'Sardegna',                                         slug: 'sardegna'},
-    
+];
+
+export const administrativeAreasLevel103 = [
     // Jamaica
     {id: '032dce13-73e2-40ed-8968-3797bd578c31', code: 'JM-01',       countryCommonId: 'ddfb3f21-d9cf-4786-9b76-374bc0d03432',   name: 'Kingston',                                         slug: 'kingston'},
     {id: '61bac9d3-0ce4-458f-a2b1-46b31a737baf', code: 'JM-02',       countryCommonId: 'ddfb3f21-d9cf-4786-9b76-374bc0d03432',   name: 'Saint Andrew',                                     slug: 'saint-andrew'},
@@ -1484,7 +1488,7 @@ export const administrativeAreasLevel1 = [
     {id: '83262ade-261d-4c2d-b3c2-daf2f9464628', code: 'JM-12',       countryCommonId: 'ddfb3f21-d9cf-4786-9b76-374bc0d03432',   name: 'Manchester',                                       slug: 'manchester'},
     {id: 'f050abf6-7a31-4c94-b423-e2999d6a6947', code: 'JM-13',       countryCommonId: 'ddfb3f21-d9cf-4786-9b76-374bc0d03432',   name: 'Clarendon',                                        slug: 'clarendon'},
     {id: '3bdd8776-32b5-464e-9d51-1f0837ac6a94', code: 'JM-14',       countryCommonId: 'ddfb3f21-d9cf-4786-9b76-374bc0d03432',   name: 'Saint Catherine',                                  slug: 'saint-catherine'},
-    
+
     // Japón
     {id: 'f0516f53-e82b-4d08-877f-4775a8b7ff28', code: 'JP-01',       countryCommonId: '933c6a89-5ecc-47f3-82b0-5b6e5bbe1ca7',   name: 'Hokkaidō',                                         slug: 'hokkaido'},
     {id: 'd3c73c9d-6455-4d63-bb3d-7c2ebd88bb9b', code: 'JP-02',       countryCommonId: '933c6a89-5ecc-47f3-82b0-5b6e5bbe1ca7',   name: 'Aomori',                                           slug: 'aomori'},
@@ -1533,7 +1537,7 @@ export const administrativeAreasLevel1 = [
     {id: '5c25996e-70f5-4dce-89bc-53ff783e2f42', code: 'JP-45',       countryCommonId: '933c6a89-5ecc-47f3-82b0-5b6e5bbe1ca7',   name: 'Miyazaki',                                         slug: 'miyazaki'},
     {id: '1e655aa3-d06c-4bcd-a95d-f33f92410e08', code: 'JP-46',       countryCommonId: '933c6a89-5ecc-47f3-82b0-5b6e5bbe1ca7',   name: 'Kagoshima',                                        slug: 'kagoshima'},
     {id: 'df30f2cb-214d-4651-8bfd-4e1b98252491', code: 'JP-47',       countryCommonId: '933c6a89-5ecc-47f3-82b0-5b6e5bbe1ca7',   name: 'Okinawa',                                          slug: 'okinawa'},
-    
+
     // Kenia
     {id: 'afe969b4-4b50-4386-8534-cf9b3b8b32c9', code: 'KE-110',      countryCommonId: '26256a08-2ce9-4f4d-a18d-7da1c07045bd',   name: 'Nairobi',                                          slug: 'nairobi'},
     {id: '7a1e9032-37b7-4feb-a2ce-18ff4f0c7595', code: 'KE-200',      countryCommonId: '26256a08-2ce9-4f4d-a18d-7da1c07045bd',   name: 'Central',                                          slug: 'central'},
@@ -1543,7 +1547,7 @@ export const administrativeAreasLevel1 = [
     {id: 'd7b5f3bc-b0bf-4cea-87b7-460828d985ec', code: 'KE-600',      countryCommonId: '26256a08-2ce9-4f4d-a18d-7da1c07045bd',   name: 'Nyanza',                                           slug: 'nyanza'},
     {id: 'c83c7243-cada-4117-87e8-118b574fea4a', code: 'KE-700',      countryCommonId: '26256a08-2ce9-4f4d-a18d-7da1c07045bd',   name: 'Rift Valley',                                      slug: 'rift-valley'},
     {id: '82a8922e-62e1-49d4-aad2-dd7dd32f0761', code: 'KE-800',      countryCommonId: '26256a08-2ce9-4f4d-a18d-7da1c07045bd',   name: 'Western',                                          slug: 'western'},
-    
+
     // Kirguistán
     {id: 'eea25049-3a35-41f7-8dd5-32c4b64226e3', code: 'KG-B',        countryCommonId: '4c44ebdc-0489-4cbf-abde-16c2c5a3460f',   name: 'Batken',                                           slug: 'batken'},
     {id: '090a1f71-1f77-4060-9e27-d6716f713e8e', code: 'KG-C',        countryCommonId: '4c44ebdc-0489-4cbf-abde-16c2c5a3460f',   name: 'Chü',                                              slug: 'chu'},
@@ -1553,7 +1557,7 @@ export const administrativeAreasLevel1 = [
     {id: '6e2c1a88-9945-445d-84ec-1b0631db8f51', code: 'KG-O',        countryCommonId: '4c44ebdc-0489-4cbf-abde-16c2c5a3460f',   name: 'Osh',                                              slug: 'osh'},
     {id: 'a88d7bd5-97c9-4652-ae3b-64eef7e17d54', code: 'KG-T',        countryCommonId: '4c44ebdc-0489-4cbf-abde-16c2c5a3460f',   name: 'Talas',                                            slug: 'talas'},
     {id: '8ac77de5-62e7-4593-93cc-de33e40e661c', code: 'KG-Y',        countryCommonId: '4c44ebdc-0489-4cbf-abde-16c2c5a3460f',   name: 'Ysyk-Köl',                                         slug: 'ysyk-kol'},
-    
+
     // Camboya
     {id: '31f5ef5f-9d56-48e3-b9d0-e129d9dcc851', code: 'KH-1',        countryCommonId: '4d81b5ab-f3a4-475b-9004-7ea88b93df48',   name: 'Banteay Mean Chey',                                slug: 'banteay-mean-chey'},
     {id: 'bbc7f7c0-7bb4-44fd-89d8-fa13a94f6076', code: 'KH-10',       countryCommonId: '4d81b5ab-f3a4-475b-9004-7ea88b93df48',   name: 'Kratie',                                           slug: 'kratie'},
@@ -1579,19 +1583,18 @@ export const administrativeAreasLevel1 = [
     {id: 'fb2ba19c-afaf-4eca-8d66-6f9596c2d313', code: 'KH-7',        countryCommonId: '4d81b5ab-f3a4-475b-9004-7ea88b93df48',   name: 'Kampot',                                           slug: 'kampot'},
     {id: 'a5c4eadc-c0c4-46c0-b0d2-f024a0f35db1', code: 'KH-8',        countryCommonId: '4d81b5ab-f3a4-475b-9004-7ea88b93df48',   name: 'Kandal',                                           slug: 'kandal'},
     {id: 'c211cd06-50a1-463b-8b9a-7cfe822b08da', code: 'KH-9',        countryCommonId: '4d81b5ab-f3a4-475b-9004-7ea88b93df48',   name: 'Kaoh Kong',                                        slug: 'kaoh-kong'},
-    
-    
+
     {id: '5a1dd094-4812-4239-988c-1f56d97f5912', code: 'KI-G',        countryCommonId: '8117c0e9-7627-443a-a00f-f806f130694b',   name: 'Gilbert Islands',                                  slug: 'gilbert-islands'},
     {id: 'cea2a38f-d327-4d44-b60b-32677b24e67a', code: 'KI-L',        countryCommonId: '8117c0e9-7627-443a-a00f-f806f130694b',   name: 'Line Islands',                                     slug: 'line-islands'},
     {id: 'f426d864-a188-49c0-9d33-5d8ffacc7704', code: 'KI-P',        countryCommonId: '8117c0e9-7627-443a-a00f-f806f130694b',   name: 'Phoenix Islands',                                  slug: 'phoenix-islands'},
-    
+
     {id: '27e1ec5c-8fc8-4662-bac8-8ba7151f234d', code: 'KM-A',        countryCommonId: '9ae96b1c-8a9e-4606-b599-1b0ae790508c',   name: 'Anjouan',                                          slug: 'anjouan'},
     {id: '8a8f6baa-902f-48cb-b042-3fdb8da9066c', code: 'KM-G',        countryCommonId: '9ae96b1c-8a9e-4606-b599-1b0ae790508c',   name: 'Grande-Comore',                                    slug: 'grande-comore'},
     {id: '31dc1780-d23d-48fc-a571-16445fa9d7e4', code: 'KM-M',        countryCommonId: '9ae96b1c-8a9e-4606-b599-1b0ae790508c',   name: 'Mohéli',                                           slug: 'moheli'},
-    
+
     {id: 'c2d9f8e5-7ab1-422d-b5ec-380ca7f1af56', code: 'KN-K',        countryCommonId: 'e54bc1fd-a2e1-42ad-b331-1427e220c60a',   name: 'Saint Kitts',                                      slug: 'saint-kitts'},
     {id: '834d4d4f-9377-4b65-a463-e2ba4567ed31', code: 'KN-N',        countryCommonId: 'e54bc1fd-a2e1-42ad-b331-1427e220c60a',   name: 'Nevis',                                            slug: 'nevis'},
-    
+
     {id: '1e614f27-83ef-4bc5-82be-b26ab4770f0b', code: 'KP-01',       countryCommonId: '8ed7dd59-f08e-4efa-a24d-26fd43e8f5c8',   name: 'Pyongyang',                                        slug: 'pyongyang'},
     {id: '0af73756-075c-4c07-a740-0d0f200c8a63', code: 'KP-02',       countryCommonId: '8ed7dd59-f08e-4efa-a24d-26fd43e8f5c8',   name: 'South Pyongan',                                    slug: 'south-pyongan'},
     {id: '984c519d-2d78-4b4b-ae66-f7e2a077b02f', code: 'KP-03',       countryCommonId: '8ed7dd59-f08e-4efa-a24d-26fd43e8f5c8',   name: 'North Pyongan',                                    slug: 'north-pyongan'},
@@ -1603,7 +1606,7 @@ export const administrativeAreasLevel1 = [
     {id: '8ae76717-3be4-4be0-af07-0498edc95fc2', code: 'KP-09',       countryCommonId: '8ed7dd59-f08e-4efa-a24d-26fd43e8f5c8',   name: 'North Hamgyong',                                   slug: 'north-hamgyong'},
     {id: '488d87eb-9ae3-400c-9c2f-f346fd731f82', code: 'KP-10',       countryCommonId: '8ed7dd59-f08e-4efa-a24d-26fd43e8f5c8',   name: 'Ryanggang',                                        slug: 'ryanggang'},
     {id: 'a6dcd76f-7df6-48dd-a2a3-3c7ad50259eb', code: 'KP-13',       countryCommonId: '8ed7dd59-f08e-4efa-a24d-26fd43e8f5c8',   name: 'Rason',                                            slug: 'rason'},
-    
+
     {id: '4ed54e81-688d-491f-bed9-841e4c0213bf', code: 'KR-11',       countryCommonId: '09f9984a-d875-48dd-9b6c-594188cb176c',   name: 'Seúl',                                             slug: 'seul'},
     {id: '3e54a24e-d1fb-4387-9b71-7816e651287b', code: 'KR-26',       countryCommonId: '09f9984a-d875-48dd-9b6c-594188cb176c',   name: 'Busan',                                            slug: 'busan'},
     {id: '6d35bc85-230f-4954-90ad-7dcfa5e36573', code: 'KR-27',       countryCommonId: '09f9984a-d875-48dd-9b6c-594188cb176c',   name: 'Daegu',                                            slug: 'daegu'},
@@ -1620,14 +1623,14 @@ export const administrativeAreasLevel1 = [
     {id: 'c865d913-aa57-427f-acaf-f083b4a2d0fb', code: 'KR-47',       countryCommonId: '09f9984a-d875-48dd-9b6c-594188cb176c',   name: 'Gyeongsang del Norte',                             slug: 'gyeongsang-del-norte'},
     {id: 'e943d708-ba11-4464-9b5f-c1a74ae3cd52', code: 'KR-48',       countryCommonId: '09f9984a-d875-48dd-9b6c-594188cb176c',   name: 'Gyeongsang del Sur',                               slug: 'gyeongsang-del-sur'},
     {id: '11ea5cf5-5b1e-47bd-b4dc-f267a25d4471', code: 'KR-49',       countryCommonId: '09f9984a-d875-48dd-9b6c-594188cb176c',   name: 'Jeju',                                             slug: 'jeju'},
-    
+
     {id: 'ac28590b-1814-4b36-bc7f-28fa81ce67c2', code: 'KW-AH',       countryCommonId: 'ec35dda0-482e-4587-b10c-d684a0a7be6d',   name: 'Al Aḩmadi',                                        slug: 'al-amadi'},
     {id: 'f67dcd39-5588-4763-9570-4794e2bfee45', code: 'KW-FA',       countryCommonId: 'ec35dda0-482e-4587-b10c-d684a0a7be6d',   name: 'Al Farwānīyah',                                    slug: 'al-farwaniyah'},
     {id: '2bf5a9d7-9ef0-4553-b0e9-425fdac41766', code: 'KW-HA',       countryCommonId: 'ec35dda0-482e-4587-b10c-d684a0a7be6d',   name: 'Ḩawallī',                                          slug: 'awalli'},
     {id: '48d9f653-aef3-409a-8432-0799f7b69c26', code: 'KW-JA',       countryCommonId: 'ec35dda0-482e-4587-b10c-d684a0a7be6d',   name: 'Al Jahrā’',                                        slug: 'al-jahra'},
     {id: '3d499a4e-757b-4287-bc65-39c5200b3c7d', code: 'KW-KU',       countryCommonId: 'ec35dda0-482e-4587-b10c-d684a0a7be6d',   name: 'Al ٰĀşimah',                                        slug: 'al-asimah'},
     {id: 'a62b97c0-f0ec-4f84-a39c-29794f02011b', code: 'KW-MU',       countryCommonId: 'ec35dda0-482e-4587-b10c-d684a0a7be6d',   name: 'Mubārak al Kabīr',                                 slug: 'mubarak-al-kabir'},
-    
+
     {id: '787b9182-b9b3-4da2-b329-0d2794646405', code: 'KZ-AKM',      countryCommonId: '1358e771-3d05-4674-8349-6c347177b319',   name: 'Aqmola',                                           slug: 'aqmola'},
     {id: '5586b2b2-0623-4729-84eb-735e070838a4', code: 'KZ-AKT',      countryCommonId: '1358e771-3d05-4674-8349-6c347177b319',   name: 'Aqtöbe',                                           slug: 'aqtobe'},
     {id: '072ec07e-74cc-4552-8e34-2540aa4da132', code: 'KZ-ALA',      countryCommonId: '1358e771-3d05-4674-8349-6c347177b319',   name: 'Almaty city',                                      slug: 'almaty-city'},
@@ -1644,7 +1647,7 @@ export const administrativeAreasLevel1 = [
     {id: '3a8037ae-0167-42a6-80d6-6d64340ae50c', code: 'KZ-YUZ',      countryCommonId: '1358e771-3d05-4674-8349-6c347177b319',   name: 'Ongtüstik Qazaqstan',                              slug: 'ongtustik-qazaqstan'},
     {id: '63b52161-af51-446f-aae6-84856644f38e', code: 'KZ-ZAP',      countryCommonId: '1358e771-3d05-4674-8349-6c347177b319',   name: 'Batys Qazaqstan',                                  slug: 'batys-qazaqstan'},
     {id: '30ef4e3f-3d77-4b9b-8c9f-f2b008044299', code: 'KZ-ZHA',      countryCommonId: '1358e771-3d05-4674-8349-6c347177b319',   name: 'Zhambyl',                                          slug: 'zhambyl'},
-    
+
     {id: '10e50555-6000-428d-a308-d44a31788413', code: 'LA-AT',       countryCommonId: '82a77be3-1138-4c70-9e12-57060ff4edfa',   name: 'Attapu',                                           slug: 'attapu'},
     {id: 'a5f7fa42-cf21-474c-8ea5-8039a40417cd', code: 'LA-BK',       countryCommonId: '82a77be3-1138-4c70-9e12-57060ff4edfa',   name: 'Bokèo',                                            slug: 'bokeo'},
     {id: 'aca0b057-f2ad-49e7-bc92-e4dd5c6f57d5', code: 'LA-BL',       countryCommonId: '82a77be3-1138-4c70-9e12-57060ff4edfa',   name: 'Bolikhamxai',                                      slug: 'bolikhamxai'},
@@ -1663,7 +1666,7 @@ export const administrativeAreasLevel1 = [
     {id: 'e021a27a-9fe0-43e2-83ce-521d35770b99', code: 'LA-XE',       countryCommonId: '82a77be3-1138-4c70-9e12-57060ff4edfa',   name: 'Xékong',                                           slug: 'xekong'},
     {id: '8c059e36-7eeb-40d2-83fd-0830c9a544e8', code: 'LA-XI',       countryCommonId: '82a77be3-1138-4c70-9e12-57060ff4edfa',   name: 'Xiangkhoang',                                      slug: 'xiangkhoang'},
     {id: '593227ea-9a86-4cf6-9895-f8dddb8def54', code: 'LA-XN',       countryCommonId: '82a77be3-1138-4c70-9e12-57060ff4edfa',   name: 'Xaisômboun',                                       slug: 'xaisomboun'},
-    
+
     {id: 'bd7b39f3-4f1f-479d-9c3d-3a9f8c7ad17b', code: 'LB-AK',       countryCommonId: 'e298588b-4a20-48ae-a514-5984ec5544fa',   name: 'Aakkâr',                                           slug: 'aakkar'},
     {id: '9f670ecc-38bc-49c4-96e3-6f6555f3409f', code: 'LB-AS',       countryCommonId: 'e298588b-4a20-48ae-a514-5984ec5544fa',   name: 'Liban-Nord',                                       slug: 'liban-nord'},
     {id: '46477c2f-e253-426e-8920-1a43264244ab', code: 'LB-BA',       countryCommonId: 'e298588b-4a20-48ae-a514-5984ec5544fa',   name: 'Beyrouth',                                         slug: 'beyrouth'},
@@ -1672,7 +1675,7 @@ export const administrativeAreasLevel1 = [
     {id: 'd84036a5-980f-423e-b506-051450968cf0', code: 'LB-JA',       countryCommonId: 'e298588b-4a20-48ae-a514-5984ec5544fa',   name: 'Liban-Sud',                                        slug: 'liban-sud'},
     {id: 'b76971ea-bdc7-437f-a421-9045b30c6a35', code: 'LB-JL',       countryCommonId: 'e298588b-4a20-48ae-a514-5984ec5544fa',   name: 'Mont-Liban',                                       slug: 'mont-liban'},
     {id: '46974797-266b-4eab-bae5-3eba955e7ae5', code: 'LB-NA',       countryCommonId: 'e298588b-4a20-48ae-a514-5984ec5544fa',   name: 'Nabatîyé',                                         slug: 'nabatiye'},
-    
+
     {id: '078ecb52-2ee9-4943-96ab-ccb55761f1cc', code: 'LC-01',       countryCommonId: 'c0f4875c-409f-4410-9bde-85a99551079f',   name: 'Anse la Raye',                                     slug: 'anse-la-raye'},
     {id: 'd6550b02-f9be-4339-99ab-52b30a762301', code: 'LC-02',       countryCommonId: 'c0f4875c-409f-4410-9bde-85a99551079f',   name: 'Castries',                                         slug: 'castries'},
     {id: 'f975a157-ed56-4705-ad2a-cbc6c32b117b', code: 'LC-03',       countryCommonId: 'c0f4875c-409f-4410-9bde-85a99551079f',   name: 'Choiseul',                                         slug: 'choiseul'},
@@ -1684,7 +1687,7 @@ export const administrativeAreasLevel1 = [
     {id: '6f132a76-11db-430a-a74e-688714b75b18', code: 'LC-09',       countryCommonId: 'c0f4875c-409f-4410-9bde-85a99551079f',   name: 'Praslin',                                          slug: 'praslin'},
     {id: '7acdde60-1a07-47b8-bb13-486445be5cae', code: 'LC-10',       countryCommonId: 'c0f4875c-409f-4410-9bde-85a99551079f',   name: 'Soufrière',                                        slug: 'soufriere'},
     {id: 'ab7b2a0a-d0fd-407c-94bd-fe5d87aeca4a', code: 'LC-11',       countryCommonId: 'c0f4875c-409f-4410-9bde-85a99551079f',   name: 'Vieux Fort',                                       slug: 'vieux-fort'},
-    
+
     {id: '5095b890-4bb1-4eff-bd4a-a4e73187f049', code: 'LI-01',       countryCommonId: '70c34026-aa2a-462d-99ec-850a910baed0',   name: 'Balzers',                                          slug: 'balzers'},
     {id: '1add51af-c8a9-49c5-8d76-67f5aa03ef1b', code: 'LI-02',       countryCommonId: '70c34026-aa2a-462d-99ec-850a910baed0',   name: 'Eschen',                                           slug: 'eschen'},
     {id: 'ed87c21f-ccbe-42f5-b085-caa93ad655f9', code: 'LI-03',       countryCommonId: '70c34026-aa2a-462d-99ec-850a910baed0',   name: 'Gamprin',                                          slug: 'gamprin'},
@@ -1696,7 +1699,7 @@ export const administrativeAreasLevel1 = [
     {id: '59e3a1f2-723d-47d1-877c-617182a6ea1e', code: 'LI-09',       countryCommonId: '70c34026-aa2a-462d-99ec-850a910baed0',   name: 'Triesen',                                          slug: 'triesen'},
     {id: '4329494c-104c-477a-8e19-5c4770ecb0cc', code: 'LI-10',       countryCommonId: '70c34026-aa2a-462d-99ec-850a910baed0',   name: 'Triesenberg',                                      slug: 'triesenberg'},
     {id: 'afc51ec0-d0fe-4551-8ad6-26d4620bc294', code: 'LI-11',       countryCommonId: '70c34026-aa2a-462d-99ec-850a910baed0',   name: 'Vaduz',                                            slug: 'vaduz'},
-    
+
     {id: 'c020f613-b229-4049-89d0-e9a15dd65383', code: 'LK-1',        countryCommonId: '62eb4dfc-f7c8-41b1-8e9c-f1e32af58592',   name: 'Western',                                          slug: 'western'},
     {id: '7f4ba33d-0c65-4096-b9a1-84ee20b2af70', code: 'LK-2',        countryCommonId: '62eb4dfc-f7c8-41b1-8e9c-f1e32af58592',   name: 'Central',                                          slug: 'central'},
     {id: '4ae97dc5-7737-4e6a-af0b-2ec7ee3ec44e', code: 'LK-3',        countryCommonId: '62eb4dfc-f7c8-41b1-8e9c-f1e32af58592',   name: 'Southern',                                         slug: 'southern'},
@@ -1706,7 +1709,7 @@ export const administrativeAreasLevel1 = [
     {id: '1edb2e54-6288-4413-9b1f-4233d1238f1b', code: 'LK-7',        countryCommonId: '62eb4dfc-f7c8-41b1-8e9c-f1e32af58592',   name: 'North Central',                                    slug: 'north-central'},
     {id: '42f70596-6133-47b0-9f07-fc25dc96bdcb', code: 'LK-8',        countryCommonId: '62eb4dfc-f7c8-41b1-8e9c-f1e32af58592',   name: 'Uva',                                              slug: 'uva'},
     {id: 'c1eb32be-7888-43dc-b341-30a49cff89ab', code: 'LK-9',        countryCommonId: '62eb4dfc-f7c8-41b1-8e9c-f1e32af58592',   name: 'Sabaragamuwa',                                     slug: 'sabaragamuwa'},
-    
+
     {id: 'f4aa3851-c5cc-49bb-95fc-8748a5497770', code: 'LR-BG',       countryCommonId: '713afde2-cae0-4bff-87d0-63619b88ae74',   name: 'Bong',                                             slug: 'bong'},
     {id: '354c1e73-2722-42d7-8ec3-d1ee29457020', code: 'LR-BM',       countryCommonId: '713afde2-cae0-4bff-87d0-63619b88ae74',   name: 'Bomi',                                             slug: 'bomi'},
     {id: 'cf3bacec-8abd-4cd5-991e-9a357a2e1090', code: 'LR-CM',       countryCommonId: '713afde2-cae0-4bff-87d0-63619b88ae74',   name: 'Grand Cape Mount',                                 slug: 'grand-cape-mount'},
@@ -1722,7 +1725,7 @@ export const administrativeAreasLevel1 = [
     {id: 'd520e932-09a1-43f1-9295-a49ef38c3728', code: 'LR-RG',       countryCommonId: '713afde2-cae0-4bff-87d0-63619b88ae74',   name: 'River Gee',                                        slug: 'river-gee'},
     {id: '8f8d871a-bb3c-46bb-9257-915c788771d0', code: 'LR-RI',       countryCommonId: '713afde2-cae0-4bff-87d0-63619b88ae74',   name: 'Rivercess',                                        slug: 'rivercess'},
     {id: '998482ea-1db0-4882-baa5-dee03ec1ef19', code: 'LR-SI',       countryCommonId: '713afde2-cae0-4bff-87d0-63619b88ae74',   name: 'Sinoe',                                            slug: 'sinoe'},
-    
+
     {id: 'fdc6ed69-0dde-47d1-b900-90301f0e991b', code: 'LS-A',        countryCommonId: 'bae8b262-fc9f-4b3d-b099-2672f4d0383d',   name: 'Maseru',                                           slug: 'maseru'},
     {id: '84ad39d1-030e-4451-93b9-504edb9cdd37', code: 'LS-B',        countryCommonId: 'bae8b262-fc9f-4b3d-b099-2672f4d0383d',   name: 'Butha-Buthe',                                      slug: 'butha-buthe'},
     {id: '8b325a45-f0d1-49b3-b5a1-01d5a3a77e0b', code: 'LS-C',        countryCommonId: 'bae8b262-fc9f-4b3d-b099-2672f4d0383d',   name: 'Leribe',                                           slug: 'leribe'},
@@ -1733,7 +1736,7 @@ export const administrativeAreasLevel1 = [
     {id: 'bbfbf871-a3dc-4c66-83a3-2e85141a4cbd', code: 'LS-H',        countryCommonId: 'bae8b262-fc9f-4b3d-b099-2672f4d0383d',   name: 'Qacha\'s Nek',                                     slug: 'qachas-nek'},
     {id: 'f98bce4a-cefd-4f7a-a088-247b443fbb97', code: 'LS-J',        countryCommonId: 'bae8b262-fc9f-4b3d-b099-2672f4d0383d',   name: 'Mokhotlong',                                       slug: 'mokhotlong'},
     {id: '4775bfab-fad4-45c4-b57f-06d213b99674', code: 'LS-K',        countryCommonId: 'bae8b262-fc9f-4b3d-b099-2672f4d0383d',   name: 'Thaba-Tseka',                                      slug: 'thaba-tseka'},
-    
+
     {id: 'a7956025-52b4-4161-9f37-fe8f29e2f93d', code: 'LT-AL',       countryCommonId: 'f06387ac-3fc2-4881-bbc6-5b65535a7ed5',   name: 'Alytaus',                                          slug: 'alytaus'},
     {id: '77cfea2e-fa15-4034-9eb9-856237827444', code: 'LT-KL',       countryCommonId: 'f06387ac-3fc2-4881-bbc6-5b65535a7ed5',   name: 'Klaipėdos',                                        slug: 'klaipedos'},
     {id: '106a3254-5a14-473c-9713-8195d87584e0', code: 'LT-KU',       countryCommonId: 'f06387ac-3fc2-4881-bbc6-5b65535a7ed5',   name: 'Kauno',                                            slug: 'kauno'},
@@ -1744,11 +1747,11 @@ export const administrativeAreasLevel1 = [
     {id: '052e344b-1c70-477a-8d27-df0aa0a60fcd', code: 'LT-TE',       countryCommonId: 'f06387ac-3fc2-4881-bbc6-5b65535a7ed5',   name: 'Telšių',                                           slug: 'telsiu'},
     {id: 'f6e71417-51d0-4003-85e0-616adeb3e252', code: 'LT-UT',       countryCommonId: 'f06387ac-3fc2-4881-bbc6-5b65535a7ed5',   name: 'Utenos',                                           slug: 'utenos'},
     {id: 'c0d899e3-61ae-4cc0-95e5-0a09d8f86bb3', code: 'LT-VL',       countryCommonId: 'f06387ac-3fc2-4881-bbc6-5b65535a7ed5',   name: 'Vilniaus',                                         slug: 'vilniaus'},
-    
+
     {id: 'b9d6fc27-37b5-407a-8c9a-c663c91fa5a9', code: 'LU-D',        countryCommonId: '33ee33de-39ec-4dab-818d-d167f1bffd02',   name: 'Diekirch',                                         slug: 'diekirch'},
     {id: '502e4707-8579-42dc-9268-b32a5f8d7b5d', code: 'LU-G',        countryCommonId: '33ee33de-39ec-4dab-818d-d167f1bffd02',   name: 'Grevenmacher',                                     slug: 'grevenmacher'},
     {id: '965a2f1f-66eb-480a-ab1c-8cf8ebe549fd', code: 'LU-L',        countryCommonId: '33ee33de-39ec-4dab-818d-d167f1bffd02',   name: 'Luxemburg',                                        slug: 'luxemburg'},
-    
+
     {id: '47d6f6a9-d3f4-4751-a1ca-b61c9d002c44', code: 'LV-001',      countryCommonId: 'ac056d30-4425-42d3-a2dc-6d02586f153a',   name: 'Aglonas',                                          slug: 'aglonas'},
     {id: 'a767f38e-3810-4f84-b5fb-4b893cabcb29', code: 'LV-002',      countryCommonId: 'ac056d30-4425-42d3-a2dc-6d02586f153a',   name: 'Aizkraukles',                                      slug: 'aizkraukles'},
     {id: '16afacaf-6178-4f5e-bbaf-23c2c39937f2', code: 'LV-003',      countryCommonId: 'ac056d30-4425-42d3-a2dc-6d02586f153a',   name: 'Aizputes',                                         slug: 'aizputes'},
@@ -1868,7 +1871,7 @@ export const administrativeAreasLevel1 = [
     {id: 'dab7ce85-cb80-4a36-93ae-8aa86e4933f7', code: 'LV-RIX',      countryCommonId: 'ac056d30-4425-42d3-a2dc-6d02586f153a',   name: 'Rīga republican city',                             slug: 'riga-republican-city'},
     {id: 'ac74ceec-9c9f-498e-8ab5-fcdbd804616f', code: 'LV-VEN',      countryCommonId: 'ac056d30-4425-42d3-a2dc-6d02586f153a',   name: 'Ventspils republican city',                        slug: 'ventspils-republican-city'},
     {id: 'b160a843-ac43-44ff-9995-066777fc443e', code: 'LV-VMR',      countryCommonId: 'ac056d30-4425-42d3-a2dc-6d02586f153a',   name: 'Valmiera republican city',                         slug: 'valmiera-republican-city'},
-    
+
     {id: 'a0ed3040-310b-45d4-bd80-98c914f79047', code: 'LY-AJ',       countryCommonId: 'dd747a5c-1a33-4c66-9223-0db4dda1174f',   name: 'Ajdābiyā',                                         slug: 'ajdabiya'},
     {id: '1bccfd14-9919-473b-a0eb-ff507ef1804b', code: 'LY-BA',       countryCommonId: 'dd747a5c-1a33-4c66-9223-0db4dda1174f',   name: 'Banghāzī',                                         slug: 'banghazi'},
     {id: '11d4dead-c15b-414a-99a3-c987018c3d01', code: 'LY-BU',       countryCommonId: 'dd747a5c-1a33-4c66-9223-0db4dda1174f',   name: 'Al Buţnān',                                        slug: 'al-butnan'},
@@ -1894,7 +1897,7 @@ export const administrativeAreasLevel1 = [
     {id: '5ef2ee49-b7ed-4f57-ad0b-60e1c60bbb64', code: 'LY-SH',       countryCommonId: 'dd747a5c-1a33-4c66-9223-0db4dda1174f',   name: 'Ash Shāţi\'',                                      slug: 'ash-shati'},
     {id: 'd605535a-66a0-40ed-a905-b6e1510eeae6', code: 'LY-WA',       countryCommonId: 'dd747a5c-1a33-4c66-9223-0db4dda1174f',   name: 'Al Wāḩah',                                         slug: 'al-waah'},
     {id: 'df7b832e-964d-4923-b586-6eb58ee85b1c', code: 'LY-ZA',       countryCommonId: 'dd747a5c-1a33-4c66-9223-0db4dda1174f',   name: 'Az Zāwiyah',                                       slug: 'az-zawiyah'},
-    
+
     {id: 'fe4e0eef-4b2b-4647-b20e-bbe4351e64a5', code: 'MA-01',       countryCommonId: 'b4a9e15d-0033-47ef-8246-0a6e662939c3',   name: 'Tanger Tétouan',                                   slug: 'tanger-tetouan'},
     {id: '522a205c-5581-49d5-afb7-6cfb04de11f0', code: 'MA-02',       countryCommonId: 'b4a9e15d-0033-47ef-8246-0a6e662939c3',   name: 'Gharb Chrarda Beni Hssen',                         slug: 'gharb-chrarda-beni-hssen'},
     {id: 'b3b1fbff-9c2c-412b-91b9-72b39dac8705', code: 'MA-03',       countryCommonId: 'b4a9e15d-0033-47ef-8246-0a6e662939c3',   name: 'Taza Al Hoceima Taounate',                         slug: 'taza-al-hoceima-taounate'},
@@ -1911,7 +1914,7 @@ export const administrativeAreasLevel1 = [
     {id: '34c7e069-4f8b-46cc-ae2b-4b951d7de6ed', code: 'MA-14',       countryCommonId: 'b4a9e15d-0033-47ef-8246-0a6e662939c3',   name: 'Guelmin Es Smara',                                 slug: 'guelmin-es-smara'},
     {id: 'cfe7a8d2-8976-4bd4-8609-d13281bc101e', code: 'MA-15',       countryCommonId: 'b4a9e15d-0033-47ef-8246-0a6e662939c3',   name: 'Laâyoune Boujdour Sakia el Hamra',                 slug: 'laayoune-boujdour-sakia-el-hamra'},
     {id: '27ab3434-5e15-41f2-af99-6aeb8fb99f1c', code: 'MA-16',       countryCommonId: 'b4a9e15d-0033-47ef-8246-0a6e662939c3',   name: 'Oued ed Dahab Lagouira',                           slug: 'oued-ed-dahab-lagouira'},
-    
+
     {id: '52a54383-c16e-4fcc-b8d7-574d128a649c', code: 'MC-CL',       countryCommonId: '64e00b6c-01f6-42b7-9c41-dfebcef5aea1',   name: 'La Colle',                                         slug: 'la-colle'},
     {id: 'ca2b158e-87de-422c-badb-20668dedd5a1', code: 'MC-CO',       countryCommonId: '64e00b6c-01f6-42b7-9c41-dfebcef5aea1',   name: 'La Condamine',                                     slug: 'la-condamine'},
     {id: '88354ac5-4036-4868-be09-86baf816cb52', code: 'MC-FO',       countryCommonId: '64e00b6c-01f6-42b7-9c41-dfebcef5aea1',   name: 'Fontvieille',                                      slug: 'fontvieille'},
@@ -1929,7 +1932,7 @@ export const administrativeAreasLevel1 = [
     {id: '6f8d116e-3da4-4d0c-8e4d-c2ab07fc8d10', code: 'MC-SP',       countryCommonId: '64e00b6c-01f6-42b7-9c41-dfebcef5aea1',   name: 'Spélugues',                                        slug: 'spelugues'},
     {id: '511686e7-f47d-43da-815e-c548917e747c', code: 'MC-SR',       countryCommonId: '64e00b6c-01f6-42b7-9c41-dfebcef5aea1',   name: 'Saint-Roman',                                      slug: 'saint-roman'},
     {id: '9c5e401b-fc38-433b-babb-4b07a1d44de5', code: 'MC-VR',       countryCommonId: '64e00b6c-01f6-42b7-9c41-dfebcef5aea1',   name: 'Vallon de la Rousse',                              slug: 'vallon-de-la-rousse'},
-    
+
     {id: '6acfd909-997e-4039-aeab-8a31c095c8d1', code: 'MD-AN',       countryCommonId: '9cbbee92-0ac1-4d78-80e4-3dd7ecb73c18',   name: 'Anenii Noi',                                       slug: 'anenii-noi'},
     {id: 'cb2ca147-dce4-4a5e-9f07-aef19c531429', code: 'MD-BA',       countryCommonId: '9cbbee92-0ac1-4d78-80e4-3dd7ecb73c18',   name: 'Ciudad de Bălţi',                                  slug: 'ciudad-de-balti'},
     {id: 'a6d15123-8bce-4482-be60-c60987e329fd', code: 'MD-BD',       countryCommonId: '9cbbee92-0ac1-4d78-80e4-3dd7ecb73c18',   name: 'Ciudad de Tighina',                                slug: 'ciudad-de-tighina'},
@@ -1967,7 +1970,7 @@ export const administrativeAreasLevel1 = [
     {id: '0bf1a4e5-c640-467a-ad65-b9edd9f96a44', code: 'MD-TA',       countryCommonId: '9cbbee92-0ac1-4d78-80e4-3dd7ecb73c18',   name: 'Taraclia',                                         slug: 'taraclia'},
     {id: 'c32bfff9-5cfc-44e4-b3b0-31efb741021f', code: 'MD-TE',       countryCommonId: '9cbbee92-0ac1-4d78-80e4-3dd7ecb73c18',   name: 'Teleneşti',                                        slug: 'telenesti'},
     {id: '644a3627-a010-4352-b214-9d1fa3273f85', code: 'MD-UN',       countryCommonId: '9cbbee92-0ac1-4d78-80e4-3dd7ecb73c18',   name: 'Ungheni',                                          slug: 'ungheni'},
-    
+
     {id: '35bf5a16-289a-4b4b-b5e1-c20acda60bbf', code: 'ME-01',       countryCommonId: '878f0c0f-538b-45ad-8036-48a2f3c0b7e3',   name: 'Andrijevica',                                      slug: 'andrijevica'},
     {id: 'bb7e4e14-934a-4b31-89f7-5540788b3faf', code: 'ME-02',       countryCommonId: '878f0c0f-538b-45ad-8036-48a2f3c0b7e3',   name: 'Bar',                                              slug: 'bar'},
     {id: '0b214131-369a-4dee-bafd-c8e7fe0b464f', code: 'ME-03',       countryCommonId: '878f0c0f-538b-45ad-8036-48a2f3c0b7e3',   name: 'Berane',                                           slug: 'berane'},
@@ -1989,17 +1992,17 @@ export const administrativeAreasLevel1 = [
     {id: '2ab7aced-92d5-4696-9920-b2d3c7800ad8', code: 'ME-19',       countryCommonId: '878f0c0f-538b-45ad-8036-48a2f3c0b7e3',   name: 'Tivat',                                            slug: 'tivat'},
     {id: '8362afef-a712-4125-811c-91e46fe1569d', code: 'ME-20',       countryCommonId: '878f0c0f-538b-45ad-8036-48a2f3c0b7e3',   name: 'Ulcinj',                                           slug: 'ulcinj'},
     {id: 'f2405445-96a0-49ea-8628-922a59a8a0de', code: 'ME-21',       countryCommonId: '878f0c0f-538b-45ad-8036-48a2f3c0b7e3',   name: 'Žabljak',                                          slug: 'zabljak'},
-    
+
     {id: '44c1df20-cc6c-4c84-8f16-2b90964e804f', code: 'MG-A',        countryCommonId: '715b864a-684b-47ee-8b97-84dd0481f819',   name: 'Toamasina',                                        slug: 'toamasina'},
     {id: '3cbb08bf-b5ce-481c-ad81-4c9f3effec0c', code: 'MG-D',        countryCommonId: '715b864a-684b-47ee-8b97-84dd0481f819',   name: 'Antsiranana',                                      slug: 'antsiranana'},
     {id: '42d02eaa-212a-41af-aa96-8835e6701a99', code: 'MG-F',        countryCommonId: '715b864a-684b-47ee-8b97-84dd0481f819',   name: 'Fianarantsoa',                                     slug: 'fianarantsoa'},
     {id: '79d1ec63-8552-4412-b4e1-efda96866f74', code: 'MG-M',        countryCommonId: '715b864a-684b-47ee-8b97-84dd0481f819',   name: 'Mahajanga',                                        slug: 'mahajanga'},
     {id: '5912a6c4-b9bb-4695-bcf5-f32356d6b282', code: 'MG-T',        countryCommonId: '715b864a-684b-47ee-8b97-84dd0481f819',   name: 'Antananarivo',                                     slug: 'antananarivo'},
     {id: '54ce15a6-7e8f-4f87-88d9-46db5b741f2a', code: 'MG-U',        countryCommonId: '715b864a-684b-47ee-8b97-84dd0481f819',   name: 'Toliara',                                          slug: 'toliara'},
-    
+
     {id: '487bd935-c743-4fa9-9651-a45415a27bf6', code: 'MH-L',        countryCommonId: '923a8c5f-5a81-4952-8922-fd7b78192b99',   name: 'Ralik',                                            slug: 'ralik'},
     {id: 'd5961295-3ebd-49a5-b0fd-3fa0891714ad', code: 'MH-T',        countryCommonId: '923a8c5f-5a81-4952-8922-fd7b78192b99',   name: 'Ratak',                                            slug: 'ratak'},
-    
+
     {id: 'b2b9e996-d45b-4687-b26b-eb68490ebd68', code: 'MK-AD',       countryCommonId: '96605e03-58ad-4b7b-ade1-e0f88bba5907',   name: 'Aerodrom',                                         slug: 'aerodrom'},
     {id: 'dc8746bb-91eb-41b5-9858-1fb79caec01c', code: 'MK-AJ',       countryCommonId: '96605e03-58ad-4b7b-ade1-e0f88bba5907',   name: 'Saraj',                                            slug: 'saraj'},
     {id: 'b56de132-5d77-4b72-ba28-466a89262e1c', code: 'MK-AR',       countryCommonId: '96605e03-58ad-4b7b-ade1-e0f88bba5907',   name: 'Aračinovo',                                        slug: 'aracinovo'},
@@ -2084,7 +2087,7 @@ export const administrativeAreasLevel1 = [
     {id: '6785bd09-4924-49c2-b92e-bf1540742977', code: 'MK-ZE',       countryCommonId: '96605e03-58ad-4b7b-ade1-e0f88bba5907',   name: 'Želino',                                           slug: 'zelino'},
     {id: '3bc9a443-a66c-4443-adfe-e6f8c64cc261', code: 'MK-ZK',       countryCommonId: '96605e03-58ad-4b7b-ade1-e0f88bba5907',   name: 'Zelenikovo',                                       slug: 'zelenikovo'},
     {id: '98586552-ebf0-4ad8-8b28-b2a609cc6429', code: 'MK-ZR',       countryCommonId: '96605e03-58ad-4b7b-ade1-e0f88bba5907',   name: 'Zrnovci',                                          slug: 'zrnovci'},
-    
+
     {id: '294c7fab-3a09-45b8-8d88-3cb14253de8d', code: 'ML-1',        countryCommonId: 'fd4ad3f8-8242-41c6-9f36-2524a83ddc3b',   name: 'Kayes',                                            slug: 'kayes'},
     {id: 'defc1f3d-6287-4598-90fe-53ca8b7eb5b2', code: 'ML-2',        countryCommonId: 'fd4ad3f8-8242-41c6-9f36-2524a83ddc3b',   name: 'Koulikoro',                                        slug: 'koulikoro'},
     {id: '86f6bd5c-0a36-469c-894b-8df68f2a8d61', code: 'ML-3',        countryCommonId: 'fd4ad3f8-8242-41c6-9f36-2524a83ddc3b',   name: 'Sikasso',                                          slug: 'sikasso'},
@@ -2094,7 +2097,7 @@ export const administrativeAreasLevel1 = [
     {id: '98cbcc35-ffb1-48e2-a8ae-480b9e73aa4b', code: 'ML-7',        countryCommonId: 'fd4ad3f8-8242-41c6-9f36-2524a83ddc3b',   name: 'Gao',                                              slug: 'gao'},
     {id: '31f2b303-2d8c-41ba-8780-2d6e88ccab8d', code: 'ML-8',        countryCommonId: 'fd4ad3f8-8242-41c6-9f36-2524a83ddc3b',   name: 'Kidal',                                            slug: 'kidal'},
     {id: '35cf1789-e2e9-4eea-96ad-ee1b8d10783b', code: 'ML-BKO',      countryCommonId: 'fd4ad3f8-8242-41c6-9f36-2524a83ddc3b',   name: 'Distrito de Bamako',                               slug: 'distrito-de-bamako'},
-    
+
     {id: 'f40eed6f-8f0c-4448-8503-3562f5647567', code: 'MM-01',       countryCommonId: 'c42971d6-9d96-467d-a61c-2a43326ebf2c',   name: 'División de Sagaing',                              slug: 'division-de-sagaing'},
     {id: 'f9c1f8ea-617c-454c-a229-7861f4ac96ed', code: 'MM-02',       countryCommonId: 'c42971d6-9d96-467d-a61c-2a43326ebf2c',   name: 'División de Bago',                                 slug: 'division-de-bago'},
     {id: '9cb35d82-0989-4684-be15-fe5468675458', code: 'MM-03',       countryCommonId: 'c42971d6-9d96-467d-a61c-2a43326ebf2c',   name: 'División de Magway',                               slug: 'division-de-magway'},
@@ -2109,7 +2112,7 @@ export const administrativeAreasLevel1 = [
     {id: 'c52bc0af-51cc-4e14-9885-1388cebd12b6', code: 'MM-15',       countryCommonId: 'c42971d6-9d96-467d-a61c-2a43326ebf2c',   name: 'Mon',                                              slug: 'mon'},
     {id: '6583dac9-22a7-4825-b1b3-89e9377fa16d', code: 'MM-16',       countryCommonId: 'c42971d6-9d96-467d-a61c-2a43326ebf2c',   name: 'Rakhine',                                          slug: 'rakhine'},
     {id: 'f80a5b8b-7edb-48b5-867c-bf72cb9060e6', code: 'MM-17',       countryCommonId: 'c42971d6-9d96-467d-a61c-2a43326ebf2c',   name: 'Shan',                                             slug: 'shan'},
-    
+
     {id: 'fa9427fa-064f-447c-bbea-fba6d0ded1f0', code: 'MN-035',      countryCommonId: '6ee8286d-ec8b-4b3b-af6d-c49c17923f02',   name: 'Orhon',                                            slug: 'orhon'},
     {id: '27cbddd0-1ced-4b6f-aa49-7f2982c7cbdf', code: 'MN-037',      countryCommonId: '6ee8286d-ec8b-4b3b-af6d-c49c17923f02',   name: 'Darhan-Uul',                                       slug: 'darhan-uul'},
     {id: '840d39cc-e18d-41e7-b0ab-16ede3a56f3d', code: 'MN-039',      countryCommonId: '6ee8286d-ec8b-4b3b-af6d-c49c17923f02',   name: 'Hentiy',                                           slug: 'hentiy'},
@@ -2132,7 +2135,7 @@ export const administrativeAreasLevel1 = [
     {id: '076d24cc-15f6-43d4-8807-3c771cd7d92b', code: 'MN-071',      countryCommonId: '6ee8286d-ec8b-4b3b-af6d-c49c17923f02',   name: 'Bayan-Ölgiy',                                      slug: 'bayan-olgiy'},
     {id: '58ca7c89-53ed-4cfa-a21b-d1950d8059ee', code: 'MN-073',      countryCommonId: '6ee8286d-ec8b-4b3b-af6d-c49c17923f02',   name: 'Arhangay',                                         slug: 'arhangay'},
     {id: '396a3d41-8042-404d-9804-2b01c6e5a107', code: 'MN-1',        countryCommonId: '6ee8286d-ec8b-4b3b-af6d-c49c17923f02',   name: 'Ciudad de Ulaanbaatar',                            slug: 'ciudad-de-ulaanbaatar'},
-    
+
     {id: '0d36cd15-88af-44f4-9ccb-42d0e982c96f', code: 'MR-01',       countryCommonId: '7f836b4d-c5f3-4f33-969c-156eb8c41a48',   name: 'Hodh ech Chargui',                                 slug: 'hodh-ech-chargui'},
     {id: '6ddf983d-c3e5-4221-b0d8-a7b063c45fe7', code: 'MR-02',       countryCommonId: '7f836b4d-c5f3-4f33-969c-156eb8c41a48',   name: 'Hodh el Gharbi',                                   slug: 'hodh-el-gharbi'},
     {id: '47448215-7062-49b1-be06-2d1e82d0f054', code: 'MR-03',       countryCommonId: '7f836b4d-c5f3-4f33-969c-156eb8c41a48',   name: 'Assaba',                                           slug: 'assaba'},
@@ -2146,7 +2149,7 @@ export const administrativeAreasLevel1 = [
     {id: '84002ea7-fc86-4fe7-9218-69dcd70ebe8d', code: 'MR-11',       countryCommonId: '7f836b4d-c5f3-4f33-969c-156eb8c41a48',   name: 'Tiris Zemmour',                                    slug: 'tiris-zemmour'},
     {id: '7e227fa1-7a56-4889-bd9e-90ebd8f5acff', code: 'MR-12',       countryCommonId: '7f836b4d-c5f3-4f33-969c-156eb8c41a48',   name: 'Inchiri',                                          slug: 'inchiri'},
     {id: 'e4081844-2b6c-4f88-91c2-4ba35b5ecfe0', code: 'MR-NKC',      countryCommonId: '7f836b4d-c5f3-4f33-969c-156eb8c41a48',   name: 'Distrito de Nouakchott',                           slug: 'distrito-de-nouakchott'},
-    
+
     {id: '76ba5af5-6a9f-4b89-94fb-e26c4a08b5f7', code: 'MT-01',       countryCommonId: '7421585a-8900-48d0-bdeb-81dfcf0d083b',   name: 'Attard',                                           slug: 'attard'},
     {id: 'a5531c22-0797-469b-a42e-7d6b16a6db0e', code: 'MT-02',       countryCommonId: '7421585a-8900-48d0-bdeb-81dfcf0d083b',   name: 'Balzan',                                           slug: 'balzan'},
     {id: '94bd78ce-03ac-4d44-84f4-f66f5f8fe13f', code: 'MT-03',       countryCommonId: '7421585a-8900-48d0-bdeb-81dfcf0d083b',   name: 'Birgu',                                            slug: 'birgu'},
@@ -2215,7 +2218,7 @@ export const administrativeAreasLevel1 = [
     {id: '0e91e424-46c1-490d-9d40-3d90d40da605', code: 'MT-66',       countryCommonId: '7421585a-8900-48d0-bdeb-81dfcf0d083b',   name: 'Żebbuġ Malta',                                     slug: 'zebbug-malta'},
     {id: 'c15c8e0b-3438-4f18-a0ea-7de7c913f96a', code: 'MT-67',       countryCommonId: '7421585a-8900-48d0-bdeb-81dfcf0d083b',   name: 'Żejtun',                                           slug: 'zejtun'},
     {id: '08da5973-c14c-487e-8245-3eeeb541b838', code: 'MT-68',       countryCommonId: '7421585a-8900-48d0-bdeb-81dfcf0d083b',   name: 'Żurrieq',                                          slug: 'zurrieq'},
-    
+
     {id: 'ca0aeea0-c064-4a4f-bd9a-0d8c6561534c', code: 'MU-AG',       countryCommonId: 'f20aed3e-1aff-4405-bbcd-b25fec860c4f',   name: 'Agalega Islands dependency',                       slug: 'agalega-islands-dependency'},
     {id: '570df166-94b7-46f0-8074-5d4358a0dec7', code: 'MU-BL',       countryCommonId: 'f20aed3e-1aff-4405-bbcd-b25fec860c4f',   name: 'Black River',                                      slug: 'black-river'},
     {id: 'edbd0672-b6e4-4d7e-865a-74b8f5d60d2c', code: 'MU-CC',       countryCommonId: 'f20aed3e-1aff-4405-bbcd-b25fec860c4f',   name: 'Cargados Carajos dependency',                      slug: 'cargados-carajos-dependency'},
@@ -2228,7 +2231,7 @@ export const administrativeAreasLevel1 = [
     {id: '5ff89735-51ee-4f0e-905e-119f40da71fb', code: 'MU-RO',       countryCommonId: 'f20aed3e-1aff-4405-bbcd-b25fec860c4f',   name: 'Rodrigues dependency',                             slug: 'rodrigues-dependency'},
     {id: 'bd8135b4-45a9-42a8-ab17-f7cac4fd4aca', code: 'MU-RR',       countryCommonId: 'f20aed3e-1aff-4405-bbcd-b25fec860c4f',   name: 'Rivière du Rempart',                               slug: 'riviere-du-rempart'},
     {id: 'e687dfe2-4e86-4e1e-9dd5-4c14af999166', code: 'MU-SA',       countryCommonId: 'f20aed3e-1aff-4405-bbcd-b25fec860c4f',   name: 'Savanne',                                          slug: 'savanne'},
-    
+
     {id: '4fa64524-b52e-481d-968a-a171ce3c0c24', code: 'MV-CE',       countryCommonId: '619d03db-f46b-4640-a4fa-dc15671ce354',   name: 'Medhu',                                            slug: 'medhu'},
     {id: '4b8017f4-fabf-4b60-a997-17fba2fcf0ea', code: 'MV-MLE',      countryCommonId: '619d03db-f46b-4640-a4fa-dc15671ce354',   name: 'Maale capital',                                    slug: 'maale-capital'},
     {id: 'd9bb16d0-5b89-4fef-8a08-b68e834fa0c8', code: 'MV-NC',       countryCommonId: '619d03db-f46b-4640-a4fa-dc15671ce354',   name: 'Medhu-Uthuru',                                     slug: 'medhu-uthuru'},
@@ -2237,11 +2240,11 @@ export const administrativeAreasLevel1 = [
     {id: '08277cd5-a062-4609-b71c-ef1745388f7b', code: 'MV-SU',       countryCommonId: '619d03db-f46b-4640-a4fa-dc15671ce354',   name: 'Dhekunu',                                          slug: 'dhekunu'},
     {id: 'b9a421c8-5378-4a13-84bd-470ae8555604', code: 'MV-UN',       countryCommonId: '619d03db-f46b-4640-a4fa-dc15671ce354',   name: 'Mathi-Uthuru',                                     slug: 'mathi-uthuru'},
     {id: '14d3a388-764a-4300-a1e1-47e4db9ce441', code: 'MV-US',       countryCommonId: '619d03db-f46b-4640-a4fa-dc15671ce354',   name: 'Mathi-Dhekunu',                                    slug: 'mathi-dhekunu'},
-    
+
     {id: 'bf5f19b6-9574-49a7-a4f4-f7f2234fd638', code: 'MW-C',        countryCommonId: '0bd2083a-4ba3-4620-a53d-fc425cca44f7',   name: 'Central',                                          slug: 'central'},
     {id: 'c0f4dcc0-eee5-4348-849e-f6a9b3c38243', code: 'MW-N',        countryCommonId: '0bd2083a-4ba3-4620-a53d-fc425cca44f7',   name: 'Northern',                                         slug: 'northern'},
     {id: 'cdf1c6e9-4fce-4cb3-a6e6-087e188c1917', code: 'MW-S',        countryCommonId: '0bd2083a-4ba3-4620-a53d-fc425cca44f7',   name: 'Southern',                                         slug: 'southern'},
-    
+
     {id: '4445c4e8-18a9-4413-b108-daefdf3e22bb', code: 'MX-AGU',      countryCommonId: '95b47f70-8a51-4d8d-974b-ffb1542a809f',   name: 'Aguascalientes',                                   slug: 'aguascalientes'},
     {id: '5c68c472-321b-4ea5-9c87-4b44025013f3', code: 'MX-BCN',      countryCommonId: '95b47f70-8a51-4d8d-974b-ffb1542a809f',   name: 'Baja California',                                  slug: 'baja-california'},
     {id: '9080da85-fdbe-4890-83f1-33192c51ef33', code: 'MX-BCS',      countryCommonId: '95b47f70-8a51-4d8d-974b-ffb1542a809f',   name: 'Baja California Sur',                              slug: 'baja-california-sur'},
@@ -2274,7 +2277,7 @@ export const administrativeAreasLevel1 = [
     {id: 'f9feaef0-5326-497f-aa49-d0ca68dba2ec', code: 'MX-VER',      countryCommonId: '95b47f70-8a51-4d8d-974b-ffb1542a809f',   name: 'Veracruz',                                         slug: 'veracruz'},
     {id: '12164ab4-86d1-446d-a2b6-3022104c8c6b', code: 'MX-YUC',      countryCommonId: '95b47f70-8a51-4d8d-974b-ffb1542a809f',   name: 'Yucatán',                                          slug: 'yucatan'},
     {id: 'ccaefa80-c5e7-4eda-9387-c3afa87aa1d1', code: 'MX-ZAC',      countryCommonId: '95b47f70-8a51-4d8d-974b-ffb1542a809f',   name: 'Zacatecas',                                        slug: 'zacatecas'},
-    
+
     {id: '48615bd2-19d8-46ec-aa3b-d6ae9a243e1b', code: 'MY-01',       countryCommonId: '4b278f8f-9746-4a5e-bf83-a1780d88bee9',   name: 'Johor',                                            slug: 'johor'},
     {id: '5e070dd7-857e-414a-8aec-88093fcd4072', code: 'MY-02',       countryCommonId: '4b278f8f-9746-4a5e-bf83-a1780d88bee9',   name: 'Kedah',                                            slug: 'kedah'},
     {id: '1a8c80d5-ecd7-43b9-95f5-4053243bb49a', code: 'MY-03',       countryCommonId: '4b278f8f-9746-4a5e-bf83-a1780d88bee9',   name: 'Kelantan',                                         slug: 'kelantan'},
@@ -2291,7 +2294,7 @@ export const administrativeAreasLevel1 = [
     {id: '946da146-723b-4e07-8af6-28261927a918', code: 'MY-14',       countryCommonId: '4b278f8f-9746-4a5e-bf83-a1780d88bee9',   name: 'Territorio Federal de Kuala Lumpur',               slug: 'territorio-federal-de-kuala-lumpur'},
     {id: '67067edd-a7ca-4691-9a94-8514793edf01', code: 'MY-15',       countryCommonId: '4b278f8f-9746-4a5e-bf83-a1780d88bee9',   name: 'Territorio Federal de Labuan',                     slug: 'territorio-federal-de-labuan'},
     {id: '83215479-1e3c-417d-a7fc-a34583d86795', code: 'MY-16',       countryCommonId: '4b278f8f-9746-4a5e-bf83-a1780d88bee9',   name: 'Territorio Federal Putrajaya',                     slug: 'territorio-federal-putrajaya'},
-    
+
     {id: 'cbfc5b6f-7326-42d3-8e9b-ecfa2f53c985', code: 'MZ-A',        countryCommonId: 'd4610086-7ea8-4e08-837e-f5ebaf33061a',   name: 'Niassa',                                           slug: 'niassa'},
     {id: '3856c000-1f36-445e-acab-10c7af24c6fc', code: 'MZ-B',        countryCommonId: 'd4610086-7ea8-4e08-837e-f5ebaf33061a',   name: 'Manica',                                           slug: 'manica'},
     {id: 'ed6272d0-31cd-460b-a9e7-d782eb908557', code: 'MZ-G',        countryCommonId: 'd4610086-7ea8-4e08-837e-f5ebaf33061a',   name: 'Gaza',                                             slug: 'gaza'},
@@ -2303,7 +2306,7 @@ export const administrativeAreasLevel1 = [
     {id: 'b6f27352-8868-4365-b0af-7dc715619c75', code: 'MZ-Q',        countryCommonId: 'd4610086-7ea8-4e08-837e-f5ebaf33061a',   name: 'Zambézia',                                         slug: 'zambezia'},
     {id: '4ec29e28-13b8-4e33-beed-6ac08297e65d', code: 'MZ-S',        countryCommonId: 'd4610086-7ea8-4e08-837e-f5ebaf33061a',   name: 'Sofala',                                           slug: 'sofala'},
     {id: '38b34fab-b05b-404b-b938-9452a8ab2568', code: 'MZ-T',        countryCommonId: 'd4610086-7ea8-4e08-837e-f5ebaf33061a',   name: 'Tete',                                             slug: 'tete'},
-    
+
     {id: 'b1db9537-c8b7-4f05-bc76-fee6c2831ba5', code: 'NA-CA',       countryCommonId: '62fdecc7-0c90-4125-9144-fafc330ca301',   name: 'Zambezi',                                          slug: 'zambezi'},
     {id: '7863ce69-4c5a-4a0d-a69a-d4372745e8bd', code: 'NA-ER',       countryCommonId: '62fdecc7-0c90-4125-9144-fafc330ca301',   name: 'Erongo',                                           slug: 'erongo'},
     {id: 'e846e539-30c9-4cdb-b152-feabdabd702e', code: 'NA-HA',       countryCommonId: '62fdecc7-0c90-4125-9144-fafc330ca301',   name: 'Hardap',                                           slug: 'hardap'},
@@ -2318,7 +2321,7 @@ export const administrativeAreasLevel1 = [
     {id: '58485e60-7cf8-4cd0-aba5-378b601a6c27', code: 'NA-OS',       countryCommonId: '62fdecc7-0c90-4125-9144-fafc330ca301',   name: 'Omusati',                                          slug: 'omusati'},
     {id: 'd3dae446-3070-417e-9bcb-e02fb8272bee', code: 'NA-OT',       countryCommonId: '62fdecc7-0c90-4125-9144-fafc330ca301',   name: 'Oshikoto',                                         slug: 'oshikoto'},
     {id: 'f104b43b-ba4d-4a94-a0ab-6e43649e523d', code: 'NA-OW',       countryCommonId: '62fdecc7-0c90-4125-9144-fafc330ca301',   name: 'Ohangwena',                                        slug: 'ohangwena'},
-    
+
     {id: 'b5cd2078-cc70-4b53-a0f8-86925ac44fbb', code: 'NE-1',        countryCommonId: '84d91c0e-93f6-496f-b199-0609ba970899',   name: 'Agadez',                                           slug: 'agadez'},
     {id: '66be6fa0-62bc-4dfb-99e3-296ab06cfeb6', code: 'NE-2',        countryCommonId: '84d91c0e-93f6-496f-b199-0609ba970899',   name: 'Diffa',                                            slug: 'diffa'},
     {id: 'b571e1d1-5377-4374-9c9e-5b85a78e4c52', code: 'NE-3',        countryCommonId: '84d91c0e-93f6-496f-b199-0609ba970899',   name: 'Dosso',                                            slug: 'dosso'},
@@ -2327,7 +2330,7 @@ export const administrativeAreasLevel1 = [
     {id: '212bb73a-38dd-426e-a70d-7c1ca0ff5166', code: 'NE-6',        countryCommonId: '84d91c0e-93f6-496f-b199-0609ba970899',   name: 'Tillabéri',                                        slug: 'tillaberi'},
     {id: '2f0c76de-058f-4d37-8080-65b28429acfa', code: 'NE-7',        countryCommonId: '84d91c0e-93f6-496f-b199-0609ba970899',   name: 'Zinder',                                           slug: 'zinder'},
     {id: '14d81d2c-137a-4a39-9db5-deaa92809d82', code: 'NE-8',        countryCommonId: '84d91c0e-93f6-496f-b199-0609ba970899',   name: 'Ciudad de Niamey',                                 slug: 'ciudad-de-niamey'},
-    
+
     {id: 'f5f2c109-7ece-483e-ae7f-bf4d36a9451a', code: 'NG-AB',       countryCommonId: '7353231b-1423-4dd5-a5d5-92b62c54259f',   name: 'Abia',                                             slug: 'abia'},
     {id: '8348a0ac-0b23-405b-9791-df95c9592b78', code: 'NG-AD',       countryCommonId: '7353231b-1423-4dd5-a5d5-92b62c54259f',   name: 'Adamawa',                                          slug: 'adamawa'},
     {id: 'b4c9c1da-51ad-4680-ab64-caf74061cea1', code: 'NG-AK',       countryCommonId: '7353231b-1423-4dd5-a5d5-92b62c54259f',   name: 'Akwa Ibom',                                        slug: 'akwa-ibom'},
@@ -2365,7 +2368,7 @@ export const administrativeAreasLevel1 = [
     {id: 'b2aed6a9-1ce3-47e8-a040-618fc38ddfc2', code: 'NG-TA',       countryCommonId: '7353231b-1423-4dd5-a5d5-92b62c54259f',   name: 'Taraba',                                           slug: 'taraba'},
     {id: '601e696e-cf43-4e9d-8a49-a5410dc46fae', code: 'NG-YO',       countryCommonId: '7353231b-1423-4dd5-a5d5-92b62c54259f',   name: 'Yobe',                                             slug: 'yobe'},
     {id: '5f2ed4de-93a7-4d06-8e5d-4ed20d85cc12', code: 'NG-ZA',       countryCommonId: '7353231b-1423-4dd5-a5d5-92b62c54259f',   name: 'Zamfara',                                          slug: 'zamfara'},
-    
+
     {id: 'e8bc5166-8682-45a1-b8ed-18272d818026', code: 'NI-AN',       countryCommonId: '32b3385c-4953-451e-9231-158a91f3ef7b',   name: 'Región de Atlántico Norte',                        slug: 'region-de-atlantico-norte'},
     {id: 'd5015dcc-07f4-4260-9b7c-85dce475524a', code: 'NI-AS',       countryCommonId: '32b3385c-4953-451e-9231-158a91f3ef7b',   name: 'Región de Atlántico Sur',                          slug: 'region-de-atlantico-sur'},
     {id: '1c6e1530-0935-41f8-b66f-84a50841e185', code: 'NI-BO',       countryCommonId: '32b3385c-4953-451e-9231-158a91f3ef7b',   name: 'Boaco',                                            slug: 'boaco'},
@@ -2383,7 +2386,7 @@ export const administrativeAreasLevel1 = [
     {id: 'd348a2bb-c05f-42bd-822d-025ca476be7d', code: 'NI-NS',       countryCommonId: '32b3385c-4953-451e-9231-158a91f3ef7b',   name: 'Nueva Segovia',                                    slug: 'nueva-segovia'},
     {id: 'b625d192-9a04-4fbe-9edb-759b58edd197', code: 'NI-RI',       countryCommonId: '32b3385c-4953-451e-9231-158a91f3ef7b',   name: 'Rivas',                                            slug: 'rivas'},
     {id: '7d97a239-480b-42a5-9eb5-bc210ec910e9', code: 'NI-SJ',       countryCommonId: '32b3385c-4953-451e-9231-158a91f3ef7b',   name: 'Río San Juan',                                     slug: 'rio-san-juan'},
-    
+
     {id: 'ff19cefc-686e-4e9b-a3c6-1d0bcaa46a41', code: 'NL-AW',       countryCommonId: '5d721506-a0ea-430b-842c-79be41c3b8f2',   name: 'País de Aruba',                                    slug: 'pais-de-aruba'},
     {id: '3fe0619d-38dd-4cd8-9750-7653d8bd8c9c', code: 'NL-BQ1',      countryCommonId: '5d721506-a0ea-430b-842c-79be41c3b8f2',   name: 'Municipio especial de Bonaire',                    slug: 'municipio-especial-de-bonaire'},
     {id: '61beeb88-47d6-46dc-acdb-0d8bf13683da', code: 'NL-BQ2',      countryCommonId: '5d721506-a0ea-430b-842c-79be41c3b8f2',   name: 'Municipio especial de Saba',                       slug: 'municipio-especial-de-saba'},
@@ -2402,7 +2405,7 @@ export const administrativeAreasLevel1 = [
     {id: 'd2235488-d861-4245-9b7c-72dbc8224875', code: 'NL-UT',       countryCommonId: '5d721506-a0ea-430b-842c-79be41c3b8f2',   name: 'Utrecht',                                          slug: 'utrecht'},
     {id: '9bb6830f-a5eb-4657-9c73-82567bdf0471', code: 'NL-ZE',       countryCommonId: '5d721506-a0ea-430b-842c-79be41c3b8f2',   name: 'Zeeland',                                          slug: 'zeeland'},
     {id: '98c92613-d4ee-4741-874b-e69467ba0641', code: 'NL-ZH',       countryCommonId: '5d721506-a0ea-430b-842c-79be41c3b8f2',   name: 'Zuid-Holland',                                     slug: 'zuid-holland'},
-    
+
     {id: '4334df39-e724-4b7f-aff2-5f41585d69bc', code: 'NO-01',       countryCommonId: '9129e280-1074-47bd-8155-8d7afcf34b18',   name: 'Østfold',                                          slug: 'ostfold'},
     {id: 'bba76c3f-ba93-4de7-9922-b890dc16cece', code: 'NO-02',       countryCommonId: '9129e280-1074-47bd-8155-8d7afcf34b18',   name: 'Akershus',                                         slug: 'akershus'},
     {id: '304b6413-f81f-4db1-8c6f-c78e8d15d9c2', code: 'NO-03',       countryCommonId: '9129e280-1074-47bd-8155-8d7afcf34b18',   name: 'Oslo',                                             slug: 'oslo'},
@@ -2424,13 +2427,13 @@ export const administrativeAreasLevel1 = [
     {id: '0e8edf1c-1098-471b-afcd-9dd8103df878', code: 'NO-20',       countryCommonId: '9129e280-1074-47bd-8155-8d7afcf34b18',   name: 'Finnmark',                                         slug: 'finnmark'},
     {id: 'cd4c3fee-fb46-46f6-9917-88d87c12c3f3', code: 'NO-21',       countryCommonId: '9129e280-1074-47bd-8155-8d7afcf34b18',   name: 'Territorio de Svalbard',                           slug: 'territorio-de-svalbard'},
     {id: '59b59692-90d3-43e8-90c6-ee7a4e61b1d9', code: 'NO-22',       countryCommonId: '9129e280-1074-47bd-8155-8d7afcf34b18',   name: 'Territorio de Jan Mayen',                          slug: 'territorio-de-jan-mayen'},
-    
+
     {id: '0ef11a71-3d2c-4892-92dc-1a15bdb0b15e', code: 'NP-1',        countryCommonId: 'f6588fd1-3918-4952-b1ca-f7f63854fb80',   name: 'Madhyamanchal',                                    slug: 'madhyamanchal'},
     {id: '4abb977c-6b24-481d-94e1-fa06c76ed4d8', code: 'NP-2',        countryCommonId: 'f6588fd1-3918-4952-b1ca-f7f63854fb80',   name: 'Madhya Pashchimanchal',                            slug: 'madhya-pashchimanchal'},
     {id: '34847f98-58b3-4ad6-b078-9d9f58e825ea', code: 'NP-3',        countryCommonId: 'f6588fd1-3918-4952-b1ca-f7f63854fb80',   name: 'Pashchimanchal',                                   slug: 'pashchimanchal'},
     {id: 'e25a82bb-801d-45b7-9f50-6121e46ec79b', code: 'NP-4',        countryCommonId: 'f6588fd1-3918-4952-b1ca-f7f63854fb80',   name: 'Purwanchal',                                       slug: 'purwanchal'},
     {id: '64bc945e-e6a8-44e3-ad1a-ccca57f84a86', code: 'NP-5',        countryCommonId: 'f6588fd1-3918-4952-b1ca-f7f63854fb80',   name: 'Sudur Pashchimanchal',                             slug: 'sudur-pashchimanchal'},
-    
+
     {id: 'b8593fe3-88dd-45e9-9aab-c259d31dacba', code: 'NR-01',       countryCommonId: '178af917-2707-4e55-9456-a79e0c6fa5a3',   name: 'Aiwo',                                             slug: 'aiwo'},
     {id: '0c200237-bb7b-474e-8610-84c9dc784d73', code: 'NR-02',       countryCommonId: '178af917-2707-4e55-9456-a79e0c6fa5a3',   name: 'Anabar',                                           slug: 'anabar'},
     {id: '91693b66-78e9-4452-932b-e54bfa292203', code: 'NR-03',       countryCommonId: '178af917-2707-4e55-9456-a79e0c6fa5a3',   name: 'Anetan',                                           slug: 'anetan'},
@@ -2445,10 +2448,10 @@ export const administrativeAreasLevel1 = [
     {id: '5e771afd-d200-4f97-8fee-f7db4577b59c', code: 'NR-12',       countryCommonId: '178af917-2707-4e55-9456-a79e0c6fa5a3',   name: 'Nibok',                                            slug: 'nibok'},
     {id: '6d41209d-ea52-414e-95ed-dc3f2840383d', code: 'NR-13',       countryCommonId: '178af917-2707-4e55-9456-a79e0c6fa5a3',   name: 'Uaboe',                                            slug: 'uaboe'},
     {id: 'dd05e764-a8b4-41ca-96c6-f535715712a7', code: 'NR-14',       countryCommonId: '178af917-2707-4e55-9456-a79e0c6fa5a3',   name: 'Yaren',                                            slug: 'yaren'},
-    
+
     {id: '43eaff7c-be8c-4da8-bf1d-76320f3cbf31', code: 'NZ-N',        countryCommonId: '480020c8-25d5-400f-b029-dbdbdb6f05ed',   name: 'North',                                            slug: 'north'},
     {id: '7f37b83f-ae87-42eb-8910-27974ad37c77', code: 'NZ-S',        countryCommonId: '480020c8-25d5-400f-b029-dbdbdb6f05ed',   name: 'South',                                            slug: 'south'},
-    
+
     {id: 'c94c831c-8b2a-4b12-a634-0c5eb1306592', code: 'OM-BA',       countryCommonId: 'baa9aa42-91d9-41ee-9436-08842305e3bd',   name: 'Al Bāţinah',                                       slug: 'al-batinah'},
     {id: 'fd88e506-f568-4b68-91d9-7133afd04e96', code: 'OM-BU',       countryCommonId: 'baa9aa42-91d9-41ee-9436-08842305e3bd',   name: 'Al Buraymī',                                       slug: 'al-buraymi'},
     {id: '83734c66-fed7-4a08-b080-fa294ee40ae9', code: 'OM-DA',       countryCommonId: 'baa9aa42-91d9-41ee-9436-08842305e3bd',   name: 'Ad Dākhilīyah',                                    slug: 'ad-dakhiliyah'},
@@ -2458,7 +2461,7 @@ export const administrativeAreasLevel1 = [
     {id: '039c92b3-aee7-4fc1-a096-959b62cb65b1', code: 'OM-WU',       countryCommonId: 'baa9aa42-91d9-41ee-9436-08842305e3bd',   name: 'Al Wusţá',                                         slug: 'al-wusta'},
     {id: '1e233a30-bb9f-4cfb-a297-14d92b4e0f7f', code: 'OM-ZA',       countryCommonId: 'baa9aa42-91d9-41ee-9436-08842305e3bd',   name: 'Az̧ Z̧āhirah',                                       slug: 'az-zahirah'},
     {id: '98d3e193-28fd-46f1-8616-f6d5a7932515', code: 'OM-ZU',       countryCommonId: 'baa9aa42-91d9-41ee-9436-08842305e3bd',   name: 'Z̧ufār',                                            slug: 'zufar'},
-    
+
     {id: '37200e11-56e1-40ea-8db4-2967300f961b', code: 'PA-1',        countryCommonId: '92a937b6-369d-45c5-b5a9-f7b31731b9cb',   name: 'Bocas del Toro',                                   slug: 'bocas-del-toro'},
     {id: '5dc70651-dd22-4ee9-95d4-c91a607b7b16', code: 'PA-13',       countryCommonId: '92a937b6-369d-45c5-b5a9-f7b31731b9cb',   name: 'Panamá Oeste',                                     slug: 'panama-oeste'},
     {id: '741f2fc7-33a0-4a81-a1f4-0aa33522fa36', code: 'PA-2',        countryCommonId: '92a937b6-369d-45c5-b5a9-f7b31731b9cb',   name: 'Coclé',                                            slug: 'cocle'},
@@ -2472,7 +2475,7 @@ export const administrativeAreasLevel1 = [
     {id: '3b2a5f34-f6e3-4bcc-9cd2-90583c8aeef9', code: 'PA-EM',       countryCommonId: '92a937b6-369d-45c5-b5a9-f7b31731b9cb',   name: 'Comarca de Emberá-Wounaan',                        slug: 'comarca-de-embera-wounaan'},
     {id: '9ebdddfe-9658-4271-b1ea-d6dcaec1641f', code: 'PA-KY',       countryCommonId: '92a937b6-369d-45c5-b5a9-f7b31731b9cb',   name: 'Comarca de Guna Yala',                             slug: 'comarca-de-guna-yala'},
     {id: '20b2c661-3bae-4565-9bd6-f0b5ecff7af0', code: 'PA-NB',       countryCommonId: '92a937b6-369d-45c5-b5a9-f7b31731b9cb',   name: 'Comarca de Ngäbe-Buglé',                           slug: 'comarca-de-ngabe-bugle'},
-    
+
     {id: '1e8c1ef8-32bf-41ef-a7f0-7c34e361881f', code: 'PE-AMA',      countryCommonId: '21b0cea4-a698-4304-bc62-5e47a0e6358b',   name: 'Amazonas',                                         slug: 'amazonas'},
     {id: '2c236b5f-735d-48b8-8d6c-29dae22d5cc0', code: 'PE-ANC',      countryCommonId: '21b0cea4-a698-4304-bc62-5e47a0e6358b',   name: 'Ancash',                                           slug: 'ancash'},
     {id: 'e61c1817-7755-44d8-8d34-f108b1eb548a', code: 'PE-APU',      countryCommonId: '21b0cea4-a698-4304-bc62-5e47a0e6358b',   name: 'Apurímac',                                         slug: 'apurimac'},
@@ -2499,7 +2502,7 @@ export const administrativeAreasLevel1 = [
     {id: '89904455-0432-4473-a1be-9ec6c3fddad7', code: 'PE-TAC',      countryCommonId: '21b0cea4-a698-4304-bc62-5e47a0e6358b',   name: 'Tacna',                                            slug: 'tacna'},
     {id: 'e62eea97-6dde-4fd1-8e36-bdfcbd3b50ec', code: 'PE-TUM',      countryCommonId: '21b0cea4-a698-4304-bc62-5e47a0e6358b',   name: 'Tumbes',                                           slug: 'tumbes'},
     {id: 'cae82ef5-76f1-400c-bdbe-0e4a07cc9a0f', code: 'PE-UCA',      countryCommonId: '21b0cea4-a698-4304-bc62-5e47a0e6358b',   name: 'Ucayali',                                          slug: 'ucayali'},
-    
+
     {id: 'a5940255-4055-4b4e-b4ef-66d844866a63', code: 'PG-CPK',      countryCommonId: '1b0e878c-c125-4dbf-824a-e05b562b9a62',   name: 'Chimbu',                                           slug: 'chimbu'},
     {id: '7aff8297-a481-4dae-be80-b24971994c37', code: 'PG-CPM',      countryCommonId: '1b0e878c-c125-4dbf-824a-e05b562b9a62',   name: 'Central',                                          slug: 'central'},
     {id: 'c17f01db-26a4-4ae3-b9ab-a42f6f524cf8', code: 'PG-EBR',      countryCommonId: '1b0e878c-c125-4dbf-824a-e05b562b9a62',   name: 'East New Britain',                                 slug: 'east-new-britain'},
@@ -2520,7 +2523,7 @@ export const administrativeAreasLevel1 = [
     {id: 'c8031dce-f0bf-42ae-b404-7e7d59d99ad9', code: 'PG-WBK',      countryCommonId: '1b0e878c-c125-4dbf-824a-e05b562b9a62',   name: 'West New Britain',                                 slug: 'west-new-britain'},
     {id: 'fdca13b2-8efc-426a-b6d1-3e10a3cd77c6', code: 'PG-WHM',      countryCommonId: '1b0e878c-c125-4dbf-824a-e05b562b9a62',   name: 'Western Highlands',                                slug: 'western-highlands'},
     {id: 'b608c228-4688-4dd4-94f8-c2518d90f820', code: 'PG-WPD',      countryCommonId: '1b0e878c-c125-4dbf-824a-e05b562b9a62',   name: 'Western',                                          slug: 'western'},
-    
+
     {id: 'b1dd7522-abc1-4945-a152-86ed55ee7427', code: 'PH-00',       countryCommonId: '18ee8378-4682-4b11-a6a9-e518de927e1c',   name: 'Pambansang Punong',                                slug: 'pambansang-punong'},
     {id: '83a270f3-6263-4217-8405-2442efa22db4', code: 'PH-01',       countryCommonId: '18ee8378-4682-4b11-a6a9-e518de927e1c',   name: 'Ilocos',                                           slug: 'ilocos'},
     {id: 'b2d4cc90-f67c-4692-a2ca-e204087f2061', code: 'PH-02',       countryCommonId: '18ee8378-4682-4b11-a6a9-e518de927e1c',   name: 'Lambak ng Cagayan',                                slug: 'lambak-ng-cagayan'},
@@ -2538,7 +2541,9 @@ export const administrativeAreasLevel1 = [
     {id: 'c32db102-309c-4101-a376-8ca7ed49699d', code: 'PH-15',       countryCommonId: '18ee8378-4682-4b11-a6a9-e518de927e1c',   name: 'Administratibong Rehiyon ng Cordillera',           slug: 'administratibong-rehiyon-ng-cordillera'},
     {id: '98a45701-2db9-47f3-8af3-b5bdcbd16a5d', code: 'PH-40',       countryCommonId: '18ee8378-4682-4b11-a6a9-e518de927e1c',   name: 'Calabarzon',                                       slug: 'calabarzon'},
     {id: 'ffbf5411-a754-40b4-8db2-8261ffa0c5c8', code: 'PH-41',       countryCommonId: '18ee8378-4682-4b11-a6a9-e518de927e1c',   name: 'Mimaropa',                                         slug: 'mimaropa'},
-    
+];
+
+export const administrativeAreasLevel104 = [
     {id: 'dc38d658-25d5-4bf0-a0d9-633654dd28ec', code: 'PK-BA',       countryCommonId: '7606859f-8e0e-4ad6-8fda-ec2fed6608e8',   name: 'Balochistan',                                      slug: 'balochistan'},
     {id: '30dbe699-9a5a-4b22-b6dc-05cb772d013c', code: 'PK-GB',       countryCommonId: '7606859f-8e0e-4ad6-8fda-ec2fed6608e8',   name: 'Zona Gilgit-Baltistan',                            slug: 'zona-gilgit-baltistan'},
     {id: 'cd0bcb07-ec16-4511-b254-4c58ce747b56', code: 'PK-IS',       countryCommonId: '7606859f-8e0e-4ad6-8fda-ec2fed6608e8',   name: 'Territorio Federal Islamabad',                     slug: 'territorio-federal-islamabad'},
@@ -2547,7 +2552,7 @@ export const administrativeAreasLevel1 = [
     {id: '6eaa6b12-81cd-4bb5-9481-195b9d8cf3b3', code: 'PK-PB',       countryCommonId: '7606859f-8e0e-4ad6-8fda-ec2fed6608e8',   name: 'Punjab',                                           slug: 'punjab'},
     {id: 'fef2e7d6-b143-4bd2-b7dc-4c64c8da6dd0', code: 'PK-SD',       countryCommonId: '7606859f-8e0e-4ad6-8fda-ec2fed6608e8',   name: 'Sindh',                                            slug: 'sindh'},
     {id: '5cf86c2a-45de-483d-bf19-4a363a2f10df', code: 'PK-TA',       countryCommonId: '7606859f-8e0e-4ad6-8fda-ec2fed6608e8',   name: 'Federally Administered Tribal Areas',              slug: 'federally-administered-tribal-areas'},
-    
+
     {id: '487bbdc2-6b78-441b-a864-442ffbcd1d4f', code: 'PL-DS',       countryCommonId: 'e0cd202f-2839-41c4-b555-f6b80d48c13a',   name: 'Dolnośląskie',                                     slug: 'dolnoslaskie'},
     {id: '4ff2a777-7405-43c4-850c-2c3ea2dbb00a', code: 'PL-KP',       countryCommonId: 'e0cd202f-2839-41c4-b555-f6b80d48c13a',   name: 'Kujawsko-pomorskie',                               slug: 'kujawsko-pomorskie'},
     {id: '8e00586f-c796-495d-97c3-c750041ac7d6', code: 'PL-LB',       countryCommonId: 'e0cd202f-2839-41c4-b555-f6b80d48c13a',   name: 'Lubuskie',                                         slug: 'lubuskie'},
@@ -2564,7 +2569,7 @@ export const administrativeAreasLevel1 = [
     {id: '15efd244-df4d-49fd-82df-8ebc5b5bd42d', code: 'PL-WN',       countryCommonId: 'e0cd202f-2839-41c4-b555-f6b80d48c13a',   name: 'Warmińsko-mazurskie',                              slug: 'warminsko-mazurskie'},
     {id: '68987ddb-4599-4f8b-84b6-d2a1c3f8dc1c', code: 'PL-WP',       countryCommonId: 'e0cd202f-2839-41c4-b555-f6b80d48c13a',   name: 'Wielkopolskie',                                    slug: 'wielkopolskie'},
     {id: 'c9f65aaf-ba4b-4606-9141-6d0d3f972aa3', code: 'PL-ZP',       countryCommonId: 'e0cd202f-2839-41c4-b555-f6b80d48c13a',   name: 'Zachodniopomorskie',                               slug: 'zachodniopomorskie'},
-    
+
     {id: 'c554787d-9588-4468-848b-8472a619e804', code: 'PS-BTH',      countryCommonId: '7e9f508f-69c3-459f-b0d6-eb2dc0743159',   name: 'Belén',                                            slug: 'belen'},
     {id: '89ffdfc7-d52a-46e7-bf3c-f29f2538008b', code: 'PS-DEB',      countryCommonId: '7e9f508f-69c3-459f-b0d6-eb2dc0743159',   name: 'Deir el-Balah',                                    slug: 'deir-el-balah'},
     {id: '4d5bdc1d-78da-43a7-9617-be4e35af6975', code: 'PS-GZA',      countryCommonId: '7e9f508f-69c3-459f-b0d6-eb2dc0743159',   name: 'Gaza',                                             slug: 'gaza'},
@@ -2580,7 +2585,7 @@ export const administrativeAreasLevel1 = [
     {id: '10b0a68f-60f5-4b7c-b896-5d0f8c720461', code: 'PS-TFH',      countryCommonId: '7e9f508f-69c3-459f-b0d6-eb2dc0743159',   name: 'Rafah',                                            slug: 'rafah'},
     {id: 'bd5b5dd9-b174-4f51-9239-e079ef4ef1b3', code: 'PS-TKM',      countryCommonId: '7e9f508f-69c3-459f-b0d6-eb2dc0743159',   name: 'Tulkarem',                                         slug: 'tulkarem'},
     {id: 'b692d99a-6c28-489e-bd84-83a56e4af8bf', code: 'PS-YEN',      countryCommonId: '7e9f508f-69c3-459f-b0d6-eb2dc0743159',   name: 'Yenín',                                            slug: 'yenin'},
-    
+
     {id: 'd5206040-de47-45c6-9152-783dcb6350f5', code: 'PT-AC',       countryCommonId: '5dd38a43-7b77-4fd5-8004-dac6fdede41a',   name: 'Açores',                                           slug: 'acores'},
     {id: '4da8a78b-6691-4b60-8c88-ff96985bc7dc', code: 'PT-AV',       countryCommonId: '5dd38a43-7b77-4fd5-8004-dac6fdede41a',   name: 'Aveiro',                                           slug: 'aveiro'},
     {id: '026c8be7-ac03-4040-be1f-348201237c6c', code: 'PT-BA',       countryCommonId: '5dd38a43-7b77-4fd5-8004-dac6fdede41a',   name: 'Bragança',                                         slug: 'braganca'},
@@ -2601,7 +2606,7 @@ export const administrativeAreasLevel1 = [
     {id: '2f2ca380-0d1d-4ecc-ba60-2c4be25854cd', code: 'PT-VC',       countryCommonId: '5dd38a43-7b77-4fd5-8004-dac6fdede41a',   name: 'Viana do Castelo',                                 slug: 'viana-do-castelo'},
     {id: '8962623f-7444-4582-adfb-9a68728c75fd', code: 'PT-VI',       countryCommonId: '5dd38a43-7b77-4fd5-8004-dac6fdede41a',   name: 'Viseu',                                            slug: 'viseu'},
     {id: '342c3301-2803-440d-91a8-22e7c3b6bbe4', code: 'PT-VR',       countryCommonId: '5dd38a43-7b77-4fd5-8004-dac6fdede41a',   name: 'Vila Real',                                        slug: 'vila-real'},
-    
+
     {id: '79f7595a-7d19-4d7f-a6a5-2637de6933a9', code: 'PW-002',      countryCommonId: 'c18b65a6-7446-46fe-ad22-1064c6776bd0',   name: 'Aimeliik',                                         slug: 'aimeliik'},
     {id: 'df8a0ef6-cb39-4dc7-a173-80cd4010a272', code: 'PW-004',      countryCommonId: 'c18b65a6-7446-46fe-ad22-1064c6776bd0',   name: 'Airai',                                            slug: 'airai'},
     {id: 'bc802167-2132-4daa-8621-f8448b7d5106', code: 'PW-010',      countryCommonId: 'c18b65a6-7446-46fe-ad22-1064c6776bd0',   name: 'Angaur',                                           slug: 'angaur'},
@@ -2618,7 +2623,7 @@ export const administrativeAreasLevel1 = [
     {id: '613d306c-04e5-4297-b850-b1fc2e5f87cb', code: 'PW-228',      countryCommonId: 'c18b65a6-7446-46fe-ad22-1064c6776bd0',   name: 'Ngiwal',                                           slug: 'ngiwal'},
     {id: '5e12c313-5cef-4698-87d7-237e13f480e0', code: 'PW-350',      countryCommonId: 'c18b65a6-7446-46fe-ad22-1064c6776bd0',   name: 'Peleliu',                                          slug: 'peleliu'},
     {id: 'e61fbb28-dedd-4b34-977b-d5266f8b72c9', code: 'PW-370',      countryCommonId: 'c18b65a6-7446-46fe-ad22-1064c6776bd0',   name: 'Sonsorol',                                         slug: 'sonsorol'},
-    
+
     {id: '69c7ac3b-2669-485e-baef-7582ae8e8e90', code: 'PY-1',        countryCommonId: '47944513-250f-4d2d-8c79-d8f3f35eb7f3',   name: 'Concepción',                                       slug: 'concepcion'},
     {id: 'b7643c6b-8896-4ed2-ba73-6bd925f81ace', code: 'PY-10',       countryCommonId: '47944513-250f-4d2d-8c79-d8f3f35eb7f3',   name: 'Alto Paraná',                                      slug: 'alto-parana'},
     {id: '110024ce-b025-4ea7-9b99-11ad6880973f', code: 'PY-11',       countryCommonId: '47944513-250f-4d2d-8c79-d8f3f35eb7f3',   name: 'Central',                                          slug: 'central'},
@@ -2637,7 +2642,7 @@ export const administrativeAreasLevel1 = [
     {id: 'a11a0b47-3658-4f66-b17c-15688a92840d', code: 'PY-8',        countryCommonId: '47944513-250f-4d2d-8c79-d8f3f35eb7f3',   name: 'Misiones',                                         slug: 'misiones'},
     {id: 'ceb45e2f-e5ad-4471-ba0a-00d4e03cc43d', code: 'PY-9',        countryCommonId: '47944513-250f-4d2d-8c79-d8f3f35eb7f3',   name: 'Paraguarí',                                        slug: 'paraguari'},
     {id: '9edba598-0694-473b-8a0e-562b490e1922', code: 'PY-ASU',      countryCommonId: '47944513-250f-4d2d-8c79-d8f3f35eb7f3',   name: 'Distrito Capital Asunción',                        slug: 'distrito-capital-asuncion'},
-    
+
     {id: 'bfbe4e03-4ab4-4dc6-863a-a13066d7c415', code: 'QA-DA',       countryCommonId: '9926400d-65c8-4a29-9a79-554674d90329',   name: 'Doha',                                             slug: 'doha'},
     {id: 'fbdeb604-eebc-469e-a5a6-be3da3f56f37', code: 'QA-KH',       countryCommonId: '9926400d-65c8-4a29-9a79-554674d90329',   name: 'Al Khor',                                          slug: 'al-khor'},
     {id: '66c4c670-f9f3-4ead-8775-44d6ae46eb0e', code: 'QA-MS',       countryCommonId: '9926400d-65c8-4a29-9a79-554674d90329',   name: 'Madinat ash Shamal',                               slug: 'madinat-ash-shamal'},
@@ -2645,7 +2650,7 @@ export const administrativeAreasLevel1 = [
     {id: '7cf6f8f3-13de-4eb0-8f40-f5c46101d440', code: 'QA-US',       countryCommonId: '9926400d-65c8-4a29-9a79-554674d90329',   name: 'Umm Salal',                                        slug: 'umm-salal'},
     {id: '5ea92ca5-c7cd-4ba9-a73c-3a1bffefd331', code: 'QA-WA',       countryCommonId: '9926400d-65c8-4a29-9a79-554674d90329',   name: 'Al Wakrah',                                        slug: 'al-wakrah'},
     {id: '4eb8f83f-9424-48c7-8337-2437eb62d5ca', code: 'QA-ZA',       countryCommonId: '9926400d-65c8-4a29-9a79-554674d90329',   name: 'Al Daayen',                                        slug: 'al-daayen'},
-    
+
     {id: '2b74f1f1-532c-4a84-baee-8f4834bdc071', code: 'RO-AB',       countryCommonId: '94f1f7f7-49a6-4e08-85b5-a954a65b0ea2',   name: 'Alba',                                             slug: 'alba'},
     {id: '230390fd-e56a-4616-b074-958a40e0a042', code: 'RO-AG',       countryCommonId: '94f1f7f7-49a6-4e08-85b5-a954a65b0ea2',   name: 'Argeș',                                            slug: 'arges'},
     {id: '2b4b7711-3691-4a1b-bfc8-a4e8b0fdf282', code: 'RO-BC',       countryCommonId: '94f1f7f7-49a6-4e08-85b5-a954a65b0ea2',   name: 'Bacău',                                            slug: 'bacau'},
@@ -2682,7 +2687,7 @@ export const administrativeAreasLevel1 = [
     {id: '0eeb3114-75e0-40a6-903b-105768093df9', code: 'RO-VL',       countryCommonId: '94f1f7f7-49a6-4e08-85b5-a954a65b0ea2',   name: 'Vâlcea',                                           slug: 'valcea'},
     {id: '0f7dfa10-6a2a-4de7-9099-006315ff9b74', code: 'RO-VN',       countryCommonId: '94f1f7f7-49a6-4e08-85b5-a954a65b0ea2',   name: 'Vrancea',                                          slug: 'vrancea'},
     {id: 'd8f8a584-8ff4-41d1-8bce-7678fc4252e6', code: 'RO-VS',       countryCommonId: '94f1f7f7-49a6-4e08-85b5-a954a65b0ea2',   name: 'Vaslui',                                           slug: 'vaslui'},
-    
+
     {id: '0e433b6e-81d0-40fb-b81a-906381768d6b', code: 'RU-AD',       countryCommonId: 'd9e79a5d-8c62-4d96-a949-da518a1f39b5',   name: 'República de Adiguesia',                           slug: 'republica-de-adiguesia'},
     {id: 'f2b421ca-aa85-492a-aa85-3c17108225b2', code: 'RU-AL',       countryCommonId: 'd9e79a5d-8c62-4d96-a949-da518a1f39b5',   name: 'República de Altái',                               slug: 'republica-de-altai'},
     {id: '922cf457-d73b-4273-9d76-a30588f738d8', code: 'RU-ALT',      countryCommonId: 'd9e79a5d-8c62-4d96-a949-da518a1f39b5',   name: 'Krai de Altái',                                    slug: 'krai-de-altai'},
@@ -2763,13 +2768,13 @@ export const administrativeAreasLevel1 = [
     {id: '10fe93d5-41ed-4a0d-bb87-dcbe69dea9b5', code: 'RU-YAR',      countryCommonId: 'd9e79a5d-8c62-4d96-a949-da518a1f39b5',   name: 'Óblast de Yaroslavl',                              slug: 'oblast-de-yaroslavl'},
     {id: '0d4bd40c-f0b6-43d8-a4ea-bf5cf0783963', code: 'RU-YEV',      countryCommonId: 'd9e79a5d-8c62-4d96-a949-da518a1f39b5',   name: 'Óblast Autónomo Hebreo',                           slug: 'oblast-autonomo-hebreo'},
     {id: '2bb2035e-de5a-4893-aa21-cb0e80559c7a', code: 'RU-ZAB',      countryCommonId: 'd9e79a5d-8c62-4d96-a949-da518a1f39b5',   name: 'Krai de Zabaikalie',                               slug: 'krai-de-zabaikalie'},
-    
+
     {id: '825f6f55-fef6-415e-a43f-2cb98490865b', code: 'RW-01',       countryCommonId: 'f59ddc3e-adb2-4ec4-a7d6-22fe61bd09cc',   name: 'Kigali',                                           slug: 'kigali'},
     {id: '530e370e-594e-4433-a032-abdc8d9e9209', code: 'RW-02',       countryCommonId: 'f59ddc3e-adb2-4ec4-a7d6-22fe61bd09cc',   name: 'Este',                                             slug: 'este'},
     {id: 'dad92b61-bcfb-4622-ba15-49f8ff4e85f0', code: 'RW-03',       countryCommonId: 'f59ddc3e-adb2-4ec4-a7d6-22fe61bd09cc',   name: 'Norte',                                            slug: 'norte'},
     {id: 'e9d5065d-23b5-462a-b859-ff5dc788bca6', code: 'RW-04',       countryCommonId: 'f59ddc3e-adb2-4ec4-a7d6-22fe61bd09cc',   name: 'Oeste',                                            slug: 'oeste'},
     {id: 'c2a5caed-412f-479b-93bc-45bf42dce420', code: 'RW-05',       countryCommonId: 'f59ddc3e-adb2-4ec4-a7d6-22fe61bd09cc',   name: 'Sur',                                              slug: 'sur'},
-    
+
     {id: 'a48508cc-8a76-4e54-8b67-5a8fe8fab047', code: 'SA-03',       countryCommonId: '527b611e-a267-4a39-a5b6-339977aa4be1',   name: 'Medina',                                           slug: 'medina'},
     {id: '5f0ef922-3fd8-4b82-96ab-96fbc920a372', code: 'SA-04',       countryCommonId: '527b611e-a267-4a39-a5b6-339977aa4be1',   name: 'Oriental',                                         slug: 'oriental'},
     {id: 'eaf9b1d0-9eef-4165-9d5d-b0d8b6bf08a5', code: 'SA-05',       countryCommonId: '527b611e-a267-4a39-a5b6-339977aa4be1',   name: 'Casim',                                            slug: 'casim'},
@@ -2780,7 +2785,7 @@ export const administrativeAreasLevel1 = [
     {id: 'f538c3e3-ca68-4fe1-912a-d13959df4373', code: 'SA-11',       countryCommonId: '527b611e-a267-4a39-a5b6-339977aa4be1',   name: 'Baha',                                             slug: 'baha'},
     {id: 'b7518e84-0502-41b2-8cf7-b26ce9d7e4ac', code: 'SA-12',       countryCommonId: '527b611e-a267-4a39-a5b6-339977aa4be1',   name: 'Yauf',                                             slug: 'yauf'},
     {id: '2d0036e8-32e0-4ed6-988f-5c2a323109a9', code: 'SA-14',       countryCommonId: '527b611e-a267-4a39-a5b6-339977aa4be1',   name: 'Asir',                                             slug: 'asir'},
-    
+
     {id: 'df8402f1-69bf-415f-a978-99dab885196f', code: 'SB-CE',       countryCommonId: '2cccaea3-7d45-41e8-8e50-625f6cb29a95',   name: 'Central',                                          slug: 'central'},
     {id: '30df89e1-1651-4a22-9f72-8496e7d69912', code: 'SB-GU',       countryCommonId: '2cccaea3-7d45-41e8-8e50-625f6cb29a95',   name: 'Guadalcanal',                                      slug: 'guadalcanal'},
     {id: 'be35abd3-aa61-4281-b961-4729b52d26d7', code: 'SB-IS',       countryCommonId: '2cccaea3-7d45-41e8-8e50-625f6cb29a95',   name: 'Isabel',                                           slug: 'isabel'},
@@ -2788,7 +2793,7 @@ export const administrativeAreasLevel1 = [
     {id: '41726f74-5c6b-4f15-bf06-52018bcdbbc9', code: 'SB-ML',       countryCommonId: '2cccaea3-7d45-41e8-8e50-625f6cb29a95',   name: 'Malaita',                                          slug: 'malaita'},
     {id: '71b605a2-59f1-4c68-94a1-4b831c1210c7', code: 'SB-TE',       countryCommonId: '2cccaea3-7d45-41e8-8e50-625f6cb29a95',   name: 'Temotu',                                           slug: 'temotu'},
     {id: '54b5ee63-873d-40f6-bb1f-604cb124b0d1', code: 'SB-WE',       countryCommonId: '2cccaea3-7d45-41e8-8e50-625f6cb29a95',   name: 'Occidental',                                       slug: 'occidental'},
-    
+
     {id: 'a913d29b-79f6-44fe-9b7e-8374e207e108', code: 'SC-01',       countryCommonId: 'c313ced6-6842-4922-aef4-b407fcad7e31',   name: 'Anse aux Pins',                                    slug: 'anse-aux-pins'},
     {id: 'e1514105-f852-4c36-a8ba-6c6a4713c5ee', code: 'SC-02',       countryCommonId: 'c313ced6-6842-4922-aef4-b407fcad7e31',   name: 'Anse Boileau',                                     slug: 'anse-boileau'},
     {id: '7936b8f4-3a35-41f4-919a-8b94f774ac32', code: 'SC-03',       countryCommonId: 'c313ced6-6842-4922-aef4-b407fcad7e31',   name: 'Anse Étoile',                                      slug: 'anse-etoile'},
@@ -2814,7 +2819,7 @@ export const administrativeAreasLevel1 = [
     {id: '2380a5ae-cef0-4dbd-86ec-b0e70bb0f612', code: 'SC-23',       countryCommonId: 'c313ced6-6842-4922-aef4-b407fcad7e31',   name: 'Takamaka',                                         slug: 'takamaka'},
     {id: 'f3309240-e2dc-472f-bec2-3094137bf8d3', code: 'SC-24',       countryCommonId: 'c313ced6-6842-4922-aef4-b407fcad7e31',   name: 'Les Mamelles',                                     slug: 'les-mamelles'},
     {id: '80402edf-65b7-4a48-b304-78bcd379a777', code: 'SC-25',       countryCommonId: 'c313ced6-6842-4922-aef4-b407fcad7e31',   name: 'Roche Caïman',                                     slug: 'roche-caiman'},
-    
+
     {id: 'd8903350-2d3e-4c90-8b03-39a0e4d6161f', code: 'SD-12',       countryCommonId: '5891073c-c3f3-4a20-b715-1e3c95941834',   name: 'Darfur del Oeste',                                 slug: 'darfur-del-oeste'},
     {id: 'cb7b1dd3-fd2e-4057-89ce-c6296bd1ea6c', code: 'SD-DN',       countryCommonId: '5891073c-c3f3-4a20-b715-1e3c95941834',   name: 'Darfur del Norte',                                 slug: 'darfur-del-norte'},
     {id: 'f029d553-47b0-4acb-b631-db0dbbb582ad', code: 'SD-DS',       countryCommonId: '5891073c-c3f3-4a20-b715-1e3c95941834',   name: 'Darfur del Sur',                                   slug: 'darfur-del-sur'},
@@ -2830,7 +2835,7 @@ export const administrativeAreasLevel1 = [
     {id: '0dc0ec86-f6ef-453c-92d8-3a9c2b3d6d4e', code: 'SD-NW',       countryCommonId: '5891073c-c3f3-4a20-b715-1e3c95941834',   name: 'Nilo Blanco',                                      slug: 'nilo-blanco'},
     {id: '101e2d2f-5be6-4e47-a3e3-3d68e40bb2b3', code: 'SD-RS',       countryCommonId: '5891073c-c3f3-4a20-b715-1e3c95941834',   name: 'Mar Rojo',                                         slug: 'mar-rojo'},
     {id: '07f88e97-0786-47cf-930a-1c0a4a835bb1', code: 'SD-SI',       countryCommonId: '5891073c-c3f3-4a20-b715-1e3c95941834',   name: 'Sennar',                                           slug: 'sennar'},
-    
+
     {id: 'f00510cc-b829-4e0b-9000-5d9deb5271ed', code: 'SE-AB',       countryCommonId: '3d6f3930-ea9e-4f12-b545-3d56a46df628',   name: 'Estocolmo',                                        slug: 'estocolmo'},
     {id: '3983811e-2af0-48a4-a885-2ab3a2702fa8', code: 'SE-AC',       countryCommonId: '3d6f3930-ea9e-4f12-b545-3d56a46df628',   name: 'Västerbotten',                                     slug: 'vasterbotten'},
     {id: 'b51293d1-897b-45ec-8541-2bbbe119eb2a', code: 'SE-BD',       countryCommonId: '3d6f3930-ea9e-4f12-b545-3d56a46df628',   name: 'Norrbotten',                                       slug: 'norrbotten'},
@@ -2852,22 +2857,22 @@ export const administrativeAreasLevel1 = [
     {id: '67dea465-d458-4803-9bc0-fbb9a431bba4', code: 'SE-X',        countryCommonId: '3d6f3930-ea9e-4f12-b545-3d56a46df628',   name: 'Gävleborg',                                        slug: 'gavleborg'},
     {id: 'f152aad7-cc57-4a9d-a2f9-6b46b7c8e2cb', code: 'SE-Y',        countryCommonId: '3d6f3930-ea9e-4f12-b545-3d56a46df628',   name: 'Västernorrland',                                   slug: 'vasternorrland'},
     {id: 'f74bd9e4-a4cf-4d62-ae4a-d17a41d442e5', code: 'SE-Z',        countryCommonId: '3d6f3930-ea9e-4f12-b545-3d56a46df628',   name: 'Jämtland',                                         slug: 'jamtland'},
-    
+
     {id: '4c85c5ad-a62a-4fa7-ab12-d936e19e39b6', code: 'SG-01',       countryCommonId: 'ce61baef-d86f-4814-8f44-111cbd7b5cea',   name: 'Consejo Central',                                  slug: 'consejo-central'},
     {id: 'b9fb7992-6064-42ba-bcd6-8febc40cd9f3', code: 'SG-02',       countryCommonId: 'ce61baef-d86f-4814-8f44-111cbd7b5cea',   name: 'Consejo del Noreste',                              slug: 'consejo-del-noreste'},
     {id: '4c379e9a-c41c-4c1c-806f-6bcedb734fb3', code: 'SG-03',       countryCommonId: 'ce61baef-d86f-4814-8f44-111cbd7b5cea',   name: 'Consejo del Noroeste',                             slug: 'consejo-del-noroeste'},
     {id: '2bc79eb7-56ae-4209-bed1-c0717361773b', code: 'SG-04',       countryCommonId: 'ce61baef-d86f-4814-8f44-111cbd7b5cea',   name: 'Consejo del Sudeste',                              slug: 'consejo-del-sudeste'},
     {id: '3c850bf2-6066-4dd7-bc0f-4175aaf6d5c1', code: 'SG-05',       countryCommonId: 'ce61baef-d86f-4814-8f44-111cbd7b5cea',   name: 'Consejo del Sudoeste',                             slug: 'consejo-del-sudoeste'},
-    
+
     {id: 'b9b2185b-82fe-428f-959e-f63cf4b2bfd9', code: 'SH-AC',       countryCommonId: 'cdabd0d5-42d8-4a30-a71e-dd30c608672f',   name: 'Ascensión',                                        slug: 'ascension'},
     {id: 'e65d1810-6bd0-4fe7-bb9b-2c42a8c18f04', code: 'SH-HL',       countryCommonId: 'cdabd0d5-42d8-4a30-a71e-dd30c608672f',   name: 'Santa Elena',                                      slug: 'santa-elena'},
     {id: 'd7ee3bb0-9cfc-4324-8a3c-5be906f07c90', code: 'SH-TA',       countryCommonId: 'cdabd0d5-42d8-4a30-a71e-dd30c608672f',   name: 'Tristán de Acuña',                                 slug: 'tristan-de-acuna'},
-    
+
     {id: '3a8f16d5-b248-4508-8b1b-d6df9459b494', code: 'SI-01',       countryCommonId: 'b25a5486-6fd4-4de7-8fa6-3b5ebd2435ef',   name: 'Región del Mura',                                  slug: 'region-del-mura'},
     {id: 'b02618ab-0797-475a-a039-9a8882c57d2a', code: 'SI-02',       countryCommonId: 'b25a5486-6fd4-4de7-8fa6-3b5ebd2435ef',   name: 'Región del Drava',                                 slug: 'region-del-drava'},
     {id: '3dd95647-7522-4141-a936-e3ef9787ee27', code: 'SI-03',       countryCommonId: 'b25a5486-6fd4-4de7-8fa6-3b5ebd2435ef',   name: 'Carintia eslovena',                                slug: 'carintia-eslovena'},
     {id: 'a7480d30-9bb5-4d97-a60a-6d45166cd5ad', code: 'SI-04',       countryCommonId: 'b25a5486-6fd4-4de7-8fa6-3b5ebd2435ef',   name: 'Savinia',                                          slug: 'savinia'},
-    
+
     {id: '0fd27398-0fbe-4fb5-9b38-5c71fffa4314', code: 'SK-BC',       countryCommonId: '87f42fdf-3f42-4719-9916-81cd988111a6',   name: 'Banská Bystrica',                                  slug: 'banska-bystrica'},
     {id: 'cc48b71b-175d-40d5-b086-c9f8df1774ca', code: 'SK-BL',       countryCommonId: '87f42fdf-3f42-4719-9916-81cd988111a6',   name: 'Bratislava',                                       slug: 'bratislava'},
     {id: '02cc3272-1607-42f2-a2cc-6621d3d4c9c4', code: 'SK-KI',       countryCommonId: '87f42fdf-3f42-4719-9916-81cd988111a6',   name: 'Košice',                                           slug: 'kosice'},
@@ -2876,12 +2881,12 @@ export const administrativeAreasLevel1 = [
     {id: '5aab65d1-0bfe-4f58-a1d0-d082c9fde7ab', code: 'SK-TA',       countryCommonId: '87f42fdf-3f42-4719-9916-81cd988111a6',   name: 'Trnava',                                           slug: 'trnava'},
     {id: 'c4a8172a-ba64-4c98-a409-86aa3647d296', code: 'SK-TC',       countryCommonId: '87f42fdf-3f42-4719-9916-81cd988111a6',   name: 'Trenčín',                                          slug: 'trencin'},
     {id: '1645db77-4560-4bb9-a5ba-09af9255a741', code: 'SK-ZI',       countryCommonId: '87f42fdf-3f42-4719-9916-81cd988111a6',   name: 'Žilina',                                           slug: 'zilina'},
-    
+
     {id: 'a184c1b8-4a67-4daf-bccc-6dfd86a25bbc', code: 'SL-A',        countryCommonId: '2b79384f-6065-4f8d-83d2-e7bb701f522c',   name: 'Provincia del Este',                               slug: 'provincia-del-este'},
     {id: 'b2ac48b4-081a-4670-9f9f-70122b53de6a', code: 'SL-N',        countryCommonId: '2b79384f-6065-4f8d-83d2-e7bb701f522c',   name: 'Provincia del Norte',                              slug: 'provincia-del-norte'},
     {id: 'd71a71cf-2af6-4f74-96d6-e7b8eccfd4ac', code: 'SL-S',        countryCommonId: '2b79384f-6065-4f8d-83d2-e7bb701f522c',   name: 'Provincia del Sur',                                slug: 'provincia-del-sur'},
     {id: '40958492-a981-456f-b3bb-be43192889b5', code: 'SL-W',        countryCommonId: '2b79384f-6065-4f8d-83d2-e7bb701f522c',   name: 'Área Occidental',                                  slug: 'area-occidental'},
-    
+
     {id: 'd7a90008-c142-4ebe-b153-dda1d70e93f1', code: 'SM-01',       countryCommonId: '6d83760c-d7c2-4199-8845-3d84aad12e20',   name: 'Acquaviva',                                        slug: 'acquaviva'},
     {id: 'b852b51c-ef8f-4e08-8a6c-ef775d20fb9e', code: 'SM-02',       countryCommonId: '6d83760c-d7c2-4199-8845-3d84aad12e20',   name: 'Chiesanuova',                                      slug: 'chiesanuova'},
     {id: 'd5a85a13-f67a-4438-b908-40f581918dc3', code: 'SM-03',       countryCommonId: '6d83760c-d7c2-4199-8845-3d84aad12e20',   name: 'Domagnano',                                        slug: 'domagnano'},
@@ -2891,7 +2896,7 @@ export const administrativeAreasLevel1 = [
     {id: '85ee68a7-8fcf-408e-bc95-f4e4e50dbd06', code: 'SM-07',       countryCommonId: '6d83760c-d7c2-4199-8845-3d84aad12e20',   name: 'Ciudad de San Marino',                             slug: 'ciudad-de-san-marino'},
     {id: '0d9ad5af-7f74-4a88-b578-0d8656f49377', code: 'SM-08',       countryCommonId: '6d83760c-d7c2-4199-8845-3d84aad12e20',   name: 'Montegiardino',                                    slug: 'montegiardino'},
     {id: '9c8ccfd6-6736-4d82-a729-c1688d4acbcf', code: 'SM-09',       countryCommonId: '6d83760c-d7c2-4199-8845-3d84aad12e20',   name: 'Serravalle',                                       slug: 'serravalle'},
-    
+
     {id: '2789a51c-807b-41e2-ae1a-77edb471471e', code: 'SN-DB',       countryCommonId: '1ce0e0a3-ed67-4501-9ab0-4e2f746948f4',   name: 'Diourbel',                                         slug: 'diourbel'},
     {id: 'f966e233-33f1-4fbb-a1bf-55deb17aa16f', code: 'SN-DK',       countryCommonId: '1ce0e0a3-ed67-4501-9ab0-4e2f746948f4',   name: 'Dakar',                                            slug: 'dakar'},
     {id: '9ed61e27-6d97-45f8-b9b8-8b813244deb9', code: 'SN-FK',       countryCommonId: '1ce0e0a3-ed67-4501-9ab0-4e2f746948f4',   name: 'Fatick',                                           slug: 'fatick'},
@@ -2905,7 +2910,7 @@ export const administrativeAreasLevel1 = [
     {id: 'db1a3626-8a69-42c0-9345-29ff948db9d1', code: 'SN-TC',       countryCommonId: '1ce0e0a3-ed67-4501-9ab0-4e2f746948f4',   name: 'Tambacounda',                                      slug: 'tambacounda'},
     {id: '250505f9-fb5d-4aa2-b978-f625c45cb5a2', code: 'SN-TH',       countryCommonId: '1ce0e0a3-ed67-4501-9ab0-4e2f746948f4',   name: 'Thiès',                                            slug: 'thies'},
     {id: 'c7d1b3a2-950b-4b6c-aa13-cfef4aa9e707', code: 'SN-ZG',       countryCommonId: '1ce0e0a3-ed67-4501-9ab0-4e2f746948f4',   name: 'Ziguinchor',                                       slug: 'ziguinchor'},
-    
+
     {id: '5b9c5c76-d8ca-43ba-b69f-334b4002d331', code: 'SO-BK',       countryCommonId: '6ee2c72e-fd4b-44e8-9868-b6157c579754',   name: 'Bakool',                                           slug: 'bakool'},
     {id: '39bf7b9a-55c3-4777-abc1-909f49fa7a94', code: 'SO-BN',       countryCommonId: '6ee2c72e-fd4b-44e8-9868-b6157c579754',   name: 'Banaadir',                                         slug: 'banaadir'},
     {id: '2c09cb95-8ed9-4354-bd55-6c0638d3bb4a', code: 'SO-BR',       countryCommonId: '6ee2c72e-fd4b-44e8-9868-b6157c579754',   name: 'Bari',                                             slug: 'bari'},
@@ -2922,7 +2927,7 @@ export const administrativeAreasLevel1 = [
     {id: '33aeba89-65ee-48db-a901-91d93cd80154', code: 'SO-SH',       countryCommonId: '6ee2c72e-fd4b-44e8-9868-b6157c579754',   name: 'Shabeellaha Hoose',                                slug: 'shabeellaha-hoose'},
     {id: 'f2fc0b19-c398-44f6-960f-06e388b806cf', code: 'SO-TO',       countryCommonId: '6ee2c72e-fd4b-44e8-9868-b6157c579754',   name: 'Togdheer',                                         slug: 'togdheer'},
     {id: '253fbca3-5451-4f9f-9d96-f80ec115f2f9', code: 'SO-WO',       countryCommonId: '6ee2c72e-fd4b-44e8-9868-b6157c579754',   name: 'Woqooyi Galbeed',                                  slug: 'woqooyi-galbeed'},
-    
+
     {id: '6e9343e9-6723-4b60-a46a-22e605b9338a', code: 'SR-BR',       countryCommonId: '709e2ac5-160f-42d2-8e28-a0a75f7ce765',   name: 'Brokopondo',                                       slug: 'brokopondo'},
     {id: 'fc2e8073-efe5-4669-8b4c-03cce1358de9', code: 'SR-CM',       countryCommonId: '709e2ac5-160f-42d2-8e28-a0a75f7ce765',   name: 'Commewijne',                                       slug: 'commewijne'},
     {id: 'e5367caf-95df-4ad9-809a-3511ec1d18c8', code: 'SR-CR',       countryCommonId: '709e2ac5-160f-42d2-8e28-a0a75f7ce765',   name: 'Coronie',                                          slug: 'coronie'},
@@ -2933,10 +2938,10 @@ export const administrativeAreasLevel1 = [
     {id: '18e28d1a-1d29-4de8-a117-307d3ac0cf3d', code: 'SR-SA',       countryCommonId: '709e2ac5-160f-42d2-8e28-a0a75f7ce765',   name: 'Saramacca',                                        slug: 'saramacca'},
     {id: 'c285568b-9c74-41dd-90ba-67f9186abe1d', code: 'SR-SI',       countryCommonId: '709e2ac5-160f-42d2-8e28-a0a75f7ce765',   name: 'Sipaliwini',                                       slug: 'sipaliwini'},
     {id: '064be9f4-d029-4de4-847a-9fb2475a36a0', code: 'SR-WA',       countryCommonId: '709e2ac5-160f-42d2-8e28-a0a75f7ce765',   name: 'Wanica',                                           slug: 'wanica'},
-    
+
     {id: '7ff67396-70b5-4678-b140-14dc45a32ed7', code: 'ST-P',        countryCommonId: '372098f0-c4c3-4701-b3cd-5eaf0927ed87',   name: 'Príncipe',                                         slug: 'principe'},
     {id: 'db705a8d-6126-47b7-a7af-11c02ffe9bdf', code: 'ST-S',        countryCommonId: '372098f0-c4c3-4701-b3cd-5eaf0927ed87',   name: 'São Tomé',                                         slug: 'sao-tome'},
-    
+
     {id: '10e06bd5-4848-4ec4-94ed-28c838ce58bd', code: 'SV-AH',       countryCommonId: '6f55232a-d713-4c7b-916e-a0c77ee3e048',   name: 'Ahuachapán',                                       slug: 'ahuachapan'},
     {id: 'e4597360-dad3-49ab-b5c6-e8e2b9036a8c', code: 'SV-CA',       countryCommonId: '6f55232a-d713-4c7b-916e-a0c77ee3e048',   name: 'Cabañas',                                          slug: 'cabanas'},
     {id: 'd8f7ffec-dc42-4bc6-8d01-d4b9a2f2384e', code: 'SV-CH',       countryCommonId: '6f55232a-d713-4c7b-916e-a0c77ee3e048',   name: 'Chalatenango',                                     slug: 'chalatenango'},
@@ -3128,7 +3133,9 @@ export const administrativeAreasLevel1 = [
     {id: 'b7b2c2e6-ebae-45bf-b715-63292b65e620', code: 'TN-81',       countryCommonId: '140025d1-c0c3-42ed-896f-1e9f3012e974',   name: 'Gabes',                                            slug: 'gabes'},
     {id: 'a9c3488c-637b-4f92-9aef-af80824dbada', code: 'TN-82',       countryCommonId: '140025d1-c0c3-42ed-896f-1e9f3012e974',   name: 'Medenine',                                         slug: 'medenine'},
     {id: '957ef24a-3750-47df-98f7-790fd27c4bfc', code: 'TN-83',       countryCommonId: '140025d1-c0c3-42ed-896f-1e9f3012e974',   name: 'Tataouine',                                        slug: 'tataouine'},
+];
 
+export const administrativeAreasLevel105 = [
     {id: '8b0201a0-cb23-437c-995b-7ab4ce07070e', code: 'TO-01',       countryCommonId: 'd1f8e22a-f762-4b99-a61f-1a06aa92b219',   name: '\'Eua',                                            slug: 'eua'},
     {id: '3ecd2a97-7213-437a-bb5d-5a05575a4560', code: 'TO-02',       countryCommonId: 'd1f8e22a-f762-4b99-a61f-1a06aa92b219',   name: 'Ha\'apai',                                         slug: 'haapai'},
     {id: '62f5a03f-8c15-48bd-88af-0aab461a35d1', code: 'TO-03',       countryCommonId: 'd1f8e22a-f762-4b99-a61f-1a06aa92b219',   name: 'Niuas',                                            slug: 'niuas'},
@@ -3584,7 +3591,7 @@ export const administrativeAreasLevel1 = [
     {id: '47197813-7987-4eb9-9595-ea529f052592', code: 'VN-71',       countryCommonId: 'bec98396-eb01-4997-af0b-0c30d3d49233',   name: 'Dien Bien',                                        slug: 'dien-bien'},
     {id: 'a97c680b-e9a6-4814-9264-f1360d4fdf88', code: 'VN-72',       countryCommonId: 'bec98396-eb01-4997-af0b-0c30d3d49233',   name: 'Dak Nong',                                         slug: 'dak-nong'},
     {id: 'ec50352a-d018-476d-bd26-ab77b405d553', code: 'VN-73',       countryCommonId: 'bec98396-eb01-4997-af0b-0c30d3d49233',   name: 'Hau Giang',                                        slug: 'hau-giang'},
-    
+
     {id: '51713709-4e02-448d-80e3-537b120e88ff', code: 'VU-MAP',      countryCommonId: '216c6168-5060-4750-92d1-db7c3bbac288',   name: 'Malapa',                                           slug: 'malapa'},
     {id: '5dee6ced-1802-43f2-ad65-4b21ac1780f2', code: 'VU-PAM',      countryCommonId: '216c6168-5060-4750-92d1-db7c3bbac288',   name: 'Pénama',                                           slug: 'penama'},
     {id: 'd383db6b-a696-468b-a576-f7d291677174', code: 'VU-SAM',      countryCommonId: '216c6168-5060-4750-92d1-db7c3bbac288',   name: 'Sanma',                                            slug: 'sanma'},

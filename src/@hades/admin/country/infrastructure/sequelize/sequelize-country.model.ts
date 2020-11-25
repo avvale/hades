@@ -14,6 +14,7 @@ export class AdminCountryModel extends Model<AdminCountryModel>
     })
     id: string;
 
+    @UnderscoredIndex
     @Column({
         field: 'common_id',
         allowNull: false,
