@@ -11,23 +11,25 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
-  - name: country_id
+  - name: country_common_id
     type: id
     length: 36
     nullable: false
     relationship: many-to-one
     relationshipAggregate: AdminCountry
     relationshipModulePath: admin/country
-    relationshipKey: id
+    relationshipKey: common_id
     relationshipField: country
   - name: code
     type: varchar
     maxLength: 8
     nullable: false
+    index: unique
   - name: custom_code
     type: varchar
     maxLength: 10
     nullable: true
+    index: unique
   - name: name
     type: varchar
     maxLength: 255

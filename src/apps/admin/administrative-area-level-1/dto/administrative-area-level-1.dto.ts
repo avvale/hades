@@ -10,9 +10,9 @@ export class AdministrativeAreaLevel1Dto
 
     @ApiProperty({
         type        : String,
-        description : 'countryId [input here api field description]',
+        description : 'countryCommonId [input here api field description]',
     })
-    countryId: string;
+    countryCommonId: string;
 
     @ApiProperty({
         type        : String,

@@ -6,11 +6,15 @@ import { IamUtils } from '@hades/iam/shared/domain/lib/iam-utils';
 
 // commands
 import { CreateLangsCommand } from '@hades/admin/lang/application/create/create-langs.command';
+import { CreateCountriesCommand } from '@hades/admin/country/application/create/create-countries.command';
+import { CreateAdministrativeAreasLevel1Command } from '@hades/admin/administrative-area-level-1/application/create/create-administrative-areas-level-1.command';
 
 // sources
 import { boundedContexts } from '@hades/admin/shared/infrastructure/seeds/bounded-context.seed';
 import { permissions } from '@hades/admin/shared/infrastructure/seeds/permission.seed';
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
+import { countries } from '@hades/admin/country/infrastructure/seeds/country.seed';
+import { administrativeAreasLevel1 } from '@hades/admin/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 
 export class Seeder
 {
@@ -23,6 +27,8 @@ export class Seeder
             await IamUtils.iamCommonSeed(commandBus, queryBus, boundedContexts, permissions);
 
             await commandBus.dispatch(new CreateLangsCommand(langs));
+            await commandBus.dispatch(new CreateCountriesCommand(countries));
+            await commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel1));
         });
     }
 }

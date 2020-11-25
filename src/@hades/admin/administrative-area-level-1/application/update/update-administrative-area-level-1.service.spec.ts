@@ -6,7 +6,7 @@ import { administrativeAreasLevel1 } from '@hades/admin/administrative-area-leve
 import { UpdateAdministrativeAreaLevel1Service } from './update-administrative-area-level-1.service';
 import {
     AdministrativeAreaLevel1Id,
-    AdministrativeAreaLevel1CountryId,
+    AdministrativeAreaLevel1CountryCommonId,
     AdministrativeAreaLevel1Code,
     AdministrativeAreaLevel1CustomCode,
     AdministrativeAreaLevel1Name,
@@ -58,7 +58,7 @@ describe('UpdateAdministrativeAreaLevel1Service', () =>
         {
             expect(await service.main(
                 new AdministrativeAreaLevel1Id(administrativeAreasLevel1[0].id),
-                new AdministrativeAreaLevel1CountryId(administrativeAreasLevel1[0].countryId),
+                new AdministrativeAreaLevel1CountryCommonId(administrativeAreasLevel1[0].countryCommonId),
                 new AdministrativeAreaLevel1Code(administrativeAreasLevel1[0].code),
                 new AdministrativeAreaLevel1CustomCode(administrativeAreasLevel1[0].customCode),
                 new AdministrativeAreaLevel1Name(administrativeAreasLevel1[0].name),

@@ -2,7 +2,7 @@ export class UpdatedAdministrativeAreaLevel1Event
 {
     constructor(
         public readonly id: string,
-        public readonly countryId: string,
+        public readonly countryCommonId: string,
         public readonly code: string,
         public readonly customCode: string,
         public readonly name: string,
