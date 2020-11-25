@@ -8,14 +8,16 @@ export class Seeder
 {
     main()
     {
-        NestFactory.createApplicationContext(SeederModule).then(appContext => {
+        NestFactory.createApplicationContext(SeederModule).then(async appContext => {
             const commandBus = appContext.get(ICommandBus);
 
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel101));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel102));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel103));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel104));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel105));
+            await (() => {
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel101));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel102));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel103));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel104));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel105));
+            })();
         });
     }
 }

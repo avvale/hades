@@ -28,11 +28,14 @@ export class Seeder
 
             await commandBus.dispatch(new CreateLangsCommand(langs));
             await commandBus.dispatch(new CreateCountriesCommand(countries));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel101));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel102));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel103));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel104));
-            commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel105));
+            await (() => {
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel101));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel102));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel103));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel104));
+                commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel105));
+            })();
+            
         });
     }
 }
