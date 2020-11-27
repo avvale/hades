@@ -24,7 +24,6 @@ export class SequelizeTenantRepository extends SequelizeRepository<IamTenant, Ia
     // hook called after create aggregate
     async createdAggregateHook(aggregate: IamTenant, model: IamTenantModel)
     {
-        console.log('ddddd')
         // add many to many relation
         if (Array.isArray(aggregate.accountIds) && aggregate.accountIds.length > 0) await model.$add('accounts', aggregate.accountIds.value);
     }
