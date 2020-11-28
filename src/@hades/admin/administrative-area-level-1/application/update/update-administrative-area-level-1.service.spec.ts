@@ -11,6 +11,9 @@ import {
     AdministrativeAreaLevel1CustomCode,
     AdministrativeAreaLevel1Name,
     AdministrativeAreaLevel1Slug,
+    AdministrativeAreaLevel1Latitude,
+    AdministrativeAreaLevel1Longitude,
+    AdministrativeAreaLevel1Zoom,
     AdministrativeAreaLevel1CreatedAt,
     AdministrativeAreaLevel1UpdatedAt,
     AdministrativeAreaLevel1DeletedAt,
@@ -63,6 +66,9 @@ describe('UpdateAdministrativeAreaLevel1Service', () =>
                 new AdministrativeAreaLevel1CustomCode(administrativeAreasLevel1[0].customCode),
                 new AdministrativeAreaLevel1Name(administrativeAreasLevel1[0].name),
                 new AdministrativeAreaLevel1Slug(administrativeAreasLevel1[0].slug),
+                new AdministrativeAreaLevel1Latitude(administrativeAreasLevel1[0].latitude),
+                new AdministrativeAreaLevel1Longitude(administrativeAreasLevel1[0].longitude),
+                new AdministrativeAreaLevel1Zoom(administrativeAreasLevel1[0].zoom),
             )).toBe(undefined);
         });
     });

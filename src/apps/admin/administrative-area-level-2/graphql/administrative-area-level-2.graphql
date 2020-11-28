@@ -1,0 +1,64 @@
+
+type AdminAdministrativeAreaLevel2
+{
+    id: ID!
+    countryCommonId: ID!
+    country: AdminCountry!
+    administrativeAreaLevel1Id: ID!
+    administrativeAreaLevel1: AdminAdministrativeAreaLevel1!
+    code: GraphQLString!
+    customCode: GraphQLString
+    name: GraphQLString!
+    slug: GraphQLString!
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input AdminCreateAdministrativeAreaLevel2Input
+{
+    id: ID!
+    countryCommonId: ID!
+    administrativeAreaLevel1Id: ID!
+    code: GraphQLString!
+    customCode: GraphQLString
+    name: GraphQLString!
+    slug: GraphQLString!
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+}
+
+input AdminUpdateAdministrativeAreaLevel2Input
+{
+    id: ID!
+    countryCommonId: ID
+    administrativeAreaLevel1Id: ID
+    code: GraphQLString
+    customCode: GraphQLString
+    name: GraphQLString
+    slug: GraphQLString
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+}
+
+type Query
+{
+    adminFindAdministrativeAreaLevel2(query:QueryStatement constraint:QueryStatement): AdminAdministrativeAreaLevel2
+    adminFindAdministrativeAreaLevel2ById(id:ID constraint:QueryStatement): AdminAdministrativeAreaLevel2
+    adminGetAdministrativeAreasLevel2(query:QueryStatement constraint:QueryStatement): [AdminAdministrativeAreaLevel2]!
+    adminPaginateAdministrativeAreasLevel2(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    adminCreateAdministrativeAreaLevel2(payload: AdminCreateAdministrativeAreaLevel2Input!): AdminAdministrativeAreaLevel2
+    adminCreateAdministrativeAreasLevel2(payload: [AdminCreateAdministrativeAreaLevel2Input]!): Boolean!
+    adminUpdateAdministrativeAreaLevel2(payload: AdminUpdateAdministrativeAreaLevel2Input! constraint:QueryStatement): AdminAdministrativeAreaLevel2
+    adminDeleteAdministrativeAreaLevel2ById(id: ID! constraint:QueryStatement): AdminAdministrativeAreaLevel2
+    adminDeleteAdministrativeAreasLevel2(query:QueryStatement constraint:QueryStatement): [AdminAdministrativeAreaLevel2]!
+}
