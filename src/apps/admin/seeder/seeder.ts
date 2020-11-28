@@ -8,6 +8,7 @@ import { IamUtils } from '@hades/iam/shared/domain/lib/iam-utils';
 import { CreateLangsCommand } from '@hades/admin/lang/application/create/create-langs.command';
 import { CreateCountriesCommand } from '@hades/admin/country/application/create/create-countries.command';
 import { CreateAdministrativeAreasLevel1Command } from '@hades/admin/administrative-area-level-1/application/create/create-administrative-areas-level-1.command';
+import { CreateAdministrativeAreasLevel2Command } from '@hades/admin/administrative-area-level-2/application/create/create-administrative-areas-level-2.command';
 
 // sources
 import { boundedContexts } from '@hades/admin/shared/infrastructure/seeds/bounded-context.seed';
@@ -15,6 +16,7 @@ import { permissions } from '@hades/admin/shared/infrastructure/seeds/permission
 import { langs } from '@hades/admin/lang/infrastructure/seeds/lang.seed';
 import { countries } from '@hades/admin/country/infrastructure/seeds/country.seed';
 import { administrativeAreasLevel1, administrativeAreasLevel101, administrativeAreasLevel102, administrativeAreasLevel103, administrativeAreasLevel104 } from '@hades/admin/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
+import { administrativeAreasLevel2 } from '@hades/admin/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
 export class Seeder
 {
@@ -35,6 +37,7 @@ export class Seeder
                 commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel103)).catch(e => console.error);
                 commandBus.dispatch(new CreateAdministrativeAreasLevel1Command(administrativeAreasLevel104)).catch(e => console.error);
             })();
+            await commandBus.dispatch(new CreateAdministrativeAreasLevel2Command(administrativeAreasLevel2));
         });
     }
 }

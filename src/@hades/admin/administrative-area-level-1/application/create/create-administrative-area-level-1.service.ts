@@ -7,6 +7,9 @@ import {
     AdministrativeAreaLevel1CustomCode,
     AdministrativeAreaLevel1Name,
     AdministrativeAreaLevel1Slug,
+    AdministrativeAreaLevel1Latitude,
+    AdministrativeAreaLevel1Longitude,
+    AdministrativeAreaLevel1Zoom,
     AdministrativeAreaLevel1CreatedAt,
     AdministrativeAreaLevel1UpdatedAt,
     AdministrativeAreaLevel1DeletedAt,
@@ -30,6 +33,9 @@ export class CreateAdministrativeAreaLevel1Service
             customCode: AdministrativeAreaLevel1CustomCode,
             name: AdministrativeAreaLevel1Name,
             slug: AdministrativeAreaLevel1Slug,
+            latitude: AdministrativeAreaLevel1Latitude,
+            longitude: AdministrativeAreaLevel1Longitude,
+            zoom: AdministrativeAreaLevel1Zoom,
         }
     ): Promise<void>
     {
@@ -41,6 +47,9 @@ export class CreateAdministrativeAreaLevel1Service
             payload.customCode,
             payload.name,
             payload.slug,
+            payload.latitude,
+            payload.longitude,
+            payload.zoom,
             new AdministrativeAreaLevel1CreatedAt({currentTimestamp: true}),
             new AdministrativeAreaLevel1UpdatedAt({currentTimestamp: true}),
             null

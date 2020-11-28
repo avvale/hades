@@ -46,6 +46,9 @@ describe('CreateAdministrativeAreaLevel1CommandHandler', () =>
                     administrativeAreasLevel1[0].customCode,
                     administrativeAreasLevel1[0].name,
                     administrativeAreasLevel1[0].slug,
+                    administrativeAreasLevel1[0].latitude,
+                    administrativeAreasLevel1[0].longitude,
+                    administrativeAreasLevel1[0].zoom,
                 )
             )).toBe(undefined);
         });

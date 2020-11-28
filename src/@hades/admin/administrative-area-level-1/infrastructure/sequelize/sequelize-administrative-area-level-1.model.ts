@@ -61,6 +61,27 @@ export class AdminAdministrativeAreaLevel1Model extends Model<AdminAdministrativ
     slug: string;
 
     @Column({
+        field: 'latitude',
+        allowNull: true,
+        type: DataTypes.DECIMAL(17,4),
+    })
+    latitude: number;
+
+    @Column({
+        field: 'longitude',
+        allowNull: true,
+        type: DataTypes.DECIMAL(17,4),
+    })
+    longitude: number;
+
+    @Column({
+        field: 'zoom',
+        allowNull: true,
+        type: DataTypes.INTEGER.UNSIGNED,
+    })
+    zoom: number;
+
+    @Column({
         field: 'created_at',
         allowNull: true,
         type: DataTypes.DATE,

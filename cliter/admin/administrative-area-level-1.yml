@@ -38,6 +38,24 @@ aggregateProperties:
     type: varchar
     maxLength: 255
     nullable: false
+  - name: latitude
+    type: decimal
+    decimals:
+      - 17
+      - 4
+    maxLength: 17
+    nullable: true
+  - name: longitude
+    type: decimal
+    decimals:
+      - 17
+      - 4
+    maxLength: 17
+    nullable: true
+  - name: zoom
+    type: int.unsigned
+    maxLength: 2
+    nullable: true
   - name: created_at
     type: timestamp
     nullable: true
