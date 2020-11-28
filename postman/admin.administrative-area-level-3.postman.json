@@ -1,0 +1,554 @@
+{
+    "info": {
+		"_postman_id"   : "f9003e7a-72a7-4ea0-afa8-74b3cd5b3fac",
+		"name"          : "@hades - admin/administrative-area-level-3",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - adminCreateAdministrativeAreaLevel3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminCreateAdministrativeAreaLevel3Input!)\n{\n\tadminCreateAdministrativeAreaLevel3 (payload:$payload)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"9d1e8149-18e8-43a0-afa4-fe2840752a42\", \n\t\t\"countryCommonId\": \"36c41b8d-7b25-46fa-8acf-bd2b867d08a9\", \n\t\t\"administrativeAreaLevel1Id\": \"de063925-f817-4b63-9db4-a836f3c3be21\", \n\t\t\"administrativeAreaLevel2Id\": \"ea7fc283-b9db-4c3e-9685-0ab82144a4bf\", \n\t\t\"code\": \"2d462kep\", \n\t\t\"customCode\": \"diez0e9yxy\", \n\t\t\"name\": \"anqb2tv578fsy49ti0xxbvlppyhi2pbg5akgkz415xcq47v8dduhwfpwcp2binlonwlfsx0gpj96m5wwgfqn1qq36gbgo4vakwz407exjpg08fk55kr7j67vdc1msff46jv93rrnm26alkrpolcucra27a0w7midvh7fbtqlpyf739gp35j9yw10tlq0d4eszlg3yoymfzj0aazxxwmt1iazgjwblcpi3pk0k3drx44b1c52ux45qtg7imwyruv\", \n\t\t\"slug\": \"4bijzuimznuav898zpcb86u58dc1n8hvl9jgtvmk6iwefdd8lam5ula44z36u5knrpbgyb5wkfmri528hel5etq4ilk103h970q31q9m6igybj4x6q7cx9i54iy3eup886boga176vhqz7uvi789ibiuoxix0sq68t9kugud6j4nxbjlqefe74a1cbyudhcxfio9sshg0splml6yxq99pxz2ctmqwuab4wa70kknkrcxj3jqnyo0xvoyyp7vabi\", \n\t\t\"latitude\": 898.98, \n\t\t\"longitude\": 737.60, \n\t\t\"zoom\": 56\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminCreateAdministrativeAreasLevel3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[AdminCreateAdministrativeAreaLevel3Input]!)\n{\n\tadminCreateAdministrativeAreasLevel3 (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"37e9e60c-dd7a-4ef1-a0da-700a3e57542c\", \n\t\t\t\"countryCommonId\": \"d481a8af-0e5e-4f1e-86b9-19e555fab656\", \n\t\t\t\"administrativeAreaLevel1Id\": \"d4e21743-8099-4c83-aa81-2f6ba73012d7\", \n\t\t\t\"administrativeAreaLevel2Id\": \"d04470cc-1a91-4d21-b5ea-34fb52ba5ec2\", \n\t\t\t\"code\": \"3fhixu7h\", \n\t\t\t\"customCode\": \"gam89xku78\", \n\t\t\t\"name\": \"zonpx27xs7qc2stbsyg9hwc8jhbwza1r61pa3lb5j0rrcm4p71o7sbqdg8qux237v1nzsg40xc3et45sg8vk75lwzhqfill2zljq5g6gf30izlorrs5b9576axjphp0da0fn42hckrl0grouw2ysnbjk1mlxlh505wc0luolcepjbpiuskp2tc2eaqk8pttd4ik3ejn3aq01l06p3u89ha57cgb7aapqsbd688b5fdy1leh3pu24gyvzeel4eg3\", \n\t\t\t\"slug\": \"2j393v7re7wsm8xpsubctpibqdgg1fdc5g1nl8300mfsdc8vwj00aurri7rbnfz0flxhczw106cr0uppclqdrvhkcwq7qcgsce4sfd99b6pa6na4txq97oj2mzcqdoxljgugzvld1npdbfvdtwch20ftyblf8o5i3785xp3tbufm2yt8qbmeus5fvlsqj17dxf95hixuljekru4m2aqxtsvd1q73x4oxy2s4tmymgzxcwqhnkuf3k31sqih56bd\", \n\t\t\t\"latitude\": 884.88, \n\t\t\t\"longitude\": 546.79, \n\t\t\t\"zoom\": 89\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3f26f14b-0367-4570-9b82-f5efab7f524a\", \n\t\t\t\"countryCommonId\": \"2021721c-d979-43ee-b816-a44da3a4a47f\", \n\t\t\t\"administrativeAreaLevel1Id\": \"eb55a74c-7713-47d7-a2c8-47c36bdefa2c\", \n\t\t\t\"administrativeAreaLevel2Id\": \"70e89dca-32f4-4671-82b1-a41d57d93e80\", \n\t\t\t\"code\": \"c4iaksfu\", \n\t\t\t\"customCode\": \"0x9sp5oyog\", \n\t\t\t\"name\": \"xfimvwl4v8wqncbdjvikev6tz6yz3cday05vf1q5523vwg1vnrwqx3et65gppre61ap4bu2br5s5cfix3s0caesa8q2r6jizkkquupi7r17h2sj6u0z1cs2wwcnznxz38m2os8ikx93r31bxmfwudk5j7sgw341ks9zhjrakbmj2a5xkbc6y1h9u1mswbpwqqu4p45hcugzed6spyfjb568thxfm7r26kc1vb0uagbkgzeifh4wr568zrq37xxv\", \n\t\t\t\"slug\": \"1bv2rxxrs7eu109ko81jy3bj0zxb3cjloppj14ixlf8leessdpn8o87vthg6nsc6b1l6mkq9ltrutci2d8xr9zfs1jrs6olppx7ru52axgrszqrvgvibvdzi70an5wvxasyf00psm6ax165biy94epbl6r8vwuzfl0mxyvsevftffndqhbj2zermk44qdaghyyksbdl27qt0ijjp03iid6sbpazuu76hhgzk2ihi8w0mr60mehf9muoz4qu3y89\", \n\t\t\t\"latitude\": 543.43, \n\t\t\t\"longitude\": 458.10, \n\t\t\t\"zoom\": 75\n\t\t},\n\t\t{\n\t\t\t\"id\": \"75a4b42c-ea61-47b9-9d65-62e184c680d2\", \n\t\t\t\"countryCommonId\": \"254f58e2-90bd-495f-a883-3b6fecd88c42\", \n\t\t\t\"administrativeAreaLevel1Id\": \"731ed989-59b4-4d25-82be-847f75863130\", \n\t\t\t\"administrativeAreaLevel2Id\": \"bfd16f98-3692-47b3-8c6d-1faea760a14f\", \n\t\t\t\"code\": \"kih7aqba\", \n\t\t\t\"customCode\": \"muqwxwx7bo\", \n\t\t\t\"name\": \"znt0n9xudl742uvr6xwvfv3pmk5lebjaqegjjuzx8drds84w4fizqwdpra0sabwtaxa5orf0h1ot1xtzjzh9ig60l9u5kzuybf4otks46qbs5y8ybw9s27bemp9ev1lns0b5xsct64vhu3p695bpgyij6p02ngcfh1ufqzvkwbohj89pknnl4enzl39ixv887sz5ues9x4ystxlula0t38syhiryvv0wpyzkffkz4u1hxcndxquxz792qe3m4qq\", \n\t\t\t\"slug\": \"8uyikndthkq84hnm2yfgpl3biawbet6cq48gqre1xg1riptxgsfziz87hnzfr1xrubijp56jspm58kwjm23bkdahhghgixv0rujqpjgwqu9bmo5d7mev1wgxxcqo08520g207ni9b5eufdybdnxd96ey5g00anw9ktpg436djzasl9wybp7gw46jllmqqzaahxo7ocss2j5275zesrvuy5r5icme5cwmvzz4ajg3870pyq28mf3svq043r4x077\", \n\t\t\t\"latitude\": 67.58, \n\t\t\t\"longitude\": 153.44, \n\t\t\t\"zoom\": 51\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8657a104-ee1a-4bbe-8622-edfb635d8d2a\", \n\t\t\t\"countryCommonId\": \"6e4668ca-7163-4566-821c-161179320ee2\", \n\t\t\t\"administrativeAreaLevel1Id\": \"b1287a04-9512-455e-9a3f-734f59bc517c\", \n\t\t\t\"administrativeAreaLevel2Id\": \"1f6d35e3-28c0-4142-acb4-b081890b0aee\", \n\t\t\t\"code\": \"guhllciy\", \n\t\t\t\"customCode\": \"2ugaa1oe6k\", \n\t\t\t\"name\": \"3bxa9dhz9g9qfk6bvltkzmc734s9adfict28tjveco5rwqpnssyzypv9spn37znj4rwupsebxys7tq193adopcyc2c4mtp3veztryqfkps6zk6ghedp3d1eis34dxn2wjerzx1xrxwcff6tzravs3xp3ov6x1sgwb33tp9gfadwnipjqq2c9egthycu705wuozutujwc9qnjl3jfz95p094jzqi8v0uq5rv82oyvl80xlh4p27g0m0s84vy2joq\", \n\t\t\t\"slug\": \"yofa9bd0e2g0dbuefd63w20b7npeeza0ktqpcy7avt2jha2rv3jn2ne1j1a1ccm3o2b670gwnpnfp24zets3854b14tbkxnx9iw365ud8e73n2r1av8m23inc7hkfgjn7u1vtrypsy379rzx7lkjpnkvpgny8n2iazhvt430g2bcdcw4ahigjm6e29bjl1mw0db71ewbhqu9g8n44ncyu74he3begudoeu58ye6iexach02p46b44cr31krujbe\", \n\t\t\t\"latitude\": 469.06, \n\t\t\t\"longitude\": 108.27, \n\t\t\t\"zoom\": 18\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c3cd8012-7ca4-4fa0-9434-eaeb0c3e4007\", \n\t\t\t\"countryCommonId\": \"0088c071-fe59-4cd5-8454-3fe3d6f36fbb\", \n\t\t\t\"administrativeAreaLevel1Id\": \"2dd873b8-2215-4f26-8442-95d9a34db9f0\", \n\t\t\t\"administrativeAreaLevel2Id\": \"c6115fa2-a40f-4ba2-a560-186446d17466\", \n\t\t\t\"code\": \"2v5u86vg\", \n\t\t\t\"customCode\": \"kuf0208pwx\", \n\t\t\t\"name\": \"725h9e03yjf72y1whhgevjycpy3se5tnnhjr4qcvv8lmu5e0c1w7zcfqvu8ni49a51kb3ehdfl55t8bf6q6e5pdoyux5h6q0f7odh0xu40nnwhbc1853ewssim0v8vhr7yweifleuwdgqedlbr8m590170jhoqdt0x5tgpeahw0k3i03oafu5qwocy810ja0kx006cbayemo6vuvfcvpbcpu95lcw3oy0fec9iytn1smslwfpivvj34lct3mw0y\", \n\t\t\t\"slug\": \"69imf0grah44hm3b9mh4el36kcdfwg3hk72tl83xniossyyw5xrad186a20s02qtrq4smsprfccn2lqokbrvzp8t6xa7jafknvc5og1x4mdctqh8nqdx0ifaylzg4u8vewfs4x1xtsoip3udtb7y42bbgxhxsqxjsdk3uhiz2j0ycq3mmyvbyros47eygohjfxrhpvfytylaw2udi34f4c0yp1hbasla6xe8psq6vp3eo02yrdvpohtcs0utwak\", \n\t\t\t\"latitude\": 328.48, \n\t\t\t\"longitude\": 654.98, \n\t\t\t\"zoom\": 74\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8d759f56-e3f5-49c2-8038-3022c401257b\", \n\t\t\t\"countryCommonId\": \"99263350-a711-40b8-918f-8dd83957d093\", \n\t\t\t\"administrativeAreaLevel1Id\": \"56f52195-ab02-4028-aaf3-bead64e4c5d4\", \n\t\t\t\"administrativeAreaLevel2Id\": \"6c786b33-8dec-4531-bac1-6d61319feb30\", \n\t\t\t\"code\": \"dtga6c80\", \n\t\t\t\"customCode\": \"whuyx4k40g\", \n\t\t\t\"name\": \"5rpgh63qilds6epu1jf46kob27qznsv71cgbrhnhzojniat8q69ud9kj065ul1qsg7pyotij6vljjxqs6cw4z0481n6bk7jbb1cqux4xr8pu2lhg4xhzd8na9gce4bskke9ljvczu5omdu1n08jwoh2r29idfufygos0j87o04g62qlbl7rxza1vriwokumiqqp8jhzq50skvhq56162eaaazny0s9saywxipv4d1l6ca69ep1c8enepltxp1qh\", \n\t\t\t\"slug\": \"9mnwyctg8mx4mst0dw7ywj28zqwnmr61v8yr4uqrqw9fymjfghkfvgryzytndy7t6qt3lo9kby48zl91wo93llovrlwk36o9jcqhcfu184eqkh4nl2dido11qhn65wr0vrnzbtiujyc4mfw9kmdaw1ip4di9qhlypxqqe94bb4b8cd1v5dw0o6y33mt0pr118pk4jrszt8xdhh3xakz7qfcydmswefz1lziw0beaxz1egsvx7w20g7z8js0pqxx\", \n\t\t\t\"latitude\": 157.01, \n\t\t\t\"longitude\": 266.58, \n\t\t\t\"zoom\": 15\n\t\t},\n\t\t{\n\t\t\t\"id\": \"adfc6e7f-b3e2-4e41-a2e1-d30cc02e2984\", \n\t\t\t\"countryCommonId\": \"7e591a21-bf3c-4d7a-a4c2-2593fd436cc7\", \n\t\t\t\"administrativeAreaLevel1Id\": \"c9c538d6-aeac-425d-8638-3115af47b70d\", \n\t\t\t\"administrativeAreaLevel2Id\": \"dece82c6-f9f9-497d-aa76-60535da2e1bc\", \n\t\t\t\"code\": \"ny7l3qr1\", \n\t\t\t\"customCode\": \"5fwsimmv10\", \n\t\t\t\"name\": \"cnvcumpoqfjhfsicjr21qk1b134d0lxjlb5h5i2wi1m4hq0ogo0znuqptzylwq0tf6qj3rv6dl3asfb795nue1vywl730e4wcwoyss6eay304zadqcsvcvrkwaagcb6igxmqddbzrudz2etzujt3t512tkjjnbvbq6u2zy1hgimwr3nqm1dho6d6sqaf0ahice5kloxg734rjzmhub21chkumg6jcfz0oudx2v7d73xlk5menl73dkynjvngccd\", \n\t\t\t\"slug\": \"2mjk1kw4ax7ez2slm98jjw8g0l710zkx9wf1k3aqqg7gghhkh4brh0ac32bfvhqlrtzoqxq38qjmhxunxvs99j6gm8u92vs8gpg50wyq2m2swxb2lz3oy7jrrwj3f31wczaajtam1yovqeuy44av9z2z4tc4x1v81l9kotjv9bki93edrofdbrkkcg3wq4oix34o2kn33tuyr13wbhne12w25sbz7w23vssmllizsgzko62ploe9q9rbukl4sk5\", \n\t\t\t\"latitude\": 202.02, \n\t\t\t\"longitude\": 849.21, \n\t\t\t\"zoom\": 65\n\t\t},\n\t\t{\n\t\t\t\"id\": \"d481c2df-dd29-41bf-b63e-ef6a90d1049a\", \n\t\t\t\"countryCommonId\": \"71658369-d78b-4ac1-beb6-0d01e9c15887\", \n\t\t\t\"administrativeAreaLevel1Id\": \"99a0fa08-a493-452d-8323-3929d113a1c6\", \n\t\t\t\"administrativeAreaLevel2Id\": \"b1bfd8be-3610-443a-abc1-f12cce54d852\", \n\t\t\t\"code\": \"dk4zh1x0\", \n\t\t\t\"customCode\": \"0tjvgidsa7\", \n\t\t\t\"name\": \"jkepb15kg1yemsf32ijwbvftnoo6yt7x8bhfp6cma2rzpqwbwjaqc0pk5jy3zkolo3mts7fvnfseo1cemdksf71u8hq427cng66tp5xlw9mpldlby1dtwncif16bsagvgwu5dz60p5ikwhyf5p3j4qrq18w9s7s40x4y6265t37rpk97cxzyjm84x01may6ekbaik84nkjwul7cnb0z72x7501b5plc3qqljn4u38p46waoeyvhq56druqdd56m\", \n\t\t\t\"slug\": \"9krv5a0x1rcs59oulpwbxt8zu4e2ash20s5phwmh86noxy1a1ftt4d7xu3qhy8p5nd52pe4cu4fzx3go37zuelt77ade9mgeie6d78vfazh1d5gg1z3e933e6dty014sucfk361ruazule5blml6th1e1oumennii4y1a0bmfy2rf5gua04twbwef7cnitkj7nb0zy4m906m6dhg4uerw0vk3vg96txhmus456miu4i1yrf6nz1em3qlfxqxsk3\", \n\t\t\t\"latitude\": 895.10, \n\t\t\t\"longitude\": 656.35, \n\t\t\t\"zoom\": 72\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b4b2f359-8226-4db1-b146-573131577e66\", \n\t\t\t\"countryCommonId\": \"a0e367d2-7dec-4a16-83ed-66790bd8359e\", \n\t\t\t\"administrativeAreaLevel1Id\": \"dbf7b3a2-dd63-40de-9326-008f1bdb5cf3\", \n\t\t\t\"administrativeAreaLevel2Id\": \"f8c125ef-92fd-47bc-ae97-0712984128c5\", \n\t\t\t\"code\": \"4cv4m21u\", \n\t\t\t\"customCode\": \"1fkaz47o3y\", \n\t\t\t\"name\": \"5b179ir8jji4hu1cqsjd0dcxu3kuvfboagrbf4o8v0gw7ka96362a97q4qqwqmxxktkfhw7bqmsn4hz008qtd3unulndoxppdc9u5ap99u5luct2o3pfs2uzidhnopsbgc5hgu980izqpw51i10k7ffpv7doa322xddi0d0qsuvprep7n4d0b7yyf9dso5ze3x3mw06ik1pxxbgj1scfsc5uwbggt90m7pbx1zf10lc89vy6w14vhtwp3v2xk7m\", \n\t\t\t\"slug\": \"n8gxz3w0ceebazmuq1p59laq4kgdyfsmw0cen8453rleojkko9t2yl2k9tkzp7rqe1dnxkpf49p8ud296djubb29icgjatbgv41wrwyqmb4wz2pywplrf0fi7xzzyr72prxnc0ruk4nvqry0zeo32dohieigdqviudb6z8woqcdhgm6wulvzj3hi1irf7wi5dv2q1p8zrtoqadj0ezvs9jfrc1vkrry0ckgnudms50shm88lyrcj0u188poyymw\", \n\t\t\t\"latitude\": 865.18, \n\t\t\t\"longitude\": 297.36, \n\t\t\t\"zoom\": 50\n\t\t},\n\t\t{\n\t\t\t\"id\": \"06395f87-5f5e-4a0e-b830-fa636ac68de5\", \n\t\t\t\"countryCommonId\": \"f7669ce9-7850-4774-ad9d-e69d7d7c7494\", \n\t\t\t\"administrativeAreaLevel1Id\": \"eae3a2e3-2695-4c17-8b8b-27bf8ae7087a\", \n\t\t\t\"administrativeAreaLevel2Id\": \"fb904779-5a96-4c92-b816-cab311efc4c2\", \n\t\t\t\"code\": \"q7tyqrbo\", \n\t\t\t\"customCode\": \"s7ngrbxec4\", \n\t\t\t\"name\": \"1sgrxx5w6dnie0jnpvoutteyn7abrxzqkdbziw8e2m0p6wmwksnk0i61iwdsngjdxyg7abc3duwnae6llf52tgubq7kc9wy3bpwriranxljit90i0vk9wltm2pz0cgk3o0jtqablyf5exahlwgoktuccbixda7a4tohrlvq3nflkzc0qb5uvu1j2pngetetplyewwg00l6brftqyenqkiy3qypu6vy1co069euuet8rcmou7stfq4zfwq7u9vv7\", \n\t\t\t\"slug\": \"60jnjkfn8o8gilj00yqm6xr0feffz9m0l6jjg8gfm8q9g52hfjaja1h0l4257mjjagfl0xtq7j7rdv604cyf3hyqw1b6l1pllvpvc4ofhw17tt6xhhntxkmcv311onhdld0kqffnstcfqdqdt2upof6tlaklnlobadfhs7dvx5qm50h78g04ms9b7ekfm33kzlno31viyjkr5w3t6aujrg9p21ss6tib15sdt85c8wt3cup8ded1boflsvo80ss\", \n\t\t\t\"latitude\": 707.47, \n\t\t\t\"longitude\": 841.09, \n\t\t\t\"zoom\": 93\n\t\t},\n\t\t{\n\t\t\t\"id\": \"a4edc7d7-d182-442c-98b0-ad06d7c0edb5\", \n\t\t\t\"countryCommonId\": \"c49a16bf-ec00-4fe7-850e-13c40b988eee\", \n\t\t\t\"administrativeAreaLevel1Id\": \"e862e29b-2471-4773-9246-5d9e77899894\", \n\t\t\t\"administrativeAreaLevel2Id\": \"60298b6b-0d4c-43c5-bf8b-1aac5849ecdd\", \n\t\t\t\"code\": \"ksid8vkw\", \n\t\t\t\"customCode\": \"tcm71814uk\", \n\t\t\t\"name\": \"sjb4ra07s46p1rmmb47rjxmmew6n30jr2s28iqhgctvrq8eo0e69aqm0eoy5xmg06wvqrk5v2j0tm2xekv2yag7kdcdwy029pk78af07ehrar9lqpndh3wby3jtrb1ctw6jimb54plv58m9hmej118eenfvoarlgvwpi1lklkko768jsrdpogyn79m9oyp50t9ncvducidf9163gv1ta9x0m4lacytc2zwmnqw8tysyidnw8cl24daranvwa4he\", \n\t\t\t\"slug\": \"urrouj1mfg9euz07n5p9eqvmsf6ewqxpiuhcfcq7lqp9ws8u36dqd2eurl4rfwuuuru9w56ayv7y96niwn9tcfr8tgjdqrecspx2z6br1na1s111ark1w73fi2kyii8qd2tpce1sjwqg7gvzpe52ysf024enmb5k249452s80wht6f289a41xumvif4qdyamy0r749voa1n0yyihbwth2t3nw0ou6c61lq35erz872p7twilh88pnfdy9kh3t65\", \n\t\t\t\"latitude\": 531.01, \n\t\t\t\"longitude\": 814.44, \n\t\t\t\"zoom\": 10\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2fd634dd-87a9-4932-8489-d6253bd91007\", \n\t\t\t\"countryCommonId\": \"c0f9f1e7-b5a1-4609-8936-f455f63b4759\", \n\t\t\t\"administrativeAreaLevel1Id\": \"a796ecb3-e81e-45ba-a2bd-918b2fb151b2\", \n\t\t\t\"administrativeAreaLevel2Id\": \"9d74c926-496b-4942-8508-d02f672bde8c\", \n\t\t\t\"code\": \"a0h7unwo\", \n\t\t\t\"customCode\": \"3lumbhyvek\", \n\t\t\t\"name\": \"02d890ervnrxh9m9z8tngq2n2z563wnh9rn2m1nvvyyt4q32ga3u0d4nylbxg2i3zch8jox9bfg4wvqw1560qvqqomdg2nd6kszujnk4tefvn92siw8l12m6ri0cj0lqz0kzmeyfx6c4onisiscmxg1tsi5a96tu3nz21u1bx3ogeh85c1mjkn3ytqdggdhuwgwg4ggu5e5088air6xucimfais667ghq8f2e23iihj2e34b2oc96tlus9fhwni\", \n\t\t\t\"slug\": \"33ukxp1aveubohmpo7v5w2q5w82rly78o1fsc2v62wbndogytnfoh231r8uud5prp6yvhw7fuvpy1pltuhy0s21w57g6gsist7yyjdl9twcdiufnw3yfix79v498v7tqc50h7bue0ae5wyavcebua563hpxg96uuoi4zpmgu9j35ib6rbmzbj9mblbqfyv1kp8s9x3yfk8dtmou4lfz7e9hp31rprr1kmpzlro91vgkqfjf63af44tn74wumesd\", \n\t\t\t\"latitude\": 431.94, \n\t\t\t\"longitude\": 26.60, \n\t\t\t\"zoom\": 23\n\t\t},\n\t\t{\n\t\t\t\"id\": \"325f1676-9f6b-43b0-aac1-94f5262d8329\", \n\t\t\t\"countryCommonId\": \"a03aac72-706f-4de5-8bcb-d277c371b460\", \n\t\t\t\"administrativeAreaLevel1Id\": \"3408eb87-8902-4641-a328-67fe483a9737\", \n\t\t\t\"administrativeAreaLevel2Id\": \"fded6b4c-daa2-4374-87ac-bea6f73e4c49\", \n\t\t\t\"code\": \"r05dkugu\", \n\t\t\t\"customCode\": \"ioy93514he\", \n\t\t\t\"name\": \"c2g1zlmumnho9x0ovfoof08pzuwujefmgw89atytbkqenfnwmdjs9ulzpmt670lnfvd7le7glw0t6dayiu5wa1hv59vf20hj3nz2sk3fjytqgf8d9g3ci4xlkazkip10sfrum54mfo8v6h5sbcb6e3sxmdsk1eicpssv2j2viwh3cjrahk7ptd5ltm4var6ximhdaqka1dprgqbbtys4f2ck5ne61g79360lp4oti23pt3uadbps7ly31e537r9\", \n\t\t\t\"slug\": \"ckibl079ktr79x3diu4xlzvqz0ci483af0bptm7pmhxmw4kd7voizsf1ubhrmwd0ejhmyiavsrhlz7peb6cy0i00r37ecoalnjscc96hudmxmlmjcja4uctikzhv3v8p990w1rqqmixabukylc2at3ps5e0jioyi4bk0fy1dc7rdt6kv3q509vdjkn9rw3mkv3dqegle8fny0b9kz5h9vcn5pzdkcanhphl9zwh4bhp4x0jkdkxsef9cgtxxoit\", \n\t\t\t\"latitude\": 635.02, \n\t\t\t\"longitude\": 906.73, \n\t\t\t\"zoom\": 36\n\t\t},\n\t\t{\n\t\t\t\"id\": \"63fe955a-35c3-4b99-a9dc-7c7e1ad1a289\", \n\t\t\t\"countryCommonId\": \"28edb876-dcbb-41b4-aa47-948b9707e358\", \n\t\t\t\"administrativeAreaLevel1Id\": \"32b4f98c-5675-46ec-8e61-4c6595693bd3\", \n\t\t\t\"administrativeAreaLevel2Id\": \"6b9a1b51-5ac7-4a8a-963a-d625e405dec8\", \n\t\t\t\"code\": \"xu6dgwlc\", \n\t\t\t\"customCode\": \"g8a2gp4stx\", \n\t\t\t\"name\": \"7u8wgx1y34yo04iaf8b9g91jee3fpief91rhfdxio2fmk50mt00vwda2izx16ipwx6isfycx6sye9cpys5a5kzxhmcolb47evxxc6ovc27aqjhxbczmcyc1htxt9jhrke357sq97djita0pol4rotzx79cuvcaomsrytxjn7uvtx4bd9h1ugby7w24q7pa9qfcnsguy3y6fcqlnoowu6dygc7oaujemm8tcr94e1u6h0foh553eejwyot9xe9mw\", \n\t\t\t\"slug\": \"zza2swrwlwlgmahbmrycmff3w8if7tjx08ivb4r9oojbi643rn0tse9a5akwbdh2gqbbk7hqv92d6oraonbycmui99uwow7125vnqi6y1c91svxejbtd0yf7lbgk0955vwouino46mlvmpzwdzqamdr4ypxgzrcvepbnn0p2uytkg7qy8oseh1sdunricz9ql77gdeo1rr38h0mekhxu72q95ouait5k11dxgz7v9aupt4090owa84vs2s0nl7d\", \n\t\t\t\"latitude\": 770.08, \n\t\t\t\"longitude\": 741.29, \n\t\t\t\"zoom\": 83\n\t\t},\n\t\t{\n\t\t\t\"id\": \"ef189551-d7f2-4403-b9d0-6e28d3b320c0\", \n\t\t\t\"countryCommonId\": \"19332624-2894-44fa-a44f-95ab2074a400\", \n\t\t\t\"administrativeAreaLevel1Id\": \"64819d49-8e8e-41a0-9d9b-5a134d82c87c\", \n\t\t\t\"administrativeAreaLevel2Id\": \"458a71b0-0a16-4187-a8b9-b6739791c1bc\", \n\t\t\t\"code\": \"sg3mjgd8\", \n\t\t\t\"customCode\": \"bbmxljj4x0\", \n\t\t\t\"name\": \"02sdf24y82h11r8ufcza19kfg3tptzl6ku1z829f73hp7kiy8wf0hyv33w2kadmkeaexopvwt81bh1l0x80q0vllnj6zgyppz2sc83pvfnslt7aghlmot7vrx9o3juymuvnkbrxiujwdd7cyjni5a30bd28pi9ye9gktzhbsgokz33hmafkid7lhxlw2gtxikkvnn3vfo9k8sbw9p23m93i61t5xikf3ububu87dvk6ak5dearxm43wzuuzmpll\", \n\t\t\t\"slug\": \"1346auh5596fo228weiif6sr5459474psncanthsibh5vm28pp9d55u7ltdc7q1g6txvab597nbs11d6b44rn4t90gcgv3ua0sq62wdsa51ql3gedv6jeesroggotxl25os25k4otqh8krkhlaz2fefq5edy0gmjxzlt4xmov2k19u2gb4tjfp7m1ayzkyao7eftb5k62gyfw3gm19ydqkv12xsn9qp7dtcp06l8tjn1fzvayfung5sjljfp5qc\", \n\t\t\t\"latitude\": 691.94, \n\t\t\t\"longitude\": 66.05, \n\t\t\t\"zoom\": 36\n\t\t},\n\t\t{\n\t\t\t\"id\": \"70f933d3-6c11-4ee5-8bed-74b324532687\", \n\t\t\t\"countryCommonId\": \"21ee654b-e587-4e04-a676-7a03fa134833\", \n\t\t\t\"administrativeAreaLevel1Id\": \"e8524406-4973-477a-9d3c-132d8cc90aa6\", \n\t\t\t\"administrativeAreaLevel2Id\": \"5f8f3de9-f566-4f3f-b296-985c713257f6\", \n\t\t\t\"code\": \"bwc03kw1\", \n\t\t\t\"customCode\": \"0ror8qn3hr\", \n\t\t\t\"name\": \"atxm07hms4ghmwpn6au583x9anpg8a2fl75w614kh2lkmgiqpic124e939kcftwzejbyx7gx592t9y9w9bgtr3gm8seeu62f6mq7z72lbi1sy3ylgia0gwg6eibnvtarmkm5s34ddwm1r0bcpoqiet1p5scbxv8rscrm7ki1uk3ky9w36u02am96rrpir9qgkixr6h2fkbv3bgbqiqkv0dqys4wfto4em7dp7v07blk40nm9dfwkzlogshira8w\", \n\t\t\t\"slug\": \"j2vgezkwavr8ngcarodgme3rgjay6b8u7nwr1pnts7ogy6v7k9fz9r6a0r1zdj3ejp5ezvcdz5fncnkmrrp7zk7srxm7z8328c9f7guisghqazqtm0zcu8odq3hpwaxlbbgimbir2ahev96tu9ir2ymbfy26lzv85y58id1gx6vw2vqymsfy9wjpqos7a7n1ypxz1mvhebmnia0nwquh96d65jhv1gvy4bmmfjvahxgox7xjhy5r8c1ahl2ntwg\", \n\t\t\t\"latitude\": 524.14, \n\t\t\t\"longitude\": 701.47, \n\t\t\t\"zoom\": 38\n\t\t},\n\t\t{\n\t\t\t\"id\": \"c1c96aa4-03ff-4c27-9260-a71cffe37401\", \n\t\t\t\"countryCommonId\": \"0cef86c4-08ec-47d1-a596-12aa2181e6d9\", \n\t\t\t\"administrativeAreaLevel1Id\": \"4a016d8e-7b0b-46b0-9ad0-8f79cacc1e04\", \n\t\t\t\"administrativeAreaLevel2Id\": \"15e21645-ee92-4aff-9323-9d1f60cb0b53\", \n\t\t\t\"code\": \"3bzsrb8s\", \n\t\t\t\"customCode\": \"gy0w3jd0t4\", \n\t\t\t\"name\": \"tgw7g05juboznnfaxuem9srhi7xfqo1jsuajuai1tuh3041cojagbbf1pt90xok2wwb04jn38v0vv91tw515ml31wtunx2sww50f0ljb83sgf0mh56d7csi3hl9f77xu9lc4ngrvsh6sqcyxxhdi9y9elua3huukcmirsbg5dt8imwlko9m6vh46oaa3r2281zyy6kknodne92xjwbsct687zfhc2bsw7po48yiy2jevqic87d0zv0ydmffeajl\", \n\t\t\t\"slug\": \"bu2cpzwfnolut332jwl3008p66gb5bzzbftj3k0dijwzml5dkt6aryz3agy8bei3w8lucjd8eq8xe8qy7bkg6cvaezpipbu6h8vv3kp5020sk1bn85efpn0dhuct2cgcoupxk8byk4s03l3dqokkpf6rps8ro47es1grrpbh56xptfq08d3y0s4tgs4h9cujrgq6olmpztgywbfgrfixln1294zg1o1b48jqnemk3pnrve0ht63q1v4yfqrrg4w\", \n\t\t\t\"latitude\": 454.96, \n\t\t\t\"longitude\": 186.47, \n\t\t\t\"zoom\": 75\n\t\t},\n\t\t{\n\t\t\t\"id\": \"6dfe8f13-f0de-4c0b-9dde-2fc73af17ad5\", \n\t\t\t\"countryCommonId\": \"4525f84c-d261-4065-8e7a-062158793d52\", \n\t\t\t\"administrativeAreaLevel1Id\": \"d6995cec-ba11-4949-a29d-6224d4abd18b\", \n\t\t\t\"administrativeAreaLevel2Id\": \"f9cd6c94-128f-4efc-a8da-5eabf7cf55f6\", \n\t\t\t\"code\": \"2nno5buu\", \n\t\t\t\"customCode\": \"zvqjj9dzqv\", \n\t\t\t\"name\": \"uv667zv51w93cousp1fgvxux20kqqi0clt5nn4ol06blhgfengfulj5fi7rkmyqmm2o3posgfc0o9fd17x65k3s9el154nqi4cuhih1cf3g9hfgdkaqvrsld1mk3ishu3uu6rkw3w74xjold9pjg16ma0u5roj92xm3t1q2c4ijfvhmlwa4l9xuv9ui0882qzhrc9guxx7ee4vc6tx38636yr4gdr5kzbn7e0i7eged2y71vixzifduql7zmckx\", \n\t\t\t\"slug\": \"4s65ij66rnbtx0vbfetfotf09j0w2sdmgo1a0hwi92zasz1nl8s81qeqob93f7sfrnbwn5iwmive5wgncmpq84wj3ru3njtgy6owa0r5ysxntl8u68pg1pyhsr9x6yejji6esazy0ztiyxgetrbhnfacubu9ig5996yczg3tim4yqptbg722g7up78zitn0v0vdpbj5jugo2nlv2avnputo9mvgl78ehk5kti3tutfwqevtwxrltsqznltslaxd\", \n\t\t\t\"latitude\": 616.81, \n\t\t\t\"longitude\": 349.59, \n\t\t\t\"zoom\": 49\n\t\t},\n\t\t{\n\t\t\t\"id\": \"2ba88cf7-16a8-478c-83b3-6d7ca8c42ab8\", \n\t\t\t\"countryCommonId\": \"3599b1d3-c08a-42f9-8e5c-5d80c93cdf8e\", \n\t\t\t\"administrativeAreaLevel1Id\": \"daf6819f-753e-4a8c-a761-f20b72ffee03\", \n\t\t\t\"administrativeAreaLevel2Id\": \"844abb90-f8f0-4593-adb1-2f1da27535b7\", \n\t\t\t\"code\": \"wdm0c7ij\", \n\t\t\t\"customCode\": \"vreo7y8kcm\", \n\t\t\t\"name\": \"8hjouxb3nm1wylrf0vdw26z3ysuyx4lhzvq2bd5gyntgjrl78dxa6ksjdsuotw47ttn8oryvl6si00swyuccpqbsavgvn0o7o55hwm9v03n0ssrwc03r1qeuz6f1exw59rt29cg4qoyz45s0j3e40memv3c90oieg95hxz4opyit3i1irjdrwib1c6usyc88kum9nch6orlvuh4rweph0znj6rm70z81uvackzgms4nti7s63lun64p1uxz71ci\", \n\t\t\t\"slug\": \"a648rvl3eyau8isgn6i2qmpv52b8ytlf57n1ki73vtulv6z74n29lc8lad1dirl8yiedffcpkic253mb7x1tedsm976bmygo36be1sf2obsa5h9ss99bvye7ncvehauhh3689mn3tutj59tce1rqey6z4ndgmq36ocxkyp5nlx8n5ds4d4547c8tkirxd8wied2mh5xk5klasipqsp4hrjmhhtjs3cy2nrot6ke58648ipec8n2hfzwy4faq8hn\", \n\t\t\t\"latitude\": 253.48, \n\t\t\t\"longitude\": 193.83, \n\t\t\t\"zoom\": 92\n\t\t},\n\t\t{\n\t\t\t\"id\": \"b6e552f1-d73a-489b-8ca2-149d8574e574\", \n\t\t\t\"countryCommonId\": \"250efcf6-4c6c-4844-8266-4530c225af03\", \n\t\t\t\"administrativeAreaLevel1Id\": \"b7e55d96-54bc-478a-9c3d-fdd07cbb89fa\", \n\t\t\t\"administrativeAreaLevel2Id\": \"411f9dea-999d-43db-9eb2-96600731bc24\", \n\t\t\t\"code\": \"z3ekkb12\", \n\t\t\t\"customCode\": \"lumjcy9lc7\", \n\t\t\t\"name\": \"ww8901okz5sm9u8u5eficwyba0t7duwwcp6dlj8cb64ejbphwmf44q8mobyrod22b5c9w48ljm9m4vadqqdxuipcy9fo80fghcssut30nsf33fcbuzrya03d11xyujsi8i8yhsn6d7nlx94r0d1hmxeruc3xpm04hxdshr955uaazhzfib5go58z0l8ttg6icbdlylzdyn1la20k00nnh0xzcwfskyzqei2eugsxzk29es0g6pejpavc7wkc8vi\", \n\t\t\t\"slug\": \"4hnlh83lxqbil6hmoa6jxoozi8tr1ciprc3r56k6d8oiwfuxcwqgq94l8vkskfqkz3l3gt677rrlzr6p86jjk7m54y6cekbprzukibteiq0kr4na01kbflepfoel2v7pcxn2ugoy6e5058ckpajpk429gkyyjbzk84ebweh2qjsraleqi21p96kmfh4d3pr6p0gx3p698n5acnzarrrzcmcoa1ex1mlfwmsuhk5w3gn0qxn0173zb05sgpk51sk\", \n\t\t\t\"latitude\": 169.34, \n\t\t\t\"longitude\": 981.85, \n\t\t\t\"zoom\": 27\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminPaginateAdministrativeAreasLevel3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tadminPaginateAdministrativeAreasLevel3 (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminGetAdministrativeAreasLevel3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tadminGetAdministrativeAreasLevel3 (query: $query)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"9d1e8149-18e8-43a0-afa4-fe2840752a42\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindAdministrativeAreaLevel3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tadminFindAdministrativeAreaLevel3 (query: $query)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"9d1e8149-18e8-43a0-afa4-fe2840752a42\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminFindAdministrativeAreaLevel3ById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tadminFindAdministrativeAreaLevel3ById (id:$id)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"9d1e8149-18e8-43a0-afa4-fe2840752a42\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminUpdateAdministrativeAreaLevel3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AdminUpdateAdministrativeAreaLevel3Input!)\n{\n\tadminUpdateAdministrativeAreaLevel3 (payload:$payload)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"9d1e8149-18e8-43a0-afa4-fe2840752a42\", \n\t\t\"countryCommonId\": \"36c41b8d-7b25-46fa-8acf-bd2b867d08a9\", \n\t\t\"administrativeAreaLevel1Id\": \"de063925-f817-4b63-9db4-a836f3c3be21\", \n\t\t\"administrativeAreaLevel2Id\": \"ea7fc283-b9db-4c3e-9685-0ab82144a4bf\", \n\t\t\"code\": \"xkng3h5z\", \n\t\t\"customCode\": \"3ha7dmo5qu\", \n\t\t\"name\": \"xsi6qmg5wzz9ea8mrme4pv2y8zccnvu4e4b8v02m871fviln68rgmedk4u48u0c34zj3demgndovqvayq2lwjmdgtelruitebmzghg0nulp8rlrt61dvshu0k1oqri1z8gqpuncocnlxvb73rvldydgeny67d9guwyroe00cvqqmutggb256psy8nj9glbiym09kp98nd6pi4x55fj3yoruqlkpd1mwtna5xxzfcafp2rb4aq57lzdyo18gpela\", \n\t\t\"slug\": \"czmfs6vvha033qqv4etel7e75fbv6lo5i051bh8otcryp4shl805ll2q9ri6bzb7v81o3kj4h1ee9l3n4est5lutqy77ph69mp6uw6vogelsnr5mvea02ztcabb1zg1jpu8jm41fneeg3op2g3kqcr7v1ktx1p9eelj6pvmy8oys9m94elzf37f24t8ipwddthxpfr0txz7tow47hzu9c3h3dsamew6c2covj7652mgqfz4fjy8db5c0mg4cngg\", \n\t\t\"latitude\": 695.54, \n\t\t\"longitude\": 996.11, \n\t\t\"zoom\": 80\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteAdministrativeAreaLevel3ById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tadminDeleteAdministrativeAreaLevel3ById (id:$id)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"9d1e8149-18e8-43a0-afa4-fe2840752a42\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - adminDeleteAdministrativeAreasLevel3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tadminDeleteAdministrativeAreasLevel3 (query: $query)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-area-level-3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"9d1e8149-18e8-43a0-afa4-fe2840752a42\", \n\t\"countryCommonId\": \"36c41b8d-7b25-46fa-8acf-bd2b867d08a9\", \n\t\"administrativeAreaLevel1Id\": \"de063925-f817-4b63-9db4-a836f3c3be21\", \n\t\"administrativeAreaLevel2Id\": \"ea7fc283-b9db-4c3e-9685-0ab82144a4bf\", \n\t\"code\": \"a75o8v7m\", \n\t\"customCode\": \"t025eiq81x\", \n\t\"name\": \"66f64w6t4r593by5l98oj7b94mge9l181zgx5wbzyjdn3zir40ti45ac6kg2hle36pild0bwbi3fzw3vcr2cop5i1jappx9lpi0a8jsjg070mlcnxz9fvq5ungd1t4owgv4yh6n5jzefeeiqcrat8a1exx8ycb0nxhsaxe3a05ztyqvzbrn6owx3qt0233lauzg5aa8dzvuy86rrdtz2vp4cmhar1a75lmmji6qclmyl5x2u10woe9a0feqdymb\", \n\t\"slug\": \"llltvv473wjrd8ehd0zeryktpcf62y27x9zfywa2pd4wq5p64l5hy5uyn8x26ind39ixvhiubbjq94u6sryhmx0o16s3kh6vf4hl1lbs4dwkorg2wp4t08q9romkhkoobgzm3cnvs84ivm7kar1sz3nhbtswwyzav67w1m307eaub7uwbb84hfs3ipfz2h3uswoplhi9o5cwhgo22yqrkvrsz2ejvu9wj4r9ft8fzv554pifzawxtbpe3xqnxid\", \n\t\"latitude\": 10.30, \n\t\"longitude\": 347.66, \n\t\"zoom\": 13\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-area-level-3",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-area-level-3"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-areas-level-3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"40bd0929-6e09-477d-b831-d6532c94d323\", \n\t\t\"countryCommonId\": \"63cdef2c-c8fa-4585-8441-66e3b2b67092\", \n\t\t\"administrativeAreaLevel1Id\": \"0270830a-cf41-438c-8ab9-0176b085d2d8\", \n\t\t\"administrativeAreaLevel2Id\": \"d32ebb95-38a1-4691-a0c8-2a69275cf917\", \n\t\t\"code\": \"mot4n075\", \n\t\t\"customCode\": \"ymzt9w0ria\", \n\t\t\"name\": \"q12rp08recroigbz9hbrlqz757z7210s3xdzdte6dhf8gc4gkmjjszh2p2hoc3ko10jezb4zoe343yvmjkbkv28n51qyv4bgpelhoalhu5hndemx4jk7mozpop51vxzaiihwufymtjmj8e6tnjvbt21wu6xrqeaocw7iy5lyt2quavgtjzbnn12o75jsh6zctxmvosu27hrpik0c9kfy7k9wtrsttwnwba8ziyvyd15orkevk5r5pgyy1x0onfk\", \n\t\t\"slug\": \"cyly19yqcsf8x421d1lcpj6nnitc2vj2kdgxxkp8zm8d1b8zxbu0e2ex4ts4f9qatl9zb5ew6orggoae2i4e2a62ekfmiukkjxl2f9q57urv52fwzaxpzl4kb6xv9xxsna66wcxnnvpqk9bl1a6ugc8ept1s97e9sgy4g1dbarvpvxa66ok505mg560oiknt3md3iexscgo17xjjpged2dotc352pvbn5o8byb2e9b0mikhjtxdutbgwiwrddnz\", \n\t\t\"latitude\": 25.64, \n\t\t\"longitude\": 605.73, \n\t\t\"zoom\": 32\n\t}, \n\t{\n\t\t\"id\": \"9d8ce5dd-b001-44c3-8da1-f08c37a4826f\", \n\t\t\"countryCommonId\": \"6acc8170-d55a-441b-a1a3-61103e27eead\", \n\t\t\"administrativeAreaLevel1Id\": \"fd128627-9fed-4a60-8380-c1274d08c9e2\", \n\t\t\"administrativeAreaLevel2Id\": \"8b51465b-89e8-4c2b-bc6a-890b4c7125ba\", \n\t\t\"code\": \"kukugx22\", \n\t\t\"customCode\": \"cpl831jdq3\", \n\t\t\"name\": \"qxmsuk2drwmtj89m16awacahytg7ybcut7eyu3eb6h7811p2bpdrvg7gxb68tmb2h0kicriopvpk75b5w1jaazrkdslnmudmute6i1tdd57yby2pcepewvwm0xhqp9m9uaz6kutbdk16e83ipxzjoh35ct7egd2oq8zn5omolvfvr6brgv6x56gcfk5vhjwhc7z7h089di0s79zqrqgu8yrwidn8w8br4yk0zjus0kxd4csfet45zrnieptastr\", \n\t\t\"slug\": \"id9ncun4ysnsbbu9o1bkxr90d8je26jyowvsunqbn2g0c9mticxz9wrv96or67zi65esyk6e8asv7xbd8ltecamqylfz97y8el2rkfkh2j4zxuoqbqzjq37p5zm0401xj2zvmdm716atpohltbqwbi1w3a665ydgbf3vlifzh9xvpxwmpdok6jyewigosfur9kwey4voffkx7kyj7cwh11d9r4v5gkmmele0529ddd9rhwrhx0us9f62dhul31z\", \n\t\t\"latitude\": 729.13, \n\t\t\"longitude\": 571.16, \n\t\t\"zoom\": 15\n\t}, \n\t{\n\t\t\"id\": \"36d4b0ab-8072-4374-ac64-8e336996eb9c\", \n\t\t\"countryCommonId\": \"f46c6446-2c02-43fe-8f4a-0a58454d2375\", \n\t\t\"administrativeAreaLevel1Id\": \"6e1a5f00-3d13-4079-ae77-7ccb70878fcd\", \n\t\t\"administrativeAreaLevel2Id\": \"6a05c8db-566c-49b7-a0c7-409333d618c3\", \n\t\t\"code\": \"h0vscnwk\", \n\t\t\"customCode\": \"swjkyoi4nd\", \n\t\t\"name\": \"cvtbd6so6w0h86g6abzj8p59b506mrtwuw1bnt6egtf2vy3as010upwd7fucwrphai06hbu1br0jsbqwxy7w8w4690qjay7q0pl22s6qk1lyfw171vrurkzzt3bhn95gkt41t2v5fu4q5c1gw8rsl746xsjiib0jqi1m7flre1aitvbwdnt0fulud5ch431oqeipif2xaidb4pjym4u9wixjaeidj2erf9yumnycgyugsr7n8holud3aechy1yw\", \n\t\t\"slug\": \"4jhhwikxidko5q8bn45tnukn81wmtg0k7nszgraw5tjum0vk3r4cshtt3o8wgygk7eflw5gao7f35n3tudpatmwf4i7e34yo1b3czbcv9o5wqc9gbrjdpie8s52jvbn4qs3rh79eya9khlo467wtqa3uyf8be39g3jyw673tt4xe47jg0fbkxfnjbmrait6mjzy98ud0i96bqqph0e5fzhrznl8latlman448chtci7vsspp5la7ban3gv2f8je\", \n\t\t\"latitude\": 309.34, \n\t\t\"longitude\": 744.83, \n\t\t\"zoom\": 21\n\t}, \n\t{\n\t\t\"id\": \"3cc920b1-060b-440a-97ef-0fe860b4fa68\", \n\t\t\"countryCommonId\": \"3be98118-7520-4a22-a5e3-326f67fe94a0\", \n\t\t\"administrativeAreaLevel1Id\": \"7cad5084-7c34-46e5-92c7-e1ebb94c56a7\", \n\t\t\"administrativeAreaLevel2Id\": \"1576947b-23d2-46c3-b827-a2f2e172bdd6\", \n\t\t\"code\": \"kxz4u7mz\", \n\t\t\"customCode\": \"kjur0pzml9\", \n\t\t\"name\": \"kvl45m5faim68fuvh5colbfvm735mntxj2fahv3qk981bgb2em9746np1ldj4q6v8fhmphttlg7nfiwb94xskwsvhma6xm9hxgku0cph5ogs4xb3o52my90hxt31qop6l4nuxmc84xrb0fy6e2nhv8outfjo9wpv27gq0jmkkqnmqaihfh1norw46zn4yxhkumfu5rzuq5c5bhmqe66cv77my9fijsbjxgeb5zvb0dwkdxo33m2dg2yjdr05g3f\", \n\t\t\"slug\": \"r879pa2gr4btq90aovbcqr29dnrs3t9fnv0nag7dgou7v8hy6snyaa8aqi8y83ohv01cymjqaru4rjys1u6gerapcv1fvsw4k45sgodne77at2ec4wm8uf79s96xbjeztrdeb792c7r3drt97fnft8vlhd8ycpvb66brkilwb2ow9wioglzk1r61aqox4r66ej6homey7nlgq7e60g3e8ywf6rakdssd0bk9cosbcrl6zotisnb6wjlc35p2wtn\", \n\t\t\"latitude\": 536.74, \n\t\t\"longitude\": 577.02, \n\t\t\"zoom\": 61\n\t}, \n\t{\n\t\t\"id\": \"cbd16849-3b79-437d-bc53-00cf6089f85f\", \n\t\t\"countryCommonId\": \"f5dc1396-ef44-40eb-9705-8485dfdea771\", \n\t\t\"administrativeAreaLevel1Id\": \"4fd22010-fc2a-4eaf-8771-ac12ca8d3064\", \n\t\t\"administrativeAreaLevel2Id\": \"8c8a2b49-4620-4d4c-affe-576f95b10a48\", \n\t\t\"code\": \"oadp5crv\", \n\t\t\"customCode\": \"bikwgvj7mb\", \n\t\t\"name\": \"a6kxuts1iwodvrva1s2n8bmnhkxp55v0994vndzi04lpatvx5mis3owh4wfmnypehuvm6bdjra9xuaceoae11uczp9qlz3nwe3gn2v5hzmo557ezjb21zdto8azizd64iwru6gamhbniurxia7x2t3rzh4hhasrp82j67egncp6jym9f0rmkfwlxsui4lch7t130g62f0tb46ve1focoxghl8vvfmc0jyuyu0fd85dteg277ip1xht4ga1gxod4\", \n\t\t\"slug\": \"r1he8x6mf8j2s7mhubxeb6wukbpse9j94r68u9a34wtuncfa0diq1porzipmrxjl1hfywlkzejww9khtmbndlg9sz8yeatrh1v94pt5wxuczg35owi6qonmu1rvv6aafov0ck15v4u3fagivvg6rgnnove2odbie2frb44n7vvldvx7o6vj2cta253t5fp9sv3xtwaly34cae75a6ycl73cvwqsrjv00qrwqyj5qwsz84asymgusz0uon4pivws\", \n\t\t\"latitude\": 128.59, \n\t\t\"longitude\": 913.10, \n\t\t\"zoom\": 69\n\t}, \n\t{\n\t\t\"id\": \"9247ee7b-9ec7-46ea-b43d-d0aabfda321c\", \n\t\t\"countryCommonId\": \"51872dac-728f-46b9-9f41-af1e645339b2\", \n\t\t\"administrativeAreaLevel1Id\": \"12dd0a96-e6e9-4aa4-94d0-7d9623f96ea4\", \n\t\t\"administrativeAreaLevel2Id\": \"13301bb3-a2eb-4af0-a062-21e47f23adc2\", \n\t\t\"code\": \"hhtdcl8d\", \n\t\t\"customCode\": \"6oijxipiu6\", \n\t\t\"name\": \"0jaflfjfza8j7pl8g48afvxvaz4wguv843d8lmzyhgpkugdss3wj8qwf9daew0077zxl4zqxvni436376e6ygfa1zh51ebvfl9a0v0arjf9f0xnzxd909pwmhenv428cp88kpoivmoajdm8bh3w4fl2l4n90dau4jzwwgvv9caueb6jodcxyd08qa878aw2ulbzw2mzuln05npeb1yoi5hdwkauado227t1ht7h100all9vfnks1n23r73rjmot\", \n\t\t\"slug\": \"c2vajt05okrh6jepevmvb0pdenw54r1t9bcc5oflheun82enu3h9zgjlp2kvba3s88awiutb0e8dizl7zd39q1nfphxedy8rff375ybbtxd25aytf5y8x641w65uvhjp7qvngo9a4y98keimlsahfuu4t764k4gk7nxhaevaaojyy7d8q8te9sp1pmpyeoxfiz38qe7uyf8320uptxowtc4x41l7ah1vz1l3d3tbmwktpwoitfmmk8qnksymtya\", \n\t\t\"latitude\": 290.63, \n\t\t\"longitude\": 577.52, \n\t\t\"zoom\": 13\n\t}, \n\t{\n\t\t\"id\": \"b4ccc109-3255-4303-b9c1-ece598a50409\", \n\t\t\"countryCommonId\": \"a9f2badb-4921-40ee-9896-9e93fbda0d6c\", \n\t\t\"administrativeAreaLevel1Id\": \"c0c71421-5478-41af-be42-69ff9d985569\", \n\t\t\"administrativeAreaLevel2Id\": \"24d1b13d-77a3-4a5e-bf8d-dbc3b8e3ad62\", \n\t\t\"code\": \"gp3x4pw8\", \n\t\t\"customCode\": \"s8r2nzrgcy\", \n\t\t\"name\": \"dtj5fpsevegvu70s0avcdpb1bn8ux8x46vf5ufl9cenfs7mpfj5o0flo44n3x6o2f9ake20stnqo5mtsjtoqa0rp9vdxrqkj9zqa6m2u7zxayac4mb8218divd8gh1ux72i0ncbkb6n3x31fjr5p97ozvp7hlmi9p3402v50wtkycfw6jwgmhpjvu9p6e2qd0fhlsqn1g5a6ityeaphgvxatoh41kc5vsh5bscwsfqb7swllicof9o3fom9frof\", \n\t\t\"slug\": \"ryfoucz4a282sx5sy4e6yemvxru211v77bye4wmf5de6k4ugetkjc0cousefqc630f0o49s6ynsue66j0x10cuytd4rln3caszt8zs33kky8kltvlfsy0n0a8o2wr84w3k08ry4cq8bx5lcv7mzw98bxvhc37kzbz6dcfyz6w97yg83lvuv7kyo3heu02hofnzpeev2jh21lw24akyuxqvalhnifopv5qc9ajq74c8utqo73ijkwy0m0peh9oyy\", \n\t\t\"latitude\": 159.13, \n\t\t\"longitude\": 486.47, \n\t\t\"zoom\": 82\n\t}, \n\t{\n\t\t\"id\": \"ae6b19d3-b131-4989-8b1e-eb7982b30aab\", \n\t\t\"countryCommonId\": \"3b39e4e5-3909-4a29-b022-11a87c7b4ccf\", \n\t\t\"administrativeAreaLevel1Id\": \"d033f2a1-27c0-4840-9aa9-100de1551b0b\", \n\t\t\"administrativeAreaLevel2Id\": \"40dbabf1-7d1b-4fe8-81e4-842f875b280b\", \n\t\t\"code\": \"5ubug7h2\", \n\t\t\"customCode\": \"r9m88eld4c\", \n\t\t\"name\": \"kmnbbf0r5bxig5agcpyaiu6x29iu1hphat4wtbw9bnm6uuteu3pbempnxey1l596gr9r1vt8y2aeq41doykmucyvqu2rb1nv8v6z19zk09vc3f3gh9mb2b6jmo0rwquju1ixwz9e3p0tpry30wku57ow2ljscwa9hww9eegpan5a33eecnvct3iazfgslg1odfy0c5r2s0q6qtq80t4do3fu52bn4fz92uafcl7b0l3h5lx23991jr5d96ttm1p\", \n\t\t\"slug\": \"wf1rc08pjmaa3cn2phouo7ijh8um1licfm0m2b3a5ys3rsbxr1ec4oeda42xg2e0d242fzpov31grghvg57kvgkkd0d490zeztyn38chcz2wt9fouw01hnueh2i3j4fwvpn0wzyqky4gq6w7jigvxzqq4pxwm8naf1wfynjlzxat88sn36lcpmau60ncgz22ql0alrwkjm4xxt6h0echeto0eqr6xxr1utzptnfg3dlc12tngv8feeawg9qlrfn\", \n\t\t\"latitude\": 388.74, \n\t\t\"longitude\": 70.70, \n\t\t\"zoom\": 32\n\t}, \n\t{\n\t\t\"id\": \"e8e864a3-38e6-441b-8403-dfb4eb3a575b\", \n\t\t\"countryCommonId\": \"fcadd239-dd76-42d6-977a-2ff076a87bd1\", \n\t\t\"administrativeAreaLevel1Id\": \"634f1e0e-2e53-4edf-b797-ea4bd8680eba\", \n\t\t\"administrativeAreaLevel2Id\": \"a59fd244-06c1-40f7-b3e5-fc5a0db89a57\", \n\t\t\"code\": \"fm2bfma8\", \n\t\t\"customCode\": \"mb3e28l6v8\", \n\t\t\"name\": \"k68wqsmkx4bplzcea0b2tb22lvmkjrmvao52hlhjsw3ojgiw9vo500r30fvjqwr558j4ccz5ri4cro4ja795rykgl6rpz401wu3hov2llx9bf0fzc5wj3wors3vf9ludhcwzx2m8cchz8vvnice9giah0rh3axc313fn269l67xbt45mqhhfcuoatcroyzxzu73wuz0u453zrfkhtkyku17p74kvx79ib2hqmfjjv5vkf1j1nfmq8onp6sxwthi\", \n\t\t\"slug\": \"lhe474ppau8fqoa8mqtf0ibdq7fy61k8jdpxt85cinhmq7uy26ipvibaeq0v4o5cbrdgq7krg88w16hut6k8eugz3gti45w7hwvzr51htkkh2tfx3mxgduevuc88nfjm4xajszelx9paockzz00tik56ocq7d133rynvekocfmsq290wxzqqiky2200niskirc0zg220knoyf003xltnqr0h97q6cp18hd0j0a6u0ok81bm0cs5wljthz5nfne6\", \n\t\t\"latitude\": 289.38, \n\t\t\"longitude\": 164.20, \n\t\t\"zoom\": 15\n\t}, \n\t{\n\t\t\"id\": \"bbf8c2a6-5a96-4929-baf6-2ba37f9258f1\", \n\t\t\"countryCommonId\": \"d7da3e75-19db-4b56-9d08-ecb41d56c683\", \n\t\t\"administrativeAreaLevel1Id\": \"fb3b11df-1851-4ab8-a9fc-41ec42ea2ac6\", \n\t\t\"administrativeAreaLevel2Id\": \"4514a431-0d74-4e40-b15d-13096e797a4d\", \n\t\t\"code\": \"jkxcpyg6\", \n\t\t\"customCode\": \"toh8mnadum\", \n\t\t\"name\": \"p0yud8boep39jm8h4p0nmsf5jax9prfqk4oic5lnz1j8nipubcf4eaxxb048epkb8gt5lxmfy4tpz9gp1svi4a3f6ffs18kc5dp0mpe2b7m39dy6k9rjond5w3i9qdydo4clba97sxvva01jcfg2cnklmjsjt3fa4t7q928ur5cw4qs43padpld4dee1sjshjkvdf59pz4lpx4yxpaufyvwp495yykr4ripgr537r8jksaw8lvny3a2az5mm8ms\", \n\t\t\"slug\": \"1wbdawb81vmwpi5x5gtbvvi5n7n25dujgxvi2n60zhhxabkbauiua9lt40r7818hugn6ppy7ziyz562t3yvhqv9g25jbzj62odlbegsparcxay18wr37iasnbndn2z6pz5obows7oeyhls840quas1u8lj80ybx26rmurkg0jjqkh97f8ou4sxgm6mq1wgm3p3ckvdvc1ndmh345qsez9amv5bian4sa9b7ykux2uz62no7vc7pj9ud3g93g6el\", \n\t\t\"latitude\": 299.23, \n\t\t\"longitude\": 942.62, \n\t\t\"zoom\": 16\n\t}, \n\t{\n\t\t\"id\": \"18032e78-26be-400f-9e61-37f0478f8fb1\", \n\t\t\"countryCommonId\": \"6d301e18-c202-4524-b296-17831de4465f\", \n\t\t\"administrativeAreaLevel1Id\": \"967628e1-1ce3-4015-ac3c-cd236c3a5b18\", \n\t\t\"administrativeAreaLevel2Id\": \"b7476314-04f1-4c68-a6bb-fe71b72f2df7\", \n\t\t\"code\": \"i23ywj5i\", \n\t\t\"customCode\": \"finfpds7kl\", \n\t\t\"name\": \"td4qzy6t0b2t4d2fmkn93fwa4zeqdgy910f7kv507x7i2nrdhs3imz7s678pruxflpvg0va7s5t7vvdx16fvs70xymvmasxtim1ywe9279rq7x1xp05kael009ojr1o35jqx6pni3xknqzcsc6o3j2je39f1gbn4a7op3nj83q9u0i5nwi8o7saomrxe7biu4rzzjj28jvk3l80x8kcfhidc5it2v3qa9yoy9rbpfe7zvamm569mdkdhrxqki0g\", \n\t\t\"slug\": \"ycqfalz493xw9ofipr28ncj3zk8kggv3831o699bgtz8i188vgjbpqlobf1dm3sjzav59r4yb503orlufogsn54qnl0jdf01av6s8l2uuclkrpuvs2799le28cvsi85t1szyn2gvlsv7aiiu6i2zz0p9uvx0vcmi35crjusiawo38xjta7f9bcyqesa188hpjyqfke9k8oza7cbmcvye3mbxpdiuauu0q520vdhvdatdfg3ezj5zgt1qzm8ovo9\", \n\t\t\"latitude\": 672.45, \n\t\t\"longitude\": 764.64, \n\t\t\"zoom\": 52\n\t}, \n\t{\n\t\t\"id\": \"ca458749-dc56-4a14-b6ef-fd2ea334850d\", \n\t\t\"countryCommonId\": \"899b75a8-b4af-4b96-a20f-68c96ce65cd6\", \n\t\t\"administrativeAreaLevel1Id\": \"4b4bab73-247a-473d-80bc-56b8cd4608ed\", \n\t\t\"administrativeAreaLevel2Id\": \"20996acb-660c-47ba-b3ee-cb98abb9480d\", \n\t\t\"code\": \"ofsb4ugz\", \n\t\t\"customCode\": \"ppjzyqapho\", \n\t\t\"name\": \"iuu0a8hlwaexe4eqqps3yq26rgw6a2oaoylxhkgdjxqhom6bp7vxruuobwoijh68cvytqs5a307ha8o5oofg6ryzpglok6ru96nc2brzqovg9tthct5f2w6ajqoqy6aqrseusdm5i77pzmohp92cfh8lseao4dnkzl15modmxntvwugqrxwu1msgz0dlm54j8jvb3ga0diluqb95bsix1dpcrhdyvxzzrst0lnd03c6olzbf5run8fpgglzzzr0\", \n\t\t\"slug\": \"55a6j4dwt5jxw1kv4ks5h7rz4um8xa94qe343abvktxt7psobly2czi9hry9lrjx18qh0rn6vmoluo5cp3zis0sxuq2k9cd3g51zjg2jev18i9wt5jn5f5hjwb2s2tt0uu9g4w1ro2hn4c4khqp6q065li954dbur758bgkpzs92l4mrdr3ipdpht6evimuccsva1w3ojlu0xr32i167tn7k8itv4c6xsyltqvibm67akxy27q281frq6kjdv4d\", \n\t\t\"latitude\": 625.73, \n\t\t\"longitude\": 861.66, \n\t\t\"zoom\": 58\n\t}, \n\t{\n\t\t\"id\": \"a30caa99-d8c1-4487-b5c7-bc445e07abe6\", \n\t\t\"countryCommonId\": \"993e3005-eea0-4ad7-bc8b-4e1d4e6c91b6\", \n\t\t\"administrativeAreaLevel1Id\": \"25548c76-d480-4c3f-b8f1-aa90e3ced6a4\", \n\t\t\"administrativeAreaLevel2Id\": \"888ae744-35c1-4d7d-8b02-b933f39f59db\", \n\t\t\"code\": \"ep0wapqy\", \n\t\t\"customCode\": \"5k30co464n\", \n\t\t\"name\": \"uem4rl05svcbqfxwk0otlyan5pu2vjx39ba2smg0zzie0n5fwp83kzz7ynwrzb9319j55iqwkk9lc0z4309bbvkndo2q6g7g602xbyrwfa8i74kk6esapjjiok3xzlm1i9mje02zxq7xkzfle6gwue2zlb14ax0pioan9r0niu87gdn2qv9rt79ei435s7bhffd3hupxrxxgv1hi7fb8n4t5lc9vqyok716ij5lwu0k29kuxc8k33hgh5m317k8\", \n\t\t\"slug\": \"clz9rmb6pz83qrovxd0nkvy2rn0enyfvd3o34iowl7w05r69n61lik14hiu0rzr2y58t6nmthv81l43wluan6exz94ke8avyt2z7m7ey7azyhkkk5uensrxky7mid35sgyrjprqwban49l87lm1hesi6m5v9z0ll69na9f8af5y7j0flb1j8vkp3g8jjpj6evugfeewoj465a0r5mfer3erjo2g08zwet6fy3sjlmjjmu368c9xb2vn9xhgccrm\", \n\t\t\"latitude\": 403.59, \n\t\t\"longitude\": 625.65, \n\t\t\"zoom\": 76\n\t}, \n\t{\n\t\t\"id\": \"9a6ac978-b503-4f5c-9d02-be9aaa96c721\", \n\t\t\"countryCommonId\": \"db069a96-df84-45de-94b4-466e9092d620\", \n\t\t\"administrativeAreaLevel1Id\": \"336b1f25-47a9-43ef-9309-f9bf86c3d90f\", \n\t\t\"administrativeAreaLevel2Id\": \"d84a603a-b11b-4998-9288-5d49c28b789c\", \n\t\t\"code\": \"88gb90ir\", \n\t\t\"customCode\": \"ma8678f44c\", \n\t\t\"name\": \"opq1lequa1e3du21b0wz58osk769d23udplvq2h7ij2dou2pjio79vt65qspw7j6pctlz6inuk1xo7q0ci3jdgklg4ahdispvg7im9fihi989qqwha4mu74yu24g8lgx7sja9z35xez5p53n47m7n107foxtt2svcho0w9x87z6f5pj6ml3z6j2ft38ct6650db40tiyomw9zefrqgu8386vejbnzsizdtc65r95onrxv9yv0w68i9vi7i9nvru\", \n\t\t\"slug\": \"1nh91neh1442z5qrto60i7dsmsucq3fgypq80bvixoacglka6lz0hrqbpm805i216szouej1jjf2gn5gpp705ziur9p7h0wy59s67zflhp1r3jnv0ska4rx38tju9k95l9yi7c7ce5wrc18ql9cehkbstfd0u81vjhselxuruloztb4cqgry71ojco4fmmc4ducjfkgk2iin7sw8a69tgs9epy3jmp55oh3iox86hvkfszmlxm82kbfhgt3gz4o\", \n\t\t\"latitude\": 564.71, \n\t\t\"longitude\": 136.82, \n\t\t\"zoom\": 41\n\t}, \n\t{\n\t\t\"id\": \"ab296dcb-d4e7-4fb7-99bc-f25f1e4eebb0\", \n\t\t\"countryCommonId\": \"5c57377d-76e5-4552-94bd-d68e30c6e4aa\", \n\t\t\"administrativeAreaLevel1Id\": \"f909dd76-dd39-4590-9f26-3685c9c770d4\", \n\t\t\"administrativeAreaLevel2Id\": \"02ba6347-0673-4863-b0ad-0e02718ae618\", \n\t\t\"code\": \"9wgou8gf\", \n\t\t\"customCode\": \"ktido2xm5y\", \n\t\t\"name\": \"ltfqww5ciym6a38s1oug6fcp7qjfekpexfbufg0zo2zeu1na177en8tfptmpuiw0xzkzawsjiq95zla0l0wdnkldju7tvqbk7569zxbahngl3fj75njjg3dt0lwzeq4ft1gi7otn95lvjs2rechx6j9ssvq602t0ri1plfhfnsosflt3ytt7uwx4rhdfkqpdwcfhbqeoivzgi4e0o0zuixz48rbqazjqhhmgyom2n1qapnlafmdl3pg8qvgsz4o\", \n\t\t\"slug\": \"edw5d2mer5sctohnvahj6jeo3vk26hoanf9knktbwquna9r7ttxa6uj9lckgfamcqcjhzgzv7mooxamik2rfmmmodwy759dd86srvogh8k3onslcjcj1yw9i39vdqktvhyx3kedr8r0lw6zh5t9s1yffdnvmygpbf9bxpel5vt6lpd8iw4smialr5tf1kvkjo46bzyldbd9vk8kdae2dcvk0nfmocl028xlat9og9a42r543hnmnyro2mqgledd\", \n\t\t\"latitude\": 337.78, \n\t\t\"longitude\": 884.87, \n\t\t\"zoom\": 85\n\t}, \n\t{\n\t\t\"id\": \"a23c762a-d444-4020-a3ba-a5b622280611\", \n\t\t\"countryCommonId\": \"5932efc8-ce42-49b3-8e59-c6245a9c87a9\", \n\t\t\"administrativeAreaLevel1Id\": \"4f626a03-6e51-4b5a-8918-dee6d60b0146\", \n\t\t\"administrativeAreaLevel2Id\": \"fa2968d7-451f-4581-bf99-047308c78e6b\", \n\t\t\"code\": \"1ujupfpp\", \n\t\t\"customCode\": \"hrrlhs8gnk\", \n\t\t\"name\": \"b35kv5gtlashs0rsitc9ws5sv3db9smk4cililmf28x3h5r6bw1r4em96b4uk1kj4wwpcxc7nlxcpqvuzrslh2cxjkp2c9d30zrvkxvfltg4358oui9vayigb02ctndion9kiohofpjo8smis5yq47bn9h5dcy4w12f9m4iei5wwauumcra2738ugciqeayq7za4t0ip7kw2zsj9p8ce5u3us35yjjpgbdbouhxk26dr77b5luc0gvsltsfzbsi\", \n\t\t\"slug\": \"z9wmk4hzfse18z50205l52eb49voq3ecsat80hj7mvp0brl97lc6mjos3jq7uqnemkuaaiin4rpovllzu06vxhzdqclpkc1kucfs4wpd23nh5ch3ayc4pr0rex4jxo3ifku96icgc833itr6s9wgonk9fqcwg8gvkh9i4xvw6081kt28rlqr1afye1qpqi68gtdph9sf8gk0h7hga8vzln3iwyvfuuofoxzuvxnlaweg9570mxz9jp731fj9eqy\", \n\t\t\"latitude\": 590.84, \n\t\t\"longitude\": 505.11, \n\t\t\"zoom\": 82\n\t}, \n\t{\n\t\t\"id\": \"b4e5ea69-0a49-4139-ab5a-5846036aef81\", \n\t\t\"countryCommonId\": \"03a2303e-3021-49bf-b6cd-3cd65a480f21\", \n\t\t\"administrativeAreaLevel1Id\": \"249fe1e7-e584-440a-b8e9-33ea04267281\", \n\t\t\"administrativeAreaLevel2Id\": \"f11ab5a2-9d45-4943-9f46-cacabcc1ad84\", \n\t\t\"code\": \"p1eo6lmh\", \n\t\t\"customCode\": \"55f9t1l6bx\", \n\t\t\"name\": \"eijqqejje4prfdeq7tr3g8m67y9ypgle06vrwgxjzl8r4quwunow4gkvqmu736w2ap5duh6e7h1z44dn26vsa7qa33fqys7pqrwxputmsbg61cucre83ac07htktr9km9u5798opsyw7giplz863bf5wsep1n64g4ibpztz6onhpplu15x19zajzbe2memhba5m8o5hwo3avmoyoe697oythtfqvlhqhl0qp5pmw7rmqk12ijs2c8vbf4a3jobj\", \n\t\t\"slug\": \"sjw157idnndif5nzy9827634b133c1ddxdanvtbtg6udawsovdm62tmgvox55r6pundvwwbwa2flejsycggpae3jpiyary6emp7xfyrg5unb9jahx4ov4msw19f5u2js2pw8puhka3sv8nkmeizg70gutyq10osq7bmsbsykrap8vbjs1wb8roioz5d45znz5xetmsdqrxucq100rqnbq5exbvbqjql3yumd6qox39pgsd0dm3i7tfrn8l8qms7\", \n\t\t\"latitude\": 589.47, \n\t\t\"longitude\": 30.43, \n\t\t\"zoom\": 59\n\t}, \n\t{\n\t\t\"id\": \"ef688cca-14aa-438a-9990-fff6827fce81\", \n\t\t\"countryCommonId\": \"20f11e57-da45-4b46-8362-e6c0c64635a5\", \n\t\t\"administrativeAreaLevel1Id\": \"51e6c98c-53a2-4c8d-963f-73ce37c70d4f\", \n\t\t\"administrativeAreaLevel2Id\": \"d4647224-f365-40f0-aab6-388849aa77ef\", \n\t\t\"code\": \"770y636w\", \n\t\t\"customCode\": \"jpjatfpqm4\", \n\t\t\"name\": \"pvbrqxx7o8yu8sk59fni01d33yzi782qvpakd39ckdp88ucazph8zdw0k34hzpxtjwdi3qhgfox7mp5ny8zq5w6zodcn2aqlo2bpjc6ipnpc48oszh7lsivosw8xfyvzk1p1pgy8rxhqiaapgeyytzuhf8bwyyrldzeh8m5j2kll5zej2ylc557axajd1i7pc33d58gkloahuohr7dczppkvtwznjw9itux6h9jnetxq75xh4fcolzsxb1zetmn\", \n\t\t\"slug\": \"52ongk3mghrxk3pum8fy9h6b2e4kk7gx0m6yupmdrolguezn0u2myzuid5muci9ol7jdefu72wu5it98z7o8quo65zkfsyq78acxoehgs7sgamy5yly220zqll3ix5owkyrrh0k873pxwstktfa7ivu44lvhmz4zaiiy0ghkt3mqtzeizuu0wljgmtxoqbmca0zwhlsbhdc6lvif9uicxvmgc672cq4fm8flak7ou48dfi1xq2fn8ph7mj4vglp\", \n\t\t\"latitude\": 315.04, \n\t\t\"longitude\": 250.83, \n\t\t\"zoom\": 32\n\t}, \n\t{\n\t\t\"id\": \"4cd56f32-6d49-4dfd-959b-8f3a8c811941\", \n\t\t\"countryCommonId\": \"faf332c7-ad4a-4c43-b77e-4af931a61db5\", \n\t\t\"administrativeAreaLevel1Id\": \"806c9fcb-2b2c-41c6-a2e0-23541e3946ce\", \n\t\t\"administrativeAreaLevel2Id\": \"285c4678-c551-46bd-8df4-47197e30ac4d\", \n\t\t\"code\": \"pziwdv1h\", \n\t\t\"customCode\": \"hwrthw1225\", \n\t\t\"name\": \"qf0q4aiq2k4ui0mf1c1ulureknepdk8rlth1c59gs8t33z53l28yyn50l2xd6wyf01e95dzgh6obqfqyao7644gwd9yh59ft6l3n5kgl2wgwbm5c9014ododxbklrtbdr3rw3zcaot5xvse2k08bvy9zmpt83dkh9nkeq0qt30inz1a1tc2am24qz61r4q4f6zb5z14vroaa5fxx5ikfo38equf1mf5fe23vfo9wyj1pprrvnzuw1kfkfvsht9v\", \n\t\t\"slug\": \"wm860otfk2pt39bigfecntywis0shix2svcaq6wq9p8wq481bjfu8oh5ev5g7b6hpvadc6yyugduhptf3squqgmj5yv0uvw3gpsm25jmyji2uip09kwbigw0ey9yqjt42mvf3b8hyg035i6ns1za2s5ovo6xnpyaq8zgvev3yxb4wb41q3khpxlw7dxshekx1zh5ynegbz9scvlft70an73g93ae2cghqessdfw3f4andmszt6fdfvynpbs1d04\", \n\t\t\"latitude\": 573.96, \n\t\t\"longitude\": 462.20, \n\t\t\"zoom\": 72\n\t}, \n\t{\n\t\t\"id\": \"8eb2bc10-c33b-4c36-bbc0-578d960f5a5b\", \n\t\t\"countryCommonId\": \"efbefda1-fd09-4ef6-876f-fec277497366\", \n\t\t\"administrativeAreaLevel1Id\": \"aba10c0c-5e17-4dc7-8637-568fb25dcd9e\", \n\t\t\"administrativeAreaLevel2Id\": \"ab6824bc-fdd1-47dc-97e6-28fb62fbf2eb\", \n\t\t\"code\": \"zo0x538f\", \n\t\t\"customCode\": \"lf5jui73i4\", \n\t\t\"name\": \"589m7804ozcjkbcvouwlhthwmj6umk1st4sy4cmggjeaju0f26tt9wg45hslicpc1uaulotkuny125li053ddwayml2oi6gbhxlcm43tfhwbp0b9c4vs6tjsd4fjhgm1lji5ozb7e15w1trekpx6q9rsxclidzvkmx7d82qm7woni3eopdzn2n093icayd7dl5ijnplhyi1bb68sr9pmes1tbsaxngnzm56wdybb67ivb5lgwosn7til83ft3dg\", \n\t\t\"slug\": \"sfoaf4bmgyvfilr50y2xobim3ukzumvpqkyqe28s9bozc7ipdy6ngbfgj04dwkmz1f927pxmb00bue5ijeg26e3c461u70i60wwk578wa4o1wz4cyabpy34v07t2cmps0kg61m01vd659aj9trq6b37wd0j5ekgdrzq8glls4gowm6g7twyk8rqzai6bndcs8o4u4nmhd4796v712hrbog13s0fzswaf9cl5wwr7xicmegkcadr4jcdue7k79an\", \n\t\t\"latitude\": 775.86, \n\t\t\"longitude\": 787.73, \n\t\t\"zoom\": 36\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-areas-level-3",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-areas-level-3"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-areas-level-3/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-areas-level-3/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+                        "administrative-areas-level-3",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-areas-level-3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"9d1e8149-18e8-43a0-afa4-fe2840752a42\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-areas-level-3",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-areas-level-3"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-area-level-3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"9d1e8149-18e8-43a0-afa4-fe2840752a42\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-area-level-3",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-area-level-3"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-area-level-3/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-area-level-3/9d1e8149-18e8-43a0-afa4-fe2840752a42",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-area-level-3",
+						"9d1e8149-18e8-43a0-afa4-fe2840752a42"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-area-level-3",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"9d1e8149-18e8-43a0-afa4-fe2840752a42\", \n\t\"countryCommonId\": \"36c41b8d-7b25-46fa-8acf-bd2b867d08a9\", \n\t\"administrativeAreaLevel1Id\": \"de063925-f817-4b63-9db4-a836f3c3be21\", \n\t\"administrativeAreaLevel2Id\": \"ea7fc283-b9db-4c3e-9685-0ab82144a4bf\", \n\t\"code\": \"c72olvx8\", \n\t\"customCode\": \"dn00ubfbet\", \n\t\"name\": \"wp3ebf99cwo2go1qy46ui7gd9ks6bhupldiaq3cwx0rxqms8cmnhx6r10q217rm6idp8sbufig6u32d6hqz3k53hw9rc96hyzjl2xlj2m26ylr1kd0k0l6uzhawz3o62z7li08vxsp5akm1rnur33iisnja5czvlwxc5kc4nf3ssucf25na312timjaxhzr58xsuijephc74rtwxa8tm0u2z2uh16ipnus14juvmpdin3pgb5o7eolae73zdplt\", \n\t\"slug\": \"7yzsga6kag25fmjjew1ex57di05xnr8t6kz0yqqgvkfsrcf42ahwi8g4pp006yx3pqcprusajj1jwt6oohfrbfu4zwxe0tpi6i6ox9cn3pvrj8duogaj67hj1ztq75shj9yq2bhjzyy5t0wok7zhdbaoyip86v2fo02409kexz6o0k9omleeadtp4vei7zi2a9yg04cddvwt7j784p0fnzfjhtay1n6p48h5ul8mzwuq8lbs834qxb8rzn15bge\", \n\t\"latitude\": 840.01, \n\t\"longitude\": 448.43, \n\t\"zoom\": 41\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-area-level-3",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-area-level-3"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - admin/administrative-area-level-3/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-area-level-3/9d1e8149-18e8-43a0-afa4-fe2840752a42",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-area-level-3",
+						"9d1e8149-18e8-43a0-afa4-fe2840752a42"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - admin/administrative-areas-level-3",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin/administrative-areas-level-3",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"administrative-areas-level-3"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "685980aa-36e4-4c77-93c2-8fef4f990d53",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
