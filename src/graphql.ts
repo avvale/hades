@@ -32,6 +32,9 @@ export interface AdminCreateAdministrativeAreaLevel1Input {
     customCode?: GraphQLString;
     name: GraphQLString;
     slug: GraphQLString;
+    latitude?: GraphQLFloat;
+    longitude?: GraphQLFloat;
+    zoom?: GraphQLInt;
 }
 
 export interface AdminUpdateAdministrativeAreaLevel1Input {
@@ -41,6 +44,35 @@ export interface AdminUpdateAdministrativeAreaLevel1Input {
     customCode?: GraphQLString;
     name?: GraphQLString;
     slug?: GraphQLString;
+    latitude?: GraphQLFloat;
+    longitude?: GraphQLFloat;
+    zoom?: GraphQLInt;
+}
+
+export interface AdminCreateAdministrativeAreaLevel2Input {
+    id: string;
+    countryCommonId: string;
+    administrativeAreaLevel1Id: string;
+    code: GraphQLString;
+    customCode?: GraphQLString;
+    name: GraphQLString;
+    slug: GraphQLString;
+    latitude?: GraphQLFloat;
+    longitude?: GraphQLFloat;
+    zoom?: GraphQLInt;
+}
+
+export interface AdminUpdateAdministrativeAreaLevel2Input {
+    id: string;
+    countryCommonId?: string;
+    administrativeAreaLevel1Id?: string;
+    code?: GraphQLString;
+    customCode?: GraphQLString;
+    name?: GraphQLString;
+    slug?: GraphQLString;
+    latitude?: GraphQLFloat;
+    longitude?: GraphQLFloat;
+    zoom?: GraphQLInt;
 }
 
 export interface AdminCreateAttachmentFamilyInput {
@@ -436,6 +468,9 @@ export interface AdminAdministrativeAreaLevel1 {
     customCode?: GraphQLString;
     name: GraphQLString;
     slug: GraphQLString;
+    latitude?: GraphQLFloat;
+    longitude?: GraphQLFloat;
+    zoom?: GraphQLInt;
     createdAt?: GraphQLTimestamp;
     updatedAt?: GraphQLTimestamp;
     deletedAt?: GraphQLTimestamp;
@@ -446,6 +481,10 @@ export interface IQuery {
     adminFindAdministrativeAreaLevel1ById(id?: string, constraint?: QueryStatement): AdminAdministrativeAreaLevel1 | Promise<AdminAdministrativeAreaLevel1>;
     adminGetAdministrativeAreasLevel1(query?: QueryStatement, constraint?: QueryStatement): AdminAdministrativeAreaLevel1[] | Promise<AdminAdministrativeAreaLevel1[]>;
     adminPaginateAdministrativeAreasLevel1(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
+    adminFindAdministrativeAreaLevel2(query?: QueryStatement, constraint?: QueryStatement): AdminAdministrativeAreaLevel2 | Promise<AdminAdministrativeAreaLevel2>;
+    adminFindAdministrativeAreaLevel2ById(id?: string, constraint?: QueryStatement): AdminAdministrativeAreaLevel2 | Promise<AdminAdministrativeAreaLevel2>;
+    adminGetAdministrativeAreasLevel2(query?: QueryStatement, constraint?: QueryStatement): AdminAdministrativeAreaLevel2[] | Promise<AdminAdministrativeAreaLevel2[]>;
+    adminPaginateAdministrativeAreasLevel2(query?: QueryStatement, constraint?: QueryStatement): Pagination | Promise<Pagination>;
     adminFindAttachmentFamily(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
     adminFindAttachmentFamilyById(id?: string, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
     adminGetAttachmentFamilies(query?: QueryStatement, constraint?: QueryStatement): AdminAttachmentFamily[] | Promise<AdminAttachmentFamily[]>;
@@ -515,6 +554,11 @@ export interface IMutation {
     adminUpdateAdministrativeAreaLevel1(payload: AdminUpdateAdministrativeAreaLevel1Input, constraint?: QueryStatement): AdminAdministrativeAreaLevel1 | Promise<AdminAdministrativeAreaLevel1>;
     adminDeleteAdministrativeAreaLevel1ById(id: string, constraint?: QueryStatement): AdminAdministrativeAreaLevel1 | Promise<AdminAdministrativeAreaLevel1>;
     adminDeleteAdministrativeAreasLevel1(query?: QueryStatement, constraint?: QueryStatement): AdminAdministrativeAreaLevel1[] | Promise<AdminAdministrativeAreaLevel1[]>;
+    adminCreateAdministrativeAreaLevel2(payload: AdminCreateAdministrativeAreaLevel2Input): AdminAdministrativeAreaLevel2 | Promise<AdminAdministrativeAreaLevel2>;
+    adminCreateAdministrativeAreasLevel2(payload: AdminCreateAdministrativeAreaLevel2Input[]): boolean | Promise<boolean>;
+    adminUpdateAdministrativeAreaLevel2(payload: AdminUpdateAdministrativeAreaLevel2Input, constraint?: QueryStatement): AdminAdministrativeAreaLevel2 | Promise<AdminAdministrativeAreaLevel2>;
+    adminDeleteAdministrativeAreaLevel2ById(id: string, constraint?: QueryStatement): AdminAdministrativeAreaLevel2 | Promise<AdminAdministrativeAreaLevel2>;
+    adminDeleteAdministrativeAreasLevel2(query?: QueryStatement, constraint?: QueryStatement): AdminAdministrativeAreaLevel2[] | Promise<AdminAdministrativeAreaLevel2[]>;
     adminCreateAttachmentFamily(payload: AdminCreateAttachmentFamilyInput): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
     adminCreateAttachmentFamilies(payload: AdminCreateAttachmentFamilyInput[]): boolean | Promise<boolean>;
     adminUpdateAttachmentFamily(payload: AdminUpdateAttachmentFamilyInput, constraint?: QueryStatement): AdminAttachmentFamily | Promise<AdminAttachmentFamily>;
@@ -591,6 +635,24 @@ export interface IMutation {
     oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthDeleteRefreshTokenById(id: string, constraint?: QueryStatement): OAuthRefreshToken | Promise<OAuthRefreshToken>;
     oAuthDeleteRefreshTokens(query?: QueryStatement, constraint?: QueryStatement): OAuthRefreshToken[] | Promise<OAuthRefreshToken[]>;
+}
+
+export interface AdminAdministrativeAreaLevel2 {
+    id: string;
+    countryCommonId: string;
+    country: AdminCountry;
+    administrativeAreaLevel1Id: string;
+    administrativeAreaLevel1: AdminAdministrativeAreaLevel1;
+    code: GraphQLString;
+    customCode?: GraphQLString;
+    name: GraphQLString;
+    slug: GraphQLString;
+    latitude?: GraphQLFloat;
+    longitude?: GraphQLFloat;
+    zoom?: GraphQLInt;
+    createdAt?: GraphQLTimestamp;
+    updatedAt?: GraphQLTimestamp;
+    deletedAt?: GraphQLTimestamp;
 }
 
 export interface AdminAttachmentFamily {
