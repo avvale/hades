@@ -8,6 +8,9 @@ import {
     AdministrativeAreaLevel1CustomCode,
     AdministrativeAreaLevel1Name,
     AdministrativeAreaLevel1Slug,
+    AdministrativeAreaLevel1Latitude,
+    AdministrativeAreaLevel1Longitude,
+    AdministrativeAreaLevel1Zoom,
     AdministrativeAreaLevel1CreatedAt,
     AdministrativeAreaLevel1UpdatedAt,
     AdministrativeAreaLevel1DeletedAt,
@@ -33,6 +36,9 @@ export class CreateAdministrativeAreasLevel1CommandHandler implements ICommandHa
                         customCode: new AdministrativeAreaLevel1CustomCode(administrativeAreaLevel1.customCode),
                         name: new AdministrativeAreaLevel1Name(administrativeAreaLevel1.name),
                         slug: new AdministrativeAreaLevel1Slug(administrativeAreaLevel1.slug),
+                        latitude: new AdministrativeAreaLevel1Latitude(administrativeAreaLevel1.latitude),
+                        longitude: new AdministrativeAreaLevel1Longitude(administrativeAreaLevel1.longitude),
+                        zoom: new AdministrativeAreaLevel1Zoom(administrativeAreaLevel1.zoom),
                     }
                 })
         );

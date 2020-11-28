@@ -38,4 +38,22 @@ export class CreateAdministrativeAreaLevel1Dto
     })
     slug: string;
 
+    @ApiProperty({
+        type        : Number,
+        description : 'latitude [input here api field description]',
+    })
+    latitude: number;
+
+    @ApiProperty({
+        type        : Number,
+        description : 'longitude [input here api field description]',
+    })
+    longitude: number;
+
+    @ApiProperty({
+        type        : Number,
+        description : 'zoom [input here api field description]',
+    })
+    zoom: number;
+
 }
