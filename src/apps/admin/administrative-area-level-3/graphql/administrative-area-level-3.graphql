@@ -1,0 +1,68 @@
+
+type AdminAdministrativeAreaLevel3
+{
+    id: ID!
+    countryCommonId: ID!
+    country: AdminCountry!
+    administrativeAreaLevel1Id: ID!
+    administrativeAreaLevel1: AdminAdministrativeAreaLevel1!
+    administrativeAreaLevel2Id: ID!
+    administrativeAreaLevel2: AdminAdministrativeAreaLevel2!
+    code: GraphQLString!
+    customCode: GraphQLString
+    name: GraphQLString!
+    slug: GraphQLString!
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input AdminCreateAdministrativeAreaLevel3Input
+{
+    id: ID!
+    countryCommonId: ID!
+    administrativeAreaLevel1Id: ID!
+    administrativeAreaLevel2Id: ID!
+    code: GraphQLString!
+    customCode: GraphQLString
+    name: GraphQLString!
+    slug: GraphQLString!
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+}
+
+input AdminUpdateAdministrativeAreaLevel3Input
+{
+    id: ID!
+    countryCommonId: ID
+    administrativeAreaLevel1Id: ID
+    administrativeAreaLevel2Id: ID
+    code: GraphQLString
+    customCode: GraphQLString
+    name: GraphQLString
+    slug: GraphQLString
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+}
+
+type Query
+{
+    adminFindAdministrativeAreaLevel3(query:QueryStatement constraint:QueryStatement): AdminAdministrativeAreaLevel3
+    adminFindAdministrativeAreaLevel3ById(id:ID constraint:QueryStatement): AdminAdministrativeAreaLevel3
+    adminGetAdministrativeAreasLevel3(query:QueryStatement constraint:QueryStatement): [AdminAdministrativeAreaLevel3]!
+    adminPaginateAdministrativeAreasLevel3(query:QueryStatement constraint:QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    adminCreateAdministrativeAreaLevel3(payload: AdminCreateAdministrativeAreaLevel3Input!): AdminAdministrativeAreaLevel3
+    adminCreateAdministrativeAreasLevel3(payload: [AdminCreateAdministrativeAreaLevel3Input]!): Boolean!
+    adminUpdateAdministrativeAreaLevel3(payload: AdminUpdateAdministrativeAreaLevel3Input! constraint:QueryStatement): AdminAdministrativeAreaLevel3
+    adminDeleteAdministrativeAreaLevel3ById(id: ID! constraint:QueryStatement): AdminAdministrativeAreaLevel3
+    adminDeleteAdministrativeAreasLevel3(query:QueryStatement constraint:QueryStatement): [AdminAdministrativeAreaLevel3]!
+}
