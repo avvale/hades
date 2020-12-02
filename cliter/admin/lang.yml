@@ -29,6 +29,12 @@ aggregateProperties:
     type: char
     length: 5
     nullable: false
+  - name: dir
+    type: enum
+    enumOptions:
+      - LTR
+      - RTL
+    nullable: false
   - name: sort
     type: smallint.unsigned
     maxLength: 6
